@@ -6,14 +6,14 @@ export default create({
   theme: 'dark',
   getDerivedVariables ({ base, derived }) {
     const {
-      tertiaryTextOverlayColor,
-      infoHsColor,
-      errorHsColor,
-      successHsColor,
-      warningHsColor,
-      primaryTextOverlayColor,
-      secondaryTextOverlayColor,
-      railBackgroundOverlayColor
+      textColorTertiaryOverlay,
+      infoColorSuppl,
+      errorColorSuppl,
+      successColorSuppl,
+      warningColorSuppl,
+      textColorPrimaryOverlay,
+      textColorSecondaryOverlay,
+      railColorOverlay
     } = derived
     const {
       strongFontWeight
@@ -21,15 +21,15 @@ export default create({
     return {
       ...sizeVariables,
       headerFontWeight: strongFontWeight,
-      circleBorderColor: tertiaryTextOverlayColor,
-      circleBorderColorInfo: infoHsColor,
-      circleBorderColorError: errorHsColor,
-      circleBorderColorSuccess: successHsColor,
-      circleBorderColorWarning: warningHsColor,
-      headerTextColor: primaryTextOverlayColor,
-      contentTextColor: secondaryTextOverlayColor,
-      metaTextColor: tertiaryTextOverlayColor,
-      lineColor: railBackgroundOverlayColor
+      circleBorderColor: textColorTertiaryOverlay,
+      circleBorderColorInfo: infoColorSuppl,
+      circleBorderColorError: errorColorSuppl,
+      circleBorderColorSuccess: successColorSuppl,
+      circleBorderColorWarning: warningColorSuppl,
+      headerTextColor: textColorPrimaryOverlay,
+      contentTextColor: textColorSecondaryOverlay,
+      metaTextColor: textColorTertiaryOverlay,
+      lineColor: railColorOverlay
     }
   }
 })

@@ -5,7 +5,7 @@ export default c([
     const {
       buttonBorderColor,
       buttonBorderColorActive,
-      disabledOpacity,
+      opacityDisabled,
       height
     } = props.$local
     const {
@@ -32,7 +32,7 @@ export default c([
             backgroundColor: buttonBorderColorActive
           }),
           cM('disabled', {
-            opacity: disabledOpacity
+            opacity: opacityDisabled
           })
         ]),
         ['small', 'medium', 'large'].map(size => {

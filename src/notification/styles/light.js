@@ -9,16 +9,16 @@ export default create({
   ],
   getDerivedVariables ({ base, derived }) {
     const {
-      secondaryTextColor,
+      textColorSecondary,
       successColor,
       infoColor,
       warningColor,
       errorColor,
-      popoverBackgroundColor,
+      popoverColor,
       closeColor,
       closeHoverColor,
-      primaryTextOverlayColor,
-      tertiaryTextOverlayColor
+      textColorPrimaryOverlay,
+      textColorTertiaryOverlay
     } = derived
     const {
       borderRadius,
@@ -31,15 +31,15 @@ export default create({
       iconColorInfo: infoColor,
       iconColorWarning: warningColor,
       iconColorError: errorColor,
-      color: popoverBackgroundColor,
-      textColor: secondaryTextColor,
+      color: popoverColor,
+      textColor: textColorSecondary,
       closeColor: closeColor,
       closeColorHover: closeHoverColor,
       closeColorActive: closeColor,
-      headerTextColor: primaryTextOverlayColor,
-      contentTextColor: secondaryTextColor,
-      descriptionTextColor: tertiaryTextOverlayColor,
-      actionTextColor: secondaryTextColor
+      headerTextColor: textColorPrimaryOverlay,
+      contentTextColor: textColorSecondary,
+      descriptionTextColor: textColorTertiaryOverlay,
+      actionTextColor: textColorSecondary
     }
   }
 })

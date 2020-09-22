@@ -5,12 +5,12 @@ export default create({
   theme: 'light',
   getDerivedVariables ({ base, derived }) {
     const {
-      scrollbarBackgroundOverlayColor,
-      scrollbarHoverBackgroundOverlayColor
+      scrollbarColorOverlay,
+      scrollbarColorHoverOverlay
     } = derived
     return {
-      color: scrollbarBackgroundOverlayColor,
-      colorHover: scrollbarHoverBackgroundOverlayColor
+      color: scrollbarColorOverlay,
+      colorHover: scrollbarColorHoverOverlay
     }
   }
 })

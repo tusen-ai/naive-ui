@@ -6,24 +6,24 @@ export default create({
   theme: 'dark',
   getDerivedVariables ({ base, derived }) {
     const {
-      secondaryTextOverlayColor,
-      bodyBackgroundColor,
-      cardBackgroundColor,
-      dividerOverlayColor,
-      scrollbarBackgroundOverlayColor,
-      scrollbarHoverBackgroundOverlayColor
+      textColorSecondaryOverlay,
+      bodyColor,
+      cardColor,
+      dividerColorOverlay,
+      scrollbarColorOverlay,
+      scrollbarColorHoverOverlay
     } = derived
     return {
-      textColor: secondaryTextOverlayColor,
-      color: bodyBackgroundColor,
-      headerColor: cardBackgroundColor,
-      headerBorderColor: dividerOverlayColor,
-      footerBorderColor: dividerOverlayColor,
-      siderBorderColor: dividerOverlayColor,
-      siderColor: cardBackgroundColor,
+      textColor: textColorSecondaryOverlay,
+      color: bodyColor,
+      headerColor: cardColor,
+      headerBorderColor: dividerColorOverlay,
+      footerBorderColor: dividerColorOverlay,
+      siderBorderColor: dividerColorOverlay,
+      siderColor: cardColor,
       siderToggleButtonColor: 'rgba(255, 255, 255, .3)',
-      siderToggleBarColor: composite(bodyBackgroundColor, scrollbarBackgroundOverlayColor),
-      siderToggleBarColorHover: composite(bodyBackgroundColor, scrollbarHoverBackgroundOverlayColor)
+      siderToggleBarColor: composite(bodyColor, scrollbarColorOverlay),
+      siderToggleBarColorHover: composite(bodyColor, scrollbarColorHoverOverlay)
     }
   }
 })

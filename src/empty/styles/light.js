@@ -6,15 +6,15 @@ export default create({
   name: 'Empty',
   getDerivedVariables ({ derived }) {
     const {
-      disabledTextColor,
-      iconOverlayColor,
-      secondaryTextColor
+      textColorDisabled,
+      iconColorOverlay,
+      textColorSecondary
     } = derived
     return {
       ...sizeVarables,
-      textColor: disabledTextColor,
-      iconColor: iconOverlayColor,
-      extraTextColor: secondaryTextColor
+      textColor: textColorDisabled,
+      iconColor: iconColorOverlay,
+      extraTextColor: textColorSecondary
     }
   }
 })

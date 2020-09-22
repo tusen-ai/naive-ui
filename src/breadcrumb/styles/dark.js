@@ -5,11 +5,11 @@ export default create({
   name: 'Breadcrumb',
   getDerivedVariables ({ base, derived }) {
     return {
-      itemTextColor: derived.tertiaryTextOverlayColor,
-      itemTextColorHover: derived.primaryHoverColor,
-      itemTextColorActive: derived.primaryActiveColor,
-      itemTextColorMatch: derived.secondaryTextOverlayColor,
-      separatorColor: derived.tertiaryTextOverlayColor
+      itemTextColor: derived.textColorTertiaryOverlay,
+      itemTextColorHover: derived.primaryColorHover,
+      itemTextColorActive: derived.primaryColorActive,
+      itemTextColorMatch: derived.textColorSecondaryOverlay,
+      separatorColor: derived.textColorTertiaryOverlay
     }
   }
 })

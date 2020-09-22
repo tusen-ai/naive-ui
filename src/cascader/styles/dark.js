@@ -29,25 +29,25 @@ export default create({
       popmenuBoxShadow
     } = base
     const {
-      popoverBackgroundColor,
-      secondaryTextOverlayColor,
+      popoverColor,
+      textColorSecondaryOverlay,
       primaryColor,
-      disabledTextOverlayColor,
-      dividerOverlayColor,
-      pendingBackgroundOverlayColor,
-      iconOverlayColor
+      textColorDisabledOverlay,
+      dividerColorOverlay,
+      hoverColorOverlay,
+      iconColorOverlay
     } = derived
     return {
       ...sizeVariables,
       menuBorderRadius: borderRadius,
-      menuColor: popoverBackgroundColor,
+      menuColor: popoverColor,
       menuBoxShadow: popmenuBoxShadow,
-      menuBorderColor: dividerOverlayColor,
-      menuTrackingRectColor: composite(popoverBackgroundColor, pendingBackgroundOverlayColor),
-      optionTextColor: secondaryTextOverlayColor,
+      menuBorderColor: dividerColorOverlay,
+      menuTrackingRectColor: composite(popoverColor, hoverColorOverlay),
+      optionTextColor: textColorSecondaryOverlay,
       optionTextColorMatched: primaryColor,
-      optionTextColorDisabled: disabledTextOverlayColor,
-      optionArrowColor: iconOverlayColor,
+      optionTextColorDisabled: textColorDisabledOverlay,
+      optionArrowColor: iconColorOverlay,
       optionCheckMarkColor: primaryColor
     }
   }

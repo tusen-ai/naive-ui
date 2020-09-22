@@ -1,11 +1,10 @@
 import create from '../../../styles/_utils/create-component-base'
 
+// no style, placeholder
 export default create({
-  name: 'BaseTrackingRect',
   theme: 'dark',
+  name: 'BaseSlotMachine',
   getDerivedVariables ({ base, derived }) {
-    return {
-      rectColor: derived.hoverColorOverlay
-    }
+    return {}
   }
 })

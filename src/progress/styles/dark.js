@@ -5,7 +5,7 @@ export default create({
   theme: 'dark',
   getDerivedVariables ({ derived }) {
     return {
-      railColor: derived.progressRailBackgroundOverlayColor,
+      railColor: derived.progressRailColorOverlay,
       default: {
         fillColor: derived.infoColor
       },

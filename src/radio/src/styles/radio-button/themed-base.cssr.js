@@ -9,7 +9,7 @@ export default c([
       buttonTextColor,
       buttonTextColorActive,
       buttonTextColorHover,
-      disabledOpacity,
+      opacityDisabled,
       buttonBoxShadowFocus,
       buttonBoxShadowHover,
       buttonBorderRadius,
@@ -124,7 +124,7 @@ export default c([
           raw: `
             cursor: not-allowed;
           `,
-          opacity: disabledOpacity
+          opacity: opacityDisabled
         })
       ])
     ])

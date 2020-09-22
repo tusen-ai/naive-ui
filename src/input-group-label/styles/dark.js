@@ -1,5 +1,5 @@
 import create from '../../styles/_utils/create-component-base'
-import commonVariables from '../../styles/_common-style/input'
+import commonVariables from '../../input/styles/_common'
 
 export default create({
   name: 'InputGroupLabel',
@@ -8,8 +8,8 @@ export default create({
     return {
       ...commonVariables,
       borderRadius: base.borderRadius,
-      color: derived.inputBackgroundOverlayColor,
-      textColor: derived.secondaryTextColor,
+      color: derived.inputColorOverlay,
+      textColor: derived.textColorSecondary,
       boxShadow: `inset 0 0 0 1px transparent`
     }
   }

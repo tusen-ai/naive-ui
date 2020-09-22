@@ -196,13 +196,13 @@ export default c([
         }, [
           cE('input', {
             cursor: 'not-allowed',
-            color: pallete.disabledTextColor
+            color: pallete.textColorDisabled
           }, [
             cM('placeholder', {
-              color: pallete.disabledPlaceholderColor
+              color: pallete.placeholderColorDisabled
             }),
             c('&::placeholder', {
-              color: pallete.disabledPlaceholderColor
+              color: pallete.placeholderColorDisabled
             })
           ])
         ]),
@@ -213,7 +213,7 @@ export default c([
         }),
         cE('placeholder', {
           cursor: 'not-allowed',
-          color: pallete.disabledPlaceholderColor
+          color: pallete.placeholderColorDisabled
         })
       ]),
       cB('base-selection-input-tag', {

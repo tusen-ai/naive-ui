@@ -1,5 +1,5 @@
 import version from './version'
-import globalStyle from './_global-style/index.cssr.js'
+import globalStyle from './styles/_global-style/index.cssr.js'
 
 function setHljs (hljs) {
   this.hljs = hljs

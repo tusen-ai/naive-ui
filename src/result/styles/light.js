@@ -6,8 +6,8 @@ export default create({
   theme: 'light',
   getDerivedVariables ({ base, derived }) {
     const {
-      secondaryTextColor,
-      primaryTextColor,
+      textColorSecondary,
+      textColorPrimary,
       errorColor,
       successColor,
       infoColor,
@@ -21,8 +21,8 @@ export default create({
       ...sizeVariables,
       lineHeight,
       headerFontWeight: strongFontWeight,
-      headerTextColor: primaryTextColor,
-      descriptionTextColor: secondaryTextColor,
+      headerTextColor: textColorPrimary,
+      descriptionTextColor: textColorSecondary,
       iconColorError: errorColor,
       iconColorSuccess: successColor,
       iconColorInfo: infoColor,

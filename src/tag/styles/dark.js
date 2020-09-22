@@ -1,5 +1,5 @@
 import create from '../../styles/_utils/create-component-base'
-import commonVariables from '../../styles/_common-style/tag'
+import commonVariables from './_common'
 import { changeColor } from '../../_utils/color'
 
 export default create({
@@ -7,17 +7,17 @@ export default create({
   name: 'Tag',
   getDerivedVariables ({ base, derived }) {
     const {
-      secondaryTextOverlayColor,
-      primaryHoverColor,
-      primaryActiveColor,
+      textColorSecondaryOverlay,
+      primaryColorHover,
+      primaryColorActive,
       primaryColor,
       infoColor,
       successColor,
       warningColor,
       errorColor,
-      baseBackgroundColor,
-      borderOverlayColor,
-      disabledOpacity,
+      baseColor,
+      borderColorOverlay,
+      opacityDisabled,
       closeOverlayColor,
       closeHoverOverlayColor,
       closeActiveOverlayColor
@@ -28,22 +28,22 @@ export default create({
     return {
       ...commonVariables,
       borderRadius,
-      disabledOpacity,
+      opacityDisabled,
       checkable: {
-        textColor: secondaryTextOverlayColor,
-        textColorHover: primaryHoverColor,
-        textColorActive: primaryActiveColor,
-        textColorChecked: baseBackgroundColor,
+        textColor: textColorSecondaryOverlay,
+        textColorHover: primaryColorHover,
+        textColorActive: primaryColorActive,
+        textColorChecked: baseColor,
         color: 'transparent',
         colorHover: 'transparent',
         colorActive: 'transparent',
         colorChecked: primaryColor,
-        colorCheckedHover: primaryHoverColor,
-        colorCheckedActive: primaryActiveColor
+        colorCheckedHover: primaryColorHover,
+        colorCheckedActive: primaryColorActive
       },
       default: {
-        borderColor: borderOverlayColor,
-        textColor: secondaryTextOverlayColor,
+        borderColor: borderColorOverlay,
+        textColor: textColorSecondaryOverlay,
         color: 'transparent',
         closeColor: closeOverlayColor,
         closeColorHover: closeHoverOverlayColor,

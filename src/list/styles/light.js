@@ -5,19 +5,19 @@ export default create({
   theme: 'light',
   getDerivedVariables ({ base, derived }) {
     const {
-      secondaryTextColor,
-      cardBackgroundColor,
-      modalBackgroundColor,
-      dividerOverlayColor
+      textColorSecondary,
+      cardColor,
+      modalColor,
+      dividerColorOverlay
     } = derived
     const {
       borderRadius
     } = base
     return {
-      textColor: secondaryTextColor,
-      color: cardBackgroundColor,
-      colorModal: modalBackgroundColor,
-      borderColor: dividerOverlayColor,
+      textColor: textColorSecondary,
+      color: cardColor,
+      colorModal: modalColor,
+      borderColor: dividerColorOverlay,
       borderRadius
     }
   }

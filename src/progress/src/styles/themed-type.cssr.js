@@ -41,7 +41,7 @@ export default c([
     return cTB('progress', [
       cM(status, [
         cB('progress-text', {
-          color: derived.secondaryTextColor
+          color: derived.textColorSecondary
         }),
         cB('progress-icon', [
           cB('icon', {

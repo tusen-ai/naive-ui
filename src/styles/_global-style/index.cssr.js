@@ -1,6 +1,6 @@
-import { c, cB } from '../_utils/cssr'
+import { c, cB } from '../../_utils/cssr'
 import virtualScrollerStyle from './vue-virtual-scroller.cssr'
-import commonVariables from '../styles/_common-style/base'
+import commonVariables from '../base/_common'
 
 export default c([
   virtualScrollerStyle,

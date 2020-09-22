@@ -11,13 +11,13 @@ export default create({
   ],
   getDerivedVariables ({ base, derived }) {
     const {
-      secondaryTextOverlayColor,
-      inputBackgroundOverlayColor
+      textColorSecondaryOverlay,
+      inputColorOverlay
     } = derived
     return {
-      textColor: secondaryTextOverlayColor,
-      loaderTextColor: secondaryTextOverlayColor,
-      loaderColor: inputBackgroundOverlayColor,
+      textColor: textColorSecondaryOverlay,
+      loaderTextColor: textColorSecondaryOverlay,
+      loaderColor: inputColorOverlay,
       loaderBorderColor: 'transparent'
     }
   }

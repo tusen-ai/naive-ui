@@ -1,6 +1,6 @@
 import create from '../_utils/create-theme-base.js'
 import { read, composite } from '../../_utils/color/index.js'
-import commonVariables from '../_common-style/base.js'
+import commonVariables from './_common.js'
 
 export default create({
   theme: 'dark',
@@ -46,31 +46,31 @@ export default create({
       primaryHover: '#7fe7c4',
       primaryDefault: '#63e2b7',
       primaryActive: '#5acea7',
-      primaryHs: 'rgb(42, 148, 125)',
+      primarySuppl: 'rgb(42, 148, 125)',
 
       // info
       infoHover: '#8acbec',
       infoDefault: '#70c0e8',
       infoActive: '#66afd3',
-      infoHs: 'rgb(56, 137, 197)',
+      infoSuppl: 'rgb(56, 137, 197)',
 
       // error
       errorHover: '#e98b8b',
       errorDefault: '#e88080',
       errorActive: '#e57272',
-      errorHs: 'rgb(208, 58, 82)',
+      errorSuppl: 'rgb(208, 58, 82)',
 
       // warning
       warningHover: '#f5d599',
       warningDefault: '#f2c97d',
       warningActive: '#e6c260',
-      warningHs: 'rgb(240, 138, 0)',
+      warningSuppl: 'rgb(240, 138, 0)',
 
       // success
       successHover: '#7fe7c4',
       successDefault: '#63e2b7',
       successActive: '#5acea7',
-      successHs: 'rgb(42, 148, 125)',
+      successSuppl: 'rgb(42, 148, 125)',
 
       boxShadow2: '0 3px 6px -4px rgba(0, 0, 0, .16), 0 6px 12px 0 rgba(0, 0, 0, .08), 0 9px 18px 8px rgba(0, 0, 0, .04)'
     }, commonVariables)
@@ -88,69 +88,69 @@ export default create({
       return composite(baseBackgroundRgb, overlayRgba)
     }
     const derived = {
-      baseBackgroundColor: base.neutralBase,
+      baseColor: base.neutralBase,
 
       // primary color
       primaryColor: base.primaryDefault,
-      primaryHoverColor: base.primaryHover,
-      primaryActiveColor: base.primaryActive,
-      primaryHsColor: base.primaryHs,
+      primaryColorHover: base.primaryHover,
+      primaryColorActive: base.primaryActive,
+      primaryColorSuppl: base.primarySuppl,
       // info color
       infoColor: base.infoDefault,
-      infoHoverColor: base.infoHover,
-      infoActiveColor: base.infoActive,
-      infoHsColor: base.infoHs,
+      infoColorHover: base.infoHover,
+      infoColorActive: base.infoActive,
+      infoColorSuppl: base.infoSuppl,
       // success color
       successColor: base.successDefault,
       successHoverColor: base.successHover,
       successActiveColor: base.successActive,
-      successHsColor: base.successHs,
+      successColorSuppl: base.successSuppl,
       // warning color
       warningColor: base.warningDefault,
-      warningHoverColor: base.warningHover,
-      warningActiveColor: base.warningActive,
-      warningHsColor: base.warningHs,
+      warningColorHover: base.warningHover,
+      warningColorActive: base.warningActive,
+      warningColorSuppl: base.warningSuppl,
       // error color
       errorColor: base.errorDefault,
-      errorHoverColor: base.errorHover,
-      errorActiveColor: base.errorActive,
-      errorHsColor: base.errorHs,
+      errorColorHover: base.errorHover,
+      errorColorActive: base.errorActive,
+      errorColorSuppl: base.errorSuppl,
       // text color
-      baseTextColor: base.neutralTextBase,
-      primaryTextColor: neutral(base.alpha1),
-      primaryTextOverlayColor: overlay(base.alpha1),
-      secondaryTextColor: neutral(base.alpha2),
-      secondaryTextOverlayColor: overlay(base.alpha2),
-      tertiaryTextColor: neutral(base.alpha3),
-      tertiaryTextOverlayColor: overlay(base.alpha3),
-      quaternaryTextColor: neutral(base.alpha4), // disabled, placeholder, icon
-      quaternaryTextOverlayColor: overlay(base.alpha4),
-      quinaryTextColor: neutral(base.alpha5),
-      quinaryTextOverlayColor: overlay(base.alpha5),
+      textColorBase: base.neutralTextBase,
+      textColorPrimary: neutral(base.alpha1),
+      textColorPrimaryOverlay: overlay(base.alpha1),
+      textColorSecondary: neutral(base.alpha2),
+      textColorSecondaryOverlay: overlay(base.alpha2),
+      textColorTertiary: neutral(base.alpha3),
+      textColorTertiaryOverlay: overlay(base.alpha3),
+      textColorQuaternary: neutral(base.alpha4), // disabled, placeholder, icon
+      textColorQuaternaryOverlay: overlay(base.alpha4),
+      textColorQuinary: neutral(base.alpha5),
+      textColorQuinaryOverlay: overlay(base.alpha5),
 
-      disabledTextColor: neutral(base.alpha4),
-      disabledTextOverlayColor: overlay(base.alpha4),
+      textColorDisabled: neutral(base.alpha4),
+      textColorDisabledOverlay: overlay(base.alpha4),
       placeholderColor: neutral(base.alpha4),
-      placeholderOverlayColor: overlay(base.alpha4),
-      disabledPlaceholderColor: neutral(base.alpha5),
-      disabledPlaceholderOverlayColor: overlay(base.alpha5),
+      placeholderColorOverlay: overlay(base.alpha4),
+      placeholderColorDisabled: neutral(base.alpha5),
+      placeholderColorDisabledOverlay: overlay(base.alpha5),
       iconColor: neutral(base.alpha4),
-      iconOverlayColor: overlay(base.alpha4),
-      disabledIconColor: neutral(base.alpha5),
-      disabledIconOverlayColor: neutral(base.alpha5),
+      iconColorOverlay: overlay(base.alpha4),
+      iconColorDisabled: neutral(base.alpha5),
+      iconColorDisabledOverlay: neutral(base.alpha5),
 
-      primaryOpacity: base.alpha1,
-      secondaryOpacity: base.alpha2,
-      tertiaryOpacity: base.alpha3,
-      quaternaryOpacity: base.alpha4,
-      quinaryOpacity: base.alpha5,
-      pendingOpacity: base.alphaPending,
-      disabledInputOpacity: base.alphaDisabledInput,
+      opacityPrimary: base.alpha1,
+      opacitySecondary: base.alpha2,
+      opacityTertiary: base.alpha3,
+      opacityQuaternary: base.alpha4,
+      opacityQuinary: base.alpha5,
+      opacityPending: base.alphaPending,
+      inputOpacityDisabled: base.alphaDisabledInput,
 
       dividerColor: neutral(base.alphaDivider),
-      dividerOverlayColor: overlay(base.alphaDivider),
+      dividerColorOverlay: overlay(base.alphaDivider),
       borderColor: neutral(base.alphaBorder),
-      borderOverlayColor: overlay(base.alphaBorder),
+      borderColorOverlay: overlay(base.alphaBorder),
 
       // close
       closeHoverColor: neutral(base.alphaClose * 1.25),
@@ -165,41 +165,40 @@ export default create({
       closeHoverOpacity: base.alphaClose * 1.25,
       closeActiveOpacity: base.alphaClose * 0.8,
 
-      scrollbarBackgroundOverlayColor: overlay(base.alphaScrollbar),
-      scrollbarHoverBackgroundOverlayColor: overlay(base.alphaScrollbarHover),
+      scrollbarColorOverlay: overlay(base.alphaScrollbar),
+      scrollbarColorHoverOverlay: overlay(base.alphaScrollbarHover),
 
-      progressRailBackgroundColor: neutral(base.alphaProgressRail),
-      progressRailBackgroundOverlayColor: overlay(base.alphaProgressRail),
-      railBackgroundColor: neutral(base.alphaRail),
-      railBackgroundOverlayColor: overlay(base.alphaRail),
-      railHoverBackgroundOverlayColor: overlay(base.alphaRail * 1.5),
+      progressRailColor: neutral(base.alphaProgressRail),
+      progressRailColorOverlay: overlay(base.alphaProgressRail),
+      railColor: neutral(base.alphaRail),
+      railColorOverlay: overlay(base.alphaRail),
+      railColorHoverOverlay: overlay(base.alphaRail * 1.5),
 
-      popoverBackgroundColor: base.neutralPopover,
-      tableBodyBackgroundColor: base.neutralCard,
-      cardBackgroundColor: base.neutralCard,
-      modalBackgroundColor: base.neutralModal,
-      bodyBackgroundColor: base.neutralBody,
-      tagBackgroundColor: neutral(base.alphaTag),
-      avatarBackgroundColor: overlay(base.alphaAvatar),
+      popoverColor: base.neutralPopover,
+      tableColor: base.neutralCard,
+      cardColor: base.neutralCard,
+      modalColor: base.neutralModal,
+      bodyColor: base.neutralBody,
+      tagColor: neutral(base.alphaTag),
+      avatarColor: overlay(base.alphaAvatar),
 
-      inputBackgroundColor: neutral(base.alphaInput),
-      inputBackgroundOverlayColor: overlay(base.alphaInput),
-      codeBackgroundColor: neutral(base.alphaCode),
-      codeBackgroundOverlayColor: overlay(base.alphaCode),
-      tabBackgroundOverlayColor: overlay(base.alphaTab),
-      avatarBackgroundOverlayColor: overlay(base.alphaAvatar),
-      actionBackgroundColor: neutral(base.alphaAction),
-      actionBackgroundOverlayColor: overlay(base.alphaAction),
-      tableHeaderBackgroundOverlayColor: overlay(base.alphaAction),
+      inputColor: neutral(base.alphaInput),
+      inputColorOverlay: overlay(base.alphaInput),
+      codeColor: neutral(base.alphaCode),
+      codeColorOverlay: overlay(base.alphaCode),
+      tabColorOverlay: overlay(base.alphaTab),
+      avatarColorOverlay: overlay(base.alphaAvatar),
+      actionColor: neutral(base.alphaAction),
+      actionColorOverlay: overlay(base.alphaAction),
+      tableHeaderColorOverlay: overlay(base.alphaAction),
 
-      pendingBackgroundOverlayColor: overlay(base.alphaPending),
-      tablePendingBackgroundOverlayColor: overlay(base.alphaTablePending),
-      activeBackgroundOverlayColor: overlay(base.alphaActive),
+      hoverColorOverlay: overlay(base.alphaPending),
+      tableColorHoverOverlay: overlay(base.alphaTablePending),
+      activeColorOverlay: overlay(base.alphaActive),
 
-      disabledOpacity: base.alphaDisabled,
-      disabledInputBackgroundColor: neutral(base.alphaDisabledInput),
-      disabledInputBackgroundOverlayColor: overlay(base.alphaDisabledInput),
-      messageColoredBoxShadow: null,
+      opacityDisabled: base.alphaDisabled,
+      inputColorDisabled: neutral(base.alphaDisabledInput),
+      inputColorDisabledOverlay: overlay(base.alphaDisabledInput),
 
       popoverBoxShadow: base.boxShadow2
     }

@@ -10,11 +10,11 @@ export default create({
     } = base
     return {
       ...commonVariables,
-      color: derived.cardBackgroundColor,
-      textColor: derived.secondaryTextOverlayColor,
-      titleTextColor: derived.primaryTextOverlayColor,
-      borderColor: derived.dividerOverlayColor,
-      actionColor: derived.actionBackgroundOverlayColor,
+      color: derived.cardColor,
+      textColor: derived.textColorSecondaryOverlay,
+      titleTextColor: derived.textColorPrimaryOverlay,
+      borderColor: derived.dividerColorOverlay,
+      actionColor: derived.actionColorOverlay,
       titleFontWeight: base.strongFontWeight,
       closeColor: derived.closeOverlayColor,
       closeColorHover: derived.closeHoverOverlayColor,

@@ -5,12 +5,12 @@ export default create({
   name: 'Divider',
   getDerivedVariables ({ base, derived }) {
     const {
-      primaryTextOverlayColor,
-      dividerOverlayColor
+      textColorPrimaryOverlay,
+      dividerColorOverlay
     } = derived
     return {
-      textColor: primaryTextOverlayColor,
-      color: dividerOverlayColor,
+      textColor: textColorPrimaryOverlay,
+      color: dividerColorOverlay,
       fontWeight: base.strongFontWeight
     }
   }

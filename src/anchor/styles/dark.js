@@ -10,19 +10,19 @@ export default create({
     } = base
     const {
       primaryColor,
-      primaryHoverColor,
-      primaryActiveColor,
-      railBackgroundOverlayColor,
-      secondaryTextOverlayColor
+      primaryColorHover,
+      primaryColorActive,
+      railColorOverlay,
+      textColorSecondaryOverlay
     } = derived
     return {
       borderRadius,
-      railColor: railBackgroundOverlayColor,
+      railColor: railColorOverlay,
       railColorActive: primaryColor,
       linkColor: changeColor(primaryColor, { alpha: 0.15 }),
-      linkTextColor: secondaryTextOverlayColor,
-      linkTextColorHover: primaryHoverColor,
-      linkTextColorActive: primaryActiveColor,
+      linkTextColor: textColorSecondaryOverlay,
+      linkTextColorHover: primaryColorHover,
+      linkTextColorActive: primaryColorActive,
       linkTextColorMatch: primaryColor
     }
   }

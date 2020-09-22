@@ -10,19 +10,19 @@ export default create({
       warningColor,
       errorColor,
       infoColor,
-      primaryHsColor,
-      successHsColor,
-      warningHsColor,
-      errorHsColor,
-      infoHsColor
+      primaryColorSuppl,
+      successColorSuppl,
+      warningColorSuppl,
+      errorColorSuppl,
+      infoColorSuppl
     } = derived
     return {
       fontWeight: base.strongFontWeight,
-      backgroundImagePrimary: `linear-gradient(252deg, ${primaryColor} 0%, ${primaryHsColor} 100%)`,
-      backgroundImageSuccess: `linear-gradient(252deg, ${successColor} 0%, ${successHsColor} 100%)`,
-      backgroundImageWarning: ` linear-gradient(252deg, ${warningColor} 0%, ${warningHsColor} 100%)`,
-      backgroundImageError: `linear-gradient(252deg, ${errorColor} 0%, ${errorHsColor} 100%)`,
-      backgroundImageInfo: `linear-gradient(252deg, ${infoColor} 0%, ${infoHsColor} 100%)`
+      backgroundImagePrimary: `linear-gradient(252deg, ${primaryColor} 0%, ${primaryColorSuppl} 100%)`,
+      backgroundImageSuccess: `linear-gradient(252deg, ${successColor} 0%, ${successColorSuppl} 100%)`,
+      backgroundImageWarning: ` linear-gradient(252deg, ${warningColor} 0%, ${warningColorSuppl} 100%)`,
+      backgroundImageError: `linear-gradient(252deg, ${errorColor} 0%, ${errorColorSuppl} 100%)`,
+      backgroundImageInfo: `linear-gradient(252deg, ${infoColor} 0%, ${infoColorSuppl} 100%)`
     }
   }
 })

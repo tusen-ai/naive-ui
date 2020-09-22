@@ -7,39 +7,39 @@ export default create({
   name: 'Radio',
   getDerivedVariables ({ base, derived }) {
     const {
-      borderOverlayColor,
+      borderColorOverlay,
       primaryColor,
-      baseBackgroundColor,
-      disabledTextOverlayColor,
+      baseColor,
+      textColorDisabledOverlay,
       disabledBackgroundColor,
-      secondaryTextOverlayColor,
-      disabledOpacity
+      textColorSecondaryOverlay,
+      opacityDisabled
     } = derived
     const {
       borderRadius
     } = base
     return {
       ...commonVariables,
-      boxShadow: `inset 0 0 0 1px ${borderOverlayColor}`,
+      boxShadow: `inset 0 0 0 1px ${borderColorOverlay}`,
       boxShadowActive: `inset 0 0 0 1px ${primaryColor}`,
       boxShadowFocus: `(inset 0 0 0 1px ${primaryColor}, 0 0 0 2px ${changeColor(primaryColor, { alpha: 0.3 })})`,
       boxShadowHover: `inset 0 0 0 1px ${primaryColor}`,
-      boxShadowDisabled: `inset 0 0 0 1px ${borderOverlayColor}`,
+      boxShadowDisabled: `inset 0 0 0 1px ${borderColorOverlay}`,
       color: 'transparent',
       colorDisabled: disabledBackgroundColor,
-      textColor: secondaryTextOverlayColor,
-      textColorDisabled: disabledTextOverlayColor,
+      textColor: textColorSecondaryOverlay,
+      textColorDisabled: textColorDisabledOverlay,
       dotColorActive: primaryColor,
-      dotColorDisabled: borderOverlayColor,
-      buttonBorderColor: borderOverlayColor,
+      dotColorDisabled: borderColorOverlay,
+      buttonBorderColor: borderColorOverlay,
       buttonBorderColorActive: primaryColor,
       buttonBorderColorHover: primaryColor,
       buttonColor: 'transparent',
       buttonColorActive: primaryColor,
-      buttonTextColor: secondaryTextOverlayColor,
-      buttonTextColorActive: baseBackgroundColor,
+      buttonTextColor: textColorSecondaryOverlay,
+      buttonTextColorActive: baseColor,
       buttonTextColorHover: primaryColor,
-      disabledOpacity: disabledOpacity,
+      opacityDisabled: opacityDisabled,
       buttonBoxShadowFocus: `inset 0 0 0 1px ${primaryColor}, 0 0 0 2px ${changeColor(primaryColor, { alpha: 0.3 })}`,
       buttonBoxShadowHover: `inset 0 0 0 1px ${primaryColor}`,
       buttonBoxShadow: 'inset 0 0 0 1px transparent',

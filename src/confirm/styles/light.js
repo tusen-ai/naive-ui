@@ -5,9 +5,9 @@ export default create({
   name: 'Confirm',
   getDerivedVariables ({ base, derived }) {
     const {
-      primaryTextColor,
-      secondaryTextColor,
-      cardBackgroundColor,
+      textColorPrimary,
+      textColorSecondary,
+      cardColor,
       closeColor,
       closeHoverColor,
       closeActiveColor,
@@ -17,9 +17,9 @@ export default create({
       errorColor
     } = derived
     return {
-      titleTextColor: primaryTextColor,
-      textColor: secondaryTextColor,
-      color: cardBackgroundColor,
+      titleTextColor: textColorPrimary,
+      textColor: textColorSecondary,
+      color: cardColor,
       closeColor: closeColor,
       closeColorHover: closeHoverColor,
       closeColorActive: closeActiveColor,

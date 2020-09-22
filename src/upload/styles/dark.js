@@ -6,18 +6,18 @@ export default create({
   theme: 'dark',
   getDerivedVariables ({ base, derived }) {
     const {
-      iconOverlayColor,
+      iconColorOverlay,
       primaryColor,
       errorColor,
-      secondaryTextColor,
+      textColorSecondary,
       successColor,
-      disabledOpacity,
-      actionBackgroundOverlayColor,
+      opacityDisabled,
+      actionColorOverlay,
       borderColor
     } = derived
 
     return {
-      draggerColor: actionBackgroundOverlayColor,
+      draggerColor: actionColorOverlay,
       draggerBorderColor: borderColor,
       draggerBorderColorHover: primaryColor,
       itemColorHover: changeColor(primaryColor, {
@@ -26,11 +26,11 @@ export default create({
       itemColorErrorHover: changeColor(errorColor, {
         alpha: 0.15
       }),
-      itemTextColor: secondaryTextColor,
+      itemTextColor: textColorSecondary,
       itemTextColorError: errorColor,
       itemTextColorSuccess: successColor,
-      itemIconColor: iconOverlayColor,
-      itemDisabledOpacity: disabledOpacity
+      itemIconColor: iconColorOverlay,
+      itemDisabledOpacity: opacityDisabled
     }
   }
 })

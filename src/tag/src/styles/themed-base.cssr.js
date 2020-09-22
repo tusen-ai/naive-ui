@@ -5,7 +5,7 @@ export default c([
     const {
       borderRadius,
       checkable,
-      disabledOpacity
+      opacityDisabled
     } = props.$local
     const {
       textColor: checkableTextColor,
@@ -47,7 +47,7 @@ export default c([
       }),
       cM('disabled', {
         cursor: 'not-allowed !important',
-        opacity: disabledOpacity
+        opacity: opacityDisabled
       }, [
         cE('close', {
           cursor: 'not-allowed !important'

@@ -7,8 +7,8 @@ export default create({
   getDerivedVariables ({ base, derived }) {
     return {
       rectColor: composite(
-        derived.baseBackgroundColor,
-        derived.pendingBackgroundOverlayColor
+        derived.baseColor,
+        derived.hoverColorOverlay
       )
     }
   }

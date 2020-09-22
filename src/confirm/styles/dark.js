@@ -5,9 +5,9 @@ export default create({
   name: 'Confirm',
   getDerivedVariables ({ base, derived }) {
     const {
-      primaryTextOverlayColor,
-      secondaryTextOverlayColor,
-      modalBackgroundColor,
+      textColorPrimaryOverlay,
+      textColorSecondaryOverlay,
+      modalColor,
       closeOverylayColor,
       closeHoverOverlayColor,
       closeActiveOverylayColor,
@@ -17,9 +17,9 @@ export default create({
       errorColor
     } = derived
     return {
-      titleTextColor: primaryTextOverlayColor,
-      textColor: secondaryTextOverlayColor,
-      color: modalBackgroundColor,
+      titleTextColor: textColorPrimaryOverlay,
+      textColor: textColorSecondaryOverlay,
+      color: modalColor,
       closeColor: closeOverylayColor,
       closeColorHover: closeHoverOverlayColor,
       closeColorActive: closeActiveOverylayColor,

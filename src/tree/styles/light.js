@@ -9,21 +9,21 @@ export default create({
       smallBorderRadius
     } = base
     const {
-      pendingBackgroundOverlayColor,
-      activeBackgroundOverlayColor,
+      hoverColorOverlay,
+      activeColorOverlay,
       primaryColor,
-      tertiaryTextColor,
-      secondaryTextColor,
-      disabledTextColor
+      textColorTertiary,
+      textColorSecondary,
+      textColorDisabled
     } = derived
     return {
       smallBorderRadius,
-      nodeColorHover: pendingBackgroundOverlayColor,
-      nodeColorActive: activeBackgroundOverlayColor,
+      nodeColorHover: hoverColorOverlay,
+      nodeColorActive: activeColorOverlay,
       nodeColorSelected: changeColor(primaryColor, { alpha: 0.1 }),
-      arrowColor: tertiaryTextColor,
-      nodeTextColor: secondaryTextColor,
-      nodeTextColorDisabled: disabledTextColor
+      arrowColor: textColorTertiary,
+      nodeTextColor: textColorSecondary,
+      nodeTextColorDisabled: textColorDisabled
     }
   }
 })

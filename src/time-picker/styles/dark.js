@@ -5,26 +5,26 @@ export default create({
   name: 'TimePicker',
   getDerivedVariables ({ base, derived }) {
     const {
-      popoverBackgroundColor,
-      secondaryTextOverlayColor,
+      popoverColor,
+      textColorSecondaryOverlay,
       primaryColor,
-      pendingBackgroundOverlayColor,
-      dividerOverlayColor,
-      disabledOpacity
+      hoverColorOverlay,
+      dividerColorOverlay,
+      opacityDisabled
     } = derived
     const {
       popmenuBoxShadow,
       borderRadius
     } = base
     return {
-      panelColor: popoverBackgroundColor,
+      panelColor: popoverColor,
       panelBoxShadow: popmenuBoxShadow,
-      panelDividerColor: dividerOverlayColor,
-      itemTextColor: secondaryTextOverlayColor,
+      panelDividerColor: dividerColorOverlay,
+      itemTextColor: textColorSecondaryOverlay,
       itemTextColorActive: primaryColor,
-      itemColorHover: pendingBackgroundOverlayColor,
-      itemOpacityDisabled: disabledOpacity,
-      triggerTextDecorationColor: secondaryTextOverlayColor,
+      itemColorHover: hoverColorOverlay,
+      itemOpacityDisabled: opacityDisabled,
+      triggerTextDecorationColor: textColorSecondaryOverlay,
       triggerTextDecorationColorActive: primaryColor,
       borderRadius
     }

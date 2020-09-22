@@ -6,12 +6,12 @@ export default create({
   name: 'Descriptions',
   getDerivedVariables ({ base, derived }) {
     const {
-      tableHeaderBackgroundOverlayColor,
-      primaryTextOverlayColor,
-      secondaryTextOverlayColor,
-      cardBackgroundColor,
-      modalBackgroundColor,
-      dividerOverlayColor
+      tableHeaderColorOverlay,
+      textColorPrimaryOverlay,
+      textColorSecondaryOverlay,
+      cardColor,
+      modalColor,
+      dividerColorOverlay
     } = derived
     const {
       borderRadius,
@@ -19,13 +19,13 @@ export default create({
     } = base
     return {
       ...commonVariables,
-      headerColor: tableHeaderBackgroundOverlayColor,
-      headerTextColor: primaryTextOverlayColor,
+      headerColor: tableHeaderColorOverlay,
+      headerTextColor: textColorPrimaryOverlay,
       headerFontWeight: strongFontWeight,
-      contentTextColor: secondaryTextOverlayColor,
-      contentColor: cardBackgroundColor,
-      contentColorModal: modalBackgroundColor,
-      borderColor: dividerOverlayColor,
+      contentTextColor: textColorSecondaryOverlay,
+      contentColor: cardColor,
+      contentColorModal: modalColor,
+      borderColor: dividerColorOverlay,
       borderRadius: borderRadius
     }
   }

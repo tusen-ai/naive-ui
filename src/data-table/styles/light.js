@@ -11,45 +11,45 @@ export default create({
       borderRadius
     } = base
     const {
-      cardBackgroundColor,
-      modalBackgroundColor,
-      dividerOverlayColor,
-      secondaryTextColor,
-      primaryTextColor,
-      tableHeaderBackgroundOverlayColor,
-      tablePendingBackgroundOverlayColor,
-      iconOverlayColor,
+      cardColor,
+      modalColor,
+      dividerColorOverlay,
+      textColorSecondary,
+      textColorPrimary,
+      tableHeaderColorOverlay,
+      tableColorHoverOverlay,
+      iconColorOverlay,
       primaryColor
     } = derived
     return {
       ...commonVariables,
       borderRadius,
       default: {
-        borderColor: composite(cardBackgroundColor, dividerOverlayColor),
-        bodyColorHover: composite(cardBackgroundColor, tablePendingBackgroundOverlayColor),
-        headerColor: composite(cardBackgroundColor, tableHeaderBackgroundOverlayColor),
+        borderColor: composite(cardColor, dividerColorOverlay),
+        bodyColorHover: composite(cardColor, tableColorHoverOverlay),
+        headerColor: composite(cardColor, tableHeaderColorOverlay),
         headerColorHover: composite(
-          composite(cardBackgroundColor, tableHeaderBackgroundOverlayColor),
-          tableHeaderBackgroundOverlayColor
+          composite(cardColor, tableHeaderColorOverlay),
+          tableHeaderColorOverlay
         ),
-        bodyColor: cardBackgroundColor,
-        bodyTextColor: secondaryTextColor,
-        headerTextColor: primaryTextColor,
+        bodyColor: cardColor,
+        bodyTextColor: textColorSecondary,
+        headerTextColor: textColorPrimary,
         headerFontWeight: strongFontWeight,
-        headerButtonColorHover: tablePendingBackgroundOverlayColor,
-        headerButtonIconColor: iconOverlayColor,
+        headerButtonColorHover: tableColorHoverOverlay,
+        headerButtonIconColor: iconColorOverlay,
         headerButtonIconColorActive: primaryColor,
         fixedColumnBoxShadowColor: 'rgba(0, 0, 0, .18)'
       },
       modal: {
-        borderColor: composite(modalBackgroundColor, dividerOverlayColor),
-        bodyColorHover: composite(modalBackgroundColor, tablePendingBackgroundOverlayColor),
-        headerColor: composite(modalBackgroundColor, tableHeaderBackgroundOverlayColor),
+        borderColor: composite(modalColor, dividerColorOverlay),
+        bodyColorHover: composite(modalColor, tableColorHoverOverlay),
+        headerColor: composite(modalColor, tableHeaderColorOverlay),
         headerColorHover: composite(
-          composite(modalBackgroundColor, tableHeaderBackgroundOverlayColor),
-          tableHeaderBackgroundOverlayColor
+          composite(modalColor, tableHeaderColorOverlay),
+          tableHeaderColorOverlay
         ),
-        bodyColor: modalBackgroundColor
+        bodyColor: modalColor
       }
     }
   }

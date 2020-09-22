@@ -5,10 +5,10 @@ export default create({
   name: 'Dropdown',
   getDerivedVariables ({ derived }) {
     const {
-      secondaryTextColor
+      textColorSecondary
     } = derived
     return {
-      suffixColor: secondaryTextColor
+      suffixColor: textColorSecondary
     }
   }
 })

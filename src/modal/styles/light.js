@@ -5,12 +5,12 @@ export default create({
   theme: 'light',
   getDerivedVariables ({ base, derived }) {
     const {
-      modalBackgroundColor,
-      secondaryTextColor
+      modalColor,
+      textColorSecondary
     } = derived
     return {
-      color: modalBackgroundColor,
-      textColor: secondaryTextColor
+      color: modalColor,
+      textColor: textColorSecondary
     }
   }
 })

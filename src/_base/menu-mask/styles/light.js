@@ -6,10 +6,10 @@ export default create({
   theme: 'light',
   getDerivedVariables ({ base, derived }) {
     return {
-      color: changeColor(derived.popoverBackgroundColor, {
+      color: changeColor(derived.popoverColor, {
         alpha: 0.75
       }),
-      textColor: derived.secondaryTextColor
+      textColor: derived.textColorSecondary
     }
   }
 })

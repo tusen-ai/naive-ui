@@ -1,7 +1,7 @@
 import create from '../../styles/_utils/create-component-base'
 import { changeColor } from '../../_utils/color'
-import inputCommonVariables from '../../styles/_common-style/input'
-import inputNumberCommonVariables from '../../styles/_common-style/input-number'
+import inputCommonVariables from '../../input/styles/_common'
+import inputNumberCommonVariables from './_common'
 
 export default create({
   name: 'InputNumber',
@@ -12,32 +12,32 @@ export default create({
     } = base
     const {
       primaryColor,
-      primaryHoverColor,
-      primaryActiveColor,
+      primaryColorHover,
+      primaryColorActive,
       errorColor,
-      errorHoverColor,
-      errorActiveColor,
+      errorColorHover,
+      errorColorActive,
       warningColor,
-      warningHoverColor,
-      warningActiveColor,
+      warningColorHover,
+      warningColorActive,
       borderColor,
-      secondaryTextColor: textColor,
-      actionBackgroundColor: buttonColor,
-      disabledInputBackgroundColor: colorDisabled,
+      textColorSecondary: textColor,
+      actionColor: buttonColor,
+      inputColorDisabled: colorDisabled,
       textColorDisabled,
       placeholdeColor,
-      quinaryTextColor: placeholderColorDisabled,
-      inputBackgroundColor: color
+      textColorQuinary: placeholderColorDisabled,
+      inputColor: color
     } = derived
-    const borderColorHover = primaryHoverColor
+    const borderColorHover = primaryColorHover
     const buttonTextColor = textColor
     const buttonColorDisabled = colorDisabled
     const buttonTextColorDisabled = textColorDisabled
     const buttonColorHover = buttonColor
     const buttonColorActive = buttonColor
     const caretColor = null
-    const buttonTextColorHover = primaryHoverColor
-    const buttonTextColorActive = primaryActiveColor
+    const buttonTextColorHover = primaryColorHover
+    const buttonTextColorActive = primaryColorActive
     const colorFocus = color
     return {
       ...inputCommonVariables,
@@ -61,27 +61,27 @@ export default create({
         caretColor,
         color,
         colorFocus,
-        borderMaskBoxShadowFocus: `inset 0 0 0 1px ${primaryHoverColor}, 0 0 0 2px ${changeColor(primaryColor, { alpha: 0.2 })}`,
-        borderMaskBoxShadowHover: `inset 0 0 0 1px ${primaryHoverColor}`,
+        borderMaskBoxShadowFocus: `inset 0 0 0 1px ${primaryColorHover}, 0 0 0 2px ${changeColor(primaryColor, { alpha: 0.2 })}`,
+        borderMaskBoxShadowHover: `inset 0 0 0 1px ${primaryColorHover}`,
         placeholdeColor
       },
       warning: {
         borderMaskBoxShadow: `inset 0 0 0 1px ${warningColor}`,
-        borderMaskBoxShadowFocus: `inset 0 0 0 1px ${warningHoverColor}, 0 0 0 2px ${changeColor(warningColor, { alpha: 0.2 })}`,
-        borderMaskBoxShadowHover: `inset 0 0 0 1px ${warningHoverColor}`,
+        borderMaskBoxShadowFocus: `inset 0 0 0 1px ${warningColorHover}, 0 0 0 2px ${changeColor(warningColor, { alpha: 0.2 })}`,
+        borderMaskBoxShadowHover: `inset 0 0 0 1px ${warningColorHover}`,
         colorFocus,
-        caretColor: warningHoverColor,
-        buttonTextColorHover: warningHoverColor,
-        buttonTextColorActive: warningActiveColor
+        caretColor: warningColorHover,
+        buttonTextColorHover: warningColorHover,
+        buttonTextColorActive: warningColorActive
       },
       error: {
         borderMaskBoxShadow: `inset 0 0 0 1px ${errorColor}`,
-        borderMaskBoxShadowFocus: `inset 0 0 0 1px ${errorHoverColor}, 0 0 0 2px ${changeColor(errorColor, { alpha: 0.2 })}`,
-        borderMaskBoxShadowHover: `inset 0 0 0 1px ${errorHoverColor}`,
+        borderMaskBoxShadowFocus: `inset 0 0 0 1px ${errorColorHover}, 0 0 0 2px ${changeColor(errorColor, { alpha: 0.2 })}`,
+        borderMaskBoxShadowHover: `inset 0 0 0 1px ${errorColorHover}`,
         colorFocus,
-        caretColor: errorHoverColor,
-        buttonTextColorHover: errorHoverColor,
-        buttonTextColorActive: errorActiveColor
+        caretColor: errorColorHover,
+        buttonTextColorHover: errorColorHover,
+        buttonTextColorActive: errorColorActive
       }
     }
   }

@@ -41,6 +41,7 @@
 
 <script>
 export default {
+  name: 'SlotMachindNumber',
   props: {
     value: {
       type: [Number, String],

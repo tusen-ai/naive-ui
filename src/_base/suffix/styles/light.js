@@ -6,31 +6,31 @@ export default create({
   getDerivedVariables ({ base, derived }) {
     return {
       default: {
-        crossColor: derived.quaternaryTextOverlayColor,
-        hoverCrossColor: derived.primaryHoverColor,
-        activeCrossColor: derived.primaryActiveColor,
-        arrowColor: derived.quaternaryTextOverlayColor,
-        hoverArrowColor: derived.primaryHoverColor,
-        activeArrowColor: derived.primaryHoverColor,
-        disabledArrowColor: derived.quinaryTextColor
+        crossColor: derived.textColorQuaternaryOverlay,
+        hoverCrossColor: derived.primaryColorHover,
+        activeCrossColor: derived.primaryColorActive,
+        arrowColor: derived.textColorQuaternaryOverlay,
+        hoverArrowColor: derived.primaryColorHover,
+        activeArrowColor: derived.primaryColorHover,
+        disabledArrowColor: derived.textColorQuinary
       },
       warning: {
         crossColor: derived.warningColor,
-        hoverCrossColor: derived.warningHoverColor,
-        activeCrossColor: derived.warningActiveColor,
+        hoverCrossColor: derived.warningColorHover,
+        activeCrossColor: derived.warningColorActive,
         arrowColor: derived.warningColor,
-        hoverArrowColor: derived.warningHoverColor,
-        activeArrowColor: derived.warningHoverColor,
-        disabledArrowColor: derived.quinaryTextColor
+        hoverArrowColor: derived.warningColorHover,
+        activeArrowColor: derived.warningColorHover,
+        disabledArrowColor: derived.textColorQuinary
       },
       error: {
         crossColor: derived.errorColor,
-        hoverCrossColor: derived.errorHoverColor,
-        activeCrossColor: derived.errorActiveColor,
+        hoverCrossColor: derived.errorColorHover,
+        activeCrossColor: derived.errorColorActive,
         arrowColor: derived.errorColor,
-        hoverArrowColor: derived.errorHoverColor,
-        activeArrowColor: derived.errorHoverColor,
-        disabledArrowColor: derived.quinaryTextColor
+        hoverArrowColor: derived.errorColorHover,
+        activeArrowColor: derived.errorColorHover,
+        disabledArrowColor: derived.textColorQuinary
       }
     }
   }

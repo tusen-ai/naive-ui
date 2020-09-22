@@ -6,32 +6,32 @@ export default create({
   theme: 'dark',
   getDerivedVariables ({ base, derived }) {
     const {
-      baseTextColor,
-      secondaryTextOverlayColor,
-      infoHsColor,
-      successHsColor,
-      errorHsColor,
-      warningHsColor,
-      popoverBackgroundColor
+      textColorBase,
+      textColorSecondaryOverlay,
+      infoColorSuppl,
+      successColorSuppl,
+      errorColorSuppl,
+      warningColorSuppl,
+      popoverColor
     } = derived
     const {
       popmenuBoxShadow
     } = base
     return {
-      textColorInfo: baseTextColor,
-      textColorSuccess: baseTextColor,
-      textColorError: baseTextColor,
-      textColorWarning: baseTextColor,
-      textColorLoading: secondaryTextOverlayColor,
-      colorInfo: infoHsColor,
-      colorSuccess: successHsColor,
-      colorError: errorHsColor,
-      colorWarning: warningHsColor,
-      colorLoading: popoverBackgroundColor,
-      boxShadowInfo: `0 2px 12px 0 ${changeColor(infoHsColor, { alpha: '0.4' })}`,
-      boxShadowSuccess: `0 2px 12px 0 ${changeColor(successHsColor, { alpha: '0.4' })}`,
-      boxShadowError: `0 2px 12px 0 ${changeColor(errorHsColor, { alpha: '0.4' })}`,
-      boxShadowWarning: `0 2px 12px 0 ${changeColor(warningHsColor, { alpha: '0.4' })}`,
+      textColorInfo: textColorBase,
+      textColorSuccess: textColorBase,
+      textColorError: textColorBase,
+      textColorWarning: textColorBase,
+      textColorLoading: textColorSecondaryOverlay,
+      colorInfo: infoColorSuppl,
+      colorSuccess: successColorSuppl,
+      colorError: errorColorSuppl,
+      colorWarning: warningColorSuppl,
+      colorLoading: popoverColor,
+      boxShadowInfo: `0 2px 12px 0 ${changeColor(infoColorSuppl, { alpha: '0.4' })}`,
+      boxShadowSuccess: `0 2px 12px 0 ${changeColor(successColorSuppl, { alpha: '0.4' })}`,
+      boxShadowError: `0 2px 12px 0 ${changeColor(errorColorSuppl, { alpha: '0.4' })}`,
+      boxShadowWarning: `0 2px 12px 0 ${changeColor(warningColorSuppl, { alpha: '0.4' })}`,
       boxShadowLoading: popmenuBoxShadow,
       iconColorInfo: 'rgba(255, 255, 255, .5)',
       iconColorSuccess: 'rgba(255, 255, 255, .5)',

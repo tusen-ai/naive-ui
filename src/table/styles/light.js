@@ -7,12 +7,12 @@ export default create({
   name: 'Table',
   getDerivedVariables ({ base, derived }) {
     const {
-      dividerOverlayColor,
-      cardBackgroundColor,
-      modalBackgroundColor,
-      actionBackgroundOverlayColor,
-      primaryTextColor,
-      secondaryTextColor
+      dividerColorOverlay,
+      cardColor,
+      modalColor,
+      actionColorOverlay,
+      textColorPrimary,
+      textColorSecondary
     } = derived
     const {
       borderRadius,
@@ -20,12 +20,12 @@ export default create({
     } = base
     return {
       ...sizeVariables,
-      borderColor: dividerOverlayColor,
-      bodyColor: cardBackgroundColor,
-      bodyColorModal: modalBackgroundColor,
-      headerColor: composite(cardBackgroundColor, actionBackgroundOverlayColor),
-      headerTextColor: primaryTextColor,
-      bodyTextColor: secondaryTextColor,
+      borderColor: dividerColorOverlay,
+      bodyColor: cardColor,
+      bodyColorModal: modalColor,
+      headerColor: composite(cardColor, actionColorOverlay),
+      headerTextColor: textColorPrimary,
+      bodyTextColor: textColorSecondary,
       borderRadius,
       headFontWeight: strongFontWeight
     }

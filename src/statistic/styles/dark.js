@@ -5,8 +5,8 @@ export default create({
   theme: 'dark',
   getDerivedVariables ({ base, derived }) {
     const {
-      secondaryTextOverlayColor,
-      primaryTextOverlayColor
+      textColorSecondaryOverlay,
+      textColorPrimaryOverlay
     } = derived
     const {
       strongFontWeight
@@ -14,10 +14,10 @@ export default create({
     return {
       labelFontWeight: strongFontWeight,
       valueFontWeight: strongFontWeight,
-      labelTextColor: secondaryTextOverlayColor,
-      valuePrefixTextColor: primaryTextOverlayColor,
-      valueSuffixTextColor: primaryTextOverlayColor,
-      valueTextColor: primaryTextOverlayColor
+      labelTextColor: textColorSecondaryOverlay,
+      valuePrefixTextColor: textColorPrimaryOverlay,
+      valueSuffixTextColor: textColorPrimaryOverlay,
+      valueTextColor: textColorPrimaryOverlay
     }
   }
 })

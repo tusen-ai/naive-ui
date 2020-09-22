@@ -5,16 +5,16 @@ export default create({
   name: 'Icon',
   getDerivedVariables ({ derived }) {
     const {
-      baseTextColor,
-      primaryOpacity,
-      secondaryOpacity,
-      tertiaryOpacity
+      textColorBase,
+      opacityPrimary,
+      opacitySecondary,
+      opacityTertiary
     } = derived
     return {
-      color: baseTextColor,
-      opacityPrimaryDepth: primaryOpacity,
-      opacitySecondaryDepth: secondaryOpacity,
-      opacityTertiaryDepth: tertiaryOpacity
+      color: textColorBase,
+      opacityPrimaryDepth: opacityPrimary,
+      opacitySecondaryDepth: opacitySecondary,
+      opacityTertiaryDepth: opacityTertiary
     }
   }
 })

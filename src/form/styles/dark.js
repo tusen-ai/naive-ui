@@ -10,13 +10,13 @@ export default create({
   ],
   getDerivedVariables ({ base, derived }) {
     const {
-      primaryTextOverlayColor,
+      textColorPrimaryOverlay,
       errorColor,
       warningColor
     } = derived
     return {
       ...commonVariables,
-      labelTextColor: primaryTextOverlayColor,
+      labelTextColor: textColorPrimaryOverlay,
       asteriskColor: errorColor,
       feedbackTextColorError: errorColor,
       feedbackTextColorWarning: warningColor

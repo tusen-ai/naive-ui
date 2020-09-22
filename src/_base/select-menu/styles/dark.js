@@ -12,17 +12,17 @@ export default create({
     return {
       ...commonVariables,
       borderRadius: base.borderRadius,
-      color: derived.popoverBackgroundColor,
+      color: derived.popoverColor,
       boxShadow: derived.popoverBoxShadow,
-      groupHeaderTextColor: derived.tertiaryTextOverlayColor,
-      actionDividerColor: derived.dividerOverlayColor,
-      optionTextColor: derived.secondaryTextOverlayColor,
-      optionTextColorPressed: derived.primaryActiveColor,
-      optionTextColorDisabled: derived.disabledTextOverlayColor,
+      groupHeaderTextColor: derived.textColorTertiaryOverlay,
+      actionDividerColor: derived.dividerColorOverlay,
+      optionTextColor: derived.textColorSecondaryOverlay,
+      optionTextColorPressed: derived.primaryColorActive,
+      optionTextColorDisabled: derived.textColorDisabledOverlay,
       optionTextColorSelected: derived.primaryColor,
-      optionOpacityDisabled: derived.disabledOpacity,
+      optionOpacityDisabled: derived.opacityDisabled,
       optionCheckColor: derived.primaryColor,
-      actionTextColor: derived.secondaryTextOverlayColor
+      actionTextColor: derived.textColorSecondaryOverlay
     }
   }
 })

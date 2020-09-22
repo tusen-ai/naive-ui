@@ -5,31 +5,31 @@ export default create({
   theme: 'light',
   getDerivedVariables ({ base, derived }) {
     const {
-      secondaryTextColor,
-      baseBackgroundColor,
+      textColorSecondary,
+      baseColor,
       closeColor,
       closeHoverColor,
       infoColor,
       successColor,
       errorColor,
       warningColor,
-      popoverBackgroundColor
+      popoverColor
     } = derived
     const {
       popmenuBoxShadow
     } = base
     const coloredBoxShadow = '0px 2px 18px 0px rgba(0, 0, 0, 0.27)'
     return {
-      textColorInfo: baseBackgroundColor,
-      textColorSuccess: baseBackgroundColor,
-      textColorError: baseBackgroundColor,
-      textColorWarning: baseBackgroundColor,
-      textColorLoading: secondaryTextColor,
+      textColorInfo: baseColor,
+      textColorSuccess: baseColor,
+      textColorError: baseColor,
+      textColorWarning: baseColor,
+      textColorLoading: textColorSecondary,
       colorInfo: infoColor,
       colorSuccess: successColor,
       colorError: errorColor,
       colorWarning: warningColor,
-      colorLoading: popoverBackgroundColor,
+      colorLoading: popoverColor,
       boxShadowInfo: coloredBoxShadow,
       boxShadowSuccess: coloredBoxShadow,
       boxShadowError: coloredBoxShadow,

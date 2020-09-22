@@ -6,16 +6,16 @@ export default create({
   theme: 'light',
   getDerivedVariables ({ base, derived }) {
     const {
-      secondaryTextColor,
+      textColorSecondary,
       primaryColor,
-      disabledTextColor,
-      iconOverlayColor,
-      disabledIconOverlayColor,
+      textColorDisabled,
+      iconColorOverlay,
+      iconColorDisabledOverlay,
       closeColor,
-      tabBackgroundOverlayColor,
+      tabColorOverlay,
       borderColor,
-      primaryTextColor,
-      dividerOverlayColor
+      textColorPrimary,
+      dividerColorOverlay
     } = derived
     const {
       strongFontWeight,
@@ -23,22 +23,22 @@ export default create({
     } = base
     return {
       ...sizeVariables,
-      labelTextColor: secondaryTextColor,
+      labelTextColor: textColorSecondary,
       labelTextColorActive: primaryColor,
       labelTextColorHover: primaryColor,
-      labelTextColorDisabled: disabledTextColor,
+      labelTextColorDisabled: textColorDisabled,
       labelBarColor: primaryColor,
-      scrollButtonColor: iconOverlayColor,
-      scrollButtonColorDisabled: disabledIconOverlayColor,
+      scrollButtonColor: iconColorOverlay,
+      scrollButtonColorDisabled: iconColorDisabledOverlay,
       tabCloseColor: closeColor,
-      tabColor: tabBackgroundOverlayColor,
+      tabColor: tabColorOverlay,
       tabBorderColorActive: borderColor,
-      tabTextColor: secondaryTextColor,
-      tabTextColorActive: primaryTextColor,
-      tabBorderColor: dividerOverlayColor,
+      tabTextColor: textColorSecondary,
+      tabTextColorActive: textColorPrimary,
+      tabBorderColor: dividerColorOverlay,
       tabFontWeight: strongFontWeight,
       tabBorderRadius: borderRadius,
-      paneTextColor: secondaryTextColor
+      paneTextColor: textColorSecondary
     }
   }
 })

@@ -7,29 +7,29 @@ export default create({
   name: 'Checkbox',
   getDerivedVariables ({ base, derived }) {
     const {
-      disabledInputBackgroundOverlayColor,
-      cardBackgroundColor,
-      modalBackgroundColor,
-      borderOverlayColor,
+      inputColorDisabledOverlay,
+      cardColor,
+      modalColor,
+      borderColorOverlay,
       primaryColor,
-      secondaryTextOverlayColor,
-      disabledTextOverlayColor
+      textColorSecondaryOverlay,
+      textColorDisabledOverlay
     } = derived
     return {
       ...commonVariables,
       borderRadius: base.smallBorderRadius,
       color: 'transparent',
-      colorDisabled: disabledInputBackgroundOverlayColor,
-      colorTableHeader: cardBackgroundColor,
-      colorModalTableHeader: modalBackgroundColor,
-      iconColor: cardBackgroundColor,
-      iconColorDisabled: disabledTextOverlayColor,
-      borderColor: borderOverlayColor,
-      borderColorDisabled: borderOverlayColor,
+      colorDisabled: inputColorDisabledOverlay,
+      colorTableHeader: cardColor,
+      colorModalTableHeader: modalColor,
+      iconColor: cardColor,
+      iconColorDisabled: textColorDisabledOverlay,
+      borderColor: borderColorOverlay,
+      borderColorDisabled: borderColorOverlay,
       borderColorActive: primaryColor,
       boxShadowColorActive: changeColor(primaryColor, { alpha: 0.3 }),
-      labelTextColor: secondaryTextOverlayColor,
-      labelTextColorDisabled: disabledTextOverlayColor
+      labelTextColor: textColorSecondaryOverlay,
+      labelTextColorDisabled: textColorDisabledOverlay
     }
   }
 })

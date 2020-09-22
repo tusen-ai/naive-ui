@@ -8,29 +8,29 @@ export default create({
   getDerivedVariables ({ base, derived }) {
     const boxShadow = '0 2px 8px 0 rgba(0, 0, 0, 0.12)'
     const {
-      railBackgroundOverlayColor,
-      railHoverBackgroundOverlayColor,
-      cardBackgroundColor,
+      railColorOverlay,
+      railColorHoverOverlay,
+      cardColor,
       primaryColor,
-      popoverBackgroundColor,
-      secondaryTextOverlayColor
+      popoverColor,
+      textColorSecondaryOverlay
     } = derived
-    const defaultFillColor = composite(cardBackgroundColor, changeColor(primaryColor, { alpha: 0.7 }))
+    const defaultFillColor = composite(cardColor, changeColor(primaryColor, { alpha: 0.7 }))
     return {
       ...sizeVariables,
       // defaultFillColor: defaultFillColor,
-      railColor: railBackgroundOverlayColor,
-      railColorHover: railHoverBackgroundOverlayColor,
+      railColor: railColorOverlay,
+      railColorHover: railColorHoverOverlay,
       railFillColor: defaultFillColor,
       railFillColorHover: primaryColor,
-      handleColor: cardBackgroundColor,
+      handleColor: cardColor,
       handleBoxShadow: `inset 0 0 0 2px ${defaultFillColor}`,
       handleBoxShadowHover: `inset 0 0 0 2px ${primaryColor}`,
       handleBoxShadowActive: `inset 0 0 0 2px ${primaryColor}, 0 0 0 3px ${changeColor(primaryColor, { alpha: 0.2 })}`,
       handleBoxShadowFocus: `inset 0 0 0 2px ${primaryColor}, 0 0 0 3px ${changeColor(primaryColor, { alpha: 0.2 })}`,
-      indicatorColor: popoverBackgroundColor,
+      indicatorColor: popoverColor,
       indicatorBoxShadow: boxShadow,
-      indicatorTextColor: secondaryTextOverlayColor,
+      indicatorTextColor: textColorSecondaryOverlay,
       dotBoxShadow: `inset 0 0 0 2px ${defaultFillColor}`,
       dotBoxShadowActive: `inset 0 0 0 2px ${primaryColor}`
     }

@@ -6,8 +6,8 @@ export default create({
   theme: 'dark',
   getDerivedVariables ({ base, derived }) {
     const {
-      popoverBackgroundColor,
-      secondaryTextOverlayColor
+      popoverColor,
+      textColorSecondaryOverlay
     } = derived
     const {
       borderRadius
@@ -15,11 +15,11 @@ export default create({
     return {
       ...commonVariables,
       borderRadius,
-      color: popoverBackgroundColor,
-      textColor: secondaryTextOverlayColor,
+      color: popoverColor,
+      textColor: textColorSecondaryOverlay,
       boxShadow: '0 2px 8px 0 rgba(0, 0, 0, .12)',
-      tooltipColor: popoverBackgroundColor,
-      tooltipTextColor: secondaryTextOverlayColor
+      tooltipColor: popoverColor,
+      tooltipTextColor: textColorSecondaryOverlay
     }
   }
 })

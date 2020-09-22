@@ -1,5 +1,5 @@
 import create from '../../styles/_utils/create-component-base'
-import commonVariables from '../../styles/_common-style/input'
+import commonVariables from './_common'
 import { changeColor } from '../../_utils/color/index'
 import suffixStyle from '../../_base/suffix/styles/light'
 
@@ -9,21 +9,21 @@ export default create({
   peer: [ suffixStyle ],
   getDerivedVariables ({ base, derived }) {
     const {
-      secondaryTextColor,
-      quaternaryTextColor,
-      quinaryTextColor,
+      textColorSecondary,
+      textColorQuaternary,
+      textColorQuinary,
       primaryColor,
-      primaryHoverColor,
-      inputBackgroundColor,
-      disabledInputBackgroundColor,
+      primaryColorHover,
+      inputColor,
+      inputColorDisabled,
       borderColor,
       warningColor,
-      warningHoverColor,
+      warningColorHover,
       errorColor,
-      errorHoverColor,
-      quaternaryOpacity,
-      quinaryOpacity,
-      baseTextColor
+      errorColorHover,
+      opacityQuaternary,
+      opacityQuinary,
+      textColorBase
     } = derived
     const {
       borderRadius
@@ -33,39 +33,39 @@ export default create({
       borderRadius,
       iconSize: '16px',
       default: {
-        textColor: secondaryTextColor,
-        textColorDisabled: quaternaryTextColor,
+        textColor: textColorSecondary,
+        textColorDisabled: textColorQuaternary,
         caretColor: primaryColor,
-        placeholderColor: quaternaryTextColor,
-        placeholderColorDisabled: quinaryTextColor,
-        backgroundColor: inputBackgroundColor,
-        colorDisabled: disabledInputBackgroundColor,
-        colorFocus: inputBackgroundColor,
-        iconColor: baseTextColor,
-        iconOpacity: quaternaryOpacity,
-        iconColorDisabled: baseTextColor,
-        iconOpacityDisabled: quinaryOpacity,
+        placeholderColor: textColorQuaternary,
+        placeholderColorDisabled: textColorQuinary,
+        backgroundColor: inputColor,
+        colorDisabled: inputColorDisabled,
+        colorFocus: inputColor,
+        iconColor: textColorBase,
+        iconOpacity: opacityQuaternary,
+        iconColorDisabled: textColorBase,
+        iconOpacityDisabled: opacityQuinary,
         borderMaskColor: 'transparent',
-        borderMaskColorHover: primaryHoverColor,
+        borderMaskColorHover: primaryColorHover,
         borderMaskColorDisabled: 'transparent !important',
-        borderMaskColorFocus: primaryHoverColor,
+        borderMaskColorFocus: primaryColorHover,
         borderMaskBoxShadowFocus: `0 0 0 2px ${changeColor(primaryColor, { alpha: 0.2 })}`,
         boxShadow: `inset 0 0 0 1px ${borderColor}`,
         boxShadowDisabled: `inset 0 0 0 1px ${borderColor}`
       },
       warning: {
         borderMaskColor: warningColor,
-        borderMaskColorHover: warningHoverColor,
-        colorFocus: inputBackgroundColor,
-        borderMaskColorFocus: warningHoverColor,
+        borderMaskColorHover: warningColorHover,
+        colorFocus: inputColor,
+        borderMaskColorFocus: warningColorHover,
         borderMaskBoxShadowFocus: `0 0 0 2px ${changeColor(warningColor, { alpha: 0.2 })}`,
         caretColor: warningColor
       },
       error: {
         borderMaskColor: errorColor,
-        borderMaskColorHover: errorHoverColor,
-        colorFocus: inputBackgroundColor,
-        borderMaskColorFocus: errorHoverColor,
+        borderMaskColorHover: errorColorHover,
+        colorFocus: inputColor,
+        borderMaskColorFocus: errorColorHover,
         borderMaskBoxShadowFocus: `0 0 0 2px ${changeColor(errorColor, { alpha: 0.2 })}`,
         caretColor: errorColor
       }

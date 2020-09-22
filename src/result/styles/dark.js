@@ -6,8 +6,8 @@ export default create({
   theme: 'dark',
   getDerivedVariables ({ base, derived }) {
     const {
-      primaryTextOverlayColor,
-      secondaryTextOverlayColor,
+      textColorPrimaryOverlay,
+      textColorSecondaryOverlay,
       errorColor,
       successColor,
       infoColor,
@@ -21,8 +21,8 @@ export default create({
       ...sizeVariables,
       lineHeight,
       headerFontWeight: strongFontWeight,
-      headerTextColor: primaryTextOverlayColor,
-      descriptionTextColor: secondaryTextOverlayColor,
+      headerTextColor: textColorPrimaryOverlay,
+      descriptionTextColor: textColorSecondaryOverlay,
       iconColorError: errorColor,
       iconColorSuccess: successColor,
       iconColorInfo: infoColor,

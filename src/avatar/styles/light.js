@@ -1,5 +1,5 @@
 import create from '../../styles/_utils/create-component-base'
-import commonVariables from '../../styles/_common-style/avatar'
+import commonVariables from './_common'
 
 export default create({
   theme: 'light',
@@ -9,12 +9,12 @@ export default create({
       borderRadius
     } = base
     const {
-      avatarBackgroundOverlayColor
+      avatarColorOverlay
     } = derived
     return {
       ...commonVariables,
       borderRadius,
-      color: avatarBackgroundOverlayColor
+      color: avatarColorOverlay
     }
   }
 })

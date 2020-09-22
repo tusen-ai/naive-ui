@@ -6,12 +6,12 @@ export default create({
   name: 'Table',
   getDerivedVariables ({ base, derived }) {
     const {
-      dividerOverlayColor,
-      cardBackgroundColor,
-      modalBackgroundColor,
-      actionBackgroundOverlayColor,
-      primaryTextOverlayColor,
-      secondaryTextOverlayColor
+      dividerColorOverlay,
+      cardColor,
+      modalColor,
+      actionColorOverlay,
+      textColorPrimaryOverlay,
+      textColorSecondaryOverlay
     } = derived
     const {
       strongFontWeight,
@@ -19,12 +19,12 @@ export default create({
     } = base
     return {
       ...sizeVariables,
-      borderColor: dividerOverlayColor,
-      bodyColor: cardBackgroundColor,
-      bodyColorModal: modalBackgroundColor,
-      headerColor: actionBackgroundOverlayColor,
-      headerTextColor: primaryTextOverlayColor,
-      bodyTextColor: secondaryTextOverlayColor,
+      borderColor: dividerColorOverlay,
+      bodyColor: cardColor,
+      bodyColorModal: modalColor,
+      headerColor: actionColorOverlay,
+      headerTextColor: textColorPrimaryOverlay,
+      bodyTextColor: textColorSecondaryOverlay,
       borderRadius,
       headFontWeight: strongFontWeight
     }

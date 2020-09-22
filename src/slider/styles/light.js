@@ -10,28 +10,28 @@ export default create({
     const indicatorColor = 'rgba(0, 0, 0, .85)'
     const boxShadow = '0 2px 8px 0 rgba(0, 0, 0, 0.12)'
     const {
-      railBackgroundOverlayColor,
-      railHoverBackgroundOverlayColor,
+      railColorOverlay,
+      railColorHoverOverlay,
       primaryColor,
-      primaryHoverColor,
-      baseBackgroundColor
+      primaryColorHover,
+      baseColor
     } = derived
     return {
       ...sizeVariables,
-      railColor: railBackgroundOverlayColor,
-      railColorHover: railHoverBackgroundOverlayColor,
+      railColor: railColorOverlay,
+      railColorHover: railColorHoverOverlay,
       railFillColor: primaryColor,
-      railFillColorHover: primaryHoverColor,
-      handleColor: baseBackgroundColor,
+      railFillColorHover: primaryColorHover,
+      handleColor: baseColor,
       handleBoxShadow: `inset 0 0 0 2px ${primaryColor}`,
-      handleBoxShadowHover: `inset 0 0 0 2px ${primaryHoverColor}`,
-      handleBoxShadowActive: `inset 0 0 0 2px ${primaryHoverColor}, 0 0 0 3px ${changeColor(primaryColor, { alpha: 0.2 })}`,
-      handleBoxShadowFocus: `inset 0 0 0 2px ${primaryHoverColor}, 0 0 0 3px ${changeColor(primaryColor, { alpha: 0.2 })}`,
+      handleBoxShadowHover: `inset 0 0 0 2px ${primaryColorHover}`,
+      handleBoxShadowActive: `inset 0 0 0 2px ${primaryColorHover}, 0 0 0 3px ${changeColor(primaryColor, { alpha: 0.2 })}`,
+      handleBoxShadowFocus: `inset 0 0 0 2px ${primaryColorHover}, 0 0 0 3px ${changeColor(primaryColor, { alpha: 0.2 })}`,
       indicatorColor: indicatorColor,
       indicatorBoxShadow: boxShadow,
-      indicatorTextColor: baseBackgroundColor,
+      indicatorTextColor: baseColor,
       dotBoxShadow: `inset 0 0 0 2px ${primaryColor}`,
-      dotBoxShadowActive: `inset 0 0 0 2px ${primaryHoverColor}`
+      dotBoxShadowActive: `inset 0 0 0 2px ${primaryColorHover}`
     }
   }
 })

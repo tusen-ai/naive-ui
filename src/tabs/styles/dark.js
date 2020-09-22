@@ -6,15 +6,15 @@ export default create({
   theme: 'dark',
   getDerivedVariables ({ base, derived }) {
     const {
-      secondaryTextOverlayColor,
+      textColorSecondaryOverlay,
       primaryColor,
-      disabledTextOverlayColor,
-      iconOverlayColor,
-      disabledIconOverlayColor,
+      textColorDisabledOverlay,
+      iconColorOverlay,
+      iconColorDisabledOverlay,
       closeOverlayColor,
-      tabBackgroundOverlayColor,
-      primaryTextOverlayColor,
-      dividerOverlayColor
+      tabColorOverlay,
+      textColorPrimaryOverlay,
+      dividerColorOverlay
     } = derived
     const {
       strongFontWeight,
@@ -22,22 +22,22 @@ export default create({
     } = base
     return {
       ...sizeVariables,
-      labelTextColor: secondaryTextOverlayColor,
+      labelTextColor: textColorSecondaryOverlay,
       labelTextColorActive: primaryColor,
       labelTextColorHover: primaryColor,
-      labelTextColorDisabled: disabledTextOverlayColor,
+      labelTextColorDisabled: textColorDisabledOverlay,
       labelBarColor: primaryColor,
-      scrollButtonColor: iconOverlayColor,
-      scrollButtonColorDisabled: disabledIconOverlayColor,
+      scrollButtonColor: iconColorOverlay,
+      scrollButtonColorDisabled: iconColorDisabledOverlay,
       tabCloseColor: closeOverlayColor,
-      tabColor: tabBackgroundOverlayColor,
+      tabColor: tabColorOverlay,
       tabBorderColorActive: 'transparent',
-      tabTextColor: secondaryTextOverlayColor,
-      tabTextColorActive: primaryTextOverlayColor,
-      tabBorderColor: dividerOverlayColor,
+      tabTextColor: textColorSecondaryOverlay,
+      tabTextColorActive: textColorPrimaryOverlay,
+      tabBorderColor: dividerColorOverlay,
       tabFontWeight: strongFontWeight,
       tabBorderRadius: borderRadius,
-      paneTextColor: secondaryTextOverlayColor
+      paneTextColor: textColorSecondaryOverlay
     }
   }
 })

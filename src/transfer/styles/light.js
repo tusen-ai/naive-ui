@@ -15,22 +15,22 @@ export default create({
     return {
       ...commonVariables,
       borderRadius: base.borderRadius,
-      borderColor: derived.dividerOverlayColor,
-      listColor: derived.cardBackgroundColor,
+      borderColor: derived.dividerColorOverlay,
+      listColor: derived.cardColor,
       headerColor: composite(
-        derived.cardBackgroundColor,
-        derived.tableHeaderBackgroundOverlayColor
+        derived.cardColor,
+        derived.tableHeaderColorOverlay
       ),
-      headerTextColor: derived.primaryTextColor,
-      headerTextColorDisabled: derived.disabledTextColor,
-      headerExtraTextColor: derived.secondaryTextColor,
+      headerTextColor: derived.textColorPrimary,
+      headerTextColorDisabled: derived.textColorDisabled,
+      headerExtraTextColor: derived.textColorSecondary,
       buttonColor: 'rgba(0, 0, 0, 0.2)',
-      buttonColorHover: derived.primaryHoverColor,
-      buttonColorActive: derived.primaryActiveColor,
+      buttonColorHover: derived.primaryColorHover,
+      buttonColorActive: derived.primaryColorActive,
       buttonColorDisabled: 'rgba(0, 0, 0, 0.1)',
-      filterBorderColor: derived.dividerOverlayColor,
-      itemTextColor: derived.secondaryTextColor,
-      itemTextColorDisabled: derived.disabledTextColor
+      filterBorderColor: derived.dividerColorOverlay,
+      itemTextColor: derived.textColorSecondary,
+      itemTextColorDisabled: derived.textColorDisabled
     }
   }
 })

@@ -6,10 +6,10 @@ export default create({
   name: 'Code',
   getDerivedVariables ({ base, derived }) {
     const {
-      secondaryTextColor
+      textColorSecondary
     } = derived
     return {
-      textColor: secondaryTextColor,
+      textColor: textColorSecondary,
       highlightStyle: [
         c(`
           .hljs-pattern-match,

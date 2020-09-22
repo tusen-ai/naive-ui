@@ -32,7 +32,7 @@ import usecssr from '../../../_mixins/usecssr.js'
 import styles from './styles/index.js'
 
 export default {
-  name: 'NBaseSlotMachine',
+  name: 'BaseSlotMachine',
   components: {
     SlotMachineNumber
   },

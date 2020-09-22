@@ -11,14 +11,14 @@ export default create({
   ],
   getDerivedVariables ({ base, derived }) {
     const {
-      secondaryTextColor,
-      modalBackgroundColor,
+      textColorSecondary,
+      modalColor,
       borderColor
     } = derived
     return {
-      textColor: secondaryTextColor,
-      loaderTextColor: secondaryTextColor,
-      loaderColor: modalBackgroundColor,
+      textColor: textColorSecondary,
+      loaderTextColor: textColorSecondary,
+      loaderColor: modalColor,
       loaderBorderColor: borderColor
     }
   }

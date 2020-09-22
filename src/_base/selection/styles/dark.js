@@ -1,5 +1,5 @@
 import create from '../../../styles/_utils/create-component-base'
-import commonVariables from '../../../styles/_common-style/base-selection'
+import commonVariables from './_common'
 import { changeColor } from '../../../_utils/color/index.js'
 import suffixStyle from '../../suffix/styles/light'
 
@@ -12,17 +12,17 @@ export default create({
       ...commonVariables,
       borderRadius: base.borderRadius,
       default: {
-        textColor: derived.secondaryTextOverlayColor,
-        disabledTextColor: derived.quaternaryTextOverlayColor,
-        placeholderColor: derived.quaternaryTextOverlayColor,
-        disabledPlaceholderColor: derived.quinaryTextOverlayColor,
-        backgroundColor: derived.inputBackgroundOverlayColor,
-        disabledBackgroundColor: derived.disabledInputBackgroundOverlayColor,
+        textColor: derived.textColorSecondaryOverlay,
+        textColorDisabled: derived.textColorQuaternaryOverlay,
+        placeholderColor: derived.textColorQuaternaryOverlay,
+        placeholderColorDisabled: derived.textColorQuinaryOverlay,
+        backgroundColor: derived.inputColorOverlay,
+        disabledBackgroundColor: derived.inputColorDisabledOverlay,
         activeBackgroundColor: changeColor(derived.primaryColor, { alpha: 0.1 }),
         borderMaskBoxShadow: 'inset 0 0 0 1px transparent',
-        hoverBorderMaskBoxShadow: `inset 0 0 0 1px ${derived.primaryHoverColor}`,
-        activeBorderMaskBoxShadow: `inset 0 0 0 1px ${derived.primaryHoverColor}, 0 0 8px 0 ${changeColor(derived.primaryColor, { alpha: 0.4 })}`,
-        focusBorderMaskBoxShadow: `inset 0 0 0 1px ${derived.primaryHoverColor}`,
+        hoverBorderMaskBoxShadow: `inset 0 0 0 1px ${derived.primaryColorHover}`,
+        activeBorderMaskBoxShadow: `inset 0 0 0 1px ${derived.primaryColorHover}, 0 0 8px 0 ${changeColor(derived.primaryColor, { alpha: 0.4 })}`,
+        focusBorderMaskBoxShadow: `inset 0 0 0 1px ${derived.primaryColorHover}`,
         disabled: 'inset 0 0 0 1px transparent',
         boxShadow: 'none',
         disabledBoxShadow: 'none',
@@ -30,17 +30,17 @@ export default create({
       },
       warning: {
         borderMaskBoxShadow: `inset 0 0 0 1px ${derived.warningColor}`,
-        hoverBorderMaskBoxShadow: `inset 0 0 0 1px ${derived.warningHoverColor}`,
-        activeBorderMaskBoxShadow: `inset 0 0 0 1px ${derived.warningHoverColor}, 0 0 8px 0 ${changeColor(derived.warningColor, { alpha: 0.4 })}`,
-        focusBorderMaskBoxShadow: `inset 0 0 0 1px ${derived.warningHoverColor}`,
+        hoverBorderMaskBoxShadow: `inset 0 0 0 1px ${derived.warningColorHover}`,
+        activeBorderMaskBoxShadow: `inset 0 0 0 1px ${derived.warningColorHover}, 0 0 8px 0 ${changeColor(derived.warningColor, { alpha: 0.4 })}`,
+        focusBorderMaskBoxShadow: `inset 0 0 0 1px ${derived.warningColorHover}`,
         activeBackgroundColor: changeColor(derived.warningColor, { alpha: 0.1 }),
         caretColor: derived.warningColor
       },
       error: {
         borderMaskBoxShadow: `inset 0 0 0 1px ${derived.errorColor}`,
-        hoverBorderMaskBoxShadow: `inset 0 0 0 1px ${derived.errorHoverColor}`,
-        activeBorderMaskBoxShadow: `inset 0 0 0 1px ${derived.errorHoverColor}, 0 0 8px 0 ${changeColor(derived.errorColor, { alpha: 0.4 })}`,
-        focusBorderMaskBoxShadow: `inset 0 0 0 1px ${derived.errorHoverColor}`,
+        hoverBorderMaskBoxShadow: `inset 0 0 0 1px ${derived.errorColorHover}`,
+        activeBorderMaskBoxShadow: `inset 0 0 0 1px ${derived.errorColorHover}, 0 0 8px 0 ${changeColor(derived.errorColor, { alpha: 0.4 })}`,
+        focusBorderMaskBoxShadow: `inset 0 0 0 1px ${derived.errorColorHover}`,
         activeBackgroundColor: changeColor(derived.errorColor, { alpha: 0.1 }),
         caretColor: derived.errorColor
       }
