@@ -7,7 +7,7 @@ export default create({
   getDerivedVariables ({ base, derived }) {
     const {
       borderRadius,
-      strongFontWeight
+      fontWeightStrong
     } = base
     const {
       baseColor,
@@ -16,7 +16,7 @@ export default create({
       textColorPrimaryOverlay,
       textColorSecondaryOverlay,
       closeColor,
-      closeHoverColor,
+      closeColorHover,
       closeColorActive,
       infoColor,
       successColor,
@@ -24,7 +24,7 @@ export default create({
       errorColor
     } = derived
     return {
-      titleFontWeight: strongFontWeight,
+      titleFontWeight: fontWeightStrong,
       borderRadius,
       default: {
         borderColor: dividerColorOverlay,
@@ -33,7 +33,7 @@ export default create({
         iconColor: textColorSecondaryOverlay,
         contentTextColor: textColorSecondaryOverlay,
         closeColor: closeColor,
-        closeColorHover: closeHoverColor,
+        closeColorHover: closeColorHover,
         closeColorActive: closeColorActive
       },
       info: {
@@ -43,7 +43,7 @@ export default create({
         iconColor: infoColor,
         contentTextColor: textColorSecondaryOverlay,
         closeColor: closeColor,
-        closeColorHover: closeHoverColor,
+        closeColorHover: closeColorHover,
         closeColorActive: closeColorActive
       },
       success: {
@@ -53,7 +53,7 @@ export default create({
         iconColor: successColor,
         contentTextColor: textColorSecondaryOverlay,
         closeColor: closeColor,
-        closeColorHover: closeHoverColor,
+        closeColorHover: closeColorHover,
         closeColorActive: closeColorActive
       },
       warning: {
@@ -63,7 +63,7 @@ export default create({
         iconColor: warningColor,
         contentTextColor: textColorSecondaryOverlay,
         closeColor: closeColor,
-        closeColorHover: closeHoverColor,
+        closeColorHover: closeColorHover,
         closeColorActive: closeColorActive
       },
       error: {
@@ -73,7 +73,7 @@ export default create({
         iconColor: errorColor,
         contentTextColor: textColorSecondaryOverlay,
         closeColor: closeColor,
-        closeColorHover: closeHoverColor,
+        closeColorHover: closeColorHover,
         closeColorActive: closeColorActive
       }
     }

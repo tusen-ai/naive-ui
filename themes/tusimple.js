@@ -1,18 +1,26 @@
 // Unstable!
 // Draft Code!
 // Variable Names Will Be Refactored!
+import { composite } from '../src/_utils/color'
 
 function tusimpleTheme (naive) {
   naive.styles.light.override({
     derived: {
-      primaryColor: '#4fb233',
-      primaryHoverColor: '#62cc45',
-      primaryActiveColor: '#388025',
-      successColor: '#4fb233',
-      successHoverColor: '#62cc45',
-      successActiveColor: '#388025',
-      errorColor: '#f22451',
-      warningColor: '#fac70d'
+      primaryColor: '#4FB233',
+      primaryColorHover: composite('#4FB233', 'rgba(255, 255, 255, .2)'),
+      primaryColorPressed: composite('#4FB233', 'rgba(0, 0, 0, .15)'),
+      infoColor: '#335FFF',
+      infoColorHover: composite('#335FFF', 'rgba(255, 255, 255, .2)'),
+      infoColorPressed: composite('#335FFF', 'rgba(0, 0, 0, .15)'),
+      successColor: '#4FB233',
+      successColorHover: composite('#4FB233', 'rgba(255, 255, 255, .2)'),
+      successColorPressed: composite('#4FB233', 'rgba(0, 0, 0, .15)'),
+      errorColor: '#D92149',
+      errorColorHover: composite('#D92149', 'rgba(255, 255, 255, .2)'),
+      errorColorPressed: composite('#FFAC26', 'rgba(0, 0, 0, .15)'),
+      warningColor: '#FFAC26',
+      warningColorHover: composite('#FFAC26', 'rgba(255, 255, 255, .2)'),
+      warningColorPressed: composite('#FFAC26', 'rgba(0, 0, 0, .05)')
     }
   })
   naive.styles.light.Button.override({

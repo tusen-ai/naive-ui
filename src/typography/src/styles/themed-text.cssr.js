@@ -3,9 +3,9 @@ import { c, cTB, cM, cNotM } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      easeInOutCubicBezier,
-      strongFontWeight,
-      monoFontFamily
+      cubicBezierEaseInOut,
+      fontWeightStrong,
+      fontFamilyMono
     } = props.$base
     const {
       textColor,
@@ -27,11 +27,11 @@ export default c([
       codeBorderColor
     } = props.$local
     return cTB('text', {
-      transition: `color .3s ${easeInOutCubicBezier}`,
+      transition: `color .3s ${cubicBezierEaseInOut}`,
       color: textColor
     }, [
       cM('strong', {
-        fontWeight: strongFontWeight,
+        fontWeight: fontWeightStrong,
         color: textColorStrong
       }),
       cM('italic', {
@@ -42,11 +42,11 @@ export default c([
       }),
       cM('code', {
         lineHeight: 1.4,
-        fontFamily: monoFontFamily,
+        fontFamily: fontFamilyMono,
         transition: `
-          color .3s ${easeInOutCubicBezier},
-          border-color .3s ${easeInOutCubicBezier},
-          background-color .3s ${easeInOutCubicBezier}
+          color .3s ${cubicBezierEaseInOut},
+          border-color .3s ${cubicBezierEaseInOut},
+          background-color .3s ${cubicBezierEaseInOut}
         `,
         boxSizing: 'border-box',
         padding: '.15em .45em 0 .45em',

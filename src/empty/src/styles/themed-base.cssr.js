@@ -8,7 +8,7 @@ export default c([
       extraTextColor
     } = props.$local
     const base = props.$base
-    const easeInOutCubicBezier = base.easeInOutCubicBezier
+    const cubicBezierEaseInOut = base.cubicBezierEaseInOut
     return [
       cTB('empty', {
         raw: `
@@ -22,8 +22,8 @@ export default c([
         cE('icon', {
           raw: `
             transition:
-              fill .3s ${easeInOutCubicBezier},
-              stroke .3s ${easeInOutCubicBezier};
+              fill .3s ${cubicBezierEaseInOut},
+              stroke .3s ${cubicBezierEaseInOut};
           `
         }, [
           cB('icon', {
@@ -36,14 +36,14 @@ export default c([
         cE('description', {
           raw: `
             margin-top: 4px;
-            transition: color .3s ${easeInOutCubicBezier};
+            transition: color .3s ${cubicBezierEaseInOut};
             color: ${textColor};
           `
         }),
         cE('extra', {
           raw: `
             text-align: center;
-            transition: color .3s ${easeInOutCubicBezier};
+            transition: color .3s ${cubicBezierEaseInOut};
             margin-top: 16px;
             color: ${extraTextColor};
           `

@@ -3,10 +3,10 @@ import fadeInScaleUpTransition from '../../../styles/_transitions/fade-in-scale-
 
 export default c([
   ({ props }) => {
-    const { easeInOutCubicBezier } = props.$base
+    const { cubicBezierEaseInOut } = props.$base
     return cTB('auto-complete-menu', [
       fadeInScaleUpTransition({
-        originalTransition: `background-color .3s ${easeInOutCubicBezier}`
+        originalTransition: `background-color .3s ${cubicBezierEaseInOut}`
       })
     ])
   }

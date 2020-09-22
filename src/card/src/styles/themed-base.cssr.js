@@ -3,7 +3,7 @@ import { c, cTB, cB, cE, cM } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const base = props.$base
-    const easeInOutCubicBezier = base.easeInOutCubicBezier
+    const cubicBezierEaseInOut = base.cubicBezierEaseInOut
     const {
       color,
       textColor,
@@ -29,9 +29,9 @@ export default c([
           color: ${textColor};
         `,
         transition: `
-          color .3s ${easeInOutCubicBezier},
-          background-color .3s ${easeInOutCubicBezier},
-          border-color .3s ${easeInOutCubicBezier}
+          color .3s ${cubicBezierEaseInOut},
+          background-color .3s ${cubicBezierEaseInOut},
+          border-color .3s ${cubicBezierEaseInOut}
         `
       },
       [
@@ -65,7 +65,7 @@ export default c([
         cM('content-segmented, content-soft-segmented', [
           c('>', [
             cE('content', {
-              transition: `border-color 0.3s ${easeInOutCubicBezier}`
+              transition: `border-color 0.3s ${cubicBezierEaseInOut}`
             }, [
               c('&:not(:first-child)', {
                 borderTop: `1px solid ${borderColor}`
@@ -76,7 +76,7 @@ export default c([
         cM('footer-segmented, footer-soft-segmented', [
           c('>', [
             cE('footer', {
-              transition: `border-color 0.3s ${easeInOutCubicBezier}`
+              transition: `border-color 0.3s ${cubicBezierEaseInOut}`
             }, [
               c('&:not(:first-child)', {
                 borderTop: `1px solid ${borderColor}`
@@ -112,7 +112,7 @@ export default c([
               raw: `
                 font-weight: ${titleFontWeight};
                 font-size: 18px;
-                transition: color .3s ${easeInOutCubicBezier};
+                transition: color .3s ${cubicBezierEaseInOut};
                 flex: 1;
                 color: ${titleTextColor};
               `
@@ -121,14 +121,14 @@ export default c([
               raw: `
                 font-weight: 400;
                 font-size: 14px;
-                transition: color .3s ${easeInOutCubicBezier};
+                transition: color .3s ${cubicBezierEaseInOut};
                 color: ${textColor};
               `
             }),
             cE('close-mark', {
               raw: `
                 cursor: pointer;
-                transition: fill .3s ${easeInOutCubicBezier};
+                transition: fill .3s ${cubicBezierEaseInOut};
                 fill: ${closeColor};
               `
             }, [
@@ -144,8 +144,8 @@ export default c([
             raw: `
               box-sizing: border-box;
               transition:
-                background-color .3s ${easeInOutCubicBezier},
-                border-color .3s ${easeInOutCubicBezier};
+                background-color .3s ${cubicBezierEaseInOut},
+                border-color .3s ${cubicBezierEaseInOut};
               line-height: 1.75;
               font-size: 14px;
               background-clip: padding-box;

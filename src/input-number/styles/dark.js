@@ -13,13 +13,13 @@ export default create({
     const {
       primaryColor,
       primaryColorHover,
-      primaryColorActive,
+      primaryColorPressed,
       errorColor,
       errorColorHover,
-      errorColorActive,
+      errorColorPressed,
       warningColor,
       warningColorHover,
-      warningColorActive,
+      warningColorPressed,
       textColorSecondary: textColor,
       inputColorOverlay,
       inputColorDisabledOverlay: colorDisabled,
@@ -38,7 +38,7 @@ export default create({
     const buttonColorActive = buttonColor
     const caretColor = null
     const buttonTextColorHover = primaryColorHover
-    const buttonTextColorActive = primaryColorActive
+    const buttonTextColorActive = primaryColorPressed
     return {
       ...inputCommonVariables,
       ...inputNumberCommonVariables,
@@ -72,7 +72,7 @@ export default create({
         colorFocus: changeColor(warningColor, { alpha: 0.1 }),
         caretColor: warningColorHover,
         buttonTextColorHover: warningColorHover,
-        buttonTextColorActive: warningColorActive
+        buttonTextColorActive: warningColorPressed
       },
       error: {
         borderMaskBoxShadow: `inset 0 0 0 1px ${errorColor}`,
@@ -81,7 +81,7 @@ export default create({
         colorFocus: changeColor(errorColor, { alpha: 0.1 }),
         caretColor: errorColorHover,
         buttonTextColorHover: errorColorHover,
-        buttonTextColorActive: errorColorActive
+        buttonTextColorActive: errorColorPressed
       }
     }
   }

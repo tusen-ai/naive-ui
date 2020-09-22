@@ -47,7 +47,7 @@ export default c([
               animationDuration: '2s, 2s',
               animationIterationCount: 'infinite',
               animationDelay: '1s, 1s',
-              animationTimingFunction: `${base.easeOutCubicBezier}, ${base.easeOutCubicBezier}`,
+              animationTimingFunction: `${base.cubicBezierEaseOut}, ${base.cubicBezierEaseOut}`,
               animationName: `${theme && theme + '-'}${digest}-badge-wave-spread, ${theme && theme + '-'}${digest}-badge-wave-opacity`
             })
           ])

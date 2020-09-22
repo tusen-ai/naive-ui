@@ -12,7 +12,7 @@ export default c([
       backTopBoxShadowActive
     } = props.$local
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
 
     return cTB('back-top', {
@@ -31,7 +31,7 @@ export default c([
       }),
       cE('default-button', {
         raw: `
-          transition: box-shadow .3s ${easeInOutCubicBezier}, fill .3s ${easeInOutCubicBezier};
+          transition: box-shadow .3s ${cubicBezierEaseInOut}, fill .3s ${cubicBezierEaseInOut};
           border-radius: 20px;
           height: 40px;
           width: 40px;

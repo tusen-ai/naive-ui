@@ -1,9 +1,9 @@
 import { c, namespace } from '../../_utils/cssr'
 import commonVariables from '../base/_common'
 
-const easeInOutCubicBezier = commonVariables.easeInOutCubicBezier
-const easeOutCubicBezier = commonVariables.easeOutCubicBezier
-const easeInCubicBezier = commonVariables.easeInCubicBezier
+const cubicBezierEaseInOut = commonVariables.cubicBezierEaseInOut
+const cubicBezierEaseOut = commonVariables.cubicBezierEaseOut
+const cubicBezierEaseIn = commonVariables.cubicBezierEaseIn
 
 export default function ({
   duration = '.3s',
@@ -30,12 +30,12 @@ export default function ({
       raw: `
         overflow: hidden;
         transition:
-          max-height ${duration} ${easeInOutCubicBezier} ${leavingDelay},
-          opacity ${duration} ${easeOutCubicBezier} ${leavingDelay},
-          margin-top ${duration} ${easeInOutCubicBezier} ${leavingDelay},
-          margin-bottom ${duration} ${easeInOutCubicBezier} ${leavingDelay},
-          padding-top ${duration} ${easeInOutCubicBezier} ${leavingDelay},
-          padding-bottom ${duration} ${easeInOutCubicBezier} ${leavingDelay}
+          max-height ${duration} ${cubicBezierEaseInOut} ${leavingDelay},
+          opacity ${duration} ${cubicBezierEaseOut} ${leavingDelay},
+          margin-top ${duration} ${cubicBezierEaseInOut} ${leavingDelay},
+          margin-bottom ${duration} ${cubicBezierEaseInOut} ${leavingDelay},
+          padding-top ${duration} ${cubicBezierEaseInOut} ${leavingDelay},
+          padding-bottom ${duration} ${cubicBezierEaseInOut} ${leavingDelay}
           ${originalTransition ? ',' + originalTransition : ''}
       `
     }),
@@ -43,12 +43,12 @@ export default function ({
       raw: `
         overflow: hidden;
         transition:
-          max-height ${duration} ${easeInOutCubicBezier},
-          opacity ${duration} ${easeInCubicBezier},
-          margin-top ${duration} ${easeInOutCubicBezier},
-          margin-bottom ${duration} ${easeInOutCubicBezier},
-          padding-top ${duration} ${easeInOutCubicBezier},
-          padding-bottom ${duration} ${easeInOutCubicBezier}
+          max-height ${duration} ${cubicBezierEaseInOut},
+          opacity ${duration} ${cubicBezierEaseIn},
+          margin-top ${duration} ${cubicBezierEaseInOut},
+          margin-bottom ${duration} ${cubicBezierEaseInOut},
+          padding-top ${duration} ${cubicBezierEaseInOut},
+          padding-bottom ${duration} ${cubicBezierEaseInOut}
           ${originalTransition ? ',' + originalTransition : ''}
       `
     })

@@ -6,7 +6,7 @@ export default c([
     const local = props.$local
     const pallete = local.default
     const base = props.$base
-    const easeInOutCubicBezier = base.easeInOutCubicBezier
+    const cubicBezierEaseInOut = base.cubicBezierEaseInOut
     const borderRadius = local.borderRadius
     return cTB('base-selection', {
       raw: `
@@ -32,7 +32,7 @@ export default c([
         `,
         boxShadow: pallete.borderMaskBoxShadow,
         borderRadius: borderRadius,
-        transition: `box-shadow .3s ${easeInOutCubicBezier}`
+        transition: `box-shadow .3s ${cubicBezierEaseInOut}`
       }),
       cE('mark', {
         raw: `
@@ -56,7 +56,7 @@ export default c([
           top: 0;
           opacity: 1;
         `,
-        transition: `color .3s ${easeInOutCubicBezier}`,
+        transition: `color .3s ${cubicBezierEaseInOut}`,
         color: pallete.placeholderColor
       }),
       cB('base-selection-tags', {
@@ -77,9 +77,9 @@ export default c([
         borderRadius: borderRadius,
         boxShadow: pallete.boxShadow,
         transition: `
-          color .3s ${easeInOutCubicBezier},
-          box-shadow .3s ${easeInOutCubicBezier},
-          background-color .3s ${easeInOutCubicBezier}
+          color .3s ${cubicBezierEaseInOut},
+          box-shadow .3s ${cubicBezierEaseInOut},
+          background-color .3s ${cubicBezierEaseInOut}
         `
       }, [
         cB('tag', {
@@ -105,9 +105,9 @@ export default c([
           position: relative;
         `,
         transition: `
-          color .3s ${easeInOutCubicBezier},
-          box-shadow .3s ${easeInOutCubicBezier},
-          background-color .3s ${easeInOutCubicBezier}
+          color .3s ${cubicBezierEaseInOut},
+          box-shadow .3s ${cubicBezierEaseInOut},
+          background-color .3s ${cubicBezierEaseInOut}
         `,
         borderRadius: borderRadius,
         boxShadow: pallete.boxShadow,
@@ -128,10 +128,10 @@ export default c([
             height: 100%;
           `,
           color: pallete.textColor,
-          transition: `color .3s ${easeInOutCubicBezier}`
+          transition: `color .3s ${cubicBezierEaseInOut}`
         }, [
           c('&::placeholder', {
-            transition: `color .3s ${easeInOutCubicBezier}`,
+            transition: `color .3s ${cubicBezierEaseInOut}`,
             color: pallete.placeholderColor
           }),
           cM('placeholder', {

@@ -2,7 +2,7 @@ import { c, namespace } from '../../_utils/cssr'
 import commonVariables from '../base/_common'
 
 const {
-  easeOutCubicBezier
+  cubicBezierEaseOut
 } = commonVariables
 
 export default function fadeUpWidthExpandTransition ({
@@ -10,10 +10,10 @@ export default function fadeUpWidthExpandTransition ({
 } = {}) {
   return [
     c(`&.${namespace}-fade-up-width-expand-transition-leave-active`, {
-      transition: `opacity ${duration} ${easeOutCubicBezier}, max-width ${duration} ${easeOutCubicBezier}, transform ${duration} ${easeOutCubicBezier}`
+      transition: `opacity ${duration} ${cubicBezierEaseOut}, max-width ${duration} ${cubicBezierEaseOut}, transform ${duration} ${cubicBezierEaseOut}`
     }),
     c(`&.${namespace}-fade-up-width-expand-transition-enter-active`, {
-      transition: `opacity ${duration} ${easeOutCubicBezier}, max-width ${duration} ${easeOutCubicBezier}, transform ${duration} ${easeOutCubicBezier}`
+      transition: `opacity ${duration} ${cubicBezierEaseOut}, max-width ${duration} ${cubicBezierEaseOut}, transform ${duration} ${cubicBezierEaseOut}`
     }),
     c(`&.${namespace}-fade-up-width-expand-transition-enter-to`, {
       opacity: 1,

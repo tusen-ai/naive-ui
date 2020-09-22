@@ -11,7 +11,7 @@ export default c([
       buttonBoxShadow
     } = props.$local
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     return cTB('switch', {
       raw: `
@@ -29,7 +29,7 @@ export default c([
           width: 30px;
           border-radius: 7px;
           margin: 3px;
-          transition: background-color .3s ${easeInOutCubicBezier};
+          transition: background-color .3s ${cubicBezierEaseInOut};
           background-color: ${railColor};
         `
       }, [
@@ -47,11 +47,11 @@ export default c([
             left: -3px;
             background-size: 800% 800%;
             transition:
-              left .3s ${easeInOutCubicBezier},
-              opacity .3s ${easeInOutCubicBezier},
-              max-width .3s ${easeInOutCubicBezier},
-              background-position .3s ${easeInOutCubicBezier},
-              box-shadow .3s ${easeInOutCubicBezier};
+              left .3s ${cubicBezierEaseInOut},
+              opacity .3s ${cubicBezierEaseInOut},
+              max-width .3s ${cubicBezierEaseInOut},
+              background-position .3s ${cubicBezierEaseInOut},
+              box-shadow .3s ${cubicBezierEaseInOut};
           `
         }),
         c('&::before', {

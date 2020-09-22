@@ -4,7 +4,7 @@ import iconSwitchTransition from '../../../styles/_transitions/icon-switch'
 export default c([
   ({ props }) => {
     const {
-      easeInOutCubicBezier,
+      cubicBezierEaseInOut,
       transformDebounceScale
     } = props.$base
     const {
@@ -44,8 +44,8 @@ export default c([
               border-radius: ${borderRadius};
               position: relative;
               transition:
-                box-shadow 0.3s ${easeInOutCubicBezier},
-                background-color 0.3s ${easeInOutCubicBezier};
+                box-shadow 0.3s ${cubicBezierEaseInOut},
+                background-color 0.3s ${cubicBezierEaseInOut};
             `
           }, [
             cB('checkbox-icon', {
@@ -68,10 +68,10 @@ export default c([
                   transform: scale(0.5);
                   transform-origin: center;
                   transition:
-                    fill 0.3s ${easeInOutCubicBezier},
-                    transform 0.3s ${easeInOutCubicBezier},
-                    opacity 0.3s ${easeInOutCubicBezier},
-                    border-color 0.3s ${easeInOutCubicBezier};
+                    fill 0.3s ${cubicBezierEaseInOut},
+                    transform 0.3s ${cubicBezierEaseInOut},
+                    opacity 0.3s ${cubicBezierEaseInOut},
+                    border-color 0.3s ${cubicBezierEaseInOut};
                 `
               }),
               iconSwitchTransition()
@@ -79,7 +79,7 @@ export default c([
           ]),
           cE('label', {
             raw: `
-              transition: color .3s ${easeInOutCubicBezier};
+              transition: color .3s ${cubicBezierEaseInOut};
               user-select: none;
               padding-left: 8px;
             `

@@ -11,7 +11,7 @@ export default create({
     const {
       primaryColor,
       primaryColorHover,
-      primaryColorActive,
+      primaryColorPressed,
       railColorOverlay,
       textColorSecondaryOverlay
     } = derived
@@ -22,7 +22,7 @@ export default create({
       linkColor: changeColor(primaryColor, { alpha: 0.15 }),
       linkTextColor: textColorSecondaryOverlay,
       linkTextColorHover: primaryColorHover,
-      linkTextColorActive: primaryColorActive,
+      linkTextColorActive: primaryColorPressed,
       linkTextColorMatch: primaryColor
     }
   }

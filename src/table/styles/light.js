@@ -16,7 +16,7 @@ export default create({
     } = derived
     const {
       borderRadius,
-      strongFontWeight
+      fontWeightStrong
     } = base
     return {
       ...sizeVariables,
@@ -27,7 +27,7 @@ export default create({
       headerTextColor: textColorPrimary,
       bodyTextColor: textColorSecondary,
       borderRadius,
-      headFontWeight: strongFontWeight
+      headFontWeight: fontWeightStrong
     }
   }
 })

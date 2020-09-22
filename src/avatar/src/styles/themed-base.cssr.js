@@ -7,7 +7,7 @@ export default c([
       color: backgroundColor
     } = props.$local
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
 
     return cTB('avatar', {
@@ -21,8 +21,8 @@ export default c([
       `,
       borderRadius,
       transition: `
-        background-color .3s ${easeInOutCubicBezier},
-        color .3s ${easeInOutCubicBezier}
+        background-color .3s ${cubicBezierEaseInOut},
+        color .3s ${cubicBezierEaseInOut}
       `,
       backgroundColor
     }, [

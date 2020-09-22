@@ -26,7 +26,7 @@ export default c([
       headerFontWeight
     } = props.$local
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     const colorStatus = {
       success: iconColorSuccess,
@@ -40,7 +40,7 @@ export default c([
         line-height: ${lineHeight};
         font-size: 14px;
         transition:
-          color .3s ${easeInOutCubicBezier};
+          color .3s ${cubicBezierEaseInOut};
       `
     }, [
       ['success', 'info', 'warning', 'error'].map(item => createResultStatus(item, colorStatus)),
@@ -66,7 +66,7 @@ export default c([
           raw: `
             margin-top: 16px;
             font-weight: ${headerFontWeight};
-            transition: color .3s ${easeInOutCubicBezier};
+            transition: color .3s ${cubicBezierEaseInOut};
             text-align: center;
             color: ${headerTextColor};
           `

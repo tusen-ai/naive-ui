@@ -5,10 +5,10 @@ import animationStyle from './animation.cssr.js'
 export default c([
   ({ props }) => {
     const {
-      easeInOutCubicBezier,
-      easeInCubicBezier,
-      easeOutCubicBezier,
-      strongFontWeight
+      cubicBezierEaseInOut,
+      cubicBezierEaseIn,
+      cubicBezierEaseOut,
+      fontWeightStrong
     } = props.$base
     const {
       borderRadius,
@@ -36,7 +36,7 @@ export default c([
           backgroundClip: 'padding-box',
           width: 'calc(50% - 36px)',
           position: 'relative',
-          transition: `background-color .3s ${easeInOutCubicBezier}`,
+          transition: `background-color .3s ${cubicBezierEaseInOut}`,
           borderRadius,
           backgroundColor: listColor
         }, [
@@ -52,7 +52,7 @@ export default c([
           ]),
           cE('border-mask', {
             border: `1px solid ${borderColor}`,
-            transition: `border-color .3s ${easeInOutCubicBezier}`,
+            transition: `border-color .3s ${cubicBezierEaseInOut}`,
             pointerEvents: 'none',
             borderRadius,
             position: 'absolute',
@@ -69,8 +69,8 @@ export default c([
             borderRadius,
             backgroundColor: headerColor,
             transition: `
-              border-color .3s ${easeInOutCubicBezier},
-              background-color .3s ${easeInOutCubicBezier}
+              border-color .3s ${cubicBezierEaseInOut},
+              background-color .3s ${cubicBezierEaseInOut}
             `
           }, [
             cE('checkbox', {
@@ -84,8 +84,8 @@ export default c([
             cE('header', {
               flex: 1,
               lineHeight: 1,
-              fontWeight: strongFontWeight,
-              transition: `color .3s ${easeInOutCubicBezier}`,
+              fontWeight: fontWeightStrong,
+              transition: `color .3s ${cubicBezierEaseInOut}`,
               color: headerTextColor
             }, [
               cM('disabled', {
@@ -93,7 +93,7 @@ export default c([
               })
             ]),
             cE('extra', {
-              transition: `color .3s ${easeInOutCubicBezier}`,
+              transition: `color .3s ${cubicBezierEaseInOut}`,
               fontSize: '12px',
               justifySelf: 'flex-end',
               marginRight: '14px',
@@ -116,7 +116,7 @@ export default c([
             cB('transfer-filter', {
               padding: '8px 8px',
               boxSizing: 'border-box',
-              transition: `border-color .3s ${easeInOutCubicBezier}`,
+              transition: `border-color .3s ${cubicBezierEaseInOut}`,
               borderBottom: `1px solid ${filterBorderColor}`
             }),
             cB('transfer-list-flex-container', {
@@ -156,7 +156,7 @@ export default c([
                   })
                 ]),
                 cB('transfer-list-item', {
-                  transition: `color .3s ${easeInOutCubicBezier}`,
+                  transition: `color .3s ${cubicBezierEaseInOut}`,
                   position: 'relative',
                   cursor: 'pointer',
                   display: 'flex',
@@ -188,7 +188,7 @@ export default c([
                       raw: `
                         transform: translateX(150%);
                         animation-duration: .25s, .25s;
-                        animation-timing-function: ${easeInOutCubicBezier}, ${easeOutCubicBezier};
+                        animation-timing-function: ${cubicBezierEaseInOut}, ${cubicBezierEaseOut};
                         animation-delay: 0s, .25s;
                       `
                     }),
@@ -196,7 +196,7 @@ export default c([
                       raw: `
                         transform: translateX(-150%);
                         animation-duration: .25s, .25s;
-                        animation-timing-function: ${easeInOutCubicBezier}, ${easeInCubicBezier};
+                        animation-timing-function: ${cubicBezierEaseInOut}, ${cubicBezierEaseIn};
                         animation-delay: .25s, 0s;
                       `
                     })
@@ -208,7 +208,7 @@ export default c([
                       raw: `
                         transform: translateX(-150%);
                         animation-duration: .25s, .25s;
-                        animation-timing-function: ${easeInOutCubicBezier}, ${easeOutCubicBezier};
+                        animation-timing-function: ${cubicBezierEaseInOut}, ${cubicBezierEaseOut};
                         animation-delay: 0s, .25s;
                       `
                     }),
@@ -216,7 +216,7 @@ export default c([
                       raw: `
                         transform: translateX(150%);
                         animation-duration: .25s, .25s;
-                        animation-timing-function: ${easeInOutCubicBezier}, ${easeInCubicBezier};
+                        animation-timing-function: ${cubicBezierEaseInOut}, ${cubicBezierEaseIn};
                         animation-delay: .25s, 0s;
                       `
                     })
@@ -247,7 +247,7 @@ export default c([
           }),
           cE('icon', {
             pointerEvents: 'none',
-            transition: `fill .3s ${easeInOutCubicBezier}`,
+            transition: `fill .3s ${cubicBezierEaseInOut}`,
             fill: buttonColor
           }),
           c('&:hover', [

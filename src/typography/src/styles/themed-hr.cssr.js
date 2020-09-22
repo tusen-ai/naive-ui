@@ -3,14 +3,14 @@ import { c, cTB } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     const {
       hrColor
     } = props.$local
     return cTB('hr', {
       margin: '12px 0',
-      transition: `border-color .3s ${easeInOutCubicBezier}`,
+      transition: `border-color .3s ${cubicBezierEaseInOut}`,
       borderLeft: 'none',
       borderRight: 'none',
       borderBottom: 'none',

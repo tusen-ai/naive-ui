@@ -13,7 +13,7 @@ export default c([
       borderRadius
     } = props.$local
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     return [
       cTB('descriptions', [
@@ -88,15 +88,15 @@ export default c([
           raw: `
             font-weight: ${headerFontWeight};
             font-size: 18px;
-            transition: color .3s ${easeInOutCubicBezier};
+            transition: color .3s ${cubicBezierEaseInOut};
           `,
           color: headerTextColor
         }),
         cB('descriptions-table-wrapper', {
           raw: `
             transition:
-              background-color .3s ${easeInOutCubicBezier},
-              border-color .3s ${easeInOutCubicBezier};
+              background-color .3s ${cubicBezierEaseInOut},
+              border-color .3s ${cubicBezierEaseInOut};
           `
         }, [
           cB('descriptions-table', {
@@ -110,7 +110,7 @@ export default c([
             cB('descriptions-table-row', {
               raw: `
                 box-sizing: border-box;
-                transition: border-color .3s ${easeInOutCubicBezier};
+                transition: border-color .3s ${cubicBezierEaseInOut};
               `
             }, [
               cB('descriptions-table-header', {
@@ -120,9 +120,9 @@ export default c([
                   display: table-cell;
                   box-sizing: border-box;
                   transition:
-                    color .3s ${easeInOutCubicBezier},
-                    background-color .3s ${easeInOutCubicBezier},
-                    border-color .3s ${easeInOutCubicBezier};
+                    color .3s ${cubicBezierEaseInOut},
+                    background-color .3s ${cubicBezierEaseInOut},
+                    border-color .3s ${cubicBezierEaseInOut};
                 `,
                 color: headerTextColor
               }),
@@ -133,16 +133,16 @@ export default c([
                   display: table-cell;
                   box-sizing: border-box;
                   transition:
-                    color .3s ${easeInOutCubicBezier},
-                    background-color .3s ${easeInOutCubicBezier},
-                    border-color .3s ${easeInOutCubicBezier};
+                    color .3s ${cubicBezierEaseInOut},
+                    background-color .3s ${cubicBezierEaseInOut},
+                    border-color .3s ${cubicBezierEaseInOut};
                   padding: 0 0 16px 0;  
                 `,
                 color: contentTextColor
               }, [
                 cE('content', {
                   raw: `
-                    transition: color .3s ${easeInOutCubicBezier};
+                    transition: color .3s ${cubicBezierEaseInOut};
                     display: inline-block;
                   `,
                   color: contentTextColor
@@ -151,7 +151,7 @@ export default c([
               cE('label', {
                 raw: `
                   font-weight: ${headerFontWeight};
-                  transition: color .3s ${easeInOutCubicBezier};
+                  transition: color .3s ${cubicBezierEaseInOut};
                   display: inline-block;
                   margin-right: 14px;
                 `,

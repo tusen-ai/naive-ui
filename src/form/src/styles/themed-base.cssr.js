@@ -10,7 +10,7 @@ export default c([
       feedbackTextColorWarning
     } = props.$local
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     return [
       cTB('form', {
@@ -138,13 +138,13 @@ export default c([
             display: inline-block;
             box-sizing: border-box;
             font-size: 14px;
-            transition: color .3s ${easeInOutCubicBezier};
+            transition: color .3s ${cubicBezierEaseInOut};
           `,
           color: labelTextColor
         }, [
           c('&::after', {
             raw: `
-              transition: color .3s ${easeInOutCubicBezier};
+              transition: color .3s ${cubicBezierEaseInOut};
             `
           })
 
@@ -158,7 +158,7 @@ export default c([
             font-size: 14px;
             transform-origin: top left;
             line-height: 1.5;
-            transition: color .3s ${easeInOutCubicBezier};
+            transition: color .3s ${cubicBezierEaseInOut};
           `
         }, [
           cB('form-item-feedback', [

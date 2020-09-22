@@ -18,7 +18,7 @@ export default create({
       dividerColorOverlay
     } = derived
     const {
-      strongFontWeight,
+      fontWeightStrong,
       borderRadius
     } = base
     return {
@@ -36,7 +36,7 @@ export default create({
       tabTextColor: textColorSecondary,
       tabTextColorActive: textColorPrimary,
       tabBorderColor: dividerColorOverlay,
-      tabFontWeight: strongFontWeight,
+      tabFontWeight: fontWeightStrong,
       tabBorderRadius: borderRadius,
       paneTextColor: textColorSecondary
     }

@@ -9,7 +9,7 @@ export default create({
     const {
       textColorSecondaryOverlay,
       primaryColorHover,
-      primaryColorActive,
+      primaryColorPressed,
       primaryColor,
       infoColor,
       successColor,
@@ -18,12 +18,12 @@ export default create({
       baseColor,
       borderColorOverlay,
       opacityDisabled,
-      closeOverlayColor,
-      closeHoverOverlayColor,
-      closeActiveOverlayColor
+      closeColorOverlay,
+      colorColorHoverOverlay,
+      closeColorPressedOverlay
     } = derived
     const {
-      smallBorderRadius: borderRadius
+      borderRadiusSmall: borderRadius
     } = base
     return {
       ...commonVariables,
@@ -32,22 +32,22 @@ export default create({
       checkable: {
         textColor: textColorSecondaryOverlay,
         textColorHover: primaryColorHover,
-        textColorActive: primaryColorActive,
+        textColorActive: primaryColorPressed,
         textColorChecked: baseColor,
         color: 'transparent',
         colorHover: 'transparent',
         colorActive: 'transparent',
         colorChecked: primaryColor,
         colorCheckedHover: primaryColorHover,
-        colorCheckedActive: primaryColorActive
+        colorCheckedActive: primaryColorPressed
       },
       default: {
         borderColor: borderColorOverlay,
         textColor: textColorSecondaryOverlay,
         color: 'transparent',
-        closeColor: closeOverlayColor,
-        closeColorHover: closeHoverOverlayColor,
-        closeColorActive: closeActiveOverlayColor
+        closeColor: closeColorOverlay,
+        closeColorHover: colorColorHoverOverlay,
+        closeColorActive: closeColorPressedOverlay
       },
       primary: {
         borderColor: changeColor(primaryColor, { alpha: 0.3 }),

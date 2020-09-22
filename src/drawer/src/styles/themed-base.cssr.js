@@ -12,15 +12,15 @@ export default c([
       textColor
     } = props.$local
     const base = props.$base
-    const easeInOutCubicBezier = base.easeInOutCubicBezier
+    const cubicBezierEaseInOut = base.cubicBezierEaseInOut
     return [
       cTB('drawer', {
         raw: `
           position: absolute;
           pointer-events: all;
           transition:
-            background-color .3s ${easeInOutCubicBezier},
-            color .3s ${easeInOutCubicBezier};
+            background-color .3s ${cubicBezierEaseInOut},
+            color .3s ${cubicBezierEaseInOut};
         `,
         backgroundColor,
         color: textColor

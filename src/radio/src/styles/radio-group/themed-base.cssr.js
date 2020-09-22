@@ -9,7 +9,7 @@ export default c([
       height
     } = props.$local
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     return [
       cTB('radio-group', {
@@ -23,8 +23,8 @@ export default c([
             vertical-align: bottom;
             width: 1px;
             transition:
-              background-color .3s ${easeInOutCubicBezier},
-              opacity .3s ${easeInOutCubicBezier};
+              background-color .3s ${cubicBezierEaseInOut},
+              opacity .3s ${cubicBezierEaseInOut};
           `,
           backgroundColor: buttonBorderColor
         }, [

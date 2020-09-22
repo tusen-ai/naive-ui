@@ -4,7 +4,7 @@ import fadeInTransition from '../../../styles/_transitions/fade-in'
 export default c([
   ({ props }) => {
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     const {
       opacitySpinning
@@ -27,7 +27,7 @@ export default c([
       cB('spin-content', {
         raw: `
           opacity: 1;
-          transition: opacity .3s ${easeInOutCubicBezier};
+          transition: opacity .3s ${cubicBezierEaseInOut};
           pointer-events: all;
         `
       }, [

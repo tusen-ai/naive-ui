@@ -21,14 +21,14 @@ export default c([
       tabBorderRadius
     } = props.$local
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     return cTB('tabs', {
       raw: `
         width: 100%;
         transition:
-          background-color .3s ${easeInOutCubicBezier},
-          border-color .3s ${easeInOutCubicBezier};
+          background-color .3s ${cubicBezierEaseInOut},
+          border-color .3s ${cubicBezierEaseInOut};
       `
     }, [
       cM('flex', [
@@ -57,7 +57,7 @@ export default c([
           line-height: 1.75;
           display: flex;
           background-clip: padding-box;
-          transition: border-color .3s ${easeInOutCubicBezier};
+          transition: border-color .3s ${cubicBezierEaseInOut};
         `
       }, [
         cB('tabs-nav-scroll', {
@@ -72,7 +72,7 @@ export default c([
             line-height: 20px;
             align-self: center;
             cursor: pointer;
-            transition: color .3s ${easeInOutCubicBezier};
+            transition: color .3s ${cubicBezierEaseInOut};
           `
         }, [
           cM('left', {
@@ -114,9 +114,9 @@ export default c([
             height: 2px;
             border-radius: 1px;
             transition:
-              left .2s ${easeInOutCubicBezier},
-              max-width .2s ${easeInOutCubicBezier},
-              background-color .3s ${easeInOutCubicBezier};
+              left .2s ${cubicBezierEaseInOut},
+              max-width .2s ${cubicBezierEaseInOut},
+              background-color .3s ${cubicBezierEaseInOut};
           `,
           backgroundColor: labelBarColor
         }, [
@@ -134,8 +134,8 @@ export default c([
             display: inline-flex;
             align-items: center;
             transition:
-            background-color .3s ${easeInOutCubicBezier},
-            border-color .3s ${easeInOutCubicBezier};
+            background-color .3s ${cubicBezierEaseInOut},
+            border-color .3s ${cubicBezierEaseInOut};
           `
         }, [
           cM('disabled', {
@@ -150,7 +150,7 @@ export default c([
               line-height: 16px;
               height: 16px;
               cursor: pointer;
-              transition: color .3s ${easeInOutCubicBezier};
+              transition: color .3s ${cubicBezierEaseInOut};
             `
           }, [
             cB('icon', {
@@ -159,7 +159,7 @@ export default c([
           ]),
           cE('label', {
             raw: `
-              transition: color .3s ${easeInOutCubicBezier};
+              transition: color .3s ${cubicBezierEaseInOut};
             `,
             color: labelTextColor
           })
@@ -170,8 +170,8 @@ export default c([
           width: 100%;
           margin-top: 8px;
           transition:
-            color .3s ${easeInOutCubicBezier},
-            background-color .3s ${easeInOutCubicBezier};
+            color .3s ${cubicBezierEaseInOut},
+            background-color .3s ${cubicBezierEaseInOut};
         `,
         color: paneTextColor
       }),

@@ -32,7 +32,7 @@ export default c([
       headFontWeight
     } = props.$local
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     return [
       cTB('table', {
@@ -48,9 +48,9 @@ export default c([
           overflow: hidden;
           background-color: ${bodyColor};
           transition:
-            background-color .3s ${easeInOutCubicBezier},
-            border-color .3s ${easeInOutCubicBezier},
-            color .3s ${easeInOutCubicBezier};
+            background-color .3s ${cubicBezierEaseInOut},
+            border-color .3s ${cubicBezierEaseInOut},
+            color .3s ${cubicBezierEaseInOut};
         `
       }, [
         ['small', 'medium', 'large']
@@ -60,9 +60,9 @@ export default c([
             background-clip: padding-box;
             white-space: nowrap;
             transition:
-              background-color .3s ${easeInOutCubicBezier},
-              border-color .3s ${easeInOutCubicBezier},
-              color .3s ${easeInOutCubicBezier};
+              background-color .3s ${cubicBezierEaseInOut},
+              border-color .3s ${cubicBezierEaseInOut},
+              color .3s ${cubicBezierEaseInOut};
             text-align: inherit;
             padding: 14px 12px;
             vertical-align: inherit;
@@ -85,9 +85,9 @@ export default c([
         cE('td', {
           raw: `
             transition:
-              background-color .3s ${easeInOutCubicBezier},
-              border-color .3s ${easeInOutCubicBezier},
-              color .3s ${easeInOutCubicBezier};
+              background-color .3s ${cubicBezierEaseInOut},
+              border-color .3s ${cubicBezierEaseInOut},
+              color .3s ${cubicBezierEaseInOut};
             padding: 12px;
             color: ${bodyTextColor};
             background-color: ${bodyColor};

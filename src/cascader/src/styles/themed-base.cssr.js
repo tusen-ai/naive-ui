@@ -5,7 +5,7 @@ export default
 c([
   ({ props }) => {
     const {
-      easeInOutCubicBezier,
+      cubicBezierEaseInOut,
       transformDebounceScale
     } = props.$base
     const {
@@ -86,8 +86,8 @@ c([
             cursor: pointer;
             color: ${optionTextColor};
             transition:
-              background-color .2s ${easeInOutCubicBezier},
-              color 0.2s ${easeInOutCubicBezier};
+              background-color .2s ${cubicBezierEaseInOut},
+              color 0.2s ${cubicBezierEaseInOut};
           `
         }, [
           cNotM('not-leaf', [
@@ -102,8 +102,8 @@ c([
                 top: calc(50% - 4px);
                 opacity: 0;
                 transition: 
-                  transform .3s ${easeInOutCubicBezier},
-                  opacity .3s ${easeInOutCubicBezier};
+                  transform .3s ${cubicBezierEaseInOut},
+                  opacity .3s ${cubicBezierEaseInOut};
                   border-right: 1px solid ${optionCheckMarkColor};
                   border-bottom: 1px solid ${optionCheckMarkColor};
               `
@@ -175,7 +175,7 @@ c([
                 right: 18px;
                 top: 50%;
                 opacity: 1;
-                transition: opacity .3s ${easeInOutCubicBezier};
+                transition: opacity .3s ${cubicBezierEaseInOut};
                 border-top: 2px solid ${optionArrowColor};
                 border-right: 2px solid ${optionArrowColor};
               `

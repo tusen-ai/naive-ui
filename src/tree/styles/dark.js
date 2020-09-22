@@ -6,7 +6,7 @@ export default create({
   name: 'Tree',
   getDerivedVariables ({ base, derived }) {
     const {
-      smallBorderRadius
+      borderRadiusSmall
     } = base
     const {
       hoverColorOverlay,
@@ -17,7 +17,7 @@ export default create({
       textColorDisabledOverlay
     } = derived
     return {
-      smallBorderRadius,
+      borderRadiusSmall,
       nodeColorHover: hoverColorOverlay,
       nodeColorActive: activeColorOverlay,
       nodeColorSelected: changeColor(primaryColor, { alpha: 0.15 }),

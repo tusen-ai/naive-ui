@@ -5,7 +5,7 @@ export default c([
   ({ props }) => {
     const local = props.$local
     const base = props.$base
-    const easeInOutCubicBezier = base.easeInOutCubicBezier
+    const cubicBezierEaseInOut = base.cubicBezierEaseInOut
     return cTB(
       'button',
       {
@@ -23,9 +23,9 @@ export default c([
           text-align: center;
           cursor: pointer;
           transition:
-            background-color .3s ${easeInOutCubicBezier},
-            opacity .3s ${easeInOutCubicBezier},
-            border-color .3s ${easeInOutCubicBezier};
+            background-color .3s ${cubicBezierEaseInOut},
+            opacity .3s ${cubicBezierEaseInOut},
+            border-color .3s ${cubicBezierEaseInOut};
         `
       },
       [
@@ -36,7 +36,7 @@ export default c([
           left: '-1px',
           animationIterationCount: 1,
           animationDuration: props.$local.waveDuration,
-          animationTimingFunction: `${base.easeOutCubicBezier}, ${base.easeOutCubicBezier}`
+          animationTimingFunction: `${base.cubicBezierEaseOut}, ${base.cubicBezierEaseOut}`
         }),
         c('&::after', {
           raw: `
@@ -62,20 +62,20 @@ export default c([
             bottom: -1px;
             border-radius: inherit;
             box-shadow: inset 0 0 0 1px transparent;
-            transition: box-shadow .3s ${easeInOutCubicBezier};
+            transition: box-shadow .3s ${cubicBezierEaseInOut};
             pointer-events: none;
             z-index: 1;
           `
         }),
         cE('icon', {
-          transition: `color .3s ${easeInOutCubicBezier}`
+          transition: `color .3s ${cubicBezierEaseInOut}`
         }, [
           fadeInWidthExpandTransition()
         ]),
         cE('content', {
           raw: `
             white-space: nowrap;
-            transition: color .3s ${easeInOutCubicBezier};
+            transition: color .3s ${cubicBezierEaseInOut};
           `
         }, [
           c('~', [

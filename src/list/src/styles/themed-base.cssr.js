@@ -10,16 +10,16 @@ export default c([
       borderRadius
     } = props.$local
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     return [
       cTB('list', {
         raw: `
           font-size: 14px;
           transition:
-            background-color .3s ${easeInOutCubicBezier},
-            color .3s ${easeInOutCubicBezier},
-            border-color .3s ${easeInOutCubicBezier};
+            background-color .3s ${cubicBezierEaseInOut},
+            color .3s ${cubicBezierEaseInOut},
+            border-color .3s ${cubicBezierEaseInOut};
           padding: 0;
           list-style-type: none;
           color: ${textColor};
@@ -59,7 +59,7 @@ export default c([
           raw: `
             padding: 12px 0;
             box-sizing: border-box;
-            transition: border-color .3s ${easeInOutCubicBezier};
+            transition: border-color .3s ${cubicBezierEaseInOut};
           `
         }, [
           c('&:not(:last-child)', {
@@ -75,7 +75,7 @@ export default c([
             display: flex;
             flex-wrap: nowrap;
             align-items: center;
-            transition: border-color .3s ${easeInOutCubicBezier};
+            transition: border-color .3s ${cubicBezierEaseInOut};
           `
         }, [
           cE('prefix', {

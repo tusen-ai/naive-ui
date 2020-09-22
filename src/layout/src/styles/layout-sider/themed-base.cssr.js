@@ -10,7 +10,7 @@ export default c([
       siderToggleBarColorHover
     } = props.$local
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     return cTB('layout-sider', {
       raw: `
@@ -18,10 +18,10 @@ export default c([
         position: relative;
         z-index: auto;
         transition:
-          min-width .3s ${easeInOutCubicBezier},
-          max-width .3s ${easeInOutCubicBezier},
-          transform .3s ${easeInOutCubicBezier},
-          background-color .3s ${easeInOutCubicBezier};
+          min-width .3s ${cubicBezierEaseInOut},
+          max-width .3s ${cubicBezierEaseInOut},
+          transform .3s ${cubicBezierEaseInOut},
+          background-color .3s ${cubicBezierEaseInOut};
         background-color: ${siderColor};
       `
     }, [
@@ -29,8 +29,8 @@ export default c([
         raw: `
           z-index: 1;
           transition:
-            transform .3s ${easeInOutCubicBezier},
-            fill .3s ${easeInOutCubicBezier};
+            transform .3s ${cubicBezierEaseInOut},
+            fill .3s ${cubicBezierEaseInOut};
           cursor: pointer;
           width: 36px;
           height: 36px;
@@ -59,8 +59,8 @@ export default c([
             height: 38px;
             left: 14px;
             transition: 
-              background-color .3s ${easeInOutCubicBezier},
-              transform .3s ${easeInOutCubicBezier};
+              background-color .3s ${cubicBezierEaseInOut},
+              transform .3s ${cubicBezierEaseInOut};
           `
         }),
         cE('bottom', {
@@ -115,13 +115,13 @@ export default c([
           right: 0;
           bottom: 0;
           width: 1px;
-          transition: background-color .3s ${easeInOutCubicBezier};
+          transition: background-color .3s ${cubicBezierEaseInOut};
         `
       }),
       cE('content', {
         raw: `
           opacity: 0;
-          transition: opacity .3s ${easeInOutCubicBezier};
+          transition: opacity .3s ${cubicBezierEaseInOut};
         `
       }),
       cM('show-content', [

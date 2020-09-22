@@ -2,7 +2,7 @@ import { c, cTB, cM } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
-    const { easeInOutCubicBezier } = props.$base
+    const { cubicBezierEaseInOut } = props.$base
     const {
       blockquotePrefixColor,
       blockquoteTextColor
@@ -16,8 +16,8 @@ export default c([
         box-sizing: border-box;
         padding-left: 12px;
         transition:
-          color .3s ${easeInOutCubicBezier},
-          border-color .3s ${easeInOutCubicBezier};
+          color .3s ${cubicBezierEaseInOut},
+          border-color .3s ${cubicBezierEaseInOut};
       `,
       borderLeft: `4px solid ${blockquotePrefixColor}`,
       color: blockquoteTextColor

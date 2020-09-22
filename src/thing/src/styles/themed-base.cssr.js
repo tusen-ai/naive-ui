@@ -3,7 +3,7 @@ import { c, cTB, cB, cE } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     const {
       headerTextColor,
@@ -13,7 +13,7 @@ export default c([
     return cTB('thing', {
       raw: `
         display: flex;
-        transition: color .3s ${easeInOutCubicBezier};
+        transition: color .3s ${cubicBezierEaseInOut};
         font-size: 14px;
       `,
       color: textColor
@@ -53,7 +53,7 @@ export default c([
             raw: `
               font-size: 16px;
               font-weight: ${headerFontWeight};
-              transition: color .3s ${easeInOutCubicBezier};
+              transition: color .3s ${cubicBezierEaseInOut};
             `,
             color: headerTextColor
           })

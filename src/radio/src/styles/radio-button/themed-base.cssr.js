@@ -16,7 +16,7 @@ export default c([
       buttonBoxShadow
     } = props.$local
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     return cTB('radio-group', [
       cM('transition-disabled', [
@@ -37,7 +37,7 @@ export default c([
           padding-left: 14px;
           padding-right: 14px;
           white-space: nowrap;
-          transition: background-color .3s ${easeInOutCubicBezier}, opacity .3s ${easeInOutCubicBezier}, border-color .3s ${easeInOutCubicBezier}, color .3s ${easeInOutCubicBezier};
+          transition: background-color .3s ${cubicBezierEaseInOut}, opacity .3s ${cubicBezierEaseInOut}, border-color .3s ${cubicBezierEaseInOut}, color .3s ${cubicBezierEaseInOut};
         `,
         color: buttonTextColor,
         borderTop: `1px solid ${buttonBorderColor}`,
@@ -56,7 +56,7 @@ export default c([
             pointer-events: none;
             position: absolute;
             box-shadow: ${buttonBoxShadow};
-            transition: box-shadow .3s ${easeInOutCubicBezier};
+            transition: box-shadow .3s ${cubicBezierEaseInOut};
             left: -1px;
             bottom: -1px;
             right: -1px;
@@ -99,7 +99,7 @@ export default c([
           c('&:hover', [
             cE('border-mask', {
               raw: `
-                transition: box-shadow .3s ${easeInOutCubicBezier};
+                transition: box-shadow .3s ${cubicBezierEaseInOut};
               `,
               boxShadow: buttonBoxShadowHover
             }),

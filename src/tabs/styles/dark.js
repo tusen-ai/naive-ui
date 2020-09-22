@@ -11,13 +11,13 @@ export default create({
       textColorDisabledOverlay,
       iconColorOverlay,
       iconColorDisabledOverlay,
-      closeOverlayColor,
+      closeColorOverlay,
       tabColorOverlay,
       textColorPrimaryOverlay,
       dividerColorOverlay
     } = derived
     const {
-      strongFontWeight,
+      fontWeightStrong,
       borderRadius
     } = base
     return {
@@ -29,13 +29,13 @@ export default create({
       labelBarColor: primaryColor,
       scrollButtonColor: iconColorOverlay,
       scrollButtonColorDisabled: iconColorDisabledOverlay,
-      tabCloseColor: closeOverlayColor,
+      tabCloseColor: closeColorOverlay,
       tabColor: tabColorOverlay,
       tabBorderColorActive: 'transparent',
       tabTextColor: textColorSecondaryOverlay,
       tabTextColorActive: textColorPrimaryOverlay,
       tabBorderColor: dividerColorOverlay,
-      tabFontWeight: strongFontWeight,
+      tabFontWeight: fontWeightStrong,
       tabBorderRadius: borderRadius,
       paneTextColor: textColorSecondaryOverlay
     }

@@ -3,7 +3,7 @@ import { c, cTB, cM } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     const {
       pTextColor,
@@ -14,7 +14,7 @@ export default c([
     return cTB('p', {
       raw: `
         box-sizing: border-box;
-        transition: color .3s ${easeInOutCubicBezier};
+        transition: color .3s ${cubicBezierEaseInOut};
         margin: 12px 0 16px 0;
         font-size: 14px;
         line-height: 1.75;

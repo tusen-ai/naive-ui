@@ -5,7 +5,7 @@ const dashOffset = 500
 export default c([
   ({ props }) => {
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     const {
       color
@@ -15,7 +15,7 @@ export default c([
         raw: `
           line-height: 1;
           stroke: ${color};
-          transition: stroke .3s ${easeInOutCubicBezier};
+          transition: stroke .3s ${cubicBezierEaseInOut};
         `
       }, [
         cB('base-loading-circular', {

@@ -10,7 +10,7 @@ export default c([
 
 function headerStyle (level, props) {
   const {
-    easeInOutCubicBezier
+    cubicBezierEaseInOut
   } = props.$base
   const {
     headerTextColor,
@@ -25,7 +25,7 @@ function headerStyle (level, props) {
     fontSize: headerFontSize[level],
     fontWeight: headerFontWeight,
     margin: headerMargin[level],
-    transition: `color .3s ${easeInOutCubicBezier}`,
+    transition: `color .3s ${cubicBezierEaseInOut}`,
     color: headerTextColor
   }, [
     c('&:first-child', {
@@ -46,7 +46,7 @@ function headerStyle (level, props) {
         content: '""',
         width: headerBarWidth[level],
         borderRadius: '',
-        transition: `background-color .3s ${easeInOutCubicBezier}`,
+        transition: `background-color .3s ${cubicBezierEaseInOut}`,
         left: 0,
         top: 0,
         bottom: 0,

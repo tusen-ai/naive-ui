@@ -9,8 +9,8 @@ export default create({
       textColorSecondary,
       cardColor,
       closeColor,
-      closeHoverColor,
-      closeActiveColor,
+      closeColorHover,
+      closeColorPressed,
       infoColor,
       successColor,
       warningColor,
@@ -21,14 +21,14 @@ export default create({
       textColor: textColorSecondary,
       color: cardColor,
       closeColor: closeColor,
-      closeColorHover: closeHoverColor,
-      closeColorActive: closeActiveColor,
+      closeColorHover: closeColorHover,
+      closeColorActive: closeColorPressed,
       iconColorInfo: infoColor,
       iconColorSuccess: successColor,
       iconColorWarning: warningColor,
       iconColorError: errorColor,
       borderRadius: base.borderRadius,
-      titleFontWeight: base.strongFontWeight
+      titleFontWeight: base.fontWeightStrong
     }
   }
 })

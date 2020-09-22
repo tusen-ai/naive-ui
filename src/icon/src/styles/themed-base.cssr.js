@@ -8,7 +8,7 @@ export default c([
       opacitySecondaryDepth,
       opacityTertiaryDepth
     } = props.$local
-    const { easeInOutCubicBezier, iconTransition } = props.$base
+    const { cubicBezierEaseInOut, iconTransition } = props.$base
     return [
       cTB('icon', {
         raw: `
@@ -26,7 +26,7 @@ export default c([
       [
         c('svg', {
           raw: `
-            transition: opacity .3s ${easeInOutCubicBezier};
+            transition: opacity .3s ${cubicBezierEaseInOut};
             height: 1em;
             width: 1em;
           `

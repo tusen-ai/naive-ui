@@ -67,7 +67,7 @@ export default create({
           fontStyle: 'italic'
         }),
         c('.hljs-strong', {
-          fontWeight: base.strongFontWeight
+          fontWeight: base.fontWeightStrong
         }),
         c('.hljs-link', {
           textDecoration: 'underline'

@@ -2,7 +2,7 @@ import { c, cTB, cB, cE, cM, cNotM, insideModal } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
-    const { easeInOutCubicBezier } = props.$base
+    const { cubicBezierEaseInOut } = props.$base
     const { borderRadius } = props.$local
     const {
       borderColor,
@@ -18,7 +18,7 @@ export default c([
       headerButtonIconColorActive,
       fixedColumnBoxShadowColor
     } = props.$local.default
-    const fixedColumnStyle = createFixedColumnStyle({ easeInOutCubicBezier, fixedColumnBoxShadowColor })
+    const fixedColumnStyle = createFixedColumnStyle({ cubicBezierEaseInOut, fixedColumnBoxShadowColor })
     return [
       createSizeStyle(props),
       cTB('data-table', {
@@ -33,7 +33,7 @@ export default c([
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: opacity .3s ${easeInOutCubicBezier};
+            transition: opacity .3s ${cubicBezierEaseInOut};
           `
         }, [
           cM('hide', {
@@ -50,7 +50,7 @@ export default c([
         cB('data-table-wrapper', {
           raw: `
             position: relative;
-            transition: border-color .3s ${easeInOutCubicBezier};
+            transition: border-color .3s ${cubicBezierEaseInOut};
             border-top-left-radius: ${borderRadius};
             border-top-right-radius: ${borderRadius};
             overflow: hidden;
@@ -124,20 +124,20 @@ export default c([
             word-wrap: break-word;
             word-break: break-all;
             table-layout: fixed;
-            transition: background-color .3s ${easeInOutCubicBezier};
+            transition: background-color .3s ${cubicBezierEaseInOut};
             border-collapse: separate;
             border-spacing: 0;
             background-color: ${bodyColor}
           `
         }, [
           cB('data-table-thead', {
-            transition: `background-color .3s ${easeInOutCubicBezier}`,
+            transition: `background-color .3s ${cubicBezierEaseInOut}`,
             backgroundColor: headerColor
           }),
           cB('data-table-tr', {
             boxSizing: 'border-box',
             backgroundClip: 'padding-box',
-            transition: `background-color .3s ${easeInOutCubicBezier}`
+            transition: `background-color .3s ${cubicBezierEaseInOut}`
           }, [
             c('&:last-child', [
               cB('data-table-td', [
@@ -166,9 +166,9 @@ export default c([
             borderColor: borderColor,
             color: headerTextColor,
             transition: `
-              border-color .3s ${easeInOutCubicBezier},
-              color .3s ${easeInOutCubicBezier},
-              background-color .3s ${easeInOutCubicBezier};
+              border-color .3s ${cubicBezierEaseInOut},
+              color .3s ${cubicBezierEaseInOut},
+              background-color .3s ${cubicBezierEaseInOut};
             `
           }, [
             cM('filterable', {
@@ -208,10 +208,10 @@ export default c([
               color: ${bodyTextColor};
               border-bottom: 1px solid ${borderColor};
               transition:
-                box-shadow .3s ${easeInOutCubicBezier},
-                background-color .3s ${easeInOutCubicBezier},
-                border-color .3s ${easeInOutCubicBezier},
-                color .3s ${easeInOutCubicBezier};
+                box-shadow .3s ${cubicBezierEaseInOut},
+                background-color .3s ${cubicBezierEaseInOut},
+                border-color .3s ${cubicBezierEaseInOut},
+                color .3s ${cubicBezierEaseInOut};
             `
           }, [
             cM('ellipsis', {
@@ -229,7 +229,7 @@ export default c([
         ]),
         cB('data-table-base-table-header', {
           flexShrink: 0,
-          transition: `border-color .3s ${easeInOutCubicBezier}`,
+          transition: `border-color .3s ${cubicBezierEaseInOut}`,
           scrollbarWidth: 'none'
         }, [
           c('&::-webkit-scrollbar', {
@@ -238,7 +238,7 @@ export default c([
           }),
           cB('data-table-table', {
             borderBottom: `1px solid ${borderColor}`,
-            transition: `border-color .3s ${easeInOutCubicBezier}`
+            transition: `border-color .3s ${cubicBezierEaseInOut}`
           }),
           cB('data-table-th', [
             cB('data-table-sort-button', {
@@ -268,7 +268,7 @@ export default c([
                 })
               ]),
               cE('asc-icon, desc-icon', {
-                transition: `fill .3s ${easeInOutCubicBezier}`,
+                transition: `fill .3s ${cubicBezierEaseInOut}`,
                 fill: headerButtonIconColor,
                 position: 'absolute'
               })
@@ -296,7 +296,7 @@ export default c([
                   justify-content: center;
                   align-items: center;  
                 `,
-                transition: `background-color .3s ${easeInOutCubicBezier}`
+                transition: `background-color .3s ${cubicBezierEaseInOut}`
               }, [
                 c('&:hover', {
                   backgroundColor: headerButtonColorHover
@@ -488,7 +488,7 @@ function createSizeStyle (props) {
 }
 
 function createFixedColumnStyle ({
-  easeInOutCubicBezier,
+  cubicBezierEaseInOut,
   fixedColumnBoxShadowColor
 }) {
   return [
@@ -506,7 +506,7 @@ function createFixedColumnStyle ({
           position: absolute;
           top: 0;
           bottom: -1px;
-          transition: box-shadow .2s ${easeInOutCubicBezier};
+          transition: box-shadow .2s ${cubicBezierEaseInOut};
           right: -36px;
         `
       })
@@ -525,7 +525,7 @@ function createFixedColumnStyle ({
           position: absolute;
           top: 0;
           bottom: -1px;
-          transition: box-shadow .2s ${easeInOutCubicBezier};
+          transition: box-shadow .2s ${cubicBezierEaseInOut};
           left: -36px;
         `
       })

@@ -9,11 +9,11 @@ export default create({
       textColorPrimary
     } = derived
     const {
-      strongFontWeight
+      fontWeightStrong
     } = base
     return {
-      labelFontWeight: strongFontWeight,
-      valueFontWeight: strongFontWeight,
+      labelFontWeight: fontWeightStrong,
+      valueFontWeight: fontWeightStrong,
       labelTextColor: textColorSecondary,
       valuePrefixTextColor: textColorPrimary,
       valueSuffixTextColor: textColorPrimary,

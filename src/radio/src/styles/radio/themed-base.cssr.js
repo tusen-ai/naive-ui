@@ -16,7 +16,7 @@ export default c([
       dotColorDisabled
     } = props.$local
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     return [
       cTB(
@@ -44,8 +44,8 @@ export default c([
           cE('dot', {
             raw: `
               transition:
-              background-color .3s ${easeInOutCubicBezier},
-              box-shadow .3s ${easeInOutCubicBezier};
+              background-color .3s ${cubicBezierEaseInOut},
+              box-shadow .3s ${cubicBezierEaseInOut};
               margin-right: 9px;
               position: relative;
               border-radius: 50%;
@@ -66,9 +66,9 @@ export default c([
                 border-radius: 50%;
                 transform: scale(.8);
                 transition: 
-                  opacity .3s ${easeInOutCubicBezier},
-                  background-color .3s ${easeInOutCubicBezier},
-                  transform .3s ${easeInOutCubicBezier};
+                  opacity .3s ${cubicBezierEaseInOut},
+                  background-color .3s ${cubicBezierEaseInOut},
+                  transform .3s ${cubicBezierEaseInOut};
               `,
               backgroundColor: dotColorActive
             }),
@@ -87,7 +87,7 @@ export default c([
             raw: `
               display: inline-block;
               white-space: nowrap;
-              transition: color .3s ${easeInOutCubicBezier};
+              transition: color .3s ${cubicBezierEaseInOut};
             `,
             color: textColor
           }),

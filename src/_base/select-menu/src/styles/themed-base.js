@@ -3,7 +3,7 @@ import { cTB, c, cB, cE, cM, cNotM } from '../../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     const {
       borderRadius,
@@ -27,7 +27,7 @@ export default c([
         z-index: 0;
         position: relative;
         border-radius: ${borderRadius};
-        transition: ${easeInOutCubicBezier};
+        transition: ${cubicBezierEaseInOut};
         overflow: hidden;
         background-color: ${color};
         box-shadow: ${boxShadow};
@@ -41,8 +41,8 @@ export default c([
         padding: '8px 14px',
         fontSize: '14px',
         transition: `
-          color .3s ${easeInOutCubicBezier},
-          border-color .3s ${easeInOutCubicBezier}
+          color .3s ${cubicBezierEaseInOut},
+          border-color .3s ${cubicBezierEaseInOut}
         `,
         borderTop: `1px solid ${actionDividerColor}`,
         color: actionTextColor
@@ -59,8 +59,8 @@ export default c([
           padding: 0 14px;
           white-space: nowrap;
           transition:
-            color .3s ${easeInOutCubicBezier},
-            opacity .3s ${easeInOutCubicBezier};
+            color .3s ${cubicBezierEaseInOut},
+            opacity .3s ${cubicBezierEaseInOut};
           text-overflow: ellipsis;
           overflow: hidden;
           box-sizing: border-box;
@@ -100,7 +100,7 @@ export default c([
       cM('multiple', [
         cB('base-select-option', {
           position: 'relative',
-          transition: `color .3s ${easeInOutCubicBezier}`,
+          transition: `color .3s ${cubicBezierEaseInOut}`,
           paddingRight: '28px'
         }, [
           cM('selected', [
@@ -120,8 +120,8 @@ export default c([
               top: calc(50% - 4px);
               opacity: 0;
               transition:
-                transform .3s ${easeInOutCubicBezier},
-                opacity .3s ${easeInOutCubicBezier};
+                transform .3s ${cubicBezierEaseInOut},
+                opacity .3s ${cubicBezierEaseInOut};
               border-right: 1px solid ${optionCheckColor};
               border-bottom: 1px solid ${optionCheckColor};
             `

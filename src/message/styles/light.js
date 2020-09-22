@@ -8,7 +8,7 @@ export default create({
       textColorSecondary,
       baseColor,
       closeColor,
-      closeHoverColor,
+      closeColorHover,
       infoColor,
       successColor,
       errorColor,
@@ -44,7 +44,7 @@ export default create({
       closeColorHover: 'rgba(255, 255, 255, .6)',
       closeColorActive: 'rgba(255, 255, 255, .4)',
       closeColorLoading: closeColor,
-      closeColorLoadingHover: closeHoverColor,
+      closeColorLoadingHover: closeColorHover,
       closeColorLoadingActive: closeColor
     }
   }

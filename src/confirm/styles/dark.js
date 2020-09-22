@@ -9,7 +9,7 @@ export default create({
       textColorSecondaryOverlay,
       modalColor,
       closeOverylayColor,
-      closeHoverOverlayColor,
+      colorColorHoverOverlay,
       closeActiveOverylayColor,
       infoColor,
       successColor,
@@ -21,14 +21,14 @@ export default create({
       textColor: textColorSecondaryOverlay,
       color: modalColor,
       closeColor: closeOverylayColor,
-      closeColorHover: closeHoverOverlayColor,
+      closeColorHover: colorColorHoverOverlay,
       closeColorActive: closeActiveOverylayColor,
       iconColorInfo: infoColor,
       iconColorSuccess: successColor,
       iconColorWarning: warningColor,
       iconColorError: errorColor,
       borderRadius: base.borderRadius,
-      titleFontWeight: base.strongFontWeight
+      titleFontWeight: base.fontWeightStrong
     }
   }
 })

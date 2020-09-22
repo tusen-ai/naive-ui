@@ -3,7 +3,7 @@ import { c, cTB, cB, cM } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     const {
       liTextColor
@@ -44,7 +44,7 @@ export default c([
         })
       ]),
       cB('li', {
-        transition: `color .3s ${easeInOutCubicBezier}`,
+        transition: `color .3s ${cubicBezierEaseInOut}`,
         lineHeight: '1.75em',
         marginBottom: 0,
         fontSize: '14px'

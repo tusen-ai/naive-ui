@@ -31,8 +31,8 @@ export default c([
             font-size: 18px;
           `,
           transition: `
-            fill .3s ${base.easeInOutCubicBezier},
-            color .3s ${base.easeInOutCubicBezier}
+            fill .3s ${base.cubicBezierEaseInOut},
+            color .3s ${base.cubicBezierEaseInOut}
           `
         }, [
           cM('as-text', {
@@ -70,7 +70,7 @@ export default c([
             color: inherit;
             font-size: 36px;
           `,
-          transition: `color .3s ${base.easeInOutCubicBezier}`
+          transition: `color .3s ${base.cubicBezierEaseInOut}`
         }),
         cB('progress-icon', {
           raw: `
@@ -86,8 +86,8 @@ export default c([
         }),
         cB('progress-text', {
           whiteSpace: 'nowrap',
-          fontWeight: base.strongFontWeight,
-          transition: `color .3s ${base.easeInOutCubicBezier}`
+          fontWeight: base.fontWeightStrong,
+          transition: `color .3s ${base.cubicBezierEaseInOut}`
         }, [
           cE('percentage', {
             color: 'inherit',
@@ -115,7 +115,7 @@ export default c([
             justify-content: center;
           `,
           transition: `
-            color .3s ${base.easeInOutCubicBezier}
+            color .3s ${base.cubicBezierEaseInOut}
           `
         })
       ]),
@@ -131,12 +131,12 @@ export default c([
           }),
           cB('progress-graph-circle-fill', {
             transition: `
-              stroke .3s ${base.easeInOutCubicBezier},
-              stroke-dasharray .3s ${base.easeInOutCubicBezier}
+              stroke .3s ${base.cubicBezierEaseInOut},
+              stroke-dasharray .3s ${base.cubicBezierEaseInOut}
             `
           }),
           cB('progress-graph-circle-rail', {
-            transition: `stroke .3s ${base.easeInOutCubicBezier}`,
+            transition: `stroke .3s ${base.cubicBezierEaseInOut}`,
             overflow: 'hidden',
             stroke: local.railColor
           })
@@ -161,8 +161,8 @@ export default c([
                 fontSize: '14px',
                 lineHeight: '21px',
                 color: local.innerIndicatorTextColor,
-                fontWeight: base.strongFontWeight,
-                transition: `color .3s ${base.easeInOutCubicBezier}`
+                fontWeight: base.fontWeightStrong,
+                transition: `color .3s ${base.cubicBezierEaseInOut}`
               })
             ])
           ]),
@@ -173,7 +173,7 @@ export default c([
           }, [
             cB('progress-graph-line-rail', {
               flex: 1,
-              transition: `background-color .3s ${base.easeInOutCubicBezier}`
+              transition: `background-color .3s ${base.cubicBezierEaseInOut}`
             }),
             cB('progress-graph-line-indicator', {
               raw: `
@@ -190,11 +190,11 @@ export default c([
               `,
               color: local.innerIndicatorTextColor,
               transition: `
-                right .2s ${base.easeInOutCubicBezier},
-                color .3s ${base.easeInOutCubicBezier},
-                background-color .3s ${base.easeInOutCubicBezier}
+                right .2s ${base.cubicBezierEaseInOut},
+                color .3s ${base.cubicBezierEaseInOut},
+                background-color .3s ${base.cubicBezierEaseInOut}
               `,
-              fontWeight: base.strongFontWeight
+              fontWeight: base.fontWeightStrong
             })
           ]),
           cB('progress-graph-line-rail', {
@@ -205,7 +205,7 @@ export default c([
               border-radius: 5px;
             `,
             backgroundColor: local.railColor,
-            transition: `background-color .3s ${base.easeInOutCubicBezier}`
+            transition: `background-color .3s ${base.cubicBezierEaseInOut}`
           }, [
             cB('progress-graph-line-fill', {
               raw: `
@@ -216,8 +216,8 @@ export default c([
                 max-width: 0%;
               `,
               transition: `
-                background-color .3s ${base.easeInOutCubicBezier},
-                max-width .2s ${base.easeInOutCubicBezier}
+                background-color .3s ${base.cubicBezierEaseInOut},
+                max-width .2s ${base.cubicBezierEaseInOut}
               `
             })
           ])

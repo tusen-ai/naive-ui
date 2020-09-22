@@ -3,7 +3,7 @@ import { cTB, c, cB, cE, cM, insideFormItem } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     const {
       borderRadius
@@ -51,7 +51,7 @@ export default c([
           left: 0;
           box-shadow: inset 0 0 0px 1px transparent;
           border-radius: ${borderRadius};
-          transition: box-shadow .3s ${easeInOutCubicBezier};
+          transition: box-shadow .3s ${cubicBezierEaseInOut};
           pointer-events: none;
         `
       }),
@@ -153,7 +153,7 @@ export default c([
             right: 0;
           `,
           transition: `
-            box-shadow .3s ${easeInOutCubicBezier}
+            box-shadow .3s ${cubicBezierEaseInOut}
           `,
           boxShadow: `inset 0 0 0 1px ${borderColor}`
         }),
@@ -167,7 +167,7 @@ export default c([
             justify-content: center;
           `,
           transition: `
-            background-color .3s ${easeInOutCubicBezier}
+            background-color .3s ${cubicBezierEaseInOut}
           `,
           backgroundColor: buttonColor
         }),
@@ -179,7 +179,7 @@ export default c([
             bottom: 0;
           `,
           transition: `
-            background-color .3s ${easeInOutCubicBezier}
+            background-color .3s ${cubicBezierEaseInOut}
           `,
           backgroundColor: buttonColor
         }),
@@ -237,11 +237,11 @@ export default c([
           box-sizing: border-box;
           border-radius: ${borderRadius};
           transition:
-            color .3s ${easeInOutCubicBezier},
-            caret-color .3s ${easeInOutCubicBezier},
-            background-color .3s ${easeInOutCubicBezier},
-            box-shadow .3s ${easeInOutCubicBezier},
-            text-decoration-color .3s ${easeInOutCubicBezier};
+            color .3s ${cubicBezierEaseInOut},
+            caret-color .3s ${cubicBezierEaseInOut},
+            background-color .3s ${cubicBezierEaseInOut},
+            box-shadow .3s ${cubicBezierEaseInOut},
+            text-decoration-color .3s ${cubicBezierEaseInOut};
           border: none;
           width: 100%;
           text-align: center;
@@ -252,7 +252,7 @@ export default c([
         caretColor: caretColor
       }, [
         c('&::placeholder', {
-          transition: `color .3s ${easeInOutCubicBezier}`,
+          transition: `color .3s ${cubicBezierEaseInOut}`,
           color: placeholdeColor
         }),
         c('&:hover ~', [

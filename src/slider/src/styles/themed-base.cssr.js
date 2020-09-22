@@ -25,7 +25,7 @@ export default c([
       dotSize
     } = props.$local
     const {
-      easeInOutCubicBezier,
+      cubicBezierEaseInOut,
       transformDebounceScale
     } = props.$base
     return [
@@ -101,7 +101,7 @@ export default c([
           position: 'relative',
           height: railHeight,
           backgroundColor: railColor,
-          transition: `background-color .3s ${easeInOutCubicBezier}`,
+          transition: `background-color .3s ${cubicBezierEaseInOut}`,
           borderRadius: pxfy(depx(railHeight) / 2)
         }, [
           cE('fill', {
@@ -110,7 +110,7 @@ export default c([
               top: 0;
               bottom: 0;
               border-radius: ${pxfy(depx(railHeight) / 2)};
-              transition: background-color .3s ${easeInOutCubicBezier};
+              transition: background-color .3s ${cubicBezierEaseInOut};
             `,
             backgroundColor: railFillColor
           })
@@ -121,7 +121,7 @@ export default c([
             height: ${handleSize};
             width: ${handleSize};
             border-radius: 50%;
-            transition: box-shadow .2s ${easeInOutCubicBezier}, background-color .3s ${easeInOutCubicBezier};
+            transition: box-shadow .2s ${cubicBezierEaseInOut}, background-color .3s ${cubicBezierEaseInOut};
             position: absolute;
             top: 0;
             transform: translateX(-50%);
@@ -151,7 +151,7 @@ export default c([
         }, [
           cB('slider-dot', {
             raw: `
-              transition: box-shadow .3s ${easeInOutCubicBezier}, background-color .3s ${easeInOutCubicBezier};
+              transition: box-shadow .3s ${cubicBezierEaseInOut}, background-color .3s ${cubicBezierEaseInOut};
               position: absolute;
               transform: translateX(-50%) translateY(-50%);
               height: ${dotSize};

@@ -3,7 +3,7 @@ import fadeInHeightExpandTransition from '../../../styles/_transitions/fade-in-h
 
 export default c([
   ({ props }) => {
-    const { easeInOutCubicBezier } = props.$base
+    const { cubicBezierEaseInOut } = props.$base
     const {
       dividerColor,
       titleTextColor,
@@ -23,7 +23,7 @@ export default c([
             raw: `
               overflow: hidden;
               font-size: 14px;
-              transition: border-color .3s ${easeInOutCubicBezier};
+              transition: border-color .3s ${cubicBezierEaseInOut};
               margin-top: 16px;
             `
           },
@@ -94,7 +94,7 @@ export default c([
                 display: flex;
                 flex-wrap: nowrap;
                 align-items: center;
-                transition: color .3s ${easeInOutCubicBezier};
+                transition: color .3s ${cubicBezierEaseInOut};
                 position: relative;
                 cursor: pointer;
                 padding: 16px 0 0 0;
@@ -109,9 +109,9 @@ export default c([
                 cB('icon', {
                   raw: `
                     transition:
-                      transform .15s ${easeInOutCubicBezier},
-                      fill .3s ${easeInOutCubicBezier},
-                      stroke .3s ${easeInOutCubicBezier};
+                      transform .15s ${cubicBezierEaseInOut},
+                      fill .3s ${cubicBezierEaseInOut},
+                      stroke .3s ${cubicBezierEaseInOut};
                     font-size: 16px;
                     fill: ${arrowColor};
                     stroke: ${arrowColor};
@@ -121,7 +121,7 @@ export default c([
             ]),
             cE('content-inner', {
               raw: `
-                transition: color .3s ${easeInOutCubicBezier};
+                transition: color .3s ${cubicBezierEaseInOut};
                 padding-top: 16px;
                 color: ${textColor};
               `

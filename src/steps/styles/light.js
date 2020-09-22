@@ -7,7 +7,7 @@ export default create({
   getDerivedVariables ({ base, derived }) {
     return {
       ...commonVariables,
-      stepHeaderFontWeight: base.strongFontWeight,
+      stepHeaderFontWeight: base.fontWeightStrong,
       indicatorTextColorProcess: 'black',
       indicatorTextColorWait: derived.textColorDisabled,
       indicatorTextColorFinish: derived.primaryColor,

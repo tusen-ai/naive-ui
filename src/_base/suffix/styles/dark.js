@@ -8,7 +8,7 @@ export default create({
       default: {
         crossColor: derived.textColorQuaternaryOverlay,
         hoverCrossColor: derived.primaryColorHover,
-        activeCrossColor: derived.primaryColorActive,
+        activeCrossColor: derived.primaryColorPressed,
         arrowColor: derived.textColorQuaternaryOverlay,
         hoverArrowColor: derived.primaryColorHover,
         activeArrowColor: derived.primaryColorHover,
@@ -17,7 +17,7 @@ export default create({
       warning: {
         crossColor: derived.warningColor,
         hoverCrossColor: derived.warningColorHover,
-        activeCrossColor: derived.warningColorActive,
+        activeCrossColor: derived.warningColorPressed,
         arrowColor: derived.warningColor,
         hoverArrowColor: derived.warningColorHover,
         activeArrowColor: derived.warningColorHover,
@@ -26,7 +26,7 @@ export default create({
       error: {
         crossColor: derived.errorColor,
         hoverCrossColor: derived.errorColorHover,
-        activeCrossColor: derived.errorColorActive,
+        activeCrossColor: derived.errorColorPressed,
         arrowColor: derived.errorColor,
         hoverArrowColor: derived.errorColorHover,
         activeArrowColor: derived.errorColorHover,

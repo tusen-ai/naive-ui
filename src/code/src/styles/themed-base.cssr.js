@@ -2,7 +2,7 @@ import { c, cTB } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
-    const { monoFontFamily, easeInOutCubicBezier } = props.$base
+    const { fontFamilyMono, cubicBezierEaseInOut } = props.$base
     const {
       textColor,
       highlightStyle
@@ -14,18 +14,18 @@ export default c([
           raw: `
             margin: 0;
             font-size: 14px;
-            font-family: ${monoFontFamily};
+            font-family: ${fontFamilyMono};
           `
         },
         [
           c('code', {
-            fontFamily: monoFontFamily
+            fontFamily: fontFamilyMono
           }),
           c('[class^=hljs]', {
             color: textColor,
             transition: `
-              color .3s ${easeInOutCubicBezier},
-              background-color .3s ${easeInOutCubicBezier}
+              color .3s ${cubicBezierEaseInOut},
+              background-color .3s ${cubicBezierEaseInOut}
             `
           }),
           highlightStyle

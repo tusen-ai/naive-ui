@@ -17,7 +17,7 @@ export default c([
     } = props.$local
     const {
       transformDebounceScale,
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     return [cTB('time-picker', {
       raw: `
@@ -90,13 +90,13 @@ export default c([
           min-width: 52px;
           height: 224px;
           flex-direction: column;
-          transition: box-shadow .3s ${easeInOutCubicBezier};
+          transition: box-shadow .3s ${cubicBezierEaseInOut};
         `
       }, [
         cM('transition-disabled', [
           cE('item', {
             raw: `
-              transition: background-color .3s ${easeInOutCubicBezier}, opacity .3s ${easeInOutCubicBezier};
+              transition: background-color .3s ${cubicBezierEaseInOut}, opacity .3s ${cubicBezierEaseInOut};
             `
           })
         ]),
@@ -108,10 +108,10 @@ export default c([
             align-items: center;
             justify-content: center;
             transition: 
-              color .3s ${easeInOutCubicBezier},
-              background-color .3s ${easeInOutCubicBezier},
-              opacity .3s ${easeInOutCubicBezier},
-              text-decoration-color .3s ${easeInOutCubicBezier};
+              color .3s ${cubicBezierEaseInOut},
+              background-color .3s ${cubicBezierEaseInOut},
+              opacity .3s ${cubicBezierEaseInOut},
+              text-decoration-color .3s ${cubicBezierEaseInOut};
             background: transparent;
             text-decoration-color: transparent;
             color: ${itemTextColor};

@@ -16,17 +16,17 @@ export default create({
       errorColor,
       popoverColor,
       closeColor,
-      closeHoverColor,
+      closeColorHover,
       textColorPrimaryOverlay,
       textColorTertiaryOverlay
     } = derived
     const {
       borderRadius,
-      strongFontWeight
+      fontWeightStrong
     } = base
     return {
       borderRadius,
-      headerFontWeight: strongFontWeight,
+      headerFontWeight: fontWeightStrong,
       iconColorSuccess: successColor,
       iconColorInfo: infoColor,
       iconColorWarning: warningColor,
@@ -34,7 +34,7 @@ export default create({
       color: popoverColor,
       textColor: textColorSecondary,
       closeColor: closeColor,
-      closeColorHover: closeHoverColor,
+      closeColorHover: closeColorHover,
       closeColorActive: closeColor,
       headerTextColor: textColorPrimaryOverlay,
       contentTextColor: textColorSecondary,

@@ -17,7 +17,7 @@ export default create({
       infoColorSuppl
     } = derived
     return {
-      fontWeight: base.strongFontWeight,
+      fontWeight: base.fontWeightStrong,
       backgroundImagePrimary: `linear-gradient(252deg, ${primaryColor} 0%, ${primaryColorSuppl} 100%)`,
       backgroundImageSuccess: `linear-gradient(252deg, ${successColor} 0%, ${successColorSuppl} 100%)`,
       backgroundImageWarning: ` linear-gradient(252deg, ${warningColor} 0%, ${warningColorSuppl} 100%)`,

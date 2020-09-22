@@ -5,7 +5,7 @@ import fadeInScaleUpTransition from '../../../styles/_transitions/fade-in-scale-
 export default c([
   ({ props }) => {
     const {
-      easeOutCubicBezier
+      cubicBezierEaseOut
     } = props.$base
     const {
       color
@@ -34,8 +34,8 @@ export default c([
         fadeInTransition({
           enterDuration: '.25s',
           leaveDuration: '.25s',
-          enterCubicBezier: easeOutCubicBezier,
-          leaveCubicBezier: easeOutCubicBezier
+          enterCubicBezier: cubicBezierEaseOut,
+          leaveCubicBezier: cubicBezierEaseOut
         })
       ]),
       cB('modal-body-wrapper', {

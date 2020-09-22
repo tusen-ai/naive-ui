@@ -16,11 +16,11 @@ export default create({
       railColorOverlay
     } = derived
     const {
-      strongFontWeight
+      fontWeightStrong
     } = base
     return {
       ...sizeVariables,
-      headerFontWeight: strongFontWeight,
+      headerFontWeight: fontWeightStrong,
       circleBorderColor: textColorTertiary,
       circleBorderColorInfo: infoColor,
       circleBorderColorError: errorColor,

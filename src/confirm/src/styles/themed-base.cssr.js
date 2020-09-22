@@ -3,7 +3,7 @@ import { c, cTB, cB, cE, cM } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const base = props.$base
-    const easeInOutCubicBezier = base.easeInOutCubicBezier
+    const cubicBezierEaseInOut = base.cubicBezierEaseInOut
     const {
       titleTextColor,
       textColor,
@@ -32,8 +32,8 @@ export default c([
           padding-top: 16px;
         `,
         transition: `
-          background-color .3s ${easeInOutCubicBezier},
-          color .3s ${easeInOutCubicBezier}
+          background-color .3s ${cubicBezierEaseInOut},
+          color .3s ${cubicBezierEaseInOut}
         `
       },
       [
@@ -54,7 +54,7 @@ export default c([
         }),
         cB('confirm-title', {
           raw: `
-            transition: color .3s ${easeInOutCubicBezier};
+            transition: color .3s ${cubicBezierEaseInOut};
             display: flex;
             justify-content: space-between;
             align-items: center;

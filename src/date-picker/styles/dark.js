@@ -12,7 +12,7 @@ export default create({
       itemSupColorMatch: derived.popoverColor,
       itemColorHover: changeColor(derived.primaryColor, { alpha: 0.5 }),
       itemColorActive: derived.primaryColor,
-      itemBorderRadius: base.smallBorderRadius,
+      itemBorderRadius: base.borderRadiusSmall,
       panelColor: derived.popoverColor,
       panelTextColor: derived.textColorSecondaryOverlay,
       panelIconColor: derived.iconColorOverlay,
@@ -21,7 +21,7 @@ export default create({
       panelBorderRadius: base.borderRadius,
       panelBoxShadow: derived.popoverBoxShadow,
       pickerTextDecorationColor: derived.textColorSecondaryOverlay,
-      panelHeaderFontWeight: base.strongFontWeight
+      panelHeaderFontWeight: base.fontWeightStrong
     }
   }
 })

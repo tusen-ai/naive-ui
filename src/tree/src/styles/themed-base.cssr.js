@@ -5,7 +5,7 @@ import iconSwitchTransition from '../../../styles/_transitions/icon-switch'
 export default c([
   ({ props }) => {
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     const {
       nodeColorHover,
@@ -14,7 +14,7 @@ export default c([
       arrowColor,
       nodeTextColor,
       nodeTextColorDisabled,
-      smallBorderRadius
+      borderRadiusSmall
     } = props.$local
     return [
       cTB('tree', {
@@ -60,7 +60,7 @@ export default c([
             width: 24px;
             align-items: center;
             justify-content: center;
-            transition: transform .15s ${easeInOutCubicBezier};
+            transition: transform .15s ${cubicBezierEaseInOut};
             vertical-align: bottom;
           `
         }, [
@@ -130,15 +130,15 @@ export default c([
             vertical-align: bottom;
             padding: 0 6px;
             cursor: pointer;
-            border-radius: ${smallBorderRadius};
+            border-radius: ${borderRadiusSmall};
             text-decoration-color: transparent;
             text-decoration-line: underline;
             color: ${nodeTextColor};
             transition:
-              color .3s ${easeInOutCubicBezier},
-              text-decoration-color .3s ${easeInOutCubicBezier},
-              background-color .3s ${easeInOutCubicBezier},
-              border-color .3s ${easeInOutCubicBezier};
+              color .3s ${cubicBezierEaseInOut},
+              text-decoration-color .3s ${cubicBezierEaseInOut},
+              background-color .3s ${cubicBezierEaseInOut},
+              border-color .3s ${cubicBezierEaseInOut};
           `
         }, [
           c('&:last-child', {
@@ -160,7 +160,7 @@ export default c([
             raw: `
               line-height: 1.25;
               border-bottom: 1px solid transparent;
-              transition: border-color .3s ${easeInOutCubicBezier};
+              transition: border-color .3s ${cubicBezierEaseInOut};
             `
           }),
           cM('block', {

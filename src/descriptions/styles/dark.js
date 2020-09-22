@@ -15,13 +15,13 @@ export default create({
     } = derived
     const {
       borderRadius,
-      strongFontWeight
+      fontWeightStrong
     } = base
     return {
       ...commonVariables,
       headerColor: tableHeaderColorOverlay,
       headerTextColor: textColorPrimaryOverlay,
-      headerFontWeight: strongFontWeight,
+      headerFontWeight: fontWeightStrong,
       contentTextColor: textColorSecondaryOverlay,
       contentColor: cardColor,
       contentColorModal: modalColor,

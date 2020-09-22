@@ -6,7 +6,7 @@ import iconSwitchTransition from '../../../../styles/_transitions/icon-switch'
 export default c([
   ({ props }) => {
     const {
-      easeInOutCubicBezier,
+      cubicBezierEaseInOut,
       transformDebounceScale
     } = props.$base
     const {
@@ -21,8 +21,8 @@ export default c([
       cB('step-splitor', {
         raw: `
           transition:
-            color .3s ${easeInOutCubicBezier},
-            background-color .3s ${easeInOutCubicBezier};
+            color .3s ${cubicBezierEaseInOut},
+            background-color .3s ${cubicBezierEaseInOut};
           height: 1px;
           flex: 1;
           align-self: flex-start;
@@ -36,8 +36,8 @@ export default c([
         cB('step-content-header', {
           raw: `
             transition:
-              color .3s ${easeInOutCubicBezier},
-              background-color .3s ${easeInOutCubicBezier};
+              color .3s ${cubicBezierEaseInOut},
+              background-color .3s ${cubicBezierEaseInOut};
             position: relative;
             display: flex;
             font-weight: ${stepHeaderFontWeight};
@@ -52,8 +52,8 @@ export default c([
         cE('description', {
           raw: `
             transition:
-              color .3s ${easeInOutCubicBezier},
-              background-color .3s ${easeInOutCubicBezier};
+              color .3s ${cubicBezierEaseInOut},
+              background-color .3s ${cubicBezierEaseInOut};
             margin-top: 12px;
             margin-left: 9px;
           `
@@ -62,8 +62,8 @@ export default c([
       cB('step-indicator', {
         raw: `
           transition:
-            background-color .3s ${easeInOutCubicBezier},
-            box-shadow .3s ${easeInOutCubicBezier};
+            background-color .3s ${cubicBezierEaseInOut},
+            box-shadow .3s ${cubicBezierEaseInOut};
           display: flex;
           align-items: center;
           justify-content: center;
@@ -76,7 +76,7 @@ export default c([
             raw: `
               display: inline-block;
               text-align: center;
-              transition: color .3s ${easeInOutCubicBezier};
+              transition: color .3s ${cubicBezierEaseInOut};
               position: absolute;
               left: 0;
               top: 0;

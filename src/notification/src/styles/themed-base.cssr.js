@@ -59,7 +59,7 @@ export default c([
   ]),
   ({ props }) => {
     const {
-      easeOutCubicBezier
+      cubicBezierEaseOut
     } = props.$base
     const {
       color,
@@ -80,13 +80,13 @@ export default c([
           background-color: ${color};
           color: ${textColor};
           transition:
-            background-color .3s ${easeOutCubicBezier},
-            color .3s ${easeOutCubicBezier},
-            opacity .3s ${easeOutCubicBezier},
-            transform .3s ${easeOutCubicBezier},
-            max-height .3s ${easeOutCubicBezier},
+            background-color .3s ${cubicBezierEaseOut},
+            color .3s ${cubicBezierEaseOut},
+            opacity .3s ${cubicBezierEaseOut},
+            transform .3s ${cubicBezierEaseOut},
+            max-height .3s ${cubicBezierEaseOut},
             margin-bottom .3s linear,
-            box-shadow .3s ${easeOutCubicBezier};
+            box-shadow .3s ${cubicBezierEaseOut};
           font-family: inherit;
           font-size: 14px;
           font-weight: 400;
@@ -203,14 +203,14 @@ export default c([
             cE('meta', {
               raw: `
                 font-size: 12px;
-                transition: color .3s ${easeOutCubicBezier};
+                transition: color .3s ${cubicBezierEaseOut};
                 color: ${descriptionTextColor};
               `
             }),
             cE('action', {
               raw: `
                 cursor: pointer;
-                transition: color .3s ${easeOutCubicBezier};
+                transition: color .3s ${cubicBezierEaseOut};
                 color: ${actionTextColor};
               `
             })
@@ -219,7 +219,7 @@ export default c([
             raw: `
               font-weight: ${headerFontWeight};
               font-size: 16px;
-              transition: color .3s ${easeOutCubicBezier};
+              transition: color .3s ${cubicBezierEaseOut};
               color: ${headerTextColor};
             `
           }),
@@ -227,7 +227,7 @@ export default c([
             raw: `
               margin-top: 8px;
               font-size: 12px;
-              transition: color .3s ${easeOutCubicBezier};
+              transition: color .3s ${cubicBezierEaseOut};
               color: ${descriptionTextColor};
             `
           }),
@@ -238,7 +238,7 @@ export default c([
               font-family: inherit;
               white-space: pre-wrap;
               word-wrap: break-word;
-              transition: color .3s ${easeOutCubicBezier};
+              transition: color .3s ${cubicBezierEaseOut};
               color: ${contentTextColor};
             `
           }, [

@@ -9,12 +9,12 @@ export default create({
       textColorSecondary
     } = derived
     const {
-      strongFontWeight
+      fontWeightStrong
     } = base
     return {
       headerTextColor: textColorPrimary,
       textColor: textColorSecondary,
-      headerFontWeight: strongFontWeight
+      headerFontWeight: fontWeightStrong
     }
   }
 })

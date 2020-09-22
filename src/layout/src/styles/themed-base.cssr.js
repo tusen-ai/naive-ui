@@ -7,7 +7,7 @@ export default c([
       color
     } = props.$local
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     return cTB('layout', {
       raw: `
@@ -17,9 +17,9 @@ export default c([
         position: relative;
         z-index: auto;
         transition:
-          margin-left .3s ${easeInOutCubicBezier},
-          background-color .3s ${easeInOutCubicBezier},
-          color .3s ${easeInOutCubicBezier};
+          margin-left .3s ${cubicBezierEaseInOut},
+          background-color .3s ${cubicBezierEaseInOut},
+          color .3s ${cubicBezierEaseInOut};
         flex: auto;
         overflow-x: hidden;
       `
@@ -55,14 +55,14 @@ export default c([
       headerBorderColor
     } = props.$local
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     return cTB('layout-header', {
       raw: `
         transition:
-          background-color .3s ${easeInOutCubicBezier},
-          box-shadow .3s ${easeInOutCubicBezier},
-          border-color .3s ${easeInOutCubicBezier};
+          background-color .3s ${cubicBezierEaseInOut},
+          box-shadow .3s ${cubicBezierEaseInOut},
+          border-color .3s ${cubicBezierEaseInOut};
         box-sizing: border-box;
         width: 100%;
         background-color: ${headerColor};
@@ -77,14 +77,14 @@ export default c([
   },
   ({ props }) => {
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     return cTB('layout-content', {
       raw: `
         transition:
-          margin-left .3s ${easeInOutCubicBezier},
-          background-color .3s ${easeInOutCubicBezier},
-          color .3s ${easeInOutCubicBezier};
+          margin-left .3s ${cubicBezierEaseInOut},
+          background-color .3s ${cubicBezierEaseInOut},
+          color .3s ${cubicBezierEaseInOut};
         box-sizing: border-box;
         position: relative;
         z-index: auto;
@@ -96,13 +96,13 @@ export default c([
       footerBorderColor
     } = props.$local
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     return cTB('layout-footer', {
       raw: `
         transition:
-          background-color .3s ${easeInOutCubicBezier},
-          border-color .3s ${easeInOutCubicBezier};
+          background-color .3s ${cubicBezierEaseInOut},
+          border-color .3s ${cubicBezierEaseInOut};
         box-sizing: border-box;
       `
     }, [
@@ -130,7 +130,7 @@ export default c([
       siderToggleBarColorHover
     } = props.$local
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     return cTB('layout-sider', {
       raw: `
@@ -138,10 +138,10 @@ export default c([
         position: relative;
         z-index: auto;
         transition:
-          min-width .3s ${easeInOutCubicBezier},
-          max-width .3s ${easeInOutCubicBezier},
-          transform .3s ${easeInOutCubicBezier},
-          background-color .3s ${easeInOutCubicBezier};
+          min-width .3s ${cubicBezierEaseInOut},
+          max-width .3s ${cubicBezierEaseInOut},
+          transform .3s ${cubicBezierEaseInOut},
+          background-color .3s ${cubicBezierEaseInOut};
         background-color: ${siderColor};
       `
     }, [
@@ -149,8 +149,8 @@ export default c([
         raw: `
           z-index: 1;
           transition:
-            transform .3s ${easeInOutCubicBezier},
-            fill .3s ${easeInOutCubicBezier};
+            transform .3s ${cubicBezierEaseInOut},
+            fill .3s ${cubicBezierEaseInOut};
           cursor: pointer;
           width: 36px;
           height: 36px;
@@ -179,8 +179,8 @@ export default c([
             height: 38px;
             left: 14px;
             transition: 
-              background-color .3s ${easeInOutCubicBezier},
-              transform .3s ${easeInOutCubicBezier};
+              background-color .3s ${cubicBezierEaseInOut},
+              transform .3s ${cubicBezierEaseInOut};
           `
         }),
         cE('bottom', {
@@ -235,13 +235,13 @@ export default c([
           right: 0;
           bottom: 0;
           width: 1px;
-          transition: background-color .3s ${easeInOutCubicBezier};
+          transition: background-color .3s ${cubicBezierEaseInOut};
         `
       }),
       cE('content', {
         raw: `
           opacity: 0;
-          transition: opacity .3s ${easeInOutCubicBezier};
+          transition: opacity .3s ${cubicBezierEaseInOut};
         `
       }),
       cM('show-content', [

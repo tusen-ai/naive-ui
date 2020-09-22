@@ -8,15 +8,15 @@ export default c([
       footerBorderColor
     } = props.$local
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     return [
       cTB('layout-header', {
         raw: `
           transition:
-            background-color .3s ${easeInOutCubicBezier},
-            box-shadow .3s ${easeInOutCubicBezier},
-            border-color .3s ${easeInOutCubicBezier};
+            background-color .3s ${cubicBezierEaseInOut},
+            box-shadow .3s ${cubicBezierEaseInOut},
+            border-color .3s ${cubicBezierEaseInOut};
           box-sizing: border-box;
           width: 100%;
           background-color: ${headerColor};
@@ -31,8 +31,8 @@ export default c([
       cTB('layout-footer', {
         raw: `
           transition:
-            background-color .3s ${easeInOutCubicBezier},
-            border-color .3s ${easeInOutCubicBezier};
+            background-color .3s ${cubicBezierEaseInOut},
+            border-color .3s ${cubicBezierEaseInOut};
           box-sizing: border-box;
         `
       }, [

@@ -16,22 +16,22 @@ export default create({
 
         textColor: derived.textColorSecondary,
         textColorHover: derived.primaryColorHover,
-        textColorActive: derived.primaryColorActive,
+        textColorActive: derived.primaryColorPressed,
         textColorFocus: derived.primaryColorHover,
 
         textTypedTextColor: derived.textColorSecondary,
         textTypedTextColorHover: derived.primaryColorHover,
-        textTypedTextColorActive: derived.primaryColorActive,
+        textTypedTextColorActive: derived.primaryColorPressed,
         textTypedTextColorFocus: derived.primaryColorHover,
 
         ghostTypedTextColor: derived.textColorSecondary,
         ghostTypedTextColorHover: derived.primaryColorHover,
-        ghostTypedTextColorActive: derived.primaryColorActive,
+        ghostTypedTextColorActive: derived.primaryColorPressed,
         ghostTypedTextColorFocus: derived.primaryColorHover,
 
         borderColor: derived.borderColor,
         borderColorHover: derived.primaryColorHover,
-        borderColorActive: derived.primaryColorActive,
+        borderColorActive: derived.primaryColorPressed,
         borderColorFocus: derived.primaryColorHover,
 
         rippleColor: derived.primaryColor,
@@ -41,35 +41,35 @@ export default create({
       primary: {
         color: derived.primaryColor,
         colorHover: derived.primaryColorHover,
-        colorActive: derived.primaryColorActive,
+        colorActive: derived.primaryColorPressed,
         colorFocus: derived.primaryColorHover,
         textColor: derived.baseColor
       },
       info: {
         color: derived.infoColor,
         colorHover: derived.infoColorHover,
-        colorActive: derived.infoColorActive,
+        colorActive: derived.infoColorPressed,
         colorFocus: derived.infoColorHover,
         textColor: derived.baseColor
       },
       success: {
         color: derived.successColor,
         colorHover: derived.successHoverColor,
-        colorActive: derived.successActiveColor,
+        colorActive: derived.successColorPressed,
         colorFocus: derived.successHoverColor,
         textColor: derived.baseColor
       },
       warning: {
         color: derived.warningColor,
         colorHover: derived.warningColorHover,
-        colorActive: derived.warningColorActive,
+        colorActive: derived.warningColorPressed,
         colorFocus: derived.warningColorHover,
         textColor: derived.baseColor
       },
       error: {
         color: derived.errorColor,
         colorHover: derived.errorColorHover,
-        colorActive: derived.errorColorActive,
+        colorActive: derived.errorColorPressed,
         colorFocus: derived.errorColorHover,
         textColor: derived.baseColor
       }

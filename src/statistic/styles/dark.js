@@ -9,11 +9,11 @@ export default create({
       textColorPrimaryOverlay
     } = derived
     const {
-      strongFontWeight
+      fontWeightStrong
     } = base
     return {
-      labelFontWeight: strongFontWeight,
-      valueFontWeight: strongFontWeight,
+      labelFontWeight: fontWeightStrong,
+      valueFontWeight: fontWeightStrong,
       labelTextColor: textColorSecondaryOverlay,
       valuePrefixTextColor: textColorPrimaryOverlay,
       valueSuffixTextColor: textColorPrimaryOverlay,

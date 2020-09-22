@@ -10,8 +10,8 @@ export default c([
       loaderBorderColor
     } = props.$local
     const {
-      easeInOutCubicBezier,
-      monoFontFamily
+      cubicBezierEaseInOut,
+      fontFamilyMono
     } = props.$base
     return cTB('log', {
       raw: `
@@ -20,8 +20,8 @@ export default c([
         box-sizing: border-box;
         color: ${textColor};
         transition:
-          border-color .3s ${easeInOutCubicBezier},
-          color .3s ${easeInOutCubicBezier};
+          border-color .3s ${cubicBezierEaseInOut},
+          color .3s ${cubicBezierEaseInOut};
       `
     }, [
       cE('lines', {
@@ -32,16 +32,16 @@ export default c([
       }),
       cE('line', {
         raw: `
-          font-family: ${monoFontFamily};
+          font-family: ${fontFamilyMono};
           margin: 0;
         `
       }),
       cB('log-loader', {
         raw: `
           transition:
-            color .3s ${easeInOutCubicBezier},
-            background-color .3s ${easeInOutCubicBezier},
-            border-color .3s ${easeInOutCubicBezier};
+            color .3s ${cubicBezierEaseInOut},
+            background-color .3s ${cubicBezierEaseInOut},
+            border-color .3s ${cubicBezierEaseInOut};
           box-sizing: border-box;
           position: absolute;
           right: 16px;

@@ -15,10 +15,10 @@ export default create({
       titleTextColor: derived.textColorPrimary,
       borderColor: derived.dividerColorOverlay,
       actionColor: derived.actionColorOverlay,
-      titleFontWeight: base.strongFontWeight,
+      titleFontWeight: base.fontWeightStrong,
       closeColor: derived.closeColor,
-      closeColorHover: derived.closeHoverColor,
-      closeColorActive: derived.closeActiveColor,
+      closeColorHover: derived.closeColorHover,
+      closeColorActive: derived.closeColorPressed,
       borderRadius
     }
   }

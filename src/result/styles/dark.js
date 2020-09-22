@@ -15,12 +15,12 @@ export default create({
     } = derived
     const {
       lineHeight,
-      strongFontWeight
+      fontWeightStrong
     } = base
     return {
       ...sizeVariables,
       lineHeight,
-      headerFontWeight: strongFontWeight,
+      headerFontWeight: fontWeightStrong,
       headerTextColor: textColorPrimaryOverlay,
       descriptionTextColor: textColorSecondaryOverlay,
       iconColorError: errorColor,

@@ -3,7 +3,7 @@ import { c, cTB, cB, cE } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const base = props.$base
-    const easeInOutCubicBezier = base.easeInOutCubicBezier
+    const cubicBezierEaseInOut = base.cubicBezierEaseInOut
     const {
       separatorColor,
       itemTextColor,
@@ -17,7 +17,7 @@ export default c([
       }, [
         cB('breadcrumb-item', {
           transition: `
-            color .3s ${easeInOutCubicBezier}
+            color .3s ${cubicBezierEaseInOut}
           `
         }, [
           cB('icon', {
@@ -32,13 +32,13 @@ export default c([
             raw: `
               cursor: pointer;
             `,
-            transition: `color .3s ${easeInOutCubicBezier}`,
+            transition: `color .3s ${cubicBezierEaseInOut}`,
             color: itemTextColor
           }),
           cE('separator', {
             margin: '0 4px',
             color: separatorColor,
-            transition: `color .3s ${easeInOutCubicBezier}`
+            transition: `color .3s ${cubicBezierEaseInOut}`
           }),
           c('&:hover', [
             cB('icon', {

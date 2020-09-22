@@ -24,12 +24,12 @@ export default c([
       borderRadius
     } = props.$local
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     return cTB('menu', {
       color: itemTextColor,
       overflow: 'hidden',
-      transition: `background-color .3s ${easeInOutCubicBezier}`,
+      transition: `background-color .3s ${cubicBezierEaseInOut}`,
       width: '100%',
       boxSizing: 'border-box',
       fontSize: '14px',
@@ -106,24 +106,24 @@ export default c([
         ])
       ]),
       cB('menu-item', {
-        transition: `background-color .3s ${easeInOutCubicBezier}`,
+        transition: `background-color .3s ${cubicBezierEaseInOut}`,
         height: '42px',
         marginTop: '6px',
         position: 'relative'
       }, [
         c('&::after', {
           raw: `
-              content: "";
-              background-color: transparent;
-              position: absolute;
-              left: 8px;
-              right: 8px;
-              top: 0;
-              bottom: 0;
-              pointer-events: none;
-            `,
+            content: "";
+            background-color: transparent;
+            position: absolute;
+            left: 8px;
+            right: 8px;
+            top: 0;
+            bottom: 0;
+            pointer-events: none;
+          `,
           borderRadius,
-          transition: `background-color .3s ${easeInOutCubicBezier}`
+          transition: `background-color .3s ${cubicBezierEaseInOut}`
         }),
         cNotM('disabled', [
           c('&:active::after', {
@@ -153,20 +153,20 @@ export default c([
       ]),
       cB('menu-item-content', {
         raw: `
-            box-sizing: border-box;
-            line-height: 1.75;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            position: relative;
-            z-index: auto;
-            padding-right: 12px;
-            transition:
-              background-color .3s ${easeInOutCubicBezier},
-              padding-left .3s ${easeInOutCubicBezier},
-              border-color .3s ${easeInOutCubicBezier};
-          `
+          box-sizing: border-box;
+          line-height: 1.75;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          position: relative;
+          z-index: auto;
+          padding-right: 12px;
+          transition:
+            background-color .3s ${cubicBezierEaseInOut},
+            padding-left .3s ${cubicBezierEaseInOut},
+            border-color .3s ${cubicBezierEaseInOut};
+        `
       }, [
         cM('disabled', {
           opacity: '.45',
@@ -175,10 +175,10 @@ export default c([
         cM('collapsed', [
           cE('arrow', {
             transition: `
-                transform 0.2s ${easeInOutCubicBezier},
-                opacity 0.2s ${easeInOutCubicBezier},
-                border-color 0.3s ${easeInOutCubicBezier}
-              `,
+              transform 0.2s ${cubicBezierEaseInOut},
+              opacity 0.2s ${cubicBezierEaseInOut},
+              border-color 0.3s ${cubicBezierEaseInOut}
+            `,
             transform: 'rotate(225deg)'
           })
         ]),
@@ -221,16 +221,16 @@ export default c([
         ]),
         cE('icon', {
           raw: `
-              transition:
-                font-size .3s ${easeInOutCubicBezier},
-                padding-right .3s ${easeInOutCubicBezier};
-              box-sizing: content-box;
-              flex-shrink: 0;
-              padding-right: 8px;
-              display: inline-flex;
-              align-items: center;
-              justify-content: center;
-            `
+            transition:
+              font-size .3s ${cubicBezierEaseInOut},
+              padding-right .3s ${cubicBezierEaseInOut};
+            box-sizing: content-box;
+            flex-shrink: 0;
+            padding-right: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+          `
         }, [
           cB('icon', {
             fill: itemIconColor,
@@ -239,28 +239,29 @@ export default c([
         ]),
         cE('arrow', {
           raw: `
-              content: '';
-              height: 6px;
-              width: 6px;
-              position: absolute;
-              right: 24px;
-              top: calc(50% - 2px);
-              transform: rotate(45deg);
-              transform-origin: 25% 25%;
-              opacity: 1;
-            `,
+            content: '';
+            height: 6px;
+            width: 6px;
+            position: absolute;
+            right: 24px;
+            top: calc(50% - 2px);
+            transform: rotate(45deg);
+            transform-origin: 25% 25%;
+            opacity: 1;
+          `,
           borderLeft: `2px solid ${submenuArrowColor}`,
           borderTop: `2px solid ${submenuArrowColor}`,
           transition: `
-              transform 0.2s ${easeInOutCubicBezier},
-              opacity 0.2s ${easeInOutCubicBezier} .1s,
-              border-color 0.3s ${easeInOutCubicBezier}`
+            transform 0.2s ${cubicBezierEaseInOut},
+            opacity 0.2s ${cubicBezierEaseInOut} .1s,
+            border-color 0.3s ${cubicBezierEaseInOut}
+          `
         }),
         cB('menu-item-content-header', {
           raw: `
               transition:
-                color .3s ${easeInOutCubicBezier},
-                opacity .3s ${easeInOutCubicBezier};
+                color .3s ${cubicBezierEaseInOut},
+                opacity .3s ${cubicBezierEaseInOut};
               opacity: 1;
               flex-grow: 1;
               flex-shrink: 1;
@@ -272,12 +273,12 @@ export default c([
         }, [
           cE('extra', {
             raw: `
-                white-space: nowrap;
-                margin-left: 6px;
-                display: inline-block;
-                transition: color 0.3s ${easeInOutCubicBezier};
-                font-size: 13px;
-              `,
+              white-space: nowrap;
+              margin-left: 6px;
+              display: inline-block;
+              transition: color 0.3s ${cubicBezierEaseInOut};
+              font-size: 13px;
+            `,
             color: itemExtraTextColor
           })
         ])
@@ -302,17 +303,17 @@ export default c([
       cB('menu-item-group', [
         cB('menu-item-group-title', {
           raw: `
-              margin-top: 6px;
-              color: ${groupTextColor};
-              cursor: default;
-              font-size: 13px;
-              height: 36px;
-              display: flex;
-              align-items: center;
-              transition:
-                padding-left .3s ${easeInOutCubicBezier},
-                color .3s ${easeInOutCubicBezier};
-            `
+            margin-top: 6px;
+            color: ${groupTextColor};
+            cursor: default;
+            font-size: 13px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            transition:
+              padding-left .3s ${cubicBezierEaseInOut},
+              color .3s ${cubicBezierEaseInOut};
+          `
         })
       ])
     ])

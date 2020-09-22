@@ -22,7 +22,7 @@ export default create({
       headerExtraTextColor: derived.textColorSecondaryOverlay,
       buttonColor: 'rgba(255, 255, 255, 0.3)',
       buttonColorHover: derived.primaryColorHover,
-      buttonColorActive: derived.primaryColorActive,
+      buttonColorActive: derived.primaryColorPressed,
       buttonColorDisabled: 'rgba(255, 255, 255, 0.15)',
       filterBorderColor: derived.dividerColorOverlay,
       itemTextColor: derived.textColorSecondaryOverlay,

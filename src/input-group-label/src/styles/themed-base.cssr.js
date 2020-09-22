@@ -3,7 +3,7 @@ import { cTB, c } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     const {
       borderRadius,
@@ -21,9 +21,9 @@ export default c([
       color: textColor,
       boxShadow,
       transition: `
-        color .3s ${easeInOutCubicBezier},
-        background-color .3s ${easeInOutCubicBezier},
-        box-shadow .3s ${easeInOutCubicBezier}
+        color .3s ${cubicBezierEaseInOut},
+        background-color .3s ${cubicBezierEaseInOut},
+        box-shadow .3s ${cubicBezierEaseInOut}
       `
     })
   }

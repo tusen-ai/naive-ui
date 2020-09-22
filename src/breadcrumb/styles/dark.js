@@ -7,7 +7,7 @@ export default create({
     return {
       itemTextColor: derived.textColorTertiaryOverlay,
       itemTextColorHover: derived.primaryColorHover,
-      itemTextColorActive: derived.primaryColorActive,
+      itemTextColorActive: derived.primaryColorPressed,
       itemTextColorMatch: derived.textColorSecondaryOverlay,
       separatorColor: derived.textColorTertiaryOverlay
     }

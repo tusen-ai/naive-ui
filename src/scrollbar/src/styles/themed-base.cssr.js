@@ -8,7 +8,7 @@ export default c([
       colorHover
     } = props.$local
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     return cTB('scrollbar', {
       raw: `
@@ -96,7 +96,7 @@ export default c([
                 cursor: pointer;
                 pointer-events: all;
                 background-color: ${color};
-                transition: background-color .2s ${easeInOutCubicBezier};
+                transition: background-color .2s ${cubicBezierEaseInOut};
               `
             }, [
               fadeInTransition(),

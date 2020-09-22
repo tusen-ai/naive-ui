@@ -17,7 +17,7 @@ export default c([
       itemBorderRadius
     } = props.$local
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     return cTB('pagination', {
       raw: `
@@ -43,7 +43,7 @@ export default c([
           display: flex;
           width: 110px;
           line-height: 28px;
-          transition: color .3s ${easeInOutCubicBezier};
+          transition: color .3s ${cubicBezierEaseInOut};
         `,
         color: itemTextColor
       }, [
@@ -72,11 +72,11 @@ export default c([
           box-sizing: border-box;
           opacity: 1;
           transition:
-            color .3s ${easeInOutCubicBezier},
-            box-shadow .3s ${easeInOutCubicBezier},
-            background-color .3s ${easeInOutCubicBezier},
-            opacity .3s ${easeInOutCubicBezier},
-            fill .3s ${easeInOutCubicBezier};
+            color .3s ${cubicBezierEaseInOut},
+            box-shadow .3s ${cubicBezierEaseInOut},
+            background-color .3s ${cubicBezierEaseInOut},
+            opacity .3s ${cubicBezierEaseInOut},
+            fill .3s ${cubicBezierEaseInOut};
           display: flex;
           align-items: center;
           justify-content: center;

@@ -14,7 +14,7 @@ export default create({
       textColorSecondaryOverlay
     } = derived
     const {
-      strongFontWeight,
+      fontWeightStrong,
       borderRadius
     } = base
     return {
@@ -26,7 +26,7 @@ export default create({
       headerTextColor: textColorPrimaryOverlay,
       bodyTextColor: textColorSecondaryOverlay,
       borderRadius,
-      headFontWeight: strongFontWeight
+      headFontWeight: fontWeightStrong
     }
   }
 })

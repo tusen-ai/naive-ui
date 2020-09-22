@@ -13,7 +13,7 @@ export default create({
       infoColor
     } = derived
     return {
-      fontWeight: base.strongFontWeight,
+      fontWeight: base.fontWeightStrong,
       backgroundImagePrimary: `linear-gradient(252deg, ${changeColor(primaryColor, { alpha: 0.6 })} 0%, ${primaryColor} 100%)`,
       backgroundImageSuccess: `linear-gradient(252deg, ${changeColor(successColor, { alpha: 0.6 })} 0%, ${successColor} 100%)`,
       backgroundImageWarning: ` linear-gradient(252deg, ${changeColor(warningColor, { alpha: 0.6 })} 0%, ${warningColor} 100%)`,

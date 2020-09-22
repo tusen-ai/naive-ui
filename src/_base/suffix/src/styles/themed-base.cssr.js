@@ -32,7 +32,7 @@ export default c([
     const base = props.$base
     const iconSwitchTransition = createIconSwitchTransition()
     const transformDebounceScale = base.transformDebounceScale
-    const easeInOutCubicBezier = base.easeInOutCubicBezier
+    const cubicBezierEaseInOut = base.cubicBezierEaseInOut
     const pallete = props.$local.default
     return [
       cTB('base-suffix', {
@@ -68,7 +68,7 @@ export default c([
         }, [
           iconSwitchTransition,
           cE('icon', {
-            transition: `fill .3s ${base.easeInOutCubicBezier}`,
+            transition: `fill .3s ${base.cubicBezierEaseInOut}`,
             fill: pallete.crossColor
           }),
           c('&:hover', [
@@ -99,8 +99,8 @@ export default c([
           c('&::after', {
             raw: `
               transition:
-                transform .3s ${easeInOutCubicBezier},
-                border-color .3s ${easeInOutCubicBezier};
+                transform .3s ${cubicBezierEaseInOut},
+                border-color .3s ${cubicBezierEaseInOut};
               position: absolute;
               content: '';
               box-sizing: border-box;

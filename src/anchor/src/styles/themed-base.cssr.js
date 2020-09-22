@@ -12,7 +12,7 @@ export default c([
       linkTextColorMatch
     } = props.$local
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     return cTB('anchor', {
       raw: `
@@ -31,9 +31,9 @@ export default c([
         `,
         backgroundColor: linkColor,
         transition: `
-          top .15s ${easeInOutCubicBezier},
-          max-width .15s ${easeInOutCubicBezier},
-          background-color .3s ${easeInOutCubicBezier}
+          top .15s ${cubicBezierEaseInOut},
+          max-width .15s ${cubicBezierEaseInOut},
+          background-color .3s ${cubicBezierEaseInOut}
         `
       }),
       cB('anchor-rail', {
@@ -46,7 +46,7 @@ export default c([
           border-radius: 2px;
           overflow: hidden;
         `,
-        transition: `background-color .3s ${easeInOutCubicBezier}`,
+        transition: `background-color .3s ${cubicBezierEaseInOut}`,
         backgroundColor: railColor
       }, [
         cE('bar', {
@@ -58,8 +58,8 @@ export default c([
             background-color: transparent;
           `,
           transition: `
-            top .15s ${easeInOutCubicBezier},
-            background-color .3s ${easeInOutCubicBezier}
+            top .15s ${cubicBezierEaseInOut},
+            background-color .3s ${cubicBezierEaseInOut}
           `
         }, [
           cM('active', {
@@ -101,7 +101,7 @@ export default c([
             display: inline-block;
             padding-right: 16px;
           `,
-          transition: `color .3s ${easeInOutCubicBezier}`,
+          transition: `color .3s ${cubicBezierEaseInOut}`,
           color: linkTextColor
         }, [
           c('&:hover, &:focus', {

@@ -7,7 +7,7 @@ export default c([
       color
     } = props.$local
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     return [
       cTB('layout', {
@@ -18,9 +18,9 @@ export default c([
         position: relative;
         z-index: auto;
         transition:
-          margin-left .3s ${easeInOutCubicBezier},
-          background-color .3s ${easeInOutCubicBezier},
-          color .3s ${easeInOutCubicBezier};
+          margin-left .3s ${cubicBezierEaseInOut},
+          background-color .3s ${cubicBezierEaseInOut},
+          color .3s ${cubicBezierEaseInOut};
         flex: auto;
         overflow-x: hidden;
       `
@@ -52,9 +52,9 @@ export default c([
       cTB('layout-content', {
         raw: `
           transition:
-            margin-left .3s ${easeInOutCubicBezier},
-            background-color .3s ${easeInOutCubicBezier},
-            color .3s ${easeInOutCubicBezier};
+            margin-left .3s ${cubicBezierEaseInOut},
+            background-color .3s ${cubicBezierEaseInOut},
+            color .3s ${cubicBezierEaseInOut};
           box-sizing: border-box;
           position: relative;
           z-index: auto;

@@ -2,7 +2,7 @@ import { c, cTB, cNotM, cE, cM } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
-    const { easeInOutCubicBezier } = props.$base
+    const { cubicBezierEaseInOut } = props.$base
     const {
       textColor,
       color,
@@ -20,8 +20,8 @@ export default c([
             font-size: 16px;
             color: ${textColor};
             transition:
-              color .3s ${easeInOutCubicBezier},
-              background-color .3s ${easeInOutCubicBezier};
+              color .3s ${cubicBezierEaseInOut},
+              background-color .3s ${cubicBezierEaseInOut};
           `
         },
         [
@@ -90,7 +90,7 @@ export default c([
           cE('line', {
             raw: `
               border: none;
-              transition: background-color .3s ${easeInOutCubicBezier}, border-color .3s ${easeInOutCubicBezier};
+              transition: background-color .3s ${cubicBezierEaseInOut}, border-color .3s ${cubicBezierEaseInOut};
               height: 1px;
               width: 100%;
               margin: 0;

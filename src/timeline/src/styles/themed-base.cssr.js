@@ -3,7 +3,7 @@ import { c, cTB, cB, cE, cM, createKey } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     const {
       headerTextColor,
@@ -70,7 +70,7 @@ export default c([
         cB('timeline-item-content', [
           cE('title', {
             raw: `
-              transition: color .3s ${easeInOutCubicBezier};
+              transition: color .3s ${cubicBezierEaseInOut};
               line-height: 1.25;
               font-weight: ${headerFontWeight};
               margin-bottom: 6px;
@@ -79,14 +79,14 @@ export default c([
           }),
           cE('content', {
             raw: `
-              transition: color .3s ${easeInOutCubicBezier};
+              transition: color .3s ${cubicBezierEaseInOut};
               font-size: 14px;
               color: ${contentTextColor};
             `
           }),
           cE('meta', {
             raw: `
-              transition: color .3s ${easeInOutCubicBezier};
+              transition: color .3s ${cubicBezierEaseInOut};
               font-size: 12px;
               margin-top: 6px;
               margin-bottom: 20px;
@@ -106,8 +106,8 @@ export default c([
           cE('circle', {
             raw: `
               transition:
-                background-color .3s ${easeInOutCubicBezier},
-                border-color .3s ${easeInOutCubicBezier};
+                background-color .3s ${cubicBezierEaseInOut},
+                border-color .3s ${cubicBezierEaseInOut};
               width: 14px;
               height: 14px;
               border-radius: 7px;
@@ -118,7 +118,7 @@ export default c([
           }),
           cE('line', {
             raw: `
-              transition: background-color .3s ${easeInOutCubicBezier};
+              transition: background-color .3s ${cubicBezierEaseInOut};
               position: absolute;
               top: 14px;
               left: 6px;

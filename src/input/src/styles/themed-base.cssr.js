@@ -29,7 +29,7 @@ export default c([
       iconOpacityDisabled
     } = props.$local.default
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     return cTB('input', {
       raw: `
@@ -44,8 +44,8 @@ export default c([
       backgroundColor,
       boxShadow,
       transition: `
-        box-shadow .3s ${easeInOutCubicBezier},
-        background-color .3s ${easeInOutCubicBezier}
+        box-shadow .3s ${cubicBezierEaseInOut},
+        background-color .3s ${cubicBezierEaseInOut}
       `
     }, [
       cM('split', {
@@ -120,8 +120,8 @@ export default c([
         border: `1px solid ${borderMaskColor}`,
         borderRadius,
         transition: `
-          border-color .3s ${easeInOutCubicBezier},
-          box-shadow .3s ${easeInOutCubicBezier}
+          border-color .3s ${cubicBezierEaseInOut},
+          box-shadow .3s ${cubicBezierEaseInOut}
         `
       }),
       cE('placeholder', {
@@ -138,7 +138,7 @@ export default c([
           padding-right: 0 !important;
         `,
         color: placeholderColor,
-        transition: `color .3s ${easeInOutCubicBezier}`
+        transition: `color .3s ${cubicBezierEaseInOut}`
       }),
       cE('suffix, prefix', {
         raw: `
@@ -219,8 +219,8 @@ export default c([
           background-color: transparent;
           min-width: 0;
           transition:
-            color .3s ${easeInOutCubicBezier},
-            text-decoration-color .3s ${easeInOutCubicBezier};
+            color .3s ${cubicBezierEaseInOut},
+            text-decoration-color .3s ${cubicBezierEaseInOut};
         `,
         color: textColor,
         caretColor: caretColor
@@ -230,7 +230,7 @@ export default c([
         })
       ]),
       cE('splitor', {
-        transition: `color .3s ${easeInOutCubicBezier}`,
+        transition: `color .3s ${cubicBezierEaseInOut}`,
         color: textColor,
         paddingLeft: '0 !important',
         paddingRight: '0 !important'

@@ -20,7 +20,7 @@ export default c([
       colorCheckedActive
     } = checkable
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     return cTB('tag', {
       raw: `
@@ -33,10 +33,10 @@ export default c([
       `,
       borderRadius,
       transition: `
-        background-color .3s ${easeInOutCubicBezier},
-        color .3s ${easeInOutCubicBezier},
-        box-shadow .3s ${easeInOutCubicBezier},
-        opacity .3s ${easeInOutCubicBezier}
+        background-color .3s ${cubicBezierEaseInOut},
+        color .3s ${cubicBezierEaseInOut},
+        box-shadow .3s ${cubicBezierEaseInOut},
+        opacity .3s ${cubicBezierEaseInOut}
       `
     }, [
       cE('close', {
@@ -67,8 +67,8 @@ export default c([
             position: absolute;
           `,
           transition: `
-            fill .2s ${easeInOutCubicBezier},
-            color .3s ${easeInOutCubicBezier}
+            fill .2s ${cubicBezierEaseInOut},
+            color .3s ${cubicBezierEaseInOut}
           `
         })
       ]),

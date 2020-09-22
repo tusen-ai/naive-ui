@@ -5,7 +5,7 @@ import createIconSwitchTransition from '../../../styles/_transitions/icon-switch
 export default c([
   ({ props }) => {
     const {
-      easeInOutCubicBezier,
+      cubicBezierEaseInOut,
       borderRadius
     } = props.$base
     const {
@@ -52,8 +52,8 @@ export default c([
           border-radius: ${borderRadius};
           padding: 24px;
           transition:
-            border-color .3s ${easeInOutCubicBezier},
-            background-color .3s ${easeInOutCubicBezier};
+            border-color .3s ${cubicBezierEaseInOut},
+            background-color .3s ${cubicBezierEaseInOut};
           background-color: ${draggerColor};
           border: 1px dashed ${draggerBorderColor};
         `
@@ -76,7 +76,7 @@ export default c([
             box-sizing: border-box;
             cursor: default;
             padding: 0px 12px 0 6px;
-            transition: background-color .3s  ${easeInOutCubicBezier};
+            transition: background-color .3s  ${cubicBezierEaseInOut};
             border-radius: ${borderRadius};
           `
         }, [
@@ -150,7 +150,7 @@ export default c([
                 width: 80px;
                 display: flex;
                 align-items: center;
-                transition: opacity .2s ${easeInOutCubicBezier};
+                transition: opacity .2s ${cubicBezierEaseInOut};
                 flex-direction: row-reverse;
                 opacity: 0;
               `
@@ -171,8 +171,8 @@ export default c([
                 text-decoration-color: transparent;
                 font-size: 14px;
                 transition:
-                  color .3s ${easeInOutCubicBezier},
-                  text-decoration-color .3s ${easeInOutCubicBezier};
+                  color .3s ${cubicBezierEaseInOut},
+                  text-decoration-color .3s ${cubicBezierEaseInOut};
                 color: ${itemTextColor};    
               `
             }, [

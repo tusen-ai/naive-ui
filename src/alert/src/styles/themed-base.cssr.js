@@ -3,18 +3,18 @@ import fadeInHeightExpandTranstion from '../../../styles/_transitions/fade-in-he
 
 export default c([
   ({ props }) => {
-    const { easeInOutCubicBezier } = props.$base
+    const { cubicBezierEaseInOut } = props.$base
     const { borderRadius, titleFontWeight } = props.$local
     return cTB('alert', {
       lineHeight: 1.75,
       borderRadius,
       position: 'relative',
       transition: `
-        background-color .3s ${easeInOutCubicBezier}
+        background-color .3s ${cubicBezierEaseInOut}
       `
     }, [
       fadeInHeightExpandTranstion({
-        originalTransition: `transform .3s ${easeInOutCubicBezier}`,
+        originalTransition: `transform .3s ${cubicBezierEaseInOut}`,
         enterToProps: {
           transform: 'scale(1)'
         },
@@ -56,10 +56,10 @@ export default c([
       cB('alert-body', {
         borderRadius,
         padding: '15px 15px 15px 47px',
-        transition: `border-color .3s ${easeInOutCubicBezier}`
+        transition: `border-color .3s ${cubicBezierEaseInOut}`
       }, [
         cE('title', {
-          transition: `color .3s ${easeInOutCubicBezier}`,
+          transition: `color .3s ${cubicBezierEaseInOut}`,
           fontSize: '16px',
           lineHeight: '19px',
           fontWeight: titleFontWeight
@@ -71,7 +71,7 @@ export default c([
           ])
         ]),
         cE('content', {
-          transition: `color .3s ${easeInOutCubicBezier}`,
+          transition: `color .3s ${cubicBezierEaseInOut}`,
           fontSize: '14px'
         })
       ]),

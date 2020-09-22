@@ -1,7 +1,7 @@
 import { c, namespace } from '../../_utils/cssr'
 import commonVariables from '../base/_common'
 
-const easeInOutCubicBezier = commonVariables.easeInOutCubicBezier
+const cubicBezierEaseInOut = commonVariables.cubicBezierEaseInOut
 
 export default function ({
   duration = '.2s',
@@ -20,20 +20,20 @@ export default function ({
       raw: `
         overflow: hidden;
         transition:
-          opacity ${duration} ${easeInOutCubicBezier},
-          max-width ${duration} ${easeInOutCubicBezier} ${delay},
-          margin-left ${duration} ${easeInOutCubicBezier} ${delay},
-          margin-right ${duration} ${easeInOutCubicBezier} ${delay};
+          opacity ${duration} ${cubicBezierEaseInOut},
+          max-width ${duration} ${cubicBezierEaseInOut} ${delay},
+          margin-left ${duration} ${cubicBezierEaseInOut} ${delay},
+          margin-right ${duration} ${cubicBezierEaseInOut} ${delay};
       `
     }),
     c(`&.${namespace}-fade-in-width-expand-transition-enter-active`, {
       raw: `
         overflow: hidden;
         transition:
-          opacity ${duration} ${easeInOutCubicBezier} ${delay},
-          max-width ${duration} ${easeInOutCubicBezier},
-          margin-left ${duration} ${easeInOutCubicBezier},
-          margin-right ${duration} ${easeInOutCubicBezier};
+          opacity ${duration} ${cubicBezierEaseInOut} ${delay},
+          max-width ${duration} ${cubicBezierEaseInOut},
+          margin-left ${duration} ${cubicBezierEaseInOut},
+          margin-right ${duration} ${cubicBezierEaseInOut};
       `
     })
   ]

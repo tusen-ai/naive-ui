@@ -11,7 +11,7 @@ export default create({
     return {
       textColor: textColorPrimary,
       color: dividerColorOverlay,
-      fontWeight: base.strongFontWeight
+      fontWeight: base.fontWeightStrong
     }
   }
 })

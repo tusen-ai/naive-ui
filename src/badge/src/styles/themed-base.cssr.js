@@ -37,8 +37,8 @@ export default c([
       cB('badge-sup', {
         raw: `
           transition:
-            background-color .3s ${base.easeInOutCubicBezier},
-            color .3s ${base.easeInOutCubicBezier};
+            background-color .3s ${base.cubicBezierEaseInOut},
+            color .3s ${base.cubicBezierEaseInOut};
           color: #FFF;
           position: absolute;
           height: 18px;

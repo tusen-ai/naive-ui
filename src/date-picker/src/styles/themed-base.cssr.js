@@ -5,7 +5,7 @@ export default c([
   ({ props }) => {
     const {
       transformDebounceScale,
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     const {
       itemTextColor,
@@ -265,8 +265,8 @@ export default c([
               z-index: 0;
               cursor: pointer;
               transition:
-                background-color .2s ${easeInOutCubicBezier},
-                color .2s ${easeInOutCubicBezier};
+                background-color .2s ${cubicBezierEaseInOut},
+                color .2s ${cubicBezierEaseInOut};
             `
           }, [
             cM('transition-disabled', {
@@ -291,7 +291,7 @@ export default c([
                   border-radius: 2px;
                   background-color: ${itemSupColor};
                   transition:
-                    background-color .2s ${easeInOutCubicBezier};
+                    background-color .2s ${cubicBezierEaseInOut};
                 `
               })
             ]),

@@ -3,7 +3,7 @@ import { c, cTB, cB, cE } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     const {
       labelFontWeight,
@@ -17,7 +17,7 @@ export default c([
       cE('label', {
         raw: `
           font-weight: ${labelFontWeight};
-          transition: .3s color ${easeInOutCubicBezier};
+          transition: .3s color ${cubicBezierEaseInOut};
           font-size: 14px;
         `,
         color: labelTextColor
@@ -31,7 +31,7 @@ export default c([
         cE('prefix', {
           raw: `
             font-size: 18px;
-            transition: .3s color ${easeInOutCubicBezier};
+            transition: .3s color ${cubicBezierEaseInOut};
           `,
           color: valuePrefixTextColor
         }, [
@@ -46,14 +46,14 @@ export default c([
         cE('content', {
           raw: `
             font-size: 24px;
-            transition: .3s color ${easeInOutCubicBezier};
+            transition: .3s color ${cubicBezierEaseInOut};
           `,
           color: valueTextColor
         }),
         cE('suffix', {
           raw: `
             font-size: 18px;
-            transition: .3s color ${easeInOutCubicBezier};
+            transition: .3s color ${cubicBezierEaseInOut};
           `,
           color: valueSuffixTextColor
         }, [

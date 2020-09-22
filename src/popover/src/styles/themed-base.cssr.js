@@ -12,17 +12,17 @@ export default c([
       arrowWidth
     } = props.$local
     const {
-      easeInOutCubicBezier,
-      easeInCubicBezier,
-      easeOutCubicBezier,
+      cubicBezierEaseInOut,
+      cubicBezierEaseIn,
+      cubicBezierEaseOut,
       transformDebounceScale
     } = props.$base
     return [
       cTB('popover-body', {
         raw: `
           transition:
-            background-color .3s ${easeInOutCubicBezier},
-            color .3s ${easeInOutCubicBezier};
+            background-color .3s ${cubicBezierEaseInOut},
+            color .3s ${cubicBezierEaseInOut};
           transform-origin: inherit;
           transform: ${transformDebounceScale};
           position: relative;
@@ -32,8 +32,8 @@ export default c([
       }, [
         bodyTransition(
           transformDebounceScale,
-          easeOutCubicBezier,
-          easeInCubicBezier
+          cubicBezierEaseOut,
+          cubicBezierEaseIn
         ),
         cM('styled', {
           raw: `
@@ -51,7 +51,7 @@ export default c([
         }, [
           cB('popover-arrow', {
             raw: `
-              transition: background-color .3s ${easeInOutCubicBezier};
+              transition: background-color .3s ${cubicBezierEaseInOut};
               position: absolute;
               display: block;
               width: ${pxfy(depx(arrowWidth) * 2)};
@@ -218,8 +218,8 @@ function noArrowStyle (placement) {
 
 function bodyTransition (
   transformDebounceScale,
-  easeOutCubicBezier,
-  easeInCubicBezier
+  cubicBezierEaseOut,
+  cubicBezierEaseIn
 ) {
   return [
     c('&.popover-body-transition-enter-from, &.popover-body-transition-leave-to', {
@@ -237,15 +237,15 @@ function bodyTransition (
     c('&.popover-body-transition-enter-active', {
       raw: `
         transition:
-          opacity .15s ${easeOutCubicBezier},
-          transform .15s ${easeOutCubicBezier};
+          opacity .15s ${cubicBezierEaseOut},
+          transform .15s ${cubicBezierEaseOut};
       `
     }),
     c('&.popover-body-transition-leave-active', {
       raw: `
         transition:
-          opacity .15s ${easeInCubicBezier},
-          transform .15s ${easeInCubicBezier};
+          opacity .15s ${cubicBezierEaseIn},
+          transform .15s ${cubicBezierEaseIn};
       `
     })
   ]

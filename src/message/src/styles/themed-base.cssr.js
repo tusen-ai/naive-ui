@@ -34,19 +34,19 @@ export default c([
       closeColorLoadingActive
     } = props.$local
     const {
-      easeInOutCubicBezier
+      cubicBezierEaseInOut
     } = props.$base
     return cTB('message', {
       raw: `
         display: flex;
         transition:
-          color .3s ${easeInOutCubicBezier},
-          box-shadow .3s ${easeInOutCubicBezier},
-          background-color .3s ${easeInOutCubicBezier},
-          opacity .3s ${easeInOutCubicBezier},
-          transform .3s ${easeInOutCubicBezier},
-          max-height .3s ${easeInOutCubicBezier},
-          margin-bottom .3s ${easeInOutCubicBezier};
+          color .3s ${cubicBezierEaseInOut},
+          box-shadow .3s ${cubicBezierEaseInOut},
+          background-color .3s ${cubicBezierEaseInOut},
+          opacity .3s ${cubicBezierEaseInOut},
+          transform .3s ${cubicBezierEaseInOut},
+          max-height .3s ${cubicBezierEaseInOut},
+          margin-bottom .3s ${cubicBezierEaseInOut};
         max-height: 40px;
         opacity: 1;
         margin-bottom: 12px;

@@ -18,7 +18,7 @@ export default create({
     } = derived
     return {
       ...commonVariables,
-      borderRadius: base.smallBorderRadius,
+      borderRadius: base.borderRadiusSmall,
       color: baseColor,
       colorDisabled: inputColorDisabled,
       colorTableHeader: cardColor,

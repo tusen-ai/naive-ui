@@ -7,7 +7,7 @@ export default create({
   name: 'DataTable',
   getDerivedVariables ({ base, derived }) {
     const {
-      strongFontWeight,
+      fontWeightStrong,
       borderRadius
     } = base
     const {
@@ -35,7 +35,7 @@ export default create({
         bodyColor: cardColor,
         bodyTextColor: textColorSecondary,
         headerTextColor: textColorPrimary,
-        headerFontWeight: strongFontWeight,
+        headerFontWeight: fontWeightStrong,
         headerButtonColorHover: tableColorHoverOverlay,
         headerButtonIconColor: iconColorOverlay,
         headerButtonIconColorActive: primaryColor,

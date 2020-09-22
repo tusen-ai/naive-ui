@@ -5,7 +5,7 @@ export default function ({
   originalTransform = '',
   left = 0,
   top = 0,
-  transition = `all .3s ${commonVariables.easeInOutCubicBezier} !important`
+  transition = `all .3s ${commonVariables.cubicBezierEaseInOut} !important`
 } = {}) {
   return [
     c(`&.${namespace}-icon-switch-transition-enter-from, &.${namespace}-icon-switch-transition-leave-to`, {

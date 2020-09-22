@@ -17,7 +17,7 @@ export default create({
       groupHeaderTextColor: derived.textColorTertiary,
       actionDividerColor: derived.dividerColorOverlay,
       optionTextColor: derived.textColorSecondary,
-      optionTextColorPressed: derived.primaryColorActive,
+      optionTextColorPressed: derived.primaryColorPressed,
       optionTextColorDisabled: derived.textColorDisabled,
       optionTextColorSelected: derived.primaryColor,
       optionOpacityDisabled: derived.opacityDisabled,

@@ -3,9 +3,9 @@ import { cTB, c, cE } from '../../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      easeInOutCubicBezier,
-      easeInCubicBezier,
-      easeOutCubicBezier
+      cubicBezierEaseInOut,
+      cubicBezierEaseIn,
+      cubicBezierEaseOut
     } = props.$base
     const {
       rectColor
@@ -25,8 +25,8 @@ export default c([
           left: 0;
           background-color: ${rectColor};
           transition:
-            background-color .3s ${easeInOutCubicBezier},
-            top .3s ${easeInOutCubicBezier}!important;
+            background-color .3s ${cubicBezierEaseInOut},
+            top .3s ${cubicBezierEaseInOut}!important;
         `
       }, [
         c('&.base-tracking-rect-transition-enter, &.base-tracking-rect-transition-leave-to', {
@@ -35,17 +35,17 @@ export default c([
         c('&.base-tracking-rect-transition-enter-active', {
           raw: `
             transition:
-              background-color .3s ${easeInOutCubicBezier},
-              opacity .15s ${easeOutCubicBezier},
-              top .3s ${easeInOutCubicBezier} !important;
+              background-color .3s ${cubicBezierEaseInOut},
+              opacity .15s ${cubicBezierEaseOut},
+              top .3s ${cubicBezierEaseInOut} !important;
           `
         }),
         c('&.base-tracking-rect-transition-leave-active', {
           raw: `
             transition:
-              background-color .3s ${easeInOutCubicBezier},
-              opacity .15s ${easeInCubicBezier},
-              top .3s ${easeInOutCubicBezier}!important;
+              background-color .3s ${cubicBezierEaseInOut},
+              opacity .15s ${cubicBezierEaseIn},
+              top .3s ${cubicBezierEaseInOut}!important;
           `
         })
       ])
