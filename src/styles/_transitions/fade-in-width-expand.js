@@ -8,10 +8,10 @@ export default function ({
   delay = '.1s'
 } = {}) {
   return [
-    c(`&.${namespace}-fade-in-width-expand-transition-leave, &.${namespace}-fade-in-width-expand-transition-enter-to`, {
+    c(`&.${namespace}-fade-in-width-expand-transition-leave-from, &.${namespace}-fade-in-width-expand-transition-enter-to`, {
       opacity: 1
     }),
-    c(`&.${namespace}-fade-in-width-expand-transition-leave-to, &.${namespace}-fade-in-width-expand-transition-enter`, {
+    c(`&.${namespace}-fade-in-width-expand-transition-leave-to, &.${namespace}-fade-in-width-expand-transition-enter-from`, {
       opacity: '0 !important',
       marginLeft: '0 !important',
       marginRight: '0 !important'
