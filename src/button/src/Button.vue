@@ -5,12 +5,13 @@
       'n-button--round': round,
       'n-button--circle': circle,
       'n-button--disabled': disabled,
-      'n-button--loading': loading,
       'n-button--block': block,
-      'n-button--active': enterPressed,
-      'n-button--ghost': ghost,
+      'n-button--pressed': enterPressed,
+      'n-button--base': !text && !(ghost || dashed),
+      'n-button--ghost': !text && (ghost || dashed),
       'n-button--text': text,
-      'n-button--no-text': noTextContent,
+      'n-button--dashed': !text && dashed,
+      'n-button--hide-icon-margin': hideIconMargin,
       [`n-button--${type}-type`]: true,
       [`n-button--${colorDigest || type}-colored`]: true,
       [`n-button--${syntheticSize}-size`]: true,
@@ -38,7 +39,6 @@
       <div
         v-if="(hasIcon || loading)"
         class="n-button__icon"
-        :class="{ 'n-button__icon--slot': $slots.icon }"
       >
         <n-icon-switch-transition>
           <n-base-loading
@@ -185,9 +185,9 @@ export default {
       },
       default: 'default'
     },
-    icon: {
-      type: String,
-      default: null
+    dashed: {
+      type: Boolean,
+      default: false
     },
     iconPlacement: {
       default: 'left',
@@ -233,13 +233,15 @@ export default {
       }
       return this.size
     },
-    noTextContent () {
+    hideIconMargin () {
       return this.circle || !this.$slots.default
     },
     avoidHollowOut () {
       return (
+        this.$naive.avoidHollowOut ||
         this.text ||
         this.ghost ||
+        this.dashed ||
         (this.type === 'default' && !this.color)
       )
     },
@@ -250,7 +252,7 @@ export default {
       return this.focusable && !this.disabled
     },
     hasIcon () {
-      return this.icon || this.$slots.icon
+      return this.$slots.icon
     },
     iconOnRight () {
       return this.iconPlacement === 'right'

@@ -444,7 +444,7 @@ Debug 用的。
       Warning
     </n-button>
   </n-button-group>
-  <n-button text type="info" loading size="small">Info</n-button>
+  <n-button text type="info" loading size="small" disabled>Info</n-button>
   <n-button text type="success">Success</n-button>
   <n-button text type="warning">Warning</n-button>
   <n-button text type="error" icon-placement="right">

@@ -1,42 +1,34 @@
 export default function (base, derived) {
   const { borderRadius } = base
   return {
-    borderRadius: {
-      tiny: borderRadius,
-      small: borderRadius,
-      medium: borderRadius,
-      large: borderRadius
-    },
-    height: {
-      tiny: '22px',
-      small: '28px',
-      medium: '34px',
-      large: '40px'
-    },
-    fontSize: {
-      tiny: '12px',
-      small: '14px',
-      medium: '14px',
-      large: '15px'
-    },
-    padding: {
-      tiny: '0 6px',
-      small: '0 10px',
-      medium: '0 14px',
-      large: '0 18px'
-    },
-    roundPadding: {
-      tiny: '0 10px',
-      small: '0 14px',
-      medium: '0 18px',
-      large: '0 22px'
-    },
-    iconSize: {
-      tiny: '15px',
-      small: '18px',
-      medium: '18px',
-      large: '20px'
-    },
+    borderRadiusTiny: borderRadius,
+    borderRadiusSmall: borderRadius,
+    borderRadiusMedium: borderRadius,
+    borderRadiusLarge: borderRadius,
+    heightTiny: '22px',
+    heightSmall: '28px',
+    heightMedium: '34px',
+    heightLarge: '40px',
+    fontSizeTiny: '12px',
+    fontSizeSmall: '14px',
+    fontSizeMedium: '14px',
+    fontSizeLarge: '15px',
+    paddingTiny: '0 6px',
+    paddingSmall: '0 10px',
+    paddingMedium: '0 14px',
+    paddingLarge: '0 18px',
+    paddingRoundTiny: '0 10px',
+    paddingRoundSmall: '0 14px',
+    paddingRoundMedium: '0 18px',
+    paddingRoundLarge: '0 22px',
+    iconMarginTiny: '6px',
+    iconMarginSmall: '6px',
+    iconMarginMedium: '6px',
+    iconMarginLarge: '6px',
+    iconSizeTiny: '15px',
+    iconSizeSmall: '18px',
+    iconSizeMedium: '18px',
+    iconSizeLarge: '20px',
     waveDuration: '.6s'
   }
 }

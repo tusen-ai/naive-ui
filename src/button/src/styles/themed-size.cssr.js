@@ -1,40 +1,42 @@
-import { c, cB, cTB, cE, cM, cNotM } from '../../../_utils/cssr'
+import { c, cB, cTB, cE, cM, createKey } from '../../../_utils/cssr'
 import formatLength from '../../../_utils/css/formatLength'
-import iconSwitchTransition from '../../../styles/_transitions/icon-switch'
 
 export default c([
   ({ props }) => {
     const size = props.$instance.syntheticSize
-    const height = props.$local.height[size]
-    const fontSize = props.$local.fontSize[size]
-    const borderRadius = props.$local.borderRadius[size]
-    const padding = props.$local.padding[size]
-    const roundPadding = props.$local.roundPadding[size]
+    const local = props.$local
+    const height = local[createKey('height', size)]
+    const fontSize = local[createKey('fontSize', size)]
+    const borderRadius = local[createKey('borderRadius', size)]
+    const padding = local[createKey('padding', size)]
+    const roundPadding = local[createKey('paddingRound', size)]
     const roundBorderRadius = formatLength(height, 0.5)
     const lineHeight = formatLength(height, 1, -2)
-    const iconSize = props.$local.iconSize[size]
+    const iconSize = local[createKey('iconSize', size)]
+    const iconMargin = local[createKey('iconMargin', size)]
     return cTB(
       'button',
       [
         cM(`${size}-size`, {
           borderRadius,
-          fontSize,
-          whiteSpace: 'nowrap'
+          fontSize
         }, [
-          cNotM('text', {
+
+          cM('base, ghost', {
             height,
-            lineHeight: lineHeight,
+            lineHeight,
             padding
-          }),
-          cM('round', {
-            padding: roundPadding,
-            borderRadius: roundBorderRadius
-          }),
-          cM('circle', {
-            borderRadius: roundBorderRadius,
-            width: height,
-            padding: '0 !important'
-          }),
+          }, [
+            cM('round', {
+              padding: roundPadding,
+              borderRadius: roundBorderRadius
+            }),
+            cM('circle', {
+              borderRadius: roundBorderRadius,
+              width: height,
+              padding: '0 !important'
+            })
+          ]),
           cM('text', {
             padding: 0,
             borderRadius: 0
@@ -44,58 +46,35 @@ export default c([
               lineHeight: iconSize
             })
           ]),
-          cE('content', {
-            display: 'inline-block',
-            lineHeight: 'inherit'
-          }),
+          cM('hide-icon-margin', [
+            cE('icon', {
+              marginRight: 0
+            })
+          ]),
           cE('icon', {
-            display: 'inline-block',
-            position: 'relative',
             lineHeight,
             height: lineHeight,
             width: iconSize,
             maxWidth: iconSize,
-            verticalAlign: 'bottom'
+            fontSize: iconSize,
+            marginRight: iconMargin
           }, [
             cB('icon', {
-              fontSize: iconSize
+              fontSize: iconSize,
+              lineHeight: iconSize,
+              height: iconSize
             }),
             cB('base-loading', {
               height: formatLength(iconSize, 1, -2),
-              width: formatLength(iconSize, 1, -2),
-              position: 'absolute',
-              left: 0,
-              top: '50%',
-              transform: 'translateY(-50%)',
-              display: 'block'
-            }, [
-              iconSwitchTransition({
-                top: '50%',
-                originalTransform: 'translateY(-50%)'
+              width: formatLength(iconSize, 1, -2)
+            })
+          ]),
+          cE('content', [
+            c('~', [
+              cE('icon', {
+                marginLeft: iconMargin,
+                marginRight: 0
               })
-            ]),
-            cM('slot', {
-              width: iconSize,
-              fontSize: iconSize,
-              display: 'inline-flex',
-              alignItems: 'center',
-              verticalAlign: 'bottom'
-            }, [
-              cB('icon-slot', {
-                position: 'absolute',
-                left: 0,
-                top: '50%',
-                transform: 'translateY(-50%)',
-                display: 'block',
-                lineHeight: iconSize,
-                height: iconSize,
-                fontSize: iconSize
-              }, [
-                iconSwitchTransition({
-                  top: '50%',
-                  originalTransform: 'translateY(-50%)'
-                })
-              ])
             ])
           ])
         ])

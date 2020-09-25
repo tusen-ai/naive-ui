@@ -1,20 +1,30 @@
 import { c, cTB, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 import fadeInWidthExpandTransition from '../../../styles/_transitions/fade-in-width-expand'
+import iconSwitchTransition from '../../../styles/_transitions/icon-switch'
 
 export default c([
   ({ props }) => {
-    const local = props.$local
-    const base = props.$base
-    const cubicBezierEaseInOut = base.cubicBezierEaseInOut
+    const {
+      waveDuration,
+      opacityDisabled,
+      textColorPrimary
+    } = props.$local
+    const {
+      cubicBezierEaseInOut,
+      cubicBezierEaseOut
+    } = props.$base
     return cTB(
       'button',
       {
         raw: `
+          white-space: nowrap;
           box-sizing: border-box;
           outline: none;
           position: relative;
           z-index: auto;
           border: none;
+          border-width: 1px;
+          border-style: solid;
           font-family: inherit;
           display: inline-block;
           align-items: center;
@@ -22,6 +32,7 @@ export default c([
           user-select: none;
           text-align: center;
           cursor: pointer;
+          color: ${textColorPrimary};
           transition:
             background-color .3s ${cubicBezierEaseInOut},
             opacity .3s ${cubicBezierEaseInOut},
@@ -35,61 +46,73 @@ export default c([
           bottom: '-1px',
           left: '-1px',
           animationIterationCount: 1,
-          animationDuration: props.$local.waveDuration,
-          animationTimingFunction: `${base.cubicBezierEaseOut}, ${base.cubicBezierEaseOut}`
-        }),
-        c('&::after', {
-          raw: `
-            pointer-events: none;
-            content: "";
-            border-radius: inherit;
-            position: absolute;
-            left: -1px;
-            top: -1px;
-            right: -1px;
-            bottom: -1px;
-          `
+          animationDuration: waveDuration,
+          animationTimingFunction: `${cubicBezierEaseOut}, ${cubicBezierEaseOut}`
         }),
         c('&::moz-focus-inner', {
           border: 0
         }),
         cE('border-mask', {
           raw: `
+            border-style: solid;
             position: absolute;
             left: -1px;
             top: -1px;
             right: -1px;
             bottom: -1px;
             border-radius: inherit;
-            box-shadow: inset 0 0 0 1px transparent;
-            transition: box-shadow .3s ${cubicBezierEaseInOut};
+            border-width: 1px;
+            border-color: transparent;
+            transition: border-color .3s ${cubicBezierEaseInOut};
             pointer-events: none;
             z-index: 1;
           `
         }),
         cE('icon', {
+          verticalAlign: 'bottom',
+          position: 'relative',
+          display: 'inline-flex',
+          alignItems: 'center',
           transition: `color .3s ${cubicBezierEaseInOut}`
         }, [
+          cB('base-loading', {
+            position: 'absolute',
+            left: 0,
+            top: '50%',
+            transform: 'translateY(-50%)',
+            display: 'block',
+            fill: 'currentColor',
+            stroke: 'currentColor'
+          }, [
+            iconSwitchTransition({
+              top: '50%',
+              originalTransform: 'translateY(-50%)'
+            })
+          ]),
+          cB('icon', {
+            position: 'absolute',
+            left: 0,
+            top: '50%',
+            transform: 'translateY(-50%)',
+            display: 'block',
+            fill: 'currentColor',
+            stroke: 'currentColor'
+          }, [
+            iconSwitchTransition({
+              top: '50%',
+              originalTransform: 'translateY(-50%)'
+            })
+          ]),
           fadeInWidthExpandTransition()
         ]),
         cE('content', {
           raw: `
+            display: inline-block;
+            line-height: inherit;
             white-space: nowrap;
             transition: color .3s ${cubicBezierEaseInOut};
           `
-        }, [
-          c('~', [
-            cE('icon', {
-              marginLeft: '6px',
-              marginRight: 0
-            })
-          ])
-        ]),
-        cNotM('no-text', [
-          cE('icon', {
-            marginRight: '6px'
-          })
-        ]),
+        }),
         cM('block', {
           raw: `
             display: block;
@@ -117,11 +140,11 @@ export default c([
           `
         }, [
           cE('border-mask', {
-            raw: `box-shadow: none !important;`
+            raw: `border: none !important;`
           })
         ]),
         cM('disabled', {
-          opacity: local.opacityDisabled
+          opacity: opacityDisabled
         })
       ]
     )

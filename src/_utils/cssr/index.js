@@ -53,11 +53,26 @@ function cTB (selector, ...rest) {
   ])
 }
 
-function createKey (keyPrefix, suffix) {
-  if (suffix === 'default') {
-    return keyPrefix
-  }
-  return keyPrefix + suffix.replace(/^[a-z]/, startChar => startChar.toUpperCase())
+function createKey (keyPrefix, ...suffixs) {
+  return keyPrefix + suffixs.map(
+    suffix => {
+      if (suffix === 'default') return ''
+      return suffix.replace(/^[a-z]/, startChar => startChar.toUpperCase())
+    }
+  ).join('')
 }
 
-export { c, cTB, cB, cE, cM, cNotM, insideFormItem, insideModal, prefix, namespace, createKey, find }
+export {
+  c,
+  cTB,
+  cB,
+  cE,
+  cM,
+  cNotM,
+  insideFormItem,
+  insideModal,
+  prefix,
+  namespace,
+  createKey,
+  find
+}

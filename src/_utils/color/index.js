@@ -113,6 +113,6 @@ export function createHoverColor (rgb) {
   return composite(rgb, [255, 255, 255, 0.14])
 }
 
-export function createActiveColor (rgb) {
+export function createPressedColor (rgb) {
   return composite(rgb, [0, 0, 0, 0.1])
 }

@@ -3,6 +3,7 @@ Button is used to trigger some actions.
 ## Demos
 ```demo
 basic
+dashed
 size
 text
 disabled
@@ -22,6 +23,7 @@ group
 |block|`boolean`|`false`||
 |circle|`boolean`|`false`||
 |color|`string`|`null`|Only support `#FFF`, `#FFFFFF`, `rgb(0, 0, 0)` formatted colors.|
+|dashed|`boolean`|`false`||
 |disabled|`boolean`|`false`||
 |ghost|`boolean`|`false`||
 |icon-placement|`'left' \| 'right'`|`'left'`||

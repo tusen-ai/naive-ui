@@ -3,6 +3,7 @@
 ## 演示
 ```demo
 basic
+dashed
 size
 text
 disabled
@@ -23,6 +24,7 @@ debug
 |block|`boolean`|`false`||
 |circle|`boolean`|`false`||
 |color|`string`|`null`|只支持形如 `#FFF`, `#FFFFFF`, `rgb(0, 0, 0)` 的颜色|
+|dashed|`boolean`|`false`||
 |disabled|`boolean`|`false`||
 |ghost|`boolean`|`false`||
 |icon-placement|`'left' \| 'right'`|`'left'`||

@@ -8,71 +8,96 @@ export default create({
     return {
       ...commonVariables(base, derived),
       opacityDisabled: derived.opacityDisabled,
-      default: {
-        color: 'transparent',
-        colorHover: 'transparent',
-        colorActive: 'transparent',
-        colorFocus: 'transparent',
+      // default type
+      color: 'transparent',
+      colorHover: 'transparent',
+      colorPressed: 'transparent',
+      colorFocus: 'transparent',
+      colorDisabled: 'transparent',
 
-        textColor: derived.textColorSecondary,
-        textColorHover: derived.primaryColorHover,
-        textColorActive: derived.primaryColorPressed,
-        textColorFocus: derived.primaryColorHover,
+      textColor: derived.textColorSecondary,
+      textColorHover: derived.primaryColorHover,
+      textColorPressed: derived.primaryColorPressed,
+      textColorFocus: derived.primaryColorHover,
+      textColorDisabled: derived.textColorSecondary,
 
-        textTypedTextColor: derived.textColorSecondary,
-        textTypedTextColorHover: derived.primaryColorHover,
-        textTypedTextColorActive: derived.primaryColorPressed,
-        textTypedTextColorFocus: derived.primaryColorHover,
+      textColorText: derived.textColorSecondary,
+      textColorTextHover: derived.primaryColorHover,
+      textColorTextPressed: derived.primaryColorPressed,
+      textColorTextFocus: derived.primaryColorHover,
+      textColorTextDisabled: derived.textColorSecondary,
 
-        ghostTypedTextColor: derived.textColorSecondary,
-        ghostTypedTextColorHover: derived.primaryColorHover,
-        ghostTypedTextColorActive: derived.primaryColorPressed,
-        ghostTypedTextColorFocus: derived.primaryColorHover,
+      textColorGhost: derived.textColorSecondary,
+      textColorGhostHover: derived.primaryColorHover,
+      textColorGhostPressed: derived.primaryColorPressed,
+      textColorGhostFocus: derived.primaryColorHover,
+      textColorGhostDisabled: derived.textColorSecondary,
 
-        borderColor: derived.borderColorOverlay,
-        borderColorHover: derived.primaryColorHover,
-        borderColorActive: derived.primaryColorPressed,
-        borderColorFocus: derived.primaryColorHover,
+      borderColor: derived.borderColorOverlay,
+      borderColorHover: derived.primaryColorHover,
+      borderColorPressed: derived.primaryColorPressed,
+      borderColorFocus: derived.primaryColorHover,
+      borderColorDisabled: derived.borderColorOverlay,
 
-        rippleColor: derived.primaryColor,
+      rippleColor: derived.primaryColor,
 
-        iconColor: derived.textColorSecondary
-      },
-      primary: {
-        color: derived.primaryColor,
-        colorHover: derived.primaryColorHover,
-        colorActive: derived.primaryColorPressed,
-        colorFocus: derived.primaryColorHover,
-        textColor: derived.baseColor
-      },
-      info: {
-        color: derived.infoColor,
-        colorHover: derived.infoColorHover,
-        colorActive: derived.infoColorPressed,
-        colorFocus: derived.infoColorHover,
-        textColor: derived.baseColor
-      },
-      success: {
-        color: derived.successColor,
-        colorHover: derived.successHoverColor,
-        colorActive: derived.successColorPressed,
-        colorFocus: derived.successHoverColor,
-        textColor: derived.baseColor
-      },
-      warning: {
-        color: derived.warningColor,
-        colorHover: derived.warningColorHover,
-        colorActive: derived.warningColorPressed,
-        colorFocus: derived.warningColorHover,
-        textColor: derived.baseColor
-      },
-      error: {
-        color: derived.errorColor,
-        colorHover: derived.errorColorHover,
-        colorActive: derived.errorColorPressed,
-        colorFocus: derived.errorColorHover,
-        textColor: derived.baseColor
-      }
+      iconColor: derived.textColorSecondary,
+
+      // type primary
+      colorPrimary: derived.primaryColor,
+      colorPrimaryHover: derived.primaryColorHover,
+      colorPrimaryPressed: derived.primaryColorPressed,
+      colorPrimaryFocus: derived.primaryColorHover,
+      colorPrimaryDisabled: derived.primaryColor,
+      textColorPrimary: derived.baseColor,
+      textColorPrimaryDisabled: derived.baseColor,
+      textColorPrimaryGhostDisabled: derived.primaryColor,
+      textColorPrimaryTextDisabled: derived.primaryColor,
+      borderColorPrimaryDisabled: derived.primaryColor,
+      // type info
+      colorInfo: derived.infoColor,
+      colorInfoHover: derived.infoColorHover,
+      colorInfoPressed: derived.infoColorPressed,
+      colorInfoFocus: derived.infoColorHover,
+      colorInfoDisabled: derived.infoColor,
+      textColorInfo: derived.baseColor,
+      textColorInfoDisabled: derived.baseColor,
+      textColorInfoGhostDisabled: derived.infoColor,
+      textColorInfoTextDisabled: derived.infoColor,
+      borderColorInfoDisabled: derived.infoColor,
+      // type success
+      colorSuccess: derived.successColor,
+      colorSuccessHover: derived.successHoverColor,
+      colorSuccessPressed: derived.successColorPressed,
+      colorSuccessFocus: derived.successHoverColor,
+      colorSuccessDisabled: derived.successColor,
+      textColorSuccess: derived.baseColor,
+      textColorSuccessDisabled: derived.baseColor,
+      textColorSuccessGhostDisabled: derived.successColor,
+      textColorSuccessTextDisabled: derived.successColor,
+      borderColorSuccessDisabled: derived.successColor,
+      // type warning
+      colorWarning: derived.warningColor,
+      colorWarningHover: derived.warningColorHover,
+      colorWarningPressed: derived.warningColorPressed,
+      colorWarningFocus: derived.warningColorHover,
+      colorWarningDisabled: derived.warningColor,
+      textColorWarning: derived.baseColor,
+      textColorWarningDisabled: derived.baseColor,
+      textColorWarningGhostDisabled: derived.warningColor,
+      textColorWarningTextDisabled: derived.warningColor,
+      borderColorWarningDisabled: derived.warningColor,
+      // type error
+      colorError: derived.errorColor,
+      colorErrorHover: derived.errorColorHover,
+      colorErrorPressed: derived.errorColorPressed,
+      colorErrorFocus: derived.errorColorHover,
+      colorErrorDisabled: derived.errorColor,
+      textColorError: derived.baseColor,
+      textColorErrorDisabled: derived.baseColor,
+      textColorErrorGhostDisabled: derived.errorColor,
+      textColorErrorTextDisabled: derived.errorColor,
+      borderColorErrorDisabled: derived.errorColor
     }
   }
 })
