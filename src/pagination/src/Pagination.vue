@@ -10,7 +10,7 @@
     <div
       class="n-pagination-item n-pagination-item--backward"
       :class="{
-        'n-pagination-item--disabled': page <= 1 || page > syntheticPageCount || disabled
+        'n-pagination-item--disabled': page <= 1 || page > compitablePageCount || disabled
       }"
       @click="backward"
     >
@@ -61,7 +61,7 @@
     <div
       class="n-pagination-item n-pagination-item--forward"
       :class="{
-        'n-pagination-item--disabled': page < 1 || page >= syntheticPageCount || disabled
+        'n-pagination-item--disabled': page < 1 || page >= compitablePageCount || disabled
       }"
       @click="forward"
     >
@@ -93,6 +93,7 @@
 </template>
 
 <script>
+import { nextTick, computed } from 'vue'
 import NSelect from '../../select'
 import NInput from '../../input'
 import NBaseIcon from '../../_base/icon'
@@ -102,6 +103,7 @@ import locale from '../../_mixins/locale'
 import { pageItems } from './utils'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
+import { useCompitable } from '../../_utils/composition'
 
 export default {
   name: 'Pagination',
@@ -116,20 +118,10 @@ export default {
     usecssr(styles),
     locale('Pagination')
   ],
-  model: {
-    prop: 'page',
-    event: 'change'
-  },
   props: {
     page: {
       type: Number,
       required: true
-    },
-    total: {
-      validator (value) {
-        return Number.isInteger(value) && value > 0
-      },
-      default: undefined
     },
     pageCount: {
       validator (value) {
@@ -161,6 +153,17 @@ export default {
       type: Number,
       default: 9
     },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:page': {
+      type: Function,
+      default: null
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:pageSize': {
+      type: Function,
+      default: null
+    },
+    // deprecated
     onPageSizeChange: {
       type: Function,
       default: null
@@ -168,6 +171,21 @@ export default {
     onChange: {
       type: Function,
       default: null
+    },
+    total: {
+      validator (value) {
+        return Number.isInteger(value) && value > 0
+      },
+      default: undefined
+    }
+  },
+  setup (props) {
+    const compitablePageCountRef = useCompitable(props, ['total', 'pageCount'])
+    return {
+      compitablePageCount: compitablePageCountRef,
+      pageItems: computed(() =>
+        pageItems(props.page, compitablePageCountRef.value, props.pageSlot)
+      )
     }
   },
   data () {
@@ -177,30 +195,19 @@ export default {
     }
   },
   computed: {
-    syntheticPageCount () {
-      if (this.total !== undefined) return this.total <= 0 ? 1 : this.total
-      if (this.pageCount !== undefined) return this.pageCount <= 0 ? 1 : this.pageCount
-      console.error(
-        '[naive-ui/pagination]: None of total and page-count is set.'
-      )
-      return 1
-    },
     pageSizeOptions () {
       const suffix = this.localeNamespace.selectionSuffix
       return this.pageSizes.map(size => ({
         label: `${size} / ${suffix}`,
         value: size
       }))
-    },
-    pageItems () {
-      return pageItems(this.page, this.syntheticPageCount, this.pageSlot)
     }
   },
   watch: {
     page (value) {
       this.transitionDisabled = true
-      this.$nextTick().then(() => {
-        this.$el.getBoundingClientRect()
+      nextTick(() => {
+        void this.$el.offsetWidth
         this.transitionDisabled = false
       })
     }
@@ -222,17 +229,27 @@ export default {
     },
     changeCurrentPage (page) {
       if (page === this.page) return
-      this.$emit('change', page)
-      if (typeof this.onChange === 'function') this.onChange(page)
+      const {
+        'onUpdate:page': onUpdatePage,
+        onPageSizeChange
+      } = this
+      if (onUpdatePage) this['onUpdate:page'](page)
+      // deprecated
+      if (onPageSizeChange) this.onChange(page)
     },
     changePageSize (pageSize) {
       if (pageSize === this.pageSize) return
-      this.$emit('page-size-change', pageSize)
-      if (typeof this.onPageSizeChange === 'function') this.onPageSizeChange(pageSize)
+      const {
+        'onUpdate:pageSize': onUpdatePageSize,
+        onPageSizeChange
+      } = this
+      if (onUpdatePageSize) this['onUpdate:pageSize'](pageSize)
+      // deprecated
+      if (onPageSizeChange) this.onPageSizeChange(pageSize)
     },
     forward () {
       if (this.disabled) return
-      const page = Math.min(this.page + 1, this.syntheticPageCount)
+      const page = Math.min(this.page + 1, this.compitablePageCount)
       this.changeCurrentPage(page)
     },
     backward () {
@@ -242,7 +259,7 @@ export default {
     },
     fastForward () {
       if (this.disabled) return
-      const page = Math.min(this.page + (this.pageSlot - 4), this.syntheticPageCount)
+      const page = Math.min(this.page + (this.pageSlot - 4), this.compitablePageCount)
       this.changeCurrentPage(page)
     },
     fastBackward () {
@@ -256,7 +273,7 @@ export default {
     handleQuickJumperKeyUp (e) {
       if (e.code === 'Enter') {
         const page = parseInt(this.quickJumperValue)
-        if (!Number.isNaN(page) && page >= 1 && page <= this.syntheticPageCount) {
+        if (!Number.isNaN(page) && page >= 1 && page <= this.compitablePageCount) {
           this.changeCurrentPage(page)
           this.quickJumperValue = ''
         }

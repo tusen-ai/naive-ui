@@ -97,7 +97,10 @@ placeable 进行了大调整
     - `onHide` => `onLeave`
     - `onAfterShow` => `onAfterEnter`
     - `onAfterHide` => `onAfterHide`
-- [ ] pagination
+- [x] pagination
+  - deprecate
+    - `on-change` => `on-update:page`
+    - `on-page-size-change` => `on-update:page-size`
 - [ ] popconfirm
 - [x] popover
   - new

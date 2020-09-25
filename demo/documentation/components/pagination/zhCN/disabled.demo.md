@@ -1,14 +1,14 @@
 # 禁用
 ```html
 <n-pagination
-  v-model="page"
+  v-model:page="page"
   :page-count="100"
   show-size-picker
   :page-size="pageSize"
   :page-sizes="[10, 20, 30, 40]"
   show-quick-jumper
   :disabled="disabled"
-  @page-size-change="handlePageSizeChange"
+  @update:page-size="handlePageSizeChange"
   :style="{ marginBottom: '12px' }"
 />
 <n-switch v-model="disabled" />
