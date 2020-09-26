@@ -296,7 +296,7 @@ export default c([
           padding: 0
         }, [
           fadeInHeightExpandTransition({
-            duration: '.3s'
+            duration: '.2s'
           })
         ])
       ]),
