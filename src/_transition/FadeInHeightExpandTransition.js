@@ -1,4 +1,3 @@
-
 import { h, Transition } from 'vue'
 
 export default {

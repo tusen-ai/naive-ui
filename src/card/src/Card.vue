@@ -14,7 +14,7 @@
     <div v-if="$slots.cover" class="n-card-cover">
       <slot name="cover" />
     </div>
-    <div v-if="$slots.header || $slots.header || title || closable" class="n-card-header">
+    <div v-if="$slots.header || title || closable" class="n-card-header">
       <div class="n-card-header__main" :style="headerStyle">
         <slot name="header">
           {{ title }}
@@ -47,9 +47,9 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import usecssr from '../../_mixins/usecssr'
 import NIcon from '../../icon'
 import CloseIcon from '../../_icons/md-close'
-import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
 
 export default {
@@ -94,12 +94,13 @@ export default {
     },
     onClose: {
       type: Function,
-      default: () => {}
+      default: undefined
     }
   },
   methods: {
     handleCloseClick () {
-      this.onClose()
+      const { onClose } = this
+      if (onClose) onClose()
     }
   }
 }

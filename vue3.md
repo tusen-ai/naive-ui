@@ -23,7 +23,7 @@ placeable 进行了大调整
     - `on-show` => `on-update:show`
     - `on-hide` => `on-update:show`
     - `target` => `listen-to`
-- [ ] badge
+- [x] badge
 - [x] breadcrumb
 - [x] button
 - [x] button-group
