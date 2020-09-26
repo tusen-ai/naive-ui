@@ -2,6 +2,7 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
+    const { iconColor } = props.$local
     return [
       cB('popconfirm-content', {
         raw: `
@@ -22,6 +23,8 @@ export default c([
               font-size: 18px;
               left: 0;
               top: 0;
+              fill: ${iconColor};
+              stroke: ${iconColor};
             `
           })
         ]),

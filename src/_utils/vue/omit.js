@@ -1,4 +1,4 @@
-export default function omit (object, keys = [], rest = {}) {
+export function omit (object, keys = [], rest = {}) {
   const omitedObject = {}
   const originalKeys = Object.getOwnPropertyNames(object)
   originalKeys.forEach(originalKey => {
@@ -6,3 +6,4 @@ export default function omit (object, keys = [], rest = {}) {
   })
   return Object.assign(omitedObject, rest)
 }
+export default omit

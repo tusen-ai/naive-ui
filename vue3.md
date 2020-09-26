@@ -117,7 +117,10 @@ placeable 进行了大调整
   - deprecate
     - `on-change` => `on-update:page`
     - `on-page-size-change` => `on-update:page-size`
-- [ ] popconfirm
+- [x] popconfirm
+  - new
+    - `leave-on-positive-click`
+    - `leave-on-negative-click`
 - [x] popover
   - new
     - `default-show`

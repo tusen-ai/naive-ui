@@ -10,40 +10,36 @@
         v-if="showIcon"
         name="icon"
       >
-        <n-icon
-          color="rgba(255, 138, 0, 1)"
-        >
-          <md-alert />
+        <n-icon>
+          <warning-icon />
         </n-icon>
       </slot>
       <slot />
     </div>
-    <template>
-      <div class="n-popconfirm-content__action">
-        <slot name="action">
-          <n-button
-            size="tiny"
-            @click="handleNegativeClick"
-          >
-            {{ localizedNegativeText }}
-          </n-button>
-          <n-button
-            size="tiny"
-            type="primary"
-            @click="handlePositiveClick"
-          >
-            {{ localizedPositiveText }}
-          </n-button>
-        </slot>
-      </div>
-    </template>
+    <div class="n-popconfirm-content__action">
+      <slot name="action">
+        <n-button
+          size="tiny"
+          @click="handleNegativeClick"
+        >
+          {{ localizedNegativeText }}
+        </n-button>
+        <n-button
+          size="tiny"
+          type="primary"
+          @click="handlePositiveClick"
+        >
+          {{ localizedPositiveText }}
+        </n-button>
+      </slot>
+    </div>
   </div>
 </template>
 
 <script>
 import NButton from '../../button'
 import NIcon from '../../icon'
-import mdAlert from '../../_icons/md-alert'
+import WarningIcon from '../../_icons/md-alert'
 import locale from '../../_mixins/locale'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
@@ -56,7 +52,7 @@ export default {
   components: {
     NButton,
     NIcon,
-    mdAlert
+    WarningIcon
   },
   mixins: [
     locale('Popconfirm'),
@@ -77,14 +73,13 @@ export default {
       type: Boolean,
       default: true
     },
-    controller: {
-      type: Object,
+    onPositiveClick: {
+      type: Function,
       required: true
-    }
-  },
-  data () {
-    return {
-      showPopconfirm: false
+    },
+    onNegativeClick: {
+      type: Function,
+      required: true
     }
   },
   computed: {
@@ -96,16 +91,11 @@ export default {
     }
   },
   methods: {
-    close () {
-      this.controller.hide()
-    },
     handlePositiveClick () {
-      this.$emit('positive-click')
-      this.close()
+      this.onPositiveClick()
     },
     handleNegativeClick () {
-      this.$emit('negative-click')
-      this.close()
+      this.onNegativeClick()
     }
   }
 }

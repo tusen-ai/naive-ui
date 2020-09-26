@@ -1,3 +1,5 @@
-export * from './src/get-slot'
-export * from './src/get-v-node-children'
-export * from './src/create-id'
+export { getSlot } from './src/get-slot'
+export { getVNodeChildren } from './src/get-v-node-children'
+export { createId } from './src/create-id'
+export { keep } from './src/keep'
+export { omit } from './omit'

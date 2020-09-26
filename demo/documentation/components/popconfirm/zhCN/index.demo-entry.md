@@ -12,21 +12,19 @@ no-icon
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|leave-on-negative-click|`boolean`|`true`||
+|leave-on-positive-click|`boolean`|`true`||
 |negative-text|`string`|`'取消'`||
 |positive-text|`string`|`'确认'`||
 |show-icon|`boolean`|`true`||
+|on-positive-click|`() => any`|`undefined`||
+|on-negative-click|`() => any`|`undefined`||
 
 更多 props 请参考 [Popover](n-popover#Props).
-
-## Events
-|名称|参数|说明|
-|-|-|-|
-|positive-click|`()`||
-|negative-click|`()`||
 
 ## Slots
 |名称|参数|说明|
 |-|-|-|
-|icon|`()`||
 |action|`()`||
 |default|`()`||
+|icon|`()`||

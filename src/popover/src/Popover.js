@@ -259,6 +259,9 @@ export default {
         this.uncontrolledShow = nextShow
         this['onUpdate:show'](nextShow)
       }
+    },
+    setShow (value) {
+      this.uncontrolledShow = value
     }
   },
   render () {

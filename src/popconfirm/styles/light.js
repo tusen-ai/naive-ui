@@ -5,7 +5,7 @@ export default create({
   theme: 'light',
   getDerivedVariables ({ base, derived }) {
     return {
-
+      iconColor: derived.warningColor
     }
   }
 })

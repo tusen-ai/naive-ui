@@ -11,7 +11,7 @@
       <md-hand />
     </n-icon>
   </template>
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button>退出游戏</n-button>
   </template>
   不充钱怎么变强？
