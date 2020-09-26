@@ -3,20 +3,21 @@
     v-if="valueIsNumber"
     class="n-base-slot-machine"
   >
-    <slot-machine-number
-      v-for="(number, i) in numbers"
-      :key="numbers.length - i - 1"
-      :appeared="appeared"
-      :old-original-number="oldValue"
-      :new-original-number="newValue"
-      :value="number"
-    />
-    <slot-machine-number
-      v-if="max && max < value"
-      key="+"
-      :appeared="appeared"
-      :value="'+'"
-    />
+    <transition-group name="n-fade-up-width-expand-transition" tag="span">
+      <slot-machine-number
+        v-for="(number, i) in numbers"
+        :key="numbers.length - i - 1"
+        :old-original-number="oldValue"
+        :new-original-number="newValue"
+        :value="number"
+      />
+    </transition-group>
+    <fade-in-expand-transition key="+" mode="width">
+      <slot-machine-number
+        v-if="max && max < value"
+        :value="'+'"
+      />
+    </fade-in-expand-transition>
   </span>
   <span
     v-else
@@ -27,6 +28,7 @@
 </template>
 
 <script>
+import FadeInExpandTransition from '../../../_transition/FadeInHeightExpandTransition'
 import SlotMachineNumber from './SlotMachineNumber.vue'
 import usecssr from '../../../_mixins/usecssr.js'
 import styles from './styles/index.js'
@@ -34,6 +36,7 @@ import styles from './styles/index.js'
 export default {
   name: 'BaseSlotMachine',
   components: {
+    FadeInExpandTransition,
     SlotMachineNumber
   },
   mixins: [
@@ -50,13 +53,13 @@ export default {
     },
     appeared: {
       type: Boolean,
-      default: null
+      required: true
     }
   },
   data () {
     return {
       oldValue: null,
-      newValue: null
+      newValue: this.value
     }
   },
   computed: {
@@ -87,9 +90,6 @@ export default {
       this.newValue = value
       this.oldValue = oldValue
     }
-  },
-  created () {
-    this.newValue = this.value
   }
 }
 </script>

@@ -9,11 +9,11 @@ export default create({
   ],
   getDerivedVariables ({ derived }) {
     return {
-      default: { color: derived.errorColor },
-      info: { color: derived.infoColor },
-      success: { color: derived.successColor },
-      error: { color: derived.errorColor },
-      warning: { color: derived.warningColor }
+      color: derived.errorColor,
+      colorInfo: derived.infoColor,
+      colorSuccess: derived.successColor,
+      colorError: derived.errorColor,
+      colorWarning: derived.warningColor
     }
   }
 })
