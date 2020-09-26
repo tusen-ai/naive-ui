@@ -11,19 +11,20 @@ export default {
     themeable
   ],
   props: {
-    as: {
-      validator () {
-        warn('element', '`as` is deprecated, please use `tag` instead.')
-        return true
-      },
-      default: undefined
-    },
     tag: {
       type: String,
       default: 'div'
     },
     onThemeChange: {
       type: Function,
+      default: undefined
+    },
+    // deprecated
+    as: {
+      validator () {
+        warn('element', '`as` is deprecated, please use `tag` instead.')
+        return true
+      },
       default: undefined
     }
   },

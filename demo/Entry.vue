@@ -101,7 +101,7 @@ export default {
     theme: {
       get () {
         switch (this.$route.params.theme) {
-          case 'os-theme': return this.$NOs.theme
+          case 'os-theme': return 'light'
           case 'dark': return 'dark'
           default: return 'light'
         }

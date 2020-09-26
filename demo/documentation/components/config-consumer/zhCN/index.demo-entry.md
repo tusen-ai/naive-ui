@@ -6,12 +6,12 @@ basic
 theme-environment
 color
 ```
-## Events
+## Props
 |名称|参数|说明|
 |-|-|-|
-|theme-change|`(theme: string)`||
-|namespace-change|`(namespace: string)`||
-|language-change|`(language: string)`||
+|on-theme-change|`(theme: string) => any`||
+|on-namespace-change|`(namespace: string) => any`||
+|on-language-change|`(language: string) => any`||
 
 ## Slots
 |名称|参数|说明|

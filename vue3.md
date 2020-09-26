@@ -36,8 +36,14 @@ placeable 进行了大调整
     - `on-expanded-names-change` => `on-update:expanded-names`
   - removed
     - `v-model` => `v-model:expanded-names`
-- [ ] config-consumer
-- [ ] config-provider
+- [x] config-consumer
+- [x] config-provider
+  - break
+    - `$NOs.theme` => `useOsTheme`
+  - deprecate
+    - `as` => `tag`
+  - new
+    - provide `useOsTheme` hook
 - [ ] confirm
 - [ ] data-table
 - [ ] date-picker

@@ -4,6 +4,7 @@ const { DefinePlugin } = require('webpack')
 
 exports.alias = {
   'naive-ui/lib/icons': path.resolve(__dirname, '../src/_icons'),
+  'naive-ui': path.resolve(__dirname, '../src/index.js'),
   'src': path.resolve(__dirname, '../src')
 }
 
