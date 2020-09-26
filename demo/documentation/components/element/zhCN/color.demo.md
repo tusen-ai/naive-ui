@@ -3,7 +3,7 @@
 
 确保你理解这些颜色的含义，请看[使用样式方案的注意事项](../doc/n-theme#style-scheme)。
 ```html
-<n-element as="div" class="myel" style="overflow: auto;" v-slot="{ styleScheme }">
+<n-element tag="div" class="myel" style="overflow: auto;" v-slot="{ styleScheme }">
   <pre
     :style="{
       color: styleScheme.secondaryTextColor,

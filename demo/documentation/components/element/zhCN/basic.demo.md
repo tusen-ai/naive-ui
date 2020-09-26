@@ -4,7 +4,7 @@
 创建特定主题的组件十分管用。
 
 ```html
-<n-element as="span" class="myel">
+<n-element tag="span" class="myel">
   我的元素
 </n-element>
 ```
