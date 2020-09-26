@@ -75,7 +75,7 @@ placeable 进行了大调整
 - [ ] layout
 - [x] list
 - [ ] loading-bar
-- [ ] log
+- [x] log
 - [x] menu
   - new
     - `popover-body-style`

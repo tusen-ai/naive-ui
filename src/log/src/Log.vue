@@ -99,6 +99,18 @@ export default {
     hljs: {
       type: Object,
       default: null
+    },
+    onReachTop: {
+      type: Function,
+      default: undefined
+    },
+    onReachBottom: {
+      type: Function,
+      default: undefined
+    },
+    onRequireMore: {
+      type: Function,
+      default: undefined
     }
   },
   data () {
@@ -130,7 +142,7 @@ export default {
     },
     handleScroll (e, container, content) {
       if (this.dismissEvent) {
-        this.$nextTick().then(() => {
+        this.$nextTick(() => {
           this.dismissEvent = false
         })
         return
@@ -141,18 +153,26 @@ export default {
       const scrollTop = containerScrollTop
       const scrollBottom = contentHeight - containerScrollTop - containerHeight
       if (scrollTop <= this.offsetTop) {
-        this.$emit('require-more', 'top')
-        this.$emit('reach-top')
+        const {
+          onReachTop,
+          onRequireMore
+        } = this
+        if (onRequireMore) onRequireMore('top')
+        if (onReachTop) onReachTop()
       }
       if (scrollBottom <= this.offsetBottom) {
-        this.$emit('require-more', 'bottom')
-        this.$emit('reach-bottom')
+        const {
+          onReachBottom,
+          onRequireMore
+        } = this
+        if (onRequireMore) onRequireMore('bottom')
+        if (onReachBottom) onReachBottom()
       }
     },
 
     handleWheel (e) {
       if (this.dismissEvent) {
-        this.$nextTick().then(() => {
+        this.$nextTick(() => {
           this.dismissEvent = false
         })
         return
@@ -168,9 +188,17 @@ export default {
           const scrollBottom =
             contentHeight - containerScrollTop - containerHeight
           const deltaY = e.deltaY
-          if (scrollTop === 0 && deltaY < 0) this.$emit('require-more', 'top')
+          if (scrollTop === 0 && deltaY < 0) {
+            const {
+              onRequireMore
+            } = this
+            if (onRequireMore) onRequireMore('top')
+          }
           if (scrollBottom <= 0 && deltaY > 0) {
-            this.$emit('require-more', 'bottom')
+            const {
+              onRequireMore
+            } = this
+            if (onRequireMore) onRequireMore('bottom')
           }
         }
       }

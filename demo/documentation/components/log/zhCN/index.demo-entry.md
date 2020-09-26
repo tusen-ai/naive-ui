@@ -36,26 +36,23 @@ loading
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|loading|`boolean`|`false`||
-|trim|`boolean`|`false`||
-|log|`string`|`null`||
-|lines|`Array<string>`|`null`||
 |font-size|`number`|`14`||
-|line-height|`number`|`1.25`||
-|language|`string`|`null`||
-|rows|`number`|`15`||
 |hljs|`Object`|`null`||
+|language|`string`|`null`||
+|line-height|`number`|`1.25`||
+|lines|`Array<string>`|`null`||
+|loading|`boolean`|`false`||
+|log|`string`|`null`||
+|rows|`number`|`15`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|trim|`boolean`|`false`||
+|on-require-more|`(from: 'top' \| 'bottom') => any`|`undefined`||
+|on-reach-top|`() => any`|`undefined`||
+|on-reach-bottom|`() => any`|`undefined`||
 
-## Events
-|名称|参数|说明|
-|-|-|-|
-|require-more|`(from: 'top' \| 'bottom')`||
-|reach-top|`()`|
-|reach-bottom|`()`|
 
 ## Methods
 |名称|参数|说明|
 |-|-|-|
-|scrollToTop|`(dismissEvent: boolean = false)`||
 |scrollToBottom|`(dismissEvent: boolean = false)`||
+|scrollToTop|`(dismissEvent: boolean = false)`||
