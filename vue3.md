@@ -72,7 +72,11 @@ placeable 进行了大调整
 - [ ] input-group
 - [ ] input-group-label
 - [ ] input-number
-- [ ] layout
+- [x] layout
+  - layout-sider
+    - deprecate
+      - `on-expand` => `on-update:collapsed`
+      - `on-collapse` => `on-update:collapsed`
 - [x] list
 - [ ] loading-bar
 - [x] log

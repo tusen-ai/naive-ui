@@ -121,6 +121,20 @@ export default {
     triggerStyle: {
       type: Object,
       default: null
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:collapsed': {
+      type: Function,
+      default: undefined
+    },
+    // deprecated
+    onExpand: {
+      type: Function,
+      default: undefined
+    },
+    onCollapse: {
+      type: Function,
+      default: undefined
     }
   },
   data () {
@@ -210,9 +224,6 @@ export default {
       NLayout.siderCollapseMode = this.collapseMode
       NLayout.siderPosition = this.position
       NLayout.siderCollapsed = this.collapsed
-      // TODO: this is a workaround for bug of vue
-      // remove it if vue fixed it
-      nextTick(() => NLayout.$forceUpdate())
     }
   },
   beforeUnmount () {
@@ -235,10 +246,18 @@ export default {
       }
     },
     handleToggleButtonClick () {
-      if (this.collapsed) {
-        this.$emit('expand')
+      const {
+        'onUpdate:collapsed': onUpdateCollapsed,
+        collapsed,
+        // deprecated
+        onExpand,
+        onCollapse
+      } = this
+      if (onUpdateCollapsed) onUpdateCollapsed(!collapsed)
+      if (collapsed) {
+        if (onExpand) onExpand()
       } else {
-        this.$emit('collapse')
+        if (onCollapse) onCollapse()
       }
     }
   }

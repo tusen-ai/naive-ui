@@ -50,6 +50,7 @@ scroll-to
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 |width|`number`|`272`||
 |use-native-scrollbar|`boolean`|`true`|是否在自身使用原生滚动条。如果设定为 `false`, Sider 将会对内容使用 naive-ui 风格的滚动条|
+|on-update:collapsed|`(collapsed: boolean) => any`|`undefined`||
 
 
 ## Slots
@@ -57,13 +58,6 @@ scroll-to
 |名称|参数|说明|
 |-|-|-|
 |default|`()`||
-
-## Events
-### Layout Sider Events
-|名称|参数|说明|
-|-|-|-|
-|collapse|`()`||
-|expand|`()`||
 
 ## Methods
 ### Layout, Layout Content, Layout Sider Methods
