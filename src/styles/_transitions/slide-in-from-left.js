@@ -21,10 +21,10 @@ export default function ({
     c(`&.${namespace}-${name}-transition-enter-to`, {
       transform: `translateX(0)`
     }),
-    c(`&.${namespace}-${name}-transition-enter`, {
+    c(`&.${namespace}-${name}-transition-enter-from`, {
       transform: `translateX(-100%)`
     }),
-    c(`&.${namespace}-${name}-transition-leave`, {
+    c(`&.${namespace}-${name}-transition-leave-from`, {
       transform: `translateX(0)`
     }),
     c(`&.${namespace}-${name}-transition-leave-to`, {

@@ -7,7 +7,7 @@
   <n-button @click="activate('left')">左</n-button>
 </n-button-group>
 <div 
-  ref="target"
+  id="drawer-target"
   style="
     position:relative;
     width: 100%;
@@ -23,11 +23,11 @@
   显示区域
 </div>
 <n-drawer
-  v-model="active"
+  v-model:show="active"
   :width="200"
   :height="200"
   :placement="placement" 
-  :target="target"
+  to="#drawer-target"
 >
   <n-h1>斯通纳</n-h1>
   <n-p>《斯通纳》是美国作家约翰·威廉姆斯在 1965 年出版的小说。</n-p>
@@ -45,9 +45,6 @@ export default {
     activate (placement) {
       this.active = true
       this.placement = placement
-    },
-    target () {
-      return this.$refs.target
     }
   }
 }

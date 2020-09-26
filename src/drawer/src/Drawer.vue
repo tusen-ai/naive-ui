@@ -1,31 +1,35 @@
 <template>
-  <n-base-portal
-    ref="portal"
-    :transfer-target="target"
+  <n-lazy-teleport
+    :to="to"
+    :show="show"
   >
     <div
-      ref="contentContainer"
+      v-zindexable="{ enabled: show }"
       class="n-positioning-container"
     >
       <div
         class="n-drawer-container"
       >
-        <transition name="n-fade-in-transition">
+        <transition
+          name="n-fade-in-transition"
+          :appear="isMounted"
+        >
           <div
-            v-if="active"
-            class="n-drawer-overlay"
-            @click="handleOverlayClick"
+            v-if="show"
+            class="n-drawer-mask"
+            @click="handleMaskClick"
           />
         </transition>
         <transition
           :name="transitionName"
-          @after-leave="handleAfterLeave"
+          :appear="isMounted"
         >
-          <n-drawer-content
-            v-if="active"
+          <n-drawer-body
+            v-if="displayDirective === 'show' || show"
+            v-show="displayDirective === 'if' || show"
             class="n-drawer"
             :style="{
-              ...drawerStyle,
+              ...compitableBodyStyle,
               ...syntheticStyle,
               width: styleWidth,
               height: styleHeight
@@ -33,45 +37,45 @@
             :class="{
               [`n-drawer--${placement}-placement`]: true,
               [`n-${syntheticTheme}-theme`]: syntheticTheme,
-              [drawerClass]: drawerClass,
+              [compitableBodyClass]: compitableBodyClass,
               [namespace]: namespace
             }"
             :style-width="styleWidth"
           >
             <slot />
-          </n-drawer-content>
+          </n-drawer-body>
         </transition>
       </div>
     </div>
-  </n-base-portal>
+  </n-lazy-teleport>
 </template>
 
 <script>
-import NBasePortal from '../../_base/portal'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import zindexable from '../../_mixins/zindexable'
-import formatLength from '../../_utils/css/formatLength'
-import NDrawerContent from './DrawerContent'
 import usecssr from '../../_mixins/usecssr'
+import zindexable from '../../_directives/zindexable'
+import formatLength from '../../_utils/css/formatLength'
+import { warn } from '../../_utils/naive/warn'
+import { useCompitable, useIsMounted } from '../../_utils/composition'
+import NLazyTeleport from '../../_base/lazy-teleport'
+import NDrawerBody from './DrawerContent'
 import styles from './styles/index'
 
 export default {
   name: 'Drawer',
   components: {
-    NBasePortal,
-    NDrawerContent
+    NLazyTeleport,
+    NDrawerBody
+  },
+  directives: {
+    zindexable
   },
   mixins: [
     withapp,
     themeable,
-    zindexable,
     usecssr(styles)
   ],
-  model: {
-    prop: 'show',
-    event: 'hide'
-  },
   props: {
     show: {
       type: Boolean,
@@ -95,22 +99,71 @@ export default {
       type: Boolean,
       default: true
     },
-    drawerStyle: {
+    bodyClass: {
+      type: String,
+      default: undefined
+    },
+    bodyStyle: {
       type: Object,
-      default: null
+      default: undefined
+    },
+    to: {
+      type: [String, Object],
+      default: 'body'
+    },
+    displayDirective: {
+      validator (value) {
+        return ['if', 'show'].includes(value)
+      },
+      default: 'if'
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:show': {
+      type: Function,
+      default: undefined
+    },
+    // deprecated
+    drawerStyle: {
+      validator () {
+        warn('drawer', '`draw-style` is deprecated, please use `body-style` instead.')
+        return true
+      },
+      default: undefined
     },
     drawerClass: {
-      type: String,
-      default: null
+      validator () {
+        warn('drawer', '`draw-class` is deprecated, please use `body-class` instead.')
+        return true
+      },
+      default: undefined
     },
     target: {
-      type: Function,
-      default: () => document.body
+      validator () {
+        warn('drawer', '`target` is deprecated, please use `to` instead.')
+        return true
+      },
+      default: undefined
+    },
+    onShow: {
+      validator () {
+        warn('drawer', '`on-show` is deprecated, please use `on-update:show` instead.')
+        return true
+      },
+      default: undefined
+    },
+    onHide: {
+      validator () {
+        warn('drawer', '`on-hide` is deprecated, please use `on-update:show` instead.')
+        return true
+      },
+      default: undefined
     }
   },
-  data () {
+  setup (props) {
     return {
-      zindexable: true
+      compitableBodyClass: useCompitable(props, ['drawerClass', 'bodyClass']),
+      compitableBodyStyle: useCompitable(props, ['drawerStyle', 'bodyStyle']),
+      isMounted: useIsMounted()
     }
   },
   computed: {
@@ -122,39 +175,39 @@ export default {
         bottom: 'n-slide-in-from-bottom-transition'
       })[this.placement]
     },
-    active () {
-      return this.show
-    },
     styleWidth () {
-      if (this.placement === 'top' || this.placement === 'bottom') return null
-      if (this.width === null) return null
-      return formatLength(this.width)
+      const {
+        placement
+      } = this
+      if (placement === 'top' || placement === 'bottom') return null
+      const {
+        width
+      } = this
+      if (width === null) return null
+      return formatLength(width)
     },
     styleHeight () {
-      if (this.placement === 'left' || this.placement === 'right') return null
-      if (this.height === null) return null
-      return formatLength(this.height)
-    }
-  },
-  watch: {
-    active (value) {
-      if (value) {
-        this.$emit('show')
-        this.$refs.portal.transferElement()
-      }
-    }
-  },
-  mounted () {
-    if (this.active) {
-      this.$refs.portal.transferElement()
+      const {
+        placement
+      } = this
+      if (placement === 'left' || placement === 'right') return null
+      const {
+        height
+      } = this
+      if (height === null) return null
+      return formatLength(height)
     }
   },
   methods: {
-    handleAfterLeave () {
-    },
-    handleOverlayClick () {
+    handleMaskClick () {
       if (this.maskClosable) {
-        this.$emit('hide', false)
+        const {
+          onHide,
+          'onUpdate:show': onUpdateShow
+        } = this
+        if (onUpdateShow) onUpdateShow(false)
+        // deprecated
+        if (onHide) onHide()
       }
     }
   }

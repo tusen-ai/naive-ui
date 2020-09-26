@@ -43,7 +43,17 @@ placeable 进行了大调整
 - [ ] date-picker
 - [x] descriptions
 - [x] divider
-- [ ] drawer
+- [x] drawer
+  - break
+    - `v-model`
+  - deprecate
+    - `on-show` => `on-update:show`
+    - `on-hide` => `on-update:show`
+    - `target` => `to`
+    - `drawer-class` => `body-class`
+    - `drawer-style` => `body-style`
+  - new
+    - `display-directive` prop
 - [ ] dropdown
 - [ ] dynamic-input
 - [ ] dynamic-tags
