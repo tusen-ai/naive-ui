@@ -141,7 +141,7 @@ placeable 进行了大调整
 - [ ] slider
 - [x] spin
 - [x] statistic
-- [ ] steps
+- [x] steps
 - [x] switch
   - remove
     - `value` => `model-value`

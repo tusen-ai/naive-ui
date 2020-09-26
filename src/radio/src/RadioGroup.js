@@ -1,4 +1,4 @@
-<script>
+import { h } from 'vue'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import hollowoutable from '../../_mixins/hollowoutable'
@@ -6,31 +6,32 @@ import asformitem from '../../_mixins/asformitem'
 import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles/radio-group/index.js'
+import { warn } from '../../_utils/naive/warn'
 
 function mapSlot (h, defaultSlot, groupInstance) {
   const mappedSlot = []
   defaultSlot = defaultSlot || []
   for (let i = 0; i < defaultSlot.length; ++i) {
     const wrappedInstance = defaultSlot[i]
-    const instanceOptions = wrappedInstance.componentOptions
-    const instanceCtorOptions = instanceOptions && instanceOptions.Ctor.options
+    const instanceOptions = wrappedInstance.type
     if (
-      !instanceOptions ||
-      !['Radio', 'RadioButton'].includes(instanceCtorOptions.name)
-    ) {
-      console.error(
-        '[naive ui/radio]: `n-radio-group` only taks `n-radio` and `n-radio-button` as children.'
+      __DEV__ && (
+        !instanceOptions ||
+        !['Radio', 'RadioButton'].includes(instanceOptions.name)
       )
+    ) {
+      warn('radio-group', '`n-radio-group` only taks `n-radio` and `n-radio-button` as children.')
       continue
     }
-    if (i === 0 || instanceCtorOptions.name === 'Radio') {
+    const instanceProps = wrappedInstance.props
+    if (i === 0 || instanceOptions.name === 'Radio') {
       mappedSlot.push(wrappedInstance)
     } else {
-      const lastInstanceComponentOptions = mappedSlot[mappedSlot.length - 1].componentOptions
-      const lastInstanceChecked = groupInstance.$props.value === lastInstanceComponentOptions.propsData.value
-      const lastInstanceDisabled = lastInstanceComponentOptions.propsData.disabled
-      const currentInstanceChecked = groupInstance.$props.value === instanceOptions.propsData.value
-      const currentInstanceDisabled = instanceOptions.propsData.disabled
+      const lastInstanceProps = mappedSlot[mappedSlot.length - 1].props
+      const lastInstanceChecked = groupInstance.$props.value === lastInstanceProps.value
+      const lastInstanceDisabled = lastInstanceProps.disabled
+      const currentInstanceChecked = groupInstance.$props.value === instanceProps.value
+      const currentInstanceDisabled = instanceProps.disabled
       let lastInstancePriority
       let currentInstancePriority
       if (groupInstance.syntheticTheme === 'dark') {
@@ -130,17 +131,18 @@ export default {
       NFormItem: null
     }
   },
-  render (h) {
+  render () {
     const isButtonGroup = this.radioButtonCount > 0
     return h('div', {
-      staticClass: 'n-radio-group',
-      class: {
-        [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
-        [`n-radio-group--${this.syntheticSize}-size`]: this.syntheticSize,
-        [`n-radio-group--button-group`]: isButtonGroup,
-        [`n-radio-group--transition-disabled`]: isButtonGroup && this.transitionDisabled
-      }
+      class: [
+        'n-radio-group',
+        {
+          [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
+          [`n-radio-group--${this.syntheticSize}-size`]: this.syntheticSize,
+          [`n-radio-group--button-group`]: isButtonGroup,
+          [`n-radio-group--transition-disabled`]: isButtonGroup && this.transitionDisabled
+        }
+      ]
     }, mapSlot(h, getDefaultSlot(this), this))
   }
 }
-</script>

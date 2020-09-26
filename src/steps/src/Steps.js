@@ -1,17 +1,15 @@
-<script>
+import { h } from 'vue'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import hollowoutable from '../../_mixins/hollowoutable'
 import usecssr from '../../_mixins/usecssr'
 import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
 import styles from './styles/steps'
+import { useDisabledUntilMounted } from '../../_utils/composition'
 
 function stepWithIndex (step, i) {
-  if (step.componentOptions) {
-    step.componentOptions.propsData = Object.assign(step.componentOptions.propsData, {
-      index: i + 1
-    })
-  }
+  if (!step.props) step.props = {}
+  step.props.index = i + 1
   return step
 }
 
@@ -50,26 +48,22 @@ export default {
       default: false
     }
   },
-  data () {
+  setup () {
     return {
-      transitionDisabled: true
+      transitionDisabled: useDisabledUntilMounted(1)
     }
   },
-  mounted () {
-    this.$nextTick().then(() => {
-      this.transitionDisabled = false
-    })
-  },
-  render (h) {
+  render () {
     return h('div', {
-      staticClass: 'n-steps',
-      class: {
-        [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
-        [`n-steps--${this.size}-size`]: true,
-        'n-steps--vertical': this.vertical,
-        'n-steps--transition-disabled': this.transitionDisabled
-      }
+      class: [
+        'n-steps',
+        {
+          [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
+          [`n-steps--${this.size}-size`]: true,
+          'n-steps--vertical': this.vertical,
+          'n-steps--transition-disabled': this.transitionDisabled
+        }
+      ]
     }, stepsWithIndex({ ...this.$props }, getDefaultSlot(this)))
   }
 }
-</script>

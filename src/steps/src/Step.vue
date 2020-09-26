@@ -24,13 +24,13 @@
             v-else-if="syntheticStatus === 'finish'"
             key="finish"
           >
-            <md-checkmark />
+            <finished-icon />
           </n-icon>
           <n-icon
             v-else-if="syntheticStatus === 'error'"
             key="error"
           >
-            <md-close />
+            <error-icon />
           </n-icon>
         </n-icon-switch-transition>
       </div>
@@ -55,8 +55,8 @@
 
 <script>
 import NIcon from '../../icon'
-import mdClose from '../../_icons/md-close'
-import mdCheckmark from '../../_icons/md-checkmark'
+import ErrorIcon from '../../_icons/md-close'
+import FinishedIcon from '../../_icons/md-checkmark'
 import themeable from '../../_mixins/themeable'
 
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
@@ -69,11 +69,13 @@ export default {
   },
   components: {
     NIcon,
-    mdCheckmark,
-    mdClose,
+    FinishedIcon,
+    ErrorIcon,
     NIconSwitchTransition
   },
-  mixins: [ themeable ],
+  mixins: [
+    themeable
+  ],
   props: {
     status: {
       type: String,

@@ -4,6 +4,23 @@ export default function (events = {
   focus: 'focus'
 }, defaultSize = 'medium', syntheticSize = null) {
   return {
+    data () {
+      return {
+        syntheticSize: 'medium'
+      }
+    },
+    provide () {
+      return {
+        NFormItem: '__FORM_ITEM_INNER__'
+      }
+    },
+    inject: {
+      NFormItem: {
+        default: null
+      }
+    }
+  }
+  return {
     computed: {
       syntheticSize: syntheticSize || function () {
         const size = this.size

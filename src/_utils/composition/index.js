@@ -6,7 +6,8 @@ import {
   inject,
   toRef,
   getCurrentInstance,
-  onBeforeUnmount
+  onBeforeUnmount,
+  nextTick
 } from 'vue'
 
 export function useFalseUntilTruthy (valueRef) {
@@ -50,6 +51,30 @@ export function useIsMounted () {
     isMounted.value = true
   })
   return isMounted
+}
+
+export function useNotMounted () {
+  const notMounted = ref(true)
+  onMounted(() => {
+    notMounted.value = false
+  })
+  return notMounted
+}
+
+export function useDisabledUntilMounted (durationTickCount = 0) {
+  const disabled = ref(true)
+  onMounted(() => {
+    function countDown () {
+      if (!durationTickCount) {
+        disabled.value = false
+      } else {
+        durationTickCount -= 1
+        nextTick(countDown)
+      }
+    }
+    countDown()
+  })
+  return disabled
 }
 
 export function useMemo (valueGenerator, deps) {
