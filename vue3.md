@@ -44,7 +44,7 @@ placeable 进行了大调整
     - `as` => `tag`
   - new
     - provide `useOsTheme` hook
-- [ ] confirm => `dialog`
+- [x] confirm => `dialog`
   - break
     - rename `confirm` to `dialog`
   - remove
@@ -82,7 +82,11 @@ placeable 进行了大调整
       - `on-expand` => `on-update:collapsed`
       - `on-collapse` => `on-update:collapsed`
 - [x] list
-- [ ] loading-bar
+- [x] loading-bar
+  - remove
+    - `$NLoadingBar`
+  - new
+    - `n-loading-bar-provider`
 - [x] log
 - [x] menu
   - new

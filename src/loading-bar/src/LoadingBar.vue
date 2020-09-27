@@ -2,12 +2,12 @@
   <transition
     name="n-fade-in-transition"
     appear
+    @enter="handleEnter"
     @after-enter="handleAfterEnter"
     @after-leave="handleAfterLeave"
-    @leave-cancelled="handleLeaveCancelled"
   >
     <div
-      v-show="!enter || status === 'starting'"
+      v-if="loading || (!loading && entering)"
       class="n-loading-bar-container"
       :class="{
         [`n-${syntheticTheme}-theme`]: syntheticTheme
@@ -16,119 +16,102 @@
       <div
         ref="loadingBar"
         class="n-loading-bar"
-        :class="{
-          'n-loading-bar--starting': status === 'starting',
-          'n-loading-bar--finishing': status === 'finishing',
-          'n-loading-bar--error': status === 'error'
-        }"
-        :style="{
-          maxWidth: progress + '%'
-        }"
       />
     </div>
   </transition>
 </template>
 
 <script>
+import withapp from '../../_mixins/withapp'
+import themeable from '../../_mixins/themeable'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
+
+function createClassName (status) {
+  return `n-loading-bar n-loading-bar--${status}`
+}
 
 export default {
   name: 'LoadingBar',
   mixins: [
+    withapp,
+    themeable,
     usecssr(styles)
   ],
   data () {
     return {
-      progress: 0,
-      status: null,
-      finishCallback: null,
-      enter: false,
-      inheritedTheme: null,
-      theme: null,
-      activeAction: null
-    }
-  },
-  computed: {
-    syntheticTheme () {
-      return this.theme || this.inheritedTheme
+      entering: false,
+      loading: false,
+      finishing: false,
+      erroring: false
     }
   },
   methods: {
+    init () {
+      this.entered = false
+      this.loading = false
+      this.finishing = false
+      this.erroring = false
+    },
+    start (fromProgress = 0, toProgress = 80, status = 'starting') {
+      this.init()
+      return this.$nextTick(() => {
+        this.loading = true
+        return this.$nextTick()
+      }).then(() => {
+        const el = this.$refs.loadingBar
+        el.style.maxWidth = `${fromProgress}%`
+        el.style.transition = 'none'
+        void el.offsetWidth
+        el.className = createClassName(status)
+        el.style.transition = null
+        el.style.maxWidth = `${toProgress}%`
+      })
+    },
+    finish () {
+      if (this.finishing || this.erroring) return
+      this.finishing = true
+      if (!this.loading) {
+        this.start(100, 100).then(() => {
+          const el = this.$refs.loadingBar
+          el.className = createClassName('finishing')
+          void el.offsetWidth
+          this.loading = false
+        })
+      } else {
+        const el = this.$refs.loadingBar
+        el.className = createClassName('finishing')
+        el.style.maxWidth = '100%'
+        void el.offsetWidth
+        this.loading = false
+      }
+    },
+    error () {
+      if (this.finishing || this.erroring) return
+      this.erroring = true
+      if (!this.loading) {
+        this.start(100, 100, 'error').then(() => {
+          const el = this.$refs.loadingBar
+          el.className = createClassName('error')
+          void el.offsetWidth
+          this.loading = false
+        })
+      } else {
+        const el = this.$refs.loadingBar
+        el.className = createClassName('error')
+        el.style.maxWidth = '100%'
+        void el.offsetWidth
+        this.loading = false
+      }
+    },
+    handleEnter () {
+      this.entering = true
+    },
     handleAfterEnter () {
-      this.enter = true
-    },
-    handleLeaveCancelled () {
-      this.enter = false
-    },
-    start (fromProgress = 0, toProgress = 80) {
-      if (this.status === null) {
-        this.status = 'starting'
-        this.activeAction = this.$nextTick().then(() => {
-          this.$el.getBoundingClientRect()
-          this.progress = toProgress
-          return this.$nextTick()
-        })
-        return this.activeAction
-      } else {
-        this.progress = fromProgress
-        this.activeAction = this.$nextTick().then(() => {
-          this.$refs.loadingBar.style.transition = 'none'
-          this.$refs.loadingBar.getBoundingClientRect()
-          this.$refs.loadingBar.style.transition = null
-          this.status = 'starting'
-          this.progress = toProgress
-          return this.$nextTick()
-        })
-        return this.activeAction
-      }
-    },
-    finish (callback) {
-      this.finishCallback = callback
-      if (this.status === 'finishing') {
-        this.activeAction = this.start(100, 100).then(() => {
-          this.finish(callback)
-        })
-      } else if (this.status === null) {
-        this.progress = 100
-        this.activeAction = this.$nextTick().then(() => {
-          this.$refs.loadingBar.style.transition = 'none'
-          this.$refs.loadingBar.getBoundingClientRect()
-          this.$refs.loadingBar.style.transition = null
-          this.status = 'finishing'
-        })
-      } else {
-        this.activeAction = this.activeAction.then(() => {
-          this.progress = 100
-          this.status = 'finishing'
-        })
-      }
-    },
-    error (callback) {
-      this.finishCallback = callback
-      if (this.status === 'error') {
-        this.activeAction = this.start(100, 100).then(() => {
-          this.error(callback)
-        })
-      } else if (this.status === null) {
-        this.progress = 100
-        this.activeAction = this.$nextTick().then(() => {
-          this.$refs.loadingBar.style.transition = 'none'
-          this.$refs.loadingBar.getBoundingClientRect()
-          this.$refs.loadingBar.style.transition = null
-          this.status = 'error'
-        })
-      } else {
-        this.activeAction = this.activeAction.then(() => {
-          this.progress = 100
-          this.status = 'error'
-        })
-      }
+      this.entering = false
     },
     handleAfterLeave () {
-      this.enter = false
-      this.status = null
-      this.finishCallback()
+      this.init()
     }
   }
 }

@@ -36,7 +36,7 @@ import InputGroupLabelStyle from './input-group-label'
 import InputNumber from './input-number'
 import Layout from './layout'
 import List from './list'
-// import LoadingBar from './loading-bar'
+import LoadingBar from './loading-bar'
 import Log from './log'
 import Menu from './menu'
 import Message from './message'
@@ -265,7 +265,7 @@ export default create({
     Transfer,
     Spin,
     Drawer,
-    // LoadingBar,
+    LoadingBar,
     Time,
     Slider,
     Tree,

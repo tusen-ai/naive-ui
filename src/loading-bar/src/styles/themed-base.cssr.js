@@ -28,16 +28,12 @@ export default c([
           transition:
             max-width 4s linear,
             background-color .2s linear;
-          max-width: 0;
           height: ${height};
         `
       }, [
         cM('starting', {
           raw: `
             background-color: ${colorLoading};
-            transition:
-              max-width 4s linear,
-              background-color .2s linear;
           `
         }),
         cM('finishing', {
