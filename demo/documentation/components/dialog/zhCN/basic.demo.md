@@ -1,5 +1,5 @@
 # 基础用法
-使用 `$NConfirm` 来创建一个确认弹框。
+注入 `dialog` 来创建一个弹框。
 ```html
 <n-button @click="handleConfirm">
   警告
@@ -18,39 +18,43 @@
 ```
 ```js
 export default {
+  inject: [
+    'dialog',
+    'message'
+  ],
   methods: {
     handleConfirm (e) {
-      const confirmInstance = this.$NConfirm.warning({
+      this.dialog.warning({
         title: '警告',
         content: '你确定？',
         positiveText: '确定',
         negativeText: '不确定',
         onPositiveClick: () => {
-          this.$NMessage.success('确定')
+          this.message.success('确定')
         },
         onNegativeClick: () => {
-          this.$NMessage.error('不确定')
+          this.message.error('不确定')
         }
       })
     },
     handleSuccess (e) {
-      const confirmInstance = this.$NConfirm.success({
+      this.dialog.success({
         title: '成功',
         content:
           '厉害',
         positiveText: '哇',
         onPositiveClick: () => {
-          this.$NMessage.success('耶！')
+          this.message.success('耶！')
         }
       })
     },
-    handleError(e) {
-      const confirmInstance = this.$NConfirm.error({
+    handleError (e) {
+      this.dialog.error({
         title: '错误',
         content: '错了',
         positiveText: '啊',
         onPositiveClick: () => {
-          this.$NMessage.success('我就知道')
+          this.message.success('我就知道')
         }
       })
     }

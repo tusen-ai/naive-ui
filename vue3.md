@@ -44,7 +44,11 @@ placeable 进行了大调整
     - `as` => `tag`
   - new
     - provide `useOsTheme` hook
-- [ ] confirm
+- [ ] confirm => `dialog`
+  - break
+    - rename `confirm` to `dialog`
+  - remove
+    - `$NConfirm`, `$NModal` => `inject.dialog`
 - [ ] data-table
 - [ ] date-picker
 - [x] descriptions
@@ -122,9 +126,6 @@ placeable 进行了大调整
     - `on-change` => `on-update:page`
     - `on-page-size-change` => `on-update:page-size`
 - [x] popconfirm
-  - new
-    - `leave-on-positive-click`
-    - `leave-on-negative-click`
 - [x] popover
   - new
     - `default-show`

@@ -29,7 +29,7 @@ import radio from '../documentation/components/radio'
 import form from '../documentation/components/form'
 import tabs from '../documentation/components/tabs'
 import timePicker from '../documentation/components/time-picker'
-import confirm from '../documentation/components/confirm'
+import dialog from '../documentation/components/dialog'
 import backTop from '../documentation/components/back-top'
 import dropdown from '../documentation/components/dropdown'
 import badge from '../documentation/components/badge'
@@ -112,7 +112,7 @@ export const childRoutes = withPrefix('/:lang/:theme/doc', [
   { path: '/n-form', component: form },
   { path: '/n-tabs', component: tabs },
   { path: '/n-time-picker', component: timePicker },
-  { path: '/n-confirm', component: confirm },
+  { path: '/n-dialog', component: dialog },
   { path: '/n-badge', component: badge },
   { path: '/n-steps', component: steps },
   { path: '/n-collapse', component: collapse },

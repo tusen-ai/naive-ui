@@ -2,7 +2,7 @@ import create from '../../styles/_utils/create-component-base'
 
 export default create({
   theme: 'dark',
-  name: 'Confirm',
+  name: 'Dialog',
   getDerivedVariables ({ base, derived }) {
     const {
       textColorPrimaryOverlay,

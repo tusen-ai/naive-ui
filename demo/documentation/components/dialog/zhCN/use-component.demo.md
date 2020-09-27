@@ -1,7 +1,7 @@
 # 使用组件
-有的时候你可能想把它用作一个组件
+有的时候你可能想把它用作一个组件。
 ```html
-<n-confirm
+<n-dialog
   title="确认"
   content="你确定" 
   :closable="false"
@@ -13,14 +13,13 @@
 ```
 ```js
 export default {
+  inject: ['message'],
   methods: {
     handleNegativeClick () {
-      this.$NMessage.warning('取消')
-      this.isActive = false
+      this.message.warning('取消')
     },
     handlePositiveClick () {
-      this.$NMessage.success('确认')
-      this.isActive = false
+      this.message.success('确认')
     }
   }
 }

@@ -434,10 +434,10 @@ export default function (instance) {
             path: `/${lang}/${theme}/doc` + '/n-badge'
           },
           {
-            name: 'Confirm',
+            name: 'Dialog',
             title: '确认',
-            titleExtra: 'Confirm',
-            path: `/${lang}/${theme}/doc` + '/n-confirm'
+            titleExtra: 'Dialog',
+            path: `/${lang}/${theme}/doc` + '/n-dialog'
           },
           {
             name: 'Drawer',
@@ -783,8 +783,8 @@ export default function (instance) {
             path: `/${lang}/${theme}/doc` + '/n-badge'
           },
           {
-            name: 'Confirm',
-            path: `/${lang}/${theme}/doc` + '/n-confirm'
+            name: 'Dialog',
+            path: `/${lang}/${theme}/doc` + '/n-dialog'
           },
           {
             name: 'Drawer',

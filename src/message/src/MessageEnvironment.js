@@ -13,25 +13,25 @@ export default {
     },
     onClose: {
       type: Function,
-      default: () => {}
+      default: undefined
     },
     onAfterLeave: {
       type: Function,
-      default: () => {}
+      default: undefined
     },
     // private
     onInternalAfterLeave: {
       type: Function,
-      default: () => {}
+      default: undefined
     },
     // deprecated
     onHide: {
       type: Function,
-      default: () => {}
+      default: undefined
     },
     onAfterHide: {
       type: Function,
-      default: () => {}
+      default: undefined
     }
   },
   data () {
@@ -50,18 +50,20 @@ export default {
     hide () {
       const {
         timerId,
-        onClose,
         onHide
       } = this
       this.show = false
       if (timerId) {
         window.clearTimeout(timerId)
       }
-      onClose()
       // deprecated
-      onHide()
+      if (onHide) onHide()
     },
     handleClose () {
+      const {
+        onClose
+      } = this
+      if (onClose) onClose()
       this.hide()
     },
     handleAfterLeave () {
@@ -70,10 +72,10 @@ export default {
         onInternalAfterLeave,
         onAfterHide
       } = this
-      onAfterLeave()
-      onInternalAfterLeave(this._.vnode.key)
+      if (onAfterLeave) onAfterLeave()
+      if (onInternalAfterLeave) onInternalAfterLeave(this._.vnode.key)
       // deprecated
-      onAfterHide()
+      if (onAfterHide) onAfterHide()
     },
     // deprecated
     deactivate () {

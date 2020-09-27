@@ -8,9 +8,7 @@ const panelProps = [
   'negativeText',
   'showIcon',
   'onPositiveClick',
-  'onNegativeClick',
-  'leaveOnNegativeClick',
-  'leaveOnPositiveClick'
+  'onNegativeClick'
 ]
 
 export default {
@@ -33,21 +31,13 @@ export default {
       type: String,
       default: 'click'
     },
-    leaveOnPositiveClick: {
-      type: Boolean,
-      default: true
-    },
-    leaveOnNegativeClick: {
-      type: Boolean,
-      default: true
-    },
     onPositiveClick: {
       type: Function,
-      default: undefined
+      default: () => true
     },
     onNegativeClick: {
       type: Function,
-      default: undefined
+      default: () => true
     }
   },
   render () {
@@ -67,26 +57,28 @@ export default {
         onPositiveClick: () => {
           const {
             onPositiveClick,
-            leaveOnPositiveClick,
             'onUpdate:show': onUpdateShow
           } = this
-          if (onPositiveClick) onPositiveClick()
-          if (leaveOnPositiveClick) {
+          Promise.resolve(
+            onPositiveClick()
+          ).then(value => {
+            if (!value) return
             this.$refs.popover.setShow(false)
             onUpdateShow(false)
-          }
+          })
         },
         onNegativeClick: () => {
           const {
             onNegativeClick,
-            leaveOnNegativeClick,
             'onUpdate:show': onUpdateShow
           } = this
-          if (onNegativeClick) onNegativeClick()
-          if (leaveOnNegativeClick) {
+          Promise.resolve(
+            onNegativeClick()
+          ).then(value => {
+            if (!value) return
             this.$refs.popover.setShow(false)
             onUpdateShow(false)
-          }
+          })
         }
       }, {
         action: slots.action,

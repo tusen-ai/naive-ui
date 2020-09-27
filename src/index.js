@@ -15,7 +15,7 @@ import Code from './code'
 import Collapse from './collapse'
 import ConfigConsumer from './config-consumer'
 import ConfigProvider from './config-provider'
-// import ConfirmPlugin from './confirm'
+import Dialog from './dialog'
 import DataTable from './data-table'
 import DatePicker from './date-picker'
 import Descriptions from './descriptions'
@@ -98,8 +98,8 @@ import codeDarkStyle from './code/styles/dark'
 import codeLightStyle from './code/styles/light'
 import collapseDarkStyle from './collapse/styles/dark'
 import collapseLightStyle from './collapse/styles/light'
-import confirmDarkStyle from './confirm/styles/dark'
-import confirmLightStyle from './confirm/styles/light'
+import dialogDarkStyle from './dialog/styles/dark'
+import dialogLightStyle from './dialog/styles/light'
 import dataTableDarkStyle from './data-table/styles/dark'
 import dataTableLightStyle from './data-table/styles/light'
 import datePickerDarkStyle from './date-picker/styles/dark'
@@ -249,7 +249,7 @@ export default create({
     TimePicker,
     Scrollbar,
     Steps,
-    // ConfirmPlugin,
+    Dialog,
     Progress,
     Badge,
     Tag,
@@ -353,8 +353,8 @@ export default create({
     dividerDarkStyle,
     dynamicInputLightStyle,
     dynamicInputDarkStyle,
-    confirmLightStyle,
-    confirmDarkStyle,
+    dialogLightStyle,
+    dialogDarkStyle,
     gradientTextLightStyle,
     gradientTextDarkStyle,
     listDarkStyle,

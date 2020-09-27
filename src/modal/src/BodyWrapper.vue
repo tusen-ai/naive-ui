@@ -7,7 +7,7 @@
     <n-scrollbar ref="scrollbar">
       <transition
         name="n-fade-in-scale-up-transition"
-        :appear="NModal.isMounted"
+        :appear="NModal.appear ?? NModal.isMounted"
         @enter="handleEnter"
         @after-leave="handleAfterLeave"
         @before-leave="handleBeforeLeave"
@@ -20,9 +20,8 @@
             [`n-${theme}-theme`]: theme,
           }"
         >
-          <n-confirm
-            v-if="preset === 'confirm'"
-            ref="confirm"
+          <n-dialog
+            v-if="preset === 'confirm' || preset === 'dialog'"
             :style="compitableBodyStyle"
             :theme="theme"
             :title="title"
@@ -44,7 +43,7 @@
             <template v-if="$slots.action" v-slot:action>
               <slot name="action" />
             </template>
-          </n-confirm>
+          </n-dialog>
           <n-card
             v-else-if="preset === 'card'"
             :theme="theme"
@@ -80,7 +79,7 @@
 <script>
 import { nextTick, reactive, toRefs, toRef, watch } from 'vue'
 import NScrollbar from '../../scrollbar'
-import NConfirm from '../../confirm/src/Confirm'
+import NDialog from '../../dialog/src/Dialog'
 import NCard from '../../card'
 import themeable from '../../_mixins/themeable'
 import presetProps from './presetProps'
@@ -94,7 +93,7 @@ export default {
   },
   components: {
     NScrollbar,
-    NConfirm,
+    NDialog,
     NCard
   },
   mixins: [

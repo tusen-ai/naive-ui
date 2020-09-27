@@ -29,12 +29,11 @@
       <n-icon
         v-if="closable"
         class="n-confirm-title__close"
-        type="md-close"
         size="22"
         style="cursor:pointer;"
         @click="handleCloseClick"
       >
-        <md-close />
+        <close-icon />
       </n-icon>
     </div>
     <div class="n-confirm__content">
@@ -67,36 +66,40 @@
     </div>
   </div>
 </template>
+
 <script>
-import NIcon from '../../icon'
-import NButton from '../../button'
-import iosCheckmarkCircle from '../../_icons/ios-checkmark-circle'
-import mdClose from '../../_icons/md-close'
-import iosHelpCircle from '../../_icons/ios-help-circle'
-import iosCloseCircle from '../../_icons/ios-close-circle'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import render from '../../_utils/vue/render'
-import asthemecontext from '../../_mixins/asthemecontext'
 import usecssr from '../../_mixins/usecssr'
+import NIcon from '../../icon'
+import NButton from '../../button'
+import SuccessIcon from '../../_icons/ios-checkmark-circle'
+import CloseIcon from '../../_icons/md-close'
+import WarningIcon from '../../_icons/ios-help-circle'
+import ErrorIcon from '../../_icons/ios-close-circle'
 import styles from './styles/index.js'
 
 export default {
-  name: 'Confirm',
+  name: 'Dialog',
   components: {
     NIcon,
     NButton,
-    mdClose,
-    iosHelpCircle,
-    iosCheckmarkCircle,
-    iosCloseCircle,
+    CloseIcon,
+    WarningIcon,
+    SuccessIcon,
+    ErrorIcon,
     render
   },
-  mixins: [withapp, themeable, asthemecontext, usecssr(styles)],
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   props: {
     icon: {
       type: Function,
-      default: null
+      default: undefined
     },
     type: {
       type: String,
@@ -104,7 +107,7 @@ export default {
     },
     title: {
       type: [String, Function],
-      default: null
+      default: undefined
     },
     closable: {
       type: Boolean,
@@ -112,15 +115,15 @@ export default {
     },
     negativeText: {
       type: String,
-      default: null
+      default: undefined
     },
     positiveText: {
       type: String,
-      default: null
+      default: undefined
     },
     content: {
       type: [String, Function],
-      default: null
+      default: undefined
     },
     showIcon: {
       type: Boolean,
@@ -134,30 +137,41 @@ export default {
       type: Boolean,
       default: false
     },
-    themeContextActivated: {
-      type: Boolean,
-      default: false
+    onPositiveClick: {
+      type: Function,
+      default: undefined
+    },
+    onNegativeClick: {
+      type: Function,
+      default: undefined
+    },
+    onClose: {
+      type: Function,
+      default: undefined
     }
   },
   computed: {
     iconType () {
-      const colors = {
-        error: 'ios-close-circle',
-        warning: 'ios-help-circle',
-        success: 'ios-checkmark-circle'
+      const iconName = {
+        error: 'error-icon',
+        warning: 'warning-icon',
+        success: 'success-icon'
       }
-      return colors[this.type]
+      return iconName[this.type]
     }
   },
   methods: {
     handlePositiveClick () {
-      this.$emit('positive-click')
+      const { onPositiveClick } = this
+      if (onPositiveClick) onPositiveClick()
     },
     handleNegativeClick () {
-      this.$emit('negative-click')
+      const { onNegativeClick } = this
+      if (onNegativeClick) onNegativeClick()
     },
     handleCloseClick () {
-      this.$emit('close')
+      const { onClose } = this
+      if (onClose) onClose()
     }
   }
 }

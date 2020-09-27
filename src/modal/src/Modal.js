@@ -5,7 +5,8 @@ import themeable from '../../_mixins/themeable'
 import presetProps from './presetProps'
 import usecssr from '../../_mixins/usecssr'
 import { useIsMounted } from '../../_utils/composition'
-import omit from '../../_utils/vue/omit'
+import { warn } from '../../_utils/naive/warn'
+import { omit } from '../../_utils/vue'
 import NLazyTeleport from '../../_base/lazy-teleport'
 import NModalMask from './Mask'
 import NModalBodyWrapper from './BodyWrapper'
@@ -50,41 +51,54 @@ export default {
     // events
     'onUpdate:show': {
       type: Function,
-      default: () => {}
+      default: undefined
     },
     onPositiveClick: {
       type: Function,
-      default: () => {}
+      default: undefined
     },
     onNegativeClick: {
       type: Function,
-      default: () => {}
+      default: undefined
     },
     onClose: {
       type: Function,
-      default: () => {}
+      default: undefined
     },
     // private
     onBeforeLeave: {
       type: Function,
-      default: () => {}
+      default: undefined
     },
     onAfterLeave: {
       type: Function,
-      default: () => {}
+      default: undefined
+    },
+    appear: {
+      type: Boolean,
+      default: undefined
     },
     // deprecated
     onBeforeHide: {
-      type: Function,
-      default: () => {}
+      validator () {
+        if (__DEV__) warn('modal', '`on-before-hide` is deprecated, please use `on-before-leave` instead.')
+        return true
+      },
+      default: undefined
     },
     onAfterHide: {
-      type: Function,
-      default: () => {}
+      validator () {
+        if (__DEV__) warn('modal', '`on-after-hide` is deprecated, please use `on-after-leave` instead.')
+        return true
+      },
+      default: undefined
     },
     onHide: {
-      type: Function,
-      default: () => {}
+      validator () {
+        if (__DEV__) warn('modal', '`on-hide` is deprecated.')
+        return true
+      },
+      default: undefined
     }
   },
   setup () {
@@ -94,9 +108,13 @@ export default {
   },
   methods: {
     hide () {
-      this['onUpdate:show'](false)
-      // legacy
-      this.onHide(false)
+      const {
+        'onUpdate:show': onUpdateShow,
+        onHide
+      } = this
+      if (onUpdateShow) onUpdateShow(false)
+      // deprecated
+      if (onHide) onHide(false)
     }
   },
   render () {
@@ -119,7 +137,7 @@ export default {
             h(Transition, {
               name: 'n-fade-in-transition',
               key: 'mask',
-              appear: this.isMounted
+              appear: this.appear ?? this.isMounted
             }, {
               default: () => {
                 return this.show ? [ h(NModalMask) ] : null
@@ -132,23 +150,34 @@ export default {
                 theme: this.syntheticTheme,
                 show: this.show,
                 onClose: () => {
-                  this.onClose()
+                  const { onClose } = this
+                  if (onClose) onClose()
                 },
                 onNegativeClick: () => {
-                  this.onNegativeClick()
+                  const { onNegativeClick } = this
+                  if (onNegativeClick) onNegativeClick()
                 },
                 onPositiveClick: () => {
-                  this.onPositiveClick()
+                  const { onPositiveClick } = this
+                  if (onPositiveClick) onPositiveClick()
                 },
                 onBeforeLeave: () => {
-                  this.onBeforeLeave()
+                  const {
+                    onBeforeLeave,
+                    onBeforeHide
+                  } = this
+                  if (onBeforeLeave) onBeforeLeave()
                   // deprecated
-                  this.onBeforeHide()
+                  if (onBeforeHide) onBeforeHide()
                 },
                 onAfterLeave: () => {
-                  this.onAfterLeave()
+                  const {
+                    onAfterLeave,
+                    onAfterHide
+                  } = this
+                  if (onAfterLeave) onAfterLeave()
                   // deprecated
-                  this.onAfterHide()
+                  if (onAfterHide) onAfterHide()
                 },
                 onClickoutside: () => {
                   if (this.maskClosable) {

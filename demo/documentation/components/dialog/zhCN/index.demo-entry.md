@@ -1,4 +1,4 @@
-# 确认 Confirm
+# 对话框 Dialog
 执行之前，请确认。
 
 ## 演示
@@ -7,16 +7,17 @@ basic
 async
 use-component
 ```
+
 ## API
-### $NConfirm API
+### Dialog Injection API
 |名称|类型|说明|
 |-|-|-|
-|warning|`(options: ConfirmOption) => ConfirmEnvironment`||
-|success|`(options: ConfirmOption) => ConfirmEnvironment`||
-|error|`(options: ConfirmOption) => ConfirmEnvironment`||
+|warning|`(options: DialogOption) => DialogReactive`||
+|success|`(options: DialogOption) => DialogReactive`||
+|error|`(options: DialogOption) => DialogReactive`||
 |destroyAll|`() => void`||
 
-### ConfirmOption API
+### DialogOption API
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
@@ -34,8 +35,8 @@ use-component
 |onNegativeClick|`() => boolean \| Promise<boolean> \| any`|`() => true`|默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为|
 |onClose|`() => boolean \| Promise<boolean> \| any`|`() => true`|默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为|
 
-### ConfirmEnvironment API
-#### ConfirmEnvironment Properties
+### DialogReactive API
+#### DialogReactive Properties
 下列属性都可以被动态修改。
 
 |名称|类型|说明|
@@ -55,13 +56,13 @@ use-component
 |onNegativeClick|`() => boolean \| Promise<boolean> \| any`||
 |onClose|`() => boolean \| Promise<boolean> \| any`||
 
-#### ConfirmEnvironment Methods
+#### DialogReactive Methods
 |名称|类型|说明|
 |-|-|-|
-|hide|`()`|关闭 Confirm|
+|destroy|`()`|关闭 Dialog|
 
 ## Props
-### Confirm Props
+### Dialog Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |type|`'error \| 'success' \| 'warning'`|`'warning'`||
@@ -74,6 +75,9 @@ use-component
 |show-icon|`boolean`|`true`||
 |loading|`boolean`|`false`||
 |bordered|`boolean`|`false`||
+|on-positive-click|`() => any`||
+|on-negative-click|`() => any`||
+|on-close|`() => any`||
 
 ## Events
 ### Confirm Events

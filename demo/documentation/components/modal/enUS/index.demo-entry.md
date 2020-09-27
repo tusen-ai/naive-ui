@@ -27,8 +27,8 @@ preset-confirm-slot
 
 ### Modal with Preset Card
 See [Card props](n-card#Props)
-### Modal with Preset Confirm
-See [Confirm props](n-confirm#Props)
+### Modal with Preset Dialog
+See [Dialog props](n-dialog#Props)
 
 ## Slots
 ### Modal without Preset
@@ -38,8 +38,8 @@ See [Confirm props](n-confirm#Props)
 
 ### Modal with Preset Card
 See [Card slots](n-card#Slots)
-### Modal with Preset Confirm
-See [Confirm slots](n-confirm#Slots)
+### Modal with Preset Dialog
+See [Dialog slots](n-dialog#Slots)
 
 ## Events
 ### Modal
@@ -49,5 +49,5 @@ See [Confirm slots](n-confirm#Slots)
 
 ### Modal with Preset Card
 See [Card events](n-card#Events)
-### Modal with Preset Confirm
-See [Confirm events](n-confirm#Events)
+### Modal with Preset Dialog
+See [Dialog events](n-dialog#Events)

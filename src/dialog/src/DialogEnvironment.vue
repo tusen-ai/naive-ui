@@ -1,13 +1,12 @@
 <template>
   <n-modal
-    v-model="active"
-    :theme="syntheticTheme"
-    :activate-event="event"
+    v-model:show="show"
+    appear
+    :to="to"
     :mask-closable="maskClosable"
-    @after-hide="handleAfterHide"
+    @after-leave="handleAfterHide"
   >
-    <n-confirm
-      :theme="syntheticTheme"
+    <n-dialog
       :type="type"
       :content="content"
       :positive-text="positiveText"
@@ -17,7 +16,6 @@
       :closable="closable"
       :show-icon="showIcon"
       :bordered="bordered"
-      theme-context-activated
       @close="handleCloseClick"
       @negative-click="handleNegativeClick"
       @positive-click="handlePositiveClick"
@@ -27,46 +25,50 @@
 
 <script>
 import NModal from '../../modal'
-import NConfirm from './Confirm'
+import NDialog from './Dialog'
 
 export default {
-  name: 'NConfirm',
+  name: 'DialogEnvironment',
   components: {
     NModal,
-    NConfirm
+    NDialog
+  },
+  props: {
+    ...NDialog.props,
+    maskClosable: {
+      type: Boolean,
+      default: true
+    },
+    onPositiveClick: {
+      type: Function,
+      default: () => true
+    },
+    onNegativeClick: {
+      type: Function,
+      default: () => true
+    },
+    onClose: {
+      type: Function,
+      default: () => true
+    },
+    to: {
+      type: [String, Object],
+      default: undefined
+    },
+    // private
+    onInternalAfterLeave: {
+      type: Function,
+      required: true
+    }
   },
   data () {
     return {
-      theme: null,
-      inheritedTheme: null,
-      maskClosable: true,
-      active: false,
-      content: null,
-      icon: null,
-      positiveText: null,
-      negativeText: null,
-      type: 'warning',
-      title: null,
-      loading: false,
-      event: null,
-      onPositiveClick: () => true,
-      onNegativeClick: () => true,
-      onClose: () => true,
-      instances: null,
-      closable: true,
-      showIcon: true,
-      bordered: false
-    }
-  },
-  computed: {
-    syntheticTheme () {
-      return this.theme || this.inheritedTheme
+      show: true
     }
   },
   methods: {
     handleAfterHide () {
-      this.instances.delete(this)
-      this.$destroy()
+      this.onInternalAfterLeave(this._.vnode.key)
     },
     handlePositiveClick () {
       Promise.resolve(
@@ -76,7 +78,6 @@ export default {
           if (result === false) return
           this.hide()
         })
-        .catch(err => console.error(err))
     },
     handleNegativeClick () {
       Promise.resolve(
@@ -86,7 +87,6 @@ export default {
           if (result === false) return
           this.hide()
         })
-        .catch(err => console.error(err))
     },
     handleCloseClick () {
       Promise.resolve(
@@ -96,10 +96,9 @@ export default {
           if (result === false) return
           this.hide()
         })
-        .catch(err => console.error(err))
     },
     hide () {
-      this.active = false
+      this.show = false
     }
   }
 }

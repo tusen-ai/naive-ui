@@ -1,7 +1,6 @@
 import { Fragment, Teleport, ref, h, reactive } from 'vue'
-import { createId } from '../../_utils/vue'
+import { createId, omit } from '../../_utils/vue'
 import MessageEnvironment from './MessageEnvironment.js'
-import omit from '../../_utils/vue/omit'
 
 export default {
   name: 'MessageProvider',

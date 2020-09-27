@@ -75,7 +75,7 @@
         <n-tag
           v-if="env==='development'"
           class="nav-picker"
-          @click.native="handleModeChange"
+          @click="handleModeChange"
         >
           {{ modeOptions[mode].label }}
         </n-tag>
@@ -165,7 +165,7 @@ export default {
     },
     zIndex () {
       const path = this.$route.path
-      return (path.endsWith('n-modal') || path.endsWith('n-drawer') || path.endsWith('n-confirm')) ? null : 3000
+      return (path.endsWith('n-modal') || path.endsWith('n-drawer') || path.endsWith('n-dialog')) ? null : 3000
     },
     theme () {
       return 'light'
