@@ -73,11 +73,11 @@
           {{ langOptions[lang].label }}
         </n-tag>
         <n-tag
-          v-if="env==='development'"
+          v-if="env === 'development'"
           class="nav-picker"
           @click="handleModeChange"
         >
-          {{ modeOptions[mode].label }}
+          {{ modeOptions[displayMode].label }}
         </n-tag>
       </div>
     </div>
@@ -86,8 +86,7 @@
 
 <script>
 import version from '../src/version'
-import withapp from '../src/_mixins/withapp'
-import { modeRef, setMode } from './use-dev-mode'
+import { useSiteTheme, useSiteLang, displayModeRef, envRef } from './util-compositions'
 
 function match (pattern, string) {
   if (!pattern.length) return true
@@ -97,26 +96,26 @@ function match (pattern, string) {
 }
 
 export default {
-  mixins: [withapp],
+  name: 'SiteHeader',
+  inject: ['message'],
   props: {
-    lang: {
-      type: String,
-      required: true
-    },
     items: {
       type: Array,
       default: () => []
-    },
-    env: {
-      type: String,
-      default: null
+    }
+  },
+  setup () {
+    return {
+      env: envRef,
+      displayMode: displayModeRef,
+      lang: useSiteLang(),
+      theme: useSiteTheme()
     }
   },
   data () {
     return {
       searchInputValue: '',
       version,
-      modeRef,
       themeOptions: {
         dark: {
           label: 'light',
@@ -138,11 +137,11 @@ export default {
         }
       },
       modeOptions: {
-        'debug': {
+        debug: {
           label: 'Production',
           next: 'common'
         },
-        'common': {
+        common: {
           label: 'Debug',
           next: 'debug'
         }
@@ -160,16 +159,9 @@ export default {
     }
   },
   computed: {
-    mode () {
-      return this.modeRef.value
-    },
     zIndex () {
       const path = this.$route.path
       return (path.endsWith('n-modal') || path.endsWith('n-drawer') || path.endsWith('n-dialog')) ? null : 3000
-    },
-    theme () {
-      return 'light'
-      // return this.NConfigProvider.$parent.theme
     },
     menuValue () {
       if (/^(\/[^/]+){2}\/doc/.test(this.$route.path)) return 'doc'
@@ -191,26 +183,14 @@ export default {
         label: getLabel(item),
         value: item.path
       }))
-    },
-    options: function () {
-      return [
-        {
-          label: 'dark',
-          value: 'dark'
-        },
-        {
-          label: 'light',
-          value: 'light'
-        }
-      ]
     }
   },
   methods: {
     handleLogoClick () {
-      // if (/^(\/[^/]+){2}$/.test(this.$route.path)) {
-      //   this.$NMessage.info(this.$t('alreadyHome'))
-      //   return
-      // }
+      if (/^(\/[^/]+){2}$/.test(this.$route.path)) {
+        this.message.info(this.$t('alreadyHome'))
+        return
+      }
       this.$router.push(
         /^(\/[^/]+){2}/.exec(this.$route.path)[0]
       )
@@ -234,13 +214,13 @@ export default {
       }
     },
     handleThemeChange () {
-      // this.NConfigProvider.$parent.theme = this.themeOptions[this.theme].next
+      this.theme = this.themeOptions[this.theme].next
     },
     handleModeChange () {
-      setMode(this.modeOptions[this.mode].next)
+      this.displayMode = this.modeOptions[this.displayMode].next
     },
     handleLanguageChange () {
-      this.$emit('lang-change', this.langOptions[this.lang].next)
+      this.lang = this.langOptions[this.lang].next
     }
   }
 }

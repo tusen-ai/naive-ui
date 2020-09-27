@@ -1,6 +1,6 @@
 
 import LandingPage from '../documentation/landing'
-import Entry from '../Entry'
+import Entry from '../SiteProvider'
 
 import intro from '../documentation/intro/intro'
 import start from '../documentation/intro/start'
@@ -76,7 +76,7 @@ import code from '../documentation/components/code'
 import upload from '../documentation/components/upload'
 import table from '../documentation/components/table'
 
-import DocEntry from '../DocEntry'
+import Documentation from '../Documentation'
 
 import { withPrefix } from './utils'
 
@@ -170,7 +170,7 @@ export const routes = [
       },
       {
         path: '/:lang/:theme/doc',
-        component: DocEntry,
+        component: Documentation,
         children: childRoutes
       }
     ]

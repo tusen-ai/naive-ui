@@ -76,7 +76,7 @@
 <script>
 import { nextTick } from 'vue'
 import codeOutline from '../../src/_icons/code-outline'
-import { modeRef } from '../use-dev-mode'
+import { displayModeRef } from '../util-compositions'
 
 export default {
   components: {
@@ -101,18 +101,17 @@ export default {
       default: null
     }
   },
+  setup () {
+    return {
+      displayMode: displayModeRef
+    }
+  },
   data () {
     return {
       showCode: false,
       contentStyle: null,
       isShow: true,
-      isDebugDemo: false,
-      modeRef
-    }
-  },
-  computed: {
-    mode () {
-      return this.modeRef.value
+      isDebugDemo: false
     }
   },
   watch: {
@@ -125,7 +124,7 @@ export default {
         this.contentStyle = null
       })
     },
-    mode () {
+    displayMode () {
       this.init()
     }
   },
@@ -140,7 +139,7 @@ export default {
       const map = this.NDocumentation.anchorLinkMap
       this.isDebugDemo = this.demoFileName && (~this.demoFileName.indexOf('debug') || ~this.demoFileName.indexOf('Debug'))
       if (this.isDebugDemo) {
-        if (this.mode === 'debug') {
+        if (this.displayMode === 'debug') {
           this.isShow = true
           map.set(this.demoFileName, this.title)
         } else {

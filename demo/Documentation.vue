@@ -25,7 +25,7 @@ export default {
     }
   },
   inject: {
-    NEntry: {
+    Site: {
       default: null
     }
   },
@@ -51,7 +51,7 @@ export default {
   },
   computed: {
     items () {
-      return this.NEntry.items
+      return this.Site.items
     }
   },
   methods: {
