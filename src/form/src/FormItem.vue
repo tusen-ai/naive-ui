@@ -446,10 +446,10 @@ export default {
     addValidationEventListeners () {
       const rules = this.syntheticRules
       if (rules.length > 0) {
-        this.$on('blur', this.handleContentBlur)
-        this.$on('input', this.handleContentInput)
-        this.$on('focus', this.handleContentFocus)
-        this.$on('change', this.handleContentChange)
+        // this.$on('blur', this.handleContentBlur)
+        // this.$on('input', this.handleContentInput)
+        // this.$on('focus', this.handleContentFocus)
+        // this.$on('change', this.handleContentChange)
       }
     },
     handleBeforeEnter () {

@@ -160,7 +160,9 @@ placeable 进行了大调整
     - `change` => `on-update:model-value`
 - [ ] table
 - [ ] tabs
-- [ ] tag
+- [x] tag
+  - deprecate
+    - `on-checked-change` => `on-update:checked`
 - [x] thing
 - [x] time
 - [ ] time-picker

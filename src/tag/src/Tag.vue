@@ -32,6 +32,7 @@ import themeable from '../../_mixins/themeable'
 import usecssr from '../../_mixins/usecssr'
 import commonProps from './common-props'
 import styles from './styles'
+import { warn } from '../../_utils/naive/warn'
 
 export default {
   name: 'Tag',
@@ -43,10 +44,6 @@ export default {
     themeable,
     usecssr(styles)
   ],
-  model: {
-    prop: 'checked',
-    event: 'checked-change'
-  },
   props: {
     ...commonProps,
     checked: {
@@ -57,16 +54,41 @@ export default {
       type: Boolean,
       default: false
     },
+    onClose: {
+      type: Function,
+      default: undefined
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:checked': {
+      type: Function,
+      default: undefined
+    },
+    // private
     stopClickPropagation: {
       type: Boolean,
       default: false
+    },
+    // deprecated
+    onCheckedChange: {
+      validator () {
+        if (__DEV__) warn('tag', '`on-checked-change` is deprecated, please use `on-update:checked` instead')
+        return true
+      },
+      default: undefined
     }
   },
   methods: {
     handleClick (e) {
       if (!this.disabled) {
         if (this.checkable) {
-          this.$emit('checked-change', !this.checked)
+          const {
+            checked,
+            onCheckedChange,
+            'onUpdate:checked': onUpdateChecked
+          } = this
+          if (onUpdateChecked) onUpdateChecked(!checked)
+          // deprecated
+          if (onCheckedChange) onCheckedChange(!checked)
         }
       }
     },
@@ -75,7 +97,8 @@ export default {
         e.stopPropagation()
       }
       if (!this.disabled) {
-        this.$emit('close', e)
+        const { onClose } = this
+        if (onClose) onClose()
       }
     }
   }
