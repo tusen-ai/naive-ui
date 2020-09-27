@@ -1,5 +1,5 @@
 import Tab from './src/Tabs.vue'
-import TabPane from './src/TabPane.vue'
+import TabPane from './src/TabPane.js'
 
 Tab.install = function (app, naive) {
   app.component(naive.componentPrefix + Tab.name, Tab)

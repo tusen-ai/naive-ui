@@ -1,5 +1,5 @@
-<script>
-import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
+import { h, withDirectives, vShow } from 'vue'
+import { getSlot } from '../../_utils/vue'
 
 export default {
   name: 'TabPane',
@@ -22,10 +22,6 @@ export default {
       default: 'if'
     }
   },
-  data () {
-    return {
-    }
-  },
   computed: {
     type () {
       return this.NTab.type
@@ -41,22 +37,17 @@ export default {
       this.NTab.removePanel(this)
     }
   },
-  render (h) {
-    if (this.displayDirective === 'if') {
-      return this.NTab && this.name === this.NTab.activeName ? h('div', {
-        staticClass: 'n-tab-panel'
-      }, getDefaultSlot(this)) : null
-    } else {
-      return h('div', {
-        staticClass: 'n-tab-panel',
-        directives: [
-          {
-            name: 'show',
-            value: this.NTab && this.name === this.NTab.activeName
-          }
-        ]
-      }, getDefaultSlot(this))
-    }
+  render () {
+    const show = this.name === this.NTab.activeName
+    const useVShow = this.displayDirective === 'show'
+    return (useVShow || show) ? withDirectives(
+      h('div', {
+        class: 'n-tab-panel',
+        key: this.name
+      }, getSlot(this)),
+      [
+        [vShow, !useVShow || show]
+      ]
+    ) : null
   }
 }
-</script>

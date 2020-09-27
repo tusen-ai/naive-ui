@@ -11,22 +11,20 @@
 </n-tabs>
 ```
 ```js
+import { h } from 'vue'
+
 const showInput = {
   data () {
     return {
       value: ''
     }
   },
-  render (h) {
+  render () {
     return h('n-input', {
-      props: {
-        placeholder: '我的内容不会被重置',
-        value: this.value
-      },
-      on: {
-        input: v => {
-          this.value = v
-        }
+      placeholder: '我的内容不会被重置',
+      value: this.value,
+      onInput: v => {
+        this.value = v
       }
     })
   }
@@ -38,16 +36,12 @@ const ifInput = {
       value: ''
     }
   },
-  render (h) {
+  render () {
     return h('n-input', {
-      props: {
-        placeholder: '我的内容会被重置',
-        value: this.value
-      },
-      on: {
-        input: v => {
-          this.value = v
-        }
+      placeholder: '我的内容会被重置',
+      value: this.value,
+      onInput: v => {
+        this.value = v
       }
     })
   }
