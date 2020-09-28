@@ -10,7 +10,7 @@
     <div
       class="n-switch__rail"
       :class="{
-        'n-switch__rail--active': modelValue,
+        'n-switch__rail--active': value,
         'n-switch__rail--disabled': disabled
       }"
     />
@@ -38,7 +38,7 @@ export default {
     }
   },
   props: {
-    modelValue: {
+    value: {
       type: Boolean,
       required: true
     },
@@ -47,7 +47,7 @@ export default {
       default: false
     },
     // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:modelValue': {
+    'onUpdate:value': {
       type: Function,
       default: () => {}
     }
@@ -55,7 +55,9 @@ export default {
   methods: {
     handleClick () {
       if (!this.disabled) {
-        this['onUpdate:modelValue'](!this.modelValue)
+        this['onUpdate:value'](!this.value)
+        this.__triggerFormInput()
+        this.__triggerFormChange()
       }
     }
   }
