@@ -29,7 +29,12 @@ placeable 进行了大调整
 - [x] button-group
 - [x] card
 - [ ] cascader
-- [ ] checkbox
+- [x] checkbox
+  - deprecate
+    - `on-change` => `on-update:checked`
+  - checkbox-group
+    - deprecate
+    - `on-change` => `on-update:value`
 - [x] code
 - [x] collapse
   - deprecate

@@ -1,7 +1,7 @@
 # 栅格
 和栅格一起使用。
 ```html
-<n-checkbox-group v-model="value">
+<n-checkbox-group v-model:value="value">
   <n-row>
     <n-col :span="12">
       <n-checkbox value="Prosperity" label="富强" />

@@ -1,6 +1,6 @@
 # 选项组
 ```html
-<n-checkbox-group v-model="cities">
+<n-checkbox-group v-model:value="cities">
   <n-checkbox value="Beijing" label="北京" />
   <n-checkbox value="Shanghai" label="上海" />
   <n-checkbox value="Guangzhou" label="广州" />

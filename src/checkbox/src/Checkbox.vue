@@ -51,17 +51,18 @@
 </template>
 
 <script>
+import { computed, inject } from 'vue'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import asformitem from '../../_mixins/asformitem'
-import collectable from '../../_mixins/collectable'
-import simulatedComputed from '../../_mixins/simulatedComputed'
 import render from '../../_utils/vue/render'
 import CheckMark from './CheckMark'
 import LineMark from './LineMark'
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
+import { useMemo } from '../../_utils/composition'
+import { warn } from '../../_utils/naive/warn'
 
 export default {
   name: 'Checkbox',
@@ -79,14 +80,9 @@ export default {
   mixins: [
     withapp,
     themeable,
-    asformitem(
-      {
-        change: 'change',
-        blur: 'blur',
-        focus: 'focus'
-      },
-      'medium',
-      function () {
+    asformitem({
+      defaultSize: 'medium',
+      syntheticSize () {
         const size = this.size
         if (size) return size
         const NCheckboxGroup = this.NCheckboxGroup
@@ -103,25 +99,9 @@ export default {
         }
         return 'medium'
       }
-    ),
-    collectable('NCheckboxGroup', 'collectedCheckboxValues'),
-    simulatedComputed({
-      renderSafeChecked: {
-        default: false,
-        get () {
-          return this.syntheticChecked
-        },
-        deps: [
-          'syntheticChecked'
-        ]
-      }
     }),
     usecssr(styles)
   ],
-  model: {
-    prop: 'checked',
-    event: 'change'
-  },
   props: {
     size: {
       validator (value) {
@@ -145,50 +125,81 @@ export default {
       type: Boolean,
       default: false
     },
+    label: {
+      type: [String, Function],
+      default: null
+    },
+    onClick: {
+      type: Function,
+      default: undefined
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:checked': {
+      type: Function,
+      default: undefined
+    },
+    // private
     tableHeader: {
       type: Boolean,
       default: false
     },
-    label: {
-      type: [String, Function],
-      default: null
+    // deprecated
+    onChange: {
+      validator () {
+        warn('checkbox', '`on-change` is deprecated, please use `on-update:checked` instead.')
+        return true
+      },
+      default: undefined
+    }
+  },
+  setup (props) {
+    const NCheckboxGroup = inject('NCheckboxGroup', null)
+    const syntheticCheckedRef = computed(() => {
+      if (NCheckboxGroup) {
+        const groupValueSet = NCheckboxGroup.valueSet
+        if (groupValueSet) {
+          return groupValueSet.has(props.value)
+        }
+        return false
+      } else {
+        return props.checked
+      }
+    })
+    return {
+      renderSafeChecked: useMemo(() => syntheticCheckedRef.value, [
+        syntheticCheckedRef
+      ])
     }
   },
   computed: {
     syntheticDisabled () {
       if (this.disabled || (this.NCheckboxGroup && this.NCheckboxGroup.disabled)) return true
       return false
-    },
-    syntheticChecked () {
-      if (this.NCheckboxGroup) {
-        const checkboxGroupValueSet = this.NCheckboxGroup.valueAsSet
-        if (checkboxGroupValueSet) {
-          return checkboxGroupValueSet.has(this.value)
-        }
-        return false
-      } else {
-        return this.checked
-      }
     }
   },
   methods: {
-    registerValue (value = undefined, oldValue = undefined) {
-      if (this.NCheckboxGroup) {
-        const values = new Set(this.NCheckboxGroup.collectedCheckboxValues)
-        if (oldValue !== undefined) values.delete(oldValue)
-        if (value !== undefined) values.add(value)
-        this.NCheckboxGroup.collectedCheckboxValues = Array.from(values)
-      }
-    },
     toggle () {
       if (this.NCheckboxGroup) {
-        this.NCheckboxGroup.toggleCheckbox(!this.syntheticChecked, this.value)
+        this.NCheckboxGroup.toggleCheckbox(!this.renderSafeChecked, this.value)
       } else {
-        this.$emit('change', !this.syntheticChecked, this.syntheticChecked)
+        const {
+          onChange,
+          'onUpdate:checked': onUpdateChecked,
+          __triggerFormInput,
+          __triggerFormChange
+        } = this
+        const nextChecked = !this.renderSafeChecked
+        if (onUpdateChecked) onUpdateChecked(nextChecked)
+        if (onChange) onChange(nextChecked) // deprecated
+        __triggerFormInput()
+        __triggerFormChange()
       }
     },
     handleClick (e) {
-      this.$emit('click', e)
+      const {
+        onClick
+      } = this
+      if (onClick) onClick(e)
       if (!this.syntheticDisabled) {
         this.toggle()
       }

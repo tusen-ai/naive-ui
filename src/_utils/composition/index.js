@@ -102,7 +102,8 @@ export function onFontReady (callback) {
 }
 
 export function useInjectionCollection (injectionName, collectionKey, valueRef) {
-  const injection = inject(injectionName)
+  const injection = inject(injectionName, null)
+  if (injection === null) return
   if (!(collectionKey in injection)) {
     injection[collectionKey] = []
   }

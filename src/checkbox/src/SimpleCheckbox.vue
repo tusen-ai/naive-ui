@@ -88,11 +88,22 @@ export default {
     theme: {
       validator: createValidator(['string']),
       default: null
+    },
+    onClick: {
+      validator: createValidator(['object']),
+      default: undefined
+    },
+    onChange: {
+      validator: createValidator(['object']),
+      default: undefined
     }
   },
   methods: {
     handleClick (e) {
-      this.$emit('click', e)
+      const {
+        onClick
+      } = this
+      if (onClick) onClick(e)
       if (!this.disabled) {
         this.toggle()
       }
@@ -103,7 +114,10 @@ export default {
       }
     },
     toggle () {
-      this.$emit('change', !this.checked, this.checked)
+      const {
+        onChange
+      } = this
+      if (onChange) onChange(!this.checked)
     },
     handleKeyDownSpace (e) {
       e.preventDefault()

@@ -1,7 +1,7 @@
 # 事件
 ```html
-<n-checkbox v-model="value" @change="handleChange" label="事件" />
-<n-checkbox-group v-model="cities"  @change="handleChange">
+<n-checkbox :checked="checked" @update:checked="handleCheckedChange" label="事件" />
+<n-checkbox-group :value="cities"  @update:value="handleUpdateValue">
   <n-checkbox value="Beijing" label="北京" />
   <n-checkbox value="Shanghai" label="上海" />
   <n-checkbox value="Guangzhou" label="广州" />
@@ -10,15 +10,21 @@
 ```
 ```js
 export default {
+  inject: ['message'],
   data () {
     return {
-      value: false,
+      checked: false,
       cities: null
     }
   },
   methods: {
-    handleChange (v) {
-      this.$NMessage.info(JSON.stringify(v))
+    handleCheckedChange (checked) {
+      this.checked = checked
+      this.message.info(JSON.stringify(checked))
+    },
+    handleUpdateValue (value) {
+      this.cities = value
+      this.message.info(JSON.stringify(value))
     }
   }
 }

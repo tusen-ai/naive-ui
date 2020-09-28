@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import NCheckboxGroup from '../../../checkbox/src/CheckboxGroup'
+import NCheckboxGroup from '../../../checkbox/src/CheckboxGroup.js'
 import NCheckbox from '../../../checkbox/src/Checkbox'
 import NRadioGroup from '../../../radio/src/RadioGroup'
 import NRadio from '../../../radio/src/Radio'
