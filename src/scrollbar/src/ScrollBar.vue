@@ -97,11 +97,6 @@ export default {
     themable,
     usecssr(styles)
   ],
-  emits: [
-    'scroll',
-    'mouse-enter',
-    'mouse-leave'
-  ],
   props: {
     width: {
       type: Number,
@@ -142,6 +137,26 @@ export default {
     showRail: {
       type: Boolean,
       default: true
+    },
+    onMouseEnter: {
+      type: Function,
+      default: undefined
+    },
+    onMouseLeave: {
+      type: Function,
+      default: undefined
+    },
+    onScroll: {
+      type: Function,
+      default: undefined
+    },
+    onScrollStart: {
+      type: Function,
+      default: undefined
+    },
+    onScrollEnd: {
+      type: Function,
+      default: undefined
     }
   },
   data () {
@@ -314,14 +329,20 @@ export default {
       }
     },
     handleMouseEnterWrapper () {
-      this.$emit('mouse-enter')
+      const {
+        onMouseEnter
+      } = this
+      if (onMouseEnter) onMouseEnter()
       if (this.disabled) return
       this.displayHorizontalScrollbar()
       this.displayVerticalScrollbar()
       this.updateParameters()
     },
     handleMouseLeaveWrapper () {
-      this.$emit('mouse-leave')
+      const {
+        onMouseLeave
+      } = this
+      if (onMouseLeave) onMouseLeave()
       if (this.disabled) return
       this.hideScrollbar()
     },
@@ -365,7 +386,10 @@ export default {
     },
     handleScroll (e) {
       if (this.disabled) return
-      this.$emit('scroll', e, this._container(), this._content())
+      const {
+        onScroll
+      } = this
+      if (onScroll) onScroll(e, this._container(), this._content())
       this.updateScrollParameters()
     },
     updateScrollParameters () {
@@ -404,7 +428,10 @@ export default {
       this.updateScrollParameters()
     },
     handleHorizontalScrollMouseDown (e) {
-      this.$emit('scrollstart')
+      const {
+        onScrollStart
+      } = this
+      if (onScrollStart) onScrollStart()
       this.horizontalScrollbarActivated = true
       window.addEventListener('mousemove', this.handleHorizontalScrollMouseMove)
       window.addEventListener('mouseup', this.handleHorizontalScrollMouseUp)
@@ -425,7 +452,10 @@ export default {
       }
     },
     handleHorizontalScrollMouseUp (e) {
-      this.$emit('scrollend')
+      const {
+        onScrollEnd
+      } = this
+      if (onScrollEnd) onScrollEnd()
       window.removeEventListener('mousemove', this.handleHorizontalScrollMouseMove)
       window.removeEventListener('mouseup', this.handleHorizontalScrollMouseUp)
       this.horizontalScrollbarActivated = false
@@ -435,7 +465,10 @@ export default {
       }
     },
     handleVerticalScrollMouseDown (e) {
-      this.$emit('scrollstart')
+      const {
+        onScrollStart
+      } = this
+      if (onScrollStart) onScrollStart()
       this.verticalScrollbarActivated = true
       window.addEventListener('mousemove', this.handleVerticalScrollMouseMove, true)
       window.addEventListener('mouseup', this.handleVerticalScrollMouseUp, true)
@@ -456,7 +489,10 @@ export default {
       }
     },
     handleVerticalScrollMouseUp (e) {
-      this.$emit('scrollend')
+      const {
+        onScrollEnd
+      } = this
+      if (onScrollEnd) onScrollEnd()
       window.removeEventListener('mousemove', this.handleVerticalScrollMouseMove, true)
       window.removeEventListener('mouseup', this.handleVerticalScrollMouseUp, true)
       this.verticalScrollbarActivated = false

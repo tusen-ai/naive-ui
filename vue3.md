@@ -166,7 +166,7 @@ placeable 进行了大调整
   - radio & radio-button
     - `on-change` => `on-update:checked-value`
 - [x] result
-- [ ] scrollbar
+- [x] scrollbar
 - [ ] select
 - [ ] slider
 - [x] spin
