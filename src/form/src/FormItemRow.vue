@@ -1,4 +1,5 @@
 <script>
+import { h } from 'vue'
 import NFormItemCol from './FormItemCol'
 import NRow from '../../grid/src/Row'
 import NFormItem from './FormItem'
@@ -21,19 +22,17 @@ export default {
       }
     }
   },
-  render (h) {
+  render () {
     return h(NRow, {
-      props: { ...this.$props },
-      scopedSlots: {
-        default: () => h(NFormItemCol, {
-          ref: 'formItemCol',
-          props: {
-            span: 24,
-            ...this.$props
-          },
-          scopedSlots: { ...this.$slots }
-        })
-      }
+      ...this.$props
+    }, {
+      default: () => h(NFormItemCol, {
+        ref: 'formItemCol',
+        span: 24,
+        ...this.$props
+      }, {
+        default: this.$slots.default
+      })
     })
   }
 }

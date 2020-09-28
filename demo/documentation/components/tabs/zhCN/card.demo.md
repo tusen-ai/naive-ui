@@ -2,7 +2,7 @@
 一个和卡片一起使用的例子（例子本身是卡片）。
 ```html
 <n-tabs
-  v-model="name"
+  v-model:value="name"
   type="card"
   closable
   @close="handleClose"

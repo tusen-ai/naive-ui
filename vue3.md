@@ -159,7 +159,10 @@ placeable 进行了大调整
     - `value` => `model-value`
     - `change` => `on-update:model-value`
 - [ ] table
-- [ ] tabs
+- [x] tabs
+  - deprecate
+    - `active-name` => `value`
+    - `on-active-name-change` => `on-update:value`
 - [x] tag
   - deprecate
     - `on-checked-change` => `on-update:checked`

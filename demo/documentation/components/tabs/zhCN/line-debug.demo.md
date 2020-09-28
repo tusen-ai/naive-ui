@@ -4,7 +4,7 @@
 
 <n-card title="歌曲" style="margin-bottom: 16px;">
   <n-tabs
-    v-model="name"
+    v-model:value="name"
   >
     <n-tab-pane
       name="oasis"

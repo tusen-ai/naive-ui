@@ -38,7 +38,7 @@ export default {
     }
   },
   render () {
-    const show = this.name === this.NTab.activeName
+    const show = this.name === this.NTab.value
     const useVShow = this.displayDirective === 'show'
     return (useVShow || show) ? withDirectives(
       h('div', {

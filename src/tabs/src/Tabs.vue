@@ -23,7 +23,7 @@
         @click="scroll('left')"
       >
         <n-icon>
-          <ios-arrow-back />
+          <backward-icon />
         </n-icon>
       </div>
       <div
@@ -41,7 +41,7 @@
               :ref="`label(${i})`"
               class="n-tabs-label"
               :class="{
-                'n-tabs-label--active': activeName === panel.name,
+                'n-tabs-label--active': compitableValue === panel.name,
                 'n-tabs-label--disabled': panel.disabled
               }"
               @click="handleTabClick($event, panel.name, panel.disabled)"
@@ -53,7 +53,7 @@
                 @click.stop="handleCloseClick(panel)"
               >
                 <n-icon>
-                  <md-close />
+                  <close-icon />
                 </n-icon>
               </div>
             </div>
@@ -77,7 +77,7 @@
         @click="scroll('right')"
       >
         <n-icon>
-          <ios-arrow-forward />
+          <forward-icon />
         </n-icon>
       </div>
     </div>
@@ -89,13 +89,15 @@
 import NIcon from '../../icon'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import iosArrowBack from '../../_icons/ios-arrow-back'
-import iosArrowForward from '../../_icons/ios-arrow-forward'
-import mdClose from '../../_icons/md-close'
+import BackwardIcon from '../../_icons/ios-arrow-back'
+import ForwardIcon from '../../_icons/ios-arrow-forward'
+import CloseIcon from '../../_icons/md-close'
 import resizeObserverDelegate from '../../_utils/delegate/resizeObserverDelegate'
 import throttle from 'lodash-es/throttle'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
+import { warn } from '../../_utils/naive/warn'
+import { onFontReady, useCompitable } from '../../_utils/composition'
 
 export default {
   name: 'Tabs',
@@ -106,9 +108,9 @@ export default {
   },
   components: {
     NIcon,
-    iosArrowBack,
-    iosArrowForward,
-    mdClose
+    BackwardIcon,
+    ForwardIcon,
+    CloseIcon
   },
   mixins: [
     withapp,
@@ -120,9 +122,9 @@ export default {
     event: 'active-name-change'
   },
   props: {
-    activeName: {
+    value: {
       type: String || Number,
-      default: undefined
+      required: true
     },
     type: {
       validator (type) {
@@ -138,7 +140,7 @@ export default {
       validator (value) {
         return ['space-between', 'space-around', 'space-evenly'].includes(value)
       },
-      default: null
+      default: undefined
     },
     labelSize: {
       validator (value) {
@@ -148,7 +150,35 @@ export default {
     },
     navStyle: {
       type: [String, Object],
-      default: null
+      default: undefined
+    },
+    onScrollableChange: {
+      type: Function,
+      default: undefined
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:value': {
+      type: Function,
+      default: undefined
+    },
+    onClose: {
+      type: Function,
+      default: undefined
+    },
+    // deprecated
+    activeName: {
+      validator () {
+        if (__DEV__) warn('tabs', '`active-name` is deprecated, please use `value` instead.')
+        return true
+      },
+      default: undefined
+    },
+    onActiveNameChange: {
+      validator () {
+        if (__DEV__) warn('tabs', '`on-active-name-change` is deprecated, please use `on-update:value` instead.')
+        return true
+      },
+      default: undefined
     }
   },
   data () {
@@ -181,33 +211,36 @@ export default {
     }
   },
   watch: {
-    activeName () {
+    compitableValue () {
       if (this.typeIsLine) {
         this.updateCurrentBarPosition()
       }
     },
     showScrollButton (value) {
-      this.$emit('scrollable-change', value)
+      const {
+        onScrollableChange
+      } = this
+      if (onScrollableChange) onScrollableChange(value)
     },
     panelLabels () {
       this.$nextTick(this.updateScrollStatus)
     }
   },
+  setup (props) {
+    onFontReady(vm => {
+      vm.updateScrollStatus()
+      if (vm.typeIsLine) {
+        vm.updateCurrentBarPosition()
+      }
+    })
+    return {
+      compitableValue: useCompitable(props, ['activeName', 'value']),
+      compitableOnValueChange: useCompitable(props, ['onActiveNameChange', 'onUpdate:value'])
+    }
+  },
   mounted () {
     this.updateScrollStatus()
     this.registerScrollContentResizeObserver()
-    this
-      .$nextTick()
-      .then(() => {
-        const fontsReady = document.fonts.ready
-        return fontsReady || undefined
-      })
-      .then(() => {
-        this.updateScrollStatus()
-        if (this.typeIsLine) {
-          this.updateCurrentBarPosition()
-        }
-      })
     this.registerResizeObserver()
   },
   beforeUnmount () {
@@ -260,23 +293,25 @@ export default {
       }
     },
     updateBarPosition (labelEl) {
-      if (this.$refs.labelBar) {
-        this.$refs.labelBar.style.left = labelEl.offsetLeft + 'px'
-        this.$refs.labelBar.style.width = this.$el.offsetWidth + 'px'
+      const labelBarEl = this.$refs.labelBar
+      // BUG? this.$el is null
+      if (labelBarEl && labelEl) {
+        labelBarEl.style.left = labelEl.offsetLeft + 'px'
+        labelBarEl.style.width = '8192px'
         if (this.type === 'card') {
-          this.$refs.labelBar.style.maxWidth = labelEl.offsetWidth + 'px'
+          labelBarEl.style.maxWidth = labelEl.offsetWidth + 'px'
         } else {
-          this.$refs.labelBar.style.maxWidth = labelEl.offsetWidth + 1 + 'px'
+          labelBarEl.style.maxWidth = labelEl.offsetWidth + 1 + 'px'
         }
       }
     },
     updateCurrentBarPosition () {
       let index = 0
-      const value = this.activeName
+      const value = this.compitableValue
       const refs = this.$refs
       for (const panel of this.panels) {
         if (panel.name === value) {
-          this.updateBarPosition(refs[`label(${index})`][0])
+          this.updateBarPosition(refs[`label(${index})`])
           break
         }
         index++
@@ -288,10 +323,16 @@ export default {
       }
     },
     setPanelActive (panelName) {
-      this.$emit('active-name-change', panelName)
+      const {
+        compitableOnValueChange
+      } = this
+      if (compitableOnValueChange) compitableOnValueChange(panelName)
     },
     handleCloseClick (panel) {
-      this.$emit('close', panel.name)
+      const {
+        onClose
+      } = this
+      if (onClose) onClose(panel.name)
     },
     registerResizeObserver () {
       resizeObserverDelegate.registerHandler(this.$refs.nav, throttle(() => {

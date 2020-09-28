@@ -1,7 +1,7 @@
 # 展示指令
 可以制定标签页展示的指令为 `if` 或者 `show`。使用 `show` 的时候标签页内容不会随着切换重置。
 ```html
-<n-tabs v-model="tab">
+<n-tabs v-model:value="tab">
   <n-tab-pane name="show" display-directive="show" label="show">
     <show-input />
   </n-tab-pane>
