@@ -84,7 +84,9 @@ placeable 进行了大调整
     - `on-update:value`
 - [ ] input-group
 - [ ] input-group-label
-- [ ] input-number
+- [x] input-number
+  - deprecate
+    - `on-change` => `on-update:value`
 - [x] layout
   - layout-sider
     - deprecate

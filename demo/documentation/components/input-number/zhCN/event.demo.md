@@ -1,14 +1,15 @@
 # 事件
-暴露了 Blur 和 Change 事件。
 ```html
 <n-input-number
-  v-model="value"
-  @change="handleChange"
+  :value="value"
+  @update:value="handleChange"
+  @focus="handleFocus"
   @blur="handleBlur"
 />
 ```
 ```js
 export default {
+  inject: ['message'],
   data () {
     return {
       value: 0
@@ -16,11 +17,15 @@ export default {
   },
   methods: {
     handleChange (v) {
-      this.$NMessage.info(`value: ${v}`)
+      this.value = v
+      this.message.info(`update:value(${v})`)
     },
-    handleBlur (v) {
-      this.$NMessage.info(`blur: ` + v)
+    handleBlur () {
+      this.message.info('blur')
     },
+    handleFocus () {
+      this.message.info('focus')
+    }
   }
 }
 ```

@@ -67,6 +67,7 @@ import themeable from '../../_mixins/themeable'
 import withapp from '../../_mixins/withapp'
 import asformitem from '../../_mixins/asformitem'
 import usecssr from '../../_mixins/usecssr'
+import { warn } from '../../_utils/naive/warn'
 import styles from './styles'
 
 const DEFAULT_STEP = 1
@@ -97,10 +98,6 @@ export default {
     asformitem(),
     usecssr(styles)
   ],
-  model: {
-    prop: 'value',
-    event: 'change'
-  },
   inject: {
     NFormItem: {
       default: null
@@ -109,7 +106,7 @@ export default {
   props: {
     placeholder: {
       type: String,
-      default: null
+      default: undefined
     },
     value: {
       type: Number,
@@ -125,13 +122,13 @@ export default {
     },
     max: {
       type: [Number, String],
-      default: null
+      default: undefined
     },
     size: {
       validator (value) {
         return ['small', 'medium', 'large'].includes(value)
       },
-      default: null
+      default: undefined
     },
     disabled: {
       type: Boolean,
@@ -139,7 +136,28 @@ export default {
     },
     validator: {
       type: Function,
-      default: null
+      default: undefined
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:value': {
+      type: Function,
+      default: undefined
+    },
+    onFocus: {
+      type: Function,
+      default: undefined
+    },
+    onBlur: {
+      type: Function,
+      default: undefined
+    },
+    // deprecated
+    onChange: {
+      validator () {
+        if (__DEV__) warn('input-number', '`on-change` is deprecated, please use `on-update:value` instead.')
+        return true
+      },
+      default: undefined
     }
   },
   computed: {
@@ -192,7 +210,16 @@ export default {
   methods: {
     emitChangeEvent (value) {
       if (value !== this.value) {
-        this.$emit('change', value)
+        const {
+          'onUpdate:value': onUpdateValue,
+          onChange,
+          __triggerFormInput,
+          __triggerFormChange
+        } = this
+        if (onChange) onChange(value)
+        if (onUpdateValue) onUpdateValue(value)
+        __triggerFormInput()
+        __triggerFormChange()
       }
     },
     createValidValue () {
@@ -212,7 +239,12 @@ export default {
       e.preventDefault()
     },
     handleFocus (e) {
-      this.$emit('focus', e, this.value)
+      const {
+        onFocus,
+        __triggerFormFocus
+      } = this
+      if (onFocus) onFocus(e)
+      __triggerFormFocus()
     },
     add () {
       if (!this.addable) return
@@ -265,7 +297,12 @@ export default {
       const value = this.adjustValue(e.target.value)
       e.target.value = value
       this.emitChangeEvent(value)
-      this.$emit('blur')
+      const {
+        onBlur,
+        __triggerFormBlur
+      } = this
+      if (onBlur) onBlur(e)
+      __triggerFormBlur()
     }
   }
 }

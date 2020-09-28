@@ -2,7 +2,7 @@
 ```html
 <n-input-number
   disabled
-  v-model="value"
+  v-model:value="value"
 />
 ```
 ```js

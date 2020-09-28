@@ -1,7 +1,7 @@
 # 间隔
 ```html
 <n-input-number
-  v-model="value"
+  v-model:value="value"
   :step="2"
 />
 ```

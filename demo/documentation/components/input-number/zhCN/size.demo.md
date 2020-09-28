@@ -2,15 +2,15 @@
 `small`、`medium`、`large`。
 ```html
 <n-input-number
-  v-model="value"
+  v-model:value="value"
   size="small"
 />
 <n-input-number
-  v-model="value"
+  v-model:value="value"
   size="medium"
 />
 <n-input-number
-  v-model="value"
+  v-model:value="value"
   size="large"
 />
 ```

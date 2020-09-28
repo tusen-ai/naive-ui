@@ -1,7 +1,7 @@
 # 自定义验证
 ```html
 <n-input-number
-  v-model="value"
+  v-model:value="value"
   :validator="validator"
 />
 ```
