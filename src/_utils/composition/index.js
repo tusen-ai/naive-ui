@@ -79,7 +79,7 @@ export function useDisabledUntilMounted (durationTickCount = 0) {
 
 export function useMemo (valueGenerator, deps) {
   const valueRef = ref(valueGenerator())
-  watch(deps, () => {
+  watch(deps.filter(dep => dep), () => {
     valueRef.value = valueGenerator()
   })
   return valueRef

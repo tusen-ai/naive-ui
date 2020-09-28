@@ -1,3 +1,5 @@
+import { warn } from '../../_utils/naive/warn'
+
 export default {
   props: {
     name: {
@@ -15,15 +17,22 @@ export default {
     disabled: {
       type: Boolean,
       default: false
-    }
-  },
-  model: {
-    prop: 'checkedValue',
-    event: 'change'
-  },
-  inject: {
-    NRadioGroup: {
-      default: null
+    },
+    onClick: {
+      type: Function,
+      default: undefined
+    },
+    'onUpdate:checkedValue': {
+      type: Function,
+      default: undefined
+    },
+    // deprecated
+    onChange: {
+      validator () {
+        if (__DEV__) warn('radio', '`on-change` is deprecated, please use `on-update:checked-value` instead.')
+        return true
+      },
+      default: undefined
     }
   },
   data () {
@@ -35,13 +44,6 @@ export default {
     syntheticName () {
       if (this.name !== undefined) return this.name
       if (this.NRadioGroup) return this.NRadioGroup.name
-    },
-    syntheticChecked () {
-      if (this.NRadioGroup) {
-        return this.NRadioGroup.value === this.value
-      } else {
-        return this.checkedValue === this.value
-      }
     },
     syntheticDisabled () {
       if (this.NRadioGroup && this.NRadioGroup.disabled) return true
@@ -84,14 +86,38 @@ export default {
       }, 0)
     },
     handleClick (e) {
-      this.$emit('click', e)
+      const {
+        onClick
+      } = this
+      if (onClick) onClick(e)
       this.toggle()
     },
     emitChangeEvent () {
+      const {
+        value
+      } = this
       if (this.NRadioGroup) {
-        this.NRadioGroup.$emit('change', this.value)
+        const {
+          onChange,
+          'onUpdate:value': updateValue,
+          __triggerFormInput,
+          __triggerFormChange
+        } = this.NRadioGroup
+        if (updateValue) updateValue(value)
+        if (onChange) onChange(value) // deprecated
+        __triggerFormInput()
+        __triggerFormChange()
       } else {
-        this.$emit('change', this.value)
+        const {
+          onChange,
+          'onUpdate:checkedValue': updateCheckedValue,
+          __triggerFormInput,
+          __triggerFormChange
+        } = this
+        if (updateCheckedValue) updateCheckedValue(value)
+        if (onChange) onChange(value) // deprecated
+        __triggerFormInput()
+        __triggerFormChange()
       }
     }
   }

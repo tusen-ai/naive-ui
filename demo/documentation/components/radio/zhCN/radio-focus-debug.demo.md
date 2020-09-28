@@ -2,7 +2,7 @@
 
 ```html
 <n-radio
-  v-model="value"
+  v-model:checked-value="value"
   value="Definitely Maybe"
 >
   <n-input />

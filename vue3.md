@@ -155,7 +155,14 @@ placeable 进行了大调整
     - set default trigger to `null`
 - [ ] popselect
 - [x] progress
-- [ ] radio
+- [x] radio
+  - radio-group
+    - break
+      - default `size` `'small'` => `'medium'`
+    - deprecate
+      - `on-change` => `on-update:value`
+  - radio & radio-button
+    - `on-change` => `on-update:checked-value`
 - [x] result
 - [ ] scrollbar
 - [ ] select
@@ -167,7 +174,7 @@ placeable 进行了大调整
   - remove
     - `value` => `model-value`
     - `change` => `on-update:model-value`
-- [ ] table
+- [x] table
 - [x] tabs
   - deprecate
     - `active-name` => `value`

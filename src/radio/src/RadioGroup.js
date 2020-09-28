@@ -3,31 +3,35 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import hollowoutable from '../../_mixins/hollowoutable'
 import asformitem from '../../_mixins/asformitem'
-import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
+import { getSlot, flatten } from '../../_utils/vue'
+import { warn } from '../../_utils/naive/warn'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles/radio-group/index.js'
-import { warn } from '../../_utils/naive/warn'
 
 function mapSlot (h, defaultSlot, groupInstance) {
-  const mappedSlot = []
-  defaultSlot = defaultSlot || []
+  const children = []
+  let isButtonGroup = false
   for (let i = 0; i < defaultSlot.length; ++i) {
     const wrappedInstance = defaultSlot[i]
     const instanceOptions = wrappedInstance.type
+    const name = instanceOptions.name
     if (
       __DEV__ && (
         !instanceOptions ||
-        !['Radio', 'RadioButton'].includes(instanceOptions.name)
+        !['Radio', 'RadioButton'].includes(name)
       )
     ) {
       warn('radio-group', '`n-radio-group` only taks `n-radio` and `n-radio-button` as children.')
       continue
     }
     const instanceProps = wrappedInstance.props
-    if (i === 0 || instanceOptions.name === 'Radio') {
-      mappedSlot.push(wrappedInstance)
+    if (name === 'RadioButton') {
+      isButtonGroup = true
+    }
+    if (i === 0 || name === 'Radio') {
+      children.push(wrappedInstance)
     } else {
-      const lastInstanceProps = mappedSlot[mappedSlot.length - 1].props
+      const lastInstanceProps = children[children.length - 1].props
       const lastInstanceChecked = groupInstance.$props.value === lastInstanceProps.value
       const lastInstanceDisabled = lastInstanceProps.disabled
       const currentInstanceChecked = groupInstance.$props.value === instanceProps.value
@@ -63,16 +67,21 @@ function mapSlot (h, defaultSlot, groupInstance) {
         'n-radio-group__splitor--disabled': currentInstanceDisabled,
         'n-radio-group__splitor--checked': currentInstanceChecked
       }
-      let splitorClass
-      if (lastInstancePriority < currentInstancePriority) splitorClass = currentInstanceClass
-      else splitorClass = lastInstanceClass
-      mappedSlot.push(h('div', {
-        staticClass: 'n-radio-group__splitor',
-        class: splitorClass
+      const splitorClass = lastInstancePriority < currentInstancePriority
+        ? currentInstanceClass
+        : lastInstanceClass
+      children.push(h('div', {
+        class: [
+          'n-radio-group__splitor',
+          splitorClass
+        ]
       }), wrappedInstance)
     }
   }
-  return mappedSlot
+  return {
+    children,
+    isButtonGroup
+  }
 }
 
 export default {
@@ -85,13 +94,9 @@ export default {
     hollowoutable,
     usecssr(styles),
     asformitem({
-      change: 'change'
-    }, 'small')
+      defaultSize: 'medium'
+    })
   ],
-  model: {
-    prop: 'value',
-    event: 'change'
-  },
   props: {
     name: {
       type: String,
@@ -102,24 +107,35 @@ export default {
       default: null
     },
     size: {
-      default: undefined,
       validator (value) {
         return ['small', 'medium', 'large'].includes(value)
-      }
+      },
+      default: undefined
     },
     disabled: {
       type: Boolean,
       default: false
+    },
+    'onUpdate:value': {
+      type: Function,
+      default: undefined
+    },
+    // deprecated
+    onChange: {
+      validator () {
+        if (__DEV__) warn('radio-group', '`on-change` is deprecated, please use `on-update:value` instead.')
+        return true
+      },
+      default: undefined
     }
   },
   data () {
     return {
-      radioButtonCount: 0,
       transitionDisabled: true
     }
   },
   mounted () {
-    if (this.radioButtonCount > 0) {
+    if (this.isButtonGroup) {
       this.$nextTick().then(() => {
         this.transitionDisabled = false
       })
@@ -127,12 +143,15 @@ export default {
   },
   provide () {
     return {
-      NRadioGroup: this,
-      NFormItem: null
+      NRadioGroup: this
     }
   },
   render () {
-    const isButtonGroup = this.radioButtonCount > 0
+    const {
+      children,
+      isButtonGroup
+    } = mapSlot(h, flatten(getSlot(this)), this)
+    this.isButtonGroup = isButtonGroup
     return h('div', {
       class: [
         'n-radio-group',
@@ -143,6 +162,6 @@ export default {
           [`n-radio-group--transition-disabled`]: isButtonGroup && this.transitionDisabled
         }
       ]
-    }, mapSlot(h, getDefaultSlot(this), this))
+    }, children)
   }
 }

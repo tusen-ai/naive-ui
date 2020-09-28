@@ -2,7 +2,7 @@
 任君挑选。
 ```html
 <div style="margin-bottom: 12px;">
-  <n-radio-group v-model="value" name="radiobuttongroup2" size="medium">
+  <n-radio-group v-model:value="value" name="radiobuttongroup2" size="medium">
     <n-radio-button
       v-for="song in songs"
       :key="song.value"
@@ -14,7 +14,7 @@
   </n-radio-group>
 </div>
 <div style="margin-bottom: 12px;">
-  <n-radio-group v-model="value" name="radiobuttongroup3" size="large">
+  <n-radio-group v-model:value="value" name="radiobuttongroup3" size="large">
     <n-radio-button
       v-for="song in songs"
       :key="song.value"
@@ -26,13 +26,13 @@
   </n-radio-group>
 </div>
 <n-checkbox
-  v-model="disabled2"
+  v-model:checked="disabled2"
   style="margin-right: 12px;"
 >
   禁用 Shakemaker
 </n-checkbox>
 <n-checkbox
-  v-model="disabled1"
+  v-model:checked="disabled1"
 >
   禁用 Live Forever
 </n-checkbox>

@@ -3,11 +3,11 @@
     class="n-radio-button"
     :class="{
       'n-radio-button--disabled': syntheticDisabled,
-      'n-radio-button--checked': syntheticChecked,
+      'n-radio-button--checked': renderSafeChecked,
       'n-radio-button--focus': focus
     }"
     :style="{
-      color: syntheticChecked ? syntheticAscendantBackgroundColor : null
+      color: renderSafeChecked ? syntheticAscendantBackgroundColor : null
     }"
     @keyup.enter="handleKeyUpEnter"
     @click="handleClick"
@@ -18,7 +18,7 @@
       type="radio"
       class="n-radio-button__radio-input"
       :name="syntheticName"
-      :checked="syntheticChecked"
+      :checked="renderSafeChecked"
       :disabled="syntheticDisabled"
       @change="handleRadioInputChange"
       @focus="handleRadioInputFocus"
@@ -31,6 +31,7 @@
 
 <script>
 import radioMixin from './radio-mixin'
+import setup from './radio-setup'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import usecssr from '../../_mixins/usecssr'
@@ -46,11 +47,6 @@ export default {
     radioMixin,
     usecssr(styles)
   ],
-  created () {
-    this.NRadioGroup && this.NRadioGroup.radioButtonCount++
-  },
-  beforeUnmount () {
-    this.NRadioGroup && this.NRadioGroup.radioButtonCount--
-  }
+  setup
 }
 </script>

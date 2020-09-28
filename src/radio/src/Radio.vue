@@ -3,7 +3,7 @@
     class="n-radio"
     :class="{
       'n-radio--disabled': syntheticDisabled,
-      'n-radio--checked': syntheticChecked,
+      'n-radio--checked': renderSafeChecked,
       'n-radio--focus': focus,
       [`n-radio--${syntheticSize}-size`]: true,
       [`n-${syntheticTheme}-theme`]: syntheticTheme
@@ -17,7 +17,7 @@
       type="radio"
       class="n-radio__radio-input"
       :name="syntheticName"
-      :checked="syntheticChecked"
+      :checked="renderSafeChecked"
       :disabled="syntheticDisabled"
       @change="handleRadioInputChange"
       @focus="handleRadioInputFocus"
@@ -26,7 +26,7 @@
     <div
       class="n-radio__dot"
       :class="{
-        'n-radio__dot--checked': syntheticChecked
+        'n-radio__dot--checked': renderSafeChecked
       }"
     />
     <div class="n-radio__label">
@@ -42,6 +42,7 @@ import themeable from '../../_mixins/themeable'
 import radioMixin from './radio-mixin'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles/radio/index.js'
+import setup from './radio-setup'
 
 export default {
   name: 'Radio',
@@ -49,14 +50,9 @@ export default {
     withapp,
     themeable,
     usecssr(styles),
-    asformitem(
-      {
-        change: 'change',
-        blur: 'blur',
-        focus: 'focus'
-      },
-      'medium',
-      function () {
+    asformitem({
+      defaultSize: 'medium',
+      syntheticSize () {
         const size = this.size
         if (size) return size
         const NRadioGroup = this.NRadioGroup
@@ -66,14 +62,14 @@ export default {
         const NFormItem = this.NFormItem
         if (
           NFormItem &&
-        NFormItem !== '__FORM_ITEM_INNER__' &&
-        NFormItem.syntheticSize
+          NFormItem !== '__FORM_ITEM_INNER__' &&
+          NFormItem.syntheticSize
         ) {
           return NFormItem.syntheticSize
         }
         return 'medium'
       }
-    ),
+    }),
     radioMixin
   ],
   props: {
@@ -81,9 +77,10 @@ export default {
       validator (value) {
         return ['small', 'medium', 'large'].includes(value)
       },
-      default: null
+      default: undefined
     }
   },
+  setup,
   computed: {
     syntheticTheme () {
       const theme = this.theme

@@ -9,52 +9,24 @@ button-group
 size
 radio-focus-debug
 ```
-## V-model
-### Radio V-model
-|Prop|Event|
-|-|-|
-|checked-value|change|
-
-### Radio Group V-model
-|Prop|Event|
-|-|-|
-|value|change|
 
 ## Props
-### Radio Props
+### Radio Props, Radio Button Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|name|`string`|`undefined`|单选 radio 元素的 name 属性。如果没有设定会使用 `radio-group` 的 `name`|
+|name|`string`|`undefined`|单选按钮 radio 元素的 name 属性。如果没有设定会使用 `n-radio-group` 的 `name`|
 |checked-value|`string \| number \| boolean`|`null`||
-|value|`string \| number \| boolean`|`null`||
+|value|`string \| number \| boolean`|required||
 |disabled|`boolean`|`false`||
-
-### Radio Button Props
-|名称|类型|默认值|说明|
-|-|-|-|-|
-|name|`string`|`undefined`|单选按钮 radio 元素的 name 属性。如果没有设定会使用 `radio-group` 的 `name`|
-|checked-value|`string \| number \| boolean`|`null`||
-|value|`string \| number \| boolean`|`null`||
-|disabled|`boolean`|`false`||
-|size|`'small' \| 'medium' \| 'large'`|`'small'`||
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`|只用于 `n-radio`|
+|on-update:checked-value|`(checkedValue: string \| number \| boolean) => any`|`undefined`||
 
 ### Radio Group Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|name|`string`|`null`|选项组内部 radio 元素的 name 属性|
-|size|`'small' \| 'medium' \| 'large'`|`small`||
-|value|`string \| number \| boolean`|`null`||
 |disabled|`boolean`|`false`||
-
-## Events
-### Radio, Radio Button Events
-|名称|参数|说明|
-|-|-|-|
-|change|`(checkedValue: string \| number \| boolean)`||
-
-### Radio Group Events
-|名称|参数|说明|
-|-|-|-|
-|change|`(checkedValue: string \| number \| boolean)`||
+|name|`string`|`null`|选项组内部 radio 元素的 name 属性|
+|size|`'small' \| 'medium' \| 'large'`|`medium`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|value|`string \| number \| boolean`|`null`||
+|on-update:value|`(checkedValue: string \| number \| boolean) => any`|`undefined`||
