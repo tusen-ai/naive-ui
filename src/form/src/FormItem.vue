@@ -289,22 +289,14 @@ export default {
   watch: {
     path () {
       if (this.ignorePathChange) return
-      this._initData()
+      this.restoreValidation()
     }
   },
   mounted () {
     this.feedbackTransitionDisabled = false
   },
-  created () {
-    /**
-     * This is buggy!
-     * Because if it's child change, rules is not updated
-     * However I need to make it work first
-     */
-    this.addValidationEventListeners()
-  },
   methods: {
-    _initData () {
+    restoreValidation () {
       this.explains = []
       this.validationErrored = false
       this.disableFeedbackTransition()
@@ -442,15 +434,6 @@ export default {
     clearValidationEffect () {
       this.explains = []
       this.validationErrored = false
-    },
-    addValidationEventListeners () {
-      const rules = this.syntheticRules
-      if (rules.length > 0) {
-        // this.$on('blur', this.handleContentBlur)
-        // this.$on('input', this.handleContentInput)
-        // this.$on('focus', this.handleContentFocus)
-        // this.$on('change', this.handleContentChange)
-      }
     },
     handleBeforeEnter () {
       this.feedbackTransitionDisabled = false

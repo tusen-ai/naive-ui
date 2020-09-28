@@ -3,7 +3,7 @@ If you want to activate input by pressing enter after focused, use `passively-ac
 
 ```html
 <n-input
-  v-model="value"
+  v-model:value="value"
   @blur="handleBlur"
   @focus="handleFocus"
   @change="handleChange"
@@ -13,7 +13,7 @@ If you want to activate input by pressing enter after focused, use `passively-ac
   :passively-activated="true"
 />
 <n-input
-  v-model="value"
+  v-model:value="value"
   type="textarea"
   @blur="handleBlur"
   @focus="handleFocus"
@@ -26,7 +26,7 @@ If you want to activate input by pressing enter after focused, use `passively-ac
 <n-input
   pair
   separator="to"
-  v-model="pair"
+  v-model:value="pair"
   @blur="handleBlur"
   @focus="handleFocus"
   :passively-activated="true"

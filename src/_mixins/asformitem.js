@@ -1,14 +1,9 @@
-export default function (events = {
-  change: 'change',
-  blur: 'blur',
-  focus: 'focus'
-}, defaultSize = 'medium', syntheticSize = null) {
+export default function (options = {}) {
+  const {
+    defaultSize = 'medium',
+    syntheticSize
+  } = options
   return {
-    data () {
-      return {
-        syntheticSize: 'medium'
-      }
-    },
     provide () {
       return {
         NFormItem: '__FORM_ITEM_INNER__'
@@ -18,9 +13,7 @@ export default function (events = {
       NFormItem: {
         default: null
       }
-    }
-  }
-  return {
+    },
     computed: {
       syntheticSize: syntheticSize || function () {
         const size = this.size
@@ -36,31 +29,36 @@ export default function (events = {
         return defaultSize
       }
     },
-    provide () {
-      return {
-        NFormItem: '__FORM_ITEM_INNER__'
-      }
-    },
-    inject: {
-      NFormItem: {
-        default: null
-      }
-    },
-    created () {
-      Object.keys(events).forEach(event => {
-        const asEvent = events[event]
-        // this.$on(event, function (value) {
-        //   const NFormItem = this.NFormItem
-        //   if (NFormItem && NFormItem !== '__FORM_ITEM_INNER__') {
-        //     NFormItem.$emit(asEvent, value)
-        //   }
-        // })
-      })
-    },
     beforeUnmount () {
       const NFormItem = this.NFormItem
       if (NFormItem && NFormItem !== '__FORM_ITEM_INNER__') {
-        NFormItem._initData()
+        NFormItem.restoreValidation()
+      }
+    },
+    methods: {
+      __triggerFormBlur () {
+        const NFormItem = this.NFormItem
+        if (NFormItem && NFormItem !== '__FORM_ITEM_INNER__') {
+          NFormItem.onContentBlur()
+        }
+      },
+      __triggerFormChange () {
+        const NFormItem = this.NFormItem
+        if (NFormItem && NFormItem !== '__FORM_ITEM_INNER__') {
+          NFormItem.onContentChange()
+        }
+      },
+      __triggerFormFocus () {
+        const NFormItem = this.NFormItem
+        if (NFormItem && NFormItem !== '__FORM_ITEM_INNER__') {
+          NFormItem.onContentFocus()
+        }
+      },
+      __triggerFormInput () {
+        const NFormItem = this.NFormItem
+        if (NFormItem && NFormItem !== '__FORM_ITEM_INNER__') {
+          NFormItem.onContentInput()
+        }
       }
     }
   }

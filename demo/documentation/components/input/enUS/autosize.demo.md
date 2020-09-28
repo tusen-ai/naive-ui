@@ -2,7 +2,7 @@
 Make textarea autosizable.
 ```html
 <n-input
-  v-model="value"
+  v-model:value="value"
   placeholder="Autosizable"
   type="textarea"
   size="small"
@@ -12,7 +12,7 @@ Make textarea autosizable.
   }"
 />
 <n-input
-  v-model="value"
+  v-model:value="value"
   type="textarea"
   placeholder="Autosizable"
   :autosize="{

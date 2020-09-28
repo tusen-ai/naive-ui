@@ -73,6 +73,10 @@ placeable 进行了大调整
 - [x] grid
 - [x] icon
 - [x] input
+  - break
+    - `v-model`
+  - new
+    - `on-update:value`
 - [ ] input-group
 - [ ] input-group-label
 - [ ] input-number

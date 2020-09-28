@@ -1,7 +1,7 @@
 # 事件
 ```html
 <n-input
-  v-model="value"
+  v-model:value="value"
   @blur="handleBlur"
   @focus="handleFocus"
   @change="handleChange"
@@ -10,7 +10,7 @@
   placeholder="触发事件"
 />
 <n-input
-  v-model="value"
+  v-model:value="value"
   type="textarea"
   @blur="handleBlur"
   @focus="handleFocus"

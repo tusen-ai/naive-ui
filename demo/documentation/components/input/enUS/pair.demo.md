@@ -3,7 +3,7 @@
 <n-input
   pair
   separator="-"
-  v-model="value"
+  v-model:value="value"
   :placeholder="placeholder"
   clearable
   @blur="handleInputBlur"

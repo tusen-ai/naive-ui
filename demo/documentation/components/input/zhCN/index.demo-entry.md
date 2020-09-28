@@ -17,32 +17,32 @@ passively-activated
 ```
 <!-- input-group -->
 
-## V-model
-|Prop|Event|
-|-|-|
-|modelValue|update:modelValue|
-
 ## Props
 ### Input Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|autofocus|`boolean`|`false`||
+|autosize|`boolean \| { minRows?: number, maxRows?: number }`|`false`||
+|clearable|`boolean`|`false`||
+|disabled|`boolean`|`false`||
+|maxlength|`number`|`null`||
+|minlength|`number`|`null`||
+|pair|`boolean`|`false`|是否输入成对的值|
+|passively-activated|`boolean`|`false`||
+|placeholder|`string \| [string, string]`|`null`|文本输入的占位符。如果是 `pair` 是 `true`，`placeholder`是一个数组|
+|readonly|`boolean`|`false`||
+|round|`boolean`|`false`||
+|rows|`number`|`3`||
+|separator|`string`|`null`|成对的值中间的分隔符|
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 |type|`'text' \| 'password' \| 'textarea'`|`'text'`||
-|pair|`boolean`|`false`|是否输入成对的值|
-|modelValue|`string \| [string, string]`|`null`|文本输入的值。如果是 `pair` 是 `true`，`modelValue` 是一个数组|
-|disabled|`boolean`|`false`||
-|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
-|rows|`number`|`3`||
-|round|`boolean`|`false`||
-|minlength|`number`|`null`||
-|maxlength|`number`|`null`||
-|clearable|`boolean`|`false`||
-|autosize|`boolean \| { minRows?: number, maxRows?: number }`|`false`||
-|readonly|`boolean`|`false`||
-|separator|`string`|`null`|成对的值中间的分隔符|
-|placeholder|`string \| [string, string]`|`null`|文本输入的占位符。如果是 `pair` 是 `true`，`placeholder`是一个数组|
-|passively-activated|`boolean`|`false`||
-|autofocus|`boolean`|`false`||
+|value|`string \| [string, string]`|`null`|文本输入的值。如果是 `pair` 是 `true`，`modelValue` 是一个数组|
+|on-blur|`() => any`|`undefined`||
+|on-change|`(value: string \| [string, string]) => any`|`undefined`||
+|on-clear|`() => any`|`undefined`||
+|on-focus|`() => any`|`undefined`||
+|on-update:modelValue|`(value: string \| [string, string]) => any`|`undefined`||
 
 
 ## Slots
@@ -61,14 +61,3 @@ passively-activated
 |属性|类型|说明|
 |-|-|-|
 |default|`()`||
-
-
-## Events
-### Input Events
-|属性|类型|说明|
-|-|-|-|
-|update:modelValue|`(value: string \| [string, string])`||
-|change|`(value: string \| [string, string])`||
-|blur|`()`||
-|focus|`()`||
-|clear|`()`||

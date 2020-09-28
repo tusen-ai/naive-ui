@@ -3,7 +3,7 @@
 
 ```html
 <n-input
-  v-model="value"
+  v-model:value="value"
   @blur="handleBlur"
   @focus="handleFocus"
   @change="handleChange"
@@ -13,7 +13,7 @@
   passively-activated
 />
 <n-input
-  v-model="value"
+  v-model:value="value"
   type="textarea"
   @blur="handleBlur"
   @focus="handleFocus"
@@ -26,7 +26,7 @@
 <n-input
   pair
   separator="to"
-  v-model="pair"
+  v-model:value="pair"
   @blur="handleBlur"
   @focus="handleFocus"
   passively-activated
