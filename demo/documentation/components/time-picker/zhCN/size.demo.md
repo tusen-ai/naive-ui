@@ -2,15 +2,15 @@
 可以是 `small`、`medium` 或 `large` 尺寸。
 ```html
 <n-time-picker
-  v-model="timestamp"
+  v-model:value="timestamp"
   size="small"
 />
 <n-time-picker
-  v-model="timestamp"
+  v-model:value="timestamp"
   size="medium"
 />
 <n-time-picker
-  v-model="timestamp"
+  v-model:value="timestamp"
   size="large"
 />
 ```

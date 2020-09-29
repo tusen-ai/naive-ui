@@ -1,5 +1,5 @@
 import { h } from 'vue'
-import omit from '../../_utils/vue/omit'
+import { omit } from '../../_utils/vue'
 import NMenuItemGroup from './MenuItemGroup'
 import NSubmenu from './Submenu'
 import NMenuItem from './MenuItem'

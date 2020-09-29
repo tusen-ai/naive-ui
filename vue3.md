@@ -79,7 +79,7 @@ placeable 进行了大调整
 - [x] icon
 - [x] input
   - break
-    - `v-model`
+    - `v-model` => `v-model:value`
   - new
     - `on-update:value`
 - [ ] input-group
@@ -186,7 +186,9 @@ placeable 进行了大调整
     - `on-checked-change` => `on-update:checked`
 - [x] thing
 - [x] time
-- [ ] time-picker
+- [x] time-picker
+  - break
+    - `v-model` => `v-model:value`
 - [x] timeline
 - [x] tooltip
   - ref

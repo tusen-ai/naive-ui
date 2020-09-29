@@ -1,6 +1,6 @@
 import { createTextVNode } from 'vue'
 
-export default {
+export const render = {
   props: {
     render: {
       type: [String, Number, Function],

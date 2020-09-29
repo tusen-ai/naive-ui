@@ -59,7 +59,7 @@
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import usecssr from '../../_mixins/usecssr'
-import render from '../../_utils/vue/render'
+import { render } from '../../_utils/vue'
 import styles from './styles'
 import NIcon from '../../icon'
 import CloseIcon from '../../_icons/md-close'

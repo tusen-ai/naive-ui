@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import render from '../../../_utils/vue/render'
+import { render } from '../../../_utils/vue'
 
 export default {
   name: 'NDataTableCell',

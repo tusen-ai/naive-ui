@@ -10,7 +10,7 @@ import {
   useCompitable,
   useIsMounted
 } from '../../_utils/composition'
-import omit from '../../_utils/vue/omit'
+import { omit } from '../../_utils/vue'
 import NLazyTeleport from '../../_base/lazy-teleport'
 import NPopoverBody from './PopoverBody'
 

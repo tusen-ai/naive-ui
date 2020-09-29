@@ -1,12 +1,12 @@
 # 基础用法
 ```html
 <n-time-picker
-  v-model="time0"
+  v-model:value="time0"
   :disabledHours="disabledHours"
   :disabledMinutes="disabledMinutes"
   :disabledSeconds="disabledSeconds"
 />
-<n-time-picker v-model="time1" />
+<n-time-picker v-model:value="time1" />
 ```
 ```js
 export default {

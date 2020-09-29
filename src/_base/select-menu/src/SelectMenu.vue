@@ -112,7 +112,7 @@ import NSelectGroupHeader from './SelectGroupHeader.vue'
 import NBaseTrackingRect from '../../tracking-rect'
 import NEmpty from '../../../empty'
 import { RecycleScroller } from 'vue-virtual-scroller'
-import render from '../../../_utils/vue/render'
+import { render } from '../../../_utils/vue'
 import {
   getPrevAvailableIndex,
   getNextAvailableIndex,

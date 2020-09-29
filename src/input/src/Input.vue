@@ -163,6 +163,7 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import asformitem from '../../_mixins/asformitem'
 import usecssr from '../../_mixins/usecssr'
+import { call } from '../../_utils/vue'
 import styles from './styles'
 
 export default {
@@ -251,41 +252,37 @@ export default {
       type: Boolean,
       default: true
     },
-    deactivateOnEnter: {
-      type: Boolean,
-      default: false
-    },
     autofocus: {
       type: Boolean,
       default: false
     },
     onFocus: {
-      type: Function,
+      type: [Function, Array],
       default: undefined
     },
     onBlur: {
-      type: Function,
+      type: [Function, Array],
       default: undefined
     },
     onClick: {
-      type: Function,
+      type: [Function, Array],
       default: undefined
     },
     onChange: {
-      type: Function,
+      type: [Function, Array],
       default: undefined
     },
     onKeyUp: {
-      type: Function,
+      type: [Function, Array],
       default: undefined
     },
     onClear: {
-      type: Function,
+      type: [Function, Array],
       default: undefined
     },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:value': {
-      type: Function,
+      type: [Function, Array],
       default: undefined
     },
     /** private */
@@ -294,28 +291,32 @@ export default {
       default: 20
     },
     onInputBlur: {
-      type: Function,
+      type: [Function, Array],
       default: undefined
     },
     onInputFocus: {
-      type: Function,
+      type: [Function, Array],
       default: undefined
     },
     onDeactivate: {
-      type: Function,
+      type: [Function, Array],
       default: undefined
     },
     onActivate: {
-      type: Function,
+      type: [Function, Array],
       default: undefined
     },
     onWrapperFocus: {
-      type: Function,
+      type: [Function, Array],
       default: undefined
     },
     onWrapperBlur: {
-      type: Function,
+      type: [Function, Array],
       default: undefined
+    },
+    deactivateOnEnter: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -378,6 +379,94 @@ export default {
     }
   },
   methods: {
+    doInput (value) {
+      const {
+        'onUpdate:value': onUpdateValue,
+        onInput,
+        __triggerFormInput
+      } = this
+      if (onUpdateValue) call(onUpdateValue, value)
+      if (onInput) call(onInput, value)
+      __triggerFormInput()
+    },
+    doChange (value) {
+      const {
+        onChange,
+        __triggerFormChange
+      } = this
+      if (onChange) call(onChange, value)
+      __triggerFormChange()
+    },
+    doBlur (e) {
+      const {
+        onBlur,
+        __triggerFormBlur
+      } = this
+      if (onBlur) call(onBlur, e)
+      __triggerFormBlur()
+    },
+    doFocus (e) {
+      const {
+        onFocus,
+        __triggerFormFocus
+      } = this
+      if (onFocus) call(onFocus, e)
+      __triggerFormFocus()
+    },
+    doClear () {
+      const {
+        onClear
+      } = this
+      if (onClear) call(onClear)
+    },
+    doInputBlur (e) {
+      const {
+        onInputBlur
+      } = this
+      if (onInputBlur) call(onInputBlur, e)
+    },
+    doInputFocus (e) {
+      const {
+        onInputFocus
+      } = this
+      if (onInputFocus) call(onInputFocus, e)
+    },
+    doDeactivate () {
+      const {
+        onDeactivate
+      } = this
+      if (onDeactivate) call(onDeactivate)
+    },
+    doActivate () {
+      const {
+        onActivate
+      } = this
+      if (onActivate) call(onActivate)
+    },
+    doKeyUp (e) {
+      const {
+        onKeyUp
+      } = this
+      if (onKeyUp) call(onKeyUp, e)
+    },
+    doClick (e) {
+      const {
+        onClick
+      } = this
+      if (onClick) call(onClick, e)
+    },
+    doWrapperFocus (e) {
+      const {
+        onWrapperFocus
+      } = this
+      if (onWrapperFocus) call(onWrapperFocus, e)
+    },
+    doWrapperBlur (e) {
+      const {
+        onWrapperBlur
+      } = this
+      if (onWrapperBlur) call(onWrapperBlur, e)
+    },
     updateTextAreaStyle () {
       const textarea = this.$refs.textarea
       const {
@@ -413,15 +502,8 @@ export default {
     handleInput (e, index) {
       if (this.isComposing) return
       const changedValue = e.target.value
-      const {
-        'onUpdate:value': onUpdateValue,
-        onInput,
-        __triggerFormInput
-      } = this
       if (!this.pair) {
-        if (onUpdateValue) onUpdateValue(changedValue)
-        if (onInput) onInput(changedValue)
-        __triggerFormInput(changedValue)
+        this.doInput(changedValue)
       } else {
         let value = this.value
         if (!Array.isArray(value)) {
@@ -430,18 +512,13 @@ export default {
           value = [...value]
         }
         value[index] = changedValue
-        if (onUpdateValue) onUpdateValue(value)
-        if (onInput) onInput(value)
-        __triggerFormInput(value)
+        this.doInput(value)
       }
       /** force update to sync input's view with value */
       this.$forceUpdate()
     },
     handleInputBlur (e) {
-      const {
-        onInputBlur
-      } = this
-      if (onInputBlur) onInputBlur(e)
+      this.doInputBlur(e)
       const {
         input,
         secondInput,
@@ -449,10 +526,7 @@ export default {
         wrapper
       } = this.$refs
       if (e.relatedTarget === wrapper) {
-        const {
-          onDeactivate
-        } = this
-        if (onDeactivate) onDeactivate()
+        this.doDeactivate()
       }
       if (!(
         e.relatedTarget === input ||
@@ -464,39 +538,27 @@ export default {
       this.dealWithEvent(e, 'blur')
     },
     handleInputFocus (e) {
-      const {
-        onInputFocus
-      } = this
-      if (onInputFocus) onInputFocus(e)
+      this.doInputFocus(e)
       this.focused = true
       this.inputFocused = true
       const {
         wrapper
       } = this.$refs
       if (e.relatedTarget === wrapper) {
-        const {
-          onActivate
-        } = this
-        if (onActivate) onActivate()
+        this.doActivate()
       }
       this.dealWithEvent(e, 'focus')
     },
     handleWrapperBlur (e) {
       if (this.passivelyActivated) {
-        const {
-          onWrapperBlur
-        } = this
-        if (onWrapperBlur) onWrapperBlur(e)
+        this.doWrapperBlur(e)
         this.dealWithEvent(e, 'blur')
       }
     },
     handleWrapperFocus (e) {
       if (this.passivelyActivated) {
         this.focused = true
-        const {
-          onWrapperFocus
-        } = this
-        if (onWrapperFocus) onWrapperFocus(e)
+        this.doWrapperFocus(e)
         this.dealWithEvent(e, 'focus')
       }
     },
@@ -518,60 +580,29 @@ export default {
          */
       } else {
         if (type === 'focus') {
-          const {
-            onFocus,
-            __triggerFormFocus
-          } = this
-          if (onFocus) onFocus(e)
-          __triggerFormFocus()
+          this.doFocus(e)
           this.focused = true
         } else if (type === 'blur') {
-          const {
-            onBlur,
-            __triggerFormBlur
-          } = this
-          if (onBlur) onBlur(e)
-          __triggerFormBlur()
+          this.doBlur(e)
           this.focused = false
         }
       }
     },
     handleKeyUp (e) {
-      const {
-        onKeyUp
-      } = this
-      if (onKeyUp) onKeyUp(e)
+      this.doKeyUp(e)
     },
     handleChange (e) {
-      const {
-        onChange,
-        __triggerFormChange
-      } = this
-      if (onChange) onChange(e.target.value)
-      __triggerFormChange()
+      this.doChange(e.target.value)
     },
     handleClick (e) {
-      const {
-        onClick
-      } = this
-      if (onClick) onClick(e)
+      this.doClick(e)
     },
     handleClear (e) {
-      const {
-        onClear,
-        onInput,
-        'onUpdate:value': onUpdateValue,
-        __triggerFormInput
-      } = this
-      if (onClear) onClear(e)
+      this.doClear()
       if (this.pair) {
-        if (onUpdateValue) onUpdateValue([])
-        if (onInput) onInput([])
-        __triggerFormInput()
+        this.doChange([])
       } else {
-        if (onUpdateValue) onUpdateValue('')
-        if (onInput) onInput('')
-        __triggerFormInput()
+        this.doChange('')
       }
     },
     handleMouseEnter () {

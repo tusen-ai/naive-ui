@@ -70,7 +70,7 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import render from '../../_utils/vue/render'
+import { render } from '../../_utils/vue'
 import usecssr from '../../_mixins/usecssr'
 import NIcon from '../../icon'
 import NButton from '../../button'
