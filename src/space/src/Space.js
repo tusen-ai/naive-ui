@@ -1,4 +1,5 @@
-import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
+import { h } from 'vue'
+import { flatten, getSlot } from '../../_utils/vue'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 
@@ -60,7 +61,7 @@ export default {
       default: 'medium'
     }
   },
-  render (h) {
+  render () {
     const {
       size,
       vertical,
@@ -68,7 +69,7 @@ export default {
       inline,
       justify
     } = this
-    const children = getDefaultSlot(this)
+    const children = flatten(getSlot(this))
     const horizontalMargin = typeof size === 'number' ? size + 'px' : HORIZONTAL_MARGIN[size]
     const verticalMargin = typeof size === 'number' ? size + 'px' : VERTICAL_MARGIN[size]
     const marginRight = !vertical ? horizontalMargin : null

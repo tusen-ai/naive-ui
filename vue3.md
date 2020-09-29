@@ -175,6 +175,7 @@ placeable 进行了大调整
 - [x] scrollbar
 - [ ] select
 - [ ] slider
+- [x] space
 - [x] spin
 - [x] statistic
 - [x] steps
