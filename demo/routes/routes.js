@@ -75,6 +75,7 @@ import log from '../documentation/components/log'
 import code from '../documentation/components/code'
 import upload from '../documentation/components/upload'
 import table from '../documentation/components/table'
+import space from '../documentation/components/space'
 
 import Documentation from '../Documentation'
 
@@ -154,6 +155,7 @@ export const childRoutes = withPrefix('/:lang/:theme/doc', [
   { path: '/n-typography', component: typography },
   { path: '/n-upload', component: upload },
   { path: '/n-table', component: table },
+  { path: '/n-space', component: space },
   // deprecated
   { path: '/n-nimbus-service-layout', component: nimbusServiceLayout }
 ])

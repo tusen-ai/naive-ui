@@ -5,6 +5,7 @@
 - 修正了嵌套 `n-icon` 没有被打平的问题
 - 修正了 `n-date-picker` 在类型为 `date` 和 `datetime` 时面板不显示年的问题
 ### Features
+- 增加 `n-space` 组件
 - `n-drawer` 内容可滚动
 ### Localization
 - `n-log` 添加 zhCN 本地化

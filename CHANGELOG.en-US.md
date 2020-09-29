@@ -5,6 +5,7 @@
 - Fix the problem that nested `n-icon` is not flattened.
 - Fix the problem that `n-date-picker` has no year in panel when type is `date` and `datetime`.
 ### Features
+- Add `n-space` component.
 - Make `n-drawer` content scrollable.
 ### Localization
 - Add zhCN for `n-log`

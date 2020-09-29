@@ -114,6 +114,12 @@ export default function (instance) {
             title: '栅格',
             titleExtra: 'Grid',
             path: `/${lang}/${theme}/doc` + '/n-grid'
+          },
+          {
+            name: 'Space',
+            title: '间距',
+            titleExtra: 'Space',
+            path: `/${lang}/${theme}/doc` + '/n-space'
           }
         ]
       }),
@@ -559,6 +565,10 @@ export default function (instance) {
           {
             name: 'Grid',
             path: `/${lang}/${theme}/doc` + '/n-grid'
+          },
+          {
+            name: 'Space',
+            path: `/${lang}/${theme}/doc` + '/n-space'
           }
         ]
       }),

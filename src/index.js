@@ -52,6 +52,7 @@ import Result from './result'
 import Select from './select'
 import Scrollbar from './scrollbar'
 import Slider from './slider'
+import Space from './space'
 import Spin from './spin'
 import Statistic from './statistic'
 import Steps from './steps'
@@ -290,6 +291,7 @@ export default create({
     InputGroup,
     InputGroupLabelStyle,
     DynamicTags,
+    Space,
     // Deprecated
     NimbusServiceLayout,
     NimbusConfirmCard,
