@@ -1,10 +1,10 @@
 import { Fragment } from 'vue'
 
-export function flatten (vNodes) {
-  let result = []
+// o(n) flatten
+export function flatten (vNodes, result = []) {
   vNodes.forEach(vNode => {
     if (vNode.type === Fragment) {
-      result = result.concat(flatten(vNode.children))
+      flatten(vNode.children, result)
     } else {
       result.push(vNode)
     }
