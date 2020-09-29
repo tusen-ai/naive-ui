@@ -71,7 +71,9 @@ placeable 进行了大调整
     - `display-directive` prop
 - [ ] dropdown
 - [ ] dynamic-input
-- [ ] dynamic-tags
+- [x] dynamic-tags
+  - break
+    - `v-model` => `v-model:value`
 - [x] element
 - [x] empty
 - [x] gradient-text
@@ -182,6 +184,8 @@ placeable 进行了大调整
     - `active-name` => `value`
     - `on-active-name-change` => `on-update:value`
 - [x] tag
+  - break
+    - `v-model` => `v-model:checked`
   - deprecate
     - `on-checked-change` => `on-update:checked`
 - [x] thing

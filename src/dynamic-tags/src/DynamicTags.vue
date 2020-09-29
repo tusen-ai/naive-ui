@@ -17,12 +17,12 @@
     <n-input
       v-if="inputVisible"
       ref="tagInput"
-      v-model="inputValue"
+      v-model:value="inputValue"
       :force-focus="inputForceFocused"
       :theme="theme"
       :style="inputStyle"
       :size="inputSize"
-      @keyup.enter.native="handleInputConfirm"
+      @keyup.enter="handleInputConfirm"
       @blur="handleInputBlur"
     />
     <n-button
@@ -51,6 +51,8 @@ import locale from '../../_mixins/locale'
 import usecssr from '../../_mixins/usecssr'
 import commonProps from '../../tag/src/common-props'
 import styles from './styles'
+import { call } from '../../_utils/vue'
+import { warn } from '../../_utils/naive'
 
 export default {
   name: 'DynamicTags',
@@ -68,10 +70,6 @@ export default {
     }),
     usecssr(styles)
   ],
-  model: {
-    name: 'value',
-    event: 'change'
-  },
   props: {
     ...commonProps,
     closable: {
@@ -99,6 +97,19 @@ export default {
           width: '64px'
         }
       }
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:value': {
+      type: [Function, Array],
+      default: undefined
+    },
+    // deprecated
+    onChange: {
+      validator () {
+        if (__DEV__) warn('dynamic-tags', '`on-change` is deprecated, please use `on-update:value` instead.')
+        return true
+      },
+      default: undefined
     }
   },
   data () {
@@ -120,16 +131,28 @@ export default {
     }
   },
   methods: {
+    doChange (value) {
+      const {
+        onChange,
+        'onUpdate:value': onUpdateValue,
+        __triggerFormInput,
+        __triggerFormChange
+      } = this
+      if (onChange) call(onChange, value)
+      if (onUpdateValue) call(onUpdateValue, value)
+      __triggerFormInput()
+      __triggerFormChange()
+    },
     handleCloseClick (index) {
       const tags = this.value.slice(0)
       tags.splice(index, 1)
-      this.$emit('change', tags)
+      this.doChange(tags)
     },
     handleInputConfirm () {
       if (this.inputValue) {
         const tags = this.value.slice(0)
         tags.push(this.inputValue)
-        this.$emit('change', tags)
+        this.doChange(tags)
       }
       this.inputVisible = false
       this.inputForceFocused = true

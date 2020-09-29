@@ -39,7 +39,7 @@
 >
   哪里都是你
 </n-tag>
-<n-switch v-model="disabled"/>
+<n-switch v-model:value="disabled"/>
 ```
 ```js
 export default {

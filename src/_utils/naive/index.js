@@ -1,0 +1,1 @@
+export { warn } from './warn'
