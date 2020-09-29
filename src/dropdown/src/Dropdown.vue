@@ -1,6 +1,6 @@
 <script>
 import NPopover from '../../popover'
-import NDropdownMenu from './DropdownMenu'
+import NDropdownMenu from './DropdownMenu.vue'
 import emptyFunction from '../../_utils/function/empty'
 
 export default {

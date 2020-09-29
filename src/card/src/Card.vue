@@ -49,7 +49,7 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import usecssr from '../../_mixins/usecssr'
 import NIcon from '../../icon'
-import CloseIcon from '../../_icons/md-close'
+import CloseIcon from '../../_icons/md-close.vue'
 import styles from './styles'
 
 export default {

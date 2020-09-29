@@ -39,7 +39,7 @@
 <script>
 import { toRef } from 'vue'
 import NIcon from '../../icon'
-import ArrowIcon from '../../_icons/ios-arrow-forward'
+import ArrowIcon from '../../_icons/ios-arrow-forward.vue'
 import NCollapseItemContent from './CollapseItemContent.js'
 import { useInjectionCollection } from '../../_utils/composition'
 

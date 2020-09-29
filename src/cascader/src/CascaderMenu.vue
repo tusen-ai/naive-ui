@@ -38,7 +38,7 @@
 </template>
 <script>
 import NBaseMenuMask from '../../_base/menu-mask'
-import NCascaderSubmenu from './CascaderSubmenu'
+import NCascaderSubmenu from './CascaderSubmenu.vue'
 import placeable from '../../_mixins/placeable'
 import { minus, merge, getPickerElement } from './utils'
 import zindexable from '../../_mixins/zindexable'

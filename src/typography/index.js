@@ -1,12 +1,12 @@
-import header from './src/header'
-import A from './src/a'
-import P from './src/p'
-import Blockquote from './src/blockquote'
-import Hr from './src/hr'
-import Ul from './src/ul'
-import Ol from './src/ol'
-import Li from './src/li'
-import Text from './src/text'
+import header from './src/header.js'
+import A from './src/a.vue'
+import P from './src/p.vue'
+import Blockquote from './src/blockquote.vue'
+import Hr from './src/hr.vue'
+import Ul from './src/ul.vue'
+import Ol from './src/ol.vue'
+import Li from './src/li.vue'
+import Text from './src/text.vue'
 
 // use this way to create name since builtin html tags
 // can't be used as component name

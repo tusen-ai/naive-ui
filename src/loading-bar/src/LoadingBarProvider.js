@@ -1,6 +1,6 @@
 import { Fragment, Teleport, h } from 'vue'
 import { useIsMounted } from '../../_utils/composition'
-import NLoadingBar from './LoadingBar'
+import NLoadingBar from './LoadingBar.vue'
 
 export default {
   name: 'LoadingBarProvider',

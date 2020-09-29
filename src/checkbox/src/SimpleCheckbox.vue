@@ -42,8 +42,8 @@
 </template>
 
 <script>
-import CheckMark from './CheckMark'
-import LineMark from './LineMark'
+import CheckMark from './CheckMark.vue'
+import LineMark from './LineMark.vue'
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 import createValidator from '../../_utils/vue/validateProp'
 import usecssr from '../../_mixins/usecssr'

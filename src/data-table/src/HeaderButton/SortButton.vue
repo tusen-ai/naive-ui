@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import iosArrowUp from '../../../_icons/ios-arrow-up'
-import iosArrowDown from '../../../_icons/ios-arrow-down'
+import iosArrowUp from '../../../_icons/ios-arrow-up.vue'
+import iosArrowDown from '../../../_icons/ios-arrow-down.vue'
 import NIcon from '../../../icon'
 
 export default {

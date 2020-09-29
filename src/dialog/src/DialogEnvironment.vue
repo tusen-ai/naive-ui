@@ -25,7 +25,7 @@
 
 <script>
 import NModal from '../../modal'
-import NDialog from './Dialog'
+import NDialog from './Dialog.vue'
 
 export default {
   name: 'DialogEnvironment',

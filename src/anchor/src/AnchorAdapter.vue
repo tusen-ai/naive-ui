@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import NBaseAnchor from './BaseAnchor'
+import NBaseAnchor from './BaseAnchor.vue'
 import NAffix from '../../affix'
 import usecssr from '../../_mixins/usecssr'
 import themeable from '../../_mixins/themeable'

@@ -1,7 +1,7 @@
 <script>
-import NDropdownMenu from './DropdownMenu'
+import NDropdownMenu from './DropdownMenu.vue'
 import NIcon from '../../icon'
-import iosArrowForward from '../../_icons/ios-arrow-forward'
+import iosArrowForward from '../../_icons/ios-arrow-forward.vue'
 import placeable from '../../_mixins/placeable'
 
 export default {

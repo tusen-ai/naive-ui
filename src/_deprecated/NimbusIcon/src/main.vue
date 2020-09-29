@@ -31,12 +31,12 @@
   </i>
 </template>
 <script>
-import shareIcon from './icons/share'
-import banIcon from './icons/ban'
-import pullRequestIcon from './icons/pullRequest'
-import operateIcon from './icons/operate'
-import editIcon from './icons/edit'
-import closeIcon from './icons/close'
+import shareIcon from './icons/share.vue'
+import banIcon from './icons/ban.vue'
+import pullRequestIcon from './icons/pullRequest.vue'
+import operateIcon from './icons/operate.vue'
+import editIcon from './icons/edit.vue'
+import closeIcon from './icons/close.vue'
 
 const validTypes = ['share', 'ban', 'pull-request', 'operate', 'edit', 'close']
 

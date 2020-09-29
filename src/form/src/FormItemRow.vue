@@ -1,8 +1,8 @@
 <script>
 import { h } from 'vue'
-import NFormItemCol from './FormItemCol'
-import NRow from '../../grid/src/Row'
-import NFormItem from './FormItem'
+import NFormItemCol from './FormItemCol.vue'
+import NRow from '../../grid/src/Row.vue'
+import NFormItem from './FormItem.vue'
 
 export default {
   name: 'FormItemRow',

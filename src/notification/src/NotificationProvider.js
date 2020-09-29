@@ -1,6 +1,6 @@
 import { Fragment, h, Teleport, reactive, ref } from 'vue'
 import { createId, omit } from '../../_utils/vue'
-import NotificationContainer from './NotificationContainer'
+import NotificationContainer from './NotificationContainer.vue'
 import NotificationEnvironment from './NotificationEnvironment'
 
 export default {

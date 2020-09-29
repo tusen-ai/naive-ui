@@ -59,7 +59,7 @@ import formatLength from '../../_utils/css/formatLength'
 import { warn } from '../../_utils/naive/warn'
 import { useCompitable, useIsMounted } from '../../_utils/composition'
 import NLazyTeleport from '../../_base/lazy-teleport'
-import NDrawerBody from './DrawerContent'
+import NDrawerBody from './DrawerContent.vue'
 import styles from './styles/index'
 
 export default {

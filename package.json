@@ -116,6 +116,7 @@
     "terser": "^4.6.3",
     "tinycolor2": "^1.4.1",
     "url-loader": "^1.1.2",
+    "vite": "^1.0.0-rc.4",
     "vue": "^3.0.0",
     "vue-i18n": "^9.0.0-alpha.16",
     "vue-jest": "^4.0.0-beta.3",
@@ -135,7 +136,6 @@
     "highlight.js": "^9.18.1",
     "lodash-es": "^4.17.15",
     "resize-observer-polyfill": "^1.5.1",
-    "vue-runtime-helpers": "^1.1.2",
-    "vue-virtual-scroller": "^1.0.10"
+    "vue-runtime-helpers": "^1.1.2"
   }
 }

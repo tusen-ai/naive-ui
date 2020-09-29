@@ -1,7 +1,7 @@
 import { h, withDirectives, vShow, toRef, ref } from 'vue'
 import FadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
 import NPopover from '../../popover/src/Popover'
-import NMenuItemContent from './MenuItemContent'
+import NMenuItemContent from './MenuItemContent.vue'
 import menuChildMixin from './menu-child-mixin'
 import { itemRenderer } from './utils'
 import { useInjectionRef, useMemo } from '../../_utils/composition'

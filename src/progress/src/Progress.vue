@@ -229,18 +229,18 @@
 
 <script>
 import NIcon from '../../icon'
-import mdCheckmark from '../../_icons/md-checkmark'
-import mdClose from '../../_icons/md-close'
-import mdAlert from '../../_icons/md-alert'
-import mdInformationCircle from '../../_icons/md-information-circle'
-import mdCheckmarkCircle from '../../_icons/md-checkmark-circle'
-import mdCloseCircle from '../../_icons/md-close-circle'
+import mdCheckmark from '../../_icons/md-checkmark.vue'
+import mdClose from '../../_icons/md-close.vue'
+import mdAlert from '../../_icons/md-alert.vue'
+import mdInformationCircle from '../../_icons/md-information-circle.vue'
+import mdCheckmarkCircle from '../../_icons/md-checkmark-circle.vue'
+import mdCloseCircle from '../../_icons/md-close-circle.vue'
 import fontawareable from '../../_mixins/fontawarable'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles/index.js'
-import formatLength from '../../_utils/css/formatLength'
+import formatLength from '../../_utils/css/formatLength.js'
 
 function circlePath (r, sw, vw = 100) {
   return `m ${vw / 2} ${vw / 2 - r} a ${r} ${r} 0 1 1 0 ${2 * r} a ${r} ${r} 0 1 1 0 -${2 * r}`

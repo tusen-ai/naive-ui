@@ -62,11 +62,11 @@ import usecssr from '../../_mixins/usecssr'
 import { render } from '../../_utils/vue'
 import styles from './styles'
 import NIcon from '../../icon'
-import CloseIcon from '../../_icons/md-close'
-import SuccessIcon from '../../_icons/md-checkmark-circle'
-import WarningIcon from '../../_icons/md-alert'
-import InfoIcon from '../../_icons/md-information-circle'
-import ErrorIcon from '../../_icons/md-close-circle'
+import CloseIcon from '../../_icons/md-close.vue'
+import SuccessIcon from '../../_icons/md-checkmark-circle.vue'
+import WarningIcon from '../../_icons/md-alert.vue'
+import InfoIcon from '../../_icons/md-information-circle.vue'
+import ErrorIcon from '../../_icons/md-close-circle.vue'
 
 export default {
   name: 'Notification',

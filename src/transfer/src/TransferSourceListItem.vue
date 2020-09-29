@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import NSimpleCheckbox from '../../checkbox/src/SimpleCheckbox'
+import NSimpleCheckbox from '../../checkbox/src/SimpleCheckbox.vue'
 import createValidator from '../../_utils/vue/validateProp'
 
 export default {

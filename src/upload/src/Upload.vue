@@ -40,7 +40,7 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import NUploadFile from './UploadFile'
+import NUploadFile from './UploadFile.vue'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
 

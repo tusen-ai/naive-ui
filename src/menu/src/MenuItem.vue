@@ -30,7 +30,7 @@
 
 <script>
 import { toRef, computed } from 'vue'
-import NMenuItemContent from './MenuItemContent'
+import NMenuItemContent from './MenuItemContent.vue'
 import NTooltip from '../../tooltip'
 import menuChildMixin from './menu-child-mixin'
 import { useMemo, useInjectionRef } from '../../_utils/composition'

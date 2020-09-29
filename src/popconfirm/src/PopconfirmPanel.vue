@@ -39,7 +39,7 @@
 <script>
 import NButton from '../../button'
 import NIcon from '../../icon'
-import WarningIcon from '../../_icons/md-alert'
+import WarningIcon from '../../_icons/md-alert.vue'
 import locale from '../../_mixins/locale'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'

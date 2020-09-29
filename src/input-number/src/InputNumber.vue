@@ -61,8 +61,8 @@
 
 <script>
 import NIcon from '../../icon/index'
-import RemoveIcon from '../../_icons/remove-outline'
-import AddIcon from '../../_icons/add-outline'
+import RemoveIcon from '../../_icons/remove-outline.vue'
+import AddIcon from '../../_icons/add-outline.vue'
 import themeable from '../../_mixins/themeable'
 import withapp from '../../_mixins/withapp'
 import asformitem from '../../_mixins/asformitem'

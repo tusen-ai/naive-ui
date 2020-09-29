@@ -85,8 +85,8 @@
 </template>
 
 <script>
-import SortButton from '../HeaderButton/SortButton'
-import FilterButton from '../HeaderButton/FilterButton'
+import SortButton from '../HeaderButton/SortButton.vue'
+import FilterButton from '../HeaderButton/FilterButton.vue'
 import { createCustomWidthStyle } from '../utils'
 import { render } from '../../../_utils/vue'
 import resizeObserverDelegate from '../../../_utils/delegate/resizeObserverDelegate'

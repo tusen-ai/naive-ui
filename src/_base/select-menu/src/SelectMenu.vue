@@ -25,7 +25,7 @@
     >
       <div class="n-base-select-menu-option-wrapper">
         <template v-show="empty">
-          <recycle-scroller
+          <!-- <recycle-scroller
             v-if="virtualScroll"
             ref="virtualScroller"
             class="n-virtual-scroller"
@@ -58,8 +58,8 @@
                 :data="option.data"
               />
             </template>
-          </recycle-scroller>
-          <template v-else>
+          </recycle-scroller> -->
+          <template>
             <n-base-tracking-rect
               v-if="showTrackingRect"
               ref="trackingRect"
@@ -111,7 +111,6 @@ import NSelectOption from './SelectOption.vue'
 import NSelectGroupHeader from './SelectGroupHeader.vue'
 import NBaseTrackingRect from '../../tracking-rect'
 import NEmpty from '../../../empty'
-import { RecycleScroller } from 'vue-virtual-scroller'
 import { render } from '../../../_utils/vue'
 import {
   getPrevAvailableIndex,
@@ -138,7 +137,7 @@ export default {
     NSelectOption,
     NEmpty,
     NSelectGroupHeader,
-    RecycleScroller,
+    // RecycleScroller,
     render
   },
   mixins: [

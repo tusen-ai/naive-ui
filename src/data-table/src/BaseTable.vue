@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import TableHeader from './TableParts/Header'
-import TableBody from './TableParts/Body'
+import TableHeader from './TableParts/Header.vue'
+import TableBody from './TableParts/Body.vue'
 import resizeObserverDelegate from '../../_utils/delegate/resizeObserverDelegate'
 import formatLength from '../../_utils/css/formatLength'
 

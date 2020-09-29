@@ -3,9 +3,9 @@
 import Scrollbar from '../../../scrollbar'
 import withapp from '../../../_mixins/withapp'
 import themeable from '../../../_mixins/themeable'
-import SiderMenu from './SiderMenu'
+import SiderMenu from './SiderMenu.vue'
 import NLayout from '../../../layout/src/Layout.vue'
-import NLayoutSider from '../../../layout/src/LayoutSider'
+import NLayoutSider from '../../../layout/src/LayoutSider.vue'
 import { h } from 'vue'
 
 export default {

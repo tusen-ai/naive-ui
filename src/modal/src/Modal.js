@@ -9,7 +9,7 @@ import { warn } from '../../_utils/naive/warn'
 import { omit } from '../../_utils/vue'
 import NLazyTeleport from '../../_base/lazy-teleport'
 import NModalMask from './Mask'
-import NModalBodyWrapper from './BodyWrapper'
+import NModalBodyWrapper from './BodyWrapper.vue'
 import styles from './styles'
 
 export default {

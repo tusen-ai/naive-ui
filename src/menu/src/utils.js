@@ -2,7 +2,7 @@ import { h } from 'vue'
 import { omit } from '../../_utils/vue'
 import NMenuItemGroup from './MenuItemGroup'
 import NSubmenu from './Submenu'
-import NMenuItem from './MenuItem'
+import NMenuItem from './MenuItem.vue'
 import { warn } from '../../_utils/naive/warn'
 
 function getWrappedItem (item, level) {

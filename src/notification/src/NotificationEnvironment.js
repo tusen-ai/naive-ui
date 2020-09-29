@@ -1,5 +1,5 @@
 import { nextTick, Transition, h } from 'vue'
-import NNotification from './Notification'
+import NNotification from './Notification.vue'
 
 export default {
   name: 'NotificationEnvironment',

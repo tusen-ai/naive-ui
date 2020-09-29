@@ -32,7 +32,7 @@
         </div>
         <div class="n-transfer-list-flex-container">
           <template v-if="filteredSourceOptions.length">
-            <n-scrollbar
+            <!-- <n-scrollbar
               v-if="virtualScroll"
               :theme="syntheticTheme"
               :container="sourceScrollContainer"
@@ -62,8 +62,8 @@
                   />
                 </template>
               </recycle-scroller>
-            </n-scrollbar>
-            <n-scrollbar v-else :theme="syntheticTheme">
+            </n-scrollbar> -->
+            <n-scrollbar :theme="syntheticTheme">
               <div ref="sourceList" class="n-transfer-list-content">
                 <n-base-tracking-rect ref="sourceLightBar" :item-size="itemSize" :theme="syntheticTheme" />
                 <n-transfer-source-list-item
@@ -183,23 +183,22 @@
 
 <script>
 import NScrollbar from '../../scrollbar'
-import NTransferHeaderCheckbox from './TransferHeaderCheckbox'
-import NTransferHeaderExtra from './TransferHeaderExtra'
-import NTransferSourceListItem from './TransferSourceListItem'
-import NTransferTargetListItem from './TransferTargetListItem'
-import NTransferButton from './TransferButton'
+import NTransferHeaderCheckbox from './TransferHeaderCheckbox.vue'
+import NTransferHeaderExtra from './TransferHeaderExtra.vue'
+import NTransferSourceListItem from './TransferSourceListItem.vue'
+import NTransferTargetListItem from './TransferTargetListItem.vue'
+import NTransferButton from './TransferButton.vue'
 import NInput from '../../input'
 import NIcon from '../../icon'
 import NEmpty from '../../empty'
 import NBaseTrackingRect from '../../_base/tracking-rect'
-import iosSearch from '../../_icons/ios-search'
+import iosSearch from '../../_icons/ios-search.vue'
 import locale from '../../_mixins/locale'
 import asformitem from '../../_mixins/asformitem'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
-import { RecycleScroller } from 'vue-virtual-scroller'
 import debounce from 'lodash-es/debounce'
 import depx from '../../_utils/css/depx'
 
@@ -216,8 +215,8 @@ export default {
     NInput,
     NIcon,
     NEmpty,
-    iosSearch,
-    RecycleScroller
+    iosSearch
+    // RecycleScroller
   },
   mixins: [
     withapp,

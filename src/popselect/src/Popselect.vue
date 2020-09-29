@@ -1,6 +1,6 @@
 <script>
 import NPopover from '../../popover'
-import NPopselectPanel from './PopselectPanel'
+import NPopselectPanel from './PopselectPanel.vue'
 import emptyFunction from '../../_utils/function/empty'
 
 export default {

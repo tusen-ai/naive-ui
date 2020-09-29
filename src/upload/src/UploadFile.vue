@@ -59,12 +59,12 @@
 
 <script>
 import NButton from '../../button'
-import closeOutline from '../../_icons/close-outline'
-import downloadOutline from '../../_icons/download-outline'
-import trashOutline from '../../_icons/trash-outline'
-import NUploadProgress from './UploadProgress'
+import closeOutline from '../../_icons/close-outline.vue'
+import downloadOutline from '../../_icons/download-outline.vue'
+import trashOutline from '../../_icons/trash-outline.vue'
+import NUploadProgress from './UploadProgress.vue'
 import NFadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
-import attachOutline from '../../_icons/attach-outline'
+import attachOutline from '../../_icons/attach-outline.vue'
 import NIcon from '../../icon'
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 

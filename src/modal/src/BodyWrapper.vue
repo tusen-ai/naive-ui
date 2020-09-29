@@ -79,7 +79,7 @@
 <script>
 import { nextTick, reactive, toRefs, toRef, watch } from 'vue'
 import NScrollbar from '../../scrollbar'
-import NDialog from '../../dialog/src/Dialog'
+import NDialog from '../../dialog/src/Dialog.vue'
 import NCard from '../../card'
 import themeable from '../../_mixins/themeable'
 import presetProps from './presetProps'

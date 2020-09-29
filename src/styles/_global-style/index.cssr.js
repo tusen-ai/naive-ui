@@ -1,9 +1,9 @@
 import { c, cB } from '../../_utils/cssr'
-import virtualScrollerStyle from './vue-virtual-scroller.cssr'
+// import virtualScrollerStyle from './vue-virtual-scroller.cssr'
 import commonVariables from '../base/_common'
 
 export default c([
-  virtualScrollerStyle,
+  // virtualScrollerStyle,
   c('body', {
     margin: 0,
     fontSize: '14px',

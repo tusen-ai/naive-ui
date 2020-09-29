@@ -1,5 +1,5 @@
-import Dialog from './src/Dialog'
-import DialogProvider from './src/DialogProvider'
+import Dialog from './src/Dialog.vue'
+import DialogProvider from './src/DialogProvider.js'
 
 DialogProvider.install = function (app, naive) {
   app.component(naive.componentPrefix + DialogProvider.name, DialogProvider)
