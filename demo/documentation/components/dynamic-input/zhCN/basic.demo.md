@@ -2,7 +2,7 @@
 默认状况下，`n-dynamic-input` 的预设是 `input`。
 ```html
 <n-dynamic-input
-  v-model="value"
+  v-model:value="value"
   placeholder="请输入"
   :min="3"
   :max="6"

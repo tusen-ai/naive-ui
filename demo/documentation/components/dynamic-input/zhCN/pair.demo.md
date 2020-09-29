@@ -2,7 +2,7 @@
 ```html
 <n-dynamic-input
   preset="pair"
-  v-model="value"
+  v-model:value="value"
   key-placeholder="环境变量名"
   value-placeholder="环境变量值"
 />

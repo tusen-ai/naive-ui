@@ -9,13 +9,13 @@
       <slot v-if="$slots.default" :value="value[index]" :index="index" />
       <n-dynamic-input-input-preset
         v-else-if="preset === 'input'"
-        v-model="value[index]"
+        v-model:value="value[index]"
         :parent-path="NFormItem && NFormItem.path"
         :path="NFormItem && NFormItem.path + '[' + index + ']'"
       />
       <n-dynamic-input-pair-preset
         v-else-if="preset === 'pair'"
-        v-model="value[index]"
+        v-model:value="value[index]"
         :parent-path="NFormItem && NFormItem.path"
         :path="NFormItem && NFormItem.path + '[' + index + ']'"
       />
@@ -56,6 +56,8 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles/index'
+import { warn } from '../../_utils/naive'
+import { call } from '../../_utils/vue'
 
 export default {
   name: 'DynamicInput',
@@ -80,21 +82,13 @@ export default {
   props: {
     max: {
       type: Number,
-      default: null
+      default: undefined
     },
     value: {
       validator (value) {
         return Array.isArray(value) && value.length
       },
       required: true
-    },
-    onCreate: {
-      type: Function,
-      default: null
-    },
-    onClear: {
-      type: Function,
-      default: null
     },
     preset: {
       validator (value) {
@@ -119,6 +113,31 @@ export default {
     placeholder: {
       type: String,
       default: ''
+    },
+    onCreate: {
+      type: Function,
+      default: undefined
+    },
+    onRemove: {
+      type: Function,
+      default: undefined
+    },
+    onClear: {
+      type: Function,
+      default: undefined
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:value': {
+      type: [Function, Array],
+      default: undefined
+    },
+    // deprecated
+    onInput: {
+      validator () {
+        if (__DEV__) warn('dynamic-input', '`on-input` is deprecated, please use `on-update:value` instead.')
+        return true
+      },
+      default: undefined
     }
   },
   data () {
@@ -135,11 +154,19 @@ export default {
     }
   },
   methods: {
+    doInput (value) {
+      const {
+        onInput,
+        'onUpdate:value': onUpdateValue
+      } = this
+      if (onInput) call(onInput, value)
+      if (onUpdateValue) call(onUpdateValue, value)
+    },
     handleValueChange (value) {
       this.value = value
     },
     createItem (e, index) {
-      const onCreate = this.onCreate
+      const { onCreate } = this
       if (onCreate) {
         this.value.splice(index + 1, 0, onCreate(index + 1))
       } else if (this.$slots.default) {
@@ -154,7 +181,6 @@ export default {
             break
         }
       }
-      this.$emit('create', index + 1)
     },
     remove (e, index) {
       if (this.value.length === 1) {
@@ -163,30 +189,28 @@ export default {
           const keyField = this.keyField
           if (keyField) {
             const memorizedKeyField = this.value[0][keyField]
-            this.$emit('input', [ Object.assign(onClear(), {
+            this.doInput([ Object.assign(onClear(), {
               [keyField]: memorizedKeyField
             })])
           } else {
-            this.$emit('input', [ onClear() ])
+            this.doInput([ onClear() ])
           }
-        } else if (this.$slots.default) {
-          return
         } else {
           switch (this.preset) {
             case 'input':
-              this.$emit('input', [ null ])
+              this.doInput([ null ])
               break
             case 'pair':
-              this.$emit('input', [ { key: null, value: null } ])
+              this.doInput([ { key: null, value: null } ])
               break
           }
         }
-        this.$emit('clear')
       } else {
         const changedValue = Array.from(this.value)
         changedValue.splice(index, 1)
-        this.$emit('input', changedValue)
-        this.$emit('remove', index)
+        this.doInput(changedValue)
+        const { onRemove } = this
+        if (onRemove) onRemove(index)
       }
     }
   }

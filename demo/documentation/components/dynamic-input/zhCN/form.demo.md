@@ -7,7 +7,7 @@
     项的验证信息消失或错位
   -->
   <n-dynamic-input
-    v-model="model.dynamicInputValue"
+    v-model:value="model.dynamicInputValue"
     key-field="key"
     :on-create="onCreate"
     :on-clear="onClear"

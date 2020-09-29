@@ -5,7 +5,7 @@
     <n-input
       :value="value"
       :placeholder="NDynamicInput.placeholder"
-      @input="handleInput"
+      @update:value="handleInput"
     />
   </div>
 </template>
@@ -14,7 +14,7 @@
 import NInput from '../../input'
 
 export default {
-  name: 'NDynamicInputInputPreset',
+  name: 'DynamicInputInputPreset',
   components: {
     NInput
   },
@@ -35,11 +35,16 @@ export default {
     path: {
       type: String,
       default: null
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:value': {
+      type: Function,
+      required: true
     }
   },
   methods: {
     handleInput (value) {
-      this.$emit('input', value)
+      this['onUpdate:value'](value)
     }
   }
 }

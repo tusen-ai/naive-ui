@@ -6,13 +6,13 @@
       :value="value.key"
       class="n-dynamic-input-pair-input"
       :placeholder="NDynamicInput.keyPlaceholder"
-      @input="handleKeyInput"
+      @update:value="handleKeyInput"
     />
     <n-input
       :value="value.value"
       class="n-dynamic-input-pair-input"
       :placeholder="NDynamicInput.valuePlaceholder"
-      @input="handleValueInput"
+      @update:value="handleValueInput"
     />
   </div>
 </template>
@@ -21,7 +21,7 @@
 import NInput from '../../input'
 
 export default {
-  name: 'NDynamicInputPairPreset',
+  name: 'DynamicInputPairPreset',
   components: {
     NInput
   },
@@ -45,17 +45,22 @@ export default {
     path: {
       type: String,
       default: null
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:value': {
+      type: Function,
+      required: true
     }
   },
   methods: {
     handleKeyInput (key) {
-      this.$emit('input', {
+      this['onUpdate:value']({
         key,
         value: this.value.value
       })
     },
     handleValueInput (value) {
-      this.$emit('input', {
+      this['onUpdate:value']({
         key: this.value.key,
         value
       })

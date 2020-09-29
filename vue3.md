@@ -70,7 +70,11 @@ placeable 进行了大调整
   - new
     - `display-directive` prop
 - [ ] dropdown
-- [ ] dynamic-input
+- [x] dynamic-input
+  - break
+    - `v-model` => `v-model:value`
+  - deprecate
+    - `on-input` => `on-update:value`
 - [x] dynamic-tags
   - break
     - `v-model` => `v-model:value`

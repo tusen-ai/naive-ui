@@ -256,6 +256,10 @@ export default {
       type: Boolean,
       default: false
     },
+    onInput: {
+      type: [Function, Array],
+      default: undefined
+    },
     onFocus: {
       type: [Function, Array],
       default: undefined
