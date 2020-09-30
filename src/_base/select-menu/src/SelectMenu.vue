@@ -7,9 +7,7 @@
       [`n-base-select-menu--no-tracking-rect`]: !showTrackingRect,
       [`n-${theme}-theme`]: theme
     }"
-    :style="{
-      width: style
-    }"
+    :style="style"
     @keyup.up.stop="handleKeyUpUp"
     @keyup.down.stop="handleKeyUpDown"
     @mousedown.prevent

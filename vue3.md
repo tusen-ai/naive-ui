@@ -168,7 +168,11 @@ placeable 进行了大调整
     - `manual` trigger is removed, use `null` instead
   - other
     - set default trigger to `null`
-- [ ] popselect
+- [x] popselect
+  - break
+    - `v-model` => `v-model:value`
+  - deprecate
+    - `on-change` => `on-update:value`
 - [x] progress
 - [x] radio
   - radio-group
@@ -216,6 +220,4 @@ placeable 进行了大调整
 - [ ] transfer
 - [ ] tree
 - [x] typography
-- [ ] upload
-  - [x] basic support
-  - height expand transition-group
+- [x] upload

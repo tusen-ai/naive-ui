@@ -2,9 +2,8 @@
 单值的弹出选择可以取消选中值。
 ```html
 <n-popselect
-  v-model="value"
+  v-model:value="value"
   cancelable
-  @change="handleChange"
   :options="options"
 >
   <n-tag>{{ value || '弹出选择' }}</n-tag>
@@ -71,11 +70,6 @@ export default {
           value: 'song12'
         }
       ]
-    }
-  },
-  methods: {
-    handleChange (v) {
-      this.$NMessage.info('值：' + v)
     }
   }
 }

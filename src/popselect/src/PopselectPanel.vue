@@ -15,18 +15,27 @@
 
 <script>
 import NBaseSelectMenu from '../../_base/select-menu'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import usecssr from '../../_mixins/usecssr'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
 import styles from './styles'
+import { call } from '../../_utils/vue'
+import { warn } from '../../_utils/naive'
 
 export default {
   components: {
     NBaseSelectMenu
   },
   cssrName: 'Popselect',
+  inject: {
+    NPopselect: {
+      default: null
+    }
+  },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles)
   ],
@@ -36,9 +45,7 @@ export default {
       default: false
     },
     value: {
-      validator () {
-        return true
-      },
+      type: [String, Number, Boolean],
       default: null
     },
     cancelable: {
@@ -51,29 +58,52 @@ export default {
     },
     options: {
       type: Array,
-      default: () => []
-    },
-    controller: {
-      type: Object,
-      default: null
+      required: true
     },
     size: {
       type: String,
-      default: null
+      default: 'medium'
     },
     scrollable: {
       type: Boolean,
-      default: true
+      default: false
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:value': {
+      type: [Function, Array],
+      default: undefined
+    },
+    // deprecated
+    onChange: {
+      validator () {
+        warn('popselect', '`on-change` is deprecated, please use `on-update:value` instead.')
+        return true
+      },
+      default: undefined
     }
   },
   watch: {
     options () {
-      this.$nextTick().then(() => {
-        this.controller && this.controller.updatePosition()
+      this.$nextTick(() => {
+        this.syncPosition()
       })
     }
   },
   methods: {
+    doUpdateValue (value) {
+      const {
+        'onUpdate:value': onUpdateValue,
+        onChange
+      } = this
+      if (onUpdateValue) call(onUpdateValue, value)
+      if (onChange) call(onChange, value)
+    },
+    syncPosition () {
+      this.NPopselect.syncPosition()
+    },
+    setShow (value) {
+      this.NPopselect.setShow(value)
+    },
     isSelected (option) {
       if (!option) return false
       const value = option.value
@@ -98,24 +128,20 @@ export default {
           } else {
             newValue.push(value)
           }
-          this.$emit('input', newValue)
-          this.$emit('change', newValue)
+          this.doUpdateValue(newValue)
         } else {
-          this.$emit('input', [value])
-          this.$emit('change', [value])
+          this.doUpdateValue([value])
         }
       } else {
         if (this.value === value && this.cancelable) {
-          this.$emit('input', null)
-          this.$emit('change', null)
+          this.doUpdateValue(null)
         } else {
-          this.$emit('input', value)
-          this.$emit('change', value)
-          this.controller && this.controller.hide()
+          this.doUpdateValue(value)
+          this.setShow(false)
         }
       }
-      this.$nextTick().then(() => {
-        this.controller.updatePosition()
+      this.$nextTick(() => {
+        this.syncPosition()
       })
     }
   }

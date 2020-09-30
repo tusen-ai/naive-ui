@@ -10,26 +10,18 @@ scrollable
 custom-width
 multiple
 ```
-## V-model
-|Prop|Event|
-|-|-|
-|value|change|
 
 ## Props
 
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|value|`string \| number`|`null`||
+|multiple|`boolean`|`false`||
 |options|`Array<SelectOption \| SelectOptionGroup>`|`[]`||
 |scrollable|`boolean`|`false`||
-|multiple|`boolean`|`false`||
-|size|`'small' \| 'medium' \| 'large'`|`'small'`||
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
+|value|`string \| number`|`null`||
+|on-update:value|`(string \| number \| Array<string \| number> \| null) => any`|`undefined`||
 
 对于 SelectOption & SelectOptionGroup，参考 [Select](n-select#SelectOption-Type)
 
 对于其他 props，参考 [Popover](n-popover#Props)
-
-## Events
-|名称|参数|说明|
-|-|-|-|
-|change|`string \| number \| Array<string \| number> \| null`||

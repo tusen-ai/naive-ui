@@ -2,9 +2,8 @@
 
 ```html
 <n-popselect
-  v-model="value"
+  v-model:value="value"
   :options="options"
-  @change="handleChange"
 >
   <n-tag>{{ value || '弹出选择' }}</n-tag>
 </n-popselect>
@@ -66,11 +65,6 @@ export default {
           value: 'Wait'
         }
       ]
-    }
-  },
-  methods: {
-    handleChange (v) {
-      this.$NMessage.info('值：' + v)
     }
   }
 }

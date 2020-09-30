@@ -4,11 +4,10 @@
 
 ```html
 <n-popselect
-  v-model="value"
-  :width="240"
+  v-model:value="value"
+  :width="400"
   multiple
   :options="options"
-  @change="handleChange"
 >
   <n-tag>{{ (Array.isArray(value) && value.length) ? value : '没了' }}</n-tag>
 </n-popselect>
@@ -32,11 +31,6 @@ export default {
         label: 'Roll It Over',
         value: 'Roll It Over'
       }]
-    }
-  },
-  methods: {
-    handleChange (v) {
-      this.$NMessage.info('值：' + v)
     }
   }
 }
