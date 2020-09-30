@@ -1,7 +1,6 @@
 <script>
 import NPopover from '../../popover'
 import NPopselectPanel from './PopselectPanel.vue'
-import emptyFunction from '../../_utils/function/empty'
 
 export default {
   name: 'Popselect',
@@ -54,9 +53,9 @@ export default {
     const slots = context.scopedSlots
     const activator = slots.activator || slots.default
     const controller = context.props.controller || {}
-    const handleHide = context.listeners.hide || emptyFunction
-    const handleShow = context.listeners.show || emptyFunction
-    const handleChange = context.listeners.change || emptyFunction
+    const handleHide = context.listeners.hide || (() => {})
+    const handleShow = context.listeners.show || (() => {})
+    const handleChange = context.listeners.change || (() => {})
     return h(NPopover, {
       props: {
         trigger: context.props.trigger,

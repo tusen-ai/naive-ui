@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="tracked"
     class="n-auto-complete"
     @keydown.down="handleKeyDownDown"
     @keydown.up="handleKeyDownUp"
@@ -8,16 +9,15 @@
     @compositionend="handleCompositionEnd"
   >
     <slot
-      :handle-input="handleInput"
-      :handle-focus="handleFocus"
-      :handle-blur="handleBlur"
-      :value="modelValue"
+      :handleInput="handleInput"
+      :handleFocus="handleFocus"
+      :handleBlur="handleBlur"
+      :value="value"
       :theme="syntheticTheme"
     >
       <n-input
-        ref="activator"
         :theme="syntheticTheme"
-        :model-value="modelValue"
+        :value="value"
         :placeholder="placeholder"
         :size="syntheticSize"
         @focus="canBeActivated = true"
@@ -25,52 +25,68 @@
         @blur="handleBlur"
       />
     </slot>
-    <div
-      ref="contentContainer"
-      class="n-positioning-container"
-      :class="{
-        [namespace]: namespace
-      }"
+    <n-lazy-teleport
+      :show="active"
+      to="body"
     >
       <div
-        ref="content"
-        class="n-positioning-content"
+        ref="offsetContainer"
+        v-zindexable="{
+          enabled: active,
+          zIndex
+        }"
+        class="n-positioning-container"
+        :class="{
+          [namespace]: namespace
+        }"
       >
-        <transition name="n-fade-in-scale-up-transition">
-          <n-base-select-menu
-            v-if="active"
-            ref="contentInner"
-            v-clickoutside="handleClickOutsideMenu"
-            auto-pending-first-option
-            class="n-auto-complete-menu"
-            :theme="syntheticTheme"
-            :pattern="modelValue"
-            :options="selectOptions"
-            :multiple="false"
-            :size="syntheticSize"
-            :remote="remote"
-            :loading="loading"
-            :filterable="false"
-            :is-option-selected="isSelected"
-            @menu-toggle-option="handleToggleOption"
-          />
-        </transition>
+        <div
+          ref="tracking"
+          class="n-positioning-content"
+        >
+          <transition
+            name="n-fade-in-scale-up-transition"
+            :appear="isMounted"
+          >
+            <n-base-select-menu
+              v-if="active"
+              ref="menu"
+              v-clickoutside="handleClickOutsideMenu"
+              auto-pending-first-option
+              class="n-auto-complete-menu"
+              :theme="syntheticTheme"
+              :pattern="value"
+              :options="selectOptions"
+              :multiple="false"
+              :size="syntheticSize"
+              :is-option-selected="isSelected"
+              @menu-toggle-option="handleToggleOption"
+            />
+          </transition>
+        </div>
       </div>
-    </div>
+    </n-lazy-teleport>
   </div>
 </template>
 
 <script>
+import {
+  configurable,
+  themeable,
+  asformitem,
+  placeable,
+  usecssr
+} from '../../_mixins'
+import {
+  clickoutside,
+  zindexable
+} from '../../_directives'
+import { call } from '../../_utils/vue'
+import { useIsMounted } from '../../_utils/composition'
+import { warn } from '../../_utils/naive'
+import NLazyTeleport from '../../_base/lazy-teleport'
 import NInput from '../../input'
-import detachable from '../../_mixins/detachable'
-import placeable from '../../_mixins/placeable'
-import zindexable from '../../_mixins/zindexable'
-import clickoutside from '../../_directives/clickoutside'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import asformitem from '../../_mixins/asformitem'
 import NBaseSelectMenu from '../../_base/select-menu'
-import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
 import { mapAutoCompleteOptionsToSelectOptions } from './utils'
 
@@ -78,16 +94,16 @@ export default {
   name: 'AutoComplete',
   components: {
     NInput,
+    NLazyTeleport,
     NBaseSelectMenu
   },
   directives: {
-    clickoutside
+    clickoutside,
+    zindexable
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
-    detachable,
-    zindexable,
     placeable,
     asformitem(),
     usecssr(styles)
@@ -95,9 +111,9 @@ export default {
   props: {
     placeholder: {
       type: String,
-      default: null
+      default: undefined
     },
-    modelValue: {
+    value: {
       type: String,
       default: null
     },
@@ -113,27 +129,47 @@ export default {
       validator (value) {
         return ['small', 'medium', 'large'].includes(value)
       },
-      default: null
+      default: undefined
     },
     options: {
       type: Array,
       default: () => []
     },
-    loading: {
-      type: Boolean,
-      default: false
-    },
-    remote: {
-      type: Boolean,
-      default: false
-    },
+    // eslint-disable-next-line vue/require-prop-types
     placement: {
-      type: String,
+      ...placeable.props.placement,
       default: 'bottom-start'
     },
+    // eslint-disable-next-line vue/require-prop-types
     widthMode: {
-      type: String,
-      default: 'activator'
+      ...placeable.props.widthMode,
+      default: 'trigger'
+    },
+    zIndex: {
+      type: Number,
+      default: undefined
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:value': {
+      type: Function,
+      default: undefined
+    },
+    onSelect: {
+      type: Function,
+      default: undefined
+    },
+    // deprecated
+    onInput: {
+      validator () {
+        if (__DEV__) warn('auto-complete', '`on-input` is deprecated, please use `on-update:value` instead.')
+        return true
+      },
+      default: undefined
+    }
+  },
+  setup () {
+    return {
+      isMounted: useIsMounted()
     }
   },
   data () {
@@ -143,14 +179,67 @@ export default {
     }
   },
   computed: {
+    __placeableEnabled () {
+      return this.active
+    },
     active () {
-      return !!this.modelValue && this.canBeActivated && !!this.selectOptions.length
+      return !!this.value && this.canBeActivated && !!this.selectOptions.length
     },
     selectOptions () {
       return mapAutoCompleteOptionsToSelectOptions(this.options)
     }
   },
   methods: {
+    __placeableOffsetContainer () {
+      return this.$refs.offsetContainer
+    },
+    __placeableTracking () {
+      return this.$refs.tracking
+    },
+    __placeableTracked () {
+      return this.$refs.tracked
+    },
+    __placeableBody () {
+      return this.$refs.menu
+    },
+    doUpdateValue (value) {
+      const {
+        'onUpdate:value': onUpdateValue,
+        onInput,
+        __triggerFormInput,
+        __triggerFormChange
+      } = this
+      if (onUpdateValue) call(onUpdateValue, value)
+      if (onInput) call(onInput, value)
+      __triggerFormInput()
+      __triggerFormChange()
+    },
+    doSelect (value) {
+      const {
+        onSelect,
+        __triggerFormInput,
+        __triggerFormChange
+      } = this
+      if (onSelect) call(onSelect, value)
+      __triggerFormInput()
+      __triggerFormChange()
+    },
+    doBlur (value) {
+      const {
+        onBlur,
+        __triggerFormBlur
+      } = this
+      if (onBlur) call(onBlur, value)
+      __triggerFormBlur()
+    },
+    doFocus (value) {
+      const {
+        onFocus,
+        __triggerFormFocus
+      } = this
+      if (onFocus) call(onFocus, value)
+      __triggerFormFocus()
+    },
     handleCompositionStart () {
       this.isComposing = true
     },
@@ -160,8 +249,8 @@ export default {
       }, 0)
     },
     handleKeyDownEnter (e) {
-      if (this.$refs.contentInner && !this.isComposing) {
-        const pendingOptionData = this.$refs.contentInner.getPendingOptionData()
+      if (this.$refs.menu && !this.isComposing) {
+        const pendingOptionData = this.$refs.menu.getPendingOptionData()
         if (pendingOptionData) {
           this.select(pendingOptionData)
           e.preventDefault()
@@ -169,53 +258,52 @@ export default {
       }
     },
     handleKeyDownDown () {
-      if (this.$refs.contentInner) {
-        this.$refs.contentInner.next()
+      const { menu } = this.$refs
+      if (menu) {
+        menu.next()
       }
     },
     handleKeyDownUp () {
-      if (this.$refs.contentInner) {
-        this.$refs.contentInner.prev()
+      const { menu } = this.$refs
+      if (menu) {
+        menu.prev()
       }
     },
     select (option) {
       if (option) {
         if (this.clearAfterSelect) {
-          this.$emit('update:modelValue', null)
+          this.doUpdateValue(null)
         } else {
-          this.$emit('update:modelValue', option.label)
+          this.doUpdateValue(option.label)
         }
-        this.$emit('select', option.value)
+        this.doSelect(option.value)
         this.canBeActivated = false
         if (this.blurAfterSelect) {
           this.blur()
         }
       }
     },
-    getTrackedElement () {
-      return this.$el
+    isSelected () {
+      return false
     },
-    isSelected () {},
-    handleFocus () {
+    handleFocus (e) {
       this.canBeActivated = true
+      this.doFocus(e)
     },
-    handleBlur () {
+    handleBlur (e) {
       this.canBeActivated = false
+      this.doBlur(e)
     },
     handleInput (value) {
-      this.$emit('update:modelValue', value)
       this.canBeActivated = true
+      this.doUpdateValue(value)
     },
     handleToggleOption (option) {
       this.select(option)
     },
     handleClickOutsideMenu (e) {
-      if (this.$refs.activator) {
-        if (!this.$refs.activator.$el.contains(e.target)) {
-          this.canBeActivated = false
-        }
-      } else {
-        if (!this.$el.contains(e.target)) {
+      if (this.$refs.tracked) {
+        if (!this.$refs.tracked.contains(e.target)) {
           this.canBeActivated = false
         }
       }

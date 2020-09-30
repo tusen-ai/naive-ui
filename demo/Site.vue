@@ -8,11 +8,12 @@
 </template>
 
 <script>
+import { inject, toRef } from 'vue'
 import SiteHeader from './SiteHeader.vue'
 import menuOptions from './menu-options'
 // import { i18n } from './init'
 import { loadingBarApiRef } from './routes/router'
-import simulatedComputed from '../src/_mixins/simulatedComputed'
+import { useMemo } from '../src/_utils/composition'
 
 export default {
   name: 'Site',
@@ -23,24 +24,23 @@ export default {
   components: {
     SiteHeader
   },
-  mixins: [
-    simulatedComputed({
-      menuGenerationOptions: {
-        get () {
-          return {
-            theme: this.SiteProvider.theme,
-            lang: this.SiteProvider.lang,
-            mode: this.mode
-          }
-        },
-        deps: ['SiteProvider.theme', 'SiteProvider.lang', 'mode'],
-        default: null
-      }
-    })
-  ],
   provide () {
     return {
       Site: this
+    }
+  },
+  setup () {
+    const SiteProvider = inject('SiteProvider')
+    return {
+      menuGenerationOptions: useMemo(() => {
+        return {
+          theme: SiteProvider.theme,
+          lang: SiteProvider.lang
+        }
+      }, [
+        toRef(SiteProvider, 'theme'),
+        toRef(SiteProvider, 'lang')
+      ])
     }
   },
   computed: {

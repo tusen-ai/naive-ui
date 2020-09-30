@@ -1,7 +1,6 @@
 <script>
 import NPopover from '../../popover'
 import NDropdownMenu from './DropdownMenu.vue'
-import emptyFunction from '../../_utils/function/empty'
 
 export default {
   name: 'Dropdown',
@@ -65,7 +64,7 @@ export default {
               theme: props.theme
             },
             on: {
-              select: context.listeners.select || emptyFunction
+              select: context.listeners.select || (() => {})
             },
             scopedSlots: { ...context.scopedSlots }
           })

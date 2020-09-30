@@ -1,4 +1,6 @@
 <script>
+import { h } from 'vue'
+
 export default {
   name: 'NBaseSelectGroupHeader',
   props: {
@@ -7,12 +9,12 @@ export default {
       required: true
     }
   },
-  render (h) {
+  render () {
     const data = this.data
-    const children = (data.render && data.render(h, data)) || [ data.name ]
+    const children = data.render ? [data.render(h, data)] : [ data.name ]
     return h('div', {
-      staticClass: 'n-base-select-group-header'
-    }, Array.isArray(children) ? children : [ children ])
+      class: 'n-base-select-group-header'
+    }, children)
   }
 }
 </script>

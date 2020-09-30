@@ -8,7 +8,7 @@
       [`n-${theme}-theme`]: theme
     }"
     :style="{
-      width: styleWidth
+      width: style
     }"
     @keyup.up.stop="handleKeyUpUp"
     @keyup.down.stop="handleKeyUpDown"
@@ -19,47 +19,19 @@
       ref="scrollbar"
       :theme="theme"
       :scrollable="scrollable"
-      :container="getScrollContainer"
-      :content="getScrollContent"
       @scroll="handleMenuScroll"
     >
       <div class="n-base-select-menu-option-wrapper">
-        <template v-show="empty">
-          <!-- <recycle-scroller
-            v-if="virtualScroll"
-            ref="virtualScroller"
-            class="n-virtual-scroller"
-            :items="flattenedOptions"
-            :item-size="itemSize"
-            key-field="key"
-            @visible="handleMenuVisible"
-          >
-            <template v-slot:before>
-              <n-base-tracking-rect
-                v-if="showTrackingRect"
-                ref="trackingRect"
-                key="__select-tracking-rect__"
-                :item-size="itemSize"
-                :theme="theme"
-              />
-            </template>
-            <template v-slot="{ item: option }">
-              <n-select-option
-                v-if="option.type === OPTION_TYPE.OPTION"
-                :key="option.key"
-                :index="option.index"
-                :wrapped-option="option"
-                :grouped="option.grouped"
-                :selected="isOptionSelected({ value: option.data.value })"
-              />
-              <n-select-group-header
-                v-else-if="option.type === OPTION_TYPE.GROUP_HEADER"
-                :key="option.key"
-                :data="option.data"
-              />
-            </template>
-          </recycle-scroller> -->
-          <template>
+        <!-- <recycle-scroller
+          v-if="virtualScroll"
+          ref="virtualScroller"
+          class="n-virtual-scroller"
+          :items="flattenedOptions"
+          :item-size="itemSize"
+          key-field="key"
+          @visible="handleMenuVisible"
+        >
+          <template v-slot:before>
             <n-base-tracking-rect
               v-if="showTrackingRect"
               ref="trackingRect"
@@ -67,27 +39,49 @@
               :item-size="itemSize"
               :theme="theme"
             />
-            <template v-for="option in flattenedOptions">
-              <n-select-option
-                v-if="option.type === OPTION_TYPE.OPTION"
-                :key="option.key"
-                :index="option.index"
-                :wrapped-option="option"
-                :grouped="option.grouped"
-                :selected="isOptionSelected({ value: option.data.value })"
-              />
-              <n-select-group-header
-                v-else-if="option.type === OPTION_TYPE.GROUP_HEADER"
-                :key="option.key"
-                :data="option.data"
-              />
-              <render
-                v-else-if="option.type === OPTION_TYPE.RENDER"
-                :key="option.key"
-                :render="option.render"
-              />
-            </template>
           </template>
+          <template v-slot="{ item: option }">
+            <n-select-option
+              v-if="option.type === OPTION_TYPE.OPTION"
+              :key="option.key"
+              :index="option.index"
+              :wrapped-option="option"
+              :grouped="option.grouped"
+              :selected="isOptionSelected({ value: option.data.value })"
+            />
+            <n-select-group-header
+              v-else-if="option.type === OPTION_TYPE.GROUP_HEADER"
+              :key="option.key"
+              :data="option.data"
+            />
+          </template>
+        </recycle-scroller> -->
+        <n-base-tracking-rect
+          v-if="showTrackingRect"
+          ref="trackingRect"
+          key="__select-tracking-rect__"
+          :item-size="itemSize"
+          :theme="theme"
+        />
+        <template v-for="option in flattenedOptions">
+          <n-select-option
+            v-if="option.type === OPTION_TYPE.OPTION"
+            :key="option.key"
+            :index="option.index"
+            :wrapped-option="option"
+            :grouped="option.grouped"
+            :selected="isOptionSelected({ value: option.data.value })"
+          />
+          <n-select-group-header
+            v-else-if="option.type === OPTION_TYPE.GROUP_HEADER"
+            :key="option.key"
+            :data="option.data"
+          />
+          <render
+            v-else-if="option.type === OPTION_TYPE.RENDER"
+            :key="option.key"
+            :render="option.render"
+          />
         </template>
       </div>
     </n-scrollbar>
@@ -118,10 +112,9 @@ import {
   flattenOptions,
   OPTION_TYPE
 } from '../../../_utils/component/select'
-import formatLength from '../../../_utils/css/formatLength'
-import depx from '../../../_utils/css/depx'
+import { depx, formatLength } from '../../../_utils/css'
 import { createKey } from '../../../_utils/cssr'
-import usecssr from '../../../_mixins/usecssr'
+import { usecssr } from '../../../_mixins'
 import styles from './styles'
 
 export default {
@@ -137,7 +130,6 @@ export default {
     NSelectOption,
     NEmpty,
     NSelectGroupHeader,
-    // RecycleScroller,
     render
   },
   mixins: [
@@ -191,7 +183,19 @@ export default {
       type: Boolean,
       default: true
     },
-    /** deprecated */
+    // deprecated
+    onMenuVisible: {
+      type: Function,
+      default: undefined
+    },
+    onMenuToggleOption: {
+      type: Function,
+      default: undefined
+    },
+    onMenuScroll: {
+      type: Function,
+      default: undefined
+    },
     emitOption: {
       type: Boolean,
       default: false
@@ -240,8 +244,10 @@ export default {
         pendingWrappedOption.data.value
       ) || null
     },
-    styleWidth () {
-      return formatLength(this.width)
+    style () {
+      return {
+        width: formatLength(this.width)
+      }
     }
   },
   watch: {
@@ -251,7 +257,7 @@ export default {
       }
     },
     flattenedOptions () {
-      this.$nextTick().then(() => {
+      this.$nextTick(() => {
         if (this.autoPendingFirstOption) {
           const firstAvailableOptionIndex = getNextAvailableIndex(this.flattenedOptions, null)
           this.setPendingWrappedOptionIndex(firstAvailableOptionIndex)
@@ -263,7 +269,7 @@ export default {
     },
     pendingWrappedOption (value) {
       if (value === null) {
-        this.$nextTick().then(() => {
+        this.$nextTick(() => {
           this.hideTrackingRect()
         })
       }
@@ -277,10 +283,16 @@ export default {
   },
   methods: {
     handleMenuVisible () {
-      this.$emit('menu-visible')
+      const {
+        onMenuVisible
+      } = this
+      if (onMenuVisible) onMenuVisible()
     },
     handleMenuScroll (e, scrollContainer, scrollContent) {
-      this.$emit('menu-scroll', e, scrollContainer, scrollContent)
+      const {
+        onMenuScroll
+      } = this
+      if (onMenuScroll) onMenuScroll(e, scrollContainer, scrollContent)
     },
     getPendingOptionData () {
       const pendingWrappedOption = this.pendingWrappedOption
@@ -297,7 +309,10 @@ export default {
       this.toggleOption(data)
     },
     toggleOption (option) {
-      this.$emit('menu-toggle-option', option)
+      const {
+        onMenuToggleOption
+      } = this
+      if (onMenuToggleOption) onMenuToggleOption(option)
     },
     handleMenuMouseLeave () {
       this.hideTrackingRect()

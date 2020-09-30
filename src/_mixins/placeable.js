@@ -2,6 +2,7 @@ import { nextTick } from 'vue'
 import scrollDelegate from '../_utils/delegate/scrollDelegate'
 import resizeDelegate from '../_utils/delegate/resizeDelegate'
 import getScrollParent from '../_utils/dom/getScrollParent'
+import { warn } from '../_utils/naive/warn'
 import {
   getAdjustedPlacementOfTrackingElement,
   getTransformOriginByPlacement,
@@ -29,67 +30,47 @@ if (!viewMeasurerInitialized) {
   }
   viewMeasurerInitialized = true
 }
-
-function getActivatorEl (refs) {
-  return refs.activator.$el || refs.activator
-}
-
-function getContentEl (refs) {
-  return refs.content.$el || refs.content
-}
-
-function getContentInner (instance) {
-  const contentInnerRef = instance.$refs.contentInner
-  return (contentInnerRef && contentInnerRef.$el) || contentInnerRef || null
-}
-
 function getViewBoundingRect () {
-  const containerBoundingRect = viewMeasurer.getBoundingClientRect()
+  const view = viewMeasurer.getBoundingClientRect()
   return {
-    left: containerBoundingRect.left,
-    top: containerBoundingRect.top,
-    right: containerBoundingRect.right,
-    bottom: containerBoundingRect.bottom,
-    width: containerBoundingRect.width,
-    height: containerBoundingRect.height
+    left: view.left,
+    top: view.top,
+    right: view.right,
+    bottom: view.bottom,
+    width: view.width,
+    height: view.height
   }
 }
 
-function getActivatorRect (placeableManuallyPositioned, x, y, trackedElement, viewBoundingRect) {
-  if (placeableManuallyPositioned) {
+function getActivatorRect (manuallyPositioned, x, y, trackedElement, viewRect) {
+  if (manuallyPositioned) {
     return {
       top: y,
       left: x,
       height: 0,
       width: 0,
-      right: viewBoundingRect.width - x,
-      bottom: viewBoundingRect.height - y
+      right: viewRect.width - x,
+      bottom: viewRect.height - y
     }
   } else {
-    const activatorRect = trackedElement.getBoundingClientRect()
+    const triggerRect = trackedElement.getBoundingClientRect()
     return {
-      left: activatorRect.left - viewBoundingRect.left,
-      top: activatorRect.top - viewBoundingRect.top,
-      bottom: viewBoundingRect.height + viewBoundingRect.top - activatorRect.bottom,
-      right: viewBoundingRect.width + viewBoundingRect.left - activatorRect.right,
-      width: activatorRect.width,
-      height: activatorRect.height
+      left: triggerRect.left - viewRect.left,
+      top: triggerRect.top - viewRect.top,
+      bottom: viewRect.height + viewRect.top - triggerRect.bottom,
+      right: viewRect.width + viewRect.left - triggerRect.right,
+      width: triggerRect.width,
+      height: triggerRect.height
     }
   }
 }
 
-/**
- * Make $refs.content trace $refs.activator, set $refs.contentInner width by the way
- *
- * Dependency:
- * $refs.activator
- * $refs.content
- * $refs.contentInner(optional)
- * $vm.placeableEnabled
- *
- * @prop {string} placement determine where should $refs.content be put
- * @prop {string} widthMode determine how width is $refs.contentInner
- */
+// dependencies:
+// methods.__placeableTracking
+// methods.__placeableTracked
+// methods.__placeableBody
+// methods.__placeableOffsetContainer
+// data.__placeableEnabled
 export default {
   inject: {
     NModal: {
@@ -100,12 +81,6 @@ export default {
     }
   },
   props: {
-    positionMode: {
-      default: null,
-      validator (value) {
-        return ['fixed', 'absolute'].includes(value)
-      }
-    },
     placement: {
       validator (value) {
         return [
@@ -125,11 +100,19 @@ export default {
       },
       default: 'bottom'
     },
+    flip: {
+      type: Boolean,
+      default: true
+    },
     widthMode: {
       validator (value) {
-        return ['self', 'activator'].includes(value)
+        return ['self', 'trigger'].includes(value)
       },
       default: 'self'
+    },
+    manuallyPositioned: {
+      type: Boolean,
+      default: false
     },
     x: {
       type: Number,
@@ -140,185 +123,180 @@ export default {
       default: null
     }
   },
-  computed: {
-    syntheticPositionMode () {
-      const positionMode = this.positionMode
-      if (positionMode !== null) {
-        return positionMode
-      }
-      if (this.NModal) {
-        return 'absolute'
-      }
-      if (this.NDrawer) {
-        return 'absolute'
-      }
-      return 'fixed'
-    },
-    positionModeisAbsolute () {
-      return this.syntheticPositionMode === 'absolute'
-    }
-  },
   watch: {
-    placeableEnabled (value) {
+    __placeableEnabled (value) {
       if (value) {
-        if (!this.listenersRegistered && !this.placeableManuallyPositioned) {
-          this.registerScrollListeners()
-          this.registerResizeListener()
-          this.listenersRegistered = true
+        if (!this.__placeableListenerAdded && !this.manuallyPositioned) {
+          this.__addScrollListeners()
+          this.__addResizeListener()
+          this.__placeableListenerAdded = true
         }
-        nextTick(this.placeableSyncPosition)
+        nextTick(this.__placeableSyncPosition)
       }
     },
     x () {
-      nextTick(this.placeableSyncPosition)
+      nextTick(this.__placeableSyncPosition)
     },
     y () {
-      nextTick(this.placeableSyncPosition)
+      nextTick(this.__placeableSyncPosition)
     }
   },
   data () {
     return {
-      trackingElement: null,
-      trackedElement: null,
-      scrollListeners: [],
-      adjustedPlacement: this.placement,
-      listenersRegistered: false
+      __placeableScrollListeners: [],
+      __placeableAdjustedPlacement: this.placement,
+      __placeableListenerAdded: false
     }
   },
   mounted () {
-    if (this.placeableEnabled) {
-      if (!this.placeableManuallyPositioned) {
-        this.registerScrollListeners()
-        this.registerResizeListener()
-        this.listenersRegistered = true
+    if (this.__placeableEnabled) {
+      if (!this.manuallyPositioned) {
+        this.__addScrollListeners()
+        this.__addResizeListener()
+        this.__placeableListenerAdded = true
       }
-      this.placeableSyncPosition()
+      this.__placeableSyncPosition()
     }
   },
   beforeUnmount () {
-    if (this.listenersRegistered) {
-      this.unregisterScrollListeners()
-      this.unregisterResizeListener()
+    if (this.__placeableListenerAdded) {
+      this.__removeScrollListeners()
+      this.__removeResizeListener()
     }
   },
+  created: __DEV__ ? function () {
+    [
+      '__placeableOffsetContainer',
+      '__placeableTracking',
+      '__placeableTracked',
+      '__placeableBody'
+    ].forEach(key => {
+      if (!this[key]) {
+        warn('mixins/placeable', `\`${key}\` is not defined.`)
+      }
+    })
+  } : undefined,
   methods: {
-    _placeableGetTrackingElement () {
-      const refs = this.$refs
-      if (refs && refs.content) {
-        return getContentEl(refs)
-      }
-      const placeableGetTrackingElement = this.placeableGetTrackingElement
-      if (placeableGetTrackingElement) {
-        return placeableGetTrackingElement()
-      }
-    },
-    _placeableGetTrackedElement () {
-      const refs = this.$refs
-      if (refs && refs.activator) {
-        return getActivatorEl(refs)
-      }
-      const placeableGetTrackedElement = this.placeableGetTrackedElement
-      if (placeableGetTrackedElement) {
-        return placeableGetTrackedElement()
-      }
-    },
-    _placeableGetAbsoluteOffsetContainer () {
-      const placeableGetAbsoluteOffsetContainer = this.placeableGetAbsoluteOffsetContainer
-      if (placeableGetAbsoluteOffsetContainer) {
-        return placeableGetAbsoluteOffsetContainer()
-      } else {
-        const container = this.$refs.contentContainer
-        if (container) {
-          return container
-        } else {
-          console.error('[naive-ui/placeable]: absolute offset container not found')
-        }
-      }
-    },
-    setOffsetOfTrackingElement (position, transformOrigin) {
-      const trackingElement = this._placeableGetTrackingElement()
-      trackingElement.style.position = 'absolute'
-      trackingElement.style.top = position.top
-      trackingElement.style.left = position.left
-      trackingElement.style.right = position.right
-      trackingElement.style.bottom = position.bottom
-      trackingElement.style.transform = position.transform
-      trackingElement.style.transformOrigin = transformOrigin
-      trackingElement.setAttribute('n-suggested-transform-origin', transformOrigin)
-    },
-    placeableSyncPosition () {
-      if (!this.placeableEnabled) {
+    __placeableSyncPosition () {
+      if (!this.__placeableEnabled) {
         return
       }
-      const trackingElement = this._placeableGetTrackingElement()
+      const trackingElement = this.__getTrackingElement()
       let trackedElement = null
       trackingElement.style.position = 'absolute'
-      if (this.placeableManuallyPositioned) {
-        if (!trackingElement) {
-          console.error('[naive-ui/mixins/placeable]: trackingElement not found.')
+      if (this.manuallyPositioned) {
+        if (__DEV__ && !trackingElement) {
+          warn('mixins/placeable', 'Tracking element not found.')
           return
         }
       } else {
-        trackedElement = this._placeableGetTrackedElement()
-        if (!trackedElement || !trackingElement) {
-          console.error('[naive-ui/mixins/placeable]: trakedElement or trackingElement not found.')
+        trackedElement = this.__getTrackedElement()
+        if (__DEV__ && (!trackedElement || !trackingElement)) {
+          warn('mixins/placeable', 'Traked element or tracking element not found.')
           return
         }
       }
-      const viewBoundingRect = getViewBoundingRect()
-      const activatorRect = getActivatorRect(this.placeableManuallyPositioned, this.x, this.y, trackedElement, viewBoundingRect)
-      const contentInner = getContentInner(this)
-      if (this.widthMode === 'activator' && contentInner) {
-        contentInner.style.minWidth = activatorRect.width + 'px'
+      const viewRect = getViewBoundingRect()
+      const triggerRect = getActivatorRect(this.manuallyPositioned, this.x, this.y, trackedElement, viewRect)
+      const body = this.__getBodyElement()
+      const {
+        widthMode
+      } = this
+      if (
+        (widthMode === 'trigger' || widthMode === 'activator') &&
+        body
+      ) {
+        body.style.minWidth = triggerRect.width + 'px'
       }
       let adjustedPlacement = this.placement
       let contentBoundingClientRect = null
-      if (this.placeableFlip) {
+      if (this.flip) {
         contentBoundingClientRect = {
           width: trackingElement.offsetWidth,
           height: trackingElement.offsetHeight
         }
-        adjustedPlacement = getAdjustedPlacementOfTrackingElement(this.placement, activatorRect, contentBoundingClientRect, true)
+        adjustedPlacement = getAdjustedPlacementOfTrackingElement(this.placement, triggerRect, contentBoundingClientRect, true)
       }
       const suggestedTransformOrigin = getTransformOriginByPlacement(adjustedPlacement)
       let offset = null
-      this.adjustedPlacement = adjustedPlacement
-      if (this.positionModeisAbsolute) {
-        const absoluteOffsetContainer = this._placeableGetAbsoluteOffsetContainer()
-        if (absoluteOffsetContainer) {
-          offset = getPosition(
-            adjustedPlacement,
-            absoluteOffsetContainer.getBoundingClientRect(),
-            activatorRect
-          )
-        }
-      } else {
-        offset = getPosition(adjustedPlacement, viewBoundingRect, activatorRect)
+      this.__placeableAdjustedPlacement = adjustedPlacement
+      const offsetContainer = this.__getOffsetContainer()
+      offset = getPosition(
+        adjustedPlacement,
+        offsetContainer.getBoundingClientRect(),
+        triggerRect
+      )
+      this.__setOffset(offset, suggestedTransformOrigin)
+    },
+    __getTrackingElement () {
+      const { __placeableTracking } = this
+      if (__placeableTracking) {
+        const el = __placeableTracking()
+        return el.$el || el
+      } else if (__DEV__) {
+        warn('mixins/placeable', 'No tracking element getter.')
       }
-      this.setOffsetOfTrackingElement(offset, suggestedTransformOrigin)
     },
-    registerResizeListener () {
-      resizeDelegate.registerHandler(this.placeableSyncPosition)
+    __getTrackedElement () {
+      const { __placeableTracked } = this
+      if (__placeableTracked) {
+        const el = __placeableTracked()
+        return el.$el || el
+      } else if (__DEV__) {
+        warn('mixins/placeable', 'No tracked element getter.')
+      }
     },
-    registerScrollListeners () {
-      let currentElement = this._placeableGetTrackedElement()
+    __getBodyElement () {
+      const { __placeableBody } = this
+      if (__placeableBody) {
+        const el = __placeableBody()
+        return el.$el || el
+      } else if (__DEV__) {
+        warn('mixins/placeable', 'No body element getter.')
+      }
+    },
+    __getOffsetContainer () {
+      const __placeableOffsetContainer = this.__placeableOffsetContainer
+      if (__placeableOffsetContainer) {
+        const el = __placeableOffsetContainer()
+        return el.$el || el
+      } else if (__DEV__) {
+        warn('mixins/placeable', 'No offset container getter.')
+      }
+    },
+    __setOffset (position, transformOrigin) {
+      const el = this.__getTrackingElement()
+      el.style.position = 'absolute'
+      el.style.top = position.top
+      el.style.left = position.left
+      el.style.right = position.right
+      el.style.bottom = position.bottom
+      el.style.transform = position.transform
+      el.style.transformOrigin = transformOrigin
+      el.setAttribute('n-suggested-transform-origin', transformOrigin)
+    },
+    __addResizeListener () {
+      resizeDelegate.registerHandler(this.__placeableSyncPosition)
+    },
+    __addScrollListeners () {
+      let currentElement = this.__getTrackedElement()
       while (true) {
         currentElement = getScrollParent(currentElement)
         if (currentElement === null) break
-        this.scrollListeners.push([currentElement, this.placeableSyncPosition])
+        this.__placeableScrollListeners.push([currentElement, this.__placeableSyncPosition])
       }
-      for (const [el, handler] of this.scrollListeners) {
+      for (const [el, handler] of this.__placeableScrollListeners) {
         scrollDelegate.registerHandler(el, handler)
       }
     },
-    unregisterResizeListener () {
-      resizeDelegate.unregisterHandler(this.placeableSyncPosition)
+    __removeResizeListener () {
+      resizeDelegate.unregisterHandler(this.__placeableSyncPosition)
     },
-    unregisterScrollListeners () {
-      for (const [el, handler] of this.scrollListeners) {
+    __removeScrollListeners () {
+      for (const [el, handler] of this.__placeableScrollListeners) {
         scrollDelegate.unregisterHandler(el, handler)
       }
-      this.scrollListeners = []
+      this.__placeableScrollListeners = []
     }
   }
 }

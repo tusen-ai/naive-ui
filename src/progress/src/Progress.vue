@@ -228,19 +228,20 @@
 </template>
 
 <script>
+import { nextTick } from 'vue'
 import NIcon from '../../icon'
-import mdCheckmark from '../../_icons/md-checkmark.vue'
-import mdClose from '../../_icons/md-close.vue'
-import mdAlert from '../../_icons/md-alert.vue'
-import mdInformationCircle from '../../_icons/md-information-circle.vue'
-import mdCheckmarkCircle from '../../_icons/md-checkmark-circle.vue'
-import mdCloseCircle from '../../_icons/md-close-circle.vue'
-import fontawareable from '../../_mixins/fontawarable'
+import SuccessIcon from '../../_icons/md-checkmark.vue'
+import ErrorIcon from '../../_icons/md-close.vue'
+import WarningIcon from '../../_icons/md-alert.vue'
+import InfoCircleIcon from '../../_icons/md-information-circle.vue'
+import SuccessCircleIcon from '../../_icons/md-checkmark-circle.vue'
+import ErrorCircleIcon from '../../_icons/md-close-circle.vue'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles/index.js'
 import formatLength from '../../_utils/css/formatLength.js'
+import { onFontReady } from '../../_utils/composition'
 
 function circlePath (r, sw, vw = 100) {
   return `m ${vw / 2} ${vw / 2 - r} a ${r} ${r} 0 1 1 0 ${2 * r} a ${r} ${r} 0 1 1 0 -${2 * r}`
@@ -250,17 +251,16 @@ export default {
   name: 'Progress',
   components: {
     NIcon,
-    mdCheckmark,
-    mdClose,
-    mdAlert,
-    mdInformationCircle,
-    mdCheckmarkCircle,
-    mdCloseCircle
+    SuccessIcon,
+    ErrorIcon,
+    WarningIcon,
+    InfoCircleIcon,
+    SuccessCircleIcon,
+    ErrorCircleIcon
   },
   mixins: [
     withapp,
     themeable,
-    fontawareable,
     usecssr(styles)
   ],
   props: {
@@ -341,6 +341,19 @@ export default {
       default: null
     }
   },
+  setup () {
+    onFontReady(vm => {
+      if (vm.syntheticIndicatorPlacement === 'inside-label') {
+        nextTick(() => {
+          vm.indicatorPercentage = vm.calcIndicatorPercentage()
+          nextTick(() => {
+            vm.$refs.indicator.getBoundingClientRect()
+            vm.indicatorPercentageIsCaculated = true
+          })
+        })
+      }
+    })
+  },
   data () {
     return {
       indicatorPercentage: 50,
@@ -385,23 +398,23 @@ export default {
     iconType () {
       if (this.type === 'circle') {
         if (this.status === 'success') {
-          return 'md-checkmark'
+          return 'success-icon'
         } else if (this.status === 'error') {
-          return 'md-close'
+          return 'error-icon'
         } else if (this.status === 'warning') {
-          return 'md-alert'
+          return 'warning-icon'
         } else if (this.status === 'info') {
-          return 'md-information-circle'
+          return 'info-circle-icon'
         }
       } else if (this.type === 'line') {
         if (this.status === 'success') {
-          return 'md-checkmark-circle'
+          return 'success-circle-icon'
         } else if (this.status === 'error') {
-          return 'md-close-circle'
+          return 'error-circle-icon'
         } else if (this.status === 'warning') {
-          return 'md-alert'
+          return 'warning-icon'
         } else if (this.status === 'info') {
-          return 'md-information-circle'
+          return 'info-circle-icon'
         }
       } return ''
     },
@@ -434,17 +447,6 @@ export default {
     }
   },
   methods: {
-    handleFontReady () {
-      if (this.syntheticIndicatorPlacement === 'inside-label') {
-        this.$nextTick().then(() => {
-          this.indicatorPercentage = this.calcIndicatorPercentage()
-          this.$nextTick().then(() => {
-            this.$refs.indicator.getBoundingClientRect()
-            this.indicatorPercentageIsCaculated = true
-          })
-        })
-      }
-    },
     circlePath: circlePath,
     calcIndicatorPercentage () {
       const lineRect = this.$refs.line.getBoundingClientRect()

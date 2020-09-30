@@ -48,6 +48,7 @@ export default c([
         color: actionTextColor
       }),
       cB('base-select-group-header', {
+        position: 'relative',
         cursor: 'default',
         padding: '0 14px',
         color: groupHeaderTextColor

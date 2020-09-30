@@ -194,7 +194,7 @@ export default {
   methods: {
     syncPosition () {
       if (this.bodyInstance) {
-        this.bodyInstance.placeableSyncPosition()
+        this.bodyInstance.__placeableSyncPosition()
       }
     },
     getTriggerElement () {

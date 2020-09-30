@@ -12,7 +12,14 @@ placeable 进行了大调整
     - `target` => `listen-to`
 - [x] alert
 - [x] anchor
-- [ ] auto-complete
+- [x] auto-complete
+  - break
+    - `v-model` => `v-model:value`
+  - deprecate
+    - `on-input` => `on-update:value`
+  - new
+    - `on-blur`
+    - `on-focus`
 - [x] avatar
 - [x] back-top
   - new

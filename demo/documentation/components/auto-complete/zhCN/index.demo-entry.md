@@ -9,27 +9,26 @@ custom-input
 after-select
 ```
 
-## V-model
-|Prop|Event|
-|-|-|
-|value|input|
-
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
-|value|`string`|`null`||
-|options|`Array<string \| AutoCompleteOption \| AutoCompleteOptionGroup>`|`[]`||
-|placeholder|`string`|`null`||
 |blur-after-select|`boolean`|`false`||
 |clear-after-select|`boolean`|`false`||
+|options|`Array<string \| AutoCompleteOption \| AutoCompleteOptionGroup>`|`[]`||
+|placeholder|`string`|`null`||
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|value|`string`|`null`||
+|on-blur|`(event: FocusEvent) => any`|`undefined`||
+|on-focus|`(event: FocusEvent) => any`|`undefined`||
+|on-select|`(value: string) => any`|`undefined`||
+|on-update:value|`(value: string \| null) => any`|`undefined`||
 
 ### AutoCompleteOption Properties
 |名称|类型|介绍|
 |-|-|-|
 |label|`string`||
-|value|`string \| number`|Should be unique in options.|
+|value|`string \| number`|需要唯一|
 |disabled|`boolean`||
 |render|`Function`||
 
@@ -38,15 +37,10 @@ after-select
 |-|-|-|
 |type|`'group'`||
 |name|`string`||
-|children|`Array<string | AutoCompleteOption>`||
+|children|`Array<string \| AutoCompleteOption>`||
 
 ## Slots
 |名称|参数|说明|
 |-|-|-|
 |default|`(options: { handleInput: (value: string) => any, handleFocus: function, handleBlur: function, value: string, theme: string \| null })`||
 
-## Events
-|名称|参数|说明|
-|-|-|-|
-|input|`(value: string \| null)`||
-|select|`(value: string)`||

@@ -1,7 +1,10 @@
 # 自定义输入元素
 你可以替换 AutoComplete 的输入元素。
 ```html
-<n-auto-complete :options="options" v-model="value">
+<n-auto-complete
+  :options="options"
+  v-model:value="value"
+>
   <template v-slot="{ handleInput, handleBlur, handleFocus, value }">
     <n-input
       type="textarea"

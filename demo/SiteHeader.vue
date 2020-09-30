@@ -47,7 +47,7 @@
       </n-config-consumer>
       <div style=" margin-left: 56px; display: flex; align-items: center;">
         <n-auto-complete
-          v-model="searchInputValue"
+          v-model:value="searchInputValue"
           style="width: 216px;"
           :z-index="zIndex && zIndex + 1"
           :placeholder="'searchPlaceholder'"

@@ -7,7 +7,7 @@
     }"
   >
     <n-input
-      ref="activator"
+      ref="tracked"
       v-model:value="displayTimeString"
       class="n-time-picker-input"
       passively-activated
@@ -39,16 +39,16 @@
       :show="active"
     >
       <div
-        ref="contentContainer"
+        ref="offsetContainer"
         v-zindexable="{ enabled: active }"
         class="n-positioning-container"
         :class="{
-          'n-positioning-container--absolute': positionModeisAbsolute,
+          'n-positioning-container--absolute': position === 'absolute',
           [namespace]: namespace
         }"
       >
         <div
-          ref="content"
+          ref="tracking"
           class="n-positioning-content"
         >
           <transition
@@ -318,6 +318,11 @@ export default {
       type: Boolean,
       default: false
     },
+    // private
+    position: {
+      type: String,
+      default: undefined
+    },
     // deprecated
     onChange: {
       validator () {
@@ -344,7 +349,7 @@ export default {
     }
   },
   computed: {
-    placeableEnabled () {
+    __placeableEnabled () {
       return this.active
     },
     localizedNow () {
@@ -421,6 +426,18 @@ export default {
     }
   },
   methods: {
+    __placeableBody () {
+      return this.$refs.panel
+    },
+    __placeableOffsetContainer () {
+      return this.$refs.offsetContainer
+    },
+    __placeableTracking () {
+      return this.$refs.tracking
+    },
+    __placeableTracked () {
+      return this.$refs.tracked
+    },
     doChange (value) {
       const {
         'onUpdate:value': onUpdateValue,
@@ -609,7 +626,7 @@ export default {
       }
     },
     handleClickOutside (e) {
-      if (this.active && !this.$refs.activator.$el.contains(e.target)) {
+      if (this.active && !this.$refs.tracked.$el.contains(e.target)) {
         this.closeTimeSelector({
           returnFocus: false,
           emitBlur: true
@@ -623,7 +640,7 @@ export default {
       if (this.active) {
         this.active = false
         if (returnFocus) {
-          this.$refs.activator.focus()
+          this.$refs.tracked.focus()
         }
         if (emitBlur) {
           const {

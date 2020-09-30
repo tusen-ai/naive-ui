@@ -3,13 +3,13 @@
 ```html
 <n-auto-complete
   :options="options"
-  v-model="value"
+  v-model:value="value"
   clear-after-select
   placeholder="选择后清空"
 />
 <n-auto-complete
   :options="options"
-  v-model="value"
+  v-model:value="value"
   blur-after-select
   placeholder="选择后 Blur"
 />

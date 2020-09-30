@@ -103,7 +103,7 @@ export default {
   ],
   data () {
     return {
-      placeableEnabled: this.show
+      __placeableEnabled: this.show
     }
   },
   created () {
@@ -113,12 +113,6 @@ export default {
     this.NPopover.bodyInstance = null
   },
   computed: {
-    placeableManuallyPositioned () {
-      return this.manuallyPositioned
-    },
-    placeableFlip () {
-      return this.filp
-    },
     useVShow () {
       return this.displayDirective === 'show'
     },
@@ -170,13 +164,16 @@ export default {
       return this.NPopover.getTriggerElement()
     },
     // for placeable mixin
-    placeableGetTrackedElement () {
+    __placeableTracked () {
       return this.NPopover.getTriggerElement()
     },
-    placeableGetTrackingElement () {
+    __placeableTracking () {
       return this.$refs.bodyWrapper
     },
-    placeableGetAbsoluteOffsetContainer () {
+    __placeableBody () {
+      return this.$refs.body
+    },
+    __placeableOffsetContainer () {
       return this.$refs.container
     }
   },
@@ -200,14 +197,14 @@ export default {
             name: 'popover-body-transition',
             appear: this.NPopover.isMounted,
             onEnter: () => {
-              this.placeableEnabled = true
+              this.__placeableEnabled = true
             },
             onAfterLeave: () => {
-              this.placeableEnabled = false
+              this.__placeableEnabled = false
             }
           }, {
             default: () => ((this.useVShow || this.show) ? withDirectives(h('div', {
-              'n-placement': this.adjustedPlacement,
+              'n-placement': this.__placeableAdjustedPlacement,
               class: [
                 'n-popover-body',
                 {
@@ -218,6 +215,7 @@ export default {
                   'n-popover-body--styled': !this.raw
                 }
               ],
+              ref: 'body',
               style: this.style,
               onMouseEnter: this.handleMouseEnter,
               onMouseLeave: this.handleMouseLeave

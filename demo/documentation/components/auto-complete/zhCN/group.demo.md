@@ -1,6 +1,6 @@
 # 成组
 ```html
-<n-auto-complete :options="options" v-model="value" placeholder="邮箱" />
+<n-auto-complete :options="options" v-model:value="value" placeholder="邮箱" />
 ```
 ```js
 export default {

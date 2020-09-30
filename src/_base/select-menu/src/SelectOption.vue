@@ -1,4 +1,5 @@
 <script>
+import { h } from 'vue'
 import { createClassObject } from '../../../data-table/src/utils'
 
 export default {
@@ -42,25 +43,25 @@ export default {
       this.NBaseSelectMenu.handleOptionMouseEnter(e, this.index, this.wrappedOption)
     }
   },
-  render (h) {
+  render () {
     const data = this.wrappedOption.data
-    const children = (data.render && data.render(h, data, this.selected)) || [ data.label ]
+    const children = data.render ? data.render(h, data, this.selected) : [ data.label ]
     const classObject = createClassObject(data.class)
     return h('div', {
-      staticClass: 'n-base-select-option',
-      class: {
-        'n-base-select-option--selected': this.selected,
-        'n-base-select-option--disabled': data.disabled,
-        'n-base-select-option--grouped': this.grouped,
-        ...classObject
-      },
-      attrs: { 'n-option-index': this.index },
+      class: [
+        'n-base-select-option',
+        {
+          'n-base-select-option--selected': this.selected,
+          'n-base-select-option--disabled': data.disabled,
+          'n-base-select-option--grouped': this.grouped,
+          ...classObject
+        }
+      ],
+      'n-option-index': this.index,
       style: data.style,
-      on: {
-        click: this.handleClick,
-        mouseenter: this.handleMouseEnter
-      }
-    }, Array.isArray(children) ? children : [ children ])
+      onClick: this.handleClick,
+      onMouseEnter: this.handleMouseEnter
+    }, children)
   }
 }
 </script>
