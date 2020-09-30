@@ -13,18 +13,17 @@ export default create({
       successColor,
       opacityDisabled,
       actionColorOverlay,
-      borderColor
+      borderColor,
+      hoverColorOverlay
     } = derived
 
     return {
       draggerColor: actionColorOverlay,
       draggerBorderColor: borderColor,
       draggerBorderColorHover: primaryColor,
-      itemColorHover: changeColor(primaryColor, {
-        alpha: 0.1
-      }),
+      itemColorHover: hoverColorOverlay,
       itemColorErrorHover: changeColor(errorColor, {
-        alpha: 0.1
+        alpha: 0.06
       }),
       itemTextColor: textColorSecondary,
       itemTextColorError: errorColor,

@@ -25,7 +25,7 @@ default-files
 |with-credentials|`boolean`|`false`|是否携带 Cookie|
 |on-change|`(options: { file: UploadFile, fileList: Array<UploadFile>, event?: Event }) => any`|`() => {}`|组件状态变化的回调，组件的任何文件状态变化都会触发回调|
 |on-remove|`(options: { file: UploadFile, fileList: Array<UploadFile> }) => boolean \| Promise<boolean> \| any`|`() => true`|文件移除的回调，返回 false 或者 promise resolve false 或者 promise reject 会不执行这次删除|
-|on-finish|`(options: { file: UploadFile }) => UploadFile \| void`|`file => file`|文件上传结束的回调，可以修改传入的 UploadFile 或者返回一个新的 UploadFile|
+|on-finish|`(options: { file: UploadFile }) => UploadFile \| void`|`({ file }) => file`|文件上传结束的回调，可以修改传入的 UploadFile 或者返回一个新的 UploadFile|
 |default-upload|`boolean`|`false`|选择文件时候是否默认上传|
 |file-list|`Array<UploadFile>`|`undefined`|文件列表，如果传入组件会处于受控状态|
 |file-list-style|`Object`|`null`|文件列表区域的样式|
@@ -42,12 +42,6 @@ default-files
 |status|`'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'`|上传的状态，受控状态下**必需**|
 |percentage|`number`|文件上传进度百分比，在 uploading 状态下生效，受控状态下可不填|
 |file|`File`|文件对应的浏览器 File 对象，受控状态下可不填|
-
-## Events
-### Upload Events
-|名称|参数|说明|
-|-|-|-|
-|change|`(file: UploadFile, fileList: Array<UploadFile>)`||
 
 ## Methods
 ### Upload Methods

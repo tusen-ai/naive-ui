@@ -26,7 +26,7 @@ default-files
 |with-credentials|`boolean`|`false`|If cookie attached.|
 |on-change|`(options: { file: UploadFile, fileList: Array<UploadFile>, event?: Event }) => any`|`() => {}`|The callback of status change of the component. Any file status change would fire the callback.|
 |on-remove|`(options: { file: UploadFile, fileList: Array<UploadFile> }) => boolean \| Promise<boolean> \| any`|`() => true`|The callback of file removal. Return false, promise resolve false or promise reject will cancel this removal.|
-|on-finish|`(options: { file: UploadFile }) => UploadFile \| void`|`file => file`|The callback of file upload finish. You can modify the UploadFile or retun a new UploadFile.|
+|on-finish|`(options: { file: UploadFile }) => UploadFile \| void`|`({ file }) => file`|The callback of file upload finish. You can modify the UploadFile or retun a new UploadFile.|
 |default-upload|`boolean`|`false`|If file uploaded immediatelly after file is selected.|
 |file-list|`Array<UploadFile>`|`undefined`|The file list of component. If set, the component will work in controlled manner.|
 |file-list-style|`Object`|`null`|The style of file list area|

@@ -1,60 +1,58 @@
 <template>
-  <n-fade-in-height-expand-transition :appear="!transitionDisabled">
-    <a
-      ref="noopener noreferer"
-      target="_blank"
-      class="n-upload-file"
-      :href="file.url"
-      :class="{
-        [`n-upload-file--${progressStatus}-status`]: true,
-        [`n-upload-file--with-url`]: file.url
-      }"
-    >
-      <div class="n-upload-file-info">
-        <div class="n-upload-file-info__name">
-          <n-icon>
-            <attach-outline />
-          </n-icon>{{ file.name }}
-        </div>
-        <div class="n-upload-file-info__action">
-          <n-button
-            v-if="showRemoveButton || showCancelButton"
-            key="closeOrTrash"
-            circle
-            size="tiny"
-            ghost
-            :type="buttonType"
-            @click="handleRemoveOrCancelClick"
-          >
-            <template v-slot:icon>
-              <n-icon-switch-transition>
-                <trash-outline v-if="showRemoveButton" key="trash" />
-                <close-outline v-else key="close" />
-              </n-icon-switch-transition>
-            </template>
-          </n-button>
-          <n-button
-            v-if="showDownloadButton"
-            key="download"
-            circle
-            size="tiny"
-            ghost
-            :type="buttonType"
-            @click="handleDownloadClick"
-          >
-            <template v-slot:icon>
-              <download-outline />
-            </template>
-          </n-button>
-        </div>
+  <a
+    ref="noopener noreferer"
+    target="_blank"
+    class="n-upload-file"
+    :href="file.url"
+    :class="{
+      [`n-upload-file--${progressStatus}-status`]: true,
+      [`n-upload-file--with-url`]: file.url
+    }"
+  >
+    <div class="n-upload-file-info">
+      <div class="n-upload-file-info__name">
+        <n-icon>
+          <attach-outline />
+        </n-icon>{{ file.name }}
       </div>
-      <n-upload-progress
-        :show="showProgress"
-        :percentage="file.percentage || 0"
-        :status="progressStatus"
-      />
-    </a>
-  </n-fade-in-height-expand-transition>
+      <div class="n-upload-file-info__action">
+        <n-button
+          v-if="showRemoveButton || showCancelButton"
+          key="closeOrTrash"
+          circle
+          size="tiny"
+          ghost
+          :type="buttonType"
+          @click="handleRemoveOrCancelClick"
+        >
+          <template v-slot:icon>
+            <n-icon-switch-transition>
+              <trash-outline v-if="showRemoveButton" key="trash" />
+              <close-outline v-else key="close" />
+            </n-icon-switch-transition>
+          </template>
+        </n-button>
+        <n-button
+          v-if="showDownloadButton"
+          key="download"
+          circle
+          size="tiny"
+          ghost
+          :type="buttonType"
+          @click="handleDownloadClick"
+        >
+          <template v-slot:icon>
+            <download-outline />
+          </template>
+        </n-button>
+      </div>
+    </div>
+    <n-upload-progress
+      :show="showProgress"
+      :percentage="file.percentage || 0"
+      :status="progressStatus"
+    />
+  </a>
 </template>
 
 <script>
@@ -63,10 +61,10 @@ import closeOutline from '../../_icons/close-outline.vue'
 import downloadOutline from '../../_icons/download-outline.vue'
 import trashOutline from '../../_icons/trash-outline.vue'
 import NUploadProgress from './UploadProgress.vue'
-import NFadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
 import attachOutline from '../../_icons/attach-outline.vue'
 import NIcon from '../../icon'
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
+import { warn } from '../../_utils/naive'
 
 export default {
   name: 'NUploadFile',
@@ -78,7 +76,6 @@ export default {
     NIcon,
     downloadOutline,
     trashOutline,
-    NFadeInHeightExpandTransition,
     NIconSwitchTransition
   },
   inject: {
@@ -93,9 +90,6 @@ export default {
     }
   },
   computed: {
-    transitionDisabled () {
-      return this.NUpload.transitionDisabled
-    },
     progressStatus () {
       const file = this.file
       if (file.status === 'finished') return 'success'
@@ -135,7 +129,7 @@ export default {
       } else if (['uploading'].includes(file.status)) {
         this.handleAbort(file)
       } else {
-        console.error('[naive-ui/upload]: the button clicked type is unknown.')
+        warn('upload', 'The button clicked type is unknown.')
       }
     },
     handleDownloadClick (e) {

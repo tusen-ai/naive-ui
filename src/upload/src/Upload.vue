@@ -28,27 +28,28 @@
       <slot />
     </div>
     <div class="n-upload-file-list" :style="fileListStyle">
-      <n-upload-file
-        v-for="file in syntheticFileList"
-        :key="file.id"
-        :file="file"
-      />
+      <n-fade-in-height-expand-transition-group>
+        <n-upload-file
+          v-for="file in syntheticFileList"
+          :key="file.id"
+          :file="file"
+        />
+      </n-fade-in-height-expand-transition-group>
     </div>
   </div>
 </template>
 
 <script>
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
+import {
+  configurable,
+  themeable
+} from '../../_mixins'
+import { warn } from '../../_utils/naive'
+import { createId } from '../../_utils/vue'
 import NUploadFile from './UploadFile.vue'
+import NFadeInHeightExpandTransitionGroup from '../../_transition/FadeInHeightExpandTransitionGroup'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
-
-function createId () {
-  return Math.random()
-    .toString(36)
-    .slice(2)
-}
 
 /**
  * fils status ['pending', 'uploading', 'finished', 'removed', 'error']
@@ -65,7 +66,7 @@ function XHRHandlers (componentInstance, file, XHR) {
         file: null
       })
       XHRMap.delete(file.id)
-      fileAfterChange = componentInstance.onFinish({ file: fileAfterChange, response: XHR.response }) || fileAfterChange
+      fileAfterChange = componentInstance.onFinish({ file: fileAfterChange }) || fileAfterChange
       change(fileAfterChange, e)
     },
     handleXHRAbort (e) {
@@ -162,14 +163,19 @@ function submit (
 export default {
   name: 'Upload',
   components: {
-    NUploadFile
+    NUploadFile,
+    NFadeInHeightExpandTransitionGroup
   },
   provide () {
     return {
       NUpload: this
     }
   },
-  mixins: [ withapp, themeable, usecssr(styles) ],
+  mixins: [
+    configurable,
+    themeable,
+    usecssr(styles)
+  ],
   props: {
     name: {
       type: String,
@@ -177,11 +183,11 @@ export default {
     },
     accept: {
       type: String,
-      default: null
+      default: undefined
     },
     action: {
       type: String,
-      default: null
+      default: undefined
     },
     directory: {
       type: Boolean,
@@ -197,11 +203,11 @@ export default {
     },
     data: {
       type: [Object, Function],
-      default: null
+      default: undefined
     },
     headers: {
       type: [Object, Function],
-      default: null
+      default: undefined
     },
     withCredentials: {
       type: Boolean,
@@ -221,7 +227,7 @@ export default {
     },
     onFinish: {
       type: Function,
-      default: file => file
+      default: ({ file }) => file
     },
     onDownload: {
       /** currently of no usage */
@@ -238,7 +244,7 @@ export default {
     },
     fileListStyle: {
       type: Object,
-      default: null
+      default: undefined
     },
     defaultFileList: {
       type: Array,
@@ -380,19 +386,14 @@ export default {
         } else {
           fileListAfterChange.splice(fileIndex, 1, fileAfterChange)
         }
-        this.$emit('change', {
-          file: fileAfterChange,
-          fileList: fileListAfterChange,
-          event
-        })
         this.onChange({
           file: fileAfterChange,
           fileList: fileListAfterChange,
           event
         })
         this.internalFileList = fileListAfterChange
-      } else {
-        console.error('[naive-ui/upload]: file has no corresponding id in current file list.')
+      } else if (__DEV__) {
+        warn('upload', 'File has no corresponding id in current file list.')
       }
     }
   }

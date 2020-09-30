@@ -181,7 +181,12 @@ placeable 进行了大调整
 - [x] result
 - [x] scrollbar
 - [ ] select
-- [ ] slider
+- [x] slider
+  - deprecated
+    - `on-change` => `on-update:value`
+  - bug
+    - vue refs
+    - drag logic
 - [x] space
 - [x] spin
 - [x] statistic
@@ -212,3 +217,5 @@ placeable 进行了大调整
 - [ ] tree
 - [x] typography
 - [ ] upload
+  - [x] basic support
+  - height expand transition-group
