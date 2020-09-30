@@ -1,12 +1,12 @@
 # 基础用法
 ```html
 <n-slider
-  v-model="value"
+  v-model:value="value"
   :step="10"
 />
 <n-input-number
   size="small"
-  v-model="value"
+  v-model:value="value"
 />
 ```
 ```js

@@ -6,7 +6,7 @@ export default {
   props: {
     to: {
       type: [String, Object],
-      required: true
+      default: undefined
     },
     disabled: {
       type: Boolean,
@@ -23,7 +23,10 @@ export default {
     }
   },
   render () {
-    return this.showTeleport ? h(Teleport, this.$props, {
+    return this.showTeleport ? h(Teleport, {
+      ...this.$props,
+      to: this.$props.to ?? 'body'
+    }, {
       default: this.$slots.default
     }) : null
   }

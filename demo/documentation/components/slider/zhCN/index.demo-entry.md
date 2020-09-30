@@ -7,25 +7,16 @@ basic
 range
 mark
 ```
-## V-model
-|Prop|Event|
-|-|-|
-|value|change|
 
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
-|marks|`{ [markValue: number]: string }`|||
+|marks|`{ [markValue: number]: string }`|`undefined`||
 |disabled|`boolean`|`false`||
 |min|`number`|`0`||
 |max|`number`|`100`||
 |step|`number`|`1`||
 |range|`boolean`|`false`||
 |value|`number \| [number, number]`|`null`|
-
-## Events
-|名称|参数|说明|
-|-|-|-|
-|change|`(value: number \| [number, number])`||
-
+|on-update:value|`(value: number \| [number, number]) => any`|`undefined`||

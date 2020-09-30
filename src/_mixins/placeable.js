@@ -198,14 +198,13 @@ export default {
       }
       const viewRect = getViewBoundingRect()
       const triggerRect = getActivatorRect(this.manuallyPositioned, this.x, this.y, trackedElement, viewRect)
-      const body = this.__getBodyElement()
       const {
         widthMode
       } = this
       if (
-        (widthMode === 'trigger' || widthMode === 'activator') &&
-        body
+        (widthMode === 'trigger' || widthMode === 'activator')
       ) {
+        const body = this.__getBodyElement()
         body.style.minWidth = triggerRect.width + 'px'
       }
       let adjustedPlacement = this.placement

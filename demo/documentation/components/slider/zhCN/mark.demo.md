@@ -1,18 +1,18 @@
 # 标记
 ```html
 <n-slider
-  v-model="value"
+  v-model:value="value"
   range
   :marks="marks"
   :step="10"
 />
 <n-input-number
   size="small"
-  v-model="value[0]"
+  v-model:value="value[0]"
 />
 <n-input-number
   size="small"
-  v-model="value[1]"
+  v-model:value="value[1]"
 />
 ```
 ```js

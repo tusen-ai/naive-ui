@@ -66,43 +66,58 @@
         {{ mark.label }}
       </div>
     </div>
-    <div
-      ref="contentContainer"
-      class="n-positioning-container"
-      :class="{
-        [namespace]: namespace
-      }"
+    <n-lazy-teleport
+      :show="showTooltip"
     >
       <div
-        ref="content"
-        class="n-positioning-content"
+        ref="offsetContainer"
+        v-zindexable="{ enabled: showTooltip }"
+        class="n-positioning-container"
+        :class="{
+          [namespace]: namespace
+        }"
       >
-        <transition name="n-fade-in-scale-up-transition">
-          <div
-            v-if="showTooltip"
-            class="n-slider-handle-indicator"
-            :class="{
-              [`n-${syntheticTheme}-theme`]: syntheticTheme
-            }"
+        <div
+          ref="tracking"
+          class="n-positioning-content"
+        >
+          <transition
+            name="n-fade-in-scale-up-transition"
+            :appear="isMounted"
           >
-            {{ activeHandleValue === null ? tooltipHoverDisplayValue : activeHandleValue }}
-          </div>
-        </transition>
+            <div
+              v-if="showTooltip"
+              class="n-slider-handle-indicator"
+              :class="{
+                [`n-${syntheticTheme}-theme`]: syntheticTheme
+              }"
+            >
+              {{ activeHandleValue === null ? tooltipHoverDisplayValue : activeHandleValue }}
+            </div>
+          </transition>
+        </div>
       </div>
-    </div>
+    </n-lazy-teleport>
   </div>
 </template>
 
 <script>
-import hollowoutable from '../../_mixins/hollowoutable'
-import detachable from '../../_mixins/detachable'
-import placeable from '../../_mixins/placeable'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import asformitem from '../../_mixins/asformitem'
-import zindexable from '../../_mixins/zindexable'
-import usecssr from '../../_mixins/usecssr'
+import {
+  configurable,
+  themeable,
+  placeable,
+  asformitem,
+  hollowoutable,
+  usecssr
+} from '../../_mixins'
+import {
+  zindexable
+} from '../../_directives'
 import styles from './styles'
+import { warn } from '../../_utils/naive'
+import { call } from '../../_utils/vue'
+import { useIsMounted } from '../../_utils/composition'
+import NLazyTeleport from '../../_base/lazy-teleport'
 
 function handleFirstHandleMouseMove (e) {
   const railRect = this.$refs.rail.getBoundingClientRect()
@@ -126,24 +141,24 @@ function handleSecondHandleMouseMove (e) {
 
 export default {
   name: 'Slider',
+  directives: {
+    zindexable
+  },
+  components: {
+    NLazyTeleport
+  },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     hollowoutable,
-    detachable,
     placeable,
-    zindexable,
     usecssr(styles),
     asformitem()
   ],
-  model: {
-    prop: 'value',
-    event: 'change'
-  },
   props: {
     marks: {
       type: Object,
-      default: null
+      default: undefined
     },
     disabled: {
       type: Boolean,
@@ -172,10 +187,29 @@ export default {
     placement: {
       type: String,
       default: 'top'
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:value': {
+      type: Function,
+      default: undefined
+    },
+    // deprecated
+    onChange: {
+      validator () {
+        if (__DEV__) warn('slider', '`on-change` is deprecated, please use `on-update:value` instead.')
+        return true
+      },
+      default: undefined
+    }
+  },
+  setup () {
+    return {
+      isMounted: useIsMounted()
     }
   },
   data () {
     return {
+      unstableMemorizedRef: {},
       showTooltip: false,
       firstHandleActive: false,
       secondHandleActive: false,
@@ -187,6 +221,9 @@ export default {
     }
   },
   computed: {
+    __placeableEnabled () {
+      return this.showTooltip
+    },
     computedMarks () {
       const marks = []
       for (const value of Object.keys(this.marks)) {
@@ -268,7 +305,7 @@ export default {
     value (newValue, oldValue) {
       if (this.range && newValue) {
         if (oldValue && oldValue[1] !== newValue[1]) {
-          this.$nextTick().then(() => {
+          this.$nextTick(() => {
             if (!this.valueChangedByRailClick) {
               this.firstHandleActive = false
               this.secondHandleActive = true
@@ -278,7 +315,7 @@ export default {
             this.switchFocus()
           })
         } else if (oldValue && oldValue[0] !== newValue[0]) {
-          this.$nextTick().then(() => {
+          this.$nextTick(() => {
             if (!this.valueChangedByRailClick) {
               this.firstHandleActive = true
               this.secondHandleActive = false
@@ -288,7 +325,7 @@ export default {
             this.switchFocus()
           })
         } else if (newValue[0] === newValue[1]) {
-          this.$nextTick().then(() => {
+          this.$nextTick(() => {
             if (!this.valueChangedByRailClick) {
               this.firstHandleActive = false
               this.secondHandleActive = true
@@ -299,15 +336,15 @@ export default {
           })
         }
       }
-      this.$nextTick().then(() => {
+      this.$nextTick(() => {
         if (this.range) {
           if (newValue && oldValue) {
             if (newValue[0] !== oldValue[0] || newValue[1] !== oldValue[1]) {
-              this.updatePosition()
+              this.__placeableSyncPosition()
             }
           }
         } else {
-          this.updatePosition()
+          this.__placeableSyncPosition()
         }
       })
     }
@@ -319,6 +356,45 @@ export default {
     window.removeEventListener('mouseup', this.handleSecondHandleMouseUp)
   },
   methods: {
+    __placeableTracked () {
+      if (this.firstHandleActive) {
+        return this.$refs.firstHandle
+      } else if (this.secondHandleActive) {
+        return this.$refs.secondHandle
+      }
+      return this.$el // for registering scroll listeners
+    },
+    // BUG: vue $refs
+    __placeableTracking () {
+      if (this.$refs.tracking) {
+        return (this.unstableMemorizedRef.tracking = this.$refs.tracking)
+      } else {
+        return this.unstableMemorizedRef.tracking
+      }
+    },
+    // BUG: vue $refs
+    __placeableOffsetContainer () {
+      if (this.$refs.offsetContainer) {
+        return (this.unstableMemorizedRef.offsetContainer = this.$refs.offsetContainer)
+      } else {
+        return this.unstableMemorizedRef.offsetContainer
+      }
+    },
+    __placeableBody () {
+      return null
+    },
+    doUpdateValue (value) {
+      const {
+        onChange,
+        'onUpdate:value': onUpdateValue,
+        __triggerFormInput,
+        __triggerFormChange
+      } = this
+      if (onChange) call(onChange, value)
+      if (onUpdateValue) call(onUpdateValue, value)
+      __triggerFormInput()
+      __triggerFormChange()
+    },
     handleRailClick (e) {
       this.valueChangedByRailClick = true
       const railRect = this.$refs.rail.getBoundingClientRect()
@@ -413,15 +489,6 @@ export default {
         }
       }
     },
-    getTrackedElement () {
-      if (this.firstHandleActive) {
-        return this.$refs.firstHandle
-      } else if (this.secondHandleActive) {
-        return this.$refs.secondHandle
-      } else {
-        return this.$el
-      }
-    },
     getClosestMarkValue (currentValue) {
       if (this.marks) {
         const markValues = Object.keys(this.marks).map(key => Number(key))
@@ -507,20 +574,20 @@ export default {
           } else {
             value = [this.justifyValue(value[0]), this.justifyValue(value[1])]
           }
-          this.$emit('change', value)
+          this.doUpdateValue(value)
         }
       } else {
         if (value > this.max) {
           if (this.value !== this.max) {
-            this.$emit('change', this.max)
+            this.doUpdateValue(this.max)
           }
         } else if (value < this.min) {
           if (this.value !== this.min) {
-            this.$emit('change', this.min)
+            this.doUpdateValue(this.min)
           }
         } else {
           if (this.value !== value) {
-            this.$emit('change', this.justifyValue(value))
+            this.doUpdateValue(this.justifyValue(value))
           }
         }
       }
@@ -531,16 +598,18 @@ export default {
     handleFirstHandleMouseEnter () {
       if (!this.active) {
         this.showTooltip = true
-        this.firstHandleActive = true
+        this.firstHandleActive = true // BUG: vue $refs value wrong
         this.tooltipHoverDisplayValue = this.firstHandleValue
-        this.$nextTick().then(() => {
-          this.updatePosition()
-          this.firstHandleActive = false
+        this.$nextTick(() => {
+          this.__placeableSyncPosition()
         })
       }
     },
     handleFirstHandleMouseLeave () {
-      if (!this.active || !this.clicked) {
+      if (!this.active) this.showTooltip = false
+      if (this.active && !this.clicked) {
+        this.secondHandleActive = false
+        this.firstHandleActive = false
         this.showTooltip = false
       }
     },
@@ -549,14 +618,16 @@ export default {
         this.showTooltip = true
         this.secondHandleActive = true
         this.tooltipHoverDisplayValue = this.secondHandleValue
-        this.$nextTick().then(() => {
-          this.updatePosition()
-          this.secondHandleActive = false
+        this.$nextTick(() => {
+          this.__placeableSyncPosition()
         })
       }
     },
     handleSecondHandleMouseLeave () {
-      if (!this.active || !this.clicked) {
+      if (!this.active) this.showTooltip = false
+      if (this.active && !this.clicked) {
+        this.secondHandleActive = false
+        this.firstHandleActive = false
         this.showTooltip = false
       }
     },
@@ -564,7 +635,7 @@ export default {
       const firstHandle = this.$refs.firstHandle
       if (firstHandle) {
         firstHandle.style.transition = 'none'
-        this.$nextTick().then(() => {
+        this.$nextTick(() => {
           if (this.$refs.firstHandle) {
             this.$refs.firstHandle.style.transition = null
           }
@@ -573,7 +644,7 @@ export default {
       const secondHandle = this.$refs.secondHandle
       if (secondHandle) {
         secondHandle.style.transition = 'none'
-        this.$nextTick().then(() => {
+        this.$nextTick(() => {
           if (this.$refs.secondHandle) {
             this.$refs.secondHandle.style.transition = null
           }
