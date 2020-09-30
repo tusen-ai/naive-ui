@@ -193,7 +193,7 @@ placeable 进行了大调整
   - deprecated
     - `on-change` => `on-update:value`
   - bug
-    - vue refs
+    - vue refs https://github.com/vuejs/vue-next/issues/2283
     - drag logic
 - [x] space
 - [x] spin

@@ -11,7 +11,7 @@
     @keydown.left="handleKeyDownLeft"
   >
     <div
-      ref="rail"
+      ref="railRef"
       class="n-slider-rail"
       @click="handleRailClick"
     >
@@ -35,7 +35,7 @@
       </div>
     </div>
     <div
-      ref="firstHandle"
+      ref="firstHandleRef"
       class="n-slider-handle"
       tabindex="0"
       :style="firstHandleStyle"
@@ -45,7 +45,7 @@
     />
     <div
       v-if="range"
-      ref="secondHandle"
+      ref="secondHandleRef"
       class="n-slider-handle"
       tabindex="0"
       :style="secondHandleStyle"
@@ -70,7 +70,7 @@
       :show="showTooltip"
     >
       <div
-        ref="offsetContainer"
+        ref="offsetContainerRef"
         v-zindexable="{ enabled: showTooltip }"
         class="n-positioning-container"
         :class="{
@@ -78,7 +78,7 @@
         }"
       >
         <div
-          ref="tracking"
+          ref="trackingRef"
           class="n-positioning-content"
         >
           <transition
@@ -102,6 +102,7 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 import {
   configurable,
   themeable,
@@ -120,7 +121,7 @@ import { useIsMounted } from '../../_utils/composition'
 import NLazyTeleport from '../../_base/lazy-teleport'
 
 function handleFirstHandleMouseMove (e) {
-  const railRect = this.$refs.rail.getBoundingClientRect()
+  const railRect = this.railRef.getBoundingClientRect()
   const offsetRatio = (e.clientX - railRect.left) / railRect.width
   const newValue = this.min + (this.max - this.min) * offsetRatio
   if (this.range) {
@@ -131,7 +132,7 @@ function handleFirstHandleMouseMove (e) {
 }
 
 function handleSecondHandleMouseMove (e) {
-  const railRect = this.$refs.rail.getBoundingClientRect()
+  const railRect = this.railRef.getBoundingClientRect()
   const offsetRatio = (e.clientX - railRect.left) / railRect.width
   const newValue = this.min + (this.max - this.min) * offsetRatio
   if (this.range) {
@@ -204,7 +205,13 @@ export default {
   },
   setup () {
     return {
-      isMounted: useIsMounted()
+      isMounted: useIsMounted(),
+      // https://github.com/vuejs/vue-next/issues/2283
+      firstHandleRef: ref(null),
+      secondHandleRef: ref(null),
+      railRef: ref(null),
+      offsetContainerRef: ref(null),
+      trackingRef: ref(null)
     }
   },
   data () {
@@ -358,24 +365,22 @@ export default {
   methods: {
     __placeableTracked () {
       if (this.firstHandleActive) {
-        return this.$refs.firstHandle
+        return this.firstHandleRef
       } else if (this.secondHandleActive) {
-        return this.$refs.secondHandle
+        return this.secondHandleRef
       }
       return this.$el // for registering scroll listeners
     },
-    // BUG: vue $refs
     __placeableTracking () {
-      if (this.$refs.tracking) {
-        return (this.unstableMemorizedRef.tracking = this.$refs.tracking)
+      if (this.trackingRef) {
+        return (this.unstableMemorizedRef.tracking = this.trackingRef)
       } else {
         return this.unstableMemorizedRef.tracking
       }
     },
-    // BUG: vue $refs
     __placeableOffsetContainer () {
-      if (this.$refs.offsetContainer) {
-        return (this.unstableMemorizedRef.offsetContainer = this.$refs.offsetContainer)
+      if (this.offsetContainerRef) {
+        return (this.unstableMemorizedRef.offsetContainer = this.offsetContainerRef)
       } else {
         return this.unstableMemorizedRef.offsetContainer
       }
@@ -397,31 +402,31 @@ export default {
     },
     handleRailClick (e) {
       this.valueChangedByRailClick = true
-      const railRect = this.$refs.rail.getBoundingClientRect()
+      const railRect = this.railRef.getBoundingClientRect()
       const offsetRatio = (e.clientX - railRect.left) / railRect.width
       const newValue = this.min + (this.max - this.min) * offsetRatio
       if (!this.range) {
         this.emitInputEvent(newValue)
-        this.$refs.firstHandle.focus()
+        this.firstHandleRef.focus()
       } else {
         if (this.value) {
           if (Math.abs(this.firstHandleValue - newValue) < Math.abs(this.secondHandleValue - newValue)) {
             this.emitInputEvent([newValue, this.secondHandleValue])
-            this.$refs.firstHandle.focus()
+            this.firstHandleRef.focus()
           } else {
             this.emitInputEvent([this.firstHandleValue, newValue])
-            this.$refs.secondHandle.focus()
+            this.secondHandleRef.focus()
           }
         } else {
           this.emitInputEvent([newValue, newValue])
-          this.$refs.firstHandle.focus()
+          this.firstHandleRef.focus()
         }
       }
     },
     handleKeyDownRight () {
       let firstHandleFocused = false
       let handleValue = null
-      if (document.activeElement === this.$refs.firstHandle) {
+      if (document.activeElement === this.firstHandleRef) {
         firstHandleFocused = true
         handleValue = this.firstHandleValue
       } else {
@@ -449,7 +454,7 @@ export default {
     handleKeyDownLeft () {
       let firstHandleFocused = false
       let handleValue = null
-      if (document.activeElement === this.$refs.firstHandle) {
+      if (document.activeElement === this.firstHandleRef) {
         firstHandleFocused = true
         handleValue = this.firstHandleValue
       } else {
@@ -476,8 +481,8 @@ export default {
     },
     switchFocus () {
       if (this.range) {
-        const firstHandle = this.$refs.firstHandle
-        const secondHandle = this.$refs.secondHandle
+        const firstHandle = this.firstHandleRef
+        const secondHandle = this.secondHandleRef
         if (firstHandle && secondHandle) {
           if (this.firstHandleActive && document.activeElement === secondHandle) {
             this.disableTransitionOneTick()
@@ -545,7 +550,7 @@ export default {
       this.firstHandleActive = false
       this.secondHandleClicked = false
       this.firstHandleClicked = false
-      if (!this.$refs.firstHandle.contains(e.target)) {
+      if (!this.firstHandleRef.contains(e.target)) {
         this.showTooltip = false
       } else {
         this.tooltipHoverDisplayValue = this.firstHandleValue
@@ -558,7 +563,7 @@ export default {
       this.firstHandleActive = false
       this.secondHandleClicked = false
       this.firstHandleClicked = false
-      if (!this.$refs.firstHandle.contains(e.target)) {
+      if (!this.firstHandleRef.contains(e.target)) {
         this.showTooltip = false
       } else {
         this.tooltipHoverDisplayValue = this.secondHandleValue
@@ -598,7 +603,7 @@ export default {
     handleFirstHandleMouseEnter () {
       if (!this.active) {
         this.showTooltip = true
-        this.firstHandleActive = true // BUG: vue $refs value wrong
+        this.firstHandleActive = true
         this.tooltipHoverDisplayValue = this.firstHandleValue
         this.$nextTick(() => {
           this.__placeableSyncPosition()
@@ -632,21 +637,21 @@ export default {
       }
     },
     disableTransitionOneTick () {
-      const firstHandle = this.$refs.firstHandle
+      const firstHandle = this.firstHandleRef
       if (firstHandle) {
         firstHandle.style.transition = 'none'
         this.$nextTick(() => {
-          if (this.$refs.firstHandle) {
-            this.$refs.firstHandle.style.transition = null
+          if (this.firstHandleRef) {
+            this.firstHandleRef.style.transition = null
           }
         })
       }
-      const secondHandle = this.$refs.secondHandle
+      const secondHandle = this.secondHandleRef
       if (secondHandle) {
         secondHandle.style.transition = 'none'
         this.$nextTick(() => {
-          if (this.$refs.secondHandle) {
-            this.$refs.secondHandle.style.transition = null
+          if (this.secondHandleRef) {
+            this.secondHandleRef.style.transition = null
           }
         })
       }
