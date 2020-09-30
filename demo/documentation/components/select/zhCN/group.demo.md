@@ -3,7 +3,7 @@
 ```html
 <n-select
   filterable
-  v-model=value
+  v-model:value=value
   :options='options'
 />
 ```

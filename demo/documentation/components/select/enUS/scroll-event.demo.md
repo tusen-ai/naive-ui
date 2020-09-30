@@ -2,7 +2,7 @@
 My colleague said he want use scroll status to async load options.
 ```html
 <n-select
-  v-model="value"
+  v-model:value="value"
   :options="options"
   @scroll="handleScroll"
 />

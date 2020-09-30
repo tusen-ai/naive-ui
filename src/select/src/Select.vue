@@ -1,6 +1,5 @@
 <template>
   <div
-    ref="select"
     class="n-select"
     :class="{
       [`n-select--${syntheticSize}-size`]: true,
@@ -17,9 +16,9 @@
     @keyup.esc="handleKeyUpEsc"
   >
     <n-base-selection
-      ref="activator"
+      ref="triggerRef"
       class="n-select-selection"
-      :active="active"
+      :active="show"
       :pattern="pattern"
       :placeholder="localizedPlaceholder"
       :selected-option="selectedOption"
@@ -33,78 +32,100 @@
       :theme="syntheticTheme"
       :loading="loading"
       :autofocus="autofocus"
-      @click="handleActivatorClick"
+      @click="handleTriggerClick"
       @delete-last-option="handleDeleteLastOption"
       @delete-option="handleToggleOption"
       @pattern-input="handlePatternInput"
       @clear="handleClear"
-      @blur="handleActivatorBlur"
-      @focus="handleActivatorFocus"
+      @blur="handleTriggerBlur"
+      @focus="handleTriggerFocus"
     />
-    <div
-      ref="contentContainer"
-      class="n-positioning-container"
-      :class="{
-        [namespace]: namespace
-      }"
+    <n-lazy-teleport
+      :show="show"
     >
       <div
-        ref="content"
-        class="n-positioning-content"
+        ref="offsetContainerRef"
+        v-zindexable="{
+          enabled: show
+        }"
+        class="n-positioning-container"
+        :class="{
+          [namespace]: namespace
+        }"
       >
-        <transition
-          name="n-fade-in-scale-up-transition"
-          @after-leave="handleMenuAfterLeave"
+        <div
+          ref="trackingRef"
+          class="n-positioning-content"
         >
-          <n-base-select-menu
-            v-if="active"
-            ref="contentInner"
-            v-clickoutside="handleMenuClickOutside"
-            class="n-select-menu"
-            auto-pending-first-option
-            :theme="syntheticTheme"
-            :pattern="pattern"
-            :options="filteredOptions"
-            :multiple="multiple"
-            :size="syntheticSize"
-            :filterable="filterable"
-            :is-option-selected="isOptionSelected"
-            @menu-toggle-option="handleToggleOption"
-            @menu-scroll="handleMenuScroll"
-            @menu-visible="handleMenuVisible"
+          <transition
+            name="n-fade-in-scale-up-transition"
+            :appear="isMounted"
+            @after-leave="handleMenuAfterLeave"
           >
-            <template v-if="$slots.empty" v-slot:empty>
-              <slot name="empty" />
-            </template>
-            <template v-if="$slots.unmatch" v-slot:unmatch>
-              <slot name="unmatch" />
-            </template>
-            <template v-if="$slots.action" v-slot:action>
-              <slot name="action" />
-            </template>
-          </n-base-select-menu>
-        </transition>
+            <n-base-select-menu
+              v-if="show"
+              ref="menuRef"
+              v-clickoutside="handleMenuClickOutside"
+              class="n-select-menu"
+              auto-pending-first-option
+              :theme="syntheticTheme"
+              :pattern="pattern"
+              :options="filteredOptions"
+              :multiple="multiple"
+              :size="syntheticSize"
+              :filterable="filterable"
+              :is-option-selected="isOptionSelected"
+              @menu-toggle-option="handleToggleOption"
+              @menu-scroll="handleMenuScroll"
+              @menu-visible="handleMenuVisible"
+            >
+              <template v-if="$slots.empty" v-slot:empty>
+                <slot name="empty" />
+              </template>
+              <template v-if="$slots.unmatch" v-slot:unmatch>
+                <slot name="unmatch" />
+              </template>
+              <template v-if="$slots.action" v-slot:action>
+                <slot name="action" />
+              </template>
+            </n-base-select-menu>
+          </transition>
+        </div>
       </div>
-    </div>
+    </n-lazy-teleport>
   </div>
 </template>
 
 <script>
-import detachable from '../../_mixins/detachable'
-import placeable from '../../_mixins/placeable'
-import zindexable from '../../_mixins/zindexable'
-import clickoutside from '../../_directives/clickoutside'
-import NBaseSelectMenu from '../../_base/select-menu'
+import { ref } from 'vue'
+import {
+  configurable,
+  placeable,
+  themeable,
+  asformitem,
+  locale,
+  usecssr
+} from '../../_mixins'
+import {
+  clickoutside,
+  zindexable
+} from '../../_directives'
 import {
   filterOptions,
   valueToOptionMap
 } from '../../_utils/component/select'
+import {
+  useIsMounted
+} from '../../_utils/composition'
+import {
+  warn
+} from '../../_utils/naive'
+import {
+  call
+} from '../../_utils/vue'
+import NBaseSelectMenu from '../../_base/select-menu'
 import NBaseSelection from '../../_base/selection'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import asformitem from '../../_mixins/asformitem'
-import locale from '../../_mixins/locale'
-import usecssr from '../../_mixins/usecssr'
+import NLazyTeleport from '../../_base/lazy-teleport'
 import styles from './styles/index.js'
 
 function patternMatched (pattern, value) {
@@ -119,25 +140,21 @@ export default {
   name: 'Select',
   components: {
     NBaseSelectMenu,
-    NBaseSelection
+    NBaseSelection,
+    NLazyTeleport
   },
   directives: {
-    clickoutside
+    clickoutside,
+    zindexable
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
-    detachable,
     placeable,
-    zindexable,
     locale('Select'),
     asformitem(),
     usecssr(styles)
   ],
-  model: {
-    prop: 'value',
-    event: 'change'
-  },
   provide () {
     return {
       NSelect: this
@@ -158,7 +175,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: null
+      default: undefined
     },
     multiple: {
       type: Boolean,
@@ -168,7 +185,7 @@ export default {
       validator (value) {
         return ['small', 'medium', 'large'].includes(value)
       },
-      default: null
+      default: undefined
     },
     filterable: {
       type: Boolean,
@@ -181,10 +198,6 @@ export default {
     remote: {
       type: Boolean,
       default: false
-    },
-    onSearch: {
-      type: Function,
-      default: () => {}
     },
     loading: {
       type: Boolean,
@@ -208,7 +221,7 @@ export default {
     },
     widthMode: {
       type: String,
-      default: 'activator'
+      default: 'trigger'
     },
     tag: {
       type: Boolean,
@@ -223,18 +236,50 @@ export default {
     },
     fallbackOption: {
       type: [ Function, Boolean ],
-      default: value => ({
+      default: () => value => ({
         label: '' + value,
         value
       })
     },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:value': {
+      type: [Function, Array],
+      default: undefined
+    },
+    onBlur: {
+      type: [Function, Array],
+      default: undefined
+    },
+    onFocus: {
+      type: [Function, Array],
+      default: undefined
+    },
+    onScroll: {
+      type: [Function, Array],
+      default: undefined
+    },
+    onSearch: {
+      type: [Function, Array],
+      default: undefined
+    },
+    // private
     debug: {
       type: Boolean,
       default: false
     },
     /** deprecated */
+    onChange: {
+      validator () {
+        if (__DEV__) warn('select', '`on-change` is deprecated, please use `on-update:value` instead.')
+        return true
+      },
+      default: undefined
+    },
     items: {
-      type: Array,
+      validator () {
+        if (__DEV__) warn('select', '`items` is deprecated, please use `options` instead.')
+        return true
+      },
       default: undefined
     },
     autofocus: {
@@ -242,9 +287,18 @@ export default {
       default: false
     }
   },
+  setup () {
+    return {
+      isMounted: useIsMounted(),
+      offsetContainerRef: ref(null),
+      triggerRef: ref(null),
+      trackingRef: ref(null),
+      menuRef: ref(null)
+    }
+  },
   data () {
     return {
-      active: false,
+      show: false,
       scrolling: false,
       pattern: '',
       memorizedValueToOptionMap: new Map(),
@@ -253,8 +307,11 @@ export default {
     }
   },
   computed: {
+    __placeableEnabled () {
+      return this.show
+    },
     localizedPlaceholder () {
-      if (this.placeholder !== null) {
+      if (this.placeholder !== undefined) {
         return this.placeholder
       }
       return this.localeNamespace.placeholder
@@ -325,21 +382,73 @@ export default {
       this.updateMemorizedOptions()
     },
     filteredOptions () {
-      this.$nextTick().then(this.updatePosition)
+      this.$nextTick(this.__placeableSyncPosition)
     },
     value () {
-      this.$nextTick().then(this.updatePosition)
+      this.$nextTick(this.__placeableSyncPosition)
     }
   },
   created () {
     this.updateMemorizedOptions()
   },
   methods: {
+    __placeableOffsetContainer () {
+      return this.offsetContainerRef
+    },
+    __placeableTracked () {
+      return this.triggerRef
+    },
+    __placeableTracking () {
+      return this.trackingRef
+    },
+    __placeableBody () {
+      return this.menuRef
+    },
+    doUpdateValue (value) {
+      const {
+        onChange,
+        'onUpdate:value': onUpdateValue,
+        __triggerFormChange,
+        __triggerFormInput
+      } = this
+      if (onChange) call(onChange, value)
+      if (onUpdateValue) call(onUpdateValue, value)
+      __triggerFormChange()
+      __triggerFormInput()
+    },
+    doBlur (value) {
+      const {
+        onBlur,
+        __triggerFormBlur
+      } = this
+      if (onBlur) call(onBlur, value)
+      __triggerFormBlur()
+    },
+    doFocus (value) {
+      const {
+        onFocus,
+        __triggerFormFocus
+      } = this
+      if (onFocus) call(onFocus, value)
+      __triggerFormFocus()
+    },
+    doSearch (value) {
+      const {
+        onSearch
+      } = this
+      if (onSearch) call(onSearch, value)
+    },
+    doScroll (...args) {
+      const {
+        onScroll
+      } = this
+      if (onScroll) call(onScroll, ...args)
+    },
     activate () {
-      this.active = true
+      this.show = true
     },
     deactivate () {
-      this.active = false
+      this.show = false
     },
     /**
      * remote related methods
@@ -369,7 +478,7 @@ export default {
         this.pattern = ''
         this.activate()
         if (this.filterable) {
-          this.$refs.activator.focusPatternInput()
+          this.triggerRef.focusPatternInput()
         }
       }
     },
@@ -379,9 +488,9 @@ export default {
     handleMenuAfterLeave () {
       this.pattern = ''
     },
-    handleActivatorClick () {
+    handleTriggerClick () {
       if (this.disabled) return
-      if (!this.active) {
+      if (!this.show) {
         this.openMenu()
       } else {
         if (!this.filterable) {
@@ -389,19 +498,19 @@ export default {
         }
       }
     },
-    handleActivatorBlur () {
-      this.$emit('blur')
-      if (process.env.NODE_ENV === 'development') {
+    handleTriggerBlur () {
+      this.doBlur()
+      if (__DEV__) {
         if (this.debug) return
       }
       this.closeMenu()
     },
-    handleActivatorFocus () {
-      this.$emit('focus')
+    handleTriggerFocus () {
+      this.doFocus()
     },
     handleMenuClickOutside (e) {
-      if (this.active) {
-        if (!this.$refs.activator.$el.contains(e.target) && !this.scrolling) {
+      if (this.show) {
+        if (!this.triggerRef.$el.contains(e.target) && !this.scrolling) {
           this.closeMenu()
         }
       }
@@ -493,7 +602,7 @@ export default {
           changedValue.push(option.value)
           this.pattern = ''
         }
-        this.$emit('change', changedValue)
+        this.doUpdateValue(changedValue)
       } else {
         if (tag && !remote) {
           const createdOptionIndex = this.getCreatedOptionIndex(option.value)
@@ -507,7 +616,7 @@ export default {
           this.returnFocusToWrapper()
         }
         this.closeMenu()
-        this.$emit('change', option.value)
+        this.doUpdateValue(option.value)
       }
     },
     handleDeleteLastOption (e) {
@@ -517,7 +626,7 @@ export default {
           const popedValue = changedValue.pop()
           const createdOptionIndex = this.getCreatedOptionIndex(popedValue)
           ~createdOptionIndex && this.createdOptions.splice(createdOptionIndex, 1)
-          this.$emit('change', changedValue)
+          this.doUpdateValue(changedValue)
         }
       }
     },
@@ -533,7 +642,7 @@ export default {
       const onSearch = this.onSearch
       if (onSearch) {
         onSearch(value)
-        this.$emit('search', value)
+        this.doSearch(value)
       }
       if (this.tag && !this.remote) {
         if (!value) {
@@ -561,27 +670,27 @@ export default {
         this.closeMenu()
       }
       if (this.multiple) {
-        this.$emit('change', [])
+        this.doUpdateValue([])
       } else {
-        this.$emit('change', null)
+        this.doUpdateValue(null)
       }
     },
     handleMenuVisible () {
-      this.updatePosition()
+      this.__placeableSyncPosition()
     },
     /**
      * scroll events on menu
      */
     handleMenuScroll (e, scrollContainer, scrollContent) {
-      this.$emit('scroll', e, scrollContainer, scrollContent)
+      this.doScroll(e, scrollContainer, scrollContent)
     },
     /**
      * keyboard events
      */
     handleKeyUpEnter (e) {
-      if (this.active) {
-        const contentInner = this.$refs.contentInner
-        const pendingOptionData = contentInner && contentInner.getPendingOptionData()
+      if (this.show) {
+        const menu = this.menuRef
+        const pendingOptionData = menu && menu.getPendingOptionData()
         if (pendingOptionData) {
           this.handleToggleOption(pendingOptionData)
         } else {
@@ -600,14 +709,14 @@ export default {
     },
     handleKeyUpUp () {
       if (this.loading) return
-      if (this.active) {
-        this.$refs.contentInner.prev()
+      if (this.show) {
+        this.menuRef.prev()
       }
     },
     handleKeyUpDown () {
       if (this.loading) return
-      if (this.active) {
-        this.$refs.contentInner.next()
+      if (this.show) {
+        this.menuRef.next()
       }
     },
     handleKeyDownSpace (e) {
@@ -617,10 +726,10 @@ export default {
     },
     handleKeyUpEsc (e) {
       this.closeMenu()
-      this.$refs.activator.focusPatternInputWrapper()
+      this.triggerRef.focusPatternInputWrapper()
     },
     returnFocusToWrapper () {
-      this.$refs.activator.focusPatternInputWrapper()
+      this.triggerRef.focusPatternInputWrapper()
     }
   }
 }

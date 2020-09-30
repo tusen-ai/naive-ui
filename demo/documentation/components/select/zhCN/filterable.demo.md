@@ -2,13 +2,13 @@
 上吧！过滤器。
 ```html
 <n-select
-  v-model="selectedValue"
+  v-model:value="selectedValue"
   filterable
   placeholder="选择歌曲"
   :options="options"
 />
 <n-select
-  v-model="selectedValues"
+  v-model:value="selectedValues"
   multiple
   filterable
   placeholder="选择歌曲"

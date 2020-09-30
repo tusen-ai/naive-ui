@@ -2,11 +2,11 @@
 选择器的基础用法。
 ```html
 <n-select
-  v-model="value"
+  v-model:value="value"
   :options="options"
 />
 <n-select
-  v-model="value"
+  v-model:value="value"
   disabled
   :options="options"
 />

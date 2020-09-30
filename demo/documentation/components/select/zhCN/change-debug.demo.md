@@ -1,14 +1,14 @@
 # Change Debug
 ```html
 <n-select
-  v-model="node"
+  v-model:value="node"
   :options="[{label: 'a', value: 'a'},{label: 'b', value: 'b'},{label: 'c', value: 'c'}]"
   clearable
   filterable
   :disabled="!editable"
   placeholder="Please Select"
   multiple
-  @change="nodeChange"
+  @update:value="nodeChange"
 />
 ```
 

@@ -2,7 +2,7 @@
 Is there anybody needs action slot on select menu?
 ```html
 <n-select
-  v-model="value"
+  v-model:value="value"
   :options="options"
 >
   <template v-slot:action>

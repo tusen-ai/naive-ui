@@ -2,11 +2,11 @@
 Basic usage for select
 ```html
 <n-select
-  v-model="value"
+  v-model:value="value"
   :options="options"
 />
 <n-select
-  v-model="value"
+  v-model:value="value"
   disabled
   :options="options"
 />

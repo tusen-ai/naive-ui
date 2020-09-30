@@ -2,7 +2,7 @@
 After a long time of consideration, I decide to drop slot API. However, there is still a way to render options as you like. (The example uses render functions, but you can also use the `style` or `class` prop on an `option`.)
 ```html
 <n-select
-  v-model="value"
+  v-model:value="value"
   :options="options"
 />
 ```

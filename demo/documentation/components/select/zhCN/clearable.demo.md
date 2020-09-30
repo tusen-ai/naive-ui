@@ -2,24 +2,24 @@
 注意只有选了值才能清空值。
 ```html
 <n-select
-  v-model="selectedValue"
+  v-model:value="selectedValue"
   :options="options"
   clearable
 />
 <n-select
-  v-model="selectedArray"
+  v-model:value="selectedArray"
   multiple
   :options="options"
   clearable
 />
 <n-select
-  v-model="selectedValue"
+  v-model:value="selectedValue"
   :options="options"
   filterable
   clearable
 />
 <n-select
-  v-model="selectedArray"
+  v-model:value="selectedArray"
   multiple
   :options="options"
   filterable

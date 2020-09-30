@@ -2,12 +2,12 @@
 1000 倍宇宙的终极答案个数的选项。
 ```html
 <n-select
-  v-model="value"
+  v-model:value="value"
   :options="options"
 />
 <n-select
   multiple
-  v-model="values"
+  v-model:value="values"
   :options="options"
 />
 ```

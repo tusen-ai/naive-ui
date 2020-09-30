@@ -2,12 +2,12 @@
 多选值。
 ```html
 <n-select
-  v-model="value"
+  v-model:value="value"
   multiple
   :options="options"
 />
 <n-select
-  v-model="value"
+  v-model:value="value"
   multiple
   disabled
   :options="options"

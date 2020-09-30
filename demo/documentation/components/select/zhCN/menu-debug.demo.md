@@ -2,22 +2,22 @@
 ```html
 <n-select
   debug
-  v-model="value"
+  v-model:value="value"
   :options="options"
 />
 <n-select
-  v-model="value"
+  v-model:value="value"
   disabled
   :options="options"
 />
 <n-select
   debug
-  v-model="value1"
+  v-model:value="value1"
   multiple
   :options="options"
 />
 <n-select
-  v-model="value1"
+  v-model:value="value1"
   multiple
   disabled
   :options="options"

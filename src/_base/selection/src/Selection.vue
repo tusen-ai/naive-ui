@@ -262,6 +262,34 @@ export default {
     autofocus: {
       type: Boolean,
       default: false
+    },
+    onBlur: {
+      type: Function,
+      default: undefined
+    },
+    onFocus: {
+      type: Function,
+      default: undefined
+    },
+    onDeleteOption: {
+      type: Function,
+      default: undefined
+    },
+    onDeleteLastOption: {
+      type: Function,
+      default: undefined
+    },
+    onClear: {
+      type: Function,
+      default: undefined
+    },
+    onClick: {
+      type: Function,
+      default: undefined
+    },
+    onPatternInput: {
+      type: Function,
+      default: undefined
     }
   },
   data () {
@@ -305,9 +333,37 @@ export default {
     }
   },
   methods: {
+    doFocus (value) {
+      const { onFocus } = this
+      if (onFocus) onFocus(value)
+    },
+    doBlur (value) {
+      const { onBlur } = this
+      if (onBlur) onBlur(value)
+    },
+    doDeleteOption (value) {
+      const { onDeleteOption } = this
+      if (onDeleteOption) onDeleteOption(value)
+    },
+    doDeleteLastOption (value) {
+      const { onDeleteLastOption } = this
+      if (onDeleteLastOption) onDeleteLastOption(value)
+    },
+    doClear (value) {
+      const { onClear } = this
+      if (onClear) onClear(value)
+    },
+    doClick (value) {
+      const { onClick } = this
+      if (onClick) onClick(value)
+    },
+    doPatternInput (value) {
+      const { onPatternInput } = this
+      if (onPatternInput) onPatternInput(value)
+    },
     handleFocusin (e) {
       if (!e.relatedTarget || !this.$el.contains(e.relatedTarget)) {
-        this.$emit('focus')
+        this.doFocus()
       }
     },
     handleBlur (e) {
@@ -323,10 +379,10 @@ export default {
       //   )
       // }
       if (e.relatedTarget && this.$el.contains(e.relatedTarget)) return
-      this.$emit('blur')
+      this.doBlur()
     },
     handleClear (e) {
-      this.$emit('clear', e)
+      this.doClear(e)
     },
     handleMouseEnter () {
       this.hover = true
@@ -347,14 +403,14 @@ export default {
       }
     },
     handleClick () {
-      this.$emit('click')
+      this.doClick()
     },
     handleDeleteOption (option) {
-      this.$emit('delete-option', option)
+      this.doDeleteOption(option)
     },
     handlePatternKeyDownDelete (option) {
       if (!this.pattern.length) {
-        this.$emit('delete-last-option')
+        this.doDeleteLastOption()
       }
     },
     handlePatternInputInput (e) {
@@ -363,10 +419,10 @@ export default {
           const refs = this.$refs
           const textWidth = refs.patternInputMirror.offsetWidth
           refs.patternInput.style.width = textWidth + 'px'
-          this.$emit('pattern-input', e)
+          this.doPatternInput(e)
         })
       } else {
-        this.$emit('pattern-input', e)
+        this.doPatternInput(e)
       }
     },
     handlePatternInputFocus (e) {

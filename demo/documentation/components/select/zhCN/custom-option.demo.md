@@ -2,7 +2,7 @@
 经过了很久的思考，我决定放弃支持 slot API。当然，还是提供自定义渲染选项的方式。(例子中是渲染函数，但是你可以直接使用 `option` 的 `style` 或 `class` 选项)
 ```html
 <n-select
-  v-model="value"
+  v-model:value="value"
   :options="options"
 />
 ```

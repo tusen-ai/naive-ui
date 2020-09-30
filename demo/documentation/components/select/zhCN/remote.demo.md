@@ -2,7 +2,7 @@
 异步单选的例子。
 ```html
 <n-select
-  v-model="value"
+  v-model:value="value"
   filterable
   placeholder="搜索歌曲"
   :options="options"

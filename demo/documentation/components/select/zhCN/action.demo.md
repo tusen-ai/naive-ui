@@ -2,7 +2,7 @@
 有人要在选择菜单里用这个插槽吗？
 ```html
 <n-select
-  v-model="value"
+  v-model:value="value"
   :options="options"
 >
   <template v-slot:action>

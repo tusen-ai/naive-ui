@@ -2,14 +2,14 @@
 Use `tag` & `filterable` to create option dynamically.
 ```html
 <n-select
-  v-model="multipleSelectValue"
+  v-model:value="multipleSelectValue"
   filterable
   multiple
   tag
   :options="options"
 />
 <n-select
-  v-model="selectValue"
+  v-model:value="selectValue"
   filterable
   tag
   :options="options"

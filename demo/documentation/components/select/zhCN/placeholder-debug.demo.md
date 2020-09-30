@@ -1,14 +1,14 @@
 # Placehoder Debug
 ```html
 <n-select
-  v-model="value2"
+  v-model:value="value2"
   placeholder=""
   :options="options"
   style="width:200px;"
 />
 
 <n-select
-  v-model="value3"
+  v-model:value="value3"
   multiple
   placeholder=""
   :options="options"

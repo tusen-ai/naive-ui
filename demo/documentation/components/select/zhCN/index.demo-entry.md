@@ -21,20 +21,15 @@ change-debug
 placeholder-debug
 menu-debug
 ```
-## V-model
-|prop|event|
-|-|-|
-|value|change|
 
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |clearable|`boolean`|`false`||
-|debug|`boolean`|`false`|如果打开，`blur` 事件不会导致菜单关闭，方便你查看菜单的 DOM。它只会在 `process.env.NODE_ENV` 为 `'development'` 的时候生效|
 |disabled|`boolean`|`false`||
 |fallback-option|`false \| (value: string \| number) => SelectOption`|`value => ({ label: '' + value, value })`|在传入的选项中没有对应当前值的选项时，这个值应该对应的选项。如果设为 `false`，不会为找不到对应选项的值生成回退选项也不会显示它，未在选项中的值会被视为不合法，操作过程中会被组件清除掉|
-|filter|`(pattern: string, option: Object) => boolean`|一个简单的字符串搜索算法||
 |filterable|`boolean`|`false`|是否可以过滤|
+|filter|`(pattern: string, option: Object) => boolean`|一个简单的字符串搜索算法||
 |loading|`boolean`|`false`||
 |multiple|`boolean`|`false`||
 |on-create|`(label: string) => SelectOption`|`label => ({ label, value: label })`|在输入内容时如何创建一个选项。注意 `filter` 对这个生成的选项同样会生效。同时确保这个选项和其他选项的 `value` 不要有重复|
@@ -45,7 +40,11 @@ menu-debug
 |tag|`boolean`|`false`|是否可以创建新的选项，需要和 `filterable` 一起使用|
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 |value|`Array<string \| number> \| string \| number`|`false`||
-|autofocus|`boolean`|`false`||
+|on-blur|`() => any`|选择器 Blur 时发出|
+|on-focus|`() => any`|选择器 Focus 时发出|
+|on-scroll|`(e: ScrollEvent) => any`|选择菜单在滚动|
+|on-search|`(value: string) => any`||
+|on-update:value|`(value: Array \| string \| number \| null) => any`||
 
 ### SelectOption Properties
 |名称|类型|说明|
@@ -69,11 +68,4 @@ menu-debug
 |-|-|-|
 |action|`()`||
 
-## Event
-|名称|参数|说明|
-|-|-|-|
-|blur|`()`|选择器 Blur 时发出|
-|change|`(value: Array \| string \| number \| null)`||
-|scroll|`(e: Event)`|选择菜单在滚动|
-|search|`(value: string)`||
 

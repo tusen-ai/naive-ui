@@ -2,17 +2,17 @@
 为什么 change 事件还是个例子？因为一开始的时候没什么可写的。
 ```html
 <n-select
-  v-model="selectedValue"
+  v-model:value="selectedValue"
   placeholder="选择歌曲"
   :options="options"
-  @change="handleChange"
+  @update:value="handleChange"
 />
 <n-select
-  v-model="selectedArray"
+  v-model:value="selectedArray"
   multiple
   placeholder="选择歌曲"
   :options="options"
-  @change="handleChange"
+  @update:value="handleChange"
 />
 ```
 ```js

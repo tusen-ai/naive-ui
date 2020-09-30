@@ -2,7 +2,7 @@
 Async example for multiple select.
 ```html
 <n-select
-  v-model="selectedValues"
+  v-model:value="selectedValues"
   multiple
   filterable
   placeholder="Search Songs"

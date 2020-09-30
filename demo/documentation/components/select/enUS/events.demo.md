@@ -2,17 +2,17 @@
 Why change event is an example? Because at first there isn't much to write.
 ```html
 <n-select
-  v-model="selectedValue"
+  v-model:value="selectedValue"
   placeholder="Please Select a Song"
   :options="options"
-  @change="handleChange"
+  @update:value="handleChange"
 />
 <n-select
-  v-model="selectedArray"
+  v-model:value="selectedArray"
   multiple
   placeholder="Please Select Songs"
   :options="options"
-  @change="handleChange"
+  @update:value="handleChange"
 />
 ```
 ```js

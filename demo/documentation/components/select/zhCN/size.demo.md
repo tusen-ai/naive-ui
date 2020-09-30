@@ -3,17 +3,17 @@
 
 ```html
 <n-select
-  v-model="value"
+  v-model:value="value"
   size="small"
   :options="options"
 />
 <n-select
-  v-model="value"
+  v-model:value="value"
   size="medium"
   :options="options"
 />
 <n-select
-  v-model="value"
+  v-model:value="value"
   size="large"
   :options="options"
 />

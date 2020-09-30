@@ -2,13 +2,13 @@
 Go go go, Filter.
 ```html
 <n-select
-  v-model="selectedValue"
+  v-model:value="selectedValue"
   filterable
   placeholder="Please Select a Song"
   :options="options"
 />
 <n-select
-  v-model="selectedValues"
+  v-model:value="selectedValues"
   multiple
   filterable
   placeholder="Please Select Songs"

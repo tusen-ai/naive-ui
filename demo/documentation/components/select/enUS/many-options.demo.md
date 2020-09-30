@@ -2,12 +2,12 @@
 1000 times of the ultimate answer.
 ```html
 <n-select
-  v-model="value"
+  v-model:value="value"
   :options="options"
 />
 <n-select
   multiple
-  v-model="values"
+  v-model:value="values"
   :options="options"
 />
 ```

@@ -2,7 +2,7 @@
 同事说要用这个来触发做异步加载。
 ```html
 <n-select
-  v-model="value"
+  v-model:value="value"
   :options="options"
   @scroll="handleScroll"
 />

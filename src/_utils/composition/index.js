@@ -12,9 +12,10 @@ import {
 
 export function useFalseUntilTruthy (valueRef) {
   const bindValueRef = ref(!!valueRef.value)
-  watch(valueRef, value => {
+  const stop = watch(valueRef, value => {
     if (value) {
       bindValueRef.value = true
+      stop()
     }
   })
   return bindValueRef

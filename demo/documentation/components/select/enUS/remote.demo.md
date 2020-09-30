@@ -2,7 +2,7 @@
 Async example for single select.
 ```html
 <n-select
-  v-model="value"
+  v-model:value="value"
   filterable
   placeholder="Search Songs"
   :options="options"
