@@ -3,7 +3,7 @@
     <n-checkbox
       :theme="NTree.syntheticTheme"
       :checked="value"
-      @change="handleChange"
+      @update:value="handleUpdateValue"
     />
   </span>
 </template>
@@ -25,11 +25,21 @@ export default {
     value: {
       type: Boolean,
       default: false
+    },
+    onCheck: {
+      type: Function,
+      default: undefined
     }
   },
   methods: {
-    handleChange (value) {
-      this.$emit('check', value)
+    doCheck (value) {
+      const {
+        onCheck
+      } = this
+      if (onCheck) return onCheck(value)
+    },
+    handleUpdateValue (value) {
+      this.doCheck(value)
     }
   }
 }

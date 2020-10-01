@@ -47,11 +47,19 @@ export default {
     loading: {
       type: Boolean,
       default: false
+    },
+    onClick: {
+      type: Function,
+      default: undefined
     }
   },
   methods: {
+    doClick () {
+      const { onClick } = this
+      if (onClick) onClick()
+    },
     handleClick () {
-      this.$emit('click')
+      this.doClick()
     }
   }
 }

@@ -222,6 +222,12 @@ placeable 进行了大调整
 - [x] tooltip
   - ref
 - [ ] transfer
-- [ ] tree
+- [x] tree
+  - break
+    - `v-model` => `v-model:selected-keys`
+  - deprecate
+    - `on-selected-keys-change` => `on-update:selected-keys`
+    - `on-checked-keys-change` => `on-update:checked-keys`
+    - `on-expanded-keys-change` => `on-update:expanded-keys`
 - [x] typography
 - [x] upload

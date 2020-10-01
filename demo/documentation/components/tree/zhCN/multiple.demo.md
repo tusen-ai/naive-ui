@@ -11,7 +11,7 @@
   multiple
   block-node
   :data="data"
-  v-model="value"
+  v-model:selected-keys="value"
 />
 ```
 ```js

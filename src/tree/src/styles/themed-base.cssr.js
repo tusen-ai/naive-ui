@@ -29,6 +29,13 @@ export default c([
             list-style: none;
           `
         }),
+        c('>', [
+          cB('tree-node', [
+            c('&:first-child', {
+              paddingTop: 0
+            })
+          ])
+        ]),
         cB('tree-children-wrapper', {
           raw: `
             margin-left: 16px;
@@ -38,20 +45,9 @@ export default c([
         ]),
         cB('tree-node', {
           raw: `
-            padding: 3px 0 3px 0;
+            padding: 6px 0 0 0;
           `
-        }, [
-          c('&:first-child', {
-            raw: `
-              padding-top: 6px;
-            `
-          }),
-          c('&:last-child', {
-            raw: `
-              padding-top: 6px;
-            `
-          })
-        ]),
+        }),
         cB('tree-node-switcher', {
           raw: `
             cursor: pointer;

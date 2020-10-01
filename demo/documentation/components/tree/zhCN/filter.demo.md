@@ -1,7 +1,7 @@
 # 搜索
 树接受 `pattern` 和 `filter` 来完成搜索。
 ```html
-<n-input v-model="pattern" placeholder="搜索" />
+<n-input v-model:value="pattern" placeholder="搜索" />
 <n-tree
   :pattern="pattern"
   :data="data"

@@ -49,6 +49,34 @@ export default {
     highlight: {
       type: Boolean,
       default: false
+    },
+    onClick: {
+      type: Function,
+      default: undefined
+    },
+    onDragStart: {
+      type: Function,
+      default: undefined
+    },
+    onDragEnd: {
+      type: Function,
+      default: undefined
+    },
+    onDragEnter: {
+      type: Function,
+      default: undefined
+    },
+    onDragOver: {
+      type: Function,
+      default: undefined
+    },
+    onDragLeave: {
+      type: Function,
+      default: undefined
+    },
+    onDrop: {
+      type: Function,
+      default: undefined
     }
   },
   data () {
@@ -58,15 +86,43 @@ export default {
     }
   },
   methods: {
+    doClick () {
+      const { onClick } = this
+      if (onClick) onClick()
+    },
+    doDragStart (e) {
+      const { onDragStart } = this
+      if (onDragStart) onDragStart(e)
+    },
+    doDragEnter (e) {
+      const { onDragEnter } = this
+      if (onDragEnter) onDragEnter(e)
+    },
+    doDragEnd (e) {
+      const { onDragEnd } = this
+      if (onDragEnd) onDragEnd(e)
+    },
+    doDragLeave (e) {
+      const { onDragLeave } = this
+      if (onDragLeave) onDragLeave(e)
+    },
+    doDragOver (e) {
+      const { onDragOver } = this
+      if (onDragOver) onDragOver(e)
+    },
+    doDrop (e, dropPosition) {
+      const { onDrop } = this
+      if (onDrop) onDrop(e, dropPosition)
+    },
     handleClick () {
-      this.$emit('click')
+      this.doClick()
     },
     handleContentDragStart (e) {
-      this.$emit('dragstart', e)
+      this.doDragStart(e)
     },
     handleContentDragEnter (e) {
       if (e.currentTarget && e.relatedTarget && e.currentTarget.contains(e.relatedTarget)) return
-      this.$emit('dragenter')
+      this.doDragEnter(e)
     },
     handleDragOverContent (e) {
       e.preventDefault()
@@ -82,15 +138,15 @@ export default {
       } else {
         this.pendingPosition = 'body'
       }
-      this.$emit('dragover')
+      this.doDragOver(e)
     },
     handleContentDragEnd (e) {
-      this.$emit('dragend')
+      this.doDragEnd(e)
     },
     handleContentDragLeave (e) {
       if (e.currentTarget && e.relatedTarget && e.currentTarget.contains(e.relatedTarget)) return
       this.pending = false
-      this.$emit('dragleave')
+      this.doDragLeave(e)
     },
     handleContentDrop (e) {
       e.preventDefault()
@@ -100,7 +156,7 @@ export default {
         bottom: 'bottom',
         body: 'center'
       })[this.pendingPosition]
-      this.$emit('drop', e, dropPosition)
+      this.doDrop(e, dropPosition)
     }
   }
 }

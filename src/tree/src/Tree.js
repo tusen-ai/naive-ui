@@ -1,71 +1,24 @@
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
+import {
+  h
+} from 'vue'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
 import NTreeNode from './TreeNode'
-import NFadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
 import { isLeaf, isLoaded, getAllKeys, keysWithFilter } from './utils'
-import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
-
-function createNode (node, h, treeInstance) {
-  const listeners = {
-    'switcher-click': treeInstance.handleSwitcherClick,
-    select: treeInstance.handleSelect,
-    dragenter: treeInstance.handleDragEnter,
-    dragstart: treeInstance.handleDragStart,
-    dragleave: treeInstance.handleDragLeave,
-    dragend: treeInstance.handleDragEnd,
-    drop: treeInstance.handleDrop,
-    check: treeInstance.handleCheck
-  }
-  const expanded = treeInstance.syntheticExpandedKeys.includes(node.key)
-  const props = {
-    data: node,
-    expanded,
-    selected: treeInstance.syntheticSelectedKeys.includes(node.key),
-    draggable: treeInstance.draggable,
-    checkable: treeInstance.checkable,
-    drop: treeInstance.drop,
-    blockNode: treeInstance.blockNode,
-    checked: treeInstance.syntheticCheckedKeys.includes(node.key)
-  }
-  return h(NTreeNode, {
-    props,
-    on: listeners,
-    key: node.key
-  },
-  [!isLeaf(node)
-    ? h(NFadeInHeightExpandTransition, {
-      props: {
-        transitionDisabled: treeInstance.transitionDisabled
-      }
-    },
-    [
-      expanded && node.children
-        ? h('ul', {
-          staticClass: 'n-tree-children-wrapper'
-        }, node.children.map(child => createNode(child, h, treeInstance)))
-        : null
-    ]
-    )
-    : null]
-  )
-}
-
-function convertOptionsToVNodeTree (options, h, treeInstance) {
-  return options.map(child => createNode(child, h, treeInstance))
-}
+import { call } from '../../_utils/vue'
+import { warn } from '../../_utils/naive'
 
 export default {
   name: 'Tree',
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles)
   ],
-  model: {
-    prop: 'selected-keys',
-    event: 'selected-keys-change'
-  },
   provide () {
     return { NTree: this }
   },
@@ -150,28 +103,72 @@ export default {
     selectable: {
       type: Boolean,
       default: true
-    }
-  },
-  created () {
-    this.internalCheckedKeys = this.defaultCheckedKeys || []
-    this.internalExpandedKeys = this.defaultExpandedKeys || []
-    this.internalSelectedKeys = this.defaultSelectedKeys || []
-    if (this.defaultExpandAll) {
-      this.internalExpandedKeys = getAllKeys(this.data)
-      // console.log('getAllKeys(this.data)', getAllKeys(this.data))
+    },
+    onDragEnter: {
+      type: [Function, Array],
+      default: undefined
+    },
+    onDragLeave: {
+      type: [Function, Array],
+      default: undefined
+    },
+    onDragEnd: {
+      type: [Function, Array],
+      default: undefined
+    },
+    onDragStart: {
+      type: [Function, Array],
+      default: undefined
+    },
+    onDrop: {
+      type: [Function, Array],
+      default: undefined
+    },
+    'onUpdate:expandedKeys': {
+      type: [Function, Array],
+      default: undefined
+    },
+    'onUpdate:checkedKeys': {
+      type: [Function, Array],
+      default: undefined
+    },
+    'onUpdate:selectedKeys': {
+      type: [Function, Array],
+      default: undefined
+    },
+    // deprecated
+    onExpandedKeysChange: {
+      validator () {
+        warn('tree', '`on-expanded-keys-change` is deprecated, please use `on-update:expanded-keys` instead.')
+        return true
+      },
+      default: undefined
+    },
+    onCheckedKeysChange: {
+      validator () {
+        warn('tree', '`on-checked-keys-change` is deprecated, please use `on-checked:expanded-keys` instead.')
+        return true
+      },
+      default: undefined
+    },
+    onSelectedKeysChange: {
+      validator () {
+        warn('tree', '`on-selected-keys-change` is deprecated, please use `on-update:selected-keys` instead.')
+        return true
+      },
+      default: undefined
     }
   },
   data () {
     return {
       treeData: null,
-      internalExpandedKeys: [],
-      internalCheckedKeys: [],
-      internalSelectedKeys: [],
+      internalExpandedKeys: this.defaultExpandAll ? getAllKeys(this.data) : (this.defaultExpandedKeys || []),
+      internalCheckedKeys: this.defaultCheckedKeys || [],
+      internalSelectedKeys: this.defaultSelectedKeys || [],
       draggingNodeKey: null,
       draggingNode: null,
       droppingNodeKey: null,
       expandTimerId: null,
-      transitionDisabled: false,
       highlightKeys: [],
       loadingKeys: []
     }
@@ -195,11 +192,10 @@ export default {
           this.filter
         )
         this.highlightKeys = highlightKeys
-        // console.log(highlightKeys)
         if (!this.hasExpandedKeys) {
           this.internalExpandedKeys = expandedKeysAfterChange
         }
-        this.$emit('expanded-keys-change', expandedKeysAfterChange)
+        this.doExpandedKeysChange(expandedKeysAfterChange)
       } else {
         this.highlightKeys = []
       }
@@ -238,11 +234,49 @@ export default {
     }
   },
   methods: {
-    disableTransition () {
-      this.transitionDisabled = true
+    doExpandedKeysChange (...args) {
+      const {
+        'onUpdate:expandedKeys': onUpdateExpandedKeys,
+        onExpandedKeysChange
+      } = this
+      if (onUpdateExpandedKeys) call(onUpdateExpandedKeys, ...args)
+      if (onExpandedKeysChange) call(onExpandedKeysChange, ...args)
     },
-    enableTransition () {
-      this.transitionDisabled = false
+    doCheckedKeysChange (...args) {
+      const {
+        'onUpdate:checkedKeys': onUpdateCheckedKeys,
+        onCheckedKeysChange
+      } = this
+      if (onUpdateCheckedKeys) call(onUpdateCheckedKeys, ...args)
+      if (onCheckedKeysChange) call(onCheckedKeysChange, ...args)
+    },
+    doSelectedKeysChange (...args) {
+      const {
+        'onUpdate:selectedKeys': onUpdateSelectedKeys,
+        onSelectedKeysChange
+      } = this
+      if (onUpdateSelectedKeys) call(onUpdateSelectedKeys, ...args)
+      if (onSelectedKeysChange) call(onSelectedKeysChange, ...args)
+    },
+    doDragEnter (...args) {
+      const { onDragEnter } = this
+      if (onDragEnter) call(onDragEnter, ...args)
+    },
+    doDragLeave (...args) {
+      const { onDragLeave } = this
+      if (onDragLeave) call(onDragLeave, ...args)
+    },
+    doDragEnd (...args) {
+      const { onDragEnd } = this
+      if (onDragEnd) call(onDragEnd, ...args)
+    },
+    doDragStart (...args) {
+      const { onDragStart } = this
+      if (onDragStart) call(onDragStart, ...args)
+    },
+    doDrop (...args) {
+      const { onDrop } = this
+      if (onDrop) call(onDrop, ...args)
     },
     resetDragStatus () {
       this.draggingNodeKey = null
@@ -253,7 +287,7 @@ export default {
       if (this.disabled || node.disabled) return
       if (checked) {
         if (this.hasCheckedKeys) {
-          this.$emit('checked-keys-change', this.syntheticCheckedKeys.concat([node.key]))
+          this.doCheckedKeysChange(this.syntheticCheckedKeys.concat([node.key]))
         } else {
           this.internalCheckedKeys.push(node.key)
         }
@@ -264,7 +298,7 @@ export default {
             checkedKeysAfterChange.findIndex(key => key === node.key),
             1
           )
-          this.$emit('checked-keys-change', checkedKeysAfterChange)
+          this.doCheckedKeysChange(checkedKeysAfterChange)
         } else {
           this.internalCheckedKeys.splice(
             this.internalCheckedKeys.findIndex(key => key === node.key),
@@ -280,12 +314,11 @@ export default {
       if (~index) {
         if (!this.hasExpandedKeys) {
           this.internalExpandedKeys.splice(index, 1)
-          this.$emit('expanded-keys-change', this.internalExpandedKeys)
+          this.doExpandedKeysChange(this.internalExpandedKeys)
         } else {
           const expandedKeysAfterChange = Array.from(this.syntheticExpandedKeys)
           expandedKeysAfterChange.splice(index, 1)
-          this.$emit(
-            'expanded-keys-change',
+          this.doExpandedKeysChange(
             expandedKeysAfterChange
           )
         }
@@ -293,10 +326,9 @@ export default {
         if (!isLeaf(node)) {
           if (!this.hasExpandedKeys) {
             this.internalExpandedKeys.push(node.key)
-            this.$emit('expanded-keys-change', this.internalExpandedKeys)
+            this.doExpandedKeysChange(this.internalExpandedKeys)
           } else {
-            this.$emit(
-              'expanded-keys-change',
+            this.doExpandedKeysChange(
               this.syntheticExpandedKeys.concat(node.key)
             )
           }
@@ -323,7 +355,7 @@ export default {
           } else if (!~index) {
             selectedKeys.push(node.key)
           }
-          this.$emit('selected-keys-change', selectedKeys)
+          this.doSelectedKeysChange(selectedKeys)
         } else {
           const selectedKeys = this.internalSelectedKeys
           const index = selectedKeys.findIndex(key => key === node.key)
@@ -337,17 +369,17 @@ export default {
           } else {
             selectedKeys.push(node.key)
           }
-          this.$emit('selected-keys-change', selectedKeys)
+          this.doSelectedKeysChange(selectedKeys)
         }
       } else {
         if (this.hasSelectedKeys) {
           const selectedKeys = this.syntheticSelectedKeys
           if (selectedKeys.includes(node.key)) {
             if (this.cancelable) {
-              this.$emit('selected-keys-change', [])
+              this.doSelectedKeysChange([])
             }
           } else {
-            this.$emit('selected-keys-change', [node.key])
+            this.doSelectedKeysChange([node.key])
           }
         } else {
           if (this.internalSelectedKeys.includes(node.key)) {
@@ -355,13 +387,13 @@ export default {
               this.internalSelectedKeys = []
             }
           } else this.internalSelectedKeys = [node.key]
-          this.$emit('selected-keys-change', [node.key])
+          this.doSelectedKeysChange([node.key])
         }
       }
     },
     handleDragEnter ({ event, node }) {
       if (!this.draggable || this.disabled || node.disabled) return
-      this.$emit('dragenter', { event, node })
+      this.doDragEnter({ event, node })
       if (!this.expandOnDragenter) return
       this.droppingNodeKey = node.key
       if (node.key === this.draggingNodeKey) return
@@ -377,9 +409,9 @@ export default {
           ) {
             if (!this.hasExpandedKeys) {
               this.internalExpandedKeys.push(node.key)
-              this.$emit('expanded-keys-change', this.internalExpandedKeys)
+              this.doExpandedKeysChange(this.internalExpandedKeys)
             } else {
-              this.$emit('expanded-keys-change', this.syntheticExpandedKeys.concat(node.key))
+              this.doExpandedKeysChange(this.syntheticExpandedKeys.concat(node.key))
             }
           }
         }
@@ -407,37 +439,41 @@ export default {
     handleDragLeave ({ event, node }) {
       if (!this.draggable || this.disabled || node.disabled) return
       this.droppingNodeKey = null
-      this.$emit('dragleave', { event, node })
+      this.doDragLeave({ event, node })
     },
     handleDragEnd ({ event, node }) {
       if (!this.draggable || this.disabled || node.disabled) return
-      this.$emit('dragend', { event, node })
+      this.doDragEnd({ event, node })
       this.resetDragStatus()
     },
     handleDragStart ({ event, node }) {
       if (!this.draggable || this.disabled || node.disabled) return
       this.draggingNodeKey = node.key
       this.draggingNode = node
-      this.$emit('dragstart', { event, node })
+      this.doDragStart({ event, node })
     },
     handleDrop ({ event, node, dropPosition }) {
       if (!this.draggable || this.disabled || node.disabled) return
-      const drop = {
+      this.doDrop('drop', {
         event,
         node,
         dragNode: this.draggingNode,
         dropPosition
-      }
-      this.$emit('drop', drop)
+      })
       this.resetDragStatus()
     }
   },
-  render (h) {
+  render () {
     return h('div', {
-      staticClass: 'n-tree',
-      class: {
-        [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme
-      }
-    }, convertOptionsToVNodeTree(this.data, h, this))
+      class: [
+        'n-tree',
+        {
+          [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme
+        }
+      ]
+    }, this.data.map(child => h(NTreeNode, {
+      data: child,
+      key: child.key
+    })))
   }
 }
