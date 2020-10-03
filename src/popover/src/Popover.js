@@ -2,6 +2,7 @@ import {
   h,
   ref,
   computed,
+  watch,
   Fragment,
   createTextVNode
 } from 'vue'
@@ -50,38 +51,6 @@ export default {
   provide () {
     return {
       NPopover: this
-    }
-  },
-  setup (props) {
-    // setup show
-    const controlledShowRef = computed(() => props.show)
-    const uncontrolledShowRef = ref(props.defaultShow)
-    const mergedShowWithoutDisabledRef = useMergedState(
-      controlledShowRef,
-      uncontrolledShowRef
-    )
-    const mergedShowRef = computed(() => {
-      return props.disabled ? false : mergedShowWithoutDisabledRef.value
-    })
-    // setup show-arrow
-    const compatibleShowArrowRef = useCompitable(props, [
-      'arrow',
-      'showArrow'
-    ])
-    return {
-      isMounted: useIsMounted(),
-      // if to show popover body
-      uncontrolledShow: uncontrolledShowRef,
-      mergedShow: mergedShowRef,
-      compatibleShowArrow: compatibleShowArrowRef
-    }
-  },
-  data () {
-    return {
-      showTimerId: null,
-      hideTimerId: null,
-      triggerVNode: null,
-      bodyInstance: null
     }
   },
   props: {
@@ -189,6 +158,43 @@ export default {
     arrow: {
       type: Boolean,
       default: undefined
+    }
+  },
+  setup (props) {
+    // setup show
+    const controlledShowRef = computed(() => props.show)
+    const uncontrolledShowRef = ref(props.defaultShow)
+    const mergedShowWithoutDisabledRef = useMergedState(
+      controlledShowRef,
+      uncontrolledShowRef
+    )
+    const mergedShowRef = computed(() => {
+      return props.disabled ? false : mergedShowWithoutDisabledRef.value
+    })
+    // setup show-arrow
+    const compatibleShowArrowRef = useCompitable(props, [
+      'arrow',
+      'showArrow'
+    ])
+    watch(mergedShowRef, value => {
+      if (props.showWatcher) {
+        props.showWatcher(value)
+      }
+    })
+    return {
+      isMounted: useIsMounted(),
+      // if to show popover body
+      uncontrolledShow: uncontrolledShowRef,
+      mergedShow: mergedShowRef,
+      compatibleShowArrow: compatibleShowArrowRef
+    }
+  },
+  data () {
+    return {
+      showTimerId: null,
+      hideTimerId: null,
+      triggerVNode: null,
+      bodyInstance: null
     }
   },
   methods: {

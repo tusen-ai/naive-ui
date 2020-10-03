@@ -106,6 +106,11 @@ export default {
       __placeableEnabled: this.show
     }
   },
+  watch: {
+    show (value) {
+      if (value) this.__placeableEnabled = true
+    }
+  },
   created () {
     this.NPopover.bodyInstance = this
   },
@@ -196,9 +201,6 @@ export default {
           h(Transition, {
             name: 'popover-body-transition',
             appear: this.NPopover.isMounted,
-            onEnter: () => {
-              this.__placeableEnabled = true
-            },
             onAfterLeave: () => {
               this.__placeableEnabled = false
             }
