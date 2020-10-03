@@ -7,19 +7,18 @@
   >
     <transition name="base-tracking-rect-transition">
       <div
-        v-show="show"
+        v-show="mergedShow"
         class="n-base-tracking-rect__body"
-        :style="{
-          top: styleTop,
-          height: itemSize && itemSize + 'px'
-        }"
+        :style="style"
       />
     </transition>
   </div>
 </template>
 
 <script>
-import usecssr from '../../../_mixins/usecssr'
+import { ref, toRef, computed } from 'vue'
+import { useMergedState, useCompitable } from '../../../_utils/composition'
+import { usecssr } from '../../../_mixins'
 import styles from './styles/index'
 
 export default {
@@ -30,19 +29,50 @@ export default {
   props: {
     theme: {
       type: String,
-      default: null
+      default: undefined
     },
+    show: {
+      type: Boolean,
+      default: undefined
+    },
+    top: {
+      type: Number,
+      default: undefined
+    },
+    height: {
+      type: Number,
+      default: undefined
+    },
+    // deprecated
     itemSize: {
       type: Number,
-      required: true
+      default: undefined
     }
   },
-  data () {
+  setup (props) {
+    const uncontrolledShowRef = ref(false)
+    const controlledShowRef = toRef(props, 'show')
+    const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
+    const compitableHeightRef = useCompitable(props, ['itemSize', 'height'])
+    const uncontrolledTopRef = ref(null)
+    const controlledTopRef = computed(() => {
+      if (props.top !== undefined) return props.top
+      return undefined
+    })
+    const mergedTopRef = useMergedState(controlledTopRef, uncontrolledTopRef)
+    const styleRef = computed(() => {
+      return {
+        height: compitableHeightRef.value && (compitableHeightRef.value + 'px'),
+        top: mergedTopRef.value && (mergedTopRef.value + 'px')
+      }
+    })
     return {
-      show: false,
-      styleTop: null,
-      vanishTimerId: null,
-      containerScrollTop: 0
+      mergedShow: mergedShowRef,
+      uncontrolledShow: uncontrolledShowRef,
+      uncontrolledTop: uncontrolledTopRef,
+      compitableHeight: compitableHeightRef,
+      style: styleRef,
+      vanishTimerId: ref(null)
     }
   },
   methods: {
@@ -50,10 +80,10 @@ export default {
       this.vanishTimerId && window.clearTimeout(this.vanishTimerId)
       if (!delay) {
         this.vanishTimerId = null
-        this.show = false
+        this.uncontrolledShow = false
       } else {
         this.vanishTimerId = window.setTimeout(() => {
-          this.show = false
+          this.uncontrolledShow = false
         }, delay)
       }
     },
@@ -61,9 +91,8 @@ export default {
       if (!el) return
       this.vanishTimerId && window.clearTimeout(this.vanishTimerId)
       this.vanishTimerId = null
-      this.show = true
-      const top = getLightBarTop(el)
-      this.styleTop = top + 'px'
+      this.uncontrolledShow = true
+      this.uncontrolledTop = getLightBarTop(el)
     }
   }
 }

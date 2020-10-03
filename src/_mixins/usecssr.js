@@ -108,7 +108,7 @@ function setupImmutableStyle (
   })
 }
 
-function setupCssrProps (
+function getCssrProps (
   instance,
   theme
 ) {
@@ -122,7 +122,7 @@ function setupCssrProps (
   const renderedTheme = theme || fallbackTheme
   const cssrPropsGetter = styles[renderedTheme][name]
   const themeVariables = getThemeVariables(naive, renderedTheme)
-  const componentCssrProps = {
+  return {
     $instance: instance,
     $base: themeVariables.base,
     $derived: themeVariables.derived,
@@ -130,7 +130,6 @@ function setupCssrProps (
     $renderedTheme: renderedTheme,
     $fallbackTheme: fallbackTheme
   }
-  instance.cssrProps = componentCssrProps
 }
 
 export default function (styles, cssrPropsOption) {
@@ -144,7 +143,7 @@ export default function (styles, cssrPropsOption) {
     const themeKey = cssrPropsOption.themeKey
     watchers[themeKey] = [
       instance => {
-        setupCssrProps(instance, instance[themeKey])
+        instance.cssrProps = getCssrProps(instance, instance[themeKey])
       }
     ]
   }
@@ -186,11 +185,15 @@ export default function (styles, cssrPropsOption) {
       }
     )
   return {
-    data () {
-      return {
-        cssrProps: null
-      }
-    },
+    data: (
+      cssrPropsOption &&
+      cssrPropsOption.themeKey &&
+      cssrPropsOption.injectCssrProps
+    ) ? function () {
+        return {
+          cssrProps: getCssrProps(this, this[cssrPropsOption.themeKey])
+        }
+      } : undefined,
     created () {
       styles.forEach(style => {
         if (process.env.NODE_ENV !== 'production') {
@@ -209,9 +212,6 @@ export default function (styles, cssrPropsOption) {
             this,
             style.CNode
           )
-        }
-        if (cssrPropsOption && cssrPropsOption.themeKey) {
-          setupCssrProps(this, this[cssrPropsOption.themeKey])
         }
         if (process.env.NODE_ENV !== 'production') {
           window.naive.styleRenderingDuration += performance.now()

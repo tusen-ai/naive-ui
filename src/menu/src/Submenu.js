@@ -1,4 +1,4 @@
-import { h, withDirectives, vShow, toRef, ref } from 'vue'
+import { h, withDirectives, vShow, ref } from 'vue'
 import FadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
 import NPopover from '../../popover/src/Popover'
 import NMenuItemContent from './MenuItemContent.vue'
@@ -41,14 +41,10 @@ export default {
   },
   setup (props) {
     const activePathRef = useInjectionRef('NMenu', 'activePath')
-    const internalKeyRef = toRef(props, 'internalKey')
     return {
       selectedInside: useMemo(() => {
-        return activePathRef.value.includes(internalKeyRef.value)
-      }, [
-        activePathRef,
-        internalKeyRef
-      ]),
+        return activePathRef.value.includes(props.internalKey)
+      }),
       popoverBodyStyle: useInjectionRef('NMenu', 'popoverBodyStyle'),
       popoverShow: ref(false)
     }

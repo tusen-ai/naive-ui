@@ -1,7 +1,9 @@
 # 手动定位
 在特殊情况下，你可能想手动定位下拉菜单。比如在一块区域右击以弹出下拉菜单。
 ```html
-<div style="width: 200px; height: 200px; background-color: rgba(0, 128, 0, .5);" @contextmenu="handleContextMenu">
+<div
+  style="width: 200px; height: 200px; background-color: rgba(0, 128, 0, .5);" @contextmenu="handleContextMenu"
+>
   右击
 </div>
 <n-dropdown
@@ -20,42 +22,42 @@
 const options = [
   {
     label: '杰·盖茨比',
-    value: 'jay gatsby'
+    key: 'jay gatsby'
   },
   {
     label: '黛西·布坎南',
-    value: 'daisy buchanan'
+    key: 'daisy buchanan'
   },
   {
     type: 'divider'
   },
   {
     label: '尼克·卡拉威',
-    value: 'nick carraway'
+    key: 'nick carraway'
   },
   {
     label: '其他',
-    value: 'others',
+    key: 'others1',
     children: [
       {
         label: '乔丹·贝克',
-        value: 'jordan baker'
+        key: 'jordan baker'
       },
       {
         label: '汤姆·布坎南',
-        value: 'tom buchanan'
+        key: 'tom buchanan'
       },
       {
         label: '其他',
-        value: 'others',
+        key: 'others2',
         children: [
           {
             label: '鸡肉',
-            value: 'chicken'
+            key: 'chicken'
           },
           {
             label: '牛肉',
-            value: 'beef'
+            key: 'beef'
           }
         ]
       }

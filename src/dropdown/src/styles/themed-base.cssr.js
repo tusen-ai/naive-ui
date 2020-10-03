@@ -1,160 +1,106 @@
-import { c, cTB, cB, cM, cE } from '../../../_utils/cssr'
-import fadeInScaleUpTransition from '../../../styles/_transitions/fade-in-scale-up'
+import { c, cTB, cB, cM, cE, createKey } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
+    const local = props.$local
     const {
-      suffixColor
-    } = props.$local
+      prefixColor,
+      suffixColor,
+      dividerColor,
+      padding,
+      boxShadow,
+      borderRadius,
+      optionColorHover
+    } = local
     return [
-      cTB('popover-content', {
-        raw: `
-          position: relative;
-        `
-      },
-      [
-        cB('dropdown-submenu-activator', {
-          raw: `
-            display: inline-block;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-          `
-        }, [
-          cE('arrow', {
-            raw: `
-              position: relative;
-              right: -8px;
-              fill: ${suffixColor};
-            `
-          })
-        ]),
-        cB('dropdown-menu', {
-          raw: `
-            outline: none;
-          `
-        }, [
-          cB('base-select-menu', {
-            raw: `
-              margin-top: 0;
-              margin-bottom: 0;
-            `
-          }, [
-            cM('small-size', {
-              raw: `
-                padding-top: 4px;
-                padding-bottom: 4px;
-              `
+      cTB('dropdown-menu', {
+        padding,
+        background: 'white',
+        borderRadius,
+        boxShadow
+      }, [
+        [
+          'small',
+          'medium',
+          'large',
+          'huge'
+        ].map(size => cM(`${size}-size`, [
+          cB('dropdown-option', [
+            cB('dropdown-option-body', {
+              display: 'flex',
+              height: local[createKey('optionHeight', size)],
+              lineHeight: local[createKey('optionHeight', size)],
+              fontSize: local[createKey('fontSize', size)]
             }, [
-              cB('base-select-option', {
-                raw: `
-                  padding: 0 16px;
-                `
-              }),
-              cB('dropdown-divider', {
-                raw: `
-                  margin: 0 0;
-                `
-              }),
-              cB('dropdown-submenu-activator', [
-                cE('arrow', {
-                  raw: `
-                    font-size: 16px;
-                    margin-left: 12px;
-                  `
+              cE('prefix', {
+                width: local[createKey('optionPrefixWidth', size)],
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }, [
+                cM('show-icon', {
+                  width: local[createKey('optionIconPrefixWidth', size)]
+                }),
+                cB('icon', {
+                  fill: prefixColor,
+                  stroke: prefixColor,
+                  fontSize: '16px'
                 })
-              ])
-            ]),
-            cM('medium-size', {
-              raw: `
-                padding-top: 6px;
-                padding-bottom: 6px;
-              `
-            }, [
-              cB('base-select-option', {
-                raw: `
-                  padding: 0 20px;
-                `
+              ]),
+              cE('label', {
+                whiteSpace: 'nowrap',
+                flex: 1
               }),
-              cB('dropdown-divider', {
-                raw: `
-                  margin: 0 0;
-                `
-              }),
-              cB('dropdown-submenu-activator', [
-                cE('arrow', {
-                  raw: `
-                    font-size: 16px;
-                    margin-left: 16px;
-                  `
-                })
-              ])
-            ]),
-            cM('large-size', {
-              raw: `
-                padding-top: 6px;
-                padding-bottom: 6px;
-              `
-            }, [
-              cB('base-select-option', {
-                raw: `
-                  padding: 0 24px;
-                `
-              }),
-              cB('dropdown-divider', {
-                raw: `
-                  margin: 2px 0;
-                `
-              }),
-              cB('dropdown-submenu-activator', [
-                cE('arrow', {
-                  raw: `
-                    font-size: 16px;
-                    margin-left: 20px;
-                  `
-                })
-              ])
-            ]),
-            cM('huge-size', {
-              raw: `
-                padding-top: 8px;
-                padding-bottom: 8px;
-              `
-            }, [
-              cB('base-select-option', {
-                raw: `
-                  padding: 0 24px;
-                `
-              }),
-              cB('dropdown-submenu-activator', [
-                cE('arrow', {
-                  raw: `
-                    font-size: 16px;
-                    margin-left: 20px;
-                  `
+              cE('suffix', {
+                boxSizing: 'border-box',
+                flex: 1,
+                display: 'flex',
+                justifyContent: 'flex-end',
+                alignItems: 'center',
+                minWidth: local[createKey('optionSuffixWidth', size)],
+                padding: '0 8px'
+              }, [
+                cM('show-submenu', {
+                  width: local[createKey('optionIconSuffixWidth', size)]
+                }),
+                cB('icon', {
+                  fill: suffixColor,
+                  stroke: suffixColor,
+                  fontSize: '16px'
                 })
               ])
             ])
           ])
-        ]),
+        ])),
         cB('dropdown-divider', {
-          raw: `
-            margin: 2px 0;
-          `
+          backgroundColor: dividerColor,
+          height: '1px',
+          margin: '4px 0'
         }),
-        cB('dropdown-menu-wrapper', {
-          raw: `
-            position: absolute !important;
-          `
-        }),
-        cB('dropdown-submenu', {
-          raw: `
-            margin-top: 0;
-            margin-left: 6px;
-            margin-right: 6px;
-          `
+        cB('dropdown-option', {
+          position: 'relative'
         }, [
-          fadeInScaleUpTransition()
+          cB('dropdown-option-body', {
+            cursor: 'default'
+          }, [
+            cM('pending', {
+              backgroundColor: optionColorHover
+            })
+          ]),
+          cB('dropdown-offset-container', {
+            pointerEvents: 'none',
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            top: '-4px',
+            bottom: '-4px'
+          }),
+          cB('dropdown-menu', {
+            pointerEvents: 'all'
+          }),
+          cB('dropdown-menu-wrapper', {
+            width: 'fit-content'
+          })
         ])
       ])
     ]

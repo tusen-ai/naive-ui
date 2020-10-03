@@ -7,13 +7,14 @@ const {
   transformDebounceScale
 } = commonVariables
 
-export default function ({
-  transformOrigin = 'inherit',
-  duration = '.2s',
-  enterScale = '.9',
-  originalTransform = '',
-  originalTransition = ''
-} = {}) {
+export default function (options = {}) {
+  const {
+    transformOrigin = 'inherit',
+    duration = '.2s',
+    enterScale = '.9',
+    originalTransform = '',
+    originalTransition = ''
+  } = options
   return [
     c(`&.${namespace}-fade-in-scale-up-transition-leave-active`, {
       transformOrigin,

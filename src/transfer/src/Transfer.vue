@@ -122,7 +122,7 @@
         </div>
         <div class="n-transfer-list-flex-container">
           <template v-if="filteredTargetOptions.length">
-            <n-scrollbar
+            <!-- <n-scrollbar
               v-if="virtualScroll"
               :theme="syntheticTheme"
               :container="targetScrollContainer"
@@ -152,8 +152,8 @@
                   />
                 </template>
               </recycle-scroller>
-            </n-scrollbar>
-            <n-scrollbar v-else :theme="syntheticTheme">
+            </n-scrollbar> -->
+            <n-scrollbar :theme="syntheticTheme">
               <div ref="targetList" class="n-transfer-list-content">
                 <n-base-tracking-rect ref="targetLightBar" :item-size="itemSize" :theme="syntheticTheme" />
                 <n-transfer-target-list-item

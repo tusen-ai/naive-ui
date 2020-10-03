@@ -2,6 +2,7 @@
 使用不同的弹出位置。
 ```html
 <n-dropdown
+  trigger="hover"
   @select="handleSelect"
   placement="bottom-start"
   :options="options"
@@ -11,31 +12,32 @@
 ```
 ```js
 export default {
+  inject: ['message'],
   data () {
     return {
       options: [
         {
           label: '滨海湾金沙，新加坡',
-          value: 'marina bay sands'
+          key: 'marina bay sands'
         },
         {
           label: '布朗酒店，伦敦',
-          value: 'brown\'s hotel, london'
+          key: 'brown\'s hotel, london'
         },
         {
           label: '亚特兰蒂斯巴哈马，拿骚',
-          value: 'atlantis nahamas, nassau'
+          key: 'atlantis nahamas, nassau'
         },
         {
           label: '比佛利山庄酒店，洛杉矶',
-          value: 'the beverly hills hotel, los angeles'
+          key: 'the beverly hills hotel, los angeles'
         }
       ]
     }
   },
   methods: {
     handleSelect (key) {
-      this.$NMessage.info(key)
+      this.message.info(key)
     }
   }
 }

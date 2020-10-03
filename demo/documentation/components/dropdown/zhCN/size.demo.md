@@ -1,82 +1,84 @@
 # 尺寸
 ```html
-<n-dropdown
-  placement="bottom-start"
-  trigger="click"
-  size="small"
-  @select="handleSelect"
-  :options="options"
->
-  <n-button :keyboard="false">小号</n-button>
-</n-dropdown>
-<n-dropdown
-  placement="bottom-start"
-  trigger="click"
-  size="medium"
-  @select="handleSelect"
-  :options="options"
->
-  <n-button :keyboard="false">中号</n-button>
-</n-dropdown>
-<n-dropdown
-  placement="bottom-start"
-  trigger="click"
-  size="large"
-  @select="handleSelect"
-  :options="options"
->
-  <n-button :keyboard="false">大号</n-button>
-</n-dropdown>
-<n-dropdown
-  placement="bottom-start"
-  trigger="click"
-  size="large"
-  @select="handleSelect"
-  :options="options"
->
-  <n-button :keyboard="false">巨大号</n-button>
-</n-dropdown>
+<n-space>
+  <n-dropdown
+    placement="bottom-start"
+    trigger="click"
+    size="small"
+    @select="handleSelect"
+    :options="options"
+  >
+    <n-button :keyboard="false">小号</n-button>
+  </n-dropdown>
+  <n-dropdown
+    placement="bottom-start"
+    trigger="click"
+    size="medium"
+    @select="handleSelect"
+    :options="options"
+  >
+    <n-button :keyboard="false">中号</n-button>
+  </n-dropdown>
+  <n-dropdown
+    placement="bottom-start"
+    trigger="click"
+    size="large"
+    @select="handleSelect"
+    :options="options"
+  >
+    <n-button :keyboard="false">大号</n-button>
+  </n-dropdown>
+  <n-dropdown
+    placement="bottom-start"
+    trigger="click"
+    size="large"
+    @select="handleSelect"
+    :options="options"
+  >
+    <n-button :keyboard="false">巨大号</n-button>
+  </n-dropdown>
+</n-space>
 ```
 ```js
 const options = [
   {
     label: '杰·盖茨比',
-    value: 'jay gatsby'
+    key: 'jay gatsby'
   },
   {
     label: '黛西·布坎南',
-    value: 'daisy buchanan'
+    key: 'daisy buchanan'
   },
   {
     type: 'divider'
   },
   {
     label: '尼克·卡拉威',
-    value: 'nick carraway'
+    key: 'nick carraway'
   },
   {
     label: '其他',
-    value: 'others',
+    key: 'others1',
     children: [
       {
         label: '乔丹·贝克',
-        value: 'jordan baker'
+        key: 'jordan baker'
       },
       {
         label: '汤姆·布坎南',
-        value: 'tom buchanan'
+        key: 'tom buchanan'
       },
       {
         label: '其他',
-        value: 'others',
+        key: 'others2',
         children: [
           {
             label: '鸡肉',
-            value: 'chicken'
+            key: 'chicken'
           },
           {
             label: '牛肉',
-            value: 'beef'
+            key: 'beef'
           }
         ]
       }
@@ -85,6 +87,7 @@ const options = [
 ]
 
 export default {
+  inject: ['message'],
   data () {
     return {
       options
@@ -92,13 +95,8 @@ export default {
   },
   methods: {
     handleSelect (name) {
-      this.$NMessage.info(name)
+      this.message.info(name)
     }
   }
-}
-```
-```css
-.n-button {
-  margin: 0 8px 12px 0;
 }
 ```

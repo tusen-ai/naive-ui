@@ -48,10 +48,7 @@ export default {
     const hrefRef = toRef(props, 'href')
     const activeRef = useMemo(() => {
       return hrefRef.value && (hrefRef.value === activeHrefRef.value)
-    }, [
-      hrefRef,
-      activeHrefRef
-    ])
+    })
     useInjectionCollection('NAnchor', 'collectedLinkHrefs', hrefRef)
     useInjectionElementCollection('NAnchor', 'titleEls', vm => vm.$refs.title)
     return {

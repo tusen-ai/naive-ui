@@ -78,10 +78,11 @@ export function useDisabledUntilMounted (durationTickCount = 0) {
   return disabled
 }
 
-export function useMemo (valueGenerator, deps) {
-  const valueRef = ref(valueGenerator())
-  watch(deps.filter(dep => dep), () => {
-    valueRef.value = valueGenerator()
+export function useMemo (valueGenerator) {
+  const computedValueRef = computed(valueGenerator)
+  const valueRef = ref(computedValueRef.value)
+  watch(computedValueRef, value => {
+    valueRef.value = value
   })
   return valueRef
 }
@@ -150,3 +151,4 @@ export function useInjectionElementCollection (injectionName, collectionKey, get
 
 export { default as useLastClickPosition } from './use-last-click-position'
 export { default as useOsTheme } from './use-os-theme'
+export { useDelayedTrue } from './use-delayed'

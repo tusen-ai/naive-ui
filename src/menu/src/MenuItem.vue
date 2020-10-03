@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { toRef, computed } from 'vue'
+import { computed } from 'vue'
 import NMenuItemContent from './MenuItemContent.vue'
 import NTooltip from '../../tooltip'
 import menuChildMixin from './menu-child-mixin'
@@ -65,7 +65,6 @@ export default {
   setup (props) {
     const rootMenuValueRef = useInjectionRef('NMenu', 'modelValue')
     const submenuDisabledRef = useInjectionRef('NSubmenu', 'mergedDisabled', false)
-    const internalKeyRef = toRef(props, 'internalKey')
     const mergedDisabledRef = computed(() => {
       return submenuDisabledRef.value || props.disabled
     })
@@ -73,7 +72,7 @@ export default {
       selected: useMemo(() => {
         if (rootMenuValueRef.value === props.internalKey) return true
         return false
-      }, [rootMenuValueRef, internalKeyRef]),
+      }),
       mergedDisabled: mergedDisabledRef
     }
   },

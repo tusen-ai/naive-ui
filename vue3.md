@@ -76,7 +76,17 @@ placeable 进行了大调整
     - `drawer-style` => `body-style`
   - new
     - `display-directive` prop
-- [ ] dropdown
+- [x] dropdown
+  - break
+    - `option.value` => `option.key`
+    - item must have unique key
+    - submenu must have unique key
+  - remove
+    - `submenu-width`
+    - `submenu-min-width`
+    - `submenu-max-width`
+  - new
+    - `option.icon`
 - [x] dynamic-input
   - break
     - `v-model` => `v-model:value`

@@ -1,14 +1,27 @@
 import create from '../../styles/_utils/create-component-base'
+import commonVariables from './_common'
 
 export default create({
   theme: 'light',
   name: 'Dropdown',
-  getDerivedVariables ({ derived }) {
+  getDerivedVariables ({ derived, base }) {
     const {
-      textColorSecondary
+      textColorSecondary,
+      popoverBoxShadow,
+      dividerColor,
+      hoverColorOverlay
     } = derived
+    const {
+      borderRadius
+    } = base
     return {
-      suffixColor: textColorSecondary
+      ...commonVariables,
+      dividerColor,
+      borderRadius,
+      boxShadow: popoverBoxShadow,
+      suffixColor: textColorSecondary,
+      prefixColor: textColorSecondary,
+      optionColorHover: hoverColorOverlay
     }
   }
 })

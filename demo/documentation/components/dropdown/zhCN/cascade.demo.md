@@ -12,45 +12,53 @@
 ```
 
 ```js
+import { h, resolveComponent } from 'vue'
+import CashIcon from 'naive-ui/lib/icons/cash-outline'
+
 const options = [
   {
     label: '杰·盖茨比',
-    value: 'jay gatsby'
+    key: 'jay gatsby'
   },
   {
     label: '黛西·布坎南',
-    value: 'daisy buchanan'
+    icon () {
+      return h(resolveComponent('n-icon'), null, {
+        default: () => h(CashIcon)
+      })
+    },
+    key: 'daisy buchanan'
   },
   {
     type: 'divider'
   },
   {
     label: '尼克·卡拉威',
-    value: 'nick carraway'
+    key: 'nick carraway'
   },
   {
     label: '其他',
-    value: 'others',
+    key: 'others1',
     children: [
       {
         label: '乔丹·贝克',
-        value: 'jordan baker'
+        key: 'jordan baker'
       },
       {
         label: '汤姆·布坎南',
-        value: 'tom buchanan'
+        key: 'tom buchanan'
       },
       {
         label: '其他',
-        value: 'others',
+        key: 'others2',
         children: [
           {
             label: '鸡肉',
-            value: 'chicken'
+            key: 'chicken'
           },
           {
             label: '牛肉',
-            value: 'beef'
+            key: 'beef'
           }
         ]
       }
@@ -59,14 +67,15 @@ const options = [
 ]
 
 export default {
+  inject: ['message'],
   data () {
     return {
       options
     }
   },
   methods: {
-    handleSelect (name) {
-      this.$NMessage.info(name)
+    handleSelect (key) {
+      this.message.info(key)
     }
   }
 }

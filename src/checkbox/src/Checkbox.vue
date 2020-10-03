@@ -166,9 +166,7 @@ export default {
       }
     })
     return {
-      renderSafeChecked: useMemo(() => syntheticCheckedRef.value, [
-        syntheticCheckedRef
-      ])
+      renderSafeChecked: useMemo(() => syntheticCheckedRef.value)
     }
   },
   computed: {

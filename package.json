@@ -136,6 +136,7 @@
     "highlight.js": "^9.18.1",
     "lodash-es": "^4.17.15",
     "resize-observer-polyfill": "^1.5.1",
+    "treemate": "^0.1.5",
     "vue-runtime-helpers": "^1.1.2"
   }
 }

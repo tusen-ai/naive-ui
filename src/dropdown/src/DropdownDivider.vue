@@ -1,9 +1,9 @@
 <template>
-  <n-divider class="n-dropdown-divider" />
+  <div class="n-dropdown-divider" />
 </template>
 
 <script>
 export default {
-  name: 'NDropdownDivider'
+  name: 'DropdownDivider'
 }
 </script>
