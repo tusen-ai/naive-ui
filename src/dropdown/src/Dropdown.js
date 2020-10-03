@@ -180,6 +180,7 @@ export default {
       keyboardDelegate.unregisterHandler(this.handleKeyDownLeft)
       keyboardDelegate.unregisterHandler(this.handleKeyDownRight)
       keyboardDelegate.unregisterHandler(this.handleKeyUpEnter)
+      keyboardDelegate.unregisterHandler(this.handleKeyDownEsc)
     },
     handleKeyDownEsc () {
       this.doUpdateShow(false)
