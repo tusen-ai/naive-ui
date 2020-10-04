@@ -1,26 +1,26 @@
 # Disabled
 ```html
 <n-date-picker
-  v-model="date"
+  v-model:value="date"
   type="date"
   :disabled="disabled"
 />
 <n-date-picker
-  v-model="datetime"
+  v-model:value="datetime"
   type="datetime"
   :disabled="disabled"
 />
 <n-date-picker
-  v-model="daterange"
+  v-model:value="daterange"
   :disabled="disabled"
   type="daterange"
 />
 <n-date-picker
-  v-model="datetimerange"
+  v-model:value="datetimerange"
   :disabled="disabled"
   type="datetimerange"
 />
-<n-switch v-model="disabled" />
+<n-switch v-model:value="disabled" />
 ```
 ```js
 export default {

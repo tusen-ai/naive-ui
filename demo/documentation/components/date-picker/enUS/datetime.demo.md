@@ -1,7 +1,7 @@
 # Datetime
 ```html
 <n-date-picker
-  v-model="timestamp"
+  v-model:value="timestamp"
   type="datetime"
   clearable
 />

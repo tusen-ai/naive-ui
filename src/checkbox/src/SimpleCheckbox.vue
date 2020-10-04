@@ -60,10 +60,6 @@ export default {
   mixins: [
     usecssr(styles)
   ],
-  model: {
-    prop: 'checked',
-    event: 'chanage'
-  },
   props: {
     value: {
       validator: createValidator(['number', 'boolean', 'string']),

@@ -2,17 +2,17 @@
 有 `small`、`medium` 和 `large` 尺寸。
 ```html
 <n-date-picker
-  v-model="timestamp"
+  v-model:value="timestamp"
   size="small"
   type="date"
 />
 <n-date-picker
-  v-model="timestamp"
+  v-model:value="timestamp"
   size="medium"
   type="date"
 />
 <n-date-picker
-  v-model="timestamp"
+  v-model:value="timestamp"
   size="large"
   type="date"
 />

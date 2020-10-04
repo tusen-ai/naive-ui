@@ -462,7 +462,7 @@ export default {
     },
     handleActivatorBlur () {
       this.doBlur()
-      // this.closeMenu()
+      this.closeMenu()
     },
     handleActivatorClick () {
       if (this.filterable) {

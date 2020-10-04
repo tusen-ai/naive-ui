@@ -1,7 +1,7 @@
 # 日期时间范围
 ```html
 <n-date-picker
-  v-model="range"
+  v-model:value="range"
   type="datetimerange"
   clearable
 />

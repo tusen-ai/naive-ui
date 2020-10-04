@@ -1,12 +1,12 @@
 # Format
 ```html
 <n-date-picker
-  v-model="timestamp"
+  v-model:value="timestamp"
   type="datetime"
   clearable
   :format="format"
 />
-<n-date-picker v-model="timestamp2" type="datetime" :format="format" clearable />
+<n-date-picker v-model:value="timestamp2" type="datetime" :format="format" clearable />
 ```
 ```js
 export default {

@@ -1,8 +1,8 @@
 /* istanbul ignore file */
-import Scaffold from './src/TimePicker.vue'
+import TimePicker from './src/TimePicker.vue'
 
-Scaffold.install = function (app, naive) {
-  app.component(naive.componentPrefix + Scaffold.name, Scaffold)
+TimePicker.install = function (app, naive) {
+  app.component(naive.componentPrefix + TimePicker.name, TimePicker)
 }
 
-export default Scaffold
+export default TimePicker

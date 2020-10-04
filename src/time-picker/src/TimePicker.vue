@@ -35,8 +35,9 @@
       </template>
     </n-input>
     <n-lazy-teleport
-      to="body"
+      :to="to"
       :show="active"
+      :disabled="teleportDisabled"
     >
       <div
         ref="offsetContainer"
@@ -326,10 +327,18 @@ export default {
     // deprecated
     onChange: {
       validator () {
-        if (__DEV__) warn('time-picker', '')
+        if (__DEV__) warn('time-picker', '`on-change` is deprecated, please use `on-update:value` instead.')
         return true
       },
       default: undefined
+    },
+    to: {
+      type: [String, Object],
+      default: undefined
+    },
+    teleportDisabled: {
+      type: Boolean,
+      default: false
     }
   },
   setup () {

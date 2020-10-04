@@ -16,14 +16,6 @@ import { dateArray, strictParse } from '../../../_utils/component/datePicker'
 export default {
   mixins: [commonCalendarMixin],
   props: {
-    theme: {
-      type: String,
-      default: null
-    },
-    active: {
-      type: Boolean,
-      default: true
-    },
     value: {
       type: Number,
       required: false,
@@ -146,21 +138,18 @@ export default {
     this.NDatePicker.setInvalidStatus(this.isDateTimeInvalid)
   },
   methods: {
-    handleClickOutside () {
-      this.closeCalendar()
-    },
     handleDateInput (value) {
       const date = strictParse(value, this.dateFormat, new Date())
       if (isValid(date)) {
         if (!this.valueAsDateTime) {
-          this.$emit('input', getTime(this.adjustValue(new Date())))
+          this.doUpdateValue(getTime(this.adjustValue(new Date())))
         } else {
           const newDateTime = set(this.valueAsDateTime, {
             year: getYear(date),
             month: getMonth(date),
             date: getDate(date)
           })
-          this.$emit('input', getTime(this.adjustValue(newDateTime)))
+          this.doUpdateValue(getTime(this.adjustValue(newDateTime)))
         }
       }
     },
@@ -168,25 +157,25 @@ export default {
       const date = strictParse(this.displayDateString, this.dateFormat, new Date())
       if (isValid(date)) {
         if (!this.valueAsDateTime) {
-          this.$emit('input', getTime(this.adjustValue(new Date())))
+          this.doUpdateValue(getTime(this.adjustValue(new Date())))
         } else {
           const newDateTime = set(this.valueAsDateTime, {
             year: getYear(date),
             month: getMonth(date),
             date: getDate(date)
           })
-          this.$emit('input', getTime(this.adjustValue(newDateTime)))
+          this.doUpdateValue(getTime(this.adjustValue(newDateTime)))
         }
       } else {
         this.refreshDisplayDateString()
       }
     },
     clearSelectedDateTime () {
-      this.$emit('input', null)
+      this.doUpdateValue(null)
       this.displayDateString = ''
     },
     setSelectedDateTimeToNow () {
-      this.$emit('input', getTime(this.adjustValue(new Date())))
+      this.doUpdateValue(getTime(this.adjustValue(new Date())))
       this.calendarDateTime = new Date()
     },
     handleDateClick (dateItem) {
@@ -199,7 +188,7 @@ export default {
       }
       newSelectedDateTime = set(newSelectedDateTime, dateItem.dateObject)
       this.selectedDate = dateItem.dateObject
-      this.$emit('input', getTime(this.adjustValue(newSelectedDateTime)))
+      this.doUpdateValue(getTime(this.adjustValue(newSelectedDateTime)))
     },
     /**
      * If not selected, display nothing,
@@ -219,12 +208,12 @@ export default {
       if (this.isDateInvalid || this.isTimeInvalid) {
         return
       }
-      this.$emit('confirm')
+      this.doConfirm()
       this.closeCalendar()
     },
     closeCalendar () {
       if (this.active) {
-        this.$emit('close')
+        this.doClose()
       }
     },
     nextYear () {

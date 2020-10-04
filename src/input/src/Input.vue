@@ -417,11 +417,11 @@ export default {
       if (onFocus) call(onFocus, e)
       __triggerFormFocus()
     },
-    doClear () {
+    doClear (...args) {
       const {
         onClear
       } = this
-      if (onClear) call(onClear)
+      if (onClear) call(onClear, ...args)
     },
     doInputBlur (e) {
       const {

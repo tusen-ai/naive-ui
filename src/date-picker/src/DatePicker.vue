@@ -1,6 +1,6 @@
 <template>
   <div
-    ref="activator"
+    ref="triggerRef"
     class="n-date-picker"
     :class="{
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
@@ -14,7 +14,7 @@
   >
     <n-input
       v-if="isRange"
-      ref="input"
+      ref="inputRef"
       :size="syntheticSize"
       :theme="syntheticTheme"
       passively-activated
@@ -41,8 +41,8 @@
     </n-input>
     <n-input
       v-else
-      ref="input"
-      v-model="displayTime"
+      ref="inputRef"
+      v-model:value="displayTime"
       :theme="syntheticTheme"
       passively-activated
       :size="syntheticSize"
@@ -64,92 +64,110 @@
         <n-icon><calendar-icon /></n-icon>
       </template>
     </n-input>
-    <div
-      ref="contentContainer"
-      class="n-positioning-container"
-      :class="{
-        [namespace]: namespace
-      }"
+    <n-base-lazy-teleport
+      :show="active"
     >
       <div
-        ref="content"
-        class="n-positioning-content"
-        @keydown.esc.enter="handlePanelKeyDownEsc"
-        @keydown="handleKeyDown"
+        ref="offsetContainerRef"
+        v-zindexable="{ enabled: active }"
+        class="n-positioning-container"
+        :class="{
+          [namespace]: namespace
+        }"
       >
-        <datetime-panel
-          v-if="type === 'datetime'"
-          ref="panel"
-          v-clickoutside="handleClickOutside"
-          :value="value"
-          :active="active"
-          :actions="actions"
-          :theme="syntheticTheme"
-          :is-date-disabled="isDateDisabled"
-          :is-time-disabled="isTimeDisabled"
-          :format="computedFormat"
-          @tab-out="handlePanelTabOut"
-          @input="handlePanelInput"
-          @close="handlePanelClose"
-        />
-        <date-panel
-          v-else-if="type === 'date'"
-          ref="panel"
-          v-clickoutside="handleClickOutside"
-          :value="value"
-          :active="active"
-          :actions="actions"
-          :theme="syntheticTheme"
-          :is-date-disabled="isDateDisabled"
-          @input="handlePanelInput"
-          @tab-out="handlePanelTabOut"
-          @close="handlePanelClose"
-        />
-        <daterange-panel
-          v-else-if="type === 'daterange'"
-          ref="panel"
-          v-clickoutside="handleClickOutside"
-          :value="value"
-          :active="active"
-          :actions="actions"
-          :theme="syntheticTheme"
-          :is-date-disabled="isDateDisabled"
-          @input="handleRangePanelInput"
-          @tab-out="handlePanelTabOut"
-          @close="handlePanelClose"
-          @check-value="setInvalidStatus"
-        />
-        <datetimerange-panel
-          v-else-if="type === 'datetimerange'"
-          ref="panel"
-          v-clickoutside="handleClickOutside"
-          :format="computedFormat"
-          :value="value"
-          :active="active"
-          :actions="actions"
-          :theme="syntheticTheme"
-          :is-date-disabled="isDateDisabled"
-          :is-time-disabled="isTimeDisabled"
-          @input="handleRangePanelInput"
-          @close="handlePanelClose"
-          @tab-out="handlePanelTabOut"
-          @check-value="setInvalidStatus"
-        />
+        <div
+          ref="trackingRef"
+          class="n-positioning-content"
+          @keydown.esc="handlePanelKeyDownEsc"
+          @keydown="handleKeyDown"
+        >
+          <transition
+            name="n-fade-in-scale-up-transition"
+            :appear="isMounted"
+          >
+            <datetime-panel
+              v-if="type === 'datetime' && active"
+              ref="panelRef"
+              v-clickoutside="handleClickOutside"
+              :value="value"
+              :active="active"
+              :actions="actions"
+              :theme="syntheticTheme"
+              :is-date-disabled="isDateDisabled"
+              :is-time-disabled="isTimeDisabled"
+              :format="computedFormat"
+              @update:value="handlePanelInput"
+              @tab-out="handlePanelTabOut"
+              @close="handlePanelClose"
+            />
+            <date-panel
+              v-else-if="type === 'date' && active"
+              ref="panelRef"
+              v-clickoutside="handleClickOutside"
+              :value="value"
+              :active="active"
+              :actions="actions"
+              :theme="syntheticTheme"
+              :is-date-disabled="isDateDisabled"
+              @update:value="handlePanelInput"
+              @tab-out="handlePanelTabOut"
+              @close="handlePanelClose"
+            />
+            <daterange-panel
+              v-else-if="type === 'daterange' && active"
+              ref="panelRef"
+              v-clickoutside="handleClickOutside"
+              :value="value"
+              :active="active"
+              :actions="actions"
+              :theme="syntheticTheme"
+              :is-date-disabled="isDateDisabled"
+              @update:value="handleRangePanelInput"
+              @tab-out="handlePanelTabOut"
+              @close="handlePanelClose"
+            />
+            <datetimerange-panel
+              v-else-if="type === 'datetimerange' && active"
+              ref="panelRef"
+              v-clickoutside="handleClickOutside"
+              :format="computedFormat"
+              :value="value"
+              :active="active"
+              :actions="actions"
+              :theme="syntheticTheme"
+              :is-date-disabled="isDateDisabled"
+              :is-time-disabled="isTimeDisabled"
+              @update:value="handleRangePanelInput"
+              @close="handlePanelClose"
+              @tab-out="handlePanelTabOut"
+            />
+          </transition>
+        </div>
       </div>
-    </div>
+    </n-base-lazy-teleport>
   </div>
 </template>
 
 <script>
-import detachable from '../../_mixins/detachable'
-import placeable from '../../_mixins/placeable'
-import zindexable from '../../_mixins/zindexable'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import asformitem from '../../_mixins/asformitem'
-import usecssr from '../../_mixins/usecssr'
-import clickoutside from '../../_directives/clickoutside'
-import locale from '../../_mixins/locale'
+import {
+  ref
+} from 'vue'
+import {
+  configurable,
+  themeable,
+  placeable,
+  asformitem,
+  usecssr,
+  locale
+} from '../../_mixins'
+import {
+  clickoutside,
+  zindexable
+} from '../../_directives'
+import { warn } from '../../_utils/naive'
+import { call } from '../../_utils/vue'
+import { useIsMounted } from '../../_utils/composition'
+
 import DatetimePanel from './panel/datetime.vue'
 import DatetimerangePanel from './panel/datetimerange.vue'
 import DatePanel from './panel/date.vue'
@@ -157,7 +175,8 @@ import DaterangePanel from './panel/daterange.vue'
 
 import NInput from '../../input'
 import NIcon from '../../icon'
-import CalendarIcon from './CalendarIcon.vue'
+import { CalendarIcon } from '../../_base/icons'
+import NBaseLazyTeleport from '../../_base/lazy-teleport'
 
 import format from 'date-fns/format'
 import getTime from 'date-fns/getTime'
@@ -177,9 +196,11 @@ const DATE_FORMAT = {
 export default {
   name: 'DatePicker',
   directives: {
-    clickoutside
+    clickoutside,
+    zindexable
   },
   components: {
+    NBaseLazyTeleport,
     NInput,
     NIcon,
     DatetimePanel,
@@ -189,19 +210,13 @@ export default {
     CalendarIcon
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
-    detachable,
     placeable,
-    zindexable,
     locale('DatePicker'),
     asformitem(),
     usecssr(styles)
   ],
-  model: {
-    prop: 'value',
-    event: 'change'
-  },
   provide () {
     return {
       NDatePicker: this
@@ -267,6 +282,32 @@ export default {
     isTimeDisabled: {
       type: Function,
       default: undefined
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:value': {
+      type: [Function, Array],
+      default: undefined
+    },
+    onFocus: {
+      type: [Function, Array],
+      default: undefined
+    },
+    onBlur: {
+      type: [Function, Array],
+      default: undefined
+    },
+    // deprecated
+    onChange: {
+      validator () {
+        if (__DEV__) {
+          warn(
+            'data-picker',
+            '`on-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
+        return true
+      },
+      default: undefined
     }
   },
   data () {
@@ -280,12 +321,25 @@ export default {
       isStartValueInvalid: false
     }
   },
+  setup () {
+    return {
+      panelRef: ref(null),
+      offsetContainerRef: ref(null),
+      trackingRef: ref(null),
+      triggerRef: ref(null),
+      inputRef: ref(null),
+      isMounted: useIsMounted()
+    }
+  },
   computed: {
+    __placeableEnabled () {
+      return this.active
+    },
     isRange () {
       return ['daterange', 'datetimerange'].includes(this.type)
     },
     localizedSeperator () {
-      if (this.sepearator !== undefined) return this.separator
+      if (this.separator !== undefined) return this.separator
       return this.localeNamespace.separator
     },
     localizedPlacehoder () {
@@ -341,18 +395,58 @@ export default {
     this.refresh(this.value)
   },
   methods: {
+    __placeableOffsetContainer () {
+      return this.offsetContainerRef
+    },
+    __placeableTracking () {
+      return this.trackingRef
+    },
+    __placeableTracked () {
+      return this.triggerRef
+    },
+    __placeableBody () {
+      return this.panelRef
+    },
+    doUpdateValue (...args) {
+      const {
+        'onUpdate:value': onUpdateValue,
+        onChange,
+        __triggerFormChange,
+        __triggerFormInput
+      } = this
+      if (onUpdateValue) call(onUpdateValue, ...args)
+      if (onChange) call(onChange, ...args)
+      __triggerFormChange()
+      __triggerFormInput()
+    },
+    doFocus (...args) {
+      const {
+        onFocus,
+        __triggerFormFocus
+      } = this
+      if (onFocus) call(onFocus, ...args)
+      __triggerFormFocus()
+    },
+    doBlur (...args) {
+      const {
+        onBlur,
+        __triggerFormBlur
+      } = this
+      if (onBlur) call(onBlur, ...args)
+      __triggerFormBlur()
+    },
     handleKeyDown (e) {
       const value = this.value
       if (this.type === 'date') {
         const nextValue = getDerivedTimeFromKeyboardEvent(value, e)
         if (value !== nextValue) {
-          this.$emit('change', nextValue)
+          this.doUpdateValue(nextValue)
         }
       }
     },
     handleClear (e) {
       e.stopPropagation()
-      this.$emit('change', null)
+      this.doUpdateValue(null)
       this.refresh(null)
     },
     handlePanelTabOut () {
@@ -362,7 +456,7 @@ export default {
       })
     },
     handleClickOutside (e) {
-      if (this.active && !this.$refs.activator.contains(e.target)) {
+      if (this.active && !this.triggerRef.contains(e.target)) {
         this.closeCalendar({
           returnFocus: false,
           emitBlur: true
@@ -385,11 +479,11 @@ export default {
      * Panel Input
      */
     handlePanelInput (value, valueString) {
-      this.$emit('change', value)
+      this.doUpdateValue(value)
       this.refresh(value)
     },
     handleRangePanelInput (value, valueString) {
-      this.$emit('change', value)
+      this.doUpdateValue(value)
       this.refresh(value)
     },
     /**
@@ -428,12 +522,15 @@ export default {
      * input deactivate & blur
      */
     handleInputBlur (e) {
+      const {
+        panelRef
+      } = this
       if (!(
-        this.$refs.panel &&
-        this.$refs.panel.$el.contains(e.relatedTarget)
+        panelRef &&
+        panelRef.$el.contains(e.relatedTarget)
       )) {
         this.cleanValue()
-        this.$emit('blur')
+        this.doBlur()
         this.closeCalendar({
           returnFocus: false,
           emitBlur: false
@@ -468,7 +565,7 @@ export default {
       } else {
         const newSelectedDateTime = strictParse(this.displayTime, this.computedFormat, new Date())
         if (isValid(newSelectedDateTime)) {
-          this.$emit('change', getTime(newSelectedDateTime))
+          this.doUpdateValue(getTime(newSelectedDateTime))
         } else {
           this.refreshDisplayTime(this.value)
         }
@@ -480,7 +577,7 @@ export default {
     handleTimeInput (v) {
       const newSelectedDateTime = strictParse(this.displayTime, this.computedFormat, new Date())
       if (isValid(newSelectedDateTime)) {
-        this.$emit('change', getTime(newSelectedDateTime))
+        this.doUpdateValue(getTime(newSelectedDateTime))
       }
     },
     handleRangeInput (v, isValueInvalid) {
@@ -511,7 +608,7 @@ export default {
      */
     handleInputFocus () {
       if (this.disabled) return
-      this.$emit('focus')
+      this.doFocus()
     },
     /**
      * Calendar
@@ -519,7 +616,7 @@ export default {
     openCalendar (e) {
       if (this.disabled || this.active) return
       this.active = true
-      this.$nextTick().then(this.updatePosition)
+      this.$nextTick(this.__placeableSyncPosition)
     },
     closeCalendar ({
       returnFocus,
@@ -528,12 +625,15 @@ export default {
       if (this.active) {
         this.active = false
         if (returnFocus) {
-          if (this.$refs.input) {
-            this.$refs.input.focus()
+          const {
+            inputRef
+          } = this
+          if (inputRef) {
+            inputRef.focus()
           }
         }
         if (emitBlur) {
-          this.$emit('blur')
+          this.doBlur()
         }
       }
     },
@@ -545,12 +645,12 @@ export default {
         time = getTime(time)
       }
       if (this.value === null) {
-        this.$emit('change', [time, time])
+        this.doUpdateValue([time, time])
         this.refresh([time, time])
       } else {
         const newValue = [time, Math.max(this.value[1], time)]
         if (!isEqual(newValue, this.value)) {
-          this.$emit('change', newValue)
+          this.doUpdateValue(newValue)
           this.refresh(newValue)
         }
       }
@@ -560,12 +660,12 @@ export default {
         time = getTime(time)
       }
       if (this.value === null) {
-        this.$emit('change', [time, time])
+        this.doUpdateValue([time, time])
         this.refresh([time, time])
       } else {
         const newValue = [Math.min(this.value[0], time), time]
         if (!isEqual(newValue, this.value)) {
-          this.$emit('change', newValue)
+          this.doUpdateValue(newValue)
           this.refresh(newValue)
         }
       }
@@ -578,7 +678,7 @@ export default {
       if (typeof endTime !== 'number') {
         endTime = getTime(endTime)
       }
-      this.$emit('change', [startTime, endTime])
+      this.doUpdateValue([startTime, endTime])
       this.refresh([startTime, endTime])
     },
     setInvalidStatus (isValueInvalid) {

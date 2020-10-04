@@ -66,7 +66,14 @@ placeable 进行了大调整
   - remove
     - `$NConfirm`, `$NModal` => `inject.dialog`
 - [ ] data-table
-- [ ] date-picker
+- [x] date-picker
+  - break
+    - `v-model` => `v-model:value`
+  - deprecate
+    - `on-change` => `on-update:value`
+  - bug
+    - time-picker close animation
+    - invalid time (TODO: hoist invalid)
 - [x] descriptions
 - [x] divider
 - [x] drawer

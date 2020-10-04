@@ -1,6 +1,7 @@
-import clickoutside from '../../../_directives/clickoutside'
-import focusDetector from '../../../_base/focus-detector'
-import locale from '../../../_mixins/locale'
+import FocusDetector from '../../../_base/focus-detector'
+import {
+  locale
+} from '../../../_mixins'
 import keyboardDelegate from '../../../_utils/delegate/keyboardDelegate'
 import { KEY_CODE } from '../../../_utils/event/keyCode'
 
@@ -19,21 +20,41 @@ export default {
       default: null
     }
   },
-  directives: {
-    clickoutside
-  },
   components: {
-    focusDetector
+    FocusDetector
+  },
+  props: {
+    theme: {
+      type: String,
+      default: null
+    },
+    active: {
+      type: Boolean,
+      default: undefined
+    },
+    onConfirm: {
+      type: Function,
+      default: undefined
+    },
+    'onUpdate:value': {
+      type: Function,
+      default: undefined
+    },
+    onClose: {
+      type: Function,
+      default: undefined
+    },
+    onTabOut: {
+      type: Function,
+      default: undefined
+    }
   },
   data () {
     return {
       noTransition: false,
-      memorizedValue: null,
+      memorizedValue: this.value,
       ...TIME_CONST
     }
-  },
-  created () {
-    this.memorizedValue = this.value
   },
   computed: {
     weekdays () {
@@ -41,18 +62,43 @@ export default {
     }
   },
   methods: {
+    doConfirm (...args) {
+      const {
+        onConfirm
+      } = this
+      if (onConfirm) onConfirm(...args)
+    },
+    doUpdateValue (...args) {
+      const {
+        'onUpdate:value': onUpdateValue
+      } = this
+      if (onUpdateValue) onUpdateValue(...args)
+    },
+    doClose (...args) {
+      const {
+        onClose
+      } = this
+      if (onClose) onClose(...args)
+    },
+    doTabOut (...args) {
+      const {
+        onTabOut
+      } = this
+      if (onTabOut) onTabOut(...args)
+    },
     clearValue () {
-      this.$emit('input', null)
+      this.doUpdateValue(null)
     },
     handleFocusDetectorFocus (e) {
-      this.$emit('tab-out', e)
+      this.doTabOut(e)
     },
     disableTransitionOneTick () {
       if (this.active) {
         this.noTransition = true
-        this.$nextTick().then(() => {
-          if (this.$el) {
-            this.$el.getBoundingClientRect()
+        this.$nextTick(() => {
+          const el = this.$el
+          if (el) {
+            void el.offsetWidth
           }
           this.noTransition = false
         })
@@ -67,7 +113,7 @@ export default {
         keyboardDelegate.shiftPressed
       ) {
         e.preventDefault()
-        this.$emit('tab-out')
+        this.doTabOut()
       }
     },
     handlePanelFocus (e) {
@@ -76,7 +122,7 @@ export default {
         e.target === this.$el &&
         this.$el.contains(e.relatedTarget)
       ) {
-        this.$emit('tab-out')
+        this.doTabOut()
       }
     }
   }

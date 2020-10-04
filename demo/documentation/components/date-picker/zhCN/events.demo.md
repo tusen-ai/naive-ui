@@ -1,34 +1,34 @@
 # 事件
 ```html
 <n-date-picker
-  v-model="datetime"
+  v-model:value="datetime"
   type="datetime"
   :disabled="disabled"
   @blur="onBlur1"
-  @change="onChange1"
+  @update:value="onChange1"
 />
 <n-date-picker
-  v-model="date"
+  v-model:value="date"
   type="date"
   :disabled="disabled"
   @blur="onBlur2"
-  @change="onChange2"
+  @update:value="onChange2"
 />
 <n-date-picker
-  v-model="datetimerange"
+  v-model:value="datetimerange"
   :disabled="disabled"
   type="datetimerange"
   @blur="onBlur3"
-  @change="onChange3"
+  @update:value="onChange3"
 />
 <n-date-picker
-  v-model="daterange"
+  v-model:value="daterange"
   :disabled="disabled"
   type="daterange"
   @blur="onBlur4"
-  @change="onChange4"
+  @update:value="onChange4"
 />
-<n-switch v-model="disabled" />
+<n-switch v-model:value="disabled" />
 ```
 ```js
 export default {

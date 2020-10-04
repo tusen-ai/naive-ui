@@ -117,10 +117,6 @@ export default {
     themeable,
     usecssr(styles)
   ],
-  model: {
-    prop: 'active-name',
-    event: 'active-name-change'
-  },
   props: {
     value: {
       type: String || Number,

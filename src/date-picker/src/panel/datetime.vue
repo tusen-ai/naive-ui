@@ -1,143 +1,139 @@
 <template>
-  <transition name="n-fade-in-scale-up-transition">
+  <div
+    tabindex="0"
+    class="n-date-panel n-date-panel--datetime"
+    :class="{
+      [`n-${theme}-theme`]: theme
+    }"
+    @keydown="handlePanelKeyDown"
+    @focus="handlePanelFocus"
+  >
     <div
-      v-if="active"
-      tabindex="0"
-      class="n-date-panel n-date-panel--datetime"
-      :class="{
-        [`n-${theme}-theme`]: theme
-      }"
-      @keydown="handlePanelKeyDown"
-      @focus="handlePanelFocus"
+      class="n-date-panel-input-wrapper"
     >
-      <div
-        class="n-date-panel-input-wrapper"
-      >
-        <n-input
-          v-model="displayDateString"
-          :theme="theme"
-          :stateful="false"
-          size="small"
-          class="n-date-panel-date-input"
-          :class="{
-            'n-date-panel-date-input--invalid': isDateInvalid
-          }"
-          :placeholder="localeNamespace.selectDate"
-          @blur="handleDateInputBlur"
-          @input="handleDateInput"
-        />
-        <n-time-picker
-          :show-icon="false"
-          :format="timeFormat"
-          :stateful="false"
-          :theme="theme"
-          size="small"
-          position-mode="absolute"
-          :detachable="false"
-          :value="value"
-          :placeholder="localeNamespace.selectTime"
-          stop-selector-bubble
-          :is-hour-disabled="isHourDisabled"
-          :is-minute-disabled="isMinuteDisabled"
-          :is-second-disabled="isSecondDisabled"
-          @change="handleTimePickerChange"
-        />
-      </div>
-      <div class="n-date-panel-calendar">
-        <div class="n-date-panel-month">
-          <div
-            class="n-date-panel-month__fast-prev"
-            @click="prevYear"
-          >
-            <n-base-icon type="fast-backward" />
-          </div>
-          <div
-            class="n-date-panel-month__prev"
-            @click="prevMonth"
-          >
-            <n-base-icon type="backward" />
-          </div>
-          <div class="n-date-panel-month__month-year">
-            {{ calendarMonth }} {{ calendarYear }}
-          </div>
-          <div
-            class="n-date-panel-month__next"
-            @click="nextMonth"
-          >
-            <n-base-icon type="forward" />
-          </div>
-          <div
-            class="n-date-panel-month__fast-next"
-            @click="nextYear"
-          >
-            <n-base-icon type="fast-forward" />
-          </div>
-        </div>
-        <div class="n-date-panel-weekdays">
-          <div
-            v-for="weekday in weekdays"
-            :key="weekday"
-            class="n-date-panel-weekdays__day"
-          >
-            {{ weekday }}
-          </div>
-        </div>
-        <div class="n-date-panel-dates">
-          <div
-            v-for="(dateItem, i) in dateArray"
-            :key="i"
-            class="n-date-panel-date"
-            :class="{
-              'n-date-panel-date--current': dateItem.isCurrentDate,
-              'n-date-panel-date--selected': dateItem.isSelectedDate,
-              'n-date-panel-date--excluded': !dateItem.isDateOfDisplayMonth,
-              'n-date-panel-date--transition-disabled': noTransition,
-              'n-date-panel-date--disabled': isDateDisabled(dateItem.timestamp)
-            }"
-            @click="handleDateClick(dateItem)"
-          >
-            {{ dateItem.dateObject.date }}
-          </div>
-          <div
-            v-if="!(actions && actions.length)"
-            style="height: 8px; width: 100%;"
-          />
-        </div>
-      </div>
-      <div
-        v-if="actions && actions.length"
-        class="n-date-panel-actions"
-      >
-        <n-button
-          v-if="actions.includes('clear')"
-          :theme="theme"
-          size="tiny"
-          @click="clearValue"
-        >
-          {{ localeNamespace.clear }}
-        </n-button>
-        <n-button
-          v-if="actions.includes('now')"
-          :theme="theme"
-          size="tiny"
-          @click="setSelectedDateTimeToNow"
-        >
-          {{ localeNamespace.now }}
-        </n-button>
-        <n-button
-          v-if="actions.includes('confirm')"
-          :theme="theme"
-          size="tiny"
-          type="primary"
-          :disabled="isDateTimeInvalid"
-          @click="handleConfirmClick"
-        >
-          {{ localeNamespace.confirm }}
-        </n-button>
-      </div>
-      <focus-detector @focus="handleFocusDetectorFocus" />
+      <n-input
+        v-model="displayDateString"
+        :theme="theme"
+        :stateful="false"
+        size="small"
+        class="n-date-panel-date-input"
+        :class="{
+          'n-date-panel-date-input--invalid': isDateInvalid
+        }"
+        :placeholder="localeNamespace.selectDate"
+        @blur="handleDateInputBlur"
+        @input="handleDateInput"
+      />
+      <n-time-picker
+        :show-icon="false"
+        :format="timeFormat"
+        :stateful="false"
+        :theme="theme"
+        teleport-disabled
+        size="small"
+        :detachable="false"
+        :value="value"
+        :placeholder="localeNamespace.selectTime"
+        :is-hour-disabled="isHourDisabled"
+        :is-minute-disabled="isMinuteDisabled"
+        :is-second-disabled="isSecondDisabled"
+        @update:value="handleTimePickerChange"
+      />
     </div>
-  </transition>
+    <div class="n-date-panel-calendar">
+      <div class="n-date-panel-month">
+        <div
+          class="n-date-panel-month__fast-prev"
+          @click="prevYear"
+        >
+          <n-base-icon type="fast-backward" />
+        </div>
+        <div
+          class="n-date-panel-month__prev"
+          @click="prevMonth"
+        >
+          <n-base-icon type="backward" />
+        </div>
+        <div class="n-date-panel-month__month-year">
+          {{ calendarMonth }} {{ calendarYear }}
+        </div>
+        <div
+          class="n-date-panel-month__next"
+          @click="nextMonth"
+        >
+          <n-base-icon type="forward" />
+        </div>
+        <div
+          class="n-date-panel-month__fast-next"
+          @click="nextYear"
+        >
+          <n-base-icon type="fast-forward" />
+        </div>
+      </div>
+      <div class="n-date-panel-weekdays">
+        <div
+          v-for="weekday in weekdays"
+          :key="weekday"
+          class="n-date-panel-weekdays__day"
+        >
+          {{ weekday }}
+        </div>
+      </div>
+      <div class="n-date-panel-dates">
+        <div
+          v-for="(dateItem, i) in dateArray"
+          :key="i"
+          class="n-date-panel-date"
+          :class="{
+            'n-date-panel-date--current': dateItem.isCurrentDate,
+            'n-date-panel-date--selected': dateItem.isSelectedDate,
+            'n-date-panel-date--excluded': !dateItem.isDateOfDisplayMonth,
+            'n-date-panel-date--transition-disabled': noTransition,
+            'n-date-panel-date--disabled': isDateDisabled(dateItem.timestamp)
+          }"
+          @click="handleDateClick(dateItem)"
+        >
+          {{ dateItem.dateObject.date }}
+        </div>
+        <div
+          v-if="!(actions && actions.length)"
+          style="height: 8px; width: 100%;"
+        />
+      </div>
+    </div>
+    <div
+      v-if="actions && actions.length"
+      class="n-date-panel-actions"
+    >
+      <n-button
+        v-if="actions.includes('clear')"
+        :theme="theme"
+        size="tiny"
+        @click="clearValue"
+      >
+        {{ localeNamespace.clear }}
+      </n-button>
+      <n-button
+        v-if="actions.includes('now')"
+        :theme="theme"
+        size="tiny"
+        @click="setSelectedDateTimeToNow"
+      >
+        {{ localeNamespace.now }}
+      </n-button>
+      <n-button
+        v-if="actions.includes('confirm')"
+        :theme="theme"
+        size="tiny"
+        type="primary"
+        :disabled="isDateTimeInvalid"
+        @click="handleConfirmClick"
+      >
+        {{ localeNamespace.confirm }}
+      </n-button>
+    </div>
+    <focus-detector @focus="handleFocusDetectorFocus" />
+  </div>
 </template>
 
 <script>
@@ -184,7 +180,7 @@ export default {
         this.initialValue = this.value
       } else {
         if (this.isTimeInvalid || this.isDateInvalid) {
-          this.$emit('input', this.initialValue)
+          this.doUpdateValue(this.initialValue)
         }
       }
     }
@@ -194,7 +190,7 @@ export default {
       return startOfSecond(datetime)
     },
     handleTimePickerChange (value) {
-      this.$emit('input', value)
+      this.doUpdateValue(value)
     }
   }
 }

@@ -19,10 +19,6 @@ export default {
     }
   },
   mixins: [withapp, themeable],
-  model: {
-    prop: 'value',
-    event: 'input'
-  },
   emits: ['input'],
   props: {
     name: {

@@ -15,14 +15,6 @@ import commonCalendarMixin from './commonCalendarMixin'
 export default {
   mixins: [commonCalendarMixin],
   props: {
-    theme: {
-      type: String,
-      default: null
-    },
-    active: {
-      type: Boolean,
-      default: true
-    },
     value: {
       validator (value) {
         if (value === null) return true
@@ -281,9 +273,6 @@ export default {
         this.isSelecting = false
       }
     },
-    handleClickOutside () {
-      this.closeCalendar()
-    },
     syncCalendarTimeWithValue (value) {
       if (value === null) return
       const [startMoment, endMoment] = value
@@ -326,13 +315,13 @@ export default {
       if (this.isRangeInvalid) {
         return
       }
-      this.$emit('confirm')
+      this.doConfirm()
       this.closeCalendar()
     },
     closeCalendar () {
       this.isSelecting = false
       if (this.active) {
-        this.$emit('close')
+        this.doClose()
       }
     },
     changeStartDateTime (time) {
@@ -340,9 +329,9 @@ export default {
         time = getTime(time)
       }
       if (this.value === null) {
-        this.$emit('input', [time, time])
+        this.doUpdateValue([time, time])
       } else {
-        this.$emit('input', [time, Math.max(this.value[1], time)])
+        this.doUpdateValue([time, Math.max(this.value[1], time)])
       }
     },
     changeEndDateTime (time) {
@@ -350,9 +339,9 @@ export default {
         time = getTime(time)
       }
       if (this.value === null) {
-        this.$emit('input', [time, time])
+        this.doUpdateValue([time, time])
       } else {
-        this.$emit('input', [Math.min(this.value[0], time), time])
+        this.doUpdateValue([Math.min(this.value[0], time), time])
       }
     },
     changeStartEndTime (startTime, endTime) {
@@ -363,7 +352,7 @@ export default {
       if (typeof endTime !== 'number') {
         endTime = getTime(endTime)
       }
-      this.$emit('input', [startTime, endTime])
+      this.doUpdateValue([startTime, endTime])
     },
     /** change calendar time */
     adjustCalendarTimes (byStartCalendarTime) {

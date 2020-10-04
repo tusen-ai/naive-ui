@@ -1,23 +1,23 @@
 # Disabled Specific Time
 ```html
 <n-date-picker
-  v-model="timestamp1"
+  v-model:value="timestamp1"
   type="date"
   :is-date-disabled = "dateDisabled"
 />
 <n-date-picker
-  v-model="timestamp2"
+  v-model:value="timestamp2"
   type="datetime"
   :is-date-disabled = "dateDisabled"
   :is-time-disabled= "timeDisabled"
 />
 <n-date-picker
-  v-model="timestamp3"
+  v-model:value="timestamp3"
   type="daterange"
   :is-date-disabled = "isRangeDateDisabled"
 />
 <n-date-picker
-  v-model="timestamp4"
+  v-model:value="timestamp4"
   type="datetimerange"
   :is-date-disabled = "isRangeDateDisabled"
   :is-time-disabled= "isRangeTimeDisabled"

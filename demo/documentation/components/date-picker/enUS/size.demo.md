@@ -2,17 +2,17 @@
 Date Picker can be `small`, `medium` or `large` sized.
 ```html
 <n-date-picker
-  v-model="timestamp"
+  v-model:value="timestamp"
   size="small"
   type="date"
 />
 <n-date-picker
-  v-model="timestamp"
+  v-model:value="timestamp"
   size="medium"
   type="date"
 />
 <n-date-picker
-  v-model="timestamp"
+  v-model:value="timestamp"
   size="large"
   type="date"
 />
