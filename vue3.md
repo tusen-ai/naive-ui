@@ -109,8 +109,8 @@ placeable 进行了大调整
     - `v-model` => `v-model:value`
   - new
     - `on-update:value`
-- [ ] input-group
-- [ ] input-group-label
+- [x] input-group
+- [x] input-group-label
 - [x] input-number
   - deprecate
     - `on-change` => `on-update:value`

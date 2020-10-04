@@ -13,9 +13,9 @@ disabled
 clearable
 autosize
 pair
+input-group
 passively-activated
 ```
-<!-- input-group -->
 
 ## Props
 ### Input Props
