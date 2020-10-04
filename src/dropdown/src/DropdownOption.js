@@ -1,7 +1,7 @@
 import { h, computed, inject, ref } from 'vue'
 import { render } from '../../_utils/vue'
 import { placeable } from '../../_mixins'
-import ChevronRightIcon from './ChevronRight.vue'
+import { ChevronRightIcon } from '../../_base/icons'
 import NIcon from '../../icon'
 import { useMemo, useDelayedTrue } from '../../_utils/composition'
 import NDropdownMenu from './DropdownMenu'

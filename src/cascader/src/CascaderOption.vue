@@ -17,9 +17,10 @@
   >
     <div
       v-if="type==='multiple'"
-      class="n-cascader-option__checkbox"
+      class="n-cascader-option__prefix"
     >
       <n-checkbox
+
         :disabled="disabled"
         :checked="checkboxChecked"
         :indeterminate="checkboxIndeterminate"
@@ -28,7 +29,7 @@
     </div>
     <div
       v-else-if="type==='multiple-all-options' || type === 'single-all-options'"
-      class="n-cascader-option__radio"
+      class="n-cascader-option__prefix"
     >
       <n-radio
         :disabled="disabled"
@@ -37,28 +38,41 @@
         @click.stop="handleOptionCheck"
       />
     </div>
-    <div
-      v-else-if="type==='single' && isLeaf"
-      class="n-cascader-option__checkbox"
-    >
-      <!-- <n-checkbox
-        :disabled="disabled"
-        :checked="checked"
-        @click.stop="handleOptionCheck"
-      /> -->
-    </div>
     <span
       class="n-cascader-option__label"
-    >{{ label }}
-    </span>
-    <transition name="n-cascader-option-loading-transition">
+    >{{ label }}</span>
+    <div
+      v-if="!isLeaf || (isLeaf && type === 'single')"
+      class="n-cascader-option__suffix"
+    >
       <div
-        v-if="loading"
-        class="n-cascader-option__loading"
+        class="n-cascader-option-icon-placeholder"
       >
-        <n-base-loading :theme="NCascader.syntheticTheme" />
+        <n-icon-switch-transition
+          v-if="!isLeaf"
+        >
+          <n-base-loading
+            v-if="loading"
+            key="loading"
+            class="n-cascader-option-icon"
+            :theme="NCascader.syntheticTheme"
+          />
+          <n-icon
+            v-else
+            key="arrow"
+            class="n-cascader-option-icon n-cascader-option-icon--arrow"
+          >
+            <chevron-right-icon />
+          </n-icon>
+        </n-icon-switch-transition>
+        <n-icon
+          v-else-if="checked"
+          class="n-cascader-option-icon n-cascader-option-icon--checkmark"
+        >
+          <checkmark-icon />
+        </n-icon>
       </div>
-    </transition>
+    </div>
   </div>
 </template>
 
@@ -66,18 +80,26 @@
 import NCheckbox from '../../checkbox'
 import NRadio from '../../radio'
 import NBaseLoading from '../../_base/loading'
+import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
+import { ChevronRightIcon, CheckmarkIcon } from '../../_base/icons'
 
 export default {
   name: 'NCascaderOption',
   inject: {
     NCascader: {
       default: null
+    },
+    NCascaderMenu: {
+      default: null
     }
   },
   components: {
     NCheckbox,
     NRadio,
-    NBaseLoading
+    NBaseLoading,
+    NIconSwitchTransition,
+    ChevronRightIcon,
+    CheckmarkIcon
   },
   props: {
     checked: {
@@ -197,24 +219,38 @@ export default {
       }
     }
   },
-  created () {
-    // console.log(this.type)
-  },
   methods: {
     handleClick (e) {
-      this.$emit('click', e, this.option)
+      const {
+        NCascaderMenu: {
+          handleOptionClick
+        }
+      } = this
+      handleOptionClick(e, this.option)
     },
     handleMouseEnter (e) {
-      this.$emit('mouseenter', e, this.option)
+      const {
+        NCascaderMenu: {
+          handleOptionMouseEnter
+        }
+      } = this
+      handleOptionMouseEnter(e, this.option)
     },
     handleMouseLeave (e) {
-      this.$emit('mouseleave', e, this.option)
+      const {
+        NCascaderMenu: {
+          handleOptionMouseLeave
+        }
+      } = this
+      handleOptionMouseLeave(e, this.option)
     },
-    handleOptionCheck (e) {
-      this.$emit('check', this.option)
-    },
-    setLoading (loading) {
-      this.loading = loading
+    handleOptionCheck () {
+      const {
+        NCascaderMenu: {
+          handleOptionCheck
+        }
+      } = this
+      handleOptionCheck(this.option.id)
     }
   }
 }

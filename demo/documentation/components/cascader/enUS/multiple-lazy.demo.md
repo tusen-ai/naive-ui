@@ -1,7 +1,7 @@
 # Async Multiple
 ```html
 <n-cascader
-  v-model="value"
+  v-model:value="value"
   multiple
   :leaf-only="false"
   placeholder="Please Select Something"

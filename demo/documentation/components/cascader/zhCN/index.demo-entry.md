@@ -19,11 +19,6 @@ multiple-lazy
 filter
 ```
 
-## V-model
-|Prop|Event|
-|-|-|
-|value|change|
-
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
@@ -42,9 +37,6 @@ filter
 |on-load|`(option: CascaderOption, resolve: (children: Array<CascaderOption>) => void) => any`|`() => {}`|在点击未加载完成节点时的回调。把获得的子节点传入 `resolve` 函数来设定这个节点的子节点。|
 |separator|`string`|`'/'`||
 |filter|`(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean`|一个基于字符串的过滤算法||
-
-## Events
-|名称|参数|说明|
-|-|-|-|
-|change|`(value: string \| number \| Array<string \| number>)`||
-|blur|`()`||
+|on-focus|`() => any`|`undefined`||
+|on-blur|`() => any`|`undefined`||
+|on-update:value|`(value: string \| number \| Array<string \| number>) => any`|`undefined`||

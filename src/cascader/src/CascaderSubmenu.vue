@@ -1,14 +1,10 @@
 <template>
   <div
     class="n-cascader-submenu"
-    @mouseleave="handleMouseLeave"
   >
-    <n-scrollbar ref="scrollbar">
-      <n-base-tracking-rect
-        ref="trackingRect"
-        :theme="theme"
-        :item-size="itemSize"
-      />
+    <n-scrollbar
+      ref="scrollbarRef"
+    >
       <n-cascader-option
         v-for="(option, index) in options"
         ref="options"
@@ -36,21 +32,15 @@
         :loaded="option.loaded"
         :determined="option.determined"
         :loading="option.loading"
-        @check="handleOptionCheck"
-        @click="handleOptionClick"
-        @mouseenter="handleOptionMouseEnter"
-        @mouseleave="handleOptionMouseLeave"
       />
     </n-scrollbar>
   </div>
 </template>
 
 <script>
+import { ref } from 'vue'
 import NCascaderOption from './CascaderOption.vue'
 import NScrollbar from '../../scrollbar'
-import NBaseTrackingRect from '../../_base/tracking-rect'
-import debounce from 'lodash-es/debounce'
-import depx from '../../_utils/css/depx'
 
 export default {
   name: 'NCascaderSubmenu',
@@ -61,8 +51,7 @@ export default {
   },
   components: {
     NCascaderOption,
-    NScrollbar,
-    NBaseTrackingRect
+    NScrollbar
   },
   props: {
     depth: {
@@ -73,52 +62,19 @@ export default {
       type: Array,
       required: true
     },
-    menuIsLoading: {
-      type: Boolean,
-      default: false
-    },
     size: {
       type: String,
       default: 'medium'
     }
   },
-  data () {
+  setup () {
     return {
-      active: true
+      scrollbarRef: ref(null)
     }
   },
   computed: {
     theme () {
       return this.NCascader.syntheticTheme
-    },
-    itemSize () {
-      const localCssrProps = this.NCascader.cssrProps.$local
-      return depx(localCssrProps.height[this.size])
-    }
-  },
-  methods: {
-    handleOptionMouseEnter (e, option) {
-      if (!option.disabled) {
-        this.updateTrackingRectPosition(e)
-      }
-      this.$emit('option-mouseenter', e, option)
-    },
-    updateTrackingRectPosition: debounce(function (e) {
-      const trackingRect = this.$refs.trackingRect
-      trackingRect && trackingRect.updateTrackingRectTop(e.target)
-    }, 64),
-    handleOptionMouseLeave (e, option) {
-      this.$emit('option-mouseleave', e, option)
-    },
-    handleOptionClick (e, option) {
-      this.$emit('option-click', e, option)
-    },
-    handleMouseLeave: debounce(function (e) {
-      const trackingRect = this.$refs.trackingRect
-      trackingRect && trackingRect.hideTrackingRect()
-    }, 64),
-    handleOptionCheck (option) {
-      this.$emit('option-check', option.id)
     }
   }
 }

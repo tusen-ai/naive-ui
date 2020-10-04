@@ -1,7 +1,7 @@
 # 过滤
 ```html
 <n-cascader
-  v-model="value1"
+  v-model:value="value1"
   placeholder="可过滤多项（仅叶子节点）"
   :options="options"
   filterable
@@ -10,7 +10,7 @@
   style="margin-bottom:10px;"
 />
 <n-cascader
-  v-model="value2"
+  v-model:value="value2"
   placeholder="可过滤多项"
   :options="options"
   filterable
@@ -20,7 +20,7 @@
   style="margin-bottom:10px;"
 />
 <n-cascader
-  v-model="value3"
+  v-model:value="value3"
   placeholder="可过滤单项（仅叶子节点）"
   :options="options"
   filterable
@@ -28,7 +28,7 @@
   style="margin-bottom:10px;"
 />
 <n-cascader
-  v-model="value4"
+  v-model:value="value4"
   placeholder="可过滤单项"
   :options="options"
   filterable

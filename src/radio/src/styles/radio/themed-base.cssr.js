@@ -46,7 +46,6 @@ export default c([
               transition:
               background-color .3s ${cubicBezierEaseInOut},
               box-shadow .3s ${cubicBezierEaseInOut};
-              margin-right: 9px;
               position: relative;
               border-radius: 50%;
             `,
@@ -54,6 +53,9 @@ export default c([
             boxShadow: boxShadow
           }
           , [
+            c('&:not(:last-child)', {
+              marginRight: '9px'
+            }),
             c('&::before', {
               raw: `
                 content: "";

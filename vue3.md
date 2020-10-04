@@ -35,7 +35,11 @@ placeable 进行了大调整
 - [x] button
 - [x] button-group
 - [x] card
-- [ ] cascader
+- [x] cascader
+  - break
+    - `v-model` => `v-model:value`
+  - deprecated
+    - `on-change` => `on-update:value`
 - [x] checkbox
   - deprecate
     - `on-change` => `on-update:checked`

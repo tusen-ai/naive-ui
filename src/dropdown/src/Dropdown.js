@@ -9,7 +9,7 @@ import { KEY_CODE } from '../../_utils/event/keyCode'
 import keyboardDelegate from '../../_utils/delegate/keyboardDelegate'
 import NPopover from '../../popover'
 import NDropdownMenu from './DropdownMenu.js'
-import { useMergedState } from '../../_utils/composition'
+import { useMergedState, useFalseUntilTruthy } from '../../_utils/composition'
 import { keep, call } from '../../_utils/vue'
 import styles from './styles'
 
@@ -75,11 +75,30 @@ export default {
     ...dropdownProps
   },
   setup (props) {
-    const treemateRef = computed(() => TreeMate(props.options, treemateOptions))
-    const tmNodesRef = computed(() => treemateRef.value.treeNodes)
-    const tmNodeMap = computed(() => treemateRef.value.treeNodeMap)
-    const getPathRef = computed(() => treemateRef.value.getPath)
-    const getFirstAvailableNodeRef = computed(() => treemateRef.value.getFirstAvailableNode)
+    const uncontrolledShowRef = ref(false)
+    const mergedShowRef = useMergedState(toRef(props, 'show'), uncontrolledShowRef)
+    const dataNeededRef = useFalseUntilTruthy(mergedShowRef)
+
+    const treemateRef = computed(() => {
+      if (dataNeededRef.value) return TreeMate(props.options, treemateOptions)
+      return null
+    })
+    const tmNodesRef = computed(() => {
+      if (dataNeededRef.value) return treemateRef.value.treeNodes
+      return null
+    })
+    const tmNodeMap = computed(() => {
+      if (dataNeededRef.value) return treemateRef.value.treeNodeMap
+      return null
+    })
+    const getPathRef = computed(() => {
+      if (dataNeededRef.value) return treemateRef.value.getPath
+      return null
+    })
+    const getFirstAvailableNodeRef = computed(() => {
+      if (dataNeededRef.value) return treemateRef.value.getFirstAvailableNode
+      return null
+    })
 
     const hoverKeyRef = ref(null)
     const keyboardKeyRef = ref(null)
@@ -90,9 +109,6 @@ export default {
     const activeKeyPathRef = computed(() => getPathRef.value(
       pendingKeyRef.value
     ).keyPath)
-
-    const uncontrolledShowRef = ref(false)
-    const mergedShow = useMergedState(toRef(props, 'show'), uncontrolledShowRef)
 
     return {
       // data
@@ -108,7 +124,7 @@ export default {
       keyboardHandlerRegistered: ref(false),
       // show
       uncontrolledShow: uncontrolledShowRef,
-      mergedShow,
+      mergedShow: mergedShowRef,
       // methods
       getPath: getPathRef,
       getFirstAvailableNode: getFirstAvailableNodeRef

@@ -29,7 +29,10 @@
         'n-radio__dot--checked': renderSafeChecked
       }"
     />
-    <div class="n-radio__label">
+    <div
+      v-if="$slots.default"
+      class="n-radio__label"
+    >
       <slot />
     </div>
   </div>

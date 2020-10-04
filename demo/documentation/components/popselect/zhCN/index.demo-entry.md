@@ -19,7 +19,7 @@ multiple
 |options|`Array<SelectOption \| SelectOptionGroup>`|`[]`||
 |scrollable|`boolean`|`false`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
-|value|`string \| number`|`null`||
+|value|`string \| number \| Array<string \| number> \| null`|`null`||
 |on-update:value|`(string \| number \| Array<string \| number> \| null) => any`|`undefined`||
 
 对于 SelectOption & SelectOptionGroup，参考 [Select](n-select#SelectOption-Type)

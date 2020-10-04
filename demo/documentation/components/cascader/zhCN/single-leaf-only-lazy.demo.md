@@ -1,7 +1,7 @@
 # 异步单项（仅叶子节点）
 ```html
 <n-cascader
-  v-model="value"
+  v-model:value="value"
   placeholder="请选些什么"
   remote
   :on-load="handleLoad"

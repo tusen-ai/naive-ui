@@ -1,20 +1,25 @@
 <template>
   <div
-    ref="contentContainer"
+    ref="offsetContainerRef"
+    v-zindexable="{ enabled: active }"
     class="n-positioning-container"
   >
-    <div ref="content" class="n-positioning-content">
-      <transition name="n-fade-in-scale-up-transition">
+    <div ref="trackingRef" class="n-positioning-content">
+      <transition
+        name="n-fade-in-scale-up-transition"
+        :appear="NCascader.isMounted"
+      >
         <n-base-select-menu
           v-if="active"
-          ref="contentInner"
+          ref="menuRef"
+          v-clickoutside="handleClickOutside"
           class="n-cascader-menu"
           :theme="theme"
           :pattern="pattern"
           :options="filteredSelectOptions"
           :multiple="multiple"
           :size="size"
-          :is-option-selected="isSelected"
+          :value="value"
           @menu-toggle-option="handleSelectMenuToggleOption"
           @menu-visible="handleMenuVisible"
         />
@@ -24,10 +29,16 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 import NBaseSelectMenu from '../../_base/select-menu'
 import { traverseWithCallback, getPickerElement } from './utils'
-import placeable from '../../_mixins/placeable'
-import zindexable from '../../_mixins/zindexable'
+import {
+  placeable
+} from '../../_mixins'
+import {
+  zindexable,
+  clickoutside
+} from '../../_directives'
 
 export default {
   name: 'NCascaderSelectMenu',
@@ -39,19 +50,27 @@ export default {
       default: null
     }
   },
-  mixins: [ placeable, zindexable ],
+  directives: {
+    zindexable,
+    clickoutside
+  },
+  mixins: [
+    placeable
+  ],
   props: {
     type: {
       type: String,
       required: true
     },
+    // eslint-disable-next-line vue/require-prop-types
     placement: {
-      type: String,
+      ...placeable.props.placement,
       default: 'bottom-start'
     },
+    // eslint-disable-next-line vue/require-prop-types
     widthMode: {
-      type: String,
-      default: 'activator'
+      ...placeable.props.widthMode,
+      default: 'trigger'
     },
     value: {
       type: [String, Number, Array],
@@ -84,15 +103,24 @@ export default {
     filter: {
       type: Function,
       default: (pattern, _, path) => path.some(option => option.label && ~(option.label.indexOf(pattern)))
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:value': {
+      type: Function,
+      required: true
     }
   },
-  data () {
+  setup () {
     return {
-      /** for zindexable, shouldn't be changed */
-      zindexable: true
+      offsetContainerRef: ref(null),
+      trackingRef: ref(null),
+      menuRef: ref(null)
     }
   },
   computed: {
+    __placeableEnabled () {
+      return this.active
+    },
     selectOptions () {
       const selectOptions = []
       const type = this.type
@@ -119,80 +147,80 @@ export default {
         value: option.value,
         label: option.label
       }))
-    },
-    valueSet () {
-      return new Set(this.value)
     }
   },
   watch: {
     value () {
-      this.$nextTick().then(() => {
-        // console.log('menu model')
-        this.updatePosition()
+      this.$nextTick(() => {
+        this.__placeableSyncPosition()
       })
     },
     pattern () {
-      this.$nextTick().then(() => {
-        // console.log('menu model')
-        this.updatePosition()
+      this.$nextTick(() => {
+        this.__placeableSyncPosition()
       })
     }
   },
   methods: {
-    getZindexableContent () {
-      return this.$el
+    __placeableOffsetContainer () {
+      return this.offsetContainerRef
     },
-    getTrackedElement () {
+    __placeableTracking () {
+      return this.trackingRef
+    },
+    __placeableTracked () {
       return getPickerElement(this)
     },
-    /**
-     * filterable related attributes
-     */
-    isSelected (option) {
-      if (this.multiple) {
-        return this.valueSet.has(option.value)
-      } else {
-        return this.value === option.value
-      }
+    __placeableBody () {
+      return this.menuRef
     },
     handleSelectMenuToggleOption (option) {
       this.handleSelectOptionCheck(option)
     },
     handleSelectOptionCheck (option) {
       if (option.disabled) return
+      const {
+        'onUpdate:value': onUpdateValue
+      } = this
       if (this.type === 'multiple' || this.type === 'multiple-all-options') {
         if (Array.isArray(this.value)) {
           const index = this.value.findIndex(v => v === option.value)
           if (~index) {
             const newValue = this.value
             newValue.splice(index, 1)
-            this.$emit('input', newValue)
+            onUpdateValue(newValue)
           } else {
             const newValue = this.value
             newValue.push(option.value)
-            this.$emit('input', newValue)
+            onUpdateValue(newValue)
           }
         } else {
-          this.$emit('input', [option.value])
+          onUpdateValue([option.value])
         }
       } else {
-        this.$emit('input', option.value)
+        onUpdateValue(option.value)
       }
     },
     prev () {
-      this.$refs.contentInner && this.$refs.contentInner.prev()
+      const { menuRef } = this
+      menuRef && menuRef.prev()
     },
     next () {
-      this.$refs.contentInner && this.$refs.contentInner.next()
+      const { menuRef } = this
+      menuRef && menuRef.next()
     },
     enter () {
-      if (this.$refs.contentInner) {
-        const pendingOptionData = this.$refs.contentInner.getPendingOptionData()
+      const { menuRef } = this
+      if (menuRef) {
+        const pendingOptionData = menuRef.getPendingOptionData()
         this.handleSelectOptionCheck(pendingOptionData)
       }
     },
     handleMenuVisible () {
-      this.updatePosition()
+      this.__placeableSyncPosition()
+    },
+    handleClickOutside (e) {
+      this.NCascader.handleSelectMenuClickOutside(e)
     }
   }
 }

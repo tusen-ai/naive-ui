@@ -2,21 +2,21 @@
 级联选择有 `small`、`medium` 和 `large` 尺寸。
 ```html
 <n-cascader
-  v-model="value"
+  v-model:value="value"
   placeholder="请选些什么"
   :options="options"
   :leaf-only="false"
   size="small"
 />
 <n-cascader
-  v-model="value"
+  v-model:value="value"
   placeholder="请选些什么"
   :options="options"
   :leaf-only="false"
   size="medium"
 />
 <n-cascader
-  v-model="value"
+  v-model:value="value"
   placeholder="请选些什么"
   :options="options"
   :leaf-only="false"

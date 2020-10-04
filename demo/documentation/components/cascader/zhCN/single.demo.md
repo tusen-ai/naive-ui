@@ -1,7 +1,7 @@
 # 单项
 ```html
 <n-cascader
-  v-model="value"
+  v-model:value="value"
   placeholder="请选些什么"
   :options="options"
   :leaf-only="false"

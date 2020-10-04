@@ -1,7 +1,7 @@
 # Filter
 ```html
 <n-cascader
-  v-model="value1"
+  v-model:value="value1"
   placeholder="Filterable Multiple (Leaf Only)"
   :options="options"
   filterable
@@ -10,7 +10,7 @@
   style="margin-bottom:10px;"
 />
 <n-cascader
-  v-model="value2"
+  v-model:value="value2"
   placeholder="Filterable Multiple"
   :options="options"
   filterable
@@ -20,7 +20,7 @@
   style="margin-bottom:10px;"
 />
 <n-cascader
-  v-model="value3"
+  v-model:value="value3"
   placeholder="Filterable Single (Leaf Only)"
   :options="options"
   filterable
@@ -28,7 +28,7 @@
   style="margin-bottom:10px;"
 />
 <n-cascader
-  v-model="value4"
+  v-model:value="value4"
   placeholder="Filterable Single"
   :options="options"
   filterable

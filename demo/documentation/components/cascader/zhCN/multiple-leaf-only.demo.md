@@ -1,7 +1,7 @@
 # 多项（仅叶子节点）
 ```html
 <n-cascader
-  v-model="value"
+  v-model:value="value"
   multiple
   placeholder="请选些什么"
   :options="options"

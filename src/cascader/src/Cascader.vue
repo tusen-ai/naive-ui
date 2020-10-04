@@ -2,10 +2,6 @@
   <div
     ref="self"
     class="n-cascader"
-    @keydown.up.prevent
-    @keydown.down.prevent
-    @keydown.left.prevent
-    @keydown.right.prevent
     @keydown.space="handleKeyDownSpace"
     @keyup.esc="handleKeyUpEsc"
     @keyup.space="handleKeyUpSpace"
@@ -16,7 +12,7 @@
     @keyup.right="handleKeyUpRight"
   >
     <n-base-selection
-      ref="activator"
+      ref="triggerRef"
       class="n-cascader-selection"
       :size="syntheticSize"
       :theme="syntheticTheme"
@@ -37,13 +33,16 @@
       @delete-last-option="handleDeleteLastOption"
       @pattern-input="handlePatternInput"
     />
-    <n-base-portal ref="portal1">
+    <n-lazy-teleport
+      :show="active && !selectMenuActive"
+    >
       <cascader-menu
-        ref="menu1"
-        v-clickoutside="handleCascaderMenuClickOutside"
+        ref="cascaderMenuRef"
+        v-model:active-id="activeId"
+        v-model:patches="patches"
+        v-model:loading="loading"
         :active="active && !selectMenuActive"
         :class="{
-          [`n-${syntheticTheme}-theme`]: syntheticTheme,
           [namespace]: namespace
         }"
         :type="type"
@@ -53,21 +52,19 @@
         :pattern="pattern"
         :filterable="filterable"
         :expand-trigger="expandTrigger"
-        :active-id.sync="activeId"
         :lazy="remote"
         :on-load="onLoad"
-        :patches.sync="patches"
-        :loading.sync="loading"
-        :loading-id.sync="loadingId"
         :theme="syntheticTheme"
         :size="syntheticSize"
-        @input="handleMenuInput"
+        @update:loading-id="loadingId = $event"
+        @update:value="handleMenuInput"
       />
-    </n-base-portal>
-    <n-base-portal ref="portal2">
+    </n-lazy-teleport>
+    <n-lazy-teleport
+      :show="selectMenuActive"
+    >
       <cascader-select-menu
-        ref="menu2"
-        v-clickoutside="handleSelectMenuClickOutside"
+        ref="selectMenuRef"
         :class="{
           [namespace]: namespace
         }"
@@ -79,26 +76,30 @@
         :size="syntheticSize"
         :multiple="multiple"
         :options="menuOptions"
-        @input="handleMenuInput"
+        @update:value="handleMenuInput"
       />
-    </n-base-portal>
+    </n-lazy-teleport>
   </div>
 </template>
 
 <script>
+import { ref } from 'vue'
 import NBaseSelection from '../../_base/selection'
-import NBasePortal from '../../_base/portal'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import clickoutside from '../../_directives/clickoutside'
-import CascaderMenu from './CascaderMenu.vue'
+import NLazyTeleport from '../../_base/lazy-teleport'
+import {
+  configurable,
+  themeable,
+  locale,
+  usecssr,
+  asformitem
+} from '../../_mixins'
+import { useIsMounted } from '../../_utils/composition'
+import { warn } from '../../_utils/naive'
+import { call } from '../../_utils/vue'
 import { getType, traverseWithCallback } from './utils'
-import asformitem from '../../_mixins/asformitem'
+import CascaderMenu from './CascaderMenu.vue'
 import CascaderSelectMenu from './CascaderSelectMenu.vue'
-import locale from '../../_mixins/locale'
-import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
-
 import {
   rootedOptions,
   patchedOptions,
@@ -112,18 +113,15 @@ export default {
     CascaderMenu,
     CascaderSelectMenu,
     NBaseSelection,
-    NBasePortal
+    NLazyTeleport
   },
   provide () {
     return {
       NCascader: this
     }
   },
-  directives: {
-    clickoutside
-  },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     asformitem(),
     locale('Cascader'),
@@ -132,10 +130,6 @@ export default {
       injectCssrProps: true
     })
   ],
-  model: {
-    prop: 'value',
-    event: 'change'
-  },
   props: {
     options: {
       type: Array,
@@ -200,6 +194,27 @@ export default {
     placement: {
       type: String,
       default: 'bottom-start'
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:value': {
+      type: [Function, Array],
+      default: undefined
+    },
+    // deprecated
+    onChange: {
+      validator () {
+        warn('cascader', '`on-change` is deprecated, please use `on-update:value` instead.')
+        return true
+      },
+      default: undefined
+    }
+  },
+  setup () {
+    return {
+      cascaderMenuRef: ref(null),
+      selectMenuRef: ref(null),
+      triggerRef: ref(null),
+      isMounted: useIsMounted()
     }
   },
   data () {
@@ -290,22 +305,41 @@ export default {
     }
   },
   watch: {
-    active () {
-      if (this.$refs.portal1) {
-        this.$refs.portal1.transferElement()
-      }
-      if (this.$refs.portal2) {
-        this.$refs.portal2.transferElement()
-      }
-    },
     options () {
       this.activeId = null
     }
   },
   methods: {
+    doUpdateValue (...args) {
+      const {
+        'onUpdate:value': onUpdateValue,
+        onChange,
+        __triggerFormInput,
+        __triggerFormChange
+      } = this
+      if (onUpdateValue) call(onUpdateValue, ...args)
+      if (onChange) call(onChange, ...args)
+      __triggerFormInput()
+      __triggerFormChange()
+    },
+    doBlur (...args) {
+      const {
+        onBlur,
+        __triggerFormBlur
+      } = this
+      if (onBlur) call(onBlur, ...args)
+      __triggerFormBlur()
+    },
+    doFocus (...args) {
+      const {
+        onFocus,
+        __triggerFormFocus
+      } = this
+      if (onFocus) call(onFocus, ...args)
+      __triggerFormFocus()
+    },
     deactivate () {
       this.active = false
-      this.$emit('setactive', false)
     },
     activate () {
       this.active = true
@@ -315,7 +349,7 @@ export default {
         this.pattern = ''
         this.activate()
         if (this.filterable) {
-          this.$refs.activator.focusPatternInput()
+          this.triggerRef.focusPatternInput()
         }
       }
     },
@@ -326,7 +360,7 @@ export default {
     handleCascaderMenuClickOutside (e) {
       if (this.selectMenuActive) return
       if (this.active) {
-        if (!this.$refs.activator.$el.contains(e.target)) {
+        if (!this.triggerRef.$el.contains(e.target)) {
           this.closeMenu()
         }
       }
@@ -344,65 +378,91 @@ export default {
       if (!this.active) {
         this.openMenu()
       } else {
-        if (this.$refs.menu1) {
-          this.$refs.menu1.enter()
+        const {
+          cascaderMenuRef,
+          selectMenuRef
+        } = this
+        if (cascaderMenuRef) {
+          cascaderMenuRef.enter()
         }
-        if (this.$refs.menu2) {
-          this.$refs.menu2.enter()
+        if (selectMenuRef) {
+          selectMenuRef.enter()
         }
       }
     },
-    handleKeyUpUp () {
-      if (this.active && this.$refs.menu1) {
-        this.$refs.menu1.prev()
+    handleKeyUpUp (e) {
+      e.preventDefault()
+      const {
+        active,
+        cascaderMenuRef,
+        selectMenuRef
+      } = this
+      if (active && cascaderMenuRef) {
+        cascaderMenuRef.prev()
       }
-      if (this.active && this.$refs.menu2) {
-        this.$refs.menu2.prev()
-      }
-    },
-    handleKeyUpDown () {
-      if (this.active && this.$refs.menu1) {
-        this.$refs.menu1.next()
-      }
-      if (this.active && this.$refs.menu2) {
-        this.$refs.menu2.next()
+      if (active && selectMenuRef) {
+        selectMenuRef.prev()
       }
     },
-    handleKeyUpLeft () {
-      if (this.active && this.$refs.menu1) {
-        this.$refs.menu1.shallow()
+    handleKeyUpDown (e) {
+      e.preventDefault()
+      const {
+        active,
+        cascaderMenuRef,
+        selectMenuRef
+      } = this
+      if (active && cascaderMenuRef) {
+        cascaderMenuRef.next()
+      }
+      if (active && selectMenuRef) {
+        selectMenuRef.next()
       }
     },
-    handleKeyUpRight () {
-      if (this.active && this.$refs.menu1) {
-        this.$refs.menu1.deep()
+    handleKeyUpLeft (e) {
+      e.preventDefault()
+      const {
+        active,
+        cascaderMenuRef
+      } = this
+      if (active && cascaderMenuRef) {
+        cascaderMenuRef.shallow()
+      }
+    },
+    handleKeyUpRight (e) {
+      e.preventDefault()
+      const {
+        active,
+        cascaderMenuRef
+      } = this
+      if (active && cascaderMenuRef) {
+        cascaderMenuRef.deep()
       }
     },
     handleMenuInput (value) {
-      this.$emit('change', value)
+      this.doUpdateValue(value)
       if (this.type === 'single') {
         this.closeMenu()
       } else if (this.type === 'single-all-options') {
         this.closeMenu()
       } else {
-        const activator = this.$refs.activator
-        if (activator && this.filterable) {
+        const trigger = this.triggerRef
+        if (trigger && this.filterable) {
           this.pattern = ''
           this.$nextTick().then(() => {
-            activator.focusPatternInput()
+            trigger.focusPatternInput()
           })
         }
       }
     },
     handleClear () {
-      this.$emit('change', null)
+      this.doUpdateValue(null)
     },
     handleActivatorFocus () {
-      this.$emit('focus')
+      this.doFocus()
     },
     handleActivatorBlur () {
-      this.$emit('blur')
-      this.closeMenu()
+      this.doBlur()
+      // this.closeMenu()
     },
     handleActivatorClick () {
       if (this.filterable) {
@@ -420,7 +480,7 @@ export default {
         if (Array.isArray(this.value)) {
           const newValue = this.value
           newValue.pop()
-          this.$emit('change', newValue)
+          this.doUpdateValue(newValue)
         }
       }
     },
@@ -433,10 +493,10 @@ export default {
         if (~index) {
           const newValue = this.value
           newValue.splice(index, 1)
-          this.$emit('change', newValue)
+          this.doUpdateValue(newValue)
         }
       } else {
-        this.$emit('change', null)
+        this.doUpdateValue(null)
       }
       this.$el.focus()
     },
@@ -445,7 +505,7 @@ export default {
      */
     handleKeyUpEsc () {
       this.closeMenu()
-      this.$refs.activator.focusPatternInputWrapper()
+      this.triggerRef.focusPatternInputWrapper()
     },
     handleKeyDownSpace (e) {
       if (!this.filterable) {

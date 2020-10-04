@@ -1,7 +1,7 @@
 # Async Single (Leaf Only)
 ```html
 <n-cascader
-  v-model="value"
+  v-model:value="value"
   placeholder="Please Select Something"
   remote
   :on-load="handleLoad"

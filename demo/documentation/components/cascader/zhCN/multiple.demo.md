@@ -1,7 +1,7 @@
 # 多项
 ```html
 <n-cascader
-  v-model="value"
+  v-model:value="value"
   multiple
   :leaf-only="false"
   placeholder="请选些什么"

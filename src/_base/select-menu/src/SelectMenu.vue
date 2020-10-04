@@ -200,6 +200,13 @@ export default {
     }
   },
   computed: {
+    valueSet () {
+      if (
+        this.multiple &&
+        Array.isArray(this.value)
+      ) return new Set(this.value)
+      return null
+    },
     /**
      * scrollbar related
      */

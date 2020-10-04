@@ -1,5 +1,6 @@
-import { c, cTB, cB, cE, cM, cNotM } from '../../../_utils/cssr'
+import { c, cTB, cB, cE, cM } from '../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../styles/_transitions/fade-in-scale-up'
+import iconSwitchTransition from '../../../styles/_transitions/icon-switch'
 
 export default
 c([
@@ -12,12 +13,11 @@ c([
       optionTextColor,
       optionTextColorMatched,
       optionTextColorDisabled,
-      optionArrowColor,
       optionCheckMarkColor,
       menuColor,
       menuBoxShadow,
       menuBorderColor,
-      menuTrackingRectColor,
+      optionColorHover,
       menuBorderRadius
     } = props.$local
     return cTB(
@@ -80,7 +80,7 @@ c([
             min-width: 182px;
             background-color: transparent;
             display: flex;
-            padding: 0px 24px 0 33px;
+            align-items: center;
             white-space: nowrap;
             position: relative;
             cursor: pointer;
@@ -90,68 +90,57 @@ c([
               color 0.2s ${cubicBezierEaseInOut};
           `
         }, [
-          cNotM('not-leaf', [
-            c('&::after', {
-              raw: `
-                content: '';
-                height: 6px;
-                width: 3px;
-                position: absolute;
-                right: 14px;
-                transform: rotate(45deg) scale(.5);
-                top: calc(50% - 4px);
-                opacity: 0;
-                transition: 
-                  transform .3s ${cubicBezierEaseInOut},
-                  opacity .3s ${cubicBezierEaseInOut};
-                  border-right: 1px solid ${optionCheckMarkColor};
-                  border-bottom: 1px solid ${optionCheckMarkColor};
-              `
-            })
-          ]),
           cM('single-type', {
             raw: `
-              padding: 0px 24px 0 18px;
+              padding: 0 0 0 18px;
             `
           }),
-          cE('checkbox, radio', {
-            raw: `
-              position: absolute;
-              top: 50%;
-              transform: translateY(-50%);
-              left: 10px;
-              display: flex;
-            `
+          cE('label', {
+            flex: 1
           }),
-          cE('loading', {
-            raw: `
-              position: absolute;
-              width: 14px;
-              height: 14px;
-              right: 10px;
-              top: 50%;
-              transform: translateY(-50%);
-              display: block;
-            `
+          cE('prefix', {
+            width: '32px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }),
+          cE('suffix', {
+            width: '32px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }),
+          cB('cascader-option-icon-placeholder', {
+            position: 'relative',
+            width: '14px',
+            height: '14px'
           }, [
-            fadeInScaleUpTransition({ originalTransform: 'translateY(-50%)' })
+            cB('cascader-option-icon', {
+              position: 'absolute',
+              left: 0,
+              right: 0,
+              top: 0,
+              bottom: 0
+            }, [
+              iconSwitchTransition(),
+              cM('checkmark', {
+                fill: optionCheckMarkColor,
+                stroke: optionCheckMarkColor
+              }),
+              cM('arrow', {
+                fill: optionTextColor,
+                stroke: optionTextColor
+              })
+            ])
           ]),
           cM('selected', {
             raw: `
               color: ${optionTextColorMatched}
             `
-          }, [
-            c('&::after', {
-              raw: `
-                transform: rotate(45deg) scale(1);
-                opacity: 1;
-              `
-            })
-          ]),
+          }),
           cM('active', {
-            raw: `
-              color: ${optionTextColorMatched}
-            `
+            color: optionTextColorMatched,
+            backgroundColor: optionColorHover
           }),
           cM('disabled', {
             raw: `
@@ -160,42 +149,10 @@ c([
             `
           }),
           cM('tracked', {
-            raw: `
-              background-color: ${menuTrackingRectColor};
-            `
+            backgroundColor: optionColorHover
           }),
-          cM('not-leaf', [
-            c('&::after', {
-              raw: `
-                content: '';
-                position: absolute;
-                width: 5px;
-                height: 5px;
-                transform: rotate(45deg) translateY(-50%);
-                right: 18px;
-                top: 50%;
-                opacity: 1;
-                transition: opacity .3s ${cubicBezierEaseInOut};
-                border-top: 2px solid ${optionArrowColor};
-                border-right: 2px solid ${optionArrowColor};
-              `
-            })
-          ]),
-          cM('loading', [
-            cM('not-leaf', [
-              c('&::after', {
-                raw: `
-                  opacity: 0;
-                `
-              })
-            ])
-          ])
-        ]),
-        cB('base-tracking-rect', [
-          cE('body', {
-            raw: `
-              background-color: ${menuTrackingRectColor} !important;
-            `
+          c('&:hover', {
+            backgroundColor: optionColorHover
           })
         ])
       ]

@@ -42,7 +42,7 @@ function merge (arrA, arrB) {
 }
 
 function getPickerElement (instance) {
-  return instance.NCascader.$refs.activator.$el
+  return instance.NCascader.triggerRef.$el
 }
 
 export {

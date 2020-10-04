@@ -1,12 +1,18 @@
 <template>
   <div
-    ref="contentContainer"
+    ref="offsetContainerRef"
+    v-zindexable="{ enabled: active }"
     class="n-positioning-container"
   >
-    <div ref="content" class="n-positioning-content">
-      <transition name="n-fade-in-scale-up-transition">
+    <div ref="trackingRef" class="n-positioning-content">
+      <transition
+        name="n-fade-in-scale-up-transition"
+        :appear="NCascader.isMounted"
+      >
         <div
           v-if="active"
+          ref="bodyRef"
+          v-clickoutside="handleClickOutside"
           class="n-cascader-menu"
           :class="{
             [`n-${theme}-theme`]: theme,
@@ -16,18 +22,14 @@
         >
           <n-cascader-submenu
             v-for="(submenuOptions, index) in menuModel"
+            :ref="instance => { if (instance) submenuRefs[index] = instance }"
             :key="index"
             :size="size"
             :options="submenuOptions"
             :depth="index + 1"
-            :menu-is-loading="loading"
-            @option-click="handleOptionClick"
-            @option-mouseenter="handleOptionMouseEnter"
-            @option-mouseleave="handleOptionMouseLeave"
-            @option-check="handleCascaderOptionCheck"
           />
           <n-base-menu-mask
-            ref="mask"
+            ref="maskRef"
             :theme="theme"
             :duration="3000"
           />
@@ -37,12 +39,15 @@
   </div>
 </template>
 <script>
+import { ref } from 'vue'
 import NBaseMenuMask from '../../_base/menu-mask'
 import NCascaderSubmenu from './CascaderSubmenu.vue'
-import placeable from '../../_mixins/placeable'
+import { placeable } from '../../_mixins'
 import { minus, merge, getPickerElement } from './utils'
-import zindexable from '../../_mixins/zindexable'
-
+import {
+  zindexable,
+  clickoutside
+} from '../../_directives'
 import {
   firstOptionId,
   menuModel
@@ -50,16 +55,27 @@ import {
 
 export default {
   name: 'NCascaderMenu',
+  components: {
+    NCascaderSubmenu,
+    NBaseMenuMask
+  },
+  directives: {
+    zindexable,
+    clickoutside
+  },
+  mixins: [
+    placeable
+  ],
   inject: {
     NCascader: {
       default: null
     }
   },
-  components: {
-    NCascaderSubmenu,
-    NBaseMenuMask
+  provide () {
+    return {
+      NCascaderMenu: this
+    }
   },
-  mixins: [ placeable, zindexable ],
   props: {
     type: {
       type: String,
@@ -119,10 +135,6 @@ export default {
       type: Boolean,
       default: false
     },
-    loadingId: {
-      type: String,
-      default: null
-    },
     onLoad: {
       type: Function,
       default: () => {}
@@ -130,16 +142,49 @@ export default {
     theme: {
       type: String,
       default: null
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:value': {
+      type: Function,
+      required: true
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:loading': {
+      type: Function,
+      required: true
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:loadingId': {
+      type: Function,
+      required: true
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:activeId': {
+      type: Function,
+      required: true
+    }
+  },
+  setup () {
+    return {
+      submenuRefs: ref([]),
+      maskRef: ref(null),
+      trackingRef: ref(null),
+      offsetContainerRef: ref(null),
+      bodyRef: ref(null)
     }
   },
   data () {
     return {
-      trackId: null,
-      /** for zindexable, shouldn't be changed */
-      zindexable: true
+      trackId: null
     }
   },
   computed: {
+    __placeableEnabled () {
+      return this.active
+    },
+    loadingId () {
+      return this.NCascader.loadingId
+    },
     expandTriggeredByHover () {
       return this.expandTrigger === 'hover'
     },
@@ -172,12 +217,12 @@ export default {
   watch: {
     active (value) {
       if (value) {
-        this.$nextTick().then(() => {
+        this.$nextTick(() => {
           if (this.lazy && !this.options[0].children) {
             const option = this.options[0]
             if (!this.loading) {
               this.updateLoadingStatus(true)
-              this.$refs.mask.show(this.NCascader.localeNamespace.loading)
+              this.maskRef.show(this.NCascader.localeNamespace.loading)
               this.onLoad(option, (children) => this.NCascader.resolveLoad(option, children, () => {
                 this.hideMask()
               }), () => this.rejectLoad(() => {
@@ -189,8 +234,8 @@ export default {
       }
     },
     menuModel () {
-      this.$nextTick().then(() => {
-        this.updatePosition()
+      this.$nextTick(() => {
+        this.__placeableSyncPosition()
       })
     },
     activeId (id) {
@@ -204,38 +249,46 @@ export default {
       }
     },
     trackId (id) {
-      if (!id) return
+      if (id === null || id === undefined) return
       /**
        * scroll to option element
        */
-      this.$nextTick().then(() => {
+      this.$nextTick(() => {
         const option = this.idOptionMap.get(id)
         if (!option) return
-        const submenuInstance = this.$children.find(child => child.depth === option.depth)
+        const submenuInstance = this.submenuRefs[option.depth - 1]
         if (submenuInstance) {
-          const scrollbar = submenuInstance.$refs.scrollbar
+          const scrollbar = submenuInstance.scrollbarRef
           if (scrollbar) {
-            const optionElement = this.$el.querySelector(`[n-option-id="${id}"]`)
-            scrollbar.scrollToElement(optionElement)
+            const optionElement = submenuInstance.$el.querySelector(`[n-option-id="${id}"]`)
+            scrollbar.scrollToElement(optionElement, {
+              behavior: 'auto'
+            })
           }
         }
       })
     }
   },
   methods: {
+    __placeableTracked () {
+      return getPickerElement(this)
+    },
+    __placeableTracking () {
+      return this.trackingRef
+    },
+    __placeableOffsetContainer () {
+      return this.offsetContainerRef
+    },
+    __placeableBody () {
+      return this.bodyRef
+    },
     handleMenuMouseDown (e) {
       e.preventDefault()
       e.stopPropagation()
     },
-    getZindexableContent () {
-      return this.$el
-    },
-    getTrackedElement () {
-      return getPickerElement(this)
-    },
     hideMask () {
-      if (this.$refs.mask) {
-        this.$refs.mask.hide()
+      if (this.maskRef) {
+        this.maskRef.hide()
       }
     },
     optionPath (optionId) {
@@ -261,18 +314,13 @@ export default {
       traverseOptions(this.options)
       return path
     },
-    handleOptionMouseEnter (e, option) {
-      if (this.expandTriggeredByHover && !option.disabled) {
-        this.updateActiveId(option.id)
-      }
-    },
-    handleOptionMouseLeave (e, option) {
-    },
     updateLoadingId (id) {
-      this.$emit('update:loadingId', id)
+      const { 'onUpdate:loadingId': onUpdateLoadingId } = this
+      onUpdateLoadingId(id)
     },
     updateLoadingStatus (loading) {
-      this.$emit('update:loading', loading)
+      const { 'onUpdate:loading': onUpdateLoading } = this
+      onUpdateLoading(loading)
     },
     loadOptionChildren (option) {
       if (this.lazy) {
@@ -285,22 +333,32 @@ export default {
         }
       }
     },
+    handleOptionMouseEnter (e, option) {
+      if (this.expandTriggeredByHover && !option.disabled) {
+        this.updateActiveId(option.id)
+      }
+    },
+    handleOptionMouseLeave (e, option) {
+    },
     handleOptionClick (e, option) {
       if (!option.disabled) {
         this.updateActiveId(option.id)
         this.updateTrackId(option.id)
         if (option.isLeaf) {
-          this.handleCascaderOptionCheck(option.id)
+          this.handleOptionCheck(option.id)
         }
       }
     },
-    handleCascaderOptionCheck (optionId) {
+    handleOptionCheck (optionId) {
       const option = this.idOptionMap.get(optionId)
       if (!option || option.disabled) return
+      const {
+        'onUpdate:value': onUpdateValue
+      } = this
       if (this.type === 'multiple') {
         const newValues = []
         if (!option.determined) {
-          this.$refs.mask.showOnce(
+          this.maskRef.showOnce(
             this.NCascader.localeNamespace.loadingRequiredMessage(option.label)
           )
           return
@@ -319,28 +377,28 @@ export default {
         traverseMultiple(option)
         if (Array.isArray(this.value)) {
           if (!option.checkboxChecked && !option.checkboxIndeterminate) {
-            this.$emit('input', merge(this.value, newValues))
+            onUpdateValue(merge(this.value, newValues))
           } else {
-            this.$emit('input', minus(this.value, newValues))
+            onUpdateValue(minus(this.value, newValues))
           }
         } else {
-          this.$emit('input', newValues)
+          onUpdateValue(newValues)
         }
       } else if (this.type === 'multiple-all-options') {
         if (Array.isArray(this.value)) {
           if (!option.checkboxChecked) {
-            this.$emit('input', merge(this.value, [option.value]))
+            onUpdateValue(merge(this.value, [option.value]))
           } else {
-            this.$emit('input', minus(this.value, [option.value]))
+            onUpdateValue(minus(this.value, [option.value]))
           }
         } else {
-          this.$emit('input', [option.value])
+          onUpdateValue([option.value])
         }
       } else if (this.type === 'single-all-options') {
-        this.$emit('input', option.value)
+        onUpdateValue(option.value)
       } else if (this.type === 'single') {
         if (!option.hasChildren) {
-          this.$emit('input', option.value)
+          onUpdateValue(option.value)
         }
       }
     },
@@ -366,7 +424,10 @@ export default {
       this.trackId = id
     },
     updateActiveId (id) {
-      this.$emit('update:activeId', id)
+      const {
+        'onUpdate:activeId': onUpdateActiveId
+      } = this
+      onUpdateActiveId(id)
     },
     prev () {
       if (!this.filterable || (this.filterable && !this.pattern.length)) {
@@ -404,8 +465,11 @@ export default {
     },
     enter () {
       if (this.trackId) {
-        this.handleCascaderOptionCheck(this.trackId)
+        this.handleOptionCheck(this.trackId)
       }
+    },
+    handleClickOutside (e) {
+      this.NCascader.handleCascaderMenuClickOutside(e)
     }
   }
 }

@@ -1,13 +1,13 @@
 # Trigger
 ```html
 <n-cascader
-  v-model="value"
+  v-model:value="value"
   placeholder="Please Select Something"
   :options="options"
   expand-trigger="click"
 />
 <n-cascader
-  v-model="value"
+  v-model:value="value"
   placeholder="Please Select Something"
   :options="options"
   expand-trigger="hover"

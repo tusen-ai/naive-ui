@@ -1,5 +1,4 @@
 import create from '../../styles/_utils/create-component-base'
-import { composite } from '../../_utils/color'
 import sizeVariables from './_common'
 import baseTrackingRectStyle from '../../_base/tracking-rect/styles/dark'
 import baseMenuMaskStyle from '../../_base/menu-mask/styles/dark'
@@ -34,8 +33,7 @@ export default create({
       primaryColor,
       textColorDisabledOverlay,
       dividerColorOverlay,
-      hoverColorOverlay,
-      iconColorOverlay
+      hoverColorOverlay
     } = derived
     return {
       ...sizeVariables,
@@ -43,11 +41,10 @@ export default create({
       menuColor: popoverColor,
       menuBoxShadow: popmenuBoxShadow,
       menuBorderColor: dividerColorOverlay,
-      menuTrackingRectColor: composite(popoverColor, hoverColorOverlay),
+      optionColorHover: hoverColorOverlay,
       optionTextColor: textColorSecondaryOverlay,
       optionTextColorMatched: primaryColor,
       optionTextColorDisabled: textColorDisabledOverlay,
-      optionArrowColor: iconColorOverlay,
       optionCheckMarkColor: primaryColor
     }
   }

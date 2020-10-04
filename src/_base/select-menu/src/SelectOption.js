@@ -43,7 +43,10 @@ export default {
         if (value === null) return false
         const optionValue = dataRef.value.value
         if (multiple) {
-          return Array.isArray(value) && value.includes(optionValue)
+          const {
+            valueSet
+          } = NBaseSelectMenu
+          return valueSet.has(optionValue)
         } else {
           return value === optionValue
         }

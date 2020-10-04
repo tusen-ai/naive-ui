@@ -44,7 +44,7 @@ export default {
       default: false
     },
     value: {
-      type: [String, Number],
+      type: [String, Number, Array],
       default: null
     },
     cancelable: {

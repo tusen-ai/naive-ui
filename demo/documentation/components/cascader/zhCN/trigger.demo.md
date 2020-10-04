@@ -2,13 +2,13 @@
 可以是 `hover` 或者 `click`。
 ```html
 <n-cascader
-  v-model="value"
+  v-model:value="value"
   placeholder="请选些什么"
   :options="options"
   expand-trigger="click"
 />
 <n-cascader
-  v-model="value"
+  v-model:value="value"
   placeholder="请选些什么"
   :options="options"
   expand-trigger="hover"
