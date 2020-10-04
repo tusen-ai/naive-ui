@@ -306,15 +306,20 @@ export default {
         })
       }
     },
-    scrollToElement (el, getTop = elm => elm.offsetTop, getHeight = elm => elm.offsetHeight) {
+    scrollToElement (el, options = {}) {
       if (!this.scrollable) return
+      const {
+        getTop = elm => elm.offsetTop,
+        getHeight = elm => elm.offsetHeight,
+        behavior = 'smooth'
+      } = options
       const top = getTop(el)
       const container = this._container()
       if (top < container.scrollTop) {
         container.scrollTo({
           top,
           left: 0,
-          behavior: 'smooth'
+          behavior
         })
       } else {
         const elHeight = getHeight(el)
@@ -323,7 +328,7 @@ export default {
           container.scrollTo({
             top: top + elHeight - containerHeight,
             left: 0,
-            behavior: 'smooth'
+            behavior
           })
         }
       }

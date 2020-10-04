@@ -17,7 +17,8 @@ export default c([
       optionTextColorSelected,
       optionOpacityDisabled,
       optionCheckColor,
-      actionTextColor
+      actionTextColor,
+      optionColorPending
     } = props.$local
     return cTB('base-select-menu', {
       raw: `
@@ -60,6 +61,7 @@ export default c([
           padding: 0 14px;
           white-space: nowrap;
           transition:
+            background-color .3s ${cubicBezierEaseInOut},
             color .3s ${cubicBezierEaseInOut},
             opacity .3s ${cubicBezierEaseInOut};
           text-overflow: ellipsis;
@@ -87,16 +89,10 @@ export default c([
           cM('selected', {
             opacity: optionOpacityDisabled
           })
-        ])
-      ]),
-      cM('no-tracking-rect', [
-        cB('base-select-option', [
-          cNotM('disabled', [
-            c('&:hover', {
-              color: optionTextColorSelected
-            })
-          ])
-        ])
+        ]),
+        cM('pending', {
+          backgroundColor: optionColorPending
+        })
       ]),
       cM('multiple', [
         cB('base-select-option', {

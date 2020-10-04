@@ -94,7 +94,6 @@
           >{{ pattern ? pattern : '&nbsp;' }}</span>
         </div>
         <n-base-suffix
-          ref="suffix"
           class="n-base-selection__mark"
           :arrow="showArrow"
           :theme="theme"
@@ -133,7 +132,6 @@
           @input="handlePatternInputInput"
         >
         <n-base-suffix
-          ref="suffix"
           class="n-base-selection__mark"
           :loading="loading"
           :theme="theme"

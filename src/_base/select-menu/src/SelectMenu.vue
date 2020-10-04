@@ -4,7 +4,6 @@
     :class="{
       [`n-base-select-menu--${size}-size`]: true,
       'n-base-select-menu--multiple': multiple,
-      [`n-base-select-menu--no-tracking-rect`]: !showTrackingRect,
       [`n-${theme}-theme`]: theme
     }"
     :style="style"
@@ -54,13 +53,6 @@
             />
           </template>
         </recycle-scroller> -->
-        <n-base-tracking-rect
-          v-if="showTrackingRect"
-          ref="trackingRect"
-          key="__select-tracking-rect__"
-          :item-size="itemSize"
-          :theme="theme"
-        />
         <template v-for="option in flattenedOptions">
           <n-select-option
             v-if="option.type === OPTION_TYPE.OPTION"
@@ -68,7 +60,6 @@
             :index="option.index"
             :wrapped-option="option"
             :grouped="option.grouped"
-            :selected="isOptionSelected({ value: option.data.value })"
           />
           <n-select-group-header
             v-else-if="option.type === OPTION_TYPE.GROUP_HEADER"
@@ -99,9 +90,8 @@
 
 <script>
 import NScrollbar from '../../../scrollbar'
-import NSelectOption from './SelectOption.vue'
-import NSelectGroupHeader from './SelectGroupHeader.vue'
-import NBaseTrackingRect from '../../tracking-rect'
+import NSelectOption from './SelectOption.js'
+import NSelectGroupHeader from './SelectGroupHeader.js'
 import NEmpty from '../../../empty'
 import { render } from '../../../_utils/vue'
 import {
@@ -124,7 +114,6 @@ export default {
   },
   components: {
     NScrollbar,
-    NBaseTrackingRect,
     NSelectOption,
     NEmpty,
     NSelectGroupHeader,
@@ -140,10 +129,6 @@ export default {
     theme: {
       type: String,
       default: null
-    },
-    showTrackingRect: {
-      type: Boolean,
-      default: true
     },
     scrollable: {
       type: Boolean,
@@ -165,9 +150,9 @@ export default {
       type: String,
       default: null
     },
-    isOptionSelected: {
-      type: Function,
-      required: true
+    value: {
+      type: [String, Number],
+      default: null
     },
     width: {
       type: [Number, String],
@@ -179,7 +164,7 @@ export default {
     },
     virtualScroll: {
       type: Boolean,
-      default: true
+      default: false
     },
     // deprecated
     onMenuVisible: {
@@ -194,15 +179,23 @@ export default {
       type: Function,
       default: undefined
     },
+    // deprecated
     emitOption: {
       type: Boolean,
       default: false
     }
   },
   data () {
+    const flattenedOptions = flattenOptions(this.options)
+    const firstAvailableOptionIndex = this.autoPendingFirstOption
+      ? getNextAvailableIndex(flattenedOptions, null)
+      : null
+    const pendingWrappedOption = firstAvailableOptionIndex === null
+      ? null
+      : flattenedOptions[firstAvailableOptionIndex]
     return {
-      active: true,
-      pendingWrappedOption: null,
+      flattenedOptions,
+      pendingWrappedOption,
       OPTION_TYPE
     }
   },
@@ -223,10 +216,6 @@ export default {
       if (!pendingWrappedOption) return null
       return pendingWrappedOption.index
     },
-    flattenedOptions () {
-      const flattenedOptions = flattenOptions(this.options)
-      return flattenedOptions
-    },
     empty () {
       const flattenedOptions = this.flattenedOptions
       return flattenedOptions && flattenedOptions.length === 0
@@ -236,10 +225,11 @@ export default {
     },
     pendingOptionValue () {
       const pendingWrappedOption = this.pendingWrappedOption
+      const data = (pendingWrappedOption && pendingWrappedOption.data) || null
       return (
-        pendingWrappedOption &&
-        pendingWrappedOption.data &&
-        pendingWrappedOption.data.value
+        data &&
+        data.value !== undefined &&
+        data.value
       ) || null
     },
     style () {
@@ -249,34 +239,14 @@ export default {
     }
   },
   watch: {
-    empty (value) {
-      if (value) {
-        this.hideTrackingRect(0)
+    options (value) {
+      this.flattenedOptions = flattenOptions(value)
+      if (this.autoPendingFirstOption) {
+        const firstAvailableOptionIndex = getNextAvailableIndex(this.flattenedOptions, null)
+        this.setPendingWrappedOptionIndex(firstAvailableOptionIndex)
+      } else {
+        this.pendingWrappedOption = null
       }
-    },
-    flattenedOptions () {
-      this.$nextTick(() => {
-        if (this.autoPendingFirstOption) {
-          const firstAvailableOptionIndex = getNextAvailableIndex(this.flattenedOptions, null)
-          this.setPendingWrappedOptionIndex(firstAvailableOptionIndex)
-        } else {
-          this.hideTrackingRect()
-          this.pendingWrappedOption = null
-        }
-      })
-    },
-    pendingWrappedOption (value) {
-      if (value === null) {
-        this.$nextTick(() => {
-          this.hideTrackingRect()
-        })
-      }
-    }
-  },
-  mounted () {
-    if (this.autoPendingFirstOption) {
-      const firstAvailableOptionIndex = getNextAvailableIndex(this.flattenedOptions, null)
-      this.setPendingWrappedOptionIndex(firstAvailableOptionIndex)
     }
   },
   methods: {
@@ -313,7 +283,6 @@ export default {
       if (onMenuToggleOption) onMenuToggleOption(option)
     },
     handleMenuMouseLeave () {
-      this.hideTrackingRect()
       this.pendingWrappedOption = null
     },
     /**
@@ -355,43 +324,22 @@ export default {
       }
       const scrollbar = this.$refs.scrollbar
       if (this.virtualScroll) {
-        this.pendingWrappedOption = this.flattenedOptions[index]
-        const size = this.itemSize
-        const offsetTop = size * index
-        this.updateTrackingRectTop({
-          offsetTop
-        })
-        doScroll && scrollbar && scrollbar.scrollToElement({}, () => offsetTop, () => size)
+        // this.pendingWrappedOption = this.flattenedOptions[index]
+        // const size = this.itemSize
+        // const offsetTop = size * index
+        // this.updateTrackingRectTop({
+        //   offsetTop
+        // })
+        // doScroll && scrollbar && scrollbar.scrollToElement({}, () => offsetTop, () => size)
       } else {
         this.pendingWrappedOption = this.flattenedOptions[index]
-        const el = this.$el
-        const optionEl = el.querySelector(`[n-option-index="${index}"]`)
-        const offsetTop = optionEl.offsetTop
-        this.updateTrackingRectTop({
-          offsetTop
-        })
-        doScroll && scrollbar && scrollbar.scrollToElement(optionEl)
-      }
-    },
-    /**
-     * select option background related
-     */
-    updateTrackingRectTop (el) {
-      const refs = this.$refs
-      if (refs.trackingRect) {
-        refs.trackingRect.updateTrackingRectTop(el)
-      }
-    },
-    hideTrackingRect () {
-      const refs = this.$refs
-      if (refs.trackingRect) {
-        refs.trackingRect.hideTrackingRect()
-      }
-    },
-    hideTrackingRectSync () {
-      const refs = this.$refs
-      if (refs.trackingRect) {
-        refs.trackingRect.hideTrackingRect(0)
+        if (doScroll && scrollbar) {
+          const el = this.$el
+          const optionEl = el.querySelector(`[n-option-index="${index}"]`)
+          scrollbar.scrollToElement(optionEl, {
+            behavior: 'auto'
+          })
+        }
       }
     }
   }

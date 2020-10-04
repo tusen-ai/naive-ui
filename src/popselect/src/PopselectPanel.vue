@@ -4,10 +4,9 @@
     :multiple="multiple"
     :options="options"
     :size="size"
-    :is-option-selected="isSelected"
+    :value="value"
     :width="width"
     :virtual-scroll="false"
-    :show-tracking-rect="false"
     :scrollable="scrollable"
     @menu-toggle-option="handleMenuToggleOption"
   />
@@ -45,7 +44,7 @@ export default {
       default: false
     },
     value: {
-      type: [String, Number, Boolean],
+      type: [String, Number],
       default: null
     },
     cancelable: {
@@ -103,16 +102,6 @@ export default {
     },
     setShow (value) {
       this.NPopselect.setShow(value)
-    },
-    isSelected (option) {
-      if (!option) return false
-      const value = option.value
-      if (this.multiple) {
-        if (Array.isArray(this.value)) return !!~this.value.findIndex(v => v === value)
-      } else {
-        return this.value === value
-      }
-      return false
     },
     handleMenuToggleOption (option) {
       this.toggle(option.value)

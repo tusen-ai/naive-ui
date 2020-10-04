@@ -7,24 +7,24 @@
 />
 ```
 ```js
-import mdMusicalNote from 'naive-ui/lib/icons/md-musical-note'
+import { resolveComponent, h } from 'vue'
+import MusicIcon from 'naive-ui/lib/icons/md-musical-note'
 
-function render (h, option, selected) {
+function render (option, selected) {
   return [
-    h('n-config-consumer', {
-      props: {
-        abstract: true
-      },
-      scopedSlots: {
-        default ({ styleScheme }) {
-          return h('n-icon', {
-            style: {
-              fill: selected ? styleScheme.primaryColor : styleScheme.tertiaryTextColor,
-              verticalAlign: 'middle',
-              marginRight: '4px',
-            }
-          }, [h(mdMusicalNote)])
-        }
+    h(resolveComponent('n-config-consumer'), {
+      abstract: true
+    }, {
+      default ({ styleScheme }) {
+        return h(resolveComponent('n-icon'), {
+          style: {
+            fill: selected ? styleScheme.primaryColor : styleScheme.tertiaryTextColor,
+            verticalAlign: 'middle',
+            marginRight: '4px',
+          }
+        }, {
+          default: () => h(MusicIcon)
+        })
       }
     }),
     option.label

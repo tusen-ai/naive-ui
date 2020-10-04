@@ -1,4 +1,3 @@
-<script>
 import { h } from 'vue'
 
 export default {
@@ -17,4 +16,3 @@ export default {
     }, children)
   }
 }
-</script>

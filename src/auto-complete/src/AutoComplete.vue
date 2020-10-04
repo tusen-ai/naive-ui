@@ -59,7 +59,6 @@
               :options="selectOptions"
               :multiple="false"
               :size="syntheticSize"
-              :is-option-selected="isSelected"
               @menu-toggle-option="handleToggleOption"
             />
           </transition>
@@ -282,9 +281,6 @@ export default {
           this.blur()
         }
       }
-    },
-    isSelected () {
-      return false
     },
     handleFocus (e) {
       this.canBeActivated = true

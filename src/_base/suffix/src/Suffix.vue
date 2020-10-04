@@ -41,7 +41,9 @@
 import CancelIcon from './CancelIcon.vue'
 import IconSwitchTransition from '../../../_transition/IconSwitchTransition'
 import NBaseLoading from '../../loading'
-import usecssr from '../../../_mixins/usecssr'
+import {
+  usecssr
+} from '../../../_mixins'
 import styles from './styles'
 
 export default {
@@ -87,6 +89,14 @@ export default {
     loading: {
       type: Boolean,
       default: false
+    },
+    onClear: {
+      type: Function,
+      default: undefined
+    },
+    onMouseDown: {
+      type: Function,
+      default: undefined
     }
   },
   data () {
@@ -95,20 +105,23 @@ export default {
     }
   },
   watch: {
-    clearable (newValue) {
-      if (!newValue) {
+    clearable (value) {
+      if (!value) {
         this.mouseHovered = false
       }
     },
-    show (newValue) {
-      if (!newValue) {
+    show (value) {
+      if (!value) {
         this.mouseHovered = false
       }
     }
   },
   methods: {
     handleClick (e) {
-      this.$emit('clear', e)
+      const {
+        onClear
+      } = this
+      if (onClear) onClear(e)
     },
     handleMouseEnter () {
       this.mouseHovered = true
@@ -118,7 +131,10 @@ export default {
     },
     handleMouseDown (e) {
       e.preventDefault()
-      this.$emit('mousedown', e)
+      const {
+        onMouseDown
+      } = this
+      if (onMouseDown) onMouseDown(e)
     }
   }
 }

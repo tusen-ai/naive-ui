@@ -22,6 +22,7 @@ export default create({
       optionTextColorSelected: derived.primaryColor,
       optionOpacityDisabled: derived.opacityDisabled,
       optionCheckColor: derived.primaryColor,
+      optionColorPending: derived.hoverColorOverlay,
       actionTextColor: derived.textColorSecondary
     }
   }

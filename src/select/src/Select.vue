@@ -74,7 +74,7 @@
               :multiple="multiple"
               :size="syntheticSize"
               :filterable="filterable"
-              :is-option-selected="isOptionSelected"
+              :value="value"
               @menu-toggle-option="handleToggleOption"
               @menu-scroll="handleMenuScroll"
               @menu-visible="handleMenuVisible"
@@ -544,14 +544,6 @@ export default {
         return this.valueToOptionMap.get(value)
       } else if (this.remote && this.memorizedValueToOptionMap.has(value)) {
         return this.memorizedValueToOptionMap.get(value)
-      }
-    },
-    isOptionSelected (option) {
-      if (this.multiple) {
-        if (!Array.isArray(this.value)) return false
-        return !!~this.value.findIndex(value => value === option.value)
-      } else {
-        return option.value === this.value
       }
     },
     createClearedMultipleSelectValue (value) {
