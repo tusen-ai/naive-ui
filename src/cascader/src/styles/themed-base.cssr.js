@@ -1,6 +1,6 @@
 import { c, cTB, cB, cE, cM } from '../../../_utils/cssr'
-import fadeInScaleUpTransition from '../../../styles/_transitions/fade-in-scale-up'
-import iconSwitchTransition from '../../../styles/_transitions/icon-switch'
+import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up'
+import iconSwitchTransition from '../../../_styles/transitions/icon-switch'
 
 export default
 c([

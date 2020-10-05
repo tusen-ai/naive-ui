@@ -1,4 +1,4 @@
-import create from '../../styles/_utils/create-component-base'
+import create from '../../_styles/utils/create-component-base'
 import baseSelectionStyle from '../../_base/selection/styles/light'
 import baseSelectMenuStyle from '../../_base/select-menu/styles/light'
 

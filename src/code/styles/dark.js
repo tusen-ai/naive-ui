@@ -1,4 +1,4 @@
-import create from '../../styles/_utils/create-component-base'
+import create from '../../_styles/utils/create-component-base'
 import { c } from '../../_utils/cssr'
 
 export default create({

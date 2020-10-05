@@ -42,8 +42,8 @@ export default {
     ), {
       default: () => h(NFormItemCol, {
         ref: 'formItemColRef',
-        span: 24,
-        ...keep(this.$props, formItemColPropsKey)
+        ...keep(this.$props, formItemColPropsKey),
+        span: 24
       }, {
         default: this.$slots.default
       })

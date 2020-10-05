@@ -1,7 +1,7 @@
 import { c, cTB, cB, cE, cM, createKey } from '../../../../_utils/cssr'
 import depx from '../../../../_utils/css/depx'
 import pxfy from '../../../../_utils/css/pxfy'
-import iconSwitchTransition from '../../../../styles/_transitions/icon-switch'
+import iconSwitchTransition from '../../../../_styles/transitions/icon-switch'
 
 export default c([
   ({ props }) => {

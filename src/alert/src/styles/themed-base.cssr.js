@@ -1,5 +1,5 @@
 import { c, cTB, cB, cE, cM } from '../../../_utils/cssr'
-import fadeInHeightExpandTranstion from '../../../styles/_transitions/fade-in-height-expand'
+import fadeInHeightExpandTranstion from '../../../_styles/transitions/fade-in-height-expand'
 
 export default c([
   ({ props }) => {

@@ -1,4 +1,4 @@
-import create from '../../styles/_utils/create-component-base'
+import create from '../../_styles/utils/create-component-base'
 import sizeVariables from './_common'
 import baseMenuMaskStyle from '../../_base/menu-mask/styles/light'
 import baseSelectMenuStyle from '../../_base/select-menu/styles/light'

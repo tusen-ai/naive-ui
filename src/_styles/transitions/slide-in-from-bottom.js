@@ -1,5 +1,5 @@
 import { c, namespace } from '../../_utils/cssr'
-import commonVariables from '../base/_common'
+import commonVariables from '../../styles/base/_common'
 
 const {
   cubicBezierEaseIn,
@@ -9,7 +9,7 @@ const {
 export default function ({
   duration = '0.3s',
   leaveDuration = '0.2s',
-  name = 'slide-in-from-left'
+  name = 'slide-in-from-bottom'
 } = {}) {
   return [
     c(`&.${namespace}-${name}-transition-leave-active`, {
@@ -19,16 +19,16 @@ export default function ({
       transition: `transform ${duration} ${cubicBezierEaseOut}`
     }),
     c(`&.${namespace}-${name}-transition-enter-to`, {
-      transform: `translateX(0)`
+      transform: `translateY(0)`
     }),
     c(`&.${namespace}-${name}-transition-enter-from`, {
-      transform: `translateX(-100%)`
+      transform: `translateY(100%)`
     }),
     c(`&.${namespace}-${name}-transition-leave-from`, {
-      transform: `translateX(0)`
+      transform: `translateY(0)`
     }),
     c(`&.${namespace}-${name}-transition-leave-to`, {
-      transform: `translateX(-100%)`
+      transform: `translateY(100%)`
     })
   ]
 }

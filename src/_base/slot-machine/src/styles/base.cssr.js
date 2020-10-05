@@ -1,6 +1,6 @@
 import { c, cB, cE, cM } from '../../../../_utils/cssr'
-import fadeInWidthExpandTransition from '../../../../styles/_transitions/fade-in-width-expand'
-import fadeUpWidthExpandTransition from '../../../../styles/_transitions/fade-up-width-expand'
+import fadeInWidthExpandTransition from '../../../../_styles/transitions/fade-in-width-expand'
+import fadeUpWidthExpandTransition from '../../../../_styles/transitions/fade-up-width-expand'
 
 export default c([
   ({ props }) => [

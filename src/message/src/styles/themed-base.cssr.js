@@ -1,5 +1,5 @@
 import { cTB, c, cB, cE, cM, createKey } from '../../../_utils/cssr'
-import iconSwitchTransition from '../../../styles/_transitions/icon-switch'
+import iconSwitchTransition from '../../../_styles/transitions/icon-switch'
 
 function typeStyle (
   type,

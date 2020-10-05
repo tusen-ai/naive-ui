@@ -1,5 +1,5 @@
 import { cTB, c, cB, cM } from '../../../_utils/cssr'
-import fadeDownTranstion from '../../../styles/_transitions/fade-down'
+import fadeDownTranstion from '../../../_styles/transitions/fade-down'
 
 export default c([
   ({ props }) => {

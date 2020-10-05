@@ -1,6 +1,6 @@
 import { c, cM, cTB, cB, cE } from '../../../_utils/cssr'
-import fadeInHeightExpand from '../../../styles/_transitions/fade-in-height-expand'
-import createIconSwitchTransition from '../../../styles/_transitions/icon-switch'
+import fadeInHeightExpand from '../../../_styles/transitions/fade-in-height-expand'
+import createIconSwitchTransition from '../../../_styles/transitions/icon-switch'
 
 export default c([
   ({ props }) => {

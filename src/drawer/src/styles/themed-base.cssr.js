@@ -1,9 +1,9 @@
 import { c, cTB, cB, cM } from '../../../_utils/cssr'
-import slideInFromRightTransition from '../../../styles/_transitions/slide-in-from-right'
-import slideInFromLeftTransition from '../../../styles/_transitions/slide-in-from-left'
-import slideInFromTopTransition from '../../../styles/_transitions/slide-in-from-top'
-import slideInFromBottomTransition from '../../../styles/_transitions/slide-in-from-bottom'
-import fadeInTransition from '../../../styles/_transitions/fade-in'
+import slideInFromRightTransition from '../../../_styles/transitions/slide-in-from-right'
+import slideInFromLeftTransition from '../../../_styles/transitions/slide-in-from-left'
+import slideInFromTopTransition from '../../../_styles/transitions/slide-in-from-top'
+import slideInFromBottomTransition from '../../../_styles/transitions/slide-in-from-bottom'
+import fadeInTransition from '../../../_styles/transitions/fade-in'
 
 export default c([
   ({ props }) => {

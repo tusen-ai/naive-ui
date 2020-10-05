@@ -1,4 +1,4 @@
-import create from '../../styles/_utils/create-component-base'
+import create from '../../_styles/utils/create-component-base'
 import selectMenuStyle from '../../_base/select-menu/styles/dark'
 
 export default create({

@@ -1,5 +1,5 @@
 import { cTB, c, cB, cM, cE } from '../../../_utils/cssr'
-import fadeInTransition from '../../../styles/_transitions/fade-in'
+import fadeInTransition from '../../../_styles/transitions/fade-in'
 
 export default c([
   ({ props }) => {

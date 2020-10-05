@@ -1,4 +1,4 @@
-import create from '../../styles/_utils/create-component-base'
+import create from '../../_styles/utils/create-component-base'
 import { composite, changeColor } from '../../_utils/color/index'
 
 export default create({

@@ -1,6 +1,6 @@
 import { c, cTB, cB, cE, cM, cNotM } from '../../../_utils/cssr'
-import fadeInWidthExpandTransition from '../../../styles/_transitions/fade-in-width-expand'
-import iconSwitchTransition from '../../../styles/_transitions/icon-switch'
+import fadeInWidthExpandTransition from '../../../_styles/transitions/fade-in-width-expand'
+import iconSwitchTransition from '../../../_styles/transitions/icon-switch'
 
 export default c([
   ({ props }) => {

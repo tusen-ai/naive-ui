@@ -1,4 +1,4 @@
-import create from '../../styles/_utils/create-component-base'
+import create from '../../_styles/utils/create-component-base'
 import baseLoadingStyle from '../../_base/loading/styles/light'
 import scrollbarStyle from '../../scrollbar/styles/light'
 

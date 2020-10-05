@@ -1,5 +1,5 @@
 import { c, cTB, cB, cE, cM, cNotM } from '../../../_utils/cssr'
-import fadeInScaleUpTransition from '../../../styles/_transitions/fade-in-scale-up'
+import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up'
 
 export default c([
   ({ props }) => {

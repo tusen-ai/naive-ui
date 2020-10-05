@@ -1,4 +1,4 @@
-import create from '../../styles/_utils/create-component-base'
+import create from '../../_styles/utils/create-component-base'
 import suffixStyle from '../../_base/suffix/styles/dark'
 
 export default create({
