@@ -6,7 +6,7 @@ export default function (options = {}) {
   return {
     provide () {
       return {
-        NFormItem: '__FORM_ITEM_INNER__'
+        NFormItem: null
       }
     },
     inject: {
@@ -21,7 +21,6 @@ export default function (options = {}) {
         const NFormItem = this.NFormItem
         if (
           NFormItem &&
-          NFormItem !== '__FORM_ITEM_INNER__' &&
           NFormItem.syntheticSize
         ) {
           return NFormItem.syntheticSize
@@ -30,34 +29,34 @@ export default function (options = {}) {
       }
     },
     beforeUnmount () {
-      const NFormItem = this.NFormItem
-      if (NFormItem && NFormItem !== '__FORM_ITEM_INNER__') {
+      const { NFormItem } = this
+      if (NFormItem) {
         NFormItem.restoreValidation()
       }
     },
     methods: {
       __triggerFormBlur () {
-        const NFormItem = this.NFormItem
-        if (NFormItem && NFormItem !== '__FORM_ITEM_INNER__') {
-          NFormItem.onContentBlur()
+        const { NFormItem } = this
+        if (NFormItem) {
+          NFormItem.handleContentBlur()
         }
       },
       __triggerFormChange () {
-        const NFormItem = this.NFormItem
-        if (NFormItem && NFormItem !== '__FORM_ITEM_INNER__') {
-          NFormItem.onContentChange()
+        const { NFormItem } = this
+        if (NFormItem) {
+          NFormItem.handleContentChange()
         }
       },
       __triggerFormFocus () {
-        const NFormItem = this.NFormItem
-        if (NFormItem && NFormItem !== '__FORM_ITEM_INNER__') {
-          NFormItem.onContentFocus()
+        const { NFormItem } = this
+        if (NFormItem) {
+          NFormItem.handleContentFocus()
         }
       },
       __triggerFormInput () {
-        const NFormItem = this.NFormItem
-        if (NFormItem && NFormItem !== '__FORM_ITEM_INNER__') {
-          NFormItem.onContentInput()
+        const { NFormItem } = this
+        if (NFormItem) {
+          NFormItem.handleContentInput()
         }
       }
     }

@@ -1,34 +1,27 @@
 export default function (
-  inject,
+  injectionName,
   collectionKey,
   registerKey = 'value'
 ) {
   return {
     watch: {
       [registerKey]: function (value, oldValue) {
-        if (this[inject]) {
-          this.registerInstance(value, oldValue)
-        }
+        this.registerInstance(value, oldValue)
       }
     },
     created () {
-      if (this[inject]) {
-        this.registerInstance(this[registerKey])
-      }
+      this.registerInstance(this[registerKey])
     },
     beforeUnmount () {
-      if (this[inject]) {
-        this.registerInstance(undefined, this[registerKey])
-      }
+      this.registerInstance(undefined, this[registerKey])
     },
     methods: {
       registerInstance (key = undefined, oldKey = undefined) {
-        if (!key && !oldKey) return
-        if (this[inject]) {
-          const collection = this[inject][collectionKey]
-          if (oldKey !== undefined) this.removeInstance(collection, oldKey)
-          if (key !== undefined) this.addInstance(collection, key)
-        }
+        if (key === undefined && oldKey === undefined) return
+        const injection = this[injectionName]
+        const collection = injection[collectionKey]
+        if (oldKey !== undefined) this.removeInstance(collection, oldKey)
+        if (key !== undefined) this.addInstance(collection, key)
       },
       removeInstance (collection, key) {
         if (!collection[key]) collection[key] = []

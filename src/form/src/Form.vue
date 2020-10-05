@@ -9,8 +9,9 @@
     <slot />
   </form>
 </template>
+
 <script>
-import cloneDeep from 'lodash-es/cloneDeep'
+import { markRaw } from 'vue'
 
 export default {
   name: 'Form',
@@ -61,19 +62,16 @@ export default {
       default: e => e.preventDefault()
     }
   },
-  data () {
+  setup () {
     return {
-      items: {}
+      formItems: markRaw({})
     }
-  },
-  created () {
-    this.initialValue = cloneDeep(this.model)
   },
   methods: {
     validate (callback, shouldRuleBeApplied = () => true) {
       return new Promise((resolve, reject) => {
         const formItemValidationPromises = []
-        const formItems = this.items
+        const formItems = this.formItems
         for (const key of Object.keys(formItems)) {
           const formItemInstances = formItems[key]
           for (const formItemInstance of formItemInstances) {
@@ -106,7 +104,7 @@ export default {
       })
     },
     clearValidationEffect () {
-      const formItems = this.items
+      const { formItems } = this
       for (const key of Object.keys(formItems)) {
         const formItemInstances = formItems[key]
         for (const formItemInstance of formItemInstances) {

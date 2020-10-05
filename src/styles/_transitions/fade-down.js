@@ -12,11 +12,11 @@ export default function ({
   leaveCubicBezier = cubicBezierEaseInOut
 } = {}) {
   return [
-    c(`&.${namespace}-${name}-transition-enter, &.${namespace}-${name}-transition-leave-to`, {
+    c(`&.${namespace}-${name}-transition-enter-from, &.${namespace}-${name}-transition-leave-to`, {
       opacity: 0,
       transform: `translateY(${fromOffset})`
     }),
-    c(`&.${namespace}-${name}-transition-enter-to, &.${namespace}-${name}-transition-leave`, {
+    c(`&.${namespace}-${name}-transition-enter-to, &.${namespace}-${name}-transition-leave-from`, {
       opacity: 1,
       transform: 'translateY(0)'
     }),

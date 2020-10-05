@@ -31,7 +31,6 @@
         :theme="theme"
         teleport-disabled
         size="small"
-        :detachable="false"
         :value="value"
         :placeholder="localeNamespace.selectTime"
         :is-hour-disabled="isHourDisabled"

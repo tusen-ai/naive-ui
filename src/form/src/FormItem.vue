@@ -57,12 +57,15 @@
 <script>
 import Schema from 'async-validator'
 import get from 'lodash-es/get'
-import registerable from '../../_mixins/registerable'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
+import {
+  configurable,
+  themeable,
+  usecssr,
+  registerable
+} from '../../_mixins'
 import formatLength from '../../_utils/css/formatLength'
-import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
+import { warn } from '../../_utils/naive'
 
 function wrapValidator (validator) {
   if (typeof validator === 'function') {
@@ -75,24 +78,23 @@ function wrapValidator (validator) {
           (validateResult && validateResult.then)
         ) {
           return validateResult
-        } else if (validateResult === void 0) {
+        } else if (validateResult === undefined) {
           return true
         } else {
-          console.warn(
-            `[naive-ui/form-item/validate]: You return a ${typeof validateResult} ` +
+          warn('form-item/validate', `You return a ${typeof validateResult} ` +
             'typed value in the validator method, which is not recommended. Please ' +
             'use `boolean`, `Error` or `Promise` typed value instead.'
           )
           return true
         }
       } catch (err) {
-        console.error(
-          '[naive-ui/form-item/validate]: An error is catched in the validation, ' +
+        warn(
+          'form-item/validate', 'An error is catched in the validation, ' +
           'so the validation won\'t be done. Your callback in `validate` method of ' +
           '`n-form` or `n-form-item` won\'t be called in this validation.'
         )
         console.error(err)
-        return void 0
+        return undefined
       }
     }
   }
@@ -103,8 +105,8 @@ export default {
   name: 'FormItem',
   cssrName: 'Form',
   mixins: [
-    registerable('NForm', 'items', 'path'),
-    withapp,
+    registerable('NForm', 'formItems', 'path'),
+    configurable,
     themeable,
     usecssr(styles)
   ],
@@ -200,7 +202,6 @@ export default {
       const NFormItem = this.NFormItem
       if (
         NFormItem &&
-        NFormItem !== '__FORM_ITEM_INNER__' &&
         NFormItem.syntheticSize
       ) return NFormItem.syntheticSize
       const NForm = this.NForm
@@ -258,7 +259,6 @@ export default {
     syntheticRequired () {
       if (this.syntheticRules.some(rule => rule.required)) return true
       if (this.required) return true
-      if (this.NForm && this.NForm.required) return true
       return false
     },
     syntheticRules () {
@@ -372,9 +372,9 @@ export default {
        * be valid.
        */
       if (!path) {
-        console.error(
-          '[naive-ui/form-item]: `n-form-item` without `path` can\'t be validated.'
-        )
+        if (__DEV__) {
+          warn('form-item', '`n-form-item` without `path` can\'t be validated.')
+        }
         return Promise.resolve({
           valid: true
         })

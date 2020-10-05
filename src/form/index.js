@@ -1,8 +1,8 @@
 /* istanbul ignore file */
 import Form from './src/Form.vue'
 import FormItem from './src/FormItem.vue'
-import FormItemCol from './src/FormItemCol.vue'
-import FormItemRow from './src/FormItemRow.vue'
+import FormItemCol from './src/FormItemCol.js'
+import FormItemRow from './src/FormItemRow.js'
 
 Form.install = function (Vue, naive) {
   Vue.component(naive.componentPrefix + Form.name, Form)
