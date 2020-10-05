@@ -602,7 +602,7 @@ export default {
       this.doClick(e)
     },
     handleClear (e) {
-      this.doClear()
+      this.doClear(e)
       if (this.pair) {
         this.doChange([])
       } else {

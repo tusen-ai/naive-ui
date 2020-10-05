@@ -175,7 +175,8 @@
 import NButton from '../../../button'
 import NBaseIcon from '../../../_base/icon'
 import dualCalendarMixin from './dualCalendarMixin'
-import startOfDay from 'date-fns/startOfDay'
+import { startOfDay } from 'date-fns'
+import { injectDualCalendarValidation } from '../validate-utils'
 
 const DATE_FORMAT = 'yyyy-MM-dd'
 
@@ -184,12 +185,17 @@ export default {
     NButton,
     NBaseIcon
   },
-  mixins: [dualCalendarMixin],
+  mixins: [
+    dualCalendarMixin
+  ],
   props: {
     format: {
       type: String,
       default: DATE_FORMAT
     }
+  },
+  setup () {
+    return injectDualCalendarValidation()
   },
   watch: {
     active (newActive) {

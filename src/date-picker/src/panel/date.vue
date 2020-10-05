@@ -57,7 +57,7 @@
             'n-date-panel-date--selected': dateItem.isSelectedDate,
             'n-date-panel-date--excluded': !dateItem.isDateOfDisplayMonth,
             'n-date-panel-date--transition-disabled': noTransition,
-            'n-date-panel-date--disabled': isDateDisabled(dateItem.timestamp)
+            'n-date-panel-date--disabled': isCalendarDateDisabled(dateItem.timestamp)
           }"
           @click="handleDateClick(dateItem)"
         >
@@ -107,9 +107,9 @@
 <script>
 import NBaseIcon from '../../../_base/icon'
 import uniCalendarMixin from './uniCalendarMixin'
-import startOfDay from 'date-fns/startOfDay'
-
+import { startOfDay } from 'date-fns'
 import NButton from '../../../button'
+import { injectUniCalendarValidation } from '../validate-utils'
 
 const DATETIME_FORMAT = 'yyyy-MM-dd HH:mm:ss'
 const DATE_FORMAT = 'yyyy-MM-dd'
@@ -120,12 +120,17 @@ export default {
     NButton,
     NBaseIcon
   },
-  mixins: [uniCalendarMixin],
+  mixins: [
+    uniCalendarMixin
+  ],
   props: {
     format: {
       type: String,
       default: DATETIME_FORMAT
     }
+  },
+  setup () {
+    return injectUniCalendarValidation()
   },
   data () {
     return {

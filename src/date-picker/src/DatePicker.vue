@@ -93,8 +93,6 @@
               :active="active"
               :actions="actions"
               :theme="syntheticTheme"
-              :is-date-disabled="isDateDisabled"
-              :is-time-disabled="isTimeDisabled"
               :format="computedFormat"
               @update:value="handlePanelInput"
               @tab-out="handlePanelTabOut"
@@ -108,7 +106,6 @@
               :active="active"
               :actions="actions"
               :theme="syntheticTheme"
-              :is-date-disabled="isDateDisabled"
               @update:value="handlePanelInput"
               @tab-out="handlePanelTabOut"
               @close="handlePanelClose"
@@ -121,7 +118,6 @@
               :active="active"
               :actions="actions"
               :theme="syntheticTheme"
-              :is-date-disabled="isDateDisabled"
               @update:value="handleRangePanelInput"
               @tab-out="handlePanelTabOut"
               @close="handlePanelClose"
@@ -135,8 +131,6 @@
               :active="active"
               :actions="actions"
               :theme="syntheticTheme"
-              :is-date-disabled="isDateDisabled"
-              :is-time-disabled="isTimeDisabled"
               @update:value="handleRangePanelInput"
               @close="handlePanelClose"
               @tab-out="handlePanelTabOut"
@@ -178,13 +172,19 @@ import NIcon from '../../icon'
 import { CalendarIcon } from '../../_base/icons'
 import NBaseLazyTeleport from '../../_base/lazy-teleport'
 
-import format from 'date-fns/format'
-import getTime from 'date-fns/getTime'
-import isValid from 'date-fns/isValid'
+import {
+  format,
+  getTime,
+  isValid
+} from 'date-fns'
 import { strictParse, getDerivedTimeFromKeyboardEvent } from '../../_utils/component/datePicker'
 import isEqual from 'lodash-es/isEqual'
 
 import styles from './styles'
+import {
+  uniCalendarValidation,
+  dualCalendarValidation
+} from './validate-utils'
 
 const DATE_FORMAT = {
   date: 'yyyy-MM-dd',
@@ -315,20 +315,19 @@ export default {
       displayTime: '',
       displayStartTime: '',
       displayEndTime: '',
-      active: false,
-      isValueInvalid: false,
-      isEndValueInvalid: false,
-      isStartValueInvalid: false
+      active: false
     }
   },
-  setup () {
+  setup (props) {
     return {
       panelRef: ref(null),
       offsetContainerRef: ref(null),
       trackingRef: ref(null),
       triggerRef: ref(null),
       inputRef: ref(null),
-      isMounted: useIsMounted()
+      isMounted: useIsMounted(),
+      ...uniCalendarValidation(props),
+      ...dualCalendarValidation(props)
     }
   },
   computed: {
@@ -580,7 +579,7 @@ export default {
         this.doUpdateValue(getTime(newSelectedDateTime))
       }
     },
-    handleRangeInput (v, isValueInvalid) {
+    handleRangeInput (v) {
       if (v === null) v = [null, null]
       const [startTime, endTime] = v
       const newStartTime = strictParse(startTime, this.computedFormat, new Date())
@@ -680,15 +679,6 @@ export default {
       }
       this.doUpdateValue([startTime, endTime])
       this.refresh([startTime, endTime])
-    },
-    setInvalidStatus (isValueInvalid) {
-      this.isValueInvalid = isValueInvalid
-    },
-    setStartInvalidStatus (isStartValueInvalid) {
-      this.isStartValueInvalid = isStartValueInvalid
-    },
-    setEndInvalidStatus (isEndValueInvalid) {
-      this.isEndValueInvalid = isEndValueInvalid
     }
   }
 }

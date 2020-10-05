@@ -1,19 +1,20 @@
-// import moment from 'moment'
-import addMonths from 'date-fns/addMonths'
-import format from 'date-fns/format'
-import getTime from 'date-fns/getTime'
-import getYear from 'date-fns/getYear'
-import getMonth from 'date-fns/getMonth'
-import startOfMonth from 'date-fns/startOfMonth'
-import isValid from 'date-fns/isValid'
-import getHours from 'date-fns/getHours'
-import getMinutes from 'date-fns/getMinutes'
-import getSeconds from 'date-fns/getSeconds'
+import {
+  addMonths,
+  format,
+  getTime,
+  getYear,
+  getMonth,
+  startOfMonth,
+  isValid
+} from 'date-fns'
+import { warn } from '../../../_utils/naive'
 import { dateArray } from '../../../_utils/component/datePicker'
 import commonCalendarMixin from './commonCalendarMixin'
 
 export default {
-  mixins: [commonCalendarMixin],
+  mixins: [
+    commonCalendarMixin
+  ],
   props: {
     value: {
       validator (value) {
@@ -23,9 +24,12 @@ export default {
             if (typeof value[0] === 'number' && typeof value[1] === 'number') {
               return value[1] >= value[0]
             } else {
-              console.error(
-                '[naive-ui/date-picker/datetimerange]: Start time should be no later than end time.'
-              )
+              if (__DEV__) {
+                warn(
+                  'date-picker/datetimerange',
+                  'Start time should be no later than end time.'
+                )
+              }
             }
           }
         }
@@ -37,22 +41,6 @@ export default {
     actions: {
       type: Array,
       default: () => ['clear', 'confirm']
-    },
-    isDateDisabled: {
-      type: Function,
-      default: () => {
-        return false
-      }
-    },
-    isTimeDisabled: {
-      type: Function,
-      default: () => {
-        return {
-          hourDisabled: () => false,
-          minuteDisabled: () => false,
-          secondDisabled: () => false
-        }
-      }
     }
   },
   data () {
@@ -61,7 +49,7 @@ export default {
       endDateDisplayString: '',
       startCalendarDateTime: new Date(),
       endCalendarDateTime: addMonths(new Date(), 1),
-      currentDateTime: new Date(),
+      now: new Date(),
       calendar: [],
       isSelecting: false,
       memorizedStartDateTime: null
@@ -76,14 +64,14 @@ export default {
       return dateArray(
         this.startCalendarDateTime,
         this.valueAsDateArray,
-        this.currentDateTime
+        this.now
       )
     },
     endDateArray () {
       return dateArray(
         this.endCalendarDateTime,
         this.valueAsDateArray,
-        this.currentDateTime
+        this.now
       )
     },
     startCalendarMonth () {
@@ -117,100 +105,6 @@ export default {
       if (isValid(startMoment)) {
         return [startMoment, endMoment]
       } else return null
-    },
-    isStartHourDisabled () {
-      if (this.value === null) return () => false
-      const isTimeDisabled = this.isTimeDisabled(this.value[0], 'start', this.value)
-      const isStartHourDisabled = (isTimeDisabled && isTimeDisabled.isHourDisabled)
-      return function (...args) {
-        if (!isStartHourDisabled) return false
-        return isStartHourDisabled(...args)
-      }
-    },
-    isStartMinuteDisabled () {
-      if (this.value === null) return () => false
-      const isTimeDisabled = this.isTimeDisabled(this.value[0], 'start', this.value)
-      const isStartMinuteDisabled = (isTimeDisabled && isTimeDisabled.isMinuteDisabled)
-      return function (...args) {
-        if (!isStartMinuteDisabled) return false
-        return isStartMinuteDisabled(...args)
-      }
-    },
-    isStartSecondDisabled () {
-      if (this.value === null) return () => false
-      const isTimeDisabled = this.isTimeDisabled(this.value[0], 'start', this.value)
-      const isStartSecondDisabled = (isTimeDisabled && isTimeDisabled.isSecondDisabled)
-      return function (...args) {
-        if (!isStartSecondDisabled) return false
-        return isStartSecondDisabled(...args)
-      }
-    },
-    isEndHourDisabled () {
-      if (this.value === null) return () => false
-      const isTimeDisabled = this.isTimeDisabled(this.value[0], 'end', this.value)
-      const isEndHourDisabled = (isTimeDisabled && isTimeDisabled.isHourDisabled)
-      return function (...args) {
-        if (!isEndHourDisabled) return false
-        return isEndHourDisabled(...args)
-      }
-    },
-    isEndMinuteDisabled () {
-      if (this.value === null) return () => false
-      const isTimeDisabled = this.isTimeDisabled(this.value[0], 'end', this.value)
-      const isEndMinuteDisabled = (isTimeDisabled && isTimeDisabled.isMinuteDisabled)
-      return function (...args) {
-        if (!isEndMinuteDisabled) return false
-        return isEndMinuteDisabled(...args)
-      }
-    },
-    isEndSecondDisabled () {
-      if (this.value === null) return () => false
-      const isTimeDisabled = this.isTimeDisabled(this.value[0], 'end', this.value)
-      const isEndSecondDisabled = (isTimeDisabled && isTimeDisabled.isSecondDisabled)
-      return function (...args) {
-        if (!isEndSecondDisabled) return false
-        return isEndSecondDisabled(...args)
-      }
-    },
-    isRangeInvalid () {
-      if (this.value === null) return false
-      return this.isStartValueInvalid || this.isEndValueInvalid
-    },
-    isStartValueInvalid () {
-      if (this.value === null) return false
-      return this.isStartDateInvalid || this.isStartTimeInvalid
-    },
-    isStartDateInvalid () {
-      if (this.value === null) return false
-      return this.isDateDisabled(this.value[0], 'start', this.value)
-    },
-    isStartTimeInvalid () {
-      if (this.value === null) return false
-      if (this.type === 'daterange') return false
-      const hours = getHours(this.value[0])
-      const minutes = getMinutes(this.value[0])
-      const seconds = getSeconds(this.value[0])
-      return this.isStartHourDisabled(hours) ||
-        this.isStartMinuteDisabled(minutes, hours) ||
-        this.isStartSecondDisabled(seconds, minutes, hours)
-    },
-    isEndValueInvalid () {
-      if (this.value === null) return false
-      return this.isEndDateInvalid || this.isEndTimeInvalid
-    },
-    isEndDateInvalid () {
-      if (this.value === null) return false
-      return this.isDateDisabled(this.value[1], 'end', this.value)
-    },
-    isEndTimeInvalid () {
-      if (this.value === null) return false
-      if (this.type === 'daterange') return false
-      const hours = getHours(this.value[1])
-      const minutes = getMinutes(this.value[1])
-      const seconds = getSeconds(this.value[1])
-      return this.isStartHourDisabled(hours) ||
-        this.isStartMinuteDisabled(minutes, hours) ||
-        this.isStartSecondDisabled(seconds, minutes, hours)
     }
   },
   watch: {
@@ -234,32 +128,25 @@ export default {
         }
       }
     },
-    isStartValueInvalid (value) {
-      this.NDatePicker.setStartInvalidStatus(value)
-    },
-    isEndValueInvalid (value) {
-      this.NDatePicker.setEndInvalidStatus(value)
-    },
     active (value) {
       if (!value) {
         this.isSelecting = false
       }
     }
   },
-  mounted () {
-    this.NDatePicker.setStartInvalidStatus(this.isStartValueInvalid)
-    this.NDatePicker.setEndInvalidStatus(this.isEndValueInvalid)
-  },
   methods: {
     isCalendarDateDisabled (timestamp) {
-      if (this.value === null) return false
+      const {
+        isDateDisabled
+      } = this
+      if (!isDateDisabled) return false
       if (this.selectingPhase === 'start') {
-        return this.isDateDisabled(timestamp, 'start', this.value)
+        return isDateDisabled(timestamp, 'start', this.value)
       } else {
         if (timestamp < this.value[1]) {
-          return this.isDateDisabled(timestamp, 'start', this.value)
+          return isDateDisabled(timestamp, 'start', this.value)
         } else {
-          return this.isDateDisabled(timestamp, 'end', this.value)
+          return isDateDisabled(timestamp, 'end', this.value)
         }
       }
     },

@@ -1,20 +1,22 @@
-import commonCalendarMixin from './commonCalendarMixin'
-import addMonths from 'date-fns/addMonths'
-import addYears from 'date-fns/addYears'
-import isSameMonth from 'date-fns/isSameMonth'
-import getTime from 'date-fns/getTime'
-import format from 'date-fns/format'
-import set from 'date-fns/set'
-import getYear from 'date-fns/getYear'
-import getMonth from 'date-fns/getMonth'
-import getDate from 'date-fns/getDate'
-import isValid from 'date-fns/isValid'
-import startOfHour from 'date-fns/startOfHour'
-import setHours from 'date-fns/setHours'
+import {
+  addMonths,
+  addYears,
+  isSameMonth,
+  getTime,
+  format,
+  set,
+  getYear,
+  getMonth,
+  getDate,
+  isValid
+} from 'date-fns'
 import { dateArray, strictParse } from '../../../_utils/component/datePicker'
+import commonCalendarMixin from './commonCalendarMixin'
 
 export default {
-  mixins: [commonCalendarMixin],
+  mixins: [
+    commonCalendarMixin
+  ],
   props: {
     value: {
       type: Number,
@@ -24,35 +26,19 @@ export default {
     actions: {
       type: Array,
       default: () => ['now', 'clear', 'confirm']
-    },
-    isDateDisabled: {
-      type: Function,
-      default: () => {
-        return false
-      }
-    },
-    isTimeDisabled: {
-      type: Function,
-      default: () => {
-        return {
-          isHourDisabled: () => false,
-          isMinuteDisabled: () => false,
-          isSecondDisabled: () => false
-        }
-      }
     }
   },
   data () {
     return {
       displayDateString: '',
       calendarDateTime: new Date(),
-      currentDateTime: new Date(),
+      now: new Date(),
       selectedDate: null
     }
   },
   computed: {
     dateArray () {
-      return dateArray(this.calendarDateTime, this.valueAsDateTime, this.currentDateTime)
+      return dateArray(this.calendarDateTime, this.valueAsDateTime, this.now)
     },
     calendarMonth () {
       return this.localeNamespace[format(this.calendarDateTime, 'MMM')]
@@ -67,45 +53,6 @@ export default {
     valueAsDateTime () {
       if (this.value === null || this.value === undefined) return null
       return new Date(this.value)
-    },
-    isDateInvalid () {
-      if (this.value === null) {
-        return false
-      }
-      return this.isDateDisabled(new Date(this.value))
-    },
-    isTimeInvalid () {
-      if (!this.value) {
-        return false
-      }
-      const time = new Date(this.value)
-      const hour = time.getHours()
-      const minute = time.getMinutes()
-      const second = time.getMinutes()
-      return this.isHourDisabled(hour) ||
-          this.isMinuteDisabled(minute, hour) ||
-          this.isSecondDisabled(second, minute, hour)
-    },
-    isDateTimeInvalid () {
-      return this.isDateInvalid || this.isTimeInvalid
-    },
-    currentDate () {
-      if (!this.value) {
-        return null
-      }
-      return setHours(startOfHour(new Date(this.value)), 0).getTime()
-    },
-    timePickerValidator () {
-      return this.isTimeDisabled(this.currentDate)
-    },
-    isHourDisabled () {
-      return this.timePickerValidator.isHourDisabled || (() => false)
-    },
-    isMinuteDisabled () {
-      return this.timePickerValidator.isMinuteDisabled || (() => false)
-    },
-    isSecondDisabled () {
-      return this.timePickerValidator.isSecondDisabled || (() => false)
     }
   },
   watch: {
@@ -123,9 +70,6 @@ export default {
       } else {
         this.displayDateString = ''
       }
-    },
-    isDateTimeInvalid (value) {
-      this.NDatePicker.setInvalidStatus(value)
     }
   },
   created () {
@@ -135,9 +79,15 @@ export default {
     } else {
       this.displayDateString = ''
     }
-    this.NDatePicker.setInvalidStatus(this.isDateTimeInvalid)
   },
   methods: {
+    isCalendarDateDisabled (timestamp) {
+      const {
+        isDateDisabled
+      } = this
+      if (!isDateDisabled) return false
+      return isDateDisabled(timestamp)
+    },
     handleDateInput (value) {
       const date = strictParse(value, this.dateFormat, new Date())
       if (isValid(date)) {
@@ -179,7 +129,7 @@ export default {
       this.calendarDateTime = new Date()
     },
     handleDateClick (dateItem) {
-      if (this.isDateDisabled(dateItem.timestamp)) {
+      if (this.isCalendarDateDisabled(dateItem.timestamp)) {
         return
       }
       let newSelectedDateTime = new Date()

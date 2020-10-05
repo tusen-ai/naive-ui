@@ -262,14 +262,17 @@ import NTimePicker from '../../../time-picker'
 import NInput from '../../../input'
 import dualCalendarMixin from './dualCalendarMixin'
 import NBaseIcon from '../../../_base/icon'
-import startOfSecond from 'date-fns/startOfSecond'
-import format from 'date-fns/format'
-import set from 'date-fns/set'
-import getYear from 'date-fns/getYear'
-import getMonth from 'date-fns/getMonth'
-import getDate from 'date-fns/getDate'
-import isValid from 'date-fns/isValid'
+import {
+  format,
+  startOfSecond,
+  set,
+  getYear,
+  getMonth,
+  getDate,
+  isValid
+} from 'date-fns'
 import { strictParse } from '../../../_utils/component/datePicker'
+import { injectDualCalendarValidation } from '../validate-utils'
 
 const DATETIME_FORMAT = 'yyyy-MM-dd HH:mm:ss'
 const DATE_FORMAT = 'yyyy-MM-dd'
@@ -296,6 +299,9 @@ export default {
       type: Array,
       default: () => DATE_VALIDATE_FORMAT
     }
+  },
+  setup () {
+    return injectDualCalendarValidation()
   },
   computed: {
     timeFormat () {
