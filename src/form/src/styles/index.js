@@ -8,8 +8,8 @@ export default [
     CNode: baseStyle
   },
   {
-    key: 'renderedSize',
-    watch: ['syntheticTheme', 'renderedSize'],
+    key: 'mergedSize',
+    watch: ['syntheticTheme', 'mergedSize'],
     CNode: sizeStyle
   }
 ]

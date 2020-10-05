@@ -15,7 +15,7 @@
     <n-input
       v-if="isRange"
       ref="inputRef"
-      :size="syntheticSize"
+      :size="mergedSize"
       :theme="syntheticTheme"
       passively-activated
       :disabled="disabled"
@@ -45,7 +45,7 @@
       v-model:value="displayTime"
       :theme="syntheticTheme"
       passively-activated
-      :size="syntheticSize"
+      :size="mergedSize"
       :force-focus="active"
       :disabled="disabled"
       :placeholder="localizedPlacehoder"

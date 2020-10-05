@@ -4,7 +4,7 @@
     :class="{
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
       [`n-transfer--filterable`]: filterable,
-      [`n-transfer--${syntheticSize}-size`]: true
+      [`n-transfer--${mergedSize}-size`]: true
     }"
   >
     <div class="n-transfer-list">

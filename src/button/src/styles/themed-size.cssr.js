@@ -3,7 +3,7 @@ import formatLength from '../../../_utils/css/formatLength'
 
 export default c([
   ({ props }) => {
-    const size = props.$instance.syntheticSize
+    const size = props.$instance.mergedSize
     const local = props.$local
     const height = local[createKey('height', size)]
     const fontSize = local[createKey('fontSize', size)]

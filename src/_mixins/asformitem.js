@@ -1,7 +1,7 @@
 export default function (options = {}) {
   const {
     defaultSize = 'medium',
-    syntheticSize
+    mergedSize
   } = options
   return {
     provide () {
@@ -15,15 +15,15 @@ export default function (options = {}) {
       }
     },
     computed: {
-      syntheticSize: syntheticSize || function () {
+      mergedSize: mergedSize || function () {
         const size = this.size
         if (size) return size
         const NFormItem = this.NFormItem
         if (
           NFormItem &&
-          NFormItem.syntheticSize
+          NFormItem.mergedSize
         ) {
-          return NFormItem.syntheticSize
+          return NFormItem.mergedSize
         }
         return defaultSize
       }

@@ -65,9 +65,7 @@ export default {
     withapp,
     themeable,
     locale('Tag'),
-    asformitem({
-      change: 'change'
-    }),
+    asformitem(),
     usecssr(styles)
   ],
   props: {

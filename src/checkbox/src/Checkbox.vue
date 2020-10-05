@@ -6,7 +6,7 @@
       'n-checkbox--disabled': syntheticDisabled,
       'n-checkbox--indeterminate': indeterminate,
       'n-checkbox--table-header': tableHeader,
-      [`n-checkbox--${syntheticSize}-size`]: true,
+      [`n-checkbox--${mergedSize}-size`]: true,
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
     }"
     :tabindex="syntheticDisabled ? false : 0"
@@ -81,22 +81,20 @@ export default {
     withapp,
     themeable,
     asformitem({
-      defaultSize: 'medium',
-      syntheticSize () {
-        const size = this.size
-        if (size) return size
-        const NCheckboxGroup = this.NCheckboxGroup
-        if (NCheckboxGroup && NCheckboxGroup.syntheticSize) {
-          return NCheckboxGroup.syntheticSize
+      mergedSize () {
+        const { size } = this
+        if (size !== undefined) return size
+        const { NCheckboxGroup } = this
+        if (NCheckboxGroup && NCheckboxGroup.mergedSize !== undefined) {
+          return NCheckboxGroup.mergedSize
         }
-        const NFormItem = this.NFormItem
+        const { NFormItem } = this
         if (
           NFormItem &&
-          NFormItem.syntheticSize
+          NFormItem.mergedSize
         ) {
-          return NFormItem.syntheticSize
+          return NFormItem.mergedSize
         }
-        return 'medium'
       }
     }),
     usecssr(styles)

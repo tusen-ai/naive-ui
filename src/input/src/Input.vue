@@ -4,7 +4,7 @@
     class="n-input"
     :class="{
       'n-input--disabled': disabled,
-      [`n-input--${syntheticSize}-size`]: true,
+      [`n-input--${mergedSize}-size`]: true,
       'n-input--textarea': isTextarea,
       'n-input--round': round && !isTextarea,
       'n-input--clearable': clearable,
@@ -371,7 +371,7 @@ export default {
         this.$nextTick(this.updateTextAreaStyle)
       }
     },
-    syntheticSize () {
+    mergedSize () {
       if (this.isTextarea && this.autosize) {
         this.$nextTick(this.updateTextAreaStyle)
       }

@@ -93,9 +93,7 @@ export default {
     themeable,
     hollowoutable,
     usecssr(styles),
-    asformitem({
-      defaultSize: 'medium'
-    })
+    asformitem()
   ],
   props: {
     name: {
@@ -157,7 +155,7 @@ export default {
         'n-radio-group',
         {
           [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
-          [`n-radio-group--${this.syntheticSize}-size`]: this.syntheticSize,
+          [`n-radio-group--${this.mergedSize}-size`]: this.mergedSize,
           [`n-radio-group--button-group`]: isButtonGroup,
           [`n-radio-group--transition-disabled`]: isButtonGroup && this.transitionDisabled
         }

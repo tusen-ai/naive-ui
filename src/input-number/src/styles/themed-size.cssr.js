@@ -2,7 +2,7 @@ import { cTB, c, cE, cM } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
-    const size = props.$instance.syntheticSize
+    const size = props.$instance.mergedSize
     const local = props.$local
     const height = local.height[size]
     const fontSize = local.fontSize[size]

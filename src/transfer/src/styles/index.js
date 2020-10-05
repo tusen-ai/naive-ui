@@ -10,9 +10,9 @@ export default [
     CNode: themedBaseStyle
   },
   {
-    key: 'syntheticSize',
+    key: 'mergedSize',
     watch: [
-      'syntheticSize',
+      'mergedSize',
       'syntheticTheme'
     ],
     CNode: themedSizeStyle

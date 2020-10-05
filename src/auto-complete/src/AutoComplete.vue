@@ -19,7 +19,7 @@
         :theme="syntheticTheme"
         :value="value"
         :placeholder="placeholder"
-        :size="syntheticSize"
+        :size="mergedSize"
         @focus="canBeActivated = true"
         @input="handleInput"
         @blur="handleBlur"
@@ -58,7 +58,7 @@
               :pattern="value"
               :options="selectOptions"
               :multiple="false"
-              :size="syntheticSize"
+              :size="mergedSize"
               @menu-toggle-option="handleToggleOption"
             />
           </transition>

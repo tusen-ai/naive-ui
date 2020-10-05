@@ -2,7 +2,7 @@
   <div
     class="n-select"
     :class="{
-      [`n-select--${syntheticSize}-size`]: true,
+      [`n-select--${mergedSize}-size`]: true,
       'n-select--multiple': multiple,
       [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
@@ -28,7 +28,7 @@
       :remote="remote"
       :clearable="clearable"
       :disabled="disabled"
-      :size="syntheticSize"
+      :size="mergedSize"
       :theme="syntheticTheme"
       :loading="loading"
       :autofocus="autofocus"
@@ -72,7 +72,7 @@
               :pattern="pattern"
               :options="filteredOptions"
               :multiple="multiple"
-              :size="syntheticSize"
+              :size="mergedSize"
               :filterable="filterable"
               :value="value"
               @menu-toggle-option="handleToggleOption"

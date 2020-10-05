@@ -15,7 +15,7 @@
       :attr-size="syntheticAttrSize"
       :theme="syntheticTheme"
       :stateful="stateful"
-      :size="syntheticSize"
+      :size="mergedSize"
       :force-focus="active"
       :placeholder="localizedPlaceholder"
       :clearable="clearable"

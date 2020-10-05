@@ -43,19 +43,17 @@ export default {
     },
     rules: {
       type: Object,
-      default: function () {
-        return {}
-      }
+      default: undefined
     },
     showRequireMark: {
       type: Boolean,
-      default: true
+      default: undefined
     },
     size: {
       validator (value) {
         return ['small', 'medium', 'large'].includes(value)
       },
-      default: null
+      default: undefined
     },
     onSubmit: {
       type: Function,

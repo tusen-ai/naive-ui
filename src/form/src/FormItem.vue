@@ -2,18 +2,18 @@
   <div
     class="n-form-item"
     :class="{
-      [`n-form-item--${renderedSize}-size`]: true,
+      [`n-form-item--${mergedSize}-size`]: true,
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
-      [`n-form-item--${syntheticLabelPlacement}-labelled`]: syntheticLabelPlacement,
-      [`n-form-item--${syntheticLabelAlign}-label-aligned`]: syntheticLabelAlign,
-      [`n-form-item--required`]: syntheticRequired && syntheticShowRequireMark,
+      [`n-form-item--${mergedLabelPlacement}-labelled`]: true,
+      [`n-form-item--${mergedLabelAlign}-label-aligned`]: true,
+      [`n-form-item--required`]: mergedShowRequireMark === undefined ? mergedShowRequireMark : mergedRequired,
       [`n-form-item--no-label`]: !(label || $slots.label)
     }"
   >
     <label
       v-if="label || $slots.label"
       :class="`n-form-item-label`"
-      :style="syntheticLabelStyle"
+      :style="mergedLabelStyle"
     >
       <template
         v-if="$slots.label"
@@ -26,19 +26,22 @@
       <div
         class="n-form-item-blank"
         :class="{
-          [`n-form-item-blank--${syntheticValidationStatus}`]: syntheticValidationStatus
+          [`n-form-item-blank--${mergedValidationStatus}`]: mergedValidationStatus
         }"
       >
         <slot />
       </div>
-      <div v-if="syntheticValidationStatus !== null || path" class="n-form-item-feedback-wrapper">
+      <div
+        v-if="mergedValidationStatus !== undefined || path"
+        class="n-form-item-feedback-wrapper"
+      >
         <transition
           name="n-form-item-feedback-transition"
           @before-enter="handleBeforeEnter"
           @before-leave="handleBeforeLeave"
           @after-leave="handleAfterLeave"
         >
-          <div v-if="feedback !== null" class="n-form-item-feedback">
+          <div v-if="feedback !== undefined" class="n-form-item-feedback">
             {{ feedback }}
           </div>
           <div v-else-if="explains.length" class="n-form-item-feedback">
@@ -63,9 +66,13 @@ import {
   usecssr,
   registerable
 } from '../../_mixins'
-import formatLength from '../../_utils/css/formatLength'
 import styles from './styles'
 import { warn } from '../../_utils/naive'
+import {
+  formItemMisc,
+  formItemSize,
+  formItemRule
+} from './utils'
 
 function wrapValidator (validator) {
   if (typeof validator === 'function') {
@@ -113,11 +120,11 @@ export default {
   props: {
     label: {
       type: [Number, String],
-      default: null
+      default: undefined
     },
     labelWidth: {
       type: [Number, String],
-      default: null
+      default: undefined
     },
     labelStyle: {
       type: Object,
@@ -125,15 +132,15 @@ export default {
     },
     labelAlign: {
       type: String,
-      default: null
+      default: undefined
     },
     labelPlacement: {
       type: String,
-      default: null
+      default: undefined
     },
     path: {
       type: String,
-      default: null
+      default: undefined
     },
     first: {
       type: Boolean,
@@ -141,7 +148,7 @@ export default {
     },
     rulePath: {
       type: String,
-      default: null
+      default: undefined
     },
     required: {
       type: Boolean,
@@ -149,17 +156,17 @@ export default {
     },
     showRequireMark: {
       type: Boolean,
-      default: null
+      default: undefined
     },
     rule: {
       type: [Object, Array],
-      default: null
+      default: undefined
     },
     size: {
       validator (value) {
         return ['small', 'medium', 'large'].includes(value)
       },
-      default: null
+      default: undefined
     },
     ignorePathChange: {
       type: Boolean,
@@ -169,11 +176,11 @@ export default {
       validator (value) {
         return ['error', 'warning', 'success'].includes(value)
       },
-      default: null
+      default: undefined
     },
     feedback: {
       type: String,
-      default: null
+      default: undefined
     }
   },
   inject: {
@@ -189,101 +196,17 @@ export default {
       NFormItem: this
     }
   },
+  setup (props) {
+    return {
+      ...formItemSize(props),
+      ...formItemMisc(props),
+      ...formItemRule(props)
+    }
+  },
   data () {
     return {
       explains: [],
-      validationErrored: false,
       feedbackTransitionDisabled: true
-    }
-  },
-  computed: {
-    syntheticSize () {
-      if (this.size) return this.size
-      const NFormItem = this.NFormItem
-      if (
-        NFormItem &&
-        NFormItem.syntheticSize
-      ) return NFormItem.syntheticSize
-      const NForm = this.NForm
-      if (NForm && NForm.size) {
-        return NForm.size
-      }
-      return null
-    },
-    renderedSize () {
-      return this.syntheticSize || 'medium'
-    },
-    syntheticValidationStatus () {
-      if (this.validationStatus !== null) return this.validationStatus
-      if (this.validationErrored) return 'error'
-      return null
-    },
-    labelWidthStyle () {
-      return {
-        width: formatLength(this.syntheticLabelWidth)
-      }
-    },
-    syntheticShowRequireMark () {
-      if (this.showRequireMark === null) {
-        return this.NForm.showRequireMark
-      }
-      return this.showRequireMark
-    },
-    syntheticLabelStyle () {
-      return {
-        ...this.labelWidthStyle,
-        ...this.labelStyle
-      }
-    },
-    syntheticLabelWidth () {
-      if (this.labelWidth) return this.labelWidth
-      if (this.NForm && this.NForm.labelWidth) return this.NForm.labelWidth
-      return null
-    },
-    syntheticRulePath () {
-      if (this.rulePath) return this.rulePath
-      else if (this.path) {
-        return this.path
-      } else return null
-    },
-    syntheticLabelPlacement () {
-      if (this.labelPlacement) return this.labelPlacement
-      if (this.NForm && this.NForm.labelPlacement) { return this.NForm.labelPlacement }
-      return 'top'
-    },
-    syntheticLabelAlign () {
-      if (this.labelAlign) return this.labelAlign
-      if (this.NForm && this.NForm.labelAlign) return this.NForm.labelAlign
-      return 'left'
-    },
-    syntheticRequired () {
-      if (this.syntheticRules.some(rule => rule.required)) return true
-      if (this.required) return true
-      return false
-    },
-    syntheticRules () {
-      let rules = []
-      if (this.rule) {
-        if (Array.isArray(this.rule)) {
-          rules = rules.concat(this.rule)
-        } else {
-          rules.push(this.rule)
-        }
-      }
-      const NForm = this.NForm
-      if (
-        NForm &&
-        NForm.rules &&
-        get(NForm.rules, this.syntheticRulePath, null)
-      ) {
-        const rule = get(NForm.rules, this.syntheticRulePath)
-        if (Array.isArray(rule)) {
-          rules = rules.concat(rule)
-        } else {
-          rules.push(rule)
-        }
-      }
-      return rules
     }
   },
   watch: {
@@ -384,7 +307,7 @@ export default {
       } else {
         if (!options.first) options.first = this.first
       }
-      const rules = this.syntheticRules
+      const rules = this.mergedRules
       const value = get(this.NForm.model, path, null)
       const activeRules = (!trigger
         ? rules

@@ -2,7 +2,7 @@
   <div
     class="n-input-number"
     :class="{
-      [`n-input-number--${syntheticSize}-size`]: true,
+      [`n-input-number--${mergedSize}-size`]: true,
       'n-input-number--disabled': disabled,
       'n-input-number--invalid': invalid,
       [`n-${syntheticTheme}-theme`]: syntheticTheme

@@ -14,7 +14,7 @@
     <n-base-selection
       ref="triggerRef"
       class="n-cascader-selection"
-      :size="syntheticSize"
+      :size="mergedSize"
       :theme="syntheticTheme"
       :active="active"
       :pattern="pattern"
@@ -55,7 +55,7 @@
         :lazy="remote"
         :on-load="onLoad"
         :theme="syntheticTheme"
-        :size="syntheticSize"
+        :size="mergedSize"
         @update:loading-id="loadingId = $event"
         @update:value="handleMenuInput"
       />
@@ -73,7 +73,7 @@
         :active="active && selectMenuActive"
         :theme="syntheticTheme"
         :pattern="pattern"
-        :size="syntheticSize"
+        :size="mergedSize"
         :multiple="multiple"
         :options="menuOptions"
         @update:value="handleMenuInput"

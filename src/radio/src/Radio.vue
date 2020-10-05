@@ -5,7 +5,7 @@
       'n-radio--disabled': syntheticDisabled,
       'n-radio--checked': renderSafeChecked,
       'n-radio--focus': focus,
-      [`n-radio--${syntheticSize}-size`]: true,
+      [`n-radio--${mergedSize}-size`]: true,
       [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
     @keyup.enter="handleKeyUpEnter"
@@ -54,22 +54,20 @@ export default {
     themeable,
     usecssr(styles),
     asformitem({
-      defaultSize: 'medium',
-      syntheticSize () {
-        const size = this.size
-        if (size) return size
-        const NRadioGroup = this.NRadioGroup
-        if (NRadioGroup && NRadioGroup.syntheticSize) {
-          return NRadioGroup.syntheticSize
+      mergedSize () {
+        const { size } = this
+        if (size !== undefined) return size
+        const { NRadioGroup } = this
+        if (NRadioGroup && NRadioGroup.mergedSize) {
+          return NRadioGroup.mergedSize
         }
-        const NFormItem = this.NFormItem
+        const { NFormItem } = this
         if (
           NFormItem &&
-          NFormItem.syntheticSize
+          NFormItem.mergedSize
         ) {
-          return NFormItem.syntheticSize
+          return NFormItem.mergedSize
         }
-        return 'medium'
       }
     }),
     radioMixin

@@ -14,7 +14,7 @@
       'n-button--hide-icon-margin': hideIconMargin,
       [`n-button--${type}-type`]: true,
       [`n-button--${colorDigest || type}-colored`]: true,
-      [`n-button--${syntheticSize}-size`]: true,
+      [`n-button--${mergedSize}-size`]: true,
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
     }"
     :tabindex="syntheticFocusable ? 0 : -1"
@@ -218,7 +218,7 @@ export default {
       if (!this.color) return null
       return hash(read(this.color))
     },
-    syntheticSize () {
+    mergedSize () {
       const NButtonGroup = this.NButtonGroup
       if (NButtonGroup && NButtonGroup.size) {
         return NButtonGroup.size
@@ -226,9 +226,9 @@ export default {
       const NFormItem = this.NFormItem
       if (
         NFormItem &&
-        NFormItem.syntheticSize
+        NFormItem.mergedSize
       ) {
-        return NFormItem.syntheticSize
+        return NFormItem.mergedSize
       }
       return this.size
     },

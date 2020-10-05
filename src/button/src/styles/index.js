@@ -12,9 +12,9 @@ export default [
     CNode: colorStyle
   },
   {
-    key: 'syntheticSize',
+    key: 'mergedSize',
     watch: [
-      'syntheticSize',
+      'mergedSize',
       'syntheticTheme'
     ],
     CNode: sizeStyle

@@ -4,7 +4,7 @@ import pxfy from '../../../_utils/css/pxfy'
 
 export default c([
   ({ props }) => {
-    const size = props.$instance.renderedSize
+    const size = props.$instance.mergedSize
     const $local = props.$local
     const blankHeight = $local[createKey('blankHeight', size)]
     const feedbackFontSize = $local[createKey('feedbackFontSize', size)]
