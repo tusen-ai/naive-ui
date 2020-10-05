@@ -3,17 +3,14 @@
     class="n-transfer-list-item n-transfer-list-item--target"
     :class="{
       'n-transfer-list-item--disabled': disabled,
-      'n-transfer-list-item--enter': enableEnterAnimation
     }"
     @click="handleClick"
-    @mouseenter="handleMouseEnter"
-    @mouseleave="handleMouseLeave"
   >
     <div class="n-transfer-list-item__checkbox">
       <n-simple-checkbox
         :theme="NTransfer.syntheticTheme"
         :disabled="disabled"
-        :checked="syntheticChecked"
+        :checked="checked"
         :size="NTransfer.syntheticSize"
       />
     </div>
@@ -26,8 +23,10 @@
 </template>
 
 <script>
+import { inject } from 'vue'
 import NSimpleCheckbox from '../../checkbox/src/SimpleCheckbox.vue'
 import createValidator from '../../_utils/vue/validateProp'
+import { useMemo } from '../../_utils/composition'
 
 export default {
   name: 'NTransferListItem',
@@ -46,10 +45,6 @@ export default {
     disabled: {
       validator: createValidator(['boolean']),
       default: false
-    },
-    index: {
-      type: Number,
-      default: null
     }
   },
   inject: {
@@ -57,55 +52,19 @@ export default {
       default: null
     }
   },
-  data () {
+  setup (props) {
+    const NTransfer = inject('NTransfer')
     return {
-      checked: false,
-      enableEnterAnimation: false
+      checked: useMemo(() => {
+        return NTransfer.tgtCheckedValues.includes(props.value)
+      })
     }
-  },
-  computed: {
-    syntheticChecked () {
-      if (this.NTransfer.virtualScroll) {
-        return this.NTransfer.targetCheckedValues.includes(this.value)
-      } else {
-        return this.checked
-      }
-    }
-  },
-  created () {
-    if (
-      this.NTransfer.initialized &&
-      this.NTransfer.enableTargetEnterAnimation
-    ) {
-      this.enableEnterAnimation = true
-    }
-    if (this.NTransfer.targetCheckedValues.includes(this.value)) this.checked = true
   },
   methods: {
-    setChecked (checked) {
-      if (!this.disabled && this.checked !== checked) {
-        this.checked = checked
-      }
-    },
     handleClick () {
       if (!this.disabled) {
-        const newCheckedStatus = !this.checked
-        this.checked = newCheckedStatus
-        this.$emit('click', newCheckedStatus, this.value)
+        this.NTransfer.handleTgtCheckboxClick(!this.checked, this.value)
       }
-    },
-    handleMouseEnter (e) {
-      if (!this.disabled) {
-        this.$emit('mouseenter', e, this.index)
-      }
-    },
-    handleMouseLeave (e) {
-      if (!this.disabled) {
-        this.$emit('mouseleave', e, this.index)
-      }
-    },
-    leave () {
-      if (this.$el && this.$el.classList) this.$el.classList.add('n-transfer-list-item--leave')
     }
   }
 }

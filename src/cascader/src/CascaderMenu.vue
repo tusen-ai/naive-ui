@@ -20,6 +20,7 @@
           }"
           @mousedown.capture="handleMenuMouseDown"
         >
+          <!-- TODO: refactor ref -->
           <n-cascader-submenu
             v-for="(submenuOptions, index) in menuModel"
             :ref="instance => { if (instance) submenuRefs[index] = instance }"

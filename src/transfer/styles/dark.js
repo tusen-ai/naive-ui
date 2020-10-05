@@ -1,13 +1,11 @@
 import create from '../../styles/_utils/create-component-base'
 import commonVariables from './_common'
-import baseTrackingRectStyle from '../../_base/tracking-rect/styles/dark'
 import checkboxStyle from '../../checkbox/styles/dark'
 
 export default create({
   theme: 'dark',
   name: 'Transfer',
   peer: [
-    baseTrackingRectStyle,
     checkboxStyle
   ],
   getDerivedVariables ({ base, derived }) {

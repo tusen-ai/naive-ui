@@ -3,7 +3,7 @@ If you have tons of data, you may need to speed the transfer up! Set `virtual-sc
 ```html
 <n-transfer
   ref="transfer"
-  v-model="value"
+  v-model:value="value"
   :options="options"
   virtual-scroll
 />

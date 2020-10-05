@@ -86,11 +86,11 @@ export default {
       default: null
     },
     onClick: {
-      validator: createValidator(['object']),
+      validator: createValidator(['function']),
       default: undefined
     },
     onChange: {
-      validator: createValidator(['object']),
+      validator: createValidator(['function']),
       default: undefined
     }
   },

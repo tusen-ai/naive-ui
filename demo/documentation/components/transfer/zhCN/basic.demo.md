@@ -3,7 +3,7 @@
 ```html
 <n-transfer
   ref="transfer"
-  v-model="value"
+  v-model:value="value"
   :options="options"
 />
 ```

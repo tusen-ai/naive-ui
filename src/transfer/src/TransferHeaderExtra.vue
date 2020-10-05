@@ -2,20 +2,12 @@
   <div class="n-transfer-list-header__extra">
     {{
       source ?
-        NTransfer.sourceCheckedValues.length :
-        NTransfer.targetCheckedValues.length
+        NTransfer.srcCheckedValues.length :
+        NTransfer.tgtCheckedValues.length
     }}/{{
       source ?
-        (
-          NTransfer.nextSourceOptionsLength === null ?
-            NTransfer.memorizedSourceOptions.length :
-            NTransfer.nextSourceOptionsLength
-        ) :
-        (
-          NTransfer.nextTargetOptionsLength === null ?
-            NTransfer.targetOptions.length :
-            NTransfer.nextTargetOptionsLength
-        )
+        NTransfer.srcOpts.length :
+        NTransfer.tgtOpts.length
     }}
   </div>
 </template>

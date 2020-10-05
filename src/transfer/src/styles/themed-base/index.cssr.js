@@ -1,5 +1,4 @@
 import { c, cTB, cB, cE, cM } from '../../../../_utils/cssr'
-import fadeInTransition from '../../../../styles/_transitions/fade-in'
 import animationStyle from './animation.cssr.js'
 
 export default c([
@@ -74,13 +73,11 @@ export default c([
             `
           }, [
             cE('checkbox', {
+              display: 'flex',
+              alignItems: 'center',
               position: 'relative',
               padding: '0 9px 0 14px'
-            }, [
-              cB('checkbox', {
-                display: 'block'
-              })
-            ]),
+            }),
             cE('header', {
               flex: 1,
               lineHeight: 1,
@@ -142,9 +139,7 @@ export default c([
                 left: '50%',
                 top: '50%',
                 transform: 'translateY(-50%) translateX(-50%)'
-              }, [
-                fadeInTransition()
-              ]),
+              }),
               cB('transfer-list-content', {
                 padding: 0,
                 margin: 0,
@@ -170,13 +165,11 @@ export default c([
                     paddingRight: '4px'
                   }),
                   cE('checkbox', {
+                    display: 'flex',
+                    alignItems: 'center',
                     position: 'relative',
                     padding: '0 9px 0 14px'
-                  }, [
-                    cB('checkbox', {
-                      display: 'block'
-                    })
-                  ]),
+                  }),
                   cM('disabled', {
                     cursor: 'not-allowed',
                     color: itemTextColorDisabled
@@ -184,7 +177,7 @@ export default c([
                   cM('source', {
                     animationFillMode: 'forwards'
                   }, [
-                    cM('enter', {
+                    c('&.item-enter-active', {
                       raw: `
                         transform: translateX(150%);
                         animation-duration: .25s, .25s;
@@ -192,7 +185,7 @@ export default c([
                         animation-delay: 0s, .25s;
                       `
                     }),
-                    cM('leave', {
+                    c('&.item-leave-active', {
                       raw: `
                         transform: translateX(-150%);
                         animation-duration: .25s, .25s;
@@ -204,7 +197,7 @@ export default c([
                   cM('target', {
                     animationFillMode: 'forwards'
                   }, [
-                    cM('enter', {
+                    c('&.item-enter-active', {
                       raw: `
                         transform: translateX(-150%);
                         animation-duration: .25s, .25s;
@@ -212,7 +205,7 @@ export default c([
                         animation-delay: 0s, .25s;
                       `
                     }),
-                    cM('leave', {
+                    c('&.item-leave-active', {
                       raw: `
                         transform: translateX(150%);
                         animation-duration: .25s, .25s;

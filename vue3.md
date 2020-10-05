@@ -242,7 +242,11 @@ placeable 进行了大调整
 - [x] timeline
 - [x] tooltip
   - ref
-- [ ] transfer
+- [x] transfer
+  - break
+    - `v-model` => `v-model:value`
+  - deprecate
+    - `on-change` => `on-update:value`
 - [x] tree
   - break
     - `v-model` => `v-model:selected-keys`

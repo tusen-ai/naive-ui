@@ -3,13 +3,13 @@
 ```html
 <n-transfer
   ref="transfer"
-  v-model="value"
+  v-model:value="value"
   :options="options"
   size="small"
 />
 <n-transfer
   ref="transfer"
-  v-model="value"
+  v-model:value="value"
   :options="options"
   size="large"
 />

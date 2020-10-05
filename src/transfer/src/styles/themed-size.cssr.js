@@ -54,18 +54,18 @@ export default c([
                 maxHeight: height
               }, [
                 cM('source', [
-                  cM('enter', {
+                  c('&.item-enter-active', {
                     animationName: `transfer-height-expand--${size}, transfer-slide-in-from-right`
                   }),
-                  cM('leave', {
+                  c('&.item-leave-active', {
                     animationName: `transfer-height-collapse--${size}, transfer-slide-out-to-right`
                   })
                 ]),
                 cM('target', [
-                  cM('enter', {
+                  c('&.item-enter-active', {
                     animationName: `transfer-height-expand--${size}, transfer-slide-in-from-left`
                   }),
-                  cM('leave', {
+                  c('&.item-leave-active', {
                     animationName: `transfer-height-collapse--${size}, transfer-slide-out-to-left`
                   })
                 ])

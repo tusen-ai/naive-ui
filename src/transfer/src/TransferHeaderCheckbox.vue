@@ -1,11 +1,11 @@
 <template>
   <n-simple-checkbox
     :theme="theme"
-    :checked="checked"
-    :indeterminate="indeterminate"
-    :disabled="disabled"
+    :checked="checkboxProps.checked"
+    :indeterminate="checkboxProps.indeterminate"
+    :disabled="checkboxProps.disabled"
     :size="NTransfer.syntheticSize"
-    @change="handleChange"
+    @change="onChange"
   />
 </template>
 
@@ -26,6 +26,10 @@ export default {
     source: {
       validator: createValidator(['boolean']),
       default: false
+    },
+    onChange: {
+      validator: createValidator(['function']),
+      required: true
     }
   },
   inject: {
@@ -34,22 +38,16 @@ export default {
     }
   },
   computed: {
-    checked () {
-      if (this.source) return this.NTransfer.sourceHeaderCheckboxChecked
-      return this.NTransfer.targetHeaderCheckboxChecked
-    },
-    disabled () {
-      if (this.source) return this.NTransfer.sourceHeaderCheckboxDisabled
-      return this.NTransfer.targetHeaderCheckboxDisabled
-    },
-    indeterminate () {
-      if (this.source) return this.NTransfer.sourceHeaderCheckboxIndeterminate
-      return this.NTransfer.targetHeaderCheckboxIndeterminate
-    }
-  },
-  methods: {
-    handleChange (value) {
-      this.$emit('change', value)
+    checkboxProps () {
+      const {
+        NTransfer,
+        source
+      } = this
+      if (source) {
+        return NTransfer.srcCheckedStatus
+      } else {
+        return NTransfer.tgtCheckedStatus
+      }
     }
   }
 }

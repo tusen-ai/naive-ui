@@ -604,9 +604,9 @@ export default {
     handleClear (e) {
       this.doClear(e)
       if (this.pair) {
-        this.doChange([])
+        this.doInput([])
       } else {
-        this.doChange('')
+        this.doInput('')
       }
     },
     handleMouseEnter () {

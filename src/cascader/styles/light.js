@@ -1,6 +1,5 @@
 import create from '../../styles/_utils/create-component-base'
 import sizeVariables from './_common'
-import baseTrackingRectStyle from '../../_base/tracking-rect/styles/light'
 import baseMenuMaskStyle from '../../_base/menu-mask/styles/light'
 import baseSelectMenuStyle from '../../_base/select-menu/styles/light'
 import baseSelectionStyle from '../../_base/selection/styles/light'
@@ -13,7 +12,6 @@ export default create({
   theme: 'light',
   name: 'Cascader',
   peer: [
-    baseTrackingRectStyle,
     baseMenuMaskStyle,
     baseSelectMenuStyle,
     baseSelectionStyle,
