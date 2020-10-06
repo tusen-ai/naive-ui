@@ -9,92 +9,99 @@
       [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
   >
-    <div
-      ref="nav"
-      class="n-tabs-nav"
-      :style="navStyle"
-    >
+    <resize-observer @resize="handleNavResize">
       <div
-        v-if="showScrollButton"
-        class="n-tabs-nav-scroll-button n-tabs-nav-scroll-button--left"
-        :class="{
-          'n-tabs-nav-scroll-button--disabled': leftScrollButtonDisabled
-        }"
-        @click="scroll('left')"
-      >
-        <n-icon>
-          <backward-icon />
-        </n-icon>
-      </div>
-      <div
-        ref="navScroll"
-        class="n-tabs-nav-scroll"
+        ref="navRef"
+        class="n-tabs-nav"
+        :style="navStyle"
       >
         <div
-          ref="labelWrapper"
-          class="n-tabs-label-wrapper"
+          v-if="showScrollButton"
+          class="n-tabs-nav-scroll-button n-tabs-nav-scroll-button--left"
+          :class="{
+            'n-tabs-nav-scroll-button--disabled': leftScrollButtonDisabled
+          }"
+          @click="scroll('left')"
         >
-          <div :style="labelWrapperStyle">
+          <n-icon>
+            <backward-icon />
+          </n-icon>
+        </div>
+        <div
+          ref="navScrollRef"
+          class="n-tabs-nav-scroll"
+        >
+          <resize-observer @resize="handleScrollContentResize">
             <div
-              v-for="(panel, i) in panels"
-              :key="i"
-              :ref="`label(${i})`"
-              class="n-tabs-label"
-              :class="{
-                'n-tabs-label--active': compitableValue === panel.name,
-                'n-tabs-label--disabled': panel.disabled
-              }"
-              @click="handleTabClick($event, panel.name, panel.disabled)"
+              ref="labelWrapperRef"
+              class="n-tabs-label-wrapper"
             >
-              <span class="n-tabs-label__label">{{ panel.label }}</span>
-              <div
-                v-if="closable && typeIsCard"
-                class="n-tabs-label__close"
-                @click.stop="handleCloseClick(panel)"
-              >
-                <n-icon>
-                  <close-icon />
-                </n-icon>
+              <div :style="labelWrapperStyle">
+                <div
+                  v-for="(panel, i) in panels"
+                  :key="i"
+                  :ref="`label(${i})`"
+                  class="n-tabs-label"
+                  :class="{
+                    'n-tabs-label--active': compitableValue === panel.name,
+                    'n-tabs-label--disabled': panel.disabled
+                  }"
+                  @click="handleTabClick($event, panel.name, panel.disabled)"
+                >
+                  <span class="n-tabs-label__label">{{ panel.label }}</span>
+                  <div
+                    v-if="closable && typeIsCard"
+                    class="n-tabs-label__close"
+                    @click.stop="handleCloseClick(panel)"
+                  >
+                    <n-icon>
+                      <close-icon />
+                    </n-icon>
+                  </div>
+                </div>
               </div>
+              <div
+                v-if="!typeIsCard"
+                ref="labelBarRef"
+                class="n-tabs-label-bar"
+                :class="{
+                  'n-tabs-label-bar--transition-disabled': transitionDisabled
+                }"
+              />
             </div>
-          </div>
-          <div
-            v-if="!typeIsCard"
-            ref="labelBar"
-            class="n-tabs-label-bar"
-            :class="{
-              'n-tabs-label-bar--transition-disabled': transitionDisabled
-            }"
-          />
+          </resize-observer>
+        </div>
+        <div
+          v-if="showScrollButton"
+          class="n-tabs-nav-scroll-button n-tabs-nav-scroll-button--right"
+          :class="{
+            'n-tabs-nav-scroll-button--disabled': rightScrollButtonDisabled
+          }"
+          @click="scroll('right')"
+        >
+          <n-icon>
+            <forward-icon />
+          </n-icon>
         </div>
       </div>
-      <div
-        v-if="showScrollButton"
-        class="n-tabs-nav-scroll-button n-tabs-nav-scroll-button--right"
-        :class="{
-          'n-tabs-nav-scroll-button--disabled': rightScrollButtonDisabled
-        }"
-        @click="scroll('right')"
-      >
-        <n-icon>
-          <forward-icon />
-        </n-icon>
-      </div>
-    </div>
+    </resize-observer>
     <slot />
   </div>
 </template>
 
 <script>
+import { ref } from 'vue'
 import NIcon from '../../icon'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
 import BackwardIcon from '../../_icons/ios-arrow-back.vue'
 import ForwardIcon from '../../_icons/ios-arrow-forward.vue'
 import CloseIcon from '../../_icons/md-close.vue'
-import resizeObserverDelegate from '../../_utils/delegate/resizeObserverDelegate'
-import throttle from 'lodash-es/throttle'
-import usecssr from '../../_mixins/usecssr'
+import { ResizeObserver } from '../../_base'
+import { throttle } from 'lodash-es'
 import styles from './styles'
 import { warn } from '../../_utils/naive/warn'
 import { onFontReady, useCompitable } from '../../_utils/composition'
@@ -110,10 +117,11 @@ export default {
     NIcon,
     BackwardIcon,
     ForwardIcon,
-    CloseIcon
+    CloseIcon,
+    ResizeObserver
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles)
   ],
@@ -184,8 +192,7 @@ export default {
       showScrollButton: false,
       leftScrollButtonDisabled: true,
       rightScrollButtonDisabled: false,
-      transitionDisabled: false,
-      resizeObserver: null
+      transitionDisabled: false
     }
   },
   computed: {
@@ -231,23 +238,21 @@ export default {
     })
     return {
       compitableValue: useCompitable(props, ['activeName', 'value']),
-      compitableOnValueChange: useCompitable(props, ['onActiveNameChange', 'onUpdate:value'])
+      compitableOnValueChange: useCompitable(props, ['onActiveNameChange', 'onUpdate:value']),
+      navScrollRef: ref(null),
+      labelWrapperRef: ref(null),
+      navRef: ref(null),
+      labelBarRef: ref(null)
     }
   },
   mounted () {
     this.updateScrollStatus()
-    this.registerScrollContentResizeObserver()
-    this.registerResizeObserver()
-  },
-  beforeUnmount () {
-    this.unregisterResizeObserver()
-    this.unregisterScrollContentResizeObserver()
   },
   methods: {
     scroll (direction) {
-      const navScroll = this.$refs.navScroll
+      const navScroll = this.navScrollRef
       const scrollLeft = navScroll.scrollLeft
-      const labelWrapper = this.$refs.labelWrapper
+      const labelWrapper = this.labelWrapperRef
       const scrollWidth = navScroll.offsetWidth * 0.8
       let left = 0
       if (direction === 'left') {
@@ -271,8 +276,8 @@ export default {
       })
     },
     updateScrollStatus () {
-      const labelWrapper = this.$refs.labelWrapper
-      const nav = this.$refs.nav
+      const labelWrapper = this.labelWrapperRef
+      const nav = this.navRef
       if (labelWrapper.offsetWidth > nav.offsetWidth) {
         this.showScrollButton = true
       } else {
@@ -289,7 +294,7 @@ export default {
       }
     },
     updateBarPosition (labelEl) {
-      const labelBarEl = this.$refs.labelBar
+      const labelBarEl = this.labelBarRef
       // BUG? this.$el is null
       if (labelBarEl && labelEl) {
         labelBarEl.style.left = labelEl.offsetLeft + 'px'
@@ -330,34 +335,24 @@ export default {
       } = this
       if (onClose) onClose(panel.name)
     },
-    registerResizeObserver () {
-      resizeObserverDelegate.registerHandler(this.$refs.nav, throttle(() => {
-        if (
-          this.typeIsCard ||
-          (this.typeIsLine && !this.justifyContent)
-        ) {
-          this.updateScrollStatus()
-        }
-        if (this.typeIsLine) {
-          this.transitionDisabled = true
-          this.$nextTick().then(() => {
-            this.updateCurrentBarPosition()
-            this.transitionDisabled = false
-          })
-        }
-      }, 64))
-    },
-    unregisterResizeObserver () {
-      resizeObserverDelegate.unregisterHandler(this.$refs.nav)
-    },
-    registerScrollContentResizeObserver () {
-      resizeObserverDelegate.registerHandler(this.$refs.labelWrapper, throttle(() => {
+    handleNavResize: throttle(function handleNavResize () {
+      if (
+        this.typeIsCard ||
+        (this.typeIsLine && !this.justifyContent)
+      ) {
         this.updateScrollStatus()
-      }, 64))
-    },
-    unregisterScrollContentResizeObserver () {
-      resizeObserverDelegate.unregisterHandler(this.$refs.labelWrapper)
-    }
+      }
+      if (this.typeIsLine) {
+        this.transitionDisabled = true
+        this.$nextTick().then(() => {
+          this.updateCurrentBarPosition()
+          this.transitionDisabled = false
+        })
+      }
+    }, 64),
+    handleScrollContentResize: throttle(function handleScrollContentResize () {
+      this.updateScrollStatus()
+    }, 64)
   }
 }
 </script>

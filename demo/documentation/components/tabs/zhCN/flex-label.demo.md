@@ -27,7 +27,7 @@
 </n-card>
 <n-card title="Too Simple">
   <n-tabs
-    v-model="func"
+    v-model:value="func"
     label-size="large"
   >
     <n-tab-pane

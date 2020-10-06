@@ -11,7 +11,7 @@
 </n-tabs>
 ```
 ```js
-import { h } from 'vue'
+import { h, resolveComponent } from 'vue'
 
 const showInput = {
   data () {
@@ -20,7 +20,7 @@ const showInput = {
     }
   },
   render () {
-    return h('n-input', {
+    return h(resolveComponent('n-input'), {
       placeholder: '我的内容不会被重置',
       value: this.value,
       onInput: v => {
@@ -37,7 +37,7 @@ const ifInput = {
     }
   },
   render () {
-    return h('n-input', {
+    return h(resolveComponent('n-input'), {
       placeholder: '我的内容会被重置',
       value: this.value,
       onInput: v => {
