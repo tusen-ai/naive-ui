@@ -1,17 +1,19 @@
 <script>
 import { h } from 'vue'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import usecssr from '../../_mixins/usecssr'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
 import styles from './styles/index'
 import formatLength from '../../_utils/css/formatLength'
-import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
+import { getSlot } from '../../_utils/vue'
 
 export default {
   __NAIVE_ICON__: true,
   name: 'Icon',
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles)
   ],
@@ -46,7 +48,7 @@ export default {
   },
   render () {
     const parent = this.$parent
-    if (parent && parent.$options.__NAIVE_ICON__) return getDefaultSlot(this)
+    if (parent && parent.$options.__NAIVE_ICON__) return getSlot(this)
     else {
       const syntheticTheme = this.syntheticTheme
       const depth = this.depth

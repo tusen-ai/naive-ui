@@ -2,7 +2,7 @@ import { h } from 'vue'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import usecssr from '../../_mixins/usecssr'
-import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
+import { getSlot } from '../../_utils/vue'
 import styles from './styles/header'
 
 export default level => ({
@@ -38,6 +38,6 @@ export default level => ({
         [`n-h${level}--prefix-bar`]: props.prefix,
         [`n-h${level}--align-text`]: props.alignText
       }
-    }, getDefaultSlot(this))
+    }, getSlot(this))
   }
 })

@@ -1,9 +1,11 @@
 import { h } from 'vue'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import hollowoutable from '../../_mixins/hollowoutable'
-import usecssr from '../../_mixins/usecssr'
-import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
+import {
+  configurable,
+  themeable,
+  hollowoutable,
+  usecssr
+} from '../../_mixins'
+import { getSlot } from '../../_utils/vue'
 import styles from './styles/steps'
 import { useDisabledUntilMounted } from '../../_utils/composition'
 
@@ -25,7 +27,7 @@ export default {
     }
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     hollowoutable,
     usecssr(styles)
@@ -64,6 +66,6 @@ export default {
           'n-steps--transition-disabled': this.transitionDisabled
         }
       ]
-    }, stepsWithIndex({ ...this.$props }, getDefaultSlot(this)))
+    }, stepsWithIndex({ ...this.$props }, getSlot(this)))
   }
 }

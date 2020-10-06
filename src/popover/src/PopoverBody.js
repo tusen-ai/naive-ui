@@ -13,7 +13,7 @@ import placeable from '../../_mixins/placeable'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
 import formatLength from '../../_utils/css/formatLength'
-import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
+import { getSlot } from '../../_utils/vue'
 
 export default {
   name: 'PopoverBody',
@@ -222,7 +222,7 @@ export default {
               onMouseEnter: this.handleMouseEnter,
               onMouseLeave: this.handleMouseLeave
             }, [
-              getDefaultSlot(this),
+              getSlot(this),
               this.showArrow
                 ? h(
                   'div',
