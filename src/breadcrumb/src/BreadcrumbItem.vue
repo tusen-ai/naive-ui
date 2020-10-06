@@ -4,7 +4,7 @@
       <slot />
     </span>
     <span class="n-breadcrumb-item__separator">
-      {{ separator }}
+      {{ NBreadcrumb.separator }}
     </span>
   </span>
 </template>
@@ -15,16 +15,6 @@ export default {
   inject: {
     NBreadcrumb: {
       default: null
-    }
-  },
-  computed: {
-    separator () {
-      return this.NBreadcrumb.separator
-    }
-  },
-  methods: {
-    handleClick (e) {
-      this.$emit('click', e)
     }
   }
 }

@@ -9,12 +9,24 @@
 
 <script>
 export default {
-  methods: {
-    handleFocus () {
-      this.$emit('focus')
+  props: {
+    onFocus: {
+      type: Function,
+      default: undefined
     },
-    handleBlur () {
-      this.$emit('blur')
+    onBlur: {
+      type: Function,
+      default: undefined
+    }
+  },
+  methods: {
+    handleFocus (e) {
+      const { onFocus } = this
+      if (onFocus) onFocus(e)
+    },
+    handleBlur (e) {
+      const { onBlur } = this
+      if (onBlur) onBlur(e)
     }
   }
 }

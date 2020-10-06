@@ -14,7 +14,7 @@
     >
       <div v-if="closable" class="n-alert__close" @click="handleCloseClick">
         <n-icon>
-          <md-close />
+          <close-icon />
         </n-icon>
       </div>
       <div
@@ -29,27 +29,27 @@
         <n-icon
           v-else-if="type==='success'"
         >
-          <md-checkmark-circle />
+          <success-icon />
         </n-icon>
         <n-icon
           v-else-if="type==='info'"
         >
-          <md-information-circle />
+          <info-icon />
         </n-icon>
         <n-icon
           v-else-if="type==='warning'"
         >
-          <md-alert />
+          <warning-icon />
         </n-icon>
         <n-icon
           v-else-if="type==='error'"
         >
-          <md-close-circle />
+          <error-icon />
         </n-icon>
       </div>
       <div class="n-alert-body">
         <div
-          v-if="title !== null"
+          v-if="title !== undefined"
           class="n-alert-body__title"
         >
           <slot name="header">
@@ -70,45 +70,41 @@
 <script>
 import NIcon from '../../icon'
 import FadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import usecssr from '../../_mixins/usecssr'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
+import { warn } from '../../_utils/naive'
 import styles from './styles'
 
 // icons
-import mdCheckmarkCircle from '../../_icons/md-checkmark-circle.vue'
-import mdAlert from '../../_icons/md-alert.vue'
-import mdInformationCircle from '../../_icons/md-information-circle.vue'
-import mdCloseCircle from '../../_icons/md-close-circle.vue'
-import mdClose from '../../_icons/md-close.vue'
+import SuccessIcon from '../../_icons/md-checkmark-circle.vue'
+import WarningIcon from '../../_icons/md-alert.vue'
+import InfoIcon from '../../_icons/md-information-circle.vue'
+import ErrorIcon from '../../_icons/md-close-circle.vue'
+import CloseIcon from '../../_icons/md-close.vue'
 
 export default {
   name: 'Alert',
-  emits: [
-    'leave',
-    'after-leave',
-    // legacy
-    'close',
-    'after-hide'
-  ],
   components: {
     NIcon,
-    mdCheckmarkCircle,
-    mdAlert,
-    mdInformationCircle,
-    mdCloseCircle,
     FadeInHeightExpandTransition,
-    mdClose
+    SuccessIcon,
+    WarningIcon,
+    InfoIcon,
+    ErrorIcon,
+    CloseIcon
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles)
   ],
   props: {
     title: {
       type: String,
-      default: null
+      default: undefined
     },
     showIcon: {
       type: Boolean,
@@ -128,9 +124,16 @@ export default {
       type: Function,
       default: () => true
     },
-    onAfterHide: {
+    onAfterLeave: {
       type: Function,
-      default: () => {}
+      default: undefined
+    },
+    onAfterHide: {
+      validator () {
+        if (__DEV__) warn('alert', '`on-after-hide` is deprecated, please use `on-after-leave` instead.')
+        return true
+      },
+      default: undefined
     }
   },
   data () {
@@ -139,27 +142,24 @@ export default {
     }
   },
   methods: {
-    open () {
-      this.visible = true
-    },
-    close () {
-      this.$emit('leave')
-      this.visible = false
-      // legacy
-      this.$emit('close')
+    doAfterLeave () {
+      const {
+        onAfterLeave,
+        onAfterHide // deprecated
+      } = this
+      if (onAfterLeave) onAfterLeave()
+      if (onAfterHide) onAfterHide()
     },
     handleCloseClick () {
       Promise
         .resolve(this.onClose())
         .then(result => {
           if (result === false) return
-          this.close()
+          this.visible = false
         })
     },
     handleAfterLeave () {
-      this.$emit('after-leave')
-      // legacy
-      this.$emit('after-hide')
+      this.doAfterLeave()
     }
   }
 }

@@ -310,7 +310,6 @@ export default {
     },
     handleClick (e) {
       if (!this.disabled) {
-        this.$emit('click', e)
         if (!this.text) {
           const waveRef = this.$refs.wave
           if (waveRef) {

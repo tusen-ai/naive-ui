@@ -7,18 +7,18 @@ closable
 icon
 no-icon
 ```
+
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |closable|`boolean`|`false`||
-|on-close|`() => boolean \| Promise<boolean> \| any`|`() => true`||
-|on-after-hide|`Function`|`null`||
 |show-icon|`boolean`|`true`||
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 |themed-style|`{ [themeName: string]: Object } \| null`|`null`||
-|title|`string`|`null`||
+|title|`string`|`undefined`||
 |type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'default'`||
-
+|on-after-leave|`Function`|`undefined`||
+|on-close|`() => boolean \| Promise<boolean> \| any`|`() => true`||
 
 ## Slots
 |名称|参数|说明|
@@ -26,9 +26,3 @@ no-icon
 |default|`()`||
 |header|`()`||
 |icon|`()`||
-
-## Events
-|名称|参数|说明|
-|-|-|-|
-|after-leave|`()`|关闭动画结束触发|
-|leave|`()`|点击关闭出发|
