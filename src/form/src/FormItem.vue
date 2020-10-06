@@ -32,16 +32,17 @@
         <slot />
       </div>
       <div
-        v-if="mergedValidationStatus !== undefined || path"
+        v-if="mergedShowFeedback"
+        :key="feedbackId"
         class="n-form-item-feedback-wrapper"
       >
         <transition
           name="n-form-item-feedback-transition"
-          @before-enter="handleBeforeEnter"
-          @before-leave="handleBeforeLeave"
-          @after-leave="handleAfterLeave"
         >
-          <div v-if="feedback !== undefined" class="n-form-item-feedback">
+          <div
+            v-if="feedback !== undefined && feedback !== null"
+            class="n-form-item-feedback"
+          >
             {{ feedback }}
           </div>
           <div v-else-if="explains.length" class="n-form-item-feedback">
@@ -68,6 +69,7 @@ import {
 } from '../../_mixins'
 import styles from './styles'
 import { warn } from '../../_utils/naive'
+import { createId } from '../../_utils/vue'
 import {
   formItemMisc,
   formItemSize,
@@ -158,6 +160,10 @@ export default {
       type: Boolean,
       default: undefined
     },
+    showFeedback: {
+      type: Boolean,
+      default: undefined
+    },
     rule: {
       type: [Object, Array],
       default: undefined
@@ -186,9 +192,6 @@ export default {
   inject: {
     NForm: {
       default: null
-    },
-    NFormItem: {
-      default: null
     }
   },
   provide () {
@@ -206,7 +209,7 @@ export default {
   data () {
     return {
       explains: [],
-      feedbackTransitionDisabled: true
+      feedbackId: createId()
     }
   },
   watch: {
@@ -215,28 +218,11 @@ export default {
       this.restoreValidation()
     }
   },
-  mounted () {
-    this.feedbackTransitionDisabled = false
-  },
   methods: {
     restoreValidation () {
       this.explains = []
       this.validationErrored = false
-      this.disableFeedbackTransition()
-    },
-    handleBeforeLeave (feedback) {
-      if (this.feedbackTransitionDisabled) {
-        if (feedback) {
-          feedback.style.transition = 'none'
-        }
-      } else {
-        if (feedback) {
-          feedback.style.transition = null
-        }
-      }
-    },
-    disableFeedbackTransition () {
-      this.feedbackTransitionDisabled = true
+      this.feedbackId = createId()
     },
     handleContentBlur () {
       this._validate('blur')
@@ -295,9 +281,6 @@ export default {
        * be valid.
        */
       if (!path) {
-        if (__DEV__) {
-          warn('form-item', '`n-form-item` without `path` can\'t be validated.')
-        }
         return Promise.resolve({
           valid: true
         })
@@ -357,12 +340,6 @@ export default {
     clearValidationEffect () {
       this.explains = []
       this.validationErrored = false
-    },
-    handleBeforeEnter () {
-      this.feedbackTransitionDisabled = false
-    },
-    handleAfterLeave () {
-      this.feedbackTransitionDisabled = false
     }
   }
 }

@@ -1,6 +1,6 @@
 # 标签左置
 ```html
-<n-radio-group v-model="size" name="left-size" style="margin-bottom: 12px;">
+<n-radio-group v-model:value="size" name="left-size" style="margin-bottom: 12px;">
   <n-radio-button value="small">小</n-radio-button>
   <n-radio-button value="medium" >中</n-radio-button>
   <n-radio-button value="large">大</n-radio-button>
@@ -18,10 +18,10 @@
   }"
 >
   <n-form-item-row label="Input" path="inputValue">
-    <n-input placeholder="Input" v-model="model.inputValue" />
+    <n-input placeholder="Input" v-model:value="model.inputValue" />
   </n-form-item-row>
   <n-form-item-row label="Textarea" path="textareaValue">
-    <n-input placeholder="Textarea" v-model="model.textareaValue" type="textarea"
+    <n-input placeholder="Textarea" v-model:value="model.textareaValue" type="textarea"
       :autosize="{
         minRows: 3,
         maxRows: 5
@@ -29,60 +29,60 @@
     />
   </n-form-item-row>
   <n-form-item-row label="Select" path="selectValue">
-    <n-select placeholder="Select" :options="generalOptions" v-model="model.selectValue"/>
+    <n-select placeholder="Select" :options="generalOptions" v-model:value="model.selectValue"/>
   </n-form-item-row>
   <n-form-item-row label="Multiple Select" path="multipleSelectValue">
-    <n-select placeholder="Select" :options="generalOptions" v-model="model.multipleSelectValue" multiple/>
+    <n-select placeholder="Select" :options="generalOptions" v-model:value="model.multipleSelectValue" multiple/>
   </n-form-item-row>
   <n-form-item-row label="Datetime" path="datetimeValue">
-    <n-date-picker type="datetime" v-model="model.datetimeValue"/>
+    <n-date-picker type="datetime" v-model:value="model.datetimeValue"/>
   </n-form-item-row>
   <n-form-item-row label="Switch" path="switchValue">
-    <n-switch v-model="model.switchValue" />
+    <n-switch v-model:value="model.switchValue" />
   </n-form-item-row>
   <n-form-item-row label="Checkbox Group" path="checkboxGroupValue">
-    <n-checkbox-group v-model="model.checkboxGroupValue">
+    <n-checkbox-group v-model:value="model.checkboxGroupValue">
       <n-checkbox value="Option 1">Option 1</n-checkbox>
       <n-checkbox value="Option 2">Option 2</n-checkbox>
       <n-checkbox value="Option 3">Option 3</n-checkbox>
     </n-checkbox-group>
   </n-form-item-row>
   <n-form-item-row label="Radio Group" path="radioGroupValue">
-    <n-radio-group v-model="model.radioGroupValue" name="radiogroup1">
+    <n-radio-group v-model:value="model.radioGroupValue" name="radiogroup1">
       <n-radio value="Radio 1">Radio 1</n-radio>
       <n-radio value="Radio 2">Radio 2</n-radio>
       <n-radio value="Radio 3">Radio 3</n-radio>
     </n-radio-group>
   </n-form-item-row>
   <n-form-item-row label="Radio Button Group" path="radioGroupValue">
-    <n-radio-group v-model="model.radioGroupValue" name="radiogroup2">
+    <n-radio-group v-model:value="model.radioGroupValue" name="radiogroup2">
       <n-radio-button value="Radio 1">Radio 1</n-radio-button>
       <n-radio-button value="Radio 2">Radio 2</n-radio-button>
       <n-radio-button value="Radio 3">Radio 3</n-radio-button>
     </n-radio-group>
   </n-form-item-row>
   <n-form-item-row label="Input Number" path="inputNumberValue">
-    <n-input-number v-model="model.inputNumberValue"/>
+    <n-input-number v-model:value="model.inputNumberValue"/>
   </n-form-item-row>
   <n-form-item-row label="Time Picker" path="timePickerValue">
-    <n-time-picker v-model="model.timePickerValue" />
+    <n-time-picker v-model:value="model.timePickerValue" />
   </n-form-item-row>
   <n-form-item-row label="Slider" path="sliderValue">
-    <n-slider v-model="model.sliderValue" :step="5"/>
+    <n-slider v-model:value="model.sliderValue" :step="5"/>
   </n-form-item-row>
   <n-form-item-row label="Transfer" path="transferValue">
     <n-transfer
-      v-model="model.transferValue"
+      v-model:value="model.transferValue"
       :options="generalOptions"
     />
   </n-form-item-row>
   <n-form-item-row  :gutter="[28, 0]" label="Nested Path">
     <n-row :gutter="[28, 0]" >
       <n-form-item-col :span="12" path="nestedValue.path1">
-        <n-input placeholder="Nested Path 1" v-model="model.nestedValue.path1"/>
+        <n-input placeholder="Nested Path 1" v-model:value="model.nestedValue.path1"/>
       </n-form-item-col>
       <n-form-item-col :span="12" path="nestedValue.path2">
-        <n-select placeholder="Nested Path 2" :options="generalOptions" v-model="model.nestedValue.path2"/>
+        <n-select placeholder="Nested Path 2" :options="generalOptions" v-model:value="model.nestedValue.path2"/>
       </n-form-item-col>
     </n-row>
   </n-form-item-row>
@@ -102,6 +102,7 @@
 
 ```js
 export default {
+  inject: ['message'],
   data () {
     return {
       size: 'medium',
@@ -216,10 +217,10 @@ export default {
       e.preventDefault()
       this.$refs.form.validate(errors => {
         if (!errors) {
-          this.$NMessage.success('验证成功')
+          this.message.success('验证成功')
         } else {
           console.log(errors)
-          this.$NMessage.error('验证失败')
+          this.message.error('验证失败')
         }
       })
     }

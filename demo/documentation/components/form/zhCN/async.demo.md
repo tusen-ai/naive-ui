@@ -11,25 +11,25 @@
     label="Name"
     path="user.name"
   >
-    <n-input v-model="formValue.user.name" placeholder="Input Name" />
+    <n-input v-model:value="formValue.user.name" placeholder="Input Name" />
   </n-form-item>
   <n-form-item
     label="Age"
     path="user.age"
   >
-    <n-input placeholder="Input Age" v-model="formValue.user.age"/>
+    <n-input placeholder="Input Age" v-model:value="formValue.user.age"/>
   </n-form-item>
   <n-form-item
     label="Adress"
     path="user.address"
   >
-    <n-input placeholder="Input Address" v-model="formValue.user.address"/>
+    <n-input placeholder="Input Address" v-model:value="formValue.user.address"/>
   </n-form-item>
   <n-form-item
     label="Phone"
     path="phone"
   >
-    <n-input placeholder="Phone Number" v-model="formValue.phone"/>
+    <n-input placeholder="Phone Number" v-model:value="formValue.phone"/>
   </n-form-item>
   <n-form-item>
     <n-button @click="handleValidateClick">Validate</n-button>
@@ -42,6 +42,7 @@
 ```
 ```js
 export default {
+  inject: ['message'],
   data () {
     return {
       formValue: {
@@ -98,13 +99,12 @@ export default {
       e.preventDefault()
       this.$refs.form.validate(errors => {
         if (!errors) {
-          this.$NMessage.success('Valid')
+          this.message.success('Valid')
         } else {
-          this.$NMessage.error('Invalid')
+          this.message.error('Invalid')
           console.log('errors', errors)
         }
       })
-      console.log('end')
     }
   }
 }

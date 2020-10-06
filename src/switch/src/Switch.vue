@@ -6,6 +6,8 @@
     }"
     :tabindex="!disabled ? 0 : false"
     @click="handleClick"
+    @focus="handleFocus"
+    @blur="handleBlur"
   >
     <div
       class="n-switch__rail"
@@ -18,25 +20,28 @@
 </template>
 
 <script>
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import asformitem from '../../_mixins/asformitem'
-import usecssr from '../../_mixins/usecssr'
+import {
+  configurable,
+  themeable,
+  asformitem,
+  usecssr
+} from '../../_mixins'
+import {
+  call
+} from '../../_utils/vue'
+import {
+  warn
+} from '../../_utils/naive'
 import styles from './styles'
 
 export default {
   cssrName: 'Switch',
   mixins: [
-    withapp,
+    configurable,
     themeable,
     asformitem(),
     usecssr(styles)
   ],
-  inject: {
-    NFormItem: {
-      default: null
-    }
-  },
   props: {
     value: {
       type: Boolean,
@@ -48,17 +53,56 @@ export default {
     },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:value': {
-      type: Function,
-      default: () => {}
+      type: [Function, Array],
+      default: undefined
+    },
+    onChange: {
+      validator () {
+        if (__DEV__) warn('switch', '`on-change` is deprecated, please use `on-update:value` instead.')
+        return true
+      },
+      default: undefined
     }
   },
   methods: {
+    doUpdateValue (...args) {
+      const {
+        'onUpdate:value': onUpdateValue,
+        onChange,
+        __triggerFormInput,
+        __triggerFormChange
+      } = this
+      if (onUpdateValue) call(onUpdateValue, ...args)
+      if (onChange) call(onChange, ...args)
+      __triggerFormInput()
+      __triggerFormChange()
+    },
+    doFocus (...args) {
+      const {
+        onFocus,
+        __triggerFormFocus
+      } = this
+      if (onFocus) call(onFocus, ...args)
+      __triggerFormFocus()
+    },
+    doBlur (...args) {
+      const {
+        onBlur,
+        __triggerFormBlur
+      } = this
+      if (onBlur) call(onBlur, ...args)
+      __triggerFormBlur()
+    },
     handleClick () {
       if (!this.disabled) {
-        this['onUpdate:value'](!this.value)
-        this.__triggerFormInput()
-        this.__triggerFormChange()
+        this.doUpdateValue(!this.value)
       }
+    },
+    handleFocus (e) {
+      this.doFocus(e)
+    },
+    handleBlur (e) {
+      this.doBlur(e)
     }
   }
 }

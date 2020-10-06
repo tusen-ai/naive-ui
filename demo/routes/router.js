@@ -9,14 +9,16 @@ export default function createDemoRouter (app, routes) {
   })
 
   router.beforeEach(function (to, from, next) {
-    if (loadingBarApiRef.value) {
-      loadingBarApiRef.value.start()
+    if (!from || to.path !== from.path) {
+      if (loadingBarApiRef.value) {
+        loadingBarApiRef.value.start()
+      }
     }
     next()
   })
 
   router.afterEach(function (to, from) {
-    if (to.path !== from.path) {
+    if (!from || to.path !== from.path) {
       if (loadingBarApiRef.value) {
         loadingBarApiRef.value.finish()
       }

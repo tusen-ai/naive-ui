@@ -70,13 +70,22 @@ export function formItemMisc (props) {
     if (validationErroredRef.value) return 'error'
     return undefined
   })
+  const mergedShowFeedbackRef = computed(() => {
+    const {
+      showFeedback
+    } = props
+    if (showFeedback) return showFeedback
+    if (NForm && NForm.showFeedback) return NForm.showFeedback
+    return true
+  })
   return {
     validationErrored: validationErroredRef,
     mergedLabelStyle: mergedLabelStyleRef,
     mergedLabelPlacement: mergedLabelPlacementRef,
     mergedLabelAlign: mergedLabelAlignRef,
     mergedShowRequireMark: mergedShowRequireMarkRef,
-    mergedValidationStatus: mergedValidationStatusRef
+    mergedValidationStatus: mergedValidationStatusRef,
+    mergedShowFeedback: mergedShowFeedbackRef
   }
 }
 

@@ -79,7 +79,9 @@
               </div>
             </n-scrollbar>
           </template>
-          <n-empty v-else />
+          <transition name="n-fade-in-transition" :appear="isMounted">
+            <n-empty v-if="!filteredSrcOpts.length" />
+          </transition>
         </div>
       </div>
       <div class="n-transfer-list__border-mask" />
@@ -165,7 +167,9 @@
               </div>
             </n-scrollbar>
           </template>
-          <n-empty v-else />
+          <transition name="n-fade-in-transition" :appear="isMounted">
+            <n-empty v-if="!filteredTgtOpts.length" />
+          </transition>
         </div>
       </div>
       <div class="n-transfer-list__border-mask" />

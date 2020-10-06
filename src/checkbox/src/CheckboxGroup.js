@@ -22,7 +22,7 @@ export default {
       validator (value) {
         return ['small', 'medium', 'large'].includes(value)
       },
-      default: null
+      default: undefined
     },
     value: {
       type: Array,

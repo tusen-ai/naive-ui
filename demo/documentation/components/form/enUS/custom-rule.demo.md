@@ -12,7 +12,7 @@ Sometimes builtin triggers don't meet you demand. You can custom you valiation b
   >
     <n-input
       v-model="model.age"
-      @keydown.enter.native.prevent
+      @keydown.enter.prevent
     />
   </n-form-item-row>
   <n-form-item-row
@@ -23,7 +23,7 @@ Sometimes builtin triggers don't meet you demand. You can custom you valiation b
       v-model="model.password"
       @input="handlePasswordInput"
       type="password"
-      @keydown.enter.native.prevent
+      @keydown.enter.prevent
     />
   </n-form-item-row>
   <n-form-item-row
@@ -36,7 +36,7 @@ Sometimes builtin triggers don't meet you demand. You can custom you valiation b
       :disabled="!model.password"
       v-model="model.reenteredPassword"
       type="password"
-      @keydown.enter.native.prevent
+      @keydown.enter.prevent
     />
   </n-form-item-row>
   <n-row :gutter="[0, 24]">

@@ -8,7 +8,7 @@
     :feedback="inputFeedback"
   >
     <n-input
-      v-model="inputValue"
+      v-model:value="inputValue"
       clearable
     />
   </n-form-item>
@@ -18,7 +18,7 @@
     :feedback="inputNumberFeedback"
   >
     <n-input-number
-      v-model="inputNumberValue"
+      v-model:value="inputNumberValue"
     />
   </n-form-item>
   <n-form-item
@@ -27,8 +27,7 @@
     :feedback="selectFeedback"
   >
     <n-select
-      debug
-      v-model="selectValue"
+      v-model:value="selectValue"
       :options="selectOptions"
       clearable
     />

@@ -68,6 +68,7 @@ export default {
         ) {
           return NFormItem.mergedSize
         }
+        return 'medium'
       }
     }),
     radioMixin

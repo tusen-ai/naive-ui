@@ -11,8 +11,8 @@
     label="年龄"
   >
     <n-input
-      v-model="model.age"
-      @keydown.enter.native.prevent
+      v-model:value="model.age"
+      @keydown.enter.prevent
     />
   </n-form-item-row>
   <n-form-item-row
@@ -20,10 +20,10 @@
     label="密码"
   >
     <n-input
-      v-model="model.password"
+      v-model:value="model.password"
       @input="handlePasswordInput"
       type="password"
-      @keydown.enter.native.prevent
+      @keydown.enter.prevent
     />
   </n-form-item-row>
   <n-form-item-row
@@ -34,9 +34,9 @@
   >
     <n-input
       :disabled="!model.password"
-      v-model="model.reenteredPassword"
+      v-model:value="model.reenteredPassword"
       type="password"
-      @keydown.enter.native.prevent
+      @keydown.enter.prevent
     />
   </n-form-item-row>
   <n-row :gutter="[0, 24]">

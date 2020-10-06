@@ -1,5 +1,6 @@
 import { c, cTB, cB, cE, cM } from '../../../../_utils/cssr'
 import animationStyle from './animation.cssr.js'
+import fadeInTransition from '../../../../_styles/transitions/fade-in.js'
 
 export default c([
   ({ props }) => {
@@ -139,7 +140,9 @@ export default c([
                 left: '50%',
                 top: '50%',
                 transform: 'translateY(-50%) translateX(-50%)'
-              }),
+              }, [
+                fadeInTransition()
+              ]),
               cB('transfer-list-content', {
                 padding: 0,
                 margin: 0,

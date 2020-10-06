@@ -63,10 +63,12 @@
 import NIcon from '../../icon/index'
 import RemoveIcon from '../../_icons/remove-outline.vue'
 import AddIcon from '../../_icons/add-outline.vue'
-import themeable from '../../_mixins/themeable'
-import withapp from '../../_mixins/withapp'
-import asformitem from '../../_mixins/asformitem'
-import usecssr from '../../_mixins/usecssr'
+import {
+  configurable,
+  themeable,
+  asformitem,
+  usecssr
+} from '../../_mixins'
 import { warn } from '../../_utils/naive/warn'
 import styles from './styles'
 
@@ -93,16 +95,11 @@ export default {
     AddIcon
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     asformitem(),
     usecssr(styles)
   ],
-  inject: {
-    NFormItem: {
-      default: null
-    }
-  },
   props: {
     placeholder: {
       type: String,

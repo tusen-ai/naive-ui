@@ -4,10 +4,8 @@ export default function (options = {}) {
     mergedSize
   } = options
   return {
-    provide () {
-      return {
-        NFormItem: null
-      }
+    provide: {
+      NFormItem: null
     },
     inject: {
       NFormItem: {

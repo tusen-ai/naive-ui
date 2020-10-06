@@ -95,6 +95,7 @@ export default {
         ) {
           return NFormItem.mergedSize
         }
+        return 'medium'
       }
     }),
     usecssr(styles)
@@ -104,7 +105,7 @@ export default {
       validator (value) {
         return ['small', 'medium', 'large'].includes(value)
       },
-      default: null
+      default: undefined
     },
     value: {
       type: [Number, Boolean, String],

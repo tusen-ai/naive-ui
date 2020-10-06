@@ -26,7 +26,7 @@
         >
           <n-input
             placeholder="Name"
-            @keydown.enter.native.prevent
+            @keydown.enter.prevent
             v-model="model.dynamicInputValue[index].name"
           />
           <!--
@@ -41,7 +41,7 @@
         >
           <n-input
             placeholder="Value"
-            @keydown.enter.native.prevent
+            @keydown.enter.prevent
             v-model="model.dynamicInputValue[index].value"
           />
         </n-form-item>
