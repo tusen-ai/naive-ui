@@ -49,6 +49,11 @@ ajax-usage
 |single-line|`boolean`|`true`||
 |single-column|`boolean`|`false`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
+|on-update:filters|`(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: Column)`||
+|on-update:sorter|`(options: { columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } \| null) => any`|`undefined`|如果在变动后没有激活的排序，那么 sorter-change 将发出 `null`|
+|on-update:page|`(page: number)`|`undefined`||
+|on-update:page-size|`(pageSize: number) => any`|`undefined`||
+|on-update:checked-row-keys|`(keys: Array<string \| number>) => any`|`undefined`||
 
 ## Methods
 这些方法可以帮助你在非受控的状态下改变表格，但是，并不推荐在异步的状况下使用这些方法。如果需要异步操作，最好用**受控**的方式使用表格。
@@ -61,21 +66,11 @@ ajax-usage
 |clearFilters|`() => void`||
 |clearSorter|`() => void`||
 
-
-## Events
-|名称|参数|说明|
-|-|-|-|
-|filters-change|`(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: Column)`||
-|sorter-change|`(options: { columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } \| null)`|如果在变动后没有激活的排序，那么 sorter-change 将发出 `null`|
-|page-change|`(page: number)`||
-|page-size-change|`(pageSize: number)`||
-|checked-row-keys-change|`(keys: Array<string \| number>)`||
-
 ## API
 ### Column Properties
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|render|`(h, rowData: Object) => VNode \| Array<VNode>`|`null`|渲染函数，渲染这一列的每一行的单元格|
+|render|`(rowData: Object) => VNode \| Array<VNode>`|`null`|渲染函数，渲染这一列的每一行的单元格|
 |type|`'default' \| 'selection'`|`default`||
 |disabled|`(rowData: Object, index: number) => boolean`|`() => false`||
 |align|`'left' \| 'right' \| 'center'`|`'left'`|列内的文本排列|

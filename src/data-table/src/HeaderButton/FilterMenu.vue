@@ -10,7 +10,7 @@
         :theme="theme"
         :value="cachedValue"
         class="n-data-table-filter-menu__group"
-        @change="handleChange"
+        @update:value="handleChange"
       >
         <n-checkbox
           v-for="option in options"
@@ -26,7 +26,7 @@
         :name="radioGroupName"
         class="n-data-table-filter-menu__group"
         :value="radioGroupValue"
-        @change="handleChange"
+        @update:value="handleChange"
       >
         <n-radio
           v-for="option in options"
@@ -113,6 +113,18 @@ export default {
     options: {
       type: Array,
       required: true
+    },
+    onConfirm: {
+      type: Function,
+      required: true
+    },
+    onCancel: {
+      type: Function,
+      required: true
+    },
+    onChange: {
+      type: Function,
+      required: true
     }
   },
   data () {
@@ -137,6 +149,11 @@ export default {
     }
   },
   methods: {
+    doChange (value) {
+      if (!isEqual(this.initialValue, value)) {
+        this.onChange(value)
+      }
+    },
     handleChange (value) {
       if (this.multiple) {
         this.cachedValue = value
@@ -150,24 +167,19 @@ export default {
       }
     },
     handleConfirmClick (value) {
-      this.emitChangeEvent(this.cachedValue)
-      this.$emit('confirm')
+      this.doChange(this.cachedValue)
+      this.onConfirm()
     },
     handleCancelClick () {
       if (
         this.multiple ||
         shouldUseArrayInSingleMode(this.column)
       ) {
-        this.emitChangeEvent([])
+        this.doChange([])
       } else {
-        this.emitChangeEvent(null)
+        this.doChange(null)
       }
-      this.$emit('cancel')
-    },
-    emitChangeEvent (value) {
-      if (!isEqual(this.initialValue, value)) {
-        this.$emit('change', value)
-      }
+      this.onCancel()
     }
   }
 }

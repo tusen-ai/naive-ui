@@ -11,7 +11,7 @@ Rows can be selectable by making first column's type as `selection`.
   :data="data"
   :pagination="pagination"
   :row-key="row => row.address"
-  @checked-row-keys-change="handleCheck"
+  @update:checked-row-keys="handleCheck"
 />
 ```
 

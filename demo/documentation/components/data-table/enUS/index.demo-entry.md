@@ -75,7 +75,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 ### Column Properties
 |Name|Type|Default|Description|
 |-|-|-|-|
-|render|`(h, rowData: Object) => VNode \| Array<VNode>`|`null`|Render function of column row cell|
+|render|`(rowData: Object) => VNode \| Array<VNode>`|`null`|Render function of column row cell|
 |type|`'default' \| 'selection'`|`default`||
 |disabled|`(rowData: Object, index: number) => boolean`|`() => false`||
 |align|`'left' \| 'right' \| 'center'`|`'left'`|Text align in column|

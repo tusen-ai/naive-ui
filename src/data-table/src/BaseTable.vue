@@ -1,16 +1,16 @@
 <template>
   <div class="n-data-table-base-table">
     <table-header
-      ref="header"
+      ref="headerRef"
       :placement="placement"
       :columns="columns"
       :data="data"
       :fixed="fixed"
       :scroll-x="scrollX"
-      @set-active-fixed-column="setActiveFixedColumn"
+      @update:active-fixed-column="setActiveFixedColumn"
     />
     <table-body
-      ref="body"
+      ref="bodyRef"
       :style="bodyStyle"
       :main="main"
       :placement="placement"
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 import TableHeader from './TableParts/Header.vue'
 import TableBody from './TableParts/Body.vue'
 import resizeObserverDelegate from '../../_utils/delegate/resizeObserverDelegate'
@@ -91,6 +92,12 @@ export default {
       required: true
     }
   },
+  setup () {
+    return {
+      headerRef: ref(null),
+      bodyRef: ref(null)
+    }
+  },
   data () {
     return {
       bodyMaxHeight: null,
@@ -113,21 +120,23 @@ export default {
     this.setBodyMinMaxHeight()
   },
   beforeUnmount () {
+    // BUG: beforeUnmount is called twice
+    // wait for vue 3.0.1 to fix it
     resizeObserverDelegate.unregisterHandler(
-      this.getHeaderElement(),
-      this.setBodyMinMaxHeight
+      this.getHeaderElement()
     )
   },
   methods: {
     getHeaderElement () {
-      return this.$refs.header.$el
+      return this.headerRef.$el
     },
     getBodyElement () {
-      return this.$refs.body.getScrollContainer()
+      return this.bodyRef.getScrollContainer()
     },
     setActiveFixedColumn (leftActiveFixedColumn, rightActiveFixedColumn) {
-      this.$refs.body.activeLeft = leftActiveFixedColumn
-      this.$refs.body.activeRight = rightActiveFixedColumn
+      const { bodyRef } = this
+      bodyRef.activeLeft = leftActiveFixedColumn
+      bodyRef.activeRight = rightActiveFixedColumn
     },
     setBodyMinMaxHeight () {
       const bordered = this.bordered

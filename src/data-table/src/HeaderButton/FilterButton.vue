@@ -3,21 +3,19 @@
     class="n-data-table-filter-button"
     :class="{
       'n-data-table-filter-button--active': active,
-      'n-data-table-filter-button--popover-visible': popoverVisible
+      'n-data-table-filter-button--popover-visible': showPopover
     }"
   >
     <n-popover
+      v-model:show="showPopover"
       trigger="click"
       :theme="NDataTable.syntheticTheme"
-      :controller="controller"
-      :overlay-style="{ padding: 0 }"
-      @show="popoverVisible = true"
-      @hide="popoverVisible = false"
+      :body-style="popoverBodyStyle"
     >
-      <template v-slot:activator>
+      <template v-slot:trigger>
         <div class="n-data-table-filter-button__icon-wrapper">
           <n-icon>
-            <funnel />
+            <filter-icon />
           </n-icon>
         </div>
       </template>
@@ -39,7 +37,7 @@
 import NIcon from '../../../icon'
 import NDataTableFilterMenu from './FilterMenu.vue'
 import NPopover from '../../../popover'
-import funnel from '../../../_icons/funnel.vue'
+import FilterIcon from '../../../_icons/funnel.vue'
 
 function createActiveFilters (allFilters, columnKey, syntheticFilterValue) {
   const activeFilters = Object.assign({}, allFilters)
@@ -57,7 +55,7 @@ export default {
     NIcon,
     NDataTableFilterMenu,
     NPopover,
-    funnel
+    FilterIcon
   },
   props: {
     column: {
@@ -71,8 +69,8 @@ export default {
   },
   data () {
     return {
-      popoverVisible: false,
-      controller: {}
+      showPopover: false,
+      popoverBodyStyle: { padding: 0 }
     }
   },
   computed: {
@@ -102,10 +100,10 @@ export default {
       this.NDataTable.changeFilters(nextActiveFilters, this.column)
     },
     handleFilterMenuCancel () {
-      this.controller.hide()
+      this.showPopover = false
     },
     handleFilterMenuConfirm () {
-      this.controller.hide()
+      this.showPopover = false
     }
   }
 }

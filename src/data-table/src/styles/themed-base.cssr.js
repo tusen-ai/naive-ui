@@ -42,7 +42,7 @@ export default c([
         ]),
         cE('pagination', {
           raw: `
-            margin-top: 24px;
+            margin-top: 12px;
             display: flex;
             justify-content: flex-end;
           `
@@ -357,7 +357,7 @@ export default c([
           ])
         ]),
         cB('divider', {
-          margin: 0
+          margin: '0 !important'
         })
       ]),
       createStyleInsideModal(props)

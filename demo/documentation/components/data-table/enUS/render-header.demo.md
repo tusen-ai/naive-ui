@@ -10,16 +10,14 @@
 ```
 
 ```js
-const renderTooltip = (h, activator, content) => {
-  const scopedSlots = {
-    activator: () => activator,
+import { h, resolveComponent } from 'vue'
+
+const renderTooltip = (trigger, content) => {
+  return h(resolveComponent('n-tooltip'), {
+    showArrow: true
+  }, {
+    trigger: () => trigger,
     default: () => content
-  }
-  return h('n-tooltip', {
-    props: {
-      arrow: true
-    },
-    scopedSlots
   })
 }
 
@@ -27,40 +25,32 @@ const createColumns = instance => {
   return [
     {
       key: 'name',
-      title (h, column) {
+      title (column) {
         return renderTooltip(
-          h,
-          h('n-gradient-text', {
-            props: {
-              size: 24,
-              type: 'danger'
-            }
-          }, 'Name'),
+          h(resolveComponent('n-gradient-text'), {
+            size: 24,
+            type: 'danger'
+          }, { default: () => 'Name' }),
           'Tooltip Content'
         )
       }
     },
     {
       key: 'age',
-      title (h, column) {
-        return h('n-gradient-text', {
-          props: {
-            size: '20',
-            type: 'info'
-          }
-        }, 'Age')
+      title (column) {
+        return h(resolveComponent('n-gradient-text'), {
+          size: '20',
+          type: 'info'
+        }, { default: () => 'Age' })
       }
     },
     {
       key: 'address',
-      title (h, column) {
-        return h(
-          'n-gradient-text', {
-          props: {
-            size: '16',
-            type: 'warning'
-          }
-        }, 'Address')
+      title (column) {
+        return h(resolveComponent('n-gradient-text'), {
+          size: '16',
+          type: 'warning'
+        }, { default: () => 'Address' })
       }
     }
   ]

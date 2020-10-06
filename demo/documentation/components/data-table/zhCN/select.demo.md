@@ -2,15 +2,13 @@
 可以通过把第一列的类型设为 `selection` 来让行变成可选的。
 
 ```html
-<div>You have selected {{ checkedRowKeys.length }} row{{ checkedRowKeys.length < 2 ? '': 's'}}.</div>
-
 <n-data-table
   ref="table"
   :columns="columns"
   :data="data"
   :pagination="pagination"
   :row-key="row => row.address"
-  @checked-row-keys-change="handleCheck"
+  @update:checked-row-keys="handleCheck"
 />
 ```
 
@@ -43,6 +41,7 @@ const data = Array.apply(null, { length: 46 }).map((_, index) => ({
 }))
 
 export default {
+  inject: ['message'],
   data() {
     return {
       data,
@@ -55,7 +54,7 @@ export default {
   },
   methods: {
     sendMail(rowData) {
-      this.$NMessage.info('send mail to ' + rowData.name)
+      this.message.info('send mail to ' + rowData.name)
     },
     handleCheck (rowKeys) {
       this.checkedRowKeys = rowKeys

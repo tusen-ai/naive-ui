@@ -9,7 +9,7 @@ If one of the column objects' `sortOrder` is set to `'ascend'`, `'descend'` or `
   :columns="columns"
   :data="data"
   :pagination="pagination"
-  @sorter-change="handleSorterChange"
+  @update:sorter="handleSorterChange"
 />
 ```
 

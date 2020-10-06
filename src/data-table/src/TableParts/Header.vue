@@ -49,12 +49,12 @@
               table-header
               :checked="checkboxChecked"
               :indeterminate="checkboxIndererminate"
-              @change="handleCheckboxInput(column)"
+              @update:checked="handleCheckboxInput(column)"
             />
             <div v-if="column.ellipsis" class="n-data-table-th__ellipsis">
               <render
                 :render="typeof column.title === 'function'
-                  ? h => (column.title)(h, column, index)
+                  ? h => (column.title)(column, index)
                   : column.title
                 "
               />
@@ -62,7 +62,7 @@
             <template v-else>
               <render
                 :render="typeof column.title === 'function'
-                  ? h => (column.title)(h, column, index)
+                  ? () => (column.title)(column, index)
                   : column.title
                 "
               />
@@ -155,6 +155,11 @@ export default {
     fixed: {
       type: Boolean,
       default: false
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:activeFixedColumn': {
+      type: Function,
+      required: true
     }
   },
   data: function () {
@@ -195,7 +200,7 @@ export default {
         if (this.NDataTable.leftFixedColumns.indexOf(column) > -1) {
           columnsLeft[column.key] = left
         }
-        left = left + this.$refs[column.key][0].offsetWidth
+        left = left + this.$refs[column.key].offsetWidth
       })
       return columnsLeft
     },
@@ -207,7 +212,7 @@ export default {
         if (this.NDataTable.rightFixedColumns.indexOf(this.columns[i]) > -1) {
           columnsRight[columns[i].key] = right
         }
-        right = right + this.$refs[columns[i].key][0].offsetWidth
+        right = right + this.$refs[columns[i].key].offsetWidth
       }
       return columnsRight
     }
@@ -217,12 +222,18 @@ export default {
     this.handleResize()
     this.setActiveLeftFixedColumn(this.$el)
     this.setActiveRightFixedColumn(this.$el)
-    this.$emit('set-active-fixed-column', this.leftActiveFixedColumn, this.rightActiveFixedColumn)
+    this.doUpdateActiveFixedColumn(this.leftActiveFixedColumn, this.rightActiveFixedColumn)
   },
   beforeUnmount () {
     resizeObserverDelegate.unregisterHandler(this.$el)
   },
   methods: {
+    doUpdateActiveFixedColumn (...args) {
+      const {
+        'onUpdate:activeFixedColumn': onUpdateActiveFixedColumn
+      } = this
+      onUpdateActiveFixedColumn(...args)
+    },
     isColumnSortable,
     isColumnFilterable,
     createCustomWidthStyle,
@@ -232,7 +243,7 @@ export default {
     handleScroll (e) {
       this.setActiveRightFixedColumn(e.target)
       this.setActiveLeftFixedColumn(e.target)
-      this.$emit('set-active-fixed-column', this.leftActiveFixedColumn, this.rightActiveFixedColumn)
+      this.doUpdateActiveFixedColumn(this.leftActiveFixedColumn, this.rightActiveFixedColumn)
       this.NDataTable.handleTableHeaderScroll(e)
     },
     handleCheckboxInput (column) {

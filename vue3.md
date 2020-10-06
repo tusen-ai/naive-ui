@@ -6,7 +6,10 @@ placeable 进行了大调整
 
 在很特殊的情况下，popover 的在 teleport 打开的时候 beforeUnmount 会被调用两次，具体没有研究出为什么。
 
-- [ ] form
+- [x] form
+  - new
+    - form-item
+      - `show-feedback`
 - [x] affix
   - deprecate
     - `target` => `listen-to`
@@ -65,7 +68,13 @@ placeable 进行了大调整
     - rename `confirm` to `dialog`
   - remove
     - `$NConfirm`, `$NModal` => `inject.dialog`
-- [ ] data-table
+- [x] data-table
+  - deprecate
+    - `on-filters-change` => `on-update:filters`
+    - `on-sorter-change` => `on-update:sorter`
+    - `on-checked-row-keys-change` => `on-update:checked-row-keys`
+    - `on-page-change` => `on-update:page`
+    - `on-page-size-change` => `on-update:page-size`
 - [x] date-picker
   - break
     - `v-model` => `v-model:value`

@@ -10,9 +10,9 @@
   :pagination="pagination"
   :paging="false"
   :row-key="rowKey"
-  @sorter-change="handleSorterChange"
-  @filters-change="handleFiltersChange"
-  @page-change="handlePageChange"
+  @update:sorter="handleSorterChange"
+  @update:filters="handleFiltersChange"
+  @update:page="handlePageChange"
 />
 ```
 
@@ -121,9 +121,7 @@ export default {
     handleFiltersChange (filters) {
       if (!this.loading) {
         this.loading = true
-        const filterValues = filters
-          .filter(filter => filter.columnKey === 'column2')
-          .map(filter => filter.filterOptionValue)
+        const filterValues = filters.column2 || []
         query(
           this.pagination.page,
           this.pagination.pageSize,

@@ -54,7 +54,7 @@
               :key="currentPage"
               :disabled="column.disabled && column.disabled(rowData)"
               :checked="checkedRowKeys.includes(createRowKey(rowData, rowKey))"
-              @change="checked => handleCheckboxInput(rowData, checked)"
+              @update:checked="checked => handleCheckboxInput(rowData, checked)"
             />
             <cell
               v-else

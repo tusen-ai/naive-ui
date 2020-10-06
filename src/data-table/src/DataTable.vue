@@ -17,7 +17,7 @@
         class="n-data-table-wrapper"
       >
         <base-table
-          ref="mainTable"
+          ref="mainTableRef"
           main
           :scroll-x="styleScrollX"
           :max-height="maxHeight"
@@ -62,6 +62,7 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import usecssr from '../../_mixins/usecssr'
@@ -73,6 +74,8 @@ import NPagination from '../../pagination'
 import formatLength from '../../_utils/css/formatLength'
 import isPlainObject from 'lodash-es/isPlainObject'
 import styles from './styles'
+import { warn } from '../../_utils/naive'
+import { call } from '../../_utils/vue'
 
 function createShallowClonedObject (object) {
   if (!object) return object
@@ -210,6 +213,72 @@ export default {
         return ['small', 'medium', 'large'].includes(value)
       },
       default: 'medium'
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:page': {
+      type: [Function, Array],
+      default: undefined
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:pageSize': {
+      type: [Function, Array],
+      default: undefined
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:sorter': {
+      type: [Function, Array],
+      default: undefined
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:filters': {
+      type: [Function, Array],
+      default: undefined
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:checkedRowKeys': {
+      type: [Function, Array],
+      default: undefined
+    },
+    // deprecated
+    onPageChange: {
+      validator () {
+        if (__DEV__) warn('data-table', '`on-page-change` is deprecated, please use `on-update:page` instead.')
+        return true
+      },
+      default: undefined
+    },
+    onPageSizeChange: {
+      validator () {
+        if (__DEV__) warn('data-table', '`on-page-size-change` is deprecated, please use `on-update:page-size` instead.')
+        return true
+      },
+      default: undefined
+    },
+    onSorterChange: {
+      validator () {
+        if (__DEV__) warn('data-table', '`on-sorter-change` is deprecated, please use `on-update:sorter` instead.')
+        return true
+      },
+      default: undefined
+    },
+    onFiltersChange: {
+      validator () {
+        if (__DEV__) warn('data-table', '`on-filters-change` is deprecated, please use `on-update:filters` instead.')
+        return true
+      },
+      default: undefined
+    },
+    onCheckedRowKeysChange: {
+      validator () {
+        if (__DEV__) warn('data-table', '`on-checked-row-keys-change` is deprecated, please use `on-update:checked-row-keys` instead.')
+        return true
+      },
+      default: undefined
+    }
+  },
+  setup () {
+    return {
+      mainTableRef: ref(null)
     }
   },
   data () {
@@ -373,7 +442,7 @@ export default {
         this.pagination.onChange && this.pagination.onChange(page)
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         this.internalCurrentPage = page
-        this.$emit('page-change', page)
+        this.doUpdatePage(page)
       }
     },
     syntheticOnPageSizeChange () {
@@ -381,12 +450,7 @@ export default {
         this.pagination.onPageSizeChange && this.pagination.onPageSizeChange(pageSize)
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         this.internalPageSize = pageSize
-        // this.$emit('change', {
-        //   sorter: createShallowClonedObject(this.syntheticActiveSorter),
-        //   pagination: createShallowClonedObject(this.syntheticPagination),
-        //   filters: createShallowClonedObject(this.syntheticActiveFilters)
-        // })
-        this.$emit('page-size-change')
+        this.doUpdatePageSize(pageSize)
       }
     },
     syntheticPageCount () {
@@ -497,23 +561,64 @@ export default {
     this.internalCheckedRowKeys = this.defaultCheckedRowKeys
   },
   methods: {
+    // events
+    doUpdateCheckedRowKeys (...args) {
+      const {
+        'onUpdate:checkedRowKeys': onUpdateCheckedRowKeys,
+        onCheckedRowKeysChange
+      } = this
+      if (onUpdateCheckedRowKeys) call(onUpdateCheckedRowKeys, ...args)
+      if (onCheckedRowKeysChange) call(onCheckedRowKeysChange, ...args)
+    },
+    doUpdatePage (...args) {
+      const {
+        'onUpdate:page': onUpdatePage,
+        onPageChange
+      } = this
+      if (onUpdatePage) call(onUpdatePage, ...args)
+      if (onPageChange) call(onPageChange, ...args)
+    },
+    doUpdatePageSize (...args) {
+      const {
+        'onUpdate:checkedRowKeys': onUpdateCheckedKeys,
+        onCheckedRowKeysChange
+      } = this
+      if (onUpdateCheckedKeys) call(onUpdateCheckedKeys, ...args)
+      if (onCheckedRowKeysChange) call(onCheckedRowKeysChange, ...args)
+    },
+    doUpdateSorter (...args) {
+      const {
+        'onUpdate:sorter': onUpdateSorter,
+        onSorterChange
+      } = this
+      if (onUpdateSorter) call(onUpdateSorter, ...args)
+      if (onSorterChange) call(onSorterChange, ...args)
+    },
+    doUpdateFilters (...args) {
+      const {
+        'onUpdate:filters': onUpdateFilters,
+        onFiltersChange
+      } = this
+      if (onUpdateFilters) call(onUpdateFilters, ...args)
+      if (onFiltersChange) call(onFiltersChange, ...args)
+    },
     changeCheckedRowKeys (checkedRowKeys) {
       this.internalCheckedRowKeys = checkedRowKeys
-      this.$emit('checked-row-keys-change', checkedRowKeys)
+      this.doUpdateCheckedRowKeys(checkedRowKeys)
     },
     changeSorter (sorter) {
       this.internalActiveSorter = sorter
-      this.$emit('sorter-change', createShallowClonedObject(sorter))
+      this.doUpdateSorter(createShallowClonedObject(sorter))
     },
     changeFilters (filters, sourceColumn) {
       if (!filters) {
         this.internalActiveFilters = {}
-        this.$emit('filters-change', {}, createShallowClonedObject(sourceColumn))
+        this.doUpdateFilters({}, createShallowClonedObject(sourceColumn))
       } else if (isPlainObject(filters)) {
         this.internalActiveFilters = filters
-        this.$emit('filters-change', createShallowClonedObject(filters), createShallowClonedObject(sourceColumn))
-      } else {
-        console.error('[naive-ui/n-data-table]: filters is not an object')
+        this.doUpdateFilters(createShallowClonedObject(filters), createShallowClonedObject(sourceColumn))
+      } else if (__DEV__) {
+        warn('data-table', '`filters` is not an object')
       }
     },
     scrollMainTableBodyToTop () {
@@ -523,8 +628,11 @@ export default {
       body.scrollTop = 0
     },
     getScrollElements () {
-      const header = this.$refs.mainTable.getHeaderElement()
-      const body = this.$refs.mainTable ? this.$refs.mainTable.getBodyElement() : null
+      const {
+        mainTableRef
+      } = this
+      const header = mainTableRef ? mainTableRef.getHeaderElement() : null
+      const body = mainTableRef ? mainTableRef.getBodyElement() : null
       return {
         header,
         body
@@ -578,7 +686,7 @@ export default {
     },
     page (page) {
       this.internalCurrentPage = page
-      this.$emit('page-change', page)
+      this.doUpdatePage(page)
     },
     sort (columnKey, order = 'ascend') {
       if (!columnKey) {
@@ -610,7 +718,7 @@ export default {
       this.changeFilters(filters)
     },
     checkAll (column) {
-      const checkedRowKeys = this.syntheticCheckedRowKeys.map(v => v)
+      const checkedRowKeys = Array.from(this.syntheticCheckedRowKeys)
       const rowKey = this.rowKey
       this.paginatedData.forEach(row => {
         if (column.disabled && column.disabled(row)) {
@@ -621,7 +729,7 @@ export default {
       this.changeCheckedRowKeys(checkedRowKeys)
     },
     clearCheckAll (column) {
-      const checkedRowKeys = this.syntheticCheckedRowKeys.map(v => v)
+      const checkedRowKeys = Array.from(this.syntheticCheckedRowKeys)
       const rowKey = this.rowKey
       this.paginatedData.forEach(row => {
         if (column.disabled && column.disabled(row)) {

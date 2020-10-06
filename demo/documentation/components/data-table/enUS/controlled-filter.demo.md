@@ -8,7 +8,7 @@
   :columns='columns'
   :data='data'
   :pagination='pagination'
-  @filters-change="handleFiltersChange"
+  @update:filters="handleFiltersChange"
 />
 ```
 
@@ -96,7 +96,6 @@ export default {
       this.addressColumn.filterOptionValue = null
     },
     handleFiltersChange (filters, sourceColumn) {
-      console.log(filters, sourceColumn)
       this.addressColumn.filterOptionValue = filters[sourceColumn.key]
     }
   }

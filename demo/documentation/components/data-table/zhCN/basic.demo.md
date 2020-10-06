@@ -9,10 +9,12 @@
 ```
 
 ```js
+import { h, resolveComponent } from 'vue'
+
 const createColumns = instance => {
   return [
     {
-      title: 'Name',
+      title: 'Name111',
       key: 'name',
       width: '15%'
     },
@@ -30,18 +32,16 @@ const createColumns = instance => {
       title: 'Tags',
       key: 'tags',
       width: '20%',
-      render (h, row) {
+      render (row) {
         const tags = row.tags.map(tagKey => {
-          return (
-            h('n-tag', {
-              staticStyle: {
-                marginRight: '6px'
-              },
-              props: {
-                type: 'info'
-              }
-            }, [ tagKey ])
-          )
+          return h(resolveComponent('n-tag'), {
+            style: {
+              marginRight: '6px'
+            },
+            type: 'info'
+          }, {
+            default: () => tagKey 
+          })
         })
         return tags
       }
@@ -50,15 +50,11 @@ const createColumns = instance => {
       title: 'Action',
       key: 'actions',
       width: '20%',
-      render (h, row) {
-        return h('n-button', {
-          props: {
-            size: 'small'
-          },
-          on: {
-            click: () => instance.sendMail(row)
-          }
-        }, [ 'Send Email' ])
+      render (row) {
+        return h(resolveComponent('n-button'), {
+          size: 'small',
+          onClick: () => instance.sendMail(row)
+        }, { default: () => 'Send Email' })
       }
     }
   ]
@@ -89,6 +85,7 @@ const data = [
 ]
 
 export default {
+  inject: ['message'],
   data() {
     return {
       data: data,
@@ -102,7 +99,7 @@ export default {
   },
   methods: {
     sendMail(rowData) {
-      this.$NMessage.info('send mail to ' + rowData.name)
+      this.message.info('send mail to ' + rowData.name)
     }
   }
 }

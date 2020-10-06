@@ -1,10 +1,10 @@
 <template>
-  <span v-if="column.render" :title="title">
-    <render :render="h => column.render(h, row, index)" />
-  </span>
-  <span v-else :title="title">
+  <template v-if="column.render">
+    <render :render="() => column.render(row, index)" />
+  </template>
+  <template v-else>
     {{ row[column.key] }}
-  </span>
+  </template>
 </template>
 
 <script>

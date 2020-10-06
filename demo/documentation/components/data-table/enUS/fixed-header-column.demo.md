@@ -16,6 +16,8 @@ Note that: If you have set fixed column, you should also set `scroll-x`.
 ```
 
 ```js
+import { h } from 'vue'
+
 const columns = [
   {
     title: 'Name',
@@ -31,21 +33,21 @@ const columns = [
   {
     title: 'Row',
     key: 'row',
-    render (h, row, index) {
+    render (row, index) {
       return h('span', ['row ', index])
     }
   },
   {
     title: 'Row1',
     key: 'row1',
-    render(h, row, index) {
+    render(row, index) {
       return h('span', ['row ', index])
     }
   },
   {
     title: 'Row2',
     key: 'row2',
-    render(h, row, index) {
+    render(row, index) {
       return h('span', ['row ', index])
     }
   },

@@ -87,7 +87,7 @@
       :options="pageSizeOptions"
       :value="pageSize"
       :disabled="disabled"
-      @change="handleSizePickerChange"
+      @update:value="handleSizePickerChange"
     />
   </div>
 </template>
