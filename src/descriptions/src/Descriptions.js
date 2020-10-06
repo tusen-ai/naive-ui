@@ -1,7 +1,9 @@
 import { h } from 'vue'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import usecssr from '../../_mixins/usecssr'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
 import styles from './styles'
 import { warn } from '../../_utils/naive/warn'
 import { getSlot, getVNodeChildren } from '../../_utils/vue'
@@ -11,7 +13,7 @@ import { isDescriptionsItem } from './utils'
 export default {
   name: 'Descriptions',
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles)
   ],
