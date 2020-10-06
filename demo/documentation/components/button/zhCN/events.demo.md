@@ -8,13 +8,10 @@
 
 ```js
 export default {
-  data () {
-    return {
-    }
-  },
+  inject: ['message'],
   methods: {
     handleClick () {
-      this.$NMessage.info('Button Clicked')
+      this.message.info('Button Clicked')
     }
   }
 }
