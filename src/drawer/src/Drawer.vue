@@ -51,15 +51,17 @@
 </template>
 
 <script>
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import usecssr from '../../_mixins/usecssr'
-import zindexable from '../../_directives/zindexable'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
+import { zindexable } from '../../_directives'
 import formatLength from '../../_utils/css/formatLength'
 import { warn } from '../../_utils/naive/warn'
 import { useCompitable, useIsMounted } from '../../_utils/composition'
 import NLazyTeleport from '../../_base/lazy-teleport'
-import NDrawerBody from './DrawerContent.vue'
+import NDrawerBody from './DrawerBody.vue'
 import styles from './styles/index'
 
 export default {
@@ -72,7 +74,7 @@ export default {
     zindexable
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles)
   ],
