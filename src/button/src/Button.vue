@@ -17,7 +17,7 @@
       [`n-button--${mergedSize}-size`]: true,
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
     }"
-    :tabindex="syntheticFocusable ? 0 : -1"
+    :tabindex="mergedFocusable ? 0 : -1"
     :type="attrType"
     @click="handleClick"
     @blur="handleBlur"
@@ -28,10 +28,6 @@
     <div
       v-if="!circle && $slots.default && iconOnRight"
       class="n-button__content"
-      :style="{
-        transition: hollowOutColorTransitionDisabled ? 'none' : null,
-        color: hollowText ? ascendantBackgroundColor : null
-      }"
     >
       <slot />
     </div>
@@ -46,20 +42,11 @@
             key="loading"
             class="n-icon-slot"
             :theme="syntheticTheme"
-            :style="{
-              transition: hollowOutColorTransitionDisabled ? 'none' : null
-            }"
-            :stroke="hollowText ? ascendantBackgroundColor : null"
             :stroke-width="24"
           />
           <n-icon
             v-else
             key="icon"
-            :style="{
-              transition: hollowOutColorTransitionDisabled ? 'none' : null,
-              fill: hollowText ? ascendantBackgroundColor : null,
-              stroke: hollowText ? ascendantBackgroundColor : null
-            }"
             class="n-icon-slot"
           >
             <slot
@@ -72,10 +59,6 @@
     <div
       v-if="!circle && $slots.default && !iconOnRight"
       class="n-button__content"
-      :style="{
-        transition: hollowOutColorTransitionDisabled ? 'none' : null,
-        color: hollowText ? ascendantBackgroundColor : null
-      }"
     >
       <slot />
     </div>
@@ -85,10 +68,11 @@
 </template>
 
 <script>
-import hollowoutable from '../../_mixins/hollowoutable'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import usecssr from '../../_mixins/usecssr'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
 import NFadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 import NBaseLoading from '../../_base/loading'
@@ -116,9 +100,8 @@ export default {
     }
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
-    hollowoutable,
     usecssr(styles)
   ],
   props: {
@@ -150,7 +133,7 @@ export default {
       validator (value) {
         return ['tiny', 'small', 'medium', 'large'].includes(value)
       },
-      default: 'medium'
+      default: undefined
     },
     ghost: {
       type: Boolean,
@@ -216,35 +199,25 @@ export default {
       return hash(read(this.color))
     },
     mergedSize () {
-      const NButtonGroup = this.NButtonGroup
+      const { size } = this
+      if (size) return size
+      const { NButtonGroup } = this
       if (NButtonGroup && NButtonGroup.size) {
         return NButtonGroup.size
       }
-      const NFormItem = this.NFormItem
+      const { NFormItem } = this
       if (
         NFormItem &&
         NFormItem.mergedSize
       ) {
         return NFormItem.mergedSize
       }
-      return this.size
+      return 'medium'
     },
     hideIconMargin () {
       return this.circle || !this.$slots.default
     },
-    avoidHollowOut () {
-      return (
-        this.$naive.avoidHollowOut ||
-        this.text ||
-        this.ghost ||
-        this.dashed ||
-        (this.type === 'default' && !this.color)
-      )
-    },
-    hollowText () {
-      return !this.avoidHollowOut
-    },
-    syntheticFocusable () {
+    mergedFocusable () {
       return this.focusable && !this.disabled
     },
     hasIcon () {
@@ -301,7 +274,7 @@ export default {
       if (this.disabled) {
         return
       }
-      if (this.syntheticFocusable) {
+      if (this.mergedFocusable) {
         this.$el.focus()
       }
     },
