@@ -15,6 +15,9 @@ export default create({
       popoverColor,
       textColorSecondaryOverlay
     } = derived
+    const {
+      borderRadius
+    } = base
     const defaultFillColor = composite(cardColor, changeColor(primaryColor, { alpha: 0.7 }))
     return {
       ...sizeVariables,
@@ -31,6 +34,7 @@ export default create({
       indicatorColor: popoverColor,
       indicatorBoxShadow: boxShadow,
       indicatorTextColor: textColorSecondaryOverlay,
+      indicatorBorderRadius: borderRadius,
       dotBoxShadow: `inset 0 0 0 2px ${defaultFillColor}`,
       dotBoxShadowActive: `inset 0 0 0 2px ${primaryColor}`
     }

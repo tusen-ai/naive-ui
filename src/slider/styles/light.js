@@ -16,6 +16,9 @@ export default create({
       primaryColorHover,
       baseColor
     } = derived
+    const {
+      borderRadius
+    } = base
     return {
       ...sizeVariables,
       railColor: railColorOverlay,
@@ -30,6 +33,7 @@ export default create({
       indicatorColor: indicatorColor,
       indicatorBoxShadow: boxShadow,
       indicatorTextColor: baseColor,
+      indicatorBorderRadius: borderRadius,
       dotBoxShadow: `inset 0 0 0 2px ${primaryColor}`,
       dotBoxShadowActive: `inset 0 0 0 2px ${primaryColorHover}`
     }

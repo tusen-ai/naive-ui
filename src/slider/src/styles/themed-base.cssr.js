@@ -22,7 +22,8 @@ export default c([
       dotBoxShadowActive,
       railHeight,
       handleSize,
-      dotSize
+      dotSize,
+      indicatorBorderRadius
     } = props.$local
     const {
       cubicBezierEaseInOut,
@@ -169,8 +170,8 @@ export default c([
           font-size: 14px;
           padding: 8px 12px;
           margin-bottom: 12px;
-          border-radius: 4px;
         `,
+        borderRadius: indicatorBorderRadius,
         color: indicatorTextColor,
         backgroundColor: indicatorColor,
         boxShadow: indicatorBoxShadow

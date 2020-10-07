@@ -122,7 +122,7 @@ export default c([
         ]
       ),
       // checkbox-group
-      cTB('checkbox-group', {
+      cB('checkbox-group', {
         raw: `
           font-size: 14px;
           line-height: 1.25;
