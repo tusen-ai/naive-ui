@@ -1,13 +1,10 @@
-import { cTB, c, cB, cE, cM, insideFormItem } from '../../../_utils/cssr'
+import { cTB, c, cB, cE, cM, createKey, insideFormItem } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
     const {
       cubicBezierEaseInOut
     } = props.$base
-    const {
-      borderRadius
-    } = props.$local
     const {
       buttonColorDisabled,
       buttonTextColorDisabled,
@@ -28,8 +25,9 @@ export default c([
       colorFocus,
       borderMaskBoxShadowFocus,
       borderMaskBoxShadowHover,
-      placeholdeColor
-    } = props.$local.default
+      placeholdeColor,
+      borderRadius
+    } = props.$local
     return cTB('input-number', {
       raw: `
         position: relative;
@@ -273,16 +271,14 @@ export default c([
     ])
   },
   ({ props }) => ['warning', 'error'].map(status => {
-    const pallete = props.$local[status]
-    const {
-      borderMaskBoxShadow,
-      borderMaskBoxShadowHover,
-      borderMaskBoxShadowFocus,
-      colorFocus,
-      caretColor,
-      buttonTextColorHover,
-      buttonTextColorActive
-    } = pallete
+    const local = props.$local
+    const borderMaskBoxShadow = local[createKey('borderMaskBoxShadow', status)]
+    const borderMaskBoxShadowHover = local[createKey('borderMaskBoxShadow', status, 'hover')]
+    const borderMaskBoxShadowFocus = local[createKey('borderMaskBoxShadow', status, 'focus')]
+    const colorFocus = local[createKey('color', status, 'focus')]
+    const caretColor = local[createKey('caretColor', status)]
+    const buttonTextColorHover = local[createKey('buttonTextColor', status, 'hover')]
+    const buttonTextColorActive = local[createKey('buttonTextColor', status, 'active')]
     return insideFormItem(
       status,
       cTB('input-number', [

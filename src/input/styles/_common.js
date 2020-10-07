@@ -1,14 +1,10 @@
 export default {
-  height: {
-    tiny: '22px',
-    small: '28px',
-    medium: '34px',
-    large: '40px'
-  },
-  fontSize: {
-    tiny: '12px',
-    small: '14px',
-    medium: '14px',
-    large: '15px'
-  }
+  heightTiny: '22px',
+  heightSmall: '28px',
+  heightMedium: '34px',
+  heightLarge: '40px',
+  fontSizeTiny: '12px',
+  fontSizeSmall: '14px',
+  fontSizeMedium: '14px',
+  fontSizeLarge: '15px'
 }

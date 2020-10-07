@@ -1,7 +1,5 @@
 export default {
-  buttonWidth: {
-    small: '24px',
-    medium: '28px',
-    large: '28px'
-  }
+  buttonWidthSmall: '24px',
+  buttonWidthMedium: '28px',
+  buttonWidthLarge: '28px'
 }

@@ -1,12 +1,12 @@
-import { cTB, c, cE, cM, cNotM } from '../../../_utils/cssr'
+import { cTB, c, cE, cM, cNotM, createKey } from '../../../_utils/cssr'
 import depx from '../../../_utils/css/depx'
 import pxfy from '../../../_utils/css/pxfy'
 
 export default c([
   ({ props }) => {
     const size = props.$instance.mergedSize
-    const height = props.$local.height[size]
-    const fontSize = props.$local.fontSize[size]
+    const height = props.$local[createKey('height', size)]
+    const fontSize = props.$local[createKey('fontSize', size)]
     const lineHeight = pxfy(Math.round(depx(fontSize) * 1.5))
     const paddingTop = pxfy((depx(height) - depx(lineHeight)) / 2)
     const roundBorderRadius = pxfy(depx(height) / 2)

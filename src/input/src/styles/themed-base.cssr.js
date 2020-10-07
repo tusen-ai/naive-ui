@@ -1,4 +1,4 @@
-import { cTB, c, cB, cE, cM, insideFormItem } from '../../../_utils/cssr'
+import { cTB, c, cB, cE, cM, insideFormItem, createKey } from '../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up'
 
 export default c([
@@ -27,7 +27,7 @@ export default c([
       placeholderColorDisabled,
       iconColorDisabled,
       iconOpacityDisabled
-    } = props.$local.default
+    } = props.$local
     const {
       cubicBezierEaseInOut
     } = props.$base
@@ -254,29 +254,29 @@ export default c([
       'warning',
       'error'
     ].map(status => {
-      const pallete = props.$local[status]
+      const pallete = props.$local
       return insideFormItem(
         status,
         cB('input', [
           cM('stateful', [
             cE('border-mask', {
-              borderColor: pallete.borderMaskColor
+              borderColor: pallete[createKey('borderMaskColor', status)]
             }),
             c('&:hover', [
               cE('border-mask', {
-                borderColor: pallete.borderMaskColorHover
+                borderColor: pallete[createKey('borderMaskColor', status, 'hover')]
               })
             ]),
             cM('focus', {
-              backgroundColor: pallete.colorFocus
+              backgroundColor: pallete[createKey('color', status, 'focus')]
             }, [
               cE('border-mask', {
-                borderColor: pallete.borderMaskColorFocus,
-                boxShadow: pallete.borderMaskBoxShadowFocus
+                borderColor: pallete[createKey('borderMaskColor', status, 'focus')],
+                boxShadow: pallete[createKey('borderMaskBoxShadow', status, 'focus')]
               })
             ]),
             cE('input, textarea', {
-              caretColor: pallete.caretColor
+              caretColor: pallete[createKey('caretColor', status)]
             })
           ])
         ])
