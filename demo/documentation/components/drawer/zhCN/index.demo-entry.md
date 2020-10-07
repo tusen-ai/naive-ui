@@ -16,13 +16,15 @@ dark-4-debug
 |-|-|-|-|
 |body-class|`string`|`undefined`||
 |body-style|`Object`|`undefined`||
+|body-wrapper-class|`string`|`undefined`||
+|body-wrapper-style|`Object`|`undefined`||
 |height|`number \| string`|`251`|在位置是 `top` 和 `bottom` 时生效|
 |mask-closable|`boolean`|`true`|点击遮罩时是否发出 `update:show` 事件|
 |placement|`'top' \| 'right' \| 'bottom' \| 'left'`|`'right'`||
 |show|`boolean`|`false`||
 |themed-style|`{ [themeName: string]: Object } \| null`|`null`||
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
-|to|`string \| HTMLElement`|`'body`|抽屉出现的区域|
+|to|`string \| HTMLElement`|`'body'`|抽屉出现的区域|
 |width|`number \| string`|`251`||
 |on-update:show|`(show: boolean) => any`|`undefined`||
 
@@ -30,9 +32,3 @@ dark-4-debug
 |名称|参数|说明|
 |-|-|-|
 |default|`()`||
-
-## Events
-|名称|参数|说明|
-|-|-|-|
-|show|`()`||
-|hide|`(show: false)`||

@@ -91,8 +91,8 @@ placeable 进行了大调整
     - `on-show` => `on-update:show`
     - `on-hide` => `on-update:show`
     - `target` => `to`
-    - `drawer-class` => `body-class`
-    - `drawer-style` => `body-style`
+    - `drawer-class` => `body-class` & `body-wrapper-class`
+    - `drawer-style` => `body-style` & `body-wrapper-style`
   - new
     - `display-directive` prop
 - [x] dropdown

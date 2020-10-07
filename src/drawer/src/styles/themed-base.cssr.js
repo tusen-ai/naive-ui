@@ -30,7 +30,7 @@ export default c([
         slideInFromLeftTransition(),
         slideInFromTopTransition(),
         slideInFromBottomTransition(),
-        cB('drawer-content', {
+        cB('drawer-body', {
           boxSizing: 'border-box',
           padding: '16px 24px'
         }),
@@ -79,7 +79,7 @@ export default c([
           leaveDuration: '0.3s'
         })
       ]),
-      cB('darwer-container', {
+      cB('drawer-container', {
         raw: `
           position: absolute;
           left: 0;

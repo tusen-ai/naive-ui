@@ -6,42 +6,32 @@
     <div
       v-zindexable="{ enabled: show }"
       class="n-positioning-container"
+      :class="{
+        [namespace]: namespace
+      }"
     >
-      <div
-        class="n-drawer-container"
+      <transition
+        name="n-fade-in-transition"
+        :appear="isMounted"
       >
-        <transition
-          name="n-fade-in-transition"
-          :appear="isMounted"
-        >
-          <div
-            v-if="show"
-            class="n-drawer-mask"
-            @click="handleMaskClick"
-          />
-        </transition>
-        <transition
-          :name="transitionName"
-          :appear="isMounted"
-        >
-          <n-drawer-body
-            v-if="displayDirective === 'show' || show"
-            v-show="displayDirective === 'if' || show"
-            :style="mergedBodyStyle"
-            :class="[
-              `n-drawer--${placement}-placement`,
-              {
-                [`n-${syntheticTheme}-theme`]: syntheticTheme,
-                [compitableBodyClass]: compitableBodyClass,
-                [namespace]: namespace
-              }
-            ]"
-            :style-width="styleWidth"
-          >
-            <slot />
-          </n-drawer-body>
-        </transition>
-      </div>
+        <div
+          v-if="show"
+          class="n-drawer-mask"
+          @click="handleMaskClick"
+        />
+      </transition>
+      <n-drawer-body-wrapper
+        :placement="placement"
+        :body-wrapper-class="bodyWrapperClass"
+        :body-wrapper-style="mergedBodyWrapperStyle"
+        :body-style="compitableBodyStyle"
+        :body-class="compitableBodyClass"
+        :show="show"
+        :display-directive="displayDirective"
+        :theme="syntheticTheme"
+      >
+        <slot />
+      </n-drawer-body-wrapper>
     </div>
   </n-lazy-teleport>
 </template>
@@ -57,14 +47,14 @@ import formatLength from '../../_utils/css/formatLength'
 import { warn } from '../../_utils/naive/warn'
 import { useCompitable, useIsMounted } from '../../_utils/composition'
 import NLazyTeleport from '../../_base/lazy-teleport'
-import NDrawerBody from './DrawerBody.vue'
+import NDrawerBodyWrapper from './DrawerBodyWrapper.vue'
 import styles from './styles/index'
 
 export default {
   name: 'Drawer',
   components: {
     NLazyTeleport,
-    NDrawerBody
+    NDrawerBodyWrapper
   },
   directives: {
     zindexable
@@ -108,6 +98,14 @@ export default {
       default: undefined
     },
     bodyStyle: {
+      type: Object,
+      default: undefined
+    },
+    bodyWrapperClass: {
+      type: String,
+      default: undefined
+    },
+    bodyWrapperStyle: {
       type: Object,
       default: undefined
     },
@@ -171,14 +169,6 @@ export default {
     }
   },
   computed: {
-    transitionName () {
-      return ({
-        right: 'n-slide-in-from-right-transition',
-        left: 'n-slide-in-from-left-transition',
-        top: 'n-slide-in-from-top-transition',
-        bottom: 'n-slide-in-from-bottom-transition'
-      })[this.placement]
-    },
     styleWidth () {
       const {
         placement
@@ -201,12 +191,11 @@ export default {
       if (height === null) return null
       return formatLength(height)
     },
-    mergedBodyStyle () {
+    mergedBodyWrapperStyle () {
       return {
-        ...this.compitableBodyStyle,
-        ...this.syntheticStyle,
         width: this.styleWidth,
-        height: this.styleHeight
+        height: this.styleHeight,
+        ...this.bodyWrapperStyle
       }
     }
   },
