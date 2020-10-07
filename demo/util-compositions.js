@@ -35,6 +35,7 @@ export const envRef = ref(process.env.NODE_ENV)
 export const i18n = function (data) {
   const configProvider = inject('NConfigProvider', null)
   return {
+    locale: toRef(configProvider, 'inheritedLanguage'),
     t (key) {
       const { inheritedLanguage } = configProvider
       return data[inheritedLanguage][key]

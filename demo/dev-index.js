@@ -1,6 +1,5 @@
-
 import { createApp } from 'vue'
-import { installDemoComponents, i18n } from './init'
+import { installDemoComponents } from './init'
 import debugRouteMixin from './routes/debug-route-mixin'
 import hljs from './hljs'
 import DemoRouterView from './DemoRouterView'
@@ -18,7 +17,6 @@ const router = createDemoRouter(app, routes)
 
 app.use(router)
 app.use(naive)
-app.use(i18n)
 installDemoComponents(app)
 
 app.mount('#app')

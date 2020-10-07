@@ -11,7 +11,6 @@
 import { inject, toRef } from 'vue'
 import SiteHeader from './SiteHeader.vue'
 import menuOptions from './menu-options'
-// import { i18n } from './init'
 import { loadingBarApiRef } from './routes/router'
 import { useMemo } from '../src/_utils/composition'
 

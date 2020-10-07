@@ -1,17 +1,16 @@
 <script>
+import { i18n } from '../util-compositions'
+
 export default {
-  watch: {
-    '$i18n.locale': function () {
-      // console.log('locale change')
+  setup () {
+    return {
+      ...(i18n())
     }
   },
-  render (h, context) {
-    // const locale = this.$i18n.locale
-    const locale = 'zh-CN'
+  render () {
+    const { locale } = this
     const defaultSlot = (this.$slots.default && this.$slots.default()) || []
-    const index = 1 // defaultSlot.findIndex(VNode => VNode.componentOptions.tag === locale)
-    // console.log(locale, defaultSlot[0].componentOptions.tag)
-    // console.log(index)
+    const index = defaultSlot.findIndex(VNode => VNode.type.name === locale)
     if (~index) {
       return defaultSlot[index]
     } else return defaultSlot[0] || null

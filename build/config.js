@@ -63,11 +63,6 @@ exports.docLoaders = (env) => [
       limit: 10000,
       name: path.posix.join('static', '[name].[hash:7].[ext]')
     }
-  },
-  {
-    resourceQuery: /blockType=i18n/,
-    type: 'javascript/auto',
-    loader: '@intlify/vue-i18n-loader'
   }
 ]
 

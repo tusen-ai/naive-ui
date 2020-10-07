@@ -1,18 +1,3 @@
-<i18n>
-{
-  "zh-CN": {
-    "show": "显示代码",
-    "hide": "收起代码",
-    "editOnGithub": "在 Github 上编辑"
-  },
-  "en-US": {
-    "show": "Show Code",
-    "hide": "Hide Code",
-    "editOnGithub": "Edit on Github"
-  }
-}
-</i18n>
-
 <template>
   <n-card
     v-if="isShow"
@@ -39,7 +24,7 @@
             :relative-url="relativeUrl"
           />
         </template>
-        {{ ('editOnGithub') }}
+        {{ t('editOnGithub') }}
       </n-tooltip>
       <n-tooltip
         ref="expandCodeButton"
@@ -60,7 +45,7 @@
             </template>
           </n-button>
         </template>
-        {{ !showCode ? ('show') : ('hide') }}
+        {{ !showCode ? t('show') : t('hide') }}
       </n-tooltip>
     </template>
     <slot name="content" />
@@ -76,7 +61,7 @@
 <script>
 import { nextTick } from 'vue'
 import codeOutline from '../../src/_icons/code-outline'
-import { displayModeRef } from '../util-compositions'
+import { displayModeRef, i18n } from '../util-compositions'
 
 export default {
   components: {
@@ -103,7 +88,19 @@ export default {
   },
   setup () {
     return {
-      displayMode: displayModeRef
+      displayMode: displayModeRef,
+      ...(i18n({
+        'zh-CN': {
+          'show': '显示代码',
+          'hide': '收起代码',
+          'editOnGithub': '在 Github 上编辑'
+        },
+        'en-US': {
+          'show': 'Show Code',
+          'hide': 'Hide Code',
+          'editOnGithub': 'Edit on Github'
+        }
+      }))
     }
   },
   data () {

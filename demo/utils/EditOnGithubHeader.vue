@@ -1,21 +1,9 @@
-
-<i18n>
-{
-  "zh-CN": {
-    "editOnGithub": "在 Github 上编辑"
-    },
-  "en-US": {
-    "editOnGithub": "Edit on Github"
-  }
-}
-</i18n>
-
 <template>
   <n-h1 :id="id" class="naive-doc-title">
     <span>{{ text }}</span>
     <span class="edit-button">
       <n-tooltip
-        :delay="300"
+        trigger="hover"
         placement="left"
         :show-arrow="true"
       >
@@ -27,13 +15,15 @@
             :relative-url="relativeUrl"
           />
         </template>
-        {{ ('editOnGithub') }}
+        {{ t('editOnGithub') }}
       </n-tooltip>
     </span>
   </n-h1>
 </template>
 
 <script>
+import { i18n } from '../util-compositions'
+
 export default {
   name: 'EditOnGithubHeader',
   props: {
@@ -44,6 +34,18 @@ export default {
     text: {
       type: String,
       required: true
+    }
+  },
+  setup () {
+    return {
+      ...(i18n({
+        'zh-CN': {
+          'editOnGithub': '在 Github 上编辑'
+        },
+        'en-US': {
+          'editOnGithub': 'Edit on Github'
+        }
+      }))
     }
   },
   computed: {

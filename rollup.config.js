@@ -1,7 +1,6 @@
 const vue = require('rollup-plugin-vue')
 const resolve = require('@rollup/plugin-node-resolve')
 const { terser } = require('rollup-plugin-terser')
-const naiveSCSSVariable = require('./build/naiveSCSSVarPlugin')
 
 function externalValidator (patterns) {
   return id => patterns.some(pattern => id.startsWith(pattern))
@@ -31,7 +30,6 @@ module.exports = {
         }
       }
     }),
-    naiveSCSSVariable(),
     terser({
       mangle: false,
       output: {
