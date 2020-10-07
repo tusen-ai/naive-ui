@@ -2,10 +2,10 @@
 ```html
 <n-button @click="modalActive = !modalActive">Toggle</n-button>
 <n-drawer
-  v-model="modalActive"
+  v-model:show="modalActive"
   width="800"
 >
-  <n-popover>
+  <n-popover trigger="click">
     <template v-slot:activator>
       <n-button style="margin:0;">
         悬浮

@@ -42,6 +42,7 @@
     />
     <n-lazy-teleport
       :show="show"
+      adjust-to
     >
       <div
         ref="offsetContainerRef"

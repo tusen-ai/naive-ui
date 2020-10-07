@@ -28,6 +28,7 @@
     <n-lazy-teleport
       :show="active"
       to="body"
+      adjust-to
     >
       <div
         ref="offsetContainer"

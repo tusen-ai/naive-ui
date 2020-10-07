@@ -1,6 +1,6 @@
 import moveoutsideDelegate from '../_utils/delegate/moveoutsideDelegate'
 
-const ctx = '@@mousemoveoutsideContext'
+const ctx = '@@mmoContext'
 
 function lazyHandler (handler) {
   let called = false
@@ -21,7 +21,6 @@ function lazyHandler (handler) {
 
 const mousemoveoutside = {
   beforeMount (el, bindings) {
-    // console.debug('[mousemoveoutside]: bind', el)
     if (process.env.NODE_ENV !== 'production') {
       console.debug('[mousemoveoutside]: bind $el')
     }
@@ -37,14 +36,6 @@ const mousemoveoutside = {
       console.debug('[mousemoveoutside]: inserted')
     }
   },
-  // update (el, bindings) {
-  //   console.debug('[mousemoveoutside]: update')
-  //   if (typeof bindings.value === 'function') {
-  //     moveoutsideDelegate.unregisterHandler(el[ctx].handler)
-  //     el[ctx].handler = bindings.value
-  //     moveoutsideDelegate.registerHandler(el, el[ctx].handler)
-  //   }
-  // },
   updated (el, bindings) {
     if (process.env.NODE_ENV !== 'production') {
       console.debug('[mousemoveoutside]: componentUpdated')

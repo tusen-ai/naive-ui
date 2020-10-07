@@ -35,6 +35,7 @@
     />
     <n-lazy-teleport
       :show="active && !selectMenuActive"
+      adjust-to
     >
       <cascader-menu
         ref="cascaderMenuRef"
@@ -62,6 +63,7 @@
     </n-lazy-teleport>
     <n-lazy-teleport
       :show="selectMenuActive"
+      adjust-to
     >
       <cascader-select-menu
         ref="selectMenuRef"

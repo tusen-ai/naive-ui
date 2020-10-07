@@ -1,14 +1,11 @@
-import { h, withDirectives, Transition } from 'vue'
-import zindexable from '../../_directives/zindexable'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
+import { h, withDirectives, Transition, ref } from 'vue'
+import { zindexable } from '../../_directives'
+import { configurable, themeable, usecssr } from '../../_mixins'
 import presetProps from './presetProps'
-import usecssr from '../../_mixins/usecssr'
 import { useIsMounted } from '../../_utils/composition'
 import { warn } from '../../_utils/naive/warn'
 import { omit } from '../../_utils/vue'
 import NLazyTeleport from '../../_base/lazy-teleport'
-import NModalMask from './Mask'
 import NModalBodyWrapper from './BodyWrapper.vue'
 import styles from './styles'
 
@@ -16,11 +13,12 @@ export default {
   name: 'Modal',
   provide () {
     return {
-      NModal: this
+      NModal: this,
+      NDrawer: null
     }
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles)
   ],
@@ -103,7 +101,8 @@ export default {
   },
   setup () {
     return {
-      isMounted: useIsMounted()
+      isMounted: useIsMounted(),
+      containerRef: ref(null)
     }
   },
   methods: {
@@ -125,7 +124,7 @@ export default {
       default: () => [
         withDirectives(
           h('div', {
-            ref: 'container',
+            ref: 'containerRef',
             class: [
               'n-modal-container',
               {
@@ -140,7 +139,10 @@ export default {
               appear: this.appear ?? this.isMounted
             }, {
               default: () => {
-                return this.show ? [ h(NModalMask) ] : null
+                return this.show ? h('div', {
+                  ref: 'containerRef',
+                  class: 'n-modal-mask'
+                }) : null
               }
             }),
             h(NModalBodyWrapper,
@@ -179,10 +181,12 @@ export default {
                   // deprecated
                   if (onAfterHide) onAfterHide()
                 },
-                onClickoutside: () => {
+                onClickoutside: (e) => {
                   if (this.maskClosable) {
-                    // TODO: slient scrollbar click
-                    this.hide()
+                    const { containerRef } = this
+                    if (containerRef.contains(e.target)) {
+                      this.hide()
+                    }
                   }
                 }
               },

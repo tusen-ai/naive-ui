@@ -1,5 +1,5 @@
 # 遮罩关闭
-使用 `mask-closable` 使点击遮罩层不发出关闭事件。
+使用 `mask-closable=false` 使点击遮罩层不发出关闭事件。
 ```html
 <n-button
   @click="showModal = true"

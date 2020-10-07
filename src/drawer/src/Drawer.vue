@@ -76,6 +76,12 @@ export default {
     themeable,
     usecssr(styles)
   ],
+  provide () {
+    return {
+      NDrawer: this,
+      NModal: null
+    }
+  },
   props: {
     show: {
       type: Boolean,

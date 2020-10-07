@@ -105,7 +105,7 @@ export default {
           }, [
             h('span', {
               class: 'n-descriptions-table-content__label'
-            }, itemLabel.concat([':'])), h('span', {
+            }, itemLabel.concat([': '])), h('span', {
               class: 'n-descriptions-table-content__content'
             }, itemChildren)]))
         }

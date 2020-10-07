@@ -2,7 +2,7 @@
 ```html
 <n-button @click="modalActive = !modalActive">Toggle</n-button>
 <n-drawer
-  v-model="modalActive"
+  v-model:show="modalActive"
   width="800"
 >
   <n-data-table
@@ -16,6 +16,8 @@
 </n-drawer>
 ```
 ```js
+import { h } from 'vue'
+
 const columns = [
   {
     title: 'Name',
@@ -50,21 +52,21 @@ const columns = [
   {
     title: 'Row',
     key: 'row',
-    render (h, row, index) {
+    render (row, index) {
       return h('span', ['row ', index])
     }
   },
   {
     title: 'Row1',
     key: 'row1',
-    render(h, row, index) {
+    render(row, index) {
       return h('span', ['row ', index])
     }
   },
   {
     title: 'Row2',
     key: 'row2',
-    render(h, row, index) {
+    render(row, index) {
       return h('span', ['row ', index])
     }
   },
@@ -85,7 +87,8 @@ const data = Array.apply(null, { length: 46 }).map((_, index) => ({
 
 
 export default {
-  data() {
+  inject: ['message'],
+  data () {
     return {
       modalActive: false,
       data,
@@ -99,7 +102,7 @@ export default {
   },
   methods: {
     sendMail(rowData) {
-      this.$NMessage.info('send mail to ' + rowData.name)
+      this.message.info('send mail to ' + rowData.name)
     }
   }
 }

@@ -4,7 +4,7 @@
 <n-modal
   title="Dark Modal Debug"
   preset="card"
-  v-model="modalActive"
+  v-model:show="modalActive"
   :overlay-style="{ marginTop: '24px', marginBottom: '24px' }"
 >
   <n-table :bordered="false" :single-line="false">

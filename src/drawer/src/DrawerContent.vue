@@ -1,6 +1,7 @@
 <template>
   <n-scrollbar>
     <div
+      ref="bodyRef"
       class="n-drawer-content"
       :style="{
         width: styleWidth
@@ -12,6 +13,7 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 import NScrollbar from '../../scrollbar'
 
 export default {
@@ -29,7 +31,13 @@ export default {
   },
   provide () {
     return {
-      NDrawer: this
+      NDrawerBody: this,
+      NModalBody: null
+    }
+  },
+  setup () {
+    return {
+      bodyRef: ref(null)
     }
   },
   methods: {

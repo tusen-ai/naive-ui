@@ -68,6 +68,7 @@
     </div>
     <n-lazy-teleport
       :show="showTooltip"
+      adjust-to
     >
       <div
         ref="offsetContainerRef"

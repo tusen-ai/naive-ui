@@ -4,11 +4,11 @@
 <n-modal
   title="Dark Modal Debug"
   preset="card"
-  v-model="modalActive"
-  :overlay-style="{ marginTop: '24px', marginBottom: '24px', width: '800px' }"
+  v-model:show="modalActive"
+  :body-style="{ marginTop: '24px', marginBottom: '24px', width: '800px' }"
 >
-  <n-popover>
-    <template v-slot:activator>
+  <n-popover trigger="click">
+    <template v-slot:trigger>
       <n-button style="margin:0;">
         悬浮
       </n-button>

@@ -2,7 +2,7 @@
 ```html
 <n-button @click="modalActive = !modalActive">Toggle</n-button>
 <n-drawer
-  v-model="modalActive"
+  v-model:show="modalActive"
   width="800"
 >
   <n-table :bordered="false" :single-line="false">

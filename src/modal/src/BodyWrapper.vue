@@ -14,6 +14,7 @@
       >
         <div
           v-show="show"
+          ref="bodyRef"
           v-clickoutside="handleClickOutside"
           class="n-modal"
           :class="{
@@ -77,7 +78,7 @@
 </template>
 
 <script>
-import { nextTick, reactive, toRefs, toRef, watch } from 'vue'
+import { nextTick, reactive, toRefs, toRef, watch, ref } from 'vue'
 import NScrollbar from '../../scrollbar'
 import NDialog from '../../dialog/src/Dialog.vue'
 import NCard from '../../card'
@@ -99,6 +100,12 @@ export default {
   mixins: [
     themeable
   ],
+  provide () {
+    return {
+      NModalBody: this,
+      NDrawerBody: null
+    }
+  },
   inject: {
     NModal: {
       default: null
@@ -119,6 +126,7 @@ export default {
         'bodyStyle'
       ]),
       mousePosition: useLastClickPosition(),
+      bodyRef: ref(null),
       ...dataRefs
     }
   },
@@ -225,8 +233,8 @@ export default {
     handlePositiveClick () {
       this.onPositiveClick()
     },
-    handleClickOutside () {
-      this.onClickoutside()
+    handleClickOutside (e) {
+      this.onClickoutside(e)
     }
   }
 }

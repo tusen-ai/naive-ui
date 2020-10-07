@@ -1,8 +1,5 @@
 class ClickOutsideDelegate {
   constructor () {
-    if (process.env.NODE_ENV !== 'production') {
-      console.debug('[ClickOutsideDelegate]: Ctor called')
-    }
     this.handlers = new Map()
     this.handlerCount = 0
     this.mouseDownTarget = null
@@ -13,29 +10,18 @@ class ClickOutsideDelegate {
     this.mouseDownTarget = e.target
   }
   handleMouseUpOutside (e) {
-    const target = e.target
-    for (const [handler, { els, once }] of this.handlers) {
+    const { target } = e
+    for (const [handler, { els }] of this.handlers) {
       let existElContainTarget = false
       for (const el of els) {
-        if (el) {
-          if (typeof el === 'function') {
-            const unwrappedEl = el()
-            if (unwrappedEl && (unwrappedEl.contains(target) || unwrappedEl.contains(this.mouseDownTarget))) {
-              existElContainTarget = true
-              break
-            }
-          } else if (el.contains(target) || el.contains(this.mouseDownTarget)) {
-            existElContainTarget = true
-            break
-          }
+        if (el && (el.contains(target) || el.contains(this.mouseDownTarget))) {
+          existElContainTarget = true
+          break
         }
       }
       if (existElContainTarget) continue
       else {
         handler(e)
-        if (once) {
-          this.unregisterHandler(handler)
-        }
       }
     }
   }
@@ -68,7 +54,7 @@ class ClickOutsideDelegate {
       this.handlers = new Map()
     }
   }
-  registerHandler (els, handler, once = true) {
+  registerHandler (els, handler) {
     if (!Array.isArray(els)) {
       els = [els]
     }
@@ -86,7 +72,7 @@ class ClickOutsideDelegate {
       window.addEventListener('mousedown', this.handleMouseDown)
     }
     ++this.handlerCount
-    this.handlers.set(handler, { els, once })
+    this.handlers.set(handler, { els })
     window.x = this.handlers
   }
 }

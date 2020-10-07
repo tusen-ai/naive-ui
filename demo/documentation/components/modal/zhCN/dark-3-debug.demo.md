@@ -4,7 +4,7 @@
 <n-modal
   title="Dark Modal Debug"
   preset="card"
-  v-model="modalActive"
+  v-model:show="modalActive"
   :overlay-style="{ marginTop: '24px', marginBottom: '24px', width: '800px' }"
 >
   <n-data-table
@@ -18,6 +18,8 @@
 </n-modal>
 ```
 ```js
+import { h } from 'vue'
+
 const columns = [
   {
     type: 'selection',
@@ -60,21 +62,21 @@ const columns = [
   {
     title: 'Row',
     key: 'row',
-    render (h, row, index) {
+    render (row, index) {
       return h('span', ['row ', index])
     }
   },
   {
     title: 'Row1',
     key: 'row1',
-    render(h, row, index) {
+    render(row, index) {
       return h('span', ['row ', index])
     }
   },
   {
     title: 'Row2',
     key: 'row2',
-    render(h, row, index) {
+    render(row, index) {
       return h('span', ['row ', index])
     }
   },

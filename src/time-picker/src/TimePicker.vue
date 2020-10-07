@@ -38,6 +38,7 @@
       :to="to"
       :show="active"
       :disabled="teleportDisabled"
+      adjust-to
     >
       <div
         ref="offsetContainer"

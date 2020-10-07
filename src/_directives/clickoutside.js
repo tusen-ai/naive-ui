@@ -1,81 +1,34 @@
+import { warn } from '../_utils/naive'
 import clickoutsideDelegate from '../_utils/delegate/clickoutsideDelegate'
 
-const ctx = '@@clickoutsideContext'
-
-function lazyHandler (handler) {
-  let called = false
-  return function (e) {
-    if (called) {
-      if (process.env.NODE_ENV !== 'production') {
-        console.debug('[clickoutside] called')
-      }
-      handler(e)
-    } else {
-      if (process.env.NODE_ENV !== 'production') {
-        console.debug('[clickoutside] lazy called')
-      }
-      called = true
-    }
-  }
-}
+const ctx = '@@coContext'
 
 const clickoutside = {
-  beforeMount (el, bindings) {
-    // console.debug('[clickoutside]: bind', el)
-    if (process.env.NODE_ENV !== 'production') {
-      console.debug('[clickoutside]: bind $el')
-    }
+  mounted (el, bindings) {
     if (typeof bindings.value === 'function') {
       el[ctx] = {
-        handler: bindings.modifiers.lazy ? lazyHandler(bindings.value) : bindings.value
+        handler: bindings.value
       }
-      clickoutsideDelegate.registerHandler(el, el[ctx].handler, false)
+      clickoutsideDelegate.registerHandler(el, el[ctx].handler)
     }
   },
-  mounted (el, bindings) {
-    if (process.env.NODE_ENV !== 'production') {
-      console.debug('[clickoutside]: inserted')
-    }
-    // if (typeof bindings.value === 'function') {
-    //   el[ctx] = {
-    //     handler: bindings.modifiers.lazy ? lazyHandler(bindings.value) : bindings.value
-    //   }
-    //   clickoutsideDelegate.registerHandler(el, el[ctx].handler, false)
-    // }
-  },
-  // update (el, bindings) {
-  //   console.debug('[clickoutside]: update', el)
-  //   if (typeof bindings.value === 'function') {
-  //     clickoutsideDelegate.unregisterHandler(el[ctx].handler)
-  //     el[ctx].handler = bindings.value
-  //     clickoutsideDelegate.registerHandler(el, el[ctx].handler, false)
-  //   }
-  // },
   updated (el, bindings) {
-    if (process.env.NODE_ENV !== 'production') {
-      console.debug('[clickoutside]: componentUpdated')
-    }
     if (typeof bindings.value === 'function') {
       if (el[ctx] && el[ctx].handler) {
         if (el[ctx].handler !== bindings.value) {
           clickoutsideDelegate.unregisterHandler(el[ctx].handler)
           el[ctx].handler = bindings.value
-          clickoutsideDelegate.registerHandler(el, el[ctx].handler, false)
+          clickoutsideDelegate.registerHandler(el, el[ctx].handler)
         }
       } else {
         el[ctx].handler = bindings.value
-        clickoutsideDelegate.registerHandler(el, el[ctx].handler, false)
+        clickoutsideDelegate.registerHandler(el, el[ctx].handler)
       }
-    } else {
-      console.error(
-        '[naive-ui/clickoutside]: Binding value is not a function.'
-      )
+    } else if (__DEV__) {
+      warn('clickoutside', 'Binding value is not a function.')
     }
   },
   unmounted (el) {
-    if (process.env.NODE_ENV !== 'production') {
-      console.debug('[clickoutside]: unbind')
-    }
     el[ctx] && clickoutsideDelegate.unregisterHandler(el[ctx].handler)
   }
 }

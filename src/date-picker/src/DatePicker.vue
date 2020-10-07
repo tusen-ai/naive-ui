@@ -66,6 +66,7 @@
     </n-input>
     <n-base-lazy-teleport
       :show="active"
+      adjust-to
     >
       <div
         ref="offsetContainerRef"

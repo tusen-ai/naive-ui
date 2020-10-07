@@ -298,7 +298,8 @@ export default {
       manuallyPositioned ? null : triggerVNode,
       h(NLazyTeleport, {
         to: 'body',
-        show: this.mergedShow
+        show: this.mergedShow,
+        adjustTo: true
       }, {
         default: () => {
           return [

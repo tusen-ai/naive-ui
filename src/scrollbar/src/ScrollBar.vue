@@ -433,6 +433,8 @@ export default {
       this.updateScrollParameters()
     },
     handleHorizontalScrollMouseDown (e) {
+      e.preventDefault()
+      e.stopPropagation()
       const {
         onScrollStart
       } = this
@@ -457,6 +459,8 @@ export default {
       }
     },
     handleHorizontalScrollMouseUp (e) {
+      e.preventDefault()
+      e.stopPropagation()
       const {
         onScrollEnd
       } = this
@@ -470,6 +474,8 @@ export default {
       }
     },
     handleVerticalScrollMouseDown (e) {
+      e.preventDefault()
+      e.stopPropagation()
       const {
         onScrollStart
       } = this
@@ -494,6 +500,8 @@ export default {
       }
     },
     handleVerticalScrollMouseUp (e) {
+      e.preventDefault()
+      e.stopPropagation()
       const {
         onScrollEnd
       } = this
