@@ -63,7 +63,7 @@ export default {
     }
   },
   setup (props) {
-    const rootMenuValueRef = useInjectionRef('NMenu', 'modelValue')
+    const rootMenuValueRef = useInjectionRef('NMenu', 'value')
     const submenuDisabledRef = useInjectionRef('NSubmenu', 'mergedDisabled', false)
     const mergedDisabledRef = computed(() => {
       return submenuDisabledRef.value || props.disabled

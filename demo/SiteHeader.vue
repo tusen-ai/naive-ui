@@ -34,7 +34,7 @@
         <div class="nav-menu">
           <n-menu
             mode="horizontal"
-            :model-value="menuValue"
+            :value="menuValue"
             :items="menuItems"
             @select="handleMenuSelect"
           />

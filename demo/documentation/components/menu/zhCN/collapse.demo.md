@@ -1,31 +1,33 @@
 # 压缩菜单
 可以让垂直菜单随着边栏压缩。使用 `collapsed` 属性控制菜单状态。必需设定 `collapsed-width` 来确保菜单正常显示。除此之外还有一些其他和压缩有关的属性：`icon-size`、`collapsed-icon-size`、`popover-body-style`。详细信息参考页面底下的 API 文档。
 ```html
-<n-switch v-model="collapsed" />
-<n-layout>
-  <n-layout-sider
-    collapse-mode="width"
-    :collapsed-width="64"
-    :width="240"
-    :collapsed="collapsed"
-    show-toggle-button
-    @collapse="collapsed = true"
-    @expand="collapsed = false"
-  >
-    <n-menu
-      :collapsed="collapsed"
-      :collapsed-width="64"
-      :collapsed-icon-size="22"
-      :items="menuItems"
-      v-model="activeKey"
-    />
-  </n-layout-sider>
+<n-space vertical align="stretch">
+  <n-switch v-model:value="collapsed" />
   <n-layout>
-    <n-layout-content>
-      <span>内容</span>
-    </n-layout-content>
+    <n-layout-sider
+      collapse-mode="width"
+      :collapsed-width="64"
+      :width="240"
+      :collapsed="collapsed"
+      show-toggle-button
+      @collapse="collapsed = true"
+      @expand="collapsed = false"
+    >
+      <n-menu
+        :collapsed="collapsed"
+        :collapsed-width="64"
+        :collapsed-icon-size="22"
+        :items="menuItems"
+        v-model:value="activeKey"
+      />
+    </n-layout-sider>
+    <n-layout>
+      <n-layout-content>
+        <span>内容</span>
+      </n-layout-content>
+    </n-layout>
   </n-layout>
-</n-layout>
+</n-space>
 ```
 ```js
 import { h, resolveComponent } from 'vue'

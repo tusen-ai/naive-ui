@@ -51,7 +51,7 @@ export default {
     const ServiceLayout = this.NNimbusServiceLayout
     return h(resolveComponent('NMenu'),
       {
-        modelValue: ServiceLayout.value || ServiceLayout.activeItem,
+        value: ServiceLayout.value || ServiceLayout.activeItem,
         expandedNames: ServiceLayout.expandedNames,
         defaultExpandedNames: ServiceLayout.defaultExpandedNames || this.subMenuNames,
         rootIndent: 36,

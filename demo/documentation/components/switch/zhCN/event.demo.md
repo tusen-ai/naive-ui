@@ -1,13 +1,13 @@
 # 事件
 ```html
 <n-switch
-  :modelValue="active"
-  @update:modelValue="handleChange"
+  :value="active"
+  @update:value="handleChange"
 />
-<n-message-controller ref='message' />
 ```
 ```js
 export default {
+  inject: ['message'],
   data () {
     return {
       active: false
@@ -16,7 +16,7 @@ export default {
   methods: {
     handleChange (value) {
       this.active = value
-      this.$refs.message.info(`Update modelValue: ${value}`)
+      this.message.info(`Update value: ${value}`)
     }
   }
 }

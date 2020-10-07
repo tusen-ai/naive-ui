@@ -25,6 +25,7 @@ export default {
     align: {
       validator (value) {
         return [
+          'stretch',
           'baseline',
           'start',
           'end',

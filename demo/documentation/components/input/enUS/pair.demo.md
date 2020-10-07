@@ -9,7 +9,7 @@
   @blur="handleInputBlur"
   @focus="handleInputFocus"
   @change="handleInputChange"
-  @update:modelValue="handleInputInput"
+  @update:value="handleInputInput"
 />
 ```
 ```js

@@ -37,12 +37,12 @@ passively-activated
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 |type|`'text' \| 'password' \| 'textarea'`|`'text'`||
-|value|`string \| [string, string]`|`null`|文本输入的值。如果是 `pair` 是 `true`，`modelValue` 是一个数组|
+|value|`string \| [string, string]`|`null`|文本输入的值。如果是 `pair` 是 `true`，`value` 是一个数组|
 |on-blur|`() => any`|`undefined`||
 |on-change|`(value: string \| [string, string]) => any`|`undefined`||
 |on-clear|`() => any`|`undefined`||
 |on-focus|`() => any`|`undefined`||
-|on-update:modelValue|`(value: string \| [string, string]) => any`|`undefined`||
+|on-update:value|`(value: string \| [string, string]) => any`|`undefined`||
 
 
 ## Slots

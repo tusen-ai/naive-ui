@@ -20,13 +20,13 @@ collapse
 |expanded-keys|`Array<string>`|`undefined`|展开的子菜单标识符数组，如果设定了，菜单的展开将会进入受控状态，`default-expanded-keys` 不会生效|
 |icon-size|`number`|`20`|菜单未折叠时图标的大小|
 |indent|`number`|`32`|菜单每级的缩进|
-|model-value|`string`|`null`|菜单当前的选中值|
+|value|`string`|`null`|菜单当前的选中值|
 |mode|`'vertical' \| 'horizontal'`|`'vertical'`||
 |popover-body-style|`object \| null`|`{ padding: '2px 4px', minWidth: '180px' }`|菜单收缩时子菜单弹层的样式|
 |root-indent|`number`|`32`|菜单第一级的缩进，如果没有设定，使用 `indent` 代替|
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 |on-update:expanded-keys|`(value: string[]) => any`|`() => {}`||
-|on-update:model-value|`(value: string) => any`|`() => {}`||
+|on-update:value|`(value: string) => any`|`() => {}`||
 
 ### MenuItem Properties
 |名称|类型|说明|

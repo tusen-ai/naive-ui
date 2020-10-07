@@ -146,7 +146,7 @@ placeable 进行了大调整
     - `popover-body-style`
   - deprecate
     - `on-expanded-names-change` => `on-update:expanded-keys`
-    - `on-select` => `on-update:model-value`
+    - `on-select` => `on-update:value`
     - `expanded-names` => `expanded-keys`
     - `default-expanded-names` => `default-expanded-keys`
     - `item.name` => `item.key`
@@ -230,8 +230,8 @@ placeable 进行了大调整
 - [x] steps
 - [x] switch
   - remove
-    - `value` => `model-value`
-    - `change` => `on-update:model-value`
+    - `value` => `value`
+    - `change` => `on-update:value`
 - [x] table
 - [x] tabs
   - deprecate

@@ -2,7 +2,7 @@
 一个水平菜单
 ```html
 <n-menu
-  v-model="activeKey"
+  v-model:value="activeKey"
   mode="horizontal"
   :items="menuItems"
 />

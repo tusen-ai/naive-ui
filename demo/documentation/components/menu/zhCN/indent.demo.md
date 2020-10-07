@@ -2,7 +2,7 @@
 你可以设定菜单的 `indent` & `root-indent`。`root-indent` 只决定第一层项目的缩进。
 ```html
 <n-menu
-  v-model="activeKey"
+  v-model:value="activeKey"
   :root-indent="36"
   :indent="12"
   :items="menuItems"

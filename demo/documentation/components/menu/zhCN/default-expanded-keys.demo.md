@@ -2,11 +2,10 @@
 你可以设定 `default-expanded-keys` 让菜单工作在非受控状态下或者使用 `expanded-keys` 和 `@update:expanded-keys` 以受控的方式控制菜单。
 ```html
 <n-menu
-  v-model="activeKey"
+  v-model:value="activeKey"
   :default-expanded-keys="defaultExpandedKeys"
   :items="menuItems"
   @update:expanded-keys="handleUpdateExpandedKeys"
-  @update:model-value="handleUpdateActiveKey"
 />
 ```
 ```js
@@ -104,9 +103,6 @@ export default {
     }
   },
   methods: {
-    handleUpdateActiveKey (value) {
-      this.message.info('[onUpdate:modelValue]: ' + value)
-    },
     handleUpdateExpandedKeys (value) {
       this.message.info('[onUpdate:expandedKeys]: ' + JSON.stringify(value))
     }

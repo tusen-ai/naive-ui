@@ -60,7 +60,7 @@ export default {
       type: Array,
       default: null
     },
-    modelValue: {
+    value: {
       type: String,
       default: null
     },
@@ -87,7 +87,7 @@ export default {
       type: Function,
       default: () => {}
     },
-    'onUpdate:modelValue': {
+    'onUpdate:value': {
       type: Function,
       default: () => {}
     },
@@ -121,7 +121,7 @@ export default {
       uncontrolledExpandedKeysRef
     )
     const itemsRef = computed(() => getWrappedItems(props.items))
-    const valueRef = toRef(props, 'modelValue')
+    const valueRef = toRef(props, 'value')
     const activePathRef = computed(() => getActivePath(itemsRef.value, valueRef.value))
     const transitionDisabledRef = ref(true)
     onMounted(() => {
@@ -140,7 +140,7 @@ export default {
   },
   methods: {
     handleSelect (value) {
-      this['onUpdate:modelValue'](value)
+      this['onUpdate:value'](value)
       // deprecated
       this.onSelect(value)
     },
