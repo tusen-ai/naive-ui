@@ -1,5 +1,6 @@
-import { Fragment, h, Teleport, reactive, ref } from 'vue'
+import { Fragment, h, reactive, ref } from 'vue'
 import { createId, omit } from '../../_utils/vue'
+import { Teleport } from '../../_base'
 import NotificationContainer from './NotificationContainer.vue'
 import NotificationEnvironment from './NotificationEnvironment'
 
@@ -19,7 +20,7 @@ export default {
   props: {
     to: {
       type: [String, Object],
-      default: 'body'
+      default: undefined
     },
     scrollable: {
       type: Boolean,
@@ -70,8 +71,8 @@ export default {
     return h(Fragment, null, [
       h(Teleport, {
         to: this.to
-      }, [
-        this.notificationList.length ? h(NotificationContainer, {
+      }, {
+        default: () => this.notificationList.length ? h(NotificationContainer, {
           scrollable: this.scrollable
         }, {
           default: () => {
@@ -84,7 +85,7 @@ export default {
             )
           }
         }) : null
-      ]),
+      }),
       this.$slots.default()
     ])
   }

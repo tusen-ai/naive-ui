@@ -1,5 +1,6 @@
-import { Fragment, Teleport, h } from 'vue'
+import { Fragment, h, ref } from 'vue'
 import { useIsMounted } from '../../_utils/composition'
+import { Teleport } from '../../_base'
 import NLoadingBar from './LoadingBar.vue'
 
 export default {
@@ -17,49 +18,50 @@ export default {
   props: {
     to: {
       type: [String, Object],
-      default: 'body'
+      default: undefined
     }
   },
   setup () {
     return {
-      isMounted: useIsMounted()
+      isMounted: useIsMounted(),
+      loadingBarRef: ref(null)
     }
   },
   methods: {
     start () {
       if (this.isMounted) {
-        this.$refs.loadingBar.start()
+        this.loadingBarRef.start()
       } else {
         this.$nextTick(() => {
-          this.$refs.loadingBar.start()
+          this.loadingBarRef.start()
         })
       }
     },
     error () {
       if (this.isMounted) {
-        this.$refs.loadingBar.error()
+        this.loadingBarRef.error()
       } else {
         this.$nextTick(() => {
-          this.$refs.loadingBar.error()
+          this.loadingBarRef.error()
         })
       }
     },
     finish () {
       if (this.isMounted) {
-        this.$refs.loadingBar.finish()
+        this.loadingBarRef.finish()
       } else {
         this.$nextTick(() => {
-          this.$refs.loadingBar.finish()
+          this.loadingBarRef.finish()
         })
       }
     },
     update (options) {
       const { percent } = options
       if (this.isMounted) {
-        this.$refs.loadingBar.update(percent)
+        this.loadingBarRef.update(percent)
       } else {
         this.$nextTick(() => {
-          this.$refs.loadingBar.update(percent)
+          this.loadingBarRef.update(percent)
         })
       }
     }
@@ -68,11 +70,11 @@ export default {
     return h(Fragment, null, [
       h(Teleport, {
         to: this.to
-      }, [
-        h(NLoadingBar, {
-          ref: 'loadingBar'
+      }, {
+        default: () => h(NLoadingBar, {
+          ref: 'loadingBarRef'
         })
-      ]),
+      }),
       this.$slots.default()
     ])
   }

@@ -1,5 +1,6 @@
-import { Fragment, Teleport, ref, h, reactive } from 'vue'
+import { Fragment, ref, h, reactive } from 'vue'
 import { createId, omit } from '../../_utils/vue'
+import { Teleport } from '../../_base'
 import MessageEnvironment from './MessageEnvironment.js'
 
 export default {
@@ -7,7 +8,7 @@ export default {
   props: {
     to: {
       type: [String, Object],
-      default: 'body'
+      default: undefined
     }
   },
   provide () {

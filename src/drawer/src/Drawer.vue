@@ -109,7 +109,7 @@ export default {
     },
     to: {
       type: [String, Object],
-      default: 'body'
+      default: undefined
     },
     displayDirective: {
       validator (value) {

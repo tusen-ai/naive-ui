@@ -88,7 +88,7 @@ export default {
     },
     to: {
       type: [String, Object],
-      default: 'body'
+      default: undefined
     },
     visibilityHeight: {
       type: Number,

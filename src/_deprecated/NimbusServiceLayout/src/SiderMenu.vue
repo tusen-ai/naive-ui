@@ -35,8 +35,6 @@ export default {
           children: item.childItems ? this.createItems(item.childItems) : undefined,
           group: item.group,
           onClick: !(item.group && item.childItems) ? () => {
-            console.log('item click')
-            console.log(this.$router, item.path)
             if (this.$router && item.path) {
               Promise.resolve(
                 this.$router.push(item.path)

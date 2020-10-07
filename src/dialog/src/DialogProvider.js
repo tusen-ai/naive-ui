@@ -7,7 +7,7 @@ export default {
   props: {
     to: {
       type: [String, Object],
-      default: 'body'
+      default: undefined
     }
   },
   provide () {
