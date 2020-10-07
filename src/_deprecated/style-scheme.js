@@ -77,3 +77,8 @@ export const darkStyleScheme = {
   'tableHeaderOverlayBackgroundColor': 'rgba(255, 255, 255, .06)',
   'inputOverlayBackgroundColor': 'rgba(255, 255, 255, .1)'
 }
+
+export default {
+  light: lightStyleScheme,
+  dark: darkStyleScheme
+}

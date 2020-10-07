@@ -4,15 +4,10 @@ import {
   withDirectives,
   Transition
 } from 'vue'
-import clickoutside from '../../_directives/clickoutside'
-import mousemoveoutside from '../../_directives/mousemoveoutside'
-import zindexable from '../../_directives/zindexable'
-import themeable from '../../_mixins/themeable'
-import withapp from '../../_mixins/withapp'
-import placeable from '../../_mixins/placeable'
-import usecssr from '../../_mixins/usecssr'
+import { clickoutside, mousemoveoutside, zindexable } from '../../_directives'
+import { configurable, themeable, placeable, usecssr } from '../../_mixins'
 import styles from './styles'
-import formatLength from '../../_utils/css/formatLength'
+import { formatLength } from '../../_utils/css'
 import { getSlot } from '../../_utils/vue'
 
 export default {
@@ -96,7 +91,7 @@ export default {
     }
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     placeable,
     usecssr(styles)

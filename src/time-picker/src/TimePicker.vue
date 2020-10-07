@@ -186,13 +186,8 @@ import NLazyTeleport from '../../_base/lazy-teleport'
 import NScrollbar from '../../scrollbar'
 import NInput from '../../input'
 import NIcon from '../../icon'
-import placeable from '../../_mixins/placeable'
-import clickoutside from '../../_directives/clickoutside'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import locale from '../../_mixins/locale'
-import asformitem from '../../_mixins/asformitem'
-import zindexable from '../../_directives/zindexable'
+import { configurable, themeable, locale, usecssr, asformitem, placeable } from '../../_mixins'
+import { zindexable, clickoutside } from '../../_directives'
 import isValid from 'date-fns/isValid'
 import startOfSecond from 'date-fns/startOfSecond'
 import startOfMinute from 'date-fns/startOfMinute'
@@ -211,7 +206,6 @@ import keyboardDelegate from '../../_utils/delegate/keyboardDelegate'
 import { KEY_CODE } from '../../_utils/event/keyCode'
 import NBaseFocusDetector from '../../_base/focus-detector'
 import TimeIcon from '../../_icons/time-outline.vue'
-import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
 import { useIsMounted } from '../../_utils/composition'
 import { warn } from '../../_utils/naive/warn'
@@ -242,7 +236,7 @@ export default {
     zindexable
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     placeable,
     locale('TimePicker'),

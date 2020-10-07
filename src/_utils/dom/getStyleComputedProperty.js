@@ -1,7 +1,7 @@
 /**
  * Get CSS computed property of the given element
  * @method
- * @param {Eement} element
+ * @param {Element} element
  * @param {String} property
  */
 export default function getStyleComputedProperty (element, property) {

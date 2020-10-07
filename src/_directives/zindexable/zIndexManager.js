@@ -1,5 +1,4 @@
-import { warn } from '../naive/warn'
-import { debug } from '../naive/debug'
+import { warn, debug } from '../../_utils/naive'
 
 class ZIndexManager {
   constructor () {

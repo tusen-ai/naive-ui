@@ -1,13 +1,15 @@
 import { h } from 'vue'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import styleScheme from '../../_utils/naive/styleScheme'
+import {
+  configurable,
+  themeable
+} from '../../_mixins'
+import styleScheme from '../../_deprecated/style-scheme'
 import { warn } from '../../_utils/naive/warn'
 
 export default {
   name: 'Element',
   mixins: [
-    withapp,
+    configurable,
     themeable
   ],
   props: {

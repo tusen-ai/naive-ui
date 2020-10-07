@@ -1,6 +1,8 @@
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import styleScheme from '../../_utils/naive/styleScheme'
+import {
+  configurable,
+  themeable
+} from '../../_mixins'
+import styleScheme from '../../_deprecated/style-scheme'
 
 export default {
   name: 'ConfigConsumer',
@@ -19,7 +21,7 @@ export default {
     }
   },
   mixins: [
-    withapp,
+    configurable,
     themeable
   ],
   watch: {
@@ -38,10 +40,11 @@ export default {
   },
   render () {
     const defaultSlot = this.$slots.default
+    const { NConfigProvider } = this
     return defaultSlot ? defaultSlot({
       theme: this.mergedTheme,
-      language: this.NConfigProvider ? this.NConfigProvider.inheritedLanguage : null,
-      namespace: this.NConfigProvider ? this.NConfigProvider.inheritedNamespace : null,
+      language: NConfigProvider ? NConfigProvider.inheritedLanguage : null,
+      namespace: NConfigProvider ? NConfigProvider.inheritedNamespace : null,
       themeEnvironment: this.mergedThemeEnvironment,
       styleScheme: styleScheme[this.mergedTheme || this.$naive.fallbackTheme]
     }) : []
