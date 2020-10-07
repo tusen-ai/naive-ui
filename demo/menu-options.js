@@ -1,3 +1,5 @@
+import { h } from 'vue'
+
 const env = process.env.NODE_ENV
 
 const appendCounts = item => {
@@ -9,7 +11,7 @@ const appendCounts = item => {
     item.childItems.forEach(appendCounts)
     item.count = item.childItems.reduce((sum, item) => sum + item.count, 0)
     if (!item.group) {
-      item.title = h => {
+      item.title = () => {
         return h('n-config-consumer', {
           props: {
             abstract: true
@@ -47,8 +49,7 @@ const appendDebugDemos = (item, mode) => {
 }
 
 export default function (instance) {
-  // TODO fix
-  const { lang = 'zh-CN', theme = 'light' } = {}
+  const { lang, theme } = instance
   if (lang === 'zh-CN') {
     return [
       {

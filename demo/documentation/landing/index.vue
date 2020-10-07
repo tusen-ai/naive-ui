@@ -125,7 +125,7 @@ export default {
 }
 
 .naive-title {
-  font-family: 'Metropolis';
+  font-family: Metropolis, sans-serif;
   font-size: 80px !important;
   margin-bottom: 18px !important;
 }

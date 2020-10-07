@@ -248,7 +248,7 @@ export default {
   padding-left: 32px;
 }
 
-.nav-menu::v-deep(.n-menu-item) {
+.nav-menu ::v-deep(.n-menu-item) {
   height: 63px !important;
 }
 
