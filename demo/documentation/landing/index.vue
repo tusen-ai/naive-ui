@@ -1,22 +1,3 @@
-<i18n>
-{
-  "zh-CN": {
-    "start": "开始使用",
-    "intro1": "一个 Vue UI 框架",
-    "intro2": "在意样式，带主题，比较完整，不算太慢",
-    "intro3": "有点意思",
-    "intro4": "换个主题"
-  },
-  "en-US": {
-    "start": "Get Started",
-    "intro1": "A Vue UI Framework",
-    "intro2": "Caring About Styles, Themed, Batteries Included, Not Rather Slow",
-    "intro3": "Interesting Somehow",
-    "intro4": "Change Theme"
-  }
-}
-</i18n>
-
 <template>
   <n-config-consumer>
     <template v-slot="{ theme }">
@@ -37,20 +18,20 @@
             >Na{{ hover ? 'ï' : 'i' }}ve UI</span>
           </n-h1>
           <n-p style="font-size: 16px; margin-bottom: 0;">
-            {{ ("intro1") }}
+            {{ t("intro1") }}
           </n-p>
           <n-p style="font-size: 16px; margin-bottom: 4px; margin-top: 4px; font-weight: 500;">
-            {{ ("intro2") }}
+            {{ t("intro2") }}
           </n-p>
           <n-p style="font-size: 16px; margin-top: 0;">
-            {{ ("intro3") }}
+            {{ t("intro3") }}
           </n-p>
           <div>
             <n-button type="default" size="large" style="margin-right: 12px;" @click="handleThemeChangeClick">
-              {{ ("intro4") }}
+              {{ t("intro4") }}
             </n-button>
             <n-button type="primary" :ghost="theme === 'dark'" size="large" @click="handleStartClick">
-              {{ ("start") }}
+              {{ t("start") }}
             </n-button>
           </div>
         </div>
@@ -63,6 +44,7 @@
 import LandingFooter from './Footer'
 import leftImage from './Left'
 import rightImage from './Right'
+import { i18n } from '../../util-compositions'
 
 export default {
   inject: {
@@ -74,6 +56,26 @@ export default {
     LandingFooter,
     leftImage,
     rightImage
+  },
+  setup () {
+    return {
+      ...(i18n({
+        'zh-CN': {
+          'start': '开始使用',
+          'intro1': '一个 Vue UI 框架',
+          'intro2': '在意样式，带主题，比较完整，不算太慢',
+          'intro3': '有点意思',
+          'intro4': '换个主题'
+        },
+        'en-US': {
+          'start': 'Get Started',
+          'intro1': 'A Vue UI Framework',
+          'intro2': 'Caring About Styles, Themed, Batteries Included, Not Rather Slow',
+          'intro3': 'Interesting Somehow',
+          'intro4': 'Change Theme'
+        }
+      }))
+    }
   },
   data () {
     return {

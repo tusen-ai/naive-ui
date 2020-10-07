@@ -1,28 +1,3 @@
-<i18n>
-{
-  "zh-CN": {
-    "dark": "深色",
-    "light": "浅色",
-    "searchPlaceholder": "搜索",
-    "home": "首页",
-    "doc": "文档",
-    "common": "常规",
-    "debug": "调试",
-    "alreadyHome": "别点了，你已经在首页了"
-  },
-  "en-US": {
-    "dark": "Dark",
-    "light": "Light",
-    "searchPlaceholder": "Search",
-    "home": "Home",
-    "doc": "Documentation",
-    "common": "Common",
-    "debug": "Debug",
-    "alreadyHome": "You've already been in home page. No clicking."
-  }
-}
-</i18n>
-
 <template>
   <n-layout-header
     bordered
@@ -50,7 +25,7 @@
           v-model:value="searchInputValue"
           style="width: 216px;"
           :z-index="zIndex && zIndex + 1"
-          :placeholder="'searchPlaceholder'"
+          :placeholder="t('searchPlaceholder')"
           :options="searchOptions"
           clear-after-select
           blur-after-select
@@ -85,8 +60,9 @@
 </template>
 
 <script>
+import { computed, readonly, ref } from 'vue'
 import version from '../src/version'
-import { useSiteTheme, useSiteLang, displayModeRef, envRef } from './util-compositions'
+import { useSiteTheme, useSiteLang, displayModeRef, envRef, i18n } from './util-compositions'
 
 function match (pattern, string) {
   if (!pattern.length) return true
@@ -105,28 +81,61 @@ export default {
     }
   },
   setup () {
+    const { t } = i18n({
+      'zh-CN': {
+        'dark': '深色',
+        'light': '浅色',
+        'searchPlaceholder': '搜索',
+        'home': '首页',
+        'doc': '文档',
+        'common': '常规',
+        'debug': '调试',
+        'alreadyHome': '别点了，你已经在首页了'
+      },
+      'en-US': {
+        'dark': 'Dark',
+        'light': 'Light',
+        'searchPlaceholder': 'Search',
+        'home': 'Home',
+        'doc': 'Documentation',
+        'common': 'Common',
+        'debug': 'Debug',
+        'alreadyHome': "You've already been in home page. No clicking."
+      }
+    })
+    const menuItemsRef = computed(() => {
+      return [
+        {
+          name: 'home',
+          title: t('home')
+        },
+        {
+          name: 'doc',
+          title: t('doc')
+        }
+      ]
+    })
+    const themeOptionsRef = computed(() => ({
+      dark: {
+        label: t('light'),
+        next: 'light'
+      },
+      light: {
+        label: t('dark'),
+        next: 'dark'
+      }
+    }))
     return {
+      t,
+      searchInputValue: ref(''),
+      version,
       env: envRef,
       displayMode: displayModeRef,
       lang: useSiteLang(),
-      theme: useSiteTheme()
-    }
-  },
-  data () {
-    return {
-      searchInputValue: '',
-      version,
-      themeOptions: {
-        dark: {
-          label: 'light',
-          next: 'light'
-        },
-        light: {
-          label: 'dark',
-          next: 'dark'
-        }
-      },
-      langOptions: {
+      theme: useSiteTheme(),
+      menuItems: menuItemsRef,
+      themeOptions: themeOptionsRef,
+      langOptions: readonly({
         'zh-CN': {
           label: 'English',
           next: 'en-US'
@@ -135,8 +144,8 @@ export default {
           label: '中文',
           next: 'zh-CN'
         }
-      },
-      modeOptions: {
+      }),
+      modeOptions: readonly({
         debug: {
           label: 'Production',
           next: 'common'
@@ -145,17 +154,7 @@ export default {
           label: 'Debug',
           next: 'debug'
         }
-      },
-      menuItems: [
-        {
-          name: 'home',
-          title: 'home'
-        },
-        {
-          name: 'doc',
-          title: 'doc'
-        }
-      ]
+      })
     }
   },
   computed: {
@@ -188,7 +187,7 @@ export default {
   methods: {
     handleLogoClick () {
       if (/^(\/[^/]+){2}$/.test(this.$route.path)) {
-        this.message.info(this.$t('alreadyHome'))
+        this.message.info(this.t('alreadyHome'))
         return
       }
       this.$router.push(
@@ -249,10 +248,8 @@ export default {
   padding-left: 32px;
 }
 
-.nav-menu {
-  ::v-deep .n-menu-item {
-    height: 63px !important;
-  }
+.nav-menu::v-deep(.n-menu-item) {
+  height: 63px !important;
 }
 
 .nav-picker {

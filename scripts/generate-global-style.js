@@ -21,7 +21,8 @@ function generateCssr (literal) {
     __dirname,
     '..',
     'src',
-    '_global-style/',
+    '_styles/',
+    'global-style/',
     'vue-virtual-scroller.cssr.js'
   ), generateCssr(cssLiteral))
 })()

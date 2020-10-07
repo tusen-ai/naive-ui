@@ -67,13 +67,13 @@ export default {
 ```
 
 ```css
-/deep/ .too-old td {
+::v-deep(.too-old td) {
   color: rgba(255, 0, 0, .75) !important;
 }
-/deep/ .age {
+::v-deep(.age) {
   color: rgba(0, 128, 0, .75) !important;
 }
-/deep/ .too-old .age {
+::v-deep(.too-old .age) {
   color: rgba(0, 0, 128, .75) !important;
 }
 ```

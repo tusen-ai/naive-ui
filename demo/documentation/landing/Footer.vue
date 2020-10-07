@@ -2,7 +2,7 @@
   <div class="footer">
     <n-divider v-if="showDivider" style="margin: 0 0 16px 0;" />
     <n-text depth="tertiary">
-      For Preview Only
+      Made by Tusimple
     </n-text>
   </div>
 </template>

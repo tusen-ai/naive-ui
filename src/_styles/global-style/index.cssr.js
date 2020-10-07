@@ -1,5 +1,4 @@
 import { c, cB } from '../../_utils/cssr'
-// import virtualScrollerStyle from './vue-virtual-scroller.cssr'
 import commonVariables from '../../styles/base/_common'
 
 export default c([

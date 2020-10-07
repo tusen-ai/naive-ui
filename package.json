@@ -26,7 +26,7 @@
     "init-cssr": "node scripts/create-cssr-scaffold.js",
     "generate": "npm run generate-version && npm run generate-global-style",
     "generate-version": "node scripts/generate-version",
-    "generate-global-style": "node scripts/generate-global-style"
+    "generate-global-style": ""
   },
   "author": "lecong.zhang",
   "license": "MIT",
