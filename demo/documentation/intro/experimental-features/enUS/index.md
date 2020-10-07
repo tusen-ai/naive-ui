@@ -5,9 +5,6 @@
 </n-alert>
 
 ## Customize Theme
-It is a experimental feature.
-
-Let's continue, override the light theme on naive-ui instance.
 
 ```js
 // ...
@@ -25,4 +22,16 @@ naive.styles.light.override({
 Vue.use(naive)
 ```
 
-Done.
+For specific variables, please see source code.
+
+### Use Tusimple Theme
+
+```js
+// ...
+import tusimpleTheme from 'naive-ui/themes/tusimple'
+import naive from 'naive-ui'
+
+naive.use(tusimpleTheme)
+
+Vue.use(naive)
+```

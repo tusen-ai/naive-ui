@@ -1,10 +1,11 @@
 # CHANGELOG
-## PENDING
+## 1.6.0
 ### Fixes
 - Fix the problem that `n-auto-complete`'s menu can't be closed when use `textarea` as input.
 - Fix the problem that nested `n-icon` is not flattened.
 - Fix the problem that `n-date-picker` has no year in panel when type is `date` and `datetime`.
 ### Features
+- `n-button` add `dashed` props
 - Add `n-space` component.
 - Make `n-drawer` content scrollable.
 ### Localization

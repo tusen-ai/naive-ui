@@ -6,8 +6,12 @@ import { composite } from '../src/_utils/color'
 function tusimpleTheme (naive) {
   naive.avoidHollowOut = true
   naive.styles.light.override({
+    base: {
+      borderRadius: '16px'
+    },
     derived: {
       borderColor: '#999',
+      divider: '#EBEDF0',
       primaryColor: '#4FB233',
       primaryColorHover: composite('#4FB233', 'rgba(255, 255, 255, .2)'),
       primaryColorPressed: composite('#4FB233', 'rgba(0, 0, 0, .15)'),
@@ -23,7 +27,8 @@ function tusimpleTheme (naive) {
       warningColor: '#FFAC26',
       warningColorHover: composite('#FFAC26', 'rgba(255, 255, 255, .2)'),
       warningColorPressed: composite('#FFAC26', 'rgba(0, 0, 0, .05)'),
-      textColorSecondary: '#333'
+      textColorSecondary: '#333',
+      tableHeaderColorOverlay: '#EBEDF0'
     }
   })
   naive.styles.light.Button.override({
@@ -86,6 +91,9 @@ function tusimpleTheme (naive) {
     iconMarginSmall: '8px',
     iconMarginMedium: '8px',
     iconMarginLarge: '12px'
+  })
+  naive.styles.light.Tag.override({
+    borderRadius: '16px'
   })
 }
 

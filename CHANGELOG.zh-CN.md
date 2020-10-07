@@ -1,10 +1,11 @@
 # CHANGELOG
-## PENDING
+## 1.6.0
 ### Fixes
 - 修正了 `n-auto-complete` 使用 `textarea` 作为输入元素时菜单无法关闭的问题
 - 修正了嵌套 `n-icon` 没有被打平的问题
 - 修正了 `n-date-picker` 在类型为 `date` 和 `datetime` 时面板不显示年的问题
 ### Features
+- `n-button` 增加 `dashed` 属性
 - 增加 `n-space` 组件
 - `n-drawer` 内容可滚动
 ### Localization

@@ -6,8 +6,6 @@
 
 ## 定制主题
 
-这是一个试验性特性。
-
 ```js
 // ...
 
@@ -16,12 +14,24 @@ import naive from 'naive-ui'
 naive.styles.light.override({
   derived: {
     primaryColor: 'rgb(255, 0, 0)',
-    primaryHoverColor: 'rgb(0, 255, 0)',
-    primaryActiveColor: 'rgb(0, 0, 255)'
+    primaryColorHover: 'rgb(0, 255, 0)',
+    primaryColorActive: 'rgb(0, 0, 255)'
   }
 })
 
 Vue.use(naive)
 ```
 
-好了。
+具体可使用变量请参考源码。
+
+### 使用图森主题
+
+```js
+// ...
+import tusimpleTheme from 'naive-ui/theme/tusimple'
+import naive from 'naive-ui'
+
+naive.use(tusimpleTheme)
+
+Vue.use(naive)
+```
