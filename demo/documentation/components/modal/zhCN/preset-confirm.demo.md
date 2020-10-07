@@ -20,6 +20,7 @@
 ```
 ```js
 export default {
+  inject: ['message'],
   data () {
     return {
       modalActive: false,
@@ -27,11 +28,11 @@ export default {
   },
   methods: {
     cancelCallback () {
-      this.$NMessage.success('算了')
+      this.message.success('算了')
       this.modalActive = false
     },
     submitCallback () {
-      this.$NMessage.success('确认')
+      this.message.success('确认')
       this.modalActive = false
     }
   }

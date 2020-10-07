@@ -34,6 +34,7 @@
 ```
 ```js
 export default {
+  inject: ['message'],
   data() {
     return {
       value: null,
@@ -42,19 +43,19 @@ export default {
   },
   methods: {
     handleFocus(e) {
-      this.$NMessage.info('[Event focus]')
+      this.message.info('[Event focus]')
     },
     handleBlur(e) {
-      this.$NMessage.info('[Event blur]')
+      this.message.info('[Event blur]')
     },
     handleChange(v) {
-      this.$NMessage.info('[Event change]: ' + v)
+      this.message.info('[Event change]: ' + v)
     },
     handleKeyUp(e) {
-      this.$NMessage.info('[Event keyup]')
+      this.message.info('[Event keyup]')
     },
     handleInput(v) {
-      this.$NMessage.info('[Event input]: ' + v)
+      this.message.info('[Event input]: ' + v)
     }
   }
 }

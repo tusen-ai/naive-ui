@@ -66,10 +66,11 @@ const options = [
 ]
 
 export default {
+  inject: ['message'],
   methods: {
     handleSelect (name) {
       this.showDropdown = false
-      this.$NMessage.info(name)
+      this.message.info(name)
     },
     handleBlur () {
       this.showDropdown = false

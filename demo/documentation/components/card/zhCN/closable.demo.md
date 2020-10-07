@@ -7,9 +7,10 @@
 ```
 ```js
 export default {
+  inject: ['message'],
   methods: {
     handleClose () {
-      this.$NMessage.info('卡片关闭')
+      this.message.info('卡片关闭')
     }
   }
 }

@@ -14,6 +14,7 @@
 ```
 ```js
 export default {
+  inject: ['message'],
   data () {
     return {
       placeholder: ['从', '到'],
@@ -22,16 +23,16 @@ export default {
   },
   methods: {
     handleInputBlur () {
-      this.$NMessage.info('输入成对值：Blur')
+      this.message.info('输入成对值：Blur')
     },
     handleInputFocus () {
-      this.$NMessage.info('输入成对值：Focus')
+      this.message.info('输入成对值：Focus')
     },
     handleInputInput () {
-      this.$NMessage.info('输入成对值：Input')
+      this.message.info('输入成对值：Input')
     },
     handleInputChange () {
-      this.$NMessage.info('输入成对值：Change')
+      this.message.info('输入成对值：Change')
     }
   }
 }

@@ -16,6 +16,7 @@
 
 ```js
 export default {
+  inject: ['message'],
   data () {
     return {
       page: 2,
@@ -26,7 +27,7 @@ export default {
   methods: {
     handlePageSizeChange (pageSize) {
       this.pageSize = pageSize
-      this.$NMessage.info(`Page size is set to ${pageSize}`)
+      this.message.info(`Page size is set to ${pageSize}`)
     }
   }
 }

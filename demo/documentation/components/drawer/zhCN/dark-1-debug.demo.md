@@ -110,6 +110,7 @@
 
 ```js
 export default {
+  inject: ['message'],
   data () {
     return {
       modalActive: false,
@@ -237,10 +238,10 @@ export default {
       e.preventDefault()
       this.$refs.form.validate(errors => {
         if (!errors) {
-          this.$NMessage.success('验证成功')
+          this.message.success('验证成功')
         } else {
           console.log(errors)
-          this.$NMessage.error('验证失败')
+          this.message.error('验证失败')
         }
       })
     }

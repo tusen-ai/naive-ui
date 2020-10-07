@@ -43,9 +43,10 @@
 ```
 ```js
 export default {
+  inject: ['message'],
   methods: {
     handleClose () {
-      this.$NMessage.info('tag close')
+      this.message.info('tag close')
     }
   },
   data () {

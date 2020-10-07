@@ -17,6 +17,7 @@
 ```
 ```js
 export default {
+  inject: ['message'],
   data () {
     return {
       selectedValue: 'song1',
@@ -75,7 +76,7 @@ export default {
   },
   methods: {
     handleChange (item) {
-      this.$NMessage.info('value: ' + JSON.stringify(item))
+      this.message.info('value: ' + JSON.stringify(item))
     }
   }
 }

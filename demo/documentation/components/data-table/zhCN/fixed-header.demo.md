@@ -37,7 +37,8 @@ const data = Array.apply(null, { length: 46 }).map((_, index) => ({
 
 
 export default {
-  data() {
+  inject: ['message'],
+  data () {
     return {
       data,
       columns,
@@ -48,7 +49,7 @@ export default {
   },
   methods: {
     sendMail (rowData) {
-      this.$NMessage.info('send mail to ' + rowData.name)
+      this.message.info('send mail to ' + rowData.name)
     }
   }
 }

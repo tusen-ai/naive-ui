@@ -48,6 +48,7 @@
 ```
 ```js
 export default {
+  inject: ['message'],
   data() {
     return {
       showPopover: false
@@ -55,10 +56,10 @@ export default {
   },
   methods: {
     handleShow() {
-      this.$NMessage.success("show tooltip");
+      this.message.success("show tooltip");
     },
     handleHide() {
-      this.$NMessage.success("hide tooltip");
+      this.message.success("hide tooltip");
     }
   }
 };

@@ -58,6 +58,7 @@ const data = [
 ]
 
 export default {
+  inject: ['message'],
   data () {
     return {
       data,
@@ -67,7 +68,7 @@ export default {
   },
   methods: {
     sendMail(rowData) {
-      this.$NMessage.info('Send mail to ' + rowData.name)
+      this.message.info('Send mail to ' + rowData.name)
     }
   }
 }

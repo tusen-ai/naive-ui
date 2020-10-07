@@ -41,6 +41,7 @@
 ```
 ```js
 export default {
+  inject: ['message'],
   data () {
     return {
       formValue: {
@@ -73,7 +74,7 @@ export default {
             try {
               throw Error('Simulated Exception')
             } catch (err) {
-              this.$NMessage.info('手动处理异常，不会完成验证')
+              this.message.info('手动处理异常，不会完成验证')
               return true
             }
           }
@@ -135,7 +136,7 @@ export default {
                 }, 1000)
               }
             ).catch(error => {
-              this.$NMessage.info('手动处理异常，不会完成验证')
+              this.message.info('手动处理异常，不会完成验证')
               return true
             })
           }
@@ -149,13 +150,13 @@ export default {
       this.$refs.form
         .validate(errors => {
           if (!errors) {
-            this.$NMessage.success('Valid')
+            this.message.success('Valid')
           } else {
-            this.$NMessage.error('Invalid')
+            this.message.error('Invalid')
             console.log('errors', errors)
           }
         }).catch(error => {
-          this.$NMessage.error('验证出现错误')
+          this.message.error('验证出现错误')
           console.log('验证出现错误', error)
         })
     }

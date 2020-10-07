@@ -22,6 +22,7 @@
 ```
 ```js
 export default {
+  inject: ['message'],
   data () {
     return {
       showModal: false,
@@ -29,11 +30,11 @@ export default {
   },
   methods: {
     onNegativeClick () {
-      this.$NMessage.success('算了')
+      this.message.success('算了')
       this.showModal = false
     },
     onPositiveClick () {
-      this.$NMessage.success('确认')
+      this.message.success('确认')
       this.showModal = false
     }
   }
