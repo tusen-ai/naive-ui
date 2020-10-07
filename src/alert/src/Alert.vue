@@ -1,5 +1,5 @@
 <template>
-  <fade-in-height-expand-transition @after-leave="handleAfterLeave">
+  <n-fade-in-expand-transition @after-leave="handleAfterLeave">
     <div
       v-if="visible"
       class="n-alert"
@@ -64,12 +64,12 @@
         </div>
       </div>
     </div>
-  </fade-in-height-expand-transition>
+  </n-fade-in-expand-transition>
 </template>
 
 <script>
 import NIcon from '../../icon'
-import FadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
+import NFadeInExpandTransition from '../../_transition/FadeInExpandTransition'
 import {
   configurable,
   themeable,
@@ -89,7 +89,7 @@ export default {
   name: 'Alert',
   components: {
     NIcon,
-    FadeInHeightExpandTransition,
+    NFadeInExpandTransition,
     SuccessIcon,
     WarningIcon,
     InfoIcon,

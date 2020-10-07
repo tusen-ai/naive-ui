@@ -1,36 +1,32 @@
-import { h, TransitionGroup } from 'vue'
+import { h, Transition, TransitionGroup } from 'vue'
 
 export default {
-  name: 'FadeInExpandTransitionGroup',
+  name: 'FadeInExpandTransition',
   props: {
     appear: {
       type: Boolean,
       default: false
     },
+    group: {
+      type: Boolean,
+      default: false
+    },
     mode: {
-      validator (value) {
-        return ['width', 'height'].includes(value)
-      },
-      default: 'height'
+      type: String,
+      default: undefined
     },
     onAfterLeave: {
       type: Function,
       default: undefined
     },
-    // deprecated
     width: {
       type: Boolean,
       default: false
     }
   },
-  computed: {
-    compitableMode () {
-      return this.width ? 'width' : this.mode
-    }
-  },
   methods: {
     handleBeforeLeave (el) {
-      if (this.compitableMode === 'width') {
+      if (this.width) {
         el.style.maxWidth = el.offsetWidth + 'px'
       } else {
         el.style.maxHeight = el.offsetHeight + 'px'
@@ -38,7 +34,7 @@ export default {
       void el.offsetWidth
     },
     handleLeave (el) {
-      if (this.compitableMode === 'width') {
+      if (this.width) {
         el.style.maxWidth = 0
       } else {
         el.style.maxHeight = 0
@@ -46,7 +42,7 @@ export default {
       void el.offsetWidth
     },
     handleAfterLeave (el) {
-      if (this.compitableMode === 'width') {
+      if (this.width) {
         el.style.maxWidth = null
       } else {
         el.style.maxHeight = null
@@ -58,7 +54,7 @@ export default {
     },
     handleEnter (el) {
       el.style.transition = 'none'
-      if (this.compitableMode === 'width') {
+      if (this.width) {
         const memorizedWidth = el.offsetWidth
         el.style.maxWidth = 0
         void el.offsetWidth
@@ -74,7 +70,7 @@ export default {
       void el.offsetWidth
     },
     handleAfterEnter (el) {
-      if (this.compitableMode === 'width') {
+      if (this.width) {
         el.style.maxWidth = null
       } else {
         el.style.maxHeight = null
@@ -82,10 +78,12 @@ export default {
     }
   },
   render () {
-    return h(TransitionGroup, {
-      name: this.compitableMode === 'width'
+    const type = this.group ? TransitionGroup : Transition
+    return h(type, {
+      name: this.width
         ? 'n-fade-in-width-expand-transition'
         : 'n-fade-in-height-expand-transition',
+      mode: this.mode,
       appear: this.appear,
       onEnter: this.handleEnter,
       onAfterEnter: this.handleAfterEnter,

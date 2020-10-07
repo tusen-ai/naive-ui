@@ -14,7 +14,7 @@ import { h, resolveComponent } from 'vue'
 const createColumns = instance => {
   return [
     {
-      title: 'Name111',
+      title: 'Name',
       key: 'name',
       width: '15%'
     },

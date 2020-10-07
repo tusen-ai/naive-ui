@@ -54,7 +54,7 @@ export default create({
         boxShadowDisabled: 'inset 0 0 0 1px transparent'
       },
       warning: {
-        borderMaskColor: 'transparent',
+        borderMaskColor: warningColor,
         borderMaskColorHover: warningColorHover,
         colorFocus: changeColor(warningColor, { alpha: 0.1 }),
         borderMaskColorFocus: warningColorHover,
@@ -62,7 +62,7 @@ export default create({
         caretColor: warningColor
       },
       error: {
-        borderMaskColor: 'transparent',
+        borderMaskColor: errorColor,
         borderMaskColorHover: errorColorHover,
         colorFocus: changeColor(errorColor, { alpha: 0.1 }),
         borderMaskColorFocus: errorColorHover,

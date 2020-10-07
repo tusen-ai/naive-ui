@@ -31,7 +31,7 @@
     >
       <slot />
     </div>
-    <n-fade-in-height-expand-transition width>
+    <n-fade-in-expand-transition width>
       <div
         v-if="(hasIcon || loading)"
         class="n-button__icon"
@@ -55,7 +55,7 @@
           </n-icon>
         </n-icon-switch-transition>
       </div>
-    </n-fade-in-height-expand-transition>
+    </n-fade-in-expand-transition>
     <div
       v-if="!circle && $slots.default && !iconOnRight"
       class="n-button__content"
@@ -73,7 +73,7 @@ import {
   themeable,
   usecssr
 } from '../../_mixins'
-import NFadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
+import NFadeInExpandTransition from '../../_transition/FadeInExpandTransition'
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 import NBaseLoading from '../../_base/loading'
 import NBaseWave from '../../_base/wave/index.js'
@@ -89,7 +89,7 @@ export default {
     NBaseWave,
     NIcon,
     NIconSwitchTransition,
-    NFadeInHeightExpandTransition
+    NFadeInExpandTransition
   },
   inject: {
     NButtonGroup: {

@@ -1,5 +1,5 @@
 import { h, withDirectives, vShow, ref } from 'vue'
-import FadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
+import NFadeInExpandTransition from '../../_transition/FadeInExpandTransition'
 import NPopover from '../../popover/src/Popover'
 import NMenuItemContent from './MenuItemContent.vue'
 import menuChildMixin from './menu-child-mixin'
@@ -119,7 +119,7 @@ export default {
       })
     }
     const createSubmenuChildren = (insidePopover = false) => {
-      return h(FadeInHeightExpandTransition, null, {
+      return h(NFadeInExpandTransition, null, {
         default: () => {
           const {
             children,

@@ -37,27 +37,57 @@
         class="n-form-item-feedback-wrapper"
       >
         <transition
-          name="n-form-item-feedback-transition"
+          name="n-fade-down-transition"
+          :mode="mergedValidationStatus ? 'out-in' : undefined"
         >
-          <div
-            v-if="feedback !== undefined && feedback !== null"
-            class="n-form-item-feedback"
-          >
-            {{ feedback }}
-          </div>
-          <div v-else-if="explains.length" class="n-form-item-feedback">
-            <span
-              v-for="(explain, i) in explains"
-              :key="i"
-            >{{ explain }}<br
-              v-if="i + 1 !== explains.length"
-            ></span>
-          </div>
+          <template v-if="hasFeedback">
+            <div
+              v-if="mergedValidationStatus === 'warning'"
+              key="controlled-warning"
+              class="n-form-item-feedback n-form-item-feedback--warning"
+            >
+              <feedbacks
+                :explains="explains"
+                :feedback="feedback"
+              />
+            </div>
+            <div
+              v-else-if="mergedValidationStatus === 'error'"
+              key="controlled-error"
+              class="n-form-item-feedback n-form-item-feedback--error"
+            >
+              <feedbacks
+                :explains="explains"
+                :feedback="feedback"
+              />
+            </div>
+            <div
+              v-else-if="mergedValidationStatus === 'success'"
+              key="controlled-success"
+              class="n-form-item-feedback n-form-item-feedback--success"
+            >
+              <feedbacks
+                :explains="explains"
+                :feedback="feedback"
+              />
+            </div>
+            <div
+              v-else
+              key="controlled-default"
+              class="n-form-item-feedback"
+            >
+              <feedbacks
+                :explains="explains"
+                :feedback="feedback"
+              />
+            </div>
+          </template>
         </transition>
       </div>
     </div>
   </div>
 </template>
+
 <script>
 import Schema from 'async-validator'
 import get from 'lodash-es/get'
@@ -75,6 +105,7 @@ import {
   formItemSize,
   formItemRule
 } from './utils'
+import Feedbacks from './Feedbacks.vue'
 
 function wrapValidator (validator) {
   if (typeof validator === 'function') {
@@ -113,6 +144,9 @@ function wrapValidator (validator) {
 export default {
   name: 'FormItem',
   cssrName: 'Form',
+  components: {
+    Feedbacks
+  },
   mixins: [
     registerable('NForm', 'formItems', 'path'),
     configurable,
@@ -210,6 +244,15 @@ export default {
     return {
       explains: [],
       feedbackId: createId()
+    }
+  },
+  computed: {
+    hasFeedback () {
+      const {
+        feedback
+      } = this
+      if (feedback !== undefined && feedback !== null) return true
+      return this.explains.length
     }
   },
   watch: {

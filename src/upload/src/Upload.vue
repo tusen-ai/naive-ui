@@ -28,13 +28,13 @@
       <slot />
     </div>
     <div class="n-upload-file-list" :style="fileListStyle">
-      <n-fade-in-height-expand-transition-group>
+      <n-fade-in-expand-transition group>
         <n-upload-file
           v-for="file in syntheticFileList"
           :key="file.id"
           :file="file"
         />
-      </n-fade-in-height-expand-transition-group>
+      </n-fade-in-expand-transition>
     </div>
   </div>
 </template>
@@ -47,7 +47,7 @@ import {
 import { warn } from '../../_utils/naive'
 import { createId } from '../../_utils/vue'
 import NUploadFile from './UploadFile.vue'
-import NFadeInHeightExpandTransitionGroup from '../../_transition/FadeInHeightExpandTransitionGroup'
+import NFadeInExpandTransition from '../../_transition/FadeInExpandTransition'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
 
@@ -164,7 +164,7 @@ export default {
   name: 'Upload',
   components: {
     NUploadFile,
-    NFadeInHeightExpandTransitionGroup
+    NFadeInExpandTransition
   },
   provide () {
     return {

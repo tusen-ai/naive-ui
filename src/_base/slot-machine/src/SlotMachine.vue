@@ -12,12 +12,12 @@
         :value="number"
       />
     </transition-group>
-    <fade-in-expand-transition key="+" mode="width">
+    <n-fade-in-expand-transition key="+" width>
       <slot-machine-number
         v-if="max && max < value"
         :value="'+'"
       />
-    </fade-in-expand-transition>
+    </n-fade-in-expand-transition>
   </span>
   <span
     v-else
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import FadeInExpandTransition from '../../../_transition/FadeInHeightExpandTransition'
+import NFadeInExpandTransition from '../../../_transition/FadeInExpandTransition'
 import SlotMachineNumber from './SlotMachineNumber.vue'
 import usecssr from '../../../_mixins/usecssr.js'
 import styles from './styles/index.js'
@@ -36,7 +36,7 @@ import styles from './styles/index.js'
 export default {
   name: 'BaseSlotMachine',
   components: {
-    FadeInExpandTransition,
+    NFadeInExpandTransition,
     SlotMachineNumber
   },
   mixins: [

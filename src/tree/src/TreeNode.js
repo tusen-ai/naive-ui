@@ -2,7 +2,7 @@ import { h } from 'vue'
 import NTreeNodeSwitcher from './TreeNodeSwitcher.vue'
 import NTreeNodeCheckbox from './TreeNodeCheckbox.vue'
 import NTreeNodeContent from './TreeNodeContent.vue'
-import NFadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
+import NFadeInExpandTransition from '../../_transition/FadeInExpandTransition'
 
 import { isLeaf, isLoaded } from './utils'
 
@@ -161,7 +161,7 @@ const TreeNode = {
         default: () => data.label
       }),
       this.icon ? this.icon() : null,
-      !isLeaf(data) ? h(NFadeInHeightExpandTransition, null,
+      !isLeaf(data) ? h(NFadeInExpandTransition, null,
         {
           default: () => this.expanded && data.children
             ? h('ul', {

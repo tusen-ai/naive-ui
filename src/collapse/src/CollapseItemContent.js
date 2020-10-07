@@ -1,5 +1,5 @@
 import { h, withDirectives, vShow } from 'vue'
-import NFadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
+import NFadeInExpandTransition from '../../_transition/FadeInExpandTransition'
 
 export default {
   name: 'NCollapseItemContent',
@@ -25,7 +25,7 @@ export default {
     const directives = useVShow ? [
       [vShow, show]
     ] : []
-    return h(NFadeInHeightExpandTransition, null, {
+    return h(NFadeInExpandTransition, null, {
       default: () => (useVShow || show) ? withDirectives(
         h('div', {
           class: 'n-collapse-item__content-wrapper'

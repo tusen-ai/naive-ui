@@ -5,14 +5,16 @@ const cubicBezierEaseInOut = commonVariables.cubicBezierEaseInOut
 const cubicBezierEaseOut = commonVariables.cubicBezierEaseOut
 const cubicBezierEaseIn = commonVariables.cubicBezierEaseIn
 
-export default function ({
-  duration = '.3s',
-  originalTransition = '',
-  leavingDelay = '0s',
-  foldPadding = false,
-  enterToProps = null,
-  leaveToProps = null
-} = {}) {
+export default function (options = {}) {
+  const {
+    overflow = 'hidden',
+    duration = '.3s',
+    originalTransition = '',
+    leavingDelay = '0s',
+    foldPadding = false,
+    enterToProps = null,
+    leaveToProps = null
+  } = options
   return [
     c(`&.${namespace}-fade-in-height-expand-transition-leave-from, &.${namespace}-fade-in-height-expand-transition-enter-to`, {
       ...enterToProps,
@@ -28,7 +30,7 @@ export default function ({
     }),
     c(`&.${namespace}-fade-in-height-expand-transition-leave-active`, {
       raw: `
-        overflow: hidden;
+        overflow: ${overflow};
         transition:
           max-height ${duration} ${cubicBezierEaseInOut} ${leavingDelay},
           opacity ${duration} ${cubicBezierEaseOut} ${leavingDelay},
@@ -41,7 +43,7 @@ export default function ({
     }),
     c(`&.${namespace}-fade-in-height-expand-transition-enter-active`, {
       raw: `
-        overflow: hidden;
+        overflow: ${overflow};
         transition:
           max-height ${duration} ${cubicBezierEaseInOut},
           opacity ${duration} ${cubicBezierEaseIn},

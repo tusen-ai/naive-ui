@@ -47,7 +47,6 @@ export default c([
             raw: `
               display: block;
               width: 100%;
-              padding-bottom: 8px;
               padding-left: 2px;
             `
           })
@@ -101,28 +100,14 @@ export default c([
         ]),
         cB('form-item-blank', {
           raw: `
+            box-sizing: border-box;
             padding-top: 3px;
             padding-bottom: 3px;
             display: flex;
             align-items: center;
             position: relative;
           `
-        }, [
-          cM('error', [
-            c('+', [
-              cB('form-item-feedback-wrapper', {
-                color: feedbackTextColorError
-              })
-            ])
-          ]),
-          cM('warning', [
-            c('+', [
-              cB('form-item-feedback-wrapper', {
-                color: feedbackTextColorWarning
-              })
-            ])
-          ])
-        ]),
+        }),
         cM('required', [
           cB('form-item-label', [
             c('&::after, &::before', {
@@ -154,17 +139,23 @@ export default c([
             padding-left: 2px;
             padding-top: 0px;
             box-sizing: border-box;
-            min-height: 1.5em;
-            font-size: 14px;
+            min-height: 1.25em;
             transform-origin: top left;
-            line-height: 1.5;
+            line-height: 1.25;
             transition: color .3s ${cubicBezierEaseInOut};
           `
         }, [
           cB('form-item-feedback', [
+            cM('error', {
+              color: feedbackTextColorError
+            }),
+            cM('warning', {
+              color: feedbackTextColorWarning
+            }),
             fadeDownTranstion({
-              name: 'form-item-feedback',
-              fromOffset: '-3px'
+              fromOffset: '-3px',
+              enterDuration: '.3s',
+              leaveDuration: '.2s'
             })
           ])
         ])

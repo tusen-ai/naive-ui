@@ -67,7 +67,7 @@ import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 import { warn } from '../../_utils/naive'
 
 export default {
-  name: 'NUploadFile',
+  name: 'UploadFile',
   components: {
     NButton,
     NUploadProgress,

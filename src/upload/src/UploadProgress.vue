@@ -1,5 +1,5 @@
 <template>
-  <n-fade-in-height-expand-transition>
+  <n-fade-in-expand-transition>
     <n-progress
       v-if="postponedShow"
       type="line"
@@ -8,18 +8,18 @@
       :status="status"
       :height="2"
     />
-  </n-fade-in-height-expand-transition>
+  </n-fade-in-expand-transition>
 </template>
 
 <script>
-import NFadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
+import NFadeInExpandTransition from '../../_transition/FadeInExpandTransition'
 import NProgress from '../../progress/index.js'
 
 export default {
-  name: 'NUploadProgress',
+  name: 'UploadProgress',
   components: {
     NProgress,
-    NFadeInHeightExpandTransition
+    NFadeInExpandTransition
   },
   props: {
     show: {
