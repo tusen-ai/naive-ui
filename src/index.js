@@ -206,7 +206,6 @@ import baseSelectionDarkStyle from './_base/selection/styles/dark'
 
 // Deprecated Components
 import NimbusFormCard from './_deprecated/NimbusFormCard'
-import NimbusConfirmCard from './_deprecated/NimbusConfirmCard'
 import NimbusServiceLayout from './_deprecated/NimbusServiceLayout'
 import NimbusIcon from './_deprecated/NimbusIcon'
 
@@ -294,7 +293,6 @@ export default create({
     Space,
     // Deprecated
     NimbusServiceLayout,
-    NimbusConfirmCard,
     NimbusFormCard,
     NimbusIcon
   ],
