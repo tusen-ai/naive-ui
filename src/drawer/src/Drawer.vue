@@ -27,19 +27,15 @@
           <n-drawer-body
             v-if="displayDirective === 'show' || show"
             v-show="displayDirective === 'if' || show"
-            class="n-drawer"
-            :style="{
-              ...compitableBodyStyle,
-              ...syntheticStyle,
-              width: styleWidth,
-              height: styleHeight
-            }"
-            :class="{
-              [`n-drawer--${placement}-placement`]: true,
-              [`n-${syntheticTheme}-theme`]: syntheticTheme,
-              [compitableBodyClass]: compitableBodyClass,
-              [namespace]: namespace
-            }"
+            :style="mergedBodyStyle"
+            :class="[
+              `n-drawer--${placement}-placement`,
+              {
+                [`n-${syntheticTheme}-theme`]: syntheticTheme,
+                [compitableBodyClass]: compitableBodyClass,
+                [namespace]: namespace
+              }
+            ]"
             :style-width="styleWidth"
           >
             <slot />
@@ -204,6 +200,14 @@ export default {
       } = this
       if (height === null) return null
       return formatLength(height)
+    },
+    mergedBodyStyle () {
+      return {
+        ...this.compitableBodyStyle,
+        ...this.syntheticStyle,
+        width: this.styleWidth,
+        height: this.styleHeight
+      }
     }
   },
   methods: {
