@@ -59,7 +59,9 @@ export default c([
   ]),
   ({ props }) => {
     const {
-      cubicBezierEaseOut
+      cubicBezierEaseOut,
+      cubicBezierEaseIn,
+      cubicBezierEaseInOut
     } = props.$base
     const {
       color,
@@ -80,13 +82,13 @@ export default c([
           background-color: ${color};
           color: ${textColor};
           transition:
-            background-color .3s ${cubicBezierEaseOut},
-            color .3s ${cubicBezierEaseOut},
-            opacity .3s ${cubicBezierEaseOut},
+            background-color .3s ${cubicBezierEaseInOut},
+            color .3s ${cubicBezierEaseInOut},
+            opacity .3s ${cubicBezierEaseInOut},
             transform .3s ${cubicBezierEaseOut},
-            max-height .3s ${cubicBezierEaseOut},
+            max-height .3s ${cubicBezierEaseInOut},
             margin-bottom .3s linear,
-            box-shadow .3s ${cubicBezierEaseOut};
+            box-shadow .3s ${cubicBezierEaseInOut};
           font-family: inherit;
           font-size: 14px;
           font-weight: 400;
@@ -120,6 +122,18 @@ export default c([
           raw: `
             opacity: 1;
             transform: translateX(0);
+          `
+        }),
+        c('&-transition-leave-active', {
+          raw: `
+            transition:
+              background-color .3s ${cubicBezierEaseInOut},
+              color .3s ${cubicBezierEaseInOut},
+              opacity .3s ${cubicBezierEaseInOut},
+              transform .3s ${cubicBezierEaseIn},
+              max-height .3s ${cubicBezierEaseInOut},
+              margin-bottom .3s linear,
+              box-shadow .3s ${cubicBezierEaseInOut};
           `
         }),
         cM('show-avatar', [
