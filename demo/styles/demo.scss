@@ -28,8 +28,7 @@ body {
   max-width: 680px;
 }
 
-.api-table .n-table__td:nth-child(1),
-.api-table .n-table__td:nth-child(2) {
+.api-table .n-table__td:nth-child(1) {
   font-size: 13px;
   font-family: naive-ui-mono, monospace;
 }

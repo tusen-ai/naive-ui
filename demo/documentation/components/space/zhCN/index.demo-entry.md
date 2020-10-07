@@ -9,7 +9,7 @@ from-end
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|align|`'start' \| 'end' \| 'center' \| 'baseline'`|`'start'`||
+|align|`'start' \| 'end' \| 'center' \| 'baseline' \| 'stretch'`|`'start'`||
 |inline|`boolean`|`false`||
 |theme|`'light' \| 'dark' \| null`|`null`||
 |justify|`'start' \| 'end'`|`'start'`||
