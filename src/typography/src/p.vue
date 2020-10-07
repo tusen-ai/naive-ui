@@ -2,7 +2,7 @@
   <p
     class="n-p"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme,
       [`n-p--${depth}-depth`]: depth
     }"
   >

@@ -2,9 +2,9 @@ import themedBaseStyle from './themed-hr.cssr.js'
 
 export default [
   {
-    key: 'syntheticTheme',
+    key: 'mergedTheme',
     watch: [
-      'syntheticTheme'
+      'mergedTheme'
     ],
     CNode: themedBaseStyle
   }

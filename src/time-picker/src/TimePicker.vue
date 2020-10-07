@@ -3,7 +3,7 @@
     class="n-time-picker"
     :class="{
       'n-time-picker--invalid': isValueInvalid,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-${mergedTheme}-theme`]: mergedTheme
     }"
   >
     <n-input
@@ -13,7 +13,7 @@
       passively-activated
       deactivate-on-enter
       :attr-size="syntheticAttrSize"
-      :theme="syntheticTheme"
+      :theme="mergedTheme"
       :stateful="stateful"
       :size="mergedSize"
       :force-focus="active"
@@ -64,7 +64,7 @@
               tabindex="0"
               class="n-time-picker-selector"
               :class="{
-                [`n-${syntheticTheme}-theme`]: syntheticTheme
+                [`n-${mergedTheme}-theme`]: mergedTheme
               }"
               @focus="handleMenuFocus"
               @keydown="handleMenuKeyDown"
@@ -78,7 +78,7 @@
                     'n-time-picker-selector-time-row--transition-disabled': hourTransitionDisabled
                   }"
                 >
-                  <n-scrollbar ref="hours" :theme="syntheticTheme">
+                  <n-scrollbar ref="hours" :theme="mergedTheme">
                     <div
                       v-for="hour in hours"
                       :key="hour"
@@ -105,7 +105,7 @@
                     'n-time-picker-selector-time-row--invalid': isMinuteInvalid
                   }"
                 >
-                  <n-scrollbar ref="minutes" :theme="syntheticTheme">
+                  <n-scrollbar ref="minutes" :theme="mergedTheme">
                     <div
                       v-for="minute in minutes"
                       :key="minute"
@@ -131,7 +131,7 @@
                     'n-time-picker-selector-time-row--transition-disabled': secondTransitionDisabled,
                   }"
                 >
-                  <n-scrollbar ref="seconds" :theme="syntheticTheme">
+                  <n-scrollbar ref="seconds" :theme="mergedTheme">
                     <div
                       v-for="second in seconds"
                       :key="second"
@@ -154,7 +154,7 @@
               <div class="n-time-picker-selector-actions">
                 <n-button
                   size="tiny"
-                  :theme="syntheticTheme"
+                  :theme="mergedTheme"
                   @click="handleNowClick"
                 >
                   {{ localizedNow }}
@@ -163,7 +163,7 @@
                   size="tiny"
                   type="primary"
                   class="n-time-picker-selector-actions__confirm"
-                  :theme="syntheticTheme"
+                  :theme="mergedTheme"
                   :disabled="isValueInvalid"
                   @click="handleConfirmClick"
                 >

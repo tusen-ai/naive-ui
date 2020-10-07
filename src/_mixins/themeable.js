@@ -15,7 +15,7 @@ export default {
     }
   },
   computed: {
-    syntheticTheme () {
+    mergedTheme () {
       const theme = this.theme
       if (theme !== null) {
         return theme
@@ -29,21 +29,21 @@ export default {
         return NThemedComponent.theme
       }
       const NConfigProvider = this.NConfigProvider
-      return (NConfigProvider && NConfigProvider.syntheticTheme) || null
+      return (NConfigProvider && NConfigProvider.mergedTheme) || null
     },
     syntheticStyle () {
       const themedStyle = this.themedStyle
-      const syntheticTheme = this.syntheticTheme
-      if (themedStyle && syntheticTheme && themedStyle[syntheticTheme]) {
-        return themedStyle[syntheticTheme]
+      const mergedTheme = this.mergedTheme
+      if (themedStyle && mergedTheme && themedStyle[mergedTheme]) {
+        return themedStyle[mergedTheme]
       }
       return null
     },
-    syntheticThemeEnvironment () {
+    mergedThemeEnvironment () {
       const NConfigProvider = this.NConfigProvider
-      const syntheticTheme = this.syntheticTheme
-      if (syntheticTheme && NConfigProvider && NConfigProvider.inheritedThemeEnvironments) {
-        return NConfigProvider.inheritedThemeEnvironments[syntheticTheme] || null
+      const mergedTheme = this.mergedTheme
+      if (mergedTheme && NConfigProvider && NConfigProvider.inheritedThemeEnvironments) {
+        return NConfigProvider.inheritedThemeEnvironments[mergedTheme] || null
       }
     }
   }

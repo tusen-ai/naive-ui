@@ -6,7 +6,7 @@
       [`n-tag--${type}-type`]: true,
       'n-tag--closable': !checkable && closable,
       'n-tag--disabled': disabled,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme,
       'n-tag--checkable': checkable,
       'n-tag--checked': checkable && checked,
       'n-tag--round': round

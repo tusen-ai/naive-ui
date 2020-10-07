@@ -2,7 +2,7 @@
   <table
     class="n-table"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme,
       [`n-table--${size}-size`]: true,
       'n-table--bordered': bordered,
       'n-table--single-line': singleLine,

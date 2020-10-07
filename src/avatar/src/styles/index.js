@@ -3,16 +3,16 @@ import themedSizeStyle from './themed-size.cssr.js'
 
 export default [
   {
-    key: 'syntheticTheme',
+    key: 'mergedTheme',
     watch: [
-      'syntheticTheme'
+      'mergedTheme'
     ],
     CNode: themedBaseStyle
   },
   {
     key: 'cssrSize',
     watch: [
-      'syntheticTheme',
+      'mergedTheme',
       'cssrSize'
     ],
     CNode: themedSizeStyle

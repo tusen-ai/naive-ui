@@ -2,7 +2,7 @@
   <blockquote
     class="n-blockquote"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme,
       'n-blockquote--align-text': alignText
     }"
   >

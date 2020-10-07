@@ -29,7 +29,7 @@ export default {
     }
   },
   watch: {
-    syntheticTheme: function (value, oldValue) {
+    mergedTheme: function (value, oldValue) {
       const {
         onThemeChange
       } = this
@@ -40,20 +40,20 @@ export default {
     const {
       as,
       tag,
-      syntheticTheme,
+      mergedTheme,
       NConfigProvider,
-      syntheticThemeEnvironment,
+      mergedThemeEnvironment,
       $slots
     } = this
     return h(as || tag, {
       class: {
-        [`n-${syntheticTheme}-theme`]: syntheticTheme
+        [`n-${mergedTheme}-theme`]: mergedTheme
       }
     }, ($slots.default && $slots.default({
-      theme: syntheticTheme,
+      theme: mergedTheme,
       namespace: NConfigProvider ? NConfigProvider.inheritedNamespace : null,
-      themeEnvironment: syntheticThemeEnvironment,
-      styleScheme: syntheticTheme ? styleScheme[syntheticTheme] : null
+      themeEnvironment: mergedThemeEnvironment,
+      styleScheme: mergedTheme ? styleScheme[mergedTheme] : null
     })) || null)
   }
 }

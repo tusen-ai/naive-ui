@@ -2,7 +2,7 @@
   <ul
     class="n-ul"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme,
       'n-ul--align-text': alignText
     }"
     v-bind="$attrs"

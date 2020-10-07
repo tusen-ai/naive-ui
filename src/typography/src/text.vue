@@ -3,7 +3,7 @@
     v-if="code"
     class="n-text"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme,
       'n-text--code': code,
       [`n-text--${type}-type`]: type,
       'n-text--delete': $props.delete,
@@ -19,7 +19,7 @@
     v-else-if="$props.delete"
     class="n-text"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme,
       'n-text--code': code,
       [`n-text--${type}-type`]: type,
       'n-text--delete': $props.delete,
@@ -36,7 +36,7 @@
     v-else
     class="n-text"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme,
       'n-text--code': code,
       [`n-text--${type}-type`]: type,
       'n-text--delete': $props.delete,

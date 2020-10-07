@@ -2,7 +2,7 @@
   <ol
     class="n-ol"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme,
       'n-ol--align-text': alignText
     }"
     v-bind="$attrs"

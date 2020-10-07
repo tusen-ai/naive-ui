@@ -3,7 +3,7 @@
     ref="triggerRef"
     class="n-date-picker"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme,
       'n-date-picker--disabled': disabled,
       'n-date-picker--range': isRange,
       'n-date-picker--invalid': isValueInvalid && !isRange,
@@ -16,7 +16,7 @@
       v-if="isRange"
       ref="inputRef"
       :size="mergedSize"
-      :theme="syntheticTheme"
+      :theme="mergedTheme"
       passively-activated
       :disabled="disabled"
       :value="[displayStartTime, displayEndTime]"
@@ -43,7 +43,7 @@
       v-else
       ref="inputRef"
       v-model:value="displayTime"
-      :theme="syntheticTheme"
+      :theme="mergedTheme"
       passively-activated
       :size="mergedSize"
       :force-focus="active"
@@ -93,7 +93,7 @@
               :value="value"
               :active="active"
               :actions="actions"
-              :theme="syntheticTheme"
+              :theme="mergedTheme"
               :format="computedFormat"
               @update:value="handlePanelInput"
               @tab-out="handlePanelTabOut"
@@ -106,7 +106,7 @@
               :value="value"
               :active="active"
               :actions="actions"
-              :theme="syntheticTheme"
+              :theme="mergedTheme"
               @update:value="handlePanelInput"
               @tab-out="handlePanelTabOut"
               @close="handlePanelClose"
@@ -118,7 +118,7 @@
               :value="value"
               :active="active"
               :actions="actions"
-              :theme="syntheticTheme"
+              :theme="mergedTheme"
               @update:value="handleRangePanelInput"
               @tab-out="handlePanelTabOut"
               @close="handlePanelClose"
@@ -131,7 +131,7 @@
               :value="value"
               :active="active"
               :actions="actions"
-              :theme="syntheticTheme"
+              :theme="mergedTheme"
               @update:value="handleRangePanelInput"
               @close="handlePanelClose"
               @tab-out="handlePanelTabOut"

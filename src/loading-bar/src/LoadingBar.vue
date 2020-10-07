@@ -10,7 +10,7 @@
       v-if="loading || (!loading && entering)"
       class="n-loading-bar-container"
       :class="{
-        [`n-${syntheticTheme}-theme`]: syntheticTheme
+        [`n-${mergedTheme}-theme`]: mergedTheme
       }"
     >
       <div

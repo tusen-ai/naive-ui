@@ -52,9 +52,9 @@ fs.writeFileSync(path.resolve(cssrPath, 'index.js'), `import themedBaseStyle fro
 
 export default [
   {
-    key: 'syntheticTheme',
+    key: 'mergedTheme',
     watch: [
-      'syntheticTheme'
+      'mergedTheme'
     ],
     CNode: themedBaseStyle
   }

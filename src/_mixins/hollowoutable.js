@@ -93,7 +93,7 @@ function isTranslucentColor (color) {
 
 export default {
   watch: {
-    syntheticTheme (value) {
+    mergedTheme (value) {
       if (this.avoidHollowOut) return
       cache()
       this.$nextTick(() => {

@@ -17,7 +17,7 @@
         <div
           v-if="mergedShow"
           :class="{
-            [`n-${syntheticTheme}-theme`]: syntheticTheme,
+            [`n-${mergedTheme}-theme`]: mergedTheme,
             'n-back-top--transition-disabled': transitionDisabled
           }"
           :style="{

@@ -7,7 +7,7 @@ export default [
     key: 'type',
     watch: [
       'type',
-      'syntheticTheme'
+      'mergedTheme'
     ],
     CNode: colorStyle
   },
@@ -15,14 +15,14 @@ export default [
     key: 'mergedSize',
     watch: [
       'mergedSize',
-      'syntheticTheme'
+      'mergedTheme'
     ],
     CNode: sizeStyle
   },
   {
-    key: 'syntheticTheme',
+    key: 'mergedTheme',
     watch: [
-      'syntheticTheme'
+      'mergedTheme'
     ],
     CNode: baseStyle
   }

@@ -4,7 +4,7 @@
     :class="{
       [`n-layout--${position}-positioned`]: true,
       'n-layout--has-sider': hasSider,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme,
       [`n-layout--${siderCollapseMode}-collapse-mode`]: siderCollapseMode
     }"
     :style="syntheticLayoutStyle"
@@ -12,7 +12,7 @@
     <n-scrollbar
       v-if="!useNativeScrollbar"
       ref="scrollbar"
-      :theme="syntheticTheme"
+      :theme="mergedTheme"
       :content-style="scrollContentStyle"
       :container-style="scrollContainerStyle"
     >

@@ -3,13 +3,13 @@ import typeStyle from './themed-type.cssr.js'
 
 export default [
   {
-    key: 'syntheticTheme',
-    watch: ['syntheticTheme'],
+    key: 'mergedTheme',
+    watch: ['mergedTheme'],
     CNode: baseStyle
   },
   {
     key: 'status',
-    watch: ['status', 'syntheticTheme'],
+    watch: ['status', 'mergedTheme'],
     CNode: typeStyle
   }
 ]

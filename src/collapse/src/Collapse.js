@@ -94,12 +94,12 @@ export default {
     }
   },
   render () {
-    const { syntheticTheme } = this
+    const { mergedTheme } = this
     return h('div', {
       class: [
         'n-collapse',
         {
-          [`n-${syntheticTheme}-theme`]: syntheticTheme
+          [`n-${mergedTheme}-theme`]: mergedTheme
         }
       ]
     }, {

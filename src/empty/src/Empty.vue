@@ -2,7 +2,7 @@
   <div
     class="n-empty"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme,
       [`n-empty--${size}-size`]: true
     }"
     :style="syntheticStyle"

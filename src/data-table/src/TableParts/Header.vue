@@ -176,7 +176,7 @@ export default {
       return (this.pagination && this.pagination.page) || null
     },
     theme () {
-      return this.NDataTable.syntheticTheme
+      return this.NDataTable.mergedTheme
     },
     checkboxIndererminate () {
       return this.NDataTable.someRowsChecked

@@ -69,7 +69,7 @@ export default {
     const memorizedLength = children.length
     const {
       compitableColumn,
-      syntheticTheme,
+      mergedTheme,
       labelPlacement,
       labelAlign,
       size,
@@ -151,7 +151,7 @@ export default {
         `n-descriptions--${labelAlign}-label-align`,
         `n-descriptions--${size}-size`,
         {
-          [`n-${syntheticTheme}-theme`]: syntheticTheme,
+          [`n-${mergedTheme}-theme`]: mergedTheme,
           [`n-descriptions--bordered`]: bordered
         }
       ]

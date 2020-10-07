@@ -6,7 +6,7 @@
       'n-tabs--scroll': showScrollButton,
       [`n-tabs--${labelSize}-size`]: labelSize,
       [`n-tabs--flex`]: justifyContent,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-${mergedTheme}-theme`]: mergedTheme
     }"
   >
     <resize-observer @resize="handleNavResize">

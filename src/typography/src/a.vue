@@ -4,7 +4,7 @@
     class="n-a"
     :to="to"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-${mergedTheme}-theme`]: mergedTheme
     }"
   >
     <slot />
@@ -13,7 +13,7 @@
     v-else
     class="n-a"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-${mergedTheme}-theme`]: mergedTheme
     }"
   ><slot /></a>
 </template>

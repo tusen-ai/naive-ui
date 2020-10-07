@@ -2,7 +2,7 @@
   <div
     class="n-anchor"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-${mergedTheme}-theme`]: mergedTheme
     }"
     :style="syntheticStyle"
   >

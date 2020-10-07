@@ -31,7 +31,7 @@ export default {
     const {
       icon,
       type,
-      syntheticTheme,
+      mergedTheme,
       closable,
       content,
       handleClose
@@ -41,7 +41,7 @@ export default {
         'n-message': true,
         'n-message--closable': closable,
         [`n-message--${type}-type`]: true,
-        [`n-${syntheticTheme}-theme`]: syntheticTheme
+        [`n-${mergedTheme}-theme`]: mergedTheme
       }
     }, [
       h('div', {
@@ -53,7 +53,7 @@ export default {
           default: () => [
             h(IconSwitchTransition, null, {
               default: () => [
-                createIconVNode(icon, type, syntheticTheme)
+                createIconVNode(icon, type, mergedTheme)
               ]
             })
           ]

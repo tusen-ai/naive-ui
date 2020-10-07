@@ -9,7 +9,7 @@
     <n-popover
       v-model:show="showPopover"
       trigger="click"
-      :theme="NDataTable.syntheticTheme"
+      :theme="NDataTable.mergedTheme"
       :body-style="popoverBodyStyle"
     >
       <template v-slot:trigger>

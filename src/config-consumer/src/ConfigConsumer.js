@@ -23,7 +23,7 @@ export default {
     themeable
   ],
   watch: {
-    syntheticTheme (value, oldValue) {
+    mergedTheme (value, oldValue) {
       const { onThemeChange } = this
       if (onThemeChange) onThemeChange(value, oldValue)
     },
@@ -39,11 +39,11 @@ export default {
   render () {
     const defaultSlot = this.$slots.default
     return defaultSlot ? defaultSlot({
-      theme: this.syntheticTheme,
+      theme: this.mergedTheme,
       language: this.NConfigProvider ? this.NConfigProvider.inheritedLanguage : null,
       namespace: this.NConfigProvider ? this.NConfigProvider.inheritedNamespace : null,
-      themeEnvironment: this.syntheticThemeEnvironment,
-      styleScheme: styleScheme[this.syntheticTheme || this.$naive.fallbackTheme]
+      themeEnvironment: this.mergedThemeEnvironment,
+      styleScheme: styleScheme[this.mergedTheme || this.$naive.fallbackTheme]
     }) : []
   }
 }

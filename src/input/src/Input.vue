@@ -13,7 +13,7 @@
       'n-input--suffix': $slots.suffix,
       'n-input--prefix': $slots.prefix || $slots.affix,
       'n-input--stateful': stateful,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-${mergedTheme}-theme`]: mergedTheme
     }"
     :tabindex="!disabled && (passivelyActivated && !inputFocused) ? 0 : false"
     @focus="handleWrapperFocus"
@@ -133,7 +133,7 @@
       >
         <div class="n-input-clear">
           <n-base-suffix
-            :theme="syntheticTheme"
+            :theme="mergedTheme"
             :show="showClearButton"
             :clearable="clearable"
             @clear="handleClear"

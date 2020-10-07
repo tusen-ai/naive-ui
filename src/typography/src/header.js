@@ -33,7 +33,7 @@ export default level => ({
     return h(`h${level}`, {
       class: {
         [`n-h${level}`]: true,
-        [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
+        [`n-${this.mergedTheme}-theme`]: this.mergedTheme,
         [`n-h${level}--${props.type}-type`]: props.type,
         [`n-h${level}--prefix-bar`]: props.prefix,
         [`n-h${level}--align-text`]: props.alignText

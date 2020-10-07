@@ -50,13 +50,13 @@ export default {
     const parent = this.$parent
     if (parent && parent.$options.__NAIVE_ICON__) return getSlot(this)
     else {
-      const syntheticTheme = this.syntheticTheme
+      const mergedTheme = this.mergedTheme
       const depth = this.depth
       return h('i', {
         ...this.$attrs,
         class: {
           'n-icon': true,
-          [`n-${syntheticTheme}-theme`]: syntheticTheme,
+          [`n-${mergedTheme}-theme`]: mergedTheme,
           [`n-icon--${depth}-depth`]: depth
         },
         style: {

@@ -1,7 +1,7 @@
 <template>
   <div
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme,
       'n-notification--closable': closable,
       'n-notification--show-avatar': showAvatar,
       [`n-notification--${type}-type`]: type

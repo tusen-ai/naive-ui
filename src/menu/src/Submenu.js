@@ -151,7 +151,7 @@ export default {
         !this.horizontal ? createSubmenuChildren() : null
       ]),
       default: () => {
-        const theme = this.NMenu.syntheticTheme
+        const theme = this.NMenu.mergedTheme
         return h('div', {
           class: [
             'n-menu',

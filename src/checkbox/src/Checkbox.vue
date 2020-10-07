@@ -7,7 +7,7 @@
       'n-checkbox--indeterminate': indeterminate,
       'n-checkbox--table-header': tableHeader,
       [`n-checkbox--${mergedSize}-size`]: true,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme,
     }"
     :tabindex="syntheticDisabled ? false : 0"
     @keyup.enter="handleKeyUpEnter"

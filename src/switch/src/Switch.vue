@@ -2,7 +2,7 @@
   <div
     class="n-switch"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-${mergedTheme}-theme`]: mergedTheme
     }"
     :tabindex="!disabled ? 0 : false"
     @click="handleClick"

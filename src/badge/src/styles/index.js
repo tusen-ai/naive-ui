@@ -3,10 +3,10 @@ import colorStyle from './themed-color.cssr.js'
 
 export default [
   {
-    key: 'syntheticTheme',
+    key: 'mergedTheme',
     CNode: baseStyle,
     watch: [
-      'syntheticTheme'
+      'mergedTheme'
     ]
   },
   {
@@ -14,7 +14,7 @@ export default [
     CNode: colorStyle,
     watch: [
       'type',
-      'syntheticTheme'
+      'mergedTheme'
     ]
   }
 ]

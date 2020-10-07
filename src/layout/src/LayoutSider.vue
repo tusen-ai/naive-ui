@@ -6,7 +6,7 @@
       [`n-layout-sider--bordered`]: bordered,
       [`n-layout-sider--collapsed`]: collapsed,
       [`n-layout-sider--show-content`]: showContent,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-${mergedTheme}-theme`]: mergedTheme
     }"
     :style="{
       ...syntheticStyle,
@@ -19,7 +19,7 @@
       v-if="!useNativeScrollbar"
       ref="scrollbar"
       class="n-layout-sider__content"
-      :theme="syntheticTheme"
+      :theme="mergedTheme"
       :content-style="scrollContentStyle"
       :container-style="scrollContainerStyle"
     >

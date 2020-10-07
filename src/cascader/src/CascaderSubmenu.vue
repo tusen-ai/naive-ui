@@ -74,7 +74,7 @@ export default {
   },
   computed: {
     theme () {
-      return this.NCascader.syntheticTheme
+      return this.NCascader.mergedTheme
     }
   }
 }

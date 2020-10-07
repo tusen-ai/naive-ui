@@ -12,7 +12,7 @@
         <n-icon v-if="!loading" key="switcher">
           <md-arrow-dropright />
         </n-icon>
-        <n-base-loading v-else key="loading" :theme="NTree.syntheticTheme" />
+        <n-base-loading v-else key="loading" :theme="NTree.mergedTheme" />
       </n-icon-switch-transition>
     </div>
   </span>

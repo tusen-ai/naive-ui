@@ -2,7 +2,7 @@
   <ul
     class="n-hr"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-${mergedTheme}-theme`]: mergedTheme
     }"
   >
     <slot />

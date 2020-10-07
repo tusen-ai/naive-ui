@@ -2,7 +2,7 @@
   <div
     class="n-transfer"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme,
       [`n-transfer--filterable`]: filterable,
       [`n-transfer--${mergedSize}-size`]: true
     }"
@@ -12,7 +12,7 @@
         <div class="n-transfer-list-header__checkbox">
           <n-transfer-header-checkbox
             :source="true"
-            :theme="syntheticTheme"
+            :theme="mergedTheme"
             @change="handleSrcHeaderCheck"
           />
         </div>
@@ -42,7 +42,7 @@
           <template v-if="filteredSrcOpts.length">
             <!-- <n-scrollbar
               v-if="virtualScroll"
-              :theme="syntheticTheme"
+              :theme="mergedTheme"
               :container="sourceScrollContainer"
               :content="sourceScrollContent"
             >
@@ -65,7 +65,7 @@
                 </template>
               </recycle-scroller>
             </n-scrollbar> -->
-            <n-scrollbar :theme="syntheticTheme">
+            <n-scrollbar :theme="mergedTheme">
               <div class="n-transfer-list-content">
                 <transition-group name="item" :appear="isMounted">
                   <n-transfer-source-list-item
@@ -100,7 +100,7 @@
       <div class="n-transfer-list-header">
         <div class="n-transfer-list-header__checkbox">
           <n-transfer-header-checkbox
-            :theme="syntheticTheme"
+            :theme="mergedTheme"
             @change="handleTgtHeaderCheck"
           />
         </div>
@@ -130,7 +130,7 @@
           <template v-if="filteredTgtOpts.length">
             <!-- <n-scrollbar
               v-if="virtualScroll"
-              :theme="syntheticTheme"
+              :theme="mergedTheme"
               :container="targetScrollContainer"
               :content="targetScrollContent"
             >
@@ -153,7 +153,7 @@
                 </template>
               </recycle-scroller>
             </n-scrollbar> -->
-            <n-scrollbar :theme="syntheticTheme">
+            <n-scrollbar :theme="mergedTheme">
               <div class="n-transfer-list-content">
                 <transition-group name="item" :appear="isMounted">
                   <n-transfer-target-list-item
@@ -221,7 +221,7 @@ export default {
     themeable,
     usecssr(
       styles, {
-        themeKey: 'syntheticTheme',
+        themeKey: 'mergedTheme',
         injectCssrProps: true
       }
     ),

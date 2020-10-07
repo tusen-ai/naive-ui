@@ -15,7 +15,7 @@
       ref="triggerRef"
       class="n-cascader-selection"
       :size="mergedSize"
-      :theme="syntheticTheme"
+      :theme="mergedTheme"
       :active="active"
       :pattern="pattern"
       :placeholder="localizedPlaceholder"
@@ -55,7 +55,7 @@
         :expand-trigger="expandTrigger"
         :lazy="remote"
         :on-load="onLoad"
-        :theme="syntheticTheme"
+        :theme="mergedTheme"
         :size="mergedSize"
         @update:loading-id="loadingId = $event"
         @update:value="handleMenuInput"
@@ -73,7 +73,7 @@
         :type="type"
         :value="value"
         :active="active && selectMenuActive"
-        :theme="syntheticTheme"
+        :theme="mergedTheme"
         :pattern="pattern"
         :size="mergedSize"
         :multiple="multiple"
@@ -128,7 +128,7 @@ export default {
     asformitem(),
     locale('Cascader'),
     usecssr(styles, {
-      themeKey: 'syntheticTheme',
+      themeKey: 'mergedTheme',
       injectCssrProps: true
     })
   ],

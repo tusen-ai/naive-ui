@@ -38,7 +38,7 @@ function mapSlot (h, defaultSlot, groupInstance) {
       const currentInstanceDisabled = instanceProps.disabled
       let lastInstancePriority
       let currentInstancePriority
-      if (groupInstance.syntheticTheme === 'dark') {
+      if (groupInstance.mergedTheme === 'dark') {
         /**
          * Priority of button splitor:
          * !disabled  checked >
@@ -154,7 +154,7 @@ export default {
       class: [
         'n-radio-group',
         {
-          [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
+          [`n-${this.mergedTheme}-theme`]: this.mergedTheme,
           [`n-radio-group--${this.mergedSize}-size`]: this.mergedSize,
           [`n-radio-group--button-group`]: isButtonGroup,
           [`n-radio-group--transition-disabled`]: isButtonGroup && this.transitionDisabled

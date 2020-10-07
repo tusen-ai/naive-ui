@@ -7,7 +7,7 @@
       [`n-card--action-segmented`]: segmented === true || (segmented && segmented.action),
       [`n-card--${size}-size`]: true,
       'n-card--bordered': bordered,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-${mergedTheme}-theme`]: mergedTheme
     }"
     :style="syntheticStyle"
   >

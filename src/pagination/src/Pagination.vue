@@ -3,7 +3,7 @@
     class="n-pagination"
     :class="{
       'n-pagination--transition-disabled': transitionDisabled,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme,
       'n-pagination--disabled': disabled
     }"
   >

@@ -149,7 +149,7 @@ export default {
               {
                 ref: 'bodyWrapper',
                 ...omit(this.$props, ['maskClosable', 'to']),
-                theme: this.syntheticTheme,
+                theme: this.mergedTheme,
                 show: this.show,
                 onClose: () => {
                   const { onClose } = this

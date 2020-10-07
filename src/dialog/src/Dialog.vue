@@ -2,7 +2,7 @@
   <div
     class="n-confirm"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme,
       'n-confirm--bordered': bordered
     }"
     :style="syntheticStyle"

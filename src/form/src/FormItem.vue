@@ -3,7 +3,7 @@
     class="n-form-item"
     :class="{
       [`n-form-item--${mergedSize}-size`]: true,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme,
       [`n-form-item--${mergedLabelPlacement}-labelled`]: true,
       [`n-form-item--${mergedLabelAlign}-label-aligned`]: true,
       [`n-form-item--required`]: mergedShowRequireMark === undefined ? mergedShowRequireMark : mergedRequired,

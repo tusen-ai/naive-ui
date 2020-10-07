@@ -3,7 +3,7 @@
     class="n-gradient-text"
     :class="{
       [`n-gradient-text--${computedType}-type`]: true,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-${mergedTheme}-theme`]: mergedTheme
     }"
     :style="{
       ...syntheticStyle,

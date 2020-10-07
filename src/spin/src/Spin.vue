@@ -3,7 +3,7 @@
     v-if="$slots.default"
     class="n-spin-container"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-${mergedTheme}-theme`]: mergedTheme
     }"
   >
     <div
@@ -19,11 +19,11 @@
         v-if="spinning"
         :class="{
           [`n-spin--${size}-size`]: true,
-          [`n-${syntheticTheme}-theme`]: syntheticTheme
+          [`n-${mergedTheme}-theme`]: mergedTheme
         }"
         :stroke="stroke"
         :stroke-width="syntheticStrokeWidth"
-        :theme="syntheticTheme"
+        :theme="mergedTheme"
         class="n-spin"
       />
     </transition>
@@ -35,7 +35,7 @@
     }"
     :stroke="stroke"
     :stroke-width="syntheticStrokeWidth"
-    :theme="syntheticTheme"
+    :theme="mergedTheme"
     class="n-spin"
   />
 </template>

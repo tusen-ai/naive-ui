@@ -4,7 +4,7 @@
     :class="{
       [`n-progress--${status}`]: status,
       [`n-progress--${type}`]: type,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-${mergedTheme}-theme`]: mergedTheme
     }"
   >
     <div

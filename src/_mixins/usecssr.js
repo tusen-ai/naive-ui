@@ -18,7 +18,7 @@ function createMutableStyleId (
   dependencyValue
 ) {
   if (
-    dependencyKey === 'syntheticTheme' ||
+    dependencyKey === 'mergedTheme' ||
     dependencyKey === 'theme'
   ) {
     return componentCssrId + '-' + renderedTheme
@@ -53,7 +53,7 @@ function setupMutableStyle (
   const id = options.cssrId || name
   const renderedTheme = theme || fallbackTheme
   const dependencyValue = (
-    dependencyKey === 'syntheticTheme' ||
+    dependencyKey === 'mergedTheme' ||
     dependencyKey === 'theme'
   ) ? renderedTheme : instance[dependencyKey]
   if (
@@ -152,13 +152,13 @@ export default function (styles, cssrPropsOption) {
     style.watch.forEach(watchKey => {
       if (!watchers[watchKey]) watchers[watchKey] = []
       watchers[watchKey].push(
-        function (instance, syntheticTheme) {
+        function (instance, mergedTheme) {
           if (process.env.NODE_ENV !== 'production') {
             window.naive.styleRenderingDuration -= performance.now()
           }
           setupMutableStyle(
             instance,
-            syntheticTheme || null,
+            mergedTheme || null,
             style.key,
             style.CNode
           )
@@ -177,9 +177,9 @@ export default function (styles, cssrPropsOption) {
       watchKey => {
         watch[watchKey] = function () {
           // TODO use `themeKey`
-          const syntheticTheme = this.syntheticTheme || this.theme
+          const mergedTheme = this.mergedTheme || this.theme
           watchers[watchKey].forEach(watcher => {
-            watcher(this, syntheticTheme)
+            watcher(this, mergedTheme)
           })
         }
       }
@@ -203,7 +203,7 @@ export default function (styles, cssrPropsOption) {
           setupMutableStyle(
             this,
             // TODO use `themeKey`
-            this.syntheticTheme || this.theme || null,
+            this.mergedTheme || this.theme || null,
             style.key,
             style.CNode
           )

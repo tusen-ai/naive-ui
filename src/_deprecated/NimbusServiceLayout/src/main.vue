@@ -140,7 +140,7 @@ export default {
     return h(NLayout, {
       class: {
         'n-nbs': true,
-        [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme
+        [`n-${this.mergedTheme}-theme`]: this.mergedTheme
       },
       position: 'absolute'
     }, {

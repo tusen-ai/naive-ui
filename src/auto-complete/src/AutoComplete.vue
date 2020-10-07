@@ -13,10 +13,10 @@
       :handleFocus="handleFocus"
       :handleBlur="handleBlur"
       :value="value"
-      :theme="syntheticTheme"
+      :theme="mergedTheme"
     >
       <n-input
-        :theme="syntheticTheme"
+        :theme="mergedTheme"
         :value="value"
         :placeholder="placeholder"
         :size="mergedSize"
@@ -55,7 +55,7 @@
               v-clickoutside="handleClickOutsideMenu"
               auto-pending-first-option
               class="n-auto-complete-menu"
-              :theme="syntheticTheme"
+              :theme="mergedTheme"
               :pattern="value"
               :options="selectOptions"
               :multiple="false"

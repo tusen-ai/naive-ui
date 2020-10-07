@@ -8,7 +8,7 @@
   >
     <div class="n-transfer-list-item__checkbox">
       <n-simple-checkbox
-        :theme="NTransfer.syntheticTheme"
+        :theme="NTransfer.mergedTheme"
         :disabled="disabled"
         :checked="checked"
         :size="NTransfer.mergedSize"

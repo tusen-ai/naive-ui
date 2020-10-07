@@ -468,7 +468,7 @@ export default {
       class: [
         'n-tree',
         {
-          [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme
+          [`n-${this.mergedTheme}-theme`]: this.mergedTheme
         }
       ]
     }, this.data.map(child => h(NTreeNode, {

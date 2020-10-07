@@ -2,7 +2,7 @@
   <div
     class="n-breadcrumb"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-${mergedTheme}-theme`]: mergedTheme
     }"
   >
     <slot />

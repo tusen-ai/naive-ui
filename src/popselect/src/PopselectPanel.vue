@@ -1,6 +1,6 @@
 <template>
   <n-base-select-menu
-    :theme="syntheticTheme"
+    :theme="mergedTheme"
     :multiple="multiple"
     :options="options"
     :size="size"

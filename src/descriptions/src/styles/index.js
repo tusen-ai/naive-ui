@@ -5,15 +5,15 @@ export default [
   {
     key: 'size',
     watch: [
-      'syntheticTheme',
+      'mergedTheme',
       'size'
     ],
     CNode: sizeStyle
   },
   {
-    key: 'syntheticTheme',
+    key: 'mergedTheme',
     watch: [
-      'syntheticTheme'
+      'mergedTheme'
     ],
     CNode: baseStyle
   }

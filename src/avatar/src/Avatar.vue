@@ -4,7 +4,7 @@
     :class="{
       [`n-avatar--${size}-size`]: typeof size !== 'number',
       [`n-avatar--circle-shaped`]: circle || round,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-${mergedTheme}-theme`]: mergedTheme
     }"
     :style="{
       width: styleWidth,

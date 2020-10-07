@@ -4,7 +4,7 @@
     :class="{
       'n-list--bordered': bordered,
       [`n-list--${size}-size`]: size,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-${mergedTheme}-theme`]: mergedTheme
     }"
   >
     <div v-if="$slots.header" class="n-list__header">

@@ -135,7 +135,7 @@ export default {
   },
   computed: {
     theme () {
-      return this.NDataTable.syntheticTheme
+      return this.NDataTable.mergedTheme
     },
     radioGroupValue () {
       const cachedValue = this.cachedValue

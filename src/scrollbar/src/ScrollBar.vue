@@ -6,7 +6,7 @@
     v-else
     class="n-scrollbar"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-${mergedTheme}-theme`]: mergedTheme
     }"
     @mouseenter="handleMouseEnterWrapper"
     @mouseleave="handleMouseLeaveWrapper"

@@ -4,7 +4,7 @@
     :class="{
       [`n-select--${mergedSize}-size`]: true,
       'n-select--multiple': multiple,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-${mergedTheme}-theme`]: mergedTheme
     }"
     @keydown.up.prevent
     @keydown.down.prevent
@@ -29,7 +29,7 @@
       :clearable="clearable"
       :disabled="disabled"
       :size="mergedSize"
-      :theme="syntheticTheme"
+      :theme="mergedTheme"
       :loading="loading"
       :autofocus="autofocus"
       @click="handleTriggerClick"
@@ -69,7 +69,7 @@
               v-clickoutside="handleMenuClickOutside"
               class="n-select-menu"
               auto-pending-first-option
-              :theme="syntheticTheme"
+              :theme="mergedTheme"
               :pattern="pattern"
               :options="filteredOptions"
               :multiple="multiple"

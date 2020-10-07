@@ -6,7 +6,7 @@
       'n-radio--checked': renderSafeChecked,
       'n-radio--focus': focus,
       [`n-radio--${mergedSize}-size`]: true,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-${mergedTheme}-theme`]: mergedTheme
     }"
     @keyup.enter="handleKeyUpEnter"
     @click="handleClick"
@@ -83,16 +83,16 @@ export default {
   },
   setup,
   computed: {
-    syntheticTheme () {
+    mergedTheme () {
       const theme = this.theme
       const NRadioGroup = this.NRadioGroup
       if (theme !== null) {
         return theme
-      } else if (NRadioGroup && NRadioGroup.syntheticTheme) {
-        return NRadioGroup.syntheticTheme
+      } else if (NRadioGroup && NRadioGroup.mergedTheme) {
+        return NRadioGroup.mergedTheme
       } else {
         const NConfigProvider = this.NConfigProvider
-        return (NConfigProvider && NConfigProvider.syntheticTheme) || null
+        return (NConfigProvider && NConfigProvider.mergedTheme) || null
       }
     }
   }

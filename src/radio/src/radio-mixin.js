@@ -52,7 +52,7 @@ export default {
     },
     syntheticAscendantBackgroundColor () {
       const NRadioGroup = this.NRadioGroup
-      if (NRadioGroup && NRadioGroup.syntheticTheme === 'dark') {
+      if (NRadioGroup && NRadioGroup.mergedTheme === 'dark') {
         return NRadioGroup.ascendantBackgroundColor
       }
       return null

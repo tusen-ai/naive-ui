@@ -6,7 +6,7 @@
       'n-divider--no-title': !$slots.default,
       'n-divider--dashed': dashed,
       [`n-divider--title-position-${titlePlacement}`]: $slots.default && titlePlacement,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-${mergedTheme}-theme`]: mergedTheme
     }"
   >
     <hr

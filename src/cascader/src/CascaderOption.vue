@@ -55,7 +55,7 @@
             v-if="loading"
             key="loading"
             class="n-cascader-option-icon"
-            :theme="NCascader.syntheticTheme"
+            :theme="NCascader.mergedTheme"
           />
           <n-icon
             v-else

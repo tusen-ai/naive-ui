@@ -2,7 +2,7 @@
   <div
     class="n-timeline"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme,
       [`n-timeline--${size}-size`]: true,
       [`n-timeline--${itemPlacement}-placement`]: true
     }"

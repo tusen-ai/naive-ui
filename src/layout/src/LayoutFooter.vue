@@ -3,7 +3,7 @@
     class="n-layout-footer"
     :class="{
       [`n-layout-footer--${position}-positioned`]: position,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme,
       [`n-layout-footer--bordered`]: bordered
     }"
     :style="syntheticStyle"

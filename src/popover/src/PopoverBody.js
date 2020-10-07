@@ -210,7 +210,7 @@ export default {
               class: [
                 'n-popover-body',
                 {
-                  [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
+                  [`n-${this.mergedTheme}-theme`]: this.mergedTheme,
                   'n-popover-body--no-arrow': !this.showArrow,
                   'n-popover-body--shadow': this.shadow,
                   [this.bodyClass]: this.bodyClass,

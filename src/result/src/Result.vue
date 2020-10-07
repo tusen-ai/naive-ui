@@ -2,7 +2,7 @@
   <div
     class="n-result"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme,
       [`n-result--${status}-status`]: status,
       [`n-result--${size}-size`]: size
     }"

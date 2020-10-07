@@ -60,7 +60,7 @@ export default {
       class: [
         'n-steps',
         {
-          [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
+          [`n-${this.mergedTheme}-theme`]: this.mergedTheme,
           [`n-steps--${this.size}-size`]: true,
           'n-steps--vertical': this.vertical,
           'n-steps--transition-disabled': this.transitionDisabled

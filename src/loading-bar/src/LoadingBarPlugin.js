@@ -7,9 +7,9 @@ const LoadingBar = {
   loadingBarInstance: null,
   handleThemeChange (theme) {
     LoadingBar.inheritedTheme = theme
-    const syntheticTheme = LoadingBar.theme || LoadingBar.inheritedTheme
+    const mergedTheme = LoadingBar.theme || LoadingBar.inheritedTheme
     if (LoadingBar.loadingBarInstance) {
-      LoadingBar.loadingBarInstance.inheritedTheme = syntheticTheme
+      LoadingBar.loadingBarInstance.inheritedTheme = mergedTheme
     }
   },
   finishCallback () {

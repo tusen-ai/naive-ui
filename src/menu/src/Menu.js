@@ -169,7 +169,7 @@ export default {
         'n-menu',
         `n-menu--${this.mode}`,
         {
-          [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
+          [`n-${this.mergedTheme}-theme`]: this.mergedTheme,
           'n-menu--collapsed': this.collapsed,
           'n-menu--transition-disabled': this.transitionDisabled
         }

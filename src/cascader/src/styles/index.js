@@ -6,14 +6,14 @@ export default [
     key: 'mergedSize',
     watch: [
       'mergedSize',
-      'syntheticTheme'
+      'mergedTheme'
     ],
     CNode: sizeStyle
   },
   {
-    key: 'syntheticTheme',
+    key: 'mergedTheme',
     watch: [
-      'syntheticTheme'
+      'mergedTheme'
     ],
     CNode: baseStyle
   }

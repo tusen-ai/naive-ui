@@ -6,7 +6,7 @@
       :class="{
         [`n-alert--${type}-type`]: true,
         'n-alert--no-icon': showIcon === false,
-        [`n-${syntheticTheme}-theme`]: syntheticTheme
+        [`n-${mergedTheme}-theme`]: mergedTheme
       }"
       :style="{
         ...syntheticStyle

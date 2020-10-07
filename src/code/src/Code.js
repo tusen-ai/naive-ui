@@ -77,12 +77,12 @@ export default {
     }
   },
   render () {
-    const { syntheticTheme } = this
+    const { mergedTheme } = this
     return h('pre', {
       class: [
         'n-code',
         {
-          [`n-${syntheticTheme}-theme`]: syntheticTheme
+          [`n-${mergedTheme}-theme`]: mergedTheme
         }
       ]
     }, [

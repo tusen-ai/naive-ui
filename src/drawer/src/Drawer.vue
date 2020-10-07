@@ -28,7 +28,7 @@
         :body-class="compitableBodyClass"
         :show="show"
         :display-directive="displayDirective"
-        :theme="syntheticTheme"
+        :theme="mergedTheme"
       >
         <slot />
       </n-drawer-body-wrapper>

@@ -15,7 +15,7 @@
       [`n-button--${type}-type`]: true,
       [`n-button--${colorDigest || type}-colored`]: true,
       [`n-button--${mergedSize}-size`]: true,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme,
     }"
     :tabindex="mergedFocusable ? 0 : -1"
     :type="attrType"
@@ -41,7 +41,7 @@
             v-if="loading"
             key="loading"
             class="n-icon-slot"
-            :theme="syntheticTheme"
+            :theme="mergedTheme"
             :stroke-width="24"
           />
           <n-icon

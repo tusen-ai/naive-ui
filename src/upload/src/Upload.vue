@@ -2,7 +2,7 @@
   <div
     class="n-upload"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme,
       'n-upload--dragger-inside': draggerInside,
       'n-upload--drag-over': dragOver,
       'n-upload--disabled': disabled

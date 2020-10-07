@@ -4,16 +4,16 @@ import themedTypeStyle from './themed-type.cssr.js'
 
 export default [
   {
-    key: 'syntheticTheme',
+    key: 'mergedTheme',
     watch: [
-      'syntheticTheme'
+      'mergedTheme'
     ],
     CNode: themedBaseStyle
   },
   {
     key: 'size',
     watch: [
-      'syntheticTheme',
+      'mergedTheme',
       'size'
     ],
     CNode: themedSizeStyle
@@ -21,7 +21,7 @@ export default [
   {
     key: 'type',
     watch: [
-      'syntheticTheme',
+      'mergedTheme',
       'type'
     ],
     CNode: themedTypeStyle

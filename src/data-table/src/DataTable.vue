@@ -2,7 +2,7 @@
   <div
     class="n-data-table"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme,
       'n-data-table--bordered': bordered,
       'n-data-table--single-line': singleLine,
       'n-data-table--single-column': singleColumn,
@@ -11,7 +11,7 @@
   >
     <n-spin
       :spinning="loading"
-      :theme="syntheticTheme"
+      :theme="mergedTheme"
     >
       <div
         class="n-data-table-wrapper"
@@ -35,7 +35,7 @@
               'n-data-table-empty--hide': loading
             }"
           >
-            <n-empty :theme="syntheticTheme" />
+            <n-empty :theme="mergedTheme" />
           </div>
         </base-table>
       </div>
@@ -44,7 +44,7 @@
         class="n-data-table__pagination"
       >
         <n-pagination
-          :theme="syntheticTheme"
+          :theme="mergedTheme"
           :page="syntheticPagination.page"
           :page-count="syntheticPagination.pageCount"
           :page-size="syntheticPagination.pageSize"

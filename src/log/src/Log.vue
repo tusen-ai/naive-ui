@@ -2,7 +2,7 @@
   <div
     class="n-log"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-${mergedTheme}-theme`]: mergedTheme
     }"
     :style="{
       lineHeight: lineHeight,
@@ -13,7 +13,7 @@
     <n-scrollbar
       ref="scrollbar"
       class="n-code"
-      :theme="syntheticTheme"
+      :theme="mergedTheme"
       @scroll="handleScroll"
     >
       <n-log-line
@@ -23,7 +23,7 @@
       />
     </n-scrollbar>
     <transition name="n-fade-in-scale-up-transition">
-      <n-log-loader v-if="loading" :theme="syntheticTheme" />
+      <n-log-loader v-if="loading" :theme="mergedTheme" />
     </transition>
   </div>
 </template>

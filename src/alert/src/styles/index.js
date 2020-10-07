@@ -3,9 +3,9 @@ import themedTypeStyle from './themed-type.cssr.js'
 
 export default [
   {
-    key: 'syntheticTheme',
+    key: 'mergedTheme',
     watch: [
-      'syntheticTheme'
+      'mergedTheme'
     ],
     CNode: themedBaseStyle
   },
@@ -13,7 +13,7 @@ export default [
     key: 'type',
     watch: [
       'type',
-      'syntheticTheme'
+      'mergedTheme'
     ],
     CNode: themedTypeStyle
   }

@@ -3,7 +3,7 @@
     class="n-layout-header"
     :class="{
       [`n-layout-header--${position}-positioned`]: position,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme,
       [`n-layout-header--bordered`]: bordered
     }"
     :style="syntheticStyle"
