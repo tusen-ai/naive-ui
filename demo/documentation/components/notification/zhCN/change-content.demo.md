@@ -1,12 +1,14 @@
 # 动态修改内容
 你可以修改已经存在的通知
 ```html
-<n-button @click="open">
-  打开它
-</n-button>
-<n-button @click="change" :disabled="!notification">
-  改它
-</n-button>
+<n-space>
+  <n-button @click="open">
+    打开它
+  </n-button>
+  <n-button @click="change" :disabled="!n">
+    改它
+  </n-button>
+</n-space>
 ```
 ```js
 import { h, resolveComponent } from 'vue'
@@ -15,12 +17,12 @@ export default {
   inject: ['notification'],
   data () {
     return {
-      notification: null
+      n: null
     }
   },
   methods: {
     open () {
-      this.notification = this.notification.create({
+      this.n = this.notification.create({
         title: `Wouldn't it be Nice`,
         description: 'From the Beach Boys',
         content: `Wouldn't it be nice if we were older
@@ -41,23 +43,18 @@ Hold each other close the whole night through`,
             src:'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
           }),
         onClose: () => {
-          this.notification = null
+          this.n = null
         }
       })
     },
     change () {
-      if (this.notification) {
-        this.notification.content = () => h('img', {
+      if (this.n) {
+        this.n.content = () => h('img', {
           src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
           style: 'width: 100%;'
         })
       }
     }
   }
-}
-```
-```css
-.n-button {
-  margin: 0 12px 8px 0;
 }
 ```

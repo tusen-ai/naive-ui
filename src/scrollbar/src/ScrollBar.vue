@@ -88,7 +88,7 @@ import themable from '../../_mixins/themeable'
 import resizeObserverDelagate from '../../_utils/delegate/resizeObserverDelegate'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles/index.js'
-import { isIos } from '../../_utils/browser/os'
+import { isIos } from '../../_utils'
 
 export default {
   name: 'Scrollbar',

@@ -5,7 +5,7 @@ import {
   themeable,
   usecssr
 } from '../../_mixins'
-import { KEY_CODE } from '../../_utils/event/keyCode'
+import { KEY_CODE } from '../../_utils'
 import keyboardDelegate from '../../_utils/delegate/keyboardDelegate'
 import NPopover from '../../popover'
 import NDropdownMenu from './DropdownMenu.js'

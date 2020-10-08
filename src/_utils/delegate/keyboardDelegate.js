@@ -1,4 +1,4 @@
-import { KEY_CODE } from '../event/keyCode'
+import { KEY_CODE } from '../dom/key-code'
 
 class KeyboardDelegate {
   constructor () {
