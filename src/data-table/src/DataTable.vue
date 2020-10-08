@@ -63,19 +63,19 @@
 
 <script>
 import { ref } from 'vue'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import usecssr from '../../_mixins/usecssr'
-import locale from '../../_mixins/locale'
+import {
+  configurable,
+  themeable,
+  usecssr,
+  locale
+} from '../../_mixins'
 import { setCheckStatusOfRow, createRowKey } from './utils'
 import BaseTable from './BaseTable.vue'
 import NEmpty from '../../empty'
 import NPagination from '../../pagination'
-import formatLength from '../../_utils/css/formatLength'
 import isPlainObject from 'lodash-es/isPlainObject'
 import styles from './styles'
-import { warn } from '../../_utils/naive'
-import { call } from '../../_utils/vue'
+import { warn, call, formatLength, nextFrame } from '../../_utils'
 
 function createShallowClonedObject (object) {
   if (!object) return object
@@ -137,7 +137,7 @@ export default {
     NPagination
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles),
     locale('DataTable')
@@ -283,11 +283,9 @@ export default {
   },
   data () {
     return {
-      /** collected tr heights of main table */
-      horizontalScrollLeft: 0,
       /* which part is being scrolling: main left right header */
       scrollingPart: null,
-      scrollTimerId: null,
+      scrollReceived: false,
       /** internal checked rows */
       internalCheckedRowKeys: [],
       /** internal filters state */
@@ -523,9 +521,6 @@ export default {
   watch: {
     syntheticCurrentPage () {
       this.scrollMainTableBodyToTop()
-    },
-    data () {
-      /** TODO: init logic should be fulfilled */
     }
   },
   created () {
@@ -638,50 +633,67 @@ export default {
         body
       }
     },
-    handleTableHeaderScroll (e, active) {
-      if (this.scrollingPart === null) {
-        this.scrollingPart = 'header'
-      }
-      if (this.scrollingPart === 'header') {
-        window.clearTimeout(this.scrollTimerId)
-        this.scrollTimerId = window.setTimeout(() => {
+    handleTableHeaderScroll () {
+      const {
+        scrollReceived,
+        scrollingPart
+      } = this
+      if (scrollReceived && scrollingPart === 'header') return
+      switch (scrollingPart) {
+        case null:
+          this.scrollingPart = 'header'
+          this.scrollReceived = true
+          console.log('queue sync')
+          nextFrame(this.syncScrollState)
+          break
+        case 'body':
           this.scrollingPart = null
-        }, 200)
+          this.scrollReceived = false
+          break
       }
-      if (this.scrollingPart === 'body') {
-        return
-      }
-      const {
-        scrollLeft
-      } = e.target
-      const {
-        body: bodyEl
-      } = this.getScrollElements()
-      bodyEl.scrollLeft = scrollLeft
-      this.horizontalScrollLeft = scrollLeft
     },
-    handleTableBodyScroll (e) {
-      if (this.scrollingPart === null) {
-        this.scrollingPart = 'body'
-      }
-      if (this.scrollingPart === 'body') {
-        window.clearTimeout(this.scrollTimerId)
-        this.scrollTimerId = window.setTimeout(() => {
+    handleTableBodyScroll () {
+      const {
+        scrollReceived,
+        scrollingPart
+      } = this
+      if (scrollReceived && scrollingPart === 'body') return
+      switch (scrollingPart) {
+        case null:
+          this.scrollingPart = 'body'
+          this.scrollReceived = true
+          console.log('queue sync')
+          nextFrame(this.syncScrollState)
+          break
+        case 'header':
           this.scrollingPart = null
-        }, 200)
+          this.scrollReceived = false
+          break
       }
-      if (this.scrollingPart === 'header') {
+    },
+    syncScrollState () {
+      const {
+        scrollingPart
+      } = this
+      if (__DEV__ && scrollingPart === null) {
+        warn('data-table', 'Scroll sync has no corresponding part. This could be a bug of naive-ui.')
+      }
+      const {
+        header,
+        body
+      } = this.getScrollElements()
+      if (body.scrollLeft === header.scrollLeft) {
+        this.scrollingPart = null
+        this.scrollReceived = false
         return
       }
-      const {
-        scrollLeft
-      } = e.target
-      const {
-        header: headerEl
-      } = this.getScrollElements()
-      if (headerEl) {
-        headerEl.scrollLeft = scrollLeft
-        this.horizontalScrollLeft = scrollLeft
+      switch (scrollingPart) {
+        case 'header':
+          body.scrollLeft = header.scrollLeft
+          break
+        case 'body':
+          header.scrollLeft = body.scrollLeft
+          break
       }
     },
     page (page) {
