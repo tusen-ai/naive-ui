@@ -78,7 +78,6 @@
               :value="value"
               @menu-toggle-option="handleToggleOption"
               @menu-scroll="handleMenuScroll"
-              @menu-visible="handleMenuVisible"
             >
               <template v-if="$slots.empty" v-slot:empty>
                 <slot name="empty" />
@@ -667,9 +666,6 @@ export default {
       } else {
         this.doUpdateValue(null)
       }
-    },
-    handleMenuVisible () {
-      this.__placeableSyncPosition()
     },
     /**
      * scroll events on menu

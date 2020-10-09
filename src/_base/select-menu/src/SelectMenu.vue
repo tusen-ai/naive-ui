@@ -165,10 +165,6 @@ export default {
       default: true
     },
     // deprecated
-    onMenuVisible: {
-      type: Function,
-      default: undefined
-    },
     onMenuToggleOption: {
       type: Function,
       default: undefined
@@ -289,13 +285,6 @@ export default {
     },
     handleListResize () {
       this.scrollbarRef.sync()
-    },
-    handleMenuVisible () {
-      // TODO: remove it
-      const {
-        onMenuVisible
-      } = this
-      if (onMenuVisible) onMenuVisible()
     },
     handleMenuScroll (e, scrollContainer, scrollContent) {
       const {

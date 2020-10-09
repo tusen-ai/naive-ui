@@ -21,7 +21,6 @@
           :size="size"
           :value="value"
           @menu-toggle-option="handleSelectMenuToggleOption"
-          @menu-visible="handleMenuVisible"
         />
       </transition>
     </div>
@@ -215,9 +214,6 @@ export default {
         const pendingOptionData = menuRef.getPendingOptionData()
         this.handleSelectOptionCheck(pendingOptionData)
       }
-    },
-    handleMenuVisible () {
-      this.__placeableSyncPosition()
     },
     handleClickOutside (e) {
       this.NCascader.handleSelectMenuClickOutside(e)
