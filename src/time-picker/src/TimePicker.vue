@@ -7,7 +7,7 @@
     }"
   >
     <n-input
-      ref="tracked"
+      ref="trackedRef"
       v-model:value="displayTimeString"
       class="n-time-picker-input"
       passively-activated
@@ -41,7 +41,7 @@
       adjust-to
     >
       <div
-        ref="offsetContainer"
+        ref="offsetContainerRef"
         v-zindexable="{ enabled: active }"
         class="n-positioning-container"
         :class="{
@@ -50,7 +50,7 @@
         }"
       >
         <div
-          ref="tracking"
+          ref="trackingRef"
           class="n-positioning-content"
         >
           <transition
@@ -59,7 +59,7 @@
           >
             <div
               v-if="active"
-              ref="panel"
+              ref="panelRef"
               v-clickoutside="handleClickOutside"
               tabindex="0"
               class="n-time-picker-selector"
@@ -78,7 +78,7 @@
                     'n-time-picker-selector-time-row--transition-disabled': hourTransitionDisabled
                   }"
                 >
-                  <n-scrollbar ref="hours" :theme="mergedTheme">
+                  <n-scrollbar ref="hoursRef" :theme="mergedTheme">
                     <div
                       v-for="hour in hours"
                       :key="hour"
@@ -105,7 +105,7 @@
                     'n-time-picker-selector-time-row--invalid': isMinuteInvalid
                   }"
                 >
-                  <n-scrollbar ref="minutes" :theme="mergedTheme">
+                  <n-scrollbar ref="minutesRef" :theme="mergedTheme">
                     <div
                       v-for="minute in minutes"
                       :key="minute"
@@ -131,7 +131,7 @@
                     'n-time-picker-selector-time-row--transition-disabled': secondTransitionDisabled,
                   }"
                 >
-                  <n-scrollbar ref="seconds" :theme="mergedTheme">
+                  <n-scrollbar ref="secondsRef" :theme="mergedTheme">
                     <div
                       v-for="second in seconds"
                       :key="second"
@@ -182,6 +182,7 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 import NLazyTeleport from '../../_base/lazy-teleport'
 import NScrollbar from '../../scrollbar'
 import NInput from '../../input'
@@ -203,13 +204,10 @@ import getHours from 'date-fns/getHours'
 import getSeconds from 'date-fns/getSeconds'
 import { strictParse } from '../../_utils/component/datePicker'
 import keyboardDelegate from '../../_utils/delegate/keyboardDelegate'
-import { KEY_CODE } from '../../_utils'
 import NBaseFocusDetector from '../../_base/focus-detector'
 import TimeIcon from '../../_icons/time-outline.vue'
 import styles from './styles'
-import { useIsMounted } from '../../_utils/composition'
-import { warn } from '../../_utils/naive/warn'
-import { call } from '../../_utils/vue'
+import { warn, call, useIsMounted, KEY_CODE } from '../../_utils'
 
 const DEFAULT_FORMAT = 'HH:mm:ss'
 
@@ -338,7 +336,14 @@ export default {
   },
   setup () {
     return {
-      isMounted: useIsMounted()
+      isMounted: useIsMounted(),
+      hoursRef: ref(null),
+      minutesRef: ref(null),
+      secondsRef: ref(null),
+      offsetContainerRef: ref(null),
+      trackingRef: ref(null),
+      trackedRef: ref(null),
+      panelRef: ref(null)
     }
   },
   data () {
@@ -421,7 +426,7 @@ export default {
   watch: {
     computedTime (value) {
       this.refreshTimeString(value)
-      this.$nextTick().then(this.scrollTimer)
+      this.$nextTick(this.scrollTimer)
     },
     active (value) {
       if (this.isValueInvalid) {
@@ -431,16 +436,16 @@ export default {
   },
   methods: {
     __placeableBody () {
-      return this.$refs.panel
+      return this.panelRef
     },
     __placeableOffsetContainer () {
-      return this.$refs.offsetContainer
+      return this.offsetContainerRef
     },
     __placeableTracking () {
-      return this.$refs.tracking
+      return this.trackingRef
     },
     __placeableTracked () {
-      return this.$refs.tracked
+      return this.trackedRef
     },
     doChange (value) {
       const {
@@ -491,7 +496,7 @@ export default {
           break
         case KEY_CODE.TAB:
           const shiftPressed = keyboardDelegate.getKeyboardStatus().shiftPressed
-          if (shiftPressed && e.target === this.$refs.panel) {
+          if (shiftPressed && e.target === this.panelRef) {
             e.preventDefault()
             this.closeTimeSelector({
               returnFocus: true,
@@ -503,7 +508,7 @@ export default {
     },
     disableTransitionOneTick (unit) {
       this[unit + 'TransitionDisabled'] = true
-      this.$nextTick().then(() => {
+      this.$nextTick(() => {
         this[unit + 'TransitionDisabled'] = false
       })
     },
@@ -572,7 +577,7 @@ export default {
     },
     handleTimeInputBlur (e) {
       if (this.active) {
-        const panel = this.$refs.panel
+        const panel = this.panelRef
         if (!(
           panel &&
           panel.contains(e.relatedTarget)
@@ -600,29 +605,29 @@ export default {
       })
     },
     scrollTimer () {
-      if (this.$refs.hours && this.$refs.hours.$el) {
-        const hour = this.$refs.hours.$el.querySelector('.n-time-picker-selector-time-row__item--active')
+      if (this.hoursRef && this.hoursRef.$el) {
+        const hour = this.hoursRef.$el.querySelector('.n-time-picker-selector-time-row__item--active')
         if (hour) {
-          this.$refs.hours.$refs.scrollContainer.scrollTo(0, hour.offsetTop)
+          this.hoursRef.scrollTo(0, hour.offsetTop)
         }
       }
-      if (this.$refs.minutes && this.$refs.minutes.$el) {
-        const minute = this.$refs.minutes.$el.querySelector('.n-time-picker-selector-time-row__item--active')
+      if (this.minutesRef && this.minutesRef.$el) {
+        const minute = this.minutesRef.$el.querySelector('.n-time-picker-selector-time-row__item--active')
         if (minute) {
-          this.$refs.minutes.$refs.scrollContainer.scrollTo(0, minute.offsetTop)
+          this.minutesRef.scrollTo(0, minute.offsetTop)
         }
       }
-      if (this.$refs.seconds && this.$refs.seconds.$el) {
-        const second = this.$refs.seconds.$el.querySelector('.n-time-picker-selector-time-row__item--active')
+      if (this.secondsRef && this.secondsRef.$el) {
+        const second = this.secondsRef.$el.querySelector('.n-time-picker-selector-time-row__item--active')
         if (second) {
-          this.$refs.seconds.$refs.scrollContainer.scrollTo(0, second.offsetTop)
+          this.secondsRef.scrollTo(0, second.offsetTop)
         }
       }
     },
     openTimeSelector () {
       this.memorizedValue = this.value
       this.active = true
-      this.$nextTick().then(this.scrollTimer)
+      this.$nextTick(this.scrollTimer)
     },
     handleActivatorClick (e) {
       if (!this.active) {
@@ -630,7 +635,7 @@ export default {
       }
     },
     handleClickOutside (e) {
-      if (this.active && !this.$refs.tracked.$el.contains(e.target)) {
+      if (this.active && !this.trackedRef.$el.contains(e.target)) {
         this.closeTimeSelector({
           returnFocus: false,
           emitBlur: true
@@ -644,7 +649,7 @@ export default {
       if (this.active) {
         this.active = false
         if (returnFocus) {
-          this.$refs.tracked.focus()
+          this.trackedRef.focus()
         }
         if (emitBlur) {
           const {
@@ -691,7 +696,7 @@ export default {
       })
     },
     handleMenuFocus (e) {
-      const panel = this.$refs.panel
+      const panel = this.panelRef
       if (
         keyboardDelegate.tabPressed &&
         e.target === panel &&
