@@ -9,7 +9,7 @@
       [`n-${mergedTheme}-theme`]: mergedTheme
     }"
   >
-    <resize-observer @resize="handleNavResize">
+    <v-resize-observer @resize="handleNavResize">
       <div
         ref="navRef"
         class="n-tabs-nav"
@@ -31,7 +31,7 @@
           ref="navScrollRef"
           class="n-tabs-nav-scroll"
         >
-          <resize-observer @resize="handleScrollContentResize">
+          <v-resize-observer @resize="handleScrollContentResize">
             <div
               ref="labelWrapperRef"
               class="n-tabs-label-wrapper"
@@ -69,7 +69,7 @@
                 }"
               />
             </div>
-          </resize-observer>
+          </v-resize-observer>
         </div>
         <div
           v-if="showScrollButton"
@@ -84,7 +84,7 @@
           </n-icon>
         </div>
       </div>
-    </resize-observer>
+    </v-resize-observer>
     <slot />
   </div>
 </template>
@@ -100,7 +100,7 @@ import {
 import BackwardIcon from '../../_icons/ios-arrow-back.vue'
 import ForwardIcon from '../../_icons/ios-arrow-forward.vue'
 import CloseIcon from '../../_icons/md-close.vue'
-import { ResizeObserver } from '../../_base'
+import { VResizeObserver } from 'vueuc'
 import { throttle } from 'lodash-es'
 import styles from './styles'
 import { warn } from '../../_utils/naive/warn'
@@ -118,7 +118,7 @@ export default {
     BackwardIcon,
     ForwardIcon,
     CloseIcon,
-    ResizeObserver
+    VResizeObserver
   },
   mixins: [
     configurable,
