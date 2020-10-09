@@ -1,6 +1,6 @@
 <template>
   <n-scrollbar
-    ref="scrollbar"
+    ref="scrollbarRef"
     class="n-data-table-base-table-body"
     :theme="NDataTable.mergedTheme"
     :content-style="{
@@ -8,7 +8,7 @@
     }"
     :horizontal-rail-style="{ zIndex: 3 }"
     :vertical-rail-style="{ zIndex: 3 }"
-    :show-rail="!fixed"
+    x-scrollable
     @scroll="handleScroll"
   >
     <table ref="body" class="n-data-table-table">
@@ -70,7 +70,8 @@
 </template>
 
 <script>
-import cell from './Cell.vue'
+import { ref } from 'vue'
+import Cell from './Cell.vue'
 import { createCustomWidthStyle, setCheckStatusOfRow, createClassObject, createRowKey } from '../utils'
 import NScrollbar from '../../../scrollbar'
 import formatLength from '../../../_utils/css/formatLength'
@@ -78,7 +79,7 @@ import formatLength from '../../../_utils/css/formatLength'
 export default {
   components: {
     NScrollbar,
-    cell
+    Cell
   },
   inject: {
     NDataTable: {
@@ -97,10 +98,6 @@ export default {
     scrollX: {
       type: [Number, String],
       default: null
-    },
-    fixed: {
-      type: Boolean,
-      default: false
     },
     minHeight: {
       type: Number,
@@ -121,6 +118,11 @@ export default {
     loading: {
       type: Boolean,
       default: false
+    }
+  },
+  setup () {
+    return {
+      scrollbarRef: ref(null)
     }
   },
   data () {
@@ -155,7 +157,7 @@ export default {
       this.NDataTable.changeCheckedRowKeys(newCheckedRowKeys)
     },
     getScrollContainer () {
-      return this.$refs.scrollbar.$refs.scrollContainer
+      return this.scrollbarRef.containerRef
     },
     createCustomWidthStyle: createCustomWidthStyle,
     handleScroll (event) {

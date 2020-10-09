@@ -1,103 +1,115 @@
 <template>
-  <div v-if="!scrollable" ref="scrollContent">
-    <slot />
-  </div>
-  <div
+  <slot v-if="!scrollable" />
+  <v-resize-observer
     v-else
-    class="n-scrollbar"
-    :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme
-    }"
-    @mouseenter="handleMouseEnterWrapper"
-    @mouseleave="handleMouseLeaveWrapper"
+    @resize="handleContentResize"
   >
     <div
-      v-if="!container"
-      ref="scrollContainer"
-      class="n-scrollbar-container"
-      :style="containerStyle"
-      @scroll="handleScroll"
+      class="n-scrollbar"
+      :class="{
+        [`n-${mergedTheme}-theme`]: mergedTheme
+      }"
+      @mouseenter="handleMouseEnterWrapper"
+      @mouseleave="handleMouseLeaveWrapper"
     >
       <div
-        ref="scrollContent"
-        :style="{
-          width: xScrollable ? 'fit-content' : null,
-          ...contentStyle,
-        }"
-        class="n-scrollbar-content"
+        v-if="!container"
+        ref="containerRef"
+        class="n-scrollbar-container"
+        :style="containerStyle"
+        @scroll="handleScroll"
       >
+        <v-resize-observer @resize="handleContentResize">
+          <div
+            ref="contentRef"
+            :style="{
+              width: xScrollable ? 'fit-content' : null,
+              ...contentStyle,
+            }"
+            class="n-scrollbar-content"
+          >
+            <slot />
+          </div>
+        </v-resize-observer>
+      </div>
+      <template v-else>
         <slot />
+      </template>
+      <div
+        ref="verticalRailRef"
+        class="n-scrollbar-rail n-scrollbar-rail--vertical"
+        :class="{
+          'n-scrollbar-rail--disabled': !needVerticalScrollbar
+        }"
+        :style="{...horizontalRailStyle, width: scrollbarSize }"
+      >
+        <transition name="n-fade-in-transition">
+          <div
+            v-if="needVerticalScrollbar && showVeriticalScrollbar && !isIos"
+            class="n-scrollbar-rail__scrollbar"
+            :style="{
+              height: verticalScrollbarHeightPx,
+              top: verticalScrollbarTopPx,
+              width: scrollbarSize,
+              borderRadius: scrollbarBorderRadius
+            }"
+            @mousedown="handleVerticalScrollMouseDown"
+            @mouseup="handleVerticalScrollMouseUp"
+            @mousemove="handleVerticalScrollMouseMove"
+          />
+        </transition>
+      </div>
+      <div
+        ref="horizontalRailRef"
+        class="n-scrollbar-rail n-scrollbar-rail--horizontal"
+        :class="{
+          'n-scrollbar-rail--disabled': !needHorizontalScrollbar
+        }"
+        :style="{ ...verticalRailStyle, height: scrollbarSize }"
+      >
+        <transition name="n-scrollbar-transition">
+          <div
+            v-if="needHorizontalScrollbar && showHorizontalScrollbar && !isIos"
+            class="n-scrollbar-rail__scrollbar"
+            :style="{
+              height: scrollbarSize,
+              width: horizontalScrollbarWidthPx,
+              left: horizontalScrollbarLeftPx,
+              borderRadius: scrollbarBorderRadius
+            }"
+            @mousedown="handleHorizontalScrollMouseDown"
+            @mouseup="handleHorizontalScrollMouseUp"
+            @mousemove="handleHorizontalScrollMouseMove"
+          />
+        </transition>
       </div>
     </div>
-    <template v-else>
-      <slot />
-    </template>
-    <div
-      v-if="showRail"
-      ref="verticalRail"
-      class="n-scrollbar-rail n-scrollbar-rail--vertical"
-      :class="{
-        'n-scrollbar-rail--disabled': !needVerticalScrollbar
-      }"
-      :style="{...horizontalRailStyle, width: scrollbarSize }"
-    >
-      <transition name="n-fade-in-transition">
-        <div
-          v-if="needVerticalScrollbar && showVeriticalScrollbar && !isIos"
-          class="n-scrollbar-rail__scrollbar"
-          :style="{
-            height: verticalScrollbarHeightPx,
-            top: verticalScrollbarTopPx,
-            width: scrollbarSize,
-            borderRadius: scrollbarBorderRadius
-          }"
-          @mousedown="handleVerticalScrollMouseDown"
-          @mouseup="handleVerticalScrollMouseUp"
-          @mousemove="handleVerticalScrollMouseMove"
-        />
-      </transition>
-    </div>
-    <div
-      v-if="showRail"
-      ref="horizontalRail"
-      class="n-scrollbar-rail n-scrollbar-rail--horizontal"
-      :class="{
-        'n-scrollbar-rail--disabled': !needHorizontalScrollbar
-      }"
-      :style="{ ...verticalRailStyle, height: scrollbarSize }"
-    >
-      <transition name="n-scrollbar-transition">
-        <div
-          v-if="needHorizontalScrollbar && showHorizontalScrollbar && !isIos"
-          class="n-scrollbar-rail__scrollbar"
-          :style="{
-            height: scrollbarSize,
-            width: horizontalScrollbarWidthPx,
-            left: horizontalScrollbarLeftPx,
-            borderRadius: scrollbarBorderRadius
-          }"
-          @mousedown="handleHorizontalScrollMouseDown"
-          @mouseup="handleHorizontalScrollMouseUp"
-          @mousemove="handleHorizontalScrollMouseMove"
-        />
-      </transition>
-    </div>
-  </div>
+  </v-resize-observer>
 </template>
 
 <script>
-import withapp from '../../_mixins/withapp'
-import themable from '../../_mixins/themeable'
-import resizeObserverDelagate from '../../_utils/delegate/resizeObserverDelegate'
-import usecssr from '../../_mixins/usecssr'
+import {
+  ref
+} from 'vue'
+import {
+  VResizeObserver
+} from 'vueuc'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
 import styles from './styles/index.js'
 import { isIos } from '../../_utils'
 
 export default {
   name: 'Scrollbar',
+  components: {
+    VResizeObserver
+  },
   mixins: [
-    withapp,
-    themable,
+    configurable,
+    themeable,
     usecssr(styles)
   ],
   props: {
@@ -125,11 +137,11 @@ export default {
       type: Function,
       default: null
     },
-    contentStyle: {
+    containerStyle: {
       type: Object,
       default: null
     },
-    containerStyle: {
+    contentStyle: {
       type: Object,
       default: null
     },
@@ -141,27 +153,7 @@ export default {
       type: Object,
       default: null
     },
-    showRail: {
-      type: Boolean,
-      default: true
-    },
-    onMouseEnter: {
-      type: Function,
-      default: undefined
-    },
-    onMouseLeave: {
-      type: Function,
-      default: undefined
-    },
     onScroll: {
-      type: Function,
-      default: undefined
-    },
-    onScrollStart: {
-      type: Function,
-      default: undefined
-    },
-    onScrollEnd: {
       type: Function,
       default: undefined
     }
@@ -186,7 +178,6 @@ export default {
       memorizedHorizontalLeft: null,
       memorizedMouseX: null,
       memorizedMouseY: null,
-      disabled: false,
       isIos
     }
   },
@@ -240,77 +231,54 @@ export default {
       return this.containerWidth !== null && this.contentWidth !== null && this.contentWidth > this.containerWidth
     }
   },
-  watch: {
-    containerScrollTop () {
-      this.handleVerticalScroll()
-    },
-    containerScrollLeft () {
-      this.handleHorizontalScroll()
-    }
-  },
   beforeUnmount () {
-    resizeObserverDelagate.unregisterHandler(this._content())
-  },
-  unmounted () {
     window.clearTimeout(this.horizontalScrollbarVanishTimerId)
     window.clearTimeout(this.verticalScrollbarVanishTimerId)
     window.removeEventListener('mousemove', this.handleVerticalScrollMouseMove, true)
     window.removeEventListener('mouseup', this.handleVerticalScrollMouseUp, true)
   },
+  setup () {
+    return {
+      containerRef: ref(null),
+      contentRef: ref(null),
+      verticalRailRef: ref(null),
+      horizontalRailRef: ref(null)
+    }
+  },
   mounted () {
-    this.updateParameters()
-    this.$nextTick().then(() => {
-      if (this.container) {
-        const containerEl = this.container()
-        containerEl.addEventListener('scroll', this.handleScroll)
-      }
-    })
-    resizeObserverDelagate.registerHandler(this._content(), this.updateParameters)
+    // if container exist, it always can't be resolved when scrollbar is mounted
+    // for example:
+    // - component
+    //   - scrollbar
+    //     - inner
+    // if you pass inner to scrollbar, you may use a ref inside component
+    // however, when scrollbar is mounted, ref is not ready at component
+    // you need to init by yourself
+    if (this.container) return
+    this.sync()
   },
   methods: {
-    _container () {
-      if (this.container) {
-        return this.container()
-      }
-      return this.$refs.scrollContainer
+    mergedContainerRef () {
+      const {
+        container
+      } = this
+      if (container) return container()
+      return this.containerRef
     },
-    _content () {
-      if (this.content) {
-        return this.content()
-      }
-      return this.$refs.scrollContent
+    mergedContentRef () {
+      const {
+        content
+      } = this
+      if (content) return content()
+      return this.contentRef
     },
-    disableScrollbar () {
-      this.hideScrollbar()
-      this.disabled = true
-    },
-    enableScrollbar () {
-      this.disabled = false
-      this.updateParameters()
-      this.showScrollbar()
-    },
-    showScrollbar () {
-      this.showHorizontalScrollbar = true
-      this.showVeriticalScrollbar = true
+    handleContentResize () {
+      this.sync()
     },
     scrollTo (...args) {
-      const container = this._container()
+      const container = this.mergedContainerRef()
       if (container) {
         container.scrollTo(...args)
-      }
-    },
-    scrollToTop (smooth = false) {
-      this.scrollTo({
-        top: 0,
-        smooth
-      })
-    },
-    scrollToBottom (smooth = false) {
-      const content = this._content()
-      if (content) {
-        this.scrollTo({
-          top: content.offsetHeight
-        })
       }
     },
     scrollToElement (el, options = {}) {
@@ -318,10 +286,10 @@ export default {
       const {
         getTop = elm => elm.offsetTop,
         getHeight = elm => elm.offsetHeight,
-        behavior = 'smooth'
+        behavior = 'auto'
       } = options
       const top = getTop(el)
-      const container = this._container()
+      const container = this.mergedContainerRef()
       if (top < container.scrollTop) {
         container.scrollTo({
           top,
@@ -341,21 +309,11 @@ export default {
       }
     },
     handleMouseEnterWrapper () {
-      const {
-        onMouseEnter
-      } = this
-      if (onMouseEnter) onMouseEnter()
-      if (this.disabled) return
       this.displayHorizontalScrollbar()
       this.displayVerticalScrollbar()
-      this.updateParameters()
+      this.sync()
     },
     handleMouseLeaveWrapper () {
-      const {
-        onMouseLeave
-      } = this
-      if (onMouseLeave) onMouseLeave()
-      if (this.disabled) return
       this.hideScrollbar()
     },
     hideScrollbar () {
@@ -390,62 +348,51 @@ export default {
       }
       this.showVeriticalScrollbar = true
     },
-    handleHorizontalScroll () {
-      // console.log('handleHorizontalScroll')
-    },
-    handleVerticalScroll () {
-      // console.log('handleVerticalScroll')
-    },
     handleScroll (e) {
-      if (this.disabled) return
       const {
         onScroll
       } = this
-      if (onScroll) onScroll(e, this._container(), this._content())
-      this.updateScrollParameters()
+      if (onScroll) onScroll(e, this.mergedContainerRef(), this.mergedContentRef())
+      this.syncScrollState()
     },
-    updateScrollParameters () {
-      const container = this._container()
+    syncScrollState () {
+      // only collect scroll state, do not trigger any dom event
+      const container = this.mergedContainerRef()
       if (container) {
         this.containerScrollTop = container.scrollTop
         this.containerScrollLeft = container.scrollLeft
       }
     },
-    updatePositionParameters () {
-      /**
-       * Don't use getClientBoundingRect because element may be scale transformed
-       */
-      const content = this._content()
+    syncPositionState () {
+      // only collect position state, do not trigger any dom event
+      // Don't use getClientBoundingRect because element may be scale transformed
+      const content = this.mergedContentRef()
       if (content) {
         this.contentHeight = content.offsetHeight
         this.contentWidth = content.offsetWidth
       }
-      const container = this._container()
+      const container = this.mergedContainerRef()
       if (container) {
         this.containerHeight = container.offsetHeight
         this.containerWidth = container.offsetWidth
       }
-      const horizontalRail = this.$refs.horizontalRail
+      const horizontalRail = this.horizontalRailRef
       if (horizontalRail) {
         this.horizontalRailWidth = horizontalRail.offsetWidth
       }
-      const verticalRail = this.$refs.verticalRail
+      const verticalRail = this.verticalRailRef
       if (verticalRail) {
         this.verticalRailHeight = verticalRail.offsetHeight
       }
     },
-    updateParameters () {
+    sync () {
       if (!this.scrollable) return
-      this.updatePositionParameters()
-      this.updateScrollParameters()
+      this.syncPositionState()
+      this.syncScrollState()
     },
     handleHorizontalScrollMouseDown (e) {
       e.preventDefault()
       e.stopPropagation()
-      const {
-        onScrollStart
-      } = this
-      if (onScrollStart) onScrollStart()
       this.horizontalScrollbarActivated = true
       window.addEventListener('mousemove', this.handleHorizontalScrollMouseMove)
       window.addEventListener('mouseup', this.handleHorizontalScrollMouseUp)
@@ -453,40 +400,31 @@ export default {
       this.memorizedMouseX = e.clientX
     },
     handleHorizontalScrollMouseMove (e) {
-      if (this.horizontalScrollbarActivated) {
-        window.clearTimeout(this.horizontalScrollbarVanishTimerId)
-        window.clearTimeout(this.verticalScrollbarVanishTimerId)
-        const dX = (e.clientX - this.memorizedMouseX)
-        let dScrollLeft = dX * (this.contentWidth - this.containerWidth) / (this.containerWidth - this.horizontalScrollbarWidth)
-        const toScrollLeftUpperBound = this.contentWidth - this.containerWidth
-        let toScrollLeft = this.memorizedHorizontalLeft + dScrollLeft
-        toScrollLeft = Math.min(toScrollLeftUpperBound, toScrollLeft)
-        toScrollLeft = Math.max(toScrollLeft, 0)
-        this._container().scrollLeft = toScrollLeft
-      }
+      if (!this.horizontalScrollbarActivated) return
+      window.clearTimeout(this.horizontalScrollbarVanishTimerId)
+      window.clearTimeout(this.verticalScrollbarVanishTimerId)
+      const dX = (e.clientX - this.memorizedMouseX)
+      let dScrollLeft = dX * (this.contentWidth - this.containerWidth) / (this.containerWidth - this.horizontalScrollbarWidth)
+      const toScrollLeftUpperBound = this.contentWidth - this.containerWidth
+      let toScrollLeft = this.memorizedHorizontalLeft + dScrollLeft
+      toScrollLeft = Math.min(toScrollLeftUpperBound, toScrollLeft)
+      toScrollLeft = Math.max(toScrollLeft, 0)
+      this.mergedContainerRef().scrollLeft = toScrollLeft
     },
     handleHorizontalScrollMouseUp (e) {
       e.preventDefault()
       e.stopPropagation()
-      const {
-        onScrollEnd
-      } = this
-      if (onScrollEnd) onScrollEnd()
       window.removeEventListener('mousemove', this.handleHorizontalScrollMouseMove)
       window.removeEventListener('mouseup', this.handleHorizontalScrollMouseUp)
       this.horizontalScrollbarActivated = false
-      this.updateParameters()
-      if (!this.$el.contains(e.target)) {
+      this.sync()
+      if (!this.mergedContainerRef().contains(e.target)) {
         this.hideScrollbar()
       }
     },
     handleVerticalScrollMouseDown (e) {
       e.preventDefault()
       e.stopPropagation()
-      const {
-        onScrollStart
-      } = this
-      if (onScrollStart) onScrollStart()
       this.verticalScrollbarActivated = true
       window.addEventListener('mousemove', this.handleVerticalScrollMouseMove, true)
       window.addEventListener('mouseup', this.handleVerticalScrollMouseUp, true)
@@ -494,17 +432,16 @@ export default {
       this.memorizedMouseY = e.clientY
     },
     handleVerticalScrollMouseMove (e) {
-      if (this.verticalScrollbarActivated) {
-        window.clearTimeout(this.horizontalScrollbarVanishTimerId)
-        window.clearTimeout(this.verticalScrollbarVanishTimerId)
-        const dY = (e.clientY - this.memorizedMouseY)
-        let dScrollTop = dY * (this.contentHeight - this.containerHeight) / (this.containerHeight - this.verticalScrollbarHeight)
-        const toScrollTopUpperBound = this.contentHeight - this.containerHeight
-        let toScrollTop = this.memorizedVerticalTop + dScrollTop
-        toScrollTop = Math.min(toScrollTopUpperBound, toScrollTop)
-        toScrollTop = Math.max(toScrollTop, 0)
-        this._container().scrollTop = toScrollTop
-      }
+      if (!this.verticalScrollbarActivated) return
+      window.clearTimeout(this.horizontalScrollbarVanishTimerId)
+      window.clearTimeout(this.verticalScrollbarVanishTimerId)
+      const dY = (e.clientY - this.memorizedMouseY)
+      let dScrollTop = dY * (this.contentHeight - this.containerHeight) / (this.containerHeight - this.verticalScrollbarHeight)
+      const toScrollTopUpperBound = this.contentHeight - this.containerHeight
+      let toScrollTop = this.memorizedVerticalTop + dScrollTop
+      toScrollTop = Math.min(toScrollTopUpperBound, toScrollTop)
+      toScrollTop = Math.max(toScrollTop, 0)
+      this.mergedContainerRef().scrollTop = toScrollTop
     },
     handleVerticalScrollMouseUp (e) {
       e.preventDefault()
@@ -516,8 +453,8 @@ export default {
       window.removeEventListener('mousemove', this.handleVerticalScrollMouseMove, true)
       window.removeEventListener('mouseup', this.handleVerticalScrollMouseUp, true)
       this.verticalScrollbarActivated = false
-      this.updateParameters()
-      if (!this.$el.contains(e.target)) {
+      this.sync()
+      if (!this.mergedContainerRef().contains(e.target)) {
         this.hideScrollbar()
       }
     }

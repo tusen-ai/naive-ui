@@ -152,10 +152,6 @@ export default {
       type: Array,
       default: () => []
     },
-    fixed: {
-      type: Boolean,
-      default: false
-    },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:activeFixedColumn': {
       type: Function,
@@ -189,7 +185,7 @@ export default {
     },
     headerStyle () {
       return {
-        overflow: !this.fixed ? 'scroll' : 'hidden'
+        overflow: 'scroll'
       }
     },
     fixedColumnsLeft () {

@@ -206,16 +206,12 @@ export default {
       el.style.transformOrigin = this.styleTransformOrigin()
     },
     handleEnter (el) {
-      // TODO: check what happened
-      this.$refs.scrollbar.enableScrollbar()
       nextTick(() => {
         this.syncTransformOrigin(el)
       })
     },
     handleBeforeLeave (el) {
       el.style.transformOrigin = this.styleTransformOrigin()
-      // TODO: check what happened
-      this.$refs.scrollbar.disableScrollbar()
       this.onBeforeLeave()
     },
     handleAfterLeave () {

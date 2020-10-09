@@ -5,7 +5,6 @@
       :placement="placement"
       :columns="columns"
       :data="data"
-      :fixed="fixed"
       :scroll-x="scrollX"
       @update:active-fixed-column="setActiveFixedColumn"
     />
@@ -19,7 +18,6 @@
       :columns="columns"
       :row-class-name="rowClassName"
       :loading="loading"
-      :fixed="fixed"
     />
     <slot />
   </div>
@@ -62,10 +60,6 @@ export default {
     data: {
       type: Array,
       default: () => []
-    },
-    fixed: {
-      type: Boolean,
-      default: false
     },
     height: {
       type: Number,

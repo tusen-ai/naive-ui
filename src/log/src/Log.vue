@@ -11,7 +11,7 @@
     @wheel="handleWheel"
   >
     <n-scrollbar
-      ref="scrollbar"
+      ref="scrollbarRef"
       class="n-code"
       :theme="mergedTheme"
       @scroll="handleScroll"
@@ -29,13 +29,16 @@
 </template>
 
 <script>
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
+import { ref } from 'vue'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
 import NScrollbar from '../../scrollbar'
 import NLogLoader from './LogLoader.vue'
 import NLogLine from './LogLine.vue'
-import throttle from 'lodash-es/throttle'
-import usecssr from '../../_mixins/usecssr'
+import { throttle } from 'lodash-es'
 import styles from './styles'
 
 export default {
@@ -51,7 +54,7 @@ export default {
     }
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles)
   ],
@@ -111,6 +114,11 @@ export default {
     onRequireMore: {
       type: Function,
       default: undefined
+    }
+  },
+  setup () {
+    return {
+      scrollbarRef: ref(null)
     }
   },
   data () {
@@ -177,12 +185,12 @@ export default {
         })
         return
       }
-      if (this.$refs.scrollbar && this.$refs.scrollbar.$refs.scrollContainer) {
-        const container = this.$refs.scrollbar.$refs.scrollContainer
+      if (this.scrollbarRef && this.scrollbarRef.containerRef) {
+        const container = this.scrollbarRef.containerRef
         const containerHeight = container.offsetHeight
         const containerScrollTop = container.scrollTop
-        if (this.$refs.scrollbar.$refs.scrollContent) {
-          const content = this.$refs.scrollbar.$refs.scrollContent
+        if (this.scrollbarRef.$refs.scrollContent) {
+          const content = this.scrollbarRef.$refs.scrollContent
           const contentHeight = content.offsetHeight
           const scrollTop = containerScrollTop
           const scrollBottom =
@@ -214,9 +222,9 @@ export default {
         this.dismissEvent = true
       }
       if (to === 'bottom') {
-        this.$refs.scrollbar.scrollToBottom()
+        this.scrollbarRef.scrollTo(0, Number.MAX_SAFE_INTEGER)
       } else {
-        this.$refs.scrollbar.scrollToTop()
+        this.scrollbarRef.scrollTo(0, 0)
       }
     }
   }

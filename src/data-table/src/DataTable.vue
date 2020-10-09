@@ -114,7 +114,6 @@ function normalizeColumn (column) {
     defaultFilterOptionValues: undefined,
     defaultFilterOptionValue: null,
     filterMultiple: true,
-    fixed: false,
     width: null
   }
   Object.keys(column).forEach(key => {
@@ -643,7 +642,6 @@ export default {
         case null:
           this.scrollingPart = 'header'
           this.scrollReceived = true
-          console.log('queue sync')
           nextFrame(this.syncScrollState)
           break
         case 'body':
@@ -662,7 +660,6 @@ export default {
         case null:
           this.scrollingPart = 'body'
           this.scrollReceived = true
-          console.log('queue sync')
           nextFrame(this.syncScrollState)
           break
         case 'header':

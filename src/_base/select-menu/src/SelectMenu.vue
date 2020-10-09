@@ -14,68 +14,41 @@
     <n-scrollbar
       v-if="!empty"
       ref="scrollbarRef"
-      :theme="theme"
       :scrollable="scrollable"
+      :container="virtualListContainer"
+      :content="virtualListContent"
       @scroll="handleMenuScroll"
     >
-      <div class="n-base-select-menu-option-wrapper">
-        <virtual-list
-          v-if="virtualScroll"
-          ref="virtualListRef"
-          class="n-virtual-list"
-          :items="flattenedOptions"
-          :item-height="itemSize"
-          :show-scrollbar="false"
-        >
-          <template v-slot="{ item: option }">
-            <n-select-option
-              v-if="option.type === OPTION_TYPE.OPTION"
-              :key="option.key"
-              :index="option.index"
-              :wrapped-option="option"
-              :grouped="option.grouped"
-            />
-            <n-select-group-header
-              v-else-if="option.type === OPTION_TYPE.GROUP_HEADER"
-              :key="option.key"
-              :data="option.data"
-            />
-          </template>
-        </virtual-list>
-        <!-- <recycle-scroller
-          v-if="virtualScroll"
-          ref="virtualScroller"
-          class="n-virtual-scroller"
-          :items="flattenedOptions"
-          :item-size="itemSize"
-          key-field="key"
-          @visible="handleMenuVisible"
-        >
-          <template v-slot:before>
-            <n-base-tracking-rect
-              v-if="showTrackingRect"
-              ref="trackingRect"
-              key="__select-tracking-rect__"
-              :item-size="itemSize"
-              :theme="theme"
-            />
-          </template>
-          <template v-slot="{ item: option }">
-            <n-select-option
-              v-if="option.type === OPTION_TYPE.OPTION"
-              :key="option.key"
-              :index="option.index"
-              :wrapped-option="option"
-              :grouped="option.grouped"
-            />
-            <n-select-group-header
-              v-else-if="option.type === OPTION_TYPE.GROUP_HEADER"
-              :key="option.key"
-              :data="option.data"
-            />
-          </template>
-        </recycle-scroller> -->
-        <template v-for="option in flattenedOptions" v-else>
+      <virtual-list
+        v-if="virtualScroll"
+        ref="virtualListRef"
+        class="n-virtual-list"
+        :items="flattenedOptions"
+        :item-size="itemSize"
+        :show-scrollbar="false"
+        @resize="handleListResize"
+        @scroll="handleListScroll"
+      >
+        <template v-slot="{ item: option }">
+          <n-select-option
+            v-if="option.type === OPTION_TYPE.OPTION"
+            :key="option.key"
+            :index="option.index"
+            :wrapped-option="option"
+            :grouped="option.grouped"
+          />
+          <n-select-group-header
+            v-else-if="option.type === OPTION_TYPE.GROUP_HEADER"
+            :key="option.key"
+            :data="option.data"
+          />
+        </template>
+      </virtual-list>
+      <div
+        v-else
+        class="n-base-select-menu-option-wrapper"
+      >
+        <template v-for="option in flattenedOptions">
           <n-select-option
             v-if="option.type === OPTION_TYPE.OPTION"
             :key="option.key"
@@ -111,7 +84,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { VirtualList } from 'vueuc'
 import NScrollbar from '../../../scrollbar'
 import NSelectOption from './SelectOption.js'
@@ -176,7 +149,7 @@ export default {
       default: null
     },
     value: {
-      type: [String, Number],
+      type: [String, Number, Array],
       default: null
     },
     width: {
@@ -211,9 +184,29 @@ export default {
     }
   },
   setup () {
+    const virtualListRef = ref(null)
+    const scrollbarRef = ref(null)
+    onMounted(() => {
+      const {
+        value
+      } = scrollbarRef
+      if (value) value.sync()
+    })
     return {
-      virtualListRef: ref(null),
-      scrollbarRef: ref(null)
+      virtualListRef,
+      scrollbarRef,
+      virtualListContainer () {
+        const {
+          value
+        } = virtualListRef
+        return value && value.listRef
+      },
+      virtualListContent () {
+        const {
+          value
+        } = virtualListRef
+        return value && value.itemsRef
+      }
     }
   },
   data () {
@@ -285,10 +278,20 @@ export default {
       } else {
         this.pendingWrappedOption = null
       }
+      this.$nextTick(() => {
+        this.scrollbarRef.sync()
+      })
     }
   },
   methods: {
+    handleListScroll () {
+      this.scrollbarRef.sync()
+    },
+    handleListResize () {
+      this.scrollbarRef.sync()
+    },
     handleMenuVisible () {
+      // TODO: remove it
       const {
         onMenuVisible
       } = this
