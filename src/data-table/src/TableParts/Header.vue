@@ -5,7 +5,6 @@
     }"
     :style="headerStyle"
     class="n-data-table-base-table-header"
-    @scroll="handleScroll"
   >
     <table
       ref="body"
@@ -37,8 +36,8 @@
               'n-data-table-th--filterable': isColumnFilterable(column),
               'n-data-table-th--sortable': isColumnSortable(column),
               [`n-data-table-th--fixed-${column.fixed}`]: column.fixed && column.width,
-              'n-data-table-th--shadow-after': leftActiveFixedColumn[column.key],
-              'n-data-table-th--shadow-before': rightActiveFixedColumn[column.key],
+              'n-data-table-th--shadow-after': NBaseTable.leftActiveFixedColumn[column.key],
+              'n-data-table-th--shadow-before': NBaseTable.rightActiveFixedColumn[column.key],
               'n-data-table-th--selection': column.type === 'selection'
             }"
             @click="handleHeaderClick($event, column)"
@@ -89,7 +88,6 @@ import SortButton from '../HeaderButton/SortButton.vue'
 import FilterButton from '../HeaderButton/FilterButton.vue'
 import { createCustomWidthStyle } from '../utils'
 import { render } from '../../../_utils/vue'
-import resizeObserverDelegate from '../../../_utils/delegate/resizeObserverDelegate'
 
 function isColumnSortable (column) {
   return !!column.sorter
@@ -133,6 +131,9 @@ export default {
   inject: {
     NDataTable: {
       default: null
+    },
+    NBaseTable: {
+      default: null
     }
   },
   props: {
@@ -151,17 +152,6 @@ export default {
     data: {
       type: Array,
       default: () => []
-    },
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:activeFixedColumn': {
-      type: Function,
-      required: true
-    }
-  },
-  data: function () {
-    return {
-      leftActiveFixedColumn: [],
-      rightActiveFixedColumn: []
     }
   },
   computed: {
@@ -187,61 +177,12 @@ export default {
       return {
         overflow: 'scroll'
       }
-    },
-    fixedColumnsLeft () {
-      let columnsLeft = {}
-      let left = 0
-      let columns = this.columns
-      columns.map((column) => {
-        if (this.NDataTable.leftFixedColumns.indexOf(column) > -1) {
-          columnsLeft[column.key] = left
-        }
-        left = left + this.$refs[column.key].offsetWidth
-      })
-      return columnsLeft
-    },
-    fixedColumnsRight () {
-      let columnsRight = {}
-      let right = 0
-      let columns = this.columns
-      for (let i = columns.length - 1; i >= 0; i--) {
-        if (this.NDataTable.rightFixedColumns.indexOf(this.columns[i]) > -1) {
-          columnsRight[columns[i].key] = right
-        }
-        right = right + this.$refs[columns[i].key].offsetWidth
-      }
-      return columnsRight
     }
   },
-  mounted () {
-    resizeObserverDelegate.registerHandler(this.$el, this.handleResize)
-    this.handleResize()
-    this.setActiveLeftFixedColumn(this.$el)
-    this.setActiveRightFixedColumn(this.$el)
-    this.doUpdateActiveFixedColumn(this.leftActiveFixedColumn, this.rightActiveFixedColumn)
-  },
-  beforeUnmount () {
-    resizeObserverDelegate.unregisterHandler(this.$el)
-  },
   methods: {
-    doUpdateActiveFixedColumn (...args) {
-      const {
-        'onUpdate:activeFixedColumn': onUpdateActiveFixedColumn
-      } = this
-      onUpdateActiveFixedColumn(...args)
-    },
     isColumnSortable,
     isColumnFilterable,
     createCustomWidthStyle,
-    handleResize () {
-      this.tableWidth = this.$el.offsetWidth
-    },
-    handleScroll (e) {
-      this.setActiveRightFixedColumn(e.target)
-      this.setActiveLeftFixedColumn(e.target)
-      this.doUpdateActiveFixedColumn(this.leftActiveFixedColumn, this.rightActiveFixedColumn)
-      this.NDataTable.handleTableHeaderScroll(e)
-    },
     handleCheckboxInput (column) {
       if (this.checkboxIndererminate || this.checkboxChecked) {
         this.NDataTable.clearCheckAll(column)
@@ -258,41 +199,6 @@ export default {
       const activeSorter = this.NDataTable.syntheticActiveSorter
       const nextSorter = createNextSorter(column.key, activeSorter, column.sorter)
       this.NDataTable.changeSorter(nextSorter)
-    },
-    setActiveRightFixedColumn (target) {
-      const rightFixedColumns = this.NDataTable.rightFixedColumns
-      const scrollLeft = target.scrollLeft
-      const tableWidth = this.tableWidth
-      const scrollWidth = target.scrollWidth
-      let rightWidth = 0
-      const fixedColumnsRight = this.fixedColumnsRight
-      const rightActiveFixedColumn = {}
-      this.rightActiveFixedColumn = rightActiveFixedColumn
-      for (let i = rightFixedColumns.length - 1; i >= 0; --i) {
-        const key = rightFixedColumns[i].key
-        if (scrollLeft + fixedColumnsRight[key] + tableWidth - rightWidth < scrollWidth) {
-          this.rightActiveFixedColumn = { [key]: true }
-          rightWidth += rightFixedColumns[i].width
-        } else {
-          break
-        }
-      }
-    },
-    setActiveLeftFixedColumn (target) {
-      const leftFixedColumns = this.NDataTable.leftFixedColumns
-      const scrollLeft = target.scrollLeft
-      let leftWidth = 0
-      const fixedColumnsLeft = this.fixedColumnsLeft
-      this.leftActiveFixedColumn = {}
-      for (let i = 0; i < leftFixedColumns.length; ++i) {
-        const key = leftFixedColumns[i].key
-        if (scrollLeft > fixedColumnsLeft[key] - leftWidth) {
-          this.leftActiveFixedColumn = { [key]: true }
-          leftWidth += leftFixedColumns[i].width
-        } else {
-          break
-        }
-      }
     }
   }
 }

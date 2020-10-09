@@ -44,8 +44,8 @@
               [`n-data-table-td--${column.align}-align`]: column.align,
               ...(column.className && createClassObject(column.className)),
               [`n-data-table-td--fixed-${column.fixed}`]: column.width && column.fixed,
-              'n-data-table-td--shadow-after': activeLeft[column.key],
-              'n-data-table-td--shadow-before': activeRight[column.key],
+              'n-data-table-td--shadow-after': NBaseTable.leftActiveFixedColumn[column.key],
+              'n-data-table-td--shadow-before': NBaseTable.rightActiveFixedColumn[column.key],
               'n-data-table-td--selection': column.type === 'selection'
             }"
           >
@@ -83,6 +83,9 @@ export default {
   },
   inject: {
     NDataTable: {
+      default: null
+    },
+    NBaseTable: {
       default: null
     }
   },
@@ -123,12 +126,6 @@ export default {
   setup () {
     return {
       scrollbarRef: ref(null)
-    }
-  },
-  data () {
-    return {
-      activeLeft: {},
-      activeRight: {}
     }
   },
   computed: {

@@ -1,13 +1,15 @@
 <template>
   <div class="n-data-table-base-table">
-    <table-header
-      ref="headerRef"
-      :placement="placement"
-      :columns="columns"
-      :data="data"
-      :scroll-x="scrollX"
-      @update:active-fixed-column="setActiveFixedColumn"
-    />
+    <v-resize-observer @resize="handleHeaderResize">
+      <table-header
+        ref="headerRef"
+        :placement="placement"
+        :columns="columns"
+        :data="data"
+        :scroll-x="scrollX"
+        @scroll="handleHeaderScroll"
+      />
+    </v-resize-observer>
     <table-body
       ref="bodyRef"
       :style="bodyStyle"
@@ -24,16 +26,22 @@
 </template>
 
 <script>
+import { VResizeObserver } from 'vueuc'
 import { ref } from 'vue'
 import TableHeader from './TableParts/Header.vue'
 import TableBody from './TableParts/Body.vue'
-import resizeObserverDelegate from '../../_utils/delegate/resizeObserverDelegate'
 import formatLength from '../../_utils/css/formatLength'
 
 export default {
   components: {
+    VResizeObserver,
     TableHeader,
     TableBody
+  },
+  provide () {
+    return {
+      NBaseTable: this
+    }
   },
   inject: {
     NDataTable: {
@@ -94,8 +102,11 @@ export default {
   },
   data () {
     return {
+      tableWidth: null,
       bodyMaxHeight: null,
-      bodyMinHeight: null
+      bodyMinHeight: null,
+      leftActiveFixedColumn: {},
+      rightActiveFixedColumn: {}
     }
   },
   computed: {
@@ -104,37 +115,51 @@ export default {
         maxHeight: formatLength(this.bodyMaxHeight),
         minHeight: formatLength(this.bodyMinHeight)
       }
+    },
+    fixedColumnsLeft () {
+      const columnsLeft = {}
+      let left = 0
+      let columns = this.columns
+      columns.map((column) => {
+        if (this.NDataTable.leftFixedColumns.indexOf(column) > -1) {
+          columnsLeft[column.key] = left
+        }
+        left = left + this.headerRef.$refs[column.key].offsetWidth
+      })
+      return columnsLeft
+    },
+    fixedColumnsRight () {
+      const columnsRight = {}
+      let right = 0
+      let columns = this.columns
+      for (let i = columns.length - 1; i >= 0; i--) {
+        if (this.NDataTable.rightFixedColumns.indexOf(this.columns[i]) > -1) {
+          columnsRight[columns[i].key] = right
+        }
+        right = right + this.headerRef.$refs[columns[i].key].offsetWidth
+      }
+      return columnsRight
     }
   },
-  mounted () {
-    resizeObserverDelegate.registerHandler(
-      this.getHeaderElement(),
-      this.setBodyMinMaxHeight
-    )
-    this.setBodyMinMaxHeight()
-  },
-  beforeUnmount () {
-    // BUG: beforeUnmount is called twice
-    // wait for vue 3.0.1 to fix it
-    resizeObserverDelegate.unregisterHandler(
-      this.getHeaderElement()
-    )
-  },
   methods: {
+    handleHeaderResize (entry) {
+      this.setBodyMinMaxHeight(entry.contentRect.height)
+      this.setActiveLeftFixedColumn(entry.target)
+      this.setActiveRightFixedColumn(entry.target)
+    },
+    handleHeaderScroll (e) {
+      this.setActiveRightFixedColumn(e.target)
+      this.setActiveLeftFixedColumn(e.target)
+      this.NDataTable.handleTableHeaderScroll(e)
+    },
     getHeaderElement () {
       return this.headerRef.$el
     },
     getBodyElement () {
       return this.bodyRef.getScrollContainer()
     },
-    setActiveFixedColumn (leftActiveFixedColumn, rightActiveFixedColumn) {
-      const { bodyRef } = this
-      bodyRef.activeLeft = leftActiveFixedColumn
-      bodyRef.activeRight = rightActiveFixedColumn
-    },
-    setBodyMinMaxHeight () {
+    setBodyMinMaxHeight (headerHeight) {
       const bordered = this.bordered
-      const headerHeight = this.getHeaderElement().offsetHeight
       const maxHeight = this.maxHeight
       const minHeight = this.minHeight
       if (maxHeight !== null) {
@@ -142,6 +167,41 @@ export default {
       }
       if (minHeight !== null) {
         this.bodyMinHeight = minHeight + (bordered ? -2 : 0) - headerHeight
+      }
+    },
+    setActiveRightFixedColumn (target) {
+      const rightFixedColumns = this.NDataTable.rightFixedColumns
+      const scrollLeft = target.scrollLeft
+      const tableWidth = this.tableWidth
+      const scrollWidth = target.scrollWidth
+      let rightWidth = 0
+      const fixedColumnsRight = this.fixedColumnsRight
+      const rightActiveFixedColumn = {}
+      this.rightActiveFixedColumn = rightActiveFixedColumn
+      for (let i = rightFixedColumns.length - 1; i >= 0; --i) {
+        const key = rightFixedColumns[i].key
+        if (scrollLeft + fixedColumnsRight[key] + tableWidth - rightWidth < scrollWidth) {
+          this.rightActiveFixedColumn = { [key]: true }
+          rightWidth += rightFixedColumns[i].width
+        } else {
+          break
+        }
+      }
+    },
+    setActiveLeftFixedColumn (target) {
+      const leftFixedColumns = this.NDataTable.leftFixedColumns
+      const scrollLeft = target.scrollLeft
+      let leftWidth = 0
+      const fixedColumnsLeft = this.fixedColumnsLeft
+      this.leftActiveFixedColumn = {}
+      for (let i = 0; i < leftFixedColumns.length; ++i) {
+        const key = leftFixedColumns[i].key
+        if (scrollLeft > fixedColumnsLeft[key] - leftWidth) {
+          this.leftActiveFixedColumn = { [key]: true }
+          leftWidth += leftFixedColumns[i].width
+        } else {
+          break
+        }
       }
     }
   }
