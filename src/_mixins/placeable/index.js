@@ -205,7 +205,7 @@ export default {
         (widthMode === 'trigger' || widthMode === 'activator')
       ) {
         const body = this.__getBodyElement()
-        body.style.minWidth = triggerRect.width + 'px'
+        body.style.width = triggerRect.width + 'px'
       }
       let adjustedPlacement = this.placement
       let contentBoundingClientRect = null

@@ -20,7 +20,10 @@
     >
       <div
         ref="scrollContent"
-        :style="contentStyle"
+        :style="{
+          width: xScrollable ? 'fit-content' : null,
+          ...contentStyle,
+        }"
         class="n-scrollbar-content"
       >
         <slot />
@@ -109,6 +112,10 @@ export default {
     scrollable: {
       type: Boolean,
       default: true
+    },
+    xScrollable: {
+      type: Boolean,
+      default: false
     },
     container: {
       type: Function,

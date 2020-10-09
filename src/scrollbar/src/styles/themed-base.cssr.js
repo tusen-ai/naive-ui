@@ -12,6 +12,7 @@ export default c([
     } = props.$base
     return cTB('scrollbar', {
       raw: `
+        overflow: hidden;
         position: relative;
         z-index: auto;
         height: 100%;
@@ -36,7 +37,6 @@ export default c([
           c('>', [
             cB('scrollbar-content', {
               raw: `
-                width: fit-content;
                 overflow: hidden;
                 min-width: 100%;
               `

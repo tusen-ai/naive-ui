@@ -13,12 +13,35 @@
   >
     <n-scrollbar
       v-if="!empty"
-      ref="scrollbar"
+      ref="scrollbarRef"
       :theme="theme"
       :scrollable="scrollable"
       @scroll="handleMenuScroll"
     >
       <div class="n-base-select-menu-option-wrapper">
+        <virtual-list
+          v-if="virtualScroll"
+          ref="virtualListRef"
+          class="n-virtual-list"
+          :items="flattenedOptions"
+          :item-height="itemSize"
+          :show-scrollbar="false"
+        >
+          <template v-slot="{ item: option }">
+            <n-select-option
+              v-if="option.type === OPTION_TYPE.OPTION"
+              :key="option.key"
+              :index="option.index"
+              :wrapped-option="option"
+              :grouped="option.grouped"
+            />
+            <n-select-group-header
+              v-else-if="option.type === OPTION_TYPE.GROUP_HEADER"
+              :key="option.key"
+              :data="option.data"
+            />
+          </template>
+        </virtual-list>
         <!-- <recycle-scroller
           v-if="virtualScroll"
           ref="virtualScroller"
@@ -44,7 +67,6 @@
               :index="option.index"
               :wrapped-option="option"
               :grouped="option.grouped"
-              :selected="isOptionSelected({ value: option.data.value })"
             />
             <n-select-group-header
               v-else-if="option.type === OPTION_TYPE.GROUP_HEADER"
@@ -53,7 +75,7 @@
             />
           </template>
         </recycle-scroller> -->
-        <template v-for="option in flattenedOptions">
+        <template v-for="option in flattenedOptions" v-else>
           <n-select-option
             v-if="option.type === OPTION_TYPE.OPTION"
             :key="option.key"
@@ -89,6 +111,8 @@
 </template>
 
 <script>
+import { ref } from 'vue'
+import { VirtualList } from 'vueuc'
 import NScrollbar from '../../../scrollbar'
 import NSelectOption from './SelectOption.js'
 import NSelectGroupHeader from './SelectGroupHeader.js'
@@ -113,6 +137,7 @@ export default {
     }
   },
   components: {
+    VirtualList,
     NScrollbar,
     NSelectOption,
     NEmpty,
@@ -164,7 +189,7 @@ export default {
     },
     virtualScroll: {
       type: Boolean,
-      default: false
+      default: true
     },
     // deprecated
     onMenuVisible: {
@@ -183,6 +208,12 @@ export default {
     emitOption: {
       type: Boolean,
       default: false
+    }
+  },
+  setup () {
+    return {
+      virtualListRef: ref(null),
+      scrollbarRef: ref(null)
     }
   },
   data () {
@@ -327,27 +358,11 @@ export default {
     setPendingWrappedOptionIndex (index, doScroll = false) {
       if (index === null) {
         this.pendingWrappedOption = null
-        return
       }
-      const scrollbar = this.$refs.scrollbar
-      if (this.virtualScroll) {
-        // this.pendingWrappedOption = this.flattenedOptions[index]
-        // const size = this.itemSize
-        // const offsetTop = size * index
-        // this.updateTrackingRectTop({
-        //   offsetTop
-        // })
-        // doScroll && scrollbar && scrollbar.scrollToElement({}, () => offsetTop, () => size)
-      } else {
-        this.pendingWrappedOption = this.flattenedOptions[index]
-        if (doScroll && scrollbar) {
-          const el = this.$el
-          const optionEl = el.querySelector(`[n-option-index="${index}"]`)
-          scrollbar.scrollToElement(optionEl, {
-            behavior: 'auto'
-          })
-        }
-      }
+      // TODO: fix scroll logic
+      // const scrollbar = this.scrollbarRef
+      this.pendingWrappedOption = this.flattenedOptions[index]
+      // scrollbar.scrollTo({ y: index * this.itemSize })
     }
   }
 }
