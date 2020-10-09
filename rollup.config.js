@@ -45,7 +45,7 @@ module.exports = {
     'lodash-es',
     'resize-observer-polyfill',
     'vue-runtime-helpers',
-    'vue-virtual-scroller',
-    '@css-render/plugin-bem'
+    '@css-render/plugin-bem',
+    'vueuc'
   ])
 }
