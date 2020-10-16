@@ -1,48 +1,36 @@
+<!--
+'n-cascader-option--selected': type === 'single' && value === NCascader.value,
+'n-cascader-option--loading': loading,
+'n-cascader-option--active': active && !isLeaf,
+-->
+
 <template>
   <div
     class="n-cascader-option"
     :class="{
-      'n-cascader-option--selected': type === 'single' && value === NCascader.value,
-      'n-cascader-option--active': active && !isLeaf,
-      'n-cascader-option--tracked': tracked,
+      'n-cascader-option--pending': keyboardPending || hoverPending,
       'n-cascader-option--disabled': disabled,
-      'n-cascader-option--not-leaf': !isLeaf,
-      'n-cascader-option--loading': loading,
-      'n-cascader-option--single-type': type === 'single'
+      'n-cascader-option--show-prefix': showCheckbox
     }"
-    :n-option-id="optionId"
+    :onMouseEnter="mergedHandleMouseEnter"
+    :onMouseMove="mergedHandleMouseMove"
     @click="handleClick"
-    @mouseenter="handleMouseEnter"
-    @mouseleave="handleMouseLeave"
   >
     <div
-      v-if="type==='multiple'"
+      v-if="showCheckbox"
       class="n-cascader-option__prefix"
     >
       <n-checkbox
-
         :disabled="disabled"
-        :checked="checkboxChecked"
-        :indeterminate="checkboxIndeterminate"
-        @click.stop="handleOptionCheck"
-      />
-    </div>
-    <div
-      v-else-if="type==='multiple-all-options' || type === 'single-all-options'"
-      class="n-cascader-option__prefix"
-    >
-      <n-radio
-        :disabled="disabled"
-        :value="true"
-        :checked-value="checked"
-        @click.stop="handleOptionCheck"
+        :checked="checked"
+        :indeterminate="indeterminate"
+        @click.stop="handleCheck"
       />
     </div>
     <span
       class="n-cascader-option__label"
     >{{ label }}</span>
     <div
-      v-if="!isLeaf || (isLeaf && type === 'single')"
       class="n-cascader-option__suffix"
     >
       <div
@@ -65,192 +53,157 @@
             <chevron-right-icon />
           </n-icon>
         </n-icon-switch-transition>
-        <n-icon
-          v-else-if="checked"
-          class="n-cascader-option-icon n-cascader-option-icon--checkmark"
+        <transition
+          v-else-if="!multiple && leafOnly"
+          name="n-fade-in-scale-up-transition"
         >
-          <checkmark-icon />
-        </n-icon>
+          <n-icon
+            v-if="checked"
+            class="n-cascader-option-icon n-cascader-option-icon--checkmark"
+          >
+            <checkmark-icon />
+          </n-icon>
+        </transition>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { computed, inject, toRef } from 'vue'
 import NCheckbox from '../../checkbox'
-import NRadio from '../../radio'
 import NBaseLoading from '../../_base/loading'
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 import { ChevronRightIcon, CheckmarkIcon } from '../../_base/icons'
+import { useMemo } from 'vooks'
 
 export default {
   name: 'NCascaderOption',
   inject: {
     NCascader: {
       default: null
-    },
-    NCascaderMenu: {
-      default: null
     }
   },
   components: {
     NCheckbox,
-    NRadio,
     NBaseLoading,
     NIconSwitchTransition,
     ChevronRightIcon,
     CheckmarkIcon
   },
   props: {
-    checked: {
-      type: Boolean,
-      default: false
-    },
-    type: {
-      type: String,
-      required: true
-    },
-    optionId: {
-      type: String,
-      required: true
-    },
-    label: {
-      type: String,
-      required: true
-    },
-    value: {
-      type: [Number, String],
-      default: null
-    },
-    active: {
-      type: Boolean,
-      default: false
-    },
-    tracked: {
-      type: Boolean,
-      default: false
-    },
-    prevAvailableSiblingId: {
-      type: String,
-      default: null
-    },
-    nextAvailableSiblingId: {
-      type: String,
-      default: null
-    },
-    availableParentId: {
-      type: String,
-      default: null
-    },
-    firstAvailableChildId: {
-      type: String,
-      default: null
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    children: {
-      type: Array,
-      default: null
-    },
-    depth: {
-      type: Number,
-      required: true
-    },
-    isLeaf: {
-      type: Boolean,
-      default: false
-    },
-    checkboxChecked: {
-      type: Boolean,
-      default: false
-    },
-    checkboxIndeterminate: {
-      type: Boolean,
-      default: false
-    },
-    loaded: {
-      type: Boolean,
-      default: false
-    },
-    loading: {
-      type: Boolean,
-      default: false
-    },
-    /** debug usage */
-    hasCheckedLeaf: {
-      type: Boolean,
-      required: true
-    },
-    checkedLeafCount: {
-      type: Number,
-      required: true
-    },
-    leafCount: {
-      type: Number,
-      required: true
-    },
-    determined: {
-      type: Boolean,
+    tmNode: {
+      type: Object,
       required: true
     }
   },
+  setup (props) {
+    const NCascader = inject('NCascader')
+    const {
+      tmNode
+    } = props
+    const {
+      rawNode
+    } = tmNode
+    const valueRef = toRef(rawNode, 'value')
+    return {
+      leafOnly: toRef(NCascader, 'leafOnly'),
+      multiple: toRef(NCascader, 'multiple'),
+      checked: useMemo(() => {
+        if (!NCascader.multiple) return NCascader.value === valueRef.value
+        return NCascader.checkedKeys.includes(valueRef.value)
+      }),
+      indeterminate: useMemo(() => {
+        if (!NCascader.multiple) return false
+        return NCascader.indeterminateKeys.includes(valueRef.value)
+      }),
+      hoverPending: useMemo(() => {
+        return NCascader.hoverKeyPath.includes(valueRef.value)
+      }),
+      keyboardPending: useMemo(() => {
+        if (NCascader.keyboardKey === null) return false
+        return NCascader.keyboardKey === valueRef.value
+      }),
+      showCheckbox: computed(() => {
+        if (NCascader.multiple) return true
+        if (!NCascader.leafOnly) return true
+      }),
+      useHoverTrigger: computed(() => NCascader.expandTrigger === 'hover'),
+      isLeaf: toRef(tmNode, 'isLeaf'),
+      disabled: toRef(tmNode, 'disabled'),
+      label: toRef(rawNode, 'label'),
+      value: valueRef,
+      loading: false
+    }
+  },
   computed: {
-    option () {
-      return {
-        id: this.optionId,
-        label: this.label,
-        value: this.value,
-        children: this.children,
-        prevAvailableSiblingId: this.prevAvailableSiblingId,
-        nextAvailableSiblingId: this.nextAvailableSiblingId,
-        availableParentId: this.availableParentId,
-        firstAvailableChildId: this.firstAvailableChildId,
-        leafCount: this.leafCount,
-        loaded: this.loaded,
-        depth: this.depth,
-        disabled: this.disabled,
-        /** debug usage */
-        hasCheckedLeaf: this.hasCheckedLeaf,
-        checkedLeafCount: this.checkedLeafCount,
-        isLeaf: this.isLeaf,
-        determined: this.determined
+    mergedHandleMouseEnter () {
+      if (this.useHoverTrigger) {
+        return this.handleMouseEnter
       }
+      return null
+    },
+    mergedHandleMouseMove () {
+      if (this.useHoverTrigger) {
+        return this.handleMouseMove
+      }
+      return null
     }
   },
   methods: {
     handleClick (e) {
+      if (this.disabled) return
       const {
-        NCascaderMenu: {
-          handleOptionClick
-        }
+        NCascader: {
+          updateHoverKey,
+          updateKeyboardKey
+        },
+        value,
+        isLeaf
       } = this
-      handleOptionClick(e, this.option)
+      updateHoverKey(value)
+      updateKeyboardKey(value)
+      if (isLeaf) {
+        this.handleCheck()
+      }
     },
     handleMouseEnter (e) {
+      if (!this.useHoverTrigger) return
+      if (this.disabled) return
       const {
-        NCascaderMenu: {
-          handleOptionMouseEnter
-        }
+        NCascader: {
+          updateHoverKey,
+          updateKeyboardKey
+        },
+        value
       } = this
-      handleOptionMouseEnter(e, this.option)
+      updateHoverKey(value)
+      updateKeyboardKey(value)
     },
-    handleMouseLeave (e) {
-      const {
-        NCascaderMenu: {
-          handleOptionMouseLeave
-        }
-      } = this
-      handleOptionMouseLeave(e, this.option)
+    handleMouseMove (e) {
+      if (!this.useHoverTrigger) return
+      this.handleMouseEnter(e)
     },
-    handleOptionCheck () {
+    handleCheck () {
       const {
-        NCascaderMenu: {
-          handleOptionCheck
+        multiple,
+        value,
+        NCascader: {
+          doCheck,
+          doUncheck,
+          closeMenu
         }
       } = this
-      handleOptionCheck(this.option.id)
+      if (multiple) {
+        if (this.indeterminate || this.checked) {
+          doUncheck(value)
+        } else {
+          doCheck(value)
+        }
+      } else {
+        doCheck(value)
+        closeMenu()
+      }
     }
   }
 }

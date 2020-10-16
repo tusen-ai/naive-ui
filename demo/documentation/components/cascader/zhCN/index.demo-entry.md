@@ -3,11 +3,12 @@
 ## 演示
 ```demo
 single-leaf-only
+multiple-leaf-only
+```
+multiple
+single
 size
 trigger
-multiple-leaf-only
-single
-multiple
 single-leaf-only-search
 multiple-leaf-only-search
 single-search
@@ -17,7 +18,6 @@ multiple-leaf-only-lazy
 single-lazy
 multiple-lazy
 filter
-```
 
 ## Props
 |名称|类型|默认值|说明|

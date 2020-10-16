@@ -132,6 +132,7 @@
     "lodash-es": "^4.17.15",
     "resize-observer-polyfill": "^1.5.1",
     "treemate": "^0.1.5",
+    "vooks": "0.0.1-alpha.1",
     "vue-runtime-helpers": "^1.1.2",
     "vueuc": "0.1.0-alpha.3"
   }

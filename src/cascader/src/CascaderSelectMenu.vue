@@ -1,7 +1,7 @@
 <template>
   <div
     ref="offsetContainerRef"
-    v-zindexable="{ enabled: active }"
+    v-zindexable="{ enabled: show }"
     class="n-positioning-container"
   >
     <div ref="trackingRef" class="n-positioning-content">
@@ -10,7 +10,7 @@
         :appear="NCascader.isMounted"
       >
         <n-base-select-menu
-          v-if="active"
+          v-if="show"
           ref="menuRef"
           v-clickoutside="handleClickOutside"
           class="n-cascader-menu"
@@ -28,9 +28,9 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, inject, toRef } from 'vue'
 import NBaseSelectMenu from '../../_base/select-menu'
-import { traverseWithCallback, getPickerElement } from './utils'
+import { createSelectOptions, getPickerElement } from './utils'
 import {
   placeable
 } from '../../_mixins'
@@ -57,10 +57,6 @@ export default {
     placeable
   ],
   props: {
-    type: {
-      type: String,
-      required: true
-    },
     // eslint-disable-next-line vue/require-prop-types
     placement: {
       ...placeable.props.placement,
@@ -75,7 +71,7 @@ export default {
       type: [String, Number, Array],
       default: null
     },
-    active: {
+    show: {
       type: Boolean,
       default: false
     },
@@ -95,7 +91,7 @@ export default {
       type: String,
       required: true
     },
-    options: {
+    tmNodes: {
       type: Array,
       default: () => []
     },
@@ -110,7 +106,9 @@ export default {
     }
   },
   setup () {
+    const NCascader = inject('NCascader')
     return {
+      leafOnly: toRef(NCascader, 'leafOnly'),
       offsetContainerRef: ref(null),
       trackingRef: ref(null),
       menuRef: ref(null)
@@ -118,26 +116,12 @@ export default {
   },
   computed: {
     __placeableEnabled () {
-      return this.active
+      return this.show
     },
     selectOptions () {
-      const selectOptions = []
-      const type = this.type
-      traverseWithCallback(this.options, option => {
-        if (
-          ((type === 'multiple' || type === 'single') && option.isLeaf) ||
-          (type !== 'multiple' && type !== 'single')
-        ) {
-          if (option.isRoot) return
-          if (option.disabled) return
-          selectOptions.push({
-            label: option.path.map(optionInPath => optionInPath.label).join('/'),
-            value: option.value,
-            path: option.path
-          })
-        }
-      })
-      return selectOptions || []
+      const ret = createSelectOptions(this.tmNodes, this.leafOnly)
+      console.log(this.tmNodes, this.leafOnly, 'ret', ret)
+      return ret
     },
     filteredSelectOptions () {
       return this.selectOptions.filter(option => {
@@ -177,28 +161,28 @@ export default {
       this.handleSelectOptionCheck(option)
     },
     handleSelectOptionCheck (option) {
-      if (option.disabled) return
-      const {
-        'onUpdate:value': onUpdateValue
-      } = this
-      if (this.type === 'multiple' || this.type === 'multiple-all-options') {
-        if (Array.isArray(this.value)) {
-          const index = this.value.findIndex(v => v === option.value)
-          if (~index) {
-            const newValue = this.value
-            newValue.splice(index, 1)
-            onUpdateValue(newValue)
-          } else {
-            const newValue = this.value
-            newValue.push(option.value)
-            onUpdateValue(newValue)
-          }
-        } else {
-          onUpdateValue([option.value])
-        }
-      } else {
-        onUpdateValue(option.value)
-      }
+      // if (option.disabled) return
+      // const {
+      //   'onUpdate:value': onUpdateValue
+      // } = this
+      // if (this.multiple) {
+      //   if (Array.isArray(this.value)) {
+      //     const index = this.value.findIndex(v => v === option.value)
+      //     if (~index) {
+      //       const newValue = this.value
+      //       newValue.splice(index, 1)
+      //       onUpdateValue(newValue)
+      //     } else {
+      //       const newValue = this.value
+      //       newValue.push(option.value)
+      //       onUpdateValue(newValue)
+      //     }
+      //   } else {
+      //     onUpdateValue([option.value])
+      //   }
+      // } else {
+      //   onUpdateValue(option.value)
+      // }
     },
     prev () {
       const { menuRef } = this

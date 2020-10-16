@@ -76,6 +76,7 @@ c([
         ]),
         cB('cascader-option', {
           raw: `
+            padding: 0 0 0 18px;
             box-sizing: border-box;
             min-width: 182px;
             background-color: transparent;
@@ -90,10 +91,8 @@ c([
               color 0.2s ${cubicBezierEaseInOut};
           `
         }, [
-          cM('single-type', {
-            raw: `
-              padding: 0 0 0 18px;
-            `
+          cM('show-prefix', {
+            paddingLeft: 0
           }),
           cE('label', {
             flex: 1
@@ -126,7 +125,9 @@ c([
               cM('checkmark', {
                 fill: optionCheckMarkColor,
                 stroke: optionCheckMarkColor
-              }),
+              }, [
+                fadeInScaleUpTransition()
+              ]),
               cM('arrow', {
                 fill: optionTextColor,
                 stroke: optionTextColor
@@ -142,17 +143,18 @@ c([
             color: optionTextColorMatched,
             backgroundColor: optionColorHover
           }),
-          cM('disabled', {
-            raw: `
-              color: ${optionTextColorDisabled};
-              cursor: not-allowed;
-            `
-          }),
-          cM('tracked', {
+          cM('pending', {
             backgroundColor: optionColorHover
           }),
           c('&:hover', {
             backgroundColor: optionColorHover
+          }),
+          cM('disabled', {
+            raw: `
+              color: ${optionTextColorDisabled};
+              background-color: transparent;
+              cursor: not-allowed;
+            `
           })
         ])
       ]

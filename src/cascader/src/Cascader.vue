@@ -10,13 +10,15 @@
     @keyup.down="handleKeyUpDown"
     @keyup.left="handleKeyUpLeft"
     @keyup.right="handleKeyUpRight"
+    @keydown.up.prevent
+    @keydown.down.prevent
   >
     <n-base-selection
       ref="triggerRef"
       class="n-cascader-selection"
       :size="mergedSize"
       :theme="mergedTheme"
-      :active="active"
+      :active="showMenu"
       :pattern="pattern"
       :placeholder="localizedPlaceholder"
       :selected-option="selectedOption"
@@ -34,35 +36,26 @@
       @pattern-input="handlePatternInput"
     />
     <n-lazy-teleport
-      :show="active && !selectMenuActive"
+      :show="showMenu && !showSelectMenu"
       adjust-to
     >
       <cascader-menu
         ref="cascaderMenuRef"
-        v-model:active-id="activeId"
-        v-model:patches="patches"
-        v-model:loading="loading"
-        :active="active && !selectMenuActive"
         :class="{
           [namespace]: namespace
         }"
-        :type="type"
-        :value="value"
-        :multiple="multiple"
-        :options="menuOptions"
-        :pattern="pattern"
-        :filterable="filterable"
-        :expand-trigger="expandTrigger"
+        :show="showMenu && !showSelectMenu"
         :lazy="remote"
         :on-load="onLoad"
         :theme="mergedTheme"
         :size="mergedSize"
+        :menu-model="menuModel"
         @update:loading-id="loadingId = $event"
         @update:value="handleMenuInput"
       />
     </n-lazy-teleport>
     <n-lazy-teleport
-      :show="selectMenuActive"
+      :show="showMenu && showSelectMenu"
       adjust-to
     >
       <cascader-select-menu
@@ -70,14 +63,13 @@
         :class="{
           [namespace]: namespace
         }"
-        :type="type"
         :value="value"
-        :active="active && selectMenuActive"
+        :show="showMenu && showSelectMenu"
         :theme="mergedTheme"
         :pattern="pattern"
         :size="mergedSize"
         :multiple="multiple"
-        :options="menuOptions"
+        :tm-nodes="treeMate.treeNodes"
         @update:value="handleMenuInput"
       />
     </n-lazy-teleport>
@@ -95,19 +87,12 @@ import {
   usecssr,
   asformitem
 } from '../../_mixins'
-import { useIsMounted } from '../../_utils/composition'
-import { warn } from '../../_utils/naive'
-import { call } from '../../_utils/vue'
-import { getType, traverseWithCallback } from './utils'
+import { useCascader } from './composables'
+import { useIsMounted } from 'vooks'
+import { warn, call } from '../../_utils'
 import CascaderMenu from './CascaderMenu.vue'
 import CascaderSelectMenu from './CascaderSelectMenu.vue'
 import styles from './styles'
-import {
-  rootedOptions,
-  patchedOptions,
-  linkedCascaderOptions,
-  menuOptions
-} from '../../_utils/component/cascader'
 
 export default {
   name: 'Cascader',
@@ -169,10 +154,6 @@ export default {
       },
       default: 'click'
     },
-    leafOnly: {
-      type: Boolean,
-      default: true
-    },
     clearable: {
       type: Boolean,
       default: false
@@ -197,6 +178,18 @@ export default {
       type: String,
       default: 'bottom-start'
     },
+    cascade: {
+      type: Boolean,
+      default: true
+    },
+    leafOnly: {
+      type: Boolean,
+      default: false
+    },
+    showPath: {
+      type: Boolean,
+      default: true
+    },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:value': {
       type: [Function, Array],
@@ -211,8 +204,9 @@ export default {
       default: undefined
     }
   },
-  setup () {
+  setup (props) {
     return {
+      ...(useCascader(props)),
       cascaderMenuRef: ref(null),
       selectMenuRef: ref(null),
       triggerRef: ref(null),
@@ -222,93 +216,23 @@ export default {
   data () {
     return {
       pattern: '',
-      active: false,
+      showMenu: false,
       /**
        * set here to keep state
        */
-      activeId: null,
       patches: new Map(),
       loadingId: null,
       loading: false
     }
   },
   computed: {
-    type: getType,
     localizedPlaceholder () {
       if (this.placeholder !== undefined) return this.placeholder
       return this.localeNamespace.placeholder
     },
-    enableAllOptions () {
-      return !this.leafOnly
-    },
-    selectMenuActive () {
+    // select option related
+    showSelectMenu () {
       return !!(this.filterable && this.pattern && this.pattern.trim().length)
-    },
-    rootedOptions () {
-      return rootedOptions(this.options)
-    },
-    patchedOptions () {
-      /**
-       * Options must be patched here because Picker need to know all available
-       * options.
-       */
-      return patchedOptions(this.rootedOptions, this.patches)
-    },
-    linkedCascaderOptions () {
-      return linkedCascaderOptions(this.patchedOptions, this.type)
-    },
-    menuOptions () {
-      return menuOptions(this.linkedCascaderOptions, this.value, this.type)
-    },
-    selectedOptions () {
-      if (this.multiple) {
-        let options = []
-        if (Array.isArray(this.value)) {
-          const values = new Set(this.value)
-          const path = []
-          traverseWithCallback(this.patchedOptions, option => {
-            path.push(option.label)
-            if (values.has(option.value)) {
-              options.push({
-                value: option.value,
-                label: path.slice(1, path.length).join(this.separator)
-              })
-            }
-          }, () => {
-            path.pop()
-          })
-          const valueOptionMap = new Map()
-          options.forEach(option => {
-            valueOptionMap.set(option.value, option)
-          })
-          const reorderedOptions = this.value.filter(v => valueOptionMap.has(v)).map(v => valueOptionMap.get(v))
-          options = reorderedOptions
-        }
-        return options
-      } else return []
-    },
-    selectedOption () {
-      if (!this.multiple) {
-        const path = []
-        let selectedOption = null
-        traverseWithCallback(this.patchedOptions, option => {
-          path.push(option.label)
-          if (option.value === this.value) {
-            selectedOption = {
-              value: option.value,
-              label: path.slice(1, path.length).join(this.separator)
-            }
-          }
-        }, () => {
-          path.pop()
-        })
-        return selectedOption
-      } else return null
-    }
-  },
-  watch: {
-    options () {
-      this.activeId = null
     }
   },
   methods: {
@@ -340,35 +264,37 @@ export default {
       if (onFocus) call(onFocus, ...args)
       __triggerFormFocus()
     },
-    deactivate () {
-      this.active = false
-    },
-    activate () {
-      this.active = true
-    },
     openMenu () {
       if (!this.disabled) {
         this.pattern = ''
-        this.activate()
+        this.showMenu = true
         if (this.filterable) {
           this.triggerRef.focusPatternInput()
         }
       }
     },
     closeMenu () {
-      this.deactivate()
+      this.showMenu = false
       this.pattern = ''
     },
+    updateKeyboardKey (key) {
+      if (key === this.keyboardKey) return
+      this.keyboardKey = key
+    },
+    updateHoverKey (key) {
+      if (key === this.hoverKey) return
+      this.hoverKey = key
+    },
     handleCascaderMenuClickOutside (e) {
-      if (this.selectMenuActive) return
-      if (this.active) {
+      if (this.showSelectMenu) return
+      if (this.showMenu) {
         if (!this.triggerRef.$el.contains(e.target)) {
           this.closeMenu()
         }
       }
     },
     handleSelectMenuClickOutside (e) {
-      if (!this.selectMenuActive) return
+      if (!this.showSelectMenu) return
       this.handleCascaderMenuClickOutside(e)
     },
     handleKeyUpSpace () {
@@ -376,16 +302,81 @@ export default {
         this.handleKeyUpEnter()
       }
     },
+    // --- keyboard
+    move (direction) {
+      const {
+        keyboardKey,
+        updateKeyboardKey,
+        updateHoverKey,
+        treeMate
+      } = this
+      switch (direction) {
+        case 'prev':
+          if (keyboardKey !== null) {
+            const node = treeMate.getPrev(keyboardKey)
+            if (node !== null) {
+              updateKeyboardKey(node.key)
+            }
+          }
+          break
+        case 'next':
+          if (keyboardKey === null) {
+            const node = treeMate.getFirstAvailableNode()
+            if (node !== null) {
+              updateKeyboardKey(node.key)
+            }
+          } else {
+            const node = treeMate.getNext(keyboardKey)
+            if (node !== null) {
+              updateKeyboardKey(node.key)
+            }
+          }
+          break
+        case 'child':
+          if (keyboardKey !== null) {
+            const node = treeMate.getChild(keyboardKey)
+            if (node !== null) {
+              updateHoverKey(keyboardKey)
+              updateKeyboardKey(node.key)
+            }
+          }
+          break
+        case 'parent':
+          if (keyboardKey !== null) {
+            const node = treeMate.getParent(keyboardKey)
+            if (node !== null) {
+              updateKeyboardKey(node.key)
+              const parentNode = node.getParent()
+              if (parentNode === null) {
+                updateHoverKey(null)
+              } else {
+                updateHoverKey(parentNode.key)
+              }
+            }
+          }
+          break
+      }
+    },
     handleKeyUpEnter () {
-      if (!this.active) {
+      if (!this.showMenu) {
         this.openMenu()
       } else {
         const {
-          cascaderMenuRef,
-          selectMenuRef
+          showSelectMenu,
+          selectMenuRef,
+          keyboardKey
         } = this
-        if (cascaderMenuRef) {
-          cascaderMenuRef.enter()
+        if (!showSelectMenu) {
+          if (keyboardKey !== null) {
+            if (
+              this.checkedKeys.includes(keyboardKey) ||
+              this.indeterminateKeys.includes(keyboardKey)
+            ) {
+              this.doUncheck(keyboardKey)
+            } else {
+              this.doCheck(keyboardKey)
+            }
+          }
         }
         if (selectMenuRef) {
           selectMenuRef.enter()
@@ -395,51 +386,52 @@ export default {
     handleKeyUpUp (e) {
       e.preventDefault()
       const {
-        active,
-        cascaderMenuRef,
+        showMenu,
         selectMenuRef
       } = this
-      if (active && cascaderMenuRef) {
-        cascaderMenuRef.prev()
-      }
-      if (active && selectMenuRef) {
-        selectMenuRef.prev()
+      if (showMenu) {
+        if (this.showSelectMenu) {
+          selectMenuRef.prev()
+        } else {
+          this.move('prev')
+        }
       }
     },
     handleKeyUpDown (e) {
       e.preventDefault()
       const {
-        active,
-        cascaderMenuRef,
+        showMenu,
         selectMenuRef
       } = this
-      if (active && cascaderMenuRef) {
-        cascaderMenuRef.next()
-      }
-      if (active && selectMenuRef) {
-        selectMenuRef.next()
+      if (showMenu) {
+        if (this.showSelectMenu) {
+          selectMenuRef.next()
+        } else {
+          this.move('next')
+        }
       }
     },
     handleKeyUpLeft (e) {
       e.preventDefault()
       const {
-        active,
-        cascaderMenuRef
+        showMenu,
+        showSelectMenu
       } = this
-      if (active && cascaderMenuRef) {
-        cascaderMenuRef.shallow()
+      if (showMenu && !showSelectMenu) {
+        this.move('parent')
       }
     },
     handleKeyUpRight (e) {
       e.preventDefault()
       const {
-        active,
-        cascaderMenuRef
+        showMenu,
+        showSelectMenu
       } = this
-      if (active && cascaderMenuRef) {
-        cascaderMenuRef.deep()
+      if (showMenu && !showSelectMenu) {
+        this.move('child')
       }
     },
+    // --- search
     handleMenuInput (value) {
       this.doUpdateValue(value)
       if (this.type === 'single') {
@@ -470,7 +462,7 @@ export default {
       if (this.filterable) {
         this.openMenu()
       } else {
-        if (this.active) {
+        if (this.showMenu) {
           this.closeMenu()
         } else {
           this.openMenu()
@@ -502,9 +494,7 @@ export default {
       }
       this.$el.focus()
     },
-    /**
-     * Important for blur input state!
-     */
+    // Important for blur input state!
     handleKeyUpEsc () {
       this.closeMenu()
       this.triggerRef.focusPatternInputWrapper()
@@ -514,13 +504,8 @@ export default {
         e.preventDefault()
       }
     },
-    /**
-     * lazy load related
-     */
+    // --- async
     resolveLoad (option, children, callback) {
-      const newPatches = new Map(this.patches)
-      newPatches.set(option.id, children)
-      this.patches = newPatches
       this.loading = false
       this.loadingId = null
       if (callback) callback()

@@ -9,7 +9,7 @@ import { KEY_CODE } from '../../_utils'
 import keyboardDelegate from '../../_utils/delegate/keyboardDelegate'
 import NPopover from '../../popover'
 import NDropdownMenu from './DropdownMenu.js'
-import { useMergedState, useFalseUntilTruthy } from '../../_utils/composition'
+import { useMergedState, useFalseUntilTruthy } from 'vooks'
 import { keep, call } from '../../_utils/vue'
 import styles from './styles'
 

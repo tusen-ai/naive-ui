@@ -1,5 +1,5 @@
 import { Teleport, h, toRef, computed, inject } from 'vue'
-import { useFalseUntilTruthy } from '../../_utils/composition'
+import { useFalseUntilTruthy } from 'vooks'
 
 export default {
   name: 'LazyTeleport',

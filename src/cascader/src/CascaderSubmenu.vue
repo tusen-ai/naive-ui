@@ -6,32 +6,10 @@
       ref="scrollbarRef"
     >
       <n-cascader-option
-        v-for="(option, index) in options"
+        v-for="tmNode in tmNodes"
         ref="options"
-        :key="`${index}_${option.value}`"
-        :option-id="option.id"
-        :value="option.value"
-        :active="option.active"
-        :tracked="option.tracked"
-        :label="option.label"
-        :disabled="option.disabled"
-        :children="option.children"
-        :first-available-child-id="option.firstAvailableChildId"
-        :next-available-sibling-id="option.nextAvailableSiblingId"
-        :prev-available-sibling-id="option.prevAvailableSiblingId"
-        :available-parent-id="option.availableParentId"
-        :depth="option.depth"
-        :type="option.type"
-        :checked="option.checked"
-        :is-leaf="option.isLeaf"
-        :checkbox-checked="option.checkboxChecked"
-        :checkbox-indeterminate="option.checkboxIndeterminate"
-        :checked-leaf-count="option.checkedLeafCount"
-        :leaf-count="option.leafCount"
-        :has-checked-leaf="option.hasCheckedLeaf"
-        :loaded="option.loaded"
-        :determined="option.determined"
-        :loading="option.loading"
+        :key="tmNode.rawNode.value"
+        :tm-node="tmNode"
       />
     </n-scrollbar>
   </div>
@@ -58,23 +36,14 @@ export default {
       type: Number,
       required: true
     },
-    options: {
+    tmNodes: {
       type: Array,
       required: true
-    },
-    size: {
-      type: String,
-      default: 'medium'
     }
   },
   setup () {
     return {
       scrollbarRef: ref(null)
-    }
-  },
-  computed: {
-    theme () {
-      return this.NCascader.mergedTheme
     }
   }
 }
