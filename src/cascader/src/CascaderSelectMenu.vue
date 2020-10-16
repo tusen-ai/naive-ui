@@ -14,13 +14,14 @@
           ref="menuRef"
           v-clickoutside="handleClickOutside"
           class="n-cascader-menu"
+          auto-pending-first-option
           :theme="theme"
           :pattern="pattern"
           :options="filteredSelectOptions"
           :multiple="multiple"
           :size="size"
           :value="value"
-          @menu-toggle-option="handleSelectMenuToggleOption"
+          @menu-toggle-option="handleToggleOption"
         />
       </transition>
     </div>
@@ -119,9 +120,7 @@ export default {
       return this.show
     },
     selectOptions () {
-      const ret = createSelectOptions(this.tmNodes, this.leafOnly)
-      console.log(this.tmNodes, this.leafOnly, 'ret', ret)
-      return ret
+      return createSelectOptions(this.tmNodes, this.leafOnly)
     },
     filteredSelectOptions () {
       return this.selectOptions.filter(option => {
@@ -157,32 +156,33 @@ export default {
     __placeableBody () {
       return this.menuRef
     },
-    handleSelectMenuToggleOption (option) {
-      this.handleSelectOptionCheck(option)
+    handleToggleOption (option) {
+      this.doCheck(option)
     },
-    handleSelectOptionCheck (option) {
-      // if (option.disabled) return
-      // const {
-      //   'onUpdate:value': onUpdateValue
-      // } = this
-      // if (this.multiple) {
-      //   if (Array.isArray(this.value)) {
-      //     const index = this.value.findIndex(v => v === option.value)
-      //     if (~index) {
-      //       const newValue = this.value
-      //       newValue.splice(index, 1)
-      //       onUpdateValue(newValue)
-      //     } else {
-      //       const newValue = this.value
-      //       newValue.push(option.value)
-      //       onUpdateValue(newValue)
-      //     }
-      //   } else {
-      //     onUpdateValue([option.value])
-      //   }
-      // } else {
-      //   onUpdateValue(option.value)
-      // }
+    doCheck (option) {
+      if (this.multiple) {
+        const {
+          NCascader: {
+            value,
+            doCheck,
+            doUncheck
+          }
+        } = this
+        if (value === null || !value.includes(option.value)) {
+          doCheck(option.value)
+        } else {
+          doUncheck(option.value)
+        }
+      } else {
+        const {
+          NCascader: {
+            doCheck,
+            closeMenu
+          }
+        } = this
+        doCheck(option.value)
+        closeMenu()
+      }
     },
     prev () {
       const { menuRef } = this
@@ -196,8 +196,10 @@ export default {
       const { menuRef } = this
       if (menuRef) {
         const pendingOptionData = menuRef.getPendingOptionData()
-        this.handleSelectOptionCheck(pendingOptionData)
+        this.doCheck(pendingOptionData)
+        return true
       }
+      return false
     },
     handleClickOutside (e) {
       this.NCascader.handleSelectMenuClickOutside(e)

@@ -41,7 +41,7 @@
 </template>
 <script>
 import { ref } from 'vue'
-import NBaseMenuMask from '../../_base/menu-mask'
+// import NBaseMenuMask from '../../_base/menu-mask'
 import NCascaderSubmenu from './CascaderSubmenu.vue'
 import { placeable } from '../../_mixins'
 import { getPickerElement } from './utils'
@@ -53,8 +53,8 @@ import {
 export default {
   name: 'NCascaderMenu',
   components: {
-    NCascaderSubmenu,
-    NBaseMenuMask
+    NCascaderSubmenu
+    // NBaseMenuMask
   },
   directives: {
     zindexable,

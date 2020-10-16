@@ -377,9 +377,11 @@ export default {
               this.doCheck(keyboardKey)
             }
           }
-        }
-        if (selectMenuRef) {
-          selectMenuRef.enter()
+        } else {
+          if (selectMenuRef) {
+            const hasCorrespondingOption = selectMenuRef.enter()
+            if (hasCorrespondingOption) this.pattern = ''
+          }
         }
       }
     },
