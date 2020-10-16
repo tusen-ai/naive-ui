@@ -97,7 +97,6 @@ export default c([
       cM('multiple', [
         cB('base-select-option', {
           position: 'relative',
-          transition: `color .3s ${cubicBezierEaseInOut}`,
           paddingRight: '28px'
         }, [
           cM('selected', [
