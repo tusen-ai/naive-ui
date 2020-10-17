@@ -14,7 +14,7 @@ export default {
       count: 0,
       typeIndex: 0,
       types: ['success', 'info', 'warning', 'error', 'loading'],
-      message: null
+      msg: null
     }
   },
   computed: {
@@ -24,19 +24,19 @@ export default {
   },
   methods: {
     plus () {
-      if (this.message) {
+      if (this.msg) {
         this.count++
-        this.message.content = '' + this.count
+        this.msg.content = '' + this.count
       }
     },
     changeType () {
-      if (this.message) {
+      if (this.msg) {
         this.typeIndex = (this.typeIndex + 1) % this.types.length
-        this.message.type = this.type
+        this.msg.type = this.type
       }
     },
     createMessage () {
-      this.message = this.message[this.type](
+      this.msg = this.message[this.type](
         '' + this.count, { duration: 10000 }
       )
     }

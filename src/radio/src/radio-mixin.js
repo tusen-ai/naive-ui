@@ -100,24 +100,24 @@ export default {
         const {
           onChange,
           'onUpdate:value': updateValue,
-          __triggerFormInput,
-          __triggerFormChange
+          nTriggerFormInput,
+          nTriggerFormChange
         } = this.NRadioGroup
         if (updateValue) updateValue(value)
         if (onChange) onChange(value) // deprecated
-        __triggerFormInput()
-        __triggerFormChange()
+        nTriggerFormInput()
+        nTriggerFormChange()
       } else {
         const {
           onChange,
           'onUpdate:checkedValue': updateCheckedValue,
-          __triggerFormInput,
-          __triggerFormChange
+          nTriggerFormInput,
+          nTriggerFormChange
         } = this
         if (updateCheckedValue) updateCheckedValue(value)
         if (onChange) onChange(value) // deprecated
-        __triggerFormInput()
-        __triggerFormChange()
+        nTriggerFormInput()
+        nTriggerFormChange()
       }
     }
   }

@@ -181,14 +181,14 @@ export default {
         const {
           onChange,
           'onUpdate:checked': onUpdateChecked,
-          __triggerFormInput,
-          __triggerFormChange
+          nTriggerFormInput,
+          nTriggerFormChange
         } = this
         const nextChecked = !this.renderSafeChecked
         if (onUpdateChecked) onUpdateChecked(nextChecked)
         if (onChange) onChange(nextChecked) // deprecated
-        __triggerFormInput()
-        __triggerFormChange()
+        nTriggerFormInput()
+        nTriggerFormChange()
       }
     },
     handleClick (e) {

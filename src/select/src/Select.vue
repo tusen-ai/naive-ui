@@ -408,29 +408,29 @@ export default {
       const {
         onChange,
         'onUpdate:value': onUpdateValue,
-        __triggerFormChange,
-        __triggerFormInput
+        nTriggerFormChange,
+        nTriggerFormInput
       } = this
       if (onChange) call(onChange, value)
       if (onUpdateValue) call(onUpdateValue, value)
-      __triggerFormChange()
-      __triggerFormInput()
+      nTriggerFormChange()
+      nTriggerFormInput()
     },
     doBlur (value) {
       const {
         onBlur,
-        __triggerFormBlur
+        nTriggerFormBlur
       } = this
       if (onBlur) call(onBlur, value)
-      __triggerFormBlur()
+      nTriggerFormBlur()
     },
     doFocus (value) {
       const {
         onFocus,
-        __triggerFormFocus
+        nTriggerFormFocus
       } = this
       if (onFocus) call(onFocus, value)
-      __triggerFormFocus()
+      nTriggerFormFocus()
     },
     doSearch (value) {
       const {

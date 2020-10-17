@@ -206,39 +206,39 @@ export default {
       const {
         'onUpdate:value': onUpdateValue,
         onInput,
-        __triggerFormInput,
-        __triggerFormChange
+        nTriggerFormInput,
+        nTriggerFormChange
       } = this
       if (onUpdateValue) call(onUpdateValue, value)
       if (onInput) call(onInput, value)
-      __triggerFormInput()
-      __triggerFormChange()
+      nTriggerFormInput()
+      nTriggerFormChange()
     },
     doSelect (value) {
       const {
         onSelect,
-        __triggerFormInput,
-        __triggerFormChange
+        nTriggerFormInput,
+        nTriggerFormChange
       } = this
       if (onSelect) call(onSelect, value)
-      __triggerFormInput()
-      __triggerFormChange()
+      nTriggerFormInput()
+      nTriggerFormChange()
     },
     doBlur (value) {
       const {
         onBlur,
-        __triggerFormBlur
+        nTriggerFormBlur
       } = this
       if (onBlur) call(onBlur, value)
-      __triggerFormBlur()
+      nTriggerFormBlur()
     },
     doFocus (value) {
       const {
         onFocus,
-        __triggerFormFocus
+        nTriggerFormFocus
       } = this
       if (onFocus) call(onFocus, value)
-      __triggerFormFocus()
+      nTriggerFormFocus()
     },
     handleCompositionStart () {
       this.isComposing = true

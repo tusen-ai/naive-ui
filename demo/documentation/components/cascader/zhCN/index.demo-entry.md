@@ -2,12 +2,11 @@
 用来选一些树型信息。
 ## 演示
 ```demo
-
-multiple-lazy
-```
 single
 multiple
 single-lazy
+multiple-lazy
+```
 size
 
 ## Props

@@ -14,7 +14,7 @@ export default {
       message: null
     }
   },
-  beforeDestroy () {
+  beforeUnmount () {
     this.closeMessage()
   },
   methods: {

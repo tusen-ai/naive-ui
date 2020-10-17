@@ -210,13 +210,13 @@ export default {
         const {
           'onUpdate:value': onUpdateValue,
           onChange,
-          __triggerFormInput,
-          __triggerFormChange
+          nTriggerFormInput,
+          nTriggerFormChange
         } = this
         if (onChange) onChange(value)
         if (onUpdateValue) onUpdateValue(value)
-        __triggerFormInput()
-        __triggerFormChange()
+        nTriggerFormInput()
+        nTriggerFormChange()
       }
     },
     createValidValue () {
@@ -238,10 +238,10 @@ export default {
     handleFocus (e) {
       const {
         onFocus,
-        __triggerFormFocus
+        nTriggerFormFocus
       } = this
       if (onFocus) onFocus(e)
-      __triggerFormFocus()
+      nTriggerFormFocus()
     },
     add () {
       if (!this.addable) return
@@ -296,10 +296,10 @@ export default {
       this.emitChangeEvent(value)
       const {
         onBlur,
-        __triggerFormBlur
+        nTriggerFormBlur
       } = this
       if (onBlur) onBlur(e)
-      __triggerFormBlur()
+      nTriggerFormBlur()
     }
   }
 }

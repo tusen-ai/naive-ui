@@ -133,13 +133,13 @@ export default {
       const {
         onChange,
         'onUpdate:value': onUpdateValue,
-        __triggerFormInput,
-        __triggerFormChange
+        nTriggerFormInput,
+        nTriggerFormChange
       } = this
       if (onChange) call(onChange, value)
       if (onUpdateValue) call(onUpdateValue, value)
-      __triggerFormInput()
-      __triggerFormChange()
+      nTriggerFormInput()
+      nTriggerFormChange()
     },
     handleCloseClick (index) {
       const tags = this.value.slice(0)

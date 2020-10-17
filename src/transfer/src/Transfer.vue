@@ -307,13 +307,13 @@ export default {
       const {
         'onUpdate:value': onUpdateValue,
         onChange,
-        __triggerFormInput,
-        __triggerFormChange
+        nTriggerFormInput,
+        nTriggerFormChange
       } = this
       if (onUpdateValue) call(onUpdateValue, ...args)
       if (onChange) call(onChange, ...args)
-      __triggerFormInput()
-      __triggerFormChange()
+      nTriggerFormInput()
+      nTriggerFormChange()
     },
     handleSrcHeaderCheck (value) {
       const {

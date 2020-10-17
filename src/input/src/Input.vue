@@ -387,35 +387,35 @@ export default {
       const {
         'onUpdate:value': onUpdateValue,
         onInput,
-        __triggerFormInput
+        nTriggerFormInput
       } = this
       if (onUpdateValue) call(onUpdateValue, value)
       if (onInput) call(onInput, value)
-      __triggerFormInput()
+      nTriggerFormInput()
     },
     doChange (value) {
       const {
         onChange,
-        __triggerFormChange
+        nTriggerFormChange
       } = this
       if (onChange) call(onChange, value)
-      __triggerFormChange()
+      nTriggerFormChange()
     },
     doBlur (e) {
       const {
         onBlur,
-        __triggerFormBlur
+        nTriggerFormBlur
       } = this
       if (onBlur) call(onBlur, e)
-      __triggerFormBlur()
+      nTriggerFormBlur()
     },
     doFocus (e) {
       const {
         onFocus,
-        __triggerFormFocus
+        nTriggerFormFocus
       } = this
       if (onFocus) call(onFocus, e)
-      __triggerFormFocus()
+      nTriggerFormFocus()
     },
     doClear (...args) {
       const {

@@ -58,7 +58,9 @@ I cant get no, I cant get no`,
               notification.destroy()
             }
           },
-          ['已读']
+          {
+            default: () => '已读'
+          }
         ),
         onClose: () => {
           if (!markAsRead) {

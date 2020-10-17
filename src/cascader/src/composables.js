@@ -1,6 +1,5 @@
 import {
   computed,
-  getCurrentInstance,
   ref,
   watch
 } from 'vue'
@@ -9,8 +8,11 @@ import {
   SubtreeNotLoadedError
 } from 'treemate'
 import { useIsMounted } from 'vooks'
+import { useFormItem } from '../../_composables'
+import { call } from '../../_utils'
 
 export function useCascader (props) {
+  const formItem = useFormItem(props)
   const cascaderMenuRef = ref(null)
   const selectMenuRef = ref(null)
   const triggerRef = ref(null)
@@ -24,7 +26,6 @@ export function useCascader (props) {
     loadingKeySetRef.value.delete(key)
   }
   const treeMateRef = computed(() => {
-    console.log('build treemate', props.options)
     return TreeMate(props.options, {
       getKey ({ node }) {
         return node.value
@@ -68,10 +69,6 @@ export function useCascader (props) {
     }
     return ret
   })
-
-  console.log('value', props.value)
-  console.log('mergedKeysRef', mergedKeysRef.value)
-
   const hoverKeyPathRef = computed(() => {
     const {
       keyPath
@@ -84,7 +81,20 @@ export function useCascader (props) {
       keyboardKeyRef.value = null
     }
   })
-  const vm = getCurrentInstance().proxy
+  function doUpdateValue (...args) {
+    const {
+      'onUpdate:value': onUpdateValue,
+      onChange
+    } = props
+    const {
+      nTriggerFormInput,
+      nTriggerFormChange
+    } = formItem
+    if (onUpdateValue) call(onUpdateValue, ...args)
+    if (onChange) call(onChange, ...args)
+    nTriggerFormInput()
+    nTriggerFormChange()
+  }
   function updateKeyboardKey (key) {
     keyboardKeyRef.value = key
   }
@@ -109,7 +119,7 @@ export function useCascader (props) {
             leafOnly
           }
         )
-        vm.doUpdateValue(checkedKeys)
+        doUpdateValue(checkedKeys)
       } catch (err) {
         if (err instanceof SubtreeNotLoadedError) {
           if (cascaderMenuRef.value) {
@@ -128,12 +138,12 @@ export function useCascader (props) {
       if (leafOnly) {
         const node = treeMateRef.value.getNode(key)
         if (node !== null && node.isLeaf) {
-          vm.doUpdateValue(key)
+          doUpdateValue(key)
         } else {
           return false
         }
       } else {
-        vm.doUpdateValue(key)
+        doUpdateValue(key)
       }
     }
     return true
@@ -155,7 +165,7 @@ export function useCascader (props) {
           leafOnly
         }
       )
-      vm.doUpdateValue(checkedKeys)
+      doUpdateValue(checkedKeys)
     }
   }
   const selectedOptionsRef = computed(() => {
@@ -233,6 +243,7 @@ export function useCascader (props) {
     cascaderMenuRef,
     selectMenuRef,
     triggerRef,
+    ...formItem,
     updateKeyboardKey,
     updateHoverKey,
     doCheck,

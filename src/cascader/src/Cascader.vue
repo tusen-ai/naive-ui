@@ -80,8 +80,7 @@ import {
   configurable,
   themeable,
   locale,
-  usecssr,
-  asformitem
+  usecssr
 } from '../../_mixins'
 import { useCascader } from './composables'
 import { warn, call } from '../../_utils'
@@ -105,7 +104,6 @@ export default {
   mixins: [
     configurable,
     themeable,
-    asformitem(),
     locale('Cascader'),
     usecssr(styles, {
       themeKey: 'mergedTheme',
@@ -223,29 +221,29 @@ export default {
       const {
         'onUpdate:value': onUpdateValue,
         onChange,
-        __triggerFormInput,
-        __triggerFormChange
+        nTriggerFormInput,
+        nTriggerFormChange
       } = this
       if (onUpdateValue) call(onUpdateValue, ...args)
       if (onChange) call(onChange, ...args)
-      __triggerFormInput()
-      __triggerFormChange()
+      nTriggerFormInput()
+      nTriggerFormChange()
     },
     doBlur (...args) {
       const {
         onBlur,
-        __triggerFormBlur
+        nTriggerFormBlur
       } = this
       if (onBlur) call(onBlur, ...args)
-      __triggerFormBlur()
+      nTriggerFormBlur()
     },
     doFocus (...args) {
       const {
         onFocus,
-        __triggerFormFocus
+        nTriggerFormFocus
       } = this
       if (onFocus) call(onFocus, ...args)
-      __triggerFormFocus()
+      nTriggerFormFocus()
     },
     openMenu () {
       if (!this.disabled) {

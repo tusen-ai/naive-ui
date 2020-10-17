@@ -33,25 +33,25 @@ export default function (options = {}) {
       }
     },
     methods: {
-      __triggerFormBlur () {
+      nTriggerFormBlur () {
         const { NFormItem } = this
         if (NFormItem) {
           NFormItem.handleContentBlur()
         }
       },
-      __triggerFormChange () {
+      nTriggerFormChange () {
         const { NFormItem } = this
         if (NFormItem) {
           NFormItem.handleContentChange()
         }
       },
-      __triggerFormFocus () {
+      nTriggerFormFocus () {
         const { NFormItem } = this
         if (NFormItem) {
           NFormItem.handleContentFocus()
         }
       },
-      __triggerFormInput () {
+      nTriggerFormInput () {
         const { NFormItem } = this
         if (NFormItem) {
           NFormItem.handleContentInput()

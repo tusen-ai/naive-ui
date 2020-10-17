@@ -63,7 +63,6 @@ export default {
         window.setTimeout(() => {
           option.children = genChildren(option)
           resolve()
-          console.log('on-load', this.options)
         }, 1000)
       })
     }

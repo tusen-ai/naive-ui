@@ -57,8 +57,8 @@ export default {
       const {
         onChange,
         'onUpdate:value': onUpdateValue,
-        __triggerFormInput,
-        __triggerFormChange
+        nTriggerFormInput,
+        nTriggerFormChange
       } = this
       if (Array.isArray(this.value)) {
         let groupValue = Array.from(this.value)
@@ -67,8 +67,8 @@ export default {
           if (!~index) {
             groupValue.push(checkboxValue)
             if (onUpdateValue) onUpdateValue(groupValue)
-            __triggerFormInput()
-            __triggerFormChange()
+            nTriggerFormInput()
+            nTriggerFormChange()
             // deprecated
             if (onChange) onChange(groupValue)
           }
@@ -77,21 +77,21 @@ export default {
             groupValue.splice(index, 1)
             if (onUpdateValue) onUpdateValue(groupValue)
             if (onChange) onChange(groupValue) // deprecated
-            __triggerFormInput()
-            __triggerFormChange()
+            nTriggerFormInput()
+            nTriggerFormChange()
           }
         }
       } else {
         if (checked) {
           if (onUpdateValue) onUpdateValue([checkboxValue])
           if (onChange) onChange([checkboxValue]) // deprecated
-          __triggerFormInput()
-          __triggerFormChange()
+          nTriggerFormInput()
+          nTriggerFormChange()
         } else {
           if (onUpdateValue) onUpdateValue([])
           if (onChange) onChange([]) // deprecated
-          __triggerFormInput()
-          __triggerFormChange()
+          nTriggerFormInput()
+          nTriggerFormChange()
         }
       }
     }

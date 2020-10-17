@@ -67,8 +67,8 @@ export default {
       [
         this.messageList.length ? h(Teleport, {
           to: this.to
-        }, [
-          h('div', {
+        }, {
+          default: () => h('div', {
             class: 'n-message-container',
             key: 'n-message-container'
           }, this.messageList.map(
@@ -78,7 +78,7 @@ export default {
               onInternalAfterLeave: this.handleAfterLeave
             })
           ))
-        ]) : null,
+        }) : null,
         this.$slots.default()
       ]
     )

@@ -12,24 +12,24 @@ export default {
   inject: ['message'],
   data () {
     return {
-      message: null
+      msg: null
     }
   },
-  beforeDestroy () {
+  beforeUnmount () {
     this.removeMessage()
   },
   methods: {
     createMessage () {
-      if (!this.message) {
-        this.message = this.message.info('3 * 3 * 4 * 4 * ?', {
+      if (!this.msg) {
+        this.msg = this.message.info('3 * 3 * 4 * 4 * ?', {
           duration: 0
         })
       }
     },
     removeMessage () {
-      if (this.message) {
-        this.message.destroy()
-        this.message = null
+      if (this.msg) {
+        this.msg.destroy()
+        this.msg = null
       }
     }
   }

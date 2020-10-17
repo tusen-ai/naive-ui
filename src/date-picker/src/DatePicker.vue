@@ -411,29 +411,29 @@ export default {
       const {
         'onUpdate:value': onUpdateValue,
         onChange,
-        __triggerFormChange,
-        __triggerFormInput
+        nTriggerFormChange,
+        nTriggerFormInput
       } = this
       if (onUpdateValue) call(onUpdateValue, ...args)
       if (onChange) call(onChange, ...args)
-      __triggerFormChange()
-      __triggerFormInput()
+      nTriggerFormChange()
+      nTriggerFormInput()
     },
     doFocus (...args) {
       const {
         onFocus,
-        __triggerFormFocus
+        nTriggerFormFocus
       } = this
       if (onFocus) call(onFocus, ...args)
-      __triggerFormFocus()
+      nTriggerFormFocus()
     },
     doBlur (...args) {
       const {
         onBlur,
-        __triggerFormBlur
+        nTriggerFormBlur
       } = this
       if (onBlur) call(onBlur, ...args)
-      __triggerFormBlur()
+      nTriggerFormBlur()
     },
     handleKeyDown (e) {
       const value = this.value

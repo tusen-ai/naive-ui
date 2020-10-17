@@ -451,29 +451,29 @@ export default {
       const {
         'onUpdate:value': onUpdateValue,
         onChange,
-        __triggerFormChange,
-        __triggerFormInput
+        nTriggerFormChange,
+        nTriggerFormInput
       } = this
       if (onUpdateValue) call(onUpdateValue, value)
       if (onChange) call(onChange, value)
-      __triggerFormChange()
-      __triggerFormInput()
+      nTriggerFormChange()
+      nTriggerFormInput()
     },
     doFocus () {
       const {
         onFocus,
-        __triggerFormFocus
+        nTriggerFormFocus
       } = this
       if (onFocus) call(onFocus)
-      __triggerFormFocus()
+      nTriggerFormFocus()
     },
     doBlur () {
       const {
         onBlur,
-        __triggerFormBlur
+        nTriggerFormBlur
       } = this
       if (onBlur) call(onBlur)
-      __triggerFormBlur()
+      nTriggerFormBlur()
     },
     handleTimeInputClear (e) {
       e.stopPropagation()
@@ -605,20 +605,20 @@ export default {
       })
     },
     scrollTimer () {
-      if (this.hoursRef && this.hoursRef.$el) {
-        const hour = this.hoursRef.$el.querySelector('.n-time-picker-selector-time-row__item--active')
+      if (this.hoursRef && this.hoursRef.contentRef) {
+        const hour = this.hoursRef.contentRef.querySelector('.n-time-picker-selector-time-row__item--active')
         if (hour) {
           this.hoursRef.scrollTo(0, hour.offsetTop)
         }
       }
-      if (this.minutesRef && this.minutesRef.$el) {
-        const minute = this.minutesRef.$el.querySelector('.n-time-picker-selector-time-row__item--active')
+      if (this.minutesRef && this.minutesRef.contentRef) {
+        const minute = this.minutesRef.contentRef.querySelector('.n-time-picker-selector-time-row__item--active')
         if (minute) {
           this.minutesRef.scrollTo(0, minute.offsetTop)
         }
       }
-      if (this.secondsRef && this.secondsRef.$el) {
-        const second = this.secondsRef.$el.querySelector('.n-time-picker-selector-time-row__item--active')
+      if (this.secondsRef && this.secondsRef.contentRef) {
+        const second = this.secondsRef.contentRef.querySelector('.n-time-picker-selector-time-row__item--active')
         if (second) {
           this.secondsRef.scrollTo(0, second.offsetTop)
         }
@@ -654,10 +654,10 @@ export default {
         if (emitBlur) {
           const {
             onBlur,
-            __triggerFormBlur
+            nTriggerFormBlur
           } = this
           if (onBlur) onBlur()
-          __triggerFormBlur()
+          nTriggerFormBlur()
         }
       }
     },
