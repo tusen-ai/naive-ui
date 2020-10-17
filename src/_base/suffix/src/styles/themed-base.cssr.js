@@ -53,7 +53,9 @@ export default c([
             height: 12px;
             width: 12px;
           `
-        }),
+        }, [
+          iconSwitchTransition
+        ]),
         cB('base-suffix-cross', {
           transform: transformDebounceScale,
           raw: `

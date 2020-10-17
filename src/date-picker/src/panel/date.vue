@@ -79,7 +79,7 @@
         size="tiny"
         @click="clearValue"
       >
-        {{ localeNamespace.clear }}
+        {{ localeNs.clear }}
       </n-button>
       <n-button
         v-if="actions.includes('now')"
@@ -87,7 +87,7 @@
         size="tiny"
         @click="setSelectedDateTimeToNow"
       >
-        {{ localeNamespace.now }}
+        {{ localeNs.now }}
       </n-button>
       <n-button
         v-if="actions.includes('confirm')"
@@ -97,7 +97,7 @@
         :disabled="isDateInvalid"
         @click="handleConfirmClick"
       >
-        {{ localeNamespace.confirm }}
+        {{ localeNs.confirm }}
       </n-button>
     </div>
     <focus-detector @focus="handleFocusDetectorFocus" />

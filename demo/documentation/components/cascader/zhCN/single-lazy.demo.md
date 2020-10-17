@@ -1,21 +1,36 @@
-# 异步单项
+# 单项（异步）
 ```html
-<n-cascader
-  v-model:value="value"
-  placeholder="请选些什么"
-  :options="options"
-  :leaf-only="false"
-  remote
-  :on-load="handleLoad"
-/>
+<n-space vertical align="stretch">
+  <n-space>
+    <n-space><n-switch v-model:value="leafOnly" />Leaf Only</n-space>
+    <n-space><n-switch v-model:value="cascade" />Cascade</n-space>
+  </n-space>
+  <n-space>
+    <n-space><n-switch v-model:value="showPath" />Show Path</n-space>
+    <n-space><n-switch v-model:value="hoverTrigger" />Hover Trigger</n-space>
+  </n-space>
+  <n-cascader
+    v-model:value="value"
+    placeholder="请选些什么"
+    :expand-trigger="hoverTrigger ? 'hover' : 'click'"
+    :options="options"
+    :cascade="cascade"
+    :leaf-only="leafOnly"
+    :show-path="showPath"
+    remote
+    :on-load="handleLoad"
+  />
+</n-space>
 ```
+
 ```js
 function genChildren (option) {
   const children = []
   for (let i = 0; i <= option.depth; ++i) {
     children.push({
-      label: option.label + '_' + i,
-      value: option.label + '_' + i,
+      label: option.label + '-' + i,
+      value: option.label + '-' + i,
+      depth: option.depth + 1,
       isLeaf: option.depth === 3
     })
   }
@@ -24,8 +39,9 @@ function genChildren (option) {
 
 const options = [
   {
-    label: 'Root',
-    value: 'root',
+    label: 'l-0',
+    value: 'v-0',
+    depth: 1,
     isLeaf: false
   }
 ]
@@ -33,15 +49,23 @@ const options = [
 export default {
   data () {
     return {
+      leafOnly: true,
+      cascade: true,
+      showPath: true,
+      hoverTrigger: false,
       value: null,
       options: options
     }
   },
   methods: {
-    handleLoad (option, resolve) {
-      window.setTimeout(() => {
-        resolve(genChildren(option))
-      }, 1000)
+    handleLoad (option) {
+      return new Promise((resolve) => {
+        window.setTimeout(() => {
+          option.children = genChildren(option)
+          resolve()
+          console.log('on-load', this.options)
+        }, 1000)
+      })
     }
   }
 }

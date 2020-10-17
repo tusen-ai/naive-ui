@@ -119,7 +119,7 @@ export default {
   },
   computed: {
     localizedAdd () {
-      return this.localeNamespace.add
+      return this.localeNs.add
     },
     inputSize () {
       const sizes = ['small', 'medium', 'large']

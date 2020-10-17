@@ -314,7 +314,7 @@ export default {
       if (this.placeholder !== undefined) {
         return this.placeholder
       }
-      return this.localeNamespace.placeholder
+      return this.localeNs.placeholder
     },
     adpatedOptions () {
       /**

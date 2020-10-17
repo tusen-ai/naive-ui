@@ -137,7 +137,7 @@ export default {
         this.__placeableSyncPosition()
       })
     },
-    pattern () {
+    filteredSelectOptions () {
       this.$nextTick(() => {
         this.__placeableSyncPosition()
       })

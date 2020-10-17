@@ -1,7 +1,7 @@
 <template>
   <div class="n-log-loader">
     <n-base-loading :stroke-width="24" :theme="theme" /><span class="n-log-loader__content">
-      {{ localeNamespace.loading }}
+      {{ localeNs.loading }}
     </span>
   </div>
 </template>

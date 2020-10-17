@@ -17,7 +17,7 @@
           />
         </div>
         <div class="n-transfer-list-header__header">
-          {{ sourceTitle || localeNamespace.sourceTitle }}
+          {{ sourceTitle || localeNs.sourceTitle }}
         </div>
         <n-transfer-header-extra :source="true" />
       </div>
@@ -105,7 +105,7 @@
           />
         </div>
         <div class="n-transfer-list-header__header">
-          {{ targetTitle || localeNamespace.targetTitle }}
+          {{ targetTitle || localeNs.targetTitle }}
         </div>
         <n-transfer-header-extra />
       </div>

@@ -51,7 +51,7 @@ export default function createLocaleMixin (componentLocaleNamespace) {
           language
         )
       },
-      localeNamespace () {
+      localeNs () {
         return this.tns(componentLocaleNamespace)
       }
     },

@@ -73,7 +73,7 @@
       v-if="showQuickJumper"
       class="n-pagination-quick-jumper"
     >
-      {{ localeNamespace.goto }} <n-input
+      {{ localeNs.goto }} <n-input
         v-model="quickJumperValue"
         size="small"
         :disabled="disabled"
@@ -196,7 +196,7 @@ export default {
   },
   computed: {
     pageSizeOptions () {
-      const suffix = this.localeNamespace.selectionSuffix
+      const suffix = this.localeNs.selectionSuffix
       return this.pageSizes.map(size => ({
         label: `${size} / ${suffix}`,
         value: size

@@ -11,7 +11,12 @@
       @mouseleave="handleMouseLeave"
     >
       <icon-switch-transition>
-        <n-base-loading v-if="loading" :theme="theme" class="n-base-suffix-spin" />
+        <n-base-loading
+          v-if="loading"
+          key="loading"
+          :theme="theme"
+          class="n-base-suffix-spin"
+        />
         <div
           v-else-if="!arrow || (mouseHovered && clearable)"
           key="cross"

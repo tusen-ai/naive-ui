@@ -362,17 +362,17 @@ export default {
       return this.active
     },
     localizedNow () {
-      return this.localeNamespace.now
+      return this.localeNs.now
     },
     localizedPlaceholder () {
       if (this.placeholder !== null) return this.placeholder
-      return this.localeNamespace.placeholder
+      return this.localeNs.placeholder
     },
     localizedNegativeText () {
-      return this.localeNamespace.negativeText
+      return this.localeNs.negativeText
     },
     localizedPositiveText () {
-      return this.localeNamespace.positiveText
+      return this.localeNs.positiveText
     },
     dateFnsOptions () {
       return {

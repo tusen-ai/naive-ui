@@ -58,7 +58,7 @@ export default {
   },
   computed: {
     weekdays () {
-      return weekdays.map(weekday => this.localeNamespace[weekday])
+      return weekdays.map(weekday => this.localeNs[weekday])
     }
   },
   methods: {

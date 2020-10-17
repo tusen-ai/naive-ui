@@ -1,6 +1,5 @@
 <!--
 'n-cascader-option--selected': type === 'single' && value === NCascader.value,
-'n-cascader-option--loading': loading,
 'n-cascader-option--active': active && !isLeaf,
 -->
 
@@ -40,7 +39,7 @@
           v-if="!isLeaf"
         >
           <n-base-loading
-            v-if="loading"
+            v-if="isLoading"
             key="loading"
             class="n-cascader-option-icon"
             :theme="NCascader.mergedTheme"
@@ -99,13 +98,7 @@ export default {
   },
   setup (props) {
     const NCascader = inject('NCascader')
-    const {
-      tmNode
-    } = props
-    const {
-      rawNode
-    } = tmNode
-    const valueRef = toRef(rawNode, 'value')
+    const valueRef = computed(() => props.tmNode.rawNode.value)
     return {
       leafOnly: toRef(NCascader, 'leafOnly'),
       multiple: toRef(NCascader, 'multiple'),
@@ -124,14 +117,30 @@ export default {
         if (NCascader.keyboardKey === null) return false
         return NCascader.keyboardKey === valueRef.value
       }),
+      isLoading: useMemo(() => {
+        if (NCascader.remote) {
+          return NCascader.loadingKeySet.has(valueRef.value)
+        }
+        return false
+      }),
       showCheckbox: computed(() => {
         if (NCascader.multiple) return true
         if (!NCascader.leafOnly) return true
       }),
-      useHoverTrigger: computed(() => NCascader.expandTrigger === 'hover'),
-      isLeaf: toRef(tmNode, 'isLeaf'),
-      disabled: toRef(tmNode, 'disabled'),
-      label: toRef(rawNode, 'label'),
+      useHoverTrigger: computed(() => {
+        const {
+          expandTrigger,
+          remote
+        } = NCascader
+        return !remote && expandTrigger === 'hover'
+      }),
+      rawNode: computed(() => props.tmNode.rawNode),
+      isLeaf: computed(() => props.tmNode.isLeaf),
+      disabled: computed(() => props.tmNode.disabled),
+      label: computed(() => props.tmNode.rawNode.label),
+      isShallowLoaded: computed(() => {
+        return props.tmNode.isShallowLoaded
+      }),
       value: valueRef,
       loading: false
     }
@@ -156,11 +165,27 @@ export default {
       const {
         NCascader: {
           updateHoverKey,
-          updateKeyboardKey
+          updateKeyboardKey,
+          remote,
+          loadingKeySet,
+          addLoadingKey,
+          deleteLoadingKey,
+          onLoad
         },
         value,
-        isLeaf
+        isLeaf,
+        isShallowLoaded
       } = this
+      if (remote && !isShallowLoaded && !loadingKeySet.has(value)) {
+        addLoadingKey(value)
+        onLoad(this.rawNode)
+          .then(() => {
+            deleteLoadingKey(value)
+          })
+          .catch(() => {
+            deleteLoadingKey(value)
+          })
+      }
       updateHoverKey(value)
       updateKeyboardKey(value)
       if (isLeaf) {

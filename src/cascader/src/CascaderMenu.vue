@@ -29,11 +29,10 @@
             :tm-nodes="submenuOptions"
             :depth="index + 1"
           />
-          <!-- <n-base-menu-mask
+          <n-base-menu-mask
             ref="maskRef"
             :theme="theme"
-            :duration="3000"
-          /> -->
+          />
         </div>
       </transition>
     </div>
@@ -41,7 +40,7 @@
 </template>
 <script>
 import { ref } from 'vue'
-// import NBaseMenuMask from '../../_base/menu-mask'
+import NBaseMenuMask from '../../_base/menu-mask'
 import NCascaderSubmenu from './CascaderSubmenu.vue'
 import { placeable } from '../../_mixins'
 import { getPickerElement } from './utils'
@@ -53,8 +52,8 @@ import {
 export default {
   name: 'NCascaderMenu',
   components: {
-    NCascaderSubmenu
-    // NBaseMenuMask
+    NCascaderSubmenu,
+    NBaseMenuMask
   },
   directives: {
     zindexable,
@@ -74,6 +73,16 @@ export default {
     }
   },
   props: {
+    value: {
+      validator () {
+        return true
+      },
+      default: undefined
+    },
+    theme: {
+      type: String,
+      default: null
+    },
     placement: {
       type: String,
       default: 'bottom-start'
@@ -90,21 +99,9 @@ export default {
       type: Array,
       required: true
     },
-    lazy: {
-      type: Boolean,
-      default: false
-    },
     loading: {
       type: Boolean,
       default: false
-    },
-    onLoad: {
-      type: Function,
-      default: () => {}
-    },
-    theme: {
-      type: String,
-      default: null
     }
   },
   setup () {
@@ -122,14 +119,15 @@ export default {
     }
   },
   watch: {
-    menuModel () {
+    value () {
       this.$nextTick(() => {
         this.__placeableSyncPosition()
       })
     },
-    keyboardKey (id) {
-      // sync position
-      // sync scroll status
+    menuModel () {
+      this.$nextTick(() => {
+        this.__placeableSyncPosition()
+      })
     }
   },
   methods: {
@@ -149,30 +147,19 @@ export default {
       e.preventDefault()
       e.stopPropagation()
     },
-    // hideMask () {
-    //   if (this.maskRef) {
-    //     this.maskRef.hide()
-    //   }
-    // },
-    // updateLoadingId (id) {
-    //   const { 'onUpdate:loadingId': onUpdateLoadingId } = this
-    //   onUpdateLoadingId(id)
-    // },
-    // updateLoadingStatus (loading) {
-    //   const { 'onUpdate:loading': onUpdateLoading } = this
-    //   onUpdateLoading(loading)
-    // },
-    // loadOptionChildren (option) {
-    //   if (this.lazy) {
-    //     if (!option.loaded) {
-    //       if (!this.loading) {
-    //         this.updateLoadingStatus(true)
-    //         this.updateLoadingId(option.id)
-    //         this.onLoad(option, (children) => this.NCascader.resolveLoad(option, children), () => this.rejectLoad())
-    //       }
-    //     }
-    //   }
-    // },
+    showErrorMessage (label) {
+      const {
+        NCascader: {
+          localeNs: {
+            loadingRequiredMessage
+          }
+        },
+        maskRef
+      } = this
+      if (maskRef) {
+        maskRef.showOnce(loadingRequiredMessage(label))
+      }
+    },
     handleClickOutside (e) {
       this.NCascader.handleCascaderMenuClickOutside(e)
     }

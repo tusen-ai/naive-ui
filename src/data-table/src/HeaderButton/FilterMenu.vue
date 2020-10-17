@@ -44,7 +44,7 @@
         :theme="theme"
         @click="handleCancelClick"
       >
-        {{ NDataTable.localeNamespace.clear }}
+        {{ NDataTable.localeNs.clear }}
       </n-button>
       <n-button
         :theme="theme"
@@ -52,7 +52,7 @@
         size="tiny"
         @click="handleConfirmClick"
       >
-        {{ NDataTable.localeNamespace.confirm }}
+        {{ NDataTable.localeNs.confirm }}
       </n-button>
     </div>
   </div>

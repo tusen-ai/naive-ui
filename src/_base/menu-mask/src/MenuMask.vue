@@ -3,7 +3,7 @@
     name="n-fade-in-transition"
   >
     <div
-      v-if="active"
+      v-if="show"
       class="n-base-menu-mask"
       :class="{
         [`n-${theme}-theme`]: theme
@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { ref, onBeforeUnmount } from 'vue'
 import usecssr from '../../../_mixins/usecssr'
 import styles from './styles'
 
@@ -28,43 +29,36 @@ export default {
     theme: {
       type: String,
       default: null
-    },
-    color: {
-      type: String,
-      default: null
-    },
-    duration: {
-      type: Number,
-      default: 1500
     }
   },
-  data () {
+  setup () {
+    const messageRef = ref(null)
+    const timerIdRef = ref(null)
+    const uncontrolledShowRef = ref(false)
+    onBeforeUnmount(() => {
+      const {
+        value: timerId
+      } = timerIdRef
+      if (timerId !== null) {
+        window.clearTimeout(timerId)
+      }
+    })
     return {
-      message: null,
-      timerId: null,
-      active: false
-    }
-  },
-  beforeUnmount () {
-    if (this.timerId) window.clearTimeout(this.timerId)
-  },
-  methods: {
-    showOnce (message) {
-      if (this.timerId) window.clearTimeout(this.timerId)
-      this.active = true
-      this.message = message
-      this.timerId = window.setTimeout(() => {
-        this.active = false
-        this.message = null
-      }, this.duration)
-    },
-    show (message) {
-      this.active = true
-      this.message = message
-    },
-    hide () {
-      this.active = false
-      this.message = null
+      message: messageRef,
+      timerId: timerIdRef,
+      show: uncontrolledShowRef,
+      showOnce (message, duration = 1500) {
+        const {
+          value: timerId
+        } = timerIdRef
+        if (timerId) window.clearTimeout(timerId)
+        uncontrolledShowRef.value = true
+        messageRef.value = message
+        timerIdRef.value = window.setTimeout(() => {
+          uncontrolledShowRef.value = false
+          messageRef.value = null
+        }, duration)
+      }
     }
   }
 }

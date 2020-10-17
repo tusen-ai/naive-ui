@@ -5,13 +5,26 @@ import {
   watch
 } from 'vue'
 import {
-  TreeMate
+  TreeMate,
+  SubtreeNotLoadedError
 } from 'treemate'
+import { useIsMounted } from 'vooks'
 
 export function useCascader (props) {
+  const cascaderMenuRef = ref(null)
+  const selectMenuRef = ref(null)
+  const triggerRef = ref(null)
   const keyboardKeyRef = ref(null)
   const hoverKeyRef = ref(null)
+  const loadingKeySetRef = ref(new Set())
+  const addLoadingKey = (key) => {
+    loadingKeySetRef.value.add(key)
+  }
+  const deleteLoadingKey = (key) => {
+    loadingKeySetRef.value.delete(key)
+  }
   const treeMateRef = computed(() => {
+    console.log('build treemate', props.options)
     return TreeMate(props.options, {
       getKey ({ node }) {
         return node.value
@@ -49,21 +62,27 @@ export function useCascader (props) {
       ]
     } else {
       ret = treeNodePath.map(treeNode => treeNode.siblings)
-      if (!treeNode.isLeaf) {
+      if (!treeNode.isLeaf && !loadingKeySetRef.value.has(treeNode.key)) {
         ret.push(treeNode.children)
       }
     }
     return ret
   })
+
+  console.log('value', props.value)
+  console.log('mergedKeysRef', mergedKeysRef.value)
+
   const hoverKeyPathRef = computed(() => {
     const {
       keyPath
     } = treeMateRef.value.getPath(hoverKeyRef.value)
     return keyPath
   })
-  watch(props.options, () => {
-    hoverKeyRef.value = null
-    keyboardKeyRef.value = null
+  watch(props.options, (value, oldValue) => {
+    if (!(value === oldValue)) {
+      hoverKeyRef.value = null
+      keyboardKeyRef.value = null
+    }
   })
   const vm = getCurrentInstance().proxy
   function updateKeyboardKey (key) {
@@ -79,20 +98,45 @@ export function useCascader (props) {
       leafOnly
     } = props
     if (multiple) {
-      const {
-        checkedKeys
-      } = treeMateRef.value.check(
-        key,
-        mergedKeysRef.value.checkedKeys,
-        {
-          cascade,
-          leafOnly
+      try {
+        const {
+          checkedKeys
+        } = treeMateRef.value.check(
+          key,
+          mergedKeysRef.value.checkedKeys,
+          {
+            cascade,
+            leafOnly
+          }
+        )
+        vm.doUpdateValue(checkedKeys)
+      } catch (err) {
+        if (err instanceof SubtreeNotLoadedError) {
+          if (cascaderMenuRef.value) {
+            const node = treeMateRef.value.getNode(key)
+            if (node !== null) {
+              cascaderMenuRef.value.showErrorMessage(
+                node.rawNode.label
+              )
+            }
+          }
+        } else {
+          throw err
         }
-      )
-      vm.doUpdateValue(checkedKeys)
+      }
     } else {
-      vm.doUpdateValue(key)
+      if (leafOnly) {
+        const node = treeMateRef.value.getNode(key)
+        if (node !== null && node.isLeaf) {
+          vm.doUpdateValue(key)
+        } else {
+          return false
+        }
+      } else {
+        vm.doUpdateValue(key)
+      }
     }
+    return true
   }
   function doUncheck (key) {
     const {
@@ -184,10 +228,17 @@ export function useCascader (props) {
     selectedOptions: selectedOptionsRef,
     selectedOption: selectedOptionRef,
     hoverKeyPath: hoverKeyPathRef,
+    loadingKeySet: loadingKeySetRef,
+    isMounted: useIsMounted(),
+    cascaderMenuRef,
+    selectMenuRef,
+    triggerRef,
     updateKeyboardKey,
     updateHoverKey,
     doCheck,
-    doUncheck
+    doUncheck,
+    addLoadingKey,
+    deleteLoadingKey
   }
 }
 

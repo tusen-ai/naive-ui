@@ -340,14 +340,14 @@ export default {
     },
     localizedSeperator () {
       if (this.separator !== undefined) return this.separator
-      return this.localeNamespace.separator
+      return this.localeNs.separator
     },
     localizedPlacehoder () {
       if (this.placeholder === null) {
         if (this.type === 'date') {
-          return this.localeNamespace.datePlaceholder
+          return this.localeNs.datePlaceholder
         } else if (this.type === 'datetime') {
-          return this.localeNamespace.datetimePlaceholder
+          return this.localeNs.datetimePlaceholder
         }
         return this.placeholder
       } else {
@@ -357,9 +357,9 @@ export default {
     localizedStartPlaceholder () {
       if (this.startPlaceholder === null) {
         if (this.type === 'daterange') {
-          return this.localeNamespace.startDatePlaceholder
+          return this.localeNs.startDatePlaceholder
         } else if (this.type === 'datetimerange') {
-          return this.localeNamespace.startDatetimePlaceholder
+          return this.localeNs.startDatetimePlaceholder
         }
         return this.startPlaceholder
       } else {
@@ -369,9 +369,9 @@ export default {
     localizedEndPlaceholder () {
       if (this.endPlaceholder === null) {
         if (this.type === 'daterange') {
-          return this.localeNamespace.endDatePlaceholder
+          return this.localeNs.endDatePlaceholder
         } else if (this.type === 'datetimerange') {
-          return this.localeNamespace.endDatetimePlaceholder
+          return this.localeNs.endDatetimePlaceholder
         }
         return this.endPlaceholder
       } else {

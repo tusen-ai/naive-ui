@@ -27,9 +27,9 @@
       :filterable="filterable"
       :clearable="clearable"
       :disabled="disabled"
-      @focus="handleActivatorFocus"
-      @blur="handleActivatorBlur"
-      @click="handleActivatorClick"
+      @focus="handleTriggerFocus"
+      @blur="handleTriggerBlur"
+      @click="handleTriggerClick"
       @clear="handleClear"
       @delete-option="handleDeleteOption"
       @delete-last-option="handleDeleteLastOption"
@@ -44,14 +44,11 @@
         :class="{
           [namespace]: namespace
         }"
+        :value="value"
         :show="showMenu && !showSelectMenu"
-        :lazy="remote"
-        :on-load="onLoad"
         :theme="mergedTheme"
         :size="mergedSize"
         :menu-model="menuModel"
-        @update:loading-id="loadingId = $event"
-        @update:value="handleMenuInput"
       />
     </n-lazy-teleport>
     <n-lazy-teleport
@@ -77,7 +74,6 @@
 </template>
 
 <script>
-import { ref } from 'vue'
 import NBaseSelection from '../../_base/selection'
 import NLazyTeleport from '../../_base/lazy-teleport'
 import {
@@ -88,7 +84,6 @@ import {
   asformitem
 } from '../../_mixins'
 import { useCascader } from './composables'
-import { useIsMounted } from 'vooks'
 import { warn, call } from '../../_utils'
 import CascaderMenu from './CascaderMenu.vue'
 import CascaderSelectMenu from './CascaderSelectMenu.vue'
@@ -164,7 +159,7 @@ export default {
     },
     onLoad: {
       type: Function,
-      default: () => {}
+      default: undefined
     },
     separator: {
       type: String,
@@ -205,30 +200,18 @@ export default {
     }
   },
   setup (props) {
-    return {
-      ...(useCascader(props)),
-      cascaderMenuRef: ref(null),
-      selectMenuRef: ref(null),
-      triggerRef: ref(null),
-      isMounted: useIsMounted()
-    }
+    return useCascader(props)
   },
   data () {
     return {
       pattern: '',
-      showMenu: false,
-      /**
-       * set here to keep state
-       */
-      patches: new Map(),
-      loadingId: null,
-      loading: false
+      showMenu: false
     }
   },
   computed: {
     localizedPlaceholder () {
       if (this.placeholder !== undefined) return this.placeholder
-      return this.localeNamespace.placeholder
+      return this.localeNs.placeholder
     },
     // select option related
     showSelectMenu () {
@@ -334,10 +317,33 @@ export default {
           break
         case 'child':
           if (keyboardKey !== null) {
-            const node = treeMate.getChild(keyboardKey)
-            if (node !== null) {
-              updateHoverKey(keyboardKey)
-              updateKeyboardKey(node.key)
+            const currentNode = treeMate.getNode(keyboardKey)
+            if (currentNode !== null) {
+              if (currentNode.isShallowLoaded) {
+                const node = treeMate.getChild(keyboardKey)
+                if (node !== null) {
+                  updateHoverKey(keyboardKey)
+                  updateKeyboardKey(node.key)
+                }
+              } else {
+                const {
+                  addLoadingKey,
+                  deleteLoadingKey,
+                  loadingKeySet
+                } = this
+                if (!loadingKeySet.has(keyboardKey)) {
+                  addLoadingKey(keyboardKey)
+                  updateHoverKey(keyboardKey)
+                  this
+                    .onLoad(currentNode.rawNode)
+                    .then(() => {
+                      deleteLoadingKey(keyboardKey)
+                    })
+                    .catch(() => {
+                      deleteLoadingKey(keyboardKey)
+                    })
+                }
+              }
             }
           }
           break
@@ -374,7 +380,10 @@ export default {
             ) {
               this.doUncheck(keyboardKey)
             } else {
-              this.doCheck(keyboardKey)
+              const checkIsValid = this.doCheck(keyboardKey)
+              if (!this.multiple && checkIsValid) {
+                this.closeMenu()
+              }
             }
           }
         } else {
@@ -436,9 +445,7 @@ export default {
     // --- search
     handleMenuInput (value) {
       this.doUpdateValue(value)
-      if (this.type === 'single') {
-        this.closeMenu()
-      } else if (this.type === 'single-all-options') {
+      if (!this.multiple) {
         this.closeMenu()
       } else {
         const trigger = this.triggerRef
@@ -453,14 +460,14 @@ export default {
     handleClear () {
       this.doUpdateValue(null)
     },
-    handleActivatorFocus () {
+    handleTriggerFocus () {
       this.doFocus()
     },
-    handleActivatorBlur () {
+    handleTriggerBlur () {
       this.doBlur()
       this.closeMenu()
     },
-    handleActivatorClick () {
+    handleTriggerClick () {
       if (this.filterable) {
         this.openMenu()
       } else {

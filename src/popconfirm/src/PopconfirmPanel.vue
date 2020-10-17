@@ -84,10 +84,10 @@ export default {
   },
   computed: {
     localizedPositiveText () {
-      return this.positiveText || this.localeNamespace.positiveText
+      return this.positiveText || this.localeNs.positiveText
     },
     localizedNegativeText () {
-      return this.negativeText || this.localeNamespace.negativeText
+      return this.negativeText || this.localeNs.negativeText
     }
   },
   methods: {
