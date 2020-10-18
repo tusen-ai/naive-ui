@@ -13,7 +13,7 @@ export default c([
       cubicBezierEaseInOut
     } = props.$base
     return [
-      cTB('form', {
+      cB('form', {
         width: '100%',
         fontSize: '14px',
         lineHeight: '1.5'
