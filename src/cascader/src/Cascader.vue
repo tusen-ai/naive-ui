@@ -131,7 +131,7 @@ export default {
       validator (value) {
         return ['small', 'medium', 'large'].includes(value)
       },
-      default: 'medium'
+      default: undefined
     },
     filterable: {
       type: Boolean,

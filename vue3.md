@@ -40,6 +40,11 @@ placeable 进行了大调整
 - [x] cascader
   - break
     - `v-model` => `v-model:value`
+    - `on-load` has different usage
+    - `leaf-only` has different meaning
+  - new
+    - `cascade` prop
+    - `show-path` prop
   - deprecated
     - `on-change` => `on-update:value`
 - [x] checkbox

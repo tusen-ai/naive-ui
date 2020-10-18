@@ -4,29 +4,31 @@
 ```demo
 single
 multiple
+size
 single-lazy
 multiple-lazy
 ```
-size
 
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|options|`Array<CascaderOption>`|`null`||
-|value|`string \| number`|`null`||
-|placeholder|`string`|`'请选择'`||
-|multiple|`boolean`|`false`||
-|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
-|filterable|`boolean`|`false`|不能和 `remote` 同时为 `true`|
-|disabled|`boolean`|`false`||
-|expand-trigger|`'click' \| 'hover'`|`'click'`|在 remote 为 `true` 时不可设为 `'hover'`|
-|leaf-only|`boolean`|`false`||
+|cascade|`boolean`|`true`|在多选时是否关联选项|
 |clearable|`boolean`|`false`||
-|remote|`boolean`|`false`||
-|on-load|`(option: CascaderOption) => Promise<any>`|`undefined`|在点击未加载完成节点时的回调，在回调中设定 `option.children`，在返回的 promise resolve 或 reject 之后加载完成|
-|separator|`string`|`' / '`||
+|disabled|`boolean`|`false`||
+|expand-trigger|`'click' \| 'hover'`|`'click'`|在 `remote` 被设定时 `'hover'` 不生效|
+|filterable|`boolean`|`false`|`remote` 被设定时不生效|
 |filter|`(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean`|一个基于字符串的过滤算法||
-|on-focus|`() => any`|`undefined`||
+|leaf-only|`boolean`|`false`|是否只允许 `value` 出现叶节点的值|
+|multiple|`boolean`|`false`||
+|on-load|`(option: CascaderOption) => Promise<any>`|`undefined`|在点击未加载完成节点时的回调，在回调中设定 `option.children`，在返回的 promise resolve 或 reject 之后加载完成|
+|options|`Array<CascaderOption>`|required||
+|placeholder|`string`|`'请选择'`||
+|remote|`boolean`|`false`||
+|separator|`string`|`' / '`||
+|show-path|`boolean`|`true`|是否在选择器中显示选项路径|
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|value|`string \| number \| Array<number \| string>`|`null`||
 |on-blur|`() => any`|`undefined`||
+|on-focus|`() => any`|`undefined`||
 |on-update:value|`(value: string \| number \| Array<string \| number>) => any`|`undefined`||

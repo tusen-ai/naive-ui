@@ -1,6 +1,7 @@
 import { c, cTB, cB, cE, cM } from '../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up'
 import iconSwitchTransition from '../../../_styles/transitions/icon-switch'
+import { depx, pxfy } from '../../../_utils/css'
 
 export default
 c([
@@ -17,9 +18,12 @@ c([
       menuColor,
       menuBoxShadow,
       menuBorderColor,
+      menuBorderRadius,
       optionColorHover,
-      menuBorderRadius
+      optionHeight,
+      optionFontSize
     } = props.$local
+    const menuHeight = pxfy(depx(optionHeight) * 6.6)
     return cTB(
       'cascader-menu',
       {
@@ -45,6 +49,7 @@ c([
         }),
         cB('cascader-submenu', {
           raw: `
+            height: ${menuHeight};
             position: relative;
             overflow: hidden;
             min-width: 182px;
@@ -76,6 +81,9 @@ c([
         ]),
         cB('cascader-option', {
           raw: `
+            height: ${optionHeight};
+            line-height: ${optionHeight};
+            font-size: ${optionFontSize};
             padding: 0 0 0 18px;
             box-sizing: border-box;
             min-width: 182px;

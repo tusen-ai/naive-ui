@@ -7,13 +7,11 @@
   </n-space>
   <n-space>
     <n-space><n-switch v-model:value="showPath" />Show Path</n-space>
-    <n-space><n-switch v-model:value="hoverTrigger" />Hover Trigger</n-space>
   </n-space>
   <n-cascader
     v-model:value="value"
     multiple
     placeholder="请选些什么"
-    :expand-trigger="hoverTrigger ? 'hover' : 'click'"
     :options="options"
     :cascade="cascade"
     :leaf-only="leafOnly"
@@ -52,7 +50,6 @@ export default {
       leafOnly: true,
       cascade: true,
       showPath: true,
-      hoverTrigger: false,
       value: null,
       options: options
     }
