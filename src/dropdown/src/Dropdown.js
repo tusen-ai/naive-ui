@@ -53,6 +53,10 @@ const dropdownProps = {
   options: {
     type: Array,
     required: true
+  },
+  containerClass: {
+    type: String,
+    default: 'n-dropdown'
   }
 }
 
