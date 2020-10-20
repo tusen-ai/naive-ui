@@ -6,7 +6,7 @@ basic
 position
 ```
 ## Props
-|Name|Type|Default|Description|
+|名称|类型|默认值|描述|
 |-|-|-|-|
 |position|`'fixed' \| 'absolute'`|`'fixed'`||
 |top|`number`|`null`|在触发顶部固定后 Affix 的 CSS top 属性（如果没设定，会使用 `offset-top` 代替)|

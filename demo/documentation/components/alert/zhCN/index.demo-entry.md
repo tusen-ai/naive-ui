@@ -1,5 +1,7 @@
 # 警示信息 Alert
 根据我的经验，这东西使用最频繁的场景是让你关掉 AdBlocks。
+
+<!-- there is a bug of chrome rendering svg, if translateZ is not set -->
 ## 演示
 ```demo
 basic

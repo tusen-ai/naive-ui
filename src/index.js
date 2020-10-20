@@ -139,6 +139,8 @@ import logDarkStyle from './log/styles/dark'
 import logLightStyle from './log/styles/light'
 import iconDarkStyle from './icon/styles/dark'
 import iconLightStyle from './icon/styles/light'
+import spaceDarkStyle from './space/styles/dark'
+import spaceLightStyle from './space/styles/light'
 import loadingBarLightStyle from './loading-bar/styles/light'
 import loadingBarDarkStyle from './loading-bar/styles/dark'
 import menuDarkStyle from './menu/styles/dark'
@@ -425,6 +427,8 @@ export default create({
     descriptionsDarkStyle,
     formLightStyle,
     formDarkStyle,
+    spaceDarkStyle,
+    spaceLightStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle
