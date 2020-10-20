@@ -4,7 +4,7 @@
     :class="{
       [`n-${mergedTheme}-theme`]: mergedTheme
     }"
-    :style="syntheticStyle"
+    :style="mergedStyle"
   >
     <div v-if="$slots.avatar && contentIndented" class="n-thing-avatar">
       <slot name="avatar" />

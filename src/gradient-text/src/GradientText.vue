@@ -6,7 +6,7 @@
       [`n-${mergedTheme}-theme`]: mergedTheme
     }"
     :style="{
-      ...syntheticStyle,
+      ...mergedStyle,
       fontSize: styleFontSize,
       backgroundImage: styleBackgroundImage
     }"

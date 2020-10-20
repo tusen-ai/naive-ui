@@ -5,7 +5,7 @@
       [`n-${mergedTheme}-theme`]: mergedTheme,
       'n-confirm--bordered': bordered
     }"
-    :style="syntheticStyle"
+    :style="mergedStyle"
   >
     <div class="n-confirm-title">
       <span class="n-confirm-title-content">

@@ -11,7 +11,7 @@
       'n-tag--checked': checkable && checked,
       'n-tag--round': round
     }"
-    :style="syntheticStyle"
+    :style="mergedStyle"
     @click="handleClick"
   >
     <slot />

@@ -6,7 +6,7 @@
       [`n-${mergedTheme}-theme`]: mergedTheme,
       [`n-layout-footer--bordered`]: bordered
     }"
-    :style="syntheticStyle"
+    :style="mergedStyle"
   >
     <slot />
   </div>

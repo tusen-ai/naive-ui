@@ -9,7 +9,7 @@
         [`n-${mergedTheme}-theme`]: mergedTheme
       }"
       :style="{
-        ...syntheticStyle
+        ...mergedStyle
       }"
     >
       <div v-if="closable" class="n-alert__close" @click="handleCloseClick">

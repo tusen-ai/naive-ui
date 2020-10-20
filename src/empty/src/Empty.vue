@@ -5,7 +5,7 @@
       [`n-${mergedTheme}-theme`]: mergedTheme,
       [`n-empty--${size}-size`]: true
     }"
-    :style="syntheticStyle"
+    :style="mergedStyle"
   >
     <div class="n-empty__icon">
       <slot name="icon">

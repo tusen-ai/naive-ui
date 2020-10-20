@@ -75,7 +75,7 @@ export default {
       size,
       bordered,
       title,
-      syntheticStyle
+      mergedStyle
     } = this
     children = children.filter(child => isDescriptionsItem(child))
     if (__DEV__ && memorizedLength !== children.length) {
@@ -144,7 +144,7 @@ export default {
       class: 'n-descriptions-table-row'
     }, row))
     return h('div', {
-      style: syntheticStyle,
+      style: mergedStyle,
       class: [
         'n-descriptions',
         `n-descriptions--${labelPlacement}-label-placement`,

@@ -9,29 +9,16 @@ export default {
       default: null
     }
   },
-  inject: {
-    NThemedComponent: {
-      default: null
-    }
-  },
   computed: {
     mergedTheme () {
       const theme = this.theme
       if (theme !== null) {
         return theme
       }
-      const NThemedComponent = this.NThemedComponent
-      if (
-        NThemedComponent &&
-        NThemedComponent.theme &&
-        NThemedComponent.themeContextActivated
-      ) {
-        return NThemedComponent.theme
-      }
       const NConfigProvider = this.NConfigProvider
       return (NConfigProvider && NConfigProvider.mergedTheme) || null
     },
-    syntheticStyle () {
+    mergedStyle () {
       const themedStyle = this.themedStyle
       const mergedTheme = this.mergedTheme
       if (themedStyle && mergedTheme && themedStyle[mergedTheme]) {

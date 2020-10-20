@@ -9,7 +9,7 @@
       [`n-${mergedTheme}-theme`]: mergedTheme
     }"
     :style="{
-      ...syntheticStyle,
+      ...mergedStyle,
       transform: styleTransform,
       maxWidth: styleMaxWidth,
       width: styleWidth,

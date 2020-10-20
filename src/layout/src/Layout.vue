@@ -91,7 +91,7 @@ export default {
       return Object.assign({
         marginLeft: this.styleMarginLeft,
         transition: this.transitionDisabled ? 'none' : null
-      }, this.syntheticStyle)
+      }, this.mergedStyle)
     },
     transitionDisabled () {
       if (this.NLayout && this.NLayout.childLayoutTransitionDisabled) {

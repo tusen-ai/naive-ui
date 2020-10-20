@@ -61,7 +61,7 @@ export default {
         },
         style: {
           ...this.styles,
-          ...this.syntheticStyle
+          ...this.mergedStyle
         }
       }, this.$slots)
     }

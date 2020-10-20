@@ -21,7 +21,7 @@
             'n-back-top--transition-disabled': transitionDisabled
           }"
           :style="{
-            ...syntheticStyle,
+            ...mergedStyle,
             right: styleRight,
             bottom: styleBottom
           }"

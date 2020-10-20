@@ -10,7 +10,7 @@
       width: styleWidth,
       height: styleWidth,
       borderRadius: styleBorderRadius,
-      ...syntheticStyle
+      ...mergedStyle
     }"
   >
     <img v-if="!$slots.default && src" :src="src">

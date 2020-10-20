@@ -9,7 +9,7 @@
       'n-card--bordered': bordered,
       [`n-${mergedTheme}-theme`]: mergedTheme
     }"
-    :style="syntheticStyle"
+    :style="mergedStyle"
   >
     <div v-if="$slots.cover" class="n-card-cover">
       <slot name="cover" />

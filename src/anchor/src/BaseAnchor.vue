@@ -4,7 +4,7 @@
     :class="{
       [`n-${mergedTheme}-theme`]: mergedTheme
     }"
-    :style="syntheticStyle"
+    :style="mergedStyle"
   >
     <div
       ref="slot"
