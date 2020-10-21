@@ -268,4 +268,7 @@ placeable 进行了大调整
     - `on-checked-keys-change` => `on-update:checked-keys`
     - `on-expanded-keys-change` => `on-update:expanded-keys`
 - [x] typography
+  - deprecate
+    - text
+      - `as` => `tag`
 - [x] upload

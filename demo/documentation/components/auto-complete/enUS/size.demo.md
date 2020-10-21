@@ -1,8 +1,8 @@
 # Size
 ```html
-<n-auto-complete :options="options" v-model="value" placeholder="Email" size="small" />
-<n-auto-complete :options="options" v-model="value" placeholder="Email" size="medium" />
-<n-auto-complete :options="options" v-model="value" placeholder="Email" size="large" />
+<n-auto-complete :options="options" v-model:value="value" placeholder="Email" size="small" />
+<n-auto-complete :options="options" v-model:value="value" placeholder="Email" size="medium" />
+<n-auto-complete :options="options" v-model:value="value" placeholder="Email" size="large" />
 ```
 ```js
 export default {

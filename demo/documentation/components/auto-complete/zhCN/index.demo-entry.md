@@ -27,20 +27,19 @@ after-select
 ### AutoCompleteOption Properties
 |名称|类型|介绍|
 |-|-|-|
-|label|`string`||
-|value|`string \| number`|需要唯一|
 |disabled|`boolean`||
+|label|`string`||
 |render|`Function`||
+|value|`string \| number`|需要唯一|
 
 ### AutoCompleteOptionGroup Properties
 |名称|类型|介绍|
 |-|-|-|
-|type|`'group'`||
-|name|`string`||
 |children|`Array<string \| AutoCompleteOption>`||
+|name|`string`||
+|type|`'group'`||
 
 ## Slots
 |名称|参数|说明|
 |-|-|-|
 |default|`(options: { handleInput: (value: string) => any, handleFocus: function, handleBlur: function, value: string, theme: string \| null })`||
-

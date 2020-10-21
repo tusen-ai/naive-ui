@@ -3,13 +3,13 @@ Blur after selection or clear after selection.
 ```html
 <n-auto-complete
   :options="options"
-  v-model="value"
+  v-model:value="value"
   clear-after-select
   placeholder="Clear After Select"
 />
 <n-auto-complete
   :options="options"
-  v-model="value"
+  v-model:value="value"
   blur-after-select
   placeholder="Blur After Select"
 />

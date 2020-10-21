@@ -1,6 +1,6 @@
 # Group
 ```html
-<n-auto-complete :options="options" v-model="value" placeholder="Email" />
+<n-auto-complete :options="options" v-model:value="value" placeholder="Email" />
 ```
 ```js
 export default {

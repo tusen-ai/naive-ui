@@ -8,44 +8,38 @@ group
 custom-input
 after-select
 ```
-## V-model
-|Prop|Event|
-|-|-|
-|value|input|
 
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
-|value|`string`|`null`||
-|options|`Array<string \| AutoCompleteOption \| AutoCompleteOptionGroup>`|`[]`||
-|placeholder|`string`|`null`||
 |blur-after-select|`boolean`|`false`||
 |clear-after-select|`boolean`|`false`||
+|options|`Array<string \| AutoCompleteOption \| AutoCompleteOptionGroup>`|`[]`||
+|placeholder|`string`|`null`||
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|value|`string`|`null`||
+|on-blur|`(event: FocusEvent) => any`|`undefined`||
+|on-focus|`(event: FocusEvent) => any`|`undefined`||
+|on-select|`(value: string) => any`|`undefined`||
+|on-update:value|`(value: string \| null) => any`|`undefined`||
 
 ### AutoCompleteOption Properties
 |Name|Type|Description|
 |-|-|-|
-|label|`string`||
-|value|`string \| number`|Should be unique in options.|
 |disabled|`boolean`||
+|label|`string`||
 |render|`Function`||
+|value|`string \| number`|Should be unique in options.|
 
 ### AutoCompleteOptionGroup Properties
 |Name|Type|Description|
 |-|-|-|
-|type|`'group'`||
-|name|`string`||
 |children|`Array<string | AutoCompleteOption>`||
+|name|`string`||
+|type|`'group'`||
 
 ## Slots
 |Name|Parameters|Description|
 |-|-|-|
 |default|`(options: { handleInput: (value: string) => any, handleFocus: function, handleBlur: function, value: string, theme: string \| null })`||
-
-## Events
-|Name|Parameters|Description|
-|-|-|-|
-|input|`(value: string \| null)`||
-|select|`(value: string)`||
