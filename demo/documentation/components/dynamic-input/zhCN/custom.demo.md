@@ -9,7 +9,7 @@
     <div style="width: 100%;">
       <div style="display: flex; align-items: center;">
         <n-checkbox
-          v-model:checked="value.isCheck"
+          v-model:value="value.isCheck"
           style="margin-right: 12px;"
         />
         <n-input-number

@@ -111,10 +111,6 @@ export default {
       type: [Number, Boolean, String],
       default: null
     },
-    checked: {
-      type: Boolean,
-      default: false
-    },
     disabled: {
       type: Boolean,
       default: false
@@ -132,7 +128,7 @@ export default {
       default: undefined
     },
     // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:checked': {
+    'onUpdate:value': {
       type: [Function, Array],
       default: undefined
     },
@@ -144,7 +140,7 @@ export default {
     // deprecated
     onChange: {
       validator () {
-        warn('checkbox', '`on-change` is deprecated, please use `on-update:checked` instead.')
+        warn('checkbox', '`on-change` is deprecated, please use `on-update:value` instead.')
         return true
       },
       default: undefined
@@ -160,7 +156,7 @@ export default {
         }
         return false
       } else {
-        return props.checked
+        return props.value
       }
     })
     return {
@@ -180,12 +176,12 @@ export default {
       } else {
         const {
           onChange,
-          'onUpdate:checked': onUpdateChecked,
+          'onUpdate:value': onUpdateValue,
           nTriggerFormInput,
           nTriggerFormChange
         } = this
         const nextChecked = !this.renderSafeChecked
-        if (onUpdateChecked) call(onUpdateChecked, nextChecked)
+        if (onUpdateValue) call(onUpdateValue, nextChecked)
         if (onChange) call(onChange, nextChecked) // deprecated
         nTriggerFormInput()
         nTriggerFormChange()

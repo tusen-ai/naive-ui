@@ -1,19 +1,19 @@
 # 基础用法
 ```html
 <n-radio
-  v-model:checked-value="value"
+  v-model:value-value="value"
   value="Definitely Maybe"
 >
   Definitely Maybe
 </n-radio>
 <n-radio
-  v-model:checked-value="value"
+  v-model:value-value="value"
   value="Be Here Now"
 >
   Be Here Now
 </n-radio>
 <n-radio
-  v-model:checked-value="value"
+  v-model:value-value="value"
   value="Be Here Now"
   :disabled="disabled"
 >

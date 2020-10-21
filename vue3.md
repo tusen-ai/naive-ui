@@ -244,7 +244,7 @@ placeable 进行了大调整
     - `on-active-name-change` => `on-update:value`
 - [x] tag
   - break
-    - `v-model` => `v-model:checked`
+    - `v-model` => `v-model:value`
   - deprecate
     - `on-checked-change` => `on-update:checked`
 - [x] thing

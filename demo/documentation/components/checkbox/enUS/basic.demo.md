@@ -1,8 +1,8 @@
 # Basic
 ```html
-<n-checkbox v-model:checked="value">Checkbox</n-checkbox>
-<n-checkbox v-model:checked="value"/>
-<n-checkbox v-model:checked="value" :disabled="disabled">Checkbox</n-checkbox>
+<n-checkbox v-model:value="value">Checkbox</n-checkbox>
+<n-checkbox v-model:value="value"/>
+<n-checkbox v-model:value="value" :disabled="disabled">Checkbox</n-checkbox>
 <n-button @click="disabled = !disabled" size="small">Disabled</n-button>
 ```
 ```js
