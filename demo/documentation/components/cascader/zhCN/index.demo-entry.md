@@ -1,5 +1,6 @@
 # 级联选择 Cascader
 用来选一些树型信息。
+
 ## 演示
 ```demo
 single
@@ -20,7 +21,6 @@ multiple-lazy
 |filter|`(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean`|一个基于字符串的过滤算法||
 |leaf-only|`boolean`|`false`|是否只允许 `value` 出现叶节点的值|
 |multiple|`boolean`|`false`||
-|on-load|`(option: CascaderOption) => Promise<any>`|`undefined`|在点击未加载完成节点时的回调，在回调中设定 `option.children`，在返回的 promise resolve 或 reject 之后加载完成|
 |options|`Array<CascaderOption>`|required||
 |placeholder|`string`|`'请选择'`||
 |remote|`boolean`|`false`||
@@ -31,4 +31,5 @@ multiple-lazy
 |value|`string \| number \| Array<number \| string>`|`null`||
 |on-blur|`() => any`|`undefined`||
 |on-focus|`() => any`|`undefined`||
+|on-load|`(option: CascaderOption) => Promise<any>`|`undefined`|在点击未加载完成节点时的回调，在返回的 promise 中设定 `option.children`，在返回的 promise resolve 或 reject 之后完成加载|
 |on-update:value|`(value: string \| number \| Array<string \| number>) => any`|`undefined`||

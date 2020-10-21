@@ -3,21 +3,21 @@
 ```html
 <n-cascader
   v-model:value="value"
-  placeholder="请选些什么"
+  placeholder="没啥用的值"
   :options="options"
   :leaf-only="false"
   size="small"
 />
 <n-cascader
   v-model:value="value"
-  placeholder="请选些什么"
+  placeholder="没啥用的值"
   :options="options"
   :leaf-only="false"
   size="medium"
 />
 <n-cascader
   v-model:value="value"
-  placeholder="请选些什么"
+  placeholder="没啥用的值"
   :options="options"
   :leaf-only="false"
   size="large"

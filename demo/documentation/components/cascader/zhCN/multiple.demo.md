@@ -15,7 +15,7 @@
   <n-cascader
     v-model:value="value"
     multiple
-    placeholder="请选些什么"
+    placeholder="没啥用的值"
     :expand-trigger="hoverTrigger ? 'hover' : 'click'"
     :options="options"
     :cascade="cascade"

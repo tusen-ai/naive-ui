@@ -1,49 +1,35 @@
 # Cascader
 Cascader can be used to select some tree structured data.
+
 ## Demos
 ```demo
-single-leaf-only
-size
-trigger
-multiple-leaf-only
 single
 multiple
-single-leaf-only-search
-multiple-leaf-only-search
-single-search
-multiple-search
-single-leaf-only-lazy
-multiple-leaf-only-lazy
+size
 single-lazy
 multiple-lazy
-filter
 ```
-## V-model
-|Prop|Event|
-|-|-|
-|value|change|
 
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|options|`Array<CascaderOption>`|`null`||
-|value|`string \| number`|`null`||
-|placeholder|`string`|`'Please Select'`||
-|multiple|`boolean`|`false`||
-|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
-|filterable|`boolean`|`false`|Can't be `true` with `remote` prop at same time.|
-|disabled|`boolean`|`false`||
-|expand-trigger|`'click' \| 'hover'`|`'click'`||
-|leaf-only|`boolean`|`true`||
+|cascade|`boolean`|`true`|Whether to cascade checkbox when multiple.|
 |clearable|`boolean`|`false`||
+|disabled|`boolean`|`false`||
+|expand-trigger|`'click' \| 'hover'`|`'click'`|If `remote` is set, `'hover'` won't work.|
+|filterable|`boolean`|`false`|If `remote` is set, it won't work.|
+|filter|`(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean`|A string based filter algorithm.||
+|leaf-only|`boolean`|`false`|If only allow value of leaf node to be in `value`.|
+|multiple|`boolean`|`false`||
+|options|`Array<CascaderOption>`|required||
+|placeholder|`string`|`'Please Select'`||
 |remote|`boolean`|`false`||
-|on-load|`(option: CascaderOption, resolve: (children: Array<CascaderOption>) => void) => any`|`() => {}`|Callback when click at unloaded nodes. Pass resolved children to `resolve` function to set children of the node.|
-|separator|`string`|`'/'`||
-|filter|`(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean`|A string based filter.||
-
-## Events
-|Name|Parameters|Description|
-|-|-|-|
-|change|`(value: string \| number \| Array<string \| number>)`||
-|blur|`()`||
+|separator|`string`|`' / '`||
+|show-path|`boolean`|`true`|Whether to show path in selector.|
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|value|`string \| number \| Array<number \| string>`|`null`||
+|on-blur|`() => any`|`undefined`||
+|on-focus|`() => any`|`undefined`|
+|on-load|`(option: CascaderOption) => Promise<any>`|`undefined`|Callback when click unloaded node. Set `option.children` in the returned promise. Loading is end after the promise is resolved or rejected.|
+|on-update:value|`(value: string \| number \| Array<string \| number>) => any`|`undefined`||

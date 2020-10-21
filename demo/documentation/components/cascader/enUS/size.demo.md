@@ -1,23 +1,23 @@
 # Size
-Cascader can be `small` or `medium` or `large` size.
+Cascader has `small`, `medium` and `large` size.
 ```html
 <n-cascader
   v-model:value="value"
-  placeholder="Please Select Something"
+  placeholder="Meaningless values"
   :options="options"
   :leaf-only="false"
   size="small"
 />
 <n-cascader
   v-model:value="value"
-  placeholder="Please Select Something"
+  placeholder="Meaningless values"
   :options="options"
   :leaf-only="false"
   size="medium"
 />
 <n-cascader
   v-model:value="value"
-  placeholder="Please Select Something"
+  placeholder="Meaningless values"
   :options="options"
   :leaf-only="false"
   size="large"
