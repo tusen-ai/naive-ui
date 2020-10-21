@@ -1,15 +1,15 @@
 import { c, cTB, cB, cM, createKey } from '../../../_utils/cssr'
 
-function createRippleAnimation (digest, color, theme) {
+function createRippleAnimation () {
   return [
-    c(`@keyframes ${theme && theme + '-'}${digest}-badge-wave-spread`, {
+    c(`@keyframes badge-wave-spread`, {
       from: {
-        boxShadow: `0 0 0.5px 0px ${color}`,
+        boxShadow: `0 0 0.5px 0px var(--ripple-color)`,
         opacity: 0.6
       },
       to: {
         // don't use exact 5px since chrome will display the animation with glitches
-        boxShadow: `0 0 0.5px 4.5px ${color}`,
+        boxShadow: `0 0 0.5px 4.5px var(--ripple-color)`,
         opacity: 0
       }
     })
@@ -18,31 +18,26 @@ function createRippleAnimation (digest, color, theme) {
 
 export default c([
   ({ props }) => {
-    let digest
-    let color
-    if (props.colorDigest) {
-      digest = props.colorDigest
-      color = props.color
-    } else {
-      digest = props.$instance.type
-      color = props.$local[createKey('color', digest)]
-    }
-    const base = props.$base
-    const theme = props.$renderedTheme
+    const type = props.$instance.type
+    const color = props.$local[createKey('color', type)]
+    const { cubicBezierEaseOut } = props.$base
     return [
-      createRippleAnimation(digest, color, theme),
+      createRippleAnimation(),
       cTB('badge', [
-        cM(digest + '-colored', [
+        cM(type + '-type', {
+          '--color': color,
+          '--ripple-color': color
+        }, [
           cB('badge-sup', {
-            background: color
+            background: 'var(--color)'
           }, [
             cB('base-wave', {
               zIndex: 1,
               animationDuration: '2s',
               animationIterationCount: 'infinite',
               animationDelay: '1s',
-              animationTimingFunction: `${base.cubicBezierEaseOut}`,
-              animationName: `${theme && theme + '-'}${digest}-badge-wave-spread`
+              animationTimingFunction: `${cubicBezierEaseOut}`,
+              animationName: 'badge-wave-spread'
             })
           ])
         ])

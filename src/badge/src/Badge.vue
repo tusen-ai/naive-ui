@@ -4,10 +4,13 @@
     :class="{
       'n-badge--dot': dot,
       [`n-badge--${type}-type`]: true,
-      [`n-badge--${color || type}-colored`]: true,
       [`n-${mergedTheme}-theme`]: mergedTheme,
       [`n-badge--as-is`]: !$slots.default
     }"
+    :style="color ? {
+      '--color': color,
+      '--ripple-color': color
+    } : null"
   >
     <slot />
     <transition
@@ -55,11 +58,11 @@ export default {
   props: {
     value: {
       type: [String, Number],
-      default: null
+      default: undefined
     },
     max: {
       type: Number,
-      default: null
+      default: undefined
     },
     dot: {
       type: Boolean,
@@ -85,7 +88,7 @@ export default {
     },
     color: {
       type: String,
-      default: null
+      default: undefined
     }
   },
   data () {
@@ -95,10 +98,10 @@ export default {
   },
   computed: {
     number () {
-      return (this.max === null || typeof value === 'string') ? this.value : (this.value > this.max ? `${this.max}+` : this.value)
+      return (this.max === undefined || typeof value === 'string') ? this.value : (this.value > this.max ? `${this.max}+` : this.value)
     },
     showBadge () {
-      return this.show && (this.dot || (this.value !== null && !(!this.showZero && this.value <= 0)))
+      return this.show && (this.dot || (this.value !== undefined && !(!this.showZero && this.value <= 0)))
     }
   },
   mounted () {
