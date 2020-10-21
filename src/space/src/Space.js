@@ -57,7 +57,7 @@ export default {
           'small',
           'medium',
           'large'
-        ].includes(value) || typeof size === 'number'
+        ].includes(value) || typeof value === 'number'
       },
       default: 'medium'
     }
@@ -86,6 +86,7 @@ export default {
       }
     }, children.map((child, index) => h('div', {
       style: {
+        display: 'flex',
         marginRight: index !== lastIndex ? marginRight : null,
         marginBottom: index !== lastIndex ? marginBottom : null
       }
