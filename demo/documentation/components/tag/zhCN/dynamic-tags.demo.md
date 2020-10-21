@@ -1,6 +1,8 @@
 # 动态编辑标签
 ```html
-<n-dynamic-tags v-model:value="model.tags" />
+<n-dynamic-tags
+  v-model:value="model.tags"
+/>
 <p style="margin: 20px 0 16px 0;">在表单中使用</p>
 <n-form :model="model" :rules="rules">
   <n-form-item

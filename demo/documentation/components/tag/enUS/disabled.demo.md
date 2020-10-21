@@ -39,13 +39,14 @@
 >
   I'm Looking Through You
 </n-tag>
-<n-switch v-model="disabled"/>
+<n-switch v-model:value="disabled"/>
 ```
 ```js
 export default {
+  inject: ['message'],
   methods: {
     handleClose () {
-      this.$NMessage.info('tag close')
+      this.message.info('tag close')
     }
   },
   data () {

@@ -10,56 +10,37 @@ checkable
 shape
 dynamic-tags
 ```
-## V-model
-### Tag
-|Prop|Event|
-|-|-|
-|checked|checked-change|
-
-### DynamicTags
-|Prop|Event|
-|-|-|
-|value|change|
 
 ## Props
 ### Tag
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'default'`||
-|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
-|disabled|`boolean`|`false`||
-|round|`boolean`|`false`||
 |checkable|`boolean`|`false`||
 |checked|`boolean`|`false`||
 |closable|`boolean`|`false`||
+|disabled|`boolean`|`false`||
+|round|`boolean`|`false`||
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'default'`||
+|on-update:checked|`(value: boolean) => any`|`undefined`||
 
 ### DynamicTags
 |Name|Type|Default|Description|
 |-|-|-|-|
-|value|`Array<string>`|`[]`||
+|closable|`boolean`|`false`||
+|disabled|`boolean`|`false`||
+|input-style|`Object`|`{ width: '50px' }`||
+|round|`boolean`|`false`||
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
+|tag-style|`Object`|`{ marginRight: '5px', marginBottom: '5px' }`||
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 |type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'default'`||
-|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
-|disabled|`boolean`|`false`||
-|round|`boolean`|`false`||
-|closable|`boolean`|`false`||
-|inputStyle|`Object`|`{ width: '50px' }`||
-|tagStyle|`Object`|`{ marginRight: '5px', marginBottom: '5px' }`||
+|value|`Array<string>`|`[]`||
+|on-update:value|`(value: boolean) => any`|`undefined`||
 
 ## Slots
-|Name|Parameters|Description|
-|-|-|-|
-|default|`()`||
-
-## Events
 ### Tag
 |Name|Parameters|Description|
 |-|-|-|
-|close|`()`|
-|checked-change|`(checked: boolean)`||
-
-### DynamicTags
-|Name|Parameters|Description|
-|-|-|-|
-|change|`(tags: Array<string>)`||
+|default|`()`||

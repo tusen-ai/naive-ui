@@ -1,13 +1,15 @@
 # Edit Dynamically
 ```html
-<n-dynamic-tags v-model="model.tags" @change="handleChange" />
+<n-dynamic-tags
+  v-model:value="model.tags"
+/>
 <p style="margin: 20px 0 16px 0;">Use in form.</p>
 <n-form :model="model" :rules="rules">
   <n-form-item
     style="padding-top:0"
     path="tags"
   >
-    <n-dynamic-tags v-model="model.tags" />
+    <n-dynamic-tags v-model:value="model.tags" />
   </n-form-item>
 </n-form>
 {{model.tags}}
@@ -28,11 +30,6 @@ export default {
           }
         }
       }
-    }
-  },
-  methods: {
-    handleChange (tags) {
-      console.log('tags', tags)
     }
   }
 }
