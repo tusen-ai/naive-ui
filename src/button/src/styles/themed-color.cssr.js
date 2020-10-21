@@ -1,6 +1,38 @@
 import { c, cB, cTB, cE, cM, cNotM, createKey } from '../../../_utils/cssr'
 import { read, createHoverColor, createPressedColor } from '../../../_utils/color'
 
+export default c([
+  ({ props }) => {
+    const digest = props.colorDigest || props.$instance.type
+    const pallete = props.colorDigest ? createPallete(props.color) : extractPallete(props.$local, digest)
+    return [
+      createRippleAnimation(),
+      cTB(
+        'button',
+        [
+          cM(`${digest}-colored`, {
+            '--ripple-color': pallete.rippleColor || pallete.borderColor || pallete.color
+          }, [
+            // wave animation
+            cB('base-wave', [
+              cM('active', {
+                zIndex: 1,
+                animationName: `button-wave-spread, button-wave-opacity`
+              })
+            ]),
+            // background-color
+            createBackgroundStyle(pallete),
+            // text-color
+            ['base', 'ghost', 'text'].map(appearance => createTextStyle(pallete, appearance)),
+            // border-color
+            createBorderStyle(pallete)
+          ])
+        ]
+      )
+    ]
+  }
+])
+
 function createPallete (color) {
   const rgb = read(color)
   const colorHover = createHoverColor(rgb)
@@ -53,18 +85,18 @@ function extractPallete (props, type) {
   }
 }
 
-function createRippleAnimation (digest, color, theme) {
+function createRippleAnimation () {
   return [
-    c(`@keyframes a${theme ? theme + '-' : ''}${digest}-button-wave-spread`, {
+    c(`@keyframes button-wave-spread`, {
       from: {
-        boxShadow: `0 0 0.5px 0 ${color}`
+        boxShadow: `0 0 0.5px 0 var(--ripple-color)`
       },
       to: {
         // don't use exact 5px since chrome will display the animation with glitches
-        boxShadow: `0 0 0.5px 4.5px ${color}`
+        boxShadow: `0 0 0.5px 4.5px var(--ripple-color)`
       }
     }),
-    c(`@keyframes a${theme ? theme + '-' : ''}${digest}-button-wave-opacity`, {
+    c(`@keyframes button-wave-opacity`, {
       from: {
         opacity: 0.6
       },
@@ -119,96 +151,68 @@ function createTextStyle (pallete, appearance) {
   ])
 }
 
-export default c([
-  ({ props }) => {
-    const digest = props.colorDigest || props.$instance.type
-    const pallete = props.colorDigest ? createPallete(props.color) : extractPallete(props.$local, digest)
-    const theme = props.$renderedTheme
-    return [
-      createRippleAnimation(
-        digest,
-        pallete.rippleColor || pallete.borderColor || pallete.color,
-        theme
-      ),
-      cTB(
-        'button',
-        [
-          cM(`${digest}-colored`, [
-            // wave animation
-            cB('base-wave', [
-              cM('active', {
-                zIndex: 1,
-                animationName: `a${theme ? theme + '-' : ''}${digest}-button-wave-spread, a${theme ? theme + '-' : ''}${digest}-button-wave-opacity`
-              })
-            ]),
-            // background-color
-            cM('base', {
-              backgroundColor: pallete.color
-            }, [
-              cM('disabled', {
-                backgroundColor: pallete.colorDisabled
-              }),
-              cNotM('disabled', [
-                c('&:focus', {
-                  backgroundColor: pallete.colorFocus
-                }),
-                c('&:hover', {
-                  backgroundColor: pallete.colorHover
-                }),
-                c('&:active', {
-                  backgroundColor: pallete.colorPressed
-                }),
-                cM('pressed', {
-                  backgroundColor: pallete.colorPressed
-                })
-              ])
-            ]),
-            cM('ghost, text', {
-              backgroundColor: 'transparent'
-            }),
-            // text-color
-            ['base', 'ghost', 'text'].map(appearance => createTextStyle(pallete, appearance)),
-            // border-color
-            cM('ghost, base', {
-              borderColor: pallete.borderColor || pallete.color
-            }, [
-              cM('disabled', {
-                borderColor: pallete.borderColorDisabled || pallete.colorDisabled
-              }),
-              cNotM('disabled', [
-                c('&:focus', {
-                  borderColor: pallete.borderColorFocus || pallete.colorFocus
-                }, [
-                  createBorderMaskStyle(pallete.borderColorFocus || pallete.colorFocus)
-                ]),
-                c('&:hover', {
-                  borderColor: pallete.borderColorHover || pallete.colorHover
-                }, [
-                  createBorderMaskStyle(pallete.borderColorHover || pallete.colorHover)
-                ]),
-                c('&:active', {
-                  borderColor: pallete.borderColorPressed || pallete.colorPressed
-                }, [
-                  createBorderMaskStyle(pallete.borderColorPressed || pallete.colorPressed)
-                ]),
-                cM('pressed', {
-                  borderColor: pallete.borderColorPressed || pallete.colorPressed
-                }, [
-                  createBorderMaskStyle(pallete.borderColorPressed || pallete.colorPressed)
-                ])
-              ])
-            ]),
-            // dashed
-            cM('dashed', {
-              borderStyle: 'dashed'
-            }, [
-              cE('border-mask', {
-                borderStyle: 'dashed'
-              })
-            ])
-          ])
-        ]
-      )
-    ]
-  }
-])
+function createBorderStyle (pallete) {
+  return [
+    cM('ghost, base', {
+      borderColor: pallete.borderColor || pallete.color
+    }, [
+      cM('disabled', {
+        borderColor: pallete.borderColorDisabled || pallete.colorDisabled
+      }),
+      cNotM('disabled', [
+        c('&:focus', {
+          borderColor: pallete.borderColorFocus || pallete.colorFocus
+        }, [
+          createBorderMaskStyle(pallete.borderColorFocus || pallete.colorFocus)
+        ]),
+        c('&:hover', {
+          borderColor: pallete.borderColorHover || pallete.colorHover
+        }, [
+          createBorderMaskStyle(pallete.borderColorHover || pallete.colorHover)
+        ]),
+        c('&:active', {
+          borderColor: pallete.borderColorPressed || pallete.colorPressed
+        }, [
+          createBorderMaskStyle(pallete.borderColorPressed || pallete.colorPressed)
+        ]),
+        cM('pressed', {
+          borderColor: pallete.borderColorPressed || pallete.colorPressed
+        }, [
+          createBorderMaskStyle(pallete.borderColorPressed || pallete.colorPressed)
+        ])
+      ])
+    ]),
+    cM('text', {
+      border: 'none'
+    })
+  ]
+}
+
+function createBackgroundStyle (pallete) {
+  return [
+    cM('base', {
+      backgroundColor: pallete.color
+    }, [
+      cM('disabled', {
+        backgroundColor: pallete.colorDisabled
+      }),
+      cNotM('disabled', [
+        c('&:focus', {
+          backgroundColor: pallete.colorFocus
+        }),
+        c('&:hover', {
+          backgroundColor: pallete.colorHover
+        }),
+        c('&:active', {
+          backgroundColor: pallete.colorPressed
+        }),
+        cM('pressed', {
+          backgroundColor: pallete.colorPressed
+        })
+      ])
+    ]),
+    cM('ghost, text', {
+      backgroundColor: 'transparent'
+    })
+  ]
+}

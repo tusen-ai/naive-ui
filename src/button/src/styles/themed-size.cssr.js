@@ -21,7 +21,6 @@ export default c([
           borderRadius,
           fontSize
         }, [
-
           cM('base, ghost', {
             height,
             lineHeight,

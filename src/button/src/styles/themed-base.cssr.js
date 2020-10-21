@@ -6,8 +6,7 @@ export default c([
   ({ props }) => {
     const {
       waveDuration,
-      opacityDisabled,
-      textColorPrimary
+      opacityDisabled
     } = props.$local
     const {
       cubicBezierEaseInOut,
@@ -32,7 +31,6 @@ export default c([
           user-select: none;
           text-align: center;
           cursor: pointer;
-          color: ${textColorPrimary};
           transition:
             background-color .3s ${cubicBezierEaseInOut},
             opacity .3s ${cubicBezierEaseInOut},
@@ -119,9 +117,13 @@ export default c([
             width: 100%;
           `
         }),
-        cM('disabled', {
-          cursor: 'not-allowed'
-        }),
+        cM('dashed', {
+          borderStyle: 'dashed'
+        }, [
+          cE('border-mask', {
+            borderStyle: 'dashed'
+          })
+        ]),
         cNotM('disabled', [
           cM('rippling', [
             c('&::after', {
@@ -133,17 +135,8 @@ export default c([
             })
           ])
         ]),
-        cM('text', {
-          raw: `
-            border: none !important;
-            background-color: transparent !important;
-          `
-        }, [
-          cE('border-mask', {
-            raw: `border: none !important;`
-          })
-        ]),
         cM('disabled', {
+          cursor: 'not-allowed',
           opacity: opacityDisabled
         })
       ]
