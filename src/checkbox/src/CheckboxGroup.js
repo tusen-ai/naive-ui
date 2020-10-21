@@ -3,7 +3,7 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import asformitem from '../../_mixins/asformitem'
 import { getSlot } from '../../_utils/vue'
-import { warn } from '../../_utils/naive/warn'
+import { warn, call } from '../../_utils'
 
 export default {
   name: 'CheckboxGroup',
@@ -34,7 +34,7 @@ export default {
     },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:value': {
-      type: Function,
+      type: [Function, Array],
       default: undefined
     },
     // deprecated
@@ -66,30 +66,30 @@ export default {
         if (checked) {
           if (!~index) {
             groupValue.push(checkboxValue)
-            if (onUpdateValue) onUpdateValue(groupValue)
+            if (onUpdateValue) call(onUpdateValue, groupValue)
             nTriggerFormInput()
             nTriggerFormChange()
             // deprecated
-            if (onChange) onChange(groupValue)
+            if (onChange) call(onChange, groupValue)
           }
         } else {
           if (~index) {
             groupValue.splice(index, 1)
-            if (onUpdateValue) onUpdateValue(groupValue)
-            if (onChange) onChange(groupValue) // deprecated
+            if (onUpdateValue) call(onUpdateValue, groupValue)
+            if (onChange) call(onChange, groupValue) // deprecated
             nTriggerFormInput()
             nTriggerFormChange()
           }
         }
       } else {
         if (checked) {
-          if (onUpdateValue) onUpdateValue([checkboxValue])
-          if (onChange) onChange([checkboxValue]) // deprecated
+          if (onUpdateValue) call(onUpdateValue, [checkboxValue])
+          if (onChange) call(onChange, [checkboxValue]) // deprecated
           nTriggerFormInput()
           nTriggerFormChange()
         } else {
-          if (onUpdateValue) onUpdateValue([])
-          if (onChange) onChange([]) // deprecated
+          if (onUpdateValue) call(onUpdateValue, [])
+          if (onChange) call(onChange, []) // deprecated
           nTriggerFormInput()
           nTriggerFormChange()
         }

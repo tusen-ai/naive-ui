@@ -8,7 +8,7 @@
 ```
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: false,
       indeterminate: false

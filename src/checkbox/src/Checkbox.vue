@@ -62,7 +62,7 @@ import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
 import { useMemo } from '../../_utils/composition'
-import { warn } from '../../_utils/naive/warn'
+import { warn, call } from '../../_utils'
 
 export default {
   name: 'Checkbox',
@@ -133,7 +133,7 @@ export default {
     },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:checked': {
-      type: Function,
+      type: [Function, Array],
       default: undefined
     },
     // private
@@ -185,8 +185,8 @@ export default {
           nTriggerFormChange
         } = this
         const nextChecked = !this.renderSafeChecked
-        if (onUpdateChecked) onUpdateChecked(nextChecked)
-        if (onChange) onChange(nextChecked) // deprecated
+        if (onUpdateChecked) call(onUpdateChecked, nextChecked)
+        if (onChange) call(onChange, nextChecked) // deprecated
         nTriggerFormInput()
         nTriggerFormChange()
       }

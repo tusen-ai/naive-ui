@@ -1,6 +1,6 @@
 # Checkbox Group
 ```html
-<n-checkbox-group v-model="cities">
+<n-checkbox-group v-model:value="cities">
   <n-checkbox value="Beijing" label="Beijing" />
   <n-checkbox value="Shanghai" label="Shanghai" />
   <n-checkbox value="Guangzhou" label="Guangzhou" />
@@ -9,7 +9,7 @@
 ```
 ```js
 export default {
-  data() {
+  data () {
     return {
       cities: null
     }

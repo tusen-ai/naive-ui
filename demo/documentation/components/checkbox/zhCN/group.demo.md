@@ -9,7 +9,7 @@
 ```
 ```js
 export default {
-  data() {
+  data () {
     return {
       cities: null
     }
