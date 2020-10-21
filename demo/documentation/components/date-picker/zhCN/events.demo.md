@@ -33,42 +33,42 @@
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       datetime: 1183135260000,
       date: null,
       datetimerange: null,
       daterange: null,
       disabled: false
-    };
+    }
   },
   methods: {
-    onBlur1 (v) {
-      this.message.info('Blur-1 ' + v)
+    onBlur1 () {
+      this.message.info('Blur-1')
     },
     onChange1 (v) {
       this.message.info('Change-1 ' + v)
     },
-    onBlur2 (v) {
-      this.message.error('Blur-2 ' + v)
+    onBlur2 () {
+      this.message.error('Blur-2')
     },
     onChange2 (v) {
       this.message.error('Change-2 ' + v)
     },
-    onBlur3 (v) {
-      this.message.warning('Blur-3 ' + v)
+    onBlur3 () {
+      this.message.warning('Blur-3')
     },
     onChange3 (v) {
       this.message.warning('Change-3 ' + v)
     },
-    onBlur4 (v) {
-      this.message.success('Blur-4 ' + v)
+    onBlur4 () {
+      this.message.success('Blur-4')
     },
     onChange4 (v) {
       this.message.success('Change-4 ' + v)
     }
   }
-};
+}
 ```
 ```css
 .n-date-picker {

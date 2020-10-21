@@ -12,7 +12,7 @@
       class="n-date-panel-input-wrapper"
     >
       <n-input
-        v-model="displayDateString"
+        v-model:value="displayDateString"
         :theme="theme"
         :stateful="false"
         size="small"

@@ -13,7 +13,7 @@
       class="n-date-panel-input-wrapper"
     >
       <n-input
-        v-model="startDateDisplayString"
+        v-model:value="startDateDisplayString"
         :theme="theme"
         size="small"
         :stateful="false"
@@ -45,7 +45,7 @@
         />
       </div>
       <n-input
-        v-model="endDateDisplayString"
+        v-model:value="endDateDisplayString"
         :theme="theme"
         :stateful="false"
         size="small"

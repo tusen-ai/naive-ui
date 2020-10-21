@@ -14,13 +14,9 @@ actions
 events
 format
 ```
-## V-model
-|Prop|Event|
-|-|-|
-|value|change|
 
 ## Props
-### All Types Props
+### General Props
 |Name|Type|Default|Description|
 |-|-|-|-|
 |clearable|`boolean`|`false`||
@@ -29,6 +25,8 @@ format
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 |type|`'date' \| 'datetime' \| 'daterange' \|'datetimerange'`|`'date`||
 |value|`number`|`null`||
+|on-blur|`() => any`|`undefined`||
+|on-focus|`() => any`|`undefined`||
 
 ### Date Type Props
 |Name|Type|Default|Description|
@@ -37,6 +35,7 @@ format
 |format|`string`|`'yyyy-MM-dd'`||
 |is-date-disabled|`(current: number) => boolean`|`() => false`||
 |placeholder|`string`|`'Select Date'`||
+|on-update:value|`(value: number \| null) => any`|`undefined`||
 
 ### DateTime Type Props
 |Name|Type|Default|Description|
@@ -46,6 +45,7 @@ format
 |is-date-disabled|`(current: number) => boolean`|`() => false`||
 |is-time-disabled|`(current: number) => { isHourDisabled: boolean, isMinuteDisabled: boolean, isSecondDisabled: boolean }`|`() => ({ isHourDisabled: () => false, isMinuteDisabled: () => false, isSecondDisabled: () => false }})`||
 |placeholder|`string`|`'Select Date and Time'`||
+|on-update:value|`(value: number \| null) => any`|`undefined`||
 
 ### DateRange Type Props
 |Name|Type|Default|Description|
@@ -57,7 +57,7 @@ format
 |is-time-disabled|`(current: number) => { isHourDisabled: boolean, isMinuteDisabled: boolean, isSecondDisabled: boolean }`|`() => ({ isHourDisabled: () => false, isMinuteDisabled: () => false, isSecondDisabled: () => false }})`||
 |separator|`string`|`'to'`||
 |start-placeholder|`string`|`'Start Date'`||
-
+|on-update:value|`(value: [number, number] \| null) => any`|`undefined`||
 
 ### DateTimeRange Type Props
 |Name|Type|Default|Description|
@@ -69,16 +69,4 @@ format
 |is-time-disabled|`(current: number) => { isHourDisabled: boolean, isMinuteDisabled: boolean, isSecondDisabled: boolean }`|`() => ({ isHourDisabled: () => false, isMinuteDisabled: () => false, isSecondDisabled: () => false }})`||
 |separator|`string`|`'to'`||
 |start-placeholder|`string`|`'Start Date and Time'`||
-
-## Events
-### Date, DateTime Type Events
-|Name|Parameters|Description|
-|-|-|-|
-|blur|`()`||
-|change|`(value: number \| null)`||
-
-### DateRange, DateTimeRange Type Events
-|Name|Parameters|Description|
-|-|-|-|
-|blur|`()`||
-|change|`(value: [number, number] \| null)`||
+|on-update:value|`(value: [number, number] \| null) => any`|`undefined`||
