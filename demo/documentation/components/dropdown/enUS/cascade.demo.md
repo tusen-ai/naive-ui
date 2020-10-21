@@ -12,45 +12,53 @@ Dropdown can be cascade.
 ```
 
 ```js
+import { h, resolveComponent } from 'vue'
+import CashIcon from 'naive-ui/lib/icons/cash-outline'
+
 const options = [
   {
     label: 'Jay Gatsby',
-    value: 'jay gatsby'
+    key: 'jay gatsby'
   },
   {
     label: 'Daisy Buchanan',
-    value: 'daisy buchanan'
+    icon () {
+      return h(resolveComponent('n-icon'), null, {
+        default: () => h(CashIcon)
+      })
+    },
+    key: 'daisy buchanan'
   },
   {
     type: 'divider'
   },
   {
     label: 'Nick Carraway',
-    value: 'nick carraway'
+    key: 'nick carraway'
   },
   {
     label: 'Others',
-    value: 'others',
+    key: 'others1',
     children: [
       {
         label: 'Jordan Baker',
-        value: 'jordan baker'
+        key: 'jordan baker'
       },
       {
         label: 'Tom Buchanan',
-        value: 'tom buchanan'
+        key: 'tom buchanan'
       },
       {
         label: 'Others',
-        value: 'others',
+        key: 'others2',
         children: [
           {
             label: 'Chicken',
-            value: 'chicken'
+            key: 'chicken'
           },
           {
             label: 'Beef',
-            value: 'beef'
+            key: 'beef'
           }
         ]
       }
@@ -59,6 +67,7 @@ const options = [
 ]
 
 export default {
+  inject: ['message'],
   data () {
     return {
       options
@@ -66,7 +75,7 @@ export default {
   },
   methods: {
     handleSelect (name) {
-      this.$NMessage.info(name)
+      this.message.info(name)
     }
   }
 }

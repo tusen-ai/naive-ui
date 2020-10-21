@@ -1,4 +1,5 @@
 # 触发
+下拉菜单不同的触发方式。
 ```html
 <n-space>
   <n-dropdown @select="handleSelect" trigger="hover" :options="options">

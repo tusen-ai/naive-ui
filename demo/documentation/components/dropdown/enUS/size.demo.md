@@ -1,83 +1,85 @@
 # Size
 Dropdown has different size.
 ```html
-<n-dropdown
-  placement="bottom-start"
-  trigger="click"
-  size="small"
-  @select="handleSelect"
-  :options="options"
->
-  <n-button :keyboard="false">Small Some</n-button>
-</n-dropdown>
-<n-dropdown
-  placement="bottom-start"
-  trigger="click"
-  size="medium"
-  @select="handleSelect"
-  :options="options"
->
-  <n-button :keyboard="false">Medium Some</n-button>
-</n-dropdown>
-<n-dropdown
-  placement="bottom-start"
-  trigger="click"
-  size="large"
-  @select="handleSelect"
-  :options="options"
->
-  <n-button :keyboard="false">Large Some</n-button>
-</n-dropdown>
-<n-dropdown
-  placement="bottom-start"
-  trigger="click"
-  size="huge"
-  @select="handleSelect"
-  :options="options"
->
-  <n-button :keyboard="false">Huge Some</n-button>
-</n-dropdown>
+<n-space vertical>
+  <n-dropdown
+    placement="bottom-start"
+    trigger="click"
+    size="small"
+    @select="handleSelect"
+    :options="options"
+  >
+    <n-button :keyboard="false">Small Some</n-button>
+  </n-dropdown>
+  <n-dropdown
+    placement="bottom-start"
+    trigger="click"
+    size="medium"
+    @select="handleSelect"
+    :options="options"
+  >
+    <n-button :keyboard="false">Medium Some</n-button>
+  </n-dropdown>
+  <n-dropdown
+    placement="bottom-start"
+    trigger="click"
+    size="large"
+    @select="handleSelect"
+    :options="options"
+  >
+    <n-button :keyboard="false">Large Some</n-button>
+  </n-dropdown>
+  <n-dropdown
+    placement="bottom-start"
+    trigger="click"
+    size="huge"
+    @select="handleSelect"
+    :options="options"
+  >
+    <n-button :keyboard="false">Huge Some</n-button>
+  </n-dropdown>
+</n-space>
 ```
 ```js
 const options = [
   {
     label: 'Jay Gatsby',
-    value: 'jay gatsby'
+    key: 'jay gatsby'
   },
   {
     label: 'Daisy Buchanan',
-    value: 'daisy buchanan'
+    key: 'daisy buchanan'
   },
   {
     type: 'divider'
   },
   {
     label: 'Nick Carraway',
-    value: 'nick carraway'
+    key: 'nick carraway'
   },
   {
     label: 'Others',
-    value: 'others',
+    key: 'others1',
     children: [
       {
         label: 'Jordan Baker',
-        value: 'jordan baker'
+        key: 'jordan baker'
       },
       {
         label: 'Tom Buchanan',
-        value: 'tom buchanan'
+        key: 'tom buchanan'
       },
       {
         label: 'Others',
-        value: 'others',
+        key: 'others2',
         children: [
           {
             label: 'Chicken',
-            value: 'chicken'
+            key: 'chicken'
           },
           {
             label: 'Beef',
-            value: 'beef'
+            key: 'beef'
           }
         ]
       }
@@ -86,6 +88,7 @@ const options = [
 ]
 
 export default {
+  inject: ['message'],
   data () {
     return {
       options
@@ -93,13 +96,8 @@ export default {
   },
   methods: {
     handleSelect (name) {
-      this.$NMessage.info(name)
+      this.message.info(name)
     }
   }
-}
-```
-```css
-.n-button {
-  margin: 0 8px 12px 0;
 }
 ```

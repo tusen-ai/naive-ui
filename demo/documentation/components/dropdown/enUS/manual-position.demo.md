@@ -20,42 +20,42 @@ For some special case, you may want to manually position the dropdown. For examp
 const options = [
   {
     label: 'Jay Gatsby',
-    value: 'jay gatsby'
+    key: 'jay gatsby'
   },
   {
     label: 'Daisy Buchanan',
-    value: 'daisy buchanan'
+    key: 'daisy buchanan'
   },
   {
     type: 'divider'
   },
   {
     label: 'Nick Carraway',
-    value: 'nick carraway'
+    key: 'nick carraway'
   },
   {
     label: 'Others',
-    value: 'others',
+    key: 'others1',
     children: [
       {
         label: 'Jordan Baker',
-        value: 'jordan baker'
+        key: 'jordan baker'
       },
       {
         label: 'Tom Buchanan',
-        value: 'tom buchanan'
+        key: 'tom buchanan'
       },
       {
         label: 'Others',
-        value: 'others',
+        key: 'others2',
         children: [
           {
             label: 'Chicken',
-            value: 'chicken'
+            key: 'chicken'
           },
           {
             label: 'Beef',
-            value: 'beef'
+            key: 'beef'
           }
         ]
       }
@@ -64,10 +64,11 @@ const options = [
 ]
 
 export default {
+  inject: ['message'],
   methods: {
     handleSelect (name) {
       this.showDropdown = false
-      this.$NMessage.info(name)
+      this.message.info(name)
     },
     handleBlur () {
       this.showDropdown = false
