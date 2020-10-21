@@ -27,7 +27,7 @@
           <n-input
             placeholder="Name"
             @keydown.enter.prevent
-            v-model="model.dynamicInputValue[index].name"
+            v-model:value="model.dynamicInputValue[index].name"
           />
           <!--
             由于在 input 元素里按回车会导致 form 里面的 button 被点击，所以阻止了默认行为
@@ -42,7 +42,7 @@
           <n-input
             placeholder="Value"
             @keydown.enter.prevent
-            v-model="model.dynamicInputValue[index].value"
+            v-model:value="model.dynamicInputValue[index].value"
           />
         </n-form-item>
       </div>

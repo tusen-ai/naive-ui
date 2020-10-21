@@ -2,7 +2,7 @@
 ```html
 <n-dynamic-input
   preset="pair"
-  v-model="value"
+  v-model:value="value"
   key-placeholder="Please input the key"
   value-placeholder="Please input the value"
 />

@@ -8,7 +8,7 @@
     or misplacement.
   -->
   <n-dynamic-input
-    v-model="model.dynamicInputValue"
+    v-model:value="model.dynamicInputValue"
     key-field="key"
     :on-create="onCreate"
     :on-clear="onClear"
@@ -30,7 +30,7 @@
           <n-input
             placeholder="Name"
             @keydown.enter.prevent
-            v-model="model.dynamicInputValue[index].name"
+            v-model:value="model.dynamicInputValue[index].name"
           />
           <!--
            Since pressing enter on the input element will cause the button in the form to be clicked, the default behavior is prevented
@@ -45,7 +45,7 @@
           <n-input
             placeholder="Value"
             @keydown.enter.prevent
-            v-model="model.dynamicInputValue[index].value"
+            v-model:value="model.dynamicInputValue[index].value"
           />
         </n-form-item>
       </div>
