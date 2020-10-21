@@ -60,6 +60,10 @@ export default {
         ].includes(value) || typeof value === 'number'
       },
       default: 'medium'
+    },
+    itemStyle: {
+      type: [String, Object],
+      default: undefined
     }
   },
   render () {
@@ -68,7 +72,8 @@ export default {
       vertical,
       align,
       inline,
-      justify
+      justify,
+      itemStyle
     } = this
     const children = flatten(getSlot(this))
     const horizontalMargin = typeof size === 'number' ? size + 'px' : HORIZONTAL_MARGIN[size]
@@ -85,11 +90,13 @@ export default {
         alignItems: align
       }
     }, children.map((child, index) => h('div', {
-      style: {
-        display: 'flex',
-        marginRight: index !== lastIndex ? marginRight : null,
-        marginBottom: index !== lastIndex ? marginBottom : null
-      }
+      style: [
+        itemStyle,
+        {
+          marginRight: index !== lastIndex ? marginRight : null,
+          marginBottom: index !== lastIndex ? marginBottom : null
+        }
+      ]
     }, [
       child
     ])))

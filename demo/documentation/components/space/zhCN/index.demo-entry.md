@@ -11,6 +11,7 @@ from-end
 |-|-|-|-|
 |align|`'start' \| 'end' \| 'center' \| 'baseline' \| 'stretch'`|`'start'`||
 |inline|`boolean`|`false`||
+|item-style|`string \| object`|`undefined`||
 |theme|`'light' \| 'dark' \| null`|`null`||
 |justify|`'start' \| 'end'`|`'start'`||
 |size|`'small' \| 'medium' \| 'large' \| number`|`medium`||
