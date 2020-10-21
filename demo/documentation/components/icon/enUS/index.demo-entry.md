@@ -17,11 +17,11 @@ depth
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|color|`string`|`undefined`||
+|depth|`'primary' \| 'secondary' \| 'tertiary'`|`undefined`||
+|size|`number \| string`|`undefined`||
 |themed-style|`{ [themeName: string]: Object } \| null`|`null`||
-|size|`number \| string`|`null`||
-|color|`string`|`null`||
-|depth|`'primary' \| 'secondary' \| 'tertiary'`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 
 ## Slots
 |Name|Parameters|Description|

@@ -1,4 +1,3 @@
-<script>
 import { h } from 'vue'
 import {
   configurable,
@@ -20,17 +19,17 @@ export default {
   props: {
     size: {
       type: [Number, String],
-      default: null
+      default: undefined
     },
     depth: {
       validator (value) {
         return ['primary', 'secondary', 'tertiary'].includes(value)
       },
-      default: null
+      default: undefined
     },
     color: {
       type: String,
-      default: null
+      default: undefined
     }
   },
   computed: {
@@ -67,4 +66,3 @@ export default {
     }
   }
 }
-</script>
