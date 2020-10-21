@@ -6,10 +6,8 @@ For some special case, you may want to manually position the dropdown. For examp
 </div>
 <n-dropdown
   placement="bottom-start"
-  trigger="manual"
   manually-positioned
   @select="handleSelect"
-  @blur="handleBlur"
   :x="x"
   :y="y"
   :options="options"

@@ -8,6 +8,7 @@ trigger
 cascade
 placement
 size
+manual-position
 ```
 
 ## Props

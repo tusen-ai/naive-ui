@@ -8,7 +8,7 @@ Different trigger of dropdown.
   <n-dropdown @select="handleSelect" trigger="click" :options="options">
     <n-button :keyboard="false">Click!</n-button>
   </n-dropdown>
-  <n-dropdown @select="handleSelect" trigger="manual" :show="showDropdown" :options="options">
+  <n-dropdown @select="handleSelect" :show="showDropdown" :options="options">
     <n-button :keyboard="false" @click="handleClick">Oh! Manually By Myself!</n-button>
   </n-dropdown>
 </n-space>
