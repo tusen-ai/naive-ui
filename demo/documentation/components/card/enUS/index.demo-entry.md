@@ -1,5 +1,6 @@
 # Card
 Some amatuer UI designers like to apply shadow on every cards.
+
 ## Demos
 ```demo
 basic
@@ -9,24 +10,21 @@ slots
 border
 segment
 closable
+
 ```
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|title|`string`|`null`||
+|bordered|`boolean`|`true`||
+|closable|`boolean`|`false`||
 |content-style|`Object \| string`|`null`||
 |header-style|`Object \| string`|`null`||
 |segmented|`boolean \| { [part in 'content' \| 'footer' \| 'action']?: boolean \| 'soft' \| 'hard' }`|`false`||
 |size|`'small' \| 'medium' \| 'large' \| 'huge'`|`'medium'`||
-|bordered|`boolean`|`true`||
-|closable|`boolean`|`false`||
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |themed-style|`{ [themeName: string]: Object } \| null`|`null`||
-
-## Events
-|Name|Parameters|Description|
-|-|-|-|
-|close|`()`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|title|`string`|`null`||
+|on-close|`() => any`|`undefined`||
 
 ## Slots
 |Name|Parameters|Description|

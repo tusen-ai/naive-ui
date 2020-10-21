@@ -7,9 +7,10 @@ You may need when use it in modal.
 ```
 ```js
 export default {
+  inject: ['message'],
   methods: {
     handleClose () {
-      this.$NMessage.info('Card Close')
+      this.message.info('Card Close')
     }
   }
 }

@@ -4,9 +4,9 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 
 const HORIZONTAL_MARGIN = {
-  small: '4px',
-  medium: '8px',
-  large: '12px'
+  small: '8px',
+  medium: '12px',
+  large: '16px'
 }
 
 const VERTICAL_MARGIN = {
