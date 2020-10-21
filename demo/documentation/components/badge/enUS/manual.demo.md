@@ -1,6 +1,6 @@
 # Controlled Display
 ```html
-<div class="badge-demo">
+<n-space :size="24" align="center">
   <n-badge :value="value" :max="15" :show="show">
     <n-avatar />
   </n-badge>
@@ -19,8 +19,8 @@
       </template>
     </n-button>
   </n-button-group>
-  <n-switch v-model="show"/>
-</div>
+  <n-switch v-model:value="show"/>
+</n-space>
 ```
 ```js
 import mdAdd from 'naive-ui/lib/icons/md-add'
@@ -31,20 +31,11 @@ export default {
     mdAdd,
     mdRemove
   },
-  data() {
+  data () {
     return {
       value: 5,
       show: true
-    };
+    }
   }
-};
-```
-```css
-.n-badge {
-  margin: 0 32px 0px 0;
-}
-.badge-demo {
-  display: flex;
-  align-items: center;
 }
 ```

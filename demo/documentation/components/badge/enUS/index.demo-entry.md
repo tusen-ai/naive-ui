@@ -14,15 +14,16 @@ raw
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|themed-style|`{ [themeName: string]: Object } \| null`|`null`||
-|value|`string \| number`|`null`||
-|max|`number`|`null`||
+|color|`string`|`undefined`||
 |dot|`boolean`|`false`||
-|type|`'default' \| 'success' \| 'error' \| 'warning' \| 'info'`|`'default'`||
-|show|`boolean`|`true`||
-|show-zero|`boolean`|`false`||
+|max|`number`|`undefined`||
 |processing|`boolean`|`false`||
+|show-zero|`boolean`|`false`||
+|show|`boolean`|`true`||
+|themed-style|`{ [themeName: string]: Object } \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|type|`'default' \| 'success' \| 'error' \| 'warning' \| 'info'`|`'default'`||
+|value|`string \| number`|`undefined`||
 
 ## Slots
 |Name|Parameters|Description|
