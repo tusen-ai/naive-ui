@@ -1,6 +1,6 @@
 # Basic
 ```html
-<n-collapse v-model="activeNames">
+<n-collapse v-model:expandedNames="activeNames">
   <n-collapse-item title="right" name="1">
     <div>good</div>
   </n-collapse-item>

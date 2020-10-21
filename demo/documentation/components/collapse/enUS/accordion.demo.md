@@ -1,7 +1,7 @@
 # Accordion
 Like an accordion.
 ```html
-<n-collapse v-model="activeNames" accordion>
+<n-collapse v-model:expandedNames="activeNames" accordion>
   <n-collapse-item title="right" name="1">
     <div>good</div>
   </n-collapse-item>
@@ -12,7 +12,7 @@ Like an accordion.
 ```
 ```js
 export default {
-  data() {
+  data () {
     return {
       activeNames: []
     }

@@ -2,7 +2,7 @@
 Use `arrow-placement` to set the placement of arrow.
 ```html
 <n-collapse
-  v-model="activeNames"
+  v-model:expandedNames="activeNames"
   arrow-placement="right"
 >
   <n-collapse-item title="right" name="1">

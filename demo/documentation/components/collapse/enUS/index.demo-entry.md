@@ -9,13 +9,8 @@ nested
 display-directive
 item-header-click
 ```
-## V-model
-|Prop|Event|
-|-|-|
-|expanded-names|expanded-names-change|
-
 ## Props
-### Collapse
+### Collapse Props
 |Name|Type|Default|Description|
 |-|-|-|-|
 |accordion|`boolean`|`false`||
@@ -23,14 +18,15 @@ item-header-click
 |display-directive|`'if' \| 'show'`|`'if'`|The display directive to use when its inner `n-collapse-item` render content. `'if'` corresponds to `v-if` and `'show'` corresponds to `v-show`.|
 |expanded-names|`Array<string \| number>`|`null`||
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
+|on-update-expanded-names|`(expandedNames: Array<string>) => any`|`() => {}`||
+|on-item-header-click|`(data: { name: string, expanded: boolean, event: MouseEvent }) => any`|`() => {}`||
 
-
-### Collapse Item
+### Collapse Item Props
 |Name|Type|Default|Description|
 |-|-|-|-|
 |display-directive|`'if' \| 'show' \| null`|`null`|The display directive to use when it is rendering its content. `'if'` corresponds to `v-if` and `'show'` corresponds to `v-show`. When it is set to `null` the value will follow its outer `n-collapse`.|
+|name|`string \| number`|required||
 |title|`string`|`null`||
-|name|`string \| number`||**required**|
 
 ## Slots
 ### Collapse Slots
@@ -44,10 +40,3 @@ item-header-click
 |default|`()`||
 |header|`()`||
 |arrow|`(options: { collapsed: boolean })`||
-
-## Event
-### Collapse Event
-|Name|Parameters|Description|
-|-|-|-|
-|expanded-names-change|`(expandedNames: Array<string>)`||
-|item-header-click|`(data: { name: string, expanded: boolean, event: MouseEvent })`||

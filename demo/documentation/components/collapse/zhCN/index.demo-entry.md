@@ -26,7 +26,7 @@ item-header-click
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |display-directive|`'if' \| 'show' \| null`|`null`|自身在控制内容是否渲染时使用的指令，`'if'` 对应 `v-if`，`'show'` 对应 `v-show`。在设定为 `null` 的时候跟随外层的 `n-collapse`|
-|name|`string \| number`||**必需**|
+|name|`string \| number`|required||
 |title|`string`|`null`||
 
 ## Slots
