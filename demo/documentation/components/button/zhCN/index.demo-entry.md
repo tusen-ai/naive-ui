@@ -53,9 +53,3 @@ debug
 |名称|参数|说明|
 |-|-|-|
 |default|`()`||
-
-## Events
-### Button Events
-|名称|参数|说明|
-|-|-|-|
-|click|`(e: MouseEvent)`||

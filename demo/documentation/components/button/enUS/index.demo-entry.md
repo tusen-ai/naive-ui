@@ -52,9 +52,3 @@ group
 |Name|Parameters|Description|
 |-|-|-|
 |default|`()`||
-
-## Events
-### Button Events
-|Name|Parameters|Description|
-|-|-|-|
-|click|`(e: MouseEvent)`||
