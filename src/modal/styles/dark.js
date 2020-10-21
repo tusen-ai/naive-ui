@@ -6,11 +6,11 @@ export default create({
   getDerivedVariables ({ base, derived }) {
     const {
       modalColor,
-      textColorSecondaryOverlay
+      textColor2Overlay
     } = derived
     return {
       color: modalColor,
-      textColor: textColorSecondaryOverlay
+      textColor: textColor2Overlay
     }
   }
 })

@@ -10,10 +10,10 @@ export default c([
     const {
       textColor,
       textColorStrong,
-      textColorPrimaryDepth,
-      textColorSecondaryDepth,
-      textColorTertiaryDepth,
-      textColorPrimary,
+      textColor1Depth,
+      textColor2Depth,
+      textColor3Depth,
+      textColor1,
       textColorInfo,
       textColorSuccess,
       textColorWarning,
@@ -58,13 +58,13 @@ export default c([
       }),
       cM('default-type', [
         cM('primary-depth', {
-          color: textColorPrimaryDepth
+          color: textColor1Depth
         }),
         cM('secondary-depth', {
-          color: textColorSecondaryDepth
+          color: textColor2Depth
         }),
         cM('tertiary-depth', {
-          color: textColorTertiaryDepth
+          color: textColor3Depth
         })
       ]),
       cNotM('default-type', [
@@ -79,7 +79,7 @@ export default c([
         })
       ]),
       cM('primary-type', {
-        color: textColorPrimary
+        color: textColor1
       }),
       cM('info-type', {
         color: textColorInfo

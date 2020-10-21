@@ -7,21 +7,21 @@ export default create({
   getDerivedVariables ({ base, derived }) {
     return {
       borderRadius: base.borderRadius,
-      groupTextColor: derived.textColorTertiaryOverlay,
+      groupTextColor: derived.textColor3Overlay,
       itemColorMatch: changeColor(derived.primaryColor, { alpha: 0.15 }),
-      itemTextColor: derived.textColorSecondaryOverlay,
+      itemTextColor: derived.textColor2Overlay,
       itemTextColorHover: derived.primaryColorHover,
       itemTextColorChildSelected: derived.primaryColor,
       itemTextColorSelected: derived.primaryColor,
-      itemExtraTextColor: derived.textColorTertiaryOverlay,
+      itemExtraTextColor: derived.textColor3Overlay,
       itemExtraTextColorHover: derived.primaryColorHover,
       itemExtraTextColorChildSelected: derived.primaryColor,
       itemExtraTextColorSelected: derived.primaryColor,
-      itemIconColor: derived.textColorPrimaryOverlay,
+      itemIconColor: derived.textColor1Overlay,
       itemIconColorHover: derived.primaryColorHover,
       itemIconColorSelected: derived.primaryColor,
       itemIconColorChildSelected: derived.primaryColor,
-      itemIconColorCollapsed: derived.textColorPrimaryOverlay,
+      itemIconColorCollapsed: derived.textColor1Overlay,
       borderColorHorizontal: derived.primaryColor,
       submenuArrowColor: derived.primaryColor
     }

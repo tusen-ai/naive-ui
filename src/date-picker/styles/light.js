@@ -6,7 +6,7 @@ export default create({
   name: 'DatePicker',
   getDerivedVariables ({ base, derived }) {
     return {
-      itemTextColor: derived.textColorSecondary,
+      itemTextColor: derived.textColor2,
       itemTextColorDisabled: derived.textColorDisabled,
       itemTextColorMatched: derived.popoverColor,
       itemTextColorCurrent: derived.primaryColor,
@@ -16,13 +16,13 @@ export default create({
       itemColorActive: derived.primaryColor,
       itemBorderRadius: base.borderRadiusSmall,
       panelColor: derived.popoverColor,
-      panelTextColor: derived.textColorSecondary,
+      panelTextColor: derived.textColor2,
       panelIconColor: derived.iconColor,
-      panelHeaderTextColor: derived.textColorPrimary,
+      panelHeaderTextColor: derived.textColor1,
       panelDividerColor: derived.dividerColor,
       panelBoxShadow: derived.popoverBoxShadow,
       panelBorderRadius: base.borderRadius,
-      pickerTextDecorationColor: derived.textColorSecondary,
+      pickerTextDecorationColor: derived.textColor2,
       panelHeaderFontWeight: base.fontWeightStrong
     }
   }

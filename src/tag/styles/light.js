@@ -7,7 +7,7 @@ export default create({
   name: 'Tag',
   getDerivedVariables ({ base, derived }) {
     const {
-      textColorSecondaryOverlay,
+      textColor2Overlay,
       primaryColorHover,
       primaryColorPressed,
       primaryColor,
@@ -31,7 +31,7 @@ export default create({
       borderRadius,
       opacityDisabled,
       checkable: {
-        textColor: textColorSecondaryOverlay,
+        textColor: textColor2Overlay,
         textColorHover: primaryColorHover,
         textColorActive: primaryColorPressed,
         textColorChecked: baseColor,
@@ -44,7 +44,7 @@ export default create({
       },
       default: {
         borderColor: borderColorOverlay,
-        textColor: textColorSecondaryOverlay,
+        textColor: textColor2Overlay,
         color: tagColor,
         closeColor: closeColorOverlay,
         closeColorHover: colorColorHoverOverlay,

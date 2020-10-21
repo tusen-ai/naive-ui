@@ -6,13 +6,13 @@ export default create({
   theme: 'light',
   getDerivedVariables ({ base, derived }) {
     const {
-      textColorTertiary,
+      textColor3,
       infoColor,
       errorColor,
       successColor,
       warningColor,
-      textColorPrimary,
-      textColorSecondary,
+      textColor1,
+      textColor2,
       railColorOverlay
     } = derived
     const {
@@ -21,14 +21,14 @@ export default create({
     return {
       ...sizeVariables,
       headerFontWeight: fontWeightStrong,
-      circleBorderColor: textColorTertiary,
+      circleBorderColor: textColor3,
       circleBorderColorInfo: infoColor,
       circleBorderColorError: errorColor,
       circleBorderColorSuccess: successColor,
       circleBorderColorWarning: warningColor,
-      headerTextColor: textColorPrimary,
-      contentTextColor: textColorSecondary,
-      metaTextColor: textColorTertiary,
+      headerTextColor: textColor1,
+      contentTextColor: textColor2,
+      metaTextColor: textColor3,
       lineColor: railColorOverlay
     }
   }

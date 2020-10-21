@@ -10,16 +10,16 @@ export default create({
       borderRadius: base.borderRadius,
       color: derived.popoverColor,
       boxShadow: derived.popoverBoxShadow,
-      groupHeaderTextColor: derived.textColorTertiaryOverlay,
+      groupHeaderTextColor: derived.textColor3Overlay,
       actionDividerColor: derived.dividerColorOverlay,
-      optionTextColor: derived.textColorSecondaryOverlay,
+      optionTextColor: derived.textColor2Overlay,
       optionTextColorPressed: derived.primaryColorPressed,
       optionTextColorDisabled: derived.textColorDisabledOverlay,
       optionTextColorSelected: derived.primaryColor,
       optionOpacityDisabled: derived.opacityDisabled,
       optionCheckColor: derived.primaryColor,
       optionColorPending: derived.hoverColorOverlay,
-      actionTextColor: derived.textColorSecondaryOverlay
+      actionTextColor: derived.textColor2Overlay
     }
   }
 })

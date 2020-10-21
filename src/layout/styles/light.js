@@ -6,7 +6,7 @@ export default create({
   theme: 'light',
   getDerivedVariables ({ base, derived }) {
     const {
-      textColorSecondary,
+      textColor2,
       bodyColor,
       cardColor,
       dividerColorOverlay,
@@ -14,7 +14,7 @@ export default create({
       scrollbarColorHoverOverlay
     } = derived
     return {
-      textColor: textColorSecondary,
+      textColor: textColor2,
       color: bodyColor,
       headerColor: cardColor,
       headerBorderColor: dividerColorOverlay,

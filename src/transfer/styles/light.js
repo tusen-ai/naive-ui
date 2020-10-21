@@ -19,15 +19,15 @@ export default create({
         derived.cardColor,
         derived.tableHeaderColorOverlay
       ),
-      headerTextColor: derived.textColorPrimary,
+      headerTextColor: derived.textColor1,
       headerTextColorDisabled: derived.textColorDisabled,
-      headerExtraTextColor: derived.textColorSecondary,
+      headerExtraTextColor: derived.textColor2,
       buttonColor: 'rgba(0, 0, 0, 0.2)',
       buttonColorHover: derived.primaryColorHover,
       buttonColorActive: derived.primaryColorPressed,
       buttonColorDisabled: 'rgba(0, 0, 0, 0.1)',
       filterBorderColor: derived.dividerColorOverlay,
-      itemTextColor: derived.textColorSecondary,
+      itemTextColor: derived.textColor2,
       itemTextColorDisabled: derived.textColorDisabled
     }
   }

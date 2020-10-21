@@ -12,8 +12,8 @@ export default create({
     const {
       dividerColorOverlay,
       inputColorOverlay,
-      textColorPrimaryOverlay,
-      textColorSecondaryOverlay,
+      textColor1Overlay,
+      textColor2Overlay,
       closeColorOverlay,
       colorColorHoverOverlay,
       closeColorPressedOverlay,
@@ -28,9 +28,9 @@ export default create({
       default: {
         borderColor: dividerColorOverlay,
         color: inputColorOverlay,
-        titleTextColor: textColorPrimaryOverlay,
-        iconColor: textColorSecondaryOverlay,
-        contentTextColor: textColorSecondaryOverlay,
+        titleTextColor: textColor1Overlay,
+        iconColor: textColor2Overlay,
+        contentTextColor: textColor2Overlay,
         closeColor: closeColorOverlay,
         closeColorHover: colorColorHoverOverlay,
         closeColorActive: closeColorPressedOverlay
@@ -38,9 +38,9 @@ export default create({
       info: {
         borderColor: changeColor(infoColorSuppl, { alpha: 0.35 }),
         color: changeColor(infoColorSuppl, { alpha: 0.25 }),
-        titleTextColor: textColorPrimaryOverlay,
+        titleTextColor: textColor1Overlay,
         iconColor: infoColorSuppl,
-        contentTextColor: textColorSecondaryOverlay,
+        contentTextColor: textColor2Overlay,
         closeColor: closeColorOverlay,
         closeColorHover: colorColorHoverOverlay,
         closeColorActive: closeColorPressedOverlay
@@ -48,9 +48,9 @@ export default create({
       success: {
         borderColor: changeColor(successColorSuppl, { alpha: 0.35 }),
         color: changeColor(successColorSuppl, { alpha: 0.25 }),
-        titleTextColor: textColorPrimaryOverlay,
+        titleTextColor: textColor1Overlay,
         iconColor: successColorSuppl,
-        contentTextColor: textColorSecondaryOverlay,
+        contentTextColor: textColor2Overlay,
         closeColor: closeColorOverlay,
         closeColorHover: colorColorHoverOverlay,
         closeColorActive: closeColorPressedOverlay
@@ -58,9 +58,9 @@ export default create({
       warning: {
         borderColor: changeColor(warningColorSuppl, { alpha: 0.35 }),
         color: changeColor(warningColorSuppl, { alpha: 0.25 }),
-        titleTextColor: textColorPrimaryOverlay,
+        titleTextColor: textColor1Overlay,
         iconColor: warningColorSuppl,
-        contentTextColor: textColorSecondaryOverlay,
+        contentTextColor: textColor2Overlay,
         closeColor: closeColorOverlay,
         closeColorHover: colorColorHoverOverlay,
         closeColorActive: closeColorPressedOverlay
@@ -68,9 +68,9 @@ export default create({
       error: {
         borderColor: changeColor(errorColorSuppl, { alpha: 0.35 }),
         color: changeColor(errorColorSuppl, { alpha: 0.25 }),
-        titleTextColor: textColorPrimaryOverlay,
+        titleTextColor: textColor1Overlay,
         iconColor: errorColorSuppl,
-        contentTextColor: textColorSecondaryOverlay,
+        contentTextColor: textColor2Overlay,
         closeColor: closeColorOverlay,
         closeColorHover: colorColorHoverOverlay,
         closeColorActive: closeColorPressedOverlay

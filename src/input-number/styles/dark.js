@@ -20,7 +20,7 @@ export default create({
       warningColor,
       warningColorHover,
       warningColorPressed,
-      textColorSecondary: textColor,
+      textColor2: textColor,
       inputColorOverlay,
       inputColorDisabledOverlay: colorDisabled,
       textColorDisabled,

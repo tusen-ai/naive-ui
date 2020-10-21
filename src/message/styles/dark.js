@@ -7,7 +7,7 @@ export default create({
   getDerivedVariables ({ base, derived }) {
     const {
       textColorBase,
-      textColorSecondaryOverlay,
+      textColor2Overlay,
       infoColorSuppl,
       successColorSuppl,
       errorColorSuppl,
@@ -22,7 +22,7 @@ export default create({
       textColorSuccess: textColorBase,
       textColorError: textColorBase,
       textColorWarning: textColorBase,
-      textColorLoading: textColorSecondaryOverlay,
+      textColorLoading: textColor2Overlay,
       colorInfo: infoColorSuppl,
       colorSuccess: successColorSuppl,
       colorError: errorColorSuppl,

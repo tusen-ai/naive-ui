@@ -13,14 +13,14 @@ export default create({
       primaryColor,
       primaryColorHover,
       primaryColorPressed,
-      textColorSecondaryOverlay
+      textColor2Overlay
     } = derived
     return {
       borderRadius,
       railColor: railColorOverlay,
       railColorActive: primaryColor,
       linkColor: changeColor(primaryColor, { alpha: 0.15 }),
-      linkTextColor: textColorSecondaryOverlay,
+      linkTextColor: textColor2Overlay,
       linkTextColorHover: primaryColorHover,
       linkTextColorActive: primaryColorPressed,
       linkTextColorMatch: primaryColor

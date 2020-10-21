@@ -6,15 +6,15 @@ export default create({
   getDerivedVariables ({ derived }) {
     const {
       textColorBase,
-      opacityPrimary,
-      opacitySecondary,
-      opacityTertiary
+      opacity1,
+      opacity2,
+      opacity3
     } = derived
     return {
       color: textColorBase,
-      opacityPrimaryDepth: opacityPrimary,
-      opacitySecondaryDepth: opacitySecondary,
-      opacityTertiaryDepth: opacityTertiary
+      opacity1Depth: opacity1,
+      opacity2Depth: opacity2,
+      opacity3Depth: opacity3
     }
   }
 })

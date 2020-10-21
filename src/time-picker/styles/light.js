@@ -6,7 +6,7 @@ export default create({
   getDerivedVariables ({ base, derived }) {
     const {
       modalColor,
-      textColorSecondaryOverlay,
+      textColor2Overlay,
       primaryColor,
       hoverColorOverlay,
       dividerColorOverlay,
@@ -20,11 +20,11 @@ export default create({
       panelColor: modalColor,
       panelBoxShadow: popmenuBoxShadow,
       panelDividerColor: dividerColorOverlay,
-      itemTextColor: textColorSecondaryOverlay,
+      itemTextColor: textColor2Overlay,
       itemTextColorActive: primaryColor,
       itemColorHover: hoverColorOverlay,
       itemOpacityDisabled: opacityDisabled,
-      triggerTextDecorationColor: textColorSecondaryOverlay,
+      triggerTextDecorationColor: textColor2Overlay,
       triggerTextDecorationColorActive: primaryColor,
       borderRadius
     }

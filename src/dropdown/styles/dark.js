@@ -6,7 +6,7 @@ export default create({
   name: 'Dropdown',
   getDerivedVariables ({ derived, base }) {
     const {
-      textColorSecondary,
+      textColor2,
       popoverBoxShadow,
       dividerColor,
       hoverColorOverlay
@@ -19,8 +19,8 @@ export default create({
       dividerColor,
       borderRadius,
       boxShadow: popoverBoxShadow,
-      suffixColor: textColorSecondary,
-      prefixColor: textColorSecondary,
+      suffixColor: textColor2,
+      prefixColor: textColor2,
       optionColorHover: hoverColorOverlay
     }
   }

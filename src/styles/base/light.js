@@ -117,16 +117,16 @@ export default create({
       errorColorSuppl: base.errorSuppl,
       // text color
       textColorBase: base.neutralTextBase,
-      textColorPrimary: neutral(base.alpha1),
-      textColorPrimaryOverlay: overlay(base.alpha1),
-      textColorSecondary: neutral(base.alpha2),
-      textColorSecondaryOverlay: overlay(base.alpha2),
-      textColorTertiary: neutral(base.alpha3),
-      textColorTertiaryOverlay: overlay(base.alpha3),
-      textColorQuaternary: neutral(base.alpha4), // disabled, placeholder, icon
-      textColorQuaternaryOverlay: overlay(base.alpha4),
-      textColorQuinary: neutral(base.alpha5),
-      textColorQuinaryOverlay: overlay(base.alpha5),
+      textColor1: neutral(base.alpha1),
+      textColor1Overlay: overlay(base.alpha1),
+      textColor2: neutral(base.alpha2),
+      textColor2Overlay: overlay(base.alpha2),
+      textColor3: neutral(base.alpha3),
+      textColor3Overlay: overlay(base.alpha3),
+      textColor4: neutral(base.alpha4), // disabled, placeholder, icon
+      textColor4Overlay: overlay(base.alpha4),
+      textColor5: neutral(base.alpha5),
+      textColor5Overlay: overlay(base.alpha5),
 
       textColorDisabled: neutral(base.alpha4),
       textColorDisabledOverlay: overlay(base.alpha4),
@@ -139,11 +139,11 @@ export default create({
       iconColorDisabled: neutral(base.alpha5),
       iconColorDisabledOverlay: neutral(base.alpha5),
 
-      opacityPrimary: base.alpha1,
-      opacitySecondary: base.alpha2,
-      opacityTertiary: base.alpha3,
-      opacityQuaternary: base.alpha4,
-      opacityQuinary: base.alpha5,
+      opacity1: base.alpha1,
+      opacity2: base.alpha2,
+      opacity3: base.alpha3,
+      opacity4: base.alpha4,
+      opacity5: base.alpha5,
       opacityPending: base.alphaPending,
       inputOpacityDisabled: base.alphaDisabledInput,
 

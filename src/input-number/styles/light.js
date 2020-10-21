@@ -21,12 +21,12 @@ export default create({
       warningColorHover,
       warningColorPressed,
       borderColor,
-      textColorSecondary: textColor,
+      textColor2: textColor,
       actionColor: buttonColor,
       inputColorDisabled: colorDisabled,
       textColorDisabled,
       placeholdeColor,
-      textColorQuinary: placeholderColorDisabled,
+      textColor5: placeholderColorDisabled,
       inputColor: color
     } = derived
     const borderColorHover = primaryColorHover

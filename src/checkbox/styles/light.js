@@ -14,7 +14,7 @@ export default create({
       textColorDisabled,
       borderColor,
       primaryColor,
-      textColorSecondary
+      textColor2
     } = derived
     return {
       ...commonVariables,
@@ -29,7 +29,7 @@ export default create({
       borderColorDisabled: borderColor,
       borderColorActive: primaryColor,
       boxShadowColorActive: changeColor(primaryColor, { alpha: 0.3 }),
-      labelTextColor: textColorSecondary,
+      labelTextColor: textColor2,
       labelTextColorDisabled: textColorDisabled
     }
   }

@@ -12,7 +12,7 @@ export default create({
       baseColor,
       textColorDisabledOverlay,
       disabledBackgroundColor,
-      textColorSecondaryOverlay,
+      textColor2Overlay,
       opacityDisabled
     } = derived
     const {
@@ -27,7 +27,7 @@ export default create({
       boxShadowDisabled: `inset 0 0 0 1px ${borderColorOverlay}`,
       color: 'transparent',
       colorDisabled: disabledBackgroundColor,
-      textColor: textColorSecondaryOverlay,
+      textColor: textColor2Overlay,
       textColorDisabled: textColorDisabledOverlay,
       dotColorActive: primaryColor,
       dotColorDisabled: borderColorOverlay,
@@ -36,7 +36,7 @@ export default create({
       buttonBorderColorHover: primaryColor,
       buttonColor: 'transparent',
       buttonColorActive: primaryColor,
-      buttonTextColor: textColorSecondaryOverlay,
+      buttonTextColor: textColor2Overlay,
       buttonTextColorActive: baseColor,
       buttonTextColorHover: primaryColor,
       opacityDisabled: opacityDisabled,

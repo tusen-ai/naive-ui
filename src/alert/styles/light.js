@@ -13,8 +13,8 @@ export default create({
       baseColor,
       dividerColorOverlay,
       actionColor,
-      textColorPrimaryOverlay,
-      textColorSecondaryOverlay,
+      textColor1Overlay,
+      textColor2Overlay,
       closeColor,
       closeColorHover,
       closeColorActive,
@@ -29,9 +29,9 @@ export default create({
       default: {
         borderColor: dividerColorOverlay,
         color: actionColor,
-        titleTextColor: textColorPrimaryOverlay,
-        iconColor: textColorSecondaryOverlay,
-        contentTextColor: textColorSecondaryOverlay,
+        titleTextColor: textColor1Overlay,
+        iconColor: textColor2Overlay,
+        contentTextColor: textColor2Overlay,
         closeColor: closeColor,
         closeColorHover: closeColorHover,
         closeColorActive: closeColorActive
@@ -39,9 +39,9 @@ export default create({
       info: {
         borderColor: composite(baseColor, changeColor(infoColor, { alpha: 0.25 })),
         color: composite(baseColor, changeColor(infoColor, { alpha: 0.08 })),
-        titleTextColor: textColorPrimaryOverlay,
+        titleTextColor: textColor1Overlay,
         iconColor: infoColor,
-        contentTextColor: textColorSecondaryOverlay,
+        contentTextColor: textColor2Overlay,
         closeColor: closeColor,
         closeColorHover: closeColorHover,
         closeColorActive: closeColorActive
@@ -49,9 +49,9 @@ export default create({
       success: {
         borderColor: composite(baseColor, changeColor(successColor, { alpha: 0.25 })),
         color: composite(baseColor, changeColor(successColor, { alpha: 0.08 })),
-        titleTextColor: textColorPrimaryOverlay,
+        titleTextColor: textColor1Overlay,
         iconColor: successColor,
-        contentTextColor: textColorSecondaryOverlay,
+        contentTextColor: textColor2Overlay,
         closeColor: closeColor,
         closeColorHover: closeColorHover,
         closeColorActive: closeColorActive
@@ -59,9 +59,9 @@ export default create({
       warning: {
         borderColor: composite(baseColor, changeColor(warningColor, { alpha: 0.33 })),
         color: composite(baseColor, changeColor(warningColor, { alpha: 0.08 })),
-        titleTextColor: textColorPrimaryOverlay,
+        titleTextColor: textColor1Overlay,
         iconColor: warningColor,
-        contentTextColor: textColorSecondaryOverlay,
+        contentTextColor: textColor2Overlay,
         closeColor: closeColor,
         closeColorHover: closeColorHover,
         closeColorActive: closeColorActive
@@ -69,9 +69,9 @@ export default create({
       error: {
         borderColor: composite(baseColor, changeColor(errorColor, { alpha: 0.25 })),
         color: composite(baseColor, changeColor(errorColor, { alpha: 0.08 })),
-        titleTextColor: textColorPrimaryOverlay,
+        titleTextColor: textColor1Overlay,
         iconColor: errorColor,
-        contentTextColor: textColorSecondaryOverlay,
+        contentTextColor: textColor2Overlay,
         closeColor: closeColor,
         closeColorHover: closeColorHover,
         closeColorActive: closeColorActive

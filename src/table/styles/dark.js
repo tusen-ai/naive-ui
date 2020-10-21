@@ -10,8 +10,8 @@ export default create({
       cardColor,
       modalColor,
       actionColorOverlay,
-      textColorPrimaryOverlay,
-      textColorSecondaryOverlay
+      textColor1Overlay,
+      textColor2Overlay
     } = derived
     const {
       fontWeightStrong,
@@ -23,8 +23,8 @@ export default create({
       bodyColor: cardColor,
       bodyColorModal: modalColor,
       headerColor: actionColorOverlay,
-      headerTextColor: textColorPrimaryOverlay,
-      bodyTextColor: textColorSecondaryOverlay,
+      headerTextColor: textColor1Overlay,
+      bodyTextColor: textColor2Overlay,
       borderRadius,
       headFontWeight: fontWeightStrong
     }

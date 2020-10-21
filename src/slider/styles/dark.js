@@ -13,7 +13,7 @@ export default create({
       cardColor,
       primaryColor,
       popoverColor,
-      textColorSecondaryOverlay
+      textColor2Overlay
     } = derived
     const {
       borderRadius
@@ -33,7 +33,7 @@ export default create({
       handleBoxShadowFocus: `inset 0 0 0 2px ${primaryColor}, 0 0 0 3px ${changeColor(primaryColor, { alpha: 0.2 })}`,
       indicatorColor: popoverColor,
       indicatorBoxShadow: boxShadow,
-      indicatorTextColor: textColorSecondaryOverlay,
+      indicatorTextColor: textColor2Overlay,
       indicatorBorderRadius: borderRadius,
       dotBoxShadow: `inset 0 0 0 2px ${defaultFillColor}`,
       dotBoxShadowActive: `inset 0 0 0 2px ${primaryColor}`

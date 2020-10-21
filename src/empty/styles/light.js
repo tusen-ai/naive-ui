@@ -8,13 +8,13 @@ export default create({
     const {
       textColorDisabled,
       iconColorOverlay,
-      textColorSecondary
+      textColor2
     } = derived
     return {
       ...sizeVarables,
       textColor: textColorDisabled,
       iconColor: iconColorOverlay,
-      extraTextColor: textColorSecondary
+      extraTextColor: textColor2
     }
   }
 })

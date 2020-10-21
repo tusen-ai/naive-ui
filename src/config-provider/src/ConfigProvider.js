@@ -88,7 +88,7 @@ export default {
           [`n-${this.theme}-theme`]: this.theme
         }
       ],
-      style: this.syntheticStyle
+      style: this.mergedStyle
     },
     getSlot(this))
       : getSlot(this)

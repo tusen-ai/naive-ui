@@ -6,13 +6,13 @@ export default create({
   getDerivedVariables ({ base, derived }) {
     return {
       default: {
-        crossColor: derived.textColorQuaternaryOverlay,
+        crossColor: derived.textColor4Overlay,
         hoverCrossColor: derived.primaryColorHover,
         activeCrossColor: derived.primaryColorPressed,
-        arrowColor: derived.textColorQuaternaryOverlay,
+        arrowColor: derived.textColor4Overlay,
         hoverArrowColor: derived.primaryColorHover,
         activeArrowColor: derived.primaryColorHover,
-        disabledArrowColor: derived.textColorQuinary
+        disabledArrowColor: derived.textColor5
       },
       warning: {
         crossColor: derived.warningColor,
@@ -21,7 +21,7 @@ export default create({
         arrowColor: derived.warningColor,
         hoverArrowColor: derived.warningColorHover,
         activeArrowColor: derived.warningColorHover,
-        disabledArrowColor: derived.textColorQuinary
+        disabledArrowColor: derived.textColor5
       },
       error: {
         crossColor: derived.errorColor,
@@ -30,7 +30,7 @@ export default create({
         arrowColor: derived.errorColor,
         hoverArrowColor: derived.errorColorHover,
         activeArrowColor: derived.errorColorHover,
-        disabledArrowColor: derived.textColorQuinary
+        disabledArrowColor: derived.textColor5
       }
     }
   }

@@ -5,15 +5,15 @@ export default create({
   theme: 'light',
   getDerivedVariables ({ base, derived }) {
     const {
-      textColorPrimary,
-      textColorSecondary
+      textColor1,
+      textColor2
     } = derived
     const {
       fontWeightStrong
     } = base
     return {
-      headerTextColor: textColorPrimary,
-      textColor: textColorSecondary,
+      headerTextColor: textColor1,
+      textColor: textColor2,
       headerFontWeight: fontWeightStrong
     }
   }

@@ -5,8 +5,8 @@ export default create({
   name: 'Dialog',
   getDerivedVariables ({ base, derived }) {
     const {
-      textColorPrimaryOverlay,
-      textColorSecondaryOverlay,
+      textColor1Overlay,
+      textColor2Overlay,
       modalColor,
       closeOverylayColor,
       colorColorHoverOverlay,
@@ -17,8 +17,8 @@ export default create({
       errorColor
     } = derived
     return {
-      titleTextColor: textColorPrimaryOverlay,
-      textColor: textColorSecondaryOverlay,
+      titleTextColor: textColor1Overlay,
+      textColor: textColor2Overlay,
       color: modalColor,
       closeColor: closeOverylayColor,
       closeColorHover: colorColorHoverOverlay,

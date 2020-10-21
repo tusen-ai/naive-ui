@@ -7,7 +7,7 @@ export default create({
   getDerivedVariables ({ base, derived }) {
     const {
       popoverColor,
-      textColorSecondary,
+      textColor2,
       baseColor
     } = derived
     const {
@@ -17,7 +17,7 @@ export default create({
       ...commonVariables,
       borderRadius,
       color: popoverColor,
-      textColor: textColorSecondary,
+      textColor: textColor2,
       boxShadow: '0 2px 8px 0 rgba(0, 0, 0, .12)',
       tooltipColor: 'rgba(0, 0, 0, .85)',
       tooltipTextColor: baseColor

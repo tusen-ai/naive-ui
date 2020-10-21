@@ -11,8 +11,8 @@ export default create({
       cardColor,
       modalColor,
       actionColorOverlay,
-      textColorPrimary,
-      textColorSecondary
+      textColor1,
+      textColor2
     } = derived
     const {
       borderRadius,
@@ -24,8 +24,8 @@ export default create({
       bodyColor: cardColor,
       bodyColorModal: modalColor,
       headerColor: composite(cardColor, actionColorOverlay),
-      headerTextColor: textColorPrimary,
-      bodyTextColor: textColorSecondary,
+      headerTextColor: textColor1,
+      bodyTextColor: textColor2,
       borderRadius,
       headFontWeight: fontWeightStrong
     }

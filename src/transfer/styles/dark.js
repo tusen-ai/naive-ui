@@ -15,15 +15,15 @@ export default create({
       borderColor: 'transparent',
       listColor: derived.inputColorOverlay,
       headerColor: derived.tableHeaderColorOverlay,
-      headerTextColor: derived.textColorPrimaryOverlay,
+      headerTextColor: derived.textColor1Overlay,
       headerTextColorDisabled: derived.textColorDisabledOverlay,
-      headerExtraTextColor: derived.textColorSecondaryOverlay,
+      headerExtraTextColor: derived.textColor2Overlay,
       buttonColor: 'rgba(255, 255, 255, 0.3)',
       buttonColorHover: derived.primaryColorHover,
       buttonColorActive: derived.primaryColorPressed,
       buttonColorDisabled: 'rgba(255, 255, 255, 0.15)',
       filterBorderColor: derived.dividerColorOverlay,
-      itemTextColor: derived.textColorSecondaryOverlay,
+      itemTextColor: derived.textColor2Overlay,
       itemTextColorDisabled: derived.textColorDisabledOverlay
     }
   }

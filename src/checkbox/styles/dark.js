@@ -12,7 +12,7 @@ export default create({
       modalColor,
       borderColorOverlay,
       primaryColor,
-      textColorSecondaryOverlay,
+      textColor2Overlay,
       textColorDisabledOverlay
     } = derived
     return {
@@ -28,7 +28,7 @@ export default create({
       borderColorDisabled: borderColorOverlay,
       borderColorActive: primaryColor,
       boxShadowColorActive: changeColor(primaryColor, { alpha: 0.3 }),
-      labelTextColor: textColorSecondaryOverlay,
+      labelTextColor: textColor2Overlay,
       labelTextColorDisabled: textColorDisabledOverlay
     }
   }

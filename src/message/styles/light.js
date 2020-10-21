@@ -5,7 +5,7 @@ export default create({
   theme: 'light',
   getDerivedVariables ({ base, derived }) {
     const {
-      textColorSecondary,
+      textColor2,
       baseColor,
       closeColor,
       closeColorHover,
@@ -24,7 +24,7 @@ export default create({
       textColorSuccess: baseColor,
       textColorError: baseColor,
       textColorWarning: baseColor,
-      textColorLoading: textColorSecondary,
+      textColorLoading: textColor2,
       colorInfo: infoColor,
       colorSuccess: successColor,
       colorError: errorColor,

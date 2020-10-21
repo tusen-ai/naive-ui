@@ -9,7 +9,7 @@ export default create({
       iconColorOverlay,
       primaryColor,
       errorColor,
-      textColorSecondary,
+      textColor2,
       successColor,
       opacityDisabled,
       actionColorOverlay,
@@ -25,7 +25,7 @@ export default create({
       itemColorErrorHover: changeColor(errorColor, {
         alpha: 0.09
       }),
-      itemTextColor: textColorSecondary,
+      itemTextColor: textColor2,
       itemTextColorError: errorColor,
       itemTextColorSuccess: successColor,
       itemIconColor: iconColorOverlay,

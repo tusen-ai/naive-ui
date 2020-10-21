@@ -12,7 +12,7 @@ export default create({
       baseColor,
       textColorDisabled,
       disabledBackgroundColor,
-      textColorSecondary,
+      textColor2,
       opacityDisabled
     } = derived
     const {
@@ -27,7 +27,7 @@ export default create({
       boxShadowDisabled: `inset 0 0 0 1px ${borderColor}`,
       color: baseColor,
       colorDisabled: disabledBackgroundColor,
-      textColor: textColorSecondary,
+      textColor: textColor2,
       textColorDisabled: textColorDisabled,
       dotColorActive: primaryColor,
       dotColorDisabled: borderColor,
@@ -36,7 +36,7 @@ export default create({
       buttonBorderColorHover: borderColor,
       buttonColor: baseColor,
       buttonColorActive: baseColor,
-      buttonTextColor: textColorSecondary,
+      buttonTextColor: textColor2,
       buttonTextColorActive: primaryColor,
       buttonTextColorHover: primaryColor,
       opacityDisabled: opacityDisabled,

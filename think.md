@@ -217,9 +217,9 @@ style overrides RFC
   textColor2, // 暂时可以先不改
   textColor3, // 
   textColorDisabled,
-  textColorPrimary,
-  textColorSecondary,
-  textColorTertiary,
+  textColor1,
+  textColor2,
+  textColor3,
   textColorQ...
 }
 // 还有一点是去掉 backgroundColor 中的 background，因为 color & textColor 区分度已经够了

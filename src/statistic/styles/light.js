@@ -5,8 +5,8 @@ export default create({
   theme: 'light',
   getDerivedVariables ({ base, derived }) {
     const {
-      textColorSecondary,
-      textColorPrimary
+      textColor2,
+      textColor1
     } = derived
     const {
       fontWeightStrong
@@ -14,10 +14,10 @@ export default create({
     return {
       labelFontWeight: fontWeightStrong,
       valueFontWeight: fontWeightStrong,
-      labelTextColor: textColorSecondary,
-      valuePrefixTextColor: textColorPrimary,
-      valueSuffixTextColor: textColorPrimary,
-      valueTextColor: textColorPrimary
+      labelTextColor: textColor2,
+      valuePrefixTextColor: textColor1,
+      valueSuffixTextColor: textColor1,
+      valueTextColor: textColor1
     }
   }
 })

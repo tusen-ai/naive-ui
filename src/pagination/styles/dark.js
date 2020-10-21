@@ -8,18 +8,18 @@ export default create({
   peer: [ suffixStyle ],
   getDerivedVariables ({ base, derived }) {
     const {
-      textColorSecondaryOverlay,
+      textColor2Overlay,
       primaryColor,
       inputColorDisabledOverlay,
       textColorDisabledOverlay,
       borderColorOverlay,
-      opacityTertiary
+      opacity3
     } = derived
     const {
       borderRadius
     } = base
     return {
-      itemTextColor: textColorSecondaryOverlay,
+      itemTextColor: textColor2Overlay,
       itemTextColorHover: primaryColor,
       itemTextColorActive: primaryColor,
       itemTextColorDisabled: textColorDisabledOverlay,
@@ -27,10 +27,10 @@ export default create({
       itemColorActive: 'transparent',
       itemColorDisabled: inputColorDisabledOverlay,
       itemBorderColor: borderColorOverlay,
-      itemBorderColorActive: changeColor(primaryColor, { alpha: opacityTertiary }),
+      itemBorderColorActive: changeColor(primaryColor, { alpha: opacity3 }),
       itemBorderColorDisabled: 'transparent',
       itemBorderRadius: borderRadius,
-      jumperTextColor: textColorSecondaryOverlay,
+      jumperTextColor: textColor2Overlay,
       jumperTextColorDisabled: textColorDisabledOverlay
     }
   }

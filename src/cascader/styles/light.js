@@ -27,7 +27,7 @@ export default create({
     } = base
     const {
       popoverColor,
-      textColorSecondary,
+      textColor2,
       primaryColor,
       textColorDisabled,
       dividerColorOverlay,
@@ -40,7 +40,7 @@ export default create({
       menuBoxShadow: popmenuBoxShadow,
       menuBorderColor: dividerColorOverlay,
       optionColorHover: hoverColorOverlay,
-      optionTextColor: textColorSecondary,
+      optionTextColor: textColor2,
       optionTextColorMatched: primaryColor,
       optionTextColorDisabled: textColorDisabled,
       optionCheckMarkColor: primaryColor

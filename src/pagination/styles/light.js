@@ -7,7 +7,7 @@ export default create({
   peer: [ suffixStyle ],
   getDerivedVariables ({ base, derived }) {
     const {
-      textColorSecondary,
+      textColor2,
       primaryColor,
       inputColorDisabled,
       textColorDisabled,
@@ -19,7 +19,7 @@ export default create({
       borderRadius
     } = base
     return {
-      itemTextColor: textColorSecondary,
+      itemTextColor: textColor2,
       itemTextColorHover: primaryColor,
       itemTextColorActive: primaryColor,
       itemTextColorDisabled: textColorDisabled,
@@ -30,7 +30,7 @@ export default create({
       itemBorderColorActive: primaryColor,
       itemBorderColorDisabled: borderColor,
       itemBorderRadius: borderRadius,
-      jumperTextColor: textColorSecondary,
+      jumperTextColor: textColor2,
       jumperTextColorDisabled: textColorDisabled
     }
   }

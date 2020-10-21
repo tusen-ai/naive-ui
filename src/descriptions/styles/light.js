@@ -8,8 +8,8 @@ export default create({
   getDerivedVariables ({ base, derived }) {
     const {
       tableHeaderColorOverlay,
-      textColorPrimaryOverlay,
-      textColorSecondaryOverlay,
+      textColor1Overlay,
+      textColor2Overlay,
       cardColor,
       modalColor,
       dividerColorOverlay
@@ -21,9 +21,9 @@ export default create({
     return {
       ...commonVariables,
       headerColor: composite(cardColor, tableHeaderColorOverlay),
-      headerTextColor: textColorPrimaryOverlay,
+      headerTextColor: textColor1Overlay,
       headerFontWeight: fontWeightStrong,
-      contentTextColor: textColorSecondaryOverlay,
+      contentTextColor: textColor2Overlay,
       contentColor: cardColor,
       contentColorModal: modalColor,
       borderColor: dividerColorOverlay,

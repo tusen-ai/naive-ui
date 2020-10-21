@@ -12,8 +12,8 @@ export default create({
       hoverColorOverlay,
       activeColorOverlay,
       primaryColor,
-      textColorTertiary,
-      textColorSecondary,
+      textColor3,
+      textColor2,
       textColorDisabled
     } = derived
     return {
@@ -21,8 +21,8 @@ export default create({
       nodeColorHover: hoverColorOverlay,
       nodeColorActive: activeColorOverlay,
       nodeColorSelected: changeColor(primaryColor, { alpha: 0.1 }),
-      arrowColor: textColorTertiary,
-      nodeTextColor: textColorSecondary,
+      arrowColor: textColor3,
+      nodeTextColor: textColor2,
       nodeTextColorDisabled: textColorDisabled
     }
   }

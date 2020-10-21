@@ -24,11 +24,11 @@ export default create({
       splitorColorWait: derived.textColorDisabledOverlay,
       splitorColorFinish: derived.primaryColor,
       splitorColorError: derived.textColorDisabledOverlay,
-      headerTextColorProcess: derived.textColorPrimaryOverlay,
+      headerTextColorProcess: derived.textColor1Overlay,
       headerTextColorWait: derived.textColorDisabledOverlay,
       headerTextColorFinish: derived.textColorDisabledOverlay,
       headerTextColorError: derived.errorColor,
-      descriptionTextColorProcess: derived.textColorSecondaryOverlay,
+      descriptionTextColorProcess: derived.textColor2Overlay,
       descriptionTextColorWait: derived.textColorDisabledOverlay,
       descriptionTextColorFinish: derived.textColorDisabledOverlay,
       descriptionTextColorError: derived.errorColor

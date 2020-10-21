@@ -6,7 +6,7 @@ export default create({
   theme: 'light',
   getDerivedVariables ({ base, derived }) {
     const {
-      textColorSecondary,
+      textColor2,
       primaryColor,
       textColorDisabled,
       iconColorOverlay,
@@ -14,7 +14,7 @@ export default create({
       closeColor,
       tabColorOverlay,
       borderColor,
-      textColorPrimary,
+      textColor1,
       dividerColorOverlay
     } = derived
     const {
@@ -23,7 +23,7 @@ export default create({
     } = base
     return {
       ...sizeVariables,
-      labelTextColor: textColorSecondary,
+      labelTextColor: textColor2,
       labelTextColorActive: primaryColor,
       labelTextColorHover: primaryColor,
       labelTextColorDisabled: textColorDisabled,
@@ -33,12 +33,12 @@ export default create({
       tabCloseColor: closeColor,
       tabColor: tabColorOverlay,
       tabBorderColorActive: borderColor,
-      tabTextColor: textColorSecondary,
-      tabTextColorActive: textColorPrimary,
+      tabTextColor: textColor2,
+      tabTextColorActive: textColor1,
       tabBorderColor: dividerColorOverlay,
       tabFontWeight: fontWeightStrong,
       tabBorderRadius: borderRadius,
-      paneTextColor: textColorSecondary
+      paneTextColor: textColor2
     }
   }
 })

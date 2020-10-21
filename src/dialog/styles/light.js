@@ -5,8 +5,8 @@ export default create({
   name: 'Dialog',
   getDerivedVariables ({ base, derived }) {
     const {
-      textColorPrimary,
-      textColorSecondary,
+      textColor1,
+      textColor2,
       cardColor,
       closeColor,
       closeColorHover,
@@ -17,8 +17,8 @@ export default create({
       errorColor
     } = derived
     return {
-      titleTextColor: textColorPrimary,
-      textColor: textColorSecondary,
+      titleTextColor: textColor1,
+      textColor: textColor2,
       color: cardColor,
       closeColor: closeColor,
       closeColorHover: closeColorHover,

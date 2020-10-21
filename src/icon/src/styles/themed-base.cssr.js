@@ -4,9 +4,9 @@ export default c([
   ({ props }) => {
     const {
       color,
-      opacityPrimaryDepth,
-      opacitySecondaryDepth,
-      opacityTertiaryDepth
+      opacity1Depth,
+      opacity2Depth,
+      opacity3Depth
     } = props.$local
     const { cubicBezierEaseInOut, iconTransition } = props.$base
     return [
@@ -34,21 +34,21 @@ export default c([
         cM('primary-depth', [
           c('svg', {
             raw: `
-              opacity: ${opacityPrimaryDepth};
+              opacity: ${opacity1Depth};
             `
           })
         ]),
         cM('secondary-depth', [
           c('svg', {
             raw: `
-              opacity: ${opacitySecondaryDepth};
+              opacity: ${opacity2Depth};
             `
           })
         ]),
         cM('tertiary-depth', [
           c('svg', {
             raw: `
-              opacity: ${opacityTertiaryDepth};
+              opacity: ${opacity3Depth};
             `
           })
         ])

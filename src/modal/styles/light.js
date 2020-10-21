@@ -6,11 +6,11 @@ export default create({
   getDerivedVariables ({ base, derived }) {
     const {
       modalColor,
-      textColorSecondary
+      textColor2
     } = derived
     return {
       color: modalColor,
-      textColor: textColorSecondary
+      textColor: textColor2
     }
   }
 })

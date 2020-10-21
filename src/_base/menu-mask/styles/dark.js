@@ -9,7 +9,7 @@ export default create({
       color: changeColor(derived.popoverColor, {
         alpha: 0.75
       }),
-      textColor: derived.textColorSecondaryOverlay
+      textColor: derived.textColor2Overlay
     }
   }
 })
