@@ -4,7 +4,7 @@ When `n-config-provider` provides dark theme, it applies `n-dark-theme` class on
 It is very useful to create themed component.
 
 ```html
-<n-element as="span" class="myel">
+<n-element tag="span" class="myel">
   My Element
 </n-element>
 ```

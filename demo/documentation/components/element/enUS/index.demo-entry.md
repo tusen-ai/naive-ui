@@ -9,14 +9,10 @@ color
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|as|`string`|`'div'`|The tag `n-element` should be rendered as.|
+|tag|`string`|`'div'`|The tag `n-element` should be rendered as.|
+|on-theme-change|`(theme: string) => any`|`undefined`||
 
 ## Slots
 |Name|Parameters|Description|
 |-|-|-|
 |default|`(theme: string, namespace: string, themeEnvironment: any, styleScheme: Object)`||
-
-## Events
-|Name|Parameters|
-|-|-|
-|theme-change|`(theme: string)`|
