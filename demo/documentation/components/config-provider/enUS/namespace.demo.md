@@ -6,7 +6,7 @@ Some parts of component are detached to `document.body`. If you want to add a cl
     placement="bottom"
     trigger="click"
   >
-    <template v-slot:activator>
+    <template v-slot:trigger>
       <n-button
         @click="isActive = true"
       >

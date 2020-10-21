@@ -14,7 +14,7 @@ transparent
 |Name|Type|Default|Description|
 |-|-|-|-|
 |abstract|`boolean`|`false`|If `n-config-provider` has no wrapper DOM|
-|as|`string`|`'div'`|What tag `n-config-provider` will be rendered as|
+|tag|`string`|`'div'`|What tag `n-config-provider` will be rendered as|
 |language|`string`|`'en-US'`|Language of components inside `n-config-provider`|
 |namespace|`string`|`null`|Class name of detached parts of components inside `n-config-provider`|
 |theme|`string`|`null`|Theme name of components inside `n-config-provider`|

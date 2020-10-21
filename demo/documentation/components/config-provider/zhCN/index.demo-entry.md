@@ -14,7 +14,7 @@ transparent
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |abstract|`boolean`|`false`|是否不存在 DOM 包裹|
-|as|`string`|`'div'`|`n-config-provider` 被渲染成的元素|
+|tag|`string`|`'div'`|`n-config-provider` 被渲染成的元素|
 |language|`string`|`'en-US'`|`n-config-provider` 内部的组件语言|
 |namespace|`string`|`null`|`n-config-provider` 内部组件被卸载于其他位置的 DOM 的类名|
 |theme|`string`|`null`|`n-config-provider` 内部组件的主题|

@@ -6,7 +6,7 @@
     placement="bottom"
     trigger="click"
   >
-    <template v-slot:activator>
+    <template v-slot:trigger>
       <n-button
         @click="isActive = true"
       >
