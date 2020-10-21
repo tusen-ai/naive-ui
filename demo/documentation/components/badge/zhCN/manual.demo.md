@@ -1,6 +1,6 @@
 # 受控显示
 ```html
-<n-space :size="24" align="center">
+<n-space :size="24" align="center" item-style="display: flex;">
   <n-badge :value="value" :max="15" :show="show">
     <n-avatar />
   </n-badge>
