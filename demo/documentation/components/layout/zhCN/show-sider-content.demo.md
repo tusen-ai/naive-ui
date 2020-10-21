@@ -1,7 +1,7 @@
 # 隐藏侧边栏内容
 有时候收起边栏后，你不想看到里面有什么。
 ```html
-<n-switch v-model="collapsed" />
+<n-switch v-model:value="collapsed" />
 <n-layout style="height: 240px;">
   <n-layout-header style="height: 64px;">
     酷的页头

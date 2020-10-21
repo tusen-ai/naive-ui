@@ -5,7 +5,7 @@ Sider has two `collapse-mode`: `width`, `transform`. `width` will actually chang
 
 Use `collapsed-width` and `width` to set sider's width.
 ```html
-<n-switch v-model="collapsed" />
+<n-switch v-model:value="collapsed" />
 <n-layout>
   <n-layout-header style="height: 64px;">
     Cool Header

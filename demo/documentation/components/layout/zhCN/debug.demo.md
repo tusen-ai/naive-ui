@@ -1,6 +1,6 @@
 # Debug
 ```html
-<n-switch v-model="collapsed" />
+<n-switch v-model:value="collapsed" />
 <n-layout style="height: 480px;">
   <n-layout-header position="absolute" style="height: 64px;">
     Cool Header

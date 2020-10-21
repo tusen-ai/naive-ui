@@ -14,13 +14,14 @@ trigger-button
 show-sider-content
 scroll-to
 ```
+
 ## Props
 ### Layout, Layout Content Props
 |Name|Type|Default|Description|
 |-|-|-|-|
 |position|`'static' \| 'absolute'`|`'static'`|`static` position will make it css position set to `static`. `absolute` position will make it css position set to `absolute` and `left`, `right`, `top`, `bottom` to `0`. `absolute` position is very useful when you want to make content scroll in a fixed container or make the whole page's layout in a fixed position. You may need to change the style of the component to make it display as you expect.|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |themed-style|`{ [themeName: string]: Object }`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |use-native-scrollbar|`boolean`|`true`|Whether to use native scrollbar on itself. If set to `false`, layout will use a naive-ui style scrollbar for content|
 
 ### Layout Footer Props
@@ -51,21 +52,13 @@ scroll-to
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 |use-native-scrollbar|`boolean`|`true`|Whether to use native scrollbar on itself. If set to `false`, sider will use a naive-ui style scrollbar for content|
 |width|`number`|`272`||
-
+|on-update:collapsed|`(collapsed: boolean) => any`|`undefined`||
 
 ## Slots
 ### Layout, Layout Content, Layout Sider, Layout Header, Layout Footer Slots
 |Name|Parameters|Description|
 |-|-|-|
 |default|`()`||
-
-## Events
-### Layout Sider Events
-|Name|Parameters|Description|
-|-|-|-|
-|collapse|`()`||
-|expand|`()`||
-
 
 ## Methods
 ### Layout, Layout Content, Layout Sider Methods

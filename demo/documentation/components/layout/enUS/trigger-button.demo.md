@@ -1,7 +1,7 @@
 # Trigger Button
 A trigger button, for free.
 ```html
-<n-switch v-model="collapsed" />
+<n-switch v-model:value="collapsed" />
 <n-layout style="height: 240px;">
   <n-layout-header style="height: 64px;">
     Cool Header

@@ -1,7 +1,7 @@
 # 触发按钮
 免费附赠一个触发按钮。
 ```html
-<n-switch v-model="collapsed" />
+<n-switch v-model:value="collapsed" />
 <n-layout style="height: 240px;">
   <n-layout-header style="height: 64px;">
     酷的页头

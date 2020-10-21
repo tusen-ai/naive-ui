@@ -1,7 +1,7 @@
 # Hide Sider Content
 Sometimes you don't want to see content inside sider after it's collapsed.
 ```html
-<n-switch v-model="collapsed" />
+<n-switch v-model:value="collapsed" />
 <n-layout style="height: 240px;">
   <n-layout-header style="height: 64px;">
     Cool Header
