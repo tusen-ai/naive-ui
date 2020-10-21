@@ -7,11 +7,11 @@ theme-environment
 color
 ```
 ## Props
-|名称|参数|说明|
-|-|-|-|
-|on-theme-change|`(theme: string) => any`||
-|on-namespace-change|`(namespace: string) => any`||
-|on-language-change|`(language: string) => any`||
+|名称|参数|默认值|说明|
+|-|-|-|-|
+|on-theme-change|`(theme: string) => any`|`undefined`||
+|on-namespace-change|`(namespace: string) => any`|`undefined`||
+|on-language-change|`(language: string) => any`|`undefined`||
 
 ## Slots
 |名称|参数|说明|

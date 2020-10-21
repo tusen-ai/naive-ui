@@ -7,11 +7,11 @@ theme-environment
 color
 ```
 ## Events
-|Name|Parameters|Description|
-|-|-|-|
-|theme-change|`(theme: string)`||
-|namespace-change|`(namespace: string)`||
-|language-change|`(language: string)`||
+|Name|Parameters|Default|Description|
+|-|-|-|-|
+|on-theme-change|`(theme: string) => any`|`undefined`||
+|on-namespace-change|`(namespace: string) => any`|`undefined`||
+|on-language-change|`(language: string) => any`|`undefined`||
 
 ## Slots
 |Name|Parameters|Description|
