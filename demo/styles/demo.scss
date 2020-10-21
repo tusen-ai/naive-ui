@@ -29,10 +29,10 @@ body {
 }
 
 .api-table .n-table__td:nth-child(1) {
-  font-size: 13px;
+  font-size: 13px !important;
   font-family: naive-ui-mono, monospace;
 }
 
 .api-table .n-text.n-text--code {
-  font-size: 13px;
+  font-size: 13px !important;
 }
