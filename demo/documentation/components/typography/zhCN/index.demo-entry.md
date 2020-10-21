@@ -28,7 +28,7 @@ text
 |delete|`boolean`|`false`||
 |code|`boolean`|`false`||
 |depth|`'primary' \| 'secondary' \| 'tertiary'`|`null`||
-|as|`string`|`null`|需要被渲染为什么标签，在 `code` 和 `del` 设定的情况下不生效|
+|tag|`string`|`null`|需要被渲染为什么标签，在 `code` 和 `del` 设定的情况下不生效|
 
 ### P Props
 |名称|类型|默认值|说明|

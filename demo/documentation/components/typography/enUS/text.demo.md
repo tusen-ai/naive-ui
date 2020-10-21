@@ -14,5 +14,5 @@ Use different type of text to display different kind of info.
 <n-text depth="primary">Primary Depth</n-text>&nbsp;
 <n-text depth="secondary">Secondary Depth</n-text>&nbsp;
 <n-text depth="tertiary">Tertiary Depth</n-text>&nbsp;
-<n-text as="div">As Div</n-text> 
+<n-text tag="div">As Div</n-text> 
 ```

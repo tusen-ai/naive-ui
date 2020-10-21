@@ -32,7 +32,7 @@
     v-bind="$attrs"
   ><slot /></del>
   <component
-    :is="as || 'span'"
+    :is="compitableTag || 'span'"
     v-else
     class="n-text"
     :class="{
@@ -53,9 +53,17 @@
 </template>
 
 <script>
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import usecssr from '../../_mixins/usecssr'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
+import {
+  warn
+} from '../../_utils'
+import {
+  useCompitable
+} from 'vooks'
 import styles from './styles/text'
 
 export default {
@@ -63,7 +71,7 @@ export default {
   cssrName: 'Typography',
   cssrId: 'TypographyText',
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles)
   ],
@@ -100,11 +108,24 @@ export default {
       validator (value) {
         return ['primary', 'secondary', 'tertiary'].includes(value)
       },
-      default: null
+      default: undefined
     },
-    as: {
+    tag: {
       type: String,
-      default: null
+      default: undefined
+    },
+    // deprecated
+    as: {
+      validator () {
+        if (__DEV__) warn('text', '`as` is deprecated, please use `tag` instead.')
+        return true
+      },
+      default: undefined
+    }
+  },
+  setup (props) {
+    return {
+      compitableTag: useCompitable(props, ['as', 'tag'])
     }
   }
 }

@@ -14,5 +14,5 @@
 <n-text depth="primary">Primary Depth</n-text>&nbsp;
 <n-text depth="secondary">Secondary Depth</n-text>&nbsp;
 <n-text depth="tertiary">Tertiary Depth</n-text>&nbsp;
-<n-text as="div">作为 Div</n-text>
+<n-text tag="div">作为 Div</n-text>
 ```
