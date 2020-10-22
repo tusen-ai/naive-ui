@@ -15,7 +15,7 @@ target-container-selector
 |Name|Type|Default|Description|
 |-|-|-|-|
 |bottom|`number \| string`|`40`||
-|listen-to|`() => HTMLElement`|a function that returns the nearest scrollable ascendant element||
+|listen-to|`string \| HTMLElement`|`undefined`|The element to be listened to scroll event. If it is `undefined` back top will listen to the nearest scrollable parent.|
 |right|`number \| string`|`40`||
 |show|`boolean`|`undefined`|Whether to show BackTop|
 |themed-style|`{ [themeName: string]: Object } \| null`|`null`||

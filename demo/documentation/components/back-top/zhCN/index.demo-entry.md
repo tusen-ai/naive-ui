@@ -15,7 +15,7 @@ target-container-selector
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |bottom|`number`|`40`||
-|listen-to|`string \| HTMLElement`|`null`|监听滚动的元素，如果为 `null` 会监听距离最近的一个可滚动的祖先节点|
+|listen-to|`string \| HTMLElement`|`undefined`|监听滚动的元素，如果为 `undefined` 会监听距离最近的一个可滚动的祖先节点|
 |right|`number`|`40`||
 |show|`boolean`|`undefined`|是否显示 BackTop（受控）|
 |themed-style|`{ [themeName: string]: Object } \| null`|`null`||
