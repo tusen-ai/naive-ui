@@ -12,13 +12,14 @@
       'n-button--text': text,
       'n-button--dashed': !text && dashed,
       'n-button--hide-icon-margin': hideIconMargin,
+      'n-button--custom-color': color,
       [`n-button--${type}-type`]: true,
-      [`n-button--${colorDigest || type}-colored`]: true,
       [`n-button--${mergedSize}-size`]: true,
       [`n-${mergedTheme}-theme`]: mergedTheme,
     }"
     :tabindex="mergedFocusable ? 0 : -1"
     :type="attrType"
+    :style="colorCssVars"
     @click="handleClick"
     @blur="handleBlur"
     @mousedown="handleMouseDown"
@@ -79,8 +80,7 @@ import NBaseLoading from '../../_base/loading'
 import NBaseWave from '../../_base/wave/index.js'
 import NIcon from '../../icon/index.js'
 import styles from './styles/index.js'
-import { read, hash } from '../../_utils/color/index.js'
-import colorStyle from './styles/themed-color.cssr.js'
+import { createHoverColor, createPressedColor } from '../../_utils/color/index.js'
 
 export default {
   name: 'Button',
@@ -194,9 +194,18 @@ export default {
     }
   },
   computed: {
-    colorDigest () {
-      if (!this.color) return null
-      return hash(read(this.color))
+    colorCssVars () {
+      const {
+        color
+      } = this
+      return color ? {
+        '--color': color,
+        '--color-hover': createHoverColor(color),
+        '--color-pressed': createPressedColor(color),
+        '--color-focus': createHoverColor(color),
+        '--color-disabled': color,
+        '--ripple-color': color
+      } : null
     },
     mergedSize () {
       const { size } = this
@@ -225,47 +234,6 @@ export default {
     },
     iconOnRight () {
       return this.iconPlacement === 'right'
-    }
-  },
-  watch: {
-    colorDigest (value, oldValue) {
-      if (oldValue) {
-        colorStyle.unmount({
-          target: 'NButton-color-' + oldValue,
-          delay: 3000
-        })
-      }
-      if (value) {
-        colorStyle.mount({
-          target: 'NButton-color-' + value,
-          props: {
-            colorDigest: value,
-            color: this.color
-          }
-        })
-      }
-    }
-  },
-  created () {
-    const color = this.color
-    const colorDigest = this.colorDigest
-    if (color) {
-      colorStyle.mount({
-        target: 'NButton-color-' + colorDigest,
-        props: {
-          colorDigest,
-          color
-        }
-      })
-    }
-  },
-  beforeUnmount () {
-    const colorDigest = this.colorDigest
-    if (colorDigest) {
-      colorStyle.unmount({
-        target: 'NButton-color-' + colorDigest,
-        delay: 3000
-      })
     }
   },
   methods: {

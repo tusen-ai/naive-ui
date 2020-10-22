@@ -102,7 +102,7 @@ export default create({
       infoColorSuppl: base.infoSuppl,
       // success color
       successColor: base.successDefault,
-      successHoverColor: base.successHover,
+      successColorHover: base.successHover,
       successColorPressed: base.successActive,
       successColorSuppl: base.successSuppl,
       // warning color

@@ -1,17 +1,16 @@
 import { c, cB, cTB, cE, cM, cNotM, createKey } from '../../../_utils/cssr'
-import { read, createHoverColor, createPressedColor } from '../../../_utils/color'
 
 export default c([
   ({ props }) => {
-    const digest = props.colorDigest || props.$instance.type
-    const pallete = props.colorDigest ? createPallete(props.color) : extractPallete(props.$local, digest)
+    const type = props.$instance.type
+    const pallete = extractPallete(props.$local, type)
     return [
       createRippleAnimation(),
       cTB(
         'button',
         [
-          cM(`${digest}-colored`, {
-            '--ripple-color': pallete.rippleColor || pallete.borderColor || pallete.color
+          cM(`${type}-type`, {
+            '--ripple-color': pallete.rippleColor
           }, [
             // wave animation
             cB('base-wave', [
@@ -24,6 +23,11 @@ export default c([
             createBackgroundStyle(pallete),
             // text-color
             ['base', 'ghost', 'text'].map(appearance => createTextStyle(pallete, appearance)),
+            cM('base', [
+              cM('custom-color', {
+                color: `${props.$local.textColorPrimary} !important`
+              })
+            ]),
             // border-color
             createBorderStyle(pallete)
           ])
@@ -32,20 +36,6 @@ export default c([
     ]
   }
 ])
-
-function createPallete (color) {
-  const rgb = read(color)
-  const colorHover = createHoverColor(rgb)
-  const colorPressed = createPressedColor(rgb)
-  const colorFocus = colorHover
-  return {
-    color,
-    colorHover,
-    colorPressed,
-    colorFocus,
-    colorDisabled: color
-  }
-}
 
 function extractPallete (props, type) {
   return {
@@ -117,35 +107,33 @@ function createTextStyle (pallete, appearance) {
   // textColor for base
   // textColorGhost for ghost
   // textColorText for text
-  const propPrefix = 'textColor' + (appearance === 'base' ? '' : appearance[0].toUpperCase() + appearance.slice(1))
-  const baseKey = propPrefix
+  const propPrefix = 'textColor' + ({
+    base: '',
+    ghost: 'Ghost',
+    text: 'Text'
+  }[appearance])
   const disabledKey = createKey(propPrefix, 'disabled')
   const focusKey = createKey(propPrefix, 'focus')
   const hoverKey = createKey(propPrefix, 'hover')
   const pressedKey = createKey(propPrefix, 'pressed')
-  const fallbackBaseKey = appearance === 'base' ? baseKey : 'color'
-  const fallbackDisabledKey = appearance === 'base' ? baseKey : 'colorDisabled'
-  const fallbackFocusKey = appearance === 'base' ? baseKey : 'colorFocus'
-  const fallbackHoverKey = appearance === 'base' ? baseKey : 'colorHover'
-  const fallbackPressedKey = appearance === 'base' ? baseKey : 'colorPressed'
   return cM(appearance, {
-    color: pallete[baseKey] || pallete[fallbackBaseKey]
+    color: `var(--color, ${pallete[propPrefix]})`
   }, [
     cM('disabled', {
-      color: pallete[disabledKey] || pallete[fallbackDisabledKey]
+      color: `var(--color-disabled, ${pallete[disabledKey]})`
     }),
     cNotM('disabled', [
       c('&:focus', {
-        color: pallete[focusKey] || pallete[fallbackFocusKey]
+        color: `var(--color-focus, ${pallete[focusKey]})`
       }),
       c('&:hover', {
-        color: pallete[hoverKey] || pallete[fallbackHoverKey]
+        color: `var(--color-hover, ${pallete[hoverKey]})`
       }),
       c('&:active', {
-        color: pallete[pressedKey] || pallete[fallbackPressedKey]
+        color: `var(--color-pressed, ${pallete[pressedKey]})`
       }),
       cM('pressed', {
-        color: pallete[pressedKey] || pallete[fallbackPressedKey]
+        color: `var(--color-pressed, ${pallete[pressedKey]})`
       })
     ])
   ])
@@ -154,31 +142,31 @@ function createTextStyle (pallete, appearance) {
 function createBorderStyle (pallete) {
   return [
     cM('ghost, base', {
-      borderColor: pallete.borderColor || pallete.color
+      borderColor: `var(--color, ${pallete.borderColor})`
     }, [
       cM('disabled', {
-        borderColor: pallete.borderColorDisabled || pallete.colorDisabled
+        borderColor: `var(--color-disabled, ${pallete.borderColorDisabled})`
       }),
       cNotM('disabled', [
         c('&:focus', {
-          borderColor: pallete.borderColorFocus || pallete.colorFocus
+          borderColor: `var(--color-focus, ${pallete.borderColorFocus})`
         }, [
-          createBorderMaskStyle(pallete.borderColorFocus || pallete.colorFocus)
+          createBorderMaskStyle(`var(--color-focus, ${pallete.borderColorFocus})`)
         ]),
         c('&:hover', {
-          borderColor: pallete.borderColorHover || pallete.colorHover
+          borderColor: `var(--color-hover, ${pallete.borderColorHover})`
         }, [
-          createBorderMaskStyle(pallete.borderColorHover || pallete.colorHover)
+          createBorderMaskStyle(`var(--color-hover, ${pallete.borderColorHover})`)
         ]),
         c('&:active', {
-          borderColor: pallete.borderColorPressed || pallete.colorPressed
+          borderColor: `var(--color-pressed, ${pallete.borderColorPressed})`
         }, [
-          createBorderMaskStyle(pallete.borderColorPressed || pallete.colorPressed)
+          createBorderMaskStyle(`var(--color-pressed, ${pallete.borderColorPressed})`)
         ]),
         cM('pressed', {
-          borderColor: pallete.borderColorPressed || pallete.colorPressed
+          borderColor: `var(--color-pressed, ${pallete.borderColorPressed})`
         }, [
-          createBorderMaskStyle(pallete.borderColorPressed || pallete.colorPressed)
+          createBorderMaskStyle(`var(--color-pressed, ${pallete.borderColorPressed})`)
         ])
       ])
     ]),
@@ -191,23 +179,23 @@ function createBorderStyle (pallete) {
 function createBackgroundStyle (pallete) {
   return [
     cM('base', {
-      backgroundColor: pallete.color
+      backgroundColor: `var(--color, ${pallete.color})`
     }, [
       cM('disabled', {
-        backgroundColor: pallete.colorDisabled
+        backgroundColor: `var(--color-disabled, ${pallete.colorDisabled})`
       }),
       cNotM('disabled', [
         c('&:focus', {
-          backgroundColor: pallete.colorFocus
+          backgroundColor: `var(--color-focus, ${pallete.colorFocus})`
         }),
         c('&:hover', {
-          backgroundColor: pallete.colorHover
+          backgroundColor: `var(--color-hover, ${pallete.colorHover})`
         }),
         c('&:active', {
-          backgroundColor: pallete.colorPressed
+          backgroundColor: `var(--color-pressed, ${pallete.colorPressed})`
         }),
         cM('pressed', {
-          backgroundColor: pallete.colorPressed
+          backgroundColor: `var(--color-pressed, ${pallete.colorPressed})`
         })
       ])
     ]),
