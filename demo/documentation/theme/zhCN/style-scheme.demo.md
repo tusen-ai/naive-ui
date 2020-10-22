@@ -1,4 +1,4 @@
-# 使用样式方案
+# 使用样式方案（弃用）
 Naive UI 有一组内置的样式方案，对创建一个 Naive UI 相同风格的组件时很有帮助。配置消费者 `n-config-consumer` 和元素 `n-element` 可以读取样式方案。
 
 如果你看到了 `x-color` 和 `x-overlay-color` 同时存在，那么 `x-color` 是由 `base-background-color` 和 `x-overlay-color` 混合得来的。`x-color` 保证没有透明度，`x-overlay-color` 保证是半透明的。

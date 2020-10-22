@@ -1,4 +1,4 @@
-# Use Style Scheme
+# Use Style Scheme (Deprecated)
 Naive UI has a built-in style scheme. It's powerful for you to create Naive UI styled component. `n-config-consumer` & `n-element` have access to style scheme.
 
 If you find `x-color` and `x-overlay-color` both exist, the `x-color` is composited by `base-background-color` and `x-overlay-color`. `x-color` is guranteed to be a opaque color and `x-overlay-color` is guranteed to be a translucent color.
