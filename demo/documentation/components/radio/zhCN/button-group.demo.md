@@ -1,8 +1,8 @@
 # 按钮组
 有的时候用按钮显得更优雅一点。
 ```html
-<div style="margin-bottom: 12px;">
-  <n-radio-group v-model:value="value" name="radiobuttongroup">
+<n-space vertical>
+  <n-radio-group v-model:value="value" name="radiobuttongroup1">
     <n-radio-button
       v-for="song in songs"
       :key="song.value"
@@ -12,18 +12,20 @@
       {{ song.label }}
     </n-radio-button>
   </n-radio-group>
-</div>
-<n-checkbox
-  v-model:value="disabled2"
-  style="margin-right: 12px;"
->
-  禁用 Shakemaker
-</n-checkbox>
-<n-checkbox
-  v-model:value="disabled1"
->
-  禁用 Live Forever
-</n-checkbox>
+  <n-space>
+    <n-checkbox
+      v-model:value="disabled2"
+      style="margin-right: 12px;"
+    >
+      禁用 Shakemaker
+    </n-checkbox>
+    <n-checkbox
+      v-model:value="disabled1"
+    >
+      禁用 Live Forever
+    </n-checkbox>
+  </n-space>
+</n-space>
 ```
 ```js
 export default {

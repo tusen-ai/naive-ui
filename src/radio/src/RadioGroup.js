@@ -98,7 +98,7 @@ export default {
   props: {
     name: {
       type: String,
-      default: null
+      default: undefined
     },
     value: {
       type: [Boolean, String, Number],

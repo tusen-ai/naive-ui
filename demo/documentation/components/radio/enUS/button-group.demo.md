@@ -1,8 +1,8 @@
 # Button Group
 Sometimes a radio button group looks more elegant.
 ```html
-<div style="margin-bottom: 12px;">
-  <n-radio-group v-model="value" name="radiobuttongroup1">
+<n-space vertical>
+  <n-radio-group v-model:value="value" name="radiobuttongroup1">
     <n-radio-button
       v-for="song in songs"
       :key="song.value"
@@ -12,18 +12,20 @@ Sometimes a radio button group looks more elegant.
       {{ song.label }}
     </n-radio-button>
   </n-radio-group>
-</div>
-<n-checkbox
-  v-model="disabled2"
-  style="margin-right: 12px;"
->
-  Disable Shakemaker
-</n-checkbox>
-<n-checkbox
-  v-model="disabled1"
->
-  Disable Live Forever
-</n-checkbox>
+  <n-space>
+    <n-checkbox
+      v-model:value="disabled2"
+      style="margin-right: 12px;"
+    >
+      Disable Shakemaker
+    </n-checkbox>
+    <n-checkbox
+      v-model:value="disabled1"
+    >
+      Disable Live Forever
+    </n-checkbox>
+  </n-space>
+</n-space>
 ```
 ```js
 export default {

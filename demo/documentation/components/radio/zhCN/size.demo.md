@@ -1,7 +1,7 @@
 # 尺寸
 任君挑选。
 ```html
-<div style="margin-bottom: 12px;">
+<n-space vertical>
   <n-radio-group v-model:value="value" name="radiobuttongroup2" size="medium">
     <n-radio-button
       v-for="song in songs"
@@ -12,8 +12,6 @@
       {{ song.label }}
     </n-radio-button>
   </n-radio-group>
-</div>
-<div style="margin-bottom: 12px;">
   <n-radio-group v-model:value="value" name="radiobuttongroup3" size="large">
     <n-radio-button
       v-for="song in songs"
@@ -24,18 +22,20 @@
       {{ song.label }}
     </n-radio-button>
   </n-radio-group>
-</div>
-<n-checkbox
-  v-model:value="disabled2"
-  style="margin-right: 12px;"
->
-  禁用 Shakemaker
-</n-checkbox>
-<n-checkbox
-  v-model:value="disabled1"
->
-  禁用 Live Forever
-</n-checkbox>
+  <n-space>
+    <n-checkbox
+      v-model:value="disabled2"
+      style="margin-right: 12px;"
+    >
+      禁用 Shakemaker
+    </n-checkbox>
+    <n-checkbox
+      v-model:value="disabled1"
+    >
+      禁用 Live Forever
+    </n-checkbox>
+  </n-space>
+</n-space>
 ```
 ```js
 export default {

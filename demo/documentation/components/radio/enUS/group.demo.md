@@ -1,7 +1,7 @@
 # Group
 A radio group look elegant.
 ```html
-<n-radio-group v-model="value" name="radiogroup">
+<n-radio-group v-model:value="value" name="radiogroup">
   <n-radio
     v-for="song in songs"
     :key="song.value"

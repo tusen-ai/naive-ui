@@ -1,4 +1,4 @@
-import { warn } from '../../_utils/naive/warn'
+import { warn, call } from '../../_utils'
 
 export default {
   props: {
@@ -23,7 +23,7 @@ export default {
       default: undefined
     },
     'onUpdate:checkedValue': {
-      type: Function,
+      type: [Function, Array],
       default: undefined
     },
     // deprecated
@@ -41,11 +41,11 @@ export default {
     }
   },
   computed: {
-    syntheticName () {
+    mergedName () {
       if (this.name !== undefined) return this.name
       if (this.NRadioGroup) return this.NRadioGroup.name
     },
-    syntheticDisabled () {
+    mergedDisabled () {
       if (this.NRadioGroup && this.NRadioGroup.disabled) return true
       if (this.disabled) return true
       return false
@@ -59,10 +59,38 @@ export default {
     }
   },
   methods: {
+    doUpdateValue () {
+      const {
+        value
+      } = this
+      if (this.NRadioGroup) {
+        const {
+          onChange,
+          'onUpdate:value': updateValue,
+          nTriggerFormInput,
+          nTriggerFormChange
+        } = this.NRadioGroup
+        if (updateValue) call(updateValue, value)
+        if (onChange) call(onChange, value) // deprecated
+        nTriggerFormInput()
+        nTriggerFormChange()
+      } else {
+        const {
+          onChange,
+          'onUpdate:checkedValue': updateCheckedValue,
+          nTriggerFormInput,
+          nTriggerFormChange
+        } = this
+        if (updateCheckedValue) call(updateCheckedValue, value)
+        if (onChange) call(onChange, value) // deprecated
+        nTriggerFormInput()
+        nTriggerFormChange()
+      }
+    },
     toggle () {
-      if (this.syntheticDisabled) return
+      if (this.mergedDisabled) return
       if (this.checkedValue !== this.value) {
-        this.emitChangeEvent()
+        this.doUpdateValue()
       }
     },
     handleRadioInputChange () {
@@ -78,7 +106,7 @@ export default {
       this.toggle()
     },
     handleMouseDown () {
-      if (this.syntheticDisabled) return
+      if (this.mergedDisabled) return
       setTimeout(() => {
         if (!this.$el.contains(document.activeElement)) {
           this.$refs.input.focus()
@@ -91,34 +119,6 @@ export default {
       } = this
       if (onClick) onClick(e)
       this.toggle()
-    },
-    emitChangeEvent () {
-      const {
-        value
-      } = this
-      if (this.NRadioGroup) {
-        const {
-          onChange,
-          'onUpdate:value': updateValue,
-          nTriggerFormInput,
-          nTriggerFormChange
-        } = this.NRadioGroup
-        if (updateValue) updateValue(value)
-        if (onChange) onChange(value) // deprecated
-        nTriggerFormInput()
-        nTriggerFormChange()
-      } else {
-        const {
-          onChange,
-          'onUpdate:checkedValue': updateCheckedValue,
-          nTriggerFormInput,
-          nTriggerFormChange
-        } = this
-        if (updateCheckedValue) updateCheckedValue(value)
-        if (onChange) onChange(value) // deprecated
-        nTriggerFormInput()
-        nTriggerFormChange()
-      }
     }
   }
 }

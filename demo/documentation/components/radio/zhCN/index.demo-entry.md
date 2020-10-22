@@ -11,21 +11,21 @@ radio-focus-debug
 ```
 
 ## Props
-### Radio Props, Radio Button Props
+### Radio Props, RadioButton Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|name|`string`|`undefined`|单选按钮 radio 元素的 name 属性。如果没有设定会使用 `n-radio-group` 的 `name`|
 |checked-value|`string \| number \| boolean`|`null`||
-|value|`string \| number \| boolean`|required||
 |disabled|`boolean`|`false`||
+|name|`string`|`undefined`|单选按钮 radio 元素的 name 属性。如果没有设定会使用 `n-radio-group` 的 `name`|
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`|只用于 `n-radio`|
+|value|`string \| number \| boolean`|required||
 |on-update:checked-value|`(checkedValue: string \| number \| boolean) => any`|`undefined`||
 
-### Radio Group Props
+### RadioGroup Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |disabled|`boolean`|`false`||
-|name|`string`|`null`|选项组内部 radio 元素的 name 属性|
+|name|`string`|`undefined`|选项组内部 radio 元素的 name 属性|
 |size|`'small' \| 'medium' \| 'large'`|`medium`||
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 |value|`string \| number \| boolean`|`null`||

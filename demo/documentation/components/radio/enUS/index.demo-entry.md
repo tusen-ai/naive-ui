@@ -8,52 +8,25 @@ group
 button-group
 size
 ```
-## V-model
-### Radio V-model
-|Prop|Event|
-|-|-|
-|checked-value|change|
-
-### Radio Group V-model
-|Prop|Event|
-|-|-|
-|value|change|
 
 ## Props
-### Radio Props
+### Radio Props, RadioButton Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|name|`string`|`undefined`|The name attribute of the radio element. If not set, name of `radio-group` will be used.|
 |checked-value|`string \| number \| boolean`|`null`||
-|value|`string \| number \| boolean`|`null`||
 |disabled|`boolean`|`false`||
-
-### Radio Button Props
-|Name|Type|Default|Description|
-|-|-|-|-|
 |name|`string`|`undefined`|The name attribute of the radio element. If not set, name of `radio-group` will be used.|
-|checked-value|`string \| number \| boolean`|`null`||
-|value|`string \| number \| boolean`|`null`||
-|disabled|`boolean`|`false`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|value|`string \| number \| boolean`|required||
+|on-update:checked-value|`(checkedValue: string \| number \| boolean) => any`|`undefined`||
 
-### Radio Group Props
+### RadioGroup Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|name|`string`|`null`|The name attribute of the radio elements inside the group.|
-|size|`'small' \| 'medium' \| 'large'`|`small`||
-|value|`string \| number \| boolean`|`null`||
 |disabled|`boolean`|`false`||
+|name|`string`|`undefined`|The name attribute of the radio elements inside the group.|
 |size|`'small' \| 'medium' \| 'large'`|`'small'`||
-
-## Events
-### Radio, Radio Button Events
-|Name|Parameters|Description|
-|-|-|-|
-|change|`(checkedValue: string \| number \| boolean)`||
-
-### Radio Group Events
-|Name|Parameters|Description|
-|-|-|-|
-|change|`(checkedValue: string \| number \| boolean)`||
+|size|`'small' \| 'medium' \| 'large'`|`small`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|value|`string \| number \| boolean`|`null`||
+|on-update:value|`(checkedValue: string \| number \| boolean) => any`|`undefined`||

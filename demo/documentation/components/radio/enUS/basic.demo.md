@@ -1,26 +1,27 @@
 # Basic
 ```html
-<n-radio
-  v-model="value"
-  value="Definitely Maybe"
->
-  Definitely Maybe
-</n-radio>
-<n-radio
-  v-model="value"
-  value="Be Here Now"
->
-  Be Here Now
-</n-radio>
-<n-radio
-  v-model="value"
-  value="Be Here Now"
-  :disabled="disabled"
->
-  Be Here Now
-</n-radio>
-<n-switch v-model="disabled"/>
-
+<n-space>
+  <n-radio
+    v-model:checked-value="value"
+    value="Definitely Maybe"
+  >
+    Definitely Maybe
+  </n-radio>
+  <n-radio
+    v-model:checked-value="value"
+    value="Be Here Now"
+  >
+    Be Here Now
+  </n-radio>
+  <n-radio
+    v-model:checked-value="value"
+    value="Be Here Now"
+    :disabled="disabled"
+  >
+    Be Here Now
+  </n-radio>
+  <n-switch v-model:value="disabled"/>
+</n-space>
 ```
 ```js
 export default {
@@ -30,10 +31,5 @@ export default {
       value: null
     }
   }
-}
-```
-```css
-.n-radio {
-  margin-right: 8px;
 }
 ```

@@ -2,7 +2,7 @@
   <div
     class="n-radio-button"
     :class="{
-      'n-radio-button--disabled': syntheticDisabled,
+      'n-radio-button--disabled': mergedDisabled,
       'n-radio-button--checked': renderSafeChecked,
       'n-radio-button--focus': focus
     }"
@@ -17,9 +17,9 @@
       ref="input"
       type="radio"
       class="n-radio-button__radio-input"
-      :name="syntheticName"
+      :name="mergedName"
       :checked="renderSafeChecked"
-      :disabled="syntheticDisabled"
+      :disabled="mergedDisabled"
       @change="handleRadioInputChange"
       @focus="handleRadioInputFocus"
       @blur="handleRadioInputBlur"
