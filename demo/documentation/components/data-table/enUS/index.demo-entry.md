@@ -6,10 +6,7 @@ DataTable is used to displays rows of structured data.
 
 ## Demos
 <n-alert type="warning" title="Caveat" style="margin-bottom: 16px;">
-  <n-ol align-text>
-    <n-li>Every row data needs a unique key property, otherwise you should specify <n-text code>row-key</n-text> prop on table.</n-li>
-    <n-li>In controlled manner, you'd better specify all the properies you may use in advance. Since Vue cannot detect normal property additions.</n-li>
-  </n-ol>
+  Every row data needs a unique key property, otherwise you should specify <n-text code>row-key</n-text>
 </n-alert>
 
 ```demo
@@ -33,12 +30,12 @@ ajax-usage
 |Name|Type|Default|Description|
 |-|-|-|-|
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
-|data|`Array<Object>`|`[]`|Data to display|
-|columns|`Array<Column>`||Columns to display, **required**|
-|max-height|`number \| string`|`null`|The max-height of the table. If content height is larger than it, the header will be fixed at top|
-|min-height|`number \| string`|`null`|The min-height of the table.|
+|data|`Array<Object>`|`[]`|Data to display.|
+|columns|`Array<Column>`|required|Columns to display.|
+|max-height|`number \| string`|`undefined`|The max-height of the table. If content height is larger than it, the header will be fixed at top|
+|min-height|`number \| string`|`undefined`|The min-height of the table.|
 |loading|`boolean`|`false`||
-|scroll-x|`number \| string`|`null`|If columns are horizontal fixed, scroll-x need to be set|
+|scroll-x|`number \| string`|`undefined`|If columns are horizontal fixed, scroll-x need to be set|
 |pagination|`false \| Object`|`false`|See [Pagination props](n-pagination#Props)|
 |paging|`boolean`|`true`|If data-table do automatic paging. You may set it to `false` in async usage.|
 |row-class-name|`string \| (rowData: Object, index : number) => string \| Object`|`null`||
@@ -49,6 +46,11 @@ ajax-usage
 |single-line|`boolean`|`true`||
 |single-column|`boolean`|`false`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
+|on-update:filters|`(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: Column)`||
+|on-update:sorter|`(options: { columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } \| null) => any`|`undefined`|If there won't be a active sorter after change, `options` will be `null`|
+|on-update:page|`(page: number)`|`undefined`||
+|on-update:page-size|`(pageSize: number) => any`|`undefined`||
+|on-update:checked-row-keys|`(keys: Array<string \| number>) => any`|`undefined`||
 
 ## Methods
 These methods can help you control table in an uncontrolled manner. However, it's not recommended to use them to implement some async operations. If async operations is needed, use table in a **controlled** manner.

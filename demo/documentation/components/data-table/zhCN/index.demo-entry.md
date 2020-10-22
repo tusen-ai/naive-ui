@@ -6,10 +6,7 @@
 
 ## 演示
 <n-alert type="warning" title="注意" style="margin-bottom: 16px;">
-  <n-ol align-text>
-    <n-li>每一列数据都要有唯一的 key，否则要在 table 上声明 <n-text code>row-key</n-text> 属性</n-li>
-    <n-li>在受控状态下，你最好提前声明每一个你可能用到的属性。因为 Vue 并不能追踪使用常规方式添加的属性。</n-li>
-  </n-ol>
+  每一列数据都要有唯一的 key，否则要在 table 上声明 <n-text code>row-key</n-text> 属性
 </n-alert>
 
 ```demo
@@ -35,10 +32,10 @@ ajax-usage
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 |data|`Array<Object>`|`[]`|需要展示的数据|
 |columns|`Array<Column>`||需要展示的列，**必需**|
-|max-height|`number \| string`|`null`|表格的最大高度，如果内容高度高于它，那么表头将固定|
-|min-height|`number \| string`|`null`|表格的最低高度|
+|max-height|`number \| string`|`undefined`|表格的最大高度，如果内容高度高于它，那么表头将固定|
+|min-height|`number \| string`|`undefined`|表格的最低高度|
 |loading|`boolean`|`false`||
-|scroll-x|`number \| string`|`null`|表格内容的横向宽度，如果列被水平固定了，则需要设定它|
+|scroll-x|`number \| string`|`undefined`|表格内容的横向宽度，如果列被水平固定了，则需要设定它|
 |pagination|`false \| Object`|`false`|属性参考 [Pagination props](n-pagination#Props)|
 |paging|`boolean`|`true`|表格是否自动分页数据，在异步的状况下你可能需要把它设为 `false`|
 |row-class-name|`string \| (rowData: Object, index : number) => string \| Object`|`null`||
@@ -50,7 +47,7 @@ ajax-usage
 |single-column|`boolean`|`false`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |on-update:filters|`(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: Column)`||
-|on-update:sorter|`(options: { columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } \| null) => any`|`undefined`|如果在变动后没有激活的排序，那么 sorter-change 将发出 `null`|
+|on-update:sorter|`(options: { columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } \| null) => any`|`undefined`|如果在变动后没有激活的排序，那么 `options` 为 `null`|
 |on-update:page|`(page: number)`|`undefined`||
 |on-update:page-size|`(pageSize: number) => any`|`undefined`||
 |on-update:checked-row-keys|`(keys: Array<string \| number>) => any`|`undefined`||

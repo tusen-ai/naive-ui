@@ -53,8 +53,8 @@
               v-if="column.type === 'selection'"
               :key="currentPage"
               :disabled="column.disabled && column.disabled(rowData)"
-              :checked="checkedRowKeys.includes(createRowKey(rowData, rowKey))"
-              @update:checked="checked => handleCheckboxInput(rowData, checked)"
+              :value="checkedRowKeys.includes(createRowKey(rowData, rowKey))"
+              @update:value="checked => handleCheckboxInput(rowData, checked)"
             />
             <cell
               v-else

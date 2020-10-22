@@ -46,9 +46,9 @@
               v-if="column.type === 'selection'"
               :key="currentPage"
               table-header
-              :checked="checkboxChecked"
+              :value="checkboxChecked"
               :indeterminate="checkboxIndererminate"
-              @update:checked="handleCheckboxInput(column)"
+              @update:value="handleCheckboxInput(column)"
             />
             <div v-if="column.ellipsis" class="n-data-table-th__ellipsis">
               <render
