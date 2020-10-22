@@ -101,6 +101,13 @@ export function data (props) {
       }
     }
   })
+  const isInputingRef = ref(false)
+  function handleInputFocus () {
+    isInputingRef.value = true
+  }
+  function handleInputBlur () {
+    isInputingRef.value = false
+  }
   return {
     avlSrcValueSet: avlSrcValueSetRef,
     avlTgtValueSet: avlTgtValueSetRef,
@@ -113,6 +120,9 @@ export function data (props) {
     srcCheckedStatus: srcCheckedStatusRef,
     tgtCheckedStatus: tgtCheckedStatusRef,
     srcPattern: srcPatternRef,
-    tgtPattern: tgtPatternRef
+    tgtPattern: tgtPatternRef,
+    isInputing: isInputingRef,
+    handleInputFocus,
+    handleInputBlur
   }
 }

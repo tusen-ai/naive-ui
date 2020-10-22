@@ -30,6 +30,8 @@
             clearable
             size="small"
             :placeholder="targetFilterPlaceholder"
+            @focus="handleInputFocus"
+            @blur="handleInputBlur"
           >
             <template v-slot:suffix>
               <n-icon :size="16">
@@ -67,7 +69,7 @@
             </n-scrollbar> -->
             <n-scrollbar :theme="mergedTheme">
               <div class="n-transfer-list-content">
-                <transition-group name="item" :appear="isMounted">
+                <transition-group name="item" :appear="isMounted" :css="!isInputing">
                   <n-transfer-source-list-item
                     v-for="option in filteredSrcOpts"
                     :key="option.value"
@@ -79,7 +81,7 @@
               </div>
             </n-scrollbar>
           </template>
-          <transition name="n-fade-in-transition" :appear="isMounted">
+          <transition name="n-fade-in-transition" :appear="isMounted" :css="!isInputing">
             <n-empty v-if="!filteredSrcOpts.length" />
           </transition>
         </div>
@@ -118,6 +120,8 @@
             clearable
             size="small"
             :placeholder="targetFilterPlaceholder"
+            @focus="handleInputFocus"
+            @blur="handleInputBlur"
           >
             <template v-slot:suffix>
               <n-icon :size="16">
@@ -155,7 +159,7 @@
             </n-scrollbar> -->
             <n-scrollbar :theme="mergedTheme">
               <div class="n-transfer-list-content">
-                <transition-group name="item" :appear="isMounted">
+                <transition-group name="item" :appear="isMounted" :css="!isInputing">
                   <n-transfer-target-list-item
                     v-for="option in filteredTgtOpts"
                     :key="option.value"
@@ -167,7 +171,7 @@
               </div>
             </n-scrollbar>
           </template>
-          <transition name="n-fade-in-transition" :appear="isMounted">
+          <transition name="n-fade-in-transition" :appear="isMounted" :css="!isInputing">
             <n-empty v-if="!filteredTgtOpts.length" />
           </transition>
         </div>
