@@ -64,7 +64,7 @@ export default c([
               }, [
                 cM('processing', [
                   c('&::after', {
-                    content: '',
+                    content: "''",
                     backgroundImage: lineBackgroundImageProcessing,
                     animation: `progress-processing-animation 2s ${base.cubicBezierEaseInOut} infinite`
                   })
