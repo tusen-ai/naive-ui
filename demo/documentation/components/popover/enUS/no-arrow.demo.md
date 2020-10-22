@@ -1,6 +1,9 @@
 # No Arrow
 ```html
-<n-popover :show-arrow="false">
+<n-popover
+  trigger="hover"
+  :show-arrow="false"
+>
   <template v-slot:trigger>
     <n-button>
       Hover

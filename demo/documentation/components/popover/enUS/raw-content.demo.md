@@ -1,6 +1,10 @@
 # Raw Content
 ```html
-<n-popover raw :show-arrow="false">
+<n-popover
+  trigger="hover"
+  raw
+  :show-arrow="false"
+>
   <template v-slot:trigger>
     <n-button>
       Hover
@@ -12,11 +16,4 @@
     Who kicks a hole in the sky so the heaven cry over me.
   </div>
 </n-popover>
-```
-```js
-export default {
-  data() {
-    return {}
-  }
-}
 ```

@@ -1,6 +1,6 @@
 # Basic
 ```html
-<n-popover>
+<n-popover trigger="hover">
   <template v-slot:trigger>
     <n-button>
       Hover

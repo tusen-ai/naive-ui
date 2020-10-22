@@ -17,7 +17,7 @@
 <n-popover
   placement="bottom"
   trigger="click"
-   @update:show="handleUpdateShow"
+  @update:show="handleUpdateShow"
 >
   <template v-slot:trigger>
     <n-button>
@@ -47,7 +47,7 @@
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       showPopover: false
     }

@@ -1,6 +1,9 @@
 # Body Style
 ```html
-<n-popover :body-style="{ width: '500px' }">
+<n-popover
+  :body-style="{ width: '500px' }"
+  trigger="hover"
+>
   <template v-slot:trigger>
     <n-button>
       Width 500px

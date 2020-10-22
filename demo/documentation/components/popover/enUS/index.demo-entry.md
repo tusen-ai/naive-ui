@@ -21,9 +21,9 @@ manual-position
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|arrow-style|`Object`|-||
-|body-class|`string`|-||
-|body-style|`Object`|-||
+|arrow-style|`Object`|`undefined`||
+|body-class|`string`|`undefined`||
+|body-style|`Object`|`undefined`||
 |delay|`number`|`200`|Popover showing delay when trigger is `hover`|
 |disabled|`boolean`|`false`|Whether the popover can't be activated.|
 |display-directive|`'if' \| 'show'`|`'if'`|The conditionally render directive to show popover content. `if` means using `v-if` to render content, `show` means using `v-show` to render content.|
@@ -33,20 +33,15 @@ manual-position
 |placement|`'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| `|`'bottom'`||
 |raw|`boolean`|`false`|Whether to use no default styles.|
 |show-arrow|`boolean`|`true`||
-|show|`boolean`|-|Whether to show popover if set.|
+|show|`boolean`|`undefined`|Whether to show popover if set.|
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 |trigger|`'hover' \| 'click'`|`'hover'`||
-|x|`number`|-|The CSS `left` pixel value when popover manually positioned.|
-|y|`number`|-|The CSS `top` pixel value when popover manually positioned.|
+|x|`number`|`undefined`|The CSS `left` pixel value when popover manually positioned.|
+|y|`number`|`undefined`|The CSS `top` pixel value when popover manually positioned.|
+|on-update:show|`(value: boolean) => any`|||
 
 ## Slots
 |Name|Parameters|Description|
 |-|-|-|
 |trigger|`()`|The element or component that triggers popover.|
 |default|`()`|The content inside popover.|
-
-
-## Events
-|Name|Parameters|Description|
-|-|-|-|
-|update:show|`(value: boolean)`||
