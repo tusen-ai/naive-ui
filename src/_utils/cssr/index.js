@@ -30,7 +30,7 @@ function insideFormItem (status, style) {
 }
 
 function insideModal (style) {
-  return c(`${prefix}modal-content, ${prefix}drawer`, [
+  return c(`${prefix}modal-body-wrapper, ${prefix}drawer`, [
     style
   ])
 }
