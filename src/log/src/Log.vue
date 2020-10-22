@@ -69,7 +69,7 @@ export default {
     },
     log: {
       type: String,
-      default: null
+      default: undefined
     },
     fontSize: {
       type: Number,
@@ -85,7 +85,7 @@ export default {
     },
     language: {
       type: String,
-      default: null
+      default: undefined
     },
     rows: {
       type: Number,
@@ -101,7 +101,7 @@ export default {
     },
     hljs: {
       type: Object,
-      default: null
+      default: undefined
     },
     onReachTop: {
       type: Function,
@@ -130,7 +130,7 @@ export default {
   },
   computed: {
     highlight () {
-      return this.language !== null
+      return this.language !== undefined
     },
     styleHeight () {
       const lineHeight = Math.floor(this.fontSize * this.lineHeight)

@@ -30,6 +30,7 @@ function log() {
 }
 
 export default {
+  inject: ['message'],
   data() {
     return {
       loading: false,
@@ -41,7 +42,7 @@ export default {
       this.log = ""
     },
     handleRequireMore(from) {
-      this.$NMessage.info("Require More from " + from)
+      this.message.info("Require More from " + from)
       if (this.loading) return
       this.loading = true
       setTimeout(() => {
@@ -54,10 +55,10 @@ export default {
       }, 1000)
     },
     handleReachTop() {
-      this.$NMessage.info("Reach Top")
+      this.message.info("Reach Top")
     },
     handleReachBottom() {
-      this.$NMessage.info("Reach Bottom")
+      this.message.info("Reach Bottom")
     },
     scrollTo(to, dismissEvent = false) {
       if (to === "bottom") {

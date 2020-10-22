@@ -8,7 +8,7 @@ If you have some logs to show, use log.
 
 In hightlight demo, we defined a language called `naive-log` which will highlight all the numbers of line. The following code shows how we defined it. If you want to know more about hightlight.js, see <n-a href="https://highlightjs.org/">hightlight.js</n-a> and <n-a href="https://highlightjs.readthedocs.io/en/latest/index.html">highlight.js developer documentation</n-a>
 ```js
-...
+// ...
 hljs.registerLanguage('naive-log', () => ({
   contains: [
     {
@@ -18,9 +18,9 @@ hljs.registerLanguage('naive-log', () => ({
   ]
 }))
 
-Vue.use(NaiveUI)
-NaiveUI.setHljs(hljs)
-...
+naive.setHljs(hljs)
+app.use(naive)
+// ...
 ```
 
 
@@ -36,23 +36,19 @@ loading
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|loading|`boolean`|`false`||
-|trim|`boolean`|`false`||
-|log|`string`|`null`||
-|lines|`Array<string>`|`null`||
 |font-size|`number`|`14`||
+|hljs|`Object`|`undefined`||
+|language|`string`|`undefined`||
 |line-height|`number`|`1.25`||
-|language|`string`|`null`||
+|lines|`Array<string>`|`undefined`||
+|loading|`boolean`|`false`||
+|log|`string`|`undefined`||
 |rows|`number`|`15`||
-|hljs|`Object`|`null`||
-
-## Events
-|Name|Parameters|Description|
-|-|-|-|
-|require-more|`(from: 'top' \| 'bottom')`||
-|reach-top|`()`|
-|reach-bottom|`()`|
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|trim|`boolean`|`false`||
+|on-require-more|`(from: 'top' \| 'bottom') => any`|`undefined`||
+|on-reach-top|`() => any`|`undefined`||
+|on-reach-bottom|`() => any`|`undefined`||
 
 ## Methods
 |Name|Parameters|Description|

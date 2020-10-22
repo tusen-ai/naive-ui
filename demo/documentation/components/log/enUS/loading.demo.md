@@ -1,6 +1,6 @@
 # Loading
 ```html
-<n-switch v-model="loading" />
+<n-switch v-model:value="loading" />
 <n-log
   :loading="loading"
   :log="log"

@@ -8,7 +8,7 @@
 
 在本页如何高亮的演示中，我们定义了一个叫做 `naive-log` 的语言来高亮全部的数字。下面的代码是我们怎么定义的。如果你想了解 highlight.js，可以参考 <n-a href="https://highlightjs.org/">hightlight.js</n-a> 和 <n-a href="https://highlightjs.readthedocs.io/en/latest/index.html">highlight.js developer documentation</n-a>
 ```js
-...
+// ...
 hljs.registerLanguage('naive-log', () => ({
   contains: [
     {
@@ -18,9 +18,9 @@ hljs.registerLanguage('naive-log', () => ({
   ]
 }))
 
-Vue.use(NaiveUI)
-NaiveUI.setHljs(hljs)
-...
+naive.setHljs(hljs)
+app.use(naive)
+// ...
 ```
 
 
@@ -37,19 +37,18 @@ loading
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |font-size|`number`|`14`||
-|hljs|`Object`|`null`||
-|language|`string`|`null`||
+|hljs|`Object`|`undefined`||
+|language|`string`|`undefined`||
 |line-height|`number`|`1.25`||
-|lines|`Array<string>`|`null`||
+|lines|`Array<string>`|`undefined`||
 |loading|`boolean`|`false`||
-|log|`string`|`null`||
+|log|`string`|`undefined`||
 |rows|`number`|`15`||
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 |trim|`boolean`|`false`||
 |on-require-more|`(from: 'top' \| 'bottom') => any`|`undefined`||
 |on-reach-top|`() => any`|`undefined`||
 |on-reach-bottom|`() => any`|`undefined`||
-
 
 ## Methods
 |名称|参数|说明|
