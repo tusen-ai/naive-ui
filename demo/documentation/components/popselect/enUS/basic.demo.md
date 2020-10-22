@@ -1,12 +1,9 @@
 # Basic
 
-Basic usage of popselect.
-
 ```html
 <n-popselect
-  v-model="value"
+  v-model:value="value"
   :options="options"
-  @change="handleChange"
 >
   <n-tag>{{ value || 'Popselect' }}</n-tag>
 </n-popselect>
@@ -68,11 +65,6 @@ export default {
           value: 'Wait'
         }
       ]
-    }
-  },
-  methods: {
-    handleChange (v) {
-      this.$NMessage.info('Value: ' + v)
     }
   }
 }

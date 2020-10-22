@@ -4,10 +4,9 @@ Select multiple value in popselect.
 
 ```html
 <n-popselect
-  v-model="value"
+  v-model:value="value"
   multiple
   :options="options"
-  @change="handleChange"
 >
   <n-tag>{{ (Array.isArray(value) && value.length) ? value : 'Nothing' }}</n-tag>
 </n-popselect>
@@ -31,11 +30,6 @@ export default {
         label: 'Roll It Over',
         value: 'Roll It Over'
       }]
-    }
-  },
-  methods: {
-    handleChange (value) {
-      this.$NMessage.info(JSON.stringify(value))
     }
   }
 }

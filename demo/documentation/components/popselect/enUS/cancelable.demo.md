@@ -2,9 +2,8 @@
 Make single value popselect cancelable.
 ```html
 <n-popselect
-  v-model="value"
+  v-model:value="value"
   cancelable
-  @change="handleChange"
   :options="options"
 >
   <n-tag>{{ value || 'Popselect' }}</n-tag>
@@ -71,11 +70,6 @@ export default {
           value: 'song12'
         }
       ]
-    }
-  },
-  methods: {
-    handleChange (v) {
-      this.$NMessage.info('Value: ' + v)
     }
   }
 }

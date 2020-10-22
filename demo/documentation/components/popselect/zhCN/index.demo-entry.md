@@ -7,7 +7,6 @@
 basic
 size
 scrollable
-custom-width
 multiple
 ```
 

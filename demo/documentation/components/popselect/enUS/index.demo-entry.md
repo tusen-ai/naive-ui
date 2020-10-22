@@ -7,30 +7,20 @@ If you want select some options but don't want a picker, you can use popselect i
 basic
 size
 scrollable
-custom-width
 multiple
 ```
-
-## V-model
-|Prop|Event|
-|-|-|
-|value|change|
 
 ## Props
 
 |Name|Type|Default|Description|
 |-|-|-|-|
-|value|`string \| number`|`null`||
+|multiple|`boolean`|`false`||
 |options|`Array<SelectOption \| SelectOptionGroup>`|`[]`||
 |scrollable|`boolean`|`false`||
-|multiple|`boolean`|`false`||
-|size|`'small' \| 'medium' \| 'large'`|`'small'`||
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
+|value|`string \| number \| Array<string \| number> \| null`|`null`||
+|on-update:value|`(string \| number \| Array<string \| number> \| null) => any`|`undefined`||
 
 For SelectOption & SelectOptionGroup, see [Select](n-select#SelectOption-Type)
 
 For other props, see [Popover](n-popover#Props)
-
-## Events
-|Name|Parameters|Description|
-|-|-|-|
-|change|`string \| number \| Array<string \| number> \| null`||
