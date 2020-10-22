@@ -1,28 +1,26 @@
 # Caveat About Theme
-Wherever you use `this.$NMessage` to generate a message, if you don't specify the theme of it, the theme of created message will follow the outer-most ascendant Config Provider of `this`. Since making the message's theme as same as its invoking component instance will cause chaos.
+If you don't specified the theme, the theme of created message will be the same as its `n-message-provider`.
 ```html
-<n-button @click="emitInfo" style="margin: 0 8px 12px 0;">
+<n-button @click="info" style="margin: 0 8px 12px 0;">
   You can change the theme while the message is active
 </n-button>
-<n-button @click="emitLoading">
+<n-button @click="loading">
   Specify Dark Theme
 </n-button>
 ```
 
 ```js
 export default {
-  data() {
-    return {}
-  },
+  inject: ['message'],
   methods: {
-    emitInfo () {
-      this.$NMessage.info(
+    info () {
+      this.message.info(
         "I don't know why nobody told you how to unfold your love",
         { duration: 5000 }
       )
     },
-    emitLoading () {
-      this.$NMessage.info(
+    loading () {
+      this.message.info(
         "I don't know why nobody told you how to unfold your love",
         { duration: 5000, theme: 'dark' }
       )

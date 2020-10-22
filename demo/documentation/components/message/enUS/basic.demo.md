@@ -1,45 +1,47 @@
 # Basic
 ```html
-<n-button @click="emitInfo">
+<n-button @click="info">
   Info
 </n-button>
-<n-button @click="emitError">
+<n-button @click="error">
   Error
 </n-button>
-<n-button @click="emitWarning">
+<n-button @click="warning">
   Warning
 </n-button>
-<n-button @click="emitSuccess">
+<n-button @click="success">
   Success
 </n-button>
-<n-button @click="emitLoading">
+<n-button @click="loading">
   Loading
 </n-button>
 ```
 ```js
 export default {
-  data() {
-    return {}
-  },
+  inject: ['message'],
   methods: {
-    emitInfo() {
-      this.$NMessage.info(
+    info () {
+      this.message.info(
         "I don't know why nobody told you how to unfold your love"
       )
     },
-    emitError() {
-      this.$NMessage.error("Once upon a time you dressed so fine")
+    error () {
+      this.message.error(
+        "Once upon a time you dressed so fine"
+      )
     },
-    emitWarning() {
-      this.$NMessage.warning("How many roads must a man walk down")
+    warning () {
+      this.message.warning(
+        "How many roads must a man walk down"
+      )
     },
-    emitSuccess() {
-      this.$NMessage.success(
+    success () {
+      this.message.success(
         "'Cause you walked hand in hand With another man in my place"
       )
     },
-    emitLoading() {
-      this.$NMessage.loading(
+    loading () {
+      this.message.loading(
         "If I were you, I will realize that I love you more than any other guy"
       )
     }

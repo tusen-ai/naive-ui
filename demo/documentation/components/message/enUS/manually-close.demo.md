@@ -1,34 +1,35 @@
 # Manually Close
 ```html
-<n-button @click="openMessage">
-  Open
+<n-button @click="createMessage">
+  Create
 </n-button>
-<n-button @click="closeMessage">
-  Close
+<n-button @click="removeMessage">
+  Destroy
 </n-button>
 ```
 ```js
 export default {
-  data() {
+  inject: ['message'],
+  data () {
     return {
-      message: null
+      msg: null
     }
   },
   beforeUnmount () {
-    this.closeMessage()
+    this.removeMessage()
   },
   methods: {
-    openMessage () {
-      if (!this.message) {
-        this.message = this.$NMessage.info('3 * 3 * 4 * 4 * ?', {
+    createMessage () {
+      if (!this.msg) {
+        this.msg = this.message.info('3 * 3 * 4 * 4 * ?', {
           duration: 0
         })
       }
     },
-    closeMessage () {
-      if (this.message) {
-        this.message.hide()
-        this.message = null
+    removeMessage () {
+      if (this.msg) {
+        this.msg.destroy()
+        this.msg = null
       }
     }
   }

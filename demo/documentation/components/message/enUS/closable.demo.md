@@ -1,16 +1,17 @@
 # Closable
 Set `closable` to make message closable by a click.
 ```html
-<n-button @click="emitInfo">
-  Open a Message
+<n-button @click="createMessage">
+  Create a Message
 </n-button>
 ```
 
 ```js
 export default {
+  inject: ['message'],
   methods: {
-    emitInfo() {
-      this.$NMessage.info(
+    createMessage() {
+      this.message.info(
         "I don't know why nobody told you how to unfold your love",
         {
           closable: true,

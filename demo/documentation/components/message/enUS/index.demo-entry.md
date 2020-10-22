@@ -1,5 +1,32 @@
 # Message
 Oracle from the top(always) of the browser.
+
+<n-space vertical align="stretch">
+<n-alert title="Prerequisite" type="warning">
+  If you want use message, you need to wrap the component where you call related methods inside <n-text code>n-message-provider</n-text> and inject <n-text code>message</n-text>.
+</n-alert>
+For example:
+
+```html
+<!-- App.vue -->
+<n-message-provider>
+  <content />
+</n-message-provider>
+```
+
+```js
+// content
+export default {
+  inject: ['message'],
+  methods: {
+    warning () {
+      this.message.warning('...')
+    }
+  }
+}
+```
+</n-space>
+
 ## Demos
 ```demo
 basic
@@ -10,39 +37,45 @@ modify-content
 manually-close
 about-theme
 ```
+
 ## API
-### $NMessage Methods
-|Name|Type|Description|
-|-|-|-|
-|-|-|-|
-|info|`(message: string, option?: MessageOption) => MessageEnvironment`||
-|success|`(message: string, option?: MessageOption) => MessageEnvironment`||
-|warning|`(message: string, option?: MessageOption) => MessageEnvironment`||
-|error|`(message: string, option?: MessageOption) => MessageEnvironment`||
-|loading|`(message: string, option?: MessageOption) => MessageEnvironment`||
+### MessageProvider Props
+|Name|Type|Default|Description|
+|-|-|-|-|
+|to|`string \| HTMLElement`|`'body'`|Container node of message container.|
 
-### MessageOption Properties
+### MessageProvider Injection API
+#### MessageProvider Injection Methods
 |Name|Type|Description|
 |-|-|-|
-|content|`string \|(() => VNode \| Array<VNode>)`|Can be a render function|
-|icon|`() => VNode`|Can be a render function|
-|theme|`'light' \| 'dark'`||
+|error|`(content: string, option?: MessageOption) => MessageReactive`||
+|info|`(content: string, option?: MessageOption) => MessageReactive`||
+|loading|`(content: string, option?: MessageOption) => MessageReactive`||
+|success|`(content: string, option?: MessageOption) => MessageReactive`||
+|warning|`(content: string, option?: MessageOption) => MessageReactive`||
+
+#### MessageOption Properties
+|Name|Type|Description|
+|-|-|-|
 |closable|`boolean`||
-|onHide|`Function`||
-|onAfterHide|`Function`||
+|content|`string \| (() => VNode \| Array<VNode>)`|Message content.|
+|icon|`() => VNode`|Message icon.|
+|theme|`'light' \| 'dark' \| string \| null`||
+|onAfterLeave|`Function`|Callback after message disappeared.|
+|onLeave|`Function`|Callback when message start to disappear.|
 
-### MessageEnvironment API
-#### MessageEnvironment Properties
+#### MessageReactive Properties
 |Name|Type|Description|
 |-|-|-|
-|content|`string \| (() => VNode \| Array<VNode>)`|Can be a render function|
-|icon|`string \| (() => VNode)`|Can be a render function|
+|closable|`boolean`||
+|content|`string \| (() => VNode \| Array<VNode>)`|Message content.|
+|icon|`() => VNode`|Message icon.|
+|theme|`'light' \| 'dark' \| string \| null`||
 |type|`'info' \| 'success' \| 'warning' \| 'error' \| 'loading'`||
-|closable|`boolean`||
-|onHide|`Function`||
-|onAfterHide|`Function`||
+|onAfterLeave|`Function`|Callback after message disappeared.|
+|onLeave|`Function`|Callback when message start to disappear.|
 
-#### MessageEnvironment Methods
+#### MessageReactive Methods
 |Name|Type|Description|
 |-|-|-|
-|hide|`()`||
+|destroy|`()`||

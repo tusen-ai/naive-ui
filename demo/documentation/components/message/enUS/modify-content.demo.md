@@ -1,19 +1,20 @@
 # Modify Exist Message
 ```html
 <n-button @click="createMessage">
-  Open a Message Firstly
+  Create  a Message Firstly
 </n-button>
-<n-button @click="changeType">changeType</n-button>
-<n-button @click="plus">+</n-button>
+<n-button @click="changeType">Change Type</n-button>
+<n-button @click="plus">Plus 1</n-button>
 ```
 ```js
 export default {
-  data() {
+  inject: ['message'],
+  data () {
     return {
       count: 0,
       typeIndex: 0,
       types: ['success', 'info', 'warning', 'error', 'loading'],
-      message: null
+      msg: null
     }
   },
   computed: {
@@ -23,22 +24,22 @@ export default {
   },
   methods: {
     plus () {
-      if (this.message) {
+      if (this.msg) {
         this.count++
-        this.message.content = '' + this.count
+        this.msg.content = '' + this.count
       }
     },
     changeType () {
-      if (this.message) {
+      if (this.msg) {
         this.typeIndex = (this.typeIndex + 1) % this.types.length
-        this.message.type = this.type
+        this.msg.type = this.type
       }
     },
-    createMessage() {
-      this.message = this.$NMessage[this.type](
+    createMessage () {
+      this.msg = this.message[this.type](
         '' + this.count, { duration: 10000 }
       )
-    },
+    }
   }
 }
 ```

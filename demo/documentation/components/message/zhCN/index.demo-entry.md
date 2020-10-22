@@ -1,9 +1,32 @@
 # 信息 Message
 （一般是）从浏览器顶部降下来的神谕。
 
-<n-alert title="注意" type="warning">
-  以下所有例子需要 <n-text code>n-message-provider</n-text> 的包裹，并在组件中注入 <n-text code>message</n-text>。
+<n-space vertical align="stretch">
+<n-alert title="使用前提" type="warning">
+  如果你想使用信息，你需要把调用其方法的组件放在 <n-text code>n-message-provider</n-text> 内部并且注入 <n-text code>message</n-text>。
 </n-alert>
+例如：
+
+```html
+<!-- App.vue -->
+<n-message-provider>
+  <content />
+</n-message-provider>
+```
+
+```js
+// content
+export default {
+  inject: ['message'],
+  methods: {
+    warning () {
+      this.message.warning('...')
+    }
+  }
+}
+```
+</n-space>
+
 
 ## 演示
 ```demo
@@ -26,11 +49,11 @@ about-theme
 #### MessageProvider Injection Methods
 |名称|类型|说明|
 |-|-|-|
+|error|`(content: string, option?: MessageOption) => MessageReactive`||
 |info|`(content: string, option?: MessageOption) => MessageReactive`||
+|loading|`(content: string, option?: MessageOption) => MessageReactive`||
 |success|`(content: string, option?: MessageOption) => MessageReactive`||
 |warning|`(content: string, option?: MessageOption) => MessageReactive`||
-|error|`(content: string, option?: MessageOption) => MessageReactive`||
-|loading|`(content: string, option?: MessageOption) => MessageReactive`||
 
 #### MessageOption Properties
 |名称|类型|说明|
@@ -38,9 +61,9 @@ about-theme
 |closable|`boolean`||
 |content|`string \| (() => VNode \| Array<VNode>)`|信息内容|
 |icon|`() => VNode`|信息图标|
+|theme|`'light' \| 'dark' \| string \| null`||
 |onAfterLeave|`Function`|信息消失动画结束的回调|
 |onLeave|`Function`|信息开始消失的回调|
-|theme|`'light' \| 'dark' \| string \| null`||
 
 #### MessageReactive Properties
 |名称|类型|说明|
@@ -48,10 +71,10 @@ about-theme
 |closable|`boolean`||
 |content|`string \| (() => VNode \| Array<VNode>)`|信息内容|
 |icon|`() => VNode`|信息图标|
-|onAfterLeave|`Function`|信息消失动画结束的回调|
-|onLeave|`Function`|信息开始消失的回调|
 |theme|`'light' \| 'dark' \| string \| null`||
 |type|`'info' \| 'success' \| 'warning' \| 'error' \| 'loading'`||
+|onAfterLeave|`Function`|信息消失动画结束的回调|
+|onLeave|`Function`|信息开始消失的回调|
 
 #### MessageReactive Methods
 |名称|类型|说明|

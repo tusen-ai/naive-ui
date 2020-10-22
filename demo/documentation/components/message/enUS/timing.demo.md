@@ -1,19 +1,17 @@
 # Timing
 Specify the duration of messages.
 ```html
-<n-button @click="emitInfo">
+<n-button @click="createMessage">
   Last for 5 second
 </n-button>
 ```
 
 ```js
 export default {
-  data() {
-    return {}
-  },
+  inject: ['message'],
   methods: {
-    emitInfo() {
-      this.$NMessage.info(
+    createMessage() {
+      this.message.info(
         "I don't know why nobody told you how to unfold your love",
         { duration: 5000 }
       )
