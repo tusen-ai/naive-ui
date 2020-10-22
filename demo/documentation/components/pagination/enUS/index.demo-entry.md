@@ -9,27 +9,17 @@ quick-jumper
 size-picker
 disabled
 ```
-## V-model
-|Prop|Event|
-|-|-|
-|page|change|
 
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|page|`number`|`null`||
-|page-count|`number`|`null`||
-|page-size|`number`|`null`||
+|page-count|`number`|required||
 |page-sizes|`Array<number>`|`[]`||
-|show-size-picker|`boolean`|`false`||
-|show-quick-jumper|`boolean`|`false`||
+|page-size|`number`|`undefined`||
 |page-slot|`number`|`9`||
-|on-page-size-change|`(pageSize: number) => any`|`null`||
-|on-change|`(page: number) => any`|`null`||
-
-## Events
-|Name|Parameters|Description|
-|-|-|-|
-|change|`(page: number)`||
-|page-size-chagne|`(pageSize: number)`||
+|page|`number`|required||
+|show-quick-jumper|`boolean`|`false`||
+|show-size-picker|`boolean`|`false`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|on-update:page|`(page: number) => any`|`undefined`||
+|on-update:page-size|`(pageSize: number) => any`|`undefined`||

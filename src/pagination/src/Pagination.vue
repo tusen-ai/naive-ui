@@ -74,7 +74,7 @@
       class="n-pagination-quick-jumper"
     >
       {{ localeNs.goto }} <n-input
-        v-model="quickJumperValue"
+        v-model:value="quickJumperValue"
         size="small"
         :disabled="disabled"
         @keyup="handleQuickJumperKeyUp"
@@ -135,7 +135,7 @@ export default {
     },
     pageSize: {
       type: Number,
-      default: null
+      default: undefined
     },
     pageSizes: {
       type: Array,
@@ -156,21 +156,21 @@ export default {
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:page': {
       type: Function,
-      default: null
+      default: undefined
     },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:pageSize': {
       type: Function,
-      default: null
+      default: undefined
     },
     // deprecated
     onPageSizeChange: {
       type: Function,
-      default: null
+      default: undefined
     },
     onChange: {
       type: Function,
-      default: null
+      default: undefined
     },
     total: {
       validator (value) {

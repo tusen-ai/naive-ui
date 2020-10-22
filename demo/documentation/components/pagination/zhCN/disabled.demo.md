@@ -1,39 +1,27 @@
 # 禁用
 ```html
-<n-pagination
-  v-model:page="page"
-  :page-count="100"
-  show-size-picker
-  :page-size="pageSize"
-  :page-sizes="[10, 20, 30, 40]"
-  show-quick-jumper
-  :disabled="disabled"
-  @update:page-size="handlePageSizeChange"
-  :style="{ marginBottom: '12px' }"
-/>
-<n-switch v-model="disabled" />
+<n-space vertical>
+  <n-pagination
+    v-model:page="page"
+    v-model:page-size="pageSize"
+    :page-count="100"
+    show-size-picker
+    :page-sizes="[10, 20, 30, 40]"
+    show-quick-jumper
+    :disabled="disabled"
+  />
+  <n-switch v-model:value="disabled" />
+</n-space>
 ```
 
 ```js
 export default {
-  inject: ['message'],
   data () {
     return {
       page: 2,
       pageSize: 20,
       disabled: true
     }
-  },
-  methods: {
-    handlePageSizeChange (pageSize) {
-      this.pageSize = pageSize
-      this.message.info(`Page size is set to ${pageSize}`)
-    }
   }
-}
-```
-```css
-.n-switch {
-  margin-left: 12px;
 }
 ```

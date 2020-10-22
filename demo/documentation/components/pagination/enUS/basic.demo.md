@@ -1,7 +1,7 @@
 # Basic
 ```html
 <n-pagination
-  v-model="page"
+  v-model:page="page"
   :page-count="100"
 />
 ```
