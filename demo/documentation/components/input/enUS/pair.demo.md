@@ -14,6 +14,7 @@
 ```
 ```js
 export default {
+  inject: ['message'],
   data () {
     return {
       placeholder: ['From', 'To'],
@@ -22,22 +23,17 @@ export default {
   },
   methods: {
     handleInputBlur () {
-      this.$NMessage.info('Pairwise Value：Blur')
+      this.message.info('Pairwise Value：Blur')
     },
     handleInputFocus () {
-      this.$NMessage.info('Pairwise Value：Focus')
+      this.message.info('Pairwise Value：Focus')
     },
     handleInputInput () {
-      this.$NMessage.info('Pairwise Value：Input')
+      this.message.info('Pairwise Value：Input')
     },
     handleInputChange () {
-      this.$NMessage.info('Pairwise Value：Change')
+      this.message.info('Pairwise Value：Change')
     }
   }
-}
-```
-```css
-.n-input {
-  margin-bottom: 8px;
 }
 ```

@@ -1,38 +1,35 @@
 # Clearable
 Make input clearable when value is set.
 ```html
-<n-input
-  v-model:value="value"
-  type="input"
-  placeholder="Content is clearable"
-  clearable
-/>
-<n-input
-  v-model:value="value"
-  type="password"
-  placeholder="Content is clearable"
-  clearable
-/>
-<n-input
-  v-model:value="value"
-  type="textarea"
-  placeholder="Content is clearable"
-  round
-  clearable
-/>
-<n-button size="small" @click="value = 'Content is clearable'">Fill Content</n-button>
+<n-space vertical align="stretch">
+  <n-input
+    v-model:value="value"
+    type="input"
+    placeholder="Content is clearable"
+    clearable
+  />
+  <n-input
+    v-model:value="value"
+    type="password"
+    placeholder="Content is clearable"
+    clearable
+  />
+  <n-input
+    v-model:value="value"
+    type="textarea"
+    placeholder="Content is clearable"
+    round
+    clearable
+  />
+  <n-button size="small" @click="value = 'Content is clearable'">Fill Content</n-button>
+</n-space>
 ```
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: null
     }
   }
-}
-```
-```css
-.n-input {
-  margin-bottom: 8px;
 }
 ```

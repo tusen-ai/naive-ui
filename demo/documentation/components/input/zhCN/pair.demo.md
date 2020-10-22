@@ -37,8 +37,3 @@ export default {
   }
 }
 ```
-```css
-.n-input {
-  margin-bottom: 8px;
-}
-```

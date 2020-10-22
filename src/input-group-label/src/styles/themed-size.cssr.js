@@ -1,11 +1,11 @@
-import { cTB, c, cM } from '../../../_utils/cssr'
+import { cTB, c, cM, createKey } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
-    const size = props.$instance.size
+    const { size } = props.$instance
     const local = props.$local
-    const fontSize = local.fontSize[size]
-    const height = local.height[size]
+    const fontSize = local[createKey('fontSize', size)]
+    const height = local[createKey('height', size)]
     return cTB('input-group-label', [
       cM(size + '-size', {
         fontSize,

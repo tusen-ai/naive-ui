@@ -1,7 +1,8 @@
 # 文本输入 Input
 很多年前，人们还在用打孔纸卡输入。
 
-<n-alert title="注意" type="warning">`n-input` 是严格受控的组件，如果你不对 `input` 事件做任何响应，那么它的值永远不会改变。（v-model 并不会出问题，因为 v-model 只是受控用法的简写）</n-alert>
+<n-alert title="注意" type="warning">`n-input` 是严格受控的组件，如果你修改 `value`，那么它的值永远不会改变。（`v-model:value` 并不会出问题）</n-alert>
+
 ## 演示
 ```demo
 basic

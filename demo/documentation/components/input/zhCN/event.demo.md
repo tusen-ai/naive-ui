@@ -1,29 +1,31 @@
 # 事件
 ```html
-<n-input
-  v-model:value="value"
-  @blur="handleBlur"
-  @focus="handleFocus"
-  @change="handleChange"
-  @keyup="handleKeyUp"
-  @input="handleInput"
-  placeholder="触发事件"
-/>
-<n-input
-  v-model:value="value"
-  type="textarea"
-  @blur="handleBlur"
-  @focus="handleFocus"
-  @change="handleChange"
-  @keyup="handleKeyUp"
-  @input="handleInput"
-  placeholder="触发事件"
-/>
+<n-space vertical align="stretch">
+  <n-input
+    v-model:value="value"
+    @blur="handleBlur"
+    @focus="handleFocus"
+    @change="handleChange"
+    @keyup="handleKeyUp"
+    @input="handleInput"
+    placeholder="触发事件"
+  />
+  <n-input
+    v-model:value="value"
+    type="textarea"
+    @blur="handleBlur"
+    @focus="handleFocus"
+    @change="handleChange"
+    @keyup="handleKeyUp"
+    @input="handleInput"
+    placeholder="触发事件"
+  />
+</n-space>
 ```
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       value: null,
       pair: null
@@ -46,10 +48,5 @@ export default {
       this.message.info("[Event input] " + v)
     }
   }
-}
-```
-```css
-.n-input {
-  margin-bottom: 8px;
 }
 ```

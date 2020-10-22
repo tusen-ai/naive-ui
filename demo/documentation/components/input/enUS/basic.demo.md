@@ -1,20 +1,17 @@
 # Basic
 Basic usage of input.
 ```html
-<n-input v-model:value="value" type="input" placeholder="Basic Input"/>
-<n-input v-model:value="value" type="textarea"  placeholder="Basic Textarea"/>
+<n-space vertical align="stretch">
+  <n-input v-model:value="value" type="input" placeholder="Basic Input"/>
+  <n-input v-model:value="value" type="textarea"  placeholder="Basic Textarea"/>
+</n-space>
 ```
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: null
     }
   }
-}
-```
-```css
-.n-input {
-  margin-bottom: 8px;
 }
 ```
