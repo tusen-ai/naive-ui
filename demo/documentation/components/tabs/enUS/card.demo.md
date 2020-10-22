@@ -2,7 +2,7 @@
 A example to use with card. (demo is the card)
 ```html
 <n-tabs
-  v-model="name"
+  v-model:value="name"
   type="card"
   closable
   @close="handleClose"
@@ -25,6 +25,7 @@ A example to use with card. (demo is the card)
 ```
 ```js
 export default {
+  inject: ['message'],
   data () {
     return {
       panels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
@@ -37,7 +38,7 @@ export default {
       this.tabNavScrollable = value
     },
     handleClose (name) {
-      this.$NMessage.info('Close ' + name)
+      this.message.info('Close ' + name)
       const index = this.panels.findIndex(v => name === v.toString())
       if (~index) {
         this.panels.splice(index, 1)

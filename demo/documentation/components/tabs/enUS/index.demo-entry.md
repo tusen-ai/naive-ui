@@ -7,38 +7,29 @@ flex-label
 card
 display-directive
 ```
-## V-model
-|Prop|Event|
-|-|-|
-|active-name|active-name-change|
 
 ## Props
 ### Tabs Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|active-name|`string \| number`|`null`||
-|type|`'line' \| 'card'`|`'line'`||
 |closable|`boolean`|`false`||
-|justify-content|`'space-between' \| 'space-around' \| 'space-evenly'`|`null`||
-|label-size|`'small' \| 'medium' \| 'large' \| 'huge'`|`'medium'`|The size of label, only works when type is line|
+|justify-content|`'space-between' \| 'space-around' \| 'space-evenly'`|`undefined`||
+|label-size|`'small' \| 'medium' \| 'large' \| 'huge'`|`'medium'`|标签的尺寸，只对线型的 Tabs 生效|
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|type|`'line' \| 'card'`|`'line'`||
+|value|`string \| number`|required||
+|on-update:value|`(value: string \| number) => any`|`undefined`||
 
 ### Tab Pane Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|label|`string`|`null`||
-|name|`string \| number`|`null`|**required**|
 |disabled|`boolean`|`false`||
 |display-directive|`'if' \| 'show'`|`'if'`|The directive to use in conditionally rendering. 'if' will use 'v-if' and 'show' will use 'v-show'. When use show directive, the status of tab won't be reset after tab changes.|
+|label|`string`|`null`||
+|name|`string \| number`|`null`|**required**|
 
 ## Slots
 ### Tabs, Tab Pane Slots
 |Name|Parameters|Description|
 |-|-|-|
 |default|`()`||
-
-
-## Events
-|Name|Parameters|Description|
-|-|-|-|
-|active-name-change|`(activeName: string \| number)`||

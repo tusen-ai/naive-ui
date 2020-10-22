@@ -2,7 +2,7 @@
 ```html
 <n-card title="Song of" style="margin-bottom: 16px;">
   <n-tabs
-    v-model="name"
+    v-model:value="name"
     justify-content="space-evenly"
   >
     <n-tab-pane
@@ -27,7 +27,7 @@
 </n-card>
 <n-card title="Too Simple">
   <n-tabs
-    v-model="func"
+    v-model:value="func"
     label-size="large"
   >
     <n-tab-pane

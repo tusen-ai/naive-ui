@@ -24,10 +24,10 @@ line-debug
 ### Tab Pane Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|label|`string`|`null`||
-|name|`string \| number`|required||
 |disabled|`boolean`|`false`||
 |display-directive|`'if' \| 'show'`|`'if'`|选择性渲染使用的指令。if 对应 v-if，show 对应 v-show，使用 show 的时候标签页状态切换后不会被重置|
+|label|`string`|`null`||
+|name|`string \| number`|required||
 
 ## Slots
 ### Tabs, Tab Pane Slots

@@ -23,7 +23,7 @@ const showInput = {
     return h(resolveComponent('n-input'), {
       placeholder: '我的内容不会被重置',
       value: this.value,
-      onInput: v => {
+      'onUpdate:value': v => {
         this.value = v
       }
     })
@@ -40,7 +40,7 @@ const ifInput = {
     return h(resolveComponent('n-input'), {
       placeholder: '我的内容会被重置',
       value: this.value,
-      onInput: v => {
+      'onUpdate:value': v => {
         this.value = v
       }
     })

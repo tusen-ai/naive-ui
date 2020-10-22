@@ -1,7 +1,7 @@
 # Display Directive
 You can set tab-panel's display directive to `if` or `show`. When use show, the tab-panel's content won't be reset after tab changes.
 ```html
-<n-tabs v-model="tab">
+<n-tabs v-model:value="tab">
   <n-tab-pane name="show" display-directive="show" label="show">
     <show-input />
   </n-tab-pane>
@@ -11,22 +11,20 @@ You can set tab-panel's display directive to `if` or `show`. When use show, the 
 </n-tabs>
 ```
 ```js
+import { h, resolveComponent } from 'vue'
+
 const showInput = {
   data () {
     return {
       value: ''
     }
   },
-  render (h) {
-    return h('n-input', {
-      props: {
-        placeholder: 'My content won\'t be reset',
-        value: this.value
-      },
-      on: {
-        input: v => {
-          this.value = v
-        }
+  render () {
+    return h(resolveComponent('n-input'), {
+      placeholder: 'My content won\'t be reset',
+      value: this.value,
+      'onUpdate:value': v => {
+        this.value = v
       }
     })
   }
@@ -38,16 +36,12 @@ const ifInput = {
       value: ''
     }
   },
-  render (h) {
-    return h('n-input', {
-      props: {
-        placeholder: 'My content will be reset',
-        value: this.value
-      },
-      on: {
-        input: v => {
-          this.value = v
-        }
+  render () {
+    return h(resolveComponent('n-input'), {
+      placeholder: 'My content won\'t be reset',
+      value: this.value,
+      'onUpdate:value': v => {
+        this.value = v
       }
     })
   }

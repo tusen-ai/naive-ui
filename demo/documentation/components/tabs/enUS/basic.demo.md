@@ -2,7 +2,7 @@
 ```html
 <n-card title="Song of" style="margin-bottom: 16px;">
   <n-tabs
-    v-model="name"
+    v-model:value="name"
   >
     <n-tab-pane
       name="oasis"
@@ -26,7 +26,7 @@
 </n-card>
 <n-card>
   <n-tabs
-    v-model="func"
+    v-model:value="func"
     label-size="large"
   >
     <n-tab-pane
