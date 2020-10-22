@@ -2,7 +2,7 @@
 你可以设定监听哪个元素来触发 Back Top。
 ```html
 <n-back-top
-  :target="target"
+  :listen-to="target"
   :bottom="220"
   :visibility-height="10"
   :themed-style="{

@@ -53,10 +53,12 @@
 <script>
 import { ref, computed, toRef, watch, nextTick } from 'vue'
 import getScrollParent from '../../_utils/dom/getScrollParent'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
 import formatLength from '../../_utils/css/formatLength'
-import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
 import { warn } from '../../_utils/naive/warn'
 import getTarget from '../../_utils/dom/get-target'
@@ -69,7 +71,7 @@ export default {
     NLazyTeleport
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles)
   ],
@@ -88,7 +90,7 @@ export default {
     },
     to: {
       type: [String, Object],
-      default: undefined
+      default: 'body'
     },
     visibilityHeight: {
       type: Number,
@@ -99,8 +101,8 @@ export default {
       default: () => {}
     },
     listenTo: {
-      type: [String, Object],
-      default: null
+      type: [String, Object, Function],
+      default: undefined
     },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:show': {
@@ -109,8 +111,11 @@ export default {
     },
     // deprecated
     target: {
-      type: Function,
-      default: null
+      validator () {
+        warn('back-top', '`target` is deprecated, please use `listen-to` instead.')
+        return true
+      },
+      default: undefined
     },
     onShow: {
       type: Function,
@@ -177,17 +182,17 @@ export default {
       if (this.scrollListenerRegistered) return
       this.scrollListenerRegistered = true
       const scrollElement =
-        getTarget(this.listenTo) ||
         (this.target && this.target()) ||
+        getTarget(this.listenTo) ||
         getScrollParent(this.$refs.placeholder)
       if (__DEV__ && !scrollElement) {
-        warn('anchor', 'Container of back-top element is not found. This could be a bug of naive-ui.')
+        warn('back-top', 'Container of back-top element is not found. This could be a bug of naive-ui.')
       }
       this.scrollElement = scrollElement
       const { to } = this
       const target = typeof to === 'string' ? document.querySelector(to) : to
       if (__DEV__ && !target) {
-        warn('anchor', 'Target is not found.')
+        warn('back-top', 'Target is not found.')
       }
       if (scrollElement) {
         scrollElement.addEventListener('scroll', this.handleScroll)

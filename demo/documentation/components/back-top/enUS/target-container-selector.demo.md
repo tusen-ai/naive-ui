@@ -2,7 +2,7 @@
 You can specify target to listen scroll event of.
 ```html
 <n-back-top
-  :target="target"
+  :listen-to="target"
   :bottom="220"
   :visibility-height="10"
   :style="{

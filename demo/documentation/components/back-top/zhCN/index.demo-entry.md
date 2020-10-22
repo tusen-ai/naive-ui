@@ -22,4 +22,4 @@ target-container-selector
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 |to|`string \| HTMLElement`|`'body'`|BackTop 渲染的容器节点|
 |visibility-height|`number`|`180`||
-|on-update:show|`(value: boolean) => any`|`() => {}`||
+|on-update:show|`(value: boolean) => any`|`undefined`||
