@@ -10,21 +10,21 @@ border
 ### List Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |bordered|`boolean`|`false`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 
 ## Slots
 ### List Slots
 |名称|参数|说明|
 |-|-|-|
-|header|`()`||
 |default|`()`||
 |footer|`()`||
+|header|`()`||
 
 ### List Item Slots
 |名称|参数|说明|
 |-|-|-|
-|prefix|`()`||
 |default|`()`||
+|prefix|`()`||
 |suffix|`()`||
 

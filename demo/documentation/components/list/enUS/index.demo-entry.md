@@ -10,21 +10,21 @@ border
 ### List Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |bordered|`boolean`|`false`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 
 ## Slots
 ### List Slots
 |Name|Parameters|Description|
 |-|-|-|
-|header|`()`||
 |default|`()`||
 |footer|`()`||
+|header|`()`||
 
 ### List Item Slots
 |Name|Parameters|Description|
 |-|-|-|
-|prefix|`()`||
 |default|`()`||
+|prefix|`()`||
 |suffix|`()`||
 
