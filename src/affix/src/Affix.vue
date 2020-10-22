@@ -13,14 +13,16 @@
 
 <script>
 import getScrollParent from '../../_utils/dom/getScrollParent'
-import usecssr from '../../_mixins/usecssr'
+import { usecssr } from '../../_mixins'
 import styles from './styles/index.js'
 import getTarget from '../../_utils/dom/get-target'
 import { warn } from '../../_utils/naive/warn'
 
 export default {
   name: 'Affix',
-  mixins: [usecssr(styles)],
+  mixins: [
+    usecssr(styles)
+  ],
   props: {
     listenTo: {
       type: [String, Object],
@@ -28,19 +30,19 @@ export default {
     },
     offsetTop: {
       type: Number,
-      default: null
+      default: undefined
     },
     top: {
       type: Number,
-      default: null
+      default: undefined
     },
     offsetBottom: {
       type: Number,
-      default: null
+      default: undefined
     },
     bottom: {
       type: Number,
-      default: null
+      default: undefined
     },
     position: {
       type: String,
@@ -48,8 +50,11 @@ export default {
     },
     // deprecated
     target: {
-      type: Function,
-      default: null
+      validator () {
+        warn('affix', '`target` is deprecated, please use `listen-to` instead.')
+        return true
+      },
+      default: undefined
     }
   },
   data () {
@@ -66,23 +71,23 @@ export default {
       return this.stickToBottom || this.stickToTop
     },
     syntheticOffsetTop () {
-      return this.offsetTop === null ? this.top : this.offsetTop
+      return this.offsetTop === undefined ? this.top : this.offsetTop
     },
     syntheticTop () {
-      return this.top === null ? this.offsetTop : this.top
+      return this.top === undefined ? this.offsetTop : this.top
     },
     syntheticBottom () {
-      return this.bottom === null ? this.offsetBottom : this.bottom
+      return this.bottom === undefined ? this.offsetBottom : this.bottom
     },
     syntheticOffsetBottom () {
-      return this.offsetBottom === null ? this.bottom : this.offsetBottom
+      return this.offsetBottom === undefined ? this.bottom : this.offsetBottom
     },
     style () {
       const style = {}
-      if (this.stickToTop && this.syntheticOffsetTop !== null) {
+      if (this.stickToTop && this.syntheticOffsetTop !== undefined) {
         style.top = `${this.syntheticTop}px`
       }
-      if (this.stickToBottom && this.syntheticOffsetBottom !== null) {
+      if (this.stickToBottom && this.syntheticOffsetBottom !== undefined) {
         style.bottom = `${this.syntheticBottom}px`
       }
       return style
@@ -143,14 +148,14 @@ export default {
         syntheticOffsetTop,
         syntheticOffsetBottom
       } = this
-      if (syntheticOffsetTop !== null && pxToTop <= syntheticOffsetTop) {
+      if (syntheticOffsetTop !== undefined && pxToTop <= syntheticOffsetTop) {
         this.stickToTop = true
         this.topAffixedTriggerScrollTop = containerEl.scrollTop - (syntheticOffsetTop - pxToTop)
       } else {
         this.stickToTop = false
         this.topAffixedTriggerScrollTop = null
       }
-      if (syntheticOffsetBottom !== null && pxToBottom <= syntheticOffsetBottom) {
+      if (syntheticOffsetBottom !== undefined && pxToBottom <= syntheticOffsetBottom) {
         this.stickToBottom = true
         this.bottomAffixedTriggerScrollTop = containerEl.scrollTop + syntheticOffsetBottom - pxToBottom
       } else {
