@@ -7,23 +7,24 @@ basic
 size
 filterable
 ```
+<!-- large-data -->
 
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|disabled|`boolean`|`true`||
+|filterable|`boolean`|`false`||
+|filter|`(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean`|一个简单的标签字符串匹配函数||
+|options|`Array<TransferOption>`|`[]`||
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
+|source-filter-placeholder|`string`|`undefined`||
+|source-title|`string`|`'源项'`||
+|target-filter-placeholder|`string`|`undefined`||
+|target-title|`string`|`'目标项'`||
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 |value|`Array<string \| number>`|`null`||
-|options|`Array<TransferOption>`|`[]`||
-|disabled|`boolean`|`true`||
-|source-title|`string`|`'源项'`||
-|target-title|`string`|`'目标项'`||
-|filterable|`boolean`|`false`||
-|source-filter-placeholder|`string`|`undefined`||
-|target-filter-placeholder|`string`|`undefined`||
-|filter|`(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean`|一个简单的标签字符串匹配函数||
-|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |on-update:value|`(value: Array<string \| number>) => any`|`undefined`||
-
+<!-- |virtual-scroll|`boolean`|`false`|If use virtual scroll on transfer. If set to `true` it can handles large data (and turn transfer animation off)| -->
 
 ### TransferOption Type
 |属性|类型|说明|
