@@ -146,9 +146,10 @@ placeable 进行了大调整
     - `$NLoadingBar`
   - new
     - `n-loading-bar-provider`
-- [ ] log
-  - TODO
-    - event bug
+- [x] log
+  - deprecate
+    - `scrollToTop` => `scrollTo`
+    - `scrollToBottom` => `scrollTo`
 - [x] menu
   - new
     - `popover-body-style`

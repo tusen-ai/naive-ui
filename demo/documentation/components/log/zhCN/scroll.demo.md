@@ -3,10 +3,10 @@
 
 ```html
 <n-button-group>
-  <n-button @click="scrollTo('bottom', false)">滚动到底部</n-button>
-  <n-button @click="scrollTo('bottom', true)">滚动到底部（无事件）</n-button>
-  <n-button @click="scrollTo('top', false)">滚动到顶部</n-button>
-  <n-button @click="scrollTo('top', true)">滚动到顶部（无事件）</n-button>
+  <n-button @click="scrollTo({ position: 'bottom', slient: false })">滚动到底部</n-button>
+  <n-button @click="scrollTo({ position: 'bottom', slient: true })">滚动到底部（无事件）</n-button>
+  <n-button @click="scrollTo({ position: 'top', slient: false })">滚动到顶部</n-button>
+  <n-button @click="scrollTo({ position: 'top', slient: true })">滚动到顶部（无事件）</n-button>
 </n-button-group>
 <n-log
   ref="log"
@@ -20,51 +20,47 @@
 ```
 
 ```js
-function log() {
+function log () {
   const l = []
   for (let i = 0; i < 10; ++i) {
     l.push(Math.random().toString(16))
   }
-  return l.join("\n") + "\n"
+  return l.join('\n') + '\n'
 }
 
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       loading: false,
       log: log()
     }
   },
   methods: {
-    clear() {
-      this.log = ""
+    clear () {
+      this.log = ''
     },
-    handleRequireMore(from) {
-      this.message.info("Require More from " + from)
+    handleRequireMore (from) {
+      this.message.info('Require More from ' + from)
       if (this.loading) return
       this.loading = true
       setTimeout(() => {
-        if (from === "top") {
+        if (from === 'top') {
           this.log = log() + this.log
-        } else if (from === "bottom") {
+        } else if (from === 'bottom') {
           this.log = this.log + log()
         }
         this.loading = false
       }, 1000)
     },
     handleReachTop() {
-      this.message.info("Reach Top")
+      this.message.info('Reach Top')
     },
     handleReachBottom() {
-      this.message.info("Reach Bottom")
+      this.message.info('Reach Bottom')
     },
-    scrollTo(to, dismissEvent = false) {
-      if (to === "bottom") {
-        this.$refs.log.scrollToBottom(dismissEvent)
-      } else {
-        this.$refs.log.scrollToTop(dismissEvent)
-      }
+    scrollTo(...args) {
+      this.$refs.log.scrollTo(...args)
     }
   }
 }

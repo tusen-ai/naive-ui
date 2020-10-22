@@ -4,10 +4,10 @@ You can easily make log scroll to top or bottom. Also you can make the scroll ac
 
 ```html
 <n-button-group>
-  <n-button @click="scrollTo('bottom', false)">Scroll To Bottom</n-button>
-  <n-button @click="scrollTo('bottom', true)">Scroll To Bottom (silent)</n-button>
-  <n-button @click="scrollTo('top', false)">Scroll To Top</n-button>
-  <n-button @click="scrollTo('top', true)">Scroll To Top (silent)</n-button>
+  <n-button @click="scrollTo({ position: 'bottom', slient: false })">Scroll To Bottom</n-button>
+  <n-button @click="scrollTo({ position: 'bottom', slient: true })">Scroll To Bottom (silent)</n-button>
+  <n-button @click="scrollTo({ position: 'top', slient: false })">Scroll To Top</n-button>
+  <n-button @click="scrollTo({ position: 'top', slient: true })">Scroll To Top (silent)</n-button>
 </n-button-group>
 <n-log
   ref="log"
@@ -21,51 +21,47 @@ You can easily make log scroll to top or bottom. Also you can make the scroll ac
 ```
 
 ```js
-function log() {
+function log () {
   const l = []
   for (let i = 0; i < 10; ++i) {
     l.push(Math.random().toString(16))
   }
-  return l.join("\n") + "\n"
+  return l.join('\n') + '\n'
 }
 
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       loading: false,
       log: log()
     }
   },
   methods: {
-    clear() {
-      this.log = ""
+    clear () {
+      this.log = ''
     },
-    handleRequireMore(from) {
-      this.message.info("Require More from " + from)
+    handleRequireMore (from) {
+      this.message.info('Require More from ' + from)
       if (this.loading) return
       this.loading = true
       setTimeout(() => {
-        if (from === "top") {
+        if (from === 'top') {
           this.log = log() + this.log
-        } else if (from === "bottom") {
+        } else if (from === 'bottom') {
           this.log = this.log + log()
         }
         this.loading = false
       }, 1000)
     },
-    handleReachTop() {
-      this.message.info("Reach Top")
+    handleReachTop () {
+      this.message.info('Reach Top')
     },
-    handleReachBottom() {
-      this.message.info("Reach Bottom")
+    handleReachBottom () {
+      this.message.info('Reach Bottom')
     },
-    scrollTo(to, dismissEvent = false) {
-      if (to === "bottom") {
-        this.$refs.log.scrollToBottom(dismissEvent)
-      } else {
-        this.$refs.log.scrollToTop(dismissEvent)
-      }
+    scrollTo(...args) {
+      this.$refs.log.scrollTo(...args)
     }
   }
 }

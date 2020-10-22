@@ -285,6 +285,23 @@ const naive = create({
 })
 ```
 
+## 2020.10.22
+```js
+// extend Element.prototype.scrollTo
+// override 1 (xCoord, yCoord) keep it
+// overried 2 ScrollOptions
+// ScrollOptions {
+//   x: number,
+//   y: number,
+//   behavior: 'auto' | 'smooth'
+//   index?: number
+//   key?: number
+//   el?: Element
+//   position?: 'bottom' | 'top',
+//   slient?: boolean
+// }
+```
+
 ## TODO 排序不分先后
 1. <del>Focus Detector on Time Selector</del>
 2. <del>Menu Root Indent = 0 可能造成问题</del>

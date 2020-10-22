@@ -39,6 +39,7 @@ import NScrollbar from '../../scrollbar'
 import NLogLoader from './LogLoader.vue'
 import NLogLine from './LogLine.vue'
 import { throttle } from 'lodash-es'
+import { warn } from '../../_utils'
 import styles from './styles'
 
 export default {
@@ -124,7 +125,7 @@ export default {
   data () {
     return {
       memorizedScrollTop: 0,
-      dismissEvent: false,
+      slient: false,
       memorizedScrollBottom: null
     }
   },
@@ -149,9 +150,9 @@ export default {
       return this.hljs || this.$naive.hljs
     },
     handleScroll (e, container, content) {
-      if (this.dismissEvent) {
+      if (this.slient) {
         this.$nextTick(() => {
-          this.dismissEvent = false
+          this.slient = false
         })
         return
       }
@@ -177,21 +178,25 @@ export default {
         if (onReachBottom) onReachBottom()
       }
     },
-
     handleWheel (e) {
-      if (this.dismissEvent) {
+      if (this.slient) {
         this.$nextTick(() => {
-          this.dismissEvent = false
+          this.slient = false
         })
         return
       }
-      if (this.scrollbarRef && this.scrollbarRef.containerRef) {
-        const container = this.scrollbarRef.containerRef
-        const containerHeight = container.offsetHeight
-        const containerScrollTop = container.scrollTop
-        if (this.scrollbarRef.$refs.scrollContent) {
-          const content = this.scrollbarRef.$refs.scrollContent
-          const contentHeight = content.offsetHeight
+      const {
+        scrollbarRef
+      } = this
+      if (scrollbarRef) {
+        const {
+          containerRef,
+          contentRef
+        } = scrollbarRef
+        if (containerRef && contentRef) {
+          const containerHeight = containerRef.offsetHeight
+          const containerScrollTop = containerRef.scrollTop
+          const contentHeight = contentRef.offsetHeight
           const scrollTop = containerScrollTop
           const scrollBottom =
             contentHeight - containerScrollTop - containerHeight
@@ -211,21 +216,34 @@ export default {
         }
       }
     },
-    scrollToTop (dismissEvent = false) {
-      this.scrollTo('top', dismissEvent)
-    },
-    scrollToBottom (dismissEvent = false) {
-      this.scrollTo('bottom', dismissEvent)
-    },
-    scrollTo (to, dismissEvent = false) {
-      if (dismissEvent) {
-        this.dismissEvent = true
+    scrollTo (options) {
+      const {
+        scrollbarRef
+      } = this
+      const {
+        slient,
+        y,
+        position
+      } = options
+      if (slient) {
+        this.slient = true
       }
-      if (to === 'bottom') {
-        this.scrollbarRef.scrollTo(0, Number.MAX_SAFE_INTEGER)
-      } else {
-        this.scrollbarRef.scrollTo(0, 0)
+      if (y !== undefined) {
+        scrollbarRef.scrollTo(0, y)
+      } else if (position === 'bottom') {
+        scrollbarRef.scrollTo(0, Number.MAX_SAFE_INTEGER)
+      } else if (position === 'top') {
+        scrollbarRef.scrollTo(0, 0)
       }
+    },
+    // deprecated
+    scrollToTop (slient = false) {
+      warn('log', '`scrollToTop` is deprecated, please use `scrollTo({ position: \'top\'})` instead.')
+      this.scrollTo('top', slient)
+    },
+    scrollToBottom (slient = false) {
+      warn('log', '`scrollToTop` is deprecated, please use `scrollTo({ position: \'bottom\'})` instead.')
+      this.scrollTo('bottom', slient)
     }
   }
 }
