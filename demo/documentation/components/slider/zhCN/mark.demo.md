@@ -1,19 +1,23 @@
 # 标记
 ```html
-<n-slider
-  v-model:value="value"
-  range
-  :marks="marks"
-  :step="10"
-/>
-<n-input-number
-  size="small"
-  v-model:value="value[0]"
-/>
-<n-input-number
-  size="small"
-  v-model:value="value[1]"
-/>
+<n-space vertical align="stretch">
+  <n-slider
+    v-model:value="value"
+    range
+    :marks="marks"
+    :step="10"
+  />
+  <n-space>
+    <n-input-number
+      size="small"
+      v-model:value="value[0]"
+    />
+    <n-input-number
+      size="small"
+      v-model:value="value[1]"
+    />
+  </n-space>
+</n-space>
 ```
 ```js
 export default {
@@ -26,10 +30,5 @@ export default {
       }
     }
   }
-}
-```
-```css
-.n-input-number {
-  margin: 0 12px 8px 0;
 }
 ```

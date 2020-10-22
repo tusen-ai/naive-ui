@@ -1,18 +1,22 @@
 # 范围
 ```html
-<n-slider
-  v-model:value="value"
-  range
-  :step="1"
-/>
-<n-input-number
-  size="small"
-  v-model:value="value[0]"
-/>
-<n-input-number
-  size="small"
-  v-model:value="value[1]"
-/>
+<n-space vertical align="stretch">
+  <n-slider
+    v-model:value="value"
+    range
+    :step="1"
+  />
+  <n-space>
+    <n-input-number
+      size="small"
+      v-model:value="value[0]"
+    />
+    <n-input-number
+      size="small"
+      v-model:value="value[1]"
+    />
+  </n-space>
+</n-space>
 ```
 ```js
 export default {
@@ -21,13 +25,5 @@ export default {
       value: [50, 70]
     }
   }
-}
-```
-```css
-.n-slider {
-  margin-bottom: 8px;
-}
-.n-input-number {
-  margin: 0 12px 8px 0;
 }
 ```

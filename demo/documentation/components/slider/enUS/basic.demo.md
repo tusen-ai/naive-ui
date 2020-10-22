@@ -1,13 +1,15 @@
 # Basic
 ```html
-<n-slider
-  v-model="value"
-  :step="10"
-/>
-<n-input-number
-  size="small"
-  v-model="value"
-/>
+<n-space vertical align="stretch">
+  <n-slider
+    v-model:value="value"
+    :step="10"
+  />
+  <n-input-number
+    size="small"
+    v-model:value="value"
+  />
+</n-space>
 ```
 ```js
 export default {
@@ -16,10 +18,5 @@ export default {
       value: 50
     }
   }
-}
-```
-```css
-.n-slider {
-  margin-bottom: 8px;
 }
 ```

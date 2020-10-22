@@ -11,12 +11,12 @@ mark
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|marks|`{ [markValue: number]: string }`|`undefined`||
 |disabled|`boolean`|`false`||
-|min|`number`|`0`||
+|marks|`{ [markValue: number]: string }`|`undefined`||
 |max|`number`|`100`||
-|step|`number`|`1`||
+|min|`number`|`0`||
 |range|`boolean`|`false`||
+|step|`number`|`1`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |value|`number \| [number, number]`|`null`|
 |on-update:value|`(value: number \| [number, number]) => any`|`undefined`||
