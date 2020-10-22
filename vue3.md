@@ -219,11 +219,13 @@ placeable 进行了大调整
     - `on-change` => `on-update:checked-value`
 - [x] result
 - [x] scrollbar
-- [x] select
+- [ ] select
   - break
     - `v-model` => `v-model:value`
   - deprecated
     - `on-change` => `on-update:value`
+  - TODO
+    - `on-scroll`
 - [x] slider
   - deprecated
     - `on-change` => `on-update:value`

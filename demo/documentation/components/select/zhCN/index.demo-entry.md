@@ -32,7 +32,6 @@ menu-debug
 |filter|`(pattern: string, option: Object) => boolean`|一个简单的字符串搜索算法||
 |loading|`boolean`|`false`||
 |multiple|`boolean`|`false`||
-|on-create|`(label: string) => SelectOption`|`label => ({ label, value: label })`|在输入内容时如何创建一个选项。注意 `filter` 对这个生成的选项同样会生效。同时确保这个选项和其他选项的 `value` 不要有重复|
 |options|`Array<SelectOption \| SelectOptionGroup>`|`[]`||
 |placeholder|`string`|`'请选择'`||
 |remote|`boolean`|`false`|是否要异步获取选项。注意如果设定了，那么 `fitler` 和 `tag` 都不会对 `options` 生效。这个时候你在全权控制 `options`|
@@ -41,6 +40,7 @@ menu-debug
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 |value|`Array<string \| number> \| string \| number`|`false`||
 |on-blur|`() => any`|选择器 Blur 时发出|
+|on-create|`(label: string) => SelectOption`|`label => ({ label, value: label })`|在输入内容时如何创建一个选项。注意 `filter` 对这个生成的选项同样会生效。同时确保这个选项和其他选项的 `value` 不要有重复|
 |on-focus|`() => any`|选择器 Focus 时发出|
 |on-scroll|`(e: ScrollEvent) => any`|选择菜单在滚动|
 |on-search|`(value: string) => any`||
