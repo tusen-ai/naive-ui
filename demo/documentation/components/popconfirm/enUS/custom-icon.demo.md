@@ -8,21 +8,21 @@
     <n-icon
       color="red"
     >
-      <md-hand />
+      <hand-icon />
     </n-icon>
   </template>
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button>Quit Game</n-button>
   </template>
   How can you be strong without purchasing?
 </n-popconfirm>
 ```
 ```js
-import mdHand from 'naive-ui/lib/icons/md-hand'
+import HandIcon from 'naive-ui/lib/icons/md-hand'
 
 export default {
   components: {
-    mdHand
+    HandIcon
   }
 }
 ```

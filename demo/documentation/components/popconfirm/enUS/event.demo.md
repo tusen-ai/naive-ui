@@ -13,12 +13,13 @@
 ```
 ```js
 export default {
+  inject: ['message'],
   methods: {
     handlePositiveClick () {
-      this.$NMessage.info('positive click')
+      this.message.info('positive click')
     },
     handleNegativeClick () {
-      this.$NMessage.info('negative click')
+      this.message.info('negative click')
     }
   }
 }

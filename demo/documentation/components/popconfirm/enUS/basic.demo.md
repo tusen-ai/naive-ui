@@ -4,7 +4,7 @@
   @positive-click="handlePositiveClick"
   @negative-click="handleNegativeClick"
 >
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button>Quote</n-button>
   </template>
   Things pass us by. Nobody can catch them. That's the way we live our lives.
@@ -12,12 +12,13 @@
 ```
 ```js
 export default {
+  inject: ['message'],
   methods: {
     handlePositiveClick () {
-      this.$NMessage.success('Yes')
+      this.message.success('Yes')
     },
     handleNegativeClick () {
-      this.$NMessage.warning('No')
+      this.message.warning('No')
     }
   }
 }

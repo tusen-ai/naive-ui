@@ -8,7 +8,7 @@
     <n-icon
       color="red"
     >
-      <md-hand />
+      <hand-icon />
     </n-icon>
   </template>
   <template v-slot:trigger>
@@ -18,11 +18,11 @@
 </n-popconfirm>
 ```
 ```js
-import mdHand from 'naive-ui/lib/icons/md-hand'
+import HandIcon from 'naive-ui/lib/icons/md-hand'
 
 export default {
   components: {
-    mdHand
+    HandIcon
   }
 }
 ```
