@@ -43,8 +43,11 @@
 </template>
 
 <script>
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
 import iosCheckmarkCircle from '../../_icons/ios-checkmark-circle.vue'
 import iosAlert from '../../_icons/ios-alert.vue'
 import iosInformationCircle from '../../_icons/ios-information-circle.vue'
@@ -54,7 +57,6 @@ import image404 from './404.vue'
 import image500 from './500.vue'
 import image418 from './418.vue'
 import image403 from './403.vue'
-import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
 
 export default {
@@ -71,7 +73,7 @@ export default {
     image500
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles)
   ],
@@ -88,11 +90,11 @@ export default {
     },
     title: {
       type: String,
-      default: null
+      default: undefined
     },
     description: {
       type: String,
-      default: null
+      default: undefined
     }
   }
 }
