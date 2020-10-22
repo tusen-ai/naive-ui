@@ -9,14 +9,16 @@
 The following code shows how to set hljs of Naive UI. Importing highlight.js on demand is recommonded, because it can significantly reduce bundle size of your app.
 
 ```js
-import Vue from 'vue'
-import NaiveUI from 'naive-ui'
+// ...
+import naive from 'naive-ui'
 import hljs from 'highlight.js/lib/highlight'
 import cpp from 'highlight.js/lib/languages/cpp'
 
 hljs.registerLanguage('cpp', cpp)
-Vue.use(NaiveUI)
-NaiveUI.setHljs(hljs)
+naive.setHljs(hljs)
+
+// ...
+app.use(naive)
 ```
 
 ## Demos
@@ -28,8 +30,8 @@ basic
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|language|`string`|`null`||
 |code|`string`|`null`||
+|hljs|`Object`|`undefined`|If you want to set hljs locally, set it on code by the prop|
+|language|`string`|`undefined`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |trim|`boolean`|`true`||
-|hljs|`Object`|`null`|If you want to set hljs locally, set it on code by the prop|
