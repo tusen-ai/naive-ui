@@ -1,5 +1,5 @@
 # Mask Closable
-You can make mask click not to close modal when using v-model on modal.
+Use `mask-closable=false` to make modal not emit the event which may close the modal.
 ```html
 <n-button
   @click="modalActive = true"
@@ -7,7 +7,7 @@ You can make mask click not to close modal when using v-model on modal.
   Start Me up
 </n-button>
 <n-modal
-  v-model="modalActive" 
+  v-model:show="modalActive" 
   :mask-closable="false"
   preset="confirm" 
   title="Confirm"
@@ -21,6 +21,7 @@ You can make mask click not to close modal when using v-model on modal.
 ```
 ```js
 export default {
+  inject: ['message'],
   data () {
     return {
       modalActive: false,
@@ -28,11 +29,11 @@ export default {
   },
   methods: {
     cancelCallback () {
-      this.$NMessage.success('Cancel')
+      this.message.success('Cancel')
       this.modalActive = false
     },
     submitCallback () {
-      this.$NMessage.success('Submit')
+      this.message.success('Submit')
       this.modalActive = false
     }
   }

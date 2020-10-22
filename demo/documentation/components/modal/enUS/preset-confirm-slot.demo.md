@@ -6,7 +6,7 @@ Slots are also related to preset.
 >
   Start Me up
 </n-button>
-<n-modal v-model="modalActive" 
+<n-modal v-model:show="modalActive" 
   preset="confirm"
   title="Confirm"
 >

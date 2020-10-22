@@ -7,9 +7,9 @@ Modal has some presets, which means you can use props & slots of the preset afte
   Start Me up
 </n-button>
 <n-modal
-  v-model="modalActive"
+  v-model:show="modalActive"
   preset="card"
-  overlay-style="width: 600px;"
+  :body-style="bodyStyle"
   title="Modal"
   :bordered="false"
   size="huge"
@@ -31,6 +31,9 @@ Modal has some presets, which means you can use props & slots of the preset afte
 export default {
   data () {
     return {
+      bodyStyle: {
+        width: '600px'
+      },
       modalActive: false,
     }
   }

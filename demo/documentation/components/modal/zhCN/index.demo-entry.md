@@ -22,7 +22,7 @@ drawer-debug
 |-|-|-|-|
 |display-directive|`'if' \| 'show'`|`'if'`|使用何种指令控制模态框主体的条件渲染|
 |mask-closable|`boolean`|`true`|点击遮罩时是否发出 `update:show` 事件|
-|body-style|`Object \| null`|`null`|当使用 `preset` 时候主体的样式|
+|body-style|`Object \| null`|`null`||
 |preset|`'card' \| 'dialog' \| null`|`null`|模态框使用何种预设|
 |show|`boolean`|`false`|是否展示 Modal|
 |theme|`'light' \| 'dark' \| null \| string`|`null`||

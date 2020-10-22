@@ -10,20 +10,18 @@ preset-card
 preset-confirm
 preset-confirm-slot
 ```
-## V-model
-|Prop|Event|
-|-|-|
-|show|hide|
 
 ## Props
 ### Modal
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|show|`boolean`|`false`||
+|display-directive|`'if' \| 'show'`|`'if'`|Use which directive to control the rendering of modal body.|
 |mask-closable|`boolean`|`true`|Whether to emit `hide` event when click mask.|
+|body-style|`Object`|`null`||
 |preset|`'card' \| 'confirm'`|`null`||
-|overlay-style|`Object`|`null`|The content style when use `preset`.|
+|show|`boolean`|`false`|Whether to show modal.|
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|on-update:show|`(value: boolean) => any`||Callback when modal's display status is changed.|
 
 ### Modal with Preset Card
 See [Card props](n-card#Props)
@@ -40,14 +38,3 @@ See [Dialog props](n-dialog#Props)
 See [Card slots](n-card#Slots)
 ### Modal with Preset Dialog
 See [Dialog slots](n-dialog#Slots)
-
-## Events
-### Modal
-|Name|Parameters|Description|
-|-|-|-|
-|hide|`(show: false)`||
-
-### Modal with Preset Card
-See [Card events](n-card#Events)
-### Modal with Preset Dialog
-See [Dialog events](n-dialog#Events)

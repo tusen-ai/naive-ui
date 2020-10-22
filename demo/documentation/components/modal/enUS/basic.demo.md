@@ -6,7 +6,7 @@ Basic usage of modal. You can put anything in modal, a card for example.
 >
   Start Me up
 </n-button>
-<n-modal v-model="modalActive">
+<n-modal v-model:show="modalActive">
   <n-card
     style="width: 600px;"
     title="Modal"

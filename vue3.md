@@ -180,6 +180,9 @@ placeable 进行了大调整
     - `overlay-style` => `body-style`
   - remove
     - default hide behavior for preset
+  - TODO
+    - BUG:
+      - dialog preset slot
 - [x] notification
   - deprecate
     - `open` => `create`
