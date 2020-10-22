@@ -1,16 +1,14 @@
 # 受控的文件列表
 下面的例子纯属玩笑。
 ```html
-<div>
-  <n-upload
-    action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
-    :file-list="fileList"
-    @change="handleUploadChange"
-    :on-remove="handleRemove"
-  >
-    <n-button>上传文件</n-button>
-  </n-upload>
-</div>
+<n-upload
+  action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+  :file-list="fileList"
+  @change="handleUploadChange"
+  @remove="handleRemove"
+>
+  <n-button>上传文件</n-button>
+</n-upload>
 ```
 ```js
 export default {

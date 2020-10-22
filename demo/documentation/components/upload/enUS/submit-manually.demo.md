@@ -8,25 +8,18 @@ You can use `submit` method to submit in uncontrolled manner. Also you can do it
 >
   Upload File
 </n-button>
-<div>
-  <n-upload
-    @change="handleChange"
-    action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
-    :default-upload="false"
-    multiple
-    ref="upload"
-  >
-    <n-button>Select File</n-button>
-  </n-upload>
-</div>
+<n-upload
+  @change="handleChange"
+  action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+  :default-upload="false"
+  multiple
+  ref="upload"
+>
+  <n-button>Select File</n-button>
+</n-upload>
 ```
 ```js
-import archiveOutline from 'naive-ui/lib/icons/archive-outline'
-
 export default {
-  components: {
-    archiveOutline
-  },
   data () {
     return {
       fileListLength: 0

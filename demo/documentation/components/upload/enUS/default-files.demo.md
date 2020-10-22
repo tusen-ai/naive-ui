@@ -1,13 +1,11 @@
 # Default File List
 ```html
-<div>
-  <n-upload
-    action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
-    :default-file-list="defaultFileList"
-  >
-    <n-button>Upload File</n-button>
-  </n-upload>
-</div>
+<n-upload
+  action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+  :default-file-list="defaultFileList"
+>
+  <n-button>Upload File</n-button>
+</n-upload>
 ```
 ```js
 export default {
