@@ -5,14 +5,12 @@ After set `remote`, use `on-load` callback to load data. When loading async, all
   block-node
   checkable
   remote
-  draggable
   :data="data"
   :checked-keys="checkedKeys"
   :on-load="handleLoad"
-  @drop="handleDrop"
-  @checked-keys-change="handleCheckedKeysChange"
+  @update:checked-keys="handleCheckedKeysChange"
   :expanded-keys="expandedKeys"
-  @expanded-keys-change="handleExpandedKeysChange"
+  @update:expanded-keys="handleExpandedKeysChange"
 />
 ```
 ```js

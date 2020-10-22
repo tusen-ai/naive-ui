@@ -98,7 +98,7 @@ export default {
     },
     onLoad: {
       type: Function,
-      default: null
+      default: undefined
     },
     selectable: {
       type: Boolean,

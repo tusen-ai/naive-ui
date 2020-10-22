@@ -9,8 +9,8 @@ Set `draggable` and write bunch of codes to make drag & drop work.
   :checked-keys="checkedKeys"
   :expanded-keys="expandedKeys"
   @drop="handleDrop"
-  @checked-keys-change="handleCheckedKeysChange"
-  @expanded-keys-change="handleExpandedKeysChange"
+  @update:checked-keys="handleCheckedKeysChange"
+  @update:expanded-keys="handleExpandedKeysChange"
 />
 ```
 ```js

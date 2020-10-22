@@ -24,11 +24,10 @@ drag-drop-debug
 |default-expand-all|`boolean`|`false`||
 |default-expanded-keys|`Array<string \| number>`|`[]`||
 |default-selected-keys|`Array<string \| number>`|`[]`||
-|expand-on-dragenter|`boolean`|`true`|是否在拖入后展开节点|
 |expanded-keys|`Array<string \| number>`|`null`|如果设定则展开受控|
 |filter|`(node: TreeNode) => boolean`|一个简单的字符串过滤算法||
 |multiple|`boolean`|`false`||
-|on-load|`(node: TreeNode) => Promise<any>`|`null`||
+|on-load|`(node: TreeNode) => Promise<any>`|`undefined`||
 |pattern|`string`|`''`||
 |remote|`boolean`|`false`|是否异步获取选项，和 onLoad 配合|
 |selectable|`boolean`|`true`||
@@ -38,7 +37,7 @@ drag-drop-debug
 |on-update:expanded-keys|`(keys: Array<string \| number>) => any`|`undefined`||
 |on-update:checked-keys|`(keys: Array<string \| number>) => any`|`undefined`||
 <!-- |draggable|`boolean`|`false`|| -->
-
+<!-- |expand-on-dragenter|`boolean`|`true`|是否在拖入后展开节点| -->
 <!-- |dragstart|`(data: { node: TreeNode, event: DragEvent })`||
 |dragend|`(data: { node: TreeNode, event: DragEvent })`||
 |dragenter|`(data: { node: TreeNode, event: DragEvent })`||

@@ -1,7 +1,7 @@
 # Search
 Tree accept `pattern` and `filter` to do searching.
 ```html
-<n-input v-model="pattern" placeholder="Search" />
+<n-input v-model:value="pattern" placeholder="Search" />
 <n-tree
   :pattern="pattern"
   :data="data"
