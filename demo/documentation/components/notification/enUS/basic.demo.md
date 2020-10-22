@@ -1,17 +1,20 @@
 # Basic
 ```html
-<n-button @click="notify1">
+<n-button @click="handleClick1">
   Wouldn't it be Nice
 </n-button>
-<n-button @click="notify2">
+<n-button @click="handleClick2">
   Satisfaction
 </n-button>
 ```
 ```js
+import { h, resolveComponent } from 'vue'
+
 export default {
+  inject: ['notification', 'message'],
   methods: {
-    notify1 () {
-      this.$NNotification.open({
+    handleClick1 () {
+      this.notification.create({
         title: `Wouldn't it be Nice`,
         description: 'From the Beach Boys',
         content: `Wouldn't it be nice if we were older
@@ -25,47 +28,43 @@ In the morning when the day is new
 And after having spent the day together
 Hold each other close the whole night through`,
         meta: '2019-5-27 15:11',
-        avatar: h => 
-          h('n-avatar', {
-            props: {
-              size: 'small',
-              round: true,
-              src:'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
-            }
+        avatar: () => 
+          h(resolveComponent('n-avatar'), {
+            size: 'small',
+            round: true,
+            src:'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
           }),
-        onAfterHide: () => {
-          this.$NMessage.success(`Wouldn't it be Nice`)
+        onAfterLeave: () => {
+          this.message.success(`Wouldn't it be Nice`)
         },
       })
     },
-    notify2 () {
+    handleClick2 () {
       let markAsRead = false
-      const notification = this.$NNotification.open({
+      const notification = this.notification.create({
         title: 'Satisfaction',
         content: `I cant get no satisfaction
 I cant get no satisfaction
 Cause I try and I try and I try and I try
 I cant get no, I cant get no`,
         meta: '2019-5-27 15:11',
-        action: h => h(
-          'n-button',
+        action: () => h(
+          resolveComponent('n-button'),
           {
-            props: {
-              text: true,
-              type: 'primary'
-            },
-            on: {
-              click: () => {
-                markAsRead = true
-                notification.hide()
-              }
+            text: true,
+            type: 'primary',
+            onClick: () => {
+              markAsRead = true
+              notification.destroy()
             }
           },
-          ['Mark as Read']
+          {
+            default: () => 'Mark as Read'
+          }
         ),
         onClose: () => {
           if (!markAsRead) {
-            this.$NMessage.warning('Please mark as read')
+            this.message.warning('Please mark as read')
             return false
           }
         }

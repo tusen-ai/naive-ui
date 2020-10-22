@@ -15,9 +15,10 @@
 ```
 ```js
 export default {
+  inject: ['notification'],
   methods: {
     notify (type) {
-      this.$NNotification[type]({
+      this.notification[type]({
         content: `What to say?`,
         meta: 'I don\'t know'
       })

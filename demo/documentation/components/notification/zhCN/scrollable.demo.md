@@ -26,8 +26,3 @@ export default {
   }
 }
 ```
-```css
-.n-button {
-  margin: 0 12px 8px 0;
-}
-```

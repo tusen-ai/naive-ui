@@ -1,28 +1,30 @@
 # Unclosable
 You can make it unclosable.
 ```html
-<n-button @click="notify('info')">
+<n-button @click="handleClick">
   Unclosable
 </n-button>
 ```
 ```js
 export default {
+  inject: ['notification'],
   methods: {
-    notify (type) {
-      this.$NNotification.open({
-        title: `Close Me if You Can`,
+    handleClick () {
+      const notification = this.notification
+      notification.create({
+        title: 'Close Me if You Can',
         duration: 2000,
         closable: false,
-        onAfterHide: () => {
-          this.$NNotification.open({
-            title: `Ha Ha Ha Ha!`,
+        onAfterLeave: () => {
+          notification.create({
+            title: 'Ha Ha Ha Ha!',
             duration: 2000,
             closable: false,
-            onAfterHide: () => {
-              this.$NNotification.open({
+            onAfterLeave: () => {
+              notification.create({
                 title: `No, You Can't`,
                 duration: 2000,
-                closable: false,
+                closable: false
               })
             }
           })
@@ -30,10 +32,5 @@ export default {
       })
     }
   }
-}
-```
-```css
-.n-button {
-  margin: 0 12px 8px 0;
 }
 ```

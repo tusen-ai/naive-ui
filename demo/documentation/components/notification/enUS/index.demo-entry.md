@@ -1,7 +1,36 @@
 # Notification
 If something is to be telled to somebody.
 
-UI has designed it long long ago. However, you know, notification component is always with low piority so I can make a lot of useless animations on it.
+Notification component is always with low piority so I can make a lot of useless animations on it.
+
+<n-space vertical align="stretch">
+<n-alert title="Prerequisite" type="warning">
+  If you want use notification, you need to wrap the component where you call related methods inside <n-text code>n-nofitication-provider</n-text> and inject <n-text code>nofitication</n-text>.
+</n-alert>
+For example:
+
+```html
+<!-- App.vue -->
+<n-nofitication-provider>
+  <content />
+</n-nofitication-provider>
+```
+
+```js
+// content
+export default {
+  inject: ['nofitication'],
+  methods: {
+    notify () {
+      this.nofitication.create(
+        // ...
+      )
+    }
+  }
+}
+```
+</n-space>
+
 ## Demos
 ```demo
 basic
@@ -11,58 +40,60 @@ scrollable
 closable
 duration
 ```
-## API
-### $NNotification Methods
-|Name|Type|Description|
-|-|-|-|
-|theme|`'light' \| 'dark'`|||
-|open|`(option: NotificationOption, type: string = 'default') => NotificationEnvironment`|`type` can be `'default'`, `'warning'`, `'info'`, `'success'` and `'error'`|
-|success|`(option: NofiticationOption) => NotificationEnvironment`||
-|info|`(option: NofiticationOption) => NotificationEnvironment`||
-|warning|`(option: NofiticationOption) => NotificationEnvironment`||
-|error|`(option: NofiticationOption) => NotificationEnvironment`||
 
-### $Notification Properties
+## API
+### NotificationProvider Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|scrollable|`boolean`|`false`||
+|scrollable|`boolean`|`true`||
+|to|`string \| HTMLElement`|`'body'`||
+
+### `notification` Injection Methods
+|Name|Type|Description|
+|-|-|-|
+|create|`(option: NotificationOption) => NotificationReactive`||
+|error|`(option: NotificationOption) => NotificationReactive`||
+|info|`(option: NotificationOption) => NotificationReactive`||
+|success|`(option: NotificationOption) => NotificationReactive`||
+|warning|`(option: NotificationOption) => NotificationReactive`||
 
 ### NotificationOption Properties
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`|If set it will be used as the theme of notification. (It works nearly the same as <n-a to="n-message#about-theme">$NMessage's theme</n-a>, and in most cases you don't need to set the property.)|
-|avatar|`() => VNode \| Array<VNode>`|`null`|Can be a render function|
-|title|`string \| (() => VNode \| Array<VNode>)`|`null`|Can be a render function|
-|description|`string \| (() => VNode \| Array<VNode>)`|`null`|Can be a render function|
-|content|`string \| (() => VNode \| Array<VNode>)`|`null`|Can be a render function|
-|meta|`string \| (() => VNode \| Array<VNode>)`|`null`|Can be a render function|
-|action|`string \| (() => VNode \| Array<VNode>)`|`null`|Can be a render function|
+|action|`string \| (() => VNode \| Array<VNode>)`|`undefined`|Can be a render function.|
+|avatar|`() => VNode \| Array<VNode>`|`undefined`|Can be a render function.|
 |closable|`boolean`|`true`||
-|onClose|`() => boolean \| Promise<boolean> \| any`|`() => {}`|The callback of notification closing. Returning `false`, promise resolve `false` or promise reject will cancel this closing.|
-|onAfterHide|`Function`|`null`||
-|onAfterShow|`Function`|`null`||
-|duration|`number`|`null`|If not set, it won't automatically close. Unit is millisecond.|
+|content|`string \| (() => VNode \| Array<VNode>)`|`undefined`|Can be a render function.|
+|description|`string \| (() => VNode \| Array<VNode>)`|`undefined`|Can be a render function.|
+|duration|`number`|`undefined`|If not set, it won't automatically close. Unit is millisecond.|
+|meta|`string \| (() => VNode \| Array<VNode>)`|`undefined`|Can be a render function.|
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|title|`string \| (() => VNode \| Array<VNode>)`|`undefined`|Can be a render function.|
+|onAfterEnter|`Function`|`undefined`||
+|onAfterLeave|`Function`|`undefined`||
+|onClose|`() => boolean \| Promise<boolean>`|`undefined`|The callback of notification closing. Returning `false`, promise resolve `false` or promise reject will cancel this closing.|
+|onLeave|`Function`|||
 
-### NotificationEnvironment API
-#### NotificationEnvironment Properties
-Properties of NofiticationEnvironment Instance can be dynamically set.
+### NotificationReactive API
+#### NotificationReactive Properties
+Properties of NotificationReactive can be dynamically changed.
 
 |Name|Type|Description|
 |-|-|-|
-|theme|`'light' \| 'dark'`|If set it will be used as the theme of notification. (It works nearly the same as <n-a to="n-message#about-theme">$NMessage's theme</n-a>, and in most cases you don't need to set the property.)|
-|avatar|`() => VNode \| Array<VNode>`|Can be a render function|
-|title|`string \| (() => VNode \| Array<VNode>)`|Can be a render function|
-|description|`string \| (() => VNode \| Array<VNode>)`|Can be a render function|
-|content|`string \| (() => VNode \| Array<VNode>)`|Can be a render function|
-|meta|`string \| (() => VNode \| Array<VNode>)`|Can be a render function|
-|action|`string \| (() => VNode \| Array<VNode>)`|Can be a render function|
+|action|`string \| (() => VNode \| Array<VNode>)`|Can be a render function.|
+|avatar|`() => VNode \| Array<VNode>`|Can be a render function.|
 |closable|`boolean`||
-|onClose|`(next: function) => any`|Callback when close button is clicked. Only if next is called notification will close|
-|onHide|`Function`||
-|onAfterHide|`Function`||
-|onAfterShow|`Function`||
+|content|`string \| (() => VNode \| Array<VNode>)`|Can be a render function.|
+|description|`string \| (() => VNode \| Array<VNode>)`|Can be a render function.|
+|meta|`string \| (() => VNode \| Array<VNode>)`|Can be a render function.|
+|theme|`'light' \| 'dark' \| null \| string`||
+|title|`string \| (() => VNode \| Array<VNode>)`|Can be a render function.|
+|onAfterEnter|`Function`||
+|onAfterLeave|`Function`||
+|onClose|`() => boolean \| Promise<boolean>`|The callback of notification closing. Returning `false`, promise resolve `false` or promise reject will cancel this closing.|
+|onLeave|`Function`||
 
-#### NotificationEnvironment Methods
+#### NotificationReactive Methods
 |Name|Type|Description|
 |-|-|-|
-|hide|`()`||
+|destroy|`()`|Destroy the notification|

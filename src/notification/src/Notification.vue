@@ -97,31 +97,31 @@ export default {
     },
     avatar: {
       type: Function,
-      default: null
+      default: undefined
     },
     title: {
       type: [String, Function],
-      default: null
+      default: undefined
     },
     description: {
       type: [String, Function],
-      default: null
+      default: undefined
     },
     content: {
       type: [String, Function],
-      default: null
+      default: undefined
     },
     meta: {
       type: [String, Function],
-      default: null
+      default: undefined
     },
     action: {
       type: Function,
-      default: null
+      default: undefined
     },
     onClose: {
       type: Function,
-      default: () => {}
+      required: true
     }
   },
   computed: {
