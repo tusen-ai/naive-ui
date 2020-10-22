@@ -1,7 +1,7 @@
 # 事件
 ```html
 <n-input-number
-  :value="value"
+  v-model:value="value"
   @update:value="handleChange"
   @focus="handleFocus"
   @blur="handleBlur"
@@ -17,7 +17,6 @@ export default {
   },
   methods: {
     handleChange (v) {
-      this.value = v
       this.message.info(`update:value(${v})`)
     },
     handleBlur () {

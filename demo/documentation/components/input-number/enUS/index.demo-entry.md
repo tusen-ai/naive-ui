@@ -1,5 +1,6 @@
 # Input Number
 If you want just input number, use it.
+
 ## Demos
 ```demo
 basic
@@ -10,26 +11,19 @@ size
 step
 validator
 ```
-## V-model
-|Prop|Event|
-|-|-|
-|value|change|
 
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|value|`number`|`null`||
-|step|`number`|`1`||
-|min|`number`|`null`||
-|max|`number`|`null`||
-|size|`'small' \| 'medium' \| 'large'`|`medium`||
 |disabled|`boolean`|`false`||
-|validator|`(value) => boolean`|`null`||
-|placeholder|`string`|`null`||
-
-## Events
-|Name|Parameters|Description|
-|-|-|-|
-|change|`(value: number)`||
-|blur|`()`||
+|max|`number`|`undefined`||
+|min|`number`|`undefined`||
+|placeholder|`string`|`undefined`||
+|size|`'small' \| 'medium' \| 'large'`|`medium`||
+|step|`number`|`1`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|validator|`(value) => boolean`|`undefined`||
+|value|`number`|`null`||
+|on-blur|`(event: FocusEvent) => any`|`undefined`||
+|on-focus|`(event: FocusEvent) => any`|`undefined`||
+|on-update:value|`(value: number) => any`|`undefined`||

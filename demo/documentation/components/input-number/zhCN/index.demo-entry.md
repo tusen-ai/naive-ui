@@ -1,5 +1,6 @@
 # 数字输入 Input Number
 输入数字就用它。
+
 ## 演示
 ```demo
 basic

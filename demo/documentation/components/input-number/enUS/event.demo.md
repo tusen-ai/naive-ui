@@ -2,13 +2,14 @@
 Blur & change events are exposed.
 ```html
 <n-input-number
-  v-model="value"
-  @change="handleChange"
+  v-model:value="value"
+  @update:value="handleChange"
   @blur="handleBlur"
 />
 ```
 ```js
 export default {
+  inject: ['message'],
   data () {
     return {
       value: 0
@@ -16,10 +17,10 @@ export default {
   },
   methods: {
     handleChange (v) {
-      this.$NMessage.info(`value: ${v}`)
+      this.message.info(`value: ${v}`)
     },
     handleBlur (v) {
-      this.$NMessage.info(`blur: ` + v)
+      this.message.info(`blur: ` + v)
     },
   }
 }

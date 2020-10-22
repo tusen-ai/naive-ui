@@ -1,18 +1,20 @@
 # 尺寸
 `small`、`medium`、`large`。
 ```html
-<n-input-number
-  v-model:value="value"
-  size="small"
-/>
-<n-input-number
-  v-model:value="value"
-  size="medium"
-/>
-<n-input-number
-  v-model:value="value"
-  size="large"
-/>
+<n-space vertical align="stretch">
+  <n-input-number
+    v-model:value="value"
+    size="small"
+  />
+  <n-input-number
+    v-model:value="value"
+    size="medium"
+  />
+  <n-input-number
+    v-model:value="value"
+    size="large"
+  />
+</n-space>
 ```
 ```js
 export default {
@@ -21,10 +23,5 @@ export default {
       value: 0
     }
   }
-}
-```
-```css
-.n-input-number {
-  margin: 0 8px 12px 0
 }
 ```

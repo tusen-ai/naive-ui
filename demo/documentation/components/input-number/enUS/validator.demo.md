@@ -1,7 +1,7 @@
 # Validator
 ```html
 <n-input-number
-  v-model="value"
+  v-model:value="value"
   :validator="validator"
 />
 ```
