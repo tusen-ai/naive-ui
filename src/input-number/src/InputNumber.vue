@@ -51,8 +51,8 @@
       :placeholder="placeholder"
       :value="value"
       :disabled="disabled ? 'disabled' : false"
-      @focus="handleFocus"
-      @blur="handleBlur"
+      @focus="doFocus"
+      @blur="doBlur"
       @keyup.enter="handleEnter"
     >
     <div class="n-input-number__border-mask" />
@@ -69,7 +69,7 @@ import {
   asformitem,
   usecssr
 } from '../../_mixins'
-import { warn } from '../../_utils/naive/warn'
+import { warn, call } from '../../_utils'
 import styles from './styles'
 
 const DEFAULT_STEP = 1
@@ -137,15 +137,15 @@ export default {
     },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:value': {
-      type: Function,
+      type: [Function, Array],
       default: undefined
     },
     onFocus: {
-      type: Function,
+      type: [Function, Array],
       default: undefined
     },
     onBlur: {
-      type: Function,
+      type: [Function, Array],
       default: undefined
     },
     // deprecated
@@ -205,7 +205,7 @@ export default {
     }
   },
   methods: {
-    emitChangeEvent (value) {
+    doUpdateValue (value) {
       if (value !== this.value) {
         const {
           'onUpdate:value': onUpdateValue,
@@ -213,11 +213,30 @@ export default {
           nTriggerFormInput,
           nTriggerFormChange
         } = this
-        if (onChange) onChange(value)
-        if (onUpdateValue) onUpdateValue(value)
+        if (onChange) call(onChange, value)
+        if (onUpdateValue) call(onUpdateValue, value)
         nTriggerFormInput()
         nTriggerFormChange()
       }
+    },
+    doFocus (e) {
+      const {
+        onFocus,
+        nTriggerFormFocus
+      } = this
+      if (onFocus) call(onFocus, e)
+      nTriggerFormFocus()
+    },
+    doBlur (e) {
+      const value = this.adjustValue(e.target.value)
+      e.target.value = value
+      this.doUpdateValue(value)
+      const {
+        onBlur,
+        nTriggerFormBlur
+      } = this
+      if (onBlur) call(onBlur, e)
+      nTriggerFormBlur()
     },
     createValidValue () {
       if (this.validator) return null
@@ -235,36 +254,28 @@ export default {
       }
       e.preventDefault()
     },
-    handleFocus (e) {
-      const {
-        onFocus,
-        nTriggerFormFocus
-      } = this
-      if (onFocus) onFocus(e)
-      nTriggerFormFocus()
-    },
     add () {
       if (!this.addable) return
       if (this.value === null) {
-        this.emitChangeEvent(this.createValidValue())
+        this.doUpdateValue(this.createValidValue())
       } else {
         const valueAfterChange = this.adjustValue(this.value + this.safeStep)
-        this.emitChangeEvent(valueAfterChange)
+        this.doUpdateValue(valueAfterChange)
       }
     },
     minus () {
       if (!this.minusable) return
       if (this.value === null) {
-        this.emitChangeEvent(this.createValidValue())
+        this.doUpdateValue(this.createValidValue())
       } else {
         const valueAfterChange = this.adjustValue(this.value - this.safeStep)
-        this.emitChangeEvent(valueAfterChange)
+        this.doUpdateValue(valueAfterChange)
       }
     },
     handleEnter (e) {
       const value = this.adjustValue(this.$refs.input.value)
       this.$refs.input.value = value
-      this.emitChangeEvent(value)
+      this.doUpdateValue(value)
     },
     adjustValue (value) {
       value = String(value).trim() || ''
@@ -289,17 +300,6 @@ export default {
         else if (this.safeMax !== null && value > this.safeMax) { value = this.safeMax }
       }
       return value
-    },
-    handleBlur (e) {
-      const value = this.adjustValue(e.target.value)
-      e.target.value = value
-      this.emitChangeEvent(value)
-      const {
-        onBlur,
-        nTriggerFormBlur
-      } = this
-      if (onBlur) onBlur(e)
-      nTriggerFormBlur()
     }
   }
 }
