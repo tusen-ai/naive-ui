@@ -46,21 +46,17 @@ export default {
     usecssr(styles)
   ],
   props: {
-    type: {
-      type: String,
-      default: null
-    },
     label: {
       type: String,
-      default: null
+      default: undefined
     },
     value: {
       type: [String, Number],
-      default: null
+      default: undefined
     },
     valueStyle: {
       type: [Object, String],
-      default: null
+      default: undefined
     }
   }
 }

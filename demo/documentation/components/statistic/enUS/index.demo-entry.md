@@ -7,12 +7,12 @@ basic
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|label|`string`|`undefined`||
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
-|label|`string`|`null`||
-|value|`string`|`null`||
+|value|`string`|`undefined`||
 
 ## Slots
 |Name|Parameters|Description|
 |-|-|-|
-|suffix|`()`||
 |prefix|`()`||
+|suffix|`()`||

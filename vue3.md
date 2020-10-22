@@ -146,7 +146,9 @@ placeable 进行了大调整
     - `$NLoadingBar`
   - new
     - `n-loading-bar-provider`
-- [x] log
+- [ ] log
+  - TODO
+    - event bug
 - [x] menu
   - new
     - `popover-body-style`
@@ -258,11 +260,13 @@ placeable 进行了大调整
 - [x] timeline
 - [x] tooltip
   - ref
-- [x] transfer
+- [ ] transfer
   - break
     - `v-model` => `v-model:value`
   - deprecate
     - `on-change` => `on-update:value`
+  - TODO
+    - `virtual`
 - [x] tree
   - break
     - `v-model` => `v-model:selected-keys`
