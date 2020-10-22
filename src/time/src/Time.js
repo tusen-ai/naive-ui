@@ -30,7 +30,7 @@ export default {
     },
     format: {
       type: String,
-      default: null
+      default: undefined
     },
     text: {
       type: Boolean,

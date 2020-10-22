@@ -11,8 +11,8 @@ unix
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|format|`string`|`undefined`||
 |time|`number \| Date`|`null`||
-|type|`'relative' \| 'date' \| 'datetime'`|`'relative'`||
 |to|`number \| Date`|`new Date()`||
+|type|`'relative' \| 'date' \| 'datetime'`|`'relative'`||
 |unix|`boolean`|`false`||
-|format|`string`|`null`||
