@@ -48,7 +48,7 @@ async
 |required|`boolean`|`false`|Whether to show required mark. Note: a required rule has higher priority than this prop & this prop **won't** have any effect on validation. The validation still depends on the rules.|
 |rule|`FormItemRule \| Array<FormItemRule>`|`null`|The rule to validate the form item. It will be merged with the rules acquired by `rule-path` from wrapper form's rules. It's recommend to set all rules on wrapper form.|
 |rule-path|`string`|`null`|The path to get rule from wrapper form's rule object. If not set, use path of the form item instead.|
-|show-require-mark|`boolean`|`true`|Whether to show require mark when form item is required. If not set, use `show-require-mark` from wrapper form.|
+|show-require-mark|`boolean`|`true`|Whether to show require mark. If not set, use `show-require-mark` from wrapper form.|
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |validation-status|`'error' \| 'success' \| 'warning' \| null`|`null`|The validation status of the form item. If not set to `null`, it will take place of the result of rule-based validation.|
 

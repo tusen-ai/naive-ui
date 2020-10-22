@@ -2,17 +2,17 @@
 ```html
 <n-form :model="model" ref="form" :rules="rules" label-align="right" label-placement="left">
   <n-form-item-row path="age" label="Age">
-    <n-input v-model="model.age"/>
+    <n-input v-model:value="model.age"/>
   </n-form-item-row>
   <n-form-item-row path="password" label="Password">
-    <n-input v-model="model.password" @input="handlePasswordInput" type="password"/>
+    <n-input v-model:value="model.password" @input="handlePasswordInput" type="password"/>
   </n-form-item-row>
   <n-form-item-row
     path="reenteredPassword"
     label="Re-enter Password"
     ref="reenteredPassword"
   >
-    <n-input :disabled="!model.password" v-model="model.reenteredPassword" type="password"/>
+    <n-input :disabled="!model.password" v-model:value="model.reenteredPassword" type="password"/>
   </n-form-item-row>
   <n-row :gutter="[0, 24]">
     <n-col :span="24">
@@ -29,6 +29,7 @@
 ```
 ```js
 export default {
+  inject: ['message'],
   data () {
     return {
       model: {
@@ -78,10 +79,10 @@ export default {
       if (this.model.reenteredPassword) {
         this.$refs.reenteredPassword.validate('password-input', (errors => {
           if (!errors) {
-            this.$NMessage.success('Valid')
+            this.message.success('Valid')
           } else {
             console.log(errors)
-            this.$NMessage.error('Invalid')
+            this.message.error('Invalid')
           }
         }))
       }
@@ -90,10 +91,10 @@ export default {
       e.preventDefault()
       this.$refs.form.validate(errors => {
         if (!errors) {
-          this.$NMessage.success('Valid')
+          this.message.success('Valid')
         } else {
           console.log(errors)
-          this.$NMessage.error('Invalid')
+          this.message.error('Invalid')
         }
       })
     },

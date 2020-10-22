@@ -47,9 +47,10 @@ placeable 进行了大调整
     - `show-path` prop
   - deprecated
     - `on-change` => `on-update:value`
-- [x] checkbox
+- [ ] checkbox
   - deprecate
     - `on-change` => `on-update:checked`
+    - `checked` => `value`
   - checkbox-group
     - deprecate
     - `on-change` => `on-update:value`

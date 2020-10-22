@@ -144,6 +144,13 @@ export default {
         return true
       },
       default: undefined
+    },
+    checked: {
+      validator () {
+        warn('checkbox', '`checked` is deprecated, please use `value` instead')
+        return true
+      },
+      default: undefined
     }
   },
   setup (props) {
@@ -156,7 +163,7 @@ export default {
         }
         return false
       } else {
-        return props.value
+        return props.checked ?? props.value
       }
     })
     return {

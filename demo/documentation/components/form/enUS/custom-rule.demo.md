@@ -11,7 +11,7 @@ Sometimes builtin triggers don't meet you demand. You can custom you valiation b
     label="Age"
   >
     <n-input
-      v-model="model.age"
+      v-model:value="model.age"
       @keydown.enter.prevent
     />
   </n-form-item-row>
@@ -20,7 +20,7 @@ Sometimes builtin triggers don't meet you demand. You can custom you valiation b
     label="Password"
   >
     <n-input
-      v-model="model.password"
+      v-model:value="model.password"
       @input="handlePasswordInput"
       type="password"
       @keydown.enter.prevent
@@ -34,7 +34,7 @@ Sometimes builtin triggers don't meet you demand. You can custom you valiation b
   >
     <n-input
       :disabled="!model.password"
-      v-model="model.reenteredPassword"
+      v-model:value="model.reenteredPassword"
       type="password"
       @keydown.enter.prevent
     />
@@ -61,6 +61,7 @@ Sometimes builtin triggers don't meet you demand. You can custom you valiation b
 ```
 ```js
 export default {
+  inject: ['message'],
   data () {
     return {
       model: {
@@ -121,10 +122,10 @@ export default {
       e.preventDefault()
       this.$refs.form.validate(errors => {
         if (!errors) {
-          this.$NMessage.success('Valid')
+          this.message.success('Valid')
         } else {
           console.log(errors)
-          this.$NMessage.error('Invalid')
+          this.message.error('Invalid')
         }
       })
     },

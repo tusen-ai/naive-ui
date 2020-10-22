@@ -23,7 +23,7 @@ validator-debug
 |label-placement|`'left' \| 'top'`|`'top'`||
 |model|`Object`|`{}`|获取表项中收集到的值的对象|
 |rules|`type FormRules = { [itemValidatePath: string]: FormItemRule \| Array<FormItemRule> \| FormRules }`|`{}`|验证表项的规则|
-|show-require-mark|`boolean`|`true`|在表项是必填的时候是不是展示星号|
+|show-require-mark|`boolean`|`true`|是否展示必填的星号|
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 
 #### FormItemRule Type

@@ -8,7 +8,7 @@ You may need to manually custom the timing and the effect of a validation. Use `
     :feedback="inputFeedback"
   >
     <n-input
-      v-model="inputValue"
+      v-model:value="inputValue"
       clearable
     />
   </n-form-item>
@@ -18,7 +18,7 @@ You may need to manually custom the timing and the effect of a validation. Use `
     :feedback="inputNumberFeedback"
   >
     <n-input-number
-      v-model="inputNumberValue"
+      v-model:value="inputNumberValue"
     />
   </n-form-item>
   <n-form-item
@@ -28,7 +28,7 @@ You may need to manually custom the timing and the effect of a validation. Use `
   >
     <n-select
       debug
-      v-model="selectValue"
+      v-model:value="selectValue"
       :options="selectOptions"
       clearable
     />

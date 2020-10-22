@@ -1,10 +1,10 @@
 # Inline Form
 A Example of inline form.
 ```html
-<n-radio-group v-model="size" name="left-size" style="margin-bottom: 12px;">
-  <n-radio-button value="small">小</n-radio-button>
-  <n-radio-button value="medium" >中</n-radio-button>
-  <n-radio-button value="large">大</n-radio-button>
+<n-radio-group v-model:value="size" name="left-size" style="margin-bottom: 12px;">
+  <n-radio-button value="small">Small</n-radio-button>
+  <n-radio-button value="medium" >Medium</n-radio-button>
+  <n-radio-button value="large">Large</n-radio-button>
 </n-radio-group>
 <n-form
   inline
@@ -15,13 +15,13 @@ A Example of inline form.
   ref="form"
 >
   <n-form-item label="Name" path="user.name">
-    <n-input v-model="formValue.user.name" placeholder="Input Name" />
+    <n-input v-model:value="formValue.user.name" placeholder="Input Name" />
   </n-form-item>
   <n-form-item label="Age" path="user.age">
-    <n-input placeholder="Input Age" v-model="formValue.user.age"/>
+    <n-input placeholder="Input Age" v-model:value="formValue.user.age"/>
   </n-form-item>
   <n-form-item label="Phone" path="phone">
-    <n-input placeholder="Phone Number" v-model="formValue.phone"/>
+    <n-input placeholder="Phone Number" v-model:value="formValue.phone"/>
   </n-form-item>
   <n-form-item>
     <n-button @click="handleValidateClick">Validate</n-button>
@@ -34,6 +34,7 @@ A Example of inline form.
 ```
 ```js
 export default {
+  inject: ['message'],
   data () {
     return {
       size: 'medium',

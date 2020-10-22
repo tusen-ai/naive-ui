@@ -8,10 +8,10 @@
   ref="form"
 >
   <n-form-item label="Name" path="user.name" v-if="show">
-    <n-input v-model="formValue.user.name" placeholder="Input Name" />
+    <n-input v-model:value="formValue.user.name" placeholder="Input Name" />
   </n-form-item>
   <n-form-item label="Age" path="user.age" v-else>
-    <n-switch v-model="formValue.user.age"/>
+    <n-switch v-model:value="formValue.user.age"/>
   </n-form-item>
   <n-form-item>
     <n-button @click="handleShowClick">show</n-button>
@@ -25,6 +25,7 @@
 ```
 ```js
 export default {
+  inject: ['message'],
   data () {
     return {
       show: true,
@@ -67,10 +68,10 @@ export default {
       e.preventDefault()
       this.$refs.form.validate(errors => {
         if (!errors) {
-          this.$NMessage.success('Valid')
+          this.message.success('Valid')
         } else {
           console.log(errors)
-          this.$NMessage.error('Invalid')
+          this.message.error('Invalid')
         }
       })
     }
