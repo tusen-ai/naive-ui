@@ -3,7 +3,7 @@ You can disable some time.
 
 ```html
 <n-time-picker
-  v-model="time0"
+  v-model:value="time0"
   :is-hour-disabled="isHourDisabled"
   :is-minute-disabled="isMinuteDisabled"
   :is-second-disabled="isSecondDisabled"
@@ -38,10 +38,5 @@ export default {
       }
     },
   },
-}
-```
-```css
-.n-time-picker {
-  margin: 0 12px 8px 0;
 }
 ```

@@ -40,8 +40,3 @@ export default {
   },
 }
 ```
-```css
-.n-time-picker {
-  margin: 0 12px 8px 0;
-}
-```

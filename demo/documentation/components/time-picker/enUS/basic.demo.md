@@ -1,12 +1,14 @@
 # Basic
 ```html
-<n-time-picker
-  v-model="time0"
-  :disabledHours="disabledHours"
-  :disabledMinutes="disabledMinutes"
-  :disabledSeconds="disabledSeconds"
-/>
-<n-time-picker v-model="time1" />
+<n-space>
+  <n-time-picker
+    v-model:value="time0"
+    :disabledHours="disabledHours"
+    :disabledMinutes="disabledMinutes"
+    :disabledSeconds="disabledSeconds"
+  />
+  <n-time-picker v-model:value="time1" />
+</n-space>
 ```
 ```js
 export default {
@@ -31,10 +33,5 @@ export default {
       }
     }
   }
-}
-```
-```css
-.n-time-picker {
-  margin: 0 12px 8px 0;
 }
 ```
