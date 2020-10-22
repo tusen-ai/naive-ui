@@ -12,4 +12,4 @@ event
 |disabled|`boolean`|`false`||
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 |value|`boolean`|`false`||
-|on-update:value|`(value: boolean) => any`|`() => {}`||
+|on-update:value|`(value: boolean) => any`|`undefined`||

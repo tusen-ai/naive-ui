@@ -1,12 +1,13 @@
 # Event
 ```html
 <n-switch
-  v-model="active"
-  @change="handleChange"
+  v-model:value="active"
+  @update:value="handleChange"
 />
 ```
 ```js
 export default {
+  inject: ['message'],
   data () {
     return {
       active: false
@@ -14,7 +15,7 @@ export default {
   },
   methods: {
     handleChange (value) {
-      this.$NMessage.info(`Change Event: ${value}`)
+      this.message.info(`Update value: ${value}`)
     }
   }
 }

@@ -1,7 +1,7 @@
 # 事件
 ```html
 <n-switch
-  :value="active"
+  v-model:value="active"
   @update:value="handleChange"
 />
 ```
@@ -15,7 +15,6 @@ export default {
   },
   methods: {
     handleChange (value) {
-      this.active = value
       this.message.info(`Update value: ${value}`)
     }
   }

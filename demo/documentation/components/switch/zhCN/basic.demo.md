@@ -1,12 +1,14 @@
 # 基础用法
 ```html
-<n-switch
-  v-model="active"
-/>
-<n-switch
-  v-model="active"
-  disabled
-/>
+<n-space>
+  <n-switch
+    v-model:value="active"
+  />
+  <n-switch
+    v-model:value="active"
+    disabled
+  />
+</n-space>
 ```
 ```js
 export default {
