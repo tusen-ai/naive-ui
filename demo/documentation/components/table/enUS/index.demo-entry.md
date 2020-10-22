@@ -18,8 +18,8 @@ You can use `n-table`, `n-thead`, `n-tbody`, `n-tr`, `n-th` and `n-td`.
 ### Table Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |bordered|`boolean`|`true`||
-|single-line|`boolean`|`true`||
 |single-column|`boolean`|`false`||
+|single-line|`boolean`|`true`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
