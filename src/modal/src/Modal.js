@@ -33,7 +33,7 @@ export default {
     },
     preset: {
       type: String,
-      default: null
+      default: undefined
     },
     to: {
       type: [String, Object],

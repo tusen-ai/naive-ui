@@ -141,7 +141,7 @@ export default {
     },
     displayDirective: {
       type: String,
-      default: null
+      default: undefined
     },
     ...presetProps,
     // events

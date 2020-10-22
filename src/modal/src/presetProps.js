@@ -1,7 +1,7 @@
 export default {
   bodyStyle: {
     type: Object,
-    default: null
+    default: undefined
   },
   // For preset: confirm, card
   title: {

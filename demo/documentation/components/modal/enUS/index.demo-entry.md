@@ -17,11 +17,11 @@ preset-confirm-slot
 |-|-|-|-|
 |display-directive|`'if' \| 'show'`|`'if'`|Use which directive to control the rendering of modal body.|
 |mask-closable|`boolean`|`true`|Whether to emit `hide` event when click mask.|
-|body-style|`Object`|`null`||
-|preset|`'card' \| 'confirm'`|`null`||
+|body-style|`Object`|`undefined`||
+|preset|`'card' \| 'confirm'`|`undefined`||
 |show|`boolean`|`false`|Whether to show modal.|
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
-|on-update:show|`(value: boolean) => any`||Callback when modal's display status is changed.|
+|on-update:show|`(value: boolean) => any`|`undefined`|Callback when modal's display status is changed.|
 
 ### Modal with Preset Card
 See [Card props](n-card#Props)
