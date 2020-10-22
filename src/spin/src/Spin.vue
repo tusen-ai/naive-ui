@@ -42,9 +42,11 @@
 
 <script>
 import NBaseLoading from '../../_base/loading'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import usecssr from '../../_mixins/usecssr'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
 import styles from './styles'
 
 const STROKE_WIDTH = {
@@ -62,14 +64,14 @@ export default {
     NBaseLoading
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles)
   ],
   props: {
     stroke: {
       type: String,
-      default: null
+      default: undefined
     },
     size: {
       type: [String, Number],
@@ -81,13 +83,13 @@ export default {
     },
     strokeWidth: {
       type: Number,
-      default: null
+      default: undefined
     }
   },
   computed: {
     syntheticStrokeWidth () {
       const { strokeWidth } = this
-      if (strokeWidth !== null) return strokeWidth
+      if (strokeWidth !== undefined) return strokeWidth
       const size = this.size
       return STROKE_WIDTH[size]
     }

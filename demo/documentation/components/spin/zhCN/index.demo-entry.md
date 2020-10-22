@@ -8,11 +8,11 @@ wrap
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|spinning|`boolean`|`false`|Spin 在填入内容的状态是否激活|
 |size|`'small' \| 'in-small' \| 'medium' \| 'in-medium' \| 'large' \| 'in-large'`|`medium`||
-|stroke|`string`|`null`|Spin 的颜色|
-|stroke-width|`number`|`null`|Spin 边缘的相对宽度，假定 Spin 的外侧半径是 100|
+|spinning|`boolean`|`false`|Spin 在填入内容的状态是否激活|
+|stroke-width|`number`|`undefined`|Spin 边缘的相对宽度，假定 Spin 的外侧半径是 100|
+|stroke|`string`|`undefined`|Spin 的颜色|
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 
 ## Slots
 |名称|参数|说明|

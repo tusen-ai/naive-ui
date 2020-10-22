@@ -1,8 +1,7 @@
 # 填充内容
 你可以把其他内容包裹在 Spin 中。为了匹配一些常用组件的尺寸，Spin 还提供 `in-small`、`in-medium` 和 `in-large` 的尺寸。
 ```html
-<div
->
+<div>
   <n-spin
     style="display: inline-block; margin: 0 8px 12px 0;"
     size="in-small"

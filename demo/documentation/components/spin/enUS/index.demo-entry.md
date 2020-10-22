@@ -8,11 +8,11 @@ wrap
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|spinning|`boolean`|`false`|It spin is active|
 |size|`'small' \| 'in-small' \| 'medium' \| 'in-medium' \| 'large' \| 'in-large'`|`medium`||
-|stroke|`string`|`null`|Color of spin|
-|stroke-width|`number`|`null`|Relative width of spin's stroke, you can assume the outer radius of spin is 100|
+|spinning|`boolean`|`false`|It spin is active|
+|stroke-width|`number`|`undefined`|Relative width of spin's stroke, you can assume the outer radius of spin is 100|
+|stroke|`string`|`undefined`|Color of spin|
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 
 ## Slots
 |Name|Parameters|Description|

@@ -1,8 +1,7 @@
 # Wrap
 You can wrap a component inside spin. To match regular components's size, spin alse provides `in-small`, `in-medium` and `in-large` sizes.
 ```html
-<div
->
+<div>
   <n-spin
     style="display: inline-block; margin: 0 8px 12px 0;"
     size="in-small"
