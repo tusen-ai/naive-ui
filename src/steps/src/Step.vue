@@ -2,7 +2,7 @@
   <div
     class="n-step"
     :class="{
-      [`n-step--${syntheticStatus}`]: syntheticStatus !== null
+      [`n-step--${mergedStatus}`]: mergedStatus
     }"
   >
     <div class="n-step-indicator">
@@ -11,23 +11,23 @@
       >
         <n-icon-switch-transition>
           <div
-            v-if="!(syntheticStatus === 'finish' || syntheticStatus === 'error')"
+            v-if="!(mergedStatus === 'finish' || mergedStatus === 'error')"
             key="index"
             class="n-step-indicator-slot__index"
             :style="{
-              color: syntheticStatus === 'process' ? ascendantBackgroundColor : null
+              color: mergedStatus === 'process' ? ascendantBackgroundColor : null
             }"
           >
             {{ index }}
           </div>
           <n-icon
-            v-else-if="syntheticStatus === 'finish'"
+            v-else-if="mergedStatus === 'finish'"
             key="finish"
           >
             <finished-icon />
           </n-icon>
           <n-icon
-            v-else-if="syntheticStatus === 'error'"
+            v-else-if="mergedStatus === 'error'"
             key="error"
           >
             <error-icon />
@@ -44,7 +44,7 @@
         <div v-if="!vertical" class="n-step-splitor" />
       </div>
       <div
-        v-if="description !== null || $slots.default"
+        v-if="description !== undefined || $slots.default"
         class="n-step-content__description"
       >
         <slot>{{ description }}</slot>
@@ -79,22 +79,22 @@ export default {
   props: {
     status: {
       type: String,
-      default: null,
+      default: undefined,
       validator (value) {
         return ['process', 'finish', 'error', 'wait'].includes(value)
       }
     },
     title: {
       type: String,
-      default: null
+      default: undefined
     },
     description: {
       type: String,
-      default: null
+      default: undefined
     },
     index: {
       type: [Number, String],
-      default: null
+      default: undefined
     }
   },
   computed: {
@@ -110,7 +110,7 @@ export default {
     stepsStatus () {
       return this.NSteps && this.NSteps.status
     },
-    syntheticStatus () {
+    mergedStatus () {
       if (this.status) {
         return this.status
       } else if (this.index < this.current) {
@@ -120,7 +120,7 @@ export default {
       } else if (this.index > this.current) {
         return 'wait'
       }
-      return null
+      return undefined
     }
   }
 }

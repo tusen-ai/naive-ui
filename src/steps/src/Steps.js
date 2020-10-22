@@ -35,7 +35,7 @@ export default {
   props: {
     current: {
       type: Number,
-      default: null
+      default: undefined
     },
     status: {
       type: String,

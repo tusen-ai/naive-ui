@@ -13,18 +13,18 @@ content
 ### Steps Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|current|`number`|`null`||
-|status|`'process' \| 'finish' \| 'error' \| 'wait'`|`'process'`||
+|current|`number`|`undefined`||
 |size|`'small' \| 'medium'`|`'medium'`||
+|status|`'process' \| 'finish' \| 'error' \| 'wait'`|`'process'`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |vertical|`boolean`|`false`||
 
 ### Step Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|title|`string`|`null`||
-|description|`string`|`null`||
-|status|`'process' \| 'finish' \| 'error' \| 'wait'`|`'process'`||
+|description|`string`|`undefined`||
+|status|`'process' \| 'finish' \| 'error' \| 'wait'`|`undefined`||
+|title|`string`|`undefined`||
 
 ## Slots
 ### Steps Slots
