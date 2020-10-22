@@ -1,4 +1,4 @@
-import { cTB, c, cB, cM } from '../../../_utils/cssr'
+import { cTB, c, cB, cM, createKey } from '../../../_utils/cssr'
 
 export default c([
   c('@keyframes progress-processing-animation', {
@@ -35,7 +35,7 @@ export default c([
     const base = props.$base
     const derived = props.$derived
     const local = props.$local
-    const fillColor = local[status].fillColor
+    const fillColor = local[createKey('fillColor', status)]
     const outerIndicatorTextColor = local.outerIndicatorTextColor
     const lineBackgroundImageProcessing = local.lineBackgroundImageProcessing
     return cTB('progress', [
