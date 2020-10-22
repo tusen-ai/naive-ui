@@ -3,26 +3,26 @@ Content can be indented after avatar.
 ```html
 <n-row>
   <n-col :span="12">
-    <n-checkbox v-model="avatar">Avatar</n-checkbox>
+    <n-checkbox v-model:value="avatar">Avatar</n-checkbox>
   </n-col>
   <n-col :span="12">
-    <n-checkbox v-model="action">Action</n-checkbox>
-  </n-col>
-</n-row>
-<n-row>
-  <n-col :span="12">
-    <n-checkbox v-model="header">Header</n-checkbox>
-  </n-col>
-  <n-col :span="12">
-    <n-checkbox v-model="headerExtra">Header Extra</n-checkbox>
+    <n-checkbox v-model:value="action">Action</n-checkbox>
   </n-col>
 </n-row>
 <n-row>
   <n-col :span="12">
-    <n-checkbox v-model="description">Description</n-checkbox>
+    <n-checkbox v-model:value="header">Header</n-checkbox>
   </n-col>
   <n-col :span="12">
-    <n-checkbox v-model="footer">Footer</n-checkbox>
+    <n-checkbox v-model:value="headerExtra">Header Extra</n-checkbox>
+  </n-col>
+</n-row>
+<n-row>
+  <n-col :span="12">
+    <n-checkbox v-model:value="description">Description</n-checkbox>
+  </n-col>
+  <n-col :span="12">
+    <n-checkbox v-model:value="footer">Footer</n-checkbox>
   </n-col>
 </n-row>
 <n-divider />
@@ -30,7 +30,7 @@ Content can be indented after avatar.
   <template v-slot:avatar v-if="avatar">
     <n-avatar>
       <n-icon>
-        <md-cash />
+        <cash-icon />
       </n-icon>
     </n-avatar>
   </template>
@@ -40,7 +40,7 @@ Content can be indented after avatar.
   <template v-slot:header-extra v-if="headerExtra">
     <n-button circle size="tiny">
       <template v-slot:icon>
-        <md-cash />
+        <cash-icon />
       </template>
     </n-button>
   </template>
@@ -54,19 +54,19 @@ Content can be indented after avatar.
   <template v-slot:action v-if="action">
     <n-button size="tiny" style="margin-right: 8px;">
       <template v-slot:icon>
-        <md-cash />
+        <cash-icon />
       </template>
       1$
     </n-button>
     <n-button size="tiny" style="margin-right: 8px;">
       <template v-slot:icon>
-        <md-cash />
+        <cash-icon />
       </template>
       10$
     </n-button>
     <n-button size="tiny">
       <template v-slot:icon>
-        <md-cash />
+        <cash-icon />
       </template>
       100$
     </n-button>
@@ -74,11 +74,11 @@ Content can be indented after avatar.
 </n-thing>
 ```
 ```js
-import mdCash from 'naive-ui/lib/icons/md-cash'
+import CashIcon from 'naive-ui/lib/icons/md-cash'
 
 export default {
   components: {
-    mdCash
+    CashIcon
   },
   data () {
     return {

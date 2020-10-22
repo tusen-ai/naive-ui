@@ -10,18 +10,18 @@ indent
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|title|`string`|`null`||
-|title-extra|`string`|`null`||
-|description|`string`|`null`||
-|content|`string`|`null`||
 |content-indented|`boolean`|`false`||
+|content|`string`|`undefined`||
+|description|`string`|`undefined`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|title-extra|`string`|`undefined`||
+|title|`string`|`undefined`||
 
 ## Slots
 |名称|参数|说明|
 |-|-|-|
-|header|`()`||
-|header-extra|`()`||
-|description|`()`||
-|default|`()`||
 |action|`()`||
+|default|`()`||
+|description|`()`||
+|header-extra|`()`||
+|header|`()`||

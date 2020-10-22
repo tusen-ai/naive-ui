@@ -3,26 +3,26 @@
 ```html
 <n-row>
   <n-col :span="12">
-    <n-checkbox v-model="avatar">头像</n-checkbox>
+    <n-checkbox v-model:value="avatar">头像</n-checkbox>
   </n-col>
   <n-col :span="12">
-    <n-checkbox v-model="action">操作</n-checkbox>
-  </n-col>
-</n-row>
-<n-row>
-  <n-col :span="12">
-    <n-checkbox v-model="header">标题</n-checkbox>
-  </n-col>
-  <n-col :span="12">
-    <n-checkbox v-model="headerExtra">标题附加信息</n-checkbox>
+    <n-checkbox v-model:value="action">操作</n-checkbox>
   </n-col>
 </n-row>
 <n-row>
   <n-col :span="12">
-    <n-checkbox v-model="description">描述</n-checkbox>
+    <n-checkbox v-model:value="header">标题</n-checkbox>
   </n-col>
   <n-col :span="12">
-    <n-checkbox v-model="footer">底部</n-checkbox>
+    <n-checkbox v-model:value="headerExtra">标题附加信息</n-checkbox>
+  </n-col>
+</n-row>
+<n-row>
+  <n-col :span="12">
+    <n-checkbox v-model:value="description">描述</n-checkbox>
+  </n-col>
+  <n-col :span="12">
+    <n-checkbox v-model:value="footer">底部</n-checkbox>
   </n-col>
 </n-row>
 <n-divider />
@@ -30,7 +30,7 @@
   <template v-slot:avatar v-if="avatar">
     <n-avatar>
       <n-icon>
-        <md-cash />
+        <cash-icon />
       </n-icon>
     </n-avatar>
   </template>
@@ -40,7 +40,7 @@
   <template v-slot:header-extra v-if="headerExtra">
     <n-button circle size="tiny">
       <template v-slot:icon>
-        <md-cash />
+        <cash-icon />
       </template>
     </n-button>
   </template>
@@ -54,19 +54,19 @@
   <template v-slot:action v-if="action">
     <n-button size="tiny" style="margin-right: 8px;">
       <template v-slot:icon>
-        <md-cash />
+        <cash-icon />
       </template>
       1 块钱
     </n-button>
     <n-button size="tiny" style="margin-right: 8px;">
       <template v-slot:icon>
-        <md-cash />
+        <cash-icon />
       </template>
       10 块钱
     </n-button>
     <n-button size="tiny">
       <template v-slot:icon>
-        <md-cash />
+        <cash-icon />
       </template>
       100 块钱
     </n-button>
@@ -74,11 +74,11 @@
 </n-thing>
 ```
 ```js
-import mdCash from 'naive-ui/lib/icons/md-cash'
+import CashIcon from 'naive-ui/lib/icons/md-cash'
 
 export default {
   components: {
-    mdCash
+    CashIcon
   },
   data () {
     return {

@@ -10,18 +10,18 @@ indent
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|title|`string`|`null`||
-|title-extra|`string`|`null`||
-|description|`string`|`null`||
-|content|`string`|`null`||
 |content-indented|`boolean`|`false`||
+|content|`string`|`undefined`||
+|description|`string`|`undefined`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|title-extra|`string`|`undefined`||
+|title|`string`|`undefined`||
 
 ## Slots
 |Name|Parameters|Description|
 |-|-|-|
-|header|`()`||
-|header-extra|`()`||
-|description|`()`||
-|default|`()`||
 |action|`()`||
+|default|`()`||
+|description|`()`||
+|header-extra|`()`||
+|header|`()`||
