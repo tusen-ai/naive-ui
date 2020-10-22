@@ -1,6 +1,6 @@
 class ResizeDelegate {
   constructor () {
-    if (process.env.NODE_ENV !== 'production') {
+    if (__DEV__) {
       console.debug('[ResizeDelegate]: Ctor called')
     }
     this.handlers = []
@@ -25,7 +25,7 @@ class ResizeDelegate {
       }
     }
     if (!handlers.length) {
-      if (process.env.NODE_ENV !== 'production') {
+      if (__DEV__) {
         console.debug('[ResizeDelegate]: remove resize handler from window')
       }
       window.removeEventListener('resize', this.handleResize, true)
@@ -33,7 +33,7 @@ class ResizeDelegate {
   }
   registerHandler (handler) {
     if (!this.handlers.length) {
-      if (process.env.NODE_ENV !== 'production') {
+      if (__DEV__) {
         console.debug('[ResizeDelegate]: add resize handler to window')
       }
       window.addEventListener('resize', this.handleResize, true)

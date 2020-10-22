@@ -6,12 +6,12 @@ function lazyHandler (handler) {
   let called = false
   return function (e) {
     if (called) {
-      if (process.env.NODE_ENV !== 'production') {
+      if (__DEV__) {
         console.debug('[mousemoveoutside] called')
       }
       handler(e)
     } else {
-      if (process.env.NODE_ENV !== 'production') {
+      if (__DEV__) {
         console.debug('[mousemoveoutside] lazy called')
       }
       called = true
@@ -21,7 +21,7 @@ function lazyHandler (handler) {
 
 const mousemoveoutside = {
   beforeMount (el, bindings) {
-    if (process.env.NODE_ENV !== 'production') {
+    if (__DEV__) {
       console.debug('[mousemoveoutside]: bind $el')
     }
     if (typeof bindings.value === 'function') {
@@ -32,12 +32,12 @@ const mousemoveoutside = {
     }
   },
   mounted () {
-    if (process.env.NODE_ENV !== 'production') {
+    if (__DEV__) {
       console.debug('[mousemoveoutside]: inserted')
     }
   },
   updated (el, bindings) {
-    if (process.env.NODE_ENV !== 'production') {
+    if (__DEV__) {
       console.debug('[mousemoveoutside]: componentUpdated')
     }
     if (typeof bindings.value === 'function') {
@@ -58,7 +58,7 @@ const mousemoveoutside = {
     }
   },
   unmounted (el) {
-    if (process.env.NODE_ENV !== 'production') {
+    if (__DEV__) {
       console.debug('[mousemoveoutside]: unbind')
     }
     moveoutsideDelegate.unregisterHandler(el[ctx].handler)

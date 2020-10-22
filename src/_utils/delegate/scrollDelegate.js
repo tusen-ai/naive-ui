@@ -1,6 +1,6 @@
 class ScrollDelegate {
   constructor () {
-    if (process.env.NODE_ENV !== 'production') {
+    if (__DEV__) {
       console.debug('[ScrollDelegate]: Ctor called')
     }
     this.handlers = new Map()
@@ -30,7 +30,7 @@ class ScrollDelegate {
       }
     }
     if (!this.handlerCount) {
-      if (process.env.NODE_ENV !== 'production') {
+      if (__DEV__) {
         console.debug('[ScrollDelegate]: remove handler from window')
       }
       window.removeEventListener('scroll', this.handleScroll, true)
@@ -39,7 +39,7 @@ class ScrollDelegate {
   }
   registerHandler (el, handler) {
     if (!this.handlerCount) {
-      if (process.env.NODE_ENV !== 'production') {
+      if (__DEV__) {
         console.debug('[ScrollDelegate]: add handler to window')
       }
       window.addEventListener('scroll', this.handleScroll, true)

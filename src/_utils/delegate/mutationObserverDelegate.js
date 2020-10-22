@@ -1,6 +1,6 @@
 class MutationObserverDelegate {
   constructor () {
-    if (process.env.NODE_ENV !== 'production') {
+    if (__DEV__) {
       console.debug('[MutationObserverDelegate]: Ctor called')
     }
     this.handlers = new Map()

@@ -88,7 +88,7 @@ export function read (color) {
 export function composite (base, overlay) {
   if (!Array.isArray(base)) base = read(base)
   if (!Array.isArray(overlay)) overlay = read(overlay)
-  if (process.env.NODE_ENV !== 'production') {
+  if (__DEV__) {
     if (base.length === 3 && base[3] !== 1) {
       console.error('[naive-ui/utils/color/composite]: base color has alpha')
     }

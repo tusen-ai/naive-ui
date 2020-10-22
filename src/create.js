@@ -73,7 +73,7 @@ function create ({
       count: false
     })
   }
-  if (process.env.NODE_ENV !== 'production') {
+  if (__DEV__) {
     if (!window.naive) window.naive = {}
     window.naive.styles = styles
   }

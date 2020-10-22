@@ -26,26 +26,26 @@ class ClickOutsideDelegate {
     }
   }
   unregisterHandler (handler) {
-    if (process.env.NODE_ENV !== 'production') {
+    if (__DEV__) {
       console.debug('[ClickOutsideDelegate]: unregisterHandler')
     }
     const h = this.handlers.get(handler)
     if (h) {
-      if (process.env.NODE_ENV !== 'production') {
+      if (__DEV__) {
         console.debug('[ClickOutsideDelegate.unregisterHandler]: handler found')
       }
       this.handlers.delete(handler)
       --this.handlerCount
-      if (process.env.NODE_ENV !== 'production') {
+      if (__DEV__) {
         console.debug('[ClickOutsideDelegate.unregisterHandler]: handler unregistered')
       }
     } else {
-      if (process.env.NODE_ENV !== 'production') {
+      if (__DEV__) {
         console.debug('[ClickOutsideDelegate.unregisterHandler]: handler not found')
       }
     }
     if (!this.handlerCount) {
-      if (process.env.NODE_ENV !== 'production') {
+      if (__DEV__) {
         console.debug('[ClickOutsideDelegate]: remove handler from window')
       }
       window.removeEventListener('mouseup', this.handleMouseUpOutside)
@@ -65,7 +65,7 @@ class ClickOutsideDelegate {
       throw new Error('[ClickOutsideDelegate.registerHandler]: don\'t register duplicate event handler, if you want to do it, unregister this handler and reregister it.')
     }
     if (!this.handlerCount) {
-      if (process.env.NODE_ENV !== 'production') {
+      if (__DEV__) {
         console.debug('[ClickOutsideDelegate]: add handler to window')
       }
       window.addEventListener('mouseup', this.handleMouseUpOutside)

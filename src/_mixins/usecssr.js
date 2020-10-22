@@ -1,6 +1,6 @@
 import { find } from '../_utils/cssr'
 
-if (process.env.NODE_ENV !== 'production') {
+if (__DEV__) {
   if (!window.naive) window.naive = {}
   window.naive.styleRenderingDuration = 0
 }
@@ -57,7 +57,7 @@ function setupMutableStyle (
     dependencyKey === 'theme'
   ) ? renderedTheme : instance[dependencyKey]
   if (
-    process.env.NODE_ENV !== 'production' &&
+    __DEV__ &&
     (dependencyValue === null || dependencyValue === undefined)
   ) {
     console.error(`[naive-ui/mixins/usecssr]: dependency key ${name}.${dependencyKey} should not be nullable`, instance)
@@ -70,7 +70,7 @@ function setupMutableStyle (
   )
   if (find(mountId)) return
   const cssrPropsGetter = styles[renderedTheme][name]
-  if (process.env.NODE_ENV !== 'production' && !cssrPropsGetter) {
+  if (__DEV__ && !cssrPropsGetter) {
     console.error(`[naive-ui/mixins/usecssr]: ${name}'s style not found`, styles)
   }
   // themeVariables: { base, derived }
@@ -153,7 +153,7 @@ export default function (styles, cssrPropsOption) {
       if (!watchers[watchKey]) watchers[watchKey] = []
       watchers[watchKey].push(
         function (instance, mergedTheme) {
-          if (process.env.NODE_ENV !== 'production') {
+          if (__DEV__) {
             window.naive.styleRenderingDuration -= performance.now()
           }
           setupMutableStyle(
@@ -162,7 +162,7 @@ export default function (styles, cssrPropsOption) {
             style.key,
             style.CNode
           )
-          if (process.env.NODE_ENV !== 'production') {
+          if (__DEV__) {
             window.naive.styleRenderingDuration += performance.now()
           }
         }
@@ -196,7 +196,7 @@ export default function (styles, cssrPropsOption) {
       } : undefined,
     created () {
       styles.forEach(style => {
-        if (process.env.NODE_ENV !== 'production') {
+        if (__DEV__) {
           window.naive.styleRenderingDuration -= performance.now()
         }
         if (style.key) {
@@ -213,7 +213,7 @@ export default function (styles, cssrPropsOption) {
             style.CNode
           )
         }
-        if (process.env.NODE_ENV !== 'production') {
+        if (__DEV__) {
           window.naive.styleRenderingDuration += performance.now()
         }
       })
