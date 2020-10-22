@@ -3,10 +3,9 @@
 <n-tooltip
   placement="bottom"
   trigger="hover"
-  @show="handleShow"
-  @hide="handleHide"
+  @update:show="handleUpdateShow"
 >
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button>
       Hover
     </n-button>
@@ -18,10 +17,9 @@
 <n-tooltip
   placement="bottom"
   trigger="click"
-  @show="handleShow"
-  @hide="handleHide"
+  @update:show="handleUpdateShow"
 >
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button>
       Click
     </n-button>
@@ -33,10 +31,9 @@
 <n-tooltip
   :show="showPopover"
   placement="bottom"
-  @show="handleShow"
-  @hide="handleHide"
+  @update:show="handleUpdateShow"
 >
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button @click="showPopover = !showPopover">
       Manual
     </n-button>
@@ -48,20 +45,18 @@
 ```
 ```js
 export default {
-  data() {
+  inject: ['message'],
+  data () {
     return {
       showPopover: false
-    };
+    }
   },
   methods: {
-    handleShow() {
-      this.$NMessage.success("show tooltip");
-    },
-    handleHide() {
-      this.$NMessage.success("hide tooltip");
+    handleUpdateShow (show) {
+      this.message.success(show)
     }
   }
-};
+}
 ```
 ```css
 .n-button {

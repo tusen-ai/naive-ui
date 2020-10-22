@@ -3,10 +3,9 @@
 <n-tooltip
   placement="bottom"
   trigger="hover"
-  @show="handleShow"
-  @hide="handleHide"
+  @update:show="handleUpdateShow"
 >
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button>
       悬浮
     </n-button>
@@ -18,10 +17,9 @@
 <n-tooltip
   placement="bottom"
   trigger="click"
-  @show="handleShow"
-  @hide="handleHide"
+  @update:show="handleUpdateShow"
 >
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button>
       点击
     </n-button>
@@ -33,10 +31,9 @@
 <n-tooltip
   :show="showPopover"
   placement="bottom"
-  @show="handleShow"
-  @hide="handleHide"
+  @update:show="handleUpdateShow"
 >
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button @click="showPopover = !showPopover">
       手动
     </n-button>
@@ -49,20 +46,17 @@
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       showPopover: false
-    };
+    }
   },
   methods: {
-    handleShow() {
-      this.message.success("show tooltip");
-    },
-    handleHide() {
-      this.message.success("hide tooltip");
+    handleUpdateShow (show) {
+      this.message.success(show)
     }
   }
-};
+}
 ```
 ```css
 .n-button {

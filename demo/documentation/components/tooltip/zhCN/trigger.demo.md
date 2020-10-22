@@ -1,7 +1,7 @@
 # 触发方式
 ```html
 <n-tooltip placement="bottom" trigger="hover">
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button>
       悬浮
     </n-button>
@@ -11,7 +11,7 @@
   </span>
 </n-tooltip>
 <n-tooltip placement="bottom" trigger="click">
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button>
       点击
     </n-button>
@@ -21,7 +21,7 @@
   </span>
 </n-tooltip>
 <n-tooltip :show="showPopover" placement="bottom">
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button @click="showPopover = !showPopover">
       手动
     </n-button>
@@ -33,12 +33,12 @@
 ```
 ```js
 export default {
-  data() {
+  data () {
     return {
       showPopover: false
-    };
+    }
   }
-};
+}
 ```
 ```css
 .n-button {

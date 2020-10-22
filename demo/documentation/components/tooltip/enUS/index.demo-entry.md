@@ -14,6 +14,3 @@ See [Popover Props](n-popover#Props)
 
 ## Slots
 See [Popover Slots](n-popover#Slots)
-
-## Events
-See [Popover Events](n-popover#Events)

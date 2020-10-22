@@ -1,7 +1,7 @@
 # Arrow
 ```html
-<n-tooltip show-arrow>
-  <template v-slot:activator>
+<n-tooltip show-arrow trigger="hover">
+  <template v-slot:trigger>
     <n-button>
       No, no arrow by default
     </n-button>

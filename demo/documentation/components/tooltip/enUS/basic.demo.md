@@ -1,7 +1,7 @@
 # Basic
 ```html
-<n-tooltip>
-  <template v-slot:activator>
+<n-tooltip trigger="hover">
+  <template v-slot:trigger>
     <n-button>
       Duck
     </n-button>

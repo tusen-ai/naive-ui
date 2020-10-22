@@ -2,7 +2,7 @@
 Setting body-style is sometimes useful.
 ```html
 <n-tooltip :body-style="{ maxWidth: '400px' }" trigger="click">
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button>
       California Girls
     </n-button>
@@ -11,7 +11,7 @@ Setting body-style is sometimes useful.
   girls. I wish they all could be California girls.
 </n-tooltip>
 <n-tooltip :body-style="{ maxWidth: '400px' }" trigger="click">
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button>
       California Girls
     </n-button>

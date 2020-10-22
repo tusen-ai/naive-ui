@@ -1,7 +1,7 @@
 # Trigger
 ```html
 <n-tooltip placement="bottom" trigger="hover">
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button>
       Hover
     </n-button>
@@ -11,7 +11,7 @@
   </span>
 </n-tooltip>
 <n-tooltip placement="bottom" trigger="click">
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button>
       Click
     </n-button>
@@ -21,7 +21,7 @@
   </span>
 </n-tooltip>
 <n-tooltip :show="showPopover" placement="bottom">
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button @click="showPopover = !showPopover">
       Manual
     </n-button>
@@ -33,7 +33,7 @@
 ```
 ```js
 export default {
-  data() {
+  data () {
     return {
       showPopover: false
     }

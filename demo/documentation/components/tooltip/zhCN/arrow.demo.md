@@ -1,7 +1,7 @@
 # 箭头
 ```html
-<n-tooltip show-arrow>
-  <template v-slot:activator>
+<n-tooltip show-arrow trigger="hover">
+  <template v-slot:trigger>
     <n-button>
       是的，默认没有箭头
     </n-button>

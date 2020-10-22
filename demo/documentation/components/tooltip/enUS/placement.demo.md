@@ -1,7 +1,7 @@
 # Placement
 ```html
-<n-tooltip placement="top-start">
-  <template v-slot:activator>
+<n-tooltip placement="top-start" trigger="hover">
+  <template v-slot:trigger>
     <n-button>
       Top Start
     </n-button>
