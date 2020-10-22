@@ -14,24 +14,23 @@ processing
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|processing|`boolean`|`false`||
-|type|`'line' \| 'circle' \| 'multiple-circle'`|`line`||
-|status|`'default' \| 'success' \| 'error' \| 'warning' \| 'info'`|`'default'`||
-|rail-color|`string \| Array<string>`|`null`||
-|color|`string \| Array<string>`|`null`||
-|stroke-width|`number`|`7`||
-|percentage|`number \| Array<number>`|`0`||
-|unit|`string`|`%`||
-|show-indicator|`boolean`|`true`||
-|indicator-placement|`'inside' \| 'inside-label' \| 'outside'`|`'outside'`||
-|indicator-text-color|`string`|`null`||
+|border-radius|`number \| string`|`undefined`|`'line'` typed progress's border-radius. Keep half of default height if not passed.|
 |circle-gap|`number`|`1`|The gap bewteen circles when type is `'multiple-circle'`, suppose viewbox size is `100`|
-|height|`number`|`null`|`'line'` typed progress's height. Keep default height if not passed.|
-|border-radius|`number \| string`|`null`|`'line'` typed progress's border-radius. Keep half of default height if not passed.|
-|fill-border-radius|`number \| string`|`null`|`'line'` typed progress's fill's border-radius. Keep `border-radius` if not passed.|
+|color|`string \| Array<string>`|`undefined`||
+|fill-border-radius|`number \| string`|`undefined`|`'line'` typed progress's fill's border-radius. Keep `border-radius` if not passed.|
+|height|`number`|`undefined`|`'line'` typed progress's height. Keep default height if not passed.|
+|indicator-placement|`'inside' \| 'inside-label' \| 'outside'`|`'outside'`||
+|indicator-text-color|`string`|`undefined`||
+|percentage|`number \| Array<number>`|`0`||
 |processing|`boolean`|`false`||
-
+|processing|`boolean`|`false`||
+|rail-color|`string \| Array<string>`|`undefined`||
+|show-indicator|`boolean`|`true`||
+|status|`'default' \| 'success' \| 'error' \| 'warning' \| 'info'`|`'default'`||
+|stroke-width|`number`|`7`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|type|`'line' \| 'circle' \| 'multiple-circle'`|`line`||
+|unit|`string`|`%`||
 
 ## Slots
 |Name|Parameters|Description|

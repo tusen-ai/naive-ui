@@ -282,11 +282,11 @@ export default {
     },
     railColor: {
       type: [String, Array],
-      default: null
+      default: undefined
     },
     color: {
       type: [String, Array],
-      default: null
+      default: undefined
     },
     viewBoxWidth: {
       type: Number,
@@ -322,7 +322,7 @@ export default {
     },
     indicatorTextColor: {
       type: String,
-      default: null
+      default: undefined
     },
     circleGap: {
       type: Number,
@@ -330,15 +330,15 @@ export default {
     },
     height: {
       type: Number,
-      default: null
+      default: undefined
     },
     borderRadius: {
       type: [String, Number],
-      default: null
+      default: undefined
     },
     fillBorderRadius: {
       type: [String, Number],
-      default: null
+      default: undefined
     }
   },
   setup () {
@@ -365,20 +365,20 @@ export default {
       return formatLength(this.height)
     },
     styleBorderRadius () {
-      if (this.borderRadius !== null) {
+      if (this.borderRadius !== undefined) {
         return formatLength(this.borderRadius)
       }
-      if (this.height !== null) return formatLength(this.height / 2)
+      if (this.height !== undefined) return formatLength(this.height / 2)
       return null
     },
     styleFillBorderRadius () {
-      if (this.fillBorderRadius !== null) {
+      if (this.fillBorderRadius !== undefined) {
         return formatLength(this.fillBorderRadius)
       }
-      if (this.borderRadius !== null) {
+      if (this.borderRadius !== undefined) {
         return formatLength(this.borderRadius)
       }
-      if (this.height !== null) return formatLength(this.height / 2)
+      if (this.height !== undefined) return formatLength(this.height / 2)
       return null
     },
     syntheticIndicatorPlacement () {
