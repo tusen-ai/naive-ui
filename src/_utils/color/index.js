@@ -1,12 +1,7 @@
 /* eslint-disable no-cond-assign */
 /**
- * The color utils are for internal usage, it needs to work first. API design
- * need to be refined later.
+ * The color utils are for internal usage.
  */
-function floor (number) {
-  return Math.floor(Number(number))
-}
-
 const prefix = '^\\s*'
 const suffix = '\\s*$'
 const num = '\\s*(\\d+)\\s*'
@@ -76,24 +71,32 @@ export function read (color) {
     }
     throw new Error('[naive-ui/utils/color]: Invalid color value ' + color)
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
+}
+
+function compositeChannel (v1, a1, v2, a2, a) {
+  return Math.floor((v1 * a1 * (1 - a2) + v2 * a2) / a)
 }
 
 /**
  *
- * @param {string | [number, number, number]} base
+ * @param {string | [number, number, number, number]} base
  * @param {string | [number, number, number, number]} overlay
  */
 export function composite (base, overlay) {
   if (!Array.isArray(base)) base = read(base)
   if (!Array.isArray(overlay)) overlay = read(overlay)
-  if (__DEV__) {
-    if (base.length === 3 && base[3] !== 1) {
-      console.error('[naive-ui/utils/color/composite]: base color has alpha')
-    }
-  }
-  return 'rgb(' + base.slice(0, 3).map((v, i) => floor(v * (1 - overlay[3]) + overlay[i] * overlay[3])).join(', ') + ')'
+  const a1 = base[3]
+  const a2 = overlay[3]
+  const alpha = (a1 + a2 - a1 * a2)
+  return `rgba(${
+    compositeChannel(base[0], a1, overlay[0], a2, alpha)
+  }, ${
+    compositeChannel(base[1], a1, overlay[1], a2, alpha)
+  }, ${
+    compositeChannel(base[2], a1, overlay[2], a2, alpha)
+  }, ${alpha})`
 }
 
 export function changeColor (base, options) {
