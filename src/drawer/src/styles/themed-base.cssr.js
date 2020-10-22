@@ -11,8 +11,11 @@ export default c([
       color: backgroundColor,
       textColor
     } = props.$local
-    const base = props.$base
-    const cubicBezierEaseInOut = base.cubicBezierEaseInOut
+    const {
+      cubicBezierEaseInOut,
+      cubicBezierEaseIn,
+      cubicBezierEaseOut
+    } = props.$base
     return [
       cTB('drawer', {
         raw: `
@@ -76,7 +79,9 @@ export default c([
       }, [
         fadeInTransition({
           enterDuration: '0.3s',
-          leaveDuration: '0.3s'
+          leaveDuration: '0.3s',
+          enterCubicBezier: cubicBezierEaseIn,
+          leaveCubicBezier: cubicBezierEaseOut
         })
       ]),
       cB('drawer-container', {

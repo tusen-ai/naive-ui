@@ -7,7 +7,8 @@
   <n-button @click="activate('left')">Left</n-button>
 </n-button-group>
 <div 
-  ref="target" 
+  ref="target"
+  id="drawer-target"
   style="
     position:relative;
     width: 100%;
@@ -23,11 +24,11 @@
   Target Area
 </div>
 <n-drawer
-  v-model="active"
+  v-model:show="active"
   :width="200"
   :height="200"
   :placement="placement" 
-  :target="target"
+  to="#drawer-target"
 >
   <n-h1>Stoner</n-h1>
   <n-p>Stoner is a 1965 novel by the American writer John Williams.</n-p>
