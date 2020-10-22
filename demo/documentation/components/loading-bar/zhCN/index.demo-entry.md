@@ -1,24 +1,45 @@
 # 加载条 Loading Bar 
 焦虑的安慰剂，疗效尚可。
+
+<n-space vertical align="stretch">
+<n-alert title="使用前提" type="warning">
+  如果你想使用加载条，你需要把调用其方法的组件放在 <n-text code>n-loading-bar-provider</n-text> 内部并且注入 <n-text code>loadingBar</n-text>。
+</n-alert>
+例如：
+
+```html
+<!-- App.vue -->
+<n-loading-bar-provider>
+  <content />
+</n-loading-bar-provider>
+```
+
+```js
+// content
+export default {
+  inject: ['loadingBar'],
+  methods: {
+    loading () {
+      this.loadingBar.start()
+    }
+  }
+}
+```
+</n-space>
+
 ## 演示
 ```demo
 basic
 ```
 ## API
-### $NLoadingBar
-#### $NLoadingBar Methods
+### `loadingBar` Injection Methods
 |名称|类型|说明|
 |-|-|-|
-|`start`|`(option: LoadingBarOption) => void`||
-|`finish`|`(option: LoadingBarOption) => void`||
-|`error`|`(option: LoadingBarOption) => void`||
-
-#### $NLoadingBar Properties
-|名称|类型|说明|
-|-|-|-|
-|theme|`'light' \| 'dark'`|如果设定会将 `$NLoadingBar` 的全局主题设为该主题，如果没有设定则全局主题则取决于调用位置（它工作起来和 <n-a to="n-message#about-theme">message 的主题</n-a>比较像，在大多数情况下你不用为此而操心）|
+|error|`(option: LoadingBarOption) => void`||
+|finish|`(option: LoadingBarOption) => void`||
+|start|`(option: LoadingBarOption) => void`||
 
 #### LoadingBarOption Properties
 |名称|类型|说明|
 |-|-|-|
-|theme|`'light' \| 'dark'`|如果设定会将该加载条的主题设为该主题，如果没有设定则会使用 `$NLoadingBar` 的全局主题|
+|theme|`'light' \| 'dark'`|如果设定会将该加载条的主题设为该主题，如果没有设定则会使用 `n-loading-bar-provider` 所处位置的主题|
