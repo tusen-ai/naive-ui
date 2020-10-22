@@ -13,18 +13,29 @@ Confirm can be async.
 ```
 
 ```js
+const sleep = () => new Promise(resolve => setTimeout(resolve, 1000))
+const countDown = second => `Count down ${second} second`
+
 export default {
+  inject: [
+    'dialog'
+  ],
   methods: {
     handleClick(e) {
-      const confirmInstance = this.$NConfirm.success({
+      const dialog = this.dialog.success({
         title: 'Async',
         content:
           'Click and count down 3 second',
         positiveText: 'Confirm',
         onPositiveClick: () => {
-          confirmInstance.loading = true
-          this.$NMessage.success('Count down 3 second')
-          return new Promise(resolve => window.setTimeout(() => resolve(true), 3000))
+          dialog.loading = true
+          return new Promise(resolve => {
+            sleep()
+              .then(() => { dialog.content = countDown(2); return sleep() })
+              .then(() => { dialog.content = countDown(1); return sleep() })
+              .then(() => { dialog.content = countDown(0) })
+              .then(resolve)
+          })
         }
       })
     }

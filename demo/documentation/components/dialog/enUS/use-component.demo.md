@@ -1,7 +1,7 @@
 # Use as a Component
 Sometimes you may want to use a component.
 ```html
-<n-confirm
+<n-dialog
   title="Confirm"
   content="Are you sure?" 
   :closable="false"
@@ -13,13 +13,14 @@ Sometimes you may want to use a component.
 ```
 ```js
 export default {
+  inject: ['message'],
   methods: {
     handleNegativeClick () {
-      this.$NMessage.waning('Cancel')
+      this.message.warning('Cancel')
       this.isActive = false
     },
     handlePositiveClick () {
-      this.$NMessage.success('Confirm')
+      this.message.success('Confirm')
       this.isActive = false
     }
   }

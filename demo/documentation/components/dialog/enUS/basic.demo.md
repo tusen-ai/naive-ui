@@ -1,5 +1,5 @@
 # Basic
-Use `$NConfirm` to create a confirm modal.
+Inject `dialog` to create a dialog.
 ```html
 <n-button @click="handleConfirm">
   Confirm
@@ -18,39 +18,43 @@ Use `$NConfirm` to create a confirm modal.
 ```
 ```js
 export default {
+  inject: [
+    'dialog',
+    'message'
+  ],
   methods: {
     handleConfirm (e) {
-      const confirmInstance = this.$NConfirm.warning({
+      const confirmInstance = this.dialog.warning({
         title: 'Confirm',
         content: 'Are you sure?',
         positiveText: 'Sure',
         negativeText: 'Not Sure',
         onPositiveClick: () => {
-          this.$NMessage.success('Sure')
+          this.message.success('Sure')
         },
         onNegativeClick: () => {
-          this.$NMessage.error('Not Sure')
+          this.message.error('Not Sure')
         }
       })
     },
     handleSuccess (e) {
-      const confirmInstance = this.$NConfirm.success({
+      const confirmInstance = this.dialog.success({
         title: 'Success',
         content:
           'Cool',
         positiveText: 'Wow!',
         onPositiveClick: () => {
-          this.$NMessage.success('Great!')
+          this.message.success('Great!')
         }
       })
     },
     handleError(e) {
-      const confirmInstance = this.$NConfirm.error({
+      const confirmInstance = this.dialog.error({
         title: 'Error',
         content: 'A mistake.',
         positiveText: 'Ahhh!',
         onPositiveClick: () => {
-          this.$NMessage.success('I knew it...')
+          this.message.success('I knew it...')
         }
       })
     }

@@ -1,5 +1,33 @@
-# Confirm
+# Dialog
 Before taking action, please confirm.
+
+<n-space vertical align="stretch">
+<n-alert title="Prerequisite" type="warning">
+  If you want use dialog, you need to wrap the component where you call related methods inside <n-text code>n-dialog-provider</n-text> and inject <n-text code>dialog</n-text>.
+</n-alert>
+For example:
+
+```html
+<!-- App.vue -->
+<n-dialog-provider>
+  <content />
+</n-dialog-provider>
+```
+
+```js
+// content
+export default {
+  inject: ['dialog'],
+  methods: {
+    warning () {
+      this.dialog.warning(
+        // ...
+      )
+    }
+  }
+}
+```
+</n-space>
 
 ## Demos
 ```demo
@@ -8,87 +36,82 @@ async
 use-component
 ```
 ## API
-### $NConfirm API
+### `dialog` Injection API
 |Name|Type|Description|
 |-|-|-|
-|warning|`(options: ConfirmOption) => ConfirmEnvironment`||
-|success|`(options: ConfirmOption) => ConfirmEnvironment`||
-|error|`(options: ConfirmOption) => ConfirmEnvironment`||
 |destroyAll|`() => void`||
+|error|`(options: DialogOption) => DialogReactive`||
+|success|`(options: DialogOption) => DialogReactive`||
+|warning|`(options: DialogOption) => DialogReactive`||
 
-### ConfirmOption API
+### DialogOption Properties
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|type|`'error \| 'success' \| 'warning'`|`'warning'`||
-|title|`string \| (() => VNode \| Array<VNode>)`|`null`|Can be a render function.|
-|closable|`boolean`|`true`||
-|icon|`() => VNode \| Array<VNode>`|`null`|Should be a render function.|
-|negative-text|`string`|`null`|Corresponding button won't show if not set.|
-|positive-text|`string`|`null`|Corresponding button won't show if not set.|
-|content|`string \| (() => VNode \| Array<VNode>)`|`null`|Can be a render function.|
-|show-icon|`boolean`|`true`||
-|loading|`boolean`|`false`||
 |bordered|`boolean`|`false`||
+|closable|`boolean`|`true`||
+|content|`string \| (() => VNode \| Array<VNode>)`|`undefined`|Can be a render function.|
+|icon|`() => VNode \| Array<VNode>`|`undefined`|Render function.|
+|loading|`boolean`|`false`||
+|negative-text|`string`|`undefined`|Corresponding button won't show if not set.|
+|positive-text|`string`|`undefined`|Corresponding button won't show if not set.|
+|show-icon|`boolean`|`true`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|title|`string \| (() => VNode \| Array<VNode>)`|`undefined`|Can be a render function.|
+|type|`'error \| 'success' \| 'warning'`|`'warning'`||
 |onPositiveClick|`() => boolean \| Promise<boolean> \| any`|`() => true`|The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior.|
 |onNegativeClick|`() => boolean \| Promise<boolean> \| any`|`() => true`|The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior.|
 |onClose|`() => boolean \| Promise<boolean> \| any`|`() => true`|The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior.|
 
-### ConfirmEnvironment API
-#### ConfirmEnvironment Properties
-Properties of ConfirmEnvironment can be modified
+### DialogReactive API
+#### DialogReactive Properties
+All the properties can be modified dynamically.
 
 |Name|Type|Description|
 |-|-|-|
-|theme|`'light' \| 'dark'`||
-|type|`'error \| 'success' \| 'warning'`||
-|title|`string \| (() => VNode \| Array<VNode>)`|Can be a render function.|
+|bordered|`boolean`||
 |closable|`boolean`||
-|icon|`() => VNode \| Array<VNode>`|Should be a render function.|
+|content|`string \| (() => VNode \| Array<VNode>)`|Can be a render function.|
+|icon|`() => VNode \| Array<VNode>`|Render function.|
+|loading|`boolean`||
 |negative-text|`string`|Corresponding button won't show if not set.|
 |positive-text|`string`|Corresponding button won't show if not set.|
-|content|`string \| (() => VNode \| Array<VNode>)`|Can be a render function.|
 |show-icon|`boolean`||
-|loading|`boolean`||
-|bordered|`boolean`||
+|theme|`'light' \| 'dark'`||
+|title|`string \| (() => VNode \| Array<VNode>)`|Can be a render function.|
+|type|`'error \| 'success' \| 'warning'`||
 |onPositiveClick|`() => boolean \| Promise<boolean> \| any`||
 |onNegativeClick|`() => boolean \| Promise<boolean> \| any`||
 |onClose|`() => boolean \| Promise<boolean> \| any`||
 
-#### ConfirmEnvironment Methods
-|Name|Parameters|Description|
+#### DialogReactive Methods
+|Name|Type|Description|
 |-|-|-|
-|hide|`()`|Call this method can close the confirm|
+|destroy|`()`|Close dialog|
 
 ## Props
-### Confirm Props
+### Dialog Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|type|`'error \| 'success' \| 'warning'`|`'warning'`||
-|title|`string \| (() => VNode \| Array<VNode>)`|`null`|Can be a render function.|
-|closable|`boolean`|`boolean`||
-|icon|`() => VNode \| Array<VNode>`|`null`|Should be a render function|
-|negative-text|`string`|`null`|Corresponding button won't show if not set.|
-|positive-text|`string`|`null`|Corresponding button won't show if not set.|
-|content|`string \| (() => VNode \| Array<VNode>)`|`null`|Can be a render function.|
-|show-icon|`boolean`|`true`||
-|loading|`boolean`|`false`||
 |bordered|`boolean`|`false`||
-
-## Events
-### Confirm Events
-|Name|Parameters|Description|
-|-|-|-|
-|positive-click|`()`||
-|negative-click|`()`||
-|close|`()`||
+|closable|`boolean`|`boolean`||
+|content|`string \| (() => VNode \| Array<VNode>)`|`undefined`|Can be a render function.|
+|icon|`() => VNode \| Array<VNode>`|`undefined`|Render function.|
+|loading|`boolean`|`false`||
+|negative-text|`string`|`undefined`|Corresponding button won't show if not set.|
+|positive-text|`string`|`undefined`|Corresponding button won't show if not set.|
+|show-icon|`boolean`|`true`||
+|title|`string \| (() => VNode \| Array<VNode>)`|`undefined`|Can be a render function.|
+|type|`'error \| 'success' \| 'warning'`|`'warning'`||
+|on-positive-click|`() => any`||
+|on-negative-click|`() => any`||
+|on-close|`() => any`||
 
 ## Slots
-### Confirm Slots
+### Dialog Slots
 |Name|Parameters|Description|
 |-|-|-|
-|icon|`()`||
-|header|`()`||
-|default|`()`|Content|
 |action|`()`||
+|default|`()`|Content|
+|header|`()`||
+|icon|`()`||
 
