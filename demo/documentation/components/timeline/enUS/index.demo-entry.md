@@ -10,16 +10,16 @@ item-placement
 ### Timeline Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |item-placement|`'left' \| 'right'`|`'left'`||
 |size|`'medium' \| 'large'`|`'medium'`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 
 ### Timeline Item Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|title|`string`|`null`||
-|content|`string`|`null`||
-|time|`string`|`null`||
+|content|`string`|`undefined`||
+|time|`string`|`undefined`||
+|title|`string`|`undefined`||
 |type|`'default' \| 'success' \| 'info' \| 'warning' \| 'error'`|`'default'`||
 
 ## Slots
@@ -32,5 +32,5 @@ item-placement
 |Name|Parameters|Description|
 |-|-|-|
 |default|`()`||
-|header|`()`||
 |footer|`()`||
+|header|`()`||

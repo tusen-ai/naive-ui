@@ -10,16 +10,16 @@ item-placement
 ### Timeline Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |item-placement|`'left' \| 'right'`|`'left'`||
 |size|`'medium' \| 'large'`|`'medium'`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 
 ### Timeline Item Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|title|`string`|`null`||
-|content|`string`|`null`||
-|time|`string`|`null`||
+|content|`string`|`undefined`||
+|time|`string`|`undefined`||
+|title|`string`|`undefined`||
 |type|`'default' \| 'success' \| 'info' \| 'warning' \| 'error'`|`'default'`||
 
 ## Slots
@@ -32,5 +32,5 @@ item-placement
 |名称|参数|说明|
 |-|-|-|
 |default|`()`||
-|header|`()`||
 |footer|`()`||
+|header|`()`||
