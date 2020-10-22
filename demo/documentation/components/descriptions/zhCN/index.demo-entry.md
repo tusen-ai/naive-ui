@@ -16,13 +16,13 @@ size
 ### Descriptions Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|title|`string`|`null`||
-|column|`number`|`3`||
-|label-placement|`'top' \| 'left'`|`'top'`||
-|label-align|`'center' \| 'left' \| 'right'`|`'left'`||
-|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |bordered|`boolean`|`false`||
+|column|`number`|`3`||
+|label-align|`'center' \| 'left' \| 'right'`|`'left'`||
+|label-placement|`'top' \| 'left'`|`'top'`||
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|title|`string`|`undefined`||
 
 ### Description Item Props
 |名称|类型|默认值|说明|
