@@ -9,7 +9,6 @@
 <n-modal
   :show="showModal"  
   :mask-closable="false"
-  
   preset="confirm"
   title="确认"
   content="你确认" 

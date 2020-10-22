@@ -6,7 +6,7 @@
 >
   来吧
 </n-button>
-<n-modal v-model="modalActive" 
+<n-modal v-model:show="modalActive" 
   preset="confirm"
   title="Confirm"
 >
@@ -23,7 +23,7 @@
 export default {
   data () {
     return {
-      modalActive: false,
+      modalActive: false
     }
   }
 }

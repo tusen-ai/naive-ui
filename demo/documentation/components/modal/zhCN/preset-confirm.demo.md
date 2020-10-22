@@ -1,5 +1,5 @@
-# 使用 Confirm 预设
-`confirm` 预设的例子。
+# 使用 Dialog 预设
+`dialog` 预设的例子。
 ```html
 <n-button
   @click="modalActive = true"
@@ -7,7 +7,7 @@
   来吧
 </n-button>
 <n-modal
-  v-model="modalActive"
+  v-model:show="modalActive"
   preset="confirm" 
   title="确认"
   content="你确认?" 
