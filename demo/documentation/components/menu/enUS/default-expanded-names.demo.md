@@ -1,112 +1,110 @@
 # Opened Submenu
-You can set `default-expanded-names` to make menu work in an uncontrolled manner or use `expanded-names` and `@expanded-names-change` to make it work in a controlled manner.
+You can set `default-expanded-keys` to make menu work in an uncontrolled manner or use `expanded-keys` and `@update:expanded-keys` to make it work in a controlled manner.
 ```html
 <n-menu
-  v-model="activeName"
-  :default-expanded-names="defaultExpandedNames"
+  v-model:value="activeKey"
+  :default-expanded-keys="defaultExpandedKeys"
   :items="menuItems"
-  @expanded-names-change="handleExpandedNamesChange"
-  @select="handleSelect"
+  @update:expanded-keys="handleUpdateExpandedKeys"
 />
 ```
 ```js
+import { h, resolveComponent } from 'vue'
 import bookIcon from 'naive-ui/lib/icons/book-outline'
 import personIcon from 'naive-ui/lib/icons/person-outline'
 import wineIcon from 'naive-ui/lib/icons/wine-outline'
 
+function renderIcon(icon) {
+  return () => h(resolveComponent('n-icon'), null, { default: () => h(icon) })
+}
+
 const menuItems = [
   {
     title: 'Hear the Wind Sing',
-    name: 'hear-the-wind-sing',
-    icon: h => h('n-icon', [h(bookIcon)])
+    key: 'hear-the-wind-sing',
+    icon: renderIcon(bookIcon)
   },
   {
-    title: 'Pinball, 1973',
-    name: 'pinball-1973',
-    icon: h => h('n-icon', [h(bookIcon)]),
+    title: 'Pinball 1973',
+    key: 'pinball-1973',
+    icon: renderIcon(bookIcon),
     disabled: true,
     children: [
       {
         title: 'Rat',
-        name: 'rat'
+        key: 'rat'
       }
     ]
   },
   {
     title: 'A Wild Sheep Chase',
-    name: 'a-wild-sheep-chase',
-    icon: h => h('n-icon', [h(bookIcon)]),
-    disabled: true
+    key: 'a-wild-sheep-chase',
+    disabled: true,
+    icon: renderIcon(bookIcon)
   },
   {
-    title: 'Dance Dance Dance',
-    name: 'dance-dance-dance',
-    icon: h => h('n-icon', [h(bookIcon)]),
+    title: '舞，舞，舞',
+    key: 'Dance Dance Dance',
+    icon: renderIcon(bookIcon),
     children: [
       {
         type: 'group',
-        title: 'Characters',
+        title: 'People',
+        key: 'people',
         children: [
           {
             title: 'Narrator',
-            name: 'narrator',
-            icon: h =>  h('n-icon', [h(personIcon)])
+            key: 'narrator',
+            icon: renderIcon(personIcon)
           },
           {
             title: 'Sheep Man',
-            name: 'sheep-man',
-            icon: h => h('n-icon', [h(personIcon)])
+            key: 'sheep-man',
+            icon: renderIcon(personIcon)
           }
         ]
       },
       {
         title: 'Beverage',
-        name: 'beverage',
-        icon: h => h('n-icon', [h(wineIcon)]),
+        key: 'beverage',
+        icon: renderIcon(wineIcon),
         children: [
           {
             title: 'Whisky',
-            name: 'whisky'
+            key: 'whisky'
           }
         ]
       },
       {
         title: 'Food',
-        name: 'food',
+        key: 'food',
         children: [
           {
             title: 'Sandwich',
-            name: 'sandwich'
+            key: 'sandwich'
           }
         ]
       },
       {
         title: 'The past increases. The future recedes.',
-        name: 'the-past-increases-the-future-recedes'
+        key: 'the-past-increases-the-future-recedes'
       }
     ]
   }
 ]
 
 export default {
-  components: {
-    bookIcon,
-    personIcon,
-    wineIcon
-  },
+  inject: ['message'],
   data () {
     return {
-      defaultExpandedNames: ['dance-dance-dance', 'food'],
-      activeName: null,
+      defaultExpandedKeys: ['dance-dance-dance', 'food'],
+      activeKey: null,
       menuItems
     }
   },
   methods: {
-    handleSelect (value) {
-      this.$NMessage.info('Select: ' + JSON.stringify(value))
-    },
-    handleExpandedNamesChange (value) {
-      this.$NMessage.info('ExpandedNamesChange: ' + JSON.stringify(value))
+    handleUpdateExpandedKeys (value) {
+      this.message.info('[onUpdate:expandedKeys]: ' + JSON.stringify(value))
     }
   }
 }

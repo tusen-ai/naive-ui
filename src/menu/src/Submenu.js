@@ -20,7 +20,7 @@ export default {
   props: {
     extra: {
       type: [String, Function],
-      default: null
+      default: undefined
     },
     disabled: {
       type: Boolean,
@@ -32,7 +32,7 @@ export default {
     },
     icon: {
       type: Function,
-      default: null
+      default: undefined
     },
     onClick: {
       type: Function,

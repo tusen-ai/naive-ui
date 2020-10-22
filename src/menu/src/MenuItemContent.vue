@@ -47,27 +47,27 @@ export default {
     },
     paddingLeft: {
       type: Number,
-      default: null
+      default: undefined
     },
     maxIconSize: {
       type: Number,
-      default: null
+      default: undefined
     },
     activeIconSize: {
       type: Number,
-      default: null
+      default: undefined
     },
     title: {
       type: [String, Function],
-      default: null
+      default: undefined
     },
     extra: {
       type: [String, Function],
-      default: null
+      default: undefined
     },
     icon: {
       type: [String, Function],
-      default: null
+      default: undefined
     },
     showArrow: {
       type: Boolean,

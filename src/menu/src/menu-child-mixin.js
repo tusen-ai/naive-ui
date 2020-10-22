@@ -27,7 +27,7 @@ export default {
     },
     title: {
       type: [String, Function],
-      default: null
+      default: undefined
     },
     insidePopover: {
       type: Boolean,
@@ -36,7 +36,7 @@ export default {
   },
   data () {
     return {
-      delayedPaddingLeft: null
+      delayedPaddingLeft: undefined
     }
   },
   created () {
@@ -90,7 +90,7 @@ export default {
           collapsedIconSize
         }
       } = this
-      return collapsedIconSize === null ? iconSize : collapsedIconSize
+      return collapsedIconSize === undefined ? iconSize : collapsedIconSize
     },
     paddingLeft () {
       // TODO handle popover
@@ -110,11 +110,11 @@ export default {
         level
       } = this
       if (insidePopover && level === 1) return 12
-      const mergedRootIndent = rootIndent === null ? indent : rootIndent
+      const mergedRootIndent = rootIndent === undefined ? indent : rootIndent
       const menuCollapsedPaddingLeft = collapsedWidth / 2 - collapsedIconSize / 2
       const menuCollapsedPaddingDiff = menuCollapsed ? mergedRootIndent - menuCollapsedPaddingLeft : 0
       if (root) {
-        if (horizontal) return null
+        if (horizontal) return undefined
         return mergedRootIndent - menuCollapsedPaddingDiff
       }
       if (NMenuItemGroup) {
@@ -123,7 +123,7 @@ export default {
       if (NSubmenu) {
         return indent + NSubmenu.paddingLeft
       }
-      return null
+      return undefined
     }
   }
 }

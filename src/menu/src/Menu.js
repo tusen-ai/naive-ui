@@ -34,7 +34,7 @@ export default {
     },
     collapsedWidth: {
       type: Number,
-      default: null
+      default: undefined
     },
     iconSize: {
       type: Number,
@@ -46,7 +46,7 @@ export default {
     },
     rootIndent: {
       type: Number,
-      default: null
+      default: undefined
     },
     indent: {
       type: Number,
@@ -58,11 +58,11 @@ export default {
     },
     expandedKeys: {
       type: Array,
-      default: null
+      default: undefined
     },
     value: {
       type: String,
-      default: null
+      default: undefined
     },
     mode: {
       validator (value) {

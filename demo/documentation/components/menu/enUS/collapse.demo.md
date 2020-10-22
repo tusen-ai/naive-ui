@@ -1,120 +1,123 @@
 # Collapsed Menu
-Use collapsable vertical menu with layout sider. Use `collapsed` to control collapse status of menu. You must set `collapsed-width` to make it collapse in a right manner. There are still some other collapse related props you can modify: `icon-size`, `collapsed-icon-size`, `overlay-width`, `overlay-min-width`. For details see API table at the bottom of the page.
+Use collapsable vertical menu with layout sider. Use `collapsed` to control collapse status of menu. You must set `collapsed-width` to make it collapse in a right manner. There are still some other collapse related props you can modify: `icon-size`, `collapsed-icon-size`, `popover-body-style`. For details see API table at the bottom of the page.
 ```html
-<n-switch v-model="collapsed" />
-<n-layout>
-  <n-layout-sider
-    collapse-mode="width"
-    :collapsed-width="64"
-    :width="240"
-    :collapsed="collapsed"
-    show-toggle-button
-    @collapse="collapsed = true"
-    @expand="collapsed = false"
-  >
-    <n-menu
-      :collapsed="collapsed"
-      :collapsed-width="64"
-      :collapsed-icon-size="22"
-      :items="menuItems"
-      v-model="activeMenuItemName"
-    />
-  </n-layout-sider>
+<n-space vertical align="stretch">
+  <n-switch v-model:value="collapsed" />
   <n-layout>
-    <n-layout-content>
-      <span>Content</span>
-    </n-layout-content>
+    <n-layout-sider
+      collapse-mode="width"
+      :collapsed-width="64"
+      :width="240"
+      :collapsed="collapsed"
+      show-toggle-button
+      @collapse="collapsed = true"
+      @expand="collapsed = false"
+    >
+      <n-menu
+        :collapsed="collapsed"
+        :collapsed-width="64"
+        :collapsed-icon-size="22"
+        :items="menuItems"
+        v-model:value="activeKey"
+      />
+    </n-layout-sider>
+    <n-layout>
+      <n-layout-content>
+        <span>内容</span>
+      </n-layout-content>
+    </n-layout>
   </n-layout>
-</n-layout>
+</n-space>
 ```
 ```js
+import { h, resolveComponent } from 'vue'
 import bookIcon from 'naive-ui/lib/icons/book-outline'
 import personIcon from 'naive-ui/lib/icons/person-outline'
 import wineIcon from 'naive-ui/lib/icons/wine-outline'
 
+function renderIcon(icon) {
+  return () => h(resolveComponent('n-icon'), null, { default: () => h(icon) })
+}
+
 const menuItems = [
   {
     title: 'Hear the Wind Sing',
-    name: 'hear-the-wind-sing',
-    icon: h => h('n-icon', [h(bookIcon)])
+    key: 'hear-the-wind-sing',
+    icon: renderIcon(bookIcon)
   },
   {
-    title: 'Pinball, 1973',
-    name: 'pinball-1973',
-    icon: h => h('n-icon', [h(bookIcon)]),
+    title: 'Pinball 1973',
+    key: 'pinball-1973',
+    icon: renderIcon(bookIcon),
     disabled: true,
     children: [
       {
         title: 'Rat',
-        name: 'rat'
+        key: 'rat'
       }
     ]
   },
   {
     title: 'A Wild Sheep Chase',
-    name: 'a-wild-sheep-chase',
-    icon: h => h('n-icon', [h(bookIcon)]),
-    disabled: true
+    key: 'a-wild-sheep-chase',
+    disabled: true,
+    icon: renderIcon(bookIcon)
   },
   {
-    title: 'Dance Dance Dance',
-    name: 'dance-dance-dance',
-    icon: h => h('n-icon', [h(bookIcon)]),
+    title: '舞，舞，舞',
+    key: 'Dance Dance Dance',
+    icon: renderIcon(bookIcon),
     children: [
       {
         type: 'group',
-        title: 'Characters',
+        title: 'People',
+        key: 'people',
         children: [
           {
             title: 'Narrator',
-            name: 'narrator',
-            icon: h =>  h('n-icon', [h(personIcon)])
+            key: 'narrator',
+            icon: renderIcon(personIcon)
           },
           {
             title: 'Sheep Man',
-            name: 'sheep-man',
-            icon: h => h('n-icon', [h(personIcon)])
+            key: 'sheep-man',
+            icon: renderIcon(personIcon)
           }
         ]
       },
       {
         title: 'Beverage',
-        name: 'beverage',
-        icon: h => h('n-icon', [h(wineIcon)]),
+        key: 'beverage',
+        icon: renderIcon(wineIcon),
         children: [
           {
             title: 'Whisky',
-            name: 'whisky'
+            key: 'whisky'
           }
         ]
       },
       {
         title: 'Food',
-        name: 'food',
+        key: 'food',
         children: [
           {
             title: 'Sandwich',
-            name: 'sandwich'
+            key: 'sandwich'
           }
         ]
       },
       {
         title: 'The past increases. The future recedes.',
-        name: 'the-past-increases-the-future-recedes'
+        key: 'the-past-increases-the-future-recedes'
       }
     ]
   }
 ]
 
 export default {
-  components: {
-    bookIcon,
-    personIcon,
-    wineIcon
-  },
   data () {
     return {
-      activeMenuItemName: null,
+      activeKey: null,
       collapsed: true,
       menuItems
     }
