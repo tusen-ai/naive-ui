@@ -49,7 +49,7 @@ export default {
   props: {
     description: {
       type: String,
-      default: null
+      default: undefined
     },
     showDescription: {
       type: Boolean,

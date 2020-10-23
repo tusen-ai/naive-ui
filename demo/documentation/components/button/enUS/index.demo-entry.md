@@ -22,7 +22,7 @@ group
 |attr-type|`'button' \| 'submit' \| 'reset'`|`'button'`|The DOM `type` attribute of the button.|
 |block|`boolean`|`false`||
 |circle|`boolean`|`false`||
-|color|`string`|`null`|Only support `#FFF`, `#FFFFFF`, `rgb(0, 0, 0)` formatted colors.|
+|color|`string`|`undefined`|Only support `#FFF`, `#FFFFFF`, `rgb(0, 0, 0)` formatted colors.|
 |dashed|`boolean`|`false`||
 |disabled|`boolean`|`false`||
 |ghost|`boolean`|`false`||
@@ -38,7 +38,7 @@ group
 ### Button Group Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|size|`'tiny' \| 'small' \| 'medium' \| 'large'`|`null`|The buttons' size in button group. If set, the button's size prop inner group won't work.|
+|size|`'tiny' \| 'small' \| 'medium' \| 'large'`|`undefined`|The buttons' size in button group. If set, the button's size prop inner group won't work.|
 |vertical|`boolean`|`false`||
 
 ## Slots

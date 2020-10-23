@@ -70,7 +70,7 @@ export default {
       validator (value) {
         return ['hover', 'click'].includes(value)
       },
-      default: null
+      default: undefined
     },
     delay: {
       type: Number,
@@ -90,11 +90,11 @@ export default {
     },
     bodyClass: {
       type: String,
-      default: null
+      default: undefined
     },
     bodyStyle: {
       type: Object,
-      default: null
+      default: undefined
     },
     manuallyPositioned: {
       type: Boolean,
@@ -102,11 +102,11 @@ export default {
     },
     x: {
       type: Number,
-      default: null
+      default: undefined
     },
     y: {
       type: Number,
-      default: null
+      default: undefined
     },
     disabled: {
       type: Boolean,
@@ -118,11 +118,11 @@ export default {
     },
     arrowStyle: {
       type: Object,
-      default: null
+      default: undefined
     },
     theme: {
       type: String,
-      default: null
+      default: undefined
     },
     filp: {
       type: Boolean,

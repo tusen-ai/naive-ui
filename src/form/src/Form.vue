@@ -27,7 +27,7 @@ export default {
     },
     labelWidth: {
       type: [Number, String],
-      default: null
+      default: undefined
     },
     labelAlign: {
       type: String,

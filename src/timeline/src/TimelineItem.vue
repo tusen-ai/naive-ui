@@ -51,15 +51,15 @@ export default {
   props: {
     time: {
       type: [String, Number],
-      default: null
+      default: undefined
     },
     title: {
       type: String,
-      default: null
+      default: undefined
     },
     content: {
       type: String,
-      default: null
+      default: undefined
     },
     type: {
       validator (type) {

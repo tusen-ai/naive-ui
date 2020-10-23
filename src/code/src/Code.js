@@ -15,7 +15,7 @@ export default {
   props: {
     language: {
       type: String,
-      default: null
+      default: undefined
     },
     code: {
       type: String,
@@ -27,7 +27,7 @@ export default {
     },
     hljs: {
       type: Object,
-      default: null
+      default: undefined
     }
   },
   watch: {

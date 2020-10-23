@@ -25,7 +25,7 @@ export default {
   props: {
     data: {
       type: Array,
-      default: null
+      required: true
     },
     defaultExpandAll: {
       type: Boolean,
@@ -53,7 +53,7 @@ export default {
     },
     checkedKeys: {
       type: Array,
-      default: null
+      default: undefined
     },
     disabled: {
       type: Boolean,
@@ -61,19 +61,19 @@ export default {
     },
     defaultCheckedKeys: {
       type: Array,
-      default: null
+      default: undefined
     },
     expandedKeys: {
       type: Array,
-      default: null
+      default: undefined
     },
     defaultExpandedKeys: {
       type: Array,
-      default: null
+      default: undefined
     },
     selectedKeys: {
       type: Array,
-      default: null
+      default: undefined
     },
     remote: {
       type: Boolean,

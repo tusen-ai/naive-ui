@@ -41,11 +41,11 @@ export default {
     },
     alignItems: {
       type: String,
-      default: null
+      default: undefined
     },
     justifyContent: {
       type: String,
-      default: null
+      default: undefined
     }
   },
   computed: {

@@ -6,7 +6,7 @@ export default {
   props: {
     label: {
       type: String,
-      default: null
+      default: undefined
     },
     span: {
       type: Number,

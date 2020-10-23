@@ -30,7 +30,7 @@ basic
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|code|`string`|`null`||
+|code|`string`|`''`||
 |hljs|`Object`|`undefined`|If you want to set hljs locally, set it on code by the prop|
 |language|`string`|`undefined`||
 |theme|`'light' \| 'dark' \| string`|`undefined`||

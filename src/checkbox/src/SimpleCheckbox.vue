@@ -83,7 +83,7 @@ export default {
     },
     theme: {
       validator: createValidator(['string']),
-      default: null
+      default: undefined
     },
     onClick: {
       validator: createValidator(['function']),

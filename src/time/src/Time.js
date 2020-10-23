@@ -12,7 +12,7 @@ export default {
   props: {
     time: {
       type: [Number, Date],
-      default: null
+      default: undefined
     },
     type: {
       validator (value) {

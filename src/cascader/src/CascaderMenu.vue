@@ -81,7 +81,7 @@ export default {
     },
     theme: {
       type: String,
-      default: null
+      default: undefined
     },
     placement: {
       type: String,

@@ -23,7 +23,7 @@ debug
 |attr-type|`'button' \| 'submit' \| 'reset'`|`'button'`|按钮的 DOM `type` 属性|
 |block|`boolean`|`false`||
 |circle|`boolean`|`false`||
-|color|`string`|`null`|只支持形如 `#FFF`, `#FFFFFF`, `rgb(0, 0, 0)` 的颜色|
+|color|`string`|`undefined`|只支持形如 `#FFF`, `#FFFFFF`, `rgb(0, 0, 0)` 的颜色|
 |dashed|`boolean`|`false`||
 |disabled|`boolean`|`false`||
 |ghost|`boolean`|`false`||
@@ -39,7 +39,7 @@ debug
 ### Button Group Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|size|`'tiny' \| 'small' \| 'medium' \| 'large'`|`null`|在组内的按钮的尺寸。如果设定，内部的按钮尺寸将不生效|
+|size|`'tiny' \| 'small' \| 'medium' \| 'large'`|`undefined`|在组内的按钮的尺寸。如果设定，内部的按钮尺寸将不生效|
 |vertical|`boolean`|`false`||
 
 ## Slots

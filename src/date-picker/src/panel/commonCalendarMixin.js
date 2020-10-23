@@ -26,7 +26,7 @@ export default {
   props: {
     theme: {
       type: String,
-      default: null
+      default: undefined
     },
     active: {
       type: Boolean,

@@ -78,11 +78,11 @@ export default {
     },
     theme: {
       type: String,
-      default: null
+      default: undefined
     },
     pattern: {
       type: String,
-      default: null
+      default: undefined
     },
     multiple: {
       type: Boolean,

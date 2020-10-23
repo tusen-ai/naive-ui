@@ -113,7 +113,7 @@ export default {
   props: {
     options: {
       type: Array,
-      default: null
+      required: true
     },
     value: {
       type: [String, Number, Array],
@@ -165,7 +165,7 @@ export default {
     },
     filter: {
       type: [String, Function],
-      default: null
+      default: undefined
     },
     placement: {
       type: String,

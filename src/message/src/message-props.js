@@ -1,7 +1,7 @@
 export default {
   icon: {
     type: [String, Function],
-    default: null
+    default: undefined
   },
   type: {
     type: String,
@@ -9,7 +9,7 @@ export default {
   },
   content: {
     type: [String, Function],
-    default: null
+    default: undefined
   },
   closable: {
     type: Boolean,
@@ -17,7 +17,7 @@ export default {
   },
   theme: {
     type: String,
-    default: null
+    default: undefined
   },
   onClose: {
     type: Function,

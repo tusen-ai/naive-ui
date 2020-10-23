@@ -40,7 +40,7 @@ export default {
     },
     href: {
       type: String,
-      default: null
+      default: undefined
     }
   },
   setup (props) {

@@ -7,7 +7,7 @@ export default {
   props: {
     line: {
       type: String,
-      default: null
+      default: undefined
     }
   },
   inject: {

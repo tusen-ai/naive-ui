@@ -17,11 +17,11 @@ export default {
     ...NPopover.props,
     positiveText: {
       type: String,
-      default: null
+      default: undefined
     },
     negativeText: {
       type: String,
-      default: null
+      default: undefined
     },
     showIcon: {
       type: Boolean,

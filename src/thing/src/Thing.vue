@@ -87,19 +87,19 @@ export default {
   props: {
     title: {
       type: String,
-      default: null
+      default: undefined
     },
     titleExtra: {
       type: String,
-      default: null
+      default: undefined
     },
     description: {
       type: String,
-      default: null
+      default: undefined
     },
     content: {
       type: String,
-      default: null
+      default: undefined
     },
     contentIndented: {
       type: Boolean,

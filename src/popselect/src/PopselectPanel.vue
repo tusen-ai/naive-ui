@@ -53,7 +53,7 @@ export default {
     },
     width: {
       type: [Number, String],
-      default: null
+      default: undefined
     },
     options: {
       type: Array,

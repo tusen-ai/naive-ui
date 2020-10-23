@@ -29,23 +29,23 @@ export default {
     },
     namespace: {
       type: String,
-      default: null
+      default: undefined
     },
     themeEnvironment: {
       type: Object,
-      default: null
+      default: undefined
     },
     themeEnvironments: {
       type: Object,
-      default: null
+      default: undefined
     },
     language: {
       type: String,
-      default: null
+      default: undefined
     },
     lang: {
       type: String,
-      default: null
+      default: undefined
     },
     // deprecated
     as: {

@@ -58,17 +58,17 @@ export default {
   props: {
     title: {
       type: String,
-      default: null
+      default: undefined
     },
     name: {
       type: [ String, Number ],
-      default: null
+      default: undefined
     },
     displayDirective: {
       validator (value) {
         return ['if', 'show'].includes(value)
       },
-      default: null
+      default: undefined
     }
   },
   setup (props) {
@@ -77,7 +77,7 @@ export default {
   computed: {
     syntheticDisplayDirective () {
       const { displayDirective, NCollapse } = this
-      if (displayDirective !== null) {
+      if (displayDirective) {
         return displayDirective
       } else {
         return NCollapse.displayDirective

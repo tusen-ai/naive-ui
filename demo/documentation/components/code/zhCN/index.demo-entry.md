@@ -30,7 +30,7 @@ basic
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|code|`string`|`null`||
+|code|`string`|`''`||
 |hljs|`Object`|`undefined`|如果你想局部设定 hljs，可以通过这个属性传给组件|
 |language|`string`|`undefined`||
 |theme|`'light' \| 'dark' \| string`|`undefined`||

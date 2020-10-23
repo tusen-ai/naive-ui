@@ -107,7 +107,7 @@ export default {
   props: {
     color: {
       type: String,
-      default: null
+      default: undefined
     },
     text: {
       type: Boolean,

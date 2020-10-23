@@ -121,7 +121,7 @@ export default {
     },
     label: {
       type: [String, Function],
-      default: null
+      default: undefined
     },
     onClick: {
       type: Function,

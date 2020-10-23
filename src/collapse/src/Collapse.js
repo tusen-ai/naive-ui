@@ -26,7 +26,7 @@ export default {
   props: {
     expandedNames: {
       type: [Array, String],
-      default: null
+      default: undefined
     },
     arrowPlacement: {
       validator (value) {

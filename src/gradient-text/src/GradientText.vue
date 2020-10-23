@@ -32,11 +32,11 @@ export default {
   props: {
     size: {
       type: [String, Number],
-      default: null
+      default: undefined
     },
     fontSize: {
       type: [String, Number],
-      default: null
+      default: undefined
     },
     type: {
       type: String,
@@ -44,11 +44,11 @@ export default {
     },
     color: {
       type: [Object, String],
-      default: null
+      default: undefined
     },
     gradient: {
       type: [Object, String],
-      default: null
+      default: undefined
     }
   },
   computed: {
@@ -59,7 +59,7 @@ export default {
     styleFontSize () {
       let fontSize = this.size || this.fontSize
       if (fontSize) fontSize = formatLength(fontSize)
-      return fontSize || null
+      return fontSize || undefined
     },
     styleBackgroundImage () {
       const gradient = this.color || this.gradient
@@ -71,7 +71,7 @@ export default {
         const to = gradient.to
         return `linear-gradient(${deg}deg, ${from} 0%, ${to} 100%)`
       }
-      return null
+      return undefined
     }
   }
 }

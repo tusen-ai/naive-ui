@@ -52,7 +52,7 @@ export default {
     },
     src: {
       type: String,
-      default: null
+      default: undefined
     },
     circle: {
       type: Boolean,
@@ -64,7 +64,7 @@ export default {
     },
     color: {
       type: String,
-      default: null
+      default: undefined
     }
   },
   data () {

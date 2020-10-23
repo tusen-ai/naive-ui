@@ -40,11 +40,11 @@ export default {
     },
     parentPath: {
       type: String,
-      default: null
+      default: undefined
     },
     path: {
       type: String,
-      default: null
+      default: undefined
     },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:value': {

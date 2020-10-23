@@ -28,7 +28,7 @@ export default {
       validator (value) {
         return ['tiny', 'small', 'medium', 'large'].includes(value)
       },
-      default: null
+      default: undefined
     },
     vertical: {
       type: Boolean,

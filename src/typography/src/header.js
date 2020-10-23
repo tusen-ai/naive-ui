@@ -16,7 +16,7 @@ export default level => ({
     },
     prefix: {
       type: String,
-      default: null
+      default: undefined
     },
     alignText: {
       type: Boolean,

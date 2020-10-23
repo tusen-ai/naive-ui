@@ -244,7 +244,7 @@ export default {
       validator (value) {
         return ['small', 'medium', 'large'].includes(value)
       },
-      default: null
+      default: undefined
     },
     type: {
       validator (type) {
@@ -258,19 +258,19 @@ export default {
     },
     placeholder: {
       type: String,
-      default: null
+      default: undefined
     },
     startPlaceholder: {
       type: String,
-      default: null
+      default: undefined
     },
     endPlaceholder: {
       type: String,
-      default: null
+      default: undefined
     },
     format: {
       type: String,
-      default: null
+      default: undefined
     },
     actions: {
       type: Array,
