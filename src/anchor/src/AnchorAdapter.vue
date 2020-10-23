@@ -2,6 +2,8 @@
   <n-base-anchor
     v-if="!affix"
     ref="anchor"
+    :theme="theme"
+    :listen-to="listenTo"
     :bound="bound"
     :target="target"
     :ignore-gap="ignoreGap"
@@ -10,18 +12,21 @@
   </n-base-anchor>
   <n-affix
     v-else
-    :target="target"
+    :listen-to="listenTo"
     :top="top"
     :bottom="bottom"
     :offset-top="offsetTop"
     :offset-bottom="offsetBottom"
     :position="position"
+    :target="target"
   >
     <n-base-anchor
       ref="anchor"
+      :theme="theme"
       :bound="bound"
-      :target="target"
+      :listen-to="listenTo"
       :ignore-gap="ignoreGap"
+      :target="target"
     >
       <slot />
     </n-base-anchor>
@@ -31,10 +36,7 @@
 <script>
 import NBaseAnchor from './BaseAnchor.vue'
 import NAffix from '../../affix'
-import usecssr from '../../_mixins/usecssr'
-import themeable from '../../_mixins/themeable'
-import withapp from '../../_mixins/withapp'
-import styles from './styles'
+import { themeable } from '../../_mixins'
 
 export default {
   name: 'Anchor',
@@ -43,18 +45,12 @@ export default {
     NAffix
   },
   mixins: [
-    withapp,
-    themeable,
-    usecssr(styles)
+    themeable
   ],
   props: {
     top: {
       type: Number,
-      default: null
-    },
-    target: {
-      type: Function,
-      default: null
+      default: undefined
     },
     affix: {
       type: Boolean,
@@ -83,6 +79,17 @@ export default {
     ignoreGap: {
       type: Boolean,
       default: false
+    },
+    listenTo: {
+      type: [String, Object],
+      default: undefined
+    },
+    // deprecated
+    target: {
+      validator () {
+        return true
+      },
+      default: undefined
     }
   },
   methods: {

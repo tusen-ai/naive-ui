@@ -15,7 +15,7 @@ scrollto
 |affix|`boolean`|`false`|If it works like a affix. If set to `true`, it will recieve props from [affix](n-affix#Props)|
 |bound|`number`|`12`||
 |ignore-gap|`boolean`|`false`| If set to `true`, it will be displayed on the exact href |
-|target|`() => HTMLElement`|A function that returns the nearest scrollable ascendant element|The element that anchor listens to scroll event. (If you want affix & anchor to listen to different target, manually warp anchor in affix instead.)|
+|listen-to|`string \| HTMLElement`|`undefined`|The scrolling element to listen scrolling. If not set it will listen to the nearest scrollable ascendant element.|
 |theme|`'light' \| 'dark' \| string`|`undefined`||
 
 ## Methods

@@ -116,11 +116,11 @@ export default {
     },
     x: {
       type: Number,
-      default: null
+      default: undefined
     },
     y: {
       type: Number,
-      default: null
+      default: undefined
     }
   },
   watch: {

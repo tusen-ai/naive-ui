@@ -26,10 +26,15 @@
 <script>
 import { nextTick, ref, markRaw } from 'vue'
 import getScrollParent from '../../_utils/dom/getScrollParent'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
 import { onFontReady } from '../../_utils/composition/index'
 import { warn } from '../../_utils/naive/warn'
+import getTarget from '../../_utils/dom/get-target'
+import styles from './styles'
 
 function getOffset (el, container) {
   const {
@@ -46,10 +51,12 @@ function getOffset (el, container) {
 }
 
 export default {
-  name: 'NBaseAnchor',
+  name: 'BaseAnchor',
+  cssrName: 'Anchor',
   mixins: [
-    withapp,
-    themeable
+    configurable,
+    themeable,
+    usecssr(styles)
   ],
   provide () {
     return {
@@ -57,9 +64,9 @@ export default {
     }
   },
   props: {
-    target: {
-      type: Function,
-      default: null
+    listenTo: {
+      type: [String, Object],
+      default: undefined
     },
     bound: {
       type: Number,
@@ -68,6 +75,14 @@ export default {
     ignoreGap: {
       type: Boolean,
       default: false
+    },
+    // deprecated
+    target: {
+      validator () {
+        if (__DEV__) warn('anchor', '`target` is deprecated, please use`listen-to` instead.')
+        return true
+      },
+      default: undefined
     }
   },
   setup () {
@@ -80,7 +95,13 @@ export default {
       collectedLinkHrefs: markRaw([]),
       titleEls: markRaw([]),
       activeHref: ref(null),
-      container: ref(null)
+      scrollElement: ref(null)
+    }
+  },
+  beforeUnmount () {
+    const { scrollElement } = this
+    if (scrollElement) {
+      scrollElement.removeEventListener('scroll', this.handleScroll)
     }
   },
   watch: {
@@ -162,8 +183,11 @@ export default {
         const linkEl = document.getElementById(idMatchResult[1])
         if (linkEl) {
           this.activeHref = href
-          const top = getOffset(linkEl, this.container).top + (this.container.scrollTop || 0)
-          this.container.scrollTo({
+          const {
+            scrollElement
+          } = this
+          const top = getOffset(linkEl, scrollElement).top + (scrollElement.scrollTop || 0)
+          scrollElement.scrollTo({
             top: top
           })
           if (!transition) {
@@ -183,7 +207,7 @@ export default {
             const {
               top,
               height
-            } = getOffset(linkEl, this.container)
+            } = getOffset(linkEl, this.scrollElement)
             links.push({
               top,
               height,
@@ -229,17 +253,26 @@ export default {
       }
     },
     init () {
-      this.container = getScrollParent(this.$el)
-      if (this.target) {
-        const target = this.target()
-        if (target instanceof Element) {
-          this.container = target
-        } else if (__DEV__) {
-          warn('anchor', 'target is not a element')
-        }
+      const {
+        target: getScrollTarget,
+        listenTo
+      } = this
+      let scrollElement
+      if (getScrollTarget) {
+        // deprecated
+        scrollElement = getScrollTarget()
+      } else if (listenTo) {
+        scrollElement = getTarget(listenTo)
+      } else {
+        scrollElement = getScrollParent(this.$el)
       }
-      if (this.container) {
-        this.container.addEventListener('scroll', this.handleScroll)
+      if (scrollElement) {
+        this.scrollElement = scrollElement
+      } else if (__DEV__) {
+        warn('anchor', 'Target to be listened to is not valid.')
+      }
+      if (scrollElement) {
+        scrollElement.addEventListener('scroll', this.handleScroll)
       }
     }
   }

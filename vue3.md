@@ -14,6 +14,8 @@ placeable 进行了大调整
     - `target` => `listen-to`
 - [x] alert
 - [x] anchor
+  - deprecate
+    - `target` => `listen-to`
 - [x] auto-complete
   - break
     - `v-model` => `v-model:value`
