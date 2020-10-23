@@ -22,7 +22,7 @@ format
 |clearable|`boolean`|`false`||
 |disabled|`boolean`|`false`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|theme|`'light' \| 'dark'  \| string`|`undefined`||
 |type|`'date' \| 'datetime' \| 'daterange' \|'datetimerange'`|`'date`||
 |value|`number`|`null`||
 |on-blur|`() => any`|`undefined`||

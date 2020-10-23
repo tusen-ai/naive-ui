@@ -21,7 +21,7 @@ depth
 |depth|`'primary' \| 'secondary' \| 'tertiary'`|`undefined`||
 |size|`number \| string`|`undefined`||
 |themed-style|`{ [themeName: string]: Object }`|`undefined`||
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|theme|`'light' \| 'dark'  \| string`|`undefined`||
 
 ## Slots
 |Name|Parameters|Description|

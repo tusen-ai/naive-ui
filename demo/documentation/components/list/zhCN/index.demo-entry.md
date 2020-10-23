@@ -11,7 +11,7 @@ border
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |bordered|`boolean`|`false`||
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|theme|`'light' \| 'dark'  \| string`|`undefined`||
 
 ## Slots
 ### List Slots

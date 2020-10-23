@@ -12,7 +12,7 @@ wrap
 |spinning|`boolean`|`false`|It spin is active|
 |stroke-width|`number`|`undefined`|Relative width of spin's stroke, you can assume the outer radius of spin is 100|
 |stroke|`string`|`undefined`|Color of spin|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|theme|`'light' \| 'dark'  \| string`|`undefined`||
 
 ## Slots
 |Name|Parameters|Description|

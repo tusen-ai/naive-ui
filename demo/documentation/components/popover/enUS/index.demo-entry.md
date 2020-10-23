@@ -34,7 +34,7 @@ manual-position
 |raw|`boolean`|`false`|Whether to use no default styles.|
 |show-arrow|`boolean`|`true`||
 |show|`boolean`|`undefined`|Whether to show popover if set.|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|theme|`'light' \| 'dark'  \| string`|`undefined`||
 |trigger|`'hover' \| 'click'`|`'hover'`||
 |x|`number`|`undefined`|The CSS `left` pixel value when popover manually positioned.|
 |y|`number`|`undefined`|The CSS `top` pixel value when popover manually positioned.|

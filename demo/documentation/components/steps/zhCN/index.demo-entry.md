@@ -16,7 +16,7 @@ content
 |current|`number`|`undefined`||
 |size|`'small' \| 'medium'`|`'medium'`||
 |status|`'process' \| 'finish' \| 'error' \| 'wait'`|`'process'`||
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|theme|`'light' \| 'dark'  \| string`|`undefined`||
 |vertical|`boolean`|`false`||
 
 ### Step Props

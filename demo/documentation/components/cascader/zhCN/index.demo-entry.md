@@ -27,7 +27,7 @@ multiple-lazy
 |separator|`string`|`' / '`||
 |show-path|`boolean`|`true`|是否在选择器中显示选项路径|
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|theme|`'light' \| 'dark'  \| string`|`undefined`||
 |value|`string \| number \| Array<number \| string>`|`null`||
 |on-blur|`() => any`|`undefined`||
 |on-focus|`() => any`|`undefined`||

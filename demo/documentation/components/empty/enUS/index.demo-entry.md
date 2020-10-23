@@ -10,7 +10,7 @@ basic
 |description|`string`|`'No Data'`||
 |show-description|`boolean`|`true`||
 |size|`'small' \| 'medium' \| 'large' \| 'huge'`|`'medium'`||
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|theme|`'light' \| 'dark'  \| string`|`undefined`||
 
 ## Slots
 |Name|Parameters|Description|

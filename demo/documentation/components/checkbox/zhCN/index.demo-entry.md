@@ -18,7 +18,7 @@ event
 |checked|`boolean`|`false`||
 |disabled|`boolean`|`false`||
 |label|`string \| function`|`null`|可以是渲染函数|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|theme|`'light' \| 'dark'  \| string`|`undefined`||
 |value|`string \| number`|`null`||
 |on-update:checked|`(checked: boolean)`|`undefined`||
 
@@ -26,7 +26,7 @@ event
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |disabled|`boolean`|`false`||
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|theme|`'light' \| 'dark'  \| string`|`undefined`||
 |value|`Array<string \| number>`|`null`||
 |on-update:value|`(value: string \| number)`|`undefined`||
 

@@ -67,7 +67,7 @@ duration
 |description|`string \| (() => VNode \| Array<VNode>)`|`undefined`|Can be a render function.|
 |duration|`number`|`undefined`|If not set, it won't automatically close. Unit is millisecond.|
 |meta|`string \| (() => VNode \| Array<VNode>)`|`undefined`|Can be a render function.|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|theme|`'light' \| 'dark'  \| string`|`undefined`||
 |title|`string \| (() => VNode \| Array<VNode>)`|`undefined`|Can be a render function.|
 |onAfterEnter|`Function`|`undefined`||
 |onAfterLeave|`Function`|`undefined`||

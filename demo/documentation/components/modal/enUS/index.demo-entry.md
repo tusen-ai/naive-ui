@@ -20,7 +20,7 @@ preset-confirm-slot
 |body-style|`Object`|`undefined`||
 |preset|`'card' \| 'confirm'`|`undefined`||
 |show|`boolean`|`false`|Whether to show modal.|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|theme|`'light' \| 'dark'  \| string`|`undefined`||
 |on-update:show|`(value: boolean) => any`|`undefined`|Callback when modal's display status is changed.|
 
 ### Modal with Preset Card

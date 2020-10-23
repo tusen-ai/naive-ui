@@ -8,7 +8,7 @@ basic
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |label|`string`|`undefined`||
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|theme|`'light' \| 'dark'  \| string`|`undefined`||
 |value|`string`|`undefined`||
 
 ## Slots

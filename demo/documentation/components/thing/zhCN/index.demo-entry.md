@@ -13,7 +13,7 @@ indent
 |content-indented|`boolean`|`false`||
 |content|`string`|`undefined`||
 |description|`string`|`undefined`||
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|theme|`'light' \| 'dark'  \| string`|`undefined`||
 |title-extra|`string`|`undefined`||
 |title|`string`|`undefined`||
 

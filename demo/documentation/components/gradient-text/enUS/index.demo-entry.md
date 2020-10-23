@@ -15,7 +15,7 @@ custom
 |gradient|`string \| { from: string, to: string, deg: number \| string }`|`null`||
 |size|`number \| string`|`null`||
 |themed-style|`{ [themeName: string]: Object }`|`undefined`||
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|theme|`'light' \| 'dark'  \| string`|`undefined`||
 |type|`'primary' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'primary'`||
 
 ## Slots

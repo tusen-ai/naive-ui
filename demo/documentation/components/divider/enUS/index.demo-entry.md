@@ -12,7 +12,7 @@ vertical
 |Name|Type|Default|Description|
 |-|-|-|-|
 |dashed|`boolean`|`false`||
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|theme|`'light' \| 'dark'  \| string`|`undefined`||
 |title-placement|`'left' \| 'right' \| 'center'`|`'center'`||
 |vertical|`boolean`|`false`||
 

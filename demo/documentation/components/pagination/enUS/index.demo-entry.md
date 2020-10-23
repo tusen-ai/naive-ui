@@ -20,6 +20,6 @@ disabled
 |page|`number`|required||
 |show-quick-jumper|`boolean`|`false`||
 |show-size-picker|`boolean`|`false`||
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|theme|`'light' \| 'dark'  \| string`|`undefined`||
 |on-update:page|`(page: number) => any`|`undefined`||
 |on-update:page-size|`(pageSize: number) => any`|`undefined`||

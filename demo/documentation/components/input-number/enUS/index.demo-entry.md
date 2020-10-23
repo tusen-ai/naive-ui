@@ -21,7 +21,7 @@ validator
 |placeholder|`string`|`undefined`||
 |size|`'small' \| 'medium' \| 'large'`|`medium`||
 |step|`number`|`1`||
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|theme|`'light' \| 'dark'  \| string`|`undefined`||
 |validator|`(value) => boolean`|`undefined`||
 |value|`number`|`null`||
 |on-blur|`(event: FocusEvent) => any`|`undefined`||

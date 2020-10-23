@@ -20,7 +20,7 @@ format
 |is-second-disabled|`(second: number, minute: number, hour: number) => boolean`|`() => false`||
 |placeholder|`string`|`'Select Time'`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|theme|`'light' \| 'dark'  \| string`|`undefined`||
 |value|`number`|`null`||
 |on-blur|`() => any`|`undefined`||
 |on-focus|`() => any`|`undefined`||

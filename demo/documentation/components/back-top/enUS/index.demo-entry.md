@@ -19,7 +19,7 @@ target-container-selector
 |right|`number \| string`|`40`||
 |show|`boolean`|`undefined`|Whether to show BackTop|
 |themed-style|`{ [themeName: string]: Object }`|`undefined`||
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|theme|`'light' \| 'dark'  \| string`|`undefined`||
 |to|`string \| HTMLElement`|`'body'`|Container node to show BackTop|
 |visibility-height|`number`|`180`||
 |on-update:show|`(value: boolean) => any`|`undefined`||

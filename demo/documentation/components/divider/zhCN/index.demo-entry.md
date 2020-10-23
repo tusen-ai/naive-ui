@@ -10,7 +10,7 @@ vertical
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |dashed|`boolean`|`false`||
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|theme|`'light' \| 'dark'  \| string`|`undefined`||
 |title-placement|`'left' \| 'right' \| 'center'`|`'center'`||
 |vertical|`boolean`|`false`||
 

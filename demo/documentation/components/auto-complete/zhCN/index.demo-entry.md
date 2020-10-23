@@ -17,7 +17,7 @@ after-select
 |options|`Array<string \| AutoCompleteOption \| AutoCompleteOptionGroup>`|`[]`||
 |placeholder|`string`|`null`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|theme|`'light' \| 'dark'  \| string`|`undefined`||
 |value|`string`|`null`||
 |on-blur|`(event: FocusEvent) => any`|`undefined`||
 |on-focus|`(event: FocusEvent) => any`|`undefined`||
