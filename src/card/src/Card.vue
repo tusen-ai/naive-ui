@@ -70,15 +70,15 @@ export default {
   props: {
     title: {
       type: String,
-      default: null
+      default: undefined
     },
     contentStyle: {
       type: [Object, String],
-      default: null
+      default: undefined
     },
     headerStyle: {
       type: [Object, String],
-      default: null
+      default: undefined
     },
     segmented: {
       type: [Boolean, Object],

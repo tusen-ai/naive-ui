@@ -17,13 +17,13 @@ closable
 |-|-|-|-|
 |bordered|`boolean`|`true`||
 |closable|`boolean`|`false`||
-|content-style|`Object \| string`|`null`||
-|header-style|`Object \| string`|`null`||
+|content-style|`Object \| string`|`undefined`||
+|header-style|`Object \| string`|`undefined`||
 |segmented|`boolean \| { [part in 'content' \| 'footer' \| 'action']?: boolean \| 'soft' \| 'hard' }`|`false`||
 |size|`'small' \| 'medium' \| 'large' \| 'huge'`|`'medium'`||
-|themed-style|`{ [themeName: string]: Object } \| null`|`null`||
+|themed-style|`{ [themeName: string]: Object }`|`undefined`||
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
-|title|`string`|`null`||
+|title|`string`|`undefined`||
 |on-close|`() => any`|`undefined`|点击卡片关闭图标时的回调|
 
 ## Slots
