@@ -58,18 +58,15 @@ export default c([
       }, [
         cE('close', {
           raw: `
-            right: 3px;
+            right: 4px;
             top: 50%;
             transform: translateY(-50%);
-            height: 14px;
-            width: 14px;
-            line-height: 14px;
+            height: 12px;
+            width: 12px;
+            line-height: 12px;
             position: absolute;
           `,
-          transition: `
-            fill .2s ${cubicBezierEaseInOut},
-            color .3s ${cubicBezierEaseInOut}
-          `
+          transition: `fill .2s ${cubicBezierEaseInOut}`
         })
       ]),
       cM('checkable', {

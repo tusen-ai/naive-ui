@@ -26,13 +26,15 @@
 </template>
 
 <script>
-import CloseIcon from '../../_icons/md-close.vue'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import usecssr from '../../_mixins/usecssr'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
+import { CloseIcon } from '../../_base/icons'
+import { warn } from '../../_utils'
 import commonProps from './common-props'
 import styles from './styles'
-import { warn } from '../../_utils/naive/warn'
 
 export default {
   name: 'Tag',
@@ -40,7 +42,7 @@ export default {
     CloseIcon
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles)
   ],
