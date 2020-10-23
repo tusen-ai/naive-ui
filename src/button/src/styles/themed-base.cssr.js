@@ -92,9 +92,7 @@ export default c([
             left: 0,
             top: '50%',
             transform: 'translateY(-50%)',
-            display: 'block',
-            fill: 'currentColor',
-            stroke: 'currentColor'
+            display: 'block'
           }, [
             iconSwitchTransition({
               top: '50%',

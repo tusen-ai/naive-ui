@@ -31,11 +31,10 @@
 <n-tooltip
   :show="showPopover"
   placement="bottom"
-  @update:show="handleUpdateShow"
 >
   <template v-slot:trigger>
     <n-button @click="showPopover = !showPopover">
-      Manual
+      Manual (No event will be emitted)
     </n-button>
   </template>
   <span>

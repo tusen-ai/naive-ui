@@ -16,7 +16,7 @@ export const render = {
     } else if (typeof render === 'number') {
       return createTextVNode(String(render))
     } else {
-      return null
+      return JSON.stringify(render)
     }
   }
 }
