@@ -16,8 +16,8 @@ no-icon
 |negative-text|`string`|`'取消'`||
 |positive-text|`string`|`'确认'`||
 |show-icon|`boolean`|`true`||
-|on-positive-click|`() => boolean \| Promise<boolean> \| any`|`() => true`||
-|on-negative-click|`() => boolean \| Promise<boolean> \| any`|`() => true`||
+|on-positive-click|`() => boolean \| Promise<boolean> \| any`|`undefined`||
+|on-negative-click|`() => boolean \| Promise<boolean> \| any`|`undefined`||
 
 更多 props 请参考 [Popover](n-popover#Props).
 

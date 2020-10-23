@@ -16,8 +16,8 @@ no-icon
 |negative-text|`string`|`'Cancel'`||
 |positive-text|`string`|`'Confirm'`||
 |show-icon|`boolean`|`true`||
-|on-positive-click|`() => boolean \| Promise<boolean> \| any`|`() => true`||
-|on-negative-click|`() => boolean \| Promise<boolean> \| any`|`() => true`||
+|on-positive-click|`() => boolean \| Promise<boolean> \| any`|`undefined`||
+|on-negative-click|`() => boolean \| Promise<boolean> \| any`|`undefined`||
 
 For more props, see [popover](n-popover#Props).
 

@@ -1,13 +1,14 @@
 # Custom Action
 ```html
-<n-popconfirm>
+<n-popconfirm v-model:show="show">
   <template v-slot:trigger>
     <n-button>Quote</n-button>
   </template>
   For example, if I were to write about elephants, I’d have had no idea what words to use.
   <template v-slot:action>
     <n-button
-      size="tiny"
+      size="small"
+      @click="show = false"
     >
       Maybe
     </n-button>
@@ -20,8 +21,13 @@
   For example, if I were to write about elephants, I’d have had no idea what words to use.
 </n-popconfirm>
 ```
-```css
-.n-button {
-  margin-right: 8px;
+
+```js
+export default {
+  data () {
+    return {
+      show: false
+    }
+  }
 }
 ```

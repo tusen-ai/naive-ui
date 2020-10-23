@@ -11,27 +11,26 @@ export default c([
       }, [
         cE('body', {
           raw: `
-            font-size: 13px;
+            font-size: 14px;
             white-space: nowrap;
-            padding-left: 22px;
             position: relative;
           `
         }, [
           cB('icon', {
             raw: `
               position: absolute;
-              font-size: 18px;
+              font-size: 22px;
               left: 0;
-              top: 0;
+              top: -2px;
               fill: ${iconColor};
               stroke: ${iconColor};
             `
           })
         ]),
-        cM('no-icon', [
+        cM('show-icon', [
           cE('body', {
             raw: `
-              padding-left: 0;
+              padding-left: 26px;
             `
           })
         ]),
@@ -42,15 +41,9 @@ export default c([
             justify-content: flex-end;
           `
         }, [
-          cB('button', {
-            raw: `
-              margin-right: 8px;
-            `
-          }, [
-            c('&:last-child', {
-              raw: `
-                margin-right: 0;
-              `
+          cB('button', [
+            c('&:not(:last-child)', {
+              marginRight: '8px'
             })
           ])
         ])

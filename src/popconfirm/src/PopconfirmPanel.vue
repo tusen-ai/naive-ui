@@ -2,7 +2,7 @@
   <div
     class="n-popconfirm-content"
     :class="{
-      'n-popconfirm-content--no-icon': !showIcon
+      'n-popconfirm-content--show-icon': showIcon
     }"
   >
     <div class="n-popconfirm-content__body">
@@ -19,13 +19,13 @@
     <div class="n-popconfirm-content__action">
       <slot name="action">
         <n-button
-          size="tiny"
+          size="small"
           @click="handleNegativeClick"
         >
           {{ localizedNegativeText }}
         </n-button>
         <n-button
-          size="tiny"
+          size="small"
           type="primary"
           @click="handlePositiveClick"
         >

@@ -1,4 +1,4 @@
-import { h } from 'vue'
+import { h, ref } from 'vue'
 import NPopover from '../../popover'
 import PopconfirmPanel from './PopconfirmPanel.vue'
 import { omit, keep } from '../../_utils/vue'
@@ -33,11 +33,16 @@ export default {
     },
     onPositiveClick: {
       type: Function,
-      default: () => true
+      default: undefined
     },
     onNegativeClick: {
       type: Function,
-      default: () => true
+      default: undefined
+    }
+  },
+  setup () {
+    return {
+      popoverRef: ref(null)
     }
   },
   render () {
@@ -48,7 +53,7 @@ export default {
     return h(NPopover, {
       ...omit(props, panelProps),
       containerClass: 'n-popconfirm',
-      ref: 'popover'
+      ref: 'popoverRef'
     },
     {
       trigger: slots.activator || slots.trigger,
@@ -56,27 +61,27 @@ export default {
         ...keep(props, panelProps),
         onPositiveClick: () => {
           const {
-            onPositiveClick,
+            onPositiveClick = () => true,
             'onUpdate:show': onUpdateShow
           } = this
           Promise.resolve(
             onPositiveClick()
           ).then(value => {
-            if (!value) return
-            this.$refs.popover.setShow(false)
+            if (value === false) return
+            this.popoverRef.setShow(false)
             onUpdateShow(false)
           })
         },
         onNegativeClick: () => {
           const {
-            onNegativeClick,
+            onNegativeClick = () => true,
             'onUpdate:show': onUpdateShow
           } = this
           Promise.resolve(
             onNegativeClick()
           ).then(value => {
-            if (!value) return
-            this.$refs.popover.setShow(false)
+            if (value === false) return
+            this.popoverRef.setShow(false)
             onUpdateShow(false)
           })
         }
