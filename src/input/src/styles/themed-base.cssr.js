@@ -24,9 +24,7 @@ export default c([
       borderMaskColorDisabled,
       colorDisabled,
       textColorDisabled,
-      placeholderColorDisabled,
-      iconColorDisabled,
-      iconOpacityDisabled
+      placeholderColorDisabled
     } = props.$local
     const {
       cubicBezierEaseInOut
@@ -80,16 +78,6 @@ export default c([
         cE('placeholder', {
           color: placeholderColorDisabled
         }),
-        cE('suffix, prefix', [
-          cB('icon', {
-            fill: iconColorDisabled,
-            stroke: iconColorDisabled
-          }, [
-            c('svg', {
-              opacity: iconOpacityDisabled
-            })
-          ])
-        ]),
         cE('splitor', {
           color: textColorDisabled
         })

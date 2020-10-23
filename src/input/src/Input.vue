@@ -122,6 +122,7 @@
     <div
       v-if="$slots.affix || $slots.prefix"
       class="n-input__prefix"
+      :class="disabled ? 'n-icon-5-depth' : 'n-icon-4-depth'"
     >
       <slot name="affix">
         <slot name="prefix" />
@@ -130,6 +131,7 @@
     <transition name="n-button-suffix-transition">
       <div
         class="n-input__suffix"
+        :class="disabled ? 'n-icon-5-depth' : 'n-icon-4-depth'"
       >
         <div class="n-input-clear">
           <n-base-suffix

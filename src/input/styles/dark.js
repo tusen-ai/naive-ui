@@ -12,8 +12,6 @@ export default create({
       textColor2Overlay,
       textColor4Overlay,
       textColor5Overlay,
-      opacity5,
-      opacity4,
       primaryColor,
       primaryColorHover,
       inputColorOverlay,
@@ -21,8 +19,7 @@ export default create({
       warningColor,
       warningColorHover,
       errorColor,
-      errorColorHover,
-      textColorBase
+      errorColorHover
     } = derived
     const {
       borderRadius
@@ -39,10 +36,6 @@ export default create({
       backgroundColor: inputColorOverlay,
       colorDisabled: inputColorDisabledOverlay,
       colorFocus: changeColor(primaryColor, { alpha: 0.1 }),
-      iconColor: textColorBase,
-      iconColorDisabled: textColorBase,
-      iconOpacity: opacity4,
-      iconOpacityDisabled: opacity5,
       borderMaskColor: 'transparent',
       borderMaskColorHover: primaryColorHover,
       borderMaskColorDisabled: 'transparent !important',

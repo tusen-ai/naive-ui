@@ -20,10 +20,7 @@ export default create({
       warningColor,
       warningColorHover,
       errorColor,
-      errorColorHover,
-      opacity4,
-      opacity5,
-      textColorBase
+      errorColorHover
     } = derived
     const {
       borderRadius
@@ -40,10 +37,6 @@ export default create({
       backgroundColor: inputColor,
       colorDisabled: inputColorDisabled,
       colorFocus: inputColor,
-      iconColor: textColorBase,
-      iconOpacity: opacity4,
-      iconColorDisabled: textColorBase,
-      iconOpacityDisabled: opacity5,
       borderMaskColor: 'transparent',
       borderMaskColorHover: primaryColorHover,
       borderMaskColorDisabled: 'transparent !important',

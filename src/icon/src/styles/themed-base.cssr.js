@@ -1,4 +1,4 @@
-import { c, cTB, cM } from '../../../_utils/cssr'
+import { c, cTB, cM, cB } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
@@ -52,7 +52,14 @@ export default c([
         cM('5-depth', {
           opacity: opacity5Depth
         })
-      ])
+      ]),
+      [1, 2, 3, 4, 5].map(v => cB(`icon-${v}-depth >`, [
+        cTB('icon', {
+          fill: color,
+          stroke: color,
+          opacity: props.$local[`opacity${v}Depth`]
+        })
+      ]))
     ]
   }
 ])
