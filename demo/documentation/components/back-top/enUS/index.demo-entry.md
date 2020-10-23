@@ -18,7 +18,7 @@ target-container-selector
 |listen-to|`string \| HTMLElement`|`undefined`|The element to be listened to scroll event. If it is `undefined` back top will listen to the nearest scrollable parent.|
 |right|`number \| string`|`40`||
 |show|`boolean`|`undefined`|Whether to show BackTop|
-|themed-style|`{ [themeName: string]: Object } \| null`|`null`||
+|themed-style|`{ [themeName: string]: Object }`|`undefined`||
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 |to|`string \| HTMLElement`|`'body'`|Container node to show BackTop|
 |visibility-height|`number`|`180`||

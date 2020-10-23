@@ -20,7 +20,7 @@ raw
 |processing|`boolean`|`false`||
 |show-zero|`boolean`|`false`||
 |show|`boolean`|`true`||
-|themed-style|`{ [themeName: string]: Object } \| null`|`null`||
+|themed-style|`{ [themeName: string]: Object }`|`undefined`||
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 |type|`'default' \| 'success' \| 'error' \| 'warning' \| 'info'`|`'default'`||
 |value|`string \| number`|`undefined`||

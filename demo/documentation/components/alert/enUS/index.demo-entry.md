@@ -14,7 +14,7 @@ no-icon
 |-|-|-|-|
 |closable|`boolean`|`false`||
 |show-icon|`boolean`|`true`||
-|themed-style|`{ [themeName: string]: Object } \| null`|`null`||
+|themed-style|`{ [themeName: string]: Object }`|`undefined`||
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 |title|`string`|`undefined`||
 |type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'default'`||

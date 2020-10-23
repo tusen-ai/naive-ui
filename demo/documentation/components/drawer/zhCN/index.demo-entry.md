@@ -23,7 +23,7 @@ dark-4-debug
 |mask-closable|`boolean`|`true`|点击遮罩时是否发出 `update:show` 事件|
 |placement|`'top' \| 'right' \| 'bottom' \| 'left'`|`'right'`||
 |show|`boolean`|`false`||
-|themed-style|`{ [themeName: string]: Object } \| null`|`null`||
+|themed-style|`{ [themeName: string]: Object }`|`undefined`||
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 |to|`string \| HTMLElement`|`'body'`|抽屉出现的区域|
 |width|`number \| string`|`251`||

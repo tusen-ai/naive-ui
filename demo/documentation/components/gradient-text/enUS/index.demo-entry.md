@@ -14,7 +14,7 @@ custom
 |-|-|-|-|
 |gradient|`string \| { from: string, to: string, deg: number \| string }`|`null`||
 |size|`number \| string`|`null`||
-|themed-style|`{ [themeName: string]: Object } \| null`|`null`||
+|themed-style|`{ [themeName: string]: Object }`|`undefined`||
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 |type|`'primary' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'primary'`||
 

@@ -20,7 +20,7 @@ depth
 |color|`string`|`undefined`||
 |depth|`'primary' \| 'secondary' \| 'tertiary'`|`undefined`||
 |size|`number \| string`|`undefined`||
-|themed-style|`{ [themeName: string]: Object } \| null`|`null`||
+|themed-style|`{ [themeName: string]: Object }`|`undefined`||
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 
 ## Slots
