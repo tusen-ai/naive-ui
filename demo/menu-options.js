@@ -249,6 +249,12 @@ export default function (instance) {
             path: `/${lang}/${theme}/doc` + '/n-radio'
           },
           {
+            name: 'Rate',
+            title: '评分',
+            titleExtra: 'Rate',
+            path: `/${lang}/${theme}/doc` + '/n-rate'
+          },
+          {
             name: 'Select',
             title: '选择器',
             titleExtra: 'Select',
@@ -658,6 +664,10 @@ export default function (instance) {
           {
             name: 'Radio',
             path: `/${lang}/${theme}/doc` + '/n-radio'
+          },
+          {
+            name: 'Rate',
+            path: `/${lang}/${theme}/doc` + '/n-rate'
           },
           {
             name: 'Select',

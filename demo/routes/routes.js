@@ -76,6 +76,7 @@ import code from '../documentation/components/code'
 import upload from '../documentation/components/upload'
 import table from '../documentation/components/table'
 import space from '../documentation/components/space'
+import rate from '../documentation/components/rate'
 
 import Documentation from '../Documentation'
 
@@ -156,6 +157,7 @@ export const childRoutes = withPrefix('/:lang/:theme/doc', [
   { path: '/n-upload', component: upload },
   { path: '/n-table', component: table },
   { path: '/n-space', component: space },
+  { path: '/n-rate', component: rate },
   // deprecated
   { path: '/n-nimbus-service-layout', component: nimbusServiceLayout }
 ])

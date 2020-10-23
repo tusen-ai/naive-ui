@@ -48,6 +48,7 @@ import Popselect from './popselect'
 import Popup from './popover'
 import Progress from './progress'
 import Radio from './radio'
+import Rate from './rate'
 import Result from './result'
 import Select from './select'
 import Scrollbar from './scrollbar'
@@ -201,6 +202,8 @@ import descriptionsLightStyle from './descriptions/styles/light'
 import descriptionsDarkStyle from './descriptions/styles/dark'
 import formLightStyle from './form/styles/light'
 import formDarkStyle from './form/styles/dark'
+import rateLightStyle from './rate/styles/light'
+import rateDarkStyle from './rate/styles/dark'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -294,6 +297,7 @@ export default create({
     InputGroupLabelStyle,
     DynamicTags,
     Space,
+    Rate,
     // Deprecated
     NimbusServiceLayout,
     NimbusFormCard,
@@ -430,6 +434,8 @@ export default create({
     formDarkStyle,
     spaceDarkStyle,
     spaceLightStyle,
+    rateDarkStyle,
+    rateLightStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle
