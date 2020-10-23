@@ -355,7 +355,7 @@ export default {
       }
     },
     localizedStartPlaceholder () {
-      if (this.startPlaceholder === null) {
+      if (this.startPlaceholder === undefined) {
         if (this.type === 'daterange') {
           return this.localeNs.startDatePlaceholder
         } else if (this.type === 'datetimerange') {
@@ -367,7 +367,7 @@ export default {
       }
     },
     localizedEndPlaceholder () {
-      if (this.endPlaceholder === null) {
+      if (this.endPlaceholder === undefined) {
         if (this.type === 'daterange') {
           return this.localeNs.endDatePlaceholder
         } else if (this.type === 'datetimerange') {
