@@ -216,7 +216,8 @@ import { lightStyleScheme, darkStyleScheme } from './_deprecated/style-scheme'
 
 import create from './create'
 
-export { useOsTheme } from './_utils/composition'
+export { useOsTheme } from 'vooks'
+
 export default create({
   locales: [zhCN, enUS],
   fallbackLocale: enUS,

@@ -150,5 +150,4 @@ export function useInjectionElementCollection (injectionName, collectionKey, get
 }
 
 export { default as useLastClickPosition } from './use-last-click-position'
-export { default as useOsTheme } from './use-os-theme'
 export { useDelayedTrue } from './use-delayed'
