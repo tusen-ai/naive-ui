@@ -343,7 +343,7 @@ export default {
       return this.localeNs.separator
     },
     localizedPlacehoder () {
-      if (this.placeholder === null) {
+      if (this.placeholder === undefined) {
         if (this.type === 'date') {
           return this.localeNs.datePlaceholder
         } else if (this.type === 'datetime') {
