@@ -17,7 +17,7 @@ event
 |-|-|-|-|
 |checked|`boolean`|`false`||
 |disabled|`boolean`|`false`||
-|label|`string \| function`|`null`|Could be a render function.|
+|label|`string \| function`|`undefined`|Could be a render function.|
 |theme|`'light' \| 'dark' \| string`|`undefined`||
 |value|`string \| number`|`null`||
 |on-update:checked|`(checked: boolean)`|`undefined`||

@@ -26,15 +26,15 @@ passively-activated
 |autosize|`boolean \| { minRows?: number, maxRows?: number }`|`false`||
 |clearable|`boolean`|`false`||
 |disabled|`boolean`|`false`||
-|maxlength|`number`|`null`||
-|minlength|`number`|`null`||
+|maxlength|`number`|`undefined`||
+|minlength|`number`|`undefined`||
 |pair|`boolean`|`false`|Whether to input pairwise value.|
 |passively-activated|`boolean`|`false`||
-|placeholder|`string \| [string, string]`|`null`|Placeholder of input. When `pair` is `true`, placeholder is an array.|
+|placeholder|`string \| [string, string]`|`undefined`|Placeholder of input. When `pair` is `true`, placeholder is an array.|
 |readonly|`boolean`|`false`||
 |round|`boolean`|`false`||
 |rows|`number`|`3`||
-|separator|`string`|`null`|The separator bewteen pairwise inputs.|
+|separator|`string`|`undefined`|The separator bewteen pairwise inputs.|
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |theme|`'light' \| 'dark' \| string`|`undefined`||
 |type|`'text' \| 'password' \| 'textarea'`|`'text'`||

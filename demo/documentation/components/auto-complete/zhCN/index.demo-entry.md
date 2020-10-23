@@ -15,7 +15,7 @@ after-select
 |blur-after-select|`boolean`|`false`||
 |clear-after-select|`boolean`|`false`||
 |options|`Array<string \| AutoCompleteOption \| AutoCompleteOptionGroup>`|`[]`||
-|placeholder|`string`|`null`||
+|placeholder|`string`|`undefined`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |theme|`'light' \| 'dark' \| string`|`undefined`||
 |value|`string`|`null`||

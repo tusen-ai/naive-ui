@@ -20,7 +20,7 @@ scroll-to
 |Name|Type|Default|Description|
 |-|-|-|-|
 |position|`'static' \| 'absolute'`|`'static'`|`static` position will make it css position set to `static`. `absolute` position will make it css position set to `absolute` and `left`, `right`, `top`, `bottom` to `0`. `absolute` position is very useful when you want to make content scroll in a fixed container or make the whole page's layout in a fixed position. You may need to change the style of the component to make it display as you expect.|
-|themed-style|`{ [themeName: string]: Object }`|`null`||
+|themed-style|`{ [themeName: string]: Object }`|`undefined`||
 |theme|`'light' \| 'dark' \| string`|`undefined`||
 |use-native-scrollbar|`boolean`|`true`|Whether to use native scrollbar on itself. If set to `false`, layout will use a naive-ui style scrollbar for content|
 

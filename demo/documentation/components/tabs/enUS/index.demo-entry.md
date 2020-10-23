@@ -25,8 +25,8 @@ display-directive
 |-|-|-|-|
 |disabled|`boolean`|`false`||
 |display-directive|`'if' \| 'show'`|`'if'`|The directive to use in conditionally rendering. 'if' will use 'v-if' and 'show' will use 'v-show'. When use show directive, the status of tab won't be reset after tab changes.|
-|label|`string`|`null`||
-|name|`string \| number`|`null`|**required**|
+|label|`string`|`undefined`||
+|name|`string \| number`|required||
 
 ## Slots
 ### Tabs, Tab Pane Slots

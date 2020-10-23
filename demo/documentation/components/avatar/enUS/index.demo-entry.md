@@ -13,7 +13,7 @@ name-size
 |Name|Type|Default|Description|
 |-|-|-|-|
 |size|`'small' \| 'medium' \| 'large' \| number`| `'medium'`||
-|src|`string`|`null`||
+|src|`string`|`undefined`||
 |round|`boolean`|`false`||
 |theme|`'light' \| 'dark' \| string`|`undefined`||
 |themed-style|`{ [themeName: string]: Object }`|`undefined`||

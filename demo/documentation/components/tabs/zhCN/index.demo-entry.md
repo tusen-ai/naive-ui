@@ -26,7 +26,7 @@ line-debug
 |-|-|-|-|
 |disabled|`boolean`|`false`||
 |display-directive|`'if' \| 'show'`|`'if'`|选择性渲染使用的指令。if 对应 v-if，show 对应 v-show，使用 show 的时候标签页状态切换后不会被重置|
-|label|`string`|`null`||
+|label|`string`|`undefined`||
 |name|`string \| number`|required||
 
 ## Slots

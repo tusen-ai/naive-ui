@@ -16,7 +16,7 @@ item-header-click
 |accordion|`boolean`|`false`||
 |arrow-placement|`'left' \| 'right'`|`'left'`||
 |display-directive|`'if' \| 'show'`|`'if'`|The display directive to use when its inner `n-collapse-item` render content. `'if'` corresponds to `v-if` and `'show'` corresponds to `v-show`.|
-|expanded-names|`Array<string \| number>`|`null`||
+|expanded-names|`Array<string \| number>`|`undefined`||
 |theme|`'light' \| 'dark' \| string`|`undefined`||
 |on-update-expanded-names|`(expandedNames: Array<string>) => any`|`undefined`||
 |on-item-header-click|`(data: { name: string, expanded: boolean, event: MouseEvent }) => any`|`undefined`||
@@ -24,9 +24,9 @@ item-header-click
 ### Collapse Item Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|display-directive|`'if' \| 'show' \| null`|`null`|The display directive to use when it is rendering its content. `'if'` corresponds to `v-if` and `'show'` corresponds to `v-show`. When it is set to `null` the value will follow its outer `n-collapse`.|
+|display-directive|`'if' \| 'show'`|`undefined`|The display directive to use when it is rendering its content. `'if'` corresponds to `v-if` and `'show'` corresponds to `v-show`. When it is set to `undefined` the value will follow its outer `n-collapse`.|
 |name|`string \| number`|required||
-|title|`string`|`null`||
+|title|`string`|`undefined`||
 
 ## Slots
 ### Collapse Slots

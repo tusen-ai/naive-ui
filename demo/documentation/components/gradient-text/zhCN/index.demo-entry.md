@@ -11,8 +11,8 @@ custom
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|gradient|`string \| { from: string, to: string, deg: number \| string }`|`null`||
-|size|`number \| string`|`null`||
+|gradient|`string \| { from: string, to: string, deg: number \| string }`|`undefined`||
+|size|`number \| string`|`undefined`||
 |themed-style|`{ [themeName: string]: Object }`|`undefined`||
 |theme|`'light' \| 'dark' \| string`|`undefined`||
 |type|`'primary' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'primary'`||

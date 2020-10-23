@@ -12,8 +12,8 @@ custom
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|gradient|`string \| { from: string, to: string, deg: number \| string }`|`null`||
-|size|`number \| string`|`null`||
+|gradient|`string \| { from: string, to: string, deg: number \| string }`|`undefined`||
+|size|`number \| string`|`undefined`||
 |themed-style|`{ [themeName: string]: Object }`|`undefined`||
 |theme|`'light' \| 'dark' \| string`|`undefined`||
 |type|`'primary' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'primary'`||

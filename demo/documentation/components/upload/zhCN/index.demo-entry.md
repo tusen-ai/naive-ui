@@ -13,16 +13,16 @@ default-files
 ### Upload Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|accept|`string`|`null`|接受的文件类型，参考 <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept">accept</n-a>|
-|action|`string`|`null`|请求提交的地址|
-|data|`Object \| ({ file: UploadFile }) => Object`|`null`|提交表单需要附加的数据|
+|accept|`string`'`undefined`|接受的文件类型，参考 <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept">accept</n-a>|
+|action|`string`'`undefined`|请求提交的地址|
+|data|`Object \| ({ file: UploadFile }) => Object`'`undefined`|提交表单需要附加的数据|
 |default-file-list|`Array<UploadFile>`|`[]`|非受控状态下默认的文件列表|
 |default-upload|`boolean`|`false`|选择文件时候是否默认上传|
 |directory|`boolean`|`false`|是否支持目录上传，需要浏览器支持，参考 <n-a href="https://caniuse.com/#feat=input-file-directory">input-file-directory</n-a>|
 |disabled|`boolean`|`false`||
-|file-list-style|`Object`|`null`|文件列表区域的样式|
+|file-list-style|`Object`'`undefined`|文件列表区域的样式|
 |file-list|`Array<UploadFile>`|`undefined`|文件列表，如果传入组件会处于受控状态|
-|headers|`Object \| ({ file: UploadFile }) => Object`|`null`|HTTP 请求需要附加的 Headers|
+|headers|`Object \| ({ file: UploadFile }) => Object`'`undefined`|HTTP 请求需要附加的 Headers|
 |method|`string`|`'POST'`|HTTP 请求的方法|
 |multiple|`boolean`|`false`|是否支持多个文件|
 |name|`string`|`'file'`|文件在提交表单中的字段名|

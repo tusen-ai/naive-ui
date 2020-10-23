@@ -20,7 +20,7 @@ scroll-to
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |position|`'static' \| 'absolute'`|`'static'`|`static` 模式将会把 CSS `position` 设为 `static`， `absolute`  模式将会把 CSS `position` 设为 `absolute`，还将 `left`、`right`、`top`、`bottom` 设为 `0`。`absolute` 模式在你想将内容在一个固定容器或者将这个页面的布局设为固定位置的时候很有用。你可能需要修改一些 style 来确保它按照你预想的方式展示|
-|themed-style|`{ [themeName: string]: Object }`|`null`||
+|themed-style|`{ [themeName: string]: Object }`|`undefined`||
 |theme|`'light' \| 'dark' \| string`|`undefined`||
 |use-native-scrollbar|`boolean`|`true`|是否在自身使用原生滚动条。如果设定为 `false`, Layout 将会对内容使用 naive-ui 风格的滚动条|
 

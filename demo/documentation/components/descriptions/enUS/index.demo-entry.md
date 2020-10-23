@@ -27,7 +27,7 @@ size
 ### Description Item Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|label|`string`|`null`||
+|label|`string`|`undefined`||
 |span|`number`|`1`||
 
 ## Slots

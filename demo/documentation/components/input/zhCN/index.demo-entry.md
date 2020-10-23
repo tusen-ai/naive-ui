@@ -26,15 +26,15 @@ passively-activated
 |autosize|`boolean \| { minRows?: number, maxRows?: number }`|`false`||
 |clearable|`boolean`|`false`||
 |disabled|`boolean`|`false`||
-|maxlength|`number`|`null`||
-|minlength|`number`|`null`||
+|maxlength|`number`|`undefined`||
+|minlength|`number`|`undefined`||
 |pair|`boolean`|`false`|是否输入成对的值|
 |passively-activated|`boolean`|`false`||
-|placeholder|`string \| [string, string]`|`null`|文本输入的占位符。如果是 `pair` 是 `true`，`placeholder`是一个数组|
+|placeholder|`string \| [string, string]`|`undefined`|文本输入的占位符。如果是 `pair` 是 `true`，`placeholder`是一个数组|
 |readonly|`boolean`|`false`||
 |round|`boolean`|`false`||
 |rows|`number`|`3`||
-|separator|`string`|`null`|成对的值中间的分隔符|
+|separator|`string`|`undefined`|成对的值中间的分隔符|
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |theme|`'light' \| 'dark' \| string`|`undefined`||
 |type|`'text' \| 'password' \| 'textarea'`|`'text'`||

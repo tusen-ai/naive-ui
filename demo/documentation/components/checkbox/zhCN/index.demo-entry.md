@@ -17,7 +17,7 @@ event
 |-|-|-|-|
 |checked|`boolean`|`false`||
 |disabled|`boolean`|`false`||
-|label|`string \| function`|`null`|可以是渲染函数|
+|label|`string \| function`|`undefined`|可以是渲染函数|
 |theme|`'light' \| 'dark' \| string`|`undefined`||
 |value|`string \| number`|`null`||
 |on-update:checked|`(checked: boolean)`|`undefined`||

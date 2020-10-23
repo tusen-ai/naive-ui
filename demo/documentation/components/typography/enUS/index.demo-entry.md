@@ -27,13 +27,13 @@ text
 |underline|`boolean`|`false`||
 |delete|`boolean`|`false`||
 |code|`boolean`|`false`||
-|depth|`'primary' \| 'secondary' \| 'tertiary'`|`null`||
-|tag|`string`|`null`|What tag should be this component be rendered as. Won't work when `code` or `del` is set.|
+|depth|`'primary' \| 'secondary' \| 'tertiary'`|`undefined`||
+|tag|`string`|`undefined`|What tag should be this component be rendered as. Won't work when `code` or `del` is set.|
 
 ### P Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|depth|`'primary' \| 'secondary' \| 'tertiary'`|`null`||
+|depth|`'primary' \| 'secondary' \| 'tertiary'`|`undefined`||
 
 
 ### H1, H2, H3, H4, H5, H6 Props
@@ -41,12 +41,12 @@ text
 |-|-|-|-|
 |align-text|`boolean`|`false`||
 |type|`'default' \| 'success' \| 'info' \| 'warning' \| 'error'`|`'default'`||
-|prefix|`'bar'`|`null`||
+|prefix|`'bar'`|`undefined`||
 
 ### A Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|to|`string \| Object`|`null`|If the prop is set, it will be rendered as a Vue Router `router-link`s component. Make sure you don't want to use `href` attr.|
+|to|`string \| Object`|`undefined`|If the prop is set, it will be rendered as a Vue Router `router-link`s component. Make sure you don't want to use `href` attr.|
 
 ### Ul, Ol Props
 |Name|Type|Default|Description|
