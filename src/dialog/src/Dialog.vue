@@ -165,13 +165,13 @@ export default {
     }
   },
   methods: {
-    handlePositiveClick () {
+    handlePositiveClick (e) {
       const { onPositiveClick } = this
-      if (onPositiveClick) onPositiveClick()
+      if (onPositiveClick) onPositiveClick(e)
     },
-    handleNegativeClick () {
+    handleNegativeClick (e) {
       const { onNegativeClick } = this
-      if (onNegativeClick) onNegativeClick()
+      if (onNegativeClick) onNegativeClick(e)
     },
     handleCloseClick () {
       const { onClose } = this

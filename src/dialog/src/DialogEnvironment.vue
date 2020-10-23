@@ -41,15 +41,15 @@ export default {
     },
     onPositiveClick: {
       type: Function,
-      default: () => true
+      default: undefined
     },
     onNegativeClick: {
       type: Function,
-      default: () => true
+      default: undefined
     },
     onClose: {
       type: Function,
-      default: () => true
+      default: undefined
     },
     to: {
       type: [String, Object],
@@ -70,18 +70,24 @@ export default {
     handleAfterHide () {
       this.onInternalAfterLeave(this._.vnode.key)
     },
-    handlePositiveClick () {
+    handlePositiveClick (e) {
+      const {
+        onPositiveClick = () => true
+      } = this
       Promise.resolve(
-        this.onPositiveClick()
+        onPositiveClick(e)
       )
         .then(result => {
           if (result === false) return
           this.hide()
         })
     },
-    handleNegativeClick () {
+    handleNegativeClick (e) {
+      const {
+        onNegativeClick = () => true
+      } = this
       Promise.resolve(
-        this.onNegativeClick()
+        onNegativeClick(e)
       )
         .then(result => {
           if (result === false) return
@@ -89,8 +95,11 @@ export default {
         })
     },
     handleCloseClick () {
+      const {
+        onClose = () => true
+      } = this
       Promise.resolve(
-        this.onClose()
+        onClose()
       )
         .then(result => {
           if (result === false) return

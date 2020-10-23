@@ -58,9 +58,9 @@ use-component
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 |title|`string \| (() => VNode \| Array<VNode>)`|`undefined`|Can be a render function.|
 |type|`'error \| 'success' \| 'warning'`|`'warning'`||
-|onPositiveClick|`() => boolean \| Promise<boolean> \| any`|`() => true`|The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior.|
-|onNegativeClick|`() => boolean \| Promise<boolean> \| any`|`() => true`|The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior.|
-|onClose|`() => boolean \| Promise<boolean> \| any`|`() => true`|The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior.|
+|onPositiveClick|`() => boolean \| Promise<boolean> \| any`|`undefined`|The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior.|
+|onNegativeClick|`() => boolean \| Promise<boolean> \| any`|`undefined`|The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior.|
+|onClose|`() => boolean \| Promise<boolean> \| any`|`undefined`|The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior.|
 
 ### DialogReactive API
 #### DialogReactive Properties

@@ -59,9 +59,9 @@ use-component
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 |title|`string \| (() => VNode \| Array<VNode>)`|`undefined`|可以是 render 函数|
 |type|`'error \| 'success' \| 'warning'`|`'warning'`||
-|onPositiveClick|`() => boolean \| Promise<boolean> \| any`|`() => true`|默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为|
-|onNegativeClick|`() => boolean \| Promise<boolean> \| any`|`() => true`|默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为|
-|onClose|`() => boolean \| Promise<boolean> \| any`|`() => true`|默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为|
+|onPositiveClick|`() => boolean \| Promise<boolean> \| any`|`undefined`|默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为|
+|onNegativeClick|`() => boolean \| Promise<boolean> \| any`|`undefined`|默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为|
+|onClose|`() => boolean \| Promise<boolean> \| any`|`undefined`|默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为|
 
 ### DialogReactive API
 #### DialogReactive Properties
