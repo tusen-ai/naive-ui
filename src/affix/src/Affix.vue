@@ -26,7 +26,7 @@ export default {
   props: {
     listenTo: {
       type: [String, Object],
-      default: null
+      default: undefined
     },
     offsetTop: {
       type: Number,
