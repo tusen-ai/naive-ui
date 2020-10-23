@@ -29,7 +29,7 @@
       <n-icon
         v-if="closable"
         class="n-confirm-title__close"
-        size="22"
+        size="16"
         style="cursor:pointer;"
         @click="handleCloseClick"
       >
@@ -68,16 +68,20 @@
 </template>
 
 <script>
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
 import { render } from '../../_utils/vue'
-import usecssr from '../../_mixins/usecssr'
 import NIcon from '../../icon'
 import NButton from '../../button'
-import SuccessIcon from '../../_icons/ios-checkmark-circle.vue'
-import CloseIcon from '../../_icons/md-close.vue'
-import WarningIcon from '../../_icons/ios-help-circle.vue'
-import ErrorIcon from '../../_icons/ios-close-circle.vue'
+import {
+  SuccessIcon,
+  CloseIcon,
+  WarningIcon,
+  ErrorIcon
+} from '../../_base/icons'
 import styles from './styles/index.js'
 
 export default {
@@ -92,7 +96,7 @@ export default {
     render
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles)
   ],

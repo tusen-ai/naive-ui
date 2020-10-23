@@ -42,14 +42,14 @@ export default c([
           position: absolute;
           right: 16px;
           top: 14px;
-          width: 19px;
-          height: 19px;
+          width: 14px;
+          height: 14px;
         `
       }, [
         cB('icon', {
           raw: `
             cursor: pointer;
-            font-size: 19px;
+            font-size: 14px;
           `
         })
       ]),

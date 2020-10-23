@@ -34,6 +34,9 @@
             <g>
               <path
                 class="n-progress-graph-circle-fill"
+                :class="{
+                  'n-progress-graph-circle-fill--empty': percentage === 0
+                }"
                 d="m 55 5 a 50 50 0 1 1 0 100 a 50 50 0 1 1 0 -100"
                 :stroke-width="strokeWidth * 1.1"
                 stroke-linecap="round"
@@ -202,6 +205,9 @@
               />
               <path
                 class="n-progress-graph-circle-fill"
+                :class="{
+                  'n-progress-graph-circle-fill--empty': p ===0
+                }"
                 :d="circlePath(viewBoxWidth / 2 - strokeWidth / 2 * (1 + 2 * index) - circleGap * index, strokeWidth, viewBoxWidth)"
                 :stroke-width="strokeWidth"
                 stroke-linecap="round"
@@ -230,15 +236,19 @@
 <script>
 import { nextTick } from 'vue'
 import NIcon from '../../icon'
-import SuccessIcon from '../../_icons/md-checkmark.vue'
-import ErrorIcon from '../../_icons/md-close.vue'
-import WarningIcon from '../../_icons/md-alert.vue'
-import InfoCircleIcon from '../../_icons/md-information-circle.vue'
-import SuccessCircleIcon from '../../_icons/md-checkmark-circle.vue'
-import ErrorCircleIcon from '../../_icons/md-close-circle.vue'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import usecssr from '../../_mixins/usecssr'
+import {
+  CheckmarkIcon as SuccessIcon,
+  CloseIcon as ErrorIcon,
+  WarningIcon,
+  InfoIcon as InfoCircleIcon,
+  ErrorIcon as ErrorCircleIcon,
+  SuccessIcon as SuccessCircleIcon
+} from '../../_base/icons'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
 import styles from './styles/index.js'
 import formatLength from '../../_utils/css/formatLength.js'
 import { onFontReady } from '../../_utils/composition'
@@ -259,7 +269,7 @@ export default {
     ErrorCircleIcon
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles)
   ],

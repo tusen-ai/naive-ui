@@ -5,6 +5,6 @@ export default {
   indicatorIndexFontSizeMedium: '16px',
   indicatorSizeSmall: '22px',
   indicatorSizeMedium: '28px',
-  indicatorIconSizeSmall: '16px',
-  indicatorIconSizeMedium: '22px'
+  indicatorIconSizeSmall: '14px',
+  indicatorIconSizeMedium: '18px'
 }

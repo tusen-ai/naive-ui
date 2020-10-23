@@ -2,7 +2,6 @@
   <n-card
     v-if="isShow"
     class="demo-card"
-    style="transform: translateZ(0);"
     :segmented="{
       footer: true
     }"

@@ -78,6 +78,33 @@ export default c([
       headerFontWeight
     } = props.$local
     return [
+      cB('notification', [
+        c('&-transition-enter-from, &-transition-leave-to', {
+          raw: `
+            opacity: 0;
+            margin-bottom: 0 !important;
+            transform: translateX(calc(100% + 16px));
+          `
+        }),
+        c('&-transition-leave-from, &-transition-enter-to', {
+          raw: `
+            opacity: 1;
+            transform: translateX(0);
+          `
+        }),
+        c('&-transition-leave-active', {
+          raw: `
+            transition:
+              background-color .3s ${cubicBezierEaseInOut},
+              color .3s ${cubicBezierEaseInOut},
+              opacity .3s ${cubicBezierEaseInOut},
+              transform .3s ${cubicBezierEaseIn},
+              max-height .3s ${cubicBezierEaseInOut},
+              margin-bottom .3s linear,
+              box-shadow .3s ${cubicBezierEaseInOut};
+          `
+        })
+      ]),
       cTB('notification', {
         raw: `
           background-color: ${color};
@@ -112,31 +139,6 @@ export default c([
         // TODO: refactor type styles & transition
         ['success', 'info', 'warning', 'error', 'default']
           .map(type => typeStyle(type, props.$local[createKey('iconColor', type)])),
-        c('&-transition-enter-from, &-transition-leave-to', {
-          raw: `
-            opacity: 0;
-            margin-bottom: 0;
-            transform: translateX(calc(100% + 16px));
-          `
-        }),
-        c('&-transition-leave-from, &-transition-enter-to', {
-          raw: `
-            opacity: 1;
-            transform: translateX(0);
-          `
-        }),
-        c('&-transition-leave-active', {
-          raw: `
-            transition:
-              background-color .3s ${cubicBezierEaseInOut},
-              color .3s ${cubicBezierEaseInOut},
-              opacity .3s ${cubicBezierEaseInOut},
-              transform .3s ${cubicBezierEaseIn},
-              max-height .3s ${cubicBezierEaseInOut},
-              margin-bottom .3s linear,
-              box-shadow .3s ${cubicBezierEaseInOut};
-          `
-        }),
         cM('show-avatar', [
           cB('notification-main', {
             raw: `
@@ -158,7 +160,7 @@ export default c([
               position: absolute;
               top: 16px;
               right: 12px;
-              font-size: 20px;
+              font-size: 14px;
               cursor: pointer;
             `
           }, [

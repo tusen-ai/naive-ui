@@ -131,10 +131,15 @@ export default c([
           }),
           cB('progress-graph-circle-fill', {
             transition: `
+              opacity .3s ${base.cubicBezierEaseInOut},
               stroke .3s ${base.cubicBezierEaseInOut},
               stroke-dasharray .3s ${base.cubicBezierEaseInOut}
             `
-          }),
+          }, [
+            cM('empty', {
+              opacity: 0
+            })
+          ]),
           cB('progress-graph-circle-rail', {
             transition: `stroke .3s ${base.cubicBezierEaseInOut}`,
             overflow: 'hidden',

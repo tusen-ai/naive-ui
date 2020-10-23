@@ -1,3 +1,8 @@
 export { default as ChevronRightIcon } from './ChevronRight.vue'
 export { default as CheckmarkIcon } from './Checkmark.vue'
 export { default as CalendarIcon } from './CalendarIcon.vue'
+export { default as SuccessIcon } from './Success.vue'
+export { default as ErrorIcon } from './Error.vue'
+export { default as WarningIcon } from './Warning.vue'
+export { default as InfoIcon } from './Info.vue'
+export { default as CloseIcon } from './Close.vue'

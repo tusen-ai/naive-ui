@@ -39,11 +39,15 @@
 <script>
 import NButton from '../../button'
 import NIcon from '../../icon'
-import WarningIcon from '../../_icons/md-alert.vue'
-import locale from '../../_mixins/locale'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import usecssr from '../../_mixins/usecssr'
+import {
+  WarningIcon
+} from '../../_base/icons'
+import {
+  configurable,
+  themeable,
+  locale,
+  usecssr
+} from '../../_mixins'
 import styles from './styles'
 
 export default {
@@ -56,7 +60,7 @@ export default {
   },
   mixins: [
     locale('Popconfirm'),
-    withapp,
+    configurable,
     themeable,
     usecssr(styles)
   ],

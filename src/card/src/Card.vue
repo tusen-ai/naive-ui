@@ -26,7 +26,7 @@
       <n-icon
         v-if="closable"
         class="n-card-header__close-mark"
-        size="22"
+        size="16"
         @click="handleCloseClick"
       >
         <close-icon />
@@ -45,11 +45,15 @@
 </template>
 
 <script>
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import usecssr from '../../_mixins/usecssr'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
 import NIcon from '../../icon'
-import CloseIcon from '../../_icons/md-close.vue'
+import {
+  CloseIcon
+} from '../../_base/icons'
 import styles from './styles'
 
 export default {
@@ -59,7 +63,7 @@ export default {
     NIcon
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles)
   ],

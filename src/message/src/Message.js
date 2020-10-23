@@ -1,10 +1,12 @@
 import { h } from 'vue'
 import NIcon from '../../icon/index'
-import SuccessIcon from '../../_icons/md-checkmark-circle.vue'
-import WarningIcon from '../../_icons/md-alert.vue'
-import InfoIcon from '../../_icons/md-information-circle.vue'
-import ErrorIcon from '../../_icons/md-close-circle.vue'
-import CloseIcon from '../../_icons/md-close.vue'
+import {
+  InfoIcon,
+  SuccessIcon,
+  WarningIcon,
+  ErrorIcon,
+  CloseIcon
+} from '../../_base/icons'
 import NBaseLoading from '../../_base/loading'
 import IconSwitchTransition from '../../_transition/IconSwitchTransition'
 import { render } from '../../_utils/vue'

@@ -13,16 +13,16 @@
       <image-500 v-else-if="status === 500 || status === '500'" class="n-result-icon__status-image" />
       <image-418 v-else-if="status === 481 || status === '418'" class="n-result-icon__status-image" />
       <n-icon v-else-if="status === 'success'" size="80">
-        <ios-checkmark-circle />
+        <success-icon />
       </n-icon>
       <n-icon v-else-if="status === 'info'" size="80">
-        <ios-information-circle />
+        <info-icon />
       </n-icon>
       <n-icon v-else-if="status === 'warning'" size="80">
-        <ios-alert />
+        <warning-icon />
       </n-icon>
       <n-icon v-else-if="status === 'error'" size="80">
-        <ios-close-circle />
+        <error-icon />
       </n-icon>
     </div>
     <div class="n-result-header">
@@ -48,10 +48,12 @@ import {
   themeable,
   usecssr
 } from '../../_mixins'
-import iosCheckmarkCircle from '../../_icons/ios-checkmark-circle.vue'
-import iosAlert from '../../_icons/ios-alert.vue'
-import iosInformationCircle from '../../_icons/ios-information-circle.vue'
-import iosCloseCircle from '../../_icons/ios-close-circle.vue'
+import {
+  InfoIcon,
+  SuccessIcon,
+  WarningIcon,
+  ErrorIcon
+} from '../../_base/icons'
 import NIcon from '../../icon'
 import image404 from './404.vue'
 import image500 from './500.vue'
@@ -62,10 +64,10 @@ import styles from './styles'
 export default {
   name: 'Result',
   components: {
-    iosCheckmarkCircle,
-    iosAlert,
-    iosInformationCircle,
-    iosCloseCircle,
+    InfoIcon,
+    SuccessIcon,
+    WarningIcon,
+    ErrorIcon,
     NIcon,
     image404,
     image403,

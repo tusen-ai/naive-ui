@@ -55,9 +55,11 @@
 
 <script>
 import NIcon from '../../icon'
-import ErrorIcon from '../../_icons/md-close.vue'
-import FinishedIcon from '../../_icons/md-checkmark.vue'
-import themeable from '../../_mixins/themeable'
+import {
+  CheckmarkIcon as FinishedIcon,
+  CloseIcon as ErrorIcon
+} from '../../_base/icons'
+import { themeable } from '../../_mixins'
 
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 export default {

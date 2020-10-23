@@ -79,11 +79,13 @@ import { warn } from '../../_utils/naive'
 import styles from './styles'
 
 // icons
-import SuccessIcon from '../../_icons/md-checkmark-circle.vue'
-import WarningIcon from '../../_icons/md-alert.vue'
-import InfoIcon from '../../_icons/md-information-circle.vue'
-import ErrorIcon from '../../_icons/md-close-circle.vue'
-import CloseIcon from '../../_icons/md-close.vue'
+import {
+  InfoIcon,
+  SuccessIcon,
+  WarningIcon,
+  ErrorIcon,
+  CloseIcon
+} from '../../_base/icons'
 
 export default {
   name: 'Alert',
