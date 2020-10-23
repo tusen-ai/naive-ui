@@ -365,7 +365,7 @@ export default {
       return this.localeNs.now
     },
     localizedPlaceholder () {
-      if (this.placeholder !== null) return this.placeholder
+      if (this.placeholder !== undefined) return this.placeholder
       return this.localeNs.placeholder
     },
     localizedNegativeText () {
