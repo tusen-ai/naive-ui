@@ -93,7 +93,7 @@ export default c([
           height: 40px;
           display: flex;
           align-items: center;
-          font-size: 19px;
+          font-size: 14px;
           margin-left: 12px;
         `
       }, [

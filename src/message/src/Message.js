@@ -10,16 +10,18 @@ import {
 import NBaseLoading from '../../_base/loading'
 import IconSwitchTransition from '../../_transition/IconSwitchTransition'
 import { render } from '../../_utils/vue'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import usecssr from '../../_mixins/usecssr'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
 import styles from './styles'
 import props from './message-props'
 
 export default {
   name: 'Message',
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles)
   ],
