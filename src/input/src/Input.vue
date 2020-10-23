@@ -59,7 +59,7 @@
         :type="type"
         class="n-input__input n-input__input--first"
         :tabindex="passivelyActivated && !inputFocused ? -1 : false"
-        :placeholder="pair ? syntheticPlaceholder[0] : placeholder"
+        :placeholder="mergedPlaceholder[0]"
         :disabled="disabled"
         :maxlength="maxlength"
         :minlength="minlength"
@@ -75,14 +75,13 @@
       >
       <div
         v-if="
-          pair &&
-            !isComposing &&
+          !isComposing &&
             (!value || (Array.isArray(value) && !value[0])) &&
-            syntheticPlaceholder[0]
+            mergedPlaceholder[0]
         "
         class="n-input__placeholder"
       >
-        {{ syntheticPlaceholder[0] }}
+        {{ mergedPlaceholder[0] }}
       </div>
     </div>
     <span
@@ -97,7 +96,7 @@
         :type="type"
         class="n-input__input n-input__input--second"
         :tabindex="passivelyActivated && !inputFocused ? -1 : false"
-        :placeholder="syntheticPlaceholder[1]"
+        :placeholder="mergedPlaceholder[1]"
         :disabled="disabled"
         :maxlength="maxlength"
         :minlength="minlength"
@@ -113,10 +112,10 @@
         v-if="
           !isComposing &&
             (!value || (Array.isArray(value) && !value[1])) &&
-            syntheticPlaceholder[1]"
+            mergedPlaceholder[1]"
         class="n-input__placeholder"
       >
-        {{ syntheticPlaceholder[1] }}
+        {{ mergedPlaceholder[1] }}
       </div>
     </div>
     <div
@@ -161,11 +160,14 @@
 
 <script>
 import NBaseSuffix from '../../_base/suffix'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import asformitem from '../../_mixins/asformitem'
-import usecssr from '../../_mixins/usecssr'
-import { call } from '../../_utils/vue'
+import {
+  configurable,
+  themeable,
+  asformitem,
+  locale,
+  usecssr
+} from '../../_mixins'
+import { call } from '../../_utils'
 import styles from './styles'
 
 export default {
@@ -174,8 +176,9 @@ export default {
     NBaseSuffix
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
+    locale('Input'),
     asformitem(),
     usecssr(styles)
   ],
@@ -186,7 +189,7 @@ export default {
     },
     placeholder: {
       type: [Array, String],
-      default: ''
+      default: undefined
     },
     value: {
       type: [String, Array],
@@ -334,15 +337,20 @@ export default {
     }
   },
   computed: {
-    syntheticPlaceholder () {
+    mergedPlaceholder () {
+      const {
+        placeholder
+      } = this
       if (this.pair) {
-        if (Array.isArray(this.placeholder)) {
-          return this.placeholder
+        if (Array.isArray(placeholder)) {
+          return placeholder
         } else {
-          return [this.placeholder, this.placeholder]
+          return [placeholder, placeholder]
         }
+      } else if (placeholder === undefined) {
+        return [this.localeNs.placeholder]
       } else {
-        return this.placeholder
+        return [placeholder]
       }
     },
     syntheticFocus () {

@@ -74,5 +74,11 @@ export default {
   },
   Log: {
     loading: '加载中'
+  },
+  Input: {
+    placeholder: '请输入'
+  },
+  InputNumber: {
+    placeholder: '请输入'
   }
 }

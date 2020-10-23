@@ -74,5 +74,11 @@ export default {
   },
   Log: {
     loading: 'Loading'
+  },
+  Input: {
+    placeholder: 'Please Input'
+  },
+  InputNumber: {
+    placeholder: 'Please Input'
   }
 }

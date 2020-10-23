@@ -48,7 +48,7 @@
       ref="input"
       class="n-input-number__input"
       type="text"
-      :placeholder="placeholder"
+      :placeholder="mergedPlaceholder"
       :value="value"
       :disabled="disabled ? 'disabled' : false"
       @focus="doFocus"
@@ -67,7 +67,8 @@ import {
   configurable,
   themeable,
   asformitem,
-  usecssr
+  usecssr,
+  locale
 } from '../../_mixins'
 import { warn, call } from '../../_utils'
 import styles from './styles'
@@ -97,6 +98,7 @@ export default {
   mixins: [
     configurable,
     themeable,
+    locale('InputNumber'),
     asformitem(),
     usecssr(styles)
   ],
@@ -158,6 +160,13 @@ export default {
     }
   },
   computed: {
+    mergedPlaceholder () {
+      const {
+        placeholder
+      } = this
+      if (placeholder !== undefined) return placeholder
+      return this.localeNs.placeholder
+    },
     safeStep () {
       const parsedNumber = parseNumber(this.step)
       if (parsedNumber !== null) { return parsedNumber === 0 ? DEFAULT_STEP : Math.abs(parsedNumber) } else return DEFAULT_STEP
