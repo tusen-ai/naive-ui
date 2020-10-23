@@ -3,19 +3,31 @@
 ```html
 <n-icon
   size="40"
-  depth="primary"
+  :depth="1"
 >
   <cash-outline />
 </n-icon>
 <n-icon
   size="40"
-  depth="secondary"
+  :depth="2"
 >
   <cash-outline />
 </n-icon>
 <n-icon
   size="40"
-  depth="tertiary"
+  :depth="3"
+>
+  <cash-outline />
+</n-icon>
+<n-icon
+  size="40"
+  :depth="4"
+>
+  <cash-outline />
+</n-icon>
+<n-icon
+  size="40"
+  :depth="5"
 >
   <cash-outline />
 </n-icon>

@@ -6,9 +6,11 @@ export default c([
       color,
       opacity1Depth,
       opacity2Depth,
-      opacity3Depth
+      opacity3Depth,
+      opacity4Depth,
+      opacity5Depth
     } = props.$local
-    const { cubicBezierEaseInOut, iconTransition } = props.$base
+    const { cubicBezierEaseInOut } = props.$base
     return [
       cTB('icon', {
         raw: `
@@ -18,40 +20,38 @@ export default c([
           text-align: center;
           display: inline-block;
           position: relative;
-          transition: ${iconTransition};
-          fill: ${color};
-          stroke:  ${color};
+          transition:
+            fill .3s ${cubicBezierEaseInOut},
+            stroke .3s ${cubicBezierEaseInOut},
+            opacity .3s ${cubicBezierEaseInOut};
+          fill: currentColor;
+          stroke: currentColor;
         `
       },
       [
-        c('svg', {
-          raw: `
-            transition: opacity .3s ${cubicBezierEaseInOut};
-            height: 1em;
-            width: 1em;
-          `
+        cM('1-depth, 2-depth, 3-depth, 4-depth, 5-depth', {
+          fill: color,
+          stroke: color
         }),
-        cM('primary-depth', [
-          c('svg', {
-            raw: `
-              opacity: ${opacity1Depth};
-            `
-          })
-        ]),
-        cM('secondary-depth', [
-          c('svg', {
-            raw: `
-              opacity: ${opacity2Depth};
-            `
-          })
-        ]),
-        cM('tertiary-depth', [
-          c('svg', {
-            raw: `
-              opacity: ${opacity3Depth};
-            `
-          })
-        ])
+        c('svg', {
+          height: '1em',
+          width: '1em'
+        }),
+        cM('1-depth', {
+          opacity: opacity1Depth
+        }),
+        cM('2-depth', {
+          opacity: opacity2Depth
+        }),
+        cM('3-depth', {
+          opacity: opacity3Depth
+        }),
+        cM('4-depth', {
+          opacity: opacity4Depth
+        }),
+        cM('5-depth', {
+          opacity: opacity5Depth
+        })
       ])
     ]
   }

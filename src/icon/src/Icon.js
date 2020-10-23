@@ -23,7 +23,7 @@ export default {
     },
     depth: {
       validator (value) {
-        return ['primary', 'secondary', 'tertiary'].includes(value)
+        return [1, 2, 3, 4, 5, '1', '2', '3', '4', '5'].includes(value)
       },
       default: undefined
     },
@@ -34,15 +34,14 @@ export default {
   },
   computed: {
     styles () {
-      let style = {}
-      if (this.size) {
-        style['font-size'] = formatLength(this.size)
+      const {
+        size,
+        color
+      } = this
+      return {
+        fontSize: formatLength(size),
+        color
       }
-      if (this.color) {
-        style.fill = this.color
-        style.stroke = this.color
-      }
-      return style
     }
   },
   render () {

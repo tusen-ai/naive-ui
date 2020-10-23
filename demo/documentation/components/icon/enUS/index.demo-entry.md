@@ -18,7 +18,7 @@ depth
 |Name|Type|Default|Description|
 |-|-|-|-|
 |color|`string`|`undefined`||
-|depth|`'primary' \| 'secondary' \| 'tertiary'`|`undefined`||
+|depth|`1 \| 2 \| 3 \| 4 \| 5`|`undefined`||
 |size|`number \| string`|`undefined`||
 |themed-style|`{ [themeName: string]: Object }`|`undefined`||
 |theme|`'light' \| 'dark' \| string`|`undefined`||
