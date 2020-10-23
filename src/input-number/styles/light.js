@@ -25,7 +25,7 @@ export default create({
       actionColor: buttonColor,
       inputColorDisabled: colorDisabled,
       textColorDisabled,
-      placeholdeColor,
+      placeholderColor,
       textColor5: placeholderColorDisabled,
       inputColor: color
     } = derived
@@ -63,7 +63,7 @@ export default create({
       colorFocus,
       borderMaskBoxShadowFocus: `inset 0 0 0 1px ${primaryColorHover}, 0 0 0 2px ${changeColor(primaryColor, { alpha: 0.2 })}`,
       borderMaskBoxShadowHover: `inset 0 0 0 1px ${primaryColorHover}`,
-      placeholdeColor,
+      placeholderColor,
       // warning
       borderMaskBoxShadowWarning: `inset 0 0 0 1px ${warningColor}`,
       borderMaskBoxShadowWarningFocus: `inset 0 0 0 1px ${warningColorHover}, 0 0 0 2px ${changeColor(warningColor, { alpha: 0.2 })}`,

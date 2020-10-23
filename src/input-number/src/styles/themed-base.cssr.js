@@ -25,7 +25,7 @@ export default c([
       colorFocus,
       borderMaskBoxShadowFocus,
       borderMaskBoxShadowHover,
-      placeholdeColor,
+      placeholderColor,
       borderRadius
     } = props.$local
     return cTB('input-number', {
@@ -251,7 +251,7 @@ export default c([
       }, [
         c('&::placeholder', {
           transition: `color .3s ${cubicBezierEaseInOut}`,
-          color: placeholdeColor
+          color: placeholderColor
         }),
         c('&:hover ~', [
           cE('border-mask', {
