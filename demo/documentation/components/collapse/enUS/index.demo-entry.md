@@ -18,8 +18,8 @@ item-header-click
 |display-directive|`'if' \| 'show'`|`'if'`|The display directive to use when its inner `n-collapse-item` render content. `'if'` corresponds to `v-if` and `'show'` corresponds to `v-show`.|
 |expanded-names|`Array<string \| number>`|`null`||
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
-|on-update-expanded-names|`(expandedNames: Array<string>) => any`|`() => {}`||
-|on-item-header-click|`(data: { name: string, expanded: boolean, event: MouseEvent }) => any`|`() => {}`||
+|on-update-expanded-names|`(expandedNames: Array<string>) => any`|`undefined`||
+|on-item-header-click|`(data: { name: string, expanded: boolean, event: MouseEvent }) => any`|`undefined`||
 
 ### Collapse Item Props
 |Name|Type|Default|Description|

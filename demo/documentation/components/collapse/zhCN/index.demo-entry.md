@@ -18,8 +18,8 @@ item-header-click
 |display-directive|`'if' \| 'show'`|`'if'`|内部 `n-collapse-item` 在控制内容是否渲染时使用的指令，`'if'` 对应 `v-if`，`'show'` 对应 `v-show`|
 |expanded-names|`Array<string \| number>`|`null`||
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
-|on-update-expanded-names|`(expandedNames: Array<string>) => any`|`() => {}`||
-|on-item-header-click|`(data: { name: string, expanded: boolean, event: MouseEvent }) => any`|`() => {}`||
+|on-update-expanded-names|`(expandedNames: Array<string>) => any`|`undefined`||
+|on-item-header-click|`(data: { name: string, expanded: boolean, event: MouseEvent }) => any`|`undefined`||
 
 
 ### Collapse Item Props

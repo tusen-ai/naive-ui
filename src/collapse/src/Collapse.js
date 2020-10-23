@@ -1,8 +1,14 @@
 import { h, markRaw } from 'vue'
 import intersection from 'lodash-es/intersection'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import usecssr from '../../_mixins/usecssr'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
+import {
+  call,
+  warn
+} from '../../_utils'
 import styles from './styles/index.js'
 
 export default {
@@ -13,7 +19,7 @@ export default {
     }
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles)
   ],
@@ -40,16 +46,19 @@ export default {
     },
     onItemHeaderClick: {
       type: Function,
-      default: () => {}
+      default: undefined
     },
     'onUpdate:expandedNames': {
       type: Function,
-      default: () => {}
+      default: undefined
     },
     // deprecated
     onExpandedNamesChange: {
-      type: Function,
-      default: () => {}
+      validator () {
+        if (__DEV__) warn('collapse', '`on-expanded-names-change` is deprecated, please use `on-update:expanded-names` instead.')
+        return true
+      },
+      default: undefined
     }
   },
   setup () {
@@ -58,36 +67,44 @@ export default {
     }
   },
   methods: {
+    doUpdateExpandedNames (...args) {
+      const {
+        'onUpdate:expandedNames': updateExpandedNames,
+        onExpandedNamesChange
+      } = this
+      if (updateExpandedNames) call(updateExpandedNames, ...args)
+      if (onExpandedNamesChange) call(onExpandedNamesChange, ...args)
+    },
+    doItemHeaderClick (...args) {
+      const {
+        onItemHeaderClick
+      } = this
+      if (onItemHeaderClick) call(onItemHeaderClick, ...args)
+    },
     toggleItem (collapse, name, event) {
       if (this.accordion) {
         if (collapse) {
-          this['onUpdate:expandedNames']([name])
-
-          this.onExpandedNamesChange([name])
-          this.onItemHeaderClick({ name, expanded: true, event })
+          this.doUpdateExpandedNames([name])
+          this.doItemHeaderClick({ name, expanded: true, event })
         } else {
-          this['onUpdate:expandedNames']([])
-          this.onExpandedNamesChange([])
-          this.onItemHeaderClick({ name, expanded: false, event })
+          this.doUpdateExpandedNames([])
+          this.doItemHeaderClick({ name, expanded: false, event })
         }
       } else {
         if (!Array.isArray(this.expandedNames)) {
-          this['onUpdate:expandedNames']([name])
-          this.onExpandedNamesChange([name])
-          this.onItemHeaderClick({ name, expanded: true, event })
+          this.doUpdateExpandedNames([name])
+          this.doItemHeaderClick({ name, expanded: true, event })
         } else {
           const activeNames = intersection(this.expandedNames, this.collectedItemNames)
           const index = activeNames.findIndex(activeName => name === activeName)
           if (~index) {
             activeNames.splice(index, 1)
-            this['onUpdate:expandedNames'](activeNames)
-            this.onExpandedNamesChange(activeNames)
-            this.onItemHeaderClick({ name, expanded: false, event })
+            this.doUpdateExpandedNames(activeNames)
+            this.doItemHeaderClick({ name, expanded: false, event })
           } else {
             activeNames.push(name)
-            this['onUpdate:expandedNames'](activeNames)
-            this.onExpandedNamesChange(activeNames)
-            this.onItemHeaderClick({ name, expanded: true, event })
+            this.doUpdateExpandedNames(activeNames)
+            this.doItemHeaderClick({ name, expanded: true, event })
           }
         }
       }
