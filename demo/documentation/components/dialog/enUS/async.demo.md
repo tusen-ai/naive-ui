@@ -1,5 +1,5 @@
 # Async
-Confirm can be async.
+Dialog can be async.
 ```html
 <n-button @click="handleClick">
   Success

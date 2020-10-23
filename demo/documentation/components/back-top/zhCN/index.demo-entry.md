@@ -19,7 +19,7 @@ target-container-selector
 |right|`number`|`40`||
 |show|`boolean`|`undefined`|是否显示 BackTop（受控）|
 |themed-style|`{ [themeName: string]: Object }`|`undefined`||
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 |to|`string \| HTMLElement`|`'body'`|BackTop 渲染的容器节点|
 |visibility-height|`number`|`180`||
 |on-update:show|`(value: boolean) => any`|`undefined`||

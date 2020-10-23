@@ -55,7 +55,7 @@ use-component
 |negative-text|`string`|`undefined`|Corresponding button won't show if not set.|
 |positive-text|`string`|`undefined`|Corresponding button won't show if not set.|
 |show-icon|`boolean`|`true`||
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 |title|`string \| (() => VNode \| Array<VNode>)`|`undefined`|Can be a render function.|
 |type|`'error \| 'success' \| 'warning'`|`'warning'`||
 |onPositiveClick|`() => boolean \| Promise<boolean> \| any`|`undefined`|The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior.|

@@ -8,7 +8,7 @@ basic
 |Name|Type|Default|Description|
 |-|-|-|-|
 |label|`string`|`undefined`||
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 |value|`string`|`undefined`||
 
 ## Slots

@@ -24,7 +24,7 @@ dark-4-debug
 |placement|`'top' \| 'right' \| 'bottom' \| 'left'`|`'right'`||
 |show|`boolean`|`false`||
 |themed-style|`{ [themeName: string]: Object }`|`undefined`||
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 |to|`string \| HTMLElement`|`'body'`|抽屉出现的区域|
 |width|`number \| string`|`251`||
 |on-update:show|`(show: boolean) => any`|`undefined`||

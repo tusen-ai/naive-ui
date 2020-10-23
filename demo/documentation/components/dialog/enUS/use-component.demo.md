@@ -2,7 +2,7 @@
 Sometimes you may want to use a component.
 ```html
 <n-dialog
-  title="Confirm"
+  title="Dialog"
   content="Are you sure?" 
   :closable="false"
   negative-text="Cancel"

@@ -20,12 +20,12 @@ drawer-debug
 ### Modal
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|body-style|`Object`|`undefined`|使用 preset 时 Modal 主体的样式|
 |display-directive|`'if' \| 'show'`|`'if'`|使用何种指令控制模态框主体的条件渲染|
 |mask-closable|`boolean`|`true`|点击遮罩时是否发出 `update:show` 事件|
-|body-style|`Object`|`undefined`||
 |preset|`'card' \| 'dialog'`|`undefined`|模态框使用何种预设|
 |show|`boolean`|`false`|是否展示 Modal|
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 |on-update:show|`(value: boolean) => any`|`undefined`|模态框更新是否展示状态的回调|
 
 ### Modal（Card 预设）

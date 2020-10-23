@@ -33,5 +33,5 @@ basic
 |code|`string`|`null`||
 |hljs|`Object`|`undefined`|If you want to set hljs locally, set it on code by the prop|
 |language|`string`|`undefined`||
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 |trim|`boolean`|`true`||

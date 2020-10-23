@@ -33,5 +33,5 @@ basic
 |code|`string`|`null`||
 |hljs|`Object`|`undefined`|如果你想局部设定 hljs，可以通过这个属性传给组件|
 |language|`string`|`undefined`||
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 |trim|`boolean`|`true`||

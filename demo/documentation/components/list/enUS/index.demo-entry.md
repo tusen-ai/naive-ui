@@ -11,7 +11,7 @@ border
 |Name|Type|Default|Description|
 |-|-|-|-|
 |bordered|`boolean`|`false`||
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 
 ## Slots
 ### List Slots

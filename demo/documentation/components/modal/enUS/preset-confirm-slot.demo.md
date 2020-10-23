@@ -1,4 +1,4 @@
-# Use Preset Confirm (Slot)
+# Use Preset Dialog (Slot)
 Slots are also related to preset.
 ```html
 <n-button
@@ -8,7 +8,7 @@ Slots are also related to preset.
 </n-button>
 <n-modal v-model:show="modalActive" 
   preset="confirm"
-  title="Confirm"
+  title="Dialog"
 >
   <template v-slot:header>
     <div>title</div>

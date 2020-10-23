@@ -147,27 +147,27 @@ export default {
     // events
     onClickoutside: {
       type: Function,
-      default: () => {}
+      default: undefined
     },
     onBeforeLeave: {
       type: Function,
-      default: () => {}
+      default: undefined
     },
     onAfterLeave: {
       type: Function,
-      default: () => {}
+      default: undefined
     },
     onPositiveClick: {
       type: Function,
-      default: () => {}
+      default: undefined
     },
     onNegativeClick: {
       type: Function,
-      default: () => {}
+      default: undefined
     },
     onClose: {
       type: Function,
-      default: () => {}
+      default: undefined
     }
   },
   methods: {

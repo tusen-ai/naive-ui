@@ -29,11 +29,9 @@ export default {
   methods: {
     cancelCallback () {
       this.message.success('算了')
-      this.modalActive = false
     },
     submitCallback () {
       this.message.success('确认')
-      this.modalActive = false
     }
   }
 }

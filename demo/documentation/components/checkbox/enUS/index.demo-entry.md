@@ -18,7 +18,7 @@ event
 |checked|`boolean`|`false`||
 |disabled|`boolean`|`false`||
 |label|`string \| function`|`null`|Could be a render function.|
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 |value|`string \| number`|`null`||
 |on-update:checked|`(checked: boolean)`|`undefined`||
 
@@ -26,7 +26,7 @@ event
 |Name|Type|Default|Description|
 |-|-|-|-|
 |disabled|`boolean`|`false`||
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 |value|`Array<string \| number>`|`null`||
 |on-update:value|`(value: string \| number)`|`undefined`||
 

@@ -8,7 +8,7 @@ basic
 ### Breadcrumb Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 |separator|`string`|`'/'`||
 
 ## Slots

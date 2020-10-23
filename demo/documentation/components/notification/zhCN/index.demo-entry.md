@@ -66,7 +66,7 @@ duration
 |description|`string \| (() => VNode \| Array<VNode>)`|`undefined`|可以是 render 函数|
 |duration|`number`|`undefined`|如果没有设定则不会自动关闭，单位毫秒|
 |meta|`string \| (() => VNode \| Array<VNode>)`|`undefined`|可以是 render 函数|
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 |title|`string \| (() => VNode \| Array<VNode>)`|`undefined`|可以是 render 函数|
 |onAfterEnter|`Function`|`undefined`||
 |onAfterLeave|`Function`|`undefined`||

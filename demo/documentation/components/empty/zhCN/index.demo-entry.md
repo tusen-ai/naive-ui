@@ -10,7 +10,7 @@ basic
 |description|`string`|`'无数据'`||
 |show-description|`boolean`|`true`||
 |size|`'small' \| 'medium' \| 'large' \| 'huge'`|`'medium'`||
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 
 ## Slots
 |名称|参数|说明|

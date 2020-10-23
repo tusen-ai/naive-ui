@@ -15,7 +15,7 @@ display-directive
 |closable|`boolean`|`false`||
 |justify-content|`'space-between' \| 'space-around' \| 'space-evenly'`|`undefined`||
 |label-size|`'small' \| 'medium' \| 'large' \| 'huge'`|`'medium'`|标签的尺寸，只对线型的 Tabs 生效|
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 |type|`'line' \| 'card'`|`'line'`||
 |value|`string \| number`|required||
 |on-update:value|`(value: string \| number) => any`|`undefined`||

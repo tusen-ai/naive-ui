@@ -15,7 +15,7 @@ scrollto
 |bound|`number`|`12`||
 |ignore-gap|`boolean`|`false`| 如果设定为 `true`, 导航将显示在准确的href区域 |
 |target|`() => HTMLElement`|一个返回最邻近可滚动祖先元素的函数|需要监听滚动的元素（如果你希望 Anchor 和 Affix 分别监听不同的元素，可以手动的组合 Anchor 和 Affix）|
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 
 ## Methods
 |名称|类型|说明|

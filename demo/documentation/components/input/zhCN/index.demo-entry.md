@@ -36,7 +36,7 @@ passively-activated
 |rows|`number`|`3`||
 |separator|`string`|`null`|成对的值中间的分隔符|
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 |type|`'text' \| 'password' \| 'textarea'`|`'text'`||
 |value|`string \| [string, string]`|`null`|文本输入的值。如果是 `pair` 是 `true`，`value` 是一个数组|
 |on-blur|`() => any`|`undefined`||

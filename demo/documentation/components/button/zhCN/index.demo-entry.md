@@ -33,7 +33,7 @@ debug
 |round|`boolean`|`false`||
 |size|`'tiny' \| 'small' \| 'medium' \| 'large'`|`'medium'`||
 |text|`boolean`|`false`||
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 |type|`'default' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'`|`'default'`||
 
 ### Button Group Props

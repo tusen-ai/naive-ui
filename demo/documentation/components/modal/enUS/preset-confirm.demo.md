@@ -1,14 +1,15 @@
-# Use Preset Confirm
-An example of preset `confirm`.
+# Use Preset Dialog
+An example of preset `dialog`.
 ```html
 <n-button
   @click="modalActive = true"
 >
   Start Me up
 </n-button>
-<n-modal v-model:show="modalActive" 
+<n-modal
+  v-model:show="modalActive" 
   preset="confirm" 
-  title="Confirm"
+  title="Dialog"
   content="Are you sure?" 
   :closable="false"
   positive-text="Submit"
@@ -28,11 +29,9 @@ export default {
   methods: {
     cancelCallback () {
       this.message.success('Cancel')
-      this.modalActive = false
     },
     submitCallback () {
       this.message.success('Submit')
-      this.modalActive = false
     }
   }
 }

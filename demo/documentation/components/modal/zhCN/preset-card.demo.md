@@ -14,7 +14,6 @@
   size="huge"
   :bordered="false"
   :segmented="segmented"
-  @close="hide"
 >
   <template v-slot:header-extra>
     噢!
@@ -42,9 +41,6 @@ export default {
   methods: {
     show () {
       this.showModal = true
-    },
-    hide () {
-      this.showModal = false
     }
   }
 }

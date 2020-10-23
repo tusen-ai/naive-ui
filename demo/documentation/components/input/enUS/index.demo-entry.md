@@ -36,7 +36,7 @@ passively-activated
 |rows|`number`|`3`||
 |separator|`string`|`null`|The separator bewteen pairwise inputs.|
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 |type|`'text' \| 'password' \| 'textarea'`|`'text'`||
 |value|`string \| [string, string]`|`null`|Value of input. When `pair` is `true`, `value` is an array.|
 |on-blur|`() => any`|`undefined`||

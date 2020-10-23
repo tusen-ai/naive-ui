@@ -106,14 +106,14 @@ export default {
     }
   },
   methods: {
-    hide () {
+    doUpdateShow (show) {
       const {
         'onUpdate:show': onUpdateShow,
         onHide
       } = this
-      if (onUpdateShow) onUpdateShow(false)
+      if (onUpdateShow) onUpdateShow(show)
       // deprecated
-      if (onHide) onHide(false)
+      if (onHide && !show) onHide(show)
     }
   },
   render () {
@@ -152,16 +152,37 @@ export default {
                 theme: this.mergedTheme,
                 show: this.show,
                 onClose: () => {
-                  const { onClose } = this
-                  if (onClose) onClose()
+                  const { onClose = () => {} } = this
+                  Promise.resolve(
+                    onClose()
+                  ).then(
+                    value => {
+                      if (value === false) return
+                      this.doUpdateShow(false)
+                    }
+                  )
                 },
                 onNegativeClick: () => {
-                  const { onNegativeClick } = this
-                  if (onNegativeClick) onNegativeClick()
+                  const { onNegativeClick = () => {} } = this
+                  Promise.resolve(
+                    onNegativeClick()
+                  ).then(
+                    value => {
+                      if (value === false) return
+                      this.doUpdateShow(false)
+                    }
+                  )
                 },
                 onPositiveClick: () => {
-                  const { onPositiveClick } = this
-                  if (onPositiveClick) onPositiveClick()
+                  const { onPositiveClick = () => {} } = this
+                  Promise.resolve(
+                    onPositiveClick()
+                  ).then(
+                    value => {
+                      if (value === false) return
+                      this.doUpdateShow(false)
+                    }
+                  )
                 },
                 onBeforeLeave: () => {
                   const {
@@ -185,7 +206,7 @@ export default {
                   if (this.maskClosable) {
                     const { containerRef } = this
                     if (containerRef.contains(e.target)) {
-                      this.hide()
+                      this.doUpdateShow(false)
                     }
                   }
                 }

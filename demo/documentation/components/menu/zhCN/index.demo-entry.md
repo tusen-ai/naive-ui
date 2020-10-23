@@ -24,7 +24,7 @@ collapse
 |mode|`'vertical' \| 'horizontal'`|`'vertical'`||
 |popover-body-style|`object \| null`|`{ padding: '2px 4px', minWidth: '180px' }`|菜单收缩时子菜单弹层的样式|
 |root-indent|`number`|`32`|菜单第一级的缩进，如果没有设定，使用 `indent` 代替|
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 |value|`string`|`null`|菜单当前的选中值|
 |on-update:expanded-keys|`(value: string[]) => any`|`() => {}`||
 |on-update:value|`(value: string) => any`|`() => {}`||

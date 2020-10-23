@@ -24,7 +24,7 @@ collapse
 |mode|`'vertical' \| 'horizontal'`|`'vertical'`||
 |popover-body-style|`object \| null`|`{ padding: '2px 4px', minWidth: '180px' }`|菜单收缩时子菜单弹层的样式|
 |root-indent|`number`|`null`|The indent of menu's first level children. If not set, menu will use `indent` in place of it.|
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 |value|`string`|`null`|The selected name of menu.|
 |on-update:expanded-keys|`(value: string[]) => any`|`() => {}`||
 |on-update:value|`(value: string) => any`|`() => {}`||

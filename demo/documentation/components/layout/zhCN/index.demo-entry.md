@@ -21,7 +21,7 @@ scroll-to
 |-|-|-|-|
 |position|`'static' \| 'absolute'`|`'static'`|`static` 模式将会把 CSS `position` 设为 `static`， `absolute`  模式将会把 CSS `position` 设为 `absolute`，还将 `left`、`right`、`top`、`bottom` 设为 `0`。`absolute` 模式在你想将内容在一个固定容器或者将这个页面的布局设为固定位置的时候很有用。你可能需要修改一些 style 来确保它按照你预想的方式展示|
 |themed-style|`{ [themeName: string]: Object }`|`null`||
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 |use-native-scrollbar|`boolean`|`true`|是否在自身使用原生滚动条。如果设定为 `false`, Layout 将会对内容使用 naive-ui 风格的滚动条|
 
 ### Layout Footer Props
@@ -29,12 +29,12 @@ scroll-to
 |-|-|-|-|
 |bordered|`boolean`|`false`||
 |position|`'static' \| 'absolute'`|`'static'`|`static` 模式将会把 CSS `position` 设为 `static`， `absolute`  模式将会把 CSS `position` 设为 `absolute`，还将 `left`、`right`、`bottom` 设为 `0`。`absolute` 模式在你想将内容在一个固定容器或者将这个页面的布局设为固定位置的时候很有用。你可能需要修改一些 style 来确保它按照你预想的方式展示|
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 
 ### Layout Header Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 |bordered|`boolean`|`false`||
 |position|`'static' \| 'absolute'`|`'static'`|`static` 模式将会把 CSS `position` 设为 `static`， `absolute`  模式将会把 CSS `position` 设为 `absolute`，还将 `left`、`right`、`top` 设为 `0`。`absolute` 模式在你想将内容在一个固定容器或者将这个页面的布局设为固定位置的时候很有用。你可能需要修改一些 style 来确保它按照你预想的方式展示|
 
@@ -48,7 +48,7 @@ scroll-to
 |position|`'static' \| 'absolute'`|`'static'`|`static` 模式将会把 CSS `position` 设为 `static`， `absolute`  模式将会把 CSS `position` 设为 `absolute`，还将 `left`、`top`、`bottom` 设为 `0`。`absolute` 模式在你想将内容在一个固定容器或者将这个页面的布局设为固定位置的时候很有用。你可能需要修改一些 style 来确保它按照你预想的方式展示。当 Sider 的 position 是 `absolute` 的时候，需要确保它旁边的 Layout 或者 Layout Content 的 position 被设为 `absolute`|
 |show-content|`boolean`|`true`|如果设为 `false`，Sider 的内容将会变透明|
 |show-trigger|`boolean \| 'bar' \| 'arrow-circle'`|`false`|内置的触发按钮是否展示|
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 |width|`number`|`272`||
 |use-native-scrollbar|`boolean`|`true`|是否在自身使用原生滚动条。如果设定为 `false`, Sider 将会对内容使用 naive-ui 风格的滚动条|
 |on-update:collapsed|`(collapsed: boolean) => any`|`undefined`||

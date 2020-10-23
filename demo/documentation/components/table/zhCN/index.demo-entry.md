@@ -22,4 +22,4 @@ single-line
 |single-column|`boolean`|`false`||
 |single-line|`boolean`|`true`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||

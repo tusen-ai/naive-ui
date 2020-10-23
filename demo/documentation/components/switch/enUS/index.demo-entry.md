@@ -11,6 +11,6 @@ event
 |Name|Type|Default|Description|
 |-|-|-|-|
 |disabled|`boolean`|`false`||
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 |value|`boolean`|`false`||
 |on-update:value|`(value: boolean) => any`|`undefined`||

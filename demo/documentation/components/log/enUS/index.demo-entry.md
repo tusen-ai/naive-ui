@@ -44,7 +44,7 @@ loading
 |loading|`boolean`|`false`||
 |log|`string`|`undefined`||
 |rows|`number`|`15`||
-|theme|`'light' \| 'dark'  \| string`|`undefined`||
+|theme|`'light' \| 'dark' \| string`|`undefined`||
 |trim|`boolean`|`false`||
 |on-require-more|`(from: 'top' \| 'bottom') => any`|`undefined`||
 |on-reach-top|`() => any`|`undefined`||
