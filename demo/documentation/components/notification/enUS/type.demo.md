@@ -1,17 +1,19 @@
 # Type
 ```html
-<n-button @click="notify('info')">
-  Info
-</n-button>
-<n-button @click="notify('success')">
-  Success
-</n-button>
-<n-button @click="notify('warning')">
-  Warning
-</n-button>
-<n-button @click="notify('error')">
-  Error
-</n-button>
+<n-space>
+  <n-button @click="notify('info')">
+    Info
+  </n-button>
+  <n-button @click="notify('success')">
+    Success
+  </n-button>
+  <n-button @click="notify('warning')">
+    Warning
+  </n-button>
+  <n-button @click="notify('error')">
+    Error
+  </n-button>
+</n-space>
 ```
 ```js
 export default {
@@ -24,10 +26,5 @@ export default {
       })
     }
   }
-}
-```
-```css
-.n-button {
-  margin: 0 12px 8px 0;
 }
 ```

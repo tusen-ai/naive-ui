@@ -1,11 +1,13 @@
 # 基础用法
 ```html
-<n-button @click="handleClick1">
-  Wouldn't it be Nice
-</n-button>
-<n-button @click="handleClick2">
-  Satisfaction
-</n-button>
+<n-space>
+  <n-button @click="handleClick1">
+    Wouldn't it be Nice
+  </n-button>
+  <n-button @click="handleClick2">
+    Satisfaction
+  </n-button>
+</n-space>
 ```
 ```js
 import { h, resolveComponent } from 'vue'
@@ -71,10 +73,5 @@ I cant get no, I cant get no`,
       })
     }
   }
-}
-```
-```css
-.n-button {
-  margin: 0 12px 8px 0;
 }
 ```
