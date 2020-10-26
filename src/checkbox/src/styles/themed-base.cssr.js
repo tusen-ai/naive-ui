@@ -83,7 +83,11 @@ export default c([
               user-select: none;
               padding-left: 8px;
             `
-          }),
+          }, [
+            c('&:empty', {
+              display: 'none'
+            })
+          ]),
           cM('checked', [
             cB('checkbox-box', [
               cB('checkbox-icon', [
