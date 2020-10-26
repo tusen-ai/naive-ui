@@ -67,7 +67,7 @@
         }"
         :style="{ ...verticalRailStyle, height: scrollbarSize }"
       >
-        <transition name="n-scrollbar-transition">
+        <transition name="n-fade-in-transition">
           <div
             v-if="needHorizontalScrollbar && showHorizontalScrollbar && !isIos"
             class="n-scrollbar-rail__scrollbar"
