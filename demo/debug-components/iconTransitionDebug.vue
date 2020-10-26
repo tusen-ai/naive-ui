@@ -44,8 +44,8 @@
 </template>
 
 <script>
-import mdCash from 'naive-ui/lib/icons/md-cash'
-import mdContacts from 'naive-ui/lib/icons/md-contacts'
+import mdCash from 'naive-ui/lib/icons/md-cash.vue'
+import mdContacts from 'naive-ui/lib/icons/md-contacts.vue'
 
 export default {
   components: {

@@ -14,8 +14,8 @@
 
 ```
 ```js
-import gameControllerOutline from 'naive-ui/lib/icons/game-controller-outline'
-import gameController from 'naive-ui/lib/icons/game-controller'
+import gameControllerOutline from 'naive-ui/lib/icons/game-controller.vue'
+import gameController from 'naive-ui/lib/icons/game-controller.vue'
 
 export default {
   components: {

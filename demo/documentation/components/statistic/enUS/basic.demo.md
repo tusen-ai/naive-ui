@@ -21,7 +21,7 @@
 ```
 
 ```js
-import mdSave from 'naive-ui/lib/icons/md-save'
+import mdSave from 'naive-ui/lib/icons/md-save.vue'
 
 export default {
   components: {

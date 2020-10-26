@@ -1,7 +1,7 @@
 <script>
 import { h } from 'vue'
-import NCol from '../../src/grid/src/Col'
-import NRow from '../../src/grid/src/Row'
+import NCol from '../../src/grid/src/Col.vue'
+import NRow from '../../src/grid/src/Row.vue'
 
 export default {
   name: 'ComponentDemos',

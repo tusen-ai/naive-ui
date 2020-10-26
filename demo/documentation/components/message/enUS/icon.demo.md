@@ -6,7 +6,7 @@
 ```
 ```js
 import { h } from 'vue'
-import mdHourglass from 'naive-ui/lib/icons/md-hourglass'
+import mdHourglass from 'naive-ui/lib/icons/md-hourglass.vue'
 
 export default {
   inject: ['message'],

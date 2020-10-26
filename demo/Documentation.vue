@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import LandingFooter from './documentation/landing/Footer'
+import LandingFooter from './documentation/landing/Footer.vue'
 
 export default {
   components: {

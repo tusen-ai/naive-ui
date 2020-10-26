@@ -571,8 +571,8 @@ Debug 用的。
 
 ```
 ```js
-import cashOutline from 'naive-ui/lib/icons/cash-outline'
-import logInOutline from 'naive-ui/lib/icons/log-in-outline'
+import cashOutline from 'naive-ui/lib/icons/cash-outline.vue'
+import logInOutline from 'naive-ui/lib/icons/log-in-outline.vue'
 
 export default {
   components: {

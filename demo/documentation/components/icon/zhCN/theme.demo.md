@@ -18,7 +18,7 @@ Naive UI 提供一些简单的方法来自定义不同主题下的样式。
 </n-icon>
 ```
 ```js
-import cashOutline from 'naive-ui/lib/icons/cash-outline'
+import cashOutline from 'naive-ui/lib/icons/cash-outline.vue'
 
 export default {
   components: {

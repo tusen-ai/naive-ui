@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import Site from './Site'
+import Site from './Site.vue'
 
 export default {
   name: 'SiteProvider',

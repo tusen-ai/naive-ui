@@ -18,7 +18,7 @@ Naive UI provides a simple way to custom style of icon in different themes.
 </n-icon>
 ```
 ```js
-import cashOutline from 'naive-ui/lib/icons/cash-outline'
+import cashOutline from 'naive-ui/lib/icons/cash-outline.vue'
 
 export default {
   components: {

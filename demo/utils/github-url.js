@@ -1,1 +1,1 @@
-module.exports = 'https://***REMOVED***/tree/develop/'
+export default 'https://***REMOVED***/tree/develop/'

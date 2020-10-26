@@ -17,7 +17,7 @@ Use icon in button.
 </n-space>
 ```
 ```js
-import CashIcon from 'naive-ui/lib/icons/cash-outline'
+import CashIcon from 'naive-ui/lib/icons/cash-outline.vue'
 
 export default {
   components: {

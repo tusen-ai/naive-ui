@@ -23,6 +23,7 @@
     "init-cssr": "node scripts/create-cssr-scaffold.js",
     "generate": "npm run generate-version",
     "generate-version": "node scripts/generate-version",
+    "dev:v3": "vite",
     "tusimple:dev": "npm run generate && cross-env NODE_ENV=development webpack-dev-server --config build/webpack.tusimple-dev.js",
     "tusimple:build:doc": "npm run generate && npm run build && rm -rf build-doc/dist && cross-env NODE_ENV=production webpack --config build/webpack.tusimple-doc.js",
     "tusimple:release:doc": "npm run tusimple:build:doc && node build-doc/generate-deploy-sh.js && sudo bash build-doc/deploy-doc.sh",
@@ -133,6 +134,7 @@
     "treemate": "^0.1.6",
     "vooks": "0.0.1-alpha.1",
     "vue": "^3.0.2",
+    "vue-i18n": "^9.0.0-beta.6",
     "vue-runtime-helpers": "^1.1.2",
     "vueuc": "0.1.0-alpha.3"
   }

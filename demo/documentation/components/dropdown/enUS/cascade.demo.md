@@ -13,7 +13,7 @@ Dropdown can be cascade.
 
 ```js
 import { h, resolveComponent } from 'vue'
-import CashIcon from 'naive-ui/lib/icons/cash-outline'
+import CashIcon from 'naive-ui/lib/icons/cash-outline.vue'
 
 const options = [
   {

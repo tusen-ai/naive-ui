@@ -25,7 +25,7 @@
 
 ```
 ```js
-import mdMusicalNotes from 'naive-ui/lib/icons/md-musical-notes'
+import mdMusicalNotes from 'naive-ui/lib/icons/md-musical-note.vue'
 
 export default {
   components: {

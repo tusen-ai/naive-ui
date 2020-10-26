@@ -22,7 +22,7 @@
 </n-alert>
 ```
 ```js
-import iosAirplane from 'naive-ui/lib/icons/ios-airplane'
+import iosAirplane from 'naive-ui/lib/icons/ios-airplane.vue'
 
 export default {
   components: {

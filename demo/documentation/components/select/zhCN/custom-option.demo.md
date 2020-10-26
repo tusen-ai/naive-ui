@@ -8,7 +8,7 @@
 ```
 ```js
 import { resolveComponent, h } from 'vue'
-import MusicIcon from 'naive-ui/lib/icons/md-musical-note'
+import MusicIcon from 'naive-ui/lib/icons/md-musical-note.vue'
 
 function render (option, selected) {
   return [

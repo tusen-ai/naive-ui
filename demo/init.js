@@ -1,9 +1,10 @@
-import ComponentDemo from './utils/ComponentDemo'
-import ComponentDemos from './utils/ComponentDemos'
-import ComponentDocumentation from './utils/ComponentDocumentation'
-import DocumentationWrapper from './utils/DocumentationWrapper'
-import EditOnGithubButton from './utils/EditOnGithubButton'
-import EditOnGithubHeader from './utils/EditOnGithubHeader'
+import { createI18n } from 'vue-i18n'
+import ComponentDemo from './utils/ComponentDemo.vue'
+import ComponentDemos from './utils/ComponentDemos.vue'
+import ComponentDocumentation from './utils/ComponentDocumentation.vue'
+import DocumentationWrapper from './utils/DocumentationWrapper.vue'
+import EditOnGithubButton from './utils/EditOnGithubButton.vue'
+import EditOnGithubHeader from './utils/EditOnGithubHeader.vue'
 import './styles/demo.scss'
 
 export function installDemoComponents (app) {
@@ -14,3 +15,6 @@ export function installDemoComponents (app) {
   app.component('EditOnGithubButton', EditOnGithubButton)
   app.component('EditOnGithubHeader', EditOnGithubHeader)
 }
+export const i18n = createI18n({
+  locale: 'zh-CN'
+})

@@ -33,7 +33,7 @@
 </n-icon>
 ```
 ```js
-import cashOutline from 'naive-ui/lib/icons/cash-outline'
+import cashOutline from 'naive-ui/lib/icons/cash-outline.vue'
 
 export default {
   components: {

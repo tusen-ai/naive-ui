@@ -7,7 +7,7 @@ After a long time of consideration, I decide to drop slot API. However, there is
 />
 ```
 ```js
-import mdMusicalNote from 'naive-ui/lib/icons/md-musical-note'
+import mdMusicalNote from 'naive-ui/lib/icons/md-musical-note.vue'
 
 function render (h, option, selected) {
   return [

@@ -16,9 +16,9 @@ A horiziontal menu.
 ```
 ```js
 import { h, resolveComponent } from 'vue'
-import bookIcon from 'naive-ui/lib/icons/book-outline'
-import personIcon from 'naive-ui/lib/icons/person-outline'
-import wineIcon from 'naive-ui/lib/icons/wine-outline'
+import bookIcon from 'naive-ui/lib/icons/book-outline.vue'
+import personIcon from 'naive-ui/lib/icons/person-outline.vue'
+import wineIcon from 'naive-ui/lib/icons/wine-outline.vue'
 
 function renderIcon(icon) {
   return () => h(resolveComponent('n-icon'), null, { default: () => h(icon) })

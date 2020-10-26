@@ -23,8 +23,8 @@ function parseComponents (tokens) {
   return components
 }
 
-module.exports = function (content, url) {
-  const relativeURL = this.resourcePath.replace(projectPath + '/', '')
+module.exports = function (content, path) {
+  const relativeURL = path.replace(projectPath + '/', '')
 
   const showAnchor = !!~content.search('<!--anchor:on-->')
   // for marked bug https://github.com/markedjs/marked/issues/1047
@@ -39,7 +39,7 @@ module.exports = function (content, url) {
     .join('\n')
   let mdContent = marked.parser(tokens, { renderer })
   if (titleText) {
-    const githubButton = `<edit-on-github-header relative-url="${url || relativeURL}" text=${titleText}></edit-on-github-header>`
+    const githubButton = `<edit-on-github-header relative-url="${relativeURL}" text=${titleText}></edit-on-github-header>`
     const titleReg = /(<n-h1[^>]*>)(.*?)(<\/n-h1>)/
     mdContent = mdContent.replace(titleReg, `${githubButton}`)
   }

@@ -41,9 +41,9 @@
 </template>
 
 <script>
-import LandingFooter from './Footer'
-import leftImage from './Left'
-import rightImage from './Right'
+import LandingFooter from './Footer.vue'
+import leftImage from './Left.vue'
+import rightImage from './Right.vue'
 import { i18n } from '../../util-compositions'
 
 export default {

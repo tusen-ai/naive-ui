@@ -24,7 +24,7 @@
 </n-space>
 ```
 ```js
-import searchOutline from 'naive-ui/lib/icons/search-outline'
+import searchOutline from 'naive-ui/lib/icons/search-outline.vue'
 
 export default {
   components: {

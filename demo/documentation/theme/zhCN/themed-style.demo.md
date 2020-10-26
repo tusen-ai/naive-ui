@@ -24,9 +24,9 @@
 </n-config-provider>
 ```
 ```js
-import mdCash from 'naive-ui/lib/icons/md-cash'
-import mdContacts from 'naive-ui/lib/icons/md-contacts'
-import iosContacts from 'naive-ui/lib/icons/ios-contacts'
+import mdCash from 'naive-ui/lib/icons/md-cash.vue'
+import mdContacts from 'naive-ui/lib/icons/md-contacts.vue'
+import iosContacts from 'naive-ui/lib/icons/ios-contacts.vue'
 
 export default {
   components: {

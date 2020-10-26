@@ -29,8 +29,8 @@
 </n-space>
 ```
 ```js
-import mdAdd from 'naive-ui/lib/icons/md-add'
-import mdRemove from 'naive-ui/lib/icons/md-remove'
+import mdAdd from 'naive-ui/lib/icons/md-add.vue'
+import mdRemove from 'naive-ui/lib/icons/md-remove.vue'
 
 export default {
   components: {

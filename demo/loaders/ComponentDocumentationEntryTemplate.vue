@@ -8,10 +8,8 @@
 <script>
 import zhCN from './zhCN/index'
 import enUS from './enUS/index'
-
 zhCN.name = 'zh-CN'
 enUS.name = 'en-US'
-
 export default {
   components: {
     'en-US': enUS,

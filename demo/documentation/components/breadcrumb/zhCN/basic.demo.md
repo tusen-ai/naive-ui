@@ -22,7 +22,7 @@
 </n-breadcrumb>
 ```
 ```js
-import mdCash from 'naive-ui/lib/icons/md-cash'
+import mdCash from 'naive-ui/lib/icons/md-cash.vue'
 
 export default {
   components: {

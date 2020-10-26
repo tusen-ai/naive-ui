@@ -74,7 +74,7 @@ Thing 提供了很多 slot 来定制。
 </n-thing>
 ```
 ```js
-import CashIcon from 'naive-ui/lib/icons/md-cash'
+import CashIcon from 'naive-ui/lib/icons/md-cash.vue'
 
 export default {
   components: {
