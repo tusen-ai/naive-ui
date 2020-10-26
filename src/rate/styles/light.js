@@ -10,7 +10,7 @@ export default create({
   getDerivedVariables ({ base, derived }) {
     return {
       itemColor: derived.railColor,
-      itemColorActive: derived.primaryColor
+      itemColorActive: '#FFCC33'
     }
   }
 })

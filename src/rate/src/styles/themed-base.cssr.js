@@ -11,38 +11,37 @@ export default c([
     } = props.$base
     return cTB('rate', {
       display: 'inline-flex',
-      flexWrap: 'no-wrap'
+      flexWrap: 'nowrap'
     }, [
+      c('&:hover', [
+        cB('icon', {
+          transition: `
+            color .1s ${cubicBezierEaseInOut}
+          `
+        })
+      ]),
       cE('item', {
+        display: 'flex',
         transition: `transform .1s ${cubicBezierEaseInOut}`,
         transform: 'scale(1)'
       }, [
         c('&:hover', {
           transform: 'scale(1.05)'
-        }, [
-          cB('icon', {
-            transition: `
-              fill .1s ${cubicBezierEaseInOut},
-              stroke .1s ${cubicBezierEaseInOut}
-            `
-          })
-        ]),
+        }),
         c('&:active', {
           transform: 'scale(0.96)'
         }),
         c('&:not(:first-child)', {
-          marginLeft: '2px'
+          marginLeft: '6px'
         }),
         cB('icon', {
-          fontSize: '24px',
+          fontSize: '20px',
           cursor: 'pointer',
-          fill: itemColor,
-          stroke: itemColor
+          color: itemColor
         }),
         cM('active', [
           cB('icon', {
-            fill: itemColorActive,
-            stroke: itemColorActive
+            color: itemColorActive
           })
         ])
       ])
