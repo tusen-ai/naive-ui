@@ -29,10 +29,11 @@ export default {
           'baseline',
           'start',
           'end',
-          'center'
+          'center',
+          'normal'
         ].includes(value)
       },
-      default: 'start'
+      default: 'normal'
     },
     justify: {
       validator (value) {
@@ -78,23 +79,25 @@ export default {
     const children = flatten(getSlot(this))
     const horizontalMargin = typeof size === 'number' ? size + 'px' : HORIZONTAL_MARGIN[size]
     const verticalMargin = typeof size === 'number' ? size + 'px' : VERTICAL_MARGIN[size]
-    const marginRight = !vertical ? horizontalMargin : null
-    const marginBottom = vertical ? verticalMargin : null
     const lastIndex = children.length - 1
     return h('div', {
       class: 'n-space',
       style: {
         display: inline ? 'inline-flex' : 'flex',
         flexDirection: vertical ? 'column' : 'row',
+        flexWrap: 'wrap',
         justifyContent: 'flex-' + justify,
+        marginBottom: vertical ? null : `-${verticalMargin}`,
         alignItems: align
       }
     }, children.map((child, index) => h('div', {
       style: [
         itemStyle,
-        {
-          marginRight: index !== lastIndex ? marginRight : null,
-          marginBottom: index !== lastIndex ? marginBottom : null
+        vertical ? {
+          marginBottom: index !== lastIndex ? verticalMargin : null
+        } : {
+          marginRight: index !== lastIndex ? horizontalMargin : null,
+          marginBottom: verticalMargin
         }
       ]
     }, [

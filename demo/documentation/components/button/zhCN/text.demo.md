@@ -7,23 +7,18 @@
 >
   <template v-slot:icon>
     <n-icon>
-      <train-outline />
+      <train-icon />
     </n-icon>
   </template>
   那车头依然吐着烟
 </n-button>
 ```
 ```js
-import trainOutline from 'naive-ui/lib/icons/train-outline'
+import TrainIcon from 'naive-ui/lib/icons/train-outline'
 
 export default {
   components: {
-    trainOutline
+    TrainIcon
   }
-}
-```
-```css
-.n-button {
-  margin: 0 12px 8px 0;
 }
 ```

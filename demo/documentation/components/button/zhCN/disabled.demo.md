@@ -7,9 +7,3 @@
   不许点
 </n-button>
 ```
-```css
-.n-button {
-  margin: 0 8px 8px 0;
-}
-```
-
