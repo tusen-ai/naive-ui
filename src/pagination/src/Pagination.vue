@@ -76,6 +76,7 @@
       {{ localeNs.goto }} <n-input
         v-model:value="quickJumperValue"
         size="small"
+        placeholder=""
         :disabled="disabled"
         @keyup="handleQuickJumperKeyUp"
       />

@@ -52,6 +52,10 @@ export default c([
             margin: 0 8px;
           `
         }, [
+          cE('placeholder', {
+            left: '6px',
+            right: '10px'
+          }),
           c('input', {
             raw: `
               padding-left: 6px;
