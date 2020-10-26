@@ -70,8 +70,7 @@ export default c([
           verticalAlign: 'bottom',
           position: 'relative',
           display: 'inline-flex',
-          alignItems: 'center',
-          transition: `color .3s ${cubicBezierEaseInOut}`
+          alignItems: 'center'
         }, [
           cB('base-loading', {
             position: 'absolute',
