@@ -50,16 +50,17 @@
               :indeterminate="checkboxIndererminate"
               @update:value="handleCheckboxInput(column)"
             />
-            <div v-if="column.ellipsis" class="n-data-table-th__ellipsis">
+            <template v-if="column.type !== 'selection'">
+              <div v-if="column.ellipsis" class="n-data-table-th__ellipsis">
+                <render
+                  :render="typeof column.title === 'function'
+                    ? h => (column.title)(column, index)
+                    : column.title
+                  "
+                />
+              </div>
               <render
-                :render="typeof column.title === 'function'
-                  ? h => (column.title)(column, index)
-                  : column.title
-                "
-              />
-            </div>
-            <template v-else>
-              <render
+                v-else
                 :render="typeof column.title === 'function'
                   ? () => (column.title)(column, index)
                   : column.title
