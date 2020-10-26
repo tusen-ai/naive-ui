@@ -21,9 +21,7 @@ export default c([
           display: inline-block;
           position: relative;
           transition:
-            fill .3s ${cubicBezierEaseInOut},
-            stroke .3s ${cubicBezierEaseInOut},
-            opacity .3s ${cubicBezierEaseInOut};
+            color .3s ${cubicBezierEaseInOut};
           fill: currentColor;
           stroke: currentColor;
         `
