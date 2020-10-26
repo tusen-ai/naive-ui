@@ -32,7 +32,7 @@ export default {
           'center'
         ].includes(value)
       },
-      default: 'normal'
+      default: undefined
     },
     justify: {
       validator (value) {
