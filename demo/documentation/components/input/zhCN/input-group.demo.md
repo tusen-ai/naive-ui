@@ -1,6 +1,6 @@
 # 输入组
 ```html
-<n-space vertical align="stretch">
+<n-space vertical>
   <n-input-group>
     <n-input :style="{ width: '33%' }" v-model:value="value1" />
     <n-input-number :style="{ width: '33%' }" v-model:value="value2" />

@@ -1,6 +1,6 @@
 # Language
 ```html
-<n-space vertical align="stretch">
+<n-space vertical>
   <n-space>
     <n-button @click="lang = 'en-US'">en-us</n-button>
     <n-button @click="lang = 'zh-CN'">zh-cn</n-button>

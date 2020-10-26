@@ -2,7 +2,7 @@
 如果需要在 focus 之后使用回车键来激活输入，可以设定 `passively-activated`。 (使用 tab 键来聚焦这些输入)
 
 ```html
-<n-space vertical align="stretch">
+<n-space vertical>
   <n-input
     v-model:value="value"
     @blur="handleBlur"

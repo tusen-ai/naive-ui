@@ -1,7 +1,7 @@
 # Theme Environments
 Get current theme environment.
 ```html
-<n-space vertical align="stretch">
+<n-space vertical>
   <n-space>
     <n-button @click="theme = 'dark'">Dark Theme</n-button>
     <n-button @click="theme = 'light'">Light Theme</n-button>

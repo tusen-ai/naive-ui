@@ -1,7 +1,7 @@
 # 加载条 Loading Bar 
 焦虑的安慰剂，疗效尚可。
 
-<n-space vertical align="stretch">
+<n-space vertical>
 <n-alert title="使用前提" type="warning">
   如果你想使用加载条，你需要把调用其方法的组件放在 <n-text code>n-loading-bar-provider</n-text> 内部并且注入 <n-text code>loadingBar</n-text>。
 </n-alert>

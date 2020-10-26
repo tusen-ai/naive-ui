@@ -2,7 +2,7 @@
 If you want to activate input by pressing enter after focused, use `passively-activated`. (Use tab key to focus on the inputs)
 
 ```html
-<n-space vertical align="stretch">
+<n-space vertical>
   <n-input
     v-model:value="value"
     @blur="handleBlur"

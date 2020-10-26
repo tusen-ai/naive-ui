@@ -29,8 +29,7 @@ export default {
           'baseline',
           'start',
           'end',
-          'center',
-          'normal'
+          'center'
         ].includes(value)
       },
       default: 'normal'

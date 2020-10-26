@@ -1,7 +1,7 @@
 # 尺寸
 卡片有 `small`、`medium`、`large`、`huge` 尺寸。
 ```html
-<n-space vertical align="stretch">
+<n-space vertical>
   <n-card title="小卡片" size="small">
     卡片内容
   </n-card>

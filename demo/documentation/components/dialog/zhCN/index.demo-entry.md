@@ -1,7 +1,7 @@
 # 对话框 Dialog
 执行之前，请确认。
 
-<n-space vertical align="stretch">
+<n-space vertical>
 <n-alert title="使用前提" type="warning">
   如果你想使用对话框，你需要把调用其方法的组件放在 <n-text code>n-dialog-provider</n-text> 内部并且注入 <n-text code>dialog</n-text>。
 </n-alert>

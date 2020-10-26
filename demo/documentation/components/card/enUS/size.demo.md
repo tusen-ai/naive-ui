@@ -1,7 +1,7 @@
 # Size
 Card has `small`, `medium`, `large`, `huge` sizes.
 ```html
-<n-space vertical align="stretch">
+<n-space vertical>
   <n-card title="Small Card" size="small">
     Card Content
   </n-card>

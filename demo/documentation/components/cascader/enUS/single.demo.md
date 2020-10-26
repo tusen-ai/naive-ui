@@ -1,6 +1,6 @@
 # Single
 ```html
-<n-space vertical align="stretch">
+<n-space vertical>
   <n-space>
     <n-space><n-switch v-model:value="leafOnly" />Leaf Only</n-space>
     <n-space><n-switch v-model:value="cascade" />Cascade</n-space>

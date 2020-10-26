@@ -1,6 +1,6 @@
 # 事件
 ```html
-<n-space vertical align="stretch">
+<n-space vertical>
   <n-input
     v-model:value="value"
     @blur="handleBlur"

@@ -1,7 +1,7 @@
 # Clearable
 Make input clearable when value is set.
 ```html
-<n-space vertical align="stretch">
+<n-space vertical>
   <n-input
     v-model:value="value"
     type="input"

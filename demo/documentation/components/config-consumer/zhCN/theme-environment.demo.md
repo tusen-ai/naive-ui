@@ -1,7 +1,7 @@
 # 主题环境
 获得当前主题环境值。
 ```html
-<n-space vertical align="stretch">
+<n-space vertical>
   <n-space>
     <n-button @click="theme = 'dark'">深色主题</n-button>
     <n-button @click="theme = 'light'">浅色主题</n-button>

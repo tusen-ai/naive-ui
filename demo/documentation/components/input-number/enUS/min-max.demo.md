@@ -1,7 +1,7 @@
 # Min and Max
 You can set min & max of it.
 ```html
-<n-space vertical align="stretch">
+<n-space vertical>
   <n-input-number
     v-model:value="value"
     placeholder="Min"

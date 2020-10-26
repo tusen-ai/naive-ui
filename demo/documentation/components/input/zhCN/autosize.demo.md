@@ -1,7 +1,7 @@
 # 自动调整尺寸
 Textarea 自动调整尺寸。
 ```html
-<n-space vertical align="stretch">
+<n-space vertical>
   <n-input
     v-model:value="value"
     placeholder="自动调整尺寸"

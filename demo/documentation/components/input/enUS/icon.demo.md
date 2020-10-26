@@ -1,7 +1,7 @@
 # Prefix & Suffix
 Fill content in prefix or suffix of the input.
 ```html
-<n-space vertical align="stretch">
+<n-space vertical>
   <n-input v-model:value="value" placeholder="Search">
     <template v-slot:prefix>
       <n-icon>

@@ -1,6 +1,6 @@
 # Mark
 ```html
-<n-space vertical align="stretch">
+<n-space vertical>
   <n-slider
     v-model:value="value"
     range

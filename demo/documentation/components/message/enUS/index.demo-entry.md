@@ -1,7 +1,7 @@
 # Message
 Oracle from the top(always) of the browser.
 
-<n-space vertical align="stretch">
+<n-space vertical>
 <n-alert title="Prerequisite" type="warning">
   If you want use message, you need to wrap the component where you call related methods inside <n-text code>n-message-provider</n-text> and inject <n-text code>message</n-text>.
 </n-alert>

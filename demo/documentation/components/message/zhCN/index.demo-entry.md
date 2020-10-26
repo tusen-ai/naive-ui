@@ -1,7 +1,7 @@
 # 信息 Message
 （一般是）从浏览器顶部降下来的神谕。
 
-<n-space vertical align="stretch">
+<n-space vertical>
 <n-alert title="使用前提" type="warning">
   如果你想使用信息，你需要把调用其方法的组件放在 <n-text code>n-message-provider</n-text> 内部并且注入 <n-text code>message</n-text>。
 </n-alert>

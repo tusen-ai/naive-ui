@@ -3,7 +3,7 @@
 
 像是通知组件这种东西优先级不那么高，所以我可以弄一堆没什么用的动画上去。
 
-<n-space vertical align="stretch">
+<n-space vertical>
 <n-alert title="使用前提" type="warning">
   如果你想使用通知，你需要把调用其方法的组件放在 <n-text code>n-nofitication-provider</n-text> 内部并且注入 <n-text code>nofitication</n-text>。
 </n-alert>

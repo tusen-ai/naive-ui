@@ -1,7 +1,7 @@
 # 尺寸
 `small`、`medium`、`large`。
 ```html
-<n-space vertical align="stretch">
+<n-space vertical>
   <n-input-number
     v-model:value="value"
     size="small"

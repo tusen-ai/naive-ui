@@ -9,7 +9,7 @@ from-end
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|align|`'start' \| 'end' \| 'center' \| 'baseline' \| 'stretch'`|`'start'`||
+|align|`'start' \| 'end' \| 'center' \| 'baseline' \| 'stretch'`|`undefined`||
 |inline|`boolean`|`false`||
 |item-style|`string \| object`|`undefined`||
 |theme|`'light' \| 'dark' \| string`|`undefined`||

@@ -1,7 +1,7 @@
 # 前缀 & 后缀
 在前缀后缀添加内容。
 ```html
-<n-space vertical align="stretch">
+<n-space vertical>
   <n-input v-model:value="value" placeholder="搜索">
     <template v-slot:prefix>
       <n-icon>

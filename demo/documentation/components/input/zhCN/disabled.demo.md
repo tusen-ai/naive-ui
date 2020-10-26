@@ -1,7 +1,7 @@
 # 禁用
 文本输入可以被禁用。
 ```html
-<n-space vertical align="stretch">
+<n-space vertical>
   <n-input
     v-model:value="value"
     type="input"
