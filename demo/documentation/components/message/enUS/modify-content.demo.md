@@ -1,10 +1,12 @@
 # Modify Exist Message
 ```html
-<n-button @click="createMessage">
-  Create  a Message Firstly
-</n-button>
-<n-button @click="changeType">Change Type</n-button>
-<n-button @click="plus">Plus 1</n-button>
+<n-space>
+  <n-button @click="createMessage">
+    Create  a Message Firstly
+  </n-button>
+  <n-button @click="changeType">Change Type</n-button>
+  <n-button @click="plus">Plus 1</n-button>
+</n-space>
 ```
 ```js
 export default {
@@ -41,10 +43,5 @@ export default {
       )
     }
   }
-}
-```
-```css
-.n-button {
-  margin: 0 12px 8px 0;
 }
 ```

@@ -1,20 +1,22 @@
 # 基础用法
 ```html
-<n-button @click="info">
-  信息
-</n-button>
-<n-button @click="error">
-  错误
-</n-button>
-<n-button @click="warning">
-  警告
-</n-button>
-<n-button @click="success">
-  成功
-</n-button>
-<n-button @click="loading">
-  加载中
-</n-button>
+<n-space>
+  <n-button @click="info">
+    信息
+  </n-button>
+  <n-button @click="error">
+    错误
+  </n-button>
+  <n-button @click="warning">
+    警告
+  </n-button>
+  <n-button @click="success">
+    成功
+  </n-button>
+  <n-button @click="loading">
+    加载中
+  </n-button>
+</n-space>
 ```
 ```js
 export default {
@@ -46,10 +48,5 @@ export default {
       )
     }
   }
-}
-```
-```css
-.n-button {
-  margin: 0 12px 8px 0;
 }
 ```

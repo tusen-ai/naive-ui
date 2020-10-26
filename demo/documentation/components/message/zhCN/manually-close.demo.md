@@ -1,11 +1,13 @@
 # 手动关闭
 ```html
-<n-button @click="createMessage">
-  打开
-</n-button>
-<n-button @click="removeMessage">
-  关闭
-</n-button>
+<n-space>
+  <n-button @click="createMessage">
+    打开
+  </n-button>
+  <n-button @click="removeMessage">
+    关闭
+  </n-button>
+</n-space>
 ```
 ```js
 export default {
@@ -33,10 +35,5 @@ export default {
       }
     }
   }
-}
-```
-```css
-.n-button {
-  margin: 0 12px 8px 0
 }
 ```

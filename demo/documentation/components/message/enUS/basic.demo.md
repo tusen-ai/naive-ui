@@ -1,20 +1,22 @@
 # Basic
 ```html
-<n-button @click="info">
-  Info
-</n-button>
-<n-button @click="error">
-  Error
-</n-button>
-<n-button @click="warning">
-  Warning
-</n-button>
-<n-button @click="success">
-  Success
-</n-button>
-<n-button @click="loading">
-  Loading
-</n-button>
+<n-space>
+  <n-button @click="info">
+    Info
+  </n-button>
+  <n-button @click="error">
+    Error
+  </n-button>
+  <n-button @click="warning">
+    Warning
+  </n-button>
+  <n-button @click="success">
+    Success
+  </n-button>
+  <n-button @click="loading">
+    Loading
+  </n-button>
+</n-space>
 ```
 ```js
 export default {
@@ -46,10 +48,5 @@ export default {
       )
     }
   }
-}
-```
-```css
-.n-button {
-  margin: 0 12px 8px 0;
 }
 ```

@@ -1,11 +1,13 @@
 # Manually Close
 ```html
-<n-button @click="createMessage">
-  Create
-</n-button>
-<n-button @click="removeMessage">
-  Destroy
-</n-button>
+<n-space>
+  <n-button @click="createMessage">
+    Create
+  </n-button>
+  <n-button @click="removeMessage">
+    Destroy
+  </n-button>
+</n-space>
 ```
 ```js
 export default {
@@ -33,10 +35,5 @@ export default {
       }
     }
   }
-}
-```
-```css
-.n-button {
-  margin: 0 12px 8px 0
 }
 ```

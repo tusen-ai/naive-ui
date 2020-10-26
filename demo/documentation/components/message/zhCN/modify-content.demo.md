@@ -1,10 +1,12 @@
 # 修改创建的信息
 ```html
-<n-button @click="createMessage">
-  先开个信息
-</n-button>
-<n-button @click="changeType">改变类型</n-button>
-<n-button @click="plus">加一</n-button>
+<n-space>
+  <n-button @click="createMessage">
+    先开个信息
+  </n-button>
+  <n-button @click="changeType">改变类型</n-button>
+  <n-button @click="plus">加一</n-button>
+</n-space>
 ```
 ```js
 export default {
@@ -41,10 +43,5 @@ export default {
       )
     }
   }
-}
-```
-```css
-.n-button {
-  margin: 0 12px 8px 0;
 }
 ```
