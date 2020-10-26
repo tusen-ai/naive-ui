@@ -37,7 +37,7 @@
 import NIcon from '../../../icon'
 import NDataTableFilterMenu from './FilterMenu.vue'
 import NPopover from '../../../popover'
-import FilterIcon from '../../../_icons/funnel.vue'
+import { FilterIcon } from '../../../_base/icons'
 
 function createActiveFilters (allFilters, columnKey, syntheticFilterValue) {
   const activeFilters = Object.assign({}, allFilters)

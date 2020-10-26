@@ -24,7 +24,7 @@ const columns = [
   {
     title: 'Age',
     key: 'age',
-    sorter: (row1, row2) => row2.age - row1.age
+    sorter: (row1, row2) => row1.age - row2.age
   },
   {
     title: 'Address',

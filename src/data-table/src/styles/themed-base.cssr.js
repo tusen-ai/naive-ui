@@ -246,31 +246,22 @@ export default c([
               width: '14px',
               marginLeft: '4px',
               position: 'relative',
-              display: 'inline-block',
-              verticalAlign: 'middle'
+              display: 'inline-flex',
+              verticalAlign: '-0.2em',
+              color: headerButtonIconColor,
+              transition: `
+                color .3s ${cubicBezierEaseInOut},
+                transform .3s ${cubicBezierEaseInOut}
+              `
             }, [
-              cE('asc-icon', {
-                bottom: 'calc(50% - 2px)',
-                left: 0
+              cM('desc', {
+                transform: 'rotate(0)'
               }),
-              cE('desc-icon', {
-                top: 'calc(50% - 2px)',
-                left: 0
+              cM('asc', {
+                transform: 'rotate(-180deg)'
               }),
-              cM('asc', [
-                cE('asc-icon', {
-                  fill: headerButtonIconColorActive
-                })
-              ]),
-              cM('desc', [
-                cE('desc-icon', {
-                  fill: headerButtonIconColorActive
-                })
-              ]),
-              cE('asc-icon, desc-icon', {
-                transition: `fill .3s ${cubicBezierEaseInOut}`,
-                fill: headerButtonIconColor,
-                position: 'absolute'
+              cM('asc, desc', {
+                color: headerButtonIconColorActive
               })
             ]),
             cB('data-table-filter-button', {
@@ -302,9 +293,8 @@ export default c([
                   backgroundColor: headerButtonColorHover
                 }),
                 cB('icon', {
-                  fontSize: '12px',
-                  fill: headerButtonIconColor,
-                  stroke: headerButtonIconColor
+                  fontSize: '15px',
+                  color: headerButtonIconColor
                 })
               ]),
               cM('popover-visible', [
@@ -317,8 +307,7 @@ export default c([
                   backgroundColor: headerButtonColorHover
                 }, [
                   cB('icon', {
-                    fill: headerButtonIconColorActive,
-                    stroke: headerButtonIconColorActive
+                    color: headerButtonIconColorActive
                   })
                 ])
               ])

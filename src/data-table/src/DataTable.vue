@@ -123,7 +123,7 @@ function normalizeColumn (column) {
   })
   if (!column.key && column.type === 'selection') {
     defaultColumn.key = 'selection'
-    defaultColumn.width = 48
+    defaultColumn.width = 40
   }
   return defaultColumn
 }

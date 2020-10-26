@@ -1,5 +1,5 @@
 # Use OS Theme
-Naive-ui provides `$NOs.theme` property to get the current theme of your OS.
+Naive UI provides `useOsTheme` to get the current theme of your OS.
 
 ```html
 <n-config-provider :theme="theme">

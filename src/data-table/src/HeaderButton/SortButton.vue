@@ -6,22 +6,16 @@
       'n-data-table-sort-button--desc': currentColumnActive && syntheticSortOrder === 'descend'
     }"
   >
-    <n-icon
-      class="n-data-table-sort-button__desc-icon"
-    >
-      <ios-arrow-down />
-    </n-icon>
-    <n-icon
-      class="n-data-table-sort-button__asc-icon"
-    >
-      <ios-arrow-up />
+    <n-icon>
+      <arrow-down-icon />
     </n-icon>
   </span>
 </template>
 
 <script>
-import iosArrowUp from '../../../_icons/ios-arrow-up.vue'
-import iosArrowDown from '../../../_icons/ios-arrow-down.vue'
+import {
+  ArrowDownIcon
+} from '../../../_base/icons'
 import NIcon from '../../../icon'
 
 export default {
@@ -33,8 +27,7 @@ export default {
   },
   components: {
     NIcon,
-    iosArrowUp,
-    iosArrowDown
+    ArrowDownIcon
   },
   props: {
     fontSize: {

@@ -99,8 +99,8 @@ function isColumnFilterable (column) {
 }
 
 function getNextOrderOf (order) {
-  if (!order) return 'ascend'
-  else if (order === 'ascend') return 'descend'
+  if (!order) return 'descend'
+  else if (order === 'descend') return 'ascend'
   return false
 }
 
