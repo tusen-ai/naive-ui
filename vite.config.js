@@ -1,16 +1,7 @@
 const path = require('path')
 
 const mdPlugin = require('./demo/vite-plugins/mdPlugin')
-console.log(path.resolve(__dirname, './src'))
 
-const i18nTransform = ({ code, query }) => {
-  let resource
-  resource = JSON.parse(code.trim())
-  return `
-export default Comp => {
-Comp.i18n = ${JSON.stringify(resource || {})}
-}`.trim()
-}
 module.exports = {
   root: __dirname,
   plugins: [ mdPlugin() ],
@@ -26,8 +17,5 @@ module.exports = {
   define: {
     'process.env.NODE_ENV': `'${process.env.NODE_ENV}'`,
     '__DEV__': process.env === 'development'
-  },
-  vueCustomBlockTransforms: {
-    i18n: i18nTransform
   }
 }

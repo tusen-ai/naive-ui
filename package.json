@@ -114,7 +114,7 @@
     "terser": "^4.6.3",
     "tinycolor2": "^1.4.2",
     "url-loader": "^1.1.2",
-    "vite": "^1.0.0-rc.4",
+    "vite": "^1.0.0-rc.6",
     "vue-jest": "^4.0.0-rc.0",
     "vue-loader": "^16.0.0-beta.8",
     "vue-router": "^4.0.0-beta.13",
@@ -134,7 +134,6 @@
     "treemate": "^0.1.6",
     "vooks": "0.0.1-alpha.1",
     "vue": "^3.0.2",
-    "vue-i18n": "^9.0.0-beta.6",
     "vue-runtime-helpers": "^1.1.2",
     "vueuc": "0.1.0-alpha.3"
   }

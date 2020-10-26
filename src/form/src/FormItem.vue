@@ -90,7 +90,7 @@
 
 <script>
 import Schema from 'async-validator'
-import get from 'lodash-es/get'
+import { get } from 'lodash-es'
 import {
   configurable,
   themeable,

@@ -1,5 +1,5 @@
 import { h, markRaw } from 'vue'
-import intersection from 'lodash-es/intersection'
+import { intersection } from 'lodash-es'
 import {
   configurable,
   themeable,

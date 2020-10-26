@@ -179,7 +179,7 @@ import {
   isValid
 } from 'date-fns'
 import { strictParse, getDerivedTimeFromKeyboardEvent } from '../../_utils/component/datePicker'
-import isEqual from 'lodash-es/isEqual'
+import { isEqual } from 'lodash-es'
 
 import styles from './styles'
 import {

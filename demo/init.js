@@ -1,4 +1,3 @@
-import { createI18n } from 'vue-i18n'
 import ComponentDemo from './utils/ComponentDemo.vue'
 import ComponentDemos from './utils/ComponentDemos.vue'
 import ComponentDocumentation from './utils/ComponentDocumentation.vue'
@@ -15,6 +14,3 @@ export function installDemoComponents (app) {
   app.component('EditOnGithubButton', EditOnGithubButton)
   app.component('EditOnGithubHeader', EditOnGithubHeader)
 }
-export const i18n = createI18n({
-  locale: 'zh-CN'
-})
