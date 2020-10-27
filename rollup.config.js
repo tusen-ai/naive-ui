@@ -40,12 +40,12 @@ module.exports = {
   ],
   external: externalValidator([
     'async-validator',
-    'css-render',
     'date-fns',
     'lodash-es',
-    'resize-observer-polyfill',
     'vue-runtime-helpers',
+    'css-render',
     '@css-render/plugin-bem',
-    'vueuc'
+    'vueuc',
+    'vooks'
   ])
 }
