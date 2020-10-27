@@ -32,6 +32,7 @@ manual-position
 |属性|类型|说明|
 |-|-|-|
 |type|`'divider'`||
+|key|`string \| number`|需要唯一|
 
 ### DropdownSubmenu Type
 |属性|类型|说明|

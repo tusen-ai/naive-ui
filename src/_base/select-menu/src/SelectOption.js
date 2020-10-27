@@ -1,6 +1,5 @@
 import { h, inject, toRef } from 'vue'
 import { useMemo } from '../../../_utils/composition'
-import { createClassObject } from '../../../data-table/src/utils'
 
 export default {
   name: 'NBaseSelectOption',
@@ -10,30 +9,25 @@ export default {
     }
   },
   props: {
-    wrappedOption: {
+    tmNode: {
       type: Object,
-      required: true
-    },
-    grouped: {
-      validator (value) {
-        return typeof value === 'boolean'
-      },
-      default: false
-    },
-    index: {
-      validator (value) {
-        return typeof value === 'number'
-      },
       required: true
     }
   },
   setup (props) {
     const NBaseSelectMenu = inject('NBaseSelectMenu')
-    const dataRef = toRef(props.wrappedOption, 'data')
+    const rawNodeRef = toRef(props.tmNode, 'rawNode')
     return {
-      data: dataRef,
+      rawNode: rawNodeRef,
+      isGrouped: useMemo(() => {
+        const { tmNode } = props
+        const { parent } = tmNode
+        return parent && parent.rawNode.type === 'group'
+      }),
       isPending: useMemo(() => {
-        return props.index === NBaseSelectMenu.pendingWrappedOptionIndex
+        const { pendingTmNode } = NBaseSelectMenu
+        if (!pendingTmNode) return false
+        return props.tmNode.key === pendingTmNode.key
       }),
       isSelected: useMemo(() => {
         const {
@@ -41,7 +35,7 @@ export default {
           value
         } = NBaseSelectMenu
         if (value === null) return false
-        const optionValue = dataRef.value.value
+        const optionValue = rawNodeRef.value.value
         if (multiple) {
           const {
             valueSet
@@ -55,35 +49,45 @@ export default {
   },
   methods: {
     handleClick (e) {
-      if (this.disabled) return
-      this.NBaseSelectMenu.handleOptionClick(e, this.index, this.wrappedOption)
+      const {
+        tmNode
+      } = this
+      if (tmNode.disabled) return
+      this.NBaseSelectMenu.handleOptionClick(e, tmNode)
     },
     handleMouseEnter (e) {
-      if (this.disabled) return
-      this.NBaseSelectMenu.handleOptionMouseEnter(e, this.index, this.wrappedOption)
+      const {
+        tmNode
+      } = this
+      if (tmNode.disabled) return
+      this.NBaseSelectMenu.handleOptionMouseEnter(e, tmNode)
     },
     handleMouseMove (e) {
-      if (this.disabled || this.isPending) return
-      this.NBaseSelectMenu.handleOptionMouseEnter(e, this.index, this.wrappedOption)
+      const {
+        tmNode,
+        isPending
+      } = this
+      if (tmNode.disabled || isPending) return
+      this.NBaseSelectMenu.handleOptionMouseEnter(e, tmNode)
     }
   },
   render () {
-    const { data } = this
-    const children = data.render ? data.render(data, this.isSelected) : [ data.label ]
-    const classObject = createClassObject(data.class)
+    const { rawNode } = this
+    const children = rawNode.render ? rawNode.render(rawNode, this.isSelected) : [ rawNode.label ]
     return h('div', {
       class: [
         'n-base-select-option',
-        {
-          'n-base-select-option--selected': this.isSelected,
-          'n-base-select-option--disabled': data.disabled,
-          'n-base-select-option--grouped': this.grouped,
-          'n-base-select-option--pending': this.isPending,
-          ...classObject
-        }
+        [
+          rawNode.class,
+          {
+            'n-base-select-option--disabled': rawNode.disabled,
+            'n-base-select-option--selected': this.isSelected,
+            'n-base-select-option--grouped': this.isGrouped,
+            'n-base-select-option--pending': this.isPending
+          }
+        ]
       ],
-      'n-option-index': this.index,
-      style: data.style,
+      style: rawNode.style,
       onClick: this.handleClick,
       onMouseEnter: this.handleMouseEnter,
       onMouseMove: this.handleMouseMove

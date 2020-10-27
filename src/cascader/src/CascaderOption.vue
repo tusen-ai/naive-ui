@@ -21,7 +21,7 @@
     >
       <n-checkbox
         :disabled="disabled"
-        :checked="checked"
+        :value="checked"
         :indeterminate="indeterminate"
         @click.stop="handleCheck"
       />

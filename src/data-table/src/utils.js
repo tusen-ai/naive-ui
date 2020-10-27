@@ -1,16 +1,5 @@
 import formatLength from '../../_utils/css/formatLength'
 
-export function createClassObject (classString) {
-  if (!classString) return {}
-  if (typeof classString === 'string') {
-    return classString.split(' ').filter(className => className).reduce((classObject, className) => {
-      classObject[className] = true
-      return classObject
-    }, {})
-  }
-  return classString
-}
-
 export function createCustomWidthStyle (column, index, placement) {
   if (column.width) {
     const width = column.width

@@ -27,7 +27,7 @@ export function useCascader (props) {
   }
   const treeMateRef = computed(() => {
     return TreeMate(props.options, {
-      getKey ({ node }) {
+      getKey (node) {
         return node.value
       }
     })

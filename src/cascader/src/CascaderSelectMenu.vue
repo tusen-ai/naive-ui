@@ -17,7 +17,7 @@
           auto-pending-first-option
           :theme="theme"
           :pattern="pattern"
-          :options="filteredSelectOptions"
+          :tree-mate="selectTreeMate"
           :multiple="multiple"
           :size="size"
           :value="value"
@@ -30,6 +30,7 @@
 
 <script>
 import { ref, inject, toRef } from 'vue'
+import { createTreeMate } from 'treemate'
 import NBaseSelectMenu from '../../_base/select-menu'
 import { createSelectOptions, getPickerElement } from './utils'
 import {
@@ -129,6 +130,15 @@ export default {
         value: option.value,
         label: option.label
       }))
+    },
+    selectTreeMate () {
+      return createTreeMate(
+        this.filteredSelectOptions, {
+          getKey (node) {
+            return node.value
+          }
+        }
+      )
     }
   },
   watch: {
@@ -195,7 +205,7 @@ export default {
     enter () {
       const { menuRef } = this
       if (menuRef) {
-        const pendingOptionData = menuRef.getPendingOptionData()
+        const pendingOptionData = menuRef.getPendingOption()
         this.doCheck(pendingOptionData)
         return true
       }

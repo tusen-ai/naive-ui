@@ -30,7 +30,8 @@ const options = [
     key: 'daisy buchanan'
   },
   {
-    type: 'divider'
+    type: 'divider',
+    key: 'd1'
   },
   {
     label: 'Nick Carraway',

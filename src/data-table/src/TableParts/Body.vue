@@ -24,11 +24,11 @@
           v-for="(rowData, index) in data"
           :key="rowKey === null ? rowData.key : rowKey(rowData)"
           class="n-data-table-tr"
-          :class="
-            createClassObject(typeof rowClassName === 'function'
-              ? createClassObject(rowClassName(rowData, index))
-              : rowClassName)
-          "
+          :class="[
+            typeof rowClassName === 'function'
+              ? rowClassName(rowData, index)
+              : rowClassName
+          ]"
         >
           <td
             v-for="column in columns"
@@ -39,15 +39,17 @@
               right: NDataTable.currentFixedColumnRight(column)
             }"
             class="n-data-table-td"
-            :class="{
-              'n-data-table-td--ellipsis': column.ellipsis,
-              [`n-data-table-td--${column.align}-align`]: column.align,
-              ...(column.className && createClassObject(column.className)),
-              [`n-data-table-td--fixed-${column.fixed}`]: column.width && column.fixed,
-              'n-data-table-td--shadow-after': NBaseTable.leftActiveFixedColumn[column.key],
-              'n-data-table-td--shadow-before': NBaseTable.rightActiveFixedColumn[column.key],
-              'n-data-table-td--selection': column.type === 'selection'
-            }"
+            :class="[
+              column.className,
+              {
+                'n-data-table-td--ellipsis': column.ellipsis,
+                [`n-data-table-td--${column.align}-align`]: column.align,
+                [`n-data-table-td--fixed-${column.fixed}`]: column.width && column.fixed,
+                'n-data-table-td--shadow-after': NBaseTable.leftActiveFixedColumn[column.key],
+                'n-data-table-td--shadow-before': NBaseTable.rightActiveFixedColumn[column.key],
+                'n-data-table-td--selection': column.type === 'selection'
+              }
+            ]"
           >
             <n-checkbox
               v-if="column.type === 'selection'"
@@ -72,7 +74,7 @@
 <script>
 import { ref } from 'vue'
 import Cell from './Cell.vue'
-import { createCustomWidthStyle, setCheckStatusOfRow, createClassObject, createRowKey } from '../utils'
+import { createCustomWidthStyle, setCheckStatusOfRow, createRowKey } from '../utils'
 import NScrollbar from '../../../scrollbar'
 import formatLength from '../../../_utils/css/formatLength'
 
@@ -146,7 +148,6 @@ export default {
     }
   },
   methods: {
-    createClassObject,
     createRowKey,
     handleCheckboxInput (row, checked) {
       const newCheckedRowKeys = this.checkedRowKeys.map(v => v)

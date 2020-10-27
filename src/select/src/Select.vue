@@ -71,7 +71,7 @@
               auto-pending-first-option
               :theme="mergedTheme"
               :pattern="pattern"
-              :options="filteredOptions"
+              :tree-mate="treeMate"
               :multiple="multiple"
               :size="mergedSize"
               :filterable="filterable"
@@ -97,7 +97,13 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed, toRef } from 'vue'
+import { createTreeMate } from 'treemate'
+import {
+  useIsMounted,
+  useMergedState,
+  useCompitable
+} from 'vooks'
 import {
   configurable,
   placeable,
@@ -110,13 +116,6 @@ import {
   clickoutside,
   zindexable
 } from '../../_directives'
-import {
-  filterOptions,
-  valueToOptionMap
-} from '../../_utils/component/select'
-import {
-  useIsMounted
-} from '../../_utils/composition'
 import {
   warn
 } from '../../_utils/naive'
@@ -134,6 +133,28 @@ function patternMatched (pattern, value) {
   } catch (err) {
     return false
   }
+}
+
+function filterOptions (originalOpts, filter) {
+  if (!filter) return originalOpts
+  function traverse (options) {
+    if (!Array.isArray(options)) return []
+    const filteredOptions = []
+    for (const option of options) {
+      if (option.type === 'group') {
+        const children = traverse(option.children)
+        if (children.length) {
+          filteredOptions.push(Object.assign({}, option, {
+            children
+          }))
+        }
+      } else if (filter(option)) {
+        filteredOptions.push(option)
+      }
+    }
+    return filteredOptions
+  }
+  return traverse(originalOpts)
 }
 
 export default {
@@ -167,7 +188,7 @@ export default {
     },
     options: {
       type: Array,
-      default: () => []
+      required: true
     },
     value: {
       type: [String, Number, Array],
@@ -241,6 +262,10 @@ export default {
         value
       })
     },
+    show: {
+      type: Boolean,
+      default: undefined
+    },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:value': {
       type: [Function, Array],
@@ -287,23 +312,45 @@ export default {
       default: false
     }
   },
-  setup () {
+  setup (props) {
+    const patternRef = ref('')
+    const filteredOptionsRef = computed(() => filterOptions(
+      props.options,
+      patternRef.value
+    ))
+    const treeMateRef = computed(() => createTreeMate(filteredOptionsRef.value, {
+      getKey (node) {
+        if (node.type === 'group') return node.name
+        return node.value
+      }
+    }))
+    const tmNodeMap = computed(() => treeMateRef.value.treeNodeMap)
+    const uncontrolledShowRef = ref(false)
+    const mergedShowRef = useMergedState(
+      toRef(props, 'show'),
+      uncontrolledShowRef
+    )
     return {
+      treeMate: treeMateRef,
+      flattenedNodes: computed(() => {
+        return treeMateRef.value.flattenedNodes
+      }),
+      tmNodeMap,
       isMounted: useIsMounted(),
       offsetContainerRef: ref(null),
       triggerRef: ref(null),
       trackingRef: ref(null),
-      menuRef: ref(null)
-    }
-  },
-  data () {
-    return {
-      show: false,
-      scrolling: false,
-      pattern: '',
-      memorizedValueToOptionMap: new Map(),
-      createdOptions: [],
-      beingCreatedOptions: []
+      menuRef: ref(null),
+      pattern: patternRef,
+      uncontrolledShow: uncontrolledShowRef,
+      show: mergedShowRef,
+      compitableOptions: useCompitable(props, [
+        'items',
+        'options'
+      ]),
+      createdOptions: ref([]),
+      beingCreatedOptions: ref([]),
+      memoValOptMap: ref(new Map())
     }
   },
   computed: {
@@ -311,67 +358,76 @@ export default {
       return this.show
     },
     localizedPlaceholder () {
-      if (this.placeholder !== undefined) {
-        return this.placeholder
-      }
-      return this.localeNs.placeholder
-    },
-    adpatedOptions () {
-      /**
-       * If using deprecated API, make it work at first
-       */
-      const options = this.items || this.options
-      if (options) return options
-      return []
+      return this.placeholder ?? this.localeNs.placeholder
     },
     localOptions () {
-      return this.adpatedOptions
+      return this.compitableOptions
         .concat(this.createdOptions)
         .concat(this.beingCreatedOptions)
     },
     filteredOptions () {
       if (this.remote) {
-        return this.adpatedOptions
+        return this.compitableOptions
       } else {
-        const options = this.localOptions
-        const trimmedPattern = this.pattern.trim()
-        if (!trimmedPattern.length || !this.filterable) {
-          return options
+        const { localOptions, pattern } = this
+        if (!pattern.length || !this.filterable) {
+          return localOptions
         } else {
-          const filter = option => this.filter(trimmedPattern, option)
-          const filteredOptions = filterOptions(options, filter)
-          return filteredOptions
+          const { filter } = this
+          const mergedFilter = option => filter(pattern, option)
+          return filterOptions(localOptions, mergedFilter)
         }
       }
     },
-    valueToOptionMap () {
-      return valueToOptionMap(this.localOptions)
-    },
     selectedOptions () {
       if (this.multiple) {
-        return this.mapValuesToOptions(this.value)
+        const { value: values } = this
+        if (!Array.isArray(values)) return []
+        const remote = this.remote
+        const {
+          tmNodeMap,
+          memoValOptMap,
+          wrappedFallbackOption
+        } = this
+        const options = []
+        values.forEach(value => {
+          if (tmNodeMap.has(value)) {
+            options.push(tmNodeMap.get(value).rawNode)
+          } else if (remote && memoValOptMap.has(value)) {
+            options.push(memoValOptMap.get(value))
+          } else if (wrappedFallbackOption) {
+            const option = wrappedFallbackOption(value)
+            if (option) {
+              options.push(option)
+            }
+          }
+        })
+        return options
       }
       return null
     },
     selectedOption () {
       if (!this.multiple) {
-        const value = this.value
-        const selectedOption = this.getOption(value)
-        const fallbackOption = this.wrappedFallbackOption
+        const { value, tmNodeMap, wrappedFallbackOption } = this
+        let selectedOption = null
+        if (tmNodeMap.has(value)) {
+          selectedOption = tmNodeMap.get(value).rawNode
+        } else if (this.remote) {
+          selectedOption = this.memoValOptMap.get(value)
+        }
         return (
           selectedOption ||
-          (fallbackOption && fallbackOption(value)) ||
+          (wrappedFallbackOption && wrappedFallbackOption(value)) ||
           null
         )
       }
       return null
     },
     wrappedFallbackOption () {
-      const fallbackOption = this.fallbackOption
+      const { fallbackOption } = this
       if (!fallbackOption) return false
       return value => {
-        const type = typeof value
-        if (type === 'string' || type === 'number') {
+        if (['string', 'number'].includes(typeof value)) {
           return Object.assign(fallbackOption(value), { value })
         } return null
       }
@@ -382,9 +438,11 @@ export default {
       this.updateMemorizedOptions()
     },
     filteredOptions () {
+      if (!this.show) return
       this.$nextTick(this.__placeableSyncPosition)
     },
     value () {
+      if (!this.show) return
       this.$nextTick(this.__placeableSyncPosition)
     }
   },
@@ -444,28 +502,24 @@ export default {
       } = this
       if (onScroll) call(onScroll, ...args)
     },
-    activate () {
-      this.show = true
-    },
-    deactivate () {
-      this.show = false
-    },
     /**
      * remote related methods
      */
     updateMemorizedOptions () {
-      const remote = this.remote
-      const multiple = this.multiple
+      const {
+        remote,
+        multiple
+      } = this
       if (remote) {
-        const memorizedValueToOptionMap = this.memorizedValueToOptionMap
+        const { memoValOptMap } = this
         if (multiple) {
           this.selectedOptions.forEach(option => {
-            memorizedValueToOptionMap.set(option.value, option)
+            memoValOptMap.set(option.value, option)
           })
         } else {
           const option = this.selectedOption
           if (option) {
-            memorizedValueToOptionMap.set(option.value, option)
+            memoValOptMap.set(option.value, option)
           }
         }
       }
@@ -476,14 +530,14 @@ export default {
     openMenu () {
       if (!this.disabled) {
         this.pattern = ''
-        this.activate()
+        this.uncontrolledShow = true
         if (this.filterable) {
           this.triggerRef.focusPatternInput()
         }
       }
     },
     closeMenu () {
-      this.deactivate()
+      this.uncontrolledShow = false
     },
     handleMenuAfterLeave () {
       this.pattern = ''
@@ -500,9 +554,6 @@ export default {
     },
     handleTriggerBlur () {
       this.doBlur()
-      if (__DEV__) {
-        if (this.debug) return
-      }
       this.closeMenu()
     },
     handleTriggerFocus () {
@@ -510,65 +561,35 @@ export default {
     },
     handleMenuClickOutside (e) {
       if (this.show) {
-        if (!this.triggerRef.$el.contains(e.target) && !this.scrolling) {
+        if (!this.triggerRef.$el.contains(e.target)) {
           this.closeMenu()
         }
-      }
-    },
-    /**
-     * data utils methods
-     */
-    mapValuesToOptions (values) {
-      if (!Array.isArray(values)) return []
-      const remote = this.remote
-      const valueOptionMap = this.valueToOptionMap
-      const memorizedValueToOptionMap = this.memorizedValueToOptionMap
-      const options = []
-      const fallbackOption = this.wrappedFallbackOption
-      values.forEach(value => {
-        if (valueOptionMap.has(value)) {
-          options.push(valueOptionMap.get(value))
-        } else if (remote && memorizedValueToOptionMap.has(value)) {
-          options.push(memorizedValueToOptionMap.get(value))
-        } else if (fallbackOption) {
-          const option = fallbackOption(value)
-          if (option) {
-            options.push(option)
-          }
-        }
-      })
-      return options
-    },
-    getOption (value) {
-      if (this.valueToOptionMap.has(value)) {
-        return this.valueToOptionMap.get(value)
-      } else if (this.remote && this.memorizedValueToOptionMap.has(value)) {
-        return this.memorizedValueToOptionMap.get(value)
       }
     },
     createClearedMultipleSelectValue (value) {
       if (!Array.isArray(value)) return []
       if (this.wrappedFallbackOption) {
-        /** if option has a fallback, I can't help user to clear some unknown value */
+        // if option has a fallback, I can't help user to clear some unknown value
         return Array.from(value)
       } else {
-        /** if there's no option fallback, unappeared options are treated as invalid */
-        const remote = this.remote
-        const valueOptionMap = this.valueToOptionMap
+        // if there's no option fallback, unappeared options are treated as invalid
+        const {
+          remote,
+          tmNodeMap
+        } = this
         if (remote) {
-          const memorizedValueToOptionMap = this.memorizedValueToOptionMap
-          return value.filter(v => valueOptionMap.has(v) || memorizedValueToOptionMap.has(v))
+          const { memoValOptMap } = this
+          return value.filter(v => tmNodeMap.has(v) || memoValOptMap.has(v))
         } else {
-          return value.filter(v => valueOptionMap.has(v))
+          return value.filter(v => tmNodeMap.has(v))
         }
       }
     },
     handleToggleOption (option) {
       if (this.disabled) return
-      const tag = this.tag
-      const remote = this.remote
+      const { tag, remote } = this
       if (tag && !remote) {
-        const beingCreatedOptions = this.beingCreatedOptions
+        const { beingCreatedOptions } = this
         const beingCreatedOption = beingCreatedOptions[0] || null
         if (beingCreatedOption) {
           this.createdOptions.push(beingCreatedOption)
@@ -577,7 +598,7 @@ export default {
       }
       if (this.multiple) {
         if (remote) {
-          this.memorizedValueToOptionMap.set(option.value, option)
+          this.memoValOptMap.set(option.value, option)
         }
         const changedValue = this.createClearedMultipleSelectValue(this.value)
         const index = changedValue.findIndex(value => value === option.value)
@@ -615,8 +636,8 @@ export default {
       if (!this.pattern.length) {
         const changedValue = this.createClearedMultipleSelectValue(this.value)
         if (Array.isArray(changedValue)) {
-          const popedValue = changedValue.pop()
-          const createdOptionIndex = this.getCreatedOptionIndex(popedValue)
+          const poppedValue = changedValue.pop()
+          const createdOptionIndex = this.getCreatedOptionIndex(poppedValue)
           ~createdOptionIndex && this.createdOptions.splice(createdOptionIndex, 1)
           this.doUpdateValue(changedValue)
         }
@@ -631,19 +652,19 @@ export default {
     handlePatternInput (e) {
       const value = e.target.value
       this.pattern = value
-      const onSearch = this.onSearch
+      const { onSearch, tag, remote } = this
       if (onSearch) {
         onSearch(value)
         this.doSearch(value)
       }
-      if (this.tag && !this.remote) {
+      if (tag && !remote) {
         if (!value) {
           this.beingCreatedOptions = []
           return
         }
         const optionBeingCreated = this.onCreate(value)
         if (
-          this.adpatedOptions.some(
+          this.compitableOptions.some(
             option => option.value === optionBeingCreated.value
           ) ||
           this.createdOptions.some(
@@ -658,28 +679,25 @@ export default {
     },
     handleClear (e) {
       e.stopPropagation()
-      if (!this.multiple && this.filterable) {
+      const { multiple, doUpdateValue } = this
+      if (!multiple && this.filterable) {
         this.closeMenu()
       }
-      if (this.multiple) {
-        this.doUpdateValue([])
+      if (multiple) {
+        doUpdateValue([])
       } else {
-        this.doUpdateValue(null)
+        doUpdateValue(null)
       }
     },
-    /**
-     * scroll events on menu
-     */
+    // scroll events on menu
     handleMenuScroll (e, scrollContainer, scrollContent) {
       this.doScroll(e, scrollContainer, scrollContent)
     },
-    /**
-     * keyboard events
-     */
+    // keyboard events
     handleKeyUpEnter (e) {
       if (this.show) {
         const menu = this.menuRef
-        const pendingOptionData = menu && menu.getPendingOptionData()
+        const pendingOptionData = menu && menu.getPendingOption()
         if (pendingOptionData) {
           this.handleToggleOption(pendingOptionData)
         } else {

@@ -14,11 +14,7 @@ import { keep, call } from '../../_utils/vue'
 import styles from './styles'
 
 const treemateOptions = {
-  getKey ({ parentKey, index, node }) {
-    if (node.type === 'divider') {
-      if (parentKey === null) return `${index}`
-      return `${parentKey}-${index}`
-    }
+  getKey (node) {
     return node.key
   },
   getDisabled ({ node }) {

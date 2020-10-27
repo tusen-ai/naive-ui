@@ -32,6 +32,7 @@ For other props, see [Popover Props](n-popover#Props). Note that `arrow`, `raw` 
 |Property|Type|Description|
 |-|-|-|
 |type|`'divider'`||
+|key|`string \| number`|Should be unique|
 
 ### DropdownSubmenu Type
 |Property|Type|Description|

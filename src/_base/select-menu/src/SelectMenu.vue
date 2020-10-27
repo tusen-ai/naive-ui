@@ -17,30 +17,28 @@
       :scrollable="scrollable"
       :container="virtualListContainer"
       :content="virtualListContent"
-      @scroll="handleMenuScroll"
+      @scroll="doScroll"
     >
       <virtual-list
         v-if="virtualScroll"
         ref="virtualListRef"
         class="n-virtual-list"
-        :items="flattenedOptions"
+        :items="tmNodes"
         :item-size="itemSize"
         :show-scrollbar="false"
         @resize="handleListResize"
         @scroll="handleListScroll"
       >
-        <template v-slot="{ item: option }">
-          <n-select-option
-            v-if="option.type === OPTION_TYPE.OPTION"
-            :key="option.key"
-            :index="option.index"
-            :wrapped-option="option"
-            :grouped="option.grouped"
-          />
+        <template v-slot="{ item: tmNode }">
           <n-select-group-header
-            v-else-if="option.type === OPTION_TYPE.GROUP_HEADER"
-            :key="option.key"
-            :data="option.data"
+            v-if="tmNode.rawNode.type === 'group'"
+            :key="tmNode.key"
+            :tm-node="tmNode"
+          />
+          <n-select-option
+            v-else
+            :key="tmNode.key"
+            :tm-node="tmNode"
           />
         </template>
       </virtual-list>
@@ -48,23 +46,16 @@
         v-else
         class="n-base-select-menu-option-wrapper"
       >
-        <template v-for="option in flattenedOptions">
-          <n-select-option
-            v-if="option.type === OPTION_TYPE.OPTION"
-            :key="option.key"
-            :index="option.index"
-            :wrapped-option="option"
-            :grouped="option.grouped"
-          />
+        <template v-for="tmNode in tmNodes">
           <n-select-group-header
-            v-else-if="option.type === OPTION_TYPE.GROUP_HEADER"
-            :key="option.key"
-            :data="option.data"
+            v-if="tmNode.rawNode.type === 'group'"
+            :key="tmNode.key"
+            :tm-node="tmNode"
           />
-          <render
-            v-else-if="option.type === OPTION_TYPE.RENDER"
-            :key="option.key"
-            :render="option.render"
+          <n-select-option
+            v-else
+            :key="tmNode.key"
+            :tm-node="tmNode"
           />
         </template>
       </div>
@@ -84,19 +75,12 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { VirtualList } from 'vueuc'
 import NScrollbar from '../../../scrollbar'
 import NSelectOption from './SelectOption.js'
 import NSelectGroupHeader from './SelectGroupHeader.js'
 import NEmpty from '../../../empty'
-import { render } from '../../../_utils/vue'
-import {
-  getPrevAvailableIndex,
-  getNextAvailableIndex,
-  flattenOptions,
-  OPTION_TYPE
-} from '../../../_utils/component/select'
 import { depx, formatLength } from '../../../_utils/css'
 import { createKey } from '../../../_utils/cssr'
 import { usecssr } from '../../../_mixins'
@@ -114,8 +98,7 @@ export default {
     NScrollbar,
     NSelectOption,
     NEmpty,
-    NSelectGroupHeader,
-    render
+    NSelectGroupHeader
   },
   mixins: [
     usecssr(styles, {
@@ -126,15 +109,15 @@ export default {
   props: {
     theme: {
       type: String,
-      default: null
+      default: undefined
     },
     scrollable: {
       type: Boolean,
       default: true
     },
-    options: {
-      type: Array,
-      default: null
+    treeMate: {
+      type: Object,
+      required: true
     },
     multiple: {
       type: Boolean,
@@ -142,11 +125,11 @@ export default {
     },
     size: {
       type: String,
-      default: 'default'
+      default: 'medium'
     },
     pattern: {
       type: String,
-      default: null
+      default: undefined
     },
     value: {
       type: [String, Number, Array],
@@ -154,7 +137,7 @@ export default {
     },
     width: {
       type: [Number, String],
-      default: null
+      default: undefined
     },
     autoPendingFirstOption: {
       type: Boolean,
@@ -172,14 +155,9 @@ export default {
     onMenuScroll: {
       type: Function,
       default: undefined
-    },
-    // deprecated
-    emitOption: {
-      type: Boolean,
-      default: false
     }
   },
-  setup () {
+  setup (props) {
     const virtualListRef = ref(null)
     const scrollbarRef = ref(null)
     onMounted(() => {
@@ -189,6 +167,7 @@ export default {
       if (value) value.sync()
     })
     return {
+      tmNodes: computed(() => props.treeMate.flattenedNodes),
       virtualListRef,
       scrollbarRef,
       virtualListContainer () {
@@ -202,21 +181,12 @@ export default {
           value
         } = virtualListRef
         return value && value.itemsRef
-      }
-    }
-  },
-  data () {
-    const flattenedOptions = flattenOptions(this.options)
-    const firstAvailableOptionIndex = this.autoPendingFirstOption
-      ? getNextAvailableIndex(flattenedOptions, null)
-      : null
-    const pendingWrappedOption = firstAvailableOptionIndex === null
-      ? null
-      : flattenedOptions[firstAvailableOptionIndex]
-    return {
-      flattenedOptions,
-      pendingWrappedOption,
-      OPTION_TYPE
+      },
+      pendingTmNode: ref(
+        props.autoPendingFirstOption
+          ? props.treeMate.getFirstAvailableNode()
+          : null
+      )
     }
   },
   computed: {
@@ -227,37 +197,12 @@ export default {
       ) return new Set(this.value)
       return null
     },
-    /**
-     * scrollbar related
-     */
-    getScrollContainer () {
-      if (this.virtualScroll) return () => this.$refs.virtualScroller && this.$refs.virtualScroller.$el
-      return null
-    },
-    getScrollContent () {
-      if (this.virtualScroll) return () => this.$refs.virtualScroller && this.$refs.virtualScroller.$refs.wrapper
-      return null
-    },
-    pendingWrappedOptionIndex () {
-      const pendingWrappedOption = this.pendingWrappedOption
-      if (!pendingWrappedOption) return null
-      return pendingWrappedOption.index
-    },
     empty () {
-      const flattenedOptions = this.flattenedOptions
-      return flattenedOptions && flattenedOptions.length === 0
+      const { tmNodes } = this
+      return tmNodes && tmNodes.length === 0
     },
     itemSize () {
       return depx(this.cssrProps.$local[createKey('optionHeight', this.size)])
-    },
-    pendingOptionValue () {
-      const pendingWrappedOption = this.pendingWrappedOption
-      const data = (pendingWrappedOption && pendingWrappedOption.data) || null
-      return (
-        data &&
-        data.value !== undefined &&
-        data.value
-      ) || null
     },
     style () {
       return {
@@ -266,54 +211,46 @@ export default {
     }
   },
   watch: {
-    options (value) {
-      this.flattenedOptions = flattenOptions(value)
+    treeMate (value) {
       if (this.autoPendingFirstOption) {
-        const firstAvailableOptionIndex = getNextAvailableIndex(this.flattenedOptions, null)
-        this.setPendingWrappedOptionIndex(firstAvailableOptionIndex)
+        const tmNode = this.treeMate.getFirstAvailableNode()
+        this.setPendingTmNode(tmNode)
       } else {
-        this.pendingWrappedOption = null
+        this.setPendingTmNode(null)
       }
-      this.$nextTick(() => {
-        this.scrollbarRef.sync()
-      })
     }
   },
   methods: {
+    doToggleOption (option) {
+      const {
+        onMenuToggleOption
+      } = this
+      if (onMenuToggleOption) onMenuToggleOption(option)
+    },
+    doScroll (e) {
+      const {
+        onMenuScroll
+      } = this
+      if (onMenuScroll) onMenuScroll(e)
+    },
+    // required, scroller sync need to be triggered manually
     handleListScroll () {
       this.scrollbarRef.sync()
     },
     handleListResize () {
       this.scrollbarRef.sync()
     },
-    handleMenuScroll (e, scrollContainer, scrollContent) {
-      const {
-        onMenuScroll
-      } = this
-      if (onMenuScroll) onMenuScroll(e, scrollContainer, scrollContent)
+    getPendingOption () {
+      const { pendingTmNode } = this
+      return pendingTmNode && pendingTmNode.rawNode
     },
-    getPendingOptionData () {
-      const pendingWrappedOption = this.pendingWrappedOption
-      return pendingWrappedOption && pendingWrappedOption.data
+    handleOptionMouseEnter (e, tmNode) {
+      if (tmNode.disabled) return
+      this.setPendingTmNode(tmNode, false)
     },
-    handleOptionMouseEnter (e, index, wrappedOption) {
-      const data = wrappedOption.data
-      if (data.disabled) return
-      this.setPendingWrappedOptionIndex(index, false)
-    },
-    handleOptionClick (e, index, wrappedOption) {
-      const data = wrappedOption.data
-      if (data.disabled || wrappedOption.as === 'dropdown-submenu') return
-      this.toggleOption(data)
-    },
-    toggleOption (option) {
-      const {
-        onMenuToggleOption
-      } = this
-      if (onMenuToggleOption) onMenuToggleOption(option)
-    },
-    handleMenuMouseLeave () {
-      this.pendingWrappedOption = null
+    handleOptionClick (e, tmNode) {
+      if (tmNode.disabled) return
+      this.doToggleOption(tmNode.rawNode)
     },
     /**
      * keyboard related methods
@@ -325,36 +262,23 @@ export default {
       this.next()
     },
     next () {
-      if (
-        this.pendingWrappedOption === null
-      ) {
-        this.setPendingWrappedOptionIndex(
-          getNextAvailableIndex(this.flattenedOptions, null),
-          true
-        )
-      } else {
-        this.setPendingWrappedOptionIndex(
-          getNextAvailableIndex(this.flattenedOptions, this.pendingWrappedOptionIndex),
-          true
-        )
+      const {
+        pendingTmNode
+      } = this
+      if (pendingTmNode) {
+        this.setPendingTmNode(pendingTmNode.getNext(), true)
       }
     },
     prev () {
-      if (this.pendingWrappedOption) {
-        this.setPendingWrappedOptionIndex(
-          getPrevAvailableIndex(this.flattenedOptions, this.pendingWrappedOptionIndex),
-          true
-        )
+      const {
+        pendingTmNode
+      } = this
+      if (pendingTmNode) {
+        this.setPendingTmNode(pendingTmNode.getPrev(), true)
       }
     },
-    setPendingWrappedOptionIndex (index, doScroll = false) {
-      if (index === null) {
-        this.pendingWrappedOption = null
-      }
-      // TODO: fix scroll logic
-      // const scrollbar = this.scrollbarRef
-      this.pendingWrappedOption = this.flattenedOptions[index]
-      // scrollbar.scrollTo({ y: index * this.itemSize })
+    setPendingTmNode (tmNode, doScroll = false) {
+      if (tmNode !== null) this.pendingTmNode = tmNode
     }
   }
 }

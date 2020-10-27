@@ -30,7 +30,8 @@ const options = [
     key: 'daisy buchanan'
   },
   {
-    type: 'divider'
+    type: 'divider',
+    key: 'd1'
   },
   {
     label: '尼克·卡拉威',

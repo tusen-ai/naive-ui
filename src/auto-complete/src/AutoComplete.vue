@@ -57,7 +57,7 @@
               class="n-auto-complete-menu"
               :theme="mergedTheme"
               :pattern="value"
-              :options="selectOptions"
+              :tree-mate="treeMate"
               :multiple="false"
               :size="mergedSize"
               @menu-toggle-option="handleToggleOption"
@@ -70,6 +70,7 @@
 </template>
 
 <script>
+import { createTreeMate } from 'treemate'
 import {
   configurable,
   themeable,
@@ -182,11 +183,19 @@ export default {
     __placeableEnabled () {
       return this.active
     },
+    selectOptions () {
+      return mapAutoCompleteOptionsToSelectOptions(this.options)
+    },
     active () {
       return !!this.value && this.canBeActivated && !!this.selectOptions.length
     },
-    selectOptions () {
-      return mapAutoCompleteOptionsToSelectOptions(this.options)
+    treeMate () {
+      return createTreeMate(this.selectOptions, {
+        getKey (node) {
+          if (node.type === 'group') return node.name
+          return node.value
+        }
+      })
     }
   },
   methods: {
@@ -250,7 +259,7 @@ export default {
     },
     handleKeyDownEnter (e) {
       if (this.$refs.menu && !this.isComposing) {
-        const pendingOptionData = this.$refs.menu.getPendingOptionData()
+        const pendingOptionData = this.$refs.menu.getPendingOption()
         if (pendingOptionData) {
           this.select(pendingOptionData)
           e.preventDefault()
