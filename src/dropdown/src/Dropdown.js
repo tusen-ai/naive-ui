@@ -17,7 +17,7 @@ const treemateOptions = {
   getKey (node) {
     return node.key
   },
-  getDisabled ({ node }) {
+  getDisabled (node) {
     if (node.type === 'divider') return true
     return node.disabled === true
   }
