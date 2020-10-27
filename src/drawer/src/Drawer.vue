@@ -45,7 +45,7 @@ import {
 import { zindexable } from '../../_directives'
 import formatLength from '../../_utils/css/formatLength'
 import { warn } from '../../_utils'
-import { useCompitable, useIsMounted } from '../../_utils/composition'
+import { useCompitable, useIsMounted } from 'vooks'
 import NLazyTeleport from '../../_base/lazy-teleport'
 import NDrawerBodyWrapper from './DrawerBodyWrapper.vue'
 import styles from './styles/index'

@@ -1,9 +1,9 @@
 import { h, nextTick, ref, toRef, computed, onMounted } from 'vue'
+import { useCompitable, useMergedState } from 'vooks'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles/index'
-import { useCompitable, useMergedState } from '../../_utils/composition'
 import {
   getActivePath,
   getWrappedItems,

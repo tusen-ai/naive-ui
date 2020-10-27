@@ -183,6 +183,7 @@
 
 <script>
 import { ref } from 'vue'
+import { useIsMounted } from 'vooks'
 import NLazyTeleport from '../../_base/lazy-teleport'
 import NScrollbar from '../../scrollbar'
 import NInput from '../../input'
@@ -202,12 +203,12 @@ import getTime from 'date-fns/getTime'
 import getMinutes from 'date-fns/getMinutes'
 import getHours from 'date-fns/getHours'
 import getSeconds from 'date-fns/getSeconds'
-import { strictParse } from '../../_utils/component/datePicker'
+import { strictParse } from '../../date-picker/src/utils'
 import keyboardDelegate from '../../_utils/delegate/keyboardDelegate'
 import NBaseFocusDetector from '../../_base/focus-detector'
 import TimeIcon from '../../_icons/time-outline.vue'
 import styles from './styles'
-import { warn, call, useIsMounted, KEY_CODE } from '../../_utils'
+import { warn, call, KEY_CODE } from '../../_utils'
 
 const DEFAULT_FORMAT = 'HH:mm:ss'
 

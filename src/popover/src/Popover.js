@@ -10,7 +10,7 @@ import {
   useMergedState,
   useCompitable,
   useIsMounted
-} from '../../_utils/composition'
+} from 'vooks'
 import { omit } from '../../_utils/vue'
 import NLazyTeleport from '../../_base/lazy-teleport'
 import NPopoverBody from './PopoverBody'

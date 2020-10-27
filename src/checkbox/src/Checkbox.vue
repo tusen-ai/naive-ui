@@ -61,7 +61,7 @@ import LineMark from './LineMark.vue'
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
-import { useMemo } from '../../_utils/composition'
+import { useMemo } from 'vooks'
 import { warn, call } from '../../_utils'
 
 export default {

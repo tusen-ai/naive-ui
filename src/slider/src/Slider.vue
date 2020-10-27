@@ -118,7 +118,7 @@ import {
 import styles from './styles'
 import { warn } from '../../_utils/naive'
 import { call } from '../../_utils/vue'
-import { useIsMounted } from '../../_utils/composition'
+import { useIsMounted } from 'vooks'
 import NLazyTeleport from '../../_base/lazy-teleport'
 
 function handleFirstHandleMouseMove (e) {

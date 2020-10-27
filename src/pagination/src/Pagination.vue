@@ -104,7 +104,7 @@ import locale from '../../_mixins/locale'
 import { pageItems } from './utils'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
-import { useCompitable } from '../../_utils/composition'
+import { useCompitable } from 'vooks'
 
 export default {
   name: 'Pagination',

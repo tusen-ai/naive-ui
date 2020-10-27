@@ -83,7 +83,7 @@ import {
   zindexable
 } from '../../_directives'
 import { call } from '../../_utils/vue'
-import { useIsMounted } from '../../_utils/composition'
+import { useIsMounted } from 'vooks'
 import { warn } from '../../_utils/naive'
 import NLazyTeleport from '../../_base/lazy-teleport'
 import NInput from '../../input'

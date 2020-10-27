@@ -8,7 +8,7 @@ import {
   isValid
 } from 'date-fns'
 import { warn } from '../../../_utils/naive'
-import { dateArray } from '../../../_utils/component/datePicker'
+import { dateArray } from '../utils'
 import commonCalendarMixin from './commonCalendarMixin'
 
 export default {

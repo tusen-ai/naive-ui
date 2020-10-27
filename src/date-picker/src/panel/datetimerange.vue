@@ -269,7 +269,7 @@ import {
   getDate,
   isValid
 } from 'date-fns'
-import { strictParse } from '../../../_utils/component/datePicker'
+import { strictParse } from '../utils'
 import { injectDualCalendarValidation } from '../validate-utils'
 
 const DATETIME_FORMAT = 'yyyy-MM-dd HH:mm:ss'

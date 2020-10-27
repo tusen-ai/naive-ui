@@ -1,5 +1,5 @@
 import { Fragment, h, ref } from 'vue'
-import { useIsMounted } from '../../_utils/composition'
+import { useIsMounted } from 'vooks'
 import { Teleport } from '../../_base'
 import NLoadingBar from './LoadingBar.vue'
 

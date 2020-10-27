@@ -12,7 +12,7 @@ import { inject, toRef } from 'vue'
 import SiteHeader from './SiteHeader.vue'
 import menuOptions from './menu-options'
 import { loadingBarApiRef } from './routes/router'
-import { useMemo } from '../src/_utils/composition'
+import { useMemo } from 'vooks'
 
 export default {
   name: 'Site',

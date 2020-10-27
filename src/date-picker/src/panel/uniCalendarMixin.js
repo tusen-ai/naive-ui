@@ -10,7 +10,7 @@ import {
   getDate,
   isValid
 } from 'date-fns'
-import { dateArray, strictParse } from '../../../_utils/component/datePicker'
+import { dateArray, strictParse } from '../utils'
 import commonCalendarMixin from './commonCalendarMixin'
 
 export default {

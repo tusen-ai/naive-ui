@@ -1,5 +1,5 @@
 import { inject } from 'vue'
-import { useMemo } from '../../_utils/composition'
+import { useMemo } from 'vooks'
 
 export default function setup (props) {
   const NRadioGroup = inject('NRadioGroup', null)

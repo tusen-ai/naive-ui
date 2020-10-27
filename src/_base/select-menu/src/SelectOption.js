@@ -1,5 +1,5 @@
 import { h, inject, toRef } from 'vue'
-import { useMemo } from '../../../_utils/composition'
+import { useMemo } from 'vooks'
 
 export default {
   name: 'NBaseSelectOption',

@@ -161,7 +161,7 @@ import {
 } from '../../_directives'
 import { warn } from '../../_utils/naive'
 import { call } from '../../_utils/vue'
-import { useIsMounted } from '../../_utils/composition'
+import { useIsMounted } from 'vooks'
 
 import DatetimePanel from './panel/datetime.vue'
 import DatetimerangePanel from './panel/datetimerange.vue'
@@ -178,7 +178,7 @@ import {
   getTime,
   isValid
 } from 'date-fns'
-import { strictParse, getDerivedTimeFromKeyboardEvent } from '../../_utils/component/datePicker'
+import { strictParse, getDerivedTimeFromKeyboardEvent } from './utils'
 import { isEqual } from 'lodash-es'
 
 import styles from './styles'

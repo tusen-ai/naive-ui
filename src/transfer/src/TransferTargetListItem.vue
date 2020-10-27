@@ -26,7 +26,7 @@
 import { inject } from 'vue'
 import NSimpleCheckbox from '../../checkbox/src/SimpleCheckbox.vue'
 import createValidator from '../../_utils/vue/validateProp'
-import { useMemo } from '../../_utils/composition'
+import { useMemo } from 'vooks'
 
 export default {
   name: 'NTransferListItem',

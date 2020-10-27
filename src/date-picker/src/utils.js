@@ -10,7 +10,7 @@ import addDays from 'date-fns/addDays'
 import getDay from 'date-fns/getDay'
 import parse from 'date-fns/parse'
 import format from 'date-fns/format'
-import { KEY_CODE } from '../dom/key-code'
+import { KEY_CODE } from '../../_utils/dom/key-code'
 
 function getDerivedTimeFromKeyboardEvent (prevValue, event) {
   const now = getTime(Date.now())

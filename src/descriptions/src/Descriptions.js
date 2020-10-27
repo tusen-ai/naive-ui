@@ -7,7 +7,7 @@ import {
 import styles from './styles'
 import { warn } from '../../_utils/naive/warn'
 import { getSlot, getVNodeChildren } from '../../_utils/vue'
-import { useCompitable } from '../../_utils/composition'
+import { useCompitable } from 'vooks'
 import { isDescriptionsItem } from './utils'
 
 export default {

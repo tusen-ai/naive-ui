@@ -52,6 +52,7 @@
 
 <script>
 import { ref, computed, toRef, watch, nextTick } from 'vue'
+import { useIsMounted, useMergedState } from 'vooks'
 import getScrollParent from '../../_utils/dom/getScrollParent'
 import {
   configurable,
@@ -63,7 +64,6 @@ import styles from './styles'
 import { warn } from '../../_utils/naive/warn'
 import getTarget from '../../_utils/dom/get-target'
 import NLazyTeleport from '../../_base/lazy-teleport'
-import { useIsMounted, useMergedState } from '../../_utils/composition'
 
 export default {
   name: 'BackTop',

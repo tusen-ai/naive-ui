@@ -1,6 +1,5 @@
 import {
   ref,
-  computed,
   watch,
   onMounted,
   inject,
@@ -9,58 +8,6 @@ import {
   onBeforeUnmount,
   nextTick
 } from 'vue'
-
-export function useFalseUntilTruthy (valueRef) {
-  const bindValueRef = ref(!!valueRef.value)
-  const stop = watch(valueRef, value => {
-    if (value) {
-      bindValueRef.value = true
-      stop()
-    }
-  })
-  return bindValueRef
-}
-
-export function useMergedState (
-  controlledStateRef,
-  uncontrolledStateRef
-) {
-  watch(controlledStateRef, value => {
-    if (value !== undefined) {
-      uncontrolledStateRef.value = value
-    }
-  })
-  return computed(() => {
-    if (controlledStateRef.value === undefined) {
-      return uncontrolledStateRef.value
-    }
-    return controlledStateRef.value
-  })
-}
-
-export function useCompitable (reactive, keys) {
-  return computed(() => {
-    for (const key of keys) {
-      if (reactive[key] !== undefined) return reactive[key]
-    }
-  })
-}
-
-export function useIsMounted () {
-  const isMounted = ref(false)
-  onMounted(() => {
-    isMounted.value = true
-  })
-  return isMounted
-}
-
-export function useNotMounted () {
-  const notMounted = ref(true)
-  onMounted(() => {
-    notMounted.value = false
-  })
-  return notMounted
-}
 
 export function useDisabledUntilMounted (durationTickCount = 0) {
   const disabled = ref(true)
@@ -76,15 +23,6 @@ export function useDisabledUntilMounted (durationTickCount = 0) {
     countDown()
   })
   return disabled
-}
-
-export function useMemo (valueGenerator) {
-  const computedValueRef = computed(valueGenerator)
-  const valueRef = ref(computedValueRef.value)
-  watch(computedValueRef, value => {
-    valueRef.value = value
-  })
-  return valueRef
 }
 
 export function useInjectionRef (injectionName, key, fallback) {
