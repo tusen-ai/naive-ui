@@ -16,7 +16,7 @@ manual-position
 |-|-|-|-|
 |keyboard|`boolean`|`true`|Whether is supports keyboard operation. (Be careful about the potential conflicts with other components keyboard operations)|
 |options|`Array<DropdownOption \| DropdownDivider \| DropdownSubmenu>`|`[]`||
-|size|`'small'\|'medium'\|'large'\|'huge'`|`medium`||
+|size|`'small'\|'medium'\|'large'\|'huge'`|`'medium'`||
 |on-select|`(key: string \| number) => any`|`undefined`||
 
 For other props, see [Popover Props](n-popover#Props). Note that `arrow`, `raw` is not available.

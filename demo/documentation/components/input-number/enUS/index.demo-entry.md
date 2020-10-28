@@ -19,7 +19,7 @@ validator
 |max|`number`|`undefined`||
 |min|`number`|`undefined`||
 |placeholder|`string`|`undefined`||
-|size|`'small' \| 'medium' \| 'large'`|`medium`||
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |step|`number`|`1`||
 |theme|`'light' \| 'dark' \| string`|`undefined`||
 |validator|`(value) => boolean`|`undefined`||

@@ -14,7 +14,7 @@ from-end
 |item-style|`string \| object`|`undefined`||
 |theme|`'light' \| 'dark' \| string`|`undefined`||
 |justify|`'start' \| 'end'`|`'start'`||
-|size|`'small' \| 'medium' \| 'large' \| number`|`medium`||
+|size|`'small' \| 'medium' \| 'large' \| number`|`'medium'`||
 |vertical|`boolean`|`false`||
 
 ## Slots
