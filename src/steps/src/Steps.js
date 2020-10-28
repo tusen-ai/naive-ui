@@ -2,12 +2,10 @@ import { h } from 'vue'
 import {
   configurable,
   themeable,
-  hollowoutable,
   usecssr
 } from '../../_mixins'
 import { getSlot } from '../../_utils/vue'
 import styles from './styles/steps'
-import { useDisabledUntilMounted } from '../../_utils/composition'
 
 function stepWithIndex (step, i) {
   if (!step.props) step.props = {}
@@ -29,7 +27,6 @@ export default {
   mixins: [
     configurable,
     themeable,
-    hollowoutable,
     usecssr(styles)
   ],
   props: {
@@ -50,11 +47,6 @@ export default {
       default: false
     }
   },
-  setup () {
-    return {
-      transitionDisabled: useDisabledUntilMounted(1)
-    }
-  },
   render () {
     return h('div', {
       class: [
@@ -62,8 +54,7 @@ export default {
         {
           [`n-${this.mergedTheme}-theme`]: this.mergedTheme,
           [`n-steps--${this.size}-size`]: true,
-          'n-steps--vertical': this.vertical,
-          'n-steps--transition-disabled': this.transitionDisabled
+          'n-steps--vertical': this.vertical
         }
       ]
     }, stepsWithIndex({ ...this.$props }, getSlot(this)))

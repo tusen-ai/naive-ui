@@ -14,9 +14,6 @@
             v-if="!(mergedStatus === 'finish' || mergedStatus === 'error')"
             key="index"
             class="n-step-indicator-slot__index"
-            :style="{
-              color: mergedStatus === 'process' ? ascendantBackgroundColor : null
-            }"
           >
             {{ index }}
           </div>
@@ -100,9 +97,6 @@ export default {
     }
   },
   computed: {
-    ascendantBackgroundColor () {
-      return this.NSteps.ascendantBackgroundColor
-    },
     vertical () {
       return !!(this.NSteps && this.NSteps.vertical)
     },
