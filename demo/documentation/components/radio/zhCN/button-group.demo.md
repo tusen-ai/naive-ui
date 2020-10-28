@@ -14,13 +14,13 @@
   </n-radio-group>
   <n-space>
     <n-checkbox
-      v-model:value="disabled2"
+      v-model:checked="disabled2"
       style="margin-right: 12px;"
     >
       禁用 Shakemaker
     </n-checkbox>
     <n-checkbox
-      v-model:value="disabled1"
+      v-model:checked="disabled1"
     >
       禁用 Live Forever
     </n-checkbox>

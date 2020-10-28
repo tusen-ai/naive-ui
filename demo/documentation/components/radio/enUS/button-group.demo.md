@@ -14,13 +14,13 @@ Sometimes a radio button group looks more elegant.
   </n-radio-group>
   <n-space>
     <n-checkbox
-      v-model:value="disabled2"
+      v-model:checked="disabled2"
       style="margin-right: 12px;"
     >
       Disable Shakemaker
     </n-checkbox>
     <n-checkbox
-      v-model:value="disabled1"
+      v-model:checked="disabled1"
     >
       Disable Live Forever
     </n-checkbox>

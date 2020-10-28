@@ -3,13 +3,13 @@
     class="n-checkbox"
     :class="{
       'n-checkbox--checked': renderSafeChecked,
-      'n-checkbox--disabled': syntheticDisabled,
+      'n-checkbox--disabled': mergedDisabled,
       'n-checkbox--indeterminate': indeterminate,
       'n-checkbox--table-header': tableHeader,
       [`n-checkbox--${mergedSize}-size`]: true,
       [`n-${mergedTheme}-theme`]: mergedTheme,
     }"
-    :tabindex="syntheticDisabled ? false : 0"
+    :tabindex="mergedDisabled ? false : 0"
     @keyup.enter="handleKeyUpEnter"
     @keyup.space="handleKeyUpSpace"
     @keydown.space="handleKeyDownSpace"
@@ -51,17 +51,19 @@
 </template>
 
 <script>
-import { computed, inject } from 'vue'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import asformitem from '../../_mixins/asformitem'
+import { computed, inject, ref, toRef } from 'vue'
+import { useMergedState, useMemo } from 'vooks'
+import {
+  configurable,
+  themeable,
+  asformitem
+} from '../../_mixins'
 import { render } from '../../_utils/vue'
 import CheckMark from './CheckMark.vue'
 import LineMark from './LineMark.vue'
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
-import { useMemo } from 'vooks'
 import { warn, call } from '../../_utils'
 
 export default {
@@ -78,7 +80,7 @@ export default {
     render
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     asformitem({
       mergedSize () {
@@ -107,9 +109,17 @@ export default {
       },
       default: undefined
     },
+    checked: {
+      type: Boolean,
+      default: undefined
+    },
+    defaultChecked: {
+      type: Boolean,
+      default: false
+    },
     value: {
-      type: [Number, Boolean, String],
-      default: null
+      type: String,
+      default: undefined
     },
     disabled: {
       type: Boolean,
@@ -123,12 +133,8 @@ export default {
       type: [String, Function],
       default: undefined
     },
-    onClick: {
-      type: Function,
-      default: undefined
-    },
     // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': {
+    'onUpdate:checked': {
       type: [Function, Array],
       default: undefined
     },
@@ -140,14 +146,7 @@ export default {
     // deprecated
     onChange: {
       validator () {
-        warn('checkbox', '`on-change` is deprecated, please use `on-update:value` instead.')
-        return true
-      },
-      default: undefined
-    },
-    checked: {
-      validator () {
-        warn('checkbox', '`checked` is deprecated, please use `value` instead')
+        warn('checkbox', '`on-change` is deprecated, please use `on-update:checked` instead.')
         return true
       },
       default: undefined
@@ -166,45 +165,49 @@ export default {
         return props.checked ?? props.value
       }
     })
+    const uncontrolledCheckedRef = ref(props.defaultChecked)
+    const controlledCheckedRef = toRef(props, 'checked')
+    const mergedDisabledRef = computed(() => {
+      return props.disabled || (NCheckboxGroup && NCheckboxGroup.disabled)
+    })
     return {
+      mergedCheck: useMergedState(
+        controlledCheckedRef,
+        uncontrolledCheckedRef
+      ),
+      mergedDisabled: mergedDisabledRef,
       renderSafeChecked: useMemo(() => syntheticCheckedRef.value)
-    }
-  },
-  computed: {
-    syntheticDisabled () {
-      if (this.disabled || (this.NCheckboxGroup && this.NCheckboxGroup.disabled)) return true
-      return false
     }
   },
   methods: {
     toggle () {
-      if (this.NCheckboxGroup) {
-        this.NCheckboxGroup.toggleCheckbox(!this.renderSafeChecked, this.value)
+      const {
+        NCheckboxGroup
+      } = this
+      if (NCheckboxGroup) {
+        NCheckboxGroup.toggleCheckbox(!this.renderSafeChecked, this.value)
       } else {
         const {
           onChange,
-          'onUpdate:value': onUpdateValue,
+          'onUpdate:checked': onUpdateCheck,
           nTriggerFormInput,
           nTriggerFormChange
         } = this
         const nextChecked = !this.renderSafeChecked
-        if (onUpdateValue) call(onUpdateValue, nextChecked)
+        if (onUpdateCheck) call(onUpdateCheck, nextChecked)
         if (onChange) call(onChange, nextChecked) // deprecated
         nTriggerFormInput()
         nTriggerFormChange()
+        this.uncontrolledChecked = nextChecked
       }
     },
-    handleClick (e) {
-      const {
-        onClick
-      } = this
-      if (onClick) onClick(e)
-      if (!this.syntheticDisabled) {
+    handleClick () {
+      if (!this.mergedDisabled) {
         this.toggle()
       }
     },
     handleKeyUpEnter (e) {
-      if (!this.syntheticDisabled) {
+      if (!this.mergedDisabled) {
         this.toggle()
       }
     },

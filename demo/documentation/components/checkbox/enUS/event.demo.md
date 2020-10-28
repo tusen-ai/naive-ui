@@ -1,6 +1,6 @@
 # Event
 ```html
-<n-checkbox v-model:value="checked" @update:checked="handleCheckedChange" label="Event" />
+<n-checkbox v-model:checked="checked" @update:checked="handleCheckedChange" label="Event" />
 <n-checkbox-group v-model:value="cities" @update:value="handleUpdateValue">
   <n-checkbox value="Beijing" label="Beijing" />
   <n-checkbox value="Shanghai" label="Shanghai" />

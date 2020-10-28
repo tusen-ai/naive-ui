@@ -9,15 +9,15 @@
     <div style="width: 100%;">
       <div style="display: flex; align-items: center;">
         <n-checkbox
-          v-model:value="value.isCheck"
+          v-model:checked="value.isCheck"
           style="margin-right: 12px;"
         />
         <n-input-number
-          v-model:value="value.num"
+          v-model:checked="value.num"
           style="margin-right: 12px; width: 160px;"
         />
         <n-input
-          v-model:value="value.string"
+          v-model:checked="value.string"
           type="input"
         />
       </div>

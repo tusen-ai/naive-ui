@@ -15,11 +15,12 @@ event
 ### Checkbox Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|checked|`boolean`|`false`||
+|checked|`boolean`|`undefined`||
+|default-checked|`boolean`|`false`||
 |disabled|`boolean`|`false`||
 |label|`string \| function`|`undefined`|Could be a render function.|
 |theme|`'light' \| 'dark' \| string`|`undefined`||
-|value|`string \| number`|`null`||
+|value|`string`|`undefined`||
 |on-update:checked|`(checked: boolean)`|`undefined`||
 
 ### Checkbox Group Props

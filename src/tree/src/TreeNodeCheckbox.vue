@@ -2,8 +2,8 @@
   <span class="n-tree-node-checkbox">
     <n-checkbox
       :theme="NTree.mergedTheme"
-      :value="value"
-      @update:value="handleUpdateValue"
+      :checked="value"
+      @update:checked="handleUpdateValue"
     />
   </span>
 </template>

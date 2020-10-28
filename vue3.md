@@ -49,16 +49,19 @@ placeable 进行了大调整
     - `show-path` prop
   - deprecated
     - `on-change` => `on-update:value`
-- [ ] checkbox
-  - deprecate
-    - `on-change` => `on-update:checked`
-    - `checked` => `value`
-  - checkbox-group
+- [x] checkbox
+  - checkbox
+    - break
+      - `value` only supports `string`
     - deprecate
-    - `on-change` => `on-update:value`
-  - TODO?
-    - API
-    - remove simple checkbox
+      - `on-change` => `on-update:checked`
+    - new
+      - `default-checked` prop
+  - checkbox-group
+    - break
+      - `value` only supports `string` or `null`
+    - deprecate
+      - `on-change` => `on-update:value`
 - [x] code
 - [x] collapse
   - deprecate
@@ -220,14 +223,16 @@ placeable 进行了大调整
   - deprecate
     - `on-change` => `on-update:value`
 - [x] progress
-- [ ] radio
+- [x] radio
   - radio-group
     - break
       - default `size` `'small'` => `'medium'`
+      - value only supports `string` or `null`
     - deprecate
       - `on-change` => `on-update:value`
   - radio & radio-button
     - break
+      - value only supports `string`
       - `checked-value` => `checked`
         - It is change to conform html standard usage
       - `on-change` => `on-update:checked`

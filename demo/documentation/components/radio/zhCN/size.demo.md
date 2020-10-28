@@ -12,7 +12,7 @@
       {{ song.label }}
     </n-radio-button>
   </n-radio-group>
-  <n-radio-group v-model:value="value" name="radiobuttongroup3" size="large">
+  <n-radio-group v-model:checked="value" name="radiobuttongroup3" size="large">
     <n-radio-button
       v-for="song in songs"
       :key="song.value"
@@ -24,13 +24,13 @@
   </n-radio-group>
   <n-space>
     <n-checkbox
-      v-model:value="disabled2"
+      v-model:checked="disabled2"
       style="margin-right: 12px;"
     >
       禁用 Shakemaker
     </n-checkbox>
     <n-checkbox
-      v-model:value="disabled1"
+      v-model:checked="disabled1"
     >
       禁用 Live Forever
     </n-checkbox>

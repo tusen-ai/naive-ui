@@ -3,26 +3,26 @@ Thing 提供了很多 slot 来定制。
 ```html
 <n-row>
   <n-col :span="12">
-    <n-checkbox v-model:value="avatar">头像</n-checkbox>
+    <n-checkbox v-model:checked="avatar">头像</n-checkbox>
   </n-col>
   <n-col :span="12">
-    <n-checkbox v-model:value="action">操作</n-checkbox>
-  </n-col>
-</n-row>
-<n-row>
-  <n-col :span="12">
-    <n-checkbox v-model:value="header">标题</n-checkbox>
-  </n-col>
-  <n-col :span="12">
-    <n-checkbox v-model:value="headerExtra">标题附加信息</n-checkbox>
+    <n-checkbox v-model:checked="action">操作</n-checkbox>
   </n-col>
 </n-row>
 <n-row>
   <n-col :span="12">
-    <n-checkbox v-model:value="description">描述</n-checkbox>
+    <n-checkbox v-model:checked="header">标题</n-checkbox>
   </n-col>
   <n-col :span="12">
-    <n-checkbox v-model:value="footer">底部</n-checkbox>
+    <n-checkbox v-model:checked="headerExtra">标题附加信息</n-checkbox>
+  </n-col>
+</n-row>
+<n-row>
+  <n-col :span="12">
+    <n-checkbox v-model:checked="description">描述</n-checkbox>
+  </n-col>
+  <n-col :span="12">
+    <n-checkbox v-model:checked="footer">底部</n-checkbox>
   </n-col>
 </n-row>
 <n-divider />

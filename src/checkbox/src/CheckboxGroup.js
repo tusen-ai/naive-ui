@@ -1,14 +1,16 @@
 import { h } from 'vue'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import asformitem from '../../_mixins/asformitem'
+import {
+  configurable,
+  themeable,
+  asformitem
+} from '../../_mixins'
 import { getSlot } from '../../_utils/vue'
 import { warn, call } from '../../_utils'
 
 export default {
   name: 'CheckboxGroup',
   mixins: [
-    withapp,
+    configurable,
     themeable,
     asformitem()
   ],

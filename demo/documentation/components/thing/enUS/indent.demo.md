@@ -3,26 +3,26 @@ Content can be indented after avatar.
 ```html
 <n-row>
   <n-col :span="12">
-    <n-checkbox v-model:value="avatar">Avatar</n-checkbox>
+    <n-checkbox v-model:checked="avatar">Avatar</n-checkbox>
   </n-col>
   <n-col :span="12">
-    <n-checkbox v-model:value="action">Action</n-checkbox>
-  </n-col>
-</n-row>
-<n-row>
-  <n-col :span="12">
-    <n-checkbox v-model:value="header">Header</n-checkbox>
-  </n-col>
-  <n-col :span="12">
-    <n-checkbox v-model:value="headerExtra">Header Extra</n-checkbox>
+    <n-checkbox v-model:checked="action">Action</n-checkbox>
   </n-col>
 </n-row>
 <n-row>
   <n-col :span="12">
-    <n-checkbox v-model:value="description">Description</n-checkbox>
+    <n-checkbox v-model:checked="header">Header</n-checkbox>
   </n-col>
   <n-col :span="12">
-    <n-checkbox v-model:value="footer">Footer</n-checkbox>
+    <n-checkbox v-model:checked="headerExtra">Header Extra</n-checkbox>
+  </n-col>
+</n-row>
+<n-row>
+  <n-col :span="12">
+    <n-checkbox v-model:checked="description">Description</n-checkbox>
+  </n-col>
+  <n-col :span="12">
+    <n-checkbox v-model:checked="footer">Footer</n-checkbox>
   </n-col>
 </n-row>
 <n-divider />

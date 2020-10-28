@@ -146,7 +146,7 @@ export default {
     },
     onCheckedKeysChange: {
       validator () {
-        warn('tree', '`on-checked-keys-change` is deprecated, please use `on-checked:expanded-keys` instead.')
+        warn('tree', '`on-checked-keys-change` is deprecated, please use `on-update:expanded-keys` instead.')
         return true
       },
       default: undefined

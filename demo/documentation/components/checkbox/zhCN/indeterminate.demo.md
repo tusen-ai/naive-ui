@@ -1,8 +1,8 @@
 # 部分选中
 ```html
-<n-checkbox v-model:value="value" :indeterminate="indeterminate">复选框</n-checkbox>
-<n-checkbox v-model:value="value" :indeterminate="indeterminate"/>
-<n-checkbox v-model:value="value" :indeterminate="indeterminate" disabled/>
+<n-checkbox v-model:checked="value" :indeterminate="indeterminate">复选框</n-checkbox>
+<n-checkbox v-model:checked="value" :indeterminate="indeterminate"/>
+<n-checkbox v-model:checked="value" :indeterminate="indeterminate" disabled/>
 <n-button @click="value = !value" size="small">选中</n-button>
 <n-button @click="indeterminate = !indeterminate" size="small">部分选中</n-button>
 ```
