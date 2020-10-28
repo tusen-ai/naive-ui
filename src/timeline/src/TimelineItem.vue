@@ -9,9 +9,6 @@
       <div class="n-timeline-item-timeline__line" />
       <div
         class="n-timeline-item-timeline__circle"
-        :style="{
-          backgroundColor: ascendantBackgroundColor
-        }"
       />
     </div>
     <div class="n-timeline-item-content">
@@ -38,8 +35,6 @@
 </template>
 
 <script>
-import hollowoutable from '../../_mixins/hollowoutable'
-
 export default {
   inject: {
     NTimeline: {
@@ -47,7 +42,6 @@ export default {
     }
   },
   name: 'TimelineItem',
-  mixins: [ hollowoutable ],
   props: {
     time: {
       type: [String, Number],
