@@ -50,7 +50,7 @@ fallback-option
 |class|`string`||
 |disabled|`boolean`||
 |label|`string`||
-|render|`Function`||
+|render|`(option: SelectOption) => VNode`||
 |style|`string`||
 |value|`string \| number`|Should be unique in options.|
 
@@ -59,6 +59,7 @@ fallback-option
 |-|-|-|
 |children|`Array<SelectOption>`||
 |name|`string`||
+|render|`(option: SelectOption) => VNode`||
 |type|`'group'`||
 
 ## Slots

@@ -12,20 +12,13 @@ import MusicIcon from 'naive-ui/lib/icons/md-musical-note.vue'
 
 function render (option, selected) {
   return [
-    h(resolveComponent('n-config-consumer'), {
-      abstract: true
-    }, {
-      default ({ styleScheme }) {
-        return h(resolveComponent('n-icon'), {
-          style: {
-            fill: selected ? styleScheme.primaryColor : styleScheme.tertiaryTextColor,
-            verticalAlign: 'middle',
-            marginRight: '4px',
-          }
-        }, {
-          default: () => h(MusicIcon)
-        })
+    h(resolveComponent('n-icon'), {
+      style: {
+        verticalAlign: 'middle',
+        marginRight: '4px',
       }
+    }, {
+      default: () => h(MusicIcon)
     }),
     option.label
   ]
@@ -39,7 +32,7 @@ export default {
         {
           type: 'group',
           name: 'Rubber Soul',
-          render: (h, data) => h('span', [ data.name, '(Cool!)']),
+          render: data => [ data.name, '(Cool!)'],
           children: [
             {
               label: 'Everybody\'s Got Something to Hide Except Me and My Monkey',
@@ -96,15 +89,15 @@ export default {
               label: 'Wait',
               value: 'song12'
             }
-          ].map(v => {
-            v.render = render
-            return v
-          })
+          ].map(v => ({
+            ...v,
+            render
+          }))
         },
         {
           type: 'group',
           name: 'Let It Be',
-          render: (h, data) => h('span', [ data.name, '(Cool!)']),
+          render: data => [ data.name, '(Cool!)'],
           children: [
             {
               label: 'Two Of Us',
@@ -154,19 +147,13 @@ export default {
               label: 'Get Back',
               value: 'Get Back'
             }
-          ].map(v => {
-            v.render = render
-            return v
-          })
+          ].map(v =>({
+            ...v,
+            render
+          }))
         }
       ]
     }
   }
-}
-```
-```css
-.n-select {
-  width: 180px;
-  margin: 0 12px 8px 0;
 }
 ```

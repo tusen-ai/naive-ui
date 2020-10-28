@@ -52,7 +52,7 @@ menu-debug
 |class|`string`||
 |disabled|`boolean`||
 |label|`string`||
-|render|`Function`||
+|render|`(option: SelectOption) => VNode`||
 |style|`string`||
 |value|`string \| number`|在选项中应该是唯一的|
 
@@ -61,6 +61,7 @@ menu-debug
 |-|-|-|
 |children|`Array<SelectOption>`||
 |name|`string`||
+|render|`(option: SelectOption) => VNode`||
 |type|`'group'`||
 
 ## Slots
