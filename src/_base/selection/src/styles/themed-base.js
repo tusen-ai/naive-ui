@@ -126,7 +126,6 @@ export default c([
             white-space: nowrap;
             padding: 0 26px 0 14px;
             background-color: transparent;
-            height: 100%;
           `,
           color: pallete.textColor,
           transition: `color .3s ${cubicBezierEaseInOut}`
@@ -240,7 +239,7 @@ export default c([
             outline: none;
             border: none;
             max-width: 100%;
-            height: 100%;
+            overflow: hidden;
             width: 1em;
             line-height: inherit;
             cursor: pointer;

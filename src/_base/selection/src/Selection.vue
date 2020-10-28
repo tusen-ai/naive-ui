@@ -324,6 +324,15 @@ export default {
     }
   },
   watch: {
+    pattern () {
+      if (this.multiple) {
+        this.$nextTick(() => {
+          const refs = this.$refs
+          const textWidth = refs.patternInputMirror.offsetWidth
+          refs.patternInput.style.width = textWidth + 'px'
+        })
+      }
+    },
     active (active) {
       if (active) {
         this.$nextTick(() => {
@@ -417,16 +426,7 @@ export default {
       }
     },
     handlePatternInputInput (e) {
-      if (this.multiple) {
-        this.$nextTick(() => {
-          const refs = this.$refs
-          const textWidth = refs.patternInputMirror.offsetWidth
-          refs.patternInput.style.width = textWidth + 'px'
-          this.doPatternInput(e)
-        })
-      } else {
-        this.doPatternInput(e)
-      }
+      this.doPatternInput(e)
     },
     handlePatternInputFocus (e) {
       this.patternInputFocused = true
