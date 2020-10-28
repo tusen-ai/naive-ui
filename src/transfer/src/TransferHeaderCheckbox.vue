@@ -1,5 +1,5 @@
 <template>
-  <n-simple-checkbox
+  <n-checkbox
     :theme="theme"
     :checked="checkboxProps.checked"
     :indeterminate="checkboxProps.indeterminate"
@@ -10,13 +10,13 @@
 </template>
 
 <script>
-import NSimpleCheckbox from '../../checkbox/src/SimpleCheckbox.vue'
+import NCheckbox from '../../checkbox/src/Checkbox.vue'
 import createValidator from '../../_utils/vue/validateProp'
 
 export default {
   name: 'NTransferHeaderCheckbox',
   components: {
-    NSimpleCheckbox
+    NCheckbox
   },
   props: {
     theme: {

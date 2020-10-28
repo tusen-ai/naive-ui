@@ -7,7 +7,7 @@
     @click="handleClick"
   >
     <div class="n-transfer-list-item__checkbox">
-      <n-simple-checkbox
+      <n-checkbox
         :theme="NTransfer.mergedTheme"
         :disabled="disabled"
         :checked="checked"
@@ -24,14 +24,14 @@
 
 <script>
 import { inject } from 'vue'
-import NSimpleCheckbox from '../../checkbox/src/SimpleCheckbox.vue'
+import NCheckbox from '../../checkbox/src/Checkbox.vue'
 import createValidator from '../../_utils/vue/validateProp'
 import { useMemo } from 'vooks'
 
 export default {
   name: 'NTransferListItem',
   components: {
-    NSimpleCheckbox
+    NCheckbox
   },
   props: {
     label: {
