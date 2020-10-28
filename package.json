@@ -130,10 +130,10 @@
     "date-fns": "^2.9.0",
     "highlight.js": "^9.18.1",
     "lodash-es": "^4.17.15",
-    "treemate": "^0.1.7",
+    "treemate": "^0.1.9",
     "vooks": "0.0.1-alpha.1",
     "vue": "^3.0.2",
     "vue-runtime-helpers": "^1.1.2",
-    "vueuc": "0.1.0-alpha.5"
+    "vueuc": "0.1.0-alpha.6"
   }
 }
