@@ -73,7 +73,7 @@
               :pattern="pattern"
               :tree-mate="treeMate"
               :multiple="multiple"
-              :size="mergedSize"
+              size="medium"
               :filterable="filterable"
               :value="value"
               @menu-toggle-option="handleToggleOption"

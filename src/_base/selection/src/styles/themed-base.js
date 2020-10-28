@@ -115,6 +115,7 @@ export default c([
       }, [
         cE('input', {
           raw: `
+            line-height: inherit;
             outline: none;
             cursor: pointer;
             box-sizing: border-box;
@@ -129,15 +130,21 @@ export default c([
           `,
           color: pallete.textColor,
           transition: `color .3s ${cubicBezierEaseInOut}`
-        }, [
-          c('&::placeholder', {
-            transition: `color .3s ${cubicBezierEaseInOut}`,
-            color: pallete.placeholderColor
-          }),
-          cM('placeholder', {
-            color: pallete.placeholderColor
-          })
-        ])
+        }),
+        cE('placeholder', {
+          lineHeight: 'inherit',
+          pointerEvents: 'none',
+          position: 'absolute',
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
+          padding: `0 26px 0 14px`,
+          color: pallete.placeholderColor,
+          transition: `color .3s ${cubicBezierEaseInOut}`
+        })
       ]),
       cNotM('disabled', [
         cM('focus', [

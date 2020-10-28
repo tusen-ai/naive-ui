@@ -122,7 +122,7 @@
           ref="patternInput"
           class="n-base-selection-label__input"
           :value="(patternInputFocused && active) ? pattern : label"
-          :placeholder="selectedOption ? label : placeholder"
+          :placeholder="null"
           :readonly="!disabled && filterable && (active || autofocus) ? false : 'readonly'"
           :disabled="disabled"
           tabindex="-1"
@@ -131,6 +131,12 @@
           @blur="handlePatternInputBlur"
           @input="handlePatternInputInput"
         >
+        <div
+          v-if="!pattern && (active || !selectedOption)"
+          class="n-base-selection-label__placeholder"
+        >
+          {{ filterablePlaceholder }}
+        </div>
         <n-base-suffix
           class="n-base-selection__mark"
           :loading="loading"
@@ -158,11 +164,10 @@
           {{ label }}
         </div>
         <div
-          v-else
-          key="placeholder"
-          class="n-base-selection-label__input n-base-selection-label__input--placeholder"
+          v-if="!(label && label.length)"
+          class="n-base-selection-label__placeholder"
         >
-          {{ labelPlaceholder }}
+          {{ placeholder }}
         </div>
         <n-base-suffix
           class="n-base-selection__mark"
@@ -304,7 +309,7 @@ export default {
       if (!this.syntheticClearable) return true
       else return !(this.hover && this.selected)
     },
-    labelPlaceholder () {
+    filterablePlaceholder () {
       return this.selectedOption ? this.selectedOption.label : this.placeholder
     },
     label () {
