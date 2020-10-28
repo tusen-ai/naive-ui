@@ -92,6 +92,9 @@ export default {
     }, children.map((child, index) => h('div', {
       style: [
         itemStyle,
+        {
+          maxWidth: '100%'
+        },
         vertical ? {
           marginBottom: index !== lastIndex ? verticalMargin : null
         } : {
