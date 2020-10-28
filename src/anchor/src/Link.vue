@@ -19,8 +19,8 @@
 
 <script>
 import { toRef } from 'vue'
+import { useMemo } from 'vooks'
 import {
-  useMemo,
   useInjectionRef,
   useInjectionCollection,
   useInjectionElementCollection

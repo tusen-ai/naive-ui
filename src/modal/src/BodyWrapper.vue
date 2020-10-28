@@ -85,7 +85,8 @@ import NCard from '../../card'
 import themeable from '../../_mixins/themeable'
 import presetProps from './presetProps'
 import clickoutside from '../../_directives/clickoutside'
-import { useLastClickPosition, useCompitable } from '../../_utils/composition'
+import { useCompitable } from 'vooks'
+import { useLastClickPosition } from '../../_utils/composition'
 
 export default {
   name: 'ModalBody',

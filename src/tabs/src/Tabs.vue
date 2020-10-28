@@ -104,7 +104,8 @@ import { VResizeObserver } from 'vueuc'
 import { throttle } from 'lodash-es'
 import styles from './styles'
 import { warn } from '../../_utils/naive/warn'
-import { onFontReady, useCompitable } from '../../_utils/composition'
+import { useCompitable } from 'vooks'
+import { onFontReady } from '../../_utils/composition'
 
 export default {
   name: 'Tabs',

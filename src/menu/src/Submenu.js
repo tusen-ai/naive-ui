@@ -4,7 +4,8 @@ import NPopover from '../../popover/src/Popover'
 import NMenuItemContent from './MenuItemContent.vue'
 import menuChildMixin from './menu-child-mixin'
 import { itemRenderer } from './utils'
-import { useInjectionRef, useMemo } from '../../_utils/composition'
+import { useMemo } from 'vooks'
+import { useInjectionRef } from '../../_utils/composition'
 
 export default {
   name: 'Submenu',

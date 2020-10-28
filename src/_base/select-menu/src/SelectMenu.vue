@@ -26,6 +26,7 @@
         :items="tmNodes"
         :item-size="itemSize"
         :show-scrollbar="false"
+        :default-scroll-index="defaultScrollIndex"
         @resize="handleListResize"
         @scroll="handleListScroll"
       >
@@ -160,6 +161,11 @@ export default {
   setup (props) {
     const virtualListRef = ref(null)
     const scrollbarRef = ref(null)
+    const pendingNodeRef = ref(
+      props.autoPendingFirstOption
+        ? props.treeMate.getFirstAvailableNode()
+        : null
+    )
     onMounted(() => {
       const {
         value
@@ -182,11 +188,8 @@ export default {
         } = virtualListRef
         return value && value.itemsRef
       },
-      pendingTmNode: ref(
-        props.autoPendingFirstOption
-          ? props.treeMate.getFirstAvailableNode()
-          : null
-      )
+      pendingTmNode: pendingNodeRef,
+      defaultScrollIndex: pendingNodeRef.value?.fIndex
     }
   },
   computed: {
@@ -266,7 +269,7 @@ export default {
         pendingTmNode
       } = this
       if (pendingTmNode) {
-        this.setPendingTmNode(pendingTmNode.getNext(), true)
+        this.setPendingTmNode(pendingTmNode.getNext({ loop: true }), true)
       }
     },
     prev () {
@@ -274,11 +277,17 @@ export default {
         pendingTmNode
       } = this
       if (pendingTmNode) {
-        this.setPendingTmNode(pendingTmNode.getPrev(), true)
+        this.setPendingTmNode(pendingTmNode.getPrev({ loop: true }), true)
       }
     },
     setPendingTmNode (tmNode, doScroll = false) {
       if (tmNode !== null) this.pendingTmNode = tmNode
+      if (doScroll && this.virtualScroll) {
+        const {
+          virtualListRef
+        } = this
+        virtualListRef.scrollTo({ index: tmNode.fIndex })
+      }
     }
   }
 }

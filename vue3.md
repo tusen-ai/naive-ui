@@ -56,6 +56,7 @@ placeable 进行了大调整
   - checkbox-group
     - deprecate
     - `on-change` => `on-update:value`
+  - TODO? API
 - [x] code
 - [x] collapse
   - deprecate
@@ -217,7 +218,7 @@ placeable 进行了大调整
   - deprecate
     - `on-change` => `on-update:value`
 - [x] progress
-- [x] radio
+- [ ] radio
   - radio-group
     - break
       - default `size` `'small'` => `'medium'`
@@ -225,6 +226,7 @@ placeable 进行了大调整
       - `on-change` => `on-update:value`
   - radio & radio-button
     - `on-change` => `on-update:checked-value`
+  - TODO: API
 - [x] result
 - [x] scrollbar
 - [ ] select
