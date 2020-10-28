@@ -16,6 +16,7 @@
       ref="input"
       type="radio"
       class="n-radio__radio-input"
+      :value="value"
       :name="mergedName"
       :checked="renderSafeChecked"
       :disabled="mergedDisabled"
@@ -39,18 +40,20 @@
 </template>
 
 <script>
-import asformitem from '../../_mixins/asformitem'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
+import {
+  configurable,
+  themeable,
+  asformitem,
+  usecssr
+} from '../../_mixins'
 import radioMixin from './radio-mixin'
-import usecssr from '../../_mixins/usecssr'
 import styles from './styles/radio/index.js'
 import setup from './radio-setup'
 
 export default {
   name: 'Radio',
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles),
     asformitem({
@@ -84,15 +87,14 @@ export default {
   setup,
   computed: {
     mergedTheme () {
-      const theme = this.theme
-      const NRadioGroup = this.NRadioGroup
-      if (theme !== null) {
+      const { theme, NRadioGroup } = this
+      if (theme !== undefined) {
         return theme
       } else if (NRadioGroup && NRadioGroup.mergedTheme) {
         return NRadioGroup.mergedTheme
       } else {
-        const NConfigProvider = this.NConfigProvider
-        return (NConfigProvider && NConfigProvider.mergedTheme) || null
+        const { NConfigProvider } = this
+        return (NConfigProvider && NConfigProvider.mergedTheme) || undefined
       }
     }
   }

@@ -10,9 +10,13 @@ export default {
       type: [Boolean, String, Number],
       default: null
     },
-    checkedValue: {
-      type: [Boolean, String, Number],
+    checked: {
+      type: Boolean,
       default: undefined
+    },
+    defaultChecked: {
+      type: Boolean,
+      default: false
     },
     disabled: {
       type: Boolean,
@@ -22,14 +26,14 @@ export default {
       type: Function,
       default: undefined
     },
-    'onUpdate:checkedValue': {
+    'onUpdate:checked': {
       type: [Function, Array],
       default: undefined
     },
     // deprecated
-    onChange: {
+    checkedValue: {
       validator () {
-        if (__DEV__) warn('radio', '`on-change` is deprecated, please use `on-update:checked-value` instead.')
+        warn('radio', '`checked-value` is deprecated, please use `checked` instead.')
         return true
       },
       default: undefined
@@ -46,51 +50,43 @@ export default {
       if (this.NRadioGroup) return this.NRadioGroup.name
     },
     mergedDisabled () {
-      if (this.NRadioGroup && this.NRadioGroup.disabled) return true
-      if (this.disabled) return true
-      return false
-    },
-    syntheticAscendantBackgroundColor () {
-      const NRadioGroup = this.NRadioGroup
-      if (NRadioGroup && NRadioGroup.mergedTheme === 'dark') {
-        return NRadioGroup.ascendantBackgroundColor
-      }
-      return null
+      const { NRadioGroup } = this
+      return (NRadioGroup && NRadioGroup.disabled) || this.disabled
     }
   },
   methods: {
-    doUpdateValue () {
+    doUpdateChecked () {
       const {
-        value
+        NRadioGroup
       } = this
-      if (this.NRadioGroup) {
+      if (NRadioGroup) {
         const {
-          onChange,
           'onUpdate:value': updateValue,
           nTriggerFormInput,
           nTriggerFormChange
-        } = this.NRadioGroup
+        } = NRadioGroup
+        const {
+          value
+        } = this
         if (updateValue) call(updateValue, value)
-        if (onChange) call(onChange, value) // deprecated
         nTriggerFormInput()
         nTriggerFormChange()
       } else {
         const {
-          onChange,
-          'onUpdate:checkedValue': updateCheckedValue,
+          'onUpdate:checked': updateChecked,
           nTriggerFormInput,
           nTriggerFormChange
         } = this
-        if (updateCheckedValue) call(updateCheckedValue, value)
-        if (onChange) call(onChange, value) // deprecated
+        if (updateChecked) call(updateChecked, true)
         nTriggerFormInput()
         nTriggerFormChange()
+        this.uncontrolledChecked = true
       }
     },
     toggle () {
       if (this.mergedDisabled) return
-      if (this.checkedValue !== this.value) {
-        this.doUpdateValue()
+      if (!this.renderSafeChecked) {
+        this.doUpdateChecked()
       }
     },
     handleRadioInputChange () {
@@ -103,7 +99,7 @@ export default {
       this.focus = true
     },
     handleKeyUpEnter () {
-      this.toggle()
+      this.$refs.input.click()
     },
     handleMouseDown () {
       if (this.mergedDisabled) return
@@ -118,7 +114,7 @@ export default {
         onClick
       } = this
       if (onClick) onClick(e)
-      this.toggle()
+      this.$refs.input.click()
     }
   }
 }

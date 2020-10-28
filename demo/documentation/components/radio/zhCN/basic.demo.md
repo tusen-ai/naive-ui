@@ -2,21 +2,27 @@
 ```html
 <n-space>
   <n-radio
-    v-model:checked-value="value"
+    :checked="checkedValue === 'Definitely Maybe'"
+    @change="handleChange"
     value="Definitely Maybe"
+    name="basic-demo"
   >
     Definitely Maybe
   </n-radio>
   <n-radio
-    v-model:checked-value="value"
+    :checked="checkedValue === 'Be Here Now'"
+    @change="handleChange"
     value="Be Here Now"
+    name="basic-demo"
   >
     Be Here Now
   </n-radio>
   <n-radio
-    v-model:checked-value="value"
+    :checked="checkedValue === 'Be Here Now'"
+    @change="handleChange"
     value="Be Here Now"
     :disabled="disabled"
+    name="basic-demo"
   >
     Be Here Now
   </n-radio>
@@ -28,7 +34,12 @@ export default {
   data () {
     return {
       disabled: true,
-      value: null
+      checkedValue: null
+    }
+  },
+  methods: {
+    handleChange (e) {
+      this.checkedValue = e.target.value
     }
   }
 }

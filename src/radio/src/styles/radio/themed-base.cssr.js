@@ -35,6 +35,7 @@ export default c([
         [
           cE('radio-input', {
             raw: `
+              border: 0;
               width: 0;
               height: 0;
               opacity: 0;

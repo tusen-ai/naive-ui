@@ -1,8 +1,9 @@
 import { h } from 'vue'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import hollowoutable from '../../_mixins/hollowoutable'
-import asformitem from '../../_mixins/asformitem'
+import {
+  configurable,
+  themeable,
+  asformitem
+} from '../../_mixins'
 import { getSlot, flatten } from '../../_utils/vue'
 import { warn } from '../../_utils/naive/warn'
 import usecssr from '../../_mixins/usecssr'
@@ -89,9 +90,8 @@ export default {
   cssrName: 'Radio',
   cssrId: 'RadioGroup',
   mixins: [
-    withapp,
+    configurable,
     themeable,
-    hollowoutable,
     usecssr(styles),
     asformitem()
   ],
@@ -127,18 +127,6 @@ export default {
       default: undefined
     }
   },
-  data () {
-    return {
-      transitionDisabled: true
-    }
-  },
-  mounted () {
-    if (this.isButtonGroup) {
-      this.$nextTick().then(() => {
-        this.transitionDisabled = false
-      })
-    }
-  },
   provide () {
     return {
       NRadioGroup: this
@@ -150,14 +138,17 @@ export default {
       isButtonGroup
     } = mapSlot(h, flatten(getSlot(this)), this)
     this.isButtonGroup = isButtonGroup
+    const {
+      mergedTheme,
+      mergedSize
+    } = this
     return h('div', {
       class: [
         'n-radio-group',
+        `n-radio-group--${mergedSize}-size`,
         {
-          [`n-${this.mergedTheme}-theme`]: this.mergedTheme,
-          [`n-radio-group--${this.mergedSize}-size`]: this.mergedSize,
-          [`n-radio-group--button-group`]: isButtonGroup,
-          [`n-radio-group--transition-disabled`]: isButtonGroup && this.transitionDisabled
+          [`n-${mergedTheme}-theme`]: mergedTheme,
+          [`n-radio-group--button-group`]: isButtonGroup
         }
       ]
     }, children)

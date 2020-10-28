@@ -56,7 +56,9 @@ placeable 进行了大调整
   - checkbox-group
     - deprecate
     - `on-change` => `on-update:value`
-  - TODO? API
+  - TODO?
+    - API
+    - remove simple checkbox
 - [x] code
 - [x] collapse
   - deprecate
@@ -225,17 +227,25 @@ placeable 进行了大调整
     - deprecate
       - `on-change` => `on-update:value`
   - radio & radio-button
-    - `on-change` => `on-update:checked-value`
-  - TODO: API
+    - break
+      - `checked-value` => `checked`
+        - It is change to conform html standard usage
+      - `on-change` => `on-update:checked`
+        - `on-change` is now a native event
 - [x] result
 - [x] scrollbar
+  - TODO
+    - [ ] scrollTo
 - [ ] select
   - break
     - `v-model` => `v-model:value`
   - deprecated
     - `on-change` => `on-update:value`
   - TODO
-    - `on-scroll`
+    - [ ] `on-scroll`
+    - [x] render item
+    - [ ] keyboard scroll when non virtual
+    - [ ] auto pending selected option
 - [x] slider
   - deprecated
     - `on-change` => `on-update:value`
