@@ -143,6 +143,7 @@ export default {
   },
   methods: {
     handleHeaderResize (entry) {
+      this.setTableWidth(entry.contentRect.width)
       this.setBodyMinMaxHeight(entry.contentRect.height)
       this.setActiveLeftFixedColumn(entry.target)
       this.setActiveRightFixedColumn(entry.target)
@@ -158,6 +159,9 @@ export default {
     getBodyElement () {
       return this.bodyRef.getScrollContainer()
     },
+    setTableWidth (width) {
+      this.tableWidth = width
+    },
     setBodyMinMaxHeight (headerHeight) {
       const bordered = this.bordered
       const maxHeight = this.maxHeight
@@ -172,7 +176,7 @@ export default {
     setActiveRightFixedColumn (target) {
       const rightFixedColumns = this.NDataTable.rightFixedColumns
       const scrollLeft = target.scrollLeft
-      const tableWidth = this.tableWidth
+      const { tableWidth } = this
       const scrollWidth = target.scrollWidth
       let rightWidth = 0
       const fixedColumnsRight = this.fixedColumnsRight
