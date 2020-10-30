@@ -249,10 +249,7 @@ export default c([
               display: 'inline-flex',
               verticalAlign: '-0.2em',
               color: headerButtonIconColor,
-              transition: `
-                color .3s ${cubicBezierEaseInOut},
-                transform .3s ${cubicBezierEaseInOut}
-              `
+              transition: `transform .3s ${cubicBezierEaseInOut}`
             }, [
               cM('desc', {
                 transform: 'rotate(0)'
