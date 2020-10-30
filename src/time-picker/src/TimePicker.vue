@@ -609,19 +609,19 @@ export default {
       if (this.hoursRef && this.hoursRef.contentRef) {
         const hour = this.hoursRef.contentRef.querySelector('.n-time-picker-selector-time-row__item--active')
         if (hour) {
-          this.hoursRef.scrollTo(0, hour.offsetTop)
+          this.hoursRef.scrollTo({ top: hour.offsetTop })
         }
       }
       if (this.minutesRef && this.minutesRef.contentRef) {
         const minute = this.minutesRef.contentRef.querySelector('.n-time-picker-selector-time-row__item--active')
         if (minute) {
-          this.minutesRef.scrollTo(0, minute.offsetTop)
+          this.minutesRef.scrollTo({ top: minute.offsetTop })
         }
       }
       if (this.secondsRef && this.secondsRef.contentRef) {
         const second = this.secondsRef.contentRef.querySelector('.n-time-picker-selector-time-row__item--active')
         if (second) {
-          this.secondsRef.scrollTo(0, second.offsetTop)
+          this.secondsRef.scrollTo({ top: second.offsetTop })
         }
       }
     },
