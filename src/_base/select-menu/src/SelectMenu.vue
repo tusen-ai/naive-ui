@@ -27,8 +27,8 @@
         :item-size="itemSize"
         :show-scrollbar="false"
         :default-scroll-index="defaultScrollIndex"
-        @resize="handleListResize"
-        @scroll="handleListScroll"
+        @resize="handleVirtualListResize"
+        @scroll="handleVirtualListScroll"
       >
         <template v-slot="{ item: tmNode }">
           <n-select-group-header
@@ -148,12 +148,12 @@ export default {
       type: Boolean,
       default: true
     },
-    // deprecated
-    onMenuToggleOption: {
+    onScroll: {
       type: Function,
       default: undefined
     },
-    onMenuScroll: {
+    // deprecated
+    onMenuToggleOption: {
       type: Function,
       default: undefined
     }
@@ -234,15 +234,16 @@ export default {
     },
     doScroll (e) {
       const {
-        onMenuScroll
+        onScroll
       } = this
-      if (onMenuScroll) onMenuScroll(e)
+      if (onScroll) onScroll(e)
     },
     // required, scroller sync need to be triggered manually
-    handleListScroll () {
+    handleVirtualListScroll (e) {
       this.scrollbarRef.sync()
+      this.doScroll(e)
     },
-    handleListResize () {
+    handleVirtualListResize () {
       this.scrollbarRef.sync()
     },
     getPendingOption () {

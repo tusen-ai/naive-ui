@@ -77,7 +77,7 @@
               :filterable="filterable"
               :value="value"
               @menu-toggle-option="handleToggleOption"
-              @menu-scroll="handleMenuScroll"
+              @scroll="handleMenuScroll"
             >
               <template v-if="$slots.empty" v-slot:empty>
                 <slot name="empty" />

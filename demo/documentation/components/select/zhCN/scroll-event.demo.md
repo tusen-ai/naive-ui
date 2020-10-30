@@ -76,10 +76,10 @@ export default {
     }
   },
   methods: {
-    handleScroll (e, scrollContainer, scrollContent) {
-      this.scrollContentHeight = scrollContent.offsetHeight
-      this.scrollContainerScrollTop = scrollContainer.scrollTop
-      this.scrollContainerHeight = scrollContainer.offsetHeight
+    handleScroll (e) {
+      this.scrollContentHeight = e.target.firstElementChild.offsetHeight
+      this.scrollContainerScrollTop = e.target.scrollTop
+      this.scrollContainerHeight = e.target.offsetHeight
     }
   }
 }
@@ -87,6 +87,5 @@ export default {
 ```css
 .n-select {
   width: 180px;
-  margin: 0 12px 8px 0;
 }
 ```

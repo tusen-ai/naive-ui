@@ -381,7 +381,7 @@ export default {
       const {
         onScroll
       } = this
-      if (onScroll) onScroll(e, this.mergedContainerRef(), this.mergedContentRef())
+      if (onScroll) onScroll(e)
       this.syncScrollState()
     },
     syncScrollState () {

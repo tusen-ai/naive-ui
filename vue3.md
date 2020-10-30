@@ -239,18 +239,13 @@ placeable 进行了大调整
         - `on-change` is now a native event
 - [x] result
 - [x] scrollbar
-  - TODO
-    - [ ] scrollTo
-- [ ] select
+- [x] select
   - break
     - `v-model` => `v-model:value`
+    - `on-scroll(event, container, content)` => `on-scroll(event)`
+    - `option.render(h, data)` => `option.render(data)`
   - deprecated
     - `on-change` => `on-update:value`
-  - TODO
-    - [ ] `on-scroll`
-    - [x] render item
-    - [ ] keyboard scroll when non virtual
-    - [ ] auto pending selected option
 - [x] slider
   - deprecated
     - `on-change` => `on-update:value`
@@ -313,5 +308,6 @@ placeable 进行了大调整
   - tusimple theme
   - clean delegate
   - site production tag (bug)
-  - demo scrollbar 的问题
+  - [x] demo scrollbar 的问题
   - table x scroll 右侧阴影不消失
+  - [x] log scrollTo 有点问题
