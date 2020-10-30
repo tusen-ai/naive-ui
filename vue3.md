@@ -6,9 +6,9 @@ placeable 进行了大调整
 在很特殊的情况下，popover 的在 teleport 打开的时候 beforeUnmount 会被调用两次，具体没有研究出为什么。
 
 - [x] form
-  - new
-    - form-item
-      - `show-feedback`
+  - form-item
+    - new
+      - `show-feedback` prop
 - [x] affix
   - deprecate
     - `target` => `listen-to`
@@ -307,10 +307,11 @@ placeable 进行了大调整
   - vooks
     - delegate with capture
     - unify composition
-  - remove holloutable
+  - remove hollowoutable
   - vite-build
   - rollup-build
   - tusimple theme
   - clean delegate
   - site production tag (bug)
-  
+  - demo scrollbar 的问题
+  - table x scroll 右侧阴影不消失

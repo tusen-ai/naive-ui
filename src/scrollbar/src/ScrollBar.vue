@@ -22,10 +22,12 @@
         <v-resize-observer @resize="handleContentResize">
           <div
             ref="contentRef"
-            :style="{
-              width: xScrollable ? 'fit-content' : null,
-              ...contentStyle,
-            }"
+            :style="[
+              contentStyle,
+              {
+                width: xScrollable ? 'fit-content' : null,
+              }
+            ]"
             class="n-scrollbar-content"
           >
             <slot />
@@ -36,50 +38,53 @@
         <slot />
       </template>
       <div
-        ref="verticalRailRef"
+        ref="yRailRef"
         class="n-scrollbar-rail n-scrollbar-rail--vertical"
         :class="{
-          'n-scrollbar-rail--disabled': !needVerticalScrollbar
+          'n-scrollbar-rail--disabled': !needyBar
         }"
-        :style="{...horizontalRailStyle, width: scrollbarSize }"
+        :style="[
+          horizontalRailStyle,
+          { width: sizePx }
+        ]"
       >
         <transition name="n-fade-in-transition">
           <div
-            v-if="needVerticalScrollbar && showVeriticalScrollbar && !isIos"
+            v-if="needyBar && isShowYBar && !isIos"
             class="n-scrollbar-rail__scrollbar"
             :style="{
-              height: verticalScrollbarHeightPx,
-              top: verticalScrollbarTopPx,
-              width: scrollbarSize,
+              height: yBarSizePx,
+              top: yBarTopPx,
+              width: sizePx,
               borderRadius: scrollbarBorderRadius
             }"
-            @mousedown="handleVerticalScrollMouseDown"
-            @mouseup="handleVerticalScrollMouseUp"
-            @mousemove="handleVerticalScrollMouseMove"
+            @mousedown="handleYScrollMouseDown"
+            @mouseup="handleYScrollMouseUp"
+            @mousemove="handleYScrollMouseMove"
           />
         </transition>
       </div>
       <div
-        ref="horizontalRailRef"
+        ref="xRailRef"
         class="n-scrollbar-rail n-scrollbar-rail--horizontal"
         :class="{
-          'n-scrollbar-rail--disabled': !needHorizontalScrollbar
+          'n-scrollbar-rail--disabled': !needxBar
         }"
-        :style="{ ...verticalRailStyle, height: scrollbarSize }"
+        :style="{ ...verticalRailStyle, height: sizePx }"
       >
         <transition name="n-fade-in-transition">
           <div
-            v-if="needHorizontalScrollbar && showHorizontalScrollbar && !isIos"
+            v-if="needxBar && isShowXBar && !isIos"
             class="n-scrollbar-rail__scrollbar"
             :style="{
-              height: scrollbarSize,
-              width: horizontalScrollbarWidthPx,
-              left: horizontalScrollbarLeftPx,
+              height: sizePx,
+              width: xBarSizePx,
+              left: xBarLeftPx,
               borderRadius: scrollbarBorderRadius
             }"
-            @mousedown="handleHorizontalScrollMouseDown"
-            @mouseup="handleHorizontalScrollMouseUp"
-            @mousemove="handleHorizontalScrollMouseMove"
+            @mousedown="handleXScrollMouseDown"
+            @mouseup="handleXScrollMouseUp"
+            @mousemove="handleXScrollMouseMove"
           />
         </transition>
       </div>
@@ -113,7 +118,7 @@ export default {
     usecssr(styles)
   ],
   props: {
-    width: {
+    size: {
       type: Number,
       default: 5
     },
@@ -131,27 +136,27 @@ export default {
     },
     container: {
       type: Function,
-      default: null
+      default: undefined
     },
     content: {
       type: Function,
-      default: null
+      default: undefined
     },
     containerStyle: {
       type: Object,
-      default: null
+      default: undefined
     },
     contentStyle: {
       type: Object,
-      default: null
+      default: undefined
     },
     horizontalRailStyle: {
       type: Object,
-      default: null
+      default: undefined
     },
     verticalRailStyle: {
       type: Object,
-      default: null
+      default: undefined
     },
     onScroll: {
       type: Function,
@@ -164,85 +169,85 @@ export default {
       contentWidth: null,
       containerHeight: null,
       containerWidth: null,
-      verticalRailHeight: null,
-      horizontalRailWidth: null,
+      yRailSize: null,
+      xRailWidth: null,
       containerScrollTop: null,
       containerScrollLeft: null,
-      horizontalScrollbarVanishTimerId: null,
-      verticalScrollbarVanishTimerId: null,
-      showHorizontalScrollbar: false,
-      showVeriticalScrollbar: false,
-      verticalScrollbarActivated: false,
-      horizontalScrollbarActivated: false,
-      memorizedVerticalTop: null,
-      memorizedHorizontalLeft: null,
-      memorizedMouseX: null,
-      memorizedMouseY: null,
+      xBarVanishTimerId: null,
+      yBarVanishTimerId: null,
+      isShowXBar: false,
+      isShowYBar: false,
+      yBarPressed: false,
+      xBarPressed: false,
+      memoYTop: null,
+      memoXLeft: null,
+      memoMouseX: null,
+      memoMouseY: null,
       isIos
     }
   },
   computed: {
-    verticalScrollbarHeight () {
-      if (this.containerHeight === null || this.contentHeight === null || this.verticalRailHeight === null) return 0
+    yBarSize () {
+      if (this.containerHeight === null || this.contentHeight === null || this.yRailSize === null) return 0
       else {
-        return Math.min(this.containerHeight, (this.verticalRailHeight * this.containerHeight / this.contentHeight + this.width * 1.5))
+        return Math.min(this.containerHeight, (this.yRailSize * this.containerHeight / this.contentHeight + this.size * 1.5))
       }
     },
-    verticalScrollbarHeightPx () {
-      return this.verticalScrollbarHeight + 'px'
+    yBarSizePx () {
+      return this.yBarSize + 'px'
     },
-    horizontalScrollbarWidth () {
-      if (this.containerWidth === null || this.contentWidth === null || this.horizontalRailWidth === null) return 0
+    xBarSize () {
+      if (this.containerWidth === null || this.contentWidth === null || this.xRailSize === null) return 0
       else {
-        return (this.horizontalRailWidth * this.containerWidth / this.contentWidth + this.width * 1.5)
+        return (this.xRailSize * this.containerWidth / this.contentWidth + this.size * 1.5)
       }
     },
-    horizontalScrollbarWidthPx () {
-      return this.horizontalScrollbarWidth + 'px'
+    xBarSizePx () {
+      return this.xBarSize + 'px'
     },
-    verticalScrollbarTop () {
-      if (this.containerHeight === null || this.containerScrollTop === null || this.contentHeight === null || this.verticalRailHeight === null) return 0
+    yBarTop () {
+      if (this.containerHeight === null || this.containerScrollTop === null || this.contentHeight === null || this.yRailSize === null) return 0
       else {
-        return this.containerScrollTop / (this.contentHeight - this.containerHeight) * (this.verticalRailHeight - this.verticalScrollbarHeight)
+        return this.containerScrollTop / (this.contentHeight - this.containerHeight) * (this.yRailSize - this.yBarSize)
       }
     },
-    verticalScrollbarTopPx () {
-      return this.verticalScrollbarTop + 'px'
+    yBarTopPx () {
+      return this.yBarTop + 'px'
     },
-    horizontalScrollbarLeft () {
+    xBarLeft () {
       if (this.containerWidth === null || this.containerScrollLeft === null || this.contentWidth === null) return 0
       else {
-        return this.containerScrollLeft / (this.contentWidth - this.containerWidth) * (this.horizontalRailWidth - this.horizontalScrollbarWidth)
+        return this.containerScrollLeft / (this.contentWidth - this.containerWidth) * (this.xRailSize - this.xBarSize)
       }
     },
-    horizontalScrollbarLeftPx () {
-      return this.horizontalScrollbarLeft + 'px'
+    xBarLeftPx () {
+      return this.xBarLeft + 'px'
     },
-    scrollbarSize () {
-      return this.width + 'px'
+    sizePx () {
+      return this.size + 'px'
     },
     scrollbarBorderRadius () {
-      return this.width / 2 + 'px'
+      return this.size / 2 + 'px'
     },
-    needVerticalScrollbar () {
+    needyBar () {
       return this.containerHeight !== null && this.contentHeight !== null && this.contentHeight > this.containerHeight
     },
-    needHorizontalScrollbar () {
+    needxBar () {
       return this.containerWidth !== null && this.contentWidth !== null && this.contentWidth > this.containerWidth
     }
   },
   beforeUnmount () {
-    window.clearTimeout(this.horizontalScrollbarVanishTimerId)
-    window.clearTimeout(this.verticalScrollbarVanishTimerId)
-    window.removeEventListener('mousemove', this.handleVerticalScrollMouseMove, true)
-    window.removeEventListener('mouseup', this.handleVerticalScrollMouseUp, true)
+    window.clearTimeout(this.xBarVanishTimerId)
+    window.clearTimeout(this.yBarVanishTimerId)
+    window.removeEventListener('mousemove', this.handleYScrollMouseMove, true)
+    window.removeEventListener('mouseup', this.handleYScrollMouseUp, true)
   },
   setup () {
     return {
       containerRef: ref(null),
       contentRef: ref(null),
-      verticalRailRef: ref(null),
-      horizontalRailRef: ref(null)
+      yRailRef: ref(null),
+      xRailRef: ref(null)
     }
   },
   mounted () {
@@ -275,78 +280,102 @@ export default {
     handleContentResize () {
       this.sync()
     },
-    scrollTo (...args) {
-      const container = this.mergedContainerRef()
-      if (container) {
-        container.scrollTo(...args)
-      }
-    },
-    scrollToElement (el, options = {}) {
+    scrollTo (options) {
       if (!this.scrollable) return
       const {
-        getTop = elm => elm.offsetTop,
-        getHeight = elm => elm.offsetHeight,
-        behavior = 'auto'
+        left,
+        top,
+        index,
+        elSize,
+        position,
+        behavior,
+        el,
+        debounce = true
       } = options
-      const top = getTop(el)
+      if (left !== undefined || top !== undefined) {
+        this.scrollToPosition(left, top, 0, false, behavior)
+      } if (el !== undefined) {
+        this.scrollToPosition(0, el.offsetTop, el.offsetHeight, debounce, behavior)
+      } else if (index !== undefined && elSize !== undefined) {
+        this.scrollToPosition(0, index * elSize, behavior, debounce, behavior)
+      } else if (position === 'bottom') {
+        this.scrollToPosition(0, Number.MAX_SAFE_INTEGER, 0, false, behavior)
+      } else if (position === 'top') {
+        this.scrollToPosition(0, 0, 0, false, behavior)
+      }
+    },
+    scrollToPosition (
+      left,
+      top,
+      elSize,
+      debounce,
+      behavior
+    ) {
       const container = this.mergedContainerRef()
-      if (top < container.scrollTop) {
+      if (!container) return
+      if (debounce) {
+        const {
+          scrollTop,
+          offsetHeight
+        } = container
+        if (top > scrollTop) {
+          if (top + elSize <= scrollTop + offsetHeight) {
+            // do nothing
+          } else {
+            container.scrollTo({
+              left,
+              top: top + elSize - offsetHeight,
+              behavior
+            })
+          }
+          return
+        }
         container.scrollTo({
+          left,
           top,
-          left: 0,
           behavior
         })
-      } else {
-        const elHeight = getHeight(el)
-        const containerHeight = container.offsetHeight
-        if (top + elHeight > container.scrollTop + containerHeight) {
-          container.scrollTo({
-            top: top + elHeight - containerHeight,
-            left: 0,
-            behavior
-          })
-        }
       }
     },
     handleMouseEnterWrapper () {
-      this.displayHorizontalScrollbar()
-      this.displayVerticalScrollbar()
+      this.showXBar()
+      this.showYBar()
       this.sync()
     },
     handleMouseLeaveWrapper () {
-      this.hideScrollbar()
+      this.hideBar()
     },
-    hideScrollbar () {
-      this.hideVerticalScrollbar()
-      this.hideHorizontalScrollbar()
+    hideBar () {
+      this.hideYBar()
+      this.hideXBar()
     },
-    hideVerticalScrollbar () {
-      if (this.verticalScrollbarVanishTimerId !== null) {
-        window.clearTimeout(this.verticalScrollbarVanishTimerId)
+    hideYBar () {
+      if (this.yBarVanishTimerId !== null) {
+        window.clearTimeout(this.yBarVanishTimerId)
       }
-      this.verticalScrollbarVanishTimerId = window.setTimeout(() => {
-        this.showVeriticalScrollbar = false
+      this.yBarVanishTimerId = window.setTimeout(() => {
+        this.isShowYBar = false
       }, this.duration)
     },
-    hideHorizontalScrollbar () {
-      if (this.horizontalScrollbarVanishTimerId !== null) {
-        window.clearTimeout(this.horizontalScrollbarVanishTimerId)
+    hideXBar () {
+      if (this.xBarVanishTimerId !== null) {
+        window.clearTimeout(this.xBarVanishTimerId)
       }
-      this.horizontalScrollbarVanishTimerId = window.setTimeout(() => {
-        this.showHorizontalScrollbar = false
+      this.xBarVanishTimerId = window.setTimeout(() => {
+        this.isShowXBar = false
       }, this.duration)
     },
-    displayHorizontalScrollbar () {
-      if (this.horizontalScrollbarVanishTimerId !== null) {
-        window.clearTimeout(this.horizontalScrollbarVanishTimerId)
+    showXBar () {
+      if (this.xBarVanishTimerId !== null) {
+        window.clearTimeout(this.xBarVanishTimerId)
       }
-      this.showHorizontalScrollbar = true
+      this.isShowXBar = true
     },
-    displayVerticalScrollbar () {
-      if (this.verticalScrollbarVanishTimerId !== null) {
-        window.clearTimeout(this.verticalScrollbarVanishTimerId)
+    showYBar () {
+      if (this.yBarVanishTimerId !== null) {
+        window.clearTimeout(this.yBarVanishTimerId)
       }
-      this.showVeriticalScrollbar = true
+      this.isShowYBar = true
     },
     handleScroll (e) {
       const {
@@ -376,13 +405,12 @@ export default {
         this.containerHeight = container.offsetHeight
         this.containerWidth = container.offsetWidth
       }
-      const horizontalRail = this.horizontalRailRef
-      if (horizontalRail) {
-        this.horizontalRailWidth = horizontalRail.offsetWidth
+      const { xRailRef, yRailRef } = this
+      if (xRailRef) {
+        this.xRailSize = xRailRef.offsetWidth
       }
-      const verticalRail = this.verticalRailRef
-      if (verticalRail) {
-        this.verticalRailHeight = verticalRail.offsetHeight
+      if (yRailRef) {
+        this.yRailSize = yRailRef.offsetHeight
       }
     },
     sync () {
@@ -390,72 +418,72 @@ export default {
       this.syncPositionState()
       this.syncScrollState()
     },
-    handleHorizontalScrollMouseDown (e) {
+    handleXScrollMouseDown (e) {
       e.preventDefault()
       e.stopPropagation()
-      this.horizontalScrollbarActivated = true
-      window.addEventListener('mousemove', this.handleHorizontalScrollMouseMove)
-      window.addEventListener('mouseup', this.handleHorizontalScrollMouseUp)
-      this.memorizedHorizontalLeft = this.containerScrollLeft
-      this.memorizedMouseX = e.clientX
+      this.xBarPressed = true
+      window.addEventListener('mousemove', this.handleXScrollMouseMove)
+      window.addEventListener('mouseup', this.handleXScrollMouseUp)
+      this.memoXLeft = this.containerScrollLeft
+      this.memoMouseX = e.clientX
     },
-    handleHorizontalScrollMouseMove (e) {
-      if (!this.horizontalScrollbarActivated) return
-      window.clearTimeout(this.horizontalScrollbarVanishTimerId)
-      window.clearTimeout(this.verticalScrollbarVanishTimerId)
-      const dX = (e.clientX - this.memorizedMouseX)
-      let dScrollLeft = dX * (this.contentWidth - this.containerWidth) / (this.containerWidth - this.horizontalScrollbarWidth)
+    handleXScrollMouseMove (e) {
+      if (!this.xBarPressed) return
+      window.clearTimeout(this.xBarVanishTimerId)
+      window.clearTimeout(this.yBarVanishTimerId)
+      const dX = (e.clientX - this.memoMouseX)
+      const dScrollLeft = dX * (this.contentWidth - this.containerWidth) / (this.containerWidth - this.xBarSize)
       const toScrollLeftUpperBound = this.contentWidth - this.containerWidth
-      let toScrollLeft = this.memorizedHorizontalLeft + dScrollLeft
+      let toScrollLeft = this.memoXLeft + dScrollLeft
       toScrollLeft = Math.min(toScrollLeftUpperBound, toScrollLeft)
       toScrollLeft = Math.max(toScrollLeft, 0)
       this.mergedContainerRef().scrollLeft = toScrollLeft
     },
-    handleHorizontalScrollMouseUp (e) {
+    handleXScrollMouseUp (e) {
       e.preventDefault()
       e.stopPropagation()
-      window.removeEventListener('mousemove', this.handleHorizontalScrollMouseMove)
-      window.removeEventListener('mouseup', this.handleHorizontalScrollMouseUp)
-      this.horizontalScrollbarActivated = false
+      window.removeEventListener('mousemove', this.handleXScrollMouseMove)
+      window.removeEventListener('mouseup', this.handleXScrollMouseUp)
+      this.xBarPressed = false
       this.sync()
       if (!this.mergedContainerRef().contains(e.target)) {
-        this.hideScrollbar()
+        this.hideBar()
       }
     },
-    handleVerticalScrollMouseDown (e) {
+    handleYScrollMouseDown (e) {
       e.preventDefault()
       e.stopPropagation()
-      this.verticalScrollbarActivated = true
-      window.addEventListener('mousemove', this.handleVerticalScrollMouseMove, true)
-      window.addEventListener('mouseup', this.handleVerticalScrollMouseUp, true)
-      this.memorizedVerticalTop = this.containerScrollTop
-      this.memorizedMouseY = e.clientY
+      this.yBarPressed = true
+      window.addEventListener('mousemove', this.handleYScrollMouseMove, true)
+      window.addEventListener('mouseup', this.handleYScrollMouseUp, true)
+      this.memoYTop = this.containerScrollTop
+      this.memoMouseY = e.clientY
     },
-    handleVerticalScrollMouseMove (e) {
-      if (!this.verticalScrollbarActivated) return
-      window.clearTimeout(this.horizontalScrollbarVanishTimerId)
-      window.clearTimeout(this.verticalScrollbarVanishTimerId)
-      const dY = (e.clientY - this.memorizedMouseY)
-      let dScrollTop = dY * (this.contentHeight - this.containerHeight) / (this.containerHeight - this.verticalScrollbarHeight)
+    handleYScrollMouseMove (e) {
+      if (!this.yBarPressed) return
+      window.clearTimeout(this.xBarVanishTimerId)
+      window.clearTimeout(this.yBarVanishTimerId)
+      const dY = (e.clientY - this.memoMouseY)
+      const dScrollTop = dY * (this.contentHeight - this.containerHeight) / (this.containerHeight - this.yBarSize)
       const toScrollTopUpperBound = this.contentHeight - this.containerHeight
-      let toScrollTop = this.memorizedVerticalTop + dScrollTop
+      let toScrollTop = this.memoYTop + dScrollTop
       toScrollTop = Math.min(toScrollTopUpperBound, toScrollTop)
       toScrollTop = Math.max(toScrollTop, 0)
       this.mergedContainerRef().scrollTop = toScrollTop
     },
-    handleVerticalScrollMouseUp (e) {
+    handleYScrollMouseUp (e) {
       e.preventDefault()
       e.stopPropagation()
       const {
         onScrollEnd
       } = this
       if (onScrollEnd) onScrollEnd()
-      window.removeEventListener('mousemove', this.handleVerticalScrollMouseMove, true)
-      window.removeEventListener('mouseup', this.handleVerticalScrollMouseUp, true)
-      this.verticalScrollbarActivated = false
+      window.removeEventListener('mousemove', this.handleYScrollMouseMove, true)
+      window.removeEventListener('mouseup', this.handleYScrollMouseUp, true)
+      this.yBarPressed = false
       this.sync()
       if (!this.mergedContainerRef().contains(e.target)) {
-        this.hideScrollbar()
+        this.hideBar()
       }
     }
   }

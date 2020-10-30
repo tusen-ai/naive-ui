@@ -282,11 +282,12 @@ export default {
     },
     setPendingTmNode (tmNode, doScroll = false) {
       if (tmNode !== null) this.pendingTmNode = tmNode
-      if (doScroll && this.virtualScroll) {
-        const {
-          virtualListRef
-        } = this
-        virtualListRef.scrollTo({ index: tmNode.fIndex })
+      if (doScroll) {
+        if (this.virtualScroll) {
+          this.virtualListRef.scrollTo({ index: tmNode.fIndex })
+        } else {
+          this.scrollbarRef.scrollTo({ index: tmNode.fIndex, elSize: this.itemSize })
+        }
       }
     }
   }
