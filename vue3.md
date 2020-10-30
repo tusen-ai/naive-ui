@@ -93,9 +93,6 @@ placeable 进行了大调整
     - `v-model` => `v-model:value`
   - deprecate
     - `on-change` => `on-update:value`
-  - bug
-    - time-picker close animation
-    - invalid time (TODO: hoist invalid)
 - [x] descriptions
 - [x] divider
 - [x] drawer
@@ -189,9 +186,8 @@ placeable 进行了大调整
     - `overlay-style` => `body-style`
   - remove
     - default hide behavior for preset
-  - TODO
-    - BUG:
-      - dialog preset slot
+  - BUG:
+    - dialog preset slot (below vue 3.0.2)
 - [x] notification
   - deprecate
     - `open` => `create`
@@ -278,13 +274,11 @@ placeable 进行了大调整
 - [x] timeline
 - [x] tooltip
   - ref
-- [ ] transfer
+- [x] transfer
   - break
     - `v-model` => `v-model:value`
   - deprecate
     - `on-change` => `on-update:value`
-  - TODO
-    - `virtual`
 - [x] tree
   - break
     - `v-model` => `v-model:selected-keys`
