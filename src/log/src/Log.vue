@@ -8,7 +8,7 @@
       lineHeight: lineHeight,
       height: styleHeight
     }"
-    @wheel="handleWheel"
+    @wheel.passive="handleWheel"
   >
     <n-scrollbar
       ref="scrollbarRef"
