@@ -4,10 +4,11 @@ Left, right, left, right... As a boring guy, I can play it all day.
 ## Demos
 ```demo
 basic
+large-data
 size
 filterable
 ```
-<!-- large-data -->
+<!--  -->
 
 ## Props
 |Name|Type|Default|Description|
@@ -24,7 +25,7 @@ filterable
 |theme|`'light' \| 'dark' \| string`|`undefined`||
 |value|`Array<string \| number>`|`null`||
 |on-update:value|`(value: Array<string \| number>) => any`|`undefined`||
-<!-- |virtual-scroll|`boolean`|`false`|If use virtual scroll on transfer. If set to `true` it can handles large data (and turn transfer animation off)| -->
+|virtual-scroll|`boolean`|`false`|If use virtual scroll on transfer. If set to `true` it can handles large data (and turn transfer animation off)|
 
 ### TransferOption Type
 |Property|Type|Description|

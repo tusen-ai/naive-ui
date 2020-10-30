@@ -27,6 +27,6 @@ export default {
       options: createOptions(),
       value: createValues()
     }
-  },
+  }
 }
 ```

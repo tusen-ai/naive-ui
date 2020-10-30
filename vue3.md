@@ -309,5 +309,5 @@ placeable 进行了大调整
   - clean delegate
   - site production tag (bug)
   - [x] demo scrollbar 的问题
-  - table x scroll 右侧阴影不消失
+  - [x] table x scroll 右侧阴影不消失
   - [x] log scrollTo 有点问题

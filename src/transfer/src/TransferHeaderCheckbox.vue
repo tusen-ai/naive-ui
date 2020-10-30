@@ -5,7 +5,7 @@
     :indeterminate="checkboxProps.indeterminate"
     :disabled="checkboxProps.disabled"
     :size="NTransfer.mergedSize"
-    @change="onChange"
+    @update:checked="onChange"
   />
 </template>
 

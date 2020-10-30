@@ -1,12 +1,12 @@
-import { c, cTB, cB, cM } from '../../../_utils/cssr'
+import { c, cTB, cB, cM, createKey } from '../../../_utils/cssr'
 import depx from '../../../_utils/css/depx'
 import pxfy from '../../../_utils/css/pxfy'
 
 export default c([
   ({ props }) => {
     const size = props.$instance.mergedSize
-    const height = props.$local.height[size]
-    const fontSize = props.$local.fontSize[size]
+    const height = props.$local[createKey('itemHeight', size)]
+    const fontSize = props.$local[createKey('fontSize', size)]
     return [
       c(`@keyframes transfer-height-collapse--${size}`, {
         raw: `

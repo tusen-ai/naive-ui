@@ -4,10 +4,10 @@
 ## 演示
 ```demo
 basic
+large-data
 size
 filterable
 ```
-<!-- large-data -->
 
 ## Props
 |名称|类型|默认值|说明|
@@ -24,7 +24,7 @@ filterable
 |theme|`'light' \| 'dark' \| string`|`undefined`||
 |value|`Array<string \| number>`|`null`||
 |on-update:value|`(value: Array<string \| number>) => any`|`undefined`||
-<!-- |virtual-scroll|`boolean`|`false`|If use virtual scroll on transfer. If set to `true` it can handles large data (and turn transfer animation off)| -->
+|virtual-scroll|`boolean`|`false`|If use virtual scroll on transfer. If set to `true` it can handles large data (and turn transfer animation off)|
 
 ### TransferOption Type
 |属性|类型|说明|

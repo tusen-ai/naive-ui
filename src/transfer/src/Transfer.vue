@@ -33,7 +33,7 @@
             @focus="handleInputFocus"
             @blur="handleInputBlur"
           >
-            <template v-slot:suffix>
+            <template #suffix>
               <n-icon :size="16">
                 <search-icon />
               </n-icon>
@@ -42,32 +42,36 @@
         </div>
         <div class="n-transfer-list-flex-container">
           <template v-if="filteredSrcOpts.length">
-            <!-- <n-scrollbar
+            <n-scrollbar
               v-if="virtualScroll"
+              ref="srcScrollerRef"
               :theme="mergedTheme"
-              :container="sourceScrollContainer"
-              :content="sourceScrollContent"
+              :container="srcScrollContainer"
+              :content="srcScrollContent"
             >
-              <recycle-scroller
-                v-if="virtualScroll"
-                ref="sourceVirtualScroller"
+              <virtual-list
+                ref="srcVlRef"
                 class="n-virtual-scroller n-transfer-list-content"
-                :items="filteredSourceOptions"
+                :items="filteredSrcOpts"
                 :item-size="itemSize"
-                key-field="value"
+                :show-scrollbar="false"
+                @resize="syncSrcVLScroller"
+                @scroll="syncSrcVLScroller"
               >
-                <template v-slot="{ item: option }">
+                <template #="{ item }">
                   <n-transfer-source-list-item
-                    :key="option.value"
-                    :value="option.value"
-                    :disabled="!!option.disabled"
-                    :label="option.label"
-                    @click="handleSourceCheckboxClick"
+                    :key="item.value"
+                    :value="item.value"
+                    :disabled="item.disabled"
+                    :label="item.label"
                   />
                 </template>
-              </recycle-scroller>
-            </n-scrollbar> -->
-            <n-scrollbar :theme="mergedTheme">
+              </virtual-list>
+            </n-scrollbar>
+            <n-scrollbar
+              v-else
+              :theme="mergedTheme"
+            >
               <div class="n-transfer-list-content">
                 <transition-group name="item" :appear="isMounted" :css="!isInputing">
                   <n-transfer-source-list-item
@@ -123,7 +127,7 @@
             @focus="handleInputFocus"
             @blur="handleInputBlur"
           >
-            <template v-slot:suffix>
+            <template #suffix>
               <n-icon :size="16">
                 <search-icon />
               </n-icon>
@@ -132,32 +136,36 @@
         </div>
         <div class="n-transfer-list-flex-container">
           <template v-if="filteredTgtOpts.length">
-            <!-- <n-scrollbar
+            <n-scrollbar
               v-if="virtualScroll"
+              ref="tgtScrollerRef"
               :theme="mergedTheme"
-              :container="targetScrollContainer"
-              :content="targetScrollContent"
+              :container="tgtScrollContainer"
+              :content="tgtScrollContent"
             >
-              <recycle-scroller
-                v-if="virtualScroll"
-                ref="targetVirtualScroller"
+              <virtual-list
+                ref="tgtVlRef"
                 class="n-virtual-scroller n-transfer-list-content"
                 :items="filteredTgtOpts"
                 :item-size="itemSize"
-                key-field="value"
+                :show-scrollbar="false"
+                @resize="syncTgtVLScroller"
+                @scroll="syncTgtVLScroller"
               >
-                <template v-slot="{ item: option }">
+                <template #default="{ item: option }">
                   <n-transfer-target-list-item
                     :key="option.value"
                     :value="option.value"
                     :disabled="!!option.disabled"
                     :label="option.label"
-                    @click="handleTargetCheckboxClick"
                   />
                 </template>
-              </recycle-scroller>
-            </n-scrollbar> -->
-            <n-scrollbar :theme="mergedTheme">
+              </virtual-list>
+            </n-scrollbar>
+            <n-scrollbar
+              v-else
+              :theme="mergedTheme"
+            >
               <div class="n-transfer-list-content">
                 <transition-group name="item" :appear="isMounted" :css="!isInputing">
                   <n-transfer-target-list-item
@@ -182,6 +190,9 @@
 </template>
 
 <script>
+import { ref } from 'vue'
+import { VirtualList } from 'vueuc'
+import { useIsMounted } from 'vooks'
 import NScrollbar from '../../scrollbar'
 import NTransferHeaderCheckbox from './TransferHeaderCheckbox.vue'
 import NTransferHeaderExtra from './TransferHeaderExtra.vue'
@@ -200,9 +211,9 @@ import {
   locale
 } from '../../_mixins'
 import styles from './styles'
-import { warn } from '../../_utils/naive'
-import { call } from '../../_utils/vue'
-import { useIsMounted } from 'vooks'
+import { depx } from '../../_utils/css'
+import { createKey } from '../../_utils/cssr'
+import { warn, call } from '../../_utils'
 import { data } from './data-utils'
 
 export default {
@@ -217,8 +228,8 @@ export default {
     NInput,
     NIcon,
     NEmpty,
-    SearchIcon
-    // RecycleScroller
+    SearchIcon,
+    VirtualList
   },
   mixins: [
     configurable,
@@ -280,7 +291,7 @@ export default {
       validator (value) {
         return ['small', 'medium', 'large'].includes(value)
       },
-      default: null
+      default: undefined
     },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:value': {
@@ -303,7 +314,16 @@ export default {
   setup (props) {
     return {
       isMounted: useIsMounted(),
+      srcScrollerRef: ref(null),
+      tgtScrollerRef: ref(null),
+      srcVlRef: ref(null),
+      tgtVlRef: ref(null),
       ...data(props)
+    }
+  },
+  computed: {
+    itemSize () {
+      return depx(this.cssrProps.$local[createKey('itemHeight', this.mergedSize)])
     }
   },
   methods: {
@@ -373,6 +393,31 @@ export default {
       const tgtCheckedValueSet = new Set(this.tgtCheckedValues)
       this.doUpdateValue((this.value || []).filter(v => !tgtCheckedValueSet.has(v)))
       this.tgtCheckedValues = []
+    },
+    // scroll related
+    syncSrcVLScroller () {
+      const {
+        srcScrollerRef
+      } = this
+      srcScrollerRef && srcScrollerRef.sync()
+    },
+    syncTgtVLScroller () {
+      const {
+        tgtScrollerRef
+      } = this
+      tgtScrollerRef && tgtScrollerRef.sync()
+    },
+    srcScrollContainer () {
+      return this.srcVlRef?.listRef
+    },
+    srcScrollContent () {
+      return this.srcVlRef?.itemsRef
+    },
+    tgtScrollContainer () {
+      return this.tgtVlRef?.listRef
+    },
+    tgtScrollContent () {
+      return this.tgtVlRef?.itemsRef
     }
   }
 }
