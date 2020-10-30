@@ -222,28 +222,34 @@ export default {
       } = this
       const {
         slient,
-        y,
+        top,
         position
       } = options
       if (slient) {
         this.slient = true
       }
-      if (y !== undefined) {
-        scrollbarRef.scrollTo(0, y)
+      if (top !== undefined) {
+        scrollbarRef.scrollTo({ left: 0, top })
       } else if (position === 'bottom') {
-        scrollbarRef.scrollTo(0, Number.MAX_SAFE_INTEGER)
+        scrollbarRef.scrollTo({ position: 'top' })
       } else if (position === 'top') {
-        scrollbarRef.scrollTo(0, 0)
+        scrollbarRef.scrollTo({ position: 'bottom' })
       }
     },
     // deprecated
     scrollToTop (slient = false) {
       warn('log', '`scrollToTop` is deprecated, please use `scrollTo({ position: \'top\'})` instead.')
-      this.scrollTo('top', slient)
+      this.scrollTo({
+        position: 'top',
+        slient
+      })
     },
     scrollToBottom (slient = false) {
       warn('log', '`scrollToTop` is deprecated, please use `scrollTo({ position: \'bottom\'})` instead.')
-      this.scrollTo('bottom', slient)
+      this.scrollTo({
+        position: 'bottom',
+        slient
+      })
     }
   }
 }

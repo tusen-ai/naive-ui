@@ -53,4 +53,4 @@ loading
 ## Methods
 |Name|Parameters|Description|
 |-|-|-|
-|scrollTo|`(options: { y?: number, position?: 'top' \| 'bottom', slient?: boolean })`||
+|scrollTo|`(options: { top?: number, position?: 'top' \| 'bottom', slient?: boolean })`||

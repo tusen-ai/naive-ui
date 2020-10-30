@@ -53,4 +53,4 @@ loading
 ## Methods
 |名称|参数|说明|
 |-|-|-|
-|scrollTo|`(options: { y?: number, position?: 'top' \| 'bottom', slient?: boolean })`||
+|scrollTo|`(options: { top?: number, position?: 'top' \| 'bottom', slient?: boolean })`||

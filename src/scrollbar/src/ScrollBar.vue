@@ -330,12 +330,12 @@ export default {
           }
           return
         }
-        container.scrollTo({
-          left,
-          top,
-          behavior
-        })
       }
+      container.scrollTo({
+        left,
+        top,
+        behavior
+      })
     },
     handleMouseEnterWrapper () {
       this.showXBar()
