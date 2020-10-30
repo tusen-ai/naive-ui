@@ -14,7 +14,7 @@
           ref="menuRef"
           v-clickoutside="handleClickOutside"
           class="n-cascader-menu"
-          auto-pending-first-option
+          auto-pending
           :theme="theme"
           :pattern="pattern"
           :tree-mate="selectTreeMate"

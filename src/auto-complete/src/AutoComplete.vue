@@ -53,7 +53,7 @@
               v-if="active"
               ref="menu"
               v-clickoutside="handleClickOutsideMenu"
-              auto-pending-first-option
+              auto-pending
               class="n-auto-complete-menu"
               :theme="mergedTheme"
               :pattern="value"

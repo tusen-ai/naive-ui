@@ -68,7 +68,7 @@
               ref="menuRef"
               v-clickoutside="handleMenuClickOutside"
               class="n-select-menu"
-              auto-pending-first-option
+              auto-pending
               :theme="mergedTheme"
               :pattern="pattern"
               :tree-mate="treeMate"

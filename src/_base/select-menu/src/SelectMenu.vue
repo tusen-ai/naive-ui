@@ -140,7 +140,7 @@ export default {
       type: [Number, String],
       default: undefined
     },
-    autoPendingFirstOption: {
+    autoPending: {
       type: Boolean,
       default: false
     },
@@ -162,8 +162,10 @@ export default {
     const virtualListRef = ref(null)
     const scrollbarRef = ref(null)
     const pendingNodeRef = ref(
-      props.autoPendingFirstOption
-        ? props.treeMate.getFirstAvailableNode()
+      props.autoPending
+        ? props.value === null
+          ? props.treeMate.getFirstAvailableNode()
+          : props.treeMate.getNode(props.value)
         : null
     )
     onMounted(() => {
@@ -215,7 +217,7 @@ export default {
   },
   watch: {
     treeMate (value) {
-      if (this.autoPendingFirstOption) {
+      if (this.autoPending) {
         const tmNode = this.treeMate.getFirstAvailableNode()
         this.setPendingTmNode(tmNode)
       } else {
