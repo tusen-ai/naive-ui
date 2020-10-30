@@ -1,7 +1,5 @@
 import { h } from 'vue'
 
-const env = process.env.NODE_ENV
-
 const appendCounts = item => {
   if (!item.childItems) {
     item.count = 1
@@ -37,13 +35,13 @@ const appendCounts = item => {
 }
 
 const appendDeprecatedDemos = (item, mode) => {
-  if ((env === 'development' && mode === 'debug') || localStorage.getItem('nimbus')) {
+  if ((__DEV__ && mode === 'debug') || localStorage.getItem('nimbus')) {
     return [item]
   } else return []
 }
 
 const appendDebugDemos = (item, mode) => {
-  if (env === 'development' && mode === 'debug') {
+  if (__DEV__ && mode === 'debug') {
     return [item]
   } else return []
 }

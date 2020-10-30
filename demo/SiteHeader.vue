@@ -48,7 +48,7 @@
           {{ langOptions[lang].label }}
         </n-tag>
         <n-tag
-          v-if="env === 'development'"
+          v-if="dev"
           class="nav-picker"
           @click="handleModeChange"
         >
@@ -62,7 +62,7 @@
 <script>
 import { computed, readonly, ref } from 'vue'
 import version from '../src/version'
-import { useSiteTheme, useSiteLang, displayModeRef, envRef, i18n } from './util-compositions'
+import { useSiteTheme, useSiteLang, displayModeRef, i18n } from './util-composables'
 
 function match (pattern, string) {
   if (!pattern.length) return true
@@ -129,7 +129,7 @@ export default {
       t,
       searchInputValue: ref(''),
       version,
-      env: envRef,
+      dev: __DEV__,
       displayMode: displayModeRef,
       lang: useSiteLang(),
       theme: useSiteTheme(),

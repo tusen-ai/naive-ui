@@ -44,7 +44,7 @@
 import LandingFooter from './Footer.vue'
 import leftImage from './Left.vue'
 import rightImage from './Right.vue'
-import { i18n } from '../../util-compositions'
+import { i18n } from '../../util-composables'
 
 export default {
   inject: {

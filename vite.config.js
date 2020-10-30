@@ -16,6 +16,6 @@ module.exports = {
   },
   define: {
     'process.env.NODE_ENV': `'${process.env.NODE_ENV}'`,
-    '__DEV__': process.env === 'development'
+    '__DEV__': process.env !== 'production'
   }
 }

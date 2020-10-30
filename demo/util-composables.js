@@ -30,8 +30,6 @@ export function useSiteLang () {
   return toRef(inject('SiteProvider'), 'lang')
 }
 
-export const envRef = ref(process.env.NODE_ENV)
-
 export const i18n = function (data) {
   const configProvider = inject('NConfigProvider', null)
   return {

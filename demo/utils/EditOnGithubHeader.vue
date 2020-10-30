@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { i18n } from '../util-compositions'
+import { i18n } from '../util-composables'
 
 export default {
   name: 'EditOnGithubHeader',

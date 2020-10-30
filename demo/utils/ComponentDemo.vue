@@ -61,7 +61,7 @@
 <script>
 import { nextTick } from 'vue'
 import codeOutline from 'naive-ui/lib/icons/code-outline.vue'
-import { displayModeRef, i18n } from '../util-compositions'
+import { displayModeRef, i18n } from '../util-composables'
 
 export default {
   components: {
