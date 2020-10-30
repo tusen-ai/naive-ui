@@ -51,7 +51,7 @@
     <slot name="content" />
     <slot name="demo" />
     <template v-if="showCode" v-slot:footer>
-      <n-scrollbar>
+      <n-scrollbar x-scrollable>
         <slot name="code" />
       </n-scrollbar>
     </template>
