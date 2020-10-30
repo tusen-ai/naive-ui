@@ -1,14 +1,10 @@
 import { c, cTB, cM, cB } from '../../../_utils/cssr'
+import { changeColor } from '../../../_utils/color'
 
 export default c([
   ({ props }) => {
     const {
-      color,
-      opacity1Depth,
-      opacity2Depth,
-      opacity3Depth,
-      opacity4Depth,
-      opacity5Depth
+      color
     } = props.$local
     const { cubicBezierEaseInOut } = props.$base
     return [
@@ -35,27 +31,13 @@ export default c([
           height: '1em',
           width: '1em'
         }),
-        cM('1-depth', {
-          opacity: opacity1Depth
-        }),
-        cM('2-depth', {
-          opacity: opacity2Depth
-        }),
-        cM('3-depth', {
-          opacity: opacity3Depth
-        }),
-        cM('4-depth', {
-          opacity: opacity4Depth
-        }),
-        cM('5-depth', {
-          opacity: opacity5Depth
-        })
+        [1, 2, 3, 4, 5].map(v => cM(`${v}-depth`, {
+          color: changeColor(color, { alpha: props.$local[`opacity${v}Depth`] })
+        }))
       ]),
       [1, 2, 3, 4, 5].map(v => cB(`icon-${v}-depth >`, [
         cTB('icon', {
-          fill: color,
-          stroke: color,
-          opacity: props.$local[`opacity${v}Depth`]
+          color: changeColor(color, { alpha: props.$local[`opacity${v}Depth`] })
         })
       ]))
     ]
