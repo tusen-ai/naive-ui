@@ -1,0 +1,11 @@
+@font-face{
+  font-family:naive-ui;
+  font-weight:400;
+  src:url(assets/LatoLatin-Regular.woff2);
+}
+
+@font-face{
+  font-family:naive-ui;
+  font-weight:500;
+  src:url(assets/LatoLatin-Semibold.woff2);
+}

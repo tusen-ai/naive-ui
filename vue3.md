@@ -311,3 +311,5 @@ placeable 进行了大调整
 - remove
   - nimbus form card
   - nimbus icon
+
+`naive-ui/lib/styles/fonts/X.css` => `naive-ui/fonts/X.css`

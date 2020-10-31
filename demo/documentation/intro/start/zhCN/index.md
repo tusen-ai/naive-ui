@@ -15,10 +15,10 @@ import naive from 'naive-ui'
 
 // 如果需要使用 UI 内置的字体，可以按需添加下面的代码
 // 通用字体，多选一
-import 'naive-ui/lib/styles/fonts/Lato.css'
-import 'naive-ui/lib/styles/fonts/FiraSans.css'
+import 'naive-ui/fonts/Lato.css'
+import 'naive-ui/fonts/FiraSans.css'
 // 等宽字体
-import 'naive-ui/lib/styles/fonts/FiraCode.css'
+import 'naive-ui/fonts/FiraCode.css'
 
 const app = createApp()
 app.use(naive)
