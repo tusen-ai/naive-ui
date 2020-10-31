@@ -1,4 +1,6 @@
-import enUS from 'date-fns/locale/en-US'
+import {
+  enUS
+} from 'date-fns/locale'
 
 export default {
   _name: 'en-US',

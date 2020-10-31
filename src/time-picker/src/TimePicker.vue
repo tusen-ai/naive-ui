@@ -190,19 +190,21 @@ import NInput from '../../input'
 import NIcon from '../../icon'
 import { configurable, themeable, locale, usecssr, asformitem, placeable } from '../../_mixins'
 import { zindexable, clickoutside } from '../../_directives'
-import isValid from 'date-fns/isValid'
-import startOfSecond from 'date-fns/startOfSecond'
-import startOfMinute from 'date-fns/startOfMinute'
-import startOfHour from 'date-fns/startOfHour'
-import format from 'date-fns/format'
-import set from 'date-fns/set'
-import setHours from 'date-fns/setHours'
-import setMinutes from 'date-fns/setMinutes'
-import setSeconds from 'date-fns/setSeconds'
-import getTime from 'date-fns/getTime'
-import getMinutes from 'date-fns/getMinutes'
-import getHours from 'date-fns/getHours'
-import getSeconds from 'date-fns/getSeconds'
+import {
+  isValid,
+  startOfSecond,
+  startOfMinute,
+  startOfHour,
+  format,
+  set,
+  setHours,
+  setMinutes,
+  setSeconds,
+  getTime,
+  getMinutes,
+  getHours,
+  getSeconds
+} from 'date-fns'
 import { strictParse } from '../../date-picker/src/utils'
 import keyboardDelegate from '../../_utils/delegate/keyboardDelegate'
 import NBaseFocusDetector from '../../_base/focus-detector'

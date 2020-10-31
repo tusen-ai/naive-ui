@@ -1,4 +1,6 @@
-import zhCN from 'date-fns/locale/zh-CN'
+import {
+  zhCN
+} from 'date-fns/locale'
 
 export default {
   _name: 'zh-CN',

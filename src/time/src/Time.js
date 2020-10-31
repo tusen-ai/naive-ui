@@ -1,7 +1,5 @@
 import { h, createTextVNode } from 'vue'
-import format from 'date-fns/format'
-import formatDistance from 'date-fns/formatDistance'
-import fromUnixTime from 'date-fns/fromUnixTime'
+import { format, formatDistance, fromUnixTime } from 'date-fns'
 import locale from '../../_mixins/locale'
 
 export default {

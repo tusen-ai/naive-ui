@@ -1,33 +1,29 @@
-const vue = require('rollup-plugin-vue')
-const resolve = require('@rollup/plugin-node-resolve')
+const vuePlugin = require('rollup-plugin-vue')
+const { nodeResolve } = require('@rollup/plugin-node-resolve')
 const { terser } = require('rollup-plugin-terser')
 
-function externalValidator (patterns) {
-  return id => patterns.some(pattern => id.startsWith(pattern))
-}
-
 module.exports = {
-  preserveModules: true,
   input: 'src/index.js',
   output: [
     {
       format: 'cjs',
-      dir: 'lib'
+      dir: 'lib',
+      exports: 'named',
+      preserveModules: true
     },
     {
       format: 'esm',
-      dir: 'es'
+      dir: 'es',
+      preserveModules: true
     }
   ],
   plugins: [
-    resolve({
+    nodeResolve({
       extensions: ['.js', '.json', '.vue']
     }),
-    vue({
-      template: {
-        compilerOptions: {
-          whitespace: 'condense'
-        }
+    vuePlugin({
+      compilerOptions: {
+        whitespace: 'condense'
       }
     }),
     terser({
@@ -38,14 +34,16 @@ module.exports = {
       }
     })
   ],
-  external: externalValidator([
+  external: [
     'async-validator',
     'date-fns',
+    'date-fns/locale',
     'lodash-es',
-    'vue-runtime-helpers',
+    'vue',
+    'treemate',
     'css-render',
     '@css-render/plugin-bem',
     'vueuc',
     'vooks'
-  ])
+  ]
 }

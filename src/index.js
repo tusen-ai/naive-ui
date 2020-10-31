@@ -210,9 +210,7 @@ import baseSelectionLightStyle from './_base/selection/styles/light'
 import baseSelectionDarkStyle from './_base/selection/styles/dark'
 
 // Deprecated Components
-import NimbusFormCard from './_deprecated/NimbusFormCard'
 import NimbusServiceLayout from './_deprecated/NimbusServiceLayout'
-import NimbusIcon from './_deprecated/NimbusIcon'
 
 // deprecated
 import { lightStyleScheme, darkStyleScheme } from './_deprecated/style-scheme'
@@ -299,9 +297,7 @@ export default create({
     Space,
     Rate,
     // Deprecated
-    NimbusServiceLayout,
-    NimbusFormCard,
-    NimbusIcon
+    NimbusServiceLayout
   ],
   styles: [
     // base style, essential
