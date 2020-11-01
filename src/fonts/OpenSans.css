@@ -1,11 +1,11 @@
 @font-face {
-  font-family: 'naive-ui';
+  font-family: "naive-ui";
   font-weight: 400;
-  src: url('./assets/OpenSans-Regular.ttf');
+  src: url("./assets/OpenSans-Regular.ttf");
 }
 
 @font-face {
-  font-family: 'naive-ui';
+  font-family: "naive-ui";
   font-weight: 500;
-  src: url('./assets/OpenSans-SemiBold.ttf');
+  src: url("./assets/OpenSans-SemiBold.ttf");
 }

@@ -1,11 +1,11 @@
 @font-face {
-  font-family: 'naive-ui';
+  font-family: "naive-ui";
   font-weight: 400;
-  src: url('./assets/FiraSans-Regular.woff2');
+  src: url("./assets/FiraSans-Regular.woff2");
 }
 
 @font-face {
-  font-family: 'naive-ui';
+  font-family: "naive-ui";
   font-weight: 500;
-  src: url('./assets/FiraSans-Medium.woff2');
+  src: url("./assets/FiraSans-Medium.woff2");
 }
