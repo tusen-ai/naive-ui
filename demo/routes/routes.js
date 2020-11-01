@@ -6,7 +6,7 @@ export const childRoutes = withPrefix('/:lang/:theme/doc', [
   { path: '/start', component: () => import('../documentation/intro/start/index.entry') },
   { path: '/experimental-features', component: () => import('../documentation/intro/experimental-features/index.entry') },
   { path: '/changelog', component: () => import('../documentation/intro/changelog/index.entry') },
-  { path: '/dev-guildlines', component: () => import('../documentation/intro/dev-guildlines/index.entry') },
+  { path: '/dev-guidelines', component: () => import('../documentation/intro/dev-guidelines/index.entry') },
   { path: '/n-theme', component: () => import('../documentation/theme/index.entry') },
   // components
   { path: '/n-layout', component: () => import('../documentation/components/layout/index.entry') },
@@ -14,7 +14,7 @@ export const childRoutes = withPrefix('/:lang/:theme/doc', [
   { path: '/n-icon', component: () => import('../documentation/components/icon/index.entry') },
   { path: '/n-checkbox', component: () => import('../documentation/components/checkbox/index.entry') },
   { path: '/n-button', component: () => import('../documentation/components/button/index.entry') },
-  { path: '/n-switch', component: () => import('../documentation/components/nswitch/index.entry') },
+  { path: '/n-switch', component: () => import('../documentation/components/switch/index.entry') },
   { path: '/n-data-table', component: () => import('../documentation/components/data-table/index.entry') },
   { path: '/n-input', component: () => import('../documentation/components/input/index.entry') },
   { path: '/n-select', component: () => import('../documentation/components/select/index.entry') },

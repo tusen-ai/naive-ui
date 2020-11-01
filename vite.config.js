@@ -1,10 +1,11 @@
 const path = require('path')
+const alias = require('@rollup/plugin-alias')
 
-const mdPlugin = require('./demo/vite-plugins/mdPlugin')
+const { viteMdPlugin, rollupMdPlugin } = require('./demo/vite-plugins/mdPlugin')
 
 module.exports = {
   root: __dirname,
-  plugins: [ mdPlugin() ],
+  plugins: [ viteMdPlugin() ],
   optimizeDeps: {
     include: [
       'highlight.js/lib/languages/cpp',
@@ -22,5 +23,18 @@ module.exports = {
   define: {
     'process.env.NODE_ENV': `'${process.env.NODE_ENV}'`,
     '__DEV__': process.env !== 'production'
+  },
+  rollupInputOptions: {
+    plugins: [
+      alias({
+        entries: [
+          {
+            find: /^naive-ui\/lib\/icons\//g,
+            replacement: './src/_deprecated/icons/'
+          }
+        ]
+      }),
+      rollupMdPlugin()
+    ]
   }
 }
