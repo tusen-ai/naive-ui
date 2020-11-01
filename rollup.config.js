@@ -8,7 +8,7 @@ module.exports = {
     {
       format: 'cjs',
       dir: 'lib',
-      exports: 'named',
+      exports: 'auto',
       preserveModules: true
     },
     {

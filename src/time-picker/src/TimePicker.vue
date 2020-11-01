@@ -208,7 +208,7 @@ import {
 import { strictParse } from '../../date-picker/src/utils'
 import keyboardDelegate from '../../_utils/delegate/keyboardDelegate'
 import NBaseFocusDetector from '../../_base/focus-detector'
-import TimeIcon from '../../_icons/time-outline.vue'
+import TimeIcon from '../../_deprecated/icons/time-outline.vue'
 import styles from './styles'
 import { warn, call, KEY_CODE } from '../../_utils'
 

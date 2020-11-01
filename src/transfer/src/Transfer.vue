@@ -202,7 +202,7 @@ import NTransferButton from './TransferButton.vue'
 import NInput from '../../input'
 import NIcon from '../../icon'
 import NEmpty from '../../empty'
-import SearchIcon from '../../_icons/ios-search.vue'
+import SearchIcon from '../../_deprecated/icons/ios-search.vue'
 import {
   configurable,
   asformitem,

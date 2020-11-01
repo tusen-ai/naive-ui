@@ -61,8 +61,8 @@
 
 <script>
 import NIcon from '../../icon/index'
-import RemoveIcon from '../../_icons/remove-outline.vue'
-import AddIcon from '../../_icons/add-outline.vue'
+import RemoveIcon from '../../_deprecated/icons/remove-outline.vue'
+import AddIcon from '../../_deprecated/icons/add-outline.vue'
 import {
   configurable,
   themeable,

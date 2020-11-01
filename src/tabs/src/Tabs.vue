@@ -97,9 +97,9 @@ import {
   themeable,
   usecssr
 } from '../../_mixins'
-import BackwardIcon from '../../_icons/ios-arrow-back.vue'
-import ForwardIcon from '../../_icons/ios-arrow-forward.vue'
-import CloseIcon from '../../_icons/md-close.vue'
+import BackwardIcon from '../../_deprecated/icons/ios-arrow-back.vue'
+import ForwardIcon from '../../_deprecated/icons/ios-arrow-forward.vue'
+import CloseIcon from '../../_deprecated/icons/md-close.vue'
 import { VResizeObserver } from 'vueuc'
 import { throttle } from 'lodash-es'
 import styles from './styles'

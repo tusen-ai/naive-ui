@@ -298,7 +298,7 @@ placeable 进行了大调整
     - unify composition
   - remove hollowoutable
   - vite-build
-  - rollup-build
+  - [x] rollup-build
     - [ ] wait for new version of rollup-plugin-vue,
       https://github.com/vuejs/rollup-plugin-vue/issues/408
   - tusimple theme
@@ -313,3 +313,6 @@ placeable 进行了大调整
   - nimbus icon
 
 `naive-ui/lib/styles/fonts/X.css` => `naive-ui/fonts/X.css`
+deprecate
+`naive-ui/lib/icons` => `vicons`
+`naive-ui/es/icons` => `vicons`

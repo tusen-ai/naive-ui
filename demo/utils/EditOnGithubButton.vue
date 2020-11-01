@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import editIcon from '../../src/_icons/git-commit-outline.vue'
+import editIcon from '../../src/_deprecated/icons/git-commit-outline.vue'
 import githubUrl from './github-url'
 
 export default {

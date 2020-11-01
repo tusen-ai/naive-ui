@@ -225,7 +225,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .nav {
   display: grid;
   grid-template-columns: 288px 1fr auto 32px;
@@ -255,8 +255,9 @@ export default {
 .nav-picker {
   cursor: pointer;
   margin-right: 12px;
-  &:last-child {
-    margin-right: 0;
-  }
+}
+
+.nav-picker:last-child {
+  margin-right: 0;
 }
 </style>

@@ -4,7 +4,7 @@ import ComponentDocumentation from './utils/ComponentDocumentation.vue'
 import DocumentationWrapper from './utils/DocumentationWrapper.vue'
 import EditOnGithubButton from './utils/EditOnGithubButton.vue'
 import EditOnGithubHeader from './utils/EditOnGithubHeader.vue'
-import './styles/demo.scss'
+import './styles/demo.css'
 
 export function installDemoComponents (app) {
   app.component('ComponentDemo', ComponentDemo)

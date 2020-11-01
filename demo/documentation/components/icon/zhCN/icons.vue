@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import icons from '../../../../../src/_icons/index'
+import icons from '../../../../../src/_deprecated/icons/index'
 import iconWrapper from './iconWrapper'
 import { modeRef } from '../../../../use-dev-mode'
 

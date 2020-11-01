@@ -43,7 +43,7 @@
 <script>
 import NTag from '../../tag'
 import NIcon from '../../icon'
-import AddIcon from '../../_icons/add-outline.vue'
+import AddIcon from '../../_deprecated/icons/add-outline.vue'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import asformitem from '../../_mixins/asformitem'

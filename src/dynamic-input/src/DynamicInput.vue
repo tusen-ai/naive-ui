@@ -48,8 +48,8 @@
 <script>
 import NButton from '../../button'
 import NButtonGroup from '../../button-group'
-import mdAdd from '../../_icons/md-add.vue'
-import mdRemove from '../../_icons/md-remove.vue'
+import mdAdd from '../../_deprecated/icons/md-add.vue'
+import mdRemove from '../../_deprecated/icons/md-remove.vue'
 import NDynamicInputInputPreset from './InputPreset.vue'
 import NDynamicInputPairPreset from './PairPreset.vue'
 import withapp from '../../_mixins/withapp'

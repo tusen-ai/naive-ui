@@ -67,7 +67,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .demo {
   z-index: auto;
   position: absolute;
@@ -77,9 +77,6 @@ export default {
   bottom: 0;
   min-width: 1080px;
 }
-</style>
-
-<style lang="scss">
 body {
   -webkit-text-size-adjust: 100%;
 }

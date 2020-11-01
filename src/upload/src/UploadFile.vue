@@ -57,11 +57,11 @@
 
 <script>
 import NButton from '../../button'
-import closeOutline from '../../_icons/close-outline.vue'
-import downloadOutline from '../../_icons/download-outline.vue'
-import trashOutline from '../../_icons/trash-outline.vue'
+import closeOutline from '../../_deprecated/icons/close-outline.vue'
+import downloadOutline from '../../_deprecated/icons/download-outline.vue'
+import trashOutline from '../../_deprecated/icons/trash-outline.vue'
 import NUploadProgress from './UploadProgress.vue'
-import attachOutline from '../../_icons/attach-outline.vue'
+import attachOutline from '../../_deprecated/icons/attach-outline.vue'
 import NIcon from '../../icon'
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 import { warn } from '../../_utils/naive'

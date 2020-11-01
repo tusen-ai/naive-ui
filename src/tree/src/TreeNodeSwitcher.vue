@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import mdArrowDropright from '../../_icons/md-arrow-dropright.vue'
+import mdArrowDropright from '../../_deprecated/icons/md-arrow-dropright.vue'
 import NBaseLoading from '../../_base/loading'
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 

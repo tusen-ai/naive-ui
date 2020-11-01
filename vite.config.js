@@ -6,11 +6,16 @@ module.exports = {
   root: __dirname,
   plugins: [ mdPlugin() ],
   optimizeDeps: {
-    include: ['highlight.js/lib/languages/cpp', 'highlight.js/lib/highlight',
-      'highlight.js/lib/languages/javascript', 'highlight.js/lib/languages/python', 'vooks']
+    include: [
+      'highlight.js/lib/languages/cpp',
+      'highlight.js/lib/highlight',
+      'highlight.js/lib/languages/javascript',
+      'highlight.js/lib/languages/python',
+      'vooks'
+    ]
   },
   alias: {
-    '/@naive-ui/lib/icons/': path.resolve(__dirname, './src/_icons'),
+    '/@naive-ui/lib/icons/': path.resolve(__dirname, './src/_deprecated/icons'),
     '/@naive-ui/': path.resolve(__dirname, './src'),
     'src': path.resolve(__dirname, './src')
   },
