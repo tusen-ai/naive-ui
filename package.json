@@ -7,11 +7,11 @@
   "scripts": {
     "start": "npm run dev",
     "build:fonts": "npm run clean && node build/build-fonts.js",
-    "build:icon": "npm run clean && node build/build-icon.js",
+    "build:icons": "npm run clean && node build/build-icons.js",
     "build:js": "npm run generate && npm run clean && rollup -c",
+    "build:package": "npm run generate && npm run clean && node build/build-fonts.js && node build/build-icons.js && rollup -c",
     "build:demo": "npm run build && npm run demo",
     "build:doc": "npm run generate && npm run build && rm -rf build-doc/dist && cross-env NODE_ENV=production webpack --config build/webpack.doc.js",
-    "build": "npm run clean && node build/build-fonts.js && node build/build-icon.js && rollup -c",
     "clean": "rm -rf lib && rm -rf es && rm -rf dist",
     "demo": "npm run generate && cross-env NODE_ENV=production webpack-dev-server --config build/webpack.demo.js",
     "dev": "npm run generate && cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.js",
