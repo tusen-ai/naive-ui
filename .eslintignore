@@ -1,4 +1,4 @@
 node_modules
 lib
 test/unit/coverage
-src/_icons
+src/_deprecated/icons
