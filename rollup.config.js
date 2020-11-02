@@ -21,11 +21,7 @@ module.exports = {
     nodeResolve({
       extensions: ['.js', '.json', '.vue']
     }),
-    vuePlugin({
-      compilerOptions: {
-        whitespace: 'condense'
-      }
-    }),
+    vuePlugin(),
     terser({
       mangle: false,
       output: {

@@ -2,6 +2,17 @@ const path = require('path')
 const fs = require('fs')
 const template = fs.readFileSync(path.join(__dirname, 'ComponentDocumentationEntryTemplate.vue')).toString()
 
+// user may use different index for a locale
+// for example
+// enUS/index.md
+// zhCN/index.md
+//
+// enUS/index.demo-entry.md
+// zhCN/index.demo-entry.md
+//
+// enUS/index.vue
+// zhCN/index.vue
+
 module.exports = (entryPath) => {
   let resultTemplate = template
   const replaceReg = /index/g

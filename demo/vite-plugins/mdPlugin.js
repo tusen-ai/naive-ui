@@ -42,18 +42,19 @@ module.exports = {
   },
   rollupMdPlugin: function () {
     return {
-      async transform (code, id) {
-        console.log('id', id)
+      async load (id) {
         if (id.endsWith('.demo.md')) {
+          const code = readFileSync(id).toString()
           return NaiveUIDemoLoader(code, id)
-        } else if (id.endsWith('.demo-entry.md')) {
-          return NaiveUIDocEntryLoader(id)
         } else if (id.endsWith('.entry')) {
-          NaiveUIDocLoader(code, id)
+          return NaiveUIDocEntryLoader(id)
+        } else if (id.endsWith('.demo-entry.md')) {
+          const code = readFileSync(id).toString()
+          return NaiveUIDocLoader(code, id)
         } else if (id.endsWith('.md')) {
+          const code = readFileSync(id).toString()
           return NaiveUIMdLoader(code, id)
         }
-        return code
       }
     }
   }

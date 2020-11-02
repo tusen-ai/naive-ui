@@ -5,7 +5,9 @@ const { viteMdPlugin, rollupMdPlugin } = require('./demo/vite-plugins/mdPlugin')
 
 module.exports = {
   root: __dirname,
-  plugins: [ viteMdPlugin() ],
+  plugins: [
+    viteMdPlugin()
+  ],
   optimizeDeps: {
     include: [
       'highlight.js/lib/languages/cpp',
@@ -24,6 +26,9 @@ module.exports = {
     'process.env.NODE_ENV': `'${process.env.NODE_ENV}'`,
     '__DEV__': process.env !== 'production'
   },
+  rollupPluginVueOptions: {
+    include: /\.(vue|md|demo.md|demo-entry.md|entry)$/
+  },
   rollupInputOptions: {
     plugins: [
       alias({
@@ -31,6 +36,10 @@ module.exports = {
           {
             find: /^naive-ui\/lib\/icons\//g,
             replacement: './src/_deprecated/icons/'
+          },
+          {
+            find: /^naive-ui$/g,
+            replacement: './src/index.js'
           }
         ]
       }),

@@ -95,6 +95,8 @@ function genVueComponent (parts, fileName, relativeUrl, noRunning = false) {
   }
   if (parts.script && !noRunning) {
     src = src.replace(scriptReg, parts.script)
+  } else {
+    src = src.replace(scriptReg, 'export default {}')
   }
   if (parts.style) {
     src = src.replace(styleReg, parts.style)
