@@ -1,12 +1,14 @@
-
 import { createApp } from 'vue'
 import { installDemoComponents } from './init'
 import hljs from './hljs'
 import DemoRouterView from './DemoRouterView.vue'
 import naive from '../src/index'
 import './font'
-import { routes } from './routes/routes'
+import { routes, childRoutes } from './routes/routes'
 import createDemoRouter from './routes/router'
+
+import debugRouteMixin from './routes/debug-route-mixin'
+debugRouteMixin(routes, childRoutes)
 
 naive.setHljs(hljs)
 

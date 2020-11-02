@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import modalWrapper from './modalWrapper'
+import modalWrapper from './modalWrapper.vue'
 export default {
   components: {
     modalWrapper

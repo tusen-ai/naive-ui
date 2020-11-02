@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import modal from './modal'
+import modal from './modal.vue'
 
 export default {
   components: {

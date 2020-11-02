@@ -297,7 +297,9 @@ placeable 进行了大调整
     - delegate with capture
     - unify composition
   - remove hollowoutable
-  - vite-build
+  - [ ] icons from `vicons`
+  - [ ] fonts from `vfonts`
+  - [x] vite-build
   - [x] rollup-build
     - [ ] wait for new version of rollup-plugin-vue,
       https://github.com/vuejs/rollup-plugin-vue/issues/408
@@ -316,3 +318,9 @@ placeable 进行了大调整
 deprecate
 `naive-ui/lib/icons` => `vicons`
 `naive-ui/es/icons` => `vicons`
+
+- `vueuc`
+- `vooks`
+- `vicons`
+- `vfonts`
+- `css-render`

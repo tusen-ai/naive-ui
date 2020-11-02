@@ -10,7 +10,7 @@ const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 
 const webpackConfig = {
   mode: 'development',
-  entry: './demo/dev-index',
+  entry: './demo/index.dev',
   output: {
     path: path.resolve(process.cwd()),
     publicPath: '/',

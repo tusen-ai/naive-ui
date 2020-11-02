@@ -24,7 +24,7 @@ module.exports = {
   },
   define: {
     'process.env.NODE_ENV': `'${process.env.NODE_ENV}'`,
-    '__DEV__': process.env !== 'production'
+    '__DEV__': process.env.NODE_ENV !== 'production'
   },
   rollupPluginVueOptions: {
     include: /\.(vue|md|demo.md|demo-entry.md|entry)$/
@@ -45,5 +45,18 @@ module.exports = {
       }),
       rollupMdPlugin()
     ]
-  }
+  },
+  indexHtmlTransforms: [
+    {
+      apply: 'pre',
+      transform ({ code }) {
+        switch (process.env.NODE_ENV) {
+          case 'production':
+            return code.replace(/__INDEX__/, '/demo/index.prod.js')
+          default:
+            return code.replace(/__INDEX__/, '/demo/index.dev.js')
+        }
+      }
+    }
+  ]
 }
