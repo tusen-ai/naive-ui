@@ -1,4 +1,3 @@
-<script>
 import { h, resolveComponent } from 'vue'
 
 export default {
@@ -61,4 +60,3 @@ export default {
     )
   }
 }
-</script>

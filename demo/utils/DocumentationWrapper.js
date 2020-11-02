@@ -1,4 +1,3 @@
-<script>
 import { i18n } from '../util-composables'
 
 export default {
@@ -16,4 +15,3 @@ export default {
     } else return defaultSlot[0] || null
   }
 }
-</script>

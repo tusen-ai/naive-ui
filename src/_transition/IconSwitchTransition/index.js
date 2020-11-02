@@ -1,4 +1,4 @@
-import IconTransition from './src/main.vue'
+import IconTransition from './src/IconSwitchTransition.js'
 
 IconTransition.install = function (app) {
   app.component(IconTransition.name, IconTransition)

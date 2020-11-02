@@ -118,7 +118,7 @@
     "vite": "^1.0.0-rc.6",
     "vue-jest": "^4.0.0-rc.0",
     "vue-loader": "^16.0.0-beta.8",
-    "vue-router": "^4.0.0-beta.13",
+    "vue-router": "^4.0.0-rc.1",
     "webpack": "^4.44.2",
     "webpack-bundle-analyzer": "^3.9.0",
     "webpack-cli": "^3.3.10",

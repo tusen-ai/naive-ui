@@ -1,8 +1,7 @@
-<script>
 import { h, nextTick, Transition } from 'vue'
 
 export default {
-  name: 'NBaseIconTransition',
+  name: 'NBaseIconSwitchTransition',
   data () {
     return {
       appear: false
@@ -20,4 +19,3 @@ export default {
     }, this.$slots)
   }
 }
-</script>

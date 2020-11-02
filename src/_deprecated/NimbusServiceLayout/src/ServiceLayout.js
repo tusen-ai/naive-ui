@@ -1,9 +1,8 @@
 
-<script>
 import Scrollbar from '../../../scrollbar'
 import withapp from '../../../_mixins/withapp'
 import themeable from '../../../_mixins/themeable'
-import SiderMenu from './SiderMenu.vue'
+import SiderMenu from './SiderMenu.js'
 import NLayout from '../../../layout/src/Layout.vue'
 import NLayoutSider from '../../../layout/src/LayoutSider.vue'
 import { h } from 'vue'
@@ -238,4 +237,3 @@ export default {
     })
   }
 }
-</script>
