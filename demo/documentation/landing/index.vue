@@ -90,11 +90,6 @@ export default {
       }
     }
   },
-  computed: {
-    theme () {
-      return this.NConfigProvider.$parent.theme
-    }
-  },
   methods: {
     handleStartClick () {
       this.$router.push(

@@ -9,15 +9,17 @@
       <slot v-if="$slots.default" :value="value[index]" :index="index" />
       <n-dynamic-input-input-preset
         v-else-if="preset === 'input'"
-        v-model:value="value[index]"
+        :value="value[index]"
         :parent-path="NFormItem && NFormItem.path"
         :path="NFormItem && NFormItem.path + '[' + index + ']'"
+        @update:value="handleValueChange(index, $event)"
       />
       <n-dynamic-input-pair-preset
         v-else-if="preset === 'pair'"
-        v-model:value="value[index]"
+        :value="value[index]"
         :parent-path="NFormItem && NFormItem.path"
         :path="NFormItem && NFormItem.path + '[' + index + ']'"
+        @update:value="handleValueChange(index, $event)"
       />
       <div class="n-dynamic-input-item__action">
         <n-button-group>
@@ -163,8 +165,8 @@ export default {
       if (onInput) call(onInput, value)
       if (onUpdateValue) call(onUpdateValue, value)
     },
-    handleValueChange (value) {
-      this.value = value
+    handleValueChange (index, value) {
+      this.value[index] = value
     },
     createItem (e, index) {
       const { onCreate } = this

@@ -1,5 +1,5 @@
 <template>
-  <n-modal v-model="value">
+  <n-modal :show="value">
     <template #header>
       <n-input v-model="time" /> {{ time }}
       <n-button>Look at it</n-button>

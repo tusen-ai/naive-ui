@@ -1,5 +1,5 @@
 <template>
-  <modal v-model="value" />
+  <modal :show="value" />
 </template>
 
 <script>
