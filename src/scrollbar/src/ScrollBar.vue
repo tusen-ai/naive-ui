@@ -280,8 +280,9 @@ export default {
     handleContentResize () {
       this.sync()
     },
-    scrollTo (options) {
+    scrollTo (options, y) {
       if (!this.scrollable) return
+      if (typeof options === 'number') this.scrollToPosition(options, y, 0, false, 'auto')
       const {
         left,
         top,
