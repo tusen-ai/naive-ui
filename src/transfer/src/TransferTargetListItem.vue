@@ -25,7 +25,6 @@
 <script>
 import { inject } from 'vue'
 import NCheckbox from '../../checkbox/src/Checkbox.vue'
-import createValidator from '../../_utils/vue/validateProp'
 import { useMemo } from 'vooks'
 
 export default {
@@ -40,15 +39,15 @@ export default {
   },
   props: {
     label: {
-      validator: createValidator(['string']),
+      validator: String,
       required: true
     },
     value: {
-      validator: createValidator(['string', 'number']),
+      validator: [String, Number],
       required: true
     },
     disabled: {
-      validator: createValidator(['boolean']),
+      validator: Boolean,
       default: false
     }
   },

@@ -1,5 +1,5 @@
-import getStyleComputedProperty from './getStyleComputedProperty'
-import getParentNode from './getParentNode'
+import getStyleComputedProperty from './get-style-computed-property'
+import getParentNode from './get-parent-node'
 
 const NOT_FOUND = 'NOT_FOUND'
 const CACHE_DURATION = 60000

@@ -13,8 +13,6 @@
 </template>
 
 <script>
-import createValidator from '../../_utils/vue/validateProp'
-
 export default {
   name: 'NTransferHeaderExtra',
   inject: {
@@ -24,7 +22,7 @@ export default {
   },
   props: {
     source: {
-      validator: createValidator(['boolean']),
+      validator: Boolean,
       default: false
     }
   }

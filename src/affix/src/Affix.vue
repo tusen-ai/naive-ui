@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import getScrollParent from '../../_utils/dom/getScrollParent'
+import getScrollParent from '../../_utils/dom/get-scroll-parent'
 import { usecssr } from '../../_mixins'
 import styles from './styles/index.js'
 import getTarget from '../../_utils/dom/get-target'

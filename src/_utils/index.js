@@ -18,8 +18,7 @@ export {
 } from './css'
 export * from './composition'
 export {
-  nextFrame,
-  isIos
+  nextFrame
 } from './misc'
 export {
   KEY_CODE

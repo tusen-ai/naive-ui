@@ -85,7 +85,7 @@
     "lodash-es": "^4.17.15",
     "treemate": "^0.1.9",
     "vicons": "0.0.1",
-    "vooks": "0.0.1-alpha.1",
+    "vooks": "0.0.1-alpha.3",
     "vue": "^3.0.2",
     "vueuc": "0.1.0-alpha.9"
   }

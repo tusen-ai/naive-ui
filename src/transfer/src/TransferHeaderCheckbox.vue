@@ -11,7 +11,6 @@
 
 <script>
 import NCheckbox from '../../checkbox/src/Checkbox.vue'
-import createValidator from '../../_utils/vue/validateProp'
 
 export default {
   name: 'NTransferHeaderCheckbox',
@@ -25,15 +24,15 @@ export default {
   },
   props: {
     theme: {
-      validator: createValidator(['string']),
+      validator: String,
       default: null
     },
     source: {
-      validator: createValidator(['boolean']),
+      validator: Boolean,
       default: false
     },
     onChange: {
-      validator: createValidator(['function']),
+      validator: Function,
       required: true
     }
   },

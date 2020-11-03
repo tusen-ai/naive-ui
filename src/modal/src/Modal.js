@@ -1,8 +1,8 @@
-import { h, withDirectives, Transition, ref } from 'vue'
+import { h, withDirectives, Transition, ref, computed } from 'vue'
 import { zindexable } from '../../_directives'
 import { configurable, themeable, usecssr } from '../../_mixins'
 import presetProps from './presetProps'
-import { useIsMounted } from 'vooks'
+import { useIsMounted, useClicked, useClickPosition } from 'vooks'
 import { warn } from '../../_utils/naive/warn'
 import { omit } from '../../_utils/vue'
 import NLazyTeleport from '../../_base/lazy-teleport'
@@ -100,9 +100,17 @@ export default {
     }
   },
   setup () {
+    const clickedRef = useClicked(64)
+    const clickedPositionRef = useClickPosition()
     return {
       isMounted: useIsMounted(),
-      containerRef: ref(null)
+      containerRef: ref(null),
+      mousePosition: computed(() => {
+        if (clickedRef.value) {
+          return clickedPositionRef.value
+        }
+        return null
+      })
     }
   },
   methods: {

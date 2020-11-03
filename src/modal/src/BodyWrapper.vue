@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import { nextTick, reactive, toRefs, toRef, watch, ref } from 'vue'
+import { nextTick, reactive, toRefs, toRef, watch, ref, inject } from 'vue'
 import NScrollbar from '../../scrollbar'
 import NDialog from '../../dialog/src/Dialog.vue'
 import NCard from '../../card'
@@ -86,7 +86,6 @@ import themeable from '../../_mixins/themeable'
 import presetProps from './presetProps'
 import clickoutside from '../../_directives/clickoutside'
 import { useCompitable } from 'vooks'
-import { useLastClickPosition } from '../../_utils/composition'
 
 export default {
   name: 'ModalBody',
@@ -105,11 +104,6 @@ export default {
     return {
       NModalBody: this,
       NDrawerBody: null
-    }
-  },
-  inject: {
-    NModal: {
-      default: null
     }
   },
   props: {
@@ -161,17 +155,18 @@ export default {
     watch(toRef(props, 'show'), value => {
       if (value) dataRefs.displayed.value = true
     })
+    const NModal = inject('NModal', null)
     return {
+      NModal,
+      mousePosition: toRef(NModal, 'mousePosition'),
       compitableBodyStyle: useCompitable(props, [
         'overlayStyle',
         'bodyStyle'
       ]),
-      mousePosition: useLastClickPosition(),
       bodyRef: ref(null),
       ...dataRefs
     }
   },
-
   methods: {
     styleTransformOrigin () {
       const {

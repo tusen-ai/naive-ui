@@ -5,25 +5,8 @@ import {
   inject,
   toRef,
   getCurrentInstance,
-  onBeforeUnmount,
-  nextTick
+  onBeforeUnmount
 } from 'vue'
-
-export function useDisabledUntilMounted (durationTickCount = 0) {
-  const disabled = ref(true)
-  onMounted(() => {
-    function countDown () {
-      if (!durationTickCount) {
-        disabled.value = false
-      } else {
-        durationTickCount -= 1
-        nextTick(countDown)
-      }
-    }
-    countDown()
-  })
-  return disabled
-}
 
 export function useInjectionRef (injectionName, key, fallback) {
   const injection = inject(injectionName)
@@ -87,5 +70,23 @@ export function useInjectionElementCollection (injectionName, collectionKey, get
   })
 }
 
-export { default as useLastClickPosition } from './use-last-click-position'
-export { useDelayedTrue } from './use-delayed'
+export function useDelayedTrue (valueRef, delay, shouldDelayRef) {
+  if (!delay) return valueRef
+  const delayedRef = ref(valueRef.value)
+  let timerId = null
+  watch(valueRef, value => {
+    if (timerId !== null) clearTimeout(timerId)
+    if (value === true) {
+      if (shouldDelayRef && shouldDelayRef.value === false) {
+        delayedRef.value = true
+      } else {
+        timerId = setTimeout(() => {
+          delayedRef.value = true
+        }, delay)
+      }
+    } else {
+      delayedRef.value = false
+    }
+  })
+  return delayedRef
+}

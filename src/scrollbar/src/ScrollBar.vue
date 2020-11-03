@@ -105,7 +105,7 @@ import {
   usecssr
 } from '../../_mixins'
 import styles from './styles/index.js'
-import { isIos } from '../../_utils'
+import { useIsIos } from 'vooks'
 
 export default {
   name: 'Scrollbar',
@@ -191,7 +191,7 @@ export default {
       memoXLeft: null,
       memoMouseX: null,
       memoMouseY: null,
-      isIos
+      isIos: useIsIos()
     }
   },
   computed: {

@@ -25,7 +25,7 @@
 
 <script>
 import { nextTick, ref, markRaw } from 'vue'
-import getScrollParent from '../../_utils/dom/getScrollParent'
+import getScrollParent from '../../_utils/dom/get-scroll-parent'
 import {
   configurable,
   themeable,

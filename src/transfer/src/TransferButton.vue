@@ -21,8 +21,6 @@
 </template>
 
 <script>
-import createValidator from '../../_utils/vue/validateProp'
-
 export default {
   inject: {
     NTransfer: {
@@ -31,7 +29,7 @@ export default {
   },
   props: {
     to: {
-      validator: createValidator(['boolean']),
+      validator: Boolean,
       default: false
     },
     onClick: {

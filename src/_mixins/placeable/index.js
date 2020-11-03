@@ -1,7 +1,7 @@
 import { nextTick } from 'vue'
 import scrollDelegate from '../../_utils/delegate/scrollDelegate'
 import resizeDelegate from '../../_utils/delegate/resizeDelegate'
-import getScrollParent from '../../_utils/dom/getScrollParent'
+import getScrollParent from '../../_utils/dom/get-scroll-parent'
 import { warn } from '../../_utils/naive/warn'
 import {
   getAdjustedPlacementOfTrackingElement,
