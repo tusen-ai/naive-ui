@@ -11,7 +11,7 @@ import {
   useCompitable,
   useIsMounted
 } from 'vooks'
-import { omit } from '../../_utils/vue'
+import { omit, warn } from '../../_utils'
 import NLazyTeleport from '../../_base/lazy-teleport'
 import NPopoverBody from './PopoverBody'
 
@@ -32,14 +32,14 @@ function appendEvents (vNode, events) {
 function getFirstSlotVNode (slots, slotName = 'default') {
   let slot = slots[slotName]
   if (!slot) {
-    console.error(`[naive-ui/getFirstSlotVNode]: slot[${slotName}] is empty`)
+    warn('getFirstSlotVNode', `slot[${slotName}] is empty`)
   }
   slot = slot()
   // vue will normalize the slot, so slot must be an array
   if (slot.length === 1) {
     return slot[0]
   } else {
-    console.error(`[naive-ui/getFirstSlotVNode]: slot[${slotName}] should have exactly one child`)
+    warn('getFirstSlotVNode', `slot[${slotName}] should have exactly one child`)
     return null
   }
 }

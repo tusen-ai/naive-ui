@@ -1,6 +1,7 @@
 const vuePlugin = require('rollup-plugin-vue')
 const { nodeResolve } = require('@rollup/plugin-node-resolve')
 const { terser } = require('rollup-plugin-terser')
+const replace = require('@rollup/plugin-replace')
 
 module.exports = {
   input: 'src/index.js',
@@ -18,6 +19,9 @@ module.exports = {
     }
   ],
   plugins: [
+    replace({
+      __DEV__: 'process.env.NODE_ENV !== "production"'
+    }),
     nodeResolve({
       extensions: ['.js', '.json', '.vue']
     }),
