@@ -1,7 +1,7 @@
 import create from '../../_styles/utils/create-component-base'
 import { changeColor } from '../../_utils/color/index'
 import { baseSuffixDark } from '../../_base/suffix/styles'
-import { baseDark } from '../../styles/base'
+import { baseDark } from '../../styles'
 
 export default create({
   name: 'Pagination',
