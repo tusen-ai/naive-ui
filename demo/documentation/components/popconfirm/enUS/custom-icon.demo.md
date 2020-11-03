@@ -18,7 +18,7 @@
 </n-popconfirm>
 ```
 ```js
-import HandIcon from 'naive-ui/lib/icons/md-hand.vue'
+import { MdHand as HandIcon } from 'vicons/ionicons-v4'
 
 export default {
   components: {

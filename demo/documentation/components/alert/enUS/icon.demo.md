@@ -14,11 +14,13 @@
 </n-alert>
 ```
 ```js
-import iosAirplane from 'naive-ui/lib/icons/ios-airplane.vue'
+import {
+  IosAirplane,
+} from 'vicons/ionicons-v4'
 
 export default {
   components: {
-    iosAirplane
+    IosAirplane
   }
 }
 ```

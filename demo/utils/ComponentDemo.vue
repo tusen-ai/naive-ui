@@ -60,12 +60,12 @@
 
 <script>
 import { nextTick } from 'vue'
-import codeOutline from 'naive-ui/lib/icons/code-outline.vue'
+import { CodeOutline } from 'vicons/ionicons-v5'
 import { displayModeRef, i18n } from '../util-composables'
 
 export default {
   components: {
-    codeOutline
+    CodeOutline
   },
   inject: {
     NDocumentation: {

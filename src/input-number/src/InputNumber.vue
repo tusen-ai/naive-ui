@@ -61,8 +61,10 @@
 
 <script>
 import NIcon from '../../icon/index'
-import RemoveIcon from '../../_deprecated/icons/remove-outline.vue'
-import AddIcon from '../../_deprecated/icons/add-outline.vue'
+import {
+  RemoveOutline as RemoveIcon,
+  AddOutline as AddIcon
+} from 'vicons/ionicons-v5'
 import {
   configurable,
   themeable,

@@ -59,11 +59,13 @@ Use `collapsed-width` and `width` to set sider's width.
 ```
 
 ```js
-import mdContacts from 'naive-ui/lib/icons/md-contacts.vue'
+import {
+  MdContacts
+} from 'vicons/ionicons-v4'
 
 export default {
   components: {
-    mdContacts
+    MdContacts
   },
   data () {
     return {

@@ -31,9 +31,11 @@
 ```
 ```js
 import { h, resolveComponent } from 'vue'
-import bookIcon from 'naive-ui/lib/icons/book-outline.vue'
-import personIcon from 'naive-ui/lib/icons/person-outline.vue'
-import wineIcon from 'naive-ui/lib/icons/wine-outline.vue'
+import {
+  BookOutline as BookIcon,
+  PersonOutline as PersonIcon,
+  WineOutline as WineIcon
+} from 'vicons/ionicons-v5'
 
 function renderIcon(icon) {
   return () => h(resolveComponent('n-icon'), null, { default: () => h(icon) })
@@ -43,12 +45,12 @@ const menuItems = [
   {
     title: '且听风吟',
     key: 'hear-the-wind-sing',
-    icon: renderIcon(bookIcon)
+    icon: renderIcon(BookIcon)
   },
   {
     title: '1973年的弹珠玩具',
     key: 'pinball-1973',
-    icon: renderIcon(bookIcon),
+    icon: renderIcon(BookIcon),
     disabled: true,
     children: [
       {
@@ -61,12 +63,12 @@ const menuItems = [
     title: '寻羊冒险记',
     key: 'a-wild-sheep-chase',
     disabled: true,
-    icon: renderIcon(bookIcon)
+    icon: renderIcon(BookIcon)
   },
   {
     title: '舞，舞，舞',
     key: 'dance-dance-dance',
-    icon: renderIcon(bookIcon),
+    icon: renderIcon(BookIcon),
     children: [
       {
         type: 'group',
@@ -76,19 +78,19 @@ const menuItems = [
           {
             title: '叙事者',
             key: 'narrator',
-            icon: renderIcon(personIcon)
+            icon: renderIcon(PersonIcon)
           },
           {
             title: '羊男',
             key: 'sheep-man',
-            icon: renderIcon(personIcon)
+            icon: renderIcon(PersonIcon)
           }
         ]
       },
       {
         title: '饮品',
         key: 'beverage',
-        icon: renderIcon(wineIcon),
+        icon: renderIcon(WineIcon),
         children: [
           {
             title: '威士忌',

@@ -44,13 +44,15 @@
 </template>
 
 <script>
-import mdCash from 'naive-ui/lib/icons/md-cash.vue'
-import mdContacts from 'naive-ui/lib/icons/md-contacts.vue'
+import {
+  MdCash,
+  MdContacts
+} from 'vicons/ionicons-v4'
 
 export default {
   components: {
-    mdCash,
-    mdContacts
+    MdCash,
+    MdContacts
   },
   data () {
     return {

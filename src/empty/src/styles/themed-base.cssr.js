@@ -22,14 +22,12 @@ export default c([
         cE('icon', {
           raw: `
             transition:
-              fill .3s ${cubicBezierEaseInOut},
-              stroke .3s ${cubicBezierEaseInOut};
+              color .3s ${cubicBezierEaseInOut},
           `
         }, [
           cB('icon', {
             raw: `
-              fill: ${iconColor};
-              stroke: ${iconColor};
+              color: ${iconColor};
             `
           })
         ]),

@@ -21,7 +21,7 @@ Naive UI 内部的组件可能会在不同的主题下使用不同的变量作�
   >Cool!</button>
 </n-config-consumer>
 <br>
-<n-element as="div" style="overflow: auto;" v-slot="{ styleScheme }">
+<n-element tag="div" style="overflow: auto;" v-slot="{ styleScheme }">
   <pre
     :style="{
       color: styleScheme.secondaryTextColor,

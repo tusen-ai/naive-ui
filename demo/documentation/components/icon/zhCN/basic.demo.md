@@ -13,13 +13,15 @@
 </n-icon>
 ```
 ```js
-import gameControllerOutline from 'naive-ui/lib/icons/game-controller.vue'
-import gameController from 'naive-ui/lib/icons/game-controller.vue'
+import {
+  GameControllerOutline,
+  GameController
+} from 'vicons/ionicons-v5'
 
 export default {
   components: {
-    gameControllerOutline,
-    gameController
+    GameControllerOutline,
+    GameController
   }
 }
 ```

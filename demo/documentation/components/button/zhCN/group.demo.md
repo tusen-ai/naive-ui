@@ -105,7 +105,7 @@
 </n-space>
 ```
 ```js
-import LogInIcon from 'naive-ui/lib/icons/log-in-outline.vue'
+import { LogInOutline as LogInIcon } from 'vicons/ionicons-v5'
 
 export default {
   components: {

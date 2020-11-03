@@ -18,11 +18,11 @@ Naive UI provides a simple way to custom style of icon in different themes.
 </n-icon>
 ```
 ```js
-import cashOutline from 'naive-ui/lib/icons/cash-outline.vue'
+import { CashOutline } from 'vicons/ionicons-v5'
 
 export default {
   components: {
-    cashOutline
+    CashOutline
   }
 }
 ```

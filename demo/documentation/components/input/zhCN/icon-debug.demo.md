@@ -94,13 +94,15 @@
 </n-input>
 ```
 ```js
-import mdSearch from 'naive-ui/lib/icons/md-search'
+import {
+  MdSearch
+} from 'vicons/ionicons-v4'
 
 export default {
   components: {
-    mdSearch
+    MdSearch
   },
-  data() {
+  data () {
     return {
       value: null
     }

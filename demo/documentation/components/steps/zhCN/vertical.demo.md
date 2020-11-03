@@ -55,13 +55,15 @@
 ```
 
 ```js
-import mdArrowRoundBack from 'naive-ui/lib/icons/md-arrow-round-back.vue'
-import mdArrowRoundForward from 'naive-ui/lib/icons/md-arrow-round-forward.vue'
+import {
+  MdArrowRoundBack,
+  MdArrowRoundForward
+} from 'vicons/ionicons-v4'
 
 export default {
   components: {
-    mdArrowRoundBack,
-    mdArrowRoundForward
+    MdArrowRoundBack,
+    MdArrowRoundForward
   },
   data () {
     return {

@@ -1,5 +1,4 @@
 import { c, cTB, cM, cB } from '../../../_utils/cssr'
-import { changeColor } from '../../../_utils/color'
 
 export default c([
   ({ props }) => {
@@ -23,22 +22,27 @@ export default c([
         `
       },
       [
-        cM('1-depth, 2-depth, 3-depth, 4-depth, 5-depth', {
-          fill: color,
-          stroke: color
-        }),
         c('svg', {
           height: '1em',
-          width: '1em'
+          width: '1em',
+          transition: `opacity .3s ${cubicBezierEaseInOut}`
         }),
         [1, 2, 3, 4, 5].map(v => cM(`${v}-depth`, {
-          color: changeColor(color, { alpha: props.$local[`opacity${v}Depth`] })
-        }))
+          color
+        }, [
+          c('svg', {
+            opacity: props.$local[`opacity${v}Depth`]
+          })
+        ]))
       ]),
       [1, 2, 3, 4, 5].map(v => cB(`icon-${v}-depth >`, [
         cTB('icon', {
-          color: changeColor(color, { alpha: props.$local[`opacity${v}Depth`] })
-        })
+          color
+        }, [
+          c('svg', {
+            opacity: props.$local[`opacity${v}Depth`]
+          })
+        ])
       ]))
     ]
   }

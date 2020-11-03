@@ -25,11 +25,11 @@
 
 ```
 ```js
-import mdMusicalNotes from 'naive-ui/lib/icons/md-musical-note.vue'
+import { MdMusicalNotes } from 'vicons/ionicons-v4'
 
 export default {
   components: {
-    mdMusicalNotes
+    MdMusicalNotes
   },
   data () {
     return {

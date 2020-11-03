@@ -21,11 +21,11 @@
 ```
 
 ```js
-import mdSave from 'naive-ui/lib/icons/md-save.vue'
+import { MdSave }  from 'vicons/ionicons-v4'
 
 export default {
   components: {
-    mdSave
+    MdSave
   }
 }
 ```

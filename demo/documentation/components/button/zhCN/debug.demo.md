@@ -571,13 +571,15 @@ Debug 用的。
 
 ```
 ```js
-import cashOutline from 'naive-ui/lib/icons/cash-outline.vue'
-import logInOutline from 'naive-ui/lib/icons/log-in-outline.vue'
+import {
+  LogInOutline,
+  CashOutline
+} from 'vicons/ionicons-v5'
 
 export default {
   components: {
-    cashOutline,
-    logInOutline
+    CashOutline,
+    LogInOutline
   }
 }
 ```

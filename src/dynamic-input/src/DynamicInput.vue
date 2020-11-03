@@ -51,8 +51,10 @@
 /* eslint-disable vue/no-mutating-props */
 import NButton from '../../button'
 import NButtonGroup from '../../button-group'
-import mdAdd from '../../_deprecated/icons/md-add.vue'
-import mdRemove from '../../_deprecated/icons/md-remove.vue'
+import {
+  MdAdd,
+  MdRemove
+} from 'vicons/ionicons-v4'
 import NDynamicInputInputPreset from './InputPreset.vue'
 import NDynamicInputPairPreset from './PairPreset.vue'
 import withapp from '../../_mixins/withapp'
@@ -69,8 +71,8 @@ export default {
     NDynamicInputPairPreset,
     NButtonGroup,
     NButton,
-    mdAdd,
-    mdRemove
+    MdAdd,
+    MdRemove
   },
   mixins: [
     withapp,

@@ -22,13 +22,15 @@
 </n-space>
 ```
 ```js
-import mdAdd from 'naive-ui/lib/icons/md-add.vue'
-import mdRemove from 'naive-ui/lib/icons/md-remove.vue'
+import {
+  MdAdd,
+  MdRemove
+} from 'vicons/ionicons-v4'
 
 export default {
   components: {
-    mdAdd,
-    mdRemove
+    MdAdd,
+    MdRemove
   },
   data () {
     return {

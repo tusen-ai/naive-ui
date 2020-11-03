@@ -33,11 +33,11 @@ To match different level text colors, icon provides `depth` prop.
 </n-icon>
 ```
 ```js
-import cashOutline from 'naive-ui/lib/icons/cash-outline.vue'
+import { CashOutline } from 'vicons/ionicons-v5'
 
 export default {
   components: {
-    cashOutline
+    CashOutline
   }
 }
 ```

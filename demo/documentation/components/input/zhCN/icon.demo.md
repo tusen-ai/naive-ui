@@ -24,11 +24,13 @@
 </n-space>
 ```
 ```js
-import searchOutline from 'naive-ui/lib/icons/search-outline.vue'
+import {
+  SearchOutline
+} from 'vicons/ionicons-v5'
 
 export default {
   components: {
-    searchOutline
+    SearchOutline
   },
   data () {
     return {

@@ -22,11 +22,11 @@
 </n-breadcrumb>
 ```
 ```js
-import mdCash from 'naive-ui/lib/icons/md-cash.vue'
+import { MdCash } from 'vicons/ionicons-v4'
 
 export default {
   components: {
-    mdCash
+    MdCash
   }
 }
 ```

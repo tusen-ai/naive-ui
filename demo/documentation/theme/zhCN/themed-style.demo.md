@@ -24,15 +24,17 @@
 </n-config-provider>
 ```
 ```js
-import mdCash from 'naive-ui/lib/icons/md-cash.vue'
-import mdContacts from 'naive-ui/lib/icons/md-contacts.vue'
-import iosContacts from 'naive-ui/lib/icons/ios-contacts.vue'
+import {
+  MdCash,
+  MdContacts,
+  IosContacts
+} from 'vicons/ionicons-v4'
 
 export default {
   components: {
-    mdCash,
-    mdContacts,
-    iosContacts
+    MdCash,
+    MdContacts,
+    IosContacts
   },
   data () {
     return {

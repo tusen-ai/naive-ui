@@ -18,7 +18,6 @@ module.exports = {
     ]
   },
   alias: {
-    '/@naive-ui/lib/icons/': path.resolve(__dirname, './src/_deprecated/icons'),
     '/@naive-ui/': path.resolve(__dirname, './src'),
     src: path.resolve(__dirname, './src')
   },
@@ -33,10 +32,6 @@ module.exports = {
     plugins: [
       alias({
         entries: [
-          {
-            find: /^naive-ui\/lib\/icons\//g,
-            replacement: './src/_deprecated/icons/'
-          },
           {
             find: /^naive-ui$/g,
             replacement: './src/index.js'

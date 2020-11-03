@@ -25,8 +25,7 @@ export default c([
               font-size: 16px;
               vertical-align: -.2em;
             `,
-            fill: itemTextColor,
-            stroke: itemTextColor
+            color: itemTextColor
           }),
           cE('link', {
             raw: `
@@ -42,8 +41,7 @@ export default c([
           }),
           c('&:hover', [
             cB('icon', {
-              fill: itemTextColorHover,
-              stroke: itemTextColorHover
+              color: itemTextColorHover
             }),
             cE('link', {
               color: itemTextColorHover
@@ -51,8 +49,7 @@ export default c([
           ]),
           c('&:active', [
             cB('icon', {
-              fill: itemTextColorActive,
-              stroke: itemTextColorActive
+              color: itemTextColorActive
             }),
             cE('link', {
               color: itemTextColorActive
@@ -64,8 +61,7 @@ export default c([
               color: itemTextColorMatch
             }),
             cB('icon', {
-              fill: itemTextColorMatch,
-              stroke: itemTextColorMatch
+              color: itemTextColorMatch
             }),
             cE('separator', {
               display: 'none'

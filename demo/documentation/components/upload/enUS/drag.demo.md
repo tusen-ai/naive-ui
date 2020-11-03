@@ -13,7 +13,7 @@
 </n-upload>
 ```
 ```js
-import ArchiveIcon from 'naive-ui/lib/icons/archive-outline.vue'
+import { ArchiveOutline as ArchiveIcon }  from 'vicons/ionicons-v5'
 
 export default {
   components: {

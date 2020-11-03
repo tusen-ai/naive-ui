@@ -29,7 +29,9 @@
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import locale from '../../_mixins/locale'
-import removeCircleOutline from '../../_deprecated/icons/remove-circle-outline.vue'
+import {
+  RemoveCircleOutline
+} from 'vicons/ionicons-v5'
 import NIcon from '../../icon'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles/index'
@@ -37,7 +39,7 @@ import styles from './styles/index'
 export default {
   name: 'Empty',
   components: {
-    removeCircleOutline,
+    RemoveCircleOutline,
     NIcon
   },
   mixins: [

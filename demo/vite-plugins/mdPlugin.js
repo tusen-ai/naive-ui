@@ -17,9 +17,7 @@ module.exports = {
           }
         })
         app.use(async (ctx, next) => {
-          if (/\/@modules\/naive-ui\/lib\/icons\//.test(ctx.path)) {
-            ctx.path = ctx.path.replace(/\/@modules\/naive-ui\/lib\/icons\//, '/@naive-ui/lib/icons/')
-          } else if (/\/@modules\/naive-ui\/?/.test(ctx.path)) {
+          if (/\/@modules\/naive-ui\/?/.test(ctx.path)) {
             ctx.path = ctx.path.replace(/\/@modules\/naive-ui\/?/, '/@naive-ui/index.js')
           }
           if (/.md$/.test(ctx.path) || ctx.path.endsWith('.entry')) {

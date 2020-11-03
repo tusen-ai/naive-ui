@@ -14,7 +14,7 @@
 </n-button>
 ```
 ```js
-import TrainIcon from 'naive-ui/lib/icons/train-outline.vue'
+import { TrainOutline as TrainIcon } from 'vicons/ionicons-v5'
 
 export default {
   components: {

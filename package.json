@@ -72,7 +72,7 @@
     "stylelint-scss": "^3.18.0",
     "tinycolor2": "^1.4.2",
     "typescript": "^4.0.5",
-    "vite": "^1.0.0-rc.8",
+    "vite": "^1.0.0-rc.9",
     "vue-jest": "^5.0.0-alpha.5",
     "vue-router": "^4.0.0-rc.1"
   },
@@ -84,6 +84,7 @@
     "highlight.js": "^9.18.1",
     "lodash-es": "^4.17.15",
     "treemate": "^0.1.9",
+    "vicons": "0.0.1",
     "vooks": "0.0.1-alpha.1",
     "vue": "^3.0.2",
     "vueuc": "0.1.0-alpha.9"

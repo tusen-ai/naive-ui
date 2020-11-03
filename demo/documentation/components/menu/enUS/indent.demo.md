@@ -10,9 +10,11 @@ You can specify `indent` & `root-indent` of the menu. `root-indent` only determi
 ```
 ```js
 import { h, resolveComponent } from 'vue'
-import bookIcon from 'naive-ui/lib/icons/book-outline.vue'
-import personIcon from 'naive-ui/lib/icons/person-outline.vue'
-import wineIcon from 'naive-ui/lib/icons/wine-outline.vue'
+import {
+  BookOutline as BookIcon,
+  PersonOutline as PersonIcon,
+  WineOutline as WineIcon
+} from 'vicons/ionicons-v5'
 
 function renderIcon(icon) {
   return () => h(resolveComponent('n-icon'), null, { default: () => h(icon) })
@@ -22,12 +24,12 @@ const menuItems = [
   {
     title: 'Hear the Wind Sing',
     key: 'hear-the-wind-sing',
-    icon: renderIcon(bookIcon)
+    icon: renderIcon(BookIcon)
   },
   {
     title: 'Pinball 1973',
     key: 'pinball-1973',
-    icon: renderIcon(bookIcon),
+    icon: renderIcon(BookIcon),
     disabled: true,
     children: [
       {
@@ -40,12 +42,12 @@ const menuItems = [
     title: 'A Wild Sheep Chase',
     key: 'a-wild-sheep-chase',
     disabled: true,
-    icon: renderIcon(bookIcon)
+    icon: renderIcon(BookIcon)
   },
   {
     title: '舞，舞，舞',
     key: 'Dance Dance Dance',
-    icon: renderIcon(bookIcon),
+    icon: renderIcon(BookIcon),
     children: [
       {
         type: 'group',
@@ -55,19 +57,19 @@ const menuItems = [
           {
             title: 'Narrator',
             key: 'narrator',
-            icon: renderIcon(personIcon)
+            icon: renderIcon(PersonIcon)
           },
           {
             title: 'Sheep Man',
             key: 'sheep-man',
-            icon: renderIcon(personIcon)
+            icon: renderIcon(PersonIcon)
           }
         ]
       },
       {
         title: 'Beverage',
         key: 'beverage',
-        icon: renderIcon(wineIcon),
+        icon: renderIcon(WineIcon),
         children: [
           {
             title: 'Whisky',

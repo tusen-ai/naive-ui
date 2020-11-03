@@ -13,13 +13,13 @@
 </template>
 
 <script>
-import editIcon from '../../src/_deprecated/icons/git-commit-outline.vue'
+import { GitCommitOutline as EditIcon } from 'vicons/ionicons-v5'
 import githubUrl from './github-url'
 
 export default {
   name: 'EditOnGithubButton',
   components: {
-    editIcon
+    EditIcon
   },
   props: {
     relativeUrl: {

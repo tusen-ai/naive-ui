@@ -43,12 +43,14 @@
 <script>
 import NTag from '../../tag'
 import NIcon from '../../icon'
-import AddIcon from '../../_deprecated/icons/add-outline.vue'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import asformitem from '../../_mixins/asformitem'
-import locale from '../../_mixins/locale'
-import usecssr from '../../_mixins/usecssr'
+import { AddOutline as AddIcon } from 'vicons/ionicons-v5'
+import {
+  configurable,
+  themeable,
+  asformitem,
+  locale,
+  usecssr
+} from '../../_mixins'
 import commonProps from '../../tag/src/common-props'
 import styles from './styles'
 import { call } from '../../_utils/vue'
@@ -62,7 +64,7 @@ export default {
     AddIcon
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     locale('Tag'),
     asformitem(),

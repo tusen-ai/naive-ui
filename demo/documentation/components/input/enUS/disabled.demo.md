@@ -27,7 +27,7 @@ Input can be disabled.
 </n-space>
 ```
 ```js
-import CashIcon from 'naive-ui/lib/icons/cash-outline.vue'
+import { CashOutline as CashIcon } from 'vicons/ionicons-v5'
 
 export default {
   components: {

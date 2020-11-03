@@ -7,7 +7,7 @@ Naive UI has `n-element` component. See [Element](n-element).
 </div>
 <n-config-provider :theme="theme">
   <n-card>
-    <n-el as="span" class="oops">
+    <n-el tag="span" class="oops">
       I am a span
     </n-el>
   </n-card>
