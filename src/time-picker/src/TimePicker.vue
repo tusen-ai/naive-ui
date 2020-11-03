@@ -28,7 +28,7 @@
       @input="handleTimeInput"
       @clear="handleTimeInputClear"
     >
-      <template v-if="showIcon" v-slot:suffix>
+      <template v-if="showIcon" #suffix>
         <n-icon>
           <time-icon />
         </n-icon>
@@ -498,8 +498,10 @@ export default {
           })
           break
         case KEY_CODE.TAB:
-          const shiftPressed = keyboardDelegate.getKeyboardStatus().shiftPressed
-          if (shiftPressed && e.target === this.panelRef) {
+          if (
+            keyboardDelegate.getKeyboardStatus().shiftPressed &&
+            e.target === this.panelRef
+          ) {
             e.preventDefault()
             this.closeTimeSelector({
               returnFocus: true,

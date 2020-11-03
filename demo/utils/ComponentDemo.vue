@@ -7,17 +7,17 @@
     }"
     :content-style="contentStyle"
   >
-    <template v-slot:header>
+    <template #header>
       <slot name="title" />
     </template>
 
-    <template v-slot:header-extra>
+    <template #header-extra>
       <n-tooltip
         trigger="hover"
         :placement="'top'"
         :show-arrow="true"
       >
-        <template v-slot:activator>
+        <template #activator>
           <edit-on-github-button
             style="padding: 0; margin-right: 6px;"
             size="tiny"
@@ -32,7 +32,7 @@
         :placement="'top'"
         :show-arrow="true"
       >
-        <template v-slot:activator>
+        <template #activator>
           <n-button
             style="padding: 0;"
             size="tiny"
@@ -40,7 +40,7 @@
             icon-depth="tertiary"
             @click="toggleCodeDisplay"
           >
-            <template v-slot:icon>
+            <template #icon>
               <code-outline />
             </template>
           </n-button>
@@ -50,7 +50,7 @@
     </template>
     <slot name="content" />
     <slot name="demo" />
-    <template v-if="showCode" v-slot:footer>
+    <template v-if="showCode" #footer>
       <n-scrollbar x-scrollable>
         <slot name="code" />
       </n-scrollbar>
@@ -67,6 +67,11 @@ export default {
   components: {
     codeOutline
   },
+  inject: {
+    NDocumentation: {
+      default: null
+    }
+  },
   props: {
     title: {
       type: String,
@@ -81,24 +86,19 @@ export default {
       required: true
     }
   },
-  inject: {
-    NDocumentation: {
-      default: null
-    }
-  },
   setup () {
     return {
       displayMode: displayModeRef,
       ...(i18n({
         'zh-CN': {
-          'show': '显示代码',
-          'hide': '收起代码',
-          'editOnGithub': '在 Github 上编辑'
+          show: '显示代码',
+          hide: '收起代码',
+          editOnGithub: '在 Github 上编辑'
         },
         'en-US': {
-          'show': 'Show Code',
-          'hide': 'Hide Code',
-          'editOnGithub': 'Edit on Github'
+          show: 'Show Code',
+          hide: 'Hide Code',
+          editOnGithub: 'Edit on Github'
         }
       }))
     }

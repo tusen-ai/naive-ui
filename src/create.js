@@ -1,53 +1,62 @@
 import version from './version'
-import globalStyle from './_styles/global-style/index.cssr.js'
+import { warn } from './_utils'
 
 function setHljs (hljs) {
   this.hljs = hljs
 }
 
 function createLocalesObject (locales) {
-  return locales && locales.reduce((localesObject, locale) => {
-    localesObject[locale._name] = locale
-    return localesObject
+  return locales && locales.reduce((localeMap, locale) => {
+    localeMap[locale._name] = locale
+    return localeMap
   }, {})
 }
 
 function createStylesObject (styles) {
-  const stylesObject = {}
+  const styleMap = {}
   function traverse (rootStyles) {
     rootStyles.forEach(style => {
-      if (!stylesObject[style.theme]) {
-        stylesObject[style.theme] = {}
-        stylesObject[style.theme].override = (...args) => {
-          stylesObject[style.theme].base.override(...args)
+      const {
+        theme,
+        name,
+        peer
+      } = style
+      if (!styleMap[theme]) {
+        styleMap[theme] = {}
+        styleMap[theme].override = (...args) => {
+          styleMap[theme].base.override(...args)
         }
       }
-      if (!stylesObject[style.theme][style.name]) {
-        stylesObject[style.theme][style.name] = style
+      if (!styleMap[theme][name]) {
+        styleMap[theme][name] = style
       }
-      if (style.peer) {
-        traverse(style.peer)
+      if (peer) {
+        traverse(peer)
       }
     })
   }
   traverse(styles)
-  return stylesObject
+  return styleMap
 }
 
-function create ({
-  componentPrefix = 'N',
-  components = [],
-  styles = [],
-  locales,
-  fallbackLocale,
-  hljs,
-  fallbackTheme
-}) {
+function create (options = {}) {
+  const {
+    componentPrefix = 'N',
+    components = [],
+    styles = [],
+    locales = [],
+    fallbackLocale, // required
+    hljs,
+    fallbackTheme // required
+  } = options
+  const mergedFallbackLocale = fallbackLocale || locales[0]
+  if (!mergedFallbackLocale) warn('create', 'both `fallbackLocale` and `locales` are not specified.')
+  if (!fallbackTheme) warn('create', '`fallbackTheme` is not specified.')
   const installTargets = []
   const naive = {
     componentPrefix,
     locales: createLocalesObject(locales),
-    fallbackLocale: fallbackLocale || locales[0],
+    fallbackLocale: mergedFallbackLocale,
     hljs,
     components: {},
     styles: createStylesObject(styles),
@@ -57,7 +66,6 @@ function create ({
     setHljs,
     setHighlightjs: setHljs,
     use (plugin) {
-      console.log('use naive ui')
       plugin.install(naive)
     },
     install
@@ -66,12 +74,8 @@ function create ({
     if (installTargets.includes(app)) return
     installTargets.push(app)
     app.config.globalProperties.$naive = naive
-    for (const component of components) {
+    components.forEach(component => {
       component.install(app, naive)
-    }
-    globalStyle.mount({
-      target: 'naive-ui-global',
-      count: false
     })
   }
   if (__DEV__) {

@@ -1,11 +1,11 @@
 <template>
   <n-modal v-model="value">
-    <template v-slot:header>
+    <template #header>
       <n-input v-model="time" /> {{ time }}
       <n-button>Look at it</n-button>
     </template>
     <n-input v-model="time" /> {{ time }}
-    <template v-slot:footer>
+    <template #footer>
       <n-input v-model="time" /> {{ time }}
       <n-button>Look at it</n-button>
     </template>

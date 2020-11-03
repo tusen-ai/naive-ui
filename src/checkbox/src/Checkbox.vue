@@ -68,11 +68,6 @@ import { warn, call } from '../../_utils'
 
 export default {
   name: 'Checkbox',
-  inject: {
-    NCheckboxGroup: {
-      default: null
-    }
-  },
   components: {
     NIconSwitchTransition,
     CheckMark,
@@ -102,6 +97,11 @@ export default {
     }),
     usecssr(styles)
   ],
+  inject: {
+    NCheckboxGroup: {
+      default: null
+    }
+  },
   props: {
     size: {
       validator (value) {

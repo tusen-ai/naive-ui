@@ -14,7 +14,7 @@ const TIME_CONST = {
 const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 export default {
-  mixins: [ locale('DatePicker') ],
+  mixins: [locale('DatePicker')],
   inject: {
     NDatePicker: {
       default: null

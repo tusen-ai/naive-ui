@@ -46,11 +46,6 @@ export default {
   components: {
     NBaseSelectMenu
   },
-  inject: {
-    NCascader: {
-      default: null
-    }
-  },
   directives: {
     zindexable,
     clickoutside
@@ -58,6 +53,11 @@ export default {
   mixins: [
     placeable
   ],
+  inject: {
+    NCascader: {
+      default: null
+    }
+  },
   props: {
     // eslint-disable-next-line vue/require-prop-types
     placement: {

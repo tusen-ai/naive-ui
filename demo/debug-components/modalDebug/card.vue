@@ -4,13 +4,13 @@
     title="Parklife"
     :deactivate="() => isActive = false"
   >
-    <template v-slot:header>
+    <template #header>
       {{ time }}
     </template>
-    <template v-slot:footer>
+    <template #footer>
       v-slot:footer
     </template>
-    <template v-slot:content>
+    <template #content>
       <n-input
         v-model="time"
       />
@@ -26,7 +26,7 @@
         trigger="click"
         style="margin-right: 12px;"
       >
-        <template v-slot:activator>
+        <template #activator>
           <n-button style="margin: 0;">
             California Girls(Click)
           </n-button>

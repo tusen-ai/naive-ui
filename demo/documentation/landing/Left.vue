@@ -1,7 +1,7 @@
 <template>
   <div>
     <n-config-consumer>
-      <template v-slot="{ styleScheme }">
+      <template #default="{ styleScheme }">
         <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="30 0 579.43 484.77">
           <g id="Page-1" style="opacity:.9">
             <g id="Dark-1-Copy-3">

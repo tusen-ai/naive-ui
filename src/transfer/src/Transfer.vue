@@ -243,6 +243,11 @@ export default {
     locale('Transfer'),
     asformitem()
   ],
+  provide () {
+    return {
+      NTransfer: this
+    }
+  },
   props: {
     value: {
       type: Array,
@@ -304,11 +309,6 @@ export default {
         return true
       },
       default: undefined
-    }
-  },
-  provide () {
-    return {
-      NTransfer: this
     }
   },
   setup (props) {

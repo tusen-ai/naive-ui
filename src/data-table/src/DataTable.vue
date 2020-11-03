@@ -148,15 +148,15 @@ export default {
   },
   props: {
     pagination: {
-      type: [ Object, Boolean ],
+      type: [Object, Boolean],
       default: false
     },
     minHeight: {
-      type: [ Number, String ],
+      type: [Number, String],
       default: null
     },
     maxHeight: {
-      type: [ Number, String ],
+      type: [Number, String],
       default: null
     },
     columns: {
@@ -168,7 +168,7 @@ export default {
       default: () => []
     },
     rowClassName: {
-      type: [ String, Function ],
+      type: [String, Function],
       default: ''
     },
     rowKey: {
@@ -184,7 +184,7 @@ export default {
       default: true
     },
     scrollX: {
-      type: [ Number, String ],
+      type: [Number, String],
       default: null
     },
     defaultCheckedRowKeys: {

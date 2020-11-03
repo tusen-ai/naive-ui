@@ -30,7 +30,7 @@
         @resize="handleVirtualListResize"
         @scroll="handleVirtualListScroll"
       >
-        <template v-slot="{ item: tmNode }">
+        <template #default="{ item: tmNode }">
           <n-select-group-header
             v-if="tmNode.rawNode.type === 'group'"
             :key="tmNode.key"
@@ -89,11 +89,6 @@ import styles from './styles'
 
 export default {
   name: 'BaseSelectMenu',
-  provide () {
-    return {
-      NBaseSelectMenu: this
-    }
-  },
   components: {
     VirtualList,
     NScrollbar,
@@ -107,6 +102,11 @@ export default {
       injectCssrProps: true
     })
   ],
+  provide () {
+    return {
+      NBaseSelectMenu: this
+    }
+  },
   props: {
     theme: {
       type: String,

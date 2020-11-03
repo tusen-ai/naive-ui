@@ -12,7 +12,7 @@
       :theme="NDataTable.mergedTheme"
       :body-style="popoverBodyStyle"
     >
-      <template v-slot:trigger>
+      <template #trigger>
         <div class="n-data-table-filter-button__icon-wrapper">
           <n-icon>
             <filter-icon />
@@ -46,16 +46,16 @@ function createActiveFilters (allFilters, columnKey, syntheticFilterValue) {
 }
 
 export default {
-  inject: {
-    NDataTable: {
-      default: null
-    }
-  },
   components: {
     NIcon,
     NDataTableFilterMenu,
     NPopover,
     FilterIcon
+  },
+  inject: {
+    NDataTable: {
+      default: null
+    }
   },
   props: {
     column: {

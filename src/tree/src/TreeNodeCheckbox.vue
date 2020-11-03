@@ -13,13 +13,13 @@ import NCheckbox from '../../checkbox'
 
 export default {
   name: 'NTreeNodeCheckbox',
+  components: {
+    NCheckbox
+  },
   inject: {
     NTree: {
       default: null
     }
-  },
-  components: {
-    NCheckbox
   },
   props: {
     value: {

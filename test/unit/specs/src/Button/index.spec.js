@@ -12,7 +12,7 @@ describe('Button', function () {
       components: {
         NButton
       },
-      template: `<n-button>{{ content }}</n-button>`,
+      template: '<n-button>{{ content }}</n-button>',
       data () {
         return {
           content: null
@@ -32,7 +32,7 @@ describe('Button', function () {
       components: {
         NButton
       },
-      template: `<n-button @click="handleClick">test</n-button>`,
+      template: '<n-button @click="handleClick">test</n-button>',
       methods: {
         handleClick
       }
@@ -42,7 +42,7 @@ describe('Button', function () {
     expect(handleClick.calledOnce)
   })
   it('should auto adjust text-color to parents background-color when `auto-text-color` is set', function () {
-    const backgroundColor = `rgba(6, 6, 6, 0.6)`
+    const backgroundColor = 'rgba(6, 6, 6, 0.6)'
     const NButtonTestContext = {
       localVue,
       components: {

@@ -16,7 +16,7 @@ export default c([
             cB('base-wave', [
               cM('active', {
                 zIndex: 1,
-                animationName: `button-wave-spread, button-wave-opacity`
+                animationName: 'button-wave-spread, button-wave-opacity'
               })
             ]),
             // background-color
@@ -77,16 +77,16 @@ function extractPallete (props, type) {
 
 function createRippleAnimation () {
   return [
-    c(`@keyframes button-wave-spread`, {
+    c('@keyframes button-wave-spread', {
       from: {
-        boxShadow: `0 0 0.5px 0 var(--ripple-color)`
+        boxShadow: '0 0 0.5px 0 var(--ripple-color)'
       },
       to: {
         // don't use exact 5px since chrome will display the animation with glitches
-        boxShadow: `0 0 0.5px 4.5px var(--ripple-color)`
+        boxShadow: '0 0 0.5px 4.5px var(--ripple-color)'
       }
     }),
-    c(`@keyframes button-wave-opacity`, {
+    c('@keyframes button-wave-opacity', {
       from: {
         opacity: 0.6
       },

@@ -152,7 +152,7 @@ export default {
         `n-descriptions--${size}-size`,
         {
           [`n-${mergedTheme}-theme`]: mergedTheme,
-          [`n-descriptions--bordered`]: bordered
+          'n-descriptions--bordered': bordered
         }
       ]
     }, [

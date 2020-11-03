@@ -119,7 +119,7 @@ export default {
     fixedColumnsLeft () {
       const columnsLeft = {}
       let left = 0
-      let columns = this.columns
+      const columns = this.columns
       columns.map((column) => {
         if (this.NDataTable.leftFixedColumns.indexOf(column) > -1) {
           columnsLeft[column.key] = left
@@ -131,7 +131,7 @@ export default {
     fixedColumnsRight () {
       const columnsRight = {}
       let right = 0
-      let columns = this.columns
+      const columns = this.columns
       for (let i = columns.length - 1; i >= 0; i--) {
         if (this.NDataTable.rightFixedColumns.indexOf(this.columns[i]) > -1) {
           columnsRight[columns[i].key] = right

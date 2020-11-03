@@ -31,7 +31,7 @@
       :size="inputSize"
       @click="handleAddClick"
     >
-      <template v-slot:icon>
+      <template #icon>
         <n-icon>
           <add-icon />
         </n-icon>

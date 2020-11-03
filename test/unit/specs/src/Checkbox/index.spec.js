@@ -11,7 +11,7 @@ describe('Checkbox', function () {
       components: {
         NCheckbox
       },
-      template: `<n-checkbox v-model="checked"></n-checkbox>`,
+      template: '<n-checkbox v-model="checked"></n-checkbox>',
       data () {
         return {
           checked: false
@@ -33,7 +33,7 @@ describe('Checkbox', function () {
       components: {
         NCheckbox
       },
-      template: `<n-checkbox v-model="checked"></n-checkbox>`,
+      template: '<n-checkbox v-model="checked"></n-checkbox>',
       data () {
         return {
           checked: false
@@ -53,7 +53,7 @@ describe('Checkbox', function () {
       components: {
         NCheckbox
       },
-      template: `<n-checkbox v-model="checked" disabled></n-checkbox>`,
+      template: '<n-checkbox v-model="checked" disabled></n-checkbox>',
       data () {
         return {
           checked: false
@@ -70,7 +70,7 @@ describe('Checkbox', function () {
       components: {
         NCheckbox
       },
-      template: `<n-checkbox v-model="checked" disabled></n-checkbox>`,
+      template: '<n-checkbox v-model="checked" disabled></n-checkbox>',
       data () {
         return {
           checked: false

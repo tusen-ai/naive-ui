@@ -98,18 +98,18 @@ export default {
       scrollElement: ref(null)
     }
   },
-  beforeUnmount () {
-    const { scrollElement } = this
-    if (scrollElement) {
-      scrollElement.removeEventListener('scroll', this.handleScroll)
-    }
-  },
   watch: {
     activeHref (value) {
       if (value === null) {
         const slotEl = this.$refs.slot
         slotEl.style.maxWidth = 0
       }
+    }
+  },
+  beforeUnmount () {
+    const { scrollElement } = this
+    if (scrollElement) {
+      scrollElement.removeEventListener('scroll', this.handleScroll)
     }
   },
   methods: {
@@ -220,8 +220,8 @@ export default {
         return a.top > b.top || a.top === b.top ? a.height < b.height : false
       })
       const currentActiveHref = this.activeHref
-      let bound = this.bound
-      let ignoreGap = this.ignoreGap
+      const bound = this.bound
+      const ignoreGap = this.ignoreGap
       const activeLink = links.reduce((prevLink, link, index) => {
         if (link.top + link.height < 0) {
           if (ignoreGap) {

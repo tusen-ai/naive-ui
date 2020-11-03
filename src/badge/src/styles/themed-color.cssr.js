@@ -2,14 +2,14 @@ import { c, cTB, cB, cM, createKey } from '../../../_utils/cssr'
 
 function createRippleAnimation () {
   return [
-    c(`@keyframes badge-wave-spread`, {
+    c('@keyframes badge-wave-spread', {
       from: {
-        boxShadow: `0 0 0.5px 0px var(--ripple-color)`,
+        boxShadow: '0 0 0.5px 0px var(--ripple-color)',
         opacity: 0.6
       },
       to: {
         // don't use exact 5px since chrome will display the animation with glitches
-        boxShadow: `0 0 0.5px 4.5px var(--ripple-color)`,
+        boxShadow: '0 0 0.5px 4.5px var(--ripple-color)',
         opacity: 0
       }
     })

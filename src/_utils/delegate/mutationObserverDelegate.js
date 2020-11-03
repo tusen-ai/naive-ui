@@ -7,6 +7,7 @@ class MutationObserverDelegate {
     this.observers = new Map()
     this.handleMutation = this.handleMutation.bind(this)
   }
+
   handleMutation (mutationList) {
     for (const mutationRecord of mutationList) {
       const handlers = this.handlers.get(mutationRecord.target)
@@ -17,6 +18,7 @@ class MutationObserverDelegate {
       }
     }
   }
+
   unregisterHandler (el, handler) {
     const handlers = this.handlers.get(el)
     if (handlers) {
@@ -32,6 +34,7 @@ class MutationObserverDelegate {
       }
     }
   }
+
   registerHandler (el, handler) {
     if (this.handlers.get(el)) {
       this.handlers.get(el).push(handler)

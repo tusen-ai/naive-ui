@@ -4,13 +4,13 @@
     relative-url="<!--URL-->"
     title="<!--TITLE_SLOT-->"
   >
-    <template v-slot:title>
+    <template #title>
       <!--TITLE_SLOT-->
     </template>
-    <template v-slot:content>
+    <template #content>
       <!--CONTENT_SLOT-->
     </template>
-    <template v-slot:demo>
+    <template #demo>
       <div
         class="demo-card__view"
       >
@@ -18,7 +18,7 @@
       </div>
     </template>
     <template
-      v-slot:code
+      #code
     >
       <!--CODE_SLOT-->
     </template>

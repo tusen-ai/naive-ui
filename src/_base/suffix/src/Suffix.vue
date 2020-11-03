@@ -53,11 +53,6 @@ import styles from './styles'
 
 export default {
   name: 'BaseSuffix',
-  inject: {
-    NFormItem: {
-      default: null
-    }
-  },
   components: {
     CancelIcon,
     NBaseLoading,
@@ -66,6 +61,11 @@ export default {
   mixins: [
     usecssr(styles)
   ],
+  inject: {
+    NFormItem: {
+      default: null
+    }
+  },
   props: {
     theme: {
       type: String,

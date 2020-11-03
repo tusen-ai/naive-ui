@@ -18,7 +18,7 @@
     <n-base-selection
       ref="triggerRef"
       class="n-select-selection"
-      :active="show"
+      :active="mergedShow"
       :pattern="pattern"
       :placeholder="localizedPlaceholder"
       :selected-option="selectedOption"
@@ -41,13 +41,13 @@
       @focus="handleTriggerFocus"
     />
     <n-lazy-teleport
-      :show="show"
+      :show="mergedShow"
       adjust-to
     >
       <div
         ref="offsetContainerRef"
         v-zindexable="{
-          enabled: show
+          enabled: mergedShow
         }"
         class="n-positioning-container"
         :class="{
@@ -64,7 +64,7 @@
             @after-leave="handleMenuAfterLeave"
           >
             <n-base-select-menu
-              v-if="show"
+              v-if="mergedShow"
               ref="menuRef"
               v-clickoutside="handleMenuClickOutside"
               class="n-select-menu"
@@ -79,13 +79,13 @@
               @menu-toggle-option="handleToggleOption"
               @scroll="handleMenuScroll"
             >
-              <template v-if="$slots.empty" v-slot:empty>
+              <template v-if="$slots.empty" #empty>
                 <slot name="empty" />
               </template>
-              <template v-if="$slots.unmatch" v-slot:unmatch>
+              <template v-if="$slots.unmatch" #unmatch>
                 <slot name="unmatch" />
               </template>
-              <template v-if="$slots.action" v-slot:action>
+              <template v-if="$slots.action" #action>
                 <slot name="action" />
               </template>
             </n-base-select-menu>
@@ -256,7 +256,7 @@ export default {
       })
     },
     fallbackOption: {
-      type: [ Function, Boolean ],
+      type: [Function, Boolean],
       default: () => value => ({
         label: '' + value,
         value
@@ -343,7 +343,7 @@ export default {
       menuRef: ref(null),
       pattern: patternRef,
       uncontrolledShow: uncontrolledShowRef,
-      show: mergedShowRef,
+      mergedShow: mergedShowRef,
       compitableOptions: useCompitable(props, [
         'items',
         'options'
@@ -355,7 +355,7 @@ export default {
   },
   computed: {
     __placeableEnabled () {
-      return this.show
+      return this.mergedShow
     },
     localizedPlaceholder () {
       return this.placeholder ?? this.localeNs.placeholder
@@ -438,11 +438,11 @@ export default {
       this.updateMemorizedOptions()
     },
     filteredOptions () {
-      if (!this.show) return
+      if (!this.mergedShow) return
       this.$nextTick(this.__placeableSyncPosition)
     },
     value () {
-      if (!this.show) return
+      if (!this.mergedShow) return
       this.$nextTick(this.__placeableSyncPosition)
     }
   },
@@ -544,7 +544,7 @@ export default {
     },
     handleTriggerClick () {
       if (this.disabled) return
-      if (!this.show) {
+      if (!this.mergedShow) {
         this.openMenu()
       } else {
         if (!this.filterable) {
@@ -560,7 +560,7 @@ export default {
       this.doFocus()
     },
     handleMenuClickOutside (e) {
-      if (this.show) {
+      if (this.mergedShow) {
         if (!this.triggerRef.$el.contains(e.target)) {
           this.closeMenu()
         }
@@ -695,7 +695,7 @@ export default {
     },
     // keyboard events
     handleKeyUpEnter (e) {
-      if (this.show) {
+      if (this.mergedShow) {
         const menu = this.menuRef
         const pendingOptionData = menu && menu.getPendingOption()
         if (pendingOptionData) {
@@ -716,13 +716,13 @@ export default {
     },
     handleKeyUpUp () {
       if (this.loading) return
-      if (this.show) {
+      if (this.mergedShow) {
         this.menuRef.prev()
       }
     },
     handleKeyUpDown () {
       if (this.loading) return
-      if (this.show) {
+      if (this.mergedShow) {
         this.menuRef.next()
       }
     },

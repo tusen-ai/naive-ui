@@ -35,7 +35,7 @@
       @deactivate="handleRangeInputDeactivate"
       @input="handleRangeInput"
     >
-      <template v-slot:suffix>
+      <template #suffix>
         <n-icon><calendar-icon /></n-icon>
       </template>
     </n-input>
@@ -60,7 +60,7 @@
       @input="handleTimeInput"
       @clear="handleClear"
     >
-      <template v-slot:suffix>
+      <template #suffix>
         <n-icon><calendar-icon /></n-icon>
       </template>
     </n-input>
@@ -311,14 +311,6 @@ export default {
       default: undefined
     }
   },
-  data () {
-    return {
-      displayTime: '',
-      displayStartTime: '',
-      displayEndTime: '',
-      active: false
-    }
-  },
   setup (props) {
     return {
       panelRef: ref(null),
@@ -329,6 +321,14 @@ export default {
       isMounted: useIsMounted(),
       ...uniCalendarValidation(props),
       ...dualCalendarValidation(props)
+    }
+  },
+  data () {
+    return {
+      displayTime: '',
+      displayStartTime: '',
+      displayEndTime: '',
+      active: false
     }
   },
   computed: {

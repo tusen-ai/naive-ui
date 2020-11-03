@@ -109,11 +109,6 @@ import { onFontReady } from '../../_utils/composition'
 
 export default {
   name: 'Tabs',
-  provide () {
-    return {
-      NTab: this
-    }
-  },
   components: {
     NIcon,
     BackwardIcon,
@@ -126,6 +121,11 @@ export default {
     themeable,
     usecssr(styles)
   ],
+  provide () {
+    return {
+      NTab: this
+    }
+  },
   props: {
     value: {
       type: String || Number,
@@ -186,6 +186,22 @@ export default {
       default: undefined
     }
   },
+  setup (props) {
+    onFontReady(vm => {
+      vm.updateScrollStatus()
+      if (vm.typeIsLine) {
+        vm.updateCurrentBarPosition()
+      }
+    })
+    return {
+      compitableValue: useCompitable(props, ['activeName', 'value']),
+      compitableOnValueChange: useCompitable(props, ['onActiveNameChange', 'onUpdate:value']),
+      navScrollRef: ref(null),
+      labelWrapperRef: ref(null),
+      navRef: ref(null),
+      labelBarRef: ref(null)
+    }
+  },
   data () {
     return {
       panels: [],
@@ -228,22 +244,6 @@ export default {
     },
     panelLabels () {
       this.$nextTick(this.updateScrollStatus)
-    }
-  },
-  setup (props) {
-    onFontReady(vm => {
-      vm.updateScrollStatus()
-      if (vm.typeIsLine) {
-        vm.updateCurrentBarPosition()
-      }
-    })
-    return {
-      compitableValue: useCompitable(props, ['activeName', 'value']),
-      compitableOnValueChange: useCompitable(props, ['onActiveNameChange', 'onUpdate:value']),
-      navScrollRef: ref(null),
-      labelWrapperRef: ref(null),
-      navRef: ref(null),
-      labelBarRef: ref(null)
     }
   },
   mounted () {

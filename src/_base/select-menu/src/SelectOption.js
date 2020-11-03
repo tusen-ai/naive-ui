@@ -73,7 +73,7 @@ export default {
   },
   render () {
     const { rawNode } = this
-    const children = rawNode.render ? rawNode.render(rawNode, this.isSelected) : [ rawNode.label ]
+    const children = rawNode.render ? rawNode.render(rawNode, this.isSelected) : [rawNode.label]
     return h('div', {
       class: [
         'n-base-select-option',

@@ -28,16 +28,16 @@ export default {
     NBaseSelectMenu
   },
   cssrName: 'Popselect',
-  inject: {
-    NPopselect: {
-      default: null
-    }
-  },
   mixins: [
     configurable,
     themeable,
     usecssr(styles)
   ],
+  inject: {
+    NPopselect: {
+      default: null
+    }
+  },
   props: {
     multiple: {
       type: Boolean,

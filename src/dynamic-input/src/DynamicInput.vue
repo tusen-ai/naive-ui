@@ -26,7 +26,7 @@
             circle
             @click="remove($event, index)"
           >
-            <template v-slot:icon>
+            <template #icon>
               <md-remove />
             </template>
           </n-button>
@@ -35,7 +35,7 @@
             circle
             @click="createItem($event, index)"
           >
-            <template v-slot:icon>
+            <template #icon>
               <md-add />
             </template>
           </n-button>
@@ -46,6 +46,7 @@
 </template>
 
 <script>
+/* eslint-disable vue/no-mutating-props */
 import NButton from '../../button'
 import NButtonGroup from '../../button-group'
 import mdAdd from '../../_deprecated/icons/md-add.vue'
@@ -189,19 +190,19 @@ export default {
           const keyField = this.keyField
           if (keyField) {
             const memorizedKeyField = this.value[0][keyField]
-            this.doInput([ Object.assign(onClear(), {
+            this.doInput([Object.assign(onClear(), {
               [keyField]: memorizedKeyField
             })])
           } else {
-            this.doInput([ onClear() ])
+            this.doInput([onClear()])
           }
         } else {
           switch (this.preset) {
             case 'input':
-              this.doInput([ null ])
+              this.doInput([null])
               break
             case 'pair':
-              this.doInput([ { key: null, value: null } ])
+              this.doInput([{ key: null, value: null }])
               break
           }
         }

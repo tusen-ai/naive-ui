@@ -153,6 +153,16 @@ export default {
     themeable,
     usecssr(styles)
   ],
+  inject: {
+    NForm: {
+      default: null
+    }
+  },
+  provide () {
+    return {
+      NFormItem: this
+    }
+  },
   props: {
     label: {
       type: [Number, String],
@@ -221,16 +231,6 @@ export default {
     feedback: {
       type: String,
       default: undefined
-    }
-  },
-  inject: {
-    NForm: {
-      default: null
-    }
-  },
-  provide () {
-    return {
-      NFormItem: this
     }
   },
   setup (props) {

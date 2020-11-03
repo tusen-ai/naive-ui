@@ -63,7 +63,7 @@ export default {
         nTriggerFormChange
       } = this
       if (Array.isArray(this.value)) {
-        let groupValue = Array.from(this.value)
+        const groupValue = Array.from(this.value)
         const index = groupValue.findIndex(value => value === checkboxValue)
         if (checked) {
           if (!~index) {

@@ -6,7 +6,7 @@ import suffixStyle from '../../_base/suffix/styles/dark'
 export default create({
   name: 'Input',
   theme: 'dark',
-  peer: [ suffixStyle ],
+  peer: [suffixStyle],
   getDerivedVariables ({ base, derived }) {
     const {
       textColor2Overlay,

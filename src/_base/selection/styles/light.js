@@ -6,7 +6,7 @@ import suffixStyle from '../../suffix/styles/dark'
 export default create({
   name: 'BaseSelection',
   theme: 'light',
-  peer: [ suffixStyle ],
+  peer: [suffixStyle],
   getDerivedVariables ({ base, derived }) {
     return {
       ...commonVariables,

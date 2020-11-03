@@ -31,7 +31,7 @@ describe('Icon', function () {
         components: {
           NIcon
         },
-        template: `<n-icon type="md-alert"></n-icon>`,
+        template: '<n-icon type="md-alert"></n-icon>',
         data () {
           return {
             content: null
@@ -47,7 +47,7 @@ describe('Icon', function () {
         components: {
           NIcon
         },
-        template: `<n-icon type="md-alert" size="40"></n-icon>`,
+        template: '<n-icon type="md-alert" size="40"></n-icon>',
         data () {
           return {
             content: null
@@ -63,7 +63,7 @@ describe('Icon', function () {
         components: {
           NIcon
         },
-        template: `<n-icon type="md-alert" :size="40"></n-icon>`,
+        template: '<n-icon type="md-alert" :size="40"></n-icon>',
         data () {
           return {
             content: null
@@ -81,7 +81,7 @@ describe('Icon', function () {
         components: {
           NIcon
         },
-        template: `<n-icon type="md-alert"></n-icon>`,
+        template: '<n-icon type="md-alert"></n-icon>',
         data () {
           return {
             content: null

@@ -36,12 +36,12 @@
 
 <script>
 export default {
+  name: 'TimelineItem',
   inject: {
     NTimeline: {
       default: null
     }
   },
-  name: 'TimelineItem',
   props: {
     time: {
       type: [String, Number],

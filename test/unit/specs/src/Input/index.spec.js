@@ -50,7 +50,7 @@ describe('Input', function () {
           components: {
             NInput
           },
-          template: `<n-input type="input" v-model="value" :placeholder="placeholder"></n-input>`,
+          template: '<n-input type="input" v-model="value" :placeholder="placeholder"></n-input>',
           data () {
             return {
               value: '',
@@ -70,7 +70,7 @@ describe('Input', function () {
         components: {
           NInput
         },
-        template: `<n-input type="input" v-model="value" round></n-input>`,
+        template: '<n-input type="input" v-model="value" round></n-input>',
         data () {
           return {
             value: ''
@@ -87,7 +87,7 @@ describe('Input', function () {
           components: {
             NInput
           },
-          template: `<n-input type="input" v-model="value" disabled></n-input>`,
+          template: '<n-input type="input" v-model="value" disabled></n-input>',
           data () {
             return {
               value: ''
@@ -103,7 +103,7 @@ describe('Input', function () {
           components: {
             NInput
           },
-          template: `<n-input type="input" v-model="value" disabled></n-input>`,
+          template: '<n-input type="input" v-model="value" disabled></n-input>',
           data () {
             return {
               value: ''
@@ -123,7 +123,7 @@ describe('Input', function () {
           components: {
             NInput
           },
-          template: `<n-input type="input" v-model="value"></n-input>`,
+          template: '<n-input type="input" v-model="value"></n-input>',
           data () {
             return {
               value: ''
@@ -148,7 +148,7 @@ describe('Input', function () {
             components: {
               NInput
             },
-            template: `<n-input type="textarea" v-model="value" disabled></n-input>`,
+            template: '<n-input type="textarea" v-model="value" disabled></n-input>',
             data () {
               return {
                 value: ''
@@ -164,7 +164,7 @@ describe('Input', function () {
             components: {
               NInput
             },
-            template: `<n-input type="textarea" v-model="value" disabled></n-input>`,
+            template: '<n-input type="textarea" v-model="value" disabled></n-input>',
             data () {
               return {
                 value: ''
@@ -184,7 +184,7 @@ describe('Input', function () {
           components: {
             NInput
           },
-          template: `<n-input type="textarea" v-model="value" :placeholder="placeholder"></n-input>`,
+          template: '<n-input type="textarea" v-model="value" :placeholder="placeholder"></n-input>',
           data () {
             return {
               value: '',
@@ -205,7 +205,7 @@ describe('Input', function () {
           components: {
             NInput
           },
-          template: `<n-input type="textarea" v-model="value" rows="20"></n-input>`,
+          template: '<n-input type="textarea" v-model="value" rows="20"></n-input>',
           data () {
             return {
               value: ''
@@ -221,7 +221,7 @@ describe('Input', function () {
           components: {
             NInput
           },
-          template: `<n-input type="textarea" v-model="value" :rows="20"></n-input>`,
+          template: '<n-input type="textarea" v-model="value" :rows="20"></n-input>',
           data () {
             return {
               value: ''
@@ -241,7 +241,7 @@ describe('Input', function () {
           components: {
             NInput
           },
-          template: `<n-input type="textarea" v-model="value"></n-input>`,
+          template: '<n-input type="textarea" v-model="value"></n-input>',
           data () {
             return {
               value: ''

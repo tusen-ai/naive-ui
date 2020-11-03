@@ -163,6 +163,14 @@ export default {
       default: undefined
     }
   },
+  setup () {
+    return {
+      containerRef: ref(null),
+      contentRef: ref(null),
+      yRailRef: ref(null),
+      xRailRef: ref(null)
+    }
+  },
   data () {
     return {
       contentHeight: null,
@@ -241,14 +249,6 @@ export default {
     window.clearTimeout(this.yBarVanishTimerId)
     window.removeEventListener('mousemove', this.handleYScrollMouseMove, true)
     window.removeEventListener('mouseup', this.handleYScrollMouseUp, true)
-  },
-  setup () {
-    return {
-      containerRef: ref(null),
-      contentRef: ref(null),
-      yRailRef: ref(null),
-      xRailRef: ref(null)
-    }
   },
   mounted () {
     // if container exist, it always can't be resolved when scrollbar is mounted

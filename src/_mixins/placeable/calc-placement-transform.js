@@ -14,16 +14,16 @@ const lengthToCompare = {
 
 const placementToTransformOrigin = {
   'bottom-start': 'top left',
-  'bottom': 'top center',
+  bottom: 'top center',
   'bottom-end': 'top right',
   'top-start': 'bottom left',
-  'top': 'bottom',
+  top: 'bottom',
   'top-end': 'bottom right',
   'right-start': 'top left',
-  'right': 'center left',
+  right: 'center left',
   'right-end': 'bottom left',
   'left-start': 'top right',
-  'left': 'center right',
+  left: 'center right',
   'left-end': 'bottom right'
 }
 
@@ -38,8 +38,8 @@ const positionDirections = {
   'left-end': 'top'
 }
 const oppositePosition = {
-  'start': 'end',
-  'end': 'start'
+  start: 'end',
+  end: 'start'
 }
 
 export function getAdjustedPlacementOfTrackingElement (placement, trackedRect, trackingRect, flip) {

@@ -6,7 +6,7 @@
     :size="size"
     @click="handleEditOnGithubClick"
   >
-    <template v-slot:icon>
+    <template #icon>
       <edit-icon />
     </template>
   </n-button>

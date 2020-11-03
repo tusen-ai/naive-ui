@@ -63,7 +63,7 @@ export default c([
           })
         ]),
         cM('no-arrow',
-          [ 'top',
+          ['top',
             'top-start',
             'top-end',
             'bottom',

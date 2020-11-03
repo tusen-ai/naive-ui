@@ -1,4 +1,6 @@
 import { find } from '../_utils/cssr'
+import globalStyle from '../_styles/global-style/index.cssr.js'
+import { warn } from '../_utils'
 
 if (__DEV__) {
   if (!window.naive) window.naive = {}
@@ -6,27 +8,27 @@ if (__DEV__) {
 }
 
 function getThemeVariables (naive, themeName) {
-  const styles = naive.styles
+  const { styles } = naive
   const theme = styles[themeName]
-  return theme.base
+  return theme.base // style[theme]base, for example style.light.base
 }
 
 function createMutableStyleId (
   componentCssrId,
   renderedTheme,
-  dependencyKey,
-  dependencyValue
+  depKey,
+  depValue
 ) {
   if (
-    dependencyKey === 'mergedTheme' ||
-    dependencyKey === 'theme'
+    depKey === 'mergedTheme' ||
+    depKey === 'theme'
   ) {
     return componentCssrId + '-' + renderedTheme
   }
   return (
     componentCssrId + '-' +
     renderedTheme + '-' +
-    dependencyKey + (dependencyValue ? ('-' + dependencyValue) : '')
+    depKey + (depValue ? ('-' + depValue) : '')
   )
 }
 
@@ -39,11 +41,13 @@ function createImmutableStyleId (
 function setupMutableStyle (
   instance,
   theme,
-  dependencyKey,
+  depKey,
   CNode
 ) {
-  const naive = instance.$naive
-  const options = instance.$options
+  const {
+    $naive: naive,
+    $options: options
+  } = instance
   const {
     fallbackTheme,
     styles
@@ -51,26 +55,26 @@ function setupMutableStyle (
   const name = options.cssrName || options.name
   const id = options.cssrId || name
   const renderedTheme = theme || fallbackTheme
-  const dependencyValue = (
-    dependencyKey === 'mergedTheme' ||
-    dependencyKey === 'theme'
-  ) ? renderedTheme : instance[dependencyKey]
+  const depValue = (
+    depKey === 'mergedTheme' ||
+    depKey === 'theme'
+  ) ? renderedTheme : instance[depKey]
   if (
     __DEV__ &&
-    (dependencyValue === null || dependencyValue === undefined)
+    (depValue === null || depValue === undefined)
   ) {
-    console.error(`[naive-ui/mixins/usecssr]: dependency key ${name}.${dependencyKey} should not be nullable`, instance)
+    warn('mixins/usecssr', `dependency key ${name}.${depKey} should not be nullable`)
   }
   const mountId = createMutableStyleId(
     id,
     renderedTheme,
-    dependencyKey,
-    dependencyValue
+    depKey,
+    depValue
   )
   if (find(mountId)) return
   const cssrPropsGetter = styles[renderedTheme][name]
   if (__DEV__ && !cssrPropsGetter) {
-    console.error(`[naive-ui/mixins/usecssr]: ${name}'s style not found`, styles)
+    warn('mixins/usecssr', `${name}'s style not found`)
   }
   // themeVariables: { base, derived }
   const themeVariables = getThemeVariables(naive, renderedTheme)
@@ -131,7 +135,7 @@ function getCssrProps (
   }
 }
 
-const usecssr = function (styles, cssrPropsOption) {
+const usecssr = function (styles = [], cssrPropsOption) {
   // collect watchers
   const watchers = {}
   if (
@@ -193,7 +197,11 @@ const usecssr = function (styles, cssrPropsOption) {
           cssrProps: getCssrProps(this, this[cssrPropsOption.themeKey])
         }
       } : undefined,
-    created () {
+    beforeMount () {
+      globalStyle.mount({
+        target: 'naive-ui-global',
+        count: false
+      })
       styles.forEach(style => {
         if (__DEV__) {
           window.naive.styleRenderingDuration -= performance.now()

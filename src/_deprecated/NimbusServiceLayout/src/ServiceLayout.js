@@ -121,13 +121,13 @@ export default {
     const siderProps = {
       'show-toggle-button': true,
       'show-trigger': true,
-      'collapsed': this.collapsed,
+      collapsed: this.collapsed,
       'collapse-mode': 'width',
-      'bordered': this.siderBordered,
+      bordered: this.siderBordered,
       'show-content': !this.collapsed,
       'use-native-scrollbar': false,
       'collapsed-width': 0,
-      'width': 288,
+      width: 288,
       'trigger-style': {
         top: 'calc(50% - 78px)'
       },
@@ -162,7 +162,7 @@ export default {
             h(NLayoutSider, {
               ...siderProps,
               style: {
-                'display': 'flex',
+                display: 'flex',
                 'justify-content': 'flex-end',
                 ...this.siderStyle
               },

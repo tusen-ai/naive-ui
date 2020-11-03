@@ -59,6 +59,7 @@ class KeyboardDelegate {
       })
     })
   }
+
   getKeyboardStatus () {
     return {
       shiftPressed: this.shiftPressed,
@@ -67,6 +68,7 @@ class KeyboardDelegate {
       tabPressed: this.c
     }
   }
+
   registerHandler (keyCode, type, handler, options = {}) {
     this.handlerInfoList.push({
       keyCode,
@@ -77,6 +79,7 @@ class KeyboardDelegate {
       capture: options.capture
     })
   }
+
   unregisterHandler (handler) {
     this.handlerInfoList = this.handlerInfoList.filter(handlerInfo => {
       return handler !== handlerInfo.handler

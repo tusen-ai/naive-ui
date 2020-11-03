@@ -46,13 +46,13 @@ export default create({
           .hljs-attribute,
           .hljs-meta-string
         `, {
-          color: `#50a14f`
+          color: '#50a14f'
         }),
         c(`
           .hljs-built_in,
           .hljs-class .hljs-title
         `, {
-          color: `#c18401`
+          color: '#c18401'
         }),
         c(`
           .hljs-attr,
@@ -64,7 +64,7 @@ export default create({
           .hljs-selector-pseudo,
           .hljs-number
         `, {
-          color: `#986801`
+          color: '#986801'
         }),
         c(`
           .hljs-symbol,
@@ -74,10 +74,10 @@ export default create({
           .hljs-selector-id,
           .hljs-title
         `, {
-          color: `#4078f2`
+          color: '#4078f2'
         }),
         c('.hljs-emphasis', {
-          fontStyle: `italic`
+          fontStyle: 'italic'
         }),
         c('.hljs-strong', {
           fontWeight: base.fontWeightStrong

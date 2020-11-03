@@ -24,6 +24,11 @@ export default {
     themeable,
     usecssr(styles)
   ],
+  provide () {
+    return {
+      NTimeline: this
+    }
+  },
   props: {
     itemPlacement: {
       validator (value) {
@@ -36,11 +41,6 @@ export default {
         return ['medium', 'large'].includes(value)
       },
       default: 'medium'
-    }
-  },
-  provide () {
-    return {
-      NTimeline: this
     }
   }
 }

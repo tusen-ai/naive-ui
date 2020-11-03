@@ -91,6 +91,11 @@ export default {
     NIconSwitchTransition,
     NFadeInExpandTransition
   },
+  mixins: [
+    configurable,
+    themeable,
+    usecssr(styles)
+  ],
   inject: {
     NButtonGroup: {
       default: null
@@ -99,11 +104,6 @@ export default {
       default: null
     }
   },
-  mixins: [
-    configurable,
-    themeable,
-    usecssr(styles)
-  ],
   props: {
     color: {
       type: String,

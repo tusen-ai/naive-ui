@@ -8,9 +8,11 @@ class ZIndexManager {
     this.elementZIndex = new Map()
     this.nextZIndex = 2000
   }
+
   get elementCount () {
     return this.elementZIndex.size
   }
+
   registerElement (el, zIndex) {
     if (__DEV__) {
       debug('z-index-manager/register-element', 'Called.')
@@ -34,6 +36,7 @@ class ZIndexManager {
     }
     this.afterManipulation()
   }
+
   setNewZIndex (el, zIndex) {
     if (__DEV__) {
       debug('z-index-manager/set-new-z-index', 'Called.')
@@ -59,6 +62,7 @@ class ZIndexManager {
     }
     this.afterManipulation()
   }
+
   unregisterElement (el) {
     if (__DEV__) {
       debug('z-index-manager/unregister-element', 'Called.')
@@ -73,12 +77,14 @@ class ZIndexManager {
     }
     this.afterManipulation()
   }
+
   afterManipulation () {
     if (!this.elementCount) {
       this.nextZIndex = 2000
     }
     if (this.nextZIndex - this.elementCount > 2500) this.rearrangeZIndex()
   }
+
   rearrangeZIndex () {
     const elementZIndexPair = Array.from(this.elementZIndex.entries())
     elementZIndexPair.sort((pair1, pair2) => {

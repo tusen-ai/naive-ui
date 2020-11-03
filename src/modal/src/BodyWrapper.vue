@@ -34,14 +34,14 @@
             @negative-click="handleNegativeClick"
             @positive-click="handlePositiveClick"
           >
-            <template v-if="$slots.header" v-slot:header>
+            <template v-if="$slots.header" #header>
               <slot name="header" />
             </template>
-            <template v-if="$slots.icon" v-slot:icon>
+            <template v-if="$slots.icon" #icon>
               <slot name="icon" />
             </template>
             <slot />
-            <template v-if="$slots.action" v-slot:action>
+            <template v-if="$slots.action" #action>
               <slot name="action" />
             </template>
           </n-dialog>
@@ -56,16 +56,16 @@
             :segmented="segmented"
             @close="handleCloseClick"
           >
-            <template v-if="$slots.header" v-slot:header>
+            <template v-if="$slots.header" #header>
               <slot name="header" />
             </template>
-            <template v-if="$slots['header-extra']" v-slot:header-extra>
+            <template v-if="$slots['header-extra']" #header-extra>
               <slot name="header-extra" />
             </template>
-            <template v-if="$slots.footer" v-slot:footer>
+            <template v-if="$slots.footer" #footer>
               <slot name="footer" />
             </template>
-            <template v-if="$slots.action" v-slot:action>
+            <template v-if="$slots.action" #action>
               <slot name="action" />
             </template>
             <slot />
@@ -112,25 +112,6 @@ export default {
       default: null
     }
   },
-  setup (props) {
-    const dataRefs = toRefs(reactive({
-      displayed: props.show,
-      transformOriginX: null,
-      transformOriginY: null
-    }))
-    watch(toRef(props, 'show'), value => {
-      if (value) dataRefs.displayed.value = true
-    })
-    return {
-      compitableBodyStyle: useCompitable(props, [
-        'overlayStyle',
-        'bodyStyle'
-      ]),
-      mousePosition: useLastClickPosition(),
-      bodyRef: ref(null),
-      ...dataRefs
-    }
-  },
   props: {
     show: {
       type: Boolean,
@@ -171,6 +152,26 @@ export default {
       default: undefined
     }
   },
+  setup (props) {
+    const dataRefs = toRefs(reactive({
+      displayed: props.show,
+      transformOriginX: null,
+      transformOriginY: null
+    }))
+    watch(toRef(props, 'show'), value => {
+      if (value) dataRefs.displayed.value = true
+    })
+    return {
+      compitableBodyStyle: useCompitable(props, [
+        'overlayStyle',
+        'bodyStyle'
+      ]),
+      mousePosition: useLastClickPosition(),
+      bodyRef: ref(null),
+      ...dataRefs
+    }
+  },
+
   methods: {
     styleTransformOrigin () {
       const {

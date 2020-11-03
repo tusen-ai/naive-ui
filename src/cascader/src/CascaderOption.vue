@@ -78,17 +78,17 @@ import { useMemo } from 'vooks'
 
 export default {
   name: 'NCascaderOption',
-  inject: {
-    NCascader: {
-      default: null
-    }
-  },
   components: {
     NCheckbox,
     NBaseLoading,
     NIconSwitchTransition,
     ChevronRightIcon,
     CheckmarkIcon
+  },
+  inject: {
+    NCascader: {
+      default: null
+    }
   },
   props: {
     tmNode: {

@@ -148,7 +148,7 @@ export default {
         `n-radio-group--${mergedSize}-size`,
         {
           [`n-${mergedTheme}-theme`]: mergedTheme,
-          [`n-radio-group--button-group`]: isButtonGroup
+          'n-radio-group--button-group': isButtonGroup
         }
       ]
     }, children)

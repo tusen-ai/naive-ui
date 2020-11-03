@@ -49,16 +49,16 @@ export default {
     NLogLoader,
     NLogLine
   },
-  provide () {
-    return {
-      NLog: this
-    }
-  },
   mixins: [
     configurable,
     themeable,
     usecssr(styles)
   ],
+  provide () {
+    return {
+      NLog: this
+    }
+  },
   props: {
     loading: {
       type: Boolean,

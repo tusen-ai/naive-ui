@@ -7,6 +7,7 @@ class ScrollDelegate {
     this.handlerCount = 0
     this.handleScroll = this.handleScroll.bind(this)
   }
+
   handleScroll (e) {
     const handlers = this.handlers.get(e.target)
     if (handlers) {
@@ -15,6 +16,7 @@ class ScrollDelegate {
       }
     }
   }
+
   unregisterHandler (el, handler) {
     const handlers = this.handlers.get(el)
     if (handlers) {
@@ -37,6 +39,7 @@ class ScrollDelegate {
       this.handlers = new Map()
     }
   }
+
   registerHandler (el, handler) {
     if (!this.handlerCount) {
       if (__DEV__) {

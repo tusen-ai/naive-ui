@@ -19,16 +19,16 @@ export default function ({
       transition: `transform ${duration} ${cubicBezierEaseOut}`
     }),
     c(`&.${namespace}-${name}-transition-enter-to`, {
-      transform: `translateX(0)`
+      transform: 'translateX(0)'
     }),
     c(`&.${namespace}-${name}-transition-enter-from`, {
-      transform: `translateX(100%)`
+      transform: 'translateX(100%)'
     }),
     c(`&.${namespace}-${name}-transition-leave-from`, {
-      transform: `translateX(0)`
+      transform: 'translateX(0)'
     }),
     c(`&.${namespace}-${name}-transition-leave-to`, {
-      transform: `translateX(100%)`
+      transform: 'translateX(100%)'
     })
   ]
 }

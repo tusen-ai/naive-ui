@@ -7,6 +7,7 @@ class MoveOutsideDelegate {
     this.handlerCount = 0
     this.handleMoveOutside = this.handleMoveOutside.bind(this)
   }
+
   handleMoveOutside (e) {
     const target = e.target
     for (const [handler, { els, once }] of this.handlers) {
@@ -34,6 +35,7 @@ class MoveOutsideDelegate {
       }
     }
   }
+
   unregisterHandler (handler) {
     if (__DEV__) {
       console.debug('[MoveOutsideDelegate]: unregisterHandler')
@@ -51,6 +53,7 @@ class MoveOutsideDelegate {
       this.handlers = new Map()
     }
   }
+
   registerHandler (els, handler, once = true) {
     if (!Array.isArray(els)) {
       els = [els]

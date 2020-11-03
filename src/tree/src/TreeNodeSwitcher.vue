@@ -25,15 +25,15 @@ import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 
 export default {
   name: 'NTreeSwitcher',
-  inject: {
-    NTree: {
-      default: null
-    }
-  },
   components: {
     mdArrowDropright,
     NBaseLoading,
     NIconSwitchTransition
+  },
+  inject: {
+    NTree: {
+      default: null
+    }
   },
   props: {
     expanded: {

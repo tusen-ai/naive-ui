@@ -140,7 +140,7 @@ export default c([
           right: 0,
           top: 0,
           bottom: 0,
-          padding: `0 26px 0 14px`,
+          padding: '0 26px 0 14px',
           color: pallete.placeholderColor,
           transition: `color .3s ${cubicBezierEaseInOut}`
         })

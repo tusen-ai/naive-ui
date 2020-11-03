@@ -46,7 +46,7 @@ export default {
   computed: {
     styleTransform () {
       const type = this.type
-      if (type === 'backward' || type === 'fast-backward') return `rotate(180deg)`
+      if (type === 'backward' || type === 'fast-backward') return 'rotate(180deg)'
       return null
     }
   }

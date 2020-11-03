@@ -25,7 +25,7 @@
           :type="buttonType"
           @click="handleRemoveOrCancelClick"
         >
-          <template v-slot:icon>
+          <template #icon>
             <n-icon-switch-transition>
               <trash-outline v-if="showRemoveButton" key="trash" />
               <close-outline v-else key="close" />
@@ -41,7 +41,7 @@
           :type="buttonType"
           @click="handleDownloadClick"
         >
-          <template v-slot:icon>
+          <template #icon>
             <download-outline />
           </template>
         </n-button>

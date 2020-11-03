@@ -18,6 +18,11 @@ export default {
   components: {
     NCheckbox
   },
+  inject: {
+    NTransfer: {
+      default: null
+    }
+  },
   props: {
     theme: {
       validator: createValidator(['string']),
@@ -30,11 +35,6 @@ export default {
     onChange: {
       validator: createValidator(['function']),
       required: true
-    }
-  },
-  inject: {
-    NTransfer: {
-      default: null
     }
   },
   computed: {

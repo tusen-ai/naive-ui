@@ -4,15 +4,15 @@
 
 <script>
 export default {
+  inject: {
+    NLog: {
+      default: null
+    }
+  },
   props: {
     line: {
       type: String,
       default: undefined
-    }
-  },
-  inject: {
-    NLog: {
-      default: null
     }
   },
   computed: {

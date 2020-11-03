@@ -24,7 +24,7 @@ module.exports = {
           }
           if (/.md$/.test(ctx.path) || ctx.path.endsWith('.entry')) {
             const publicPath = ctx.path
-            let filePath = resolver.requestToFile(publicPath)
+            const filePath = resolver.requestToFile(publicPath)
             const content = mdTransform2VueTemplateHandlers(filePath)
             // make it Treat as vue
             ctx.vue = true

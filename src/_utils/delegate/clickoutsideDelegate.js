@@ -6,9 +6,11 @@ class ClickOutsideDelegate {
     this.handleMouseUpOutside = this.handleMouseUpOutside.bind(this)
     this.handleMouseDown = this.handleMouseDown.bind(this)
   }
+
   handleMouseDown (e) {
     this.mouseDownTarget = e.target
   }
+
   handleMouseUpOutside (e) {
     const { target } = e
     for (const [handler, { els }] of this.handlers) {
@@ -25,6 +27,7 @@ class ClickOutsideDelegate {
       }
     }
   }
+
   unregisterHandler (handler) {
     if (__DEV__) {
       console.debug('[ClickOutsideDelegate]: unregisterHandler')
@@ -54,6 +57,7 @@ class ClickOutsideDelegate {
       this.handlers = new Map()
     }
   }
+
   registerHandler (els, handler) {
     if (!Array.isArray(els)) {
       els = [els]

@@ -6,6 +6,7 @@ class ResizeDelegate {
     this.handlers = []
     this.handleResize = this.handleResize.bind(this)
   }
+
   handleResize (e) {
     const handlers = this.handlers
     if (handlers.length) {
@@ -14,6 +15,7 @@ class ResizeDelegate {
       }
     }
   }
+
   unregisterHandler (handler) {
     const handlers = this.handlers
     if (handlers.length) {
@@ -31,6 +33,7 @@ class ResizeDelegate {
       window.removeEventListener('resize', this.handleResize, true)
     }
   }
+
   registerHandler (handler) {
     if (!this.handlers.length) {
       if (__DEV__) {

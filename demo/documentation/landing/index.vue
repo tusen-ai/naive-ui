@@ -1,6 +1,6 @@
 <template>
   <n-config-consumer>
-    <template v-slot="{ theme }">
+    <template #default="{ theme }">
       <div>
         <n-layout-footer position="absolute" style="z-index: auto;">
           <landing-footer style="max-width: 1200px; margin: auto;" />
@@ -47,32 +47,32 @@ import rightImage from './Right.vue'
 import { i18n } from '../../util-composables'
 
 export default {
-  inject: {
-    NConfigProvider: {
-      default: null
-    }
-  },
   components: {
     LandingFooter,
     leftImage,
     rightImage
   },
+  inject: {
+    NConfigProvider: {
+      default: null
+    }
+  },
   setup () {
     return {
       ...(i18n({
         'zh-CN': {
-          'start': '开始使用',
-          'intro1': '一个 Vue UI 框架',
-          'intro2': '在意样式，带主题，比较完整，不算太慢',
-          'intro3': '有点意思',
-          'intro4': '换个主题'
+          start: '开始使用',
+          intro1: '一个 Vue UI 框架',
+          intro2: '在意样式，带主题，比较完整，不算太慢',
+          intro3: '有点意思',
+          intro4: '换个主题'
         },
         'en-US': {
-          'start': 'Get Started',
-          'intro1': 'A Vue UI Framework',
-          'intro2': 'Caring About Styles, Themed, Batteries Included, Not Rather Slow',
-          'intro3': 'Interesting Somehow',
-          'intro4': 'Change Theme'
+          start: 'Get Started',
+          intro1: 'A Vue UI Framework',
+          intro2: 'Caring About Styles, Themed, Batteries Included, Not Rather Slow',
+          intro3: 'Interesting Somehow',
+          intro4: 'Change Theme'
         }
       }))
     }

@@ -96,20 +96,17 @@ export default {
     NBaseSelection,
     NLazyTeleport
   },
+  mixins: [
+    configurable,
+    themeable,
+    locale('Cascader'),
+    usecssr(styles)
+  ],
   provide () {
     return {
       NCascader: this
     }
   },
-  mixins: [
-    configurable,
-    themeable,
-    locale('Cascader'),
-    usecssr(styles, {
-      themeKey: 'mergedTheme',
-      injectCssrProps: true
-    })
-  ],
   props: {
     options: {
       type: Array,

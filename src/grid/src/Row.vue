@@ -21,15 +21,15 @@ import usecssr from '../../_mixins/usecssr'
 import styles from './styles/row.js'
 
 export default {
+  name: 'Row',
+  mixins: [
+    usecssr(styles)
+  ],
   provide () {
     return {
       NRow: this
     }
   },
-  name: 'Row',
-  mixins: [
-    usecssr(styles)
-  ],
   props: {
     gutter: {
       type: [Array, Number, String],

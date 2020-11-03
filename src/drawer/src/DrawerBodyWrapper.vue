@@ -47,6 +47,17 @@ export default {
   components: {
     NScrollbar
   },
+  provide () {
+    return {
+      NDrawerBody: this,
+      NModalBody: null
+    }
+  },
+  inject: {
+    NDrawer: {
+      default: null
+    }
+  },
   props: {
     theme: {
       type: String,
@@ -79,17 +90,6 @@ export default {
     placement: {
       type: String,
       required: true
-    }
-  },
-  provide () {
-    return {
-      NDrawerBody: this,
-      NModalBody: null
-    }
-  },
-  inject: {
-    NDrawer: {
-      default: null
     }
   },
   setup (props) {

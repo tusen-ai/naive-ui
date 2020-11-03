@@ -29,15 +29,15 @@ import usecssr from '../../_mixins/usecssr'
 import styles from './styles/col.js'
 
 export default {
+  name: 'Col',
+  mixins: [
+    usecssr(styles)
+  ],
   inject: {
     NRow: {
       default: null
     }
   },
-  name: 'Col',
-  mixins: [
-    usecssr(styles)
-  ],
   props: {
     span: {
       type: [String, Number],

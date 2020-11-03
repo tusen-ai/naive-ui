@@ -16,13 +16,13 @@ const appendCounts = item => {
           },
           scopedSlots: {
             default: ({ styleScheme }) => {
-              return h('span', [ item.name, h('span', {
+              return h('span', [item.name, h('span', {
                 style: {
                   color: styleScheme.tertiaryTextColor,
                   fontWeight: '400',
                   transition: `color .3s ${styleScheme.easeInOutCubicBezier}`
                 }
-              }, [ ' (', item.count, ')' ])])
+              }, [' (', item.count, ')'])])
             }
           }
         })

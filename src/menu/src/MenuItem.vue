@@ -11,7 +11,7 @@
       :placement="popoverPlacement"
       :disabled="!popoverEnabled"
     >
-      <template v-slot:trigger>
+      <template #trigger>
         <n-menu-item-content
           :padding-left="delayedPaddingLeft"
           :max-icon-size="maxIconSize"
@@ -47,7 +47,7 @@ export default {
   ],
   props: {
     extra: {
-      type: [ String, Function ],
+      type: [String, Function],
       default: undefined
     },
     disabled: {

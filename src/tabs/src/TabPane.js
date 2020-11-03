@@ -3,7 +3,7 @@ import { getSlot } from '../../_utils/vue'
 
 export default {
   name: 'TabPane',
-  inject: [ 'NTab' ],
+  inject: ['NTab'],
   props: {
     label: {
       type: [String, Number],

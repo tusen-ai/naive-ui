@@ -12,7 +12,7 @@ describe('GradientText', function () {
       components: {
         NGradientText
       },
-      template: `<n-gradient-text>{{ content }}</n-gradient-text>`,
+      template: '<n-gradient-text>{{ content }}</n-gradient-text>',
       data () {
         return {
           content: 'hello'
@@ -48,7 +48,7 @@ describe('GradientText', function () {
         components: {
           NGradientText
         },
-        template: `<n-gradient-text size="40">{{ content }}</n-gradient-text>`,
+        template: '<n-gradient-text size="40">{{ content }}</n-gradient-text>',
         data () {
           return {
             content: 'hello'
@@ -64,7 +64,7 @@ describe('GradientText', function () {
         components: {
           NGradientText
         },
-        template: `<n-gradient-text :size="40">{{ content }}</n-gradient-text>`,
+        template: '<n-gradient-text :size="40">{{ content }}</n-gradient-text>',
         data () {
           return {
             content: 'hello'

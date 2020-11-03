@@ -45,7 +45,7 @@ function createRenderer (wrapCodeWithCard = true) {
     blockquote: quote => {
       return `<n-blockquote>${quote}</n-blockquote>`
     },
-    hr: () => `<n-hr />`,
+    hr: () => '<n-hr />',
     paragraph: text => {
       return `<n-p>${text}</n-p>`
     },

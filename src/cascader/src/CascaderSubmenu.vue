@@ -22,14 +22,14 @@ import NScrollbar from '../../scrollbar'
 
 export default {
   name: 'NCascaderSubmenu',
+  components: {
+    NCascaderOption,
+    NScrollbar
+  },
   inject: {
     NCascader: {
       default: null
     }
-  },
-  components: {
-    NCascaderOption,
-    NScrollbar
   },
   props: {
     depth: {

@@ -22,13 +22,19 @@ import Site from './Site.vue'
 
 export default {
   name: 'SiteProvider',
+  components: {
+    Site
+  },
   provide () {
     return {
       SiteProvider: this
     }
   },
-  components: {
-    Site
+  beforeRouteEnter (to, from, next) {
+    next()
+  },
+  beforeRouteUpdate (to, from, next) {
+    next()
   },
   computed: {
     lang: {
@@ -53,12 +59,6 @@ export default {
         )
       }
     }
-  },
-  beforeRouteEnter (to, from, next) {
-    next()
-  },
-  beforeRouteUpdate (to, from, next) {
-    next()
   }
 }
 

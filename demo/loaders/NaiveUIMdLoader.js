@@ -31,7 +31,7 @@ module.exports = function (content, path) {
   content = content.replace(/\n#/g, '\n\n#')
   const tokens = marked.lexer(content)
   const titleIndex = tokens.findIndex(token => token.type === 'heading' && token.depth === 1)
-  let titleText = titleIndex > -1 ? JSON.stringify(tokens[titleIndex].text) : null
+  const titleText = titleIndex > -1 ? JSON.stringify(tokens[titleIndex].text) : null
   const anchor = parseMdAsAnchor(tokens)
   const components = parseComponents(tokens)
   const importStatements = components

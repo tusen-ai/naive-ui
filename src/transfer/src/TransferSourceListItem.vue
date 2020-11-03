@@ -33,6 +33,11 @@ export default {
   components: {
     NCheckbox
   },
+  inject: {
+    NTransfer: {
+      default: null
+    }
+  },
   props: {
     label: {
       validator: createValidator(['string']),
@@ -45,11 +50,6 @@ export default {
     disabled: {
       validator: createValidator(['boolean']),
       default: false
-    }
-  },
-  inject: {
-    NTransfer: {
-      default: null
     }
   },
   setup (props) {

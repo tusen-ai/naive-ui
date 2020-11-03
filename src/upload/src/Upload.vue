@@ -166,16 +166,16 @@ export default {
     NUploadFile,
     NFadeInExpandTransition
   },
-  provide () {
-    return {
-      NUpload: this
-    }
-  },
   mixins: [
     configurable,
     themeable,
     usecssr(styles)
   ],
+  provide () {
+    return {
+      NUpload: this
+    }
+  },
   props: {
     name: {
       type: String,

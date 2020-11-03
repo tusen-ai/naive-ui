@@ -32,7 +32,7 @@ export function getActivePath (menuItems, activeKey) {
       if (item.children) {
         path.push(item.internalKey)
         if (__DEV__ && activeKey === item.internalKey) {
-          warn('menu', `Menu can't select a submenu key.`)
+          warn('menu', 'Menu can\'t select a submenu key.')
         }
         if (traverse(item.children)) return true
         path.pop()

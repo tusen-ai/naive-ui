@@ -37,7 +37,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select :items="items" v-model="selectedValue"/>`,
+          template: '<n-select :items="items" v-model="selectedValue"/>',
           data () {
             return {
               items: _.cloneDeep(items),
@@ -55,7 +55,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select :items="items" v-model="selectedValue"/>`,
+          template: '<n-select :items="items" v-model="selectedValue"/>',
           data () {
             return {
               items: _.cloneDeep(items),
@@ -74,7 +74,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select :items="items" v-model="selectedValue"/>`,
+          template: '<n-select :items="items" v-model="selectedValue"/>',
           data () {
             return {
               items: _.cloneDeep(items),
@@ -97,7 +97,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select :items="items" v-model="selectedArray" multiple/>`,
+          template: '<n-select :items="items" v-model="selectedArray" multiple/>',
           data () {
             return {
               items: _.cloneDeep(items),
@@ -115,7 +115,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select :items="items" v-model="selectedArray" multiple/>`,
+          template: '<n-select :items="items" v-model="selectedArray" multiple/>',
           data () {
             return {
               items: _.cloneDeep(items),
@@ -134,7 +134,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select :items="items" v-model="selectedArray" multiple/>`,
+          template: '<n-select :items="items" v-model="selectedArray" multiple/>',
           data () {
             return {
               items: _.cloneDeep(items),
@@ -158,7 +158,7 @@ describe('Select', function () {
         components: {
           NSelect
         },
-        template: `<n-select :items="items" v-model="selectedArray" multiple/>`,
+        template: '<n-select :items="items" v-model="selectedArray" multiple/>',
         data () {
           return {
             items: _.cloneDeep(items),
@@ -175,7 +175,7 @@ describe('Select', function () {
         components: {
           NSelect
         },
-        template: `<n-select :items="items" v-model="selectedArray"/>`,
+        template: '<n-select :items="items" v-model="selectedArray"/>',
         data () {
           return {
             items: _.cloneDeep(items),
@@ -195,7 +195,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select :items="items" v-model="selectedValue" placeholder="666"/>`,
+          template: '<n-select :items="items" v-model="selectedValue" placeholder="666"/>',
           data () {
             return {
               items: _.cloneDeep(items),
@@ -212,7 +212,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select :items="items" v-model="selectedValue"/>`,
+          template: '<n-select :items="items" v-model="selectedValue"/>',
           data () {
             return {
               items: _.cloneDeep(items),
@@ -230,7 +230,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select :items="items" v-model="selectedValue"/>`,
+          template: '<n-select :items="items" v-model="selectedValue"/>',
           data () {
             return {
               items: _.cloneDeep(items),
@@ -248,7 +248,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select :items="items" v-model="selectedValue"/>`,
+          template: '<n-select :items="items" v-model="selectedValue"/>',
           data () {
             return {
               items: _.cloneDeep(items),
@@ -267,7 +267,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select :items="items" v-model="selectedArray" multiple/>`,
+          template: '<n-select :items="items" v-model="selectedArray" multiple/>',
           data () {
             return {
               items: _.cloneDeep(items),
@@ -284,7 +284,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select :items="items" v-model="selectedArray" multiple/>`,
+          template: '<n-select :items="items" v-model="selectedArray" multiple/>',
           data () {
             return {
               items: _.cloneDeep(items),
@@ -301,7 +301,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select :items="items" v-model="selectedArray" multiple/>`,
+          template: '<n-select :items="items" v-model="selectedArray" multiple/>',
           data () {
             return {
               items: _.cloneDeep(items),
@@ -324,7 +324,7 @@ describe('Select', function () {
             components: {
               NSelect
             },
-            template: `<n-select :items="items" size="small" v-model="selectedValue"/>`,
+            template: '<n-select :items="items" size="small" v-model="selectedValue"/>',
             data () {
               return {
                 items: _.cloneDeep(items),
@@ -339,7 +339,7 @@ describe('Select', function () {
             components: {
               NSelect
             },
-            template: `<n-select :items="items" size="large" v-model="selectedValue"/>`,
+            template: '<n-select :items="items" size="large" v-model="selectedValue"/>',
             data () {
               return {
                 items: _.cloneDeep(items),
@@ -359,7 +359,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select :items="items" size="small" v-model="selectedArray" multiple/>`,
+          template: '<n-select :items="items" size="small" v-model="selectedArray" multiple/>',
           data () {
             return {
               items: _.cloneDeep(items),
@@ -374,7 +374,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select :items="items" size="large" v-model="selectedArray" multiple/>`,
+          template: '<n-select :items="items" size="large" v-model="selectedArray" multiple/>',
           data () {
             return {
               items: _.cloneDeep(items),
@@ -395,7 +395,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select :items="items" v-model="selectedValue"/>`,
+          template: '<n-select :items="items" v-model="selectedValue"/>',
           data () {
             return {
               items: _.cloneDeep(items),
@@ -416,7 +416,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select :items="items" v-model="selectedValue"/>`,
+          template: '<n-select :items="items" v-model="selectedValue"/>',
           data () {
             return {
               items: _.cloneDeep(items),
@@ -436,7 +436,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select :items="items" v-model="selectedValue"/>`,
+          template: '<n-select :items="items" v-model="selectedValue"/>',
           data () {
             return {
               items: _.cloneDeep(items),
@@ -453,7 +453,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select :items="items" v-model="selectedValue"/>`,
+          template: '<n-select :items="items" v-model="selectedValue"/>',
           data () {
             return {
               items: _.cloneDeep(items),
@@ -475,7 +475,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select :items="items" v-model="selectedArray" multiple/>`,
+          template: '<n-select :items="items" v-model="selectedArray" multiple/>',
           data () {
             return {
               items: _.cloneDeep(items),
@@ -496,7 +496,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select multiple :items="items" v-model="selectedArray"/>`,
+          template: '<n-select multiple :items="items" v-model="selectedArray"/>',
           data () {
             return {
               items: _.cloneDeep(items),
@@ -516,7 +516,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select multiple :items="items" v-model="selectedArray"/>`,
+          template: '<n-select multiple :items="items" v-model="selectedArray"/>',
           data () {
             return {
               items: _.cloneDeep(items),
@@ -536,7 +536,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select multiple :items="items" v-model="selectedArray"/>`,
+          template: '<n-select multiple :items="items" v-model="selectedArray"/>',
           data () {
             return {
               items: _.cloneDeep(items),
@@ -561,7 +561,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select :items="items" v-model="selectedValue" @change="handleChange"/>`,
+          template: '<n-select :items="items" v-model="selectedValue" @change="handleChange"/>',
           methods: {
             handleChange
           },
@@ -585,7 +585,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select :items="items" v-model="selectedValue" @change="handleChange" emitItem/>`,
+          template: '<n-select :items="items" v-model="selectedValue" @change="handleChange" emitItem/>',
           methods: {
             handleChange
           },
@@ -614,7 +614,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select multiple :items="items" v-model="selectedArray" @change="handleChange"/>`,
+          template: '<n-select multiple :items="items" v-model="selectedArray" @change="handleChange"/>',
           methods: {
             handleChange
           },
@@ -638,7 +638,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select multiple :items="items" v-model="selectedArray" @change="handleChange" emitItem/>`,
+          template: '<n-select multiple :items="items" v-model="selectedArray" @change="handleChange" emitItem/>',
           methods: {
             handleChange
           },
@@ -668,7 +668,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select :items="items" v-model="selectedValue"/>`,
+          template: '<n-select :items="items" v-model="selectedValue"/>',
           data () {
             return {
               items: _.cloneDeep(items),
@@ -690,7 +690,7 @@ describe('Select', function () {
           components: {
             NSelect
           },
-          template: `<n-select :items="items" v-model="selectedArray" multiple/>`,
+          template: '<n-select :items="items" v-model="selectedArray" multiple/>',
           data () {
             return {
               items: _.cloneDeep(items),
@@ -713,7 +713,7 @@ describe('Select', function () {
         components: {
           NSelect
         },
-        template: `<n-select :items="items" v-model="selectedValue"/>`,
+        template: '<n-select :items="items" v-model="selectedValue"/>',
         data () {
           return {
             items: _.cloneDeep(items),
@@ -734,7 +734,7 @@ describe('Select', function () {
         components: {
           NSelect
         },
-        template: `<n-select :items="items" v-model="selectedArray"/>`,
+        template: '<n-select :items="items" v-model="selectedArray"/>',
         data () {
           return {
             items: _.cloneDeep(items),

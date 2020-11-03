@@ -61,7 +61,7 @@ export default {
       default: undefined
     },
     name: {
-      type: [ String, Number ],
+      type: [String, Number],
       default: undefined
     },
     displayDirective: {

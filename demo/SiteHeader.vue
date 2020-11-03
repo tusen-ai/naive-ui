@@ -83,24 +83,24 @@ export default {
   setup () {
     const { t } = i18n({
       'zh-CN': {
-        'dark': '深色',
-        'light': '浅色',
-        'searchPlaceholder': '搜索',
-        'home': '首页',
-        'doc': '文档',
-        'common': '常规',
-        'debug': '调试',
-        'alreadyHome': '别点了，你已经在首页了'
+        dark: '深色',
+        light: '浅色',
+        searchPlaceholder: '搜索',
+        home: '首页',
+        doc: '文档',
+        common: '常规',
+        debug: '调试',
+        alreadyHome: '别点了，你已经在首页了'
       },
       'en-US': {
-        'dark': 'Dark',
-        'light': 'Light',
-        'searchPlaceholder': 'Search',
-        'home': 'Home',
-        'doc': 'Documentation',
-        'common': 'Common',
-        'debug': 'Debug',
-        'alreadyHome': "You've already been in home page. No clicking."
+        dark: 'Dark',
+        light: 'Light',
+        searchPlaceholder: 'Search',
+        home: 'Home',
+        doc: 'Documentation',
+        common: 'Common',
+        debug: 'Debug',
+        alreadyHome: "You've already been in home page. No clicking."
       }
     })
     const menuItemsRef = computed(() => {

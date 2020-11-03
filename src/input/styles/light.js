@@ -6,7 +6,7 @@ import suffixStyle from '../../_base/suffix/styles/light'
 export default create({
   name: 'Input',
   theme: 'light',
-  peer: [ suffixStyle ],
+  peer: [suffixStyle],
   getDerivedVariables ({ base, derived }) {
     const {
       textColor2,

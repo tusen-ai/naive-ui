@@ -20,14 +20,14 @@ import NIcon from '../../../icon'
 
 export default {
   name: 'SortIcon',
+  components: {
+    NIcon,
+    ArrowDownIcon
+  },
   inject: {
     NDataTable: {
       default: null
     }
-  },
-  components: {
-    NIcon,
-    ArrowDownIcon
   },
   props: {
     fontSize: {

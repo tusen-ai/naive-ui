@@ -58,7 +58,7 @@ function getNextBackgroundColorOf (el) {
 }
 
 let cachedNextBackgroundColor = null
-let cachedCSSStyleDeclaration = new WeakMap()
+const cachedCSSStyleDeclaration = new WeakMap()
 let callCount = 0
 
 function cache () {

@@ -24,6 +24,11 @@
 import createValidator from '../../_utils/vue/validateProp'
 
 export default {
+  inject: {
+    NTransfer: {
+      default: null
+    }
+  },
   props: {
     to: {
       validator: createValidator(['boolean']),
@@ -32,11 +37,6 @@ export default {
     onClick: {
       type: Function,
       required: true
-    }
-  },
-  inject: {
-    NTransfer: {
-      default: null
     }
   },
   computed: {

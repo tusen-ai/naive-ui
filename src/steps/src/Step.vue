@@ -61,11 +61,6 @@ import { themeable } from '../../_mixins'
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 export default {
   name: 'Step',
-  inject: {
-    NSteps: {
-      default: null
-    }
-  },
   components: {
     NIcon,
     FinishedIcon,
@@ -75,6 +70,11 @@ export default {
   mixins: [
     themeable
   ],
+  inject: {
+    NSteps: {
+      default: null
+    }
+  },
   props: {
     status: {
       type: String,

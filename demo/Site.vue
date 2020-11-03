@@ -16,13 +16,13 @@ import { useMemo } from 'vooks'
 
 export default {
   name: 'Site',
+  components: {
+    SiteHeader
+  },
   inject: [
     'SiteProvider',
     'loadingBar'
   ],
-  components: {
-    SiteHeader
-  },
   provide () {
     return {
       Site: this

@@ -41,7 +41,7 @@ export default create({
       buttonTextColorHover: primaryColor,
       opacityDisabled: opacityDisabled,
       buttonBoxShadowFocus: `inset 0 0 0 1px ${primaryColor}, 0 0 0 2px ${changeColor(primaryColor, { alpha: 0.3 })}`,
-      buttonBoxShadowHover: `inset 0 0 0 1px transparent`,
+      buttonBoxShadowHover: 'inset 0 0 0 1px transparent',
       buttonBoxShadow: 'inset 0 0 0 1px transparent',
       buttonBorderRadius: borderRadius
     }

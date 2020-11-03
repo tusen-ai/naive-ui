@@ -79,11 +79,6 @@ function isEqual (value, oldValue) {
 }
 
 export default {
-  inject: {
-    NDataTable: {
-      default: null
-    }
-  },
   components: {
     NCheckboxGroup,
     NCheckbox,
@@ -92,6 +87,11 @@ export default {
     NRadio,
     NButton,
     NScrollbar
+  },
+  inject: {
+    NDataTable: {
+      default: null
+    }
   },
   props: {
     column: {
@@ -107,7 +107,7 @@ export default {
       required: true
     },
     value: {
-      type: [ Array, String, Number ],
+      type: [Array, String, Number],
       default: null
     },
     options: {
@@ -161,7 +161,7 @@ export default {
         shouldUseArrayInSingleMode(this.column)
       ) {
         /** this branch is for compatibility */
-        this.cachedValue = [ value ]
+        this.cachedValue = [value]
       } else {
         this.cachedValue = value
       }
