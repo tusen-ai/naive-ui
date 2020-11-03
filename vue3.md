@@ -324,3 +324,10 @@ deprecate
 - `vicons`
 - `vfonts`
 - `css-render`
+
+class =>
+<abstract>
+  <comp>
+</abstract>
+not working in production mode
+https://github.com/vuejs/vue-next/issues/2549
