@@ -44,6 +44,7 @@ module.exports = {
     'css-render',
     '@css-render/plugin-bem',
     'vueuc',
-    'vooks'
+    'vooks',
+    'vicons'
   ]
 }

@@ -1,4 +1,4 @@
-export const lightStyleScheme = {
+const lightStyleScheme = {
   primaryColor: '#18a058',
   primaryHoverColor: '#36ad6a',
   primaryActiveColor: '#0c7a43',
@@ -38,7 +38,7 @@ export const lightStyleScheme = {
   inputOverlayBackgroundColor: null
 }
 
-export const darkStyleScheme = {
+const darkStyleScheme = {
   primaryColor: '#63e2b7',
   primaryHoverColor: '#7fe7c4',
   primaryActiveColor: '#5acea7',

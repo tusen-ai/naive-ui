@@ -79,7 +79,7 @@ import * as styles from './styles'
 import NimbusServiceLayout from './_deprecated/NimbusServiceLayout'
 
 // deprecated
-import { lightStyleScheme, darkStyleScheme } from './_deprecated/style-scheme'
+import styleScheme from './_deprecated/style-scheme'
 
 import create from './create'
 
@@ -165,8 +165,5 @@ export default create({
   ],
   styles: Object.keys(styles).map(key => styles[key]),
   // deprecated
-  styleSchemes: {
-    light: lightStyleScheme,
-    dark: darkStyleScheme
-  }
+  styleSchemes: styleScheme
 })

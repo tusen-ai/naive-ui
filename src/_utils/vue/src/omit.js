@@ -6,4 +6,3 @@ export function omit (object, keys = [], rest = {}) {
   })
   return Object.assign(omitedObject, rest)
 }
-export default omit
