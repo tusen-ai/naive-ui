@@ -57,6 +57,7 @@ function create ({
     setHljs,
     setHighlightjs: setHljs,
     use (plugin) {
+      console.log('use naive ui')
       plugin.install(naive)
     },
     install

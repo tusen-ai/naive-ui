@@ -1,10 +1,11 @@
 import create from '../../_styles/utils/create-component-base'
-import suffixStyle from '../../_base/suffix/styles/dark'
+import { baseSuffixLight } from '../../_base/suffix/styles'
+import { baseLight } from '../../styles/base'
 
 export default create({
   name: 'Pagination',
   theme: 'light',
-  peer: [ suffixStyle ],
+  peer: [baseSuffixLight, baseLight],
   getDerivedVariables ({ base, derived }) {
     const {
       textColor2,

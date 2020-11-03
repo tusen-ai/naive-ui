@@ -23,7 +23,8 @@ module.exports = {
       files: '*.spec.js',
       globals: {
         describe: 'readonly',
-        it: 'readonly'
+        it: 'readonly',
+        expect: 'readonly'
       }
     },
     {

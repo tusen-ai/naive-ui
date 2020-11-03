@@ -1,11 +1,12 @@
 import create from '../../_styles/utils/create-component-base'
 import { changeColor } from '../../_utils/color/index'
-import suffixStyle from '../../_base/suffix/styles/dark'
+import { baseSuffixDark } from '../../_base/suffix/styles'
+import { baseDark } from '../../styles/base'
 
 export default create({
   name: 'Pagination',
   theme: 'dark',
-  peer: [ suffixStyle ],
+  peer: [baseSuffixDark, baseDark],
   getDerivedVariables ({ base, derived }) {
     const {
       textColor2Overlay,

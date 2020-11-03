@@ -26,7 +26,7 @@
     "tusimple:release:doc": "npm run tusimple:build:doc && node build-doc/generate-deploy-sh.js && sudo bash build-doc/deploy-doc.sh",
     "tusimple:release:doc:no-build": "node build-doc/generate-deploy-sh.js && sudo bash build-doc/deploy-doc.sh"
   },
-  "author": "lecong.zhang",
+  "author": "07akioni",
   "license": "MIT",
   "publishConfig": {
     "registry": "***REMOVED***"
@@ -40,12 +40,15 @@
     "README.md"
   ],
   "devDependencies": {
+    "@babel/preset-env": "^7.12.1",
     "@rollup/plugin-alias": "^3.1.1",
     "@rollup/plugin-node-resolve": "^10.0.0",
+    "@types/jest": "^26.0.15",
     "@vue/compiler-sfc": "^3.0.2",
     "@vue/eslint-config-standard": "^5.1.2",
     "@vue/test-utils": "^2.0.0-beta.8",
     "autoprefixer": "^9.8.6",
+    "babel-jest": "^26.6.2",
     "cross-env": "^5.2.1",
     "cssnano": "^4.1.10",
     "eslint": "^7.12.1",
@@ -61,6 +64,7 @@
     "stylelint-config-recommended-scss": "^4.2.0",
     "stylelint-scss": "^3.18.0",
     "tinycolor2": "^1.4.2",
+    "typescript": "^4.0.5",
     "vite": "^1.0.0-rc.8",
     "vue-jest": "^5.0.0-alpha.5",
     "vue-router": "^4.0.0-rc.1"

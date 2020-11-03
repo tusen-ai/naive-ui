@@ -20,11 +20,11 @@ module.exports = {
   alias: {
     '/@naive-ui/lib/icons/': path.resolve(__dirname, './src/_deprecated/icons'),
     '/@naive-ui/': path.resolve(__dirname, './src'),
-    'src': path.resolve(__dirname, './src')
+    src: path.resolve(__dirname, './src')
   },
   define: {
     'process.env.NODE_ENV': `'${process.env.NODE_ENV}'`,
-    '__DEV__': process.env.NODE_ENV !== 'production'
+    __DEV__: process.env.NODE_ENV !== 'production'
   },
   rollupPluginVueOptions: {
     include: /\.(vue|md|demo.md|demo-entry.md|entry)$/

@@ -40,9 +40,9 @@ function setupMutableStyle (
   instance,
   theme,
   dependencyKey,
-  CNode,
-  moduleSrcUpdated
+  CNode
 ) {
+  console.log(instance, instance.$naive)
   const naive = instance.$naive
   const options = instance.$options
   const {
@@ -132,7 +132,7 @@ function getCssrProps (
   }
 }
 
-export default function (styles, cssrPropsOption) {
+const usecssr = function (styles, cssrPropsOption) {
   // collect watchers
   const watchers = {}
   if (
@@ -221,3 +221,5 @@ export default function (styles, cssrPropsOption) {
     watch
   }
 }
+
+export default usecssr
