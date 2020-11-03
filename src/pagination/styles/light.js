@@ -1,6 +1,5 @@
 import create from '../../_styles/utils/create-component-base'
-import { baseSuffixLight } from '../../_base/suffix/styles'
-import { baseLight } from '../../styles'
+import { baseLight, baseSuffixLight } from '../../styles'
 
 export default create({
   name: 'Pagination',

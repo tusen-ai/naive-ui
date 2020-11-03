@@ -42,7 +42,6 @@ function setupMutableStyle (
   dependencyKey,
   CNode
 ) {
-  console.log(instance, instance.$naive)
   const naive = instance.$naive
   const options = instance.$options
   const {

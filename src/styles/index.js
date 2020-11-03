@@ -19,6 +19,10 @@ export {
   baseLoadingDark,
   baseLoadingLight
 } from '../_base/loading/styles'
+export {
+  baseSuffixDark,
+  baseSuffixLight
+} from '../_base/suffix/styles'
 /** exposed style */
 export {
   baseDark,
