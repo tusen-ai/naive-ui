@@ -1,7 +1,7 @@
-import NewNimbusServiceLayout from './src/ServiceLayout.js'
+import ServiceLayout from './src/ServiceLayout.js'
 
-NewNimbusServiceLayout.install = function (app) {
-  app.component(NewNimbusServiceLayout.name, NewNimbusServiceLayout)
+ServiceLayout.install = function (app) {
+  app.component(ServiceLayout.name, ServiceLayout)
 }
 
-export default NewNimbusServiceLayout
+export default ServiceLayout

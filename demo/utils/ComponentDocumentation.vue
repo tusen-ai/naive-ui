@@ -13,8 +13,11 @@ export default {
   },
   mounted () {
     const paramsRegex = /\/([^/]+)\/([^/]+)\/([^/]+)\/([^/]+)/
-    if (this.NDocRoot.memorizedPath) {
-      const memorizedPath = this.NDocRoot.memorizedPath
+    const {
+      NDocRoot
+    } = this
+    if (NDocRoot.memorizedPath) {
+      const memorizedPath = NDocRoot.memorizedPath
       const currentPath = this.$route.path
       const memorizedDemoName = (paramsRegex.exec(memorizedPath) || [])[4]
       const currentDemoName = (paramsRegex.exec(currentPath) || [])[4]
@@ -23,7 +26,7 @@ export default {
         currentDemoName &&
         memorizedDemoName !== currentDemoName
       ) {
-        this.NDocRoot.resetScrollPosition()
+        NDocRoot.resetScrollPosition()
       }
     }
   }
