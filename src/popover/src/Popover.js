@@ -217,13 +217,10 @@ export default {
         this.hideTimerId = null
       }
     },
-    handleMouseEnter (e) {
+    handleMouseEnter () {
       if (this.trigger === 'hover' && !this.disabled) {
         this.clearTimer()
         if (this.mergedShow) return
-        if (
-          e.target !== e.currentTarget
-        ) return
         this.showTimerId = window.setTimeout(() => {
           this['onUpdate:show'](true)
           this.uncontrolledShow = true
@@ -231,13 +228,10 @@ export default {
         }, this.delay)
       }
     },
-    handleMouseLeave (e) {
+    handleMouseLeave () {
       if (this.trigger === 'hover' && !this.disabled) {
         this.clearTimer()
         if (!this.mergedShow) return
-        if (
-          e.target !== e.currentTarget
-        ) return
         this.hideTimerId = window.setTimeout(() => {
           this['onUpdate:show'](false)
           this.uncontrolledShow = false
