@@ -331,3 +331,6 @@ class =>
 </abstract>
 not working in production mode
 https://github.com/vuejs/vue-next/issues/2549
+
+fonts are moved to `vfonts`
+lib/styles/index.css is removed

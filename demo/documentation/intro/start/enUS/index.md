@@ -13,13 +13,13 @@ Add the following lines in you entry point js file.
 import { createApp } from 'vue'
 import naive from 'naive-ui'
 
-// If you want to use the built-in fonts of UI. Add the 
-// following lines on demand.
-// Generic Fonts, choose one at most
-import 'naive-ui/fonts/Lato.css'
-import 'naive-ui/fonts/FiraSans.css'
+// naive ui works with `vfonts` https://github.com/07akioni/vfonts
+// you can use font from `vfonts` easily, for example:
+// Generic Font
+import 'vfonts/Lato.css'
 // Monospace Fonts
-import 'naive-ui/fonts/FiraCode.css'
+import 'vfonts/FiraCode.css'
+// then it works
 
 const app = createApp()
 app.use(naive)

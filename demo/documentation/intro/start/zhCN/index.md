@@ -13,12 +13,13 @@ npm install --save-dev naive-ui
 import { createApp } from 'vue'
 import naive from 'naive-ui'
 
-// 如果需要使用 UI 内置的字体，可以按需添加下面的代码
-// 通用字体，多选一
-import 'naive-ui/fonts/Lato.css'
-import 'naive-ui/fonts/FiraSans.css'
-// 等宽字体
-import 'naive-ui/fonts/FiraCode.css'
+// naive ui 可以和 `vfonts` https://github.com/07akioni/vfonts 配合
+// 你可以简单的引入 `vfonts` 中的字体
+// 通用字体
+import 'vfonts/Lato.css'
+// 等款字体
+import 'vfonts/FiraCode.css'
+// 不用做其他的事情了
 
 const app = createApp()
 app.use(naive)

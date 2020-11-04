@@ -328,7 +328,7 @@ const naive = create({
 23. <del>Date 键盘操作 Time 键盘操作</del> 先把能做的做了
 24. <del>Time 格式化</del>
 25. <del>Date 格式化</del>
-26. <del>base cancel mark rename suffix</del>s
+26. <del>base cancel mark rename suffix</del>
 27. <del>base picker => base selection</del>
 28. <del>base lightbar => base tracking rect</del>
 29. <del>loader 区分 debug 和 非 debug</del>
@@ -398,22 +398,22 @@ const naive = create({
 93. steps 列表优化
 94. tabs 列表优化
 95. tree 列表优化
-96. cascader 列表优化
+96. <del>cascader 列表优化</del>
 97. 更多的 tabs 选择
-98. 下拉菜单应该给 icon 留空间
+98. <del>下拉菜单应该给 icon 留空间</del>
 99. <del>Form item feedback 好像有点问题，消失的时候，自定义时候</del>
 100. <del>Confim 重命名 Dialog</del> 算了不换了，牵扯的地方太多不好改了，confirm 也就凑活吧
 101. Dark Debug 3，Safari 你可太秀了......
-102. close-outline icon
-103. input + icon 主题切换 transition 有问题!!!
+102. <del>close-outline icon</del>
+103. <del>input + icon 主题切换 transition 有问题!!!</del>
 104. <del>auto-complete 自定义元素 demo 有问题</del> 有 pendingData 的时候 preventDefault
 105. <del>markdown 渲染缺少空格，修正了 n-select single filterable 时 placeholder 的样式问题</del> caused by vue compiler `preserveWhitespace: false`, change it to `whitespace: 'condense'`
 106. <del>drawer 加上滚动条，以及 overflow auto 的样式</del>
-107. 所有弹出的东西改成 body-style
-108. size 切换的时候... transfer 动画问题
+107. <del>所有弹出的东西改成 body-style</del>
+108. <del>size 切换的时候... transfer 动画问题</del>
 109. 利用了公用组件的组件样式没办法特殊调教，比如 select 组件自身是没有命名空间的，这个想要单独定制就比较麻烦。先不出来怎么解决
-110. treemate 重构 cascader，异步 api 需要更改
-
+110. <del>treemate 重构 cascader，异步 api 需要更改</del>
+111. 样式不能被 cloned，因为 peers 机制
 ```
 Done
 // modal transform scale

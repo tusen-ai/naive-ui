@@ -84,6 +84,7 @@
     "highlight.js": "^9.18.1",
     "lodash-es": "^4.17.15",
     "treemate": "^0.1.9",
+    "vfonts": "^0.0.1",
     "vicons": "0.0.1",
     "vooks": "0.0.1-alpha.3",
     "vue": "^3.0.2",
