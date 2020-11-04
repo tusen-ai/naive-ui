@@ -81,6 +81,7 @@
     "async-validator": "^1.11.5",
     "css-render": "^0.11.1",
     "date-fns": "^2.9.0",
+    "evtd": "^0.0.1-alpha.0",
     "highlight.js": "^9.18.1",
     "lodash-es": "^4.17.15",
     "treemate": "^0.1.9",

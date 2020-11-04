@@ -1,6 +1,5 @@
 import { nextTick } from 'vue'
-import scrollDelegate from '../../_utils/delegate/scrollDelegate'
-import resizeDelegate from '../../_utils/delegate/resizeDelegate'
+import { on, off } from 'evtd'
 import getScrollParent from '../../_utils/dom/get-scroll-parent'
 import { warn } from '../../_utils/naive/warn'
 import {
@@ -275,7 +274,7 @@ export default {
       el.setAttribute('n-suggested-transform-origin', transformOrigin)
     },
     __addResizeListener () {
-      resizeDelegate.registerHandler(this.__placeableSyncPosition)
+      on('resize', window, this.__placeableSyncPosition)
     },
     __addScrollListeners () {
       let currentElement = this.__getTrackedElement()
@@ -285,15 +284,15 @@ export default {
         this.__placeableScrollListeners.push([currentElement, this.__placeableSyncPosition])
       }
       for (const [el, handler] of this.__placeableScrollListeners) {
-        scrollDelegate.registerHandler(el, handler)
+        on('scroll', el, handler, true)
       }
     },
     __removeResizeListener () {
-      resizeDelegate.unregisterHandler(this.__placeableSyncPosition)
+      off('resize', window, this.__placeableSyncPosition)
     },
     __removeScrollListeners () {
       for (const [el, handler] of this.__placeableScrollListeners) {
-        scrollDelegate.unregisterHandler(el, handler)
+        off('scroll', el, handler, true)
       }
       this.__placeableScrollListeners = []
     }
