@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import formatLength from '../../_utils/css/formatLength'
-import usecssr from '../../_mixins/usecssr'
+import { formatLength } from '../../_utils'
+import { usecssr } from '../../_mixins'
 import styles from './styles/row.js'
 
 export default {
@@ -64,7 +64,7 @@ export default {
       return gutter
     },
     styleMargin () {
-      return `0px -${formatLength(this.horizontalGutter, 0.5)}`
+      return `0px -${formatLength(this.horizontalGutter, { c: 0.5 })}`
     },
     styleWidth () {
       return `calc(100% + ${formatLength(this.horizontalGutter)})`

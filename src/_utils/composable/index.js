@@ -14,16 +14,6 @@ export function useInjectionRef (injectionName, key, fallback) {
   return toRef(injection, key)
 }
 
-export function onFontReady (callback) {
-  onMounted(() => {
-    const fontsReady = document.fonts.ready
-    const currentInstance = getCurrentInstance().proxy
-    fontsReady.then(() => {
-      callback(currentInstance)
-    })
-  })
-}
-
 export function useInjectionCollection (injectionName, collectionKey, valueRef) {
   const injection = inject(injectionName, null)
   if (injection === null) return

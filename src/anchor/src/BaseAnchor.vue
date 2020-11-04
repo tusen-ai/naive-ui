@@ -24,14 +24,14 @@
 </template>
 
 <script>
-import { nextTick, ref, markRaw } from 'vue'
+import { nextTick, ref, markRaw, getCurrentInstance } from 'vue'
 import getScrollParent from '../../_utils/dom/get-scroll-parent'
 import {
   configurable,
   themeable,
   usecssr
 } from '../../_mixins'
-import { onFontReady } from '../../_utils/composable/index'
+import { onFontReady } from 'vooks'
 import { warn } from '../../_utils/naive/warn'
 import getTarget from '../../_utils/dom/get-target'
 import styles from './styles'
@@ -86,7 +86,8 @@ export default {
     }
   },
   setup () {
-    onFontReady(vm => {
+    const vm = getCurrentInstance().proxy
+    onFontReady(() => {
       vm.init()
       vm.setActiveHref(window.location)
       vm.handleScroll(false)

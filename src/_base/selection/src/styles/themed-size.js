@@ -1,5 +1,5 @@
 import { cTB, c, cB, cE, cM } from '../../../../_utils/cssr'
-import formatLength from '../../../../_utils/css/formatLength'
+import { formatLength } from '../../../../_utils'
 
 export default c([
   ({ props }) => {
@@ -24,8 +24,8 @@ export default c([
           minHeight: height
         }, [
           cB('base-selection-input-tag', {
-            height: formatLength(height, 1, -6),
-            lineHeight: formatLength(height, 1, -6)
+            height: formatLength(height, { c: 1, offset: -6 }),
+            lineHeight: formatLength(height, { c: 1, offset: -6 })
           })
         ])
       ])

@@ -30,7 +30,7 @@ import { VResizeObserver } from 'vueuc'
 import { ref } from 'vue'
 import TableHeader from './TableParts/Header.vue'
 import TableBody from './TableParts/Body.vue'
-import formatLength from '../../_utils/css/formatLength'
+import { formatLength } from '../../_utils/css'
 
 export default {
   components: {

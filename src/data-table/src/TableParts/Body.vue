@@ -76,7 +76,7 @@ import { ref } from 'vue'
 import Cell from './Cell.vue'
 import { createCustomWidthStyle, setCheckStatusOfRow, createRowKey } from '../utils'
 import NScrollbar from '../../../scrollbar'
-import formatLength from '../../../_utils/css/formatLength'
+import { formatLength } from '../../../_utils'
 
 export default {
   components: {

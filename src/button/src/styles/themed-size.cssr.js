@@ -1,5 +1,5 @@
 import { c, cB, cTB, cE, cM, createKey } from '../../../_utils/cssr'
-import formatLength from '../../../_utils/css/formatLength'
+import { formatLength } from '../../../_utils'
 
 export default c([
   ({ props }) => {
@@ -10,8 +10,8 @@ export default c([
     const borderRadius = local[createKey('borderRadius', size)]
     const padding = local[createKey('padding', size)]
     const roundPadding = local[createKey('paddingRound', size)]
-    const roundBorderRadius = formatLength(height, 0.5)
-    const lineHeight = formatLength(height, 1, -2)
+    const roundBorderRadius = formatLength(height, { c: 0.5 })
+    const lineHeight = formatLength(height, { offset: -2 })
     const iconSize = local[createKey('iconSize', size)]
     const iconMargin = local[createKey('iconMargin', size)]
     return cTB(
@@ -64,8 +64,8 @@ export default c([
               height: iconSize
             }),
             cB('base-loading', {
-              height: formatLength(iconSize, 1, -2),
-              width: formatLength(iconSize, 1, -2)
+              height: formatLength(iconSize, { offset: -2 }),
+              width: formatLength(iconSize, { offset: -2 })
             })
           ]),
           cE('content', [

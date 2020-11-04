@@ -16,16 +16,18 @@
 </template>
 
 <script>
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import formatLength from '../../_utils/css/formatLength'
-import usecssr from '../../_mixins/usecssr'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
+import { formatLength } from '../../_utils'
 import styles from './styles/index'
 
 export default {
   name: 'GradientText',
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles)
   ],

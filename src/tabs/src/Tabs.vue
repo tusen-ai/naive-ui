@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, getCurrentInstance } from 'vue'
 import NIcon from '../../icon'
 import {
   configurable,
@@ -105,9 +105,8 @@ import {
 import { VResizeObserver } from 'vueuc'
 import { throttle } from 'lodash-es'
 import styles from './styles'
-import { warn } from '../../_utils/naive/warn'
-import { useCompitable } from 'vooks'
-import { onFontReady } from '../../_utils/composable'
+import { warn } from '../../_utils'
+import { useCompitable, onFontReady } from 'vooks'
 
 export default {
   name: 'Tabs',
@@ -189,7 +188,8 @@ export default {
     }
   },
   setup (props) {
-    onFontReady(vm => {
+    const vm = getCurrentInstance().proxy
+    onFontReady(() => {
       vm.updateScrollStatus()
       if (vm.typeIsLine) {
         vm.updateCurrentBarPosition()

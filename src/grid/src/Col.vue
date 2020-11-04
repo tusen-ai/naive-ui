@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import formatLength from '../../_utils/css/formatLength'
-import usecssr from '../../_mixins/usecssr'
+import { formatLength } from '../../_utils'
+import { usecssr } from '../../_mixins'
 import styles from './styles/col.js'
 
 export default {
@@ -61,7 +61,7 @@ export default {
       return this.NRow.gutter
     },
     stylePadding () {
-      return `${formatLength(this.NRow.verticalGutter, 0.5)} ${formatLength(this.NRow.horizontalGutter, 0.5)}`
+      return `${formatLength(this.NRow.verticalGutter, { c: 0.5 })} ${formatLength(this.NRow.horizontalGutter, { c: 0.5 })}`
     },
     computedPush () {
       return this.push - this.pull

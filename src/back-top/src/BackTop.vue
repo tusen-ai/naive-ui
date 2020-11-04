@@ -59,9 +59,8 @@ import {
   themeable,
   usecssr
 } from '../../_mixins'
-import formatLength from '../../_utils/css/formatLength'
+import { formatLength, warn } from '../../_utils'
 import styles from './styles'
-import { warn } from '../../_utils/naive/warn'
 import getTarget from '../../_utils/dom/get-target'
 import NLazyTeleport from '../../_base/lazy-teleport'
 

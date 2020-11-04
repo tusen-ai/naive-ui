@@ -5,7 +5,7 @@ import {
   usecssr
 } from '../../_mixins'
 import styles from './styles/index'
-import formatLength from '../../_utils/css/formatLength'
+import { formatLength } from '../../_utils'
 import { getSlot } from '../../_utils/vue'
 
 export default {

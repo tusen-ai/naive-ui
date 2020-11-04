@@ -8,7 +8,7 @@ export default create({
     return {
       ...commonVariables,
       stepHeaderFontWeight: base.fontWeightStrong,
-      indicatorTextColorProcess: 'black',
+      indicatorTextColorProcess: derived.baseColor,
       indicatorTextColorWait: derived.textColorDisabled,
       indicatorTextColorFinish: derived.primaryColor,
       indicatorTextColorError: derived.errorColor,

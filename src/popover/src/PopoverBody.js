@@ -7,7 +7,7 @@ import {
 import { clickoutside, mousemoveoutside, zindexable } from '../../_directives'
 import { configurable, themeable, placeable, usecssr } from '../../_mixins'
 import styles from './styles'
-import { formatLength } from '../../_utils/css'
+import { formatLength } from '../../_utils'
 import { getSlot } from '../../_utils/vue'
 
 export default {

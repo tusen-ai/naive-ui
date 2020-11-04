@@ -234,7 +234,7 @@
 </template>
 
 <script>
-import { nextTick } from 'vue'
+import { nextTick, getCurrentInstance } from 'vue'
 import NIcon from '../../icon'
 import {
   CheckmarkIcon as SuccessIcon,
@@ -250,8 +250,8 @@ import {
   usecssr
 } from '../../_mixins'
 import styles from './styles/index.js'
-import formatLength from '../../_utils/css/formatLength.js'
-import { onFontReady } from '../../_utils/composable'
+import { formatLength } from '../../_utils'
+import { onFontReady } from 'vooks'
 
 function circlePath (r, sw, vw = 100) {
   return `m ${vw / 2} ${vw / 2 - r} a ${r} ${r} 0 1 1 0 ${2 * r} a ${r} ${r} 0 1 1 0 -${2 * r}`
@@ -352,7 +352,8 @@ export default {
     }
   },
   setup () {
-    onFontReady(vm => {
+    const vm = getCurrentInstance().proxy
+    onFontReady(() => {
       if (vm.syntheticIndicatorPlacement === 'inside-label') {
         nextTick(() => {
           vm.indicatorPercentage = vm.calcIndicatorPercentage()
@@ -378,7 +379,7 @@ export default {
       if (this.borderRadius !== undefined) {
         return formatLength(this.borderRadius)
       }
-      if (this.height !== undefined) return formatLength(this.height / 2)
+      if (this.height !== undefined) return formatLength(this.height, { c: 0.5 })
       return null
     },
     styleFillBorderRadius () {
@@ -388,7 +389,7 @@ export default {
       if (this.borderRadius !== undefined) {
         return formatLength(this.borderRadius)
       }
-      if (this.height !== undefined) return formatLength(this.height / 2)
+      if (this.height !== undefined) return formatLength(this.height, { c: 0.5 })
       return null
     },
     syntheticIndicatorPlacement () {

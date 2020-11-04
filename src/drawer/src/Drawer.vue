@@ -43,8 +43,7 @@ import {
   usecssr
 } from '../../_mixins'
 import { zindexable } from '../../_directives'
-import formatLength from '../../_utils/css/formatLength'
-import { warn } from '../../_utils'
+import { warn, formatLength } from '../../_utils'
 import { useCompitable, useIsMounted } from 'vooks'
 import NLazyTeleport from '../../_base/lazy-teleport'
 import NDrawerBodyWrapper from './DrawerBodyWrapper.vue'

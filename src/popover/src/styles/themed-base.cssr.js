@@ -1,5 +1,5 @@
 import { c, cTB, cB, cM } from '../../../_utils/cssr'
-import { depx, pxfy } from '../../../../_utils/css'
+import { depx, pxfy } from '../../../_utils/css'
 
 export default c([
   ({ props }) => {

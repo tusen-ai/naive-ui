@@ -1,4 +1,4 @@
-import formatLength from '../../_utils/css/formatLength'
+import { formatLength } from '../../_utils'
 
 export function createCustomWidthStyle (column, index, placement) {
   if (column.width) {
