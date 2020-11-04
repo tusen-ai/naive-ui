@@ -1,4 +1,4 @@
-import zIndexManager from './zIndexManager'
+import zIndexManager from './z-index-manager'
 
 const ctx = '@@ziContext'
 
