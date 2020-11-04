@@ -34,7 +34,7 @@ import NMenuItemContent from './MenuItemContent.vue'
 import NTooltip from '../../tooltip'
 import menuChildMixin from './menu-child-mixin'
 import { useMemo } from 'vooks'
-import { useInjectionRef } from '../../_utils/composition'
+import { useInjectionRef } from '../../_utils/composable'
 
 export default {
   name: 'MenuItem',

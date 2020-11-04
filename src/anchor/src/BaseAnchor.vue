@@ -31,7 +31,7 @@ import {
   themeable,
   usecssr
 } from '../../_mixins'
-import { onFontReady } from '../../_utils/composition/index'
+import { onFontReady } from '../../_utils/composable/index'
 import { warn } from '../../_utils/naive/warn'
 import getTarget from '../../_utils/dom/get-target'
 import styles from './styles'

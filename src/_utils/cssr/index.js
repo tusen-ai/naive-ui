@@ -22,7 +22,7 @@ function insideFormItem (status, style) {
   if (status === null) return style
   return c(`${prefix}form-item`, [
     c(`${prefix}form-item-blank`, [
-      c(({ props }) => `&${prefix}form-item-blank${modifierPrefix}${status}`, [
+      c(() => `&${prefix}form-item-blank${modifierPrefix}${status}`, [
         style
       ])
     ])

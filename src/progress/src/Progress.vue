@@ -251,7 +251,7 @@ import {
 } from '../../_mixins'
 import styles from './styles/index.js'
 import formatLength from '../../_utils/css/formatLength.js'
-import { onFontReady } from '../../_utils/composition'
+import { onFontReady } from '../../_utils/composable'
 
 function circlePath (r, sw, vw = 100) {
   return `m ${vw / 2} ${vw / 2 - r} a ${r} ${r} 0 1 1 0 ${2 * r} a ${r} ${r} 0 1 1 0 -${2 * r}`

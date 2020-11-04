@@ -107,7 +107,7 @@ import { throttle } from 'lodash-es'
 import styles from './styles'
 import { warn } from '../../_utils/naive/warn'
 import { useCompitable } from 'vooks'
-import { onFontReady } from '../../_utils/composition'
+import { onFontReady } from '../../_utils/composable'
 
 export default {
   name: 'Tabs',

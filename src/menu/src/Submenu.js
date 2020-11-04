@@ -5,7 +5,7 @@ import NMenuItemContent from './MenuItemContent.vue'
 import menuChildMixin from './menu-child-mixin'
 import { itemRenderer } from './utils'
 import { useMemo } from 'vooks'
-import { useInjectionRef } from '../../_utils/composition'
+import { useInjectionRef } from '../../_utils/composable'
 
 export default {
   name: 'Submenu',

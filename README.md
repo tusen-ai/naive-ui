@@ -13,7 +13,7 @@
 ## Features
 ### Caring About Styles
 As is.
-> The reason I started to build the library is I'm not satisfied with the UI framework I used. I think maybe it's possible to caring about nearily all the details of an UI framework, except the compatibility of IE.
+> The reason I started to build the library is I'm not satisfied with the UI framework I used. I think maybe it's possible to caring about nearily all the details of an UI framework, except the compitability of IE.
 ### Themed
 Dark theme included. Theme switching is seamlessly.
 > At first there's only dark mode UI design drafts. It's wired but true. After you starting to build a dark mode UI, sooner or later you will have to create a light theme for it. As a result, naive-ui has both of them.

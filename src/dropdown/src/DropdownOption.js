@@ -4,7 +4,7 @@ import { placeable } from '../../_mixins'
 import { ChevronRightIcon } from '../../_base/icons'
 import NIcon from '../../icon'
 import { useMemo } from 'vooks'
-import { useDelayedTrue } from '../../_utils/composition'
+import { useDelayedTrue } from '../../_utils/composable'
 import NDropdownMenu from './DropdownMenu'
 import { isSubmenuNode } from './utils'
 

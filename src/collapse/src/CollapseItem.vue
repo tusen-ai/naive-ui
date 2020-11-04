@@ -41,7 +41,7 @@ import { toRef } from 'vue'
 import NIcon from '../../icon'
 import { ChevronRightIcon as ArrowIcon } from '../../_base/icons'
 import NCollapseItemContent from './CollapseItemContent.js'
-import { useInjectionCollection } from '../../_utils/composition'
+import { useInjectionCollection } from '../../_utils/composable'
 
 export default {
   name: 'CollapseItem',

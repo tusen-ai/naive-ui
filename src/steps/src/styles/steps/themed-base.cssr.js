@@ -1,6 +1,5 @@
 import { c, cTB, cB, cE, cM, createKey } from '../../../../_utils/cssr'
-import depx from '../../../../_utils/css/depx'
-import pxfy from '../../../../_utils/css/pxfy'
+import { depx, pxfy } from '../../../../_utils/css'
 import iconSwitchTransition from '../../../../_styles/transitions/icon-switch'
 
 export default c([

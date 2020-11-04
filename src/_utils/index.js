@@ -16,7 +16,7 @@ export {
   depx,
   formatLength
 } from './css'
-export * from './composition'
+export * from './composable'
 export {
   nextFrame
 } from './misc'

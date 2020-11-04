@@ -24,7 +24,7 @@ import {
   useInjectionRef,
   useInjectionCollection,
   useInjectionElementCollection
-} from '../../_utils/composition'
+} from '../../_utils/composable'
 
 export default {
   name: 'AnchorLink',
