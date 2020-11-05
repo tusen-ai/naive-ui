@@ -8,6 +8,7 @@ module.exports = {
   plugins: [
     viteMdPlugin()
   ],
+  outDir: 'site',
   optimizeDeps: {
     include: [
       'highlight.js/lib/languages/cpp',
