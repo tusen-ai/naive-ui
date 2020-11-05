@@ -1,6 +1,5 @@
 export { default as asformitem } from './asformitem'
 export { default as locale } from './locale'
-export { default as hollowoutable } from './hollowoutable'
 export { default as placeable } from './placeable/index'
 export { default as themeable } from './themeable'
 export { default as configurable } from './withapp'
