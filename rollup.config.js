@@ -3,6 +3,10 @@ const { nodeResolve } = require('@rollup/plugin-node-resolve')
 const { terser } = require('rollup-plugin-terser')
 const replace = require('@rollup/plugin-replace')
 
+function externalValidator (patterns) {
+  return id => patterns.some(pattern => id.startsWith(pattern))
+}
+
 module.exports = {
   input: 'src/index.js',
   output: [
@@ -34,10 +38,9 @@ module.exports = {
       }
     })
   ],
-  external: [
+  external: externalValidator([
     'async-validator',
     'date-fns',
-    'date-fns/locale',
     'lodash-es',
     'vue',
     'treemate',
@@ -45,6 +48,7 @@ module.exports = {
     '@css-render/plugin-bem',
     'vueuc',
     'vooks',
-    'vicons'
-  ]
+    'vicons',
+    'evtd'
+  ])
 }
