@@ -50,6 +50,7 @@ function createRenderer (wrapCodeWithCard = true) {
       return `<n-p>${text}</n-p>`
     },
     link (href, title, text) {
+      if (/^(http:|https:)/.test(href)) return `<n-a href="${href}" target="_blank">${text}</n-a>`
       return `<n-a to="${href}" >${text}</n-a>`
     },
     list (body, ordered, start) {
