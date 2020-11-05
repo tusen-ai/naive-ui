@@ -108,8 +108,7 @@ export default c([
             backgroundColor: buttonColorDisabled
           }),
           cB('icon', {
-            fill: buttonTextColorDisabled,
-            stroke: buttonTextColorDisabled
+            color: buttonTextColorDisabled
           })
         ]),
         cE('input', {
@@ -182,8 +181,7 @@ export default c([
           backgroundColor: buttonColor
         }),
         cB('icon', {
-          fill: buttonTextColor,
-          stroke: buttonTextColor
+          color: buttonTextColor
         }),
         c('&:hover ~', [
           cE('border-mask', {
@@ -198,8 +196,7 @@ export default c([
             backgroundColor: buttonColorHover
           }),
           cB('icon', {
-            stroke: buttonTextColorHover,
-            fill: buttonTextColorHover
+            color: buttonTextColorHover
           })
         ]),
         c('&:active', [
@@ -210,8 +207,7 @@ export default c([
             backgroundColor: buttonColorActive
           }),
           cB('icon', {
-            stroke: buttonTextColorActive,
-            fill: buttonTextColorActive
+            color: buttonTextColorActive
           })
         ]),
         cM('disabled', {
@@ -224,8 +220,7 @@ export default c([
             backgroundColor: buttonColorDisabled
           }),
           cB('icon', {
-            stroke: buttonTextColorDisabled,
-            fill: buttonTextColorDisabled
+            color: buttonTextColorDisabled
           })
         ])
       ]),
@@ -306,14 +301,12 @@ export default c([
         cE('button', [
           c('&:hover', [
             cB('icon', {
-              fill: buttonTextColorHover,
-              stroke: buttonTextColorHover
+              color: buttonTextColorHover
             })
           ]),
           c('&:active', [
             cB('icon', {
-              fill: buttonTextColorActive,
-              stroke: buttonTextColorActive
+              color: buttonTextColorActive
             })
           ])
         ])

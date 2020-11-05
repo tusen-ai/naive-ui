@@ -159,6 +159,7 @@ export default c([
               border-radius: 50%;
               overflow: hidden;
             `,
+            color: handleColor,
             boxShadow: dotBoxShadow
           })
         ])

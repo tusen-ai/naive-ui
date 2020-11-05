@@ -28,7 +28,6 @@
           :key="mark.label"
           class="n-slider-dot"
           :style="{
-            backgroundColor: ascendantBackgroundColor,
             ...mark.style
           }"
         />
@@ -109,7 +108,6 @@ import {
   themeable,
   placeable,
   asformitem,
-  hollowoutable,
   usecssr
 } from '../../_mixins'
 import {
@@ -152,7 +150,6 @@ export default {
   mixins: [
     configurable,
     themeable,
-    hollowoutable,
     placeable,
     usecssr(styles),
     asformitem()
@@ -290,14 +287,12 @@ export default {
     },
     firstHandleStyle () {
       return {
-        backgroundColor: this.ascendantBackgroundColor,
         left: ((this.firstHandleValue - this.min) / (this.max - this.min) * 100) + '%',
         zIndex: this.firstHandleActive ? 1 : 0
       }
     },
     secondHandleStyle () {
       return {
-        backgroundColor: this.ascendantBackgroundColor,
         left: ((this.secondHandleValue - this.min) / (this.max - this.min) * 100) + '%',
         zIndex: this.secondHandleActive ? 1 : 0
       }
