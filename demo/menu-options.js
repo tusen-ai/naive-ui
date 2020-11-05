@@ -65,6 +65,11 @@ export default function (instance) {
         path: `/${lang}/${theme}/doc` + '/changelog'
       },
       {
+        name: 'Migrate From V1',
+        title: '从 V1 升级',
+        path: `/${lang}/${theme}/doc` + '/from-v1'
+      },
+      {
         name: 'Create Themed Component',
         title: '创建适配主题的组件',
         path: `/${lang}/${theme}/doc` + '/n-theme'
@@ -532,6 +537,10 @@ export default function (instance) {
       {
         name: 'Change Log',
         path: `/${lang}/${theme}/doc` + '/changelog'
+      },
+      {
+        name: 'Migrate From V1',
+        path: `/${lang}/${theme}/doc` + '/from-v1'
       },
       {
         name: 'Create Themed Component',

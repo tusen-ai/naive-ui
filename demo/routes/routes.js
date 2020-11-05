@@ -4,6 +4,7 @@ export const childRoutes = withPrefix('/:lang/:theme/doc', [
   // basic docs
   { path: '/intro', component: () => import('../documentation/intro/intro/index.entry') },
   { path: '/start', component: () => import('../documentation/intro/start/index.entry') },
+  { path: '/from-v1', component: () => import('../documentation/intro/vue3/index.entry') },
   { path: '/experimental-features', component: () => import('../documentation/intro/experimental-features/index.entry') },
   { path: '/changelog', component: () => import('../documentation/intro/changelog/index.entry') },
   { path: '/dev-guidelines', component: () => import('../documentation/intro/dev-guidelines/index.entry') },

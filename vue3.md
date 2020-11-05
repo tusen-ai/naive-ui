@@ -1,6 +1,5 @@
-last cherry-picked commit: 6560ae34d71b81d584af79f810cb9dfa87119d1a
-
-General Breaking Changes
+# Migrate from V1
+## General Breaking Changes
 - css
   - css index `naive-ui/lib|es/styles/index.css` has been removed, do not import it any more!
 - fonts
@@ -10,308 +9,312 @@ General Breaking Changes
 - `n-nimbus-form-card` is removed
 - `n-nimbus-icon` is removed
 
-Components
-  - [x] form
-    - form-item
-      - new
-        - `show-feedback` prop
-  - [x] affix
-    - deprecate
-      - `target` => `listen-to`
-  - [x] alert
-  - [x] anchor
-    - deprecate
-      - `target` => `listen-to`
-  - [x] auto-complete
+## Components
+- [x] form
+  - form-item
+    - new
+      - `show-feedback` prop
+- [x] affix
+  - deprecate
+    - `target` => `listen-to`
+- [x] alert
+- [x] anchor
+  - deprecate
+    - `target` => `listen-to`
+- [x] auto-complete
+  - break
+    - `v-model` => `v-model:value`
+  - deprecate
+    - `on-input` => `on-update:value`
+  - new
+    - `on-blur`
+    - `on-focus`
+- [x] avatar
+- [x] back-top
+  - new
+    - `show` controlled show
+    - `on-update:show`
+    - `to` teleport target
+  - deprecate
+    - `on-show` => `on-update:show`
+    - `on-hide` => `on-update:show`
+    - `target` => `listen-to`
+- [x] badge
+- [x] breadcrumb
+- [x] button
+- [x] button-group
+- [x] card
+- [x] cascader
+  - break
+    - `v-model` => `v-model:value`
+    - `on-load` has different usage
+    - `leaf-only` has different meaning
+  - new
+    - `cascade` prop
+    - `show-path` prop
+  - deprecated
+    - `on-change` => `on-update:value`
+- [x] checkbox
+  - checkbox
     - break
-      - `v-model` => `v-model:value`
+      - `value` only supports `string`
     - deprecate
-      - `on-input` => `on-update:value`
+      - `on-change` => `on-update:checked`
     - new
-      - `on-blur`
-      - `on-focus`
-  - [x] avatar
-  - [x] back-top
-    - new
-      - `show` controlled show
-      - `on-update:show`
-      - `to` teleport target
-    - deprecate
-      - `on-show` => `on-update:show`
-      - `on-hide` => `on-update:show`
-      - `target` => `listen-to`
-  - [x] badge
-  - [x] breadcrumb
-  - [x] button
-  - [x] button-group
-  - [x] card
-  - [x] cascader
+      - `default-checked` prop
+  - checkbox-group
     - break
-      - `v-model` => `v-model:value`
-      - `on-load` has different usage
-      - `leaf-only` has different meaning
-    - new
-      - `cascade` prop
-      - `show-path` prop
-    - deprecated
+      - `value` only supports `string` or `null`
+    - deprecate
       - `on-change` => `on-update:value`
-  - [x] checkbox
-    - checkbox
-      - break
-        - `value` only supports `string`
-      - deprecate
-        - `on-change` => `on-update:checked`
-      - new
-        - `default-checked` prop
-    - checkbox-group
-      - break
-        - `value` only supports `string` or `null`
-      - deprecate
-        - `on-change` => `on-update:value`
-  - [x] code
-  - [x] collapse
+- [x] code
+- [x] collapse
+  - deprecate
+    - `on-expanded-names-change` => `on-update:expanded-names`
+  - removed
+    - `v-model` => `v-model:expanded-names`
+- [x] config-consumer
+- [x] config-provider
+  - break
+    - `$NOs.theme` => `useOsTheme`
+  - deprecate
+    - `as` => `tag`
+    - `styleScheme` won't working in next version
+  - new
+    - provide `useOsTheme` hook
+- [x] confirm => `dialog`
+  - break
+    - rename `confirm` to `dialog`
+  - remove
+    - `$NConfirm`, `$NModal` => `inject.dialog`
+- [x] data-table
+  - deprecate
+    - `on-filters-change` => `on-update:filters`
+    - `on-sorter-change` => `on-update:sorter`
+    - `on-checked-row-keys-change` => `on-update:checked-row-keys`
+    - `on-page-change` => `on-update:page`
+    - `on-page-size-change` => `on-update:page-size`
+- [x] date-picker
+  - break
+    - `v-model` => `v-model:value`
+  - deprecate
+    - `on-change` => `on-update:value`
+- [x] descriptions
+- [x] divider
+- [x] drawer
+  - break
+    - `v-model`
+  - deprecate
+    - `on-show` => `on-update:show`
+    - `on-hide` => `on-update:show`
+    - `target` => `to`
+    - `drawer-class` => `body-class` & `body-wrapper-class`
+    - `drawer-style` => `body-style` & `body-wrapper-style`
+  - new
+    - `display-directive` prop
+- [x] dropdown
+  - break
+    - `option.value` => `option.key`
+    - item must have unique key
+    - submenu must have unique key
+  - remove
+    - `submenu-width`
+    - `submenu-min-width`
+    - `submenu-max-width`
+  - new
+    - `option.icon`
+- [x] dynamic-input
+  - break
+    - `v-model` => `v-model:value`
+  - deprecate
+    - `on-input` => `on-update:value`
+- [x] dynamic-tags
+  - break
+    - `v-model` => `v-model:value`
+- [x] element
+- [x] empty
+- [x] gradient-text
+- [x] grid
+- [x] icon
+- [x] input
+  - break
+    - `v-model` => `v-model:value`
+  - new
+    - `on-update:value`
+- [x] input-group
+- [x] input-group-label
+- [x] input-number
+  - deprecate
+    - `on-change` => `on-update:value`
+- [x] layout
+  - layout-sider
     - deprecate
-      - `on-expanded-names-change` => `on-update:expanded-names`
-    - removed
-      - `v-model` => `v-model:expanded-names`
-  - [x] config-consumer
-  - [x] config-provider
+      - `on-expand` => `on-update:collapsed`
+      - `on-collapse` => `on-update:collapsed`
+- [x] list
+- [x] loading-bar
+  - remove
+    - `$NLoadingBar`
+  - new
+    - `n-loading-bar-provider`
+- [x] log
+  - deprecate
+    - `scrollToTop` => `scrollTo`
+    - `scrollToBottom` => `scrollTo`
+- [x] menu
+  - new
+    - `popover-body-style`
+  - deprecate
+    - `on-expanded-names-change` => `on-update:expanded-keys`
+    - `on-select` => `on-update:value`
+    - `expanded-names` => `expanded-keys`
+    - `default-expanded-names` => `default-expanded-keys`
+    - `item.name` => `item.key`
+    - `item.titleExtra` => `item.extra`
+  - remove
+    - `overlay-width`
+    - `overlay-min-width`
+- [x] message
+  - rewrite message using `n-message-provider`
+  - deprecate
+    - `onHide` => `onLeave`
+    - `onAfterHide` => `onAfterLeave`
+  - remove
+    - `message.hide` => `message.destroy`
+- [x] modal
+  - rewrite with teleport
+  - new
+    - `display-directive`
+  - deprecate
+    - `v-model`
+    - `on-show` => `on-update:show`
+    - `on-hide` => `on-update:show`
+    - `overlay-style` => `body-style`
+  - remove
+    - default hide behavior for preset
+  - BUG:
+    - dialog preset slot (below vue 3.0.2)
+- [x] notification
+  - deprecate
+    - `open` => `create`
+    - `onHide` => `onLeave`
+    - `onAfterShow` => `onAfterEnter`
+    - `onAfterHide` => `onAfterHide`
+- [x] pagination
+  - deprecate
+    - `on-change` => `on-update:page`
+    - `on-page-size-change` => `on-update:page-size`
+- [x] popconfirm
+- [x] popover
+  - new
+    - `default-show`
+  - deprecate
+    - `v-slot:activator` => `v-slot:trigger`
+    - `overlay-xxx` => `body-xxx`
+  - remove
+    - `controller`
+    - `max-width`
+    - `width`
+    - `min-width`
+    - `manual` trigger is removed, use `null` instead
+  - other
+    - set default trigger to `null`
+- [x] popselect
+  - break
+    - `v-model` => `v-model:value`
+  - deprecate
+    - `on-change` => `on-update:value`
+- [x] progress
+- [x] radio
+  - radio-group
     - break
-      - `$NOs.theme` => `useOsTheme`
+      - default `size` `'small'` => `'medium'`
+      - value only supports `string` or `null`
     - deprecate
+      - `on-change` => `on-update:value`
+  - radio & radio-button
+    - break
+      - value only supports `string`
+      - `checked-value` => `checked`
+        - It is change to conform html standard usage
+      - `on-change` => `on-update:checked`
+        - `on-change` is now a native event
+- [x] result
+- [x] scrollbar
+- [x] select
+  - break
+    - `v-model` => `v-model:value`
+    - `on-scroll(event, container, content)` => `on-scroll(event)`
+    - `option.render(h, data)` => `option.render(data)`
+  - deprecated
+    - `on-change` => `on-update:value`
+- [x] slider
+  - deprecated
+    - `on-change` => `on-update:value`
+  - bug
+    - vue refs https://github.com/vuejs/vue-next/issues/2283
+    - drag logic
+- [x] space
+- [x] spin
+- [x] statistic
+- [x] steps
+- [x] switch
+  - remove
+    - `value` => `value`
+    - `change` => `on-update:value`
+- [x] table
+- [x] tabs
+  - deprecate
+    - `active-name` => `value`
+    - `on-active-name-change` => `on-update:value`
+- [x] tag
+  - break
+    - `v-model` => `v-model:value`
+  - deprecate
+    - `on-checked-change` => `on-update:checked`
+- [x] thing
+- [x] time
+- [x] time-picker
+  - break
+    - `v-model` => `v-model:value`
+- [x] timeline
+- [x] tooltip
+  - ref
+- [x] transfer
+  - break
+    - `v-model` => `v-model:value`
+  - deprecate
+    - `on-change` => `on-update:value`
+- [x] tree
+  - break
+    - `v-model` => `v-model:selected-keys`
+  - deprecate
+    - `on-selected-keys-change` => `on-update:selected-keys`
+    - `on-checked-keys-change` => `on-update:checked-keys`
+    - `on-expanded-keys-change` => `on-update:expanded-keys`
+- [x] typography
+  - deprecate
+    - text
       - `as` => `tag`
-    - new
-      - provide `useOsTheme` hook
-  - [x] confirm => `dialog`
-    - break
-      - rename `confirm` to `dialog`
-    - remove
-      - `$NConfirm`, `$NModal` => `inject.dialog`
-  - [x] data-table
-    - deprecate
-      - `on-filters-change` => `on-update:filters`
-      - `on-sorter-change` => `on-update:sorter`
-      - `on-checked-row-keys-change` => `on-update:checked-row-keys`
-      - `on-page-change` => `on-update:page`
-      - `on-page-size-change` => `on-update:page-size`
-  - [x] date-picker
-    - break
-      - `v-model` => `v-model:value`
-    - deprecate
-      - `on-change` => `on-update:value`
-  - [x] descriptions
-  - [x] divider
-  - [x] drawer
-    - break
-      - `v-model`
-    - deprecate
-      - `on-show` => `on-update:show`
-      - `on-hide` => `on-update:show`
-      - `target` => `to`
-      - `drawer-class` => `body-class` & `body-wrapper-class`
-      - `drawer-style` => `body-style` & `body-wrapper-style`
-    - new
-      - `display-directive` prop
-  - [x] dropdown
-    - break
-      - `option.value` => `option.key`
-      - item must have unique key
-      - submenu must have unique key
-    - remove
-      - `submenu-width`
-      - `submenu-min-width`
-      - `submenu-max-width`
-    - new
-      - `option.icon`
-  - [x] dynamic-input
-    - break
-      - `v-model` => `v-model:value`
-    - deprecate
-      - `on-input` => `on-update:value`
-  - [x] dynamic-tags
-    - break
-      - `v-model` => `v-model:value`
-  - [x] element
-  - [x] empty
-  - [x] gradient-text
-  - [x] grid
-  - [x] icon
-  - [x] input
-    - break
-      - `v-model` => `v-model:value`
-    - new
-      - `on-update:value`
-  - [x] input-group
-  - [x] input-group-label
-  - [x] input-number
-    - deprecate
-      - `on-change` => `on-update:value`
-  - [x] layout
-    - layout-sider
-      - deprecate
-        - `on-expand` => `on-update:collapsed`
-        - `on-collapse` => `on-update:collapsed`
-  - [x] list
-  - [x] loading-bar
-    - remove
-      - `$NLoadingBar`
-    - new
-      - `n-loading-bar-provider`
-  - [x] log
-    - deprecate
-      - `scrollToTop` => `scrollTo`
-      - `scrollToBottom` => `scrollTo`
-  - [x] menu
-    - new
-      - `popover-body-style`
-    - deprecate
-      - `on-expanded-names-change` => `on-update:expanded-keys`
-      - `on-select` => `on-update:value`
-      - `expanded-names` => `expanded-keys`
-      - `default-expanded-names` => `default-expanded-keys`
-      - `item.name` => `item.key`
-      - `item.titleExtra` => `item.extra`
-    - remove
-      - `overlay-width`
-      - `overlay-min-width`
-  - [x] message
-    - rewrite message using `n-message-provider`
-    - deprecate
-      - `onHide` => `onLeave`
-      - `onAfterHide` => `onAfterLeave`
-    - remove
-      - `message.hide` => `message.destroy`
-  - [x] modal
-    - rewrite with teleport
-    - new
-      - `display-directive`
-    - deprecate
-      - `v-model`
-      - `on-show` => `on-update:show`
-      - `on-hide` => `on-update:show`
-      - `overlay-style` => `body-style`
-    - remove
-      - default hide behavior for preset
-    - BUG:
-      - dialog preset slot (below vue 3.0.2)
-  - [x] notification
-    - deprecate
-      - `open` => `create`
-      - `onHide` => `onLeave`
-      - `onAfterShow` => `onAfterEnter`
-      - `onAfterHide` => `onAfterHide`
-  - [x] pagination
-    - deprecate
-      - `on-change` => `on-update:page`
-      - `on-page-size-change` => `on-update:page-size`
-  - [x] popconfirm
-  - [x] popover
-    - new
-      - `default-show`
-    - deprecate
-      - `v-slot:activator` => `v-slot:trigger`
-      - `overlay-xxx` => `body-xxx`
-    - remove
-      - `controller`
-      - `max-width`
-      - `width`
-      - `min-width`
-      - `manual` trigger is removed, use `null` instead
-    - other
-      - set default trigger to `null`
-  - [x] popselect
-    - break
-      - `v-model` => `v-model:value`
-    - deprecate
-      - `on-change` => `on-update:value`
-  - [x] progress
-  - [x] radio
-    - radio-group
-      - break
-        - default `size` `'small'` => `'medium'`
-        - value only supports `string` or `null`
-      - deprecate
-        - `on-change` => `on-update:value`
-    - radio & radio-button
-      - break
-        - value only supports `string`
-        - `checked-value` => `checked`
-          - It is change to conform html standard usage
-        - `on-change` => `on-update:checked`
-          - `on-change` is now a native event
-  - [x] result
-  - [x] scrollbar
-  - [x] select
-    - break
-      - `v-model` => `v-model:value`
-      - `on-scroll(event, container, content)` => `on-scroll(event)`
-      - `option.render(h, data)` => `option.render(data)`
-    - deprecated
-      - `on-change` => `on-update:value`
-  - [x] slider
-    - deprecated
-      - `on-change` => `on-update:value`
-    - bug
-      - vue refs https://github.com/vuejs/vue-next/issues/2283
-      - drag logic
-  - [x] space
-  - [x] spin
-  - [x] statistic
-  - [x] steps
-  - [x] switch
-    - remove
-      - `value` => `value`
-      - `change` => `on-update:value`
-  - [x] table
-  - [x] tabs
-    - deprecate
-      - `active-name` => `value`
-      - `on-active-name-change` => `on-update:value`
-  - [x] tag
-    - break
-      - `v-model` => `v-model:value`
-    - deprecate
-      - `on-checked-change` => `on-update:checked`
-  - [x] thing
-  - [x] time
-  - [x] time-picker
-    - break
-      - `v-model` => `v-model:value`
-  - [x] timeline
-  - [x] tooltip
-    - ref
-  - [x] transfer
-    - break
-      - `v-model` => `v-model:value`
-    - deprecate
-      - `on-change` => `on-update:value`
-  - [x] tree
-    - break
-      - `v-model` => `v-model:selected-keys`
-    - deprecate
-      - `on-selected-keys-change` => `on-update:selected-keys`
-      - `on-checked-keys-change` => `on-update:checked-keys`
-      - `on-expanded-keys-change` => `on-update:expanded-keys`
-  - [x] typography
-    - deprecate
-      - text
-        - `as` => `tag`
-  - [x] upload
+- [x] upload
 
-  - TODO
-    - [x] vooks
-    - [x] icons from `vicons`
-    - [x] fonts from `vfonts`
-    - [x] vite-build
-    - [x] rollup-build
-      - [x] wait for new version of rollup-plugin-vue,
-        https://github.com/vuejs/rollup-plugin-vue/issues/408
-    - tusimple theme
-    - clean delegate
-    - [x] site production tag (bug)
-    - [x] demo scrollbar 的问题
-    - [x] table x scroll 右侧阴影不消失
-    - [x] log scrollTo 有点问题
-    - [x] remove hollowoutable
+- TODO
+  - [x] vooks
+  - [x] icons from `vicons`
+  - [x] fonts from `vfonts`
+  - [x] vite-build
+  - [x] rollup-build
+    - [x] wait for new version of rollup-plugin-vue,
+      https://github.com/vuejs/rollup-plugin-vue/issues/408
+  - tusimple theme
+  - clean delegate
+  - [x] site production tag (bug)
+  - [x] demo scrollbar 的问题
+  - [x] table x scroll 右侧阴影不消失
+  - [x] log scrollTo 有点问题
+  - [x] remove hollowoutable
+  - [ ] styleScheme
 
+## Info
 https://github.com/vuejs/vue-next/issues/2549
+last cherry-picked commit: 6560ae34d71b81d584af79f810cb9dfa87119d1a
