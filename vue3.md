@@ -304,7 +304,7 @@ Components
     - [x] fonts from `vfonts`
     - [x] vite-build
     - [x] rollup-build
-      - [ ] wait for new version of rollup-plugin-vue,
+      - [x] wait for new version of rollup-plugin-vue,
         https://github.com/vuejs/rollup-plugin-vue/issues/408
     - tusimple theme
     - clean delegate
@@ -312,6 +312,6 @@ Components
     - [x] demo scrollbar 的问题
     - [x] table x scroll 右侧阴影不消失
     - [x] log scrollTo 有点问题
-    - [ ] remove hollowoutable
+    - [x] remove hollowoutable
 
 https://github.com/vuejs/vue-next/issues/2549
