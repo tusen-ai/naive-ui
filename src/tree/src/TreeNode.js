@@ -2,7 +2,7 @@ import { h } from 'vue'
 import NTreeNodeSwitcher from './TreeNodeSwitcher.vue'
 import NTreeNodeCheckbox from './TreeNodeCheckbox.vue'
 import NTreeNodeContent from './TreeNodeContent.vue'
-import NFadeInExpandTransition from '../../_transition/FadeInExpandTransition'
+import { NFadeInExpandTransition } from '../../_base'
 
 import { isLeaf, isLoaded } from './utils'
 

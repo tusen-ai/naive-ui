@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import NFadeInExpandTransition from '../../_transition/FadeInExpandTransition'
+import { NFadeInExpandTransition } from '../../_base'
 import NProgress from '../../progress/index.js'
 
 export default {

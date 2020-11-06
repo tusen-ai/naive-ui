@@ -8,11 +8,11 @@ import {
   SubtreeNotLoadedError
 } from 'treemate'
 import { useIsMounted } from 'vooks'
-import { useFormItem } from '../../_composables'
+import { useAsFormItem } from '../../_mixins'
 import { call } from '../../_utils'
 
 export function useCascader (props) {
-  const formItem = useFormItem(props)
+  const formItem = useAsFormItem(props)
   const cascaderMenuRef = ref(null)
   const selectMenuRef = ref(null)
   const triggerRef = ref(null)

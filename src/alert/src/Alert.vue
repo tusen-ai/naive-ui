@@ -69,7 +69,7 @@
 
 <script>
 import NIcon from '../../icon'
-import NFadeInExpandTransition from '../../_transition/FadeInExpandTransition'
+import { NFadeInExpandTransition } from '../../_base'
 import {
   configurable,
   themeable,

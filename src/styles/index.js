@@ -1,4 +1,6 @@
-/** internal style */
+// unified entry for styles
+
+// internal style
 export {
   baseMenuMaskDark,
   baseMenuMaskLight
@@ -23,11 +25,11 @@ export {
   baseSuffixDark,
   baseSuffixLight
 } from '../_base/suffix/styles'
-/** exposed style */
+// exposed style
 export {
   baseDark,
   baseLight
-} from './base'
+} from '../_styles/base'
 export {
   tabsDark,
   tabsLight

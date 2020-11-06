@@ -1,6 +1,6 @@
 import { Fragment, ref, h, reactive } from 'vue'
 import { createId, omit } from '../../_utils/vue'
-import { Teleport } from '../../_base'
+import { NBaseTeleport } from '../../_base'
 import MessageEnvironment from './MessageEnvironment.js'
 
 export default {
@@ -65,7 +65,7 @@ export default {
   render () {
     return h(Fragment, null,
       [
-        this.messageList.length ? h(Teleport, {
+        this.messageList.length ? h(NBaseTeleport, {
           to: this.to
         }, {
           default: () => h('div', {

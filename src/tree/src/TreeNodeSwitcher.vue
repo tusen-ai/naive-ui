@@ -23,7 +23,7 @@ import {
   MdArrowDropright
 } from 'vicons/ionicons-v4'
 import NBaseLoading from '../../_base/loading'
-import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
+import { NIconSwitchTransition } from '../../_base'
 
 export default {
   name: 'NTreeSwitcher',

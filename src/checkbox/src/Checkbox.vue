@@ -56,13 +56,13 @@ import { useMergedState, useMemo } from 'vooks'
 import {
   configurable,
   themeable,
-  asformitem
+  asformitem,
+  usecssr
 } from '../../_mixins'
 import { render } from '../../_utils/vue'
 import CheckMark from './CheckMark.vue'
 import LineMark from './LineMark.vue'
-import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
-import usecssr from '../../_mixins/usecssr'
+import { NIconSwitchTransition } from '../../_base'
 import styles from './styles'
 import { warn, call } from '../../_utils'
 

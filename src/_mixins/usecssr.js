@@ -1,5 +1,5 @@
 import { find } from '../_utils/cssr'
-import globalStyle from '../_styles/global-style/index.cssr.js'
+import globalStyle from '../_styles/global/index.cssr.js'
 import { warn } from '../_utils'
 
 if (__DEV__) {

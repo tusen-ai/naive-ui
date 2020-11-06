@@ -8,7 +8,7 @@ import {
   CloseIcon
 } from '../../_base/icons'
 import NBaseLoading from '../../_base/loading'
-import IconSwitchTransition from '../../_transition/IconSwitchTransition'
+import { NIconSwitchTransition } from '../../_base'
 import { render } from '../../_utils/vue'
 import {
   configurable,
@@ -55,7 +55,7 @@ export default {
           size: 20
         }, {
           default: () => [
-            h(IconSwitchTransition, null, {
+            h(NIconSwitchTransition, null, {
               default: () => [
                 createIconVNode(icon, type, mergedTheme)
               ]

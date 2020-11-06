@@ -42,13 +42,13 @@
 <script>
 import {
   configurable,
-  themeable
+  themeable,
+  usecssr
 } from '../../_mixins'
 import { warn } from '../../_utils/naive'
 import { createId } from '../../_utils/vue'
 import NUploadFile from './UploadFile.vue'
-import NFadeInExpandTransition from '../../_transition/FadeInExpandTransition'
-import usecssr from '../../_mixins/usecssr'
+import { NFadeInExpandTransition } from '../../_base'
 import styles from './styles'
 
 /**

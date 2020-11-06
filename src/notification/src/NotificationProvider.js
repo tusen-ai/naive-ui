@@ -1,6 +1,6 @@
 import { Fragment, h, reactive, ref } from 'vue'
 import { createId, omit } from '../../_utils/vue'
-import { Teleport } from '../../_base'
+import { NBaseTeleport } from '../../_base'
 import NotificationContainer from './NotificationContainer.vue'
 import NotificationEnvironment from './NotificationEnvironment'
 
@@ -69,7 +69,7 @@ export default {
   },
   render () {
     return h(Fragment, null, [
-      h(Teleport, {
+      h(NBaseTeleport, {
         to: this.to
       }, {
         default: () => this.notificationList.length ? h(NotificationContainer, {

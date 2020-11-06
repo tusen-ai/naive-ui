@@ -65,7 +65,7 @@ import {
   AttachOutline
 } from 'vicons/ionicons-v5'
 import NIcon from '../../icon'
-import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
+import { NIconSwitchTransition } from '../../_base'
 import { warn } from '../../_utils/naive'
 
 export default {

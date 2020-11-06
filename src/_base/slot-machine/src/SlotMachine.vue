@@ -28,9 +28,9 @@
 </template>
 
 <script>
-import NFadeInExpandTransition from '../../../_transition/FadeInExpandTransition'
+import { NFadeInExpandTransition } from '../../../_base'
 import SlotMachineNumber from './SlotMachineNumber.vue'
-import usecssr from '../../../_mixins/usecssr.js'
+import { usecssr } from '../../../_mixins'
 import styles from './styles/index.js'
 
 export default {

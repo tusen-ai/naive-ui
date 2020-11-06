@@ -1,3 +1,4 @@
+export { default as useAsFormItem } from './use-as-form-item'
 export { default as asformitem } from './asformitem'
 export { default as locale } from './locale'
 export { default as placeable } from './placeable/index'

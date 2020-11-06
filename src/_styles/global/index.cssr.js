@@ -1,5 +1,5 @@
 import { c, cB } from '../../_utils/cssr'
-import commonVariables from '../../styles/base/_common'
+import commonVariables from '../base/_common'
 
 export default c([
   // virtualScrollerStyle,

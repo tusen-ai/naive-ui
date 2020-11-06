@@ -1,4 +1,4 @@
-import create from '../../_styles/utils/create-theme-base.js'
+import create from '../utils/create-theme-base.js'
 import { read, composite } from '../../_utils/color/index.js'
 import commonVariables from './_common.js'
 

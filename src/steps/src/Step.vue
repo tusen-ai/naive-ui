@@ -57,8 +57,8 @@ import {
   CloseIcon as ErrorIcon
 } from '../../_base/icons'
 import { themeable } from '../../_mixins'
+import { NIconSwitchTransition } from '../../_base'
 
-import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 export default {
   name: 'Step',
   components: {

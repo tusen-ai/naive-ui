@@ -1,5 +1,5 @@
 import { h, withDirectives, vShow } from 'vue'
-import NFadeInExpandTransition from '../../_transition/FadeInExpandTransition'
+import { NFadeInExpandTransition } from '../../_base'
 
 export default {
   name: 'NCollapseItemContent',

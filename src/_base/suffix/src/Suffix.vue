@@ -10,7 +10,7 @@
       @mouseenter="handleMouseEnter"
       @mouseleave="handleMouseLeave"
     >
-      <icon-switch-transition>
+      <n-icon-switch-transition>
         <n-base-loading
           v-if="loading"
           key="loading"
@@ -37,14 +37,14 @@
             'n-base-suffix-arrow--disabled': disabled
           }"
         />
-      </icon-switch-transition>
+      </n-icon-switch-transition>
     </div>
   </transition>
 </template>
 
 <script>
 import CancelIcon from './CancelIcon.vue'
-import IconSwitchTransition from '../../../_transition/IconSwitchTransition'
+import { NIconSwitchTransition } from '../../../_base'
 import NBaseLoading from '../../loading'
 import {
   usecssr
@@ -56,7 +56,7 @@ export default {
   components: {
     CancelIcon,
     NBaseLoading,
-    IconSwitchTransition
+    NIconSwitchTransition
   },
   mixins: [
     usecssr(styles)
