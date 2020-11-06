@@ -75,10 +75,8 @@ import enUS from './locale/enUS'
 
 import * as styles from './styles'
 
-// Deprecated Components
-import NimbusServiceLayout from './_deprecated/NimbusServiceLayout'
-
 // deprecated
+import NimbusServiceLayout from './_deprecated/nimbus-service-layout/index'
 import styleScheme from './_deprecated/style-scheme'
 
 import create from './create'
