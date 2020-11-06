@@ -6,7 +6,7 @@
 ```
 ```js
 import { h } from 'vue'
-import { MdHourglass } from 'vicons/ionicons-v4'
+import { MdHourglass } from '@vicons/ionicons-v4'
 
 export default {
   inject: ['message'],

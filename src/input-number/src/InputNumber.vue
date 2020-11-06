@@ -62,9 +62,9 @@
 <script>
 import NIcon from '../../icon/index'
 import {
-  RemoveOutline as RemoveIcon,
-  AddOutline as AddIcon
-} from 'vicons/ionicons-v5'
+  RemoveIcon,
+  AddIcon
+} from '../../_base/icons'
 import {
   configurable,
   themeable,

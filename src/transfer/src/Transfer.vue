@@ -203,8 +203,8 @@ import NInput from '../../input'
 import NIcon from '../../icon'
 import NEmpty from '../../empty'
 import {
-  IosSearch as SearchIcon
-} from 'vicons/ionicons-v4'
+  SearchIcon
+} from '../../_base/icons'
 import {
   configurable,
   asformitem,

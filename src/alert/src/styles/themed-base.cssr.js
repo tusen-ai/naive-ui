@@ -41,15 +41,16 @@ export default c([
         raw: `
           position: absolute;
           right: 16px;
+          font-size: 14px;
           top: 14px;
-          width: 14px;
-          height: 14px;
+          width: 1em;
+          height: 1em;
+          line-height: 0;
         `
       }, [
         cB('icon', {
           raw: `
             cursor: pointer;
-            font-size: 14px;
           `
         })
       ]),

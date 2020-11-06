@@ -12,7 +12,7 @@ export default c([
       contentTextColor,
       closeColor,
       closeColorHover,
-      closeColorActive
+      closeColorPressed
     } = pallete
     return cTB('alert', [
       cM(type + '-type', {
@@ -21,26 +21,22 @@ export default c([
       }, [
         cE('close', [
           cB('icon', {
-            fill: closeColor,
-            stroke: closeColor
+            color: closeColor
           }),
           c('&:hover', [
             cB('icon', {
-              fill: closeColorHover,
-              stroke: closeColorHover
+              color: closeColorHover
             })
           ]),
           c('&:active', [
             cB('icon', {
-              fill: closeColorActive,
-              stroke: closeColorActive
+              color: closeColorPressed
             })
           ])
         ]),
         cE('icon', [
           cB('icon', {
-            fill: iconColor,
-            stroke: iconColor
+            color: iconColor
           })
         ]),
         cB('alert-body', {

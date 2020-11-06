@@ -86,7 +86,7 @@ export default c([
             `
           }),
           cB('icon', {
-            fill: scrollButtonColor
+            color: scrollButtonColor
           }),
           cM('disabled', {
             raw: `
@@ -94,7 +94,7 @@ export default c([
             `
           }, [
             cB('icon', {
-              fill: scrollButtonColorDisabled
+              color: scrollButtonColorDisabled
             })
           ])
         ])
@@ -154,7 +154,7 @@ export default c([
             `
           }, [
             cB('icon', {
-              fill: tabCloseColor
+              color: tabCloseColor
             })
           ]),
           cE('label', {

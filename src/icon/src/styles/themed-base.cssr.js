@@ -18,7 +18,6 @@ export default c([
           transition:
             color .3s ${cubicBezierEaseInOut};
           fill: currentColor;
-          stroke: currentColor;
         `
       },
       [

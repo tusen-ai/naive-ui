@@ -10,7 +10,7 @@
     <div class="n-tree-node-switcher__icon">
       <n-icon-switch-transition>
         <n-icon v-if="!loading" key="switcher">
-          <md-arrow-dropright />
+          <switcher-icon />
         </n-icon>
         <n-base-loading v-else key="loading" :theme="NTree.mergedTheme" />
       </n-icon-switch-transition>
@@ -20,14 +20,14 @@
 
 <script>
 import {
-  MdArrowDropright
-} from 'vicons/ionicons-v4'
+  SwitcherIcon
+} from '../../_base/icons'
 import { NIconSwitchTransition, NBaseLoading } from '../../_base'
 
 export default {
   name: 'NTreeSwitcher',
   components: {
-    MdArrowDropright,
+    SwitcherIcon,
     NBaseLoading,
     NIconSwitchTransition
   },

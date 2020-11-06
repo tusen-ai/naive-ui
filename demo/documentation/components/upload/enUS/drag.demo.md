@@ -3,7 +3,7 @@
 <n-upload action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f">
   <n-upload-dragger>
     <div style="margin-bottom: 12px;">
-      <n-icon size="48" depth="tertiary">
+      <n-icon size="48" :depth="3">
         <archive-icon />
       </n-icon>
     </div>
@@ -13,7 +13,7 @@
 </n-upload>
 ```
 ```js
-import { ArchiveOutline as ArchiveIcon }  from 'vicons/ionicons-v5'
+import { ArchiveOutline as ArchiveIcon }  from '@vicons/ionicons-v5'
 
 export default {
   components: {

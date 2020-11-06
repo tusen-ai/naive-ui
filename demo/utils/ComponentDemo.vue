@@ -60,7 +60,7 @@
 
 <script>
 import { nextTick } from 'vue'
-import { CodeOutline } from 'vicons/ionicons-v5'
+import { CodeOutline } from '@vicons/ionicons-v5'
 import { displayModeRef, i18n } from '../util-composables'
 
 export default {

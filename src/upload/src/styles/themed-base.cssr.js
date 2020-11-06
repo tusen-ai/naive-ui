@@ -181,8 +181,7 @@ export default c([
                   font-size: 18px;
                   margin-right: 2px;
                   vertical-align: middle;
-                  fill: ${itemIconColor};
-                  stroke: ${itemIconColor};
+                  color: ${itemIconColor};
                 `
               })
             ])

@@ -96,12 +96,12 @@ import { nextTick, computed } from 'vue'
 import NSelect from '../../select'
 import NInput from '../../input'
 import {
-  ArrowRight20Regular as FastForwardIcon,
-  ArrowLeft20Regular as FastBackwardIcon,
-  ChevronLeft16Regular as BackwardIcon,
-  ChevronRight16Regular as ForwardIcon,
-  More16Regular as MoreIcon
-} from 'vicons/fluent'
+  FastForwardIcon,
+  FastBackwardIcon,
+  BackwardIcon,
+  ForwardIcon,
+  MoreIcon
+} from '../../_base/icons'
 import {
   configurable,
   themeable,

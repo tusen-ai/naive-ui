@@ -8,7 +8,7 @@ After a long time of consideration, I decide to drop slot API. However, there is
 ```
 ```js
 import { resolveComponent, h } from 'vue'
-import { MdMusicalNote as MusicIcon }  from 'vicons/ionicons-v4'
+import { MdMusicalNote as MusicIcon }  from '@vicons/ionicons-v4'
 
 function render (option, selected) {
   return [

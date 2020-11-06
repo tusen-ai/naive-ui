@@ -73,26 +73,22 @@ export default c([
           [
             cM('warning-type', {
               raw: `
-                fill: ${iconColorWarning};
-                stroke: ${iconColorWarning};
+                color: ${iconColorWarning};
               `
             }),
             cM('success-type', {
               raw: `
-                fill: ${iconColorSuccess};
-                stroke: ${iconColorSuccess};
+                color: ${iconColorSuccess};
               `
             }),
             cM('error-type', {
               raw: `
-                fill: ${iconColorError};
-                stroke: ${iconColorError};
+                color: ${iconColorError};
               `
             }),
             cM('info-type', {
               raw: `
-                fill: ${iconColorInfo};
-                stroke: ${iconColorInfo};
+                color: ${iconColorInfo};
               `
             })
           ]),
@@ -104,21 +100,18 @@ export default c([
           }),
           cE('close', {
             raw: `
-              fill: ${closeColor};
-              stroke: ${closeColor};
+              color: ${closeColor};
             `
           },
           [
             c('&:hover', {
               raw: `
-                fill: ${closeColorHover};
-                stroke: ${closeColorHover};
+                color: ${closeColorHover};
               `
             }),
             c('&:active', {
               raw: `
-                fill: ${closeColorActive};
-                stroke: ${closeColorActive};
+                color: ${closeColorActive};
               `
             })
           ])

@@ -43,7 +43,7 @@
 <script>
 import NTag from '../../tag'
 import NIcon from '../../icon'
-import { AddOutline as AddIcon } from 'vicons/ionicons-v5'
+import { AddIcon } from '../../_base/icons'
 import {
   configurable,
   themeable,

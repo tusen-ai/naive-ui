@@ -96,7 +96,7 @@
 ```js
 import {
   MdSearch
-} from 'vicons/ionicons-v4'
+} from '@vicons/ionicons-v4'
 
 export default {
   components: {

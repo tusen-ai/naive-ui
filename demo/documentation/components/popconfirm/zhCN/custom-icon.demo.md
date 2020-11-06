@@ -18,7 +18,7 @@
 </n-popconfirm>
 ```
 ```js
-import { MdHand as HandIcon } from 'vicons/ionicons-v4'
+import { MdHand as HandIcon } from '@vicons/ionicons-v4'
 
 export default {
   components: {

@@ -33,7 +33,7 @@ export default create({
         contentTextColor: textColor2Overlay,
         closeColor: closeColorOverlay,
         closeColorHover: colorColorHoverOverlay,
-        closeColorActive: closeColorPressedOverlay
+        closeColorPressed: closeColorPressedOverlay
       },
       info: {
         borderColor: changeColor(infoColorSuppl, { alpha: 0.35 }),
@@ -43,7 +43,7 @@ export default create({
         contentTextColor: textColor2Overlay,
         closeColor: closeColorOverlay,
         closeColorHover: colorColorHoverOverlay,
-        closeColorActive: closeColorPressedOverlay
+        closeColorPressed: closeColorPressedOverlay
       },
       success: {
         borderColor: changeColor(successColorSuppl, { alpha: 0.35 }),
@@ -53,7 +53,7 @@ export default create({
         contentTextColor: textColor2Overlay,
         closeColor: closeColorOverlay,
         closeColorHover: colorColorHoverOverlay,
-        closeColorActive: closeColorPressedOverlay
+        closeColorPressed: closeColorPressedOverlay
       },
       warning: {
         borderColor: changeColor(warningColorSuppl, { alpha: 0.35 }),
@@ -63,7 +63,7 @@ export default create({
         contentTextColor: textColor2Overlay,
         closeColor: closeColorOverlay,
         closeColorHover: colorColorHoverOverlay,
-        closeColorActive: closeColorPressedOverlay
+        closeColorPressed: closeColorPressedOverlay
       },
       error: {
         borderColor: changeColor(errorColorSuppl, { alpha: 0.35 }),
@@ -73,7 +73,7 @@ export default create({
         contentTextColor: textColor2Overlay,
         closeColor: closeColorOverlay,
         closeColorHover: colorColorHoverOverlay,
-        closeColorActive: closeColorPressedOverlay
+        closeColorPressed: closeColorPressedOverlay
       }
     }
   }

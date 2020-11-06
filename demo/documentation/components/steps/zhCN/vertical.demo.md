@@ -58,7 +58,7 @@
 import {
   MdArrowRoundBack,
   MdArrowRoundForward
-} from 'vicons/ionicons-v4'
+} from '@vicons/ionicons-v4'
 
 export default {
   components: {

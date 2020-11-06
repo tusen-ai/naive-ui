@@ -67,9 +67,9 @@ import { ref, toRef, isProxy, toRaw } from 'vue'
 import NButton from '../../button'
 import NButtonGroup from '../../button-group'
 import {
-  RemoveOutline as RemoveIcon,
-  AddOutline as AddIcon
-} from 'vicons/ionicons-v5'
+  RemoveIcon,
+  AddIcon
+} from '../../_base/icons'
 import NDynamicInputInputPreset from './InputPreset.vue'
 import NDynamicInputPairPreset from './PairPreset.vue'
 import {

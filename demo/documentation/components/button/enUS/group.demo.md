@@ -100,7 +100,7 @@ Button can be grouped.
 </n-space>
 ```
 ```js
-import { LogInOutline as LogInIcon } from 'vicons/ionicons-v5'
+import { LogInOutline as LogInIcon } from '@vicons/ionicons-v5'
 
 export default {
   components: {

@@ -10,7 +10,7 @@
     <div class="n-empty__icon">
       <slot name="icon">
         <n-icon>
-          <remove-circle-outline />
+          <empty-icon />
         </n-icon>
       </slot>
     </div>
@@ -26,24 +26,26 @@
 </template>
 
 <script>
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import locale from '../../_mixins/locale'
 import {
-  RemoveCircleOutline
-} from 'vicons/ionicons-v5'
+  configurable,
+  themeable,
+  locale,
+  usecssr
+} from '../../_mixins'
+import {
+  EmptyIcon
+} from '../../_base/icons'
 import NIcon from '../../icon'
-import usecssr from '../../_mixins/usecssr'
 import styles from './styles/index'
 
 export default {
   name: 'Empty',
   components: {
-    RemoveCircleOutline,
+    EmptyIcon,
     NIcon
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     locale('Empty'),
     usecssr(styles)

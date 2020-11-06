@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { GitCommitOutline as EditIcon } from 'vicons/ionicons-v5'
+import { GitCommitOutline as EditIcon } from '@vicons/ionicons-v5'
 import githubUrl from './github-url'
 
 export default {

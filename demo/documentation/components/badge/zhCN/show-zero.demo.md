@@ -26,7 +26,7 @@
 import {
   MdAdd,
   MdRemove
-} from 'vicons/ionicons-v4'
+} from '@vicons/ionicons-v4'
 
 export default {
   components: {

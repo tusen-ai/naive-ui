@@ -1,10 +1,10 @@
 import { NBaseFocusDetector } from '../../../_base'
 import {
-  ArrowRight20Filled as FastForwardIcon,
-  ArrowLeft20Filled as FastBackwardIcon,
-  ChevronLeft24Filled as BackwardIcon,
-  ChevronRight24Filled as ForwardIcon
-} from 'vicons/fluent'
+  FastForwardIcon,
+  FastBackwardIcon,
+  BackwardIcon,
+  ForwardIcon
+} from '../../../_base/icons'
 import {
   locale
 } from '../../../_mixins'

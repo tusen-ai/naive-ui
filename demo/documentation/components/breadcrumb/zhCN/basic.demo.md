@@ -22,7 +22,7 @@
 </n-breadcrumb>
 ```
 ```js
-import { MdCash } from 'vicons/ionicons-v4'
+import { MdCash } from '@vicons/ionicons-v4'
 
 export default {
   components: {

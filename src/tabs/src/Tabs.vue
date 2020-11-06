@@ -98,10 +98,10 @@ import {
   usecssr
 } from '../../_mixins'
 import {
-  IosArrowBack as BackwardIcon,
-  IosArrowForward as ForwardIcon,
-  MdClose as CloseIcon
-} from 'vicons/ionicons-v4'
+  ChevronLeftIcon as BackwardIcon,
+  ChevronRightIcon as ForwardIcon,
+  CloseIcon
+} from '../../_base/icons'
 import { VResizeObserver } from 'vueuc'
 import { throttle } from 'lodash-es'
 import styles from './styles'

@@ -74,7 +74,7 @@
 </n-thing>
 ```
 ```js
-import { CashOutline as CashIcon } from 'vicons/ionicons-v5'
+import { CashOutline as CashIcon } from '@vicons/ionicons-v5'
 
 export default {
   components: {

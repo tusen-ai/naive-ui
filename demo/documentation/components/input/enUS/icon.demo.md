@@ -26,7 +26,7 @@ Fill content in prefix or suffix of the input.
 ```js
 import {
   SearchOutline
-} from 'vicons/ionicons-v5'
+} from '@vicons/ionicons-v5'
 
 export default {
   components: {

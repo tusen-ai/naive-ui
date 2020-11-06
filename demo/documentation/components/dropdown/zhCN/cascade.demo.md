@@ -13,7 +13,7 @@
 
 ```js
 import { h, resolveComponent } from 'vue'
-import { CashOutline as CashIcon } from 'vicons/ionicons-v5'
+import { CashOutline as CashIcon } from '@vicons/ionicons-v5'
 
 const options = [
   {

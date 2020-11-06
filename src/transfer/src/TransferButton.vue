@@ -29,7 +29,7 @@ export default {
   },
   props: {
     to: {
-      validator: Boolean,
+      type: Boolean,
       default: false
     },
     onClick: {

@@ -17,7 +17,7 @@
 import {
   GameControllerOutline,
   GameController
-} from 'vicons/ionicons-v5'
+} from '@vicons/ionicons-v5'
 
 export default {
   components: {

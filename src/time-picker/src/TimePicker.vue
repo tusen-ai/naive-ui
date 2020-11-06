@@ -207,10 +207,9 @@ import {
 } from 'date-fns'
 import { strictParse } from '../../date-picker/src/utils'
 import keyboardDelegate from '../../_utils/delegate/keyboardDelegate'
-
 import {
-  TimeOutline as TimeIcon
-} from 'vicons/ionicons-v5'
+  TimeIcon
+} from '../../_base/icons'
 import styles from './styles'
 import { warn, call, KEY_CODE } from '../../_utils'
 

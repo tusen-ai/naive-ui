@@ -13,7 +13,7 @@ import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
   WineOutline as WineIcon
-} from 'vicons/ionicons-v5'
+} from '@vicons/ionicons-v5'
 
 function renderIcon(icon) {
   return () => h(resolveComponent('n-icon'), null, { default: () => h(icon) })

@@ -12,13 +12,13 @@
     <div class="n-upload-file-info">
       <div class="n-upload-file-info__name">
         <n-icon>
-          <attach-outline />
+          <attach-icon />
         </n-icon>{{ file.name }}
       </div>
       <div class="n-upload-file-info__action">
         <n-button
           v-if="showRemoveButton || showCancelButton"
-          key="closeOrTrash"
+          key="cancelOrTrash"
           circle
           size="tiny"
           ghost
@@ -27,8 +27,8 @@
         >
           <template #icon>
             <n-icon-switch-transition>
-              <trash-outline v-if="showRemoveButton" key="trash" />
-              <close-outline v-else key="close" />
+              <delete-icon v-if="showRemoveButton" key="trash" />
+              <cancel-icon v-else key="cancel" />
             </n-icon-switch-transition>
           </template>
         </n-button>
@@ -42,7 +42,7 @@
           @click="handleDownloadClick"
         >
           <template #icon>
-            <download-outline />
+            <download-icon />
           </template>
         </n-button>
       </div>
@@ -59,11 +59,11 @@
 import NButton from '../../button'
 import NUploadProgress from './UploadProgress.vue'
 import {
-  CloseOutline,
-  DownloadOutline,
-  TrashOutline,
-  AttachOutline
-} from 'vicons/ionicons-v5'
+  CancelIcon,
+  DeleteIcon,
+  AttachIcon,
+  DownloadIcon
+} from '../../_base/icons'
 import NIcon from '../../icon'
 import { NIconSwitchTransition } from '../../_base'
 import { warn } from '../../_utils/naive'
@@ -73,11 +73,11 @@ export default {
   components: {
     NButton,
     NUploadProgress,
-    AttachOutline,
-    CloseOutline,
+    AttachIcon,
+    CancelIcon,
     NIcon,
-    DownloadOutline,
-    TrashOutline,
+    DownloadIcon,
+    DeleteIcon,
     NIconSwitchTransition
   },
   inject: {
@@ -93,7 +93,7 @@ export default {
   },
   computed: {
     progressStatus () {
-      const file = this.file
+      const { file } = this
       if (file.status === 'finished') return 'success'
       if (file.status === 'error') return 'error'
       return 'info'
@@ -103,29 +103,29 @@ export default {
       return undefined
     },
     showProgress () {
-      const file = this.file
+      const { file } = this
       return file.status === 'uploading'
     },
     showCancelButton () {
       if (!this.NUpload.showCancelButton) return false
-      const file = this.file
+      const { file } = this
       return ['uploading', 'pending', 'error'].includes(file.status)
     },
     showRemoveButton () {
       if (!this.NUpload.showRemoveButton) return false
-      const file = this.file
+      const { file } = this
       return ['finished'].includes(file.status)
     },
     showDownloadButton () {
       if (!this.NUpload.showDownloadButton) return false
-      const file = this.file
+      const { file } = this
       return ['finished'].includes(file.status)
     }
   },
   methods: {
     handleRemoveOrCancelClick (e) {
       e.preventDefault()
-      const file = this.file
+      const { file } = this
       if (['finished', 'pending', 'error'].includes(file.status)) {
         this.handleRemove(file)
       } else if (['uploading'].includes(file.status)) {
