@@ -11,7 +11,6 @@
     v-model:value="model.dynamicInputValue"
     key-field="key"
     :on-create="onCreate"
-    :on-clear="onClear"
   >
     <template v-slot="{ index, value }">
       <div style="display: flex;">
@@ -81,23 +80,6 @@ export default {
         value: '',
         /** Generate a key to make the verification information will not be misplaced */
         key: Math.random().toString(16).slice(2, 10)
-      }
-    },
-    /**
-     * Since clearing the content of input is an external action, input does not
-     * emit events, form-item cannot get events emitted from input.
-     * Therefore, in order to verify the results are synchronized with the
-     * displayed values, manual verification is required. `$nextTick` is used
-     * since the empty value will be set after the function is returned.
-     */
-    onClear () {
-      this.$nextTick().then(
-        () => this.$refs.form.validate()
-      )
-      return  {
-        name: '',
-        value: '',
-        key: 0
       }
     }
   }

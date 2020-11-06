@@ -1,9 +1,22 @@
 <template>
   <div class="n-dynamic-input">
+    <n-button
+      v-if="!mergedValue || mergedValue.length === 0"
+      block
+      ghost
+      dashed
+      @click="handleCreateClick"
+    >
+      <template #icon>
+        <add-icon />
+      </template>
+      {{ localeNs.create }}
+    </n-button>
     <div
       v-for="(_, index) in value"
-      :key="keyField ? _[keyField] : index"
-      :data-key="keyField ? _[keyField] : index"
+      v-else
+      :key="keyField ? _[keyField] : ensureKey(_, index)"
+      :data-key="keyField ? _[keyField] : ensureKey(_, index)"
       class="n-dynamic-input-item"
     >
       <slot v-if="$slots.default" :value="value[index]" :index="index" />
@@ -26,19 +39,21 @@
           <n-button
             v-if="!removeDisabled"
             circle
-            @click="remove($event, index)"
+            @click="remove(index)"
           >
+            {{ index }}
             <template #icon>
-              <md-remove />
+              <remove-icon />
             </template>
           </n-button>
           <n-button
             :disabled="insertionDisabled"
             circle
-            @click="createItem($event, index)"
+            @click="createItem(index)"
           >
+            {{ index }}
             <template #icon>
-              <md-add />
+              <add-icon />
             </template>
           </n-button>
         </n-button-group>
@@ -48,21 +63,27 @@
 </template>
 
 <script>
-/* eslint-disable vue/no-mutating-props */
+import { ref, toRef, isProxy, toRaw } from 'vue'
 import NButton from '../../button'
 import NButtonGroup from '../../button-group'
 import {
-  MdAdd,
-  MdRemove
-} from 'vicons/ionicons-v4'
+  RemoveOutline as RemoveIcon,
+  AddOutline as AddIcon
+} from 'vicons/ionicons-v5'
 import NDynamicInputInputPreset from './InputPreset.vue'
 import NDynamicInputPairPreset from './PairPreset.vue'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import usecssr from '../../_mixins/usecssr'
-import styles from './styles/index'
-import { warn } from '../../_utils/naive'
-import { call } from '../../_utils/vue'
+import {
+  configurable,
+  themeable,
+  usecssr,
+  asformitem,
+  locale
+} from '../../_mixins'
+import styles from './styles'
+import { warn, call, createId } from '../../_utils'
+import { useMergedState } from 'vooks'
+
+const globalDataKeyMap = new WeakMap()
 
 export default {
   name: 'DynamicInput',
@@ -71,12 +92,14 @@ export default {
     NDynamicInputPairPreset,
     NButtonGroup,
     NButton,
-    MdAdd,
-    MdRemove
+    AddIcon,
+    RemoveIcon
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
+    locale('DynamicInput'),
+    asformitem(),
     usecssr(styles)
   ],
   provide () {
@@ -89,11 +112,21 @@ export default {
       type: Number,
       default: undefined
     },
+    min: {
+      type: Number,
+      default: 0
+    },
     value: {
       validator (value) {
-        return Array.isArray(value) && value.length
+        return Array.isArray(value) || value === null
       },
-      required: true
+      default: undefined
+    },
+    defaultValue: {
+      validator (value) {
+        return Array.isArray(value)
+      },
+      default: []
     },
     preset: {
       validator (value) {
@@ -105,7 +138,7 @@ export default {
       type: String,
       default: null
     },
-    /** for preset pair */
+    // for preset pair
     keyPlaceholder: {
       type: String,
       default: ''
@@ -114,7 +147,7 @@ export default {
       type: String,
       default: ''
     },
-    /** for preset input */
+    // for preset input
     placeholder: {
       type: String,
       default: ''
@@ -127,16 +160,19 @@ export default {
       type: Function,
       default: undefined
     },
-    onClear: {
-      type: Function,
-      default: undefined
-    },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:value': {
       type: [Function, Array],
       default: undefined
     },
     // deprecated
+    onClear: {
+      validator () {
+        warn('dynamic-input', '`on-clear` is deprecated, it is out of usage anymore.')
+        return true
+      },
+      default: undefined
+    },
     onInput: {
       validator () {
         if (__DEV__) warn('dynamic-input', '`on-input` is deprecated, please use `on-update:value` instead.')
@@ -145,78 +181,113 @@ export default {
       default: undefined
     }
   },
-  data () {
+  setup (props) {
+    const uncontrolledValueRef = ref(props.value)
+    const controlledValueRef = toRef(props, 'value')
     return {
-      NFormItem: null // useless code, for debug
+      uncontrolledValue: uncontrolledValueRef,
+      mergedValue: useMergedState(controlledValueRef, uncontrolledValueRef),
+      dataKeyMap: globalDataKeyMap
     }
   },
   computed: {
     insertionDisabled () {
-      return this.max !== null && this.value.length >= this.max
+      const { mergedValue } = this
+      if (Array.isArray(mergedValue)) {
+        const { max } = this
+        return max !== undefined && mergedValue.length >= max
+      }
+      return false
     },
-    removeDisabled (index) {
-      return this.value.length === 1 && !this.onClear
+    removeDisabled () {
+      const { mergedValue } = this
+      if (Array.isArray(mergedValue)) return mergedValue.length <= this.min
+      return true
     }
   },
   methods: {
-    doInput (value) {
+    doUpdateValue (value) {
       const {
         onInput,
         'onUpdate:value': onUpdateValue
       } = this
       if (onInput) call(onInput, value)
       if (onUpdateValue) call(onUpdateValue, value)
+      this.uncontrolledValue = value
+    },
+    ensureKey (value, index) {
+      if (value === undefined || value === null) return index
+      if (typeof value !== 'object') return index
+      const {
+        dataKeyMap
+      } = this
+      const rawValue = isProxy(value) ? toRaw(value) : value
+      let key = dataKeyMap.get(rawValue)
+      if (key === undefined) {
+        dataKeyMap.set(rawValue, key = createId())
+      }
+      return key
     },
     handleValueChange (index, value) {
-      this.value[index] = value
+      const {
+        mergedValue
+      } = this
+      const newValue = Array.from(mergedValue ?? [])
+      const originalItem = newValue[index]
+      newValue[index] = value
+      const {
+        dataKeyMap
+      } = this
+      // update dataKeyMap
+      if (
+        originalItem && value && typeof originalItem === 'object' && typeof value === 'object'
+      ) {
+        const rawOriginal = isProxy(originalItem) ? toRaw(originalItem) : originalItem
+        const rawNew = isProxy(value) ? toRaw(value) : value
+        // inherit key is value position is not change
+        const originalKey = dataKeyMap.get(rawOriginal)
+        if (originalKey !== undefined) {
+          dataKeyMap.set(rawNew, originalKey)
+        }
+      }
+
+      this.doUpdateValue(newValue)
     },
-    createItem (e, index) {
-      const { onCreate } = this
+    handleCreateClick () {
+      this.createItem(0)
+    },
+    createItem (index) {
+      const { onCreate, mergedValue } = this
+      const newValue = Array.from(mergedValue ?? [])
       if (onCreate) {
-        this.value.splice(index + 1, 0, onCreate(index + 1))
+        newValue.splice(index + 1, 0, onCreate(index + 1))
+        this.doUpdateValue(newValue)
       } else if (this.$slots.default) {
-        this.value.splice(index + 1, 0, null)
+        newValue.splice(index + 1, 0, null)
+        this.doUpdateValue(newValue)
       } else {
         switch (this.preset) {
           case 'input':
-            this.value.splice(index + 1, 0, null)
+            newValue.splice(index + 1, 0, '')
+            this.doUpdateValue(newValue)
             break
           case 'pair':
-            this.value.splice(index + 1, 0, { key: null, value: null })
+            newValue.splice(index + 1, 0, { key: '', value: '' })
+            this.doUpdateValue(newValue)
             break
         }
       }
     },
-    remove (e, index) {
-      if (this.value.length === 1) {
-        const onClear = this.onClear
-        if (onClear) {
-          const keyField = this.keyField
-          if (keyField) {
-            const memorizedKeyField = this.value[0][keyField]
-            this.doInput([Object.assign(onClear(), {
-              [keyField]: memorizedKeyField
-            })])
-          } else {
-            this.doInput([onClear()])
-          }
-        } else {
-          switch (this.preset) {
-            case 'input':
-              this.doInput([null])
-              break
-            case 'pair':
-              this.doInput([{ key: null, value: null }])
-              break
-          }
-        }
-      } else {
-        const changedValue = Array.from(this.value)
-        changedValue.splice(index, 1)
-        this.doInput(changedValue)
-        const { onRemove } = this
-        if (onRemove) onRemove(index)
-      }
+    remove (index) {
+      const { mergedValue } = this
+      if (!Array.isArray(mergedValue)) return
+      const { min } = this
+      if (mergedValue.length <= min) return
+      const newValue = Array.from(mergedValue)
+      newValue.splice(index, 1)
+      this.doUpdateValue(newValue)
+      const { onRemove } = this
+      if (onRemove) onRemove(index)
     }
   }
 }

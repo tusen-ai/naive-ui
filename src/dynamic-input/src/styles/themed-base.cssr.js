@@ -66,7 +66,7 @@ export default c([
         }, [
           cB('form-item-blank', {
             raw: `
-              padding: 0 !important;
+              padding-top: 0 !important;
             `
           })
         ])

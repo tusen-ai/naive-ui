@@ -17,11 +17,11 @@ form
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |key-field|`string`|`undefined`||
+|min|`number`|`0`|最少有几项内容|
 |max|`number`|`undefined`|最多有几项内容|
 |preset|`'input' \| 'preset'`|`'input'`|动态录入使用的预设，在不设定 `$slots.default` 的时候生效。|
 |value|`Array<any>`|required||
 |on-create|`(index: number) => any`|`undefined`|点击添加按钮时的回调，如果设定则返回值会被用作新添加的初始值。其中 `index` 是创建内容将要被放置到的位置对应的数组索引，从 1 (第二项)开始计算。|
-|on-clear|`() => any`|`undefined`|点击清空最后一项时的回调，如果设定则返回值会被用作为最后一项清空后的值, 如果是自定义内容并且没有设定该属性，则最后一项不会被清空。|
 |on-remove|`() => any`|`undefined`||
 |on-update:value|`(value: any) => any`|`undefined`||
 

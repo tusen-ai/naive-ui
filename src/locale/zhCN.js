@@ -82,5 +82,8 @@ export default {
   },
   InputNumber: {
     placeholder: '请输入'
+  },
+  DynamicInput: {
+    create: '添加'
   }
 }

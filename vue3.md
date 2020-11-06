@@ -126,8 +126,11 @@
 - [x] dynamic-input
   - break
     - `v-model` => `v-model:value`
+    - `on-clear` is removed
   - deprecate
     - `on-input` => `on-update:value`
+  - new
+    - `min`
 - [x] dynamic-tags
   - break
     - `v-model` => `v-model:value`
@@ -314,7 +317,10 @@
   - [x] log scrollTo 有点问题
   - [x] remove hollowoutable
   - [ ] styleScheme
+  - [ ] use-global-style
+  - [ ] dynamic-input, no value
 
 ## Info
 https://github.com/vuejs/vue-next/issues/2549
 last cherry-picked commit: 6560ae34d71b81d584af79f810cb9dfa87119d1a
+

@@ -3,7 +3,6 @@
 <n-dynamic-input
   v-model:value="customValue"
   :on-create="onCreate"
-  :on-clear="onClear"
 >
   <template v-slot="{ value }">
     <div style="width: 100%;">
@@ -13,11 +12,11 @@
           style="margin-right: 12px;"
         />
         <n-input-number
-          v-model:checked="value.num"
+          v-model:value="value.num"
           style="margin-right: 12px; width: 160px;"
         />
         <n-input
-          v-model:checked="value.string"
+          v-model:value="value.string"
           type="input"
         />
       </div>
@@ -47,13 +46,6 @@ export default {
         isCheck: false,
         num: 1,
         string: '一个字符串'
-      }
-    },
-    onClear () {
-      return {
-        isCheck: false,
-        num: 0,
-        string: ''
       }
     }
   }

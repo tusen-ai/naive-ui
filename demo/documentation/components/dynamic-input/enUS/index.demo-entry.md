@@ -17,11 +17,11 @@ form
 |Name|Type|Default|Description|
 |-|-|-|-|
 |key-field|`string`|`undefined`||
+|min|`number`|`0`|Min number of items.|
 |max|`number`|`undefined`|Max number of items.|
 |preset|`'input' \| 'preset'`|`'input'`|The preset of `n-dynamic-input`, it work when `$slots.default` is not set.|
 |value|`Array`|-|**required**|
 |on-create|`(index: number) => any`|`undefined`|The callback when click at the add button. If set, the return value will be used as the initial value of the new item. `index` is the the new item's corresponding index in the value array, which starts from 1 (the second item).|
-|on-clear|`() => any`|`undefined`|The callback when clear the last one item. If set, the return value will be used as the value after the last item is cleared. If item content item is custom and `on-clear` is not set, the last item will not be allowed to be cleared.|
 
 ### Dynamic Input Props (Input Preset)
 |Name|Type|Default|Description|

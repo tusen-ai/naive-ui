@@ -82,5 +82,8 @@ export default {
   },
   InputNumber: {
     placeholder: 'Please Input'
+  },
+  DynamicInput: {
+    create: 'Create'
   }
 }
