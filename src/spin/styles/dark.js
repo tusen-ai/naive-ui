@@ -1,12 +1,14 @@
 import create from '../../_styles/utils/create-component-base'
 import sizeVariables from './_common'
-import baseLoadingStyle from '../../_base/loading/styles/dark'
+import {
+  baseLoadingDark
+} from '../../styles'
 
 export default create({
   name: 'Spin',
   theme: 'dark',
   peer: [
-    baseLoadingStyle
+    baseLoadingDark
   ],
   getDerivedVariables ({ base, derived }) {
     const {

@@ -1,12 +1,16 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
 import { changeColor } from '../../_utils/color/index'
-import suffixStyle from '../../_base/suffix/styles/dark'
+import {
+  baseSuffixDark
+} from '../../styles'
 
 export default create({
   name: 'Input',
   theme: 'dark',
-  peer: [suffixStyle],
+  peer: [
+    baseSuffixDark
+  ],
   getDerivedVariables ({ base, derived }) {
     const {
       textColor2Overlay,

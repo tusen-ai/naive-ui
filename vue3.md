@@ -310,7 +310,7 @@
     - [x] wait for new version of rollup-plugin-vue,
       https://github.com/vuejs/rollup-plugin-vue/issues/408
   - tusimple theme
-  - clean delegate
+  - [x] clean delegate
   - [x] site production tag (bug)
   - [x] demo scrollbar 的问题
   - [x] table x scroll 右侧阴影不消失

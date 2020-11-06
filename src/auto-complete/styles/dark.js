@@ -1,13 +1,15 @@
 import create from '../../_styles/utils/create-component-base'
-import baseSelectMenuStyle from '../../_base/select-menu/styles/dark'
-import inputStyle from '../../input/styles/dark'
+import {
+  baseSelectMenuDark,
+  inputDark
+} from '../../styles'
 
 export default create({
   theme: 'dark',
   name: 'AutoComplete',
   peer: [
-    baseSelectMenuStyle,
-    inputStyle
+    baseSelectMenuDark,
+    inputDark
   ],
   getDerivedVariables ({ base, derived }) {
     return {}

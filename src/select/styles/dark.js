@@ -1,13 +1,15 @@
 import create from '../../_styles/utils/create-component-base'
-import baseSelectionStyle from '../../_base/selection/styles/dark'
-import baseSelectMenuStyle from '../../_base/select-menu/styles/dark'
+import {
+  baseSelectionDark,
+  baseSelectMenuDark
+} from '../../styles'
 
 export default create({
   name: 'Select',
   theme: 'dark',
   peer: [
-    baseSelectionStyle,
-    baseSelectMenuStyle
+    baseSelectionDark,
+    baseSelectMenuDark
   ],
   getDerivedVariables ({ derived, base }) {
     return {}

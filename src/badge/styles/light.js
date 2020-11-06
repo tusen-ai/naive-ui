@@ -1,11 +1,13 @@
 import create from '../../_styles/utils/create-component-base'
-import baseSlotMachineStyle from '../../_base/slot-machine/styles/light'
+import {
+  baseSlotMachineLight
+} from '../../styles'
 
 export default create({
   name: 'Badge',
   theme: 'light',
   peer: [
-    baseSlotMachineStyle
+    baseSlotMachineLight
   ],
   getDerivedVariables ({ derived }) {
     return {

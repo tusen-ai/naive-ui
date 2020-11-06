@@ -1,6 +1,8 @@
 // unified entry for styles
-
-// internal style
+export {
+  scrollbarDark,
+  scrollbarLight
+} from '../scrollbar/styles'
 export {
   baseMenuMaskDark,
   baseMenuMaskLight
@@ -30,6 +32,18 @@ export {
   baseDark,
   baseLight
 } from '../_styles/base'
+export {
+  iconDark,
+  iconLight
+} from '../icon/styles'
+export {
+  inputDark,
+  inputLight
+} from '../input/styles'
+export {
+  checkboxDark,
+  checkboxLight
+} from '../checkbox/styles'
 export {
   tabsDark,
   tabsLight
@@ -95,10 +109,6 @@ export {
   timePickerLight
 } from '../time-picker/styles'
 export {
-  inputDark,
-  inputLight
-} from '../input/styles'
-export {
   notificationDark,
   notificationLight
 } from '../notification/styles'
@@ -122,10 +132,6 @@ export {
   cascaderDark,
   cascaderLight
 } from '../cascader/styles'
-export {
-  checkboxDark,
-  checkboxLight
-} from '../checkbox/styles'
 export {
   transferDark,
   transferLight
@@ -247,10 +253,6 @@ export {
   breadcrumbLight
 } from '../breadcrumb/styles'
 export {
-  iconDark,
-  iconLight
-} from '../icon/styles'
-export {
   modalDark,
   modalLight
 } from '../modal/styles'
@@ -270,10 +272,6 @@ export {
   tagDark,
   tagLight
 } from '../tag/styles'
-export {
-  scrollbarDark,
-  scrollbarLight
-} from '../scrollbar/styles'
 export {
   affixDark,
   affixLight

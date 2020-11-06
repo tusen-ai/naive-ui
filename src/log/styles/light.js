@@ -1,13 +1,15 @@
 import create from '../../_styles/utils/create-component-base'
-import baseLoadingStyle from '../../_base/loading/styles/light'
-import scrollbarStyle from '../../scrollbar/styles/light'
+import {
+  baseLoadingLight,
+  scrollbarLight
+} from '../../styles'
 
 export default create({
   name: 'Log',
   theme: 'light',
   peer: [
-    baseLoadingStyle,
-    scrollbarStyle
+    baseLoadingLight,
+    scrollbarLight
   ],
   getDerivedVariables ({ base, derived }) {
     const {

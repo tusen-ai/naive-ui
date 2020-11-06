@@ -1,24 +1,24 @@
 import create from '../../_styles/utils/create-component-base'
 import sizeVariables from './_common'
-import baseMenuMaskStyle from '../../_base/menu-mask/styles/dark'
-import baseSelectMenuStyle from '../../_base/select-menu/styles/dark'
-import baseSelectionStyle from '../../_base/selection/styles/dark'
-import baseLoadingStyle from '../../_base/loading/styles/dark'
-import scrollbarStyle from '../../scrollbar/styles/dark'
-import radioStyle from '../../radio/styles/dark'
-import checkboxStyle from '../../checkbox/styles/dark'
+import {
+  baseMenuMaskDark,
+  baseSelectMenuDark,
+  baseSelectionDark,
+  baseLoadingDark,
+  scrollbarDark,
+  checkboxDark
+} from '../../styles'
 
 export default create({
   theme: 'dark',
   name: 'Cascader',
   peer: [
-    baseMenuMaskStyle,
-    baseSelectMenuStyle,
-    baseSelectionStyle,
-    baseLoadingStyle,
-    scrollbarStyle,
-    radioStyle,
-    checkboxStyle
+    baseMenuMaskDark,
+    baseSelectMenuDark,
+    baseSelectionDark,
+    baseLoadingDark,
+    scrollbarDark,
+    checkboxDark
   ],
   getDerivedVariables ({ base, derived }) {
     const {
