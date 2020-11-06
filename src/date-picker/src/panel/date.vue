@@ -14,13 +14,13 @@
           class="n-date-panel-month__fast-prev"
           @click="prevYear"
         >
-          <n-base-icon type="fast-backward" />
+          <fast-backward-icon />
         </div>
         <div
           class="n-date-panel-month__prev"
           @click="prevMonth"
         >
-          <n-base-icon type="backward" />
+          <backward-icon />
         </div>
         <div class="n-date-panel-month__month-year">
           {{ calendarMonth }} {{ calendarYear }}
@@ -29,13 +29,13 @@
           class="n-date-panel-month__next"
           @click="nextMonth"
         >
-          <n-base-icon type="forward" />
+          <forward-icon />
         </div>
         <div
           class="n-date-panel-month__fast-next"
           @click="nextYear"
         >
-          <n-base-icon type="fast-forward" />
+          <fast-forward-icon />
         </div>
       </div>
       <div class="n-date-panel-weekdays">
@@ -105,7 +105,7 @@
 </template>
 
 <script>
-import NBaseIcon from '../../../_base/icon'
+
 import uniCalendarMixin from './uniCalendarMixin'
 import { startOfDay } from 'date-fns'
 import NButton from '../../../button'
@@ -117,8 +117,7 @@ const DATE_VALIDATE_FORMAT = ['YYYY-MM-DD', 'YYYY-MM-D', 'YYYY-M-D', 'YYYY-M-DD'
 
 export default {
   components: {
-    NButton,
-    NBaseIcon
+    NButton
   },
   mixins: [
     uniCalendarMixin

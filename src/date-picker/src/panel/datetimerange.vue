@@ -40,9 +40,7 @@
         @update:value="handleStartTimePickerChange"
       />
       <div class="n-date-panel-input-wrapper__arrow">
-        <n-base-icon
-          type="forward"
-        />
+        <forward-icon />
       </div>
       <n-input
         v-model:value="endDateDisplayString"
@@ -81,17 +79,13 @@
           class="n-date-panel-month__fast-prev"
           @click="startCalendarPrevYear"
         >
-          <n-base-icon
-            type="fast-backward"
-          />
+          <fast-backward-icon />
         </div>
         <div
           class="n-date-panel-month__prev"
           @click="startCalendarPrevMonth"
         >
-          <n-base-icon
-            type="backward"
-          />
+          <backward-icon />
         </div>
         <div class="n-date-panel-month__month-year">
           {{ startCalendarMonth }} {{ startCalendarYear }}
@@ -100,17 +94,13 @@
           class="n-date-panel-month__next"
           @click="startCalendarNextMonth"
         >
-          <n-base-icon
-            type="forward"
-          />
+          <forward-icon />
         </div>
         <div
           class="n-date-panel-month__fast-next"
           @click="startCalendarNextYear"
         >
-          <n-base-icon
-            type="fast-forward"
-          />
+          <fast-forward-icon />
         </div>
       </div>
       <div class="n-date-panel-weekdays">
@@ -155,17 +145,13 @@
           class="n-date-panel-month__fast-prev"
           @click="endCalendarPrevYear"
         >
-          <n-base-icon
-            type="fast-backward"
-          />
+          <fast-backward-icon />
         </div>
         <div
           class="n-date-panel-month__prev"
           @click="endCalendarPrevMonth"
         >
-          <n-base-icon
-            type="backward"
-          />
+          <backward-icon />
         </div>
         <div class="n-date-panel-month__month-year">
           {{ endCalendarMonth }} {{ endCalendarYear }}
@@ -174,17 +160,13 @@
           class="n-date-panel-month__next"
           @click="endCalendarNextMonth"
         >
-          <n-base-icon
-            type="forward"
-          />
+          <forward-icon />
         </div>
         <div
           class="n-date-panel-month__fast-next"
           @click="endCalendarNextYear"
         >
-          <n-base-icon
-            type="fast-forward"
-          />
+          <fast-forward-icon />
         </div>
       </div>
       <div class="n-date-panel-weekdays">
@@ -259,7 +241,6 @@ import NButton from '../../../button'
 import NTimePicker from '../../../time-picker'
 import NInput from '../../../input'
 import dualCalendarMixin from './dualCalendarMixin'
-import NBaseIcon from '../../../_base/icon'
 import {
   format,
   startOfSecond,
@@ -280,8 +261,7 @@ export default {
   components: {
     NButton,
     NTimePicker,
-    NInput,
-    NBaseIcon
+    NInput
   },
   mixins: [dualCalendarMixin],
   props: {

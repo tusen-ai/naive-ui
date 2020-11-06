@@ -125,6 +125,9 @@ export default c([
             `
           })
         ]),
+        cE('more-icon, arrow-icon', {
+          lineHeight: 0
+        }),
         cM('active', {
           background: itemColorActive,
           color: itemTextColorActive,

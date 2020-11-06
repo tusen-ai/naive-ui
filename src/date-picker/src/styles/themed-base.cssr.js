@@ -200,10 +200,11 @@ export default c([
         }, [
           cE('prev, next, fast-prev, fast-next', {
             raw: `
+              line-height: 0;
               cursor: pointer;
               width: 14px;
               height: 14px;
-              fill: ${panelIconColor};
+              color: ${panelIconColor};
             `
           }),
           cE('fast-prev, next', {

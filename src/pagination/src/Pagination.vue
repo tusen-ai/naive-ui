@@ -15,7 +15,7 @@
       @click="backward"
     >
       <div class="n-pagination-item__arrow-icon">
-        <n-base-icon type="backward" />
+        <backward-icon />
       </div>
     </div>
     <div
@@ -37,24 +37,22 @@
       </template>
       <template
         v-if="pageItem.type==='fastBackward'"
-        class="n-pagination-item--fast-backward"
       >
         <div class="n-pagination-item__more-icon">
-          <n-base-icon type="more" />
+          <more-icon />
         </div>
         <div class="n-pagination-item__arrow-icon">
-          <n-base-icon type="fast-backward" />
+          <fast-backward-icon />
         </div>
       </template>
       <template
         v-if="pageItem.type==='fastForward'"
-        class=""
       >
         <div class="n-pagination-item__more-icon">
-          <n-base-icon type="more" />
+          <more-icon />
         </div>
         <div class="n-pagination-item__arrow-icon">
-          <n-base-icon type="fast-forward" />
+          <fast-forward-icon />
         </div>
       </template>
     </div>
@@ -66,7 +64,7 @@
       @click="forward"
     >
       <div class="n-pagination-item__arrow-icon">
-        <n-base-icon type="forward" />
+        <forward-icon />
       </div>
     </div>
     <div
@@ -97,12 +95,20 @@
 import { nextTick, computed } from 'vue'
 import NSelect from '../../select'
 import NInput from '../../input'
-import NBaseIcon from '../../_base/icon'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import locale from '../../_mixins/locale'
+import {
+  ArrowRight20Regular as FastForwardIcon,
+  ArrowLeft20Regular as FastBackwardIcon,
+  ChevronLeft16Regular as BackwardIcon,
+  ChevronRight16Regular as ForwardIcon,
+  More16Regular as MoreIcon
+} from 'vicons/fluent'
+import {
+  configurable,
+  themeable,
+  locale,
+  usecssr
+} from '../../_mixins'
 import { pageItems } from './utils'
-import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
 import { useCompitable } from 'vooks'
 
@@ -111,10 +117,14 @@ export default {
   components: {
     NSelect,
     NInput,
-    NBaseIcon
+    BackwardIcon,
+    ForwardIcon,
+    MoreIcon,
+    FastForwardIcon,
+    FastBackwardIcon
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles),
     locale('Pagination')

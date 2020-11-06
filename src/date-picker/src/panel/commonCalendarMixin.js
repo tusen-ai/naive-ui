@@ -1,5 +1,11 @@
 import FocusDetector from '../../../_base/focus-detector'
 import {
+  ArrowRight20Filled as FastForwardIcon,
+  ArrowLeft20Filled as FastBackwardIcon,
+  ChevronLeft24Filled as BackwardIcon,
+  ChevronRight24Filled as ForwardIcon
+} from 'vicons/fluent'
+import {
   locale
 } from '../../../_mixins'
 import keyboardDelegate from '../../../_utils/delegate/keyboardDelegate'
@@ -21,7 +27,11 @@ export default {
     }
   },
   components: {
-    FocusDetector
+    FocusDetector,
+    FastForwardIcon,
+    FastBackwardIcon,
+    BackwardIcon,
+    ForwardIcon
   },
   props: {
     theme: {
