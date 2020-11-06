@@ -11,8 +11,8 @@
 <n-text delete>Delete</n-text>&nbsp;
 <n-text code>Code</n-text>&nbsp;
 <n-text code delete>Code</n-text>&nbsp;
-<n-text depth="primary">Primary Depth</n-text>&nbsp;
-<n-text depth="secondary">Secondary Depth</n-text>&nbsp;
-<n-text depth="tertiary">Tertiary Depth</n-text>&nbsp;
+<n-text depth="1">Primary Depth</n-text>&nbsp;
+<n-text depth="2">Secondary Depth</n-text>&nbsp;
+<n-text depth="3">Tertiary Depth</n-text>&nbsp;
 <n-text tag="div">作为 Div</n-text>
 ```

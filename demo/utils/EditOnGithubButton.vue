@@ -2,7 +2,6 @@
   <n-button
     class="edit-button"
     text
-    icon-depth="tertiary"
     :size="size"
     @click="handleEditOnGithubClick"
   >

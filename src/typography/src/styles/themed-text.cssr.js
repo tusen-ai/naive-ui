@@ -57,24 +57,24 @@ export default c([
         border: `1px solid ${codeBorderColor}`
       }),
       cM('default-type', [
-        cM('primary-depth', {
+        cM('1-depth', {
           color: textColor1Depth
         }),
-        cM('secondary-depth', {
+        cM('2-depth', {
           color: textColor2Depth
         }),
-        cM('tertiary-depth', {
+        cM('3-depth', {
           color: textColor3Depth
         })
       ]),
       cNotM('default-type', [
-        cM('primary-depth', {
+        cM('1-depth', {
           color: textOpacityPrimaryDepth
         }),
-        cM('secondary-depth', {
+        cM('2-depth', {
           color: textOpacitySecondaryDepth
         }),
-        cM('tertiary-depth', {
+        cM('3-depth', {
           color: textOpacityTertiaryDepth
         })
       ]),

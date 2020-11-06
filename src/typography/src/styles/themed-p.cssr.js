@@ -24,13 +24,13 @@ export default c([
       c('&:first-child', {
         marginTop: 0
       }),
-      cM('primary-depth', {
+      cM('1-depth', {
         color: pTextColorPrimaryDepth
       }),
-      cM('secondary-depth', {
+      cM('2-depth', {
         color: pTextColorSecondaryDepth
       }),
-      cM('tertiary-depth', {
+      cM('3-depth', {
         color: pTextColorTertiaryDepth
       })
     ])

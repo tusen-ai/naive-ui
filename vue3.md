@@ -296,6 +296,9 @@
     - `on-checked-keys-change` => `on-update:checked-keys`
     - `on-expanded-keys-change` => `on-update:expanded-keys`
 - [x] typography
+  - breaking
+    - text, p
+      - `depth` from `primary` ... `tertiary` => `1`, `2`, `3`
   - deprecate
     - text
       - `as` => `tag`

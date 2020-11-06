@@ -178,12 +178,6 @@ export default {
         return ['left', 'right'].includes(value)
       }
     },
-    iconDepth: {
-      default: 'secondary',
-      validator (value) {
-        return ['secondary', 'tertiary'].includes(value)
-      }
-    },
     attrType: {
       default: 'button',
       validator (value) {

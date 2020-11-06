@@ -27,13 +27,13 @@ text
 |underline|`boolean`|`false`||
 |delete|`boolean`|`false`||
 |code|`boolean`|`false`||
-|depth|`'primary' \| 'secondary' \| 'tertiary'`|`undefined`||
+|depth|`1 \| 2 \| 3 \| '1' \| '2' \| '3'`|`undefined`||
 |tag|`string`|`undefined`|What tag should be this component be rendered as. Won't work when `code` or `del` is set.|
 
 ### P Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|depth|`'primary' \| 'secondary' \| 'tertiary'`|`undefined`||
+|depth|`1 \| 2 \| 3 \| '1' \| '2' \| '3'`|`undefined`||
 
 
 ### H1, H2, H3, H4, H5, H6 Props

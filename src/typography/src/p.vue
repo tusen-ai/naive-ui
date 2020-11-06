@@ -30,9 +30,9 @@ export default {
   props: {
     depth: {
       validator (value) {
-        return ['primary', 'secondary', 'tertiary'].includes(value)
+        return [1, 2, 3, '1', '2', '3'].includes(value)
       },
-      default: null
+      default: undefined
     }
   }
 }

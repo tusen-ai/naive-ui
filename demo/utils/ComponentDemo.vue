@@ -37,7 +37,6 @@
             style="padding: 0;"
             size="tiny"
             text
-            icon-depth="tertiary"
             @click="toggleCodeDisplay"
           >
             <template #icon>
