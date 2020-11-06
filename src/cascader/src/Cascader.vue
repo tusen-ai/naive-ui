@@ -18,7 +18,7 @@
       class="n-cascader-selection"
       :size="mergedSize"
       :theme="mergedTheme"
-      :active="showMenu"
+      :active="mergedShow"
       :pattern="pattern"
       :placeholder="localizedPlaceholder"
       :selected-option="selectedOption"
@@ -36,7 +36,7 @@
       @pattern-input="handlePatternInput"
     />
     <n-base-lazy-teleport
-      :show="showMenu && !showSelectMenu"
+      :show="mergedShow && !showSelectMenu"
       adjust-to
     >
       <cascader-menu
@@ -45,14 +45,14 @@
           [namespace]: namespace
         }"
         :value="value"
-        :show="showMenu && !showSelectMenu"
+        :show="mergedShow && !showSelectMenu"
         :theme="mergedTheme"
         :size="mergedSize"
         :menu-model="menuModel"
       />
     </n-base-lazy-teleport>
     <n-base-lazy-teleport
-      :show="showMenu && showSelectMenu"
+      :show="mergedShow && showSelectMenu"
       adjust-to
     >
       <cascader-select-menu
@@ -61,7 +61,7 @@
           [namespace]: namespace
         }"
         :value="value"
-        :show="showMenu && showSelectMenu"
+        :show="mergedShow && showSelectMenu"
         :theme="mergedTheme"
         :pattern="pattern"
         :size="mergedSize"
@@ -182,6 +182,10 @@ export default {
       type: Boolean,
       default: true
     },
+    show: {
+      type: Boolean,
+      default: undefined
+    },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:value': {
       type: [Function, Array],
@@ -201,8 +205,7 @@ export default {
   },
   data () {
     return {
-      pattern: '',
-      showMenu: false
+      pattern: ''
     }
   },
   computed: {
@@ -247,14 +250,14 @@ export default {
     openMenu () {
       if (!this.disabled) {
         this.pattern = ''
-        this.showMenu = true
+        this.uncontrolledShow = true
         if (this.filterable) {
           this.triggerRef.focusPatternInput()
         }
       }
     },
     closeMenu () {
-      this.showMenu = false
+      this.uncontrolledShow = false
       this.pattern = ''
     },
     updateKeyboardKey (key) {
@@ -267,7 +270,7 @@ export default {
     },
     handleCascaderMenuClickOutside (e) {
       if (this.showSelectMenu) return
-      if (this.showMenu) {
+      if (this.mergedShow) {
         if (!this.triggerRef.$el.contains(e.target)) {
           this.closeMenu()
         }
@@ -361,7 +364,7 @@ export default {
       }
     },
     handleKeyUpEnter () {
-      if (!this.showMenu) {
+      if (!this.mergedShow) {
         this.openMenu()
       } else {
         const {
@@ -394,10 +397,10 @@ export default {
     handleKeyUpUp (e) {
       e.preventDefault()
       const {
-        showMenu,
+        mergedShow,
         selectMenuRef
       } = this
-      if (showMenu) {
+      if (mergedShow) {
         if (this.showSelectMenu) {
           selectMenuRef.prev()
         } else {
@@ -408,10 +411,10 @@ export default {
     handleKeyUpDown (e) {
       e.preventDefault()
       const {
-        showMenu,
+        mergedShow,
         selectMenuRef
       } = this
-      if (showMenu) {
+      if (mergedShow) {
         if (this.showSelectMenu) {
           selectMenuRef.next()
         } else {
@@ -422,20 +425,20 @@ export default {
     handleKeyUpLeft (e) {
       e.preventDefault()
       const {
-        showMenu,
+        mergedShow,
         showSelectMenu
       } = this
-      if (showMenu && !showSelectMenu) {
+      if (mergedShow && !showSelectMenu) {
         this.move('parent')
       }
     },
     handleKeyUpRight (e) {
       e.preventDefault()
       const {
-        showMenu,
+        mergedShow,
         showSelectMenu
       } = this
-      if (showMenu && !showSelectMenu) {
+      if (mergedShow && !showSelectMenu) {
         this.move('child')
       }
     },
@@ -468,7 +471,7 @@ export default {
       if (this.filterable) {
         this.openMenu()
       } else {
-        if (this.showMenu) {
+        if (this.mergedShow) {
           this.closeMenu()
         } else {
           this.openMenu()

@@ -1,13 +1,14 @@
 import {
   computed,
   ref,
-  watch
+  watch,
+  toRef
 } from 'vue'
 import {
   TreeMate,
   SubtreeNotLoadedError
 } from 'treemate'
-import { useIsMounted } from 'vooks'
+import { useIsMounted, useMergedState } from 'vooks'
 import { useAsFormItem } from '../../_mixins'
 import { call } from '../../_utils'
 
@@ -228,7 +229,11 @@ export function useCascader (props) {
       }
     } else return null
   })
+  const uncontrolledShowRef = ref(false)
+  const controlledShowRef = toRef(props, 'show')
   return {
+    uncontrolledShow: uncontrolledShowRef,
+    mergedShow: useMergedState(controlledShowRef, uncontrolledShowRef),
     treeMate: treeMateRef,
     keyboardKey: keyboardKeyRef,
     hoverKey: hoverKeyRef,

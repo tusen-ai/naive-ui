@@ -119,8 +119,9 @@ c([
           }),
           cB('cascader-option-icon-placeholder', {
             position: 'relative',
-            width: '14px',
-            height: '14px'
+            width: '16px',
+            height: '16px',
+            fontSize: '16px'
           }, [
             cB('cascader-option-icon', {
               position: 'absolute',
@@ -131,14 +132,12 @@ c([
             }, [
               iconSwitchTransition(),
               cM('checkmark', {
-                fill: optionCheckMarkColor,
-                stroke: optionCheckMarkColor
+                color: optionCheckMarkColor
               }, [
                 fadeInScaleUpTransition()
               ]),
               cM('arrow', {
-                fill: optionTextColor,
-                stroke: optionTextColor
+                color: optionTextColor
               })
             ])
           ]),
