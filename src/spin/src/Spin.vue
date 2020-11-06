@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import NBaseLoading from '../../_base/loading'
+import { NBaseLoading } from '../../_base'
 import {
   configurable,
   themeable,

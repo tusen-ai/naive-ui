@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import NBaseLoading from '../../_base/loading'
-import locale from '../../_mixins/locale'
+import { NBaseLoading } from '../../_base'
+import { locale } from '../../_mixins'
 
 export default {
   components: {

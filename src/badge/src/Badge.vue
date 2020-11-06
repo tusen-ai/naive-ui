@@ -37,12 +37,13 @@
 </template>
 
 <script>
-import themeable from '../../_mixins/themeable'
-import withapp from '../../_mixins/withapp'
-import usecssr from '../../_mixins/usecssr'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
+import { NBaseSlotMachine, NBaseWave } from '../../_base'
 import styles from './styles/index.js'
-import NBaseSlotMachine from '../../_base/slot-machine'
-import NBaseWave from '../../_base/wave'
 
 export default {
   name: 'Badge',
@@ -51,7 +52,7 @@ export default {
     NBaseWave
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles)
   ],

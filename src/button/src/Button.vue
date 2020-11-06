@@ -75,9 +75,12 @@ import {
   themeable,
   usecssr
 } from '../../_mixins'
-import { NFadeInExpandTransition, NIconSwitchTransition } from '../../_base'
-import NBaseLoading from '../../_base/loading'
-import NBaseWave from '../../_base/wave/index.js'
+import {
+  NFadeInExpandTransition,
+  NIconSwitchTransition,
+  NBaseLoading,
+  NBaseWave
+} from '../../_base'
 import NIcon from '../../icon/index.js'
 import styles from './styles/index.js'
 import { createHoverColor, createPressedColor } from '../../_utils/color/index.js'

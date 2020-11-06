@@ -31,7 +31,7 @@
 <script>
 import { ref, inject, toRef } from 'vue'
 import { createTreeMate } from 'treemate'
-import NBaseSelectMenu from '../../_base/select-menu'
+import { NBaseSelectMenu } from '../../_base'
 import { createSelectOptions, getPickerElement } from './utils'
 import {
   placeable

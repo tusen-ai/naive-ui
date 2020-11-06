@@ -5,7 +5,7 @@ import presetProps from './presetProps'
 import { useIsMounted, useClicked, useClickPosition } from 'vooks'
 import { warn } from '../../_utils/naive/warn'
 import { omit } from '../../_utils/vue'
-import NLazyTeleport from '../../_base/lazy-teleport'
+import { NBaseLazyTeleport } from '../../_base'
 import NModalBodyWrapper from './BodyWrapper.vue'
 import styles from './styles'
 
@@ -125,7 +125,7 @@ export default {
     }
   },
   render () {
-    return h(NLazyTeleport, {
+    return h(NBaseLazyTeleport, {
       to: this.to,
       show: this.show
     }, {

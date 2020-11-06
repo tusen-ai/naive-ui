@@ -167,7 +167,7 @@
         {{ localeNs.confirm }}
       </n-button>
     </div>
-    <focus-detector @focus="handleFocusDetectorFocus" />
+    <n-base-focus-detector @focus="handleFocusDetectorFocus" />
   </div>
 </template>
 

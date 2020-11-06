@@ -65,7 +65,7 @@
         {{ mark.label }}
       </div>
     </div>
-    <n-lazy-teleport
+    <n-base-lazy-teleport
       :show="showTooltip"
       adjust-to
     >
@@ -97,7 +97,7 @@
           </transition>
         </div>
       </div>
-    </n-lazy-teleport>
+    </n-base-lazy-teleport>
   </div>
 </template>
 
@@ -117,7 +117,7 @@ import styles from './styles'
 import { warn } from '../../_utils/naive'
 import { call } from '../../_utils/vue'
 import { useIsMounted } from 'vooks'
-import NLazyTeleport from '../../_base/lazy-teleport'
+import { NBaseLazyTeleport } from '../../_base'
 
 function handleFirstHandleMouseMove (e) {
   const railRect = this.railRef.getBoundingClientRect()
@@ -145,7 +145,7 @@ export default {
     zindexable
   },
   components: {
-    NLazyTeleport
+    NBaseLazyTeleport
   },
   mixins: [
     configurable,

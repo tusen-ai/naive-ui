@@ -7,8 +7,7 @@ import {
   ErrorIcon,
   CloseIcon
 } from '../../_base/icons'
-import NBaseLoading from '../../_base/loading'
-import { NIconSwitchTransition } from '../../_base'
+import { NIconSwitchTransition, NBaseLoading } from '../../_base'
 import { render } from '../../_utils/vue'
 import {
   configurable,

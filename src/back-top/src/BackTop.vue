@@ -5,7 +5,7 @@
     style="display: none;"
     aria-hidden
   >
-    <n-lazy-teleport
+    <n-base-lazy-teleport
       :to="to"
       :show="mergedShow"
     >
@@ -46,7 +46,7 @@
           </slot>
         </div>
       </transition>
-    </n-lazy-teleport>
+    </n-base-lazy-teleport>
   </div>
 </template>
 
@@ -62,12 +62,12 @@ import {
 import { formatLength, warn } from '../../_utils'
 import styles from './styles'
 import getTarget from '../../_utils/dom/get-target'
-import NLazyTeleport from '../../_base/lazy-teleport'
+import { NBaseLazyTeleport } from '../../_base'
 
 export default {
   name: 'BackTop',
   components: {
-    NLazyTeleport
+    NBaseLazyTeleport
   },
   mixins: [
     configurable,

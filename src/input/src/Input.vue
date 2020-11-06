@@ -159,7 +159,7 @@
 </template>
 
 <script>
-import NBaseSuffix from '../../_base/suffix'
+import { NBaseSuffix } from '../../_base'
 import {
   configurable,
   themeable,

@@ -34,7 +34,7 @@
         </n-icon>
       </template>
     </n-input>
-    <n-lazy-teleport
+    <n-base-lazy-teleport
       :to="to"
       :show="active"
       :disabled="teleportDisabled"
@@ -177,14 +177,14 @@
           </transition>
         </div>
       </div>
-    </n-lazy-teleport>
+    </n-base-lazy-teleport>
   </div>
 </template>
 
 <script>
 import { ref } from 'vue'
 import { useIsMounted } from 'vooks'
-import NLazyTeleport from '../../_base/lazy-teleport'
+import { NBaseLazyTeleport, NBaseFocusDetector } from '../../_base'
 import NScrollbar from '../../scrollbar'
 import NInput from '../../input'
 import NIcon from '../../icon'
@@ -207,7 +207,7 @@ import {
 } from 'date-fns'
 import { strictParse } from '../../date-picker/src/utils'
 import keyboardDelegate from '../../_utils/delegate/keyboardDelegate'
-import NBaseFocusDetector from '../../_base/focus-detector'
+
 import {
   TimeOutline as TimeIcon
 } from 'vicons/ionicons-v5'
@@ -231,7 +231,7 @@ export default {
     NIcon,
     NScrollbar,
     NBaseFocusDetector,
-    NLazyTeleport,
+    NBaseLazyTeleport,
     TimeIcon
   },
   directives: {

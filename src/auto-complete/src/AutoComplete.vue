@@ -25,7 +25,7 @@
         @blur="handleBlur"
       />
     </slot>
-    <n-lazy-teleport
+    <n-base-lazy-teleport
       :show="active"
       to="body"
       adjust-to
@@ -65,7 +65,7 @@
           </transition>
         </div>
       </div>
-    </n-lazy-teleport>
+    </n-base-lazy-teleport>
   </div>
 </template>
 
@@ -85,9 +85,11 @@ import {
 import { call } from '../../_utils/vue'
 import { useIsMounted } from 'vooks'
 import { warn } from '../../_utils/naive'
-import NLazyTeleport from '../../_base/lazy-teleport'
+import {
+  NBaseLazyTeleport,
+  NBaseSelectMenu
+} from '../../_base'
 import NInput from '../../input'
-import NBaseSelectMenu from '../../_base/select-menu'
 import styles from './styles'
 import { mapAutoCompleteOptionsToSelectOptions } from './utils'
 
@@ -95,7 +97,7 @@ export default {
   name: 'AutoComplete',
   components: {
     NInput,
-    NLazyTeleport,
+    NBaseLazyTeleport,
     NBaseSelectMenu
   },
   directives: {

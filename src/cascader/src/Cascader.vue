@@ -35,7 +35,7 @@
       @delete-last-option="handleDeleteLastOption"
       @pattern-input="handlePatternInput"
     />
-    <n-lazy-teleport
+    <n-base-lazy-teleport
       :show="showMenu && !showSelectMenu"
       adjust-to
     >
@@ -50,8 +50,8 @@
         :size="mergedSize"
         :menu-model="menuModel"
       />
-    </n-lazy-teleport>
-    <n-lazy-teleport
+    </n-base-lazy-teleport>
+    <n-base-lazy-teleport
       :show="showMenu && showSelectMenu"
       adjust-to
     >
@@ -69,13 +69,15 @@
         :tm-nodes="treeMate.treeNodes"
         @update:value="handleMenuInput"
       />
-    </n-lazy-teleport>
+    </n-base-lazy-teleport>
   </div>
 </template>
 
 <script>
-import NBaseSelection from '../../_base/selection'
-import NLazyTeleport from '../../_base/lazy-teleport'
+import {
+  NBaseSelection,
+  NBaseLazyTeleport
+} from '../../_base'
 import {
   configurable,
   themeable,
@@ -94,7 +96,7 @@ export default {
     CascaderMenu,
     CascaderSelectMenu,
     NBaseSelection,
-    NLazyTeleport
+    NBaseLazyTeleport
   },
   mixins: [
     configurable,

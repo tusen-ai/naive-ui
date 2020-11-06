@@ -171,7 +171,7 @@ import DaterangePanel from './panel/daterange.vue'
 import NInput from '../../input'
 import NIcon from '../../icon'
 import { CalendarIcon } from '../../_base/icons'
-import NBaseLazyTeleport from '../../_base/lazy-teleport'
+import { NBaseLazyTeleport } from '../../_base'
 
 import {
   format,

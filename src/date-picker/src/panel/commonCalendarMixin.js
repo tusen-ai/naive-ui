@@ -1,4 +1,4 @@
-import FocusDetector from '../../../_base/focus-detector'
+import { NBaseFocusDetector } from '../../../_base'
 import {
   ArrowRight20Filled as FastForwardIcon,
   ArrowLeft20Filled as FastBackwardIcon,
@@ -27,7 +27,7 @@ export default {
     }
   },
   components: {
-    FocusDetector,
+    NBaseFocusDetector,
     FastForwardIcon,
     FastBackwardIcon,
     BackwardIcon,

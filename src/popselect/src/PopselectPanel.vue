@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import NBaseSelectMenu from '../../_base/select-menu'
+import { NBaseSelectMenu } from '../../_base'
 import {
   configurable,
   themeable,

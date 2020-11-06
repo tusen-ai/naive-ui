@@ -40,7 +40,7 @@
       @blur="handleTriggerBlur"
       @focus="handleTriggerFocus"
     />
-    <n-lazy-teleport
+    <n-base-lazy-teleport
       :show="mergedShow"
       adjust-to
     >
@@ -92,7 +92,7 @@
           </transition>
         </div>
       </div>
-    </n-lazy-teleport>
+    </n-base-lazy-teleport>
   </div>
 </template>
 
@@ -117,14 +117,13 @@ import {
   zindexable
 } from '../../_directives'
 import {
-  warn
-} from '../../_utils/naive'
+  warn, call
+} from '../../_utils'
 import {
-  call
-} from '../../_utils/vue'
-import NBaseSelectMenu from '../../_base/select-menu'
-import NBaseSelection from '../../_base/selection'
-import NLazyTeleport from '../../_base/lazy-teleport'
+  NBaseSelectMenu,
+  NBaseSelection,
+  NBaseLazyTeleport
+} from '../../_base'
 import styles from './styles/index.js'
 
 function patternMatched (pattern, value) {
@@ -162,7 +161,7 @@ export default {
   components: {
     NBaseSelectMenu,
     NBaseSelection,
-    NLazyTeleport
+    NBaseLazyTeleport
   },
   directives: {
     clickoutside,

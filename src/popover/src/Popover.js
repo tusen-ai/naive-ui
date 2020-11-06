@@ -12,7 +12,7 @@ import {
   useIsMounted
 } from 'vooks'
 import { omit, warn } from '../../_utils'
-import NLazyTeleport from '../../_base/lazy-teleport'
+import { NBaseLazyTeleport } from '../../_base'
 import NPopoverBody from './PopoverBody'
 
 function appendEvents (vNode, events) {
@@ -290,7 +290,7 @@ export default {
 
     return h(Fragment, [
       manuallyPositioned ? null : triggerVNode,
-      h(NLazyTeleport, {
+      h(NBaseLazyTeleport, {
         to: 'body',
         show: this.mergedShow,
         adjustTo: true

@@ -232,7 +232,7 @@
       v-else
       style="height: 12px"
     />
-    <focus-detector @focus="handleFocusDetectorFocus" />
+    <n-base-focus-detector @focus="handleFocusDetectorFocus" />
   </div>
 </template>
 

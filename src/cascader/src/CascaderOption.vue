@@ -71,8 +71,7 @@
 <script>
 import { computed, inject, toRef } from 'vue'
 import NCheckbox from '../../checkbox'
-import NBaseLoading from '../../_base/loading'
-import { NIconSwitchTransition } from '../../_base'
+import { NBaseLoading, NIconSwitchTransition } from '../../_base'
 import { ChevronRightIcon, CheckmarkIcon } from '../../_base/icons'
 import { useMemo } from 'vooks'
 

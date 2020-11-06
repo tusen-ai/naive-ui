@@ -1,5 +1,5 @@
 <template>
-  <n-lazy-teleport
+  <n-base-lazy-teleport
     :to="to"
     :show="show"
   >
@@ -33,7 +33,7 @@
         <slot />
       </n-drawer-body-wrapper>
     </div>
-  </n-lazy-teleport>
+  </n-base-lazy-teleport>
 </template>
 
 <script>
@@ -45,14 +45,14 @@ import {
 import { zindexable } from '../../_directives'
 import { warn, formatLength } from '../../_utils'
 import { useCompitable, useIsMounted } from 'vooks'
-import NLazyTeleport from '../../_base/lazy-teleport'
+import { NBaseLazyTeleport } from '../../_base'
 import NDrawerBodyWrapper from './DrawerBodyWrapper.vue'
 import styles from './styles/index'
 
 export default {
   name: 'Drawer',
   components: {
-    NLazyTeleport,
+    NBaseLazyTeleport,
     NDrawerBodyWrapper
   },
   directives: {
