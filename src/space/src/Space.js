@@ -1,7 +1,9 @@
 import { h } from 'vue'
 import { flatten, getSlot } from '../../_utils/vue'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
+import {
+  configurable,
+  themeable
+} from '../../_mixins'
 
 const HORIZONTAL_MARGIN = {
   small: '8px',
@@ -18,7 +20,7 @@ const VERTICAL_MARGIN = {
 export default {
   name: 'Space',
   mixins: [
-    withapp,
+    configurable,
     themeable
   ],
   props: {

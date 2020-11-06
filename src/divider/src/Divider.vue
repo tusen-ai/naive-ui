@@ -27,15 +27,17 @@
 </template>
 
 <script>
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import usecssr from '../../_mixins/usecssr'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
 import styles from './styles'
 
 export default {
   name: 'Divider',
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles)
   ],

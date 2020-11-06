@@ -1,7 +1,9 @@
 
 import Scrollbar from '../../../scrollbar'
-import withapp from '../../../_mixins/withapp'
-import themeable from '../../../_mixins/themeable'
+import {
+  configurable,
+  themeable
+} from '../../../_mixins'
 import SiderMenu from './SiderMenu.js'
 import NLayout from '../../../layout/src/Layout.vue'
 import NLayoutSider from '../../../layout/src/LayoutSider.vue'
@@ -17,7 +19,10 @@ export default {
       NNimbusServiceLayout: this
     }
   },
-  mixins: [withapp, themeable],
+  mixins: [
+    configurable,
+    themeable
+  ],
   emits: ['input'],
   props: {
     name: {

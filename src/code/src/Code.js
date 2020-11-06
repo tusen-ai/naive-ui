@@ -1,14 +1,16 @@
 import { h, nextTick } from 'vue'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import usecssr from '../../_mixins/usecssr'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
 import styles from './styles/index.js'
 import { warn } from '../../_utils/naive/warn'
 
 export default {
   name: 'Code',
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles)
   ],

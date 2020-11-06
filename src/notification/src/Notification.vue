@@ -56,9 +56,11 @@
 </template>
 
 <script>
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import usecssr from '../../_mixins/usecssr'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
 import { render } from '../../_utils/vue'
 import styles from './styles'
 import NIcon from '../../icon'
@@ -82,7 +84,7 @@ export default {
     ErrorIcon
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     usecssr(styles)
   ],

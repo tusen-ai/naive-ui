@@ -48,9 +48,11 @@
 <script>
 import { nextTick } from 'vue'
 import layoutModeMixin from './layoutModeMixin'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import usecssr from '../../_mixins/usecssr'
+import {
+  configurable,
+  themeable,
+  usecssr
+} from '../../_mixins'
 import ToggleButton from './ToggleButton.vue'
 import ToggleBar from './ToggleBar.vue'
 import NScrollbar from '../../scrollbar'
@@ -66,7 +68,7 @@ export default {
     NScrollbar
   },
   mixins: [
-    withapp,
+    configurable,
     themeable,
     layoutModeMixin,
     usecssr(styles)
