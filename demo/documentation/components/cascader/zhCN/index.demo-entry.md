@@ -25,6 +25,7 @@ multiple-lazy
 |placeholder|`string`|`'请选择'`||
 |remote|`boolean`|`false`||
 |separator|`string`|`' / '`||
+|show|`boolean`|`undefined`|是否打开菜单|
 |show-path|`boolean`|`true`|是否在选择器中显示选项路径|
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |theme|`'light' \| 'dark' \| string`|`undefined`||

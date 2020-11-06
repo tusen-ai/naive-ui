@@ -25,6 +25,7 @@ multiple-lazy
 |placeholder|`string`|`'Please Select'`||
 |remote|`boolean`|`false`||
 |separator|`string`|`' / '`||
+|show|`boolean`|`undefined`|Whether to show menu.|
 |show-path|`boolean`|`true`|Whether to show path in selector.|
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |theme|`'light' \| 'dark' \| string`|`undefined`||

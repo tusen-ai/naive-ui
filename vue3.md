@@ -316,9 +316,9 @@
   - [x] table x scroll 右侧阴影不消失
   - [x] log scrollTo 有点问题
   - [x] remove hollowoutable
-  - [ ] styleScheme
-  - [ ] use-global-style
-  - [ ] dynamic-input, no value
+  - [ ] styleScheme, css variables 组件
+  - [ ] use-global-style ? 感觉效果不会特别好而且还是很无谓的性能开销
+  - [x] dynamic-input, no value
 
 ## Info
 https://github.com/vuejs/vue-next/issues/2549
