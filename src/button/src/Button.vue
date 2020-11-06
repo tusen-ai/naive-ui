@@ -20,6 +20,7 @@
     :tabindex="mergedFocusable ? 0 : -1"
     :type="attrType"
     :style="colorCssVars"
+    :disabled="disabled"
     @click="handleClick"
     @blur="handleBlur"
     @mousedown="handleMouseDown"
