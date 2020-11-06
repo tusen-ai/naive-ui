@@ -22,7 +22,7 @@ export default {
   },
   props: {
     source: {
-      validator: Boolean,
+      type: Boolean,
       default: false
     }
   }

@@ -24,15 +24,15 @@ export default {
   },
   props: {
     theme: {
-      validator: String,
+      type: String,
       default: null
     },
     source: {
-      validator: Boolean,
+      type: Boolean,
       default: false
     },
     onChange: {
-      validator: Function,
+      type: Function,
       required: true
     }
   },

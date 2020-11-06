@@ -39,15 +39,15 @@ export default {
   },
   props: {
     label: {
-      validator: String,
+      type: String,
       required: true
     },
     value: {
-      validator: [String, Number],
+      type: [String, Number],
       required: true
     },
     disabled: {
-      validator: Boolean,
+      type: Boolean,
       default: false
     }
   },
