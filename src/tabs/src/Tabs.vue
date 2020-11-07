@@ -106,7 +106,7 @@ import { VResizeObserver } from 'vueuc'
 import { throttle } from 'lodash-es'
 import styles from './styles'
 import { warn } from '../../_utils'
-import { useCompitable, onFontReady } from 'vooks'
+import { useCompitable, onFontsReady } from 'vooks'
 
 export default {
   name: 'Tabs',
@@ -189,7 +189,7 @@ export default {
   },
   setup (props) {
     const vm = getCurrentInstance().proxy
-    onFontReady(() => {
+    onFontsReady(() => {
       vm.updateScrollStatus()
       if (vm.typeIsLine) {
         vm.updateCurrentBarPosition()

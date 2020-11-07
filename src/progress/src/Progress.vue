@@ -251,7 +251,7 @@ import {
 } from '../../_mixins'
 import styles from './styles/index.js'
 import { formatLength } from '../../_utils'
-import { onFontReady } from 'vooks'
+import { onFontsReady } from 'vooks'
 
 function circlePath (r, sw, vw = 100) {
   return `m ${vw / 2} ${vw / 2 - r} a ${r} ${r} 0 1 1 0 ${2 * r} a ${r} ${r} 0 1 1 0 -${2 * r}`
@@ -353,7 +353,7 @@ export default {
   },
   setup () {
     const vm = getCurrentInstance().proxy
-    onFontReady(() => {
+    onFontsReady(() => {
       if (vm.syntheticIndicatorPlacement === 'inside-label') {
         nextTick(() => {
           vm.indicatorPercentage = vm.calcIndicatorPercentage()

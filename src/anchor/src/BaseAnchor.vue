@@ -31,7 +31,7 @@ import {
   themeable,
   usecssr
 } from '../../_mixins'
-import { onFontReady } from 'vooks'
+import { onFontsReady } from 'vooks'
 import { warn } from '../../_utils/naive/warn'
 import getTarget from '../../_utils/dom/get-target'
 import styles from './styles'
@@ -87,7 +87,7 @@ export default {
   },
   setup () {
     const vm = getCurrentInstance().proxy
-    onFontReady(() => {
+    onFontsReady(() => {
       vm.init()
       vm.setActiveHref(window.location)
       vm.handleScroll(false)
