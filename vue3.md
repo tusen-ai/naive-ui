@@ -320,7 +320,8 @@
   - [x] log scrollTo 有点问题
   - [x] remove hollowoutable
   - [ ] styleScheme, css variables 组件
-  - [ ] use-global-style ? 感觉效果不会特别好而且还是很无谓的性能开销
+  - [x] use-global-style ? 感觉效果不会特别好而且还是很无谓的性能开销
+    这个问题可以之后再思考，现阶段 vue 的写法还是全局 install
   - [x] dynamic-input, no value
 
 ## Info

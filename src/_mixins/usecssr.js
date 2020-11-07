@@ -1,5 +1,4 @@
 import { find } from '../_utils/cssr'
-import globalStyle from '../_styles/global/index.cssr.js'
 import { warn } from '../_utils'
 
 if (__DEV__) {
@@ -198,10 +197,6 @@ const usecssr = function (styles = [], cssrPropsOption) {
         }
       } : undefined,
     beforeMount () {
-      globalStyle.mount({
-        target: 'naive-ui-global',
-        count: false
-      })
       styles.forEach(style => {
         if (__DEV__) {
           window.naive.styleRenderingDuration -= performance.now()

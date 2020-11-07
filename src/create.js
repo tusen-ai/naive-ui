@@ -1,4 +1,5 @@
 import version from './version'
+import { globalStyle } from './_styles'
 import { warn } from './_utils'
 
 function setHljs (hljs) {
@@ -72,6 +73,10 @@ function create (options = {}) {
   }
   function install (app) {
     if (installTargets.includes(app)) return
+    globalStyle.mount({
+      target: 'naive-ui-global',
+      count: false
+    })
     installTargets.push(app)
     app.config.globalProperties.$naive = naive
     components.forEach(component => {
