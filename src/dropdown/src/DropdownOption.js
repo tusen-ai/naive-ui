@@ -1,4 +1,4 @@
-import { h, computed, inject, ref } from 'vue'
+import { h, computed, inject, ref, Transition } from 'vue'
 import { render } from '../../_utils/vue'
 import { placeable } from '../../_mixins'
 import { ChevronRightIcon } from '../../_base/icons'
@@ -10,8 +10,18 @@ import { isSubmenuNode } from './utils'
 
 export default {
   name: 'DropdownOption',
-  inject: ['NDropdown', 'NDropdownMenu'],
-  mixins: [placeable],
+  mixins: [
+    placeable
+  ],
+  provide () {
+    return {
+      NDropdownOption: this
+    }
+  },
+  inject: [
+    'NDropdown',
+    'NDropdownMenu'
+  ],
   props: {
     tmNode: {
       type: Object,
@@ -28,6 +38,7 @@ export default {
   },
   setup (props) {
     const NDropdown = inject('NDropdown')
+    const NDropdownOption = inject('NDropdownOption', null)
     const rawNodeRef = computed(() => props.tmNode.rawNode)
     const hasSubmenuRef = computed(() => {
       return isSubmenuNode(props.tmNode.rawNode)
@@ -51,11 +62,20 @@ export default {
       if (lastToggledSubmenuKey !== null) return activeKeyPath.includes(key)
       return false
     })
-    const shouldDelayRef = computed(() => NDropdown.keyboardKey === null)
+    const shouldDelayRef = computed(() => {
+      return NDropdown.keyboardKey === null && NDropdown.animated === false
+    })
+    const delayedSubmenuRef = useDelayedTrue(showSubmenuRef, 300, shouldDelayRef)
+    const parentEnteringSubmenuRef = computed(() => {
+      return !!(NDropdownOption && NDropdownOption.enteringSubmenu)
+    })
     return {
+      enteringSubmenu: ref(false),
+      mergedShowSubmenu: computed(() => {
+        return delayedSubmenuRef.value && !parentEnteringSubmenuRef.value
+      }),
       rawNode: rawNodeRef,
       hasSubmenu: hasSubmenuRef,
-      showSubmenu: useDelayedTrue(showSubmenuRef, 300, shouldDelayRef),
       pending: useMemo(() => {
         const {
           activeKeyPath
@@ -66,12 +86,13 @@ export default {
       // placeable
       trackingRef: ref(null),
       offsetContainerRef: ref(null),
-      bodyRef: ref(null)
+      bodyRef: ref(null),
+      NDropdownOption
     }
   },
   computed: {
     __placeableEnabled () {
-      return this.showSubmenu
+      return this.mergedShowSubmenu
     }
   },
   methods: {
@@ -86,6 +107,12 @@ export default {
     },
     __placeableBody () {
       return this.bodyRef
+    },
+    handleSubmenuBeforeEnter () {
+      this.enteringSubmenu = true
+    },
+    handleSubmenuAfterEnter () {
+      this.enteringSubmenu = false
     },
     handleMouseEnter () {
       const {
@@ -136,6 +163,19 @@ export default {
     }
   },
   render () {
+    const {
+      NDropdown: {
+        animated
+      },
+      mergedShowSubmenu
+    } = this
+    const submenuVNode = mergedShowSubmenu
+      ? h(NDropdownMenu, {
+        ref: 'bodyRef',
+        tmNodes: this.tmNode.children,
+        parentKey: this.tmNode.key
+      })
+      : null
     return h('div', {
       class: 'n-dropdown-option'
     }, [
@@ -172,7 +212,7 @@ export default {
           class: [
             'n-dropdown-option-body__suffix',
             {
-              'n-dropdown-option-body__suffix--show-submenu': this.NDropdownMenu.showSubmenu
+              'n-dropdown-option-body__suffix--has-submenu': this.NDropdownMenu.hasSubmenu
             }
           ],
           'n-dropdown-option': true
@@ -193,13 +233,13 @@ export default {
             class: 'n-dropdown-menu-wrapper'
           },
           [
-            this.showSubmenu
-              ? h(NDropdownMenu, {
-                ref: 'bodyRef',
-                tmNodes: this.tmNode.children,
-                parentKey: this.tmNode.key
-              })
-              : null
+            animated ? h(Transition, {
+              onBeforeEnter: this.handleSubmenuBeforeEnter,
+              onAfterEnter: this.handleSubmenuAfterEnter,
+              name: 'n-fade-in-scale-up-transition'
+            }, {
+              default: () => submenuVNode
+            }) : submenuVNode
           ]
         )
       ]) : null

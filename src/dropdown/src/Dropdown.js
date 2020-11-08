@@ -24,6 +24,10 @@ const treemateOptions = {
 }
 
 const dropdownProps = {
+  animated: {
+    type: Boolean,
+    default: true
+  },
   keyboard: {
     type: Boolean,
     default: true

@@ -1,4 +1,5 @@
 import { c, cTB, cB, cM, cE, createKey } from '../../../_utils/cssr'
+import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up'
 
 export default c([
   ({ props }) => {
@@ -19,6 +20,7 @@ export default c([
         borderRadius,
         boxShadow
       }, [
+        fadeInScaleUpTransition(),
         [
           'small',
           'medium',
@@ -42,8 +44,7 @@ export default c([
                   width: local[createKey('optionIconPrefixWidth', size)]
                 }),
                 cB('icon', {
-                  fill: prefixColor,
-                  stroke: prefixColor,
+                  color: prefixColor,
                   fontSize: '16px'
                 })
               ]),
@@ -60,12 +61,11 @@ export default c([
                 minWidth: local[createKey('optionSuffixWidth', size)],
                 padding: '0 8px'
               }, [
-                cM('show-submenu', {
+                cM('has-submenu', {
                   width: local[createKey('optionIconSuffixWidth', size)]
                 }),
                 cB('icon', {
-                  fill: suffixColor,
-                  stroke: suffixColor,
+                  color: suffixColor,
                   fontSize: '16px'
                 })
               ])

@@ -25,7 +25,7 @@ export default {
     showIcon () {
       return this.tmNodes.some(tmNode => tmNode.rawNode.icon)
     },
-    showSubmenu () {
+    hasSubmenu () {
       return this.tmNodes.some(tmNode => isSubmenuNode(tmNode.rawNode))
     }
   },

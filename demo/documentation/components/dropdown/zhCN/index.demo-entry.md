@@ -14,6 +14,7 @@ manual-position
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|animated|`boolean`|`true`||
 |keyboard|`boolean`|`true`|是否支持键盘操作（注意和其他内容键盘操作可能的冲突）|
 |options|`Array<DropdownOption \| DropdownDivider \| DropdownSubmenu>`|`[]`||
 |size|`'small'\|'medium'\|'large'\|'huge'`|`'medium'`||
