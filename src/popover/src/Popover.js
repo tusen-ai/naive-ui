@@ -128,6 +128,10 @@ export default {
       type: Boolean,
       default: true
     },
+    animated: {
+      type: Boolean,
+      default: true
+    },
     // private
     zIndex: {
       type: String,

@@ -21,6 +21,7 @@ manual-position
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|animated|`boolean`|`true`||
 |arrow-style|`Object`|`undefined`||
 |body-class|`string`|`undefined`||
 |body-style|`Object`|`undefined`||

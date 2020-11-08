@@ -104,6 +104,11 @@ export default {
   watch: {
     show (value) {
       if (value) this.__placeableEnabled = true
+      else {
+        if (!this.animated) {
+          this.__placeableEnabled = false
+        }
+      }
     }
   },
   created () {
@@ -115,6 +120,9 @@ export default {
   computed: {
     useVShow () {
       return this.displayDirective === 'show'
+    },
+    animated () {
+      return this.NPopover.animated
     },
     directives () {
       const { trigger } = this
@@ -178,6 +186,40 @@ export default {
     }
   },
   render () {
+    const {
+      animated
+    } = this
+    const contentNode = ((this.useVShow || this.show) ? withDirectives(h('div', {
+      'n-placement': this.__placeableAdjustedPlacement,
+      class: [
+        'n-popover-body',
+        {
+          [`n-${this.mergedTheme}-theme`]: this.mergedTheme,
+          'n-popover-body--no-arrow': !this.showArrow,
+          'n-popover-body--shadow': this.shadow,
+          [this.bodyClass]: this.bodyClass,
+          'n-popover-body--styled': !this.raw
+        }
+      ],
+      ref: 'body',
+      style: this.style,
+      onMouseEnter: this.handleMouseEnter,
+      onMouseLeave: this.handleMouseLeave
+    }, [
+      getSlot(this),
+      this.showArrow
+        ? h(
+          'div',
+          {
+            class: 'n-popover-arrow-wrapper'
+          }, [
+            h('div', {
+              class: 'n-popover-arrow',
+              style: this.arrowStyle
+            })
+          ])
+        : null
+    ]), this.directives) : null)
     return withDirectives(
       h('div', {
         class: [
@@ -193,45 +235,17 @@ export default {
           class: 'n-positioning-content',
           ref: 'bodyWrapper'
         }, [
-          h(Transition, {
-            name: 'popover-body-transition',
-            appear: this.NPopover.isMounted,
-            onAfterLeave: () => {
-              this.__placeableEnabled = false
-            }
-          }, {
-            default: () => ((this.useVShow || this.show) ? withDirectives(h('div', {
-              'n-placement': this.__placeableAdjustedPlacement,
-              class: [
-                'n-popover-body',
-                {
-                  [`n-${this.mergedTheme}-theme`]: this.mergedTheme,
-                  'n-popover-body--no-arrow': !this.showArrow,
-                  'n-popover-body--shadow': this.shadow,
-                  [this.bodyClass]: this.bodyClass,
-                  'n-popover-body--styled': !this.raw
-                }
-              ],
-              ref: 'body',
-              style: this.style,
-              onMouseEnter: this.handleMouseEnter,
-              onMouseLeave: this.handleMouseLeave
-            }, [
-              getSlot(this),
-              this.showArrow
-                ? h(
-                  'div',
-                  {
-                    class: 'n-popover-arrow-wrapper'
-                  }, [
-                    h('div', {
-                      class: 'n-popover-arrow',
-                      style: this.arrowStyle
-                    })
-                  ])
-                : null
-            ]), this.directives) : null)
-          })
+          animated
+            ? h(Transition, {
+              name: 'popover-body-transition',
+              appear: this.NPopover.isMounted,
+              onAfterLeave: () => {
+                this.__placeableEnabled = false
+              }
+            }, {
+              default: () => contentNode
+            })
+            : contentNode
         ])
       ]),
       [

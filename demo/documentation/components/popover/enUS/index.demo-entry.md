@@ -21,6 +21,7 @@ manual-position
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|animated|`boolean`|`true`||
 |arrow-style|`Object`|`undefined`||
 |body-class|`string`|`undefined`||
 |body-style|`Object`|`undefined`||
