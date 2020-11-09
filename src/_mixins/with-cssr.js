@@ -48,16 +48,14 @@ function setupMutableStyle (
     $options: options
   } = instance
   const {
-    fallbackTheme,
     styles
   } = naive
   const name = options.cssrName || options.name
   const id = options.cssrId || name
-  const renderedTheme = theme || fallbackTheme
   const depValue = (
     depKey === 'mergedTheme' ||
     depKey === 'theme'
-  ) ? renderedTheme : instance[depKey]
+  ) ? theme : instance[depKey]
   if (
     __DEV__ &&
     (depValue === null || depValue === undefined)
@@ -66,24 +64,23 @@ function setupMutableStyle (
   }
   const mountId = createMutableStyleId(
     id,
-    renderedTheme,
+    theme,
     depKey,
     depValue
   )
   if (find(mountId)) return
-  const cssrPropsGetter = styles[renderedTheme][name]
+  const cssrPropsGetter = styles[theme][name]
   if (__DEV__ && !cssrPropsGetter) {
     warn('mixins/with-cssr', `${name}'s style not found`)
   }
   // themeVariables: { base, derived }
-  const themeVariables = getThemeVariables(naive, renderedTheme)
+  const themeVariables = getThemeVariables(naive, theme)
   const componentCssrProps = {
     $instance: instance,
     $base: themeVariables.base,
     $derived: themeVariables.derived,
     $local: cssrPropsGetter.cssrProps(themeVariables),
-    $renderedTheme: renderedTheme,
-    $fallbackTheme: fallbackTheme
+    $theme: theme
   }
   CNode.mount({
     target: mountId,
@@ -117,20 +114,17 @@ function getCssrProps (
   const naive = instance.$naive
   const options = instance.$options
   const {
-    fallbackTheme,
     styles
   } = naive
   const name = options.cssrName || options.name
-  const renderedTheme = theme || fallbackTheme
-  const cssrPropsGetter = styles[renderedTheme][name]
-  const themeVariables = getThemeVariables(naive, renderedTheme)
+  const cssrPropsGetter = styles[theme][name]
+  const themeVariables = getThemeVariables(naive, theme)
   return {
     $instance: instance,
     $base: themeVariables.base,
     $derived: themeVariables.derived,
     $local: cssrPropsGetter.cssrProps(themeVariables),
-    $renderedTheme: renderedTheme,
-    $fallbackTheme: fallbackTheme
+    $theme: theme
   }
 }
 
@@ -160,7 +154,7 @@ const withCssr = function (styles = [], cssrPropsOption) {
           }
           setupMutableStyle(
             instance,
-            mergedTheme || null,
+            mergedTheme,
             style.key,
             style.CNode
           )
@@ -205,7 +199,7 @@ const withCssr = function (styles = [], cssrPropsOption) {
           setupMutableStyle(
             this,
             // TODO use `themeKey`
-            this.mergedTheme || this.theme || null,
+            this.mergedTheme || this.theme,
             style.key,
             style.CNode
           )

@@ -1,13 +1,14 @@
 import create from '../../create'
-import { enUS } from '../../locale'
 import { paginationLight } from '../styles'
 import { mount } from '@vue/test-utils'
 import Pagination from '../index'
+import enUS from '../../locale/enUS'
 
 describe('n-pagination', () => {
   const naive = create({
-    fallbackLocale: enUS,
-    fallbackTheme: 'light',
+    locales: [
+      enUS
+    ],
     styles: [
       paginationLight
     ]

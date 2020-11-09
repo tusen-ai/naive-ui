@@ -1,3 +1,5 @@
+export const fallbackTheme = 'light'
+
 export default {
   props: {
     theme: {
@@ -15,17 +17,14 @@ export default {
       if (theme !== null && theme !== undefined) {
         return theme
       }
-      const NConfigProvider = this.NConfigProvider
-      return (NConfigProvider && NConfigProvider.mergedTheme) || null
+      const { NConfigProvider } = this
+      return (NConfigProvider && NConfigProvider.mergedTheme) || fallbackTheme
     },
     mergedStyle () {
       const { themedStyle } = this
       if (themedStyle) {
         const {
-          mergedTheme,
-          $naive: {
-            fallbackTheme
-          }
+          mergedTheme
         } = this
         return themedStyle[mergedTheme || fallbackTheme]
       }
@@ -39,10 +38,7 @@ export default {
         } = NConfigProvider
         if (inheritedThemeEnvironments) {
           const {
-            mergedTheme,
-            $naive: {
-              fallbackTheme
-            }
+            mergedTheme
           } = this
           return inheritedThemeEnvironments[mergedTheme || fallbackTheme] || null
         }

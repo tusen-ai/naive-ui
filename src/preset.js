@@ -82,9 +82,7 @@ import styleScheme from './_deprecated/style-scheme'
 import create from './create'
 
 export default create({
-  locales: [zhCN, enUS],
-  fallbackLocale: enUS,
-  fallbackTheme: 'light',
+  locales: [enUS, zhCN],
   components: [
     Card,
     Icon,

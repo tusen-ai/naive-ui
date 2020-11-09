@@ -46,22 +46,18 @@ function create (options = {}) {
     components = [],
     styles = [],
     locales = [],
-    fallbackLocale, // required
-    hljs,
-    fallbackTheme // required
+    hljs
   } = options
-  const mergedFallbackLocale = fallbackLocale || locales[0]
-  if (!mergedFallbackLocale) warn('create', 'both `fallbackLocale` and `locales` are not specified.')
-  if (!fallbackTheme) warn('create', '`fallbackTheme` is not specified.')
+  const fallbackLocale = locales[0]
+  if (!fallbackLocale) warn('create', '`locales` is empty.')
   const installTargets = []
   const naive = {
     componentPrefix,
     locales: createLocalesObject(locales),
-    fallbackLocale: mergedFallbackLocale,
+    fallbackLocale,
     hljs,
     components: {},
     styles: createStylesObject(styles),
-    fallbackTheme: fallbackTheme || 'light',
     // external
     version,
     setHljs,

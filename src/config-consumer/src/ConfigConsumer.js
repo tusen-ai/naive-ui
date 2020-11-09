@@ -46,7 +46,7 @@ export default {
       language: NConfigProvider ? NConfigProvider.inheritedLanguage : null,
       namespace: NConfigProvider ? NConfigProvider.inheritedNamespace : null,
       themeEnvironment: this.mergedThemeEnvironment,
-      styleScheme: styleScheme[this.mergedTheme || this.$naive.fallbackTheme]
+      styleScheme: styleScheme[this.mergedTheme]
     }) : []
   }
 }
