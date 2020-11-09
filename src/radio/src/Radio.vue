@@ -43,8 +43,8 @@
 import {
   configurable,
   themeable,
-  asformitem,
-  usecssr
+  asFormItem,
+  withCssr
 } from '../../_mixins'
 import radioMixin from './radio-mixin'
 import styles from './styles/radio/index.js'
@@ -55,8 +55,8 @@ export default {
   mixins: [
     configurable,
     themeable,
-    usecssr(styles),
-    asformitem({
+    withCssr(styles),
+    asFormItem({
       mergedSize () {
         const { size } = this
         if (size !== undefined) return size

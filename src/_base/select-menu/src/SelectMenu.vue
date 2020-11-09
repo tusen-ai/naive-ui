@@ -84,7 +84,7 @@ import NSelectGroupHeader from './SelectGroupHeader.js'
 import NEmpty from '../../../empty'
 import { depx, formatLength } from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
-import { usecssr } from '../../../_mixins'
+import { withCssr } from '../../../_mixins'
 import styles from './styles'
 
 export default {
@@ -97,7 +97,7 @@ export default {
     NSelectGroupHeader
   },
   mixins: [
-    usecssr(styles, {
+    withCssr(styles, {
       themeKey: 'theme',
       injectCssrProps: true
     })

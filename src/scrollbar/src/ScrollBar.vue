@@ -102,7 +102,7 @@ import {
 import {
   configurable,
   themeable,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import styles from './styles/index.js'
 import { useIsIos } from 'vooks'
@@ -115,7 +115,7 @@ export default {
   mixins: [
     configurable,
     themeable,
-    usecssr(styles)
+    withCssr(styles)
   ],
   props: {
     size: {

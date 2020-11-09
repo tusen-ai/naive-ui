@@ -8,13 +8,13 @@
 </template>
 
 <script>
-import usecssr from '../../../_mixins/usecssr'
+import { withCssr } from '../../../_mixins'
 import styles from './styles/index.js'
 
 export default {
   name: 'NBaseWave',
   mixins: [
-    usecssr(styles)
+    withCssr(styles)
   ],
   data () {
     return {

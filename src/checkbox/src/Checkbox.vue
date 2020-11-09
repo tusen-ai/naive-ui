@@ -56,8 +56,8 @@ import { useMergedState, useMemo } from 'vooks'
 import {
   configurable,
   themeable,
-  asformitem,
-  usecssr
+  asFormItem,
+  withCssr
 } from '../../_mixins'
 import { render } from '../../_utils/vue'
 import CheckMark from './CheckMark.vue'
@@ -77,7 +77,7 @@ export default {
   mixins: [
     configurable,
     themeable,
-    asformitem({
+    asFormItem({
       mergedSize () {
         const { size } = this
         if (size !== undefined) return size
@@ -95,7 +95,7 @@ export default {
         return 'medium'
       }
     }),
-    usecssr(styles)
+    withCssr(styles)
   ],
   inject: {
     NCheckboxGroup: {

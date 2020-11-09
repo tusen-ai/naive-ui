@@ -106,7 +106,7 @@ import {
   configurable,
   themeable,
   locale,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import { pageItems } from './utils'
 import styles from './styles'
@@ -126,7 +126,7 @@ export default {
   mixins: [
     configurable,
     themeable,
-    usecssr(styles),
+    withCssr(styles),
     locale('Pagination')
   ],
   props: {

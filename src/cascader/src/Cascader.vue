@@ -82,7 +82,7 @@ import {
   configurable,
   themeable,
   locale,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import { useCascader } from './composables'
 import { warn, call } from '../../_utils'
@@ -102,7 +102,7 @@ export default {
     configurable,
     themeable,
     locale('Cascader'),
-    usecssr(styles)
+    withCssr(styles)
   ],
   provide () {
     return {

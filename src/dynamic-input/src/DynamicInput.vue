@@ -75,8 +75,8 @@ import NDynamicInputPairPreset from './PairPreset.vue'
 import {
   configurable,
   themeable,
-  usecssr,
-  asformitem,
+  withCssr,
+  asFormItem,
   locale
 } from '../../_mixins'
 import styles from './styles'
@@ -99,8 +99,8 @@ export default {
     configurable,
     themeable,
     locale('DynamicInput'),
-    asformitem(),
-    usecssr(styles)
+    asFormItem(),
+    withCssr(styles)
   ],
   provide () {
     return {

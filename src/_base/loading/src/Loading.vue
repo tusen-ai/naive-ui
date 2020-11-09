@@ -25,13 +25,13 @@
 </template>
 
 <script>
-import usecssr from '../../../_mixins/usecssr'
+import { withCssr } from '../../../_mixins'
 import styles from './styles/'
 
 export default {
   name: 'BaseLoading',
   mixins: [
-    usecssr(styles)
+    withCssr(styles)
   ],
   props: {
     radius: {

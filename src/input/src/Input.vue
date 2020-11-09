@@ -163,9 +163,9 @@ import { NBaseSuffix } from '../../_base'
 import {
   configurable,
   themeable,
-  asformitem,
+  asFormItem,
   locale,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import { call } from '../../_utils'
 import styles from './styles'
@@ -179,8 +179,8 @@ export default {
     configurable,
     themeable,
     locale('Input'),
-    asformitem(),
-    usecssr(styles)
+    asFormItem(),
+    withCssr(styles)
   ],
   props: {
     type: {

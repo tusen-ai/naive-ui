@@ -29,7 +29,7 @@ import layoutModeMixin from './layoutModeMixin'
 import {
   configurable,
   themeable,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import styles from './styles/layout'
 
@@ -44,7 +44,7 @@ export default {
     configurable,
     themeable,
     layoutModeMixin,
-    usecssr(styles)
+    withCssr(styles)
   ],
   provide () {
     return {

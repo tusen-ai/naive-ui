@@ -29,7 +29,7 @@
 import {
   configurable,
   themeable,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import { CloseIcon } from '../../_base/icons'
 import { warn } from '../../_utils'
@@ -44,7 +44,7 @@ export default {
   mixins: [
     configurable,
     themeable,
-    usecssr(styles)
+    withCssr(styles)
   ],
   props: {
     ...commonProps,

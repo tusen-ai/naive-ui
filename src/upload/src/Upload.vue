@@ -43,7 +43,7 @@
 import {
   configurable,
   themeable,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import { warn } from '../../_utils/naive'
 import { createId } from '../../_utils/vue'
@@ -169,7 +169,7 @@ export default {
   mixins: [
     configurable,
     themeable,
-    usecssr(styles)
+    withCssr(styles)
   ],
   provide () {
     return {

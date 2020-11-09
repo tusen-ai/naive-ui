@@ -188,7 +188,7 @@ import { NBaseLazyTeleport, NBaseFocusDetector } from '../../_base'
 import NScrollbar from '../../scrollbar'
 import NInput from '../../input'
 import NIcon from '../../icon'
-import { configurable, themeable, locale, usecssr, asformitem, placeable } from '../../_mixins'
+import { configurable, themeable, locale, withCssr, asFormItem, placeable } from '../../_mixins'
 import { zindexable, clickoutside } from '../../_directives'
 import {
   isValid,
@@ -242,8 +242,8 @@ export default {
     themeable,
     placeable,
     locale('TimePicker'),
-    asformitem(),
-    usecssr(styles)
+    asFormItem(),
+    withCssr(styles)
   ],
   props: {
     placeholder: {

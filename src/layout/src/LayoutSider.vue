@@ -51,7 +51,7 @@ import layoutModeMixin from './layoutModeMixin'
 import {
   configurable,
   themeable,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import ToggleButton from './ToggleButton.vue'
 import ToggleBar from './ToggleBar.vue'
@@ -71,7 +71,7 @@ export default {
     configurable,
     themeable,
     layoutModeMixin,
-    usecssr(styles)
+    withCssr(styles)
   ],
   props: {
     bordered: {

@@ -19,7 +19,7 @@
 import {
   configurable,
   themeable,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import { formatLength } from '../../_utils'
 import styles from './styles/index'
@@ -29,7 +29,7 @@ export default {
   mixins: [
     configurable,
     themeable,
-    usecssr(styles)
+    withCssr(styles)
   ],
   props: {
     size: {

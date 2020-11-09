@@ -17,13 +17,13 @@
 
 <script>
 import { formatLength } from '../../_utils'
-import { usecssr } from '../../_mixins'
+import { withCssr } from '../../_mixins'
 import styles from './styles/row.js'
 
 export default {
   name: 'Row',
   mixins: [
-    usecssr(styles)
+    withCssr(styles)
   ],
   provide () {
     return {

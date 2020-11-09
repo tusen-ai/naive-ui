@@ -5,13 +5,13 @@
 </template>
 
 <script>
-import usecssr from '../../_mixins/usecssr'
+import { withCssr } from '../../_mixins'
 import styles from './styles'
 
 export default {
   name: 'InputGroup',
   mixins: [
-    usecssr(styles)
+    withCssr(styles)
   ]
 }
 </script>

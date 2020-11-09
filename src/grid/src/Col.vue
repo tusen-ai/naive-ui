@@ -25,13 +25,13 @@
 
 <script>
 import { formatLength } from '../../_utils'
-import { usecssr } from '../../_mixins'
+import { withCssr } from '../../_mixins'
 import styles from './styles/col.js'
 
 export default {
   name: 'Col',
   mixins: [
-    usecssr(styles)
+    withCssr(styles)
   ],
   inject: {
     NRow: {

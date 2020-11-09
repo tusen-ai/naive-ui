@@ -247,7 +247,7 @@ import {
 import {
   configurable,
   themeable,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import styles from './styles/index.js'
 import { formatLength } from '../../_utils'
@@ -271,7 +271,7 @@ export default {
   mixins: [
     configurable,
     themeable,
-    usecssr(styles)
+    withCssr(styles)
   ],
   props: {
     processing: {

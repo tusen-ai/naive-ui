@@ -2,11 +2,11 @@ import { h } from 'vue'
 import {
   configurable,
   themeable,
-  asformitem
+  asFormItem,
+  withCssr
 } from '../../_mixins'
 import { getSlot, flatten } from '../../_utils/vue'
 import { warn } from '../../_utils/naive/warn'
-import usecssr from '../../_mixins/usecssr'
 import styles from './styles/radio-group/index.js'
 
 function mapSlot (h, defaultSlot, groupInstance) {
@@ -92,8 +92,8 @@ export default {
   mixins: [
     configurable,
     themeable,
-    usecssr(styles),
-    asformitem()
+    withCssr(styles),
+    asFormItem()
   ],
   props: {
     name: {

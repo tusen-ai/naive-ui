@@ -73,7 +73,7 @@
 import {
   configurable,
   themeable,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import {
   NFadeInExpandTransition,
@@ -97,7 +97,7 @@ export default {
   mixins: [
     configurable,
     themeable,
-    usecssr(styles)
+    withCssr(styles)
   ],
   inject: {
     NButtonGroup: {

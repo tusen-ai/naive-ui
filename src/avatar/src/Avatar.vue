@@ -33,7 +33,7 @@
 import {
   configurable,
   themeable,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import styles from './styles'
 import { validSize } from './config'
@@ -43,7 +43,7 @@ export default {
   mixins: [
     configurable,
     themeable,
-    usecssr(styles)
+    withCssr(styles)
   ],
   props: {
     size: {

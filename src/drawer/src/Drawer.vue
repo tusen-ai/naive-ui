@@ -40,7 +40,7 @@
 import {
   configurable,
   themeable,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import { zindexable } from '../../_directives'
 import { warn, formatLength } from '../../_utils'
@@ -61,7 +61,7 @@ export default {
   mixins: [
     configurable,
     themeable,
-    usecssr(styles)
+    withCssr(styles)
   ],
   provide () {
     return {

@@ -46,7 +46,7 @@ import {
   configurable,
   themeable,
   locale,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import styles from './styles'
 
@@ -62,7 +62,7 @@ export default {
     locale('Popconfirm'),
     configurable,
     themeable,
-    usecssr(styles)
+    withCssr(styles)
   ],
   props: {
     positiveText: {

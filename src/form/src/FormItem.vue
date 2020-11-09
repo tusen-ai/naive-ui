@@ -94,7 +94,7 @@ import { get } from 'lodash-es'
 import {
   configurable,
   themeable,
-  usecssr,
+  withCssr,
   registerable
 } from '../../_mixins'
 import styles from './styles'
@@ -151,7 +151,7 @@ export default {
     registerable('NForm', 'formItems', 'path'),
     configurable,
     themeable,
-    usecssr(styles)
+    withCssr(styles)
   ],
   inject: {
     NForm: {

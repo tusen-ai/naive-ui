@@ -33,7 +33,7 @@ import setup from './radio-setup'
 import {
   configurable,
   themeable,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import styles from './styles/radio-button/index.js'
 
@@ -45,7 +45,7 @@ export default {
     configurable,
     themeable,
     radioMixin,
-    usecssr(styles)
+    withCssr(styles)
   ],
   setup
 }

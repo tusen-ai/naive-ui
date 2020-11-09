@@ -66,7 +66,7 @@ import { ref } from 'vue'
 import {
   configurable,
   themeable,
-  usecssr,
+  withCssr,
   locale
 } from '../../_mixins'
 import { setCheckStatusOfRow, createRowKey } from './utils'
@@ -138,7 +138,7 @@ export default {
   mixins: [
     configurable,
     themeable,
-    usecssr(styles),
+    withCssr(styles),
     locale('DataTable')
   ],
   provide () {

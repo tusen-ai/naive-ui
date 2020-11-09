@@ -13,7 +13,7 @@
 
 <script>
 import getScrollParent from '../../_utils/dom/get-scroll-parent'
-import { usecssr } from '../../_mixins'
+import { withCssr } from '../../_mixins'
 import styles from './styles/index.js'
 import getTarget from '../../_utils/dom/get-target'
 import { warn } from '../../_utils/naive/warn'
@@ -21,7 +21,7 @@ import { warn } from '../../_utils/naive/warn'
 export default {
   name: 'Affix',
   mixins: [
-    usecssr(styles)
+    withCssr(styles)
   ],
   props: {
     listenTo: {

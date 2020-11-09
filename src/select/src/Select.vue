@@ -108,9 +108,9 @@ import {
   configurable,
   placeable,
   themeable,
-  asformitem,
+  asFormItem,
   locale,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import {
   clickoutside,
@@ -172,8 +172,8 @@ export default {
     themeable,
     placeable,
     locale('Select'),
-    asformitem(),
-    usecssr(styles)
+    asFormItem(),
+    withCssr(styles)
   ],
   provide () {
     return {

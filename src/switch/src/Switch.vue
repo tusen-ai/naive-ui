@@ -23,8 +23,8 @@
 import {
   configurable,
   themeable,
-  asformitem,
-  usecssr
+  asFormItem,
+  withCssr
 } from '../../_mixins'
 import {
   call
@@ -39,8 +39,8 @@ export default {
   mixins: [
     configurable,
     themeable,
-    asformitem(),
-    usecssr(styles)
+    asFormItem(),
+    withCssr(styles)
   ],
   props: {
     value: {

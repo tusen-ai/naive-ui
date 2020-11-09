@@ -4,7 +4,7 @@ import {
 import {
   configurable,
   themeable,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import NTreeNode from './TreeNode'
 import { isLeaf, isLoaded, getAllKeys, keysWithFilter } from './utils'
@@ -17,7 +17,7 @@ export default {
   mixins: [
     configurable,
     themeable,
-    usecssr(styles)
+    withCssr(styles)
   ],
   provide () {
     return { NTree: this }

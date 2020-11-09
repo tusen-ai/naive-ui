@@ -3,7 +3,7 @@ import { TreeMate } from 'treemate'
 import {
   configurable,
   themeable,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import { KEY_CODE } from '../../_utils'
 import keyboardDelegate from '../../_utils/delegate/keyboardDelegate'
@@ -67,7 +67,7 @@ export default {
   mixins: [
     configurable,
     themeable,
-    usecssr(styles)
+    withCssr(styles)
   ],
   provide () {
     return {

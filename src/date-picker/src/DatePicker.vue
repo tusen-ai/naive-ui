@@ -151,8 +151,8 @@ import {
   configurable,
   themeable,
   placeable,
-  asformitem,
-  usecssr,
+  asFormItem,
+  withCssr,
   locale
 } from '../../_mixins'
 import {
@@ -215,8 +215,8 @@ export default {
     themeable,
     placeable,
     locale('DatePicker'),
-    asformitem(),
-    usecssr(styles)
+    asFormItem(),
+    withCssr(styles)
   ],
   provide () {
     return {

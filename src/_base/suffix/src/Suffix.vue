@@ -47,7 +47,7 @@ import CancelIcon from './CancelIcon.vue'
 import { NIconSwitchTransition } from '../../../_base'
 import NBaseLoading from '../../loading'
 import {
-  usecssr
+  withCssr
 } from '../../../_mixins'
 import styles from './styles'
 
@@ -59,7 +59,7 @@ export default {
     NIconSwitchTransition
   },
   mixins: [
-    usecssr(styles)
+    withCssr(styles)
   ],
   inject: {
     NFormItem: {

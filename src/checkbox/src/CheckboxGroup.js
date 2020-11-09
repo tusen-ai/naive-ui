@@ -2,7 +2,7 @@ import { h } from 'vue'
 import {
   configurable,
   themeable,
-  asformitem
+  asFormItem
 } from '../../_mixins'
 import { getSlot } from '../../_utils/vue'
 import { warn, call } from '../../_utils'
@@ -12,7 +12,7 @@ export default {
   mixins: [
     configurable,
     themeable,
-    asformitem()
+    asFormItem()
   ],
   provide () {
     return {

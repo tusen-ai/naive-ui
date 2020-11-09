@@ -17,7 +17,7 @@ import layoutModeMixin from './layoutModeMixin'
 import {
   configurable,
   themeable,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import styles from './styles/layout-header-footer'
 
@@ -29,7 +29,7 @@ export default {
     configurable,
     themeable,
     layoutModeMixin,
-    usecssr(styles)
+    withCssr(styles)
   ],
   props: {
     bordered: {

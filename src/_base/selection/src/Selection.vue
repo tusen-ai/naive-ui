@@ -188,7 +188,7 @@
 <script>
 import NBaseSuffix from '../../suffix/index.js'
 import NTag from '../../../tag/index.js'
-import usecssr from '../../../_mixins/usecssr.js'
+import { withCssr } from '../../../_mixins'
 import styles from './styles/index.js'
 
 export default {
@@ -198,7 +198,7 @@ export default {
     NTag
   },
   mixins: [
-    usecssr(styles)
+    withCssr(styles)
   ],
   inject: {
     NFormItem: {

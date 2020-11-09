@@ -30,7 +30,7 @@ import {
   configurable,
   themeable,
   locale,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import {
   EmptyIcon
@@ -48,7 +48,7 @@ export default {
     configurable,
     themeable,
     locale('Empty'),
-    usecssr(styles)
+    withCssr(styles)
   ],
   props: {
     description: {

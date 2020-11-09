@@ -74,9 +74,9 @@ import { createTreeMate } from 'treemate'
 import {
   configurable,
   themeable,
-  asformitem,
+  asFormItem,
   placeable,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import {
   clickoutside,
@@ -108,8 +108,8 @@ export default {
     configurable,
     themeable,
     placeable,
-    asformitem(),
-    usecssr(styles)
+    asFormItem(),
+    withCssr(styles)
   ],
   props: {
     placeholder: {

@@ -30,7 +30,7 @@
 <script>
 import { NFadeInExpandTransition } from '../../../_base'
 import SlotMachineNumber from './SlotMachineNumber.vue'
-import { usecssr } from '../../../_mixins'
+import { withCssr } from '../../../_mixins'
 import styles from './styles/index.js'
 
 export default {
@@ -40,7 +40,7 @@ export default {
     SlotMachineNumber
   },
   mixins: [
-    usecssr(styles)
+    withCssr(styles)
   ],
   props: {
     value: {

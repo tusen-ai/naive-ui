@@ -12,7 +12,7 @@ import { render } from '../../_utils/vue'
 import {
   configurable,
   themeable,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import styles from './styles'
 import props from './message-props'
@@ -22,7 +22,7 @@ export default {
   mixins: [
     configurable,
     themeable,
-    usecssr(styles)
+    withCssr(styles)
   ],
   props,
   methods: {

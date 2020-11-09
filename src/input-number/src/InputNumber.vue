@@ -68,8 +68,8 @@ import {
 import {
   configurable,
   themeable,
-  asformitem,
-  usecssr,
+  asFormItem,
+  withCssr,
   locale
 } from '../../_mixins'
 import { warn, call } from '../../_utils'
@@ -101,8 +101,8 @@ export default {
     configurable,
     themeable,
     locale('InputNumber'),
-    asformitem(),
-    usecssr(styles)
+    asFormItem(),
+    withCssr(styles)
   ],
   props: {
     placeholder: {

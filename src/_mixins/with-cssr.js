@@ -62,7 +62,7 @@ function setupMutableStyle (
     __DEV__ &&
     (depValue === null || depValue === undefined)
   ) {
-    warn('mixins/usecssr', `dependency key ${name}.${depKey} should not be nullable`)
+    warn('mixins/with-cssr', `dependency key ${name}.${depKey} should not be nullable`)
   }
   const mountId = createMutableStyleId(
     id,
@@ -73,7 +73,7 @@ function setupMutableStyle (
   if (find(mountId)) return
   const cssrPropsGetter = styles[renderedTheme][name]
   if (__DEV__ && !cssrPropsGetter) {
-    warn('mixins/usecssr', `${name}'s style not found`)
+    warn('mixins/with-cssr', `${name}'s style not found`)
   }
   // themeVariables: { base, derived }
   const themeVariables = getThemeVariables(naive, renderedTheme)
@@ -134,7 +134,7 @@ function getCssrProps (
   }
 }
 
-const usecssr = function (styles = [], cssrPropsOption) {
+const withCssr = function (styles = [], cssrPropsOption) {
   // collect watchers
   const watchers = {}
   if (
@@ -224,4 +224,4 @@ const usecssr = function (styles = [], cssrPropsOption) {
   }
 }
 
-export default usecssr
+export default withCssr

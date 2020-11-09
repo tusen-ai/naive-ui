@@ -33,7 +33,7 @@ import { ref } from 'vue'
 import {
   configurable,
   themeable,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import NScrollbar from '../../scrollbar'
 import NLogLoader from './LogLoader.vue'
@@ -52,7 +52,7 @@ export default {
   mixins: [
     configurable,
     themeable,
-    usecssr(styles)
+    withCssr(styles)
   ],
   provide () {
     return {

@@ -21,13 +21,13 @@
 import {
   configurable,
   themeable,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import styles from './styles'
 
 export default {
   name: 'List',
-  mixins: [configurable, themeable, usecssr(styles)],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     size: {
       type: String,

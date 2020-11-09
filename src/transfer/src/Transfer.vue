@@ -207,9 +207,9 @@ import {
 } from '../../_base/icons'
 import {
   configurable,
-  asformitem,
+  asFormItem,
   themeable,
-  usecssr,
+  withCssr,
   locale
 } from '../../_mixins'
 import styles from './styles'
@@ -236,14 +236,14 @@ export default {
   mixins: [
     configurable,
     themeable,
-    usecssr(
+    withCssr(
       styles, {
         themeKey: 'mergedTheme',
         injectCssrProps: true
       }
     ),
     locale('Transfer'),
-    asformitem()
+    asFormItem()
   ],
   provide () {
     return {

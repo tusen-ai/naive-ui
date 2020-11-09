@@ -107,8 +107,8 @@ import {
   configurable,
   themeable,
   placeable,
-  asformitem,
-  usecssr
+  asFormItem,
+  withCssr
 } from '../../_mixins'
 import {
   zindexable
@@ -151,8 +151,8 @@ export default {
     configurable,
     themeable,
     placeable,
-    usecssr(styles),
-    asformitem()
+    withCssr(styles),
+    asFormItem()
   ],
   props: {
     marks: {

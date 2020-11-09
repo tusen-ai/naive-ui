@@ -57,7 +57,7 @@ import getScrollParent from '../../_utils/dom/get-scroll-parent'
 import {
   configurable,
   themeable,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import { formatLength, warn } from '../../_utils'
 import styles from './styles'
@@ -72,7 +72,7 @@ export default {
   mixins: [
     configurable,
     themeable,
-    usecssr(styles)
+    withCssr(styles)
   ],
   props: {
     show: {

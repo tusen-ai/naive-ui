@@ -40,7 +40,7 @@
 import {
   configurable,
   themeable,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import { NBaseSlotMachine, NBaseWave } from '../../_base'
 import styles from './styles/index.js'
@@ -54,7 +54,7 @@ export default {
   mixins: [
     configurable,
     themeable,
-    usecssr(styles)
+    withCssr(styles)
   ],
   props: {
     value: {

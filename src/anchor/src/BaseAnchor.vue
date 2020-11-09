@@ -29,7 +29,7 @@ import getScrollParent from '../../_utils/dom/get-scroll-parent'
 import {
   configurable,
   themeable,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import { onFontsReady } from 'vooks'
 import { warn } from '../../_utils/naive/warn'
@@ -56,7 +56,7 @@ export default {
   mixins: [
     configurable,
     themeable,
-    usecssr(styles)
+    withCssr(styles)
   ],
   provide () {
     return {

@@ -10,13 +10,13 @@
 </template>
 
 <script>
-import usecssr from '../../_mixins/usecssr'
+import { withCssr } from '../../_mixins'
 import styles from './styles/index.js'
 
 export default {
   name: 'ButtonGroup',
   mixins: [
-    usecssr(styles)
+    withCssr(styles)
   ],
   provide () {
     return {

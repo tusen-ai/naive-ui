@@ -17,13 +17,13 @@
 
 <script>
 import { ref, onBeforeUnmount } from 'vue'
-import usecssr from '../../../_mixins/usecssr'
+import { withCssr } from '../../../_mixins'
 import styles from './styles'
 
 export default {
   name: 'BaseMenuMask',
   mixins: [
-    usecssr(styles)
+    withCssr(styles)
   ],
   props: {
     theme: {

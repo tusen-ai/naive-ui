@@ -30,8 +30,8 @@
 import {
   configurable,
   themeable,
-  usecssr,
-  asformitem
+  withCssr,
+  asFormItem
 } from '../../_mixins'
 import {
   toRef,
@@ -56,8 +56,8 @@ export default {
   mixins: [
     configurable,
     themeable,
-    asformitem(),
-    usecssr(styles)
+    asFormItem(),
+    withCssr(styles)
   ],
   props: {
     count: {

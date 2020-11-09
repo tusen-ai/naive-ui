@@ -17,7 +17,7 @@ import { NBaseSelectMenu } from '../../_base'
 import {
   configurable,
   themeable,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import styles from './styles'
 import { call } from '../../_utils/vue'
@@ -31,7 +31,7 @@ export default {
   mixins: [
     configurable,
     themeable,
-    usecssr(styles)
+    withCssr(styles)
   ],
   inject: {
     NPopselect: {

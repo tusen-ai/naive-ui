@@ -47,9 +47,9 @@ import { AddIcon } from '../../_base/icons'
 import {
   configurable,
   themeable,
-  asformitem,
+  asFormItem,
   locale,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import commonProps from '../../tag/src/common-props'
 import styles from './styles'
@@ -67,8 +67,8 @@ export default {
     configurable,
     themeable,
     locale('Tag'),
-    asformitem(),
-    usecssr(styles)
+    asFormItem(),
+    withCssr(styles)
   ],
   props: {
     ...commonProps,

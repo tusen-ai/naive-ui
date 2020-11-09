@@ -1,6 +1,6 @@
 import { h, withDirectives, Transition, ref, computed } from 'vue'
 import { zindexable } from '../../_directives'
-import { configurable, themeable, usecssr } from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import presetProps from './presetProps'
 import { useIsMounted, useClicked, useClickPosition } from 'vooks'
 import { warn } from '../../_utils/naive/warn'
@@ -20,7 +20,7 @@ export default {
   mixins: [
     configurable,
     themeable,
-    usecssr(styles)
+    withCssr(styles)
   ],
   props: {
     show: {

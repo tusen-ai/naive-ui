@@ -95,7 +95,7 @@ import NIcon from '../../icon'
 import {
   configurable,
   themeable,
-  usecssr
+  withCssr
 } from '../../_mixins'
 import {
   ChevronLeftIcon as BackwardIcon,
@@ -120,7 +120,7 @@ export default {
   mixins: [
     configurable,
     themeable,
-    usecssr(styles)
+    withCssr(styles)
   ],
   provide () {
     return {
