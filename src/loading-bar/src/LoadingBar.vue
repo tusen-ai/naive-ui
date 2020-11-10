@@ -6,8 +6,13 @@
     @after-enter="handleAfterEnter"
     @after-leave="handleAfterLeave"
   >
+    <!--
+      BUG: need to use v-show nor it will glitch when triggers start, end,
+      start. This could be a bug of vue but currently I have no time to verify
+      it.
+    -->
     <div
-      v-if="loading || (!loading && entering)"
+      v-show="loading || (!loading && entering)"
       class="n-loading-bar-container"
       :class="{
         [`n-${mergedTheme}-theme`]: mergedTheme
@@ -72,15 +77,16 @@ export default {
     },
     finish () {
       if (this.finishing || this.erroring) return
-      this.finishing = true
       if (!this.loading) {
         this.start(100, 100).then(() => {
+          this.finishing = true
           const el = this.$refs.loadingBar
           el.className = createClassName('finishing')
           void el.offsetWidth
           this.loading = false
         })
       } else {
+        this.finishing = true
         const el = this.$refs.loadingBar
         el.className = createClassName('finishing')
         el.style.maxWidth = '100%'
@@ -90,15 +96,16 @@ export default {
     },
     error () {
       if (this.finishing || this.erroring) return
-      this.erroring = true
       if (!this.loading) {
         this.start(100, 100, 'error').then(() => {
+          this.erroring = true
           const el = this.$refs.loadingBar
           el.className = createClassName('error')
           void el.offsetWidth
           this.loading = false
         })
       } else {
+        this.erroring = true
         const el = this.$refs.loadingBar
         el.className = createClassName('error')
         el.style.maxWidth = '100%'
