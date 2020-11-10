@@ -11,17 +11,17 @@ export default c([
       placeholderColor,
       backgroundColor,
       boxShadow,
-      borderMaskColor,
-      borderMaskColorHover,
+      borderColor,
+      borderColorHover,
       colorFocus,
-      borderMaskColorFocus,
-      borderMaskBoxShadowFocus,
+      borderColorFocus,
+      boxShadowFocus,
       iconColor,
       iconOpacity,
       textColor,
       caretColor,
       boxShadowDisabled,
-      borderMaskColorDisabled,
+      borderColorDisabled,
       colorDisabled,
       textColorDisabled,
       placeholderColorDisabled
@@ -69,7 +69,7 @@ export default c([
         backgroundColor: colorDisabled
       }, [
         cE('border-mask', {
-          borderColor: borderMaskColorDisabled
+          borderColor: borderColorDisabled
         }),
         cE('input, textarea', {
           cursor: 'not-allowed',
@@ -86,13 +86,13 @@ export default c([
         backgroundColor: colorFocus
       }, [
         cE('border-mask', {
-          borderColor: borderMaskColorFocus,
-          boxShadow: borderMaskBoxShadowFocus
+          borderColor: borderColorFocus,
+          boxShadow: boxShadowFocus
         })
       ]),
       c('&:hover', [
         cE('border-mask', {
-          borderColor: borderMaskColorHover
+          borderColor: borderColorHover
         })
       ]),
       cE('border-mask', {
@@ -105,7 +105,7 @@ export default c([
           bottom: 0;
           pointer-events: none;
         `,
-        border: `1px solid ${borderMaskColor}`,
+        border: `1px solid ${borderColor}`,
         borderRadius,
         transition: `
           border-color .3s ${cubicBezierEaseInOut},
@@ -248,19 +248,19 @@ export default c([
         cB('input', [
           cM('stateful', [
             cE('border-mask', {
-              borderColor: pallete[createKey('borderMaskColor', status)]
+              borderColor: pallete[createKey('borderColor', status)]
             }),
             c('&:hover', [
               cE('border-mask', {
-                borderColor: pallete[createKey('borderMaskColor', status, 'hover')]
+                borderColor: pallete[createKey('borderColor', status, 'hover')]
               })
             ]),
             cM('focus', {
               backgroundColor: pallete[createKey('color', status, 'focus')]
             }, [
               cE('border-mask', {
-                borderColor: pallete[createKey('borderMaskColor', status, 'focus')],
-                boxShadow: pallete[createKey('borderMaskBoxShadow', status, 'focus')]
+                borderColor: pallete[createKey('borderColor', status, 'focus')],
+                boxShadow: pallete[createKey('boxShadow', status, 'focus')]
               })
             ]),
             cE('input, textarea', {

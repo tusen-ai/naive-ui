@@ -145,7 +145,8 @@
     </transition>
     <div
       v-if="
-        !isComposing &&
+        isTextarea &&
+          !isComposing &&
           placeholder &&
           !pair &&
           !value

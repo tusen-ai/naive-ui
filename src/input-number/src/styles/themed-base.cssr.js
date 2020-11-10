@@ -23,8 +23,8 @@ export default c([
       caretColor,
       color: backgroundColor,
       colorFocus,
-      borderMaskBoxShadowFocus,
-      borderMaskBoxShadowHover,
+      boxShadowFocus,
+      boxShadowHover,
       placeholderColor,
       borderRadius
     } = props.$local
@@ -250,7 +250,7 @@ export default c([
         }),
         c('&:hover ~', [
           cE('border-mask', {
-            boxShadow: borderMaskBoxShadowHover
+            boxShadow: boxShadowHover
           })
         ]),
         c('&:focus', {
@@ -258,7 +258,7 @@ export default c([
         }, [
           c('& ~', [
             cE('border-mask', {
-              boxShadow: borderMaskBoxShadowFocus
+              boxShadow: boxShadowFocus
             })
           ])
         ])
@@ -267,9 +267,9 @@ export default c([
   },
   ({ props }) => ['warning', 'error'].map(status => {
     const local = props.$local
-    const borderMaskBoxShadow = local[createKey('borderMaskBoxShadow', status)]
-    const borderMaskBoxShadowHover = local[createKey('borderMaskBoxShadow', status, 'hover')]
-    const borderMaskBoxShadowFocus = local[createKey('borderMaskBoxShadow', status, 'focus')]
+    const boxShadow = local[createKey('boxShadow', status)]
+    const boxShadowHover = local[createKey('boxShadow', status, 'hover')]
+    const boxShadowFocus = local[createKey('boxShadow', status, 'focus')]
     const colorFocus = local[createKey('color', status, 'focus')]
     const caretColor = local[createKey('caretColor', status)]
     const buttonTextColorHover = local[createKey('buttonTextColor', status, 'hover')]
@@ -278,14 +278,14 @@ export default c([
       status,
       cTB('input-number', [
         cE('border-mask', {
-          boxShadow: borderMaskBoxShadow
+          boxShadow: boxShadow
         }),
         cE('input', {
           caretColor: caretColor
         }, [
           c('&:hover ~', [
             cE('border-mask', {
-              boxShadow: borderMaskBoxShadowHover
+              boxShadow: boxShadowHover
             })
           ]),
           c('&:focus', {
@@ -293,7 +293,7 @@ export default c([
           }, [
             c('& ~', [
               cE('border-mask', {
-                boxShadow: borderMaskBoxShadowFocus
+                boxShadow: boxShadowFocus
               })
             ])
           ])
