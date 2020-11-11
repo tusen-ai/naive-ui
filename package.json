@@ -4,6 +4,7 @@
   "description": "A Vue UI Framework. Caring About Styles, Themed, Batteries Included, Not Rather Slow.",
   "main": "lib/index.js",
   "module": "es/index.js",
+  "sideEffects": false,
   "scripts": {
     "start": "npm run dev",
     "build:fonts": "npm run clean && node build/build-fonts.js",
