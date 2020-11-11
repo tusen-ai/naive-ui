@@ -1,4 +1,4 @@
-import { cTB, c, cB, cE, cM, insideFormItem } from '../../../../_utils/cssr'
+import { cTB, c, cB, cE, cM, insideFormItem, createKey } from '../../../../_utils/cssr'
 import {
   depx,
   pxfy
@@ -6,25 +6,25 @@ import {
 import fadeInScaleUpTransition from '../../../../_styles/transitions/fade-in-scale-up'
 import createIconSwitchTransition from '../../../../_styles/transitions/icon-switch'
 
-function styleInsideFormItem (status, pallete) {
+function styleInsideFormItem (status, $local) {
   return insideFormItem(status, cTB('base-suffix', [
     cB('base-suffix-cross', [
       c('&:hover', [
         cE('icon', {
-          fill: pallete.hoverCrossColor
+          fill: $local[createKey('crossColorHover', status)]
         })
       ]),
       c('&:active', [
         cE('icon', {
-          fill: pallete.activeCrossColor
+          fill: $local[createKey('crossColorActive', status)]
         })
       ])
     ]),
     cB('base-suffix-arrow', [
       cM('active', [
         c('&::after', {
-          borderLeftColor: pallete.activeArrowColor,
-          borderBottomColor: pallete.activeArrowColor
+          borderLeftColor: $local[createKey('arrowColorActive', status)],
+          borderBottomColor: $local[createKey('arrowColorActive', status)]
         })
       ])
     ])
@@ -33,19 +33,32 @@ function styleInsideFormItem (status, pallete) {
 
 export default c([
   ({ props }) => {
-    const base = props.$base
+    const {
+      $base: {
+        transformDebounceScale,
+        cubicBezierEaseInOut
+      },
+      $local: {
+        iconSize,
+        crossColor,
+        crossColorHover,
+        crossColorActive,
+        arrowSize,
+        arrowBorderWidth,
+        arrowColor,
+        arrowColorActive,
+        arrowColorDisabled
+      }
+    } = props
     const iconSwitchTransition = createIconSwitchTransition()
-    const transformDebounceScale = base.transformDebounceScale
-    const cubicBezierEaseInOut = base.cubicBezierEaseInOut
-    const local = props.$local
     return [
       cTB('base-suffix', {
         raw: `
           user-select: none;
           display: inline-block;
           position: relative;
-          height: ${local.iconSize};
-          width: ${local.iconSize};
+          height: ${iconSize};
+          width: ${iconSize};
           vertical-align: bottom;
         `
       }, [
@@ -54,8 +67,8 @@ export default c([
           transform: transformDebounceScale,
           raw: `
             position: absolute;
-            height: ${local.iconSize};
-            width: ${local.iconSize};
+            height: ${iconSize};
+            width: ${iconSize};
           `
         }, [
           iconSwitchTransition
@@ -64,9 +77,9 @@ export default c([
           transform: transformDebounceScale,
           raw: `
             position: absolute;
-            height: ${local.iconSize};
-            width: ${local.iconSize};
-            line-height: ${local.iconSize};
+            height: ${iconSize};
+            width: ${iconSize};
+            line-height: ${iconSize};
             border-radius: 8px;
             overflow: hidden;
             cursor: pointer;
@@ -74,17 +87,17 @@ export default c([
         }, [
           iconSwitchTransition,
           cE('icon', {
-            transition: `fill .3s ${base.cubicBezierEaseInOut}`,
-            fill: local.default.crossColor
+            transition: `fill .3s ${cubicBezierEaseInOut}`,
+            fill: crossColor
           }),
           c('&:hover', [
             cE('icon', {
-              fill: local.default.hoverCrossColor
+              fill: crossColorHover
             })
           ]),
           c('&:active', [
             cE('icon', {
-              fill: local.default.activeCrossColor
+              fill: crossColorActive
             })
           ])
         ]),
@@ -92,10 +105,11 @@ export default c([
           transform: transformDebounceScale,
           raw: `
             position: absolute;
-            top: 0;
-            left: 0;
-            width: ${local.iconSize};
-            height: ${local.iconSize};
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            width: ${iconSize};
+            height: ${iconSize};
             border-radius: 8px;
             overflow: hidden;
             cursor: pointer;
@@ -110,35 +124,35 @@ export default c([
               position: absolute;
               content: '';
               box-sizing: border-box;
-              width: ${local.arrowSize};
-              height: ${local.arrowSize};
-              right: ${local.arrowRight};
-              top: calc(50% - ${pxfy(depx(local.arrowSize) / 2 + depx(local.arrowBorderWidth))});
+              width: ${arrowSize};
+              height: ${arrowSize};
+              right: 1px;
+              top: calc(50% - ${pxfy(depx(arrowSize) / 2 + depx(arrowBorderWidth))});
               transform: rotate(-45deg);
               transform-origin: 30% 70%;
             `,
-            borderLeft: `${local.arrowBorderWidth} solid ${local.default.arrowColor}`,
-            borderBottom: `${local.arrowBorderWidth} solid ${local.default.arrowColor}`
+            borderLeft: `${arrowBorderWidth} solid ${arrowColor}`,
+            borderBottom: `${arrowBorderWidth} solid ${arrowColor}`
           }),
           cM('active', [
             c('&::after', {
               transform: 'rotate(135deg)',
-              borderLeft: `${local.arrowBorderWidth} solid ${local.default.activeArrowColor}`,
-              borderBottom: `${local.arrowBorderWidth} solid ${local.default.activeArrowColor}`
+              borderLeft: `${arrowBorderWidth} solid ${arrowColorActive}`,
+              borderBottom: `${arrowBorderWidth} solid ${arrowColorActive}`
             })
           ]),
           cM('disabled', {
             cursor: 'not-allowed'
           }, [
             c('&::after', {
-              borderLeft: `${local.arrowBorderWidth} solid ${local.default.disabledArrowColor}`,
-              borderBottom: `${local.arrowBorderWidth} solid ${local.default.disabledArrowColor}`
+              borderLeft: `${arrowBorderWidth} solid ${arrowColorDisabled}`,
+              borderBottom: `${arrowBorderWidth} solid ${arrowColorDisabled}`
             })
           ])
         ])
       ]),
-      styleInsideFormItem('warning', props.$local.warning),
-      styleInsideFormItem('error', props.$local.error)
+      styleInsideFormItem('warning', props.$local),
+      styleInsideFormItem('error', props.$local)
     ]
   }
 ])

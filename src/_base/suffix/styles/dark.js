@@ -7,33 +7,27 @@ export default create({
   getDerivedVariables ({ base, derived }) {
     return {
       ...commonVariables,
-      default: {
-        crossColor: derived.textColor4Overlay,
-        hoverCrossColor: derived.primaryColorHover,
-        activeCrossColor: derived.primaryColorPressed,
-        arrowColor: derived.textColor4Overlay,
-        hoverArrowColor: derived.primaryColorHover,
-        activeArrowColor: derived.primaryColorHover,
-        disabledArrowColor: derived.textColor5Overlay
-      },
-      warning: {
-        crossColor: derived.warningColor,
-        hoverCrossColor: derived.warningColorHover,
-        activeCrossColor: derived.warningColorPressed,
-        arrowColor: derived.warningColor,
-        hoverArrowColor: derived.warningColorHover,
-        activeArrowColor: derived.warningColorHover,
-        disabledArrowColor: derived.textColor5Overlay
-      },
-      error: {
-        crossColor: derived.errorColor,
-        hoverCrossColor: derived.errorColorHover,
-        activeCrossColor: derived.errorColorPressed,
-        arrowColor: derived.errorColor,
-        hoverArrowColor: derived.errorColorHover,
-        activeArrowColor: derived.errorColorHover,
-        disabledArrowColor: derived.textColor5Overlay
-      }
+      crossColor: derived.textColor4Overlay,
+      hoverCrossColor: derived.primaryColorHover,
+      activeCrossColor: derived.primaryColorPressed,
+      arrowColor: derived.textColor4Overlay,
+      hoverArrowColor: derived.primaryColorHover,
+      activeArrowColor: derived.primaryColorHover,
+      disabledArrowColor: derived.textColor5Overlay,
+      crossColorWarning: derived.warningColor,
+      crossColorHoverWarning: derived.warningColorHover,
+      crossColorActiveWarning: derived.warningColorPressed,
+      arrowColorWarning: derived.warningColor,
+      arrowColorHoverWarning: derived.warningColorHover,
+      arrowColorActiveWarning: derived.warningColorHover,
+      arrowColorDisabledWarning: derived.textColor5Overlay,
+      crossColorError: derived.errorColor,
+      crossColorHoverError: derived.errorColorHover,
+      crossColorActiveError: derived.errorColorPressed,
+      arrowColorError: derived.errorColor,
+      arrowColorHoverError: derived.errorColorHover,
+      arrowColorActiveError: derived.errorColorHover,
+      arrowColorDisabledError: derived.textColor5Overlay
     }
   }
 })
