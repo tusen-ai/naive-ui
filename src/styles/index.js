@@ -45,6 +45,10 @@ export {
   checkboxLight
 } from '../checkbox/styles'
 export {
+  tagDark,
+  tagLight
+} from '../tag/styles'
+export {
   tabsDark,
   tabsLight
 } from '../tabs/styles'
@@ -268,10 +272,6 @@ export {
   inputGroupLabelDark,
   inputGroupLabelLight
 } from '../input-group-label/styles'
-export {
-  tagDark,
-  tagLight
-} from '../tag/styles'
 export {
   affixDark,
   affixLight
