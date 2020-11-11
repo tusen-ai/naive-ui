@@ -10,5 +10,6 @@ export default {
     small: '14px',
     medium: '14px',
     large: '15px'
-  }
+  },
+  paddingSingle: '0 26px 0 14px'
 }

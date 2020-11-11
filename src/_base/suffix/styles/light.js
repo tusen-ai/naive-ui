@@ -1,10 +1,12 @@
 import create from '../../../_styles/utils/create-component-base'
+import commonVariables from './_common'
 
 export default create({
   name: 'BaseSuffix',
   theme: 'light',
   getDerivedVariables ({ base, derived }) {
     return {
+      ...commonVariables,
       default: {
         crossColor: derived.textColor4Overlay,
         hoverCrossColor: derived.primaryColorHover,

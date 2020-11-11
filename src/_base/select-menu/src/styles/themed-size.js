@@ -8,8 +8,11 @@ export default c([
     const optionHeight = props.$local[createKey('optionHeight', size)]
     const groupHeaderFontSize = pxfy(depx(fontSize) - 2)
     const menuHeight = pxfy(depx(optionHeight) * 7.6)
+    const padding = props.$local[createKey('padding', size)]
     return cTB('base-select-menu', [
-      cM(size + '-size', [
+      cM(size + '-size', {
+        padding
+      }, [
         cB('virtual-list', {
           maxHeight: menuHeight
         }),

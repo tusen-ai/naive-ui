@@ -5,7 +5,8 @@ export default c([
     const {
       borderRadius,
       checkable,
-      opacityDisabled
+      opacityDisabled,
+      padding
     } = props.$local
     const {
       textColor: checkableTextColor,
@@ -26,11 +27,13 @@ export default c([
       raw: `
         white-space: nowrap;
         position: relative;
-        padding: 0 7px;
         box-sizing: border-box;
         cursor: default;
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        flex-wrap: nowrap;
       `,
+      padding,
       borderRadius,
       transition: `
         background-color .3s ${cubicBezierEaseInOut},
@@ -51,22 +54,6 @@ export default c([
       }, [
         cE('close', {
           cursor: 'not-allowed !important'
-        })
-      ]),
-      cM('closable', {
-        paddingRight: '18px'
-      }, [
-        cE('close', {
-          raw: `
-            right: 4px;
-            top: 50%;
-            transform: translateY(-50%);
-            height: 12px;
-            width: 12px;
-            line-height: 12px;
-            position: absolute;
-          `,
-          transition: `fill .2s ${cubicBezierEaseInOut}`
         })
       ]),
       cM('checkable', {

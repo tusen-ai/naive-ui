@@ -5,11 +5,14 @@ export default c([
     const local = props.$local
     const size = props.$instance.mergedSize
     const height = local[createKey('height', size)]
+    const width = local[createKey('width', size)]
     const fontSize = local[createKey('fontSize', size)]
-    const width = local[createKey('buttonWidth', size)]
+    const buttonIconSize = local[createKey('buttonIconSize', size)]
+    const buttonWidth = local[createKey('buttonWidth', size)]
     return cTB('input-number', [
       cM(size + '-size', {
         height,
+        width,
         lineHeight: height
       }, [
         cE('button, input', {
@@ -17,11 +20,12 @@ export default c([
           lineHeight: height
         }),
         cE('button', {
-          width
+          width: buttonWidth,
+          fontSize: buttonIconSize
         }),
         cE('input', {
-          fontSize,
-          padding: `0 ${width}`
+          padding: `0 ${buttonWidth}`,
+          fontSize
         })
       ])
     ])

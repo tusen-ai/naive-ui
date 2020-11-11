@@ -15,13 +15,13 @@
     @click="handleClick"
   >
     <slot />
-    <div
+    <n-icon
       v-if="!checkable && closable"
       class="n-tag__close"
       @click="handleCloseClick"
     >
       <close-icon />
-    </div>
+    </n-icon>
   </div>
 </template>
 
@@ -32,6 +32,7 @@ import {
   withCssr
 } from '../../_mixins'
 import { CloseIcon } from '../../_base/icons'
+import NIcon from '../../icon'
 import { warn } from '../../_utils'
 import commonProps from './common-props'
 import styles from './styles'
@@ -39,7 +40,8 @@ import styles from './styles'
 export default {
   name: 'Tag',
   components: {
-    CloseIcon
+    CloseIcon,
+    NIcon
   },
   mixins: [
     configurable,

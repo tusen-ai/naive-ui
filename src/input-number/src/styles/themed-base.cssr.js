@@ -32,7 +32,6 @@ export default c([
       raw: `
         position: relative;
         box-sizing: border-box;
-        width: 152px;
         display: inline-block;
         outline: none;
         z-index: auto;
@@ -47,7 +46,7 @@ export default c([
           right: 0;
           bottom: 0;
           left: 0;
-          box-shadow: inset 0 0 0px 1px transparent;
+          box-shadow: inset 0 0 0 1px transparent;
           border-radius: ${borderRadius};
           transition: box-shadow .3s ${cubicBezierEaseInOut};
           pointer-events: none;
@@ -138,7 +137,6 @@ export default c([
           top: 0;
           padding: 0;
           border: none;
-          font-size: 14px;
         `
       }, [
         cB('input-number-button-border-mask', {

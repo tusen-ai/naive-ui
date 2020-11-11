@@ -124,7 +124,7 @@ export default c([
             border:none;
             width: 100%;
             white-space: nowrap;
-            padding: 0 26px 0 14px;
+            padding: ${local.paddingSingle};
             background-color: transparent;
           `,
           color: pallete.textColor,

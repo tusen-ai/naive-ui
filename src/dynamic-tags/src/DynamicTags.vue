@@ -27,6 +27,7 @@
     />
     <n-button
       v-else
+      dashed
       :theme="theme"
       :size="inputSize"
       @click="handleAddClick"

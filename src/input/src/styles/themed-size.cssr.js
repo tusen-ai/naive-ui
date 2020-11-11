@@ -9,6 +9,11 @@ export default c([
     const lineHeight = pxfy(Math.round(depx(fontSize) * 1.5))
     const paddingTop = pxfy((depx(height) - depx(lineHeight)) / 2)
     const roundBorderRadius = pxfy(depx(height) / 2)
+    const {
+      paddingLeft,
+      paddingRight,
+      paddingIcon
+    } = props.$local
     return cTB('input', [
       cM(size + '-size', {
         lineHeight: lineHeight,
@@ -18,26 +23,26 @@ export default c([
           height
         }),
         cE('input, textarea, textarea-mirror, splitor, placeholder', {
-          paddingLeft: '14px',
-          paddingRight: '14px',
+          paddingLeft,
+          paddingRight,
           lineHeight,
           fontSize,
           paddingTop: paddingTop,
           paddingBottom: paddingTop
         }),
         cE('placeholder', {
-          left: '14px',
-          right: '14px'
+          left: paddingLeft,
+          right: paddingRight
         }),
         cM('suffix, clearable', [
           cM('split', [
             cE('input', [
               cM('second', {
-                paddingRight: '38px !important'
+                paddingRight: `${paddingIcon} !important`
               }, [
                 c('& +', [
                   cE('placeholder', {
-                    right: '38px !important'
+                    right: `${paddingIcon} !important`
                   })
                 ])
               ])
@@ -46,18 +51,18 @@ export default c([
           cNotM('split', [
             cE('input', [
               cM('first', {
-                paddingRight: '38px !important'
+                paddingRight: `${paddingIcon} !important`
               })
             ]),
             cE('placeholder', {
-              right: '38px !important'
+              right: `${paddingIcon} !important`
             })
           ])
         ]),
         cM('prefix', [
           cNotM('split', [
             cE('placeholder', {
-              left: '38px !important'
+              left: `${paddingIcon} !important`
             })
           ]),
           cM('split', [
@@ -65,7 +70,7 @@ export default c([
               cM('first', [
                 c('& +', [
                   cE('placeholder', {
-                    left: '38px !important'
+                    left: `${paddingIcon} !important`
                   })
                 ])
               ])
@@ -73,7 +78,7 @@ export default c([
           ]),
           cE('input', [
             cM('first', {
-              paddingLeft: '38px !important'
+              paddingLeft: `${paddingIcon} !important`
             })
           ])
         ]),
@@ -85,12 +90,12 @@ export default c([
             borderRadius: roundBorderRadius
           }, [
             cE('input', {
-              paddingLeft: roundBorderRadius,
-              paddingRight: roundBorderRadius
+              paddingLeft: paddingLeft,
+              paddingRight: paddingRight
             }),
             cE('placeholder', {
-              left: roundBorderRadius,
-              right: roundBorderRadius
+              left: paddingLeft,
+              right: paddingRight
             }),
             cE('border-mask', {
               borderRadius: roundBorderRadius
