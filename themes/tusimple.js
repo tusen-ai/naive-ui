@@ -1,7 +1,7 @@
 // Unstable!
 // Draft Code!
 // Variable Names Will Be Refactored!
-import { composite, read } from '../src/_utils/color'
+import { composite } from '../src/_utils/color'
 import { cB, cE, c } from '../src/_utils/cssr'
 
 const unconfigurableStyle = c([
@@ -20,7 +20,6 @@ const unconfigurableStyle = c([
 ])
 
 function tusimpleTheme (naive) {
-  naive.avoidHollowOut = true
   unconfigurableStyle.mount({
     target: 'naive-ui/tusimple-theme',
     count: false
@@ -131,10 +130,7 @@ function tusimpleTheme (naive) {
     iconSize: '24px',
     arrowSize: '13px',
     arrowBorderWidth: '2px',
-    arrowRight: '2px',
-    default: {
-      crossColor: derived.clearIconColor
-    }
+    crossColor: derived.clearIconColor
   })
   naive.styles.light.Input.override({
     heightMedium: '32px',
@@ -169,9 +165,6 @@ function tusimpleTheme (naive) {
     buttonFontSizeMedium: '24px',
     buttonFontSizeLarge: '24px'
   })
-  naive.styles.light.BaseTrackingRect.override({
-    rectColor: `rgba( ${read(derived.primaryColor).slice(0, 3).join(', ')}, .1) `
-  })
   naive.styles.light.BaseSelectMenu.override({
     boxShadow: base.boxShadow2,
     paddingSmall: '4px 0',
@@ -180,66 +173,35 @@ function tusimpleTheme (naive) {
     paddingHuge: '8px 0'
   })
   naive.styles.light.BaseSelection.override({
-    height: {
-      medium: '32px'
-    },
-    fontSize: {
-      medium: '16px'
-    },
+    heightMedium: '32px',
+    fontSizeMedium: '16px',
     paddingSingle: '0 36px 0 12px',
-    default: {
-      boxShadow: 'none',
-      disabledBoxShadow: 'none'
-    }
+    borderColor: 'transparent'
   })
   naive.styles.light.Tag.override({
     borderRadius: '16px',
-    default: {
-      borderColor: 'none',
-      color: 'rgba(153,153,153,0.10)',
-      closeColor: derived.closeColorOverlay,
-      closeColorHover: derived.closeColorOverlay,
-      closeColorActive: derived.closeColorOverlay
-    },
-    primary: {
-      borderColor: 'none',
-      closeColor: derived.closeColorOverlay,
-      closeColorHover: derived.closeColorOverlay,
-      closeColorActive: derived.closeColorOverlay
-    },
-    info: {
-      borderColor: 'none'
-    },
-    success: {
-      borderColor: 'none'
-    },
-    warning: {
-      borderColor: 'none'
-    },
-    error: {
-      borderColor: 'none'
-    },
-    paddingLeft: '12px',
-    paddingRight: '12px',
-    closeMarginLeft: '8px',
-    height: {
-      medium: '24px'
-    },
-    closeSizeSmall: '24px',
-    closeSizeMedium: '24px',
-    closeSizeLarge: '24px',
-    fontSize: {
-      small: '12px',
-      medium: '16px',
-      large: '16px'
-    },
-    closeBackgroundColor: 'transparent',
-    closeBackgroundColorHover: composite('#D7DAE0', 'rgba(255, 255, 255, .5)'),
-    closeBackgroundColorActive: composite('#D7DAE0', 'rgba(255, 255, 255, .25)')
-  })
-  naive.styles.light.DynamicTags.override({
-    addHeight: '24px',
-    addBorderStyle: 'dashed'
+    borderColor: 'transparent',
+    color: 'rgba(153,153,153,0.10)',
+    closeColor: derived.closeColorOverlay,
+    closeColorHover: derived.closeColorOverlay,
+    closeColorActive: derived.closeColorOverlay,
+    borderColorPrimary: 'transparent',
+    closeColorPrimary: derived.closeColorOverlay,
+    closeColorHoverPrimary: derived.closeColorOverlay,
+    closeColorActivePrimary: derived.closeColorOverlay,
+    borderColorInfo: 'transparent',
+    borderColorSuccess: 'transparent',
+    borderColorWarning: 'transparent',
+    borderColorError: 'transparent',
+    padding: '0 12px',
+    closeMargin: '0 0 0 8px',
+    heightMedium: '24px',
+    closeSizeSmall: '20px',
+    closeSizeMedium: '20px',
+    closeSizeLarge: '20px',
+    fontSizeSmall: '12px',
+    fontSizeMedium: '16px',
+    fontSizeLarge: '16px'
   })
 }
 

@@ -46,11 +46,19 @@ module.exports = {
     {
       apply: 'pre',
       transform ({ code }) {
+        const isTusimple = !!process.env.TUSIMPLE
+        console.log('/demo/index.' + isTusimple ? 'ts-dev.js' : 'dev.js')
         switch (process.env.NODE_ENV) {
           case 'production':
-            return code.replace(/__INDEX__/, '/demo/index.prod.js')
+            return code.replace(
+              /__INDEX__/,
+              '/demo/index.' + (isTusimple ? 'ts-prod.js' : 'prod.js')
+            )
           default:
-            return code.replace(/__INDEX__/, '/demo/index.dev.js')
+            return code.replace(
+              /__INDEX__/,
+              '/demo/index.' + (isTusimple ? 'ts-dev.js' : 'dev.js')
+            )
         }
       }
     }
