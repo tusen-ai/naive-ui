@@ -323,6 +323,9 @@
   - [x] use-global-style ? 感觉效果不会特别好而且还是很无谓的性能开销
     这个问题可以之后再思考，现阶段 vue 的写法还是全局 install
   - [x] dynamic-input, no value
+  - [ ] button, input 的变量名需要修改一下
+  - [x] test rollup treeshaking
+  - [x] test webpack treeshaking
 
 ## Info
 https://github.com/vuejs/vue-next/issues/2549
