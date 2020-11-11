@@ -2,7 +2,7 @@ import create from '../../create'
 import { paginationLight } from '../styles'
 import { mount } from '@vue/test-utils'
 import Pagination from '../index'
-import enUS from '../../locale/enUS'
+import enUS from '../../locales/enUS'
 
 describe('n-pagination', () => {
   const naive = create({
