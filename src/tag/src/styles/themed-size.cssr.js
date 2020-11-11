@@ -3,10 +3,15 @@ import { depx, pxfy } from '../../../_utils/css'
 
 export default c([
   ({ props }) => {
-    const { size } = props.$instance
-    const height = props.$local.height[size]
-    const fontSize = props.$local.fontSize[size]
-    const closeSize = props.$local[createKey('closeSize', size)]
+    const {
+      $instance: {
+        size
+      },
+      $local
+    } = props
+    const height = $local[createKey('height', size)]
+    const fontSize = $local[createKey('fontSize', size)]
+    const closeSize = $local[createKey('closeSize', size)]
     const numericHalfHeight = depx(height) / 2
     const halfHeight = pxfy(numericHalfHeight)
     return cTB('tag', [
@@ -20,7 +25,7 @@ export default c([
         }),
         cM('round', {
           padding: `0 ${halfHeight}`,
-          borderRadius: halfHeight
+          borderRadius: '9999px'
         })
       ])
     ])

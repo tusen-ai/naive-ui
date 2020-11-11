@@ -3,23 +3,21 @@ import { c, cE, cM, cTB, cNotM } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
+      closeMargin,
       borderRadius,
-      checkable,
       opacityDisabled,
-      padding
-    } = props.$local
-    const {
-      textColor: checkableTextColor,
-      textColorHover: checkableHoverTextColor,
-      textColorActive: checkableActiveTextColor,
-      color: checkableBackgroundColor,
-      colorHover: checkableHoverBackgroundColor,
-      colorActive: checkableActiveBackgroundColor,
+      padding,
+      textColorCheckable,
+      textColorHoverCheckable,
+      textColorPressedCheckable,
       textColorChecked,
+      colorCheckable,
+      colorHoverCheckable,
+      colorPressedCheckable,
       colorChecked,
       colorCheckedHover,
-      colorCheckedActive
-    } = checkable
+      colorCheckedPressed
+    } = props.$local
     const {
       cubicBezierEaseInOut
     } = props.$base
@@ -43,6 +41,7 @@ export default c([
       `
     }, [
       cE('close', {
+        margin: closeMargin,
         cursor: 'pointer'
       }),
       cM('checkable', {
@@ -58,22 +57,22 @@ export default c([
       ]),
       cM('checkable', {
         boxShadow: 'none',
-        color: checkableTextColor,
-        backgroundColor: checkableBackgroundColor
+        color: textColorCheckable,
+        backgroundColor: colorCheckable
       }, [
         cNotM('disabled', [
           c('&:hover', {
-            backgroundColor: checkableHoverBackgroundColor
+            backgroundColor: colorHoverCheckable
           }, [
             cNotM('checked', {
-              color: checkableHoverTextColor
+              color: textColorHoverCheckable
             })
           ]),
           c('&:active', {
-            backgroundColor: checkableActiveBackgroundColor
+            backgroundColor: colorPressedCheckable
           }, [
             cNotM('checked', {
-              color: checkableActiveTextColor
+              color: textColorPressedCheckable
             })
           ])
         ]),
@@ -86,7 +85,7 @@ export default c([
               backgroundColor: colorCheckedHover
             }),
             c('&:active', {
-              backgroundColor: colorCheckedActive
+              backgroundColor: colorCheckedPressed
             })
           ])
         ])

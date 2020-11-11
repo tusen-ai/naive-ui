@@ -1,10 +1,14 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
 import { changeColor } from '../../_utils/color'
+import { iconDark } from '../../styles'
 
 export default create({
   theme: 'dark',
   name: 'Tag',
+  peer: [
+    iconDark
+  ],
   getDerivedVariables ({ base, derived }) {
     const {
       textColor2Overlay,
@@ -29,66 +33,54 @@ export default create({
       ...commonVariables,
       borderRadius,
       opacityDisabled,
-      checkable: {
-        textColor: textColor2Overlay,
-        textColorHover: primaryColorHover,
-        textColorActive: primaryColorPressed,
-        textColorChecked: baseColor,
-        color: 'transparent',
-        colorHover: 'transparent',
-        colorActive: 'transparent',
-        colorChecked: primaryColor,
-        colorCheckedHover: primaryColorHover,
-        colorCheckedActive: primaryColorPressed
-      },
-      default: {
-        borderColor: borderColorOverlay,
-        textColor: textColor2Overlay,
-        color: 'transparent',
-        closeColor: closeColorOverlay,
-        closeColorHover: colorColorHoverOverlay,
-        closeColorActive: closeColorPressedOverlay
-      },
-      primary: {
-        borderColor: changeColor(primaryColor, { alpha: 0.3 }),
-        textColor: primaryColor,
-        color: 'transparent',
-        closeColor: changeColor(primaryColor, { alpha: 0.7 }),
-        closeColorHover: changeColor(primaryColor, { alpha: 0.85 }),
-        closeColorActive: changeColor(primaryColor, { alpha: 0.57 })
-      },
-      info: {
-        borderColor: changeColor(infoColor, { alpha: 0.3 }),
-        textColor: infoColor,
-        color: 'transparent',
-        closeColor: changeColor(infoColor, { alpha: 0.7 }),
-        closeColorHover: changeColor(infoColor, { alpha: 0.85 }),
-        closeColorActive: changeColor(infoColor, { alpha: 0.57 })
-      },
-      success: {
-        borderColor: changeColor(successColor, { alpha: 0.3 }),
-        textColor: successColor,
-        color: 'transparent',
-        closeColor: changeColor(successColor, { alpha: 0.7 }),
-        closeColorHover: changeColor(successColor, { alpha: 0.85 }),
-        closeColorActive: changeColor(successColor, { alpha: 0.57 })
-      },
-      warning: {
-        borderColor: changeColor(warningColor, { alpha: 0.3 }),
-        textColor: warningColor,
-        color: 'transparent',
-        closeColor: changeColor(warningColor, { alpha: 0.7 }),
-        closeColorHover: changeColor(warningColor, { alpha: 0.85 }),
-        closeColorActive: changeColor(warningColor, { alpha: 0.57 })
-      },
-      error: {
-        borderColor: changeColor(errorColor, { alpha: 0.3 }),
-        textColor: errorColor,
-        color: 'transparent',
-        closeColor: changeColor(errorColor, { alpha: 0.7 }),
-        closeColorHover: changeColor(errorColor, { alpha: 0.85 }),
-        closeColorActive: changeColor(errorColor, { alpha: 0.57 })
-      }
+      // checked
+      textColorCheckable: textColor2Overlay,
+      textColorHoverCheckable: primaryColorHover,
+      textColorPressedCheckable: primaryColorPressed,
+      textColorChecked: baseColor,
+      colorCheckable: 'transparent',
+      colorHoverCheckable: 'transparent',
+      colorPressedCheckable: 'transparent',
+      colorChecked: primaryColor,
+      colorCheckedHover: primaryColorHover,
+      colorCheckedPressed: primaryColorPressed,
+      // default
+      borderColor: borderColorOverlay,
+      textColor: textColor2Overlay,
+      color: 'transparent',
+      closeColor: closeColorOverlay,
+      closeColorHover: colorColorHoverOverlay,
+      closeColorPressed: closeColorPressedOverlay,
+      borderColorPrimary: changeColor(primaryColor, { alpha: 0.3 }),
+      textColorPrimary: primaryColor,
+      colorPrimary: 'transparent',
+      closeColorPrimary: changeColor(primaryColor, { alpha: 0.7 }),
+      closeColorHoverPrimary: changeColor(primaryColor, { alpha: 0.85 }),
+      closeColorPressedPrimary: changeColor(primaryColor, { alpha: 0.57 }),
+      borderColorInfo: changeColor(infoColor, { alpha: 0.3 }),
+      textColorInfo: infoColor,
+      colorInfo: 'transparent',
+      closeColorInfo: changeColor(infoColor, { alpha: 0.7 }),
+      closeColorHoverInfo: changeColor(infoColor, { alpha: 0.85 }),
+      closeColorPressedInfo: changeColor(infoColor, { alpha: 0.57 }),
+      borderColorSuccess: changeColor(successColor, { alpha: 0.3 }),
+      textColorSuccess: successColor,
+      colorSuccess: 'transparent',
+      closeColorSuccess: changeColor(successColor, { alpha: 0.7 }),
+      closeColorHoverSuccess: changeColor(successColor, { alpha: 0.85 }),
+      closeColorPressedSuccess: changeColor(successColor, { alpha: 0.57 }),
+      borderColorWarning: changeColor(warningColor, { alpha: 0.3 }),
+      textColorWarning: warningColor,
+      colorWarning: 'transparent',
+      closeColorWarning: changeColor(warningColor, { alpha: 0.7 }),
+      closeColorHoverWarning: changeColor(warningColor, { alpha: 0.85 }),
+      closeColorPressedWarning: changeColor(warningColor, { alpha: 0.57 }),
+      borderColorError: changeColor(errorColor, { alpha: 0.3 }),
+      textColorError: errorColor,
+      colorError: 'transparent',
+      closeColorError: changeColor(errorColor, { alpha: 0.7 }),
+      closeColorHoverError: changeColor(errorColor, { alpha: 0.85 }),
+      closeColorPressedError: changeColor(errorColor, { alpha: 0.57 })
     }
   }
 })

@@ -1,34 +1,30 @@
-import { c, cE, cM, cTB, cNotM } from '../../../_utils/cssr'
+import { c, cE, cM, cTB, cNotM, createKey } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
-    const type = props.$instance.type
-    const pallete = props.$local[type]
     const {
-      borderColor,
-      textColor,
-      color,
-      closeColor,
-      closeColorHover,
-      closeColorActive
-    } = pallete
+      $instance: {
+        type
+      },
+      $local
+    } = props
     return cTB('tag', [
       cNotM('checkable', [
         cM(`${type}-type`, {
-          boxShadow: `inset 0 0 0 1px ${borderColor}`,
-          color: textColor,
-          backgroundColor: color
+          boxShadow: `inset 0 0 0 1px ${$local[createKey('borderColor', type)]}`,
+          color: $local[createKey('textColor', type)],
+          backgroundColor: $local[createKey('color', type)]
         }, [
           cE('close', {
-            fill: closeColor
+            color: $local[createKey('closeColor', type)]
           }),
           cNotM('disabled', [
             cE('close', [
               c('&:hover', {
-                fill: closeColorHover
+                color: $local[createKey('closeColorHover', type)]
               }),
               c('&:active', {
-                fill: closeColorActive
+                color: $local[createKey('closeColorPressed', type)]
               })
             ])
           ])

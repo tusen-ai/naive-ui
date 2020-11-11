@@ -1,11 +1,13 @@
-import tagLightStyle from '../../tag/styles/light'
-import create from '../../styles/_utils/create-component-base'
+import create from '../../_styles/utils/create-component-base'
+import {
+  tagLight
+} from '../../styles'
 
 export default create({
   name: 'DynamicTags',
   theme: 'light',
   peer: [
-    tagLightStyle
+    tagLight
   ],
   getDerivedVariables ({ base, derived }) {
     return {}
