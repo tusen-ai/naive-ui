@@ -1,13 +1,27 @@
-import { cTB, c, cB, cE, cM, cNotM, insideFormItem } from '../../../../_utils/cssr'
+import { cTB, c, cB, cE, cM, cNotM, createKey, insideFormItem } from '../../../../_utils/cssr'
 
-// TODO split form-item styles out
 export default c([
   ({ props }) => {
-    const local = props.$local
-    const pallete = local.default
-    const base = props.$base
-    const cubicBezierEaseInOut = base.cubicBezierEaseInOut
-    const borderRadius = local.borderRadius
+    const { $local } = props
+    const {
+      borderRadius,
+      color,
+      placeholderColor,
+      borderColor,
+      textColor,
+      paddingSingle,
+      boxShadowFocus,
+      boxShadowActive,
+      boxShadowHover,
+      colorActive,
+      caretColor,
+      colorDisabled,
+      textColorDisabled,
+      placeholderColorDisabled
+    } = $local
+    const {
+      cubicBezierEaseInOut
+    } = props.$base
     return cTB('base-selection', {
       raw: `
         position: relative;
@@ -18,7 +32,7 @@ export default c([
         display: inline-block;
         vertical-align: bottom;
       `,
-      borderRadius: borderRadius
+      borderRadius
     }, [
       cB('base-selection-border-mask', {
         raw: `
@@ -30,8 +44,8 @@ export default c([
           pointer-events: none;
           z-index: 1;
         `,
-        boxShadow: pallete.borderMaskBoxShadow,
-        borderRadius: borderRadius,
+        boxShadow: 'inset 0 0 0 1px transparent',
+        borderRadius,
         transition: `box-shadow .3s ${cubicBezierEaseInOut}`
       }),
       cE('mark', {
@@ -57,7 +71,7 @@ export default c([
           opacity: 1;
         `,
         transition: `color .3s ${cubicBezierEaseInOut}`,
-        color: pallete.placeholderColor
+        color: placeholderColor
       }),
       cB('base-selection-tags', {
         raw: `
@@ -73,9 +87,9 @@ export default c([
           width: 100%;
           vertical-align: bottom;
         `,
-        backgroundColor: pallete.backgroundColor,
-        borderRadius: borderRadius,
-        boxShadow: pallete.boxShadow,
+        backgroundColor: color,
+        borderRadius,
+        boxShadow: `inset 0 0 0 1px ${borderColor}`,
         transition: `
           color .3s ${cubicBezierEaseInOut},
           box-shadow .3s ${cubicBezierEaseInOut},
@@ -110,8 +124,8 @@ export default c([
           background-color .3s ${cubicBezierEaseInOut}
         `,
         borderRadius: borderRadius,
-        boxShadow: pallete.boxShadow,
-        backgroundColor: pallete.backgroundColor
+        boxShadow: `inset 0 0 0 1px ${borderColor}`,
+        backgroundColor: color
       }, [
         cE('input', {
           raw: `
@@ -124,10 +138,10 @@ export default c([
             border:none;
             width: 100%;
             white-space: nowrap;
-            padding: ${local.paddingSingle};
+            padding: ${paddingSingle};
             background-color: transparent;
           `,
-          color: pallete.textColor,
+          color: textColor,
           transition: `color .3s ${cubicBezierEaseInOut}`
         }),
         cE('placeholder', {
@@ -141,25 +155,25 @@ export default c([
           top: 0,
           bottom: 0,
           padding: '0 26px 0 14px',
-          color: pallete.placeholderColor,
+          color: placeholderColor,
           transition: `color .3s ${cubicBezierEaseInOut}`
         })
       ]),
       cNotM('disabled', [
         cM('focus', [
           cB('base-selection-border-mask', {
-            boxShadow: pallete.focusBoxShadowBorderMask
+            boxShadow: boxShadowFocus
           })
         ]),
         cM('active', [
           cB('base-selection-border-mask', {
-            boxShadow: pallete.activeBorderMaskBoxShadow
+            boxShadow: boxShadowActive
           }),
           cB('base-selection-label', {
-            backgroundColor: pallete.activeBackgroundColor
+            backgroundColor: colorActive
           }),
           cB('base-selection-tags', {
-            backgroundColor: pallete.activeBackgroundColor
+            backgroundColor: colorActive
           }),
           cB('base-selection-input-tag', {
             display: 'inline-block'
@@ -169,24 +183,24 @@ export default c([
           cB('base-selection-label', [
             c('&:focus ~', [
               cB('base-selection-border-mask', {
-                boxShadow: pallete.focusBorderMaskBoxShadow
+                boxShadow: boxShadowFocus
               })
             ]),
             c('&:hover ~', [
               cB('base-selection-border-mask', {
-                boxShadow: pallete.hoverBorderMaskBoxShadow
+                boxShadow: boxShadowHover
               })
             ])
           ]),
           cB('base-selection-tags', [
             c('&:focus ~', [
               cB('base-selection-border-mask', {
-                boxShadow: pallete.focusBorderMaskBoxShadow
+                boxShadow: boxShadowFocus
               })
             ]),
             c('&:hover ~', [
               cB('base-selection-border-mask', {
-                boxShadow: pallete.hoverBorderMaskBoxShadow
+                boxShadow: boxShadowHover
               })
             ])
           ])
@@ -197,29 +211,27 @@ export default c([
       }, [
         cB('base-selection-label', {
           cursor: 'not-allowed',
-          backgroundColor: pallete.disabledBackgroundColor,
-          boxShadow: pallete.disabledBoxShadow
+          backgroundColor: colorDisabled
         }, [
           cE('input', {
             cursor: 'not-allowed',
-            color: pallete.textColorDisabled
+            color: textColorDisabled
           }, [
             cM('placeholder', {
-              color: pallete.placeholderColorDisabled
+              color: placeholderColorDisabled
             }),
             c('&::placeholder', {
-              color: pallete.placeholderColorDisabled
+              color: placeholderColorDisabled
             })
           ])
         ]),
         cB('base-selection-tags', {
           cursor: 'now-allowed',
-          boxShadow: pallete.disabledBoxShadow,
-          backgroundColor: pallete.disabledBackgroundColor
+          backgroundColor: colorDisabled
         }),
         cE('placeholder', {
           cursor: 'not-allowed',
-          color: pallete.placeholderColorDisabled
+          color: placeholderColorDisabled
         })
       ]),
       cB('base-selection-input-tag', {
@@ -244,8 +256,8 @@ export default c([
             line-height: inherit;
             cursor: pointer;
           `,
-          color: pallete.textColor,
-          caretColor: pallete.caretColor
+          color: textColor,
+          caretColor
         }),
         cE('mirror', {
           raw: `
@@ -263,56 +275,56 @@ export default c([
     ])
   },
   ({ props }) => {
+    const { $local } = props
     return [
       'warning',
       'error'
     ].map(status => {
-      const pallete = props.$local[status]
       return insideFormItem(status, cTB('base-selection', [
         [
           cB('base-selection-border-mask', {
-            boxShadow: pallete.borderMaskBoxShadow
+            boxShadow: `inset 0 0 0 1px ${$local[createKey('borderColor', status)]}`
           }),
           cNotM('disabled', [
             cM('active', [
               cB('base-selection-border-mask', {
-                boxShadow: pallete.activeBorderMaskBoxShadow
+                boxShadow: $local[createKey('boxShadowActive', status)]
               }),
               cB('base-selection-label', {
-                backgroundColor: pallete.activeBackgroundColor
+                backgroundColor: $local[createKey('colorActive', status)]
               }),
               cB('base-selection-tags', {
-                backgroundColor: pallete.activeBackgroundColor
+                backgroundColor: $local[createKey('boxShadowActive', status)]
               })
             ]),
             cNotM('active', [
               cB('base-selection-label', [
                 c('&:hover ~', [
                   cB('base-selection-border-mask', {
-                    boxShadow: pallete.hoverBorderMaskBoxShadow
+                    boxShadow: $local[createKey('boxShadowHover', status)]
                   })
                 ]),
                 c('&:focus ~', [
                   cB('base-selection-border-mask', {
-                    boxShadow: pallete.focusBorderMaskBoxShadow
+                    boxShadow: $local[createKey('boxShadowFocus', status)]
                   })
                 ])
               ]),
               cB('base-selection-tags', [
                 c('&:hover ~', [
                   cB('base-selection-border-mask', {
-                    boxShadow: pallete.hoverBorderMaskBoxShadow
+                    boxShadow: $local[createKey('boxShadowHover', status)]
                   })
                 ]),
                 c('&:focus ~', [
                   cB('base-selection-border-mask', {
-                    boxShadow: pallete.focusBorderMaskBoxShadow
+                    boxShadow: $local[createKey('boxShadowFocus', status)]
                   })
                 ])
               ]),
               cM('focus', [
                 cB('base-selection-border-mask', {
-                  boxShadow: pallete.focusBorderMaskBoxShadow
+                  boxShadow: $local[createKey('boxShadowFocus', status)]
                 })
               ])
             ])

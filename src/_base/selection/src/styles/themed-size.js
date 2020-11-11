@@ -1,11 +1,16 @@
-import { cTB, c, cB, cE, cM } from '../../../../_utils/cssr'
+import { cTB, c, cB, cE, cM, createKey } from '../../../../_utils/cssr'
 import { formatLength } from '../../../../_utils'
 
 export default c([
   ({ props }) => {
-    const size = props.$instance.size
-    const height = props.$local.height[size]
-    const fontSize = props.$local.fontSize[size]
+    const {
+      $instance: {
+        size
+      },
+      $local
+    } = props
+    const height = $local[createKey('height', size)]
+    const fontSize = $local[createKey('fontSize', size)]
     return cTB('base-selection', [
       cM(size + '-size', {
         minHeight: height,
