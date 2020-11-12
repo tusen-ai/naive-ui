@@ -18,6 +18,10 @@ export default {
       ...NPopover.props.trigger,
       default: 'hover'
     },
+    showArrow: {
+      ...NPopover.props.showArrow,
+      default: false
+    },
     ...NPopselectPanel.props
   },
   methods: {

@@ -2,7 +2,7 @@
   <n-base-select-menu
     :theme="mergedTheme"
     :multiple="multiple"
-    :options="options"
+    :tree-mate="treeMate"
     :size="size"
     :value="value"
     :width="width"
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { createTreeMate } from 'treemate'
 import { NBaseSelectMenu } from '../../_base'
 import {
   configurable,
@@ -20,8 +21,7 @@ import {
   withCssr
 } from '../../_mixins'
 import styles from './styles'
-import { call } from '../../_utils/vue'
-import { warn } from '../../_utils/naive'
+import { call, warn } from '../../_utils'
 
 export default {
   components: {
@@ -79,6 +79,15 @@ export default {
         return true
       },
       default: undefined
+    }
+  },
+  computed: {
+    treeMate () {
+      return createTreeMate(this.options, {
+        getKey (node) {
+          return node.value
+        }
+      })
     }
   },
   watch: {
