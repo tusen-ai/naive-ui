@@ -13,6 +13,9 @@ export default c([
       cM(size + '-size', {
         padding
       }, [
+        cB('scrollbar', {
+          maxHeight: menuHeight
+        }),
         cB('virtual-list', {
           maxHeight: menuHeight
         }),
