@@ -1,4 +1,5 @@
 const vuePlugin = require('rollup-plugin-vue')
+const cssRenderPlugin = require('./build/rollup-plugin-css-render')
 const { nodeResolve } = require('@rollup/plugin-node-resolve')
 const { terser } = require('rollup-plugin-terser')
 const replace = require('@rollup/plugin-replace')
@@ -29,6 +30,7 @@ module.exports = {
     nodeResolve({
       extensions: ['.js', '.json', '.vue']
     }),
+    cssRenderPlugin(),
     vuePlugin(),
     terser({
       mangle: false,

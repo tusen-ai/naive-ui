@@ -1,5 +1,5 @@
 const marked = require('marked')
-const createRenderer = require('./mdRenderer')
+const createRenderer = require('./md-renderer')
 const renderer = createRenderer()
 const projectPath = require('./project-path')
 

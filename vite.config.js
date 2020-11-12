@@ -1,12 +1,15 @@
 const path = require('path')
 const alias = require('@rollup/plugin-alias')
-
-const { viteMdPlugin, rollupMdPlugin } = require('./demo/vite-plugins/mdPlugin')
+const rollupCssRenderPlugin = require('./build/rollup-plugin-css-render')
+const rollupDemoPlugin = require('./build/rollup-plugin-demo')
+const viteCssRenderPlugin = require('./build/vite-plugin-css-render')
+const viteDemoPlugin = require('./build/vite-plugin-demo')
 
 module.exports = {
   root: __dirname,
   plugins: [
-    viteMdPlugin()
+    viteDemoPlugin(),
+    viteCssRenderPlugin()
   ],
   outDir: 'site',
   optimizeDeps: {
@@ -39,7 +42,8 @@ module.exports = {
           }
         ]
       }),
-      rollupMdPlugin()
+      rollupDemoPlugin(),
+      rollupCssRenderPlugin()
     ]
   },
   indexHtmlTransforms: [
@@ -47,7 +51,6 @@ module.exports = {
       apply: 'pre',
       transform ({ code }) {
         const isTusimple = !!process.env.TUSIMPLE
-        console.log('/demo/index.' + isTusimple ? 'ts-dev.js' : 'dev.js')
         switch (process.env.NODE_ENV) {
           case 'production':
             return code.replace(

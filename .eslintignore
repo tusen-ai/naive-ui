@@ -3,3 +3,4 @@ lib
 test/unit/coverage
 src/_deprecated/icons
 dist
+es

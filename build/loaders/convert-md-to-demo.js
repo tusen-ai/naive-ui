@@ -1,7 +1,7 @@
 const marked = require('marked')
 const fs = require('fs')
 const path = require('path')
-const createRenderer = require('./mdRenderer')
+const createRenderer = require('./md-renderer')
 const mdRenderer = createRenderer()
 const codeRenderer = createRenderer(false)
 // const prettier = require('prettier')

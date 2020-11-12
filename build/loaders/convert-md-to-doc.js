@@ -1,7 +1,7 @@
 const marked = require('marked')
 const camelCase = require('lodash/camelCase')
-const mdLoader = require('./NaiveUIMdLoader')
-const createRenderer = require('./mdRenderer')
+const mdLoader = require('./naive-ui-md-loader')
+const createRenderer = require('./md-renderer')
 const mdRenderer = createRenderer()
 
 function template (demos, demosLiteral, isSingleColumn = false) {

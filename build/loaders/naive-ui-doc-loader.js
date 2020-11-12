@@ -1,4 +1,4 @@
-const convertMd2Doc = require('./convertMd2Doc')
+const convertMd2Doc = require('./convert-md-to-doc')
 const projectPath = require('./project-path')
 
 module.exports = function (content, path) {

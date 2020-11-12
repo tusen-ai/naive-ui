@@ -1,4 +1,4 @@
-const convertMd2Demo = require('./convertMd2Demo')
+const convertMd2Demo = require('./convert-md-to-demo')
 const projectPath = require('./project-path')
 
 module.exports = function (content, path) {
