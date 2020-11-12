@@ -99,8 +99,7 @@ export default c([
           }),
           cE('icon', [
             cB('icon', {
-              fill: itemIconColorCollapsed,
-              stroke: itemIconColorCollapsed
+              color: itemIconColorCollapsed
             })
           ])
         ])
@@ -137,8 +136,7 @@ export default c([
           cB('menu-item-content', [
             cE('icon', [
               cB('icon', {
-                fill: itemIconColorSelected,
-                stroke: itemIconColorSelected
+                color: itemIconColorSelected
               })
             ]),
             cB('menu-item-content-header', {
@@ -195,8 +193,7 @@ export default c([
           ]),
           cE('icon', [
             cB('icon', {
-              fill: itemIconColorChildSelected,
-              stroke: itemIconColorChildSelected
+              color: itemIconColorChildSelected
             })
           ])
         ]),
@@ -205,8 +202,7 @@ export default c([
             hoverStyle(null, [
               cE('icon', [
                 cB('icon', {
-                  fill: itemIconColorHover,
-                  stroke: itemIconColorHover
+                  color: itemIconColorHover
                 })
               ]),
               cB('menu-item-content-header', {

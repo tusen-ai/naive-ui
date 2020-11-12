@@ -24,6 +24,7 @@
       >
         <n-base-slot-machine
           v-if="!dot"
+          :theme="mergedTheme"
           :appeared="appeared"
           :max="max"
           :value="value"

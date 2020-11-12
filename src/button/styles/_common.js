@@ -25,7 +25,7 @@ export default function (base, derived) {
     iconMarginSmall: '6px',
     iconMarginMedium: '6px',
     iconMarginLarge: '6px',
-    iconSizeTiny: '16px',
+    iconSizeTiny: '14px',
     iconSizeSmall: '18px',
     iconSizeMedium: '18px',
     iconSizeLarge: '20px',

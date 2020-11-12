@@ -25,10 +25,11 @@ export default c([
         vertical-align: middle;
       `
     }, [
+      c('*:not(:last-child)', {
+        marginRight: '8px'
+      }),
       cB('select', {
-        raw: `
-          width: unset;
-        `
+        width: 'unset'
       }),
       cM('transition-disabled', [
         cB('pagination-item', {
@@ -48,9 +49,7 @@ export default c([
         color: itemTextColor
       }, [
         cB('input', {
-          raw: `
-            margin: 0 8px;
-          `
+          marginLeft: '8px'
         }, [
           cE('placeholder', {
             left: '6px',
@@ -90,11 +89,6 @@ export default c([
         color: itemTextColor,
         fill: itemTextColor
       }, [
-        c('&:not(:last-child)', {
-          raw: `
-            margin-right: 8px;
-          `
-        }),
         cE('more-icon, arrow-icon', {
           raw: `
             position: relative;
@@ -141,7 +135,12 @@ export default c([
           c('&:hover', {
             color: itemTextColorHover
           }, [
-            cM('fast-backward, fast-forward', [
+            cM('backward, forward', {
+              color: itemTextColor
+            }),
+            cM('fast-backward, fast-forward', {
+              color: itemTextColor
+            }, [
               cE('more-icon', {
                 raw: `
                   display: none;

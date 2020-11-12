@@ -451,7 +451,7 @@ export default function (instance) {
           },
           {
             name: 'Dialog',
-            title: '确认',
+            title: '对话框',
             titleExtra: 'Dialog',
             path: `/${lang}/${theme}/doc` + '/n-dialog'
           },

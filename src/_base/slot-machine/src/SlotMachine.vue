@@ -43,6 +43,10 @@ export default {
     withCssr(styles)
   ],
   props: {
+    theme: {
+      type: String,
+      default: undefined
+    },
     value: {
       type: [Number, String],
       default: 0

@@ -67,6 +67,15 @@
         <forward-icon />
       </div>
     </div>
+    <n-select
+      v-if="showSizePicker"
+      size="small"
+      placeholder=""
+      :options="pageSizeOptions"
+      :value="pageSize"
+      :disabled="disabled"
+      @update:value="handleSizePickerChange"
+    />
     <div
       v-if="showQuickJumper"
       class="n-pagination-quick-jumper"
@@ -79,15 +88,6 @@
         @keyup="handleQuickJumperKeyUp"
       />
     </div>
-    <n-select
-      v-if="showSizePicker"
-      size="small"
-      placeholder=""
-      :options="pageSizeOptions"
-      :value="pageSize"
-      :disabled="disabled"
-      @update:value="handleSizePickerChange"
-    />
   </div>
 </template>
 

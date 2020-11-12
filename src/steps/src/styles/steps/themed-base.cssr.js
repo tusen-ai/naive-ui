@@ -210,8 +210,7 @@ function statusStyle (props, status) {
           color: props[createKey('indicatorTextColor', status)]
         }),
         cB('icon', {
-          fill: props[createKey('indicatorTextColor', status)],
-          stroke: props[createKey('indicatorTextColor', status)]
+          color: props[createKey('indicatorTextColor', status)]
         })
       ])
     ])
