@@ -1,7 +1,0 @@
-<!-- <n-text depth="tertiary">
-      A <a ref="noopener noreferer" href="https://www.tusimple.com" target="_blank" class="link">
-        <n-text>
-          Tusimple
-        </n-text>
-      </a> Project ·&nbsp;
-    </n-text> -->
