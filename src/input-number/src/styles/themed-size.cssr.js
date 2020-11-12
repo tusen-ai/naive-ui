@@ -2,13 +2,13 @@ import { cTB, c, cE, cM, createKey } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
-    const local = props.$local
+    const { $local } = props
     const size = props.$instance.mergedSize
-    const height = local[createKey('height', size)]
-    const width = local[createKey('width', size)]
-    const fontSize = local[createKey('fontSize', size)]
-    const buttonIconSize = local[createKey('buttonIconSize', size)]
-    const buttonWidth = local[createKey('buttonWidth', size)]
+    const height = $local[createKey('height', size)]
+    const width = $local[createKey('width', size)]
+    const fontSize = $local[createKey('fontSize', size)]
+    const buttonIconSize = $local[createKey('buttonIconSize', size)]
+    const buttonWidth = $local[createKey('buttonWidth', size)]
     return cTB('input-number', [
       cM(size + '-size', {
         height,

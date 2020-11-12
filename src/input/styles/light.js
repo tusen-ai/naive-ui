@@ -50,17 +50,17 @@ export default create({
       boxShadowDisabled: `inset 0 0 0 1px ${borderColor}`,
       // warning
       borderColorWarning: warningColor,
-      borderColorWarningHover: warningColorHover,
-      colorWarningFocus: inputColor,
-      borderColorWarningFocus: warningColorHover,
-      boxShadowWarningFocus: `0 0 0 2px ${changeColor(warningColor, { alpha: 0.2 })}`,
+      borderColorHoverWarning: warningColorHover,
+      colorFocusWarning: inputColor,
+      borderColorFocusWarning: warningColorHover,
+      boxShadowFocusWarning: `0 0 0 2px ${changeColor(warningColor, { alpha: 0.2 })}`,
       caretColorWarning: warningColor,
       // error
       borderColorError: errorColor,
-      borderColorErrorHover: errorColorHover,
-      colorErrorFocus: inputColor,
-      borderColorErrorFocus: errorColorHover,
-      boxShadowErrorFocus: `0 0 0 2px ${changeColor(errorColor, { alpha: 0.2 })}`,
+      borderColorHoverError: errorColorHover,
+      colorFocusError: inputColor,
+      borderColorFocusError: errorColorHover,
+      boxShadowFocusError: `0 0 0 2px ${changeColor(errorColor, { alpha: 0.2 })}`,
       caretColorError: errorColor
     }
   }

@@ -252,15 +252,15 @@ export default c([
             }),
             c('&:hover', [
               cE('border-mask', {
-                borderColor: pallete[createKey('borderColor', status, 'hover')]
+                borderColor: pallete[createKey('borderColorHover', status)]
               })
             ]),
             cM('focus', {
-              backgroundColor: pallete[createKey('color', status, 'focus')]
+              backgroundColor: pallete[createKey('colorFocus', status)]
             }, [
               cE('border-mask', {
-                borderColor: pallete[createKey('borderColor', status, 'focus')],
-                boxShadow: pallete[createKey('boxShadow', status, 'focus')]
+                borderColor: pallete[createKey('borderColorFocus', status)],
+                boxShadow: pallete[createKey('boxShadowFocus', status)]
               })
             ]),
             cE('input, textarea', {

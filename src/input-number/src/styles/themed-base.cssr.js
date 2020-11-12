@@ -266,12 +266,12 @@ export default c([
   ({ props }) => ['warning', 'error'].map(status => {
     const local = props.$local
     const boxShadow = local[createKey('boxShadow', status)]
-    const boxShadowHover = local[createKey('boxShadow', status, 'hover')]
-    const boxShadowFocus = local[createKey('boxShadow', status, 'focus')]
-    const colorFocus = local[createKey('color', status, 'focus')]
+    const boxShadowHover = local[createKey('boxShadowHover', status)]
+    const boxShadowFocus = local[createKey('boxShadowFocus', status)]
+    const colorFocus = local[createKey('colorFocus', status)]
     const caretColor = local[createKey('caretColor', status)]
-    const buttonTextColorHover = local[createKey('buttonTextColor', status, 'hover')]
-    const buttonTextColorActive = local[createKey('buttonTextColor', status, 'active')]
+    const buttonTextColorHover = local[createKey('buttonTextColorHover', status)]
+    const buttonTextColorActive = local[createKey('buttonTextColorActive', status)]
     return insideFormItem(
       status,
       cTB('input-number', [

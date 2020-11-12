@@ -49,17 +49,17 @@ export default create({
       boxShadowDisabled: 'inset 0 0 0 1px transparent',
       // warning
       borderColorWarning: 'transparent',
-      borderColorWarningHover: warningColorHover,
-      colorWarningFocus: changeColor(warningColor, { alpha: 0.1 }),
-      borderColorWarningFocus: warningColorHover,
-      boxShadowWarningFocus: `0 0 8px 0 ${changeColor(warningColor, { alpha: 0.3 })}`,
+      borderColorHoverWarning: warningColorHover,
+      colorFocusWarning: changeColor(warningColor, { alpha: 0.1 }),
+      borderColorFocusWarning: warningColorHover,
+      boxShadowFocusWarning: `0 0 8px 0 ${changeColor(warningColor, { alpha: 0.3 })}`,
       caretColorWarning: warningColor,
       // error
       borderColorError: 'transparent',
-      borderColorErrorHover: errorColorHover,
-      colorErrorFocus: changeColor(errorColor, { alpha: 0.1 }),
-      borderColorErrorFocus: errorColorHover,
-      boxShadowErrorFocus: `0 0 8px 0 ${changeColor(errorColor, { alpha: 0.3 })}`,
+      borderColorHoverError: errorColorHover,
+      colorFocusError: changeColor(errorColor, { alpha: 0.1 }),
+      borderColorFocusError: errorColorHover,
+      boxShadowFocusError: `0 0 8px 0 ${changeColor(errorColor, { alpha: 0.3 })}`,
       caretColorError: errorColor
     }
   }

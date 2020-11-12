@@ -66,20 +66,20 @@ export default create({
       placeholderColor,
       // warning
       boxShadowWarning: `inset 0 0 0 1px ${warningColor}`,
-      boxShadowWarningFocus: `inset 0 0 0 1px ${warningColorHover}, 0 0 0 2px ${changeColor(warningColor, { alpha: 0.2 })}`,
-      boxShadowWarningHover: `inset 0 0 0 1px ${warningColorHover}`,
-      colorWarningFocus: colorFocus,
+      boxShadowFocusWarning: `inset 0 0 0 1px ${warningColorHover}, 0 0 0 2px ${changeColor(warningColor, { alpha: 0.2 })}`,
+      boxShadowHoverWarning: `inset 0 0 0 1px ${warningColorHover}`,
+      colorFocusWarning: colorFocus,
       caretColorWarning: warningColorHover,
-      buttonTextColorWarningHover: warningColorHover,
-      buttonTextColorWarningActive: warningColorPressed,
+      buttonTextColorHoverWarning: warningColorHover,
+      buttonTextColorActiveWarning: warningColorPressed,
       // error
       boxShadowError: `inset 0 0 0 1px ${errorColor}`,
-      boxShadowErrorFocus: `inset 0 0 0 1px ${errorColorHover}, 0 0 0 2px ${changeColor(errorColor, { alpha: 0.2 })}`,
-      boxShadowErrorHover: `inset 0 0 0 1px ${errorColorHover}`,
-      colorErrorFocus: colorFocus,
+      boxShadowFocusError: `inset 0 0 0 1px ${errorColorHover}, 0 0 0 2px ${changeColor(errorColor, { alpha: 0.2 })}`,
+      boxShadowHoverError: `inset 0 0 0 1px ${errorColorHover}`,
+      colorFocusError: colorFocus,
       caretColorError: errorColorHover,
-      buttonTextColorErrorHover: errorColorHover,
-      buttonTextColorErrorActive: errorColorPressed
+      buttonTextColorHoverError: errorColorHover,
+      buttonTextColorActiveError: errorColorPressed
     }
   }
 })
