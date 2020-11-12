@@ -14,7 +14,7 @@ module.exports = {
     {
       format: 'cjs',
       dir: 'lib',
-      exports: 'auto',
+      exports: 'named',
       preserveModules: true
     },
     {
