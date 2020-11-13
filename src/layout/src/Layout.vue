@@ -58,11 +58,11 @@ export default {
     },
     scrollContentStyle: {
       type: Object,
-      default: null
+      default: undefined
     },
     scrollContainerStyle: {
       type: Object,
-      default: null
+      default: undefined
     }
   },
   data () {
