@@ -16,6 +16,7 @@ collapse
 |collapsed-icon-size|`number`|`undefined`|The icon size when menu is collapsed. If not set, menu will use `icon-size` in place of it.|
 |collapsed-width|`number`|`undefined`|The menu width after collapsed.|
 |collapsed|`boolean`|`false`|The collapsed status of menu, only works when menu is vertical.|
+|default-expand-all|`boolean`|`false`||
 |default-expanded-keys|`Array<string>`|`[]`|The default expanded submenu keys of menu in uncontrolled manner.|
 |expanded-keys|`Array<string>`|`undefined`|The expanded submenu keys. If set, menu will work in controlled manner and `default-expanded-names` won't work.|
 |icon-size|`number`|`20`|The icon size when menu is not collapsed.|

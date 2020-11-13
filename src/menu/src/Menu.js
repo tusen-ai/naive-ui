@@ -53,6 +53,10 @@ export default {
       type: Number,
       default: 32
     },
+    defaultExpandedAll: {
+      type: Boolean,
+      default: false
+    },
     defaultExpandedKeys: {
       type: Array,
       default: () => []
@@ -115,17 +119,25 @@ export default {
     }
   },
   setup (props) {
-    const uncontrolledExpandedKeysRef = ref(props.defaultExpandedNames || props.defaultExpandedKeys)
-    const controlledExpandedKeysRef = useCompitable(props, 'expandedNames', 'expandedKeys')
-    const mergedExpandedKeysRef = useMergedState(
-      controlledExpandedKeysRef,
-      uncontrolledExpandedKeysRef
-    )
     const treeMateRef = computed(() => createTreeMate(props.items, {
       getKey (node) {
         return node.key ?? node.name
       }
     }))
+    const uncontrolledExpandedKeysRef = ref(
+      props.defaultExpandedAll
+        ? treeMateRef.value.getNonLeafKeys()
+        : (
+          props.defaultExpandedNames ||
+          props.defaultExpandedKeys
+        )
+    )
+    const controlledExpandedKeysRef = useCompitable(props, 'expandedNames', 'expandedKeys')
+    const mergedExpandedKeysRef = useMergedState(
+      controlledExpandedKeysRef,
+      uncontrolledExpandedKeysRef
+    )
+
     const tmNodesRef = computed(() => treeMateRef.value.treeNodes)
     const valueRef = toRef(props, 'value')
     const activePathRef = computed(() => {
