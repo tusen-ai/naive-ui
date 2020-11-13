@@ -2,7 +2,8 @@
   <span class="n-tree-node-checkbox">
     <n-checkbox
       :theme="NTree.mergedTheme"
-      :checked="value"
+      :checked="checked"
+      :indeterminate="indeterminate"
       @update:checked="handleUpdateValue"
     />
   </span>
@@ -22,7 +23,11 @@ export default {
     }
   },
   props: {
-    value: {
+    checked: {
+      type: Boolean,
+      default: false
+    },
+    indeterminate: {
       type: Boolean,
       default: false
     },
@@ -39,7 +44,11 @@ export default {
       if (onCheck) return onCheck(value)
     },
     handleUpdateValue (value) {
-      this.doCheck(value)
+      if (this.indeterminate) {
+        this.doCheck(false)
+      } else {
+        this.doCheck(value)
+      }
     }
   }
 }

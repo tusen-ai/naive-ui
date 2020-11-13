@@ -7,6 +7,7 @@ What's more, not only biology, I forget balanced tree everytime after I revise i
 ## Demos
 ```demo
 basic
+cascade
 async
 multiple
 filter
@@ -18,6 +19,7 @@ drag-drop-debug
 |-|-|-|-|
 |block-node|`boolean`|`false`||
 |cancelable|`boolean`|`false`|Whether node's select status can be cancelled.|
+|cascade|`boolean`|`false`|Whether to cascade checkboxes.|
 |checkable|`boolean`|`false`||
 |checked-keys|`Array<string \| number>`|`null`|If set, checked status will work in controlled manner.|
 |data|`Array<TreeNode>`|`[]`|The node data of the tree. Reset `data` will cause clearing of some uncontrolled status. If you need to modify data, you'd better make tree work in a controlled manner.|

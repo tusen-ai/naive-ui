@@ -1,10 +1,9 @@
-import { h } from 'vue'
+import { h, inject, computed } from 'vue'
+import { useMemo } from 'vooks'
 import NTreeNodeSwitcher from './TreeNodeSwitcher.vue'
 import NTreeNodeCheckbox from './TreeNodeCheckbox.vue'
 import NTreeNodeContent from './TreeNodeContent.vue'
 import { NFadeInExpandTransition } from '../../_base'
-
-import { isLeaf, isLoaded } from './utils'
 
 const TreeNode = {
   name: 'NTreeNode',
@@ -14,34 +13,21 @@ const TreeNode = {
     }
   },
   props: {
-    data: {
+    tmNode: {
       type: Object,
       required: true
     }
   },
-  computed: {
-    loading () {
-      return this.NTree.loadingKeys.includes(this.data.key)
-    },
-    highlight () {
-      return this.NTree.highlightKeys.includes(this.data.key)
-    },
-    checked () {
-      return this.NTree.syntheticCheckedKeys.includes(this.data.key)
-    },
-    selected () {
-      return this.NTree.syntheticSelectedKeys.includes(this.data.key)
-    },
-    expanded () {
-      return this.NTree.syntheticExpandedKeys.includes(this.data.key)
-    },
-    icon () {
-      const {
-        data: {
-          icon
-        }
-      } = this
-      return typeof icon === 'function' ? icon : null
+  setup (props) {
+    const NTree = inject('NTree')
+    return {
+      loading: useMemo(() => NTree.loadingKeys.includes(props.tmNode.key)),
+      highlight: useMemo(() => NTree.highlightKeys.includes(props.tmNode.key)),
+      checked: useMemo(() => NTree.displayedCheckedKeys.includes(props.tmNode.key)),
+      indeterminate: useMemo(() => NTree.displayedIndeterminateKeys.includes(props.tmNode.key)),
+      selected: useMemo(() => NTree.mergedSelectedKeys.includes(props.tmNode.key)),
+      expanded: useMemo(() => NTree.mergedExpandedKeys.includes(props.tmNode.key)),
+      icon: computed(() => props.tmNode.rawNode.icon)
     }
   },
   methods: {
@@ -82,67 +68,67 @@ const TreeNode = {
       if (handleSelect) handleSelect(...args)
     },
     handleSwitcherClick () {
-      const node = this.data
-      const NTree = this.NTree
-      if (NTree.remote && !isLeaf(node) && !isLoaded(node)) {
-        if (!NTree.loadingKeys.includes(node.key)) {
-          NTree.loadingKeys.push(node.key)
+      const { NTree, tmNode } = this
+      if (NTree.remote && !tmNode.isLeaf && !tmNode.isShallowLoaded) {
+        if (!NTree.loadingKeys.includes(tmNode.key)) {
+          NTree.loadingKeys.push(tmNode.key)
         }
         NTree.onLoad &&
-          NTree.onLoad(node)
+          NTree.onLoad(tmNode.rawNode)
             .then(() => {
               NTree.loadingKeys.splice(
-                NTree.loadingKeys.find(key => key === node.key),
+                NTree.loadingKeys.find(key => key === tmNode.key),
                 1
               )
-              this.doSwitcherClick(node)
+              this.doSwitcherClick(tmNode.rawNode)
             })
       } else {
-        this.doSwitcherClick(node)
+        this.doSwitcherClick(tmNode.rawNode)
       }
     },
     handleContentClick () {
-      this.doSelect(this.data)
+      this.doSelect(this.tmNode.rawNode)
     },
     handleDragOver (e) {
-      this.doDragOver({ event: e, node: this.data })
+      this.doDragOver({ event: e, node: this.tmNode.rawNode })
     },
     handleDragEnter (e) {
-      this.doDragEnter({ event: e, node: this.data })
+      this.doDragEnter({ event: e, node: this.tmNode.rawNode })
     },
     handleDragStart (e) {
-      this.doDragStart({ event: e, node: this.data })
+      this.doDragStart({ event: e, node: this.tmNode.rawNode })
     },
     handleDragLeave (e) {
-      this.doDragLeave({ event: e, node: this.data })
+      this.doDragLeave({ event: e, node: this.tmNode.rawNode })
     },
     handleDragEnd (e) {
-      this.doDragEnd({ event: e, node: this.data })
+      this.doDragEnd({ event: e, node: this.tmNode.rawNode })
     },
     handleDrop (e, dropPosition) {
       this.doDrop({
         event: e,
-        node: this.data,
+        node: this.tmNode.rawNode,
         dropPosition
       })
     },
     handleCheck (checked) {
-      this.doCheck(this.data, checked)
+      this.doCheck(this.tmNode.rawNode, checked)
     }
   },
   render () {
-    const { data } = this
+    const { tmNode } = this
     return h('li', {
       class: 'n-tree-node'
     }, [
       h(NTreeNodeSwitcher, {
         expanded: this.expanded,
         loading: this.loading,
-        hide: isLeaf(data),
+        hide: tmNode.isLeaf,
         onClick: this.handleSwitcherClick
       }),
       this.NTree.checkable ? h(NTreeNodeCheckbox, {
-        value: this.checked,
+        checked: this.checked,
+        indeterminate: this.indeterminate,
         onCheck: this.handleCheck
       }) : null,
       h(NTreeNodeContent, {
@@ -158,15 +144,15 @@ const TreeNode = {
         onDragleave: this.handleDragLeave,
         onDrop: this.handleDrop
       }, {
-        default: () => data.label
+        default: () => tmNode.rawNode.label
       }),
       this.icon ? this.icon() : null,
-      !isLeaf(data) ? h(NFadeInExpandTransition, null,
+      !tmNode.isLeaf ? h(NFadeInExpandTransition, null,
         {
-          default: () => this.expanded && data.children
+          default: () => this.expanded && tmNode.children
             ? h('ul', {
               class: 'n-tree-children-wrapper'
-            }, data.children.map(child => h(TreeNode, { data: child, key: child.key })))
+            }, tmNode.children.map(child => h(TreeNode, { tmNode: child, key: child.key })))
             : null
         }) : null
     ])

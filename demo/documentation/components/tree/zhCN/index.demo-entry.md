@@ -6,6 +6,7 @@
 ## 演示
 ```demo
 basic
+cascade
 async
 multiple
 filter
@@ -17,6 +18,7 @@ drag-drop-debug
 |-|-|-|-|
 |block-node|`boolean`|`false`||
 |cancelable|`boolean`|`false`|选中之后是否允许取消|
+|cascade|`boolean`|`false`|是否关联选项|
 |checkable|`boolean`|`false`||
 |checked-keys|`Array<string \| number>`|`null`|如果设定则 checked 状态受控|
 |data|`Array<TreeNode>`|`[]`|树的节点数据。重新设置 data 会将一些非受控状态清空，如果你需要在使用中改动 data，最好以受控的方式控制树|

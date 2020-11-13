@@ -15,9 +15,9 @@ function traverse (nodes, callback, callbackAfter) {
   })
 }
 
-export function getAllKeys (nodes) {
+export function getAllNonLeafKeys (nodes) {
   const keys = []
-  traverse(nodes, node => keys.push(node.key))
+  traverse(nodes, node => { node.children && keys.push(node.key) })
   return keys
 }
 

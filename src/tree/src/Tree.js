@@ -1,13 +1,20 @@
 import {
-  h
+  h,
+  ref,
+  toRef,
+  computed
 } from 'vue'
+import {
+  createTreeMate
+} from 'treemate'
+import { useMergedState } from 'vooks'
 import {
   configurable,
   themeable,
   withCssr
 } from '../../_mixins'
 import NTreeNode from './TreeNode'
-import { isLeaf, isLoaded, getAllKeys, keysWithFilter } from './utils'
+import { getAllNonLeafKeys, keysWithFilter } from './utils'
 import styles from './styles'
 import { call } from '../../_utils/vue'
 import { warn } from '../../_utils/naive'
@@ -100,6 +107,10 @@ export default {
       type: Function,
       default: undefined
     },
+    cascade: {
+      type: Boolean,
+      default: false
+    },
     selectable: {
       type: Boolean,
       default: true
@@ -159,25 +170,65 @@ export default {
       default: undefined
     }
   },
+  setup (props) {
+    const treeMateRef = computed(() => createTreeMate(props.data))
+    const uncontrolledCheckedKeysRef = ref(
+      props.defaultExpandAll
+        ? getAllNonLeafKeys(props.data)
+        : props.defaultCheckedKeys ?? []
+    )
+    const controlledCheckedKeysRef = toRef(props, 'checkedKeys')
+    const mergedCheckedKeysRef = useMergedState(
+      controlledCheckedKeysRef,
+      uncontrolledCheckedKeysRef
+    )
+    const checkedStatusRef = computed(() => {
+      return treeMateRef.value.getCheckedKeys(mergedCheckedKeysRef.value, {
+        cascade: props.cascade
+      })
+    })
+    const displayedCheckedKeysRef = computed(() => {
+      return checkedStatusRef.value.checkedKeys
+    })
+    const displayedIndeterminateKeysRef = computed(() => {
+      return checkedStatusRef.value.indeterminateKeys
+    })
+    const uncontrolledSelectedKeysRef = ref(props.defaultSelectedKeys ?? [])
+    const controlledSelectedKeysRef = toRef(props, 'selectedKeys')
+    const mergedSelectedKeysRef = useMergedState(
+      controlledSelectedKeysRef,
+      uncontrolledSelectedKeysRef
+    )
+    const uncontrolledExpandedKeysRef = ref(props.defaultExpandedKeys ?? [])
+    const controlledExpandedKeysRef = toRef(props, 'selectedKeys')
+    const mergedExpandedKeysRef = useMergedState(
+      controlledExpandedKeysRef,
+      uncontrolledExpandedKeysRef
+    )
+    return {
+      treeMate: treeMateRef,
+      tmNodes: computed(() => treeMateRef.value.treeNodes),
+      uncontrolledCheckedKeys: uncontrolledCheckedKeysRef,
+      displayedCheckedKeys: displayedCheckedKeysRef,
+      displayedIndeterminateKeys: displayedIndeterminateKeysRef,
+      uncontrolledSelectedKeys: uncontrolledSelectedKeysRef,
+      mergedSelectedKeys: mergedSelectedKeysRef,
+      uncontrolledExpandedKeys: uncontrolledExpandedKeysRef,
+      mergedExpandedKeys: mergedExpandedKeysRef,
+      highlightKeys: ref([]),
+      loadingKeys: ref([])
+    }
+  },
   data () {
     return {
-      treeData: null,
-      internalExpandedKeys: this.defaultExpandAll ? getAllKeys(this.data) : (this.defaultExpandedKeys || []),
-      internalCheckedKeys: this.defaultCheckedKeys || [],
-      internalSelectedKeys: this.defaultSelectedKeys || [],
       draggingNodeKey: null,
       draggingNode: null,
       droppingNodeKey: null,
-      expandTimerId: null,
-      highlightKeys: [],
-      loadingKeys: []
+      expandTimerId: null
     }
   },
   watch: {
     data () {
-      this.internalExpandedKeys = []
-      this.internalCheckedKeys = []
-      this.internalSelectedKeys = []
       this.loadingKeys = []
       this.expandTimerId = null
     },
@@ -192,71 +243,39 @@ export default {
           this.filter
         )
         this.highlightKeys = highlightKeys
-        if (!this.hasExpandedKeys) {
-          this.internalExpandedKeys = expandedKeysAfterChange
-        }
         this.doExpandedKeysChange(expandedKeysAfterChange)
       } else {
         this.highlightKeys = []
       }
     }
   },
-  computed: {
-    hasExpandedKeys () {
-      return Array.isArray(this.expandedKeys)
-    },
-    hasSelectedKeys () {
-      return Array.isArray(this.selectedKeys)
-    },
-    hasCheckedKeys () {
-      return Array.isArray(this.checkedKeys)
-    },
-    syntheticExpandedKeys () {
-      if (this.hasExpandedKeys) {
-        return this.expandedKeys
-      } else {
-        return this.internalExpandedKeys
-      }
-    },
-    syntheticSelectedKeys () {
-      if (this.hasSelectedKeys) {
-        return this.selectedKeys
-      } else {
-        return this.internalSelectedKeys
-      }
-    },
-    syntheticCheckedKeys () {
-      if (this.hasCheckedKeys) {
-        return this.checkedKeys
-      } else {
-        return this.internalCheckedKeys
-      }
-    }
-  },
   methods: {
-    doExpandedKeysChange (...args) {
+    doExpandedKeysChange (value) {
       const {
         'onUpdate:expandedKeys': onUpdateExpandedKeys,
         onExpandedKeysChange
       } = this
-      if (onUpdateExpandedKeys) call(onUpdateExpandedKeys, ...args)
-      if (onExpandedKeysChange) call(onExpandedKeysChange, ...args)
+      this.uncontrolledExpandedKeys = value
+      if (onUpdateExpandedKeys) call(onUpdateExpandedKeys, value)
+      if (onExpandedKeysChange) call(onExpandedKeysChange, value)
     },
-    doCheckedKeysChange (...args) {
+    doCheckedKeysChange (value) {
       const {
         'onUpdate:checkedKeys': onUpdateCheckedKeys,
         onCheckedKeysChange
       } = this
-      if (onUpdateCheckedKeys) call(onUpdateCheckedKeys, ...args)
-      if (onCheckedKeysChange) call(onCheckedKeysChange, ...args)
+      this.uncontrolledCheckedKeys = value
+      if (onUpdateCheckedKeys) call(onUpdateCheckedKeys, value)
+      if (onCheckedKeysChange) call(onCheckedKeysChange, value)
     },
-    doSelectedKeysChange (...args) {
+    doSelectedKeysChange (value) {
       const {
         'onUpdate:selectedKeys': onUpdateSelectedKeys,
         onSelectedKeysChange
       } = this
-      if (onUpdateSelectedKeys) call(onUpdateSelectedKeys, ...args)
-      if (onSelectedKeysChange) call(onSelectedKeysChange, ...args)
+      this.uncontrolledSelectedKeys = value
+      if (onUpdateSelectedKeys) call(onUpdateSelectedKeys, value)
+      if (onSelectedKeysChange) call(onSelectedKeysChange, value)
     },
     doDragEnter (...args) {
       const { onDragEnter } = this
@@ -285,54 +304,32 @@ export default {
     },
     handleCheck (node, checked) {
       if (this.disabled || node.disabled) return
-      if (checked) {
-        if (this.hasCheckedKeys) {
-          this.doCheckedKeysChange(this.syntheticCheckedKeys.concat([node.key]))
-        } else {
-          this.internalCheckedKeys.push(node.key)
+      const {
+        checkedKeys
+      } = this.treeMate[checked ? 'check' : 'uncheck'](
+        node.key,
+        this.displayedCheckedKeys,
+        {
+          cascade: this.cascade
         }
-      } else {
-        if (this.hasCheckedKeys) {
-          const checkedKeysAfterChange = this.syntheticCheckedKeys
-          checkedKeysAfterChange.splice(
-            checkedKeysAfterChange.findIndex(key => key === node.key),
-            1
-          )
-          this.doCheckedKeysChange(checkedKeysAfterChange)
-        } else {
-          this.internalCheckedKeys.splice(
-            this.internalCheckedKeys.findIndex(key => key === node.key),
-            1
-          )
-        }
-      }
+      )
+      this.doCheckedKeysChange(checkedKeys)
     },
     toggleExpand (node) {
       if (this.disabled) return
-      const index = this.syntheticExpandedKeys
+      const { mergedExpandedKeys } = this
+      const index = mergedExpandedKeys
         .findIndex(expandNodeId => expandNodeId === node.key)
       if (~index) {
-        if (!this.hasExpandedKeys) {
-          this.internalExpandedKeys.splice(index, 1)
-          this.doExpandedKeysChange(this.internalExpandedKeys)
-        } else {
-          const expandedKeysAfterChange = Array.from(this.syntheticExpandedKeys)
-          expandedKeysAfterChange.splice(index, 1)
-          this.doExpandedKeysChange(
-            expandedKeysAfterChange
-          )
-        }
+        const expandedKeysAfterChange = Array.from(mergedExpandedKeys)
+        expandedKeysAfterChange.splice(index, 1)
+        this.doExpandedKeysChange(
+          expandedKeysAfterChange
+        )
       } else {
-        if (!isLeaf(node)) {
-          if (!this.hasExpandedKeys) {
-            this.internalExpandedKeys.push(node.key)
-            this.doExpandedKeysChange(this.internalExpandedKeys)
-          } else {
-            this.doExpandedKeysChange(
-              this.syntheticExpandedKeys.concat(node.key)
-            )
-          }
-        }
+        this.doExpandedKeysChange(
+          mergedExpandedKeys.concat(node.key)
+        )
       }
     },
     handleSwitcherClick (node) {
@@ -342,80 +339,50 @@ export default {
     handleSelect (node) {
       if (this.disabled || node.disabled || !this.selectable) return
       if (this.multiple) {
-        if (this.hasSelectedKeys) {
-          const selectedKeys = this.syntheticSelectedKeys
-          const index = selectedKeys.findIndex(key => key === node.key)
-          if (~index) {
-            if (this.cancelable) {
-              selectedKeys.splice(
-                index,
-                1
-              )
-            }
-          } else if (!~index) {
-            selectedKeys.push(node.key)
+        const selectedKeys = this.mergedSelectedKeys
+        const index = selectedKeys.findIndex(key => key === node.key)
+        if (~index) {
+          if (this.cancelable) {
+            selectedKeys.splice(
+              index,
+              1
+            )
           }
-          this.doSelectedKeysChange(selectedKeys)
-        } else {
-          const selectedKeys = this.internalSelectedKeys
-          const index = selectedKeys.findIndex(key => key === node.key)
-          if (~index) {
-            if (this.cancelable) {
-              selectedKeys.splice(
-                index,
-                1
-              )
-            }
-          } else {
-            selectedKeys.push(node.key)
-          }
-          this.doSelectedKeysChange(selectedKeys)
+        } else if (!~index) {
+          selectedKeys.push(node.key)
         }
+        this.doSelectedKeysChange(selectedKeys)
       } else {
-        if (this.hasSelectedKeys) {
-          const selectedKeys = this.syntheticSelectedKeys
-          if (selectedKeys.includes(node.key)) {
-            if (this.cancelable) {
-              this.doSelectedKeysChange([])
-            }
-          } else {
-            this.doSelectedKeysChange([node.key])
+        const selectedKeys = this.mergedSelectedKeys
+        if (selectedKeys.includes(node.key)) {
+          if (this.cancelable) {
+            this.doSelectedKeysChange([])
           }
         } else {
-          if (this.internalSelectedKeys.includes(node.key)) {
-            if (this.cancelable) {
-              this.internalSelectedKeys = []
-            }
-          } else this.internalSelectedKeys = [node.key]
           this.doSelectedKeysChange([node.key])
         }
       }
     },
-    handleDragEnter ({ event, node }) {
+    handleDragEnter ({ event, node }) { // node should be a tmNode
       if (!this.draggable || this.disabled || node.disabled) return
       this.doDragEnter({ event, node })
       if (!this.expandOnDragenter) return
       this.droppingNodeKey = node.key
       if (node.key === this.draggingNodeKey) return
       if (
-        !this.syntheticExpandedKeys.includes(node.key) &&
-        !isLeaf(node)
+        !this.mergedExpandedKeys.includes(node.key) &&
+        !node.isLeaf
       ) {
         window.clearTimeout(this.expandTimerId)
         const expand = () => {
           if (
             this.droppingNodeKey === node.key &&
-            !this.syntheticExpandedKeys.includes(node.key)
+            !this.mergedExpandedKeys.includes(node.key)
           ) {
-            if (!this.hasExpandedKeys) {
-              this.internalExpandedKeys.push(node.key)
-              this.doExpandedKeysChange(this.internalExpandedKeys)
-            } else {
-              this.doExpandedKeysChange(this.syntheticExpandedKeys.concat(node.key))
-            }
+            this.doExpandedKeysChange(this.mergedExpandedKeys.concat(node.key))
           }
         }
-        if (!isLoaded(node)) {
+        if (!node.isShallowLoaded) {
           if (!this.loadingKeys.includes(node.key)) {
             this.loadingKeys.push(node.key)
           }
@@ -464,16 +431,19 @@ export default {
     }
   },
   render () {
+    const {
+      mergedTheme
+    } = this
     return h('div', {
       class: [
         'n-tree',
         {
-          [`n-${this.mergedTheme}-theme`]: this.mergedTheme
+          [`n-${mergedTheme}-theme`]: mergedTheme
         }
       ]
-    }, this.data.map(child => h(NTreeNode, {
-      data: child,
-      key: child.key
+    }, this.tmNodes.map(tmNode => h(NTreeNode, {
+      tmNode,
+      key: tmNode.key
     })))
   }
 }
