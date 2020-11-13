@@ -14,7 +14,7 @@ import {
   withCssr
 } from '../../_mixins'
 import NTreeNode from './TreeNode'
-import { getAllNonLeafKeys, keysWithFilter } from './utils'
+import { keysWithFilter } from './utils'
 import styles from './styles'
 import { call } from '../../_utils/vue'
 import { warn } from '../../_utils/naive'
@@ -58,17 +58,17 @@ export default {
       type: Boolean,
       default: false
     },
-    checkedKeys: {
-      type: Array,
-      default: undefined
-    },
     disabled: {
       type: Boolean,
       default: false
     },
-    defaultCheckedKeys: {
+    checkedKeys: {
       type: Array,
       default: undefined
+    },
+    defaultCheckedKeys: {
+      type: Array,
+      default: []
     },
     expandedKeys: {
       type: Array,
@@ -76,11 +76,15 @@ export default {
     },
     defaultExpandedKeys: {
       type: Array,
-      default: undefined
+      default: []
     },
     selectedKeys: {
       type: Array,
       default: undefined
+    },
+    defaultSelectedKeys: {
+      type: Array,
+      default: []
     },
     remote: {
       type: Boolean,
@@ -173,9 +177,8 @@ export default {
   setup (props) {
     const treeMateRef = computed(() => createTreeMate(props.data))
     const uncontrolledCheckedKeysRef = ref(
-      props.defaultExpandAll
-        ? getAllNonLeafKeys(props.data)
-        : props.defaultCheckedKeys ?? []
+      props.defaultCheckedKeys ||
+      props.checkedKeys
     )
     const controlledCheckedKeysRef = toRef(props, 'checkedKeys')
     const mergedCheckedKeysRef = useMergedState(
@@ -193,13 +196,23 @@ export default {
     const displayedIndeterminateKeysRef = computed(() => {
       return checkedStatusRef.value.indeterminateKeys
     })
-    const uncontrolledSelectedKeysRef = ref(props.defaultSelectedKeys ?? [])
+    const uncontrolledSelectedKeysRef = ref(
+      props.defaultSelectedKeys ||
+      props.selectedKeys
+    )
     const controlledSelectedKeysRef = toRef(props, 'selectedKeys')
     const mergedSelectedKeysRef = useMergedState(
       controlledSelectedKeysRef,
       uncontrolledSelectedKeysRef
     )
-    const uncontrolledExpandedKeysRef = ref(props.defaultExpandedKeys ?? [])
+    const uncontrolledExpandedKeysRef = ref(
+      props.defaultExpandAll
+        ? treeMateRef.value.getNonLeafKeys()
+        : (
+          props.defaultExpandedKeys ||
+          props.expandedKeys
+        )
+    )
     const controlledExpandedKeysRef = toRef(props, 'selectedKeys')
     const mergedExpandedKeysRef = useMergedState(
       controlledExpandedKeysRef,
