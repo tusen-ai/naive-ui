@@ -8,11 +8,11 @@
 </template>
 
 <script>
-import { inject, toRef } from 'vue'
+import { inject, computed } from 'vue'
 import SiteHeader from './SiteHeader.vue'
 import menuOptions from './menu-options'
 import { loadingBarApiRef } from './routes/router'
-import { useMemo } from 'vooks'
+import { displayModeRef } from './util-composables'
 
 export default {
   name: 'Site',
@@ -31,15 +31,13 @@ export default {
   setup () {
     const SiteProvider = inject('SiteProvider')
     return {
-      menuGenerationOptions: useMemo(() => {
+      menuGenerationOptions: computed(() => {
         return {
           theme: SiteProvider.theme,
-          lang: SiteProvider.lang
+          lang: SiteProvider.lang,
+          mode: displayModeRef.value
         }
-      }, [
-        toRef(SiteProvider, 'theme'),
-        toRef(SiteProvider, 'lang')
-      ])
+      })
     }
   },
   computed: {
