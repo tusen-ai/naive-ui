@@ -12,7 +12,7 @@ export default c([
       draggerColor,
       draggerBorderColorHover,
       itemColorHover,
-      itemColorErrorHover,
+      itemColorHoverError,
       itemTextColorError,
       itemTextColorSuccess,
       itemTextColor,
@@ -108,7 +108,7 @@ export default c([
           cM('error-status', [
             c('&:hover', {
               raw: `
-                background-color: ${itemColorErrorHover};
+                background-color: ${itemColorHoverError};
               `
             }),
             cB('upload-file-info', [

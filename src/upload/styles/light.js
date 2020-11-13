@@ -22,7 +22,7 @@ export default create({
       draggerBorderColor: borderColor,
       draggerBorderColorHover: primaryColor,
       itemColorHover: hoverColorOverlay,
-      itemColorErrorHover: changeColor(errorColor, {
+      itemColorHoverError: changeColor(errorColor, {
         alpha: 0.06
       }),
       itemTextColor: textColor2,

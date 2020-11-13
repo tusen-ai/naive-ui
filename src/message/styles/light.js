@@ -44,8 +44,8 @@ export default create({
       closeColorHover: 'rgba(255, 255, 255, .6)',
       closeColorActive: 'rgba(255, 255, 255, .4)',
       closeColorLoading: closeColor,
-      closeColorLoadingHover: closeColorHover,
-      closeColorLoadingActive: closeColor
+      closeColorHoverLoading: closeColorHover,
+      closeColorActiveLoading: closeColor
     }
   }
 })
