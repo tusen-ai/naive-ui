@@ -53,6 +53,10 @@ export {
   tabsLight
 } from './tabs/styles'
 export {
+  elementDark,
+  elementLight
+} from './element/styles'
+export {
   treeDark,
   treeLight
 } from './tree/styles'

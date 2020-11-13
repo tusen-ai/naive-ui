@@ -1,16 +1,19 @@
 import { h } from 'vue'
 import {
   configurable,
-  themeable
+  themeable,
+  withCssr
 } from '../../_mixins'
 import styleScheme from '../../_deprecated/style-scheme'
+import style from './styles'
 import { warn } from '../../_utils/naive/warn'
 
 export default {
   name: 'Element',
   mixins: [
     configurable,
-    themeable
+    themeable,
+    withCssr(style)
   ],
   props: {
     tag: {
@@ -49,6 +52,7 @@ export default {
     } = this
     return h(as || tag, {
       class: {
+        'n-element': true,
         [`n-${mergedTheme}-theme`]: mergedTheme
       }
     }, ($slots.default && $slots.default({
