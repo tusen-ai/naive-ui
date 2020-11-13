@@ -5,10 +5,10 @@ Config Provider is used to set global theme, set global language and set namespa
 theme
 namespace
 inherit-theme
-theme-environment
 os-theme
 language
 transparent
+theme-environment
 ```
 ## Props
 |Name|Type|Default|Description|
@@ -18,4 +18,3 @@ transparent
 |language|`string`|`'en-US'`|Language of components inside `n-config-provider`|
 |namespace|`string`|`undefined`|Class name of detached parts of components inside `n-config-provider`|
 |theme|`string`|`undefined`|Theme name of components inside `n-config-provider`|
-|theme-environments|`{ [themeName: string]: any }`|`undefined`|An object with some value which can be accessed by `n-config-consumer` or `n-element` inside `n-config-provider`|

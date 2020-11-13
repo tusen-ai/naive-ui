@@ -1,4 +1,4 @@
-# Theme Environments
+# Theme Environments (Deprecated)
 Get current theme environment.
 ```html
 <n-space vertical>

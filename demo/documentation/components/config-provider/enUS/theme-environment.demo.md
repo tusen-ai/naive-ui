@@ -1,4 +1,4 @@
-# Theme Environments
+# Theme Environments (Deprecated)
 Sometimes you may need some component to access some values at specific theme. You can use `theme-environments`.
 ```html
 <div>
