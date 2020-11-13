@@ -15,7 +15,7 @@ export default {
     }
   },
   props: {
-    children: {
+    tmNodes: {
       type: Array,
       required: true
     }
@@ -32,7 +32,7 @@ export default {
           render: this.title
         })
       ]),
-      h('div', this.children.map(item => itemRenderer(item)))
+      h('div', this.tmNodes.map(item => itemRenderer(item)))
     ])
   }
 }

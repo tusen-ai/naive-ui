@@ -57,7 +57,7 @@ export default {
       if (this.horizontal) {
         return 'bottom'
       }
-      if ('children' in this) return 'right-start'
+      if ('tmNodes' in this) return 'right-start'
       return 'right'
     },
     menuCollapsed () {

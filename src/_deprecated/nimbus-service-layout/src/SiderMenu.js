@@ -32,8 +32,8 @@ export default {
           name: item.name,
           disabled: !!item.disabled,
           children: item.childItems ? this.createItems(item.childItems) : undefined,
-          group: item.group,
-          onClick: !(item.group && item.childItems) ? () => {
+          type: (item.group || item.type === 'group') ? 'group' : undefined,
+          onClick: !((item.group || item.type === 'group') && item.childItems) ? () => {
             if (this.$router && item.path) {
               Promise.resolve(
                 this.$router.push(item.path)

@@ -47,7 +47,6 @@ collapse
 |icon|`() => VNode`||
 |key|`string`|The indentifier of the submenu. **required**|
 |title|`string`||
-|type|`'submenu'`|**required**|
 
 ### MenuItemGroup Properties
 |Name|Type|Description|

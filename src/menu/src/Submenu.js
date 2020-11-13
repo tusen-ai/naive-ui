@@ -27,7 +27,7 @@ export default {
       type: Boolean,
       default: false
     },
-    children: {
+    tmNodes: {
       type: Array,
       required: true
     },
@@ -37,7 +37,7 @@ export default {
     },
     onClick: {
       type: Function,
-      default: () => {}
+      default: undefined
     }
   },
   setup (props) {
@@ -74,12 +74,18 @@ export default {
     }
   },
   methods: {
+    doClick () {
+      const {
+        onClick
+      } = this
+      if (onClick) onClick()
+    },
     handleClick () {
       if (!this.mergedDisabled) {
         if (!this.menuCollapsed) {
           this.NMenu.toggleExpand(this.internalKey)
         }
-        this.onClick()
+        this.doClick()
       }
     },
     handlePopoverShowChange (value) {
@@ -123,13 +129,13 @@ export default {
       return h(NFadeInExpandTransition, null, {
         default: () => {
           const {
-            children,
+            tmNodes,
             collapsed
           } = this
           return withDirectives(
             h('div', {
               class: 'n-submenu-children'
-            }, children.map(item => itemRenderer(item, insidePopover))),
+            }, tmNodes.map(item => itemRenderer(item, insidePopover))),
             [
               [vShow, insidePopover || !collapsed]
             ]

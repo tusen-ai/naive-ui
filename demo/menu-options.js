@@ -8,7 +8,7 @@ const appendCounts = item => {
   if (item.childItems) {
     item.childItems.forEach(appendCounts)
     item.count = item.childItems.reduce((sum, item) => sum + item.count, 0)
-    if (!item.group) {
+    if (item.type !== 'group') {
       item.title = () => {
         return h('n-config-consumer', {
           props: {
@@ -81,7 +81,7 @@ export default function (instance) {
       },
       appendCounts({
         name: '配置组件',
-        group: true,
+        type: 'group',
         childItems: [
           {
             name: 'Config Provider',
@@ -105,7 +105,7 @@ export default function (instance) {
       }),
       appendCounts({
         name: '布局组件',
-        group: true,
+        type: 'group',
         childItems: [
           {
             name: 'Layout',
@@ -129,7 +129,7 @@ export default function (instance) {
       }),
       appendCounts({
         name: '通用组件',
-        group: true,
+        type: 'group',
         childItems: [
           {
             name: 'Avatar',
@@ -195,7 +195,7 @@ export default function (instance) {
       }),
       appendCounts({
         name: '数据录入组件',
-        group: true,
+        type: 'group',
         childItems: [
           {
             name: 'Auto Complete',
@@ -297,7 +297,7 @@ export default function (instance) {
       }),
       appendCounts({
         name: '数据展示组件',
-        group: true,
+        type: 'group',
         childItems: [
           {
             name: 'Code',
@@ -375,7 +375,7 @@ export default function (instance) {
       }),
       appendCounts({
         name: '导航组件',
-        group: true,
+        type: 'group',
         childItems: [
           {
             name: 'Affix',
@@ -435,7 +435,7 @@ export default function (instance) {
       }),
       appendCounts({
         name: '反馈组件',
-        group: true,
+        type: 'group',
         childItems: [
           {
             name: 'Alert',
@@ -552,7 +552,7 @@ export default function (instance) {
       },
       appendCounts({
         name: 'Config Components',
-        group: true,
+        type: 'group',
         childItems: [
           {
             name: 'Config Provider',
@@ -570,7 +570,7 @@ export default function (instance) {
       }),
       appendCounts({
         name: 'Layout Components',
-        group: true,
+        type: 'group',
         childItems: [
           {
             name: 'Layout',
@@ -588,7 +588,7 @@ export default function (instance) {
       }),
       appendCounts({
         name: 'Common Components',
-        group: true,
+        type: 'group',
         childItems: [
           {
             name: 'Avatar',
@@ -634,7 +634,7 @@ export default function (instance) {
       }),
       appendCounts({
         name: 'Data Input Components',
-        group: true,
+        type: 'group',
         childItems: [
           {
             name: 'Auto Complete',
@@ -704,7 +704,7 @@ export default function (instance) {
       }),
       appendCounts({
         name: 'Data Display Components',
-        group: true,
+        type: 'group',
         childItems: [
           {
             name: 'Code',
@@ -758,7 +758,7 @@ export default function (instance) {
       }),
       appendCounts({
         name: 'Navigation Components',
-        group: true,
+        type: 'group',
         childItems: [
           {
             name: 'Affix',
@@ -800,7 +800,7 @@ export default function (instance) {
       }),
       appendCounts({
         name: 'Feedback Components',
-        group: true,
+        type: 'group',
         childItems: [
           {
             name: 'Alert',

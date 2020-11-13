@@ -60,7 +60,7 @@ export default {
     },
     onClick: {
       type: Function,
-      default: () => {}
+      default: undefined
     }
   },
   setup (props) {
@@ -83,10 +83,16 @@ export default {
     }
   },
   methods: {
+    doClick (e) {
+      const {
+        onClick
+      } = this
+      if (onClick) onClick(e)
+    },
     handleClick (e) {
       if (!this.mergedDisabled) {
         this.NMenu.handleSelect(this.internalKey)
-        this.onClick(e)
+        this.doClick(e)
       }
     }
   }

@@ -47,7 +47,6 @@ collapse
 |icon|`() => VNode`||
 |key|`string`|菜单项的标识符，**必需**|
 |title|`string \| (() => VNode \| Array<VNode>)`||
-|type|`'submenu'`|**必需**|
 
 ### MenuItemGroup Properties
 |名称|类型|说明|

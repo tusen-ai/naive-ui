@@ -1,4 +1,5 @@
 import { h, nextTick, ref, toRef, computed, onMounted } from 'vue'
+import { createTreeMate } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
 import {
   configurable,
@@ -7,8 +8,6 @@ import {
 } from '../../_mixins'
 import styles from './styles/index'
 import {
-  getActivePath,
-  getWrappedItems,
   itemRenderer
 } from './utils'
 
@@ -122,9 +121,16 @@ export default {
       controlledExpandedKeysRef,
       uncontrolledExpandedKeysRef
     )
-    const itemsRef = computed(() => getWrappedItems(props.items))
+    const treeMateRef = computed(() => createTreeMate(props.items, {
+      getKey (node) {
+        return node.key ?? node.name
+      }
+    }))
+    const tmNodesRef = computed(() => treeMateRef.value.treeNodes)
     const valueRef = toRef(props, 'value')
-    const activePathRef = computed(() => getActivePath(itemsRef.value, valueRef.value))
+    const activePathRef = computed(() => {
+      return treeMateRef.value.getPath(valueRef.value).keyPath
+    })
     const transitionDisabledRef = ref(true)
     onMounted(() => {
       nextTick(() => {
@@ -136,7 +142,7 @@ export default {
       uncontrolledExpanededKeys: uncontrolledExpandedKeysRef,
       mergedExpandedKeys: mergedExpandedKeysRef,
       activePath: activePathRef,
-      menuItems: itemsRef,
+      tmNodes: tmNodesRef,
       transitionDisabled: transitionDisabledRef
     }
   },
@@ -166,16 +172,19 @@ export default {
     }
   },
   render () {
+    const {
+      mergedTheme
+    } = this
     return h('div', {
       class: [
         'n-menu',
         `n-menu--${this.mode}`,
         {
-          [`n-${this.mergedTheme}-theme`]: this.mergedTheme,
+          [`n-${mergedTheme}-theme`]: mergedTheme,
           'n-menu--collapsed': this.collapsed,
           'n-menu--transition-disabled': this.transitionDisabled
         }
       ]
-    }, this.menuItems.map(item => itemRenderer(item)))
+    }, this.tmNodes.map(tmNode => itemRenderer(tmNode)))
   }
 }
