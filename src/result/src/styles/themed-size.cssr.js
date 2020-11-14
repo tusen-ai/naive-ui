@@ -1,9 +1,9 @@
-import { c, cB, cTB, cE, cM } from '../../../_utils/cssr'
+import { c, cB, cTB, cE, cM, createKey } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
     const size = props.$instance.size
-    const { iconSize, headerFontSize, descriptionFontSize } = props.$local
+    const { $local } = props
     return cTB('result',
       [
         cM(`${size}-size`, [
@@ -14,21 +14,15 @@ export default c([
             `
           }, [
             cE('status-image', {
-              raw: `
-                width: ${iconSize[size]}
-              `
+              width: $local[createKey('iconSize', size)]
             })
           ]),
           cB('result-header', [
             cE('title', {
-              raw: `
-                font-size: ${headerFontSize[size]}
-              `
+              fontSize: $local[createKey('headerFontSize', size)]
             }),
             cE('description', {
-              raw: `
-                font-size: ${descriptionFontSize[size]}
-              `
+              fontSize: $local[createKey('descriptionFontSize', size)]
             })
           ])
         ])

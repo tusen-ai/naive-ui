@@ -36,11 +36,8 @@ export default c([
           color: valuePrefixTextColor
         }, [
           cB('icon', {
-            raw: `
-              vertical-align: -0.125em;
-            `,
-            fill: valuePrefixTextColor,
-            stroke: valuePrefixTextColor
+            verticalAlign: '-0.125em',
+            color: valuePrefixTextColor
           })
         ]),
         cE('content', {
@@ -61,8 +58,7 @@ export default c([
             raw: `
               vertical-align: -0.125em;
             `,
-            fill: valueSuffixTextColor,
-            stroke: valueSuffixTextColor
+            color: valueSuffixTextColor
           })
         ])
       ])

@@ -45,7 +45,7 @@ export default c([
         }),
         cB('progress-icon', [
           cB('icon', {
-            fill: fillColor
+            color: fillColor
           }),
           cM('as-text', {
             color: outerIndicatorTextColor

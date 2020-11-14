@@ -1,20 +1,14 @@
 export default {
-  headerFontSize: {
-    small: '26px',
-    medium: '32px',
-    large: '40px',
-    huge: '48px'
-  },
-  descriptionFontSize: {
-    small: '14px',
-    medium: '14px',
-    large: '15px',
-    huge: '16px'
-  },
-  iconSize: {
-    small: '64px',
-    medium: '80px',
-    large: '100px',
-    huge: '125px'
-  }
+  headerFontSizeSmall: '26px',
+  headerFontSizeMedium: '32px',
+  headerFontSizeLarge: '40px',
+  headerFontSizeHuge: '48px',
+  descriptionFontSizeSmall: '14px',
+  descriptionFontSizeMedium: '14px',
+  descriptionFontSizeLarge: '15px',
+  descriptionFontSizeHuge: '16px',
+  iconSizeSmall: '64px',
+  iconSizeMedium: '80px',
+  iconSizeLarge: '100px',
+  iconSizeHuge: '125px'
 }

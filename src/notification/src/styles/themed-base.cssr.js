@@ -4,10 +4,7 @@ function typeStyle (type, color) {
   return cM(`${type}-type`, [
     cE('avatar', [
       cB('icon', {
-        raw: `
-          fill: ${color};
-          stroke: ${color};
-        `
+        color
       })
     ])
   ])
@@ -165,25 +162,16 @@ export default c([
             `
           }, [
             cB('icon', {
-              raw: `
-                fill: ${closeColor};
-                stroke: ${closeColor};
-            `
+              color: closeColor
             }),
             c('&:hover', [
               cB('icon', {
-                raw: `
-                  fill: ${closeColorHover};
-                  stroke: ${closeColorHover};
-                `
+                color: closeColorHover
               })
             ]),
             c('&:active', [
               cB('icon', {
-                raw: `
-                  fill: ${closeColorActive};
-                  stroke: ${closeColorActive};
-                `
+                color: closeColorActive
               })
             ])
           ])

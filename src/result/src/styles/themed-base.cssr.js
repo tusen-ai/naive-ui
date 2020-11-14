@@ -4,10 +4,7 @@ function createResultStatus (status, colorStatus) {
   return cM(`${status}-status`, [
     cB('result-icon', [
       cB('icon', {
-        raw: `
-          fill: ${colorStatus[status]};
-          stroke: ${colorStatus[status]};
-        `
+        color: colorStatus[status]
       })
     ])
   ])

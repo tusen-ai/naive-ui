@@ -41,8 +41,7 @@ export default c([
       }),
       cTB('icon', {
         raw: `
-          fill: #FFF;
-          stroke: #FFF;
+          color: #FFF;
           vertical-align: bottom;
         `
       })

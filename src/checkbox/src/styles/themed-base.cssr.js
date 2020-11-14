@@ -225,16 +225,12 @@ export default c([
           }, [
             cB('checkbox-icon', [
               cE('check, line', {
-                raw: `
-                  fill: ${iconColorDisabled};
-                `
+                fill: iconColorDisabled
               })
             ])
           ]),
           cE('label', {
-            raw: `
-              color: ${labelTextColorDisabled};
-            `
+            color: labelTextColorDisabled
           })
         ])
       ])

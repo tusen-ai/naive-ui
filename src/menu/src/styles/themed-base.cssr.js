@@ -229,8 +229,7 @@ export default c([
           `
         }, [
           cB('icon', {
-            fill: itemIconColor,
-            stroke: itemIconColor
+            color: itemIconColor
           })
         ]),
         cE('arrow', {

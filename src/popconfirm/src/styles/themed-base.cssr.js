@@ -22,16 +22,13 @@ export default c([
               font-size: 22px;
               left: 0;
               top: -2px;
-              fill: ${iconColor};
-              stroke: ${iconColor};
+              color: ${iconColor};
             `
           })
         ]),
         cM('show-icon', [
           cE('body', {
-            raw: `
-              padding-left: 26px;
-            `
+            paddingLeft: '26px'
           })
         ]),
         cE('action', {
