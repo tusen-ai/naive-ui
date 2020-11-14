@@ -5,6 +5,7 @@
     @resize="handleContentResize"
   >
     <div
+      v-bind="$attrs"
       class="n-scrollbar"
       :class="{
         [`n-${mergedTheme}-theme`]: mergedTheme
