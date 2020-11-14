@@ -73,8 +73,7 @@ export default c([
                 height: 14px;
                 width: 14px;
                 font-size: 14px;
-                fill: ${arrowColor};
-                stroke: ${arrowColor};
+                color: ${arrowColor};
               `
             }, [
               iconSwitchTransition()
