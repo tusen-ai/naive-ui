@@ -71,40 +71,28 @@ export default c([
         }),
         c('&:hover', [
           cE('top', {
-            raw: `
-              transform: rotate(12deg) scale(1.15) translateY(-2px);
-            `
+            transform: 'rotate(12deg) scale(1.15) translateY(-2px)'
           }),
           cE('bottom', {
-            raw: `
-              transform: rotate(-12deg) scale(1.15) translateY(2px);
-            `
+            transform: 'rotate(-12deg) scale(1.15) translateY(2px)'
           })
         ]),
         cM('collapsed', [
           c('&:hover', [
             cE('top', {
-              raw: `
-                transform: rotate(-12deg) scale(1.15) translateY(-2px);
-              `
+              transform: 'rotate(-12deg) scale(1.15) translateY(-2px)'
             }),
             cE('bottom', {
-              raw: `
-                transform: rotate(12deg) scale(1.15) translateY(2px);
-              `
+              transform: 'rotate(12deg) scale(1.15) translateY(2px)'
             })
           ])
         ]),
         cE('top, bottom', {
-          raw: `
-            background-color: ${siderToggleBarColor}
-          `
+          backgroundColor: siderToggleBarColor
         }),
         c('&:hover', [
           cE('top, bottom', {
-            raw: `
-              background-color: ${siderToggleBarColorHover}
-            `
+            backgroundColor: siderToggleBarColorHover
           })
         ])
       ]),
@@ -126,16 +114,12 @@ export default c([
       }),
       cM('show-content', [
         cE('content', {
-          raw: `
-            opacity: 1;
-          `
+          opacity: 1
         })
       ]),
       cM('collapsed', [
         cB('layout-toggle-button', {
-          raw: `
-            transform: translateX(50%) translateY(-50%) rotate(180deg);
-          `
+          transform: 'translateX(50%) translateY(-50%) rotate(180deg)'
         })
       ]),
       cM('absolute-positioned', {
@@ -158,9 +142,7 @@ export default c([
       ]),
       cM('bordered', [
         cE('border', {
-          raw: `
-            background-color: ${siderBorderColor};
-          `
+          backgroundColor: siderBorderColor
         })
       ])
     ])
