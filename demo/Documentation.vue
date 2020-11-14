@@ -1,15 +1,14 @@
 <template>
-  <n-nimbus-service-layout
+  <n-service-layout
     ref="layout"
     :padding-body="false"
-    :items="items"
-    :sider-style="siderStyle"
-    :content-style="contentStyle"
-    :body-themed-style="bodyThemedStyle"
+    :items="Site.items"
+    :sider-props="siderProps"
+    :content-props="contentProps"
   >
     <router-view />
     <landing-footer style="padding: 32px 204px 16px 56px; text-align: left; font-size: 14px;" />
-  </n-nimbus-service-layout>
+  </n-service-layout>
 </template>
 
 <script>
@@ -24,11 +23,7 @@ export default {
       NDocRoot: this
     }
   },
-  inject: {
-    Site: {
-      default: null
-    }
-  },
+  inject: ['Site'],
   beforeRouteUpdate (to, from, next) {
     this.memorizedPath = from ? from.path : null
     next()
@@ -36,22 +31,18 @@ export default {
   data () {
     return {
       memorizedPath: null,
-      siderStyle: {
-        height: '100%'
+      siderProps: {
+        style: {
+          height: '100%'
+        }
       },
-      contentStyle: {
-        height: '100%'
-      },
-      bodyThemedStyle: {
-        light: {
-          backgroundColor: '#FFF'
+      contentProps: {
+        themedStyle: {
+          light: {
+            backgroundColor: '#FFF'
+          }
         }
       }
-    }
-  },
-  computed: {
-    items () {
-      return this.Site.items
     }
   },
   methods: {

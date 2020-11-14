@@ -319,13 +319,15 @@
   - [x] table x scroll 右侧阴影不消失
   - [x] log scrollTo 有点问题
   - [x] remove hollowoutable
-  - [ ] styleScheme, css variables 组件
+  - [x] styleScheme, css variables 组件
+    - 文档之后再说
   - [x] use-global-style ? 感觉效果不会特别好而且还是很无谓的性能开销
     这个问题可以之后再思考，现阶段 vue 的写法还是全局 install
   - [x] dynamic-input, no value
-  - [ ] button, input 的 css 变量名需要修改一下
+  - [x] button, input 的 css 变量名需要修改一下
   - [x] test rollup treeshaking
   - [x] test webpack treeshaking
+  - [x] menu utils render
 
 ## Info
 https://github.com/vuejs/vue-next/issues/2549

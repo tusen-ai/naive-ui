@@ -18,7 +18,9 @@
 </template>
 
 <script>
+import { ref, computed } from 'vue'
 import Site from './Site.vue'
+import { useRoute, useRouter } from 'vue-router'
 
 export default {
   name: 'SiteProvider',
@@ -36,28 +38,47 @@ export default {
   beforeRouteUpdate (to, from, next) {
     next()
   },
-  computed: {
-    lang: {
+  setup () {
+    const displayModeRef = ref(
+      localStorage.getItem('mode') ?? 'debug'
+    )
+    const displayModeComputed = computed({
       get () {
-        return this.$route.params.lang || 'en-US'
+        return displayModeRef.value
+      },
+      set (value) {
+        displayModeRef.value = value
+        localStorage.setItem('mode', value)
+      }
+    })
+    const route = useRoute()
+    const router = useRouter()
+    const langRef = computed({
+      get () {
+        return route.params.lang || 'en-US'
       },
       set (lang) {
-        this.$router.push(changeLangInPath(this.$route.fullPath, lang))
+        router.push(changeLangInPath(route.fullPath, lang))
       }
-    },
-    theme: {
+    })
+    const themeRef = computed({
       get () {
-        switch (this.$route.params.theme) {
+        switch (route.params.theme) {
           case 'os-theme': return 'light'
           case 'dark': return 'dark'
           default: return 'light'
         }
       },
       set (theme) {
-        this.$router.push(
-          changeThemeInPath(this.$route.fullPath, theme)
+        router.push(
+          changeThemeInPath(route.fullPath, theme)
         )
       }
+    })
+    return {
+      displayMode: displayModeComputed,
+      theme: themeRef,
+      lang: langRef
     }
   }
 }

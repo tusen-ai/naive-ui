@@ -9,17 +9,18 @@ const appendCounts = item => {
     item.childItems.forEach(appendCounts)
     item.count = item.childItems.reduce((sum, item) => sum + item.count, 0)
     item.name += ` (${item.count})`
+    if (item.type === 'group' && item.title) item.title += ` (${item.count})`
     return item
   }
 }
 
-const appendDeprecatedDemos = (item, mode) => {
-  if ((__DEV__ && mode === 'debug') || localStorage.getItem('nimbus')) {
+const createDeprecatedDemos = (item, mode) => {
+  if (__DEV__ && mode === 'debug') {
     return [item]
   } else return []
 }
 
-const appendDebugDemos = (item, mode) => {
+const createDebugDemos = (item, mode) => {
   if (__DEV__ && mode === 'debug') {
     return [item]
   } else return []
@@ -524,7 +525,7 @@ export default function (instance) {
         }
       ]
     }),
-    ...appendDeprecatedDemos({
+    ...createDeprecatedDemos({
       name: 'Deprecated',
       childItems: [
         {
@@ -533,7 +534,7 @@ export default function (instance) {
         }
       ]
     }, mode),
-    ...appendDebugDemos(
+    ...createDebugDemos(
       {
         name: 'Debug',
         childItems: [

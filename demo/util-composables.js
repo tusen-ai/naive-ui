@@ -1,26 +1,11 @@
 import {
-  computed,
-  ref,
   toRef,
   inject
 } from 'vue'
 
-export function useDisplayMode () {
-  const devModeRef = ref(
-    localStorage.getItem('mode') ? localStorage.getItem('mode') : 'debug'
-  )
-  return computed({
-    get () {
-      return devModeRef.value
-    },
-    set (value) {
-      devModeRef.value = value
-      localStorage.setItem('mode', value)
-    }
-  })
+export function useSiteDisplayMode () {
+  return toRef(inject('SiteProvider'), 'displayMode')
 }
-
-export const displayModeRef = useDisplayMode()
 
 export function useSiteTheme () {
   return toRef(inject('SiteProvider'), 'theme')

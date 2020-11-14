@@ -5,19 +5,17 @@
     :segmented="{
       footer: true
     }"
-    :content-style="contentStyle"
   >
     <template #header>
       <slot name="title" />
     </template>
-
     <template #header-extra>
       <n-tooltip
         trigger="hover"
         :placement="'top'"
         :show-arrow="true"
       >
-        <template #activator>
+        <template #trigger>
           <edit-on-github-button
             style="padding: 0; margin-right: 6px;"
             size="tiny"
@@ -32,7 +30,7 @@
         :placement="'top'"
         :show-arrow="true"
       >
-        <template #activator>
+        <template #trigger>
           <n-button
             style="padding: 0;"
             size="tiny"
@@ -60,17 +58,15 @@
 <script>
 import { nextTick } from 'vue'
 import { CodeOutline } from '@vicons/ionicons-v5'
-import { displayModeRef, i18n } from '../util-composables'
+import { i18n, useSiteDisplayMode } from '../util-composables'
 
 export default {
   components: {
     CodeOutline
   },
-  inject: {
-    NDocumentation: {
-      default: null
-    }
-  },
+  inject: [
+    'NDocumentation'
+  ],
   props: {
     title: {
       type: String,
@@ -87,7 +83,7 @@ export default {
   },
   setup () {
     return {
-      displayMode: displayModeRef,
+      displayMode: useSiteDisplayMode(),
       ...(i18n({
         'zh-CN': {
           show: '显示代码',
@@ -104,20 +100,21 @@ export default {
   },
   data () {
     return {
-      showCode: false,
-      contentStyle: null,
-      isShow: true,
-      isDebugDemo: false
+      showCode: false
+    }
+  },
+  computed: {
+    isDebugDemo () {
+      return this.demoFileName && (~this.demoFileName.indexOf('debug') || ~this.demoFileName.indexOf('Debug'))
+    },
+    isShow () {
+      return !(this.isDebugDemo && this.displayMode !== 'debug')
     }
   },
   watch: {
     showCode () {
-      this.contentStyle = {
-        transition: 'none'
-      }
       nextTick(() => {
         this.$refs.expandCodeButton.syncPosition()
-        this.contentStyle = null
       })
     },
     displayMode () {
@@ -133,13 +130,10 @@ export default {
     },
     init () {
       const map = this.NDocumentation.anchorLinkMap
-      this.isDebugDemo = this.demoFileName && (~this.demoFileName.indexOf('debug') || ~this.demoFileName.indexOf('Debug'))
       if (this.isDebugDemo) {
         if (this.displayMode === 'debug') {
-          this.isShow = true
           map.set(this.demoFileName, this.title)
         } else {
-          this.isShow = false
           map.delete(this.demoFileName)
         }
       } else {

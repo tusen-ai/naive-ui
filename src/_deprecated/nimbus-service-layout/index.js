@@ -1,8 +1,8 @@
 import ServiceLayout from './src/ServiceLayout.js'
 
-ServiceLayout.install = function (app) {
+ServiceLayout.install = function (app, naive) {
   app.component('NNimbusServiceLayout', ServiceLayout)
-  app.component(ServiceLayout.name, ServiceLayout)
+  app.component(naive.componentPrefix + ServiceLayout.name, ServiceLayout)
 }
 
 export default ServiceLayout

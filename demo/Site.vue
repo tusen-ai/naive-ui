@@ -8,11 +8,15 @@
 </template>
 
 <script>
-import { inject, computed } from 'vue'
+import { computed } from 'vue'
 import SiteHeader from './SiteHeader.vue'
 import menuOptions from './menu-options'
 import { loadingBarApiRef } from './routes/router'
-import { displayModeRef } from './util-composables'
+import {
+  useSiteDisplayMode,
+  useSiteTheme,
+  useSiteLang
+} from './util-composables'
 
 export default {
   name: 'Site',
@@ -29,22 +33,15 @@ export default {
     }
   },
   setup () {
-    const SiteProvider = inject('SiteProvider')
-    return {
-      menuGenerationOptions: computed(() => {
-        return {
-          theme: SiteProvider.theme,
-          lang: SiteProvider.lang,
-          mode: displayModeRef.value
-        }
-      })
-    }
-  },
-  computed: {
-    items () {
-      return menuOptions(this.menuGenerationOptions)
-    },
-    flattenedItems () {
+    const themeRef = useSiteTheme()
+    const langRef = useSiteLang()
+    const displayModeRef = useSiteDisplayMode()
+    const itemsRef = computed(() => menuOptions({
+      theme: themeRef.value,
+      lang: langRef.value,
+      mode: displayModeRef.value
+    }))
+    const flattenedItemsRef = computed(() => {
       const flattenedItems = []
       const traverse = items => {
         if (items) {
@@ -54,8 +51,12 @@ export default {
           })
         }
       }
-      traverse(this.items)
+      traverse(itemsRef.value)
       return flattenedItems
+    })
+    return {
+      items: itemsRef,
+      flattenedItems: flattenedItemsRef
     }
   },
   mounted () {

@@ -7,19 +7,15 @@
     }"
   >
     <div class="nav">
-      <n-config-consumer v-slot="{ styleScheme }" abstract>
-        <div
-          class="ui-logo"
-          :style="{
-            color: styleScheme.primaryTextColor,
-            transition: `color .3s ${styleScheme.easeInOutCubicBezier}`
-          }"
-          @click="handleLogoClick"
-        >
-          <img src="./assets/images/naivelogo.svg">
-          Naive UI ({{ version }})
-        </div>
-      </n-config-consumer>
+      <n-text
+        tag="div"
+        class="ui-logo"
+        :depth="1"
+        @click="handleLogoClick"
+      >
+        <img src="./assets/images/naivelogo.svg">
+        Naive UI ({{ version }})
+      </n-text>
       <div style=" margin-left: 56px; display: flex; align-items: center;">
         <n-auto-complete
           v-model:value="searchInputValue"
@@ -62,7 +58,7 @@
 <script>
 import { computed, readonly, ref } from 'vue'
 import version from '../src/version'
-import { useSiteTheme, useSiteLang, displayModeRef, i18n } from './util-composables'
+import { useSiteTheme, useSiteLang, useSiteDisplayMode, i18n } from './util-composables'
 
 function match (pattern, string) {
   if (!pattern.length) return true
@@ -130,7 +126,7 @@ export default {
       searchInputValue: ref(''),
       version,
       dev: __DEV__,
-      displayMode: displayModeRef,
+      displayMode: useSiteDisplayMode(),
       lang: useSiteLang(),
       theme: useSiteTheme(),
       menuItems: menuItemsRef,
@@ -248,10 +244,6 @@ export default {
   padding-left: 32px;
 }
 
-.nav-menu ::v-deep(.n-menu-item) {
-  height: 63px !important;
-}
-
 .nav-picker {
   cursor: pointer;
   margin-right: 12px;
@@ -259,5 +251,11 @@ export default {
 
 .nav-picker:last-child {
   margin-right: 0;
+}
+</style>
+
+<style>
+.nav-menu .n-menu-item {
+  height: 63px !important;
 }
 </style>
