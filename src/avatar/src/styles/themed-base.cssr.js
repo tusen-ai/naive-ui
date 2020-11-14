@@ -1,15 +1,17 @@
-import { c, cE, cTB } from '../../../_utils/cssr'
+import { c, cE, cTB, cM, cB, createKey } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
     const {
+      $local
+    } = props
+    const {
       borderRadius,
       color: backgroundColor
-    } = props.$local
+    } = $local
     const {
       cubicBezierEaseInOut
     } = props.$base
-
     return cTB('avatar', {
       raw: `
         color: #FFF;
@@ -40,10 +42,25 @@ export default c([
         `
       }),
       cTB('icon', {
-        raw: `
-          color: #FFF;
-          vertical-align: bottom;
-        `
+        color: '#FFF',
+        verticalAlign: 'bottom'
+      }),
+      ['tiny', 'small', 'medium', 'large', 'huge'].map(size => {
+        const height = $local[createKey('height', size)]
+        return cM(`${size}-size`, {
+          height,
+          width: height
+        }, [
+          cM('circle-shaped, round-shaped', {
+            borderRadius: '50%'
+          }),
+          cE('text', {
+            lineHeight: 1.25
+          }),
+          cB('icon', {
+            fontSize: height
+          })
+        ])
       })
     ])
   }])

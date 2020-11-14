@@ -1,5 +1,4 @@
 import themedBaseStyle from './themed-base.cssr.js'
-import themedSizeStyle from './themed-size.cssr.js'
 
 export default [
   {
@@ -8,13 +7,5 @@ export default [
       'mergedTheme'
     ],
     CNode: themedBaseStyle
-  },
-  {
-    key: 'cssrSize',
-    watch: [
-      'mergedTheme',
-      'cssrSize'
-    ],
-    CNode: themedSizeStyle
   }
 ]

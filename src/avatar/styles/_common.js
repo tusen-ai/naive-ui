@@ -1,9 +1,7 @@
 export default {
-  height: {
-    tiny: '22px',
-    small: '28px',
-    medium: '34px',
-    large: '40px',
-    huge: '48px'
-  }
+  heightTiny: '22px',
+  heightSmall: '28px',
+  heightMedium: '34px',
+  heightLarge: '40px',
+  heightHuge: '48px'
 }
