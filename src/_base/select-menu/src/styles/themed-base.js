@@ -71,6 +71,9 @@ export default c([
           opacity: 1;
         `
       }, [
+        cB('icon', {
+          transition: 'none'
+        }),
         c('&:active', {
           color: optionTextColorPressed
         }),
