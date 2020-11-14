@@ -18,7 +18,7 @@
       </slot>
       <div class="n-collapse-item-arrow">
         <slot name="arrow" :collapsed="collapsed">
-          <n-icon type="ios-arrow-forward">
+          <n-icon color-transition>
             <arrow-icon />
           </n-icon>
         </slot>

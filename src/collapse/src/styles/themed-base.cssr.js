@@ -14,9 +14,7 @@ export default c([
       cTB(
         'collapse',
         {
-          raw: `
-            width: 100%;
-          `
+          width: '100%'
         },
         [
           cB('collapse-item', {
@@ -29,65 +27,46 @@ export default c([
           },
           [
             c('&:first-child', {
-              raw: `
-                margin-top: 0;
-              `
+              marginTop: 0
             }),
             c('&:first-child >', [
               cE('header', {
-                raw: `
-                  padding-top: 0;
-                `
+                paddingTop: 0
               })
             ]),
             cM('left-arrow-placement', [
               cE('header', [
                 cB('collapse-item-arrow', {
-                  raw: `
-                    margin-right: 4px;
-                  `
+                  marginRight: '4px'
                 })
               ])
             ]),
             cM('right-arrow-placement', [
               cE('header', [
                 cB('collapse-item-arrow', {
-                  raw: `
-                    margin-left: 4px;
-                  `
+                  marginLeft: '4px'
                 })
               ])
             ]),
             cB('collapse-item', {
-              raw: `
-                margin-left: 32px;
-              `
+              marginLeft: '32px'
             }),
             cE('content-wrapper', {
-              raw: `
-                overflow: hidden;
-              `
+              overflow: 'hidden'
             }, [
               fadeInHeightExpandTransition({ duration: '0.15s' })
             ]),
             cM('active', [
               cE('header', [
                 cM('active', [
-                  cB('collapse-item-arrow', [
-                    cB('icon', {
-                      raw: `
-                        transform: rotate(90deg);
-                      `
-                    })
-                  ])
+                  cB('collapse-item-arrow', {
+                    transform: 'rotate(90deg)'
+                  })
                 ])
-
               ])
             ]),
             c('&:not(:first-child)', {
-              raw: `
-                border-top: 1px solid ${dividerColor};
-              `
+              borderTop: `1px solid ${dividerColor}`
             }),
             cE('header', {
               raw: `
@@ -102,19 +81,13 @@ export default c([
               `
             }, [
               cB('collapse-item-arrow', {
-                raw: `
-                  display: flex;
-                `
+                display: 'flex',
+                transition: `transform .15s ${cubicBezierEaseInOut}`
               }, [
                 cB('icon', {
                   raw: `
-                    transition:
-                      transform .15s ${cubicBezierEaseInOut},
-                      fill .3s ${cubicBezierEaseInOut},
-                      stroke .3s ${cubicBezierEaseInOut};
-                    font-size: 16px;
-                    fill: ${arrowColor};
-                    stroke: ${arrowColor};
+                    font-size: 18px;
+                    color: ${arrowColor};
                   `
                 })
               ])
