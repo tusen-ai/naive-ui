@@ -3,6 +3,11 @@
     <n-config-consumer>
       <template #default="{ styleScheme }">
         <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="30 0 579.43 484.77">
+          <defs>
+            <filter id="filter-1" x="-80.0%" y="-80.0%" width="260.0%" height="260.0%" filterUnits="objectBoundingBox">
+              <feGaussianBlur stdDeviation="12" in="SourceGraphic" />
+            </filter>
+          </defs>
           <g id="Page-1" style="opacity:.9">
             <g id="Dark-1-Copy-3">
               <g id="L">
@@ -94,6 +99,7 @@
                     }"
                   />
                 </g>
+                <circle id="Oval备份-2" fill-opacity="0.25" fill="#000000" filter="url(#filter-1)" cx="477.54" cy="66.09" r="20" />
                 <circle
                   id="Oval"
                   cx="477.54"
