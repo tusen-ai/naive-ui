@@ -1,4 +1,4 @@
-import { c, cTB, cB, cE } from '../../../_utils/cssr'
+import { c, cTB, cE } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
@@ -21,16 +21,11 @@ export default c([
       [
         cE('icon', {
           raw: `
+            color: ${iconColor};
             transition:
-              color .3s ${cubicBezierEaseInOut},
+              color .3s ${cubicBezierEaseInOut};
           `
-        }, [
-          cB('icon', {
-            raw: `
-              color: ${iconColor};
-            `
-          })
-        ]),
+        }),
         cE('description', {
           raw: `
             margin-top: 4px;

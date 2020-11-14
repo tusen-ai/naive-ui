@@ -49,6 +49,7 @@
           <n-icon
             v-else
             key="icon"
+            color-transition
             class="n-icon-slot"
           >
             <slot

@@ -68,28 +68,21 @@ export default c([
             raw: `
               vertical-align: middle;
               margin-right: 8px;
+              transition: color .3s ${cubicBezierEaseInOut};
             `
           },
           [
             cM('warning-type', {
-              raw: `
-                color: ${iconColorWarning};
-              `
+              color: iconColorWarning
             }),
             cM('success-type', {
-              raw: `
-                color: ${iconColorSuccess};
-              `
+              color: iconColorSuccess
             }),
             cM('error-type', {
-              raw: `
-                color: ${iconColorError};
-              `
+              color: iconColorError
             }),
             cM('info-type', {
-              raw: `
-                color: ${iconColorInfo};
-              `
+              color: iconColorInfo
             })
           ]),
           cB('confirm-title-content', {
@@ -99,20 +92,15 @@ export default c([
             `
           }),
           cE('close', {
-            raw: `
-              color: ${closeColor};
-            `
+            color: closeColor,
+            transition: `color .3s ${cubicBezierEaseInOut}`
           },
           [
             c('&:hover', {
-              raw: `
-                color: ${closeColorHover};
-              `
+              color: closeColorHover
             }),
             c('&:active', {
-              raw: `
-                color: ${closeColorActive};
-              `
+              color: closeColorActive
             })
           ])
         ])

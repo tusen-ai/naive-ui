@@ -1,7 +1,5 @@
 export default {
-  fontSize: {
-    small: '14px',
-    medium: '14px',
-    large: '15px'
-  }
+  fontSizeSmall: '14px',
+  fontSizeMedium: '14px',
+  fontSizeLarge: '15px'
 }

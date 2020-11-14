@@ -52,14 +52,14 @@ export default {
     const parent = this.$parent
     if (parent && parent.$options.__NAIVE_ICON__) return getSlot(this)
     else {
-      const { mergedTheme, depth, colorTransition } = this.mergedTheme
+      const { mergedTheme, depth, colorTransition } = this
       return h('i', {
         ...this.$attrs,
         class: {
           'n-icon': true,
           [`n-${mergedTheme}-theme`]: mergedTheme,
           [`n-icon--${depth}-depth`]: depth,
-          'n-icon--color-transition': colorTransition
+          'n-icon--color-transition': colorTransition || depth !== undefined
         },
         style: {
           ...this.styles,

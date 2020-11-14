@@ -2,11 +2,9 @@ import { cTB, c, cB, cE, cM } from '../../../_utils/cssr'
 
 function createResultStatus (status, colorStatus) {
   return cM(`${status}-status`, [
-    cB('result-icon', [
-      cB('icon', {
-        color: colorStatus[status]
-      })
-    ])
+    cB('result-icon', {
+      color: colorStatus[status]
+    })
   ])
 }
 
@@ -45,12 +43,11 @@ export default c([
         raw: `
           display: flex;
           justify-content: center;
+          transition: color .3s ${cubicBezierEaseInOut};
         `
       }),
       cB('result-content', {
-        raw: `
-          margin-top: 24px;
-        `
+        marginTop: '24px'
       }),
       cB('result-footer', {
         raw: `

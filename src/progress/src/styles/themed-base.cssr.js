@@ -2,11 +2,19 @@ import { cTB, c, cB, cE, cM } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
-    const base = props.$base
+    const {
+      cubicBezierEaseInOut,
+      fontWeightStrong
+    } = props.$base
     const local = props.$local
     return cTB('progress', {
       display: 'inline-block'
     }, [
+      cB('progress-icon', [
+        cB('icon', {
+          transition: `color .3s ${cubicBezierEaseInOut}`
+        })
+      ]),
       cM('line', {
         width: '100%',
         display: 'block'
@@ -31,8 +39,8 @@ export default c([
             font-size: 18px;
           `,
           transition: `
-            fill .3s ${base.cubicBezierEaseInOut},
-            color .3s ${base.cubicBezierEaseInOut}
+            fill .3s ${cubicBezierEaseInOut},
+            color .3s ${cubicBezierEaseInOut}
           `
         }, [
           cM('as-text', {
@@ -70,7 +78,7 @@ export default c([
             color: inherit;
             font-size: 36px;
           `,
-          transition: `color .3s ${base.cubicBezierEaseInOut}`
+          transition: `color .3s ${cubicBezierEaseInOut}`
         }),
         cB('progress-icon', {
           raw: `
@@ -86,8 +94,8 @@ export default c([
         }),
         cB('progress-text', {
           whiteSpace: 'nowrap',
-          fontWeight: base.fontWeightStrong,
-          transition: `color .3s ${base.cubicBezierEaseInOut}`
+          fontWeight: fontWeightStrong,
+          transition: `color .3s ${cubicBezierEaseInOut}`
         }, [
           cE('percentage', {
             color: 'inherit',
@@ -115,7 +123,7 @@ export default c([
             justify-content: center;
           `,
           transition: `
-            color .3s ${base.cubicBezierEaseInOut}
+            color .3s ${cubicBezierEaseInOut}
           `
         })
       ]),
@@ -131,9 +139,9 @@ export default c([
           }),
           cB('progress-graph-circle-fill', {
             transition: `
-              opacity .3s ${base.cubicBezierEaseInOut},
-              stroke .3s ${base.cubicBezierEaseInOut},
-              stroke-dasharray .3s ${base.cubicBezierEaseInOut}
+              opacity .3s ${cubicBezierEaseInOut},
+              stroke .3s ${cubicBezierEaseInOut},
+              stroke-dasharray .3s ${cubicBezierEaseInOut}
             `
           }, [
             cM('empty', {
@@ -141,7 +149,7 @@ export default c([
             })
           ]),
           cB('progress-graph-circle-rail', {
-            transition: `stroke .3s ${base.cubicBezierEaseInOut}`,
+            transition: `stroke .3s ${cubicBezierEaseInOut}`,
             overflow: 'hidden',
             stroke: local.railColor
           })
@@ -166,8 +174,8 @@ export default c([
                 fontSize: '14px',
                 lineHeight: '21px',
                 color: local.innerIndicatorTextColor,
-                fontWeight: base.fontWeightStrong,
-                transition: `color .3s ${base.cubicBezierEaseInOut}`
+                fontWeight: fontWeightStrong,
+                transition: `color .3s ${cubicBezierEaseInOut}`
               })
             ])
           ]),
@@ -178,7 +186,7 @@ export default c([
           }, [
             cB('progress-graph-line-rail', {
               flex: 1,
-              transition: `background-color .3s ${base.cubicBezierEaseInOut}`
+              transition: `background-color .3s ${cubicBezierEaseInOut}`
             }),
             cB('progress-graph-line-indicator', {
               raw: `
@@ -195,11 +203,11 @@ export default c([
               `,
               color: local.innerIndicatorTextColor,
               transition: `
-                right .2s ${base.cubicBezierEaseInOut},
-                color .3s ${base.cubicBezierEaseInOut},
-                background-color .3s ${base.cubicBezierEaseInOut}
+                right .2s ${cubicBezierEaseInOut},
+                color .3s ${cubicBezierEaseInOut},
+                background-color .3s ${cubicBezierEaseInOut}
               `,
-              fontWeight: base.fontWeightStrong
+              fontWeight: fontWeightStrong
             })
           ]),
           cB('progress-graph-line-rail', {
@@ -210,7 +218,7 @@ export default c([
               border-radius: 5px;
             `,
             backgroundColor: local.railColor,
-            transition: `background-color .3s ${base.cubicBezierEaseInOut}`
+            transition: `background-color .3s ${cubicBezierEaseInOut}`
           }, [
             cB('progress-graph-line-fill', {
               raw: `
@@ -221,8 +229,8 @@ export default c([
                 max-width: 0%;
               `,
               transition: `
-                background-color .3s ${base.cubicBezierEaseInOut},
-                max-width .2s ${base.cubicBezierEaseInOut}
+                background-color .3s ${cubicBezierEaseInOut},
+                max-width .2s ${cubicBezierEaseInOut}
               `
             })
           ])

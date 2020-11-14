@@ -72,31 +72,20 @@ export default c([
             line-height: 20px;
             align-self: center;
             cursor: pointer;
+            color: ${scrollButtonColor};
             transition: color .3s ${cubicBezierEaseInOut};
           `
         }, [
           cM('left', {
-            raw: `
-              margin-right: 8px;
-            `
+            marginRight: '8px'
           }),
           cM('right', {
-            raw: `
-              margin-left: 8px;
-            `
-          }),
-          cB('icon', {
-            color: scrollButtonColor
+            marginLeft: '8px'
           }),
           cM('disabled', {
-            raw: `
-              cursor: not-allowed;
-            `
-          }, [
-            cB('icon', {
-              color: scrollButtonColorDisabled
-            })
-          ])
+            cursor: 'not-allowed',
+            color: scrollButtonColorDisabled
+          })
         ])
       ]),
       cB('tabs-label-wrapper', {
@@ -121,9 +110,7 @@ export default c([
           backgroundColor: labelBarColor
         }, [
           cM('transition-disabled', {
-            raw: `
-              transition: none;
-            `
+            transition: 'none'
           })
         ]),
         cB('tabs-label', {
@@ -150,13 +137,10 @@ export default c([
               line-height: 16px;
               height: 16px;
               cursor: pointer;
+              color: ${tabCloseColor};
               transition: color .3s ${cubicBezierEaseInOut};
             `
-          }, [
-            cB('icon', {
-              color: tabCloseColor
-            })
-          ]),
+          }),
           cE('label', {
             raw: `
               transition: color .3s ${cubicBezierEaseInOut};

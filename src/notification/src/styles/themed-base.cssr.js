@@ -147,9 +147,7 @@ export default c([
         cM('closable', [
           cB('notification-main', [
             c('> *:first-child', {
-              raw: `
-                padding-right: 20px
-              `
+              paddingRight: '20px'
             })
           ]),
           cE('close', {
@@ -159,21 +157,16 @@ export default c([
               right: 12px;
               font-size: 14px;
               cursor: pointer;
+              transition: color .3s ${cubicBezierEaseInOut};
+              color: ${closeColor};
             `
           }, [
-            cB('icon', {
-              color: closeColor
+            c('&:hover', {
+              color: closeColorHover
             }),
-            c('&:hover', [
-              cB('icon', {
-                color: closeColorHover
-              })
-            ]),
-            c('&:active', [
-              cB('icon', {
-                color: closeColorActive
-              })
-            ])
+            c('&:active', {
+              color: closeColorActive
+            })
           ])
         ]),
         cE('avatar', {
@@ -185,7 +178,11 @@ export default c([
             height: 28px;
             font-size: 28px;
           `
-        }),
+        }, [
+          cB('icon', {
+            transition: `color .3s ${cubicBezierEaseInOut}`
+          })
+        ]),
         cB('notification-main', {
           raw: `
             padding-top: 16px;
@@ -248,9 +245,7 @@ export default c([
             `
           }, [
             c('&:first-child', {
-              raw: `
-                margin: 0;
-              `
+              margin: 0
             })
           ])
         ])

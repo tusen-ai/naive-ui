@@ -25,7 +25,7 @@ export default c([
         vertical-align: middle;
       `
     }, [
-      c('*:not(:last-child)', {
+      c('> *:not(:last-child)', {
         marginRight: '8px'
       }),
       cB('select', {

@@ -23,6 +23,9 @@ export default c([
         min-width: 40px;
         height: 40px;
         cursor: pointer;
+        transition:
+          color .3s ${cubicBezierEaseInOut},
+          background-color .3s ${cubicBezierEaseInOut};
       `
     }, [
       fadeInScaleIpTransition(),

@@ -18,6 +18,7 @@
     <n-icon
       v-if="!checkable && closable"
       class="n-tag__close"
+      color-transition
       @click="handleCloseClick"
     >
       <close-icon />

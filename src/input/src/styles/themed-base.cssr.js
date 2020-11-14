@@ -143,8 +143,8 @@ export default c([
         cB('icon', {
           justifySelf: 'center',
           fontSize: iconSize,
-          fill: iconColor,
-          stroke: iconColor
+          color: iconColor,
+          transition: `color .3s ${cubicBezierEaseInOut}`
         }, [
           c('svg', {
             opacity: iconOpacity

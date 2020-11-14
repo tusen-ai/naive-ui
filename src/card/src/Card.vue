@@ -27,6 +27,7 @@
         v-if="closable"
         class="n-card-header__close-mark"
         size="16"
+        color-transition
         @click="handleCloseClick"
       >
         <close-icon />

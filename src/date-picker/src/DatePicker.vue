@@ -36,7 +36,9 @@
       @input="handleRangeInput"
     >
       <template #suffix>
-        <n-icon><calendar-icon /></n-icon>
+        <n-icon>
+          <calendar-icon />
+        </n-icon>
       </template>
     </n-input>
     <n-input
@@ -61,7 +63,9 @@
       @clear="handleClear"
     >
       <template #suffix>
-        <n-icon><calendar-icon /></n-icon>
+        <n-icon>
+          <calendar-icon />
+        </n-icon>
       </template>
     </n-input>
     <n-base-lazy-teleport

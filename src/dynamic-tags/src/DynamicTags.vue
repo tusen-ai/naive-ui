@@ -22,6 +22,7 @@
       :theme="theme"
       :style="inputStyle"
       :size="inputSize"
+      placeholder=""
       @keyup.enter="handleInputConfirm"
       @blur="handleInputBlur"
     />

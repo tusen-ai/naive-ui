@@ -66,15 +66,12 @@ export default c([
               height: 14px;
               width: 14px;
               display: flex;
+              color: ${arrowColor};
+              transition: color .3s ${cubicBezierEaseInOut};
             `
           }, [
             cB('icon', {
-              raw: `
-                height: 14px;
-                width: 14px;
-                font-size: 14px;
-                color: ${arrowColor};
-              `
+              fontSize: '14px'
             }, [
               iconSwitchTransition()
             ]),

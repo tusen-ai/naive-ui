@@ -37,11 +37,9 @@ export default c([
     }, [
       cM('transition-disabled', [
         cB('menu-item-content', [
-          cE('icon', [
-            cB('icon', {
-              transition: 'none !important'
-            })
-          ])
+          cE('icon', {
+            transition: 'none !important'
+          })
         ]),
         cB('menu-item-content-header', {
           transition: 'none !important'
@@ -97,11 +95,9 @@ export default c([
           cE('arrow', {
             opacity: 0
           }),
-          cE('icon', [
-            cB('icon', {
-              color: itemIconColorCollapsed
-            })
-          ])
+          cE('icon', {
+            color: itemIconColorCollapsed
+          })
         ])
       ]),
       cB('menu-item', {
@@ -134,11 +130,9 @@ export default c([
             backgroundColor: itemColorMatch
           }),
           cB('menu-item-content', [
-            cE('icon', [
-              cB('icon', {
-                color: itemIconColorSelected
-              })
-            ]),
+            cE('icon', {
+              color: itemIconColorSelected
+            }),
             cB('menu-item-content-header', {
               color: itemTextColorSelected
             }, [
@@ -191,20 +185,16 @@ export default c([
               color: itemExtraTextColorChildSelected
             })
           ]),
-          cE('icon', [
-            cB('icon', {
-              color: itemIconColorChildSelected
-            })
-          ])
+          cE('icon', {
+            color: itemIconColorChildSelected
+          })
         ]),
         cNotM('disabled', [
           cNotM('uncollapsable', [
             hoverStyle(null, [
-              cE('icon', [
-                cB('icon', {
-                  color: itemIconColorHover
-                })
-              ]),
+              cE('icon', {
+                color: itemIconColorHover
+              }),
               cB('menu-item-content-header', {
                 color: itemTextColorHover
               }, [
@@ -217,7 +207,9 @@ export default c([
         ]),
         cE('icon', {
           raw: `
+            color: ${itemIconColor};
             transition:
+              color .3s ${cubicBezierEaseInOut},
               font-size .3s ${cubicBezierEaseInOut},
               padding-right .3s ${cubicBezierEaseInOut};
             box-sizing: content-box;
@@ -227,11 +219,7 @@ export default c([
             align-items: center;
             justify-content: center;
           `
-        }, [
-          cB('icon', {
-            color: itemIconColor
-          })
-        ]),
+        }),
         cE('arrow', {
           raw: `
             content: '';
@@ -254,16 +242,16 @@ export default c([
         }),
         cB('menu-item-content-header', {
           raw: `
-              transition:
-                color .3s ${cubicBezierEaseInOut},
-                opacity .3s ${cubicBezierEaseInOut};
-              opacity: 1;
-              flex-grow: 1;
-              flex-shrink: 1;
-              white-space: nowrap;
-              overflow: hidden;
-              text-overflow: ellipsis;
-            `,
+            transition:
+              color .3s ${cubicBezierEaseInOut},
+              opacity .3s ${cubicBezierEaseInOut};
+            opacity: 1;
+            flex-grow: 1;
+            flex-shrink: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          `,
           color: itemTextColor
         }, [
           cE('extra', {

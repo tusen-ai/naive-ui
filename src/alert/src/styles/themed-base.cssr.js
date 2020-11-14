@@ -9,9 +9,7 @@ export default c([
       lineHeight: 1.75,
       borderRadius,
       position: 'relative',
-      transition: `
-        background-color .3s ${cubicBezierEaseInOut}
-      `
+      transition: `background-color .3s ${cubicBezierEaseInOut}`
     }, [
       fadeInHeightExpandTranstion({
         originalTransition: `transform .3s ${cubicBezierEaseInOut}`,
@@ -46,12 +44,11 @@ export default c([
           width: 1em;
           height: 1em;
           line-height: 0;
+          transition: color .3s ${cubicBezierEaseInOut};
         `
       }, [
         cB('icon', {
-          raw: `
-            cursor: pointer;
-          `
+          cursor: 'pointer'
         })
       ]),
       cB('alert-body', {
@@ -76,6 +73,9 @@ export default c([
           fontSize: '14px'
         })
       ]),
+      cE('icon', {
+        transition: `color .3s ${cubicBezierEaseInOut}`
+      }),
       cM('no-icon', [
         cB('alert-body', {
           paddingLeft: '19px'

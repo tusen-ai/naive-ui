@@ -24,6 +24,7 @@ export default c([
             raw: `
               font-size: 16px;
               vertical-align: -.2em;
+              transition: color .3s ${cubicBezierEaseInOut};
             `,
             color: itemTextColor
           }),

@@ -19,26 +19,19 @@ export default c([
         backgroundColor,
         textAlign: 'start'
       }, [
-        cE('close', [
-          cB('icon', {
-            color: closeColor
+        cE('close', {
+          color: closeColor
+        }, [
+          c('&:hover', {
+            color: closeColorHover
           }),
-          c('&:hover', [
-            cB('icon', {
-              color: closeColorHover
-            })
-          ]),
-          c('&:active', [
-            cB('icon', {
-              color: closeColorPressed
-            })
-          ])
-        ]),
-        cE('icon', [
-          cB('icon', {
-            color: iconColor
+          c('&:active', {
+            color: closeColorPressed
           })
         ]),
+        cE('icon', {
+          color: iconColor
+        }),
         cB('alert-body', {
           border: `1px solid ${borderColor}`
         }, [

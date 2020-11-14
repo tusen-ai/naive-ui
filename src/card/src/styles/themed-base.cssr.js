@@ -129,14 +129,14 @@ export default c([
               raw: `
                 cursor: pointer;
                 transition: fill .3s ${cubicBezierEaseInOut};
-                fill: ${closeColor};
+                color: ${closeColor};
               `
             }, [
               c('&:hover', {
-                fill: closeColorHover
+                color: closeColorHover
               }),
               c('&:active', {
-                fill: closeColorActive
+                color: closeColorActive
               })
             ])
           ]),

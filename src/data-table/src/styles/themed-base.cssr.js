@@ -249,7 +249,10 @@ export default c([
               display: 'inline-flex',
               verticalAlign: '-0.2em',
               color: headerButtonIconColor,
-              transition: `transform .3s ${cubicBezierEaseInOut}`
+              transition: `
+                transform .3s ${cubicBezierEaseInOut},
+                color .3s ${cubicBezierEaseInOut}
+              `
             }, [
               cM('desc', {
                 transform: 'rotate(0)'
@@ -291,6 +294,7 @@ export default c([
                 }),
                 cB('icon', {
                   fontSize: '15px',
+                  transition: `color .3s ${cubicBezierEaseInOut}`,
                   color: headerButtonIconColor
                 })
               ]),
@@ -435,13 +439,13 @@ function createStyleInsideModal (props) {
 
 function createSizeStyle (props) {
   const {
-    smallFontSize,
-    mediumFontSize,
-    largeFontSize
+    fontSizeSmall,
+    fontSizeMedium,
+    fontSizeLarge
   } = props.$local
   return cTB('data-table', [
     cM('small-size', {
-      fontSize: smallFontSize
+      fontSize: fontSizeSmall
     }, [
       cB('data-table-th', {
         padding: '5px 5px 5px 11px'
@@ -451,7 +455,7 @@ function createSizeStyle (props) {
       })
     ]),
     cM('medium-size', {
-      fontSize: mediumFontSize
+      fontSize: fontSizeMedium
     }, [
       cB('data-table-th', {
         padding: '10px 10px 10px 16px'
@@ -461,7 +465,8 @@ function createSizeStyle (props) {
       })
     ]),
     cM('large-size', {
-      fontSize: largeFontSize
+      fontSize: fontSizeLarge
+
     }, [
       cB('data-table-th', {
         padding: '15px 15px 15px 20px'

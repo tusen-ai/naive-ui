@@ -84,7 +84,9 @@ export default c([
           }, [
             iconSwitchTransition()
           ]),
-          cB('icon', [
+          cB('icon', {
+            transition: `color .3s ${cubicBezierEaseInOut}`
+          }, [
             iconSwitchTransition()
           ])
         ])
