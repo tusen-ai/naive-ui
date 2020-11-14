@@ -13,8 +13,7 @@
       v-if="!useNativeScrollbar"
       ref="scrollbar"
       :theme="mergedTheme"
-      :content-style="scrollContentStyle"
-      :container-style="scrollContainerStyle"
+      v-bind="scrollbarProps"
     >
       <slot />
     </n-scrollbar>
@@ -56,11 +55,7 @@ export default {
       type: Boolean,
       default: true
     },
-    scrollContentStyle: {
-      type: Object,
-      default: undefined
-    },
-    scrollContainerStyle: {
+    scrollbarProps: {
       type: Object,
       default: undefined
     }
@@ -78,12 +73,13 @@ export default {
   },
   computed: {
     styleMarginLeft () {
-      if (this.NLayout && this.NLayout.hasSider) {
-        if (this.NLayout.siderPosition === 'absolute' && this.position === 'absolute') {
-          if (this.NLayout.siderCollapsed) {
-            return `${this.NLayout.collapsedSiderWidth}px`
+      const { NLayout } = this
+      if (NLayout && NLayout.hasSider) {
+        if (NLayout.siderPosition === 'absolute' && this.position === 'absolute') {
+          if (NLayout.siderCollapsed) {
+            return `${NLayout.collapsedSiderWidth}px`
           } else {
-            return `${this.NLayout.siderWidth}px`
+            return `${NLayout.siderWidth}px`
           }
         }
       }
@@ -96,7 +92,8 @@ export default {
       }, this.mergedStyle)
     },
     transitionDisabled () {
-      if (this.NLayout && this.NLayout.childLayoutTransitionDisabled) {
+      const { NLayout } = this
+      if (NLayout && NLayout.childLayoutTransitionDisabled) {
         return true
       } else {
         return false

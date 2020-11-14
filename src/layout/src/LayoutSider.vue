@@ -20,8 +20,7 @@
       ref="scrollbar"
       class="n-layout-sider__content"
       :theme="mergedTheme"
-      :content-style="scrollContentStyle"
-      :container-style="scrollContainerStyle"
+      v-bind="scrollbarProps"
     >
       <slot />
     </n-scrollbar>
@@ -112,11 +111,7 @@ export default {
       type: Number,
       default: 300
     },
-    scrollContentStyle: {
-      type: Object,
-      default: undefined
-    },
-    scrollContainerStyle: {
+    scrollbarProps: {
       type: Object,
       default: undefined
     },
