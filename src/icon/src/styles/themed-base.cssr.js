@@ -15,12 +15,13 @@ export default c([
           text-align: center;
           display: inline-block;
           position: relative;
-          transition:
-            fill .3s ${cubicBezierEaseInOut};
           fill: currentColor;
         `
       },
       [
+        cM('color-transition', {
+          transition: `color .3s ${cubicBezierEaseInOut}`
+        }),
         c('svg', {
           height: '1em',
           width: '1em',

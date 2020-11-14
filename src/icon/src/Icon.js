@@ -30,6 +30,10 @@ export default {
     color: {
       type: String,
       default: undefined
+    },
+    colorTransition: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -48,14 +52,14 @@ export default {
     const parent = this.$parent
     if (parent && parent.$options.__NAIVE_ICON__) return getSlot(this)
     else {
-      const mergedTheme = this.mergedTheme
-      const depth = this.depth
+      const { mergedTheme, depth, colorTransition } = this.mergedTheme
       return h('i', {
         ...this.$attrs,
         class: {
           'n-icon': true,
           [`n-${mergedTheme}-theme`]: mergedTheme,
-          [`n-icon--${depth}-depth`]: depth
+          [`n-icon--${depth}-depth`]: depth,
+          'n-icon--color-transition': colorTransition
         },
         style: {
           ...this.styles,
