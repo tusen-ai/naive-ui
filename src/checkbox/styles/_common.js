@@ -1,12 +1,8 @@
 export default {
-  checkboxSize: {
-    small: '14px',
-    medium: '14px',
-    large: '16px'
-  },
-  fontSize: {
-    small: '14px',
-    medium: '14px',
-    large: '15px'
-  }
+  checkboxSizeSmall: '14px',
+  checkboxSizeMedium: '14px',
+  checkboxSizeLarge: '16px',
+  fontSizeSmall: '14px',
+  fontSizeMedium: '14px',
+  fontSizeLarge: '15px'
 }

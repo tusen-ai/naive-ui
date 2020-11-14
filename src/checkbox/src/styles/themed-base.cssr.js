@@ -1,4 +1,4 @@
-import { c, cTB, cB, cE, cM, insideModal, cNotM } from '../../../_utils/cssr'
+import { c, cTB, cB, cE, cM, insideModal, cNotM, createKey } from '../../../_utils/cssr'
 import iconSwitchTransition from '../../../_styles/transitions/icon-switch'
 
 export default c([
@@ -119,9 +119,21 @@ export default c([
             ])
           ]),
           cM('disabled', {
-            raw: `
-              cursor: not-allowed;
-            `
+            cursor: 'not-allowed'
+          }),
+          ['small', 'medium', 'large'].map(size => {
+            const fontSize = props.$local[createKey('fontSize', size)]
+            const checkboxSize = props.$local[createKey('checkboxSize', size)]
+            return cM(`${size}-size`, {
+              fontSize
+            }, [
+              cB('checkbox-box', {
+                raw: `
+                  height: ${checkboxSize};
+                  width: ${checkboxSize};
+                `
+              })
+            ])
           })
         ]
       ),
@@ -133,9 +145,7 @@ export default c([
         `
       }, [
         cB('checkbox', {
-          raw: `
-            margin-right: 18px;
-          `
+          marginRight: '18px'
         })
       ]),
       // modal table header checkbox
@@ -146,9 +156,7 @@ export default c([
               cNotM('indeterminate', [
                 cNotM('disabled', [
                   cB('checkbox-box', {
-                    raw: `
-                      background-color: ${colorModalTableHeader}
-                    `
+                    backgroundColor: colorModalTableHeader
                   })
                 ])
               ])
@@ -181,16 +189,12 @@ export default c([
         }, [
           cB('checkbox-icon', [
             cE('check, line', {
-              raw: `
-                fill: ${iconColor};
-              `
+              fill: iconColor
             })
           ])
         ]),
         cE('label', {
-          raw: `
-            color: ${labelTextColor};
-          `
+          color: labelTextColor
         }),
         cM('table-header', [
           cB('checkbox-box', {
