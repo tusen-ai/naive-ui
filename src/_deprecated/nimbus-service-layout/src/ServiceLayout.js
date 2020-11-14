@@ -1,122 +1,112 @@
-
-import Scrollbar from '../../../scrollbar'
-import {
-  configurable,
-  themeable
-} from '../../../_mixins'
 import SiderMenu from './SiderMenu.js'
+import SiderHeader from './SiderHeader.js'
 import NLayout from '../../../layout/src/Layout.vue'
 import NLayoutSider from '../../../layout/src/LayoutSider.vue'
-import { h } from 'vue'
+import NLayoutHeader from '../../../layout/src/LayoutHeader.vue'
+
+import { h, ref, toRef } from 'vue'
+import { useMergedState } from 'vooks'
 
 export default {
-  name: 'NNimbusServiceLayout',
-  components: {
-    Scrollbar
-  },
+  name: 'ServiceLayout',
   provide () {
     return {
-      NNimbusServiceLayout: this
+      ServiceLayout: this
     }
   },
-  mixins: [
-    configurable,
-    themeable
-  ],
-  emits: ['input'],
   props: {
-    name: {
-      type: String,
-      default: null
-    },
     items: {
       type: Array,
       required: true
     },
-    paddingBody: {
-      type: Boolean,
-      default: true
+    name: {
+      type: String,
+      default: undefined
+    },
+    headerProps: {
+      type: Object,
+      default: undefined
+    },
+    contentProps: {
+      type: Object,
+      default: undefined
+    },
+    siderProps: {
+      type: Object,
+      default: undefined
     },
     value: {
       type: String,
-      default: null
-    },
-    expandedNames: {
-      type: Array,
-      default: () => {
-        return undefined
-      }
-    },
-    defaultExpandedNames: {
-      type: Array,
-      default: () => {
-        return undefined
-      }
-    },
-    headerZIndex: {
-      type: Number,
       default: undefined
     },
-    siderStyle: {
-      type: Object,
-      default: null
+    'onUpdate:value': {
+      type: Function,
+      default: undefined
     },
-    contentStyle: {
-      type: Object,
-      default: null
-    },
-    siderBordered: {
+    // deprecated
+    paddingBody: {
       type: Boolean,
-      default: true
+      default: false
     },
-    bodyThemedStyle: {
-      type: Object,
-      default: null
+    onInput: {
+      type: Function,
+      default: undefined
+    },
+    onSelect: {
+      type: Function,
+      default: undefined
+    },
+    onExpandedNamesChange: {
+      type: Function,
+      default: undefined
     }
   },
-  data () {
+  setup (props) {
+    const uncontrolledValueRef = ref(null)
+    const controlledValueRef = toRef(props, 'value')
+    const mergedValueRef = useMergedState(controlledValueRef, uncontrolledValueRef)
+    const uncontrolledCollapsedRef = ref(false)
     return {
-      activeItem: null,
-      collapsed: false
-    }
-  },
-  computed: {
-    subMenuNames () {
-      const subMenuNames = []
-      function traverse (items) {
-        items.forEach(item => {
-          if (item.childItems) {
-            subMenuNames.push(item.name)
-            traverse(item.childItems)
-          }
-        })
-      }
-      // TODO fix
-      traverse(this.items || [])
-      return subMenuNames
+      mergedValue: mergedValueRef,
+      uncontrolledValue: uncontrolledValueRef,
+      uncontrolledCollapsed: uncontrolledCollapsedRef
     }
   },
   watch: {
-    $route (to, from) {
-      this.syncActiveItemWithPath(to.path, this.items)
+    $route (to) {
+      this.syncValue(to.path)
     }
   },
   created () {
     if (this.$route) {
-      this.syncActiveItemWithPath(this.$route.path, this.items)
+      this.syncValue(this.$route.path)
     }
   },
   methods: {
+    doUpdateCollapsed (value) {
+      this.uncontrolledCollapsed = value
+    },
+    doUpdateValue (value) {
+      const {
+        onInput,
+        onSelect,
+        'onUpdate:value': onUpdateValue
+      } = this
+      this.uncontrolledValue = value
+      if (onSelect) onSelect(value)
+      if (onInput) onInput(value)
+      if (onUpdateValue) onUpdateValue(value)
+    },
     scrollTo (...args) {
       this.$refs.body.scrollTo(...args)
     },
-    syncActiveItemWithPath (path, items) {
+    syncValue (path, items) {
+      if (items === undefined) items = this.items
       for (const item of items) {
         if (item.childItems) {
-          this.syncActiveItemWithPath(path, item.childItems)
+          this.syncValue(path, item.childItems)
         } else if (item.path === path) {
-          this.$emit('input', item.name)
-          this.activeItem = item.name
+          this.doUpdateValue(item.name)
           return
         }
       }
@@ -124,116 +114,82 @@ export default {
   },
   render () {
     const siderProps = {
-      'show-toggle-button': true,
-      'show-trigger': true,
-      collapsed: this.collapsed,
-      'collapse-mode': 'width',
-      bordered: this.siderBordered,
-      'show-content': !this.collapsed,
-      'use-native-scrollbar': false,
-      'collapsed-width': 0,
+      bordered: true,
+      ...this.siderProps,
+      showTrigger: true,
+      collapsed: this.uncontrolledCollapsed,
+      collapseMode: 'width',
+      showContent: !this.uncontrolledCollapsed,
+      useNativeScrollbar: false,
+      collapsedWidth: 0,
       width: 288,
-      'trigger-style': {
+      triggerStyle: {
         top: 'calc(50% - 78px)'
       },
-      'scroll-container-style': {
-        width: '288px'
+      scrollbarProps: {
+        style: {
+          width: '288px',
+          flexShrink: 0
+        }
+      },
+      style: [
+        this.siderProps?.style,
+        {
+          display: 'flex',
+          justifyContent: 'flex-end'
+        }
+      ],
+      onCollapse: () => {
+        this.doUpdateCollapsed(true)
+      },
+      onExpand: () => {
+        this.doUpdateCollapsed(false)
       }
     }
-    // const scopedSlots = this.$slots
-    return h(NLayout, {
-      class: {
-        'n-nbs': true,
-        [`n-${this.mergedTheme}-theme`]: this.mergedTheme
+    const contentProps = {
+      ...this.contentProps,
+      ref: 'body',
+      useNativeScrollbar: false,
+      scrollbarProps: {
+        contentStyle: {
+          width: '100%',
+          boxSizing: 'border-box',
+          padding: this.paddingBody ? '21px 48px' : null
+        }
+      }
+    }
+    const headerProps = {
+      ...this.headerProps,
+      style: {
+        ...this.headerProps?.style,
+        height: '64px'
       },
+      bordered: true
+    }
+    const navSlot = this.$slots.nav
+    return h(NLayout, {
       position: 'absolute'
     }, {
       default: () => [
-      // scopedSlots.nav ? h('n-layoutHeader', {
-      //   style: {
-      //     height: '64px',
-      //     zIndex: this.headerZIndex
-      //   },
-      //   bordered: true
-      // }, scopedSlots.nav()) : null,
+        navSlot ? h(NLayoutHeader, headerProps, navSlot()) : null,
         h(NLayout, {
           style: {
-            top: this.$slots.nav ? '64px' : null
+            top: navSlot ? '64px' : null
           },
-          themedStyle: this.bodyThemedStyle,
           position: 'absolute'
         }, {
           default: () => [
-            h(NLayoutSider, {
-              ...siderProps,
-              style: {
-                display: 'flex',
-                'justify-content': 'flex-end',
-                ...this.siderStyle
-              },
-              onCollapse: () => {
-                this.collapsed = true
-              },
-              onExpand: () => {
-                this.collapsed = false
-              }
-            }, {
+            h(NLayoutSider, siderProps, {
               default: () => [
-                // this.name ? h('div', {
-                //   style: {
-                //     alignItems: 'center',
-                //     height: '64px',
-                //     paddingLeft: '36px',
-                //     fontSize: '16px',
-                //     fontWeight: '500',
-                //     display: 'flex',
-                //     position: 'relative'
-                //   }
-                // }, [
-                //   this.$slots['drawer-header-icon'] ? h(
-                //     'NConfigConsumer', {
-                //       props: {
-                //         abstract: true
-                //       },
-                //       scopedSlots: {
-                //         default: ({ styleScheme }) => {
-                //           return h('NIcon', {
-                //             props: { size: 20 },
-                //             staticStyle: {
-                //               position: 'absolute',
-                //               left: '10px',
-                //               top: '50%',
-                //               transform: 'translateY(-50%)'
-                //             },
-                //             style: {
-                //               fill: (styleScheme && styleScheme.secondaryTextColor) || null
-                //             }
-                //           }, this.$slots['drawer-header-icon'])
-                //         }
-                //       }
-                //     }) : null,
-                //   h('span', {}, this.name)
-                // ]) : null,
-                // this.name ? h('n-divider', {
-                //   staticStyle: {
-                //     margin: '0',
-                //     padding: '0 20px 0 4px'
-                //   }
-                // }) : null,
+                h(SiderHeader, {
+                  name: this.name
+                }, {
+                  icon: this.$slots['drawer-header-icon']
+                }),
                 h(SiderMenu)
               ]
             }),
-            h(NLayout, {
-              ref: 'body',
-              style: { ...this.contentStyle },
-              'use-native-scrollbar': false,
-              themedStyle: this.bodyThemedStyle,
-              'scroll-content-style': {
-                width: '100%',
-                boxSizing: 'border-box',
-                padding: this.paddingBody ? '21px 48px' : null
-              }
-            }, {
+            h(NLayout, contentProps, {
               default: this.$slots.default
             })
           ]

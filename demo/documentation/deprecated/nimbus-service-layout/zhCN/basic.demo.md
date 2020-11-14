@@ -4,8 +4,7 @@
  <n-nimbus-service-layout
     name="Oasis"
     :items="items"
-    :disable-menu="disableMenu"
-    v-model="selected"
+    v-model:value="selected"
     @expandedNamesChange="changeOpen"
     @select="changeSelect"
   >
@@ -17,9 +16,6 @@
     But please don't put your life in the hands<br>
     Of a Rock n Roll band<br>
     Who'll throw it all away
-    <n-button @click="disableMenu = !disableMenu">
-      toggleDisableMenu
-    </n-button>
   </n-nimbus-service-layout>
 </div>
 
@@ -33,8 +29,8 @@ export default {
   },
   data () {
     return {
-       disableMenu: false,
-       selected: null,
+      disableMenu: false,
+      selected: null,
       items: [
         {
           name: 'n-config-provider',
@@ -54,14 +50,11 @@ export default {
   },
   methods: {
     changeOpen (names) {
-      // console.log('names', names)
+      console.log('names', names)
     },
     changeSelect (val) {
-      // console.log('changeSelect', val)
+      console.log('changeSelect', val)
     }
   }
 };
-```
-```css
-
 ```

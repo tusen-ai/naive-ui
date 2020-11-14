@@ -1,61 +1,53 @@
-import { h, resolveComponent } from 'vue'
+import NMenu from '../../../menu'
+import { h } from 'vue'
 
 export default {
-  name: 'NNimbusServiceLayoutSiderMenu',
-  inject: {
-    NNimbusServiceLayout: {
-      default: false
+  name: 'ServiceLayoutSider',
+  inject: [
+    'ServiceLayout'
+  ],
+  methods: {
+    handleMenuUpdateValue (value, item) {
+      if (this.$router && item.path) {
+        Promise.resolve(
+          this.$router.push(item.path)
+        ).catch(err => {
+          console.log(err)
+        })
+      }
+      this.ServiceLayout.doUpdateValue(value)
     }
   },
   computed: {
-    subMenuNames () {
-      const ServiceLayout = this.NNimbusServiceLayout
-      const subMenuNames = []
-      function traverse (items) {
-        items.forEach(item => {
-          if (item.childItems) {
-            subMenuNames.push(item.name)
-            traverse(item.childItems)
+    items () {
+      function createItems (items) {
+        return items.map(item => {
+          const isGroup = (item.group || item.type === 'group')
+          return {
+            path: item.path,
+            title: item.title || item.name,
+            extra: item.extra || item.titleExtra,
+            key: item.name,
+            disabled: item.disabled,
+            children: item.childItems ? createItems(item.childItems) : undefined,
+            type: isGroup ? 'group' : undefined
           }
         })
       }
-      traverse(ServiceLayout.items || [])
-      return subMenuNames
-    }
-  },
-  methods: {
-    createItems (items) {
-      return items.map(item => {
-        return {
-          title: item.title || item.name,
-          titleExtra: item.titleExtra,
-          name: item.name,
-          disabled: !!item.disabled,
-          children: item.childItems ? this.createItems(item.childItems) : undefined,
-          type: (item.group || item.type === 'group') ? 'group' : undefined,
-          onClick: !((item.group || item.type === 'group') && item.childItems) ? () => {
-            if (this.$router && item.path) {
-              Promise.resolve(
-                this.$router.push(item.path)
-              ).catch(err => {
-                console.log(err)
-              })
-            }
-          } : undefined
-        }
-      })
+      return createItems(this.ServiceLayout.items)
     }
   },
   render () {
-    const ServiceLayout = this.NNimbusServiceLayout
-    return h(resolveComponent('NMenu'),
+    const { ServiceLayout, items } = this
+    return h(NMenu,
       {
-        value: ServiceLayout.value || ServiceLayout.activeItem,
-        expandedNames: ServiceLayout.expandedNames,
-        defaultExpandedNames: ServiceLayout.defaultExpandedNames || this.subMenuNames,
+        value: ServiceLayout.mergedValue,
+        defaultExpandAll: true,
         rootIndent: 36,
         indent: 40,
-        items: this.createItems(ServiceLayout.items)
+        items,
+        'onUpdate:expandedKeys': ServiceLayout.onExpandedNamesChange,
+        'onUpdate:value': this.handleMenuUpdateValue
       }
     )
   }
