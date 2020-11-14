@@ -30,6 +30,7 @@ export default c([
       }, [
         cE('prefix', {
           raw: `
+            margin: 0 4px;
             font-size: 18px;
             transition: .3s color ${cubicBezierEaseInOut};
           `,
