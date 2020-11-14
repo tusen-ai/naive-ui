@@ -76,6 +76,14 @@ export default {
       type: Boolean,
       default: undefined
     },
+    clicked: {
+      type: Boolean,
+      default: undefined
+    },
+    clickPosition: {
+      type: Object,
+      default: null
+    },
     // deprecated
     onBeforeHide: {
       validator () {
@@ -99,13 +107,19 @@ export default {
       default: undefined
     }
   },
-  setup () {
+  setup (props) {
     const clickedRef = useClicked(64)
     const clickedPositionRef = useClickPosition()
     return {
       isMounted: useIsMounted(),
       containerRef: ref(null),
       mousePosition: computed(() => {
+        const {
+          clicked
+        } = props
+        if (clicked !== undefined) {
+          if (clicked) return props.clickPosition
+        }
         if (clickedRef.value) {
           return clickedPositionRef.value
         }

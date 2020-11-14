@@ -1,6 +1,7 @@
 import { Fragment, ref, h, reactive } from 'vue'
 import { createId, omit } from '../../_utils/vue'
 import DialogEnvironment from './DialogEnvironment.vue'
+import { useClicked, useClickPosition } from 'vooks'
 
 export default {
   name: 'DialogProvider',
@@ -23,7 +24,9 @@ export default {
   setup () {
     const dialogListRef = ref([])
     return {
-      dialogList: dialogListRef
+      dialogList: dialogListRef,
+      clicked: useClicked(),
+      clickPosition: useClickPosition()
     }
   },
   methods: {
@@ -64,6 +67,8 @@ export default {
           dialog,
           ['destroy'],
           {
+            clicked: this.clicked,
+            clickPosition: this.clickPosition,
             to: dialog.to ?? this.to,
             ref: `n-dialog-${dialog.key}`,
             onInternalAfterLeave: this.handleAfterLeave

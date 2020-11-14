@@ -2,6 +2,8 @@
   <n-modal
     v-model:show="show"
     appear
+    :clicked="clicked"
+    :click-position="clickPosition"
     :to="to"
     :mask-closable="maskClosable"
     @after-leave="handleAfterHide"
@@ -59,6 +61,14 @@ export default {
     onInternalAfterLeave: {
       type: Function,
       required: true
+    },
+    clicked: {
+      type: Boolean,
+      default: undefined
+    },
+    clickPosition: {
+      type: Object,
+      default: undefined
     }
   },
   data () {
