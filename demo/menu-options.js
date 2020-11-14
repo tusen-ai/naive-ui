@@ -29,7 +29,6 @@ const createDebugDemos = (item, mode) => {
 function createItems (lang, items) {
   if (lang === 'zh-CN') return items
   function traverse (children) {
-    console.log(children)
     children.forEach(child => {
       child.title = undefined
       child.titleExtra = undefined

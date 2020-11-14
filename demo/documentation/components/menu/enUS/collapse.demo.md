@@ -23,7 +23,7 @@ Use collapsable vertical menu with layout sider. Use `collapsed` to control coll
     </n-layout-sider>
     <n-layout>
       <n-layout-content>
-        <span>内容</span>
+        <span>Content</span>
       </n-layout-content>
     </n-layout>
   </n-layout>

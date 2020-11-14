@@ -45,7 +45,7 @@ const menuItems = [
     icon: renderIcon(BookIcon)
   },
   {
-    title: '舞，舞，舞',
+    title: 'Dance Dance Dance',
     key: 'Dance Dance Dance',
     icon: renderIcon(BookIcon),
     children: [

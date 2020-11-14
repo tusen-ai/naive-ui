@@ -472,3 +472,19 @@ const naive = create({
 
 app.use(naive)
 ```
+
+## 2020.11.14 是否要给 icon 加上默认的 color transition?
+否。
+前提条件是 svg 在合适的地方用到了 currentColor。
+
+for example:
+```
+<n-icon>
+  <svg>
+    <line stroke="currentColor">
+  </svg>
+</n-icon>
+```
+
+我期望的是 n-icon 一直跟着外部走，如果外面有 transtion 了那内部其实不需要 transition，不然的话会重叠。
+如果一定需要 transition 的话应该去保证样式带 color transition。
