@@ -26,7 +26,7 @@ export function itemRenderer (tmNode, insidePopover = false) {
         )
       )
     }
-    return h(NSubmenu, omit(props, ['children', 'name'], { tmNodes: tmNode.children }))
+    return h(NSubmenu, omit(props, ['children', 'name', 'type', 'titleExtra'], { tmNodes: tmNode.children }))
   } else {
     return h(NMenuItem, omit(props, ['children', 'name', 'titleExtra']))
   }

@@ -67,7 +67,7 @@ export default {
       if (this.menuCollapsed) {
         return true
       }
-      return this.NMenu.mergedExpandedKeys.includes(this.internalKey)
+      return !this.NMenu.mergedExpandedKeys.includes(this.internalKey)
     },
     popoverEnabled () {
       return !this.mergedDisabled && (this.horizontal || this.menuCollapsed)

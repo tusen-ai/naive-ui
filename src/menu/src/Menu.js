@@ -53,7 +53,7 @@ export default {
       type: Number,
       default: 32
     },
-    defaultExpandedAll: {
+    defaultExpandAll: {
       type: Boolean,
       default: false
     },
@@ -125,7 +125,7 @@ export default {
       }
     }))
     const uncontrolledExpandedKeysRef = ref(
-      props.defaultExpandedAll
+      props.defaultExpandAll
         ? treeMateRef.value.getNonLeafKeys()
         : (
           props.defaultExpandedNames ||
