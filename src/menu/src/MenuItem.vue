@@ -46,6 +46,10 @@ export default {
     menuChildMixin
   ],
   props: {
+    tmNode: {
+      type: Object,
+      required: true
+    },
     extra: {
       type: [String, Function],
       default: undefined
@@ -64,7 +68,7 @@ export default {
     }
   },
   setup (props) {
-    const rootMenuValueRef = useInjectionRef('NMenu', 'value')
+    const rootMenuValueRef = useInjectionRef('NMenu', 'mergedValue')
     const submenuDisabledRef = useInjectionRef('NSubmenu', 'mergedDisabled', false)
     const mergedDisabledRef = computed(() => {
       return submenuDisabledRef.value || props.disabled
@@ -91,7 +95,7 @@ export default {
     },
     handleClick (e) {
       if (!this.mergedDisabled) {
-        this.NMenu.handleSelect(this.internalKey)
+        this.NMenu.doSelect(this.internalKey, this.tmNode.rawNode)
         this.doClick(e)
       }
     }

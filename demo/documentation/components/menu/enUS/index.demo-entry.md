@@ -18,6 +18,7 @@ collapse
 |collapsed|`boolean`|`false`|The collapsed status of menu, only works when menu is vertical.|
 |default-expand-all|`boolean`|`false`||
 |default-expanded-keys|`Array<string>`|`[]`|The default expanded submenu keys of menu in uncontrolled manner.|
+|default-value|`string \| null`|`null`||
 |expanded-keys|`Array<string>`|`undefined`|The expanded submenu keys. If set, menu will work in controlled manner and `default-expanded-names` won't work.|
 |icon-size|`number`|`20`|The icon size when menu is not collapsed.|
 |indent|`number`|`32`|The indend of menu|
@@ -26,9 +27,9 @@ collapse
 |popover-body-style|`object`|`{ padding: '2px 4px', minWidth: '180px' }`|菜单收缩时子菜单弹层的样式|
 |root-indent|`number`|`undefined`|The indent of menu's first level children. If not set, menu will use `indent` in place of it.|
 |theme|`'light' \| 'dark' \| string`|`undefined`||
-|value|`string`|`null`|The selected name of menu.|
-|on-update:expanded-keys|`(value: string[]) => any`|`() => {}`||
-|on-update:value|`(value: string) => any`|`() => {}`||
+|value|`string \| null`|`undefined`|The selected name of menu.|
+|on-update:expanded-keys|`(value: string[]) => any`|`undefined`||
+|on-update:value|`(value: string, item: MenuItem) => any`|`undefined`||
 
 ### MenuItem Properties
 |Name|Type|Description|

@@ -69,6 +69,10 @@ export default {
       type: String,
       default: undefined
     },
+    defaultValue: {
+      type: String,
+      default: null
+    },
     mode: {
       validator (value) {
         return ['vertical', 'horizontal'].includes(value)
@@ -137,11 +141,12 @@ export default {
       controlledExpandedKeysRef,
       uncontrolledExpandedKeysRef
     )
-
+    const uncontrolledValueRef = ref(props.defaultValue)
+    const controlledValueRef = toRef(props, 'value')
+    const mergedValueRef = useMergedState(controlledValueRef, uncontrolledValueRef)
     const tmNodesRef = computed(() => treeMateRef.value.treeNodes)
-    const valueRef = toRef(props, 'value')
     const activePathRef = computed(() => {
-      return treeMateRef.value.getPath(valueRef.value).keyPath
+      return treeMateRef.value.getPath(mergedValueRef.value).keyPath
     })
     const transitionDisabledRef = ref(true)
     onMounted(() => {
@@ -153,16 +158,19 @@ export default {
       controlledExpandedKeys: controlledExpandedKeysRef,
       uncontrolledExpanededKeys: uncontrolledExpandedKeysRef,
       mergedExpandedKeys: mergedExpandedKeysRef,
+      uncontrolledValue: uncontrolledValueRef,
+      mergedValue: mergedValueRef,
       activePath: activePathRef,
       tmNodes: tmNodesRef,
       transitionDisabled: transitionDisabledRef
     }
   },
   methods: {
-    handleSelect (value) {
-      this['onUpdate:value'](value)
+    doSelect (value, item) {
+      this['onUpdate:value'](value, item)
       // deprecated
-      this.onSelect(value)
+      this.onSelect(value, item)
+      this.uncontrolledValue = value
     },
     toggleExpand (key) {
       const currentExpandedKeys = Array.from(this.mergedExpandedKeys)
