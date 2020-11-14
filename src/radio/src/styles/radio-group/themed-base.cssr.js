@@ -1,21 +1,18 @@
-import { c, cTB, cB, cE, cM } from '../../../../_utils/cssr'
+import { c, cTB, cB, cE, cM, createKey } from '../../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
     const {
       buttonBorderColor,
       buttonBorderColorActive,
-      opacityDisabled,
-      height
+      opacityDisabled
     } = props.$local
     const {
       cubicBezierEaseInOut
     } = props.$base
     return [
       cTB('radio-group', {
-        raw: `
-          display: inline-block;
-        `
+        display: 'inline-block'
       }, [
         cE('splitor', {
           raw: `
@@ -36,22 +33,21 @@ export default c([
           })
         ]),
         ['small', 'medium', 'large'].map(size => {
+          const height = props.$local[createKey('buttonHeight', size)]
           return cM('button-group', {
-            raw: `
-              white-space: nowrap;
-            `
+            whiteSpace: 'nowrap'
           }, [
             cM(`${size}-size`, {
-              height: height[size],
-              lineHeight: height[size]
+              height,
+              lineHeight: height
             },
             [
               cB('radio-button', {
-                height: height[size],
-                lineHeight: height[size]
+                height,
+                lineHeight: height
               }),
               cE('splitor', {
-                height: height[size]
+                height
               })
             ])
           ])

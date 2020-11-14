@@ -1,4 +1,4 @@
-import { c, cTB, cE, cM, cNotM, cB } from '../../../../_utils/cssr'
+import { c, cTB, cE, cM, cNotM, cB, createKey } from '../../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
@@ -33,6 +33,18 @@ export default c([
           `
         },
         [
+          ['small', 'medium', 'large'].map(size => {
+            const fontSize = props.$local[createKey('fontSize', size)]
+            const radioSize = props.$local[createKey('radioSize', size)]
+            return cM(`${size}-size`, {
+              fontSize
+            }, [
+              cE('dot', {
+                height: radioSize,
+                width: radioSize
+              })
+            ])
+          }),
           cE('radio-input', {
             raw: `
               border: 0;

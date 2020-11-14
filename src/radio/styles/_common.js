@@ -1,17 +1,11 @@
 export default {
-  height: {
-    small: '28px',
-    medium: '34px',
-    large: '40px'
-  },
-  fontSize: {
-    small: '14px',
-    medium: '14px',
-    large: '15px'
-  },
-  radioSize: {
-    small: '14px',
-    medium: '14px',
-    large: '16px'
-  }
+  buttonHeightSmall: '28px',
+  buttonHeightMedium: '34px',
+  buttonHeightLarge: '40px',
+  fontSizeSmall: '14px',
+  fontSizeMedium: '14px',
+  fontSizeLarge: '15px',
+  radioSizeSmall: '14px',
+  radioSizeMedium: '14px',
+  radioSizeLarge: '16px'
 }
