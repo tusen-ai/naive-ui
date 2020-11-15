@@ -48,14 +48,14 @@ export default create({
       boxShadowFocus: `0 0 8px 0 ${changeColor(primaryColor, { alpha: 0.3 })}`,
       boxShadowDisabled: 'inset 0 0 0 1px transparent',
       // warning
-      borderColorWarning: 'transparent',
+      borderColorWarning: warningColor,
       borderColorHoverWarning: warningColorHover,
       colorFocusWarning: changeColor(warningColor, { alpha: 0.1 }),
       borderColorFocusWarning: warningColorHover,
       boxShadowFocusWarning: `0 0 8px 0 ${changeColor(warningColor, { alpha: 0.3 })}`,
       caretColorWarning: warningColor,
       // error
-      borderColorError: 'transparent',
+      borderColorError: errorColor,
       borderColorHoverError: errorColorHover,
       colorFocusError: changeColor(errorColor, { alpha: 0.1 }),
       borderColorFocusError: errorColorHover,
