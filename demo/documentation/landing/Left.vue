@@ -99,7 +99,7 @@
                     }"
                   />
                 </g>
-                <circle id="Oval备份-2" fill-opacity="0.25" fill="#000000" filter="url(#filter-1)" cx="477.54" cy="66.09" r="20" />
+                <circle id="Oval备份-2" fill-opacity="0.3" fill="#000000" filter="url(#filter-1)" cx="477.54" cy="66.09" r="20" />
                 <circle
                   id="Oval"
                   cx="477.54"

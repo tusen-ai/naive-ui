@@ -150,7 +150,12 @@
   - deprecate
     - `on-change` => `on-update:value`
 - [x] layout
+  - layout-content, layout
+    - breaking
+      `use-native-scrollbar` => `native-scrollbar`
   - layout-sider
+    - breaking
+      `use-native-scrollbar` => `native-scrollbar`
     - deprecate
       - `on-expand` => `on-update:collapsed`
       - `on-collapse` => `on-update:collapsed`
@@ -259,6 +264,10 @@
     - drag logic
 - [x] space
 - [x] spin
+  - breaking
+    - `'in-small'`, `'in-medium'` and `'in-large'` size are removed
+  - deprecate
+    - `spinning` => `show`
 - [x] statistic
 - [x] steps
 - [x] switch
@@ -303,6 +312,9 @@
     - text
       - `as` => `tag`
 - [x] upload
+- [x] nimbus-service-layout
+  - breaking
+    - `v-model` => `v-model:value`
 
 - TODO
   - [x] vooks
@@ -328,6 +340,17 @@
   - [x] test rollup treeshaking
   - [x] test webpack treeshaking
   - [x] menu utils render
+  - [x] dialog bug
+  - [x] data-table css vars
+  - [x] typography css vars
+  - [x] spin css vars
+  - [x] radio css vars
+  - [x] checkbox css vars
+  - [x] avatar css vars
+  - [x] landing page icon
+  - [x] switch styles
+  - [x] slider styles
+  - [x] drawer api
 
 ## Info
 https://github.com/vuejs/vue-next/issues/2549

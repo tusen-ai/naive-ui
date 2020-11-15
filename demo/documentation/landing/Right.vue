@@ -96,7 +96,7 @@
                     transform="translate(8.97 8.95)"
                   />
                 </g>
-                <circle id="Oval-Copy" fill-opacity="0.25" fill="#000000" filter="url(#filter-1)" transform="translate(106.010000, 376.700000) scale(-1, 1) translate(-106.010000, -376.700000) " cx="106.01" cy="376.7" r="20" />
+                <circle id="Oval-Copy" fill-opacity="0.3" fill="#000000" filter="url(#filter-1)" transform="translate(106.010000, 376.700000) scale(-1, 1) translate(-106.010000, -376.700000) " cx="106.01" cy="376.7" r="20" />
                 <circle
                   id="Oval-Copy"
                   cx="106.01"

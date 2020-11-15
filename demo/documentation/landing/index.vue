@@ -44,7 +44,7 @@
 import LandingFooter from './Footer.vue'
 import leftImage from './Left.vue'
 import rightImage from './Right.vue'
-import { i18n } from '../../util-composables'
+import { i18n, useSiteTheme } from '../../util-composables'
 
 export default {
   components: {
@@ -52,13 +52,9 @@ export default {
     leftImage,
     rightImage
   },
-  inject: {
-    NConfigProvider: {
-      default: null
-    }
-  },
   setup () {
     return {
+      theme: useSiteTheme(),
       ...(i18n({
         'zh-CN': {
           start: '开始使用',
@@ -103,7 +99,7 @@ export default {
       this.hover = false
     },
     handleThemeChangeClick () {
-      this.NConfigProvider.$parent.theme = this.themeOptions[this.theme].next
+      this.theme = this.themeOptions[this.theme].next
     }
   }
 }
