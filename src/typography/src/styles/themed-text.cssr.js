@@ -1,4 +1,4 @@
-import { c, cTB, cM, cNotM } from '../../../_utils/cssr'
+import { c, cTB, cM } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
@@ -18,9 +18,6 @@ export default c([
       textColorSuccess,
       textColorWarning,
       textColorError,
-      textOpacityPrimaryDepth,
-      textOpacitySecondaryDepth,
-      textOpacityTertiaryDepth,
       codeBorderRadius,
       codeTextColor,
       codeColor,
@@ -65,17 +62,6 @@ export default c([
         }),
         cM('3-depth', {
           color: textColor3Depth
-        })
-      ]),
-      cNotM('default-type', [
-        cM('1-depth', {
-          color: textOpacityPrimaryDepth
-        }),
-        cM('2-depth', {
-          color: textOpacitySecondaryDepth
-        }),
-        cM('3-depth', {
-          color: textOpacityTertiaryDepth
         })
       ]),
       cM('primary-type', {

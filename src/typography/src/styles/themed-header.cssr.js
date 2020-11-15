@@ -1,8 +1,9 @@
-import { c, cTB, cM } from '../../../_utils/cssr'
+import { c, cTB, cM, createKey } from '../../../_utils/cssr'
+import { depx, pxfy } from '../../../_utils/css'
 
 export default c([
   ({ props }) => {
-    return [1, 2, 3, 4, 5, 6].map(
+    return ['1', '2', '3', '4', '5', '6'].map(
       level => headerStyle(level, props)
     )
   }
@@ -10,21 +11,21 @@ export default c([
 
 function headerStyle (level, props) {
   const {
+    $local
+  } = props
+  const {
     cubicBezierEaseInOut
   } = props.$base
   const {
     headerTextColor,
-    headerFontWeight,
-    headerFontSize,
-    headerMargin,
-    headerPrefixWidth,
-    headerBarWidth,
-    headerBarColor
-  } = props.$local
+    headerFontWeight
+  } = $local
+  const barWidth = $local[createKey('headerBarWidth', level)]
+  const barRadius = pxfy(depx(barWidth) / 2)
   return cTB('h' + level, {
-    fontSize: headerFontSize[level],
+    fontSize: $local[createKey('headerFontSize', level)],
     fontWeight: headerFontWeight,
-    margin: headerMargin[level],
+    margin: $local[createKey('headerMargin', level)],
     transition: `color .3s ${cubicBezierEaseInOut}`,
     color: headerTextColor
   }, [
@@ -33,27 +34,26 @@ function headerStyle (level, props) {
     }),
     cM('prefix-bar', {
       position: 'relative',
-      paddingLeft: headerPrefixWidth[level]
+      paddingLeft: $local[createKey('headerPrefixWidth', level)]
     }, [
       cM('align-text', {
         paddingLeft: 0
       }, [
         c('&::before', {
-          left: '-' + headerPrefixWidth[level]
+          left: '-' + $local[createKey('headerPrefixWidth', level)]
         })
       ]),
       c('&::before', {
         content: '""',
-        width: headerBarWidth[level],
-        borderRadius: '',
+        width: barWidth,
+        borderRadius: barRadius,
         transition: `background-color .3s ${cubicBezierEaseInOut}`,
         left: 0,
         top: 0,
         bottom: 0,
-        position: 'absolute',
-        backgroundColor: ''
+        position: 'absolute'
       }),
-      ...[
+      [
         'default',
         'primary',
         'info',
@@ -63,7 +63,7 @@ function headerStyle (level, props) {
       ].map(type =>
         cM(type + '-type', [
           c('&::before', {
-            backgroundColor: headerBarColor[type]
+            backgroundColor: $local[createKey('headerBarColor', type)]
           })
         ])
       )

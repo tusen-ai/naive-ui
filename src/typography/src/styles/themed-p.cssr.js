@@ -7,9 +7,9 @@ export default c([
     } = props.$base
     const {
       pTextColor,
-      pTextColorPrimaryDepth,
-      pTextColorSecondaryDepth,
-      pTextColorTertiaryDepth
+      pTextColor1Depth,
+      pTextColor2Depth,
+      pTextColor3Depth
     } = props.$local
     return cTB('p', {
       raw: `
@@ -25,13 +25,13 @@ export default c([
         marginTop: 0
       }),
       cM('1-depth', {
-        color: pTextColorPrimaryDepth
+        color: pTextColor1Depth
       }),
       cM('2-depth', {
-        color: pTextColorSecondaryDepth
+        color: pTextColor2Depth
       }),
       cM('3-depth', {
-        color: pTextColorTertiaryDepth
+        color: pTextColor3Depth
       })
     ])
   }

@@ -1,10 +1,12 @@
 import create from '../../_styles/utils/create-component-base'
+import commonVars from './_common'
 
 export default create({
   theme: 'dark',
   name: 'Typography',
   getDerivedVariables ({ base, derived }) {
     return {
+      ...commonVars,
       aTextColor: derived.primaryColor,
       blockquoteTextColor: derived.textColor2Overlay,
       blockquotePrefixColor: derived.borderColorOverlay,
@@ -14,49 +16,15 @@ export default create({
       headerFontWeight: base.fontWeightStrong,
       headerTextColor: derived.textColor1Overlay,
       pTextColor: derived.textColor2Overlay,
-      pTextColorPrimaryDepth: derived.textColor1Overlay,
-      pTextColorSecondaryDepth: derived.textColor2Overlay,
-      pTextColorTertiaryDepth: derived.textColor3Overlay,
-      headerFontSize: {
-        1: '30px',
-        2: '26px',
-        3: '18px',
-        4: '16px',
-        5: '14px',
-        6: '14px'
-      },
-      headerMargin: {
-        1: '1.6em 0 .8em 0',
-        2: '1.6em 0 .8em 0',
-        3: '1.6em 0 1.2em 0',
-        4: '1.4em 0 1.2em 0',
-        5: '1.4em 0 1.2em 0',
-        6: '1.4em 0 1.2em 0'
-      },
-      headerPrefixWidth: {
-        1: '16px',
-        2: '16px',
-        3: '12px',
-        4: '12px',
-        5: '12px',
-        6: '12px'
-      },
-      headerBarWidth: {
-        1: '4px',
-        2: '4px',
-        3: '3px',
-        4: '3px',
-        5: '3px',
-        6: '3px'
-      },
-      headerBarColor: {
-        default: derived.primaryColor,
-        primary: derived.primaryColor,
-        info: derived.infoColor,
-        error: derived.errorColor,
-        warning: derived.warningColor,
-        success: derived.successColor
-      },
+      pTextColor1Depth: derived.textColor1Overlay,
+      pTextColor2Depth: derived.textColor2Overlay,
+      pTextColor3Depth: derived.textColor3Overlay,
+      headerBarColor: derived.primaryColor,
+      headerBarColorPrimary: derived.primaryColor,
+      headerBarColorInfo: derived.infoColor,
+      headerBarColorError: derived.errorColor,
+      headerBarColorWarning: derived.warningColor,
+      headerBarColorSuccess: derived.successColor,
       textColor: derived.textColor2Overlay,
       textColorStrong: derived.textColor1Overlay,
       textColor1Depth: derived.textColor1Overlay,
@@ -67,9 +35,6 @@ export default create({
       textColorSuccess: derived.successColor,
       textColorWarning: derived.warningColor,
       textColorError: derived.errorColor,
-      textOpacityPrimaryDepth: derived.opacity1,
-      textOpacitySecondaryDepth: derived.opacity2,
-      textOpacityTertiaryDepth: derived.opacity3,
       codeTextColor: derived.textColor2Overlay,
       codeColor: derived.codeColorOverlay,
       codeBorderColor: 'transparent'
