@@ -5,10 +5,10 @@ export default c([
     const {
       railColor,
       railColorActive,
-      buttonBackgroundImage,
-      buttonBackgroundImageActive,
-      buttonBackgroundPosition,
-      buttonBoxShadow
+      buttonBoxShadow,
+      buttonColor,
+      buttonSize,
+      buttonSizePressed
     } = props.$local
     const {
       cubicBezierEaseInOut
@@ -25,90 +25,54 @@ export default c([
         raw: `
           cursor: pointer;
           position: relative;
-          height: 14px;
-          width: 30px;
-          border-radius: 7px;
-          margin: 3px;
+          height: 22px;
+          width: 40px;
+          border-radius: 11px;
           transition: background-color .3s ${cubicBezierEaseInOut};
           background-color: ${railColor};
         `
       }, [
-        c('&::before, &::after', {
+        c('&::before', {
           raw: `
+            background-color: ${buttonColor};
             box-sizing: border-box;
             cursor: inherit;
             content: "";
             position: absolute;
-            height: 20px;
-            width: 24px;
-            max-width: 20px;
+            height: ${buttonSize};
+            width: ${buttonSizePressed};
+            max-width: ${buttonSize};
             border-radius: 10px;
-            top: -3px;
-            left: -3px;
-            background-size: 800% 800%;
+            top: 2px;
+            left: 2px;
             transition:
+              background-color .3s ${cubicBezierEaseInOut},
               left .3s ${cubicBezierEaseInOut},
               opacity .3s ${cubicBezierEaseInOut},
               max-width .3s ${cubicBezierEaseInOut},
-              background-position .3s ${cubicBezierEaseInOut},
               box-shadow .3s ${cubicBezierEaseInOut};
           `
         }),
-        c('&::before', {
-          raw: `
-            opacity: 1;
-          `
-        }),
-        c('&::after', {
-          raw: `
-            opacity: 0;
-          `
-        }),
         cNotM('disabled', [
-          c('&:active::before, &:active::after', {
-            raw: `
-              max-width: 24px;
-            `
+          c('&:active::before', {
+            maxWidth: buttonSizePressed
           }),
           cM('active', [
-            c('&:active::before, &:active::after', {
-              raw: `
-                left: 9px;
-              `
+            c('&:active::before', {
+              left: `calc(100% - 2px - ${buttonSizePressed})`
             })
           ])
         ]),
         cM('active', [
           c('&::before', {
-            raw: `
-              left: 13px;
-              opacity: 1;
-            `
-          }),
-          c('&::after', {
-            raw: `
-              left: 13px;
-              opacity: 1;
-            `
+            left: `calc(100% - 2px - ${buttonSize})`
           })
         ]),
         c('&::before', {
-          raw: `
-            box-shadow: ${buttonBoxShadow};
-            background-position: ${buttonBackgroundPosition};
-            background-image: ${buttonBackgroundImage};
-          `
-        }),
-        c('&::after', {
-          raw: `
-            background-position: ${buttonBackgroundPosition};
-            background-image: ${buttonBackgroundImageActive};
-          `
+          boxShadow: buttonBoxShadow
         }),
         cM('active', {
-          raw: `
-            background-color: ${railColorActive};
-          `
+          backgroundColor: railColorActive
         }),
         cM('disabled', {
           raw: `
