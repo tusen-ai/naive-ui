@@ -10,7 +10,7 @@
     }"
   >
     <n-spin
-      :spinning="loading"
+      :show="loading"
       :theme="mergedTheme"
     >
       <div

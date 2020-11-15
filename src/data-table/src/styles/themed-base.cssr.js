@@ -17,7 +17,7 @@ export default c([
       headerButtonIconColor,
       headerButtonIconColorActive,
       fixedColumnBoxShadowColor
-    } = props.$local.default
+    } = props.$local
     const fixedColumnStyle = createFixedColumnStyle({ cubicBezierEaseInOut, fixedColumnBoxShadowColor })
     return [
       createSizeStyle(props),
@@ -357,58 +357,58 @@ export default c([
 
 function createStyleInsideModal (props) {
   const {
-    bodyColor,
-    headerColor,
-    borderColor,
-    headerColorHover,
-    bodyColorHover
-  } = props.$local.modal
+    bodyColorModal,
+    headerColorModal,
+    borderColorModal,
+    headerColorHoverModal,
+    bodyColorHoverModal
+  } = props.$local
   return insideModal(cTB('data-table', [
     cB('data-table-table', {
-      backgroundColor: bodyColor
+      backgroundColor: bodyColorModal
     }, [
       cB('data-table-thead', {
-        backgroundColor: headerColor
+        backgroundColor: headerColorModal
       }),
       cB('data-table-th', {
-        borderColor: borderColor,
-        backgroundColor: headerColor
+        borderColor: borderColorModal,
+        backgroundColor: headerColorModal
       }, [
         cM('sortable', [
           c('&:hover', {
-            backgroundColor: headerColorHover
+            backgroundColor: headerColorHoverModal
           })
         ])
       ]),
       cB('data-table-tr', [
         c('&:hover', {
-          backgroundColor: bodyColorHover
+          backgroundColor: bodyColorHoverModal
         }, [
           cB('data-table-td', {
-            backgroundColor: bodyColorHover
+            backgroundColor: bodyColorHoverModal
           })
         ])
       ]),
       cB('data-table-td', {
-        borderColor: borderColor,
-        backgroundColor: bodyColor
+        borderColor: borderColorModal,
+        backgroundColor: bodyColorModal
       })
     ]),
     cNotM('single-line', [
       cB('data-table-wrapper', [
         cB('data-table-table', [
           cB('data-table-th', {
-            borderRight: `1px solid ${borderColor}`
+            borderRight: `1px solid ${borderColorModal}`
           }, [
             c('&:last-child', {
-              borderRight: `0 solid ${borderColor}`
+              borderRight: `0 solid ${borderColorModal}`
             })
           ]),
           cB('data-table-td', {
-            borderRight: `1px solid ${borderColor}`
+            borderRight: `1px solid ${borderColorModal}`
           }, [
             c('&:last-child', {
-              borderRight: `0 solid ${borderColor}`
+              borderRight: `0 solid ${borderColorModal}`
             })
           ])
         ])
@@ -416,13 +416,13 @@ function createStyleInsideModal (props) {
     ]),
     cM('bordered', [
       cB('data-table-wrapper', {
-        border: `1px solid ${borderColor}`
+        border: `1px solid ${borderColorModal}`
       }, [
         cB('data-table-table', [
           cB('data-table-tr', [
             c('&:last-child', [
               cB('data-table-td', {
-                borderBottom: `0 solid ${borderColor}`
+                borderBottom: `0 solid ${borderColorModal}`
               })
             ])
           ])
@@ -431,7 +431,7 @@ function createStyleInsideModal (props) {
     ]),
     cB('data-table-base-table-header', [
       cB('data-table-table', {
-        borderBottom: `1px solid ${borderColor}`
+        borderBottom: `1px solid ${borderColorModal}`
       })
     ])
   ]))

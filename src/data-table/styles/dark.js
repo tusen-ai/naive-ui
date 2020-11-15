@@ -24,33 +24,30 @@ export default create({
     return {
       ...commonVariables,
       borderRadius,
-      default: {
-        borderColor: composite(cardColor, dividerColorOverlay),
-        bodyColorHover: composite(cardColor, tableColorHoverOverlay),
-        headerColor: composite(cardColor, tableHeaderColorOverlay),
-        headerColorHover: composite(
-          composite(cardColor, tableHeaderColorOverlay),
-          tableHeaderColorOverlay
-        ),
-        bodyColor: cardColor,
-        bodyTextColor: textColor2,
-        headerTextColor: textColor1,
-        headerFontWeight: fontWeightStrong,
-        headerButtonColorHover: tableColorHoverOverlay,
-        headerButtonIconColor: iconColorOverlay,
-        headerButtonIconColorActive: primaryColor,
-        fixedColumnBoxShadowColor: 'rgba(0, 0, 0, .36)'
-      },
-      modal: {
-        borderColor: composite(modalColor, dividerColorOverlay),
-        bodyColorHover: composite(modalColor, tableColorHoverOverlay),
-        headerColor: composite(modalColor, tableHeaderColorOverlay),
-        headerColorHover: composite(
-          composite(modalColor, tableHeaderColorOverlay),
-          tableHeaderColorOverlay
-        ),
-        bodyColor: modalColor
-      }
+      borderColor: composite(cardColor, dividerColorOverlay),
+      bodyColorHover: composite(cardColor, tableColorHoverOverlay),
+      headerColor: composite(cardColor, tableHeaderColorOverlay),
+      headerColorHover: composite(
+        composite(cardColor, tableHeaderColorOverlay),
+        tableHeaderColorOverlay
+      ),
+      bodyColor: cardColor,
+      bodyTextColor: textColor2,
+      headerTextColor: textColor1,
+      headerFontWeight: fontWeightStrong,
+      headerButtonColorHover: tableColorHoverOverlay,
+      headerButtonIconColor: iconColorOverlay,
+      headerButtonIconColorActive: primaryColor,
+      fixedColumnBoxShadowColor: 'rgba(0, 0, 0, .36)',
+
+      borderColorModal: composite(modalColor, dividerColorOverlay),
+      bodyColorHoverModal: composite(modalColor, tableColorHoverOverlay),
+      headerColorModal: composite(modalColor, tableHeaderColorOverlay),
+      headerColorHoverModal: composite(
+        composite(modalColor, tableHeaderColorOverlay),
+        tableHeaderColorOverlay
+      ),
+      bodyColorModal: modalColor
     }
   }
 })
