@@ -1,6 +1,5 @@
 
 import create from '../../_styles/utils/create-component-base'
-import { changeColor } from '../../_utils/color/index.js'
 import sizeVariables from './_common'
 
 export default create({
@@ -11,10 +10,9 @@ export default create({
     const boxShadow = '0 2px 8px 0 rgba(0, 0, 0, 0.12)'
     const {
       railColorOverlay,
-      railColorHoverOverlay,
       primaryColor,
-      primaryColorHover,
-      baseColor
+      baseColor,
+      cardColor
     } = derived
     const {
       borderRadius
@@ -22,21 +20,22 @@ export default create({
     return {
       ...sizeVariables,
       railColor: railColorOverlay,
-      railColorHover: railColorHoverOverlay,
+      railColorHover: railColorOverlay,
       railFillColor: primaryColor,
-      railFillColorHover: primaryColorHover,
-      handleColor: baseColor,
-      handleColorModal: baseColor,
-      handleBoxShadow: `inset 0 0 0 2px ${primaryColor}`,
-      handleBoxShadowHover: `inset 0 0 0 2px ${primaryColorHover}`,
-      handleBoxShadowActive: `inset 0 0 0 2px ${primaryColorHover}, 0 0 0 3px ${changeColor(primaryColor, { alpha: 0.2 })}`,
-      handleBoxShadowFocus: `inset 0 0 0 2px ${primaryColorHover}, 0 0 0 3px ${changeColor(primaryColor, { alpha: 0.2 })}`,
+      railFillColorHover: primaryColor,
+      handleColor: '#FFF',
+      dotColor: cardColor,
+      dotColorModal: baseColor,
+      handleBoxShadow: '0 1px 4px 0 rgba(0, 0, 0, 0.3), inset 0 0 1px 0 rgba(0, 0, 0, 0.05)',
+      handleBoxShadowHover: '0 1px 4px 0 rgba(0, 0, 0, 0.3), inset 0 0 1px 0 rgba(0, 0, 0, 0.05)',
+      handleBoxShadowActive: '0 1px 4px 0 rgba(0, 0, 0, 0.3), inset 0 0 1px 0 rgba(0, 0, 0, 0.05)',
+      handleBoxShadowFocus: '0 1px 4px 0 rgba(0, 0, 0, 0.3), inset 0 0 1px 0 rgba(0, 0, 0, 0.05)',
       indicatorColor: indicatorColor,
       indicatorBoxShadow: boxShadow,
       indicatorTextColor: baseColor,
       indicatorBorderRadius: borderRadius,
-      dotBoxShadow: `inset 0 0 0 2px ${primaryColor}`,
-      dotBoxShadowActive: `inset 0 0 0 2px ${primaryColorHover}`
+      dotBorder: `2px solid ${primaryColor}`,
+      dotBoxShadow: null
     }
   }
 })

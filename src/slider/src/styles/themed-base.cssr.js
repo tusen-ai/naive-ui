@@ -10,7 +10,8 @@ export default c([
       railFillColor,
       railFillColorHover,
       handleColor,
-      handleColorModal,
+      dotColor,
+      dotColorModal,
       handleBoxShadow,
       handleBoxShadowHover,
       handleBoxShadowActive,
@@ -18,11 +19,13 @@ export default c([
       indicatorColor,
       indicatorBoxShadow,
       indicatorTextColor,
+      dotBorder,
       dotBoxShadow,
-      dotBoxShadowActive,
       railHeight,
       handleSize,
-      dotSize,
+      dotHeight,
+      dotWidth,
+      dotBorderRadius,
       indicatorBorderRadius
     } = props.$local
     const {
@@ -33,7 +36,7 @@ export default c([
       cTB('slider', {
         raw: `
           display: block;
-          padding: 5px 0;
+          padding: calc((${handleSize} - ${railHeight}) / 2) 0;
           position: relative;
           z-index: 0;
           width: calc(100% - 14px);
@@ -69,12 +72,7 @@ export default c([
           }, [
             cE('fill', {
               backgroundColor: railFillColorHover
-            }),
-            cB('slider-dots', [
-              cB('slider-dot', {
-                boxShadow: dotBoxShadowActive
-              })
-            ])
+            })
           ]),
           cB('slider-handle', {
             boxShadow: handleBoxShadowHover
@@ -86,12 +84,7 @@ export default c([
           }, [
             cE('fill', {
               backgroundColor: railFillColorHover
-            }),
-            cB('slider-dots', [
-              cB('slider-dot', {
-                boxShadow: dotBoxShadowActive
-              })
-            ])
+            })
           ]),
           cB('slider-handle', {
             boxShadow: handleBoxShadowHover
@@ -152,15 +145,20 @@ export default c([
         }, [
           cB('slider-dot', {
             raw: `
-              transition: box-shadow .3s ${cubicBezierEaseInOut}, background-color .3s ${cubicBezierEaseInOut};
+              transition:
+                border-color .3s ${cubicBezierEaseInOut},
+                box-shadow .3s ${cubicBezierEaseInOut},
+                background-color .3s ${cubicBezierEaseInOut};
               position: absolute;
               transform: translateX(-50%) translateY(-50%);
-              height: ${dotSize};
-              width: ${dotSize};
-              border-radius: 50%;
+              height: ${dotHeight};
+              width: ${dotWidth};
+              border-radius: ${dotBorderRadius};
               overflow: hidden;
+              box-sizing: border-box;
             `,
-            color: handleColor,
+            border: dotBorder,
+            backgroundColor: dotColor,
             boxShadow: dotBoxShadow
           })
         ])
@@ -181,8 +179,8 @@ export default c([
       ]),
       insideModal(
         cTB('slider', [
-          cB('slider-handle', {
-            backgroundColor: handleColorModal
+          cB('slider-dot', {
+            backgroundColor: dotColorModal
           })
         ])
       )

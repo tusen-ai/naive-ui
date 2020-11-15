@@ -1,5 +1,7 @@
 export default {
   railHeight: '4px',
-  handleSize: '14px',
-  dotSize: '8px'
+  handleSize: '18px',
+  dotHeight: '8px',
+  dotWidth: '8px',
+  dotBorderRadius: '4px'
 }

@@ -1,5 +1,4 @@
 import create from '../../_styles/utils/create-component-base'
-import { composite, changeColor } from '../../_utils/color/index.js'
 import sizeVariables from './_common'
 
 export default create({
@@ -9,36 +8,34 @@ export default create({
     const boxShadow = '0 2px 8px 0 rgba(0, 0, 0, 0.12)'
     const {
       railColorOverlay,
-      railColorHoverOverlay,
-      cardColor,
       modalColor,
-      primaryColor,
+      primaryColorSuppl,
       popoverColor,
-      textColor2Overlay
+      textColor2Overlay,
+      cardColor
     } = derived
     const {
       borderRadius
     } = base
-    const defaultFillColor = composite(cardColor, changeColor(primaryColor, { alpha: 0.7 }))
     return {
       ...sizeVariables,
-      // defaultFillColor: defaultFillColor,
       railColor: railColorOverlay,
-      railColorHover: railColorHoverOverlay,
-      railFillColor: defaultFillColor,
-      railFillColorHover: primaryColor,
-      handleColor: cardColor,
-      handleColorModal: modalColor,
-      handleBoxShadow: `inset 0 0 0 2px ${defaultFillColor}`,
-      handleBoxShadowHover: `inset 0 0 0 2px ${primaryColor}`,
-      handleBoxShadowActive: `inset 0 0 0 2px ${primaryColor}, 0 0 0 3px ${changeColor(primaryColor, { alpha: 0.2 })}`,
-      handleBoxShadowFocus: `inset 0 0 0 2px ${primaryColor}, 0 0 0 3px ${changeColor(primaryColor, { alpha: 0.2 })}`,
+      railColorHover: railColorOverlay,
+      railFillColor: primaryColorSuppl,
+      railFillColorHover: primaryColorSuppl,
+      handleColor: '#FFF',
+      dotColor: cardColor,
+      dotColorModal: modalColor,
+      handleBoxShadow: '0px 2px 4px 0 rgba(0, 0, 0, 0.4)',
+      handleBoxShadowHover: '0px 2px 4px 0 rgba(0, 0, 0, 0.4)',
+      handleBoxShadowActive: '0px 2px 4px 0 rgba(0, 0, 0, 0.4)',
+      handleBoxShadowFocus: '0px 2px 4px 0 rgba(0, 0, 0, 0.4)',
       indicatorColor: popoverColor,
       indicatorBoxShadow: boxShadow,
       indicatorTextColor: textColor2Overlay,
       indicatorBorderRadius: borderRadius,
-      dotBoxShadow: `inset 0 0 0 2px ${defaultFillColor}`,
-      dotBoxShadowActive: `inset 0 0 0 2px ${primaryColor}`
+      dotBorder: `2px solid ${primaryColorSuppl}`,
+      dotBoxShadow: null
     }
   }
 })
