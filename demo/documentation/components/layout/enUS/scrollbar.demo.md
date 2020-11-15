@@ -6,13 +6,13 @@ Sometimes you will find native scrollbar doesn't meet the style of naive-ui. You
       Cool Header
     </n-layout-header>
     <n-layout position="absolute" style="top: 64px; bottom: 64px;">
-      <n-layout-sider position="absolute" :use-native-scrollbar="false">
+      <n-layout-sider position="absolute" :native-scrollbar="false">
         <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>
         <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>
         <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>
         <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>
       </n-layout-sider>
-      <n-layout position="absolute" :use-native-scrollbar="false">
+      <n-layout position="absolute" :native-scrollbar="false">
         <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>
         <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>
         <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>

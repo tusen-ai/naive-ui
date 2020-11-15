@@ -21,7 +21,7 @@
         <n-h1>长</n-h1><n-h1>长</n-h1><n-h1>长</n-h1>
         <n-h1>长</n-h1><n-h1>长</n-h1><n-h1>长</n-h1>
       </n-layout-sider>
-      <n-layout position="absolute" :use-native-scrollbar="false" ref="content">
+      <n-layout position="absolute" :native-scrollbar="false" ref="content">
         <n-h1>长</n-h1><n-h1>长</n-h1><n-h1>长</n-h1>
         <n-h1>长</n-h1><n-h1>长</n-h1><n-h1>长</n-h1>
         <n-h1>长</n-h1><n-h1>长</n-h1><n-h1>长</n-h1>

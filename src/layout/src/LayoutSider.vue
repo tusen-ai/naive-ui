@@ -16,7 +16,7 @@
     }"
   >
     <n-scrollbar
-      v-if="!useNativeScrollbar"
+      v-if="!nativeScrollbar"
       ref="scrollbar"
       class="n-layout-sider__content"
       :theme="mergedTheme"
@@ -32,13 +32,13 @@
       <toggle-button
         v-if="showTrigger === 'arrow-circle'"
         :style="triggerStyle"
-        @click="handleToggleButtonClick"
+        @click="handleTriggerClick"
       />
       <toggle-bar
         v-else
         :collapsed="collapsed"
         :style="triggerStyle"
-        @click="handleToggleButtonClick"
+        @click="handleTriggerClick"
       />
     </template>
   </aside>
@@ -103,7 +103,7 @@ export default {
       type: [Boolean, String],
       default: false
     },
-    useNativeScrollbar: {
+    nativeScrollbar: {
       type: Boolean,
       default: true
     },
@@ -242,7 +242,7 @@ export default {
         this.$el.scrollTo(...args)
       }
     },
-    handleToggleButtonClick () {
+    handleTriggerClick () {
       const {
         'onUpdate:collapsed': onUpdateCollapsed,
         collapsed,

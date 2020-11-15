@@ -6,13 +6,13 @@
       酷的页头
     </n-layout-header>
     <n-layout position="absolute" style="top: 64px; bottom: 64px;">
-      <n-layout-sider position="absolute" :use-native-scrollbar="false">
+      <n-layout-sider position="absolute" :native-scrollbar="false">
         <n-h1>长</n-h1><n-h1>长</n-h1><n-h1>长</n-h1>
         <n-h1>长</n-h1><n-h1>长</n-h1><n-h1>长</n-h1>
         <n-h1>长</n-h1><n-h1>长</n-h1><n-h1>长</n-h1>
         <n-h1>长</n-h1><n-h1>长</n-h1><n-h1>长</n-h1>
       </n-layout-sider>
-      <n-layout position="absolute" :use-native-scrollbar="false">
+      <n-layout position="absolute" :native-scrollbar="false">
         <n-h1>长</n-h1><n-h1>长</n-h1><n-h1>长</n-h1>
         <n-h1>长</n-h1><n-h1>长</n-h1><n-h1>长</n-h1>
         <n-h1>长</n-h1><n-h1>长</n-h1><n-h1>长</n-h1>

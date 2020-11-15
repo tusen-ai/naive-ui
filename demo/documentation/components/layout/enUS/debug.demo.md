@@ -15,7 +15,7 @@
     >
       <n-h1>Sider</n-h1>
     </n-layout-sider>
-    <n-layout position="absolute" :use-native-scrollbar="false">
+    <n-layout position="absolute" :native-scrollbar="false">
       <n-layout-content>
         <span>Content</span>
       </n-layout-content>

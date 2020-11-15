@@ -10,7 +10,7 @@
     :style="syntheticLayoutStyle"
   >
     <n-scrollbar
-      v-if="!useNativeScrollbar"
+      v-if="!nativeScrollbar"
       ref="scrollbar"
       :theme="mergedTheme"
       v-bind="scrollbarProps"
@@ -51,7 +51,7 @@ export default {
     }
   },
   props: {
-    useNativeScrollbar: {
+    nativeScrollbar: {
       type: Boolean,
       default: true
     },

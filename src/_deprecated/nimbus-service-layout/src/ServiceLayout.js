@@ -120,7 +120,7 @@ export default {
       collapsed: this.uncontrolledCollapsed,
       collapseMode: 'width',
       showContent: !this.uncontrolledCollapsed,
-      useNativeScrollbar: false,
+      nativeScrollbar: false,
       collapsedWidth: 0,
       width: 288,
       triggerStyle: {
@@ -149,7 +149,7 @@ export default {
     const contentProps = {
       ...this.contentProps,
       ref: 'body',
-      useNativeScrollbar: false,
+      nativeScrollbar: false,
       scrollbarProps: {
         contentStyle: {
           width: '100%',
