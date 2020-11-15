@@ -34,14 +34,10 @@ export default c([
         ])
       ]),
       cTB('form-item', {
-        raw: `
-          width: 100%;
-        `
+        width: '100%'
       }, [
         cM('top-labelled', {
-          raw: `
-            margin-right: 18px;
-          `
+          marginRight: '18px'
         }, [
           cB('form-item-label', {
             raw: `
@@ -67,21 +63,15 @@ export default c([
             `
           }),
           cB('form-item-control', {
-            raw: `
-              flex-grow: 1;
-            `
+            flexGrow: 1
           })
         ]),
         cM('right-label-aligned', [
           cB('form-item-label', {
-            raw: `
-              text-align: right;
-            `
+            textAlign: 'right'
           }, [
             c('&::after', {
-              raw: `
-                display: none;
-              `
+              display: 'none'
             })
           ])
         ]),
@@ -128,11 +118,8 @@ export default c([
           color: labelTextColor
         }, [
           c('&::after', {
-            raw: `
-              transition: color .3s ${cubicBezierEaseInOut};
-            `
+            transition: `color .3s ${cubicBezierEaseInOut}`
           })
-
         ]),
         cB('form-item-feedback-wrapper', {
           raw: `
