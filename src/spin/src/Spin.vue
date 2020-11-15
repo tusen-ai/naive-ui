@@ -8,7 +8,7 @@
   >
     <div
       :class="{
-        'n-spin-content--spinning': spinning
+        'n-spin-content--spinning': compitableShow
       }"
       class="n-spin-content"
     >
@@ -16,13 +16,13 @@
     </div>
     <transition name="n-fade-in-transition">
       <n-base-loading
-        v-if="spinning"
+        v-if="compitableShow"
         :class="{
           [`n-spin--${size}-size`]: true,
           [`n-${mergedTheme}-theme`]: mergedTheme
         }"
         :stroke="stroke"
-        :stroke-width="syntheticStrokeWidth"
+        :stroke-width="mergedStrokeWidth"
         :theme="mergedTheme"
         class="n-spin"
       />
@@ -34,13 +34,15 @@
       [`n-spin--${size}-size`]: size
     }"
     :stroke="stroke"
-    :stroke-width="syntheticStrokeWidth"
+    :stroke-width="mergedStrokeWidth"
     :theme="mergedTheme"
     class="n-spin"
   />
 </template>
 
 <script>
+import { computed } from 'vue'
+import { useCompitable } from 'vooks'
 import { NBaseLoading } from '../../_base'
 import {
   configurable,
@@ -48,14 +50,12 @@ import {
   withCssr
 } from '../../_mixins'
 import styles from './styles'
+import { warn } from '../../_utils'
 
 const STROKE_WIDTH = {
   small: 22,
   medium: 20,
-  large: 18,
-  'in-small': 30,
-  'in-medium': 28,
-  'in-large': 26
+  large: 18
 }
 
 export default {
@@ -77,21 +77,31 @@ export default {
       type: [String, Number],
       default: 'medium'
     },
-    spinning: {
+    show: {
       type: Boolean,
       default: true
     },
     strokeWidth: {
       type: Number,
       default: undefined
+    },
+    spinning: {
+      validator () {
+        warn('spin', '`spinning` is deprecated, please use `show` instead.')
+        return true
+      },
+      default: undefined
     }
   },
-  computed: {
-    syntheticStrokeWidth () {
-      const { strokeWidth } = this
-      if (strokeWidth !== undefined) return strokeWidth
-      const size = this.size
-      return STROKE_WIDTH[size]
+  setup (props) {
+    return {
+      compitableShow: useCompitable(props, ['spinning', 'show']),
+      mergedStrokeWidth: computed(() => {
+        const { strokeWidth } = props
+        if (strokeWidth !== undefined) return strokeWidth
+        const { size } = props
+        return STROKE_WIDTH[size]
+      })
     }
   }
 }
