@@ -179,6 +179,7 @@ export default c([
           backgroundColor: buttonColor
         }),
         cB('icon', {
+          transition: `color .3s ${cubicBezierEaseInOut}`,
           color: buttonTextColor
         }),
         c('&:hover ~', [
