@@ -11,6 +11,7 @@ export default create({
       railColorOverlay,
       railColorHoverOverlay,
       cardColor,
+      modalColor,
       primaryColor,
       popoverColor,
       textColor2Overlay
@@ -27,6 +28,7 @@ export default create({
       railFillColor: defaultFillColor,
       railFillColorHover: primaryColor,
       handleColor: cardColor,
+      handleColorModal: modalColor,
       handleBoxShadow: `inset 0 0 0 2px ${defaultFillColor}`,
       handleBoxShadowHover: `inset 0 0 0 2px ${primaryColor}`,
       handleBoxShadowActive: `inset 0 0 0 2px ${primaryColor}, 0 0 0 3px ${changeColor(primaryColor, { alpha: 0.2 })}`,

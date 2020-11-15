@@ -26,6 +26,7 @@ export default create({
       railFillColor: primaryColor,
       railFillColorHover: primaryColorHover,
       handleColor: baseColor,
+      handleColorModal: baseColor,
       handleBoxShadow: `inset 0 0 0 2px ${primaryColor}`,
       handleBoxShadowHover: `inset 0 0 0 2px ${primaryColorHover}`,
       handleBoxShadowActive: `inset 0 0 0 2px ${primaryColorHover}, 0 0 0 3px ${changeColor(primaryColor, { alpha: 0.2 })}`,

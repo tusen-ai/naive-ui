@@ -1,4 +1,4 @@
-import { cTB, c, cB, cM, cE } from '../../../_utils/cssr'
+import { cTB, c, cB, cM, cE, insideModal } from '../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up'
 import { depx, pxfy } from '../../../_utils/css'
 
@@ -10,6 +10,7 @@ export default c([
       railFillColor,
       railFillColorHover,
       handleColor,
+      handleColorModal,
       handleBoxShadow,
       handleBoxShadowHover,
       handleBoxShadowActive,
@@ -177,7 +178,14 @@ export default c([
         boxShadow: indicatorBoxShadow
       }, [
         fadeInScaleUpTransition()
-      ])
+      ]),
+      insideModal(
+        cTB('slider', [
+          cB('slider-handle', {
+            backgroundColor: handleColorModal
+          })
+        ])
+      )
     ]
   }
 ])
