@@ -17,10 +17,9 @@ dark-4-debug
 |-|-|-|-|
 |body-class|`string`|`undefined`||
 |body-style|`Object`|`undefined`||
-|body-wrapper-class|`string`|`undefined`||
-|body-wrapper-style|`Object`|`undefined`||
 |height|`number \| string`|`251`|在位置是 `top` 和 `bottom` 时生效|
 |mask-closable|`boolean`|`true`|点击遮罩时是否发出 `update:show` 事件|
+|native-scrollbar|`boolean`|`true`||
 |placement|`'top' \| 'right' \| 'bottom' \| 'left'`|`'right'`||
 |show|`boolean`|`false`||
 |themed-style|`{ [themeName: string]: Object }`|`undefined`||

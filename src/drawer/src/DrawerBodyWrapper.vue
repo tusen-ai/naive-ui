@@ -11,27 +11,29 @@
     >
       <div
         v-show="show"
+        ref="bodyRef"
         class="n-drawer"
         :class="[
+          bodyClass,
           `n-drawer--${placement}-placement`,
           {
+            [`n-drawer--native-scrollbar`]: nativeScrollbar,
             [`n-${theme}-theme`]: theme,
-            [bodyWrapperClass]: bodyWrapperClass
           }
         ]"
-        :style="bodyWrapperStyle"
+        :style="bodyStyle"
       >
-        <n-scrollbar>
-          <div
-            ref="bodyRef"
-            class="n-drawer-body"
-            :class="{
-              [bodyClass]: bodyClass
-            }"
-            :style="bodyStyle"
-          >
-            <slot />
-          </div>
+        <template
+          v-if="nativeScrollbar"
+        >
+          <slot />
+        </template>
+        <n-scrollbar
+          v-else
+          v-bind="scrollbarProps"
+          content-class="n-drawer-scroll-content"
+        >
+          <slot />
         </n-scrollbar>
       </div>
     </transition>
@@ -63,14 +65,6 @@ export default {
       type: String,
       default: undefined
     },
-    bodyWrapperClass: {
-      type: String,
-      default: undefined
-    },
-    bodyWrapperStyle: {
-      type: Object,
-      default: undefined
-    },
     bodyStyle: {
       type: Object,
       default: undefined
@@ -90,6 +84,14 @@ export default {
     placement: {
       type: String,
       required: true
+    },
+    nativeScrollbar: {
+      type: Boolean,
+      required: true
+    },
+    scrollbarProps: {
+      type: Object,
+      default: undefined
     }
   },
   setup (props) {
@@ -99,7 +101,7 @@ export default {
     })
     return {
       displayed: displayedRef,
-      bodyRef: ref(null),
+      bodyRef: ref(null), // used for detached content
       transitionName: computed(() => {
         return ({
           right: 'n-slide-in-from-right-transition',

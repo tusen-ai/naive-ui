@@ -29,7 +29,10 @@
                 width: xScrollable ? 'fit-content' : null,
               }
             ]"
-            class="n-scrollbar-content"
+            :class="[
+              'n-scrollbar-content',
+              contentClass
+            ]"
           >
             <slot />
           </div>
@@ -145,6 +148,10 @@ export default {
     },
     containerStyle: {
       type: Object,
+      default: undefined
+    },
+    contentClass: {
+      type: String,
       default: undefined
     },
     contentStyle: {

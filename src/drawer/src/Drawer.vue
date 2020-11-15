@@ -22,12 +22,12 @@
       </transition>
       <n-drawer-body-wrapper
         :placement="placement"
-        :body-wrapper-class="bodyWrapperClass"
-        :body-wrapper-style="mergedBodyWrapperStyle"
         :body-style="compitableBodyStyle"
         :body-class="compitableBodyClass"
+        :scrollbar-props="scrollbarProps"
         :show="show"
         :display-directive="displayDirective"
+        :native-scrollbar="nativeScrollbar"
         :theme="mergedTheme"
       >
         <slot />
@@ -100,14 +100,6 @@ export default {
       type: Object,
       default: undefined
     },
-    bodyWrapperClass: {
-      type: String,
-      default: undefined
-    },
-    bodyWrapperStyle: {
-      type: Object,
-      default: undefined
-    },
     to: {
       type: [String, Object],
       default: undefined
@@ -117,6 +109,14 @@ export default {
         return ['if', 'show'].includes(value)
       },
       default: 'if'
+    },
+    nativeScrollbar: {
+      type: Boolean,
+      default: true
+    },
+    scrollbarProps: {
+      type: Object,
+      default: undefined
     },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:show': {

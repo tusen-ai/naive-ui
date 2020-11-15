@@ -1,4 +1,4 @@
-import { c, cTB, cB, cM } from '../../../_utils/cssr'
+import { c, cTB, cB, cM, cNotM } from '../../../_utils/cssr'
 import slideInFromRightTransition from '../../../_styles/transitions/slide-in-from-right'
 import slideInFromLeftTransition from '../../../_styles/transitions/slide-in-from-left'
 import slideInFromTopTransition from '../../../_styles/transitions/slide-in-from-top'
@@ -19,6 +19,7 @@ export default c([
     return [
       cTB('drawer', {
         raw: `
+          overflow: auto;
           position: absolute;
           pointer-events: all;
           transition:
@@ -33,10 +34,16 @@ export default c([
         slideInFromLeftTransition(),
         slideInFromTopTransition(),
         slideInFromBottomTransition(),
-        cB('drawer-body', {
+        cM('native-scrollbar', {
           boxSizing: 'border-box',
           padding: '16px 24px'
         }),
+        cNotM('native-scrollbar', [
+          cB('drawer-scroll-content', {
+            boxSizing: 'border-box',
+            padding: '16px 24px'
+          })
+        ]),
         cM('right-placement', {
           raw: `
             top: 0;
