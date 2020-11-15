@@ -10,15 +10,8 @@ export default c([
     } = props.$local
     return [
       cTB('ol', {
-        margin: '12px 0',
         paddingLeft: '1.75em'
       }, [
-        c('&:first-child', {
-          marginTop: 0
-        }),
-        c('&:last-child', {
-          marginBottom: 0
-        }),
         cM('align-text', {
           paddingLeft: 0
         }),
@@ -27,15 +20,8 @@ export default c([
         })
       ]),
       cTB('ul', {
-        margin: '12px 0',
         paddingLeft: '1.75em'
       }, [
-        c('&:first-child', {
-          marginTop: 0
-        }),
-        c('&:last-child', {
-          marginBottom: 0
-        }),
         cM('align-text', {
           paddingLeft: 0
         }),

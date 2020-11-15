@@ -66,6 +66,9 @@ function createRenderer (wrapCodeWithCard = true) {
     },
     strong (text) {
       return `<n-text strong>${text}</n-text>`
+    },
+    checkbox (checked) {
+      return `<n-checkbox :checked="${checked}" style="vertical-align: -2px; margin-right: 8px;" />`
     }
   }
 
