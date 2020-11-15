@@ -142,10 +142,11 @@ export default c([
             min-height: 1.25em;
             transform-origin: top left;
             line-height: 1.25;
-            transition: color .3s ${cubicBezierEaseInOut};
           `
         }, [
-          cB('form-item-feedback', [
+          cB('form-item-feedback', {
+            transition: `color .3s ${cubicBezierEaseInOut}`
+          }, [
             cM('error', {
               color: feedbackTextColorError
             }),
