@@ -54,7 +54,7 @@
               <div v-if="column.ellipsis" class="n-data-table-th__ellipsis">
                 <render
                   :render="typeof column.title === 'function'
-                    ? h => (column.title)(column, index)
+                    ? () => (column.title)(column, index)
                     : column.title
                   "
                 />
