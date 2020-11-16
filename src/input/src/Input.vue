@@ -155,6 +155,7 @@
     >
       {{ placeholder }}
     </div>
+    <div class="n-input__border" />
     <div class="n-input__border-mask" />
   </div>
 </template>
