@@ -279,8 +279,9 @@ export default c([
   },
   ({ props }) => ['warning', 'error'].map(status => {
     const local = props.$local
-    const boxShadow = local[createKey('boxShadow', status)]
+    const border = local[createKey('border', status)]
     const borderHover = local[createKey('borderHover', status)]
+    const borderFocus = local[createKey('borderFocus', status)]
     const boxShadowFocus = local[createKey('boxShadowFocus', status)]
     const colorFocus = local[createKey('colorFocus', status)]
     const caretColor = local[createKey('caretColor', status)]
@@ -290,7 +291,7 @@ export default c([
       status,
       cTB('input-number', [
         cE('border-mask', {
-          boxShadow: boxShadow
+          border
         }),
         cE('input', {
           caretColor: caretColor
@@ -305,6 +306,7 @@ export default c([
           }, [
             c('& ~', [
               cE('border-mask', {
+                border: borderFocus,
                 boxShadow: boxShadowFocus
               })
             ])

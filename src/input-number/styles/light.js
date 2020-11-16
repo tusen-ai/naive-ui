@@ -64,8 +64,9 @@ export default create({
       boxShadowFocus: `0 0 0 2px ${changeColor(primaryColor, { alpha: 0.2 })}`,
       placeholderColor,
       // warning
-      boxShadowWarning: `inset 0 0 0 1px ${warningColor}`,
+      borderWarning: `1px solid ${warningColor}`,
       borderHoverWarning: `1px solid ${warningColorHover}`,
+      borderFocusWarning: `1px solid ${warningColorHover}`,
       boxShadowFocusWarning: `0 0 0 2px ${changeColor(warningColor, { alpha: 0.2 })}`,
       colorFocusWarning: colorFocus,
       caretColorWarning: warningColorHover,
@@ -74,6 +75,7 @@ export default create({
       // error
       borderError: `1px solid ${errorColor}`,
       borderHoverError: `1px solid ${errorColorHover}`,
+      borderFocusError: `1px solid ${errorColorHover}`,
       boxShadowFocusError: `0 0 0 2px ${changeColor(errorColor, { alpha: 0.2 })}`,
       colorFocusError: colorFocus,
       caretColorError: errorColorHover,
