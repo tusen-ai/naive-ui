@@ -5,12 +5,12 @@ export default create({
   name: 'BackTop',
   getDerivedVariables ({ base, derived }) {
     return {
-      backTopFill: 'rgba(0, 0, 0, .6)',
-      backTopFillHover: 'rgba(0, 0, 0, .5)',
-      backTopFillActive: 'rgba(0, 0, 0, .7)',
-      backTopBoxShadow: '0 2px 8px 0px rgba(0, 0, 0, .12)',
-      backTopBoxShadowHover: '0 2px 12px 0px rgba(0, 0, 0, .18)',
-      backTopBoxShadowActive: '0 2px 12px 0px rgba(0, 0, 0, .18)'
+      color: 'rgba(0, 0, 0, .6)',
+      colorHover: 'rgba(0, 0, 0, .5)',
+      colorActive: 'rgba(0, 0, 0, .7)',
+      boxShadow: '0 2px 8px 0px rgba(0, 0, 0, .12)',
+      boxShadowHover: '0 2px 12px 0px rgba(0, 0, 0, .18)',
+      boxShadowPressed: '0 2px 12px 0px rgba(0, 0, 0, .18)'
     }
   }
 })

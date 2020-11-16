@@ -4,12 +4,12 @@ import fadeInScaleIpTransition from '../../../_styles/transitions/fade-in-scale-
 export default c([
   ({ props }) => {
     const {
-      backTopFill,
-      backTopFillHover,
-      backTopFillActive,
-      backTopBoxShadow,
-      backTopBoxShadowHover,
-      backTopBoxShadowActive
+      color,
+      colorHover,
+      colorActive,
+      boxShadow,
+      boxShadowHover,
+      boxShadowPressed
     } = props.$local
     const {
       cubicBezierEaseInOut
@@ -38,25 +38,23 @@ export default c([
           border-radius: 20px;
           height: 40px;
           width: 40px;
-          fill: ${backTopFill};
-          box-shadow: ${backTopBoxShadow};
+          fill: ${color};
+          box-shadow: ${boxShadow};
         `
       }, [
         c('svg', {
-          raw: `
-            pointer-events: none;
-          `
+          pointerEvents: 'none'
         }),
         c('&:hover', {
           raw: `
-            box-shadow: ${backTopBoxShadowHover};
-            fill: ${backTopFillHover};
+            box-shadow: ${boxShadowHover};
+            fill: ${colorHover};
           `
         }),
         c('&:active', {
           raw: `
-            box-shadow: ${backTopBoxShadowActive};
-            fill: ${backTopFillActive};
+            box-shadow: ${boxShadowPressed};
+            fill: ${colorActive};
           `
         })
       ])
