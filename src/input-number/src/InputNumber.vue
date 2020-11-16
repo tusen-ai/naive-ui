@@ -55,6 +55,7 @@
       @blur="doBlur"
       @keyup.enter="handleEnter"
     >
+    <div class="n-input-number__border" />
     <div class="n-input-number__border-mask" />
   </div>
 </template>

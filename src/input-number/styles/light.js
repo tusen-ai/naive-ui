@@ -29,7 +29,6 @@ export default create({
       textColor5: placeholderColorDisabled,
       inputColor: color
     } = derived
-    const borderColorHover = primaryColorHover
     const buttonTextColor = textColor
     const buttonColorDisabled = colorDisabled
     const buttonTextColorDisabled = textColorDisabled
@@ -37,7 +36,7 @@ export default create({
     const buttonColorActive = buttonColor
     const caretColor = null
     const buttonTextColorHover = primaryColorHover
-    const buttonTextColorActive = primaryColorPressed
+    const buttonTextColorPressed = primaryColorPressed
     const colorFocus = color
     return {
       ...inputCommonVariables,
@@ -50,36 +49,36 @@ export default create({
       colorDisabled,
       textColorDisabled,
       textColor,
-      borderColor,
-      borderColorHover,
+      border: `1px solid ${borderColor}`,
+      borderHover: `1px solid ${primaryColorHover}`,
+      borderFocus: `1px solid ${primaryColorHover}`,
       buttonColor,
       buttonColorHover,
       buttonColorActive,
       buttonTextColor,
       buttonTextColorHover,
-      buttonTextColorActive,
+      buttonTextColorPressed,
       caretColor,
       color,
       colorFocus,
-      boxShadowFocus: `inset 0 0 0 1px ${primaryColorHover}, 0 0 0 2px ${changeColor(primaryColor, { alpha: 0.2 })}`,
-      boxShadowHover: `inset 0 0 0 1px ${primaryColorHover}`,
+      boxShadowFocus: `0 0 0 2px ${changeColor(primaryColor, { alpha: 0.2 })}`,
       placeholderColor,
       // warning
       boxShadowWarning: `inset 0 0 0 1px ${warningColor}`,
-      boxShadowFocusWarning: `inset 0 0 0 1px ${warningColorHover}, 0 0 0 2px ${changeColor(warningColor, { alpha: 0.2 })}`,
-      boxShadowHoverWarning: `inset 0 0 0 1px ${warningColorHover}`,
+      borderHoverWarning: `1px solid ${warningColorHover}`,
+      boxShadowFocusWarning: `0 0 0 2px ${changeColor(warningColor, { alpha: 0.2 })}`,
       colorFocusWarning: colorFocus,
       caretColorWarning: warningColorHover,
       buttonTextColorHoverWarning: warningColorHover,
-      buttonTextColorActiveWarning: warningColorPressed,
+      buttonTextColorPressedWarning: warningColorPressed,
       // error
-      boxShadowError: `inset 0 0 0 1px ${errorColor}`,
-      boxShadowFocusError: `inset 0 0 0 1px ${errorColorHover}, 0 0 0 2px ${changeColor(errorColor, { alpha: 0.2 })}`,
-      boxShadowHoverError: `inset 0 0 0 1px ${errorColorHover}`,
+      borderError: `1px solid ${errorColor}`,
+      borderHoverError: `1px solid ${errorColorHover}`,
+      boxShadowFocusError: `0 0 0 2px ${changeColor(errorColor, { alpha: 0.2 })}`,
       colorFocusError: colorFocus,
       caretColorError: errorColorHover,
       buttonTextColorHoverError: errorColorHover,
-      buttonTextColorActiveError: errorColorPressed
+      buttonTextColorPressedError: errorColorPressed
     }
   }
 })

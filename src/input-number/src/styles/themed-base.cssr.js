@@ -12,19 +12,19 @@ export default c([
       colorDisabled,
       textColorDisabled,
       textColor,
-      borderColor,
-      borderColorHover,
+      border,
+      borderHover,
+      borderFocus,
       buttonColor,
       buttonColorHover,
       buttonColorActive,
       buttonTextColor,
       buttonTextColorHover,
-      buttonTextColorActive,
+      buttonTextColorPressed,
       caretColor,
       color: backgroundColor,
       colorFocus,
       boxShadowFocus,
-      boxShadowHover,
       placeholderColor,
       borderRadius
     } = props.$local
@@ -38,6 +38,19 @@ export default c([
       `,
       borderRadius
     }, [
+      cE('border', {
+        raw: `
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          border: ${border};
+          border-radius: ${borderRadius};
+          transition: border-color .3s ${cubicBezierEaseInOut};
+          pointer-events: none;
+        `
+      }),
       cE('border-mask', {
         raw: `
           position: absolute;
@@ -46,9 +59,12 @@ export default c([
           right: 0;
           bottom: 0;
           left: 0;
-          box-shadow: inset 0 0 0 1px transparent;
+          border: ${border};
+          border-color: transparent;
           border-radius: ${borderRadius};
-          transition: box-shadow .3s ${cubicBezierEaseInOut};
+          transition:
+            box-shadow .3s ${cubicBezierEaseInOut},
+            border-color .3s ${cubicBezierEaseInOut};
           pointer-events: none;
         `
       }),
@@ -148,9 +164,10 @@ export default c([
             right: 0;
           `,
           transition: `
+            border-color .3s ${cubicBezierEaseInOut},
             box-shadow .3s ${cubicBezierEaseInOut}
           `,
-          boxShadow: `inset 0 0 0 1px ${borderColor}`
+          border
         }),
         cB('input-number-button-body', {
           raw: `
@@ -160,9 +177,7 @@ export default c([
             display: flex;
             align-items: center;
             justify-content: center;
-          `,
-          transition: `
-            background-color .3s ${cubicBezierEaseInOut}
+            transition: background-color .3s ${cubicBezierEaseInOut};
           `,
           backgroundColor: buttonColor
         }),
@@ -172,9 +187,7 @@ export default c([
             position: absolute;
             top: 0;
             bottom: 0;
-          `,
-          transition: `
-            background-color .3s ${cubicBezierEaseInOut}
+            transition: background-color .3s ${cubicBezierEaseInOut};
           `,
           backgroundColor: buttonColor
         }),
@@ -184,7 +197,7 @@ export default c([
         }),
         c('&:hover ~', [
           cE('border-mask', {
-            boxShadow: `inset 0 0 0 1px ${borderColorHover}`
+            border: borderHover
           })
         ]),
         c('&:hover', [
@@ -206,7 +219,7 @@ export default c([
             backgroundColor: buttonColorActive
           }),
           cB('icon', {
-            color: buttonTextColorActive
+            color: buttonTextColorPressed
           })
         ]),
         cM('disabled', {
@@ -239,7 +252,6 @@ export default c([
           text-align: center;
         `,
         backgroundColor,
-        boxShadow: `inset 0 0 0 1px ${borderColor}`,
         color: textColor,
         caretColor: caretColor
       }, [
@@ -249,7 +261,7 @@ export default c([
         }),
         c('&:hover ~', [
           cE('border-mask', {
-            boxShadow: boxShadowHover
+            border: borderHover
           })
         ]),
         c('&:focus', {
@@ -257,6 +269,7 @@ export default c([
         }, [
           c('& ~', [
             cE('border-mask', {
+              border: borderFocus,
               boxShadow: boxShadowFocus
             })
           ])
@@ -267,12 +280,12 @@ export default c([
   ({ props }) => ['warning', 'error'].map(status => {
     const local = props.$local
     const boxShadow = local[createKey('boxShadow', status)]
-    const boxShadowHover = local[createKey('boxShadowHover', status)]
+    const borderHover = local[createKey('borderHover', status)]
     const boxShadowFocus = local[createKey('boxShadowFocus', status)]
     const colorFocus = local[createKey('colorFocus', status)]
     const caretColor = local[createKey('caretColor', status)]
     const buttonTextColorHover = local[createKey('buttonTextColorHover', status)]
-    const buttonTextColorActive = local[createKey('buttonTextColorActive', status)]
+    const buttonTextColorPressed = local[createKey('buttonTextColorPressed', status)]
     return insideFormItem(
       status,
       cTB('input-number', [
@@ -284,7 +297,7 @@ export default c([
         }, [
           c('&:hover ~', [
             cE('border-mask', {
-              boxShadow: boxShadowHover
+              border: borderHover
             })
           ]),
           c('&:focus', {
@@ -305,7 +318,7 @@ export default c([
           ]),
           c('&:active', [
             cB('icon', {
-              color: buttonTextColorActive
+              color: buttonTextColorPressed
             })
           ])
         ])
