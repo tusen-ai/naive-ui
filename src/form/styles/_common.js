@@ -13,5 +13,8 @@ export default {
   labelFontSizeTopLarge: '14px',
   labelHeightSmall: '18px',
   labelHeightMedium: '18px',
-  labelHeightLarge: '20px'
+  labelHeightLarge: '20px',
+  labelPaddingVertical: '0 0 8px 2px',
+  labelPaddingHorizontal: '0 12px 0 0',
+  labelTextAlignHorizontal: 'right'
 }

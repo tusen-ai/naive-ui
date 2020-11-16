@@ -28,8 +28,8 @@ export default c([
             lineHeight: pxfy(depx(blankHeight) + 6)
           })
         ]),
-        cB('form-item-blank', {
-          minHeight: blankHeight
+        cB('form-item-control', {
+          marginBottom: blankHeight
         }),
         cB('form-item-feedback-wrapper', {
           fontSize: feedbackFontSize

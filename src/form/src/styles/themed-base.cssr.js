@@ -7,7 +7,10 @@ export default c([
       labelTextColor,
       asteriskColor,
       feedbackTextColorError,
-      feedbackTextColorWarning
+      feedbackTextColorWarning,
+      labelPaddingHorizontal,
+      labelPaddingVertical,
+      labelTextAlignHorizontal
     } = props.$local
     const {
       cubicBezierEaseInOut
@@ -43,7 +46,7 @@ export default c([
             raw: `
               display: block;
               width: 100%;
-              padding-left: 2px;
+              padding: ${labelPaddingVertical};
             `
           })
         ]),
@@ -56,7 +59,7 @@ export default c([
           cB('form-item-label', {
             raw: `
               box-sizing: border-box;
-              padding-right: 12px;
+              padding: ${labelPaddingHorizontal};
               white-space: nowrap;
               flex-shrink: 0;
               flex-grow: 0;
@@ -68,7 +71,7 @@ export default c([
         ]),
         cM('right-label-aligned', [
           cB('form-item-label', {
-            textAlign: 'right'
+            textAlign: labelTextAlignHorizontal
           }, [
             c('&::after', {
               display: 'none'
@@ -127,6 +130,7 @@ export default c([
             padding-top: 0px;
             box-sizing: border-box;
             min-height: 1.25em;
+            font-size: 14px;
             transform-origin: top left;
             line-height: 1.25;
           `
