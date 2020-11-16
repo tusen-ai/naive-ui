@@ -24,6 +24,8 @@ import {
 import { formatLength } from '../../_utils'
 import styles from './styles/index'
 
+let houdiniRegistered = false
+
 export default {
   name: 'GradientText',
   mixins: [
@@ -74,6 +76,25 @@ export default {
         return `linear-gradient(${deg}deg, ${from} 0%, ${to} 100%)`
       }
       return undefined
+    }
+  },
+  beforeMount () {
+    if (!houdiniRegistered) {
+      houdiniRegistered = true
+      if (window.CSS) {
+        CSS.registerProperty({
+          name: '--start-stop',
+          syntax: '<color>',
+          inherits: false,
+          initialValue: 'transparent'
+        })
+        CSS.registerProperty({
+          name: '--end-stop',
+          syntax: '<color>',
+          inherits: false,
+          initialValue: 'transparent'
+        })
+      }
     }
   }
 }

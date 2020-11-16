@@ -14,11 +14,17 @@ export default create({
     } = derived
     return {
       fontWeight: base.fontWeightStrong,
-      backgroundImagePrimary: `linear-gradient(252deg, ${changeColor(primaryColor, { alpha: 0.6 })} 0%, ${primaryColor} 100%)`,
-      backgroundImageSuccess: `linear-gradient(252deg, ${changeColor(successColor, { alpha: 0.6 })} 0%, ${successColor} 100%)`,
-      backgroundImageWarning: ` linear-gradient(252deg, ${changeColor(warningColor, { alpha: 0.6 })} 0%, ${warningColor} 100%)`,
-      backgroundImageError: `linear-gradient(252deg, ${changeColor(errorColor, { alpha: 0.6 })} 0%, ${errorColor} 100%)`,
-      backgroundImageInfo: `linear-gradient(252deg, ${changeColor(infoColor, { alpha: 0.6 })} 0%, ${infoColor} 100%)`
+      rotate: '252deg',
+      colorStartPrimary: changeColor(primaryColor, { alpha: 0.6 }),
+      colorEndPrimary: primaryColor,
+      colorStartInfo: changeColor(infoColor, { alpha: 0.6 }),
+      colorEndInfo: infoColor,
+      colorStartWarning: changeColor(warningColor, { alpha: 0.6 }),
+      colorEndWarning: warningColor,
+      colorStartError: changeColor(errorColor, { alpha: 0.6 }),
+      colorEndError: errorColor,
+      colorStartSuccess: changeColor(successColor, { alpha: 0.6 }),
+      colorEndSuccess: successColor
     }
   }
 })

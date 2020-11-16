@@ -18,11 +18,17 @@ export default create({
     } = derived
     return {
       fontWeight: base.fontWeightStrong,
-      backgroundImagePrimary: `linear-gradient(252deg, ${primaryColor} 0%, ${primaryColorSuppl} 100%)`,
-      backgroundImageSuccess: `linear-gradient(252deg, ${successColor} 0%, ${successColorSuppl} 100%)`,
-      backgroundImageWarning: ` linear-gradient(252deg, ${warningColor} 0%, ${warningColorSuppl} 100%)`,
-      backgroundImageError: `linear-gradient(252deg, ${errorColor} 0%, ${errorColorSuppl} 100%)`,
-      backgroundImageInfo: `linear-gradient(252deg, ${infoColor} 0%, ${infoColorSuppl} 100%)`
+      rotate: '252deg',
+      colorStartPrimary: primaryColor,
+      colorEndPrimary: primaryColorSuppl,
+      colorStartInfo: infoColor,
+      colorEndInfo: infoColorSuppl,
+      colorStartWarning: warningColor,
+      colorEndWarning: warningColorSuppl,
+      colorStartError: errorColor,
+      colorEndError: errorColorSuppl,
+      colorStartSuccess: successColor,
+      colorEndSuccess: successColorSuppl
     }
   }
 })

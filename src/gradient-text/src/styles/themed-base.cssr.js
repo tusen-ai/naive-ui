@@ -3,13 +3,22 @@ import { c, cTB, cM } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      backgroundImagePrimary,
-      backgroundImageInfo,
-      backgroundImageSuccess,
-      backgroundImageWarning,
-      backgroundImageError,
+      rotate,
+      colorStartPrimary,
+      colorEndPrimary,
+      colorStartInfo,
+      colorEndInfo,
+      colorStartWarning,
+      colorEndWarning,
+      colorStartError,
+      colorEndError,
+      colorStartSuccess,
+      colorEndSuccess,
       fontWeight
     } = props.$local
+    const {
+      cubicBezierEaseInOut
+    } = props.$base
     return cTB('gradient-text', {
       raw: `
         display: inline-block;
@@ -19,32 +28,41 @@ export default c([
         background-clip: text;
         color: transparent;
         white-space: nowrap;
+        background-image: linear-gradient(${rotate}, var(--start-stop) 0%, var(--end-stop) 100%);
+        transition:
+          --start-stop .3s ${cubicBezierEaseInOut},
+          --end-stop .3s ${cubicBezierEaseInOut};
       `
     },
     [
       cM('default-type', {
         raw: `
-          background-image: ${backgroundImagePrimary};
+          --start-stop: ${colorStartPrimary};
+          --end-stop: ${colorEndPrimary};
         `
       }),
       cM('success-type', {
         raw: `
-          background-image: ${backgroundImageSuccess};
+          --start-stop: ${colorStartSuccess};
+          --end-stop: ${colorEndSuccess};
         `
       }),
       cM('warning-type', {
         raw: `
-          background-image: ${backgroundImageWarning};
+          --start-stop: ${colorStartWarning};
+          --end-stop: ${colorEndWarning};
         `
       }),
       cM('error-type', {
         raw: `
-          background-image: ${backgroundImageError};
+          --start-stop: ${colorStartError};
+          --end-stop: ${colorEndError};
         `
       }),
       cM('info-type', {
         raw: `
-          background-image: ${backgroundImageInfo};
+          --start-stop: ${colorStartInfo};
+          --end-stop: ${colorEndInfo};
         `
       })
     ])
