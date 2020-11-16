@@ -1,45 +1,35 @@
-import { c, cTB, cB, cE, cM } from '../../../_utils/cssr'
+import { c, cTB, cB, cE, cM, createKey } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
     const type = props.$instance.type
-    const pallete = props.$local[type]
-    const {
-      color: backgroundColor,
-      borderColor,
-      iconColor,
-      titleTextColor,
-      contentTextColor,
-      closeColor,
-      closeColorHover,
-      closeColorPressed
-    } = pallete
+    const { $local } = props
     return cTB('alert', [
       cM(type + '-type', {
-        backgroundColor,
+        backgroundColor: $local[createKey('color', type)],
         textAlign: 'start'
       }, [
         cE('close', {
-          color: closeColor
+          color: $local[createKey('closeColor', type)]
         }, [
           c('&:hover', {
-            color: closeColorHover
+            color: $local[createKey('closeColorHover', type)]
           }),
           c('&:active', {
-            color: closeColorPressed
+            color: $local[createKey('closeColorPressed', type)]
           })
         ]),
         cE('icon', {
-          color: iconColor
+          color: $local[createKey('iconColor', type)]
         }),
         cB('alert-body', {
-          border: `1px solid ${borderColor}`
+          border: $local[createKey('border', type)]
         }, [
           cE('title', {
-            color: titleTextColor
+            color: $local[createKey('titleTextColor', type)]
           }),
           cE('content', {
-            color: contentTextColor
+            color: $local[createKey('contentTextColor', type)]
           })
         ])
       ])
