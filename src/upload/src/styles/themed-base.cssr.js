@@ -10,15 +10,15 @@ export default c([
     } = props.$base
     const {
       draggerColor,
-      draggerBorderColorHover,
+      draggerBorder,
+      draggerBorderHover,
       itemColorHover,
       itemColorHoverError,
       itemTextColorError,
       itemTextColorSuccess,
       itemTextColor,
       itemIconColor,
-      itemDisabledOpacity,
-      draggerBorderColor
+      itemDisabledOpacity
     } = props.$local
     const iconSwitchTransition = createIconSwitchTransition()
 
@@ -55,13 +55,11 @@ export default c([
             border-color .3s ${cubicBezierEaseInOut},
             background-color .3s ${cubicBezierEaseInOut};
           background-color: ${draggerColor};
-          border: 1px dashed ${draggerBorderColor};
+          border: ${draggerBorder};
         `
       }, [
         c('&:hover', {
-          raw: `
-            border-color:${draggerBorderColorHover};
-          `
+          border: draggerBorderHover
         })
       ]),
       cB('upload-file-list', {
@@ -211,9 +209,7 @@ export default c([
       ]),
       cM('drag-over', [
         cB('upload-dragger', {
-          raw: `
-            border-color: ${draggerBorderColorHover};
-          `
+          border: draggerBorderHover
         })
       ])
     ])

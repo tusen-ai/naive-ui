@@ -22,7 +22,7 @@ export default create({
       color: baseColor,
       colorDisabled: inputColorDisabled,
       colorTableHeader: cardColor,
-      colorModalTableHeader: modalColor,
+      colorTableHeaderModal: modalColor,
       iconColor: baseColor,
       iconColorDisabled: textColorDisabled,
       borderColor: borderColor,

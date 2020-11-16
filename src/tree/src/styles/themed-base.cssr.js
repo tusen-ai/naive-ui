@@ -9,7 +9,7 @@ export default c([
     } = props.$base
     const {
       nodeColorHover,
-      nodeColorActive,
+      nodeColorPressed,
       nodeColorSelected,
       arrowColor,
       nodeTextColor,
@@ -173,7 +173,7 @@ export default c([
           }),
           c('&:active', {
             raw: `
-              background-color: ${nodeColorActive};
+              background-color: ${nodeColorPressed};
             `
           }),
           cM('hightlight', [

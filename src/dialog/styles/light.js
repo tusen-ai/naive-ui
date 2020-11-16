@@ -22,7 +22,7 @@ export default create({
       color: cardColor,
       closeColor: closeColor,
       closeColorHover: closeColorHover,
-      closeColorActive: closeColorPressed,
+      closeColorPressed: closeColorPressed,
       iconColorInfo: infoColor,
       iconColorSuccess: successColor,
       iconColorWarning: warningColor,

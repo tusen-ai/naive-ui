@@ -22,7 +22,7 @@ export default create({
       color: modalColor,
       closeColor: closeOverylayColor,
       closeColorHover: colorColorHoverOverlay,
-      closeColorActive: closeActiveOverylayColor,
+      closeColorPressed: closeActiveOverylayColor,
       iconColorInfo: infoColor,
       iconColorSuccess: successColor,
       iconColorWarning: warningColor,

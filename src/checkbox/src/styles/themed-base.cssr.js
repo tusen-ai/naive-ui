@@ -12,7 +12,7 @@ export default c([
       color,
       colorDisabled,
       colorTableHeader,
-      colorModalTableHeader,
+      colorTableHeaderModal,
       iconColor,
       iconColorDisabled,
       borderColor,
@@ -156,7 +156,7 @@ export default c([
               cNotM('indeterminate', [
                 cNotM('disabled', [
                   cB('checkbox-box', {
-                    backgroundColor: colorModalTableHeader
+                    backgroundColor: colorTableHeaderModal
                   })
                 ])
               ])

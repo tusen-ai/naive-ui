@@ -35,7 +35,7 @@ export default create({
       textColor: textColor2Overlay,
       closeColor: closeColorOverlay,
       closeColorHover: colorColorHoverOverlay,
-      closeColorActive: closeColorOverlay,
+      closeColorPressed: closeColorOverlay,
       headerTextColor: textColor1Overlay,
       contentTextColor: textColor2Overlay,
       descriptionTextColor: textColor3Overlay,

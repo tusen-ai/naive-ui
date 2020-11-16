@@ -19,8 +19,8 @@ export default create({
 
     return {
       draggerColor: actionColorOverlay,
-      draggerBorderColor: borderColor,
-      draggerBorderColorHover: primaryColor,
+      draggerBorder: `1px dashed ${borderColor}`,
+      draggerBorderHover: `1px dashed ${primaryColor}`,
       itemColorHover: hoverColorOverlay,
       itemColorHoverError: changeColor(errorColor, {
         alpha: 0.06

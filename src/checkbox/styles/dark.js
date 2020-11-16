@@ -21,7 +21,7 @@ export default create({
       color: 'transparent',
       colorDisabled: inputColorDisabledOverlay,
       colorTableHeader: cardColor,
-      colorModalTableHeader: modalColor,
+      colorTableHeaderModal: modalColor,
       iconColor: cardColor,
       iconColorDisabled: textColorDisabledOverlay,
       borderColor: borderColorOverlay,

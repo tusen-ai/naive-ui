@@ -12,7 +12,7 @@ export default c([
       titleFontWeight,
       closeColor,
       closeColorHover,
-      closeColorActive,
+      closeColorPressed,
       iconColorInfo,
       iconColorSuccess,
       iconColorWarning,
@@ -100,7 +100,7 @@ export default c([
               color: closeColorHover
             }),
             c('&:active', {
-              color: closeColorActive
+              color: closeColorPressed
             })
           ])
         ])

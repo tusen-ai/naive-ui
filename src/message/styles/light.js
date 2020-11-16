@@ -42,10 +42,10 @@ export default create({
       iconColorLoading: 'rgba(255, 255, 255, .45)',
       closeColor: 'rgba(255, 255, 255, .5)',
       closeColorHover: 'rgba(255, 255, 255, .6)',
-      closeColorActive: 'rgba(255, 255, 255, .4)',
+      closeColorPressed: 'rgba(255, 255, 255, .4)',
       closeColorLoading: closeColor,
       closeColorHoverLoading: closeColorHover,
-      closeColorActiveLoading: closeColor
+      closeColorPressedLoading: closeColor
     }
   }
 })

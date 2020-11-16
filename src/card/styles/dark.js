@@ -18,7 +18,7 @@ export default create({
       titleFontWeight: base.fontWeightStrong,
       closeColor: derived.closeColorOverlay,
       closeColorHover: derived.colorColorHoverOverlay,
-      closeColorActive: derived.closeColorPressedOverlay,
+      closeColorPressed: derived.closeColorPressedOverlay,
       borderRadius
     }
   }

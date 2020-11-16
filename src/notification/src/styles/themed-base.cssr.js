@@ -66,7 +66,7 @@ export default c([
       textColor,
       closeColor,
       closeColorHover,
-      closeColorActive,
+      closeColorPressed,
       headerTextColor,
       contentTextColor,
       descriptionTextColor,
@@ -165,7 +165,7 @@ export default c([
               color: closeColorHover
             }),
             c('&:active', {
-              color: closeColorActive
+              color: closeColorPressed
             })
           ])
         ]),

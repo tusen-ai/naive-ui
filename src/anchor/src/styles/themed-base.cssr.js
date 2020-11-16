@@ -8,8 +8,8 @@ export default c([
       railColorActive,
       linkTextColor,
       linkTextColorHover,
-      linkTextColorActive,
-      linkTextColorMatch
+      linkTextColorPressed,
+      linkTextColorActive
     } = props.$local
     const {
       cubicBezierEaseInOut
@@ -108,10 +108,10 @@ export default c([
             color: linkTextColorHover
           }),
           c('&:active', {
-            color: linkTextColorActive
+            color: linkTextColorPressed
           }),
           cM('active', {
-            color: linkTextColorMatch
+            color: linkTextColorActive
           })
         ])
       ])

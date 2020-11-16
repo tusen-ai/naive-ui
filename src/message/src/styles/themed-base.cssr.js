@@ -28,10 +28,10 @@ export default c([
     const {
       closeColor,
       closeColorHover,
-      closeColorActive,
+      closeColorPressed,
       closeColorLoading,
       closeColorHoverLoading,
-      closeColorActiveLoading
+      closeColorPressedLoading
     } = props.$local
     const {
       cubicBezierEaseInOut
@@ -112,8 +112,8 @@ export default c([
           }),
           c('&:active', {
             raw: `
-              fill: ${closeColorActive};
-              stroke: ${closeColorActive};
+              fill: ${closeColorPressed};
+              stroke: ${closeColorPressed};
             `
           })
         ])
@@ -134,8 +134,8 @@ export default c([
           }),
           c('&:active', {
             raw: `
-              fill: ${closeColorActiveLoading};
-              stroke: ${closeColorActiveLoading};
+              fill: ${closeColorPressedLoading};
+              stroke: ${closeColorPressedLoading};
             `
           })
         ])

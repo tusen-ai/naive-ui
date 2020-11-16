@@ -14,7 +14,7 @@ export default c([
       borderRadius,
       closeColor,
       closeColorHover,
-      closeColorActive
+      closeColorPressed
     } = props.$local
     return cTB(
       'card',
@@ -136,7 +136,7 @@ export default c([
                 color: closeColorHover
               }),
               c('&:active', {
-                color: closeColorActive
+                color: closeColorPressed
               })
             ])
           ]),

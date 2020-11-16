@@ -19,7 +19,7 @@ export default create({
     return {
       borderRadiusSmall,
       nodeColorHover: hoverColorOverlay,
-      nodeColorActive: activeColorOverlay,
+      nodeColorPressed: activeColorOverlay,
       nodeColorSelected: changeColor(primaryColor, { alpha: 0.15 }),
       arrowColor: textColor3Overlay,
       nodeTextColor: textColor2Overlay,

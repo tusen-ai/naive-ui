@@ -7,8 +7,8 @@ export default c([
     const {
       railColor,
       railColorHover,
-      railFillColor,
-      railFillColorHover,
+      fillColor,
+      fillColorHover,
       handleColor,
       dotColor,
       dotColorModal,
@@ -71,7 +71,7 @@ export default c([
             backgroundColor: railColorHover
           }, [
             cE('fill', {
-              backgroundColor: railFillColorHover
+              backgroundColor: fillColorHover
             })
           ]),
           cB('slider-handle', {
@@ -83,7 +83,7 @@ export default c([
             backgroundColor: railColorHover
           }, [
             cE('fill', {
-              backgroundColor: railFillColorHover
+              backgroundColor: fillColorHover
             })
           ]),
           cB('slider-handle', {
@@ -106,7 +106,7 @@ export default c([
               border-radius: ${pxfy(depx(railHeight) / 2)};
               transition: background-color .3s ${cubicBezierEaseInOut};
             `,
-            backgroundColor: railFillColor
+            backgroundColor: fillColor
           })
         ]),
         cB('slider-handle', {

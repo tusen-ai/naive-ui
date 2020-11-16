@@ -22,8 +22,8 @@ export default create({
       linkColor: changeColor(primaryColor, { alpha: 0.15 }),
       linkTextColor: textColor2Overlay,
       linkTextColorHover: primaryColorHover,
-      linkTextColorActive: primaryColorPressed,
-      linkTextColorMatch: primaryColor
+      linkTextColorPressed: primaryColorPressed,
+      linkTextColorActive: primaryColor
     }
   }
 })
