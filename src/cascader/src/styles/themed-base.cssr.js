@@ -11,6 +11,7 @@ c([
       transformDebounceScale
     } = props.$base
     const {
+      arrowColor,
       optionTextColor,
       optionTextColorMatched,
       optionTextColorDisabled,
@@ -137,7 +138,7 @@ c([
                 fadeInScaleUpTransition()
               ]),
               cM('arrow', {
-                color: optionTextColor
+                color: arrowColor
               })
             ])
           ]),
@@ -162,14 +163,18 @@ c([
               background-color: transparent;
               cursor: not-allowed;
             `
-          })
+          }, [
+            cB('cascader-option-icon', [
+              cM('arrow', {
+                color: optionTextColorDisabled
+              })
+            ])
+          ])
         ])
       ]
     )
   },
   cB('cascader', {
-    raw: `
-      width: 100%;
-    `
+    width: '100%'
   })
 ])

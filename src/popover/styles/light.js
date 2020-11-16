@@ -6,6 +6,7 @@ export default create({
   theme: 'light',
   getDerivedVariables ({ base, derived }) {
     const {
+      boxShadow2,
       popoverColor,
       textColor2,
       baseColor
@@ -18,7 +19,7 @@ export default create({
       borderRadius,
       color: popoverColor,
       textColor: textColor2,
-      boxShadow: '0 2px 8px 0 rgba(0, 0, 0, .12)',
+      boxShadow: boxShadow2,
       tooltipColor: 'rgba(0, 0, 0, .85)',
       tooltipTextColor: baseColor
     }

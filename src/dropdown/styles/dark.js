@@ -7,7 +7,7 @@ export default create({
   getDerivedVariables ({ derived, base }) {
     const {
       textColor2,
-      popoverBoxShadow,
+      boxShadow2,
       dividerColorOverlay,
       hoverColorOverlay,
       popoverColor
@@ -20,7 +20,7 @@ export default create({
       color: popoverColor,
       dividerColor: dividerColorOverlay,
       borderRadius,
-      boxShadow: popoverBoxShadow,
+      boxShadow: boxShadow2,
       suffixColor: textColor2,
       prefixColor: textColor2,
       optionColorHover: hoverColorOverlay

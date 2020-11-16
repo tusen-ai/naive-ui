@@ -9,7 +9,7 @@ export default create({
       ...commonVariables,
       borderRadius: base.borderRadius,
       color: derived.popoverColor,
-      boxShadow: derived.popoverBoxShadow,
+      boxShadow: derived.boxShadow2,
       groupHeaderTextColor: derived.textColor3,
       actionDividerColor: derived.dividerColorOverlay,
       optionTextColor: derived.textColor2,

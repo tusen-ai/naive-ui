@@ -21,11 +21,12 @@ export default create({
   getDerivedVariables ({ base, derived }) {
     const {
       borderRadius,
-      popmenuBoxShadow
+      boxShadow2
     } = base
     const {
       popoverColor,
       textColor2,
+      textColor3,
       primaryColor,
       textColorDisabled,
       dividerColorOverlay,
@@ -35,8 +36,9 @@ export default create({
       ...sizeVariables,
       menuBorderRadius: borderRadius,
       menuColor: popoverColor,
-      menuBoxShadow: popmenuBoxShadow,
+      menuBoxShadow: boxShadow2,
       menuBorderColor: dividerColorOverlay,
+      arrowColor: textColor3,
       optionColorHover: hoverColorOverlay,
       optionTextColor: textColor2,
       optionTextColorMatched: primaryColor,

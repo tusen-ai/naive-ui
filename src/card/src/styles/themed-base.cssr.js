@@ -128,7 +128,7 @@ export default c([
             cE('close-mark', {
               raw: `
                 cursor: pointer;
-                transition: fill .3s ${cubicBezierEaseInOut};
+                transition: color .3s ${cubicBezierEaseInOut};
                 color: ${closeColor};
               `
             }, [

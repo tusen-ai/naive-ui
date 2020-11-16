@@ -13,12 +13,12 @@ export default create({
       opacityDisabled
     } = derived
     const {
-      popmenuBoxShadow,
+      boxShadow2,
       borderRadius
     } = base
     return {
       panelColor: popoverColor,
-      panelBoxShadow: popmenuBoxShadow,
+      panelBoxShadow: boxShadow2,
       panelDividerColor: dividerColorOverlay,
       itemTextColor: textColor2Overlay,
       itemTextColorActive: primaryColor,

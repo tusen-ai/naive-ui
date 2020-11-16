@@ -8,7 +8,8 @@ export default c([
       cubicBezierEaseOut
     } = props.$base
     const {
-      color
+      color,
+      boxShadow
     } = props.$local
     return [
       cB('modal-container', {
@@ -48,27 +49,18 @@ export default c([
           overflow: visible;
         `
       }, [
-        c('>', [
-          cB('scrollbar', [
-            c('>', [
-              cB('scrollbar-container', [
-                c('>', [
-                  cB('scrollbar-content', {
-                    raw: `
-                      min-height: 100%;
-                      display: flex;
-                    `
-                  })
-                ])
-              ])
-            ])
-          ])
-        ])
+        cB('modal-scroll-content', {
+          raw: `
+            min-height: 100%;
+            display: flex;
+          `
+        })
       ]),
       cTB('modal', {
         raw: `
           margin: auto;
           position: relative;
+          box-shadow: ${boxShadow}
         `
       }, [
         fadeInScaleUpTransition({

@@ -19,7 +19,7 @@ export default create({
       panelHeaderTextColor: derived.textColor1Overlay,
       panelDividerColor: derived.dividerColorOverlay,
       panelBorderRadius: base.borderRadius,
-      panelBoxShadow: derived.popoverBoxShadow,
+      panelBoxShadow: derived.boxShadow2,
       pickerTextDecorationColor: derived.textColor2Overlay,
       panelHeaderFontWeight: base.fontWeightStrong
     }

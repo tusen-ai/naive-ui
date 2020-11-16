@@ -13,7 +13,5 @@ export default {
 
   lineHeight: '1.75',
 
-  transformDebounceScale: 'scale(0.99999)',
-
-  popmenuBoxShadow: '0px 2px 12px 0px rgba(0, 0, 0, 0.18)'
+  transformDebounceScale: 'scale(0.99999)'
 }

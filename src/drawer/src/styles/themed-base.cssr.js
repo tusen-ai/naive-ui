@@ -9,7 +9,8 @@ export default c([
   ({ props }) => {
     const {
       color: backgroundColor,
-      textColor
+      textColor,
+      boxShadow
     } = props.$local
     const {
       cubicBezierEaseInOut,
@@ -22,6 +23,7 @@ export default c([
           overflow: auto;
           position: absolute;
           pointer-events: all;
+          box-shadow: ${boxShadow};
           transition:
             background-color .3s ${cubicBezierEaseInOut},
             color .3s ${cubicBezierEaseInOut};

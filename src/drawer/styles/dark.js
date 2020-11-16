@@ -6,7 +6,8 @@ export default create({
   getDerivedVariables ({ derived }) {
     return {
       color: derived.modalColor,
-      textColor: derived.textColor2Overlay
+      textColor: derived.textColor2Overlay,
+      boxShadow: derived.boxShadow3
     }
   }
 })

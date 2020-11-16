@@ -16,7 +16,7 @@ export default create({
       popoverColor
     } = derived
     const {
-      popmenuBoxShadow
+      boxShadow2
     } = base
     const coloredBoxShadow = '0px 2px 18px 0px rgba(0, 0, 0, 0.27)'
     return {
@@ -34,7 +34,7 @@ export default create({
       boxShadowSuccess: coloredBoxShadow,
       boxShadowError: coloredBoxShadow,
       boxShadowWarning: coloredBoxShadow,
-      boxShadowLoading: popmenuBoxShadow,
+      boxShadowLoading: boxShadow2,
       iconColorInfo: 'rgba(255, 255, 255, .45)',
       iconColorSuccess: 'rgba(255, 255, 255, .45)',
       iconColorWarning: 'rgba(255, 255, 255, .45)',

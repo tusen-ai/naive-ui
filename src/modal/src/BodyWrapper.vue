@@ -4,7 +4,7 @@
     v-show="displayDirective === 'if' || displayed || show"
     class="n-modal-body-wrapper"
   >
-    <n-scrollbar ref="scrollbar">
+    <n-scrollbar ref="scrollbar" content-class="n-modal-scroll-content">
       <transition
         name="n-fade-in-scale-up-transition"
         :appear="NModal.appear ?? NModal.isMounted"

@@ -15,7 +15,7 @@ export default create({
       popoverColor
     } = derived
     const {
-      popmenuBoxShadow
+      boxShadow2
     } = base
     return {
       textColorInfo: textColorBase,
@@ -32,7 +32,7 @@ export default create({
       boxShadowSuccess: `0 2px 12px 0 ${changeColor(successColorSuppl, { alpha: '0.4' })}`,
       boxShadowError: `0 2px 12px 0 ${changeColor(errorColorSuppl, { alpha: '0.4' })}`,
       boxShadowWarning: `0 2px 12px 0 ${changeColor(warningColorSuppl, { alpha: '0.4' })}`,
-      boxShadowLoading: popmenuBoxShadow,
+      boxShadowLoading: boxShadow2,
       iconColorInfo: 'rgba(255, 255, 255, .5)',
       iconColorSuccess: 'rgba(255, 255, 255, .5)',
       iconColorWarning: 'rgba(255, 255, 255, .5)',

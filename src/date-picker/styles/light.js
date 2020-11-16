@@ -20,7 +20,7 @@ export default create({
       panelIconColor: derived.iconColor,
       panelHeaderTextColor: derived.textColor1,
       panelDividerColor: derived.dividerColor,
-      panelBoxShadow: derived.popoverBoxShadow,
+      panelBoxShadow: derived.boxShadow2,
       panelBorderRadius: base.borderRadius,
       pickerTextDecorationColor: derived.textColor2,
       panelHeaderFontWeight: base.fontWeightStrong
