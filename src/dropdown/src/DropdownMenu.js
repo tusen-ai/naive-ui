@@ -32,13 +32,17 @@ export default {
   render () {
     const {
       NDropdown: {
-        size
+        size,
+        mergedTheme
       }
     } = this
     return h('div', {
       class: [
         'n-dropdown-menu',
-        `n-dropdown-menu--${size}-size`
+        `n-dropdown-menu--${size}-size`,
+        {
+          [`n-${mergedTheme}-theme`]: mergedTheme
+        }
       ]
     },
     [

@@ -9,13 +9,15 @@ export default create({
       textColor2,
       popoverBoxShadow,
       dividerColor,
-      hoverColorOverlay
+      hoverColorOverlay,
+      popoverColor
     } = derived
     const {
       borderRadius
     } = base
     return {
       ...commonVariables,
+      color: popoverColor,
       dividerColor,
       borderRadius,
       boxShadow: popoverBoxShadow,

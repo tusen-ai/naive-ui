@@ -5,6 +5,7 @@ export default c([
   ({ props }) => {
     const local = props.$local
     const {
+      color,
       prefixColor,
       suffixColor,
       dividerColor,
@@ -16,7 +17,7 @@ export default c([
     return [
       cTB('dropdown-menu', {
         padding,
-        background: 'white',
+        backgroundColor: color,
         borderRadius,
         boxShadow
       }, [
