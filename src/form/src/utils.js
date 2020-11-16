@@ -24,6 +24,7 @@ export function formItemSize (props) {
 export function formItemMisc (props) {
   const NForm = inject('NForm')
   const mergedLabelWidthRef = computed(() => {
+    if (mergedLabelPlacementRef.value === 'top') return
     const {
       labelWidth
     } = props
