@@ -6,6 +6,6 @@ export default {
   fontSizeMedium: '14px',
   fontSizeLarge: '15px',
   radioSizeSmall: '14px',
-  radioSizeMedium: '14px',
-  radioSizeLarge: '16px'
+  radioSizeMedium: '16px',
+  radioSizeLarge: '18px'
 }

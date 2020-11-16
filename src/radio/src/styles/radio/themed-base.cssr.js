@@ -23,7 +23,7 @@ export default c([
         'radio',
         {
           raw: `
-            line-height: 1.25;
+            line-height: 1;
             outline: none;
             position: relative;
             user-select: none;

@@ -28,7 +28,7 @@ export default c([
         'checkbox',
         {
           raw: `
-            line-height: 1.25;
+            line-height: 1;
             outline: none;
             cursor: pointer;
             display: inline-flex;
@@ -138,12 +138,7 @@ export default c([
         ]
       ),
       // checkbox-group
-      cB('checkbox-group', {
-        raw: `
-          font-size: 14px;
-          line-height: 1.25;
-        `
-      }, [
+      cB('checkbox-group', [
         cB('checkbox', {
           marginRight: '18px'
         })
