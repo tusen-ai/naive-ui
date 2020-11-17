@@ -24,6 +24,7 @@ export default c([
       buttonColorDisabled,
       filterBorderColor,
       itemTextColor,
+      itemColorPending,
       itemTextColorDisabled
     } = props.$local
     return [
@@ -154,13 +155,18 @@ export default c([
                   })
                 ]),
                 cB('transfer-list-item', {
-                  transition: `color .3s ${cubicBezierEaseInOut}`,
+                  transition: `
+                    background-color .3s ${cubicBezierEaseInOut},
+                    color .3s ${cubicBezierEaseInOut}`,
                   position: 'relative',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   color: itemTextColor
                 }, [
+                  c('&:hover', {
+                    backgroundColor: itemColorPending
+                  }),
                   cE('extra', {
                     textOverflow: 'ellipsis',
                     overflow: 'hidden',
@@ -175,6 +181,7 @@ export default c([
                   }),
                   cM('disabled', {
                     cursor: 'not-allowed',
+                    backgroundColor: 'transparent',
                     color: itemTextColorDisabled
                   }),
                   cM('source', {

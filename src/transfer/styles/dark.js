@@ -24,7 +24,8 @@ export default create({
       buttonColorDisabled: 'rgba(255, 255, 255, 0.15)',
       filterBorderColor: derived.dividerColorOverlay,
       itemTextColor: derived.textColor2Overlay,
-      itemTextColorDisabled: derived.textColorDisabledOverlay
+      itemTextColorDisabled: derived.textColorDisabledOverlay,
+      itemColorPending: derived.hoverColorOverlay
     }
   }
 })
