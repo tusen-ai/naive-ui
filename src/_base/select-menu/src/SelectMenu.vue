@@ -161,11 +161,14 @@ export default {
   setup (props) {
     const virtualListRef = ref(null)
     const scrollbarRef = ref(null)
+    const { treeMate } = props
     const pendingNodeRef = ref(
       props.autoPending
         ? props.value === null
-          ? props.treeMate.getFirstAvailableNode()
-          : props.treeMate.getNode(props.value)
+          ? treeMate.getFirstAvailableNode()
+          : props.multiple
+            ? treeMate.getNode((props.value || [])[0]) || treeMate.getFirstAvailableNode()
+            : treeMate.getNode(props.value) || treeMate.getFirstAvailableNode()
         : null
     )
     onMounted(() => {
