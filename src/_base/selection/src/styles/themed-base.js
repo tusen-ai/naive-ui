@@ -102,10 +102,14 @@ export default c([
             margin-bottom: 3px;
             font-size: 14px;
             max-width: 100%;
-            text-overflow: ellipsis;
-            overflow: hidden;
           `
-        })
+        }, [
+          cE('content', {
+            raw: `
+              text-overflow: ellipsis;
+              overflow: hidden;`
+          })
+        ])
       ]),
       cB('base-selection-label', {
         raw: `

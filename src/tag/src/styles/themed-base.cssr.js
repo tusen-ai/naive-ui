@@ -40,6 +40,9 @@ export default c([
         opacity .3s ${cubicBezierEaseInOut}
       `
     }, [
+      cE('content', {
+        display: 'inline-block'
+      }),
       cE('close', {
         margin: closeMargin,
         cursor: 'pointer'

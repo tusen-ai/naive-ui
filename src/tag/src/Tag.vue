@@ -14,7 +14,7 @@
     :style="mergedStyle"
     @click="handleClick"
   >
-    <slot />
+    <span class="n-tag__content"><slot /></span>
     <n-icon
       v-if="!checkable && closable"
       class="n-tag__close"
