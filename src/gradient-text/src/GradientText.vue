@@ -81,7 +81,7 @@ export default {
   beforeMount () {
     if (!houdiniRegistered) {
       houdiniRegistered = true
-      if (window.CSS) {
+      if (window?.CSS?.registerProperty) {
         CSS.registerProperty({
           name: '--start-stop',
           syntax: '<color>',
