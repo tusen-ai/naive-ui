@@ -8,7 +8,7 @@ inherit-theme
 os-theme
 language
 transparent
-theme-environment
+theme-environment-debug
 ```
 ## Props
 |名称|类型|默认值|说明|

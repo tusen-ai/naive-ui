@@ -3,8 +3,8 @@ Config Consumer is built for getting config (usually as global config) of Config
 ## Demos
 ```demo
 basic
-theme-environment
-color
+theme-environment-debug
+color-debug
 ```
 ## Events
 |Name|Parameters|Default|Description|

@@ -4,7 +4,7 @@ Element can be render as a custom tag with the ability of accessing some configu
 ## Demos
 ```demo
 basic
-color
+color-debug
 ```
 ## Props
 |Name|Type|Default|Description|

@@ -3,8 +3,8 @@
 ## 演示
 ```demo
 basic
-theme-environment
-color
+theme-environment-debug
+color-debug
 ```
 ## Props
 |名称|参数|默认值|说明|

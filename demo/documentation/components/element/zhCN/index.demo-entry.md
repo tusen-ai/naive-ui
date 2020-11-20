@@ -4,7 +4,7 @@ Element 可以被渲染成各种标签同时还可以获得某些 `n-config-prov
 ## 演示
 ```demo
 basic
-color
+color-debug
 ```
 
 ## Props
