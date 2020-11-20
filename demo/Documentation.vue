@@ -7,7 +7,7 @@
     :content-props="contentProps"
   >
     <router-view />
-    <landing-footer style="padding: 32px 204px 16px 56px; text-align: left; font-size: 14px;" />
+    <landing-footer style="padding: 32px 204px 16px 36px; text-align: left; font-size: 14px;" />
   </n-service-layout>
 </template>
 
@@ -37,11 +37,11 @@ export default {
         }
       },
       contentProps: {
-        themedStyle: {
-          light: {
-            backgroundColor: '#FFF'
-          }
-        }
+        // themedStyle: {
+        //   light: {
+        //     backgroundColor: '#FFF'
+        //   }
+        // }
       }
     }
   },

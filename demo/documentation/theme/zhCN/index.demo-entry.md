@@ -11,5 +11,5 @@ read-theme
 environment
 element
 themed-style
-style-scheme
+style-scheme-debug
 ```

@@ -10,7 +10,6 @@
         <template #activator>
           <edit-on-github-button
             text
-            size="large"
             class="edit-button"
             :relative-url="relativeUrl"
           />

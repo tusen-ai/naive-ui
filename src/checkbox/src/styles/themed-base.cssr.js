@@ -138,7 +138,9 @@ export default c([
         ]
       ),
       // checkbox-group
-      cB('checkbox-group', [
+      cB('checkbox-group', {
+        display: 'flex'
+      }, [
         cB('checkbox', {
           marginRight: '18px'
         })

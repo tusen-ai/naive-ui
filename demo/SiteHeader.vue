@@ -16,17 +16,7 @@
         <img src="./assets/images/naivelogo.svg">
         Naive UI ({{ version }})
       </n-text>
-      <div style=" margin-left: 56px; display: flex; align-items: center;">
-        <n-auto-complete
-          v-model:value="searchInputValue"
-          style="width: 216px;"
-          :z-index="zIndex && zIndex + 1"
-          :placeholder="t('searchPlaceholder')"
-          :options="searchOptions"
-          clear-after-select
-          blur-after-select
-          @select="handleSelect"
-        />
+      <div style="display: flex; align-items: center;">
         <div class="nav-menu">
           <n-menu
             mode="horizontal"
@@ -35,6 +25,16 @@
             @select="handleMenuSelect"
           />
         </div>
+        <n-auto-complete
+          v-model:value="searchInputValue"
+          style="width: 216px; margin-left: 24px;"
+          :z-index="zIndex && zIndex + 1"
+          :placeholder="t('searchPlaceholder')"
+          :options="searchOptions"
+          clear-after-select
+          blur-after-select
+          @select="handleSelect"
+        />
       </div>
       <div style="display: flex;">
         <n-tag class="nav-picker" @click="handleThemeChange">
@@ -241,7 +241,7 @@ export default {
   width: 32px;
 }
 .nav-menu {
-  padding-left: 32px;
+  padding-left: 16px;
 }
 
 .nav-picker {
