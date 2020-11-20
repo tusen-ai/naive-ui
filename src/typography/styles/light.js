@@ -36,7 +36,7 @@ export default create({
       textColorWarning: derived.warningColor,
       textColorError: derived.errorColor,
       codeTextColor: derived.textColor2,
-      codeColor: derived.codeColor,
+      codeColor: derived.codeColorOverlay,
       codeBorderColor: 'transparent'
     }
   }

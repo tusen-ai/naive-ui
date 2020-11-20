@@ -39,6 +39,7 @@ export default c([
       }),
       cM('code', {
         lineHeight: 1.4,
+        display: 'inline-block',
         fontFamily: fontFamilyMono,
         transition: `
           color .3s ${cubicBezierEaseInOut},
