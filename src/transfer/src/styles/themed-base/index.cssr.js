@@ -67,7 +67,8 @@ export default c([
             display: 'flex',
             alignItems: 'center',
             backgroundClip: 'padding-box',
-            borderRadius,
+            borderTopLeftRadius: borderRadius,
+            borderTopRightRadius: borderRadius,
             backgroundColor: headerColor,
             transition: `
               border-color .3s ${cubicBezierEaseInOut},

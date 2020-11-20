@@ -13,7 +13,7 @@ export default create({
     return {
       ...commonVariables,
       borderRadius: base.borderRadius,
-      borderColor: derived.dividerColorOverlay,
+      borderColor: derived.borderColor,
       listColor: derived.cardColor,
       headerColor: composite(
         derived.cardColor,
@@ -26,7 +26,7 @@ export default create({
       buttonColorHover: derived.primaryColorHover,
       buttonColorActive: derived.primaryColorPressed,
       buttonColorDisabled: 'rgba(0, 0, 0, 0.1)',
-      filterBorderColor: derived.dividerColorOverlay,
+      filterBorderColor: derived.borderColorOverlay,
       itemTextColor: derived.textColor2,
       itemTextColorDisabled: derived.textColorDisabled,
       itemColorPending: derived.hoverColorOverlay
