@@ -22,7 +22,7 @@ export default create({
       itemIconColorSelected: derived.primaryColor,
       itemIconColorChildSelected: derived.primaryColor,
       itemIconColorCollapsed: derived.textColor1,
-      borderColorHorizontal: derived.primaryColor,
+      borderColorHorizontal: 'transparent',
       submenuArrowColor: derived.primaryColor
     }
   }
