@@ -37,19 +37,20 @@
         />
       </div>
       <div style="display: flex;">
-        <n-tag class="nav-picker" @click="handleThemeChange">
+        <n-button size="small" class="nav-picker" @click="handleThemeChange">
           {{ themeOptions[theme].label }}
-        </n-tag>
-        <n-tag class="nav-picker" @click="handleLanguageChange">
+        </n-button>
+        <n-button size="small" class="nav-picker" @click="handleLanguageChange">
           {{ langOptions[lang].label }}
-        </n-tag>
-        <n-tag
+        </n-button>
+        <n-button
           v-if="dev"
+          size="small"
           class="nav-picker"
           @click="handleModeChange"
         >
           {{ modeOptions[displayMode].label }}
-        </n-tag>
+        </n-button>
       </div>
     </div>
   </n-layout-header>
@@ -228,6 +229,7 @@ export default {
   grid-template-rows: 63px;
   align-items: center;
 }
+
 .ui-logo {
   cursor: pointer;
   display: flex;
@@ -235,17 +237,18 @@ export default {
   padding-left: 36px;
   font-size: 18px;
 }
+
 .ui-logo > img {
   margin-right: 12px;
   height: 32px;
   width: 32px;
 }
+
 .nav-menu {
   padding-left: 16px;
 }
 
 .nav-picker {
-  cursor: pointer;
   margin-right: 12px;
 }
 
