@@ -50,7 +50,7 @@ export default {
       h('div', {
         class: 'n-message__icon'
       }, [
-        h(NIcon, {
+        h(NIcon, null, {
           default: () => [
             h(NIconSwitchTransition, null, {
               default: () => [

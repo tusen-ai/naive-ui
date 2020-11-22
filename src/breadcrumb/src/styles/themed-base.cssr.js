@@ -19,27 +19,23 @@ export default c([
       }, [
         cB('breadcrumb-item', {
           fontSize: fontSize,
-          transition: `
-            color .3s ${cubicBezierEaseInOut}
-          `
+          transition: `color .3s ${cubicBezierEaseInOut}`
         }, [
           cB('icon', {
             raw: `
-              font-size: 16px;
+              font-size: 18px;
               vertical-align: -.2em;
               transition: color .3s ${cubicBezierEaseInOut};
             `,
             color: itemTextColor
           }),
           cE('link', {
-            raw: `
-              cursor: pointer;
-            `,
+            cursor: 'pointer',
             transition: `color .3s ${cubicBezierEaseInOut}`,
             color: itemTextColor
           }),
           cE('separator', {
-            margin: '0 4px',
+            margin: '0 6px',
             color: separatorColor,
             transition: `color .3s ${cubicBezierEaseInOut}`
           }),

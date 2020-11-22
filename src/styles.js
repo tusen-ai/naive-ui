@@ -41,6 +41,10 @@ export {
   inputLight
 } from './input/styles'
 export {
+  selectDark,
+  selectLight
+} from './select/styles'
+export {
   checkboxDark,
   checkboxLight
 } from './checkbox/styles'
@@ -248,10 +252,6 @@ export {
   anchorDark,
   anchorLight
 } from './anchor/styles'
-export {
-  selectDark,
-  selectLight
-} from './select/styles'
 export {
   statisticDark,
   statisticLight

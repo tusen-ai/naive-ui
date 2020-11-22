@@ -6,6 +6,6 @@ export default {
   minWidth: '420px',
   iconMargin: '10px',
   closeMargin: '0 0 0 12px',
-  closeSize: '24px',
-  iconSize: '19px'
+  closeSize: '16px',
+  iconSize: '20px'
 }

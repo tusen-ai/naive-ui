@@ -1,5 +1,5 @@
 import { c, cB, cTB, cM } from '../../../_utils/cssr'
-import fadeInScaleIpTransition from '../../../styles/_transitions/fade-in-scale-up'
+import fadeInScaleIpTransition from '../../../_styles/transitions/fade-in-scale-up'
 
 export default c([
   ({ props }) => {
@@ -47,7 +47,8 @@ export default c([
       cB('icon', {
         raw: `
           font-size: ${iconSize};
-          fill: ${iconColor}
+          color: ${iconColor};
+          transition: color .3s ${cubicBezierEaseInOut};
         `
       }),
       c('svg', {
@@ -61,8 +62,7 @@ export default c([
         `
       }, [
         cB('icon', {
-          fill: iconColorHover,
-          stroke: iconColorHover
+          color: iconColorHover
         })
       ]),
       c('&:active', {
@@ -71,8 +71,7 @@ export default c([
         `
       }, [
         cB('icon', {
-          fill: iconColorPressed,
-          stroke: iconColorPressed
+          color: iconColorPressed
         })
       ])
     ])

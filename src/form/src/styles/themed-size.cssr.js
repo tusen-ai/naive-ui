@@ -21,6 +21,9 @@ export default c([
             height: labelHeight
           })
         ]),
+        cB('form-item-blank', {
+          minHeight: pxfy(depx(blankHeight) + 6)
+        }),
         cM('left-labelled', [
           cB('form-item-label', {
             fontSize: labelFontSizeLeft,

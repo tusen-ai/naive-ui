@@ -7,14 +7,14 @@ export default create({
   getDerivedVariables ({ base, derived }) {
     const {
       popoverColor,
-      textColorSecondary,
+      textColor2,
       primaryColorHover,
       primaryColorPressed
     } = derived
     return {
       ...commonVariables,
       color: popoverColor,
-      iconColor: textColorSecondary,
+      iconColor: textColor2,
       iconColorHover: primaryColorHover,
       iconColorPressed: primaryColorPressed,
       boxShadow: '0 2px 8px 0px rgba(0, 0, 0, .12)',

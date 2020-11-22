@@ -258,7 +258,7 @@ export default c([
       const pallete = props.$local
       return insideFormItem(
         status,
-        cB('input', [
+        cTB('input', [
           cM('stateful', [
             cE('border-mask', {
               border: pallete[createKey('border', status)]

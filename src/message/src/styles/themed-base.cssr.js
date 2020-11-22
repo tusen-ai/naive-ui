@@ -115,7 +115,11 @@ export default c([
           font-size: ${closeSize};
           margin: ${closeMargin};
         `
-      }),
+      }, [
+        cB('icon', {
+          transition: `color .3s ${cubicBezierEaseInOut}`
+        })
+      ]),
       cM('closable', {
         padding: paddingClosable
       }),
