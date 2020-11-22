@@ -1,7 +1,7 @@
 // Unstable!
 // Draft Code!
 // Variable Names Will Be Refactored!
-import { composite, read } from '../../src/_utils/color'
+import { composite } from '../../src/_utils/color'
 import { cB, cE, c } from '../../src/_utils/cssr'
 import typedColor from './color'
 import cssMute from './const'
@@ -47,27 +47,25 @@ function tusimpleTheme (naive) {
     derived: {
       borderColor: '#999',
       divider: '#EBEDF0',
-      primaryColor,
-      primaryColorHover: composite(primaryColor, 'rgba(255, 255, 255, .15)'),
-      primaryColorPressed: composite(primaryColor, 'rgba(0, 0, 0, .15)'),
-      primaryColorPressedLight: composite(primaryColor, 'rgba(255, 255, 255, .15)'),
-      infoColor: '#335FFF',
-      infoColorHover: composite('#335FFF', 'rgba(255, 255, 255, .15)'),
-      infoColorPressed: composite('#335FFF', 'rgba(0, 0, 0, .15)'),
-      successColor: primaryColor,
-      successColorHover: composite(primaryColor, 'rgba(255, 255, 255, .15)'),
-      successColorPressed: composite(primaryColor, 'rgba(0, 0, 0, .15)'),
-      errorColor: '#F22451',
-      errorColorHover: composite('#F22451', 'rgba(255, 255, 255, .15)'),
-      errorColorPressed: composite('#F22451', 'rgba(0, 0, 0, .15)'),
-      warningColor: '#FAC70D',
-      warningColorHover: composite('#FAC70D', 'rgba(255, 255, 255, .15)'),
-      warningColorPressed: composite('#FAC70D', 'rgba(0, 0, 0, .15)'),
-      textColorSecondary: '#333',
+      primaryColor: typedColor.normalSuccess,
+      primaryColorHover: typedColor.hoverSuccess,
+      primaryColorPressed: typedColor.clickSuccess,
+      infoColor: typedColor.normalInfo,
+      infoColorHover: typedColor.HoverInfo,
+      infoColorPressed: typedColor.clickInfo,
+      successColor: typedColor.normalSuccess,
+      successColorHover: typedColor.hoverSuccess,
+      successColorPressed: typedColor.clickSuccess,
+      errorColor: typedColor.normalError,
+      errorColorHover: typedColor.hoverError,
+      errorColorPressed: typedColor.clickError,
+      warningColor: typedColor.normalWarning,
+      warningColorHover: typedColor.hoverWarning,
+      warningColorPressed: typedColor.clickWarning,
+      textColor2: '#333',
       tableHeaderColorOverlay: '#EBEDF0',
       inputColorDisabled,
       actionColor: inputColorDisabled,
-      textColor2: '#333',
       optionColorHover: composite(primaryColor, 'rgba(255, 255, 255, .1)'),
       clearIconColor: composite('#FFF', 'rgba(0, 0, 0, .4)')
     }
@@ -293,7 +291,7 @@ function tusimpleTheme (naive) {
     itemColorActive: 'transparent',
     itemColorDisabled: 'transparent',
     itemBorderRadius: '100px',
-    itemTextColorHover: derived.textColorSecondary,
+    itemTextColorHover: derived.textColor2,
     itemTextColorDisabled: '#D7DAE0',
     buttonBorder: 'none',
     buttonTextColorHover: derived.primaryColor
