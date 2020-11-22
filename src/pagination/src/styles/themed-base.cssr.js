@@ -3,18 +3,30 @@ import { cTB, c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
+      buttonBorder,
       itemTextColor,
       itemTextColorHover,
       itemTextColorActive,
       itemTextColorDisabled,
       itemColor,
+      itemColorHover,
       itemColorActive,
       itemColorDisabled,
-      itemBorderColor,
-      itemBorderColorActive,
-      itemBorderColorDisabled,
+      itemBorder,
+      itemBorderActive,
+      itemBorderDisabled,
       jumperTextColorDisabled,
-      itemBorderRadius
+      itemBorderRadius,
+      itemPadding,
+      buttonTextColor,
+      buttonTextColorHover,
+      itemSize,
+      buttonFontSize,
+      itemFontSize,
+      inputWidth,
+      selectWidth,
+      inputMargin,
+      itemMargin
     } = props.$local
     const {
       cubicBezierEaseInOut
@@ -23,33 +35,34 @@ export default c([
       raw: `
         display: flex;
         vertical-align: middle;
+        font-size: ${itemFontSize}
       `
     }, [
       c('> *:not(:last-child)', {
         marginRight: '8px'
       }),
       cB('select', {
-        width: 'unset'
+        width: selectWidth
       }),
       cM('transition-disabled', [
         cB('pagination-item', {
-          raw: `
-            transition: none;
-          `
+          transition: 'none'
         })
       ]),
       cB('pagination-quick-jumper', {
         raw: `
           white-space: nowrap;
           display: flex;
-          width: 110px;
-          line-height: 28px;
+          line-height: ${itemSize};
+          color: ${itemTextColor};
           transition: color .3s ${cubicBezierEaseInOut};
-        `,
-        color: itemTextColor
+        `
       }, [
         cB('input', {
-          marginLeft: '8px'
+          raw: `
+            margin: ${inputMargin};
+            width: ${inputWidth};
+          `
         }, [
           cE('placeholder', {
             left: '6px',
@@ -68,33 +81,36 @@ export default c([
           position: relative;
           cursor: pointer;
           user-select: none;
-          min-width:28px;
-          height:28px;
-          padding-left: 4px;
-          padding-right: 4px;
-          box-sizing: border-box;
-          opacity: 1;
-          transition:
-            color .3s ${cubicBezierEaseInOut},
-            box-shadow .3s ${cubicBezierEaseInOut},
-            background-color .3s ${cubicBezierEaseInOut},
-            opacity .3s ${cubicBezierEaseInOut},
-            fill .3s ${cubicBezierEaseInOut};
           display: flex;
           align-items: center;
           justify-content: center;
-          border-radius: ${itemBorderRadius};
+          box-sizing: border-box;
           line-height: 28px;
-        `,
-        color: itemTextColor,
-        fill: itemTextColor
+          min-width: ${itemSize};
+          height: ${itemSize};
+          padding: ${itemPadding};
+          background-color: ${itemColor};
+          color: ${itemTextColor};
+          border-radius: ${itemBorderRadius};
+          border: ${itemBorder};
+          fill: ${buttonTextColor};
+          transition:
+            color .3s ${cubicBezierEaseInOut},
+            border-color .3s ${cubicBezierEaseInOut},
+            background-color .3s ${cubicBezierEaseInOut},
+            fill .3s ${cubicBezierEaseInOut};
+        `
       }, [
+        c('&:not(:last-child)', {
+          margin: itemMargin
+        }),
         cE('more-icon, arrow-icon', {
           raw: `
             position: relative;
             z-index: auto;
-            width: 16px;
-            height: 16px;
+            font-size: ${buttonFontSize};
+            width: 1em;
+            height: 1em;
           `
         }, [
           cB('base-icon', {
@@ -108,15 +124,14 @@ export default c([
           })
         ]),
         cM('fast-backward, fast-forward', [
+          c('&:hover', {
+            backgroundColor: itemColor
+          }),
           cE('more-icon', {
-            raw: `
-             display: block;
-            `
+            display: 'block'
           }),
           cE('arrow-icon', {
-            raw: `
-             display: none;
-            `
+            display: 'none'
           })
         ]),
         cE('more-icon, arrow-icon', {
@@ -125,15 +140,17 @@ export default c([
         cM('active', {
           background: itemColorActive,
           color: itemTextColorActive,
-          boxShadow: `inset 0 0 0 1px ${itemBorderColorActive}`
+          border: itemBorderActive
         }),
         cM('backward, forward', {
           backgroundColor: itemColor,
-          boxShadow: `inset 0 0 0 1px  ${itemBorderColor}`
+          border: buttonBorder
         }),
         cNotM('disabled', [
           c('&:hover', {
-            color: itemTextColorHover
+            color: itemTextColorHover,
+            backgroundColor: itemColorHover,
+            fill: buttonTextColorHover
           }, [
             cM('backward, forward', {
               color: itemTextColor
@@ -142,14 +159,10 @@ export default c([
               color: itemTextColor
             }, [
               cE('more-icon', {
-                raw: `
-                  display: none;
-                `
+                display: 'none'
               }),
               cE('arrow-icon', {
-                raw: `
-                  display: block;
-                `
+                display: 'block'
               })
             ])
           ])
@@ -157,20 +170,18 @@ export default c([
         cM('disabled', {
           raw: `
             cursor: not-allowed;
-          `,
-          fill: itemTextColorDisabled,
-          color: itemTextColorDisabled
+            fill: ${itemTextColorDisabled};
+            color: ${itemTextColorDisabled};
+          `
         }, [
           cM('active, backward, forward', {
             backgroundColor: itemColorDisabled,
-            boxShadow: `inset 0 0 0 1px ${itemBorderColorDisabled}`
+            border: itemBorderDisabled
           })
         ])
       ]),
       cM('disabled', {
-        raw: `
-          cursor: not-allowed;
-        `
+        cursor: 'not-allowed'
       }, [
         cB('pagination-quick-jumper', {
           color: jumperTextColorDisabled

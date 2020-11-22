@@ -1,5 +1,6 @@
 import create from '../../_styles/utils/create-component-base'
 import { changeColor } from '../../_utils/color'
+import commonVariables from './_common'
 
 export default create({
   name: 'Message',
@@ -18,6 +19,7 @@ export default create({
       boxShadow2
     } = base
     return {
+      ...commonVariables,
       textColorInfo: textColorBase,
       textColorSuccess: textColorBase,
       textColorError: textColorBase,
@@ -38,9 +40,18 @@ export default create({
       iconColorWarning: 'rgba(255, 255, 255, .5)',
       iconColorError: 'rgba(255, 255, 255, .5)',
       iconColorLoading: 'rgba(255, 255, 255, .5)',
-      closeColor: 'rgba(255, 255, 255, .5)',
-      closeColorHover: 'rgba(255, 255, 255, .6)',
-      closeColorPressed: 'rgba(255, 255, 255, .4)',
+      closeColorInfo: 'rgba(255, 255, 255, .5)',
+      closeColorHoverInfo: 'rgba(255, 255, 255, .6)',
+      closeColorPressedInfo: 'rgba(255, 255, 255, .4)',
+      closeColorSuccess: 'rgba(255, 255, 255, .5)',
+      closeColorHoverSuccess: 'rgba(255, 255, 255, .6)',
+      closeColorPressedSuccess: 'rgba(255, 255, 255, .4)',
+      closeColorError: 'rgba(255, 255, 255, .5)',
+      closeColorHoverError: 'rgba(255, 255, 255, .6)',
+      closeColorPressedError: 'rgba(255, 255, 255, .4)',
+      closeColorWarning: 'rgba(255, 255, 255, .5)',
+      closeColorHoverWarning: 'rgba(255, 255, 255, .6)',
+      closeColorPressedWarning: 'rgba(255, 255, 255, .4)',
       closeColorLoading: 'rgba(255, 255, 255, .5)',
       closeColorHoverLoading: 'rgba(255, 255, 255, .6)',
       closeColorPressedLoading: 'rgba(255, 255, 255, .4)'

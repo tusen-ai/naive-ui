@@ -2,6 +2,9 @@ import { c, cB, cM, cE } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
+    const {
+      actionMargin
+    } = props.$local
     return [
       cB('dynamic-input', {
         raw: `
@@ -38,12 +41,12 @@ export default c([
           ]),
           cE('action', {
             raw: `
-              width: 80px;
               display: flex;
               justify-content: flex-end;
               align-items: flex-start;
               flex-shrink: 0;
               flex-grow: 0;
+              margin: ${actionMargin}
             `
           }, [
             cM('icon', {

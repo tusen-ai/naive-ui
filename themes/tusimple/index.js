@@ -1,8 +1,10 @@
 // Unstable!
 // Draft Code!
 // Variable Names Will Be Refactored!
-import { composite } from '../src/_utils/color'
-import { cB, cE, c } from '../src/_utils/cssr'
+import { composite, read } from '../../src/_utils/color'
+import { cB, cE, c } from '../../src/_utils/cssr'
+import typedColor from './color'
+import cssMute from './const'
 
 const unconfigurableStyle = c([
   cB('tag', [
@@ -13,6 +15,16 @@ const unconfigurableStyle = c([
         backgroundColor: composite('#D7DAE0', 'rgba(255, 255, 255, .5)')
       }),
       c('&:hover', {
+        backgroundColor: composite('#D7DAE0', 'rgba(255, 255, 255, .25)')
+      })
+    ])
+  ]),
+  cB('message', [
+    cE('close', [
+      c('&:hover', {
+        backgroundColor: composite('#D7DAE0', 'rgba(255, 255, 255, .5)')
+      }),
+      c('&:active', {
         backgroundColor: composite('#D7DAE0', 'rgba(255, 255, 255, .25)')
       })
     ])
@@ -202,6 +214,105 @@ function tusimpleTheme (naive) {
     fontSizeSmall: '12px',
     fontSizeMedium: '16px',
     fontSizeLarge: '16px'
+  })
+  naive.styles.light.DynamicTags.override({
+    addHeight: '24px',
+    addBorderStyle: 'dashed'
+  })
+  naive.styles.light.Form.override({
+    blankHeightSmall: cssMute.CONTENT_SPACE,
+    blankHeightMedium: cssMute.CONTENT_SPACE,
+    blankHeightLarge: cssMute.CONTENT_SPACE,
+    feedbackHeightSmall: cssMute.CONTENT_SPACE,
+    feedbackHeightMedium: cssMute.CONTENT_SPACE,
+    feedbackHeightLarge: cssMute.CONTENT_SPACE,
+    feedbackFontSizeSmall: cssMute.SMALL_FRONT_SIZE,
+    feedbackFontSizeMedium: cssMute.SMALL_FRONT_SIZE,
+    feedbackFontSizeLarge: cssMute.SMALL_FRONT_SIZE,
+    labelFontSizeLeftSmall: cssMute.SMALL_FRONT_SIZE,
+    labelFontSizeLeftMedium: cssMute.SMALL_FRONT_SIZE,
+    labelFontSizeLeftLarge: cssMute.NORMAL_FRONT_SIZE,
+    labelFontSizeTopSmall: cssMute.SMALL_FRONT_SIZE,
+    labelFontSizeTopMedium: cssMute.SMALL_FRONT_SIZE,
+    labelFontSizeTopLarge: cssMute.NORMAL_FRONT_SIZE,
+    labelHeightSmall: '22px',
+    labelHeightMedium: '22px',
+    labelHeightLarge: '22px',
+    labelTextAlignHorizontal: 'left'
+  })
+  naive.styles.light.Message.override({
+    height: '48px',
+    padding: '0 20px 0 12px',
+    paddingClosable: '0 12px',
+    maxWidth: '720px',
+    minWidth: '420px',
+    iconMargin: '20px',
+    closeMargin: '0 0 0 22px',
+    colorInfo: derived.warningColor,
+    colorWarning: derived.errorColor,
+    iconColorInfo: 'rgb(0, 0, 0)',
+    iconColorSuccess: 'rgb(255, 255, 255)',
+    iconColorWarning: 'rgb(255, 255, 255)',
+    iconColorError: 'rgb(255, 255, 255)',
+    iconColorLoading: 'rgb(255, 255, 255)',
+    closeColorInfo: 'rgb(0, 0, 0)',
+    closeColorHoverInfo: 'rgb(0, 0, 0)',
+    closeColorPressedInfo: 'rgb(0, 0, 0)',
+    closeColorSuccess: 'rgb(255, 255, 255)',
+    closeColorHoverSuccess: 'rgb(255, 255, 255)',
+    closeColorPressedSuccess: 'rgb(255, 255, 255)',
+    closeColorError: 'rgb(255, 255, 255)',
+    closeColorHoverError: 'rgb(255, 255, 255)',
+    closeColorPressedError: 'rgb(255, 255, 255)',
+    closeColorWarning: 'rgb(255, 255, 255)',
+    closeColorHoverWarning: 'rgb(255, 255, 255)',
+    closeColorPressedWarning: 'rgb(255, 255, 255)',
+    closeColorLoading: 'rgb(0, 0, 0)',
+    closeColorHoverLoading: 'rgb(0, 0, 0)',
+    closeColorActiveLoading: 'rgb(0, 0, 0)',
+    closeColor: 'transparent',
+    closeColorHover: composite('#D7DAE0', 'rgba(255, 255, 255, .5)'),
+    closeColorActive: composite('#D7DAE0', 'rgba(255, 255, 255, .25)'),
+    closeSize: '24px',
+    iconSize: '20px'
+  })
+  naive.styles.light.Pagination.override({
+    itemSize: '32px',
+    itemPadding: 0,
+    buttonFontSize: '24px',
+    itemFontSize: '16px',
+    inputWidth: '80px',
+    selectWidth: '100px',
+    inputMargin: '0 20px',
+    itemMargin: '0 20px 0 0',
+    itemBorder: 'none',
+    itemBorderActive: 'none',
+    itemBorderDisabled: 'none',
+    itemColor: 'transparent',
+    itemColorHover: composite(derived.primaryColor, 'rgba(255, 255, 255, 0.9)'),
+    itemColorActive: 'transparent',
+    itemColorDisabled: 'transparent',
+    itemBorderRadius: '100px',
+    itemTextColorHover: derived.textColorSecondary,
+    itemTextColorDisabled: '#D7DAE0',
+    buttonBorder: 'none',
+    buttonTextColorHover: derived.primaryColor
+  })
+  naive.styles.light.BackTop.override({
+    width: '48px',
+    height: '48px',
+    iconSize: '24px',
+    borderRadius: '24px',
+    iconColor: 'rgba(0, 0, 0, .8)',
+    iconColorHover: derived.primaryColor,
+    iconColorPressed: derived.primaryColorPressed,
+    boxShadow: '0 40px 16px -24px rgba(0,0,0,0.04), 0 8px 16px -8px rgba(0,0,0,0.12), 0 16px 40px 16px rgba(0,0,0,0.04)',
+    boxShadowHover: '0 40px 16px -24px rgba(0,0,0,0.04), 0 8px 16px -8px rgba(0,0,0,0.12), 0 16px 40px 16px rgba(0,0,0,0.04)',
+    boxShadowPressed: '0 40px 16px -24px rgba(0,0,0,0.04), 0 8px 16px -8px rgba(0,0,0,0.12), 0 16px 40px 16px rgba(0,0,0,0.04)'
+  })
+  naive.styles.light.Breadcrumb.override({
+    fontSize: '16px',
+    fontWeightActive: '500'
   })
 }
 

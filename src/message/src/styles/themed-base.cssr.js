@@ -14,11 +14,23 @@ function typeStyle (
   }, [
     cE('icon', [
       cB('icon', {
-        raw: `
-          fill: ${pallete[createKey('iconColor', type)]};
-          stroke: ${pallete[createKey('iconColor', type)]};
-        `
+        color: pallete[createKey('iconColor', type)]
       })
+    ]),
+    cE('close', [
+      cB('icon', {
+        raw: `
+          cursor: pointer;
+          color: ${pallete[createKey('closeColor', type)]};
+        `
+      }, [
+        c('&:hover', {
+          color: pallete[createKey('closeColorHover', type)]
+        }),
+        c('&:active', {
+          color: pallete[createKey('closeColorPressed', type)]
+        })
+      ])
     ])
   ])
 }
@@ -26,12 +38,14 @@ function typeStyle (
 export default c([
   ({ props }) => {
     const {
-      closeColor,
-      closeColorHover,
-      closeColorPressed,
-      closeColorLoading,
-      closeColorHoverLoading,
-      closeColorPressedLoading
+      height,
+      padding,
+      paddingClosable,
+      maxWidth,
+      iconMargin,
+      closeMargin,
+      closeSize,
+      iconSize
     } = props.$local
     const {
       cubicBezierEaseInOut
@@ -39,6 +53,7 @@ export default c([
     return cTB('message', {
       raw: `
         display: flex;
+        align-items: center;
         transition:
           color .3s ${cubicBezierEaseInOut},
           box-shadow .3s ${cubicBezierEaseInOut},
@@ -47,37 +62,38 @@ export default c([
           transform .3s ${cubicBezierEaseInOut},
           max-height .3s ${cubicBezierEaseInOut},
           margin-bottom .3s ${cubicBezierEaseInOut};
-        max-height: 40px;
         opacity: 1;
         margin-bottom: 12px;
-        padding: 0 40px;
-        height: 40px;
+        padding: ${padding};
+        height: ${height};
+        max-height: ${height};
         border-radius: 20px;
         flex-shrink: 0;
         font-weight: 400;
         overflow: hidden;
+        max-width: ${maxWidth};
       `
     }, [
       cE('content', {
         raw: `
           display: inline-block;
-          height: 40px;
-          line-height: 40px;
+          height: ${height};
+          line-height: ${height};
           font-size: 15px;
         `
       }),
       cE('icon', {
         raw: `
-          margin-right: 10px;
+          margin-right: ${iconMargin};
           display: inline-flex;
-          height: 40px;
-          line-height: 40px;
+          height: ${height};
+          line-height: ${height};
           align-items: center;
         `
       }, [
         cB('icon', {
           raw: `
-            font-size: 20px;
+            font-size: ${iconSize};
           `
         }, [
           cB('base-loading', [
@@ -90,60 +106,18 @@ export default c([
       ]),
       cE('close', {
         raw: `
-          height: 40px;
           display: flex;
           align-items: center;
-          font-size: 14px;
-          margin-left: 12px;
+          justify-content: center;
+          height: ${closeSize};
+          width: ${closeSize};
+          border-radius: 100px;
+          font-size: ${closeSize};
+          margin: ${closeMargin};
         `
-      }, [
-        cB('icon', {
-          raw: `
-            cursor: pointer;
-            fill: ${closeColor};
-            stroke: ${closeColor};
-          `
-        }, [
-          c('&:hover', {
-            raw: `
-              fill: ${closeColorHover};
-              stroke: ${closeColorHover};
-            `
-          }),
-          c('&:active', {
-            raw: `
-              fill: ${closeColorPressed};
-              stroke: ${closeColorPressed};
-            `
-          })
-        ])
-      ]),
-      cM('loading-type', [
-        cB('icon', {
-          raw: `
-            cursor: pointer;
-            fill: ${closeColorLoading};
-            stroke: ${closeColorLoading};
-          `
-        }, [
-          c('&:hover', {
-            raw: `
-              fill: ${closeColorHoverLoading};
-              stroke: ${closeColorHoverLoading};
-            `
-          }),
-          c('&:active', {
-            raw: `
-              fill: ${closeColorPressedLoading};
-              stroke: ${closeColorPressedLoading};
-            `
-          })
-        ])
-      ]),
+      }),
       cM('closable', {
-        raw: `
-          padding-right: 24px;
-        `
+        padding: paddingClosable
       }),
       ['info', 'success', 'error', 'warning', 'loading']
         .map(type => typeStyle(type, props.$local))

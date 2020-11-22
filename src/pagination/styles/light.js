@@ -1,34 +1,43 @@
 import create from '../../_styles/utils/create-component-base'
-import { baseLight, baseSuffixLight } from '../../styles'
+import { baseLight, selectLight, inputLight, iconLight } from '../../styles'
+import commonVariables from './_common.js'
 
 export default create({
   name: 'Pagination',
   theme: 'light',
-  peer: [baseSuffixLight, baseLight],
+  peer: [
+    baseLight,
+    selectLight,
+    inputLight,
+    iconLight
+  ],
   getDerivedVariables ({ base, derived }) {
     const {
       textColor2,
       primaryColor,
       inputColorDisabled,
       textColorDisabled,
-      cardColor,
-      baseColor,
       borderColor
     } = derived
     const {
       borderRadius
     } = base
     return {
+      ...commonVariables,
+      buttonTextColor: textColor2,
+      buttonTextColorHover: textColor2,
+      buttonBorder: `1px solid ${borderColor}`,
       itemTextColor: textColor2,
       itemTextColorHover: primaryColor,
       itemTextColorActive: primaryColor,
       itemTextColorDisabled: textColorDisabled,
-      itemColor: cardColor,
-      itemColorActive: baseColor,
+      itemColor: 'transparent',
+      itemColorHover: 'transparent',
+      itemColorActive: 'transparent',
       itemColorDisabled: inputColorDisabled,
-      itemBorderColor: borderColor,
-      itemBorderColorActive: primaryColor,
-      itemBorderColorDisabled: borderColor,
+      itemBorder: '1px solid transparent',
+      itemBorderActive: `1px solid ${primaryColor}`,
+      itemBorderDisabled: `1px solid ${borderColor}`,
       itemBorderRadius: borderRadius,
       jumperTextColor: textColor2,
       jumperTextColorDisabled: textColorDisabled

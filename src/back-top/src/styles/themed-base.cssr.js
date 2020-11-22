@@ -1,15 +1,20 @@
-import { c, cE, cTB, cM } from '../../../_utils/cssr'
-import fadeInScaleIpTransition from '../../../_styles/transitions/fade-in-scale-up'
+import { c, cB, cTB, cM } from '../../../_utils/cssr'
+import fadeInScaleIpTransition from '../../../styles/_transitions/fade-in-scale-up'
 
 export default c([
   ({ props }) => {
     const {
       color,
-      colorHover,
-      colorActive,
       boxShadow,
       boxShadowHover,
-      boxShadowPressed
+      boxShadowPressed,
+      iconColor,
+      iconColorHover,
+      iconColorPressed,
+      width,
+      height,
+      iconSize,
+      borderRadius
     } = props.$local
     const {
       cubicBezierEaseInOut
@@ -20,42 +25,54 @@ export default c([
         position: fixed;
         right: 40px;
         bottom: 40px;
-        min-width: 40px;
-        height: 40px;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         transition:
           color .3s ${cubicBezierEaseInOut},
+          box-shadow .3s ${cubicBezierEaseInOut},
           background-color .3s ${cubicBezierEaseInOut};
+        border-radius: ${borderRadius};
+        height: ${height};
+        min-width: ${width};
+        box-shadow: ${boxShadow};
+        background-color: ${color};
       `
     }, [
       fadeInScaleIpTransition(),
       cM('transition-disabled', {
         transition: 'none !important'
       }),
-      cE('default-button', {
+      cB('icon', {
         raw: `
-          transition: box-shadow .3s ${cubicBezierEaseInOut}, fill .3s ${cubicBezierEaseInOut};
-          border-radius: 20px;
-          height: 40px;
-          width: 40px;
-          fill: ${color};
-          box-shadow: ${boxShadow};
+          font-size: ${iconSize};
+          fill: ${iconColor}
+        `
+      }),
+      c('svg', {
+        raw: `
+          pointer-events: none;
+        `
+      }),
+      c('&:hover', {
+        raw: `
+          box-shadow: ${boxShadowHover};
         `
       }, [
-        c('svg', {
-          pointerEvents: 'none'
-        }),
-        c('&:hover', {
-          raw: `
-            box-shadow: ${boxShadowHover};
-            fill: ${colorHover};
-          `
-        }),
-        c('&:active', {
-          raw: `
-            box-shadow: ${boxShadowPressed};
-            fill: ${colorActive};
-          `
+        cB('icon', {
+          fill: iconColorHover,
+          stroke: iconColorHover
+        })
+      ]),
+      c('&:active', {
+        raw: `
+          box-shadow: ${boxShadowPressed};
+        `
+      }, [
+        cB('icon', {
+          fill: iconColorPressed,
+          stroke: iconColorPressed
         })
       ])
     ])

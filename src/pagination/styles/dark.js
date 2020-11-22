@@ -1,11 +1,17 @@
 import create from '../../_styles/utils/create-component-base'
 import { changeColor } from '../../_utils/color/index'
-import { baseDark, baseSuffixDark } from '../../styles'
+import { baseDark, selectDark, inputDark, iconDark } from '../../styles'
+import commonVariables from './_common.js'
 
 export default create({
   name: 'Pagination',
   theme: 'dark',
-  peer: [baseSuffixDark, baseDark],
+  peer: [
+    baseDark,
+    selectDark,
+    inputDark,
+    iconDark
+  ],
   getDerivedVariables ({ base, derived }) {
     const {
       textColor2Overlay,
@@ -19,6 +25,10 @@ export default create({
       borderRadius
     } = base
     return {
+      ...commonVariables,
+      buttonBorder: `1px solid ${borderColorOverlay}`,
+      buttonTextColor: textColor2Overlay,
+      buttonTextColorHover: textColor2Overlay,
       itemTextColor: textColor2Overlay,
       itemTextColorHover: primaryColor,
       itemTextColorActive: primaryColor,
@@ -26,9 +36,10 @@ export default create({
       itemColor: 'transparent',
       itemColorActive: 'transparent',
       itemColorDisabled: inputColorDisabledOverlay,
-      itemBorderColor: borderColorOverlay,
-      itemBorderColorActive: changeColor(primaryColor, { alpha: opacity3 }),
-      itemBorderColorDisabled: 'transparent',
+      itemBorder: '1px solid transparent',
+      itemBorderActive: `1px solid ${changeColor(primaryColor, { alpha: opacity3 })}`,
+      itemBorderDisabled: '1px solid transparent',
+      itemColorHover: 'transparent',
       itemBorderRadius: borderRadius,
       jumperTextColor: textColor2Overlay,
       jumperTextColorDisabled: textColorDisabledOverlay

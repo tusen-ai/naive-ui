@@ -51,8 +51,6 @@ export default {
         class: 'n-message__icon'
       }, [
         h(NIcon, {
-          size: 20
-        }, {
           default: () => [
             h(NIconSwitchTransition, null, {
               default: () => [

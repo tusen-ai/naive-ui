@@ -8,14 +8,17 @@ export default c([
       separatorColor,
       itemTextColor,
       itemTextColorHover,
+      itemTextColorPressed,
       itemTextColorActive,
-      itemTextColorMatch
+      fontSize,
+      fontWeightActive
     } = props.$local
     return cTB(
       'breadcrumb', {
         whiteSpace: 'nowrap'
       }, [
         cB('breadcrumb-item', {
+          fontSize: fontSize,
           transition: `
             color .3s ${cubicBezierEaseInOut}
           `
@@ -50,19 +53,22 @@ export default c([
           ]),
           c('&:active', [
             cB('icon', {
-              color: itemTextColorActive
+              color: itemTextColorPressed
             }),
             cE('link', {
-              color: itemTextColorActive
+              color: itemTextColorPressed
             })
           ]),
           c('&:last-child', [
             cE('link', {
-              cursor: 'unset',
-              color: itemTextColorMatch
+              raw: `
+                font-weight: ${fontWeightActive};
+                cursor: unset;
+              `,
+              color: itemTextColorActive
             }),
             cB('icon', {
-              color: itemTextColorMatch
+              color: itemTextColorActive
             }),
             cE('separator', {
               display: 'none'
