@@ -22,7 +22,7 @@
       </transition>
       <n-drawer-body-wrapper
         :placement="placement"
-        :body-style="compitableBodyStyle"
+        :body-style="mergedBodyStyle"
         :body-class="compitableBodyClass"
         :scrollbar-props="scrollbarProps"
         :show="show"
@@ -190,11 +190,11 @@ export default {
       if (height === null) return null
       return formatLength(height)
     },
-    mergedBodyWrapperStyle () {
+    mergedBodyStyle () {
       return {
         width: this.styleWidth,
         height: this.styleHeight,
-        ...this.bodyWrapperStyle
+        ...this.compitableBodyStyle
       }
     }
   },
