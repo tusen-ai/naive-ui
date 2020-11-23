@@ -24,8 +24,8 @@ export default create({
     } = base
     return {
       ...commonVariables,
-      buttonTextColor: textColor2,
-      buttonTextColorHover: textColor2,
+      buttonIconColor: textColor2,
+      buttonIconColorHover: textColor2,
       buttonBorder: `1px solid ${borderColor}`,
       itemTextColor: textColor2,
       itemTextColorHover: primaryColor,

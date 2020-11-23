@@ -1,7 +1,7 @@
 // Unstable!
 // Draft Code!
 // Variable Names Will Be Refactored!
-import { composite } from '../../src/_utils/color'
+import { composite, changeColor } from '../../src/_utils/color'
 import { cB, cE, c } from '../../src/_utils/cssr'
 import typedColor from './color'
 import cssMute from './const'
@@ -12,20 +12,20 @@ const unconfigurableStyle = c([
       borderRadius: '50%'
     }, [
       c('&:hover', {
-        backgroundColor: composite('#D7DAE0', 'rgba(255, 255, 255, .5)')
+        backgroundColor: changeColor('#D7DAE0', { alpha: 0.5 })
       }),
       c('&:hover', {
-        backgroundColor: composite('#D7DAE0', 'rgba(255, 255, 255, .25)')
+        backgroundColor: changeColor('#D7DAE0', { alpha: 0.25 })
       })
     ])
   ]),
   cB('message', [
     cE('close', [
       c('&:hover', {
-        backgroundColor: composite('#D7DAE0', 'rgba(255, 255, 255, .5)')
+        backgroundColor: changeColor('#D7DAE0', { alpha: 0.5 })
       }),
       c('&:active', {
-        backgroundColor: composite('#D7DAE0', 'rgba(255, 255, 255, .25)')
+        backgroundColor: changeColor('#D7DAE0', { alpha: 0.25 })
       })
     ])
   ])
@@ -149,10 +149,10 @@ function tusimpleTheme (naive) {
     paddingRight: '12px',
     paddingIcon: '44px',
     iconSize: '24px',
-    borderMaskColorHover: primaryColor,
-    borderMaskColorFocus: primaryColor,
-    boxShadow: 'none',
-    boxShadowDisabled: 'none'
+    borderHover: `1px solid ${primaryColor}`,
+    borderFocus: `1px solid ${primaryColor}`,
+    border: 'none',
+    borderDisabled: 'none'
   })
   naive.styles.light.InputGroupLabel.override({
     boxShadow: 'none'
@@ -271,7 +271,7 @@ function tusimpleTheme (naive) {
     closeColor: 'transparent',
     closeColorHover: composite('#D7DAE0', 'rgba(255, 255, 255, .5)'),
     closeColorActive: composite('#D7DAE0', 'rgba(255, 255, 255, .25)'),
-    closeSize: '24px',
+    closeSize: '20px',
     iconSize: '20px'
   })
   naive.styles.light.Pagination.override({
@@ -294,7 +294,7 @@ function tusimpleTheme (naive) {
     itemTextColorHover: derived.textColor2,
     itemTextColorDisabled: '#D7DAE0',
     buttonBorder: 'none',
-    buttonTextColorHover: derived.primaryColor
+    buttonIconColorHover: derived.primaryColor
   })
   naive.styles.light.BackTop.override({
     width: '48px',

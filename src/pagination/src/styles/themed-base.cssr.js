@@ -18,8 +18,8 @@ export default c([
       jumperTextColorDisabled,
       itemBorderRadius,
       itemPadding,
-      buttonTextColor,
-      buttonTextColorHover,
+      buttonIconColor,
+      buttonIconColorHover,
       itemSize,
       buttonFontSize,
       itemFontSize,
@@ -93,7 +93,7 @@ export default c([
           color: ${itemTextColor};
           border-radius: ${itemBorderRadius};
           border: ${itemBorder};
-          fill: ${buttonTextColor};
+          fill: ${buttonIconColor};
           transition:
             color .3s ${cubicBezierEaseInOut},
             border-color .3s ${cubicBezierEaseInOut},
@@ -150,7 +150,7 @@ export default c([
           c('&:hover', {
             color: itemTextColorHover,
             backgroundColor: itemColorHover,
-            fill: buttonTextColorHover
+            fill: buttonIconColorHover
           }, [
             cM('backward, forward', {
               color: itemTextColor

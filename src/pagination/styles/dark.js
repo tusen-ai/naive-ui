@@ -27,8 +27,8 @@ export default create({
     return {
       ...commonVariables,
       buttonBorder: `1px solid ${borderColorOverlay}`,
-      buttonTextColor: textColor2Overlay,
-      buttonTextColorHover: textColor2Overlay,
+      buttonIconColor: textColor2Overlay,
+      buttonIconColorHover: textColor2Overlay,
       itemTextColor: textColor2Overlay,
       itemTextColorHover: primaryColor,
       itemTextColorActive: primaryColor,
