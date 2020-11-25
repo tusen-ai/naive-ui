@@ -1,27 +1,29 @@
 # 禁用特定时间
 ```html
-<n-date-picker
-  v-model:value="timestamp1"
-  type="date"
-  :is-date-disabled = "dateDisabled"
-/>
-<n-date-picker
-  v-model:value="timestamp2"
-  type="datetime"
-  :is-date-disabled = "dateDisabled"
-  :is-time-disabled= "timeDisabled"
-/>
-<n-date-picker
-  v-model:value="timestamp3"
-  type="daterange"
-  :is-date-disabled = "isRangeDateDisabled"
-/>
-<n-date-picker
-  v-model:value="timestamp4"
-  type="datetimerange"
-  :is-date-disabled = "isRangeDateDisabled"
-  :is-time-disabled= "isRangeTimeDisabled"
-/>
+<n-space vertical>
+  <n-date-picker
+    v-model:value="timestamp1"
+    type="date"
+    :is-date-disabled = "dateDisabled"
+  />
+  <n-date-picker
+    v-model:value="timestamp2"
+    type="datetime"
+    :is-date-disabled = "dateDisabled"
+    :is-time-disabled= "timeDisabled"
+  />
+  <n-date-picker
+    v-model:value="timestamp3"
+    type="daterange"
+    :is-date-disabled = "isRangeDateDisabled"
+  />
+  <n-date-picker
+    v-model:value="timestamp4"
+    type="datetimerange"
+    :is-date-disabled = "isRangeDateDisabled"
+    :is-time-disabled= "isRangeTimeDisabled"
+  />
+</n-space>
 ```
 ```js
 export default {
@@ -106,10 +108,5 @@ export default {
       }
     },
   },
-}
-```
-```css
-.n-date-picker {
-  margin: 0 12px 8px 0;
 }
 ```

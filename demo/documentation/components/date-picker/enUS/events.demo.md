@@ -1,34 +1,36 @@
 # Events
 ```html
-<n-date-picker
-  v-model:value="datetime"
-  type="datetime"
-  :disabled="disabled"
-  @blur="onBlur1"
-  @update:value="onChange1"
-/>
-<n-date-picker
-  v-model:value="date"
-  type="date"
-  :disabled="disabled"
-  @blur="onBlur2"
-  @update:value="onChange2"
-/>
-<n-date-picker
-  v-model:value="datetimerange"
-  :disabled="disabled"
-  type="datetimerange"
-  @blur="onBlur3"
-  @update:value="onChange3"
-/>
-<n-date-picker
-  v-model:value="daterange"
-  :disabled="disabled"
-  type="daterange"
-  @blur="onBlur4"
-  @update:value="onChange4"
-/>
-<n-switch v-model:value="disabled" />
+<n-space vertical>
+  <n-date-picker
+    v-model:value="datetime"
+    type="datetime"
+    :disabled="disabled"
+    @blur="onBlur1"
+    @update:value="onChange1"
+  />
+  <n-date-picker
+    v-model:value="date"
+    type="date"
+    :disabled="disabled"
+    @blur="onBlur2"
+    @update:value="onChange2"
+  />
+  <n-date-picker
+    v-model:value="datetimerange"
+    :disabled="disabled"
+    type="datetimerange"
+    @blur="onBlur3"
+    @update:value="onChange3"
+  />
+  <n-date-picker
+    v-model:value="daterange"
+    :disabled="disabled"
+    type="daterange"
+    @blur="onBlur4"
+    @update:value="onChange4"
+  />
+  <n-switch v-model:value="disabled" />
+</n-space>
 ```
 ```js
 export default {
@@ -68,10 +70,5 @@ export default {
       this.message.success('Change-4 ' + v)
     }
   }
-}
-```
-```css
-.n-date-picker {
-  margin: 0 12px 8px 0;
 }
 ```

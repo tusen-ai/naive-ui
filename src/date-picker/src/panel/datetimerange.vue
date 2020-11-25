@@ -58,6 +58,7 @@
       <n-time-picker
         :show-icon="false"
         :theme="theme"
+        teleport-disabled
         size="small"
         :stateful="false"
         :format="timeFormat"

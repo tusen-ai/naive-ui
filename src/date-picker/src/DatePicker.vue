@@ -1,150 +1,152 @@
 <template>
-  <div
-    ref="triggerRef"
-    class="n-date-picker"
-    :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme,
-      'n-date-picker--disabled': disabled,
-      'n-date-picker--range': isRange,
-      'n-date-picker--invalid': isValueInvalid && !isRange,
-      'n-date-picker--start-invalid': isStartValueInvalid,
-      'n-date-picker--end-invalid': isEndValueInvalid
-    }"
-    @keydown="handleKeyDown"
-  >
-    <n-input
-      v-if="isRange"
-      ref="inputRef"
-      :size="mergedSize"
-      :theme="mergedTheme"
-      passively-activated
-      :disabled="disabled"
-      :value="[displayStartTime, displayEndTime]"
-      :placeholder="[localizedStartPlaceholder, localizedEndPlaceholder]"
-      :readonly="disabled ? 'disabled' : false"
-      :separator="localizedSeperator"
-      :force-focus="active"
-      :clearable="clearable"
-      pair
-      deactivate-on-enter
-      @clear="handleClear"
-      @click="handleActivatorClick"
-      @activate="handleInputActivate"
-      @focus="handleInputFocus"
-      @blur="handleInputBlur"
-      @deactivate="handleRangeInputDeactivate"
-      @input="handleRangeInput"
-    >
-      <template #suffix>
-        <n-icon>
-          <calendar-icon />
-        </n-icon>
-      </template>
-    </n-input>
-    <n-input
-      v-else
-      ref="inputRef"
-      v-model:value="displayTime"
-      :theme="mergedTheme"
-      passively-activated
-      :size="mergedSize"
-      :force-focus="active"
-      :disabled="disabled"
-      :placeholder="localizedPlacehoder"
-      :readonly="disabled ? 'disabled' : false"
-      :clearable="clearable"
-      deactivate-on-enter
-      @click="handleActivatorClick"
-      @focus="handleInputFocus"
-      @blur="handleInputBlur"
-      @activate="handleInputActivate"
-      @deactivate="handleInputDeactivate"
-      @input="handleTimeInput"
-      @clear="handleClear"
-    >
-      <template #suffix>
-        <n-icon>
-          <calendar-icon />
-        </n-icon>
-      </template>
-    </n-input>
-    <n-base-lazy-teleport
-      :show="active"
-      adjust-to
-    >
+  <v-binder>
+    <v-target>
       <div
-        ref="offsetContainerRef"
-        v-zindexable="{ enabled: active }"
-        class="n-positioning-container"
+        ref="triggerRef"
+        v-bind="$attrs"
+        class="n-date-picker"
         :class="{
-          [namespace]: namespace
+          [`n-${mergedTheme}-theme`]: mergedTheme,
+          'n-date-picker--disabled': disabled,
+          'n-date-picker--range': isRange,
+          'n-date-picker--invalid': isValueInvalid && !isRange,
+          'n-date-picker--start-invalid': isStartValueInvalid,
+          'n-date-picker--end-invalid': isEndValueInvalid
         }"
+        @keydown="handleKeyDown"
       >
-        <div
-          ref="trackingRef"
-          class="n-positioning-content"
+        <n-input
+          v-if="isRange"
+          ref="inputRef"
+          :size="mergedSize"
+          :theme="mergedTheme"
+          passively-activated
+          :disabled="disabled"
+          :value="[displayStartTime, displayEndTime]"
+          :placeholder="[localizedStartPlaceholder, localizedEndPlaceholder]"
+          :readonly="disabled ? 'disabled' : false"
+          :separator="localizedSeperator"
+          :force-focus="active"
+          :clearable="clearable"
+          pair
+          deactivate-on-enter
+          @clear="handleClear"
+          @click="handleActivatorClick"
+          @activate="handleInputActivate"
+          @focus="handleInputFocus"
+          @blur="handleInputBlur"
+          @deactivate="handleRangeInputDeactivate"
+          @input="handleRangeInput"
+        >
+          <template #suffix>
+            <n-icon>
+              <calendar-icon />
+            </n-icon>
+          </template>
+        </n-input>
+        <n-input
+          v-else
+          ref="inputRef"
+          v-model:value="displayTime"
+          :theme="mergedTheme"
+          passively-activated
+          :size="mergedSize"
+          :force-focus="active"
+          :disabled="disabled"
+          :placeholder="localizedPlacehoder"
+          :readonly="disabled ? 'disabled' : false"
+          :clearable="clearable"
+          deactivate-on-enter
+          @click="handleActivatorClick"
+          @focus="handleInputFocus"
+          @blur="handleInputBlur"
+          @activate="handleInputActivate"
+          @deactivate="handleInputDeactivate"
+          @input="handleTimeInput"
+          @clear="handleClear"
+        >
+          <template #suffix>
+            <n-icon>
+              <calendar-icon />
+            </n-icon>
+          </template>
+        </n-input>
+      </div>
+    </v-target>
+    <v-follower
+      :show="active"
+      :container-class="namespace"
+      placement="bottom-start"
+    >
+      <transition
+        name="n-fade-in-scale-up-transition"
+        :appear="isMounted"
+      >
+        <datetime-panel
+          v-if="type === 'datetime' && active"
+          ref="panelRef"
+          v-clickoutside="handleClickOutside"
+          v-zindexable="{ enabled: active }"
+          :value="value"
+          :active="active"
+          :actions="actions"
+          :theme="mergedTheme"
+          :format="computedFormat"
+          @update:value="handlePanelInput"
+          @tab-out="handlePanelTabOut"
+          @close="handlePanelClose"
           @keydown.esc="handlePanelKeyDownEsc"
           @keydown="handleKeyDown"
-        >
-          <transition
-            name="n-fade-in-scale-up-transition"
-            :appear="isMounted"
-          >
-            <datetime-panel
-              v-if="type === 'datetime' && active"
-              ref="panelRef"
-              v-clickoutside="handleClickOutside"
-              :value="value"
-              :active="active"
-              :actions="actions"
-              :theme="mergedTheme"
-              :format="computedFormat"
-              @update:value="handlePanelInput"
-              @tab-out="handlePanelTabOut"
-              @close="handlePanelClose"
-            />
-            <date-panel
-              v-else-if="type === 'date' && active"
-              ref="panelRef"
-              v-clickoutside="handleClickOutside"
-              :value="value"
-              :active="active"
-              :actions="actions"
-              :theme="mergedTheme"
-              @update:value="handlePanelInput"
-              @tab-out="handlePanelTabOut"
-              @close="handlePanelClose"
-            />
-            <daterange-panel
-              v-else-if="type === 'daterange' && active"
-              ref="panelRef"
-              v-clickoutside="handleClickOutside"
-              :value="value"
-              :active="active"
-              :actions="actions"
-              :theme="mergedTheme"
-              @update:value="handleRangePanelInput"
-              @tab-out="handlePanelTabOut"
-              @close="handlePanelClose"
-            />
-            <datetimerange-panel
-              v-else-if="type === 'datetimerange' && active"
-              ref="panelRef"
-              v-clickoutside="handleClickOutside"
-              :format="computedFormat"
-              :value="value"
-              :active="active"
-              :actions="actions"
-              :theme="mergedTheme"
-              @update:value="handleRangePanelInput"
-              @close="handlePanelClose"
-              @tab-out="handlePanelTabOut"
-            />
-          </transition>
-        </div>
-      </div>
-    </n-base-lazy-teleport>
-  </div>
+        />
+        <date-panel
+          v-else-if="type === 'date' && active"
+          ref="panelRef"
+          v-clickoutside="handleClickOutside"
+          v-zindexable="{ enabled: active }"
+          :value="value"
+          :active="active"
+          :actions="actions"
+          :theme="mergedTheme"
+          @update:value="handlePanelInput"
+          @tab-out="handlePanelTabOut"
+          @close="handlePanelClose"
+          @keydown.esc="handlePanelKeyDownEsc"
+          @keydown="handleKeyDown"
+        />
+        <daterange-panel
+          v-else-if="type === 'daterange' && active"
+          ref="panelRef"
+          v-clickoutside="handleClickOutside"
+          v-zindexable="{ enabled: active }"
+          :value="value"
+          :active="active"
+          :actions="actions"
+          :theme="mergedTheme"
+          @update:value="handleRangePanelInput"
+          @tab-out="handlePanelTabOut"
+          @close="handlePanelClose"
+          @keydown.esc="handlePanelKeyDownEsc"
+          @keydown="handleKeyDown"
+        />
+        <datetimerange-panel
+          v-else-if="type === 'datetimerange' && active"
+          ref="panelRef"
+          v-clickoutside="handleClickOutside"
+          v-zindexable="{ enabled: active }"
+          :format="computedFormat"
+          :value="value"
+          :active="active"
+          :actions="actions"
+          :theme="mergedTheme"
+          @update:value="handleRangePanelInput"
+          @close="handlePanelClose"
+          @tab-out="handlePanelTabOut"
+          @keydown.esc="handlePanelKeyDownEsc"
+          @keydown="handleKeyDown"
+        />
+      </transition>
+    </v-follower>
+  </v-binder>
 </template>
 
 <script>
@@ -152,9 +154,13 @@ import {
   ref
 } from 'vue'
 import {
+  VBinder,
+  VTarget,
+  VFollower
+} from 'vueuc'
+import {
   configurable,
   themeable,
-  placeable,
   asFormItem,
   withCssr,
   locale
@@ -175,7 +181,6 @@ import DaterangePanel from './panel/daterange.vue'
 import NInput from '../../input'
 import NIcon from '../../icon'
 import { CalendarIcon } from '../../_base/icons'
-import { NBaseLazyTeleport } from '../../_base'
 
 import {
   format,
@@ -205,7 +210,9 @@ export default {
     zindexable
   },
   components: {
-    NBaseLazyTeleport,
+    VBinder,
+    VTarget,
+    VFollower,
     NInput,
     NIcon,
     DatetimePanel,
@@ -217,7 +224,6 @@ export default {
   mixins: [
     configurable,
     themeable,
-    placeable,
     locale('DatePicker'),
     asFormItem(),
     withCssr(styles)
@@ -318,7 +324,6 @@ export default {
   setup (props) {
     return {
       panelRef: ref(null),
-      offsetContainerRef: ref(null),
       trackingRef: ref(null),
       triggerRef: ref(null),
       inputRef: ref(null),
@@ -336,9 +341,6 @@ export default {
     }
   },
   computed: {
-    __placeableEnabled () {
-      return this.active
-    },
     isRange () {
       return ['daterange', 'datetimerange'].includes(this.type)
     },
@@ -399,18 +401,6 @@ export default {
     this.refresh(this.value)
   },
   methods: {
-    __placeableOffsetContainer () {
-      return this.offsetContainerRef
-    },
-    __placeableTracking () {
-      return this.trackingRef
-    },
-    __placeableTracked () {
-      return this.triggerRef
-    },
-    __placeableBody () {
-      return this.panelRef
-    },
     doUpdateValue (...args) {
       const {
         'onUpdate:value': onUpdateValue,
@@ -620,7 +610,6 @@ export default {
     openCalendar (e) {
       if (this.disabled || this.active) return
       this.active = true
-      this.$nextTick(this.__placeableSyncPosition)
     },
     closeCalendar ({
       returnFocus,

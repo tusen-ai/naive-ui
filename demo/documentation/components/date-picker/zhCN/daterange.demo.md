@@ -16,14 +16,3 @@ export default {
   }
 }
 ```
-```css
-.n-date-picker {
-  margin: 0 12px 8px 0;
-}
-```
-
-```css
-.n-date-picker {
-  margin: 0 12px 8px 0;
-}
-```
