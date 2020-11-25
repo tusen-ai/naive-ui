@@ -1,8 +1,10 @@
 # 尺寸
 ```html
-<n-auto-complete :options="options" v-model:value="value" placeholder="邮箱" size="small" />
-<n-auto-complete :options="options" v-model:value="value" placeholder="邮箱" size="medium" />
-<n-auto-complete :options="options" v-model:value="value" placeholder="邮箱" size="large" />
+<n-space vertical>
+  <n-auto-complete :options="options" v-model:value="value" placeholder="邮箱" size="small" />
+  <n-auto-complete :options="options" v-model:value="value" placeholder="邮箱" size="medium" />
+  <n-auto-complete :options="options" v-model:value="value" placeholder="邮箱" size="large" />
+</n-space>
 ```
 ```js
 export default {
@@ -26,10 +28,5 @@ export default {
       value: ''
     }
   }
-}
-```
-```css
-.n-auto-complete {
-  margin-bottom: 8px;
 }
 ```

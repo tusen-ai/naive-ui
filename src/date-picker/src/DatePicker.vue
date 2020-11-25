@@ -76,6 +76,7 @@
     <v-follower
       :show="active"
       :container-class="namespace"
+      :to="adjustedTo"
       placement="bottom-start"
     >
       <transition
@@ -169,8 +170,7 @@ import {
   clickoutside,
   zindexable
 } from '../../_directives'
-import { warn } from '../../_utils/naive'
-import { call } from '../../_utils/vue'
+import { warn, call, useAdjustedTo } from '../../_utils'
 import { useIsMounted } from 'vooks'
 
 import DatetimePanel from './panel/datetime.vue'
@@ -233,6 +233,7 @@ export default {
       NDatePicker: this
     }
   },
+  inheritAttrs: false,
   props: {
     clearable: {
       type: Boolean,
@@ -328,6 +329,7 @@ export default {
       triggerRef: ref(null),
       inputRef: ref(null),
       isMounted: useIsMounted(),
+      adjustedTo: useAdjustedTo(props),
       ...uniCalendarValidation(props),
       ...dualCalendarValidation(props)
     }

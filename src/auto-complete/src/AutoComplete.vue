@@ -1,92 +1,88 @@
 <template>
-  <div
-    ref="tracked"
-    class="n-auto-complete"
-    @keydown.down="handleKeyDownDown"
-    @keydown.up="handleKeyDownUp"
-    @keydown.enter="handleKeyDownEnter"
-    @compositionstart="handleCompositionStart"
-    @compositionend="handleCompositionEnd"
-  >
-    <slot
-      :handleInput="handleInput"
-      :handleFocus="handleFocus"
-      :handleBlur="handleBlur"
-      :value="value"
-      :theme="mergedTheme"
-    >
-      <n-input
-        :theme="mergedTheme"
-        :value="value"
-        :placeholder="placeholder"
-        :size="mergedSize"
-        @focus="canBeActivated = true"
-        @input="handleInput"
-        @blur="handleBlur"
-      />
-    </slot>
-    <n-base-lazy-teleport
-      :show="active"
-      to="body"
-      adjust-to
-    >
+  <v-binder>
+    <v-target>
       <div
-        ref="offsetContainer"
-        v-zindexable="{
-          enabled: active,
-          zIndex
-        }"
-        class="n-positioning-container"
-        :class="{
-          [namespace]: namespace
-        }"
+        ref="triggerRef"
+        v-bind="$attrs"
+        class="n-auto-complete"
+        @keydown.down="handleKeyDownDown"
+        @keydown.up="handleKeyDownUp"
+        @keydown.enter="handleKeyDownEnter"
+        @compositionstart="handleCompositionStart"
+        @compositionend="handleCompositionEnd"
       >
-        <div
-          ref="tracking"
-          class="n-positioning-content"
+        <slot
+          :handleInput="handleInput"
+          :handleFocus="handleFocus"
+          :handleBlur="handleBlur"
+          :value="value"
+          :theme="mergedTheme"
         >
-          <transition
-            name="n-fade-in-scale-up-transition"
-            :appear="isMounted"
-          >
-            <n-base-select-menu
-              v-if="active"
-              ref="menu"
-              v-clickoutside="handleClickOutsideMenu"
-              auto-pending
-              class="n-auto-complete-menu"
-              :theme="mergedTheme"
-              :pattern="value"
-              :tree-mate="treeMate"
-              :multiple="false"
-              :size="mergedSize"
-              @menu-toggle-option="handleToggleOption"
-            />
-          </transition>
-        </div>
+          <n-input
+            :theme="mergedTheme"
+            :value="value"
+            :placeholder="placeholder"
+            :size="mergedSize"
+            @focus="canBeActivated = true"
+            @input="handleInput"
+            @blur="handleBlur"
+          />
+        </slot>
       </div>
-    </n-base-lazy-teleport>
-  </div>
+    </v-target>
+    <v-follower
+      :show="active"
+      :to="adjustedTo"
+      placement="bottom-start"
+      width="target"
+    >
+      <transition
+        name="n-fade-in-scale-up-transition"
+        :appear="isMounted"
+      >
+        <n-base-select-menu
+          v-if="active"
+          ref="menuRef"
+          v-clickoutside="handleClickOutsideMenu"
+          v-zindexable="{
+            enabled: active,
+            zIndex
+          }"
+          auto-pending
+          class="n-auto-complete-menu"
+          :theme="mergedTheme"
+          :pattern="value"
+          :tree-mate="treeMate"
+          :multiple="false"
+          size="medium"
+          @menu-toggle-option="handleToggleOption"
+        />
+      </transition>
+    </v-follower>
+  </v-binder>
 </template>
 
 <script>
+import { ref } from 'vue'
 import { createTreeMate } from 'treemate'
+import {
+  VBinder,
+  VTarget,
+  VFollower
+} from 'vueuc'
 import {
   configurable,
   themeable,
   asFormItem,
-  placeable,
   withCssr
 } from '../../_mixins'
 import {
   clickoutside,
   zindexable
 } from '../../_directives'
-import { call } from '../../_utils/vue'
+import { call, warn, useAdjustedTo } from '../../_utils'
 import { useIsMounted } from 'vooks'
-import { warn } from '../../_utils/naive'
 import {
-  NBaseLazyTeleport,
   NBaseSelectMenu
 } from '../../_base'
 import NInput from '../../input'
@@ -97,8 +93,10 @@ export default {
   name: 'AutoComplete',
   components: {
     NInput,
-    NBaseLazyTeleport,
-    NBaseSelectMenu
+    NBaseSelectMenu,
+    VBinder,
+    VTarget,
+    VFollower
   },
   directives: {
     clickoutside,
@@ -107,10 +105,10 @@ export default {
   mixins: [
     configurable,
     themeable,
-    placeable,
     asFormItem(),
     withCssr(styles)
   ],
+  inheritAttrs: false,
   props: {
     placeholder: {
       type: String,
@@ -138,16 +136,6 @@ export default {
       type: Array,
       default: () => []
     },
-    // eslint-disable-next-line vue/require-prop-types
-    placement: {
-      ...placeable.props.placement,
-      default: 'bottom-start'
-    },
-    // eslint-disable-next-line vue/require-prop-types
-    widthMode: {
-      ...placeable.props.widthMode,
-      default: 'trigger'
-    },
     zIndex: {
       type: Number,
       default: undefined
@@ -170,21 +158,17 @@ export default {
       default: undefined
     }
   },
-  setup () {
+  setup (props) {
     return {
-      isMounted: useIsMounted()
-    }
-  },
-  data () {
-    return {
-      canBeActivated: false,
-      isComposing: false
+      isMounted: useIsMounted(),
+      adjustedTo: useAdjustedTo(props),
+      canBeActivated: ref(false),
+      isComposing: ref(false),
+      menuRef: ref(null),
+      triggerRef: ref(null)
     }
   },
   computed: {
-    __placeableEnabled () {
-      return this.active
-    },
     selectOptions () {
       return mapAutoCompleteOptionsToSelectOptions(this.options)
     },
@@ -201,18 +185,6 @@ export default {
     }
   },
   methods: {
-    __placeableOffsetContainer () {
-      return this.$refs.offsetContainer
-    },
-    __placeableTracking () {
-      return this.$refs.tracking
-    },
-    __placeableTracked () {
-      return this.$refs.tracked
-    },
-    __placeableBody () {
-      return this.$refs.menu
-    },
     doUpdateValue (value) {
       const {
         'onUpdate:value': onUpdateValue,
@@ -260,8 +232,8 @@ export default {
       }, 0)
     },
     handleKeyDownEnter (e) {
-      if (this.$refs.menu && !this.isComposing) {
-        const pendingOptionData = this.$refs.menu.getPendingOption()
+      if (this.menuRef && !this.isComposing) {
+        const pendingOptionData = this.menuRef.getPendingOption()
         if (pendingOptionData) {
           this.select(pendingOptionData)
           e.preventDefault()
@@ -269,15 +241,15 @@ export default {
       }
     },
     handleKeyDownDown () {
-      const { menu } = this.$refs
-      if (menu) {
-        menu.next()
+      const { menuRef } = this
+      if (menuRef) {
+        menuRef.next()
       }
     },
     handleKeyDownUp () {
-      const { menu } = this.$refs
-      if (menu) {
-        menu.prev()
+      const { menuRef } = this
+      if (menuRef) {
+        menuRef.prev()
       }
     },
     select (option) {
@@ -310,14 +282,14 @@ export default {
       this.select(option)
     },
     handleClickOutsideMenu (e) {
-      if (this.$refs.tracked) {
-        if (!this.$refs.tracked.contains(e.target)) {
+      if (this.triggerRef) {
+        if (!this.triggerRef.contains(e.target)) {
           this.canBeActivated = false
         }
       }
     },
     blur () {
-      if (this.$el.contains(document.activeElement)) {
+      if (this.triggerRef.contains(document.activeElement)) {
         document.activeElement.blur()
       }
     }

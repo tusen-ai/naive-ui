@@ -166,6 +166,7 @@ export default {
       NSelect: this
     }
   },
+  inheritAttrs: false,
   props: {
     clearable: {
       type: Boolean,

@@ -1,18 +1,20 @@
 # Actions After Select
 Blur after selection or clear after selection.
 ```html
-<n-auto-complete
-  :options="options"
-  v-model:value="value"
-  clear-after-select
-  placeholder="Clear After Select"
-/>
-<n-auto-complete
-  :options="options"
-  v-model:value="value"
-  blur-after-select
-  placeholder="Blur After Select"
-/>
+<n-space vertical>
+  <n-auto-complete
+    :options="options"
+    v-model:value="value"
+    clear-after-select
+    placeholder="Clear After Select"
+  />
+  <n-auto-complete
+    :options="options"
+    v-model:value="value"
+    blur-after-select
+    placeholder="Blur After Select"
+  />
+</n-space>
 ```
 ```js
 export default {
@@ -37,10 +39,5 @@ export default {
       value: null
     }
   }
-}
-```
-```css
-.n-auto-complete {
-  margin: 0 0 12px 0;
 }
 ```

@@ -1,8 +1,10 @@
 # Size
 ```html
-<n-auto-complete :options="options" v-model:value="value" placeholder="Email" size="small" />
-<n-auto-complete :options="options" v-model:value="value" placeholder="Email" size="medium" />
-<n-auto-complete :options="options" v-model:value="value" placeholder="Email" size="large" />
+<n-space vertical>
+  <n-auto-complete :options="options" v-model:value="value" placeholder="Email" size="small" />
+  <n-auto-complete :options="options" v-model:value="value" placeholder="Email" size="medium" />
+  <n-auto-complete :options="options" v-model:value="value" placeholder="Email" size="large" />
+</n-space>
 ```
 ```js
 export default {
@@ -26,10 +28,5 @@ export default {
       value: ''
     }
   }
-}
-```
-```css
-.n-auto-complete {
-  margin-bottom: 8px;
 }
 ```
