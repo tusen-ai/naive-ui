@@ -1,19 +1,21 @@
 # Change Event
 Why change event is an example? Because at first there isn't much to write.
 ```html
-<n-select
-  v-model:value="selectedValue"
-  placeholder="Please Select a Song"
-  :options="options"
-  @update:value="handleChange"
-/>
-<n-select
-  v-model:value="selectedArray"
-  multiple
-  placeholder="Please Select Songs"
-  :options="options"
-  @update:value="handleChange"
-/>
+<n-space vertical>
+  <n-select
+    v-model:value="selectedValue"
+    placeholder="Please Select a Song"
+    :options="options"
+    @update:value="handleChange"
+  />
+  <n-select
+    v-model:value="selectedArray"
+    multiple
+    placeholder="Please Select Songs"
+    :options="options"
+    @update:value="handleChange"
+  />
+</n-space>
 ```
 ```js
 export default {
@@ -78,11 +80,5 @@ export default {
       this.$NMessage.info('value: ' + JSON.stringify(item))
     }
   }
-}
-```
-```css
-.n-select {
-  width: 180px;
-  margin: 0 12px 8px 0;
 }
 ```

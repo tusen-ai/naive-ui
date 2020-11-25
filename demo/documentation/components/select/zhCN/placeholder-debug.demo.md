@@ -1,19 +1,20 @@
 # Placehoder Debug
 ```html
-<n-select
-  v-model:value="value2"
-  placeholder=""
-  :options="options"
-  style="width:200px;"
-/>
-
-<n-select
-  v-model:value="value3"
-  multiple
-  placeholder=""
-  :options="options"
-  style="width:200px;"
-/>
+<n-space vertical>
+  <n-select
+    v-model:value="value2"
+    placeholder=""
+    :options="options"
+    style="width:200px;"
+  />
+  <n-select
+    v-model:value="value3"
+    multiple
+    placeholder=""
+    :options="options"
+    style="width:200px;"
+  />
+</n-space>
 ```
 ```js
 export default {
@@ -30,11 +31,5 @@ export default {
       value3: null
     }
   }
-}
-```
-```css
-.n-select {
-  width: 180px;
-  margin: 0 12px 8px 0;
 }
 ```

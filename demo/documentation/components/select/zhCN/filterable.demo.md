@@ -1,19 +1,21 @@
 # 可过滤
 上吧！过滤器。
 ```html
-<n-select
-  v-model:value="selectedValue"
-  filterable
-  placeholder="选择歌曲"
-  :options="options"
-/>
-<n-select
-  v-model:value="selectedValues"
-  multiple
-  filterable
-  placeholder="选择歌曲"
-  :options="options"
-/>
+<n-space vertical>
+  <n-select
+    v-model:value="selectedValue"
+    filterable
+    placeholder="选择歌曲"
+    :options="options"
+  />
+  <n-select
+    v-model:value="selectedValues"
+    multiple
+    filterable
+    placeholder="选择歌曲"
+    :options="options"
+  />
+</n-space>
 ```
 ```js
 export default {
@@ -73,11 +75,5 @@ export default {
       ]
     }
   }
-}
-```
-```css
-.n-select {
-  width: 180px;
-  margin: 0 12px 8px 0;
 }
 ```

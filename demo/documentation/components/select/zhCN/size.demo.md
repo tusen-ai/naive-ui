@@ -2,21 +2,23 @@
 选择器有不同的尺寸。
 
 ```html
-<n-select
-  v-model:value="value"
-  size="small"
-  :options="options"
-/>
-<n-select
-  v-model:value="value"
-  size="medium"
-  :options="options"
-/>
-<n-select
-  v-model:value="value"
-  size="large"
-  :options="options"
-/>
+<n-space vertical>
+  <n-select
+    v-model:value="value"
+    size="small"
+    :options="options"
+  />
+  <n-select
+    v-model:value="value"
+    size="medium"
+    :options="options"
+  />
+  <n-select
+    v-model:value="value"
+    size="large"
+    :options="options"
+  />
+</n-space>
 ```
 
 ```js
@@ -83,11 +85,5 @@ export default {
       ]
     }
   }
-}
-```
-```css
-.n-select {
-  width: 180px;
-  margin: 0 12px 8px 0;
 }
 ```

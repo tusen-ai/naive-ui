@@ -1,17 +1,19 @@
 # Multiple Select
 Select multiple value.
 ```html
-<n-select
-  v-model:value="value"
-  multiple
-  :options="options"
-/>
-<n-select
-  v-model:value="value"
-  multiple
-  disabled
-  :options="options"
-/>
+<n-space vertical>
+  <n-select
+    v-model:value="value"
+    multiple
+    :options="options"
+  />
+  <n-select
+    v-model:value="value"
+    multiple
+    disabled
+    :options="options"
+  />
+</n-space>
 ```
 ```js
 export default {
@@ -77,11 +79,5 @@ export default {
       ]
     }
   }
-}
-```
-```css
-.n-select {
-  width: 180px;
-  margin: 0 12px 8px 0;
 }
 ```

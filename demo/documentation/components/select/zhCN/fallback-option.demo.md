@@ -3,29 +3,31 @@
 
 如果你不需要回退选项，将 `fallback-option` 设为 `false` 即可，这时只有出现在选项中的值才会被视为合法值，在操作的过程中不合法的值会被清除掉。
 ```html
-<n-select
-  v-model:value="singleValue"
-  :options="options"
-/>
-<n-select
-  v-model:value="multipleValue"
-  multiple
-  :fallback-option="trim"
-  :options="options"
-/>
-<n-select
-  v-model:value="singleValue"
-  placeholder="无回退选项"
-  :fallback-option="false"
-  :options="options"
-/>
-<n-select
-  v-model:value="multipleValue"
-  placeholder="无回退选项"
-  multiple
-  :fallback-option="false"
-  :options="options"
-/>
+<n-space vertical>
+  <n-select
+    v-model:value="singleValue"
+    :options="options"
+  />
+  <n-select
+    v-model:value="multipleValue"
+    multiple
+    :fallback-option="trim"
+    :options="options"
+  />
+  <n-select
+    v-model:value="singleValue"
+    placeholder="无回退选项"
+    :fallback-option="false"
+    :options="options"
+  />
+  <n-select
+    v-model:value="multipleValue"
+    placeholder="无回退选项"
+    multiple
+    :fallback-option="false"
+    :options="options"
+  />
+</n-space>
 ```
 ```js
 export default {
@@ -98,11 +100,5 @@ export default {
       ]
     }
   }
-}
-```
-```css
-.n-select {
-  width: 180px;
-  margin: 0 12px 8px 0;
 }
 ```

@@ -3,29 +3,31 @@ In some rare cases, you may fill the value but not the corresponding options. Fo
 
 If you don't need fallback options, simply set it to `false`. Now only the value appeared in the options will be viewed as a valid value. Invalid values will be cleared in the operations of the component.
 ```html
-<n-select
-  v-model:value="singleValue"
-  :options="options"
-/>
-<n-select
-  v-model:value="multipleValue"
-  multiple
-  :fallback-option="trim"
-  :options="options"
-/>
-<n-select
-  v-model:value="singleValue"
-  placeholder="No Fallback"
-  :fallback-option="false"
-  :options="options"
-/>
-<n-select
-  v-model:value="multipleValue"
-  placeholder="No Fallback"
-  multiple
-  :fallback-option="false"
-  :options="options"
-/>
+<n-space vertical>
+  <n-select
+    v-model:value="singleValue"
+    :options="options"
+  />
+  <n-select
+    v-model:value="multipleValue"
+    multiple
+    :fallback-option="trim"
+    :options="options"
+  />
+  <n-select
+    v-model:value="singleValue"
+    placeholder="No Fallback"
+    :fallback-option="false"
+    :options="options"
+  />
+  <n-select
+    v-model:value="multipleValue"
+    placeholder="No Fallback"
+    multiple
+    :fallback-option="false"
+    :options="options"
+  />
+</n-space>
 ```
 ```js
 export default {
@@ -98,11 +100,5 @@ export default {
       ]
     }
   }
-}
-```
-```css
-.n-select {
-  width: 180px;
-  margin: 0 12px 8px 0;
 }
 ```

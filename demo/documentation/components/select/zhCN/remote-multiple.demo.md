@@ -89,9 +89,3 @@ export default {
   }
 }
 ```
-```css
-.n-select {
-  width: 180px;
-  margin: 0 12px 8px 0;
-}
-```

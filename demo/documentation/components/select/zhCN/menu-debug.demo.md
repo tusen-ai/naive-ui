@@ -1,27 +1,29 @@
 # Menu Debug
 ```html
-<n-select
-  debug
-  v-model:value="value"
-  :options="options"
-/>
-<n-select
-  v-model:value="value"
-  disabled
-  :options="options"
-/>
-<n-select
-  debug
-  v-model:value="value1"
-  multiple
-  :options="options"
-/>
-<n-select
-  v-model:value="value1"
-  multiple
-  disabled
-  :options="options"
-/>
+<n-space vertical>
+  <n-select
+    debug
+    v-model:value="value"
+    :options="options"
+  />
+  <n-select
+    v-model:value="value"
+    disabled
+    :options="options"
+  />
+  <n-select
+    debug
+    v-model:value="value1"
+    multiple
+    :options="options"
+  />
+  <n-select
+    v-model:value="value1"
+    multiple
+    disabled
+    :options="options"
+  />
+</n-space>
 ```
 ```js
 export default {
@@ -88,11 +90,5 @@ export default {
       ]
     }
   }
-}
-```
-```css
-.n-select {
-  width: 180px;
-  margin: 0 12px 8px 0;
 }
 ```

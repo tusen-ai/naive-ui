@@ -1,30 +1,32 @@
 # Clearable
 Remember you can only clear the select which has value. (Select it firstly)
 ```html
-<n-select
-  v-model:value="selectedValue"
-  :options="options"
-  clearable
-/>
-<n-select
-  v-model:value="selectedArray"
-  multiple
-  :options="options"
-  clearable
-/>
-<n-select
-  v-model:value="selectedValue"
-  :options="options"
-  filterable
-  clearable
-/>
-<n-select
-  v-model:value="selectedArray"
-  multiple
-  :options="options"
-  filterable
-  clearable
-/>
+<n-space vertical>
+  <n-select
+    v-model:value="selectedValue"
+    :options="options"
+    clearable
+  />
+  <n-select
+    v-model:value="selectedArray"
+    multiple
+    :options="options"
+    clearable
+  />
+  <n-select
+    v-model:value="selectedValue"
+    :options="options"
+    filterable
+    clearable
+  />
+  <n-select
+    v-model:value="selectedArray"
+    multiple
+    :options="options"
+    filterable
+    clearable
+  />
+</n-space>
 ```
 ```js
 export default {
@@ -84,11 +86,5 @@ export default {
       ]
     }
   }
-}
-```
-```css
-.n-select {
-  width: 180px;
-  margin: 0 12px 8px 0;
 }
 ```

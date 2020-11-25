@@ -1,19 +1,21 @@
 # Create Option Dynamically
 Use `tag` & `filterable` to create option dynamically.
 ```html
-<n-select
-  v-model:value="multipleSelectValue"
-  filterable
-  multiple
-  tag
-  :options="options"
-/>
-<n-select
-  v-model:value="selectValue"
-  filterable
-  tag
-  :options="options"
-/>
+<n-space vertical>
+  <n-select
+    v-model:value="multipleSelectValue"
+    filterable
+    multiple
+    tag
+    :options="options"
+  />
+  <n-select
+    v-model:value="selectValue"
+    filterable
+    tag
+    :options="options"
+  />
+</n-space>
 ```
 ```js
 export default {
@@ -80,11 +82,5 @@ export default {
       ]
     }
   }
-}
-```
-```css
-.n-select {
-  width: 180px;
-  margin: 0 12px 8px 0;
 }
 ```

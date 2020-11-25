@@ -1,19 +1,21 @@
 # Change 事件
 为什么 change 事件还是个例子？因为一开始的时候没什么可写的。
 ```html
-<n-select
-  v-model:value="selectedValue"
-  placeholder="选择歌曲"
-  :options="options"
-  @update:value="handleChange"
-/>
-<n-select
-  v-model:value="selectedArray"
-  multiple
-  placeholder="选择歌曲"
-  :options="options"
-  @update:value="handleChange"
-/>
+<n-space vertical>
+  <n-select
+    v-model:value="selectedValue"
+    placeholder="选择歌曲"
+    :options="options"
+    @update:value="handleChange"
+  />
+  <n-select
+    v-model:value="selectedArray"
+    multiple
+    placeholder="选择歌曲"
+    :options="options"
+    @update:value="handleChange"
+  />
+</n-space>
 ```
 ```js
 export default {
@@ -79,11 +81,5 @@ export default {
       this.message.info('value: ' + JSON.stringify(item))
     }
   }
-}
-```
-```css
-.n-select {
-  width: 180px;
-  margin: 0 12px 8px 0;
 }
 ```
