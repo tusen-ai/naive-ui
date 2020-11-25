@@ -1,27 +1,29 @@
 # Size
 Cascader has `small`, `medium` and `large` size.
 ```html
-<n-cascader
-  v-model:value="value"
-  placeholder="Meaningless values"
-  :options="options"
-  :leaf-only="false"
-  size="small"
-/>
-<n-cascader
-  v-model:value="value"
-  placeholder="Meaningless values"
-  :options="options"
-  :leaf-only="false"
-  size="medium"
-/>
-<n-cascader
-  v-model:value="value"
-  placeholder="Meaningless values"
-  :options="options"
-  :leaf-only="false"
-  size="large"
-/>
+<n-space vertical>
+  <n-cascader
+    v-model:value="value"
+    placeholder="Meaningless values"
+    :options="options"
+    :leaf-only="false"
+    size="small"
+  />
+  <n-cascader
+    v-model:value="value"
+    placeholder="Meaningless values"
+    :options="options"
+    :leaf-only="false"
+    size="medium"
+  />
+  <n-cascader
+    v-model:value="value"
+    placeholder="Meaningless values"
+    :options="options"
+    :leaf-only="false"
+    size="large"
+  />
+</n-space>
 ```
 ```js
 function genOptions (depth = 2, iterator = 1, prefix = '') {
@@ -61,10 +63,5 @@ export default {
       options: genOptions()
     }
   }
-}
-```
-```css
-.n-cascader {
-  margin-bottom: 8px;
 }
 ```

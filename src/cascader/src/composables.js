@@ -10,7 +10,7 @@ import {
 } from 'treemate'
 import { useIsMounted, useMergedState } from 'vooks'
 import { useAsFormItem } from '../../_mixins'
-import { call } from '../../_utils'
+import { call, useAdjustedTo } from '../../_utils'
 
 export function useCascader (props) {
   const formItem = useAsFormItem(props)
@@ -248,6 +248,10 @@ export function useCascader (props) {
     cascaderMenuRef,
     selectMenuRef,
     triggerRef,
+    selectMenuFollowerRef: ref(null),
+    cascaderMenuFollowerRef: ref(null),
+    pattern: ref(''),
+    adjustedTo: useAdjustedTo(props),
     ...formItem,
     updateKeyboardKey,
     updateHoverKey,

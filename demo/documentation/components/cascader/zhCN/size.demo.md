@@ -1,27 +1,29 @@
 # 尺寸
 级联选择有 `small`、`medium` 和 `large` 尺寸。
 ```html
-<n-cascader
-  v-model:value="value"
-  placeholder="没啥用的值"
-  :options="options"
-  :leaf-only="false"
-  size="small"
-/>
-<n-cascader
-  v-model:value="value"
-  placeholder="没啥用的值"
-  :options="options"
-  :leaf-only="false"
-  size="medium"
-/>
-<n-cascader
-  v-model:value="value"
-  placeholder="没啥用的值"
-  :options="options"
-  :leaf-only="false"
-  size="large"
-/>
+<n-space vertical>
+  <n-cascader
+    v-model:value="value"
+    placeholder="没啥用的值"
+    :options="options"
+    :leaf-only="false"
+    size="small"
+  />
+  <n-cascader
+    v-model:value="value"
+    placeholder="没啥用的值"
+    :options="options"
+    :leaf-only="false"
+    size="medium"
+  />
+  <n-cascader
+    v-model:value="value"
+    placeholder="没啥用的值"
+    :options="options"
+    :leaf-only="false"
+    size="large"
+  />
+</n-space>
 ```
 ```js
 function genOptions (depth = 2, iterator = 1, prefix = '') {
@@ -61,10 +63,5 @@ export default {
       options: genOptions()
     }
   }
-}
-```
-```css
-.n-cascader {
-  margin-bottom: 8px;
 }
 ```

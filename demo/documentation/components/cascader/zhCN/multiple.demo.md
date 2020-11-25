@@ -4,12 +4,8 @@
   <n-space>
     <n-space><n-switch v-model:value="leafOnly" />Leaf Only</n-space>
     <n-space><n-switch v-model:value="cascade" />Cascade</n-space>
-  </n-space>
-  <n-space>
     <n-space><n-switch v-model:value="showPath" />Show Path</n-space>
     <n-space><n-switch v-model:value="hoverTrigger" />Hover Trigger</n-space>
-  </n-space>
-  <n-space>
     <n-space><n-switch v-model:value="filterable" />Filterable</n-space>
   </n-space>
   <n-cascader

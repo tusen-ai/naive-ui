@@ -8,10 +8,6 @@ function traverseWithCallback (options, beforeCallback, afterCallback) {
   }
 }
 
-function getPickerElement (instance) {
-  return instance.NCascader.triggerRef.$el
-}
-
 function createSelectOptions (tmNodes, leafOnly) {
   const selectOptions = []
   const path = []
@@ -37,6 +33,5 @@ function createSelectOptions (tmNodes, leafOnly) {
 
 export {
   traverseWithCallback,
-  createSelectOptions,
-  getPickerElement
+  createSelectOptions
 }

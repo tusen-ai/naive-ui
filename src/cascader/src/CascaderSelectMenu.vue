@@ -1,41 +1,31 @@
 <template>
-  <div
-    ref="offsetContainerRef"
-    v-zindexable="{ enabled: show }"
-    class="n-positioning-container"
+  <transition
+    name="n-fade-in-scale-up-transition"
+    :appear="NCascader.isMounted"
   >
-    <div ref="trackingRef" class="n-positioning-content">
-      <transition
-        name="n-fade-in-scale-up-transition"
-        :appear="NCascader.isMounted"
-      >
-        <n-base-select-menu
-          v-if="show"
-          ref="menuRef"
-          v-clickoutside="handleClickOutside"
-          class="n-cascader-menu"
-          auto-pending
-          :theme="theme"
-          :pattern="pattern"
-          :tree-mate="selectTreeMate"
-          :multiple="multiple"
-          :size="size"
-          :value="value"
-          @menu-toggle-option="handleToggleOption"
-        />
-      </transition>
-    </div>
-  </div>
+    <n-base-select-menu
+      v-if="show"
+      ref="menuRef"
+      v-clickoutside="handleClickOutside"
+      v-zindexable="{ enabled: show }"
+      class="n-cascader-menu"
+      auto-pending
+      :theme="theme"
+      :pattern="pattern"
+      :tree-mate="selectTreeMate"
+      :multiple="multiple"
+      :size="size"
+      :value="value"
+      @menu-toggle-option="handleToggleOption"
+    />
+  </transition>
 </template>
 
 <script>
 import { ref, inject, toRef } from 'vue'
 import { createTreeMate } from 'treemate'
 import { NBaseSelectMenu } from '../../_base'
-import { createSelectOptions, getPickerElement } from './utils'
-import {
-  placeable
-} from '../../_mixins'
+import { createSelectOptions } from './utils'
 import {
   zindexable,
   clickoutside
@@ -50,25 +40,7 @@ export default {
     zindexable,
     clickoutside
   },
-  mixins: [
-    placeable
-  ],
-  inject: {
-    NCascader: {
-      default: null
-    }
-  },
   props: {
-    // eslint-disable-next-line vue/require-prop-types
-    placement: {
-      ...placeable.props.placement,
-      default: 'bottom-start'
-    },
-    // eslint-disable-next-line vue/require-prop-types
-    widthMode: {
-      ...placeable.props.widthMode,
-      default: 'trigger'
-    },
     value: {
       type: [String, Number, Array],
       default: null
@@ -110,16 +82,12 @@ export default {
   setup () {
     const NCascader = inject('NCascader')
     return {
+      NCascader,
       leafOnly: toRef(NCascader, 'leafOnly'),
-      offsetContainerRef: ref(null),
-      trackingRef: ref(null),
       menuRef: ref(null)
     }
   },
   computed: {
-    __placeableEnabled () {
-      return this.show
-    },
     selectOptions () {
       return createSelectOptions(this.tmNodes, this.leafOnly)
     },
@@ -144,28 +112,16 @@ export default {
   watch: {
     value () {
       this.$nextTick(() => {
-        this.__placeableSyncPosition()
+        this.NCascader.syncSelectMenuPosition()
       })
     },
     filteredSelectOptions () {
       this.$nextTick(() => {
-        this.__placeableSyncPosition()
+        this.NCascader.syncSelectMenuPosition()
       })
     }
   },
   methods: {
-    __placeableOffsetContainer () {
-      return this.offsetContainerRef
-    },
-    __placeableTracking () {
-      return this.trackingRef
-    },
-    __placeableTracked () {
-      return getPickerElement(this)
-    },
-    __placeableBody () {
-      return this.menuRef
-    },
     handleToggleOption (option) {
       this.doCheck(option)
     },

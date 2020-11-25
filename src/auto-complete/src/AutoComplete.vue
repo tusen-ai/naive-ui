@@ -33,6 +33,7 @@
     <v-follower
       :show="active"
       :to="adjustedTo"
+      :container-class="namespace"
       placement="bottom-start"
       width="target"
     >
