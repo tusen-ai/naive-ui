@@ -80,3 +80,7 @@ export function useDelayedTrue (valueRef, delay, shouldDelayRef) {
   })
   return delayedRef
 }
+
+export {
+  useAdjustedTo
+} from './use-adjusted-to'

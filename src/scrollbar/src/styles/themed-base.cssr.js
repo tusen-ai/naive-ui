@@ -59,9 +59,7 @@ export default c([
           }, [
             c('>', [
               cE('scrollbar', {
-                raw: `
-                  right: 0;
-                `
+                right: 0
               })
             ])
           ]),
@@ -74,18 +72,14 @@ export default c([
           }, [
             c('>', [
               cE('scrollbar', {
-                raw: `
-                  bottom: 0;
-                `
+                bottom: 0
               })
             ])
           ]),
           cM('disabled', [
             c('>', [
               cE('scrollbar', {
-                raw: `
-                  pointer-events: none;
-                `
+                pointerEvents: 'none'
               })
             ])
           ]),
@@ -101,9 +95,7 @@ export default c([
             }, [
               fadeInTransition(),
               c('&:hover', {
-                raw: `
-                  background-color: ${colorHover}
-                `
+                backgroundColor: colorHover
               })
             ])
           ])

@@ -28,7 +28,9 @@ export default c([
         z-index: 0;
         position: relative;
         border-radius: ${borderRadius};
-        transition: ${cubicBezierEaseInOut};
+        transition:
+          background-color .3s ${cubicBezierEaseInOut},
+          box-shadow .3s ${cubicBezierEaseInOut};
         overflow: hidden;
         background-color: ${color};
         box-shadow: ${boxShadow};

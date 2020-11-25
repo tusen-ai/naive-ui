@@ -1,104 +1,91 @@
 <template>
-  <div
-    class="n-select"
-    :class="{
-      [`n-select--${mergedSize}-size`]: true,
-      'n-select--multiple': multiple,
-      [`n-${mergedTheme}-theme`]: mergedTheme
-    }"
-    @keydown.up.prevent
-    @keydown.down.prevent
-    @keydown.space="handleKeyDownSpace"
-    @keyup.up="handleKeyUpUp"
-    @keyup.down="handleKeyUpDown"
-    @keyup.enter="handleKeyUpEnter"
-    @keyup.space="handleKeyUpSpace"
-    @keyup.esc="handleKeyUpEsc"
-  >
-    <n-base-selection
-      ref="triggerRef"
-      class="n-select-selection"
-      :active="mergedShow"
-      :pattern="pattern"
-      :placeholder="localizedPlaceholder"
-      :selected-option="selectedOption"
-      :selected-options="selectedOptions"
-      :multiple="multiple"
-      :filterable="filterable"
-      :remote="remote"
-      :clearable="clearable"
-      :disabled="disabled"
-      :size="mergedSize"
-      :theme="mergedTheme"
-      :loading="loading"
-      :autofocus="autofocus"
-      @click="handleTriggerClick"
-      @delete-last-option="handleDeleteLastOption"
-      @delete-option="handleToggleOption"
-      @pattern-input="handlePatternInput"
-      @clear="handleClear"
-      @blur="handleTriggerBlur"
-      @focus="handleTriggerFocus"
-    />
-    <n-base-lazy-teleport
+  <v-binder>
+    <v-target>
+      <n-base-selection
+        ref="triggerRef"
+        v-bind="$attrs"
+        class="n-select"
+        :active="mergedShow"
+        :pattern="pattern"
+        :placeholder="localizedPlaceholder"
+        :selected-option="selectedOption"
+        :selected-options="selectedOptions"
+        :multiple="multiple"
+        :filterable="filterable"
+        :remote="remote"
+        :clearable="clearable"
+        :disabled="disabled"
+        :size="mergedSize"
+        :theme="mergedTheme"
+        :loading="loading"
+        :autofocus="autofocus"
+        @click="handleTriggerClick"
+        @delete-last-option="handleDeleteLastOption"
+        @delete-option="handleToggleOption"
+        @pattern-input="handlePatternInput"
+        @clear="handleClear"
+        @blur="handleTriggerBlur"
+        @focus="handleTriggerFocus"
+        @keydown.up.prevent
+        @keydown.down.prevent
+        @keydown.space="handleKeyDownSpace"
+        @keyup.up="handleKeyUpUp"
+        @keyup.down="handleKeyUpDown"
+        @keyup.enter="handleKeyUpEnter"
+        @keyup.space="handleKeyUpSpace"
+        @keyup.esc="handleKeyUpEsc"
+      />
+    </v-target>
+    <v-follower
       :show="mergedShow"
-      adjust-to
+      :to="adjustedTo"
+      :container-class="namespace"
+      width="target"
+      placement="bottom-start"
     >
-      <div
-        ref="offsetContainerRef"
-        v-zindexable="{
-          enabled: mergedShow
-        }"
-        class="n-positioning-container"
-        :class="{
-          [namespace]: namespace
-        }"
+      <transition
+        name="n-fade-in-scale-up-transition"
+        :appear="isMounted"
+        @after-leave="handleMenuAfterLeave"
       >
-        <div
-          ref="trackingRef"
-          class="n-positioning-content"
+        <n-base-select-menu
+          v-if="mergedShow"
+          ref="menuRef"
+          v-clickoutside="handleMenuClickOutside"
+          v-zindexable="{
+            enabled: mergedShow
+          }"
+          class="n-select-menu"
+          auto-pending
+          :theme="mergedTheme"
+          :pattern="pattern"
+          :tree-mate="treeMate"
+          :multiple="multiple"
+          size="medium"
+          :filterable="filterable"
+          :value="value"
+          @menu-toggle-option="handleToggleOption"
+          @scroll="handleMenuScroll"
         >
-          <transition
-            name="n-fade-in-scale-up-transition"
-            :appear="isMounted"
-            @after-leave="handleMenuAfterLeave"
-          >
-            <n-base-select-menu
-              v-if="mergedShow"
-              ref="menuRef"
-              v-clickoutside="handleMenuClickOutside"
-              class="n-select-menu"
-              auto-pending
-              :theme="mergedTheme"
-              :pattern="pattern"
-              :tree-mate="treeMate"
-              :multiple="multiple"
-              size="medium"
-              :filterable="filterable"
-              :value="value"
-              @menu-toggle-option="handleToggleOption"
-              @scroll="handleMenuScroll"
-            >
-              <template v-if="$slots.empty" #empty>
-                <slot name="empty" />
-              </template>
-              <template v-if="$slots.unmatch" #unmatch>
-                <slot name="unmatch" />
-              </template>
-              <template v-if="$slots.action" #action>
-                <slot name="action" />
-              </template>
-            </n-base-select-menu>
-          </transition>
-        </div>
-      </div>
-    </n-base-lazy-teleport>
-  </div>
+          <template v-if="$slots.empty" #empty>
+            <slot name="empty" />
+          </template>
+          <template v-if="$slots.unmatch" #unmatch>
+            <slot name="unmatch" />
+          </template>
+          <template v-if="$slots.action" #action>
+            <slot name="action" />
+          </template>
+        </n-base-select-menu>
+      </transition>
+    </v-follower>
+  </v-binder>
 </template>
 
 <script>
 import { ref, computed, toRef } from 'vue'
 import { createTreeMate } from 'treemate'
+import { VBinder, VFollower, VTarget } from 'vueuc'
 import {
   useIsMounted,
   useMergedState,
@@ -106,7 +93,6 @@ import {
 } from 'vooks'
 import {
   configurable,
-  placeable,
   themeable,
   asFormItem,
   locale,
@@ -117,12 +103,11 @@ import {
   zindexable
 } from '../../_directives'
 import {
-  warn, call
+  warn, call, useAdjustedTo
 } from '../../_utils'
 import {
   NBaseSelectMenu,
-  NBaseSelection,
-  NBaseLazyTeleport
+  NBaseSelection
 } from '../../_base'
 import styles from './styles/index.js'
 
@@ -161,7 +146,9 @@ export default {
   components: {
     NBaseSelectMenu,
     NBaseSelection,
-    NBaseLazyTeleport
+    VBinder,
+    VFollower,
+    VTarget
   },
   directives: {
     clickoutside,
@@ -170,7 +157,6 @@ export default {
   mixins: [
     configurable,
     themeable,
-    placeable,
     locale('Select'),
     asFormItem(),
     withCssr(styles)
@@ -329,6 +315,7 @@ export default {
       toRef(props, 'show'),
       uncontrolledShowRef
     )
+    const followerRef = ref(null)
     return {
       treeMate: treeMateRef,
       flattenedNodes: computed(() => {
@@ -347,15 +334,14 @@ export default {
         'items',
         'options'
       ]),
+      adjustedTo: useAdjustedTo(props),
       createdOptions: ref([]),
       beingCreatedOptions: ref([]),
-      memoValOptMap: ref(new Map())
+      memoValOptMap: ref(new Map()),
+      followerRef
     }
   },
   computed: {
-    __placeableEnabled () {
-      return this.mergedShow
-    },
     localizedPlaceholder () {
       return this.placeholder ?? this.localeNs.placeholder
     },
@@ -438,29 +424,17 @@ export default {
     },
     filteredOptions () {
       if (!this.mergedShow) return
-      this.$nextTick(this.__placeableSyncPosition)
+      this.$nextTick(this.syncPosition)
     },
     value () {
       if (!this.mergedShow) return
-      this.$nextTick(this.__placeableSyncPosition)
+      this.$nextTick(this.syncPosition)
     }
   },
   created () {
     this.updateMemorizedOptions()
   },
   methods: {
-    __placeableOffsetContainer () {
-      return this.offsetContainerRef
-    },
-    __placeableTracked () {
-      return this.triggerRef
-    },
-    __placeableTracking () {
-      return this.trackingRef
-    },
-    __placeableBody () {
-      return this.menuRef
-    },
     doUpdateValue (value) {
       const {
         onChange,
@@ -736,6 +710,9 @@ export default {
     },
     returnFocusToWrapper () {
       this.triggerRef.focusPatternInputWrapper()
+    },
+    syncPosition () {
+      this.followerRef.syncPosition()
     }
   }
 }
