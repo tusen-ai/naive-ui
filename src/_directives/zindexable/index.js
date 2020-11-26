@@ -19,7 +19,6 @@ const zindexable = {
     el[ctx].enabled = enabled
   },
   unmounted (el) {
-    // TODO: bug, sometimes vue will unmount popover twice when change route
     if (el[ctx].unmounted) return
     el[ctx].unmounted = true
     zIndexManager.unregisterElement(el)

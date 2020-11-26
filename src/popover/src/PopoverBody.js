@@ -198,7 +198,7 @@ export default {
           'n-popover--no-arrow': !this.showArrow,
           'n-popover--shadow': this.shadow,
           [this.bodyClass]: this.bodyClass,
-          'n-popover--styled': !this.raw
+          'n-popover--raw': this.raw
         }
       ],
       ref: 'body',

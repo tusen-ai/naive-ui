@@ -1,4 +1,4 @@
-import { c, cTB, cB, cM } from '../../../_utils/cssr'
+import { c, cTB, cB, cM, cNotM } from '../../../_utils/cssr'
 import { depx, pxfy } from '../../../_utils/css'
 
 export default c([
@@ -27,9 +27,7 @@ export default c([
           position: relative;
           font-size: 13px;
           color: ${textColor};
-          background-color: ${color};
-          border-radius: ${borderRadius};
-          padding: 8px 14px;
+          
         `
       }, [
         bodyTransition(
@@ -37,6 +35,13 @@ export default c([
           cubicBezierEaseOut,
           cubicBezierEaseIn
         ),
+        cNotM('raw', {
+          raw: `
+            background-color: ${color};
+            border-radius: ${borderRadius};
+            padding: 8px 14px;
+          `
+        }),
         cB('popover-arrow-wrapper', {
           raw: `
             position: absolute;

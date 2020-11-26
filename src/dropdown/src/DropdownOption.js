@@ -1,6 +1,10 @@
 import { h, computed, inject, ref, Transition } from 'vue'
+import {
+  VBinder,
+  VTarget,
+  VFollower
+} from 'vueuc'
 import { render } from '../../_utils/vue'
-import { placeable } from '../../_mixins'
 import { ChevronRightIcon } from '../../_base/icons'
 import NIcon from '../../icon'
 import { useMemo } from 'vooks'
@@ -10,9 +14,6 @@ import { isSubmenuNode } from './utils'
 
 export default {
   name: 'DropdownOption',
-  mixins: [
-    placeable
-  ],
   provide () {
     return {
       NDropdownOption: this
@@ -32,7 +33,7 @@ export default {
       default: null
     },
     placement: {
-      ...placeable.props.placement,
+      type: String,
       default: 'right-start'
     }
   },
@@ -83,31 +84,10 @@ export default {
         const { key } = props.tmNode
         return activeKeyPath.includes(key) || activeKeyPath.includes(key)
       }),
-      // placeable
-      trackingRef: ref(null),
-      offsetContainerRef: ref(null),
-      bodyRef: ref(null),
       NDropdownOption
     }
   },
-  computed: {
-    __placeableEnabled () {
-      return this.mergedShowSubmenu
-    }
-  },
   methods: {
-    __placeableTracking () {
-      return this.trackingRef
-    },
-    __placeableTracked () {
-      return this.offsetContainerRef
-    },
-    __placeableOffsetContainer () {
-      return this.offsetContainerRef
-    },
-    __placeableBody () {
-      return this.bodyRef
-    },
     handleSubmenuBeforeEnter () {
       this.enteringSubmenu = true
     },
@@ -171,7 +151,6 @@ export default {
     } = this
     const submenuVNode = mergedShowSubmenu
       ? h(NDropdownMenu, {
-        ref: 'bodyRef',
         tmNodes: this.tmNode.children,
         parentKey: this.tmNode.key
       })
@@ -222,27 +201,43 @@ export default {
           }) : null
         ])
       ]),
-      this.hasSubmenu ? h('div', {
-        ref: 'offsetContainerRef',
-        class: 'n-dropdown-offset-container'
-      }, [
-        h(
-          'div',
-          {
-            ref: 'trackingRef',
-            class: 'n-dropdown-menu-wrapper'
-          },
-          [
-            animated ? h(Transition, {
-              onBeforeEnter: this.handleSubmenuBeforeEnter,
-              onAfterEnter: this.handleSubmenuAfterEnter,
-              name: 'n-fade-in-scale-up-transition'
-            }, {
-              default: () => submenuVNode
-            }) : submenuVNode
-          ]
-        )
-      ]) : null
+      this.hasSubmenu ? h(VBinder, null, {
+        default: () => {
+          return h(VTarget, null, {
+            default: () => {
+              return h('div', {
+                class: 'n-dropdown-offset-container'
+              }, [
+                h(VFollower, {
+                  show: this.mergedShowSubmenu,
+                  teleportDisabled: true,
+                  placement: this.placement
+                }, {
+                  default: () => {
+                    return h(
+                      'div',
+                      {
+                        class: 'n-dropdown-menu-wrapper'
+                      },
+                      [
+                        animated ? h(Transition, {
+                          onBeforeEnter: this.handleSubmenuBeforeEnter,
+                          onAfterEnter: this.handleSubmenuAfterEnter,
+                          name: 'n-fade-in-scale-up-transition',
+                          appear: true
+                        }, {
+                          default: () => submenuVNode
+                        }) : submenuVNode
+                      ]
+                    )
+                  }
+                })
+              ])
+            }
+          })
+        }
+      })
+        : null
     ])
   }
 }

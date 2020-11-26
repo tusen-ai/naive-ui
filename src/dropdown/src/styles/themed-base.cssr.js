@@ -55,7 +55,8 @@ export default c([
               }),
               cE('suffix', {
                 boxSizing: 'border-box',
-                flex: 1,
+                flexGrow: 0,
+                flexShrink: 0,
                 display: 'flex',
                 justifyContent: 'flex-end',
                 alignItems: 'center',
@@ -100,6 +101,7 @@ export default c([
             pointerEvents: 'all'
           }),
           cB('dropdown-menu-wrapper', {
+            transformOrigin: 'inherit',
             width: 'fit-content'
           })
         ])
