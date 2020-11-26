@@ -50,6 +50,7 @@ module.exports = {
     '@css-render/plugin-bem',
     'vueuc',
     'vooks',
-    'evtd'
+    'evtd',
+    'vdirs'
   ])
 }

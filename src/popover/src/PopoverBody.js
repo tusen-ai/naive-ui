@@ -221,6 +221,7 @@ export default {
       enabled: this.followerEnabled,
       to: this.adjustedTo,
       placement: this.placement,
+      containerClass: this.namespace,
       ref: 'followerRef'
     }, {
       default: () => {
