@@ -33,25 +33,80 @@
         />
       </div>
     </div>
-    <div
-      ref="firstHandleRef"
-      class="n-slider-handle"
-      tabindex="0"
-      :style="firstHandleStyle"
-      @mousedown="handleFirstHandleMouseDown"
-      @mouseenter="handleFirstHandleMouseEnter"
-      @mouseleave="handleFirstHandleMouseLeave"
-    />
-    <div
+    <v-binder>
+      <v-target>
+        <div
+          ref="handleRef1"
+          class="n-slider-handle"
+          tabindex="0"
+          :style="firstHandleStyle"
+          @mousedown="handleFirstHandleMouseDown"
+          @mouseenter="handleFirstHandleMouseEnter"
+          @mouseleave="handleFirstHandleMouseLeave"
+        />
+      </v-target>
+      <v-follower
+        ref="followerRef1"
+        :show="mergedShowTooltip1"
+        :to="adjustedTo"
+        :placement="placement"
+        :container-class="namespace"
+      >
+        <transition
+          name="n-fade-in-scale-up-transition"
+          :appear="isMounted"
+          :css="!(active && prevActive)"
+        >
+          <div
+            v-if="mergedShowTooltip1"
+            class="n-slider-handle-indicator"
+            :class="{
+              [`n-${mergedTheme}-theme`]: mergedTheme
+            }"
+          >
+            {{ handleValue1 }}
+          </div>
+        </transition>
+      </v-follower>
+    </v-binder>
+    <v-binder
       v-if="range"
-      ref="secondHandleRef"
-      class="n-slider-handle"
-      tabindex="0"
-      :style="secondHandleStyle"
-      @mousedown="handleSecondHandleMouseDown"
-      @mouseenter="handleSecondHandleMouseEnter"
-      @mouseleave="handleSecondHandleMouseLeave"
-    />
+    >
+      <v-target>
+        <div
+          ref="handleRef2"
+          class="n-slider-handle"
+          tabindex="0"
+          :style="secondHandleStyle"
+          @mousedown="handleSecondHandleMouseDown"
+          @mouseenter="handleSecondHandleMouseEnter"
+          @mouseleave="handleSecondHandleMouseLeave"
+        />
+      </v-target>
+      <v-follower
+        ref="followerRef2"
+        :show="mergedShowTooltip2"
+        :to="adjustedTo"
+        :placement="placement"
+        :container-class="namespace"
+      >
+        <transition
+          name="n-fade-in-scale-up-transition"
+          :appear="isMounted"
+          :css="!(active && prevActive)"
+        >
+          <div
+            v-if="mergedShowTooltip2"
+            class="n-slider-handle-indicator"
+            :class="{
+              [`n-${mergedTheme}-theme`]: mergedTheme
+            }"
+          >
+            {{ handleValue2 }}
+          </div>
+        </transition>
+      </v-follower>
+    </v-binder>
     <div
       v-if="marks"
       class="n-slider-marks"
@@ -65,68 +120,35 @@
         {{ mark.label }}
       </div>
     </div>
-    <n-base-lazy-teleport
-      :show="showTooltip"
-      adjust-to
-    >
-      <div
-        ref="offsetContainerRef"
-        v-zindexable="{ enabled: showTooltip }"
-        class="n-positioning-container"
-        :class="{
-          [namespace]: namespace
-        }"
-      >
-        <div
-          ref="trackingRef"
-          class="n-positioning-content"
-        >
-          <transition
-            name="n-fade-in-scale-up-transition"
-            :appear="isMounted"
-          >
-            <div
-              v-if="showTooltip"
-              class="n-slider-handle-indicator"
-              :class="{
-                [`n-${mergedTheme}-theme`]: mergedTheme
-              }"
-            >
-              {{ activeHandleValue === null ? tooltipHoverDisplayValue : activeHandleValue }}
-            </div>
-          </transition>
-        </div>
-      </div>
-    </n-base-lazy-teleport>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, toRef, computed, watch, nextTick } from 'vue'
+import {
+  VBinder,
+  VTarget,
+  VFollower
+} from 'vueuc'
+import { useIsMounted, useMergedState } from 'vooks'
+import { on, off } from 'evtd'
 import {
   configurable,
   themeable,
-  placeable,
   asFormItem,
   withCssr
 } from '../../_mixins'
-import {
-  zindexable
-} from 'vdirs'
 import styles from './styles'
-import { warn } from '../../_utils/naive'
-import { call } from '../../_utils/vue'
-import { useIsMounted } from 'vooks'
-import { NBaseLazyTeleport } from '../../_base'
+import { warn, call, useAdjustedTo } from '../../_utils'
 
 function handleFirstHandleMouseMove (e) {
   const railRect = this.railRef.getBoundingClientRect()
   const offsetRatio = (e.clientX - railRect.left) / railRect.width
   const newValue = this.min + (this.max - this.min) * offsetRatio
   if (this.range) {
-    this.emitInputEvent([this.memoziedOtherValue, newValue])
+    this.dispatchValueUpdate([this.memoziedOtherValue, newValue])
   } else {
-    this.emitInputEvent(newValue)
+    this.dispatchValueUpdate(newValue)
   }
 }
 
@@ -135,22 +157,20 @@ function handleSecondHandleMouseMove (e) {
   const offsetRatio = (e.clientX - railRect.left) / railRect.width
   const newValue = this.min + (this.max - this.min) * offsetRatio
   if (this.range) {
-    this.emitInputEvent([this.memoziedOtherValue, newValue])
+    this.dispatchValueUpdate([this.memoziedOtherValue, newValue])
   }
 }
 
 export default {
   name: 'Slider',
-  directives: {
-    zindexable
-  },
   components: {
-    NBaseLazyTeleport
+    VBinder,
+    VTarget,
+    VFollower
   },
   mixins: [
     configurable,
     themeable,
-    placeable,
     withCssr(styles),
     asFormItem()
   ],
@@ -187,6 +207,10 @@ export default {
       type: String,
       default: 'top'
     },
+    showTooltip: {
+      type: Boolean,
+      default: undefined
+    },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:value': {
       type: Function,
@@ -201,34 +225,55 @@ export default {
       default: undefined
     }
   },
-  setup () {
+  setup (props) {
+    const handleActive1Ref = ref(false)
+    const handleActive2Ref = ref(false)
+    const controlledShowTooltipRef = toRef(props, 'showTooltip')
+    const mergedShowTooltip1Ref = useMergedState(
+      controlledShowTooltipRef,
+      handleActive1Ref
+    )
+    const mergedShowTooltip2Ref = useMergedState(
+      controlledShowTooltipRef,
+      handleActive2Ref
+    )
+    const handleClicked1Ref = ref(false)
+    const handleClicked2Ref = ref(false)
+    const activeRef = computed(() => {
+      return handleActive1Ref.value || handleActive2Ref.value
+    })
+    const prevActiveRef = ref(activeRef.value)
+    watch(activeRef, (value) => {
+      nextTick(() => {
+        prevActiveRef.value = value
+      })
+    })
+    const clickedRef = computed(() => {
+      return handleClicked1Ref.value || handleClicked2Ref.value
+    })
     return {
       isMounted: useIsMounted(),
+      adjustedTo: useAdjustedTo(props),
+      mergedShowTooltip1: mergedShowTooltip1Ref,
+      mergedShowTooltip2: mergedShowTooltip2Ref,
+      handleActive1: handleActive1Ref,
+      handleActive2: handleActive2Ref,
+      handleClicked1: handleClicked1Ref,
+      handleClicked2: handleClicked2Ref,
+      memoziedOtherValue: ref(null),
+      valueChangedByRailClick: ref(true),
+      active: activeRef,
+      prevActive: prevActiveRef,
+      clicked: clickedRef,
       // https://github.com/vuejs/vue-next/issues/2283
-      firstHandleRef: ref(null),
-      secondHandleRef: ref(null),
+      handleRef1: ref(null),
+      handleRef2: ref(null),
       railRef: ref(null),
-      offsetContainerRef: ref(null),
-      trackingRef: ref(null)
-    }
-  },
-  data () {
-    return {
-      unstableMemorizedRef: {},
-      showTooltip: false,
-      firstHandleActive: false,
-      secondHandleActive: false,
-      firstHandleClicked: false,
-      secondHandleClicked: false,
-      memoziedOtherValue: null,
-      valueChangedByRailClick: true,
-      tooltipHoverDisplayValue: ''
+      followerRef1: ref(null),
+      followerRef2: ref(null)
     }
   },
   computed: {
-    __placeableEnabled () {
-      return this.showTooltip
-    },
     computedMarks () {
       const marks = []
       for (const value of Object.keys(this.marks)) {
@@ -244,25 +289,17 @@ export default {
     fillStyle () {
       if (this.range) {
         return {
-          left: ((this.firstHandleValue - this.min) / (this.max - this.min) * 100) + '%',
-          width: ((this.secondHandleValue - this.firstHandleValue) / (this.max - this.min) * 100) + '%'
+          left: ((this.handleValue1 - this.min) / (this.max - this.min) * 100) + '%',
+          width: ((this.handleValue2 - this.handleValue1) / (this.max - this.min) * 100) + '%'
         }
       } else {
         return {
           left: 0,
-          width: ((this.firstHandleValue - this.min) / (this.max - this.min) * 100) + '%'
+          width: ((this.handleValue1 - this.min) / (this.max - this.min) * 100) + '%'
         }
       }
     },
-    activeHandleValue () {
-      if (this.firstHandleActive) {
-        return this.firstHandleValue
-      } else if (this.secondHandleActive) {
-        return this.secondHandleValue
-      }
-      return null
-    },
-    firstHandleValue () {
+    handleValue1 () {
       if (this.range) {
         if (this.value) {
           if (this.value[0] > this.value[1]) {
@@ -275,7 +312,7 @@ export default {
         return this.justifyValue(this.value)
       }
     },
-    secondHandleValue () {
+    handleValue2 () {
       if (this.range && this.value) {
         if (this.value[0] > this.value[1]) {
           return this.justifyValue(this.value[0])
@@ -287,21 +324,15 @@ export default {
     },
     firstHandleStyle () {
       return {
-        left: ((this.firstHandleValue - this.min) / (this.max - this.min) * 100) + '%',
-        zIndex: this.firstHandleActive ? 1 : 0
+        left: ((this.handleValue1 - this.min) / (this.max - this.min) * 100) + '%',
+        zIndex: this.handleClicked1 ? 1 : 0
       }
     },
     secondHandleStyle () {
       return {
-        left: ((this.secondHandleValue - this.min) / (this.max - this.min) * 100) + '%',
-        zIndex: this.secondHandleActive ? 1 : 0
+        left: ((this.handleValue2 - this.min) / (this.max - this.min) * 100) + '%',
+        zIndex: this.handleClicked2 ? 1 : 0
       }
-    },
-    active () {
-      return this.firstHandleActive || this.secondHandleActive
-    },
-    clicked () {
-      return this.firstHandleClicked || this.secondHandleClicked
     }
   },
   watch: {
@@ -310,8 +341,8 @@ export default {
         if (oldValue && oldValue[1] !== newValue[1]) {
           this.$nextTick(() => {
             if (!this.valueChangedByRailClick) {
-              this.firstHandleActive = false
-              this.secondHandleActive = true
+              this.handleActive1 = false
+              this.handleActive2 = true
             } else {
               this.valueChangedByRailClick = false
             }
@@ -320,8 +351,8 @@ export default {
         } else if (oldValue && oldValue[0] !== newValue[0]) {
           this.$nextTick(() => {
             if (!this.valueChangedByRailClick) {
-              this.firstHandleActive = true
-              this.secondHandleActive = false
+              this.handleActive1 = true
+              this.handleActive2 = false
             } else {
               this.valueChangedByRailClick = false
             }
@@ -330,8 +361,8 @@ export default {
         } else if (newValue[0] === newValue[1]) {
           this.$nextTick(() => {
             if (!this.valueChangedByRailClick) {
-              this.firstHandleActive = false
-              this.secondHandleActive = true
+              this.handleActive1 = false
+              this.handleActive2 = true
             } else {
               this.valueChangedByRailClick = false
             }
@@ -343,47 +374,22 @@ export default {
         if (this.range) {
           if (newValue && oldValue) {
             if (newValue[0] !== oldValue[0] || newValue[1] !== oldValue[1]) {
-              this.__placeableSyncPosition()
+              this.syncPosition()
             }
           }
         } else {
-          this.__placeableSyncPosition()
+          this.syncPosition()
         }
       })
     }
   },
   beforeUnmount () {
-    window.removeEventListener('mousemove', this.handleFirstHandleMouseMove)
-    window.removeEventListener('mouseup', this.handleFirstHandleMouseUp)
-    window.removeEventListener('mousemove', this.handleSecondHandleMouseMove)
-    window.removeEventListener('mouseup', this.handleSecondHandleMouseUp)
+    off('mousemove', window, this.handleFirstHandleMouseMove)
+    off('mouseup', window, this.handleFirstHandleMouseUp)
+    off('mousemove', window, this.handleSecondHandleMouseMove)
+    off('mouseup', window, this.handleSecondHandleMouseUp)
   },
   methods: {
-    __placeableTracked () {
-      if (this.firstHandleActive) {
-        return this.firstHandleRef
-      } else if (this.secondHandleActive) {
-        return this.secondHandleRef
-      }
-      return this.$el // for registering scroll listeners
-    },
-    __placeableTracking () {
-      if (this.trackingRef) {
-        return (this.unstableMemorizedRef.tracking = this.trackingRef)
-      } else {
-        return this.unstableMemorizedRef.tracking
-      }
-    },
-    __placeableOffsetContainer () {
-      if (this.offsetContainerRef) {
-        return (this.unstableMemorizedRef.offsetContainer = this.offsetContainerRef)
-      } else {
-        return this.unstableMemorizedRef.offsetContainer
-      }
-    },
-    __placeableBody () {
-      return null
-    },
     doUpdateValue (value) {
       const {
         onChange,
@@ -396,37 +402,50 @@ export default {
       nTriggerFormInput()
       nTriggerFormChange()
     },
+    doUpdateShow (show1, show2) {
+      if (show1 !== undefined) {
+        this.handleActive1 = show1
+      }
+      if (show2 !== undefined) {
+        this.handleActive2 = show2
+      }
+    },
+    syncPosition () {
+      const { followerRef1, followerRef2 } = this
+      if (followerRef1) followerRef1.syncPosition()
+      if (followerRef2) followerRef2.syncPosition()
+    },
     handleRailClick (e) {
       this.valueChangedByRailClick = true
       const railRect = this.railRef.getBoundingClientRect()
       const offsetRatio = (e.clientX - railRect.left) / railRect.width
       const newValue = this.min + (this.max - this.min) * offsetRatio
       if (!this.range) {
-        this.emitInputEvent(newValue)
-        this.firstHandleRef.focus()
+        this.dispatchValueUpdate(newValue)
+        this.handleRef1.focus()
       } else {
         if (this.value) {
-          if (Math.abs(this.firstHandleValue - newValue) < Math.abs(this.secondHandleValue - newValue)) {
-            this.emitInputEvent([newValue, this.secondHandleValue])
-            this.firstHandleRef.focus()
+          if (Math.abs(this.handleValue1 - newValue) < Math.abs(this.handleValue2 - newValue)) {
+            this.dispatchValueUpdate([newValue, this.handleValue2])
+            this.handleRef1.focus()
           } else {
-            this.emitInputEvent([this.firstHandleValue, newValue])
-            this.secondHandleRef.focus()
+            this.dispatchValueUpdate([this.handleValue1, newValue])
+            this.handleRef2.focus()
           }
         } else {
-          this.emitInputEvent([newValue, newValue])
-          this.firstHandleRef.focus()
+          this.dispatchValueUpdate([newValue, newValue])
+          this.handleRef1.focus()
         }
       }
     },
     handleKeyDownRight () {
       let firstHandleFocused = false
       let handleValue = null
-      if (document.activeElement === this.firstHandleRef) {
+      if (document.activeElement === this.handleRef1) {
         firstHandleFocused = true
-        handleValue = this.firstHandleValue
+        handleValue = this.handleValue1
       } else {
-        handleValue = this.secondHandleValue
+        handleValue = this.handleValue2
       }
       let nextValue = Math.floor(handleValue / this.step) * this.step + this.step
       if (this.marks) {
@@ -439,22 +458,22 @@ export default {
       }
       if (this.range) {
         if (firstHandleFocused) {
-          this.emitInputEvent([nextValue, this.secondHandleValue])
+          this.dispatchValueUpdate([nextValue, this.handleValue2])
         } else {
-          this.emitInputEvent([this.firstHandleValue, nextValue])
+          this.dispatchValueUpdate([this.handleValue1, nextValue])
         }
       } else {
-        this.emitInputEvent(nextValue)
+        this.dispatchValueUpdate(nextValue)
       }
     },
     handleKeyDownLeft () {
       let firstHandleFocused = false
       let handleValue = null
-      if (document.activeElement === this.firstHandleRef) {
+      if (document.activeElement === this.handleRef1) {
         firstHandleFocused = true
-        handleValue = this.firstHandleValue
+        handleValue = this.handleValue1
       } else {
-        handleValue = this.secondHandleValue
+        handleValue = this.handleValue2
       }
       let nextValue = Math.ceil(handleValue / this.step) * this.step - this.step
       if (this.marks) {
@@ -467,23 +486,23 @@ export default {
       }
       if (this.range) {
         if (firstHandleFocused) {
-          this.emitInputEvent([nextValue, this.secondHandleValue])
+          this.dispatchValueUpdate([nextValue, this.handleValue2])
         } else {
-          this.emitInputEvent([this.firstHandleValue, nextValue])
+          this.dispatchValueUpdate([this.handleValue1, nextValue])
         }
       } else {
-        this.emitInputEvent(nextValue)
+        this.dispatchValueUpdate(nextValue)
       }
     },
     switchFocus () {
       if (this.range) {
-        const firstHandle = this.firstHandleRef
-        const secondHandle = this.secondHandleRef
+        const firstHandle = this.handleRef1
+        const secondHandle = this.handleRef2
         if (firstHandle && secondHandle) {
-          if (this.firstHandleActive && document.activeElement === secondHandle) {
+          if (this.handleActive1 && document.activeElement === secondHandle) {
             this.disableTransitionOneTick()
             firstHandle.focus()
-          } else if (this.secondHandleActive && document.activeElement === firstHandle) {
+          } else if (this.handleActive2 && document.activeElement === firstHandle) {
             this.disableTransitionOneTick()
             secondHandle.focus()
           }
@@ -525,49 +544,41 @@ export default {
     },
     handleFirstHandleMouseDown () {
       if (this.range) {
-        this.memoziedOtherValue = this.secondHandleValue
+        this.memoziedOtherValue = this.handleValue2
       }
-      this.firstHandleActive = true
-      this.firstHandleClicked = true
-      window.addEventListener('mouseup', this.handleFirstHandleMouseUp)
-      window.addEventListener('mousemove', this.handleFirstHandleMouseMove)
+      this.handleActive1 = true
+      this.handleClicked1 = true
+      on('mouseup', window, this.handleFirstHandleMouseUp)
+      on('mousemove', window, this.handleFirstHandleMouseMove)
     },
     handleSecondHandleMouseDown () {
       if (this.range) {
-        this.memoziedOtherValue = this.firstHandleValue
+        this.memoziedOtherValue = this.handleValue1
       }
-      this.secondHandleActive = true
-      this.secondHandleClicked = true
-      window.addEventListener('mouseup', this.handleSecondHandleMouseUp)
-      window.addEventListener('mousemove', this.handleSecondHandleMouseMove)
+      this.handleActive2 = true
+      this.handleClicked2 = true
+      on('mouseup', window, this.handleSecondHandleMouseUp)
+      on('mousemove', window, this.handleSecondHandleMouseMove)
     },
     handleFirstHandleMouseUp (e) {
-      this.secondHandleActive = false
-      this.firstHandleActive = false
-      this.secondHandleClicked = false
-      this.firstHandleClicked = false
-      if (!this.firstHandleRef.contains(e.target)) {
-        this.showTooltip = false
-      } else {
-        this.tooltipHoverDisplayValue = this.firstHandleValue
+      this.handleClicked2 = false
+      this.handleClicked1 = false
+      if (!this.handleRef1.contains(e.target)) {
+        this.doUpdateShow(false, undefined)
       }
-      window.removeEventListener('mouseup', this.handleFirstHandleMouseUp)
-      window.removeEventListener('mousemove', this.handleFirstHandleMouseMove)
+      off('mouseup', window, this.handleFirstHandleMouseUp)
+      off('mousemove', window, this.handleFirstHandleMouseMove)
     },
     handleSecondHandleMouseUp (e) {
-      this.secondHandleActive = false
-      this.firstHandleActive = false
-      this.secondHandleClicked = false
-      this.firstHandleClicked = false
-      if (!this.firstHandleRef.contains(e.target)) {
-        this.showTooltip = false
-      } else {
-        this.tooltipHoverDisplayValue = this.secondHandleValue
+      this.handleClicked2 = false
+      this.handleClicked1 = false
+      if (!this.handleRef1.contains(e.target)) {
+        this.doUpdateShow(undefined, false)
       }
-      window.removeEventListener('mouseup', this.handleSecondHandleMouseUp)
-      window.removeEventListener('mousemove', this.handleSecondHandleMouseMove)
+      off('mouseup', window, this.handleSecondHandleMouseUp)
+      off('mousemove', window, this.handleSecondHandleMouseMove)
     },
-    emitInputEvent (value) {
+    dispatchValueUpdate (value) {
       if (this.range) {
         if (Array.isArray(value)) {
           if (value[0] > value[1]) {
@@ -598,56 +609,57 @@ export default {
     handleSecondHandleMouseMove,
     handleFirstHandleMouseEnter () {
       if (!this.active) {
-        this.showTooltip = true
-        this.firstHandleActive = true
-        this.tooltipHoverDisplayValue = this.firstHandleValue
+        this.doUpdateShow(true, undefined)
+        this.handleActive1 = true
         this.$nextTick(() => {
-          this.__placeableSyncPosition()
+          this.syncPosition()
         })
       }
     },
     handleFirstHandleMouseLeave () {
-      if (!this.active) this.showTooltip = false
-      if (this.active && !this.clicked) {
-        this.secondHandleActive = false
-        this.firstHandleActive = false
-        this.showTooltip = false
+      if (!this.active) {
+        this.doUpdateShow(false, false)
+      } else if (!this.clicked) {
+        this.handleActive2 = false
+        this.handleActive1 = false
+        this.doUpdateShow(false, false)
       }
     },
     handleSecondHandleMouseEnter () {
       if (!this.active) {
-        this.showTooltip = true
-        this.secondHandleActive = true
-        this.tooltipHoverDisplayValue = this.secondHandleValue
+        this.doUpdateShow(undefined, true)
+        this.handleActive2 = true
         this.$nextTick(() => {
-          this.__placeableSyncPosition()
+          this.syncPosition()
         })
       }
     },
     handleSecondHandleMouseLeave () {
-      if (!this.active) this.showTooltip = false
-      if (this.active && !this.clicked) {
-        this.secondHandleActive = false
-        this.firstHandleActive = false
-        this.showTooltip = false
+      if (!this.active) {
+        this.doUpdateShow(false, false)
+      } else if (!this.clicked) {
+        this.handleActive2 = false
+        this.handleActive1 = false
+        this.doUpdateShow(false, false)
       }
     },
     disableTransitionOneTick () {
-      const firstHandle = this.firstHandleRef
-      if (firstHandle) {
-        firstHandle.style.transition = 'none'
+      const { handleRef1, handleRef2 } = this
+      if (handleRef1) {
+        handleRef1.style.transition = 'none'
         this.$nextTick(() => {
-          if (this.firstHandleRef) {
-            this.firstHandleRef.style.transition = null
+          const { handleRef1 } = this
+          if (handleRef1) {
+            handleRef1.style.transition = ''
           }
         })
       }
-      const secondHandle = this.secondHandleRef
-      if (secondHandle) {
-        secondHandle.style.transition = 'none'
+      if (handleRef2) {
+        handleRef2.style.transition = 'none'
         this.$nextTick(() => {
-          if (this.secondHandleRef) {
-            this.secondHandleRef.style.transition = null
+          const { handleRef2 } = this
+          if (handleRef2) {
+            handleRef2.style.transition = ''
           }
         })
       }

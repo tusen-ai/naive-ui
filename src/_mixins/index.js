@@ -1,7 +1,6 @@
 export { default as useAsFormItem } from './use-as-form-item'
 export { default as asFormItem } from './as-form-item'
 export { default as locale } from './locale'
-export { default as placeable } from './placeable/index'
 export { default as themeable } from './themeable'
 export { default as configurable } from './configurable'
 export { default as withCssr } from './with-cssr'
