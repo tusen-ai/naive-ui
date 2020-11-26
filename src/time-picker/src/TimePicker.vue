@@ -52,16 +52,16 @@
           v-clickoutside="handleClickOutside"
           :theme="mergedTheme"
           :transition-disabled="transitionDisabled"
-          :hour-value="computedHour"
-          :show-hour="formatWithHour"
+          :hour-value="hourValue"
+          :show-hour="hourInFormat"
           :is-hour-invalid="isHourInvalid"
           :is-hour-disabled="isHourDisabled"
-          :minute-value="computedMinute"
-          :show-minute="formatWithMinute"
+          :minute-value="minuteValue"
+          :show-minute="minuteInFormat"
           :is-minute-invalid="isMinuteInvalid"
           :is-minute-disabled="isMinuteDisabled"
-          :second-value="computedSecond"
-          :show-second="formatWithSecond"
+          :second-value="secondValue"
+          :show-second="secondInFormat"
           :is-second-invalid="isSecondInvalid"
           :is-second-disabled="isSecondDisabled"
           :is-value-invalid="isValueInvalid"
@@ -268,26 +268,26 @@ export default {
         locale: this.dateFnsLocale
       }
     },
-    formatWithHour () {
+    hourInFormat () {
       return /H|h|K|k/.test(this.format)
     },
-    formatWithMinute () {
+    minuteInFormat () {
       return /m/.test(this.format)
     },
-    formatWithSecond () {
+    secondInFormat () {
       return /s/.test(this.format)
     },
     isHourInvalid () {
       if (this.value === null) return false
-      return this.isHourDisabled(this.computedHour)
+      return this.isHourDisabled(this.hourValue)
     },
     isMinuteInvalid () {
       if (this.value === null) return false
-      return this.isMinuteDisabled(this.computedMinute, this.computedHour)
+      return this.isMinuteDisabled(this.minuteValue, this.hourValue)
     },
     isSecondInvalid () {
       if (this.value === null) return false
-      return this.isSecondDisabled(this.computedSecond, this.computedMinute, this.computedHour)
+      return this.isSecondDisabled(this.secondValue, this.minuteValue, this.hourValue)
     },
     isValueInvalid () {
       return this.isHourInvalid || this.isMinuteInvalid || this.isSecondInvalid
@@ -295,25 +295,25 @@ export default {
     syntheticAttrSize () {
       return this.format.length + 4
     },
-    computedTime () {
+    valueAsDate () {
       if (this.value === null) return null
       else return new Date(this.value)
     },
-    computedHour () {
-      if (this.computedTime) return Number(format(this.computedTime, 'HH', this.dateFnsOptions))
+    hourValue () {
+      if (this.valueAsDate) return Number(format(this.valueAsDate, 'HH', this.dateFnsOptions))
       else return null
     },
-    computedMinute () {
-      if (this.computedTime) return Number(format(this.computedTime, 'mm', this.dateFnsOptions))
+    minuteValue () {
+      if (this.valueAsDate) return Number(format(this.valueAsDate, 'mm', this.dateFnsOptions))
       else return null
     },
-    computedSecond () {
-      if (this.computedTime) return Number(format(this.computedTime, 'ss', this.dateFnsOptions))
+    second () {
+      if (this.valueAsDate) return Number(format(this.valueAsDate, 'ss', this.dateFnsOptions))
       else return null
     }
   },
   watch: {
-    computedTime (value) {
+    valueAsDate (value) {
       this.refreshTimeString(value)
       this.disableTransitionOneTick()
       this.$nextTick(this.scrollTimer)
@@ -392,11 +392,11 @@ export default {
         this.transitionDisabled = false
       })
     },
-    justifyValueAfterChangeDisplayTimeString () {
+    justifyValueAfterInput () {
       const time = strictParse(this.displayTimeString, this.format, new Date(), this.dateFnsOptions)
       if (isValid(time)) {
-        if (this.computedTime !== null) {
-          const newTime = set(this.computedTime, {
+        if (this.valueAsDate !== null) {
+          const newTime = set(this.valueAsDate, {
             hours: getHours(time),
             minutes: getMinutes(time),
             seconds: getSeconds(time)
@@ -420,7 +420,7 @@ export default {
       }
     },
     handleMinuteClick (minute) {
-      if (this.isMinuteDisabled(minute, this.computedHour)) {
+      if (this.isMinuteDisabled(minute, this.hourValue)) {
         return
       }
       if (this.value === null) {
@@ -430,7 +430,7 @@ export default {
       }
     },
     handleSecondClick (second) {
-      if (this.isSecondDisabled(second, this.computedMinute, this.computedHour)) {
+      if (this.isSecondDisabled(second, this.minuteValue, this.hourValue)) {
         return
       }
       if (this.value === null) {
@@ -440,7 +440,7 @@ export default {
       }
     },
     refreshTimeString (time) {
-      if (time === undefined) time = this.computedTime
+      if (time === undefined) time = this.valueAsDate
       if (time === null) this.displayTimeString = ''
       else this.displayTimeString = format(time, this.format, this.dateFnsOptions)
     },
@@ -535,7 +535,7 @@ export default {
       }
     },
     handleTimeInput () {
-      this.justifyValueAfterChangeDisplayTimeString()
+      this.justifyValueAfterInput()
     },
     handleCancelClick () {
       this.doChange(this.memorizedValue)
