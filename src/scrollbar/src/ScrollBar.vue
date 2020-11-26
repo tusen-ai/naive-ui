@@ -101,6 +101,10 @@ import {
   ref
 } from 'vue'
 import {
+  on,
+  off
+} from 'evtd'
+import {
   VResizeObserver
 } from 'vueuc'
 import {
@@ -255,8 +259,8 @@ export default {
   beforeUnmount () {
     window.clearTimeout(this.xBarVanishTimerId)
     window.clearTimeout(this.yBarVanishTimerId)
-    window.removeEventListener('mousemove', this.handleYScrollMouseMove, true)
-    window.removeEventListener('mouseup', this.handleYScrollMouseUp, true)
+    off('mousemove', window, this.handleYScrollMouseMove, true)
+    off('mouseup', window, this.handleYScrollMouseUp, true)
   },
   mounted () {
     // if container exist, it always can't be resolved when scrollbar is mounted
@@ -431,8 +435,8 @@ export default {
       e.preventDefault()
       e.stopPropagation()
       this.xBarPressed = true
-      window.addEventListener('mousemove', this.handleXScrollMouseMove)
-      window.addEventListener('mouseup', this.handleXScrollMouseUp)
+      on('mousemove', window, this.handleXScrollMouseMove, true)
+      on('mouseup', window, this.handleXScrollMouseUp, true)
       this.memoXLeft = this.containerScrollLeft
       this.memoMouseX = e.clientX
     },
@@ -451,8 +455,8 @@ export default {
     handleXScrollMouseUp (e) {
       e.preventDefault()
       e.stopPropagation()
-      window.removeEventListener('mousemove', this.handleXScrollMouseMove)
-      window.removeEventListener('mouseup', this.handleXScrollMouseUp)
+      off('mousemove', window, this.handleXScrollMouseMove, true)
+      off('mouseup', window, this.handleXScrollMouseUp, true)
       this.xBarPressed = false
       this.sync()
       if (!this.mergedContainerRef().contains(e.target)) {
@@ -463,8 +467,8 @@ export default {
       e.preventDefault()
       e.stopPropagation()
       this.yBarPressed = true
-      window.addEventListener('mousemove', this.handleYScrollMouseMove, true)
-      window.addEventListener('mouseup', this.handleYScrollMouseUp, true)
+      on('mousemove', window, this.handleYScrollMouseMove, true)
+      on('mouseup', window, this.handleYScrollMouseUp, true)
       this.memoYTop = this.containerScrollTop
       this.memoMouseY = e.clientY
     },
@@ -487,8 +491,8 @@ export default {
         onScrollEnd
       } = this
       if (onScrollEnd) onScrollEnd()
-      window.removeEventListener('mousemove', this.handleYScrollMouseMove, true)
-      window.removeEventListener('mouseup', this.handleYScrollMouseUp, true)
+      off('mousemove', window, this.handleYScrollMouseMove, true)
+      off('mouseup', window, this.handleYScrollMouseUp, true)
       this.yBarPressed = false
       this.sync()
       if (!this.mergedContainerRef().contains(e.target)) {

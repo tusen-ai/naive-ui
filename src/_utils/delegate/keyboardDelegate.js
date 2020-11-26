@@ -1,4 +1,5 @@
 import { KEY_CODE } from '../dom/key-code'
+import { on } from 'evtd'
 
 class KeyboardDelegate {
   constructor () {
@@ -6,7 +7,7 @@ class KeyboardDelegate {
     this.ctrlPressed = false
     this.commandPressed = false
     this.handlerInfoList = []
-    window.addEventListener('keydown', e => {
+    on('keydown', window, e => {
       switch (e.keyCode) {
         case KEY_CODE.SHIFT:
           this.shiftPressed = true
@@ -32,7 +33,7 @@ class KeyboardDelegate {
         }
       })
     })
-    window.addEventListener('keyup', e => {
+    on('keyup', window, e => {
       switch (e.keyCode) {
         case KEY_CODE.SHIFT:
           this.shiftPressed = false

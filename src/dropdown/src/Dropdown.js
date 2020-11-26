@@ -189,8 +189,8 @@ export default {
       keyboardDelegate.registerHandler(KEY_CODE.LEFT, 'keydown', this.handleKeyDownLeft, {
         preventDefault: true
       })
-      keyboardDelegate.registerHandler(KEY_CODE.ENTER, 'keyup', this.handleKeyUpEnter)
       keyboardDelegate.registerHandler(KEY_CODE.ESC, 'keydown', this.handleKeyDownEsc)
+      keyboardDelegate.registerHandler(KEY_CODE.ENTER, 'keyup', this.handleKeyUpEnter)
     },
     unregisterKeyboardOperations () {
       if (!this.keyboardHandlerRegistered) return
