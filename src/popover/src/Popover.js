@@ -3,17 +3,21 @@ import {
   ref,
   computed,
   watch,
-  Fragment,
   createTextVNode
 } from 'vue'
+import {
+  VBinder,
+  VTarget
+} from 'vueuc'
 import {
   useMergedState,
   useCompitable,
   useIsMounted
 } from 'vooks'
-import { omit, warn } from '../../_utils'
-import { NBaseLazyTeleport } from '../../_base'
+import { call, keep, warn } from '../../_utils'
 import NPopoverBody from './PopoverBody'
+
+const bodyPropKeys = Object.keys(NPopoverBody.props)
 
 function appendEvents (vNode, events) {
   Object.entries(events).forEach(([key, handler]) => {
@@ -137,10 +141,6 @@ export default {
       type: String,
       default: undefined
     },
-    containerClass: {
-      type: String,
-      default: undefined
-    },
     shadow: {
       type: Boolean,
       default: true
@@ -148,16 +148,22 @@ export default {
     // events
     'onUpdate:show': {
       type: Function,
-      default: () => {}
+      default: undefined
     },
     // deprecated
     onShow: {
-      type: Function,
-      default: () => {}
+      validator () {
+        warn('popover', '`on-show` is deprecated, please use `on-update:show` instead.')
+        return true
+      },
+      default: undefined
     },
     onHide: {
-      type: Function,
-      default: () => {}
+      validator () {
+        warn('popover', '`on-hide` is deprecated, please use `on-update:show` instead.')
+        return true
+      },
+      default: undefined
     },
     arrow: {
       type: Boolean,
@@ -202,9 +208,26 @@ export default {
     }
   },
   methods: {
+    doUpdateShow (value) {
+      const {
+        'onUpdate:show': onUpdateShow,
+        onShow,
+        onHide
+      } = this
+      this.uncontrolledShow = value
+      if (onUpdateShow) {
+        call(onUpdateShow, value)
+      }
+      if (value && onShow) {
+        call(onShow, true)
+      }
+      if (value && onHide) {
+        call(onHide, false)
+      }
+    },
     syncPosition () {
       if (this.bodyInstance) {
-        this.bodyInstance.__placeableSyncPosition()
+        this.bodyInstance.syncPosition()
       }
     },
     getTriggerElement () {
@@ -226,8 +249,7 @@ export default {
         this.clearTimer()
         if (this.mergedShow) return
         this.showTimerId = window.setTimeout(() => {
-          this['onUpdate:show'](true)
-          this.uncontrolledShow = true
+          this.doUpdateShow(true)
           this.showTimerId = null
         }, this.delay)
       }
@@ -237,8 +259,7 @@ export default {
         this.clearTimer()
         if (!this.mergedShow) return
         this.hideTimerId = window.setTimeout(() => {
-          this['onUpdate:show'](false)
-          this.uncontrolledShow = false
+          this.doUpdateShow(false)
           this.hideTimerId = null
         }, this.duration)
       }
@@ -252,16 +273,14 @@ export default {
       if (!this.mergedShow) return
       if (this.trigger === 'click') {
         this.clearTimer()
-        this.uncontrolledShow = false
-        this['onUpdate:show'](false)
+        this.doUpdateShow(false)
       }
     },
     handleClick () {
       if (this.trigger === 'click' && !this.disabled) {
         this.clearTimer()
         const nextShow = !this.mergedShow
-        this.uncontrolledShow = nextShow
-        this['onUpdate:show'](nextShow)
+        this.doUpdateShow(nextShow)
       }
     },
     setShow (value) {
@@ -292,24 +311,17 @@ export default {
       this.triggerVNode = triggerVNode
     }
 
-    return h(Fragment, [
-      manuallyPositioned ? null : triggerVNode,
-      h(NBaseLazyTeleport, {
-        to: 'body',
-        show: this.mergedShow,
-        adjustTo: true
-      }, {
-        default: () => {
-          return [
-            h(NPopoverBody, omit(this.$props, [
-              'defaultShow',
-              'disabled'
-            ], {
-              show: this.mergedShow
-            }), slots)
-          ]
-        }
-      })
-    ])
+    return h(VBinder, null, {
+      default: () => {
+        return [
+          manuallyPositioned ? null : h(VTarget, null, {
+            default: () => triggerVNode
+          }),
+          h(NPopoverBody, keep(this.$props, bodyPropKeys, {
+            show: this.mergedShow
+          }), slots)
+        ]
+      }
+    })
   }
 }

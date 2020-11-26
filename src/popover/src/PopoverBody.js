@@ -2,12 +2,16 @@ import {
   h,
   vShow,
   withDirectives,
-  Transition
+  Transition,
+  ref
 } from 'vue'
+import {
+  VFollower
+} from 'vueuc'
 import { clickoutside, mousemoveoutside, zindexable } from '../../_directives'
-import { configurable, themeable, placeable, withCssr } from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import styles from './styles'
-import { formatLength } from '../../_utils'
+import { formatLength, useAdjustedTo } from '../../_utils'
 import { getSlot } from '../../_utils/vue'
 
 export default {
@@ -18,6 +22,7 @@ export default {
       default: null
     }
   },
+  inheritAttrs: false,
   props: {
     show: {
       type: Boolean,
@@ -67,13 +72,13 @@ export default {
       type: Boolean,
       default: undefined
     },
+    placement: {
+      type: String,
+      default: undefined
+    },
     // private
     shadow: {
       type: Boolean,
-      default: undefined
-    },
-    containerClass: {
-      type: String,
       default: undefined
     },
     // deprecated
@@ -88,25 +93,30 @@ export default {
     maxWidth: {
       type: Number,
       default: undefined
+    },
+    animated: {
+      type: Boolean,
+      default: undefined
     }
   },
   mixins: [
     configurable,
     themeable,
-    placeable,
     withCssr(styles)
   ],
-  data () {
+  setup (props) {
     return {
-      __placeableEnabled: this.show
+      adjustedTo: useAdjustedTo(props),
+      followerEnabled: ref(props.show),
+      followerRef: ref(null)
     }
   },
   watch: {
     show (value) {
-      if (value) this.__placeableEnabled = true
+      if (value) this.followerEnabled = true
       else {
         if (!this.animated) {
-          this.__placeableEnabled = false
+          this.followerEnabled = false
         }
       }
     }
@@ -121,12 +131,13 @@ export default {
     useVShow () {
       return this.displayDirective === 'show'
     },
-    animated () {
-      return this.NPopover.animated
-    },
     directives () {
       const { trigger } = this
-      const directives = []
+      const directives = [
+        [zindexable, {
+          enabled: this.show
+        }]
+      ]
       if (trigger === 'click') directives.push([clickoutside, this.handleClickOutside])
       if (trigger === 'hover') directives.push([mousemoveoutside, this.handleMouseMoveOutside])
       if (this.useVShow) directives.push([vShow, this.show])
@@ -142,6 +153,9 @@ export default {
     }
   },
   methods: {
+    syncPosition () {
+      this.followerRef.syncPosition()
+    },
     handleMouseEnter (e) {
       if (this.trigger === 'hover') {
         this.NPopover.handleMouseEnter(e)
@@ -170,19 +184,6 @@ export default {
     },
     getTriggerElement () {
       return this.NPopover.getTriggerElement()
-    },
-    // for placeable mixin
-    __placeableTracked () {
-      return this.NPopover.getTriggerElement()
-    },
-    __placeableTracking () {
-      return this.$refs.bodyWrapper
-    },
-    __placeableBody () {
-      return this.$refs.body
-    },
-    __placeableOffsetContainer () {
-      return this.$refs.container
     }
   },
   render () {
@@ -190,15 +191,14 @@ export default {
       animated
     } = this
     const contentNode = ((this.useVShow || this.show) ? withDirectives(h('div', {
-      'n-placement': this.__placeableAdjustedPlacement,
       class: [
-        'n-popover-body',
+        'n-popover',
         {
           [`n-${this.mergedTheme}-theme`]: this.mergedTheme,
-          'n-popover-body--no-arrow': !this.showArrow,
-          'n-popover-body--shadow': this.shadow,
+          'n-popover--no-arrow': !this.showArrow,
+          'n-popover--shadow': this.shadow,
           [this.bodyClass]: this.bodyClass,
-          'n-popover-body--styled': !this.raw
+          'n-popover--styled': !this.raw
         }
       ],
       ref: 'body',
@@ -220,39 +220,26 @@ export default {
           ])
         : null
     ]), this.directives) : null)
-    return withDirectives(
-      h('div', {
-        class: [
-          'n-positioning-container',
-          {
-            [this.containerClass || 'n-popover']: true,
-            [this.namespace]: this.namespace
-          }
-        ],
-        ref: 'container'
-      }, [
-        h('div', {
-          class: 'n-positioning-content',
-          ref: 'bodyWrapper'
-        }, [
-          animated
-            ? h(Transition, {
-              name: 'popover-body-transition',
-              appear: this.NPopover.isMounted,
-              onAfterLeave: () => {
-                this.__placeableEnabled = false
-              }
-            }, {
-              default: () => contentNode
-            })
-            : contentNode
-        ])
-      ]),
-      [
-        [zindexable, {
-          enabled: this.show
-        }]
-      ]
-    )
+    return h(VFollower, {
+      show: this.show,
+      enabled: this.followerEnabled,
+      to: this.adjustedTo,
+      placement: this.placement,
+      ref: 'followerRef'
+    }, {
+      default: () => {
+        return animated
+          ? h(Transition, {
+            name: 'popover-transition',
+            appear: this.NPopover.isMounted,
+            onAfterLeave: () => {
+              this.followerEnabled = false
+            }
+          }, {
+            default: () => contentNode
+          })
+          : contentNode
+      }
+    })
   }
 }

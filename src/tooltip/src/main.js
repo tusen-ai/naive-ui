@@ -21,8 +21,7 @@ export default {
   render () {
     return h(NPopover, {
       ...this.$props,
-      containerClass: 'n-tooltip',
-      bodyClass: 'n-tooltip-body ' + (this.$props.bodyClass || ''),
+      bodyClass: 'n-tooltip n-popover--tooltip' + (this.$props.bodyClass || ''),
       ref: 'popover'
     }, {
       ...this.$slots
