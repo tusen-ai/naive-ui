@@ -1,194 +1,97 @@
 <template>
-  <div
-    class="n-time-picker"
-    :class="{
-      'n-time-picker--invalid': isValueInvalid,
-      [`n-${mergedTheme}-theme`]: mergedTheme
-    }"
-  >
-    <n-input
-      ref="trackedRef"
-      v-model:value="displayTimeString"
-      class="n-time-picker-input"
-      passively-activated
-      deactivate-on-enter
-      :attr-size="syntheticAttrSize"
-      :theme="mergedTheme"
-      :stateful="stateful"
-      :size="mergedSize"
-      :force-focus="active"
-      :placeholder="localizedPlaceholder"
-      :clearable="clearable"
-      :disabled="disabled"
-      @focus="handleTimeInputFocus"
-      @blur="handleTimeInputBlur"
-      @activate="handleTimeInputActivate"
-      @deactivate="handleTimeInputDeactivate"
-      @click="handleActivatorClick"
-      @input="handleTimeInput"
-      @clear="handleTimeInputClear"
-    >
-      <template v-if="showIcon" #suffix>
-        <n-icon>
-          <time-icon />
-        </n-icon>
-      </template>
-    </n-input>
-    <n-base-lazy-teleport
-      :to="to"
-      :show="active"
-      :disabled="teleportDisabled"
-      adjust-to
-    >
-      <div
-        ref="offsetContainerRef"
-        v-zindexable="{ enabled: active }"
-        class="n-positioning-container"
+  <v-binder>
+    <v-target>
+      <n-input
+        ref="inputRef"
+        v-model:value="displayTimeString"
+        v-bind="$attrs"
+        class="n-time-picker"
         :class="{
-          'n-positioning-container--absolute': position === 'absolute',
-          [namespace]: namespace
+          'n-time-picker--invalid': isValueInvalid,
+          [`n-${mergedTheme}-theme`]: mergedTheme
         }"
+        passively-activated
+        deactivate-on-enter
+        :attr-size="syntheticAttrSize"
+        :theme="mergedTheme"
+        :stateful="stateful"
+        :size="mergedSize"
+        :force-focus="active"
+        :placeholder="localizedPlaceholder"
+        :clearable="clearable"
+        :disabled="disabled"
+        @focus="handleTimeInputFocus"
+        @blur="handleTimeInputBlur"
+        @activate="handleTimeInputActivate"
+        @deactivate="handleTimeInputDeactivate"
+        @input="handleTimeInput"
+        @clear="handleTimeInputClear"
       >
-        <div
-          ref="trackingRef"
-          class="n-positioning-content"
-        >
-          <transition
-            name="n-fade-in-scale-up-transition"
-            :appear="isMounted"
-          >
-            <div
-              v-if="active"
-              ref="panelRef"
-              v-clickoutside="handleClickOutside"
-              tabindex="0"
-              class="n-time-picker-selector"
-              :class="{
-                [`n-${mergedTheme}-theme`]: mergedTheme
-              }"
-              @focus="handleMenuFocus"
-              @keydown="handleMenuKeyDown"
-            >
-              <div class="n-time-picker-selector-time">
-                <div
-                  v-if="formatWithHour"
-                  class="n-time-picker-selector-time-row"
-                  :class="{
-                    'n-time-picker-selector-time-row--invalid': isHourInvalid,
-                    'n-time-picker-selector-time-row--transition-disabled': hourTransitionDisabled
-                  }"
-                >
-                  <n-scrollbar ref="hoursRef" :theme="mergedTheme">
-                    <div
-                      v-for="hour in hours"
-                      :key="hour"
-                      class="n-time-picker-selector-time-row__item"
-                      :class="{
-                        'n-time-picker-selector-time-row__item--active': Number(hour) === computedHour,
-                        'n-time-picker-selector-time-row__item--disabled':
-                          isHourDisabled(hour)
-                      }"
-                      @click="handleHourClick(hour)"
-                    >
-                      {{ hour }}
-                    </div>
-                    <div
-                      style="height: 192px;"
-                    />
-                  </n-scrollbar>
-                </div>
-                <div
-                  v-if="formatWithMinute"
-                  class="n-time-picker-selector-time-row"
-                  :class="{
-                    'n-time-picker-selector-time-row--transition-disabled': minuteTransitionDisabled,
-                    'n-time-picker-selector-time-row--invalid': isMinuteInvalid
-                  }"
-                >
-                  <n-scrollbar ref="minutesRef" :theme="mergedTheme">
-                    <div
-                      v-for="minute in minutes"
-                      :key="minute"
-                      class="n-time-picker-selector-time-row__item"
-                      :class="{
-                        'n-time-picker-selector-time-row__item--active': Number(minute) === computedMinute,
-                        'n-time-picker-selector-time-row__item--disabled': isMinuteDisabled(minute, computedHour)
-                      }"
-                      @click="handleMinuteClick(minute)"
-                    >
-                      {{ minute }}
-                    </div>
-                    <div
-                      style="height: 192px;"
-                    />
-                  </n-scrollbar>
-                </div>
-                <div
-                  v-if="formatWithSecond"
-                  class="n-time-picker-selector-time-row"
-                  :class="{
-                    'n-time-picker-selector-time-row--invalid': isSecondInvalid,
-                    'n-time-picker-selector-time-row--transition-disabled': secondTransitionDisabled,
-                  }"
-                >
-                  <n-scrollbar ref="secondsRef" :theme="mergedTheme">
-                    <div
-                      v-for="second in seconds"
-                      :key="second"
-                      class="n-time-picker-selector-time-row__item"
-                      :class="{
-                        'n-time-picker-selector-time-row__item--active':
-                          Number(second) === computedSecond,
-                        'n-time-picker-selector-time-row__item--disabled': isSecondDisabled(second, computedMinute, computedHour)
-                      }"
-                      @click="handleSecondClick(second)"
-                    >
-                      {{ second }}
-                    </div>
-                    <div
-                      style="height: 192px;"
-                    />
-                  </n-scrollbar>
-                </div>
-              </div>
-              <div class="n-time-picker-selector-actions">
-                <n-button
-                  size="tiny"
-                  :theme="mergedTheme"
-                  @click="handleNowClick"
-                >
-                  {{ localizedNow }}
-                </n-button>
-                <n-button
-                  size="tiny"
-                  type="primary"
-                  class="n-time-picker-selector-actions__confirm"
-                  :theme="mergedTheme"
-                  :disabled="isValueInvalid"
-                  @click="handleConfirmClick"
-                >
-                  {{ localizedPositiveText }}
-                </n-button>
-              </div>
-              <n-base-focus-detector
-                @focus="handleFocusDectorFocus"
-              />
-            </div>
-          </transition>
-        </div>
-      </div>
-    </n-base-lazy-teleport>
-  </div>
+        <template v-if="showIcon" #suffix>
+          <n-icon>
+            <time-icon />
+          </n-icon>
+        </template>
+      </n-input>
+    </v-target>
+    <v-follower
+      :teleport-disabled="teleportDisabled"
+      :show="active"
+      :to="adjustedTo"
+      :container-class="namespace"
+      placement="bottom-start"
+    >
+      <transition
+        name="n-fade-in-scale-up-transition"
+        :appear="isMounted"
+      >
+        <panel
+          v-if="active"
+          ref="panelRef"
+          v-zindexable="{ enabled: active }"
+          v-clickoutside="handleClickOutside"
+          :theme="mergedTheme"
+          :transition-disabled="transitionDisabled"
+          :hour-value="computedHour"
+          :show-hour="formatWithHour"
+          :is-hour-invalid="isHourInvalid"
+          :is-hour-disabled="isHourDisabled"
+          :minute-value="computedMinute"
+          :show-minute="formatWithMinute"
+          :is-minute-invalid="isMinuteInvalid"
+          :is-minute-disabled="isMinuteDisabled"
+          :second-value="computedSecond"
+          :show-second="formatWithSecond"
+          :is-second-invalid="isSecondInvalid"
+          :is-second-disabled="isSecondDisabled"
+          :is-value-invalid="isValueInvalid"
+          :now-text="localizedNow"
+          :confirm-text="localizedPositiveText"
+          @focus="handleMenuFocus"
+          @keydown="handleMenuKeyDown"
+          @hour-click="handleHourClick"
+          @minute-click="handleMinuteClick"
+          @second-click="handleSecondClick"
+          @now-click="handleNowClick"
+          @confirm-click="handleConfirmClick"
+          @focus-detector-focus="handleFocusDetectorFocus"
+        />
+      </transition>
+    </v-follower>
+  </v-binder>
 </template>
 
 <script>
 import { ref } from 'vue'
 import { useIsMounted } from 'vooks'
-import { NBaseLazyTeleport, NBaseFocusDetector } from '../../_base'
-import NScrollbar from '../../scrollbar'
+import {
+  VBinder,
+  VTarget,
+  VFollower
+} from 'vueuc'
 import NInput from '../../input'
 import NIcon from '../../icon'
-import { configurable, themeable, locale, withCssr, asFormItem, placeable } from '../../_mixins'
+import { configurable, themeable, locale, withCssr, asFormItem } from '../../_mixins'
 import { zindexable, clickoutside } from '../../_directives'
 import {
   isValid,
@@ -211,26 +114,18 @@ import {
   TimeIcon
 } from '../../_base/icons'
 import styles from './styles'
-import { warn, call, KEY_CODE } from '../../_utils'
-
-const DEFAULT_FORMAT = 'HH:mm:ss'
-
-const TIME_CONST = {
-  weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-  hours: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'],
-  minutes: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59'],
-  seconds: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59'],
-  period: ['AM', 'PM']
-}
+import { warn, call, useAdjustedTo, KEY_CODE } from '../../_utils'
+import Panel from './Panel.vue'
 
 export default {
   name: 'TimePicker',
   components: {
     NInput,
     NIcon,
-    NScrollbar,
-    NBaseFocusDetector,
-    NBaseLazyTeleport,
+    VBinder,
+    VTarget,
+    VFollower,
+    Panel,
     TimeIcon
   },
   directives: {
@@ -240,11 +135,11 @@ export default {
   mixins: [
     configurable,
     themeable,
-    placeable,
     locale('TimePicker'),
     asFormItem(),
     withCssr(styles)
   ],
+  inheritAttrs: false,
   props: {
     placeholder: {
       type: String,
@@ -260,7 +155,7 @@ export default {
     },
     format: {
       type: String,
-      default: DEFAULT_FORMAT
+      default: 'HH:mm:ss'
     },
     isHourDisabled: {
       type: Function,
@@ -338,33 +233,23 @@ export default {
       default: false
     }
   },
-  setup () {
+  setup (props) {
     return {
       isMounted: useIsMounted(),
-      hoursRef: ref(null),
-      minutesRef: ref(null),
-      secondsRef: ref(null),
-      offsetContainerRef: ref(null),
-      trackingRef: ref(null),
-      trackedRef: ref(null),
-      panelRef: ref(null)
+      inputRef: ref(null),
+      panelRef: ref(null),
+      adjustedTo: useAdjustedTo(props)
     }
   },
   data () {
     return {
       active: false,
       displayTimeString: this.value === null ? null : format(this.value, this.format, this.dateFnsOptions),
-      ...TIME_CONST,
       memorizedValue: this.value,
-      hourTransitionDisabled: false,
-      minuteTransitionDisabled: false,
-      secondTransitionDisabled: false
+      transitionDisabled: false
     }
   },
   computed: {
-    __placeableEnabled () {
-      return this.active
-    },
     localizedNow () {
       return this.localeNs.now
     },
@@ -430,6 +315,7 @@ export default {
   watch: {
     computedTime (value) {
       this.refreshTimeString(value)
+      this.disableTransitionOneTick()
       this.$nextTick(this.scrollTimer)
     },
     active (value) {
@@ -439,18 +325,6 @@ export default {
     }
   },
   methods: {
-    __placeableBody () {
-      return this.panelRef
-    },
-    __placeableOffsetContainer () {
-      return this.offsetContainerRef
-    },
-    __placeableTracking () {
-      return this.trackingRef
-    },
-    __placeableTracked () {
-      return this.trackedRef
-    },
     doChange (value) {
       const {
         'onUpdate:value': onUpdateValue,
@@ -484,8 +358,8 @@ export default {
       this.doChange(null)
       this.refreshTimeString(null)
     },
-    handleFocusDectorFocus () {
-      this.closeTimeSelector({
+    handleFocusDetectorFocus () {
+      this.closePanel({
         returnFocus: true,
         emitBlur: false
       })
@@ -493,7 +367,7 @@ export default {
     handleMenuKeyDown (e) {
       switch (e.keyCode) {
         case KEY_CODE.ESC:
-          this.closeTimeSelector({
+          this.closePanel({
             returnFocus: true,
             emitBlur: false
           })
@@ -504,7 +378,7 @@ export default {
             e.target === this.panelRef
           ) {
             e.preventDefault()
-            this.closeTimeSelector({
+            this.closePanel({
               returnFocus: true,
               emitBlur: false
             })
@@ -512,10 +386,10 @@ export default {
           break
       }
     },
-    disableTransitionOneTick (unit) {
-      this[unit + 'TransitionDisabled'] = true
+    disableTransitionOneTick () {
+      this.transitionDisabled = true
       this.$nextTick(() => {
-        this[unit + 'TransitionDisabled'] = false
+        this.transitionDisabled = false
       })
     },
     justifyValueAfterChangeDisplayTimeString () {
@@ -544,7 +418,6 @@ export default {
         const newValue = getTime(setHours(this.value, hour))
         this.doChange(newValue)
       }
-      this.disableTransitionOneTick('hour')
     },
     handleMinuteClick (minute) {
       if (this.isMinuteDisabled(minute, this.computedHour)) {
@@ -555,7 +428,6 @@ export default {
       } else {
         this.doChange(getTime(setMinutes(this.value, minute)))
       }
-      this.disableTransitionOneTick('minute')
     },
     handleSecondClick (second) {
       if (this.isSecondDisabled(second, this.computedMinute, this.computedHour)) {
@@ -566,7 +438,6 @@ export default {
       } else {
         this.doChange(getTime(setSeconds(this.value, second)))
       }
-      this.disableTransitionOneTick('second')
     },
     refreshTimeString (time) {
       if (time === undefined) time = this.computedTime
@@ -583,13 +454,13 @@ export default {
     },
     handleTimeInputBlur (e) {
       if (this.active) {
-        const panel = this.panelRef
+        const panel = this.panelRef.$el
         if (!(
           panel &&
           panel.contains(e.relatedTarget)
         )) {
           this.doBlur()
-          this.closeTimeSelector({
+          this.closePanel({
             returnFocus: false,
             emitBlur: false
           })
@@ -599,63 +470,59 @@ export default {
     handleTimeInputActivate () {
       if (this.disabled) return
       if (!this.active) {
-        this.openTimeSelector()
+        this.openPanel()
       }
     },
     handleTimeInputDeactivate (e) {
       if (this.disabled) return
       this.refreshTimeString()
-      this.closeTimeSelector({
+      this.closePanel({
         returnFocus: false,
         emitBlur: false
       })
     },
     scrollTimer () {
-      if (this.hoursRef && this.hoursRef.contentRef) {
-        const hour = this.hoursRef.contentRef.querySelector('.n-time-picker-selector-time-row__item--active')
-        if (hour) {
-          this.hoursRef.scrollTo({ top: hour.offsetTop })
-        }
+      const { panelRef } = this
+      if (!panelRef) return
+      const {
+        hoursRef,
+        minutesRef,
+        secondsRef
+      } = panelRef
+      const hour = hoursRef.contentRef.querySelector('[active]')
+      if (hour) {
+        hoursRef.scrollTo({ top: hour.offsetTop })
       }
-      if (this.minutesRef && this.minutesRef.contentRef) {
-        const minute = this.minutesRef.contentRef.querySelector('.n-time-picker-selector-time-row__item--active')
-        if (minute) {
-          this.minutesRef.scrollTo({ top: minute.offsetTop })
-        }
+      const minute = minutesRef.contentRef.querySelector('[active]')
+      if (minute) {
+        minutesRef.scrollTo({ top: minute.offsetTop })
       }
-      if (this.secondsRef && this.secondsRef.contentRef) {
-        const second = this.secondsRef.contentRef.querySelector('.n-time-picker-selector-time-row__item--active')
-        if (second) {
-          this.secondsRef.scrollTo({ top: second.offsetTop })
-        }
+      const second = secondsRef.contentRef.querySelector('[active]')
+      if (second) {
+        secondsRef.scrollTo({ top: second.offsetTop })
       }
     },
-    openTimeSelector () {
+    openPanel () {
       this.memorizedValue = this.value
       this.active = true
       this.$nextTick(this.scrollTimer)
     },
-    handleActivatorClick (e) {
-      if (!this.active) {
-        this.openTimeSelector()
-      }
-    },
     handleClickOutside (e) {
-      if (this.active && !this.trackedRef.$el.contains(e.target)) {
-        this.closeTimeSelector({
+      if (this.active && !this.inputRef.$el.contains(e.target)) {
+        this.closePanel({
           returnFocus: false,
           emitBlur: true
         })
       }
     },
-    closeTimeSelector ({
+    closePanel ({
       returnFocus,
       emitBlur
     }) {
       if (this.active) {
         this.active = false
         if (returnFocus) {
-          this.trackedRef.focus()
+          this.inputRef.focus()
         }
         if (emitBlur) {
           const {
@@ -696,7 +563,7 @@ export default {
         return
       }
       this.refreshTimeString()
-      this.closeTimeSelector({
+      this.closePanel({
         returnFocus: true,
         emitBlur: false
       })
@@ -706,9 +573,9 @@ export default {
       if (
         keyboardDelegate.tabPressed &&
         e.target === panel &&
-        panel.contains(e.relatedTarget)
+        panel.$el.contains(e.relatedTarget)
       ) {
-        this.closeTimeSelector({
+        this.closePanel({
           returnFocus: true,
           emitBlur: false
         })

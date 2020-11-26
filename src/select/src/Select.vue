@@ -37,6 +37,7 @@
       />
     </v-target>
     <v-follower
+      ref="followerRef"
       :show="mergedShow"
       :to="adjustedTo"
       :container-class="namespace"

@@ -557,12 +557,7 @@ export default {
       this.doInputFocus(e)
       this.focused = true
       this.inputFocused = true
-      const {
-        wrapper
-      } = this.$refs
-      if (e.relatedTarget === wrapper) {
-        this.doActivate()
-      }
+      this.doActivate()
       this.dealWithEvent(e, 'focus')
     },
     handleWrapperBlur (e) {
