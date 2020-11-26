@@ -1,5 +1,5 @@
 import { h, withDirectives, Transition, ref, computed } from 'vue'
-import { zindexable } from '../../_directives'
+import { zindexable } from 'vdirs'
 import { configurable, themeable, withCssr } from '../../_mixins'
 import presetProps from './presetProps'
 import { useIsMounted, useClicked, useClickPosition } from 'vooks'

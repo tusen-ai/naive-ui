@@ -6,7 +6,6 @@
     <div
       v-if="show"
       v-clickoutside="handleClickOutside"
-      v-zindexable="{ enabled: show }"
       class="n-cascader-menu"
       :class="{
         [`n-${theme}-theme`]: theme,
@@ -32,12 +31,11 @@
 </template>
 <script>
 import { ref } from 'vue'
+import {
+  clickoutside
+} from 'vdirs'
 import { NBaseMenuMask } from '../../_base'
 import NCascaderSubmenu from './CascaderSubmenu.vue'
-import {
-  zindexable,
-  clickoutside
-} from '../../_directives'
 
 export default {
   name: 'NCascaderMenu',
@@ -46,7 +44,6 @@ export default {
     NBaseMenuMask
   },
   directives: {
-    zindexable,
     clickoutside
   },
   inject: {

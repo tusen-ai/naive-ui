@@ -90,9 +90,10 @@
     "highlight.js": "^9.18.1",
     "lodash-es": "^4.17.15",
     "treemate": "^0.1.11",
+    "vdirs": "^0.0.1",
     "vfonts": "^0.0.1",
     "vooks": "^0.0.1",
     "vue": "^3.0.2",
-    "vueuc": "^0.1.0-alpha.17"
+    "vueuc": "^0.1.0-alpha.19"
   }
 }

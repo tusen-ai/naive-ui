@@ -42,7 +42,7 @@ import {
   themeable,
   withCssr
 } from '../../_mixins'
-import { zindexable } from '../../_directives'
+import { zindexable } from 'vdirs'
 import { warn, formatLength } from '../../_utils'
 import { useCompitable, useIsMounted } from 'vooks'
 import { NBaseLazyTeleport } from '../../_base'

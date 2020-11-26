@@ -87,7 +87,6 @@
           v-if="type === 'datetime' && active"
           ref="panelRef"
           v-clickoutside="handleClickOutside"
-          v-zindexable="{ enabled: active }"
           :value="value"
           :active="active"
           :actions="actions"
@@ -103,7 +102,6 @@
           v-else-if="type === 'date' && active"
           ref="panelRef"
           v-clickoutside="handleClickOutside"
-          v-zindexable="{ enabled: active }"
           :value="value"
           :active="active"
           :actions="actions"
@@ -118,7 +116,6 @@
           v-else-if="type === 'daterange' && active"
           ref="panelRef"
           v-clickoutside="handleClickOutside"
-          v-zindexable="{ enabled: active }"
           :value="value"
           :active="active"
           :actions="actions"
@@ -133,7 +130,6 @@
           v-else-if="type === 'datetimerange' && active"
           ref="panelRef"
           v-clickoutside="handleClickOutside"
-          v-zindexable="{ enabled: active }"
           :format="computedFormat"
           :value="value"
           :active="active"
@@ -160,16 +156,15 @@ import {
   VFollower
 } from 'vueuc'
 import {
+  clickoutside
+} from 'vdirs'
+import {
   configurable,
   themeable,
   asFormItem,
   withCssr,
   locale
 } from '../../_mixins'
-import {
-  clickoutside,
-  zindexable
-} from '../../_directives'
 import { warn, call, useAdjustedTo } from '../../_utils'
 import { useIsMounted } from 'vooks'
 
@@ -206,8 +201,7 @@ const DATE_FORMAT = {
 export default {
   name: 'DatePicker',
   directives: {
-    clickoutside,
-    zindexable
+    clickoutside
   },
   components: {
     VBinder,

@@ -112,7 +112,7 @@ import {
 } from '../../_mixins'
 import {
   zindexable
-} from '../../_directives'
+} from 'vdirs'
 import styles from './styles'
 import { warn } from '../../_utils/naive'
 import { call } from '../../_utils/vue'

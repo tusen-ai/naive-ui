@@ -34,6 +34,7 @@
       :show="active"
       :to="adjustedTo"
       :container-class="namespace"
+      :z-index="zIndex"
       placement="bottom-start"
       width="target"
     >
@@ -45,10 +46,6 @@
           v-if="active"
           ref="menuRef"
           v-clickoutside="handleClickOutsideMenu"
-          v-zindexable="{
-            enabled: active,
-            zIndex
-          }"
           auto-pending
           class="n-auto-complete-menu"
           :theme="mergedTheme"
@@ -78,9 +75,8 @@ import {
   withCssr
 } from '../../_mixins'
 import {
-  clickoutside,
-  zindexable
-} from '../../_directives'
+  clickoutside
+} from 'vdirs'
 import { call, warn, useAdjustedTo } from '../../_utils'
 import { useIsMounted } from 'vooks'
 import {
@@ -100,8 +96,7 @@ export default {
     VFollower
   },
   directives: {
-    clickoutside,
-    zindexable
+    clickoutside
   },
   mixins: [
     configurable,

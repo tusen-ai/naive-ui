@@ -53,9 +53,6 @@
           v-if="mergedShow"
           ref="menuRef"
           v-clickoutside="handleMenuClickOutside"
-          v-zindexable="{
-            enabled: mergedShow
-          }"
           class="n-select-menu"
           auto-pending
           :theme="mergedTheme"
@@ -93,16 +90,15 @@ import {
   useCompitable
 } from 'vooks'
 import {
+  clickoutside
+} from 'vdirs'
+import {
   configurable,
   themeable,
   asFormItem,
   locale,
   withCssr
 } from '../../_mixins'
-import {
-  clickoutside,
-  zindexable
-} from '../../_directives'
 import {
   warn, call, useAdjustedTo
 } from '../../_utils'
@@ -152,8 +148,7 @@ export default {
     VTarget
   },
   directives: {
-    clickoutside,
-    zindexable
+    clickoutside
   },
   mixins: [
     configurable,

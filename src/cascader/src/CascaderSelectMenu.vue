@@ -7,7 +7,6 @@
       v-if="show"
       ref="menuRef"
       v-clickoutside="handleClickOutside"
-      v-zindexable="{ enabled: show }"
       class="n-cascader-menu"
       auto-pending
       :theme="theme"
@@ -23,13 +22,12 @@
 
 <script>
 import { ref, inject, toRef } from 'vue'
+import {
+  clickoutside
+} from 'vdirs'
 import { createTreeMate } from 'treemate'
 import { NBaseSelectMenu } from '../../_base'
 import { createSelectOptions } from './utils'
-import {
-  zindexable,
-  clickoutside
-} from '../../_directives'
 
 export default {
   name: 'NCascaderSelectMenu',
@@ -37,7 +35,6 @@ export default {
     NBaseSelectMenu
   },
   directives: {
-    zindexable,
     clickoutside
   },
   props: {

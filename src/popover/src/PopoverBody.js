@@ -8,7 +8,7 @@ import {
 import {
   VFollower
 } from 'vueuc'
-import { clickoutside, mousemoveoutside, zindexable } from '../../_directives'
+import { clickoutside, mousemoveoutside } from 'vdirs'
 import { configurable, themeable, withCssr } from '../../_mixins'
 import styles from './styles'
 import { formatLength, useAdjustedTo } from '../../_utils'
@@ -133,11 +133,7 @@ export default {
     },
     directives () {
       const { trigger } = this
-      const directives = [
-        [zindexable, {
-          enabled: this.show
-        }]
-      ]
+      const directives = []
       if (trigger === 'click') directives.push([clickoutside, this.handleClickOutside])
       if (trigger === 'hover') directives.push([mousemoveoutside, this.handleMouseMoveOutside])
       if (this.useVShow) directives.push([vShow, this.show])

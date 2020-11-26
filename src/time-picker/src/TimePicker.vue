@@ -48,7 +48,6 @@
         <panel
           v-if="active"
           ref="panelRef"
-          v-zindexable="{ enabled: active }"
           v-clickoutside="handleClickOutside"
           :theme="mergedTheme"
           :transition-disabled="transitionDisabled"
@@ -89,10 +88,10 @@ import {
   VTarget,
   VFollower
 } from 'vueuc'
+import { clickoutside } from 'vdirs'
 import NInput from '../../input'
 import NIcon from '../../icon'
 import { configurable, themeable, locale, withCssr, asFormItem } from '../../_mixins'
-import { zindexable, clickoutside } from '../../_directives'
 import {
   isValid,
   startOfSecond,
@@ -129,8 +128,7 @@ export default {
     TimeIcon
   },
   directives: {
-    clickoutside,
-    zindexable
+    clickoutside
   },
   mixins: [
     configurable,
