@@ -1,6 +1,6 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
-import { composite } from '../../_utils/color'
+import { composite } from 'seemly'
 
 export default create({
   theme: 'light',

@@ -1,5 +1,5 @@
 import { c, cE, cM, cTB, createKey } from '../../../_utils/cssr'
-import { depx, pxfy } from '../../../_utils/css'
+import { depx, pxfy } from 'seemly'
 
 export default c([
   ({ props }) => {

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import getScrollParent from '../../_utils/dom/get-scroll-parent'
+import { getScrollParent } from 'seemly'
 import { withCssr } from '../../_mixins'
 import styles from './styles/index.js'
 import getTarget from '../../_utils/dom/get-target'

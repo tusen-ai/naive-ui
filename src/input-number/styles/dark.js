@@ -1,5 +1,5 @@
 import create from '../../_styles/utils/create-component-base'
-import { changeColor } from '../../_utils/color'
+import { changeColor } from 'seemly'
 import inputCommonVariables from '../../input/styles/_common'
 import inputNumberCommonVariables from './_common'
 

@@ -193,6 +193,7 @@
 import { ref } from 'vue'
 import { VirtualList } from 'vueuc'
 import { useIsMounted } from 'vooks'
+import { depx } from 'seemly'
 import NScrollbar from '../../scrollbar'
 import NTransferHeaderCheckbox from './TransferHeaderCheckbox.vue'
 import NTransferHeaderExtra from './TransferHeaderExtra.vue'
@@ -213,7 +214,6 @@ import {
   locale
 } from '../../_mixins'
 import styles from './styles'
-import { depx } from '../../_utils/css'
 import { createKey } from '../../_utils/cssr'
 import { warn, call } from '../../_utils'
 import { data } from './data-utils'

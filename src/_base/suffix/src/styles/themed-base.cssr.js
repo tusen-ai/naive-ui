@@ -1,8 +1,5 @@
 import { cTB, c, cB, cE, cM, insideFormItem, createKey } from '../../../../_utils/cssr'
-import {
-  depx,
-  pxfy
-} from '../../../../_utils/css'
+import { depx, pxfy } from 'seemly'
 import fadeInScaleUpTransition from '../../../../_styles/transitions/fade-in-scale-up'
 import createIconSwitchTransition from '../../../../_styles/transitions/icon-switch'
 

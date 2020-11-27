@@ -12,11 +12,6 @@ export {
   debug
 } from './naive'
 export {
-  pxfy,
-  depx,
   formatLength
 } from './css'
 export * from './composable'
-export {
-  nextFrame
-} from './misc'

@@ -1,5 +1,5 @@
 import create from '../../_styles/utils/create-component-base'
-import { composite } from '../../_utils/color/index'
+import { composite } from 'seemly'
 
 export default create({
   name: 'Layout',

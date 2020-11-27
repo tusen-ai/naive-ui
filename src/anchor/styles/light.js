@@ -1,5 +1,5 @@
 import create from '../../_styles/utils/create-component-base'
-import { changeColor } from '../../../src/_utils/color/index'
+import { changeColor } from 'seemly'
 
 export default create({
   theme: 'light',

@@ -1,6 +1,6 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
-import { composite } from '../../_utils/color'
+import { composite } from 'seemly'
 import checkboxStyle from '../../checkbox/styles/light'
 
 export default create({

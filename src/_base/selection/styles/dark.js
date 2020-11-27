@@ -1,6 +1,6 @@
 import create from '../../../_styles/utils/create-component-base'
 import commonVariables from './_common'
-import { changeColor } from '../../../_utils/color/index.js'
+import { changeColor } from 'seemly'
 import suffixStyle from '../../suffix/styles/light'
 
 export default create({

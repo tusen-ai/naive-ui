@@ -1,6 +1,6 @@
 import { cTB, c, cB, cM, cE, insideModal } from '../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up'
-import { depx, pxfy } from '../../../_utils/css'
+import { depx, pxfy } from 'seemly'
 
 export default c([
   ({ props }) => {

@@ -63,6 +63,7 @@
 
 <script>
 import { ref } from 'vue'
+import { nextFrame } from 'seemly'
 import {
   configurable,
   themeable,
@@ -75,7 +76,7 @@ import NEmpty from '../../empty'
 import NPagination from '../../pagination'
 import { isPlainObject } from 'lodash-es'
 import styles from './styles'
-import { warn, call, formatLength, nextFrame } from '../../_utils'
+import { warn, call, formatLength } from '../../_utils'
 
 function createShallowClonedObject (object) {
   if (!object) return object

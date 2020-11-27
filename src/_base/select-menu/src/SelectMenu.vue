@@ -78,11 +78,12 @@
 <script>
 import { ref, onMounted, computed } from 'vue'
 import { VirtualList } from 'vueuc'
+import { depx } from 'seemly'
 import NScrollbar from '../../../scrollbar'
 import NSelectOption from './SelectOption.js'
 import NSelectGroupHeader from './SelectGroupHeader.js'
 import NEmpty from '../../../empty'
-import { depx, formatLength } from '../../../_utils'
+import { formatLength } from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
 import { withCssr } from '../../../_mixins'
 import styles from './styles'

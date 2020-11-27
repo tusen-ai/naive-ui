@@ -1,7 +1,7 @@
 import { c, cTB, cB, cE, cM } from '../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up'
 import iconSwitchTransition from '../../../_styles/transitions/icon-switch'
-import { depx, pxfy } from '../../../_utils/css'
+import { depx, pxfy } from 'seemly'
 
 export default
 c([

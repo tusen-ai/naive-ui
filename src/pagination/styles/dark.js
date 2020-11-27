@@ -1,5 +1,5 @@
 import create from '../../_styles/utils/create-component-base'
-import { changeColor } from '../../_utils/color/index'
+import { changeColor } from 'seemly'
 import { baseDark, selectDark, inputDark, iconDark } from '../../styles'
 import commonVariables from './_common.js'
 

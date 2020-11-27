@@ -25,7 +25,7 @@
 
 <script>
 import { nextTick, ref, markRaw, getCurrentInstance } from 'vue'
-import getScrollParent from '../../_utils/dom/get-scroll-parent'
+import { getScrollParent } from 'seemly'
 import {
   configurable,
   themeable,

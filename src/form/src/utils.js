@@ -8,7 +8,7 @@ import {
 } from 'lodash-es'
 import {
   pxfy
-} from '../../_utils/css'
+} from 'seemly'
 
 export function formItemSize (props) {
   const NForm = inject('NForm')

@@ -43,7 +43,7 @@
 <script>
 import { ref, computed, toRef, watch, nextTick } from 'vue'
 import { useIsMounted, useMergedState } from 'vooks'
-import getScrollParent from '../../_utils/dom/get-scroll-parent'
+import { getScrollParent } from 'seemly'
 import {
   configurable,
   themeable,

@@ -1,5 +1,5 @@
 import create from '../utils/create-theme-base.js'
-import { read, composite } from '../../_utils/color/index.js'
+import { rgba, composite } from 'seemly'
 import commonVariables from './_common.js'
 
 export default create({
@@ -77,8 +77,8 @@ export default create({
     }, commonVariables)
   },
   getDerivedVariables (base) {
-    const baseBackgroundRgb = read(base.neutralBase)
-    const baseInvertBackgroundRgb = read(base.neutralInvertBase)
+    const baseBackgroundRgb = rgba(base.neutralBase)
+    const baseInvertBackgroundRgb = rgba(base.neutralInvertBase)
     const overlayPrefix = 'rgba(' + baseInvertBackgroundRgb.slice(0, 3).join(', ') + ', '
     function overlay (alpha) {
       return overlayPrefix + String(alpha) + ')'
