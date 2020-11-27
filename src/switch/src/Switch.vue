@@ -27,11 +27,9 @@ import {
   withCssr
 } from '../../_mixins'
 import {
-  call
-} from '../../_utils/vue'
-import {
+  call,
   warn
-} from '../../_utils/naive'
+} from '../../_utils'
 import styles from './styles'
 
 export default {

@@ -79,8 +79,9 @@ import {
   asFormItem,
   locale
 } from '../../_mixins'
+import { createId } from 'seemly'
 import styles from './styles'
-import { warn, call, createId } from '../../_utils'
+import { warn, call } from '../../_utils'
 import { useMergedState } from 'vooks'
 
 const globalDataKeyMap = new WeakMap()

@@ -8,7 +8,7 @@ import {
 import NPopover from '../../popover'
 import NDropdownMenu from './DropdownMenu.js'
 import { useMergedState, useFalseUntilTruthy, useKeyboard, useMemo } from 'vooks'
-import { keep, call } from '../../_utils/vue'
+import { keep, call } from '../../_utils'
 import styles from './styles'
 
 const treemateOptions = {

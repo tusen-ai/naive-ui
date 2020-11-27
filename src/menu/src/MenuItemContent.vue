@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { render } from '../../_utils/vue'
+import { render } from '../../_utils'
 
 export default {
   name: 'MenuItemContent',

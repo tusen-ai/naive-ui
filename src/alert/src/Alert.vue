@@ -75,7 +75,7 @@ import {
   themeable,
   withCssr
 } from '../../_mixins'
-import { warn } from '../../_utils/naive'
+import { warn } from '../../_utils'
 import styles from './styles'
 
 // icons

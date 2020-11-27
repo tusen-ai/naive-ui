@@ -8,7 +8,7 @@ import {
   CloseIcon
 } from '../../_base/icons'
 import { NIconSwitchTransition, NBaseLoading } from '../../_base'
-import { render } from '../../_utils/vue'
+import { render } from '../../_utils'
 import {
   configurable,
   themeable,

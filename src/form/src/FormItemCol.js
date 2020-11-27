@@ -1,7 +1,7 @@
 import { h, ref } from 'vue'
 import NFormItem from './FormItem.vue'
 import NCol from '../../grid/src/Col.vue'
-import { keep } from '../../_utils/vue'
+import { keep } from '../../_utils'
 
 const formItemPropsKey = Object.keys(NFormItem.props)
 const colPropsKey = Object.keys(NCol.props)

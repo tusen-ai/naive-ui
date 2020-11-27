@@ -11,8 +11,7 @@ import {
 import { clickoutside, mousemoveoutside } from 'vdirs'
 import { configurable, themeable, withCssr } from '../../_mixins'
 import styles from './styles'
-import { formatLength, useAdjustedTo } from '../../_utils'
-import { getSlot } from '../../_utils/vue'
+import { formatLength, useAdjustedTo, getSlot } from '../../_utils'
 
 export default {
   name: 'PopoverBody',

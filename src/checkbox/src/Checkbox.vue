@@ -59,12 +59,11 @@ import {
   asFormItem,
   withCssr
 } from '../../_mixins'
-import { render } from '../../_utils/vue'
 import CheckMark from './CheckMark.vue'
 import LineMark from './LineMark.vue'
 import { NIconSwitchTransition } from '../../_base'
 import styles from './styles'
-import { warn, call } from '../../_utils'
+import { warn, call, render } from '../../_utils'
 
 export default {
   name: 'Checkbox',

@@ -7,7 +7,7 @@ import {
   startOfMonth,
   isValid
 } from 'date-fns'
-import { warn } from '../../../_utils/naive'
+import { warn } from '../../../_utils'
 import { dateArray } from '../utils'
 import commonCalendarMixin from './commonCalendarMixin'
 

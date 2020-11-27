@@ -25,15 +25,14 @@
 
 <script>
 import { nextTick, ref, markRaw, getCurrentInstance } from 'vue'
-import { getScrollParent } from 'seemly'
+import { getScrollParent, unwrapElement } from 'seemly'
 import {
   configurable,
   themeable,
   withCssr
 } from '../../_mixins'
 import { onFontsReady } from 'vooks'
-import { warn } from '../../_utils/naive/warn'
-import getTarget from '../../_utils/dom/get-target'
+import { warn } from '../../_utils'
 import styles from './styles'
 
 function getOffset (el, container) {
@@ -263,7 +262,7 @@ export default {
         // deprecated
         scrollElement = getScrollTarget()
       } else if (listenTo) {
-        scrollElement = getTarget(listenTo)
+        scrollElement = unwrapElement(listenTo)
       } else {
         scrollElement = getScrollParent(this.$el)
       }

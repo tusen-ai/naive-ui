@@ -1,5 +1,6 @@
 import { Fragment, h, reactive, ref } from 'vue'
-import { createId, omit } from '../../_utils/vue'
+import { createId } from 'seemly'
+import { omit } from '../../_utils'
 import { NBaseTeleport } from '../../_base'
 import NotificationContainer from './NotificationContainer.vue'
 import NotificationEnvironment from './NotificationEnvironment'

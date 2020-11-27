@@ -1,5 +1,5 @@
 import { h } from 'vue'
-import { flatten, getSlot } from '../../_utils/vue'
+import { flatten, getSlot } from '../../_utils'
 import {
   configurable,
   themeable

@@ -16,8 +16,7 @@ import {
 import NTreeNode from './TreeNode'
 import { keysWithFilter } from './utils'
 import styles from './styles'
-import { call } from '../../_utils/vue'
-import { warn } from '../../_utils/naive'
+import { call, warn } from '../../_utils'
 
 export default {
   name: 'Tree',

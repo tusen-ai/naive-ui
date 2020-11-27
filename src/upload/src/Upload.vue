@@ -40,13 +40,13 @@
 </template>
 
 <script>
+import { createId } from 'seemly'
 import {
   configurable,
   themeable,
   withCssr
 } from '../../_mixins'
-import { warn } from '../../_utils/naive'
-import { createId } from '../../_utils/vue'
+import { warn } from '../../_utils'
 import NUploadFile from './UploadFile.vue'
 import { NFadeInExpandTransition } from '../../_base'
 import styles from './styles'

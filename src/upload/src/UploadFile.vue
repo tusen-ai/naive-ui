@@ -66,7 +66,7 @@ import {
 } from '../../_base/icons'
 import NIcon from '../../icon'
 import { NIconSwitchTransition } from '../../_base'
-import { warn } from '../../_utils/naive'
+import { warn } from '../../_utils'
 
 export default {
   name: 'UploadFile',

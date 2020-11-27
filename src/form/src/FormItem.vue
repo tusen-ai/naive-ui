@@ -91,6 +91,7 @@
 <script>
 import Schema from 'async-validator'
 import { get } from 'lodash-es'
+import { createId } from 'seemly'
 import {
   configurable,
   themeable,
@@ -98,8 +99,7 @@ import {
   registerable
 } from '../../_mixins'
 import styles from './styles'
-import { warn } from '../../_utils/naive'
-import { createId } from '../../_utils/vue'
+import { warn } from '../../_utils'
 import {
   formItemMisc,
   formItemSize,

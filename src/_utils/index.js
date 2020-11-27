@@ -2,7 +2,8 @@ export {
   call,
   keep,
   omit,
-  createId,
+  flatten,
+  getSlot,
   getVNodeChildren,
   render
 } from './vue'

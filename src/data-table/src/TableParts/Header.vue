@@ -88,7 +88,7 @@
 import SortButton from '../HeaderButton/SortButton.vue'
 import FilterButton from '../HeaderButton/FilterButton.vue'
 import { createCustomWidthStyle } from '../utils'
-import { render } from '../../../_utils/vue'
+import { render } from '../../../_utils'
 
 function isColumnSortable (column) {
   return !!column.sorter

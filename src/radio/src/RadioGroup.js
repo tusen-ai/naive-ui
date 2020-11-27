@@ -5,8 +5,7 @@ import {
   asFormItem,
   withCssr
 } from '../../_mixins'
-import { getSlot, flatten } from '../../_utils/vue'
-import { warn } from '../../_utils/naive/warn'
+import { getSlot, flatten, warn } from '../../_utils'
 import styles from './styles/radio-group/index.js'
 
 function mapSlot (h, defaultSlot, groupInstance) {

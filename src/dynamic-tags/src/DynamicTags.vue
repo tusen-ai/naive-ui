@@ -55,8 +55,7 @@ import {
 } from '../../_mixins'
 import commonProps from '../../tag/src/common-props'
 import styles from './styles'
-import { call } from '../../_utils/vue'
-import { warn } from '../../_utils/naive'
+import { warn, call } from '../../_utils'
 
 export default {
   name: 'DynamicTags',

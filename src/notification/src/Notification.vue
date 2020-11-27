@@ -61,7 +61,7 @@ import {
   themeable,
   withCssr
 } from '../../_mixins'
-import { render } from '../../_utils/vue'
+import { render } from '../../_utils'
 import styles from './styles'
 import NIcon from '../../icon'
 import {

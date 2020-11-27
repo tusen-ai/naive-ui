@@ -1,7 +1,7 @@
 import { h } from 'vue'
 import NPopover from '../../popover'
 import NPopselectPanel from './PopselectPanel.vue'
-import { omit, keep } from '../../_utils/vue'
+import { omit, keep } from '../../_utils'
 
 const NPopselectPanelPropsKey = Object.keys(NPopselectPanel.props)
 

@@ -1,7 +1,6 @@
 import { h } from 'vue'
-import themeable from '../../_mixins/themeable'
-import { getSlot } from '../../_utils/vue'
-import { warn } from '../../_utils/naive/warn'
+import { themeable } from '../../_mixins'
+import { warn, getSlot } from '../../_utils'
 
 export default {
   name: 'ConfigProvider',

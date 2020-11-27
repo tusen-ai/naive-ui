@@ -4,7 +4,7 @@ import {
   VTarget,
   VFollower
 } from 'vueuc'
-import { render } from '../../_utils/vue'
+import { render } from '../../_utils'
 import { ChevronRightIcon } from '../../_base/icons'
 import NIcon from '../../icon'
 import { useMemo } from 'vooks'

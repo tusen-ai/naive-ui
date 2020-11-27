@@ -1,5 +1,5 @@
 import { h } from 'vue'
-import { render } from '../../_utils/vue'
+import { render } from '../../_utils'
 import { itemRenderer } from './utils'
 import menuChildMixin from './menu-child-mixin'
 

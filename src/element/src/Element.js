@@ -6,7 +6,7 @@ import {
 } from '../../_mixins'
 import styleScheme from '../../_deprecated/style-scheme'
 import style from './styles'
-import { warn } from '../../_utils/naive/warn'
+import { warn } from '../../_utils'
 
 export default {
   name: 'Element',

@@ -1,5 +1,5 @@
 import { h, withDirectives, vShow } from 'vue'
-import { getSlot } from '../../_utils/vue'
+import { getSlot } from '../../_utils'
 
 export default {
   name: 'TabPane',

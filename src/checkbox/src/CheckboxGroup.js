@@ -4,8 +4,7 @@ import {
   themeable,
   asFormItem
 } from '../../_mixins'
-import { getSlot } from '../../_utils/vue'
-import { warn, call } from '../../_utils'
+import { warn, call, getSlot } from '../../_utils'
 
 export default {
   name: 'CheckboxGroup',

@@ -12,11 +12,10 @@
 </template>
 
 <script>
-import { getScrollParent } from 'seemly'
+import { getScrollParent, unwrapElement } from 'seemly'
 import { withCssr } from '../../_mixins'
 import styles from './styles/index.js'
-import getTarget from '../../_utils/dom/get-target'
-import { warn } from '../../_utils/naive/warn'
+import { warn } from '../../_utils'
 
 export default {
   name: 'Affix',
@@ -113,7 +112,7 @@ export default {
         // deprecated
         scrollElement = getScrollTarget()
       } else if (listenTo) {
-        scrollElement = getTarget(listenTo)
+        scrollElement = unwrapElement(listenTo)
       } else {
         scrollElement = getScrollParent(this.$el)
       }

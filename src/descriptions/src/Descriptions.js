@@ -5,8 +5,7 @@ import {
   withCssr
 } from '../../_mixins'
 import styles from './styles'
-import { warn } from '../../_utils/naive/warn'
-import { getSlot, getVNodeChildren } from '../../_utils/vue'
+import { warn, getSlot, getVNodeChildren } from '../../_utils'
 import { useCompitable } from 'vooks'
 import { isDescriptionsItem } from './utils'
 

@@ -1,5 +1,5 @@
 import { h } from 'vue'
-import { keep } from '../../_utils/vue'
+import { keep } from '../../_utils'
 import NMenuItemGroup from './MenuItemGroup'
 import NSubmenu from './Submenu'
 import NMenuItem from './MenuItem.vue'

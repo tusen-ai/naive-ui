@@ -1,6 +1,5 @@
 export { getSlot } from './get-slot'
 export { getVNodeChildren } from './get-v-node-children'
-export { createId } from './create-id'
 export { keep } from './keep'
 export { omit } from './omit'
 export { flatten } from './flatten'

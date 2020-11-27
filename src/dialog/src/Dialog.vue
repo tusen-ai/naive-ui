@@ -73,7 +73,7 @@ import {
   themeable,
   withCssr
 } from '../../_mixins'
-import { render } from '../../_utils/vue'
+import { render } from '../../_utils'
 import NIcon from '../../icon'
 import NButton from '../../button'
 import {

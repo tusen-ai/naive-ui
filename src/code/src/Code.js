@@ -5,7 +5,7 @@ import {
   withCssr
 } from '../../_mixins'
 import styles from './styles/index.js'
-import { warn } from '../../_utils/naive/warn'
+import { warn } from '../../_utils'
 
 export default {
   name: 'Code',

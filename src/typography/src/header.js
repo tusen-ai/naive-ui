@@ -4,7 +4,7 @@ import {
   themeable,
   withCssr
 } from '../../_mixins'
-import { getSlot } from '../../_utils/vue'
+import { getSlot } from '../../_utils'
 import styles from './styles/header'
 
 export default level => ({

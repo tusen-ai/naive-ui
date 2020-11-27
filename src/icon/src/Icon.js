@@ -5,8 +5,7 @@ import {
   withCssr
 } from '../../_mixins'
 import styles from './styles/index'
-import { formatLength } from '../../_utils'
-import { getSlot } from '../../_utils/vue'
+import { formatLength, getSlot } from '../../_utils'
 
 export default {
   __NAIVE_ICON__: true,

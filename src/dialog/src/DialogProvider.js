@@ -1,5 +1,6 @@
 import { Fragment, ref, h, reactive } from 'vue'
-import { createId, omit } from '../../_utils/vue'
+import { createId } from 'seemly'
+import { omit } from '../../_utils'
 import DialogEnvironment from './DialogEnvironment.vue'
 import { useClicked, useClickPosition } from 'vooks'
 

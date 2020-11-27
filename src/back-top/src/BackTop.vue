@@ -43,7 +43,7 @@
 <script>
 import { ref, computed, toRef, watch, nextTick } from 'vue'
 import { useIsMounted, useMergedState } from 'vooks'
-import { getScrollParent } from 'seemly'
+import { getScrollParent, unwrapElement } from 'seemly'
 import {
   configurable,
   themeable,
@@ -51,7 +51,6 @@ import {
 } from '../../_mixins'
 import { formatLength, warn } from '../../_utils'
 import styles from './styles'
-import getTarget from '../../_utils/dom/get-target'
 import { NBaseLazyTeleport } from '../../_base'
 import BackTopIcon from './BackTopIcon.vue'
 
@@ -174,7 +173,7 @@ export default {
       this.scrollListenerRegistered = true
       const scrollElement =
         (this.target && this.target()) ||
-        getTarget(this.listenTo) ||
+        unwrapElement(this.listenTo) ||
         getScrollParent(this.$refs.placeholder)
       if (__DEV__ && !scrollElement) {
         warn('back-top', 'Container of back-top element is not found. This could be a bug of naive-ui.')
