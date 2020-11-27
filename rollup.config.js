@@ -51,6 +51,7 @@ module.exports = {
     'vueuc',
     'vooks',
     'evtd',
-    'vdirs'
+    'vdirs',
+    'seemly'
   ])
 }

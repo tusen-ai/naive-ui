@@ -1,6 +1,5 @@
-import { Fragment, h, ref } from 'vue'
+import { Fragment, h, ref, Teleport } from 'vue'
 import { useIsMounted } from 'vooks'
-import { NBaseTeleport } from '../../_base'
 import NLoadingBar from './LoadingBar.vue'
 
 export default {
@@ -68,13 +67,13 @@ export default {
   },
   render () {
     return h(Fragment, null, [
-      h(NBaseTeleport, {
-        to: this.to
-      }, {
-        default: () => h(NLoadingBar, {
+      h(Teleport, {
+        to: this.to ?? 'body'
+      }, [
+        h(NLoadingBar, {
           ref: 'loadingBarRef'
         })
-      }),
+      ]),
       this.$slots.default()
     ])
   }

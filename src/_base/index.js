@@ -1,7 +1,5 @@
 export { default as NIconSwitchTransition } from './icon-switch-transition'
 export { default as NFadeInExpandTransition } from './fade-in-expand-transition'
-export { default as NBaseTeleport } from './teleport'
-export { default as NBaseLazyTeleport } from './lazy-teleport'
 export { default as NBaseFocusDetector } from './focus-detector'
 export { default as NBaseLoading } from './loading'
 export { default as NBaseSelectMenu } from './select-menu'

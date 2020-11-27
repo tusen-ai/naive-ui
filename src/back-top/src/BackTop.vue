@@ -5,7 +5,7 @@
     style="display: none;"
     aria-hidden
   >
-    <n-base-lazy-teleport
+    <v-lazy-teleport
       :to="to"
       :show="mergedShow"
     >
@@ -36,12 +36,13 @@
           </slot>
         </div>
       </transition>
-    </n-base-lazy-teleport>
+    </v-lazy-teleport>
   </div>
 </template>
 
 <script>
 import { ref, computed, toRef, watch, nextTick } from 'vue'
+import { VLazyTeleport } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
 import { getScrollParent, unwrapElement } from 'seemly'
 import {
@@ -51,13 +52,12 @@ import {
 } from '../../_mixins'
 import { formatLength, warn } from '../../_utils'
 import styles from './styles'
-import { NBaseLazyTeleport } from '../../_base'
 import BackTopIcon from './BackTopIcon.vue'
 
 export default {
   name: 'BackTop',
   components: {
-    NBaseLazyTeleport,
+    VLazyTeleport,
     BackTopIcon
   },
   mixins: [

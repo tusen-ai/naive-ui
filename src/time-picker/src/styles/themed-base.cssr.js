@@ -30,7 +30,7 @@ export default c([
           })
         ])
       ]),
-      cB('time-picker-panel', {
+      cTB('time-picker-panel', {
         raw: `
           outline: none;
           font-size: 12px;

@@ -1,7 +1,6 @@
-import { Fragment, ref, h, reactive } from 'vue'
+import { Fragment, ref, h, reactive, Teleport } from 'vue'
 import { createId } from 'seemly'
 import { omit } from '../../_utils'
-import { NBaseTeleport } from '../../_base'
 import MessageEnvironment from './MessageEnvironment.js'
 
 export default {
@@ -66,10 +65,10 @@ export default {
   render () {
     return h(Fragment, null,
       [
-        this.messageList.length ? h(NBaseTeleport, {
-          to: this.to
-        }, {
-          default: () => h('div', {
+        this.messageList.length ? h(Teleport, {
+          to: this.to ?? 'body'
+        }, [
+          h('div', {
             class: 'n-message-container',
             key: 'n-message-container'
           }, this.messageList.map(
@@ -79,7 +78,7 @@ export default {
               onInternalAfterLeave: this.handleAfterLeave
             })
           ))
-        }) : null,
+        ]) : null,
         this.$slots.default()
       ]
     )

@@ -1,10 +1,10 @@
 import { h, withDirectives, Transition, ref, computed } from 'vue'
 import { zindexable } from 'vdirs'
+import { useIsMounted, useClicked, useClickPosition } from 'vooks'
+import { VLazyTeleport } from 'vueuc'
 import { configurable, themeable, withCssr } from '../../_mixins'
 import presetProps from './presetProps'
-import { useIsMounted, useClicked, useClickPosition } from 'vooks'
 import { warn, omit } from '../../_utils'
-import { NBaseLazyTeleport } from '../../_base'
 import NModalBodyWrapper from './BodyWrapper.vue'
 import styles from './styles'
 
@@ -138,7 +138,7 @@ export default {
     }
   },
   render () {
-    return h(NBaseLazyTeleport, {
+    return h(VLazyTeleport, {
       to: this.to,
       show: this.show
     }, {
