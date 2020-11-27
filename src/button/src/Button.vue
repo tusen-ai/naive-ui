@@ -241,7 +241,7 @@ export default {
         return
       }
       if (this.mergedFocusable) {
-        this.$el.focus()
+        this.$el.focus({ preventScroll: true })
       }
     },
     handleClick (e) {
