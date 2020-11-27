@@ -9,8 +9,7 @@ export {
 } from './vue'
 export {
   warn,
-  warnOnce,
-  debug
+  warnOnce
 } from './naive'
 export {
   formatLength

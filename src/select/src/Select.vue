@@ -269,11 +269,6 @@ export default {
       type: [Function, Array],
       default: undefined
     },
-    // private
-    debug: {
-      type: Boolean,
-      default: false
-    },
     /** deprecated */
     onChange: {
       validator () {
