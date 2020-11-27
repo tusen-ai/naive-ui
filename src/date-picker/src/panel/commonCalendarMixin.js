@@ -8,8 +8,6 @@ import {
 import {
   locale
 } from '../../../_mixins'
-import keyboardDelegate from '../../../_utils/delegate/keyboardDelegate'
-import { KEY_CODE } from '../../../_utils'
 
 const TIME_CONST = {
   hours: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'],
@@ -118,9 +116,9 @@ export default {
     },
     handlePanelKeyDown (e) {
       if (
-        e.keyCode === KEY_CODE.TAB &&
+        e.key === 'Tab' &&
         e.target === this.$el &&
-        keyboardDelegate.shiftPressed
+        this.keyboardState.shift
       ) {
         e.preventDefault()
         this.doTabOut()
@@ -128,7 +126,7 @@ export default {
     },
     handlePanelFocus (e) {
       if (
-        keyboardDelegate.tabPressed &&
+        this.keyboardState.tab &&
         e.target === this.$el &&
         this.$el.contains(e.relatedTarget)
       ) {

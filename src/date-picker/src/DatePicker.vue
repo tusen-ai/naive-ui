@@ -189,7 +189,7 @@ import styles from './styles'
 import {
   uniCalendarValidation,
   dualCalendarValidation
-} from './validate-utils'
+} from './validation-utils'
 
 const DATE_FORMAT = {
   date: 'yyyy-MM-dd',

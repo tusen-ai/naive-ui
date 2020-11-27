@@ -141,7 +141,7 @@ import { startOfSecond } from 'date-fns'
 import NButton from '../../../button'
 import NTimePicker from '../../../time-picker'
 import NInput from '../../../input'
-import { injectUniCalendarValidation } from '../validate-utils'
+import { uniCalendarSetup } from '../composables'
 
 const DATETIME_FORMAT = 'yyyy-MM-dd HH:mm:ss'
 const DATE_FORMAT = 'yyyy-MM-dd'
@@ -163,7 +163,7 @@ export default {
     }
   },
   setup () {
-    return injectUniCalendarValidation()
+    return uniCalendarSetup()
   },
   data () {
     return {

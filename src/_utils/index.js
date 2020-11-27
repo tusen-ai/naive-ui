@@ -20,6 +20,3 @@ export * from './composable'
 export {
   nextFrame
 } from './misc'
-export {
-  KEY_CODE
-} from './dom'

@@ -12,22 +12,21 @@ import {
   parse,
   format
 } from 'date-fns'
-import { KEY_CODE } from '../../_utils/dom/key-code'
 
 function getDerivedTimeFromKeyboardEvent (prevValue, event) {
   const now = getTime(Date.now())
   const valueIsNumber = typeof prevValue === 'number'
-  switch (event.keyCode) {
-    case KEY_CODE.UP:
+  switch (event.key) {
+    case 'ArrowUp':
       if (!valueIsNumber) return now
       return getTime(addDays(prevValue, -7))
-    case KEY_CODE.DOWN:
+    case 'ArrowDown':
       if (!valueIsNumber) return now
       return getTime(addDays(prevValue, 7))
-    case KEY_CODE.RIGHT:
+    case 'ArrowRight':
       if (!valueIsNumber) return now
       return getTime(addDays(prevValue, 1))
-    case KEY_CODE.LEFT:
+    case 'ArrowLeft':
       if (!valueIsNumber) return now
       return getTime(addDays(prevValue, -1))
   }

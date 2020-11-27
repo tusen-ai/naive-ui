@@ -175,7 +175,7 @@
 import NButton from '../../../button'
 import dualCalendarMixin from './dualCalendarMixin'
 import { startOfDay } from 'date-fns'
-import { injectDualCalendarValidation } from '../validate-utils'
+import { dualCalendarSetup } from '../composables'
 
 const DATE_FORMAT = 'yyyy-MM-dd'
 
@@ -193,7 +193,7 @@ export default {
     }
   },
   setup () {
-    return injectDualCalendarValidation()
+    return dualCalendarSetup()
   },
   watch: {
     active (newActive) {

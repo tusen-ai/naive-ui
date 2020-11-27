@@ -252,7 +252,7 @@ import {
   isValid
 } from 'date-fns'
 import { strictParse } from '../utils'
-import { injectDualCalendarValidation } from '../validate-utils'
+import { dualCalendarSetup } from '../composables'
 
 const DATETIME_FORMAT = 'yyyy-MM-dd HH:mm:ss'
 const DATE_FORMAT = 'yyyy-MM-dd'
@@ -280,7 +280,7 @@ export default {
     }
   },
   setup () {
-    return injectDualCalendarValidation()
+    return dualCalendarSetup()
   },
   computed: {
     timeFormat () {

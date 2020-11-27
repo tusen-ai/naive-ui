@@ -82,7 +82,7 @@
 
 <script>
 import { ref } from 'vue'
-import { useIsMounted } from 'vooks'
+import { useIsMounted, useKeyboard } from 'vooks'
 import {
   VBinder,
   VTarget,
@@ -108,12 +108,11 @@ import {
   getSeconds
 } from 'date-fns'
 import { strictParse } from '../../date-picker/src/utils'
-import keyboardDelegate from '../../_utils/delegate/keyboardDelegate'
 import {
   TimeIcon
 } from '../../_base/icons'
 import styles from './styles'
-import { warn, call, useAdjustedTo, KEY_CODE } from '../../_utils'
+import { warn, call, useAdjustedTo } from '../../_utils'
 import Panel from './Panel.vue'
 
 export default {
@@ -236,7 +235,8 @@ export default {
       isMounted: useIsMounted(),
       inputRef: ref(null),
       panelRef: ref(null),
-      adjustedTo: useAdjustedTo(props)
+      adjustedTo: useAdjustedTo(props),
+      keyboardState: useKeyboard()
     }
   },
   data () {
@@ -305,7 +305,7 @@ export default {
       if (this.valueAsDate) return Number(format(this.valueAsDate, 'mm', this.dateFnsOptions))
       else return null
     },
-    second () {
+    secondValue () {
       if (this.valueAsDate) return Number(format(this.valueAsDate, 'ss', this.dateFnsOptions))
       else return null
     }
@@ -363,17 +363,17 @@ export default {
       })
     },
     handleMenuKeyDown (e) {
-      switch (e.keyCode) {
-        case KEY_CODE.ESC:
+      switch (e.key) {
+        case 'Escape':
           this.closePanel({
             returnFocus: true,
             emitBlur: false
           })
           break
-        case KEY_CODE.TAB:
+        case 'Tab':
           if (
-            keyboardDelegate.getKeyboardStatus().shiftPressed &&
-            e.target === this.panelRef
+            this.keyboardState.shift &&
+            e.target === this.panelRef.$el
           ) {
             e.preventDefault()
             this.closePanel({
@@ -567,11 +567,11 @@ export default {
       })
     },
     handleMenuFocus (e) {
-      const panel = this.panelRef
+      const panel = this.panelRef.$el
       if (
-        keyboardDelegate.tabPressed &&
+        this.keyboardState.tab &&
         e.target === panel &&
-        panel.$el.contains(e.relatedTarget)
+        panel.contains(e.relatedTarget)
       ) {
         this.closePanel({
           returnFocus: true,

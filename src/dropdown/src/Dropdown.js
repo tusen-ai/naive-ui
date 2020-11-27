@@ -1,15 +1,13 @@
-import { h, computed, ref, toRef } from 'vue'
+import { h, computed, ref, toRef, getCurrentInstance } from 'vue'
 import { TreeMate } from 'treemate'
 import {
   configurable,
   themeable,
   withCssr
 } from '../../_mixins'
-import { KEY_CODE } from '../../_utils'
-import keyboardDelegate from '../../_utils/delegate/keyboardDelegate'
 import NPopover from '../../popover'
 import NDropdownMenu from './DropdownMenu.js'
-import { useMergedState, useFalseUntilTruthy } from 'vooks'
+import { useMergedState, useFalseUntilTruthy, useKeyboard, useMemo } from 'vooks'
 import { keep, call } from '../../_utils/vue'
 import styles from './styles'
 
@@ -114,6 +112,36 @@ export default {
       pendingKeyRef.value
     ).keyPath)
 
+    const keyboardEnabledRef = useMemo(() => {
+      return props.keyboard && mergedShowRef.value
+    })
+
+    const vm = getCurrentInstance().proxy
+    useKeyboard({
+      keydown: {
+        ArrowUp: {
+          prevent: true,
+          handler: () => vm.handleKeyDownUp()
+        },
+        ArrowRight: {
+          prevent: true,
+          handler: () => vm.handleKeyDownRight()
+        },
+        ArrowDown: {
+          prevent: true,
+          handler: () => vm.handleKeyDownDown()
+        },
+        ArrowLeft: {
+          prevent: true,
+          handler: () => vm.handleKeyDownLeft()
+        },
+        Escape: () => vm.handleKeyDownEsc()
+      },
+      keyup: {
+        Enter: () => vm.handleKeyUpEnter()
+      }
+    }, keyboardEnabledRef)
+
     return {
       // data
       tm: treemateRef,
@@ -135,29 +163,9 @@ export default {
     }
   },
   watch: {
-    keyboard (value) {
-      if (!value) {
-        this.unregisterKeyboardOperations()
-      } else if (this.mergedShow) {
-        this.registerKeyboardOperations()
-      }
-    },
     mergedShow (value) {
       if (!value) this.clearPendingState()
-      if (this.keyboard) {
-        if (value) {
-          this.registerKeyboardOperations()
-        } else {
-          this.unregisterKeyboardOperations()
-        }
-      }
     }
-  },
-  mounted () {
-    if (this.keyboard && this.mergedShow) this.registerKeyboardOperations()
-  },
-  beforeUnmount () {
-    if (this.keyboardHandlerRegistered) this.unregisterKeyboardOperations()
   },
   methods: {
     doSelect (...args) {
@@ -173,34 +181,6 @@ export default {
       this.hoverKey = null
       this.keyboardKey = null
       this.lastToggledSubmenuKey = null
-    },
-    registerKeyboardOperations () {
-      if (this.keyboardHandlerRegistered) return
-      this.keyboardHandlerRegistered = true
-      keyboardDelegate.registerHandler(KEY_CODE.UP, 'keydown', this.handleKeyDownUp, {
-        preventDefault: true
-      })
-      keyboardDelegate.registerHandler(KEY_CODE.RIGHT, 'keydown', this.handleKeyDownRight, {
-        preventDefault: true
-      })
-      keyboardDelegate.registerHandler(KEY_CODE.DOWN, 'keydown', this.handleKeyDownDown, {
-        preventDefault: true
-      })
-      keyboardDelegate.registerHandler(KEY_CODE.LEFT, 'keydown', this.handleKeyDownLeft, {
-        preventDefault: true
-      })
-      keyboardDelegate.registerHandler(KEY_CODE.ESC, 'keydown', this.handleKeyDownEsc)
-      keyboardDelegate.registerHandler(KEY_CODE.ENTER, 'keyup', this.handleKeyUpEnter)
-    },
-    unregisterKeyboardOperations () {
-      if (!this.keyboardHandlerRegistered) return
-      this.keyboardHandlerRegistered = false
-      keyboardDelegate.unregisterHandler(this.handleKeyDownUp)
-      keyboardDelegate.unregisterHandler(this.handleKeyDownDown)
-      keyboardDelegate.unregisterHandler(this.handleKeyDownLeft)
-      keyboardDelegate.unregisterHandler(this.handleKeyDownRight)
-      keyboardDelegate.unregisterHandler(this.handleKeyUpEnter)
-      keyboardDelegate.unregisterHandler(this.handleKeyDownEsc)
     },
     handleKeyDownEsc () {
       this.doUpdateShow(false)
