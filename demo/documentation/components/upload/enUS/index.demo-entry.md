@@ -14,16 +14,16 @@ default-files
 ### Upload Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|accept|`string`'`undefined`|The accept type of upload. See <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept">accept</n-a>.|
-|action|`string`'`undefined`|The URL to submit data to.|
-|data|`Object \| ({ file: UploadFile }) => Object`'`undefined`|The additional fileds data of HTTP request's form data.|
+|accept|`string`|`undefined`|The accept type of upload. See <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept">accept</n-a>.|
+|action|`string`|`undefined`|The URL to submit data to.|
+|data|`Object \| ({ file: UploadFile }) => Object`|`undefined`|The additional fileds data of HTTP request's form data.|
 |default-file-list|`Array<UploadFile>`|`[]`|The default file list in uncontrolled manner.|
 |default-upload|`boolean`|`false`|If file uploaded immediatelly after file is selected.|
 |directory|`boolean`|`false`|If directory upload supported. Browser support needed. See <n-a href="https://caniuse.com/#feat=input-file-directory">input-file-directory</n-a>.|
 |disabled|`boolean`|`false`||
-|file-list-style|`Object`'`undefined`|The style of file list area|
+|file-list-style|`Object`|`undefined`|The style of file list area|
 |file-list|`Array<UploadFile>`|`undefined`|The file list of component. If set, the component will work in controlled manner.|
-|headers|`Object \| ({ file: UploadFile }) => Object`'`undefined`|The additional HTTP Headers of request.|
+|headers|`Object \| ({ file: UploadFile }) => Object`|`undefined`|The additional HTTP Headers of request.|
 |method|`string`|`'POST'`|The method of HTTP request.|
 |multiple|`boolean`|`false`|If multiple files selection supported.|
 |name|`string`|`'file'`|The field name of file in form data.|
