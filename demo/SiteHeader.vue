@@ -10,7 +10,7 @@
         @click="handleLogoClick"
       >
         <img src="./assets/images/naivelogo.svg">
-        Naive UI ({{ version }})
+        Naive UI
       </n-text>
       <div style="display: flex; align-items: center;">
         <div class="nav-menu">
@@ -45,6 +45,9 @@
           @click="handleModeChange"
         >
           {{ modeOptions[displayMode].label }}
+        </n-button>
+        <n-button size="small">
+          {{ version }}
         </n-button>
       </div>
     </div>
