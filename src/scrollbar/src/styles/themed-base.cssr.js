@@ -52,9 +52,9 @@ export default c([
         }, [
           cM('horizontal', {
             raw: `
-              left: 0;
-              right: 0;
-              bottom: 2.5px;
+              left: 2px;
+              right: 2px;
+              bottom: 4px;
             `
           }, [
             c('>', [
@@ -65,9 +65,9 @@ export default c([
           ]),
           cM('vertical', {
             raw: `
-              right: 2.5px;
-              top: 0;
-              bottom: 0;
+              right: 4px;
+              top: 2px;
+              bottom: 2px;
             `
           }, [
             c('>', [

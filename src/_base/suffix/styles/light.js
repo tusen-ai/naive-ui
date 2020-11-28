@@ -9,7 +9,7 @@ export default create({
       ...commonVariables,
       crossColor: derived.textColor4Overlay,
       crossColorHover: derived.primaryColorHover,
-      crossColorActive: derived.primaryColorPressed,
+      crossColorPressed: derived.primaryColorPressed,
       arrowColor: derived.textColor4Overlay,
       arrowColorHover: derived.primaryColorHover,
       arrowColorActive: derived.primaryColorHover,

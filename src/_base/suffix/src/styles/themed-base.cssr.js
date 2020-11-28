@@ -13,7 +13,7 @@ function styleInsideFormItem (status, $local) {
       ]),
       c('&:active', [
         cE('icon', {
-          fill: $local[createKey('crossColorActive', status)]
+          fill: $local[createKey('crossColorPressed', status)]
         })
       ])
     ]),
@@ -39,7 +39,7 @@ export default c([
         iconSize,
         crossColor,
         crossColorHover,
-        crossColorActive,
+        crossColorPressed,
         arrowSize,
         arrowBorderWidth,
         arrowColor,
@@ -94,7 +94,7 @@ export default c([
           ]),
           c('&:active', [
             cE('icon', {
-              fill: crossColorActive
+              fill: crossColorPressed
             })
           ])
         ]),

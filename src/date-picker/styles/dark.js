@@ -10,7 +10,7 @@ export default create({
       itemTextColorMatched: derived.popoverColor,
       itemSupColor: derived.primaryColor,
       itemSupColorMatch: derived.popoverColor,
-      itemColorHover: changeColor(derived.primaryColor, { alpha: 0.5 }),
+      itemColorHover: changeColor(derived.primaryColor, { alpha: 0.15 }),
       itemColorActive: derived.primaryColor,
       itemBorderRadius: base.borderRadiusSmall,
       panelColor: derived.popoverColor,
