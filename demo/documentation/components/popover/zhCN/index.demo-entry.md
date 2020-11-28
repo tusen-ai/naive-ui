@@ -30,7 +30,6 @@ manual-position
 |display-directive|`'if' \| 'show'`|`'if'`|条件渲染使用的指令，`if` 会让内容被使用 `v-if` 渲染，`show` 会让内容被使用 `v-show` 渲染|
 |duration|`number`|`200`|悬浮关闭弹出信息的延迟|
 |filp|`boolean`|`true`|是否在当前放置方式不能提供足够空间的时候调整弹出信息的位置|
-|manually-positioned|`boolean`|`false`|是否要手动控制位置|
 |placement|`'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| `|`'bottom'`||
 |raw|`boolean`|`false`|是否不添加默认样式|
 |show-arrow|`boolean`|`true`||
@@ -38,7 +37,7 @@ manual-position
 |theme|`'light' \| 'dark' \| string`|`undefined`||
 |trigger|`'hover' \| 'click' \| null`|`null`||
 |x|`number`|`undefined`|手动控制位置时填出内容的 CSS `left` 的像素值|
-|y|`number`|`undefined`|手动控制位置时填出内容的 CSS `top` 的像素值||
+|y|`number`|`undefined`|手动控制位置时填出内容的 CSS `top` 的像素值|
 |on-update:show|`(value: boolean) => any`|||
 
 ## Slots

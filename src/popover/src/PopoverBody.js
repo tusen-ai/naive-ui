@@ -63,8 +63,12 @@ export default {
       type: String,
       default: undefined
     },
-    manuallyPositioned: {
-      type: Boolean,
+    x: {
+      type: Number,
+      default: undefined
+    },
+    y: {
+      type: Number,
       default: undefined
     },
     filp: {
@@ -219,6 +223,8 @@ export default {
       show: this.show,
       enabled: this.followerEnabled,
       to: this.adjustedTo,
+      x: this.x,
+      y: this.y,
       placement: this.placement,
       containerClass: this.namespace,
       ref: 'followerRef'

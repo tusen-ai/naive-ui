@@ -6,7 +6,6 @@ For some special case, you may want to manually position the dropdown. For examp
 </div>
 <n-dropdown
   placement="bottom-start"
-  manually-positioned
   @select="handleSelect"
   :x="x"
   :y="y"

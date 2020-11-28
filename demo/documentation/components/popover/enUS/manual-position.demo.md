@@ -2,7 +2,7 @@
 Click it.
 ```html
 <div style="width: 200px; height: 200px; background-color: rgba(0, 128, 0, .5);" @click="handleClick"></div>
-<n-popover :show="showPopover" :x="x" :y="y" manually-positioned>
+<n-popover :show="showPopover" :x="x" :y="y">
   Cool!
 </n-popover>
 ```

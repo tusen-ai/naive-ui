@@ -8,7 +8,6 @@
 </div>
 <n-dropdown
   placement="bottom-start"
-  manually-positioned
   @select="handleSelect"
   :x="x"
   :y="y"

@@ -12,7 +12,8 @@ import {
 import {
   useMergedState,
   useCompitable,
-  useIsMounted
+  useIsMounted,
+  useMemo
 } from 'vooks'
 import { call, keep, warn } from '../../_utils'
 import NPopoverBody from './PopoverBody'
@@ -99,10 +100,6 @@ export default {
     bodyStyle: {
       type: Object,
       default: undefined
-    },
-    manuallyPositioned: {
-      type: Boolean,
-      default: false
     },
     x: {
       type: Number,
@@ -193,6 +190,9 @@ export default {
     })
     return {
       isMounted: useIsMounted(),
+      positionManually: useMemo(() => {
+        return props.x !== undefined && props.y !== undefined
+      }),
       // if to show popover body
       uncontrolledShow: uncontrolledShowRef,
       mergedShow: mergedShowRef,
@@ -289,11 +289,11 @@ export default {
   },
   render () {
     const {
-      manuallyPositioned
+      positionManually
     } = this
     const slots = { ...this.$slots }
     let triggerVNode
-    if (!manuallyPositioned) {
+    if (!positionManually) {
       if (slots.activator) {
         triggerVNode = getFirstSlotVNode(slots, 'activator')
       } else {
@@ -314,7 +314,7 @@ export default {
     return h(VBinder, null, {
       default: () => {
         return [
-          manuallyPositioned ? null : h(VTarget, null, {
+          positionManually ? null : h(VTarget, null, {
             default: () => triggerVNode
           }),
           h(NPopoverBody, keep(this.$props, bodyPropKeys, {
