@@ -1,5 +1,4 @@
 import create from '../../_styles/utils/create-component-base'
-import { composite } from 'seemly'
 import sizeVariables from './_common'
 
 export default create({
@@ -23,7 +22,7 @@ export default create({
       borderColor: dividerColorOverlay,
       bodyColor: cardColor,
       bodyColorModal: modalColor,
-      headerColor: composite(cardColor, actionColorOverlay),
+      headerColor: actionColorOverlay,
       headerTextColor: textColor1,
       bodyTextColor: textColor2,
       borderRadius,

@@ -4,7 +4,7 @@
     <span class="edit-button">
       <n-tooltip
         trigger="hover"
-        placement="left"
+        placement="right"
         :show-arrow="true"
       >
         <template #activator>
@@ -58,16 +58,11 @@ export default {
 <style scoped>
 .naive-doc-title {
   display: flex;
-  justify-content: space-between;
 }
 
 .naive-doc-title .edit-button {
+  margin-left: 4px;
   display: inline-flex;
   align-items: center;
 }
-/*
-.naive-doc-title:hover .edit-button {
-  opacity: 1;
-  transition: opacity .3s ease-out;
-} */
 </style>

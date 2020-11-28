@@ -35,6 +35,6 @@ export default {
 
 <style>
 .n-documentation {
-  padding: 32px 24px 24px 36px;
+  padding: 32px 24px 24px 56px;
 }
 </style>

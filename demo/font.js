@@ -1,2 +1,2 @@
-import 'vfonts/OpenSans.css'
+import 'vfonts/Inter.css'
 import 'vfonts/FiraCode.css'

@@ -13,7 +13,7 @@ export default create({
       neutralPopover: '#fff',
       neutralCard: '#fff',
       neutralModal: '#fff',
-      neutralBody: '#eff2f5',
+      neutralBody: '#fff',
 
       alpha1: '0.82',
       alpha2: '0.72',

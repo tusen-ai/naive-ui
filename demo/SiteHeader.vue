@@ -1,10 +1,6 @@
 <template>
   <n-layout-header
     bordered
-    :style="{
-      position: 'relative',
-      zIndex: zIndex
-    }"
   >
     <div class="nav">
       <n-text
@@ -28,7 +24,6 @@
         <n-auto-complete
           v-model:value="searchInputValue"
           style="width: 216px; margin-left: 24px;"
-          :z-index="zIndex && zIndex + 1"
           :placeholder="t('searchPlaceholder')"
           :options="searchOptions"
           clear-after-select
@@ -155,10 +150,6 @@ export default {
     }
   },
   computed: {
-    zIndex () {
-      const path = this.$route.path
-      return (path.endsWith('n-modal') || path.endsWith('n-drawer') || path.endsWith('n-dialog')) ? null : 3000
-    },
     menuValue () {
       if (/^(\/[^/]+){2}\/doc/.test(this.$route.path)) return 'doc'
       else if (this.$route.name === 'home') return 'home'
@@ -245,7 +236,7 @@ export default {
 }
 
 .nav-menu {
-  padding-left: 16px;
+  padding-left: 36px;
 }
 
 .nav-picker {
