@@ -6,11 +6,17 @@ export default c([
       cubicBezierEaseInOut
     } = props.$base
     const {
+      olPadding,
+      ulPadding,
+      liFontSize,
+      liMargin,
+      liLineHeight,
       liTextColor
     } = props.$local
     return [
       cTB('ol', {
-        paddingLeft: '1.75em'
+        fontSize: liFontSize,
+        padding: olPadding
       }, [
         cM('align-text', {
           paddingLeft: 0
@@ -20,20 +26,21 @@ export default c([
         })
       ]),
       cTB('ul', {
-        paddingLeft: '1.75em'
+        fontSize: liFontSize,
+        padding: ulPadding
       }, [
         cM('align-text', {
           paddingLeft: 0
         }),
         cB('li', {
+          margin: liMargin,
           color: liTextColor
         })
       ]),
       cB('li', {
         transition: `color .3s ${cubicBezierEaseInOut}`,
-        lineHeight: '1.75em',
-        marginBottom: 0,
-        fontSize: '14px'
+        lineHeight: liLineHeight,
+        marginBottom: 0
       })
     ]
   }

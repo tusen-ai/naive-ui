@@ -6,6 +6,9 @@ export default c([
       cubicBezierEaseInOut
     } = props.$base
     const {
+      pFontSize,
+      pLineHeight,
+      pMargin,
       pTextColor,
       pTextColor1Depth,
       pTextColor2Depth,
@@ -15,9 +18,9 @@ export default c([
       raw: `
         box-sizing: border-box;
         transition: color .3s ${cubicBezierEaseInOut};
-        margin: 12px 0 16px 0;
-        font-size: 14px;
-        line-height: 1.75;
+        margin: ${pMargin};
+        font-size: ${pFontSize};
+        line-height: ${pLineHeight};
       `,
       color: pTextColor
     }, [
