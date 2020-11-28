@@ -18,7 +18,7 @@ validator
 |disabled|`boolean`|`false`||
 |max|`number`|`undefined`||
 |min|`number`|`undefined`||
-|placeholder|`string`|`undefined`||
+|placeholder|`string`|`'请输入'`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |step|`number`|`1`||
 |theme|`'light' \| 'dark' \| string`|`undefined`||

@@ -15,7 +15,7 @@ after-select
 |blur-after-select|`boolean`|`false`||
 |clear-after-select|`boolean`|`false`||
 |options|`Array<string \| AutoCompleteOption \| AutoCompleteOptionGroup>`|`[]`||
-|placeholder|`string`|`undefined`||
+|placeholder|`string`|`'请输入'`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |theme|`'light' \| 'dark' \| string`|`undefined`||
 |value|`string`|`null`||
