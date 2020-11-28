@@ -9,9 +9,15 @@ export default create({
       textColor2,
       dividerColorOverlay
     } = derived
+    const {
+      fontWeightStrong
+    } = base
     return {
+      titleFontSize: '14px',
+      titleFontWeight: fontWeightStrong,
       dividerColor: dividerColorOverlay,
       titleTextColor: textColor1,
+      fontSize: '14px',
       textColor: textColor2,
       arrowColor: textColor2
     }

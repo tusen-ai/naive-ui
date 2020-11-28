@@ -5,10 +5,13 @@ export default c([
   ({ props }) => {
     const { cubicBezierEaseInOut } = props.$base
     const {
+      titleFontWeight,
       dividerColor,
       titleTextColor,
       textColor,
-      arrowColor
+      arrowColor,
+      fontSize,
+      titleFontSize
     } = props.$local
     return [
       cTB(
@@ -20,7 +23,7 @@ export default c([
           cB('collapse-item', {
             raw: `
               overflow: hidden;
-              font-size: 14px;
+              font-size: ${fontSize};
               transition: border-color .3s ${cubicBezierEaseInOut};
               margin-top: 16px;
             `
@@ -70,9 +73,11 @@ export default c([
             }),
             cE('header', {
               raw: `
+                font-size: ${titleFontSize};
                 display: flex;
                 flex-wrap: nowrap;
                 align-items: center;
+                font-weight: ${titleFontWeight};
                 transition: color .3s ${cubicBezierEaseInOut};
                 position: relative;
                 cursor: pointer;
