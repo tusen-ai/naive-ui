@@ -40,6 +40,8 @@
           class="n-slider-handle"
           tabindex="0"
           :style="firstHandleStyle"
+          @focus="handleHandleFocus1"
+          @blur="handleHandleBlur1"
           @mousedown="handleFirstHandleMouseDown"
           @mouseenter="handleFirstHandleMouseEnter"
           @mouseleave="handleFirstHandleMouseLeave"
@@ -78,6 +80,8 @@
           class="n-slider-handle"
           tabindex="0"
           :style="secondHandleStyle"
+          @focus="handleHandleFocus2"
+          @blur="handleHandleBlur2"
           @mousedown="handleSecondHandleMouseDown"
           @mouseenter="handleSecondHandleMouseEnter"
           @mouseleave="handleSecondHandleMouseLeave"
@@ -228,6 +232,9 @@ export default {
   setup (props) {
     const handleActive1Ref = ref(false)
     const handleActive2Ref = ref(false)
+    const handleClicked1Ref = ref(false)
+    const handleClicked2Ref = ref(false)
+
     const controlledShowTooltipRef = toRef(props, 'showTooltip')
     const mergedShowTooltip1Ref = useMergedState(
       controlledShowTooltipRef,
@@ -237,8 +244,7 @@ export default {
       controlledShowTooltipRef,
       handleActive2Ref
     )
-    const handleClicked1Ref = ref(false)
-    const handleClicked2Ref = ref(false)
+
     const activeRef = computed(() => {
       return handleActive1Ref.value || handleActive2Ref.value
     })
@@ -261,7 +267,7 @@ export default {
       handleClicked1: handleClicked1Ref,
       handleClicked2: handleClicked2Ref,
       memoziedOtherValue: ref(null),
-      valueChangedByRailClick: ref(true),
+      changeSource: ref(null),
       active: activeRef,
       prevActive: prevActiveRef,
       clicked: clickedRef,
@@ -337,40 +343,37 @@ export default {
   },
   watch: {
     value (newValue, oldValue) {
+      const { changeSource } = this
       if (this.range && newValue) {
         if (oldValue && oldValue[1] !== newValue[1]) {
           this.$nextTick(() => {
-            if (!this.valueChangedByRailClick) {
-              this.handleActive1 = false
-              this.handleActive2 = true
-            } else {
-              this.valueChangedByRailClick = false
+            if (!(changeSource === 'click')) {
+              this.doUpdateShow(false, true)
             }
             this.switchFocus()
           })
         } else if (oldValue && oldValue[0] !== newValue[0]) {
           this.$nextTick(() => {
-            if (!this.valueChangedByRailClick) {
-              this.handleActive1 = true
-              this.handleActive2 = false
-            } else {
-              this.valueChangedByRailClick = false
+            if (!(changeSource === 'click')) {
+              this.doUpdateShow(true, false)
             }
             this.switchFocus()
           })
         } else if (newValue[0] === newValue[1]) {
           this.$nextTick(() => {
-            if (!this.valueChangedByRailClick) {
-              this.handleActive1 = false
-              this.handleActive2 = true
-            } else {
-              this.valueChangedByRailClick = false
+            if (!(changeSource === 'click')) {
+              this.doUpdateShow(false, true)
             }
             this.switchFocus()
           })
         }
       }
       this.$nextTick(() => {
+        // dom has changed but event is not fired, use marco task to make sure
+        // relevant event handler is called
+        setTimeout(() => {
+          this.changeSource = null
+        }, 0)
         if (this.range) {
           if (newValue && oldValue) {
             if (newValue[0] !== oldValue[0] || newValue[1] !== oldValue[1]) {
@@ -384,10 +387,9 @@ export default {
     }
   },
   beforeUnmount () {
-    off('mousemove', window, this.handleFirstHandleMouseMove)
-    off('mouseup', window, this.handleFirstHandleMouseUp)
-    off('mousemove', window, this.handleSecondHandleMouseMove)
-    off('mouseup', window, this.handleSecondHandleMouseUp)
+    off('mousemove', document, this.handleFirstHandleMouseMove)
+    off('mousemove', document, this.handleSecondHandleMouseMove)
+    off('mouseup', document, this.handleHandleMouseUp)
   },
   methods: {
     doUpdateValue (value) {
@@ -415,30 +417,46 @@ export default {
       if (followerRef1) followerRef1.syncPosition()
       if (followerRef2) followerRef2.syncPosition()
     },
+    handleHandleFocus1 () {
+      if (this.clicked) return
+      this.doUpdateShow(true, false)
+    },
+    handleHandleFocus2 () {
+      if (this.clicked) return
+      this.doUpdateShow(false, true)
+    },
+    handleHandleBlur1 () {
+      if (this.clicked) return
+      this.doUpdateShow(false, false)
+    },
+    handleHandleBlur2 () {
+      if (this.clicked) return
+      this.doUpdateShow(false, false)
+    },
     handleRailClick (e) {
-      this.valueChangedByRailClick = true
       const railRect = this.railRef.getBoundingClientRect()
       const offsetRatio = (e.clientX - railRect.left) / railRect.width
       const newValue = this.min + (this.max - this.min) * offsetRatio
       if (!this.range) {
-        this.dispatchValueUpdate(newValue)
+        this.dispatchValueUpdate(newValue, { source: 'click' })
         this.handleRef1.focus()
       } else {
         if (this.value) {
           if (Math.abs(this.handleValue1 - newValue) < Math.abs(this.handleValue2 - newValue)) {
-            this.dispatchValueUpdate([newValue, this.handleValue2])
+            this.dispatchValueUpdate([newValue, this.handleValue2], { source: 'click' })
             this.handleRef1.focus()
           } else {
-            this.dispatchValueUpdate([this.handleValue1, newValue])
+            this.dispatchValueUpdate([this.handleValue1, newValue], { source: 'click' })
             this.handleRef2.focus()
           }
         } else {
-          this.dispatchValueUpdate([newValue, newValue])
+          this.dispatchValueUpdate([newValue, newValue], { source: 'click' })
           this.handleRef1.focus()
         }
       }
     },
     handleKeyDownRight () {
+      if (this.clicked) return
       let firstHandleFocused = false
       let handleValue = null
       if (document.activeElement === this.handleRef1) {
@@ -458,22 +476,25 @@ export default {
       }
       if (this.range) {
         if (firstHandleFocused) {
-          this.dispatchValueUpdate([nextValue, this.handleValue2])
+          this.dispatchValueUpdate([nextValue, this.handleValue2], { source: 'keyboard' })
         } else {
-          this.dispatchValueUpdate([this.handleValue1, nextValue])
+          this.dispatchValueUpdate([this.handleValue1, nextValue], { source: 'keyboard' })
         }
       } else {
-        this.dispatchValueUpdate(nextValue)
+        this.dispatchValueUpdate(nextValue, { source: 'keyboard' })
       }
     },
     handleKeyDownLeft () {
+      if (this.clicked) return
       let firstHandleFocused = false
       let handleValue = null
       if (document.activeElement === this.handleRef1) {
         firstHandleFocused = true
         handleValue = this.handleValue1
-      } else {
+      } else if (document.activeElement === this.handleRef2) {
         handleValue = this.handleValue2
+      } else {
+        return
       }
       let nextValue = Math.ceil(handleValue / this.step) * this.step - this.step
       if (this.marks) {
@@ -486,12 +507,12 @@ export default {
       }
       if (this.range) {
         if (firstHandleFocused) {
-          this.dispatchValueUpdate([nextValue, this.handleValue2])
+          this.dispatchValueUpdate([nextValue, this.handleValue2], { source: 'keyboard' })
         } else {
-          this.dispatchValueUpdate([this.handleValue1, nextValue])
+          this.dispatchValueUpdate([this.handleValue1, nextValue], { source: 'keyboard' })
         }
       } else {
-        this.dispatchValueUpdate(nextValue)
+        this.dispatchValueUpdate(nextValue, { source: 'keyboard' })
       }
     },
     switchFocus () {
@@ -502,9 +523,17 @@ export default {
           if (this.handleActive1 && document.activeElement === secondHandle) {
             this.disableTransitionOneTick()
             firstHandle.focus()
+            if (this.handleClicked2) {
+              this.handleClicked2 = false
+              this.handleClicked1 = true
+            }
           } else if (this.handleActive2 && document.activeElement === firstHandle) {
             this.disableTransitionOneTick()
             secondHandle.focus()
+            if (this.handleClicked1) {
+              this.handleClicked1 = false
+              this.handleClicked2 = true
+            }
           }
         }
       }
@@ -546,39 +575,35 @@ export default {
       if (this.range) {
         this.memoziedOtherValue = this.handleValue2
       }
-      this.handleActive1 = true
+      this.doUpdateShow(true, false)
       this.handleClicked1 = true
-      on('mouseup', window, this.handleFirstHandleMouseUp)
-      on('mousemove', window, this.handleFirstHandleMouseMove)
+      on('mouseup', document, this.handleHandleMouseUp)
+      on('mousemove', document, this.handleFirstHandleMouseMove)
     },
     handleSecondHandleMouseDown () {
       if (this.range) {
         this.memoziedOtherValue = this.handleValue1
       }
-      this.handleActive2 = true
+      this.doUpdateShow(false, true)
       this.handleClicked2 = true
-      on('mouseup', window, this.handleSecondHandleMouseUp)
-      on('mousemove', window, this.handleSecondHandleMouseMove)
+      on('mouseup', document, this.handleHandleMouseUp)
+      on('mousemove', document, this.handleSecondHandleMouseMove)
     },
-    handleFirstHandleMouseUp (e) {
+    handleHandleMouseUp (e) {
+      if (
+        !this.handleRef1.contains(e.target) &&
+        !this.handleRef2.contains(e.target)
+      ) {
+        this.doUpdateShow(false, false)
+      }
       this.handleClicked2 = false
       this.handleClicked1 = false
-      if (!this.handleRef1.contains(e.target)) {
-        this.doUpdateShow(false, undefined)
-      }
-      off('mouseup', window, this.handleFirstHandleMouseUp)
-      off('mousemove', window, this.handleFirstHandleMouseMove)
+      off('mouseup', document, this.handleHandleMouseUp)
+      off('mousemove', document, this.handleFirstHandleMouseMove)
+      off('mousemove', document, this.handleSecondHandleMouseMove)
     },
-    handleSecondHandleMouseUp (e) {
-      this.handleClicked2 = false
-      this.handleClicked1 = false
-      if (!this.handleRef1.contains(e.target)) {
-        this.doUpdateShow(undefined, false)
-      }
-      off('mouseup', window, this.handleSecondHandleMouseUp)
-      off('mousemove', window, this.handleSecondHandleMouseMove)
-    },
-    dispatchValueUpdate (value) {
+    dispatchValueUpdate (value, options = { source: null }) {
+      const { source } = options
       if (this.range) {
         if (Array.isArray(value)) {
           if (value[0] > value[1]) {
@@ -586,20 +611,29 @@ export default {
           } else {
             value = [this.justifyValue(value[0]), this.justifyValue(value[1])]
           }
-          this.doUpdateValue(value)
+          const { value: oldValue } = this
+          if (!Array.isArray(oldValue) || oldValue[0] !== value[0] || oldValue[1] !== value[1]) {
+            this.changeSource = source
+            this.doUpdateValue(value)
+          }
         }
       } else {
-        if (value > this.max) {
-          if (this.value !== this.max) {
+        const { value: oldValue, max, min } = this
+        if (value > max) {
+          if (oldValue !== max) {
+            this.changeSource = source
             this.doUpdateValue(this.max)
           }
-        } else if (value < this.min) {
-          if (this.value !== this.min) {
-            this.doUpdateValue(this.min)
+        } else if (value < min) {
+          if (oldValue !== min) {
+            this.changeSource = source
+            this.doUpdateValue(min)
           }
         } else {
-          if (this.value !== value) {
-            this.doUpdateValue(this.justifyValue(value))
+          const newValue = this.justifyValue(value)
+          if (oldValue !== newValue) {
+            this.changeSource = source
+            this.doUpdateValue(newValue)
           }
         }
       }
@@ -610,36 +644,32 @@ export default {
     handleFirstHandleMouseEnter () {
       if (!this.active) {
         this.doUpdateShow(true, undefined)
-        this.handleActive1 = true
         this.$nextTick(() => {
           this.syncPosition()
         })
       }
     },
     handleFirstHandleMouseLeave () {
+      if (this.changeSource === 'keyboard') return
       if (!this.active) {
         this.doUpdateShow(false, false)
       } else if (!this.clicked) {
-        this.handleActive2 = false
-        this.handleActive1 = false
         this.doUpdateShow(false, false)
       }
     },
     handleSecondHandleMouseEnter () {
       if (!this.active) {
         this.doUpdateShow(undefined, true)
-        this.handleActive2 = true
         this.$nextTick(() => {
           this.syncPosition()
         })
       }
     },
     handleSecondHandleMouseLeave () {
+      if (this.changeSource === 'keyboard') return
       if (!this.active) {
         this.doUpdateShow(false, false)
       } else if (!this.clicked) {
-        this.handleActive2 = false
-        this.handleActive1 = false
         this.doUpdateShow(false, false)
       }
     },
