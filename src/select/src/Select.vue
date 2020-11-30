@@ -47,7 +47,7 @@
         <transition
           name="n-fade-in-scale-up-transition"
           :appear="isMounted"
-          @after-leave="handleMenuAfterLeave"
+          @leave="handleMenuLeave"
         >
           <n-base-select-menu
             v-if="mergedShow"
@@ -137,6 +137,20 @@ function filterOptions (originalOpts, filter, pattern) {
     return filteredOptions
   }
   return traverse(originalOpts)
+}
+
+function createValOptMap (options) {
+  const valOptMap = new Map()
+  options.forEach(option => {
+    if (option.type === 'group') {
+      option.children.forEach(groupOption => {
+        valOptMap.set(groupOption.value, groupOption)
+      })
+    } else {
+      valOptMap.set(option.value, option)
+    }
+  })
+  return valOptMap
 }
 
 export default {
@@ -306,7 +320,7 @@ export default {
         return node.value
       }
     }))
-    const tmNodeMap = computed(() => treeMateRef.value.treeNodeMap)
+    const valOptMapRef = computed(() => createValOptMap(props.options))
     const uncontrolledShowRef = ref(false)
     const mergedShowRef = useMergedState(
       toRef(props, 'show'),
@@ -318,7 +332,7 @@ export default {
       flattenedNodes: computed(() => {
         return treeMateRef.value.flattenedNodes
       }),
-      tmNodeMap,
+      valOptMap: valOptMapRef,
       isMounted: useIsMounted(),
       offsetContainerRef: ref(null),
       triggerRef: ref(null),
@@ -367,14 +381,14 @@ export default {
         if (!Array.isArray(values)) return []
         const remote = this.remote
         const {
-          tmNodeMap,
+          valOptMap,
           memoValOptMap,
           wrappedFallbackOption
         } = this
         const options = []
         values.forEach(value => {
-          if (tmNodeMap.has(value)) {
-            options.push(tmNodeMap.get(value).rawNode)
+          if (valOptMap.has(value)) {
+            options.push(valOptMap.get(value))
           } else if (remote && memoValOptMap.has(value)) {
             options.push(memoValOptMap.get(value))
           } else if (wrappedFallbackOption) {
@@ -390,10 +404,11 @@ export default {
     },
     selectedOption () {
       if (!this.multiple) {
-        const { value, tmNodeMap, wrappedFallbackOption } = this
+        const { value, valOptMap, wrappedFallbackOption } = this
+        if (value === null) return null
         let selectedOption = null
-        if (tmNodeMap.has(value)) {
-          selectedOption = tmNodeMap.get(value).rawNode
+        if (valOptMap.has(value)) {
+          selectedOption = valOptMap.get(value)
         } else if (this.remote) {
           selectedOption = this.memoValOptMap.get(value)
         }
@@ -509,7 +524,7 @@ export default {
     closeMenu () {
       this.uncontrolledShow = false
     },
-    handleMenuAfterLeave () {
+    handleMenuLeave () {
       this.pattern = ''
     },
     handleTriggerClick () {
@@ -545,13 +560,13 @@ export default {
         // if there's no option fallback, unappeared options are treated as invalid
         const {
           remote,
-          tmNodeMap
+          valOptMap
         } = this
         if (remote) {
           const { memoValOptMap } = this
-          return value.filter(v => tmNodeMap.has(v) || memoValOptMap.has(v))
+          return value.filter(v => valOptMap.has(v) || memoValOptMap.has(v))
         } else {
-          return value.filter(v => tmNodeMap.has(v))
+          return value.filter(v => valOptMap.has(v))
         }
       }
     },
@@ -566,10 +581,10 @@ export default {
           this.beingCreatedOptions = []
         }
       }
+      if (remote) {
+        this.memoValOptMap.set(option.value, option)
+      }
       if (this.multiple) {
-        if (remote) {
-          this.memoValOptMap.set(option.value, option)
-        }
         const changedValue = this.createClearedMultipleSelectValue(this.value)
         const index = changedValue.findIndex(value => value === option.value)
         if (~index) {

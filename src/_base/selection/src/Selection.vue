@@ -202,11 +202,6 @@ export default {
   mixins: [
     withCssr(styles)
   ],
-  inject: {
-    NFormItem: {
-      default: null
-    }
-  },
   props: {
     bordered: {
       type: Boolean,
