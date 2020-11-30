@@ -13,13 +13,13 @@
       <v-target>
         <div
           ref="triggerRef"
-          v-bind="$attrs"
           class="n-date-picker"
           @keydown="handleKeyDown"
         >
           <n-input
             v-if="isRange"
             ref="inputRef"
+            :bordered="mergedBordered"
             :size="mergedSize"
             :theme="mergedTheme"
             passively-activated
@@ -230,8 +230,11 @@ export default {
       NDatePicker: this
     }
   },
-  inheritAttrs: false,
   props: {
+    bordered: {
+      type: Boolean,
+      default: undefined
+    },
     clearable: {
       type: Boolean,
       default: false

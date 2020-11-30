@@ -1,63 +1,64 @@
 <template>
-  <v-binder>
-    <v-target>
-      <div
-        ref="triggerRef"
-        v-bind="$attrs"
-        class="n-auto-complete"
-        @keydown.down="handleKeyDownDown"
-        @keydown.up="handleKeyDownUp"
-        @keydown.enter="handleKeyDownEnter"
-        @compositionstart="handleCompositionStart"
-        @compositionend="handleCompositionEnd"
-      >
-        <slot
-          :handleInput="handleInput"
-          :handleFocus="handleFocus"
-          :handleBlur="handleBlur"
-          :value="value"
-          :theme="mergedTheme"
+  <div class="n-auto-complete">
+    <v-binder>
+      <v-target>
+        <div
+          ref="triggerRef"
+          @keydown.down="handleKeyDownDown"
+          @keydown.up="handleKeyDownUp"
+          @keydown.enter="handleKeyDownEnter"
+          @compositionstart="handleCompositionStart"
+          @compositionend="handleCompositionEnd"
         >
-          <n-input
-            :theme="mergedTheme"
+          <slot
+            :handleInput="handleInput"
+            :handleFocus="handleFocus"
+            :handleBlur="handleBlur"
             :value="value"
-            :placeholder="placeholder"
-            :size="mergedSize"
-            @focus="canBeActivated = true"
-            @input="handleInput"
-            @blur="handleBlur"
-          />
-        </slot>
-      </div>
-    </v-target>
-    <v-follower
-      :show="active"
-      :to="adjustedTo"
-      :container-class="namespace"
-      :z-index="zIndex"
-      placement="bottom-start"
-      width="target"
-    >
-      <transition
-        name="n-fade-in-scale-up-transition"
-        :appear="isMounted"
+            :theme="mergedTheme"
+          >
+            <n-input
+              :bordered="mergedBordered"
+              :theme="mergedTheme"
+              :value="value"
+              :placeholder="placeholder"
+              :size="mergedSize"
+              @focus="canBeActivated = true"
+              @input="handleInput"
+              @blur="handleBlur"
+            />
+          </slot>
+        </div>
+      </v-target>
+      <v-follower
+        :show="active"
+        :to="adjustedTo"
+        :container-class="namespace"
+        :z-index="zIndex"
+        placement="bottom-start"
+        width="target"
       >
-        <n-base-select-menu
-          v-if="active"
-          ref="menuRef"
-          v-clickoutside="handleClickOutsideMenu"
-          auto-pending
-          class="n-auto-complete-menu"
-          :theme="mergedTheme"
-          :pattern="value"
-          :tree-mate="treeMate"
-          :multiple="false"
-          size="medium"
-          @menu-toggle-option="handleToggleOption"
-        />
-      </transition>
-    </v-follower>
-  </v-binder>
+        <transition
+          name="n-fade-in-scale-up-transition"
+          :appear="isMounted"
+        >
+          <n-base-select-menu
+            v-if="active"
+            ref="menuRef"
+            v-clickoutside="handleClickOutsideMenu"
+            auto-pending
+            class="n-auto-complete-menu"
+            :theme="mergedTheme"
+            :pattern="value"
+            :tree-mate="treeMate"
+            :multiple="false"
+            size="medium"
+            @menu-toggle-option="handleToggleOption"
+          />
+        </transition>
+      </v-follower>
+    </v-binder>
+  </div>
 </template>
 
 <script>
@@ -104,8 +105,11 @@ export default {
     asFormItem(),
     withCssr(styles)
   ],
-  inheritAttrs: false,
   props: {
+    bordered: {
+      type: Boolean,
+      default: undefined
+    },
     placeholder: {
       type: String,
       default: undefined

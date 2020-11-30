@@ -11,8 +11,7 @@
         <n-input
           ref="inputRef"
           v-model:value="displayTimeString"
-          v-bind="$attrs"
-
+          :bordered="mergedBordered"
           passively-activated
           deactivate-on-enter
           :attr-size="syntheticAttrSize"
@@ -140,8 +139,11 @@ export default {
     asFormItem(),
     withCssr(styles)
   ],
-  inheritAttrs: false,
   props: {
+    bordered: {
+      type: Boolean,
+      default: undefined
+    },
     placeholder: {
       type: String,
       default: undefined
