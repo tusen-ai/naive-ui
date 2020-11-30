@@ -6,7 +6,7 @@ function createRenderer (wrapCodeWithCard = true) {
   const overrides = {
     table (header, body) {
       if (body) body = '<tbody class="n-table__tbody">' + body + '</tbody>'
-      return '<n-table single-column class="api-table">\n' +
+      return '<n-table single-column class="md-table">\n' +
         '<thead class="n-table__thead">\n' +
         header +
         '</thead>\n' +
@@ -32,7 +32,7 @@ function createRenderer (wrapCodeWithCard = true) {
         throw new Error(`MdRendererError: ${language} is not valid for code - ${code}`)
       }
       const highlighted = hljs.highlight(language, code).value
-      return `${wrapCodeWithCard ? '<n-card size="small" style="margin-bottom: 16px;">' : ''}<n-config-consumer abstract>
+      return `${wrapCodeWithCard ? '<n-card size="small" class="md-card">' : ''}<n-config-consumer abstract>
   <template v-slot="{ theme }">
     <pre class="n-code" :class="'n-' + theme + '-theme'"><code v-pre>${highlighted}</code><n-code style="display: none;" /></pre>
   </template>

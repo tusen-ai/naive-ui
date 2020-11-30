@@ -28,11 +28,19 @@ body {
   max-width: 680px;
 }
 
-.api-table .n-table__td:nth-child(1) {
+.md-table .n-table__td:nth-child(1) {
   font-size: 13px !important;
   font-family: v-mono, monospace;
 }
 
-.api-table .n-text.n-text--code {
+.md-table .n-text.n-text--code {
   font-size: 13px !important;
+}
+
+.md-card {
+  margin-bottom: 16px;
+}
+
+.md-table {
+  margin-bottom: 16px;
 }
