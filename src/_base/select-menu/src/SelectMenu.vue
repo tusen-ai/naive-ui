@@ -288,7 +288,7 @@ export default {
       }
     },
     setPendingTmNode (tmNode, doScroll = false) {
-      if (tmNode !== null) this.pendingTmNode = tmNode
+      this.pendingTmNode = tmNode
       if (doScroll) {
         if (this.virtualScroll) {
           this.virtualListRef.scrollTo({ index: tmNode.fIndex })
