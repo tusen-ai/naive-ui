@@ -1,85 +1,86 @@
 <template>
-  <v-binder>
-    <v-target>
-      <n-base-selection
-        ref="triggerRef"
-        class="n-cascader"
-        v-bind="$attrs"
-        :size="mergedSize"
-        :theme="mergedTheme"
-        :active="mergedShow"
-        :pattern="pattern"
-        :placeholder="localizedPlaceholder"
-        :selected-option="selectedOption"
-        :selected-options="selectedOptions"
-        :multiple="multiple"
-        :filterable="filterable"
-        :clearable="clearable"
-        :disabled="disabled"
-        @focus="handleTriggerFocus"
-        @blur="handleTriggerBlur"
-        @click="handleTriggerClick"
-        @clear="handleClear"
-        @delete-option="handleDeleteOption"
-        @delete-last-option="handleDeleteLastOption"
-        @pattern-input="handlePatternInput"
-        @keydown.space="handleKeyDownSpace"
-        @keyup.esc="handleKeyUpEsc"
-        @keyup.space="handleKeyUpSpace"
-        @keyup.enter="handleKeyUpEnter"
-        @keyup.up="handleKeyUpUp"
-        @keyup.down="handleKeyUpDown"
-        @keyup.left="handleKeyUpLeft"
-        @keyup.right="handleKeyUpRight"
-        @keydown.up.prevent
-        @keydown.down.prevent
-      />
-    </v-target>
-    <v-follower
-      key="cascaderMenu"
-      ref="cascaderMenuFollowerRef"
-      :show="mergedShow && !showSelectMenu"
-      :container-class="namespace"
-      placement="bottom-start"
-      :to="adjustedTo"
-    >
-      <cascader-menu
-        ref="cascaderMenuRef"
-        :class="{
-          [namespace]: namespace
-        }"
-        :value="value"
+  <div class="n-cascader">
+    <v-binder>
+      <v-target>
+        <n-base-selection
+          ref="triggerRef"
+          :bordered="mergedBordered"
+          :size="mergedSize"
+          :theme="mergedTheme"
+          :active="mergedShow"
+          :pattern="pattern"
+          :placeholder="localizedPlaceholder"
+          :selected-option="selectedOption"
+          :selected-options="selectedOptions"
+          :multiple="multiple"
+          :filterable="filterable"
+          :clearable="clearable"
+          :disabled="disabled"
+          @focus="handleTriggerFocus"
+          @blur="handleTriggerBlur"
+          @click="handleTriggerClick"
+          @clear="handleClear"
+          @delete-option="handleDeleteOption"
+          @delete-last-option="handleDeleteLastOption"
+          @pattern-input="handlePatternInput"
+          @keydown.space="handleKeyDownSpace"
+          @keyup.esc="handleKeyUpEsc"
+          @keyup.space="handleKeyUpSpace"
+          @keyup.enter="handleKeyUpEnter"
+          @keyup.up="handleKeyUpUp"
+          @keyup.down="handleKeyUpDown"
+          @keyup.left="handleKeyUpLeft"
+          @keyup.right="handleKeyUpRight"
+          @keydown.up.prevent
+          @keydown.down.prevent
+        />
+      </v-target>
+      <v-follower
+        key="cascaderMenu"
+        ref="cascaderMenuFollowerRef"
         :show="mergedShow && !showSelectMenu"
-        :theme="mergedTheme"
-        :size="mergedSize"
-        :menu-model="menuModel"
-      />
-    </v-follower>
-    <v-follower
-      key="selectMenu"
-      ref="selectMenuFollowerRef"
-      :show="mergedShow && showSelectMenu"
-      :container-class="namespace"
-      width="target"
-      placement="bottom-start"
-      :to="adjustedTo"
-    >
-      <cascader-select-menu
-        ref="selectMenuRef"
-        :class="{
-          [namespace]: namespace
-        }"
-        :value="value"
+        :container-class="namespace"
+        placement="bottom-start"
+        :to="adjustedTo"
+      >
+        <cascader-menu
+          ref="cascaderMenuRef"
+          :class="{
+            [namespace]: namespace
+          }"
+          :value="value"
+          :show="mergedShow && !showSelectMenu"
+          :theme="mergedTheme"
+          :size="mergedSize"
+          :menu-model="menuModel"
+        />
+      </v-follower>
+      <v-follower
+        key="selectMenu"
+        ref="selectMenuFollowerRef"
         :show="mergedShow && showSelectMenu"
-        :theme="mergedTheme"
-        :pattern="pattern"
-        :size="mergedSize"
-        :multiple="multiple"
-        :tm-nodes="treeMate.treeNodes"
-        @update:value="handleMenuInput"
-      />
-    </v-follower>
-  </v-binder>
+        :container-class="namespace"
+        width="target"
+        placement="bottom-start"
+        :to="adjustedTo"
+      >
+        <cascader-select-menu
+          ref="selectMenuRef"
+          :class="{
+            [namespace]: namespace
+          }"
+          :value="value"
+          :show="mergedShow && showSelectMenu"
+          :theme="mergedTheme"
+          :pattern="pattern"
+          :size="mergedSize"
+          :multiple="multiple"
+          :tm-nodes="treeMate.treeNodes"
+          @update:value="handleMenuInput"
+        />
+      </v-follower>
+    </v-binder>
+  </div>
 </template>
 
 <script>
@@ -124,8 +125,11 @@ export default {
       NCascader: this
     }
   },
-  inheritAttrs: false,
   props: {
+    bordered: {
+      type: Boolean,
+      default: undefined
+    },
     options: {
       type: Array,
       required: true

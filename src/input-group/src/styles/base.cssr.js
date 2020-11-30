@@ -47,13 +47,19 @@ export default c([
               border-bottom-right-radius: 0!important;
             `
           }, [
-            cE('input, add-button, border-mask', {
+            cE('input, add-button, border-mask, border', {
               raw: `
                 border-top-right-radius: 0!important;
                 border-bottom-right-radius: 0!important;
               `
             }, [
               cB('input-number-button-border-mask', {
+                raw: `
+                  border-top-right-radius: 0!important;
+                  border-bottom-right-radius: 0!important;
+                `
+              }),
+              cB('input-number-button-border', {
                 raw: `
                   border-top-right-radius: 0!important;
                   border-bottom-right-radius: 0!important;
@@ -72,7 +78,7 @@ export default c([
               border-bottom-left-radius: 0!important;
             `
           }, [
-            cE('input, minus-button, border-mask', {
+            cE('input, minus-button, border-mask, border', {
               raw: `
                 border-top-left-radius: 0!important;
                 border-bottom-left-radius: 0!important;
@@ -150,11 +156,17 @@ export default c([
                 }),
                 cB('base-selection-tags', {
                   raw: `
-                  border-top-right-radius: 0!important;
-                  border-bottom-right-radius: 0!important;
+                    border-top-right-radius: 0!important;
+                    border-bottom-right-radius: 0!important;
                   `
                 }),
                 cB('base-selection-border-mask', {
+                  raw: `
+                    border-top-right-radius: 0!important;
+                    border-bottom-right-radius: 0!important;
+                  `
+                }),
+                cB('base-selection-border', {
                   raw: `
                     border-top-right-radius: 0!important;
                     border-bottom-right-radius: 0!important;
@@ -198,6 +210,12 @@ export default c([
                   `
                 }),
                 cB('base-selection-border-mask', {
+                  raw: `
+                    border-top-left-radius: 0!important;
+                    border-bottom-left-radius: 0!important;
+                  `
+                }),
+                cB('base-selection-border', {
                   raw: `
                     border-top-left-radius: 0!important;
                     border-bottom-left-radius: 0!important;

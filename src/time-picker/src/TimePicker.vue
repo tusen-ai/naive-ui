@@ -14,7 +14,7 @@
           :bordered="mergedBordered"
           passively-activated
           deactivate-on-enter
-          :attr-size="syntheticAttrSize"
+          :attr-size="mergedAttrSize"
           :theme="mergedTheme"
           :stateful="stateful"
           :size="mergedSize"
@@ -296,7 +296,7 @@ export default {
     isValueInvalid () {
       return this.isHourInvalid || this.isMinuteInvalid || this.isSecondInvalid
     },
-    syntheticAttrSize () {
+    mergedAttrSize () {
       return this.format.length + 4
     },
     valueAsDate () {

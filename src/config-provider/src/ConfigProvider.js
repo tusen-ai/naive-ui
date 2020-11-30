@@ -18,6 +18,10 @@ export default {
     }
   },
   props: {
+    bordered: {
+      type: Boolean,
+      default: undefined
+    },
     tag: {
       type: String,
       default: 'div'
