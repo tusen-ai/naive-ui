@@ -65,6 +65,9 @@ export default {
     }
   },
   computed: {
+    timePickerSize () {
+      return this.NDatePicker.timePickerSize
+    },
     weekdays () {
       return weekdays.map(weekday => this.localeNs[weekday])
     }

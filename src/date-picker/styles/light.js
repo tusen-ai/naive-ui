@@ -1,11 +1,13 @@
 import create from '../../_styles/utils/create-component-base'
 import { changeColor } from 'seemly'
+import commonVars from './_common'
 
 export default create({
   theme: 'light',
   name: 'DatePicker',
   getDerivedVariables ({ base, derived }) {
     return {
+      ...commonVars,
       itemTextColor: derived.textColor2,
       itemTextColorDisabled: derived.textColorDisabled,
       itemTextColorMatched: derived.popoverColor,
@@ -18,12 +20,14 @@ export default create({
       panelColor: derived.popoverColor,
       panelTextColor: derived.textColor2,
       panelIconColor: derived.iconColor,
-      panelHeaderTextColor: derived.textColor1,
-      panelDividerColor: derived.dividerColor,
+      panelMonthTextColor: derived.textColorPrimary,
+      panelHeaderDividerColor: derived.dividerColor,
+      panelDayDividerColor: derived.dividerColor,
+      panelVerticalDividerColor: derived.dividerColor,
+      panelActionDivider: derived.dividerColor,
       panelBoxShadow: derived.boxShadow2,
       panelBorderRadius: base.borderRadius,
-      pickerTextDecorationColor: derived.textColor2,
-      panelHeaderFontWeight: base.fontWeightStrong
+      panelMonthFontWeight: base.fontWeightStrong
     }
   }
 })

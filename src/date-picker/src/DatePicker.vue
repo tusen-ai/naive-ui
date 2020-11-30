@@ -1,149 +1,152 @@
 <template>
-  <v-binder>
-    <v-target>
-      <div
-        ref="triggerRef"
-        v-bind="$attrs"
-        class="n-date-picker"
-        :class="{
-          [`n-${mergedTheme}-theme`]: mergedTheme,
-          'n-date-picker--disabled': disabled,
-          'n-date-picker--range': isRange,
-          'n-date-picker--invalid': isValueInvalid && !isRange,
-          'n-date-picker--start-invalid': isStartValueInvalid,
-          'n-date-picker--end-invalid': isEndValueInvalid
-        }"
-        @keydown="handleKeyDown"
-      >
-        <n-input
-          v-if="isRange"
-          ref="inputRef"
-          :size="mergedSize"
-          :theme="mergedTheme"
-          passively-activated
-          :disabled="disabled"
-          :value="[displayStartTime, displayEndTime]"
-          :placeholder="[localizedStartPlaceholder, localizedEndPlaceholder]"
-          :readonly="disabled ? 'disabled' : false"
-          :separator="localizedSeperator"
-          :force-focus="active"
-          :clearable="clearable"
-          pair
-          deactivate-on-enter
-          @clear="handleClear"
-          @click="handleActivatorClick"
-          @activate="handleInputActivate"
-          @focus="handleInputFocus"
-          @blur="handleInputBlur"
-          @deactivate="handleRangeInputDeactivate"
-          @input="handleRangeInput"
+  <div
+    :class="{
+      [`n-${mergedTheme}-theme`]: mergedTheme,
+      'n-date-picker--disabled': disabled,
+      'n-date-picker--range': isRange,
+      'n-date-picker--invalid': isValueInvalid && !isRange,
+      'n-date-picker--start-invalid': isStartValueInvalid,
+      'n-date-picker--end-invalid': isEndValueInvalid
+    }"
+  >
+    <v-binder>
+      <v-target>
+        <div
+          ref="triggerRef"
+          v-bind="$attrs"
+          class="n-date-picker"
+          @keydown="handleKeyDown"
         >
-          <template #suffix>
-            <n-icon>
-              <calendar-icon />
-            </n-icon>
-          </template>
-        </n-input>
-        <n-input
-          v-else
-          ref="inputRef"
-          v-model:value="displayTime"
-          :theme="mergedTheme"
-          passively-activated
-          :size="mergedSize"
-          :force-focus="active"
-          :disabled="disabled"
-          :placeholder="localizedPlacehoder"
-          :readonly="disabled ? 'disabled' : false"
-          :clearable="clearable"
-          deactivate-on-enter
-          @click="handleActivatorClick"
-          @focus="handleInputFocus"
-          @blur="handleInputBlur"
-          @activate="handleInputActivate"
-          @deactivate="handleInputDeactivate"
-          @input="handleTimeInput"
-          @clear="handleClear"
-        >
-          <template #suffix>
-            <n-icon>
-              <calendar-icon />
-            </n-icon>
-          </template>
-        </n-input>
-      </div>
-    </v-target>
-    <v-follower
-      :show="active"
-      :container-class="namespace"
-      :to="adjustedTo"
-      placement="bottom-start"
-    >
-      <transition
-        name="n-fade-in-scale-up-transition"
-        :appear="isMounted"
+          <n-input
+            v-if="isRange"
+            ref="inputRef"
+            :size="mergedSize"
+            :theme="mergedTheme"
+            passively-activated
+            :disabled="disabled"
+            :value="[displayStartTime, displayEndTime]"
+            :placeholder="[localizedStartPlaceholder, localizedEndPlaceholder]"
+            :readonly="disabled ? 'disabled' : false"
+            :separator="localizedSeperator"
+            :force-focus="active"
+            :clearable="clearable"
+            pair
+            deactivate-on-enter
+            @clear="handleClear"
+            @click="handleActivatorClick"
+            @activate="handleInputActivate"
+            @focus="handleInputFocus"
+            @blur="handleInputBlur"
+            @deactivate="handleRangeInputDeactivate"
+            @input="handleRangeInput"
+          >
+            <template #suffix>
+              <n-icon>
+                <calendar-icon />
+              </n-icon>
+            </template>
+          </n-input>
+          <n-input
+            v-else
+            ref="inputRef"
+            v-model:value="displayTime"
+            :theme="mergedTheme"
+            passively-activated
+            :size="mergedSize"
+            :force-focus="active"
+            :disabled="disabled"
+            :placeholder="localizedPlacehoder"
+            :readonly="disabled ? 'disabled' : false"
+            :clearable="clearable"
+            deactivate-on-enter
+            @click="handleActivatorClick"
+            @focus="handleInputFocus"
+            @blur="handleInputBlur"
+            @activate="handleInputActivate"
+            @deactivate="handleInputDeactivate"
+            @input="handleTimeInput"
+            @clear="handleClear"
+          >
+            <template #suffix>
+              <n-icon>
+                <calendar-icon />
+              </n-icon>
+            </template>
+          </n-input>
+        </div>
+      </v-target>
+      <v-follower
+        :show="active"
+        :container-class="namespace"
+        :to="adjustedTo"
+        placement="bottom-start"
       >
-        <datetime-panel
-          v-if="type === 'datetime' && active"
-          ref="panelRef"
-          v-clickoutside="handleClickOutside"
-          :value="value"
-          :active="active"
-          :actions="actions"
-          :theme="mergedTheme"
-          :format="computedFormat"
-          @update:value="handlePanelInput"
-          @tab-out="handlePanelTabOut"
-          @close="handlePanelClose"
-          @keydown.esc="handlePanelKeyDownEsc"
-          @keydown="handleKeyDown"
-        />
-        <date-panel
-          v-else-if="type === 'date' && active"
-          ref="panelRef"
-          v-clickoutside="handleClickOutside"
-          :value="value"
-          :active="active"
-          :actions="actions"
-          :theme="mergedTheme"
-          @update:value="handlePanelInput"
-          @tab-out="handlePanelTabOut"
-          @close="handlePanelClose"
-          @keydown.esc="handlePanelKeyDownEsc"
-          @keydown="handleKeyDown"
-        />
-        <daterange-panel
-          v-else-if="type === 'daterange' && active"
-          ref="panelRef"
-          v-clickoutside="handleClickOutside"
-          :value="value"
-          :active="active"
-          :actions="actions"
-          :theme="mergedTheme"
-          @update:value="handleRangePanelInput"
-          @tab-out="handlePanelTabOut"
-          @close="handlePanelClose"
-          @keydown.esc="handlePanelKeyDownEsc"
-          @keydown="handleKeyDown"
-        />
-        <datetimerange-panel
-          v-else-if="type === 'datetimerange' && active"
-          ref="panelRef"
-          v-clickoutside="handleClickOutside"
-          :format="computedFormat"
-          :value="value"
-          :active="active"
-          :actions="actions"
-          :theme="mergedTheme"
-          @update:value="handleRangePanelInput"
-          @close="handlePanelClose"
-          @tab-out="handlePanelTabOut"
-          @keydown.esc="handlePanelKeyDownEsc"
-          @keydown="handleKeyDown"
-        />
-      </transition>
-    </v-follower>
-  </v-binder>
+        <transition
+          name="n-fade-in-scale-up-transition"
+          :appear="isMounted"
+        >
+          <datetime-panel
+            v-if="type === 'datetime' && active"
+            ref="panelRef"
+            v-clickoutside="handleClickOutside"
+            :value="value"
+            :active="active"
+            :actions="actions"
+            :theme="mergedTheme"
+            :format="computedFormat"
+            @update:value="handlePanelInput"
+            @tab-out="handlePanelTabOut"
+            @close="handlePanelClose"
+            @keydown.esc="handlePanelKeyDownEsc"
+            @keydown="handleKeyDown"
+          />
+          <date-panel
+            v-else-if="type === 'date' && active"
+            ref="panelRef"
+            v-clickoutside="handleClickOutside"
+            :value="value"
+            :active="active"
+            :actions="actions"
+            :theme="mergedTheme"
+            @update:value="handlePanelInput"
+            @tab-out="handlePanelTabOut"
+            @close="handlePanelClose"
+            @keydown.esc="handlePanelKeyDownEsc"
+            @keydown="handleKeyDown"
+          />
+          <daterange-panel
+            v-else-if="type === 'daterange' && active"
+            ref="panelRef"
+            v-clickoutside="handleClickOutside"
+            :value="value"
+            :active="active"
+            :actions="actions"
+            :theme="mergedTheme"
+            @update:value="handleRangePanelInput"
+            @tab-out="handlePanelTabOut"
+            @close="handlePanelClose"
+            @keydown.esc="handlePanelKeyDownEsc"
+            @keydown="handleKeyDown"
+          />
+          <datetimerange-panel
+            v-else-if="type === 'datetimerange' && active"
+            ref="panelRef"
+            v-clickoutside="handleClickOutside"
+            :format="computedFormat"
+            :value="value"
+            :active="active"
+            :actions="actions"
+            :theme="mergedTheme"
+            @update:value="handleRangePanelInput"
+            @close="handlePanelClose"
+            @tab-out="handlePanelTabOut"
+            @keydown.esc="handlePanelKeyDownEsc"
+            @keydown="handleKeyDown"
+          />
+        </transition>
+      </v-follower>
+    </v-binder>
+  </div>
 </template>
 
 <script>
@@ -337,6 +340,16 @@ export default {
     }
   },
   computed: {
+    timePickerSize () {
+      const {
+        unstableConfig
+      } = this.$naive
+      const size = unstableConfig?.DatePicker?.timePickerSize
+      if (size) {
+        return size
+      }
+      return 'small'
+    },
     isRange () {
       return ['daterange', 'datetimerange'].includes(this.type)
     },

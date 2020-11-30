@@ -69,7 +69,7 @@
     </div>
     <n-select
       v-if="showSizePicker"
-      size="small"
+      :size="inputSize"
       placeholder=""
       :options="pageSizeOptions"
       :value="pageSize"
@@ -82,7 +82,7 @@
     >
       {{ localeNs.goto }} <n-input
         v-model:value="quickJumperValue"
-        size="small"
+        :size="inputSize"
         placeholder=""
         :disabled="disabled"
         @keyup="handleQuickJumperKeyUp"
@@ -212,6 +212,17 @@ export default {
         label: `${size} / ${suffix}`,
         value: size
       }))
+    },
+    // unstable feature
+    inputSize () {
+      const {
+        unstableConfig
+      } = this.$naive
+      const size = unstableConfig?.Pagination?.inputSize
+      if (size) {
+        return size
+      }
+      return 'small'
     }
   },
   watch: {

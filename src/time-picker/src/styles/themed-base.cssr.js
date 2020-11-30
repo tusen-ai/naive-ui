@@ -7,13 +7,16 @@ export default c([
       panelColor,
       itemTextColor,
       itemTextColorActive,
-      triggerTextDecorationColor,
-      triggerTextDecorationColorActive,
+      itemTextDecorationColorActive,
       itemColorHover,
       panelDividerColor,
       panelBoxShadow,
       itemOpacityDisabled,
-      borderRadius
+      borderRadius,
+      itemFontSize,
+      itemWidth,
+      itemHeight,
+      panelActionPadding
     } = props.$local
     const {
       transformDebounceScale,
@@ -23,17 +26,14 @@ export default c([
       cTB('time-picker', [
         cM('invalid', [
           c('input', {
-            raw: `
-              text-decoration: line-through;
-              text-decoration-color: ${triggerTextDecorationColor};
-            `
+            textDecoration: 'line-through'
           })
         ])
       ]),
       cTB('time-picker-panel', {
         raw: `
           outline: none;
-          font-size: 12px;
+          font-size: ${itemFontSize};
           border-radius: ${borderRadius};
           margin: 4px 0;
           min-width: 104px;
@@ -46,7 +46,7 @@ export default c([
         fadeInScaleUpTransition(),
         cB('time-picker-actions', {
           raw: `
-            height: 38px;
+            padding: ${panelActionPadding};
             align-items: center;
             display: flex;
             justify-content: space-evenly;
@@ -63,7 +63,7 @@ export default c([
         ]),
         cB('time-picker-cols', {
           raw: `
-            height: 224px;
+            height: calc(${itemHeight} * 7);
             display: flex;
             position: relative;
             border-bottom: 1px solid ${panelDividerColor};
@@ -72,23 +72,24 @@ export default c([
         cB('time-picker-col', {
           raw: `
             flex-grow: 1;
-            min-width: 52px;
-            height: 224px;
+            min-width: ${itemWidth};
+            height: calc(${itemHeight} * 7);
             flex-direction: column;
             transition: box-shadow .3s ${cubicBezierEaseInOut};
           `
         }, [
           cM('transition-disabled', [
             cE('item', {
-              raw: `
-                transition: none;
-              `
+              transition: 'none'
             })
           ]),
+          cE('padding', {
+            height: `calc(${itemHeight} * 6)`
+          }),
           cE('item', {
             raw: `
               cursor: pointer;
-              height: 32px;
+              height: ${itemHeight};
               display: flex;
               align-items: center;
               justify-content: center;
@@ -104,9 +105,7 @@ export default c([
           }, [
             cNotM('disabled', [
               c('&:hover', {
-                raw: `
-                  background-color:  ${itemColorHover};
-                `
+                backgroundColor: itemColorHover
               })
             ]),
             cM('active', {
@@ -127,7 +126,7 @@ export default c([
               cM('active', {
                 raw: `
                   text-decoration: line-through;
-                  text-decoration-color: ${triggerTextDecorationColorActive};
+                  text-decoration-color: ${itemTextDecorationColorActive};
                 `
               })
             ])

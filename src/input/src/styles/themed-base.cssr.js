@@ -22,7 +22,8 @@ export default c([
       borderDisabled,
       colorDisabled,
       textColorDisabled,
-      placeholderColorDisabled
+      placeholderColorDisabled,
+      textDecorationColor
     } = props.$local
     const {
       cubicBezierEaseInOut
@@ -219,12 +220,14 @@ export default c([
           width: 100%;
           background-color: transparent;
           min-width: 0;
+          text-decoration-color: ${textDecorationColor};
+          color: ${textColor};
+          caret-color: ${caretColor};
           transition:
+            caret-color .3s ${cubicBezierEaseInOut},
             color .3s ${cubicBezierEaseInOut},
             text-decoration-color .3s ${cubicBezierEaseInOut};
-        `,
-        color: textColor,
-        caretColor: caretColor
+        `
       }, [
         c('&::placeholder', {
           color: 'transparent'

@@ -13,5 +13,5 @@ export default {
 
   lineHeight: '1.75',
 
-  transformDebounceScale: 'scale(0.99999)'
+  transformDebounceScale: 'scale(1)'
 }

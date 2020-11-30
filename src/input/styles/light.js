@@ -35,6 +35,7 @@ export default create({
       iconSize: '16px',
       textColor: textColor2,
       textColorDisabled: textColor4,
+      textDecorationColor: textColor2,
       caretColor: primaryColor,
       placeholderColor: textColor4,
       placeholderColorDisabled: textColor5,

@@ -31,7 +31,7 @@
             {{ hour }}
           </div>
           <div
-            style="height: 192px;"
+            class="n-time-picker-col__padding"
           />
         </n-scrollbar>
       </div>
@@ -58,7 +58,7 @@
             {{ minute }}
           </div>
           <div
-            style="height: 192px;"
+            class="n-time-picker-col__padding"
           />
         </n-scrollbar>
       </div>
@@ -86,7 +86,7 @@
             {{ second }}
           </div>
           <div
-            style="height: 192px;"
+            class="n-time-picker-col__padding"
           />
         </n-scrollbar>
       </div>

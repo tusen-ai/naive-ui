@@ -34,6 +34,7 @@ export default create({
       iconSize: '16px',
       textColor: textColor2Overlay,
       textColorDisabled: textColor4Overlay,
+      textDecorationColor: textColor2Overlay,
       caretColor: primaryColor,
       placeholderColor: textColor4Overlay,
       placeholderColorDisabled: textColor5Overlay,

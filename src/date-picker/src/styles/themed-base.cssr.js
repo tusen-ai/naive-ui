@@ -8,6 +8,9 @@ export default c([
       cubicBezierEaseInOut
     } = props.$base
     const {
+      panelMonthFontSize,
+      panelDayFontSize,
+      itemFontSize,
       itemTextColor,
       itemTextColorMatched,
       itemSupColor,
@@ -18,12 +21,24 @@ export default c([
       panelColor,
       panelTextColor,
       panelIconColor,
-      panelHeaderTextColor,
-      panelDividerColor,
+      panelMonthTextColor,
+      panelActionDivider,
+      panelHeaderDividerColor,
+      panelDayDividerColor,
       panelBoxShadow,
       panelBorderRadius,
-      panelHeaderFontWeight,
-      pickerTextDecorationColor
+      panelMonthFontWeight,
+      panelActionPadding,
+      itemSize,
+      itemSpaceWidth,
+      itemSpaceHeight,
+      panelMonthPadding,
+      panelMonthHeight,
+      panelDatePaddingDate,
+      panelDatePaddingDateTime,
+      panelArrowButtonSize,
+      panelHeaderPadding,
+      panelVerticalDividerColor
     } = props.$local
     return [
       cTB('date-picker', {
@@ -31,20 +46,17 @@ export default c([
       }, [
         cM('invalid', [
           c('input', {
-            textDecoration: 'line-through',
-            textDecorationColor: pickerTextDecorationColor
+            textDecoration: 'line-through'
           })
         ]),
         cM('start-invalid', [
           c('input:nth-of-type(1)', {
-            textDecoration: 'line-through',
-            textDecorationColor: pickerTextDecorationColor
+            textDecoration: 'line-through'
           })
         ]),
         cM('end-invalid', [
           c('input:nth-of-type(2)', {
-            textDecoration: 'line-through',
-            textDecorationColor: pickerTextDecorationColor
+            textDecoration: 'line-through'
           })
         ])
       ]),
@@ -62,7 +74,7 @@ export default c([
       }, [
         fadeInScaleUpTransition(),
         cB('date-panel-calendar', {
-          padding: '4px 12px',
+          padding: panelDatePaddingDateTime,
           display: 'grid',
           gridTemplateColumns: '1fr'
         }),
@@ -73,7 +85,7 @@ export default c([
           `
         }, [
           cB('date-panel-calendar', {
-            paddingTop: '6px',
+            padding: panelDatePaddingDate,
             gridArea: 'calendar'
           }),
           cB('date-panel-actions', {
@@ -87,7 +99,7 @@ export default c([
           `
         }, [
           cB('date-panel-calendar', {
-            paddingTop: '6px'
+            padding: panelDatePaddingDate
           }, [
             cM('start', {
               gridArea: 'start-calendar'
@@ -144,47 +156,28 @@ export default c([
             box-sizing: border-box;
             width: 100%;
             align-items: center;
-            padding: 8px 12px;
+            padding: ${panelHeaderPadding};
             display: flex;
             justify-content: space-between;
-            border-bottom: 1px solid ${panelDividerColor};
+            border-bottom: 1px solid ${panelHeaderDividerColor};
           `
         }, [
-          cE('arrow', {
-            raw: `
-              width: 16px;
-              height: 16px;
-              margin: 0 8px;
-              position: relative;
-            `
-          }),
-          cB('base-icon', {
-            raw: `
-              position: absolute;
-              left: 0;
-              right: 0;
-              top: 0;
-              bottom: 0;
-              fill: ${panelIconColor};
-            `
-          }),
           c('>', [
-            cB('input', {
-              marginRight: '10px',
+            c('*:not(:last-child)', {
+              marginRight: '10px'
+            }),
+            c('*', {
               flex: 1,
               width: 0
             }),
             cB('time-picker', {
-              zIndex: 1,
-              flex: 1,
-              width: 0
+              zIndex: 1
             })
           ]),
           cB('data-panel-date-input', [
             cM('invalid', [
               c('input', {
-                textDecoration: 'line-through',
-                textDecorationColor: pickerTextDecorationColor
+                textDecoration: 'line-through'
               })
             ])
           ])
@@ -194,17 +187,17 @@ export default c([
             display: flex;
             box-sizing: border-box;
             align-items: center;
-            height: 28px;
-            padding: 0 8px;
+            height: ${panelMonthHeight};
+            padding: ${panelMonthPadding};
           `
         }, [
           cE('prev, next, fast-prev, fast-next', {
             raw: `
               line-height: 0;
               cursor: pointer;
-              width: 14px;
-              height: 14px;
-              color: ${panelIconColor};
+              width: ${panelArrowButtonSize};
+              height: ${panelArrowButtonSize};
+              fill: ${panelIconColor};
             `
           }),
           cE('fast-prev, next', {
@@ -212,12 +205,12 @@ export default c([
           }),
           cE('month-year', {
             raw: `
-              font-size: 14px;
-              font-weight: ${panelHeaderFontWeight};
+              font-size: ${panelMonthFontSize};
+              font-weight: ${panelMonthFontWeight};
               line-height: 17px;
               flex-grow: 1;
               text-align: center;
-              color: ${panelHeaderTextColor};
+              color: ${panelMonthTextColor};
             `
           })
         ]),
@@ -225,20 +218,20 @@ export default c([
           raw: `
             display: grid;
             margin: auto;
-            grid-template-columns: repeat(7, 38px);
-            grid-template-rows: repeat(1, 32px);
+            grid-template-columns: repeat(7, ${itemSpaceWidth});
+            grid-template-rows: repeat(1, ${itemSpaceHeight});
             align-items: center;
             justify-items: center;
             margin-bottom: 4px;
-            border-bottom: 1px solid ${panelDividerColor}
+            border-bottom: 1px solid ${panelDayDividerColor}
           `
         }, [
           cE('day', {
             raw: `
               line-height: 15px;
-              width: 24px;
+              width: ${itemSize};
               text-align: center;
-              font-size: 12px;
+              font-size: ${panelDayFontSize};
               color: ${itemTextColor};
             `
           })
@@ -247,8 +240,8 @@ export default c([
           raw: `
             margin: auto;
             display: grid;
-            grid-template-columns: repeat(7, 38px);
-            grid-template-rows: repeat(6, 32px);
+            grid-template-columns: repeat(7, ${itemSpaceWidth});
+            grid-template-rows: repeat(6, ${itemSpaceHeight});
             align-items: center;
             justify-items: center;
             flex-wrap: wrap;
@@ -257,11 +250,11 @@ export default c([
           cB('date-panel-date', {
             raw: `
               position: relative;
-              width: 24px;
-              height: 24px;
-              line-height: 24px;
+              width: ${itemSize};
+              height: ${itemSize};
+              line-height: ${itemSize};
               text-align: center;
-              font-size: 13px;
+              font-size: ${itemFontSize};
               border-radius: ${itemBorderRadius};
               z-index: 0;
               cursor: pointer;
@@ -303,12 +296,20 @@ export default c([
                     content: "";
                     z-index: -1;
                     position: absolute;
-                    left: -7px;
-                    right: -7px;
+                    left: calc((${itemSize} - ${itemSpaceWidth}) / 2);
+                    right: calc((${itemSize} - ${itemSpaceWidth}) / 2);
                     top: 0;
                     bottom: 0;
                     background-color: ${itemColorHover};
                   `
+                }),
+                c('&:nth-child(7n + 1)::before', {
+                  borderTopLeftRadius: itemBorderRadius,
+                  borderBottomLeftRadius: itemBorderRadius
+                }),
+                c('&:nth-child(7n + 7)::before', {
+                  borderTopRightRadius: itemBorderRadius,
+                  borderBottomRightRadius: itemBorderRadius
                 })
               ])
             ]),
@@ -334,17 +335,17 @@ export default c([
             grid-area: divider;
             height: 100%;
             width: 1px;
-            background-color: ${panelDividerColor};
+            background-color: ${panelVerticalDividerColor};
           `
         }),
         cB('date-panel-actions', {
           raw: `
             flex: 1;
-            padding: 8px 12px;
+            padding: ${panelActionPadding};
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            border-top: 1px solid ${panelDividerColor};
+            border-top: 1px solid ${panelActionDivider};
           `
         }, [
           cB('button', {

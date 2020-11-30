@@ -15,7 +15,7 @@
       <n-input
         v-model:value="startDateDisplayString"
         :theme="theme"
-        size="small"
+        :size="timePickerSize"
         :stateful="false"
         class="n-date-panel-date-input"
         :class="{
@@ -26,7 +26,7 @@
         @input="handleStartDateInput"
       />
       <n-time-picker
-        size="small"
+        :size="timePickerSize"
         teleport-disabled
         :show-icon="false"
         :theme="theme"
@@ -39,14 +39,11 @@
         :is-second-disabled="isStartSecondDisabled"
         @update:value="handleStartTimePickerChange"
       />
-      <div class="n-date-panel-input-wrapper__arrow">
-        <forward-icon />
-      </div>
       <n-input
         v-model:value="endDateDisplayString"
         :theme="theme"
         :stateful="false"
-        size="small"
+        :size="timePickerSize"
         class="n-date-panel-date-input"
         :class="{
           'n-date-panel-date-input--invalid': isEndValueInvalid
@@ -59,7 +56,7 @@
         :show-icon="false"
         :theme="theme"
         teleport-disabled
-        size="small"
+        :size="timePickerSize"
         :stateful="false"
         :format="timeFormat"
         :placeholder="localeNs.selectTime"

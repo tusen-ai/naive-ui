@@ -254,11 +254,11 @@ export default {
       }
     },
     startCalendarNextYear () {
-      this.startCalendarDateTime = addMonths(this.startCalendarDateTime, 1)
+      this.startCalendarDateTime = addMonths(this.startCalendarDateTime, 12)
       this.adjustCalendarTimes(true)
     },
     startCalendarPrevYear () {
-      this.startCalendarDateTime = addMonths(this.startCalendarDateTime, -1)
+      this.startCalendarDateTime = addMonths(this.startCalendarDateTime, -12)
       this.adjustCalendarTimes(true)
     },
     startCalendarNextMonth () {
@@ -270,11 +270,11 @@ export default {
       this.adjustCalendarTimes(true)
     },
     endCalendarNextYear () {
-      this.endCalendarDateTime = addMonths(this.endCalendarDateTime, 1)
+      this.endCalendarDateTime = addMonths(this.endCalendarDateTime, 12)
       this.adjustCalendarTimes(false)
     },
     endCalendarPrevYear () {
-      this.endCalendarDateTime = addMonths(this.endCalendarDateTime, -1)
+      this.endCalendarDateTime = addMonths(this.endCalendarDateTime, -12)
       this.adjustCalendarTimes(false)
     },
     endCalendarNextMonth () {

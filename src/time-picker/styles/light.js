@@ -1,4 +1,5 @@
 import create from '../../_styles/utils/create-component-base'
+import commonVars from './_common'
 
 export default create({
   theme: 'light',
@@ -17,6 +18,7 @@ export default create({
       borderRadius
     } = base
     return {
+      ...commonVars,
       panelColor: modalColor,
       panelBoxShadow: boxShadow2,
       panelDividerColor: dividerColorOverlay,

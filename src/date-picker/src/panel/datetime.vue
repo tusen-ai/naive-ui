@@ -15,7 +15,7 @@
         v-model:value="displayDateString"
         :theme="theme"
         :stateful="false"
-        size="small"
+        :size="timePickerSize"
         class="n-date-panel-date-input"
         :class="{
           'n-date-panel-date-input--invalid': isDateInvalid
@@ -30,7 +30,7 @@
         :stateful="false"
         :theme="theme"
         teleport-disabled
-        size="small"
+        :size="timePickerSize"
         :value="value"
         :placeholder="localeNs.selectTime"
         :is-hour-disabled="isHourDisabled"

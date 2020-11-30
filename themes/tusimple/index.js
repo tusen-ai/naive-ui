@@ -32,6 +32,14 @@ const unconfigurableStyle = c([
 ])
 
 function tusimpleTheme (naive) {
+  naive.unstableConfig = {
+    Pagination: {
+      inputSize: 'medium'
+    },
+    DatePicker: {
+      timePickerSize: 'medium'
+    }
+  }
   unconfigurableStyle.mount({
     target: 'naive-ui/tusimple-theme',
     count: false
@@ -311,6 +319,31 @@ function tusimpleTheme (naive) {
   naive.styles.light.Breadcrumb.override({
     fontSize: '16px',
     fontWeightActive: '500'
+  })
+  naive.styles.light.DatePicker.override({
+    itemBorderRadius: '14px',
+    panelHeaderDividerColor: 'transparent',
+    panelDayDividerColor: 'transparent',
+    itemFontSize: '16px',
+    panelDayFontSize: '16px',
+    panelMonthFontSize: '16px',
+    panelActionPadding: '12px 20px',
+    itemSize: '28px',
+    itemSpaceWidth: '40px',
+    itemSpaceHeight: '34px',
+    panelMonthPadding: '0 8px 8px 8px',
+    panelMonthHeight: '32px',
+    panelDatePaddingDate: '12px 16px 9px 16px',
+    panelDatePaddingDateTime: '6px 16px 9px 16px',
+    panelArrowButtonSize: '24px',
+    panelHeaderPadding: '12px 20px 8px 20px',
+    panelVerticalDividerColor: 'transparent'
+  })
+  naive.styles.light.TimePicker.override({
+    itemFontSize: '16px',
+    itemHeight: '38px',
+    itemWidth: '66px',
+    panelActionPadding: '12px 20px'
   })
 }
 
