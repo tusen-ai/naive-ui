@@ -19,7 +19,7 @@ fs.writeFileSync(path.resolve(themeStylesPath, 'light.js'), `import create from 
 export default create({
   theme: 'light',
   name: '',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     return {}
   }
 })
@@ -29,7 +29,7 @@ fs.writeFileSync(path.resolve(themeStylesPath, 'dark.js'), `import create from '
 export default create({
   theme: 'dark',
   name: '',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     return {}
   }
 })

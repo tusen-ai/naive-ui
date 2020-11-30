@@ -17,7 +17,7 @@ export default c([
     } = props.$local
     const {
       cubicBezierEaseInOut
-    } = props.$base
+    } = props.$global
     return [
       cTB(
         'radio',

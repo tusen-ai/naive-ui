@@ -9,7 +9,7 @@ export default create({
   peer: [
     iconLight
   ],
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       textColor2Overlay,
       primaryColorHover,
@@ -25,11 +25,9 @@ export default create({
       tagColor,
       closeColorOverlay,
       colorColorHoverOverlay,
-      closeColorPressedOverlay
-    } = derived
-    const {
+      closeColorPressedOverlay,
       borderRadiusSmall: borderRadius
-    } = base
+    } = vars
     return {
       ...commonVariables,
       borderRadius,

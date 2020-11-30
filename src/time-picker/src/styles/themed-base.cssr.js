@@ -21,7 +21,7 @@ export default c([
     const {
       transformDebounceScale,
       cubicBezierEaseInOut
-    } = props.$base
+    } = props.$global
     return [
       cTB('time-picker', [
         cM('invalid', [

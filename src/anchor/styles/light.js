@@ -4,17 +4,15 @@ import { changeColor } from 'seemly'
 export default create({
   theme: 'light',
   name: 'Anchor',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
-      borderRadius
-    } = base
-    const {
+      borderRadius,
       railColorOverlay,
       primaryColor,
       primaryColorHover,
       primaryColorPressed,
       textColor2Overlay
-    } = derived
+    } = vars
     return {
       borderRadius,
       railColor: railColorOverlay,

@@ -3,7 +3,7 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 
 export default c([
   ({ props }) => {
-    const { cubicBezierEaseInOut } = props.$base
+    const { cubicBezierEaseInOut } = props.$global
     return cTB('badge', {
       display: 'inline-flex',
       position: 'relative',

@@ -4,10 +4,10 @@ import commonVars from './_common'
 export default create({
   theme: 'dark',
   name: 'Switch',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       primaryColorSuppl
-    } = derived
+    } = vars
     const railOverlayColor = 'rgba(255, 255, 255, .20)'
     return {
       ...commonVars,

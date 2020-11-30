@@ -5,7 +5,7 @@ import commonVariables from './_common'
 export default create({
   theme: 'light',
   name: 'Radio',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       borderColor,
       primaryColor,
@@ -13,11 +13,9 @@ export default create({
       textColorDisabled,
       disabledBackgroundColor,
       textColor2,
-      opacityDisabled
-    } = derived
-    const {
+      opacityDisabled,
       borderRadius
-    } = base
+    } = vars
     return {
       ...commonVariables,
       boxShadow: `inset 0 0 0 1px ${borderColor}`,

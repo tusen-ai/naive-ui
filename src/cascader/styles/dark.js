@@ -20,12 +20,10 @@ export default create({
     scrollbarDark,
     checkboxDark
   ],
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       borderRadius,
-      boxShadow2
-    } = base
-    const {
+      boxShadow2,
       popoverColor,
       textColor2Overlay,
       textColor3Overlay,
@@ -33,7 +31,7 @@ export default create({
       textColorDisabledOverlay,
       dividerColorOverlay,
       hoverColorOverlay
-    } = derived
+    } = vars
     return {
       ...sizeVariables,
       menuBorderRadius: borderRadius,

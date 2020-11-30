@@ -4,7 +4,7 @@ export default c([
   ({ props }) => {
     const {
       cubicBezierEaseInOut
-    } = props.$base
+    } = props.$global
     const {
       borderRadius,
       color: backgroundColor,

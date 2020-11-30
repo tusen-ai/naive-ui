@@ -7,7 +7,7 @@ export default c([
       iconColor,
       extraTextColor
     } = props.$local
-    const base = props.$base
+    const base = props.$global
     const cubicBezierEaseInOut = base.cubicBezierEaseInOut
     return [
       cTB('empty', {

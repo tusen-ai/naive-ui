@@ -26,11 +26,11 @@ export default function createBaseComponent (component) {
     name: component.name,
     theme: component.theme,
     peer: component.peer,
-    getDerivedVariables: component.getDerivedVariables,
+    getDerivedVars: component.getDerivedVars,
     cssrProps (themeVariables) {
       if (!cachedCssrProps) {
         cachedCssrProps = mergedObject(
-          this.getDerivedVariables(themeVariables),
+          this.getDerivedVars(themeVariables),
           cssrPropsOverrided
         )
       }

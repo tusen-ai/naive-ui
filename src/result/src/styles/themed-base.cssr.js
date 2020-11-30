@@ -22,7 +22,7 @@ export default c([
     } = props.$local
     const {
       cubicBezierEaseInOut
-    } = props.$base
+    } = props.$global
     const colorStatus = {
       success: iconColorSuccess,
       warning: iconColorWarning,

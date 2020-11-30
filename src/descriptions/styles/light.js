@@ -5,19 +5,17 @@ import { composite } from 'seemly'
 export default create({
   theme: 'light',
   name: 'Descriptions',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       tableHeaderColorOverlay,
       textColor1Overlay,
       textColor2Overlay,
       cardColor,
       modalColor,
-      dividerColorOverlay
-    } = derived
-    const {
+      dividerColorOverlay,
       borderRadius,
       fontWeightStrong
-    } = base
+    } = vars
     return {
       ...commonVariables,
       headerColor: composite(cardColor, tableHeaderColorOverlay),

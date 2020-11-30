@@ -3,14 +3,12 @@ import create from '../../_styles/utils/create-component-base'
 export default create({
   name: 'Statistic',
   theme: 'dark',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       textColor2Overlay,
-      textColor1Overlay
-    } = derived
-    const {
+      textColor1Overlay,
       fontWeightStrong
-    } = base
+    } = vars
     return {
       labelFontWeight: fontWeightStrong,
       valueFontWeight: fontWeightStrong,

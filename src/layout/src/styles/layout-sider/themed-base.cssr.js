@@ -11,7 +11,7 @@ export default c([
     } = props.$local
     const {
       cubicBezierEaseInOut
-    } = props.$base
+    } = props.$global
     return cTB('layout-sider', {
       raw: `
         box-sizing: border-box;

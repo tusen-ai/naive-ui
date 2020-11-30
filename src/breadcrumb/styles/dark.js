@@ -4,14 +4,14 @@ import commonVariables from './_common'
 export default create({
   theme: 'dark',
   name: 'Breadcrumb',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     return {
       ...commonVariables,
-      itemTextColor: derived.textColor3Overlay,
-      itemTextColorHover: derived.primaryColorHover,
-      itemTextColorPressed: derived.primaryColorPressed,
-      itemTextColorActive: derived.textColor2Overlay,
-      separatorColor: derived.textColor3Overlay
+      itemTextColor: vars.textColor3Overlay,
+      itemTextColorHover: vars.primaryColorHover,
+      itemTextColorPressed: vars.primaryColorPressed,
+      itemTextColorActive: vars.textColor2Overlay,
+      separatorColor: vars.textColor3Overlay
     }
   }
 })

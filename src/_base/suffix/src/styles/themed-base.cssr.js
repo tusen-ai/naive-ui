@@ -31,7 +31,7 @@ function styleInsideFormItem (status, $local) {
 export default c([
   ({ props }) => {
     const {
-      $base: {
+      $global: {
         transformDebounceScale,
         cubicBezierEaseInOut
       },

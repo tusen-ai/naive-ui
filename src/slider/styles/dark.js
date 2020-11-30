@@ -4,7 +4,7 @@ import sizeVariables from './_common'
 export default create({
   name: 'Slider',
   theme: 'dark',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const boxShadow = '0 2px 8px 0 rgba(0, 0, 0, 0.12)'
     const {
       railColorOverlay,
@@ -12,11 +12,9 @@ export default create({
       primaryColorSuppl,
       popoverColor,
       textColor2Overlay,
-      cardColor
-    } = derived
-    const {
+      cardColor,
       borderRadius
-    } = base
+    } = vars
     return {
       ...sizeVariables,
       railColor: railColorOverlay,

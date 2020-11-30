@@ -1,5 +1,5 @@
-export default function (base, derived) {
-  const { borderRadius } = base
+export default function (vars) {
+  const { borderRadius } = vars
   return {
     borderRadiusTiny: borderRadius,
     borderRadiusSmall: borderRadius,

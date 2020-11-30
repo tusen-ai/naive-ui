@@ -4,7 +4,7 @@ import create from '../../_styles/utils/create-component-base'
 export default create({
   theme: 'dark',
   name: 'Time',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     return {}
   }
 })

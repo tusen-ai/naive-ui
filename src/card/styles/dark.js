@@ -4,21 +4,21 @@ import commonVariables from './_common'
 export default create({
   theme: 'dark',
   name: 'Card',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       borderRadius
-    } = base
+    } = vars
     return {
       ...commonVariables,
-      color: derived.cardColor,
-      textColor: derived.textColor2Overlay,
-      titleTextColor: derived.textColor1Overlay,
-      borderColor: derived.dividerColorOverlay,
-      actionColor: derived.actionColorOverlay,
-      titleFontWeight: base.fontWeightStrong,
-      closeColor: derived.closeColorOverlay,
-      closeColorHover: derived.colorColorHoverOverlay,
-      closeColorPressed: derived.closeColorPressedOverlay,
+      color: vars.cardColor,
+      textColor: vars.textColor2Overlay,
+      titleTextColor: vars.textColor1Overlay,
+      borderColor: vars.dividerColorOverlay,
+      actionColor: vars.actionColorOverlay,
+      titleFontWeight: vars.fontWeightStrong,
+      closeColor: vars.closeColorOverlay,
+      closeColorHover: vars.colorColorHoverOverlay,
+      closeColorPressed: vars.closeColorPressedOverlay,
       borderRadius
     }
   }

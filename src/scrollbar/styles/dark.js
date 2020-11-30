@@ -3,11 +3,11 @@ import create from '../../_styles/utils/create-component-base'
 export default create({
   name: 'Scrollbar',
   theme: 'dark',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       scrollbarColorOverlay,
       scrollbarColorHoverOverlay
-    } = derived
+    } = vars
     return {
       color: scrollbarColorOverlay,
       colorHover: scrollbarColorHoverOverlay

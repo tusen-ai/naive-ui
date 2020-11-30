@@ -6,10 +6,7 @@ import inputNumberCommonVariables from './_common'
 export default create({
   name: 'InputNumber',
   theme: 'light',
-  getDerivedVariables ({ base, derived }) {
-    const {
-      borderRadius
-    } = base
+  getDerivedVars (vars) {
     const {
       primaryColor,
       primaryColorHover,
@@ -27,8 +24,9 @@ export default create({
       textColorDisabled,
       placeholderColor,
       textColor5: placeholderColorDisabled,
-      inputColor: color
-    } = derived
+      inputColor: color,
+      borderRadius
+    } = vars
     const buttonTextColor = textColor
     const buttonColorDisabled = colorDisabled
     const buttonTextColorDisabled = textColorDisabled

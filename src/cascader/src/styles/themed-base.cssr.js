@@ -9,7 +9,7 @@ c([
     const {
       cubicBezierEaseInOut,
       transformDebounceScale
-    } = props.$base
+    } = props.$global
     const {
       arrowColor,
       optionTextColor,

@@ -5,7 +5,7 @@ export default c([
     const {
       color
     } = props.$local
-    const { cubicBezierEaseInOut } = props.$base
+    const { cubicBezierEaseInOut } = props.$global
     return [
       cTB('icon', {
         raw: `

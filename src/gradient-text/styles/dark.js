@@ -3,7 +3,7 @@ import create from '../../_styles/utils/create-component-base'
 export default create({
   theme: 'dark',
   name: 'GradientText',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       primaryColor,
       successColor,
@@ -15,9 +15,9 @@ export default create({
       warningColorSuppl,
       errorColorSuppl,
       infoColorSuppl
-    } = derived
+    } = vars
     return {
-      fontWeight: base.fontWeightStrong,
+      fontWeight: vars.fontWeightStrong,
       rotate: '252deg',
       colorStartPrimary: primaryColor,
       colorEndPrimary: primaryColorSuppl,

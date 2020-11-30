@@ -5,11 +5,7 @@ import commonVariables from './_common'
 export default create({
   theme: 'dark',
   name: 'DataTable',
-  getDerivedVariables ({ base, derived }) {
-    const {
-      fontWeightStrong,
-      borderRadius
-    } = base
+  getDerivedVars (vars) {
     const {
       cardColor,
       modalColor,
@@ -19,8 +15,10 @@ export default create({
       tableHeaderColorOverlay,
       tableColorHoverOverlay,
       iconColorOverlay,
-      primaryColor
-    } = derived
+      primaryColor,
+      fontWeightStrong,
+      borderRadius
+    } = vars
     return {
       ...commonVariables,
       borderRadius,

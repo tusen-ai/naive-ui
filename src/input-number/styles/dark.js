@@ -6,10 +6,7 @@ import inputNumberCommonVariables from './_common'
 export default create({
   name: 'InputNumber',
   theme: 'dark',
-  getDerivedVariables ({ base, derived }) {
-    const {
-      borderRadius
-    } = base
+  getDerivedVars (vars) {
     const {
       primaryColor,
       primaryColorHover,
@@ -26,8 +23,9 @@ export default create({
       textColorDisabled,
       placeholdeColor,
       placeholderColorDisabled,
-      actionColorOverlay
-    } = derived
+      actionColorOverlay,
+      borderRadius
+    } = vars
     const color = inputColorOverlay
     const buttonTextColor = textColor
     const buttonColorDisabled = colorDisabled

@@ -8,7 +8,7 @@ export default c([
     } = props.$local
     const {
       cubicBezierEaseInOut
-    } = props.$base
+    } = props.$global
     return cTB('layout', {
       raw: `
         color: ${textColor};
@@ -56,7 +56,7 @@ export default c([
     } = props.$local
     const {
       cubicBezierEaseInOut
-    } = props.$base
+    } = props.$global
     return cTB('layout-header', {
       raw: `
         transition:
@@ -78,7 +78,7 @@ export default c([
   ({ props }) => {
     const {
       cubicBezierEaseInOut
-    } = props.$base
+    } = props.$global
     return cTB('layout-content', {
       raw: `
         transition:
@@ -97,7 +97,7 @@ export default c([
     } = props.$local
     const {
       cubicBezierEaseInOut
-    } = props.$base
+    } = props.$global
     return cTB('layout-footer', {
       raw: `
         transition:
@@ -131,7 +131,7 @@ export default c([
     } = props.$local
     const {
       cubicBezierEaseInOut
-    } = props.$base
+    } = props.$global
     return cTB('layout-sider', {
       raw: `
         box-sizing: border-box;

@@ -4,12 +4,12 @@ import { changeColor } from 'seemly'
 export default create({
   name: 'BaseMenuMask',
   theme: 'light',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     return {
-      color: changeColor(derived.popoverColor, {
+      color: changeColor(vars.popoverColor, {
         alpha: 0.75
       }),
-      textColor: derived.textColor2
+      textColor: vars.textColor2
     }
   }
 })

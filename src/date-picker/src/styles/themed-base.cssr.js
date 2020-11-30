@@ -6,7 +6,7 @@ export default c([
     const {
       transformDebounceScale,
       cubicBezierEaseInOut
-    } = props.$base
+    } = props.$global
     const {
       panelMonthFontSize,
       panelDayFontSize,

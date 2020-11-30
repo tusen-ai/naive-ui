@@ -3,7 +3,7 @@ import create from '../../_styles/utils/create-component-base'
 export default create({
   theme: 'light',
   name: 'Dialog',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       textColor1,
       textColor2,
@@ -15,7 +15,7 @@ export default create({
       successColor,
       warningColor,
       errorColor
-    } = derived
+    } = vars
     return {
       titleTextColor: textColor1,
       textColor: textColor2,
@@ -27,8 +27,8 @@ export default create({
       iconColorSuccess: successColor,
       iconColorWarning: warningColor,
       iconColorError: errorColor,
-      borderRadius: base.borderRadius,
-      titleFontWeight: base.fontWeightStrong
+      borderRadius: vars.borderRadius,
+      titleFontWeight: vars.fontWeightStrong
     }
   }
 })

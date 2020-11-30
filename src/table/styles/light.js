@@ -4,19 +4,17 @@ import sizeVariables from './_common'
 export default create({
   theme: 'light',
   name: 'Table',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       dividerColorOverlay,
       cardColor,
       modalColor,
       actionColorOverlay,
       textColor1,
-      textColor2
-    } = derived
-    const {
+      textColor2,
       borderRadius,
       fontWeightStrong
-    } = base
+    } = vars
     return {
       ...sizeVariables,
       borderColor: dividerColorOverlay,

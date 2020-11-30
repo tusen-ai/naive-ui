@@ -7,7 +7,7 @@ export default c([
     const {
       cubicBezierEaseInOut,
       borderRadius
-    } = props.$base
+    } = props.$global
     const {
       draggerColor,
       draggerBorder,

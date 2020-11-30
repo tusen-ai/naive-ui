@@ -11,12 +11,12 @@ export default create({
     baseLoadingLight,
     scrollbarLight
   ],
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       textColor2,
       modalColor,
       borderColor
-    } = derived
+    } = vars
     return {
       textColor: textColor2,
       loaderTextColor: textColor2,

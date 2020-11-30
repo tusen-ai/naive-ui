@@ -5,18 +5,16 @@ import sizeVariables from './_common'
 export default create({
   name: 'Slider',
   theme: 'light',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const indicatorColor = 'rgba(0, 0, 0, .85)'
     const boxShadow = '0 2px 8px 0 rgba(0, 0, 0, 0.12)'
     const {
       railColorOverlay,
       primaryColor,
       baseColor,
-      cardColor
-    } = derived
-    const {
+      cardColor,
       borderRadius
-    } = base
+    } = vars
     return {
       ...sizeVariables,
       railColor: railColorOverlay,

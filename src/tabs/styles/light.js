@@ -4,7 +4,7 @@ import sizeVariables from './_common'
 export default create({
   name: 'Tabs',
   theme: 'light',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       textColor2,
       primaryColor,
@@ -15,12 +15,10 @@ export default create({
       tabColorOverlay,
       borderColor,
       textColor1,
-      dividerColorOverlay
-    } = derived
-    const {
+      dividerColorOverlay,
       fontWeightStrong,
       borderRadius
-    } = base
+    } = vars
     return {
       ...sizeVariables,
       labelTextColor: textColor2,

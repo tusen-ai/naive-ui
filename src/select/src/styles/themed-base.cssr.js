@@ -3,7 +3,7 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 
 export default c([
   ({ props }) => {
-    const { cubicBezierEaseInOut, transformDebounceScale } = props.$base
+    const { cubicBezierEaseInOut, transformDebounceScale } = props.$global
     return [
       cTB('select', {
         raw: `

@@ -3,14 +3,12 @@ import create from '../../_styles/utils/create-component-base'
 export default create({
   name: 'Thing',
   theme: 'dark',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       textColor1Overlay,
-      textColor2Overlay
-    } = derived
-    const {
+      textColor2Overlay,
       fontWeightStrong
-    } = base
+    } = vars
     return {
       headerTextColor: textColor1Overlay,
       textColor: textColor2Overlay,

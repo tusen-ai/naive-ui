@@ -2,7 +2,7 @@ import { c, cTB, cNotM, cE, cM } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
-    const { cubicBezierEaseInOut } = props.$base
+    const { cubicBezierEaseInOut } = props.$global
     const {
       textColor,
       color,

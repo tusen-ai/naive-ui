@@ -16,7 +16,7 @@ export default c([
       cubicBezierEaseInOut,
       cubicBezierEaseIn,
       cubicBezierEaseOut
-    } = props.$base
+    } = props.$global
     return [
       cTB('drawer', {
         raw: `

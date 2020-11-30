@@ -15,7 +15,7 @@ export default c([
       cubicBezierEaseIn,
       cubicBezierEaseOut,
       transformDebounceScale
-    } = props.$base
+    } = props.$global
     return [
       cTB('popover', {
         raw: `

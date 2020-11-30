@@ -8,12 +8,12 @@ export default create({
   peer: [
     gridStyle
   ],
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       textColor1Overlay,
       errorColor,
       warningColor
-    } = derived
+    } = vars
     return {
       ...commonVariables,
       labelTextColor: textColor1Overlay,

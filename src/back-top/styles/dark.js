@@ -4,13 +4,13 @@ import commonVariables from './_common.js'
 export default create({
   theme: 'dark',
   name: 'BackTop',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       popoverColor,
       textColor2Overlay,
       primaryColorHover,
       primaryColorPressed
-    } = derived
+    } = vars
     return {
       ...commonVariables,
       color: popoverColor,

@@ -5,27 +5,27 @@ import commonVars from './_common'
 export default create({
   theme: 'dark',
   name: 'DatePicker',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     return {
       ...commonVars,
-      itemTextColor: derived.textColor2Overlay,
-      itemTextColorMatched: derived.popoverColor,
-      itemSupColor: derived.primaryColor,
-      itemSupColorMatch: derived.popoverColor,
-      itemColorHover: changeColor(derived.primaryColor, { alpha: 0.15 }),
-      itemColorActive: derived.primaryColor,
-      itemBorderRadius: base.borderRadiusSmall,
-      panelColor: derived.popoverColor,
-      panelTextColor: derived.textColor2Overlay,
-      panelArrowButtonColor: derived.iconColorOverlay,
-      panelMonthTextColor: derived.textColorPrimaryOverlay,
-      panelHeaderDividerColor: derived.dividerColorOverlay,
-      panelDayDividerColor: derived.dividerColorOverlay,
-      panelVerticalDividerColor: derived.dividerColorOverlay,
-      panelActionDivider: derived.dividerColorOverlay,
-      panelBorderRadius: base.borderRadius,
-      panelBoxShadow: derived.boxShadow2,
-      panelMonthFontWeight: base.fontWeightStrong
+      itemTextColor: vars.textColor2Overlay,
+      itemTextColorMatched: vars.popoverColor,
+      itemSupColor: vars.primaryColor,
+      itemSupColorMatch: vars.popoverColor,
+      itemColorHover: changeColor(vars.primaryColor, { alpha: 0.15 }),
+      itemColorActive: vars.primaryColor,
+      itemBorderRadius: vars.borderRadiusSmall,
+      panelColor: vars.popoverColor,
+      panelTextColor: vars.textColor2Overlay,
+      panelArrowButtonColor: vars.iconColorOverlay,
+      panelMonthTextColor: vars.textColorPrimaryOverlay,
+      panelHeaderDividerColor: vars.dividerColorOverlay,
+      panelDayDividerColor: vars.dividerColorOverlay,
+      panelVerticalDividerColor: vars.dividerColorOverlay,
+      panelActionDivider: vars.dividerColorOverlay,
+      panelBorderRadius: vars.borderRadius,
+      panelBoxShadow: vars.boxShadow2,
+      panelMonthFontWeight: vars.fontWeightStrong
     }
   }
 })

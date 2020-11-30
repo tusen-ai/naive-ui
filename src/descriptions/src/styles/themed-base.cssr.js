@@ -14,7 +14,7 @@ export default c([
     } = props.$local
     const {
       cubicBezierEaseInOut
-    } = props.$base
+    } = props.$global
     return [
       cTB('descriptions', [
         cM('left-label-placement', [

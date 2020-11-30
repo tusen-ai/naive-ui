@@ -3,15 +3,15 @@ import create from '../../_styles/utils/create-component-base'
 export default create({
   theme: 'light',
   name: 'Divider',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       textColor1,
       dividerColorOverlay
-    } = derived
+    } = vars
     return {
       textColor: textColor1,
       color: dividerColorOverlay,
-      fontWeight: base.fontWeightStrong
+      fontWeight: vars.fontWeightStrong
     }
   }
 })

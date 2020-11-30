@@ -4,12 +4,12 @@ import sizeVarables from './_common'
 export default create({
   theme: 'dark',
   name: 'Empty',
-  getDerivedVariables ({ derived }) {
+  getDerivedVars (vars) {
     const {
       textColorDisabledOverlay,
       iconColorOverlay,
       textColor2Overlay
-    } = derived
+    } = vars
     return {
       ...sizeVarables,
       textColor: textColorDisabledOverlay,

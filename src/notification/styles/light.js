@@ -7,7 +7,7 @@ export default create({
   peer: [
     avatarStyle
   ],
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       textColor2,
       successColor,
@@ -18,12 +18,10 @@ export default create({
       closeColor,
       closeColorHover,
       textColor1Overlay,
-      textColor3Overlay
-    } = derived
-    const {
+      textColor3Overlay,
       borderRadius,
       fontWeightStrong
-    } = base
+    } = vars
     return {
       borderRadius,
       headerFontWeight: fontWeightStrong,

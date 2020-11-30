@@ -13,7 +13,7 @@ export default c([
     } = props.$local
     const {
       cubicBezierEaseInOut
-    } = props.$base
+    } = props.$global
     return cTB('anchor', {
       raw: `
         padding-left: 4px;

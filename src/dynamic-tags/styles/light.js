@@ -9,7 +9,7 @@ export default create({
   peer: [
     tagLight
   ],
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     return {}
   }
 })

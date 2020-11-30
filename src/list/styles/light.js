@@ -3,16 +3,14 @@ import create from '../../_styles/utils/create-component-base'
 export default create({
   name: 'List',
   theme: 'light',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       textColor2,
       cardColor,
       modalColor,
-      dividerColorOverlay
-    } = derived
-    const {
+      dividerColorOverlay,
       borderRadius
-    } = base
+    } = vars
     return {
       textColor: textColor2,
       color: cardColor,

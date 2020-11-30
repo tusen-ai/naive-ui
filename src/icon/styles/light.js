@@ -3,7 +3,7 @@ import create from '../../_styles/utils/create-component-base'
 export default create({
   theme: 'light',
   name: 'Icon',
-  getDerivedVariables ({ derived }) {
+  getDerivedVars (vars) {
     const {
       textColorBase,
       opacity1,
@@ -11,7 +11,7 @@ export default create({
       opacity3,
       opacity4,
       opacity5
-    } = derived
+    } = vars
     return {
       color: textColorBase,
       opacity1Depth: opacity1,

@@ -4,19 +4,18 @@ import commonVars from './_common'
 export default create({
   theme: 'dark',
   name: 'TimePicker',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       popoverColor,
       textColor2Overlay,
       primaryColor,
       hoverColorOverlay,
       dividerColorOverlay,
-      opacityDisabled
-    } = derived
-    const {
+      opacityDisabled,
       boxShadow2,
       borderRadius
-    } = base
+    } = vars
+
     return {
       ...commonVars,
       panelColor: popoverColor,

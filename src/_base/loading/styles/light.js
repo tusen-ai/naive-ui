@@ -3,9 +3,9 @@ import create from '../../../_styles/utils/create-component-base'
 export default create({
   name: 'BaseLoading',
   theme: 'light',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     return {
-      color: derived.primaryColor
+      color: vars.primaryColor
     }
   }
 })

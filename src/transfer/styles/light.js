@@ -9,27 +9,27 @@ export default create({
   peer: [
     checkboxStyle
   ],
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     return {
       ...commonVariables,
-      borderRadius: base.borderRadius,
-      borderColor: derived.borderColor,
-      listColor: derived.cardColor,
+      borderRadius: vars.borderRadius,
+      borderColor: vars.borderColor,
+      listColor: vars.cardColor,
       headerColor: composite(
-        derived.cardColor,
-        derived.tableHeaderColorOverlay
+        vars.cardColor,
+        vars.tableHeaderColorOverlay
       ),
-      headerTextColor: derived.textColor1,
-      headerTextColorDisabled: derived.textColorDisabled,
-      headerExtraTextColor: derived.textColor2,
+      headerTextColor: vars.textColor1,
+      headerTextColorDisabled: vars.textColorDisabled,
+      headerExtraTextColor: vars.textColor2,
       buttonColor: 'rgba(0, 0, 0, 0.2)',
-      buttonColorHover: derived.primaryColorHover,
-      buttonColorActive: derived.primaryColorPressed,
+      buttonColorHover: vars.primaryColorHover,
+      buttonColorActive: vars.primaryColorPressed,
       buttonColorDisabled: 'rgba(0, 0, 0, 0.1)',
-      filterBorderColor: derived.borderColorOverlay,
-      itemTextColor: derived.textColor2,
-      itemTextColorDisabled: derived.textColorDisabled,
-      itemColorPending: derived.hoverColorOverlay
+      filterBorderColor: vars.borderColorOverlay,
+      itemTextColor: vars.textColor2,
+      itemTextColorDisabled: vars.textColorDisabled,
+      itemColorPending: vars.hoverColorOverlay
     }
   }
 })

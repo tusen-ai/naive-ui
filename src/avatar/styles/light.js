@@ -4,13 +4,11 @@ import commonVariables from './_common'
 export default create({
   theme: 'light',
   name: 'Avatar',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
-      borderRadius
-    } = base
-    const {
+      borderRadius,
       avatarColorOverlay
-    } = derived
+    } = vars
     return {
       ...commonVariables,
       borderRadius,

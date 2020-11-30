@@ -30,7 +30,7 @@ export default c([
     } = props.$local
     const {
       cubicBezierEaseInOut
-    } = props.$base
+    } = props.$global
     return cTB('pagination', {
       raw: `
         display: flex;

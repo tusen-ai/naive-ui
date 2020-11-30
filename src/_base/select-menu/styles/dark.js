@@ -4,22 +4,22 @@ import commonVariables from './_common'
 export default create({
   name: 'BaseSelectMenu',
   theme: 'dark',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     return {
       ...commonVariables,
-      borderRadius: base.borderRadius,
-      color: derived.popoverColor,
-      boxShadow: derived.boxShadow2,
-      groupHeaderTextColor: derived.textColor3Overlay,
-      actionDividerColor: derived.dividerColorOverlay,
-      optionTextColor: derived.textColor2Overlay,
-      optionTextColorPressed: derived.primaryColorPressed,
-      optionTextColorDisabled: derived.textColorDisabledOverlay,
-      optionTextColorSelected: derived.primaryColor,
-      optionOpacityDisabled: derived.opacityDisabled,
-      optionCheckColor: derived.primaryColor,
-      optionColorPending: derived.hoverColorOverlay,
-      actionTextColor: derived.textColor2Overlay
+      borderRadius: vars.borderRadius,
+      color: vars.popoverColor,
+      boxShadow: vars.boxShadow2,
+      groupHeaderTextColor: vars.textColor3Overlay,
+      actionDividerColor: vars.dividerColorOverlay,
+      optionTextColor: vars.textColor2Overlay,
+      optionTextColorPressed: vars.primaryColorPressed,
+      optionTextColorDisabled: vars.textColorDisabledOverlay,
+      optionTextColorSelected: vars.primaryColor,
+      optionOpacityDisabled: vars.opacityDisabled,
+      optionCheckColor: vars.primaryColor,
+      optionColorPending: vars.hoverColorOverlay,
+      actionTextColor: vars.textColor2Overlay
     }
   }
 })

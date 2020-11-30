@@ -6,12 +6,12 @@ export default create({
   name: 'Form',
   theme: 'light',
   peer: [gridStyle],
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       textColor1,
       errorColor,
       warningColor
-    } = derived
+    } = vars
     return {
       ...commonVariables,
       labelTextColor: textColor1,

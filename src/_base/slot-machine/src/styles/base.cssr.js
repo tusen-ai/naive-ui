@@ -90,11 +90,11 @@ export default c([
             transform: 'translateY(100%)'
           }),
           cM('down-scroll', {
-            animation: `n-base-slot-machine-fade-down-out .2s ${props.$base.cubicBezierEaseOut}`,
+            animation: `n-base-slot-machine-fade-down-out .2s ${props.$global.cubicBezierEaseOut}`,
             animationIterationCount: 1
           }),
           cM('up-scroll', {
-            animation: `n-base-slot-machine-fade-up-out .2s ${props.$base.cubicBezierEaseOut}`,
+            animation: `n-base-slot-machine-fade-up-out .2s ${props.$global.cubicBezierEaseOut}`,
             animationIterationCount: 1
           })
         ]),
@@ -112,11 +112,11 @@ export default c([
           `
         }, [
           cM('down-scroll', {
-            animation: `n-base-slot-machine-fade-down-in .2s ${props.$base.cubicBezierEaseOut}`,
+            animation: `n-base-slot-machine-fade-down-in .2s ${props.$global.cubicBezierEaseOut}`,
             animationIterationCount: 1
           }),
           cM('up-scroll', {
-            animation: `n-base-slot-machine-fade-up-in .2s ${props.$base.cubicBezierEaseOut}`,
+            animation: `n-base-slot-machine-fade-up-in .2s ${props.$global.cubicBezierEaseOut}`,
             animationIterationCount: 1
           }),
           cE('inner', {

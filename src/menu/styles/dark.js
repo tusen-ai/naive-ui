@@ -4,26 +4,26 @@ import { changeColor } from 'seemly'
 export default create({
   theme: 'dark',
   name: 'Menu',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     return {
-      borderRadius: base.borderRadius,
-      groupTextColor: derived.textColor3Overlay,
-      itemColorMatch: changeColor(derived.primaryColor, { alpha: 0.15 }),
-      itemTextColor: derived.textColor2Overlay,
-      itemTextColorHover: derived.primaryColorHover,
-      itemTextColorChildSelected: derived.primaryColor,
-      itemTextColorSelected: derived.primaryColor,
-      itemExtraTextColor: derived.textColor3Overlay,
-      itemExtraTextColorHover: derived.primaryColorHover,
-      itemExtraTextColorChildSelected: derived.primaryColor,
-      itemExtraTextColorSelected: derived.primaryColor,
-      itemIconColor: derived.textColor1Overlay,
-      itemIconColorHover: derived.primaryColorHover,
-      itemIconColorSelected: derived.primaryColor,
-      itemIconColorChildSelected: derived.primaryColor,
-      itemIconColorCollapsed: derived.textColor1Overlay,
+      borderRadius: vars.borderRadius,
+      groupTextColor: vars.textColor3Overlay,
+      itemColorMatch: changeColor(vars.primaryColor, { alpha: 0.15 }),
+      itemTextColor: vars.textColor2Overlay,
+      itemTextColorHover: vars.primaryColorHover,
+      itemTextColorChildSelected: vars.primaryColor,
+      itemTextColorSelected: vars.primaryColor,
+      itemExtraTextColor: vars.textColor3Overlay,
+      itemExtraTextColorHover: vars.primaryColorHover,
+      itemExtraTextColorChildSelected: vars.primaryColor,
+      itemExtraTextColorSelected: vars.primaryColor,
+      itemIconColor: vars.textColor1Overlay,
+      itemIconColorHover: vars.primaryColorHover,
+      itemIconColorSelected: vars.primaryColor,
+      itemIconColorChildSelected: vars.primaryColor,
+      itemIconColorCollapsed: vars.textColor1Overlay,
       borderColorHorizontal: 'transparent',
-      submenuArrowColor: derived.primaryColor
+      submenuArrowColor: vars.primaryColor
     }
   }
 })

@@ -7,9 +7,9 @@ export default create({
   peer: [
     iconStyle
   ],
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     return {
-      itemColor: derived.railColor,
+      itemColor: vars.railColor,
       itemColorActive: '#CCAA33'
     }
   }

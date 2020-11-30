@@ -6,7 +6,7 @@ export default c([
       cubicBezierEaseInOut,
       fontWeightStrong,
       fontFamilyMono
-    } = props.$base
+    } = props.$global
     const {
       textColor,
       textColorStrong,

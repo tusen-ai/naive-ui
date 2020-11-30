@@ -4,13 +4,13 @@ import commonVariables from '../../input/styles/_common'
 export default create({
   name: 'InputGroupLabel',
   theme: 'light',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     return {
       ...commonVariables,
-      borderRadius: base.borderRadius,
-      color: derived.actionColor,
-      textColor: derived.textColor2,
-      boxShadow: `inset 0 0 0 1px ${derived.borderColor}`
+      borderRadius: vars.borderRadius,
+      color: vars.actionColor,
+      textColor: vars.textColor2,
+      boxShadow: `inset 0 0 0 1px ${vars.borderColor}`
     }
   }
 })

@@ -4,26 +4,26 @@ import { changeColor } from 'seemly'
 export default create({
   theme: 'light',
   name: 'Menu',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     return {
-      borderRadius: base.borderRadius,
-      groupTextColor: derived.textColor3,
-      itemColorMatch: changeColor(derived.primaryColor, { alpha: 0.1 }),
-      itemTextColor: derived.textColor2,
-      itemTextColorHover: derived.primaryColorHover,
-      itemTextColorChildSelected: derived.primaryColor,
-      itemTextColorSelected: derived.primaryColor,
-      itemExtraTextColor: derived.textColor3,
-      itemExtraTextColorHover: derived.primaryColorHover,
-      itemExtraTextColorChildSelected: derived.primaryColor,
-      itemExtraTextColorSelected: derived.primaryColor,
-      itemIconColor: derived.textColor1,
-      itemIconColorHover: derived.primaryColorHover,
-      itemIconColorSelected: derived.primaryColor,
-      itemIconColorChildSelected: derived.primaryColor,
-      itemIconColorCollapsed: derived.textColor1,
+      borderRadius: vars.borderRadius,
+      groupTextColor: vars.textColor3,
+      itemColorMatch: changeColor(vars.primaryColor, { alpha: 0.1 }),
+      itemTextColor: vars.textColor2,
+      itemTextColorHover: vars.primaryColorHover,
+      itemTextColorChildSelected: vars.primaryColor,
+      itemTextColorSelected: vars.primaryColor,
+      itemExtraTextColor: vars.textColor3,
+      itemExtraTextColorHover: vars.primaryColorHover,
+      itemExtraTextColorChildSelected: vars.primaryColor,
+      itemExtraTextColorSelected: vars.primaryColor,
+      itemIconColor: vars.textColor1,
+      itemIconColorHover: vars.primaryColorHover,
+      itemIconColorSelected: vars.primaryColor,
+      itemIconColorChildSelected: vars.primaryColor,
+      itemIconColorCollapsed: vars.textColor1,
       borderColorHorizontal: 'transparent',
-      submenuArrowColor: derived.primaryColor
+      submenuArrowColor: vars.primaryColor
     }
   }
 })

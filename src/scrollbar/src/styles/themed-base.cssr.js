@@ -9,7 +9,7 @@ export default c([
     } = props.$local
     const {
       cubicBezierEaseInOut
-    } = props.$base
+    } = props.$global
     return cTB('scrollbar', {
       raw: `
         overflow: hidden;

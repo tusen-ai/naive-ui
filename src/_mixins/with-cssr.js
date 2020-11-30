@@ -6,10 +6,10 @@ if (__DEV__) {
   window.naive.styleRenderingDuration = 0
 }
 
-function getThemeVariables (naive, themeName) {
+function getThemeGlobalVars (naive, themeName) {
   const { styles } = naive
   const theme = styles[themeName]
-  return theme.base // style[theme]base, for example style.light.base
+  return theme.base.vars // style[theme]base, for example style.light.base
 }
 
 function createMutableStyleId (
@@ -69,17 +69,16 @@ function setupMutableStyle (
     depValue
   )
   if (find(mountId)) return
-  const cssrPropsGetter = styles[theme][name]
-  if (__DEV__ && !cssrPropsGetter) {
+  const compStyle = styles[theme][name]
+  if (__DEV__ && !compStyle) {
     warn('mixins/with-cssr', `${name}'s style not found`)
   }
   // themeVariables: { base, derived }
-  const themeVariables = getThemeVariables(naive, theme)
+  const themeGlobalVars = getThemeGlobalVars(naive, theme)
   const componentCssrProps = {
     $instance: instance,
-    $base: themeVariables.base,
-    $derived: themeVariables.derived,
-    $local: cssrPropsGetter.cssrProps(themeVariables),
+    $global: themeGlobalVars,
+    $local: compStyle.cssrProps(themeGlobalVars),
     $theme: theme
   }
   CNode.mount({
@@ -118,7 +117,7 @@ function getCssrProps (
   } = naive
   const name = options.cssrName || options.name
   const cssrPropsGetter = styles[theme][name]
-  const themeVariables = getThemeVariables(naive, theme)
+  const themeVariables = getThemeGlobalVars(naive, theme)
   return {
     $instance: instance,
     $base: themeVariables.base,

@@ -11,7 +11,7 @@ export default create({
     baseSelectionDark,
     baseSelectMenuDark
   ],
-  getDerivedVariables ({ derived, base }) {
+  getDerivedVars (vars) {
     return {}
   }
 })

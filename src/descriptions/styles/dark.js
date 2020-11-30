@@ -4,19 +4,17 @@ import commonVariables from './_common'
 export default create({
   theme: 'dark',
   name: 'Descriptions',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       tableHeaderColorOverlay,
       textColor1Overlay,
       textColor2Overlay,
       cardColor,
       modalColor,
-      dividerColorOverlay
-    } = derived
-    const {
+      dividerColorOverlay,
       borderRadius,
       fontWeightStrong
-    } = base
+    } = vars
     return {
       ...commonVariables,
       headerColor: tableHeaderColorOverlay,

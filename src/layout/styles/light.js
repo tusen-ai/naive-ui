@@ -4,7 +4,7 @@ import { composite } from 'seemly'
 export default create({
   name: 'Layout',
   theme: 'light',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       textColor2,
       bodyColor,
@@ -12,7 +12,7 @@ export default create({
       dividerColorOverlay,
       scrollbarColorOverlay,
       scrollbarColorHoverOverlay
-    } = derived
+    } = vars
     return {
       textColor: textColor2,
       color: bodyColor,

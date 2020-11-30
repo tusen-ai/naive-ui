@@ -11,7 +11,7 @@ export default create({
   peer: [
     baseSuffixLight
   ],
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       textColor2,
       textColor4,
@@ -24,11 +24,9 @@ export default create({
       warningColor,
       warningColorHover,
       errorColor,
-      errorColorHover
-    } = derived
-    const {
+      errorColorHover,
       borderRadius
-    } = base
+    } = vars
     return {
       ...commonVariables,
       borderRadius,

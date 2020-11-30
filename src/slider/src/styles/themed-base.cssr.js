@@ -31,7 +31,7 @@ export default c([
     const {
       cubicBezierEaseInOut,
       transformDebounceScale
-    } = props.$base
+    } = props.$global
     return [
       cTB('slider', {
         raw: `

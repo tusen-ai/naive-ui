@@ -3,7 +3,7 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const { iconColor } = props.$local
-    const { cubicBezierEaseInOut } = props.$base
+    const { cubicBezierEaseInOut } = props.$global
     return [
       cB('popconfirm-content', {
         raw: `

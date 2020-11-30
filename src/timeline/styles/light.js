@@ -4,7 +4,7 @@ import sizeVariables from './_common'
 export default create({
   name: 'Timeline',
   theme: 'light',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       textColor3,
       infoColor,
@@ -13,11 +13,9 @@ export default create({
       warningColor,
       textColor1,
       textColor2,
-      railColorOverlay
-    } = derived
-    const {
+      railColorOverlay,
       fontWeightStrong
-    } = base
+    } = vars
     return {
       ...sizeVariables,
       headerFontWeight: fontWeightStrong,

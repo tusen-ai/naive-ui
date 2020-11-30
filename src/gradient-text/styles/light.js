@@ -4,16 +4,16 @@ import { changeColor } from 'seemly'
 export default create({
   theme: 'light',
   name: 'GradientText',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       primaryColor,
       successColor,
       warningColor,
       errorColor,
       infoColor
-    } = derived
+    } = vars
     return {
-      fontWeight: base.fontWeightStrong,
+      fontWeight: vars.fontWeightStrong,
       rotate: '252deg',
       colorStartPrimary: changeColor(primaryColor, { alpha: 0.6 }),
       colorEndPrimary: primaryColor,

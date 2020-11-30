@@ -10,10 +10,10 @@ export default create({
   peer: [
     baseLoadingLight
   ],
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       opacityDisabled
-    } = derived
+    } = vars
     return {
       ...sizeVariables,
       opacitySpinning: opacityDisabled

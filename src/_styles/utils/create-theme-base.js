@@ -1,28 +1,30 @@
 export default function createThemeBase (theme) {
-  function override (options = {}) {
-    baseOverrided = options.base
-    derivedOverrided = options.derived
+  const initialBaseVars = theme.getBaseVars()
+  const cache = {
+    vars: null,
+    overrides: null
   }
-  let baseOverrided = null
-  let derivedOverrided = null
-  let cachedBased = null
-  let cachedDerived = null
+  function override (vars) {
+    cache.overrides = vars
+    updateVars()
+  }
+  function updateVars () {
+    const { overrides } = cache
+    const baseVars = {
+      ...initialBaseVars,
+      overrides
+    }
+    const derivedVars = theme.getDerivedVars(baseVars)
+    cache.vars = Object.assign(baseVars, derivedVars, overrides)
+  }
   return {
     name: theme.name,
     theme: theme.theme,
-    get base () {
-      if (!cachedBased) {
-        cachedBased = Object.assign(this.getBaseVariables(), baseOverrided)
+    get vars () {
+      if (!cache.vars) {
+        updateVars()
       }
-      return cachedBased
-    },
-    getBaseVariables: theme.getBaseVariables,
-    getDerivedVariables: theme.getDerivedVariables,
-    get derived () {
-      if (!cachedDerived) {
-        cachedDerived = Object.assign(this.getDerivedVariables(this.base), derivedOverrided)
-      }
-      return cachedDerived
+      return cache.vars
     },
     override
   }

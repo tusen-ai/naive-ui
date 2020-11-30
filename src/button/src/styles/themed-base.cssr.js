@@ -11,7 +11,7 @@ export default c([
     const {
       cubicBezierEaseInOut,
       cubicBezierEaseOut
-    } = props.$base
+    } = props.$global
     return cTB(
       'button',
       {

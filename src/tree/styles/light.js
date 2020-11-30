@@ -4,18 +4,16 @@ import { changeColor } from 'seemly'
 export default create({
   theme: 'light',
   name: 'Tree',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
-      borderRadiusSmall
-    } = base
-    const {
+      borderRadiusSmall,
       hoverColorOverlay,
       activeColorOverlay,
       primaryColor,
       textColor3,
       textColor2,
       textColorDisabled
-    } = derived
+    } = vars
     return {
       borderRadiusSmall,
       nodeColorHover: hoverColorOverlay,

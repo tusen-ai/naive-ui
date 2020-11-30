@@ -5,7 +5,7 @@ export default c([
   ({ props }) => {
     const {
       cubicBezierEaseInOut
-    } = props.$base
+    } = props.$global
     const {
       opacitySpinning
     } = props.$local

@@ -5,29 +5,29 @@ import commonVars from './_common'
 export default create({
   theme: 'light',
   name: 'DatePicker',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     return {
       ...commonVars,
-      itemTextColor: derived.textColor2,
-      itemTextColorDisabled: derived.textColorDisabled,
-      itemTextColorMatched: derived.popoverColor,
-      itemTextColorCurrent: derived.primaryColor,
-      itemSupColor: derived.primaryColor,
-      itemSupColorMatch: derived.popoverColor,
-      itemColorHover: changeColor(derived.primaryColor, { alpha: 0.1 }),
-      itemColorActive: derived.primaryColor,
-      itemBorderRadius: base.borderRadiusSmall,
-      panelColor: derived.popoverColor,
-      panelTextColor: derived.textColor2,
-      panelArrowButtonColor: derived.iconColor,
-      panelMonthTextColor: derived.textColorPrimary,
-      panelHeaderDividerColor: derived.dividerColor,
-      panelDayDividerColor: derived.dividerColor,
-      panelVerticalDividerColor: derived.dividerColor,
-      panelActionDivider: derived.dividerColor,
-      panelBoxShadow: derived.boxShadow2,
-      panelBorderRadius: base.borderRadius,
-      panelMonthFontWeight: base.fontWeightStrong
+      itemTextColor: vars.textColor2,
+      itemTextColorDisabled: vars.textColorDisabled,
+      itemTextColorMatched: vars.popoverColor,
+      itemTextColorCurrent: vars.primaryColor,
+      itemSupColor: vars.primaryColor,
+      itemSupColorMatch: vars.popoverColor,
+      itemColorHover: changeColor(vars.primaryColor, { alpha: 0.1 }),
+      itemColorActive: vars.primaryColor,
+      itemBorderRadius: vars.borderRadiusSmall,
+      panelColor: vars.popoverColor,
+      panelTextColor: vars.textColor2,
+      panelArrowButtonColor: vars.iconColor,
+      panelMonthTextColor: vars.textColorPrimary,
+      panelHeaderDividerColor: vars.dividerColor,
+      panelDayDividerColor: vars.dividerColor,
+      panelVerticalDividerColor: vars.dividerColor,
+      panelActionDivider: vars.dividerColor,
+      panelBoxShadow: vars.boxShadow2,
+      panelBorderRadius: vars.borderRadius,
+      panelMonthFontWeight: vars.fontWeightStrong
     }
   }
 })

@@ -2,7 +2,7 @@ import { c, cTB, cM } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
-    const { cubicBezierEaseInOut } = props.$base
+    const { cubicBezierEaseInOut } = props.$global
     const {
       blockquotePrefixColor,
       blockquoteTextColor

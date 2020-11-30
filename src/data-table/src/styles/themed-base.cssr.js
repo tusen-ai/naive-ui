@@ -2,7 +2,7 @@ import { c, cTB, cB, cE, cM, cNotM, insideModal } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
-    const { cubicBezierEaseInOut } = props.$base
+    const { cubicBezierEaseInOut } = props.$global
     const { borderRadius } = props.$local
     const {
       borderColor,

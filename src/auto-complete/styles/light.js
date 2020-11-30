@@ -11,7 +11,7 @@ export default create({
     baseSelectMenuLight,
     inputLight
   ],
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     return {}
   }
 })

@@ -4,12 +4,10 @@ import { composite, changeColor } from 'seemly'
 export default create({
   theme: 'light',
   name: 'Alert',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       borderRadius,
-      fontWeightStrong
-    } = base
-    const {
+      fontWeightStrong,
       baseColor,
       dividerColorOverlay,
       actionColor,
@@ -22,7 +20,7 @@ export default create({
       successColor,
       warningColor,
       errorColor
-    } = derived
+    } = vars
     return {
       titleFontWeight: fontWeightStrong,
       borderRadius,

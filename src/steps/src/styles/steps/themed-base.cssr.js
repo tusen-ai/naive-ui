@@ -7,7 +7,7 @@ export default c([
     const {
       cubicBezierEaseInOut,
       transformDebounceScale
-    } = props.$base
+    } = props.$global
     const {
       stepHeaderFontWeight
     } = props.$local

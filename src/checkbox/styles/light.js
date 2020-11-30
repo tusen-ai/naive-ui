@@ -5,7 +5,7 @@ import { changeColor } from 'seemly'
 export default create({
   theme: 'light',
   name: 'Checkbox',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       baseColor,
       inputColorDisabled,
@@ -15,10 +15,10 @@ export default create({
       borderColor,
       primaryColor,
       textColor2
-    } = derived
+    } = vars
     return {
       ...commonVariables,
-      borderRadius: base.borderRadiusSmall,
+      borderRadius: vars.borderRadiusSmall,
       color: baseColor,
       colorDisabled: inputColorDisabled,
       colorTableHeader: cardColor,

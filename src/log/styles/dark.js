@@ -11,11 +11,11 @@ export default create({
     baseLoadingDark,
     scrollbarDark
   ],
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       textColor2Overlay,
       inputColorOverlay
-    } = derived
+    } = vars
     return {
       textColor: textColor2Overlay,
       loaderTextColor: textColor2Overlay,

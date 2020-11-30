@@ -4,19 +4,17 @@ import sizeVariables from './_common'
 export default create({
   name: 'Result',
   theme: 'dark',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       textColor1Overlay,
       textColor2Overlay,
       errorColor,
       successColor,
       infoColor,
-      warningColor
-    } = derived
-    const {
+      warningColor,
       lineHeight,
       fontWeightStrong
-    } = base
+    } = vars
     return {
       ...sizeVariables,
       lineHeight,

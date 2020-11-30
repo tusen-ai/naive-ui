@@ -2,7 +2,7 @@ import { c, cTB } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
-    const { fontFamilyMono, cubicBezierEaseInOut } = props.$base
+    const { fontFamilyMono, cubicBezierEaseInOut } = props.$global
     const {
       textColor,
       highlightStyle

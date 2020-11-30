@@ -24,7 +24,7 @@ export default c([
     } = $local
     const {
       cubicBezierEaseInOut
-    } = props.$base
+    } = props.$global
     return cTB('base-selection', {
       raw: `
         position: relative;

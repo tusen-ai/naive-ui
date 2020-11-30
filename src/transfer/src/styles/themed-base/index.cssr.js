@@ -9,7 +9,7 @@ export default c([
       cubicBezierEaseIn,
       cubicBezierEaseOut,
       fontWeightStrong
-    } = props.$base
+    } = props.$global
     const {
       borderRadius,
       borderColor,

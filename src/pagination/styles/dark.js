@@ -12,18 +12,16 @@ export default create({
     inputDark,
     iconDark
   ],
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       textColor2Overlay,
       primaryColor,
       inputColorDisabledOverlay,
       textColorDisabledOverlay,
       borderColorOverlay,
-      opacity3
-    } = derived
-    const {
+      opacity3,
       borderRadius
-    } = base
+    } = vars
     return {
       ...commonVariables,
       buttonBorder: `1px solid ${borderColorOverlay}`,

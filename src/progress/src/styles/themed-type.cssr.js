@@ -32,8 +32,7 @@ export default c([
   ({ props }) => {
     const instance = props.$instance
     const status = instance.status
-    const base = props.$base
-    const derived = props.$derived
+    const base = props.$global
     const local = props.$local
     const fillColor = local[createKey('fillColor', status)]
     const outerIndicatorTextColor = local.outerIndicatorTextColor
@@ -41,7 +40,7 @@ export default c([
     return cTB('progress', [
       cM(status, [
         cB('progress-text', {
-          color: derived.textColor2
+          color: outerIndicatorTextColor
         }),
         cB('progress-icon', [
           cB('icon', {

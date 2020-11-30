@@ -3,11 +3,11 @@ import create from '../../_styles/utils/create-component-base'
 export default create({
   name: 'LoadingBar',
   theme: 'light',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       successColor,
       errorColor
-    } = derived
+    } = vars
     return {
       colorError: errorColor,
       colorLoading: successColor,

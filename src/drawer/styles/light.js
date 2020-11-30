@@ -3,11 +3,11 @@ import create from '../../_styles/utils/create-component-base'
 export default create({
   theme: 'light',
   name: 'Drawer',
-  getDerivedVariables ({ derived }) {
+  getDerivedVars (vars) {
     return {
-      color: derived.modalColor,
-      textColor: derived.textColor2Overlay,
-      boxShadow: derived.boxShadow3
+      color: vars.modalColor,
+      textColor: vars.textColor2Overlay,
+      boxShadow: vars.boxShadow3
     }
   }
 })

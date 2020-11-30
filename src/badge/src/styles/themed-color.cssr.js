@@ -20,7 +20,7 @@ export default c([
   ({ props }) => {
     const type = props.$instance.type
     const color = props.$local[createKey('color', type)]
-    const { cubicBezierEaseOut } = props.$base
+    const { cubicBezierEaseOut } = props.$global
     return [
       createRippleAnimation(),
       cTB('badge', [

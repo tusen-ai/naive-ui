@@ -5,7 +5,7 @@ export default c([
     const {
       cubicBezierEaseInOut,
       fontWeightStrong
-    } = props.$base
+    } = props.$global
     const local = props.$local
     return cTB('progress', {
       display: 'inline-block'

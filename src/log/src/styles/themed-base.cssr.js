@@ -12,7 +12,7 @@ export default c([
     const {
       cubicBezierEaseInOut,
       fontFamilyMono
-    } = props.$base
+    } = props.$global
     return cTB('log', {
       raw: `
         position: relative;

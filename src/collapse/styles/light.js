@@ -3,15 +3,13 @@ import create from '../../_styles/utils/create-component-base'
 export default create({
   theme: 'light',
   name: 'Collapse',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
+      fontWeightStrong,
       textColor1,
       textColor2,
       dividerColorOverlay
-    } = derived
-    const {
-      fontWeightStrong
-    } = base
+    } = vars
     return {
       titleFontSize: '14px',
       titleFontWeight: fontWeightStrong,

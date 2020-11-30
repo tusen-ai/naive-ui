@@ -11,17 +11,15 @@ export default create({
     inputLight,
     iconLight
   ],
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       textColor2,
       primaryColor,
       inputColorDisabled,
       textColorDisabled,
-      borderColor
-    } = derived
-    const {
+      borderColor,
       borderRadius
-    } = base
+    } = vars
     return {
       ...commonVariables,
       buttonIconColor: textColor2,

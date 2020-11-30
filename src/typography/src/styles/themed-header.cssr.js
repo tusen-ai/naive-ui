@@ -15,7 +15,7 @@ function headerStyle (level, props) {
   } = props
   const {
     cubicBezierEaseInOut
-  } = props.$base
+  } = props.$global
   const {
     headerTextColor,
     headerFontWeight

@@ -7,7 +7,7 @@ export default create({
   peer: [
     popoverStyle
   ],
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     return {}
   }
 })

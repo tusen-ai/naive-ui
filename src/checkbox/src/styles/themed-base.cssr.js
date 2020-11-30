@@ -6,7 +6,7 @@ export default c([
     const {
       cubicBezierEaseInOut,
       transformDebounceScale
-    } = props.$base
+    } = props.$global
     const {
       borderRadius,
       color,

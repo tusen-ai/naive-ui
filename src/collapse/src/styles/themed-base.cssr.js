@@ -3,7 +3,7 @@ import fadeInHeightExpandTransition from '../../../_styles/transitions/fade-in-h
 
 export default c([
   ({ props }) => {
-    const { cubicBezierEaseInOut } = props.$base
+    const { cubicBezierEaseInOut } = props.$global
     const {
       titleFontWeight,
       dividerColor,

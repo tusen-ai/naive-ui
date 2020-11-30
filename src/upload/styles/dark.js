@@ -4,7 +4,7 @@ import { changeColor } from 'seemly'
 export default create({
   name: 'Upload',
   theme: 'dark',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       iconColorOverlay,
       primaryColor,
@@ -15,7 +15,7 @@ export default create({
       actionColorOverlay,
       borderColor,
       hoverColorOverlay
-    } = derived
+    } = vars
 
     return {
       draggerColor: actionColorOverlay,

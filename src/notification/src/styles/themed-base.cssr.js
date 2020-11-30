@@ -60,7 +60,7 @@ export default c([
       cubicBezierEaseOut,
       cubicBezierEaseIn,
       cubicBezierEaseInOut
-    } = props.$base
+    } = props.$global
     const {
       color,
       textColor,

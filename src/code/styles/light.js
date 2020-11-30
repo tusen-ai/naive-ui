@@ -4,10 +4,10 @@ import { c } from '../../_utils/cssr'
 export default create({
   theme: 'light',
   name: 'Code',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       textColor2
-    } = derived
+    } = vars
     return {
       textColor: textColor2,
       highlightStyle: [
@@ -80,7 +80,7 @@ export default create({
           fontStyle: 'italic'
         }),
         c('.hljs-strong', {
-          fontWeight: base.fontWeightStrong
+          fontWeight: vars.fontWeightStrong
         }),
         c('.hljs-link', {
           textDecoration: 'underline'

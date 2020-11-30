@@ -5,7 +5,7 @@ import commonVariables from './_common'
 export default create({
   name: 'Message',
   theme: 'dark',
-  getDerivedVariables ({ base, derived }) {
+  getDerivedVars (vars) {
     const {
       textColorBase,
       textColor2Overlay,
@@ -13,11 +13,9 @@ export default create({
       successColorSuppl,
       errorColorSuppl,
       warningColorSuppl,
-      popoverColor
-    } = derived
-    const {
+      popoverColor,
       boxShadow2
-    } = base
+    } = vars
     return {
       ...commonVariables,
       textColorInfo: textColorBase,
