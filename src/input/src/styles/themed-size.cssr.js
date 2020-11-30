@@ -97,7 +97,7 @@ export default c([
               left: paddingLeft,
               right: paddingRight
             }),
-            cE('box-shadow, border', {
+            cE('box-shadow, border, state-border', {
               borderRadius: roundBorderRadius
             })
           ])

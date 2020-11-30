@@ -65,7 +65,7 @@ export default c([
         cursor: 'not-allowed',
         backgroundColor: colorDisabled
       }, [
-        cE('state-border', {
+        cE('border', {
           border: borderDisabled
         }),
         cE('input, textarea', {

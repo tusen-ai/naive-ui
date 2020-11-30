@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="triggerRef"
     :class="{
       [`n-${mergedTheme}-theme`]: mergedTheme,
       'n-date-picker--disabled': disabled,
@@ -8,72 +9,68 @@
       'n-date-picker--start-invalid': isStartValueInvalid,
       'n-date-picker--end-invalid': isEndValueInvalid
     }"
+    class="n-date-picker"
+    @keydown="handleKeyDown"
   >
     <v-binder>
       <v-target>
-        <div
-          ref="triggerRef"
-          class="n-date-picker"
-          @keydown="handleKeyDown"
+        <n-input
+          v-if="isRange"
+          ref="inputRef"
+          :bordered="mergedBordered"
+          :size="mergedSize"
+          :theme="mergedTheme"
+          passively-activated
+          :disabled="disabled"
+          :value="[displayStartTime, displayEndTime]"
+          :placeholder="[localizedStartPlaceholder, localizedEndPlaceholder]"
+          :readonly="disabled ? 'disabled' : false"
+          :separator="localizedSeperator"
+          :force-focus="active"
+          :clearable="clearable"
+          pair
+          deactivate-on-enter
+          @clear="handleClear"
+          @click="handleActivatorClick"
+          @activate="handleInputActivate"
+          @focus="handleInputFocus"
+          @blur="handleInputBlur"
+          @deactivate="handleRangeInputDeactivate"
+          @input="handleRangeInput"
         >
-          <n-input
-            v-if="isRange"
-            ref="inputRef"
-            :bordered="mergedBordered"
-            :size="mergedSize"
-            :theme="mergedTheme"
-            passively-activated
-            :disabled="disabled"
-            :value="[displayStartTime, displayEndTime]"
-            :placeholder="[localizedStartPlaceholder, localizedEndPlaceholder]"
-            :readonly="disabled ? 'disabled' : false"
-            :separator="localizedSeperator"
-            :force-focus="active"
-            :clearable="clearable"
-            pair
-            deactivate-on-enter
-            @clear="handleClear"
-            @click="handleActivatorClick"
-            @activate="handleInputActivate"
-            @focus="handleInputFocus"
-            @blur="handleInputBlur"
-            @deactivate="handleRangeInputDeactivate"
-            @input="handleRangeInput"
-          >
-            <template #suffix>
-              <n-icon>
-                <calendar-icon />
-              </n-icon>
-            </template>
-          </n-input>
-          <n-input
-            v-else
-            ref="inputRef"
-            v-model:value="displayTime"
-            :theme="mergedTheme"
-            passively-activated
-            :size="mergedSize"
-            :force-focus="active"
-            :disabled="disabled"
-            :placeholder="localizedPlacehoder"
-            :readonly="disabled ? 'disabled' : false"
-            :clearable="clearable"
-            deactivate-on-enter
-            @click="handleActivatorClick"
-            @focus="handleInputFocus"
-            @blur="handleInputBlur"
-            @activate="handleInputActivate"
-            @deactivate="handleInputDeactivate"
-            @input="handleTimeInput"
-            @clear="handleClear"
-          >
-            <template #suffix>
-              <n-icon>
-                <calendar-icon />
-              </n-icon>
-            </template>
-          </n-input>
-        </div>
+          <template #suffix>
+            <n-icon>
+              <calendar-icon />
+            </n-icon>
+          </template>
+        </n-input>
+        <n-input
+          v-else
+          ref="inputRef"
+          v-model:value="displayTime"
+          :theme="mergedTheme"
+          passively-activated
+          :size="mergedSize"
+          :force-focus="active"
+          :disabled="disabled"
+          :placeholder="localizedPlacehoder"
+          :readonly="disabled ? 'disabled' : false"
+          :clearable="clearable"
+          deactivate-on-enter
+          @click="handleActivatorClick"
+          @focus="handleInputFocus"
+          @blur="handleInputBlur"
+          @activate="handleInputActivate"
+          @deactivate="handleInputDeactivate"
+          @input="handleTimeInput"
+          @clear="handleClear"
+        >
+          <template #suffix>
+            <n-icon>
+              <calendar-icon />
+            </n-icon>
+          </template>
+        </n-input>
       </v-target>
       <v-follower
         :show="active"
