@@ -174,7 +174,8 @@ c([
       ]
     )
   },
-  cB('cascader', {
+  cTB('cascader', {
+    zIndex: 'auto',
     width: '100%'
   })
 ])

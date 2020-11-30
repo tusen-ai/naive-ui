@@ -182,8 +182,9 @@
         />
       </div>
     </template>
-    <div class="n-base-selection-border" />
-    <div class="n-base-selection-border-mask" />
+    <div class="n-base-selection__border" />
+    <div class="n-base-selection__state-border" />
+    <div class="n-base-selection__box-shadow" />
   </div>
 </template>
 

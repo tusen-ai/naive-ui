@@ -65,9 +65,14 @@ function createKey (keyPrefix, ...suffixs) {
   ).join('')
 }
 
+function cRB (selector, ...rest) {
+  return c(`${prefix}${selector}`, ...rest)
+}
+
 export {
   c,
   cTB,
+  cRB,
   cB,
   cE,
   cM,

@@ -7,6 +7,7 @@ export default c([
     return [
       cTB('select', {
         raw: `
+          z-index: auto;
           outline: none;
           width: 100%;
         `

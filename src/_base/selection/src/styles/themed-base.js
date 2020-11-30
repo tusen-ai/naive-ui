@@ -1,4 +1,4 @@
-import { cTB, c, cB, cE, cM, cNotM, createKey, insideFormItem } from '../../../../_utils/cssr'
+import { cTB, cRB, c, cB, cE, cM, cNotM, createKey, insideFormItem } from '../../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
@@ -37,16 +37,12 @@ export default c([
       `,
       borderRadius
     }, [
-      cB('base-selection-border', {
-        borderColor: 'transparent',
-        transition: `border-color .3s ${cubicBezierEaseInOut}`
-      }),
       cM('bordered', [
-        cB('base-selection-border', {
+        cE('border', {
           border
         })
       ]),
-      cB('base-selection-border', {
+      cE('border, state-border', {
         raw: `
           position: absolute;
           left: 0;
@@ -60,7 +56,10 @@ export default c([
         borderRadius,
         transition: `border-color .3s ${cubicBezierEaseInOut}`
       }),
-      cB('base-selection-border-mask', {
+      cE('state-border', {
+        zIndex: 1
+      }),
+      cE('box-shadow', {
         raw: `
           position: absolute;
           left: 0;
@@ -188,18 +187,18 @@ export default c([
       ]),
       cNotM('disabled', [
         cM('focus', [
-          cB('base-selection-border-mask', {
+          cE('box-shadow', {
             boxShadow: boxShadowFocus
           }),
-          cB('base-selection-border', {
+          cE('state-border', {
             border: borderFocus
           })
         ]),
         cM('active', [
-          cB('base-selection-border-mask', {
+          cE('box-shadow', {
             boxShadow: boxShadowActive
           }),
-          cB('base-selection-border', {
+          cE('state-border', {
             border: borderActive
           }),
           cB('base-selection-label', {
@@ -213,38 +212,38 @@ export default c([
           })
         ]),
         cNotM('active', [
-          cB('base-selection-label', [
+          cRB('base-selection-label', [
             c('&:focus ~', [
-              cB('base-selection-border-mask', {
+              cE('box-shadow', {
                 boxShadow: boxShadowFocus
               }),
-              cB('base-selection-border', {
+              cE('state-border', {
                 border: borderFocus
               })
             ]),
             c('&:hover ~', [
-              cB('base-selection-border-mask', {
+              cE('box-shadow', {
                 boxShadow: boxShadowHover
               }),
-              cB('base-selection-border', {
+              cE('state-border', {
                 border: borderHover
               })
             ])
           ]),
-          cB('base-selection-tags', [
+          cRB('base-selection-tags', [
             c('&:focus ~', [
-              cB('base-selection-border-mask', {
+              cE('box-shadow', {
                 boxShadow: boxShadowFocus
               }),
-              cB('base-selection-border', {
+              cE('state-border', {
                 border: borderFocus
               })
             ]),
             c('&:hover ~', [
-              cB('base-selection-border-mask', {
+              cE('box-shadow', {
                 boxShadow: boxShadowHover
               }),
-              cB('base-selection-border', {
+              cE('state-border', {
                 border: borderHover
               })
             ])
@@ -327,15 +326,15 @@ export default c([
     ].map(status => {
       return insideFormItem(status, cTB('base-selection', [
         [
-          cB('base-selection-border', {
+          cE('state-border', {
             border: $local[createKey('border', status)]
           }),
           cNotM('disabled', [
             cM('active', [
-              cB('base-selection-border-mask', {
+              cE('box-shadow', {
                 boxShadow: $local[createKey('boxShadowActive', status)]
               }),
-              cB('base-selection-border', {
+              cE('state-border', {
                 border: $local[createKey('borderActive', status)]
               }),
               cB('base-selection-label', {
@@ -346,47 +345,47 @@ export default c([
               })
             ]),
             cNotM('active', [
-              cB('base-selection-label', [
+              cRB('base-selection-label', [
                 c('&:hover ~', [
-                  cB('base-selection-border-mask', {
+                  cE('box-shadow', {
                     boxShadow: $local[createKey('boxShadowHover', status)]
                   }),
-                  cB('base-selection-border', {
+                  cE('state-border', {
                     border: $local[createKey('borderHover', status)]
                   })
                 ]),
                 c('&:focus ~', [
-                  cB('base-selection-border-mask', {
+                  cE('box-shadow', {
                     boxShadow: $local[createKey('boxShadowFocus', status)]
                   }),
-                  cB('base-selection-border', {
+                  cE('state-border', {
                     border: $local[createKey('borderFocus', status)]
                   })
                 ])
               ]),
-              cB('base-selection-tags', [
+              cRB('base-selection-tags', [
                 c('&:hover ~', [
-                  cB('base-selection-border-mask', {
+                  cE('box-shadow', {
                     boxShadow: $local[createKey('boxShadowHover', status)]
                   }),
-                  cB('base-selection-border', {
+                  cE('state-border', {
                     border: $local[createKey('borderHover', status)]
                   })
                 ]),
                 c('&:focus ~', [
-                  cB('base-selection-border-mask', {
+                  cE('box-shadow', {
                     boxShadow: $local[createKey('boxShadowFocus', status)]
                   }),
-                  cB('base-selection-border', {
+                  cE('state-border', {
                     border: $local[createKey('borderHover', status)]
                   })
                 ])
               ]),
               cM('focus', [
-                cB('base-selection-border-mask', {
+                cE('box-shadow', {
                   boxShadow: $local[createKey('boxShadowFocus', status)]
                 }),
-                cB('base-selection-border', {
+                cE('state-border', {
                   border: $local[createKey('borderFocus', status)]
                 })
               ])
