@@ -1,64 +1,63 @@
 <template>
-  <div class="n-auto-complete">
-    <v-binder>
-      <v-target>
-        <div
-          ref="triggerRef"
-          @keydown.down="handleKeyDownDown"
-          @keydown.up="handleKeyDownUp"
-          @keydown.enter="handleKeyDownEnter"
-          @compositionstart="handleCompositionStart"
-          @compositionend="handleCompositionEnd"
-        >
-          <slot
-            :handleInput="handleInput"
-            :handleFocus="handleFocus"
-            :handleBlur="handleBlur"
-            :value="value"
-            :theme="mergedTheme"
-          >
-            <n-input
-              :bordered="mergedBordered"
-              :theme="mergedTheme"
-              :value="value"
-              :placeholder="placeholder"
-              :size="mergedSize"
-              @focus="canBeActivated = true"
-              @input="handleInput"
-              @blur="handleBlur"
-            />
-          </slot>
-        </div>
-      </v-target>
-      <v-follower
-        :show="active"
-        :to="adjustedTo"
-        :container-class="namespace"
-        :z-index="zIndex"
-        placement="bottom-start"
-        width="target"
+  <v-binder>
+    <v-target>
+      <div
+        ref="triggerRef"
+        v-bind="$attrs"
+        @keydown.down="handleKeyDownDown"
+        @keydown.up="handleKeyDownUp"
+        @keydown.enter="handleKeyDownEnter"
+        @compositionstart="handleCompositionStart"
+        @compositionend="handleCompositionEnd"
       >
-        <transition
-          name="n-fade-in-scale-up-transition"
-          :appear="isMounted"
+        <slot
+          :handleInput="handleInput"
+          :handleFocus="handleFocus"
+          :handleBlur="handleBlur"
+          :value="value"
+          :theme="mergedTheme"
         >
-          <n-base-select-menu
-            v-if="active"
-            ref="menuRef"
-            v-clickoutside="handleClickOutsideMenu"
-            auto-pending
-            class="n-auto-complete-menu"
+          <n-input
+            :bordered="mergedBordered"
             :theme="mergedTheme"
-            :pattern="value"
-            :tree-mate="treeMate"
-            :multiple="false"
-            size="medium"
-            @menu-toggle-option="handleToggleOption"
+            :value="value"
+            :placeholder="placeholder"
+            :size="mergedSize"
+            @focus="canBeActivated = true"
+            @input="handleInput"
+            @blur="handleBlur"
           />
-        </transition>
-      </v-follower>
-    </v-binder>
-  </div>
+        </slot>
+      </div>
+    </v-target>
+    <v-follower
+      :show="active"
+      :to="adjustedTo"
+      :container-class="namespace"
+      :z-index="zIndex"
+      placement="bottom-start"
+      width="target"
+    >
+      <transition
+        name="n-fade-in-scale-up-transition"
+        :appear="isMounted"
+      >
+        <n-base-select-menu
+          v-if="active"
+          ref="menuRef"
+          v-clickoutside="handleClickOutsideMenu"
+          auto-pending
+          class="n-auto-complete-menu"
+          :theme="mergedTheme"
+          :pattern="value"
+          :tree-mate="treeMate"
+          :multiple="false"
+          size="medium"
+          @menu-toggle-option="handleToggleOption"
+        />
+      </transition>
+    </v-follower>
+  </v-binder>
 </template>
 
 <script>
@@ -105,6 +104,7 @@ export default {
     asFormItem(),
     withCssr(styles)
   ],
+  inheritAttrs: false,
   props: {
     bordered: {
       type: Boolean,
