@@ -18,7 +18,7 @@ export default c([
               border-bottom-right-radius: 0!important;
             `
           }, [
-            cE('border-mask, border', {
+            cE('box-shadow, state-border, border', {
               raw: `
                 border-top-right-radius: 0!important;
                 border-bottom-right-radius: 0!important;
@@ -32,7 +32,7 @@ export default c([
               margin-left: -1px!important;
             `
           }, [
-            cE('border-mask, border', {
+            cE('box-shadow, state-border, border', {
               raw: `
                 border-top-left-radius: 0!important;
                 border-bottom-left-radius: 0!important;
@@ -140,7 +140,7 @@ export default c([
                   border-bottom-right-radius: 0!important;
                 `
               }, [
-                cE('border-mask, border', {
+                cE('box-shadow, state-border, border', {
                   raw: `
                     border-top-right-radius: 0!important;
                     border-bottom-right-radius: 0!important;
@@ -183,7 +183,7 @@ export default c([
                   border-bottom-left-radius: 0!important;
                 `
               }, [
-                cE('border-mask, border', {
+                cE('box-shadow, border, state-border', {
                   raw: `
                     border-top-left-radius: 0!important;
                     border-bottom-left-radius: 0!important;

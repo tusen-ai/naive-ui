@@ -65,7 +65,7 @@ export default c([
         cursor: 'not-allowed',
         backgroundColor: colorDisabled
       }, [
-        cE('border', {
+        cE('state-border', {
           border: borderDisabled
         }),
         cE('input, textarea', {
@@ -88,18 +88,20 @@ export default c([
         cM('focus', {
           backgroundColor: colorFocus
         }, [
-          cE('border-mask', {
-            border: borderFocus,
+          cE('state-border', {
+            border: borderFocus
+          }),
+          cE('box-shadow', {
             boxShadow: boxShadowFocus
           })
         ]),
         c('&:hover', [
-          cE('border-mask', {
+          cE('state-border', {
             border: borderHover
           })
         ])
       ]),
-      cE('border', {
+      cE('border, state-border', {
         raw: `
           box-sizing: border-box;
           position: absolute;
@@ -114,7 +116,10 @@ export default c([
         borderColor: 'transparent',
         borderRadius
       }),
-      cE('border-mask', {
+      cE('state-border', {
+        zIndex: 1
+      }),
+      cE('box-shadow', {
         raw: `
           z-index: 1;
           position: absolute;
@@ -269,20 +274,22 @@ export default c([
         status,
         cTB('input', [
           cM('stateful', [
-            cE('border-mask', {
+            cE('state-border', {
               border: pallete[createKey('border', status)]
             }),
             cNotM('disabled', [
               c('&:hover', [
-                cE('border-mask', {
+                cE('state-border', {
                   border: pallete[createKey('borderHover', status)]
                 })
               ]),
               cM('focus', {
                 backgroundColor: pallete[createKey('colorFocus', status)]
               }, [
-                cE('border-mask', {
-                  border: pallete[createKey('borderFocus', status)],
+                cE('state-border', {
+                  border: pallete[createKey('borderFocus', status)]
+                }),
+                cE('box-shadow', {
                   boxShadow: pallete[createKey('boxShadowFocus', status)]
                 })
               ])
