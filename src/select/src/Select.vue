@@ -1,83 +1,84 @@
 <template>
-  <v-binder>
-    <v-target>
-      <n-base-selection
-        ref="triggerRef"
-        v-bind="$attrs"
-        class="n-select"
-        :active="mergedShow"
-        :pattern="pattern"
-        :placeholder="localizedPlaceholder"
-        :selected-option="selectedOption"
-        :selected-options="selectedOptions"
-        :multiple="multiple"
-        :filterable="filterable"
-        :remote="remote"
-        :clearable="clearable"
-        :disabled="disabled"
-        :size="mergedSize"
-        :theme="mergedTheme"
-        :loading="loading"
-        :autofocus="autofocus"
-        @click="handleTriggerClick"
-        @delete-last-option="handleDeleteLastOption"
-        @delete-option="handleToggleOption"
-        @pattern-input="handlePatternInput"
-        @clear="handleClear"
-        @blur="handleTriggerBlur"
-        @focus="handleTriggerFocus"
-        @keydown.up.prevent
-        @keydown.down.prevent
-        @keydown.space="handleKeyDownSpace"
-        @keyup.up="handleKeyUpUp"
-        @keyup.down="handleKeyUpDown"
-        @keyup.enter="handleKeyUpEnter"
-        @keyup.space="handleKeyUpSpace"
-        @keyup.esc="handleKeyUpEsc"
-      />
-    </v-target>
-    <v-follower
-      ref="followerRef"
-      :show="mergedShow"
-      :to="adjustedTo"
-      :container-class="namespace"
-      width="target"
-      placement="bottom-start"
-    >
-      <transition
-        name="n-fade-in-scale-up-transition"
-        :appear="isMounted"
-        @after-leave="handleMenuAfterLeave"
-      >
-        <n-base-select-menu
-          v-if="mergedShow"
-          ref="menuRef"
-          v-clickoutside="handleMenuClickOutside"
-          class="n-select-menu"
-          auto-pending
-          :theme="mergedTheme"
+  <div class="n-select">
+    <v-binder>
+      <v-target>
+        <n-base-selection
+          ref="triggerRef"
+          :bordered="mergedBordered"
+          :active="mergedShow"
           :pattern="pattern"
-          :tree-mate="treeMate"
+          :placeholder="localizedPlaceholder"
+          :selected-option="selectedOption"
+          :selected-options="selectedOptions"
           :multiple="multiple"
-          size="medium"
           :filterable="filterable"
-          :value="value"
-          @menu-toggle-option="handleToggleOption"
-          @scroll="handleMenuScroll"
+          :remote="remote"
+          :clearable="clearable"
+          :disabled="disabled"
+          :size="mergedSize"
+          :theme="mergedTheme"
+          :loading="loading"
+          :autofocus="autofocus"
+          @click="handleTriggerClick"
+          @delete-last-option="handleDeleteLastOption"
+          @delete-option="handleToggleOption"
+          @pattern-input="handlePatternInput"
+          @clear="handleClear"
+          @blur="handleTriggerBlur"
+          @focus="handleTriggerFocus"
+          @keydown.up.prevent
+          @keydown.down.prevent
+          @keydown.space="handleKeyDownSpace"
+          @keyup.up="handleKeyUpUp"
+          @keyup.down="handleKeyUpDown"
+          @keyup.enter="handleKeyUpEnter"
+          @keyup.space="handleKeyUpSpace"
+          @keyup.esc="handleKeyUpEsc"
+        />
+      </v-target>
+      <v-follower
+        ref="followerRef"
+        :show="mergedShow"
+        :to="adjustedTo"
+        :container-class="namespace"
+        width="target"
+        placement="bottom-start"
+      >
+        <transition
+          name="n-fade-in-scale-up-transition"
+          :appear="isMounted"
+          @after-leave="handleMenuAfterLeave"
         >
-          <template v-if="$slots.empty" #empty>
-            <slot name="empty" />
-          </template>
-          <template v-if="$slots.unmatch" #unmatch>
-            <slot name="unmatch" />
-          </template>
-          <template v-if="$slots.action" #action>
-            <slot name="action" />
-          </template>
-        </n-base-select-menu>
-      </transition>
-    </v-follower>
-  </v-binder>
+          <n-base-select-menu
+            v-if="mergedShow"
+            ref="menuRef"
+            v-clickoutside="handleMenuClickOutside"
+            class="n-select-menu"
+            auto-pending
+            :theme="mergedTheme"
+            :pattern="pattern"
+            :tree-mate="treeMate"
+            :multiple="multiple"
+            size="medium"
+            :filterable="filterable"
+            :value="value"
+            @menu-toggle-option="handleToggleOption"
+            @scroll="handleMenuScroll"
+          >
+            <template v-if="$slots.empty" #empty>
+              <slot name="empty" />
+            </template>
+            <template v-if="$slots.unmatch" #unmatch>
+              <slot name="unmatch" />
+            </template>
+            <template v-if="$slots.action" #action>
+              <slot name="action" />
+            </template>
+          </n-base-select-menu>
+        </transition>
+      </v-follower>
+    </v-binder>
+  </div>
 </template>
 
 <script>
@@ -116,7 +117,7 @@ function patternMatched (pattern, value) {
   }
 }
 
-function filterOptions (originalOpts, filter) {
+function filterOptions (originalOpts, filter, pattern) {
   if (!filter) return originalOpts
   function traverse (options) {
     if (!Array.isArray(options)) return []
@@ -129,7 +130,7 @@ function filterOptions (originalOpts, filter) {
             children
           }))
         }
-      } else if (filter(option)) {
+      } else if (filter(pattern, option)) {
         filteredOptions.push(option)
       }
     }
@@ -162,8 +163,11 @@ export default {
       NSelect: this
     }
   },
-  inheritAttrs: false,
   props: {
+    bordered: {
+      type: Boolean,
+      default: undefined
+    },
     clearable: {
       type: Boolean,
       default: false
@@ -293,6 +297,7 @@ export default {
     const patternRef = ref('')
     const filteredOptionsRef = computed(() => filterOptions(
       props.options,
+      props.filter,
       patternRef.value
     ))
     const treeMateRef = computed(() => createTreeMate(filteredOptionsRef.value, {
