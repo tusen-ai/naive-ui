@@ -13,6 +13,7 @@
       'n-input--suffix': $slots.suffix,
       'n-input--prefix': $slots.prefix || $slots.affix,
       'n-input--stateful': stateful,
+      'n-input--bordered': mergedBordered,
       [`n-${mergedTheme}-theme`]: mergedTheme
     }"
     :tabindex="!disabled && (passivelyActivated && !inputFocused) ? 0 : false"
@@ -185,6 +186,10 @@ export default {
     withCssr(styles)
   ],
   props: {
+    bordered: {
+      type: Boolean,
+      default: undefined
+    },
     type: {
       type: String,
       default: 'text'

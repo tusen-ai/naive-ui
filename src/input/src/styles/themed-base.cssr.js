@@ -79,6 +79,11 @@ export default c([
           color: textColorDisabled
         })
       ]),
+      cM('bordered', [
+        cE('border', {
+          border
+        })
+      ]),
       cNotM('disabled', [
         cM('focus', {
           backgroundColor: colorFocus
@@ -105,7 +110,6 @@ export default c([
           pointer-events: none;
           transition: border-color .3s ${cubicBezierEaseInOut};
         `,
-        border,
         borderRadius
       }),
       cE('border-mask', {
