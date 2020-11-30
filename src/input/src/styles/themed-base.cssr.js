@@ -110,6 +110,8 @@ export default c([
           pointer-events: none;
           transition: border-color .3s ${cubicBezierEaseInOut};
         `,
+        border,
+        borderColor: 'transparent',
         borderRadius
       }),
       cE('border-mask', {
