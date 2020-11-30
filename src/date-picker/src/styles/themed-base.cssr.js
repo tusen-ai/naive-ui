@@ -20,7 +20,7 @@ export default c([
       itemBorderRadius,
       panelColor,
       panelTextColor,
-      panelIconColor,
+      panelArrowButtonColor,
       panelMonthTextColor,
       panelActionDivider,
       panelHeaderDividerColor,
@@ -197,7 +197,7 @@ export default c([
               cursor: pointer;
               width: ${panelArrowButtonSize};
               height: ${panelArrowButtonSize};
-              fill: ${panelIconColor};
+              color: ${panelArrowButtonColor};
             `
           }),
           cE('fast-prev, next', {

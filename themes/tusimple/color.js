@@ -1,4 +1,4 @@
-import { composite } from '../../src/_utils/color'
+import { composite } from 'seemly'
 
 const SPECIAL_COLOR = ['warning', 'disabled']
 

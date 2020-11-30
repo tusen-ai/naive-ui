@@ -19,7 +19,7 @@ export default create({
       itemBorderRadius: base.borderRadiusSmall,
       panelColor: derived.popoverColor,
       panelTextColor: derived.textColor2,
-      panelIconColor: derived.iconColor,
+      panelArrowButtonColor: derived.iconColor,
       panelMonthTextColor: derived.textColorPrimary,
       panelHeaderDividerColor: derived.dividerColor,
       panelDayDividerColor: derived.dividerColor,

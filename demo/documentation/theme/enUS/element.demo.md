@@ -1,17 +1,19 @@
 # Use Naive Element
 Naive UI has `n-element` component. See [Element](n-element).
 ```html
-<div>
-  <n-button @click="theme = 'dark'">Dark</n-button>
-  <n-button @click="theme = 'light'">Light</n-button>
-</div>
-<n-config-provider :theme="theme">
-  <n-card>
-    <n-el tag="span" class="oops">
-      I am a span
-    </n-el>
-  </n-card>
-</n-config-provider>
+<n-space vertical>
+  <n-space>
+    <n-button @click="theme = 'dark'">Dark</n-button>
+    <n-button @click="theme = 'light'">Light</n-button>
+  </n-space>
+  <n-config-provider :theme="theme">
+    <n-card>
+      <n-el tag="span" class="oops">
+        I am a span
+      </n-el>
+    </n-card>
+  </n-config-provider>
+</n-space>
 ```
 ```js
 export default {
@@ -32,8 +34,5 @@ export default {
 }
 .oops.n-dark-theme {
   color: aquamarine
-}
-.n-button {
-  margin: 0 12px 8px 0;
 }
 ```

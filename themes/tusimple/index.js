@@ -1,7 +1,7 @@
 // Unstable!
 // Draft Code!
 // Variable Names Will Be Refactored!
-import { composite, changeColor } from '../../src/_utils/color'
+import { composite, changeColor } from 'seemly'
 import { cB, cE, c } from '../../src/_utils/cssr'
 import typedColor from './color'
 import cssMute from './const'
@@ -324,6 +324,7 @@ function tusimpleTheme (naive) {
     itemBorderRadius: '14px',
     panelHeaderDividerColor: 'transparent',
     panelDayDividerColor: 'transparent',
+    panelArrowButtonColor: '#CCC',
     itemFontSize: '16px',
     panelDayFontSize: '16px',
     panelMonthFontSize: '16px',

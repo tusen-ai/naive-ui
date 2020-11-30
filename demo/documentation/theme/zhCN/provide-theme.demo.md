@@ -4,8 +4,10 @@
 ```html
 <n-config-provider :theme="theme">
   <n-card>
-    <n-button @click="theme = 'dark'">深色</n-button>
-    <n-button @click="theme = 'light'">浅色</n-button>
+    <n-space>
+      <n-button @click="theme = 'dark'">深色</n-button>
+      <n-button @click="theme = 'light'">浅色</n-button>
+    </n-space>
   </n-card>
 </n-config-provider>
 ```
@@ -16,10 +18,5 @@ export default {
       theme: 'dark'
     }
   }
-}
-```
-```css
-.n-button {
-  margin: 0 12px 0 0;
 }
 ```
