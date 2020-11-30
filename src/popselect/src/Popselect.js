@@ -40,8 +40,8 @@ export default {
         bodyStyle: {
           padding: 0
         },
-        containerClass: 'n-popselect',
-        ref: 'popover'
+        ref: 'popover',
+        bodyClass: 'n-popselect'
       }
     ), {
       trigger: this.$slots.default,

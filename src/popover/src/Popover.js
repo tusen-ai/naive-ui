@@ -58,6 +58,7 @@ export default {
       NPopover: this
     }
   },
+  inheritAttrs: false,
   props: {
     show: {
       type: Boolean,

@@ -15,8 +15,8 @@
       v-if="!empty"
       ref="scrollbarRef"
       :scrollable="scrollable"
-      :container="virtualScroll && virtualListContainer"
-      :content="virtualScroll && virtualListContent"
+      :container="virtualScroll ? virtualListContainer : undefined"
+      :content="virtualScroll ? virtualListContent : undefined"
       @scroll="doScroll"
     >
       <virtual-list
