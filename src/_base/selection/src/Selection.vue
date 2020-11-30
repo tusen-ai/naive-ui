@@ -8,6 +8,7 @@
       [`n-base-selection--${size}-size`]: true,
       'n-base-selection--multiple': multiple,
       'n-base-selection--focus': patternInputFocused,
+      'n-base-selection--bordered': bordered,
       [`n-${theme}-theme`]: theme
     }"
     @click="handleClick"
@@ -181,6 +182,7 @@
         />
       </div>
     </template>
+    <div class="n-base-selection-border" />
     <div class="n-base-selection-border-mask" />
   </div>
 </template>
@@ -206,6 +208,10 @@ export default {
     }
   },
   props: {
+    bordered: {
+      type: Boolean,
+      default: undefined
+    },
     theme: {
       type: String,
       default: null
