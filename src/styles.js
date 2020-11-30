@@ -27,6 +27,10 @@ export {
   baseSuffixDark,
   baseSuffixLight
 } from './_base/suffix/styles'
+export {
+  baseWaveDark,
+  baseWaveLight
+} from './_base/wave/styles'
 // exposed style
 export {
   baseDark,
@@ -300,3 +304,11 @@ export {
   gradientTextDark,
   gradientTextLight
 } from './gradient-text/styles'
+export {
+  buttonGroupDark,
+  buttonGroupLight
+} from './button-group/styles'
+export {
+  inputGroupDark,
+  inputGroupLight
+} from './input-group/styles'

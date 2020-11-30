@@ -10,12 +10,18 @@
 </template>
 
 <script>
-import { withCssr } from '../../_mixins'
+import {
+  configurable,
+  themeable,
+  withCssr
+} from '../../_mixins'
 import styles from './styles/index.js'
 
 export default {
   name: 'ButtonGroup',
   mixins: [
+    configurable,
+    themeable,
     withCssr(styles)
   ],
   provide () {

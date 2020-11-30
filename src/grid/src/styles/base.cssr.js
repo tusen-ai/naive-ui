@@ -1,7 +1,17 @@
-import { c, cB, cE, cM } from '../../../_utils/cssr'
+import { c, cB, cM, cE } from '../../../_utils/cssr'
 
 export default c([
-  ({ props }) => {
+  () => {
+    return cB('row', {
+      width: '100%'
+    },
+    [
+      cM('flex', {
+        display: 'flex'
+      })
+    ])
+  },
+  () => {
     const positionStyles = Array
       .apply(null, { length: 24 })
       .map((_, index) => {

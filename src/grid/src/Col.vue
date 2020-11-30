@@ -25,14 +25,9 @@
 
 <script>
 import { formatLength } from '../../_utils'
-import { withCssr } from '../../_mixins'
-import styles from './styles/col.js'
 
 export default {
   name: 'Col',
-  mixins: [
-    withCssr(styles)
-  ],
   inject: {
     NRow: {
       default: null

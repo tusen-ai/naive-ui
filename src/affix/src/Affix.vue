@@ -13,13 +13,19 @@
 
 <script>
 import { getScrollParent, unwrapElement } from 'seemly'
-import { withCssr } from '../../_mixins'
+import {
+  configurable,
+  themeable,
+  withCssr
+} from '../../_mixins'
 import styles from './styles/index.js'
 import { warn } from '../../_utils'
 
 export default {
   name: 'Affix',
   mixins: [
+    configurable,
+    themeable,
     withCssr(styles)
   ],
   props: {

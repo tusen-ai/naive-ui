@@ -17,12 +17,19 @@
 
 <script>
 import { formatLength } from '../../_utils'
-import { withCssr } from '../../_mixins'
-import styles from './styles/row.js'
+import {
+  configurable,
+  themeable,
+  withCssr
+} from '../../_mixins'
+import styles from './styles'
 
 export default {
   name: 'Row',
+  cssrName: 'Grid',
   mixins: [
+    configurable,
+    themeable,
     withCssr(styles)
   ],
   provide () {

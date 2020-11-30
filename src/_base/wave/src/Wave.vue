@@ -12,10 +12,16 @@ import { withCssr } from '../../../_mixins'
 import styles from './styles/index.js'
 
 export default {
-  name: 'NBaseWave',
+  name: 'BaseWave',
   mixins: [
     withCssr(styles)
   ],
+  props: {
+    theme: {
+      type: String,
+      default: undefined
+    }
+  },
   data () {
     return {
       active: false,

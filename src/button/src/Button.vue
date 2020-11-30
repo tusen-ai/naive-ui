@@ -65,7 +65,7 @@
     >
       <slot />
     </div>
-    <n-base-wave v-if="!text" ref="wave" />
+    <n-base-wave v-if="!text" ref="wave" :theme="mergedTheme" />
     <div v-if="!text" class="n-button__border-mask" />
   </button>
 </template>
