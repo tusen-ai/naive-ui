@@ -37,10 +37,13 @@ export default c([
       `,
       borderRadius
     }, [
+      cB('base-selection-border', {
+        borderColor: 'transparent',
+        transition: `border-color .3s ${cubicBezierEaseInOut}`
+      }),
       cM('bordered', [
         cB('base-selection-border', {
-          border,
-          transition: `border-color .3s ${cubicBezierEaseInOut}`
+          border
         })
       ]),
       cB('base-selection-border', {
@@ -52,6 +55,8 @@ export default c([
           bottom: 0;
           pointer-events: none;
         `,
+        border,
+        borderColor: 'transparent',
         borderRadius,
         transition: `border-color .3s ${cubicBezierEaseInOut}`
       }),
