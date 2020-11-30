@@ -168,7 +168,7 @@ export default {
         ? props.value === null
           ? treeMate.getFirstAvailableNode()
           : props.multiple
-            ? treeMate.getNode((props.value || [])[0]) || treeMate.getFirstAvailableNode()
+            ? treeMate.getNode((props.value || [])[(props.value || []).length - 1]) || treeMate.getFirstAvailableNode()
             : treeMate.getNode(props.value) || treeMate.getFirstAvailableNode()
         : null
     )
@@ -262,9 +262,7 @@ export default {
       if (tmNode.disabled) return
       this.doToggleOption(tmNode.rawNode)
     },
-    /**
-     * keyboard related methods
-     */
+    // keyboard related methods
     handleKeyUpUp () {
       this.prev()
     },

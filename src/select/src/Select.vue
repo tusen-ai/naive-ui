@@ -487,9 +487,7 @@ export default {
       } = this
       if (onScroll) call(onScroll, ...args)
     },
-    /**
-     * remote related methods
-     */
+    // remote related methods
     updateMemorizedOptions () {
       const {
         remote,
@@ -509,9 +507,7 @@ export default {
         }
       }
     },
-    /**
-     * menu related methods
-     */
+    // menu related methods
     openMenu () {
       if (!this.disabled) {
         this.pattern = ''
