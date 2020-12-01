@@ -1,5 +1,10 @@
 <template>
-  <div class="n-select">
+  <div
+    class="n-select"
+    :class="{
+      [`n-${mergedTheme}-theme`]: mergedTheme
+    }"
+  >
     <v-binder>
       <v-target>
         <n-base-selection

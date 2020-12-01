@@ -28,7 +28,7 @@ export default create({
       boxShadowFocus: null,
       caretColor: vars.primaryColor,
       // warning
-      borderWarning: '1px solid transparent',
+      borderWarning: `1px solid ${vars.warningColor}`,
       borderHoverWarning: `1px solid ${vars.warningColorHover}`,
       borderActiveWarning: `1px solid ${vars.warningColor}`,
       borderFocusWarning: `1px solid ${vars.warningColorHover}`,
@@ -38,7 +38,7 @@ export default create({
       colorActiveWarning: changeColor(vars.warningColor, { alpha: 0.1 }),
       caretColorWarning: vars.warningColor,
       // error
-      borderError: '1px solid transparent',
+      borderError: `1px solid ${vars.errorColor}`,
       borderHoverError: `1px solid ${vars.errorColorHover}`,
       borderActiveError: `1px solid ${vars.errorColor}`,
       borderFocusError: `1px solid ${vars.errorColorHover}`,
