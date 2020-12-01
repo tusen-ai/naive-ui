@@ -1,5 +1,4 @@
-import { cTB, c, cB, cE, cM, insideFormItem, createKey } from '../../../../_utils/cssr'
-import { depx, pxfy } from 'seemly'
+import { cTB, c, cB, cM, insideFormItem, createKey } from '../../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../../_styles/transitions/fade-in-scale-up'
 import createIconSwitchTransition from '../../../../_styles/transitions/icon-switch'
 
@@ -7,23 +6,20 @@ function styleInsideFormItem (status, $local) {
   return insideFormItem(status, cTB('base-suffix', [
     cB('base-suffix-cross', [
       c('&:hover', [
-        cE('icon', {
-          fill: $local[createKey('crossColorHover', status)]
+        c('svg', {
+          color: $local[createKey('crossColorHover', status)]
         })
       ]),
       c('&:active', [
-        cE('icon', {
-          fill: $local[createKey('crossColorPressed', status)]
+        c('svg', {
+          color: $local[createKey('crossColorPressed', status)]
         })
       ])
     ]),
     cB('base-suffix-arrow', [
-      cM('active', [
-        c('&::after', {
-          borderLeftColor: $local[createKey('arrowColorActive', status)],
-          borderBottomColor: $local[createKey('arrowColorActive', status)]
-        })
-      ])
+      cM('active', {
+        color: $local[createKey('arrowColorActive', status)]
+      })
     ])
   ]))
 }
@@ -40,8 +36,6 @@ export default c([
         crossColor,
         crossColorHover,
         crossColorPressed,
-        arrowSize,
-        arrowBorderWidth,
         arrowColor,
         arrowColorActive,
         arrowColorDisabled
@@ -83,18 +77,18 @@ export default c([
           `
         }, [
           iconSwitchTransition,
-          cE('icon', {
-            transition: `fill .3s ${cubicBezierEaseInOut}`,
-            fill: crossColor
+          c('svg', {
+            transition: `color .3s ${cubicBezierEaseInOut}`,
+            color: crossColor
           }),
           c('&:hover', [
-            cE('icon', {
-              fill: crossColorHover
+            c('svg', {
+              color: crossColorHover
             })
           ]),
           c('&:active', [
-            cE('icon', {
-              fill: crossColorPressed
+            c('svg', {
+              color: crossColorPressed
             })
           ])
         ]),
@@ -102,50 +96,36 @@ export default c([
           transform: transformDebounceScale,
           raw: `
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translateX(-50%) translateY(-50%);
+            transform: rotate(0);
             width: ${iconSize};
             height: ${iconSize};
             border-radius: 8px;
             overflow: hidden;
+            color: ${arrowColor};
             cursor: pointer;
+            font-size: ${iconSize};
+            line-height: 0;
+            transform-origin: 0 0;
+            transition: color .3s ${cubicBezierEaseInOut};
           `
         }, [
           iconSwitchTransition,
-          c('&::after', {
-            raw: `
-              transition:
-                transform .3s ${cubicBezierEaseInOut},
-                border-color .3s ${cubicBezierEaseInOut};
-              position: absolute;
-              content: '';
-              box-sizing: border-box;
-              width: ${arrowSize};
-              height: ${arrowSize};
-              right: 1px;
-              top: calc(50% - ${pxfy(depx(arrowSize) / 2 + depx(arrowBorderWidth))});
-              transform: rotate(-45deg);
-              transform-origin: 30% 70%;
-            `,
-            borderLeft: `${arrowBorderWidth} solid ${arrowColor}`,
-            borderBottom: `${arrowBorderWidth} solid ${arrowColor}`
+          c('svg', {
+            transition: `transform .3s ${cubicBezierEaseInOut}`,
+            width: '1em',
+            height: '1em'
           }),
-          cM('active', [
-            c('&::after', {
-              transform: 'rotate(135deg)',
-              borderLeft: `${arrowBorderWidth} solid ${arrowColorActive}`,
-              borderBottom: `${arrowBorderWidth} solid ${arrowColorActive}`
+          cM('active', {
+            color: arrowColorActive
+          }, [
+            c('svg', {
+              transform: 'rotate(180deg)'
             })
           ]),
           cM('disabled', {
-            cursor: 'not-allowed'
-          }, [
-            c('&::after', {
-              borderLeft: `${arrowBorderWidth} solid ${arrowColorDisabled}`,
-              borderBottom: `${arrowBorderWidth} solid ${arrowColorDisabled}`
-            })
-          ])
+            cursor: 'not-allowed',
+            color: arrowColorDisabled
+          })
         ])
       ]),
       styleInsideFormItem('warning', props.$local),

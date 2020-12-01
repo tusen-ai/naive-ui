@@ -21,12 +21,9 @@
           v-else-if="!arrow || (mouseHovered && clearable)"
           key="cross"
           class="n-base-suffix-cross"
-          :class="{
-            'n-base-suffix-cross--arrow': arrow
-          }"
           @click="handleClick"
         >
-          <cancel-icon />
+          <dismiss-circle-icon />
         </div>
         <div
           v-else-if="(arrow && !clearable) || (arrow && !mouseHovered)"
@@ -36,14 +33,16 @@
             'n-base-suffix-arrow--active': active,
             'n-base-suffix-arrow--disabled': disabled
           }"
-        />
+        >
+          <chevron-down-icon />
+        </div>
       </n-icon-switch-transition>
     </div>
   </transition>
 </template>
 
 <script>
-import CancelIcon from './CancelIcon.vue'
+import { ChevronDownIcon, DismissCircleIcon } from '../../icons'
 import { NIconSwitchTransition } from '../../../_base'
 import NBaseLoading from '../../loading'
 import {
@@ -54,7 +53,8 @@ import styles from './styles'
 export default {
   name: 'BaseSuffix',
   components: {
-    CancelIcon,
+    DismissCircleIcon,
+    ChevronDownIcon,
     NBaseLoading,
     NIconSwitchTransition
   },
