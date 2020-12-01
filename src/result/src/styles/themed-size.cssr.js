@@ -2,7 +2,7 @@ import { c, cB, cTB, cE, cM, createKey } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
-    const size = props.$instance.size
+    const size = props.$vm.size
     const { $local } = props
     return cTB('result',
       [

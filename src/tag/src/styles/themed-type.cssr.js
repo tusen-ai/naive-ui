@@ -3,7 +3,7 @@ import { c, cE, cM, cTB, cNotM, createKey } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      $instance: {
+      $vm: {
         type
       },
       $local

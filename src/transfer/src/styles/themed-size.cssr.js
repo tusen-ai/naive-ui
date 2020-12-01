@@ -2,7 +2,7 @@ import { c, cTB, cB, cM, createKey } from '../../../_utils/cssr'
 import { depx, pxfy } from 'seemly'
 export default c([
   ({ props }) => {
-    const size = props.$instance.mergedSize
+    const size = props.$vm.mergedSize
     const height = props.$local[createKey('itemHeight', size)]
     const fontSize = props.$local[createKey('fontSize', size)]
     return [

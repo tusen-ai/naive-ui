@@ -6,7 +6,7 @@ export default c([
       fontSize,
       iconSize: iconSizeMap
     } = props.$local
-    const size = props.$instance.size
+    const size = props.$vm.size
     const iconSize = iconSizeMap[size]
     return cTB('empty', [
       cM(

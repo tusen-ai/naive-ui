@@ -30,7 +30,7 @@ export default c([
     `
   }),
   ({ props }) => {
-    const instance = props.$instance
+    const instance = props.$vm
     const status = instance.status
     const base = props.$global
     const local = props.$local

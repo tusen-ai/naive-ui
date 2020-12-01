@@ -4,7 +4,7 @@ import { formatLength } from '../../../../_utils'
 export default c([
   ({ props }) => {
     const {
-      $instance: {
+      $vm: {
         size
       },
       $local

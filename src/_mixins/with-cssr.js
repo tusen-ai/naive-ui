@@ -7,14 +7,25 @@ if (__DEV__) {
   window.naive.styleRenderingDuration = 0
 }
 
-function getGlobalVars (naive, themeName) {
-  const { styles } = naive
-  const theme = styles[themeName]
-  return theme.base.getGlobalVars() // style[theme]base, for example style.light.base
+function getRenderedTheme (vm) {
+  return vm.mergedTheme || vm.theme || fallbackTheme
 }
 
-function getLocalVars (compStyle, themeGlobalVars) {
-  return compStyle.getLocalVars(themeGlobalVars)
+function getGlobalVars (styles, theme) {
+  const {
+    [theme]: {
+      base
+    }
+  } = styles
+  return base.getGlobalVars() // style[theme].base, for example style.light.base
+}
+
+function getLocalStyle (styles, theme, resolveId) {
+  return styles[theme][resolveId]
+}
+
+function getLocalVars (localStyle, globalVars) {
+  return localStyle.getLocalVars(globalVars)
 }
 
 function createMutableStyleId (
@@ -37,104 +48,129 @@ function createMutableStyleId (
 }
 
 function setupMutableStyle (
-  instance,
+  vm,
   theme,
   depKey,
   CNode
 ) {
   const {
-    $naive: naive,
+    $naive: {
+      styles
+    },
     $options: options
-  } = instance
-  const {
-    styles
-  } = naive
-  const name = options.cssrName || options.name
-  const id = options.cssrId || name
+  } = vm
+  const resolveId = options.cssrName || options.name
+  const mountPrefix = options.cssrId || resolveId
   const depValue = (
     depKey === 'mergedTheme' ||
     depKey === 'theme'
-  ) ? (theme || fallbackTheme) : instance[depKey]
+  ) ? theme : vm[depKey]
   if (
-    __DEV__ &&
-    (depValue === null || depValue === undefined)
+    depValue === null || depValue === undefined
   ) {
-    warn('mixins/with-cssr', `dependency key ${name}.${depKey} should not be nullable`)
+    if (__DEV__) {
+      warn('mixins/with-cssr', `dependency key ${resolveId}.${depKey} should not be nullable`)
+    }
+    return
   }
+  // create mount id
   const mountId = createMutableStyleId(
-    id,
+    mountPrefix,
     theme,
     depKey,
     depValue
   )
   if (find(mountId)) return
-  const compStyle = styles[theme][name]
-  if (__DEV__ && !compStyle) {
-    warn('mixins/with-cssr', `${name}'s style not found`)
-  }
-  // themeVariables: { base, derived }
-  const themeGlobalVars = getGlobalVars(naive, theme)
-  const compLocalVars = getLocalVars(compStyle, themeGlobalVars)
-  const componentCssrProps = {
-    $instance: instance,
-    $global: themeGlobalVars,
-    $local: compLocalVars,
-    $theme: theme
-  }
+  // get global style
+  const globalVars = getGlobalVars(styles, theme)
+  // get component sytle
+  const localStyle = getLocalStyle(styles, theme, resolveId)
+  const localVars = getLocalVars(localStyle, globalVars)
+  // get cssr props
+  const cssrProps = createCssrProps(
+    vm,
+    theme,
+    globalVars,
+    localVars
+  )
+  // mount the style
   CNode.mount({
     target: mountId,
-    props: componentCssrProps,
+    props: cssrProps,
     count: false
   })
 }
 
-function getCssrProps (
-  instance,
-  theme
+function createCssrProps (
+  vm,
+  theme,
+  globalVars,
+  localVars
 ) {
-  const naive = instance.$naive
-  const options = instance.$options
-  const {
-    styles
-  } = naive
-  const name = options.cssrName || options.name
-  const compStyle = styles[theme][name]
-  const themeGlobalVars = getGlobalVars(naive, theme)
-  const compLocalVars = getLocalVars(compStyle, themeGlobalVars)
   return {
-    $instance: instance,
-    $global: themeGlobalVars,
-    $local: compLocalVars,
-    $theme: theme
+    $vm: vm,
+    $theme: theme,
+    $global: globalVars,
+    $local: localVars
   }
 }
 
-const withCssr = function (styles = [], cssrPropsOption) {
+function getCssrProps (vm, theme) {
+  const {
+    $naive: {
+      styles
+    },
+    $options: options
+  } = vm
+  const resolveId = options.cssrName || options.name
+  const globalVars = getGlobalVars(styles, theme)
+  const localStyle = getLocalStyle(styles, theme, resolveId)
+  const localVars = getLocalVars(localStyle, globalVars)
+  return createCssrProps(
+    vm,
+    theme,
+    globalVars,
+    localVars
+  )
+}
+
+const withCssr = function (styles = [], options = {}) {
+  let data
   // collect watchers
   const watchers = {}
+  const {
+    themeKey,
+    injectCssrProps
+  } = options
   if (
-    cssrPropsOption &&
-    cssrPropsOption.themeKey &&
-    cssrPropsOption.injectCssrProps
+    themeKey &&
+    injectCssrProps
   ) {
-    const themeKey = cssrPropsOption.themeKey
     watchers[themeKey] = [
-      instance => {
-        instance.cssrProps = getCssrProps(instance, instance[themeKey])
+      vm => {
+        vm.cssrProps = getCssrProps(vm, vm[themeKey])
       }
     ]
+    data = function () {
+      return {
+        cssrProps: getCssrProps(this, this[themeKey])
+      }
+    }
   }
   styles.forEach(style => {
-    if (!style.watch) return
+    if (__DEV__ && !style.watch) {
+      warn('with-cssr', 'Style option has no `watch` field.')
+      return
+    }
     style.watch.forEach(watchKey => {
       if (!watchers[watchKey]) watchers[watchKey] = []
       watchers[watchKey].push(
-        function (instance, mergedTheme) {
+        function (vm, mergedTheme) {
           if (__DEV__) {
             window.naive.styleRenderingDuration -= performance.now()
           }
           setupMutableStyle(
-            instance,
+            vm,
             mergedTheme,
             style.key,
             style.CNode
@@ -147,30 +183,20 @@ const withCssr = function (styles = [], cssrPropsOption) {
     })
   })
   // create component watch options
-  const watch = {}
+  const watchOptions = {}
   Object
     .keys(watchers)
     .forEach(
       watchKey => {
-        watch[watchKey] = function () {
-          // TODO use `themeKey`
-          const mergedTheme = this.mergedTheme || this.theme
+        watchOptions[watchKey] = function () {
           watchers[watchKey].forEach(watcher => {
-            watcher(this, mergedTheme)
+            watcher(this, getRenderedTheme(this))
           })
         }
       }
     )
   return {
-    data: (
-      cssrPropsOption &&
-      cssrPropsOption.themeKey &&
-      cssrPropsOption.injectCssrProps
-    ) ? function () {
-        return {
-          cssrProps: getCssrProps(this, this[cssrPropsOption.themeKey])
-        }
-      } : undefined,
+    data,
     beforeMount () {
       styles.forEach(style => {
         if (__DEV__) {
@@ -179,8 +205,7 @@ const withCssr = function (styles = [], cssrPropsOption) {
         if (style.key) {
           setupMutableStyle(
             this,
-            // TODO use `themeKey`
-            this.mergedTheme || this.theme,
+            getRenderedTheme(this),
             style.key,
             style.CNode
           )
@@ -192,7 +217,7 @@ const withCssr = function (styles = [], cssrPropsOption) {
         }
       })
     },
-    watch
+    watch: watchOptions
   }
 }
 

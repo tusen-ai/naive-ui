@@ -2,7 +2,7 @@ import { c, cTB, cB, cE, cM, createKey } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
-    const type = props.$instance.type
+    const type = props.$vm.type
     const { $local } = props
     return cTB('alert', [
       cM(type + '-type', {

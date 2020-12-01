@@ -3,7 +3,7 @@ import { depx, pxfy } from 'seemly'
 
 export default c([
   ({ props }) => {
-    const size = props.$instance.mergedSize
+    const size = props.$vm.mergedSize
     const $local = props.$local
     const blankHeight = $local[createKey('blankHeight', size)]
     const feedbackFontSize = $local[createKey('feedbackFontSize', size)]

@@ -18,7 +18,7 @@ function createRippleAnimation () {
 
 export default c([
   ({ props }) => {
-    const type = props.$instance.type
+    const type = props.$vm.type
     const color = props.$local[createKey('color', type)]
     const { cubicBezierEaseOut } = props.$global
     return [

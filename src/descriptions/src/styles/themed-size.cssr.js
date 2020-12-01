@@ -2,7 +2,7 @@ import { c, cTB, cB, cM, createKey } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
-    const size = props.$instance.size
+    const size = props.$vm.size
     const padding = props.$local[createKey('padding', size)]
     const borderedPadding = props.$local[createKey('paddingBordered', size)]
     return cTB('descriptions', [

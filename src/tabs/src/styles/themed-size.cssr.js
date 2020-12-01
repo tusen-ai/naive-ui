@@ -2,7 +2,7 @@ import { c, cTB, cM, cB, cE, createKey } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
-    const { labelSize } = props.$instance
+    const { labelSize } = props.$vm
     const { $local } = props
     return cTB('tabs', [
       cM(`${labelSize}-size`, [

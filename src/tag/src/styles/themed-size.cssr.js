@@ -4,7 +4,7 @@ import { depx, pxfy } from 'seemly'
 export default c([
   ({ props }) => {
     const {
-      $instance: {
+      $vm: {
         size
       },
       $local

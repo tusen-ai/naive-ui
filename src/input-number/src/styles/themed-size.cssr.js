@@ -3,7 +3,7 @@ import { cTB, c, cE, cM, createKey } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const { $local } = props
-    const size = props.$instance.mergedSize
+    const size = props.$vm.mergedSize
     const height = $local[createKey('height', size)]
     const width = $local[createKey('width', size)]
     const fontSize = $local[createKey('fontSize', size)]

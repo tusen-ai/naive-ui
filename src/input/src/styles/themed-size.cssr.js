@@ -3,7 +3,7 @@ import { depx, pxfy } from 'seemly'
 
 export default c([
   ({ props }) => {
-    const size = props.$instance.mergedSize
+    const size = props.$vm.mergedSize
     const height = props.$local[createKey('height', size)]
     const fontSize = props.$local[createKey('fontSize', size)]
     const lineHeight = pxfy(Math.round(depx(fontSize) * 1.5))

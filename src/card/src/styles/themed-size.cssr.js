@@ -9,7 +9,7 @@ export default c([
       marginBottom
     } = props.$local
     const { actionColor } = props.$local
-    const { size } = props.$instance
+    const { size } = props.$vm
     const marginBottomSize = marginBottom[size]
     const marginLeftSize = marginLeft[size]
     const marginTopSize = marginTop[size]

@@ -3,7 +3,7 @@ import { depx, pxfy } from 'seemly'
 
 export default c([
   ({ props }) => {
-    const size = props.$instance.size
+    const size = props.$vm.size
     const fontSize = props.$local[createKey('optionFontSize', size)]
     const optionHeight = props.$local[createKey('optionHeight', size)]
     const groupHeaderFontSize = pxfy(depx(fontSize) - 2)
