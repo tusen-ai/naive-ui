@@ -3,7 +3,7 @@ import create from '../../_styles/utils/create-component-base'
 export default create({
   name: 'Modal',
   theme: 'dark',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       modalColor,
       textColor2Overlay,

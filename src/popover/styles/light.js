@@ -4,7 +4,7 @@ import commonVariables from './_common'
 export default create({
   name: 'Popover',
   theme: 'light',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       boxShadow2,
       popoverColor,

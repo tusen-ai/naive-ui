@@ -8,11 +8,11 @@ export default function createBaseComponent (options) {
     name,
     theme,
     peer,
-    getDerivedVars
+    getLocalVars
   } = options
   function updateVars () {
     cache.localVars = Object.assign(
-      getDerivedVars(cache.globalVars),
+      getLocalVars(cache.globalVars),
       cache.overrides
     )
   }

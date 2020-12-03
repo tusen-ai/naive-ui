@@ -4,7 +4,7 @@ import commonVars from './_common'
 export default create({
   theme: 'dark',
   name: 'Switch',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       primaryColorSuppl
     } = vars

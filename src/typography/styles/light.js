@@ -4,7 +4,7 @@ import commonVars from './_common'
 export default create({
   theme: 'light',
   name: 'Typography',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     return {
       ...commonVars,
       aTextColor: vars.primaryColor,

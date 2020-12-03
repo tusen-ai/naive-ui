@@ -4,7 +4,7 @@ import commonVariables from './_common'
 export default create({
   theme: 'dark',
   name: 'Steps',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     return {
       ...commonVariables,
       stepHeaderFontWeight: vars.fontWeightStrong,

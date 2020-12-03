@@ -4,7 +4,7 @@ import commonVariables from './_common'
 export default create({
   theme: 'dark',
   name: 'Descriptions',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       tableHeaderColorOverlay,
       textColor1Overlay,

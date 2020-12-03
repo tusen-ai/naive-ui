@@ -4,7 +4,7 @@ import { changeColor } from 'seemly'
 export default create({
   theme: 'dark',
   name: 'Menu',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     return {
       borderRadius: vars.borderRadius,
       groupTextColor: vars.textColor3Overlay,

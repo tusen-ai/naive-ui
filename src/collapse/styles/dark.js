@@ -3,7 +3,7 @@ import create from '../../_styles/utils/create-component-base'
 export default create({
   theme: 'dark',
   name: 'Collapse',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       fontWeightStrong,
       textColor1,

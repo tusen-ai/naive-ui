@@ -7,7 +7,7 @@ export default create({
   peer: [
     avatarStyle
   ],
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       textColor2,
       successColor,

@@ -5,7 +5,7 @@ import commonVariables from './_common'
 export default create({
   name: 'Message',
   theme: 'dark',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       textColorBase,
       textColor2Overlay,

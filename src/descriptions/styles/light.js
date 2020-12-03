@@ -5,7 +5,7 @@ import { composite } from 'seemly'
 export default create({
   theme: 'light',
   name: 'Descriptions',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       tableHeaderColorOverlay,
       textColor1Overlay,

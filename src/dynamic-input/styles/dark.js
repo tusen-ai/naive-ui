@@ -10,7 +10,7 @@ export default create({
     inputStyle,
     buttonStyle
   ],
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     return {
       ...commonVariables
     }

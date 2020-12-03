@@ -4,7 +4,7 @@ import { composite } from 'seemly'
 export default create({
   name: 'Layout',
   theme: 'dark',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       textColor2Overlay,
       bodyColor,

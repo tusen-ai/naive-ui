@@ -4,7 +4,7 @@ import { changeColor } from 'seemly'
 export default create({
   theme: 'light',
   name: 'GradientText',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       primaryColor,
       successColor,

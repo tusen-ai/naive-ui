@@ -4,7 +4,7 @@ import { changeColor } from 'seemly'
 export default create({
   name: 'Upload',
   theme: 'dark',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       iconColorOverlay,
       primaryColor,

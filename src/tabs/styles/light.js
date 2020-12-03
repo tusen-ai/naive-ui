@@ -4,7 +4,7 @@ import sizeVariables from './_common'
 export default create({
   name: 'Tabs',
   theme: 'light',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       textColor2,
       primaryColor,

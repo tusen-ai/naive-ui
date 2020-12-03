@@ -8,7 +8,7 @@ export default create({
   peer: [
     checkboxStyle
   ],
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     return {
       ...commonVariables,
       borderRadius: vars.borderRadius,

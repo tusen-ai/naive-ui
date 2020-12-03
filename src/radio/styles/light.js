@@ -5,7 +5,7 @@ import commonVariables from './_common'
 export default create({
   theme: 'light',
   name: 'Radio',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       borderColor,
       primaryColor,

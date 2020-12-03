@@ -5,7 +5,7 @@ import commonVars from './_common'
 export default create({
   theme: 'dark',
   name: 'DatePicker',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     return {
       ...commonVars,
       itemTextColor: vars.textColor2Overlay,

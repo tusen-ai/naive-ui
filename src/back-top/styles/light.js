@@ -4,7 +4,7 @@ import commonVariables from './_common.js'
 export default create({
   theme: 'light',
   name: 'BackTop',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       popoverColor,
       textColor2,

@@ -4,7 +4,7 @@ import commonVars from './_common'
 export default create({
   theme: 'dark',
   name: 'TimePicker',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       popoverColor,
       textColor2Overlay,

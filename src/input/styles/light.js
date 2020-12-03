@@ -11,7 +11,7 @@ export default create({
   peer: [
     baseSuffixLight
   ],
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       textColor2,
       textColor4,

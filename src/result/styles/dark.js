@@ -4,7 +4,7 @@ import sizeVariables from './_common'
 export default create({
   name: 'Result',
   theme: 'dark',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       textColor1Overlay,
       textColor2Overlay,

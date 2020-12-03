@@ -4,7 +4,7 @@ import { changeColor } from 'seemly'
 export default create({
   theme: 'dark',
   name: 'Anchor',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       borderRadius,
       primaryColor,

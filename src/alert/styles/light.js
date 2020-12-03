@@ -4,7 +4,7 @@ import { composite, changeColor } from 'seemly'
 export default create({
   theme: 'light',
   name: 'Alert',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       borderRadius,
       fontWeightStrong,

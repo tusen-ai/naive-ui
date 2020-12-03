@@ -4,7 +4,7 @@ import commonVariables from './_common'
 export default create({
   theme: 'light',
   name: 'Dropdown',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       textColor2,
       boxShadow2,

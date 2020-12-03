@@ -4,7 +4,7 @@ import sizeVariables from './_common'
 export default create({
   name: 'Timeline',
   theme: 'light',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       textColor3,
       infoColor,

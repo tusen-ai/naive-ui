@@ -4,7 +4,7 @@ import { changeColor } from 'seemly'
 export default create({
   name: 'BaseMenuMask',
   theme: 'dark',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     return {
       color: changeColor(vars.popoverColor, {
         alpha: 0.75

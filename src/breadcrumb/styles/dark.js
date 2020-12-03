@@ -4,7 +4,7 @@ import commonVariables from './_common'
 export default create({
   theme: 'dark',
   name: 'Breadcrumb',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     return {
       ...commonVariables,
       itemTextColor: vars.textColor3Overlay,

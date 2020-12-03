@@ -4,7 +4,7 @@ import commonVariables from '../../input/styles/_common'
 export default create({
   name: 'InputGroupLabel',
   theme: 'light',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     return {
       ...commonVariables,
       borderRadius: vars.borderRadius,

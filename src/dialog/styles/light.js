@@ -3,7 +3,7 @@ import create from '../../_styles/utils/create-component-base'
 export default create({
   theme: 'light',
   name: 'Dialog',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       textColor1,
       textColor2,

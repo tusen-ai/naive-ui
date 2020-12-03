@@ -4,7 +4,7 @@ import { c } from '../../_utils/cssr'
 export default create({
   theme: 'dark',
   name: 'Code',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       textColor2
     } = vars

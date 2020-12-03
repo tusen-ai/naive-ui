@@ -11,7 +11,7 @@ export default create({
     baseSelectMenuDark,
     inputDark
   ],
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     return {}
   }
 })

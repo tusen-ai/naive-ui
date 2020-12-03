@@ -4,7 +4,7 @@ import commonVariables from './_common'
 export default create({
   theme: 'light',
   name: 'Card',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       borderRadius
     } = vars

@@ -7,7 +7,7 @@ export default create({
   name: 'BaseSelection',
   theme: 'light',
   peer: [suffixStyle],
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     return {
       ...commonVariables,
       borderRadius: vars.borderRadius,

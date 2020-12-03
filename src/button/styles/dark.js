@@ -8,7 +8,7 @@ export default create({
   peer: [
     baseWaveDark
   ],
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     return {
       ...commonVariables(vars),
       opacityDisabled: vars.opacityDisabled,

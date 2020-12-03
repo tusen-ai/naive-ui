@@ -11,7 +11,7 @@ export default create({
     baseLoadingLight,
     scrollbarLight
   ],
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       textColor2,
       modalColor,

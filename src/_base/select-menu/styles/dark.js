@@ -4,7 +4,7 @@ import commonVariables from './_common'
 export default create({
   name: 'BaseSelectMenu',
   theme: 'dark',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     return {
       ...commonVariables,
       borderRadius: vars.borderRadius,

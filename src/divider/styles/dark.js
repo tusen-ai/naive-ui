@@ -3,7 +3,7 @@ import create from '../../_styles/utils/create-component-base'
 export default create({
   theme: 'dark',
   name: 'Divider',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       textColor1Overlay,
       dividerColorOverlay

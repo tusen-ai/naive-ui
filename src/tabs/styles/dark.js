@@ -4,7 +4,7 @@ import sizeVariables from './_common'
 export default create({
   name: 'Tabs',
   theme: 'dark',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       textColor2Overlay,
       primaryColor,

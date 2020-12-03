@@ -7,7 +7,7 @@ export default create({
   peer: [
     iconStyle
   ],
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     return {
       itemColor: vars.railColor,
       itemColorActive: '#CCAA33'

@@ -5,7 +5,7 @@ import commonVariables from './_common'
 export default create({
   theme: 'light',
   name: 'DataTable',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       cardColor,
       modalColor,

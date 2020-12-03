@@ -9,7 +9,7 @@ export default create({
   peer: [
     tagDark
   ],
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     return {}
   }
 })

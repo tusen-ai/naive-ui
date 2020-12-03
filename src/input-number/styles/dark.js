@@ -6,7 +6,7 @@ import inputNumberCommonVariables from './_common'
 export default create({
   name: 'InputNumber',
   theme: 'dark',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       primaryColor,
       primaryColorHover,

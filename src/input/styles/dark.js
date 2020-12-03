@@ -11,7 +11,7 @@ export default create({
   peer: [
     baseSuffixDark
   ],
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       textColor2Overlay,
       textColor4Overlay,

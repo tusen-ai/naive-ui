@@ -20,7 +20,7 @@ export default create({
     scrollbarDark,
     checkboxDark
   ],
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       borderRadius,
       boxShadow2,

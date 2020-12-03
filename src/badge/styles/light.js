@@ -9,7 +9,7 @@ export default create({
   peer: [
     baseSlotMachineLight
   ],
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     return {
       color: vars.errorColor,
       colorInfo: vars.infoColor,

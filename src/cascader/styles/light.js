@@ -18,7 +18,7 @@ export default create({
     scrollbarLight,
     checkboxLight
   ],
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       borderRadius,
       boxShadow2,

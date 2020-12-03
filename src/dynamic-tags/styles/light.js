@@ -9,7 +9,7 @@ export default create({
   peer: [
     tagLight
   ],
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     return {}
   }
 })

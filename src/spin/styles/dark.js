@@ -10,7 +10,7 @@ export default create({
   peer: [
     baseLoadingDark
   ],
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       opacityDisabled
     } = vars

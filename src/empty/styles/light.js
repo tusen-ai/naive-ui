@@ -4,7 +4,7 @@ import sizeVarables from './_common'
 export default create({
   theme: 'light',
   name: 'Empty',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       textColorDisabled,
       iconColorOverlay,

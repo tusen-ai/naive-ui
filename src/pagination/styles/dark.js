@@ -12,7 +12,7 @@ export default create({
     inputDark,
     iconDark
   ],
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       textColor2Overlay,
       primaryColor,

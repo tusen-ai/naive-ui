@@ -4,7 +4,7 @@ import sizeVariables from './_common'
 export default create({
   theme: 'dark',
   name: 'Table',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       dividerColorOverlay,
       cardColor,

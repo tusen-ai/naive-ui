@@ -4,7 +4,7 @@ import commonVariables from './_common'
 export default create({
   name: 'BaseSuffix',
   theme: 'light',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     return {
       ...commonVariables,
       crossColor: vars.textColor4Overlay,

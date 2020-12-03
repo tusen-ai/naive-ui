@@ -4,7 +4,7 @@ import commonVariables from './_common'
 export default create({
   name: 'Message',
   theme: 'light',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       textColor2,
       baseColor,

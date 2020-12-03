@@ -11,7 +11,7 @@ export default create({
     baseLoadingDark,
     scrollbarDark
   ],
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       textColor2Overlay,
       inputColorOverlay

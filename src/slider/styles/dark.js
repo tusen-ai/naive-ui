@@ -4,7 +4,7 @@ import sizeVariables from './_common'
 export default create({
   name: 'Slider',
   theme: 'dark',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const boxShadow = '0 2px 8px 0 rgba(0, 0, 0, 0.12)'
     const {
       railColorOverlay,

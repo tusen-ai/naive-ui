@@ -5,7 +5,7 @@ import sizeVariables from './_common'
 export default create({
   name: 'Slider',
   theme: 'light',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const indicatorColor = 'rgba(0, 0, 0, .85)'
     const boxShadow = '0 2px 8px 0 rgba(0, 0, 0, 0.12)'
     const {

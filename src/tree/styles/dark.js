@@ -4,7 +4,7 @@ import { changeColor } from 'seemly'
 export default create({
   theme: 'dark',
   name: 'Tree',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       borderRadiusSmall,
       hoverColorOverlay,

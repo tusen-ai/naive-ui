@@ -4,7 +4,7 @@ import commonVariables from './_common'
 export default create({
   name: 'Popover',
   theme: 'dark',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       popoverColor,
       textColor2Overlay,

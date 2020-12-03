@@ -9,7 +9,7 @@ export default create({
   peer: [
     baseSelectMenuDark
   ],
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     return {
 
     }

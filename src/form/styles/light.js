@@ -6,7 +6,7 @@ export default create({
   name: 'Form',
   theme: 'light',
   peer: [gridStyle],
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       textColor1,
       errorColor,

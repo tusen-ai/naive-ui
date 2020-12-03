@@ -8,7 +8,7 @@ export default create({
   peer: [
     gridStyle
   ],
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       textColor1Overlay,
       errorColor,

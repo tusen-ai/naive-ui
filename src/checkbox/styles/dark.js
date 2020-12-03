@@ -5,7 +5,7 @@ import { changeColor } from 'seemly'
 export default create({
   theme: 'dark',
   name: 'Checkbox',
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       inputColorDisabledOverlay,
       cardColor,

@@ -11,7 +11,7 @@ export default create({
     inputLight,
     iconLight
   ],
-  getDerivedVars (vars) {
+  getLocalVars (vars) {
     const {
       textColor2,
       primaryColor,
