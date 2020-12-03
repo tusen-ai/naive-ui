@@ -206,7 +206,7 @@
               <path
                 class="n-progress-graph-circle-fill"
                 :class="{
-                  'n-progress-graph-circle-fill--empty': p ===0
+                  'n-progress-graph-circle-fill--empty': p === 0
                 }"
                 :d="circlePath(viewBoxWidth / 2 - strokeWidth / 2 * (1 + 2 * index) - circleGap * index, strokeWidth, viewBoxWidth)"
                 :stroke-width="strokeWidth"

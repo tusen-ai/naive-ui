@@ -3,10 +3,21 @@ import { cTB, c, cB, cE, cM } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      cubicBezierEaseInOut,
-      fontWeightStrong
-    } = props.$global
-    const local = props.$local
+      $global: {
+        cubicBezierEaseInOut,
+        fontWeightStrong
+      },
+      $local: {
+        railHeight,
+        fontSizeCircle,
+        railColor,
+        iconSizeCircle,
+        iconSizeLine,
+        textColorCircle,
+        textColorLineInner,
+        textColorLineOuter
+      }
+    } = props
     return cTB('progress', {
       display: 'inline-block'
     }, [
@@ -34,21 +45,22 @@ export default c([
           raw: `
             width: 30px;
             padding-left: 14px;
-            height: 18px;
-            line-height: 18px;
-            font-size: 18px;
-          `,
-          transition: `
-            fill .3s ${cubicBezierEaseInOut},
-            color .3s ${cubicBezierEaseInOut}
+            height: ${iconSizeLine};
+            line-height: ${iconSizeLine};
+            font-size: ${iconSizeLine};
+            transition:
+              fill .3s ${cubicBezierEaseInOut},
+              color .3s ${cubicBezierEaseInOut};
           `
         }, [
           cM('as-text', {
             raw: `
+              color: ${textColorLineOuter};
               text-align: center;
               width: 40px;
               font-size: 14px;
               padding-left: 4px;
+              transition: color .3s ${cubicBezierEaseInOut};
             `
           })
         ])
@@ -77,8 +89,9 @@ export default c([
             align-items: center;
             color: inherit;
             font-size: 36px;
-          `,
-          transition: `color .3s ${cubicBezierEaseInOut}`
+            color: ${textColorCircle};
+            transition: color .3s ${cubicBezierEaseInOut};
+          `
         }),
         cB('progress-icon', {
           raw: `
@@ -89,7 +102,7 @@ export default c([
             display: flex;
             align-items: center;
             color: inherit;
-            font-size: 36px;
+            font-size: ${iconSizeCircle};
           `
         }),
         cB('progress-text', {
@@ -99,12 +112,11 @@ export default c([
         }, [
           cE('percentage', {
             color: 'inherit',
-            fontSize: '28px'
+            fontSize: fontSizeCircle
           }),
           cE('unit', {
             color: 'inherit',
-            fontSize: '24px',
-            marginLeft: '6px'
+            fontSize: fontSizeCircle
           })
         ])
       ]),
@@ -114,6 +126,7 @@ export default c([
       }, [
         cB('progress-text', {
           raw: `
+            color: ${textColorCircle};
             position: absolute;
             left: 50%;
             top: 50%;
@@ -121,9 +134,7 @@ export default c([
             display: flex;
             align-items: center;
             justify-content: center;
-          `,
-          transition: `
-            color .3s ${cubicBezierEaseInOut}
+            transition: color .3s ${cubicBezierEaseInOut};
           `
         })
       ]),
@@ -151,7 +162,7 @@ export default c([
           cB('progress-graph-circle-rail', {
             transition: `stroke .3s ${cubicBezierEaseInOut}`,
             overflow: 'hidden',
-            stroke: local.railColor
+            stroke: railColor
           })
         ]),
         cB('progress-graph-line', [
@@ -173,7 +184,7 @@ export default c([
                 height: '21px',
                 fontSize: '14px',
                 lineHeight: '21px',
-                color: local.innerIndicatorTextColor,
+                color: textColorLineInner,
                 fontWeight: fontWeightStrong,
                 transition: `color .3s ${cubicBezierEaseInOut}`
               })
@@ -201,7 +212,7 @@ export default c([
                 position: absolute;
                 white-space: nowrap;
               `,
-              color: local.innerIndicatorTextColor,
+              color: textColorLineInner,
               transition: `
                 right .2s ${cubicBezierEaseInOut},
                 color .3s ${cubicBezierEaseInOut},
@@ -214,23 +225,22 @@ export default c([
             raw: `
               position: relative;
               overflow: hidden;
-              height: 10px;
+              height: ${railHeight};
               border-radius: 5px;
             `,
-            backgroundColor: local.railColor,
+            backgroundColor: railColor,
             transition: `background-color .3s ${cubicBezierEaseInOut}`
           }, [
             cB('progress-graph-line-fill', {
               raw: `
                 position: relative;
                 border-radius: 5px;
-                height: 10px;
+                height: inherit;
                 width: 100%;
                 max-width: 0%;
-              `,
-              transition: `
-                background-color .3s ${cubicBezierEaseInOut},
-                max-width .2s ${cubicBezierEaseInOut}
+                transition:
+                  background-color .3s ${cubicBezierEaseInOut},
+                  max-width .2s ${cubicBezierEaseInOut};
               `
             })
           ])

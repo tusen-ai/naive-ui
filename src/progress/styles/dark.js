@@ -4,16 +4,34 @@ export default create({
   name: 'Progress',
   theme: 'dark',
   getDerivedVars (vars) {
+    const {
+      infoColor,
+      successColor,
+      warningColor,
+      errorColor,
+      textColor2,
+      progressRailColorOverlay
+    } = vars
     return {
-      railColor: vars.progressRailColorOverlay,
-      fillColor: vars.infoColor,
-      fillColorInfo: vars.infoColor,
-      fillColorSuccess: vars.successColor,
-      fillColorWarning: vars.warningColor,
-      fillColorError: vars.errorColor,
-      innerIndicatorTextColor: 'rgb(0, 0, 0)',
-      outerIndicatorTextColor: vars.textColor2,
-      lineBackgroundImageProcessing: 'linear-gradient(90deg, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, .5) 100%)'
+      fontSizeCircle: '28px',
+      railColor: progressRailColorOverlay,
+      railHeight: '10px',
+      iconSizeCircle: '36px',
+      iconSizeLine: '18px',
+      iconColor: infoColor,
+      iconColorInfo: infoColor,
+      iconColorSuccess: successColor,
+      iconColorWarning: warningColor,
+      iconColorError: errorColor,
+      textColorCircle: textColor2,
+      textColorLineInner: 'rgb(0, 0, 0)',
+      textColorLineOuter: textColor2,
+      fillColor: infoColor,
+      fillColorInfo: infoColor,
+      fillColorSuccess: successColor,
+      fillColorWarning: warningColor,
+      fillColorError: errorColor,
+      lineBgProcessing: 'linear-gradient(90deg, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, .5) 100%)'
     }
   }
 })

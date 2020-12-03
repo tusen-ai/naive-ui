@@ -30,24 +30,29 @@ export default c([
     `
   }),
   ({ props }) => {
-    const instance = props.$vm
-    const status = instance.status
-    const base = props.$global
-    const local = props.$local
-    const fillColor = local[createKey('fillColor', status)]
-    const outerIndicatorTextColor = local.outerIndicatorTextColor
-    const lineBackgroundImageProcessing = local.lineBackgroundImageProcessing
+    const {
+      $vm: {
+        status
+      },
+      $local,
+      $global: {
+        cubicBezierEaseInOut
+      }
+    } = props
+    const {
+      lineBgProcessing,
+      textColorCircle
+    } = $local
+    const iconColor = $local[createKey('iconColor', status)]
+    const fillColor = $local[createKey('fillColor', status)]
     return cTB('progress', [
       cM(status, [
         cB('progress-text', {
-          color: outerIndicatorTextColor
+          color: textColorCircle
         }),
         cB('progress-icon', [
           cB('icon', {
-            color: fillColor
-          }),
-          cM('as-text', {
-            color: outerIndicatorTextColor
+            color: iconColor
           })
         ]),
         cB('progress-graph', [
@@ -59,19 +64,19 @@ export default c([
           cB('progress-graph-line', [
             cB('progress-graph-line-rail', [
               cB('progress-graph-line-fill', {
-                backgroundColor: fillColor
+                background: fillColor
               }, [
                 cM('processing', [
                   c('&::after', {
                     content: "''",
-                    backgroundImage: lineBackgroundImageProcessing,
-                    animation: `progress-processing-animation 2s ${base.cubicBezierEaseInOut} infinite`
+                    backgroundImage: lineBgProcessing,
+                    animation: `progress-processing-animation 2s ${cubicBezierEaseInOut} infinite`
                   })
                 ])
               ])
             ]),
             cB('progress-graph-line-indicator', {
-              backgroundColor: fillColor
+              background: fillColor
             })
           ])
         ])

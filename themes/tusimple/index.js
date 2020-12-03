@@ -7,6 +7,13 @@ import typedColor from './color'
 import cssMute from './const'
 
 const unconfigurableStyle = c([
+  cB('card', [
+    cE('content', {
+      minHeight: '213px',
+      maxHeight: '673px',
+      overflow: 'auto'
+    })
+  ]),
   cB('tag', [
     cE('close', {
       borderRadius: '50%'
@@ -47,40 +54,35 @@ function tusimpleTheme (naive) {
   const primaryColor = '#4FB233'
   const inputColorDisabled = '#EBEDF0'
   naive.styles.light.override({
-    base: {
-      borderRadius: '16px',
-      alpha4: '0.2',
-      boxShadow2: '0 2px 16px 0 rgba(0,0,0,0.10), 0 0 16px -2px rgba(0,0,0,0.06)'
-    },
-    derived: {
-      borderColor: '#999',
-      divider: '#EBEDF0',
-      primaryColor: typedColor.normalSuccess,
-      primaryColorHover: typedColor.hoverSuccess,
-      primaryColorPressed: typedColor.clickSuccess,
-      infoColor: typedColor.normalInfo,
-      infoColorHover: typedColor.HoverInfo,
-      infoColorPressed: typedColor.clickInfo,
-      successColor: typedColor.normalSuccess,
-      successColorHover: typedColor.hoverSuccess,
-      successColorPressed: typedColor.clickSuccess,
-      errorColor: typedColor.normalError,
-      errorColorHover: typedColor.hoverError,
-      errorColorPressed: typedColor.clickError,
-      warningColor: typedColor.normalWarning,
-      warningColorHover: typedColor.hoverWarning,
-      warningColorPressed: typedColor.clickWarning,
-      textColor2: '#333',
-      tableHeaderColorOverlay: '#EBEDF0',
-      inputColorDisabled,
-      actionColor: inputColorDisabled,
-      optionColorHover: composite(primaryColor, 'rgba(255, 255, 255, .1)'),
-      clearIconColor: composite('#FFF', 'rgba(0, 0, 0, .4)')
-    }
+    borderRadius: '16px',
+    alpha4: '0.2',
+    boxShadow2: '0 2px 16px 0 rgba(0,0,0,0.10), 0 0 16px -2px rgba(0,0,0,0.06)',
+    borderColor: '#999',
+    divider: '#EBEDF0',
+    primaryColor: typedColor.normalSuccess,
+    primaryColorHover: typedColor.hoverSuccess,
+    primaryColorPressed: typedColor.clickSuccess,
+    infoColor: typedColor.normalInfo,
+    infoColorHover: typedColor.HoverInfo,
+    infoColorPressed: typedColor.clickInfo,
+    successColor: typedColor.normalSuccess,
+    successColorHover: typedColor.hoverSuccess,
+    successColorPressed: typedColor.clickSuccess,
+    errorColor: typedColor.normalError,
+    errorColorHover: typedColor.hoverError,
+    errorColorPressed: typedColor.clickError,
+    warningColor: typedColor.normalWarning,
+    warningColorHover: typedColor.hoverWarning,
+    warningColorPressed: typedColor.clickWarning,
+    textColor2: '#333',
+    tableHeaderColorOverlay: '#EBEDF0',
+    inputColorDisabled,
+    actionColor: inputColorDisabled,
+    optionColorHover: composite(primaryColor, 'rgba(255, 255, 255, .1)'),
+    clearIconColor: composite('#FFF', 'rgba(0, 0, 0, .4)')
   })
   const {
-    base,
-    derived
+    vars
   } = naive.styles.light.base
 
   naive.styles.light.Button.override({
@@ -148,7 +150,7 @@ function tusimpleTheme (naive) {
     iconSize: '24px',
     arrowSize: '13px',
     arrowBorderWidth: '2px',
-    crossColor: derived.clearIconColor
+    crossColor: vars.closeColor
   })
   naive.styles.light.Input.override({
     heightMedium: '32px',
@@ -168,9 +170,9 @@ function tusimpleTheme (naive) {
   naive.styles.light.InputNumber.override({
     boxShadow: 'none',
     borderColor: 'none',
-    borderColorHover: derived.primaryColor,
+    borderColorHover: vars.primaryColor,
     buttonTextColor: 'rgba(0, 0, 0, .6)',
-    buttonTextColorHover: derived.primaryColor,
+    buttonTextColorHover: vars.primaryColor,
     widthSmall: '140px',
     widthMedium: '140px',
     widthLarge: '140px',
@@ -184,7 +186,7 @@ function tusimpleTheme (naive) {
     buttonFontSizeLarge: '24px'
   })
   naive.styles.light.BaseSelectMenu.override({
-    boxShadow: base.boxShadow2,
+    boxShadow: vars.boxShadow2,
     paddingSmall: '4px 0',
     paddingMedium: '6px 0',
     paddingLarge: '6px 0',
@@ -200,13 +202,13 @@ function tusimpleTheme (naive) {
     borderRadius: '16px',
     borderColor: 'transparent',
     color: 'rgba(153,153,153,0.10)',
-    closeColor: derived.closeColorOverlay,
-    closeColorHover: derived.closeColorOverlay,
-    closeColorPressed: derived.closeColorOverlay,
+    closeColor: vars.closeColorOverlay,
+    closeColorHover: vars.closeColorOverlay,
+    closeColorPressed: vars.closeColorOverlay,
     borderColorPrimary: 'transparent',
-    closeColorPrimary: derived.closeColorOverlay,
-    closeColorHoverPrimary: derived.closeColorOverlay,
-    closeColorPressedPrimary: derived.closeColorOverlay,
+    closeColorPrimary: vars.closeColorOverlay,
+    closeColorHoverPrimary: vars.closeColorOverlay,
+    closeColorPressedPrimary: vars.closeColorOverlay,
     borderColorInfo: 'transparent',
     borderColorSuccess: 'transparent',
     borderColorWarning: 'transparent',
@@ -254,8 +256,8 @@ function tusimpleTheme (naive) {
     minWidth: '420px',
     iconMargin: '20px',
     closeMargin: '0 0 0 22px',
-    colorInfo: derived.warningColor,
-    colorWarning: derived.errorColor,
+    colorInfo: vars.warningColor,
+    colorWarning: vars.errorColor,
     iconColorInfo: 'rgb(0, 0, 0)',
     iconColorSuccess: 'rgb(255, 255, 255)',
     iconColorWarning: 'rgb(255, 255, 255)',
@@ -295,14 +297,14 @@ function tusimpleTheme (naive) {
     itemBorderActive: 'none',
     itemBorderDisabled: 'none',
     itemColor: 'transparent',
-    itemColorHover: composite(derived.primaryColor, 'rgba(255, 255, 255, 0.9)'),
+    itemColorHover: composite(vars.primaryColor, 'rgba(255, 255, 255, 0.9)'),
     itemColorActive: 'transparent',
     itemColorDisabled: 'transparent',
     itemBorderRadius: '100px',
-    itemTextColorHover: derived.textColor2,
+    itemTextColorHover: vars.textColor2,
     itemTextColorDisabled: '#D7DAE0',
     buttonBorder: 'none',
-    buttonIconColorHover: derived.primaryColor
+    buttonIconColorHover: vars.primaryColor
   })
   naive.styles.light.BackTop.override({
     width: '48px',
@@ -310,8 +312,8 @@ function tusimpleTheme (naive) {
     iconSize: '24px',
     borderRadius: '24px',
     iconColor: 'rgba(0, 0, 0, .8)',
-    iconColorHover: derived.primaryColor,
-    iconColorPressed: derived.primaryColorPressed,
+    iconColorHover: vars.primaryColor,
+    iconColorPressed: vars.primaryColorPressed,
     boxShadow: '0 40px 16px -24px rgba(0,0,0,0.04), 0 8px 16px -8px rgba(0,0,0,0.12), 0 16px 40px 16px rgba(0,0,0,0.04)',
     boxShadowHover: '0 40px 16px -24px rgba(0,0,0,0.04), 0 8px 16px -8px rgba(0,0,0,0.12), 0 16px 40px 16px rgba(0,0,0,0.04)',
     boxShadowPressed: '0 40px 16px -24px rgba(0,0,0,0.04), 0 8px 16px -8px rgba(0,0,0,0.12), 0 16px 40px 16px rgba(0,0,0,0.04)'
@@ -345,6 +347,17 @@ function tusimpleTheme (naive) {
     itemHeight: '38px',
     itemWidth: '66px',
     panelActionPadding: '12px 20px'
+  })
+  naive.styles.light.Progress.override({
+    railHeight: '4px',
+    fontSizeCircle: '24px',
+    iconSizeCircle: '30px',
+    iconSizeLine: '20px',
+    iconColor: typedColor.normalWarning,
+    iconColorInfo: typedColor.normalWarning,
+    iconColorSuccess: typedColor.normalSuccess,
+    iconColorWarning: typedColor.normalError,
+    iconColorError: typedColor.normalError
   })
 }
 
