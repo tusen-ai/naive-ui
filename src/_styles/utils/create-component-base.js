@@ -11,10 +11,10 @@ export default function createBaseComponent (options) {
     getDerivedVars
   } = options
   function updateVars () {
-    cache.localVars = getDerivedVars({
-      ...cache.globalVars,
-      ...cache.overrides
-    })
+    cache.localVars = Object.assign(
+      getDerivedVars(cache.globalVars),
+      cache.overrides
+    )
   }
   return {
     name,
@@ -24,12 +24,14 @@ export default function createBaseComponent (options) {
       if (cache.globalVars === null) {
         cache.globalVars = globalVars
       }
-      updateVars()
+      if (cache.localVars === null) {
+        updateVars()
+      }
       return cache.localVars
     },
     override (vars) {
       cache.overrides = vars
-      updateVars()
+      cache.localVars = null
     }
   }
 }

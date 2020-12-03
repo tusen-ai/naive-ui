@@ -8,7 +8,7 @@ export default function createThemeBase (theme) {
     const { overrides } = cache
     const baseVars = {
       ...initialBaseVars,
-      overrides
+      ...overrides
     }
     const derivedVars = theme.getDerivedVars(baseVars)
     cache.globalVars = Object.assign(baseVars, derivedVars, overrides)
@@ -16,6 +16,9 @@ export default function createThemeBase (theme) {
   return {
     name: theme.name,
     theme: theme.theme,
+    get vars () {
+      return this.getGlobalVars()
+    },
     getGlobalVars () {
       if (!cache.globalVars) {
         updateVars()
