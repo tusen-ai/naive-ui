@@ -8,6 +8,7 @@ function externalValidator (patterns) {
   return id => patterns.some(pattern => id.startsWith(pattern))
 }
 
+// do not use babel when build library, use it when only build the site
 module.exports = {
   input: 'src/index.js',
   output: [

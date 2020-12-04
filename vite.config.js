@@ -18,8 +18,7 @@ module.exports = {
       'highlight.js/lib/core',
       'highlight.js/lib/languages/cpp',
       'highlight.js/lib/languages/javascript',
-      'highlight.js/lib/languages/python',
-      'vooks'
+      'highlight.js/lib/languages/python'
     ]
   },
   alias: {
@@ -46,7 +45,8 @@ module.exports = {
       rollupDemoPlugin(),
       rollupCssRenderPlugin(),
       babel({
-        babelHelpers: 'bundled'
+        babelHelpers: 'bundled',
+        exclude: 'node_modules/**'
       })
     ]
   },

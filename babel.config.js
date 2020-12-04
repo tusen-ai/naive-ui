@@ -1,4 +1,4 @@
-// the file is used by jest, shouldn't be removed
+// the file is used for jest testing & site building
 module.exports = {
   presets: ['@babel/preset-env']
 }
