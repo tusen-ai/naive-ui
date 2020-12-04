@@ -2,7 +2,10 @@
   <div
     class="n-switch"
     :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme
+      [`n-${mergedTheme}-theme`]: mergedTheme,
+      [`n-switch--${mergedSize}-size`]: true,
+      'n-switch--active': mergedValue,
+      'n-switch--disabled': disabled
     }"
     :tabindex="!disabled ? 0 : false"
     @click="handleClick"
@@ -11,15 +14,13 @@
   >
     <div
       class="n-switch__rail"
-      :class="{
-        'n-switch__rail--active': value,
-        'n-switch__rail--disabled': disabled
-      }"
     />
   </div>
 </template>
 
 <script>
+import { ref, toRef } from 'vue'
+import { useMergedState } from 'vooks'
 import {
   configurable,
   themeable,
@@ -41,9 +42,17 @@ export default {
     withCssr(styles)
   ],
   props: {
+    size: {
+      type: String,
+      default: 'medium'
+    },
     value: {
       type: Boolean,
-      required: true
+      default: undefined
+    },
+    defaultValue: {
+      type: Boolean,
+      default: false
     },
     disabled: {
       type: Boolean,
@@ -62,16 +71,26 @@ export default {
       default: undefined
     }
   },
+  setup (props) {
+    const uncontrolledValueRef = ref(props.defaultValue)
+    const controlledValueRef = toRef(props, 'value')
+    const mergedValueRef = useMergedState(controlledValueRef, uncontrolledValueRef)
+    return {
+      mergedValue: mergedValueRef,
+      uncontrolledValue: uncontrolledValueRef
+    }
+  },
   methods: {
-    doUpdateValue (...args) {
+    doUpdateValue (value) {
       const {
         'onUpdate:value': onUpdateValue,
         onChange,
         nTriggerFormInput,
         nTriggerFormChange
       } = this
-      if (onUpdateValue) call(onUpdateValue, ...args)
-      if (onChange) call(onChange, ...args)
+      if (onUpdateValue) call(onUpdateValue, value)
+      if (onChange) call(onChange, value)
+      this.uncontrolledValue = value
       nTriggerFormInput()
       nTriggerFormChange()
     },
@@ -93,7 +112,7 @@ export default {
     },
     handleClick () {
       if (!this.disabled) {
-        this.doUpdateValue(!this.value)
+        this.doUpdateValue(!this.mergedValue)
       }
     },
     handleFocus (e) {

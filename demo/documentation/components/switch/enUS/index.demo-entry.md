@@ -4,13 +4,16 @@ I have a Nintendo Switch, but have no time to play. It awalys make me recall the
 ## Demos
 ```demo
 basic
+size
 event
 ```
 
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|default-value|`boolean`|`false`||
 |disabled|`boolean`|`false`||
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |theme|`'light' \| 'dark' \| string`|`undefined`||
-|value|`boolean`|`false`||
+|value|`boolean`|`undefined`||
 |on-update:value|`(value: boolean) => any`|`undefined`||

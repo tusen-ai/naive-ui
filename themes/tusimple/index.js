@@ -85,6 +85,38 @@ const unconfigurableStyle = c([
         })
       ])
     ])
+  ]),
+  cB('switch', [
+    cM('active', [
+      cE('rail', [
+        c('&::before', {
+          backgroundImage: 'linear-gradient(8deg, #4EB233 0%, #6DD400 100%)'
+        })
+      ])
+    ]),
+    cM('disabled', [
+      cE('rail', {
+        backgroundColor: '#EBEDF0'
+      }, [
+        c('&::before', {
+          backgroundColor: '#EBEDF0',
+          backgroundImage: 'unset'
+        })
+      ]),
+      cM('active', [
+        cE('rail', [
+          c('&::before', {
+            backgroundImage: 'linear-gradient(8deg, #AFE6A1 0%, #C4E6A1 100%)'
+          })
+        ])
+      ])
+    ]),
+    cE('rail', [
+      c('&::before', {
+        backgroundSize: '100%!important',
+        backgroundImage: 'linear-gradient(133deg, #E2E5E9 0%, #999999 100%)'
+      })
+    ])
   ])
 ])
 
@@ -434,6 +466,25 @@ function tusimpleTheme (naive) {
     fillColorWarning: typedColor.normalError,
     fillColorError: typedColor.normalError,
     textColorCircle: '#666666'
+  })
+  naive.styles.light.Switch.override({
+    railHeightMedium: '15px',
+    railHeightLarge: '20px',
+    railBorderRadiusMedium: '8px',
+    railBorderRadiusLarge: '10px',
+    railWidthMedium: '40px',
+    railWidthLarge: '50px',
+    buttonHeightMedium: '24px',
+    buttonHeightLarge: '32px',
+    buttonWidthMedium: '24px',
+    buttonWidthLarge: '32px',
+    buttonWidthPressedMedium: '30px',
+    buttonWidthPressedLarge: '38px',
+    buttonBorderRadiusMedium: '12px',
+    buttonBorderRadiusLarge: '16px',
+    railColor: '#EBEDF0',
+    railColorActive: '#EBEDF0',
+    buttonBoxShadow: '0 2px 3px 0 rgba(0,0,0,0.10)'
   })
 }
 
