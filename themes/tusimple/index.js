@@ -2,7 +2,7 @@
 // Draft Code!
 // Variable Names Will Be Refactored!
 import { composite, changeColor } from 'seemly'
-import { cB, cE, c } from '../../src/_utils/cssr'
+import { cB, cE, cM, c } from '../../src/_utils/cssr'
 import typedColor from './color'
 import cssMute from './const'
 
@@ -35,6 +35,56 @@ const unconfigurableStyle = c([
         backgroundColor: changeColor('#D7DAE0', { alpha: 0.25 })
       })
     ])
+  ]),
+  cB('progress', [
+    cB('progress-graph-line-fill', {
+      background: 'linear-gradient(270deg, #FFAC26 0%, #F2E93D 100%) !important'
+    }),
+    cM('circle', [
+      cB('progress-graph-circle-fill', {
+        stroke: 'url(#progress-warning) !important'
+      })
+    ]),
+    cM('info', [
+      cB('progress-graph-line-fill', {
+        background: 'linear-gradient(270deg, #FFAC26 0%, #F2E93D 100%) !important'
+      }),
+      cM('circle', [
+        cB('progress-graph-circle-fill', {
+          stroke: 'url(#progress-warning) !important'
+        })
+      ])
+    ]),
+    cM('success', [
+      cB('progress-graph-line-fill', {
+        background: 'linear-gradient(270deg, #4FB233 0%, #AFF25E 100%) !important'
+      }),
+      cM('circle', [
+        cB('progress-graph-circle-fill', {
+          stroke: 'url(#progress-success) !important'
+        })
+      ])
+    ]),
+    cM('warning', [
+      cB('progress-graph-line-fill', {
+        background: 'linear-gradient(270deg, #FF66BA 0%, #D92149 100%) !important'
+      }),
+      cM('circle', [
+        cB('progress-graph-circle-fill', {
+          stroke: 'url(#progress-error) !important'
+        })
+      ])
+    ]),
+    cM('error', [
+      cB('progress-graph-line-fill', {
+        background: 'linear-gradient(270deg, #FF66BA 0%, #D92149 100%) !important'
+      }),
+      cM('circle', [
+        cB('progress-graph-circle-fill', {
+          stroke: 'url(#progress-error) !important'
+        })
+      ])
+    ])
   ])
 ])
 
@@ -51,6 +101,26 @@ function tusimpleTheme (naive) {
     target: 'naive-ui/tusimple-theme',
     count: false
   })
+  const svgDefs = `
+  <defs>
+    <linearGradient id="progress-success">
+      <stop offset="0%" stop-color="#4FB233" />
+      <stop offset="100%" stop-color="#AFF25E" />
+    </linearGradient>
+    <linearGradient id="progress-warning">
+      <stop offset="0%" stop-color="#FFAC26" />
+      <stop offset="100%" stop-color="#F2E93D" />
+    </linearGradient>
+    <linearGradient id="progress-error">
+      <stop offset="0%" stop-color="#FF66BA" />
+      <stop offset="100%" stop-color="#D92149" />
+    </linearGradient>
+  </defs>`
+  const svgEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+  svgEl.innerHTML = svgDefs
+  document.body.appendChild(
+    svgEl
+  )
   const primaryColor = '#4FB233'
   const inputColorDisabled = '#EBEDF0'
   naive.styles.light.override({
@@ -357,7 +427,13 @@ function tusimpleTheme (naive) {
     iconColorInfo: typedColor.normalWarning,
     iconColorSuccess: typedColor.normalSuccess,
     iconColorWarning: typedColor.normalError,
-    iconColorError: typedColor.normalError
+    iconColorError: typedColor.normalError,
+    fillColor: typedColor.normalWarning,
+    fillColorInfo: typedColor.normalWarning,
+    fillColorSuccess: typedColor.normalSuccess,
+    fillColorWarning: typedColor.normalError,
+    fillColorError: typedColor.normalError,
+    textColorCircle: '#666666'
   })
 }
 
