@@ -1,5 +1,6 @@
 const path = require('path')
 const alias = require('@rollup/plugin-alias')
+const { babel } = require('@rollup/plugin-babel')
 const rollupCssRenderPlugin = require('./build/rollup-plugin-css-render')
 const rollupDemoPlugin = require('./build/rollup-plugin-demo')
 const viteCssRenderPlugin = require('./build/vite-plugin-css-render')
@@ -14,8 +15,8 @@ module.exports = {
   outDir: 'site',
   optimizeDeps: {
     include: [
+      'highlight.js/lib/core',
       'highlight.js/lib/languages/cpp',
-      'highlight.js/lib/highlight',
       'highlight.js/lib/languages/javascript',
       'highlight.js/lib/languages/python',
       'vooks'
@@ -43,7 +44,10 @@ module.exports = {
         ]
       }),
       rollupDemoPlugin(),
-      rollupCssRenderPlugin()
+      rollupCssRenderPlugin(),
+      babel({
+        babelHelpers: 'bundled'
+      })
     ]
   },
   indexHtmlTransforms: [

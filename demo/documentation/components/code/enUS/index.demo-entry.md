@@ -11,7 +11,7 @@ The following code shows how to set hljs of Naive UI. Importing highlight.js on 
 ```js
 // ...
 import naive from 'naive-ui'
-import hljs from 'highlight.js/lib/highlight'
+import hljs from 'highlight.js/lib/core'
 import cpp from 'highlight.js/lib/languages/cpp'
 
 hljs.registerLanguage('cpp', cpp)
