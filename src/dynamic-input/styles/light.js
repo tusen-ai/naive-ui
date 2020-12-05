@@ -1,16 +1,15 @@
 import create from '../../_styles/utils/create-component-base'
-import inputStyle from '../../input/styles/light'
-import buttonStyle from '../../button/styles/light'
+import { inputLight, buttonLight } from '../../styles'
 import commonVariables from './_common'
 
 export default create({
   theme: 'light',
   name: 'DynamicInput',
   peer: [
-    inputStyle,
-    buttonStyle
+    inputLight,
+    buttonLight
   ],
-  getLocalVars (vars) {
+  getLocalVars () {
     return {
       ...commonVariables
     }

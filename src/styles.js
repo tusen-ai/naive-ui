@@ -45,6 +45,10 @@ export {
   inputLight
 } from './input/styles'
 export {
+  buttonDark,
+  buttonLight
+} from './button/styles'
+export {
   selectDark,
   selectLight
 } from './select/styles'
@@ -204,10 +208,6 @@ export {
   popoverDark,
   popoverLight
 } from './popover/styles'
-export {
-  buttonDark,
-  buttonLight
-} from './button/styles'
 export {
   stepsDark,
   stepsLight

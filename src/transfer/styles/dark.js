@@ -1,12 +1,18 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
-import checkboxStyle from '../../checkbox/styles/dark'
+import {
+  checkboxDark,
+  scrollbarDark,
+  inputDark
+} from '../../styles'
 
 export default create({
   theme: 'dark',
   name: 'Transfer',
   peer: [
-    checkboxStyle
+    checkboxDark,
+    scrollbarDark,
+    inputDark
   ],
   getLocalVars (vars) {
     return {

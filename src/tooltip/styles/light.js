@@ -1,11 +1,13 @@
 import create from '../../_styles/utils/create-component-base'
-import popoverStyle from '../../popover/styles/light'
+import {
+  popoverLight
+} from '../../styles'
 
 export default create({
   theme: 'light',
   name: 'Tooltip',
   peer: [
-    popoverStyle
+    popoverLight
   ],
   getLocalVars (vars) {
     return {}
