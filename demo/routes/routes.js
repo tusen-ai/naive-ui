@@ -99,7 +99,8 @@ export const routes = [
     ]
   },
   {
-    path: '/:catchAll(.*)',
+    name: 'not-found',
+    path: '/:pathMatch(.*)*',
     redirect: '/zh-CN/os-theme'
   }
 ]
