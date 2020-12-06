@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: 'NLi',
+  name: 'Li',
   cssrName: 'Typography',
   cssrId: 'TypographyList',
   props: {

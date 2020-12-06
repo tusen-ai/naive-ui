@@ -34,7 +34,7 @@ import {
 import styles from './styles'
 
 export default {
-  cssrName: 'Switch',
+  name: 'Switch',
   mixins: [
     configurable,
     themeable,

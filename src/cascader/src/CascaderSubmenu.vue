@@ -18,7 +18,7 @@
 <script>
 import { ref } from 'vue'
 import NCascaderOption from './CascaderOption.vue'
-import NScrollbar from '../../scrollbar'
+import { NScrollbar } from '../../scrollbar'
 
 export default {
   name: 'NCascaderSubmenu',

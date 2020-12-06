@@ -34,9 +34,9 @@
 </template>
 
 <script>
-import NIcon from '../../../icon'
+import { NIcon } from '../../../icon'
 import NDataTableFilterMenu from './FilterMenu.vue'
-import NPopover from '../../../popover'
+import { NPopover } from '../../../popover'
 import { FilterIcon } from '../../../_base/icons'
 
 function createActiveFilters (allFilters, columnKey, syntheticFilterValue) {

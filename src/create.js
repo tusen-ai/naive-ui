@@ -67,6 +67,12 @@ function create (options = {}) {
     },
     install
   }
+  function registerComponent (app, name, component) {
+    const registered = app.component(componentPrefix + name)
+    if (!registered) {
+      app.component(componentPrefix + name, component)
+    }
+  }
   function install (app) {
     if (installTargets.includes(app)) return
     globalStyle.mount({
@@ -76,7 +82,13 @@ function create (options = {}) {
     installTargets.push(app)
     app.config.globalProperties.$naive = naive
     components.forEach(component => {
-      component.install(app, naive)
+      const { name, alias } = component
+      registerComponent(app, name, component)
+      if (alias) {
+        alias.forEach(aliasName => {
+          registerComponent(app, aliasName, component)
+        })
+      }
     })
   }
   if (__DEV__) {

@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import NIcon from '../../icon/index'
+import { NIcon } from '../../icon'
 import {
   RemoveIcon,
   AddIcon

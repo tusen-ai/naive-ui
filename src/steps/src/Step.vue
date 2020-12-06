@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import NIcon from '../../icon'
+import { NIcon } from '../../icon'
 import {
   CheckmarkIcon as FinishedIcon,
   CloseIcon as ErrorIcon

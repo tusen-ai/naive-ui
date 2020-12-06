@@ -82,7 +82,7 @@ import {
   NBaseLoading,
   NBaseWave
 } from '../../_base'
-import NIcon from '../../icon/index.js'
+import { NIcon } from '../../icon'
 import styles from './styles/index.js'
 import { createHoverColor, createPressedColor } from '../../_utils/color/index.js'
 

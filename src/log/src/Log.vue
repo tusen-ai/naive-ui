@@ -35,7 +35,7 @@ import {
   themeable,
   withCssr
 } from '../../_mixins'
-import NScrollbar from '../../scrollbar'
+import { NScrollbar } from '../../scrollbar'
 import NLogLoader from './LogLoader.vue'
 import NLogLine from './LogLine.vue'
 import { throttle } from 'lodash-es'

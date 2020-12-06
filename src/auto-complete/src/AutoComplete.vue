@@ -82,7 +82,7 @@ import { useIsMounted } from 'vooks'
 import {
   NBaseSelectMenu
 } from '../../_base'
-import NInput from '../../input'
+import { NInput } from '../../input'
 import styles from './styles'
 import { mapAutoCompleteOptionsToSelectOptions } from './utils'
 

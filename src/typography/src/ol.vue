@@ -20,7 +20,7 @@ import {
 import styles from './styles/list'
 
 export default {
-  name: 'NOl',
+  name: 'Ol',
   cssrName: 'Typography',
   cssrId: 'TypographyList',
   mixins: [

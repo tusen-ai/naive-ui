@@ -5,7 +5,7 @@ import {
   themeable,
   withCssr
 } from '../../_mixins'
-import NPopover from '../../popover'
+import { NPopover } from '../../popover'
 import NDropdownMenu from './DropdownMenu.js'
 import { useMergedState, useFalseUntilTruthy, useKeyboard, useMemo } from 'vooks'
 import { keep, call } from '../../_utils'

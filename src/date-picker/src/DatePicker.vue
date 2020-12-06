@@ -173,8 +173,8 @@ import DatetimerangePanel from './panel/datetimerange.vue'
 import DatePanel from './panel/date.vue'
 import DaterangePanel from './panel/daterange.vue'
 
-import NInput from '../../input'
-import NIcon from '../../icon'
+import { NInput } from '../../input'
+import { NIcon } from '../../icon'
 import { CalendarIcon } from '../../_base/icons'
 
 import {

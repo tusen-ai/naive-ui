@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import NScrollbar from '../../scrollbar'
+import { NScrollbar } from '../../scrollbar'
 
 export default {
   name: 'NotificationContainer',

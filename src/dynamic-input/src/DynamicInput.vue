@@ -64,8 +64,8 @@
 
 <script>
 import { ref, toRef, isProxy, toRaw } from 'vue'
-import NButton from '../../button'
-import NButtonGroup from '../../button-group'
+import { NButton } from '../../button'
+import { NButtonGroup } from '../../button-group'
 import {
   RemoveIcon,
   AddIcon

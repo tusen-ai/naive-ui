@@ -1,8 +1,2 @@
 /* istanbul ignore file */
-import ScrollBar from './src/ScrollBar.vue'
-
-ScrollBar.install = function (app, naive) {
-  app.component(naive.componentPrefix + ScrollBar.name, ScrollBar)
-}
-
-export default ScrollBar
+export { default as NScrollbar } from './src/ScrollBar.vue'

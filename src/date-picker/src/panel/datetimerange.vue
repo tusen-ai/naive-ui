@@ -235,9 +235,9 @@
 </template>
 
 <script>
-import NButton from '../../../button'
-import NTimePicker from '../../../time-picker'
-import NInput from '../../../input'
+import { NButton } from '../../../button'
+import { NTimePicker } from '../../../time-picker'
+import { NInput } from '../../../input'
 import dualCalendarMixin from './dualCalendarMixin'
 import {
   format,

@@ -1,4 +1,4 @@
-import NSelect from 'src/Select'
+import { NSelect } from 'src/select'
 import { mount, createLocalVue } from '@vue/test-utils'
 import { expect } from 'chai'
 import sinon from 'sinon'

@@ -91,7 +91,7 @@
 
 <script>
 import { ref, getCurrentInstance } from 'vue'
-import NIcon from '../../icon'
+import{ NIcon } from '../../icon'
 import {
   configurable,
   themeable,

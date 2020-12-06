@@ -190,7 +190,7 @@
 
 <script>
 import NBaseSuffix from '../../suffix/index.js'
-import NTag from '../../../tag/index.js'
+import { NTag } from '../../../tag/index.js'
 import { withCssr } from '../../../_mixins'
 import styles from './styles/index.js'
 

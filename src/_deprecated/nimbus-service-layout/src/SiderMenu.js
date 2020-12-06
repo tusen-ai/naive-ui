@@ -1,4 +1,4 @@
-import NMenu from '../../../menu'
+import { NMenu } from '../../../menu'
 import { h } from 'vue'
 
 export default {

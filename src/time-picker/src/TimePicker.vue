@@ -92,8 +92,8 @@ import {
   VFollower
 } from 'vueuc'
 import { clickoutside } from 'vdirs'
-import NInput from '../../input'
-import NIcon from '../../icon'
+import { NInput } from '../../input'
+import { NIcon } from '../../icon'
 import { configurable, themeable, locale, withCssr, asFormItem } from '../../_mixins'
 import {
   isValid,

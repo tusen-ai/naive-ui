@@ -16,7 +16,7 @@
 import {
   ArrowDownIcon
 } from '../../../_base/icons'
-import NIcon from '../../../icon'
+import { NIcon } from '../../../icon'
 
 export default {
   name: 'SortIcon',

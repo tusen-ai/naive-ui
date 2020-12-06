@@ -31,7 +31,9 @@ export default {
           'baseline',
           'start',
           'end',
-          'center'
+          'center',
+          'flex-end',
+          'flex-start'
         ].includes(value)
       },
       default: undefined

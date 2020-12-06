@@ -138,9 +138,9 @@
 <script>
 import uniCalendarMixin from './uniCalendarMixin'
 import { startOfSecond } from 'date-fns'
-import NButton from '../../../button'
-import NTimePicker from '../../../time-picker'
-import NInput from '../../../input'
+import { NButton } from '../../../button'
+import { NTimePicker } from '../../../time-picker'
+import { NInput } from '../../../input'
 import { uniCalendarSetup } from '../composables'
 
 const DATETIME_FORMAT = 'yyyy-MM-dd HH:mm:ss'

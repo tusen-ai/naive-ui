@@ -1,6 +1,6 @@
 import { h } from 'vue'
-import NIcon from '../../../icon'
-import NDivider from '../../../divider'
+import { NIcon } from '../../../icon'
+import { NDivider } from '../../../divider'
 
 export default {
   props: {

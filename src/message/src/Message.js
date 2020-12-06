@@ -1,5 +1,5 @@
 import { h } from 'vue'
-import NIcon from '../../icon/index'
+import { NIcon } from '../../icon'
 import {
   InfoIcon,
   SuccessIcon,

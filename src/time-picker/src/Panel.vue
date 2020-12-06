@@ -118,7 +118,7 @@
 
 <script>
 import { ref } from 'vue'
-import NScrollbar from '../../scrollbar'
+import { NScrollbar } from '../../scrollbar'
 import { NBaseFocusDetector } from '../../_base'
 
 const time = {

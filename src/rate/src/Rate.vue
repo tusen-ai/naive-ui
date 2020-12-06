@@ -45,7 +45,7 @@ import {
 } from '../../_utils'
 import styles from './styles'
 import StarIcon from './StarIcon.vue'
-import NIcon from '../../icon'
+import{ NIcon } from '../../icon'
 
 export default {
   name: 'Rate',

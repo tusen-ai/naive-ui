@@ -13,7 +13,7 @@
 
 <script>
 import { NFadeInExpandTransition } from '../../_base'
-import NProgress from '../../progress/index.js'
+import { NProgress } from '../../progress'
 
 export default {
   name: 'UploadProgress',

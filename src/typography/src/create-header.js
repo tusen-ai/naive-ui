@@ -8,7 +8,7 @@ import { getSlot } from '../../_utils'
 import styles from './styles/header'
 
 export default level => ({
-  name: 'NH' + level,
+  name: 'H' + level,
   cssrName: 'Typography',
   cssrId: 'TypographyHeader',
   props: {

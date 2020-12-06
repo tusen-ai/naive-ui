@@ -10,6 +10,7 @@ import { warn } from '../../_utils'
 
 export default {
   name: 'Element',
+  alias: ['El'],
   mixins: [
     configurable,
     themeable,

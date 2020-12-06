@@ -70,7 +70,7 @@
 
 <script>
 import { computed, inject, toRef } from 'vue'
-import NCheckbox from '../../checkbox'
+import { NCheckbox } from '../../checkbox'
 import { NBaseLoading, NIconSwitchTransition } from '../../_base'
 import { ChevronRightIcon, CheckmarkIcon } from '../../_base/icons'
 import { useMemo } from 'vooks'

@@ -37,8 +37,8 @@
 </template>
 
 <script>
-import NButton from '../../button'
-import NIcon from '../../icon'
+import { NButton } from '../../button'
+import { NIcon } from '../../icon'
 import {
   WarningIcon
 } from '../../_base/icons'

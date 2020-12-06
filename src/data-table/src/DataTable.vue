@@ -72,8 +72,8 @@ import {
 } from '../../_mixins'
 import { setCheckStatusOfRow, createRowKey } from './utils'
 import BaseTable from './BaseTable.vue'
-import NEmpty from '../../empty'
-import NPagination from '../../pagination'
+import { NEmpty } from '../../empty'
+import { NPagination } from '../../pagination'
 import { isPlainObject } from 'lodash-es'
 import styles from './styles'
 import { warn, call, formatLength } from '../../_utils'
@@ -131,6 +131,7 @@ function normalizeColumn (column) {
 
 export default {
   name: 'DataTable',
+  alias: ['AdvancedTable'],
   components: {
     BaseTable,
     NEmpty,

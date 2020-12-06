@@ -35,7 +35,7 @@
 
 <script>
 import NBaseAnchor from './BaseAnchor.vue'
-import NAffix from '../../affix'
+import { NAffix } from '../../affix'
 import { themeable } from '../../_mixins'
 
 export default {

@@ -93,8 +93,8 @@
 
 <script>
 import { nextTick, computed } from 'vue'
-import NSelect from '../../select'
-import NInput from '../../input'
+import { NSelect } from '../../select'
+import { NInput } from '../../input'
 import {
   FastForwardIcon,
   FastBackwardIcon,

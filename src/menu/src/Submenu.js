@@ -1,6 +1,6 @@
 import { h, withDirectives, vShow, ref } from 'vue'
 import { NFadeInExpandTransition } from '../../_base'
-import NPopover from '../../popover/src/Popover'
+import { NPopover } from '../../popover'
 import NMenuItemContent from './MenuItemContent.vue'
 import menuChildMixin from './menu-child-mixin'
 import { itemRenderer } from './utils'

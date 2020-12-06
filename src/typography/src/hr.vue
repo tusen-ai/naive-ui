@@ -18,7 +18,7 @@ import {
 import styles from './styles/hr'
 
 export default {
-  name: 'NHr',
+  name: 'Hr',
   cssrName: 'Typography',
   cssrId: 'TypographyHr',
   mixins: [

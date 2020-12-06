@@ -1,8 +1,2 @@
 /* istanbul ignore file */
-import Spin from './src/Spin.vue'
-
-Spin.install = function (app, naive) {
-  app.component(naive.componentPrefix + Spin.name, Spin)
-}
-
-export default Spin
+export { default as NSpin } from './src/Spin.vue'

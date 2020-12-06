@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import NModal from '../../modal'
+import { NModal } from '../../modal'
 import NDialog from './Dialog.vue'
 
 export default {

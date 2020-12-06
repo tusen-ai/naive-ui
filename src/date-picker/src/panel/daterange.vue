@@ -172,7 +172,7 @@
 </template>
 
 <script>
-import NButton from '../../../button'
+import { NButton } from '../../../button'
 import dualCalendarMixin from './dualCalendarMixin'
 import { startOfDay } from 'date-fns'
 import { dualCalendarSetup } from '../composables'

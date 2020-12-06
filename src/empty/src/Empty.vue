@@ -35,7 +35,7 @@ import {
 import {
   EmptyIcon
 } from '../../_base/icons'
-import NIcon from '../../icon'
+import { NIcon } from '../../icon'
 import styles from './styles/index'
 
 export default {

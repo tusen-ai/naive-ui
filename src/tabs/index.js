@@ -1,10 +1,2 @@
-import Tab from './src/Tabs.vue'
-import TabPane from './src/TabPane.js'
-
-Tab.install = function (app, naive) {
-  app.component(naive.componentPrefix + Tab.name, Tab)
-  app.component(naive.componentPrefix + TabPane.name, TabPane)
-  app.component(naive.componentPrefix + 'TabPanel', TabPane)
-}
-
-export default Tab
+export { default as NTab } from './src/Tabs.vue'
+export { default as NTabPane } from './src/TabPane.js'

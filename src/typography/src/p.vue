@@ -19,7 +19,7 @@ import {
 import styles from './styles/p'
 
 export default {
-  name: 'NP',
+  name: 'P',
   cssrName: 'Typography',
   cssrId: 'TypographyP',
   mixins: [

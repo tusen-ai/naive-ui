@@ -51,7 +51,7 @@ import {
   themeable,
   withCssr
 } from '../../_mixins'
-import NIcon from '../../icon'
+import { NIcon } from '../../icon'
 import {
   CloseIcon
 } from '../../_base/icons'

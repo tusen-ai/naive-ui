@@ -54,7 +54,7 @@ import {
 } from '../../_mixins'
 import ToggleButton from './ToggleButton.vue'
 import ToggleBar from './ToggleBar.vue'
-import NScrollbar from '../../scrollbar'
+import { NScrollbar } from '../../scrollbar'
 import styles from './styles/layout-sider'
 
 export default {

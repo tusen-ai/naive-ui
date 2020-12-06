@@ -1,5 +1,5 @@
 import { h } from 'vue'
-import NPopover from '../../popover'
+import { NPopover } from '../../popover'
 import NPopselectPanel from './PopselectPanel.vue'
 import { omit, keep } from '../../_utils'
 

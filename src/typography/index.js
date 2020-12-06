@@ -1,43 +1,9 @@
-import header from './src/header.js'
-import A from './src/a.vue'
-import P from './src/p.vue'
-import Blockquote from './src/blockquote.vue'
-import Hr from './src/hr.vue'
-import Ul from './src/ul.vue'
-import Ol from './src/ol.vue'
-import Li from './src/li.vue'
-import Text from './src/text.vue'
-
-// use this way to create name since builtin html tags
-// can't be used as component name
-function generateName (prefix, originalName) {
-  return originalName.replace(/^N/, prefix)
-}
-
-const Typography = {
-  install (app, naive) {
-    const prefix = naive.componentPrefix
-    const H1 = header(1)
-    const H2 = header(2)
-    const H3 = header(3)
-    const H4 = header(4)
-    const H5 = header(5)
-    const H6 = header(6)
-    app.component(generateName(prefix, H1.name), H1)
-    app.component(generateName(prefix, H2.name), H2)
-    app.component(generateName(prefix, H3.name), H3)
-    app.component(generateName(prefix, H4.name), H4)
-    app.component(generateName(prefix, H5.name), H5)
-    app.component(generateName(prefix, H6.name), H6)
-    app.component(generateName(prefix, A.name), A)
-    app.component(generateName(prefix, P.name), P)
-    app.component(generateName(prefix, Blockquote.name), Blockquote)
-    app.component(generateName(prefix, Hr.name), Hr)
-    app.component(generateName(prefix, Ul.name), Ul)
-    app.component(generateName(prefix, Ol.name), Ol)
-    app.component(generateName(prefix, Li.name), Li)
-    app.component(generateName(prefix, Text.name), Text)
-  }
-}
-
-export default Typography
+export { NH1, NH2, NH3, NH4, NH5, NH6 } from './src/headers.js'
+export { default as A } from './src/a.vue'
+export { default as P } from './src/p.vue'
+export { default as NBlockquote } from './src/blockquote.vue'
+export { default as NHr } from './src/hr.vue'
+export { default as NUl } from './src/ul.vue'
+export { default as NOl } from './src/ol.vue'
+export { default as NLi } from './src/li.vue'
+export { default as NText } from './src/text.vue'

@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import NIcon from '../../icon'
+import { NIcon } from '../../icon'
 import { NFadeInExpandTransition } from '../../_base'
 import {
   configurable,

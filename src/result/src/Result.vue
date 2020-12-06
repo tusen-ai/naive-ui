@@ -54,7 +54,7 @@ import {
   WarningIcon,
   ErrorIcon
 } from '../../_base/icons'
-import NIcon from '../../icon'
+import { NIcon } from '../../icon'
 import image404 from './404.vue'
 import image500 from './500.vue'
 import image418 from './418.vue'

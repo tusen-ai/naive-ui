@@ -59,13 +59,11 @@
 </template>
 
 <script>
-import NCheckboxGroup from '../../../checkbox/src/CheckboxGroup.js'
-import NCheckbox from '../../../checkbox/src/Checkbox.vue'
-import NRadioGroup from '../../../radio/src/RadioGroup'
-import NRadio from '../../../radio/src/Radio.vue'
-import NDivider from '../../../divider'
-import NButton from '../../../button'
-import NScrollbar from '../../../scrollbar'
+import { NCheckbox, NCheckboxGroup } from '../../../checkbox'
+import { NRadio, NRadioGroup } from '../../../radio'
+import { NDivider } from '../../../divider'
+import { NButton } from '../../../button'
+import { NScrollbar } from '../../../scrollbar'
 import { shouldUseArrayInSingleMode } from '../utils'
 
 function isEqual (value, oldValue) {

@@ -42,7 +42,7 @@
 
 <script>
 import { ref, computed, watchEffect } from 'vue'
-import NScrollbar from '../../scrollbar'
+import { NScrollbar } from '../../scrollbar'
 
 export default {
   name: 'NDrawerContent',

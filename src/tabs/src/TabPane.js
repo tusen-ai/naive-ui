@@ -3,6 +3,7 @@ import { getSlot } from '../../_utils'
 
 export default {
   name: 'TabPane',
+  alias: ['TabPanel'],
   inject: ['NTab'],
   props: {
     label: {

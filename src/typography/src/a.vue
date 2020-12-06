@@ -27,7 +27,7 @@ import {
 import styles from './styles/a'
 
 export default {
-  name: 'NA',
+  name: 'A',
   cssrName: 'Typography',
   cssrId: 'TypographyA',
   mixins: [

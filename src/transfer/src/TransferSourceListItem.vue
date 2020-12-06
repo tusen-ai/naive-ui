@@ -24,7 +24,7 @@
 
 <script>
 import { inject } from 'vue'
-import NCheckbox from '../../checkbox/src/Checkbox.vue'
+import { NCheckbox } from '../../checkbox'
 import { useMemo } from 'vooks'
 
 export default {

@@ -67,7 +67,7 @@ import {
 import styles from './styles/text'
 
 export default {
-  name: 'NText',
+  name: 'Text',
   cssrName: 'Typography',
   cssrId: 'TypographyText',
   mixins: [

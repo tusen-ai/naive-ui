@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import NButton from '../../button'
+import { NButton } from '../../button'
 import NUploadProgress from './UploadProgress.vue'
 import {
   CancelIcon,
@@ -64,7 +64,7 @@ import {
   AttachIcon,
   DownloadIcon
 } from '../../_base/icons'
-import NIcon from '../../icon'
+import { NIcon } from '../../icon'
 import { NIconSwitchTransition } from '../../_base'
 import { warn } from '../../_utils'
 

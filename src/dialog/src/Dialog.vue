@@ -74,8 +74,8 @@ import {
   withCssr
 } from '../../_mixins'
 import { render } from '../../_utils'
-import NIcon from '../../icon'
-import NButton from '../../button'
+import { NIcon } from '../../icon'
+import { NButton } from '../../button'
 import {
   SuccessIcon,
   CloseIcon,
@@ -86,6 +86,10 @@ import styles from './styles/index.js'
 
 export default {
   name: 'Dialog',
+  alias: [
+    'NimbusConfirmCard', // deprecated
+    'Confirm' // deprecated
+  ],
   components: {
     NIcon,
     NButton,

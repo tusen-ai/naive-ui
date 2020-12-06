@@ -1,12 +1,4 @@
 /* istanbul ignore file */
-import Radio from './src/Radio.vue'
-import RadioGroup from './src/RadioGroup'
-import RadioButton from './src/RadioButton.vue'
-
-Radio.install = function (app, naive) {
-  app.component(naive.componentPrefix + Radio.name, Radio)
-  app.component(naive.componentPrefix + RadioGroup.name, RadioGroup)
-  app.component(naive.componentPrefix + RadioButton.name, RadioButton)
-}
-
-export default Radio
+export { default as NRadio } from './src/Radio.vue'
+export { default as NRadioGroup } from './src/RadioGroup'
+export { default as NRadioButton } from './src/RadioButton.vue'

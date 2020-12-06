@@ -1,14 +1,5 @@
 /* istanbul ignore file */
-import Form from './src/Form.vue'
-import FormItem from './src/FormItem.vue'
-import FormItemCol from './src/FormItemCol.js'
-import FormItemRow from './src/FormItemRow.js'
-
-Form.install = function (Vue, naive) {
-  Vue.component(naive.componentPrefix + Form.name, Form)
-  Vue.component(naive.componentPrefix + FormItem.name, FormItem)
-  Vue.component(naive.componentPrefix + FormItemCol.name, FormItemCol)
-  Vue.component(naive.componentPrefix + FormItemRow.name, FormItemRow)
-}
-
-export default Form
+export { default as NForm } from './src/Form.vue'
+export { default as NFormItem } from './src/FormItem.vue'
+export { default as NFormItemCol } from './src/FormItemCol.js'
+export { default as NFormItemRow } from './src/FormItemRow.js'

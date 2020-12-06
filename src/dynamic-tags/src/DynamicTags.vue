@@ -43,8 +43,8 @@
 </template>
 
 <script>
-import NTag from '../../tag'
-import NIcon from '../../icon'
+import { NTag } from '../../tag'
+import { NIcon } from '../../icon'
 import { AddIcon } from '../../_base/icons'
 import {
   configurable,

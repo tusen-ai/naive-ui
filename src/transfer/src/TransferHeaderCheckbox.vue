@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import NCheckbox from '../../checkbox/src/Checkbox.vue'
+import { NCheckbox } from '../../checkbox'
 
 export default {
   name: 'NTransferHeaderCheckbox',

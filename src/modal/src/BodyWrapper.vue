@@ -81,10 +81,10 @@
 import { nextTick, reactive, toRefs, toRef, watch, ref, inject } from 'vue'
 import { clickoutside } from 'vdirs'
 import { useCompitable } from 'vooks'
-import NScrollbar from '../../scrollbar'
-import NDialog from '../../dialog/src/Dialog.vue'
-import NCard from '../../card'
-import themeable from '../../_mixins/themeable'
+import { NScrollbar } from '../../scrollbar'
+import { NDialog } from '../../dialog'
+import { NCard } from '../../card'
+import { themeable } from '../../_mixins'
 import presetProps from './presetProps'
 
 export default {

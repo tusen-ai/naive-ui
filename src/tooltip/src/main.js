@@ -1,7 +1,7 @@
 /**
  * Tooltip: popover wearing waistcoat
  */
-import NPopover from '../../popover/src/Popover'
+import { NPopover } from '../../popover'
 import { h } from 'vue'
 
 export default {

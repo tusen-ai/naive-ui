@@ -33,7 +33,7 @@ import {
   withCssr
 } from '../../_mixins'
 import { CloseIcon } from '../../_base/icons'
-import NIcon from '../../icon'
+import { NIcon } from '../../icon'
 import { warn } from '../../_utils'
 import commonProps from './common-props'
 import styles from './styles'

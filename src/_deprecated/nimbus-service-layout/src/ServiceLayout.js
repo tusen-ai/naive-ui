@@ -9,6 +9,9 @@ import { useMergedState } from 'vooks'
 
 export default {
   name: 'ServiceLayout',
+  alias: [
+    'NimbusServiceLayout'
+  ],
   provide () {
     return {
       ServiceLayout: this

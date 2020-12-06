@@ -19,7 +19,7 @@ import {
 import styles from './styles/blockquote'
 
 export default {
-  name: 'NBlockquote',
+  name: 'Blockquote',
   cssrName: 'Typography',
   cssrId: 'TypographyBlockquote',
   mixins: [

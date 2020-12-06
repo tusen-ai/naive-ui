@@ -1,4 +1,4 @@
-import NInput from 'src/Input'
+import { NInput } from 'src/Input'
 import { mount, createLocalVue } from '@vue/test-utils'
 import { expect } from 'chai'
 import { existsInClassList } from '../utils'

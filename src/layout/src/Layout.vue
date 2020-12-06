@@ -23,7 +23,7 @@
 
 <script>
 import { nextTick } from 'vue'
-import NScrollbar from '../../scrollbar'
+import { NScrollbar } from '../../scrollbar'
 import layoutModeMixin from './layoutModeMixin'
 import {
   configurable,
@@ -34,6 +34,7 @@ import styles from './styles/layout'
 
 export default {
   name: 'Layout',
+  alias: ['LayoutContent'],
   cssrName: 'Layout',
   cssrId: 'Layout',
   components: {

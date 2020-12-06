@@ -63,7 +63,7 @@ import {
 } from '../../_mixins'
 import { render } from '../../_utils'
 import styles from './styles'
-import NIcon from '../../icon'
+import { NIcon } from '../../icon'
 import {
   CloseIcon,
   InfoIcon,

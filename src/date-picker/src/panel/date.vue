@@ -107,7 +107,7 @@
 <script>
 import uniCalendarMixin from './uniCalendarMixin'
 import { startOfDay } from 'date-fns'
-import NButton from '../../../button'
+import { NButton } from '../../../button'
 import { uniCalendarSetup } from '../composables'
 
 const DATETIME_FORMAT = 'yyyy-MM-dd HH:mm:ss'

@@ -6,7 +6,7 @@ import {
 } from 'vueuc'
 import { render } from '../../_utils'
 import { ChevronRightIcon } from '../../_base/icons'
-import NIcon from '../../icon'
+import { NIcon } from '../../icon'
 import { useMemo } from 'vooks'
 import { useDelayedTrue } from '../../_utils/composable'
 import NDropdownMenu from './DropdownMenu'

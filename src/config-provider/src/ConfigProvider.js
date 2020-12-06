@@ -4,6 +4,7 @@ import { warn, getSlot } from '../../_utils'
 
 export default {
   name: 'ConfigProvider',
+  alias: ['App'],
   mixins: [
     themeable
   ],
