@@ -1,9 +1,11 @@
 import { c, namespace } from '../../_utils/cssr'
 import commonVariables from '../base/_common'
 
-const cubicBezierEaseInOut = commonVariables.cubicBezierEaseInOut
-const cubicBezierEaseOut = commonVariables.cubicBezierEaseOut
-const cubicBezierEaseIn = commonVariables.cubicBezierEaseIn
+const {
+  cubicBezierEaseInOut,
+  cubicBezierEaseOut,
+  cubicBezierEaseIn
+} = commonVariables
 
 export default function (options = {}) {
   const {

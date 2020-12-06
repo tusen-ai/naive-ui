@@ -35,17 +35,17 @@ export default {
     },
     handleLeave (el) {
       if (this.width) {
-        el.style.maxWidth = 0
+        el.style.maxWidth = '0'
       } else {
-        el.style.maxHeight = 0
+        el.style.maxHeight = '0'
       }
       void el.offsetWidth
     },
     handleAfterLeave (el) {
       if (this.width) {
-        el.style.maxWidth = null
+        el.style.maxWidth = ''
       } else {
-        el.style.maxHeight = null
+        el.style.maxHeight = ''
       }
       const {
         onAfterLeave
@@ -56,24 +56,24 @@ export default {
       el.style.transition = 'none'
       if (this.width) {
         const memorizedWidth = el.offsetWidth
-        el.style.maxWidth = 0
+        el.style.maxWidth = '0'
         void el.offsetWidth
-        el.style.transition = null
+        el.style.transition = ''
         el.style.maxWidth = memorizedWidth + 'px'
       } else {
         const memorizedHeight = el.offsetHeight
-        el.style.maxHeight = 0
+        el.style.maxHeight = '0'
         void el.offsetWidth
-        el.style.transition = null
+        el.style.transition = ''
         el.style.maxHeight = memorizedHeight + 'px'
       }
       void el.offsetWidth
     },
     handleAfterEnter (el) {
       if (this.width) {
-        el.style.maxWidth = null
+        el.style.maxWidth = ''
       } else {
-        el.style.maxHeight = null
+        el.style.maxHeight = ''
       }
     }
   },
