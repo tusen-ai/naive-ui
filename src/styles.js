@@ -53,6 +53,10 @@ export {
   selectLight
 } from './select/styles'
 export {
+  popoverDark,
+  popoverLight
+} from './popover/styles'
+export {
   checkboxDark,
   checkboxLight
 } from './checkbox/styles'
@@ -204,10 +208,6 @@ export {
   thingDark,
   thingLight
 } from './thing/styles'
-export {
-  popoverDark,
-  popoverLight
-} from './popover/styles'
 export {
   stepsDark,
   stepsLight
