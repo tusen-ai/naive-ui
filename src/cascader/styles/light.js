@@ -1,18 +1,18 @@
 import create from '../../_styles/utils/create-component-base'
 import sizeVariables from './_common'
-import {
-  baseMenuMaskLight,
-  baseSelectMenuLight,
-  baseLoadingLight,
-  scrollbarLight,
-  checkboxLight
-} from '../../styles'
+import { baseMenuMaskLight } from '../../_base/menu-mask/styles'
+import { baseLoadingLight } from '../../_base/loading/styles'
+import { baseSelectionLight } from '../../_base/selection/styles'
+import { baseSelectMenuLight } from '../../_base/select-menu/styles'
+import { scrollbarLight } from '../../scrollbar/styles'
+import { checkboxLight } from '../../checkbox/styles'
 
 export default create({
   theme: 'light',
   name: 'Cascader',
   peer: [
     baseMenuMaskLight,
+    baseSelectionLight,
     baseSelectMenuLight,
     baseLoadingLight,
     scrollbarLight,

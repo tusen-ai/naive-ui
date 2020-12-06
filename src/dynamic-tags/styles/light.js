@@ -1,7 +1,7 @@
 import create from '../../_styles/utils/create-component-base'
 import {
   tagLight
-} from '../../styles'
+} from '../../tag/styles'
 
 export default create({
   name: 'DynamicTags',

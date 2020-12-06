@@ -1,7 +1,9 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
 import { changeColor } from 'seemly'
-import { iconLight } from '../../styles'
+import {
+  iconLight
+} from '../../icon/styles'
 
 export default create({
   theme: 'light',

@@ -2,10 +2,14 @@ import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
 import { composite } from 'seemly'
 import {
-  checkboxLight,
-  scrollbarLight,
+  checkboxLight
+} from '../../checkbox/styles'
+import {
+  scrollbarLight
+} from '../../scrollbar/styles'
+import {
   inputLight
-} from '../../styles'
+} from '../../input/styles'
 
 export default create({
   theme: 'light',

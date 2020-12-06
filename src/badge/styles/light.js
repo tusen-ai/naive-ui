@@ -1,7 +1,7 @@
 import create from '../../_styles/utils/create-component-base'
 import {
   baseSlotMachineLight
-} from '../../styles'
+} from '../../_base/slot-machine/styles'
 
 export default create({
   name: 'Badge',

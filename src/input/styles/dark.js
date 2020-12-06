@@ -3,7 +3,7 @@ import commonVariables from './_common'
 import { changeColor } from 'seemly'
 import {
   baseSuffixDark
-} from '../../styles'
+} from '../../_base/suffix/styles'
 
 export default create({
   name: 'Input',

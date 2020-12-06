@@ -7,18 +7,19 @@ const { camelCase } = require('lodash')
   const files = await fs.opendir(
     srcPath
   )
-  let code = ''
+  const code = []
   for await (const file of files) {
     if (file.isDirectory() && !file.name.startsWith('_')) {
       if (await fs.stat(path.resolve(srcPath, file.name, 'styles')).then(() => false).catch(() => {
         return true
       })) continue
-      code += `export {
+      code.push(`export {
   ${camelCase(file.name)}Dark,
   ${camelCase(file.name)}Light
-} from '../${file.name}/styles\n`
+} from './${file.name}/styles'\n`)
       // await fs.writeFile(path.resolve(srcPath, file.name, 'styles', 'index.js'), code)
     }
   }
-  console.log(code)
+  code.sort()
+  console.log(code.join(''))
 })()

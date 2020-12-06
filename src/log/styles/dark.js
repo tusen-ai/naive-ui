@@ -1,8 +1,6 @@
 import create from '../../_styles/utils/create-component-base'
-import {
-  baseLoadingDark,
-  scrollbarDark
-} from '../../styles'
+import { baseLoadingDark } from '../../_base/loading/styles'
+import { scrollbarDark } from '../../scrollbar/styles'
 
 export default create({
   name: 'Log',

@@ -1,10 +1,14 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
 import {
-  checkboxDark,
-  scrollbarDark,
+  checkboxDark
+} from '../../checkbox/styles'
+import {
+  scrollbarDark
+} from '../../scrollbar/styles'
+import {
   inputDark
-} from '../../styles'
+} from '../../input/styles'
 
 export default create({
   theme: 'dark',

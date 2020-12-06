@@ -354,6 +354,7 @@
   - [x] drawer api
   - [x] chrome date-picker overflow (focus({ preventScroll }))
   - [x] slider 键盘好像会激活不该激活的 tooltip...
+  - [ ] transfer 打包之后有问题
 
 ## Info
 https://github.com/vuejs/vue-next/issues/2549

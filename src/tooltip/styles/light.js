@@ -1,7 +1,7 @@
 import create from '../../_styles/utils/create-component-base'
 import {
   popoverLight
-} from '../../styles'
+} from '../../popover/styles'
 
 export default create({
   theme: 'light',

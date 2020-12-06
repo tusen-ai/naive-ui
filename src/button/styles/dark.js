@@ -1,5 +1,7 @@
 import create from '../../_styles/utils/create-component-base'
-import { baseWaveDark } from '../../styles'
+import {
+  baseWaveDark
+} from '../../_base/wave/styles'
 import commonVariables from './_common'
 
 export default create({

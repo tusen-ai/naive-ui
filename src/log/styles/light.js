@@ -1,8 +1,6 @@
 import create from '../../_styles/utils/create-component-base'
-import {
-  baseLoadingLight,
-  scrollbarLight
-} from '../../styles'
+import { baseLoadingLight } from '../../_base/loading/styles'
+import { scrollbarLight } from '../../scrollbar/styles'
 
 export default create({
   name: 'Log',

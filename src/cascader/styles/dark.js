@@ -1,13 +1,11 @@
 import create from '../../_styles/utils/create-component-base'
 import sizeVariables from './_common'
-import {
-  baseMenuMaskDark,
-  baseSelectMenuDark,
-  baseSelectionDark,
-  baseLoadingDark,
-  scrollbarDark,
-  checkboxDark
-} from '../../styles'
+import { baseMenuMaskDark } from '../../_base/menu-mask/styles'
+import { baseLoadingDark } from '../../_base/loading/styles'
+import { baseSelectionDark } from '../../_base/selection/styles'
+import { baseSelectMenuDark } from '../../_base/select-menu/styles'
+import { scrollbarDark } from '../../scrollbar/styles'
+import { checkboxDark } from '../../checkbox/styles'
 
 export default create({
   theme: 'dark',
