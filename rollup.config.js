@@ -1,4 +1,3 @@
-const vuePlugin = require('rollup-plugin-vue')
 const cssRenderPlugin = require('./build/rollup-plugin-css-render')
 const { nodeResolve } = require('@rollup/plugin-node-resolve')
 const { terser } = require('rollup-plugin-terser')
@@ -10,7 +9,7 @@ function externalValidator (patterns) {
 
 // do not use babel when build library, use it when only build the site
 module.exports = {
-  input: 'src/index.js',
+  input: 'src-mirror/index.js',
   output: [
     {
       format: 'cjs',
@@ -29,10 +28,9 @@ module.exports = {
       __DEV__: 'process.env.NODE_ENV !== "production"'
     }),
     nodeResolve({
-      extensions: ['.js', '.json', '.vue']
+      extensions: ['.js', '.json']
     }),
     cssRenderPlugin(),
-    vuePlugin(),
     terser({
       mangle: false,
       output: {
