@@ -28,6 +28,7 @@ module.exports = {
     'process.env.NODE_ENV': `'${process.env.NODE_ENV}'`,
     __DEV__: process.env.NODE_ENV !== 'production'
   },
+  minify: false,
   rollupPluginVueOptions: {
     include: /\.(vue|md|demo.md|demo-entry.md|entry)$/
   },
