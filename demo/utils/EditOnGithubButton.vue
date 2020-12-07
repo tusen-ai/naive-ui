@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { Compose16Regular as EditIcon } from '@vicons/fluent'
+import EditIcon from '@vicons/fluent/Compose16Regular.js'
 import githubUrl from './github-url'
 
 export default {
