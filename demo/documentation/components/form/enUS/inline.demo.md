@@ -71,10 +71,10 @@ export default {
       e.preventDefault()
       this.$refs.form.validate(errors => {
         if (!errors) {
-          this.$NMessage.success('Valid')
+          this.message.success('Valid')
         } else {
           console.log(errors)
-          this.$NMessage.error('Invalid')
+          this.message.error('Invalid')
         }
       })
     }

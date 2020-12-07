@@ -19,6 +19,7 @@ Why change event is an example? Because at first there isn't much to write.
 ```
 ```js
 export default {
+  inject: ['message'],
   data () {
     return {
       selectedValue: 'song1',
@@ -76,8 +77,8 @@ export default {
     }
   },
   methods: {
-    handleChange (item) {
-      this.$NMessage.info('value: ' + JSON.stringify(item))
+    handleChange (value) {
+      this.message.info('value: ' + JSON.stringify(value))
     }
   }
 }

@@ -77,8 +77,8 @@ export default {
     }
   },
   methods: {
-    handleChange (item) {
-      this.message.info('value: ' + JSON.stringify(item))
+    handleChange (value) {
+      this.message.info('value: ' + JSON.stringify(value))
     }
   }
 }

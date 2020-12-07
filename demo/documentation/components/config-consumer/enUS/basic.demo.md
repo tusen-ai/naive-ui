@@ -15,12 +15,13 @@ Get current theme and namespace.
 ```
 ```js
 export default {
+  inject: ['message'],
   methods: {
     handleThemeChange (value, oldValue) {
-      this.$NMessage.info('Theme Change: `' + value + '` theme')
+      this.message.info('Theme Change: `' + value + '` theme')
     },
     handleNamespaceChange (value, oldValue) {
-      this.$NMessage.info('Namespace Change: `' + value + '` namespace')
+      this.message.info('Namespace Change: `' + value + '` namespace')
     }
   }
 }
