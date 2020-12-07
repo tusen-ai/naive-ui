@@ -9,7 +9,7 @@
       'n-input--round': round && !isTextarea,
       'n-input--clearable': clearable,
       'n-input--split': pair,
-      'n-input--focus': syntheticFocus,
+      'n-input--focus': mergedFocus,
       'n-input--suffix': $slots.suffix,
       'n-input--prefix': $slots.prefix || $slots.affix,
       'n-input--stateful': stateful,
@@ -361,19 +361,19 @@ export default {
         return [placeholder]
       }
     },
-    syntheticFocus () {
+    mergedFocus () {
       return this.forceFocus || this.focused
     },
     showClearButton () {
-      if (this.disabled || !this.clearable || (!this.syntheticFocus && !this.hover)) return false
+      if (this.disabled || !this.clearable || (!this.mergedFocus && !this.hover)) return false
       if (this.pair) {
         return !!(
           Array.isArray(this.value) &&
           (this.value[0] || this.value[1])
         ) &&
-        (this.hover || this.syntheticFocus)
+        (this.hover || this.mergedFocus)
       } else {
-        return !!this.value && (this.hover || this.syntheticFocus)
+        return !!this.value && (this.hover || this.mergedFocus)
       }
     },
     isTextarea () {
