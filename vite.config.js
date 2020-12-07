@@ -1,5 +1,4 @@
 const path = require('path')
-const alias = require('@rollup/plugin-alias')
 const { babel } = require('@rollup/plugin-babel')
 const rollupCssRenderPlugin = require('./build/rollup-plugin-css-render')
 const rollupDemoPlugin = require('./build/rollup-plugin-demo')
@@ -34,19 +33,11 @@ module.exports = {
   },
   rollupInputOptions: {
     plugins: [
-      alias({
-        entries: [
-          {
-            find: /^naive-ui$/g,
-            replacement: './src/index.js'
-          }
-        ]
-      }),
       rollupDemoPlugin(),
       rollupCssRenderPlugin(),
       babel({
-        babelHelpers: 'bundled',
-        exclude: 'node_modules/**'
+        babelHelpers: 'bundled'
+        // exclude: 'node_modules/highlight.js/**'
       })
     ]
   },

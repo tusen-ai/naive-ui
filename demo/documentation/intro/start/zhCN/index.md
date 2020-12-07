@@ -17,7 +17,7 @@ import naive from 'naive-ui'
 // 你可以简单的引入 `vfonts` 中的字体
 // 通用字体
 import 'vfonts/Lato.css'
-// 等款字体
+// 等宽字体
 import 'vfonts/FiraCode.css'
 // 不用做其他的事情了
 

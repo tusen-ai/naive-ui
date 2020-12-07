@@ -28,7 +28,7 @@ Vue.use(naive)
 
 ```js
 // ...
-import tusimpleTheme from 'naive-ui/theme/tusimple'
+import tusimpleTheme from 'naive-ui/themes/tusimple'
 import naive from 'naive-ui'
 
 naive.use(tusimpleTheme)
