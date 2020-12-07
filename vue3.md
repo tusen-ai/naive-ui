@@ -354,7 +354,9 @@
   - [x] drawer api
   - [x] chrome date-picker overflow (focus({ preventScroll }))
   - [x] slider 键盘好像会激活不该激活的 tooltip...
-  - [ ] transfer 打包之后有问题
+  - [x] transfer 打包之后有问题
+  - [x] side effects = false 好像会影响 rollup 的打包（这让我很不安，要是生效 css 怎么办？要是不生效 JS 怎么办？） https://github.com/rollup/plugins/issues/692
+  - [x] vue 在 $attrs 的处理上 dev 和 prod 还是有差别 https://github.com/vuejs/vue-next/issues/2741
 
 ## Info
 https://github.com/vuejs/vue-next/issues/2549
