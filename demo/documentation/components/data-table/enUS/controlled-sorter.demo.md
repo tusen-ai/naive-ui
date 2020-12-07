@@ -92,13 +92,14 @@ export default {
   },
   methods: {
     sortName (order) {
-      nameColumn.sortOrder = order
+      this.nameColumn.sortOrder = order
     },
     clearSorter () {
-      nameColumn.sortOrder = false
+      this.nameColumn.sortOrder = false
+      this.ageColumn.sortOrder = false
     },
     handleSorterChange (sorter) {
-      columns.forEach(column => {
+      this.columns.forEach(column => {
         /** column.sortOrder !== undefined means it is uncontrolled */
         if (column.sortOrder === undefined) return
         if (!sorter) {
