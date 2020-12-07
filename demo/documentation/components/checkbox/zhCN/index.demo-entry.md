@@ -20,7 +20,7 @@ event
 |disabled|`boolean`|`false`||
 |label|`string \| function`|`undefined`|可以是渲染函数|
 |theme|`'light' \| 'dark' \| string`|`undefined`||
-|value|`string`|`undefined`||
+|value|`string \| number`|`undefined`||
 |on-update:checked|`(checked: boolean)`|`undefined`||
 
 ### Checkbox Group Props
