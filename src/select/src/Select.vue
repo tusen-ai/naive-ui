@@ -686,8 +686,8 @@ export default {
       }
     },
     // scroll events on menu
-    handleMenuScroll (e, scrollContainer, scrollContent) {
-      this.doScroll(e, scrollContainer, scrollContent)
+    handleMenuScroll (e) {
+      this.doScroll(e)
     },
     // keyboard events
     handleKeyUpEnter (e) {
