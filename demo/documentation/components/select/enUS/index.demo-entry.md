@@ -24,6 +24,7 @@ fallback-option
 |Name|Type|Default|Description|
 |-|-|-|-|
 |clearable|`boolean`|`false`||
+|default-value|`Array<string \| number> \| string \| number \| null`|`null`||
 |disabled|`boolean`|`false`||
 |fallback-option|`false \| (value: string \| number) => SelectOption`|`value => ({ label: '' + value, value })`|The option to be created according the value which has no corresponding option in the options of the component. If set to `false`, the fallback option won't be created and displayed and the value has no corresponding option will be viewed as a invalid value and it will be removed in the operations of the component.|
 |filterable|`boolean`|`false`|Whether it can filter options.|
@@ -36,7 +37,7 @@ fallback-option
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |tag|`boolean`|`false`|Whether it can create new option, should be used with `filterable`.|
 |theme|`'light' \| 'dark' \| string`|`undefined`||
-|value|`Array<string \| number> \| string \| number`|`false`||
+|value|`Array<string \| number> \| string \| number \| null`|`undefined`||
 |on-blur|`() => any`|Selection blur.|
 |on-create|`(label: string) => SelectOption`|`label => ({ label, value: label })`|How to create a option when you input a string to create a option. Note that `filter` will be applied to the created option too. And make sure the value of the created option is not the same as any other option.|
 |on-focus|`() => any`|Selection focus.|

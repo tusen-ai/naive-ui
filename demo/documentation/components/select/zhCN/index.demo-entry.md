@@ -26,6 +26,7 @@ menu-debug
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |clearable|`boolean`|`false`||
+|default-value|`Array<string \| number> \| string \| number \| null`|`null`||
 |disabled|`boolean`|`false`||
 |fallback-option|`false \| (value: string \| number) => SelectOption`|`value => ({ label: '' + value, value })`|在传入的选项中没有对应当前值的选项时，这个值应该对应的选项。如果设为 `false`，不会为找不到对应选项的值生成回退选项也不会显示它，未在选项中的值会被视为不合法，操作过程中会被组件清除掉|
 |filterable|`boolean`|`false`|是否可以过滤|
@@ -38,7 +39,7 @@ menu-debug
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |tag|`boolean`|`false`|是否可以创建新的选项，需要和 `filterable` 一起使用|
 |theme|`'light' \| 'dark' \| string`|`undefined`||
-|value|`Array<string \| number> \| string \| number`|`false`||
+|value|`Array<string \| number> \| string \| number \| null`|`undefined`||
 |on-blur|`() => any`|选择器 Blur 时发出|
 |on-create|`(label: string) => SelectOption`|`label => ({ label, value: label })`|在输入内容时如何创建一个选项。注意 `filter` 对这个生成的选项同样会生效。同时确保这个选项和其他选项的 `value` 不要有重复|
 |on-focus|`() => any`|选择器 Focus 时发出|

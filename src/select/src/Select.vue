@@ -66,7 +66,7 @@
             :multiple="multiple"
             size="medium"
             :filterable="filterable"
-            :value="value"
+            :value="mergedValue"
             @menu-toggle-option="handleToggleOption"
             @scroll="handleMenuScroll"
           >
@@ -195,9 +195,13 @@ export default {
       type: Array,
       required: true
     },
-    value: {
+    defaultValue: {
       type: [String, Number, Array],
       default: null
+    },
+    value: {
+      type: [String, Number, Array],
+      default: undefined
     },
     placeholder: {
       type: String,
@@ -313,6 +317,9 @@ export default {
     }
   },
   setup (props) {
+    const uncontrolledValueRef = ref(props.defaultValue)
+    const controlledValueRef = toRef(props, 'value')
+    const mergedValueRef = useMergedState(controlledValueRef, uncontrolledValueRef)
     const patternRef = ref('')
     const filteredOptionsRef = computed(() => filterOptions(
       props.options,
@@ -354,6 +361,8 @@ export default {
       createdOptions: ref([]),
       beingCreatedOptions: ref([]),
       memoValOptMap: ref(new Map()),
+      uncontrolledValue: uncontrolledValueRef,
+      mergedValue: mergedValueRef,
       followerRef
     }
   },
@@ -382,7 +391,7 @@ export default {
     },
     selectedOptions () {
       if (this.multiple) {
-        const { value: values } = this
+        const { mergedValue: values } = this
         if (!Array.isArray(values)) return []
         const remote = this.remote
         const {
@@ -409,17 +418,17 @@ export default {
     },
     selectedOption () {
       if (!this.multiple) {
-        const { value, valOptMap, wrappedFallbackOption } = this
-        if (value === null) return null
+        const { mergedValue, valOptMap, wrappedFallbackOption } = this
+        if (mergedValue === null) return null
         let selectedOption = null
-        if (valOptMap.has(value)) {
-          selectedOption = valOptMap.get(value)
+        if (valOptMap.has(mergedValue)) {
+          selectedOption = valOptMap.get(mergedValue)
         } else if (this.remote) {
-          selectedOption = this.memoValOptMap.get(value)
+          selectedOption = this.memoValOptMap.get(mergedValue)
         }
         return (
           selectedOption ||
-          (wrappedFallbackOption && wrappedFallbackOption(value)) ||
+          (wrappedFallbackOption && wrappedFallbackOption(mergedValue)) ||
           null
         )
       }
@@ -443,7 +452,7 @@ export default {
       if (!this.mergedShow) return
       this.$nextTick(this.syncPosition)
     },
-    value () {
+    mergedValue () {
       if (!this.mergedShow) return
       this.$nextTick(this.syncPosition)
     }
@@ -461,6 +470,7 @@ export default {
       } = this
       if (onChange) call(onChange, value)
       if (onUpdateValue) call(onUpdateValue, value)
+      this.uncontrolledValue = value
       nTriggerFormChange()
       nTriggerFormInput()
     },
@@ -586,7 +596,7 @@ export default {
         this.memoValOptMap.set(option.value, option)
       }
       if (this.multiple) {
-        const changedValue = this.createClearedMultipleSelectValue(this.value)
+        const changedValue = this.createClearedMultipleSelectValue(this.mergedValue)
         const index = changedValue.findIndex(value => value === option.value)
         if (~index) {
           changedValue.splice(index, 1)
@@ -620,7 +630,7 @@ export default {
     },
     handleDeleteLastOption (e) {
       if (!this.pattern.length) {
-        const changedValue = this.createClearedMultipleSelectValue(this.value)
+        const changedValue = this.createClearedMultipleSelectValue(this.mergedValue)
         if (Array.isArray(changedValue)) {
           const poppedValue = changedValue.pop()
           const createdOptionIndex = this.getCreatedOptionIndex(poppedValue)
@@ -636,7 +646,7 @@ export default {
       )
     },
     handlePatternInput (e) {
-      const value = e.target.value
+      const { value } = e.target
       this.pattern = value
       const { onSearch, tag, remote } = this
       if (onSearch) {
