@@ -14,12 +14,14 @@ after-select
 |-|-|-|-|
 |blur-after-select|`boolean`|`false`||
 |clear-after-select|`boolean`|`false`||
+|clearable|`boolean`|`false`||
+|default-value|`string`|`null`||
 |disabled|`boolean`|`false`||
 |options|`Array<string \| AutoCompleteOption \| AutoCompleteOptionGroup>`|`[]`||
 |placeholder|`string`|`'请输入'`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |theme|`'light' \| 'dark' \| string`|`undefined`||
-|value|`string`|`null`||
+|value|`string`|`undefined`||
 |on-blur|`(event: FocusEvent) => any`|`undefined`||
 |on-focus|`(event: FocusEvent) => any`|`undefined`||
 |on-select|`(value: string) => any`|`undefined`||

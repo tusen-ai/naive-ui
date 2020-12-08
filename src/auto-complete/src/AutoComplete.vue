@@ -14,16 +14,18 @@
           :handleInput="handleInput"
           :handleFocus="handleFocus"
           :handleBlur="handleBlur"
-          :value="value"
+          :value="mergedValue"
           :theme="mergedTheme"
         >
           <n-input
             :bordered="mergedBordered"
             :theme="mergedTheme"
-            :value="value"
+            :value="mergedValue"
             :placeholder="placeholder"
             :size="mergedSize"
             :disabled="disabled"
+            :clearable="clearable"
+            @clear="handleClear"
             @focus="canBeActivated = true"
             @input="handleInput"
             @blur="handleBlur"
@@ -62,7 +64,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, toRef } from 'vue'
 import { createTreeMate } from 'treemate'
 import {
   VBinder,
@@ -79,7 +81,7 @@ import {
   clickoutside
 } from 'vdirs'
 import { call, warn, useAdjustedTo } from '../../_utils'
-import { useIsMounted } from 'vooks'
+import { useIsMounted, useMergedState } from 'vooks'
 import {
   NBaseSelectMenu
 } from '../../_base'
@@ -111,6 +113,14 @@ export default {
       type: Boolean,
       default: undefined
     },
+    clearable: {
+      type: Boolean,
+      default: undefined
+    },
+    defaultValue: {
+      type: String,
+      default: null
+    },
     disabled: {
       type: Boolean,
       default: false
@@ -121,7 +131,7 @@ export default {
     },
     value: {
       type: String,
-      default: null
+      default: undefined
     },
     blurAfterSelect: {
       type: Boolean,
@@ -164,7 +174,12 @@ export default {
     }
   },
   setup (props) {
+    const uncontrolledValueRef = ref(props.defaultValue)
+    const controlledValueRef = toRef(props, 'value')
+    const mergedValueRef = useMergedState(controlledValueRef, uncontrolledValueRef)
     return {
+      uncontrolledValue: uncontrolledValueRef,
+      mergedValue: mergedValueRef,
       isMounted: useIsMounted(),
       adjustedTo: useAdjustedTo(props),
       canBeActivated: ref(false),
@@ -178,7 +193,7 @@ export default {
       return mapAutoCompleteOptionsToSelectOptions(this.options)
     },
     active () {
-      return !!this.value && this.canBeActivated && !!this.selectOptions.length
+      return !!this.mergedValue && this.canBeActivated && !!this.selectOptions.length
     },
     treeMate () {
       return createTreeMate(this.selectOptions, {
@@ -199,6 +214,7 @@ export default {
       } = this
       if (onUpdateValue) call(onUpdateValue, value)
       if (onInput) call(onInput, value)
+      this.uncontrolledValue = value
       nTriggerFormInput()
       nTriggerFormChange()
     },
@@ -270,6 +286,9 @@ export default {
           this.blur()
         }
       }
+    },
+    handleClear () {
+      this.doUpdateValue(null)
     },
     handleFocus (e) {
       this.canBeActivated = true
