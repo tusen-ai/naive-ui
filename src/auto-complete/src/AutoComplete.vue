@@ -23,6 +23,7 @@
             :value="value"
             :placeholder="placeholder"
             :size="mergedSize"
+            :disabled="disabled"
             @focus="canBeActivated = true"
             @input="handleInput"
             @blur="handleBlur"
@@ -109,6 +110,10 @@ export default {
     bordered: {
       type: Boolean,
       default: undefined
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     },
     placeholder: {
       type: String,
