@@ -93,14 +93,22 @@
       <div class="n-transfer-list__border-mask" />
     </div>
     <div class="n-transfer-gap">
-      <n-transfer-button
-        :to="true"
+      <n-button
+        :disabled="toButtonDisabled"
         @click="handleToTgtClick"
-      />
-      <n-transfer-button
-        :to="false"
+      >
+        <template #icon>
+          <chevron-right-icon />
+        </template>
+      </n-button>
+      <n-button
+        :disabled="fromButtonDisabled"
         @click="handleToSrcClick"
-      />
+      >
+        <template #icon>
+          <chevron-left-icon />
+        </template>
+      </n-button>
     </div>
     <div class="n-transfer-list">
       <div class="n-transfer-list-header">
@@ -199,12 +207,13 @@ import NTransferHeaderCheckbox from './TransferHeaderCheckbox.vue'
 import NTransferHeaderExtra from './TransferHeaderExtra.vue'
 import NTransferSourceListItem from './TransferSourceListItem.vue'
 import NTransferTargetListItem from './TransferTargetListItem.vue'
-import NTransferButton from './TransferButton.vue'
 import { NInput } from '../../input'
 import { NIcon } from '../../icon'
 import { NEmpty } from '../../empty'
 import {
-  SearchIcon
+  SearchIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon
 } from '../../_base/icons'
 import {
   configurable,
@@ -226,12 +235,13 @@ export default {
     NScrollbar,
     NTransferSourceListItem,
     NTransferTargetListItem,
-    NTransferButton,
     NInput,
     NIcon,
     NEmpty,
     SearchIcon,
-    VirtualList
+    VirtualList,
+    ChevronLeftIcon,
+    ChevronRightIcon
   },
   mixins: [
     configurable,

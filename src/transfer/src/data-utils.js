@@ -2,6 +2,9 @@ import {
   ref,
   computed
 } from 'vue'
+import {
+  useMemo
+} from 'vooks'
 
 export function data (props) {
   const optMapRef = computed(() => {
@@ -101,6 +104,14 @@ export function data (props) {
       }
     }
   })
+  const fromButtonDisabledRef = useMemo(() => {
+    if (props.disabled) return true
+    return tgtCheckedValuesRef.value.length === 0
+  })
+  const toButtonDisabledRef = useMemo(() => {
+    if (props.disabled) return true
+    return srcCheckedValuesRef.value.length === 0
+  })
   const isInputingRef = ref(false)
   function handleInputFocus () {
     isInputingRef.value = true
@@ -122,6 +133,8 @@ export function data (props) {
     srcPattern: srcPatternRef,
     tgtPattern: tgtPatternRef,
     isInputing: isInputingRef,
+    fromButtonDisabled: fromButtonDisabledRef,
+    toButtonDisabled: toButtonDisabledRef,
     handleInputFocus,
     handleInputBlur
   }

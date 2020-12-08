@@ -18,10 +18,6 @@ export default c([
       headerTextColor,
       headerTextColorDisabled,
       headerExtraTextColor,
-      buttonColor,
-      buttonColorHover,
-      buttonColorActive,
-      buttonColorDisabled,
       filterBorderColor,
       itemTextColor,
       itemColorPending,
@@ -237,40 +233,10 @@ export default c([
           justifyContent: 'center',
           flexDirection: 'column'
         }),
-        cB('transfer-button', {
-          width: '36px',
-          height: '36px',
-          borderRadius: '18px',
-          cursor: 'pointer'
-        }, [
+        cB('button', [
           c('&:first-child', {
             marginBottom: '12px'
-          }),
-          cM('to', {
-            transform: 'rotate(180deg)'
-          }),
-          cE('icon', {
-            pointerEvents: 'none',
-            transition: `fill .3s ${cubicBezierEaseInOut}`,
-            fill: buttonColor
-          }),
-          c('&:hover', [
-            cE('icon', {
-              fill: buttonColorHover
-            })
-          ]),
-          c('&:active', [
-            cE('icon', {
-              fill: buttonColorActive
-            })
-          ]),
-          cM('disabled', {
-            cursor: 'not-allowed'
-          }, [
-            cE('icon', {
-              fill: buttonColorDisabled
-            })
-          ])
+          })
         ])
       ])
     ]
