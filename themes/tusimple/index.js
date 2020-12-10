@@ -486,6 +486,16 @@ function tusimpleTheme (naive) {
     railColorActive: '#EBEDF0',
     buttonBoxShadow: '0 2px 3px 0 rgba(0,0,0,0.10)'
   })
+  naive.styles.light.Confirm.override({
+    padding: '40px',
+    iconSize: '36px',
+    iconMarginIconTop: '0 0 12px 0',
+    closeMarginIconTop: '24px 24px 0 0',
+    headerFontSize: '24px',
+    fontSize: '16px',
+    actionSpace: '20px',
+    contentMargin: '12px 0 40px 0'
+  })
 }
 
 tusimpleTheme.install = tusimpleTheme

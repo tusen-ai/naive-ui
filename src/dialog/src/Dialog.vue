@@ -1,52 +1,59 @@
 <template>
   <div
-    class="n-confirm"
+    class="n-dialog"
     :class="{
       [`n-${mergedTheme}-theme`]: mergedTheme,
-      'n-confirm--bordered': bordered
+      'n-dialog--bordered': bordered,
+      [`n-dialog--icon-${mergedIconPlacement}`]: true,
+      [`n-dialog--${type}-type`]: type
     }"
     :style="mergedStyle"
   >
-    <div class="n-confirm-title">
-      <span class="n-confirm-title-content">
-        <n-icon
-          v-if="showIcon"
-          class="n-confirm-title-icon"
-          :class="{
-            [`n-confirm-title-icon--${type}-type`]: type
-          }"
-          size="28"
-        >
-          <slot name="icon">
-            <render v-if="icon" :render="icon" />
-            <component :is="iconType" v-else />
-          </slot>
-        </n-icon>
-        <slot name="header">
-          <render :render="title" />
-        </slot>
-      </span>
+    <n-icon
+      v-if="closable"
+      class="n-dialog__close"
+      @click="handleCloseClick"
+    >
+      <close-icon />
+    </n-icon>
+    <div
+      v-if="showIcon && mergedIconPlacement === 'top'"
+      class="n-dialog-icon-container"
+    >
       <n-icon
-        v-if="closable"
-        class="n-confirm-title__close"
-        size="16"
-        style="cursor:pointer;"
-        @click="handleCloseClick"
+        class="n-dialog__icon"
       >
-        <close-icon />
+        <slot name="icon">
+          <render v-if="icon" :render="icon" />
+          <component :is="iconType" v-else />
+        </slot>
       </n-icon>
     </div>
-    <div class="n-confirm__content">
+    <div class="n-dialog__title">
+      <n-icon
+        v-if="showIcon && mergedIconPlacement === 'left'"
+        class="n-dialog__icon"
+      >
+        <slot name="icon">
+          <render v-if="icon" :render="icon" />
+          <component :is="iconType" v-else />
+        </slot>
+      </n-icon>
+      <slot name="header">
+        <render :render="title" />
+      </slot>
+    </div>
+    <div class="n-dialog__content">
       <slot>
         <render :render="content" />
       </slot>
     </div>
-    <div class="n-confirm__footer">
+    <div class="n-dialog__action">
       <slot name="action">
         <n-button
           v-if="negativeText"
           :theme="theme"
-          style="margin-right:12px;"
+          ghost
           size="small"
           @click="handleNegativeClick"
         >
@@ -57,7 +64,7 @@
           :disabled="loading === true"
           :loading="loading"
           size="small"
-          type="primary"
+          :type="type"
           @click="handlePositiveClick"
         >
           <render :render="positiveText" />
@@ -77,6 +84,7 @@ import { render } from '../../_utils'
 import { NIcon } from '../../icon'
 import { NButton } from '../../button'
 import {
+  InfoIcon,
   SuccessIcon,
   CloseIcon,
   WarningIcon,
@@ -97,6 +105,7 @@ export default {
     WarningIcon,
     SuccessIcon,
     ErrorIcon,
+    InfoIcon,
     render
   },
   mixins: [
@@ -145,6 +154,10 @@ export default {
       type: Boolean,
       default: false
     },
+    iconPlacement: {
+      type: String,
+      default: 'left'
+    },
     onPositiveClick: {
       type: Function,
       default: undefined
@@ -159,13 +172,16 @@ export default {
     }
   },
   computed: {
+    mergedIconPlacement () {
+      return this.$naive?.unstableConfig?.Confirm?.iconPlacement || this.iconPlacement
+    },
     iconType () {
-      const iconName = {
+      return {
         error: 'error-icon',
         warning: 'warning-icon',
-        success: 'success-icon'
-      }
-      return iconName[this.type]
+        success: 'success-icon',
+        info: 'info-icon'
+      }[this.type]
     }
   },
   methods: {

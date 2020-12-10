@@ -1,4 +1,5 @@
 import create from '../../_styles/utils/create-component-base'
+import commonVars from './_common'
 
 export default create({
   theme: 'dark',
@@ -8,27 +9,32 @@ export default create({
       textColor1Overlay,
       textColor2Overlay,
       modalColor,
-      closeOverylayColor,
-      colorColorHoverOverlay,
-      closeActiveOverylayColor,
+      closeColorOverlay,
+      closeColorHoverOverlay,
+      closeColorPressedOverlay,
       infoColor,
       successColor,
       warningColor,
-      errorColor
+      errorColor,
+      dividerColorOverlay,
+      borderRadius,
+      fontWeightStrong
     } = vars
     return {
-      titleTextColor: textColor1Overlay,
+      ...commonVars,
+      border: `1px solid ${dividerColorOverlay}`,
+      headerTextColor: textColor1Overlay,
       textColor: textColor2Overlay,
       color: modalColor,
-      closeColor: closeOverylayColor,
-      closeColorHover: colorColorHoverOverlay,
-      closeColorPressed: closeActiveOverylayColor,
+      closeColor: closeColorOverlay,
+      closeColorHover: closeColorHoverOverlay,
+      closeColorPressed: closeColorPressedOverlay,
       iconColorInfo: infoColor,
       iconColorSuccess: successColor,
       iconColorWarning: warningColor,
       iconColorError: errorColor,
-      borderRadius: vars.borderRadius,
-      titleFontWeight: vars.fontWeightStrong
+      borderRadius,
+      headerFontWeight: fontWeightStrong
     }
   }
 })

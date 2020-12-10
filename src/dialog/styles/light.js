@@ -1,4 +1,5 @@
 import create from '../../_styles/utils/create-component-base'
+import commonVars from './_common'
 
 export default create({
   theme: 'light',
@@ -14,10 +15,15 @@ export default create({
       infoColor,
       successColor,
       warningColor,
-      errorColor
+      errorColor,
+      dividerColor,
+      borderRadius,
+      fontWeightStrong
     } = vars
     return {
-      titleTextColor: textColor1,
+      ...commonVars,
+      border: `1px solid ${dividerColor}`,
+      headerTextColor: textColor1,
       textColor: textColor2,
       color: cardColor,
       closeColor: closeColor,
@@ -27,8 +33,8 @@ export default create({
       iconColorSuccess: successColor,
       iconColorWarning: warningColor,
       iconColorError: errorColor,
-      borderRadius: vars.borderRadius,
-      titleFontWeight: vars.fontWeightStrong
+      borderRadius,
+      headerFontWeight: fontWeightStrong
     }
   }
 })

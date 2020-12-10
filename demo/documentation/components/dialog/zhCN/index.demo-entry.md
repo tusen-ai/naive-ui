@@ -42,6 +42,7 @@ use-component
 |-|-|-|
 |destroyAll|`() => void`||
 |error|`(options: DialogOption) => DialogReactive`||
+|info|`(options: DialogOption) => DialogReactive`||
 |success|`(options: DialogOption) => DialogReactive`||
 |warning|`(options: DialogOption) => DialogReactive`||
 
@@ -51,6 +52,7 @@ use-component
 |bordered|`boolean`|`false`||
 |closable|`boolean`|`true`||
 |content|`string \| (() => VNode \| Array<VNode>)`|`undefined`|可以是 render 函数|
+|icon-placement|`'left' \| 'top'`|`'left'`||
 |icon|`() => VNode \| Array<VNode>`|`undefined`|需要是 render 函数|
 |loading|`boolean`|`false`||
 |negative-text|`string`|`undefined`|不填对应的按钮不会出现|
@@ -59,9 +61,9 @@ use-component
 |theme|`'light' \| 'dark' \| string`|`undefined`||
 |title|`string \| (() => VNode \| Array<VNode>)`|`undefined`|可以是 render 函数|
 |type|`'error \| 'success' \| 'warning'`|`'warning'`||
-|onPositiveClick|`() => boolean \| Promise<boolean> \| any`|`undefined`|默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为|
-|onNegativeClick|`() => boolean \| Promise<boolean> \| any`|`undefined`|默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为|
 |onClose|`() => boolean \| Promise<boolean> \| any`|`undefined`|默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为|
+|onNegativeClick|`() => boolean \| Promise<boolean> \| any`|`undefined`|默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为|
+|onPositiveClick|`() => boolean \| Promise<boolean> \| any`|`undefined`|默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为|
 
 ### DialogReactive API
 #### DialogReactive Properties
@@ -72,6 +74,7 @@ use-component
 |bordered|`boolean`||
 |closable|`boolean`||
 |content|`string \| (() => VNode \| Array<VNode>)`|可以是 render 函数|
+|icon-placement|`'left' \| 'top'`|`'left'`||
 |icon|`() => VNode \| Array<VNode>`|需要是 render 函数|
 |loading|`boolean`||
 |negative-text|`string`|不填对应的按钮不会出现|
@@ -80,9 +83,9 @@ use-component
 |theme|`'light' \| 'dark'`||
 |title|`string \| (() => VNode \| Array<VNode>)`|可以是 render 函数|
 |type|`'error \| 'success' \| 'warning'`||
-|onPositiveClick|`() => boolean \| Promise<boolean> \| any`||
-|onNegativeClick|`() => boolean \| Promise<boolean> \| any`||
 |onClose|`() => boolean \| Promise<boolean> \| any`||
+|onNegativeClick|`() => boolean \| Promise<boolean> \| any`||
+|onPositiveClick|`() => boolean \| Promise<boolean> \| any`||
 
 #### DialogReactive Methods
 |名称|类型|说明|
@@ -103,9 +106,9 @@ use-component
 |show-icon|`boolean`|`true`||
 |title|`string \| (() => VNode \| Array<VNode>)`|`undefined`|可以是 render 函数|
 |type|`'error \| 'success' \| 'warning'`|`'warning'`||
-|on-positive-click|`() => any`||
-|on-negative-click|`() => any`||
 |on-close|`() => any`||
+|on-negative-click|`() => any`||
+|on-positive-click|`() => any`||
 
 ## Slots
 ### Dialog Slots

@@ -18,7 +18,8 @@ export default {
         create: this.create,
         success: this.success,
         warning: this.warning,
-        error: this.error
+        error: this.error,
+        info: this.info
       }
     }
   },
@@ -44,6 +45,7 @@ export default {
       return dialogReactive
     },
     ...[
+      'info',
       'success',
       'warning',
       'error'

@@ -41,6 +41,7 @@ use-component
 |-|-|-|
 |destroyAll|`() => void`||
 |error|`(options: DialogOption) => DialogReactive`||
+|info|`(options: DialogOption) => DialogReactive`||
 |success|`(options: DialogOption) => DialogReactive`||
 |warning|`(options: DialogOption) => DialogReactive`||
 
@@ -50,6 +51,7 @@ use-component
 |bordered|`boolean`|`false`||
 |closable|`boolean`|`true`||
 |content|`string \| (() => VNode \| Array<VNode>)`|`undefined`|Can be a render function.|
+|icon-placement|`'left' \| 'top'`|`'left'`||
 |icon|`() => VNode \| Array<VNode>`|`undefined`|Render function.|
 |loading|`boolean`|`false`||
 |negative-text|`string`|`undefined`|Corresponding button won't show if not set.|
@@ -58,9 +60,9 @@ use-component
 |theme|`'light' \| 'dark' \| string`|`undefined`||
 |title|`string \| (() => VNode \| Array<VNode>)`|`undefined`|Can be a render function.|
 |type|`'error \| 'success' \| 'warning'`|`'warning'`||
-|onPositiveClick|`() => boolean \| Promise<boolean> \| any`|`undefined`|The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior.|
-|onNegativeClick|`() => boolean \| Promise<boolean> \| any`|`undefined`|The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior.|
 |onClose|`() => boolean \| Promise<boolean> \| any`|`undefined`|The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior.|
+|onNegativeClick|`() => boolean \| Promise<boolean> \| any`|`undefined`|The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior.|
+|onPositiveClick|`() => boolean \| Promise<boolean> \| any`|`undefined`|The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior.|
 
 ### DialogReactive API
 #### DialogReactive Properties
@@ -71,6 +73,7 @@ All the properties can be modified dynamically.
 |bordered|`boolean`||
 |closable|`boolean`||
 |content|`string \| (() => VNode \| Array<VNode>)`|Can be a render function.|
+|icon-placement|`'left' \| 'top'`|`'left'`||
 |icon|`() => VNode \| Array<VNode>`|Render function.|
 |loading|`boolean`||
 |negative-text|`string`|Corresponding button won't show if not set.|
@@ -79,9 +82,9 @@ All the properties can be modified dynamically.
 |theme|`'light' \| 'dark'`||
 |title|`string \| (() => VNode \| Array<VNode>)`|Can be a render function.|
 |type|`'error \| 'success' \| 'warning'`||
-|onPositiveClick|`() => boolean \| Promise<boolean> \| any`||
-|onNegativeClick|`() => boolean \| Promise<boolean> \| any`||
 |onClose|`() => boolean \| Promise<boolean> \| any`||
+|onNegativeClick|`() => boolean \| Promise<boolean> \| any`||
+|onPositiveClick|`() => boolean \| Promise<boolean> \| any`||
 
 #### DialogReactive Methods
 |Name|Type|Description|
@@ -95,6 +98,7 @@ All the properties can be modified dynamically.
 |bordered|`boolean`|`false`||
 |closable|`boolean`|`boolean`||
 |content|`string \| (() => VNode \| Array<VNode>)`|`undefined`|Can be a render function.|
+|icon-placement|`'left' \| 'top'`|`'left'`||
 |icon|`() => VNode \| Array<VNode>`|`undefined`|Render function.|
 |loading|`boolean`|`false`||
 |negative-text|`string`|`undefined`|Corresponding button won't show if not set.|
@@ -102,9 +106,9 @@ All the properties can be modified dynamically.
 |show-icon|`boolean`|`true`||
 |title|`string \| (() => VNode \| Array<VNode>)`|`undefined`|Can be a render function.|
 |type|`'error \| 'success' \| 'warning'`|`'warning'`||
-|on-positive-click|`() => any`||
-|on-negative-click|`() => any`||
 |on-close|`() => any`||
+|on-negative-click|`() => any`||
+|on-positive-click|`() => any`||
 
 ## Slots
 ### Dialog Slots
