@@ -40,6 +40,7 @@ use-component
 |Name|Type|Description|
 |-|-|-|
 |destroyAll|`() => void`||
+|create|`(options: DialogOption) => DialogReactive`||
 |error|`(options: DialogOption) => DialogReactive`||
 |info|`(options: DialogOption) => DialogReactive`||
 |success|`(options: DialogOption) => DialogReactive`||

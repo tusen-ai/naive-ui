@@ -17,7 +17,7 @@
       <close-icon />
     </n-icon>
     <div
-      v-if="showIcon && mergedIconPlacement === 'top'"
+      v-if="mergedShowIcon && mergedIconPlacement === 'top'"
       class="n-dialog-icon-container"
     >
       <n-icon
@@ -25,18 +25,18 @@
       >
         <slot name="icon">
           <render v-if="icon" :render="icon" />
-          <component :is="iconType" v-else />
+          <component :is="iconType" v-else-if="type !== 'default'" />
         </slot>
       </n-icon>
     </div>
     <div class="n-dialog__title">
       <n-icon
-        v-if="showIcon && mergedIconPlacement === 'left'"
+        v-if="mergedShowIcon && mergedIconPlacement === 'left'"
         class="n-dialog__icon"
       >
         <slot name="icon">
           <render v-if="icon" :render="icon" />
-          <component :is="iconType" v-else />
+          <component :is="iconType" v-else-if="type !== 'default'" />
         </slot>
       </n-icon>
       <slot name="header">
@@ -64,7 +64,7 @@
           :disabled="loading === true"
           :loading="loading"
           size="small"
-          :type="type"
+          :type="type === 'default' ? 'primary' : type"
           @click="handlePositiveClick"
         >
           <render :render="positiveText" />
@@ -120,7 +120,7 @@ export default {
     },
     type: {
       type: String,
-      default: 'warning'
+      default: 'default'
     },
     title: {
       type: [String, Function],
@@ -174,6 +174,13 @@ export default {
   computed: {
     mergedIconPlacement () {
       return this.$naive?.unstableConfig?.Confirm?.iconPlacement || this.iconPlacement
+    },
+    mergedShowIcon () {
+      const { showIcon, type, icon, $slots } = this
+      return (
+        (type !== 'default' && showIcon) ||
+        (type === 'default' && showIcon && (icon || $slots.icon))
+      )
     },
     iconType () {
       return {

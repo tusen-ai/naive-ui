@@ -41,6 +41,7 @@ use-component
 |名称|类型|说明|
 |-|-|-|
 |destroyAll|`() => void`||
+|create|`(options: DialogOption) => DialogReactive`||
 |error|`(options: DialogOption) => DialogReactive`||
 |info|`(options: DialogOption) => DialogReactive`||
 |success|`(options: DialogOption) => DialogReactive`||
