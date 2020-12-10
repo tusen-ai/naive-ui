@@ -26,7 +26,7 @@ export default create({
       opacityDisabled,
       tagColor,
       closeColorOverlay,
-      colorColorHoverOverlay,
+      closeColorHoverOverlay,
       closeColorPressedOverlay,
       borderRadiusSmall: borderRadius
     } = vars
@@ -50,7 +50,7 @@ export default create({
       textColor: textColor2Overlay,
       color: tagColor,
       closeColor: closeColorOverlay,
-      closeColorHover: colorColorHoverOverlay,
+      closeColorHover: closeColorHoverOverlay,
       closeColorPressed: closeColorPressedOverlay,
       borderColorPrimary: changeColor(primaryColor, { alpha: 0.3 }),
       textColorPrimary: primaryColor,

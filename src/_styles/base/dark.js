@@ -155,7 +155,7 @@ export default create({
 
       // close
       closeColorHover: neutral(base.alphaClose * 1.25),
-      colorColorHoverOverlay: overlay(base.alphaClose * 1.25),
+      closeColorHoverOverlay: overlay(base.alphaClose * 1.25),
       closeColor: neutral(base.alphaClose),
       closeColorOverlay: overlay(base.alphaClose),
       closeColorPressed: neutral(base.alphaClose * 0.8),

@@ -17,7 +17,7 @@ export default create({
       actionColor: vars.actionColorOverlay,
       titleFontWeight: vars.fontWeightStrong,
       closeColor: vars.closeColorOverlay,
-      closeColorHover: vars.colorColorHoverOverlay,
+      closeColorHover: vars.closeColorHoverOverlay,
       closeColorPressed: vars.closeColorPressedOverlay,
       borderRadius
     }
