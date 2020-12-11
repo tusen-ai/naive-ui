@@ -1,6 +1,7 @@
 import create from '../../_styles/utils/create-component-base'
 import { baseLight } from '../../_styles/base'
 import { popoverLight } from '../../popover/styles'
+import commonVars from './_common'
 
 export default create({
   theme: 'light',
@@ -10,6 +11,12 @@ export default create({
     popoverLight
   ],
   getLocalVars (vars) {
-    return {}
+    return {
+      ...commonVars,
+      borderRadius: vars.borderRadius,
+      boxShadow: vars.boxShadow2,
+      color: 'rgba(0, 0, 0, .85)',
+      textColor: vars.baseColor
+    }
   }
 })

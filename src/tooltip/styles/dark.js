@@ -1,6 +1,7 @@
 import create from '../../_styles/utils/create-component-base'
 import { baseDark } from '../../_styles/base'
 import { popoverDark } from '../../popover/styles'
+import commonVars from './_common'
 
 export default create({
   theme: 'dark',
@@ -10,6 +11,12 @@ export default create({
     popoverDark
   ],
   getLocalVars (vars) {
-    return {}
+    return {
+      ...commonVars,
+      borderRadius: vars.borderRadius,
+      boxShadow: vars.boxShadow2,
+      color: vars.popoverColor,
+      textColor: vars.textColor2Overlay
+    }
   }
 })

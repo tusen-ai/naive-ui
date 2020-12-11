@@ -1,11 +1,14 @@
-/**
- * Tooltip: popover wearing waistcoat
- */
+// Tooltip: popover wearing waistcoat
 import { NPopover } from '../../popover'
 import { h } from 'vue'
+import { withCssr } from '../../_mixins'
+import styles from './styles'
 
 export default {
   name: 'Tooltip',
+  mixins: [
+    withCssr(styles)
+  ],
   props: {
     ...NPopover.props,
     showArrow: {
