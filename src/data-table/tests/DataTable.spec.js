@@ -1,20 +1,20 @@
 import { mount } from '@vue/test-utils'
 import create from '../../create'
 import { enUS } from '../../locales'
-import { paginationLight } from '../styles'
-import { NPagination } from '../index'
+import { dataTableLight } from '../styles'
+import { NDataTable } from '../index'
 
-describe('n-pagination', () => {
+describe('n-data-table', () => {
   const naive = create({
     locales: [
       enUS
     ],
     styles: [
-      paginationLight
+      dataTableLight
     ]
   })
   it('should work with import on demand', () => {
-    mount(NPagination, {
+    mount(NDataTable, {
       global: {
         plugins: [naive]
       }

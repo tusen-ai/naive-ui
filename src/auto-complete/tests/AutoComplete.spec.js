@@ -1,20 +1,20 @@
 import { mount } from '@vue/test-utils'
 import create from '../../create'
 import { enUS } from '../../locales'
-import { paginationLight } from '../styles'
-import { NPagination } from '../index'
+import { autoCompleteLight } from '../styles'
+import { NAutoComplete } from '../index'
 
-describe('n-pagination', () => {
+describe('n-auto-complete', () => {
   const naive = create({
     locales: [
       enUS
     ],
     styles: [
-      paginationLight
+      autoCompleteLight
     ]
   })
   it('should work with import on demand', () => {
-    mount(NPagination, {
+    mount(NAutoComplete, {
       global: {
         plugins: [naive]
       }

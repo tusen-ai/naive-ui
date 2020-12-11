@@ -1,20 +1,20 @@
 import { mount } from '@vue/test-utils'
 import create from '../../create'
 import { enUS } from '../../locales'
-import { paginationLight } from '../styles'
-import { NPagination } from '../index'
+import { datePickerLight } from '../styles'
+import { NDatePicker } from '../index'
 
-describe('n-pagination', () => {
+describe('n-date-picker', () => {
   const naive = create({
     locales: [
       enUS
     ],
     styles: [
-      paginationLight
+      datePickerLight
     ]
   })
   it('should work with import on demand', () => {
-    mount(NPagination, {
+    mount(NDatePicker, {
       global: {
         plugins: [naive]
       }

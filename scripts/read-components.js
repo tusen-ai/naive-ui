@@ -19,6 +19,7 @@ const _ = require('lodash')
 
 async function generateImportOnDemandTest (name) {
   const styleVarName = `${_.camelCase(name)}Light`
+  const testFileName = `${_.upperFirst(_.camelCase(name))}.spec.js`
   const compVarName = `N${_.upperFirst(_.camelCase(name))}`
   const script = `import { mount } from '@vue/test-utils'
 import create from '../../create'
@@ -50,5 +51,5 @@ describe('n-${name}', () => {
   } else {
     await fs.mkdir(path.resolve(__dirname, '../src/', name, 'tests'))
   }
-  await fs.writeFile(path.resolve(__dirname, '../src/', name, 'tests', 'index.spec.js'), script)
+  await fs.writeFile(path.resolve(__dirname, '../src/', name, 'tests', testFileName), script)
 }

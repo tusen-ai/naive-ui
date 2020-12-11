@@ -1,20 +1,20 @@
 import { mount } from '@vue/test-utils'
 import create from '../../create'
 import { enUS } from '../../locales'
-import { paginationLight } from '../styles'
-import { NPagination } from '../index'
+import { dropdownLight } from '../styles'
+import { NDropdown } from '../index'
 
-describe('n-pagination', () => {
+describe('n-dropdown', () => {
   const naive = create({
     locales: [
       enUS
     ],
     styles: [
-      paginationLight
+      dropdownLight
     ]
   })
   it('should work with import on demand', () => {
-    mount(NPagination, {
+    mount(NDropdown, {
       global: {
         plugins: [naive]
       }

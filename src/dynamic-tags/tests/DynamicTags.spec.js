@@ -1,20 +1,20 @@
 import { mount } from '@vue/test-utils'
 import create from '../../create'
 import { enUS } from '../../locales'
-import { paginationLight } from '../styles'
-import { NPagination } from '../index'
+import { dynamicTagsLight } from '../styles'
+import { NDynamicTags } from '../index'
 
-describe('n-pagination', () => {
+describe('n-dynamic-tags', () => {
   const naive = create({
     locales: [
       enUS
     ],
     styles: [
-      paginationLight
+      dynamicTagsLight
     ]
   })
   it('should work with import on demand', () => {
-    mount(NPagination, {
+    mount(NDynamicTags, {
       global: {
         plugins: [naive]
       }

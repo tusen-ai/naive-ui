@@ -1,20 +1,20 @@
 import { mount } from '@vue/test-utils'
 import create from '../../create'
 import { enUS } from '../../locales'
-import { paginationLight } from '../styles'
-import { NPagination } from '../index'
+import { dynamicInputLight } from '../styles'
+import { NDynamicInput } from '../index'
 
-describe('n-pagination', () => {
+describe('n-dynamic-input', () => {
   const naive = create({
     locales: [
       enUS
     ],
     styles: [
-      paginationLight
+      dynamicInputLight
     ]
   })
   it('should work with import on demand', () => {
-    mount(NPagination, {
+    mount(NDynamicInput, {
       global: {
         plugins: [naive]
       }

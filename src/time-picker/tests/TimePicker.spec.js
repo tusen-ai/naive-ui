@@ -1,20 +1,20 @@
 import { mount } from '@vue/test-utils'
 import create from '../../create'
 import { enUS } from '../../locales'
-import { paginationLight } from '../styles'
-import { NPagination } from '../index'
+import { timePickerLight } from '../styles'
+import { NTimePicker } from '../index'
 
-describe('n-pagination', () => {
+describe('n-time-picker', () => {
   const naive = create({
     locales: [
       enUS
     ],
     styles: [
-      paginationLight
+      timePickerLight
     ]
   })
   it('should work with import on demand', () => {
-    mount(NPagination, {
+    mount(NTimePicker, {
       global: {
         plugins: [naive]
       }

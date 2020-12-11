@@ -1,20 +1,20 @@
 import { mount } from '@vue/test-utils'
 import create from '../../create'
 import { enUS } from '../../locales'
-import { paginationLight } from '../styles'
-import { NPagination } from '../index'
+import { logLight } from '../styles'
+import { NLog } from '../index'
 
-describe('n-pagination', () => {
+describe('n-log', () => {
   const naive = create({
     locales: [
       enUS
     ],
     styles: [
-      paginationLight
+      logLight
     ]
   })
   it('should work with import on demand', () => {
-    mount(NPagination, {
+    mount(NLog, {
       global: {
         plugins: [naive]
       }

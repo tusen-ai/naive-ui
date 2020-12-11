@@ -1,20 +1,20 @@
 import { mount } from '@vue/test-utils'
 import create from '../../create'
 import { enUS } from '../../locales'
-import { paginationLight } from '../styles'
-import { NPagination } from '../index'
+import { switchLight } from '../styles'
+import { NSwitch } from '../index'
 
-describe('n-pagination', () => {
+describe('n-switch', () => {
   const naive = create({
     locales: [
       enUS
     ],
     styles: [
-      paginationLight
+      switchLight
     ]
   })
   it('should work with import on demand', () => {
-    mount(NPagination, {
+    mount(NSwitch, {
       global: {
         plugins: [naive]
       }
