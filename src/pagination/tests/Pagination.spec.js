@@ -1,7 +1,7 @@
 import create from '../../create'
 import { paginationLight } from '../styles'
 import { mount } from '@vue/test-utils'
-import Pagination from '../index'
+import { NPagination } from '../index'
 import enUS from '../../locales/enUS'
 
 describe('n-pagination', () => {
@@ -15,7 +15,7 @@ describe('n-pagination', () => {
   })
   describe('props.page', () => {
     it('should work', () => {
-      const wrapper = mount(Pagination, {
+      const wrapper = mount(NPagination, {
         props: {
           page: 5,
           pageCount: 10
