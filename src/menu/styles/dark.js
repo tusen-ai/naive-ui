@@ -1,8 +1,8 @@
 import create from '../../_styles/utils/create-component-base'
 import { changeColor } from 'seemly'
 import { baseDark } from '../../_styles/base'
-import { iconDark } from '../../icon'
-import { tooltipDark } from '../../tooltip'
+import { iconDark } from '../../icon/styles'
+import { tooltipDark } from '../../tooltip/styles'
 
 export default create({
   theme: 'dark',

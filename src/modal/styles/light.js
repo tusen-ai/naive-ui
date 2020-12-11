@@ -1,8 +1,8 @@
 import create from '../../_styles/utils/create-component-base'
 import { baseLight } from '../../_styles/base'
-import { scrollbarLight } from '../../scrollbar'
-import { dialogLight } from '../../dialog'
-import { cardLight } from '../../card'
+import { scrollbarLight } from '../../scrollbar/styles'
+import { dialogLight } from '../../dialog/styles'
+import { cardLight } from '../../card/styles'
 
 export default create({
   name: 'Modal',

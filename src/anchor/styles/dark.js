@@ -1,6 +1,6 @@
 import create from '../../_styles/utils/create-component-base'
 import { baseDark } from '../../_styles/base'
-import { affixDark } from '../../affix'
+import { affixDark } from '../../affix/styles'
 import { changeColor } from 'seemly'
 
 export default create({

@@ -1,14 +1,14 @@
 import create from '../../_styles/utils/create-component-base'
 import {
   tagDark
-} from '../../tag'
+} from '../../tag/styles'
 import { baseDark } from '../../_styles/base'
 import {
   inputDark
-} from '../../input'
+} from '../../input/styles'
 import {
   buttonDark
-} from '../../button'
+} from '../../button/styles'
 
 export default create({
   name: 'DynamicTags',

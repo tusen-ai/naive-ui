@@ -1,8 +1,8 @@
 import create from '../../_styles/utils/create-component-base'
 import { baseDark } from '../../_styles/base'
-import { scrollbarDark } from '../../scrollbar'
-import { dialogDark } from '../../dialog'
-import { cardDark } from '../../card'
+import { scrollbarDark } from '../../scrollbar/styles'
+import { dialogDark } from '../../dialog/styles'
+import { cardDark } from '../../card/styles'
 
 export default create({
   name: 'Modal',

@@ -1,9 +1,9 @@
 import create from '../../_styles/utils/create-component-base'
 import { changeColor } from 'seemly'
 import { baseDark } from '../../_styles/base'
-import { iconDark } from '../../icon'
-import { checkboxDark } from '../../checkbox'
-import { baseLoadingDark } from '../../_base/loading'
+import { iconDark } from '../../icon/styles'
+import { checkboxDark } from '../../checkbox/styles'
+import { baseLoadingDark } from '../../_base/loading/styles'
 
 export default create({
   theme: 'dark',

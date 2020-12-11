@@ -1,6 +1,6 @@
 import create from '../../_styles/utils/create-component-base'
 import { baseDark } from '../../_styles/base'
-import { buttonDark } from '../../button'
+import { buttonDark } from '../../button/styles'
 
 export default create({
   theme: 'dark',

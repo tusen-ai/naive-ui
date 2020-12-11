@@ -1,8 +1,8 @@
 import create from '../../_styles/utils/create-component-base'
 import { baseLight } from '../../_styles/base'
-import { avatarLight } from '../../avatar'
-import { scrollbarLight } from '../../scrollbar'
-import { iconLight } from '../../icon'
+import { avatarLight } from '../../avatar/styles'
+import { scrollbarLight } from '../../scrollbar/styles'
+import { iconLight } from '../../icon/styles'
 
 export default create({
   name: 'Notification',

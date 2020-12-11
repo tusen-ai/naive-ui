@@ -1,7 +1,7 @@
 import create from '../../_styles/utils/create-component-base'
 import sizeVariables from './_common'
 import { baseLight } from '../../_styles/base'
-import { baseLoadingLight } from '../../_base/loading'
+import { baseLoadingLight } from '../../_base/loading/styles'
 
 export default create({
   name: 'Spin',

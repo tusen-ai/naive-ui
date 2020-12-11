@@ -1,7 +1,7 @@
 import create from '../../_styles/utils/create-component-base'
 import sizeVariables from './_common'
 import { baseLight } from '../../_styles/base'
-import { iconLight } from '../../icon'
+import { iconLight } from '../../icon/styles'
 
 export default create({
   name: 'Result',

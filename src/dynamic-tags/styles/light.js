@@ -1,14 +1,14 @@
 import create from '../../_styles/utils/create-component-base'
 import {
   tagLight
-} from '../../tag'
+} from '../../tag/styles'
 import { baseLight } from '../../_styles/base'
 import {
   inputLight
-} from '../../input'
+} from '../../input/styles'
 import {
   buttonLight
-} from '../../button'
+} from '../../button/styles'
 
 export default create({
   name: 'DynamicTags',

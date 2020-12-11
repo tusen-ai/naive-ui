@@ -1,7 +1,7 @@
 import create from '../../_styles/utils/create-component-base'
-import { selectLight } from '../../select'
-import { inputLight } from '../../input'
-import { iconLight } from '../../icon'
+import { selectLight } from '../../select/styles'
+import { inputLight } from '../../input/styles'
+import { iconLight } from '../../icon/styles'
 import { baseLight } from '../../_styles/base'
 import commonVariables from './_common.js'
 

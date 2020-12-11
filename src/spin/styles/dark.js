@@ -1,7 +1,7 @@
 import create from '../../_styles/utils/create-component-base'
 import sizeVariables from './_common'
 import { baseDark } from '../../_styles/base'
-import { baseLoadingDark } from '../../_base/loading'
+import { baseLoadingDark } from '../../_base/loading/styles'
 
 export default create({
   name: 'Spin',

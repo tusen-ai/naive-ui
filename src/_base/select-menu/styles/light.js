@@ -1,5 +1,5 @@
 import create from '../../../_styles/utils/create-component-base'
-import { scrollbarLight } from '../../../scrollbar'
+import { scrollbarLight } from '../../../scrollbar/styles'
 import commonVariables from './_common'
 
 export default create({

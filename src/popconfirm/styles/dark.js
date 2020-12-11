@@ -1,8 +1,8 @@
 import create from '../../_styles/utils/create-component-base'
 import { baseDark } from '../../_styles/base'
-import { iconDark } from '../../icon'
-import { buttonDark } from '../../button'
-import { popoverDark } from '../../popover'
+import { iconDark } from '../../icon/styles'
+import { buttonDark } from '../../button/styles'
+import { popoverDark } from '../../popover/styles'
 
 export default create({
   name: 'Popconfirm',

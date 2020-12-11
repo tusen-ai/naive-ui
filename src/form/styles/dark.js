@@ -1,7 +1,7 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
 import { baseDark } from '../../_styles/base'
-import { gridDark } from '../../grid'
+import { gridDark } from '../../grid/styles'
 
 export default create({
   name: 'Form',

@@ -1,9 +1,9 @@
 import create from '../../_styles/utils/create-component-base'
 import { changeColor } from 'seemly'
 import { baseLight } from '../../_styles/base'
-import { buttonLight } from '../../button'
-import { iconLight } from '../../icon'
-import { progressLight } from '../../progress'
+import { buttonLight } from '../../button/styles'
+import { iconLight } from '../../icon/styles'
+import { progressLight } from '../../progress/styles'
 
 export default create({
   name: 'Upload',

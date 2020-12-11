@@ -1,7 +1,7 @@
 import create from '../../_styles/utils/create-component-base'
 import sizeVariables from './_common'
 import { baseDark } from '../../_styles/base'
-import { iconDark } from '../../icon'
+import { iconDark } from '../../icon/styles'
 
 export default create({
   name: 'Tabs',

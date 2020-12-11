@@ -2,10 +2,10 @@ import create from '../../_styles/utils/create-component-base'
 import { baseDark } from '../../_styles/base'
 import {
   inputDark
-} from '../../input'
+} from '../../input/styles'
 import {
   buttonDark
-} from '../../button'
+} from '../../button/styles'
 import commonVariables from './_common'
 
 export default create({

@@ -1,8 +1,8 @@
 import create from '../../_styles/utils/create-component-base'
 import { baseDark } from '../../_styles/base'
-import { avatarDark } from '../../avatar'
-import { scrollbarDark } from '../../scrollbar'
-import { iconDark } from '../../icon'
+import { avatarDark } from '../../avatar/styles'
+import { scrollbarDark } from '../../scrollbar/styles'
+import { iconDark } from '../../icon/styles'
 
 export default create({
   name: 'Notification',

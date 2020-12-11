@@ -1,7 +1,7 @@
 import create from '../../_styles/utils/create-component-base'
 import { baseLight } from '../../_styles/base'
-import { baseSlotMachineLight } from '../../_base/slot-machine'
-import { baseWaveLight } from '../../_base/wave'
+import { baseSlotMachineLight } from '../../_base/slot-machine/styles'
+import { baseWaveLight } from '../../_base/wave/styles'
 
 export default create({
   name: 'Badge',

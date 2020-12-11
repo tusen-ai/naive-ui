@@ -4,7 +4,7 @@ import { changeColor } from 'seemly'
 import { baseDark } from '../../_styles/base'
 import {
   baseSuffixDark
-} from '../../_base/suffix'
+} from '../../_base/suffix/styles'
 
 export default create({
   name: 'Input',

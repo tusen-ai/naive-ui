@@ -1,6 +1,6 @@
 import create from '../../_styles/utils/create-component-base'
 import { baseDark } from '../../_styles/base'
-import { iconDark } from '../../icon'
+import { iconDark } from '../../icon/styles'
 import commonVariables from './_common'
 
 export default create({

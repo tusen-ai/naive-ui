@@ -1,8 +1,8 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVars from './_common'
 import { baseDark } from '../../_styles/base'
-import { iconDark } from '../../icon'
-import { scrollbarDark } from '../../scrollbar'
+import { iconDark } from '../../icon/styles'
+import { scrollbarDark } from '../../scrollbar/styles'
 
 export default create({
   name: 'TimePicker',

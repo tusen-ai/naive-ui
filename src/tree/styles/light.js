@@ -1,9 +1,9 @@
 import create from '../../_styles/utils/create-component-base'
 import { changeColor } from 'seemly'
 import { baseLight } from '../../_styles/base'
-import { iconLight } from '../../icon'
-import { checkboxLight } from '../../checkbox'
-import { baseLoadingLight } from '../../_base/loading'
+import { iconLight } from '../../icon/styles'
+import { checkboxLight } from '../../checkbox/styles'
+import { baseLoadingLight } from '../../_base/loading/styles'
 
 export default create({
   theme: 'light',

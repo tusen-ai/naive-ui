@@ -1,12 +1,12 @@
 import create from '../../_styles/utils/create-component-base'
 import sizeVariables from './_common'
 import { baseLight } from '../../_styles/base'
-import { baseMenuMaskLight } from '../../_base/menu-mask'
-import { baseLoadingLight } from '../../_base/loading'
-import { baseSelectionLight } from '../../_base/selection'
-import { baseSelectMenuLight } from '../../_base/select-menu'
-import { scrollbarLight } from '../../scrollbar'
-import { checkboxLight } from '../../checkbox'
+import { baseMenuMaskLight } from '../../_base/menu-mask/styles'
+import { baseLoadingLight } from '../../_base/loading/styles'
+import { baseSelectionLight } from '../../_base/selection/styles'
+import { baseSelectMenuLight } from '../../_base/select-menu/styles'
+import { scrollbarLight } from '../../scrollbar/styles'
+import { checkboxLight } from '../../checkbox/styles'
 
 export default create({
   theme: 'light',

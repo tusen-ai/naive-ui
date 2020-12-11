@@ -1,6 +1,6 @@
 import create from '../../_styles/utils/create-component-base'
 import { baseLight } from '../../_styles/base'
-import { popoverLight } from '../../popover'
+import { popoverLight } from '../../popover/styles'
 
 export default create({
   theme: 'light',
