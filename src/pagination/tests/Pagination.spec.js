@@ -1,8 +1,8 @@
-import create from '../../create'
-import { paginationLight } from '../styles'
 import { mount } from '@vue/test-utils'
+import create from '../../create'
+import { enUS } from '../../locales'
 import { NPagination } from '../index'
-import enUS from '../../locales/enUS'
+import { paginationLight } from '../styles'
 
 describe('n-pagination', () => {
   const naive = create({
