@@ -1,8 +1,14 @@
 import create from '../../_styles/utils/create-component-base'
+import { baseLight } from '../../_styles/base'
+import { iconLight } from '../../icon'
 
 export default create({
   name: 'Progress',
   theme: 'light',
+  peer: [
+    baseLight,
+    iconLight
+  ],
   getLocalVars (vars) {
     const {
       infoColor,

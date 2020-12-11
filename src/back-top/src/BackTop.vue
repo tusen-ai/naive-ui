@@ -65,6 +65,7 @@ export default {
     themeable,
     withCssr(styles)
   ],
+  inheritAttrs: false,
   props: {
     show: {
       type: Boolean,
@@ -85,10 +86,6 @@ export default {
     visibilityHeight: {
       type: Number,
       default: 180
-    },
-    onClick: {
-      type: Function,
-      default: () => {}
     },
     listenTo: {
       type: [String, Object, Function],
@@ -202,7 +199,6 @@ export default {
           behavior: 'smooth'
         })
       }
-      this.onClick(e)
     },
     handleScroll () {
       const { scrollElement } = this

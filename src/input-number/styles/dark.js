@@ -1,11 +1,17 @@
 import create from '../../_styles/utils/create-component-base'
 import { changeColor } from 'seemly'
+import { baseDark } from '../../_styles/base'
+import { iconDark } from '../../icon'
 import inputCommonVariables from '../../input/styles/_common'
 import inputNumberCommonVariables from './_common'
 
 export default create({
   name: 'InputNumber',
   theme: 'dark',
+  peer: [
+    baseDark,
+    iconDark
+  ],
   getLocalVars (vars) {
     const {
       primaryColor,

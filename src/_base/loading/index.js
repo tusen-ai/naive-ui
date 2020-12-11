@@ -1,3 +1,2 @@
-import Loader from './src/Loading.vue'
-
-export default Loader
+export { default } from './src/Loading.vue'
+export * from './styles'

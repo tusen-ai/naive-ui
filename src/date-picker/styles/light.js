@@ -1,10 +1,18 @@
 import create from '../../_styles/utils/create-component-base'
 import { changeColor } from 'seemly'
+import { baseLight } from '../../_styles/base'
+import { inputLight } from '../../input'
+import { iconLight } from '../../icon'
 import commonVars from './_common'
 
 export default create({
   theme: 'light',
   name: 'DatePicker',
+  peer: [
+    baseLight,
+    inputLight,
+    iconLight
+  ],
   getLocalVars (vars) {
     return {
       ...commonVars,

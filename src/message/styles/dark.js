@@ -1,10 +1,16 @@
 import create from '../../_styles/utils/create-component-base'
 import { changeColor } from 'seemly'
 import commonVariables from './_common'
+import { baseDark } from '../../_styles/base'
+import { iconDark } from '../../icon'
 
 export default create({
   name: 'Message',
   theme: 'dark',
+  peer: [
+    baseDark,
+    iconDark
+  ],
   getLocalVars (vars) {
     const {
       textColorBase,

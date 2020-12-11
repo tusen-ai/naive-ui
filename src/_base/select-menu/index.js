@@ -1,4 +1,3 @@
 /* istanbul ignore file */
-import BaseSelectMenu from './src/SelectMenu.vue'
-
-export default BaseSelectMenu
+export { default } from './src/SelectMenu.vue'
+export * from './styles'

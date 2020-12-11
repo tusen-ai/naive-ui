@@ -1,11 +1,13 @@
 import create from '../../_styles/utils/create-component-base'
-import iconStyle from '../../icon/styles/dark'
+import { baseLight } from '../../_styles/base'
+import { iconLight } from '../../icon'
 
 export default create({
   theme: 'light',
   name: 'Rate',
   peer: [
-    iconStyle
+    baseLight,
+    iconLight
   ],
   getLocalVars (vars) {
     return {

@@ -1,9 +1,19 @@
 import create from '../../_styles/utils/create-component-base'
 import { changeColor } from 'seemly'
+import { baseLight } from '../../_styles/base'
+import { iconLight } from '../../icon'
+import { checkboxLight } from '../../checkbox'
+import { baseLoadingLight } from '../../_base/loading'
 
 export default create({
   theme: 'light',
   name: 'Tree',
+  peer: [
+    baseLight,
+    iconLight,
+    checkboxLight,
+    baseLoadingLight
+  ],
   getLocalVars (vars) {
     const {
       borderRadiusSmall,

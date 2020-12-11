@@ -1,9 +1,15 @@
 import create from '../../_styles/utils/create-component-base'
 import sizeVariables from './_common'
+import { baseDark } from '../../_styles/base'
+import { iconDark } from '../../icon'
 
 export default create({
   name: 'Result',
   theme: 'dark',
+  peer: [
+    baseDark,
+    iconDark
+  ],
   getLocalVars (vars) {
     const {
       textColor1Overlay,

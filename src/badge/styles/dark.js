@@ -1,12 +1,14 @@
 import create from '../../_styles/utils/create-component-base'
-import {
-  baseSlotMachineDark
-} from '../../_base/slot-machine/styles'
+import { baseDark } from '../../_styles/base'
+import { baseSlotMachineDark } from '../../_base/slot-machine'
+import { baseWaveDark } from '../../_base/wave'
 
 export default create({
   name: 'Badge',
   theme: 'dark',
   peer: [
+    baseDark,
+    baseWaveDark,
     baseSlotMachineDark
   ],
   getLocalVars (vars) {

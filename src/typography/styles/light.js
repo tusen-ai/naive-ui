@@ -1,9 +1,13 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVars from './_common'
+import { baseLight } from '../../_styles/base'
 
 export default create({
   theme: 'light',
   name: 'Typography',
+  peer: [
+    baseLight
+  ],
   getLocalVars (vars) {
     return {
       ...commonVars,

@@ -1,9 +1,19 @@
 import create from '../../_styles/utils/create-component-base'
 import { changeColor } from 'seemly'
+import { baseLight } from '../../_styles/base'
+import { buttonLight } from '../../button'
+import { iconLight } from '../../icon'
+import { progressLight } from '../../progress'
 
 export default create({
   name: 'Upload',
   theme: 'light',
+  peer: [
+    baseLight,
+    buttonLight,
+    iconLight,
+    progressLight
+  ],
   getLocalVars (vars) {
     const {
       iconColorOverlay,

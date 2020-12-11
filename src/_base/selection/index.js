@@ -1,4 +1,3 @@
 /* istanbul ignore file */
-import BaseSelection from './src/Selection.vue'
-
-export default BaseSelection
+export { default } from './src/Selection.vue'
+export * from './styles'

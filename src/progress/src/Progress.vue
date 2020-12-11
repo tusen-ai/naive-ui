@@ -235,7 +235,7 @@
 
 <script>
 import { nextTick, getCurrentInstance } from 'vue'
-import{ NIcon } from '../../icon'
+import { NIcon } from '../../icon'
 import {
   CheckmarkIcon as SuccessIcon,
   CloseIcon as ErrorIcon,

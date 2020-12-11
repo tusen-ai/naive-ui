@@ -1,10 +1,14 @@
 import create from '../../_styles/utils/create-component-base'
+import { baseDark } from '../../_styles/base'
 import commonVariables from './_common'
 import { changeColor } from 'seemly'
 
 export default create({
   theme: 'dark',
   name: 'Checkbox',
+  peer: [
+    baseDark
+  ],
   getLocalVars (vars) {
     const {
       inputColorDisabledOverlay,

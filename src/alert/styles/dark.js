@@ -1,6 +1,6 @@
 import create from '../../_styles/utils/create-component-base'
 import { baseDark } from '../../_styles/base'
-import { iconDark } from '../../icon/styles'
+import { iconDark } from '../../icon'
 import { changeColor } from 'seemly'
 
 export default create({

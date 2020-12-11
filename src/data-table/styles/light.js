@@ -1,10 +1,28 @@
 import create from '../../_styles/utils/create-component-base'
 import { composite } from 'seemly'
 import commonVariables from './_common'
+import { baseLight } from '../../_styles/base'
+import { iconLight } from '../../icon'
+import { buttonLight } from '../../button'
+import { checkboxLight } from '../../checkbox'
+import { radioLight } from '../../radio'
+import { paginationLight } from '../../pagination'
+import { scrollbarLight } from '../../scrollbar'
+import { dividerLight } from '../../divider'
 
 export default create({
   theme: 'light',
   name: 'DataTable',
+  peer: [
+    baseLight,
+    iconLight,
+    buttonLight,
+    checkboxLight,
+    radioLight,
+    paginationLight,
+    scrollbarLight,
+    dividerLight
+  ],
   getLocalVars (vars) {
     const {
       cardColor,

@@ -1,14 +1,14 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
 import { changeColor } from 'seemly'
-import {
-  iconLight
-} from '../../icon/styles'
+import { baseLight } from '../../_styles/base'
+import { iconLight } from '../../icon'
 
 export default create({
   theme: 'light',
   name: 'Tag',
   peer: [
+    baseLight,
     iconLight
   ],
   getLocalVars (vars) {

@@ -1,9 +1,15 @@
 import create from '../../_styles/utils/create-component-base'
+import { baseLight } from '../../_styles/base'
+import { affixLight } from '../../affix'
 import { changeColor } from 'seemly'
 
 export default create({
   theme: 'light',
   name: 'Anchor',
+  peer: [
+    baseLight,
+    affixLight
+  ],
   getLocalVars (vars) {
     const {
       borderRadius,

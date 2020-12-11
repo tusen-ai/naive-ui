@@ -1,10 +1,6 @@
 import create from '../../_styles/utils/create-component-base'
-import {
-  baseSelectMenuLight
-} from '../../_base/select-menu/styles'
-import {
-  inputLight
-} from '../../input/styles'
+import { baseSelectMenuLight } from '../../_base/select-menu'
+import { inputLight } from '../../input'
 
 export default create({
   theme: 'light',
@@ -13,7 +9,7 @@ export default create({
     baseSelectMenuLight,
     inputLight
   ],
-  getLocalVars (vars) {
+  getLocalVars () {
     return {}
   }
 })

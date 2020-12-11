@@ -1,14 +1,16 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
 import { changeColor } from 'seemly'
+import { baseLight } from '../../_styles/base'
 import {
   baseSuffixLight
-} from '../../_base/suffix/styles'
+} from '../../_base/suffix'
 
 export default create({
   name: 'Input',
   theme: 'light',
   peer: [
+    baseLight,
     baseSuffixLight
   ],
   getLocalVars (vars) {

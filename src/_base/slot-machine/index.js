@@ -1,3 +1,2 @@
-import SlotMachine from './src/SlotMachine.vue'
-
-export default SlotMachine
+export { default } from './src/SlotMachine.vue'
+export * from './styles'

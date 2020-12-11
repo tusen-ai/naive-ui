@@ -1,9 +1,13 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVariables from '../../input/styles/_common'
+import { baseLight } from '../../_styles/base'
 
 export default create({
   name: 'InputGroupLabel',
   theme: 'light',
+  peer: [
+    baseLight
+  ],
   getLocalVars (vars) {
     return {
       ...commonVariables,

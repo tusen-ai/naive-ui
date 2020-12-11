@@ -1,20 +1,16 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
 import { composite } from 'seemly'
-import {
-  checkboxLight
-} from '../../checkbox/styles'
-import {
-  scrollbarLight
-} from '../../scrollbar/styles'
-import {
-  inputLight
-} from '../../input/styles'
+import { baseLight } from '../../_styles/base'
+import { checkboxLight } from '../../checkbox'
+import { scrollbarLight } from '../../scrollbar'
+import { inputLight } from '../../input'
 
 export default create({
   theme: 'light',
   name: 'Transfer',
   peer: [
+    baseLight,
     checkboxLight,
     scrollbarLight,
     inputLight

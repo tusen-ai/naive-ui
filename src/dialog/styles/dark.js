@@ -1,9 +1,17 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVars from './_common'
+import { baseDark } from '../../_styles/base'
+import { iconDark } from '../../icon'
+import { buttonDark } from '../../button'
 
 export default create({
   theme: 'dark',
   name: 'Dialog',
+  peer: [
+    baseDark,
+    iconDark,
+    buttonDark
+  ],
   getLocalVars (vars) {
     const {
       textColor1Overlay,

@@ -1,13 +1,13 @@
 import create from '../../_styles/utils/create-component-base'
-import {
-  baseWaveLight
-} from '../../_base/wave/styles'
+import { baseLight } from '../../_styles/base'
+import { baseWaveLight } from '../../_base/wave'
 import commonVariables from './_common'
 
 export default create({
   theme: 'light',
   name: 'Button',
   peer: [
+    baseLight,
     baseWaveLight
   ],
   getLocalVars (vars) {

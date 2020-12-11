@@ -1,9 +1,13 @@
 import create from '../../_styles/utils/create-component-base'
 import { c } from '../../_utils/cssr'
+import { baseDark } from '../../_styles/base'
 
 export default create({
   theme: 'dark',
   name: 'Code',
+  peer: [
+    baseDark
+  ],
   getLocalVars (vars) {
     const {
       textColor2

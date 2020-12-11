@@ -1,9 +1,9 @@
-import { cTB, c, cB, cE, cM } from '../../../_utils/cssr'
+import { cTB, c, cB, cE, cM, createKey } from '../../../_utils/cssr'
 
-function createResultStatus (status, colorStatus) {
+function createResultStatus (status, color) {
   return cM(`${status}-status`, [
     cB('result-icon', {
-      color: colorStatus[status]
+      color
     })
   ])
 }
@@ -11,24 +11,17 @@ function createResultStatus (status, colorStatus) {
 export default c([
   ({ props }) => {
     const {
-      headerTextColor,
-      descriptionTextColor,
-      iconColorError,
-      iconColorSuccess,
-      iconColorInfo,
-      iconColorWarning,
-      lineHeight,
-      headerFontWeight
-    } = props.$local
-    const {
-      cubicBezierEaseInOut
-    } = props.$global
-    const colorStatus = {
-      success: iconColorSuccess,
-      warning: iconColorWarning,
-      info: iconColorInfo,
-      error: iconColorError
-    }
+      $global: {
+        cubicBezierEaseInOut
+      },
+      $local: {
+        headerTextColor,
+        descriptionTextColor,
+        lineHeight,
+        headerFontWeight
+      }
+    } = props
+    const { $local } = props
     return cTB('result', {
       raw: `
         color: ${descriptionTextColor};
@@ -38,7 +31,41 @@ export default c([
           color .3s ${cubicBezierEaseInOut};
       `
     }, [
-      ['success', 'info', 'warning', 'error'].map(item => createResultStatus(item, colorStatus)),
+      ['success', 'info', 'warning', 'error']
+        .map(status => createResultStatus(status, $local[createKey('iconColor', status)])),
+      ['small', 'medium', 'large', 'huge'].map(size => {
+        const {
+          $local: {
+            [createKey('iconSize', size)]: iconSize,
+            [createKey('headerFontSize', size)]: headerFontSize,
+            [createKey('descriptionFontSize', size)]: descriptionFontSize
+          }
+        } = props
+        return cTB('result',
+          [
+            cM(`${size}-size`, [
+              cB('result-icon', {
+                raw: `
+              display: flex;
+              justify-content: center;
+            `
+              }, [
+                cE('status-image', {
+                  width: iconSize
+                })
+              ]),
+              cB('result-header', [
+                cE('title', {
+                  fontSize: headerFontSize
+                }),
+                cE('description', {
+                  fontSize: descriptionFontSize
+                })
+              ])
+            ])
+          ]
+        )
+      }),
       cB('result-icon', {
         raw: `
           display: flex;

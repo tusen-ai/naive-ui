@@ -1,12 +1,14 @@
 import create from '../../_styles/utils/create-component-base'
-import {
-  baseSlotMachineLight
-} from '../../_base/slot-machine/styles'
+import { baseLight } from '../../_styles/base'
+import { baseSlotMachineLight } from '../../_base/slot-machine'
+import { baseWaveLight } from '../../_base/wave'
 
 export default create({
   name: 'Badge',
   theme: 'light',
   peer: [
+    baseLight,
+    baseWaveLight,
     baseSlotMachineLight
   ],
   getLocalVars (vars) {

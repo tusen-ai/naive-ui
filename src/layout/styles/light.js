@@ -1,9 +1,13 @@
 import create from '../../_styles/utils/create-component-base'
 import { composite } from 'seemly'
+import { baseLight } from '../../_styles/base'
 
 export default create({
   name: 'Layout',
   theme: 'light',
+  peer: [
+    baseLight
+  ],
   getLocalVars (vars) {
     const {
       textColor2,

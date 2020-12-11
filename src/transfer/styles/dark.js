@@ -1,19 +1,15 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
-import {
-  checkboxDark
-} from '../../checkbox/styles'
-import {
-  scrollbarDark
-} from '../../scrollbar/styles'
-import {
-  inputDark
-} from '../../input/styles'
+import { baseDark } from '../../_styles/base'
+import { checkboxDark } from '../../checkbox'
+import { scrollbarDark } from '../../scrollbar'
+import { inputDark } from '../../input'
 
 export default create({
   theme: 'dark',
   name: 'Transfer',
   peer: [
+    baseDark,
     checkboxDark,
     scrollbarDark,
     inputDark

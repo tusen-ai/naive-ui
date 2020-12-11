@@ -1,16 +1,18 @@
-import { cTB, c } from '../../../_utils/cssr'
+import { cTB, c, cM, createKey } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
     const {
-      cubicBezierEaseInOut
-    } = props.$global
-    const {
-      borderRadius,
-      color: backgroundColor,
-      textColor,
-      boxShadow
-    } = props.$local
+      $global: {
+        cubicBezierEaseInOut
+      },
+      $local: {
+        borderRadius,
+        color: backgroundColor,
+        textColor,
+        boxShadow
+      }
+    } = props
     return cTB('input-group-label', {
       userSelect: 'none',
       boxSizing: 'border-box',
@@ -25,6 +27,18 @@ export default c([
         background-color .3s ${cubicBezierEaseInOut},
         box-shadow .3s ${cubicBezierEaseInOut}
       `
-    })
+    }, ['small', 'medium', 'large'].map(size => {
+      const {
+        $local: {
+          [createKey('fontSize', size)]: fontSize,
+          [createKey('height', size)]: height
+        }
+      } = props
+      return cM(size + '-size', {
+        fontSize,
+        lineHeight: height,
+        height
+      })
+    }))
   }
 ])

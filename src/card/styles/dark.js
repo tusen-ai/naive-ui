@@ -1,9 +1,15 @@
 import create from '../../_styles/utils/create-component-base'
+import { baseDark } from '../../_styles/base'
+import { iconDark } from '../../icon'
 import commonVariables from './_common'
 
 export default create({
   theme: 'dark',
   name: 'Card',
+  peer: [
+    baseDark,
+    iconDark
+  ],
   getLocalVars (vars) {
     const {
       borderRadius

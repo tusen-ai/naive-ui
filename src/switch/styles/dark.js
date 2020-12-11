@@ -1,9 +1,13 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVars from './_common'
+import { baseDark } from '../../_styles/base'
 
 export default create({
   theme: 'dark',
   name: 'Switch',
+  peer: [
+    baseDark
+  ],
   getLocalVars (vars) {
     const {
       primaryColorSuppl

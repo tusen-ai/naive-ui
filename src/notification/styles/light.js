@@ -1,11 +1,17 @@
 import create from '../../_styles/utils/create-component-base'
-import avatarStyle from '../../avatar/styles/dark'
+import { baseLight } from '../../_styles/base'
+import { avatarLight } from '../../avatar'
+import { scrollbarLight } from '../../scrollbar'
+import { iconLight } from '../../icon'
 
 export default create({
   name: 'Notification',
   theme: 'light',
   peer: [
-    avatarStyle
+    baseLight,
+    iconLight,
+    avatarLight,
+    scrollbarLight
   ],
   getLocalVars (vars) {
     const {

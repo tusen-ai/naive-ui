@@ -1,9 +1,17 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVars from './_common'
+import { baseLight } from '../../_styles/base'
+import { iconLight } from '../../icon'
+import { scrollbarLight } from '../../scrollbar'
 
 export default create({
-  theme: 'light',
   name: 'TimePicker',
+  theme: 'light',
+  peer: [
+    baseLight,
+    iconLight,
+    scrollbarLight
+  ],
   getLocalVars (vars) {
     const {
       modalColor,

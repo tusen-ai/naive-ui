@@ -1,9 +1,13 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVars from './_common'
+import { baseLight } from '../../_styles/base'
 
 export default create({
   theme: 'light',
   name: 'Switch',
+  peer: [
+    baseLight
+  ],
   getLocalVars (vars) {
     const {
       primaryColor

@@ -1,9 +1,17 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVars from './_common'
+import { baseDark } from '../../_styles/base'
+import { iconDark } from '../../icon'
+import { scrollbarDark } from '../../scrollbar'
 
 export default create({
-  theme: 'dark',
   name: 'TimePicker',
+  theme: 'dark',
+  peer: [
+    baseDark,
+    iconDark,
+    scrollbarDark
+  ],
   getLocalVars (vars) {
     const {
       popoverColor,

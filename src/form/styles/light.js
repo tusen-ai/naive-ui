@@ -1,11 +1,15 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
-import gridStyle from '../../grid/styles/light'
+import { baseLight } from '../../_styles/base'
+import { gridLight } from '../../grid'
 
 export default create({
   name: 'Form',
   theme: 'light',
-  peer: [gridStyle],
+  peer: [
+    baseLight,
+    gridLight
+  ],
   getLocalVars (vars) {
     const {
       textColor1,

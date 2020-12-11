@@ -1,9 +1,13 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
+import { baseDark } from '../../_styles/base'
 
 export default create({
   theme: 'dark',
   name: 'Descriptions',
+  peer: [
+    baseDark
+  ],
   getLocalVars (vars) {
     const {
       tableHeaderColorOverlay,

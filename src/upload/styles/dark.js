@@ -1,9 +1,19 @@
 import create from '../../_styles/utils/create-component-base'
 import { changeColor } from 'seemly'
+import { baseDark } from '../../_styles/base'
+import { buttonDark } from '../../button'
+import { iconDark } from '../../icon'
+import { progressDark } from '../../progress'
 
 export default create({
   name: 'Upload',
   theme: 'dark',
+  peer: [
+    baseDark,
+    buttonDark,
+    iconDark,
+    progressDark
+  ],
   getLocalVars (vars) {
     const {
       iconColorOverlay,
@@ -16,7 +26,6 @@ export default create({
       borderColor,
       hoverColorOverlay
     } = vars
-
     return {
       draggerColor: actionColorOverlay,
       draggerBorder: `1px dashed ${borderColor}`,

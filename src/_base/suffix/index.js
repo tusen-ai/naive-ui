@@ -1,4 +1,3 @@
 /* istanbul ignore file */
-import Suffix from './src/Suffix.vue'
-
-export default Suffix
+export { default } from './src/Suffix.vue'
+export * from './styles'

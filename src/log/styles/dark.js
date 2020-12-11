@@ -1,11 +1,13 @@
 import create from '../../_styles/utils/create-component-base'
-import { baseLoadingDark } from '../../_base/loading/styles'
-import { scrollbarDark } from '../../scrollbar/styles'
+import { baseDark } from '../../_styles/base'
+import { baseLoadingDark } from '../../_base/loading'
+import { scrollbarDark } from '../../scrollbar'
 
 export default create({
   name: 'Log',
   theme: 'dark',
   peer: [
+    baseDark,
     baseLoadingDark,
     scrollbarDark
   ],

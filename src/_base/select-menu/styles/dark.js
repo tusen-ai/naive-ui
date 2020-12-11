@@ -1,9 +1,13 @@
 import create from '../../../_styles/utils/create-component-base'
+import { scrollbarDark } from '../../../scrollbar'
 import commonVariables from './_common'
 
 export default create({
   name: 'BaseSelectMenu',
   theme: 'dark',
+  peer: [
+    scrollbarDark
+  ],
   getLocalVars (vars) {
     return {
       ...commonVariables,

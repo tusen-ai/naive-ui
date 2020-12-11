@@ -1,9 +1,13 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
+import { baseDark } from '../../_styles/base'
 
 export default create({
   theme: 'dark',
   name: 'Dropdown',
+  peer: [
+    baseDark
+  ],
   getLocalVars (vars) {
     const {
       textColor2,

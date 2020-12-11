@@ -1,11 +1,13 @@
 import create from '../../_styles/utils/create-component-base'
-import { baseLoadingLight } from '../../_base/loading/styles'
-import { scrollbarLight } from '../../scrollbar/styles'
+import { baseLight } from '../../_styles/base'
+import { baseLoadingLight } from '../../_base/loading'
+import { scrollbarLight } from '../../scrollbar'
 
 export default create({
   name: 'Log',
   theme: 'light',
   peer: [
+    baseLight,
     baseLoadingLight,
     scrollbarLight
   ],

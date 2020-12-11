@@ -1,9 +1,17 @@
 import create from '../../_styles/utils/create-component-base'
 import { changeColor } from 'seemly'
+import { baseDark } from '../../_styles/base'
+import { iconDark } from '../../icon'
+import { tooltipDark } from '../../tooltip'
 
 export default create({
   theme: 'dark',
   name: 'Menu',
+  peer: [
+    baseDark,
+    iconDark,
+    tooltipDark
+  ],
   getLocalVars (vars) {
     return {
       borderRadius: vars.borderRadius,

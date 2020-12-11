@@ -1,8 +1,12 @@
 import create from '../../_styles/utils/create-component-base'
+import { baseDark } from '../../_styles/base'
 
 export default create({
   name: 'Statistic',
   theme: 'light',
+  peer: [
+    baseDark
+  ],
   getLocalVars (vars) {
     const {
       textColor2,

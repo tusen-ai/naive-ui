@@ -1,16 +1,18 @@
 import create from '../../_styles/utils/create-component-base'
+import { baseDark } from '../../_styles/base'
 import {
   inputDark
-} from '../../input/styles'
+} from '../../input'
 import {
   buttonDark
-} from '../../button/styles'
+} from '../../button'
 import commonVariables from './_common'
 
 export default create({
   theme: 'dark',
   name: 'DynamicInput',
   peer: [
+    baseDark,
     inputDark,
     buttonDark
   ],

@@ -1,3 +1,2 @@
-import Wave from './src/Wave.vue'
-
-export default Wave
+export { default } from './src/Wave.vue'
+export * from './styles'

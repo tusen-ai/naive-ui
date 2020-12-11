@@ -1,3 +1,2 @@
-import MenuMask from './src/MenuMask.vue'
-
-export default MenuMask
+export { default } from './src/MenuMask.vue'
+export * from './styles'

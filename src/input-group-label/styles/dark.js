@@ -1,9 +1,13 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVariables from '../../input/styles/_common'
+import { baseDark } from '../../_styles/base'
 
 export default create({
   name: 'InputGroupLabel',
   theme: 'dark',
+  peer: [
+    baseDark
+  ],
   getLocalVars (vars) {
     return {
       ...commonVariables,

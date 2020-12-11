@@ -1,10 +1,14 @@
 import create from '../../_styles/utils/create-component-base'
+import { baseLight } from '../../_styles/base'
 import commonVariables from './_common'
 import { changeColor } from 'seemly'
 
 export default create({
   theme: 'light',
   name: 'Checkbox',
+  peer: [
+    baseLight
+  ],
   getLocalVars (vars) {
     const {
       baseColor,

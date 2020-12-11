@@ -72,16 +72,16 @@ import {
   VFollower
 } from 'vueuc'
 import {
+  clickoutside
+} from 'vdirs'
+import { useIsMounted, useMergedState } from 'vooks'
+import {
   configurable,
   themeable,
   asFormItem,
   withCssr
 } from '../../_mixins'
-import {
-  clickoutside
-} from 'vdirs'
 import { call, warn, useAdjustedTo } from '../../_utils'
-import { useIsMounted, useMergedState } from 'vooks'
 import {
   NBaseSelectMenu
 } from '../../_base'

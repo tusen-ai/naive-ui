@@ -1,10 +1,14 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
+import { baseLight } from '../../_styles/base'
 import { composite } from 'seemly'
 
 export default create({
   theme: 'light',
   name: 'Descriptions',
+  peer: [
+    baseLight
+  ],
   getLocalVars (vars) {
     const {
       tableHeaderColorOverlay,

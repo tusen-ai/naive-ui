@@ -15,7 +15,7 @@ import {
   themeable,
   withCssr
 } from '../../_mixins'
-import styles from './styles/index.js'
+import styles from './styles'
 
 export default {
   name: 'Breadcrumb',

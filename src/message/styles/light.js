@@ -1,9 +1,15 @@
 import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
+import { baseDark } from '../../_styles/base'
+import { iconDark } from '../../icon'
 
 export default create({
   name: 'Message',
   theme: 'light',
+  peer: [
+    baseDark,
+    iconDark
+  ],
   getLocalVars (vars) {
     const {
       textColor2,

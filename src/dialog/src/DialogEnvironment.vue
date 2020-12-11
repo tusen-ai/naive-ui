@@ -26,7 +26,9 @@
 </template>
 
 <script>
-import { NModal } from '../../modal'
+// use absolute path to make sure no circular ref of style
+// this -> modal-index -> modal-style
+import NModal from '../../modal/src/Modal'
 import NDialog from './Dialog.vue'
 
 export default {
