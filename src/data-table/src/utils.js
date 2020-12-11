@@ -1,6 +1,6 @@
 import { formatLength } from '../../_utils'
 
-export function createCustomWidthStyle (column, index, placement) {
+export function createCustomWidthStyle (column) {
   if (column.width) {
     const width = column.width
     return {

@@ -14,9 +14,9 @@
     <table ref="body" class="n-data-table-table">
       <colgroup>
         <col
-          v-for="(column, index) in columns"
+          v-for="column in columns"
           :key="column.key"
-          :style="createCustomWidthStyle(column, index, placement)"
+          :style="createCustomWidthStyle(column)"
         >
       </colgroup>
       <tbody ref="tbody" class="n-data-table-tbody">
