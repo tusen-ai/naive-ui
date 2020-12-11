@@ -1,9 +1,17 @@
 <template>
+  <render-sorter
+    v-if="mergedRenderSorter"
+    :render="mergedRenderSorter"
+    :order="mergedSortOrder"
+    :active="active"
+    :theme="NDataTable.mergedTheme"
+  />
   <span
+    v-else
     class="n-data-table-sort-button"
     :class="{
-      'n-data-table-sort-button--asc': currentColumnActive && syntheticSortOrder === 'ascend',
-      'n-data-table-sort-button--desc': currentColumnActive && syntheticSortOrder === 'descend'
+      'n-data-table-sort-button--asc': active && mergedSortOrder === 'ascend',
+      'n-data-table-sort-button--desc': active && mergedSortOrder === 'descend'
     }"
   >
     <n-icon>
@@ -17,23 +25,17 @@ import {
   ArrowDownIcon
 } from '../../../_base/icons'
 import { NIcon } from '../../../icon'
+import RenderSorter from './RenderSorter'
 
 export default {
   name: 'SortIcon',
   components: {
     NIcon,
+    RenderSorter,
     ArrowDownIcon
   },
-  inject: {
-    NDataTable: {
-      default: null
-    }
-  },
+  inject: ['NDataTable'],
   props: {
-    fontSize: {
-      type: Number,
-      default: 17
-    },
     column: {
       type: Object,
       required: true
@@ -44,14 +46,17 @@ export default {
       const activeSorter = this.NDataTable.syntheticActiveSorter
       return activeSorter
     },
-    currentColumnActive () {
+    active () {
       return this.activeSorter && this.activeSorter.columnKey === this.column.key
     },
-    syntheticSortOrder () {
-      if (this.activeSorter) {
+    mergedSortOrder () {
+      if (this.active && this.activeSorter) {
         return this.activeSorter.order
       }
       return false
+    },
+    mergedRenderSorter () {
+      return this.NDataTable?.renderSorter || this.$naive?.unstableConfig?.DataTable?.renderSorter
     }
   }
 }

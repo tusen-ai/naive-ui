@@ -23,28 +23,28 @@ export default create({
       ...commonVariables,
       borderRadius,
       borderColor: composite(cardColor, dividerColorOverlay),
-      bodyColorHover: composite(cardColor, tableColorHoverOverlay),
-      headerColor: composite(cardColor, tableHeaderColorOverlay),
-      headerColorHover: composite(
+      tdColorHover: composite(cardColor, tableColorHoverOverlay),
+      thColor: composite(cardColor, tableHeaderColorOverlay),
+      thColorHover: composite(
         composite(cardColor, tableHeaderColorOverlay),
         tableHeaderColorOverlay
       ),
-      bodyColor: cardColor,
-      bodyTextColor: textColor2,
-      headerTextColor: textColor1,
-      headerFontWeight: fontWeightStrong,
-      headerButtonColorHover: tableColorHoverOverlay,
-      headerButtonIconColor: iconColorOverlay,
-      headerButtonIconColorActive: primaryColor,
-      fixedColumnBoxShadowColor: 'rgba(0, 0, 0, .18)',
+      tdColor: cardColor,
+      tdTextColor: textColor2,
+      thTextColor: textColor1,
+      thFontWeight: fontWeightStrong,
+      thButtonColorHover: tableColorHoverOverlay,
+      thButtonIconColor: iconColorOverlay,
+      thButtonIconColorActive: primaryColor,
+      // modal
       borderColorModal: composite(modalColor, dividerColorOverlay),
-      bodyColorHoverModal: composite(modalColor, tableColorHoverOverlay),
-      headerColorModal: composite(modalColor, tableHeaderColorOverlay),
-      headerColorHoverModal: composite(
+      tdColorHoverModal: composite(modalColor, tableColorHoverOverlay),
+      thColorModal: composite(modalColor, tableHeaderColorOverlay),
+      thColorHoverModal: composite(
         composite(modalColor, tableHeaderColorOverlay),
         tableHeaderColorOverlay
       ),
-      bodyColorModal: modalColor
+      tdColorModal: modalColor
     }
   }
 })

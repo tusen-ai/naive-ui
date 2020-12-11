@@ -172,7 +172,7 @@ export default {
       return this.NDataTable.allRowsChecked
     },
     activeFilters () {
-      return this.NDataTable.syntheticActiveFilters
+      return this.NDataTable.mergedActiveFilters
     },
     headerStyle () {
       return {

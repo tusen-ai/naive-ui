@@ -13,7 +13,17 @@
       :body-style="popoverBodyStyle"
     >
       <template #trigger>
-        <div class="n-data-table-filter-button__icon-wrapper">
+        <render-filter
+          v-if="mergedRenderFilter"
+          :render="mergedRenderFilter"
+          :active="active"
+          :show="popoverVisible"
+          :theme="NDataTable.mergedTheme"
+        />
+        <div
+          v-else
+          class="n-data-table-filter-button__icon-wrapper"
+        >
           <n-icon>
             <filter-icon />
           </n-icon>
@@ -22,7 +32,7 @@
       <n-data-table-filter-menu
         :radio-group-name="column.key"
         :multiple="filterMultiple"
-        :value="syntheticFilterValue"
+        :value="mergedFilterValue"
         :options="options"
         :column="column"
         @change="handleFilterChange"
@@ -34,29 +44,27 @@
 </template>
 
 <script>
+import RenderFilter from './RenderFilter'
 import { NIcon } from '../../../icon'
 import NDataTableFilterMenu from './FilterMenu.vue'
 import { NPopover } from '../../../popover'
 import { FilterIcon } from '../../../_base/icons'
 
-function createActiveFilters (allFilters, columnKey, syntheticFilterValue) {
+function createActiveFilters (allFilters, columnKey, mergedFilterValue) {
   const activeFilters = Object.assign({}, allFilters)
-  activeFilters[columnKey] = syntheticFilterValue
+  activeFilters[columnKey] = mergedFilterValue
   return activeFilters
 }
 
 export default {
   components: {
     NIcon,
+    RenderFilter,
     NDataTableFilterMenu,
     NPopover,
     FilterIcon
   },
-  inject: {
-    NDataTable: {
-      default: null
-    }
-  },
+  inject: ['NDataTable'],
   props: {
     column: {
       type: Object,
@@ -75,27 +83,30 @@ export default {
   },
   computed: {
     activeFilters () {
-      return this.NDataTable.syntheticActiveFilters
+      return this.NDataTable.mergedActiveFilters
     },
-    syntheticFilterValue () {
+    mergedFilterValue () {
       return this.activeFilters[this.column.key]
     },
     active () {
-      if (Array.isArray(this.syntheticFilterValue)) {
-        return !!this.syntheticFilterValue.length
+      if (Array.isArray(this.mergedFilterValue)) {
+        return !!this.mergedFilterValue.length
       }
-      return !!this.syntheticFilterValue
+      return !!this.mergedFilterValue
     },
     filterMultiple () {
       return this.column.filterMultiple !== false
+    },
+    mergedRenderFilter () {
+      return this.NDataTable.renderFilter || this.$naive?.unstableConfig?.DataTable?.renderFilter
     }
   },
   methods: {
-    handleFilterChange (syntheticFilterValue) {
+    handleFilterChange (mergedFilterValue) {
       const nextActiveFilters = createActiveFilters(
         this.activeFilters,
         this.column.key,
-        syntheticFilterValue
+        mergedFilterValue
       )
       this.NDataTable.changeFilters(nextActiveFilters, this.column)
     },

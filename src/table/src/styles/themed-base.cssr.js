@@ -2,19 +2,13 @@ import { c, cE, cM, cTB, insideModal, createKey } from '../../../_utils/cssr'
 
 function sizeStyle (size, props) {
   return cM(`${size}-size`, {
-    raw: `
-      font-size: ${props[createKey('fontSize', size)]};
-    `
+    fontSize: props[createKey('fontSize', size)]
   }, [
     cE('th', {
-      raw: `
-        padding: ${props[createKey('padding', size)]};
-      `
+      padding: props[createKey('thPadding', size)]
     }),
     cE('td', {
-      raw: `
-        padding: ${props[createKey('padding', size)]};
-      `
+      padding: props[createKey('tdPadding', size)]
     })
   ])
 }
@@ -22,23 +16,25 @@ function sizeStyle (size, props) {
 export default c([
   ({ props }) => {
     const {
-      borderColor,
-      bodyColor,
-      bodyColorModal,
-      headerColor,
-      headerTextColor,
-      bodyTextColor,
-      borderRadius,
-      headFontWeight
-    } = props.$local
-    const {
-      cubicBezierEaseInOut
-    } = props.$global
+      $local: {
+        borderColor,
+        bodyColor,
+        bodyColorModal,
+        headerColor,
+        headerTextColor,
+        bodyTextColor,
+        borderRadius,
+        headFontWeight
+      },
+      $global: {
+        cubicBezierEaseInOut
+      }
+    } = props
     return [
       cTB('table', {
         raw: `
           font-variant-numeric: tabular-nums;
-          line-height: 1.75;
+          line-height: 1.5;
           font-size: 14px;
           width: 100%;
           border-radius: ${borderRadius} ${borderRadius} 0 0;

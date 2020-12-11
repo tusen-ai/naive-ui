@@ -1,4 +1,4 @@
-import { c, cTB, cB, cE, cM, cNotM, insideModal } from '../../../_utils/cssr'
+import { c, cTB, cB, cE, cM, cNotM, insideModal, createKey } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
@@ -6,24 +6,27 @@ export default c([
     const { borderRadius } = props.$local
     const {
       borderColor,
-      bodyColorHover,
-      headerColor,
-      headerColorHover,
-      bodyColor,
-      bodyTextColor,
-      headerTextColor,
-      headerFontWeight,
-      headerButtonColorHover,
-      headerButtonIconColor,
-      headerButtonIconColorActive,
-      fixedColumnBoxShadowColor
+      tdColorHover,
+      thColor,
+      thColorHover,
+      tdColor,
+      tdTextColor,
+      thTextColor,
+      thFontWeight,
+      thButtonColorHover,
+      thButtonIconColor,
+      thButtonIconColorActive,
+      fixedColumnBoxShadowColor,
+      filterSize
     } = props.$local
     const fixedColumnStyle = createFixedColumnStyle({ cubicBezierEaseInOut, fixedColumnBoxShadowColor })
     return [
-      createSizeStyle(props),
       cTB('data-table', {
         width: '100%'
       }, [
+        ['small', 'medium', 'large'].map(size => {
+          return createSizeStyle(size, props)
+        }),
         cB('data-table-empty', {
           raw: `
             margin: 16px 0 14px 0;
@@ -54,7 +57,7 @@ export default c([
             border-top-left-radius: ${borderRadius};
             border-top-right-radius: ${borderRadius};
             overflow: hidden;
-            line-height: 1.75;
+            line-height: 1.5;
           `
         }),
         cM('single-column', [
@@ -127,12 +130,12 @@ export default c([
             transition: background-color .3s ${cubicBezierEaseInOut};
             border-collapse: separate;
             border-spacing: 0;
-            background-color: ${bodyColor}
+            background-color: ${tdColor}
           `
         }, [
           cB('data-table-thead', {
             transition: `background-color .3s ${cubicBezierEaseInOut}`,
-            backgroundColor: headerColor
+            backgroundColor: thColor
           }),
           cB('data-table-tr', {
             boxSizing: 'border-box',
@@ -150,26 +153,26 @@ export default c([
               ])
             ]),
             c('&:hover', {
-              backgroundColor: bodyColorHover
+              backgroundColor: tdColorHover
             }, [
               cB('data-table-td', {
-                backgroundColor: bodyColorHover
+                backgroundColor: tdColorHover
               })
             ])
           ]),
           cB('data-table-th', {
             position: 'relative',
             textAlign: 'start',
-            fontWeight: headerFontWeight,
             boxSizing: 'border-box',
-            backgroundColor: headerColor,
+            backgroundColor: thColor,
             borderColor: borderColor,
-            color: headerTextColor,
+            color: thTextColor,
             transition: `
               border-color .3s ${cubicBezierEaseInOut},
               color .3s ${cubicBezierEaseInOut},
               background-color .3s ${cubicBezierEaseInOut};
-            `
+            `,
+            fontWeight: thFontWeight
           }, [
             cM('filterable', {
               paddingRight: '36px'
@@ -194,7 +197,7 @@ export default c([
                 maxWidth: 'calc(100% - 18px)'
               }),
               c('&:hover', {
-                backgroundColor: headerColorHover
+                backgroundColor: thColorHover
               })
             ]),
             fixedColumnStyle
@@ -204,8 +207,8 @@ export default c([
               text-align: start;
               box-sizing: border-box;
               border: none;
-              background-color: ${bodyColor};
-              color: ${bodyTextColor};
+              background-color: ${tdColor};
+              color: ${tdTextColor};
               border-bottom: 1px solid ${borderColor};
               transition:
                 box-shadow .3s ${cubicBezierEaseInOut},
@@ -248,7 +251,7 @@ export default c([
               position: 'relative',
               display: 'inline-flex',
               verticalAlign: '-0.2em',
-              color: headerButtonIconColor,
+              color: thButtonIconColor,
               transition: `
                 transform .3s ${cubicBezierEaseInOut},
                 color .3s ${cubicBezierEaseInOut}
@@ -261,7 +264,7 @@ export default c([
                 transform: 'rotate(-180deg)'
               }),
               cM('asc, desc', {
-                color: headerButtonIconColorActive
+                color: thButtonIconColorActive
               })
             ]),
             cB('data-table-filter-button', {
@@ -286,29 +289,30 @@ export default c([
                   display: flex;
                   justify-content: center;
                   align-items: center;  
-                `,
-                transition: `background-color .3s ${cubicBezierEaseInOut}`
+                  transition: background-color .3s ${cubicBezierEaseInOut};
+                `
               }, [
                 c('&:hover', {
-                  backgroundColor: headerButtonColorHover
+                  backgroundColor: thButtonColorHover
                 }),
                 cB('icon', {
-                  fontSize: '15px',
-                  transition: `color .3s ${cubicBezierEaseInOut}`,
-                  color: headerButtonIconColor
+                  fontSize: filterSize,
+                  fill: thButtonIconColor,
+                  stroke: thButtonIconColor
                 })
               ]),
               cM('popover-visible', [
                 cE('icon-wrapper', {
-                  backgroundColor: headerButtonColorHover
+                  backgroundColor: thButtonColorHover
                 })
               ]),
               cM('active', [
                 cE('icon-wrapper', {
-                  backgroundColor: headerButtonColorHover
+                  backgroundColor: thButtonColorHover
                 }, [
                   cB('icon', {
-                    color: headerButtonIconColorActive
+                    fill: thButtonIconColorActive,
+                    stroke: thButtonIconColorActive
                   })
                 ])
               ])
@@ -347,7 +351,7 @@ export default c([
           ])
         ]),
         cB('divider', {
-          margin: '0 !important'
+          margin: '0!important'
         })
       ]),
       createStyleInsideModal(props)
@@ -357,41 +361,41 @@ export default c([
 
 function createStyleInsideModal (props) {
   const {
-    bodyColorModal,
-    headerColorModal,
+    tdColorModal,
+    thColorModal,
     borderColorModal,
-    headerColorHoverModal,
-    bodyColorHoverModal
+    thColorHoverModal,
+    tdColorHoverModal
   } = props.$local
   return insideModal(cTB('data-table', [
     cB('data-table-table', {
-      backgroundColor: bodyColorModal
+      backgroundColor: tdColorModal
     }, [
       cB('data-table-thead', {
-        backgroundColor: headerColorModal
+        backgroundColor: thColorModal
       }),
       cB('data-table-th', {
         borderColor: borderColorModal,
-        backgroundColor: headerColorModal
+        backgroundColor: thColorModal
       }, [
         cM('sortable', [
           c('&:hover', {
-            backgroundColor: headerColorHoverModal
+            backgroundColor: thColorHoverModal
           })
         ])
       ]),
       cB('data-table-tr', [
         c('&:hover', {
-          backgroundColor: bodyColorHoverModal
+          backgroundColor: tdColorHoverModal
         }, [
           cB('data-table-td', {
-            backgroundColor: bodyColorHoverModal
+            backgroundColor: tdColorHoverModal
           })
         ])
       ]),
       cB('data-table-td', {
         borderColor: borderColorModal,
-        backgroundColor: bodyColorModal
+        backgroundColor: tdColorModal
       })
     ]),
     cNotM('single-line', [
@@ -437,50 +441,8 @@ function createStyleInsideModal (props) {
   ]))
 }
 
-function createSizeStyle (props) {
-  const {
-    fontSizeSmall,
-    fontSizeMedium,
-    fontSizeLarge
-  } = props.$local
-  return cTB('data-table', [
-    cM('small-size', {
-      fontSize: fontSizeSmall
-    }, [
-      cB('data-table-th', {
-        padding: '5px 5px 5px 11px'
-      }),
-      cB('data-table-td', {
-        padding: '5px 5px 5px 11px'
-      })
-    ]),
-    cM('medium-size', {
-      fontSize: fontSizeMedium
-    }, [
-      cB('data-table-th', {
-        padding: '10px 10px 10px 16px'
-      }),
-      cB('data-table-td', {
-        padding: '10px 10px 10px 16px'
-      })
-    ]),
-    cM('large-size', {
-      fontSize: fontSizeLarge
-
-    }, [
-      cB('data-table-th', {
-        padding: '15px 15px 15px 20px'
-      }),
-      cB('data-table-td', {
-        padding: '15px 15px 15px 20px'
-      })
-    ])
-  ])
-}
-
 function createFixedColumnStyle ({
-  cubicBezierEaseInOut,
-  fixedColumnBoxShadowColor
+  cubicBezierEaseInOut
 }) {
   return [
     cM('fixed-left', {
@@ -523,13 +485,33 @@ function createFixedColumnStyle ({
     ]),
     cM('shadow-before', [
       c('&::before', {
-        boxShadow: `inset -12px 0 8px -12px ${fixedColumnBoxShadowColor}`
+        boxShadow: 'inset -12px 0 8px -12px rgba(0, 0, 0, .18)'
       })
     ]),
     cM('shadow-after', [
       c('&::after', {
-        boxShadow: `inset 12px 0 8px -12px ${fixedColumnBoxShadowColor}`
+        boxShadow: 'inset 12px 0 8px -12px rgba(0, 0, 0, .18)'
       })
     ])
   ]
+}
+
+function createSizeStyle (size, props) {
+  const {
+    $local: {
+      [createKey('fontSize', size)]: fontSize,
+      [createKey('thPadding', size)]: thPadding,
+      [createKey('tdPadding', size)]: tdPadding
+    }
+  } = props
+  return cM(`${size}-size`, {
+    fontSize: fontSize
+  }, [
+    cB('data-table-th', {
+      padding: thPadding
+    }),
+    cB('data-table-td', {
+      padding: tdPadding
+    })
+  ])
 }

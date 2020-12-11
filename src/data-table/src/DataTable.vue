@@ -215,6 +215,14 @@ export default {
       },
       default: 'medium'
     },
+    renderFilter: {
+      type: Function,
+      default: undefined
+    },
+    renderSorter: {
+      type: Function,
+      default: undefined
+    },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:page': {
       type: [Function, Array],
@@ -341,7 +349,7 @@ export default {
         .filter(column => column.fixed === 'right')
     },
     filteredData () {
-      const syntheticActiveFilters = this.syntheticActiveFilters
+      const mergedActiveFilters = this.mergedActiveFilters
       const normalizedColumns = this.normalizedColumns
       function createDefaultFilter (columnKey) {
         return (filterOptionValue, row) => ~String(row[columnKey]).indexOf(String(filterOptionValue))
@@ -349,7 +357,7 @@ export default {
       const data = this.data
       return data ? data.filter(row => {
         for (const columnKey of Object.keys(row)) {
-          let activeFilterOptionValues = syntheticActiveFilters[columnKey]
+          let activeFilterOptionValues = mergedActiveFilters[columnKey]
           if (activeFilterOptionValues == null) continue
           if (!activeFilterOptionValues.length) continue
           if (!Array.isArray(activeFilterOptionValues)) activeFilterOptionValues = [activeFilterOptionValues]
@@ -381,7 +389,7 @@ export default {
       if (this.checkedRowKeys !== null) return this.checkedRowKeys
       return this.internalCheckedRowKeys
     },
-    syntheticActiveFilters () {
+    mergedActiveFilters () {
       const columnsWithControlledFilter = this.normalizedColumns.filter(column => {
         return column.filterOptionValues !== undefined || column.filterOptionValue !== undefined
       })
