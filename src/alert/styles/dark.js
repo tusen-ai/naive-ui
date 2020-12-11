@@ -1,9 +1,15 @@
 import create from '../../_styles/utils/create-component-base'
+import { baseDark } from '../../_styles/base'
+import { iconDark } from '../../icon/styles'
 import { changeColor } from 'seemly'
 
 export default create({
   theme: 'dark',
   name: 'Alert',
+  peer: [
+    baseDark,
+    iconDark
+  ],
   getLocalVars (vars) {
     const {
       borderRadius,

@@ -1,9 +1,15 @@
 import create from '../../_styles/utils/create-component-base'
+import { baseLight } from '../../_styles/base'
+import { iconLight } from '../../icon/styles'
 import { composite, changeColor } from 'seemly'
 
 export default create({
   theme: 'light',
   name: 'Alert',
+  peer: [
+    baseLight,
+    iconLight
+  ],
   getLocalVars (vars) {
     const {
       borderRadius,
