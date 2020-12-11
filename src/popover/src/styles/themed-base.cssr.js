@@ -20,7 +20,8 @@ export default c([
       boxShadow,
       borderRadius,
       arrowHeight,
-      arrowOffset
+      arrowOffset,
+      arrowOffsetVertical
     } = $local
     return [
       cTB('popover', {
@@ -40,13 +41,15 @@ export default c([
           cubicBezierEaseOut,
           cubicBezierEaseIn
         ),
-        cNotM('raw, tooltip', {
-          raw: `
-            background-color: ${color};
-            border-radius: ${borderRadius};
-            padding: ${padding};
-          `
-        }),
+        cNotM('raw', [
+          cNotM('tooltip', {
+            raw: `
+              background-color: ${color};
+              border-radius: ${borderRadius};
+              padding: ${padding};
+            `
+          })
+        ]),
         cB('popover-arrow-wrapper', {
           raw: `
             position: absolute;
@@ -59,8 +62,8 @@ export default c([
               transition: background-color .3s ${cubicBezierEaseInOut};
               position: absolute;
               display: block;
-              width: ${pxfy(depx(arrowHeight) * 2)};
-              height: ${pxfy(depx(arrowHeight) * 2)};
+              width: ${pxfy(depx(arrowHeight) * 1.5)};
+              height: ${pxfy(depx(arrowHeight) * 1.5)};
               box-shadow: 0 0 8px 0 rgba(0, 0, 0, .12);
               transform: rotate(45deg);
               background-color: ${color};
@@ -100,7 +103,7 @@ export default c([
       `),
       placementStyle($local, 'left-start', `
         left: -${arrowHeight};
-        top: ${arrowOffset};
+        top: ${arrowOffsetVertical};
       `),
       placementStyle($local, 'left', `
         left: -${arrowHeight};
@@ -109,20 +112,20 @@ export default c([
       `),
       placementStyle($local, 'left-end', `
         left: -${arrowHeight};
-        bottom: ${arrowOffset};
+        bottom: ${arrowOffsetVertical};
       `),
       placementStyle($local, 'right-start', `
         right: -${arrowHeight};
-        top: ${arrowOffset};
+        top: ${arrowOffsetVertical};
       `),
       placementStyle($local, 'right', `
         right: -${arrowHeight};
         transform: translateY(-${arrowHeight}) rotate(45deg);
-        top: ${arrowOffset};
+        top: 50%;
       `),
       placementStyle($local, 'right-end', `
         right: -${arrowHeight};
-        bottom: ${arrowOffset};
+        bottom: ${arrowOffsetVertical};
       `)
     ]
   }

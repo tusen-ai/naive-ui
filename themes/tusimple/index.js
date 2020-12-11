@@ -520,6 +520,18 @@ function tusimpleTheme (naive) {
     actionSpace: '20px',
     contentMargin: '12px 0 40px 0'
   })
+  naive.styles.light.Popover.override({
+    padding: '20px',
+    fontSize: '16px',
+    arrowOffset: '40px',
+    arrowOffsetVertical: '16px',
+    arrowHeight: '8px',
+    spaceArrow: '14px'
+  })
+  naive.styles.light.Tooltip.override({
+    padding: '20px',
+    fontSize: '16px'
+  })
 }
 
 tusimpleTheme.install = tusimpleTheme
