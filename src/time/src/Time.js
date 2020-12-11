@@ -41,13 +41,13 @@ export default {
         locale: this.dateFnsLocale
       }
     },
-    syntheticTime () {
+    mergedTime () {
       if (this.unix) {
         return fromUnixTime(this.time)
       }
       return this.time
     },
-    syntheticTo () {
+    mergedTo () {
       if (this.unix) {
         return fromUnixTime(this.to)
       }
@@ -55,13 +55,13 @@ export default {
     },
     renderedTime () {
       if (this.format) {
-        return format(this.syntheticTime, this.format, this.dateFnsOptions)
+        return format(this.mergedTime, this.format, this.dateFnsOptions)
       } else if (this.type === 'date') {
-        return format(this.syntheticTime, 'yyyy-MM-dd', this.dateFnsOptions)
+        return format(this.mergedTime, 'yyyy-MM-dd', this.dateFnsOptions)
       } else if (this.type === 'datetime') {
-        return format(this.syntheticTime, 'yyyy-MM-dd hh:mm:ss', this.dateFnsOptions)
+        return format(this.mergedTime, 'yyyy-MM-dd hh:mm:ss', this.dateFnsOptions)
       } else {
-        return formatDistance(this.syntheticTime, this.syntheticTo, {
+        return formatDistance(this.mergedTime, this.mergedTo, {
           addSuffix: true,
           locale: this.dateFnsLocale
         })

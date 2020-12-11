@@ -30,7 +30,7 @@
     <div class="n-upload-file-list" :style="fileListStyle">
       <n-fade-in-expand-transition group>
         <n-upload-file
-          v-for="file in syntheticFileList"
+          v-for="file in mergedFileList"
           :key="file.id"
           :file="file"
         />
@@ -275,7 +275,7 @@ export default {
     }
   },
   computed: {
-    syntheticFileList () {
+    mergedFileList () {
       if (this.fileList) {
         return this.fileList
       } else {
@@ -346,9 +346,9 @@ export default {
       const headers = this.headers
       const data = this.data
       const fieldName = this.name
-      const filesToUpload = fileId ? this.syntheticFileList.filter(
+      const filesToUpload = fileId ? this.mergedFileList.filter(
         file => file.id === fileId
-      ) : this.syntheticFileList
+      ) : this.mergedFileList
       filesToUpload.forEach(file => {
         if (file.status === 'pending') {
           const formData = new FormData()
@@ -376,7 +376,7 @@ export default {
         append,
         remove
       } = options
-      const fileListAfterChange = this.syntheticFileList
+      const fileListAfterChange = this.mergedFileList
       const fileIndex = fileListAfterChange.findIndex(file => file.id === fileAfterChange.id)
       if (append || remove || ~fileIndex) {
         if (append) {

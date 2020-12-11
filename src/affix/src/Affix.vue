@@ -75,25 +75,25 @@ export default {
     affixed () {
       return this.stickToBottom || this.stickToTop
     },
-    syntheticOffsetTop () {
+    mergedOffsetTop () {
       return this.offsetTop === undefined ? this.top : this.offsetTop
     },
-    syntheticTop () {
+    mergedTop () {
       return this.top === undefined ? this.offsetTop : this.top
     },
-    syntheticBottom () {
+    mergedBottom () {
       return this.bottom === undefined ? this.offsetBottom : this.bottom
     },
-    syntheticOffsetBottom () {
+    mergedOffsetBottom () {
       return this.offsetBottom === undefined ? this.bottom : this.offsetBottom
     },
     style () {
       const style = {}
-      if (this.stickToTop && this.syntheticOffsetTop !== undefined) {
-        style.top = `${this.syntheticTop}px`
+      if (this.stickToTop && this.mergedOffsetTop !== undefined) {
+        style.top = `${this.mergedTop}px`
       }
-      if (this.stickToBottom && this.syntheticOffsetBottom !== undefined) {
-        style.bottom = `${this.syntheticBottom}px`
+      if (this.stickToBottom && this.mergedOffsetBottom !== undefined) {
+        style.bottom = `${this.mergedBottom}px`
       }
       return style
     }
@@ -150,19 +150,19 @@ export default {
       const pxToTop = affixRect.top - containerRect.top
       const pxToBottom = containerRect.bottom - affixRect.bottom
       const {
-        syntheticOffsetTop,
-        syntheticOffsetBottom
+        mergedOffsetTop,
+        mergedOffsetBottom
       } = this
-      if (syntheticOffsetTop !== undefined && pxToTop <= syntheticOffsetTop) {
+      if (mergedOffsetTop !== undefined && pxToTop <= mergedOffsetTop) {
         this.stickToTop = true
-        this.topAffixedTriggerScrollTop = containerEl.scrollTop - (syntheticOffsetTop - pxToTop)
+        this.topAffixedTriggerScrollTop = containerEl.scrollTop - (mergedOffsetTop - pxToTop)
       } else {
         this.stickToTop = false
         this.topAffixedTriggerScrollTop = null
       }
-      if (syntheticOffsetBottom !== undefined && pxToBottom <= syntheticOffsetBottom) {
+      if (mergedOffsetBottom !== undefined && pxToBottom <= mergedOffsetBottom) {
         this.stickToBottom = true
-        this.bottomAffixedTriggerScrollTop = containerEl.scrollTop + syntheticOffsetBottom - pxToBottom
+        this.bottomAffixedTriggerScrollTop = containerEl.scrollTop + mergedOffsetBottom - pxToBottom
       } else {
         this.stickToBottom = false
         this.bottomAffixedTriggerScrollTop = null

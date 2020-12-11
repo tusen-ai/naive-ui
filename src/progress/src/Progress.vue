@@ -87,7 +87,7 @@
           ref="line"
           class="n-progress-graph-line"
           :class="{
-            [`n-progress-graph-line--indicator-${syntheticIndicatorPlacement}`]: true
+            [`n-progress-graph-line--indicator-${mergedIndicatorPlacement}`]: true
           }"
         >
           <div
@@ -111,7 +111,7 @@
               }"
             >
               <div
-                v-if="syntheticIndicatorPlacement === 'inside'"
+                v-if="mergedIndicatorPlacement === 'inside'"
                 class="n-progress-graph-line-indicator"
               >
                 {{ percentage + unit }}
@@ -119,7 +119,7 @@
             </div>
           </div>
           <div
-            v-if="syntheticIndicatorPlacement === 'inside-label'"
+            v-if="mergedIndicatorPlacement === 'inside-label'"
             ref="indicator"
             class="n-progress-graph-line-indicator"
             :style="indicatorPercentageIsCaculated ? {
@@ -138,7 +138,7 @@
           </div>
         </div>
       </div>
-      <div v-if="showIndicator && syntheticIndicatorPlacement === 'outside'">
+      <div v-if="showIndicator && mergedIndicatorPlacement === 'outside'">
         <div
           v-if="$slots.default"
           class="n-progress-custom-content"
@@ -354,7 +354,7 @@ export default {
   setup () {
     const vm = getCurrentInstance().proxy
     onFontsReady(() => {
-      if (vm.syntheticIndicatorPlacement === 'inside-label') {
+      if (vm.mergedIndicatorPlacement === 'inside-label') {
         nextTick(() => {
           vm.indicatorPercentage = vm.calcIndicatorPercentage()
           nextTick(() => {
@@ -392,11 +392,11 @@ export default {
       if (this.height !== undefined) return formatLength(this.height, { c: 0.5 })
       return null
     },
-    syntheticIndicatorPlacement () {
+    mergedIndicatorPlacement () {
       return this.indicatorPlacement || this.indicatorPosition
     },
     fillStyleMaxWidth () {
-      return Math.max(this.percentage - (this.syntheticIndicatorPlacement === 'inside-label' ? 2 : 0), 0)
+      return Math.max(this.percentage - (this.mergedIndicatorPlacement === 'inside-label' ? 2 : 0), 0)
     },
     strokeDasharray () {
       if (this.type === 'multiple-circle') {
@@ -450,7 +450,7 @@ export default {
   },
   watch: {
     percentage (newPercentage) {
-      if (this.syntheticIndicatorPlacement === 'inside-label') {
+      if (this.mergedIndicatorPlacement === 'inside-label') {
         this.$nextTick().then(() => {
           this.indicatorPercentage = this.calcIndicatorPercentage()
         })

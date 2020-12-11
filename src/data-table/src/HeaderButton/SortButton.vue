@@ -43,7 +43,7 @@ export default {
   },
   computed: {
     activeSorter () {
-      const activeSorter = this.NDataTable.syntheticActiveSorter
+      const activeSorter = this.NDataTable.mergedActiveSorter
       return activeSorter
     },
     active () {

@@ -153,7 +153,7 @@ export default {
   },
   setup (props) {
     const NCheckboxGroup = inject('NCheckboxGroup', null)
-    const syntheticCheckedRef = computed(() => {
+    const mergedCheckedRef = computed(() => {
       if (NCheckboxGroup) {
         const groupValueSet = NCheckboxGroup.valueSet
         if (groupValueSet) {
@@ -175,7 +175,7 @@ export default {
         uncontrolledCheckedRef
       ),
       mergedDisabled: mergedDisabledRef,
-      renderSafeChecked: useMemo(() => syntheticCheckedRef.value)
+      renderSafeChecked: useMemo(() => mergedCheckedRef.value)
     }
   },
   methods: {

@@ -145,7 +145,7 @@ export default {
       Promise.resolve(
         NUpload.onRemove({
           file: Object.assign({}, file),
-          fileList: NUpload.syntheticFileList
+          fileList: NUpload.mergedFileList
         })
       ).then(
         result => {

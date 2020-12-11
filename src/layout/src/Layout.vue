@@ -7,7 +7,7 @@
       [`n-${mergedTheme}-theme`]: mergedTheme,
       [`n-layout--${siderCollapseMode}-collapse-mode`]: siderCollapseMode
     }"
-    :style="syntheticLayoutStyle"
+    :style="mergedLayoutStyle"
   >
     <n-scrollbar
       v-if="!nativeScrollbar"
@@ -86,7 +86,7 @@ export default {
       }
       return null
     },
-    syntheticLayoutStyle () {
+    mergedLayoutStyle () {
       return Object.assign({
         marginLeft: this.styleMarginLeft,
         transition: this.transitionDisabled ? 'none' : null

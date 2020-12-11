@@ -17,7 +17,7 @@
       @scroll="handleScroll"
     >
       <n-log-line
-        v-for="(line, index) in syntheticLines"
+        v-for="(line, index) in mergedLines"
         :key="index"
         :line="line"
       />
@@ -137,7 +137,7 @@ export default {
       const lineHeight = Math.floor(this.fontSize * this.lineHeight)
       return `calc(${this.rows * lineHeight}px)`
     },
-    syntheticLines () {
+    mergedLines () {
       if (!this.log) return []
       return this.log.split('\n')
     }

@@ -157,7 +157,7 @@ export default {
   },
   computed: {
     pagination () {
-      return this.NDataTable.syntheticPagination
+      return this.NDataTable.mergedPagination
     },
     currentPage () {
       return (this.pagination && this.pagination.page) || null
@@ -197,7 +197,7 @@ export default {
       const filterElement = filterRef && filterRef.$el
       if (filterElement && filterElement.contains(e.target)) return
       if (!column.sorter) return
-      const activeSorter = this.NDataTable.syntheticActiveSorter
+      const activeSorter = this.NDataTable.mergedActiveSorter
       const nextSorter = createNextSorter(column.key, activeSorter, column.sorter)
       this.NDataTable.changeSorter(nextSorter)
     }

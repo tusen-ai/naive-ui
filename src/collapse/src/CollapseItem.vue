@@ -28,7 +28,7 @@
       </slot>
     </div>
     <n-collapse-item-content
-      :display-directive="syntheticDisplayDirective"
+      :display-directive="mergedDisplayDirective"
       :show="!collapsed"
     >
       <slot />
@@ -75,7 +75,7 @@ export default {
     useInjectionCollection('NCollapse', 'collectedItemNames', toRef(props, 'name'))
   },
   computed: {
-    syntheticDisplayDirective () {
+    mergedDisplayDirective () {
       const { displayDirective, NCollapse } = this
       if (displayDirective) {
         return displayDirective

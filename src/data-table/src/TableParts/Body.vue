@@ -138,13 +138,13 @@ export default {
       return this.NDataTable.rowKey
     },
     currentPage () {
-      const pagination = this.NDataTable.syntheticPagination
+      const pagination = this.NDataTable.mergedPagination
       if (!pagination) return -1
       if (!pagination.page) return -1
       return pagination.page
     },
     checkedRowKeys () {
-      return this.NDataTable.syntheticCheckedRowKeys
+      return this.NDataTable.mergedCheckedRowKeys
     }
   },
   methods: {

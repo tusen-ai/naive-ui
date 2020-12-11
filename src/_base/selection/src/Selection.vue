@@ -44,7 +44,7 @@
           :arrow="showArrow"
           :disabled="disabled"
           :active="active"
-          :clearable="syntheticClearable && selected"
+          :clearable="mergedClearable && selected"
           @clear="handleClear"
         />
       </div>
@@ -100,7 +100,7 @@
           :theme="theme"
           :disabled="disabled"
           :active="active"
-          :clearable="syntheticClearable && selected"
+          :clearable="mergedClearable && selected"
           :loading="loading"
           @clear="handleClear"
         />
@@ -145,7 +145,7 @@
           :arrow="showArrow"
           :disabled="disabled"
           :active="active"
-          :clearable="syntheticClearable && selected"
+          :clearable="mergedClearable && selected"
           @clear="handleClear"
         />
       </div>
@@ -176,7 +176,7 @@
           :arrow="showArrow"
           :disabled="disabled"
           :active="active"
-          :clearable="syntheticClearable && selected"
+          :clearable="mergedClearable && selected"
           :loading="loading"
           @clear="handleClear"
         />
@@ -304,11 +304,11 @@ export default {
     }
   },
   computed: {
-    syntheticClearable () {
+    mergedClearable () {
       return this.clearable && !this.disabled
     },
     showArrow () {
-      if (!this.syntheticClearable) return true
+      if (!this.mergedClearable) return true
       else return !(this.hover && this.selected)
     },
     filterablePlaceholder () {

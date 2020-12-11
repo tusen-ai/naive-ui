@@ -45,16 +45,16 @@
       >
         <n-pagination
           :theme="mergedTheme"
-          :page="syntheticPagination.page"
-          :page-count="syntheticPagination.pageCount"
-          :page-size="syntheticPagination.pageSize"
+          :page="mergedPagination.page"
+          :page-count="mergedPagination.pageCount"
+          :page-size="mergedPagination.pageSize"
           :page-slot="pagination.pageSlot"
           :page-sizes="pagination.pageSizes"
           :show-size-picker="pagination.showSizePicker"
           :show-quick-jumper="!!pagination.showQuickJumper"
           :disabled="!!pagination.disabled"
-          :on-change="syntheticOnPageChange"
-          :on-page-size-change="syntheticOnPageSizeChange"
+          :on-change="mergedOnPageChange"
+          :on-page-size-change="mergedOnPageSizeChange"
         />
       </div>
     </n-spin>
@@ -385,7 +385,7 @@ export default {
         return true
       }) : []
     },
-    syntheticCheckedRowKeys () {
+    mergedCheckedRowKeys () {
       if (this.checkedRowKeys !== null) return this.checkedRowKeys
       return this.internalCheckedRowKeys
     },
@@ -403,7 +403,7 @@ export default {
       )
       return activeFilters
     },
-    syntheticActiveSorter () {
+    mergedActiveSorter () {
       /**
        * If one of the columns's sort order is false or 'ascend' or 'descend',
        * the table's controll functionality should work in controlled manner.
@@ -424,27 +424,27 @@ export default {
       if (columnsWithControlledSortOrder.length) return null
       return this.internalActiveSorter
     },
-    syntheticPageSize () {
+    mergedPageSize () {
       return this.pagination.pageSize || this.internalPageSize
     },
-    syntheticCurrentPage () {
+    mergedCurrentPage () {
       return this.pagination.page || this.internalCurrentPage
     },
-    syntheticPagination () {
+    mergedPagination () {
       if (!this.pagination) return null
       return {
         ...this.pagination,
         /**
-         * writing synthetic props after pagination to avoid
+         * writing merged props after pagination to avoid
          * pagination[key] === undefined
          * key still exists but value is undefined
          */
-        page: this.syntheticCurrentPage,
-        pageSize: this.syntheticPageSize,
-        pageCount: this.syntheticPageCount
+        page: this.mergedCurrentPage,
+        pageSize: this.mergedPageSize,
+        pageCount: this.mergedPageCount
       }
     },
-    syntheticOnPageChange () {
+    mergedOnPageChange () {
       return page => {
         this.pagination.onChange && this.pagination.onChange(page)
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
@@ -452,7 +452,7 @@ export default {
         this.doUpdatePage(page)
       }
     },
-    syntheticOnPageSizeChange () {
+    mergedOnPageSizeChange () {
       return pageSize => {
         this.pagination.onPageSizeChange && this.pagination.onPageSizeChange(pageSize)
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
@@ -460,18 +460,18 @@ export default {
         this.doUpdatePageSize(pageSize)
       }
     },
-    syntheticPageCount () {
+    mergedPageCount () {
       if (this.pagination.pageCount) return this.pagination.pageCount
       if (this.filteredData.length === 0) return 1
       const { pageSize } = this.pagination
       return Math.ceil(this.filteredData.length / pageSize)
     },
     sortedData () {
-      const activeSorter = this.syntheticActiveSorter
+      const activeSorter = this.mergedActiveSorter
       if (activeSorter) {
         /**
-         * When async, syntheticActiveSorter.sorter should be true
-         * If want use default sorter, syntheticActiveSorter.sorter should be 'default'
+         * When async, mergedActiveSorter.sorter should be true
+         * If want use default sorter, mergedActiveSorter.sorter should be 'default'
          */
         if (
           activeSorter.sorter === true ||
@@ -508,12 +508,12 @@ export default {
     paginatedData () {
       if (!this.pagination) return this.sortedData
       if (!this.paging) return this.sortedData
-      const pageSize = this.syntheticPageSize
+      const pageSize = this.mergedPageSize
       const startIndex = (this.internalCurrentPage - 1) * pageSize
       return this.sortedData.slice(startIndex, startIndex + pageSize)
     },
     countOfCurrentPageCheckedRows () {
-      const checkedRowKeys = this.syntheticCheckedRowKeys
+      const checkedRowKeys = this.mergedCheckedRowKeys
       const rowKey = this.rowKey
       return this.paginatedData.reduce((total, row) => {
         const key = createRowKey(row, rowKey)
@@ -528,7 +528,7 @@ export default {
     }
   },
   watch: {
-    syntheticCurrentPage () {
+    mergedCurrentPage () {
       this.scrollMainTableBodyToTop()
     }
   },
@@ -737,7 +737,7 @@ export default {
       this.changeFilters(filters)
     },
     checkAll (column) {
-      const checkedRowKeys = Array.from(this.syntheticCheckedRowKeys)
+      const checkedRowKeys = Array.from(this.mergedCheckedRowKeys)
       const rowKey = this.rowKey
       this.paginatedData.forEach(row => {
         if (column.disabled && column.disabled(row)) {
@@ -748,7 +748,7 @@ export default {
       this.changeCheckedRowKeys(checkedRowKeys)
     },
     clearCheckAll (column) {
-      const checkedRowKeys = Array.from(this.syntheticCheckedRowKeys)
+      const checkedRowKeys = Array.from(this.mergedCheckedRowKeys)
       const rowKey = this.rowKey
       this.paginatedData.forEach(row => {
         if (column.disabled && column.disabled(row)) {
