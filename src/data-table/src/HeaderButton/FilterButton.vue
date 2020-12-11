@@ -1,46 +1,44 @@
 <template>
-  <div
-    class="n-data-table-filter-button"
-    :class="{
-      'n-data-table-filter-button--active': active,
-      'n-data-table-filter-button--popover-visible': showPopover
-    }"
+  <n-popover
+    v-model:show="showPopover"
+    trigger="click"
+    :theme="NDataTable.mergedTheme"
+    :body-style="popoverBodyStyle"
   >
-    <n-popover
-      v-model:show="showPopover"
-      trigger="click"
-      :theme="NDataTable.mergedTheme"
-      :body-style="popoverBodyStyle"
-    >
-      <template #trigger>
-        <render-filter
-          v-if="mergedRenderFilter"
-          :render="mergedRenderFilter"
-          :active="active"
-          :show="popoverVisible"
-          :theme="NDataTable.mergedTheme"
-        />
-        <div
-          v-else
-          class="n-data-table-filter-button__icon-wrapper"
-        >
-          <n-icon>
-            <filter-icon />
-          </n-icon>
-        </div>
-      </template>
-      <n-data-table-filter-menu
-        :radio-group-name="column.key"
-        :multiple="filterMultiple"
-        :value="mergedFilterValue"
-        :options="options"
-        :column="column"
-        @change="handleFilterChange"
-        @cancel="handleFilterMenuCancel"
-        @confirm="handleFilterMenuConfirm"
+    <template #trigger>
+      <render-filter
+        v-if="mergedRenderFilter"
+        :render="mergedRenderFilter"
+        :active="active"
+        :show="showPopover"
+        :theme="NDataTable.mergedTheme"
+        @click.stop
       />
-    </n-popover>
-  </div>
+      <div
+        v-else
+        class="n-data-table-filter"
+        :class="{
+          'n-data-table-filter--active': active,
+          'n-data-table-filter--show': showPopover
+        }"
+        @click.stop
+      >
+        <n-icon>
+          <filter-icon />
+        </n-icon>
+      </div>
+    </template>
+    <n-data-table-filter-menu
+      :radio-group-name="column.key"
+      :multiple="filterMultiple"
+      :value="mergedFilterValue"
+      :options="options"
+      :column="column"
+      @change="handleFilterChange"
+      @cancel="handleFilterMenuCancel"
+      @confirm="handleFilterMenuConfirm"
+    />
+  </n-popover>
 </template>
 
 <script>

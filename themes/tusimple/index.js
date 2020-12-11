@@ -3,6 +3,7 @@
 // Variable Names Will Be Refactored!
 import { composite, changeColor } from 'seemly'
 import { cB, cE, cM, c } from '../../src/_utils/cssr'
+import { renderFilter, renderSorter } from './data-table'
 import typedColor from './color'
 import cssMute from './const'
 
@@ -127,6 +128,13 @@ function tusimpleTheme (naive) {
     },
     DatePicker: {
       timePickerSize: 'medium'
+    },
+    Dialog: {
+      iconPlacement: 'top'
+    },
+    DataTable: {
+      renderFilter,
+      renderSorter
     }
   }
   unconfigurableStyle.mount({
@@ -486,7 +494,23 @@ function tusimpleTheme (naive) {
     railColorActive: '#EBEDF0',
     buttonBoxShadow: '0 2px 3px 0 rgba(0,0,0,0.10)'
   })
-  naive.styles.light.Confirm.override({
+  naive.styles.light.Table.override({
+    thColor: '#EBEDF0',
+    thTextColor: vars.textColorSecondary,
+    thFontWeight: vars.fontWeight
+  })
+  naive.styles.light.DataTable.override({
+    fontSizeMedium: '16px',
+    thPaddingMedium: '12px 0 12px 20px',
+    thColor: '#EBEDF0',
+    thTextColor: vars.textColorSecondary,
+    thFontWeight: vars.fontWeight,
+    tdColorHover: composite(vars.primaryColor, 'rgba(255, 255, 255, .9)'),
+    thButtonColorHover: 'transparent',
+    thColorModal: '#EBEDF0',
+    tdColorHoverModal: composite(vars.primaryColor, 'rgba(255, 255, 255, .9)')
+  })
+  naive.styles.light.Dialog.override({
     padding: '40px',
     iconSize: '36px',
     iconMarginIconTop: '0 0 12px 0',

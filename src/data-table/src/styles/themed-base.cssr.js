@@ -244,7 +244,7 @@ export default c([
             transition: `border-color .3s ${cubicBezierEaseInOut}`
           }),
           cB('data-table-th', [
-            cB('data-table-sort-button', {
+            cB('data-table-sorter', {
               height: '14px',
               width: '14px',
               marginLeft: '4px',
@@ -267,7 +267,7 @@ export default c([
                 color: thButtonIconColorActive
               })
             ]),
-            cB('data-table-filter-button', {
+            cB('data-table-filter', {
               raw: `
                 position: absolute;
                 z-index: auto;
@@ -276,45 +276,29 @@ export default c([
                 top: 0;
                 bottom: 0;
                 cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: background-color .3s ${cubicBezierEaseInOut};
               `
             }, [
-              cE('icon-wrapper', {
-                raw: `
-                  position: absolute;
-                  z-index: auto;
-                  right: 0;
-                  left: 0;
-                  top: 0;
-                  bottom: 0;
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;  
-                  transition: background-color .3s ${cubicBezierEaseInOut};
-                `
+              c('&:hover', {
+                backgroundColor: thButtonColorHover
+              }),
+              cB('icon', {
+                fontSize: filterSize,
+                color: thButtonIconColor,
+                transition: `color .3s ${cubicBezierEaseInOut}`
+              }),
+              cM('show', {
+                backgroundColor: thButtonColorHover
+              }),
+              cM('active', {
+                backgroundColor: thButtonColorHover
               }, [
-                c('&:hover', {
-                  backgroundColor: thButtonColorHover
-                }),
                 cB('icon', {
-                  fontSize: filterSize,
-                  fill: thButtonIconColor,
-                  stroke: thButtonIconColor
+                  color: thButtonIconColorActive
                 })
-              ]),
-              cM('popover-visible', [
-                cE('icon-wrapper', {
-                  backgroundColor: thButtonColorHover
-                })
-              ]),
-              cM('active', [
-                cE('icon-wrapper', {
-                  backgroundColor: thButtonColorHover
-                }, [
-                  cB('icon', {
-                    fill: thButtonIconColorActive,
-                    stroke: thButtonIconColorActive
-                  })
-                ])
               ])
             ])
           ])

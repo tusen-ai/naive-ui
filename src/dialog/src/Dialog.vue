@@ -173,7 +173,7 @@ export default {
   },
   computed: {
     mergedIconPlacement () {
-      return this.$naive?.unstableConfig?.Confirm?.iconPlacement || this.iconPlacement
+      return this.$naive?.unstableConfig?.Dialog?.iconPlacement || this.iconPlacement
     },
     mergedShowIcon () {
       const { showIcon, type, icon, $slots } = this

@@ -8,10 +8,10 @@
   />
   <span
     v-else
-    class="n-data-table-sort-button"
+    class="n-data-table-sorter"
     :class="{
-      'n-data-table-sort-button--asc': active && mergedSortOrder === 'ascend',
-      'n-data-table-sort-button--desc': active && mergedSortOrder === 'descend'
+      'n-data-table-sorter--asc': active && mergedSortOrder === 'ascend',
+      'n-data-table-sorter--desc': active && mergedSortOrder === 'descend'
     }"
   >
     <n-icon>
