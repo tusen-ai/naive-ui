@@ -4,18 +4,24 @@ import { depx, pxfy } from 'seemly'
 export default c([
   ({ props }) => {
     const {
+      $local,
+      $global: {
+        cubicBezierEaseInOut,
+        cubicBezierEaseIn,
+        cubicBezierEaseOut,
+        transformDebounceScale
+      }
+    } = props
+    const {
+      padding,
+      fontSize,
       textColor,
       color,
       boxShadow,
       borderRadius,
-      arrowWidth
-    } = props.$local
-    const {
-      cubicBezierEaseInOut,
-      cubicBezierEaseIn,
-      cubicBezierEaseOut,
-      transformDebounceScale
-    } = props.$global
+      arrowHeight,
+      arrowOffset
+    } = $local
     return [
       cTB('popover', {
         raw: `
@@ -25,9 +31,8 @@ export default c([
           transform-origin: inherit;
           transform: ${transformDebounceScale};
           position: relative;
-          font-size: 13px;
+          font-size: ${fontSize};
           color: ${textColor};
-          
         `
       }, [
         bodyTransition(
@@ -35,11 +40,11 @@ export default c([
           cubicBezierEaseOut,
           cubicBezierEaseIn
         ),
-        cNotM('raw', {
+        cNotM('raw, tooltip', {
           raw: `
             background-color: ${color};
             border-radius: ${borderRadius};
-            padding: 8px 14px;
+            padding: ${padding};
           `
         }),
         cB('popover-arrow-wrapper', {
@@ -54,102 +59,74 @@ export default c([
               transition: background-color .3s ${cubicBezierEaseInOut};
               position: absolute;
               display: block;
-              width: ${pxfy(depx(arrowWidth) * 2)};
-              height: ${pxfy(depx(arrowWidth) * 2)};
+              width: ${pxfy(depx(arrowHeight) * 2)};
+              height: ${pxfy(depx(arrowHeight) * 2)};
               box-shadow: 0 0 8px 0 rgba(0, 0, 0, .12);
               transform: rotate(45deg);
               background-color: ${color};
+              pointer-events: all;
             `
           })
         ]),
         cM('shadow', {
-          raw: `
-            box-shadow: ${boxShadow};
-          `
+          boxShadow: boxShadow
         })
       ]),
-      placementStyle(arrowWidth, 'top-start', `
-        top: -${arrowWidth};
-        left: 10px;
+      placementStyle($local, 'top-start', `
+        top: -${arrowHeight};
+        left: ${arrowOffset};
       `),
-      placementStyle(arrowWidth, 'top', `
-        top: -${arrowWidth};
-        transform: translateX(-${arrowWidth}) rotate(45deg) ;
+      placementStyle($local, 'top', `
+        top: -${arrowHeight};
+        transform: translateX(-${arrowHeight}) rotate(45deg);
         left: 50%;
       `),
-      placementStyle(arrowWidth, 'top-end', `
-        top: -${arrowWidth};
-        right: 10px;
+      placementStyle($local, 'top-end', `
+        top: -${arrowHeight};
+        right: ${arrowOffset};
       `),
-      placementStyle(arrowWidth, 'bottom-start', `
-        bottom: -${arrowWidth};
-        left: 10px;
+      placementStyle($local, 'bottom-start', `
+        bottom: -${arrowHeight};
+        left: ${arrowOffset};
       `),
-      placementStyle(arrowWidth, 'bottom', `
-        bottom: -${arrowWidth};
-        transform: translateX(-${arrowWidth}) rotate(45deg) ;
+      placementStyle($local, 'bottom', `
+        bottom: -${arrowHeight};
+        transform: translateX(-${arrowHeight}) rotate(45deg);
         left: 50%;
       `),
-      placementStyle(arrowWidth, 'bottom-end', `
-        bottom: -${arrowWidth};
-        right: 10px;
+      placementStyle($local, 'bottom-end', `
+        bottom: -${arrowHeight};
+        right: ${arrowOffset};
       `),
-      placementStyle(arrowWidth, 'left-start', `
-        left: -${arrowWidth};
-        top: 10px;
+      placementStyle($local, 'left-start', `
+        left: -${arrowHeight};
+        top: ${arrowOffset};
       `),
-      placementStyle(arrowWidth, 'left', `
-        left: -${arrowWidth};
-        transform: translateY(-${arrowWidth}) rotate(45deg) ;
+      placementStyle($local, 'left', `
+        left: -${arrowHeight};
+        transform: translateY(-${arrowHeight}) rotate(45deg);
         top: 50%;
       `),
-      placementStyle(arrowWidth, 'left-end', `
-        left: -${arrowWidth};
-        bottom: 10px;
+      placementStyle($local, 'left-end', `
+        left: -${arrowHeight};
+        bottom: ${arrowOffset};
       `),
-      placementStyle(arrowWidth, 'right-start', `
-        right: -${arrowWidth};
-        top: 10px;
+      placementStyle($local, 'right-start', `
+        right: -${arrowHeight};
+        top: ${arrowOffset};
       `),
-      placementStyle(arrowWidth, 'right', `
-        right: -${arrowWidth};
-        transform: translateY(-${arrowWidth}) rotate(45deg) ;
-        top: 50%;
+      placementStyle($local, 'right', `
+        right: -${arrowHeight};
+        transform: translateY(-${arrowHeight}) rotate(45deg);
+        top: ${arrowOffset};
       `),
-      placementStyle(arrowWidth, 'right-end', `
-        right: -${arrowWidth};
-        bottom: 10px;
-      `),
-      tooltipStyle(props.$local)
+      placementStyle($local, 'right-end', `
+        right: -${arrowHeight};
+        bottom: ${arrowOffset};
+      `)
     ]
   }
 ])
-
-function tooltipStyle (pallete) {
-  const {
-    borderRadius,
-    boxShadow,
-    tooltipColor,
-    tooltipTextColor
-  } = pallete
-  return cTB('popover', [
-    cM('tooltip', {
-      raw: `
-        padding: 8px 14px;
-        border-radius: ${borderRadius};
-        box-shadow: ${boxShadow};
-        background-color: ${tooltipColor};
-        color: ${tooltipTextColor};
-      `
-    }, [
-      cB('popover-arrow-wrapper', [
-        cB('popover-arrow', {
-          backgroundColor: tooltipColor
-        })
-      ])
-    ])
-  ])
-}
 
 const oppositePlacement = {
   top: 'bottom',
@@ -159,26 +136,29 @@ const oppositePlacement = {
 }
 
 function placementStyle (
-  arrowWidth,
+  $local,
   placement,
   arrowStyleLiteral
 ) {
-  const arrowWrapperSpace = pxfy(depx(arrowWidth) * 2)
+  const {
+    space,
+    spaceArrow
+  } = $local
   const position = placement.split('-')[0]
   const sizeStyle = ['top', 'bottom'].includes(position) ? {
-    height: arrowWrapperSpace
-  } : { width: arrowWrapperSpace }
+    height: spaceArrow
+  } : { width: spaceArrow }
   return c(`[v-placement="${placement}"]`, [
     cB('popover',
       {
         raw: `
-          margin-${oppositePlacement[position]}: 10px;
+          margin-${oppositePlacement[position]}: ${spaceArrow};
         `
       }, [
         cM('no-arrow', {
           raw: `
-            margin-${position}: 6px;
-            margin-${oppositePlacement[position]}: 6px;
+            margin-${position}: ${space};
+            margin-${oppositePlacement[position]}: ${space};
           `
         }),
         cB('popover-arrow-wrapper', {

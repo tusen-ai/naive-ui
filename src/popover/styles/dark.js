@@ -20,9 +20,7 @@ export default create({
       borderRadius,
       color: popoverColor,
       textColor: textColor2Overlay,
-      boxShadow: boxShadow2,
-      tooltipColor: popoverColor,
-      tooltipTextColor: textColor2Overlay
+      boxShadow: boxShadow2
     }
   }
 })

@@ -13,7 +13,6 @@ export default create({
       boxShadow2,
       popoverColor,
       textColor2,
-      baseColor,
       borderRadius
     } = vars
     return {
@@ -21,9 +20,7 @@ export default create({
       borderRadius,
       color: popoverColor,
       textColor: textColor2,
-      boxShadow: boxShadow2,
-      tooltipColor: 'rgba(0, 0, 0, .85)',
-      tooltipTextColor: baseColor
+      boxShadow: boxShadow2
     }
   }
 })
