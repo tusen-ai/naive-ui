@@ -17,12 +17,12 @@ You can set tab-panel's display directive to `if` or `show`. When use show, the 
 import { h, resolveComponent } from 'vue'
 
 const showInput = {
-  data() {
+  data () {
     return {
       value: ''
     }
   },
-  render() {
+  render () {
     return h(resolveComponent('n-input'), {
       placeholder: "My content won't be reset",
       value: this.value,
@@ -34,12 +34,12 @@ const showInput = {
 }
 
 const ifInput = {
-  data() {
+  data () {
     return {
       value: ''
     }
   },
-  render() {
+  render () {
     return h(resolveComponent('n-input'), {
       placeholder: "My content won't be reset",
       value: this.value,
@@ -55,7 +55,7 @@ export default {
     showInput,
     ifInput
   },
-  data() {
+  data () {
     return {
       tab: 'show',
       value2: ''

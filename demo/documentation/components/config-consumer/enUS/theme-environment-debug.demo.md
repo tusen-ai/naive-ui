@@ -20,7 +20,7 @@ Get current theme environment.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       theme: 'dark',
       env: {

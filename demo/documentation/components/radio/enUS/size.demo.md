@@ -35,7 +35,7 @@ Choose whatever you want.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: null,
       disabled2: false,

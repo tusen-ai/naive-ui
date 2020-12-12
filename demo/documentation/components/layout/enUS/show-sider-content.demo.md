@@ -56,7 +56,7 @@ Sometimes you don't want to see content inside sider after it's collapsed.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       collapsed: false
     }

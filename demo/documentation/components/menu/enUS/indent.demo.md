@@ -19,7 +19,7 @@ import {
   WineOutline as WineIcon
 } from '@vicons/ionicons-v5'
 
-function renderIcon(icon) {
+function renderIcon (icon) {
   return () => h(resolveComponent('n-icon'), null, { default: () => h(icon) })
 }
 
@@ -99,7 +99,7 @@ const menuItems = [
 ]
 
 export default {
-  data() {
+  data () {
     return {
       activeKey: null,
       menuItems

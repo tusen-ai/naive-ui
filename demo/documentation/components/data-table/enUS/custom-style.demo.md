@@ -36,7 +36,7 @@ const data = [
 ]
 
 export default {
-  data() {
+  data () {
     return {
       data: data,
       columns: [
@@ -57,7 +57,7 @@ export default {
     }
   },
   methods: {
-    rowClassName(row, index) {
+    rowClassName (row, index) {
       if (row.age > 32) {
         return 'too-old'
       }

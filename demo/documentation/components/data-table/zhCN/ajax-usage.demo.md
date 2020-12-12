@@ -52,7 +52,7 @@ const data = Array.apply(null, { length: 987 }).map((_, index) => {
   }
 })
 
-function query(page, pageSize = 10, order = 'ascend', filterValues = []) {
+function query (page, pageSize = 10, order = 'ascend', filterValues = []) {
   return new Promise((resolve) => {
     const copiedData = data.map((v) => v)
     const orderedData = order === 'descend' ? copiedData.reverse() : copiedData
@@ -73,7 +73,7 @@ function query(page, pageSize = 10, order = 'ascend', filterValues = []) {
 }
 
 export default {
-  data() {
+  data () {
     return {
       data: [],
       columns,
@@ -87,7 +87,7 @@ export default {
       loading: true
     }
   },
-  mounted() {
+  mounted () {
     query(
       this.pagination.page,
       this.pagination.pageSize,
@@ -100,10 +100,10 @@ export default {
     })
   },
   methods: {
-    rowKey(rowData) {
+    rowKey (rowData) {
       return rowData.column1
     },
-    handleSorterChange(sorter) {
+    handleSorterChange (sorter) {
       if (!sorter || sorter.columnKey === 'column1') {
         if (!this.loading) {
           this.loading = true
@@ -113,15 +113,15 @@ export default {
             !sorter ? false : sorter.order,
             this.Column2.filterOptionValues
           ).then((data) => {
-            ;(this.Column1.sortOrder = !sorter ? false : sorter.order),
-              (this.data = data.data)
+            this.Column1.sortOrder = !sorter ? false : sorter.order
+            this.data = data.data
             this.pagination.pageCount = data.pageCount
             this.loading = false
           })
         }
       }
     },
-    handleFiltersChange(filters) {
+    handleFiltersChange (filters) {
       if (!this.loading) {
         this.loading = true
         const filterValues = filters.column2 || []
@@ -138,7 +138,7 @@ export default {
         })
       }
     },
-    handlePageChange(currentPage) {
+    handlePageChange (currentPage) {
       if (!this.loading) {
         this.loading = true
         console.log(currentPage)

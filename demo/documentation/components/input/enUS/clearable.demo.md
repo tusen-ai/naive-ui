@@ -31,7 +31,7 @@ Make input clearable when value is set.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: null
     }

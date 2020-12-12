@@ -33,14 +33,14 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       disabled: true,
       checkedValue: null
     }
   },
   methods: {
-    handleChange(e) {
+    handleChange (e) {
       this.checkedValue = e.target.value
     }
   }

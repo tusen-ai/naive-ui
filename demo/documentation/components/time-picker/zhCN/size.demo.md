@@ -12,7 +12,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       timestamp: null
     }

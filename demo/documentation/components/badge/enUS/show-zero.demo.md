@@ -33,7 +33,7 @@ export default {
     MdAdd,
     MdRemove
   },
-  data() {
+  data () {
     return {
       value: 0
     }

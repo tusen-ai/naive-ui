@@ -20,16 +20,16 @@ An example of preset `dialog`.
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       modalActive: false
     }
   },
   methods: {
-    cancelCallback() {
+    cancelCallback () {
       this.message.success('Cancel')
     },
-    submitCallback() {
+    submitCallback () {
       this.message.success('Submit')
     }
   }

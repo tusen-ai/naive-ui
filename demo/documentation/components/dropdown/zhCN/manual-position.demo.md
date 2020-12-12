@@ -70,14 +70,14 @@ const options = [
 export default {
   inject: ['message'],
   methods: {
-    handleSelect(name) {
+    handleSelect (name) {
       this.showDropdown = false
       this.message.info(name)
     },
-    handleBlur() {
+    handleBlur () {
       this.showDropdown = false
     },
-    handleContextMenu(e) {
+    handleContextMenu (e) {
       e.preventDefault()
       this.showDropdown = false
       this.$nextTick().then(() => {
@@ -87,7 +87,7 @@ export default {
       })
     }
   },
-  data() {
+  data () {
     return {
       options,
       showDropdown: false,

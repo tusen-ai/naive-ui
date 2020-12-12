@@ -15,19 +15,19 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       node: null,
       editable: true
     }
   },
   watch: {
-    node(newValue, oldValue) {
+    node (newValue, oldValue) {
       console.log('watch node', newValue === oldValue, newValue, oldValue)
     }
   },
   methods: {
-    nodeChange(value) {
+    nodeChange (value) {
       console.log('handle node change', value)
     }
   }

@@ -15,7 +15,7 @@ Use `n-config-provider` to set the theme of all its descedant components.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       theme: 'dark'
     }

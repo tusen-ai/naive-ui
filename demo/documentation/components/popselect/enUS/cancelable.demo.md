@@ -10,7 +10,7 @@ Make single value popselect cancelable.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: 'song1',
       options: [

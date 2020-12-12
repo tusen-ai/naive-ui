@@ -17,7 +17,7 @@ Some parts of component are detached to `document.body`. If you want to add a cl
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       ns: 'custom-app-namespace1',
       isActive: false

@@ -22,11 +22,8 @@
 export default {
   inject: ['nofitication'],
   methods: {
-    nofity() {
-      this.nofitication
-        .create
-        // ...
-        ()
+    nofity () {
+      this.nofitication.create(options)
     }
   }
 }

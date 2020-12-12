@@ -10,7 +10,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       time: new Date(0)
     }

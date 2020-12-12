@@ -20,7 +20,7 @@ For example:
 export default {
   inject: ['loadingBar'],
   methods: {
-    loading() {
+    loading () {
       this.loadingBar.start()
     }
   }

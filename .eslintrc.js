@@ -1,5 +1,9 @@
 module.exports = {
-  extends: ['plugin:vue/recommended', '@vue/standard'],
+  extends: [
+    'plugin:vue/recommended',
+    '@vue/standard',
+    'plugin:markdown/recommended'
+  ],
   parserOptions: {
     parser: 'babel-eslint'
   },
@@ -20,6 +24,12 @@ module.exports = {
     'no-void': 0
   },
   overrides: [
+    {
+      files: '**/*.md/*.js',
+      rules: {
+        'no-undef': 0
+      }
+    },
     {
       files: '*.spec.js',
       globals: {

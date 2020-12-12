@@ -10,7 +10,7 @@ Auto close.
 export default {
   inject: ['notification'],
   methods: {
-    handleClick() {
+    handleClick () {
       let count = 10
       const notification = this.notification.create({
         title: 'What is Pingshan Road + rain ?',

@@ -11,7 +11,7 @@ Basic usage for select
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: null,
       options: [

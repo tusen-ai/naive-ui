@@ -23,16 +23,16 @@ You can use `submit` method to submit in uncontrolled manner. Also you can do it
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       fileListLength: 0
     }
   },
   methods: {
-    handleChange({ fileList }) {
+    handleChange ({ fileList }) {
       this.fileListLength = fileList.length
     },
-    handleClick() {
+    handleClick () {
       this.$refs.upload.submit()
     }
   }

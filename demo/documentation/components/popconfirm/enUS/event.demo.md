@@ -19,10 +19,10 @@
 export default {
   inject: ['message'],
   methods: {
-    handlePositiveClick() {
+    handlePositiveClick () {
       this.message.info('positive click')
     },
-    handleNegativeClick() {
+    handleNegativeClick () {
       this.message.info('negative click')
     }
   }

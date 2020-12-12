@@ -24,7 +24,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       show: false
     }

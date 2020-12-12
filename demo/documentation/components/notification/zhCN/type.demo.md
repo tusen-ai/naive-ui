@@ -13,7 +13,7 @@
 export default {
   inject: ['notification'],
   methods: {
-    notify(type) {
+    notify (type) {
       this.notification[type]({
         content: '说点啥呢',
         meta: '想不出来'

@@ -17,7 +17,7 @@
 const columns = [
   {
     type: 'selection',
-    disabled(row, index) {
+    disabled (row, index) {
       return row.name === 'Edward King 3'
     }
   },
@@ -43,7 +43,7 @@ const data = Array.apply(null, { length: 46 }).map((_, index) => ({
 
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       data,
       columns,
@@ -54,10 +54,10 @@ export default {
     }
   },
   methods: {
-    sendMail(rowData) {
+    sendMail (rowData) {
       this.message.info('send mail to ' + rowData.name)
     },
-    handleCheck(rowKeys) {
+    handleCheck (rowKeys) {
       this.checkedRowKeys = rowKeys
     }
   }

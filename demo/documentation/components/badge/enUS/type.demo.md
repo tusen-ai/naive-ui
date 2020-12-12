@@ -24,7 +24,7 @@ Badge has `default`, `error`, `info`, `success`, `warning` types.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: 10
     }

@@ -18,10 +18,10 @@
 export default {
   inject: ['message'],
   methods: {
-    handleNegativeClick() {
+    handleNegativeClick () {
       this.message.warning('取消')
     },
-    handlePositiveClick() {
+    handlePositiveClick () {
       this.message.success('确认')
     }
   }

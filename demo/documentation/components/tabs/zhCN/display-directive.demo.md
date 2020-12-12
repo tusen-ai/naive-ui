@@ -17,12 +17,12 @@
 import { h, resolveComponent } from 'vue'
 
 const showInput = {
-  data() {
+  data () {
     return {
       value: ''
     }
   },
-  render() {
+  render () {
     return h(resolveComponent('n-input'), {
       placeholder: '我的内容不会被重置',
       value: this.value,
@@ -34,12 +34,12 @@ const showInput = {
 }
 
 const ifInput = {
-  data() {
+  data () {
     return {
       value: ''
     }
   },
-  render() {
+  render () {
     return h(resolveComponent('n-input'), {
       placeholder: '我的内容会被重置',
       value: this.value,
@@ -55,7 +55,7 @@ export default {
     showInput,
     ifInput
   },
-  data() {
+  data () {
     return {
       tab: 'show',
       value2: ''

@@ -12,7 +12,7 @@ Select has different size.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: null,
       options: [

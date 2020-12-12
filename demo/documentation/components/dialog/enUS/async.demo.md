@@ -19,7 +19,7 @@ const countDown = (second) => `Count down ${second} second`
 export default {
   inject: ['dialog'],
   methods: {
-    handleClick(e) {
+    handleClick (e) {
       const dialog = this.dialog.success({
         title: 'Async',
         content: 'Click and count down 3 second',

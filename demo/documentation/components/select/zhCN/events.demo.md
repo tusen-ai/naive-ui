@@ -23,7 +23,7 @@
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       selectedValue: 'song1',
       selectedArray: ['song1'],
@@ -80,7 +80,7 @@ export default {
     }
   },
   methods: {
-    handleChange(value) {
+    handleChange (value) {
       this.message.info('value: ' + JSON.stringify(value))
     }
   }

@@ -17,7 +17,7 @@
 ```
 
 ```js
-function createData() {
+function createData () {
   return [
     {
       label: nextLabel(),
@@ -32,7 +32,7 @@ function createData() {
   ]
 }
 
-function nextLabel(currentLabel) {
+function nextLabel (currentLabel) {
   if (!currentLabel) return '道生一'
   if (currentLabel === '道生一') return '一生二'
   if (currentLabel === '一生二') return '二生三'
@@ -41,7 +41,7 @@ function nextLabel(currentLabel) {
 }
 
 export default {
-  data() {
+  data () {
     return {
       data: createData(),
       expandedKeys: [],
@@ -49,13 +49,13 @@ export default {
     }
   },
   methods: {
-    handleExpandedKeysChange(expandedKeys) {
+    handleExpandedKeysChange (expandedKeys) {
       this.expandedKeys = expandedKeys
     },
-    handleCheckedKeysChange(checkedKeys) {
+    handleCheckedKeysChange (checkedKeys) {
       this.checkedKeys = checkedKeys
     },
-    handleLoad(node) {
+    handleLoad (node) {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           node.children = [

@@ -22,7 +22,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       activeNames: [],
       activeNames2: []

@@ -6,7 +6,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: 0,
       validator: (x) => x > 0

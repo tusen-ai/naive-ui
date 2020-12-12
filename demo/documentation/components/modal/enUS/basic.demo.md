@@ -24,7 +24,7 @@ Basic usage of modal. You can put anything in modal, a card for example.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       modalActive: false
     }

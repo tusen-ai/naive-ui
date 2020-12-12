@@ -10,7 +10,7 @@
 export default {
   inject: ['message'],
   methods: {
-    handleClose() {
+    handleClose () {
       this.message.info('卡片关闭')
     }
   }

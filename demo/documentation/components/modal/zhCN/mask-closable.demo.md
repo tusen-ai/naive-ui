@@ -21,17 +21,17 @@
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       showModal: false
     }
   },
   methods: {
-    onNegativeClick() {
+    onNegativeClick () {
       this.message.success('算了')
       this.showModal = false
     },
-    onPositiveClick() {
+    onPositiveClick () {
       this.message.success('确认')
       this.showModal = false
     }

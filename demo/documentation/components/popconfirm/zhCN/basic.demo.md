@@ -16,10 +16,10 @@
 export default {
   inject: ['message'],
   methods: {
-    handlePositiveClick() {
+    handlePositiveClick () {
       this.message.success('是的')
     },
-    handleNegativeClick() {
+    handleNegativeClick () {
       this.message.warning('并不')
     }
   }

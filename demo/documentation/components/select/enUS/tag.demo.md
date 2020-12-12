@@ -17,7 +17,7 @@ Use `tag` & `filterable` to create option dynamically.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       multipleSelectValue: null,
       selectValue: null,

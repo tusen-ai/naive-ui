@@ -23,7 +23,7 @@ Buggy!
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       size: 'medium',
       formValue: {
@@ -44,14 +44,14 @@ export default {
             {
               message: 'not a',
               trigger: 'input',
-              validator(rule, value) {
+              validator (rule, value) {
                 return value === 'x'
               }
             },
             {
               message: 'not b',
               trigger: 'input',
-              validator(rule, value) {
+              validator (rule, value) {
                 return value === 'x'
               }
             }
@@ -66,7 +66,7 @@ export default {
     }
   },
   methods: {
-    handleValidateClick(e) {
+    handleValidateClick (e) {
       this.$refs.form.validate((errors) => {
         if (!errors) {
           this.message.success('Valid')

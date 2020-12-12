@@ -22,7 +22,7 @@ It can be nested.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       activeNames: [],
       activeNames2: []

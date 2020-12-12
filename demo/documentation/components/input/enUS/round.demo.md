@@ -12,7 +12,7 @@ Input can have round corner.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: null
     }

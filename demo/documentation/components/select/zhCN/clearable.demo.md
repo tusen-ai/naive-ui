@@ -29,7 +29,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       selectedValue: null,
       selectedArray: null,

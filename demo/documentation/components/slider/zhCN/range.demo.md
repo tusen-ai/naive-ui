@@ -12,7 +12,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: [50, 70]
     }

@@ -21,7 +21,7 @@
 ```
 
 ```js
-function genChildren(option) {
+function genChildren (option) {
   const children = []
   for (let i = 0; i <= option.depth; ++i) {
     children.push({
@@ -44,7 +44,7 @@ const options = [
 ]
 
 export default {
-  data() {
+  data () {
     return {
       leafOnly: true,
       cascade: true,
@@ -54,7 +54,7 @@ export default {
     }
   },
   methods: {
-    handleLoad(option) {
+    handleLoad (option) {
       return new Promise((resolve) => {
         window.setTimeout(() => {
           option.children = genChildren(option)

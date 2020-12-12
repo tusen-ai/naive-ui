@@ -30,7 +30,7 @@
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       formValue: {
         user: {
@@ -48,7 +48,7 @@ export default {
             validator: (rule, value) => {
               return new Promise((resolve, reject) => {
                 if (value !== 'testName') {
-                  reject('非正确名字') // reject with error message
+                  reject(Error('非正确名字')) // reject with error message
                 } else {
                   resolve()
                 }
@@ -62,7 +62,7 @@ export default {
               return new Promise((resolve, reject) => {
                 setTimeout(() => {
                   if (value <= 16) {
-                    reject('非正确年龄')
+                    reject(Error('非正确年龄'))
                   } else {
                     resolve()
                   }
@@ -82,7 +82,7 @@ export default {
     }
   },
   methods: {
-    handleValidateClick(e) {
+    handleValidateClick (e) {
       e.preventDefault()
       this.$refs.form.validate((errors) => {
         if (!errors) {

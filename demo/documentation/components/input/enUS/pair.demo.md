@@ -17,23 +17,23 @@
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       placeholder: ['From', 'To'],
       value: ['0', '100']
     }
   },
   methods: {
-    handleInputBlur() {
+    handleInputBlur () {
       this.message.info('Pairwise Value：Blur')
     },
-    handleInputFocus() {
+    handleInputFocus () {
       this.message.info('Pairwise Value：Focus')
     },
-    handleInputInput() {
+    handleInputInput () {
       this.message.info('Pairwise Value：Input')
     },
-    handleInputChange() {
+    handleInputChange () {
       this.message.info('Pairwise Value：Change')
     }
   }

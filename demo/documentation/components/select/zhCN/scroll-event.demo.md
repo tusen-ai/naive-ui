@@ -17,7 +17,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: null,
       array: null,
@@ -77,7 +77,7 @@ export default {
     }
   },
   methods: {
-    handleScroll(e) {
+    handleScroll (e) {
       this.scrollContentHeight = e.target.firstElementChild.offsetHeight
       this.scrollContainerScrollTop = e.target.scrollTop
       this.scrollContainerHeight = e.target.offsetHeight

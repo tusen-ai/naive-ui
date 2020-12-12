@@ -47,19 +47,19 @@ export default {
     MdArrowRoundBack,
     MdArrowRoundForward
   },
-  data() {
+  data () {
     return {
       current: 1,
       currentStatus: 'process'
     }
   },
   methods: {
-    next() {
+    next () {
       if (this.current === null) this.current = 1
       else if (this.current >= 4) this.current = null
       else this.current++
     },
-    prev() {
+    prev () {
       if (this.current === 0) this.current = null
       else if (this.current === null) this.current = 4
       else this.current--

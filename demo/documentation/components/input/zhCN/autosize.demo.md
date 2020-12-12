@@ -27,7 +27,7 @@ Textarea 自动调整尺寸。
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: null
     }

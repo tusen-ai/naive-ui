@@ -12,7 +12,7 @@
 export default {
   inject: ['message'],
   methods: {
-    handleClose() {
+    handleClose () {
       this.message.info('tag close')
     }
   }

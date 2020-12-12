@@ -72,14 +72,14 @@ export default {
     MdArrowRoundBack,
     MdArrowRoundForward
   },
-  data() {
+  data () {
     return {
       current: 1,
       currentStatus: 'process'
     }
   },
   computed: {
-    buttonType() {
+    buttonType () {
       switch (this.currentStatus) {
         case 'error':
           return 'error'
@@ -91,7 +91,7 @@ export default {
     }
   },
   methods: {
-    handleButtonClick() {
+    handleButtonClick () {
       this.current = (this.current % 4) + 1
     }
   }

@@ -25,7 +25,7 @@ Sometimes a radio button group looks more elegant.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: null,
       disabled2: false,

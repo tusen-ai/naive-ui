@@ -21,11 +21,11 @@
 export default {
   inject: ['message'],
   methods: {
-    handleClose() {
+    handleClose () {
       this.message.info('tag close')
     }
   },
-  data() {
+  data () {
     return {
       disabled: true
     }

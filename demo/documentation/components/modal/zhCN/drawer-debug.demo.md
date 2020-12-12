@@ -165,7 +165,7 @@
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       drawerActive: false,
       modalActive: false,
@@ -286,7 +286,7 @@ export default {
     }
   },
   methods: {
-    handleValidateButtonClick(e) {
+    handleValidateButtonClick (e) {
       e.preventDefault()
       this.$refs.form.validate((errors) => {
         if (!errors) {

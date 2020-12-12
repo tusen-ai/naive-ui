@@ -7,7 +7,7 @@
 ```js
 export default {
   computed: {
-    options() {
+    options () {
       return [
         ['谷歌', '@gmail.com'],
         ['网易', '@163.com'],
@@ -21,7 +21,7 @@ export default {
       })
     }
   },
-  data() {
+  data () {
     return {
       value: ''
     }

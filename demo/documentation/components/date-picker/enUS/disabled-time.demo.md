@@ -29,7 +29,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       timestamp1: 1576239200000,
       timestamp2: 1576234000000,
@@ -38,12 +38,12 @@ export default {
     }
   },
   methods: {
-    dateDisabled(current) {
+    dateDisabled (current) {
       const month = new Date(current).getMonth()
       const date = new Date(current).getDate()
       return month === 11 && date < 15
     },
-    timeDisabled(current) {
+    timeDisabled (current) {
       const month = new Date(current).getMonth()
       return {
         isHourDisabled: (hour) => {
@@ -74,7 +74,7 @@ export default {
         }
       }
     },
-    isRangeDateDisabled(current, type, range) {
+    isRangeDateDisabled (current, type, range) {
       const currentDate = new Date(current)
       if (type === 'start') {
         if (currentDate.getMonth() === 11) {
@@ -82,12 +82,12 @@ export default {
         }
       } else if (type === 'end') {
         if (range) {
-          const [start, end] = range
+          const [start] = range
           return currentDate < start
         }
       }
     },
-    isRangeTimeDisabled(current, type, range) {
+    isRangeTimeDisabled (current, type, range) {
       const month = new Date(current).getMonth()
       return {
         isHourDisabled: (hour) => {

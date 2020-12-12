@@ -18,8 +18,8 @@ Inject `dialog` to create a dialog.
 export default {
   inject: ['dialog', 'message'],
   methods: {
-    handleConfirm(e) {
-      const confirmInstance = this.dialog.warning({
+    handleConfirm (e) {
+      this.dialog.warning({
         title: 'Confirm',
         content: 'Are you sure?',
         positiveText: 'Sure',
@@ -32,8 +32,8 @@ export default {
         }
       })
     },
-    handleSuccess(e) {
-      const confirmInstance = this.dialog.success({
+    handleSuccess (e) {
+      this.dialog.success({
         title: 'Success',
         content: 'Cool',
         positiveText: 'Wow!',
@@ -42,8 +42,8 @@ export default {
         }
       })
     },
-    handleError(e) {
-      const confirmInstance = this.dialog.error({
+    handleError (e) {
+      this.dialog.error({
         title: 'Error',
         content: 'A mistake.',
         positiveText: 'Ahhh!',

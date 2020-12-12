@@ -158,7 +158,9 @@ export default {
     },
     searchOptions () {
       function getLabel (item) {
-        if (item.title) { return item.title + (item.titleExtra ? ' ' + item.titleExtra : '') }
+        if (item.title) {
+          return item.title + (item.titleExtra ? ' ' + item.titleExtra : '')
+        }
         return item.name
       }
       if (!this.searchInputValue) return []

@@ -42,7 +42,7 @@ export default {
   components: {
     CashIcon
   },
-  data() {
+  data () {
     return {
       active: false,
       value: null

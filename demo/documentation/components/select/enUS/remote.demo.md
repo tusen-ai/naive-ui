@@ -68,7 +68,7 @@ const options = [
 ]
 
 export default {
-  data() {
+  data () {
     return {
       value: null,
       loading: false,

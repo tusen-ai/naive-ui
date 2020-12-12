@@ -15,7 +15,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       ns: 'custom-app-namespace1',
       isActive: false

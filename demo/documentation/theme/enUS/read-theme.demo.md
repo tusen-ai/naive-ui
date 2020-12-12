@@ -21,13 +21,13 @@ Use `n-config-consumer` to get the theme at current position.
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       theme: 'dark'
     }
   },
   methods: {
-    handleThemeChange(theme) {
+    handleThemeChange (theme) {
       this.message.info(theme)
     }
   }

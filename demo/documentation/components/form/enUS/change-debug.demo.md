@@ -22,7 +22,7 @@
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       show: true,
       formValue: {
@@ -42,7 +42,7 @@ export default {
           age: {
             required: true,
             message: 'Please input your age',
-            validator(v) {
+            validator (v) {
               return v === true
             }
           }
@@ -56,11 +56,11 @@ export default {
     }
   },
   methods: {
-    handleShowClick(e) {
+    handleShowClick (e) {
       e.preventDefault()
       this.show = !this.show
     },
-    handleValidateClick(e) {
+    handleValidateClick (e) {
       e.preventDefault()
       this.$refs.form.validate((errors) => {
         if (!errors) {

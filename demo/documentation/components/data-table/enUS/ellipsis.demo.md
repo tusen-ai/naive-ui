@@ -61,7 +61,7 @@ const data = [
 
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       data,
       columns,
@@ -69,7 +69,7 @@ export default {
     }
   },
   methods: {
-    sendMail(rowData) {
+    sendMail (rowData) {
       this.message.info('Send mail to ' + rowData.name)
     }
   }

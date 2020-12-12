@@ -20,7 +20,7 @@
 ```js
 export default {
   computed: {
-    options() {
+    options () {
       return ['@gmail.com', '@163.com', '@qq.com'].map((suffix) => {
         const prefix = this.value.split('@')[0]
         return {
@@ -30,7 +30,7 @@ export default {
       })
     }
   },
-  data() {
+  data () {
     return {
       value: ''
     }

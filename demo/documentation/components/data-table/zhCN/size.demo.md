@@ -39,7 +39,7 @@ const createColumns = (instance) => {
       title: 'Tags',
       key: 'tags',
       width: '20%',
-      render(row) {
+      render (row) {
         const tags = row.tags.map((tagKey) => {
           return h(
             resolveComponent('n-tag'),
@@ -59,7 +59,7 @@ const createColumns = (instance) => {
       title: 'Action',
       key: 'actions',
       width: '20%',
-      render(row) {
+      render (row) {
         return h(
           resolveComponent('n-button'),
           {
@@ -99,19 +99,19 @@ const data = [
 
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       data: data,
       columns: createColumns(this)
     }
   },
   computed: {
-    pagination() {
+    pagination () {
       return { total: this.data.length, pageSize: 10 }
     }
   },
   methods: {
-    sendMail(rowData) {
+    sendMail (rowData) {
       this.message.info('send mail to ' + rowData.name)
     }
   }

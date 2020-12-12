@@ -12,7 +12,7 @@ Naive UI 提供 `useOsTheme` 来获取当前操作系统的主题。
 import { useOsTheme } from 'naive-ui'
 
 export default {
-  setup() {
+  setup () {
     return {
       theme: useOsTheme()
     }

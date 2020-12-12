@@ -15,17 +15,17 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       active: false,
       innerActive: false
     }
   },
   methods: {
-    activate() {
+    activate () {
       this.active = true
     },
-    innerActivate() {
+    innerActivate () {
       this.innerActive = true
     }
   }

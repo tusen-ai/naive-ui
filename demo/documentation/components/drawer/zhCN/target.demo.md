@@ -37,14 +37,14 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       active: false,
       placement: 'right'
     }
   },
   methods: {
-    activate(placement) {
+    activate (placement) {
       this.active = true
       this.placement = placement
     }

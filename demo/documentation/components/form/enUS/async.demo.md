@@ -32,7 +32,7 @@ Support async. Make sure your code in `return new Promise()`.
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       formValue: {
         user: {
@@ -50,7 +50,7 @@ export default {
             validator: (rule, value) => {
               return new Promise((resolve, reject) => {
                 if (value !== 'testName') {
-                  reject('error name') // reject with error message
+                  reject(Error('error name')) // reject with error message
                 } else {
                   resolve()
                 }
@@ -64,7 +64,7 @@ export default {
               return new Promise((resolve, reject) => {
                 setTimeout(() => {
                   if (value <= 16) {
-                    reject('error age')
+                    reject(Error('error age'))
                   } else {
                     resolve()
                   }
@@ -84,7 +84,7 @@ export default {
     }
   },
   methods: {
-    handleValidateClick(e) {
+    handleValidateClick (e) {
       e.preventDefault()
       this.$refs.form.validate((errors) => {
         if (!errors) {

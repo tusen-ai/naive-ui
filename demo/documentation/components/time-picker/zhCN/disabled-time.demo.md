@@ -13,16 +13,16 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       time0: null
     }
   },
   methods: {
-    isHourDisabled(hour) {
+    isHourDisabled (hour) {
       return hour % 2 === 0
     },
-    isMinuteDisabled(minute, selectedHour) {
+    isMinuteDisabled (minute, selectedHour) {
       if (selectedHour === null) return false
       if (Number(selectedHour) < 12) {
         return minute < 30
@@ -30,7 +30,7 @@ export default {
         return false
       }
     },
-    isSecondDisabled(second, selectedMinute, selectedHour) {
+    isSecondDisabled (second, selectedMinute, selectedHour) {
       if (selectedHour === null || selectedMinute === null) return false
       if (Number(selectedHour) > 20 && Number(selectedMinute) < 30) {
         return second < 40

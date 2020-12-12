@@ -19,7 +19,7 @@ import {
   WineOutline as WineIcon
 } from '@vicons/ionicons-v5'
 
-function renderIcon(icon) {
+function renderIcon (icon) {
   return () => h(resolveComponent('n-icon'), null, { default: () => h(icon) })
 }
 
@@ -100,7 +100,7 @@ const menuItems = [
 
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       defaultExpandedKeys: ['dance-dance-dance', 'food'],
       activeKey: null,
@@ -108,7 +108,7 @@ export default {
     }
   },
   methods: {
-    handleUpdateExpandedKeys(value) {
+    handleUpdateExpandedKeys (value) {
       this.message.info('[onUpdate:expandedKeys]: ' + JSON.stringify(value))
     }
   }

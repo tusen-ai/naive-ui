@@ -14,7 +14,7 @@ You can change file's property when upload finishes.
 ```js
 export default {
   methods: {
-    handleFinish({ file }) {
+    handleFinish ({ file }) {
       file.url = 'http://www.mocky.io/v2/5e4bafc63100007100d8b70f'
     }
   }

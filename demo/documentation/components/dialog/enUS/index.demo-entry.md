@@ -20,11 +20,8 @@ For example:
 export default {
   inject: ['dialog'],
   methods: {
-    warning() {
-      this.dialog
-        .warning
-        // ...
-        ()
+    warning () {
+      this.dialog.warning(options)
     }
   }
 }

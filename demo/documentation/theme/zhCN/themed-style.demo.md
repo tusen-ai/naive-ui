@@ -37,7 +37,7 @@ export default {
     MdContacts,
     IosContacts
   },
-  data() {
+  data () {
     return {
       theme: 'dark'
     }

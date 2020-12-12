@@ -24,7 +24,7 @@ const options = [
   },
   {
     label: '黛西·布坎南',
-    icon() {
+    icon () {
       return h(resolveComponent('n-icon'), null, {
         default: () => h(CashIcon)
       })
@@ -71,13 +71,13 @@ const options = [
 
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       options
     }
   },
   methods: {
-    handleSelect(key) {
+    handleSelect (key) {
       this.message.info(key)
     }
   }

@@ -11,7 +11,7 @@
 ```
 
 ```js
-function createData(level = 4, baseKey = '') {
+function createData (level = 4, baseKey = '') {
   if (!level) return undefined
   return Array.apply(null, { length: 6 - level }).map((_, index) => {
     const key = '' + baseKey + level + index
@@ -23,7 +23,7 @@ function createData(level = 4, baseKey = '') {
   })
 }
 
-function createLabel(level) {
+function createLabel (level) {
   if (level === 4) return '道生一'
   if (level === 3) return '一生二'
   if (level === 2) return '二生三'
@@ -31,7 +31,7 @@ function createLabel(level) {
 }
 
 export default {
-  data() {
+  data () {
     return {
       data: createData(),
       defaultExpandedKeys: ['40', '41']

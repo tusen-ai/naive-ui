@@ -22,11 +22,8 @@ For example:
 export default {
   inject: ['nofitication'],
   methods: {
-    notify() {
-      this.nofitication
-        .create
-        // ...
-        ()
+    notify () {
+      this.nofitication.create(options)
     }
   }
 }

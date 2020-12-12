@@ -10,7 +10,7 @@
 export default {
   inject: ['notification'],
   methods: {
-    handleClick() {
+    handleClick () {
       const notification = this.notification
       notification.create({
         title: '你能关掉我吗？',
@@ -18,12 +18,12 @@ export default {
         closable: false,
         onAfterLeave: () => {
           notification.create({
-            title: `哈哈哈哈!`,
+            title: '哈哈哈哈!',
             duration: 2000,
             closable: false,
             onAfterLeave: () => {
               notification.create({
-                title: `你不能`,
+                title: '你不能',
                 duration: 2000,
                 closable: false
               })

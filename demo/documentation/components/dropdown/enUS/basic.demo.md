@@ -13,7 +13,7 @@ Basic usage of dropdown
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       options: [
         {
@@ -36,7 +36,7 @@ export default {
     }
   },
   methods: {
-    handleSelect(key) {
+    handleSelect (key) {
       this.message.info(key)
     }
   }

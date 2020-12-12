@@ -12,13 +12,13 @@
 export default {
   inject: ['loadingBar'],
   methods: {
-    handleStart() {
+    handleStart () {
       this.loadingBar.start()
     },
-    handleFinish() {
+    handleFinish () {
       this.loadingBar.finish()
     },
-    handleError() {
+    handleError () {
       this.loadingBar.error()
     }
   }

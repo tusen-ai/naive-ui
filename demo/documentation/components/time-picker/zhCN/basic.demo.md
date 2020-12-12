@@ -9,7 +9,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       time0: null,
       time1: 1183135260000

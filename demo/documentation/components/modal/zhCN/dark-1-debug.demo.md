@@ -152,7 +152,7 @@
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       modalActive: false,
       size: 'medium',
@@ -272,7 +272,7 @@ export default {
     }
   },
   methods: {
-    handleValidateButtonClick(e) {
+    handleValidateButtonClick (e) {
       e.preventDefault()
       this.$refs.form.validate((errors) => {
         if (!errors) {

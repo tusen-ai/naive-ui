@@ -18,7 +18,7 @@
 export default {
   inject: ['dialog', 'message'],
   methods: {
-    handleConfirm(e) {
+    handleConfirm (e) {
       this.dialog.warning({
         title: '警告',
         content: '你确定？',
@@ -32,7 +32,7 @@ export default {
         }
       })
     },
-    handleSuccess(e) {
+    handleSuccess (e) {
       this.dialog.success({
         title: '成功',
         content: '厉害',
@@ -42,7 +42,7 @@ export default {
         }
       })
     },
-    handleError(e) {
+    handleError (e) {
       this.dialog.error({
         title: '错误',
         content: '错了',

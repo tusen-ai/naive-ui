@@ -31,9 +31,9 @@ If you don't need fallback options, simply set it to `false`. Now only the value
 
 ```js
 export default {
-  data() {
+  data () {
     return {
-      trim(value) {
+      trim (value) {
         return {
           label: value.split(' ')[0],
           value

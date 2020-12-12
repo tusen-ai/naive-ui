@@ -10,7 +10,7 @@ You can make it unclosable.
 export default {
   inject: ['notification'],
   methods: {
-    handleClick() {
+    handleClick () {
       const notification = this.notification
       notification.create({
         title: 'Close Me if You Can',
@@ -23,7 +23,7 @@ export default {
             closable: false,
             onAfterLeave: () => {
               notification.create({
-                title: `No, You Can't`,
+                title: "No, You Can't",
                 duration: 2000,
                 closable: false
               })

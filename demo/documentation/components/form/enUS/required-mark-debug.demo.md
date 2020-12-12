@@ -48,7 +48,7 @@
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       model: {
         age: null,
@@ -59,7 +59,7 @@ export default {
         age: [
           {
             required: true,
-            validator(rule, value) {
+            validator (rule, value) {
               if (!value) {
                 return new Error('Age is required')
               } else if (!/^\d*$/.test(value)) {
@@ -93,7 +93,7 @@ export default {
     }
   },
   methods: {
-    handlePasswordInput() {
+    handlePasswordInput () {
       if (this.model.reenteredPassword) {
         this.$refs.reenteredPassword.validate('password-input', (errors) => {
           if (!errors) {
@@ -105,7 +105,7 @@ export default {
         })
       }
     },
-    handleValidateButtonClick(e) {
+    handleValidateButtonClick (e) {
       e.preventDefault()
       this.$refs.form.validate((errors) => {
         if (!errors) {
@@ -116,14 +116,14 @@ export default {
         }
       })
     },
-    validatePasswordStartWith(rule, value) {
+    validatePasswordStartWith (rule, value) {
       return (
         this.model.password &&
         this.model.password.startsWith(value) &&
         this.model.password.length >= value.length
       )
     },
-    validatePasswordSame(rule, value) {
+    validatePasswordSame (rule, value) {
       return value === this.model.password
     }
   }

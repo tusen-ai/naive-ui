@@ -29,7 +29,7 @@ const createColumns = (instance) => {
   return [
     {
       key: 'name',
-      title(column) {
+      title (column) {
         return renderTooltip(
           h(
             resolveComponent('n-gradient-text'),
@@ -45,7 +45,7 @@ const createColumns = (instance) => {
     },
     {
       key: 'age',
-      title(column) {
+      title (column) {
         return h(
           resolveComponent('n-gradient-text'),
           {
@@ -58,7 +58,7 @@ const createColumns = (instance) => {
     },
     {
       key: 'address',
-      title(column) {
+      title (column) {
         return h(
           resolveComponent('n-gradient-text'),
           {
@@ -94,7 +94,7 @@ const data = [
 ]
 
 export default {
-  data() {
+  data () {
     return {
       data: data,
       columns: createColumns(this),

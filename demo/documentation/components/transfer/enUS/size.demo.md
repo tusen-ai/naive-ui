@@ -18,7 +18,7 @@ They doesn't look harmonious.
 ```
 
 ```js
-function createOptions() {
+function createOptions () {
   return Array.apply(null, { length: 20 }).map((v, i) => ({
     label: 'Option' + i,
     value: i,
@@ -26,12 +26,12 @@ function createOptions() {
   }))
 }
 
-function createValues() {
+function createValues () {
   return Array.apply(null, { length: 5 }).map((v, i) => i)
 }
 
 export default {
-  data() {
+  data () {
     return {
       options: createOptions(),
       value: createValues()

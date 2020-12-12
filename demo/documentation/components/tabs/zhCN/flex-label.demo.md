@@ -41,7 +41,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       name: 'oasis',
       func: 'signin'

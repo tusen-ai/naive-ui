@@ -29,7 +29,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: null
     }

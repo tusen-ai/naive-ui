@@ -23,16 +23,16 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       fileListLength: 0
     }
   },
   methods: {
-    handleChange({ fileList }) {
+    handleChange ({ fileList }) {
       this.fileListLength = fileList.length
     },
-    handleClick() {
+    handleClick () {
       this.$refs.upload.submit()
     }
   }

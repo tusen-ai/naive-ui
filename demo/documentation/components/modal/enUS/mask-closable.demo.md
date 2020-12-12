@@ -21,17 +21,17 @@ Use `mask-closable=false` to make modal not emit the event which may close the m
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       modalActive: false
     }
   },
   methods: {
-    cancelCallback() {
+    cancelCallback () {
       this.message.success('Cancel')
       this.modalActive = false
     },
-    submitCallback() {
+    submitCallback () {
       this.message.success('Submit')
       this.modalActive = false
     }

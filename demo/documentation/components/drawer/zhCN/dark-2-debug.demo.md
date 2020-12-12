@@ -217,7 +217,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       modalActive: false
     }

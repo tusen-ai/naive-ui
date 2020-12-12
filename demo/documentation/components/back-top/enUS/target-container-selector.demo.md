@@ -43,7 +43,7 @@ You can specify target to listen scroll event of.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       target: () => this.$refs.scrollContainer
     }

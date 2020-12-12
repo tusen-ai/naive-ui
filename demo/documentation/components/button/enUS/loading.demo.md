@@ -10,7 +10,7 @@ Button has loading status.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       loading: false
     }

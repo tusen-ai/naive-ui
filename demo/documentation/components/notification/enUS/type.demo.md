@@ -13,9 +13,9 @@
 export default {
   inject: ['notification'],
   methods: {
-    notify(type) {
+    notify (type) {
       this.notification[type]({
-        content: `What to say?`,
+        content: 'What to say?',
         meta: "I don't know"
       })
     }

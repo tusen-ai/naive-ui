@@ -18,7 +18,7 @@ Use `arrow-placement` to set the placement of arrow.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       activeNames: []
     }

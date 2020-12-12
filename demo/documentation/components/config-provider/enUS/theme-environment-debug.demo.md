@@ -18,7 +18,7 @@ Sometimes you may need some component to access some values at specific theme. Y
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       theme: 'dark',
       env: {

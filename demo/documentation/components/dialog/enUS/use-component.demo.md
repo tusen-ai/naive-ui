@@ -18,11 +18,11 @@ Sometimes you may want to use a component.
 export default {
   inject: ['message'],
   methods: {
-    handleNegativeClick() {
+    handleNegativeClick () {
       this.message.warning('Cancel')
       this.isActive = false
     },
-    handlePositiveClick() {
+    handlePositiveClick () {
       this.message.success('Confirm')
       this.isActive = false
     }

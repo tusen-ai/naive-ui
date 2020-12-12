@@ -10,7 +10,7 @@ Is there anybody needs action slot on select menu?
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: null,
       options: [

@@ -69,7 +69,7 @@ const options = [
 ]
 
 export default {
-  data() {
+  data () {
     return {
       selectedValues: null,
       loading: false,

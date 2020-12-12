@@ -31,9 +31,9 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
-      trim(value) {
+      trim (value) {
         return {
           label: value.slice(0, 2),
           value

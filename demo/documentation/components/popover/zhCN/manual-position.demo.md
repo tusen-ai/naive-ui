@@ -13,7 +13,7 @@
 ```js
 export default {
   methods: {
-    handleClick(e) {
+    handleClick (e) {
       if (this.showPopover) {
         this.showPopover = false
       } else {
@@ -23,7 +23,7 @@ export default {
       }
     }
   },
-  data() {
+  data () {
     return {
       showPopover: false,
       x: 0,

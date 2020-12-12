@@ -16,7 +16,7 @@ By default, the preset of `n-dynamic-input` is `input`.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: ['', '', '']
     }

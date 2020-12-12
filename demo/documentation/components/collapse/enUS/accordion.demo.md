@@ -15,7 +15,7 @@ Like an accordion.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       activeNames: []
     }

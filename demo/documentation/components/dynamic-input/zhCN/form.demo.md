@@ -57,11 +57,11 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       dynamicInputRule: {
         trigger: 'input',
-        validator(rule, value) {
+        validator (rule, value) {
           if (value.length >= 5) return new Error('最多输入四个字符')
           return true
         }
@@ -72,7 +72,7 @@ export default {
     }
   },
   methods: {
-    onCreate() {
+    onCreate () {
       return {
         name: '',
         value: '',

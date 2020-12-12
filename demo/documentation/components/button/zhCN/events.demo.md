@@ -10,7 +10,7 @@
 export default {
   inject: ['message'],
   methods: {
-    handleClick() {
+    handleClick () {
       this.message.info('Button Clicked')
     }
   }

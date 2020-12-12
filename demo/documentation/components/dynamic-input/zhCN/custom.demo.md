@@ -25,7 +25,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       customValue: [
         {
@@ -37,7 +37,7 @@ export default {
     }
   },
   methods: {
-    onCreate() {
+    onCreate () {
       return {
         isCheck: false,
         num: 1,

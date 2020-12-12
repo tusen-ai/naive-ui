@@ -18,7 +18,7 @@ Naive UI 提供 `n-element` 组件，参考 [Element](n-element)。
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       theme: 'dark'
     }

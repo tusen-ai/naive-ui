@@ -19,7 +19,7 @@ Slots are also related to preset.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       modalActive: false
     }

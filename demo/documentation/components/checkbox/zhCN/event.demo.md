@@ -17,18 +17,18 @@
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       checked: false,
       cities: null
     }
   },
   methods: {
-    handleCheckedChange(checked) {
+    handleCheckedChange (checked) {
       this.checked = checked
       this.message.info(JSON.stringify(checked))
     },
-    handleUpdateValue(value) {
+    handleUpdateValue (value) {
       this.cities = value
       this.message.info(JSON.stringify(value))
     }

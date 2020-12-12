@@ -28,7 +28,7 @@
 ```js
 export default {
   methods: {
-    scrollTo(href) {
+    scrollTo (href) {
       this.$refs.anchor.scrollTo(href)
     }
   }

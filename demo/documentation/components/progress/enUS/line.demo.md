@@ -97,17 +97,17 @@ In fact, progress of line type don't need four different styles. However, since 
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       percentage: 0
     }
   },
   methods: {
-    add() {
+    add () {
       this.percentage += 10
       if (this.percentage > 100) this.percentage = 0
     },
-    minus() {
+    minus () {
       this.percentage -= 10
       if (this.percentage < 0) this.percentage = 100
     }

@@ -115,7 +115,7 @@ export default {
   components: {
     MdSearch
   },
-  data() {
+  data () {
     return {
       value: null
     }

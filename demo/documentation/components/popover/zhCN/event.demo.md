@@ -28,13 +28,13 @@
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       showPopover: false
     }
   },
   methods: {
-    handleUpdateShow(value) {
+    handleUpdateShow (value) {
       this.message.success(`Update show: ${value}`)
     }
   }

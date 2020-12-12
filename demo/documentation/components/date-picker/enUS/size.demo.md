@@ -12,7 +12,7 @@ Date Picker can be `small`, `medium` or `large` sized.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       timestamp: null
     }

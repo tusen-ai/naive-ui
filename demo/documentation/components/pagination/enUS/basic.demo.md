@@ -6,7 +6,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       page: 2
     }

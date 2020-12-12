@@ -20,7 +20,7 @@ If you don't need wrapper DOM, set `abstract` on it. (Note, in this case it can 
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       theme: 'dark',
       env: {

@@ -10,7 +10,7 @@ Specify the duration of messages.
 export default {
   inject: ['message'],
   methods: {
-    createMessage() {
+    createMessage () {
       this.message.info(
         "I don't know why nobody told you how to unfold your love",
         { duration: 5000 }

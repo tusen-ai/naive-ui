@@ -21,13 +21,13 @@
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       theme: 'dark'
     }
   },
   methods: {
-    handleThemeChange(theme) {
+    handleThemeChange (theme) {
       this.message.info(theme)
     }
   }

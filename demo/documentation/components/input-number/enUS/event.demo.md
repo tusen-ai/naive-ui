@@ -13,17 +13,17 @@ Blur & change events are exposed.
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       value: 0
     }
   },
   methods: {
-    handleChange(v) {
+    handleChange (v) {
       this.message.info(`value: ${v}`)
     },
-    handleBlur(v) {
-      this.message.info(`blur: ` + v)
+    handleBlur (v) {
+      this.message.info('blur: ' + v)
     }
   }
 }

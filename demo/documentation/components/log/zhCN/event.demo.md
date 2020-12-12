@@ -14,7 +14,7 @@ Log 有 `require-more`、`reach-top` 和 `reach-bottom` 事件。需要注意的
 ```
 
 ```js
-function log() {
+function log () {
   const l = []
   for (let i = 0; i < 10; ++i) {
     l.push(Math.random().toString(16))
@@ -24,17 +24,17 @@ function log() {
 
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       loading: false,
       log: log()
     }
   },
   methods: {
-    clear() {
+    clear () {
       this.log = ''
     },
-    handleRequireMore(from) {
+    handleRequireMore (from) {
       this.message.info('Require More from ' + from)
       if (this.loading) return
       this.loading = true
@@ -47,10 +47,10 @@ export default {
         this.loading = false
       }, 1000)
     },
-    handleReachTop() {
+    handleReachTop () {
       this.message.info('Reach Top')
     },
-    handleReachBottom() {
+    handleReachBottom () {
       this.message.info('Reach Bottom')
     }
   }

@@ -12,7 +12,7 @@
 export default {
   inject: ['notification'],
   methods: {
-    handleClick(scrollable) {
+    handleClick (scrollable) {
       Array.apply(null, { length: 5 }).forEach((notification) =>
         this.notification.create({
           title: '很多个通知',

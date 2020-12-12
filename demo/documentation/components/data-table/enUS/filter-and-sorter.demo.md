@@ -40,7 +40,7 @@ const columns = [
         value: 'New York'
       }
     ],
-    filter(value, row) {
+    filter (value, row) {
       return ~row.address.indexOf(value)
     }
   }
@@ -74,7 +74,7 @@ const data = [
 ]
 
 export default {
-  data() {
+  data () {
     return {
       data: data,
       columns,
@@ -82,18 +82,18 @@ export default {
     }
   },
   methods: {
-    filterAddress() {
+    filterAddress () {
       this.$refs.table.filter({
         address: ['London']
       })
     },
-    sortName() {
+    sortName () {
       this.$refs.table.sort('name', 'ascend')
     },
-    clearFilters() {
+    clearFilters () {
       this.$refs.table.filter(null)
     },
-    clearSorter() {
+    clearSorter () {
       this.$refs.table.sort(null)
     }
   }

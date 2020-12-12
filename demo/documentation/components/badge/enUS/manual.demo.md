@@ -32,7 +32,7 @@ export default {
     MdAdd,
     MdRemove
   },
-  data() {
+  data () {
     return {
       value: 5,
       show: true

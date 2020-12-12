@@ -13,7 +13,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       model: {
         tags: ['武汉', '广东']
@@ -21,7 +21,7 @@ export default {
       rules: {
         tags: {
           trigger: ['change'],
-          validator(rule, value) {
+          validator (rule, value) {
             if (value.length >= 5) return new Error('最多允许四个标签')
             return true
           }

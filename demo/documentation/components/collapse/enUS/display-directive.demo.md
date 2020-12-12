@@ -22,7 +22,7 @@ Set `display-directive` to `if` or `show` to determine whether to keep the DOM i
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       activeNames: [],
       activeNames2: []

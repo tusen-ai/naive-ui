@@ -7,7 +7,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       range: [1183135260000, Date.now()]
     }

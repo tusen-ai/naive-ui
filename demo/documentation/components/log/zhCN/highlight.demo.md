@@ -14,7 +14,7 @@
 ```
 
 ```js
-function log() {
+function log () {
   const l = []
   for (let i = 0; i < 40; ++i) {
     l.push(Math.random().toString(16))
@@ -23,17 +23,17 @@ function log() {
 }
 
 export default {
-  data() {
+  data () {
     return {
       loading: false,
       log: log()
     }
   },
   methods: {
-    clear() {
+    clear () {
       this.log = ''
     },
-    handlerequireTop() {
+    handlerequireTop () {
       if (this.loading) return
       this.loading = true
       setTimeout(() => {
@@ -41,7 +41,7 @@ export default {
         this.loading = false
       }, 1000)
     },
-    handlerequireBottom() {
+    handlerequireBottom () {
       if (this.loading) return
       this.loading = true
       setTimeout(() => {

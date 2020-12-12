@@ -15,7 +15,7 @@ Words' sizing would be auto adjusted in avatar.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: 'Oasis'
     }

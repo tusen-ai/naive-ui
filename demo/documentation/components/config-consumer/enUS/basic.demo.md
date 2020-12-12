@@ -20,10 +20,10 @@ Get current theme and namespace.
 export default {
   inject: ['message'],
   methods: {
-    handleThemeChange(value, oldValue) {
+    handleThemeChange (value, oldValue) {
       this.message.info('Theme Change: `' + value + '` theme')
     },
-    handleNamespaceChange(value, oldValue) {
+    handleNamespaceChange (value, oldValue) {
       this.message.info('Namespace Change: `' + value + '` namespace')
     }
   }

@@ -21,7 +21,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       showModal: false,
       bodyStyle: {
@@ -34,7 +34,7 @@ export default {
     }
   },
   methods: {
-    show() {
+    show () {
       this.showModal = true
     }
   }

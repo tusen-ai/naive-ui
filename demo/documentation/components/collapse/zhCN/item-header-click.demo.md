@@ -23,13 +23,13 @@
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       activeNames: []
     }
   },
   methods: {
-    handleItemHeaderClick({ name, expanded }) {
+    handleItemHeaderClick ({ name, expanded }) {
       this.message.info(`Name: ${name}, Expanded: ${expanded}`)
     }
   }

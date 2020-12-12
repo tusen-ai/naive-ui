@@ -7,13 +7,13 @@
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       active: false
     }
   },
   methods: {
-    handleChange(value) {
+    handleChange (value) {
       this.message.info(`Update value: ${value}`)
     }
   }

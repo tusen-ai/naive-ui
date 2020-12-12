@@ -13,14 +13,14 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       showModal: false,
       timeout: 6000
     }
   },
   methods: {
-    handleClick() {
+    handleClick () {
       this.showModal = true
       this.timeout = 6000
       const countdown = () => {

@@ -63,7 +63,7 @@ export default {
   components: {
     MdContacts
   },
-  data() {
+  data () {
     return {
       activeMenuItemName: null,
       collapsed: true

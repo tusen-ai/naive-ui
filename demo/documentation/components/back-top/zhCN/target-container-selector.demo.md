@@ -40,7 +40,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       target: () => this.$refs.scrollContainer
     }

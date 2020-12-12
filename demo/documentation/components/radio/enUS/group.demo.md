@@ -12,7 +12,7 @@ A radio group look elegant.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: null,
       songs: [

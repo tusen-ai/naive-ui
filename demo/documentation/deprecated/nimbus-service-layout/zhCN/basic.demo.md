@@ -28,7 +28,7 @@ export default {
   components: {
     MdMusicalNotes
   },
-  data() {
+  data () {
     return {
       disableMenu: false,
       selected: null,
@@ -38,7 +38,7 @@ export default {
           path: '/en-US/dark/n-config-provider'
         },
         {
-          name: `Morning Glory`,
+          name: 'Morning Glory',
           childItems: [
             {
               name: 'Hello',
@@ -50,10 +50,10 @@ export default {
     }
   },
   methods: {
-    changeOpen(names) {
+    changeOpen (names) {
       console.log('names', names)
     },
-    changeSelect(val) {
+    changeSelect (val) {
       console.log('changeSelect', val)
     }
   }

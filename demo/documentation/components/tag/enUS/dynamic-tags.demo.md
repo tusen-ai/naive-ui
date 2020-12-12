@@ -13,7 +13,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       model: {
         tags: ['teacher', 'programmer']
@@ -21,7 +21,7 @@ export default {
       rules: {
         tags: {
           trigger: ['change'],
-          validator(rule, value) {
+          validator (rule, value) {
             if (value.length >= 5) return new Error('Up to 4 tags')
             return true
           }

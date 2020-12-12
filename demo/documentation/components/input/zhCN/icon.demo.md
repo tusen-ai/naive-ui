@@ -31,7 +31,7 @@ export default {
   components: {
     SearchOutline
   },
-  data() {
+  data () {
     return {
       value: null
     }

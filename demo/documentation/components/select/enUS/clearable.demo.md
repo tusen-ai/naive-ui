@@ -29,7 +29,7 @@ Remember you can only clear the select which has value. (Select it firstly)
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       selectedValue: null,
       selectedArray: null,

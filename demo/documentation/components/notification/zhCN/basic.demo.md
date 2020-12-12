@@ -13,9 +13,9 @@ import { h, resolveComponent } from 'vue'
 export default {
   inject: ['notification', 'message'],
   methods: {
-    handleClick1() {
+    handleClick1 () {
       this.notification.create({
-        title: `Wouldn't it be Nice`,
+        title: "Wouldn't it be Nice",
         description: 'From the Beach Boys',
         content: `Wouldn't it be nice if we were older
 Then we wouldn't have to wait so long
@@ -35,11 +35,11 @@ Hold each other close the whole night through`,
             src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
           }),
         onAfterLeave: () => {
-          this.message.success(`Wouldn't it be Nice`)
+          this.message.success("Wouldn't it be Nice")
         }
       })
     },
-    handleClick2() {
+    handleClick2 () {
       let markAsRead = false
       const notification = this.notification.create({
         title: 'Satisfaction',

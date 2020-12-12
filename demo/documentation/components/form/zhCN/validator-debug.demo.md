@@ -50,7 +50,7 @@
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       formValue: {
         syncBoolean: '',
@@ -65,14 +65,14 @@ export default {
       rules: {
         syncBoolean: {
           trigger: 'input',
-          validator(rule, value) {
+          validator (rule, value) {
             return value === 'test'
           },
           message: 'syncBoolean'
         },
         syncError: {
           trigger: 'input',
-          validator(rule, value) {
+          validator (rule, value) {
             return value === 'test' ? true : Error('syncError')
           }
         },
@@ -89,24 +89,24 @@ export default {
         },
         callbackFalse: {
           trigger: 'input',
-          asyncValidator(rule, value, callback) {
+          asyncValidator (rule, value, done) {
             setTimeout(() => {
-              callback(value === 'test')
+              done(value === 'test')
             }, 1000)
           }
         },
         callbackError: {
           trigger: 'input',
-          asyncValidator(rule, value, callback) {
+          asyncValidator (rule, value, done) {
             setTimeout(() => {
-              if (value !== 'test') callback(Error('callbackError'))
-              else callback(true)
+              if (value !== 'test') done(Error('callbackError'))
+              else done(true)
             }, 1000)
           }
         },
         promiseRejectError: {
           trigger: 'input',
-          validator(rule, value) {
+          validator (rule, value) {
             return new Promise((resolve, reject) => {
               setTimeout(() => {
                 if (value !== 'test') {
@@ -116,16 +116,15 @@ export default {
                 }
               }, 1000)
             })
-            return value === 'test'
           }
         },
         promiseRejectString: {
           trigger: 'input',
-          validator(rule, value) {
+          validator (rule, value) {
             return new Promise((resolve, reject) => {
               setTimeout(() => {
                 if (value !== 'test') {
-                  reject('promiseRejectString')
+                  reject(Error('promiseRejectString'))
                 } else {
                   resolve()
                 }
@@ -141,7 +140,7 @@ export default {
                 reject(Error('Simulate Exeption'))
                 resolve()
               }, 1000)
-            }).catch((error) => {
+            }).catch(() => {
               this.message.info('手动处理异常，不会完成验证')
               return true
             })
@@ -151,7 +150,7 @@ export default {
     }
   },
   methods: {
-    handleValidateClick(e) {
+    handleValidateClick (e) {
       e.preventDefault()
       this.$refs.form
         .validate((errors) => {

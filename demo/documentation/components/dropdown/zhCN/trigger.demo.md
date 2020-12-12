@@ -21,7 +21,7 @@
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       options: [
         {
@@ -45,10 +45,10 @@ export default {
     }
   },
   methods: {
-    handleSelect(name) {
+    handleSelect (name) {
       this.message.info(name)
     },
-    handleClick() {
+    handleClick () {
       this.showDropdown = !this.showDropdown
     }
   }

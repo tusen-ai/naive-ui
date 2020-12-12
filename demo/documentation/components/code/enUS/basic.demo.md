@@ -27,7 +27,7 @@ def say_hello():
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       cppCode: `int main () {
   std::cout << "Hello Naive UI";

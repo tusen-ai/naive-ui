@@ -27,26 +27,26 @@
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       value: null,
       pair: null
     }
   },
   methods: {
-    handleFocus() {
+    handleFocus () {
       this.message.info('[Event focus]')
     },
-    handleBlur() {
+    handleBlur () {
       this.message.info('[Event blur]')
     },
-    handleChange(v) {
+    handleChange (v) {
       this.message.info('[Event change]' + v)
     },
-    handleKeyUp(e) {
+    handleKeyUp (e) {
       this.message.info('[Event keyup]')
     },
-    handleInput(v) {
+    handleInput (v) {
       this.message.info('[Event input] ' + v)
     }
   }

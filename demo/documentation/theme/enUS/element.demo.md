@@ -18,7 +18,7 @@ Naive UI has `n-element` component. See [Element](n-element).
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       theme: 'dark'
     }

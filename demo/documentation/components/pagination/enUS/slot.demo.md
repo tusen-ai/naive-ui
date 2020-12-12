@@ -12,7 +12,7 @@ The pagination has a property `page-slot`, try it and you will understand. It ai
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       page: 2
     }

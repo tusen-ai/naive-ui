@@ -11,7 +11,7 @@ You can set min & max of it.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: null
     }

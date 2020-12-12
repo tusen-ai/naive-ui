@@ -60,11 +60,11 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       dynamicInputRule: {
         trigger: 'input',
-        validator(rule, value) {
+        validator (rule, value) {
           if (value.length >= 5) return new Error('Input up to 4 characters')
           return true
         }
@@ -75,7 +75,7 @@ export default {
     }
   },
   methods: {
-    onCreate() {
+    onCreate () {
       return {
         name: '',
         value: '',

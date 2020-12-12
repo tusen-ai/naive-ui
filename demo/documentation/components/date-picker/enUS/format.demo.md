@@ -19,7 +19,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       timestamp: null,
       timestamp2: 1183135260000,

@@ -33,21 +33,21 @@ const columns = [
   {
     title: 'Row',
     key: 'row',
-    render(row, index) {
+    render (row, index) {
       return h('span', ['row ', index])
     }
   },
   {
     title: 'Row1',
     key: 'row1',
-    render(row, index) {
+    render (row, index) {
       return h('span', ['row ', index])
     }
   },
   {
     title: 'Row2',
     key: 'row2',
-    render(row, index) {
+    render (row, index) {
       return h('span', ['row ', index])
     }
   },
@@ -68,19 +68,19 @@ const data = Array.apply(null, { length: 46 }).map((_, index) => ({
 
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       data,
       columns
     }
   },
   computed: {
-    pagination() {
+    pagination () {
       return { pageSize: 10 }
     }
   },
   methods: {
-    sendMail(rowData) {
+    sendMail (rowData) {
       this.message.info('send mail to ' + rowData.name)
     }
   }

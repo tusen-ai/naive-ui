@@ -29,7 +29,7 @@
 ```
 
 ```js
-function createStatus(value) {
+function createStatus (value) {
   switch (value) {
     case '10: 30':
       return 'success'
@@ -40,7 +40,7 @@ function createStatus(value) {
   }
 }
 
-function createFeedback(value) {
+function createFeedback (value) {
   switch (value) {
     case '10: 30':
       return null
@@ -51,32 +51,32 @@ function createFeedback(value) {
   }
 }
 
-function createTimeForNumber(num) {
+function createTimeForNumber (num) {
   return `${parseInt(num / 100, 10)}: ${num % 100}`
 }
 
 export default {
   computed: {
-    inputValidationStatus() {
+    inputValidationStatus () {
       return createStatus(this.inputValue)
     },
-    inputFeedback() {
+    inputFeedback () {
       return createFeedback(this.inputValue)
     },
-    inputNumberValidationStatus() {
+    inputNumberValidationStatus () {
       return createStatus(createTimeForNumber(this.inputNumberValue))
     },
-    inputNumberFeedback() {
+    inputNumberFeedback () {
       return createFeedback(createTimeForNumber(this.inputNumberValue))
     },
-    selectValidationStatus() {
+    selectValidationStatus () {
       return createStatus(this.selectValue)
     },
-    selectFeedback() {
+    selectFeedback () {
       return createFeedback(this.selectValue)
     }
   },
-  data() {
+  data () {
     return {
       inputValue: '10: 29',
       inputNumberValue: 1029,

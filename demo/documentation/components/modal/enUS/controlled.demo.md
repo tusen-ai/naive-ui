@@ -13,17 +13,17 @@ Modal can be controlled.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       modalActive: false,
       timeout: 6000
     }
   },
   methods: {
-    handleClick() {
+    handleClick () {
       this.modalActive = true
       this.timeout = 6000
-      let countdown = () => {
+      const countdown = () => {
         if (this.timeout <= 0) {
           this.modalActive = false
         } else {

@@ -10,10 +10,10 @@
 export default {
   inject: ['notification'],
   methods: {
-    handleClick() {
+    handleClick () {
       let count = 10
       const notification = this.notification.create({
-        title: `平山道 + 雨 = 什么？`,
+        title: '平山道 + 雨 = 什么？',
         content: `你有 ${count} 秒来回答这个问题`,
         duration: 10000,
         closable: false,
@@ -29,7 +29,7 @@ export default {
         },
         onAfterLeave: () => {
           this.notification.create({
-            title: `答案是平山河`,
+            title: '答案是平山河',
             content: '这其实连个冷笑话都算不上',
             duration: 10000
           })

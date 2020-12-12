@@ -14,15 +14,15 @@ import { h, resolveComponent } from 'vue'
 
 export default {
   inject: ['notification'],
-  data() {
+  data () {
     return {
       n: null
     }
   },
   methods: {
-    open() {
+    open () {
       this.n = this.notification.create({
-        title: `Wouldn't it be Nice`,
+        title: "Wouldn't it be Nice",
         description: 'From the Beach Boys',
         content: `Wouldn't it be nice if we were older
 Then we wouldn't have to wait so long
@@ -46,7 +46,7 @@ Hold each other close the whole night through`,
         }
       })
     },
-    change() {
+    change () {
       if (this.n) {
         this.n.content = () =>
           h('img', {

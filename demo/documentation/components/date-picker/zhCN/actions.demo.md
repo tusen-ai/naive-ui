@@ -15,7 +15,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       ts1: null,
       ts2: 1183135260000,

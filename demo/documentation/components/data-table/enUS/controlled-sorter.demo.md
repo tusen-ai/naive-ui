@@ -27,7 +27,7 @@ const ageColumn = {
   title: 'Age',
   key: 'age',
   sortOrder: false,
-  sorter(rowA, rowB) {
+  sorter (rowA, rowB) {
     return rowA.age - rowB.age
   }
 }
@@ -49,7 +49,7 @@ const columns = [
         value: 'New York'
       }
     ],
-    filter(value, row) {
+    filter (value, row) {
       return row.address.indexOf(value) >= 0
     }
   }
@@ -83,7 +83,7 @@ const data = [
 ]
 
 export default {
-  data() {
+  data () {
     return {
       data: data,
       columns,
@@ -93,14 +93,14 @@ export default {
     }
   },
   methods: {
-    sortName(order) {
+    sortName (order) {
       this.nameColumn.sortOrder = order
     },
-    clearSorter() {
+    clearSorter () {
       this.nameColumn.sortOrder = false
       this.ageColumn.sortOrder = false
     },
-    handleSorterChange(sorter) {
+    handleSorterChange (sorter) {
       this.columns.forEach((column) => {
         /** column.sortOrder !== undefined means it is uncontrolled */
         if (column.sortOrder === undefined) return

@@ -14,23 +14,23 @@
 export default {
   inject: ['message'],
   methods: {
-    info() {
+    info () {
       this.message.info(
         "I don't know why nobody told you how to unfold your love"
       )
     },
-    error() {
+    error () {
       this.message.error('Once upon a time you dressed so fine')
     },
-    warning() {
+    warning () {
       this.message.warning('How many roads must a man walk down')
     },
-    success() {
+    success () {
       this.message.success(
         "'Cause you walked hand in hand With another man in my place"
       )
     },
-    loading() {
+    loading () {
       this.message.loading(
         'If I were you, I will realize that I love you more than any other guy'
       )

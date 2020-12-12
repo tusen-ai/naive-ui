@@ -10,7 +10,7 @@ You may need when use it in modal.
 export default {
   inject: ['message'],
   methods: {
-    handleClose() {
+    handleClose () {
       this.message.info('Card Close')
     }
   }

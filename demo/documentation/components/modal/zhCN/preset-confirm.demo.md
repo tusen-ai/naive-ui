@@ -20,16 +20,16 @@
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       modalActive: false
     }
   },
   methods: {
-    cancelCallback() {
+    cancelCallback () {
       this.message.success('算了')
     },
-    submitCallback() {
+    submitCallback () {
       this.message.success('确认')
     }
   }

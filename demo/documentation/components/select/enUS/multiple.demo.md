@@ -11,7 +11,7 @@ Select multiple value.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: null,
       options: [

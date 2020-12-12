@@ -24,7 +24,7 @@ Modal has some presets, which means you can use props & slots of the preset afte
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       bodyStyle: {
         width: '600px'

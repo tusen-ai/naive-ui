@@ -16,17 +16,17 @@ Progress can be a circle. It can be `default`, `info`, `success`, `warning` or `
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       percentage: 0
     }
   },
   methods: {
-    add() {
+    add () {
       this.percentage += 10
       if (this.percentage > 100) this.percentage = 0
     },
-    minus() {
+    minus () {
       this.percentage -= 10
       if (this.percentage < 0) this.percentage = 100
     }

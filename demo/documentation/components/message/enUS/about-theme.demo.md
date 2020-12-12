@@ -15,13 +15,13 @@ If you don't specified the theme, the theme of created message will be the same 
 export default {
   inject: ['message'],
   methods: {
-    info() {
+    info () {
       this.message.info(
         "I don't know why nobody told you how to unfold your love",
         { duration: 5000 }
       )
     },
-    loading() {
+    loading () {
       this.message.info(
         "I don't know why nobody told you how to unfold your love",
         { duration: 5000, theme: 'dark' }

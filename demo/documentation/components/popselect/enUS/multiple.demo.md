@@ -12,7 +12,7 @@ Select multiple value in popselect.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: null,
       options: [

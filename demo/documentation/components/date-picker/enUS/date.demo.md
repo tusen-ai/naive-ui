@@ -7,7 +7,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       timestamp: 1183135260000
     }

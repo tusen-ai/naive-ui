@@ -42,7 +42,7 @@
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       size: 'medium',
       formValue: {
@@ -74,7 +74,7 @@ export default {
     }
   },
   methods: {
-    handleValidateClick(e) {
+    handleValidateClick (e) {
       this.$refs.form.validate((errors) => {
         if (!errors) {
           this.message.success('Valid')

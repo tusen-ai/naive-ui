@@ -77,7 +77,7 @@ export default {
   components: {
     CashIcon
   },
-  data() {
+  data () {
     return {
       avatar: true,
       header: true,

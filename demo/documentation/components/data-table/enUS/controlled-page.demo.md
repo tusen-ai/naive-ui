@@ -33,7 +33,7 @@ const data = Array.apply(null, { length: 46 }).map((_, index) => ({
 }))
 
 export default {
-  data() {
+  data () {
     return {
       data,
       columns,

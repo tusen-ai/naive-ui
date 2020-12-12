@@ -27,7 +27,7 @@ Make textarea autosizable.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: null
     }

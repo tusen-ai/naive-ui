@@ -10,7 +10,7 @@ After a long time of consideration, I decide to drop slot API. However, there is
 import { resolveComponent, h } from 'vue'
 import { MdMusicalNote as MusicIcon } from '@vicons/ionicons-v4'
 
-function render(option, selected) {
+function render (option, selected) {
   return [
     h(
       resolveComponent('n-icon'),
@@ -29,7 +29,7 @@ function render(option, selected) {
 }
 
 export default {
-  data() {
+  data () {
     return {
       value: null,
       options: [

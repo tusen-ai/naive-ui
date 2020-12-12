@@ -12,7 +12,7 @@
 ```js
 let prefix = null
 
-function genOptions() {
+function genOptions () {
   prefix = Math.random().toString(36).slice(2, 5)
   return Array.apply(null, { length: 200 }).map((v, i) => ({
     label: prefix + 'Option' + i,
@@ -21,23 +21,23 @@ function genOptions() {
   }))
 }
 
-function genValues() {
+function genValues () {
   return Array.apply(null, { length: 100 }).map((v, i) => prefix + i)
 }
 
 export default {
-  data() {
+  data () {
     return {
       options: genOptions(),
       value: genValues()
     }
   },
-  mounted() {},
+  mounted () {},
   methods: {
-    regenOptions() {
+    regenOptions () {
       this.options = genOptions()
     },
-    regenValues() {
+    regenValues () {
       this.value = genValues()
     }
   }

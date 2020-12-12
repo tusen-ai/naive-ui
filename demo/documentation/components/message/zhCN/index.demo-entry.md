@@ -20,7 +20,7 @@
 export default {
   inject: ['message'],
   methods: {
-    warning() {
+    warning () {
       this.message.warning('...')
     }
   }

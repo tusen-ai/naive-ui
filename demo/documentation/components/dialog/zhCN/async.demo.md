@@ -19,7 +19,7 @@ const countDown = (second) => `倒计时 ${second} 秒`
 export default {
   inject: ['dialog'],
   methods: {
-    handleClick(e) {
+    handleClick (e) {
       const dialog = this.dialog.success({
         title: '异步',
         content: '点击，倒计时 3 秒',

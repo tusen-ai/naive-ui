@@ -59,7 +59,7 @@ A trigger button, for free.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       collapsed: false
     }

@@ -16,7 +16,7 @@ Example is only a joke.
 ```js
 export default {
   inject: ['message'],
-  data() {
+  data () {
     return {
       fileList: [
         {
@@ -44,17 +44,17 @@ export default {
     }
   },
   methods: {
-    handleUploadChange({ fileList }) {
+    handleUploadChange ({ fileList }) {
       this.fileList = fileList
     },
-    handleRemove({ file, fileList }) {
+    handleRemove ({ file, fileList }) {
       if (file.id === 'text-message') {
         this.message.info("Oops... It's now uploaded. Okay, delete it.")
       } else if (file.id === 'notification') {
         this.message.error('No, this is useful for us. Removal not allowed.')
         return false
       } else if (file.id === 'contact') {
-        const message = this.message.loading(
+        this.message.loading(
           "Don' know whether it is useful for us, let me ask the server",
           {
             duration: 4000

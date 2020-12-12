@@ -17,7 +17,7 @@ My colleague said he want use scroll status to async load options.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: null,
       array: null,
@@ -77,7 +77,7 @@ export default {
     }
   },
   methods: {
-    handleScroll(e) {
+    handleScroll (e) {
       this.scrollContentHeight = e.target.firstElementChild.offsetHeight
       this.scrollContainerScrollTop = e.target.scrollTop
       this.scrollContainerHeight = e.target.offsetHeight

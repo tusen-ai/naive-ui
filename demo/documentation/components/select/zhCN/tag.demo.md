@@ -17,7 +17,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       multipleSelectValue: null,
       selectValue: null,

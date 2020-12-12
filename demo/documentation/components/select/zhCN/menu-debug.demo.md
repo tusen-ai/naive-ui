@@ -11,7 +11,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       value: 'song0',
       value1: ['song0', 'song1'],

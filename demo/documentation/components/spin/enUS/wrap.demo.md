@@ -15,7 +15,7 @@ You can wrap a component inside spin.
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       show: false
     }

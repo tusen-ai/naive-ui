@@ -30,7 +30,7 @@ export default {
   components: {
     IosAirplane
   },
-  data() {
+  data () {
     return {
       show: true
     }

@@ -56,7 +56,7 @@
 
 ```js
 export default {
-  data() {
+  data () {
     return {
       collapsed: false
     }
