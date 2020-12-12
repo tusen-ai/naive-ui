@@ -14,10 +14,12 @@
     "clean": "rm -rf site lib es src-mirror node_modules/naive-ui",
     "dev": "npm run clean && npm run gen-version && cross-env NODE_ENV=development vite",
     "dev:ts": "npm run clean && npm run gen-version && cross-env NODE_ENV=development TUSIMPLE=true vite",
-    "lint": "eslint --no-error-on-unmatched-pattern --fix \"src/**/*.{js,vue}\" \"test/**/*.{js,vue}\" \"build/**/*.{js,vue}\" \"demo/**/*.{js,vue}\" && stylelint \"src/_styles/**/*.scss\"",
-    "lint:js": "eslint --no-error-on-unmatched-pattern --fix \"src/**/*.{js,vue}\" \"test/**/*.{js,vue}\" \"build/**/*.{js,vue}\" \"demo/**/*.{js,vue}\"",
-    "lint:style": "stylelint \"src/_styles/**/*.scss\"",
-    "format": "prettier --write --parser vue \"src/**/*.vue\" \"demo/**/*.vue\" && prettier --write \"src/**/*.js\" \"demo/**/*.js\"",
+    "lint": "npm run lint:code && npm run lint:style",
+    "lint:code": "eslint --fix \"{src,build,scripts,demo}/**/*.{js,vue}\"",
+    "lint:style": "stylelint \"demo/**/*.css\"",
+    "format": "npm run format:code && npm run format:md",
+    "format:code": "prettier --write \"(src|demo)/**/*.(vue|js)\"",
+    "format:md": "prettier --write --parser markdown --prose-wrap never \"demo/**/*.md\"",
     "release:package": "npm run build:package && npm publish",
     "test": "cross-env NODE_ENV=test jest",
     "init-cssr": "node scripts/create-cssr-scaffold.js",
@@ -40,13 +42,18 @@
     "README.md"
   ],
   "lint-staged": {
-    "*.js": "eslint --fix",
+    "*.js": [
+      "prettier --write",
+      "eslint --fix"
+    ],
     "*.vue": [
       "prettier --parser=vue --write",
       "eslint --fix"
     ],
     "*.css": "stylelint --fix",
-    "*.{js,css,md}": "prettier --write"
+    "*.md": [
+      "prettier --write --parser markdown --prose-wrap never"
+    ]
   },
   "devDependencies": {
     "@babel/preset-env": "^7.12.7",
