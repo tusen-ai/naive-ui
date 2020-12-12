@@ -1,9 +1,7 @@
 # Use Slot in Step
+
 ```html
-<n-steps
-  :current="current"
-  :status="currentStatus"
->
+<n-steps :current="current" :status="currentStatus">
   <n-step title="I Me Mine">
     <div class="n-step-description">
       <p>Al through the day, I me mine I me mine, I me mine</p>
@@ -11,7 +9,8 @@
         v-if="current === 1"
         :type="buttonType"
         size="small"
-        @click="handleButtonClick">
+        @click="handleButtonClick"
+      >
         Next
       </n-button>
     </div>
@@ -23,7 +22,8 @@
         v-if="current === 2"
         :type="buttonType"
         size="small"
-        @click="handleButtonClick">
+        @click="handleButtonClick"
+      >
         Next
       </n-button>
     </div>
@@ -35,7 +35,8 @@
         v-if="current === 3"
         :type="buttonType"
         size="small"
-        @click="handleButtonClick">
+        @click="handleButtonClick"
+      >
         Next
       </n-button>
     </div>
@@ -47,7 +48,8 @@
         v-if="current === 4"
         :type="buttonType"
         size="small"
-        @click="handleButtonClick">
+        @click="handleButtonClick"
+      >
         Next
       </n-button>
     </div>
@@ -55,40 +57,29 @@
 </n-steps>
 
 <n-radio-group v-model:value="currentStatus" size="medium" name="basic">
-  <n-radio-button value="error">
-    Error
-  </n-radio-button>
-  <n-radio-button value="process">
-    Process
-  </n-radio-button>
-  <n-radio-button value="wait">
-    Wait
-  </n-radio-button>
-  <n-radio-button  value="finish">
-    Finish
-  </n-radio-button>
+  <n-radio-button value="error"> Error </n-radio-button>
+  <n-radio-button value="process"> Process </n-radio-button>
+  <n-radio-button value="wait"> Wait </n-radio-button>
+  <n-radio-button value="finish"> Finish </n-radio-button>
 </n-radio-group>
 ```
 
 ```js
-import {
-  MdArrowRoundBack,
-  MdArrowRoundForward
-} from '@vicons/ionicons-v4'
+import { MdArrowRoundBack, MdArrowRoundForward } from '@vicons/ionicons-v4'
 
 export default {
   components: {
     MdArrowRoundBack,
     MdArrowRoundForward
   },
-  data () {
+  data() {
     return {
       current: 1,
       currentStatus: 'process'
     }
   },
   computed: {
-    buttonType () {
+    buttonType() {
       switch (this.currentStatus) {
         case 'error':
           return 'error'

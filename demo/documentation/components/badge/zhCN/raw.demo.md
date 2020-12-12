@@ -1,8 +1,9 @@
 # 直接使用
+
 ```html
 <n-space :size="24" align="center" item-style="display: flex;">
   <n-badge :value="value" :max="15" />
-  <n-badge :value="value" dot/>
+  <n-badge :value="value" dot />
   <n-button-group>
     <n-button @click="value = Math.min(16, value + 1)">
       <template v-slot:icon>
@@ -17,18 +18,16 @@
   </n-button-group>
 </n-space>
 ```
+
 ```js
-import {
-  MdAdd,
-  MdRemove
-} from '@vicons/ionicons-v4'
+import { MdAdd, MdRemove } from '@vicons/ionicons-v4'
 
 export default {
   components: {
     MdAdd,
     MdRemove
   },
-  data () {
+  data() {
     return {
       value: 5
     }

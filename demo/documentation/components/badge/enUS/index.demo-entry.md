@@ -1,6 +1,9 @@
 # Badge
+
 I bet you have seen it and know how it should be applied.
+
 ## Demos
+
 ```demo
 basic
 type
@@ -11,21 +14,24 @@ manual
 custom-content
 raw
 ```
+
 ## Props
-|Name|Type|Default|Description|
-|-|-|-|-|
-|color|`string`|`undefined`||
-|dot|`boolean`|`false`||
-|max|`number`|`undefined`||
-|processing|`boolean`|`false`||
-|show-zero|`boolean`|`false`||
-|show|`boolean`|`true`||
-|themed-style|`{ [themeName: string]: Object }`|`undefined`||
-|theme|`'light' \| 'dark' \| string`|`undefined`||
-|type|`'default' \| 'success' \| 'error' \| 'warning' \| 'info'`|`'default'`||
-|value|`string \| number`|`undefined`||
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| color | `string` | `undefined` |  |
+| dot | `boolean` | `false` |  |
+| max | `number` | `undefined` |  |
+| processing | `boolean` | `false` |  |
+| show-zero | `boolean` | `false` |  |
+| show | `boolean` | `true` |  |
+| themed-style | `{ [themeName: string]: Object }` | `undefined` |  |
+| theme | `'light' \| 'dark' \| string` | `undefined` |  |
+| type | `'default' \| 'success' \| 'error' \| 'warning' \| 'info'` | `'default'` |  |
+| value | `string \| number` | `undefined` |  |
 
 ## Slots
-|Name|Parameters|Description|
-|-|-|-|
-|default|`()`||
+
+| Name    | Parameters | Description |
+| ------- | ---------- | ----------- |
+| default | `()`       |             |

@@ -1,4 +1,5 @@
 # Password
+
 ```html
 <n-input
   v-model:value="value"
@@ -8,9 +9,10 @@
   :maxlength="8"
 />
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       value: null
     }

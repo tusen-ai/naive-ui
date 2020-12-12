@@ -1,13 +1,12 @@
 # Step
+
 ```html
-<n-input-number
-  v-model:value="value"
-  :step="2"
-/>
+<n-input-number v-model:value="value" :step="2" />
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       value: 0
     }

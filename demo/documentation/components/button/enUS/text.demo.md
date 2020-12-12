@@ -1,10 +1,9 @@
 # Text Button
+
 Somebody also calls it `link` button.
+
 ```html
-<n-button
-  text
-  size="large"
->
+<n-button text size="large">
   <template v-slot:icon>
     <n-icon>
       <train-icon />
@@ -13,6 +12,7 @@ Somebody also calls it `link` button.
   The Engine is Still Spiting Smoke
 </n-button>
 ```
+
 ```js
 import { TrainOutline as TrainIcon } from '@vicons/ionicons-v5'
 

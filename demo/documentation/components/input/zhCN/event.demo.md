@@ -1,4 +1,5 @@
 # 事件
+
 ```html
 <n-space vertical>
   <n-input
@@ -22,10 +23,11 @@
   />
 </n-space>
 ```
+
 ```js
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       value: null,
       pair: null
@@ -33,19 +35,19 @@ export default {
   },
   methods: {
     handleFocus() {
-      this.message.info("[Event focus]")
+      this.message.info('[Event focus]')
     },
     handleBlur() {
-      this.message.info("[Event blur]")
+      this.message.info('[Event blur]')
     },
     handleChange(v) {
-      this.message.info("[Event change]" + v)
+      this.message.info('[Event change]' + v)
     },
     handleKeyUp(e) {
-      this.message.info("[Event keyup]")
+      this.message.info('[Event keyup]')
     },
     handleInput(v) {
-      this.message.info("[Event input] " + v)
+      this.message.info('[Event input] ' + v)
     }
   }
 }

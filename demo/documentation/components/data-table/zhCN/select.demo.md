@@ -1,4 +1,5 @@
 # 选中行
+
 可以通过把第一列的类型设为 `selection` 来让行变成可选的。
 
 ```html
@@ -16,7 +17,7 @@
 const columns = [
   {
     type: 'selection',
-    disabled (row, index) {
+    disabled(row, index) {
       return row.name === 'Edward King 3'
     }
   },
@@ -56,7 +57,7 @@ export default {
     sendMail(rowData) {
       this.message.info('send mail to ' + rowData.name)
     },
-    handleCheck (rowKeys) {
+    handleCheck(rowKeys) {
       this.checkedRowKeys = rowKeys
     }
   }

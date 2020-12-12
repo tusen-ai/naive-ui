@@ -1,9 +1,8 @@
 # Basic
+
 ```html
 <n-timeline>
-  <n-timeline-item 
-    content="Oops"
-  />
+  <n-timeline-item content="Oops" />
   <n-timeline-item
     type="success"
     title="Success"

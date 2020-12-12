@@ -1,41 +1,46 @@
 # Custom Option Render
+
 After a long time of consideration, I decide to drop slot API. However, there is still a way to render options as you like. (The example uses render functions, but you can also use the `style` or `class` prop on an `option`.)
+
 ```html
-<n-select
-  v-model:value="value"
-  :options="options"
-/>
+<n-select v-model:value="value" :options="options" />
 ```
+
 ```js
 import { resolveComponent, h } from 'vue'
-import { MdMusicalNote as MusicIcon }  from '@vicons/ionicons-v4'
+import { MdMusicalNote as MusicIcon } from '@vicons/ionicons-v4'
 
-function render (option, selected) {
+function render(option, selected) {
   return [
-    h(resolveComponent('n-icon'), {
-      style: {
-        verticalAlign: 'middle',
-        marginRight: '4px',
+    h(
+      resolveComponent('n-icon'),
+      {
+        style: {
+          verticalAlign: 'middle',
+          marginRight: '4px'
+        }
+      },
+      {
+        default: () => h(MusicIcon)
       }
-    }, {
-      default: () => h(MusicIcon)
-    }),
+    ),
     option.label
   ]
 }
 
 export default {
-  data () {
+  data() {
     return {
       value: null,
       options: [
         {
           type: 'group',
           name: 'Rubber Soul',
-          render: data => [ data.name, '(Cool!)'],
+          render: (data) => [data.name, '(Cool!)'],
           children: [
             {
-              label: 'Everybody\'s Got Something to Hide Except Me and My Monkey',
+              label:
+                "Everybody's Got Something to Hide Except Me and My Monkey",
               value: 'song0',
               disabled: true
             },
@@ -48,7 +53,7 @@ export default {
               value: 'song2'
             },
             {
-              label: 'You Won\'t See',
+              label: "You Won't See",
               value: 'song3',
               disabled: true
             },
@@ -78,7 +83,7 @@ export default {
               value: 'song9'
             },
             {
-              label: 'I\'m looking through you',
+              label: "I'm looking through you",
               value: 'song10'
             },
             {
@@ -89,7 +94,7 @@ export default {
               label: 'Wait',
               value: 'song12'
             }
-          ].map(v => ({
+          ].map((v) => ({
             ...v,
             render
           }))
@@ -97,7 +102,7 @@ export default {
         {
           type: 'group',
           name: 'Let It Be',
-          render: data => [ data.name, '(Cool!)'],
+          render: (data) => [data.name, '(Cool!)'],
           children: [
             {
               label: 'Two Of Us',
@@ -128,8 +133,8 @@ export default {
               value: 'Maggie Mae'
             },
             {
-              label: 'I\'ve Got A Feeling',
-              value: 'I\'ve Got A Feeling'
+              label: "I've Got A Feeling",
+              value: "I've Got A Feeling"
             },
             {
               label: 'One After 909',
@@ -147,7 +152,7 @@ export default {
               label: 'Get Back',
               value: 'Get Back'
             }
-          ].map(v =>({
+          ].map((v) => ({
             ...v,
             render
           }))

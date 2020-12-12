@@ -1,17 +1,13 @@
 # Delay
+
 ```html
-<n-popover
-  trigger="hover"
-  :delay="500"
-  :duration="500"
->
+<n-popover trigger="hover" :delay="500" :duration="500">
   <template v-slot:trigger>
-    <n-button>
-      Delay 500, Duration 500
-    </n-button>
+    <n-button> Delay 500, Duration 500 </n-button>
   </template>
   <span>
-    Lately did you ever feel the pain In the morning rain As it soaks it to the bone
+    Lately did you ever feel the pain In the morning rain As it soaks it to the
+    bone
   </span>
 </n-popover>
 ```

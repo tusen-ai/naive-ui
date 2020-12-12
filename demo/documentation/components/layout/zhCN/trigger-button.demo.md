@@ -1,11 +1,11 @@
 # 触发按钮
+
 免费附赠一个触发按钮。
+
 ```html
 <n-switch v-model:value="collapsed" />
 <n-layout style="height: 240px;">
-  <n-layout-header style="height: 64px;">
-    酷的页头
-  </n-layout-header>
+  <n-layout-header style="height: 64px;"> 酷的页头 </n-layout-header>
   <n-layout>
     <n-layout-sider
       collapse-mode="width"
@@ -45,10 +45,7 @@
     >
       <n-h1>边栏</n-h1>
     </n-layout-sider>
-    <n-layout 
-      position="absolute"
-      style="padding: 24px;"
-    >
+    <n-layout position="absolute" style="padding: 24px;">
       <n-layout-content>
         <span>内容</span>
       </n-layout-content>
@@ -59,9 +56,10 @@
   </n-layout>
 </n-layout>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       collapsed: false
     }

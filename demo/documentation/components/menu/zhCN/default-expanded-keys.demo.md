@@ -1,5 +1,7 @@
 # 展开子菜单
+
 你可以设定 `default-expanded-keys` 让菜单工作在非受控状态下或者使用 `expanded-keys` 和 `@update:expanded-keys` 以受控的方式控制菜单。
+
 ```html
 <n-menu
   v-model:value="activeKey"
@@ -8,6 +10,7 @@
   @update:expanded-keys="handleUpdateExpandedKeys"
 />
 ```
+
 ```js
 import { h, resolveComponent } from 'vue'
 import {
@@ -97,7 +100,7 @@ const menuItems = [
 
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       defaultExpandedKeys: ['dance-dance-dance', 'food'],
       activeKey: null,
@@ -105,7 +108,7 @@ export default {
     }
   },
   methods: {
-    handleUpdateExpandedKeys (value) {
+    handleUpdateExpandedKeys(value) {
       this.message.info('[onUpdate:expandedKeys]: ' + JSON.stringify(value))
     }
   }

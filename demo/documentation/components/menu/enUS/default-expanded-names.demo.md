@@ -1,5 +1,7 @@
 # Opened Submenu
+
 You can set `default-expanded-keys` to make menu work in an uncontrolled manner or use `expanded-keys` and `@update:expanded-keys` to make it work in a controlled manner.
+
 ```html
 <n-menu
   v-model:value="activeKey"
@@ -8,6 +10,7 @@ You can set `default-expanded-keys` to make menu work in an uncontrolled manner 
   @update:expanded-keys="handleUpdateExpandedKeys"
 />
 ```
+
 ```js
 import { h, resolveComponent } from 'vue'
 import {
@@ -97,7 +100,7 @@ const menuItems = [
 
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       defaultExpandedKeys: ['dance-dance-dance', 'food'],
       activeKey: null,
@@ -105,7 +108,7 @@ export default {
     }
   },
   methods: {
-    handleUpdateExpandedKeys (value) {
+    handleUpdateExpandedKeys(value) {
       this.message.info('[onUpdate:expandedKeys]: ' + JSON.stringify(value))
     }
   }

@@ -1,13 +1,12 @@
 # Fallback Option
+
 In some rare cases, you may fill the value but not the corresponding options. For example in async cases, or simply you passed a bad value. If you want to control the way of the value to be displayed, use `fallback-option` prop to control how to create a option using the value.
 
 If you don't need fallback options, simply set it to `false`. Now only the value appeared in the options will be viewed as a valid value. Invalid values will be cleared in the operations of the component.
+
 ```html
 <n-space vertical>
-  <n-select
-    v-model:value="singleValue"
-    :options="options"
-  />
+  <n-select v-model:value="singleValue" :options="options" />
   <n-select
     v-model:value="multipleValue"
     multiple
@@ -29,11 +28,12 @@ If you don't need fallback options, simply set it to `false`. Now only the value
   />
 </n-space>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
-      trim (value) {
+      trim(value) {
         return {
           label: value.split(' ')[0],
           value
@@ -56,7 +56,7 @@ export default {
           value: 'song2'
         },
         {
-          label: 'You Won\'t See',
+          label: "You Won't See",
           value: 'song3',
           disabled: true
         },
@@ -86,7 +86,7 @@ export default {
           value: 'song9'
         },
         {
-          label: 'I\'m looking through you',
+          label: "I'm looking through you",
           value: 'song10'
         },
         {

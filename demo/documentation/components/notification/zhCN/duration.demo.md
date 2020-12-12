@@ -1,15 +1,16 @@
 # 持续时间
+
 自动关闭。
+
 ```html
-<n-button @click="handleClick">
-  持续时间 10000ms
-</n-button>
+<n-button @click="handleClick"> 持续时间 10000ms </n-button>
 ```
+
 ```js
 export default {
   inject: ['notification'],
   methods: {
-    handleClick () {
+    handleClick() {
       let count = 10
       const notification = this.notification.create({
         title: `平山道 + 雨 = 什么？`,

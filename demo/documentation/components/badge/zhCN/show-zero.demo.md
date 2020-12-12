@@ -1,5 +1,7 @@
 # 显示 0
+
 设定 `show-zero` 来显示 0。
+
 ```html
 <n-space :size="24" align="center">
   <n-badge :value="value">
@@ -22,18 +24,16 @@
   </n-button-group>
 </n-space>
 ```
+
 ```js
-import {
-  MdAdd,
-  MdRemove
-} from '@vicons/ionicons-v4'
+import { MdAdd, MdRemove } from '@vicons/ionicons-v4'
 
 export default {
   components: {
     MdAdd,
     MdRemove
   },
-  data () {
+  data() {
     return {
       value: 0
     }

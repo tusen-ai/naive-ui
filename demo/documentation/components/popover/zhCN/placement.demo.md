@@ -1,4 +1,5 @@
 # 位置
+
 ```html
 <div class="popover-grid">
   <n-popover placement="top-start" trigger="click">
@@ -7,19 +8,13 @@
         Top Start
       </n-button>
     </template>
-    <div class="large-text">
-      啊！
-    </div>
+    <div class="large-text">啊！</div>
   </n-popover>
   <n-popover placement="top" trigger="click">
     <template v-slot:trigger>
-      <n-button size="small" style="grid-area: 1 / 2 / 2 / 3;">
-        Top
-      </n-button>
+      <n-button size="small" style="grid-area: 1 / 2 / 2 / 3;"> Top </n-button>
     </template>
-    <div class="large-text">
-      啊！
-    </div>
+    <div class="large-text">啊！</div>
   </n-popover>
   <n-popover placement="top-end" trigger="click">
     <template v-slot:trigger>
@@ -27,9 +22,7 @@
         Top End
       </n-button>
     </template>
-    <div class="large-text">
-      啊！
-    </div>
+    <div class="large-text">啊！</div>
   </n-popover>
   <n-popover placement="left-start" trigger="click">
     <template v-slot:trigger>
@@ -37,19 +30,13 @@
         Left Start
       </n-button>
     </template>
-    <div class="large-text">
-      啊！
-    </div>
+    <div class="large-text">啊！</div>
   </n-popover>
   <n-popover placement="left" trigger="click">
     <template v-slot:trigger>
-      <n-button size="small" style="grid-area: 3 / 1 / 4 / 2;">
-        Left
-      </n-button>
+      <n-button size="small" style="grid-area: 3 / 1 / 4 / 2;"> Left </n-button>
     </template>
-    <div class="large-text">
-      啊！
-    </div>
+    <div class="large-text">啊！</div>
   </n-popover>
   <n-popover placement="left-end" trigger="click">
     <template v-slot:trigger>
@@ -57,9 +44,7 @@
         Left End
       </n-button>
     </template>
-    <div class="large-text">
-      啊！
-    </div>
+    <div class="large-text">啊！</div>
   </n-popover>
   <n-popover placement="right-start" trigger="click">
     <template v-slot:trigger>
@@ -67,9 +52,7 @@
         Right Start
       </n-button>
     </template>
-    <div class="large-text">
-      啊！
-    </div>
+    <div class="large-text">啊！</div>
   </n-popover>
   <n-popover placement="right" trigger="click">
     <template v-slot:trigger>
@@ -77,9 +60,7 @@
         Right
       </n-button>
     </template>
-    <div class="large-text">
-      啊！
-    </div>
+    <div class="large-text">啊！</div>
   </n-popover>
   <n-popover placement="right-end" trigger="click">
     <template v-slot:trigger>
@@ -87,9 +68,7 @@
         Right End
       </n-button>
     </template>
-    <div class="large-text">
-      啊！
-    </div>
+    <div class="large-text">啊！</div>
   </n-popover>
   <n-popover placement="bottom-start" trigger="click">
     <template v-slot:trigger>
@@ -97,9 +76,7 @@
         Bottom Start
       </n-button>
     </template>
-    <div class="large-text">
-      啊！
-    </div>
+    <div class="large-text">啊！</div>
   </n-popover>
   <n-popover placement="bottom" trigger="click">
     <template v-slot:trigger>
@@ -107,9 +84,7 @@
         Bottom
       </n-button>
     </template>
-    <div class="large-text">
-      啊！
-    </div>
+    <div class="large-text">啊！</div>
   </n-popover>
   <n-popover placement="bottom-end" trigger="click">
     <template v-slot:trigger>
@@ -117,9 +92,7 @@
         Bottom End
       </n-button>
     </template>
-    <div class="large-text">
-      啊！
-    </div>
+    <div class="large-text">啊！</div>
   </n-popover>
 </div>
 ```

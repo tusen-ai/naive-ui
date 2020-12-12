@@ -1,5 +1,7 @@
 # Clearable
+
 Make input clearable when value is set.
+
 ```html
 <n-space vertical>
   <n-input
@@ -21,12 +23,15 @@ Make input clearable when value is set.
     round
     clearable
   />
-  <n-button size="small" @click="value = 'Content is clearable'">Fill Content</n-button>
+  <n-button size="small" @click="value = 'Content is clearable'"
+    >Fill Content</n-button
+  >
 </n-space>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       value: null
     }

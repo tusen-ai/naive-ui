@@ -1,5 +1,7 @@
 # Target to be Listened to
+
 You can specify target to listen scroll event of.
+
 ```html
 <n-back-top
   :listen-to="target"
@@ -19,23 +21,29 @@ You can specify target to listen scroll event of.
     }
   }"
 >
-   <div style="width: 200px; height: 40px; line-height: 40px; text-align: center; font-size: 14px;">
+  <div
+    style="width: 200px; height: 40px; line-height: 40px; text-align: center; font-size: 14px;"
+  >
     Specify Target
   </div>
 </n-back-top>
-<div ref="scrollContainer" style="overflow: auto; height: 72px; line-height: 1.5;">
-  A funny joke is need to be wrote here.<br/>
-  A funny joke is need to be wrote here.<br/>
-  A funny joke is need to be wrote here.<br/>
-  A funny joke is need to be wrote here.<br/>
-  A funny joke is need to be wrote here.<br/>
-  A funny joke is need to be wrote here.<br/>
-  A funny joke is need to be wrote here.<br/>
+<div
+  ref="scrollContainer"
+  style="overflow: auto; height: 72px; line-height: 1.5;"
+>
+  A funny joke is need to be wrote here.<br />
+  A funny joke is need to be wrote here.<br />
+  A funny joke is need to be wrote here.<br />
+  A funny joke is need to be wrote here.<br />
+  A funny joke is need to be wrote here.<br />
+  A funny joke is need to be wrote here.<br />
+  A funny joke is need to be wrote here.<br />
 </div>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       target: () => this.$refs.scrollContainer
     }

@@ -1,5 +1,7 @@
 # Change Event
+
 Why change event is an example? Because at first there isn't much to write.
+
 ```html
 <n-space vertical>
   <n-select
@@ -17,10 +19,11 @@ Why change event is an example? Because at first there isn't much to write.
   />
 </n-space>
 ```
+
 ```js
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       selectedValue: 'song1',
       selectedArray: ['song1'],
@@ -34,7 +37,7 @@ export default {
           value: 'song2'
         },
         {
-          label: 'You Won\'t See',
+          label: "You Won't See",
           value: 'song3'
         },
         {
@@ -62,7 +65,7 @@ export default {
           value: 'song9'
         },
         {
-          label: 'I\'m looking through you',
+          label: "I'm looking through you",
           value: 'song10'
         },
         {
@@ -77,7 +80,7 @@ export default {
     }
   },
   methods: {
-    handleChange (value) {
+    handleChange(value) {
       this.message.info('value: ' + JSON.stringify(value))
     }
   }

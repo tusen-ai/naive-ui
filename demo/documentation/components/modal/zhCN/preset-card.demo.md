@@ -1,11 +1,9 @@
 # 使用 Card 预设
+
 模态框有一些预设，让你在设定之后可以使用对应的 slots 还有 props。
+
 ```html
-<n-button
-  @click="show"
->
-  来吧
-</n-button>
+<n-button @click="show"> 来吧 </n-button>
 <n-modal
   v-model:show="showModal"
   preset="card"
@@ -15,18 +13,15 @@
   :bordered="false"
   :segmented="segmented"
 >
-  <template v-slot:header-extra>
-    噢!
-  </template>
+  <template v-slot:header-extra> 噢! </template>
   内容
-  <template v-slot:footer>
-    尾部
-  </template>
+  <template v-slot:footer> 尾部 </template>
 </n-modal>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       showModal: false,
       bodyStyle: {
@@ -39,7 +34,7 @@ export default {
     }
   },
   methods: {
-    show () {
+    show() {
       this.showModal = true
     }
   }

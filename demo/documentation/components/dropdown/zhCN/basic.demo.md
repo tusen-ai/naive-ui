@@ -1,18 +1,17 @@
 # 基础用法
+
 下拉菜单的基础用法。
+
 ```html
-<n-dropdown
-  trigger="hover"
-  @select="handleSelect"
-  :options="options"
->
+<n-dropdown trigger="hover" @select="handleSelect" :options="options">
   <n-button :keyboard="false">金钱所迫，起床工作</n-button>
 </n-dropdown>
 ```
+
 ```js
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       options: [
         {
@@ -21,7 +20,7 @@ export default {
         },
         {
           label: '布朗酒店，伦敦',
-          key: 'brown\'s hotel, london'
+          key: "brown's hotel, london"
         },
         {
           label: '亚特兰蒂斯巴哈马，拿骚',
@@ -35,7 +34,7 @@ export default {
     }
   },
   methods: {
-    handleSelect (key) {
+    handleSelect(key) {
       this.message.info(key)
     }
   }

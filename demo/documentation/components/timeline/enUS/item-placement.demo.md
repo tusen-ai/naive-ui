@@ -1,10 +1,10 @@
 # Item Placement
+
 Left. .thgiR
+
 ```html
 <n-timeline item-placement="left">
-  <n-timeline-item 
-    content="Oops"
-  />
+  <n-timeline-item content="Oops" />
   <n-timeline-item
     type="success"
     title="Success"

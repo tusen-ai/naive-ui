@@ -1,4 +1,5 @@
 # 格式化
+
 ```html
 <n-space vertical>
   <n-date-picker
@@ -7,12 +8,18 @@
     clearable
     :format="format"
   />
-  <n-date-picker v-model:value="timestamp2" type="datetime" :format="format" clearable />
+  <n-date-picker
+    v-model:value="timestamp2"
+    type="datetime"
+    :format="format"
+    clearable
+  />
 </n-space>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       timestamp: null,
       timestamp2: 1183135260000,

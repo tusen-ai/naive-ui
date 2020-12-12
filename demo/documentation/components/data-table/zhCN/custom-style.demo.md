@@ -1,4 +1,5 @@
 # 自定义样式
+
 行：设定 `row-class-name` 为某些行设定 class。
 
 列：在列对象上设定 `className` 属性为确定的列设定 class。
@@ -68,12 +69,12 @@ export default {
 
 ```css
 ::v-deep(.too-old td) {
-  color: rgba(255, 0, 0, .75) !important;
+  color: rgba(255, 0, 0, 0.75) !important;
 }
 ::v-deep(.age) {
-  color: rgba(0, 128, 0, .75) !important;
+  color: rgba(0, 128, 0, 0.75) !important;
 }
 ::v-deep(.too-old .age) {
-  color: rgba(0, 0, 128, .75) !important;
+  color: rgba(0, 0, 128, 0.75) !important;
 }
 ```

@@ -2,10 +2,10 @@
 
 ```html
 <n-data-table
-  ref='table'
-  :columns='columns'
-  :data='data'
-  :pagination='pagination'
+  ref="table"
+  :columns="columns"
+  :data="data"
+  :pagination="pagination"
 />
 ```
 
@@ -13,44 +13,60 @@
 import { h, resolveComponent } from 'vue'
 
 const renderTooltip = (trigger, content) => {
-  return h(resolveComponent('n-tooltip'), {
-    showArrow: true
-  }, {
-    trigger: () => trigger,
-    default: () => content
-  })
+  return h(
+    resolveComponent('n-tooltip'),
+    {
+      showArrow: true
+    },
+    {
+      trigger: () => trigger,
+      default: () => content
+    }
+  )
 }
 
-const createColumns = instance => {
+const createColumns = (instance) => {
   return [
     {
       key: 'name',
-      title (column) {
+      title(column) {
         return renderTooltip(
-          h(resolveComponent('n-gradient-text'), {
-            size: 24,
-            type: 'danger'
-          }, { default: () => 'Name' }),
+          h(
+            resolveComponent('n-gradient-text'),
+            {
+              size: 24,
+              type: 'danger'
+            },
+            { default: () => 'Name' }
+          ),
           'Tooltip Content'
         )
       }
     },
     {
       key: 'age',
-      title (column) {
-        return h(resolveComponent('n-gradient-text'), {
-          size: '20',
-          type: 'info'
-        }, { default: () => 'Age' })
+      title(column) {
+        return h(
+          resolveComponent('n-gradient-text'),
+          {
+            size: '20',
+            type: 'info'
+          },
+          { default: () => 'Age' }
+        )
       }
     },
     {
       key: 'address',
-      title (column) {
-        return h(resolveComponent('n-gradient-text'), {
-          size: '16',
-          type: 'warning'
-        }, { default: () => 'Address' })
+      title(column) {
+        return h(
+          resolveComponent('n-gradient-text'),
+          {
+            size: '16',
+            type: 'warning'
+          },
+          { default: () => 'Address' }
+        )
       }
     }
   ]
@@ -78,7 +94,7 @@ const data = [
 ]
 
 export default {
-  data () {
+  data() {
     return {
       data: data,
       columns: createColumns(this),

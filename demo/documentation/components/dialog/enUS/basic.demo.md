@@ -1,29 +1,24 @@
 # Basic
+
 Inject `dialog` to create a dialog.
+
 ```html
-<n-button @click="handleConfirm">
-  Confirm
-</n-button>
-<n-button @click="handleSuccess">
-  Success
-</n-button>
-<n-button @click="handleError">
-  Error
-</n-button>
+<n-button @click="handleConfirm"> Confirm </n-button>
+<n-button @click="handleSuccess"> Success </n-button>
+<n-button @click="handleError"> Error </n-button>
 ```
+
 ```css
 .n-button {
   margin: 0 12px 8px 0;
 }
 ```
+
 ```js
 export default {
-  inject: [
-    'dialog',
-    'message'
-  ],
+  inject: ['dialog', 'message'],
   methods: {
-    handleConfirm (e) {
+    handleConfirm(e) {
       const confirmInstance = this.dialog.warning({
         title: 'Confirm',
         content: 'Are you sure?',
@@ -37,11 +32,10 @@ export default {
         }
       })
     },
-    handleSuccess (e) {
+    handleSuccess(e) {
       const confirmInstance = this.dialog.success({
         title: 'Success',
-        content:
-          'Cool',
+        content: 'Cool',
         positiveText: 'Wow!',
         onPositiveClick: () => {
           this.message.success('Great!')

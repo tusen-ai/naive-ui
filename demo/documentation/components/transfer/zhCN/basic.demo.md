@@ -1,14 +1,13 @@
 # 基础用法
+
 穿梭框的基础用法。如果你有一大堆数据，看下一个例子。
+
 ```html
-<n-transfer
-  ref="transfer"
-  v-model:value="value"
-  :options="options"
-/>
+<n-transfer ref="transfer" v-model:value="value" :options="options" />
 ```
+
 ```js
-function createOptions () {
+function createOptions() {
   return Array.apply(null, { length: 100 }).map((v, i) => ({
     label: 'Option' + i,
     value: i,
@@ -16,16 +15,16 @@ function createOptions () {
   }))
 }
 
-function createValues () {
+function createValues() {
   return Array.apply(null, { length: 50 }).map((v, i) => i)
 }
 
 export default {
-  data () {
+  data() {
     return {
       options: createOptions(),
       value: createValues()
     }
-  },
+  }
 }
 ```

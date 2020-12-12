@@ -1,5 +1,7 @@
 # 使用元素组件
+
 Naive UI 提供 `n-element` 组件，参考 [Element](n-element)。
+
 ```html
 <n-space vertical>
   <n-space>
@@ -8,31 +10,31 @@ Naive UI 提供 `n-element` 组件，参考 [Element](n-element)。
   </n-space>
   <n-config-provider :theme="theme">
     <n-card>
-      <n-el tag="span" class="oops">
-        我是个 span 标签
-      </n-el>
+      <n-el tag="span" class="oops"> 我是个 span 标签 </n-el>
     </n-card>
   </n-config-provider>
 </n-space>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       theme: 'dark'
     }
   }
 }
 ```
+
 ```css
 .oops {
   color: #000;
-  transition: color .3s cubic-bezier(.4, 0, .2, 1);
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .oops.n-light-theme {
-  color: green
+  color: green;
 }
 .oops.n-dark-theme {
-  color: aquamarine
+  color: aquamarine;
 }
 ```

@@ -1,4 +1,5 @@
 # 尺寸
+
 ```html
 <n-space>
   <n-dropdown
@@ -39,6 +40,7 @@
   </n-dropdown>
 </n-space>
 ```
+
 ```js
 const options = [
   {
@@ -89,13 +91,13 @@ const options = [
 
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       options
     }
   },
   methods: {
-    handleSelect (name) {
+    handleSelect(name) {
       this.message.info(name)
     }
   }

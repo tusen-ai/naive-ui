@@ -1,14 +1,9 @@
 # Raw Content
+
 ```html
-<n-popover
-  trigger="hover"
-  raw
-  :show-arrow="false"
->
+<n-popover trigger="hover" raw :show-arrow="false">
   <template v-slot:trigger>
-    <n-button>
-      Hover
-    </n-button>
+    <n-button> Hover </n-button>
   </template>
   <div
     style="width: 100px; height: 100px; background-color: red; transform-origin: inherit;"

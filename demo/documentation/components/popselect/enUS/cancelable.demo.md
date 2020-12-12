@@ -1,20 +1,20 @@
 # Cancelable
+
 Make single value popselect cancelable.
+
 ```html
-<n-popselect
-  v-model:value="value"
-  cancelable
-  :options="options"
->
+<n-popselect v-model:value="value" cancelable :options="options">
   <n-tag>{{ value || 'Popselect' }}</n-tag>
 </n-popselect>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       value: 'song1',
-      options: [{
+      options: [
+        {
           label: "Everybody's Got Something to Hide Except Me and My Monkey",
           value: 'song0',
           disabled: true
@@ -28,7 +28,7 @@ export default {
           value: 'song2'
         },
         {
-          label: 'You Won\'t See',
+          label: "You Won't See",
           value: 'song3',
           disabled: true
         },
@@ -58,7 +58,7 @@ export default {
           value: 'song9'
         },
         {
-          label: 'I\'m looking through you',
+          label: "I'm looking through you",
           value: 'song10'
         },
         {

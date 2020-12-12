@@ -1,7 +1,9 @@
 # 好几个圈
+
 你可以在单个进度里面放好几个圈。注意 `circle-gap` 和 `stroke-width` 是相对 100 而言（SVG 的 viewbox 尺寸看作 100）。
 
 或许你们的产品经理想要这种效果。
+
 ```html
 <n-config-consumer>
   <template v-slot="{ styleScheme }">
@@ -27,40 +29,36 @@
         styleScheme.errorColor + '30'
       ]"
     >
-      <div style="text-align: center;">
-        圈圈赛跑！
-      </div>
+      <div style="text-align: center;">圈圈赛跑！</div>
     </n-progress>
   </template>
 </n-config-consumer>
 <div>
-  <n-button @click="minus">
-    减 10%
-  </n-button>
-  <n-button @click="add">
-    加 10%
-  </n-button>
+  <n-button @click="minus"> 减 10% </n-button>
+  <n-button @click="add"> 加 10% </n-button>
 </div>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       percentage: 0
     }
   },
   methods: {
-    add () {
+    add() {
       this.percentage += 10
       if (this.percentage > 100) this.percentage = 0
     },
-    minus () {
+    minus() {
       this.percentage -= 10
       if (this.percentage < 0) this.percentage = 100
     }
   }
 }
 ```
+
 ```css
 .n-progress {
   margin: 0 8px 12px 0;

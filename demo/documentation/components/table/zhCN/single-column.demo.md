@@ -1,4 +1,5 @@
 # 单列
+
 ```html
 <n-table single-column :single-line="false">
   <n-thead>

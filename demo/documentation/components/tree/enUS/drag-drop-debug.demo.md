@@ -1,5 +1,7 @@
 # Drag & Drag
+
 Set `draggable` and write bunch of codes to make drag & drop work.
+
 ```html
 <n-tree
   block-node
@@ -13,37 +15,33 @@ Set `draggable` and write bunch of codes to make drag & drop work.
   @update:expanded-keys="handleExpandedKeysChange"
 />
 ```
+
 ```js
-function createData (level = 4, baseKey = '') {
+function createData(level = 4, baseKey = '') {
   if (!level) return undefined
-  return Array
-    .apply(null, { length: 6 - level })
-    .map((_, index) => {
-      const key = '' + baseKey + level + index
-      return {
-        label: createLabel(level),
-        key,
-        children: createData(level - 1, key)
-      }
-    })
+  return Array.apply(null, { length: 6 - level }).map((_, index) => {
+    const key = '' + baseKey + level + index
+    return {
+      label: createLabel(level),
+      key,
+      children: createData(level - 1, key)
+    }
+  })
 }
 
-function createLabel (level) {
+function createLabel(level) {
   if (level === 4) return 'Out of Tao, One is born'
   if (level === 3) return 'Out of One, Two'
   if (level === 2) return 'Out of Two, Three'
   if (level === 1) return 'Out of Three, the created universe'
 }
 
-function dropIsValid ({
-  dragNode,
-  node
-}) {
+function dropIsValid({ dragNode, node }) {
   /** drop on itselft */
   if (dragNode.key === node.key) return false
   /** shouldn't drop parent to its child */
   const childKeys = []
-  const dropNodeInside = children => {
+  const dropNodeInside = (children) => {
     if (!children) return false
     return children.reduce((result, child) => {
       return result || child.key === node.key || dropNodeInside(child.children)
@@ -52,7 +50,7 @@ function dropIsValid ({
   return !dropNodeInside(dragNode.children)
 }
 
-function findSiblingsAndIndex (node, nodes) {
+function findSiblingsAndIndex(node, nodes) {
   if (!nodes) return [null, null]
   for (let i = 0; i < nodes.length; ++i) {
     const siblingNode = nodes[i]
@@ -63,15 +61,13 @@ function findSiblingsAndIndex (node, nodes) {
   return [null, null]
 }
 
-function applyDrop ({
-  dragNode,
-  node,
-  dropPosition
-}) {
+function applyDrop({ dragNode, node, dropPosition }) {
   const parent = findParent(node)
   if (dropPosition === 'center') {
     const parent = dragNode.parent
-    const index = parent.children.findIndex(child => child.key === dragNode.key)
+    const index = parent.children.findIndex(
+      (child) => child.key === dragNode.key
+    )
     if (~index) {
       parent.children.splice(index, 1)
       if (!parent.children.length) {
@@ -89,14 +85,16 @@ function applyDrop ({
     }
     dragNode.parent = node
   } else if (dropPosition === 'top' || dropPosition === 'bottom') {
-    const dragNodeIndex = parent.children.findIndex(child => child.key === dragNode.key)
+    const dragNodeIndex = parent.children.findIndex(
+      (child) => child.key === dragNode.key
+    )
     if (~dragNodeIndex) {
       parent.children.splice(dragNodeIndex, 1)
       if (!parent.children.length) {
         parent.children = null
       }
     }
-    let nodeIndex = parent.children.findIndex(child => child.key === node.key)
+    let nodeIndex = parent.children.findIndex((child) => child.key === node.key)
     if (dropPosition === 'bottom') nodeIndex += 1
     if (~nodeIndex) {
       parent.children.splice(nodeIndex, 0, dragNode)
@@ -117,7 +115,7 @@ function applyDrop ({
  * but I'm too lazy to optimize it.
  */
 export default {
-  data () {
+  data() {
     return {
       data: createData(),
       expandedKeys: [],
@@ -125,21 +123,20 @@ export default {
     }
   },
   methods: {
-    handleExpandedKeysChange (expandedKeys) {
+    handleExpandedKeysChange(expandedKeys) {
       this.expandedKeys = expandedKeys
     },
-    handleCheckedKeysChange (checkedKeys) {
+    handleCheckedKeysChange(checkedKeys) {
       this.checkedKeys = checkedKeys
     },
-    handleDrop ({
-      node,
-      dragNode,
-      dropPosition
-    }) {
+    handleDrop({ node, dragNode, dropPosition }) {
       const valid = dropIsValid({ node, dragNode })
       if (!valid) return
       const data = this.data
-      const [dragNodeSiblings, dragNodeIndex] = findSiblingsAndIndex(dragNode, data)
+      const [dragNodeSiblings, dragNodeIndex] = findSiblingsAndIndex(
+        dragNode,
+        data
+      )
       dragNodeSiblings.splice(dragNodeIndex, 1)
       if (dropPosition === 'center') {
         if (node.children) {

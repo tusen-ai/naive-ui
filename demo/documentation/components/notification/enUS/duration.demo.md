@@ -1,16 +1,16 @@
 # Duration
+
 Auto close.
+
 ```html
-<n-button @click="handleClick">
-  Duration: 10000
-</n-button>
+<n-button @click="handleClick"> Duration: 10000 </n-button>
 ```
 
 ```js
 export default {
   inject: ['notification'],
   methods: {
-    handleClick () {
+    handleClick() {
       let count = 10
       const notification = this.notification.create({
         title: 'What is Pingshan Road + rain ?',

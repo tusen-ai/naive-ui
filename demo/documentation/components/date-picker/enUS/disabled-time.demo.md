@@ -1,48 +1,50 @@
 # Disabled Specific Time
+
 ```html
 <n-space vertical>
   <n-date-picker
     v-model:value="timestamp1"
     type="date"
-    :is-date-disabled = "dateDisabled"
+    :is-date-disabled="dateDisabled"
   />
   <n-date-picker
     v-model:value="timestamp2"
     type="datetime"
-    :is-date-disabled = "dateDisabled"
-    :is-time-disabled= "timeDisabled"
+    :is-date-disabled="dateDisabled"
+    :is-time-disabled="timeDisabled"
   />
   <n-date-picker
     v-model:value="timestamp3"
     type="daterange"
-    :is-date-disabled = "isRangeDateDisabled"
+    :is-date-disabled="isRangeDateDisabled"
   />
   <n-date-picker
     v-model:value="timestamp4"
     type="datetimerange"
-    :is-date-disabled = "isRangeDateDisabled"
-    :is-time-disabled= "isRangeTimeDisabled"
+    :is-date-disabled="isRangeDateDisabled"
+    :is-time-disabled="isRangeTimeDisabled"
   />
 </n-space>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       timestamp1: 1576239200000,
       timestamp2: 1576234000000,
       timestamp3: [1576439200000, 1576739200000],
-      timestamp4: [1576234000000, 1576934000000],
+      timestamp4: [1576234000000, 1576934000000]
     }
   },
   methods: {
-    dateDisabled (current) {
-      const month = (new Date(current)).getMonth()
-      const date = (new Date(current)).getDate()
+    dateDisabled(current) {
+      const month = new Date(current).getMonth()
+      const date = new Date(current).getDate()
       return month === 11 && date < 15
     },
-    timeDisabled (current) {
-      const month = (new Date(current)).getMonth()
+    timeDisabled(current) {
+      const month = new Date(current).getMonth()
       return {
         isHourDisabled: (hour) => {
           if (month === 11) {
@@ -59,7 +61,12 @@ export default {
           }
         },
         isSecondDisabled: (second, selectedMinute, selectedHour) => {
-          if (month === 11 && selectedHour === 12 && selectedMinute >= 40 && selectedMinute <= 50) {
+          if (
+            month === 11 &&
+            selectedHour === 12 &&
+            selectedMinute >= 40 &&
+            selectedMinute <= 50
+          ) {
             return second >= 20 && second <= 30
           } else {
             return false
@@ -67,7 +74,7 @@ export default {
         }
       }
     },
-    isRangeDateDisabled (current, type, range) {
+    isRangeDateDisabled(current, type, range) {
       const currentDate = new Date(current)
       if (type === 'start') {
         if (currentDate.getMonth() === 11) {
@@ -80,8 +87,8 @@ export default {
         }
       }
     },
-    isRangeTimeDisabled (current, type, range) {
-      const month = (new Date(current)).getMonth()
+    isRangeTimeDisabled(current, type, range) {
+      const month = new Date(current).getMonth()
       return {
         isHourDisabled: (hour) => {
           if (month === 11) {
@@ -99,14 +106,19 @@ export default {
           }
         },
         isSecondDisabled: (second, selectedMinute, selectedHour) => {
-          if (month === 11 && selectedHour === 12 && selectedMinute >= 40 && selectedMinute <= 50) {
+          if (
+            month === 11 &&
+            selectedHour === 12 &&
+            selectedMinute >= 40 &&
+            selectedMinute <= 50
+          ) {
             return second >= 20 && second <= 30
           } else {
             return false
           }
         }
       }
-    },
-  },
+    }
+  }
 }
 ```

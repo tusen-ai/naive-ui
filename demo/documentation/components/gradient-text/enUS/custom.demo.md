@@ -1,5 +1,7 @@
 # Custom Gradient
+
 By yourself.
+
 ```html
 <n-gradient-text
   :gradient="{
@@ -9,7 +11,7 @@ By yourself.
 >
   Custom Color
 </n-gradient-text>
-<br/>
+<br />
 <n-gradient-text
   :gradient="{
     deg: 180,
@@ -19,13 +21,14 @@ By yourself.
 >
   Custom Color
 </n-gradient-text>
-<br/>
+<br />
 <n-gradient-text
   gradient="linear-gradient(90deg, red 0%, green 50%, blue 100%)"
 >
   A Scribbled Color
 </n-gradient-text>
 ```
+
 ```css
 .n-gradient-text {
   font-size: 24px;

@@ -4,10 +4,10 @@
 <n-button @click="filterAddress">Filter Address(Use Value 'London')</n-button>
 <n-button @click="unfilterAddress">Clear Address Filters</n-button>
 <n-data-table
-  ref='table'
-  :columns='columns'
-  :data='data'
-  :pagination='pagination'
+  ref="table"
+  :columns="columns"
+  :data="data"
+  :pagination="pagination"
   @update:filters="handleFiltersChange"
 />
 ```
@@ -29,7 +29,7 @@ const addressColumn = {
       value: 'New York'
     }
   ],
-  filter (value, row) {
+  filter(value, row) {
     return ~row.address.indexOf(value)
   }
 }
@@ -38,14 +38,14 @@ const columns = [
   {
     title: 'Name',
     key: 'name',
-    sorter (rowA, rowB) {
+    sorter(rowA, rowB) {
       return rowA.name.length - rowB.name.length
     }
   },
   {
     title: 'Age',
     key: 'age',
-    sorter (rowA, rowB) {
+    sorter(rowA, rowB) {
       return rowA.age - rowB.age
     }
   },
@@ -80,7 +80,7 @@ const data = [
 ]
 
 export default {
-  data () {
+  data() {
     return {
       data: data,
       columns,
@@ -89,13 +89,13 @@ export default {
     }
   },
   methods: {
-    filterAddress () {
+    filterAddress() {
       this.addressColumn.filterOptionValue = 'London'
     },
-    unfilterAddress () {
+    unfilterAddress() {
       this.addressColumn.filterOptionValue = null
     },
-    handleFiltersChange (filters, sourceColumn) {
+    handleFiltersChange(filters, sourceColumn) {
       this.addressColumn.filterOptionValue = filters[sourceColumn.key]
     }
   }

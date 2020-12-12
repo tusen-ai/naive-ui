@@ -1,21 +1,17 @@
 # 许多选项
+
 1000 倍宇宙的终极答案个数的选项。
+
 ```html
 <n-space vertical>
-  <n-select
-    v-model:value="value"
-    :options="options"
-  />
-  <n-select
-    multiple
-    v-model:value="values"
-    :options="options"
-  />
+  <n-select v-model:value="value" :options="options" />
+  <n-select multiple v-model:value="values" :options="options" />
 </n-space>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       value: null,
       values: null,

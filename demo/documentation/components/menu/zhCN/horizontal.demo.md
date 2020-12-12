@@ -1,12 +1,11 @@
 # 水平菜单
+
 一个水平菜单
+
 ```html
-<n-menu
-  v-model:value="activeKey"
-  mode="horizontal"
-  :items="menuItems"
-/>
+<n-menu v-model:value="activeKey" mode="horizontal" :items="menuItems" />
 ```
+
 ```js
 import { h, resolveComponent } from 'vue'
 import {
@@ -95,7 +94,7 @@ const menuItems = [
 ]
 
 export default {
-  data () {
+  data() {
     return {
       activeKey: null,
       menuItems
@@ -103,6 +102,7 @@ export default {
   }
 }
 ```
+
 ```css
 .n-menu-item {
   padding-right: 16px;

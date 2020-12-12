@@ -1,4 +1,5 @@
 # Target
+
 ```html
 <n-button-group>
   <n-button @click="activate('top')">Top</n-button>
@@ -6,7 +7,7 @@
   <n-button @click="activate('bottom')">Bottom</n-button>
   <n-button @click="activate('left')">Left</n-button>
 </n-button-group>
-<div 
+<div
   ref="target"
   id="drawer-target"
   style="
@@ -27,27 +28,28 @@
   v-model:show="active"
   :width="200"
   :height="200"
-  :placement="placement" 
+  :placement="placement"
   to="#drawer-target"
 >
   <n-h1>Stoner</n-h1>
   <n-p>Stoner is a 1965 novel by the American writer John Williams.</n-p>
 </n-drawer>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       active: false,
       placement: 'right'
     }
   },
   methods: {
-    activate (placement) {
+    activate(placement) {
       this.active = true
       this.placement = placement
     },
-    target () {
+    target() {
       return this.$refs.target
     }
   }

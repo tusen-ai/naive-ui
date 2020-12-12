@@ -1,17 +1,12 @@
 # Change Debug
+
 ```html
-<n-form
-  inline
-  :label-width="80"
-  :model="formValue"
-  :rules="rules"
-  ref="form"
->
+<n-form inline :label-width="80" :model="formValue" :rules="rules" ref="form">
   <n-form-item label="Name" path="user.name" v-if="show">
     <n-input v-model:value="formValue.user.name" placeholder="Input Name" />
   </n-form-item>
   <n-form-item label="Age" path="user.age" v-else>
-    <n-switch v-model:value="formValue.user.age"/>
+    <n-switch v-model:value="formValue.user.age" />
   </n-form-item>
   <n-form-item>
     <n-button @click="handleShowClick">show</n-button>
@@ -23,10 +18,11 @@
 {{  JSON.stringify(formValue, 0, 2) }}
 </pre>
 ```
+
 ```js
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       show: true,
       formValue: {
@@ -46,7 +42,7 @@ export default {
           age: {
             required: true,
             message: 'Please input your age',
-            validator (v) {
+            validator(v) {
               return v === true
             }
           }
@@ -60,13 +56,13 @@ export default {
     }
   },
   methods: {
-    handleShowClick (e) {
+    handleShowClick(e) {
       e.preventDefault()
       this.show = !this.show
     },
-    handleValidateClick (e) {
+    handleValidateClick(e) {
       e.preventDefault()
-      this.$refs.form.validate(errors => {
+      this.$refs.form.validate((errors) => {
         if (!errors) {
           this.message.success('Valid')
         } else {

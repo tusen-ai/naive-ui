@@ -1,5 +1,7 @@
 # 处理中
+
 设定 `processing` 来表明正在处理。
+
 ```html
 <n-space :size="24" align="center">
   <n-badge dot processing>

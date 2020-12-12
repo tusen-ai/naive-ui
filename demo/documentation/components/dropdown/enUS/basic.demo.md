@@ -1,18 +1,19 @@
 # Basic
+
 Basic usage of dropdown
+
 ```html
-<n-dropdown
-  trigger="hover"
-  @select="handleSelect"
-  :options="options"
->
-  <n-button :keyboard="false">Money Force Us to Work Rather Than Sleep</n-button>
+<n-dropdown trigger="hover" @select="handleSelect" :options="options">
+  <n-button :keyboard="false"
+    >Money Force Us to Work Rather Than Sleep</n-button
+  >
 </n-dropdown>
 ```
+
 ```js
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       options: [
         {
@@ -20,8 +21,8 @@ export default {
           key: 'marina bay sands'
         },
         {
-          label: 'Brown\'s Hotel, London',
-          key: 'brown\'s hotel, london'
+          label: "Brown's Hotel, London",
+          key: "brown's hotel, london"
         },
         {
           label: 'Atlantis Bahamas, Nassau',
@@ -35,7 +36,7 @@ export default {
     }
   },
   methods: {
-    handleSelect (key) {
+    handleSelect(key) {
       this.message.info(key)
     }
   }

@@ -1,5 +1,7 @@
 # Placement
+
 Use different placement.
+
 ```html
 <n-dropdown
   trigger="hover"
@@ -7,13 +9,16 @@ Use different placement.
   placement="bottom-start"
   :options="options"
 >
-  <n-button :keyboard="false">Money Force Us to Work Rather Than Sleep</n-button>
+  <n-button :keyboard="false"
+    >Money Force Us to Work Rather Than Sleep</n-button
+  >
 </n-dropdown>
 ```
+
 ```js
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       options: [
         {
@@ -21,8 +26,8 @@ export default {
           key: 'Marina Bay Sands'
         },
         {
-          label: 'Brown\'s Hotel, London',
-          key: 'Brown\'s Hotel, London'
+          label: "Brown's Hotel, London",
+          key: "Brown's Hotel, London"
         },
         {
           label: 'Atlantis Bahamas, Nassau',
@@ -36,7 +41,7 @@ export default {
     }
   },
   methods: {
-    handleSelect (name) {
+    handleSelect(name) {
       this.message.info(name)
     }
   }

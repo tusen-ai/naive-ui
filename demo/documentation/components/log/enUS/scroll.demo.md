@@ -4,10 +4,18 @@ You can easily make log scroll to top or bottom. Also you can make the scroll ac
 
 ```html
 <n-button-group>
-  <n-button @click="scrollTo({ position: 'bottom', slient: false })">Scroll To Bottom</n-button>
-  <n-button @click="scrollTo({ position: 'bottom', slient: true })">Scroll To Bottom (silent)</n-button>
-  <n-button @click="scrollTo({ position: 'top', slient: false })">Scroll To Top</n-button>
-  <n-button @click="scrollTo({ position: 'top', slient: true })">Scroll To Top (silent)</n-button>
+  <n-button @click="scrollTo({ position: 'bottom', slient: false })"
+    >Scroll To Bottom</n-button
+  >
+  <n-button @click="scrollTo({ position: 'bottom', slient: true })"
+    >Scroll To Bottom (silent)</n-button
+  >
+  <n-button @click="scrollTo({ position: 'top', slient: false })"
+    >Scroll To Top</n-button
+  >
+  <n-button @click="scrollTo({ position: 'top', slient: true })"
+    >Scroll To Top (silent)</n-button
+  >
 </n-button-group>
 <n-log
   ref="log"
@@ -21,7 +29,7 @@ You can easily make log scroll to top or bottom. Also you can make the scroll ac
 ```
 
 ```js
-function log () {
+function log() {
   const l = []
   for (let i = 0; i < 10; ++i) {
     l.push(Math.random().toString(16))
@@ -31,17 +39,17 @@ function log () {
 
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       loading: false,
       log: log()
     }
   },
   methods: {
-    clear () {
+    clear() {
       this.log = ''
     },
-    handleRequireMore (from) {
+    handleRequireMore(from) {
       this.message.info('Require More from ' + from)
       if (this.loading) return
       this.loading = true
@@ -54,10 +62,10 @@ export default {
         this.loading = false
       }, 1000)
     },
-    handleReachTop () {
+    handleReachTop() {
       this.message.info('Reach Top')
     },
-    handleReachBottom () {
+    handleReachBottom() {
       this.message.info('Reach Bottom')
     },
     scrollTo(...args) {
@@ -66,9 +74,9 @@ export default {
   }
 }
 ```
+
 ```css
-.n-button-group { 
+.n-button-group {
   margin-bottom: 12px;
 }
 ```
-

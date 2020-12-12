@@ -1,13 +1,12 @@
 # Disabled
+
 ```html
-<n-input-number
-  disabled
-  v-model:value="value"
-/>
+<n-input-number disabled v-model:value="value" />
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       value: 0
     }

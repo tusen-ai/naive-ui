@@ -1,34 +1,41 @@
 # Validator Debug
+
 检测各种返回情况
+
 ```html
-<n-form
-  :model="formValue"
-  :rules="rules"
-  ref="form"
->
+<n-form :model="formValue" :rules="rules" ref="form">
   <n-form-item label="syncBoolean" path="syncBoolean">
-    <n-input placeholder="syncBoolean" v-model="formValue.syncBoolean"/>
+    <n-input placeholder="syncBoolean" v-model="formValue.syncBoolean" />
   </n-form-item>
   <n-form-item label="syncError" path="syncError">
-    <n-input placeholder="syncError" v-model="formValue.syncError"/>
+    <n-input placeholder="syncError" v-model="formValue.syncError" />
   </n-form-item>
   <n-form-item label="syncException" path="syncException">
-    <n-input placeholder="syncException" v-model="formValue.syncException"/>
+    <n-input placeholder="syncException" v-model="formValue.syncException" />
   </n-form-item>
   <n-form-item label="callbackFalse" path="callbackFalse">
-    <n-input placeholder="callbackFalse" v-model="formValue.callbackFalse"/>
+    <n-input placeholder="callbackFalse" v-model="formValue.callbackFalse" />
   </n-form-item>
   <n-form-item label="callbackError" path="callbackError">
-    <n-input placeholder="callbackError" v-model="formValue.callbackError"/>
+    <n-input placeholder="callbackError" v-model="formValue.callbackError" />
   </n-form-item>
   <n-form-item label="promiseRejectError" path="promiseRejectError">
-    <n-input placeholder="promiseRejectError" v-model="formValue.promiseRejectError"/>
+    <n-input
+      placeholder="promiseRejectError"
+      v-model="formValue.promiseRejectError"
+    />
   </n-form-item>
   <n-form-item label="promiseRejectString" path="promiseRejectString">
-    <n-input placeholder="promiseRejectString" v-model="formValue.promiseRejectString"/>
+    <n-input
+      placeholder="promiseRejectString"
+      v-model="formValue.promiseRejectString"
+    />
   </n-form-item>
   <n-form-item label="promiseException" path="promiseException">
-    <n-input placeholder="promiseException" v-model="formValue.promiseException"/>
+    <n-input
+      placeholder="promiseException"
+      v-model="formValue.promiseException"
+    />
   </n-form-item>
   <n-form-item>
     <n-button @click="handleValidateClick">Validate</n-button>
@@ -39,10 +46,11 @@
 {{  JSON.stringify(formValue, 0, 2) }}
 </pre>
 ```
+
 ```js
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       formValue: {
         syncBoolean: '',
@@ -57,14 +65,14 @@ export default {
       rules: {
         syncBoolean: {
           trigger: 'input',
-          validator (rule, value) {
+          validator(rule, value) {
             return value === 'test'
           },
           message: 'syncBoolean'
         },
         syncError: {
           trigger: 'input',
-          validator (rule, value) {
+          validator(rule, value) {
             return value === 'test' ? true : Error('syncError')
           }
         },
@@ -81,7 +89,7 @@ export default {
         },
         callbackFalse: {
           trigger: 'input',
-          asyncValidator (rule, value, callback) {
+          asyncValidator(rule, value, callback) {
             setTimeout(() => {
               callback(value === 'test')
             }, 1000)
@@ -89,7 +97,7 @@ export default {
         },
         callbackError: {
           trigger: 'input',
-          asyncValidator (rule, value, callback) {
+          asyncValidator(rule, value, callback) {
             setTimeout(() => {
               if (value !== 'test') callback(Error('callbackError'))
               else callback(true)
@@ -98,7 +106,7 @@ export default {
         },
         promiseRejectError: {
           trigger: 'input',
-          validator (rule, value) {
+          validator(rule, value) {
             return new Promise((resolve, reject) => {
               setTimeout(() => {
                 if (value !== 'test') {
@@ -113,7 +121,7 @@ export default {
         },
         promiseRejectString: {
           trigger: 'input',
-          validator (rule, value) {
+          validator(rule, value) {
             return new Promise((resolve, reject) => {
               setTimeout(() => {
                 if (value !== 'test') {
@@ -128,14 +136,12 @@ export default {
         promiseException: {
           trigger: 'input',
           validator: (rule, value) => {
-            return new Promise(
-              (resolve, reject) => {
-                setTimeout(() => {
-                  reject(Error('Simulate Exeption'))
-                  resolve()
-                }, 1000)
-              }
-            ).catch(error => {
+            return new Promise((resolve, reject) => {
+              setTimeout(() => {
+                reject(Error('Simulate Exeption'))
+                resolve()
+              }, 1000)
+            }).catch((error) => {
               this.message.info('手动处理异常，不会完成验证')
               return true
             })
@@ -145,17 +151,18 @@ export default {
     }
   },
   methods: {
-    handleValidateClick (e) {
+    handleValidateClick(e) {
       e.preventDefault()
       this.$refs.form
-        .validate(errors => {
+        .validate((errors) => {
           if (!errors) {
             this.message.success('Valid')
           } else {
             this.message.error('Invalid')
             console.log('errors', errors)
           }
-        }).catch(error => {
+        })
+        .catch((error) => {
           this.message.error('验证出现错误')
           console.log('验证出现错误', error)
         })

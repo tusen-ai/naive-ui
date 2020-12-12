@@ -1,9 +1,9 @@
 # 图标
+
 ```html
-<n-button @click="createMessage">
-  漏斗图标
-</n-button>
+<n-button @click="createMessage"> 漏斗图标 </n-button>
 ```
+
 ```js
 import { h } from 'vue'
 import { MdHourglass } from '@vicons/ionicons-v4'

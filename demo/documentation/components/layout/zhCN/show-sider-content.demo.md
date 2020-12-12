@@ -1,11 +1,11 @@
 # 隐藏侧边栏内容
+
 有时候收起边栏后，你不想看到里面有什么。
+
 ```html
 <n-switch v-model:value="collapsed" />
 <n-layout style="height: 240px;">
-  <n-layout-header style="height: 64px;">
-    酷的页头
-  </n-layout-header>
+  <n-layout-header style="height: 64px;"> 酷的页头 </n-layout-header>
   <n-layout>
     <n-layout-sider
       collapse-mode="width"
@@ -47,17 +47,16 @@
     >
       <n-h1>边栏 边栏 边栏</n-h1>
     </n-layout-sider>
-    <n-layout 
-      position="absolute"
-    >
+    <n-layout position="absolute">
       <span>内容</span>
     </n-layout>
   </n-layout>
 </n-layout>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       collapsed: false
     }

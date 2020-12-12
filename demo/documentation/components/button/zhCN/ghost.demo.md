@@ -1,5 +1,7 @@
 # 透明背景
+
 `Ghost` 按钮有透明的背景。
+
 ```html
 <n-space>
   <n-button ghost>Default</n-button>

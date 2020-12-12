@@ -1,5 +1,7 @@
 # 显示指令
+
 设定 `display-directive` 为 `if` 或 `show` 来控制 `n-collapse-item` 里面的 DOM 是否保持。
+
 ```html
 <n-collapse v-model:expandedNames="activeNames" display-directive="show">
   <n-collapse-item title="绿灯" name="1">
@@ -17,6 +19,7 @@
   </n-collapse-item>
 </n-collapse>
 ```
+
 ```js
 export default {
   data() {

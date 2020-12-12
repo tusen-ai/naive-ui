@@ -1,5 +1,7 @@
 # 图标
+
 我喜欢用图标当头像。
+
 ```html
 <n-avatar>
   <n-icon>
@@ -7,12 +9,9 @@
   </n-icon>
 </n-avatar>
 ```
+
 ```js
-import {
-  MdCash,
-  MdContacts,
-  IosContacts
-} from '@vicons/ionicons-v4'
+import { MdCash, MdContacts, IosContacts } from '@vicons/ionicons-v4'
 
 export default {
   components: {

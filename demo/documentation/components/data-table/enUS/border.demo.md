@@ -19,7 +19,7 @@
 ```js
 import { h, resolveComponent } from 'vue'
 
-const createColumns = instance => {
+const createColumns = (instance) => {
   return [
     {
       title: 'Name',
@@ -40,15 +40,17 @@ const createColumns = instance => {
       title: 'Tags',
       key: 'tags',
       width: '20%',
-      render (row) {
-        const tags = row.tags.map(tagKey => {
-          return (
-            h(resolveComponent('n-tag'), {
+      render(row) {
+        const tags = row.tags.map((tagKey) => {
+          return h(
+            resolveComponent('n-tag'),
+            {
               style: {
                 marginRight: '6px'
               },
               type: 'info'
-            }, { default: () => tagKey })
+            },
+            { default: () => tagKey }
           )
         })
         return tags
@@ -58,11 +60,15 @@ const createColumns = instance => {
       title: 'Action',
       key: 'actions',
       width: '20%',
-      render (row) {
-        return h(resolveComponent('n-button'), {
-          size: 'small',
-          onClick: () => instance.sendMail(row)
-        }, { default: () => 'Send Email' })
+      render(row) {
+        return h(
+          resolveComponent('n-button'),
+          {
+            size: 'small',
+            onClick: () => instance.sendMail(row)
+          },
+          { default: () => 'Send Email' }
+        )
       }
     }
   ]
@@ -112,6 +118,7 @@ export default {
   }
 }
 ```
+
 ```css
 .n-data-table {
   margin-bottom: 12px;

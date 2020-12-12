@@ -1,4 +1,5 @@
 # Basic
+
 ```html
 <n-alert title="Default Text" type="default">
   <template v-slot:icon>
@@ -8,23 +9,18 @@
   </template>
   Gee it's good to be back home
 </n-alert>
-<n-alert title="Info Text" type="info">
-  Gee it's good to be back home
-</n-alert>
+<n-alert title="Info Text" type="info"> Gee it's good to be back home </n-alert>
 <n-alert title="Success Text" type="success">
   Leave it till tomorrow to unpack my case
 </n-alert>
 <n-alert title="Warning Text" type="warning">
   Honey disconnect the phone
 </n-alert>
-<n-alert title="Error Text" type="error">
-  I'm back in the U.S.S.R.
-</n-alert>
+<n-alert title="Error Text" type="error"> I'm back in the U.S.S.R. </n-alert>
 ```
+
 ```js
-import {
-  IosAirplane,
-} from '@vicons/ionicons-v4'
+import { IosAirplane } from '@vicons/ionicons-v4'
 
 export default {
   components: {
@@ -32,6 +28,7 @@ export default {
   }
 }
 ```
+
 ```css
 .n-alert {
   margin-bottom: 12px;

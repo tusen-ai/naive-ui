@@ -1,9 +1,9 @@
 # Closable
+
 Set `closable` to make message closable by a click.
+
 ```html
-<n-button @click="createMessage">
-  Create a Message
-</n-button>
+<n-button @click="createMessage"> Create a Message </n-button>
 ```
 
 ```js

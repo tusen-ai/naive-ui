@@ -1,4 +1,5 @@
 # Basic
+
 ```html
 <n-popconfirm
   @positive-click="handlePositiveClick"
@@ -10,14 +11,15 @@
   Things pass us by. Nobody can catch them. That's the way we live our lives.
 </n-popconfirm>
 ```
+
 ```js
 export default {
   inject: ['message'],
   methods: {
-    handlePositiveClick () {
+    handlePositiveClick() {
       this.message.success('Yes')
     },
-    handleNegativeClick () {
+    handleNegativeClick() {
       this.message.warning('No')
     }
   }

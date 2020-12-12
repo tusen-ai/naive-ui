@@ -1,9 +1,15 @@
 # Inline Form
+
 A Example of inline form.
+
 ```html
-<n-radio-group v-model:value="size" name="left-size" style="margin-bottom: 12px;">
+<n-radio-group
+  v-model:value="size"
+  name="left-size"
+  style="margin-bottom: 12px;"
+>
   <n-radio-button value="small">Small</n-radio-button>
-  <n-radio-button value="medium" >Medium</n-radio-button>
+  <n-radio-button value="medium">Medium</n-radio-button>
   <n-radio-button value="large">Large</n-radio-button>
 </n-radio-group>
 <n-form
@@ -18,10 +24,10 @@ A Example of inline form.
     <n-input v-model:value="formValue.user.name" placeholder="Input Name" />
   </n-form-item>
   <n-form-item label="Age" path="user.age">
-    <n-input placeholder="Input Age" v-model:value="formValue.user.age"/>
+    <n-input placeholder="Input Age" v-model:value="formValue.user.age" />
   </n-form-item>
   <n-form-item label="Phone" path="phone">
-    <n-input placeholder="Phone Number" v-model:value="formValue.phone"/>
+    <n-input placeholder="Phone Number" v-model:value="formValue.phone" />
   </n-form-item>
   <n-form-item>
     <n-button @click="handleValidateClick">Validate</n-button>
@@ -32,10 +38,11 @@ A Example of inline form.
 {{  JSON.stringify(formValue, 0, 2) }}
 </pre>
 ```
+
 ```js
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       size: 'medium',
       formValue: {
@@ -67,9 +74,9 @@ export default {
     }
   },
   methods: {
-    handleValidateClick (e) {
+    handleValidateClick(e) {
       e.preventDefault()
-      this.$refs.form.validate(errors => {
+      this.$refs.form.validate((errors) => {
         if (!errors) {
           this.message.success('Valid')
         } else {

@@ -1,5 +1,7 @@
 # 自动调整尺寸
+
 Textarea 自动调整尺寸。
+
 ```html
 <n-space vertical>
   <n-input
@@ -22,9 +24,10 @@ Textarea 自动调整尺寸。
   />
 </n-space>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       value: null
     }

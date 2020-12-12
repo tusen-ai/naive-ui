@@ -1,16 +1,15 @@
 # Validator
+
 ```html
-<n-input-number
-  v-model:value="value"
-  :validator="validator"
-/>
+<n-input-number v-model:value="value" :validator="validator" />
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       value: 0,
-      validator: x => x > 0
+      validator: (x) => x > 0
     }
   }
 }

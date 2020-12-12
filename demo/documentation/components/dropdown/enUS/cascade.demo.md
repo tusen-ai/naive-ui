@@ -1,5 +1,7 @@
 # Cascade
+
 Dropdown can be cascade.
+
 ```html
 <n-dropdown
   :options="options"
@@ -22,7 +24,7 @@ const options = [
   },
   {
     label: 'Daisy Buchanan',
-    icon () {
+    icon() {
       return h(resolveComponent('n-icon'), null, {
         default: () => h(CashIcon)
       })
@@ -69,13 +71,13 @@ const options = [
 
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       options
     }
   },
   methods: {
-    handleSelect (name) {
+    handleSelect(name) {
       this.message.info(name)
     }
   }

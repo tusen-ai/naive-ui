@@ -1,4 +1,5 @@
 # Dark Debug 3
+
 ```html
 <n-button @click="modalActive = !modalActive">Toggle</n-button>
 <n-modal
@@ -17,16 +18,17 @@
   />
 </n-modal>
 ```
+
 ```js
 import { h } from 'vue'
 
 const columns = [
   {
     type: 'selection',
-    disabled (row, index) {
+    disabled(row, index) {
       return row.name === 'Edward King 3'
     },
-    fixed: 'left',
+    fixed: 'left'
   },
   {
     title: 'Name',
@@ -50,7 +52,7 @@ const columns = [
       {
         label: 'Edward King 3',
         value: 'Edward King 3'
-      },
+      }
     ]
   },
   {
@@ -62,7 +64,7 @@ const columns = [
   {
     title: 'Row',
     key: 'row',
-    render (row, index) {
+    render(row, index) {
       return h('span', ['row ', index])
     }
   },
@@ -91,14 +93,13 @@ const columns = [
 const data = Array.apply(null, { length: 46 }).map((_, index) => ({
   key: index,
   name: `Edward King ${index % 4}`,
-  age: 32 + index % 3,
+  age: 32 + (index % 3),
   address: `London, Park Lane no. ${index}`
 }))
 
-
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       modalActive: false,
       data,
@@ -106,7 +107,7 @@ export default {
     }
   },
   computed: {
-    pagination () {
+    pagination() {
       return { pageSize: 10 }
     }
   },

@@ -1,50 +1,38 @@
 # Basic
+
 ```html
 <n-space>
-  <n-button @click="info">
-    Info
-  </n-button>
-  <n-button @click="error">
-    Error
-  </n-button>
-  <n-button @click="warning">
-    Warning
-  </n-button>
-  <n-button @click="success">
-    Success
-  </n-button>
-  <n-button @click="loading">
-    Loading
-  </n-button>
+  <n-button @click="info"> Info </n-button>
+  <n-button @click="error"> Error </n-button>
+  <n-button @click="warning"> Warning </n-button>
+  <n-button @click="success"> Success </n-button>
+  <n-button @click="loading"> Loading </n-button>
 </n-space>
 ```
+
 ```js
 export default {
   inject: ['message'],
   methods: {
-    info () {
+    info() {
       this.message.info(
         "I don't know why nobody told you how to unfold your love"
       )
     },
-    error () {
-      this.message.error(
-        "Once upon a time you dressed so fine"
-      )
+    error() {
+      this.message.error('Once upon a time you dressed so fine')
     },
-    warning () {
-      this.message.warning(
-        "How many roads must a man walk down"
-      )
+    warning() {
+      this.message.warning('How many roads must a man walk down')
     },
-    success () {
+    success() {
       this.message.success(
         "'Cause you walked hand in hand With another man in my place"
       )
     },
-    loading () {
+    loading() {
       this.message.loading(
-        "If I were you, I will realize that I love you more than any other guy"
+        'If I were you, I will realize that I love you more than any other guy'
       )
     }
   }

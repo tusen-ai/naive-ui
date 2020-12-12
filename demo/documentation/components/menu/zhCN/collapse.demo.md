@@ -1,5 +1,7 @@
 # 压缩菜单
+
 可以让垂直菜单随着边栏压缩。使用 `collapsed` 属性控制菜单状态。必需设定 `collapsed-width` 来确保菜单正常显示。除此之外还有一些其他和压缩有关的属性：`icon-size`、`collapsed-icon-size`、`popover-body-style`。详细信息参考页面底下的 API 文档。
+
 ```html
 <n-space vertical>
   <n-switch v-model:value="collapsed" />
@@ -29,6 +31,7 @@
   </n-layout>
 </n-space>
 ```
+
 ```js
 import { h, resolveComponent } from 'vue'
 import {
@@ -117,7 +120,7 @@ const menuItems = [
 ]
 
 export default {
-  data () {
+  data() {
     return {
       activeKey: null,
       collapsed: true,

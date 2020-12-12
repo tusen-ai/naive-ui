@@ -3,6 +3,7 @@
 如果你想选择一些数据，还不想看到那个框子，可以使用 Popselect。
 
 ## 演示
+
 ```demo
 basic
 size
@@ -12,14 +13,14 @@ multiple
 
 ## Props
 
-|名称|类型|默认值|说明|
-|-|-|-|-|
-|multiple|`boolean`|`false`||
-|options|`Array<SelectOption \| SelectOptionGroup>`|`[]`||
-|scrollable|`boolean`|`false`||
-|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
-|value|`string \| number \| Array<string \| number> \| null`|`null`||
-|on-update:value|`(string \| number \| Array<string \| number> \| null) => any`|`undefined`||
+| 名称 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| multiple | `boolean` | `false` |  |
+| options | `Array<SelectOption \| SelectOptionGroup>` | `[]` |  |
+| scrollable | `boolean` | `false` |  |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
+| value | `string \| number \| Array<string \| number> \| null` | `null` |  |
+| on-update:value | `(string \| number \| Array<string \| number> \| null) => any` | `undefined` |  |
 
 对于 SelectOption & SelectOptionGroup，参考 [Select](n-select#SelectOption-Type)
 

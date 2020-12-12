@@ -1,15 +1,14 @@
 # Group
+
 Group options together.
+
 ```html
-<n-select
-  filterable
-  v-model:value=value
-  :options='options'
-/>
+<n-select filterable v-model:value="value" :options="options" />
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       value: null,
       options: [
@@ -18,7 +17,8 @@ export default {
           name: 'Rubber Soul',
           children: [
             {
-              label: 'Everybody\'s Got Something to Hide Except Me and My Monkey',
+              label:
+                "Everybody's Got Something to Hide Except Me and My Monkey",
               value: 'song0',
               disabled: true
             },
@@ -31,7 +31,7 @@ export default {
               value: 'song2'
             },
             {
-              label: 'You Won\'t See',
+              label: "You Won't See",
               value: 'song3',
               disabled: true
             },
@@ -61,7 +61,7 @@ export default {
               value: 'song9'
             },
             {
-              label: 'I\'m looking through you',
+              label: "I'm looking through you",
               value: 'song10'
             },
             {
@@ -107,8 +107,8 @@ export default {
               value: 'Maggie Mae'
             },
             {
-              label: 'I\'ve Got A Feeling',
-              value: 'I\'ve Got A Feeling'
+              label: "I've Got A Feeling",
+              value: "I've Got A Feeling"
             },
             {
               label: 'One After 909',

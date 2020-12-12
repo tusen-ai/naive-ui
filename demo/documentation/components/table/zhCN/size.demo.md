@@ -1,4 +1,5 @@
 # 尺寸
+
 ```html
 <n-table :bordered="false" :single-line="false" size="small">
   <n-thead>
@@ -55,6 +56,7 @@
   </n-tbody>
 </n-table>
 ```
+
 ```css
 .n-table {
   margin-bottom: 12px;

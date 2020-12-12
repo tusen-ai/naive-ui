@@ -1,16 +1,14 @@
 # 基础用法
 
 ```html
-<n-popselect
-  v-model:value="value"
-  :options="options"
->
+<n-popselect v-model:value="value" :options="options">
   <n-tag>{{ value || '弹出选择' }}</n-tag>
 </n-popselect>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       value: 'Drive My Car',
       options: [
@@ -23,8 +21,8 @@ export default {
           value: 'Norwegian Wood'
         },
         {
-          label: 'You Won\'t See',
-          value: 'You Won\'t See',
+          label: "You Won't See",
+          value: "You Won't See",
           disabled: true
         },
         {
@@ -53,8 +51,8 @@ export default {
           value: 'Girl'
         },
         {
-          label: 'I\'m looking through you',
-          value: 'I\'m looking through you'
+          label: "I'm looking through you",
+          value: "I'm looking through you"
         },
         {
           label: 'In My Life',

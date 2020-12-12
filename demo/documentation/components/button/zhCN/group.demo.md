@@ -1,19 +1,17 @@
 # 按钮组
+
 可以把几个按钮结合成按钮组。
+
 ```html
 <n-space>
   <n-button-group vertical>
-    <n-button
-      round
-    >
+    <n-button round>
       <template v-slot:icon>
         <log-in-icon />
       </template>
       活着
     </n-button>
-    <n-button
-      ghost
-    >
+    <n-button ghost>
       <template v-slot:icon>
         <log-in-icon />
       </template>
@@ -39,10 +37,7 @@
       </template>
       刚好
     </n-button>
-    <n-button
-      ghost
-      round
-    >
+    <n-button ghost round>
       <template v-slot:icon>
         <log-in-icon />
       </template>
@@ -50,26 +45,19 @@
     </n-button>
   </n-button-group>
   <n-button-group size="small">
-    <n-button
-      type="default"
-      round
-    >
+    <n-button type="default" round>
       <template v-slot:icon>
         <log-in-icon />
       </template>
       活着
     </n-button>
-    <n-button
-      type="default"
-    >
+    <n-button type="default">
       <template v-slot:icon>
         <log-in-icon />
       </template>
       其实
     </n-button>
-    <n-button
-      type="default"
-    >
+    <n-button type="default">
       <template v-slot:icon>
         <log-in-icon />
       </template>
@@ -77,25 +65,19 @@
     </n-button>
   </n-button-group>
   <n-button-group>
-    <n-button
-      ghost
-    >
+    <n-button ghost>
       <template v-slot:icon>
         <log-in-icon />
       </template>
       再吃
     </n-button>
-    <n-button
-      ghost
-    >
+    <n-button ghost>
       <template v-slot:icon>
         <log-in-icon />
       </template>
       一颗
     </n-button>
-    <n-button
-      round
-    >
+    <n-button round>
       <template v-slot:icon>
         <log-in-icon />
       </template>
@@ -104,6 +86,7 @@
   </n-button-group>
 </n-space>
 ```
+
 ```js
 import { LogInOutline as LogInIcon } from '@vicons/ionicons-v5'
 

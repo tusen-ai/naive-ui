@@ -1,9 +1,13 @@
 # Debug
+
 ```html
-<n-card title="Random String Logs" :segmented="{
+<n-card
+  title="Random String Logs"
+  :segmented="{
   header: 'soft',
   content: 'hard'
-}">
+}"
+>
   <n-log
     style="margin-top: -12px; margin-bottom: -12px;"
     :log="log"
@@ -18,26 +22,26 @@
 ```
 
 ```js
-function log () {
+function log() {
   const l = []
   for (let i = 0; i < 40; ++i) {
-    l.push((Math.random()).toString(16))
+    l.push(Math.random().toString(16))
   }
   return l.join('\n') + '\n'
 }
 
 export default {
-  data () {
+  data() {
     return {
       loading: false,
       log: log()
     }
   },
   methods: {
-    clear () {
+    clear() {
       this.log = ''
     },
-    handleRequireMore (from) {
+    handleRequireMore(from) {
       if (this.loading) return
       this.loading = true
       setTimeout(() => {

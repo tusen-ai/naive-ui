@@ -1,4 +1,5 @@
 # Language
+
 ```html
 <n-space vertical>
   <n-space>
@@ -10,9 +11,10 @@
   </n-config-provider>
 </n-space>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       date: null,
       lang: 'en-US'

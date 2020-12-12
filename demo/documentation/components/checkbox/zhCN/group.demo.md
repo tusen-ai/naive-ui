@@ -1,4 +1,5 @@
 # 选项组
+
 ```html
 <n-checkbox-group v-model:value="cities">
   <n-checkbox value="Beijing" label="北京" />
@@ -7,15 +8,17 @@
   <n-checkbox value="Shenzen" label="深圳" />
 </n-checkbox-group>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       cities: null
     }
   }
 }
 ```
+
 ```css
 .n-checkbox {
   margin-right: 12px;

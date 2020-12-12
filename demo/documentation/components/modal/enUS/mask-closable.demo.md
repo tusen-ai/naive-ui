@@ -1,17 +1,15 @@
 # Mask Closable
+
 Use `mask-closable=false` to make modal not emit the event which may close the modal.
+
 ```html
-<n-button
-  @click="modalActive = true"
->
-  Start Me up
-</n-button>
+<n-button @click="modalActive = true"> Start Me up </n-button>
 <n-modal
-  v-model:show="modalActive" 
+  v-model:show="modalActive"
   :mask-closable="false"
-  preset="confirm" 
+  preset="confirm"
   title="Dialog"
-  content="Are you sure?" 
+  content="Are you sure?"
   :closable="false"
   positive-text="Confirm"
   @positive-click="submitCallback"
@@ -19,20 +17,21 @@ Use `mask-closable=false` to make modal not emit the event which may close the m
   negative-text="Cancel"
 />
 ```
+
 ```js
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
-      modalActive: false,
+      modalActive: false
     }
   },
   methods: {
-    cancelCallback () {
+    cancelCallback() {
       this.message.success('Cancel')
       this.modalActive = false
     },
-    submitCallback () {
+    submitCallback() {
       this.message.success('Submit')
       this.modalActive = false
     }

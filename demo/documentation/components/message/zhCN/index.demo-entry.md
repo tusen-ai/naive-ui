@@ -1,4 +1,5 @@
 # 信息 Message
+
 （一般是）从浏览器顶部降下来的神谕。
 
 <n-space vertical>
@@ -19,16 +20,17 @@
 export default {
   inject: ['message'],
   methods: {
-    warning () {
+    warning() {
       this.message.warning('...')
     }
   }
 }
 ```
+
 </n-space>
 
-
 ## 演示
+
 ```demo
 basic
 icon
@@ -40,43 +42,50 @@ about-theme
 ```
 
 ## API
+
 ### MessageProvider Props
-|名称|类型|默认值|说明|
-|-|-|-|-|
-|to|`string \| HTMLElement`|`'body'`|Message 容器节点的位置|
+
+| 名称 | 类型                    | 默认值   | 说明                   |
+| ---- | ----------------------- | -------- | ---------------------- |
+| to   | `string \| HTMLElement` | `'body'` | Message 容器节点的位置 |
 
 ### MessageProvider Injection API
+
 #### MessageProvider Injection Methods
-|名称|类型|说明|
-|-|-|-|
-|error|`(content: string, option?: MessageOption) => MessageReactive`||
-|info|`(content: string, option?: MessageOption) => MessageReactive`||
-|loading|`(content: string, option?: MessageOption) => MessageReactive`||
-|success|`(content: string, option?: MessageOption) => MessageReactive`||
-|warning|`(content: string, option?: MessageOption) => MessageReactive`||
+
+| 名称 | 类型 | 说明 |
+| --- | --- | --- |
+| error | `(content: string, option?: MessageOption) => MessageReactive` |  |
+| info | `(content: string, option?: MessageOption) => MessageReactive` |  |
+| loading | `(content: string, option?: MessageOption) => MessageReactive` |  |
+| success | `(content: string, option?: MessageOption) => MessageReactive` |  |
+| warning | `(content: string, option?: MessageOption) => MessageReactive` |  |
 
 #### MessageOption Properties
-|名称|类型|说明|
-|-|-|-|
-|closable|`boolean`||
-|content|`string \| (() => VNode \| Array<VNode>)`|信息内容|
-|icon|`() => VNode`|信息图标|
-|theme|`'light' \| 'dark' \| string \| null`||
-|onAfterLeave|`Function`|信息消失动画结束的回调|
-|onLeave|`Function`|信息开始消失的回调|
+
+| 名称 | 类型 | 说明 |
+| --- | --- | --- |
+| closable | `boolean` |  |
+| content | `string \| (() => VNode \| Array<VNode>)` | 信息内容 |
+| icon | `() => VNode` | 信息图标 |
+| theme | `'light' \| 'dark' \| string \| null` |  |
+| onAfterLeave | `Function` | 信息消失动画结束的回调 |
+| onLeave | `Function` | 信息开始消失的回调 |
 
 #### MessageReactive Properties
-|名称|类型|说明|
-|-|-|-|
-|closable|`boolean`||
-|content|`string \| (() => VNode \| Array<VNode>)`|信息内容|
-|icon|`() => VNode`|信息图标|
-|theme|`'light' \| 'dark' \| string \| null`||
-|type|`'info' \| 'success' \| 'warning' \| 'error' \| 'loading'`||
-|onAfterLeave|`Function`|信息消失动画结束的回调|
-|onLeave|`Function`|信息开始消失的回调|
+
+| 名称 | 类型 | 说明 |
+| --- | --- | --- |
+| closable | `boolean` |  |
+| content | `string \| (() => VNode \| Array<VNode>)` | 信息内容 |
+| icon | `() => VNode` | 信息图标 |
+| theme | `'light' \| 'dark' \| string \| null` |  |
+| type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` |  |
+| onAfterLeave | `Function` | 信息消失动画结束的回调 |
+| onLeave | `Function` | 信息开始消失的回调 |
 
 #### MessageReactive Methods
-|名称|类型|说明|
-|-|-|-|
-|destroy|`()`||
+
+| 名称    | 类型 | 说明 |
+| ------- | ---- | ---- |
+| destroy | `()` |      |

@@ -1,5 +1,7 @@
 # 非受控手动提交
+
 你可以使用 submit 方法来进行非受控状态下的手动提交。当然你也可以在受控模式下完全控制提交行为。
+
 ```html
 <n-button
   :disabled="!fileListLength"
@@ -18,20 +20,19 @@
   <n-button>选择文件</n-button>
 </n-upload>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       fileListLength: 0
     }
   },
   methods: {
-    handleChange ({
-      fileList
-    }) {
+    handleChange({ fileList }) {
       this.fileListLength = fileList.length
     },
-    handleClick () {
+    handleClick() {
       this.$refs.upload.submit()
     }
   }

@@ -1,5 +1,7 @@
 # 基础
+
 获得当前主题和命名空间。
+
 ```html
 <n-config-consumer
   @theme-change="handleThemeChange"
@@ -13,14 +15,15 @@
   </template>
 </n-config-consumer>
 ```
+
 ```js
 export default {
   inject: ['message'],
   methods: {
-    handleThemeChange (value, oldValue) {
+    handleThemeChange(value, oldValue) {
       this.message.info('Theme Change: `' + value + '` theme')
     },
-    handleNamespaceChange (value, oldValue) {
+    handleNamespaceChange(value, oldValue) {
       this.message.info('Namespace Change: `' + value + '` namespace')
     }
   }

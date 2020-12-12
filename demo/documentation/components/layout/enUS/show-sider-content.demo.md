@@ -1,11 +1,11 @@
 # Hide Sider Content
+
 Sometimes you don't want to see content inside sider after it's collapsed.
+
 ```html
 <n-switch v-model:value="collapsed" />
 <n-layout style="height: 240px;">
-  <n-layout-header style="height: 64px;">
-    Cool Header
-  </n-layout-header>
+  <n-layout-header style="height: 64px;"> Cool Header </n-layout-header>
   <n-layout>
     <n-layout-sider
       collapse-mode="width"
@@ -47,17 +47,16 @@ Sometimes you don't want to see content inside sider after it's collapsed.
     >
       <n-h1>Sider Sider Sider</n-h1>
     </n-layout-sider>
-    <n-layout 
-      position="absolute"
-    >
+    <n-layout position="absolute">
       <span>Content</span>
     </n-layout>
   </n-layout>
 </n-layout>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       collapsed: false
     }

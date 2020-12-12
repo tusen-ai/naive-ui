@@ -1,13 +1,12 @@
 # 回退选项
+
 在某些特殊的情况下，你会填入值但是还没填入对应的选项，例如异步，或者你填错了。如果你想控制在这种情况下选项如何显示，使用 `fallback-option` 属性来控制如何用这个值产生一个选项。
 
 如果你不需要回退选项，将 `fallback-option` 设为 `false` 即可，这时只有出现在选项中的值才会被视为合法值，在操作的过程中不合法的值会被清除掉。
+
 ```html
 <n-space vertical>
-  <n-select
-    v-model:value="singleValue"
-    :options="options"
-  />
+  <n-select v-model:value="singleValue" :options="options" />
   <n-select
     v-model:value="multipleValue"
     multiple
@@ -29,11 +28,12 @@
   />
 </n-space>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
-      trim (value) {
+      trim(value) {
         return {
           label: value.slice(0, 2),
           value
@@ -56,7 +56,7 @@ export default {
           value: 'song2'
         },
         {
-          label: 'You Won\'t See',
+          label: "You Won't See",
           value: 'song3',
           disabled: true
         },
@@ -86,7 +86,7 @@ export default {
           value: 'song9'
         },
         {
-          label: 'I\'m looking through you',
+          label: "I'm looking through you",
           value: 'song10'
         },
         {

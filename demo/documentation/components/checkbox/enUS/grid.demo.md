@@ -1,5 +1,7 @@
 # Grid
+
 Use checkbox with grid.
+
 ```html
 <n-checkbox-group v-model:value="value">
   <n-row>
@@ -52,17 +54,20 @@ Use checkbox with grid.
   </n-row>
 </n-checkbox-group>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       value: null
     }
   }
 }
 ```
+
 ```css
-.n-checkbox, .n-button {
+.n-checkbox,
+.n-button {
   margin: 0 12px 8px 0;
 }
 ```

@@ -1,4 +1,5 @@
 # 事件
+
 ```html
 <n-input-number
   v-model:value="value"
@@ -7,22 +8,23 @@
   @blur="handleBlur"
 />
 ```
+
 ```js
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       value: 0
     }
   },
   methods: {
-    handleChange (v) {
+    handleChange(v) {
       this.message.info(`update:value(${v})`)
     },
-    handleBlur () {
+    handleBlur() {
       this.message.info('blur')
     },
-    handleFocus () {
+    handleFocus() {
       this.message.info('focus')
     }
   }

@@ -1,14 +1,9 @@
 # 不用基础样式
+
 ```html
-<n-popover
-  trigger="hover"
-  raw
-  :show-arrow="false"
->
+<n-popover trigger="hover" raw :show-arrow="false">
   <template v-slot:trigger>
-    <n-button style="margin:0;">
-      悬浮
-    </n-button>
+    <n-button style="margin:0;"> 悬浮 </n-button>
   </template>
   <div
     style="width: 100px; height: 100px; background-color: red; transform-origin: inherit;"

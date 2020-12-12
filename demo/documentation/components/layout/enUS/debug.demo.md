@@ -1,4 +1,5 @@
 # Debug
+
 ```html
 <n-switch v-model:value="collapsed" />
 <n-layout style="height: 480px;">
@@ -26,9 +27,10 @@
   </n-layout>
 </n-layout>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       collapsed: false
     }

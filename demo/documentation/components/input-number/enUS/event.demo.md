@@ -1,5 +1,7 @@
 # Event
+
 Blur & change events are exposed.
+
 ```html
 <n-input-number
   v-model:value="value"
@@ -7,21 +9,22 @@ Blur & change events are exposed.
   @blur="handleBlur"
 />
 ```
+
 ```js
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       value: 0
     }
   },
   methods: {
-    handleChange (v) {
+    handleChange(v) {
       this.message.info(`value: ${v}`)
     },
-    handleBlur (v) {
+    handleBlur(v) {
       this.message.info(`blur: ` + v)
-    },
+    }
   }
 }
 ```

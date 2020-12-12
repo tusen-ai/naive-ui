@@ -1,4 +1,5 @@
 # Passively Activateds
+
 If you want to activate input by pressing enter after focused, use `passively-activated`. (Use tab key to focus on the inputs)
 
 ```html
@@ -34,10 +35,11 @@ If you want to activate input by pressing enter after focused, use `passively-ac
   />
 </n-space>
 ```
+
 ```js
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       value: null,
       pair: null

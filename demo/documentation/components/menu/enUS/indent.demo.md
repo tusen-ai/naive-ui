@@ -1,5 +1,7 @@
 # Indent
+
 You can specify `indent` & `root-indent` of the menu. `root-indent` only determines the first-leveled children.
+
 ```html
 <n-menu
   v-model:value="activeKey"
@@ -8,6 +10,7 @@ You can specify `indent` & `root-indent` of the menu. `root-indent` only determi
   :items="menuItems"
 />
 ```
+
 ```js
 import { h, resolveComponent } from 'vue'
 import {
@@ -96,7 +99,7 @@ const menuItems = [
 ]
 
 export default {
-  data () {
+  data() {
     return {
       activeKey: null,
       menuItems

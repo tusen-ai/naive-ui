@@ -1,5 +1,7 @@
 # Large Data
+
 If you have tons of data, you may need to speed the transfer up! Set `virtual-scroll` on transfer to use a blazing fast transfer (which turns ridiculous animation off).
+
 ```html
 <n-transfer
   ref="transfer"
@@ -8,8 +10,9 @@ If you have tons of data, you may need to speed the transfer up! Set `virtual-sc
   virtual-scroll
 />
 ```
+
 ```js
-function createOptions () {
+function createOptions() {
   return Array.apply(null, { length: 42000 }).map((v, i) => ({
     label: 'Option' + i,
     value: i,
@@ -17,12 +20,12 @@ function createOptions () {
   }))
 }
 
-function createValues () {
+function createValues() {
   return Array.apply(null, { length: 10000 }).map((v, i) => i)
 }
 
 export default {
-  data () {
+  data() {
     return {
       options: createOptions(),
       value: createValues()

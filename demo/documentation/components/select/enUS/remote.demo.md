@@ -1,5 +1,7 @@
 # Remote(Single)
+
 Async example for single select.
+
 ```html
 <n-select
   v-model:value="value"
@@ -12,6 +14,7 @@ Async example for single select.
   @search="handleSearch"
 />
 ```
+
 ```js
 const options = [
   {
@@ -23,7 +26,7 @@ const options = [
     value: 'song2'
   },
   {
-    label: 'You Won\'t See',
+    label: "You Won't See",
     value: 'song3'
   },
   {
@@ -51,7 +54,7 @@ const options = [
     value: 'song9'
   },
   {
-    label: 'I\'m looking through you',
+    label: "I'm looking through you",
     value: 'song10'
   },
   {
@@ -65,7 +68,7 @@ const options = [
 ]
 
 export default {
-  data () {
+  data() {
     return {
       value: null,
       loading: false,
@@ -79,7 +82,7 @@ export default {
         }
         this.loading = true
         window.setTimeout(() => {
-          this.options = options.filter(item => ~item.label.indexOf(query))
+          this.options = options.filter((item) => ~item.label.indexOf(query))
           if (!this.options.length) this.noDataContent = 'no result found'
           this.loading = false
         }, 1000)

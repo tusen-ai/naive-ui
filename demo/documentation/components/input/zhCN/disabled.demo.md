@@ -1,5 +1,7 @@
 # 禁用
+
 文本输入可以被禁用。
+
 ```html
 <n-space vertical>
   <n-input
@@ -18,7 +20,13 @@
     :disabled="!active"
     round
   />
-  <n-input pair separator="to" v-model:value="value" clearable :disabled="!active">
+  <n-input
+    pair
+    separator="to"
+    v-model:value="value"
+    clearable
+    :disabled="!active"
+  >
     <template v-slot:affix>
       <n-icon><cash-icon /></n-icon>
     </template>
@@ -26,6 +34,7 @@
   <n-switch v-model:value="active" />
 </n-space>
 ```
+
 ```js
 import { CashOutline as CashIcon } from '@vicons/ionicons-v5'
 
@@ -33,7 +42,7 @@ export default {
   components: {
     CashIcon
   },
-  data () {
+  data() {
     return {
       active: false,
       value: null

@@ -1,5 +1,7 @@
 # Use Preset Input
+
 By default, the preset of `n-dynamic-input` is `input`.
+
 ```html
 <n-dynamic-input
   v-model:value="value"
@@ -11,15 +13,12 @@ By default, the preset of `n-dynamic-input` is `input`.
 {{  JSON.stringify(value, 0, 2) }}
 </pre>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
-      value: [
-        '',
-        '',
-        ''
-      ]
+      value: ['', '', '']
     }
   }
 }

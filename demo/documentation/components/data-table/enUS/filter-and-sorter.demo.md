@@ -1,15 +1,15 @@
 # Uncontrolled Filter and Sorter
 
 ```html
-<n-button @click='sortName'>Sort By Name (Ascend)</n-button>
-<n-button @click='filterAddress'>Filter Address (London)</n-button>
-<n-button @click='clearFilters'>Clear Filters</n-button>
-<n-button @click='clearSorter'>Clear Sorter</n-button>
+<n-button @click="sortName">Sort By Name (Ascend)</n-button>
+<n-button @click="filterAddress">Filter Address (London)</n-button>
+<n-button @click="clearFilters">Clear Filters</n-button>
+<n-button @click="clearSorter">Clear Sorter</n-button>
 <n-data-table
-  ref='table'
-  :columns='columns'
-  :data='data'
-  :pagination='pagination'
+  ref="table"
+  :columns="columns"
+  :data="data"
+  :pagination="pagination"
 />
 ```
 
@@ -29,7 +29,7 @@ const columns = [
   {
     title: 'Address',
     key: 'address',
-    defaultFilterOptionValues: [ 'London', 'New York' ],
+    defaultFilterOptionValues: ['London', 'New York'],
     filterOptions: [
       {
         label: 'London',
@@ -40,7 +40,7 @@ const columns = [
         value: 'New York'
       }
     ],
-    filter (value, row) {
+    filter(value, row) {
       return ~row.address.indexOf(value)
     }
   }
@@ -74,7 +74,7 @@ const data = [
 ]
 
 export default {
-  data () {
+  data() {
     return {
       data: data,
       columns,
@@ -82,18 +82,18 @@ export default {
     }
   },
   methods: {
-    filterAddress () {
+    filterAddress() {
       this.$refs.table.filter({
-        address: [ 'London' ]
+        address: ['London']
       })
     },
-    sortName () {
+    sortName() {
       this.$refs.table.sort('name', 'ascend')
     },
-    clearFilters () {
+    clearFilters() {
       this.$refs.table.filter(null)
     },
-    clearSorter () {
+    clearSorter() {
       this.$refs.table.sort(null)
     }
   }

@@ -1,5 +1,7 @@
 # Use it in Form
+
 `n-dynamic-input` itself cannot be verified. If you need to verify the input of `n-dynamic-input`, you can pass `n-form-item` in the custom content to complete the verification. Here is a complete example.
+
 ```html
 <n-form :model="model" ref="form">
   <!--
@@ -55,26 +57,25 @@
 {{  JSON.stringify(model.dynamicInputValue, 0, 2) }}
 </pre>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       dynamicInputRule: {
         trigger: 'input',
-        validator (rule, value) {
+        validator(rule, value) {
           if (value.length >= 5) return new Error('Input up to 4 characters')
           return true
         }
       },
       model: {
-        dynamicInputValue: [
-          { key: 0, value: '', name: '' }
-        ]
+        dynamicInputValue: [{ key: 0, value: '', name: '' }]
       }
     }
   },
   methods: {
-    onCreate () {
+    onCreate() {
       return {
         name: '',
         value: '',

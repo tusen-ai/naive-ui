@@ -1,5 +1,7 @@
 # 尺寸
+
 级联选择有 `small`、`medium` 和 `large` 尺寸。
+
 ```html
 <n-space vertical>
   <n-cascader
@@ -25,8 +27,9 @@
   />
 </n-space>
 ```
+
 ```js
-function genOptions (depth = 2, iterator = 1, prefix = '') {
+function genOptions(depth = 2, iterator = 1, prefix = '') {
   const length = 12
   const options = []
   for (let i = 1; i <= length; ++i) {
@@ -42,7 +45,6 @@ function genOptions (depth = 2, iterator = 1, prefix = '') {
         value: `${prefix}-${i}`,
         label: `${prefix}-${i}`,
         disabled: i % 5 === 0
-
       })
     } else {
       options.push({
@@ -57,7 +59,7 @@ function genOptions (depth = 2, iterator = 1, prefix = '') {
 }
 
 export default {
-  data () {
+  data() {
     return {
       value: null,
       options: genOptions()

@@ -1,5 +1,7 @@
 # Size
+
 Button can be `tiny`, `small`, `medium` and `large` size.
+
 ```html
 <n-space align="baseline">
   <n-button size="tiny">Small Small</n-button>

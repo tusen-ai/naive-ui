@@ -1,32 +1,26 @@
 # Controlled
+
 Modal can be controlled.
+
 ```html
-<n-button
-  @click="handleClick"
->
-  Start Me up
-</n-button>
+<n-button @click="handleClick"> Start Me up </n-button>
 <n-modal :show="modalActive">
-  <n-card
-    style="width: 600px;"
-    title="Modal"
-    :bordered="false"
-    size="huge"
-  >
+  <n-card style="width: 600px;" title="Modal" :bordered="false" size="huge">
     Countdown {{ timeout / 1000 }}s
   </n-card>
 </n-modal>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       modalActive: false,
       timeout: 6000
     }
   },
   methods: {
-    handleClick () {
+    handleClick() {
       this.modalActive = true
       this.timeout = 6000
       let countdown = () => {

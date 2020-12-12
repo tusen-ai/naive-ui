@@ -1,5 +1,7 @@
 # Shape
+
 Button has different shapes.
+
 ```html
 <n-space>
   <n-button circle>
@@ -11,6 +13,7 @@ Button has different shapes.
   <n-button>Rect</n-button>
 </n-space>
 ```
+
 ```js
 import { CashOutline as CashIcon } from '@vicons/ionicons-v5'
 

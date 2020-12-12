@@ -1,11 +1,9 @@
 # Use Preset Card
+
 Modal has some presets, which means you can use props & slots of the preset after set it.
+
 ```html
-<n-button
-  @click="modalActive = true"
->
-  Start Me up
-</n-button>
+<n-button @click="modalActive = true"> Start Me up </n-button>
 <n-modal
   v-model:show="modalActive"
   preset="card"
@@ -18,23 +16,20 @@ Modal has some presets, which means you can use props & slots of the preset afte
     footer: 'soft'
   }"
 >
-  <template v-slot:header-extra>
-    Oops!
-  </template>
+  <template v-slot:header-extra> Oops! </template>
   Content
-  <template v-slot:footer>
-    Footer
-  </template>
+  <template v-slot:footer> Footer </template>
 </n-modal>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       bodyStyle: {
         width: '600px'
       },
-      modalActive: false,
+      modalActive: false
     }
   }
 }

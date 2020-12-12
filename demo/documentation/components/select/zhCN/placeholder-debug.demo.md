@@ -1,4 +1,5 @@
 # Placehoder Debug
+
 ```html
 <n-space vertical>
   <n-select
@@ -16,14 +17,15 @@
   />
 </n-space>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       options: [
         {
           value: '1',
-          label: '1',
+          label: '1'
         }
       ],
       value1: null,

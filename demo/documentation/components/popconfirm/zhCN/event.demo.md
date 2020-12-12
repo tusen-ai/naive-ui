@@ -1,5 +1,7 @@
 # 事件
+
 `positive-click` & `negative-click`
+
 ```html
 <n-popconfirm
   @positive-click="handlePositiveClick"
@@ -11,14 +13,15 @@
   我看 B 站的时候，听说有些游戏冲钱也是找罪受。
 </n-popconfirm>
 ```
+
 ```js
 export default {
   inject: ['message'],
   methods: {
-    handlePositiveClick () {
+    handlePositiveClick() {
       this.message.info('positive click')
     },
-    handleNegativeClick () {
+    handleNegativeClick() {
       this.message.info('negative click')
     }
   }

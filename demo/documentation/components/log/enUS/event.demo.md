@@ -1,5 +1,7 @@
 # Event
+
 Log has `require-more`, `reach-top` and `reach-bottom` event. Note that even if logs are scrolled to top or bottom, when you wheel to the same direction, `require-more` will still be triggered while `reach-xxx` will not. If you don't want to trigger handler when logs are at top or bottom. Use `reach-top` or `reach-bottom` instead.
+
 ```html
 <n-log
   :log="log"
@@ -12,27 +14,27 @@ Log has `require-more`, `reach-top` and `reach-bottom` event. Note that even if 
 ```
 
 ```js
-function log () {
+function log() {
   const l = []
   for (let i = 0; i < 10; ++i) {
-    l.push((Math.random()).toString(16))
+    l.push(Math.random().toString(16))
   }
   return l.join('\n') + '\n'
 }
 
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       loading: false,
       log: log()
     }
   },
   methods: {
-    clear () {
+    clear() {
       this.log = ''
     },
-    handleRequireMore (from) {
+    handleRequireMore(from) {
       this.message.info('Require More from ' + from)
       if (this.loading) return
       this.loading = true
@@ -45,10 +47,10 @@ export default {
         this.loading = false
       }, 1000)
     },
-    handleReachTop () {
+    handleReachTop() {
       this.message.info('Reach Top')
     },
-    handleReachBottom () {
+    handleReachBottom() {
       this.message.info('Reach Bottom')
     }
   }

@@ -1,7 +1,12 @@
 # Manually Positioned
+
 For some special case, you may want to manually position the dropdown. For example, right click to activate dropdown in some area.
+
 ```html
-<div style="width: 200px; height: 200px; background-color: rgba(0, 128, 0, .5);" @contextmenu="handleContextMenu">
+<div
+  style="width: 200px; height: 200px; background-color: rgba(0, 128, 0, .5);"
+  @contextmenu="handleContextMenu"
+>
   Right Click
 </div>
 <n-dropdown
@@ -13,6 +18,7 @@ For some special case, you may want to manually position the dropdown. For examp
   :show="showDropdown"
 />
 ```
+
 ```js
 const options = [
   {
@@ -64,14 +70,14 @@ const options = [
 export default {
   inject: ['message'],
   methods: {
-    handleSelect (name) {
+    handleSelect(name) {
       this.showDropdown = false
       this.message.info(name)
     },
-    handleBlur () {
+    handleBlur() {
       this.showDropdown = false
     },
-    handleContextMenu (e) {
+    handleContextMenu(e) {
       e.preventDefault()
       this.showDropdown = false
       this.$nextTick().then(() => {
@@ -81,7 +87,7 @@ export default {
       })
     }
   },
-  data () {
+  data() {
     return {
       options,
       showDropdown: false,

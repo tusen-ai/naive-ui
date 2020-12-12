@@ -1,27 +1,26 @@
 # 动态修改内容
+
 你可以修改已经存在的通知
+
 ```html
 <n-space>
-  <n-button @click="open">
-    打开它
-  </n-button>
-  <n-button @click="change" :disabled="!n">
-    改它
-  </n-button>
+  <n-button @click="open"> 打开它 </n-button>
+  <n-button @click="change" :disabled="!n"> 改它 </n-button>
 </n-space>
 ```
+
 ```js
 import { h, resolveComponent } from 'vue'
 
 export default {
   inject: ['notification'],
-  data () {
+  data() {
     return {
       n: null
     }
   },
   methods: {
-    open () {
+    open() {
       this.n = this.notification.create({
         title: `Wouldn't it be Nice`,
         description: 'From the Beach Boys',
@@ -36,23 +35,24 @@ In the morning when the day is new
 And after having spent the day together
 Hold each other close the whole night through`,
         meta: '2019-5-27 15:11',
-        avatar: () => 
+        avatar: () =>
           h(resolveComponent('n-avatar'), {
             size: 'small',
             round: true,
-            src:'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+            src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
           }),
         onClose: () => {
           this.n = null
         }
       })
     },
-    change () {
+    change() {
       if (this.n) {
-        this.n.content = () => h('img', {
-          src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
-          style: 'width: 100%;'
-        })
+        this.n.content = () =>
+          h('img', {
+            src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
+            style: 'width: 100%;'
+          })
       }
     }
   }

@@ -1,7 +1,11 @@
 # 穿梭框 Transfer
+
 <!--single-column-->
+
 左、右、左、右...像我这么无聊的人能玩一整天。
+
 ## 演示
+
 ```demo
 basic
 large-data
@@ -10,28 +14,30 @@ filterable
 ```
 
 ## Props
-|名称|类型|默认值|说明|
-|-|-|-|-|
-|disabled|`boolean`|`true`||
-|filterable|`boolean`|`false`||
-|filter|`(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean`|一个简单的标签字符串匹配函数||
-|options|`Array<TransferOption>`|`[]`||
-|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
-|source-filter-placeholder|`string`|`undefined`||
-|source-title|`string`|`'源项'`||
-|target-filter-placeholder|`string`|`undefined`||
-|target-title|`string`|`'目标项'`||
-|theme|`'light' \| 'dark' \| string`|`undefined`||
-|value|`Array<string \| number>`|`null`||
-|on-update:value|`(value: Array<string \| number>) => any`|`undefined`||
-|virtual-scroll|`boolean`|`false`|If use virtual scroll on transfer. If set to `true` it can handles large data (and turn transfer animation off)|
+
+| 名称 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| disabled | `boolean` | `true` |  |
+| filterable | `boolean` | `false` |  |
+| filter | `(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean` | 一个简单的标签字符串匹配函数 |  |
+| options | `Array<TransferOption>` | `[]` |  |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
+| source-filter-placeholder | `string` | `undefined` |  |
+| source-title | `string` | `'源项'` |  |
+| target-filter-placeholder | `string` | `undefined` |  |
+| target-title | `string` | `'目标项'` |  |
+| theme | `'light' \| 'dark' \| string` | `undefined` |  |
+| value | `Array<string \| number>` | `null` |  |
+| on-update:value | `(value: Array<string \| number>) => any` | `undefined` |  |
+| virtual-scroll | `boolean` | `false` | If use virtual scroll on transfer. If set to `true` it can handles large data (and turn transfer animation off) |
 
 ### TransferOption Type
-|属性|类型|说明|
-|-|-|-|
-|label|`string`||
-|value|`string \| number`|选项的 value，需要唯一|
-|disabled|`boolean`||
+
+| 属性     | 类型               | 说明                   |
+| -------- | ------------------ | ---------------------- |
+| label    | `string`           |                        |
+| value    | `string \| number` | 选项的 value，需要唯一 |
+| disabled | `boolean`          |                        |
 
 <!-- ## 备注
 当听到同事和我说他要往里面放上千条数据的时候，我是很蛋疼的。贫瘠的想象让我实在难想出为啥非得用这个东西装这么多数据。但是必须承认，大多数情况下还是我考虑得不太周全。

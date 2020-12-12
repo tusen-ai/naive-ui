@@ -1,5 +1,7 @@
 # No Indicator
+
 If you don't want indicator.
+
 ```html
 <n-progress
   style="margin: 0 8px 12px 0;"

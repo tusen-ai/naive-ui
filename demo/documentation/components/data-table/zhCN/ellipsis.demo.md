@@ -1,11 +1,13 @@
 # 省略
+
 通过设定 `column.ellipsis` 省略单元格内容。
+
 ```html
 <n-data-table
-  ref='table'
-  :columns='columns'
-  :data='data'
-  :pagination='pagination'
+  ref="table"
+  :columns="columns"
+  :data="data"
+  :pagination="pagination"
 />
 ```
 
@@ -59,7 +61,7 @@ const data = [
 
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       data,
       columns,

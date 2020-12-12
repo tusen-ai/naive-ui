@@ -1,4 +1,5 @@
 # 输入成对值
+
 ```html
 <n-input
   pair
@@ -12,26 +13,27 @@
   @update:value="handleInputInput"
 />
 ```
+
 ```js
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       placeholder: ['从', '到'],
       value: ['0', '100']
     }
   },
   methods: {
-    handleInputBlur () {
+    handleInputBlur() {
       this.message.info('输入成对值：Blur')
     },
-    handleInputFocus () {
+    handleInputFocus() {
       this.message.info('输入成对值：Focus')
     },
-    handleInputInput () {
+    handleInputInput() {
       this.message.info('输入成对值：Input')
     },
-    handleInputChange () {
+    handleInputChange() {
       this.message.info('输入成对值：Change')
     }
   }

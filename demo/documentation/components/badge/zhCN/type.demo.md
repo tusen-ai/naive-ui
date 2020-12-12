@@ -1,5 +1,7 @@
 # 类型
+
 标记有 `default`、`error`、`info`、`success`、`warning` 类型。
+
 ```html
 <n-space :size="24" align="center">
   <n-badge dot>
@@ -19,9 +21,10 @@
   </n-badge>
 </n-space>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       value: 10
     }

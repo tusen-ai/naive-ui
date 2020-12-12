@@ -1,5 +1,7 @@
 # Icon
+
 Use icon in button.
+
 ```html
 <n-space>
   <n-button>
@@ -16,6 +18,7 @@ Use icon in button.
   </n-button>
 </n-space>
 ```
+
 ```js
 import { CashOutline as CashIcon } from '@vicons/ionicons-v5'
 

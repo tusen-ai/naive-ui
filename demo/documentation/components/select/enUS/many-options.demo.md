@@ -1,21 +1,17 @@
 # Lots of Options
+
 1000 times of the ultimate answer.
+
 ```html
 <n-space vertical>
-  <n-select
-    v-model:value="value"
-    :options="options"
-  />
-  <n-select
-    multiple
-    v-model:value="values"
-    :options="options"
-  />
+  <n-select v-model:value="value" :options="options" />
+  <n-select multiple v-model:value="values" :options="options" />
 </n-space>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       value: null,
       values: null,

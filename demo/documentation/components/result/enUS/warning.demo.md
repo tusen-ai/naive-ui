@@ -1,6 +1,11 @@
 # Warning
+
 ```html
-<n-result status="warning" title="Warning" description="People seldom see it until it comes true.">
+<n-result
+  status="warning"
+  title="Warning"
+  description="People seldom see it until it comes true."
+>
   <template v-slot:footer>
     <n-button>Hmm, Truly Sad, Isn't It?</n-button>
   </template>

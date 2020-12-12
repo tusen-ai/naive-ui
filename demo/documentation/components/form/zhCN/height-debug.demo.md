@@ -1,17 +1,14 @@
 # Height Debug
+
 Buggy!
+
 ```html
-<n-form
-  :model="formValue"
-  :rules="rules"
-  :size="size"
-  ref="form"
->
+<n-form :model="formValue" :rules="rules" :size="size" ref="form">
   <n-form-item label="姓名" path="user.name">
     <n-input v-model:value="formValue.user.name" placeholder="输入姓名" />
   </n-form-item>
   <n-form-item label="电话号码" path="phone">
-    <n-input placeholder="电话号码" v-model:value="formValue.phone"/>
+    <n-input placeholder="电话号码" v-model:value="formValue.phone" />
   </n-form-item>
   <n-form-item>
     <n-button @click="handleValidateClick" attr-type="button">验证</n-button>
@@ -22,10 +19,11 @@ Buggy!
 {{  JSON.stringify(formValue, 0, 2) }}
 </pre>
 ```
+
 ```js
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       size: 'medium',
       formValue: {
@@ -46,14 +44,14 @@ export default {
             {
               message: 'not a',
               trigger: 'input',
-              validator (rule, value) {
+              validator(rule, value) {
                 return value === 'x'
               }
             },
             {
               message: 'not b',
               trigger: 'input',
-              validator (rule, value) {
+              validator(rule, value) {
                 return value === 'x'
               }
             }
@@ -68,8 +66,8 @@ export default {
     }
   },
   methods: {
-    handleValidateClick (e) {
-      this.$refs.form.validate(errors => {
+    handleValidateClick(e) {
+      this.$refs.form.validate((errors) => {
         if (!errors) {
           this.message.success('Valid')
         } else {

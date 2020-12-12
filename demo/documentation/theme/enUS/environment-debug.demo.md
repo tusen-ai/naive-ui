@@ -1,5 +1,7 @@
 # Theme Environments
+
 Sometimes you may need some component to access some values at specific theme. You can use `theme-environments`. Config Consumer & Element have access to the current theme environment.
+
 ```html
 <div>
   <n-button @click="theme = 'dark'">Dark Theme</n-button>
@@ -13,9 +15,10 @@ Sometimes you may need some component to access some values at specific theme. Y
   </n-card>
 </n-config-provider>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       theme: 'dark',
       env: {
@@ -26,6 +29,7 @@ export default {
   }
 }
 ```
+
 ```css
 .n-button {
   margin: 0 8px 12px 0;

@@ -1,7 +1,9 @@
 # Change Position
+
 For example: right 40px & bottom 160px.
+
 ```html
- <n-back-top
+<n-back-top
   :right="40"
   :bottom="160"
   :style="{
@@ -18,7 +20,9 @@ For example: right 40px & bottom 160px.
     }
   }"
 >
-  <div style="width: 200px; height: 40px; line-height: 40px; text-align: center; font-size: 14px;">
+  <div
+    style="width: 200px; height: 40px; line-height: 40px; text-align: center; font-size: 14px;"
+  >
     Change Position
   </div>
 </n-back-top>

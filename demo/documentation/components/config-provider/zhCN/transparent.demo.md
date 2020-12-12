@@ -1,5 +1,7 @@
 # 不需要包裹 DOM
+
 如果不需要包裹 DOM，设置 `abstract`。(注意，这种情况下只接受一个子节点)
+
 ```html
 <n-space vertical>
   <n-space>
@@ -15,9 +17,10 @@
   </n-config-provider>
 </n-space>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       theme: 'dark',
       env: {

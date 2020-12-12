@@ -1,5 +1,7 @@
 # 主题环境
+
 你有的时候可能需要让一些组件在特定主题下获取一些值，这个时候你可以设定环境主题。
+
 ```html
 <div>
   <n-button @click="theme = 'dark'">深色主题</n-button>
@@ -13,9 +15,10 @@
   </n-card>
 </n-config-provider>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       theme: 'dark',
       env: {
@@ -26,6 +29,7 @@ export default {
   }
 }
 ```
+
 ```css
 .n-button {
   margin: 0 8px 12px 0;

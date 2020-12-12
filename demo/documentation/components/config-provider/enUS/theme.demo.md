@@ -1,5 +1,7 @@
 # Theme
+
 Set theme of inner components of `n-config-provider`.
+
 ```html
 <n-config-provider :theme="theme">
   <n-card>
@@ -10,9 +12,10 @@ Set theme of inner components of `n-config-provider`.
   </n-card>
 </n-config-provider>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       theme: 'dark'
     }

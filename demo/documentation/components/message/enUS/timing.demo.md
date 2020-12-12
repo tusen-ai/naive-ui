@@ -1,9 +1,9 @@
 # Timing
+
 Specify the duration of messages.
+
 ```html
-<n-button @click="createMessage">
-  Last for 5 second
-</n-button>
+<n-button @click="createMessage"> Last for 5 second </n-button>
 ```
 
 ```js

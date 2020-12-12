@@ -1,29 +1,18 @@
 # 尺寸
+
 选择器有不同的尺寸。
 
 ```html
 <n-space vertical>
-  <n-select
-    v-model:value="value"
-    size="small"
-    :options="options"
-  />
-  <n-select
-    v-model:value="value"
-    size="medium"
-    :options="options"
-  />
-  <n-select
-    v-model:value="value"
-    size="large"
-    :options="options"
-  />
+  <n-select v-model:value="value" size="small" :options="options" />
+  <n-select v-model:value="value" size="medium" :options="options" />
+  <n-select v-model:value="value" size="large" :options="options" />
 </n-space>
 ```
 
 ```js
 export default {
-  data () {
+  data() {
     return {
       value: null,
       options: [
@@ -41,7 +30,7 @@ export default {
           value: 'song2'
         },
         {
-          label: 'You Won\'t See',
+          label: "You Won't See",
           value: 'song3',
           disabled: true
         },
@@ -71,7 +60,7 @@ export default {
           value: 'song9'
         },
         {
-          label: 'I\'m looking through you',
+          label: "I'm looking through you",
           value: 'song10'
         },
         {

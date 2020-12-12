@@ -1,5 +1,7 @@
 # Ghost
+
 Ghost button has transparent background.
+
 ```html
 <n-space>
   <n-button ghost>Default</n-button>

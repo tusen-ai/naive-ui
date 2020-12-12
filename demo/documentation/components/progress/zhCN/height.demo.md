@@ -1,5 +1,7 @@
 # 高度 & 圆角
+
 如果你对高度和圆角不满意。
+
 ```html
 <n-progress
   type="line"
@@ -15,8 +17,10 @@
   :height="24"
   border-radius="12px 12px 0 0"
   fill-border-radius="12px 0 12px 12px"
->一种艺术</n-progress>
+  >一种艺术</n-progress
+>
 ```
+
 ```css
 .n-progress {
   margin-bottom: 8px;

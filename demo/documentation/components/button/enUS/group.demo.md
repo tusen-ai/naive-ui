@@ -1,19 +1,17 @@
 # Button Group
+
 Button can be grouped.
+
 ```html
 <n-space>
   <n-button-group vertical>
-    <n-button
-      round
-    >
+    <n-button round>
       <template v-slot:icon>
         <log-in-icon />
       </template>
       Live a
     </n-button>
-    <n-button
-      ghost
-    >
+    <n-button ghost>
       <template v-slot:icon>
         <log-in-icon />
       </template>
@@ -39,10 +37,7 @@ Button can be grouped.
       </template>
       Enough
     </n-button>
-    <n-button
-      ghost
-      round
-    >
+    <n-button ghost round>
       <template v-slot:icon>
         <log-in-icon />
       </template>
@@ -50,9 +45,7 @@ Button can be grouped.
     </n-button>
   </n-button-group>
   <n-button-group size="small">
-    <n-button
-      round
-    >
+    <n-button round>
       <template v-slot:icon>
         <log-in-icon />
       </template>
@@ -72,25 +65,19 @@ Button can be grouped.
     </n-button>
   </n-button-group>
   <n-button-group>
-    <n-button
-      ghost
-    >
+    <n-button ghost>
       <template v-slot:icon>
         <log-in-icon />
       </template>
       Eat
     </n-button>
-    <n-button
-      ghost
-    >
+    <n-button ghost>
       <template v-slot:icon>
         <log-in-icon />
       </template>
       One More
     </n-button>
-    <n-button
-      round
-    >
+    <n-button round>
       <template v-slot:icon>
         <log-in-icon />
       </template>
@@ -99,6 +86,7 @@ Button can be grouped.
   </n-button-group>
 </n-space>
 ```
+
 ```js
 import { LogInOutline as LogInIcon } from '@vicons/ionicons-v5'
 

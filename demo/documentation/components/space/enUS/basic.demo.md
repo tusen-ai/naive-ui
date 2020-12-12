@@ -1,4 +1,5 @@
 # Basic
+
 ```html
 <n-space>
   <n-button>Oops!</n-button>

@@ -1,5 +1,7 @@
 # Height & Border Radius
+
 In case you aren't satisfied with height & border-radius.
+
 ```html
 <n-progress
   type="line"
@@ -15,8 +17,10 @@ In case you aren't satisfied with height & border-radius.
   :height="24"
   border-radius="12px 0 12px 0"
   fill-border-radius="12px 0 12px 0"
->A Kind of Art</n-progress>
+  >A Kind of Art</n-progress
+>
 ```
+
 ```css
 .n-progress {
   margin-bottom: 8px;

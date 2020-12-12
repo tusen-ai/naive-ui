@@ -1,5 +1,7 @@
 # Push && Pull
+
 See codes to know what happens. Basically it is relative position change.
+
 ```html
 <n-row :gutter="12">
   <n-col :span="6" :push="6">
@@ -16,13 +18,14 @@ See codes to know what happens. Basically it is relative position change.
   </n-col>
 </n-row>
 ```
+
 ```css
 .light-green {
   height: 108px;
-  background-color: rgba(0, 128, 0, .12);
+  background-color: rgba(0, 128, 0, 0.12);
 }
 .green {
   height: 108px;
-  background-color: rgba(0, 128, 0, .24);
+  background-color: rgba(0, 128, 0, 0.24);
 }
 ```

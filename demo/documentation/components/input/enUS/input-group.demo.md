@@ -1,4 +1,5 @@
 # Input Group
+
 ```html
 <n-space vertical>
   <n-input-group>
@@ -12,9 +13,22 @@
     <n-input-group-label>.com</n-input-group-label>
   </n-input-group>
   <n-input-group>
-    <n-select :style="{ width: '33%' }" v-model:value="value5" :options="selectOptions" />
-    <n-cascader :style="{ width: '33%' }" v-model:value="value6" :options="cascaderOptions" />
-    <n-select :style="{ width: '33%' }" multiple v-model:value="value7" :options="selectOptions" />
+    <n-select
+      :style="{ width: '33%' }"
+      v-model:value="value5"
+      :options="selectOptions"
+    />
+    <n-cascader
+      :style="{ width: '33%' }"
+      v-model:value="value6"
+      :options="cascaderOptions"
+    />
+    <n-select
+      :style="{ width: '33%' }"
+      multiple
+      v-model:value="value7"
+      :options="selectOptions"
+    />
   </n-input-group>
   <n-input-group>
     <n-button type="primary">Search</n-button>
@@ -22,14 +36,15 @@
     <n-button type="primary" ghost>Search</n-button>
   </n-input-group>
   <n-input-group>
-    <n-date-picker v-model:value="value9"/>
-    <n-time-picker v-model:value="value10"/>
+    <n-date-picker v-model:value="value9" />
+    <n-time-picker v-model:value="value10" />
   </n-input-group>
 </n-space>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       value1: null,
       value2: null,
@@ -41,10 +56,12 @@ export default {
       value8: null,
       value9: null,
       value10: null,
-      selectOptions: [{
-        label: 'option',
-        value: 'option'
-      }],
+      selectOptions: [
+        {
+          label: 'option',
+          value: 'option'
+        }
+      ],
       cascaderOptions: [
         {
           label: 'option-1',
@@ -61,4 +78,3 @@ export default {
   }
 }
 ```
-

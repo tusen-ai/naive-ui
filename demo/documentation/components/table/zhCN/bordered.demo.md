@@ -1,4 +1,5 @@
 # 边框
+
 ```html
 <n-table :single-line="false">
   <n-thead>

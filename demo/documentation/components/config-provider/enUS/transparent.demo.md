@@ -1,5 +1,7 @@
 # No Wrapper DOM
+
 If you don't need wrapper DOM, set `abstract` on it. (Note, in this case it can only take one child node.)
+
 ```html
 <n-space vertical>
   <n-space>
@@ -15,9 +17,10 @@ If you don't need wrapper DOM, set `abstract` on it. (Note, in this case it can 
   </n-config-provider>
 </n-space>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       theme: 'dark',
       env: {

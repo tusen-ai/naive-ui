@@ -1,5 +1,7 @@
 # Actions After Select
+
 Blur after selection or clear after selection.
+
 ```html
 <n-space vertical>
   <n-auto-complete
@@ -16,25 +18,22 @@ Blur after selection or clear after selection.
   />
 </n-space>
 ```
+
 ```js
 export default {
   computed: {
-    options () {
-      return [
-        '@gmail.com',
-        '@163.com',
-        '@qq.com'
-      ].map(suffix => {
+    options() {
+      return ['@gmail.com', '@163.com', '@qq.com'].map((suffix) => {
         const value = this.value === null ? '' : this.value
         const prefix = value.split('@')[0]
         return {
           label: prefix + suffix,
-          value: prefix + suffix,
+          value: prefix + suffix
         }
       })
     }
   },
-  data () {
+  data() {
     return {
       value: null
     }

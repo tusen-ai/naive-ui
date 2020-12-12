@@ -1,5 +1,7 @@
 # Basic
+
 Here are `small`, `medium` and `large` spins.
+
 ```html
 <n-space>
   <n-spin size="small" />

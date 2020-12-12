@@ -5,6 +5,7 @@ You may not want to use only the provided components and want to write themed co
 Naive UI provide some tools for developers to create themed components easier.
 
 ## Demos
+
 ```demo
 provide-theme
 read-theme

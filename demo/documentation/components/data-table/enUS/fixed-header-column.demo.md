@@ -33,7 +33,7 @@ const columns = [
   {
     title: 'Row',
     key: 'row',
-    render (row, index) {
+    render(row, index) {
       return h('span', ['row ', index])
     }
   },
@@ -66,7 +66,6 @@ const data = Array.apply(null, { length: 46 }).map((_, index) => ({
   address: `London, Park Lane no. ${index}`
 }))
 
-
 export default {
   inject: ['message'],
   data() {
@@ -76,7 +75,7 @@ export default {
     }
   },
   computed: {
-    pagination () {
+    pagination() {
       return { pageSize: 10 }
     }
   },

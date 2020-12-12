@@ -1,5 +1,7 @@
 # 推 & 拉
+
 看看代码就明白这个怎么用了，基本来说就是相对位置的改变。
+
 ```html
 <n-row :gutter="12">
   <n-col :span="6" :push="6">
@@ -16,13 +18,14 @@
   </n-col>
 </n-row>
 ```
+
 ```css
 .light-green {
   height: 108px;
-  background-color: rgba(0, 128, 0, .12);
+  background-color: rgba(0, 128, 0, 0.12);
 }
 .green {
   height: 108px;
-  background-color: rgba(0, 128, 0, .24);
+  background-color: rgba(0, 128, 0, 0.24);
 }
 ```

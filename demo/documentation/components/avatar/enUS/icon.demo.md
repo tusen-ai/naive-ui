@@ -1,5 +1,7 @@
 # Icon
+
 I like using icon in avatar.
+
 ```html
 <n-avatar>
   <n-icon>
@@ -7,12 +9,9 @@ I like using icon in avatar.
   </n-icon>
 </n-avatar>
 ```
+
 ```js
-import {
-  MdCash,
-  MdContacts,
-  IosContacts
-} from '@vicons/ionicons-v4'
+import { MdCash, MdContacts, IosContacts } from '@vicons/ionicons-v4'
 
 export default {
   components: {

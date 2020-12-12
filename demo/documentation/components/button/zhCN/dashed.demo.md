@@ -1,5 +1,7 @@
 # 虚线按钮
+
 使用 `dashed` 来使用虚线按钮。
+
 ```html
 <n-space>
   <n-button dashed>Default</n-button>

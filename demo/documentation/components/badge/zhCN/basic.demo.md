@@ -1,4 +1,5 @@
 # 基础用法
+
 ```html
 <n-space :size="24" align="center">
   <n-badge :value="value" :max="15">
@@ -21,18 +22,16 @@
   </n-button-group>
 </n-space>
 ```
+
 ```js
-import {
-  MdAdd,
-  MdRemove
-} from '@vicons/ionicons-v4'
+import { MdAdd, MdRemove } from '@vicons/ionicons-v4'
 
 export default {
   components: {
     MdAdd,
     MdRemove
   },
-  data () {
+  data() {
     return {
       value: 5
     }

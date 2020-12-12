@@ -1,4 +1,5 @@
 # Bordered
+
 ```html
 <n-table :single-line="false">
   <n-thead>

@@ -1,5 +1,7 @@
 # Basic
+
 There are `default`, `primary`, `info`, `success`, `warning` and `error` type of button.
+
 ```html
 <n-space>
   <n-button>Default</n-button>

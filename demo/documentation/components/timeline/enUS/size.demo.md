@@ -1,9 +1,8 @@
 # Size
+
 ```html
 <n-timeline size="large">
-  <n-timeline-item 
-    content="Oops"
-  />
+  <n-timeline-item content="Oops" />
   <n-timeline-item
     type="success"
     title="Success"

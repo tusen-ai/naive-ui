@@ -1,24 +1,13 @@
 # 自定义规则
+
 有时候内置的 trigger 无法满足验证的需要。你可以通过设定自定的 trigger 然后手动触发它来控制验证。
+
 ```html
-<n-form
-  :model="model"
-  ref="form"
-  :rules="rules"
->
-  <n-form-item-row
-    path="age"
-    label="年龄"
-  >
-    <n-input
-      v-model:value="model.age"
-      @keydown.enter.prevent
-    />
+<n-form :model="model" ref="form" :rules="rules">
+  <n-form-item-row path="age" label="年龄">
+    <n-input v-model:value="model.age" @keydown.enter.prevent />
   </n-form-item-row>
-  <n-form-item-row
-    path="password"
-    label="密码"
-  >
+  <n-form-item-row path="password" label="密码">
     <n-input
       v-model:value="model.password"
       @input="handlePasswordInput"
@@ -59,10 +48,11 @@
 {{  JSON.stringify(model, 0, 2) }}
 </pre>
 ```
+
 ```js
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       model: {
         age: null,
@@ -73,7 +63,7 @@ export default {
         age: [
           {
             required: true,
-            validator (rule, value) {
+            validator(rule, value) {
               if (!value) {
                 return new Error('需要年龄')
               } else if (!/^\d*$/.test(value)) {
@@ -113,14 +103,14 @@ export default {
     }
   },
   methods: {
-    handlePasswordInput () {
+    handlePasswordInput() {
       if (this.model.reenteredPassword) {
         this.$refs.reenteredPassword.validate({ trigger: 'password-input' })
       }
     },
-    handleValidateButtonClick (e) {
+    handleValidateButtonClick(e) {
       e.preventDefault()
-      this.$refs.form.validate(errors => {
+      this.$refs.form.validate((errors) => {
         if (!errors) {
           this.message.success('验证成功')
         } else {
@@ -129,10 +119,14 @@ export default {
         }
       })
     },
-    validatePasswordStartWith (rule, value) {
-      return this.model.password && this.model.password.startsWith(value) && this.model.password.length >= value.length
+    validatePasswordStartWith(rule, value) {
+      return (
+        this.model.password &&
+        this.model.password.startsWith(value) &&
+        this.model.password.length >= value.length
+      )
     },
-    validatePasswordSame (rule, value) {
+    validatePasswordSame(rule, value) {
       return value === this.model.password
     }
   }

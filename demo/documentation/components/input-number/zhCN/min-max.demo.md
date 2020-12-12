@@ -1,5 +1,7 @@
 # 最小值 & 最大值
+
 你可以设定最小值和最大值。
+
 ```html
 <n-space vertical>
   <n-input-number
@@ -16,9 +18,10 @@
   />
 </n-space>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       value: null
     }

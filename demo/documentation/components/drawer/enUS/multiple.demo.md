@@ -1,4 +1,5 @@
 # Multiple Drawers
+
 ```html
 <n-button @click="activate">Come on!</n-button>
 <n-drawer v-model:show="active" :width="502">
@@ -11,19 +12,20 @@
   </n-drawer>
 </n-drawer>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       active: false,
       innerActive: false
     }
   },
   methods: {
-    activate () {
+    activate() {
       this.active = true
     },
-    innerActivate () {
+    innerActivate() {
       this.innerActive = true
     }
   }

@@ -1,4 +1,5 @@
 # 基础用法
+
 ```html
 <n-table :bordered="false" :single-line="false">
   <n-thead>

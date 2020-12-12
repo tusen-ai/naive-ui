@@ -1,4 +1,5 @@
 # Loading Bar
+
 A kind of good placebo for anxiety.
 
 <n-space vertical>
@@ -19,28 +20,33 @@ For example:
 export default {
   inject: ['loadingBar'],
   methods: {
-    loading () {
+    loading() {
       this.loadingBar.start()
     }
   }
 }
 ```
+
 </n-space>
 
 ## Demos
+
 ```demo
 basic
 ```
 
 ## API
+
 ### `loadingBar` Injection Methods
-|Name|Type|Description|
-|-|-|-|
-|error|`(option: LoadingBarOption) => void`||
-|finish|`(option: LoadingBarOption) => void`||
-|start|`(option: LoadingBarOption) => void`||
+
+| Name   | Type                                 | Description |
+| ------ | ------------------------------------ | ----------- |
+| error  | `(option: LoadingBarOption) => void` |             |
+| finish | `(option: LoadingBarOption) => void` |             |
+| start  | `(option: LoadingBarOption) => void` |             |
 
 #### LoadingBarOption Properties
-|Name|Type|Description|
-|-|-|-|
-|theme|`'light' \| 'dark'`|If set it will be used as the theme of loading bar. If not the theme of `n-loading-bar-provider`'s context will be used.|
+
+| Name | Type | Description |
+| --- | --- | --- |
+| theme | `'light' \| 'dark'` | If set it will be used as the theme of loading bar. If not the theme of `n-loading-bar-provider`'s context will be used. |

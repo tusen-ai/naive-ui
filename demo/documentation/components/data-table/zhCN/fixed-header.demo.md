@@ -35,10 +35,9 @@ const data = Array.apply(null, { length: 46 }).map((_, index) => ({
   address: `London, Park Lane no. ${index}`
 }))
 
-
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       data,
       columns,
@@ -48,7 +47,7 @@ export default {
     }
   },
   methods: {
-    sendMail (rowData) {
+    sendMail(rowData) {
       this.message.info('send mail to ' + rowData.name)
     }
   }

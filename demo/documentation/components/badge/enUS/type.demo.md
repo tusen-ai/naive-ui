@@ -1,5 +1,7 @@
 # Type
+
 Badge has `default`, `error`, `info`, `success`, `warning` types.
+
 ```html
 <n-space :size="24" align="center">
   <n-badge dot>
@@ -19,9 +21,10 @@ Badge has `default`, `error`, `info`, `success`, `warning` types.
   </n-badge>
 </n-space>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       value: 10
     }

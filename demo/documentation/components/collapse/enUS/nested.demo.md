@@ -1,5 +1,7 @@
 # Nested
+
 It can be nested.
+
 ```html
 <n-collapse v-model:expandedNames="activeNames">
   <n-collapse-item title="right" name="1">
@@ -17,6 +19,7 @@ It can be nested.
   </n-collapse-item>
 </n-collapse>
 ```
+
 ```js
 export default {
   data() {

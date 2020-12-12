@@ -1,23 +1,17 @@
 # 多选
+
 多选值。
+
 ```html
 <n-space vertical>
-  <n-select
-    v-model:value="value"
-    multiple
-    :options="options"
-  />
-  <n-select
-    v-model:value="value"
-    multiple
-    disabled
-    :options="options"
-  />
+  <n-select v-model:value="value" multiple :options="options" />
+  <n-select v-model:value="value" multiple disabled :options="options" />
 </n-space>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       value: null,
       options: [
@@ -35,7 +29,7 @@ export default {
           value: 'song2'
         },
         {
-          label: 'You Won\'t See',
+          label: "You Won't See",
           value: 'song3',
           disabled: true
         },
@@ -65,7 +59,7 @@ export default {
           value: 'song9'
         },
         {
-          label: 'I\'m looking through you',
+          label: "I'm looking through you",
           value: 'song10'
         },
         {

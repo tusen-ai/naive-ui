@@ -1,11 +1,9 @@
 # 尺寸
+
 有 `small` 和 `medium` 大小。
+
 ```html
-<n-steps
-  size="small"
-  :current="current"
-  :status="currentStatus"
->
+<n-steps size="small" :current="current" :status="currentStatus">
   <n-step
     title="I Me Mine"
     description="All through the day, I me mine I me mine, I me mine"
@@ -24,61 +22,46 @@
   />
 </n-steps>
 <n-button-group>
-  <n-button
-    @click="prev"
-  >
+  <n-button @click="prev">
     <template v-slot:icon>
       <md-arrow-round-back />
     </template>
   </n-button>
-  <n-button
-    @click="next"
-  >
+  <n-button @click="next">
     <template v-slot:icon>
       <md-arrow-round-forward />
     </template>
   </n-button>
 </n-button-group>
 <n-radio-group v-model:value="currentStatus" size="medium" name="size">
-  <n-radio-button value="error">
-    Error
-  </n-radio-button>
-  <n-radio-button value="process">
-    Process
-  </n-radio-button>
-  <n-radio-button value="wait">
-    Wait
-  </n-radio-button>
-  <n-radio-button  value="finish">
-    Finish
-  </n-radio-button>
+  <n-radio-button value="error"> Error </n-radio-button>
+  <n-radio-button value="process"> Process </n-radio-button>
+  <n-radio-button value="wait"> Wait </n-radio-button>
+  <n-radio-button value="finish"> Finish </n-radio-button>
 </n-radio-group>
 ```
 
 ```js
-import {
-  MdArrowRoundBack,
-  MdArrowRoundForward
-} from '@vicons/ionicons-v4'
+import { MdArrowRoundBack, MdArrowRoundForward } from '@vicons/ionicons-v4'
 
 export default {
   components: {
     MdArrowRoundBack,
     MdArrowRoundForward
   },
-  data () {
+  data() {
     return {
       current: 1,
       currentStatus: 'process'
     }
   },
   methods: {
-    next () {
+    next() {
       if (this.current === null) this.current = 1
       else if (this.current >= 4) this.current = null
       else this.current++
     },
-    prev () {
+    prev() {
       if (this.current === 0) this.current = null
       else if (this.current === null) this.current = 4
       else this.current--

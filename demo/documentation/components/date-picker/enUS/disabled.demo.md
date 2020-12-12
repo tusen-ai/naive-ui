@@ -1,11 +1,8 @@
 # Disabled
+
 ```html
 <n-space vertical>
-  <n-date-picker
-    v-model:value="date"
-    type="date"
-    :disabled="disabled"
-  />
+  <n-date-picker v-model:value="date" type="date" :disabled="disabled" />
   <n-date-picker
     v-model:value="datetime"
     type="datetime"
@@ -27,7 +24,7 @@
 
 ```js
 export default {
-  data () {
+  data() {
     return {
       datetime: null,
       date: null,

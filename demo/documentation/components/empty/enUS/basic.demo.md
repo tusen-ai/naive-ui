@@ -1,4 +1,5 @@
 # Basic
+
 ```html
 <n-empty description="You can't find anything">
   <template v-slot:extra>

@@ -1,12 +1,10 @@
 # 日期范围
+
 ```html
-<n-date-picker
-  v-model:value="range"
-  type="daterange"
-  clearable
-/>
+<n-date-picker v-model:value="range" type="daterange" clearable />
 <pre>{{ JSON.stringify(range) }}</pre>
 ```
+
 ```js
 export default {
   data() {

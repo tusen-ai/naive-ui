@@ -1,5 +1,7 @@
 # 弹出位置
+
 使用不同的弹出位置。
+
 ```html
 <n-dropdown
   trigger="hover"
@@ -10,10 +12,11 @@
   <n-button :keyboard="false">金钱所迫，起床工作</n-button>
 </n-dropdown>
 ```
+
 ```js
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       options: [
         {
@@ -22,7 +25,7 @@ export default {
         },
         {
           label: '布朗酒店，伦敦',
-          key: 'brown\'s hotel, london'
+          key: "brown's hotel, london"
         },
         {
           label: '亚特兰蒂斯巴哈马，拿骚',
@@ -36,7 +39,7 @@ export default {
     }
   },
   methods: {
-    handleSelect (key) {
+    handleSelect(key) {
       this.message.info(key)
     }
   }

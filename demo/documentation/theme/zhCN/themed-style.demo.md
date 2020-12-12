@@ -1,5 +1,7 @@
 # 使用带主题的样式
+
 一些组件有 `themed-style` 属性来帮你调整这个组件最外层元素的样式，对于一些简单的组件，这是很有效的方式。
+
 ```html
 <n-space vertical>
   <n-space>
@@ -25,12 +27,9 @@
   </n-config-provider>
 </n-space>
 ```
+
 ```js
-import {
-  MdCash,
-  MdContacts,
-  IosContacts
-} from '@vicons/ionicons-v4'
+import { MdCash, MdContacts, IosContacts } from '@vicons/ionicons-v4'
 
 export default {
   components: {
@@ -38,7 +37,7 @@ export default {
     MdContacts,
     IosContacts
   },
-  data () {
+  data() {
     return {
       theme: 'dark'
     }

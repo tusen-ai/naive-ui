@@ -1,4 +1,5 @@
 # Custom Style
+
 Row: Set `row-class-name` prop to assign a class name to certain rows.
 
 Column: Set `className` property on column object to assign a class name to a certain column.
@@ -68,12 +69,12 @@ export default {
 
 ```css
 ::v-deep(.too-old td) {
-  color: rgba(255, 0, 0, .75) !important;
+  color: rgba(255, 0, 0, 0.75) !important;
 }
 ::v-deep(.age) {
-  color: rgba(0, 128, 0, .75) !important;
+  color: rgba(0, 128, 0, 0.75) !important;
 }
 ::v-deep(.too-old .age) {
-  color: rgba(0, 0, 128, .75) !important;
+  color: rgba(0, 0, 128, 0.75) !important;
 }
 ```

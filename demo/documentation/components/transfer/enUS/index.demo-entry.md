@@ -1,43 +1,51 @@
 # Transfer
+
 <!--single-column-->
+
 Left, right, left, right... As a boring guy, I can play it all day.
+
 ## Demos
+
 ```demo
 basic
 large-data
 size
 filterable
 ```
+
 <!--  -->
 
 ## Props
-|Name|Type|Default|Description|
-|-|-|-|-|
-|disabled|`boolean`|`true`||
-|filterable|`boolean`|`false`||
-|filter|`(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean`|A basic label string match function||
-|options|`Array<TransferOption>`|`[]`||
-|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
-|source-filter-placeholder|`string`|`undefined`||
-|source-title|`string`|`'Source'`||
-|target-filter-placeholder|`string`|`undefined`||
-|target-title|`string`|`'Target'`||
-|theme|`'light' \| 'dark' \| string`|`undefined`||
-|value|`Array<string \| number>`|`null`||
-|on-update:value|`(value: Array<string \| number>) => any`|`undefined`||
-|virtual-scroll|`boolean`|`false`|If use virtual scroll on transfer. If set to `true` it can handles large data (and turn transfer animation off)|
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| disabled | `boolean` | `true` |  |
+| filterable | `boolean` | `false` |  |
+| filter | `(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean` | A basic label string match function |  |
+| options | `Array<TransferOption>` | `[]` |  |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
+| source-filter-placeholder | `string` | `undefined` |  |
+| source-title | `string` | `'Source'` |  |
+| target-filter-placeholder | `string` | `undefined` |  |
+| target-title | `string` | `'Target'` |  |
+| theme | `'light' \| 'dark' \| string` | `undefined` |  |
+| value | `Array<string \| number>` | `null` |  |
+| on-update:value | `(value: Array<string \| number>) => any` | `undefined` |  |
+| virtual-scroll | `boolean` | `false` | If use virtual scroll on transfer. If set to `true` it can handles large data (and turn transfer animation off) |
 
 ### TransferOption Type
-|Property|Type|Description|
-|-|-|-|
-|label|`string`||
-|value|`string \| number`|value of an option, should be unique in options|
-|disabled|`boolean`||
+
+| Property | Type | Description |
+| --- | --- | --- |
+| label | `string` |  |
+| value | `string \| number` | value of an option, should be unique in options |
+| disabled | `boolean` |  |
 
 ## Events
-|Name|Parameters|Description|
-|-|-|-|
-|change|`(Array<string \| number>)`||
+
+| Name   | Parameters                  | Description |
+| ------ | --------------------------- | ----------- |
+| change | `(Array<string \| number>)` |             |
 
 <!-- ## Notes
 When I heared from my colleague he's going to put more than a thousand items into the transfer, I was astonished. My poor imagination can't come up with a scene that must use a transfer with thousands of items. But I must admit, it's my mind that always not considerate enough.

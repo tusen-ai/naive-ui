@@ -1,4 +1,5 @@
 # Controlled Pagination
+
 ```html
 <n-data-table
   ref="table"
@@ -31,7 +32,6 @@ const data = Array.apply(null, { length: 46 }).map((_, index) => ({
   address: `London, Park Lane no. ${index}`
 }))
 
-
 export default {
   data() {
     return {
@@ -42,10 +42,10 @@ export default {
         pageSize: 5,
         showSizePicker: true,
         pageSizes: [3, 5, 7],
-        onChange: page => {
+        onChange: (page) => {
           this.pagination.page = page
         },
-        onPageSizeChange: pageSize => {
+        onPageSizeChange: (pageSize) => {
           this.pagination.pageSize = pageSize
         }
       }

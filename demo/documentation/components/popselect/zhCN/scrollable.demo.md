@@ -1,18 +1,14 @@
 # 让它滚动
 
 ```html
-<n-popselect
-  v-model:value="value"
-  :options="options"
-  size="medium"
-  scrollable
->
+<n-popselect v-model:value="value" :options="options" size="medium" scrollable>
   <n-tag style="margin-right: 8px;">{{ value || 'Popselect' }}</n-tag>
 </n-popselect>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       value: 'Drive My Car',
       options: [
@@ -25,8 +21,8 @@ export default {
           value: 'Norwegian Wood'
         },
         {
-          label: 'You Won\'t See',
-          value: 'You Won\'t See',
+          label: "You Won't See",
+          value: "You Won't See",
           disabled: true
         },
         {
@@ -55,8 +51,8 @@ export default {
           value: 'Girl'
         },
         {
-          label: 'I\'m looking through you',
-          value: 'I\'m looking through you'
+          label: "I'm looking through you",
+          value: "I'm looking through you"
         },
         {
           label: 'In My Life',

@@ -1,4 +1,5 @@
 # Vertical
+
 ```html
 <n-space vertical>
   <n-button>Oops!</n-button>

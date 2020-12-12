@@ -1,18 +1,16 @@
 # 操作插槽
+
 有人要在选择菜单里用这个插槽吗？
+
 ```html
-<n-select
-  v-model:value="value"
-  :options="options"
->
-  <template v-slot:action>
-    如果你点开了这个例子，你可能需要它
-  </template>
+<n-select v-model:value="value" :options="options">
+  <template v-slot:action> 如果你点开了这个例子，你可能需要它 </template>
 </n-select>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       value: null,
       options: [
@@ -30,7 +28,7 @@ export default {
           value: 'song2'
         },
         {
-          label: 'You Won\'t See',
+          label: "You Won't See",
           value: 'song3',
           disabled: true
         }

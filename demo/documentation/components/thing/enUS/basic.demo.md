@@ -1,5 +1,7 @@
 # Basic
+
 Thing provides many slots to custom.
+
 ```html
 <n-row>
   <n-col :span="12">
@@ -34,9 +36,7 @@ Thing provides many slots to custom.
       </n-icon>
     </n-avatar>
   </template>
-  <template v-slot:header v-if="header">
-    Money
-  </template>
+  <template v-slot:header v-if="header"> Money </template>
   <template v-slot:header-extra v-if="headerExtra">
     <n-button circle size="tiny">
       <template v-slot:icon>
@@ -44,13 +44,11 @@ Thing provides many slots to custom.
       </template>
     </n-button>
   </template>
-  <template v-slot:description v-if="description">
-    Description
-  </template>
-  Money is any item or verifiable record that is generally accepted as payment for goods and services and repayment of debts, such as taxes, in a particular country or socio-economic context.
-  <template v-slot:footer v-if="footer">
-    Footer
-  </template>
+  <template v-slot:description v-if="description"> Description </template>
+  Money is any item or verifiable record that is generally accepted as payment
+  for goods and services and repayment of debts, such as taxes, in a particular
+  country or socio-economic context.
+  <template v-slot:footer v-if="footer"> Footer </template>
   <template v-slot:action v-if="action">
     <n-button size="tiny" style="margin-right: 8px;">
       <template v-slot:icon>
@@ -73,6 +71,7 @@ Thing provides many slots to custom.
   </template>
 </n-thing>
 ```
+
 ```js
 import { CashOutline as CashIcon } from '@vicons/ionicons-v5'
 
@@ -80,7 +79,7 @@ export default {
   components: {
     CashIcon
   },
-  data () {
+  data() {
     return {
       avatar: true,
       header: true,

@@ -1,5 +1,7 @@
 # 主题
+
 设置 `n-config-provider` 内部组件的主题。
+
 ```html
 <n-config-provider :theme="theme">
   <n-card>
@@ -10,9 +12,10 @@
   </n-card>
 </n-config-provider>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       theme: 'dark'
     }

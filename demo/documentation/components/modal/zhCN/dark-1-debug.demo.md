@@ -1,4 +1,5 @@
 # Dark Debug 1
+
 ```html
 <n-button @click="modalActive = !modalActive">Toggle</n-button>
 <n-modal
@@ -7,9 +8,13 @@
   v-model:show="modalActive"
   :overlay-style="{ marginTop: '24px', marginBottom: '24px', width: '800px' }"
 >
-  <n-radio-group v-model:value="size" name="top-size" style="margin-bottom: 12px;">
+  <n-radio-group
+    v-model:value="size"
+    name="top-size"
+    style="margin-bottom: 12px;"
+  >
     <n-radio-button value="small">小</n-radio-button>
-    <n-radio-button value="medium" >中</n-radio-button>
+    <n-radio-button value="medium">中</n-radio-button>
     <n-radio-button value="large">大</n-radio-button>
   </n-radio-group>
   <n-form
@@ -24,7 +29,10 @@
         <n-input placeholder="Input" v-model:value="model.inputValue" />
       </n-form-item-col>
       <n-form-item-col :span="12" label="Textarea" path="textareaValue">
-        <n-input placeholder="Textarea" v-model:value="model.textareaValue" type="textarea"
+        <n-input
+          placeholder="Textarea"
+          v-model:value="model.textareaValue"
+          type="textarea"
           :autosize="{
             minRows: 3,
             maxRows: 5
@@ -34,22 +42,39 @@
     </n-row>
     <n-row :gutter="24">
       <n-form-item-col :span="12" label="Select" path="selectValue">
-        <n-select placeholder="Select" :options="generalOptions" v-model:value="model.selectValue"/>
+        <n-select
+          placeholder="Select"
+          :options="generalOptions"
+          v-model:value="model.selectValue"
+        />
       </n-form-item-col>
-      <n-form-item-col :span="12" label="Multiple Select" path="multipleSelectValue">
-        <n-select placeholder="Select" :options="generalOptions" v-model:value="model.multipleSelectValue" multiple/>
+      <n-form-item-col
+        :span="12"
+        label="Multiple Select"
+        path="multipleSelectValue"
+      >
+        <n-select
+          placeholder="Select"
+          :options="generalOptions"
+          v-model:value="model.multipleSelectValue"
+          multiple
+        />
       </n-form-item-col>
     </n-row>
     <n-row :gutter="24">
       <n-form-item-col :span="12" label="Datetime" path="datetimeValue">
-        <n-date-picker type="datetime" v-model:value="model.datetimeValue"/>
+        <n-date-picker type="datetime" v-model:value="model.datetimeValue" />
       </n-form-item-col>
       <n-form-item-col :span="12" label="Switch" path="switchValue">
         <n-switch v-model:value="model.switchValue" />
       </n-form-item-col>
     </n-row>
     <n-row :gutter="24">
-      <n-form-item-col :span="12" label="Checkbox Group" path="checkboxGroupValue">
+      <n-form-item-col
+        :span="12"
+        label="Checkbox Group"
+        path="checkboxGroupValue"
+      >
         <n-checkbox-group v-model:value="model.checkboxGroupValue">
           <n-checkbox value="Option 1">Option 1</n-checkbox>
           <n-checkbox value="Option 2">Option 2</n-checkbox>
@@ -65,7 +90,11 @@
       </n-form-item-col>
     </n-row>
     <n-row :gutter="24">
-      <n-form-item-col :span="12" label="Radio Button Group" path="radioGroupValue">
+      <n-form-item-col
+        :span="12"
+        label="Radio Button Group"
+        path="radioGroupValue"
+      >
         <n-radio-group v-model:value="model.radioGroupValue" name="radiogroup2">
           <n-radio-button value="Radio 1">Radio 1</n-radio-button>
           <n-radio-button value="Radio 2">Radio 2</n-radio-button>
@@ -73,7 +102,7 @@
         </n-radio-group>
       </n-form-item-col>
       <n-form-item-col :span="12" label="Input Number" path="inputNumberValue">
-        <n-input-number v-model:value="model.inputNumberValue"/>
+        <n-input-number v-model:value="model.inputNumberValue" />
       </n-form-item-col>
     </n-row>
     <n-row :gutter="24">
@@ -81,7 +110,7 @@
         <n-time-picker v-model:value="model.timePickerValue" />
       </n-form-item-col>
       <n-form-item-col :span="12" label="Slider" path="sliderValue">
-        <n-slider v-model:value="model.sliderValue" :step="5"/>
+        <n-slider v-model:value="model.sliderValue" :step="5" />
       </n-form-item-col>
     </n-row>
     <n-row :gutter="24">
@@ -93,16 +122,26 @@
         />
       </n-form-item-col>
       <n-form-item-col :span="5" label="Nested Path" path="nestedValue.path1">
-        <n-cascader placeholder="Nested Path 1" v-model:value="model.nestedValue.path1" :options="cascaderOptions"/>
+        <n-cascader
+          placeholder="Nested Path 1"
+          v-model:value="model.nestedValue.path1"
+          :options="cascaderOptions"
+        />
       </n-form-item-col>
       <n-form-item-col :span="5" path="nestedValue.path2">
-        <n-select placeholder="Nested Path 2" :options="generalOptions" v-model:value="model.nestedValue.path2"/>
+        <n-select
+          placeholder="Nested Path 2"
+          :options="generalOptions"
+          v-model:value="model.nestedValue.path2"
+        />
       </n-form-item-col>
     </n-row>
     <n-row>
       <n-col :span="24">
         <div style="display: flex; justify-content: flex-end;">
-          <n-button @click="handleValidateButtonClick" round type="primary">验证</n-button>
+          <n-button @click="handleValidateButtonClick" round type="primary"
+            >验证</n-button
+          >
         </div>
       </n-col>
     </n-row>
@@ -113,7 +152,7 @@
 ```js
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       modalActive: false,
       size: 'medium',
@@ -136,15 +175,12 @@ export default {
         sliderValue: 0,
         transferValue: null
       },
-      generalOptions: [
-        'groode',
-        'veli good',
-        'emazing',
-        'lidiculous'
-      ].map(v => ({
-        label: v,
-        value: v
-      })),
+      generalOptions: ['groode', 'veli good', 'emazing', 'lidiculous'].map(
+        (v) => ({
+          label: v,
+          value: v
+        })
+      ),
       cascaderOptions: [
         {
           label: 'groode',
@@ -236,9 +272,9 @@ export default {
     }
   },
   methods: {
-    handleValidateButtonClick (e) {
+    handleValidateButtonClick(e) {
       e.preventDefault()
-      this.$refs.form.validate(errors => {
+      this.$refs.form.validate((errors) => {
         if (!errors) {
           this.message.success('验证成功')
         } else {

@@ -1,9 +1,9 @@
 # Icon
+
 ```html
-<n-button @click="createMessage">
-  Hourglass Icon
-</n-button>
+<n-button @click="createMessage"> Hourglass Icon </n-button>
 ```
+
 ```js
 import { h } from 'vue'
 import { MdHourglass } from '@vicons/ionicons-v4'

@@ -1,5 +1,7 @@
 # 动态创建选项
+
 使用 `tag` & `filterable` 来允许动态创建选项。
+
 ```html
 <n-space vertical>
   <n-select
@@ -9,17 +11,13 @@
     tag
     :options="options"
   />
-  <n-select
-    v-model:value="selectValue"
-    filterable
-    tag
-    :options="options"
-  />
+  <n-select v-model:value="selectValue" filterable tag :options="options" />
 </n-space>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       multipleSelectValue: null,
       selectValue: null,
@@ -38,7 +36,7 @@ export default {
           value: 'song2'
         },
         {
-          label: 'You Won\'t See',
+          label: "You Won't See",
           value: 'song3',
           disabled: true
         },
@@ -68,7 +66,7 @@ export default {
           value: 'song9'
         },
         {
-          label: 'I\'m looking through you',
+          label: "I'm looking through you",
           value: 'song10'
         },
         {

@@ -1,4 +1,5 @@
 # Dark Debug 4
+
 ```html
 <n-button @click="modalActive = !modalActive">Toggle</n-button>
 <n-modal
@@ -9,14 +10,13 @@
 >
   <n-popover trigger="click">
     <template v-slot:trigger>
-      <n-button style="margin:0;">
-        悬浮
-      </n-button>
+      <n-button style="margin:0;"> 悬浮 </n-button>
     </template>
     <span>或许不想知道你的花园长得咋样</span>
   </n-popover>
 </n-modal>
 ```
+
 ```js
 export default {
   data() {

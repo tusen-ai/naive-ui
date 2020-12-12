@@ -1,5 +1,7 @@
 # 定制
+
 靠你了。
+
 ```html
 <n-gradient-text
   :gradient="{
@@ -9,7 +11,7 @@
 >
   定制颜色
 </n-gradient-text>
-<br/>
+<br />
 <n-gradient-text
   :gradient="{
     deg: 180,
@@ -19,13 +21,14 @@
 >
   定制颜色
 </n-gradient-text>
-<br/>
+<br />
 <n-gradient-text
   gradient="linear-gradient(90deg, red 0%, green 50%, blue 100%)"
 >
   瞎写的颜色
 </n-gradient-text>
 ```
+
 ```css
 .n-gradient-text {
   font-size: 24px;

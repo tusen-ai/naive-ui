@@ -1,8 +1,11 @@
 # 手动定位
+
 在特殊情况下，你可能想手动定位下拉菜单。比如在一块区域右击以弹出下拉菜单。
+
 ```html
 <div
-  style="width: 200px; height: 200px; background-color: rgba(0, 128, 0, .5);" @contextmenu="handleContextMenu"
+  style="width: 200px; height: 200px; background-color: rgba(0, 128, 0, .5);"
+  @contextmenu="handleContextMenu"
 >
   右击
 </div>
@@ -15,6 +18,7 @@
   :show="showDropdown"
 />
 ```
+
 ```js
 const options = [
   {
@@ -66,14 +70,14 @@ const options = [
 export default {
   inject: ['message'],
   methods: {
-    handleSelect (name) {
+    handleSelect(name) {
       this.showDropdown = false
       this.message.info(name)
     },
-    handleBlur () {
+    handleBlur() {
       this.showDropdown = false
     },
-    handleContextMenu (e) {
+    handleContextMenu(e) {
       e.preventDefault()
       this.showDropdown = false
       this.$nextTick().then(() => {
@@ -83,7 +87,7 @@ export default {
       })
     }
   },
-  data () {
+  data() {
     return {
       options,
       showDropdown: false,

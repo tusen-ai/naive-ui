@@ -1,6 +1,9 @@
 <!--anchor:on-->
+
 # Get Started
+
 ## Installation
+
 First install it.
 
 ```bash
@@ -8,7 +11,9 @@ npm install --save-dev naive-ui
 ```
 
 ## Usage
+
 Add the following lines in you entry point js file.
+
 ```js
 import { createApp } from 'vue'
 import naive from 'naive-ui'

@@ -1,4 +1,5 @@
 # Disabled
+
 ```html
 <n-space vertical>
   <n-pagination
@@ -16,7 +17,7 @@
 
 ```js
 export default {
-  data () {
+  data() {
     return {
       page: 2,
       pageSize: 20,

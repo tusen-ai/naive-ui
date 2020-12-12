@@ -1,4 +1,5 @@
 # Success
+
 ```html
 <n-result status="success" title="Success" description="child of failure">
   <template v-slot:footer>

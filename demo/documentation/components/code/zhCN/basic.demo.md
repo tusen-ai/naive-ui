@@ -1,24 +1,33 @@
 # 基础用法
+
 Javascript、Python、Cpp 的例子。
+
 ```html
 <div style="overflow: auto;">
-  <n-code :code="`
+  <n-code
+    :code="`
 function sleep (ms = 1000) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
-`" language="javascript" />
+`"
+    language="javascript"
+  />
 
-  <n-code :code="`
+  <n-code
+    :code="`
 def say_hello():
     print('Hello Naive UI')
-`" language="python" />
+`"
+    language="python"
+  />
 
   <n-code :code="cppCode" language="cpp" />
 </div>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       cppCode: `int main () {
   std::cout << "Hello Naive UI";
@@ -28,6 +37,7 @@ export default {
   }
 }
 ```
+
 ```css
 .n-code {
   margin-bottom: 16px;

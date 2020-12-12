@@ -1,7 +1,10 @@
 # Color
+
 Color is depend on you even in different theme. You can set it to something related to things you want to eat.
+
 ```html
-<n-avatar :themed-style="{
+<n-avatar
+  :themed-style="{
   light: {
     color: 'yellow',
     backgroundColor: 'red'
@@ -10,5 +13,7 @@ Color is depend on you even in different theme. You can set it to something rela
      color: 'red',
     backgroundColor: 'yellow'
   }
-}">M</n-avatar>
+}"
+  >M</n-avatar
+>
 ```

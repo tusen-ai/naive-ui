@@ -1,5 +1,7 @@
 # 基础用法
+
 Thing 提供了很多 slot 来定制。
+
 ```html
 <n-row>
   <n-col :span="12">
@@ -34,9 +36,7 @@ Thing 提供了很多 slot 来定制。
       </n-icon>
     </n-avatar>
   </template>
-  <template v-slot:header v-if="header">
-    货币
-  </template>
+  <template v-slot:header v-if="header"> 货币 </template>
   <template v-slot:header-extra v-if="headerExtra">
     <n-button circle size="tiny">
       <template v-slot:icon>
@@ -44,13 +44,9 @@ Thing 提供了很多 slot 来定制。
       </template>
     </n-button>
   </template>
-  <template v-slot:description v-if="description">
-    描述
-  </template>
+  <template v-slot:description v-if="description"> 描述 </template>
   货币是为了提高交易效率而用于交换的中介商品。货币有多种形式，如贝壳粮食等自然物、金属纸张等加工品、银行卡信用卡等磁条卡、移动支付加密货币等APP。
-  <template v-slot:footer v-if="footer">
-    尾部
-  </template>
+  <template v-slot:footer v-if="footer"> 尾部 </template>
   <template v-slot:action v-if="action">
     <n-button size="tiny" style="margin-right: 8px;">
       <template v-slot:icon>
@@ -73,6 +69,7 @@ Thing 提供了很多 slot 来定制。
   </template>
 </n-thing>
 ```
+
 ```js
 import { CashOutline as CashIcon } from '@vicons/ionicons-v5'
 
@@ -80,7 +77,7 @@ export default {
   components: {
     CashIcon
   },
-  data () {
+  data() {
     return {
       avatar: true,
       header: true,

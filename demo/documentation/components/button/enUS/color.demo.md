@@ -1,5 +1,7 @@
 # Custom Color
-The two colors look like toadstool. 
+
+The two colors look like toadstool.
+
 ```html
 <n-space>
   <n-button color="#8a2be2">
@@ -52,6 +54,7 @@ The two colors look like toadstool.
   </n-button>
 </n-space>
 ```
+
 ```js
 import { CashOutline as CashIcon } from '@vicons/ionicons-v5'
 

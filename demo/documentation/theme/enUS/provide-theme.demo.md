@@ -1,4 +1,5 @@
 # Provide Theme
+
 Use `n-config-provider` to set the theme of all its descedant components.
 
 ```html
@@ -11,9 +12,10 @@ Use `n-config-provider` to set the theme of all its descedant components.
   </n-card>
 </n-config-provider>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       theme: 'dark'
     }

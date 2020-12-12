@@ -1,24 +1,13 @@
 # Custom Rules
+
 Sometimes builtin triggers don't meet you demand. You can custom you valiation by setting custom trigger in rules and manually trigger the validation.
+
 ```html
-<n-form
-  :model="model"
-  ref="form"
-  :rules="rules"
->
-  <n-form-item-row
-    path="age"
-    label="Age"
-  >
-    <n-input
-      v-model:value="model.age"
-      @keydown.enter.prevent
-    />
+<n-form :model="model" ref="form" :rules="rules">
+  <n-form-item-row path="age" label="Age">
+    <n-input v-model:value="model.age" @keydown.enter.prevent />
   </n-form-item-row>
-  <n-form-item-row
-    path="password"
-    label="Password"
-  >
+  <n-form-item-row path="password" label="Password">
     <n-input
       v-model:value="model.password"
       @input="handlePasswordInput"
@@ -59,10 +48,11 @@ Sometimes builtin triggers don't meet you demand. You can custom you valiation b
 {{  JSON.stringify(model, 0, 2) }}
 </pre>
 ```
+
 ```js
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       model: {
         age: null,
@@ -73,7 +63,7 @@ export default {
         age: [
           {
             required: true,
-            validator (rule, value) {
+            validator(rule, value) {
               if (!value) {
                 return new Error('Age is required')
               } else if (!/^\d*$/.test(value)) {
@@ -113,14 +103,14 @@ export default {
     }
   },
   methods: {
-    handlePasswordInput () {
+    handlePasswordInput() {
       if (this.model.reenteredPassword) {
         this.$refs.reenteredPassword.validate({ trigger: 'password-input' })
       }
     },
-    handleValidateButtonClick (e) {
+    handleValidateButtonClick(e) {
       e.preventDefault()
-      this.$refs.form.validate(errors => {
+      this.$refs.form.validate((errors) => {
         if (!errors) {
           this.message.success('Valid')
         } else {
@@ -129,10 +119,14 @@ export default {
         }
       })
     },
-    validatePasswordStartWith (rule, value) {
-      return this.model.password && this.model.password.startsWith(value) && this.model.password.length >= value.length
+    validatePasswordStartWith(rule, value) {
+      return (
+        this.model.password &&
+        this.model.password.startsWith(value) &&
+        this.model.password.length >= value.length
+      )
     },
-    validatePasswordSame (rule, value) {
+    validatePasswordSame(rule, value) {
       return value === this.model.password
     }
   }

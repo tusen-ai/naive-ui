@@ -1,5 +1,7 @@
 # Theme Environments (Deprecated)
+
 Get current theme environment.
+
 ```html
 <n-space vertical>
   <n-space>
@@ -15,9 +17,10 @@ Get current theme environment.
   </n-config-provider>
 </n-space>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       theme: 'dark',
       env: {

@@ -1,4 +1,5 @@
 # 基础
+
 ```html
 <n-collapse v-model:expandedNames="activeNames">
   <n-collapse-item title="青铜" name="1">
@@ -12,6 +13,7 @@
   </n-collapse-item>
 </n-collapse>
 ```
+
 ```js
 export default {
   data() {

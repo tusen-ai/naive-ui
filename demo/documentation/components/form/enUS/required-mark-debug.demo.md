@@ -1,23 +1,40 @@
 # Custom Rules
+
 ```html
-<n-form :model="model" ref="form" :rules="rules" label-align="right" label-placement="left">
+<n-form
+  :model="model"
+  ref="form"
+  :rules="rules"
+  label-align="right"
+  label-placement="left"
+>
   <n-form-item-row path="age" label="Age">
-    <n-input v-model:value="model.age"/>
+    <n-input v-model:value="model.age" />
   </n-form-item-row>
   <n-form-item-row path="password" label="Password">
-    <n-input v-model:value="model.password" @input="handlePasswordInput" type="password"/>
+    <n-input
+      v-model:value="model.password"
+      @input="handlePasswordInput"
+      type="password"
+    />
   </n-form-item-row>
   <n-form-item-row
     path="reenteredPassword"
     label="Re-enter Password"
     ref="reenteredPassword"
   >
-    <n-input :disabled="!model.password" v-model:value="model.reenteredPassword" type="password"/>
+    <n-input
+      :disabled="!model.password"
+      v-model:value="model.reenteredPassword"
+      type="password"
+    />
   </n-form-item-row>
   <n-row :gutter="[0, 24]">
     <n-col :span="24">
       <div style="display: flex; justify-content: flex-end;">
-        <n-button @click="handleValidateButtonClick" round type="primary">Validate</n-button>
+        <n-button @click="handleValidateButtonClick" round type="primary"
+          >Validate</n-button
+        >
       </div>
     </n-col>
   </n-row>
@@ -27,10 +44,11 @@
 {{  JSON.stringify(model, 0, 2) }}
 </pre>
 ```
+
 ```js
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       model: {
         age: null,
@@ -41,7 +59,7 @@ export default {
         age: [
           {
             required: true,
-            validator (rule, value) {
+            validator(rule, value) {
               if (!value) {
                 return new Error('Age is required')
               } else if (!/^\d*$/.test(value)) {
@@ -75,21 +93,21 @@ export default {
     }
   },
   methods: {
-    handlePasswordInput () {
+    handlePasswordInput() {
       if (this.model.reenteredPassword) {
-        this.$refs.reenteredPassword.validate('password-input', (errors => {
+        this.$refs.reenteredPassword.validate('password-input', (errors) => {
           if (!errors) {
             this.message.success('Valid')
           } else {
             console.log(errors)
             this.message.error('Invalid')
           }
-        }))
+        })
       }
     },
-    handleValidateButtonClick (e) {
+    handleValidateButtonClick(e) {
       e.preventDefault()
-      this.$refs.form.validate(errors => {
+      this.$refs.form.validate((errors) => {
         if (!errors) {
           this.message.success('Valid')
         } else {
@@ -98,10 +116,14 @@ export default {
         }
       })
     },
-    validatePasswordStartWith (rule, value) {
-      return this.model.password && this.model.password.startsWith(value) && this.model.password.length >= value.length
+    validatePasswordStartWith(rule, value) {
+      return (
+        this.model.password &&
+        this.model.password.startsWith(value) &&
+        this.model.password.length >= value.length
+      )
     },
-    validatePasswordSame (rule, value) {
+    validatePasswordSame(rule, value) {
       return value === this.model.password
     }
   }

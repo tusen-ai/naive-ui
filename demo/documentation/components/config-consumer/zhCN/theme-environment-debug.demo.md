@@ -1,5 +1,7 @@
 # 主题环境（弃用）
+
 获得当前主题环境值。
+
 ```html
 <n-space vertical>
   <n-space>
@@ -15,9 +17,10 @@
   </n-config-provider>
 </n-space>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       theme: 'dark',
       env: {

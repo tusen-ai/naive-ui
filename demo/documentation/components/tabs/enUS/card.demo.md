@@ -1,5 +1,7 @@
 # Card
+
 A example to use with card. (demo is the card)
+
 ```html
 <n-tabs
   v-model:value="name"
@@ -23,10 +25,11 @@ A example to use with card. (demo is the card)
   </n-tab-pane>
 </n-tabs>
 ```
+
 ```js
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       panels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
       name: '1',
@@ -34,12 +37,12 @@ export default {
     }
   },
   methods: {
-    handleScrollableChange (value) {
+    handleScrollableChange(value) {
       this.tabNavScrollable = value
     },
-    handleClose (name) {
+    handleClose(name) {
       this.message.info('Close ' + name)
-      const index = this.panels.findIndex(v => name === v.toString())
+      const index = this.panels.findIndex((v) => name === v.toString())
       if (~index) {
         this.panels.splice(index, 1)
       }

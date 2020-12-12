@@ -1,5 +1,7 @@
 # Overflow
+
 Set `max` prop to handle overflow situation.
+
 ```html
 <n-space :size="24" align="center">
   <n-badge :value="value" show-zero>
@@ -20,7 +22,7 @@ Set `max` prop to handle overflow situation.
         <n-icon><md-add /></n-icon>
       </template>
     </n-button>
-    <n-button @click="value = Math.max(0, value - 1)" >
+    <n-button @click="value = Math.max(0, value - 1)">
       <template v-slot:icon>
         <n-icon><md-remove /></n-icon>
       </template>
@@ -28,18 +30,16 @@ Set `max` prop to handle overflow situation.
   </n-button-group>
 </n-space>
 ```
+
 ```js
-import {
-  MdAdd,
-  MdRemove
-} from '@vicons/ionicons-v4'
+import { MdAdd, MdRemove } from '@vicons/ionicons-v4'
 
 export default {
   components: {
     MdAdd,
     MdRemove
   },
-  data () {
+  data() {
     return {
       value: 101
     }

@@ -1,4 +1,5 @@
 # 可以关掉
+
 ```html
 <n-alert title="Default 类型" type="default" closable>
   <template v-slot:icon>
@@ -21,22 +22,22 @@
   I'm back in the U.S.S.R.
 </n-alert>
 ```
+
 ```js
-import {
-  IosAirplane,
-} from '@vicons/ionicons-v4'
+import { IosAirplane } from '@vicons/ionicons-v4'
 
 export default {
   components: {
     IosAirplane
   },
-  data () {
+  data() {
     return {
       show: true
     }
   }
 }
 ```
+
 ```css
 .n-alert {
   margin-bottom: 12px;

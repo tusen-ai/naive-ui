@@ -1,4 +1,5 @@
 # 图标
+
 ```html
 <n-alert title="Back in the U.S.S.R.">
   <template v-slot:icon>
@@ -13,10 +14,9 @@
   Aw come on!
 </n-alert>
 ```
+
 ```js
-import {
-  IosAirplane,
-} from '@vicons/ionicons-v4'
+import { IosAirplane } from '@vicons/ionicons-v4'
 
 export default {
   components: {

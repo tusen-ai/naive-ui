@@ -1,25 +1,24 @@
 # Group
+
 A radio group look elegant.
+
 ```html
 <n-radio-group v-model:value="value" name="radiogroup">
-  <n-radio
-    v-for="song in songs"
-    :key="song.value"
-    :value="song.value"
-  >
+  <n-radio v-for="song in songs" :key="song.value" :value="song.value">
     {{ song.label }}
   </n-radio>
 </n-radio-group>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       value: null,
       songs: [
         {
-          value: 'Rock\'n\'Roll Star',
-          label: 'Rock\'n\'Roll Star'
+          value: "Rock'n'Roll Star",
+          label: "Rock'n'Roll Star"
         },
         {
           value: 'Shakermaker',
@@ -37,7 +36,7 @@ export default {
           value: '...',
           label: '...'
         }
-      ].map(s => {
+      ].map((s) => {
         s.value = s.value.toLowerCase()
         return s
       })

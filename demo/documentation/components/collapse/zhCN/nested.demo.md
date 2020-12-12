@@ -1,5 +1,7 @@
 # 嵌套
+
 可以嵌套。
+
 ```html
 <n-collapse v-model:expandedNames="activeNames">
   <n-collapse-item title="绿灯" name="1">
@@ -17,6 +19,7 @@
   </n-collapse-item>
 </n-collapse>
 ```
+
 ```js
 export default {
   data() {

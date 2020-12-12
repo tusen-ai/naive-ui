@@ -1,15 +1,15 @@
 # Collapse Sider
+
 Use `collapsed` prop to control status of sider.
 
 Sider has two `collapse-mode`: `width`, `transform`. `width` will actually change width of sider, `transform` will just move sider out of layout.
 
 Use `collapsed-width` and `width` to set sider's width.
+
 ```html
 <n-switch v-model:value="collapsed" />
 <n-layout>
-  <n-layout-header style="height: 64px;">
-    Cool Header
-  </n-layout-header>
+  <n-layout-header style="height: 64px;"> Cool Header </n-layout-header>
   <n-layout>
     <n-layout-sider
       collapse-mode="width"
@@ -49,9 +49,7 @@ Use `collapsed-width` and `width` to set sider's width.
     >
       <n-h1>Sider</n-h1>
     </n-layout-sider>
-    <n-layout 
-      position="absolute"
-    >
+    <n-layout position="absolute">
       <span>Content</span>
     </n-layout>
   </n-layout>
@@ -59,15 +57,13 @@ Use `collapsed-width` and `width` to set sider's width.
 ```
 
 ```js
-import {
-  MdContacts
-} from '@vicons/ionicons-v4'
+import { MdContacts } from '@vicons/ionicons-v4'
 
 export default {
   components: {
     MdContacts
   },
-  data () {
+  data() {
     return {
       activeMenuItemName: null,
       collapsed: true

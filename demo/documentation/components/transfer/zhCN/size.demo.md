@@ -1,5 +1,7 @@
 # 尺寸
+
 太小太大好像都不怎么好看。
+
 ```html
 <n-transfer
   ref="transfer"
@@ -14,8 +16,9 @@
   size="large"
 />
 ```
+
 ```js
-function createOptions () {
+function createOptions() {
   return Array.apply(null, { length: 20 }).map((v, i) => ({
     label: 'Option' + i,
     value: i,
@@ -23,12 +26,12 @@ function createOptions () {
   }))
 }
 
-function createValues () {
+function createValues() {
   return Array.apply(null, { length: 5 }).map((v, i) => i)
 }
 
 export default {
-  data () {
+  data() {
     return {
       options: createOptions(),
       value: createValues()
@@ -36,6 +39,7 @@ export default {
   }
 }
 ```
+
 ```css
 .n-transfer {
   margin-bottom: 8px;

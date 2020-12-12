@@ -1,12 +1,21 @@
 # 滚动
+
 你可以很简单的让 Log 滚到顶部或者底部。同时你可以控制这个滚动操作是否发出事件。
 
 ```html
 <n-button-group>
-  <n-button @click="scrollTo({ position: 'bottom', slient: false })">滚动到底部</n-button>
-  <n-button @click="scrollTo({ position: 'bottom', slient: true })">滚动到底部（无事件）</n-button>
-  <n-button @click="scrollTo({ position: 'top', slient: false })">滚动到顶部</n-button>
-  <n-button @click="scrollTo({ position: 'top', slient: true })">滚动到顶部（无事件）</n-button>
+  <n-button @click="scrollTo({ position: 'bottom', slient: false })"
+    >滚动到底部</n-button
+  >
+  <n-button @click="scrollTo({ position: 'bottom', slient: true })"
+    >滚动到底部（无事件）</n-button
+  >
+  <n-button @click="scrollTo({ position: 'top', slient: false })"
+    >滚动到顶部</n-button
+  >
+  <n-button @click="scrollTo({ position: 'top', slient: true })"
+    >滚动到顶部（无事件）</n-button
+  >
 </n-button-group>
 <n-log
   ref="log"
@@ -20,7 +29,7 @@
 ```
 
 ```js
-function log () {
+function log() {
   const l = []
   for (let i = 0; i < 10; ++i) {
     l.push(Math.random().toString(16))
@@ -30,17 +39,17 @@ function log () {
 
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       loading: false,
       log: log()
     }
   },
   methods: {
-    clear () {
+    clear() {
       this.log = ''
     },
-    handleRequireMore (from) {
+    handleRequireMore(from) {
       this.message.info('Require More from ' + from)
       if (this.loading) return
       this.loading = true
@@ -65,8 +74,9 @@ export default {
   }
 }
 ```
+
 ```css
-.n-button-group { 
+.n-button-group {
   margin-bottom: 12px;
 }
 ```

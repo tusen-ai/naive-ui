@@ -1,4 +1,5 @@
 # Gradient Text
+
 It doesn't seem very useful. In fact it isn't.
 
 ## Demos
@@ -10,15 +11,17 @@ custom
 ```
 
 ## Props
-|Name|Type|Default|Description|
-|-|-|-|-|
-|gradient|`string \| { from: string, to: string, deg: number \| string }`|`undefined`||
-|size|`number \| string`|`undefined`||
-|themed-style|`{ [themeName: string]: Object }`|`undefined`||
-|theme|`'light' \| 'dark' \| string`|`undefined`||
-|type|`'primary' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'primary'`||
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| gradient | `string \| { from: string, to: string, deg: number \| string }` | `undefined` |  |
+| size | `number \| string` | `undefined` |  |
+| themed-style | `{ [themeName: string]: Object }` | `undefined` |  |
+| theme | `'light' \| 'dark' \| string` | `undefined` |  |
+| type | `'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'primary'` |  |
 
 ## Slots
-|Name|Parameters|Description|
-|-|-|-|
-|default|`()`||
+
+| Name    | Parameters | Description |
+| ------- | ---------- | ----------- |
+| default | `()`       |             |

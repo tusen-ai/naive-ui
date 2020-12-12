@@ -1,12 +1,10 @@
 # Datetime Range
+
 ```html
-<n-date-picker
-  v-model:value="range"
-  type="datetimerange"
-  clearable
-/>
+<n-date-picker v-model:value="range" type="datetimerange" clearable />
 <pre>{{ JSON.stringify(range) }}</pre>
 ```
+
 ```js
 export default {
   data() {

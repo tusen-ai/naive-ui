@@ -1,4 +1,5 @@
-# 加载条 Loading Bar 
+# 加载条 Loading Bar
+
 焦虑的安慰剂，疗效尚可。
 
 <n-space vertical>
@@ -19,27 +20,33 @@
 export default {
   inject: ['loadingBar'],
   methods: {
-    loading () {
+    loading() {
       this.loadingBar.start()
     }
   }
 }
 ```
+
 </n-space>
 
 ## 演示
+
 ```demo
 basic
 ```
+
 ## API
+
 ### `loadingBar` Injection Methods
-|名称|类型|说明|
-|-|-|-|
-|error|`(option: LoadingBarOption) => void`||
-|finish|`(option: LoadingBarOption) => void`||
-|start|`(option: LoadingBarOption) => void`||
+
+| 名称   | 类型                                 | 说明 |
+| ------ | ------------------------------------ | ---- |
+| error  | `(option: LoadingBarOption) => void` |      |
+| finish | `(option: LoadingBarOption) => void` |      |
+| start  | `(option: LoadingBarOption) => void` |      |
 
 #### LoadingBarOption Properties
-|名称|类型|说明|
-|-|-|-|
-|theme|`'light' \| 'dark'`|如果设定会将该加载条的主题设为该主题，如果没有设定则会使用 `n-loading-bar-provider` 所处位置的主题|
+
+| 名称 | 类型 | 说明 |
+| --- | --- | --- |
+| theme | `'light' \| 'dark'` | 如果设定会将该加载条的主题设为该主题，如果没有设定则会使用 `n-loading-bar-provider` 所处位置的主题 |

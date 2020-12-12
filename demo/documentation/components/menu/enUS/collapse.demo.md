@@ -1,5 +1,7 @@
 # Collapsed Menu
+
 Use collapsable vertical menu with layout sider. Use `collapsed` to control collapse status of menu. You must set `collapsed-width` to make it collapse in a right manner. There are still some other collapse related props you can modify: `icon-size`, `collapsed-icon-size`, `popover-body-style`. For details see API table at the bottom of the page.
+
 ```html
 <n-space vertical>
   <n-switch v-model:value="collapsed" />
@@ -29,6 +31,7 @@ Use collapsable vertical menu with layout sider. Use `collapsed` to control coll
   </n-layout>
 </n-space>
 ```
+
 ```js
 import { h, resolveComponent } from 'vue'
 import {
@@ -117,7 +120,7 @@ const menuItems = [
 ]
 
 export default {
-  data () {
+  data() {
     return {
       activeKey: null,
       collapsed: true,

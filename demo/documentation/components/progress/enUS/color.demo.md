@@ -1,5 +1,7 @@
 # Custom Color
+
 If you are not satisfied with builtin colors.
+
 ```html
 <n-config-consumer>
   <template v-slot="{ styleScheme }">

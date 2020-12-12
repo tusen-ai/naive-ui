@@ -1,9 +1,7 @@
 # 自定义内容
+
 ```html
-<n-dynamic-input
-  v-model:value="customValue"
-  :on-create="onCreate"
->
+<n-dynamic-input v-model:value="customValue" :on-create="onCreate">
   <template v-slot="{ value }">
     <div style="width: 100%;">
       <div style="display: flex; align-items: center;">
@@ -15,10 +13,7 @@
           v-model:value="value.num"
           style="margin-right: 12px; width: 160px;"
         />
-        <n-input
-          v-model:value="value.string"
-          type="input"
-        />
+        <n-input v-model:value="value.string" type="input" />
       </div>
     </div>
   </template>
@@ -27,9 +22,10 @@
 {{  JSON.stringify(customValue, 0, 2) }}
 </pre>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       customValue: [
         {
@@ -41,7 +37,7 @@ export default {
     }
   },
   methods: {
-    onCreate () {
+    onCreate() {
       return {
         isCheck: false,
         num: 1,

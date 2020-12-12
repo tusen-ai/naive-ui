@@ -1,11 +1,11 @@
 # Trigger Button
+
 A trigger button, for free.
+
 ```html
 <n-switch v-model:value="collapsed" />
 <n-layout style="height: 240px;">
-  <n-layout-header style="height: 64px;">
-    Cool Header
-  </n-layout-header>
+  <n-layout-header style="height: 64px;"> Cool Header </n-layout-header>
   <n-layout>
     <n-layout-sider
       collapse-mode="width"
@@ -45,10 +45,7 @@ A trigger button, for free.
     >
       <n-h1>Sider</n-h1>
     </n-layout-sider>
-    <n-layout 
-      position="absolute"
-      style="padding: 24px;"
-    >
+    <n-layout position="absolute" style="padding: 24px;">
       <n-layout-content>
         <span>Content</span>
       </n-layout-content>
@@ -59,9 +56,10 @@ A trigger button, for free.
   </n-layout>
 </n-layout>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       collapsed: false
     }

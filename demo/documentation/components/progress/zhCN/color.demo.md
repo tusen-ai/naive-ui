@@ -1,5 +1,7 @@
 # 自定义颜色
-如果你觉得内置的颜色不行🙅‍♂️。
+
+如果你觉得内置的颜色不行 🙅‍♂️。
+
 ```html
 <n-config-consumer>
   <template v-slot="{ styleScheme }">

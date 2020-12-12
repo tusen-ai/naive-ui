@@ -1,5 +1,7 @@
 # 触发
+
 下拉菜单不同的触发方式。
+
 ```html
 <n-space>
   <n-dropdown @select="handleSelect" trigger="hover" :options="options">
@@ -9,14 +11,17 @@
     <n-button :keyboard="false">点击！</n-button>
   </n-dropdown>
   <n-dropdown @select="handleSelect" :show="showDropdown" :options="options">
-    <n-button :keyboard="false" @click="handleClick">噢！我要自己手动！</n-button>
+    <n-button :keyboard="false" @click="handleClick"
+      >噢！我要自己手动！</n-button
+    >
   </n-dropdown>
 </n-space>
 ```
+
 ```js
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       options: [
         {
@@ -25,7 +30,7 @@ export default {
         },
         {
           label: '布朗酒店，伦敦',
-          key: 'brown\'s hotel, london'
+          key: "brown's hotel, london"
         },
         {
           label: '亚特兰蒂斯巴哈马，拿骚',
@@ -40,10 +45,10 @@ export default {
     }
   },
   methods: {
-    handleSelect (name) {
+    handleSelect(name) {
       this.message.info(name)
     },
-    handleClick () {
+    handleClick() {
       this.showDropdown = !this.showDropdown
     }
   }

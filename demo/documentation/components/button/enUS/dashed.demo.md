@@ -1,5 +1,7 @@
 # Dashed
+
 Use `dashed` to show dashed button.
+
 ```html
 <n-space>
   <n-button dashed>Default</n-button>

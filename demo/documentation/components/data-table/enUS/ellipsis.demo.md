@@ -1,11 +1,13 @@
 # Ellipsis
+
 Ellipsize cell content via setting `column.ellipsis`.
+
 ```html
 <n-data-table
-  ref='table'
-  :columns='columns'
-  :data='data'
-  :pagination='pagination'
+  ref="table"
+  :columns="columns"
+  :data="data"
+  :pagination="pagination"
 />
 ```
 
@@ -59,7 +61,7 @@ const data = [
 
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       data,
       columns,

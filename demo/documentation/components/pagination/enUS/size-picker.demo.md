@@ -1,4 +1,5 @@
 # Size Picker
+
 ```html
 <n-pagination
   v-model:page="page"
@@ -11,7 +12,7 @@
 
 ```js
 export default {
-  data () {
+  data() {
     return {
       page: 2,
       pageSize: 20

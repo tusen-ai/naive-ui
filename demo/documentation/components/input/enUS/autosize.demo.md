@@ -1,5 +1,7 @@
 # Autosize
+
 Make textarea autosizable.
+
 ```html
 <n-space vertical>
   <n-input
@@ -22,9 +24,10 @@ Make textarea autosizable.
   />
 </n-space>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       value: null
     }

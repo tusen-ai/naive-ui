@@ -1,4 +1,5 @@
 # Message
+
 Oracle from the top(always) of the browser.
 
 <n-space vertical>
@@ -19,15 +20,17 @@ For example:
 export default {
   inject: ['message'],
   methods: {
-    warning () {
+    warning() {
       this.message.warning('...')
     }
   }
 }
 ```
+
 </n-space>
 
 ## Demos
+
 ```demo
 basic
 icon
@@ -39,43 +42,50 @@ about-theme
 ```
 
 ## API
+
 ### MessageProvider Props
-|Name|Type|Default|Description|
-|-|-|-|-|
-|to|`string \| HTMLElement`|`'body'`|Container node of message container.|
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| to | `string \| HTMLElement` | `'body'` | Container node of message container. |
 
 ### MessageProvider Injection API
+
 #### MessageProvider Injection Methods
-|Name|Type|Description|
-|-|-|-|
-|error|`(content: string, option?: MessageOption) => MessageReactive`||
-|info|`(content: string, option?: MessageOption) => MessageReactive`||
-|loading|`(content: string, option?: MessageOption) => MessageReactive`||
-|success|`(content: string, option?: MessageOption) => MessageReactive`||
-|warning|`(content: string, option?: MessageOption) => MessageReactive`||
+
+| Name | Type | Description |
+| --- | --- | --- |
+| error | `(content: string, option?: MessageOption) => MessageReactive` |  |
+| info | `(content: string, option?: MessageOption) => MessageReactive` |  |
+| loading | `(content: string, option?: MessageOption) => MessageReactive` |  |
+| success | `(content: string, option?: MessageOption) => MessageReactive` |  |
+| warning | `(content: string, option?: MessageOption) => MessageReactive` |  |
 
 #### MessageOption Properties
-|Name|Type|Description|
-|-|-|-|
-|closable|`boolean`||
-|content|`string \| (() => VNode \| Array<VNode>)`|Message content.|
-|icon|`() => VNode`|Message icon.|
-|theme|`'light' \| 'dark' \| string \| null`||
-|onAfterLeave|`Function`|Callback after message disappeared.|
-|onLeave|`Function`|Callback when message start to disappear.|
+
+| Name | Type | Description |
+| --- | --- | --- |
+| closable | `boolean` |  |
+| content | `string \| (() => VNode \| Array<VNode>)` | Message content. |
+| icon | `() => VNode` | Message icon. |
+| theme | `'light' \| 'dark' \| string \| null` |  |
+| onAfterLeave | `Function` | Callback after message disappeared. |
+| onLeave | `Function` | Callback when message start to disappear. |
 
 #### MessageReactive Properties
-|Name|Type|Description|
-|-|-|-|
-|closable|`boolean`||
-|content|`string \| (() => VNode \| Array<VNode>)`|Message content.|
-|icon|`() => VNode`|Message icon.|
-|theme|`'light' \| 'dark' \| string \| null`||
-|type|`'info' \| 'success' \| 'warning' \| 'error' \| 'loading'`||
-|onAfterLeave|`Function`|Callback after message disappeared.|
-|onLeave|`Function`|Callback when message start to disappear.|
+
+| Name | Type | Description |
+| --- | --- | --- |
+| closable | `boolean` |  |
+| content | `string \| (() => VNode \| Array<VNode>)` | Message content. |
+| icon | `() => VNode` | Message icon. |
+| theme | `'light' \| 'dark' \| string \| null` |  |
+| type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` |  |
+| onAfterLeave | `Function` | Callback after message disappeared. |
+| onLeave | `Function` | Callback when message start to disappear. |
 
 #### MessageReactive Methods
-|Name|Type|Description|
-|-|-|-|
-|destroy|`()`||
+
+| Name    | Type | Description |
+| ------- | ---- | ----------- |
+| destroy | `()` |             |

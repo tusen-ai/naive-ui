@@ -1,5 +1,7 @@
 # Custom Validation
+
 You may need to manually custom the timing and the effect of a validation. Use `validation-status` and `feedback` to control the validation effect of a form item. In this case, there's usually no need for providing a `path` for the form item.
+
 ```html
 <n-form>
   <n-form-item
@@ -7,19 +9,14 @@ You may need to manually custom the timing and the effect of a validation. Use `
     :validation-status="inputValidationStatus"
     :feedback="inputFeedback"
   >
-    <n-input
-      v-model:value="inputValue"
-      clearable
-    />
+    <n-input v-model:value="inputValue" clearable />
   </n-form-item>
   <n-form-item
     label="Airport's"
     :validation-status="inputNumberValidationStatus"
     :feedback="inputNumberFeedback"
   >
-    <n-input-number
-      v-model:value="inputNumberValue"
-    />
+    <n-input-number v-model:value="inputNumberValue" />
   </n-form-item>
   <n-form-item
     label="Airport's"
@@ -35,8 +32,9 @@ You may need to manually custom the timing and the effect of a validation. Use `
   </n-form-item>
 </n-form>
 ```
+
 ```js
-function createStatus (value) {
+function createStatus(value) {
   switch (value) {
     case '10: 30':
       return 'success'
@@ -47,7 +45,7 @@ function createStatus (value) {
   }
 }
 
-function createFeedback (value) {
+function createFeedback(value) {
   switch (value) {
     case '10: 30':
       return null
@@ -58,32 +56,32 @@ function createFeedback (value) {
   }
 }
 
-function createTimeForNumber (num) {
+function createTimeForNumber(num) {
   return `${parseInt(num / 100, 10)}: ${num % 100}`
 }
 
 export default {
   computed: {
-    inputValidationStatus () {
+    inputValidationStatus() {
       return createStatus(this.inputValue)
     },
-    inputFeedback () {
+    inputFeedback() {
       return createFeedback(this.inputValue)
     },
-    inputNumberValidationStatus () {
+    inputNumberValidationStatus() {
       return createStatus(createTimeForNumber(this.inputNumberValue))
     },
-    inputNumberFeedback () {
+    inputNumberFeedback() {
       return createFeedback(createTimeForNumber(this.inputNumberValue))
     },
-    selectValidationStatus () {
+    selectValidationStatus() {
       return createStatus(this.selectValue)
     },
-    selectFeedback () {
+    selectFeedback() {
       return createFeedback(this.selectValue)
     }
   },
-  data () {
+  data() {
     return {
       inputValue: '10: 29',
       inputNumberValue: 1029,

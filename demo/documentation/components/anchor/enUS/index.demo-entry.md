@@ -1,7 +1,11 @@
 # Anchor
+
 <!--single-column-->
-These demos used to use some charactor names from *Hard-Boiled Wonderland and the End of the World* as anchor links, but if so there will be too wired in this page compared with other pages. So I rewrite them. What a pity.
+
+These demos used to use some charactor names from _Hard-Boiled Wonderland and the End of the World_ as anchor links, but if so there will be too wired in this page compared with other pages. So I rewrite them. What a pity.
+
 ## Demos
+
 ```demo
 basic
 ignore-gap
@@ -9,16 +13,19 @@ affix
 scrollto
 
 ```
+
 ## Props
-|Name|Type|Default|Description|
-|-|-|-|-|
-|affix|`boolean`|`false`|If it works like a affix. If set to `true`, it will recieve props from [affix](n-affix#Props)|
-|bound|`number`|`12`||
-|ignore-gap|`boolean`|`false`| If set to `true`, it will be displayed on the exact href |
-|listen-to|`string \| HTMLElement`|`undefined`|The scrolling element to listen scrolling. If not set it will listen to the nearest scrollable ascendant element.|
-|theme|`'light' \| 'dark' \| string`|`undefined`||
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| affix | `boolean` | `false` | If it works like a affix. If set to `true`, it will recieve props from [affix](n-affix#Props) |
+| bound | `number` | `12` |  |
+| ignore-gap | `boolean` | `false` | If set to `true`, it will be displayed on the exact href |
+| listen-to | `string \| HTMLElement` | `undefined` | The scrolling element to listen scrolling. If not set it will listen to the nearest scrollable ascendant element. |
+| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 
 ## Methods
-|Name|Type|Description|
-|-|-|-|
-|scrollTo|`(href: string) => void`||
+
+| Name     | Type                     | Description |
+| -------- | ------------------------ | ----------- |
+| scrollTo | `(href: string) => void` |             |

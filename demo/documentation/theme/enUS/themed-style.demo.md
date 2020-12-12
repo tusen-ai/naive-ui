@@ -1,5 +1,7 @@
 # Use Themed Style
+
 Some of components has `themed-style` prop to help you simply modify the style of outer element's style of a component. For some simple components it could be very useful.
+
 ```html
 <n-space vertical>
   <n-space>
@@ -25,12 +27,9 @@ Some of components has `themed-style` prop to help you simply modify the style o
   </n-config-provider>
 </n-space>
 ```
+
 ```js
-import {
-  MdCash,
-  MdContacts,
-  IosContacts
-} from '@vicons/ionicons-v4'
+import { MdCash, MdContacts, IosContacts } from '@vicons/ionicons-v4'
 
 export default {
   components: {
@@ -38,7 +37,7 @@ export default {
     MdContacts,
     IosContacts
   },
-  data () {
+  data() {
     return {
       theme: 'dark'
     }

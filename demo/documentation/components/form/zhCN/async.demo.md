@@ -1,35 +1,21 @@
 # 异步验证
+
 ```html
-<n-form
-  inline
-  :label-width="80"
-  :model="formValue"
-  :rules="rules"
-  ref="form"
->
-  <n-form-item
-    label="Name"
-    path="user.name"
-  >
+<n-form inline :label-width="80" :model="formValue" :rules="rules" ref="form">
+  <n-form-item label="Name" path="user.name">
     <n-input v-model:value="formValue.user.name" placeholder="Input Name" />
   </n-form-item>
-  <n-form-item
-    label="Age"
-    path="user.age"
-  >
-    <n-input placeholder="Input Age" v-model:value="formValue.user.age"/>
+  <n-form-item label="Age" path="user.age">
+    <n-input placeholder="Input Age" v-model:value="formValue.user.age" />
   </n-form-item>
-  <n-form-item
-    label="Adress"
-    path="user.address"
-  >
-    <n-input placeholder="Input Address" v-model:value="formValue.user.address"/>
+  <n-form-item label="Adress" path="user.address">
+    <n-input
+      placeholder="Input Address"
+      v-model:value="formValue.user.address"
+    />
   </n-form-item>
-  <n-form-item
-    label="Phone"
-    path="phone"
-  >
-    <n-input placeholder="Phone Number" v-model:value="formValue.phone"/>
+  <n-form-item label="Phone" path="phone">
+    <n-input placeholder="Phone Number" v-model:value="formValue.phone" />
   </n-form-item>
   <n-form-item>
     <n-button @click="handleValidateClick">Validate</n-button>
@@ -40,10 +26,11 @@
 {{  JSON.stringify(formValue, 0, 2) }}
 </pre>
 ```
+
 ```js
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       formValue: {
         user: {
@@ -82,22 +69,22 @@ export default {
                 }, 3000)
               })
             }
-          },
+          }
         },
-          phone: {
-            required: true,
-            trigger: ['input'],
-            validator: (rule, value) => {
-              return /^[1]+[3,8]+\\d{9}$/.test(value)
-            }
+        phone: {
+          required: true,
+          trigger: ['input'],
+          validator: (rule, value) => {
+            return /^[1]+[3,8]+\\d{9}$/.test(value)
           }
         }
       }
-    },
+    }
+  },
   methods: {
-    handleValidateClick (e) {
+    handleValidateClick(e) {
       e.preventDefault()
-      this.$refs.form.validate(errors => {
+      this.$refs.form.validate((errors) => {
         if (!errors) {
           this.message.success('Valid')
         } else {

@@ -1,4 +1,5 @@
 # Icon
+
 It is recommend to use <n-a href="https://vicons.vercel.app/">vicons</n-a> as your icon library.
 
 ## Demos
@@ -11,15 +12,17 @@ depth
 ```
 
 ## Props
-|Name|Type|Default|Description|
-|-|-|-|-|
-|color|`string`|`undefined`||
-|depth|`1 \| 2 \| 3 \| 4 \| 5`|`undefined`||
-|size|`number \| string`|`undefined`||
-|themed-style|`{ [themeName: string]: Object }`|`undefined`||
-|theme|`'light' \| 'dark' \| string`|`undefined`||
+
+| Name         | Type                              | Default     | Description |
+| ------------ | --------------------------------- | ----------- | ----------- |
+| color        | `string`                          | `undefined` |             |
+| depth        | `1 \| 2 \| 3 \| 4 \| 5`           | `undefined` |             |
+| size         | `number \| string`                | `undefined` |             |
+| themed-style | `{ [themeName: string]: Object }` | `undefined` |             |
+| theme        | `'light' \| 'dark' \| string`     | `undefined` |             |
 
 ## Slots
-|Name|Parameters|Description|
-|-|-|-|
-|default|`()`||
+
+| Name    | Parameters | Description |
+| ------- | ---------- | ----------- |
+| default | `()`       |             |

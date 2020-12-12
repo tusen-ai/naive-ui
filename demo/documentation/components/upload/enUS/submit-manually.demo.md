@@ -1,5 +1,7 @@
 # Uncontrolled Manually Submit
+
 You can use `submit` method to submit in uncontrolled manner. Also you can do it in controlled manner in another way.
+
 ```html
 <n-button
   :disabled="!fileListLength"
@@ -18,20 +20,19 @@ You can use `submit` method to submit in uncontrolled manner. Also you can do it
   <n-button>Select File</n-button>
 </n-upload>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       fileListLength: 0
     }
   },
   methods: {
-    handleChange ({
-      fileList
-    }) {
+    handleChange({ fileList }) {
       this.fileListLength = fileList.length
     },
-    handleClick () {
+    handleClick() {
       this.$refs.upload.submit()
     }
   }

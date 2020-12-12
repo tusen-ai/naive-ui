@@ -1,5 +1,7 @@
 # Processing
+
 Set `processing` prop to indicate it is processing.
+
 ```html
 <n-space :size="24" align="center">
   <n-badge dot processing>

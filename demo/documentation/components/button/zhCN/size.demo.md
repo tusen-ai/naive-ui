@@ -1,5 +1,7 @@
 # 尺寸
+
 有 `tiny`、`small`、`medium` 和 `large` 尺寸。
+
 ```html
 <n-space align="baseline">
   <n-button size="tiny">小小</n-button>

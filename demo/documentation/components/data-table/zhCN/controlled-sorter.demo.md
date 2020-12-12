@@ -1,5 +1,7 @@
 # 受控的排序
+
 如果列对象的 `sortOrder` 属性被设为 `'ascend'`、`'descend'` 或者 `false`，表格的排序将为受控状态。如果很多列的 `sortOrder` 都被设定了，那么只有他们之中的第一列会生效。
+
 ```html
 <n-button @click="sortName('ascend')">Sort By Name (Ascend)</n-button>
 <n-button @click="sortName('descend')">Sort By Name (Descend)</n-button>
@@ -25,7 +27,7 @@ const ageColumn = {
   title: 'Age',
   key: 'age',
   sortOrder: false,
-  sorter (rowA, rowB) {
+  sorter(rowA, rowB) {
     return rowA.age - rowB.age
   }
 }
@@ -47,7 +49,7 @@ const columns = [
         value: 'New York'
       }
     ],
-    filter (value, row) {
+    filter(value, row) {
       return row.address.indexOf(value) >= 0
     }
   }
@@ -81,7 +83,7 @@ const data = [
 ]
 
 export default {
-  data () {
+  data() {
     return {
       data: data,
       columns,
@@ -91,15 +93,15 @@ export default {
     }
   },
   methods: {
-    sortName (order) {
+    sortName(order) {
       this.nameColumn.sortOrder = order
     },
-    clearSorter () {
+    clearSorter() {
       this.nameColumn.sortOrder = false
       this.ageColumn.sortOrder = false
     },
-    handleSorterChange (sorter) {
-      this.columns.forEach(column => {
+    handleSorterChange(sorter) {
+      this.columns.forEach((column) => {
         /** column.sortOrder !== undefined means it is uncontrolled */
         if (column.sortOrder === undefined) return
         if (!sorter) {

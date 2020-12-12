@@ -1,4 +1,5 @@
 # Events
+
 ```html
 <n-space vertical>
   <n-date-picker
@@ -32,10 +33,11 @@
   <n-switch v-model:value="disabled" />
 </n-space>
 ```
+
 ```js
 export default {
   inject: ['message'],
-  data () {
+  data() {
     return {
       datetime: 1183135260000,
       date: null,
@@ -45,28 +47,28 @@ export default {
     }
   },
   methods: {
-    onBlur1 () {
+    onBlur1() {
       this.message.info('Blur-1')
     },
-    onChange1 (v) {
+    onChange1(v) {
       this.message.info('Change-1 ' + v)
     },
-    onBlur2 () {
+    onBlur2() {
       this.message.error('Blur-2')
     },
-    onChange2 (v) {
+    onChange2(v) {
       this.message.error('Change-2 ' + v)
     },
-    onBlur3 () {
+    onBlur3() {
       this.message.warning('Blur-3')
     },
-    onChange3 (v) {
+    onChange3(v) {
       this.message.warning('Change-3 ' + v)
     },
-    onBlur4 () {
+    onBlur4() {
       this.message.success('Blur-4')
     },
-    onChange4 (v) {
+    onChange4(v) {
       this.message.success('Change-4 ' + v)
     }
   }

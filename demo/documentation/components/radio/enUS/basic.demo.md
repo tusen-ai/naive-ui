@@ -1,4 +1,5 @@
 # Basic
+
 ```html
 <n-space>
   <n-radio
@@ -26,19 +27,20 @@
   >
     Be Here Now
   </n-radio>
-  <n-switch v-model:value="disabled"/>
+  <n-switch v-model:value="disabled" />
 </n-space>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       disabled: true,
       checkedValue: null
     }
   },
   methods: {
-    handleChange (e) {
+    handleChange(e) {
       this.checkedValue = e.target.value
     }
   }

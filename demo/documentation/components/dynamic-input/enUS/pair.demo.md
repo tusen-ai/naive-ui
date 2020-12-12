@@ -1,4 +1,5 @@
 # Use Preset Pair
+
 ```html
 <n-dynamic-input
   preset="pair"
@@ -10,9 +11,10 @@
 {{  JSON.stringify(value, 0, 2) }}
 </pre>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       value: [
         {

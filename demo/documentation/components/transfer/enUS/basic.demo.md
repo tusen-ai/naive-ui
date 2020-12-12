@@ -1,14 +1,13 @@
 # Basic
+
 Basic example of transfer. If you have tons of data, see next section.
+
 ```html
-<n-transfer
-  ref="transfer"
-  v-model:value="value"
-  :options="options"
-/>
+<n-transfer ref="transfer" v-model:value="value" :options="options" />
 ```
+
 ```js
-function createOptions () {
+function createOptions() {
   return Array.apply(null, { length: 100 }).map((v, i) => ({
     label: 'Option' + i,
     value: i,
@@ -16,16 +15,16 @@ function createOptions () {
   }))
 }
 
-function createValues () {
+function createValues() {
   return Array.apply(null, { length: 50 }).map((v, i) => i)
 }
 
 export default {
-  data () {
+  data() {
     return {
       options: createOptions(),
       value: createValues()
     }
-  },
+  }
 }
 ```

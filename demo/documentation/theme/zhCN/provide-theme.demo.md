@@ -1,4 +1,5 @@
 # 提供主题
+
 使用 `n-config-provider` 来设定它全部的后代组件主题。
 
 ```html
@@ -11,9 +12,10 @@
   </n-card>
 </n-config-provider>
 ```
+
 ```js
 export default {
-  data () {
+  data() {
     return {
       theme: 'dark'
     }
