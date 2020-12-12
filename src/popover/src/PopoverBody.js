@@ -125,8 +125,12 @@ export default {
     directives () {
       const { trigger } = this
       const directives = []
-      if (trigger === 'click') { directives.push([clickoutside, this.handleClickOutside]) }
-      if (trigger === 'hover') { directives.push([mousemoveoutside, this.handleMouseMoveOutside]) }
+      if (trigger === 'click') {
+        directives.push([clickoutside, this.handleClickOutside])
+      }
+      if (trigger === 'hover') {
+        directives.push([mousemoveoutside, this.handleMouseMoveOutside])
+      }
       if (this.useVShow) directives.push([vShow, this.show])
       return directives
     },

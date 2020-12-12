@@ -3,13 +3,13 @@ import { i18n } from '../util-composables'
 export default {
   setup () {
     return {
-      ...(i18n())
+      ...i18n()
     }
   },
   render () {
     const { locale } = this
     const defaultSlot = (this.$slots.default && this.$slots.default()) || []
-    const index = defaultSlot.findIndex(VNode => VNode.type.name === locale)
+    const index = defaultSlot.findIndex((VNode) => VNode.type.name === locale)
     if (~index) {
       return defaultSlot[index]
     } else return defaultSlot[0] || null

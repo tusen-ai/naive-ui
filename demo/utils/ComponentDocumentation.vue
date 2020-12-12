@@ -13,9 +13,7 @@ export default {
   },
   mounted () {
     const paramsRegex = /\/([^/]+)\/([^/]+)\/([^/]+)\/([^/]+)/
-    const {
-      NDocRoot
-    } = this
+    const { NDocRoot } = this
     if (NDocRoot.memorizedPath) {
       const memorizedPath = NDocRoot.memorizedPath
       const currentPath = this.$route.path

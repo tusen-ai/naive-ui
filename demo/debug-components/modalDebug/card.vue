@@ -2,7 +2,7 @@
   <n-nimbus-form-card
     width="1032"
     title="Parklife"
-    :deactivate="() => isActive = false"
+    :deactivate="() => (isActive = false)"
   >
     <template #header>
       {{ time }}
@@ -11,29 +11,21 @@
       v-slot:footer
     </template>
     <template #content>
-      <n-input
-        v-model="time"
-      />
+      <n-input v-model="time" />
       <n-select
         v-model="selectedValue"
         size="small"
         placeholder="Please Select Type"
         :items="items"
-        style="flex-grow: 1;"
+        style="flex-grow: 1"
       />
-      <n-tooltip
-        placement="bottom"
-        trigger="click"
-        style="margin-right: 12px;"
-      >
+      <n-tooltip placement="bottom" trigger="click" style="margin-right: 12px">
         <template #activator>
-          <n-button style="margin: 0;">
+          <n-button style="margin: 0">
             California Girls(Click)
           </n-button>
         </template>
-        <span>
-          I wish they all could be California girls
-        </span>
+        <span> I wish they all could be California girls </span>
       </n-tooltip>
     </template>
   </n-nimbus-form-card>

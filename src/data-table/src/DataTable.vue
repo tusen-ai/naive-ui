@@ -366,7 +366,9 @@ export default {
             let activeFilterOptionValues = mergedActiveFilters[columnKey]
             if (activeFilterOptionValues == null) continue
             if (!activeFilterOptionValues.length) continue
-            if (!Array.isArray(activeFilterOptionValues)) { activeFilterOptionValues = [activeFilterOptionValues] }
+            if (!Array.isArray(activeFilterOptionValues)) {
+              activeFilterOptionValues = [activeFilterOptionValues]
+            }
             const columnToFilter = normalizedColumns.find(
               (column) => column.key === columnKey
             )
@@ -505,7 +507,9 @@ export default {
           activeSorter.sorter === true ||
           (typeof activeSorter.sorter !== 'function' &&
             activeSorter.sorter !== 'default')
-        ) { return this.filteredData }
+        ) {
+          return this.filteredData
+        }
         const filteredData = this.filteredData.slice(0)
         const columnKey = activeSorter.columnKey
         /**

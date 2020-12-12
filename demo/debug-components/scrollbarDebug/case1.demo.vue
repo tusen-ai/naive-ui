@@ -3,36 +3,51 @@
     <div class="n-doc-section__header">
       Scrollbar
     </div>
-    <div
-      class="n-doc-section__view"
-      style="flex-wrap: wrap;"
-    >
+    <div class="n-doc-section__view" style="flex-wrap: wrap">
       <!--EXAMPLE_START-->
-      <div style="width: 400px; height: 300px;">
-        <n-scrollbar style="max-height: 200px;">
-          <div style="background: linear-gradient(red, blue); width: 800px; height: 500px;">
+      <div style="width: 400px; height: 300px">
+        <n-scrollbar style="max-height: 200px">
+          <div
+            style="
+              background: linear-gradient(red, blue);
+              width: 800px;
+              height: 500px;
+            "
+          >
             666
           </div>
         </n-scrollbar>
       </div>
-      <div style="width: 400px; height: 300px;">
+      <div style="width: 400px; height: 300px">
         <n-scrollbar :max-height="200">
-          <div style="background: linear-gradient(red, blue); width: 400px; height: 500px;">
+          <div
+            style="
+              background: linear-gradient(red, blue);
+              width: 400px;
+              height: 500px;
+            "
+          >
             666
           </div>
         </n-scrollbar>
       </div>
-      <div style="width: 400px; height: 300px;">
+      <div style="width: 400px; height: 300px">
         <n-scrollbar>
-          <div style="background: linear-gradient(red, blue); width: 800px; height: 300px;">
+          <div
+            style="
+              background: linear-gradient(red, blue);
+              width: 800px;
+              height: 300px;
+            "
+          >
             666
           </div>
         </n-scrollbar>
       </div>
-      <div style="width: 400px; height: 300px;">
+      <div style="width: 400px; height: 300px">
         <n-scrollbar>
-          <div style="background: linear-gradient(red, blue); height: 300px;">
-            <div style="background: yellow; width: 100%; color: #000;">
+          <div style="background: linear-gradient(red, blue); height: 300px">
+            <div style="background: yellow; width: 100%; color: #000">
               <n-button block>
                 666
               </n-button>
@@ -40,7 +55,7 @@
           </div>
         </n-scrollbar>
       </div>
-      <div style="width: 400px;">
+      <div style="width: 400px">
         <n-scrollbar>
           <n-advance-table
             :columns="columns"
@@ -76,10 +91,12 @@ export default {
           title: 'Name',
           key: 'name',
           filterMultiple: false,
-          filterOptions: [{
-            label: 'xiaobai1',
-            value: 'xiaobai1'
-          }],
+          filterOptions: [
+            {
+              label: 'xiaobai1',
+              value: 'xiaobai1'
+            }
+          ],
           onFilter: 'custom'
         },
         {
@@ -92,13 +109,16 @@ export default {
             return a.age - b.age
           },
           filterMultiple: true, // 多选 onFilter接受参数为数组
-          filterOptions: [{
-            label: '14',
-            value: 14
-          }, {
-            label: '15',
-            value: 15
-          }],
+          filterOptions: [
+            {
+              label: '14',
+              value: 14
+            },
+            {
+              label: '15',
+              value: 15
+            }
+          ],
           onFilter: (value, record) => {
             return value.includes(record.age)
             // switch (value) {
@@ -115,16 +135,14 @@ export default {
         {
           title: '#',
           render: (h, params) => {
-            return (
-              ''
-              // <n-button
-              //   style="margin:0;"
-              //   size="small"
-              //   onClick={() => this.handleClick(params)}
-              // >
-              //   delete
-              // </n-button>
-            )
+            return ''
+            // <n-button
+            //   style="margin:0;"
+            //   size="small"
+            //   onClick={() => this.handleClick(params)}
+            // >
+            //   delete
+            // </n-button>
           }
         }
       ],
@@ -138,7 +156,6 @@ export default {
     onChange (...args) {
       console.log(args)
     }
-
   }
 }
 </script>

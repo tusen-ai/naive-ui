@@ -188,7 +188,9 @@ export default {
         this.containerHeight === null ||
         this.contentHeight === null ||
         this.yRailSize === null
-      ) { return 0 } else {
+      ) {
+        return 0
+      } else {
         return Math.min(
           this.containerHeight,
           (this.yRailSize * this.containerHeight) / this.contentHeight +
@@ -204,7 +206,9 @@ export default {
         this.containerWidth === null ||
         this.contentWidth === null ||
         this.xRailSize === null
-      ) { return 0 } else {
+      ) {
+        return 0
+      } else {
         return (
           (this.xRailSize * this.containerWidth) / this.contentWidth +
           this.size * 1.5
@@ -220,7 +224,9 @@ export default {
         this.containerScrollTop === null ||
         this.contentHeight === null ||
         this.yRailSize === null
-      ) { return 0 } else {
+      ) {
+        return 0
+      } else {
         return (
           (this.containerScrollTop /
             (this.contentHeight - this.containerHeight)) *
@@ -236,7 +242,9 @@ export default {
         this.containerWidth === null ||
         this.containerScrollLeft === null ||
         this.contentWidth === null
-      ) { return 0 } else {
+      ) {
+        return 0
+      } else {
         return (
           (this.containerScrollLeft /
             (this.contentWidth - this.containerWidth)) *
@@ -302,7 +310,9 @@ export default {
     },
     scrollTo (options, y) {
       if (!this.scrollable) return
-      if (typeof options === 'number') { this.scrollToPosition(options, y, 0, false, 'auto') }
+      if (typeof options === 'number') {
+        this.scrollToPosition(options, y, 0, false, 'auto')
+      }
       const {
         left,
         top,

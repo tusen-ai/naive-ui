@@ -1,6 +1,13 @@
 <template>
   <div>
-    <div style="height: 10px; width: 100%; background-color: red; min-width: 1000px;" />
+    <div
+      style="
+        height: 10px;
+        width: 100%;
+        background-color: red;
+        min-width: 1000px;
+      "
+    />
     <case2 />
   </div>
 </template>
@@ -13,11 +20,8 @@ export default {
     case2
   },
   data () {
-    return {
-
-    }
+    return {}
   },
-  methods: {
-  }
+  methods: {}
 }
 </script>

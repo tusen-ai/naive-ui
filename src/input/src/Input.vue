@@ -359,7 +359,9 @@ export default {
         this.disabled ||
         !this.clearable ||
         (!this.mergedFocus && !this.hover)
-      ) { return false }
+      ) {
+        return false
+      }
       if (this.pair) {
         return (
           !!(Array.isArray(this.value) && (this.value[0] || this.value[1])) &&

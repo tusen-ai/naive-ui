@@ -364,7 +364,9 @@ export default {
       if (this.borderRadius !== undefined) {
         return formatLength(this.borderRadius)
       }
-      if (this.height !== undefined) { return formatLength(this.height, { c: 0.5 }) }
+      if (this.height !== undefined) {
+        return formatLength(this.height, { c: 0.5 })
+      }
       return null
     },
     styleFillBorderRadius () {
@@ -374,7 +376,9 @@ export default {
       if (this.borderRadius !== undefined) {
         return formatLength(this.borderRadius)
       }
-      if (this.height !== undefined) { return formatLength(this.height, { c: 0.5 }) }
+      if (this.height !== undefined) {
+        return formatLength(this.height, { c: 0.5 })
+      }
       return null
     },
     mergedIndicatorPlacement () {

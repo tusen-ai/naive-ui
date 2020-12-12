@@ -313,13 +313,19 @@ export default {
       else return new Date(this.value)
     },
     hourValue () {
-      if (this.valueAsDate) { return Number(format(this.valueAsDate, 'HH', this.dateFnsOptions)) } else return null
+      if (this.valueAsDate) {
+        return Number(format(this.valueAsDate, 'HH', this.dateFnsOptions))
+      } else return null
     },
     minuteValue () {
-      if (this.valueAsDate) { return Number(format(this.valueAsDate, 'mm', this.dateFnsOptions)) } else return null
+      if (this.valueAsDate) {
+        return Number(format(this.valueAsDate, 'mm', this.dateFnsOptions))
+      } else return null
     },
     secondValue () {
-      if (this.valueAsDate) { return Number(format(this.valueAsDate, 'ss', this.dateFnsOptions)) } else return null
+      if (this.valueAsDate) {
+        return Number(format(this.valueAsDate, 'ss', this.dateFnsOptions))
+      } else return null
     }
   },
   watch: {
@@ -448,7 +454,9 @@ export default {
     refreshTimeString (time) {
       if (time === undefined) time = this.valueAsDate
       if (time === null) this.displayTimeString = ''
-      else { this.displayTimeString = format(time, this.format, this.dateFnsOptions) }
+      else {
+        this.displayTimeString = format(time, this.format, this.dateFnsOptions)
+      }
     },
     handleTimeInputWrapperBlur () {
       if (!this.active) {

@@ -1,18 +1,11 @@
 <template>
-  <n-layout-header
-    bordered
-  >
+  <n-layout-header bordered>
     <div class="nav">
-      <n-text
-        tag="div"
-        class="ui-logo"
-        :depth="1"
-        @click="handleLogoClick"
-      >
+      <n-text tag="div" class="ui-logo" :depth="1" @click="handleLogoClick">
         <img src="./assets/images/naivelogo.svg">
         Naive UI
       </n-text>
-      <div style="display: flex; align-items: center;">
+      <div style="display: flex; align-items: center">
         <div class="nav-menu">
           <n-menu
             mode="horizontal"
@@ -23,7 +16,7 @@
         </div>
         <n-auto-complete
           v-model:value="searchInputValue"
-          style="width: 216px; margin-left: 24px;"
+          style="width: 216px; margin-left: 24px"
           :placeholder="t('searchPlaceholder')"
           :options="searchOptions"
           clear-after-select
@@ -31,7 +24,7 @@
           @select="handleSelect"
         />
       </div>
-      <div style="display: flex;">
+      <div style="display: flex">
         <n-button size="small" class="nav-picker" @click="handleThemeChange">
           {{ themeOptions[theme].label }}
         </n-button>
@@ -57,7 +50,12 @@
 <script>
 import { computed, readonly, ref } from 'vue'
 import version from '../src/version'
-import { useSiteTheme, useSiteLang, useSiteDisplayMode, i18n } from './util-composables'
+import {
+  useSiteTheme,
+  useSiteLang,
+  useSiteDisplayMode,
+  i18n
+} from './util-composables'
 
 function match (pattern, string) {
   if (!pattern.length) return true
@@ -160,19 +158,24 @@ export default {
     },
     searchOptions () {
       function getLabel (item) {
-        if (item.title) return item.title + (item.titleExtra ? (' ' + item.titleExtra) : '')
+        if (item.title) { return item.title + (item.titleExtra ? ' ' + item.titleExtra : '') }
         return item.name
       }
       if (!this.searchInputValue) return []
       const replaceRegex = / |-/g
-      return this.items.filter(item => {
-        const pattern = this.searchInputValue.toLowerCase().replace(replaceRegex, '').slice(0, 20)
-        const label = getLabel(item).toLowerCase().replace(replaceRegex, '')
-        return match(pattern, label)
-      }).map(item => ({
-        label: getLabel(item),
-        value: item.path
-      }))
+      return this.items
+        .filter((item) => {
+          const pattern = this.searchInputValue
+            .toLowerCase()
+            .replace(replaceRegex, '')
+            .slice(0, 20)
+          const label = getLabel(item).toLowerCase().replace(replaceRegex, '')
+          return match(pattern, label)
+        })
+        .map((item) => ({
+          label: getLabel(item),
+          value: item.path
+        }))
     }
   },
   methods: {
@@ -181,21 +184,17 @@ export default {
         this.message.info(this.t('alreadyHome'))
         return
       }
-      this.$router.push(
-        /^(\/[^/]+){2}/.exec(this.$route.path)[0]
-      )
+      this.$router.push(/^(\/[^/]+){2}/.exec(this.$route.path)[0])
     },
     handleSelect (value) {
       this.$router.push(value)
     },
     handleMenuSelect (value) {
       if (value === 'home') {
-        this.$router.push(
-          /^(\/[^/]+){2}/.exec(this.$route.path)[0]
-        )
-      } if (value === 'doc') {
+        this.$router.push(/^(\/[^/]+){2}/.exec(this.$route.path)[0])
+      }
+      if (value === 'doc') {
         if (/^(\/[^/]+){2}\/doc/.test(this.$route.path)) {
-
         } else {
           this.$router.push(
             /^(\/[^/]+){2}/.exec(this.$route.path)[0] + '/doc/start'

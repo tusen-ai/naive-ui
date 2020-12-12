@@ -1,7 +1,11 @@
 <template>
   <n-layout position="absolute" class="root-layout">
     <site-header :items="flattenedItems" />
-    <n-layout class="home-layout" style="top: 64px; overflow: hidden;" position="absolute">
+    <n-layout
+      class="home-layout"
+      style="top: 64px; overflow: hidden"
+      position="absolute"
+    >
       <router-view />
     </n-layout>
   </n-layout>
@@ -23,10 +27,7 @@ export default {
   components: {
     SiteHeader
   },
-  inject: [
-    'SiteProvider',
-    'loadingBar'
-  ],
+  inject: ['SiteProvider', 'loadingBar'],
   provide () {
     return {
       Site: this
@@ -36,16 +37,18 @@ export default {
     const themeRef = useSiteTheme()
     const langRef = useSiteLang()
     const displayModeRef = useSiteDisplayMode()
-    const itemsRef = computed(() => menuOptions({
-      theme: themeRef.value,
-      lang: langRef.value,
-      mode: displayModeRef.value
-    }))
+    const itemsRef = computed(() =>
+      menuOptions({
+        theme: themeRef.value,
+        lang: langRef.value,
+        mode: displayModeRef.value
+      })
+    )
     const flattenedItemsRef = computed(() => {
       const flattenedItems = []
-      const traverse = items => {
+      const traverse = (items) => {
         if (items) {
-          items.forEach(item => {
+          items.forEach((item) => {
             if (item.childItems) traverse(item.childItems)
             else flattenedItems.push(item)
           })
@@ -81,9 +84,9 @@ body {
 }
 
 .root-layout.n-layout.n-light-theme {
-  background-color: #FFF;
+  background-color: #fff;
 }
 .home-layout.n-layout.n-light-theme {
-  background-color: #FFF;
+  background-color: #fff;
 }
 </style>

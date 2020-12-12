@@ -17,28 +17,44 @@ export default {
     //   staticClass: 'n-documentation-anchor'
     // }, anchorSlot)]
     if (this.singleColumn) {
-      return h(NRow, {
-        gutter: 16
-      }, {
-        default: () => h(NCol, { span: 24 }, this.$slots)
-        // h(NCol, { props: { span: 4 } }, anchorSlot)
-      })
+      return h(
+        NRow,
+        {
+          gutter: 16
+        },
+        {
+          default: () => h(NCol, { span: 24 }, this.$slots)
+          // h(NCol, { props: { span: 4 } }, anchorSlot)
+        }
+      )
     } else {
       const leftColumn = defaultSlot.filter((value, index) => index % 2 === 0)
       const rightColumn = defaultSlot.filter((value, index) => index % 2 === 1)
-      return h(NRow, {
-        gutter: 16
-      }, {
-        default: () => [
-          h(NCol, { span: 12 }, {
-            default: () => leftColumn
-          }),
-          h(NCol, { span: 12 }, {
-            default: () => rightColumn
-          })
-        // h(NCol, { props: { span: 4 } }, anchor)
-        ]
-      })
+      return h(
+        NRow,
+        {
+          gutter: 16
+        },
+        {
+          default: () => [
+            h(
+              NCol,
+              { span: 12 },
+              {
+                default: () => leftColumn
+              }
+            ),
+            h(
+              NCol,
+              { span: 12 },
+              {
+                default: () => rightColumn
+              }
+            )
+            // h(NCol, { props: { span: 4 } }, anchor)
+          ]
+        }
+      )
     }
   }
 }

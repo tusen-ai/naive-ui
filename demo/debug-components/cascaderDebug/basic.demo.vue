@@ -3,23 +3,21 @@
     <div class="n-doc-section__header">
       Multiple
     </div>
-    <div
-      class="n-doc-section__view"
-      style="flex-wrap: nowrap;"
-    >
+    <div class="n-doc-section__view" style="flex-wrap: nowrap">
       <!--EXAMPLE_START-->
       <n-cascader
         v-model="value"
         multiple
         placeholder="Please Select Something"
         :options="options"
-        style="flex-grow: 1; margin-right: 12px;"
+        style="flex-grow: 1; margin-right: 12px"
         lazy
         :on-load="handleLoad"
       />
       <!--EXAMPLE_END-->
     </div>
-    <pre class="n-doc-section__inspect">v-model: {{ JSON.stringify(value) }}</pre>
+    <pre class="n-doc-section__inspect">
+v-model: {{ JSON.stringify(value) }}</pre>
     <pre>
       <!--SOURCE-->
     </pre>

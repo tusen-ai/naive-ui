@@ -39,9 +39,7 @@ export default {
     next()
   },
   setup () {
-    const displayModeRef = ref(
-      localStorage.getItem('mode') ?? 'debug'
-    )
+    const displayModeRef = ref(localStorage.getItem('mode') ?? 'debug')
     const displayModeComputed = computed({
       get () {
         return displayModeRef.value
@@ -64,15 +62,16 @@ export default {
     const themeRef = computed({
       get () {
         switch (route.params.theme) {
-          case 'os-theme': return 'light'
-          case 'dark': return 'dark'
-          default: return 'light'
+          case 'os-theme':
+            return 'light'
+          case 'dark':
+            return 'dark'
+          default:
+            return 'light'
         }
       },
       set (theme) {
-        router.push(
-          changeThemeInPath(route.fullPath, theme)
-        )
+        router.push(changeThemeInPath(route.fullPath, theme))
       }
     })
     return {

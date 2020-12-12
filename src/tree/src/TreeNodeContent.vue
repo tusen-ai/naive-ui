@@ -125,7 +125,9 @@ export default {
         e.currentTarget &&
         e.relatedTarget &&
         e.currentTarget.contains(e.relatedTarget)
-      ) { return }
+      ) {
+        return
+      }
       this.doDragEnter(e)
     },
     handleDragOverContent (e) {
@@ -152,7 +154,9 @@ export default {
         e.currentTarget &&
         e.relatedTarget &&
         e.currentTarget.contains(e.relatedTarget)
-      ) { return }
+      ) {
+        return
+      }
       this.pending = false
       this.doDragLeave(e)
     },

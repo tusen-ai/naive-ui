@@ -3,19 +3,17 @@
     <div class="n-doc-section__header">
       DateTime Range
     </div>
-    <div
-      class="n-doc-section__view"
-      style="flex-wrap: wrap;"
-    >
+    <div class="n-doc-section__view" style="flex-wrap: wrap">
       <!--EXAMPLE_START-->
       <n-date-picker
         v-model="range1"
         type="datetimerange"
-        style="margin-bottom: 12px;"
+        style="margin-bottom: 12px"
       />
       <!--EXAMPLE_END-->
     </div>
-    <pre class="n-doc-section__inspect">range1 v-model: {{ JSON.stringify(range1) }}
+    <pre class="n-doc-section__inspect">
+range1 v-model: {{ JSON.stringify(range1) }}
 range2 v-model: {{ JSON.stringify(range2) }}
 range3 v-model: {{ JSON.stringify(range3) }}</pre>
     <pre>
@@ -40,7 +38,6 @@ export default {
       range3: [1562774400000, 1567180800000]
     }
   },
-  methods: {
-  }
+  methods: {}
 }
 </script>

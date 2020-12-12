@@ -1,8 +1,5 @@
 <template>
-  <div
-    ref="doc"
-    class="n-doc"
-  >
+  <div ref="doc" class="n-doc">
     <div class="n-doc-header">
       <n-gradient-text :font-size="20">
         DatePickerDebug
@@ -22,11 +19,8 @@ export default {
     range
   },
   data () {
-    return {
-
-    }
+    return {}
   },
-  methods: {
-  }
+  methods: {}
 }
 </script>

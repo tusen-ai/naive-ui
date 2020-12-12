@@ -2,7 +2,9 @@ function traverseWithCallback (options, beforeCallback, afterCallback) {
   if (Array.isArray(options)) {
     for (const option of options) {
       if (beforeCallback) beforeCallback(option)
-      if (option.children) { traverseWithCallback(option.children, beforeCallback, afterCallback) }
+      if (option.children) {
+        traverseWithCallback(option.children, beforeCallback, afterCallback)
+      }
       if (afterCallback) afterCallback(option)
     }
   }

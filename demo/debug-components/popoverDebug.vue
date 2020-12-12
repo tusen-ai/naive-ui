@@ -1,9 +1,9 @@
 <template>
-  <n-config-provider style="height: 6000px; width: 6000px;" theme="light">
-    <div class="popover-grid" style="margin-top: 1500px;">
+  <n-config-provider style="height: 6000px; width: 6000px" theme="light">
+    <div class="popover-grid" style="margin-top: 1500px">
       <n-popover placement="top-start" trigger="click">
         <template #activator>
-          <n-button size="small" style="grid-area: 1 / 2 / 2 / 3;">
+          <n-button size="small" style="grid-area: 1 / 2 / 2 / 3">
             Top Start
           </n-button>
         </template>
@@ -13,7 +13,7 @@
       </n-popover>
       <n-popover placement="top" trigger="click">
         <template #activator>
-          <n-button size="small" style="grid-area: 1 / 3 / 2 / 4;">
+          <n-button size="small" style="grid-area: 1 / 3 / 2 / 4">
             Top
           </n-button>
         </template>
@@ -23,7 +23,7 @@
       </n-popover>
       <n-popover placement="top-end" trigger="click">
         <template #activator>
-          <n-button size="small" style="grid-area: 1 / 4/ 2 / 5;">
+          <n-button size="small" style="grid-area: 1 / 4/ 2 / 5">
             Top End
           </n-button>
         </template>
@@ -33,7 +33,7 @@
       </n-popover>
       <n-popover placement="left-start" trigger="click">
         <template #activator>
-          <n-button size="small" style="grid-area: 2 / 1 / 3 / 2;">
+          <n-button size="small" style="grid-area: 2 / 1 / 3 / 2">
             Left Start
           </n-button>
         </template>
@@ -43,7 +43,7 @@
       </n-popover>
       <n-popover placement="left" trigger="click">
         <template #activator>
-          <n-button size="small" style="grid-area: 3 / 1 / 4 / 2;">
+          <n-button size="small" style="grid-area: 3 / 1 / 4 / 2">
             Left
           </n-button>
         </template>
@@ -53,7 +53,7 @@
       </n-popover>
       <n-popover placement="left-end" trigger="click">
         <template #activator>
-          <n-button size="small" style="grid-area: 4 / 1 / 5 / 2;">
+          <n-button size="small" style="grid-area: 4 / 1 / 5 / 2">
             Left End
           </n-button>
         </template>
@@ -63,7 +63,7 @@
       </n-popover>
       <n-popover placement="right-start" trigger="click">
         <template #activator>
-          <n-button size="small" style="grid-area: 2 / 5 / 3 / 6;">
+          <n-button size="small" style="grid-area: 2 / 5 / 3 / 6">
             Right Start
           </n-button>
         </template>
@@ -73,7 +73,7 @@
       </n-popover>
       <n-popover placement="right" trigger="click">
         <template #activator>
-          <n-button size="small" style="grid-area: 3 / 5 / 4 / 6;">
+          <n-button size="small" style="grid-area: 3 / 5 / 4 / 6">
             Right
           </n-button>
         </template>
@@ -83,7 +83,7 @@
       </n-popover>
       <n-popover placement="right-end" trigger="click">
         <template #activator>
-          <n-button size="small" style="grid-area: 4 / 5 / 5 / 6;">
+          <n-button size="small" style="grid-area: 4 / 5 / 5 / 6">
             Right End
           </n-button>
         </template>
@@ -93,7 +93,7 @@
       </n-popover>
       <n-popover placement="bottom-start" trigger="click">
         <template #activator>
-          <n-button size="small" style="grid-area: 5 / 2 / 6 / 3;">
+          <n-button size="small" style="grid-area: 5 / 2 / 6 / 3">
             Bottom Start
           </n-button>
         </template>
@@ -103,7 +103,7 @@
       </n-popover>
       <n-popover placement="bottom" trigger="click">
         <template #activator>
-          <n-button size="small" style="grid-area: 5 / 3 / 6 / 4;">
+          <n-button size="small" style="grid-area: 5 / 3 / 6 / 4">
             Bottom
           </n-button>
         </template>
@@ -113,7 +113,7 @@
       </n-popover>
       <n-popover placement="bottom-end" trigger="click">
         <template #activator>
-          <n-button size="small" style="grid-area: 5 / 4 / 6 / 5;">
+          <n-button size="small" style="grid-area: 5 / 4 / 6 / 5">
             Bottom End
           </n-button>
         </template>

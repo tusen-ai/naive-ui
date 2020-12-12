@@ -1,7 +1,4 @@
-import {
-  toRef,
-  inject
-} from 'vue'
+import { toRef, inject } from 'vue'
 
 export function useSiteDisplayMode () {
   return toRef(inject('SiteProvider'), 'displayMode')

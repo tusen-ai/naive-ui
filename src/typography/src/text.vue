@@ -105,7 +105,9 @@ export default {
     // deprecated
     as: {
       validator () {
-        if (__DEV__) { warn('text', '`as` is deprecated, please use `tag` instead.') }
+        if (__DEV__) {
+          warn('text', '`as` is deprecated, please use `tag` instead.')
+        }
         return true
       },
       default: undefined

@@ -10,14 +10,10 @@
       <slot name="title" />
     </template>
     <template #header-extra>
-      <n-tooltip
-        trigger="hover"
-        :placement="'top'"
-        :show-arrow="true"
-      >
+      <n-tooltip trigger="hover" :placement="'top'" :show-arrow="true">
         <template #trigger>
           <edit-on-github-button
-            style="padding: 0; margin-right: 6px;"
+            style="padding: 0; margin-right: 6px"
             size="tiny"
             :relative-url="relativeUrl"
           />
@@ -32,7 +28,7 @@
       >
         <template #trigger>
           <n-button
-            style="padding: 0;"
+            style="padding: 0"
             size="tiny"
             text
             @click="toggleCodeDisplay"
@@ -64,9 +60,7 @@ export default {
   components: {
     CodeOutline
   },
-  inject: [
-    'NDocumentation'
-  ],
+  inject: ['NDocumentation'],
   props: {
     title: {
       type: String,
@@ -84,7 +78,7 @@ export default {
   setup () {
     return {
       displayMode: useSiteDisplayMode(),
-      ...(i18n({
+      ...i18n({
         'zh-CN': {
           show: '显示代码',
           hide: '收起代码',
@@ -95,7 +89,7 @@ export default {
           hide: 'Hide Code',
           editOnGithub: 'Edit on Github'
         }
-      }))
+      })
     }
   },
   data () {
@@ -105,7 +99,11 @@ export default {
   },
   computed: {
     isDebugDemo () {
-      return this.demoFileName && (~this.demoFileName.indexOf('debug') || ~this.demoFileName.indexOf('Debug'))
+      return (
+        this.demoFileName &&
+        (~this.demoFileName.indexOf('debug') ||
+          ~this.demoFileName.indexOf('Debug'))
+      )
     },
     isShow () {
       return !(this.isDebugDemo && this.displayMode !== 'debug')

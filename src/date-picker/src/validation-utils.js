@@ -23,7 +23,9 @@ export function uniCalendarValidation (props) {
       value === null ||
       !['date', 'datetime'].includes(type) ||
       !isDateDisabled
-    ) { return false }
+    ) {
+      return false
+    }
     return isDateDisabled(value)
   })
   const isTimeInvalidRef = computed(() => {
@@ -105,7 +107,9 @@ export function dualCalendarValidation (props) {
       value === null ||
       !['daterange', 'datetimerange'].includes(type) ||
       !isDateDisabled
-    ) { return false }
+    ) {
+      return false
+    }
     return [
       isDateDisabled(value[0], 'start', value),
       isDateDisabled(value[0], 'end', value)

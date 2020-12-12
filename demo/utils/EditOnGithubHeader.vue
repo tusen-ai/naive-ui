@@ -2,11 +2,7 @@
   <n-h1 :id="id" class="naive-doc-title">
     <span>{{ text }}</span>
     <span class="edit-button">
-      <n-tooltip
-        trigger="hover"
-        placement="right"
-        :show-arrow="true"
-      >
+      <n-tooltip trigger="hover" placement="right" :show-arrow="true">
         <template #activator>
           <edit-on-github-button
             text
@@ -37,14 +33,14 @@ export default {
   },
   setup () {
     return {
-      ...(i18n({
+      ...i18n({
         'zh-CN': {
           editOnGithub: '在 Github 上编辑'
         },
         'en-US': {
           editOnGithub: 'Edit on Github'
         }
-      }))
+      })
     }
   },
   computed: {

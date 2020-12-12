@@ -12,7 +12,8 @@
     <div class="n-upload-file-info">
       <div class="n-upload-file-info__name">
         <n-icon>
-          <attach-icon /> </n-icon>{{ file.name }}
+          <attach-icon />
+        </n-icon>{{ file.name }}
       </div>
       <div class="n-upload-file-info__action">
         <n-button

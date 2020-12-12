@@ -1,6 +1,6 @@
 // rubbish code here
 
-const appendCounts = item => {
+const appendCounts = (item) => {
   if (!item.childItems) {
     item.count = 1
     return item
@@ -29,7 +29,7 @@ const createDebugDemos = (item, mode) => {
 function createItems (lang, items) {
   if (lang === 'zh-CN') return items
   function traverse (children) {
-    children.forEach(child => {
+    children.forEach((child) => {
       child.title = undefined
       child.titleExtra = undefined
       if (child.childItems) {
@@ -524,15 +524,18 @@ export default function (instance) {
         }
       ]
     }),
-    ...createDeprecatedDemos({
-      name: 'Deprecated',
-      childItems: [
-        {
-          name: 'Nimbus Service Layout',
-          path: `/${lang}/${theme}/doc` + '/n-nimbus-service-layout'
-        }
-      ]
-    }, mode),
+    ...createDeprecatedDemos(
+      {
+        name: 'Deprecated',
+        childItems: [
+          {
+            name: 'Nimbus Service Layout',
+            path: `/${lang}/${theme}/doc` + '/n-nimbus-service-layout'
+          }
+        ]
+      },
+      mode
+    ),
     ...createDebugDemos(
       {
         name: 'Debug',
@@ -586,6 +589,8 @@ export default function (instance) {
             path: `/${lang}/${theme}/doc` + '/n-select-debug'
           }
         ]
-      }, mode)
+      },
+      mode
+    )
   ])
 }

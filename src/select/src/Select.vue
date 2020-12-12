@@ -304,7 +304,9 @@ export default {
     },
     items: {
       validator () {
-        if (__DEV__) { warn('select', '`items` is deprecated, please use `options` instead.') }
+        if (__DEV__) {
+          warn('select', '`items` is deprecated, please use `options` instead.')
+        }
         return true
       },
       default: undefined

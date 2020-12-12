@@ -3,32 +3,12 @@
     <div class="n-doc-section__header">
       DateTime Range
     </div>
-    <div
-      class="n-doc-section__view"
-      style="flex-wrap: wrap;"
-    >
+    <div class="n-doc-section__view" style="flex-wrap: wrap">
       <!--EXAMPLE_START-->
-      <n-base-suffix
-        clearable
-        :show="show"
-      />
-      <n-base-suffix
-        :show="show"
-        disabled
-        arrow
-        :active="active"
-      />
-      <n-base-suffix
-        :show="show"
-        :active="active"
-        arrow
-        clearable
-      />
-      <n-base-suffix
-        :active="!active"
-        :show="show"
-        arrow
-      />
+      <n-base-suffix clearable :show="show" />
+      <n-base-suffix :show="show" disabled arrow :active="active" />
+      <n-base-suffix :show="show" :active="active" arrow clearable />
+      <n-base-suffix :active="!active" :show="show" arrow />
       <!--EXAMPLE_END-->
     </div>
     <pre class="n-doc-section__inspect">

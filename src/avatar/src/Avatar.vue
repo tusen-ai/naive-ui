@@ -69,7 +69,9 @@ export default {
   },
   computed: {
     styleTransfrom () {
-      if (this.ratio !== 1) { return `translateX(-50%) translateY(-50%) scale(${this.ratio})` }
+      if (this.ratio !== 1) {
+        return `translateX(-50%) translateY(-50%) scale(${this.ratio})`
+      }
       return 'translateX(-50%) translateY(-50%)'
     },
     styleWidth () {

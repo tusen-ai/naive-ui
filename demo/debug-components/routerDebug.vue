@@ -1,5 +1,5 @@
 <template>
-  <div style="padding: 100px;">
+  <div style="padding: 100px">
     <button @click="f">
       router debug
     </button>
