@@ -1,10 +1,6 @@
 <template>
-  <div
-    class="n-cascader-submenu"
-  >
-    <n-scrollbar
-      ref="scrollbarRef"
-    >
+  <div class="n-cascader-submenu">
+    <n-scrollbar ref="scrollbarRef">
       <n-cascader-option
         v-for="tmNode in tmNodes"
         ref="options"

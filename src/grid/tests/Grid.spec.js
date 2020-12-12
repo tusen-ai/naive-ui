@@ -6,12 +6,8 @@ import { NGrid } from '../index'
 
 describe('n-grid', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      gridLight
-    ]
+    locales: [enUS],
+    styles: [gridLight]
   })
   it('should work with import on demand', () => {
     mount(NGrid, {

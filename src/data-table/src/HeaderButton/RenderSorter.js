@@ -9,7 +9,8 @@ export default {
       type: Boolean,
       default: false
     },
-    order: { // asc, desc
+    order: {
+      // asc, desc
       type: [String, Boolean],
       default: undefined
     },
@@ -19,11 +20,7 @@ export default {
     }
   },
   render () {
-    const {
-      render,
-      active,
-      order
-    } = this
+    const { render, active, order } = this
     return render({
       active,
       order

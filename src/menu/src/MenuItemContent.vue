@@ -11,11 +11,7 @@
     }"
     @click="handleClick"
   >
-    <div
-      v-if="icon"
-      class="n-menu-item-content__icon"
-      :style="iconStyle"
-    >
+    <div v-if="icon" class="n-menu-item-content__icon" :style="iconStyle">
       <render :render="icon" />
     </div>
     <div class="n-menu-item-content-header">
@@ -93,13 +89,10 @@ export default {
   computed: {
     style () {
       const { paddingLeft } = this
-      return { paddingLeft: paddingLeft && (paddingLeft + 'px') }
+      return { paddingLeft: paddingLeft && paddingLeft + 'px' }
     },
     iconStyle () {
-      const {
-        maxIconSize,
-        activeIconSize
-      } = this
+      const { maxIconSize, activeIconSize } = this
       return {
         width: maxIconSize + 'px',
         height: maxIconSize + 'px',

@@ -53,28 +53,16 @@
 </template>
 
 <script>
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
-import {
-  warn
-} from '../../_utils'
-import {
-  useCompitable
-} from 'vooks'
+import { configurable, themeable, withCssr } from '../../_mixins'
+import { warn } from '../../_utils'
+import { useCompitable } from 'vooks'
 import styles from './styles/text'
 
 export default {
   name: 'Text',
   cssrName: 'Typography',
   cssrId: 'TypographyText',
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     code: {
       type: Boolean,
@@ -117,7 +105,7 @@ export default {
     // deprecated
     as: {
       validator () {
-        if (__DEV__) warn('text', '`as` is deprecated, please use `tag` instead.')
+        if (__DEV__) { warn('text', '`as` is deprecated, please use `tag` instead.') }
         return true
       },
       default: undefined

@@ -6,12 +6,8 @@ import { NBadge } from '../index'
 
 describe('n-badge', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      badgeLight
-    ]
+    locales: [enUS],
+    styles: [badgeLight]
   })
   it('should work with import on demand', () => {
     mount(NBadge, {

@@ -6,10 +6,7 @@
     }"
   >
     <div class="n-popconfirm-content__body">
-      <slot
-        v-if="showIcon"
-        name="icon"
-      >
+      <slot v-if="showIcon" name="icon">
         <n-icon>
           <warning-icon />
         </n-icon>
@@ -18,17 +15,10 @@
     </div>
     <div class="n-popconfirm-content__action">
       <slot name="action">
-        <n-button
-          size="small"
-          @click="handleNegativeClick"
-        >
+        <n-button size="small" @click="handleNegativeClick">
           {{ localizedNegativeText }}
         </n-button>
-        <n-button
-          size="small"
-          type="primary"
-          @click="handlePositiveClick"
-        >
+        <n-button size="small" type="primary" @click="handlePositiveClick">
           {{ localizedPositiveText }}
         </n-button>
       </slot>
@@ -39,15 +29,8 @@
 <script>
 import { NButton } from '../../button'
 import { NIcon } from '../../icon'
-import {
-  WarningIcon
-} from '../../_base/icons'
-import {
-  configurable,
-  themeable,
-  locale,
-  withCssr
-} from '../../_mixins'
+import { WarningIcon } from '../../_base/icons'
+import { configurable, themeable, locale, withCssr } from '../../_mixins'
 import styles from './styles'
 
 export default {
@@ -58,12 +41,7 @@ export default {
     NIcon,
     WarningIcon
   },
-  mixins: [
-    locale('Popconfirm'),
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [locale('Popconfirm'), configurable, themeable, withCssr(styles)],
   props: {
     positiveText: {
       type: String,

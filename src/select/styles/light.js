@@ -6,11 +6,7 @@ import { baseSelectMenuLight } from '../../_base/select-menu/styles'
 export default create({
   name: 'Select',
   theme: 'light',
-  peer: [
-    baseLight,
-    baseSelectionLight,
-    baseSelectMenuLight
-  ],
+  peer: [baseLight, baseSelectionLight, baseSelectMenuLight],
   getLocalVars (vars) {
     return {}
   }

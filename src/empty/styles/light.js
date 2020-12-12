@@ -6,16 +6,9 @@ import { iconLight } from '../../icon/styles'
 export default create({
   theme: 'light',
   name: 'Empty',
-  peer: [
-    baseLight,
-    iconLight
-  ],
+  peer: [baseLight, iconLight],
   getLocalVars (vars) {
-    const {
-      textColorDisabled,
-      iconColorOverlay,
-      textColor2
-    } = vars
+    const { textColorDisabled, iconColorOverlay, textColor2 } = vars
     return {
       ...sizeVarables,
       textColor: textColorDisabled,

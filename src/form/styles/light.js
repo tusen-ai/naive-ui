@@ -6,16 +6,9 @@ import { gridLight } from '../../grid/styles'
 export default create({
   name: 'Form',
   theme: 'light',
-  peer: [
-    baseLight,
-    gridLight
-  ],
+  peer: [baseLight, gridLight],
   getLocalVars (vars) {
-    const {
-      textColor1,
-      errorColor,
-      warningColor
-    } = vars
+    const { textColor1, errorColor, warningColor } = vars
     return {
       ...commonVariables,
       labelTextColor: textColor1,

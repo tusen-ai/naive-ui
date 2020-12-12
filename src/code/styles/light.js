@@ -5,60 +5,72 @@ import { baseLight } from '../../_styles/base'
 export default create({
   theme: 'light',
   name: 'Code',
-  peer: [
-    baseLight
-  ],
+  peer: [baseLight],
   getLocalVars (vars) {
-    const {
-      textColor2
-    } = vars
+    const { textColor2 } = vars
     return {
       textColor: textColor2,
       highlightStyle: [
-        c(`
+        c(
+          `
           .hljs-comment,
           .hljs-quote
-        `, {
-          raw: `
+        `,
+          {
+            raw: `
             color: #a0a1a7;
             font-style: italic;
           `
-        }),
-        c(`
+          }
+        ),
+        c(
+          `
           .hljs-doctag,
           .hljs-keyword,
           .hljs-formula
-        `, {
-          color: '#a626a4'
-        }),
-        c(`
+        `,
+          {
+            color: '#a626a4'
+          }
+        ),
+        c(
+          `
           .hljs-section, 
           .hljs-name,
           .hljs-selector-tag,
           .hljs-deletion,
           .hljs-subst
-        `, {
-          color: '#e45649'
-        }),
+        `,
+          {
+            color: '#e45649'
+          }
+        ),
         c('.hljs-literal', {
           color: '#0184bb'
         }),
-        c(`
+        c(
+          `
           .hljs-string,
           .hljs-regexp,
           .hljs-addition,
           .hljs-attribute,
           .hljs-meta-string
-        `, {
-          color: '#50a14f'
-        }),
-        c(`
+        `,
+          {
+            color: '#50a14f'
+          }
+        ),
+        c(
+          `
           .hljs-built_in,
           .hljs-class .hljs-title
-        `, {
-          color: '#c18401'
-        }),
-        c(`
+        `,
+          {
+            color: '#c18401'
+          }
+        ),
+        c(
+          `
           .hljs-attr,
           .hljs-variable,
           .hljs-template-variable,
@@ -67,19 +79,24 @@ export default create({
           .hljs-selector-attr,
           .hljs-selector-pseudo,
           .hljs-number
-        `, {
-          color: '#986801'
-        }),
-        c(`
+        `,
+          {
+            color: '#986801'
+          }
+        ),
+        c(
+          `
           .hljs-symbol,
           .hljs-bullet,
           .hljs-link,
           .hljs-meta,
           .hljs-selector-id,
           .hljs-title
-        `, {
-          color: '#4078f2'
-        }),
+        `,
+          {
+            color: '#4078f2'
+          }
+        ),
         c('.hljs-emphasis', {
           fontStyle: 'italic'
         }),
@@ -89,12 +106,15 @@ export default create({
         c('.hljs-link', {
           textDecoration: 'underline'
         }),
-        c(`
+        c(
+          `
           .hljs-function .hljs-params,
           .hljs-function .hljs-params .hljs-typing
-        `, {
-          color: '#383a42'
-        })
+        `,
+          {
+            color: '#383a42'
+          }
+        )
       ]
     }
   }

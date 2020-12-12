@@ -8,12 +8,7 @@ import commonVariables from './_common.js'
 export default create({
   name: 'Pagination',
   theme: 'light',
-  peer: [
-    baseLight,
-    selectLight,
-    inputLight,
-    iconLight
-  ],
+  peer: [baseLight, selectLight, inputLight, iconLight],
   getLocalVars (vars) {
     const {
       textColor2,

@@ -4,16 +4,12 @@ import sizeStyle from './themed-size'
 export default [
   {
     key: 'theme',
-    watch: [
-      'theme'
-    ],
+    watch: ['theme'],
     CNode: baseStyle
   },
   {
     key: 'size',
-    watch: [
-      'size', 'theme'
-    ],
+    watch: ['size', 'theme'],
     CNode: sizeStyle
   }
 ]

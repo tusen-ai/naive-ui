@@ -5,10 +5,7 @@ import { buttonLight } from '../../button/styles'
 export default create({
   theme: 'light',
   name: 'ButtonGroup',
-  peer: [
-    baseLight,
-    buttonLight
-  ],
+  peer: [baseLight, buttonLight],
   getLocalVars () {
     return {}
   }

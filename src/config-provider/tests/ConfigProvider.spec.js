@@ -6,12 +6,8 @@ import { NConfigProvider } from '../index'
 
 describe('n-config-provider', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      configProviderLight
-    ]
+    locales: [enUS],
+    styles: [configProviderLight]
   })
   it('should work with import on demand', () => {
     mount(NConfigProvider, {

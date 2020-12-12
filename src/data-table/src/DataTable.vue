@@ -6,16 +6,11 @@
       'n-data-table--bordered': bordered,
       'n-data-table--single-line': singleLine,
       'n-data-table--single-column': singleColumn,
-      [`n-data-table--${size}-size`]: true,
+      [`n-data-table--${size}-size`]: true
     }"
   >
-    <n-spin
-      :show="loading"
-      :theme="mergedTheme"
-    >
-      <div
-        class="n-data-table-wrapper"
-      >
+    <n-spin :show="loading" :theme="mergedTheme">
+      <div class="n-data-table-wrapper">
         <base-table
           ref="mainTableRef"
           main
@@ -39,10 +34,7 @@
           </div>
         </base-table>
       </div>
-      <div
-        v-if="pagination"
-        class="n-data-table__pagination"
-      >
+      <div v-if="pagination" class="n-data-table__pagination">
         <n-pagination
           :theme="mergedTheme"
           :page="mergedPagination.page"
@@ -64,12 +56,7 @@
 <script>
 import { ref } from 'vue'
 import { nextFrame } from 'seemly'
-import {
-  configurable,
-  themeable,
-  withCssr,
-  locale
-} from '../../_mixins'
+import { configurable, themeable, withCssr, locale } from '../../_mixins'
 import { setCheckStatusOfRow, createRowKey } from './utils'
 import BaseTable from './BaseTable.vue'
 import { NEmpty } from '../../empty'
@@ -117,7 +104,7 @@ function normalizeColumn (column) {
     filterMultiple: true,
     width: null
   }
-  Object.keys(column).forEach(key => {
+  Object.keys(column).forEach((key) => {
     if (column[key] !== undefined) {
       defaultColumn[key] = column[key]
     }
@@ -137,12 +124,7 @@ export default {
     NEmpty,
     NPagination
   },
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles),
-    locale('DataTable')
-  ],
+  mixins: [configurable, themeable, withCssr(styles), locale('DataTable')],
   provide () {
     return {
       NDataTable: this
@@ -251,35 +233,60 @@ export default {
     // deprecated
     onPageChange: {
       validator () {
-        if (__DEV__) warn('data-table', '`on-page-change` is deprecated, please use `on-update:page` instead.')
+        if (__DEV__) {
+          warn(
+            'data-table',
+            '`on-page-change` is deprecated, please use `on-update:page` instead.'
+          )
+        }
         return true
       },
       default: undefined
     },
     onPageSizeChange: {
       validator () {
-        if (__DEV__) warn('data-table', '`on-page-size-change` is deprecated, please use `on-update:page-size` instead.')
+        if (__DEV__) {
+          warn(
+            'data-table',
+            '`on-page-size-change` is deprecated, please use `on-update:page-size` instead.'
+          )
+        }
         return true
       },
       default: undefined
     },
     onSorterChange: {
       validator () {
-        if (__DEV__) warn('data-table', '`on-sorter-change` is deprecated, please use `on-update:sorter` instead.')
+        if (__DEV__) {
+          warn(
+            'data-table',
+            '`on-sorter-change` is deprecated, please use `on-update:sorter` instead.'
+          )
+        }
         return true
       },
       default: undefined
     },
     onFiltersChange: {
       validator () {
-        if (__DEV__) warn('data-table', '`on-filters-change` is deprecated, please use `on-update:filters` instead.')
+        if (__DEV__) {
+          warn(
+            'data-table',
+            '`on-filters-change` is deprecated, please use `on-update:filters` instead.'
+          )
+        }
         return true
       },
       default: undefined
     },
     onCheckedRowKeysChange: {
       validator () {
-        if (__DEV__) warn('data-table', '`on-checked-row-keys-change` is deprecated, please use `on-update:checked-row-keys` instead.')
+        if (__DEV__) {
+          warn(
+            'data-table',
+            '`on-checked-row-keys-change` is deprecated, please use `on-update:checked-row-keys` instead.'
+          )
+        }
         return true
       },
       default: undefined
@@ -337,65 +344,82 @@ export default {
       }
     },
     normalizedColumns () {
-      return this.columns
-        .map(column => normalizeColumn(column))
+      return this.columns.map((column) => normalizeColumn(column))
     },
     leftFixedColumns () {
-      return this.normalizedColumns
-        .filter(column => column.fixed === 'left')
+      return this.normalizedColumns.filter((column) => column.fixed === 'left')
     },
     rightFixedColumns () {
-      return this.normalizedColumns
-        .filter(column => column.fixed === 'right')
+      return this.normalizedColumns.filter((column) => column.fixed === 'right')
     },
     filteredData () {
       const mergedActiveFilters = this.mergedActiveFilters
       const normalizedColumns = this.normalizedColumns
       function createDefaultFilter (columnKey) {
-        return (filterOptionValue, row) => ~String(row[columnKey]).indexOf(String(filterOptionValue))
+        return (filterOptionValue, row) =>
+          ~String(row[columnKey]).indexOf(String(filterOptionValue))
       }
       const data = this.data
-      return data ? data.filter(row => {
-        for (const columnKey of Object.keys(row)) {
-          let activeFilterOptionValues = mergedActiveFilters[columnKey]
-          if (activeFilterOptionValues == null) continue
-          if (!activeFilterOptionValues.length) continue
-          if (!Array.isArray(activeFilterOptionValues)) activeFilterOptionValues = [activeFilterOptionValues]
-          const columnToFilter = normalizedColumns.find(column => column.key === columnKey)
-          /**
-           * When async, filter won't be set, so data won't be filtered
-           */
-          const filter = columnToFilter.filter === 'default'
-            ? createDefaultFilter(columnKey)
-            : columnToFilter.filter
-          if (columnToFilter && typeof filter === 'function') {
-            if (columnToFilter.filterMode === 'and') {
-              if (activeFilterOptionValues.some(filterOptionValue => !filter(filterOptionValue, row))) {
-                return false
-              }
-            } else {
-              if (activeFilterOptionValues.some(filterOptionValue => filter(filterOptionValue, row))) {
-                continue
+      return data
+        ? data.filter((row) => {
+          for (const columnKey of Object.keys(row)) {
+            let activeFilterOptionValues = mergedActiveFilters[columnKey]
+            if (activeFilterOptionValues == null) continue
+            if (!activeFilterOptionValues.length) continue
+            if (!Array.isArray(activeFilterOptionValues)) { activeFilterOptionValues = [activeFilterOptionValues] }
+            const columnToFilter = normalizedColumns.find(
+              (column) => column.key === columnKey
+            )
+            /**
+               * When async, filter won't be set, so data won't be filtered
+               */
+            const filter =
+                columnToFilter.filter === 'default'
+                  ? createDefaultFilter(columnKey)
+                  : columnToFilter.filter
+            if (columnToFilter && typeof filter === 'function') {
+              if (columnToFilter.filterMode === 'and') {
+                if (
+                  activeFilterOptionValues.some(
+                    (filterOptionValue) => !filter(filterOptionValue, row)
+                  )
+                ) {
+                  return false
+                }
               } else {
-                return false
+                if (
+                  activeFilterOptionValues.some((filterOptionValue) =>
+                    filter(filterOptionValue, row)
+                  )
+                ) {
+                  continue
+                } else {
+                  return false
+                }
               }
             }
           }
-        }
-        return true
-      }) : []
+          return true
+        })
+        : []
     },
     mergedCheckedRowKeys () {
       if (this.checkedRowKeys !== null) return this.checkedRowKeys
       return this.internalCheckedRowKeys
     },
     mergedActiveFilters () {
-      const columnsWithControlledFilter = this.normalizedColumns.filter(column => {
-        return column.filterOptionValues !== undefined || column.filterOptionValue !== undefined
-      })
+      const columnsWithControlledFilter = this.normalizedColumns.filter(
+        (column) => {
+          return (
+            column.filterOptionValues !== undefined ||
+            column.filterOptionValue !== undefined
+          )
+        }
+      )
       const controlledActiveFilters = {}
-      columnsWithControlledFilter.forEach(column => {
-        controlledActiveFilters[column.key] = column.filterOptionValues || column.filterOptionValue || null
+      columnsWithControlledFilter.forEach((column) => {
+        controlledActiveFilters[column.key] =
+          column.filterOptionValues || column.filterOptionValue || null
       })
       const activeFilters = Object.assign(
         createShallowClonedObject(this.internalActiveFilters),
@@ -409,11 +433,14 @@ export default {
        * the table's controll functionality should work in controlled manner.
        */
       const columnsWithControlledSortOrder = this.normalizedColumns.filter(
-        column => column.sortOrder === false ||
-        column.sortOrder === 'ascend' ||
-        column.sortOrder === 'descend'
+        (column) =>
+          column.sortOrder === false ||
+          column.sortOrder === 'ascend' ||
+          column.sortOrder === 'descend'
       )
-      const columnToSort = columnsWithControlledSortOrder.find(column => column.sortOrder)
+      const columnToSort = columnsWithControlledSortOrder.find(
+        (column) => column.sortOrder
+      )
       if (columnToSort) {
         return {
           columnKey: columnToSort.key,
@@ -445,7 +472,7 @@ export default {
       }
     },
     mergedOnPageChange () {
-      return page => {
+      return (page) => {
         this.pagination.onChange && this.pagination.onChange(page)
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         this.internalCurrentPage = page
@@ -453,8 +480,9 @@ export default {
       }
     },
     mergedOnPageSizeChange () {
-      return pageSize => {
-        this.pagination.onPageSizeChange && this.pagination.onPageSizeChange(pageSize)
+      return (pageSize) => {
+        this.pagination.onPageSizeChange &&
+          this.pagination.onPageSizeChange(pageSize)
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         this.internalPageSize = pageSize
         this.doUpdatePageSize(pageSize)
@@ -475,11 +503,9 @@ export default {
          */
         if (
           activeSorter.sorter === true ||
-          (
-            typeof activeSorter.sorter !== 'function' &&
-            activeSorter.sorter !== 'default'
-          )
-        ) return this.filteredData
+          (typeof activeSorter.sorter !== 'function' &&
+            activeSorter.sorter !== 'default')
+        ) { return this.filteredData }
         const filteredData = this.filteredData.slice(0)
         const columnKey = activeSorter.columnKey
         /**
@@ -487,21 +513,25 @@ export default {
          * -1 for desc
          */
         const order = activeSorter.order
-        const sorter = (
+        const sorter =
           activeSorter.sorter === 'default'
             ? (row1, row2) => {
               const value1 = row1[columnKey]
               const value2 = row2[columnKey]
               if (typeof value1 === 'number' && typeof value2 === 'number') {
                 return value1 - value2
-              } else if (typeof value1 === 'string' && typeof value2 === 'string') {
+              } else if (
+                typeof value1 === 'string' &&
+                  typeof value2 === 'string'
+              ) {
                 return value1.localeCompare(value2)
               }
               return 0
             }
             : activeSorter.sorter
+        return filteredData.sort(
+          (row1, row2) => getFlagOfOrder(order) * sorter(row1, row2)
         )
-        return filteredData.sort((row1, row2) => getFlagOfOrder(order) * sorter(row1, row2))
       }
       return this.filteredData
     },
@@ -521,7 +551,10 @@ export default {
       }, 0)
     },
     someRowsChecked () {
-      return this.countOfCurrentPageCheckedRows > 0 && this.countOfCurrentPageCheckedRows < this.paginatedData.length
+      return (
+        this.countOfCurrentPageCheckedRows > 0 &&
+        this.countOfCurrentPageCheckedRows < this.paginatedData.length
+      )
     },
     allRowsChecked () {
       return this.countOfCurrentPageCheckedRows === this.paginatedData.length
@@ -533,12 +566,11 @@ export default {
     }
   },
   created () {
-    this.normalizedColumns.forEach(column => {
+    this.normalizedColumns.forEach((column) => {
       if (
-        column.sorter && (
-          column.defaultSortOrder === 'ascend' ||
-          column.defaultSortOrder === 'descend'
-        )
+        column.sorter &&
+        (column.defaultSortOrder === 'ascend' ||
+          column.defaultSortOrder === 'descend')
       ) {
         this.internalActiveSorter = {
           columnKey: column.key,
@@ -546,19 +578,18 @@ export default {
           order: column.defaultSortOrder
         }
       }
-      if (
-        column.filter
-      ) {
+      if (column.filter) {
         const defaultFilterOptionValues = column.defaultFilterOptionValues
         if (column.filterMultiple) {
-          this.internalActiveFilters[column.key] = defaultFilterOptionValues || []
-        } else if (
-          defaultFilterOptionValues !== undefined
-        ) {
+          this.internalActiveFilters[column.key] =
+            defaultFilterOptionValues || []
+        } else if (defaultFilterOptionValues !== undefined) {
           /** this branch is for compatibility, someone may use `values` in single filter mode */
-          this.internalActiveFilters[column.key] = defaultFilterOptionValues === null ? [] : defaultFilterOptionValues
+          this.internalActiveFilters[column.key] =
+            defaultFilterOptionValues === null ? [] : defaultFilterOptionValues
         } else {
-          this.internalActiveFilters[column.key] = column.defaultFilterOptionValue
+          this.internalActiveFilters[column.key] =
+            column.defaultFilterOptionValue
         }
       }
     })
@@ -575,10 +606,7 @@ export default {
       if (onCheckedRowKeysChange) call(onCheckedRowKeysChange, ...args)
     },
     doUpdatePage (...args) {
-      const {
-        'onUpdate:page': onUpdatePage,
-        onPageChange
-      } = this
+      const { 'onUpdate:page': onUpdatePage, onPageChange } = this
       if (onUpdatePage) call(onUpdatePage, ...args)
       if (onPageChange) call(onPageChange, ...args)
     },
@@ -591,18 +619,12 @@ export default {
       if (onCheckedRowKeysChange) call(onCheckedRowKeysChange, ...args)
     },
     doUpdateSorter (...args) {
-      const {
-        'onUpdate:sorter': onUpdateSorter,
-        onSorterChange
-      } = this
+      const { 'onUpdate:sorter': onUpdateSorter, onSorterChange } = this
       if (onUpdateSorter) call(onUpdateSorter, ...args)
       if (onSorterChange) call(onSorterChange, ...args)
     },
     doUpdateFilters (...args) {
-      const {
-        'onUpdate:filters': onUpdateFilters,
-        onFiltersChange
-      } = this
+      const { 'onUpdate:filters': onUpdateFilters, onFiltersChange } = this
       if (onUpdateFilters) call(onUpdateFilters, ...args)
       if (onFiltersChange) call(onFiltersChange, ...args)
     },
@@ -620,21 +642,20 @@ export default {
         this.doUpdateFilters({}, createShallowClonedObject(sourceColumn))
       } else if (isPlainObject(filters)) {
         this.internalActiveFilters = filters
-        this.doUpdateFilters(createShallowClonedObject(filters), createShallowClonedObject(sourceColumn))
+        this.doUpdateFilters(
+          createShallowClonedObject(filters),
+          createShallowClonedObject(sourceColumn)
+        )
       } else if (__DEV__) {
         warn('data-table', '`filters` is not an object')
       }
     },
     scrollMainTableBodyToTop () {
-      const {
-        body
-      } = this.getScrollElements()
+      const { body } = this.getScrollElements()
       body.scrollTop = 0
     },
     getScrollElements () {
-      const {
-        mainTableRef
-      } = this
+      const { mainTableRef } = this
       const header = mainTableRef ? mainTableRef.getHeaderElement() : null
       const body = mainTableRef ? mainTableRef.getBodyElement() : null
       return {
@@ -643,10 +664,7 @@ export default {
       }
     },
     handleTableHeaderScroll () {
-      const {
-        scrollReceived,
-        scrollingPart
-      } = this
+      const { scrollReceived, scrollingPart } = this
       if (scrollReceived && scrollingPart === 'header') return
       switch (scrollingPart) {
         case null:
@@ -661,10 +679,7 @@ export default {
       }
     },
     handleTableBodyScroll () {
-      const {
-        scrollReceived,
-        scrollingPart
-      } = this
+      const { scrollReceived, scrollingPart } = this
       if (scrollReceived && scrollingPart === 'body') return
       switch (scrollingPart) {
         case null:
@@ -679,16 +694,14 @@ export default {
       }
     },
     syncScrollState () {
-      const {
-        scrollingPart
-      } = this
+      const { scrollingPart } = this
       if (__DEV__ && scrollingPart === null) {
-        warn('data-table', 'Scroll sync has no corresponding part. This could be a bug of naive-ui.')
+        warn(
+          'data-table',
+          'Scroll sync has no corresponding part. This could be a bug of naive-ui.'
+        )
       }
-      const {
-        header,
-        body
-      } = this.getScrollElements()
+      const { header, body } = this.getScrollElements()
       if (body.scrollLeft === header.scrollLeft) {
         this.scrollingPart = null
         this.scrollReceived = false
@@ -711,7 +724,9 @@ export default {
       if (!columnKey) {
         this.clearSorter()
       } else {
-        const columnToSort = this.normalizedColumns.find(column => column.key === columnKey)
+        const columnToSort = this.normalizedColumns.find(
+          (column) => column.key === columnKey
+        )
         if (!columnToSort) return
         const sorter = columnToSort.sorter || null
         this.changeSorter({
@@ -739,7 +754,7 @@ export default {
     checkAll (column) {
       const checkedRowKeys = Array.from(this.mergedCheckedRowKeys)
       const rowKey = this.rowKey
-      this.paginatedData.forEach(row => {
+      this.paginatedData.forEach((row) => {
         if (column.disabled && column.disabled(row)) {
           return
         }
@@ -750,7 +765,7 @@ export default {
     clearCheckAll (column) {
       const checkedRowKeys = Array.from(this.mergedCheckedRowKeys)
       const rowKey = this.rowKey
-      this.paginatedData.forEach(row => {
+      this.paginatedData.forEach((row) => {
         if (column.disabled && column.disabled(row)) {
           return
         }

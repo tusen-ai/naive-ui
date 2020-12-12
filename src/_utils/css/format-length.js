@@ -2,11 +2,7 @@ const pureNumberRegex = /^(\d|\.)+$/
 const numberRegex = /(\d|\.)+/
 
 export default function formatLength (length, options = {}) {
-  const {
-    c = 1,
-    offset = 0,
-    attachPx = true
-  } = options
+  const { c = 1, offset = 0, attachPx = true } = options
   const type = typeof length
   if (type === 'number') {
     const result = (length + offset) * c

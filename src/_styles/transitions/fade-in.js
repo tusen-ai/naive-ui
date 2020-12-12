@@ -1,9 +1,7 @@
 import { c, namespace } from '../../_utils/cssr'
 import commonVariables from '../base/_common'
 
-const {
-  cubicBezierEaseInOut
-} = commonVariables
+const { cubicBezierEaseInOut } = commonVariables
 
 export default function ({
   name = 'fade-in',
@@ -19,11 +17,17 @@ export default function ({
     c(`&.${namespace}-${name}-transition-leave-active`, {
       transition: `all ${leaveDuration} ${leaveCubicBezier}!important`
     }),
-    c(`&.${namespace}-${name}-transition-enter-from, &.${namespace}-${name}-transition-leave-to`, {
-      opacity: 0
-    }),
-    c(`&.${namespace}-${name}-transition-leave-from, &.${namespace}-${name}-transition-enter-to`, {
-      opacity: 1
-    })
+    c(
+      `&.${namespace}-${name}-transition-enter-from, &.${namespace}-${name}-transition-leave-to`,
+      {
+        opacity: 0
+      }
+    ),
+    c(
+      `&.${namespace}-${name}-transition-leave-from, &.${namespace}-${name}-transition-enter-to`,
+      {
+        opacity: 1
+      }
+    )
   ]
 }

@@ -41,11 +41,7 @@
 
 <script>
 import { createId } from 'seemly'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import { warn } from '../../_utils'
 import NUploadFile from './UploadFile.vue'
 import { NFadeInExpandTransition } from '../../_base'
@@ -66,7 +62,8 @@ function XHRHandlers (componentInstance, file, XHR) {
         file: null
       })
       XHRMap.delete(file.id)
-      fileAfterChange = componentInstance.onFinish({ file: fileAfterChange }) || fileAfterChange
+      fileAfterChange =
+        componentInstance.onFinish({ file: fileAfterChange }) || fileAfterChange
       change(fileAfterChange, e)
     },
     handleXHRAbort (e) {
@@ -121,7 +118,7 @@ function unwrapFunctionValue (data, file) {
 function setHeaders (request, headers, file) {
   const headersObject = unwrapFunctionValue(headers, file)
   if (!headersObject) return
-  Object.keys(headers).forEach(key => {
+  Object.keys(headers).forEach((key) => {
     request.setRequestHeader(key, headers[key])
   })
 }
@@ -129,7 +126,7 @@ function setHeaders (request, headers, file) {
 function appendData (formData, data, file) {
   const dataObject = unwrapFunctionValue(data, file)
   if (!dataObject) return
-  Object.keys(dataObject).forEach(key => {
+  Object.keys(dataObject).forEach((key) => {
     formData.append(key, dataObject[key])
   })
 }
@@ -138,13 +135,7 @@ function submit (
   componentInstance,
   file,
   formData,
-  {
-    method,
-    action,
-    withCredentials,
-    headers,
-    data
-  }
+  { method, action, withCredentials, headers, data }
 ) {
   const request = new XMLHttpRequest()
   componentInstance.XHRMap.set(file.id, request)
@@ -166,11 +157,7 @@ export default {
     NUploadFile,
     NFadeInExpandTransition
   },
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   provide () {
     return {
       NUpload: this
@@ -323,7 +310,7 @@ export default {
     },
     handleFileAddition (files, e) {
       const change = this.change
-      Array.from(files).forEach(file => {
+      Array.from(files).forEach((file) => {
         const fileInfo = {
           id: createId(),
           name: file.name,
@@ -346,38 +333,36 @@ export default {
       const headers = this.headers
       const data = this.data
       const fieldName = this.name
-      const filesToUpload = fileId ? this.mergedFileList.filter(
-        file => file.id === fileId
-      ) : this.mergedFileList
-      filesToUpload.forEach(file => {
+      const filesToUpload = fileId
+        ? this.mergedFileList.filter((file) => file.id === fileId)
+        : this.mergedFileList
+      filesToUpload.forEach((file) => {
         if (file.status === 'pending') {
           const formData = new FormData()
           formData.append(fieldName, file.file)
-          submit(
-            this,
-            file,
-            formData,
-            {
-              method: method,
-              action: action,
-              withCredentials: withCredentials,
-              headers: headers,
-              data: data
-            }
-          )
+          submit(this, file, formData, {
+            method: method,
+            action: action,
+            withCredentials: withCredentials,
+            headers: headers,
+            data: data
+          })
         }
       })
     },
-    change (fileAfterChange, event, options = {
-      append: false,
-      remove: false
-    }) {
-      const {
-        append,
-        remove
-      } = options
+    change (
+      fileAfterChange,
+      event,
+      options = {
+        append: false,
+        remove: false
+      }
+    ) {
+      const { append, remove } = options
       const fileListAfterChange = this.mergedFileList
-      const fileIndex = fileListAfterChange.findIndex(file => file.id === fileAfterChange.id)
+      const fileIndex = fileListAfterChange.findIndex(
+        (file) => file.id === fileAfterChange.id
+      )
       if (append || remove || ~fileIndex) {
         if (append) {
           fileListAfterChange.push(fileAfterChange)

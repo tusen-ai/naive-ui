@@ -8,7 +8,9 @@ import menuChildMixin from './menu-child-mixin'
 const menuChildProps = Object.keys(menuChildMixin.props)
 const menuItemProps = Object.keys(NMenuItem.props).concat(menuChildProps)
 const submenuProps = Object.keys(NSubmenu.props).concat(menuChildProps)
-const menuItemGroupProps = Object.keys(NMenuItemGroup.props).concat(menuChildProps)
+const menuItemGroupProps = Object.keys(NMenuItemGroup.props).concat(
+  menuChildProps
+)
 
 export function itemRenderer (tmNode, insidePopover = false) {
   const { rawNode, key, level } = tmNode
@@ -25,19 +27,21 @@ export function itemRenderer (tmNode, insidePopover = false) {
     if (tmNode.isGroup) {
       return h(
         NMenuItemGroup,
-        keep(
-          props,
-          menuItemGroupProps,
-          { tmNodes: tmNode.children }
-        )
+        keep(props, menuItemGroupProps, { tmNodes: tmNode.children })
       )
     }
-    return h(NSubmenu, keep(props, submenuProps, {
-      tmNodes: tmNode.children
-    }))
+    return h(
+      NSubmenu,
+      keep(props, submenuProps, {
+        tmNodes: tmNode.children
+      })
+    )
   } else {
-    return h(NMenuItem, keep(props, menuItemProps, {
-      tmNode
-    }))
+    return h(
+      NMenuItem,
+      keep(props, menuItemProps, {
+        tmNode
+      })
+    )
   }
 }

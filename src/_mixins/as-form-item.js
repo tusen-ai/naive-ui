@@ -1,8 +1,5 @@
 export default function (options = {}) {
-  const {
-    defaultSize = 'medium',
-    mergedSize
-  } = options
+  const { defaultSize = 'medium', mergedSize } = options
   return {
     provide: {
       NFormItem: null
@@ -13,18 +10,17 @@ export default function (options = {}) {
       }
     },
     computed: {
-      mergedSize: mergedSize || function () {
-        const size = this.size
-        if (size) return size
-        const NFormItem = this.NFormItem
-        if (
-          NFormItem &&
-          NFormItem.mergedSize
-        ) {
-          return NFormItem.mergedSize
+      mergedSize:
+        mergedSize ||
+        function () {
+          const size = this.size
+          if (size) return size
+          const NFormItem = this.NFormItem
+          if (NFormItem && NFormItem.mergedSize) {
+            return NFormItem.mergedSize
+          }
+          return defaultSize
         }
-        return defaultSize
-      }
     },
     beforeUnmount () {
       const { NFormItem } = this

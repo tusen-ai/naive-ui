@@ -90,14 +90,8 @@
 import { ref, computed, toRef } from 'vue'
 import { createTreeMate } from 'treemate'
 import { VBinder, VFollower, VTarget } from 'vueuc'
-import {
-  useIsMounted,
-  useMergedState,
-  useCompitable
-} from 'vooks'
-import {
-  clickoutside
-} from 'vdirs'
+import { useIsMounted, useMergedState, useCompitable } from 'vooks'
+import { clickoutside } from 'vdirs'
 import {
   configurable,
   themeable,
@@ -105,18 +99,15 @@ import {
   locale,
   withCssr
 } from '../../_mixins'
-import {
-  warn, call, useAdjustedTo
-} from '../../_utils'
-import {
-  NBaseSelectMenu,
-  NBaseSelection
-} from '../../_base'
+import { warn, call, useAdjustedTo } from '../../_utils'
+import { NBaseSelectMenu, NBaseSelection } from '../../_base'
 import styles from './styles/index.js'
 
 function patternMatched (pattern, value) {
   try {
-    return 1 + value.toString().toLowerCase().indexOf(pattern.trim().toLowerCase())
+    return (
+      1 + value.toString().toLowerCase().indexOf(pattern.trim().toLowerCase())
+    )
   } catch (err) {
     return false
   }
@@ -131,9 +122,11 @@ function filterOptions (originalOpts, filter, pattern) {
       if (option.type === 'group') {
         const children = traverse(option.children)
         if (children.length) {
-          filteredOptions.push(Object.assign({}, option, {
-            children
-          }))
+          filteredOptions.push(
+            Object.assign({}, option, {
+              children
+            })
+          )
         }
       } else if (filter(pattern, option)) {
         filteredOptions.push(option)
@@ -146,9 +139,9 @@ function filterOptions (originalOpts, filter, pattern) {
 
 function createValOptMap (options) {
   const valOptMap = new Map()
-  options.forEach(option => {
+  options.forEach((option) => {
     if (option.type === 'group') {
-      option.children.forEach(groupOption => {
+      option.children.forEach((groupOption) => {
         valOptMap.set(groupOption.value, groupOption)
       })
     } else {
@@ -259,14 +252,14 @@ export default {
     },
     onCreate: {
       type: Function,
-      default: label => ({
+      default: (label) => ({
         label: label,
         value: label
       })
     },
     fallbackOption: {
       type: [Function, Boolean],
-      default: () => value => ({
+      default: () => (value) => ({
         label: '' + value,
         value
       })
@@ -299,14 +292,19 @@ export default {
     /** deprecated */
     onChange: {
       validator () {
-        if (__DEV__) warn('select', '`on-change` is deprecated, please use `on-update:value` instead.')
+        if (__DEV__) {
+          warn(
+            'select',
+            '`on-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
         return true
       },
       default: undefined
     },
     items: {
       validator () {
-        if (__DEV__) warn('select', '`items` is deprecated, please use `options` instead.')
+        if (__DEV__) { warn('select', '`items` is deprecated, please use `options` instead.') }
         return true
       },
       default: undefined
@@ -319,19 +317,22 @@ export default {
   setup (props) {
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
-    const mergedValueRef = useMergedState(controlledValueRef, uncontrolledValueRef)
+    const mergedValueRef = useMergedState(
+      controlledValueRef,
+      uncontrolledValueRef
+    )
     const patternRef = ref('')
-    const filteredOptionsRef = computed(() => filterOptions(
-      props.options,
-      props.filter,
-      patternRef.value
-    ))
-    const treeMateRef = computed(() => createTreeMate(filteredOptionsRef.value, {
-      getKey (node) {
-        if (node.type === 'group') return node.name
-        return node.value
-      }
-    }))
+    const filteredOptionsRef = computed(() =>
+      filterOptions(props.options, props.filter, patternRef.value)
+    )
+    const treeMateRef = computed(() =>
+      createTreeMate(filteredOptionsRef.value, {
+        getKey (node) {
+          if (node.type === 'group') return node.name
+          return node.value
+        }
+      })
+    )
     const valOptMapRef = computed(() => createValOptMap(props.options))
     const uncontrolledShowRef = ref(false)
     const mergedShowRef = useMergedState(
@@ -353,10 +354,7 @@ export default {
       pattern: patternRef,
       uncontrolledShow: uncontrolledShowRef,
       mergedShow: mergedShowRef,
-      compitableOptions: useCompitable(props, [
-        'items',
-        'options'
-      ]),
+      compitableOptions: useCompitable(props, ['items', 'options']),
       adjustedTo: useAdjustedTo(props),
       createdOptions: ref([]),
       beingCreatedOptions: ref([]),
@@ -384,7 +382,7 @@ export default {
           return localOptions
         } else {
           const { filter } = this
-          const mergedFilter = option => filter(pattern, option)
+          const mergedFilter = (option) => filter(pattern, option)
           return filterOptions(localOptions, mergedFilter)
         }
       }
@@ -394,13 +392,9 @@ export default {
         const { mergedValue: values } = this
         if (!Array.isArray(values)) return []
         const remote = this.remote
-        const {
-          valOptMap,
-          memoValOptMap,
-          wrappedFallbackOption
-        } = this
+        const { valOptMap, memoValOptMap, wrappedFallbackOption } = this
         const options = []
-        values.forEach(value => {
+        values.forEach((value) => {
           if (valOptMap.has(value)) {
             options.push(valOptMap.get(value))
           } else if (remote && memoValOptMap.has(value)) {
@@ -437,10 +431,11 @@ export default {
     wrappedFallbackOption () {
       const { fallbackOption } = this
       if (!fallbackOption) return false
-      return value => {
+      return (value) => {
         if (['string', 'number'].includes(typeof value)) {
           return Object.assign(fallbackOption(value), { value })
-        } return null
+        }
+        return null
       }
     }
   },
@@ -475,43 +470,30 @@ export default {
       nTriggerFormInput()
     },
     doBlur (value) {
-      const {
-        onBlur,
-        nTriggerFormBlur
-      } = this
+      const { onBlur, nTriggerFormBlur } = this
       if (onBlur) call(onBlur, value)
       nTriggerFormBlur()
     },
     doFocus (value) {
-      const {
-        onFocus,
-        nTriggerFormFocus
-      } = this
+      const { onFocus, nTriggerFormFocus } = this
       if (onFocus) call(onFocus, value)
       nTriggerFormFocus()
     },
     doSearch (value) {
-      const {
-        onSearch
-      } = this
+      const { onSearch } = this
       if (onSearch) call(onSearch, value)
     },
     doScroll (...args) {
-      const {
-        onScroll
-      } = this
+      const { onScroll } = this
       if (onScroll) call(onScroll, ...args)
     },
     // remote related methods
     updateMemorizedOptions () {
-      const {
-        remote,
-        multiple
-      } = this
+      const { remote, multiple } = this
       if (remote) {
         const { memoValOptMap } = this
         if (multiple) {
-          this.selectedOptions.forEach(option => {
+          this.selectedOptions.forEach((option) => {
             memoValOptMap.set(option.value, option)
           })
         } else {
@@ -569,15 +551,12 @@ export default {
         return Array.from(value)
       } else {
         // if there's no option fallback, unappeared options are treated as invalid
-        const {
-          remote,
-          valOptMap
-        } = this
+        const { remote, valOptMap } = this
         if (remote) {
           const { memoValOptMap } = this
-          return value.filter(v => valOptMap.has(v) || memoValOptMap.has(v))
+          return value.filter((v) => valOptMap.has(v) || memoValOptMap.has(v))
         } else {
-          return value.filter(v => valOptMap.has(v))
+          return value.filter((v) => valOptMap.has(v))
         }
       }
     },
@@ -596,8 +575,10 @@ export default {
         this.memoValOptMap.set(option.value, option)
       }
       if (this.multiple) {
-        const changedValue = this.createClearedMultipleSelectValue(this.mergedValue)
-        const index = changedValue.findIndex(value => value === option.value)
+        const changedValue = this.createClearedMultipleSelectValue(
+          this.mergedValue
+        )
+        const index = changedValue.findIndex((value) => value === option.value)
         if (~index) {
           changedValue.splice(index, 1)
           if (tag && !remote) {
@@ -630,11 +611,14 @@ export default {
     },
     handleDeleteLastOption (e) {
       if (!this.pattern.length) {
-        const changedValue = this.createClearedMultipleSelectValue(this.mergedValue)
+        const changedValue = this.createClearedMultipleSelectValue(
+          this.mergedValue
+        )
         if (Array.isArray(changedValue)) {
           const poppedValue = changedValue.pop()
           const createdOptionIndex = this.getCreatedOptionIndex(poppedValue)
-          ~createdOptionIndex && this.createdOptions.splice(createdOptionIndex, 1)
+          ~createdOptionIndex &&
+            this.createdOptions.splice(createdOptionIndex, 1)
           this.doUpdateValue(changedValue)
         }
       }
@@ -642,7 +626,7 @@ export default {
     getCreatedOptionIndex (optionValue) {
       const createdOptions = this.createdOptions
       return createdOptions.findIndex(
-        createdOption => createdOption.value === optionValue
+        (createdOption) => createdOption.value === optionValue
       )
     },
     handlePatternInput (e) {
@@ -661,10 +645,10 @@ export default {
         const optionBeingCreated = this.onCreate(value)
         if (
           this.compitableOptions.some(
-            option => option.value === optionBeingCreated.value
+            (option) => option.value === optionBeingCreated.value
           ) ||
           this.createdOptions.some(
-            option => option.value === optionBeingCreated.value
+            (option) => option.value === optionBeingCreated.value
           )
         ) {
           this.beingCreatedOptions = []

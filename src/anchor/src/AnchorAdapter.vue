@@ -44,9 +44,7 @@ export default {
     NBaseAnchor,
     NAffix
   },
-  mixins: [
-    themeable
-  ],
+  mixins: [themeable],
   props: {
     top: {
       type: Number,

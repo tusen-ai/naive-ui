@@ -1,13 +1,9 @@
 import { c, namespace } from '../../_utils/cssr'
 import commonVariables from '../base/_common'
 
-const {
-  cubicBezierEaseOut
-} = commonVariables
+const { cubicBezierEaseOut } = commonVariables
 
-export default function fadeUpWidthExpandTransition ({
-  duration = '.2s'
-} = {}) {
+export default function fadeUpWidthExpandTransition ({ duration = '.2s' } = {}) {
   return [
     c(`&.${namespace}-fade-up-width-expand-transition-leave-active`, {
       transition: `

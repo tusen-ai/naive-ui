@@ -1,10 +1,7 @@
 import { c, namespace } from '../../_utils/cssr'
 import commonVariables from '../base/_common'
 
-const {
-  cubicBezierEaseIn,
-  cubicBezierEaseOut
-} = commonVariables
+const { cubicBezierEaseIn, cubicBezierEaseOut } = commonVariables
 
 export default function ({
   duration = '0.3s',

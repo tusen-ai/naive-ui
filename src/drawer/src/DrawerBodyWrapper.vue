@@ -18,14 +18,12 @@
           `n-drawer--${placement}-placement`,
           {
             [`n-drawer--native-scrollbar`]: nativeScrollbar,
-            [`n-${theme}-theme`]: theme,
+            [`n-${theme}-theme`]: theme
           }
         ]"
         :style="bodyStyle"
       >
-        <template
-          v-if="nativeScrollbar"
-        >
+        <template v-if="nativeScrollbar">
           <slot />
         </template>
         <n-scrollbar
@@ -103,12 +101,12 @@ export default {
       displayed: displayedRef,
       bodyRef: ref(null), // used for detached content
       transitionName: computed(() => {
-        return ({
+        return {
           right: 'n-slide-in-from-right-transition',
           left: 'n-slide-in-from-left-transition',
           top: 'n-slide-in-from-top-transition',
           bottom: 'n-slide-in-from-bottom-transition'
-        })[props.placement]
+        }[props.placement]
       })
     }
   },

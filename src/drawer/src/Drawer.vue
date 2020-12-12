@@ -1,8 +1,5 @@
 <template>
-  <v-lazy-teleport
-    :to="to"
-    :show="show"
-  >
+  <v-lazy-teleport :to="to" :show="show">
     <div
       v-zindexable="{ enabled: show }"
       class="n-positioning-container"
@@ -10,15 +7,8 @@
         [namespace]: namespace
       }"
     >
-      <transition
-        name="n-fade-in-transition"
-        :appear="isMounted"
-      >
-        <div
-          v-if="show"
-          class="n-drawer-mask"
-          @click="handleMaskClick"
-        />
+      <transition name="n-fade-in-transition" :appear="isMounted">
+        <div v-if="show" class="n-drawer-mask" @click="handleMaskClick" />
       </transition>
       <n-drawer-body-wrapper
         :placement="placement"
@@ -40,11 +30,7 @@
 import { VLazyTeleport } from 'vueuc'
 import { zindexable } from 'vdirs'
 import { useCompitable, useIsMounted } from 'vooks'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import { warn, formatLength } from '../../_utils'
 import NDrawerBodyWrapper from './DrawerBodyWrapper.vue'
 import styles from './styles/index'
@@ -58,11 +44,7 @@ export default {
   directives: {
     zindexable
   },
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   provide () {
     return {
       NDrawer: this,
@@ -126,14 +108,20 @@ export default {
     // deprecated
     drawerStyle: {
       validator () {
-        warn('drawer', '`draw-style` is deprecated, please use `body-style` instead.')
+        warn(
+          'drawer',
+          '`draw-style` is deprecated, please use `body-style` instead.'
+        )
         return true
       },
       default: undefined
     },
     drawerClass: {
       validator () {
-        warn('drawer', '`draw-class` is deprecated, please use `body-class` instead.')
+        warn(
+          'drawer',
+          '`draw-class` is deprecated, please use `body-class` instead.'
+        )
         return true
       },
       default: undefined
@@ -147,14 +135,20 @@ export default {
     },
     onShow: {
       validator () {
-        warn('drawer', '`on-show` is deprecated, please use `on-update:show` instead.')
+        warn(
+          'drawer',
+          '`on-show` is deprecated, please use `on-update:show` instead.'
+        )
         return true
       },
       default: undefined
     },
     onHide: {
       validator () {
-        warn('drawer', '`on-hide` is deprecated, please use `on-update:show` instead.')
+        warn(
+          'drawer',
+          '`on-hide` is deprecated, please use `on-update:show` instead.'
+        )
         return true
       },
       default: undefined
@@ -169,24 +163,16 @@ export default {
   },
   computed: {
     styleWidth () {
-      const {
-        placement
-      } = this
+      const { placement } = this
       if (placement === 'top' || placement === 'bottom') return null
-      const {
-        width
-      } = this
+      const { width } = this
       if (width === null) return null
       return formatLength(width)
     },
     styleHeight () {
-      const {
-        placement
-      } = this
+      const { placement } = this
       if (placement === 'left' || placement === 'right') return null
-      const {
-        height
-      } = this
+      const { height } = this
       if (height === null) return null
       return formatLength(height)
     },
@@ -201,10 +187,7 @@ export default {
   methods: {
     handleMaskClick () {
       if (this.maskClosable) {
-        const {
-          onHide,
-          'onUpdate:show': onUpdateShow
-        } = this
+        const { onHide, 'onUpdate:show': onUpdateShow } = this
         if (onUpdateShow) onUpdateShow(false)
         // deprecated
         if (onHide) onHide()

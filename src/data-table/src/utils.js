@@ -13,7 +13,9 @@ export function createCustomWidthStyle (column) {
 export function setCheckStatusOfRow (checkedRowKeys, row, checked, rowKey) {
   const key = createRowKey(row, rowKey)
   while (true) {
-    const checkedRowIndex = checkedRowKeys.findIndex(checkedRowKey => checkedRowKey === key)
+    const checkedRowIndex = checkedRowKeys.findIndex(
+      (checkedRowKey) => checkedRowKey === key
+    )
     if (~checkedRowIndex) checkedRowKeys.splice(checkedRowIndex, 1)
     else break
   }
@@ -28,9 +30,7 @@ export function createRowKey (row, rowKey) {
 export function shouldUseArrayInSingleMode (column) {
   return (
     column.filterOptionValues !== undefined ||
-    (
-      column.filterOptionValue === undefined &&
-      column.defaultFilterOptionValues !== undefined
-    )
+    (column.filterOptionValue === undefined &&
+      column.defaultFilterOptionValues !== undefined)
   )
 }

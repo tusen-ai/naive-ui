@@ -5,9 +5,7 @@ import { baseDark } from '../../_styles/base'
 export default create({
   name: 'InputGroupLabel',
   theme: 'dark',
-  peer: [
-    baseDark
-  ],
+  peer: [baseDark],
   getLocalVars (vars) {
     return {
       ...commonVariables,

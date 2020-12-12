@@ -1,8 +1,5 @@
 <template>
-  <span
-    ref="numbers"
-    class="n-base-slot-machine-number"
-  >
+  <span ref="numbers" class="n-base-slot-machine-number">
     <span
       v-if="oldNumber !== null"
       class="n-base-slot-machine-old-number n-base-slot-machine-old-number--top"
@@ -16,8 +13,7 @@
         ref="numberWrapper"
         class="n-base-slot-machine-current-number__inner"
         :class="{
-          'n-base-slot-machine-current-number__inner--not-number':
-            isNotNumber
+          'n-base-slot-machine-current-number__inner--not-number': isNotNumber
         }"
       >{{ newNumber }}</span>
     </span>
@@ -56,10 +52,14 @@ export default {
   },
   computed: {
     newNumberScrollAnimationClass () {
-      return this.active ? `n-base-slot-machine-current-number--${this.scrollAnimationDirection}-scroll` : null
+      return this.active
+        ? `n-base-slot-machine-current-number--${this.scrollAnimationDirection}-scroll`
+        : null
     },
     oldNumberScrollAnimationClass () {
-      return this.active ? `n-base-slot-machine-old-number--${this.scrollAnimationDirection}-scroll` : null
+      return this.active
+        ? `n-base-slot-machine-old-number--${this.scrollAnimationDirection}-scroll`
+        : null
     },
     isNotNumber () {
       return !(typeof this.value === 'number')

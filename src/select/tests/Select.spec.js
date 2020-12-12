@@ -6,12 +6,8 @@ import { NSelect } from '../index'
 
 describe('n-select', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      selectLight
-    ]
+    locales: [enUS],
+    styles: [selectLight]
   })
   it('should work with import on demand', () => {
     mount(NSelect, {

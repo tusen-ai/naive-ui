@@ -6,10 +6,7 @@ import commonVariables from './_common.js'
 export default create({
   theme: 'light',
   name: 'BackTop',
-  peer: [
-    baseLight,
-    iconLight
-  ],
+  peer: [baseLight, iconLight],
   getLocalVars (vars) {
     const {
       popoverColor,

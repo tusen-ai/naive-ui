@@ -8,9 +8,7 @@
     @keydown="handlePanelKeyDown"
     @focus="handlePanelFocus"
   >
-    <div
-      class="n-date-panel-input-wrapper"
-    >
+    <div class="n-date-panel-input-wrapper">
       <n-input
         v-model:value="displayDateString"
         :theme="theme"
@@ -41,31 +39,19 @@
     </div>
     <div class="n-date-panel-calendar">
       <div class="n-date-panel-month">
-        <div
-          class="n-date-panel-month__fast-prev"
-          @click="prevYear"
-        >
+        <div class="n-date-panel-month__fast-prev" @click="prevYear">
           <fast-backward-icon />
         </div>
-        <div
-          class="n-date-panel-month__prev"
-          @click="prevMonth"
-        >
+        <div class="n-date-panel-month__prev" @click="prevMonth">
           <backward-icon />
         </div>
         <div class="n-date-panel-month__month-year">
           {{ calendarMonth }} {{ calendarYear }}
         </div>
-        <div
-          class="n-date-panel-month__next"
-          @click="nextMonth"
-        >
+        <div class="n-date-panel-month__next" @click="nextMonth">
           <forward-icon />
         </div>
-        <div
-          class="n-date-panel-month__fast-next"
-          @click="nextYear"
-        >
+        <div class="n-date-panel-month__fast-next" @click="nextYear">
           <fast-forward-icon />
         </div>
       </div>
@@ -88,7 +74,9 @@
             'n-date-panel-date--selected': dateItem.isSelectedDate,
             'n-date-panel-date--excluded': !dateItem.isDateOfDisplayMonth,
             'n-date-panel-date--transition-disabled': noTransition,
-            'n-date-panel-date--disabled': isCalendarDateDisabled(dateItem.timestamp)
+            'n-date-panel-date--disabled': isCalendarDateDisabled(
+              dateItem.timestamp
+            )
           }"
           @click="handleDateClick(dateItem)"
         >
@@ -96,14 +84,11 @@
         </div>
         <div
           v-if="!(actions && actions.length)"
-          style="height: 8px; width: 100%;"
+          style="height: 8px; width: 100%"
         />
       </div>
     </div>
-    <div
-      v-if="actions && actions.length"
-      class="n-date-panel-actions"
-    >
+    <div v-if="actions && actions.length" class="n-date-panel-actions">
       <n-button
         v-if="actions.includes('clear')"
         :theme="theme"
@@ -145,7 +130,12 @@ import { uniCalendarSetup } from '../composables'
 
 const DATETIME_FORMAT = 'yyyy-MM-dd HH:mm:ss'
 const DATE_FORMAT = 'yyyy-MM-dd'
-const DATE_VALIDATE_FORMAT = ['YYYY-MM-DD', 'YYYY-MM-D', 'YYYY-M-D', 'YYYY-M-DD']
+const DATE_VALIDATE_FORMAT = [
+  'YYYY-MM-DD',
+  'YYYY-MM-D',
+  'YYYY-M-D',
+  'YYYY-M-DD'
+]
 
 export default {
   components: {
@@ -153,9 +143,7 @@ export default {
     NTimePicker,
     NInput
   },
-  mixins: [
-    uniCalendarMixin
-  ],
+  mixins: [uniCalendarMixin],
   props: {
     format: {
       type: String,

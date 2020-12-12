@@ -5,10 +5,7 @@ import { iconLight } from '../../icon/styles'
 export default create({
   name: 'Progress',
   theme: 'light',
-  peer: [
-    baseLight,
-    iconLight
-  ],
+  peer: [baseLight, iconLight],
   getLocalVars (vars) {
     const {
       infoColor,
@@ -37,7 +34,8 @@ export default create({
       fillColorSuccess: successColor,
       fillColorWarning: warningColor,
       fillColorError: errorColor,
-      lineBgProcessing: 'linear-gradient(90deg, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, .5) 100%)'
+      lineBgProcessing:
+        'linear-gradient(90deg, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, .5) 100%)'
     }
   }
 })

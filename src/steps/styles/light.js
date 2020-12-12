@@ -6,10 +6,7 @@ import { iconDark } from '../../icon/styles'
 export default create({
   theme: 'light',
   name: 'Steps',
-  peer: [
-    baseDark,
-    iconDark
-  ],
+  peer: [baseDark, iconDark],
   getLocalVars (vars) {
     return {
       ...commonVariables,

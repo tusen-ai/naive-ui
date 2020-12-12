@@ -22,22 +22,31 @@ export default {
   render () {
     const { show, displayDirective } = this
     const useVShow = displayDirective === 'show'
-    const directives = useVShow ? [
-      [vShow, show]
-    ] : []
+    const directives = useVShow ? [[vShow, show]] : []
     return h(NFadeInExpandTransition, null, {
-      default: () => (useVShow || show) ? withDirectives(
-        h('div', {
-          class: 'n-collapse-item__content-wrapper'
-        }, [
-          h('div', {
-            class: 'n-collapse-item__content-inner'
-          }, {
-            ...this.$slots
-          })
-        ]),
-        directives
-      ) : null
+      default: () =>
+        useVShow || show
+          ? withDirectives(
+            h(
+              'div',
+              {
+                class: 'n-collapse-item__content-wrapper'
+              },
+              [
+                h(
+                  'div',
+                  {
+                    class: 'n-collapse-item__content-inner'
+                  },
+                  {
+                    ...this.$slots
+                  }
+                )
+              ]
+            ),
+            directives
+          )
+          : null
     })
   }
 }

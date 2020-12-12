@@ -14,9 +14,7 @@
         :size="NTransfer.mergedSize"
       />
     </div>
-    <div
-      class="n-transfer-list-item__label"
-    >
+    <div class="n-transfer-list-item__label">
       {{ label }}
     </div>
   </div>

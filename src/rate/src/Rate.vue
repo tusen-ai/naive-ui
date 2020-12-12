@@ -12,9 +12,7 @@
       class="n-rate__item"
       :class="{
         'n-rate__item--active':
-          hoverIndex !== null
-            ? index <= hoverIndex
-            : index < mergedValue
+          hoverIndex !== null ? index <= hoverIndex : index < mergedValue
       }"
       @click="handleClick(index)"
       @mouseenter="handleMouseEnter(index)"
@@ -27,25 +25,13 @@
 </template>
 
 <script>
-import {
-  configurable,
-  themeable,
-  withCssr,
-  asFormItem
-} from '../../_mixins'
-import {
-  toRef,
-  ref
-} from 'vue'
-import {
-  useMergedState
-} from 'vooks'
-import {
-  call
-} from '../../_utils'
+import { configurable, themeable, withCssr, asFormItem } from '../../_mixins'
+import { toRef, ref } from 'vue'
+import { useMergedState } from 'vooks'
+import { call } from '../../_utils'
 import styles from './styles'
 import StarIcon from './StarIcon.vue'
-import{ NIcon } from '../../icon'
+import { NIcon } from '../../icon'
 
 export default {
   name: 'Rate',
@@ -53,12 +39,7 @@ export default {
     NIcon,
     StarIcon
   },
-  mixins: [
-    configurable,
-    themeable,
-    asFormItem(),
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, asFormItem(), withCssr(styles)],
   props: {
     count: {
       type: Number,
@@ -82,10 +63,7 @@ export default {
     const controlledValueRef = toRef(props, 'value')
     const uncontrolledValueRef = ref(props.defaultValue)
     return {
-      mergedValue: useMergedState(
-        controlledValueRef,
-        uncontrolledValueRef
-      ),
+      mergedValue: useMergedState(controlledValueRef, uncontrolledValueRef),
       uncontrolledValue: uncontrolledValueRef,
       hoverIndex: ref(null)
     }

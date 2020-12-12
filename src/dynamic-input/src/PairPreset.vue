@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="n-dynamic-input-preset-pair"
-  >
+  <div class="n-dynamic-input-preset-pair">
     <n-input
       :value="value.key"
       class="n-dynamic-input-pair-input"

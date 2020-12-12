@@ -107,7 +107,12 @@ export default {
     // deprecated
     onChange: {
       validator () {
-        if (__DEV__) warn('dynamic-tags', '`on-change` is deprecated, please use `on-update:value` instead.')
+        if (__DEV__) {
+          warn(
+            'dynamic-tags',
+            '`on-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
         return true
       },
       default: undefined
@@ -126,8 +131,8 @@ export default {
     },
     inputSize () {
       const sizes = ['small', 'medium', 'large']
-      const tagSizeIndex = sizes.findIndex(size => size === this.size)
-      const inputSizeIndex = (tagSizeIndex - 1) > 0 ? tagSizeIndex - 1 : 0
+      const tagSizeIndex = sizes.findIndex((size) => size === this.size)
+      const inputSizeIndex = tagSizeIndex - 1 > 0 ? tagSizeIndex - 1 : 0
       return sizes[inputSizeIndex]
     }
   },

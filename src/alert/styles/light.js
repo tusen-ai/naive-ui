@@ -6,10 +6,7 @@ import { composite, changeColor } from 'seemly'
 export default create({
   theme: 'light',
   name: 'Alert',
-  peer: [
-    baseLight,
-    iconLight
-  ],
+  peer: [baseLight, iconLight],
   getLocalVars (vars) {
     const {
       borderRadius,
@@ -38,7 +35,10 @@ export default create({
       closeColor,
       closeColorHover,
       closeColorPressed,
-      borderInfo: `1px solid ${composite(baseColor, changeColor(infoColor, { alpha: 0.25 }))}`,
+      borderInfo: `1px solid ${composite(
+        baseColor,
+        changeColor(infoColor, { alpha: 0.25 })
+      )}`,
       colorInfo: composite(baseColor, changeColor(infoColor, { alpha: 0.08 })),
       titleTextColorInfo: textColor1Overlay,
       iconColorInfo: infoColor,
@@ -46,24 +46,42 @@ export default create({
       closeColorInfo: closeColor,
       closeColorHoverInfo: closeColorHover,
       closeColorPressedInfo: closeColorPressed,
-      borderSuccess: `1px solid ${composite(baseColor, changeColor(successColor, { alpha: 0.25 }))}`,
-      colorSuccess: composite(baseColor, changeColor(successColor, { alpha: 0.08 })),
+      borderSuccess: `1px solid ${composite(
+        baseColor,
+        changeColor(successColor, { alpha: 0.25 })
+      )}`,
+      colorSuccess: composite(
+        baseColor,
+        changeColor(successColor, { alpha: 0.08 })
+      ),
       titleTextColorSuccess: textColor1Overlay,
       iconColorSuccess: successColor,
       contentTextColorSuccess: textColor2Overlay,
       closeColorSuccess: closeColor,
       closeColorHoverSuccess: closeColorHover,
       closeColorPressedSuccess: closeColorPressed,
-      borderWarning: `1px solid ${composite(baseColor, changeColor(warningColor, { alpha: 0.33 }))}`,
-      colorWarning: composite(baseColor, changeColor(warningColor, { alpha: 0.08 })),
+      borderWarning: `1px solid ${composite(
+        baseColor,
+        changeColor(warningColor, { alpha: 0.33 })
+      )}`,
+      colorWarning: composite(
+        baseColor,
+        changeColor(warningColor, { alpha: 0.08 })
+      ),
       titleTextColorWarning: textColor1Overlay,
       iconColorWarning: warningColor,
       contentTextColorWarning: textColor2Overlay,
       closeColorWarning: closeColor,
       closeColorHoverWarning: closeColorHover,
       closeColorPressedWarning: closeColorPressed,
-      borderError: `1px solid ${composite(baseColor, changeColor(errorColor, { alpha: 0.25 }))}`,
-      colorError: composite(baseColor, changeColor(errorColor, { alpha: 0.08 })),
+      borderError: `1px solid ${composite(
+        baseColor,
+        changeColor(errorColor, { alpha: 0.25 })
+      )}`,
+      colorError: composite(
+        baseColor,
+        changeColor(errorColor, { alpha: 0.08 })
+      ),
       titleTextColorError: textColor1Overlay,
       iconColorError: errorColor,
       contentTextColorError: textColor2Overlay,

@@ -6,12 +6,8 @@ import { NButton } from '../index'
 
 describe('n-button', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      buttonLight
-    ]
+    locales: [enUS],
+    styles: [buttonLight]
   })
   it('should work with import on demand', () => {
     mount(NButton, {

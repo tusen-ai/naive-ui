@@ -33,7 +33,10 @@ export default {
     // deprecated
     checkedValue: {
       validator () {
-        warn('radio', '`checked-value` is deprecated, please use `checked` instead.')
+        warn(
+          'radio',
+          '`checked-value` is deprecated, please use `checked` instead.'
+        )
         return true
       },
       default: undefined
@@ -56,18 +59,14 @@ export default {
   },
   methods: {
     doUpdateChecked () {
-      const {
-        NRadioGroup
-      } = this
+      const { NRadioGroup } = this
       if (NRadioGroup) {
         const {
           'onUpdate:value': updateValue,
           nTriggerFormInput,
           nTriggerFormChange
         } = NRadioGroup
-        const {
-          value
-        } = this
+        const { value } = this
         if (updateValue) call(updateValue, value)
         nTriggerFormInput()
         nTriggerFormChange()
@@ -110,9 +109,7 @@ export default {
       }, 0)
     },
     handleClick (e) {
-      const {
-        onClick
-      } = this
+      const { onClick } = this
       if (onClick) onClick(e)
       this.$refs.input.click()
     }

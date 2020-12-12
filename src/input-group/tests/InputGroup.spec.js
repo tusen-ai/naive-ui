@@ -6,12 +6,8 @@ import { NInputGroup } from '../index'
 
 describe('n-input-group', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      inputGroupLight
-    ]
+    locales: [enUS],
+    styles: [inputGroupLight]
   })
   it('should work with import on demand', () => {
     mount(NInputGroup, {

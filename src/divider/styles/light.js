@@ -4,14 +4,9 @@ import { baseLight } from '../../_styles/base'
 export default create({
   theme: 'light',
   name: 'Divider',
-  peer: [
-    baseLight
-  ],
+  peer: [baseLight],
   getLocalVars (vars) {
-    const {
-      textColor1,
-      dividerColorOverlay
-    } = vars
+    const { textColor1, dividerColorOverlay } = vars
     return {
       textColor: textColor1,
       color: dividerColorOverlay,

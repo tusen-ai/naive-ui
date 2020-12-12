@@ -1,15 +1,9 @@
 import { h, nextTick, ref, toRef, computed, onMounted } from 'vue'
 import { createTreeMate } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import styles from './styles/index'
-import {
-  itemRenderer
-} from './utils'
+import { itemRenderer } from './utils'
 
 export default {
   name: 'Menu',
@@ -19,11 +13,7 @@ export default {
       NSubmenu: null
     }
   },
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     items: {
       type: Array,
@@ -123,27 +113,33 @@ export default {
     }
   },
   setup (props) {
-    const treeMateRef = computed(() => createTreeMate(props.items, {
-      getKey (node) {
-        return node.key ?? node.name
-      }
-    }))
+    const treeMateRef = computed(() =>
+      createTreeMate(props.items, {
+        getKey (node) {
+          return node.key ?? node.name
+        }
+      })
+    )
     const uncontrolledExpandedKeysRef = ref(
       props.defaultExpandAll
         ? treeMateRef.value.getNonLeafKeys()
-        : (
-          props.defaultExpandedNames ||
-          props.defaultExpandedKeys
-        )
+        : props.defaultExpandedNames || props.defaultExpandedKeys
     )
-    const controlledExpandedKeysRef = useCompitable(props, 'expandedNames', 'expandedKeys')
+    const controlledExpandedKeysRef = useCompitable(
+      props,
+      'expandedNames',
+      'expandedKeys'
+    )
     const mergedExpandedKeysRef = useMergedState(
       controlledExpandedKeysRef,
       uncontrolledExpandedKeysRef
     )
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
-    const mergedValueRef = useMergedState(controlledValueRef, uncontrolledValueRef)
+    const mergedValueRef = useMergedState(
+      controlledValueRef,
+      uncontrolledValueRef
+    )
     const tmNodesRef = computed(() => treeMateRef.value.treeNodes)
     const activePathRef = computed(() => {
       return treeMateRef.value.getPath(mergedValueRef.value).keyPath
@@ -175,7 +171,7 @@ export default {
     toggleExpand (key) {
       const currentExpandedKeys = Array.from(this.mergedExpandedKeys)
       const index = currentExpandedKeys.findIndex(
-        expanededKey => expanededKey === key
+        (expanededKey) => expanededKey === key
       )
       if (~index) {
         currentExpandedKeys.splice(index, 1)
@@ -192,19 +188,21 @@ export default {
     }
   },
   render () {
-    const {
-      mergedTheme
-    } = this
-    return h('div', {
-      class: [
-        'n-menu',
-        `n-menu--${this.mode}`,
-        {
-          [`n-${mergedTheme}-theme`]: mergedTheme,
-          'n-menu--collapsed': this.collapsed,
-          'n-menu--transition-disabled': this.transitionDisabled
-        }
-      ]
-    }, this.tmNodes.map(tmNode => itemRenderer(tmNode)))
+    const { mergedTheme } = this
+    return h(
+      'div',
+      {
+        class: [
+          'n-menu',
+          `n-menu--${this.mode}`,
+          {
+            [`n-${mergedTheme}-theme`]: mergedTheme,
+            'n-menu--collapsed': this.collapsed,
+            'n-menu--transition-disabled': this.transitionDisabled
+          }
+        ]
+      },
+      this.tmNodes.map((tmNode) => itemRenderer(tmNode))
+    )
   }
 }

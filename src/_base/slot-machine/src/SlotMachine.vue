@@ -1,8 +1,5 @@
 <template>
-  <span
-    v-if="valueIsNumber"
-    class="n-base-slot-machine"
-  >
+  <span v-if="valueIsNumber" class="n-base-slot-machine">
     <transition-group name="n-fade-up-width-expand-transition" tag="span">
       <slot-machine-number
         v-for="(number, i) in numbers"
@@ -13,16 +10,10 @@
       />
     </transition-group>
     <n-fade-in-expand-transition key="+" width>
-      <slot-machine-number
-        v-if="max && max < value"
-        :value="'+'"
-      />
+      <slot-machine-number v-if="max && max < value" :value="'+'" />
     </n-fade-in-expand-transition>
   </span>
-  <span
-    v-else
-    class="n-base-slot-machine"
-  >
+  <span v-else class="n-base-slot-machine">
     {{ value }}
   </span>
 </template>
@@ -39,9 +30,7 @@ export default {
     NFadeInExpandTransition,
     SlotMachineNumber
   },
-  mixins: [
-    withCssr(styles)
-  ],
+  mixins: [withCssr(styles)],
   props: {
     theme: {
       type: String,

@@ -6,12 +6,8 @@ import { NInputNumber } from '../index'
 
 describe('n-input-number', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      inputNumberLight
-    ]
+    locales: [enUS],
+    styles: [inputNumberLight]
   })
   it('should work with import on demand', () => {
     mount(NInputNumber, {

@@ -38,10 +38,7 @@ export default {
   },
   computed: {
     checkboxProps () {
-      const {
-        NTransfer,
-        source
-      } = this
+      const { NTransfer, source } = this
       if (source) {
         return NTransfer.srcCheckedStatus
       } else {

@@ -44,12 +44,7 @@ export default {
       this.notificationList.push(notificationReactive)
       return notificationReactive
     },
-    ...[
-      'info',
-      'success',
-      'warning',
-      'error'
-    ].reduce((api, type) => {
+    ...['info', 'success', 'warning', 'error'].reduce((api, type) => {
       api[type] = function (options) {
         return this.create({ ...options, type })
       }
@@ -58,7 +53,7 @@ export default {
     handleAfterLeave (key) {
       const { notificationList } = this
       notificationList.splice(
-        notificationList.findIndex(notification => notification.key === key),
+        notificationList.findIndex((notification) => notification.key === key),
         1
       )
     },
@@ -69,23 +64,33 @@ export default {
   },
   render () {
     return h(Fragment, null, [
-      h(Teleport, {
-        to: this.to ?? 'body'
-      }, [
-        this.notificationList.length ? h(NotificationContainer, {
-          scrollable: this.scrollable
-        }, {
-          default: () => {
-            return this.notificationList.map(
-              notification => h(NotificationEnvironment, {
-                ref: `n-notification-${notification.key}`,
-                ...omit(notification, ['destroy']),
-                onInternalAfterLeave: this.handleAfterLeave
-              })
+      h(
+        Teleport,
+        {
+          to: this.to ?? 'body'
+        },
+        [
+          this.notificationList.length
+            ? h(
+              NotificationContainer,
+              {
+                scrollable: this.scrollable
+              },
+              {
+                default: () => {
+                  return this.notificationList.map((notification) =>
+                    h(NotificationEnvironment, {
+                      ref: `n-notification-${notification.key}`,
+                      ...omit(notification, ['destroy']),
+                      onInternalAfterLeave: this.handleAfterLeave
+                    })
+                  )
+                }
+              }
             )
-          }
-        }) : null
-      ]),
+            : null
+        ]
+      ),
       this.$slots.default()
     ])
   }

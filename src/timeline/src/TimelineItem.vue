@@ -7,15 +7,10 @@
   >
     <div class="n-timeline-item-timeline">
       <div class="n-timeline-item-timeline__line" />
-      <div
-        class="n-timeline-item-timeline__circle"
-      />
+      <div class="n-timeline-item-timeline__circle" />
     </div>
     <div class="n-timeline-item-content">
-      <div
-        v-if="title"
-        class="n-timeline-item-content__title"
-      >
+      <div v-if="title" class="n-timeline-item-content__title">
         <slot name="header">
           {{ title }}
         </slot>

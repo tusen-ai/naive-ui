@@ -6,14 +6,9 @@ import { baseLoadingDark } from '../../_base/loading/styles'
 export default create({
   name: 'Spin',
   theme: 'dark',
-  peer: [
-    baseDark,
-    baseLoadingDark
-  ],
+  peer: [baseDark, baseLoadingDark],
   getLocalVars (vars) {
-    const {
-      opacityDisabled
-    } = vars
+    const { opacityDisabled } = vars
     return {
       ...sizeVariables,
       opacitySpinning: opacityDisabled

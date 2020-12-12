@@ -6,12 +6,8 @@ import { NDynamicTags } from '../index'
 
 describe('n-dynamic-tags', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      dynamicTagsLight
-    ]
+    locales: [enUS],
+    styles: [dynamicTagsLight]
   })
   it('should work with import on demand', () => {
     mount(NDynamicTags, {

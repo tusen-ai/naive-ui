@@ -44,9 +44,12 @@
               {
                 'n-data-table-td--ellipsis': column.ellipsis,
                 [`n-data-table-td--${column.align}-align`]: column.align,
-                [`n-data-table-td--fixed-${column.fixed}`]: column.width && column.fixed,
-                'n-data-table-td--shadow-after': NBaseTable.leftActiveFixedColumn[column.key],
-                'n-data-table-td--shadow-before': NBaseTable.rightActiveFixedColumn[column.key],
+                [`n-data-table-td--fixed-${column.fixed}`]:
+                  column.width && column.fixed,
+                'n-data-table-td--shadow-after':
+                  NBaseTable.leftActiveFixedColumn[column.key],
+                'n-data-table-td--shadow-before':
+                  NBaseTable.rightActiveFixedColumn[column.key],
                 'n-data-table-td--selection': column.type === 'selection'
               }
             ]"
@@ -56,14 +59,11 @@
               :key="currentPage"
               :disabled="column.disabled && column.disabled(rowData)"
               :checked="checkedRowKeys.includes(createRowKey(rowData, rowKey))"
-              @update:checked="checked => handleCheckboxInput(rowData, checked)"
+              @update:checked="
+                (checked) => handleCheckboxInput(rowData, checked)
+              "
             />
-            <cell
-              v-else
-              :index="index"
-              :row="rowData"
-              :column="column"
-            />
+            <cell v-else :index="index" :row="rowData" :column="column" />
           </td>
         </tr>
       </tbody>
@@ -74,7 +74,11 @@
 <script>
 import { ref } from 'vue'
 import Cell from './Cell.vue'
-import { createCustomWidthStyle, setCheckStatusOfRow, createRowKey } from '../utils'
+import {
+  createCustomWidthStyle,
+  setCheckStatusOfRow,
+  createRowKey
+} from '../utils'
 import { NScrollbar } from '../../../scrollbar'
 import { formatLength } from '../../../_utils'
 
@@ -150,7 +154,7 @@ export default {
   methods: {
     createRowKey,
     handleCheckboxInput (row, checked) {
-      const newCheckedRowKeys = this.checkedRowKeys.map(v => v)
+      const newCheckedRowKeys = this.checkedRowKeys.map((v) => v)
       setCheckStatusOfRow(newCheckedRowKeys, row, checked, this.rowKey)
       this.NDataTable.changeCheckedRowKeys(newCheckedRowKeys)
     },

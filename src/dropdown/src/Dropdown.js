@@ -1,13 +1,14 @@
 import { h, computed, ref, toRef, getCurrentInstance } from 'vue'
 import { TreeMate } from 'treemate'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import { NPopover } from '../../popover'
 import NDropdownMenu from './DropdownMenu.js'
-import { useMergedState, useFalseUntilTruthy, useKeyboard, useMemo } from 'vooks'
+import {
+  useMergedState,
+  useFalseUntilTruthy,
+  useKeyboard,
+  useMemo
+} from 'vooks'
 import { keep, call } from '../../_utils'
 import styles from './styles'
 
@@ -62,11 +63,7 @@ const popoverPropKeys = Object.keys(NPopover.props)
 
 export default {
   name: 'Dropdown',
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   provide () {
     return {
       NDropdown: this
@@ -78,7 +75,10 @@ export default {
   },
   setup (props) {
     const uncontrolledShowRef = ref(false)
-    const mergedShowRef = useMergedState(toRef(props, 'show'), uncontrolledShowRef)
+    const mergedShowRef = useMergedState(
+      toRef(props, 'show'),
+      uncontrolledShowRef
+    )
     const dataNeededRef = useFalseUntilTruthy(mergedShowRef)
 
     const treemateRef = computed(() => {
@@ -106,41 +106,49 @@ export default {
     const keyboardKeyRef = ref(null)
     const lastToggledSubmenuKeyRef = ref(null)
     const pendingKeyRef = computed(() => {
-      return hoverKeyRef.value ?? keyboardKeyRef.value ?? lastToggledSubmenuKeyRef.value ?? null
+      return (
+        hoverKeyRef.value ??
+        keyboardKeyRef.value ??
+        lastToggledSubmenuKeyRef.value ??
+        null
+      )
     })
-    const activeKeyPathRef = computed(() => getPathRef.value(
-      pendingKeyRef.value
-    ).keyPath)
+    const activeKeyPathRef = computed(
+      () => getPathRef.value(pendingKeyRef.value).keyPath
+    )
 
     const keyboardEnabledRef = useMemo(() => {
       return props.keyboard && mergedShowRef.value
     })
 
     const vm = getCurrentInstance().proxy
-    useKeyboard({
-      keydown: {
-        ArrowUp: {
-          prevent: true,
-          handler: () => vm.handleKeyDownUp()
+    useKeyboard(
+      {
+        keydown: {
+          ArrowUp: {
+            prevent: true,
+            handler: () => vm.handleKeyDownUp()
+          },
+          ArrowRight: {
+            prevent: true,
+            handler: () => vm.handleKeyDownRight()
+          },
+          ArrowDown: {
+            prevent: true,
+            handler: () => vm.handleKeyDownDown()
+          },
+          ArrowLeft: {
+            prevent: true,
+            handler: () => vm.handleKeyDownLeft()
+          },
+          Escape: () => vm.handleKeyDownEsc()
         },
-        ArrowRight: {
-          prevent: true,
-          handler: () => vm.handleKeyDownRight()
-        },
-        ArrowDown: {
-          prevent: true,
-          handler: () => vm.handleKeyDownDown()
-        },
-        ArrowLeft: {
-          prevent: true,
-          handler: () => vm.handleKeyDownLeft()
-        },
-        Escape: () => vm.handleKeyDownEsc()
+        keyup: {
+          Enter: () => vm.handleKeyUpEnter()
+        }
       },
-      keyup: {
-        Enter: () => vm.handleKeyUpEnter()
-      }
-    }, keyboardEnabledRef)
+      keyboardEnabledRef
+    )
 
     return {
       // data
@@ -199,30 +207,19 @@ export default {
     },
     handleKeyUpEnter () {
       const pendingNode = this.getPendingNode()
-      if (
-        pendingNode &&
-        pendingNode.isLeaf
-      ) {
+      if (pendingNode && pendingNode.isLeaf) {
         this.doSelect(pendingNode.key)
         this.doUpdateShow(false)
       }
     },
     getPendingNode () {
-      const {
-        pendingKey,
-        tmNodeMap
-      } = this
+      const { pendingKey, tmNodeMap } = this
       return tmNodeMap.get(pendingKey) ?? null
     },
     handleKeyDown (direction) {
-      const {
-        pendingKey,
-        getFirstAvailableNode
-      } = this
+      const { pendingKey, getFirstAvailableNode } = this
       let nextKeyboardKey = null
-      if (
-        pendingKey === null
-      ) {
+      if (pendingKey === null) {
         const firstNode = getFirstAvailableNode()
         if (firstNode !== null) {
           nextKeyboardKey = firstNode.key
@@ -255,27 +252,23 @@ export default {
     }
   },
   render () {
-    return h(NPopover,
-      keep(
-        this.$props,
-        popoverPropKeys,
-        {
-          show: this.mergedShow,
-          'onUpdate:show': this.doUpdateShow,
-          showArrow: false,
-          raw: true,
-          shadow: false
-        }
-      ),
+    return h(
+      NPopover,
+      keep(this.$props, popoverPropKeys, {
+        show: this.mergedShow,
+        'onUpdate:show': this.doUpdateShow,
+        showArrow: false,
+        raw: true,
+        shadow: false
+      }),
       {
         trigger: this.$slots.default,
         default: () => {
-          return h(NDropdownMenu,
-            {
-              tmNodes: this.tmNodes
-            }
-          )
+          return h(NDropdownMenu, {
+            tmNodes: this.tmNodes
+          })
         }
-      })
+      }
+    )
   }
 }

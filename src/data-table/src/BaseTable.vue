@@ -184,7 +184,10 @@ export default {
       this.rightActiveFixedColumn = rightActiveFixedColumn
       for (let i = rightFixedColumns.length - 1; i >= 0; --i) {
         const key = rightFixedColumns[i].key
-        if (scrollLeft + fixedColumnsRight[key] + tableWidth - rightWidth < scrollWidth) {
+        if (
+          scrollLeft + fixedColumnsRight[key] + tableWidth - rightWidth <
+          scrollWidth
+        ) {
           this.rightActiveFixedColumn = { [key]: true }
           rightWidth += rightFixedColumns[i].width
         } else {

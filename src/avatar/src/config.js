@@ -1,7 +1,1 @@
-export const validSize = [
-  'tiny',
-  'small',
-  'medium',
-  'large',
-  'huge'
-]
+export const validSize = ['tiny', 'small', 'medium', 'large', 'huge']

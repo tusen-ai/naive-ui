@@ -13,9 +13,13 @@ export default {
     })
   },
   render () {
-    return h(Transition, {
-      name: 'n-icon-switch-transition',
-      appear: this.appear
-    }, this.$slots)
+    return h(
+      Transition,
+      {
+        name: 'n-icon-switch-transition',
+        appear: this.appear
+      },
+      this.$slots
+    )
   }
 }

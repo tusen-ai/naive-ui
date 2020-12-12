@@ -67,13 +67,17 @@ export default {
   },
   render () {
     return h(Fragment, null, [
-      h(Teleport, {
-        to: this.to ?? 'body'
-      }, [
-        h(NLoadingBar, {
-          ref: 'loadingBarRef'
-        })
-      ]),
+      h(
+        Teleport,
+        {
+          to: this.to ?? 'body'
+        },
+        [
+          h(NLoadingBar, {
+            ref: 'loadingBarRef'
+          })
+        ]
+      ),
       this.$slots.default()
     ])
   }

@@ -6,12 +6,8 @@ import { NPopover } from '../index'
 
 describe('n-popover', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      popoverLight
-    ]
+    locales: [enUS],
+    styles: [popoverLight]
   })
   it('should work with import on demand', () => {
     mount(NPopover, {

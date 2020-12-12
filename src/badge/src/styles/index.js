@@ -5,16 +5,11 @@ export default [
   {
     key: 'mergedTheme',
     CNode: baseStyle,
-    watch: [
-      'mergedTheme'
-    ]
+    watch: ['mergedTheme']
   },
   {
     key: 'type',
     CNode: colorStyle,
-    watch: [
-      'type',
-      'mergedTheme'
-    ]
+    watch: ['type', 'mergedTheme']
   }
 ]

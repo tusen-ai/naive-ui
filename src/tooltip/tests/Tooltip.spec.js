@@ -6,12 +6,8 @@ import { NTooltip } from '../index'
 
 describe('n-tooltip', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      tooltipLight
-    ]
+    locales: [enUS],
+    styles: [tooltipLight]
   })
   it('should work with import on demand', () => {
     mount(NTooltip, {

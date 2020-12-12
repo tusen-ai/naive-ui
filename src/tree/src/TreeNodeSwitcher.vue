@@ -19,9 +19,7 @@
 </template>
 
 <script>
-import {
-  SwitcherIcon
-} from '../../_base/icons'
+import { SwitcherIcon } from '../../_base/icons'
 import { NIconSwitchTransition, NBaseLoading } from '../../_base'
 
 export default {

@@ -6,12 +6,8 @@ import { NDropdown } from '../index'
 
 describe('n-dropdown', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      dropdownLight
-    ]
+    locales: [enUS],
+    styles: [dropdownLight]
   })
   it('should work with import on demand', () => {
     mount(NDropdown, {

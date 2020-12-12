@@ -6,12 +6,8 @@ import { NDynamicInput } from '../index'
 
 describe('n-dynamic-input', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      dynamicInputLight
-    ]
+    locales: [enUS],
+    styles: [dynamicInputLight]
   })
   it('should work with import on demand', () => {
     mount(NDynamicInput, {

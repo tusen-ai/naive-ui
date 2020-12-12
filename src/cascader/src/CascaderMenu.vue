@@ -16,24 +16,23 @@
       <!-- TODO: refactor ref -->
       <n-cascader-submenu
         v-for="(submenuOptions, index) in menuModel"
-        :ref="instance => { if (instance) submenuRefs[index] = instance }"
+        :ref="
+          (instance) => {
+            if (instance) submenuRefs[index] = instance
+          }
+        "
         :key="index"
         :size="size"
         :tm-nodes="submenuOptions"
         :depth="index + 1"
       />
-      <n-base-menu-mask
-        ref="maskRef"
-        :theme="theme"
-      />
+      <n-base-menu-mask ref="maskRef" :theme="theme" />
     </div>
   </transition>
 </template>
 <script>
 import { ref } from 'vue'
-import {
-  clickoutside
-} from 'vdirs'
+import { clickoutside } from 'vdirs'
 import { NBaseMenuMask } from '../../_base'
 import NCascaderSubmenu from './CascaderSubmenu.vue'
 
@@ -114,9 +113,7 @@ export default {
     showErrorMessage (label) {
       const {
         NCascader: {
-          localeNs: {
-            loadingRequiredMessage
-          }
+          localeNs: { loadingRequiredMessage }
         },
         maskRef
       } = this

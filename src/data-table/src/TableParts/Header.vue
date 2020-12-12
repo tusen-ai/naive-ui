@@ -35,9 +35,12 @@
             :class="{
               'n-data-table-th--filterable': isColumnFilterable(column),
               'n-data-table-th--sortable': isColumnSortable(column),
-              [`n-data-table-th--fixed-${column.fixed}`]: column.fixed && column.width,
-              'n-data-table-th--shadow-after': NBaseTable.leftActiveFixedColumn[column.key],
-              'n-data-table-th--shadow-before': NBaseTable.rightActiveFixedColumn[column.key],
+              [`n-data-table-th--fixed-${column.fixed}`]:
+                column.fixed && column.width,
+              'n-data-table-th--shadow-after':
+                NBaseTable.leftActiveFixedColumn[column.key],
+              'n-data-table-th--shadow-before':
+                NBaseTable.rightActiveFixedColumn[column.key],
               'n-data-table-th--selection': column.type === 'selection'
             }"
             @click="handleHeaderClick($event, column)"
@@ -53,24 +56,23 @@
             <template v-if="column.type !== 'selection'">
               <div v-if="column.ellipsis" class="n-data-table-th__ellipsis">
                 <render
-                  :render="typeof column.title === 'function'
-                    ? () => (column.title)(column, index)
-                    : column.title
+                  :render="
+                    typeof column.title === 'function'
+                      ? () => column.title(column, index)
+                      : column.title
                   "
                 />
               </div>
               <render
                 v-else
-                :render="typeof column.title === 'function'
-                  ? () => (column.title)(column, index)
-                  : column.title
+                :render="
+                  typeof column.title === 'function'
+                    ? () => column.title(column, index)
+                    : column.title
                 "
               />
             </template>
-            <sort-button
-              v-if="isColumnSortable(column)"
-              :column="column"
-            />
+            <sort-button v-if="isColumnSortable(column)" :column="column" />
             <filter-button
               v-if="isColumnFilterable(column)"
               :ref="`${column.key}Filter`"
@@ -198,7 +200,11 @@ export default {
       if (filterElement && filterElement.contains(e.target)) return
       if (!column.sorter) return
       const activeSorter = this.NDataTable.mergedActiveSorter
-      const nextSorter = createNextSorter(column.key, activeSorter, column.sorter)
+      const nextSorter = createNextSorter(
+        column.key,
+        activeSorter,
+        column.sorter
+      )
       this.NDataTable.changeSorter(nextSorter)
     }
   }

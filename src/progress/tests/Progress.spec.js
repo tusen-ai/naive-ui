@@ -6,12 +6,8 @@ import { NProgress } from '../index'
 
 describe('n-progress', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      progressLight
-    ]
+    locales: [enUS],
+    styles: [progressLight]
   })
   it('should work with import on demand', () => {
     mount(NProgress, {

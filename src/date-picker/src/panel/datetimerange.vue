@@ -9,9 +9,7 @@
     @keydown="handlePanelKeyDown"
     @focus="handlePanelFocus"
   >
-    <div
-      class="n-date-panel-input-wrapper"
-    >
+    <div class="n-date-panel-input-wrapper">
       <n-input
         v-model:value="startDateDisplayString"
         :theme="theme"
@@ -79,19 +77,13 @@
         >
           <fast-backward-icon />
         </div>
-        <div
-          class="n-date-panel-month__prev"
-          @click="startCalendarPrevMonth"
-        >
+        <div class="n-date-panel-month__prev" @click="startCalendarPrevMonth">
           <backward-icon />
         </div>
         <div class="n-date-panel-month__month-year">
           {{ startCalendarMonth }} {{ startCalendarYear }}
         </div>
-        <div
-          class="n-date-panel-month__next"
-          @click="startCalendarNextMonth"
-        >
+        <div class="n-date-panel-month__next" @click="startCalendarNextMonth">
           <forward-icon />
         </div>
         <div
@@ -111,9 +103,7 @@
         </div>
       </div>
       <div class="n-date-panel__divider" />
-      <div
-        class="n-date-panel-dates"
-      >
+      <div class="n-date-panel-dates">
         <div
           v-for="(dateItem, i) in startDateArray"
           :key="i"
@@ -124,7 +114,9 @@
             'n-date-panel-date--excluded': !dateItem.isDateOfDisplayMonth,
             'n-date-panel-date--covered': dateItem.isInSpan,
             'n-date-panel-date--transition-disabled': noTransition,
-            'n-date-panel-date--disabled': isCalendarDateDisabled(dateItem.timestamp)
+            'n-date-panel-date--disabled': isCalendarDateDisabled(
+              dateItem.timestamp
+            )
           }"
           @click="handleDateClick(dateItem)"
           @mouseenter="handleDateMouseEnter(dateItem)"
@@ -139,31 +131,19 @@
       class="n-date-panel-calendar n-date-panel-calendar--end"
     >
       <div class="n-date-panel-month">
-        <div
-          class="n-date-panel-month__fast-prev"
-          @click="endCalendarPrevYear"
-        >
+        <div class="n-date-panel-month__fast-prev" @click="endCalendarPrevYear">
           <fast-backward-icon />
         </div>
-        <div
-          class="n-date-panel-month__prev"
-          @click="endCalendarPrevMonth"
-        >
+        <div class="n-date-panel-month__prev" @click="endCalendarPrevMonth">
           <backward-icon />
         </div>
         <div class="n-date-panel-month__month-year">
           {{ endCalendarMonth }} {{ endCalendarYear }}
         </div>
-        <div
-          class="n-date-panel-month__next"
-          @click="endCalendarNextMonth"
-        >
+        <div class="n-date-panel-month__next" @click="endCalendarNextMonth">
           <forward-icon />
         </div>
-        <div
-          class="n-date-panel-month__fast-next"
-          @click="endCalendarNextYear"
-        >
+        <div class="n-date-panel-month__fast-next" @click="endCalendarNextYear">
           <fast-forward-icon />
         </div>
       </div>
@@ -177,9 +157,7 @@
         </div>
       </div>
       <div class="n-date-panel__divider" />
-      <div
-        class="n-date-panel-dates"
-      >
+      <div class="n-date-panel-dates">
         <div
           v-for="(dateItem, i) in endDateArray"
           :key="i"
@@ -190,7 +168,9 @@
             'n-date-panel-date--excluded': !dateItem.isDateOfDisplayMonth,
             'n-date-panel-date--covered': dateItem.isInSpan,
             'n-date-panel-date--transition-disabled': noTransition,
-            'n-date-panel-date--disabled': isCalendarDateDisabled(dateItem.timestamp)
+            'n-date-panel-date--disabled': isCalendarDateDisabled(
+              dateItem.timestamp
+            )
           }"
           @click="handleDateClick(dateItem)"
           @mouseenter="handleDateMouseEnter(dateItem)"
@@ -199,14 +179,11 @@
         </div>
         <div
           v-if="!(actions && actions.length)"
-          style="height: 6px; width: 100%;"
+          style="height: 6px; width: 100%"
         />
       </div>
     </div>
-    <div
-      v-if="actions && actions.length"
-      class="n-date-panel-actions"
-    >
+    <div v-if="actions && actions.length" class="n-date-panel-actions">
       <n-button
         v-if="actions.includes('clear')"
         :theme="theme"
@@ -226,10 +203,7 @@
         {{ localeNs.confirm }}
       </n-button>
     </div>
-    <div
-      v-else
-      style="height: 12px"
-    />
+    <div v-else style="height: 12px" />
     <n-base-focus-detector @focus="handleFocusDetectorFocus" />
   </div>
 </template>
@@ -253,7 +227,12 @@ import { dualCalendarSetup } from '../composables'
 
 const DATETIME_FORMAT = 'yyyy-MM-dd HH:mm:ss'
 const DATE_FORMAT = 'yyyy-MM-dd'
-const DATE_VALIDATE_FORMAT = ['yyyy-MM-dd', 'yyyy-MM-D', 'yyyy-M-D', 'yyyy-M-dd']
+const DATE_VALIDATE_FORMAT = [
+  'yyyy-MM-dd',
+  'yyyy-MM-D',
+  'yyyy-M-D',
+  'yyyy-M-dd'
+]
 
 export default {
   components: {
@@ -367,7 +346,11 @@ export default {
       }
     },
     handleStartDateInputBlur () {
-      const date = strictParse(this.startDateDisplayString, this.dateFormat, new Date())
+      const date = strictParse(
+        this.startDateDisplayString,
+        this.dateFormat,
+        new Date()
+      )
       // const date = moment(this.startDateDisplayString, this.dateValidateFormat, true)
       if (isValid(date)) {
         if (!this.valueAsDateArray) {
@@ -390,7 +373,11 @@ export default {
       }
     },
     handleEndDateInputBlur () {
-      const date = strictParse(this.endDateDisplayString, this.dateFormat, new Date())
+      const date = strictParse(
+        this.endDateDisplayString,
+        this.dateFormat,
+        new Date()
+      )
       if (isValid(date)) {
         if (!this.valueAsDateArray) {
           const newValue = set(new Date(), {

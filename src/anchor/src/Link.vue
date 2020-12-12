@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="n-anchor-link"
-  >
+  <div class="n-anchor-link">
     <a
       ref="title"
       class="n-anchor-link__title"
@@ -47,10 +45,10 @@ export default {
     const activeHrefRef = useInjectionRef('NAnchor', 'activeHref')
     const hrefRef = toRef(props, 'href')
     const activeRef = useMemo(() => {
-      return hrefRef.value && (hrefRef.value === activeHrefRef.value)
+      return hrefRef.value && hrefRef.value === activeHrefRef.value
     })
     useInjectionCollection('NAnchor', 'collectedLinkHrefs', hrefRef)
-    useInjectionElementCollection('NAnchor', 'titleEls', vm => vm.$refs.title)
+    useInjectionElementCollection('NAnchor', 'titleEls', (vm) => vm.$refs.title)
     return {
       activeHref: activeHrefRef,
       active: activeRef

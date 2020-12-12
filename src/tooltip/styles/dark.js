@@ -6,10 +6,7 @@ import commonVars from './_common'
 export default create({
   theme: 'dark',
   name: 'Tooltip',
-  peer: [
-    baseDark,
-    popoverDark
-  ],
+  peer: [baseDark, popoverDark],
   getLocalVars (vars) {
     return {
       ...commonVars,

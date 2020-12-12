@@ -7,12 +7,7 @@ import { iconLight } from '../../icon/styles'
 export default create({
   name: 'Notification',
   theme: 'light',
-  peer: [
-    baseLight,
-    iconLight,
-    avatarLight,
-    scrollbarLight
-  ],
+  peer: [baseLight, iconLight, avatarLight, scrollbarLight],
   getLocalVars (vars) {
     const {
       textColor2,

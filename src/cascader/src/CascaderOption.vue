@@ -15,10 +15,7 @@
     :onMouseMove="mergedHandleMouseMove"
     @click="handleClick"
   >
-    <div
-      v-if="showCheckbox"
-      class="n-cascader-option__prefix"
-    >
+    <div v-if="showCheckbox" class="n-cascader-option__prefix">
       <n-checkbox
         :disabled="disabled"
         :checked="checked"
@@ -26,18 +23,10 @@
         @click.stop="handleCheck"
       />
     </div>
-    <span
-      class="n-cascader-option__label"
-    >{{ label }}</span>
-    <div
-      class="n-cascader-option__suffix"
-    >
-      <div
-        class="n-cascader-option-icon-placeholder"
-      >
-        <n-icon-switch-transition
-          v-if="!isLeaf"
-        >
+    <span class="n-cascader-option__label">{{ label }}</span>
+    <div class="n-cascader-option__suffix">
+      <div class="n-cascader-option-icon-placeholder">
+        <n-icon-switch-transition v-if="!isLeaf">
           <n-base-loading
             v-if="isLoading"
             key="loading"
@@ -127,10 +116,7 @@ export default {
         if (!NCascader.leafOnly) return true
       }),
       useHoverTrigger: computed(() => {
-        const {
-          expandTrigger,
-          remote
-        } = NCascader
+        const { expandTrigger, remote } = NCascader
         return !remote && expandTrigger === 'hover'
       }),
       rawNode: computed(() => props.tmNode.rawNode),
@@ -195,10 +181,7 @@ export default {
       if (!this.useHoverTrigger) return
       if (this.disabled) return
       const {
-        NCascader: {
-          updateHoverKey,
-          updateKeyboardKey
-        },
+        NCascader: { updateHoverKey, updateKeyboardKey },
         value
       } = this
       updateHoverKey(value)
@@ -212,11 +195,7 @@ export default {
       const {
         multiple,
         value,
-        NCascader: {
-          doCheck,
-          doUncheck,
-          closeMenu
-        }
+        NCascader: { doCheck, doUncheck, closeMenu }
       } = this
       if (multiple) {
         if (this.indeterminate || this.checked) {

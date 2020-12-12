@@ -6,12 +6,8 @@ import { NElement } from '../index'
 
 describe('n-element', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      elementLight
-    ]
+    locales: [enUS],
+    styles: [elementLight]
   })
   it('should work with import on demand', () => {
     mount(NElement, {

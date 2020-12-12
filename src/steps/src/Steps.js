@@ -1,9 +1,5 @@
 import { h } from 'vue'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import { getSlot } from '../../_utils'
 import styles from './styles/steps'
 
@@ -24,11 +20,7 @@ export default {
       NSteps: this
     }
   },
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     current: {
       type: Number,
@@ -48,15 +40,19 @@ export default {
     }
   },
   render () {
-    return h('div', {
-      class: [
-        'n-steps',
-        {
-          [`n-${this.mergedTheme}-theme`]: this.mergedTheme,
-          [`n-steps--${this.size}-size`]: true,
-          'n-steps--vertical': this.vertical
-        }
-      ]
-    }, stepsWithIndex({ ...this.$props }, getSlot(this)))
+    return h(
+      'div',
+      {
+        class: [
+          'n-steps',
+          {
+            [`n-${this.mergedTheme}-theme`]: this.mergedTheme,
+            [`n-steps--${this.size}-size`]: true,
+            'n-steps--vertical': this.vertical
+          }
+        ]
+      },
+      stepsWithIndex({ ...this.$props }, getSlot(this))
+    )
   }
 }

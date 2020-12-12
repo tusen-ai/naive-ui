@@ -6,12 +6,8 @@ import { NResult } from '../index'
 
 describe('n-result', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      resultLight
-    ]
+    locales: [enUS],
+    styles: [resultLight]
   })
   it('should work with import on demand', () => {
     mount(NResult, {

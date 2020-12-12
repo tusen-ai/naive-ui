@@ -12,16 +12,10 @@
       <span class="n-statistic-value__prefix">
         <slot name="prefix" />
       </span>
-      <span
-        v-if="value"
-        class="n-statistic-value__content"
-      >
+      <span v-if="value" class="n-statistic-value__content">
         {{ value }}
       </span>
-      <span
-        v-else-if="$slots.default"
-        class="n-statistic-value__content"
-      >
+      <span v-else-if="$slots.default" class="n-statistic-value__content">
         <slot />
       </span>
       <span class="n-statistic-value__suffix">
@@ -32,20 +26,12 @@
 </template>
 
 <script>
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import styles from './styles'
 
 export default {
   name: 'Statistic',
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     label: {
       type: String,

@@ -8,12 +8,7 @@ import { baseLoadingDark } from '../../_base/loading/styles'
 export default create({
   theme: 'dark',
   name: 'Tree',
-  peer: [
-    baseDark,
-    iconDark,
-    checkboxDark,
-    baseLoadingDark
-  ],
+  peer: [baseDark, iconDark, checkboxDark, baseLoadingDark],
   getLocalVars (vars) {
     const {
       borderRadiusSmall,

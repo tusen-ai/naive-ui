@@ -7,11 +7,7 @@ import { tooltipDark } from '../../tooltip/styles'
 export default create({
   theme: 'dark',
   name: 'Menu',
-  peer: [
-    baseDark,
-    iconDark,
-    tooltipDark
-  ],
+  peer: [baseDark, iconDark, tooltipDark],
   getLocalVars (vars) {
     return {
       borderRadius: vars.borderRadius,

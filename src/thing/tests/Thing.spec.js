@@ -6,12 +6,8 @@ import { NThing } from '../index'
 
 describe('n-thing', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      thingLight
-    ]
+    locales: [enUS],
+    styles: [thingLight]
   })
   it('should work with import on demand', () => {
     mount(NThing, {

@@ -30,23 +30,14 @@
 <script>
 import radioMixin from './radio-mixin'
 import setup from './radio-setup'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import styles from './styles/radio-button/index.js'
 
 export default {
   name: 'RadioButton',
   cssrName: 'Radio',
   cssrId: 'RadioButton',
-  mixins: [
-    configurable,
-    themeable,
-    radioMixin,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, radioMixin, withCssr(styles)],
   setup
 }
 </script>

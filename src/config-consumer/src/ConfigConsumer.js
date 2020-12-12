@@ -1,7 +1,4 @@
-import {
-  configurable,
-  themeable
-} from '../../_mixins'
+import { configurable, themeable } from '../../_mixins'
 import styleScheme from '../../_deprecated/style-scheme'
 
 export default {
@@ -20,10 +17,7 @@ export default {
       default: undefined
     }
   },
-  mixins: [
-    configurable,
-    themeable
-  ],
+  mixins: [configurable, themeable],
   watch: {
     mergedTheme (value, oldValue) {
       const { onThemeChange } = this
@@ -41,12 +35,16 @@ export default {
   render () {
     const defaultSlot = this.$slots.default
     const { NConfigProvider } = this
-    return defaultSlot ? defaultSlot({
-      theme: this.mergedTheme,
-      language: NConfigProvider ? NConfigProvider.inheritedLanguage : null,
-      namespace: NConfigProvider ? NConfigProvider.inheritedNamespace : null,
-      themeEnvironment: this.mergedThemeEnvironment,
-      styleScheme: styleScheme[this.mergedTheme]
-    }) : []
+    return defaultSlot
+      ? defaultSlot({
+        theme: this.mergedTheme,
+        language: NConfigProvider ? NConfigProvider.inheritedLanguage : null,
+        namespace: NConfigProvider
+          ? NConfigProvider.inheritedNamespace
+          : null,
+        themeEnvironment: this.mergedThemeEnvironment,
+        styleScheme: styleScheme[this.mergedTheme]
+      })
+      : []
   }
 }

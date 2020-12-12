@@ -9,22 +9,14 @@ import { inputLight } from '../../input/styles'
 export default create({
   theme: 'light',
   name: 'Transfer',
-  peer: [
-    baseLight,
-    checkboxLight,
-    scrollbarLight,
-    inputLight
-  ],
+  peer: [baseLight, checkboxLight, scrollbarLight, inputLight],
   getLocalVars (vars) {
     return {
       ...commonVariables,
       borderRadius: vars.borderRadius,
       borderColor: vars.borderColor,
       listColor: vars.cardColor,
-      headerColor: composite(
-        vars.cardColor,
-        vars.tableHeaderColorOverlay
-      ),
+      headerColor: composite(vars.cardColor, vars.tableHeaderColorOverlay),
       headerTextColor: vars.textColor1,
       headerTextColorDisabled: vars.textColorDisabled,
       headerExtraTextColor: vars.textColor2,

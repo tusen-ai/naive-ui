@@ -72,7 +72,11 @@ export default {
     }
   },
   setup (props) {
-    useInjectionCollection('NCollapse', 'collectedItemNames', toRef(props, 'name'))
+    useInjectionCollection(
+      'NCollapse',
+      'collectedItemNames',
+      toRef(props, 'name')
+    )
   },
   computed: {
     mergedDisplayDirective () {
@@ -90,7 +94,7 @@ export default {
       const { NCollapse } = this
       if (NCollapse && Array.isArray(NCollapse.expandedNames)) {
         const itemName = this.name
-        return !~NCollapse.expandedNames.findIndex(name => name === itemName)
+        return !~NCollapse.expandedNames.findIndex((name) => name === itemName)
       }
       return true
     }
@@ -99,11 +103,7 @@ export default {
     handleClick (e) {
       const { NCollapse } = this
       if (NCollapse) {
-        NCollapse.toggleItem(
-          this.collapsed,
-          this.name,
-          e
-        )
+        NCollapse.toggleItem(this.collapsed, this.name, e)
       }
     }
   }

@@ -1,14 +1,10 @@
 <template>
   <div class="n-transfer-list-header__extra">
     {{
-      source ?
-        NTransfer.srcCheckedValues.length :
-        NTransfer.tgtCheckedValues.length
-    }}/{{
-      source ?
-        NTransfer.srcOpts.length :
-        NTransfer.tgtOpts.length
-    }}
+      source
+        ? NTransfer.srcCheckedValues.length
+        : NTransfer.tgtCheckedValues.length
+    }}/{{ source ? NTransfer.srcOpts.length : NTransfer.tgtOpts.length }}
   </div>
 </template>
 

@@ -84,20 +84,9 @@
 </template>
 
 <script>
-import {
-  VBinder,
-  VTarget,
-  VFollower
-} from 'vueuc'
-import {
-  NBaseSelection
-} from '../../_base'
-import {
-  configurable,
-  themeable,
-  locale,
-  withCssr
-} from '../../_mixins'
+import { VBinder, VTarget, VFollower } from 'vueuc'
+import { NBaseSelection } from '../../_base'
+import { configurable, themeable, locale, withCssr } from '../../_mixins'
 import { useCascader } from './composables'
 import { warn, call } from '../../_utils'
 import CascaderMenu from './CascaderMenu.vue'
@@ -114,12 +103,7 @@ export default {
     VTarget,
     VFollower
   },
-  mixins: [
-    configurable,
-    themeable,
-    locale('Cascader'),
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, locale('Cascader'), withCssr(styles)],
   provide () {
     return {
       NCascader: this
@@ -214,7 +198,10 @@ export default {
     // deprecated
     onChange: {
       validator () {
-        warn('cascader', '`on-change` is deprecated, please use `on-update:value` instead.')
+        warn(
+          'cascader',
+          '`on-change` is deprecated, please use `on-update:value` instead.'
+        )
         return true
       },
       default: undefined
@@ -247,18 +234,12 @@ export default {
       nTriggerFormChange()
     },
     doBlur (...args) {
-      const {
-        onBlur,
-        nTriggerFormBlur
-      } = this
+      const { onBlur, nTriggerFormBlur } = this
       if (onBlur) call(onBlur, ...args)
       nTriggerFormBlur()
     },
     doFocus (...args) {
-      const {
-        onFocus,
-        nTriggerFormFocus
-      } = this
+      const { onFocus, nTriggerFormFocus } = this
       if (onFocus) call(onFocus, ...args)
       nTriggerFormFocus()
     },
@@ -302,12 +283,7 @@ export default {
     },
     // --- keyboard
     move (direction) {
-      const {
-        keyboardKey,
-        updateKeyboardKey,
-        updateHoverKey,
-        treeMate
-      } = this
+      const { keyboardKey, updateKeyboardKey, updateHoverKey, treeMate } = this
       switch (direction) {
         case 'prev':
           if (keyboardKey !== null) {
@@ -341,16 +317,11 @@ export default {
                   updateKeyboardKey(node.key)
                 }
               } else {
-                const {
-                  addLoadingKey,
-                  deleteLoadingKey,
-                  loadingKeySet
-                } = this
+                const { addLoadingKey, deleteLoadingKey, loadingKeySet } = this
                 if (!loadingKeySet.has(keyboardKey)) {
                   addLoadingKey(keyboardKey)
                   updateHoverKey(keyboardKey)
-                  this
-                    .onLoad(currentNode.rawNode)
+                  this.onLoad(currentNode.rawNode)
                     .then(() => {
                       deleteLoadingKey(keyboardKey)
                     })
@@ -382,11 +353,7 @@ export default {
       if (!this.mergedShow) {
         this.openMenu()
       } else {
-        const {
-          showSelectMenu,
-          selectMenuRef,
-          keyboardKey
-        } = this
+        const { showSelectMenu, selectMenuRef, keyboardKey } = this
         if (!showSelectMenu) {
           if (keyboardKey !== null) {
             if (
@@ -411,10 +378,7 @@ export default {
     },
     handleKeyUpUp (e) {
       e.preventDefault()
-      const {
-        mergedShow,
-        selectMenuRef
-      } = this
+      const { mergedShow, selectMenuRef } = this
       if (mergedShow) {
         if (this.showSelectMenu) {
           selectMenuRef.prev()
@@ -425,10 +389,7 @@ export default {
     },
     handleKeyUpDown (e) {
       e.preventDefault()
-      const {
-        mergedShow,
-        selectMenuRef
-      } = this
+      const { mergedShow, selectMenuRef } = this
       if (mergedShow) {
         if (this.showSelectMenu) {
           selectMenuRef.next()
@@ -439,20 +400,14 @@ export default {
     },
     handleKeyUpLeft (e) {
       e.preventDefault()
-      const {
-        mergedShow,
-        showSelectMenu
-      } = this
+      const { mergedShow, showSelectMenu } = this
       if (mergedShow && !showSelectMenu) {
         this.move('parent')
       }
     },
     handleKeyUpRight (e) {
       e.preventDefault()
-      const {
-        mergedShow,
-        showSelectMenu
-      } = this
+      const { mergedShow, showSelectMenu } = this
       if (mergedShow && !showSelectMenu) {
         this.move('child')
       }
@@ -507,7 +462,7 @@ export default {
     },
     handleDeleteOption (option) {
       if (this.multiple && Array.isArray(this.value)) {
-        const index = this.value.findIndex(value => value === option.value)
+        const index = this.value.findIndex((value) => value === option.value)
         if (~index) {
           const newValue = this.value
           newValue.splice(index, 1)

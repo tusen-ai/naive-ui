@@ -5,9 +5,7 @@ import { baseLight } from '../../_styles/base'
 export default create({
   theme: 'light',
   name: 'Dropdown',
-  peer: [
-    baseLight
-  ],
+  peer: [baseLight],
   getLocalVars (vars) {
     const {
       textColor2,

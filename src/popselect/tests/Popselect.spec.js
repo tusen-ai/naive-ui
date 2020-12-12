@@ -6,12 +6,8 @@ import { NPopselect } from '../index'
 
 describe('n-popselect', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      popselectLight
-    ]
+    locales: [enUS],
+    styles: [popselectLight]
   })
   it('should work with import on demand', () => {
     mount(NPopselect, {

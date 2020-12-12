@@ -4,14 +4,9 @@ import { baseLight } from '../../_styles/base'
 export default create({
   name: 'LoadingBar',
   theme: 'light',
-  peer: [
-    baseLight
-  ],
+  peer: [baseLight],
   getLocalVars (vars) {
-    const {
-      successColor,
-      errorColor
-    } = vars
+    const { successColor, errorColor } = vars
     return {
       colorError: errorColor,
       colorLoading: successColor,

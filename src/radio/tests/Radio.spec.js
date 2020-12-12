@@ -6,12 +6,8 @@ import { NRadio } from '../index'
 
 describe('n-radio', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      radioLight
-    ]
+    locales: [enUS],
+    styles: [radioLight]
   })
   it('should work with import on demand', () => {
     mount(NRadio, {

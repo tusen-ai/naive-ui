@@ -6,12 +6,8 @@ import { NConfigConsumer } from '../index'
 
 describe('n-config-consumer', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      configConsumerLight
-    ]
+    locales: [enUS],
+    styles: [configConsumerLight]
   })
   it('should work with import on demand', () => {
     mount(NConfigConsumer, {

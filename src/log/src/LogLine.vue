@@ -41,7 +41,11 @@ export default {
   methods: {
     setInnerHTML () {
       if (this.highlight) {
-        this.$el.innerHTML = this.generateCodeHTML(this.language, this.trimedLine, false).content
+        this.$el.innerHTML = this.generateCodeHTML(
+          this.language,
+          this.trimedLine,
+          false
+        ).content
       }
     },
     getHljs () {

@@ -6,17 +6,9 @@ import { scrollbarLight } from '../../scrollbar/styles'
 export default create({
   name: 'Log',
   theme: 'light',
-  peer: [
-    baseLight,
-    baseLoadingLight,
-    scrollbarLight
-  ],
+  peer: [baseLight, baseLoadingLight, scrollbarLight],
   getLocalVars (vars) {
-    const {
-      textColor2,
-      modalColor,
-      borderColor
-    } = vars
+    const { textColor2, modalColor, borderColor } = vars
     return {
       textColor: textColor2,
       loaderTextColor: textColor2,

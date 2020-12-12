@@ -6,12 +6,8 @@ import { NCascader } from '../index'
 
 describe('n-cascader', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      cascaderLight
-    ]
+    locales: [enUS],
+    styles: [cascaderLight]
   })
   it('should work with import on demand', () => {
     mount(NCascader, {

@@ -6,10 +6,7 @@ import { iconLight } from '../../icon/styles'
 export default create({
   name: 'Tabs',
   theme: 'light',
-  peer: [
-    baseLight,
-    iconLight
-  ],
+  peer: [baseLight, iconLight],
   getLocalVars (vars) {
     const {
       textColor2,

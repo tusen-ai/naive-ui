@@ -5,9 +5,7 @@ import { warn, getSlot } from '../../_utils'
 export default {
   name: 'ConfigProvider',
   alias: ['App'],
-  mixins: [
-    themeable
-  ],
+  mixins: [themeable],
   provide () {
     return {
       NConfigProvider: this
@@ -66,35 +64,42 @@ export default {
     },
     inheritedThemeEnvironments () {
       const { NConfigProvider, compitableThemeEnvironments } = this
-      return compitableThemeEnvironments || (NConfigProvider ? NConfigProvider.inheritedThemeEnvironments : null)
+      return (
+        compitableThemeEnvironments ||
+        (NConfigProvider ? NConfigProvider.inheritedThemeEnvironments : null)
+      )
     },
     inheritedNamespace () {
-      const {
-        namespace,
-        NConfigProvider
-      } = this
-      return namespace || (NConfigProvider ? NConfigProvider.inheritedNamespace : null)
+      const { namespace, NConfigProvider } = this
+      return (
+        namespace ||
+        (NConfigProvider ? NConfigProvider.inheritedNamespace : null)
+      )
     },
     inheritedLanguage () {
-      const {
-        NConfigProvider,
-        language,
-        lang
-      } = this
-      return (language || lang) || (NConfigProvider ? NConfigProvider.inheritedLanguage : null)
+      const { NConfigProvider, language, lang } = this
+      return (
+        language ||
+        lang ||
+        (NConfigProvider ? NConfigProvider.inheritedLanguage : null)
+      )
     }
   },
   render () {
-    return !this.abstract ? h(this.as || this.tag, {
-      class: [
-        'n-config-provider',
+    return !this.abstract
+      ? h(
+        this.as || this.tag,
         {
-          [`n-${this.theme}-theme`]: this.theme
-        }
-      ],
-      style: this.mergedStyle
-    },
-    getSlot(this))
+          class: [
+            'n-config-provider',
+            {
+              [`n-${this.theme}-theme`]: this.theme
+            }
+          ],
+          style: this.mergedStyle
+        },
+        getSlot(this)
+      )
       : getSlot(this)
   }
 }

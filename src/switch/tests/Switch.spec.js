@@ -6,12 +6,8 @@ import { NSwitch } from '../index'
 
 describe('n-switch', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      switchLight
-    ]
+    locales: [enUS],
+    styles: [switchLight]
   })
   it('should work with import on demand', () => {
     mount(NSwitch, {

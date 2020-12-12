@@ -5,9 +5,7 @@
       'n-notification-container--scrollable': scrollable
     }"
   >
-    <n-scrollbar
-      v-if="scrollable"
-    >
+    <n-scrollbar v-if="scrollable">
       <slot />
     </n-scrollbar>
     <slot v-else />

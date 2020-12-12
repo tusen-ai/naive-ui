@@ -27,11 +27,7 @@
 </template>
 
 <script>
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import { CloseIcon } from '../../_base/icons'
 import { NIcon } from '../../icon'
 import { warn } from '../../_utils'
@@ -44,11 +40,7 @@ export default {
     CloseIcon,
     NIcon
   },
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     ...commonProps,
     checked: {
@@ -76,7 +68,12 @@ export default {
     // deprecated
     onCheckedChange: {
       validator () {
-        if (__DEV__) warn('tag', '`on-checked-change` is deprecated, please use `on-update:checked` instead')
+        if (__DEV__) {
+          warn(
+            'tag',
+            '`on-checked-change` is deprecated, please use `on-update:checked` instead'
+          )
+        }
         return true
       },
       default: undefined

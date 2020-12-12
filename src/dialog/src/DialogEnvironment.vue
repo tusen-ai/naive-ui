@@ -83,40 +83,25 @@ export default {
       this.onInternalAfterLeave(this._.vnode.key)
     },
     handlePositiveClick (e) {
-      const {
-        onPositiveClick = () => true
-      } = this
-      Promise.resolve(
-        onPositiveClick(e)
-      )
-        .then(result => {
-          if (result === false) return
-          this.hide()
-        })
+      const { onPositiveClick = () => true } = this
+      Promise.resolve(onPositiveClick(e)).then((result) => {
+        if (result === false) return
+        this.hide()
+      })
     },
     handleNegativeClick (e) {
-      const {
-        onNegativeClick = () => true
-      } = this
-      Promise.resolve(
-        onNegativeClick(e)
-      )
-        .then(result => {
-          if (result === false) return
-          this.hide()
-        })
+      const { onNegativeClick = () => true } = this
+      Promise.resolve(onNegativeClick(e)).then((result) => {
+        if (result === false) return
+        this.hide()
+      })
     },
     handleCloseClick () {
-      const {
-        onClose = () => true
-      } = this
-      Promise.resolve(
-        onClose()
-      )
-        .then(result => {
-          if (result === false) return
-          this.hide()
-        })
+      const { onClose = () => true } = this
+      Promise.resolve(onClose()).then((result) => {
+        if (result === false) return
+        this.hide()
+      })
     },
     hide () {
       this.show = false

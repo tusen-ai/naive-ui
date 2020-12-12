@@ -48,7 +48,7 @@ function pagesToShow (currentPage, pageCount, pageSlot = 9) {
 }
 
 function mapPagesToPageItems (pages, currentPage) {
-  return pages.map(page => {
+  return pages.map((page) => {
     switch (page) {
       case -2:
         return {

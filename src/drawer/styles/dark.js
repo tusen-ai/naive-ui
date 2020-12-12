@@ -4,9 +4,7 @@ import { baseDark } from '../../_styles/base'
 export default create({
   theme: 'dark',
   name: 'Drawer',
-  peer: [
-    baseDark
-  ],
+  peer: [baseDark],
   getLocalVars (vars) {
     return {
       color: vars.modalColor,

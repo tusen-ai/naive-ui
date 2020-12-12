@@ -6,10 +6,7 @@ import { iconDark } from '../../icon/styles'
 export default create({
   name: 'Result',
   theme: 'dark',
-  peer: [
-    baseDark,
-    iconDark
-  ],
+  peer: [baseDark, iconDark],
   getLocalVars (vars) {
     const {
       textColor1Overlay,

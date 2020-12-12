@@ -7,10 +7,7 @@ import { iconDark } from '../../icon/styles'
 export default create({
   name: 'Message',
   theme: 'dark',
-  peer: [
-    baseDark,
-    iconDark
-  ],
+  peer: [baseDark, iconDark],
   getLocalVars (vars) {
     const {
       textColorBase,
@@ -34,10 +31,18 @@ export default create({
       colorError: errorColorSuppl,
       colorWarning: warningColorSuppl,
       colorLoading: popoverColor,
-      boxShadowInfo: `0 2px 12px 0 ${changeColor(infoColorSuppl, { alpha: '0.4' })}`,
-      boxShadowSuccess: `0 2px 12px 0 ${changeColor(successColorSuppl, { alpha: '0.4' })}`,
-      boxShadowError: `0 2px 12px 0 ${changeColor(errorColorSuppl, { alpha: '0.4' })}`,
-      boxShadowWarning: `0 2px 12px 0 ${changeColor(warningColorSuppl, { alpha: '0.4' })}`,
+      boxShadowInfo: `0 2px 12px 0 ${changeColor(infoColorSuppl, {
+        alpha: '0.4'
+      })}`,
+      boxShadowSuccess: `0 2px 12px 0 ${changeColor(successColorSuppl, {
+        alpha: '0.4'
+      })}`,
+      boxShadowError: `0 2px 12px 0 ${changeColor(errorColorSuppl, {
+        alpha: '0.4'
+      })}`,
+      boxShadowWarning: `0 2px 12px 0 ${changeColor(warningColorSuppl, {
+        alpha: '0.4'
+      })}`,
       boxShadowLoading: boxShadow2,
       iconColorInfo: 'rgba(255, 255, 255, .5)',
       iconColorSuccess: 'rgba(255, 255, 255, .5)',

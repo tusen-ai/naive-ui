@@ -17,49 +17,30 @@
           <close-icon />
         </n-icon>
       </div>
-      <div
-        v-if="showIcon"
-        class="n-alert__icon"
-      >
+      <div v-if="showIcon" class="n-alert__icon">
         <n-icon v-if="$slots.icon">
-          <slot
-            name="icon"
-          />
+          <slot name="icon" />
         </n-icon>
-        <n-icon
-          v-else-if="type==='success'"
-        >
+        <n-icon v-else-if="type === 'success'">
           <success-icon />
         </n-icon>
-        <n-icon
-          v-else-if="type==='info'"
-        >
+        <n-icon v-else-if="type === 'info'">
           <info-icon />
         </n-icon>
-        <n-icon
-          v-else-if="type==='warning'"
-        >
+        <n-icon v-else-if="type === 'warning'">
           <warning-icon />
         </n-icon>
-        <n-icon
-          v-else-if="type==='error'"
-        >
+        <n-icon v-else-if="type === 'error'">
           <error-icon />
         </n-icon>
       </div>
       <div class="n-alert-body">
-        <div
-          v-if="title !== undefined"
-          class="n-alert-body__title"
-        >
+        <div v-if="title !== undefined" class="n-alert-body__title">
           <slot name="header">
             {{ title }}
           </slot>
         </div>
-        <div
-          v-if="$slots.default"
-          class="n-alert-body__content"
-        >
+        <div v-if="$slots.default" class="n-alert-body__content">
           <slot />
         </div>
       </div>
@@ -70,11 +51,7 @@
 <script>
 import { NIcon } from '../../icon'
 import { NFadeInExpandTransition } from '../../_base'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import { warn } from '../../_utils'
 import styles from './styles'
 
@@ -98,11 +75,7 @@ export default {
     ErrorIcon,
     CloseIcon
   },
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     title: {
       type: String,
@@ -132,7 +105,12 @@ export default {
     },
     onAfterHide: {
       validator () {
-        if (__DEV__) warn('alert', '`on-after-hide` is deprecated, please use `on-after-leave` instead.')
+        if (__DEV__) {
+          warn(
+            'alert',
+            '`on-after-hide` is deprecated, please use `on-after-leave` instead.'
+          )
+        }
         return true
       },
       default: undefined
@@ -153,12 +131,10 @@ export default {
       if (onAfterHide) onAfterHide()
     },
     handleCloseClick () {
-      Promise
-        .resolve(this.onClose())
-        .then(result => {
-          if (result === false) return
-          this.visible = false
-        })
+      Promise.resolve(this.onClose()).then((result) => {
+        if (result === false) return
+        this.visible = false
+      })
     },
     handleAfterLeave () {
       this.doAfterLeave()

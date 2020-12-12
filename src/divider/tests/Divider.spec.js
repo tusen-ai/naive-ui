@@ -6,12 +6,8 @@ import { NDivider } from '../index'
 
 describe('n-divider', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      dividerLight
-    ]
+    locales: [enUS],
+    styles: [dividerLight]
   })
   it('should work with import on demand', () => {
     mount(NDivider, {

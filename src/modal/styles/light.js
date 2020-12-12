@@ -7,18 +7,9 @@ import { cardLight } from '../../card/styles'
 export default create({
   name: 'Modal',
   theme: 'light',
-  peer: [
-    baseLight,
-    scrollbarLight,
-    dialogLight,
-    cardLight
-  ],
+  peer: [baseLight, scrollbarLight, dialogLight, cardLight],
   getLocalVars (vars) {
-    const {
-      modalColor,
-      textColor2,
-      boxShadow3
-    } = vars
+    const { modalColor, textColor2, boxShadow3 } = vars
     return {
       color: modalColor,
       textColor: textColor2,

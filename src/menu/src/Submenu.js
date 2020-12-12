@@ -9,9 +9,7 @@ import { useInjectionRef } from '../../_utils/composable'
 
 export default {
   name: 'Submenu',
-  mixins: [
-    menuChildMixin
-  ],
+  mixins: [menuChildMixin],
   provide () {
     return {
       NSubmenu: this,
@@ -52,11 +50,7 @@ export default {
   },
   computed: {
     mergedDisabled () {
-      const {
-        NMenu,
-        NSubmenu,
-        disabled
-      } = this
+      const { NMenu, NSubmenu, disabled } = this
       if (NSubmenu && NSubmenu.mergedDisabled) return true
       if (NMenu.disabled) return true
       return disabled
@@ -75,9 +69,7 @@ export default {
   },
   methods: {
     doClick () {
-      const {
-        onClick
-      } = this
+      const { onClick } = this
       if (onClick) onClick()
     },
     handleClick () {
@@ -128,51 +120,66 @@ export default {
     const createSubmenuChildren = (insidePopover = false) => {
       return h(NFadeInExpandTransition, null, {
         default: () => {
-          const {
-            tmNodes,
-            collapsed
-          } = this
+          const { tmNodes, collapsed } = this
           return withDirectives(
-            h('div', {
-              class: 'n-submenu-children'
-            }, tmNodes.map(item => itemRenderer(item, insidePopover))),
-            [
-              [vShow, insidePopover || !collapsed]
-            ]
+            h(
+              'div',
+              {
+                class: 'n-submenu-children'
+              },
+              tmNodes.map((item) => itemRenderer(item, insidePopover))
+            ),
+            [[vShow, insidePopover || !collapsed]]
           )
         }
       })
     }
-    return this.root ? h(NPopover, {
-      trigger: 'hover',
-      disabled: !this.popoverEnabled,
-      bodyStyle: this.popoverBodyStyle,
-      placement: this.popoverPlacement,
-      showArrow: false,
-      'onUpdate:show': this.handlePopoverShowChange
-    }, {
-      trigger: () => h('div', {
-        class: 'n-submenu'
-      }, [
-        createSubmenuItem(),
-        !this.horizontal ? createSubmenuChildren() : null
-      ]),
-      default: () => {
-        const theme = this.NMenu.mergedTheme
-        return h('div', {
-          class: [
-            'n-menu',
-            {
-              [`n-${theme}-theme`]: theme
-            }
-          ]
-        }, createSubmenuChildren(true))
-      }
-    }) : h('div', {
-      class: 'n-submenu'
-    }, [
-      createSubmenuItem(),
-      createSubmenuChildren()
-    ])
+    return this.root
+      ? h(
+        NPopover,
+        {
+          trigger: 'hover',
+          disabled: !this.popoverEnabled,
+          bodyStyle: this.popoverBodyStyle,
+          placement: this.popoverPlacement,
+          showArrow: false,
+          'onUpdate:show': this.handlePopoverShowChange
+        },
+        {
+          trigger: () =>
+            h(
+              'div',
+              {
+                class: 'n-submenu'
+              },
+              [
+                createSubmenuItem(),
+                !this.horizontal ? createSubmenuChildren() : null
+              ]
+            ),
+          default: () => {
+            const theme = this.NMenu.mergedTheme
+            return h(
+              'div',
+              {
+                class: [
+                  'n-menu',
+                  {
+                    [`n-${theme}-theme`]: theme
+                  }
+                ]
+              },
+              createSubmenuChildren(true)
+            )
+          }
+        }
+      )
+      : h(
+        'div',
+        {
+          class: 'n-submenu'
+        },
+        [createSubmenuItem(), createSubmenuChildren()]
+      )
   }
 }

@@ -6,12 +6,8 @@ import { NMessage } from '../index'
 
 describe('n-message', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      messageLight
-    ]
+    locales: [enUS],
+    styles: [messageLight]
   })
   it('should work with import on demand', () => {
     mount(NMessage, {

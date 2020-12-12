@@ -42,45 +42,50 @@ export default {
       this.messageList.push(messageReactive)
       return messageReactive
     },
-    ...[
-      'info',
-      'success',
-      'warning',
-      'error',
-      'loading'
-    ].reduce((api, type) => {
-      api[type] = function (content, options) {
-        return this.create(content, { ...options, type })
-      }
-      return api
-    }, {}),
+    ...['info', 'success', 'warning', 'error', 'loading'].reduce(
+      (api, type) => {
+        api[type] = function (content, options) {
+          return this.create(content, { ...options, type })
+        }
+        return api
+      },
+      {}
+    ),
     handleAfterLeave (key) {
       const { messageList } = this
       messageList.splice(
-        messageList.findIndex(message => message.key === key),
+        messageList.findIndex((message) => message.key === key),
         1
       )
     }
   },
   render () {
-    return h(Fragment, null,
-      [
-        this.messageList.length ? h(Teleport, {
-          to: this.to ?? 'body'
-        }, [
-          h('div', {
-            class: 'n-message-container',
-            key: 'n-message-container'
-          }, this.messageList.map(
-            message => h(MessageEnvironment, {
-              ref: `n-message-${message.key}`,
-              ...omit(message, ['destroy']),
-              onInternalAfterLeave: this.handleAfterLeave
-            })
-          ))
-        ]) : null,
-        this.$slots.default()
-      ]
-    )
+    return h(Fragment, null, [
+      this.messageList.length
+        ? h(
+          Teleport,
+          {
+            to: this.to ?? 'body'
+          },
+          [
+            h(
+              'div',
+              {
+                class: 'n-message-container',
+                key: 'n-message-container'
+              },
+              this.messageList.map((message) =>
+                h(MessageEnvironment, {
+                  ref: `n-message-${message.key}`,
+                  ...omit(message, ['destroy']),
+                  onInternalAfterLeave: this.handleAfterLeave
+                })
+              )
+            )
+          ]
+        )
+        : null,
+      this.$slots.default()
+    ])
   }
 }

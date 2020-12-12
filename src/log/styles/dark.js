@@ -6,16 +6,9 @@ import { scrollbarDark } from '../../scrollbar/styles'
 export default create({
   name: 'Log',
   theme: 'dark',
-  peer: [
-    baseDark,
-    baseLoadingDark,
-    scrollbarDark
-  ],
+  peer: [baseDark, baseLoadingDark, scrollbarDark],
   getLocalVars (vars) {
-    const {
-      textColor2Overlay,
-      inputColorOverlay
-    } = vars
+    const { textColor2Overlay, inputColorOverlay } = vars
     return {
       textColor: textColor2Overlay,
       loaderTextColor: textColor2Overlay,

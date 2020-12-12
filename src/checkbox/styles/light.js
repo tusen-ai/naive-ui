@@ -6,9 +6,7 @@ import { changeColor } from 'seemly'
 export default create({
   theme: 'light',
   name: 'Checkbox',
-  peer: [
-    baseLight
-  ],
+  peer: [baseLight],
   getLocalVars (vars) {
     const {
       baseColor,

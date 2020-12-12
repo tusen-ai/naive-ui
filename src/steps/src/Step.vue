@@ -6,9 +6,7 @@
     }"
   >
     <div class="n-step-indicator">
-      <div
-        class="n-step-indicator-slot"
-      >
+      <div class="n-step-indicator-slot">
         <n-icon-switch-transition>
           <div
             v-if="!(mergedStatus === 'finish' || mergedStatus === 'error')"
@@ -17,16 +15,10 @@
           >
             {{ index }}
           </div>
-          <n-icon
-            v-else-if="mergedStatus === 'finish'"
-            key="finish"
-          >
+          <n-icon v-else-if="mergedStatus === 'finish'" key="finish">
             <finished-icon />
           </n-icon>
-          <n-icon
-            v-else-if="mergedStatus === 'error'"
-            key="error"
-          >
+          <n-icon v-else-if="mergedStatus === 'error'" key="error">
             <error-icon />
           </n-icon>
         </n-icon-switch-transition>
@@ -67,9 +59,7 @@ export default {
     ErrorIcon,
     NIconSwitchTransition
   },
-  mixins: [
-    themeable
-  ],
+  mixins: [themeable],
   inject: {
     NSteps: {
       default: null

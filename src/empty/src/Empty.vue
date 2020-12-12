@@ -26,15 +26,8 @@
 </template>
 
 <script>
-import {
-  configurable,
-  themeable,
-  locale,
-  withCssr
-} from '../../_mixins'
-import {
-  EmptyIcon
-} from '../../_base/icons'
+import { configurable, themeable, locale, withCssr } from '../../_mixins'
+import { EmptyIcon } from '../../_base/icons'
 import { NIcon } from '../../icon'
 import styles from './styles/index'
 
@@ -44,12 +37,7 @@ export default {
     EmptyIcon,
     NIcon
   },
-  mixins: [
-    configurable,
-    themeable,
-    locale('Empty'),
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, locale('Empty'), withCssr(styles)],
   props: {
     description: {
       type: String,

@@ -36,11 +36,7 @@
       />
       <div class="n-dynamic-input-item__action">
         <n-button-group>
-          <n-button
-            v-if="!removeDisabled"
-            circle
-            @click="remove(index)"
-          >
+          <n-button v-if="!removeDisabled" circle @click="remove(index)">
             {{ index }}
             <template #icon>
               <remove-icon />
@@ -66,10 +62,7 @@
 import { ref, toRef, isProxy, toRaw } from 'vue'
 import { NButton } from '../../button'
 import { NButtonGroup } from '../../button-group'
-import {
-  RemoveIcon,
-  AddIcon
-} from '../../_base/icons'
+import { RemoveIcon, AddIcon } from '../../_base/icons'
 import NDynamicInputInputPreset from './InputPreset.vue'
 import NDynamicInputPairPreset from './PairPreset.vue'
 import {
@@ -169,14 +162,22 @@ export default {
     // deprecated
     onClear: {
       validator () {
-        warn('dynamic-input', '`on-clear` is deprecated, it is out of usage anymore.')
+        warn(
+          'dynamic-input',
+          '`on-clear` is deprecated, it is out of usage anymore.'
+        )
         return true
       },
       default: undefined
     },
     onInput: {
       validator () {
-        if (__DEV__) warn('dynamic-input', '`on-input` is deprecated, please use `on-update:value` instead.')
+        if (__DEV__) {
+          warn(
+            'dynamic-input',
+            '`on-input` is deprecated, please use `on-update:value` instead.'
+          )
+        }
         return true
       },
       default: undefined
@@ -208,10 +209,7 @@ export default {
   },
   methods: {
     doUpdateValue (value) {
-      const {
-        onInput,
-        'onUpdate:value': onUpdateValue
-      } = this
+      const { onInput, 'onUpdate:value': onUpdateValue } = this
       if (onInput) call(onInput, value)
       if (onUpdateValue) call(onUpdateValue, value)
       this.uncontrolledValue = value
@@ -219,31 +217,30 @@ export default {
     ensureKey (value, index) {
       if (value === undefined || value === null) return index
       if (typeof value !== 'object') return index
-      const {
-        dataKeyMap
-      } = this
+      const { dataKeyMap } = this
       const rawValue = isProxy(value) ? toRaw(value) : value
       let key = dataKeyMap.get(rawValue)
       if (key === undefined) {
-        dataKeyMap.set(rawValue, key = createId())
+        dataKeyMap.set(rawValue, (key = createId()))
       }
       return key
     },
     handleValueChange (index, value) {
-      const {
-        mergedValue
-      } = this
+      const { mergedValue } = this
       const newValue = Array.from(mergedValue ?? [])
       const originalItem = newValue[index]
       newValue[index] = value
-      const {
-        dataKeyMap
-      } = this
+      const { dataKeyMap } = this
       // update dataKeyMap
       if (
-        originalItem && value && typeof originalItem === 'object' && typeof value === 'object'
+        originalItem &&
+        value &&
+        typeof originalItem === 'object' &&
+        typeof value === 'object'
       ) {
-        const rawOriginal = isProxy(originalItem) ? toRaw(originalItem) : originalItem
+        const rawOriginal = isProxy(originalItem)
+          ? toRaw(originalItem)
+          : originalItem
         const rawNew = isProxy(value) ? toRaw(value) : value
         // inherit key is value position is not change
         const originalKey = dataKeyMap.get(rawOriginal)

@@ -6,12 +6,8 @@ import { NModal } from '../index'
 
 describe('n-modal', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      modalLight
-    ]
+    locales: [enUS],
+    styles: [modalLight]
   })
   it('should work with import on demand', () => {
     mount(NModal, {

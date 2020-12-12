@@ -23,16 +23,13 @@
             class="n-time-picker-col__item"
             :class="{
               'n-time-picker-col__item--active': Number(hour) === hourValue,
-              'n-time-picker-col__item--disabled':
-                isHourDisabled(hour)
+              'n-time-picker-col__item--disabled': isHourDisabled(hour)
             }"
             @click="onHourClick(hour)"
           >
             {{ hour }}
           </div>
-          <div
-            class="n-time-picker-col__padding"
-          />
+          <div class="n-time-picker-col__padding" />
         </n-scrollbar>
       </div>
       <div
@@ -51,15 +48,16 @@
             class="n-time-picker-col__item"
             :class="{
               'n-time-picker-col__item--active': Number(minute) === minuteValue,
-              'n-time-picker-col__item--disabled': isMinuteDisabled(minute, hourValue)
+              'n-time-picker-col__item--disabled': isMinuteDisabled(
+                minute,
+                hourValue
+              )
             }"
             @click="onMinuteClick(minute)"
           >
             {{ minute }}
           </div>
-          <div
-            class="n-time-picker-col__padding"
-          />
+          <div class="n-time-picker-col__padding" />
         </n-scrollbar>
       </div>
       <div
@@ -67,7 +65,7 @@
         class="n-time-picker-col"
         :class="{
           'n-time-picker-col--invalid': isSecondInvalid,
-          'n-time-picker-col--transition-disabled': transitionDisabled,
+          'n-time-picker-col--transition-disabled': transitionDisabled
         }"
       >
         <n-scrollbar ref="secondsRef" :theme="theme">
@@ -77,26 +75,23 @@
             :active="Number(second) === secondValue ? '' : null"
             class="n-time-picker-col__item"
             :class="{
-              'n-time-picker-col__item--active':
-                Number(second) === secondValue,
-              'n-time-picker-col__item--disabled': isSecondDisabled(second, minuteValue, hourValue)
+              'n-time-picker-col__item--active': Number(second) === secondValue,
+              'n-time-picker-col__item--disabled': isSecondDisabled(
+                second,
+                minuteValue,
+                hourValue
+              )
             }"
             @click="onSecondClick(second)"
           >
             {{ second }}
           </div>
-          <div
-            class="n-time-picker-col__padding"
-          />
+          <div class="n-time-picker-col__padding" />
         </n-scrollbar>
       </div>
     </div>
     <div class="n-time-picker-actions">
-      <n-button
-        size="tiny"
-        :theme="theme"
-        @click="onNowClick"
-      >
+      <n-button size="tiny" :theme="theme" @click="onNowClick">
         {{ nowText }}
       </n-button>
       <n-button
@@ -110,9 +105,7 @@
         {{ confirmText }}
       </n-button>
     </div>
-    <n-base-focus-detector
-      @focus="onFocusDetectorFocus"
-    />
+    <n-base-focus-detector @focus="onFocusDetectorFocus" />
   </div>
 </template>
 
@@ -122,9 +115,156 @@ import { NScrollbar } from '../../scrollbar'
 import { NBaseFocusDetector } from '../../_base'
 
 const time = {
-  hours: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'],
-  minutes: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59'],
-  seconds: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59'],
+  hours: [
+    '00',
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
+    '10',
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20',
+    '21',
+    '22',
+    '23'
+  ],
+  minutes: [
+    '00',
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
+    '10',
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20',
+    '21',
+    '22',
+    '23',
+    '24',
+    '25',
+    '26',
+    '27',
+    '28',
+    '29',
+    '30',
+    '31',
+    '32',
+    '33',
+    '34',
+    '35',
+    '36',
+    '37',
+    '38',
+    '39',
+    '40',
+    '41',
+    '42',
+    '43',
+    '44',
+    '45',
+    '46',
+    '47',
+    '48',
+    '49',
+    '50',
+    '51',
+    '52',
+    '53',
+    '54',
+    '55',
+    '56',
+    '57',
+    '58',
+    '59'
+  ],
+  seconds: [
+    '00',
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
+    '10',
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20',
+    '21',
+    '22',
+    '23',
+    '24',
+    '25',
+    '26',
+    '27',
+    '28',
+    '29',
+    '30',
+    '31',
+    '32',
+    '33',
+    '34',
+    '35',
+    '36',
+    '37',
+    '38',
+    '39',
+    '40',
+    '41',
+    '42',
+    '43',
+    '44',
+    '45',
+    '46',
+    '47',
+    '48',
+    '49',
+    '50',
+    '51',
+    '52',
+    '53',
+    '54',
+    '55',
+    '56',
+    '57',
+    '58',
+    '59'
+  ],
   period: ['AM', 'PM']
 }
 

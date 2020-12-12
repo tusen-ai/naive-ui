@@ -4,17 +4,12 @@ import themedSizeStyle from './themed-size.cssr.js'
 export default [
   {
     key: 'mergedTheme',
-    watch: [
-      'mergedTheme'
-    ],
+    watch: ['mergedTheme'],
     CNode: themedBaseStyle
   },
   {
     key: 'mergedSize',
-    watch: [
-      'mergedSize',
-      'mergedTheme'
-    ],
+    watch: ['mergedSize', 'mergedTheme'],
     CNode: themedSizeStyle
   }
 ]

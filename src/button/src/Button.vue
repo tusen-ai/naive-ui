@@ -15,7 +15,7 @@
       'n-button--custom-color': color,
       [`n-button--${type}-type`]: true,
       [`n-button--${mergedSize}-size`]: true,
-      [`n-${mergedTheme}-theme`]: mergedTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme
     }"
     :tabindex="mergedFocusable ? 0 : -1"
     :type="attrType"
@@ -34,10 +34,7 @@
       <slot />
     </div>
     <n-fade-in-expand-transition width>
-      <div
-        v-if="(hasIcon || loading)"
-        class="n-button__icon"
-      >
+      <div v-if="hasIcon || loading" class="n-button__icon">
         <n-icon-switch-transition>
           <n-base-loading
             v-if="loading"
@@ -46,15 +43,8 @@
             :theme="mergedTheme"
             :stroke-width="24"
           />
-          <n-icon
-            v-else
-            key="icon"
-            color-transition
-            class="n-icon-slot"
-          >
-            <slot
-              name="icon"
-            />
+          <n-icon v-else key="icon" color-transition class="n-icon-slot">
+            <slot name="icon" />
           </n-icon>
         </n-icon-switch-transition>
       </div>
@@ -71,11 +61,7 @@
 </template>
 
 <script>
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import {
   NFadeInExpandTransition,
   NIconSwitchTransition,
@@ -84,7 +70,10 @@ import {
 } from '../../_base'
 import { NIcon } from '../../icon'
 import styles from './styles/index.js'
-import { createHoverColor, createPressedColor } from '../../_utils/color/index.js'
+import {
+  createHoverColor,
+  createPressedColor
+} from '../../_utils/color/index.js'
 
 export default {
   name: 'Button',
@@ -95,11 +84,7 @@ export default {
     NIconSwitchTransition,
     NFadeInExpandTransition
   },
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   inject: {
     NButtonGroup: {
       default: null
@@ -193,17 +178,17 @@ export default {
   },
   computed: {
     colorCssVars () {
-      const {
-        color
-      } = this
-      return color ? {
-        '--color': color,
-        '--color-hover': createHoverColor(color),
-        '--color-pressed': createPressedColor(color),
-        '--color-focus': createHoverColor(color),
-        '--color-disabled': color,
-        '--ripple-color': color
-      } : null
+      const { color } = this
+      return color
+        ? {
+          '--color': color,
+          '--color-hover': createHoverColor(color),
+          '--color-pressed': createPressedColor(color),
+          '--color-focus': createHoverColor(color),
+          '--color-disabled': color,
+          '--ripple-color': color
+        }
+        : null
     },
     mergedSize () {
       const { size } = this
@@ -213,10 +198,7 @@ export default {
         return NButtonGroup.size
       }
       const { NFormItem } = this
-      if (
-        NFormItem &&
-        NFormItem.mergedSize
-      ) {
+      if (NFormItem && NFormItem.mergedSize) {
         return NFormItem.mergedSize
       }
       return 'medium'

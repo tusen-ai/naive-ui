@@ -30,21 +30,13 @@
 </template>
 
 <script>
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import styles from './styles'
 import { validSize } from './config'
 
 export default {
   name: 'Avatar',
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     size: {
       validator (value) {
@@ -77,7 +69,7 @@ export default {
   },
   computed: {
     styleTransfrom () {
-      if (this.ratio !== 1) return `translateX(-50%) translateY(-50%) scale(${this.ratio})`
+      if (this.ratio !== 1) { return `translateX(-50%) translateY(-50%) scale(${this.ratio})` }
       return 'translateX(-50%) translateY(-50%)'
     },
     styleWidth () {
@@ -109,15 +101,21 @@ export default {
       const textEl = this.$refs.text
       if (textEl) {
         const memorizedTextHTML = this.memorizedTextHTML
-        if (memorizedTextHTML === null || memorizedTextHTML !== textEl.innerHTML) {
+        if (
+          memorizedTextHTML === null ||
+          memorizedTextHTML !== textEl.innerHTML
+        ) {
           this.memorizedTextHTML = textEl.innerHTML
           const selfEl = this.$el
           const elWidth = selfEl.offsetWidth
           const textWidth = textEl.offsetWidth
           const elHeight = selfEl.offsetHeight
           const textHeight = textEl.offsetHeight
-          const radix = (this.circle || this.round) ? 0.75 : 0.85
-          const ratio = Math.min(elWidth / textWidth * radix, elHeight / textHeight * radix)
+          const radix = this.circle || this.round ? 0.75 : 0.85
+          const ratio = Math.min(
+            (elWidth / textWidth) * radix,
+            (elHeight / textHeight) * radix
+          )
           this.ratio = Math.min(1, ratio)
         }
       }

@@ -6,10 +6,7 @@ import commonVariables from './_common'
 export default create({
   theme: 'light',
   name: 'Button',
-  peer: [
-    baseLight,
-    baseWaveLight
-  ],
+  peer: [baseLight, baseWaveLight],
   getLocalVars (vars) {
     return {
       ...commonVariables(vars),

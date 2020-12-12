@@ -43,10 +43,7 @@
         :container-class="namespace"
         placement="bottom-start"
       >
-        <transition
-          name="n-fade-in-scale-up-transition"
-          :appear="isMounted"
-        >
+        <transition name="n-fade-in-scale-up-transition" :appear="isMounted">
           <panel
             v-if="active"
             ref="panelRef"
@@ -86,15 +83,17 @@
 <script>
 import { ref } from 'vue'
 import { useIsMounted, useKeyboard } from 'vooks'
-import {
-  VBinder,
-  VTarget,
-  VFollower
-} from 'vueuc'
+import { VBinder, VTarget, VFollower } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { NInput } from '../../input'
 import { NIcon } from '../../icon'
-import { configurable, themeable, locale, withCssr, asFormItem } from '../../_mixins'
+import {
+  configurable,
+  themeable,
+  locale,
+  withCssr,
+  asFormItem
+} from '../../_mixins'
 import {
   isValid,
   startOfSecond,
@@ -111,9 +110,7 @@ import {
   getSeconds
 } from 'date-fns'
 import { strictParse } from '../../date-picker/src/utils'
-import {
-  TimeIcon
-} from '../../_base/icons'
+import { TimeIcon } from '../../_base/icons'
 import styles from './styles'
 import { warn, call, useAdjustedTo } from '../../_utils'
 import Panel from './Panel.vue'
@@ -222,7 +219,12 @@ export default {
     // deprecated
     onChange: {
       validator () {
-        if (__DEV__) warn('time-picker', '`on-change` is deprecated, please use `on-update:value` instead.')
+        if (__DEV__) {
+          warn(
+            'time-picker',
+            '`on-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
         return true
       },
       default: undefined
@@ -248,7 +250,10 @@ export default {
   data () {
     return {
       active: false,
-      displayTimeString: this.value === null ? null : format(this.value, this.format, this.dateFnsOptions),
+      displayTimeString:
+        this.value === null
+          ? null
+          : format(this.value, this.format, this.dateFnsOptions),
       memorizedValue: this.value,
       transitionDisabled: false
     }
@@ -291,7 +296,11 @@ export default {
     },
     isSecondInvalid () {
       if (this.value === null) return false
-      return this.isSecondDisabled(this.secondValue, this.minuteValue, this.hourValue)
+      return this.isSecondDisabled(
+        this.secondValue,
+        this.minuteValue,
+        this.hourValue
+      )
     },
     isValueInvalid () {
       return this.isHourInvalid || this.isMinuteInvalid || this.isSecondInvalid
@@ -304,16 +313,13 @@ export default {
       else return new Date(this.value)
     },
     hourValue () {
-      if (this.valueAsDate) return Number(format(this.valueAsDate, 'HH', this.dateFnsOptions))
-      else return null
+      if (this.valueAsDate) { return Number(format(this.valueAsDate, 'HH', this.dateFnsOptions)) } else return null
     },
     minuteValue () {
-      if (this.valueAsDate) return Number(format(this.valueAsDate, 'mm', this.dateFnsOptions))
-      else return null
+      if (this.valueAsDate) { return Number(format(this.valueAsDate, 'mm', this.dateFnsOptions)) } else return null
     },
     secondValue () {
-      if (this.valueAsDate) return Number(format(this.valueAsDate, 'ss', this.dateFnsOptions))
-      else return null
+      if (this.valueAsDate) { return Number(format(this.valueAsDate, 'ss', this.dateFnsOptions)) } else return null
     }
   },
   watch: {
@@ -342,18 +348,12 @@ export default {
       nTriggerFormInput()
     },
     doFocus () {
-      const {
-        onFocus,
-        nTriggerFormFocus
-      } = this
+      const { onFocus, nTriggerFormFocus } = this
       if (onFocus) call(onFocus)
       nTriggerFormFocus()
     },
     doBlur () {
-      const {
-        onBlur,
-        nTriggerFormBlur
-      } = this
+      const { onBlur, nTriggerFormBlur } = this
       if (onBlur) call(onBlur)
       nTriggerFormBlur()
     },
@@ -377,10 +377,7 @@ export default {
           })
           break
         case 'Tab':
-          if (
-            this.keyboardState.shift &&
-            e.target === this.panelRef.$el
-          ) {
+          if (this.keyboardState.shift && e.target === this.panelRef.$el) {
             e.preventDefault()
             this.closePanel({
               returnFocus: true,
@@ -397,7 +394,12 @@ export default {
       })
     },
     justifyValueAfterInput () {
-      const time = strictParse(this.displayTimeString, this.format, new Date(), this.dateFnsOptions)
+      const time = strictParse(
+        this.displayTimeString,
+        this.format,
+        new Date(),
+        this.dateFnsOptions
+      )
       if (isValid(time)) {
         if (this.valueAsDate !== null) {
           const newTime = set(this.valueAsDate, {
@@ -446,7 +448,7 @@ export default {
     refreshTimeString (time) {
       if (time === undefined) time = this.valueAsDate
       if (time === null) this.displayTimeString = ''
-      else this.displayTimeString = format(time, this.format, this.dateFnsOptions)
+      else { this.displayTimeString = format(time, this.format, this.dateFnsOptions) }
     },
     handleTimeInputWrapperBlur () {
       if (!this.active) {
@@ -459,10 +461,7 @@ export default {
     handleTimeInputBlur (e) {
       if (this.active) {
         const panel = this.panelRef.$el
-        if (!(
-          panel &&
-          panel.contains(e.relatedTarget)
-        )) {
+        if (!(panel && panel.contains(e.relatedTarget))) {
           this.doBlur()
           this.closePanel({
             returnFocus: false,
@@ -488,11 +487,7 @@ export default {
     scrollTimer () {
       const { panelRef } = this
       if (!panelRef) return
-      const {
-        hoursRef,
-        minutesRef,
-        secondsRef
-      } = panelRef
+      const { hoursRef, minutesRef, secondsRef } = panelRef
       const hour = hoursRef.contentRef.querySelector('[active]')
       if (hour) {
         hoursRef.scrollTo({ top: hour.offsetTop })
@@ -519,20 +514,14 @@ export default {
         })
       }
     },
-    closePanel ({
-      returnFocus,
-      emitBlur
-    }) {
+    closePanel ({ returnFocus, emitBlur }) {
       if (this.active) {
         this.active = false
         if (returnFocus) {
           this.inputRef.focus()
         }
         if (emitBlur) {
-          const {
-            onBlur,
-            nTriggerFormBlur
-          } = this
+          const { onBlur, nTriggerFormBlur } = this
           if (onBlur) onBlur()
           nTriggerFormBlur()
         }
@@ -550,13 +539,7 @@ export default {
       if (!this.value) this.doChange(getTime(now))
       else {
         const newValue = setSeconds(
-          setMinutes(
-            setHours(
-              this.value,
-              getHours(now)
-            ),
-            getMinutes(now)
-          ),
+          setMinutes(setHours(this.value, getHours(now)), getMinutes(now)),
           getSeconds(now)
         )
         this.doChange(getTime(newValue))

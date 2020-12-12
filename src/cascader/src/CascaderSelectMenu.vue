@@ -22,9 +22,7 @@
 
 <script>
 import { ref, inject, toRef } from 'vue'
-import {
-  clickoutside
-} from 'vdirs'
+import { clickoutside } from 'vdirs'
 import { createTreeMate } from 'treemate'
 import { NBaseSelectMenu } from '../../_base'
 import { createSelectOptions } from './utils'
@@ -68,7 +66,8 @@ export default {
     },
     filter: {
       type: Function,
-      default: (pattern, _, path) => path.some(option => option.label && ~(option.label.indexOf(pattern)))
+      default: (pattern, _, path) =>
+        path.some((option) => option.label && ~option.label.indexOf(pattern))
     },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:value': {
@@ -89,21 +88,25 @@ export default {
       return createSelectOptions(this.tmNodes, this.leafOnly)
     },
     filteredSelectOptions () {
-      return this.selectOptions.filter(option => {
-        return this.filter(this.pattern, { label: option.label, value: option.value }, option.path)
-      }).map(option => ({
-        value: option.value,
-        label: option.label
-      }))
+      return this.selectOptions
+        .filter((option) => {
+          return this.filter(
+            this.pattern,
+            { label: option.label, value: option.value },
+            option.path
+          )
+        })
+        .map((option) => ({
+          value: option.value,
+          label: option.label
+        }))
     },
     selectTreeMate () {
-      return createTreeMate(
-        this.filteredSelectOptions, {
-          getKey (node) {
-            return node.value
-          }
+      return createTreeMate(this.filteredSelectOptions, {
+        getKey (node) {
+          return node.value
         }
-      )
+      })
     }
   },
   watch: {
@@ -125,11 +128,7 @@ export default {
     doCheck (option) {
       if (this.multiple) {
         const {
-          NCascader: {
-            value,
-            doCheck,
-            doUncheck
-          }
+          NCascader: { value, doCheck, doUncheck }
         } = this
         if (value === null || !value.includes(option.value)) {
           doCheck(option.value)
@@ -138,10 +137,7 @@ export default {
         }
       } else {
         const {
-          NCascader: {
-            doCheck,
-            closeMenu
-          }
+          NCascader: { doCheck, closeMenu }
         } = this
         doCheck(option.value)
         closeMenu()

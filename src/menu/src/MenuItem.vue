@@ -42,9 +42,7 @@ export default {
     NMenuItemContent,
     NTooltip
   },
-  mixins: [
-    menuChildMixin
-  ],
+  mixins: [menuChildMixin],
   props: {
     tmNode: {
       type: Object,
@@ -69,7 +67,11 @@ export default {
   },
   setup (props) {
     const rootMenuValueRef = useInjectionRef('NMenu', 'mergedValue')
-    const submenuDisabledRef = useInjectionRef('NSubmenu', 'mergedDisabled', false)
+    const submenuDisabledRef = useInjectionRef(
+      'NSubmenu',
+      'mergedDisabled',
+      false
+    )
     const mergedDisabledRef = computed(() => {
       return submenuDisabledRef.value || props.disabled
     })
@@ -83,14 +85,17 @@ export default {
   },
   computed: {
     popoverEnabled () {
-      return !this.horizontal && this.root && this.menuCollapsed && !this.mergedDisabled
+      return (
+        !this.horizontal &&
+        this.root &&
+        this.menuCollapsed &&
+        !this.mergedDisabled
+      )
     }
   },
   methods: {
     doClick (e) {
-      const {
-        onClick
-      } = this
+      const { onClick } = this
       if (onClick) onClick(e)
     },
     handleClick (e) {

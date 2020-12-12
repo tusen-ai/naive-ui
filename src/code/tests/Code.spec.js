@@ -6,12 +6,8 @@ import { NCode } from '../index'
 
 describe('n-code', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      codeLight
-    ]
+    locales: [enUS],
+    styles: [codeLight]
   })
   it('should work with import on demand', () => {
     mount(NCode, {

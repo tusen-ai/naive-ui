@@ -6,12 +6,8 @@ import { NTable } from '../index'
 
 describe('n-table', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      tableLight
-    ]
+    locales: [enUS],
+    styles: [tableLight]
   })
   it('should work with import on demand', () => {
     mount(NTable, {

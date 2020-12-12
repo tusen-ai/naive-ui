@@ -62,10 +62,7 @@
 
 <script>
 import { NIcon } from '../../icon'
-import {
-  RemoveIcon,
-  AddIcon
-} from '../../_base/icons'
+import { RemoveIcon, AddIcon } from '../../_base/icons'
 import {
   configurable,
   themeable,
@@ -156,7 +153,12 @@ export default {
     // deprecated
     onChange: {
       validator () {
-        if (__DEV__) warn('input-number', '`on-change` is deprecated, please use `on-update:value` instead.')
+        if (__DEV__) {
+          warn(
+            'input-number',
+            '`on-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
         return true
       },
       default: undefined
@@ -164,15 +166,15 @@ export default {
   },
   computed: {
     mergedPlaceholder () {
-      const {
-        placeholder
-      } = this
+      const { placeholder } = this
       if (placeholder !== undefined) return placeholder
       return this.localeNs.placeholder
     },
     safeStep () {
       const parsedNumber = parseNumber(this.step)
-      if (parsedNumber !== null) { return parsedNumber === 0 ? DEFAULT_STEP : Math.abs(parsedNumber) } else return DEFAULT_STEP
+      if (parsedNumber !== null) {
+        return parsedNumber === 0 ? DEFAULT_STEP : Math.abs(parsedNumber)
+      } else return DEFAULT_STEP
     },
     safeMin () {
       const parsedNumber = parseNumber(this.min)
@@ -232,10 +234,7 @@ export default {
       }
     },
     doFocus (e) {
-      const {
-        onFocus,
-        nTriggerFormFocus
-      } = this
+      const { onFocus, nTriggerFormFocus } = this
       if (onFocus) call(onFocus, e)
       nTriggerFormFocus()
     },
@@ -243,10 +242,7 @@ export default {
       const value = this.adjustValue(e.target.value)
       e.target.value = value
       this.doUpdateValue(value)
-      const {
-        onBlur,
-        nTriggerFormBlur
-      } = this
+      const { onBlur, nTriggerFormBlur } = this
       if (onBlur) call(onBlur, e)
       nTriggerFormBlur()
     },
@@ -309,7 +305,9 @@ export default {
         }
       } else {
         if (this.safeMin !== null && value < this.safeMin) value = this.safeMin
-        else if (this.safeMax !== null && value > this.safeMax) { value = this.safeMax }
+        else if (this.safeMax !== null && value > this.safeMax) {
+          value = this.safeMax
+        }
       }
       return value
     }

@@ -6,10 +6,7 @@ import { changeColor } from 'seemly'
 export default create({
   theme: 'dark',
   name: 'Anchor',
-  peer: [
-    baseDark,
-    affixDark
-  ],
+  peer: [baseDark, affixDark],
   getLocalVars (vars) {
     const {
       borderRadius,

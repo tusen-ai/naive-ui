@@ -1,9 +1,10 @@
 function traverse (nodes, callback, callbackAfter) {
-  nodes && nodes.forEach(node => {
-    callback(node)
-    traverse(node.children, callback, callbackAfter)
-    callbackAfter && callbackAfter(node)
-  })
+  nodes &&
+    nodes.forEach((node) => {
+      callback(node)
+      traverse(node.children, callback, callbackAfter)
+      callbackAfter && callbackAfter(node)
+    })
 }
 
 export function keysWithFilter (nodes, pattern, filter) {
@@ -12,7 +13,7 @@ export function keysWithFilter (nodes, pattern, filter) {
   const path = []
   traverse(
     nodes,
-    node => {
+    (node) => {
       path.push(node)
       if (filter(pattern, node)) {
         highlightKeys.add(node.key)

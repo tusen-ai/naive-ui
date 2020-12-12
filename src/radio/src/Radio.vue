@@ -30,22 +30,14 @@
         'n-radio__dot--checked': renderSafeChecked
       }"
     />
-    <div
-      v-if="$slots.default"
-      class="n-radio__label"
-    >
+    <div v-if="$slots.default" class="n-radio__label">
       <slot />
     </div>
   </div>
 </template>
 
 <script>
-import {
-  configurable,
-  themeable,
-  asFormItem,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, asFormItem, withCssr } from '../../_mixins'
 import radioMixin from './radio-mixin'
 import styles from './styles/radio/index.js'
 import setup from './radio-setup'
@@ -65,10 +57,7 @@ export default {
           return NRadioGroup.mergedSize
         }
         const { NFormItem } = this
-        if (
-          NFormItem &&
-          NFormItem.mergedSize
-        ) {
+        if (NFormItem && NFormItem.mergedSize) {
           return NFormItem.mergedSize
         }
         return 'medium'

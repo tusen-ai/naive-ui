@@ -7,11 +7,6 @@ export {
   getVNodeChildren,
   render
 } from './vue'
-export {
-  warn,
-  warnOnce
-} from './naive'
-export {
-  formatLength
-} from './css'
+export { warn, warnOnce } from './naive'
+export { formatLength } from './css'
 export * from './composable'

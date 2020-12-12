@@ -7,11 +7,7 @@ import { scrollbarDark } from '../../scrollbar/styles'
 export default create({
   name: 'TimePicker',
   theme: 'dark',
-  peer: [
-    baseDark,
-    iconDark,
-    scrollbarDark
-  ],
+  peer: [baseDark, iconDark, scrollbarDark],
   getLocalVars (vars) {
     const {
       popoverColor,

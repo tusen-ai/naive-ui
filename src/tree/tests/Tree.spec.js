@@ -6,12 +6,8 @@ import { NTree } from '../index'
 
 describe('n-tree', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      treeLight
-    ]
+    locales: [enUS],
+    styles: [treeLight]
   })
   it('should work with import on demand', () => {
     mount(NTree, {

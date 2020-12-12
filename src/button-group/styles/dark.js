@@ -5,10 +5,7 @@ import { buttonDark } from '../../button/styles'
 export default create({
   theme: 'dark',
   name: 'ButtonGroup',
-  peer: [
-    baseDark,
-    buttonDark
-  ],
+  peer: [baseDark, buttonDark],
   getLocalVars () {
     return {}
   }

@@ -102,41 +102,51 @@ describe('Pagination', function () {
     })
     describe('#pageItems', function () {
       it('should work', function () {
-        expect(pageItems(6, 11)).toEqual([{
-          type: 'page',
-          label: 1,
-          active: false
-        }, {
-          type: 'fastBackward',
-          label: 'fastBackward'
-        }, {
-          type: 'page',
-          label: 4,
-          active: false
-        }, {
-          type: 'page',
-          label: 5,
-          active: false
-        }, {
-          type: 'page',
-          label: 6,
-          active: true
-        }, {
-          type: 'page',
-          label: 7,
-          active: false
-        }, {
-          type: 'page',
-          label: 8,
-          active: false
-        }, {
-          type: 'fastForward',
-          label: 'fastForward'
-        }, {
-          type: 'page',
-          label: 11,
-          active: false
-        }])
+        expect(pageItems(6, 11)).toEqual([
+          {
+            type: 'page',
+            label: 1,
+            active: false
+          },
+          {
+            type: 'fastBackward',
+            label: 'fastBackward'
+          },
+          {
+            type: 'page',
+            label: 4,
+            active: false
+          },
+          {
+            type: 'page',
+            label: 5,
+            active: false
+          },
+          {
+            type: 'page',
+            label: 6,
+            active: true
+          },
+          {
+            type: 'page',
+            label: 7,
+            active: false
+          },
+          {
+            type: 'page',
+            label: 8,
+            active: false
+          },
+          {
+            type: 'fastForward',
+            label: 'fastForward'
+          },
+          {
+            type: 'page',
+            label: 11,
+            active: false
+          }
+        ])
       })
     })
   })

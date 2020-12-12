@@ -10,11 +10,7 @@
     }"
   >
     <v-resize-observer @resize="handleNavResize">
-      <div
-        ref="navRef"
-        class="n-tabs-nav"
-        :style="navStyle"
-      >
+      <div ref="navRef" class="n-tabs-nav" :style="navStyle">
         <div
           v-if="showScrollButton"
           class="n-tabs-nav-scroll-button n-tabs-nav-scroll-button--left"
@@ -27,15 +23,9 @@
             <backward-icon />
           </n-icon>
         </div>
-        <div
-          ref="navScrollRef"
-          class="n-tabs-nav-scroll"
-        >
+        <div ref="navScrollRef" class="n-tabs-nav-scroll">
           <v-resize-observer @resize="handleScrollContentResize">
-            <div
-              ref="labelWrapperRef"
-              class="n-tabs-label-wrapper"
-            >
+            <div ref="labelWrapperRef" class="n-tabs-label-wrapper">
               <div :style="labelWrapperStyle">
                 <div
                   v-for="(panel, i) in panels"
@@ -91,12 +81,8 @@
 
 <script>
 import { ref, getCurrentInstance } from 'vue'
-import{ NIcon } from '../../icon'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { NIcon } from '../../icon'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import {
   ChevronLeftIcon as BackwardIcon,
   ChevronRightIcon as ForwardIcon,
@@ -117,11 +103,7 @@ export default {
     CloseIcon,
     VResizeObserver
   },
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   provide () {
     return {
       NTab: this
@@ -174,14 +156,24 @@ export default {
     // deprecated
     activeName: {
       validator () {
-        if (__DEV__) warn('tabs', '`active-name` is deprecated, please use `value` instead.')
+        if (__DEV__) {
+          warn(
+            'tabs',
+            '`active-name` is deprecated, please use `value` instead.'
+          )
+        }
         return true
       },
       default: undefined
     },
     onActiveNameChange: {
       validator () {
-        if (__DEV__) warn('tabs', '`on-active-name-change` is deprecated, please use `on-update:value` instead.')
+        if (__DEV__) {
+          warn(
+            'tabs',
+            '`on-active-name-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
         return true
       },
       default: undefined
@@ -197,7 +189,10 @@ export default {
     })
     return {
       compitableValue: useCompitable(props, ['activeName', 'value']),
-      compitableOnValueChange: useCompitable(props, ['onActiveNameChange', 'onUpdate:value']),
+      compitableOnValueChange: useCompitable(props, [
+        'onActiveNameChange',
+        'onUpdate:value'
+      ]),
       navScrollRef: ref(null),
       labelWrapperRef: ref(null),
       navRef: ref(null),
@@ -229,7 +224,7 @@ export default {
       }
     },
     panelLabels () {
-      return this.panels.map(panel => panel.label)
+      return this.panels.map((panel) => panel.label)
     }
   },
   watch: {
@@ -239,9 +234,7 @@ export default {
       }
     },
     showScrollButton (value) {
-      const {
-        onScrollableChange
-      } = this
+      const { onScrollableChange } = this
       if (onScrollableChange) onScrollableChange(value)
     },
     panelLabels () {
@@ -291,7 +284,7 @@ export default {
       this.panels.push(panelInstance)
     },
     removePanel (panelInstance) {
-      const index = this.panels.findIndex(panel => panel === panelInstance)
+      const index = this.panels.findIndex((panel) => panel === panelInstance)
       if (~index) {
         this.panels.splice(index, 1)
       }
@@ -327,22 +320,15 @@ export default {
       }
     },
     setPanelActive (panelName) {
-      const {
-        compitableOnValueChange
-      } = this
+      const { compitableOnValueChange } = this
       if (compitableOnValueChange) compitableOnValueChange(panelName)
     },
     handleCloseClick (panel) {
-      const {
-        onClose
-      } = this
+      const { onClose } = this
       if (onClose) onClose(panel.name)
     },
     handleNavResize: throttle(function handleNavResize () {
-      if (
-        this.typeIsCard ||
-        (this.typeIsLine && !this.justifyContent)
-      ) {
+      if (this.typeIsCard || (this.typeIsLine && !this.justifyContent)) {
         this.updateScrollStatus()
       }
       if (this.typeIsLine) {

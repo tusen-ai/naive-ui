@@ -6,12 +6,8 @@ import { NEmpty } from '../index'
 
 describe('n-empty', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      emptyLight
-    ]
+    locales: [enUS],
+    styles: [emptyLight]
   })
   it('should work with import on demand', () => {
     mount(NEmpty, {

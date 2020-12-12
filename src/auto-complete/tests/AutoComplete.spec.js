@@ -6,12 +6,8 @@ import { NAutoComplete } from '../index'
 
 describe('n-auto-complete', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      autoCompleteLight
-    ]
+    locales: [enUS],
+    styles: [autoCompleteLight]
   })
   it('should work with import on demand', () => {
     mount(NAutoComplete, {

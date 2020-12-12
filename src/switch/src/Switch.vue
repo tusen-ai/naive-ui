@@ -12,35 +12,20 @@
     @focus="handleFocus"
     @blur="handleBlur"
   >
-    <div
-      class="n-switch__rail"
-    />
+    <div class="n-switch__rail" />
   </div>
 </template>
 
 <script>
 import { ref, toRef } from 'vue'
 import { useMergedState } from 'vooks'
-import {
-  configurable,
-  themeable,
-  asFormItem,
-  withCssr
-} from '../../_mixins'
-import {
-  call,
-  warn
-} from '../../_utils'
+import { configurable, themeable, asFormItem, withCssr } from '../../_mixins'
+import { call, warn } from '../../_utils'
 import styles from './styles'
 
 export default {
   name: 'Switch',
-  mixins: [
-    configurable,
-    themeable,
-    asFormItem(),
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, asFormItem(), withCssr(styles)],
   props: {
     size: {
       type: String,
@@ -65,7 +50,12 @@ export default {
     },
     onChange: {
       validator () {
-        if (__DEV__) warn('switch', '`on-change` is deprecated, please use `on-update:value` instead.')
+        if (__DEV__) {
+          warn(
+            'switch',
+            '`on-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
         return true
       },
       default: undefined
@@ -74,7 +64,10 @@ export default {
   setup (props) {
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
-    const mergedValueRef = useMergedState(controlledValueRef, uncontrolledValueRef)
+    const mergedValueRef = useMergedState(
+      controlledValueRef,
+      uncontrolledValueRef
+    )
     return {
       mergedValue: mergedValueRef,
       uncontrolledValue: uncontrolledValueRef
@@ -95,18 +88,12 @@ export default {
       nTriggerFormChange()
     },
     doFocus (...args) {
-      const {
-        onFocus,
-        nTriggerFormFocus
-      } = this
+      const { onFocus, nTriggerFormFocus } = this
       if (onFocus) call(onFocus, ...args)
       nTriggerFormFocus()
     },
     doBlur (...args) {
-      const {
-        onBlur,
-        nTriggerFormBlur
-      } = this
+      const { onBlur, nTriggerFormBlur } = this
       if (onBlur) call(onBlur, ...args)
       nTriggerFormBlur()
     },

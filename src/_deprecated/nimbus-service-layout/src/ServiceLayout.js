@@ -9,9 +9,7 @@ import { useMergedState } from 'vooks'
 
 export default {
   name: 'ServiceLayout',
-  alias: [
-    'NimbusServiceLayout'
-  ],
+  alias: ['NimbusServiceLayout'],
   provide () {
     return {
       ServiceLayout: this
@@ -67,7 +65,10 @@ export default {
   setup (props) {
     const uncontrolledValueRef = ref(null)
     const controlledValueRef = toRef(props, 'value')
-    const mergedValueRef = useMergedState(controlledValueRef, uncontrolledValueRef)
+    const mergedValueRef = useMergedState(
+      controlledValueRef,
+      uncontrolledValueRef
+    )
     const uncontrolledCollapsedRef = ref(false)
     return {
       mergedValue: mergedValueRef,
@@ -90,11 +91,7 @@ export default {
       this.uncontrolledCollapsed = value
     },
     doUpdateValue (value) {
-      const {
-        onInput,
-        onSelect,
-        'onUpdate:value': onUpdateValue
-      } = this
+      const { onInput, onSelect, 'onUpdate:value': onUpdateValue } = this
       this.uncontrolledValue = value
       if (onSelect) onSelect(value)
       if (onInput) onInput(value)
@@ -170,34 +167,46 @@ export default {
       bordered: true
     }
     const navSlot = this.$slots.nav
-    return h(NLayout, {
-      position: 'absolute'
-    }, {
-      default: () => [
-        navSlot ? h(NLayoutHeader, headerProps, navSlot()) : null,
-        h(NLayout, {
-          style: {
-            top: navSlot ? '64px' : null
-          },
-          position: 'absolute'
-        }, {
-          default: () => [
-            h(NLayoutSider, siderProps, {
+    return h(
+      NLayout,
+      {
+        position: 'absolute'
+      },
+      {
+        default: () => [
+          navSlot ? h(NLayoutHeader, headerProps, navSlot()) : null,
+          h(
+            NLayout,
+            {
+              style: {
+                top: navSlot ? '64px' : null
+              },
+              position: 'absolute'
+            },
+            {
               default: () => [
-                h(SiderHeader, {
-                  name: this.name
-                }, {
-                  icon: this.$slots['drawer-header-icon']
+                h(NLayoutSider, siderProps, {
+                  default: () => [
+                    h(
+                      SiderHeader,
+                      {
+                        name: this.name
+                      },
+                      {
+                        icon: this.$slots['drawer-header-icon']
+                      }
+                    ),
+                    h(SiderMenu)
+                  ]
                 }),
-                h(SiderMenu)
+                h(NLayout, contentProps, {
+                  default: this.$slots.default
+                })
               ]
-            }),
-            h(NLayout, contentProps, {
-              default: this.$slots.default
-            })
-          ]
-        })
-      ]
-    })
+            }
+          )
+        ]
+      }
+    )
   }
 }

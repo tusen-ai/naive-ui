@@ -6,12 +6,8 @@ import { NSlider } from '../index'
 
 describe('n-slider', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      sliderLight
-    ]
+    locales: [enUS],
+    styles: [sliderLight]
   })
   it('should work with import on demand', () => {
     mount(NSlider, {

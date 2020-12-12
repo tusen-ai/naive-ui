@@ -16,7 +16,7 @@ function convertAutoCompleteOptionToSelectOption (option) {
     return {
       type: 'group',
       name: option.name,
-      children: option.children.map(groupOption =>
+      children: option.children.map((groupOption) =>
         convertAutoCompleteOptionToSelectOption(groupOption)
       )
     }

@@ -6,12 +6,8 @@ import { NList } from '../index'
 
 describe('n-list', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      listLight
-    ]
+    locales: [enUS],
+    styles: [listLight]
   })
   it('should work with import on demand', () => {
     mount(NList, {

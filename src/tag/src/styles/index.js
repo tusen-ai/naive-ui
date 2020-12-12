@@ -5,25 +5,17 @@ import themedTypeStyle from './themed-type.cssr.js'
 export default [
   {
     key: 'mergedTheme',
-    watch: [
-      'mergedTheme'
-    ],
+    watch: ['mergedTheme'],
     CNode: themedBaseStyle
   },
   {
     key: 'size',
-    watch: [
-      'mergedTheme',
-      'size'
-    ],
+    watch: ['mergedTheme', 'size'],
     CNode: themedSizeStyle
   },
   {
     key: 'type',
-    watch: [
-      'mergedTheme',
-      'type'
-    ],
+    watch: ['mergedTheme', 'type'],
     CNode: themedTypeStyle
   }
 ]

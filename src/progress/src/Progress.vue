@@ -7,16 +7,9 @@
       [`n-${mergedTheme}-theme`]: mergedTheme
     }"
   >
-    <div
-      v-if="type === 'circle'"
-      class="n-progress-content"
-    >
-      <div
-        class="n-progress-graph"
-      >
-        <div
-          class="n-progress-graph-circle"
-        >
+    <div v-if="type === 'circle'" class="n-progress-content">
+      <div class="n-progress-graph">
+        <div class="n-progress-graph-circle">
           <svg viewBox="0 0 110 110">
             <g>
               <path
@@ -52,16 +45,10 @@
         </div>
       </div>
       <div v-if="showIndicator">
-        <div
-          v-if="$slots.default"
-          class="n-progress-custom-content"
-        >
+        <div v-if="$slots.default" class="n-progress-custom-content">
           <slot />
         </div>
-        <div
-          v-else-if="status !== 'default'"
-          class="n-progress-icon"
-        >
+        <div v-else-if="status !== 'default'" class="n-progress-icon">
           <n-icon>
             <component :is="iconType" />
           </n-icon>
@@ -78,10 +65,7 @@
         </div>
       </div>
     </div>
-    <div
-      v-else-if="type === 'line'"
-      class="n-progress-content"
-    >
+    <div v-else-if="type === 'line'" class="n-progress-content">
       <div class="n-progress-graph">
         <div
           ref="line"
@@ -122,17 +106,21 @@
             v-if="mergedIndicatorPlacement === 'inside-label'"
             ref="indicator"
             class="n-progress-graph-line-indicator"
-            :style="indicatorPercentageIsCaculated ? {
-              right: `${indicatorPercentage}%`,
-              backgroundColor: safeColor,
-              color: indicatorTextColor
-            } : {
-              visibility: 'hidden',
-              transition: 'none',
-              right: `${indicatorPercentage}%`,
-              backgroundColor: safeColor,
-              color: indicatorTextColor
-            }"
+            :style="
+              indicatorPercentageIsCaculated
+                ? {
+                  right: `${indicatorPercentage}%`,
+                  backgroundColor: safeColor,
+                  color: indicatorTextColor
+                }
+                : {
+                  visibility: 'hidden',
+                  transition: 'none',
+                  right: `${indicatorPercentage}%`,
+                  backgroundColor: safeColor,
+                  color: indicatorTextColor
+                }
+            "
           >
             {{ percentage + unit }}
           </div>
@@ -157,10 +145,7 @@
         >
           {{ percentage }}{{ unit }}
         </div>
-        <div
-          v-else-if="status"
-          class="n-progress-icon"
-        >
+        <div v-else-if="status" class="n-progress-icon">
           <n-icon>
             <component :is="iconType" />
           </n-icon>
@@ -177,24 +162,22 @@
         </div>
       </div>
     </div>
-    <div
-      v-else-if="type==='multiple-circle'"
-      class="n-progress-content"
-    >
-      <div
-        class="n-progress-graph"
-      >
-        <div
-          class="n-progress-graph-circle"
-        >
+    <div v-else-if="type === 'multiple-circle'" class="n-progress-content">
+      <div class="n-progress-graph">
+        <div class="n-progress-graph-circle">
           <svg :viewBox="`0 0 ${viewBoxWidth} ${viewBoxWidth}`">
-            <g
-              v-for="(p, index) in percentage"
-              :key="index"
-            >
+            <g v-for="(p, index) in percentage" :key="index">
               <path
                 class="n-progress-graph-circle-rail"
-                :d="circlePath(viewBoxWidth / 2 - strokeWidth / 2 * (1 + 2 * index) - circleGap * index, strokeWidth, viewBoxWidth)"
+                :d="
+                  circlePath(
+                    viewBoxWidth / 2 -
+                      (strokeWidth / 2) * (1 + 2 * index) -
+                      circleGap * index,
+                    strokeWidth,
+                    viewBoxWidth
+                  )
+                "
                 :stroke-width="strokeWidth"
                 stroke-linecap="round"
                 fill="none"
@@ -208,7 +191,15 @@
                 :class="{
                   'n-progress-graph-circle-fill--empty': p === 0
                 }"
-                :d="circlePath(viewBoxWidth / 2 - strokeWidth / 2 * (1 + 2 * index) - circleGap * index, strokeWidth, viewBoxWidth)"
+                :d="
+                  circlePath(
+                    viewBoxWidth / 2 -
+                      (strokeWidth / 2) * (1 + 2 * index) -
+                      circleGap * index,
+                    strokeWidth,
+                    viewBoxWidth
+                  )
+                "
                 :stroke-width="strokeWidth"
                 stroke-linecap="round"
                 fill="none"
@@ -223,9 +214,7 @@
         </div>
       </div>
       <div v-if="showIndicator && this.$slots.default">
-        <div
-          class="n-progress-text"
-        >
+        <div class="n-progress-text">
           <slot />
         </div>
       </div>
@@ -244,17 +233,15 @@ import {
   ErrorIcon as ErrorCircleIcon,
   SuccessIcon as SuccessCircleIcon
 } from '../../_base/icons'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import styles from './styles/index.js'
 import { formatLength } from '../../_utils'
 import { onFontsReady } from 'vooks'
 
 function circlePath (r, sw, vw = 100) {
-  return `m ${vw / 2} ${vw / 2 - r} a ${r} ${r} 0 1 1 0 ${2 * r} a ${r} ${r} 0 1 1 0 -${2 * r}`
+  return `m ${vw / 2} ${vw / 2 - r} a ${r} ${r} 0 1 1 0 ${
+    2 * r
+  } a ${r} ${r} 0 1 1 0 -${2 * r}`
 }
 
 export default {
@@ -268,11 +255,7 @@ export default {
     SuccessCircleIcon,
     ErrorCircleIcon
   },
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     processing: {
       type: Boolean,
@@ -286,7 +269,9 @@ export default {
     },
     status: {
       validator (status) {
-        return ['success', 'error', 'warning', 'info', 'default'].includes(status)
+        return ['success', 'error', 'warning', 'info', 'default'].includes(
+          status
+        )
       },
       default: 'default'
     },
@@ -379,7 +364,7 @@ export default {
       if (this.borderRadius !== undefined) {
         return formatLength(this.borderRadius)
       }
-      if (this.height !== undefined) return formatLength(this.height, { c: 0.5 })
+      if (this.height !== undefined) { return formatLength(this.height, { c: 0.5 }) }
       return null
     },
     styleFillBorderRadius () {
@@ -389,18 +374,31 @@ export default {
       if (this.borderRadius !== undefined) {
         return formatLength(this.borderRadius)
       }
-      if (this.height !== undefined) return formatLength(this.height, { c: 0.5 })
+      if (this.height !== undefined) { return formatLength(this.height, { c: 0.5 }) }
       return null
     },
     mergedIndicatorPlacement () {
       return this.indicatorPlacement || this.indicatorPosition
     },
     fillStyleMaxWidth () {
-      return Math.max(this.percentage - (this.mergedIndicatorPlacement === 'inside-label' ? 2 : 0), 0)
+      return Math.max(
+        this.percentage -
+          (this.mergedIndicatorPlacement === 'inside-label' ? 2 : 0),
+        0
+      )
     },
     strokeDasharray () {
       if (this.type === 'multiple-circle') {
-        const strokeDasharrays = this.percentage.map((v, i) => `${Math.PI * v / 100 * (this.viewBoxWidth / 2 - this.strokeWidth / 2 * (1 + 2 * i) - this.circleGap * i) * 2}, ${this.viewBoxWidth * 8}`)
+        const strokeDasharrays = this.percentage.map(
+          (v, i) =>
+            `${
+              ((Math.PI * v) / 100) *
+              (this.viewBoxWidth / 2 -
+                (this.strokeWidth / 2) * (1 + 2 * i) -
+                this.circleGap * i) *
+              2
+            }, ${this.viewBoxWidth * 8}`
+        )
         return strokeDasharrays
       } else {
         return `${Math.PI * this.percentage}, ${this.viewBoxWidth * 8}`
@@ -427,7 +425,8 @@ export default {
         } else if (this.status === 'info') {
           return 'info-circle-icon'
         }
-      } return ''
+      }
+      return ''
     },
     safeColor () {
       if (this.type === 'multiple-circle') {

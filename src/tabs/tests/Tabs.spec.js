@@ -6,12 +6,8 @@ import { NTabs } from '../index'
 
 describe('n-tabs', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      tabsLight
-    ]
+    locales: [enUS],
+    styles: [tabsLight]
   })
   it('should work with import on demand', () => {
     mount(NTabs, {

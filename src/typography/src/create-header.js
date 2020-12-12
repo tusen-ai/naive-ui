@@ -1,13 +1,9 @@
 import { h } from 'vue'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import { getSlot } from '../../_utils'
 import styles from './styles/header'
 
-export default level => ({
+export default (level) => ({
   name: 'H' + level,
   cssrName: 'Typography',
   cssrId: 'TypographyHeader',
@@ -25,21 +21,21 @@ export default level => ({
       default: false
     }
   },
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   render () {
     const props = this.$props
-    return h(`h${level}`, {
-      class: {
-        [`n-h${level}`]: true,
-        [`n-${this.mergedTheme}-theme`]: this.mergedTheme,
-        [`n-h${level}--${props.type}-type`]: props.type,
-        [`n-h${level}--prefix-bar`]: props.prefix,
-        [`n-h${level}--align-text`]: props.alignText
-      }
-    }, getSlot(this))
+    return h(
+      `h${level}`,
+      {
+        class: {
+          [`n-h${level}`]: true,
+          [`n-${this.mergedTheme}-theme`]: this.mergedTheme,
+          [`n-h${level}--${props.type}-type`]: props.type,
+          [`n-h${level}--prefix-bar`]: props.prefix,
+          [`n-h${level}--align-text`]: props.alignText
+        }
+      },
+      getSlot(this)
+    )
   }
 })

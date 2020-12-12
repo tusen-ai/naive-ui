@@ -6,80 +6,86 @@ export default create({
   theme: 'dark',
   name: 'base',
   getBaseVars () {
-    return Object.assign({
-      neutralBase: '#000',
-      neutralInvertBase: '#fff',
-      neutralTextBase: '#fff',
-      neutralPopover: 'rgb(72, 72, 78)',
-      neutralCard: 'rgb(24, 24, 28)',
-      neutralModal: 'rgb(44, 44, 50)',
-      neutralBody: 'rgb(16, 16, 20)',
+    return Object.assign(
+      {
+        neutralBase: '#000',
+        neutralInvertBase: '#fff',
+        neutralTextBase: '#fff',
+        neutralPopover: 'rgb(72, 72, 78)',
+        neutralCard: 'rgb(24, 24, 28)',
+        neutralModal: 'rgb(44, 44, 50)',
+        neutralBody: 'rgb(16, 16, 20)',
 
-      alpha1: '0.9',
-      alpha2: '0.82',
-      alpha3: '0.52',
-      alpha4: '0.38',
-      alpha5: '0.28',
+        alpha1: '0.9',
+        alpha2: '0.82',
+        alpha3: '0.52',
+        alpha4: '0.38',
+        alpha5: '0.28',
 
-      alphaClose: '0.52',
+        alphaClose: '0.52',
 
-      alphaDisabled: '0.6',
-      alphaDisabledInput: '0.06',
-      alphaPending: '0.09',
-      alphaTablePending: '0.06',
-      alphaActive: '0.03',
+        alphaDisabled: '0.6',
+        alphaDisabledInput: '0.06',
+        alphaPending: '0.09',
+        alphaTablePending: '0.06',
+        alphaActive: '0.03',
 
-      alphaAvatar: '0.18',
-      alphaRail: '0.2',
-      alphaProgressRail: '0.12',
-      alphaBorder: '0.24',
-      alphaDivider: '0.09',
-      alphaInput: '0.1',
-      alphaAction: '0.06',
-      alphaTab: '0.1',
-      alphaScrollbar: '0.2',
-      alphaScrollbarHover: '0.3',
-      alphaCode: '0.12',
-      alphaTag: '0',
+        alphaAvatar: '0.18',
+        alphaRail: '0.2',
+        alphaProgressRail: '0.12',
+        alphaBorder: '0.24',
+        alphaDivider: '0.09',
+        alphaInput: '0.1',
+        alphaAction: '0.06',
+        alphaTab: '0.1',
+        alphaScrollbar: '0.2',
+        alphaScrollbarHover: '0.3',
+        alphaCode: '0.12',
+        alphaTag: '0',
 
-      // primary
-      primaryHover: '#7fe7c4',
-      primaryDefault: '#63e2b7',
-      primaryActive: '#5acea7',
-      primarySuppl: 'rgb(42, 148, 125)',
+        // primary
+        primaryHover: '#7fe7c4',
+        primaryDefault: '#63e2b7',
+        primaryActive: '#5acea7',
+        primarySuppl: 'rgb(42, 148, 125)',
 
-      // info
-      infoHover: '#8acbec',
-      infoDefault: '#70c0e8',
-      infoActive: '#66afd3',
-      infoSuppl: 'rgb(56, 137, 197)',
+        // info
+        infoHover: '#8acbec',
+        infoDefault: '#70c0e8',
+        infoActive: '#66afd3',
+        infoSuppl: 'rgb(56, 137, 197)',
 
-      // error
-      errorHover: '#e98b8b',
-      errorDefault: '#e88080',
-      errorActive: '#e57272',
-      errorSuppl: 'rgb(208, 58, 82)',
+        // error
+        errorHover: '#e98b8b',
+        errorDefault: '#e88080',
+        errorActive: '#e57272',
+        errorSuppl: 'rgb(208, 58, 82)',
 
-      // warning
-      warningHover: '#f5d599',
-      warningDefault: '#f2c97d',
-      warningActive: '#e6c260',
-      warningSuppl: 'rgb(240, 138, 0)',
+        // warning
+        warningHover: '#f5d599',
+        warningDefault: '#f2c97d',
+        warningActive: '#e6c260',
+        warningSuppl: 'rgb(240, 138, 0)',
 
-      // success
-      successHover: '#7fe7c4',
-      successDefault: '#63e2b7',
-      successActive: '#5acea7',
-      successSuppl: 'rgb(42, 148, 125)',
+        // success
+        successHover: '#7fe7c4',
+        successDefault: '#63e2b7',
+        successActive: '#5acea7',
+        successSuppl: 'rgb(42, 148, 125)',
 
-      boxShadow2: '0 3px 6px -4px rgba(0, 0, 0, .16), 0 6px 12px 0 rgba(0, 0, 0, .08), 0 9px 18px 8px rgba(0, 0, 0, .04)',
-      boxShadow3: '0 6px 16px -9px rgba(0, 0, 0, .08), 0 9px 28px 0 rgba(0, 0, 0, .05), 0 12px 48px 16px rgba(0, 0, 0, .03)'
-    }, commonVariables)
+        boxShadow2:
+          '0 3px 6px -4px rgba(0, 0, 0, .16), 0 6px 12px 0 rgba(0, 0, 0, .08), 0 9px 18px 8px rgba(0, 0, 0, .04)',
+        boxShadow3:
+          '0 6px 16px -9px rgba(0, 0, 0, .08), 0 9px 28px 0 rgba(0, 0, 0, .05), 0 12px 48px 16px rgba(0, 0, 0, .03)'
+      },
+      commonVariables
+    )
   },
   getDerivedVars (base) {
     const baseBackgroundRgb = rgba(base.neutralBase)
     const baseInvertBackgroundRgb = rgba(base.neutralInvertBase)
-    const overlayPrefix = 'rgba(' + baseInvertBackgroundRgb.slice(0, 3).join(', ') + ', '
+    const overlayPrefix =
+      'rgba(' + baseInvertBackgroundRgb.slice(0, 3).join(', ') + ', '
     function overlay (alpha) {
       return overlayPrefix + String(alpha) + ')'
     }

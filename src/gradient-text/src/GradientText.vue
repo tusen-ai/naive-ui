@@ -16,11 +16,7 @@
 </template>
 
 <script>
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import { formatLength } from '../../_utils'
 import styles from './styles/index'
 
@@ -28,11 +24,7 @@ let houdiniRegistered = false
 
 export default {
   name: 'GradientText',
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     size: {
       type: [String, Number],

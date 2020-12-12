@@ -30,11 +30,7 @@
 
 <script>
 import { ref } from 'vue'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import { NScrollbar } from '../../scrollbar'
 import NLogLoader from './LogLoader.vue'
 import NLogLine from './LogLine.vue'
@@ -49,11 +45,7 @@ export default {
     NLogLoader,
     NLogLine
   },
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   provide () {
     return {
       NLog: this
@@ -162,18 +154,12 @@ export default {
       const scrollTop = containerScrollTop
       const scrollBottom = contentHeight - containerScrollTop - containerHeight
       if (scrollTop <= this.offsetTop) {
-        const {
-          onReachTop,
-          onRequireMore
-        } = this
+        const { onReachTop, onRequireMore } = this
         if (onRequireMore) onRequireMore('top')
         if (onReachTop) onReachTop()
       }
       if (scrollBottom <= this.offsetBottom) {
-        const {
-          onReachBottom,
-          onRequireMore
-        } = this
+        const { onReachBottom, onRequireMore } = this
         if (onRequireMore) onRequireMore('bottom')
         if (onReachBottom) onReachBottom()
       }
@@ -185,14 +171,9 @@ export default {
         })
         return
       }
-      const {
-        scrollbarRef
-      } = this
+      const { scrollbarRef } = this
       if (scrollbarRef) {
-        const {
-          containerRef,
-          contentRef
-        } = scrollbarRef
+        const { containerRef, contentRef } = scrollbarRef
         if (containerRef && contentRef) {
           const containerHeight = containerRef.offsetHeight
           const containerScrollTop = containerRef.scrollTop
@@ -202,29 +183,19 @@ export default {
             contentHeight - containerScrollTop - containerHeight
           const deltaY = e.deltaY
           if (scrollTop === 0 && deltaY < 0) {
-            const {
-              onRequireMore
-            } = this
+            const { onRequireMore } = this
             if (onRequireMore) onRequireMore('top')
           }
           if (scrollBottom <= 0 && deltaY > 0) {
-            const {
-              onRequireMore
-            } = this
+            const { onRequireMore } = this
             if (onRequireMore) onRequireMore('bottom')
           }
         }
       }
     },
     scrollTo (options) {
-      const {
-        scrollbarRef
-      } = this
-      const {
-        slient,
-        top,
-        position
-      } = options
+      const { scrollbarRef } = this
+      const { slient, top, position } = options
       if (slient) {
         this.slient = true
       }
@@ -238,14 +209,20 @@ export default {
     },
     // deprecated
     scrollToTop (slient = false) {
-      warn('log', '`scrollToTop` is deprecated, please use `scrollTo({ position: \'top\'})` instead.')
+      warn(
+        'log',
+        "`scrollToTop` is deprecated, please use `scrollTo({ position: 'top'})` instead."
+      )
       this.scrollTo({
         position: 'top',
         slient
       })
     },
     scrollToBottom (slient = false) {
-      warn('log', '`scrollToTop` is deprecated, please use `scrollTo({ position: \'bottom\'})` instead.')
+      warn(
+        'log',
+        "`scrollToTop` is deprecated, please use `scrollTo({ position: 'bottom'})` instead."
+      )
       this.scrollTo({
         position: 'bottom',
         slient

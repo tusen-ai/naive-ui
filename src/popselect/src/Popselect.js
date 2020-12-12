@@ -33,24 +33,21 @@ export default {
     }
   },
   render () {
-    return h(NPopover, omit(
-      this.$props,
-      NPopselectPanelPropsKey,
-      {
+    return h(
+      NPopover,
+      omit(this.$props, NPopselectPanelPropsKey, {
         bodyStyle: {
           padding: 0
         },
         ref: 'popover',
         bodyClass: 'n-popselect'
+      }),
+      {
+        trigger: this.$slots.default,
+        default: () => {
+          return h(NPopselectPanel, keep(this.$props, NPopselectPanelPropsKey))
+        }
       }
-    ), {
-      trigger: this.$slots.default,
-      default: () => {
-        return h(NPopselectPanel, keep(
-          this.$props,
-          NPopselectPanelPropsKey
-        ))
-      }
-    })
+    )
   }
 }

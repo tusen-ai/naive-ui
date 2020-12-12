@@ -78,10 +78,7 @@
         :to="adjustedTo"
         placement="bottom-start"
       >
-        <transition
-          name="n-fade-in-scale-up-transition"
-          :appear="isMounted"
-        >
+        <transition name="n-fade-in-scale-up-transition" :appear="isMounted">
           <datetime-panel
             v-if="type === 'datetime' && active"
             ref="panelRef"
@@ -147,17 +144,9 @@
 </template>
 
 <script>
-import {
-  ref
-} from 'vue'
-import {
-  VBinder,
-  VTarget,
-  VFollower
-} from 'vueuc'
-import {
-  clickoutside
-} from 'vdirs'
+import { ref } from 'vue'
+import { VBinder, VTarget, VFollower } from 'vueuc'
+import { clickoutside } from 'vdirs'
 import {
   configurable,
   themeable,
@@ -177,11 +166,7 @@ import { NInput } from '../../input'
 import { NIcon } from '../../icon'
 import { CalendarIcon } from '../../_base/icons'
 
-import {
-  format,
-  getTime,
-  isValid
-} from 'date-fns'
+import { format, getTime, isValid } from 'date-fns'
 import { strictParse, getDerivedTimeFromKeyboardEvent } from './utils'
 import { isEqual } from 'lodash-es'
 
@@ -341,9 +326,7 @@ export default {
   },
   computed: {
     timePickerSize () {
-      const {
-        unstableConfig
-      } = this.$naive
+      const { unstableConfig } = this.$naive
       const size = unstableConfig?.DatePicker?.timePickerSize
       if (size) {
         return size
@@ -423,18 +406,12 @@ export default {
       nTriggerFormInput()
     },
     doFocus (...args) {
-      const {
-        onFocus,
-        nTriggerFormFocus
-      } = this
+      const { onFocus, nTriggerFormFocus } = this
       if (onFocus) call(onFocus, ...args)
       nTriggerFormFocus()
     },
     doBlur (...args) {
-      const {
-        onBlur,
-        nTriggerFormBlur
-      } = this
+      const { onBlur, nTriggerFormBlur } = this
       if (onBlur) call(onBlur, ...args)
       nTriggerFormBlur()
     },
@@ -525,13 +502,8 @@ export default {
      * input deactivate & blur
      */
     handleInputBlur (e) {
-      const {
-        panelRef
-      } = this
-      if (!(
-        panelRef &&
-        panelRef.$el.contains(e.relatedTarget)
-      )) {
+      const { panelRef } = this
+      if (!(panelRef && panelRef.$el.contains(e.relatedTarget))) {
         this.cleanValue()
         this.doBlur()
         this.closeCalendar({
@@ -558,15 +530,27 @@ export default {
     },
     cleanValue () {
       if (this.isRange) {
-        const startDateTime = strictParse(this.displayStartTime, this.computedFormat, new Date())
-        const endDateTime = strictParse(this.displayEndTime, this.computedFormat, new Date())
+        const startDateTime = strictParse(
+          this.displayStartTime,
+          this.computedFormat,
+          new Date()
+        )
+        const endDateTime = strictParse(
+          this.displayEndTime,
+          this.computedFormat,
+          new Date()
+        )
         if (!isValid(startDateTime) || !isValid(endDateTime)) {
           this.refresh(this.value)
         } else {
           this.changeStartEndTime(startDateTime, endDateTime)
         }
       } else {
-        const newSelectedDateTime = strictParse(this.displayTime, this.computedFormat, new Date())
+        const newSelectedDateTime = strictParse(
+          this.displayTime,
+          this.computedFormat,
+          new Date()
+        )
         if (isValid(newSelectedDateTime)) {
           this.doUpdateValue(getTime(newSelectedDateTime))
         } else {
@@ -578,7 +562,11 @@ export default {
      * Input
      */
     handleTimeInput (v) {
-      const newSelectedDateTime = strictParse(this.displayTime, this.computedFormat, new Date())
+      const newSelectedDateTime = strictParse(
+        this.displayTime,
+        this.computedFormat,
+        new Date()
+      )
       if (isValid(newSelectedDateTime)) {
         this.doUpdateValue(getTime(newSelectedDateTime))
       }
@@ -586,7 +574,11 @@ export default {
     handleRangeInput (v) {
       if (v === null) v = [null, null]
       const [startTime, endTime] = v
-      const newStartTime = strictParse(startTime, this.computedFormat, new Date())
+      const newStartTime = strictParse(
+        startTime,
+        this.computedFormat,
+        new Date()
+      )
       if (startTime !== this.displayStartTime && isValid(newStartTime)) {
         this.changeStartDateTime(newStartTime)
       }
@@ -620,16 +612,11 @@ export default {
       if (this.disabled || this.active) return
       this.active = true
     },
-    closeCalendar ({
-      returnFocus,
-      emitBlur
-    }) {
+    closeCalendar ({ returnFocus, emitBlur }) {
       if (this.active) {
         this.active = false
         if (returnFocus) {
-          const {
-            inputRef
-          } = this
+          const { inputRef } = this
           if (inputRef) {
             inputRef.focus()
           }

@@ -5,13 +5,9 @@ import { baseDark } from '../../_styles/base'
 export default create({
   theme: 'dark',
   name: 'Switch',
-  peer: [
-    baseDark
-  ],
+  peer: [baseDark],
   getLocalVars (vars) {
-    const {
-      primaryColorSuppl
-    } = vars
+    const { primaryColorSuppl } = vars
     const railOverlayColor = 'rgba(255, 255, 255, .20)'
     return {
       ...commonVars,

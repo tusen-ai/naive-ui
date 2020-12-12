@@ -1,6 +1,6 @@
 <template>
   <div
-    style="width: 0; height: 0;"
+    style="width: 0; height: 0"
     tabindex="0"
     @focus="handleFocus"
     @blur="handleBlur"

@@ -6,12 +6,8 @@ import { NSpin } from '../index'
 
 describe('n-spin', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      spinLight
-    ]
+    locales: [enUS],
+    styles: [spinLight]
   })
   it('should work with import on demand', () => {
     mount(NSpin, {

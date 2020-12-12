@@ -1,18 +1,7 @@
-import {
-  h,
-  ref,
-  toRef,
-  computed
-} from 'vue'
-import {
-  createTreeMate
-} from 'treemate'
+import { h, ref, toRef, computed } from 'vue'
+import { createTreeMate } from 'treemate'
 import { useMergedState } from 'vooks'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import NTreeNode from './TreeNode'
 import { keysWithFilter } from './utils'
 import styles from './styles'
@@ -20,11 +9,7 @@ import { call, warn } from '../../_utils'
 
 export default {
   name: 'Tree',
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   provide () {
     return { NTree: this }
   },
@@ -101,9 +86,7 @@ export default {
       type: Function,
       default: (pattern, node) => {
         if (!pattern) return true
-        return ~node.label.toLowerCase().indexOf(
-          pattern.toLowerCase()
-        )
+        return ~node.label.toLowerCase().indexOf(pattern.toLowerCase())
       }
     },
     onLoad: {
@@ -153,21 +136,30 @@ export default {
     // deprecated
     onExpandedKeysChange: {
       validator () {
-        warn('tree', '`on-expanded-keys-change` is deprecated, please use `on-update:expanded-keys` instead.')
+        warn(
+          'tree',
+          '`on-expanded-keys-change` is deprecated, please use `on-update:expanded-keys` instead.'
+        )
         return true
       },
       default: undefined
     },
     onCheckedKeysChange: {
       validator () {
-        warn('tree', '`on-checked-keys-change` is deprecated, please use `on-update:expanded-keys` instead.')
+        warn(
+          'tree',
+          '`on-checked-keys-change` is deprecated, please use `on-update:expanded-keys` instead.'
+        )
         return true
       },
       default: undefined
     },
     onSelectedKeysChange: {
       validator () {
-        warn('tree', '`on-selected-keys-change` is deprecated, please use `on-update:selected-keys` instead.')
+        warn(
+          'tree',
+          '`on-selected-keys-change` is deprecated, please use `on-update:selected-keys` instead.'
+        )
         return true
       },
       default: undefined
@@ -176,8 +168,7 @@ export default {
   setup (props) {
     const treeMateRef = computed(() => createTreeMate(props.data))
     const uncontrolledCheckedKeysRef = ref(
-      props.defaultCheckedKeys ||
-      props.checkedKeys
+      props.defaultCheckedKeys || props.checkedKeys
     )
     const controlledCheckedKeysRef = toRef(props, 'checkedKeys')
     const mergedCheckedKeysRef = useMergedState(
@@ -196,8 +187,7 @@ export default {
       return checkedStatusRef.value.indeterminateKeys
     })
     const uncontrolledSelectedKeysRef = ref(
-      props.defaultSelectedKeys ||
-      props.selectedKeys
+      props.defaultSelectedKeys || props.selectedKeys
     )
     const controlledSelectedKeysRef = toRef(props, 'selectedKeys')
     const mergedSelectedKeysRef = useMergedState(
@@ -207,10 +197,7 @@ export default {
     const uncontrolledExpandedKeysRef = ref(
       props.defaultExpandAll
         ? treeMateRef.value.getNonLeafKeys()
-        : (
-          props.defaultExpandedKeys ||
-          props.expandedKeys
-        )
+        : props.defaultExpandedKeys || props.expandedKeys
     )
     const controlledExpandedKeysRef = toRef(props, 'selectedKeys')
     const mergedExpandedKeysRef = useMergedState(
@@ -246,10 +233,7 @@ export default {
     },
     pattern (value) {
       if (value) {
-        const [
-          expandedKeysAfterChange,
-          highlightKeys
-        ] = keysWithFilter(
+        const [expandedKeysAfterChange, highlightKeys] = keysWithFilter(
           this.data,
           this.pattern,
           this.filter
@@ -316,9 +300,7 @@ export default {
     },
     handleCheck (node, checked) {
       if (this.disabled || node.disabled) return
-      const {
-        checkedKeys
-      } = this.treeMate[checked ? 'check' : 'uncheck'](
+      const { checkedKeys } = this.treeMate[checked ? 'check' : 'uncheck'](
         node.key,
         this.displayedCheckedKeys,
         {
@@ -330,18 +312,15 @@ export default {
     toggleExpand (node) {
       if (this.disabled) return
       const { mergedExpandedKeys } = this
-      const index = mergedExpandedKeys
-        .findIndex(expandNodeId => expandNodeId === node.key)
+      const index = mergedExpandedKeys.findIndex(
+        (expandNodeId) => expandNodeId === node.key
+      )
       if (~index) {
         const expandedKeysAfterChange = Array.from(mergedExpandedKeys)
         expandedKeysAfterChange.splice(index, 1)
-        this.doExpandedKeysChange(
-          expandedKeysAfterChange
-        )
+        this.doExpandedKeysChange(expandedKeysAfterChange)
       } else {
-        this.doExpandedKeysChange(
-          mergedExpandedKeys.concat(node.key)
-        )
+        this.doExpandedKeysChange(mergedExpandedKeys.concat(node.key))
       }
     },
     handleSwitcherClick (node) {
@@ -352,13 +331,10 @@ export default {
       if (this.disabled || node.disabled || !this.selectable) return
       if (this.multiple) {
         const selectedKeys = this.mergedSelectedKeys
-        const index = selectedKeys.findIndex(key => key === node.key)
+        const index = selectedKeys.findIndex((key) => key === node.key)
         if (~index) {
           if (this.cancelable) {
-            selectedKeys.splice(
-              index,
-              1
-            )
+            selectedKeys.splice(index, 1)
           }
         } else if (!~index) {
           selectedKeys.push(node.key)
@@ -375,16 +351,14 @@ export default {
         }
       }
     },
-    handleDragEnter ({ event, node }) { // node should be a tmNode
+    handleDragEnter ({ event, node }) {
+      // node should be a tmNode
       if (!this.draggable || this.disabled || node.disabled) return
       this.doDragEnter({ event, node })
       if (!this.expandOnDragenter) return
       this.droppingNodeKey = node.key
       if (node.key === this.draggingNodeKey) return
-      if (
-        !this.mergedExpandedKeys.includes(node.key) &&
-        !node.isLeaf
-      ) {
+      if (!this.mergedExpandedKeys.includes(node.key) && !node.isLeaf) {
         window.clearTimeout(this.expandTimerId)
         const expand = () => {
           if (
@@ -398,15 +372,13 @@ export default {
           if (!this.loadingKeys.includes(node.key)) {
             this.loadingKeys.push(node.key)
           }
-          this
-            .onLoad(node)
-            .then(() => {
-              this.loadingKeys.splice(
-                this.loadingKeys.find(key => key === node.key),
-                1
-              )
-              expand()
-            })
+          this.onLoad(node).then(() => {
+            this.loadingKeys.splice(
+              this.loadingKeys.find((key) => key === node.key),
+              1
+            )
+            expand()
+          })
           return
         }
         this.expandTimerId = window.setTimeout(() => {
@@ -443,19 +415,23 @@ export default {
     }
   },
   render () {
-    const {
-      mergedTheme
-    } = this
-    return h('div', {
-      class: [
-        'n-tree',
-        {
-          [`n-${mergedTheme}-theme`]: mergedTheme
-        }
-      ]
-    }, this.tmNodes.map(tmNode => h(NTreeNode, {
-      tmNode,
-      key: tmNode.key
-    })))
+    const { mergedTheme } = this
+    return h(
+      'div',
+      {
+        class: [
+          'n-tree',
+          {
+            [`n-${mergedTheme}-theme`]: mergedTheme
+          }
+        ]
+      },
+      this.tmNodes.map((tmNode) =>
+        h(NTreeNode, {
+          tmNode,
+          key: tmNode.key
+        })
+      )
+    )
   }
 }

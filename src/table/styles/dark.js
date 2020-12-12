@@ -5,9 +5,7 @@ import { baseDark } from '../../_styles/base'
 export default create({
   theme: 'dark',
   name: 'Table',
-  peer: [
-    baseDark
-  ],
+  peer: [baseDark],
   getLocalVars (vars) {
     const {
       dividerColorOverlay,

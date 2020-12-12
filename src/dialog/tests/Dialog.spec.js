@@ -6,12 +6,8 @@ import { NDialog } from '../index'
 
 describe('n-dialog', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      dialogLight
-    ]
+    locales: [enUS],
+    styles: [dialogLight]
   })
   it('should work with import on demand', () => {
     mount(NDialog, {

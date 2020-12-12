@@ -8,12 +8,7 @@ import { baseLoadingLight } from '../../_base/loading/styles'
 export default create({
   theme: 'light',
   name: 'Tree',
-  peer: [
-    baseLight,
-    iconLight,
-    checkboxLight,
-    baseLoadingLight
-  ],
+  peer: [baseLight, iconLight, checkboxLight, baseLoadingLight],
   getLocalVars (vars) {
     const {
       borderRadiusSmall,

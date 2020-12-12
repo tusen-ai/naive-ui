@@ -14,9 +14,7 @@ import { dateArray, strictParse } from '../utils'
 import commonCalendarMixin from './commonCalendarMixin'
 
 export default {
-  mixins: [
-    commonCalendarMixin
-  ],
+  mixins: [commonCalendarMixin],
   props: {
     value: {
       type: Number,
@@ -57,9 +55,7 @@ export default {
   },
   watch: {
     calendarDateTime (newCalendarDateTime, oldCalendarDateTime) {
-      if (
-        !isSameMonth(newCalendarDateTime, oldCalendarDateTime)
-      ) {
+      if (!isSameMonth(newCalendarDateTime, oldCalendarDateTime)) {
         this.disableTransitionOneTick()
       }
     },
@@ -82,9 +78,7 @@ export default {
   },
   methods: {
     isCalendarDateDisabled (timestamp) {
-      const {
-        isDateDisabled
-      } = this
+      const { isDateDisabled } = this
       if (!isDateDisabled) return false
       return isDateDisabled(timestamp)
     },
@@ -104,7 +98,11 @@ export default {
       }
     },
     handleDateInputBlur () {
-      const date = strictParse(this.displayDateString, this.dateFormat, new Date())
+      const date = strictParse(
+        this.displayDateString,
+        this.dateFormat,
+        new Date()
+      )
       if (isValid(date)) {
         if (!this.valueAsDateTime) {
           this.doUpdateValue(getTime(this.adjustValue(new Date())))

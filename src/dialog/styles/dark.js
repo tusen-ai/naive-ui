@@ -7,11 +7,7 @@ import { buttonDark } from '../../button/styles'
 export default create({
   theme: 'dark',
   name: 'Dialog',
-  peer: [
-    baseDark,
-    iconDark,
-    buttonDark
-  ],
+  peer: [baseDark, iconDark, buttonDark],
   getLocalVars (vars) {
     const {
       textColor1Overlay,

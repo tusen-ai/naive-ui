@@ -6,12 +6,8 @@ import { NTransfer } from '../index'
 
 describe('n-transfer', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      transferLight
-    ]
+    locales: [enUS],
+    styles: [transferLight]
   })
   it('should work with import on demand', () => {
     mount(NTransfer, {

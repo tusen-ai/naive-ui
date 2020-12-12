@@ -4,9 +4,7 @@ import { baseLight } from '../../_styles/base'
 export default create({
   theme: 'light',
   name: 'Affix',
-  peer: [
-    baseLight
-  ],
+  peer: [baseLight],
   getLocalVars () {
     return {}
   }

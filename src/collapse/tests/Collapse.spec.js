@@ -6,12 +6,8 @@ import { NCollapse } from '../index'
 
 describe('n-collapse', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      collapseLight
-    ]
+    locales: [enUS],
+    styles: [collapseLight]
   })
   it('should work with import on demand', () => {
     mount(NCollapse, {

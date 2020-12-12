@@ -1,6 +1,4 @@
-import {
-  enUS
-} from 'date-fns/locale'
+import { enUS } from 'date-fns/locale'
 
 export default {
   _name: 'en-US',
@@ -12,7 +10,8 @@ export default {
   Cascader: {
     placeholder: 'Please Select',
     loading: 'Loading',
-    loadingRequiredMessage: label => `Please load all ${label}'s descedants before checking it.`
+    loadingRequiredMessage: (label) =>
+      `Please load all ${label}'s descedants before checking it.`
   },
   DatePicker: {
     Jan: 'Jan',

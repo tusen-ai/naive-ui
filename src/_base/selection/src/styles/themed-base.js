@@ -1,4 +1,14 @@
-import { cTB, cRB, c, cB, cE, cM, cNotM, createKey, insideFormItem } from '../../../../_utils/cssr'
+import {
+  cTB,
+  cRB,
+  c,
+  cB,
+  cE,
+  cM,
+  cNotM,
+  createKey,
+  insideFormItem
+} from '../../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
@@ -22,11 +32,11 @@ export default c([
       borderHover,
       borderActive
     } = $local
-    const {
-      cubicBezierEaseInOut
-    } = props.$global
-    return cTB('base-selection', {
-      raw: `
+    const { cubicBezierEaseInOut } = props.$global
+    return cTB(
+      'base-selection',
+      {
+        raw: `
         position: relative;
         z-index: auto;
         box-shadow: none;
@@ -35,15 +45,16 @@ export default c([
         display: inline-block;
         vertical-align: bottom;
       `,
-      borderRadius
-    }, [
-      cM('bordered', [
-        cE('border', {
-          border
-        })
-      ]),
-      cE('border, state-border', {
-        raw: `
+        borderRadius
+      },
+      [
+        cM('bordered', [
+          cE('border', {
+            border
+          })
+        ]),
+        cE('border, state-border', {
+          raw: `
           position: absolute;
           left: 0;
           right: 0;
@@ -51,16 +62,16 @@ export default c([
           bottom: 0;
           pointer-events: none;
         `,
-        border,
-        borderColor: 'transparent',
-        borderRadius,
-        transition: `border-color .3s ${cubicBezierEaseInOut}`
-      }),
-      cE('state-border', {
-        zIndex: 1
-      }),
-      cE('box-shadow', {
-        raw: `
+          border,
+          borderColor: 'transparent',
+          borderRadius,
+          transition: `border-color .3s ${cubicBezierEaseInOut}`
+        }),
+        cE('state-border', {
+          zIndex: 1
+        }),
+        cE('box-shadow', {
+          raw: `
           position: absolute;
           left: 0;
           right: 0;
@@ -69,36 +80,38 @@ export default c([
           pointer-events: none;
           z-index: 1;
         `,
-        borderRadius,
-        transition: `box-shadow .3s ${cubicBezierEaseInOut}`
-      }),
-      cE('mark', {
-        raw: `
+          borderRadius,
+          transition: `box-shadow .3s ${cubicBezierEaseInOut}`
+        }),
+        cE('mark', {
+          raw: `
           cursor: pointer;
           position: absolute;
           top: 50%;
           transform: translateY(-50%);
           right: 10px;
         `
-      }),
-      cM('selected', [
+        }),
+        cM('selected', [
+          cE('placeholder', {
+            opacity: 0
+          })
+        ]),
         cE('placeholder', {
-          opacity: 0
-        })
-      ]),
-      cE('placeholder', {
-        raw: `
+          raw: `
           pointer-events: none;
           position: absolute;
           left: 14px;
           top: 0;
           opacity: 1;
         `,
-        transition: `color .3s ${cubicBezierEaseInOut}`,
-        color: placeholderColor
-      }),
-      cB('base-selection-tags', {
-        raw: `
+          transition: `color .3s ${cubicBezierEaseInOut}`,
+          color: placeholderColor
+        }),
+        cB(
+          'base-selection-tags',
+          {
+            raw: `
           cursor: pointer;
           outline: none;
           box-sizing: border-box;
@@ -111,31 +124,39 @@ export default c([
           width: 100%;
           vertical-align: bottom;
         `,
-        backgroundColor: color,
-        borderRadius,
-        transition: `
+            backgroundColor: color,
+            borderRadius,
+            transition: `
           color .3s ${cubicBezierEaseInOut},
           box-shadow .3s ${cubicBezierEaseInOut},
           background-color .3s ${cubicBezierEaseInOut}
         `
-      }, [
-        cB('tag', {
-          raw: `
+          },
+          [
+            cB(
+              'tag',
+              {
+                raw: `
             margin-right: 7px;
             margin-bottom: 3px;
             font-size: 14px;
             max-width: 100%;
           `
-        }, [
-          cE('content', {
-            raw: `
+              },
+              [
+                cE('content', {
+                  raw: `
               text-overflow: ellipsis;
               overflow: hidden;`
-          })
-        ])
-      ]),
-      cB('base-selection-label', {
-        raw: `
+                })
+              ]
+            )
+          ]
+        ),
+        cB(
+          'base-selection-label',
+          {
+            raw: `
           display: inline-block;
           width: 100%;
           vertical-align: bottom;
@@ -145,16 +166,17 @@ export default c([
           box-sizing: border-box;
           position: relative;
         `,
-        transition: `
+            transition: `
           color .3s ${cubicBezierEaseInOut},
           box-shadow .3s ${cubicBezierEaseInOut},
           background-color .3s ${cubicBezierEaseInOut}
         `,
-        borderRadius: borderRadius,
-        backgroundColor: color
-      }, [
-        cE('input', {
-          raw: `
+            borderRadius: borderRadius,
+            backgroundColor: color
+          },
+          [
+            cE('input', {
+              raw: `
             line-height: inherit;
             outline: none;
             cursor: pointer;
@@ -167,119 +189,134 @@ export default c([
             padding: ${paddingSingle};
             background-color: transparent;
           `,
-          color: textColor,
-          transition: `color .3s ${cubicBezierEaseInOut}`
-        }),
-        cE('placeholder', {
-          lineHeight: 'inherit',
-          pointerEvents: 'none',
-          position: 'absolute',
-          whiteSpace: 'nowrap',
-          overflow: 'hidden',
-          left: 0,
-          right: 0,
-          top: 0,
-          bottom: 0,
-          padding: '0 26px 0 14px',
-          color: placeholderColor,
-          transition: `color .3s ${cubicBezierEaseInOut}`
-        })
-      ]),
-      cNotM('disabled', [
-        cM('focus', [
-          cE('box-shadow', {
-            boxShadow: boxShadowFocus
-          }),
-          cE('state-border', {
-            border: borderFocus
-          })
-        ]),
-        cM('active', [
-          cE('box-shadow', {
-            boxShadow: boxShadowActive
-          }),
-          cE('state-border', {
-            border: borderActive
-          }),
-          cB('base-selection-label', {
-            backgroundColor: colorActive
-          }),
-          cB('base-selection-tags', {
-            backgroundColor: colorActive
-          }),
-          cB('base-selection-input-tag', {
-            display: 'inline-block'
-          })
-        ]),
-        cNotM('active', [
-          cRB('base-selection-label', [
-            c('&:focus ~', [
-              cE('box-shadow', {
-                boxShadow: boxShadowFocus
-              }),
-              cE('state-border', {
-                border: borderFocus
-              })
-            ]),
-            c('&:hover ~', [
-              cE('box-shadow', {
-                boxShadow: boxShadowHover
-              }),
-              cE('state-border', {
-                border: borderHover
-              })
-            ])
+              color: textColor,
+              transition: `color .3s ${cubicBezierEaseInOut}`
+            }),
+            cE('placeholder', {
+              lineHeight: 'inherit',
+              pointerEvents: 'none',
+              position: 'absolute',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              left: 0,
+              right: 0,
+              top: 0,
+              bottom: 0,
+              padding: '0 26px 0 14px',
+              color: placeholderColor,
+              transition: `color .3s ${cubicBezierEaseInOut}`
+            })
+          ]
+        ),
+        cNotM('disabled', [
+          cM('focus', [
+            cE('box-shadow', {
+              boxShadow: boxShadowFocus
+            }),
+            cE('state-border', {
+              border: borderFocus
+            })
           ]),
-          cRB('base-selection-tags', [
-            c('&:focus ~', [
-              cE('box-shadow', {
-                boxShadow: boxShadowFocus
-              }),
-              cE('state-border', {
-                border: borderFocus
-              })
+          cM('active', [
+            cE('box-shadow', {
+              boxShadow: boxShadowActive
+            }),
+            cE('state-border', {
+              border: borderActive
+            }),
+            cB('base-selection-label', {
+              backgroundColor: colorActive
+            }),
+            cB('base-selection-tags', {
+              backgroundColor: colorActive
+            }),
+            cB('base-selection-input-tag', {
+              display: 'inline-block'
+            })
+          ]),
+          cNotM('active', [
+            cRB('base-selection-label', [
+              c('&:focus ~', [
+                cE('box-shadow', {
+                  boxShadow: boxShadowFocus
+                }),
+                cE('state-border', {
+                  border: borderFocus
+                })
+              ]),
+              c('&:hover ~', [
+                cE('box-shadow', {
+                  boxShadow: boxShadowHover
+                }),
+                cE('state-border', {
+                  border: borderHover
+                })
+              ])
             ]),
-            c('&:hover ~', [
-              cE('box-shadow', {
-                boxShadow: boxShadowHover
-              }),
-              cE('state-border', {
-                border: borderHover
-              })
+            cRB('base-selection-tags', [
+              c('&:focus ~', [
+                cE('box-shadow', {
+                  boxShadow: boxShadowFocus
+                }),
+                cE('state-border', {
+                  border: borderFocus
+                })
+              ]),
+              c('&:hover ~', [
+                cE('box-shadow', {
+                  boxShadow: boxShadowHover
+                }),
+                cE('state-border', {
+                  border: borderHover
+                })
+              ])
             ])
           ])
-        ])
-      ]),
-      cM('disabled', {
-        cursor: 'not-allowed'
-      }, [
-        cB('base-selection-label', {
-          cursor: 'not-allowed',
-          backgroundColor: colorDisabled
-        }, [
-          cE('input', {
-            cursor: 'not-allowed',
-            color: textColorDisabled
-          }, [
-            cM('placeholder', {
-              color: placeholderColorDisabled
+        ]),
+        cM(
+          'disabled',
+          {
+            cursor: 'not-allowed'
+          },
+          [
+            cB(
+              'base-selection-label',
+              {
+                cursor: 'not-allowed',
+                backgroundColor: colorDisabled
+              },
+              [
+                cE(
+                  'input',
+                  {
+                    cursor: 'not-allowed',
+                    color: textColorDisabled
+                  },
+                  [
+                    cM('placeholder', {
+                      color: placeholderColorDisabled
+                    }),
+                    c('&::placeholder', {
+                      color: placeholderColorDisabled
+                    })
+                  ]
+                )
+              ]
+            ),
+            cB('base-selection-tags', {
+              cursor: 'now-allowed',
+              backgroundColor: colorDisabled
             }),
-            c('&::placeholder', {
+            cE('placeholder', {
+              cursor: 'not-allowed',
               color: placeholderColorDisabled
             })
-          ])
-        ]),
-        cB('base-selection-tags', {
-          cursor: 'now-allowed',
-          backgroundColor: colorDisabled
-        }),
-        cE('placeholder', {
-          cursor: 'not-allowed',
-          color: placeholderColorDisabled
-        })
-      ]),
-      cB('base-selection-input-tag', {
-        raw: `
+          ]
+        ),
+        cB(
+          'base-selection-input-tag',
+          {
+            raw: `
           outline: none;
           display: none;
           position: relative;
@@ -287,9 +324,10 @@ export default c([
           max-width: 100%;
           vertical-align: bottom;
         `
-      }, [
-        cE('input', {
-          raw: `
+          },
+          [
+            cE('input', {
+              raw: `
             padding: 0;
             background-color: transparent;
             outline: none;
@@ -300,11 +338,11 @@ export default c([
             line-height: inherit;
             cursor: pointer;
           `,
-          color: textColor,
-          caretColor
-        }),
-        cE('mirror', {
-          raw: `
+              color: textColor,
+              caretColor
+            }),
+            cE('mirror', {
+              raw: `
             position: absolute;
             padding-right: 1em;
             left: 0;
@@ -314,47 +352,75 @@ export default c([
             user-select: none;
             opacity: 0;
           `
-        })
-      ])
-    ])
+            })
+          ]
+        )
+      ]
+    )
   },
   ({ props }) => {
     const { $local } = props
-    return [
-      'warning',
-      'error'
-    ].map(status => {
-      return insideFormItem(status, cTB('base-selection', [
-        [
-          cE('state-border', {
-            border: $local[createKey('border', status)]
-          }),
-          cNotM('disabled', [
-            cM('active', [
-              cE('box-shadow', {
-                boxShadow: $local[createKey('boxShadowActive', status)]
-              }),
-              cE('state-border', {
-                border: $local[createKey('borderActive', status)]
-              }),
-              cB('base-selection-label', {
-                backgroundColor: $local[createKey('colorActive', status)]
-              }),
-              cB('base-selection-tags', {
-                backgroundColor: $local[createKey('boxShadowActive', status)]
-              })
-            ]),
-            cNotM('active', [
-              cRB('base-selection-label', [
-                c('&:hover ~', [
-                  cE('box-shadow', {
-                    boxShadow: $local[createKey('boxShadowHover', status)]
-                  }),
-                  cE('state-border', {
-                    border: $local[createKey('borderHover', status)]
-                  })
+    return ['warning', 'error'].map((status) => {
+      return insideFormItem(
+        status,
+        cTB('base-selection', [
+          [
+            cE('state-border', {
+              border: $local[createKey('border', status)]
+            }),
+            cNotM('disabled', [
+              cM('active', [
+                cE('box-shadow', {
+                  boxShadow: $local[createKey('boxShadowActive', status)]
+                }),
+                cE('state-border', {
+                  border: $local[createKey('borderActive', status)]
+                }),
+                cB('base-selection-label', {
+                  backgroundColor: $local[createKey('colorActive', status)]
+                }),
+                cB('base-selection-tags', {
+                  backgroundColor: $local[createKey('boxShadowActive', status)]
+                })
+              ]),
+              cNotM('active', [
+                cRB('base-selection-label', [
+                  c('&:hover ~', [
+                    cE('box-shadow', {
+                      boxShadow: $local[createKey('boxShadowHover', status)]
+                    }),
+                    cE('state-border', {
+                      border: $local[createKey('borderHover', status)]
+                    })
+                  ]),
+                  c('&:focus ~', [
+                    cE('box-shadow', {
+                      boxShadow: $local[createKey('boxShadowFocus', status)]
+                    }),
+                    cE('state-border', {
+                      border: $local[createKey('borderFocus', status)]
+                    })
+                  ])
                 ]),
-                c('&:focus ~', [
+                cRB('base-selection-tags', [
+                  c('&:hover ~', [
+                    cE('box-shadow', {
+                      boxShadow: $local[createKey('boxShadowHover', status)]
+                    }),
+                    cE('state-border', {
+                      border: $local[createKey('borderHover', status)]
+                    })
+                  ]),
+                  c('&:focus ~', [
+                    cE('box-shadow', {
+                      boxShadow: $local[createKey('boxShadowFocus', status)]
+                    }),
+                    cE('state-border', {
+                      border: $local[createKey('borderHover', status)]
+                    })
+                  ])
+                ]),
+                cM('focus', [
                   cE('box-shadow', {
                     boxShadow: $local[createKey('boxShadowFocus', status)]
                   }),
@@ -362,37 +428,11 @@ export default c([
                     border: $local[createKey('borderFocus', status)]
                   })
                 ])
-              ]),
-              cRB('base-selection-tags', [
-                c('&:hover ~', [
-                  cE('box-shadow', {
-                    boxShadow: $local[createKey('boxShadowHover', status)]
-                  }),
-                  cE('state-border', {
-                    border: $local[createKey('borderHover', status)]
-                  })
-                ]),
-                c('&:focus ~', [
-                  cE('box-shadow', {
-                    boxShadow: $local[createKey('boxShadowFocus', status)]
-                  }),
-                  cE('state-border', {
-                    border: $local[createKey('borderHover', status)]
-                  })
-                ])
-              ]),
-              cM('focus', [
-                cE('box-shadow', {
-                  boxShadow: $local[createKey('boxShadowFocus', status)]
-                }),
-                cE('state-border', {
-                  border: $local[createKey('borderFocus', status)]
-                })
               ])
             ])
-          ])
-        ]
-      ]))
+          ]
+        ])
+      )
     })
   }
 ])

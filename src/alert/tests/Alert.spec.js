@@ -6,12 +6,8 @@ import { NAlert } from '../index'
 
 describe('n-alert', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      alertLight
-    ]
+    locales: [enUS],
+    styles: [alertLight]
   })
   it('should work with import on demand', () => {
     mount(NAlert, {

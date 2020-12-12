@@ -41,14 +41,18 @@ export default {
   render () {
     const show = this.name === this.NTab.value
     const useVShow = this.displayDirective === 'show'
-    return (useVShow || show) ? withDirectives(
-      h('div', {
-        class: 'n-tab-panel',
-        key: this.name
-      }, getSlot(this)),
-      [
-        [vShow, !useVShow || show]
-      ]
-    ) : null
+    return useVShow || show
+      ? withDirectives(
+        h(
+          'div',
+          {
+            class: 'n-tab-panel',
+            key: this.name
+          },
+          getSlot(this)
+        ),
+        [[vShow, !useVShow || show]]
+      )
+      : null
   }
 }

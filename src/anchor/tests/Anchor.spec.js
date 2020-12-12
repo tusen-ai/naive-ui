@@ -6,12 +6,8 @@ import { NAnchor } from '../index'
 
 describe('n-anchor', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      anchorLight
-    ]
+    locales: [enUS],
+    styles: [anchorLight]
   })
   it('should work with import on demand', () => {
     mount(NAnchor, {

@@ -36,35 +36,21 @@
             :key="tmNode.key"
             :tm-node="tmNode"
           />
-          <n-select-option
-            v-else
-            :key="tmNode.key"
-            :tm-node="tmNode"
-          />
+          <n-select-option v-else :key="tmNode.key" :tm-node="tmNode" />
         </template>
       </virtual-list>
-      <div
-        v-else
-        class="n-base-select-menu-option-wrapper"
-      >
+      <div v-else class="n-base-select-menu-option-wrapper">
         <template v-for="tmNode in tmNodes">
           <n-select-group-header
             v-if="tmNode.rawNode.type === 'group'"
             :key="tmNode.key"
             :tm-node="tmNode"
           />
-          <n-select-option
-            v-else
-            :key="tmNode.key"
-            :tm-node="tmNode"
-          />
+          <n-select-option v-else :key="tmNode.key" :tm-node="tmNode" />
         </template>
       </div>
     </n-scrollbar>
-    <div
-      v-else
-      style="padding: 14px 0; width: 100%;"
-    >
+    <div v-else style="padding: 14px 0; width: 100%">
       <slot name="empty">
         <n-empty />
       </slot>
@@ -168,14 +154,14 @@ export default {
         ? props.value === null
           ? treeMate.getFirstAvailableNode()
           : props.multiple
-            ? treeMate.getNode((props.value || [])[(props.value || []).length - 1]) || treeMate.getFirstAvailableNode()
+            ? treeMate.getNode(
+              (props.value || [])[(props.value || []).length - 1]
+            ) || treeMate.getFirstAvailableNode()
             : treeMate.getNode(props.value) || treeMate.getFirstAvailableNode()
         : null
     )
     onMounted(() => {
-      const {
-        value
-      } = scrollbarRef
+      const { value } = scrollbarRef
       if (value) value.sync()
     })
     return {
@@ -183,15 +169,11 @@ export default {
       virtualListRef,
       scrollbarRef,
       virtualListContainer () {
-        const {
-          value
-        } = virtualListRef
+        const { value } = virtualListRef
         return value && value.listRef
       },
       virtualListContent () {
-        const {
-          value
-        } = virtualListRef
+        const { value } = virtualListRef
         return value && value.itemsRef
       },
       pendingTmNode: pendingNodeRef,
@@ -200,10 +182,7 @@ export default {
   },
   computed: {
     valueSet () {
-      if (
-        this.multiple &&
-        Array.isArray(this.value)
-      ) return new Set(this.value)
+      if (this.multiple && Array.isArray(this.value)) return new Set(this.value)
       return null
     },
     empty () {
@@ -231,15 +210,11 @@ export default {
   },
   methods: {
     doToggleOption (option) {
-      const {
-        onMenuToggleOption
-      } = this
+      const { onMenuToggleOption } = this
       if (onMenuToggleOption) onMenuToggleOption(option)
     },
     doScroll (e) {
-      const {
-        onScroll
-      } = this
+      const { onScroll } = this
       if (onScroll) onScroll(e)
     },
     // required, scroller sync need to be triggered manually
@@ -270,17 +245,13 @@ export default {
       this.next()
     },
     next () {
-      const {
-        pendingTmNode
-      } = this
+      const { pendingTmNode } = this
       if (pendingTmNode) {
         this.setPendingTmNode(pendingTmNode.getNext({ loop: true }), true)
       }
     },
     prev () {
-      const {
-        pendingTmNode
-      } = this
+      const { pendingTmNode } = this
       if (pendingTmNode) {
         this.setPendingTmNode(pendingTmNode.getPrev({ loop: true }), true)
       }
@@ -291,7 +262,10 @@ export default {
         if (this.virtualScroll) {
           this.virtualListRef.scrollTo({ index: tmNode.fIndex })
         } else {
-          this.scrollbarRef.scrollTo({ index: tmNode.fIndex, elSize: this.itemSize })
+          this.scrollbarRef.scrollTo({
+            index: tmNode.fIndex,
+            elSize: this.itemSize
+          })
         }
       }
     }

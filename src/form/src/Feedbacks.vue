@@ -1,9 +1,6 @@
 <template>
   <template v-if="feedback !== undefined && feedback !== null">
-    <div
-      :key="feedback"
-      class="n-form-item-feedback__line"
-    >
+    <div :key="feedback" class="n-form-item-feedback__line">
       {{ feedback }}
     </div>
   </template>
@@ -19,7 +16,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'FormItemFeedback',
   props: {

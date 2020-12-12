@@ -1,9 +1,5 @@
 import { h } from 'vue'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import styleScheme from '../../_deprecated/style-scheme'
 import style from './styles'
 import { warn } from '../../_utils'
@@ -11,11 +7,7 @@ import { warn } from '../../_utils'
 export default {
   name: 'Element',
   alias: ['El'],
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(style)
-  ],
+  mixins: [configurable, themeable, withCssr(style)],
   props: {
     tag: {
       type: String,
@@ -36,9 +28,7 @@ export default {
   },
   watch: {
     mergedTheme: function (value, oldValue) {
-      const {
-        onThemeChange
-      } = this
+      const { onThemeChange } = this
       if (onThemeChange) onThemeChange(value, oldValue)
     }
   },
@@ -51,16 +41,24 @@ export default {
       mergedThemeEnvironment,
       $slots
     } = this
-    return h(as || tag, {
-      class: {
-        'n-element': true,
-        [`n-${mergedTheme}-theme`]: mergedTheme
-      }
-    }, ($slots.default && $slots.default({
-      theme: mergedTheme,
-      namespace: NConfigProvider ? NConfigProvider.inheritedNamespace : null,
-      themeEnvironment: mergedThemeEnvironment,
-      styleScheme: mergedTheme ? styleScheme[mergedTheme] : null
-    })) || null)
+    return h(
+      as || tag,
+      {
+        class: {
+          'n-element': true,
+          [`n-${mergedTheme}-theme`]: mergedTheme
+        }
+      },
+      ($slots.default &&
+        $slots.default({
+          theme: mergedTheme,
+          namespace: NConfigProvider
+            ? NConfigProvider.inheritedNamespace
+            : null,
+          themeEnvironment: mergedThemeEnvironment,
+          styleScheme: mergedTheme ? styleScheme[mergedTheme] : null
+        })) ||
+        null
+    )
   }
 }

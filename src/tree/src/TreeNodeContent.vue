@@ -121,7 +121,11 @@ export default {
       this.doDragStart(e)
     },
     handleContentDragEnter (e) {
-      if (e.currentTarget && e.relatedTarget && e.currentTarget.contains(e.relatedTarget)) return
+      if (
+        e.currentTarget &&
+        e.relatedTarget &&
+        e.currentTarget.contains(e.relatedTarget)
+      ) { return }
       this.doDragEnter(e)
     },
     handleDragOverContent (e) {
@@ -144,18 +148,22 @@ export default {
       this.doDragEnd(e)
     },
     handleContentDragLeave (e) {
-      if (e.currentTarget && e.relatedTarget && e.currentTarget.contains(e.relatedTarget)) return
+      if (
+        e.currentTarget &&
+        e.relatedTarget &&
+        e.currentTarget.contains(e.relatedTarget)
+      ) { return }
       this.pending = false
       this.doDragLeave(e)
     },
     handleContentDrop (e) {
       e.preventDefault()
       this.pending = false
-      const dropPosition = ({
+      const dropPosition = {
         top: 'top',
         bottom: 'bottom',
         body: 'center'
-      })[this.pendingPosition]
+      }[this.pendingPosition]
       this.doDrop(e, dropPosition)
     }
   }

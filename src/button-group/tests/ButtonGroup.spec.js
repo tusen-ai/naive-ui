@@ -6,12 +6,8 @@ import { NButtonGroup } from '../index'
 
 describe('n-button-group', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      buttonGroupLight
-    ]
+    locales: [enUS],
+    styles: [buttonGroupLight]
   })
   it('should work with import on demand', () => {
     mount(NButtonGroup, {

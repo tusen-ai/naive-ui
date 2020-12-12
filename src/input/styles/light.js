@@ -2,17 +2,12 @@ import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
 import { changeColor } from 'seemly'
 import { baseLight } from '../../_styles/base'
-import {
-  baseSuffixLight
-} from '../../_base/suffix/styles'
+import { baseSuffixLight } from '../../_base/suffix/styles'
 
 export default create({
   name: 'Input',
   theme: 'light',
-  peer: [
-    baseLight,
-    baseSuffixLight
-  ],
+  peer: [baseLight, baseSuffixLight],
   getLocalVars (vars) {
     const {
       textColor2,
@@ -52,14 +47,18 @@ export default create({
       borderHoverWarning: `1px solid ${warningColorHover}`,
       colorFocusWarning: inputColor,
       borderFocusWarning: `1px solid ${warningColorHover}`,
-      boxShadowFocusWarning: `0 0 0 2px ${changeColor(warningColor, { alpha: 0.2 })}`,
+      boxShadowFocusWarning: `0 0 0 2px ${changeColor(warningColor, {
+        alpha: 0.2
+      })}`,
       caretColorWarning: warningColor,
       // error
       borderError: `1px solid ${errorColor}`,
       borderHoverError: `1px solid ${errorColorHover}`,
       colorFocusError: inputColor,
       borderFocusError: `1px solid ${errorColorHover}`,
-      boxShadowFocusError: `0 0 0 2px ${changeColor(errorColor, { alpha: 0.2 })}`,
+      boxShadowFocusError: `0 0 0 2px ${changeColor(errorColor, {
+        alpha: 0.2
+      })}`,
       caretColorError: errorColor
     }
   }

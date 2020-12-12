@@ -4,12 +4,7 @@ export default function createBaseComponent (options) {
     globalVars: null,
     overrides: null
   }
-  const {
-    name,
-    theme,
-    peer,
-    getLocalVars
-  } = options
+  const { name, theme, peer, getLocalVars } = options
   function updateVars () {
     cache.localVars = Object.assign(
       getLocalVars(cache.globalVars),

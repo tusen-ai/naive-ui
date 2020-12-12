@@ -96,7 +96,10 @@ export default {
       return this.column.filterMultiple !== false
     },
     mergedRenderFilter () {
-      return this.NDataTable.renderFilter || this.$naive?.unstableConfig?.DataTable?.renderFilter
+      return (
+        this.NDataTable.renderFilter ||
+        this.$naive?.unstableConfig?.DataTable?.renderFilter
+      )
     }
   },
   methods: {

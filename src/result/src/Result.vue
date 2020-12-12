@@ -8,10 +8,22 @@
     }"
   >
     <div class="n-result-icon">
-      <image-404 v-if="status === 404 || status === '404'" class="n-result-icon__status-image" />
-      <image-403 v-else-if="status === 403 || status === '403'" class="n-result-icon__status-image" />
-      <image-500 v-else-if="status === 500 || status === '500'" class="n-result-icon__status-image" />
-      <image-418 v-else-if="status === 481 || status === '418'" class="n-result-icon__status-image" />
+      <image-404
+        v-if="status === 404 || status === '404'"
+        class="n-result-icon__status-image"
+      />
+      <image-403
+        v-else-if="status === 403 || status === '403'"
+        class="n-result-icon__status-image"
+      />
+      <image-500
+        v-else-if="status === 500 || status === '500'"
+        class="n-result-icon__status-image"
+      />
+      <image-418
+        v-else-if="status === 481 || status === '418'"
+        class="n-result-icon__status-image"
+      />
       <n-icon v-else-if="status === 'success'" size="80">
         <success-icon />
       </n-icon>
@@ -43,11 +55,7 @@
 </template>
 
 <script>
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import {
   InfoIcon,
   SuccessIcon,
@@ -74,11 +82,7 @@ export default {
     image418,
     image500
   },
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     size: {
       validator (value) {

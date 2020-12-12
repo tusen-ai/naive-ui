@@ -11,10 +11,7 @@
       padding: stylePadding
     }"
   >
-    <div
-      v-if="gutter"
-      class="n-col__box"
-    >
+    <div v-if="gutter" class="n-col__box">
       <slot />
     </div>
     <template v-else>
@@ -56,7 +53,9 @@ export default {
       return this.NRow.gutter
     },
     stylePadding () {
-      return `${formatLength(this.NRow.verticalGutter, { c: 0.5 })} ${formatLength(this.NRow.horizontalGutter, { c: 0.5 })}`
+      return `${formatLength(this.NRow.verticalGutter, {
+        c: 0.5
+      })} ${formatLength(this.NRow.horizontalGutter, { c: 0.5 })}`
     },
     computedPush () {
       return this.push - this.pull

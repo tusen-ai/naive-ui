@@ -7,11 +7,7 @@ import { scrollbarLight } from '../../scrollbar/styles'
 export default create({
   name: 'TimePicker',
   theme: 'light',
-  peer: [
-    baseLight,
-    iconLight,
-    scrollbarLight
-  ],
+  peer: [baseLight, iconLight, scrollbarLight],
   getLocalVars (vars) {
     const {
       modalColor,

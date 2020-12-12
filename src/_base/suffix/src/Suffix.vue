@@ -45,9 +45,7 @@
 import { ChevronDownIcon, DismissCircleIcon } from '../../icons'
 import { NIconSwitchTransition } from '../../../_base'
 import NBaseLoading from '../../loading'
-import {
-  withCssr
-} from '../../../_mixins'
+import { withCssr } from '../../../_mixins'
 import styles from './styles'
 
 export default {
@@ -58,9 +56,7 @@ export default {
     NBaseLoading,
     NIconSwitchTransition
   },
-  mixins: [
-    withCssr(styles)
-  ],
+  mixins: [withCssr(styles)],
   inject: {
     NFormItem: {
       default: null
@@ -123,9 +119,7 @@ export default {
   },
   methods: {
     handleClick (e) {
-      const {
-        onClear
-      } = this
+      const { onClear } = this
       if (onClear) onClear(e)
     },
     handleMouseEnter () {
@@ -136,9 +130,7 @@ export default {
     },
     handleMouseDown (e) {
       e.preventDefault()
-      const {
-        onMouseDown
-      } = this
+      const { onMouseDown } = this
       if (onMouseDown) onMouseDown(e)
     }
   }

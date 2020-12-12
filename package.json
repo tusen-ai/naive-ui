@@ -40,10 +40,10 @@
     "README.md"
   ],
   "lint-staged": {
-    "*.js": "eslint --cache --fix",
+    "*.js": "eslint --fix",
     "*.vue": [
-      "eslint",
-      "prettier --parser=vue --write"
+      "prettier --parser=vue --write",
+      "eslint --fix"
     ],
     "*.css": "stylelint --fix",
     "*.{js,css,md}": "prettier --write"

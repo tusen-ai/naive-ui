@@ -5,10 +5,7 @@ import { iconDark } from '../../icon/styles'
 export default create({
   theme: 'dark',
   name: 'Rate',
-  peer: [
-    baseDark,
-    iconDark
-  ],
+  peer: [baseDark, iconDark],
   getLocalVars (vars) {
     return {
       itemColor: vars.railColor,

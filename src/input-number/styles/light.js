@@ -8,10 +8,7 @@ import inputNumberCommonVariables from './_common'
 export default create({
   name: 'InputNumber',
   theme: 'light',
-  peer: [
-    baseLight,
-    iconLight
-  ],
+  peer: [baseLight, iconLight],
   getLocalVars (vars) {
     const {
       primaryColor,
@@ -71,7 +68,9 @@ export default create({
       borderWarning: `1px solid ${warningColor}`,
       borderHoverWarning: `1px solid ${warningColorHover}`,
       borderFocusWarning: `1px solid ${warningColorHover}`,
-      boxShadowFocusWarning: `0 0 0 2px ${changeColor(warningColor, { alpha: 0.2 })}`,
+      boxShadowFocusWarning: `0 0 0 2px ${changeColor(warningColor, {
+        alpha: 0.2
+      })}`,
       colorFocusWarning: colorFocus,
       caretColorWarning: warningColorHover,
       buttonTextColorHoverWarning: warningColorHover,
@@ -80,7 +79,9 @@ export default create({
       borderError: `1px solid ${errorColor}`,
       borderHoverError: `1px solid ${errorColorHover}`,
       borderFocusError: `1px solid ${errorColorHover}`,
-      boxShadowFocusError: `0 0 0 2px ${changeColor(errorColor, { alpha: 0.2 })}`,
+      boxShadowFocusError: `0 0 0 2px ${changeColor(errorColor, {
+        alpha: 0.2
+      })}`,
       colorFocusError: colorFocus,
       caretColorError: errorColorHover,
       buttonTextColorHoverError: errorColorHover,

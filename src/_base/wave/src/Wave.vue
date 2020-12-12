@@ -13,9 +13,7 @@ import styles from './styles/index.js'
 
 export default {
   name: 'BaseWave',
-  mixins: [
-    withCssr(styles)
-  ],
+  mixins: [withCssr(styles)],
   props: {
     theme: {
       type: String,

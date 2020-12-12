@@ -44,11 +44,7 @@
 import { computed } from 'vue'
 import { useCompitable } from 'vooks'
 import { NBaseLoading } from '../../_base'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import styles from './styles'
 import { warn } from '../../_utils'
 
@@ -63,11 +59,7 @@ export default {
   components: {
     NBaseLoading
   },
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     stroke: {
       type: String,

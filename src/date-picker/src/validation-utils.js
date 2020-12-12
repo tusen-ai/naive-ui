@@ -1,19 +1,10 @@
-import {
-  computed, toRef
-} from 'vue'
-import {
-  getHours,
-  getMinutes,
-  getSeconds
-} from 'date-fns'
+import { computed, toRef } from 'vue'
+import { getHours, getMinutes, getSeconds } from 'date-fns'
 
 export function uniCalendarValidation (props) {
   // date, datetime
   const timePickerValidatorRef = computed(() => {
-    const {
-      isTimeDisabled,
-      value
-    } = props
+    const { isTimeDisabled, value } = props
     if (value === null) return undefined
     return isTimeDisabled && isTimeDisabled(props.value)
   })
@@ -27,23 +18,16 @@ export function uniCalendarValidation (props) {
     return timePickerValidatorRef.value?.isSecondDisabled
   })
   const isDateInvalidRef = computed(() => {
-    const {
-      value,
-      type,
-      isDateDisabled
-    } = props
+    const { value, type, isDateDisabled } = props
     if (
       value === null ||
       !['date', 'datetime'].includes(type) ||
       !isDateDisabled
-    ) return false
+    ) { return false }
     return isDateDisabled(value)
   })
   const isTimeInvalidRef = computed(() => {
-    const {
-      value,
-      type
-    } = props
+    const { value, type } = props
     if (value === null || !(type !== 'datetime')) return false
     const time = new Date(value)
     const hour = time.getHours()
@@ -51,17 +35,19 @@ export function uniCalendarValidation (props) {
     const second = time.getMinutes()
     return (
       (isHourDisabledRef.value ? isHourDisabledRef.value(hour) : false) ||
-      (isMinuteDisabledRef.value ? isMinuteDisabledRef.value(minute, hour) : false) ||
-      (isSecondDisabledRef.value ? isSecondDisabledRef.value(second, minute, hour) : false)
+      (isMinuteDisabledRef.value
+        ? isMinuteDisabledRef.value(minute, hour)
+        : false) ||
+      (isSecondDisabledRef.value
+        ? isSecondDisabledRef.value(second, minute, hour)
+        : false)
     )
   })
   const isDateTimeInvalidRef = computed(() => {
     return isDateInvalidRef.value || isTimeInvalidRef.value
   })
   const isValueInvalidRef = computed(() => {
-    const {
-      type
-    } = props
+    const { type } = props
     if (type === 'date') return isDateInvalidRef.value
     if (type === 'datetime') return isDateTimeInvalidRef.value
     return false
@@ -80,10 +66,7 @@ export function uniCalendarValidation (props) {
 export function dualCalendarValidation (props) {
   // daterange, datetimerange
   const timePickerValidatorRef = computed(() => {
-    const {
-      value,
-      isTimeDisabled
-    } = props
+    const { value, isTimeDisabled } = props
     if (value === null || !isTimeDisabled) return [undefined, undefined]
     return [
       isTimeDisabled && isTimeDisabled(value[0], 'start', value),
@@ -117,26 +100,19 @@ export function dualCalendarValidation (props) {
     isEndSecondDisabled: toRef(isSecondDisabledRef.value, '1')
   }
   const isDateInvalidRef = computed(() => {
-    const {
-      value,
-      type,
-      isDateDisabled
-    } = props
+    const { value, type, isDateDisabled } = props
     if (
       value === null ||
       !['daterange', 'datetimerange'].includes(type) ||
       !isDateDisabled
-    ) return false
+    ) { return false }
     return [
       isDateDisabled(value[0], 'start', value),
       isDateDisabled(value[0], 'end', value)
     ]
   })
   const isTimeInvalidRef = computed(() => {
-    const {
-      value,
-      type
-    } = props
+    const { value, type } = props
     if (value === null || type !== 'datetimerange') return false
     const startHours = getHours(value[0])
     const startMinutes = getMinutes(value[0])
@@ -152,20 +128,25 @@ export function dualCalendarValidation (props) {
       isEndMinuteDisabled,
       isEndSecondDisabled
     } = timeValidator
-    const startTimeInvalid = (
-      (isStartHourDisabled.value ? isStartHourDisabled.value(startHours) : false) ||
-      (isStartMinuteDisabled.value ? isStartMinuteDisabled.value(startMinutes, startHours) : false) ||
-      (isStartSecondDisabled.value ? isStartSecondDisabled.value(startSeconds, startMinutes, startHours) : false)
-    )
-    const endTimeInvalid = (
+    const startTimeInvalid =
+      (isStartHourDisabled.value
+        ? isStartHourDisabled.value(startHours)
+        : false) ||
+      (isStartMinuteDisabled.value
+        ? isStartMinuteDisabled.value(startMinutes, startHours)
+        : false) ||
+      (isStartSecondDisabled.value
+        ? isStartSecondDisabled.value(startSeconds, startMinutes, startHours)
+        : false)
+    const endTimeInvalid =
       (isEndHourDisabled.value ? isEndHourDisabled.value(endHours) : false) ||
-      (isEndMinuteDisabled.value ? isEndMinuteDisabled.value(endMinutes, endHours) : false) ||
-      (isEndSecondDisabled.value ? isEndSecondDisabled.value(endSeconds, endMinutes, endHours) : false)
-    )
-    return [
-      startTimeInvalid,
-      endTimeInvalid
-    ]
+      (isEndMinuteDisabled.value
+        ? isEndMinuteDisabled.value(endMinutes, endHours)
+        : false) ||
+      (isEndSecondDisabled.value
+        ? isEndSecondDisabled.value(endSeconds, endMinutes, endHours)
+        : false)
+    return [startTimeInvalid, endTimeInvalid]
   })
   const isValueInvalidRef = computed(() => {
     return [

@@ -1,4 +1,3 @@
-
 import create from '../../_styles/utils/create-component-base'
 import sizeVariables from './_common'
 import { baseLight } from '../../_styles/base'
@@ -6,9 +5,7 @@ import { baseLight } from '../../_styles/base'
 export default create({
   name: 'Slider',
   theme: 'light',
-  peer: [
-    baseLight
-  ],
+  peer: [baseLight],
   getLocalVars (vars) {
     const indicatorColor = 'rgba(0, 0, 0, .85)'
     const boxShadow = '0 2px 8px 0 rgba(0, 0, 0, 0.12)'
@@ -28,10 +25,14 @@ export default create({
       handleColor: '#FFF',
       dotColor: cardColor,
       dotColorModal: baseColor,
-      handleBoxShadow: '0 1px 4px 0 rgba(0, 0, 0, 0.3), inset 0 0 1px 0 rgba(0, 0, 0, 0.05)',
-      handleBoxShadowHover: '0 1px 4px 0 rgba(0, 0, 0, 0.3), inset 0 0 1px 0 rgba(0, 0, 0, 0.05)',
-      handleBoxShadowActive: '0 1px 4px 0 rgba(0, 0, 0, 0.3), inset 0 0 1px 0 rgba(0, 0, 0, 0.05)',
-      handleBoxShadowFocus: '0 1px 4px 0 rgba(0, 0, 0, 0.3), inset 0 0 1px 0 rgba(0, 0, 0, 0.05)',
+      handleBoxShadow:
+        '0 1px 4px 0 rgba(0, 0, 0, 0.3), inset 0 0 1px 0 rgba(0, 0, 0, 0.05)',
+      handleBoxShadowHover:
+        '0 1px 4px 0 rgba(0, 0, 0, 0.3), inset 0 0 1px 0 rgba(0, 0, 0, 0.05)',
+      handleBoxShadowActive:
+        '0 1px 4px 0 rgba(0, 0, 0, 0.3), inset 0 0 1px 0 rgba(0, 0, 0, 0.05)',
+      handleBoxShadowFocus:
+        '0 1px 4px 0 rgba(0, 0, 0, 0.3), inset 0 0 1px 0 rgba(0, 0, 0, 0.05)',
       indicatorColor: indicatorColor,
       indicatorBoxShadow: boxShadow,
       indicatorTextColor: baseColor,

@@ -6,12 +6,8 @@ import { NBackTop } from '../index'
 
 describe('n-back-top', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      backTopLight
-    ]
+    locales: [enUS],
+    styles: [backTopLight]
   })
   it('should work with import on demand', () => {
     mount(NBackTop, {

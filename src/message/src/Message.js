@@ -9,21 +9,13 @@ import {
 } from '../../_base/icons'
 import { NIconSwitchTransition, NBaseLoading } from '../../_base'
 import { render } from '../../_utils'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import styles from './styles'
 import props from './message-props'
 
 export default {
   name: 'Message',
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   props,
   methods: {
     handleClose () {
@@ -31,54 +23,65 @@ export default {
     }
   },
   render () {
-    const {
-      icon,
-      type,
-      mergedTheme,
-      closable,
-      content,
-      handleClose
-    } = this
-    return h('div', {
-      class: {
-        'n-message': true,
-        'n-message--closable': closable,
-        [`n-message--${type}-type`]: true,
-        [`n-${mergedTheme}-theme`]: mergedTheme
-      }
-    }, [
-      h('div', {
-        class: 'n-message__icon'
-      }, [
-        h(NIcon, null, {
-          default: () => [
-            h(NIconSwitchTransition, null, {
+    const { icon, type, mergedTheme, closable, content, handleClose } = this
+    return h(
+      'div',
+      {
+        class: {
+          'n-message': true,
+          'n-message--closable': closable,
+          [`n-message--${type}-type`]: true,
+          [`n-${mergedTheme}-theme`]: mergedTheme
+        }
+      },
+      [
+        h(
+          'div',
+          {
+            class: 'n-message__icon'
+          },
+          [
+            h(NIcon, null, {
               default: () => [
-                createIconVNode(icon, type, mergedTheme)
+                h(NIconSwitchTransition, null, {
+                  default: () => [createIconVNode(icon, type, mergedTheme)]
+                })
               ]
             })
           ]
-        })
-      ]),
-      h('div', {
-        class: 'n-message__content'
-      }, [
-        h(render, {
-          render: content
-        })
-      ]),
-      closable
-        ? h('div', {
-          class: 'n-message__close'
-        }, [
-          h(NIcon, {
-            onClick: handleClose
-          }, {
-            default: () => [h(CloseIcon)]
-          })
-        ])
-        : null
-    ])
+        ),
+        h(
+          'div',
+          {
+            class: 'n-message__content'
+          },
+          [
+            h(render, {
+              render: content
+            })
+          ]
+        ),
+        closable
+          ? h(
+            'div',
+            {
+              class: 'n-message__close'
+            },
+            [
+              h(
+                NIcon,
+                {
+                  onClick: handleClose
+                },
+                {
+                  default: () => [h(CloseIcon)]
+                }
+              )
+            ]
+          )
+          : null
+      ]
+    )
   }
 }
 

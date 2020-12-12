@@ -12,9 +12,7 @@ import { dateArray } from '../utils'
 import commonCalendarMixin from './commonCalendarMixin'
 
 export default {
-  mixins: [
-    commonCalendarMixin
-  ],
+  mixins: [commonCalendarMixin],
   props: {
     value: {
       validator (value) {
@@ -136,9 +134,7 @@ export default {
   },
   methods: {
     isCalendarDateDisabled (timestamp) {
-      const {
-        isDateDisabled
-      } = this
+      const { isDateDisabled } = this
       if (!isDateDisabled) return false
       if (this.selectingPhase === 'start') {
         return isDateDisabled(timestamp, 'start', this.value)

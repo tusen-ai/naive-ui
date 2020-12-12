@@ -6,12 +6,8 @@ import { NTimeline } from '../index'
 
 describe('n-timeline', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      timelineLight
-    ]
+    locales: [enUS],
+    styles: [timelineLight]
   })
   it('should work with import on demand', () => {
     mount(NTimeline, {

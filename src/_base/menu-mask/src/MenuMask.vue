@@ -1,7 +1,5 @@
 <template>
-  <transition
-    name="n-fade-in-transition"
-  >
+  <transition name="n-fade-in-transition">
     <div
       v-if="show"
       class="n-base-menu-mask"
@@ -22,9 +20,7 @@ import styles from './styles'
 
 export default {
   name: 'BaseMenuMask',
-  mixins: [
-    withCssr(styles)
-  ],
+  mixins: [withCssr(styles)],
   props: {
     theme: {
       type: String,
@@ -36,9 +32,7 @@ export default {
     const timerIdRef = ref(null)
     const uncontrolledShowRef = ref(false)
     onBeforeUnmount(() => {
-      const {
-        value: timerId
-      } = timerIdRef
+      const { value: timerId } = timerIdRef
       if (timerId !== null) {
         window.clearTimeout(timerId)
       }
@@ -48,9 +42,7 @@ export default {
       timerId: timerIdRef,
       show: uncontrolledShowRef,
       showOnce (message, duration = 1500) {
-        const {
-          value: timerId
-        } = timerIdRef
+        const { value: timerId } = timerIdRef
         if (timerId) window.clearTimeout(timerId)
         uncontrolledShowRef.value = true
         messageRef.value = message

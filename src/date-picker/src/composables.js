@@ -1,10 +1,5 @@
-import {
-  toRef,
-  inject
-} from 'vue'
-import {
-  useKeyboard
-} from 'vooks'
+import { toRef, inject } from 'vue'
+import { useKeyboard } from 'vooks'
 
 export function uniCalendarSetup () {
   const NDatePicker = inject('NDatePicker')

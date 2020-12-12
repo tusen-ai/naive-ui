@@ -1,20 +1,6 @@
-import {
-  h,
-  ref,
-  computed,
-  watch,
-  createTextVNode
-} from 'vue'
-import {
-  VBinder,
-  VTarget
-} from 'vueuc'
-import {
-  useMergedState,
-  useCompitable,
-  useIsMounted,
-  useMemo
-} from 'vooks'
+import { h, ref, computed, watch, createTextVNode } from 'vue'
+import { VBinder, VTarget } from 'vueuc'
+import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
 import { call, keep, warn } from '../../_utils'
 import NPopoverBody from './PopoverBody'
 
@@ -151,14 +137,20 @@ export default {
     // deprecated
     onShow: {
       validator () {
-        warn('popover', '`on-show` is deprecated, please use `on-update:show` instead.')
+        warn(
+          'popover',
+          '`on-show` is deprecated, please use `on-update:show` instead.'
+        )
         return true
       },
       default: undefined
     },
     onHide: {
       validator () {
-        warn('popover', '`on-hide` is deprecated, please use `on-update:show` instead.')
+        warn(
+          'popover',
+          '`on-hide` is deprecated, please use `on-update:show` instead.'
+        )
         return true
       },
       default: undefined
@@ -180,11 +172,8 @@ export default {
       return props.disabled ? false : mergedShowWithoutDisabledRef.value
     })
     // setup show-arrow
-    const compatibleShowArrowRef = useCompitable(props, [
-      'arrow',
-      'showArrow'
-    ])
-    watch(mergedShowRef, value => {
+    const compatibleShowArrowRef = useCompitable(props, ['arrow', 'showArrow'])
+    watch(mergedShowRef, (value) => {
       if (props.showWatcher) {
         props.showWatcher(value)
       }
@@ -210,11 +199,7 @@ export default {
   },
   methods: {
     doUpdateShow (value) {
-      const {
-        'onUpdate:show': onUpdateShow,
-        onShow,
-        onHide
-      } = this
+      const { 'onUpdate:show': onUpdateShow, onShow, onHide } = this
       this.uncontrolledShow = value
       if (onUpdateShow) {
         call(onUpdateShow, value)
@@ -289,9 +274,7 @@ export default {
     }
   },
   render () {
-    const {
-      positionManually
-    } = this
+    const { positionManually } = this
     const slots = { ...this.$slots }
     let triggerVNode
     if (!positionManually) {
@@ -300,9 +283,10 @@ export default {
       } else {
         triggerVNode = getFirstSlotVNode(slots, 'trigger')
       }
-      triggerVNode = triggerVNode.type === textVNodeType ? h('span', [
-        triggerVNode
-      ]) : triggerVNode
+      triggerVNode =
+        triggerVNode.type === textVNodeType
+          ? h('span', [triggerVNode])
+          : triggerVNode
 
       appendEvents(triggerVNode, {
         onClick: this.handleClick,
@@ -315,12 +299,18 @@ export default {
     return h(VBinder, null, {
       default: () => {
         return [
-          positionManually ? null : h(VTarget, null, {
-            default: () => triggerVNode
-          }),
-          h(NPopoverBody, keep(this.$props, bodyPropKeys, {
-            show: this.mergedShow
-          }), slots)
+          positionManually
+            ? null
+            : h(VTarget, null, {
+              default: () => triggerVNode
+            }),
+          h(
+            NPopoverBody,
+            keep(this.$props, bodyPropKeys, {
+              show: this.mergedShow
+            }),
+            slots
+          )
         ]
       }
     })

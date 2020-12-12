@@ -5,13 +5,8 @@ import { baseSelectMenuDark } from '../../_base/select-menu/styles'
 export default create({
   name: 'Popselect',
   theme: 'dark',
-  peer: [
-    baseDark,
-    baseSelectMenuDark
-  ],
+  peer: [baseDark, baseSelectMenuDark],
   getLocalVars (vars) {
-    return {
-
-    }
+    return {}
   }
 })

@@ -6,12 +6,8 @@ import { NScrollbar } from '../index'
 
 describe('n-scrollbar', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      scrollbarLight
-    ]
+    locales: [enUS],
+    styles: [scrollbarLight]
   })
   it('should work with import on demand', () => {
     mount(NScrollbar, {

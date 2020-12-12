@@ -7,10 +7,14 @@
       [`n-${mergedTheme}-theme`]: mergedTheme,
       [`n-badge--as-is`]: !$slots.default
     }"
-    :style="color ? {
-      '--color': color,
-      '--ripple-color': color
-    } : null"
+    :style="
+      color
+        ? {
+          '--color': color,
+          '--ripple-color': color
+        }
+        : null
+    "
   >
     <slot />
     <transition
@@ -18,10 +22,7 @@
       @after-enter="handleAfterEnter"
       @after-leave="handleAfterLeave"
     >
-      <sup
-        v-if="showBadge"
-        class="n-badge-sup"
-      >
+      <sup v-if="showBadge" class="n-badge-sup">
         <n-base-slot-machine
           v-if="!dot"
           :theme="mergedTheme"
@@ -29,20 +30,14 @@
           :max="max"
           :value="value"
         />
-        <n-base-wave
-          v-if="processing"
-        />
+        <n-base-wave v-if="processing" />
       </sup>
     </transition>
   </div>
 </template>
 
 <script>
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import { NBaseSlotMachine, NBaseWave } from '../../_base'
 import styles from './styles/index.js'
 
@@ -52,11 +47,7 @@ export default {
     NBaseSlotMachine,
     NBaseWave
   },
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     value: {
       type: [String, Number],
@@ -100,10 +91,18 @@ export default {
   },
   computed: {
     number () {
-      return (this.max === undefined || typeof value === 'string') ? this.value : (this.value > this.max ? `${this.max}+` : this.value)
+      return this.max === undefined || typeof value === 'string'
+        ? this.value
+        : this.value > this.max
+          ? `${this.max}+`
+          : this.value
     },
     showBadge () {
-      return this.show && (this.dot || (this.value !== undefined && !(!this.showZero && this.value <= 0)))
+      return (
+        this.show &&
+        (this.dot ||
+          (this.value !== undefined && !(!this.showZero && this.value <= 0)))
+      )
     }
   },
   mounted () {

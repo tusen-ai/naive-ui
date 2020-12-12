@@ -6,12 +6,8 @@ import { NPagination } from '../index'
 
 describe('n-pagination', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      paginationLight
-    ]
+    locales: [enUS],
+    styles: [paginationLight]
   })
   it('should work with import on demand', () => {
     mount(NPagination, {

@@ -5,9 +5,7 @@ import { baseLight } from '../../_styles/base'
 export default create({
   name: 'Timeline',
   theme: 'light',
-  peer: [
-    baseLight
-  ],
+  peer: [baseLight],
   getLocalVars (vars) {
     const {
       textColor3,

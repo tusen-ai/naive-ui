@@ -21,9 +21,7 @@
         </div>
         <n-transfer-header-extra :source="true" />
       </div>
-      <div
-        class="n-transfer-list-body"
-      >
+      <div class="n-transfer-list-body">
         <div v-if="filterable" class="n-transfer-filter">
           <n-input
             v-model:value="srcPattern"
@@ -68,12 +66,13 @@
                 </template>
               </virtual-list>
             </n-scrollbar>
-            <n-scrollbar
-              v-else
-              :theme="mergedTheme"
-            >
+            <n-scrollbar v-else :theme="mergedTheme">
               <div class="n-transfer-list-content">
-                <transition-group name="item" :appear="isMounted" :css="!isInputing">
+                <transition-group
+                  name="item"
+                  :appear="isMounted"
+                  :css="!isInputing"
+                >
                   <n-transfer-source-list-item
                     v-for="option in filteredSrcOpts"
                     :key="option.value"
@@ -85,7 +84,11 @@
               </div>
             </n-scrollbar>
           </template>
-          <transition name="n-fade-in-transition" :appear="isMounted" :css="!isInputing">
+          <transition
+            name="n-fade-in-transition"
+            :appear="isMounted"
+            :css="!isInputing"
+          >
             <n-empty v-if="!filteredSrcOpts.length" />
           </transition>
         </div>
@@ -93,18 +96,12 @@
       <div class="n-transfer-list__border-mask" />
     </div>
     <div class="n-transfer-gap">
-      <n-button
-        :disabled="toButtonDisabled"
-        @click="handleToTgtClick"
-      >
+      <n-button :disabled="toButtonDisabled" @click="handleToTgtClick">
         <template #icon>
           <chevron-right-icon />
         </template>
       </n-button>
-      <n-button
-        :disabled="fromButtonDisabled"
-        @click="handleToSrcClick"
-      >
+      <n-button :disabled="fromButtonDisabled" @click="handleToSrcClick">
         <template #icon>
           <chevron-left-icon />
         </template>
@@ -123,9 +120,7 @@
         </div>
         <n-transfer-header-extra />
       </div>
-      <div
-        class="n-transfer-list-body"
-      >
+      <div class="n-transfer-list-body">
         <div v-if="filterable" class="n-transfer-filter">
           <n-input
             v-model:value="tgtPattern"
@@ -170,12 +165,13 @@
                 </template>
               </virtual-list>
             </n-scrollbar>
-            <n-scrollbar
-              v-else
-              :theme="mergedTheme"
-            >
+            <n-scrollbar v-else :theme="mergedTheme">
               <div class="n-transfer-list-content">
-                <transition-group name="item" :appear="isMounted" :css="!isInputing">
+                <transition-group
+                  name="item"
+                  :appear="isMounted"
+                  :css="!isInputing"
+                >
                   <n-transfer-target-list-item
                     v-for="option in filteredTgtOpts"
                     :key="option.value"
@@ -187,7 +183,11 @@
               </div>
             </n-scrollbar>
           </template>
-          <transition name="n-fade-in-transition" :appear="isMounted" :css="!isInputing">
+          <transition
+            name="n-fade-in-transition"
+            :appear="isMounted"
+            :css="!isInputing"
+          >
             <n-empty v-if="!filteredTgtOpts.length" />
           </transition>
         </div>
@@ -246,12 +246,10 @@ export default {
   mixins: [
     configurable,
     themeable,
-    withCssr(
-      styles, {
-        themeKey: 'mergedTheme',
-        injectCssrProps: true
-      }
-    ),
+    withCssr(styles, {
+      themeKey: 'mergedTheme',
+      injectCssrProps: true
+    }),
     locale('Transfer'),
     asFormItem()
   ],
@@ -301,7 +299,9 @@ export default {
       type: Function,
       default: (pattern, option, from) => {
         if (!pattern) return true
-        return ~('' + option.label).toLowerCase().indexOf(('' + pattern).toLowerCase())
+        return ~('' + option.label)
+          .toLowerCase()
+          .indexOf(('' + pattern).toLowerCase())
       }
     },
     size: {
@@ -317,7 +317,12 @@ export default {
     },
     onChange: {
       validator () {
-        if (__DEV__) warn('transfer', '`on-change` is deprecated, please use `on-update:value` instead.')
+        if (__DEV__) {
+          warn(
+            'transfer',
+            '`on-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
         return true
       },
       default: undefined
@@ -335,7 +340,9 @@ export default {
   },
   computed: {
     itemSize () {
-      return depx(this.cssrProps.$local[createKey('itemHeight', this.mergedSize)])
+      return depx(
+        this.cssrProps.$local[createKey('itemHeight', this.mergedSize)]
+      )
     }
   },
   methods: {
@@ -353,10 +360,7 @@ export default {
     },
     handleSrcHeaderCheck (value) {
       const {
-        srcCheckedStatus: {
-          checked,
-          indeterminate
-        }
+        srcCheckedStatus: { checked, indeterminate }
       } = this
       if (indeterminate || checked) {
         this.srcCheckedValues = []
@@ -366,10 +370,7 @@ export default {
     },
     handleTgtHeaderCheck () {
       const {
-        tgtCheckedStatus: {
-          checked,
-          indeterminate
-        }
+        tgtCheckedStatus: { checked, indeterminate }
       } = this
       if (indeterminate || checked) {
         this.tgtCheckedValues = []
@@ -381,7 +382,7 @@ export default {
       if (checked) {
         this.tgtCheckedValues.push(optionValue)
       } else {
-        const index = this.tgtCheckedValues.findIndex(v => v === optionValue)
+        const index = this.tgtCheckedValues.findIndex((v) => v === optionValue)
         if (~index) {
           this.tgtCheckedValues.splice(index, 1)
         }
@@ -391,7 +392,7 @@ export default {
       if (checked) {
         this.srcCheckedValues.push(optionValue)
       } else {
-        const index = this.srcCheckedValues.findIndex(v => v === optionValue)
+        const index = this.srcCheckedValues.findIndex((v) => v === optionValue)
         if (~index) {
           this.srcCheckedValues.splice(index, 1)
         }
@@ -403,20 +404,18 @@ export default {
     },
     handleToSrcClick () {
       const tgtCheckedValueSet = new Set(this.tgtCheckedValues)
-      this.doUpdateValue((this.value || []).filter(v => !tgtCheckedValueSet.has(v)))
+      this.doUpdateValue(
+        (this.value || []).filter((v) => !tgtCheckedValueSet.has(v))
+      )
       this.tgtCheckedValues = []
     },
     // scroll related
     syncSrcVLScroller () {
-      const {
-        srcScrollerRef
-      } = this
+      const { srcScrollerRef } = this
       srcScrollerRef && srcScrollerRef.sync()
     },
     syncTgtVLScroller () {
-      const {
-        tgtScrollerRef
-      } = this
+      const { tgtScrollerRef } = this
       tgtScrollerRef && tgtScrollerRef.sync()
     },
     srcScrollContainer () {

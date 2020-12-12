@@ -6,12 +6,8 @@ import { NTimePicker } from '../index'
 
 describe('n-time-picker', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      timePickerLight
-    ]
+    locales: [enUS],
+    styles: [timePickerLight]
   })
   it('should work with import on demand', () => {
     mount(NTimePicker, {

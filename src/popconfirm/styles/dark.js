@@ -7,12 +7,7 @@ import { popoverDark } from '../../popover/styles'
 export default create({
   name: 'Popconfirm',
   theme: 'dark',
-  peer: [
-    baseDark,
-    iconDark,
-    buttonDark,
-    popoverDark
-  ],
+  peer: [baseDark, iconDark, buttonDark, popoverDark],
   getLocalVars (vars) {
     return {
       iconColor: vars.warningColor

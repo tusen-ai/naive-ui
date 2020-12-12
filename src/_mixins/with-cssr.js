@@ -13,9 +13,7 @@ function getRenderedTheme (vm) {
 
 function getGlobalVars (styles, theme) {
   const {
-    [theme]: {
-      base
-    }
+    [theme]: { base }
   } = styles
   return base.getGlobalVars() // style[theme].base, for example style.light.base
 }
@@ -34,52 +32,39 @@ function createMutableStyleId (
   depKey,
   depValue
 ) {
-  if (
-    depKey === 'mergedTheme' ||
-    depKey === 'theme'
-  ) {
+  if (depKey === 'mergedTheme' || depKey === 'theme') {
     return componentCssrId + '-' + renderedTheme
   }
   return (
-    componentCssrId + '-' +
-    renderedTheme + '-' +
-    depKey + (depValue ? ('-' + depValue) : '')
+    componentCssrId +
+    '-' +
+    renderedTheme +
+    '-' +
+    depKey +
+    (depValue ? '-' + depValue : '')
   )
 }
 
-function setupMutableStyle (
-  vm,
-  theme,
-  depKey,
-  CNode
-) {
+function setupMutableStyle (vm, theme, depKey, CNode) {
   const {
-    $naive: {
-      styles
-    },
+    $naive: { styles },
     $options: options
   } = vm
   const resolveId = options.cssrName || options.name
   const mountPrefix = options.cssrId || resolveId
-  const depValue = (
-    depKey === 'mergedTheme' ||
-    depKey === 'theme'
-  ) ? theme : vm[depKey]
-  if (
-    depValue === null || depValue === undefined
-  ) {
+  const depValue =
+    depKey === 'mergedTheme' || depKey === 'theme' ? theme : vm[depKey]
+  if (depValue === null || depValue === undefined) {
     if (__DEV__) {
-      warn('mixins/with-cssr', `dependency key ${resolveId}.${depKey} should not be nullable`)
+      warn(
+        'mixins/with-cssr',
+        `dependency key ${resolveId}.${depKey} should not be nullable`
+      )
     }
     return
   }
   // create mount id
-  const mountId = createMutableStyleId(
-    mountPrefix,
-    theme,
-    depKey,
-    depValue
-  )
+  const mountId = createMutableStyleId(mountPrefix, theme, depKey, depValue)
   if (find(mountId)) return
   // get global style
   const globalVars = getGlobalVars(styles, theme)
@@ -87,12 +72,7 @@ function setupMutableStyle (
   const localStyle = getLocalStyle(styles, theme, resolveId)
   const localVars = getLocalVars(localStyle, globalVars)
   // get cssr props
-  const cssrProps = createCssrProps(
-    vm,
-    theme,
-    globalVars,
-    localVars
-  )
+  const cssrProps = createCssrProps(vm, theme, globalVars, localVars)
   // mount the style
   CNode.mount({
     target: mountId,
@@ -101,12 +81,7 @@ function setupMutableStyle (
   })
 }
 
-function createCssrProps (
-  vm,
-  theme,
-  globalVars,
-  localVars
-) {
+function createCssrProps (vm, theme, globalVars, localVars) {
   return {
     $vm: vm,
     $theme: theme,
@@ -117,37 +92,24 @@ function createCssrProps (
 
 function getCssrProps (vm, theme) {
   const {
-    $naive: {
-      styles
-    },
+    $naive: { styles },
     $options: options
   } = vm
   const resolveId = options.cssrName || options.name
   const globalVars = getGlobalVars(styles, theme)
   const localStyle = getLocalStyle(styles, theme, resolveId)
   const localVars = getLocalVars(localStyle, globalVars)
-  return createCssrProps(
-    vm,
-    theme,
-    globalVars,
-    localVars
-  )
+  return createCssrProps(vm, theme, globalVars, localVars)
 }
 
 const withCssr = function (styles = [], options = {}) {
   let data
   // collect watchers
   const watchers = {}
-  const {
-    themeKey,
-    injectCssrProps
-  } = options
-  if (
-    themeKey &&
-    injectCssrProps
-  ) {
+  const { themeKey, injectCssrProps } = options
+  if (themeKey && injectCssrProps) {
     watchers[themeKey] = [
-      vm => {
+      (vm) => {
         vm.cssrProps = getCssrProps(vm, vm[themeKey])
       }
     ]
@@ -157,48 +119,37 @@ const withCssr = function (styles = [], options = {}) {
       }
     }
   }
-  styles.forEach(style => {
+  styles.forEach((style) => {
     if (__DEV__ && !style.watch) {
       warn('with-cssr', 'Style option has no `watch` field.')
       return
     }
-    style.watch.forEach(watchKey => {
+    style.watch.forEach((watchKey) => {
       if (!watchers[watchKey]) watchers[watchKey] = []
-      watchers[watchKey].push(
-        function (vm, mergedTheme) {
-          if (__DEV__) {
-            window.naive.styleRenderingDuration -= performance.now()
-          }
-          setupMutableStyle(
-            vm,
-            mergedTheme,
-            style.key,
-            style.CNode
-          )
-          if (__DEV__) {
-            window.naive.styleRenderingDuration += performance.now()
-          }
+      watchers[watchKey].push(function (vm, mergedTheme) {
+        if (__DEV__) {
+          window.naive.styleRenderingDuration -= performance.now()
         }
-      )
+        setupMutableStyle(vm, mergedTheme, style.key, style.CNode)
+        if (__DEV__) {
+          window.naive.styleRenderingDuration += performance.now()
+        }
+      })
     })
   })
   // create component watch options
   const watchOptions = {}
-  Object
-    .keys(watchers)
-    .forEach(
-      watchKey => {
-        watchOptions[watchKey] = function () {
-          watchers[watchKey].forEach(watcher => {
-            watcher(this, getRenderedTheme(this))
-          })
-        }
-      }
-    )
+  Object.keys(watchers).forEach((watchKey) => {
+    watchOptions[watchKey] = function () {
+      watchers[watchKey].forEach((watcher) => {
+        watcher(this, getRenderedTheme(this))
+      })
+    }
+  })
   return {
     data,
     beforeMount () {
-      styles.forEach(style => {
+      styles.forEach((style) => {
         if (__DEV__) {
           window.naive.styleRenderingDuration -= performance.now()
         }

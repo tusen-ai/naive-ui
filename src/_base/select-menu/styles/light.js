@@ -5,9 +5,7 @@ import commonVariables from './_common'
 export default create({
   name: 'BaseSelectMenu',
   theme: 'light',
-  peer: [
-    scrollbarLight
-  ],
+  peer: [scrollbarLight],
   getLocalVars (vars) {
     return {
       ...commonVariables,

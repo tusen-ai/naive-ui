@@ -11,22 +11,14 @@
 </template>
 
 <script>
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import styles from './styles/p'
 
 export default {
   name: 'P',
   cssrName: 'Typography',
   cssrId: 'TypographyP',
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     depth: {
       validator (value) {

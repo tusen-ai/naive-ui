@@ -6,12 +6,8 @@ import { NStatistic } from '../index'
 
 describe('n-statistic', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      statisticLight
-    ]
+    locales: [enUS],
+    styles: [statisticLight]
   })
   it('should work with import on demand', () => {
     mount(NStatistic, {

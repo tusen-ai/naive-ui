@@ -6,12 +6,8 @@ import { NDescriptions } from '../index'
 
 describe('n-descriptions', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      descriptionsLight
-    ]
+    locales: [enUS],
+    styles: [descriptionsLight]
   })
   it('should work with import on demand', () => {
     mount(NDescriptions, {

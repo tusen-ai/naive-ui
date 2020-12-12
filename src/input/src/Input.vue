@@ -16,7 +16,7 @@
       'n-input--bordered': mergedBordered,
       [`n-${mergedTheme}-theme`]: mergedTheme
     }"
-    :tabindex="!disabled && (passivelyActivated && !inputFocused) ? 0 : false"
+    :tabindex="!disabled && passivelyActivated && !inputFocused ? 0 : false"
     @focus="handleWrapperFocus"
     @blur="handleWrapperBlur"
     @keydown.enter="handleWrapperKeyDownEnter"
@@ -64,7 +64,7 @@
         :disabled="disabled"
         :maxlength="maxlength"
         :minlength="minlength"
-        :value="pair ? (value && value[0]) : value"
+        :value="pair ? value && value[0] : value"
         :readonly="readonly"
         :autofocus="autofocus"
         :size="attrSize"
@@ -85,10 +85,7 @@
         {{ mergedPlaceholder[0] }}
       </div>
     </div>
-    <span
-      v-if="pair"
-      class="n-input__splitor"
-    >
+    <span v-if="pair" class="n-input__splitor">
       {{ separator }}
     </span>
     <div v-if="pair" class="n-input-second-input">
@@ -113,7 +110,8 @@
         v-if="
           !isComposing &&
             (!value || (Array.isArray(value) && !value[1])) &&
-            mergedPlaceholder[1]"
+            mergedPlaceholder[1]
+        "
         class="n-input__placeholder"
       >
         {{ mergedPlaceholder[1] }}
@@ -145,13 +143,7 @@
       </div>
     </transition>
     <div
-      v-if="
-        isTextarea &&
-          !isComposing &&
-          placeholder &&
-          !pair &&
-          !value
-      "
+      v-if="isTextarea && !isComposing && placeholder && !pair && !value"
       class="n-input__placeholder"
     >
       {{ placeholder }}
@@ -346,9 +338,7 @@ export default {
   },
   computed: {
     mergedPlaceholder () {
-      const {
-        placeholder
-      } = this
+      const { placeholder } = this
       if (this.pair) {
         if (Array.isArray(placeholder)) {
           return placeholder
@@ -365,13 +355,16 @@ export default {
       return this.forceFocus || this.focused
     },
     showClearButton () {
-      if (this.disabled || !this.clearable || (!this.mergedFocus && !this.hover)) return false
+      if (
+        this.disabled ||
+        !this.clearable ||
+        (!this.mergedFocus && !this.hover)
+      ) { return false }
       if (this.pair) {
-        return !!(
-          Array.isArray(this.value) &&
-          (this.value[0] || this.value[1])
-        ) &&
-        (this.hover || this.mergedFocus)
+        return (
+          !!(Array.isArray(this.value) && (this.value[0] || this.value[1])) &&
+          (this.hover || this.mergedFocus)
+        )
       } else {
         return !!this.value && (this.hover || this.mergedFocus)
       }
@@ -412,81 +405,54 @@ export default {
       nTriggerFormInput()
     },
     doChange (value) {
-      const {
-        onChange,
-        nTriggerFormChange
-      } = this
+      const { onChange, nTriggerFormChange } = this
       if (onChange) call(onChange, value)
       nTriggerFormChange()
     },
     doBlur (e) {
-      const {
-        onBlur,
-        nTriggerFormBlur
-      } = this
+      const { onBlur, nTriggerFormBlur } = this
       if (onBlur) call(onBlur, e)
       nTriggerFormBlur()
     },
     doFocus (e) {
-      const {
-        onFocus,
-        nTriggerFormFocus
-      } = this
+      const { onFocus, nTriggerFormFocus } = this
       if (onFocus) call(onFocus, e)
       nTriggerFormFocus()
     },
     doClear (...args) {
-      const {
-        onClear
-      } = this
+      const { onClear } = this
       if (onClear) call(onClear, ...args)
     },
     doInputBlur (e) {
-      const {
-        onInputBlur
-      } = this
+      const { onInputBlur } = this
       if (onInputBlur) call(onInputBlur, e)
     },
     doInputFocus (e) {
-      const {
-        onInputFocus
-      } = this
+      const { onInputFocus } = this
       if (onInputFocus) call(onInputFocus, e)
     },
     doDeactivate () {
-      const {
-        onDeactivate
-      } = this
+      const { onDeactivate } = this
       if (onDeactivate) call(onDeactivate)
     },
     doActivate () {
-      const {
-        onActivate
-      } = this
+      const { onActivate } = this
       if (onActivate) call(onActivate)
     },
     doKeyUp (e) {
-      const {
-        onKeyUp
-      } = this
+      const { onKeyUp } = this
       if (onKeyUp) call(onKeyUp, e)
     },
     doClick (e) {
-      const {
-        onClick
-      } = this
+      const { onClick } = this
       if (onClick) call(onClick, e)
     },
     doWrapperFocus (e) {
-      const {
-        onWrapperFocus
-      } = this
+      const { onWrapperFocus } = this
       if (onWrapperFocus) call(onWrapperFocus, e)
     },
     doWrapperBlur (e) {
-      const {
-        onWrapperBlur
-      } = this
+      const { onWrapperBlur } = this
       if (onWrapperBlur) call(onWrapperBlur, e)
     },
     updateTextAreaStyle () {
@@ -501,12 +467,18 @@ export default {
       const lineHeight = Number(styleLineHeight.slice(0, -2))
       if (this.autosize.minRows) {
         const minRows = Math.max(this.autosize.minRows, 1)
-        const styleMinHeight = (paddingTop + paddingBottom + lineHeight * minRows) + 'px'
+        const styleMinHeight =
+          paddingTop + paddingBottom + lineHeight * minRows + 'px'
         this.$refs.textareaMirrow.style.minHeight = styleMinHeight
       }
       if (this.autosize.maxRows) {
-        const maxRows = Math.max(this.autosize.maxRows, this.autosize.minRows, 1)
-        const styleMaxHeight = (paddingTop + paddingBottom + lineHeight * maxRows) + 'px'
+        const maxRows = Math.max(
+          this.autosize.maxRows,
+          this.autosize.minRows,
+          1
+        )
+        const styleMaxHeight =
+          paddingTop + paddingBottom + lineHeight * maxRows + 'px'
         this.$refs.textareaMirrow.style.maxHeight = styleMaxHeight
       }
     },
@@ -541,20 +513,17 @@ export default {
     },
     handleInputBlur (e) {
       this.doInputBlur(e)
-      const {
-        input,
-        secondInput,
-        textarea,
-        wrapper
-      } = this.$refs
+      const { input, secondInput, textarea, wrapper } = this.$refs
       if (e.relatedTarget === wrapper) {
         this.doDeactivate()
       }
-      if (!(
-        e.relatedTarget === input ||
-        e.relatedTarget === secondInput ||
-        e.relatedTarget === textarea
-      )) {
+      if (
+        !(
+          e.relatedTarget === input ||
+          e.relatedTarget === secondInput ||
+          e.relatedTarget === textarea
+        )
+      ) {
         this.inputFocused = false
       }
       this.dealWithEvent(e, 'blur')
@@ -580,12 +549,7 @@ export default {
       }
     },
     dealWithEvent (e, type) {
-      const {
-        input,
-        secondInput,
-        textarea,
-        wrapper
-      } = this.$refs
+      const { input, secondInput, textarea, wrapper } = this.$refs
       if (
         e.relatedTarget === input ||
         e.relatedTarget === secondInput ||

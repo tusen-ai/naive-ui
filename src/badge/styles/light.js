@@ -6,11 +6,7 @@ import { baseWaveLight } from '../../_base/wave/styles'
 export default create({
   name: 'Badge',
   theme: 'light',
-  peer: [
-    baseLight,
-    baseWaveLight,
-    baseSlotMachineLight
-  ],
+  peer: [baseLight, baseWaveLight, baseSlotMachineLight],
   getLocalVars (vars) {
     return {
       color: vars.errorColor,

@@ -14,23 +14,14 @@
 
 <script>
 import layoutModeMixin from './layoutModeMixin'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import styles from './styles/layout-header-footer'
 
 export default {
   name: 'LayoutFooter',
   cssrName: 'Layout',
   cssrId: 'LayoutHeaderFooter',
-  mixins: [
-    configurable,
-    themeable,
-    layoutModeMixin,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, layoutModeMixin, withCssr(styles)],
   props: {
     bordered: {
       type: Boolean,

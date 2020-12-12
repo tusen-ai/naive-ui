@@ -6,12 +6,8 @@ import { NTypography } from '../index'
 
 describe('n-typography', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      typographyLight
-    ]
+    locales: [enUS],
+    styles: [typographyLight]
   })
   it('should work with import on demand', () => {
     mount(NTypography, {

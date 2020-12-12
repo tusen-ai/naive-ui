@@ -24,7 +24,9 @@ export default create({
       borderActive: `1px solid ${vars.primaryColor}`,
       borderFocus: `1px solid ${vars.primaryColorHover}`,
       boxShadowHover: null,
-      boxShadowActive: `0 0 0 2px ${changeColor(vars.primaryColor, { alpha: 0.2 })}`,
+      boxShadowActive: `0 0 0 2px ${changeColor(vars.primaryColor, {
+        alpha: 0.2
+      })}`,
       boxShadowFocus: null,
       caretColor: vars.primaryColor,
       // warning
@@ -33,7 +35,9 @@ export default create({
       borderActiveWarning: `1px solid ${vars.warningColor}`,
       borderFocusWarning: `1px solid ${vars.warningColorHover}`,
       boxShadowHoverWarning: null,
-      boxShadowActiveWarning: `0 0 0 2px ${changeColor(vars.warningColor, { alpha: 0.2 })}`,
+      boxShadowActiveWarning: `0 0 0 2px ${changeColor(vars.warningColor, {
+        alpha: 0.2
+      })}`,
       boxShadowFocusWarning: null,
       colorActiveWarning: vars.inputColor,
       caretColorWarning: vars.warningColor,
@@ -43,7 +47,9 @@ export default create({
       borderActiveError: `1px solid ${vars.errorColor}`,
       borderFocusError: `1px solid ${vars.errorColorHover}`,
       boxShadowHoverError: null,
-      boxShadowActiveError: `0 0 0 2px ${changeColor(vars.errorColor, { alpha: 0.2 })}`,
+      boxShadowActiveError: `0 0 0 2px ${changeColor(vars.errorColor, {
+        alpha: 0.2
+      })}`,
       boxShadowFocusError: null,
       colorActiveError: vars.inputColor,
       caretColorError: vars.errorColor

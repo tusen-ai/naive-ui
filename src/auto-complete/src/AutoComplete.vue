@@ -41,10 +41,7 @@
       placement="bottom-start"
       width="target"
     >
-      <transition
-        name="n-fade-in-scale-up-transition"
-        :appear="isMounted"
-      >
+      <transition name="n-fade-in-scale-up-transition" :appear="isMounted">
         <n-base-select-menu
           v-if="active"
           ref="menuRef"
@@ -66,25 +63,12 @@
 <script>
 import { ref, toRef } from 'vue'
 import { createTreeMate } from 'treemate'
-import {
-  VBinder,
-  VTarget,
-  VFollower
-} from 'vueuc'
-import {
-  clickoutside
-} from 'vdirs'
+import { VBinder, VTarget, VFollower } from 'vueuc'
+import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
-import {
-  configurable,
-  themeable,
-  asFormItem,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, asFormItem, withCssr } from '../../_mixins'
 import { call, warn, useAdjustedTo } from '../../_utils'
-import {
-  NBaseSelectMenu
-} from '../../_base'
+import { NBaseSelectMenu } from '../../_base'
 import { NInput } from '../../input'
 import styles from './styles'
 import { mapAutoCompleteOptionsToSelectOptions } from './utils'
@@ -101,12 +85,7 @@ export default {
   directives: {
     clickoutside
   },
-  mixins: [
-    configurable,
-    themeable,
-    asFormItem(),
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, asFormItem(), withCssr(styles)],
   inheritAttrs: false,
   props: {
     bordered: {
@@ -167,7 +146,12 @@ export default {
     // deprecated
     onInput: {
       validator () {
-        if (__DEV__) warn('auto-complete', '`on-input` is deprecated, please use `on-update:value` instead.')
+        if (__DEV__) {
+          warn(
+            'auto-complete',
+            '`on-input` is deprecated, please use `on-update:value` instead.'
+          )
+        }
         return true
       },
       default: undefined
@@ -176,7 +160,10 @@ export default {
   setup (props) {
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
-    const mergedValueRef = useMergedState(controlledValueRef, uncontrolledValueRef)
+    const mergedValueRef = useMergedState(
+      controlledValueRef,
+      uncontrolledValueRef
+    )
     return {
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
@@ -193,7 +180,9 @@ export default {
       return mapAutoCompleteOptionsToSelectOptions(this.options)
     },
     active () {
-      return !!this.mergedValue && this.canBeActivated && !!this.selectOptions.length
+      return (
+        !!this.mergedValue && this.canBeActivated && !!this.selectOptions.length
+      )
     },
     treeMate () {
       return createTreeMate(this.selectOptions, {
@@ -219,28 +208,18 @@ export default {
       nTriggerFormChange()
     },
     doSelect (value) {
-      const {
-        onSelect,
-        nTriggerFormInput,
-        nTriggerFormChange
-      } = this
+      const { onSelect, nTriggerFormInput, nTriggerFormChange } = this
       if (onSelect) call(onSelect, value)
       nTriggerFormInput()
       nTriggerFormChange()
     },
     doBlur (value) {
-      const {
-        onBlur,
-        nTriggerFormBlur
-      } = this
+      const { onBlur, nTriggerFormBlur } = this
       if (onBlur) call(onBlur, value)
       nTriggerFormBlur()
     },
     doFocus (value) {
-      const {
-        onFocus,
-        nTriggerFormFocus
-      } = this
+      const { onFocus, nTriggerFormFocus } = this
       if (onFocus) call(onFocus, value)
       nTriggerFormFocus()
     },

@@ -38,9 +38,7 @@ export default {
   },
   methods: {
     doCheck (value) {
-      const {
-        onCheck
-      } = this
+      const { onCheck } = this
       if (onCheck) return onCheck(value)
     },
     handleUpdateValue (value) {

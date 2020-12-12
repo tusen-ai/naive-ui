@@ -18,7 +18,7 @@
           v-clickoutside="handleClickOutside"
           class="n-modal"
           :class="{
-            [`n-${theme}-theme`]: theme,
+            [`n-${theme}-theme`]: theme
           }"
         >
           <n-dialog
@@ -97,9 +97,7 @@ export default {
     NDialog,
     NCard
   },
-  mixins: [
-    themeable
-  ],
+  mixins: [themeable],
   provide () {
     return {
       NModalBody: this,
@@ -147,32 +145,28 @@ export default {
     }
   },
   setup (props) {
-    const dataRefs = toRefs(reactive({
-      displayed: props.show,
-      transformOriginX: null,
-      transformOriginY: null
-    }))
-    watch(toRef(props, 'show'), value => {
+    const dataRefs = toRefs(
+      reactive({
+        displayed: props.show,
+        transformOriginX: null,
+        transformOriginY: null
+      })
+    )
+    watch(toRef(props, 'show'), (value) => {
       if (value) dataRefs.displayed.value = true
     })
     const NModal = inject('NModal', null)
     return {
       NModal,
       mousePosition: toRef(NModal, 'mousePosition'),
-      compitableBodyStyle: useCompitable(props, [
-        'overlayStyle',
-        'bodyStyle'
-      ]),
+      compitableBodyStyle: useCompitable(props, ['overlayStyle', 'bodyStyle']),
       bodyRef: ref(null),
       ...dataRefs
     }
   },
   methods: {
     styleTransformOrigin () {
-      const {
-        transformOriginX,
-        transformOriginY
-      } = this
+      const { transformOriginX, transformOriginY } = this
       if (transformOriginX === null || transformOriginY === null) {
         return null
       } else {
@@ -181,19 +175,12 @@ export default {
       }
     },
     syncTransformOrigin (el) {
-      const {
-        mousePosition
-      } = this
-      if (
-        !mousePosition
-      ) {
+      const { mousePosition } = this
+      if (!mousePosition) {
         return
       }
       const scrollTop = this.$refs.scrollbar.containerScrollTop
-      const {
-        offsetLeft,
-        offsetTop
-      } = el
+      const { offsetLeft, offsetTop } = el
       if (mousePosition) {
         const top = mousePosition.y
         const left = mousePosition.x

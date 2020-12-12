@@ -19,11 +19,7 @@ export default {
     }
   },
   render () {
-    const {
-      render,
-      active,
-      show
-    } = this
+    const { render, active, show } = this
     return render({
       active,
       show

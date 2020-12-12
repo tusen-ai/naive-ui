@@ -2,17 +2,12 @@ import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
 import { changeColor } from 'seemly'
 import { baseDark } from '../../_styles/base'
-import {
-  baseSuffixDark
-} from '../../_base/suffix/styles'
+import { baseSuffixDark } from '../../_base/suffix/styles'
 
 export default create({
   name: 'Input',
   theme: 'dark',
-  peer: [
-    baseDark,
-    baseSuffixDark
-  ],
+  peer: [baseDark, baseSuffixDark],
   getLocalVars (vars) {
     const {
       textColor2Overlay,
@@ -51,14 +46,18 @@ export default create({
       borderHoverWarning: `1px solid ${warningColorHover}`,
       colorFocusWarning: changeColor(warningColor, { alpha: 0.1 }),
       borderFocusWarning: `1px solid ${warningColorHover}`,
-      boxShadowFocusWarning: `0 0 8px 0 ${changeColor(warningColor, { alpha: 0.3 })}`,
+      boxShadowFocusWarning: `0 0 8px 0 ${changeColor(warningColor, {
+        alpha: 0.3
+      })}`,
       caretColorWarning: warningColor,
       // error
       borderError: `1px solid ${errorColor}`,
       borderHoverError: `1px solid ${errorColorHover}`,
       colorFocusError: changeColor(errorColor, { alpha: 0.1 }),
       borderFocusError: `1px solid ${errorColorHover}`,
-      boxShadowFocusError: `0 0 8px 0 ${changeColor(errorColor, { alpha: 0.3 })}`,
+      boxShadowFocusError: `0 0 8px 0 ${changeColor(errorColor, {
+        alpha: 0.3
+      })}`,
       caretColorError: errorColor
     }
   }

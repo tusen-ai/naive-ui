@@ -13,21 +13,13 @@
 
 <script>
 import { getScrollParent, unwrapElement } from 'seemly'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import styles from './styles/index.js'
 import { warn } from '../../_utils'
 
 export default {
   name: 'Affix',
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     listenTo: {
       type: [String, Object],
@@ -109,10 +101,7 @@ export default {
   },
   methods: {
     init () {
-      const {
-        target: getScrollTarget,
-        listenTo
-      } = this
+      const { target: getScrollTarget, listenTo } = this
       let scrollElement
       if (getScrollTarget) {
         // deprecated
@@ -149,20 +138,22 @@ export default {
       const affixRect = this.$el.getBoundingClientRect()
       const pxToTop = affixRect.top - containerRect.top
       const pxToBottom = containerRect.bottom - affixRect.bottom
-      const {
-        mergedOffsetTop,
-        mergedOffsetBottom
-      } = this
+      const { mergedOffsetTop, mergedOffsetBottom } = this
       if (mergedOffsetTop !== undefined && pxToTop <= mergedOffsetTop) {
         this.stickToTop = true
-        this.topAffixedTriggerScrollTop = containerEl.scrollTop - (mergedOffsetTop - pxToTop)
+        this.topAffixedTriggerScrollTop =
+          containerEl.scrollTop - (mergedOffsetTop - pxToTop)
       } else {
         this.stickToTop = false
         this.topAffixedTriggerScrollTop = null
       }
-      if (mergedOffsetBottom !== undefined && pxToBottom <= mergedOffsetBottom) {
+      if (
+        mergedOffsetBottom !== undefined &&
+        pxToBottom <= mergedOffsetBottom
+      ) {
         this.stickToBottom = true
-        this.bottomAffixedTriggerScrollTop = containerEl.scrollTop + mergedOffsetBottom - pxToBottom
+        this.bottomAffixedTriggerScrollTop =
+          containerEl.scrollTop + mergedOffsetBottom - pxToBottom
       } else {
         this.stickToBottom = false
         this.bottomAffixedTriggerScrollTop = null

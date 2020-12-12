@@ -6,12 +6,8 @@ import { NSteps } from '../index'
 
 describe('n-steps', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      stepsLight
-    ]
+    locales: [enUS],
+    styles: [stepsLight]
   })
   it('should work with import on demand', () => {
     mount(NSteps, {

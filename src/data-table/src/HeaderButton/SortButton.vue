@@ -21,9 +21,7 @@
 </template>
 
 <script>
-import {
-  ArrowDownIcon
-} from '../../../_base/icons'
+import { ArrowDownIcon } from '../../../_base/icons'
 import { NIcon } from '../../../icon'
 import RenderSorter from './RenderSorter'
 
@@ -47,7 +45,9 @@ export default {
       return activeSorter
     },
     active () {
-      return this.activeSorter && this.activeSorter.columnKey === this.column.key
+      return (
+        this.activeSorter && this.activeSorter.columnKey === this.column.key
+      )
     },
     mergedSortOrder () {
       if (this.active && this.activeSorter) {
@@ -56,7 +56,10 @@ export default {
       return false
     },
     mergedRenderSorter () {
-      return this.NDataTable?.renderSorter || this.$naive?.unstableConfig?.DataTable?.renderSorter
+      return (
+        this.NDataTable?.renderSorter ||
+        this.$naive?.unstableConfig?.DataTable?.renderSorter
+      )
     }
   }
 }

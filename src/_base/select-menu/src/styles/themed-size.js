@@ -10,26 +10,30 @@ export default c([
     const menuHeight = pxfy(depx(optionHeight) * 7.6)
     const padding = props.$local[createKey('padding', size)]
     return cTB('base-select-menu', [
-      cM(size + '-size', {
-        padding
-      }, [
-        cB('scrollbar', {
-          maxHeight: menuHeight
-        }),
-        cB('virtual-list', {
-          maxHeight: menuHeight
-        }),
-        cB('base-select-option', {
-          height: optionHeight,
-          lineHeight: optionHeight,
-          fontSize: fontSize
-        }),
-        cB('base-select-group-header', {
-          height: optionHeight,
-          lineHeight: optionHeight,
-          fontSize: groupHeaderFontSize
-        })
-      ])
+      cM(
+        size + '-size',
+        {
+          padding
+        },
+        [
+          cB('scrollbar', {
+            maxHeight: menuHeight
+          }),
+          cB('virtual-list', {
+            maxHeight: menuHeight
+          }),
+          cB('base-select-option', {
+            height: optionHeight,
+            lineHeight: optionHeight,
+            fontSize: fontSize
+          }),
+          cB('base-select-group-header', {
+            height: optionHeight,
+            lineHeight: optionHeight,
+            fontSize: groupHeaderFontSize
+          })
+        ]
+      )
     ])
   }
 ])

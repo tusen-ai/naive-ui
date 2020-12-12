@@ -47,10 +47,8 @@ export default {
       } else {
         el.style.maxHeight = ''
       }
-      const {
-        onAfterLeave
-      } = this
-      if (this.onAfterLeave) onAfterLeave()
+      const { onAfterLeave } = this
+      if (onAfterLeave) onAfterLeave()
     },
     handleEnter (el) {
       el.style.transition = 'none'
@@ -79,19 +77,23 @@ export default {
   },
   render () {
     const type = this.group ? TransitionGroup : Transition
-    return h(type, {
-      name: this.width
-        ? 'n-fade-in-width-expand-transition'
-        : 'n-fade-in-height-expand-transition',
-      mode: this.mode,
-      appear: this.appear,
-      onEnter: this.handleEnter,
-      onAfterEnter: this.handleAfterEnter,
-      onBeforeLeave: this.handleBeforeLeave,
-      onLeave: this.handleLeave,
-      onAfterLeave: this.handleAfterLeave
-    }, {
-      default: this.$slots.default
-    })
+    return h(
+      type,
+      {
+        name: this.width
+          ? 'n-fade-in-width-expand-transition'
+          : 'n-fade-in-height-expand-transition',
+        mode: this.mode,
+        appear: this.appear,
+        onEnter: this.handleEnter,
+        onAfterEnter: this.handleAfterEnter,
+        onBeforeLeave: this.handleBeforeLeave,
+        onLeave: this.handleLeave,
+        onAfterLeave: this.handleAfterLeave
+      },
+      {
+        default: this.$slots.default
+      }
+    )
   }
 }

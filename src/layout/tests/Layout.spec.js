@@ -6,12 +6,8 @@ import { NLayout } from '../index'
 
 describe('n-layout', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      layoutLight
-    ]
+    locales: [enUS],
+    styles: [layoutLight]
   })
   it('should work with import on demand', () => {
     mount(NLayout, {

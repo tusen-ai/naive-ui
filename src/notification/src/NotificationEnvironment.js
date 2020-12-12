@@ -88,9 +88,7 @@ export default {
   },
   methods: {
     hide () {
-      const {
-        timerId
-      } = this
+      const { timerId } = this
       this.show = false
       if (timerId) {
         window.clearTimeout(timerId)
@@ -124,25 +122,17 @@ export default {
       void el.offsetHeight
     },
     handleAfterLeave () {
-      const {
-        onAfterLeave,
-        onInternalAfterLeave,
-        onAfterHide
-      } = this
+      const { onAfterLeave, onInternalAfterLeave, onAfterHide } = this
       onAfterLeave()
       onInternalAfterLeave(this._.vnode.key)
       // deprecated
       onAfterHide()
     },
     handleClose () {
-      Promise
-        .resolve(
-          this.onClose()
-        )
-        .then(feedback => {
-          if (feedback === false) return
-          this.hide()
-        })
+      Promise.resolve(this.onClose()).then((feedback) => {
+        if (feedback === false) return
+        this.hide()
+      })
     },
     // deprecated
     deactivate () {
@@ -150,29 +140,35 @@ export default {
     }
   },
   render () {
-    return h(Transition, {
-      name: 'n-notification-transition',
-      appear: true,
-      onBeforeEnter: this.handleBeforeEnter,
-      onAfterEnter: this.handleAfterEnter,
-      onBeforeLeave: this.handleBeforeLeave,
-      onLeave: this.handleLeave,
-      onAfterLeave: this.handleAfterLeave
-    }, {
-      default: () => [
-        this.show ? h(NNotification, {
-          type: this.type,
-          theme: this.theme,
-          avatar: this.avatar,
-          title: this.title,
-          description: this.description,
-          content: this.content,
-          meta: this.meta,
-          action: this.action,
-          closable: this.closable,
-          onClose: this.handleClose
-        }) : null
-      ]
-    })
+    return h(
+      Transition,
+      {
+        name: 'n-notification-transition',
+        appear: true,
+        onBeforeEnter: this.handleBeforeEnter,
+        onAfterEnter: this.handleAfterEnter,
+        onBeforeLeave: this.handleBeforeLeave,
+        onLeave: this.handleLeave,
+        onAfterLeave: this.handleAfterLeave
+      },
+      {
+        default: () => [
+          this.show
+            ? h(NNotification, {
+              type: this.type,
+              theme: this.theme,
+              avatar: this.avatar,
+              title: this.title,
+              description: this.description,
+              content: this.content,
+              meta: this.meta,
+              action: this.action,
+              closable: this.closable,
+              onClose: this.handleClose
+            })
+            : null
+        ]
+      }
+    )
   }
 }

@@ -6,9 +6,7 @@ import { changeColor } from 'seemly'
 export default create({
   theme: 'dark',
   name: 'Checkbox',
-  peer: [
-    baseDark
-  ],
+  peer: [baseDark],
   getLocalVars (vars) {
     const {
       inputColorDisabledOverlay,

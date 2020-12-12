@@ -12,7 +12,7 @@
       ...mergedStyle,
       transform: styleTransform,
       maxWidth: styleMaxWidth,
-      width: styleWidth,
+      width: styleWidth
     }"
   >
     <n-scrollbar
@@ -47,11 +47,7 @@
 <script>
 import { nextTick } from 'vue'
 import layoutModeMixin from './layoutModeMixin'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import ToggleButton from './ToggleButton.vue'
 import ToggleBar from './ToggleBar.vue'
 import { NScrollbar } from '../../scrollbar'
@@ -66,12 +62,7 @@ export default {
     ToggleBar,
     NScrollbar
   },
-  mixins: [
-    configurable,
-    themeable,
-    layoutModeMixin,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, layoutModeMixin, withCssr(styles)],
   props: {
     bordered: {
       type: Boolean,

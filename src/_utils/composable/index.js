@@ -24,7 +24,7 @@ export function useInjectionCollection (injectionName, collectionKey, valueRef) 
   watch(valueRef, (value, prevValue) => {
     const collectionArray = injection[collectionKey]
     const index = collectionArray.findIndex(
-      collectionValue => collectionValue === prevValue
+      (collectionValue) => collectionValue === prevValue
     )
     if (~index) collectionArray.splice(index, 1)
     collectionArray.push(value)
@@ -32,29 +32,31 @@ export function useInjectionCollection (injectionName, collectionKey, valueRef) 
   onBeforeUnmount(() => {
     const collectionArray = injection[collectionKey]
     const index = collectionArray.findIndex(
-      collectionValue => collectionValue === valueRef.value
+      (collectionValue) => collectionValue === valueRef.value
     )
     if (~index) collectionArray.splice(index, 1)
   })
 }
 
-export function useInjectionElementCollection (injectionName, collectionKey, getElement) {
+export function useInjectionElementCollection (
+  injectionName,
+  collectionKey,
+  getElement
+) {
   const injection = inject(injectionName)
   if (!(collectionKey in injection)) {
     injection[collectionKey] = []
   }
   onMounted(() => {
     const currentInstance = getCurrentInstance().proxy
-    injection[collectionKey].push(
-      getElement(currentInstance)
-    )
+    injection[collectionKey].push(getElement(currentInstance))
   })
   onBeforeUnmount(() => {
     const collectionArray = injection[collectionKey]
     const currentInstance = getCurrentInstance().proxy
     const element = getElement(currentInstance)
     const index = collectionArray.findIndex(
-      collectionElement => collectionElement === element
+      (collectionElement) => collectionElement === element
     )
     if (~index) collectionArray.splice(index, 1)
   })
@@ -64,7 +66,7 @@ export function useDelayedTrue (valueRef, delay, shouldDelayRef) {
   if (!delay) return valueRef
   const delayedRef = ref(valueRef.value)
   let timerId = null
-  watch(valueRef, value => {
+  watch(valueRef, (value) => {
     if (timerId !== null) clearTimeout(timerId)
     if (value === true) {
       if (shouldDelayRef && shouldDelayRef.value === false) {
@@ -81,6 +83,4 @@ export function useDelayedTrue (valueRef, delay, shouldDelayRef) {
   return delayedRef
 }
 
-export {
-  useAdjustedTo
-} from './use-adjusted-to'
+export { useAdjustedTo } from './use-adjusted-to'

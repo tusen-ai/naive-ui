@@ -4,13 +4,9 @@ import { baseDark } from '../../_styles/base'
 export default create({
   name: 'LoadingBar',
   theme: 'dark',
-  peer: [
-    baseDark
-  ],
+  peer: [baseDark],
   getLocalVars (vars) {
-    const {
-      successColor
-    } = vars
+    const { successColor } = vars
     return {
       colorError: 'red',
       colorLoading: successColor,

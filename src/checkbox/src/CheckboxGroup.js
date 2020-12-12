@@ -1,18 +1,10 @@
 import { h } from 'vue'
-import {
-  configurable,
-  themeable,
-  asFormItem
-} from '../../_mixins'
+import { configurable, themeable, asFormItem } from '../../_mixins'
 import { warn, call, getSlot } from '../../_utils'
 
 export default {
   name: 'CheckboxGroup',
-  mixins: [
-    configurable,
-    themeable,
-    asFormItem()
-  ],
+  mixins: [configurable, themeable, asFormItem()],
   provide () {
     return {
       NCheckboxGroup: this
@@ -41,7 +33,12 @@ export default {
     // deprecated
     onChange: {
       validator () {
-        if (__DEV__) warn('checkbox-group', '`on-change` is deprecated, please use `on-update:value` instead.')
+        if (__DEV__) {
+          warn(
+            'checkbox-group',
+            '`on-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
         return true
       },
       default: undefined
@@ -63,7 +60,7 @@ export default {
       } = this
       if (Array.isArray(this.value)) {
         const groupValue = Array.from(this.value)
-        const index = groupValue.findIndex(value => value === checkboxValue)
+        const index = groupValue.findIndex((value) => value === checkboxValue)
         if (checked) {
           if (!~index) {
             groupValue.push(checkboxValue)
@@ -98,8 +95,12 @@ export default {
     }
   },
   render () {
-    return h('div', {
-      class: 'n-checkbox-group'
-    }, getSlot(this))
+    return h(
+      'div',
+      {
+        class: 'n-checkbox-group'
+      },
+      getSlot(this)
+    )
   }
 }

@@ -7,7 +7,7 @@
       'n-checkbox--indeterminate': indeterminate,
       'n-checkbox--table-header': tableHeader,
       [`n-checkbox--${mergedSize}-size`]: true,
-      [`n-${mergedTheme}-theme`]: mergedTheme,
+      [`n-${mergedTheme}-theme`]: mergedTheme
     }"
     :tabindex="mergedDisabled ? false : 0"
     @keyup.enter="handleKeyUpEnter"
@@ -15,34 +15,17 @@
     @keydown.space="handleKeyDownSpace"
     @click="handleClick"
   >
-    <div
-      class="n-checkbox-box"
-    >
+    <div class="n-checkbox-box">
       <n-icon-switch-transition>
-        <div
-          v-if="indeterminate"
-          key="indeterminate"
-          class="n-checkbox-icon"
-        >
-          <line-mark
-            class="n-checkbox-icon__line"
-          />
+        <div v-if="indeterminate" key="indeterminate" class="n-checkbox-icon">
+          <line-mark class="n-checkbox-icon__line" />
         </div>
-        <div
-          v-else
-          key="check"
-          class="n-checkbox-icon"
-        >
-          <check-mark
-            class="n-checkbox-icon__check"
-          />
+        <div v-else key="check" class="n-checkbox-icon">
+          <check-mark class="n-checkbox-icon__check" />
         </div>
       </n-icon-switch-transition>
     </div>
-    <span
-      v-if="label !== null || $slots.default"
-      class="n-checkbox__label"
-    >
+    <span v-if="label !== null || $slots.default" class="n-checkbox__label">
       <slot>
         <render :render="label" />
       </slot>
@@ -53,12 +36,7 @@
 <script>
 import { computed, inject, ref, toRef } from 'vue'
 import { useMergedState, useMemo } from 'vooks'
-import {
-  configurable,
-  themeable,
-  asFormItem,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, asFormItem, withCssr } from '../../_mixins'
 import CheckMark from './CheckMark.vue'
 import LineMark from './LineMark.vue'
 import { NIconSwitchTransition } from '../../_base'
@@ -85,10 +63,7 @@ export default {
           return NCheckboxGroup.mergedSize
         }
         const { NFormItem } = this
-        if (
-          NFormItem &&
-          NFormItem.mergedSize
-        ) {
+        if (NFormItem && NFormItem.mergedSize) {
           return NFormItem.mergedSize
         }
         return 'medium'
@@ -145,7 +120,10 @@ export default {
     // deprecated
     onChange: {
       validator () {
-        warn('checkbox', '`on-change` is deprecated, please use `on-update:checked` instead.')
+        warn(
+          'checkbox',
+          '`on-change` is deprecated, please use `on-update:checked` instead.'
+        )
         return true
       },
       default: undefined
@@ -170,19 +148,14 @@ export default {
       return props.disabled || (NCheckboxGroup && NCheckboxGroup.disabled)
     })
     return {
-      mergedCheck: useMergedState(
-        controlledCheckedRef,
-        uncontrolledCheckedRef
-      ),
+      mergedCheck: useMergedState(controlledCheckedRef, uncontrolledCheckedRef),
       mergedDisabled: mergedDisabledRef,
       renderSafeChecked: useMemo(() => mergedCheckedRef.value)
     }
   },
   methods: {
     toggle () {
-      const {
-        NCheckboxGroup
-      } = this
+      const { NCheckboxGroup } = this
       if (NCheckboxGroup) {
         NCheckboxGroup.toggleCheckbox(!this.renderSafeChecked, this.value)
       } else {

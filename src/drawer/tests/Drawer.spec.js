@@ -6,12 +6,8 @@ import { NDrawer } from '../index'
 
 describe('n-drawer', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      drawerLight
-    ]
+    locales: [enUS],
+    styles: [drawerLight]
   })
   it('should work with import on demand', () => {
     mount(NDrawer, {

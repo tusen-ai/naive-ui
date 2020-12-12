@@ -20,7 +20,10 @@ export default create({
       ...commonVariables,
       boxShadow: `inset 0 0 0 1px ${borderColor}`,
       boxShadowActive: `inset 0 0 0 1px ${primaryColor}`,
-      boxShadowFocus: `inset 0 0 0 1px ${primaryColor}, 0 0 0 2px ${changeColor(primaryColor, { alpha: 0.2 })}`,
+      boxShadowFocus: `inset 0 0 0 1px ${primaryColor}, 0 0 0 2px ${changeColor(
+        primaryColor,
+        { alpha: 0.2 }
+      )}`,
       boxShadowHover: `inset 0 0 0 1px ${primaryColor}`,
       boxShadowDisabled: `inset 0 0 0 1px ${borderColor}`,
       color: baseColor,
@@ -38,7 +41,10 @@ export default create({
       buttonTextColorActive: primaryColor,
       buttonTextColorHover: primaryColor,
       opacityDisabled: opacityDisabled,
-      buttonBoxShadowFocus: `inset 0 0 0 1px ${primaryColor}, 0 0 0 2px ${changeColor(primaryColor, { alpha: 0.3 })}`,
+      buttonBoxShadowFocus: `inset 0 0 0 1px ${primaryColor}, 0 0 0 2px ${changeColor(
+        primaryColor,
+        { alpha: 0.3 }
+      )}`,
       buttonBoxShadowHover: 'inset 0 0 0 1px transparent',
       buttonBoxShadow: 'inset 0 0 0 1px transparent',
       buttonBorderRadius: borderRadius

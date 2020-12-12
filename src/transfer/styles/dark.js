@@ -8,12 +8,7 @@ import { inputDark } from '../../input/styles'
 export default create({
   theme: 'dark',
   name: 'Transfer',
-  peer: [
-    baseDark,
-    checkboxDark,
-    scrollbarDark,
-    inputDark
-  ],
+  peer: [baseDark, checkboxDark, scrollbarDark, inputDark],
   getLocalVars (vars) {
     return {
       ...commonVariables,

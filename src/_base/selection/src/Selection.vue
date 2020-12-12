@@ -48,9 +48,7 @@
           @clear="handleClear"
         />
       </div>
-      <div
-        class="n-base-selection__placeholder"
-      >
+      <div class="n-base-selection__placeholder">
         {{ placeholder }}
       </div>
     </template>
@@ -59,7 +57,7 @@
       <div
         ref="patternInputWrapper"
         class="n-base-selection-tags"
-        :tabindex="(disabled || patternInputFocused) ? false : '0'"
+        :tabindex="disabled || patternInputFocused ? false : '0'"
         @blur="handleBlur"
       >
         <n-tag
@@ -74,9 +72,7 @@
         >
           {{ option.label }}
         </n-tag>
-        <div
-          class="n-base-selection-input-tag"
-        >
+        <div class="n-base-selection-input-tag">
           <input
             ref="patternInput"
             tabindex="-1"
@@ -105,9 +101,7 @@
           @clear="handleClear"
         />
       </div>
-      <div
-        class="n-base-selection__placeholder"
-      >
+      <div class="n-base-selection__placeholder">
         {{ placeholder }}
       </div>
     </template>
@@ -116,15 +110,19 @@
       <div
         ref="patternInputWrapper"
         class="n-base-selection-label"
-        :tabindex="(!disabled && !patternInputFocused) ? '0' : false"
+        :tabindex="!disabled && !patternInputFocused ? '0' : false"
         @blur="handleBlur"
       >
         <input
           ref="patternInput"
           class="n-base-selection-label__input"
-          :value="(patternInputFocused && active) ? pattern : label"
+          :value="patternInputFocused && active ? pattern : label"
           :placeholder="null"
-          :readonly="!disabled && filterable && (active || autofocus) ? false : 'readonly'"
+          :readonly="
+            !disabled && filterable && (active || autofocus)
+              ? false
+              : 'readonly'
+          "
           :disabled="disabled"
           tabindex="-1"
           :autofocus="autofocus"
@@ -158,10 +156,7 @@
         :tabindex="disabled ? false : '0'"
         @blur="handleBlur"
       >
-        <div
-          v-if="label && label.length"
-          class="n-base-selection-label__input"
-        >
+        <div v-if="label && label.length" class="n-base-selection-label__input">
           {{ label }}
         </div>
         <div
@@ -200,9 +195,7 @@ export default {
     NBaseSuffix,
     NTag
   },
-  mixins: [
-    withCssr(styles)
-  ],
+  mixins: [withCssr(styles)],
   props: {
     bordered: {
       type: Boolean,
@@ -319,8 +312,11 @@ export default {
       return label
     },
     selected () {
-      if (this.multiple) return !!(Array.isArray(this.selectedOptions) && this.selectedOptions.length)
-      else {
+      if (this.multiple) {
+        return !!(
+          Array.isArray(this.selectedOptions) && this.selectedOptions.length
+        )
+      } else {
         return this.selectedOption !== null
       }
     }
@@ -406,7 +402,12 @@ export default {
     },
     handleMouseDown (e) {
       if (!this.active) return
-      const filterableElKeys = ['focusableEl1', 'patternInputWrapper', 'patternInput', 'focusableEl2']
+      const filterableElKeys = [
+        'focusableEl1',
+        'patternInputWrapper',
+        'patternInput',
+        'focusableEl2'
+      ]
       const refs = this.$refs
       for (const key of filterableElKeys) {
         const el = refs[key]

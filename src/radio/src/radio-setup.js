@@ -5,7 +5,10 @@ export default function setup (props) {
   const NRadioGroup = inject('NRadioGroup', null)
   const uncontrolledCheckedRef = ref(props.defaultChecked)
   const controlledCheckedRef = toRef(props, 'checked')
-  const mergedCheckedRef = useMergedState(controlledCheckedRef, uncontrolledCheckedRef)
+  const mergedCheckedRef = useMergedState(
+    controlledCheckedRef,
+    uncontrolledCheckedRef
+  )
   return {
     NRadioGroup,
     uncontrolledChecked: uncontrolledCheckedRef,

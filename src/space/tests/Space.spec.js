@@ -6,12 +6,8 @@ import { NSpace } from '../index'
 
 describe('n-space', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      spaceLight
-    ]
+    locales: [enUS],
+    styles: [spaceLight]
   })
   it('should work with import on demand', () => {
     mount(NSpace, {

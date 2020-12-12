@@ -1,8 +1,5 @@
 <template>
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 99.9 99.9"
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 99.9 99.9">
     <title>close</title>
     <g>
       <path

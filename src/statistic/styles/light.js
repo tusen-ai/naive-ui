@@ -4,15 +4,9 @@ import { baseDark } from '../../_styles/base'
 export default create({
   name: 'Statistic',
   theme: 'light',
-  peer: [
-    baseDark
-  ],
+  peer: [baseDark],
   getLocalVars (vars) {
-    const {
-      textColor2,
-      textColor1,
-      fontWeightStrong
-    } = vars
+    const { textColor2, textColor1, fontWeightStrong } = vars
     return {
       labelFontWeight: fontWeightStrong,
       valueFontWeight: fontWeightStrong,

@@ -20,19 +20,13 @@
         >
           <fast-backward-icon />
         </div>
-        <div
-          class="n-date-panel-month__prev"
-          @click="startCalendarPrevMonth"
-        >
+        <div class="n-date-panel-month__prev" @click="startCalendarPrevMonth">
           <backward-icon />
         </div>
         <div class="n-date-panel-month__month-year">
           {{ startCalendarMonth }} {{ startCalendarYear }}
         </div>
-        <div
-          class="n-date-panel-month__next"
-          @click="startCalendarNextMonth"
-        >
+        <div class="n-date-panel-month__next" @click="startCalendarNextMonth">
           <forward-icon />
         </div>
         <div
@@ -52,9 +46,7 @@
         </div>
       </div>
       <div class="n-date-panel__divider" />
-      <div
-        class="n-date-panel-dates"
-      >
+      <div class="n-date-panel-dates">
         <div
           v-for="(dateItem, i) in startDateArray"
           :key="i"
@@ -65,7 +57,9 @@
             'n-date-panel-date--excluded': !dateItem.isDateOfDisplayMonth,
             'n-date-panel-date--covered': dateItem.isInSpan,
             'n-date-panel-date--transition-disabled': noTransition,
-            'n-date-panel-date--disabled': isCalendarDateDisabled(dateItem.timestamp)
+            'n-date-panel-date--disabled': isCalendarDateDisabled(
+              dateItem.timestamp
+            )
           }"
           @click="handleDateClick(dateItem)"
           @mouseenter="handleDateMouseEnter(dateItem)"
@@ -80,31 +74,19 @@
       class="n-date-panel-calendar n-date-panel-calendar--end"
     >
       <div class="n-date-panel-month">
-        <div
-          class="n-date-panel-month__fast-prev"
-          @click="endCalendarPrevYear"
-        >
+        <div class="n-date-panel-month__fast-prev" @click="endCalendarPrevYear">
           <fast-backward-icon />
         </div>
-        <div
-          class="n-date-panel-month__prev"
-          @click="endCalendarPrevMonth"
-        >
+        <div class="n-date-panel-month__prev" @click="endCalendarPrevMonth">
           <backward-icon />
         </div>
         <div class="n-date-panel-month__month-year">
           {{ endCalendarMonth }} {{ endCalendarYear }}
         </div>
-        <div
-          class="n-date-panel-month__next"
-          @click="endCalendarNextMonth"
-        >
+        <div class="n-date-panel-month__next" @click="endCalendarNextMonth">
           <forward-icon />
         </div>
-        <div
-          class="n-date-panel-month__fast-next"
-          @click="endCalendarNextYear"
-        >
+        <div class="n-date-panel-month__fast-next" @click="endCalendarNextYear">
           <fast-forward-icon />
         </div>
       </div>
@@ -118,9 +100,7 @@
         </div>
       </div>
       <div class="n-date-panel__divider" />
-      <div
-        class="n-date-panel-dates"
-      >
+      <div class="n-date-panel-dates">
         <div
           v-for="(dateItem, i) in endDateArray"
           :key="i"
@@ -131,7 +111,9 @@
             'n-date-panel-date--excluded': !dateItem.isDateOfDisplayMonth,
             'n-date-panel-date--covered': dateItem.isInSpan,
             'n-date-panel-date--transition-disabled': noTransition,
-            'n-date-panel-date--disabled': isCalendarDateDisabled(dateItem.timestamp)
+            'n-date-panel-date--disabled': isCalendarDateDisabled(
+              dateItem.timestamp
+            )
           }"
           @click="handleDateClick(dateItem)"
           @mouseenter="handleDateMouseEnter(dateItem)"
@@ -140,14 +122,11 @@
         </div>
         <div
           v-if="!(actions && actions.length)"
-          style="height: 8px; width: 100%;"
+          style="height: 8px; width: 100%"
         />
       </div>
     </div>
-    <div
-      v-if="actions && actions.length"
-      class="n-date-panel-actions"
-    >
+    <div v-if="actions && actions.length" class="n-date-panel-actions">
       <n-button
         v-if="actions.includes('clear')"
         :theme="theme"
@@ -183,9 +162,7 @@ export default {
   components: {
     NButton
   },
-  mixins: [
-    dualCalendarMixin
-  ],
+  mixins: [dualCalendarMixin],
   props: {
     format: {
       type: String,

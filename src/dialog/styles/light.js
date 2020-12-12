@@ -7,11 +7,7 @@ import { buttonLight } from '../../button/styles'
 export default create({
   theme: 'light',
   name: 'Dialog',
-  peer: [
-    baseLight,
-    iconLight,
-    buttonLight
-  ],
+  peer: [baseLight, iconLight, buttonLight],
   getLocalVars (vars) {
     const {
       textColor1,

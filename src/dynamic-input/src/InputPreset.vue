@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="n-dynamic-input-preset-input"
-  >
+  <div class="n-dynamic-input-preset-input">
     <n-input
       :value="value"
       :placeholder="NDynamicInput.placeholder"

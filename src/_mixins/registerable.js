@@ -1,8 +1,4 @@
-export default function (
-  injectionName,
-  collectionKey,
-  registerKey = 'value'
-) {
+export default function (injectionName, collectionKey, registerKey = 'value') {
   return {
     watch: {
       [registerKey]: function (value, oldValue) {
@@ -25,12 +21,16 @@ export default function (
       },
       removeInstance (collection, key) {
         if (!collection[key]) collection[key] = []
-        const indexOfInstance = collection[key].findIndex(instance => instance === this)
+        const indexOfInstance = collection[key].findIndex(
+          (instance) => instance === this
+        )
         if (~indexOfInstance) collection[key].splice(indexOfInstance, 1)
       },
       addInstance (collection, key) {
         if (!collection[key]) collection[key] = []
-        const indexOfInstance = collection[key].findIndex(instance => instance === this)
+        const indexOfInstance = collection[key].findIndex(
+          (instance) => instance === this
+        )
         if (!~indexOfInstance) collection[key].push(this)
       }
     }

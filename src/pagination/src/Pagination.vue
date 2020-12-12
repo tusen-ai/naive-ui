@@ -10,7 +10,8 @@
     <div
       class="n-pagination-item n-pagination-item--backward"
       :class="{
-        'n-pagination-item--disabled': page <= 1 || page > compitablePageCount || disabled
+        'n-pagination-item--disabled':
+          page <= 1 || page > compitablePageCount || disabled
       }"
       @click="backward"
     >
@@ -24,20 +25,16 @@
       class="n-pagination-item"
       :class="{
         'n-pagination-item--active': pageItem.active,
-        'n-pagination-item--fast-backward': pageItem.type==='fastBackward',
-        'n-pagination-item--fast-forward': pageItem.type==='fastForward',
+        'n-pagination-item--fast-backward': pageItem.type === 'fastBackward',
+        'n-pagination-item--fast-forward': pageItem.type === 'fastForward',
         'n-pagination-item--disabled': disabled
       }"
       @click="dispatchPageChangeAction(pageItem)"
     >
-      <template
-        v-if="pageItem.type==='page'"
-      >
+      <template v-if="pageItem.type === 'page'">
         {{ pageItem.label }}
       </template>
-      <template
-        v-if="pageItem.type==='fastBackward'"
-      >
+      <template v-if="pageItem.type === 'fastBackward'">
         <div class="n-pagination-item__more-icon">
           <more-icon />
         </div>
@@ -45,9 +42,7 @@
           <fast-backward-icon />
         </div>
       </template>
-      <template
-        v-if="pageItem.type==='fastForward'"
-      >
+      <template v-if="pageItem.type === 'fastForward'">
         <div class="n-pagination-item__more-icon">
           <more-icon />
         </div>
@@ -59,7 +54,8 @@
     <div
       class="n-pagination-item n-pagination-item--forward"
       :class="{
-        'n-pagination-item--disabled': page < 1 || page >= compitablePageCount || disabled
+        'n-pagination-item--disabled':
+          page < 1 || page >= compitablePageCount || disabled
       }"
       @click="forward"
     >
@@ -76,11 +72,9 @@
       :disabled="disabled"
       @update:value="handleSizePickerChange"
     />
-    <div
-      v-if="showQuickJumper"
-      class="n-pagination-quick-jumper"
-    >
-      {{ localeNs.goto }} <n-input
+    <div v-if="showQuickJumper" class="n-pagination-quick-jumper">
+      {{ localeNs.goto }}
+      <n-input
         v-model:value="quickJumperValue"
         :size="inputSize"
         placeholder=""
@@ -102,12 +96,7 @@ import {
   ForwardIcon,
   MoreIcon
 } from '../../_base/icons'
-import {
-  configurable,
-  themeable,
-  locale,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, locale, withCssr } from '../../_mixins'
 import { pageItems } from './utils'
 import styles from './styles'
 import { useCompitable } from 'vooks'
@@ -123,12 +112,7 @@ export default {
     FastForwardIcon,
     FastBackwardIcon
   },
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles),
-    locale('Pagination')
-  ],
+  mixins: [configurable, themeable, withCssr(styles), locale('Pagination')],
   props: {
     page: {
       type: Number,
@@ -208,16 +192,14 @@ export default {
   computed: {
     pageSizeOptions () {
       const suffix = this.localeNs.selectionSuffix
-      return this.pageSizes.map(size => ({
+      return this.pageSizes.map((size) => ({
         label: `${size} / ${suffix}`,
         value: size
       }))
     },
     // unstable feature
     inputSize () {
-      const {
-        unstableConfig
-      } = this.$naive
+      const { unstableConfig } = this.$naive
       const size = unstableConfig?.Pagination?.inputSize
       if (size) {
         return size
@@ -251,20 +233,14 @@ export default {
     },
     changeCurrentPage (page) {
       if (page === this.page) return
-      const {
-        'onUpdate:page': onUpdatePage,
-        onPageSizeChange
-      } = this
+      const { 'onUpdate:page': onUpdatePage, onPageSizeChange } = this
       if (onUpdatePage) this['onUpdate:page'](page)
       // deprecated
       if (onPageSizeChange) this.onChange(page)
     },
     changePageSize (pageSize) {
       if (pageSize === this.pageSize) return
-      const {
-        'onUpdate:pageSize': onUpdatePageSize,
-        onPageSizeChange
-      } = this
+      const { 'onUpdate:pageSize': onUpdatePageSize, onPageSizeChange } = this
       if (onUpdatePageSize) this['onUpdate:pageSize'](pageSize)
       // deprecated
       if (onPageSizeChange) this.onPageSizeChange(pageSize)
@@ -281,7 +257,10 @@ export default {
     },
     fastForward () {
       if (this.disabled) return
-      const page = Math.min(this.page + (this.pageSlot - 4), this.compitablePageCount)
+      const page = Math.min(
+        this.page + (this.pageSlot - 4),
+        this.compitablePageCount
+      )
       this.changeCurrentPage(page)
     },
     fastBackward () {
@@ -295,7 +274,11 @@ export default {
     handleQuickJumperKeyUp (e) {
       if (e.code === 'Enter') {
         const page = parseInt(this.quickJumperValue)
-        if (!Number.isNaN(page) && page >= 1 && page <= this.compitablePageCount) {
+        if (
+          !Number.isNaN(page) &&
+          page >= 1 &&
+          page <= this.compitablePageCount
+        ) {
           this.changeCurrentPage(page)
           this.quickJumperValue = ''
         }

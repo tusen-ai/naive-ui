@@ -7,12 +7,7 @@ import { popoverLight } from '../../popover/styles'
 export default create({
   name: 'Popconfirm',
   theme: 'light',
-  peer: [
-    baseLight,
-    iconLight,
-    buttonLight,
-    popoverLight
-  ],
+  peer: [baseLight, iconLight, buttonLight, popoverLight],
   getLocalVars (vars) {
     return {
       iconColor: vars.warningColor

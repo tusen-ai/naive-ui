@@ -6,9 +6,7 @@ import styles from './styles'
 
 export default {
   name: 'Tooltip',
-  mixins: [
-    withCssr(styles)
-  ],
+  mixins: [withCssr(styles)],
   props: {
     ...NPopover.props,
     showArrow: {
@@ -22,12 +20,17 @@ export default {
     }
   },
   render () {
-    return h(NPopover, {
-      ...this.$props,
-      bodyClass: 'n-tooltip n-popover--tooltip' + (this.$props.bodyClass || ''),
-      ref: 'popover'
-    }, {
-      ...this.$slots
-    })
+    return h(
+      NPopover,
+      {
+        ...this.$props,
+        bodyClass:
+          'n-tooltip n-popover--tooltip' + (this.$props.bodyClass || ''),
+        ref: 'popover'
+      },
+      {
+        ...this.$slots
+      }
+    )
   }
 }

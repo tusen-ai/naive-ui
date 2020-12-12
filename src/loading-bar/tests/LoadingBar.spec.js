@@ -6,12 +6,8 @@ import { NLoadingBar } from '../index'
 
 describe('n-loading-bar', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      loadingBarLight
-    ]
+    locales: [enUS],
+    styles: [loadingBarLight]
   })
   it('should work with import on demand', () => {
     mount(NLoadingBar, {

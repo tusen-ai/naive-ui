@@ -6,12 +6,8 @@ import { NCheckbox } from '../index'
 
 describe('n-checkbox', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      checkboxLight
-    ]
+    locales: [enUS],
+    styles: [checkboxLight]
   })
   it('should work with import on demand', () => {
     mount(NCheckbox, {

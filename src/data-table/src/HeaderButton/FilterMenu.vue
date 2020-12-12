@@ -39,11 +39,7 @@
     </n-scrollbar>
     <n-divider :theme="theme" />
     <div class="n-data-table-filter-menu__action">
-      <n-button
-        size="tiny"
-        :theme="theme"
-        @click="handleCancelClick"
-      >
+      <n-button size="tiny" :theme="theme" @click="handleCancelClick">
         {{ NDataTable.localeNs.clear }}
       </n-button>
       <n-button
@@ -68,9 +64,12 @@ import { shouldUseArrayInSingleMode } from '../utils'
 
 function isEqual (value, oldValue) {
   if (Array.isArray(value) && Array.isArray(oldValue)) {
-    return value.length === oldValue.length && value.reduce((same, v, index) => {
-      return same && v === oldValue[index]
-    }, true)
+    return (
+      value.length === oldValue.length &&
+      value.reduce((same, v, index) => {
+        return same && v === oldValue[index]
+      }, true)
+    )
   } else {
     return value === oldValue
   }
@@ -137,11 +136,13 @@ export default {
     },
     radioGroupValue () {
       const cachedValue = this.cachedValue
-      if (
-        this.multiple ||
-        shouldUseArrayInSingleMode(this.column)
-      ) {
-        return (Array.isArray(cachedValue) && cachedValue.length && cachedValue[0]) || null
+      if (this.multiple || shouldUseArrayInSingleMode(this.column)) {
+        return (
+          (Array.isArray(cachedValue) &&
+            cachedValue.length &&
+            cachedValue[0]) ||
+          null
+        )
       }
       return cachedValue
     }
@@ -155,9 +156,7 @@ export default {
     handleChange (value) {
       if (this.multiple) {
         this.cachedValue = value
-      } else if (
-        shouldUseArrayInSingleMode(this.column)
-      ) {
+      } else if (shouldUseArrayInSingleMode(this.column)) {
         /** this branch is for compatibility */
         this.cachedValue = [value]
       } else {
@@ -169,10 +168,7 @@ export default {
       this.onConfirm()
     },
     handleCancelClick () {
-      if (
-        this.multiple ||
-        shouldUseArrayInSingleMode(this.column)
-      ) {
+      if (this.multiple || shouldUseArrayInSingleMode(this.column)) {
         this.doChange([])
       } else {
         this.doChange(null)

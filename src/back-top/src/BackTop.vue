@@ -2,13 +2,10 @@
   <div
     ref="placeholder"
     class="n-back-top-placeholder"
-    style="display: none;"
+    style="display: none"
     aria-hidden
   >
-    <v-lazy-teleport
-      :to="to"
-      :show="mergedShow"
-    >
+    <v-lazy-teleport :to="to" :show="mergedShow">
       <transition
         name="n-fade-in-scale-up-transition"
         :appear="isMounted"
@@ -45,11 +42,7 @@ import { ref, computed, toRef, watch, nextTick } from 'vue'
 import { VLazyTeleport } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
 import { getScrollParent, unwrapElement } from 'seemly'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import { formatLength, warn } from '../../_utils'
 import styles from './styles'
 import BackTopIcon from './BackTopIcon.vue'
@@ -60,11 +53,7 @@ export default {
     VLazyTeleport,
     BackTopIcon
   },
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   inheritAttrs: false,
   props: {
     show: {
@@ -99,7 +88,10 @@ export default {
     // deprecated
     target: {
       validator () {
-        warn('back-top', '`target` is deprecated, please use `listen-to` instead.')
+        warn(
+          'back-top',
+          '`target` is deprecated, please use `listen-to` instead.'
+        )
         return true
       },
       default: undefined
@@ -126,10 +118,7 @@ export default {
       }
     })
     const controlledShowRef = toRef(props, 'show')
-    const mergedShowRef = useMergedState(
-      controlledShowRef,
-      uncontrolledShowRef
-    )
+    const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
     // deprecated
     watch(mergedShowRef, (value) => {
       if (DomInfoReadyRef.value) {
@@ -173,7 +162,10 @@ export default {
         unwrapElement(this.listenTo) ||
         getScrollParent(this.$refs.placeholder)
       if (__DEV__ && !scrollElement) {
-        warn('back-top', 'Container of back-top element is not found. This could be a bug of naive-ui.')
+        warn(
+          'back-top',
+          'Container of back-top element is not found. This could be a bug of naive-ui.'
+        )
       }
       this.scrollElement = scrollElement
       const { to } = this

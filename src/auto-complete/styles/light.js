@@ -5,10 +5,7 @@ import { inputLight } from '../../input/styles'
 export default create({
   theme: 'light',
   name: 'AutoComplete',
-  peer: [
-    baseSelectMenuLight,
-    inputLight
-  ],
+  peer: [baseSelectMenuLight, inputLight],
   getLocalVars () {
     return {}
   }

@@ -10,19 +10,9 @@
     @keydown.right="handleKeyDownRight"
     @keydown.left="handleKeyDownLeft"
   >
-    <div
-      ref="railRef"
-      class="n-slider-rail"
-      @click="handleRailClick"
-    >
-      <div
-        class="n-slider-rail__fill"
-        :style="fillStyle"
-      />
-      <div
-        v-if="marks"
-        class="n-slider-dots"
-      >
+    <div ref="railRef" class="n-slider-rail" @click="handleRailClick">
+      <div class="n-slider-rail__fill" :style="fillStyle" />
+      <div v-if="marks" class="n-slider-dots">
         <div
           v-for="mark in computedMarks"
           :key="mark.label"
@@ -71,9 +61,7 @@
         </transition>
       </v-follower>
     </v-binder>
-    <v-binder
-      v-if="range"
-    >
+    <v-binder v-if="range">
       <v-target>
         <div
           ref="handleRef2"
@@ -111,10 +99,7 @@
         </transition>
       </v-follower>
     </v-binder>
-    <div
-      v-if="marks"
-      class="n-slider-marks"
-    >
+    <div v-if="marks" class="n-slider-marks">
       <div
         v-for="mark in computedMarks"
         :key="mark.label"
@@ -129,19 +114,10 @@
 
 <script>
 import { ref, toRef, computed, watch, nextTick } from 'vue'
-import {
-  VBinder,
-  VTarget,
-  VFollower
-} from 'vueuc'
+import { VBinder, VTarget, VFollower } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
 import { on, off } from 'evtd'
-import {
-  configurable,
-  themeable,
-  asFormItem,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, asFormItem, withCssr } from '../../_mixins'
 import styles from './styles'
 import { warn, call, useAdjustedTo } from '../../_utils'
 
@@ -172,12 +148,7 @@ export default {
     VTarget,
     VFollower
   },
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles),
-    asFormItem()
-  ],
+  mixins: [configurable, themeable, withCssr(styles), asFormItem()],
   props: {
     marks: {
       type: Object,
@@ -223,7 +194,12 @@ export default {
     // deprecated
     onChange: {
       validator () {
-        if (__DEV__) warn('slider', '`on-change` is deprecated, please use `on-update:value` instead.')
+        if (__DEV__) {
+          warn(
+            'slider',
+            '`on-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
         return true
       },
       default: undefined
@@ -286,7 +262,8 @@ export default {
         marks.push({
           label: this.marks[value],
           style: {
-            left: ((Number(value) - this.min) / (this.max - this.min) * 100) + '%'
+            left:
+              ((Number(value) - this.min) / (this.max - this.min)) * 100 + '%'
           }
         })
       }
@@ -295,13 +272,19 @@ export default {
     fillStyle () {
       if (this.range) {
         return {
-          left: ((this.handleValue1 - this.min) / (this.max - this.min) * 100) + '%',
-          width: ((this.handleValue2 - this.handleValue1) / (this.max - this.min) * 100) + '%'
+          left:
+            ((this.handleValue1 - this.min) / (this.max - this.min)) * 100 +
+            '%',
+          width:
+            ((this.handleValue2 - this.handleValue1) / (this.max - this.min)) *
+              100 +
+            '%'
         }
       } else {
         return {
           left: 0,
-          width: ((this.handleValue1 - this.min) / (this.max - this.min) * 100) + '%'
+          width:
+            ((this.handleValue1 - this.min) / (this.max - this.min)) * 100 + '%'
         }
       }
     },
@@ -313,7 +296,8 @@ export default {
           } else {
             return this.justifyValue(this.value[0])
           }
-        } return null
+        }
+        return null
       } else {
         return this.justifyValue(this.value)
       }
@@ -330,13 +314,15 @@ export default {
     },
     firstHandleStyle () {
       return {
-        left: ((this.handleValue1 - this.min) / (this.max - this.min) * 100) + '%',
+        left:
+          ((this.handleValue1 - this.min) / (this.max - this.min)) * 100 + '%',
         zIndex: this.handleClicked1 ? 1 : 0
       }
     },
     secondHandleStyle () {
       return {
-        left: ((this.handleValue2 - this.min) / (this.max - this.min) * 100) + '%',
+        left:
+          ((this.handleValue2 - this.min) / (this.max - this.min)) * 100 + '%',
         zIndex: this.handleClicked2 ? 1 : 0
       }
     }
@@ -442,11 +428,18 @@ export default {
         this.handleRef1.focus()
       } else {
         if (this.value) {
-          if (Math.abs(this.handleValue1 - newValue) < Math.abs(this.handleValue2 - newValue)) {
-            this.dispatchValueUpdate([newValue, this.handleValue2], { source: 'click' })
+          if (
+            Math.abs(this.handleValue1 - newValue) <
+            Math.abs(this.handleValue2 - newValue)
+          ) {
+            this.dispatchValueUpdate([newValue, this.handleValue2], {
+              source: 'click'
+            })
             this.handleRef1.focus()
           } else {
-            this.dispatchValueUpdate([this.handleValue1, newValue], { source: 'click' })
+            this.dispatchValueUpdate([this.handleValue1, newValue], {
+              source: 'click'
+            })
             this.handleRef2.focus()
           }
         } else {
@@ -465,7 +458,8 @@ export default {
       } else {
         handleValue = this.handleValue2
       }
-      let nextValue = Math.floor(handleValue / this.step) * this.step + this.step
+      let nextValue =
+        Math.floor(handleValue / this.step) * this.step + this.step
       if (this.marks) {
         for (let key of Object.keys(this.marks)) {
           key = Number(key)
@@ -476,9 +470,13 @@ export default {
       }
       if (this.range) {
         if (firstHandleFocused) {
-          this.dispatchValueUpdate([nextValue, this.handleValue2], { source: 'keyboard' })
+          this.dispatchValueUpdate([nextValue, this.handleValue2], {
+            source: 'keyboard'
+          })
         } else {
-          this.dispatchValueUpdate([this.handleValue1, nextValue], { source: 'keyboard' })
+          this.dispatchValueUpdate([this.handleValue1, nextValue], {
+            source: 'keyboard'
+          })
         }
       } else {
         this.dispatchValueUpdate(nextValue, { source: 'keyboard' })
@@ -507,9 +505,13 @@ export default {
       }
       if (this.range) {
         if (firstHandleFocused) {
-          this.dispatchValueUpdate([nextValue, this.handleValue2], { source: 'keyboard' })
+          this.dispatchValueUpdate([nextValue, this.handleValue2], {
+            source: 'keyboard'
+          })
         } else {
-          this.dispatchValueUpdate([this.handleValue1, nextValue], { source: 'keyboard' })
+          this.dispatchValueUpdate([this.handleValue1, nextValue], {
+            source: 'keyboard'
+          })
         }
       } else {
         this.dispatchValueUpdate(nextValue, { source: 'keyboard' })
@@ -527,7 +529,10 @@ export default {
               this.handleClicked2 = false
               this.handleClicked1 = true
             }
-          } else if (this.handleActive2 && document.activeElement === firstHandle) {
+          } else if (
+            this.handleActive2 &&
+            document.activeElement === firstHandle
+          ) {
             this.disableTransitionOneTick()
             secondHandle.focus()
             if (this.handleClicked1) {
@@ -540,7 +545,7 @@ export default {
     },
     getClosestMarkValue (currentValue) {
       if (this.marks) {
-        const markValues = Object.keys(this.marks).map(key => Number(key))
+        const markValues = Object.keys(this.marks).map((key) => Number(key))
         let diff = null
         let closestValue = null
         for (const value of markValues) {
@@ -562,10 +567,15 @@ export default {
       let justifiedValue = value
       justifiedValue = Math.max(this.min, justifiedValue)
       justifiedValue = Math.min(this.max, justifiedValue)
-      justifiedValue = Math.round((justifiedValue - this.min) / this.step) * this.step + this.min
+      justifiedValue =
+        Math.round((justifiedValue - this.min) / this.step) * this.step +
+        this.min
       if (this.marks) {
         const closestMarkValue = this.getClosestMarkValue(value)
-        if (closestMarkValue !== null && Math.abs(justifiedValue - value) > Math.abs(closestMarkValue - value)) {
+        if (
+          closestMarkValue !== null &&
+          Math.abs(justifiedValue - value) > Math.abs(closestMarkValue - value)
+        ) {
           justifiedValue = closestMarkValue
         }
       }
@@ -612,7 +622,11 @@ export default {
             value = [this.justifyValue(value[0]), this.justifyValue(value[1])]
           }
           const { value: oldValue } = this
-          if (!Array.isArray(oldValue) || oldValue[0] !== value[0] || oldValue[1] !== value[1]) {
+          if (
+            !Array.isArray(oldValue) ||
+            oldValue[0] !== value[0] ||
+            oldValue[1] !== value[1]
+          ) {
             this.changeSource = source
             this.doUpdateValue(value)
           }

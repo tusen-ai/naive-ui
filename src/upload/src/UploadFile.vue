@@ -12,8 +12,7 @@
     <div class="n-upload-file-info">
       <div class="n-upload-file-info__name">
         <n-icon>
-          <attach-icon />
-        </n-icon>{{ file.name }}
+          <attach-icon /> </n-icon>{{ file.name }}
       </div>
       <div class="n-upload-file-info__action">
         <n-button
@@ -147,25 +146,21 @@ export default {
           file: Object.assign({}, file),
           fileList: NUpload.mergedFileList
         })
-      ).then(
-        result => {
-          if (result === false) return
-          const fileAfterChange = Object.assign({}, file, {
-            status: 'removed'
-          })
-          XHRMap.delete(file.id)
-          change(fileAfterChange, undefined, {
-            remove: true
-          })
-        }
-      )
+      ).then((result) => {
+        if (result === false) return
+        const fileAfterChange = Object.assign({}, file, {
+          status: 'removed'
+        })
+        XHRMap.delete(file.id)
+        change(fileAfterChange, undefined, {
+          remove: true
+        })
+      })
     },
     handleDownload (file) {
       const NUpload = this.NUpload
-      Promise.resolve(
-        NUpload.onDownload(Object.assign({}, file))
-      ).then(
-        res => {
+      Promise.resolve(NUpload.onDownload(Object.assign({}, file))).then(
+        (res) => {
           /** I haven't figure out its usage, so just leave it here */
         }
       )

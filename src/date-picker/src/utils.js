@@ -35,7 +35,7 @@ function getDerivedTimeFromKeyboardEvent (prevValue, event) {
 
 function matchDate (sourceTime, patternTime) {
   if (Array.isArray(sourceTime)) {
-    return sourceTime.some(time => isSameDay(time, patternTime))
+    return sourceTime.some((time) => isSameDay(time, patternTime))
   } else {
     return isSameDay(sourceTime, patternTime)
   }
@@ -82,16 +82,22 @@ function dateArray (displayTime, selectedTime, currentTime) {
   const calendarDays = []
   let protectLastMonthDateIsShownFlag = true
   while (getDay(lastMonthIterator) !== 6 || protectLastMonthDateIsShownFlag) {
-    calendarDays.unshift(dateItem(lastMonthIterator, displayTime, selectedTime, currentTime))
+    calendarDays.unshift(
+      dateItem(lastMonthIterator, displayTime, selectedTime, currentTime)
+    )
     lastMonthIterator = addDays(lastMonthIterator, -1)
     protectLastMonthDateIsShownFlag = false
   }
   while (getMonth(displayMonthIterator) === displayMonth) {
-    calendarDays.push(dateItem(displayMonthIterator, displayTime, selectedTime, currentTime))
+    calendarDays.push(
+      dateItem(displayMonthIterator, displayTime, selectedTime, currentTime)
+    )
     displayMonthIterator = addDays(displayMonthIterator, 1)
   }
   while (calendarDays.length < 42) {
-    calendarDays.push(dateItem(displayMonthIterator, displayTime, selectedTime, currentTime))
+    calendarDays.push(
+      dateItem(displayMonthIterator, displayTime, selectedTime, currentTime)
+    )
     displayMonthIterator = addDays(displayMonthIterator, 1)
   }
   return calendarDays

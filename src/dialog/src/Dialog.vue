@@ -9,20 +9,14 @@
     }"
     :style="mergedStyle"
   >
-    <n-icon
-      v-if="closable"
-      class="n-dialog__close"
-      @click="handleCloseClick"
-    >
+    <n-icon v-if="closable" class="n-dialog__close" @click="handleCloseClick">
       <close-icon />
     </n-icon>
     <div
       v-if="mergedShowIcon && mergedIconPlacement === 'top'"
       class="n-dialog-icon-container"
     >
-      <n-icon
-        class="n-dialog__icon"
-      >
+      <n-icon class="n-dialog__icon">
         <slot name="icon">
           <render v-if="icon" :render="icon" />
           <component :is="iconType" v-else-if="type !== 'default'" />
@@ -75,11 +69,7 @@
 </template>
 
 <script>
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import { render } from '../../_utils'
 import { NIcon } from '../../icon'
 import { NButton } from '../../button'
@@ -108,11 +98,7 @@ export default {
     InfoIcon,
     render
   },
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     icon: {
       type: Function,
@@ -173,7 +159,9 @@ export default {
   },
   computed: {
     mergedIconPlacement () {
-      return this.$naive?.unstableConfig?.Dialog?.iconPlacement || this.iconPlacement
+      return (
+        this.$naive?.unstableConfig?.Dialog?.iconPlacement || this.iconPlacement
+      )
     },
     mergedShowIcon () {
       const { showIcon, type, icon, $slots } = this

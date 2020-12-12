@@ -1,14 +1,7 @@
 import { h, markRaw } from 'vue'
 import { intersection } from 'lodash-es'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
-import {
-  call,
-  warn
-} from '../../_utils'
+import { configurable, themeable, withCssr } from '../../_mixins'
+import { call, warn } from '../../_utils'
 import styles from './styles/index.js'
 
 export default {
@@ -18,11 +11,7 @@ export default {
       NCollapse: this
     }
   },
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     expandedNames: {
       type: [Array, String],
@@ -55,7 +44,12 @@ export default {
     // deprecated
     onExpandedNamesChange: {
       validator () {
-        if (__DEV__) warn('collapse', '`on-expanded-names-change` is deprecated, please use `on-update:expanded-names` instead.')
+        if (__DEV__) {
+          warn(
+            'collapse',
+            '`on-expanded-names-change` is deprecated, please use `on-update:expanded-names` instead.'
+          )
+        }
         return true
       },
       default: undefined
@@ -76,9 +70,7 @@ export default {
       if (onExpandedNamesChange) call(onExpandedNamesChange, ...args)
     },
     doItemHeaderClick (...args) {
-      const {
-        onItemHeaderClick
-      } = this
+      const { onItemHeaderClick } = this
       if (onItemHeaderClick) call(onItemHeaderClick, ...args)
     },
     toggleItem (collapse, name, event) {
@@ -95,8 +87,13 @@ export default {
           this.doUpdateExpandedNames([name])
           this.doItemHeaderClick({ name, expanded: true, event })
         } else {
-          const activeNames = intersection(this.expandedNames, this.collectedItemNames)
-          const index = activeNames.findIndex(activeName => name === activeName)
+          const activeNames = intersection(
+            this.expandedNames,
+            this.collectedItemNames
+          )
+          const index = activeNames.findIndex(
+            (activeName) => name === activeName
+          )
           if (~index) {
             activeNames.splice(index, 1)
             this.doUpdateExpandedNames(activeNames)
@@ -112,15 +109,19 @@ export default {
   },
   render () {
     const { mergedTheme } = this
-    return h('div', {
-      class: [
-        'n-collapse',
-        {
-          [`n-${mergedTheme}-theme`]: mergedTheme
-        }
-      ]
-    }, {
-      ...this.$slots
-    })
+    return h(
+      'div',
+      {
+        class: [
+          'n-collapse',
+          {
+            [`n-${mergedTheme}-theme`]: mergedTheme
+          }
+        ]
+      },
+      {
+        ...this.$slots
+      }
+    )
   }
 }

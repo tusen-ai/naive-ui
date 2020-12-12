@@ -1,4 +1,3 @@
-
 import { h, Transition } from 'vue'
 import NMessage from './Message.js'
 import props from './message-props'
@@ -48,10 +47,7 @@ export default {
   },
   methods: {
     hide () {
-      const {
-        timerId,
-        onHide
-      } = this
+      const { timerId, onHide } = this
       this.show = false
       if (timerId) {
         window.clearTimeout(timerId)
@@ -60,18 +56,12 @@ export default {
       if (onHide) onHide()
     },
     handleClose () {
-      const {
-        onClose
-      } = this
+      const { onClose } = this
       if (onClose) onClose()
       this.hide()
     },
     handleAfterLeave () {
-      const {
-        onAfterLeave,
-        onInternalAfterLeave,
-        onAfterHide
-      } = this
+      const { onAfterLeave, onInternalAfterLeave, onAfterHide } = this
       if (onAfterLeave) onAfterLeave()
       if (onInternalAfterLeave) onInternalAfterLeave(this._.vnode.key)
       // deprecated
@@ -84,7 +74,8 @@ export default {
   },
   render () {
     return h(
-      Transition, {
+      Transition,
+      {
         name: 'message-transition',
         appear: true,
         onAfterLeave: this.handleAfterLeave
@@ -99,7 +90,8 @@ export default {
               icon: this.icon,
               closable: this.closable,
               onClose: this.handleClose
-            }) : null
+            })
+            : null
         ]
       }
     )

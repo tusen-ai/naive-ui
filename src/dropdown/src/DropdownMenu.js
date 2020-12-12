@@ -23,41 +23,41 @@ export default {
   },
   computed: {
     showIcon () {
-      return this.tmNodes.some(tmNode => tmNode.rawNode.icon)
+      return this.tmNodes.some((tmNode) => tmNode.rawNode.icon)
     },
     hasSubmenu () {
-      return this.tmNodes.some(tmNode => isSubmenuNode(tmNode.rawNode))
+      return this.tmNodes.some((tmNode) => isSubmenuNode(tmNode.rawNode))
     }
   },
   render () {
     const {
-      NDropdown: {
-        size,
-        mergedTheme
-      }
+      NDropdown: { size, mergedTheme }
     } = this
-    return h('div', {
-      class: [
-        'n-dropdown-menu',
-        `n-dropdown-menu--${size}-size`,
-        {
-          [`n-${mergedTheme}-theme`]: mergedTheme
-        }
-      ]
-    },
-    [
-      this.tmNodes.map(tmNode => {
-        if (tmNode.rawNode.type === 'divider') {
-          return h(NDropdownDivider, {
+    return h(
+      'div',
+      {
+        class: [
+          'n-dropdown-menu',
+          `n-dropdown-menu--${size}-size`,
+          {
+            [`n-${mergedTheme}-theme`]: mergedTheme
+          }
+        ]
+      },
+      [
+        this.tmNodes.map((tmNode) => {
+          if (tmNode.rawNode.type === 'divider') {
+            return h(NDropdownDivider, {
+              key: tmNode.key
+            })
+          }
+          return h(NDropdownOption, {
+            tmNode: tmNode,
+            parentKey: this.parentKey,
             key: tmNode.key
           })
-        }
-        return h(NDropdownOption, {
-          tmNode: tmNode,
-          parentKey: this.parentKey,
-          key: tmNode.key
         })
-      })
-    ])
+      ]
+    )
   }
 }

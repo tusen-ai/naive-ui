@@ -6,10 +6,7 @@ import { changeColor } from 'seemly'
 export default create({
   theme: 'dark',
   name: 'Alert',
-  peer: [
-    baseDark,
-    iconDark
-  ],
+  peer: [baseDark, iconDark],
   getLocalVars (vars) {
     const {
       borderRadius,
@@ -45,7 +42,9 @@ export default create({
       closeColorInfo: closeColorOverlay,
       closeColorHoverInfo: closeColorHoverOverlay,
       closeColorPressedInfo: closeColorPressedOverlay,
-      borderSuccess: `1px solid ${changeColor(successColorSuppl, { alpha: 0.35 })}`,
+      borderSuccess: `1px solid ${changeColor(successColorSuppl, {
+        alpha: 0.35
+      })}`,
       colorSuccess: changeColor(successColorSuppl, { alpha: 0.25 }),
       titleTextColorSuccess: textColor1Overlay,
       iconColorSuccess: successColorSuppl,
@@ -53,7 +52,9 @@ export default create({
       closeColorSuccess: closeColorOverlay,
       closeColorHoverSuccess: closeColorHoverOverlay,
       closeColorPressedSuccess: closeColorPressedOverlay,
-      borderWarning: `1px solid ${changeColor(warningColorSuppl, { alpha: 0.35 })}`,
+      borderWarning: `1px solid ${changeColor(warningColorSuppl, {
+        alpha: 0.35
+      })}`,
       colorWarning: changeColor(warningColorSuppl, { alpha: 0.25 }),
       titleTextColorWarning: textColor1Overlay,
       iconColorWarning: warningColorSuppl,

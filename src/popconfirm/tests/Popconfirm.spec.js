@@ -6,12 +6,8 @@ import { NPopconfirm } from '../index'
 
 describe('n-popconfirm', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      popconfirmLight
-    ]
+    locales: [enUS],
+    styles: [popconfirmLight]
   })
   it('should work with import on demand', () => {
     mount(NPopconfirm, {

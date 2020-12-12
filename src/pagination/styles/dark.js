@@ -9,12 +9,7 @@ import commonVariables from './_common.js'
 export default create({
   name: 'Pagination',
   theme: 'dark',
-  peer: [
-    baseDark,
-    selectDark,
-    inputDark,
-    iconDark
-  ],
+  peer: [baseDark, selectDark, inputDark, iconDark],
   getLocalVars (vars) {
     const {
       textColor2Overlay,
@@ -38,7 +33,9 @@ export default create({
       itemColorActive: 'transparent',
       itemColorDisabled: inputColorDisabledOverlay,
       itemBorder: '1px solid transparent',
-      itemBorderActive: `1px solid ${changeColor(primaryColor, { alpha: opacity3 })}`,
+      itemBorderActive: `1px solid ${changeColor(primaryColor, {
+        alpha: opacity3
+      })}`,
       itemBorderDisabled: '1px solid transparent',
       itemColorHover: 'transparent',
       itemBorderRadius: borderRadius,

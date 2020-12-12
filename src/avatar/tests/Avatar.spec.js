@@ -6,12 +6,8 @@ import { NAvatar } from '../index'
 
 describe('n-avatar', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      avatarLight
-    ]
+    locales: [enUS],
+    styles: [avatarLight]
   })
   it('should work with import on demand', () => {
     mount(NAvatar, {

@@ -5,13 +5,8 @@ import { baseSelectMenuLight } from '../../_base/select-menu/styles'
 export default create({
   name: 'Popselect',
   theme: 'light',
-  peer: [
-    baseLight,
-    baseSelectMenuLight
-  ],
+  peer: [baseLight, baseSelectMenuLight],
   getLocalVars (vars) {
-    return {
-
-    }
+    return {}
   }
 })

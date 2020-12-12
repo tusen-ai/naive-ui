@@ -19,22 +19,14 @@
 </template>
 
 <script>
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import styles from './styles/a'
 
 export default {
   name: 'A',
   cssrName: 'Typography',
   cssrId: 'TypographyA',
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     to: {
       type: [String, Object],

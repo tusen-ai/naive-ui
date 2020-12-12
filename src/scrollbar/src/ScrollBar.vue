@@ -1,9 +1,6 @@
 <template>
   <slot v-if="!scrollable" />
-  <v-resize-observer
-    v-else
-    @resize="handleContentResize"
-  >
+  <v-resize-observer v-else @resize="handleContentResize">
     <div
       v-bind="$attrs"
       class="n-scrollbar"
@@ -26,13 +23,10 @@
             :style="[
               contentStyle,
               {
-                width: xScrollable ? 'fit-content' : null,
+                width: xScrollable ? 'fit-content' : null
               }
             ]"
-            :class="[
-              'n-scrollbar-content',
-              contentClass
-            ]"
+            :class="['n-scrollbar-content', contentClass]"
           >
             <slot />
           </div>
@@ -47,10 +41,7 @@
         :class="{
           'n-scrollbar-rail--disabled': !needyBar
         }"
-        :style="[
-          horizontalRailStyle,
-          { width: sizePx }
-        ]"
+        :style="[horizontalRailStyle, { width: sizePx }]"
       >
         <transition name="n-fade-in-transition">
           <div
@@ -97,21 +88,10 @@
 </template>
 
 <script>
-import {
-  ref
-} from 'vue'
-import {
-  on,
-  off
-} from 'evtd'
-import {
-  VResizeObserver
-} from 'vueuc'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { ref } from 'vue'
+import { on, off } from 'evtd'
+import { VResizeObserver } from 'vueuc'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import styles from './styles/index.js'
 import { useIsIos } from 'vooks'
 
@@ -120,11 +100,7 @@ export default {
   components: {
     VResizeObserver
   },
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     size: {
       type: Number,
@@ -208,36 +184,64 @@ export default {
   },
   computed: {
     yBarSize () {
-      if (this.containerHeight === null || this.contentHeight === null || this.yRailSize === null) return 0
-      else {
-        return Math.min(this.containerHeight, (this.yRailSize * this.containerHeight / this.contentHeight + this.size * 1.5))
+      if (
+        this.containerHeight === null ||
+        this.contentHeight === null ||
+        this.yRailSize === null
+      ) { return 0 } else {
+        return Math.min(
+          this.containerHeight,
+          (this.yRailSize * this.containerHeight) / this.contentHeight +
+            this.size * 1.5
+        )
       }
     },
     yBarSizePx () {
       return this.yBarSize + 'px'
     },
     xBarSize () {
-      if (this.containerWidth === null || this.contentWidth === null || this.xRailSize === null) return 0
-      else {
-        return (this.xRailSize * this.containerWidth / this.contentWidth + this.size * 1.5)
+      if (
+        this.containerWidth === null ||
+        this.contentWidth === null ||
+        this.xRailSize === null
+      ) { return 0 } else {
+        return (
+          (this.xRailSize * this.containerWidth) / this.contentWidth +
+          this.size * 1.5
+        )
       }
     },
     xBarSizePx () {
       return this.xBarSize + 'px'
     },
     yBarTop () {
-      if (this.containerHeight === null || this.containerScrollTop === null || this.contentHeight === null || this.yRailSize === null) return 0
-      else {
-        return this.containerScrollTop / (this.contentHeight - this.containerHeight) * (this.yRailSize - this.yBarSize)
+      if (
+        this.containerHeight === null ||
+        this.containerScrollTop === null ||
+        this.contentHeight === null ||
+        this.yRailSize === null
+      ) { return 0 } else {
+        return (
+          (this.containerScrollTop /
+            (this.contentHeight - this.containerHeight)) *
+          (this.yRailSize - this.yBarSize)
+        )
       }
     },
     yBarTopPx () {
       return this.yBarTop + 'px'
     },
     xBarLeft () {
-      if (this.containerWidth === null || this.containerScrollLeft === null || this.contentWidth === null) return 0
-      else {
-        return this.containerScrollLeft / (this.contentWidth - this.containerWidth) * (this.xRailSize - this.xBarSize)
+      if (
+        this.containerWidth === null ||
+        this.containerScrollLeft === null ||
+        this.contentWidth === null
+      ) { return 0 } else {
+        return (
+          (this.containerScrollLeft /
+            (this.contentWidth - this.containerWidth)) *
+          (this.xRailSize - this.xBarSize)
+        )
       }
     },
     xBarLeftPx () {
@@ -250,10 +254,18 @@ export default {
       return this.size / 2 + 'px'
     },
     needyBar () {
-      return this.containerHeight !== null && this.contentHeight !== null && this.contentHeight > this.containerHeight
+      return (
+        this.containerHeight !== null &&
+        this.contentHeight !== null &&
+        this.contentHeight > this.containerHeight
+      )
     },
     needxBar () {
-      return this.containerWidth !== null && this.contentWidth !== null && this.contentWidth > this.containerWidth
+      return (
+        this.containerWidth !== null &&
+        this.contentWidth !== null &&
+        this.contentWidth > this.containerWidth
+      )
     }
   },
   beforeUnmount () {
@@ -276,16 +288,12 @@ export default {
   },
   methods: {
     mergedContainerRef () {
-      const {
-        container
-      } = this
+      const { container } = this
       if (container) return container()
       return this.containerRef
     },
     mergedContentRef () {
-      const {
-        content
-      } = this
+      const { content } = this
       if (content) return content()
       return this.contentRef
     },
@@ -294,7 +302,7 @@ export default {
     },
     scrollTo (options, y) {
       if (!this.scrollable) return
-      if (typeof options === 'number') this.scrollToPosition(options, y, 0, false, 'auto')
+      if (typeof options === 'number') { this.scrollToPosition(options, y, 0, false, 'auto') }
       const {
         left,
         top,
@@ -307,8 +315,15 @@ export default {
       } = options
       if (left !== undefined || top !== undefined) {
         this.scrollToPosition(left, top, 0, false, behavior)
-      } if (el !== undefined) {
-        this.scrollToPosition(0, el.offsetTop, el.offsetHeight, debounce, behavior)
+      }
+      if (el !== undefined) {
+        this.scrollToPosition(
+          0,
+          el.offsetTop,
+          el.offsetHeight,
+          debounce,
+          behavior
+        )
       } else if (index !== undefined && elSize !== undefined) {
         this.scrollToPosition(0, index * elSize, behavior, debounce, behavior)
       } else if (position === 'bottom') {
@@ -317,20 +332,11 @@ export default {
         this.scrollToPosition(0, 0, 0, false, behavior)
       }
     },
-    scrollToPosition (
-      left,
-      top,
-      elSize,
-      debounce,
-      behavior
-    ) {
+    scrollToPosition (left, top, elSize, debounce, behavior) {
       const container = this.mergedContainerRef()
       if (!container) return
       if (debounce) {
-        const {
-          scrollTop,
-          offsetHeight
-        } = container
+        const { scrollTop, offsetHeight } = container
         if (top > scrollTop) {
           if (top + elSize <= scrollTop + offsetHeight) {
             // do nothing
@@ -391,9 +397,7 @@ export default {
       this.isShowYBar = true
     },
     handleScroll (e) {
-      const {
-        onScroll
-      } = this
+      const { onScroll } = this
       if (onScroll) onScroll(e)
       this.syncScrollState()
     },
@@ -444,8 +448,10 @@ export default {
       if (!this.xBarPressed) return
       window.clearTimeout(this.xBarVanishTimerId)
       window.clearTimeout(this.yBarVanishTimerId)
-      const dX = (e.clientX - this.memoMouseX)
-      const dScrollLeft = dX * (this.contentWidth - this.containerWidth) / (this.containerWidth - this.xBarSize)
+      const dX = e.clientX - this.memoMouseX
+      const dScrollLeft =
+        (dX * (this.contentWidth - this.containerWidth)) /
+        (this.containerWidth - this.xBarSize)
       const toScrollLeftUpperBound = this.contentWidth - this.containerWidth
       let toScrollLeft = this.memoXLeft + dScrollLeft
       toScrollLeft = Math.min(toScrollLeftUpperBound, toScrollLeft)
@@ -476,8 +482,10 @@ export default {
       if (!this.yBarPressed) return
       window.clearTimeout(this.xBarVanishTimerId)
       window.clearTimeout(this.yBarVanishTimerId)
-      const dY = (e.clientY - this.memoMouseY)
-      const dScrollTop = dY * (this.contentHeight - this.containerHeight) / (this.containerHeight - this.yBarSize)
+      const dY = e.clientY - this.memoMouseY
+      const dScrollTop =
+        (dY * (this.contentHeight - this.containerHeight)) /
+        (this.containerHeight - this.yBarSize)
       const toScrollTopUpperBound = this.contentHeight - this.containerHeight
       let toScrollTop = this.memoYTop + dScrollTop
       toScrollTop = Math.min(toScrollTopUpperBound, toScrollTop)
@@ -487,9 +495,7 @@ export default {
     handleYScrollMouseUp (e) {
       e.preventDefault()
       e.stopPropagation()
-      const {
-        onScrollEnd
-      } = this
+      const { onScrollEnd } = this
       if (onScrollEnd) onScrollEnd()
       off('mousemove', window, this.handleYScrollMouseMove, true)
       off('mouseup', window, this.handleYScrollMouseUp, true)

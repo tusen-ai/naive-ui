@@ -10,39 +10,49 @@ export default {
     }
   },
   render () {
-    return this.name ? [
-      h('div', {
-        style: {
-          alignItems: 'center',
-          height: '64px',
-          paddingLeft: '36px',
-          fontSize: '16px',
-          fontWeight: '500',
-          display: 'flex',
-          position: 'relative'
-        }
-      }, [
-        this.$slots.icon
-          ? h(NIcon, {
-            size: 20,
+    return this.name
+      ? [
+        h(
+          'div',
+          {
             style: {
-              position: 'absolute',
-              left: '10px',
-              top: '50%',
-              transform: 'translateY(-50%)'
+              alignItems: 'center',
+              height: '64px',
+              paddingLeft: '36px',
+              fontSize: '16px',
+              fontWeight: '500',
+              display: 'flex',
+              position: 'relative'
             }
-          }, {
-            default: this.$slots.icon
-          })
-          : null,
-        h('span', [this.name])
-      ]),
-      h(NDivider, {
-        style: {
-          margin: '0',
-          padding: '0 8px'
-        }
-      })
-    ] : null
+          },
+          [
+            this.$slots.icon
+              ? h(
+                NIcon,
+                {
+                  size: 20,
+                  style: {
+                    position: 'absolute',
+                    left: '10px',
+                    top: '50%',
+                    transform: 'translateY(-50%)'
+                  }
+                },
+                {
+                  default: this.$slots.icon
+                }
+              )
+              : null,
+            h('span', [this.name])
+          ]
+        ),
+        h(NDivider, {
+          style: {
+            margin: '0',
+            padding: '0 8px'
+          }
+        })
+      ]
+      : null
   }
 }

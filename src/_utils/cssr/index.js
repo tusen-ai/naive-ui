@@ -24,45 +24,40 @@ function insideFormItem (status, style) {
   if (status === null) return style
   return c(`${prefix}form-item`, [
     c(`${prefix}form-item-blank`, [
-      c(() => `&${prefix}form-item-blank${modifierPrefix}${status}`, [
-        style
-      ])
+      c(() => `&${prefix}form-item-blank${modifierPrefix}${status}`, [style])
     ])
   ])
 }
 
 function insideModal (style) {
-  return c(`${prefix}modal-body-wrapper, ${prefix}drawer`, [
-    style
-  ])
+  return c(`${prefix}modal-body-wrapper, ${prefix}drawer`, [style])
 }
 
 function cTB (selector, ...rest) {
   return cB(selector, [
-    c(
-      ({ props }) => {
-        const theme = props.$theme
-        if (__DEV__ && !theme) {
-          warn('utils/cssr', 'No theme when rendering styles, this could be a bug of naive-ui.')
-        }
-        return (
-          theme === fallbackTheme
-            ? ''
-            : `&.${namespace}-${theme}-theme`
+    c(({ props }) => {
+      const theme = props.$theme
+      if (__DEV__ && !theme) {
+        warn(
+          'utils/cssr',
+          'No theme when rendering styles, this could be a bug of naive-ui.'
         )
-      },
-      ...rest
-    )
+      }
+      return theme === fallbackTheme ? '' : `&.${namespace}-${theme}-theme`
+    }, ...rest)
   ])
 }
 
 function createKey (keyPrefix, ...suffixs) {
-  return keyPrefix + suffixs.map(
-    suffix => {
-      if (suffix === 'default') return ''
-      return suffix.replace(/^[a-z]/, startChar => startChar.toUpperCase())
-    }
-  ).join('')
+  return (
+    keyPrefix +
+    suffixs
+      .map((suffix) => {
+        if (suffix === 'default') return ''
+        return suffix.replace(/^[a-z]/, (startChar) => startChar.toUpperCase())
+      })
+      .join('')
+  )
 }
 
 function cRB (selector, ...rest) {

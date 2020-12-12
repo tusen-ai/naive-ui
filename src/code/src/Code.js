@@ -1,19 +1,11 @@
 import { h, nextTick } from 'vue'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import styles from './styles/index.js'
 import { warn } from '../../_utils'
 
 export default {
   name: 'Code',
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     language: {
       type: String,
@@ -61,15 +53,13 @@ export default {
       }
     },
     setCode () {
-      const {
-        code,
-        language
-      } = this
+      const { code, language } = this
       if (language) {
-        const {
-          valid,
-          content
-        } = this.generateCodeHTML(language, code, this.trim)
+        const { valid, content } = this.generateCodeHTML(
+          language,
+          code,
+          this.trim
+        )
         if (valid) {
           this.$refs.code.innerHTML = content
           return
@@ -80,17 +70,21 @@ export default {
   },
   render () {
     const { mergedTheme } = this
-    return h('pre', {
-      class: [
-        'n-code',
-        {
-          [`n-${mergedTheme}-theme`]: mergedTheme
-        }
+    return h(
+      'pre',
+      {
+        class: [
+          'n-code',
+          {
+            [`n-${mergedTheme}-theme`]: mergedTheme
+          }
+        ]
+      },
+      [
+        h('code', {
+          ref: 'code'
+        })
       ]
-    }, [
-      h('code', {
-        ref: 'code'
-      })
-    ])
+    )
   }
 }

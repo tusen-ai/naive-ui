@@ -67,39 +67,26 @@ export default {
       return Math.max(this.collapsedIconSize, this.iconSize)
     },
     activeIconSize () {
-      if (
-        !this.horizontal &&
-        this.root &&
-        this.menuCollapsed
-      ) {
+      if (!this.horizontal && this.root && this.menuCollapsed) {
         return this.collapsedIconSize
       } else {
         return this.iconSize
       }
     },
     iconSize () {
-      const {
-        NMenu
-      } = this
+      const { NMenu } = this
       return NMenu.iconSize
     },
     collapsedIconSize () {
       const {
-        NMenu: {
-          iconSize,
-          collapsedIconSize
-        }
+        NMenu: { iconSize, collapsedIconSize }
       } = this
       return collapsedIconSize === undefined ? iconSize : collapsedIconSize
     },
     paddingLeft () {
       // TODO handle popover
       const {
-        NMenu: {
-          collapsedWidth,
-          indent,
-          rootIndent
-        },
+        NMenu: { collapsedWidth, indent, rootIndent },
         NSubmenu,
         NMenuItemGroup,
         root,
@@ -111,8 +98,11 @@ export default {
       } = this
       if (insidePopover && level === 1) return 12
       const mergedRootIndent = rootIndent === undefined ? indent : rootIndent
-      const menuCollapsedPaddingLeft = collapsedWidth / 2 - collapsedIconSize / 2
-      const menuCollapsedPaddingDiff = menuCollapsed ? mergedRootIndent - menuCollapsedPaddingLeft : 0
+      const menuCollapsedPaddingLeft =
+        collapsedWidth / 2 - collapsedIconSize / 2
+      const menuCollapsedPaddingDiff = menuCollapsed
+        ? mergedRootIndent - menuCollapsedPaddingLeft
+        : 0
       if (root) {
         if (horizontal) return undefined
         return mergedRootIndent - menuCollapsedPaddingDiff

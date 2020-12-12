@@ -1,35 +1,20 @@
 <template>
-  <i
-    :class="`n-nimbus-icon n-nimbus-icon-${type}`"
-    :style="styles"
-  >
-    <share-icon
-      v-if="type==='share'"
-      :style="iconStyle"
-      :color="color"
-    />
-    <ban-icon
-      v-else-if="type==='ban'"
-      :style="iconStyle"
-      :color="color"
-    />
+  <i :class="`n-nimbus-icon n-nimbus-icon-${type}`" :style="styles">
+    <share-icon v-if="type === 'share'" :style="iconStyle" :color="color" />
+    <ban-icon v-else-if="type === 'ban'" :style="iconStyle" :color="color" />
     <pull-request-icon
-      v-else-if="type==='pull-request'"
+      v-else-if="type === 'pull-request'"
       :style="iconStyle"
       :color="color"
     />
     <operate-icon
-      v-else-if="type==='operate'"
+      v-else-if="type === 'operate'"
       :style="iconStyle"
       :color="color"
     />
-    <edit-icon
-      v-else-if="type==='edit'"
-      :style="iconStyle"
-      :color="color"
-    />
+    <edit-icon v-else-if="type === 'edit'" :style="iconStyle" :color="color" />
     <close-icon
-      v-else-if="type==='close'"
+      v-else-if="type === 'close'"
       :style="iconStyle"
       :color="color"
     />

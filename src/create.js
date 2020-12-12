@@ -7,21 +7,20 @@ function setHljs (hljs) {
 }
 
 function createLocalesObject (locales) {
-  return locales && locales.reduce((localeMap, locale) => {
-    localeMap[locale._name] = locale
-    return localeMap
-  }, {})
+  return (
+    locales &&
+    locales.reduce((localeMap, locale) => {
+      localeMap[locale._name] = locale
+      return localeMap
+    }, {})
+  )
 }
 
 function createStylesObject (styles) {
   const styleMap = {}
   function traverse (rootStyles) {
-    rootStyles.forEach(style => {
-      const {
-        theme,
-        name,
-        peer
-      } = style
+    rootStyles.forEach((style) => {
+      const { theme, name, peer } = style
       if (!styleMap[theme]) {
         styleMap[theme] = {}
         styleMap[theme].override = (...args) => {
@@ -81,11 +80,11 @@ function create (options = {}) {
     })
     installTargets.push(app)
     app.config.globalProperties.$naive = naive
-    components.forEach(component => {
+    components.forEach((component) => {
       const { name, alias } = component
       registerComponent(app, name, component)
       if (alias) {
-        alias.forEach(aliasName => {
+        alias.forEach((aliasName) => {
           registerComponent(app, aliasName, component)
         })
       }

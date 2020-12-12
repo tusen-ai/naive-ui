@@ -4,14 +4,9 @@ import { baseDark } from '../../_styles/base'
 export default create({
   name: 'Scrollbar',
   theme: 'dark',
-  peer: [
-    baseDark
-  ],
+  peer: [baseDark],
   getLocalVars (vars) {
-    const {
-      scrollbarColorOverlay,
-      scrollbarColorHoverOverlay
-    } = vars
+    const { scrollbarColorOverlay, scrollbarColorHoverOverlay } = vars
     return {
       color: scrollbarColorOverlay,
       colorHover: scrollbarColorHoverOverlay

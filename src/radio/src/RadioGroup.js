@@ -1,10 +1,5 @@
 import { h } from 'vue'
-import {
-  configurable,
-  themeable,
-  asFormItem,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, asFormItem, withCssr } from '../../_mixins'
 import { getSlot, flatten, warn } from '../../_utils'
 import styles from './styles/radio-group/index.js'
 
@@ -16,12 +11,13 @@ function mapSlot (h, defaultSlot, groupInstance) {
     const instanceOptions = wrappedInstance.type
     const name = instanceOptions.name
     if (
-      __DEV__ && (
-        !instanceOptions ||
-        !['Radio', 'RadioButton'].includes(name)
-      )
+      __DEV__ &&
+      (!instanceOptions || !['Radio', 'RadioButton'].includes(name))
     ) {
-      warn('radio-group', '`n-radio-group` only taks `n-radio` and `n-radio-button` as children.')
+      warn(
+        'radio-group',
+        '`n-radio-group` only taks `n-radio` and `n-radio-button` as children.'
+      )
       continue
     }
     const instanceProps = wrappedInstance.props
@@ -32,9 +28,11 @@ function mapSlot (h, defaultSlot, groupInstance) {
       children.push(wrappedInstance)
     } else {
       const lastInstanceProps = children[children.length - 1].props
-      const lastInstanceChecked = groupInstance.$props.value === lastInstanceProps.value
+      const lastInstanceChecked =
+        groupInstance.$props.value === lastInstanceProps.value
       const lastInstanceDisabled = lastInstanceProps.disabled
-      const currentInstanceChecked = groupInstance.$props.value === instanceProps.value
+      const currentInstanceChecked =
+        groupInstance.$props.value === instanceProps.value
       const currentInstanceDisabled = instanceProps.disabled
       let lastInstancePriority
       let currentInstancePriority
@@ -46,8 +44,10 @@ function mapSlot (h, defaultSlot, groupInstance) {
          *  disabled  checked >
          *  disabled !checked
          */
-        lastInstancePriority = (!lastInstanceDisabled ? 2 : 0) + (lastInstanceChecked ? 1 : 0)
-        currentInstancePriority = (!currentInstanceDisabled ? 2 : 0) + (currentInstanceChecked ? 1 : 0)
+        lastInstancePriority =
+          (!lastInstanceDisabled ? 2 : 0) + (lastInstanceChecked ? 1 : 0)
+        currentInstancePriority =
+          (!currentInstanceDisabled ? 2 : 0) + (currentInstanceChecked ? 1 : 0)
       } else {
         /**
          * Priority of button splitor:
@@ -56,8 +56,10 @@ function mapSlot (h, defaultSlot, groupInstance) {
          * !disabled !checked >
          *  disabled !checked
          */
-        lastInstancePriority = (lastInstanceChecked ? 2 : 0) + (!lastInstanceDisabled ? 1 : 0)
-        currentInstancePriority = (currentInstanceChecked ? 2 : 0) + (!currentInstanceDisabled ? 1 : 0)
+        lastInstancePriority =
+          (lastInstanceChecked ? 2 : 0) + (!lastInstanceDisabled ? 1 : 0)
+        currentInstancePriority =
+          (currentInstanceChecked ? 2 : 0) + (!currentInstanceDisabled ? 1 : 0)
       }
       const lastInstanceClass = {
         'n-radio-group__splitor--disabled': lastInstanceDisabled,
@@ -67,15 +69,16 @@ function mapSlot (h, defaultSlot, groupInstance) {
         'n-radio-group__splitor--disabled': currentInstanceDisabled,
         'n-radio-group__splitor--checked': currentInstanceChecked
       }
-      const splitorClass = lastInstancePriority < currentInstancePriority
-        ? currentInstanceClass
-        : lastInstanceClass
-      children.push(h('div', {
-        class: [
-          'n-radio-group__splitor',
-          splitorClass
-        ]
-      }), wrappedInstance)
+      const splitorClass =
+        lastInstancePriority < currentInstancePriority
+          ? currentInstanceClass
+          : lastInstanceClass
+      children.push(
+        h('div', {
+          class: ['n-radio-group__splitor', splitorClass]
+        }),
+        wrappedInstance
+      )
     }
   }
   return {
@@ -88,12 +91,7 @@ export default {
   name: 'RadioGroup',
   cssrName: 'Radio',
   cssrId: 'RadioGroup',
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles),
-    asFormItem()
-  ],
+  mixins: [configurable, themeable, withCssr(styles), asFormItem()],
   props: {
     name: {
       type: String,
@@ -120,7 +118,12 @@ export default {
     // deprecated
     onChange: {
       validator () {
-        if (__DEV__) warn('radio-group', '`on-change` is deprecated, please use `on-update:value` instead.')
+        if (__DEV__) {
+          warn(
+            'radio-group',
+            '`on-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
         return true
       },
       default: undefined
@@ -132,24 +135,22 @@ export default {
     }
   },
   render () {
-    const {
-      children,
-      isButtonGroup
-    } = mapSlot(h, flatten(getSlot(this)), this)
+    const { children, isButtonGroup } = mapSlot(h, flatten(getSlot(this)), this)
     this.isButtonGroup = isButtonGroup
-    const {
-      mergedTheme,
-      mergedSize
-    } = this
-    return h('div', {
-      class: [
-        'n-radio-group',
-        `n-radio-group--${mergedSize}-size`,
-        {
-          [`n-${mergedTheme}-theme`]: mergedTheme,
-          'n-radio-group--button-group': isButtonGroup
-        }
-      ]
-    }, children)
+    const { mergedTheme, mergedSize } = this
+    return h(
+      'div',
+      {
+        class: [
+          'n-radio-group',
+          `n-radio-group--${mergedSize}-size`,
+          {
+            [`n-${mergedTheme}-theme`]: mergedTheme,
+            'n-radio-group--button-group': isButtonGroup
+          }
+        ]
+      },
+      children
+    )
   }
 }

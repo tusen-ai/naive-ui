@@ -7,10 +7,7 @@ export default create({
   name: 'Avatar',
   peer: [baseLight],
   getLocalVars (vars) {
-    const {
-      borderRadius,
-      avatarColorOverlay
-    } = vars
+    const { borderRadius, avatarColorOverlay } = vars
     return {
       ...commonVariables,
       borderRadius,

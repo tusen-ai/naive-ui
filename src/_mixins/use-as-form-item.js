@@ -1,20 +1,14 @@
 import { computed, inject, provide, onBeforeUnmount } from 'vue'
 
 export default function useFormItem (props, options = {}) {
-  const {
-    defaultSize = 'medium'
-  } = options
+  const { defaultSize = 'medium' } = options
   const NFormItem = inject('NFormItem', null)
   provide('NFormItem', null)
   const mergedSizeRef = computed(() => {
-    const {
-      size
-    } = props
+    const { size } = props
     if (size) return size
     if (NFormItem) {
-      const {
-        mergedSize
-      } = NFormItem
+      const { mergedSize } = NFormItem
       if (mergedSize) {
         return mergedSize
       }

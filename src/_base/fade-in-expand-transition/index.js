@@ -1,3 +1,1 @@
-export {
-  default
-} from './src/FadeInExpandTransition'
+export { default } from './src/FadeInExpandTransition'

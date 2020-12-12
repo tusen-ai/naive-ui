@@ -5,10 +5,7 @@ import { iconDark } from '../../icon/styles'
 export default create({
   theme: 'dark',
   name: 'Collapse',
-  peer: [
-    baseDark,
-    iconDark
-  ],
+  peer: [baseDark, iconDark],
   getLocalVars (vars) {
     const {
       fontWeightStrong,

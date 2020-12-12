@@ -8,12 +8,7 @@ import { progressDark } from '../../progress/styles'
 export default create({
   name: 'Upload',
   theme: 'dark',
-  peer: [
-    baseDark,
-    buttonDark,
-    iconDark,
-    progressDark
-  ],
+  peer: [baseDark, buttonDark, iconDark, progressDark],
   getLocalVars (vars) {
     const {
       iconColorOverlay,

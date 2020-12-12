@@ -2,9 +2,14 @@
   <div
     class="n-card"
     :class="{
-      [`n-card--content${(segmented && segmented.content === 'soft') ? '-soft' : ''}-segmented`]: segmented === true || (segmented && segmented.content),
-      [`n-card--footer${(segmented && segmented.footer === 'soft') ? '-soft' : ''}-segmented`]: segmented === true || (segmented && segmented.footer),
-      [`n-card--action-segmented`]: segmented === true || (segmented && segmented.action),
+      [`n-card--content${
+        segmented && segmented.content === 'soft' ? '-soft' : ''
+      }-segmented`]: segmented === true || (segmented && segmented.content),
+      [`n-card--footer${
+        segmented && segmented.footer === 'soft' ? '-soft' : ''
+      }-segmented`]: segmented === true || (segmented && segmented.footer),
+      [`n-card--action-segmented`]:
+        segmented === true || (segmented && segmented.action),
       [`n-card--${size}-size`]: true,
       'n-card--bordered': bordered,
       [`n-${mergedTheme}-theme`]: mergedTheme
@@ -46,15 +51,9 @@
 </template>
 
 <script>
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import { NIcon } from '../../icon'
-import {
-  CloseIcon
-} from '../../_base/icons'
+import { CloseIcon } from '../../_base/icons'
 import styles from './styles'
 
 export default {
@@ -63,11 +62,7 @@ export default {
     CloseIcon,
     NIcon
   },
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     title: {
       type: String,

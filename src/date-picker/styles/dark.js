@@ -8,11 +8,7 @@ import commonVars from './_common'
 export default create({
   theme: 'dark',
   name: 'DatePicker',
-  peer: [
-    baseDark,
-    inputDark,
-    iconDark
-  ],
+  peer: [baseDark, inputDark, iconDark],
   getLocalVars (vars) {
     return {
       ...commonVars,

@@ -6,16 +6,9 @@ import { gridDark } from '../../grid/styles'
 export default create({
   name: 'Form',
   theme: 'dark',
-  peer: [
-    baseDark,
-    gridDark
-  ],
+  peer: [baseDark, gridDark],
   getLocalVars (vars) {
-    const {
-      textColor1Overlay,
-      errorColor,
-      warningColor
-    } = vars
+    const { textColor1Overlay, errorColor, warningColor } = vars
     return {
       ...commonVariables,
       labelTextColor: textColor1Overlay,

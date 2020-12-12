@@ -4,9 +4,7 @@ import { baseDark } from '../../_styles/base'
 export default create({
   theme: 'dark',
   name: 'GradientText',
-  peer: [
-    baseDark
-  ],
+  peer: [baseDark],
   getLocalVars (vars) {
     const {
       primaryColor,

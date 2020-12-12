@@ -6,12 +6,8 @@ import { NIcon } from '../index'
 
 describe('n-icon', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      iconLight
-    ]
+    locales: [enUS],
+    styles: [iconLight]
   })
   it('should work with import on demand', () => {
     mount(NIcon, {

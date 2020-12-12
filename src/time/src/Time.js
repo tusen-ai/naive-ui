@@ -4,9 +4,7 @@ import locale from '../../_mixins/locale'
 
 export default {
   name: 'Time',
-  mixins: [
-    locale('Time')
-  ],
+  mixins: [locale('Time')],
   props: {
     time: {
       type: [Number, Date],
@@ -59,7 +57,11 @@ export default {
       } else if (this.type === 'date') {
         return format(this.mergedTime, 'yyyy-MM-dd', this.dateFnsOptions)
       } else if (this.type === 'datetime') {
-        return format(this.mergedTime, 'yyyy-MM-dd hh:mm:ss', this.dateFnsOptions)
+        return format(
+          this.mergedTime,
+          'yyyy-MM-dd hh:mm:ss',
+          this.dateFnsOptions
+        )
       } else {
         return formatDistance(this.mergedTime, this.mergedTo, {
           addSuffix: true,

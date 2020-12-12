@@ -25,11 +25,7 @@
 import { nextTick } from 'vue'
 import { NScrollbar } from '../../scrollbar'
 import layoutModeMixin from './layoutModeMixin'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import styles from './styles/layout'
 
 export default {
@@ -40,12 +36,7 @@ export default {
   components: {
     NScrollbar
   },
-  mixins: [
-    configurable,
-    themeable,
-    layoutModeMixin,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, layoutModeMixin, withCssr(styles)],
   provide () {
     return {
       NLayout: this
@@ -76,7 +67,10 @@ export default {
     styleMarginLeft () {
       const { NLayout } = this
       if (NLayout && NLayout.hasSider) {
-        if (NLayout.siderPosition === 'absolute' && this.position === 'absolute') {
+        if (
+          NLayout.siderPosition === 'absolute' &&
+          this.position === 'absolute'
+        ) {
           if (NLayout.siderCollapsed) {
             return `${NLayout.collapsedSiderWidth}px`
           } else {
@@ -87,10 +81,13 @@ export default {
       return null
     },
     mergedLayoutStyle () {
-      return Object.assign({
-        marginLeft: this.styleMarginLeft,
-        transition: this.transitionDisabled ? 'none' : null
-      }, this.mergedStyle)
+      return Object.assign(
+        {
+          marginLeft: this.styleMarginLeft,
+          transition: this.transitionDisabled ? 'none' : null
+        },
+        this.mergedStyle
+      )
     },
     transitionDisabled () {
       const { NLayout } = this

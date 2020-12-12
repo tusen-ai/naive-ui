@@ -1,6 +1,4 @@
-import {
-  zhCN
-} from 'date-fns/locale'
+import { zhCN } from 'date-fns/locale'
 
 export default {
   _name: 'zh-CN',
@@ -12,7 +10,7 @@ export default {
   Cascader: {
     placeholder: '请选择',
     loading: '加载中',
-    loadingRequiredMessage: label => `加载全部 ${label} 的子节点后才可选中`
+    loadingRequiredMessage: (label) => `加载全部 ${label} 的子节点后才可选中`
   },
   DatePicker: {
     Jan: '一月',

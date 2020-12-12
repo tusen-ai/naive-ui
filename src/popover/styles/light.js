@@ -5,16 +5,9 @@ import { baseLight } from '../../_styles/base'
 export default create({
   name: 'Popover',
   theme: 'light',
-  peer: [
-    baseLight
-  ],
+  peer: [baseLight],
   getLocalVars (vars) {
-    const {
-      boxShadow2,
-      popoverColor,
-      textColor2,
-      borderRadius
-    } = vars
+    const { boxShadow2, popoverColor, textColor2, borderRadius } = vars
     return {
       ...commonVariables,
       borderRadius,

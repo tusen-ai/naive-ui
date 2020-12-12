@@ -6,12 +6,8 @@ import { NInputGroupLabel } from '../index'
 
 describe('n-input-group-label', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      inputGroupLabelLight
-    ]
+    locales: [enUS],
+    styles: [inputGroupLabelLight]
   })
   it('should work with import on demand', () => {
     mount(NInputGroupLabel, {

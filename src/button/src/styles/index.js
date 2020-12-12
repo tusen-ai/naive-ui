@@ -5,25 +5,17 @@ import baseStyle from './themed-base.cssr.js'
 export default [
   {
     key: 'type',
-    watch: [
-      'type',
-      'mergedTheme'
-    ],
+    watch: ['type', 'mergedTheme'],
     CNode: colorStyle
   },
   {
     key: 'mergedSize',
-    watch: [
-      'mergedSize',
-      'mergedTheme'
-    ],
+    watch: ['mergedSize', 'mergedTheme'],
     CNode: sizeStyle
   },
   {
     key: 'mergedTheme',
-    watch: [
-      'mergedTheme'
-    ],
+    watch: ['mergedTheme'],
     CNode: baseStyle
   }
 ]

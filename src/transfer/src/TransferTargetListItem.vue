@@ -2,7 +2,7 @@
   <div
     class="n-transfer-list-item n-transfer-list-item--target"
     :class="{
-      'n-transfer-list-item--disabled': disabled,
+      'n-transfer-list-item--disabled': disabled
     }"
     @click="handleClick"
   >
@@ -14,9 +14,7 @@
         :size="NTransfer.mergedSize"
       />
     </div>
-    <div
-      class="n-transfer-list-item__label"
-    >
+    <div class="n-transfer-list-item__label">
       {{ label }}
     </div>
   </div>

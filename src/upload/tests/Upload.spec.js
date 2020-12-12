@@ -6,12 +6,8 @@ import { NUpload } from '../index'
 
 describe('n-upload', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      uploadLight
-    ]
+    locales: [enUS],
+    styles: [uploadLight]
   })
   it('should work with import on demand', () => {
     mount(NUpload, {

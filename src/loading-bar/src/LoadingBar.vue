@@ -18,20 +18,13 @@
         [`n-${mergedTheme}-theme`]: mergedTheme
       }"
     >
-      <div
-        ref="loadingBar"
-        class="n-loading-bar"
-      />
+      <div ref="loadingBar" class="n-loading-bar" />
     </div>
   </transition>
 </template>
 
 <script>
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import styles from './styles'
 
 function createClassName (status) {
@@ -40,11 +33,7 @@ function createClassName (status) {
 
 export default {
   name: 'LoadingBar',
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   data () {
     return {
       entering: false,

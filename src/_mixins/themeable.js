@@ -23,9 +23,7 @@ export default {
     mergedStyle () {
       const { themedStyle } = this
       if (themedStyle) {
-        const {
-          mergedTheme
-        } = this
+        const { mergedTheme } = this
         return themedStyle[mergedTheme || fallbackTheme]
       }
       return null
@@ -33,14 +31,12 @@ export default {
     mergedThemeEnvironment () {
       const { NConfigProvider } = this
       if (NConfigProvider) {
-        const {
-          inheritedThemeEnvironments
-        } = NConfigProvider
+        const { inheritedThemeEnvironments } = NConfigProvider
         if (inheritedThemeEnvironments) {
-          const {
-            mergedTheme
-          } = this
-          return inheritedThemeEnvironments[mergedTheme || fallbackTheme] || null
+          const { mergedTheme } = this
+          return (
+            inheritedThemeEnvironments[mergedTheme || fallbackTheme] || null
+          )
         }
       }
       return null

@@ -6,7 +6,10 @@
       [`n-${mergedTheme}-theme`]: mergedTheme,
       [`n-form-item--${mergedLabelPlacement}-labelled`]: true,
       [`n-form-item--${mergedLabelAlign}-label-aligned`]: true,
-      [`n-form-item--required`]: mergedShowRequireMark === undefined ? mergedShowRequireMark : mergedRequired,
+      [`n-form-item--required`]:
+        mergedShowRequireMark === undefined
+          ? mergedShowRequireMark
+          : mergedRequired,
       [`n-form-item--no-label`]: !(label || $slots.label)
     }"
   >
@@ -15,11 +18,7 @@
       :class="`n-form-item-label`"
       :style="mergedLabelStyle"
     >
-      <template
-        v-if="$slots.label"
-      ><slot
-        name="label"
-      /></template>
+      <template v-if="$slots.label"><slot name="label" /></template>
       <template v-else>{{ label }}</template>
     </label>
     <div class="n-form-item-control">
@@ -46,40 +45,24 @@
               key="controlled-warning"
               class="n-form-item-feedback n-form-item-feedback--warning"
             >
-              <feedbacks
-                :explains="explains"
-                :feedback="feedback"
-              />
+              <feedbacks :explains="explains" :feedback="feedback" />
             </div>
             <div
               v-else-if="mergedValidationStatus === 'error'"
               key="controlled-error"
               class="n-form-item-feedback n-form-item-feedback--error"
             >
-              <feedbacks
-                :explains="explains"
-                :feedback="feedback"
-              />
+              <feedbacks :explains="explains" :feedback="feedback" />
             </div>
             <div
               v-else-if="mergedValidationStatus === 'success'"
               key="controlled-success"
               class="n-form-item-feedback n-form-item-feedback--success"
             >
-              <feedbacks
-                :explains="explains"
-                :feedback="feedback"
-              />
+              <feedbacks :explains="explains" :feedback="feedback" />
             </div>
-            <div
-              v-else
-              key="controlled-default"
-              class="n-form-item-feedback"
-            >
-              <feedbacks
-                :explains="explains"
-                :feedback="feedback"
-              />
+            <div v-else key="controlled-default" class="n-form-item-feedback">
+              <feedbacks :explains="explains" :feedback="feedback" />
             </div>
           </template>
         </transition>
@@ -92,19 +75,10 @@
 import Schema from 'async-validator'
 import { get } from 'lodash-es'
 import { createId } from 'seemly'
-import {
-  configurable,
-  themeable,
-  withCssr,
-  registerable
-} from '../../_mixins'
+import { configurable, themeable, withCssr, registerable } from '../../_mixins'
 import styles from './styles'
 import { warn } from '../../_utils'
-import {
-  formItemMisc,
-  formItemSize,
-  formItemRule
-} from './utils'
+import { formItemMisc, formItemSize, formItemRule } from './utils'
 import Feedbacks from './Feedbacks.vue'
 
 function wrapValidator (validator) {
@@ -121,17 +95,20 @@ function wrapValidator (validator) {
         } else if (validateResult === undefined) {
           return true
         } else {
-          warn('form-item/validate', `You return a ${typeof validateResult} ` +
-            'typed value in the validator method, which is not recommended. Please ' +
-            'use `boolean`, `Error` or `Promise` typed value instead.'
+          warn(
+            'form-item/validate',
+            `You return a ${typeof validateResult} ` +
+              'typed value in the validator method, which is not recommended. Please ' +
+              'use `boolean`, `Error` or `Promise` typed value instead.'
           )
           return true
         }
       } catch (err) {
         warn(
-          'form-item/validate', 'An error is catched in the validation, ' +
-          'so the validation won\'t be done. Your callback in `validate` method of ' +
-          '`n-form` or `n-form-item` won\'t be called in this validation.'
+          'form-item/validate',
+          'An error is catched in the validation, ' +
+            "so the validation won't be done. Your callback in `validate` method of " +
+            "`n-form` or `n-form-item` won't be called in this validation."
         )
         console.error(err)
         return undefined
@@ -248,9 +225,7 @@ export default {
   },
   computed: {
     hasFeedback () {
-      const {
-        feedback
-      } = this
+      const { feedback } = this
       if (feedback !== undefined && feedback !== null) return true
       return this.explains.length
     }
@@ -295,7 +270,11 @@ export default {
         asyncValidatorOptions = options.options
       }
       return new Promise((resolve, reject) => {
-        this._validate(trigger, shouldRuleBeApplied, asyncValidatorOptions).then(({ valid, errors }) => {
+        this._validate(
+          trigger,
+          shouldRuleBeApplied,
+          asyncValidatorOptions
+        ).then(({ valid, errors }) => {
           if (valid) {
             if (validateCallback) {
               validateCallback()
@@ -337,7 +316,7 @@ export default {
       const value = get(this.NForm.model, path, null)
       const activeRules = (!trigger
         ? rules
-        : rules.filter(rule => {
+        : rules.filter((rule) => {
           if (Array.isArray(rule.trigger)) {
             return rule.trigger.includes(trigger)
           } else {
@@ -346,13 +325,17 @@ export default {
         })
       )
         .filter(shouldRuleBeApplied)
-        .map(rule => {
+        .map((rule) => {
           const shallowClonedRule = Object.assign({}, rule)
           if (shallowClonedRule.validator) {
-            shallowClonedRule.validator = wrapValidator(shallowClonedRule.validator)
+            shallowClonedRule.validator = wrapValidator(
+              shallowClonedRule.validator
+            )
           }
           if (shallowClonedRule.asyncValidator) {
-            shallowClonedRule.asyncValidator = wrapValidator(shallowClonedRule.asyncValidator)
+            shallowClonedRule.asyncValidator = wrapValidator(
+              shallowClonedRule.asyncValidator
+            )
           }
           return shallowClonedRule
         })
@@ -365,7 +348,7 @@ export default {
       return new Promise((resolve, reject) => {
         validator.validate({ [path]: value }, options, (errors, fields) => {
           if (errors && errors.length) {
-            this.explains = errors.map(error => error.message)
+            this.explains = errors.map((error) => error.message)
             this.validationErrored = true
             resolve({
               valid: false,

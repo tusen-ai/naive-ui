@@ -6,12 +6,8 @@ import { NLog } from '../index'
 
 describe('n-log', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      logLight
-    ]
+    locales: [enUS],
+    styles: [logLight]
   })
   it('should work with import on demand', () => {
     mount(NLog, {

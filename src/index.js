@@ -1,14 +1,8 @@
-export {
-  default
-} from './preset'
+export { default } from './preset'
 
-export {
-  useOsTheme
-} from 'vooks'
+export { useOsTheme } from 'vooks'
 
-export {
-  default as create
-} from './create'
+export { default as create } from './create'
 
 export * from './locales'
 export * from './components'

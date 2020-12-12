@@ -1,20 +1,12 @@
 import { h } from 'vue'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import styles from './styles/index'
 import { formatLength, getSlot } from '../../_utils'
 
 export default {
   __NAIVE_ICON__: true,
   name: 'Icon',
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     size: {
       type: [Number, String],
@@ -37,10 +29,7 @@ export default {
   },
   computed: {
     styles () {
-      const {
-        size,
-        color
-      } = this
+      const { size, color } = this
       return {
         fontSize: formatLength(size),
         color
@@ -52,19 +41,23 @@ export default {
     if (parent && parent.$options.__NAIVE_ICON__) return getSlot(this)
     else {
       const { mergedTheme, depth, colorTransition } = this
-      return h('i', {
-        ...this.$attrs,
-        class: {
-          'n-icon': true,
-          [`n-${mergedTheme}-theme`]: mergedTheme,
-          [`n-icon--${depth}-depth`]: depth,
-          'n-icon--color-transition': colorTransition || depth !== undefined
+      return h(
+        'i',
+        {
+          ...this.$attrs,
+          class: {
+            'n-icon': true,
+            [`n-${mergedTheme}-theme`]: mergedTheme,
+            [`n-icon--${depth}-depth`]: depth,
+            'n-icon--color-transition': colorTransition || depth !== undefined
+          },
+          style: {
+            ...this.styles,
+            ...this.mergedStyle
+          }
         },
-        style: {
-          ...this.styles,
-          ...this.mergedStyle
-        }
-      }, this.$slots)
+        this.$slots
+      )
     }
   }
 }

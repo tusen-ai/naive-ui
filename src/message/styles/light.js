@@ -6,10 +6,7 @@ import { iconDark } from '../../icon/styles'
 export default create({
   name: 'Message',
   theme: 'light',
-  peer: [
-    baseDark,
-    iconDark
-  ],
+  peer: [baseDark, iconDark],
   getLocalVars (vars) {
     const {
       textColor2,

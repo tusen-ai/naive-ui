@@ -12,22 +12,14 @@
 </template>
 
 <script>
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import styles from './styles/list'
 
 export default {
   name: 'Ul',
   cssrName: 'Typography',
   cssrId: 'TypographyList',
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     alignText: {
       type: Boolean,

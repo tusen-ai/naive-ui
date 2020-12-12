@@ -7,12 +7,7 @@ import { iconDark } from '../../icon/styles'
 export default create({
   name: 'Notification',
   theme: 'dark',
-  peer: [
-    baseDark,
-    iconDark,
-    avatarDark,
-    scrollbarDark
-  ],
+  peer: [baseDark, iconDark, avatarDark, scrollbarDark],
   getLocalVars (vars) {
     const {
       textColor2Overlay,

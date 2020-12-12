@@ -6,12 +6,8 @@ import { NBreadcrumb } from '../index'
 
 describe('n-breadcrumb', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      breadcrumbLight
-    ]
+    locales: [enUS],
+    styles: [breadcrumbLight]
   })
   it('should work with import on demand', () => {
     mount(NBreadcrumb, {

@@ -44,12 +44,7 @@ export default {
       this.dialogList.push(dialogReactive)
       return dialogReactive
     },
-    ...[
-      'info',
-      'success',
-      'warning',
-      'error'
-    ].reduce((api, type) => {
+    ...['info', 'success', 'warning', 'error'].reduce((api, type) => {
       api[type] = function (options) {
         return this.create({ ...options, type })
       }
@@ -58,27 +53,26 @@ export default {
     handleAfterLeave (key) {
       const { dialogList } = this
       dialogList.splice(
-        dialogList.findIndex(dialog => dialog.key === key),
+        dialogList.findIndex((dialog) => dialog.key === key),
         1
       )
     }
   },
   render () {
-    return h(Fragment, null,
-      [
-        this.dialogList.map(dialog => h(DialogEnvironment, omit(
-          dialog,
-          ['destroy'],
-          {
+    return h(Fragment, null, [
+      this.dialogList.map((dialog) =>
+        h(
+          DialogEnvironment,
+          omit(dialog, ['destroy'], {
             clicked: this.clicked,
             clickPosition: this.clickPosition,
             to: dialog.to ?? this.to,
             ref: `n-dialog-${dialog.key}`,
             onInternalAfterLeave: this.handleAfterLeave
-          }
-        ))),
-        this.$slots.default()
-      ]
-    )
+          })
+        )
+      ),
+      this.$slots.default()
+    ])
   }
 }

@@ -1,13 +1,5 @@
-import {
-  h,
-  vShow,
-  withDirectives,
-  Transition,
-  ref
-} from 'vue'
-import {
-  VFollower
-} from 'vueuc'
+import { h, vShow, withDirectives, Transition, ref } from 'vue'
+import { VFollower } from 'vueuc'
 import { clickoutside, mousemoveoutside } from 'vdirs'
 import { configurable, themeable, withCssr } from '../../_mixins'
 import styles from './styles'
@@ -102,11 +94,7 @@ export default {
       default: undefined
     }
   },
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   setup (props) {
     return {
       adjustedTo: useAdjustedTo(props),
@@ -137,8 +125,8 @@ export default {
     directives () {
       const { trigger } = this
       const directives = []
-      if (trigger === 'click') directives.push([clickoutside, this.handleClickOutside])
-      if (trigger === 'hover') directives.push([mousemoveoutside, this.handleMouseMoveOutside])
+      if (trigger === 'click') { directives.push([clickoutside, this.handleClickOutside]) }
+      if (trigger === 'hover') { directives.push([mousemoveoutside, this.handleMouseMoveOutside]) }
       if (this.useVShow) directives.push([vShow, this.show])
       return directives
     },
@@ -186,62 +174,80 @@ export default {
     }
   },
   render () {
-    const {
-      animated
-    } = this
-    const contentNode = ((this.useVShow || this.show) ? withDirectives(h('div', {
-      class: [
-        'n-popover',
-        {
-          [`n-${this.mergedTheme}-theme`]: this.mergedTheme,
-          'n-popover--no-arrow': !this.showArrow,
-          'n-popover--shadow': this.shadow,
-          [this.bodyClass]: this.bodyClass,
-          'n-popover--raw': this.raw
-        }
-      ],
-      ref: 'body',
-      style: this.style,
-      onMouseEnter: this.handleMouseEnter,
-      onMouseLeave: this.handleMouseLeave
-    }, [
-      getSlot(this),
-      this.showArrow
-        ? h(
-          'div',
-          {
-            class: 'n-popover-arrow-wrapper'
-          }, [
-            h('div', {
-              class: 'n-popover-arrow',
-              style: this.arrowStyle
-            })
-          ])
+    const { animated } = this
+    const contentNode =
+      this.useVShow || this.show
+        ? withDirectives(
+          h(
+            'div',
+            {
+              class: [
+                'n-popover',
+                {
+                  [`n-${this.mergedTheme}-theme`]: this.mergedTheme,
+                  'n-popover--no-arrow': !this.showArrow,
+                  'n-popover--shadow': this.shadow,
+                  [this.bodyClass]: this.bodyClass,
+                  'n-popover--raw': this.raw
+                }
+              ],
+              ref: 'body',
+              style: this.style,
+              onMouseEnter: this.handleMouseEnter,
+              onMouseLeave: this.handleMouseLeave
+            },
+            [
+              getSlot(this),
+              this.showArrow
+                ? h(
+                  'div',
+                  {
+                    class: 'n-popover-arrow-wrapper'
+                  },
+                  [
+                    h('div', {
+                      class: 'n-popover-arrow',
+                      style: this.arrowStyle
+                    })
+                  ]
+                )
+                : null
+            ]
+          ),
+          this.directives
+        )
         : null
-    ]), this.directives) : null)
-    return h(VFollower, {
-      show: this.show,
-      enabled: this.followerEnabled,
-      to: this.adjustedTo,
-      x: this.x,
-      y: this.y,
-      placement: this.placement,
-      containerClass: this.namespace,
-      ref: 'followerRef'
-    }, {
-      default: () => {
-        return animated
-          ? h(Transition, {
-            name: 'popover-transition',
-            appear: this.NPopover.isMounted,
-            onAfterLeave: () => {
-              this.followerEnabled = false
-            }
-          }, {
-            default: () => contentNode
-          })
-          : contentNode
+    return h(
+      VFollower,
+      {
+        show: this.show,
+        enabled: this.followerEnabled,
+        to: this.adjustedTo,
+        x: this.x,
+        y: this.y,
+        placement: this.placement,
+        containerClass: this.namespace,
+        ref: 'followerRef'
+      },
+      {
+        default: () => {
+          return animated
+            ? h(
+              Transition,
+              {
+                name: 'popover-transition',
+                appear: this.NPopover.isMounted,
+                onAfterLeave: () => {
+                  this.followerEnabled = false
+                }
+              },
+              {
+                default: () => contentNode
+              }
+            )
+            : contentNode
+        }
       }
-    })
+    )
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="{[`n-${theme}-theme`]: theme}"
+    :class="{ [`n-${theme}-theme`]: theme }"
     class="n-base-loading"
     :style="{
       stroke
@@ -18,7 +18,7 @@
         :cx="radius"
         :cy="radius"
         fill="none"
-        :r="radius - (strokeWidth) / 2"
+        :r="radius - strokeWidth / 2"
       />
     </svg>
   </div>
@@ -30,9 +30,7 @@ import styles from './styles/'
 
 export default {
   name: 'BaseLoading',
-  mixins: [
-    withCssr(styles)
-  ],
+  mixins: [withCssr(styles)],
   props: {
     radius: {
       type: Number,

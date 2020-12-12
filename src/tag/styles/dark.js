@@ -7,10 +7,7 @@ import { iconDark } from '../../icon/styles'
 export default create({
   theme: 'dark',
   name: 'Tag',
-  peer: [
-    baseDark,
-    iconDark
-  ],
+  peer: [baseDark, iconDark],
   getLocalVars (vars) {
     const {
       textColor2Overlay,

@@ -6,10 +6,7 @@
     }"
     :style="mergedStyle"
   >
-    <div
-      ref="slot"
-      class="n-anchor-link-background"
-    />
+    <div ref="slot" class="n-anchor-link-background" />
     <div class="n-anchor-rail">
       <div
         ref="bar"
@@ -26,23 +23,14 @@
 <script>
 import { nextTick, ref, markRaw, getCurrentInstance } from 'vue'
 import { getScrollParent, unwrapElement } from 'seemly'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import { onFontsReady } from 'vooks'
 import { warn } from '../../_utils'
 import styles from './styles'
 
 function getOffset (el, container) {
-  const {
-    top: elTop,
-    height
-  } = el.getBoundingClientRect()
-  const {
-    top: containerTop
-  } = container.getBoundingClientRect()
+  const { top: elTop, height } = el.getBoundingClientRect()
+  const { top: containerTop } = container.getBoundingClientRect()
   return {
     top: elTop - containerTop,
     height
@@ -52,11 +40,7 @@ function getOffset (el, container) {
 export default {
   name: 'BaseAnchor',
   cssrName: 'Anchor',
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   provide () {
     return {
       NAnchor: this
@@ -78,7 +62,12 @@ export default {
     // deprecated
     target: {
       validator () {
-        if (__DEV__) warn('anchor', '`target` is deprecated, please use`listen-to` instead.')
+        if (__DEV__) {
+          warn(
+            'anchor',
+            '`target` is deprecated, please use`listen-to` instead.'
+          )
+        }
         return true
       },
       default: undefined
@@ -123,22 +112,22 @@ export default {
       if (slotEl) {
         slotEl.style.transition = 'none'
       }
-      titleEls.forEach(titleEl => {
+      titleEls.forEach((titleEl) => {
         titleEl.style.transition = 'none'
       })
       nextTick(() => {
         const nextBarEl = this.$refs.bar
         const nextSlotEl = this.$refs.slot
         if (nextBarEl) {
-          void (nextBarEl.offsetWidth)
+          void nextBarEl.offsetWidth
           nextBarEl.style.transition = null
         }
         if (nextSlotEl) {
-          void (nextSlotEl.offsetWidth)
+          void nextSlotEl.offsetWidth
           nextSlotEl.style.transition = null
         }
-        titleEls.forEach(titleEl => {
-          void (titleEl.offsetWidth)
+        titleEls.forEach((titleEl) => {
+          void titleEl.offsetWidth
           titleEl.style.transition = null
         })
       })
@@ -150,10 +139,7 @@ export default {
         barEl.style.transition = 'none'
         slotEl.style.transition = 'none'
       }
-      const {
-        offsetHeight,
-        offsetWidth
-      } = linkTitleEl
+      const { offsetHeight, offsetWidth } = linkTitleEl
       const {
         top: linkTitleClientTop,
         left: linkTitleClientLeft
@@ -183,10 +169,10 @@ export default {
         const linkEl = document.getElementById(idMatchResult[1])
         if (linkEl) {
           this.activeHref = href
-          const {
-            scrollElement
-          } = this
-          const top = getOffset(linkEl, scrollElement).top + (scrollElement.scrollTop || 0)
+          const { scrollElement } = this
+          const top =
+            getOffset(linkEl, scrollElement).top +
+            (scrollElement.scrollTop || 0)
           scrollElement.scrollTo({
             top: top
           })
@@ -199,15 +185,12 @@ export default {
     },
     handleScroll (transition = true) {
       const links = []
-      this.collectedLinkHrefs.forEach(href => {
+      this.collectedLinkHrefs.forEach((href) => {
         const idMatchResult = /#([^#]+)$/.exec(href)
         if (idMatchResult) {
           const linkEl = document.getElementById(idMatchResult[1])
           if (linkEl) {
-            const {
-              top,
-              height
-            } = getOffset(linkEl, this.scrollElement)
+            const { top, height } = getOffset(linkEl, this.scrollElement)
             links.push({
               top,
               height,
@@ -253,10 +236,7 @@ export default {
       }
     },
     init () {
-      const {
-        target: getScrollTarget,
-        listenTo
-      } = this
+      const { target: getScrollTarget, listenTo } = this
       let scrollElement
       if (getScrollTarget) {
         // deprecated

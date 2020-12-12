@@ -61,7 +61,7 @@ export default {
     },
     onSubmit: {
       type: Function,
-      default: e => e.preventDefault()
+      default: (e) => e.preventDefault()
     }
   },
   setup () {
@@ -84,25 +84,23 @@ export default {
             }
           }
         }
-        Promise
-          .all(formItemValidationPromises)
-          .then(results => {
-            if (results.some(result => !result.valid)) {
-              const errors = results
-                .filter(result => result.errors)
-                .map(result => result.errors)
-              if (callback) {
-                callback(errors)
-              } else {
-                reject(errors)
-              }
+        Promise.all(formItemValidationPromises).then((results) => {
+          if (results.some((result) => !result.valid)) {
+            const errors = results
+              .filter((result) => result.errors)
+              .map((result) => result.errors)
+            if (callback) {
+              callback(errors)
             } else {
-              if (callback) callback()
-              else {
-                resolve()
-              }
+              reject(errors)
             }
-          })
+          } else {
+            if (callback) callback()
+            else {
+              resolve()
+            }
+          }
+        })
       })
     },
     clearValidationEffect () {

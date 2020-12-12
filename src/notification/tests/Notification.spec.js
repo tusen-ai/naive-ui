@@ -6,12 +6,8 @@ import { NNotification } from '../index'
 
 describe('n-notification', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      notificationLight
-    ]
+    locales: [enUS],
+    styles: [notificationLight]
   })
   it('should work with import on demand', () => {
     mount(NNotification, {

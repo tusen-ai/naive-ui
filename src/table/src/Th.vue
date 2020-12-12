@@ -1,7 +1,5 @@
 <template>
-  <th
-    class="n-table__th"
-  >
+  <th class="n-table__th">
     <slot />
   </th>
 </template>

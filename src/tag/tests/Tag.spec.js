@@ -6,12 +6,8 @@ import { NTag } from '../index'
 
 describe('n-tag', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      tagLight
-    ]
+    locales: [enUS],
+    styles: [tagLight]
   })
   it('should work with import on demand', () => {
     mount(NTag, {

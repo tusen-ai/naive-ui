@@ -5,9 +5,7 @@ import menuChildMixin from './menu-child-mixin'
 
 export default {
   name: 'MenuItemGroup',
-  mixins: [
-    menuChildMixin
-  ],
+  mixins: [menuChildMixin],
   provide () {
     return {
       NMenuItemGroup: this,
@@ -21,18 +19,29 @@ export default {
     }
   },
   render () {
-    return h('div', {
-      class: 'n-menu-item-group'
-    }, [
-      h('span', {
-        class: 'n-menu-item-group-title',
-        style: `padding-left: ${this.delayedPaddingLeft}px;`
-      }, [
-        h(render, {
-          render: this.title
-        })
-      ]),
-      h('div', this.tmNodes.map(item => itemRenderer(item)))
-    ])
+    return h(
+      'div',
+      {
+        class: 'n-menu-item-group'
+      },
+      [
+        h(
+          'span',
+          {
+            class: 'n-menu-item-group-title',
+            style: `padding-left: ${this.delayedPaddingLeft}px;`
+          },
+          [
+            h(render, {
+              render: this.title
+            })
+          ]
+        ),
+        h(
+          'div',
+          this.tmNodes.map((item) => itemRenderer(item))
+        )
+      ]
+    )
   }
 }

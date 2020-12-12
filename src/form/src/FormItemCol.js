@@ -19,34 +19,31 @@ export default {
   },
   methods: {
     validate (...args) {
-      const {
-        formItemRef
-      } = this
+      const { formItemRef } = this
       if (formItemRef) {
         return formItemRef.validate(...args)
       }
     },
     clearValidationEffect (...args) {
-      const {
-        formItemRef
-      } = this
+      const { formItemRef } = this
       if (formItemRef) {
         return formItemRef.clearValidationEffect(...args)
       }
     }
   },
   render () {
-    return h(NCol, keep(
-      this.$props,
-      colPropsKey
-    ), {
+    return h(NCol, keep(this.$props, colPropsKey), {
       default: () => {
-        return h(NFormItem, {
-          ref: 'formItemRef',
-          ...keep(this.$props, formItemPropsKey)
-        }, {
-          default: this.$slots.default
-        })
+        return h(
+          NFormItem,
+          {
+            ref: 'formItemRef',
+            ...keep(this.$props, formItemPropsKey)
+          },
+          {
+            default: this.$slots.default
+          }
+        )
       }
     })
   }

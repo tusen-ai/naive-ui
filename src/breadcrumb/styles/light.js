@@ -5,9 +5,7 @@ import commonVariables from './_common'
 export default create({
   theme: 'light',
   name: 'Breadcrumb',
-  peer: [
-    baseLight
-  ],
+  peer: [baseLight],
   getLocalVars (vars) {
     return {
       ...commonVariables,

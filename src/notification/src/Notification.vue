@@ -8,10 +8,7 @@
     }"
     class="n-notification"
   >
-    <div
-      v-if="showAvatar"
-      class="n-notification__avatar"
-    >
+    <div v-if="showAvatar" class="n-notification__avatar">
       <render v-if="avatar" :render="avatar" />
       <n-icon v-else>
         <info-icon v-if="type === 'info'" />
@@ -29,20 +26,17 @@
         <close-icon />
       </n-icon>
     </div>
-    <div
-      ref="body"
-      class="n-notification-main"
-    >
+    <div ref="body" class="n-notification-main">
       <div v-if="title" class="n-notification-main__header">
         <render :render="title" />
       </div>
-      <div
-        v-if="description"
-        class="n-notification-main__description"
-      >
+      <div v-if="description" class="n-notification-main__description">
         <render :render="description" />
       </div>
-      <pre v-if="content" class="n-notification-main__content"><render :render="content" /></pre>
+      <pre
+        v-if="content"
+        class="n-notification-main__content"
+      ><render :render="content" /></pre>
       <div v-if="meta || action" class="n-notification-main-footer">
         <div v-if="meta" class="n-notification-main-footer__meta">
           <render :render="meta" />
@@ -56,11 +50,7 @@
 </template>
 
 <script>
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import { render } from '../../_utils'
 import styles from './styles'
 import { NIcon } from '../../icon'
@@ -83,11 +73,7 @@ export default {
     InfoIcon,
     ErrorIcon
   },
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     closable: {
       type: Boolean,
@@ -95,7 +81,9 @@ export default {
     },
     type: {
       validator (value) {
-        return ['info', 'success', 'warning', 'error', 'default'].includes(value)
+        return ['info', 'success', 'warning', 'error', 'default'].includes(
+          value
+        )
       },
       default: 'default'
     },

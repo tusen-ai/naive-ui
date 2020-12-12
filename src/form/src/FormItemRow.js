@@ -19,34 +19,32 @@ export default {
   },
   methods: {
     validate (...args) {
-      const {
-        formItemColRef
-      } = this
+      const { formItemColRef } = this
       if (formItemColRef) {
         return formItemColRef.validate(...args)
       }
     },
     clearValidationEffect (...args) {
-      const {
-        formItemColRef
-      } = this
+      const { formItemColRef } = this
       if (formItemColRef) {
         return formItemColRef.clearValidationEffect(...args)
       }
     }
   },
   render () {
-    return h(NRow, keep(
-      this.$props,
-      rowPropsKey
-    ), {
-      default: () => h(NFormItemCol, {
-        ref: 'formItemColRef',
-        ...keep(this.$props, formItemColPropsKey),
-        span: 24
-      }, {
-        default: this.$slots.default
-      })
+    return h(NRow, keep(this.$props, rowPropsKey), {
+      default: () =>
+        h(
+          NFormItemCol,
+          {
+            ref: 'formItemColRef',
+            ...keep(this.$props, formItemColPropsKey),
+            span: 24
+          },
+          {
+            default: this.$slots.default
+          }
+        )
     })
   }
 }

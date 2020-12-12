@@ -6,12 +6,8 @@ import { NAffix } from '../index'
 
 describe('n-affix', () => {
   const naive = create({
-    locales: [
-      enUS
-    ],
-    styles: [
-      affixLight
-    ]
+    locales: [enUS],
+    styles: [affixLight]
   })
   it('should work with import on demand', () => {
     mount(NAffix, {

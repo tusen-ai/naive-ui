@@ -1,13 +1,5 @@
-import {
-  computed,
-  ref,
-  watch,
-  toRef
-} from 'vue'
-import {
-  TreeMate,
-  SubtreeNotLoadedError
-} from 'treemate'
+import { computed, ref, watch, toRef } from 'vue'
+import { TreeMate, SubtreeNotLoadedError } from 'treemate'
 import { useIsMounted, useMergedState } from 'vooks'
 import { useAsFormItem } from '../../_mixins'
 import { call, useAdjustedTo } from '../../_utils'
@@ -34,11 +26,7 @@ export function useCascader (props) {
     })
   })
   const mergedKeysRef = computed(() => {
-    const {
-      value,
-      cascade,
-      multiple
-    } = props
+    const { value, cascade, multiple } = props
     if (multiple) {
       return treeMateRef.value.getCheckedKeys(value, {
         cascade
@@ -51,19 +39,18 @@ export function useCascader (props) {
     }
   })
   const checkedKeysRef = computed(() => mergedKeysRef.value.checkedKeys)
-  const indeterminateKeysRef = computed(() => mergedKeysRef.value.indeterminateKeys)
+  const indeterminateKeysRef = computed(
+    () => mergedKeysRef.value.indeterminateKeys
+  )
   const menuModelRef = computed(() => {
-    const {
-      treeNodePath,
-      treeNode
-    } = treeMateRef.value.getPath(hoverKeyRef.value)
+    const { treeNodePath, treeNode } = treeMateRef.value.getPath(
+      hoverKeyRef.value
+    )
     let ret
     if (treeNode === null) {
-      ret = [
-        treeMateRef.value.treeNodes
-      ]
+      ret = [treeMateRef.value.treeNodes]
     } else {
-      ret = treeNodePath.map(treeNode => treeNode.siblings)
+      ret = treeNodePath.map((treeNode) => treeNode.siblings)
       if (!treeNode.isLeaf && !loadingKeySetRef.value.has(treeNode.key)) {
         ret.push(treeNode.children)
       }
@@ -71,9 +58,7 @@ export function useCascader (props) {
     return ret
   })
   const hoverKeyPathRef = computed(() => {
-    const {
-      keyPath
-    } = treeMateRef.value.getPath(hoverKeyRef.value)
+    const { keyPath } = treeMateRef.value.getPath(hoverKeyRef.value)
     return keyPath
   })
   watch(props.options, (value, oldValue) => {
@@ -83,14 +68,8 @@ export function useCascader (props) {
     }
   })
   function doUpdateValue (...args) {
-    const {
-      'onUpdate:value': onUpdateValue,
-      onChange
-    } = props
-    const {
-      nTriggerFormInput,
-      nTriggerFormChange
-    } = formItem
+    const { 'onUpdate:value': onUpdateValue, onChange } = props
+    const { nTriggerFormInput, nTriggerFormChange } = formItem
     if (onUpdateValue) call(onUpdateValue, ...args)
     if (onChange) call(onChange, ...args)
     nTriggerFormInput()
@@ -103,16 +82,10 @@ export function useCascader (props) {
     hoverKeyRef.value = key
   }
   function doCheck (key) {
-    const {
-      cascade,
-      multiple,
-      leafOnly
-    } = props
+    const { cascade, multiple, leafOnly } = props
     if (multiple) {
       try {
-        const {
-          checkedKeys
-        } = treeMateRef.value.check(
+        const { checkedKeys } = treeMateRef.value.check(
           key,
           mergedKeysRef.value.checkedKeys,
           {
@@ -126,9 +99,7 @@ export function useCascader (props) {
           if (cascaderMenuRef.value) {
             const node = treeMateRef.value.getNode(key)
             if (node !== null) {
-              cascaderMenuRef.value.showErrorMessage(
-                node.rawNode.label
-              )
+              cascaderMenuRef.value.showErrorMessage(node.rawNode.label)
             }
           }
         } else {
@@ -150,15 +121,9 @@ export function useCascader (props) {
     return true
   }
   function doUncheck (key) {
-    const {
-      cascade,
-      multiple,
-      leafOnly
-    } = props
+    const { cascade, multiple, leafOnly } = props
     if (multiple) {
-      const {
-        checkedKeys
-      } = treeMateRef.value.uncheck(
+      const { checkedKeys } = treeMateRef.value.uncheck(
         key,
         mergedKeysRef.value.checkedKeys,
         {
@@ -171,16 +136,10 @@ export function useCascader (props) {
   }
   const selectedOptionsRef = computed(() => {
     if (props.multiple) {
-      const {
-        value,
-        showPath,
-        separator
-      } = props
+      const { value, showPath, separator } = props
       if (Array.isArray(value)) {
-        const {
-          getNode
-        } = treeMateRef.value
-        return value.map(key => {
+        const { getNode } = treeMateRef.value
+        return value.map((key) => {
           const node = getNode(key)
           if (node === null) {
             return {
@@ -189,7 +148,9 @@ export function useCascader (props) {
             }
           } else {
             return {
-              label: showPath ? getPathLabel(node, separator) : node.rawNode.label,
+              label: showPath
+                ? getPathLabel(node, separator)
+                : node.rawNode.label,
               value: node.rawNode.value
             }
           }
@@ -200,18 +161,10 @@ export function useCascader (props) {
     } else return []
   })
   const selectedOptionRef = computed(() => {
-    const {
-      multiple,
-      showPath,
-      separator
-    } = props
+    const { multiple, showPath, separator } = props
     if (!multiple) {
-      const {
-        value
-      } = props
-      const {
-        getNode
-      } = treeMateRef.value
+      const { value } = props
+      const { getNode } = treeMateRef.value
       if (value === null) {
         return null
       }

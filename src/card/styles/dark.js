@@ -6,14 +6,9 @@ import commonVariables from './_common'
 export default create({
   theme: 'dark',
   name: 'Card',
-  peer: [
-    baseDark,
-    iconDark
-  ],
+  peer: [baseDark, iconDark],
   getLocalVars (vars) {
-    const {
-      borderRadius
-    } = vars
+    const { borderRadius } = vars
     return {
       ...commonVariables,
       color: vars.cardColor,

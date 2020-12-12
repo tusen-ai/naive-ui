@@ -18,18 +18,24 @@ export default function (options = {}) {
     leaveToProps = null
   } = options
   return [
-    c(`&.${namespace}-fade-in-height-expand-transition-leave-from, &.${namespace}-fade-in-height-expand-transition-enter-to`, {
-      ...enterToProps,
-      opacity: 1
-    }),
-    c(`&.${namespace}-fade-in-height-expand-transition-leave-to, &.${namespace}-fade-in-height-expand-transition-enter-from`, {
-      ...leaveToProps,
-      opacity: 0,
-      marginTop: '0 !important',
-      marginBottom: '0 !important',
-      paddingTop: foldPadding ? '0 !important' : null,
-      paddingBottom: foldPadding ? '0 !important' : null
-    }),
+    c(
+      `&.${namespace}-fade-in-height-expand-transition-leave-from, &.${namespace}-fade-in-height-expand-transition-enter-to`,
+      {
+        ...enterToProps,
+        opacity: 1
+      }
+    ),
+    c(
+      `&.${namespace}-fade-in-height-expand-transition-leave-to, &.${namespace}-fade-in-height-expand-transition-enter-from`,
+      {
+        ...leaveToProps,
+        opacity: 0,
+        marginTop: '0 !important',
+        marginBottom: '0 !important',
+        paddingTop: foldPadding ? '0 !important' : null,
+        paddingBottom: foldPadding ? '0 !important' : null
+      }
+    ),
     c(`&.${namespace}-fade-in-height-expand-transition-leave-active`, {
       raw: `
         overflow: ${overflow};

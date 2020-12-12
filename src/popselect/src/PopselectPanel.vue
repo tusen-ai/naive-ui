@@ -15,11 +15,7 @@
 <script>
 import { createTreeMate } from 'treemate'
 import { NBaseSelectMenu } from '../../_base'
-import {
-  configurable,
-  themeable,
-  withCssr
-} from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import styles from './styles'
 import { call, warn } from '../../_utils'
 
@@ -28,11 +24,7 @@ export default {
     NBaseSelectMenu
   },
   cssrName: 'Popselect',
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, withCssr(styles)],
   inject: {
     NPopselect: {
       default: null
@@ -75,7 +67,10 @@ export default {
     // deprecated
     onChange: {
       validator () {
-        warn('popselect', '`on-change` is deprecated, please use `on-update:value` instead.')
+        warn(
+          'popselect',
+          '`on-change` is deprecated, please use `on-update:value` instead.'
+        )
         return true
       },
       default: undefined
@@ -99,10 +94,7 @@ export default {
   },
   methods: {
     doUpdateValue (value) {
-      const {
-        'onUpdate:value': onUpdateValue,
-        onChange
-      } = this
+      const { 'onUpdate:value': onUpdateValue, onChange } = this
       if (onUpdateValue) call(onUpdateValue, value)
       if (onChange) call(onChange, value)
     },
@@ -118,9 +110,11 @@ export default {
     toggle (value) {
       if (this.multiple) {
         if (Array.isArray(this.value)) {
-          const validValues = new Set(this.options.map(option => option.value))
+          const validValues = new Set(
+            this.options.map((option) => option.value)
+          )
           const newValue = this.value.filter((v) => validValues.has(v))
-          const index = newValue.findIndex(v => v === value)
+          const index = newValue.findIndex((v) => v === value)
           if (~index) {
             newValue.splice(index, 1)
           } else {
