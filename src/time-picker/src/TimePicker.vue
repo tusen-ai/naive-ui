@@ -81,8 +81,8 @@
 </template>
 
 <script>
-import { ref } from 'vue'
-import { useIsMounted, useKeyboard } from 'vooks'
+import { ref, toRef } from 'vue'
+import { useIsMounted, useKeyboard, useMergedState } from 'vooks'
 import { VBinder, VTarget, VFollower } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { NInput } from '../../input'
@@ -141,6 +141,10 @@ export default {
       type: Boolean,
       default: undefined
     },
+    defaultValue: {
+      type: Number,
+      default: null
+    },
     placeholder: {
       type: String,
       default: undefined
@@ -151,7 +155,7 @@ export default {
     },
     value: {
       type: Number,
-      default: null
+      default: undefined
     },
     format: {
       type: String,
@@ -239,7 +243,15 @@ export default {
     }
   },
   setup (props) {
+    const uncontrolledValueRef = ref(props.defaultValue)
+    const controlledValueRef = toRef(props, 'value')
+    const mergedValueRef = useMergedState(
+      controlledValueRef,
+      uncontrolledValueRef
+    )
     return {
+      uncontrolledValue: uncontrolledValueRef,
+      mergedValue: mergedValueRef,
       isMounted: useIsMounted(),
       inputRef: ref(null),
       panelRef: ref(null),
@@ -248,13 +260,16 @@ export default {
     }
   },
   data () {
+    // TODO refactor
+    const { value } = this
+    const initValue = value === undefined ? this.defaultValue : value
     return {
       active: false,
       displayTimeString:
-        this.value === null
+        initValue === null
           ? null
-          : format(this.value, this.format, this.dateFnsOptions),
-      memorizedValue: this.value,
+          : format(initValue, this.format, this.dateFnsOptions),
+      memorizedValue: initValue,
       transitionDisabled: false
     }
   },
@@ -287,15 +302,15 @@ export default {
       return /s/.test(this.format)
     },
     isHourInvalid () {
-      if (this.value === null) return false
+      if (this.mergedValue === null) return false
       return this.isHourDisabled(this.hourValue)
     },
     isMinuteInvalid () {
-      if (this.value === null) return false
+      if (this.mergedValue === null) return false
       return this.isMinuteDisabled(this.minuteValue, this.hourValue)
     },
     isSecondInvalid () {
-      if (this.value === null) return false
+      if (this.mergedValue === null) return false
       return this.isSecondDisabled(
         this.secondValue,
         this.minuteValue,
@@ -309,8 +324,8 @@ export default {
       return this.format.length + 4
     },
     valueAsDate () {
-      if (this.value === null) return null
-      else return new Date(this.value)
+      if (this.mergedValue === null) return null
+      else return new Date(this.mergedValue)
     },
     hourValue () {
       if (this.valueAsDate) {
@@ -350,6 +365,7 @@ export default {
       } = this
       if (onUpdateValue) call(onUpdateValue, value)
       if (onChange) call(onChange, value)
+      this.uncontrolledValue = value
       nTriggerFormChange()
       nTriggerFormInput()
     },
@@ -423,11 +439,11 @@ export default {
       if (this.isHourDisabled(hour)) {
         return
       }
-      if (this.value === null) {
+      if (this.mergedValue === null) {
         const newValue = getTime(setHours(startOfHour(new Date()), hour))
         this.doChange(newValue)
       } else {
-        const newValue = getTime(setHours(this.value, hour))
+        const newValue = getTime(setHours(this.mergedValue, hour))
         this.doChange(newValue)
       }
     },
@@ -435,20 +451,20 @@ export default {
       if (this.isMinuteDisabled(minute, this.hourValue)) {
         return
       }
-      if (this.value === null) {
+      if (this.mergedValue === null) {
         this.doChange(getTime(setMinutes(startOfMinute(new Date()), minute)))
       } else {
-        this.doChange(getTime(setMinutes(this.value, minute)))
+        this.doChange(getTime(setMinutes(this.mergedValue, minute)))
       }
     },
     handleSecondClick (second) {
       if (this.isSecondDisabled(second, this.minuteValue, this.hourValue)) {
         return
       }
-      if (this.value === null) {
+      if (this.mergedValue === null) {
         this.doChange(getTime(setSeconds(startOfSecond(new Date()), second)))
       } else {
-        this.doChange(getTime(setSeconds(this.value, second)))
+        this.doChange(getTime(setSeconds(this.mergedValue, second)))
       }
     },
     refreshTimeString (time) {
@@ -510,7 +526,7 @@ export default {
       }
     },
     openPanel () {
-      this.memorizedValue = this.value
+      this.memorizedValue = this.mergedValue
       this.active = true
       this.$nextTick(this.scrollTimer)
     },
@@ -544,10 +560,13 @@ export default {
     },
     handleNowClick () {
       const now = new Date()
-      if (!this.value) this.doChange(getTime(now))
+      if (!this.mergedValue) this.doChange(getTime(now))
       else {
         const newValue = setSeconds(
-          setMinutes(setHours(this.value, getHours(now)), getMinutes(now)),
+          setMinutes(
+            setHours(this.mergedValue, getHours(now)),
+            getMinutes(now)
+          ),
           getSeconds(now)
         )
         this.doChange(getTime(newValue))

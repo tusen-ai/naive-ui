@@ -16,6 +16,7 @@ format
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | clearable | `boolean` | `false` |  |
+| default-value | `number \| null` | `null` |  |
 | disabled | `boolean` | `false` |  |
 | format | `string` | `'HH:mm:ss'` |  |
 | is-hour-disabled | `(hour: number) => boolean` | `() => false` |  |
@@ -24,7 +25,7 @@ format
 | placeholder | `string` | `'Select Time'` |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | theme | `'light' \| 'dark' \| string` | `undefined` |  |
-| value | `number` | `null` |  |
+| value | `number \| null` | `undefined` |  |
 | on-blur | `() => any` | `undefined` |  |
 | on-focus | `() => any` | `undefined` |  |
 | on-update:value | `(value: number \| null) => any` | `undefined` |  |
