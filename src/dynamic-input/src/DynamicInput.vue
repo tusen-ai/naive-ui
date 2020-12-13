@@ -13,23 +13,23 @@
       {{ localeNs.create }}
     </n-button>
     <div
-      v-for="(_, index) in value"
+      v-for="(_, index) in mergedValue"
       v-else
       :key="keyField ? _[keyField] : ensureKey(_, index)"
       :data-key="keyField ? _[keyField] : ensureKey(_, index)"
       class="n-dynamic-input-item"
     >
-      <slot v-if="$slots.default" :value="value[index]" :index="index" />
+      <slot v-if="$slots.default" :value="mergedValue[index]" :index="index" />
       <n-dynamic-input-input-preset
         v-else-if="preset === 'input'"
-        :value="value[index]"
+        :value="mergedValue[index]"
         :parent-path="NFormItem && NFormItem.path"
         :path="NFormItem && NFormItem.path + '[' + index + ']'"
         @update:value="handleValueChange(index, $event)"
       />
       <n-dynamic-input-pair-preset
         v-else-if="preset === 'pair'"
-        :value="value[index]"
+        :value="mergedValue[index]"
         :parent-path="NFormItem && NFormItem.path"
         :path="NFormItem && NFormItem.path + '[' + index + ']'"
         @update:value="handleValueChange(index, $event)"
@@ -111,16 +111,13 @@ export default {
       default: 0
     },
     value: {
-      validator (value) {
-        return Array.isArray(value) || value === null
-      },
+      type: Array,
       default: undefined
     },
+    // TODO: make it robust for different types
     defaultValue: {
-      validator (value) {
-        return Array.isArray(value)
-      },
-      default: []
+      type: Array,
+      default: () => []
     },
     preset: {
       validator (value) {
@@ -184,7 +181,7 @@ export default {
     }
   },
   setup (props) {
-    const uncontrolledValueRef = ref(props.value)
+    const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
     return {
       uncontrolledValue: uncontrolledValueRef,

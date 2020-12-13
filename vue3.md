@@ -137,6 +137,7 @@
     - `on-input` => `on-update:value`
   - new
     - `min`
+    - `default-value`
 - [x] dynamic-tags
   - break
     - `v-model` => `v-model:value`
