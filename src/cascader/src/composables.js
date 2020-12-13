@@ -5,6 +5,12 @@ import { useAsFormItem } from '../../_mixins'
 import { call, useAdjustedTo } from '../../_utils'
 
 export function useCascader (props) {
+  const uncontrolledValueRef = ref(null)
+  const controlledValueRef = toRef(props, 'value')
+  const mergedValueRef = useMergedState(
+    controlledValueRef,
+    uncontrolledValueRef
+  )
   const formItem = useAsFormItem(props)
   const cascaderMenuRef = ref(null)
   const selectMenuRef = ref(null)
@@ -26,9 +32,9 @@ export function useCascader (props) {
     })
   })
   const mergedKeysRef = computed(() => {
-    const { value, cascade, multiple } = props
+    const { cascade, multiple } = props
     if (multiple) {
-      return treeMateRef.value.getCheckedKeys(value, {
+      return treeMateRef.value.getCheckedKeys(mergedValueRef.value, {
         cascade
       })
     } else {
@@ -67,11 +73,12 @@ export function useCascader (props) {
       keyboardKeyRef.value = null
     }
   })
-  function doUpdateValue (...args) {
+  function doUpdateValue (value) {
     const { 'onUpdate:value': onUpdateValue, onChange } = props
     const { nTriggerFormInput, nTriggerFormChange } = formItem
-    if (onUpdateValue) call(onUpdateValue, ...args)
-    if (onChange) call(onChange, ...args)
+    if (onUpdateValue) call(onUpdateValue, value)
+    if (onChange) call(onChange, value)
+    uncontrolledValueRef.value = value
     nTriggerFormInput()
     nTriggerFormChange()
   }
@@ -136,7 +143,8 @@ export function useCascader (props) {
   }
   const selectedOptionsRef = computed(() => {
     if (props.multiple) {
-      const { value, showPath, separator } = props
+      const { showPath, separator } = props
+      const { value } = mergedValueRef
       if (Array.isArray(value)) {
         const { getNode } = treeMateRef.value
         return value.map((key) => {
@@ -163,7 +171,7 @@ export function useCascader (props) {
   const selectedOptionRef = computed(() => {
     const { multiple, showPath, separator } = props
     if (!multiple) {
-      const { value } = props
+      const { value } = mergedValueRef
       const { getNode } = treeMateRef.value
       if (value === null) {
         return null
@@ -185,6 +193,7 @@ export function useCascader (props) {
   const uncontrolledShowRef = ref(false)
   const controlledShowRef = toRef(props, 'show')
   return {
+    mergedValue: mergedValueRef,
     uncontrolledShow: uncontrolledShowRef,
     mergedShow: useMergedState(controlledShowRef, uncontrolledShowRef),
     treeMate: treeMateRef,
@@ -206,6 +215,7 @@ export function useCascader (props) {
     pattern: ref(''),
     adjustedTo: useAdjustedTo(props),
     ...formItem,
+    doUpdateValue,
     updateKeyboardKey,
     updateHoverKey,
     doCheck,

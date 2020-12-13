@@ -128,9 +128,9 @@ export default {
     doCheck (option) {
       if (this.multiple) {
         const {
-          NCascader: { value, doCheck, doUncheck }
+          NCascader: { mergedValue, doCheck, doUncheck }
         } = this
-        if (value === null || !value.includes(option.value)) {
+        if (mergedValue === null || !mergedValue.includes(option.value)) {
           doCheck(option.value)
         } else {
           doUncheck(option.value)

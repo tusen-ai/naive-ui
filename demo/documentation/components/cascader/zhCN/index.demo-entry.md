@@ -18,6 +18,7 @@ multiple-lazy
 | --- | --- | --- | --- |
 | cascade | `boolean` | `true` | 在多选时是否关联选项 |
 | clearable | `boolean` | `false` |  |
+| default-value | `string \| number \| Array<number \| string> \| null` | `null` |  |
 | disabled | `boolean` | `false` |  |
 | expand-trigger | `'click' \| 'hover'` | `'click'` | 在 `remote` 被设定时 `'hover'` 不生效 |
 | filterable | `boolean` | `false` | `remote` 被设定时不生效 |
@@ -32,8 +33,8 @@ multiple-lazy
 | show-path | `boolean` | `true` | 是否在选择器中显示选项路径 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | theme | `'light' \| 'dark' \| string` | `undefined` |  |
-| value | `string \| number \| Array<number \| string>` | `null` |  |
+| value | `string \| number \| Array<number \| string>` | `undefined` |  |
 | on-blur | `() => any` | `undefined` |  |
 | on-focus | `() => any` | `undefined` |  |
 | on-load | `(option: CascaderOption) => Promise<any>` | `undefined` | 在点击未加载完成节点时的回调，在返回的 promise 中设定 `option.children`，在返回的 promise resolve 或 reject 之后完成加载 |
-| on-update:value | `(value: string \| number \| Array<string \| number>) => any` | `undefined` |  |
+| on-update:value | `(value: string \| number \| Array<string \| number> \| null) => any` | `undefined` |  |

@@ -48,7 +48,7 @@
           :class="{
             [namespace]: namespace
           }"
-          :value="value"
+          :value="mergedValue"
           :show="mergedShow && !showSelectMenu"
           :theme="mergedTheme"
           :size="mergedSize"
@@ -69,7 +69,7 @@
           :class="{
             [namespace]: namespace
           }"
-          :value="value"
+          :value="mergedValue"
           :show="mergedShow && showSelectMenu"
           :theme="mergedTheme"
           :pattern="pattern"
@@ -120,7 +120,7 @@ export default {
     },
     value: {
       type: [String, Number, Array],
-      default: null
+      default: undefined
     },
     placeholder: {
       type: String,
@@ -221,18 +221,6 @@ export default {
     }
   },
   methods: {
-    doUpdateValue (...args) {
-      const {
-        'onUpdate:value': onUpdateValue,
-        onChange,
-        nTriggerFormInput,
-        nTriggerFormChange
-      } = this
-      if (onUpdateValue) call(onUpdateValue, ...args)
-      if (onChange) call(onChange, ...args)
-      nTriggerFormInput()
-      nTriggerFormChange()
-    },
     doBlur (...args) {
       const { onBlur, nTriggerFormBlur } = this
       if (onBlur) call(onBlur, ...args)
@@ -450,8 +438,9 @@ export default {
     },
     handleDeleteLastOption () {
       if (this.multiple) {
-        if (Array.isArray(this.value)) {
-          const newValue = this.value
+        const { mergedValue } = this
+        if (Array.isArray(mergedValue)) {
+          const newValue = Array.from(mergedValue)
           newValue.pop()
           this.doUpdateValue(newValue)
         }
@@ -461,10 +450,11 @@ export default {
       this.pattern = e.target.value
     },
     handleDeleteOption (option) {
-      if (this.multiple && Array.isArray(this.value)) {
-        const index = this.value.findIndex((value) => value === option.value)
+      const { multiple, mergedValue } = this
+      if (multiple && Array.isArray(mergedValue)) {
+        const index = mergedValue.findIndex((value) => value === option.value)
         if (~index) {
-          const newValue = this.value
+          const newValue = Array.from(mergedValue)
           newValue.splice(index, 1)
           this.doUpdateValue(newValue)
         }

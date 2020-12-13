@@ -22,11 +22,7 @@ export default {
     NCascaderOption,
     NScrollbar
   },
-  inject: {
-    NCascader: {
-      default: null
-    }
-  },
+  inject: ['NCascader'],
   props: {
     depth: {
       type: Number,

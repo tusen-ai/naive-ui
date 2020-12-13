@@ -45,11 +45,7 @@ export default {
   directives: {
     clickoutside
   },
-  inject: {
-    NCascader: {
-      default: null
-    }
-  },
+  inject: ['NCascader'],
   provide () {
     return {
       NCascaderMenu: this

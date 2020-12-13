@@ -1,8 +1,3 @@
-<!--
-'n-cascader-option--selected': type === 'single' && value === NCascader.value,
-'n-cascader-option--active': active && !isLeaf,
--->
-
 <template>
   <div
     class="n-cascader-option"
@@ -73,11 +68,6 @@ export default {
     ChevronRightIcon,
     CheckmarkIcon
   },
-  inject: {
-    NCascader: {
-      default: null
-    }
-  },
   props: {
     tmNode: {
       type: Object,
@@ -88,6 +78,7 @@ export default {
     const NCascader = inject('NCascader')
     const valueRef = computed(() => props.tmNode.rawNode.value)
     return {
+      NCascader,
       leafOnly: toRef(NCascader, 'leafOnly'),
       multiple: toRef(NCascader, 'multiple'),
       checked: useMemo(() => {
