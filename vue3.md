@@ -149,7 +149,8 @@
   - break
     - `v-model` => `v-model:value`
   - new
-    - `on-update:value`
+    - `on-update:value` prop
+    - `default-value` prop
 - [x] input-group
 - [x] input-group-label
 - [x] input-number

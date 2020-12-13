@@ -31,7 +31,7 @@
       v-if="isTextarea && autosize"
       ref="textareaMirrow"
       class="n-input__textarea-mirror"
-    >{{ value }}<br></pre>
+    >{{ mergedValue }}<br></pre>
     <textarea
       v-if="type === 'textarea'"
       ref="textarea"
@@ -42,7 +42,7 @@
       :autofocus="autofocus"
       :rows="rows"
       :placeholder="placeholder"
-      :value="value"
+      :value="mergedValue"
       :disabled="disabled"
       :maxlength="maxlength"
       :minlength="minlength"
@@ -64,7 +64,7 @@
         :disabled="disabled"
         :maxlength="maxlength"
         :minlength="minlength"
-        :value="pair ? value && value[0] : value"
+        :value="pair ? mergedValue && mergedValue[0] : mergedValue"
         :readonly="readonly"
         :autofocus="autofocus"
         :size="attrSize"
@@ -77,7 +77,7 @@
       <div
         v-if="
           !isComposing &&
-            (!value || (Array.isArray(value) && !value[0])) &&
+            (!mergedValue || (Array.isArray(mergedValue) && !mergedValue[0])) &&
             mergedPlaceholder[0]
         "
         class="n-input__placeholder"
@@ -98,7 +98,7 @@
         :disabled="disabled"
         :maxlength="maxlength"
         :minlength="minlength"
-        :value="value && value[1]"
+        :value="mergedValue && mergedValue[1]"
         :readonly="readonly"
         @blur="handleInputBlur"
         @focus="handleInputFocus"
@@ -109,7 +109,7 @@
       <div
         v-if="
           !isComposing &&
-            (!value || (Array.isArray(value) && !value[1])) &&
+            (!mergedValue || (Array.isArray(mergedValue) && !mergedValue[1])) &&
             mergedPlaceholder[1]
         "
         class="n-input__placeholder"
@@ -143,7 +143,7 @@
       </div>
     </transition>
     <div
-      v-if="isTextarea && !isComposing && placeholder && !pair && !value"
+      v-if="isTextarea && !isComposing && placeholder && !pair && !mergedValue"
       class="n-input__placeholder"
     >
       {{ placeholder }}
@@ -155,6 +155,8 @@
 </template>
 
 <script>
+import { ref, toRef } from 'vue'
+import { useMergedState } from 'vooks'
 import { NBaseSuffix } from '../../_base'
 import {
   configurable,
@@ -191,9 +193,13 @@ export default {
       type: [Array, String],
       default: undefined
     },
-    value: {
+    defaultValue: {
       type: [String, Array],
       default: null
+    },
+    value: {
+      type: [String, Array],
+      default: undefined
     },
     disabled: {
       type: Boolean,
@@ -328,12 +334,20 @@ export default {
       default: false
     }
   },
-  data () {
+  setup (props) {
+    const uncontrolledValueRef = ref(props.defaultValue)
+    const controlledValueRef = toRef(props, 'value')
+    const mergedValueRef = useMergedState(
+      controlledValueRef,
+      uncontrolledValueRef
+    )
     return {
-      focused: false,
-      hover: false,
-      isComposing: false,
-      inputFocused: false
+      uncontrolledValue: uncontrolledValueRef,
+      mergedValue: mergedValueRef,
+      focused: ref(false),
+      hover: ref(false),
+      isComposing: ref(false),
+      inputFocused: ref(false)
     }
   },
   computed: {
@@ -362,13 +376,17 @@ export default {
       ) {
         return false
       }
+      const { mergedValue } = this
       if (this.pair) {
         return (
-          !!(Array.isArray(this.value) && (this.value[0] || this.value[1])) &&
+          !!(
+            Array.isArray(mergedValue) &&
+            (mergedValue[0] || mergedValue[1])
+          ) &&
           (this.hover || this.mergedFocus)
         )
       } else {
-        return !!this.value && (this.hover || this.mergedFocus)
+        return !!mergedValue && (this.hover || this.mergedFocus)
       }
     },
     isTextarea () {
@@ -379,7 +397,7 @@ export default {
     }
   },
   watch: {
-    value () {
+    mergedValue () {
       if (this.isTextarea && this.autosize) {
         this.$nextTick(this.updateTextAreaStyle)
       }
@@ -404,11 +422,13 @@ export default {
       } = this
       if (onUpdateValue) call(onUpdateValue, value)
       if (onInput) call(onInput, value)
+      this.uncontrolledValue = value
       nTriggerFormInput()
     },
     doChange (value) {
       const { onChange, nTriggerFormChange } = this
       if (onChange) call(onChange, value)
+      this.uncontrolledValue = value
       nTriggerFormChange()
     },
     doBlur (e) {
@@ -501,7 +521,7 @@ export default {
       if (!this.pair) {
         this.doInput(changedValue)
       } else {
-        let value = this.value
+        let { mergedValue: value } = this
         if (!Array.isArray(value)) {
           value = [null, null]
         } else {

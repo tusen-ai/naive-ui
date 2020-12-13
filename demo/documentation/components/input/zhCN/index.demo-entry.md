@@ -2,8 +2,6 @@
 
 很多年前，人们还在用打孔纸卡输入。
 
-<n-alert title="注意" type="warning">`n-input` 是严格受控的组件，如果你修改 `value`，那么它的值永远不会改变。（`v-model:value` 并不会出问题）</n-alert>
-
 ## 演示
 
 ```demo
@@ -29,6 +27,7 @@ passively-activated
 | autofocus | `boolean` | `false` |  |
 | autosize | `boolean \| { minRows?: number, maxRows?: number }` | `false` |  |
 | clearable | `boolean` | `false` |  |
+| default-value | `string \| [string, string] \| null` | `null` |  |
 | disabled | `boolean` | `false` |  |
 | maxlength | `number` | `undefined` |  |
 | minlength | `number` | `undefined` |  |
@@ -42,7 +41,7 @@ passively-activated
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | theme | `'light' \| 'dark' \| string` | `undefined` |  |
 | type | `'text' \| 'password' \| 'textarea'` | `'text'` |  |
-| value | `string \| [string, string]` | `null` | 文本输入的值。如果是 `pair` 是 `true`，`value` 是一个数组 |
+| value | `string \| [string, string] \| null` | `undefined` | 文本输入的值。如果是 `pair` 是 `true`，`value` 是一个数组 |
 | on-blur | `() => any` | `undefined` |  |
 | on-change | `(value: string \| [string, string]) => any` | `undefined` |  |
 | on-clear | `() => any` | `undefined` |  |

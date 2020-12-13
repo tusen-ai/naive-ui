@@ -2,8 +2,6 @@
 
 Many years ago, people used punched card to input.
 
-<n-alert title="Caveat" type="warning">`n-input` is a controlled component. If you don't update its `value` its value will never change. (`v-model:value` doesn't matter.)</n-alert>
-
 ## Demos
 
 ```demo
@@ -29,6 +27,7 @@ passively-activated
 | autofocus | `boolean` | `false` |  |
 | autosize | `boolean \| { minRows?: number, maxRows?: number }` | `false` |  |
 | clearable | `boolean` | `false` |  |
+| default-value | `string \| [string, string] \| null` | `null` |  |
 | disabled | `boolean` | `false` |  |
 | maxlength | `number` | `undefined` |  |
 | minlength | `number` | `undefined` |  |
@@ -42,7 +41,7 @@ passively-activated
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | theme | `'light' \| 'dark' \| string` | `undefined` |  |
 | type | `'text' \| 'password' \| 'textarea'` | `'text'` |  |
-| value | `string \| [string, string]` | `null` | Value of input. When `pair` is `true`, `value` is an array. |
+| value | `string \| [string, string] \| null` | `undefined` | Value of input. When `pair` is `true`, `value` is an array. |
 | on-blur | `() => any` | `undefined` |  |
 | on-change | `(value: string \| [string, string]) => any` | `undefined` |  |
 | on-clear | `() => any` | `undefined` |  |
