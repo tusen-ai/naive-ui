@@ -18,6 +18,7 @@ validator
 
 | 名称            | 类型                             | 默认值      | 说明 |
 | --------------- | -------------------------------- | ----------- | ---- |
+| default-value   | `number \| null`                 | `null`      |      |
 | disabled        | `boolean`                        | `false`     |      |
 | max             | `number`                         | `undefined` |      |
 | min             | `number`                         | `undefined` |      |
@@ -26,7 +27,7 @@ validator
 | step            | `number`                         | `1`         |      |
 | theme           | `'light' \| 'dark' \| string`    | `undefined` |      |
 | validator       | `(value) => boolean`             | `undefined` |      |
-| value           | `number`                         | `null`      |      |
+| value           | `number \| null`                 | `undefined` |      |
 | on-blur         | `(event: FocusEvent) => any`     | `undefined` |      |
 | on-focus        | `(event: FocusEvent) => any`     | `undefined` |      |
 | on-update:value | `(value: number) => any`         | `undefined` |      |

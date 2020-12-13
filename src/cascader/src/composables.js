@@ -5,7 +5,7 @@ import { useAsFormItem } from '../../_mixins'
 import { call, useAdjustedTo } from '../../_utils'
 
 export function useCascader (props) {
-  const uncontrolledValueRef = ref(null)
+  const uncontrolledValueRef = ref(props.defaultValue)
   const controlledValueRef = toRef(props, 'value')
   const mergedValueRef = useMergedState(
     controlledValueRef,

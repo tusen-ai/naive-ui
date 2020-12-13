@@ -49,7 +49,7 @@
       class="n-input-number__input"
       type="text"
       :placeholder="mergedPlaceholder"
-      :value="value"
+      :value="mergedValue"
       :disabled="disabled ? 'disabled' : false"
       @focus="doFocus"
       @blur="doBlur"
@@ -61,6 +61,8 @@
 </template>
 
 <script>
+import { ref, toRef } from 'vue'
+import { useMergedState } from 'vooks'
 import { NIcon } from '../../icon'
 import { RemoveIcon, AddIcon } from '../../_base/icons'
 import {
@@ -72,8 +74,6 @@ import {
 } from '../../_mixins'
 import { warn, call } from '../../_utils'
 import styles from './styles'
-
-const DEFAULT_STEP = 1
 
 function parseNumber (number) {
   if (number === null) return null
@@ -107,17 +107,21 @@ export default {
       type: String,
       default: undefined
     },
-    value: {
+    defaultValue: {
       type: Number,
       default: null
     },
+    value: {
+      type: Number,
+      default: undefined
+    },
     step: {
       type: [Number, String],
-      default: DEFAULT_STEP
+      default: 1
     },
     min: {
       type: [Number, String],
-      default: null
+      default: undefined
     },
     max: {
       type: [Number, String],
@@ -164,74 +168,94 @@ export default {
       default: undefined
     }
   },
+  setup (props) {
+    const uncontrolledValueRef = ref(props.defaultValue)
+    const controlledValueRef = toRef(props, 'value')
+    const mergedValueRef = useMergedState(
+      controlledValueRef,
+      uncontrolledValueRef
+    )
+    return {
+      uncontrolledValue: uncontrolledValueRef,
+      mergedValue: mergedValueRef
+    }
+  },
   computed: {
     mergedPlaceholder () {
       const { placeholder } = this
       if (placeholder !== undefined) return placeholder
       return this.localeNs.placeholder
     },
-    safeStep () {
+    mergedStep () {
       const parsedNumber = parseNumber(this.step)
       if (parsedNumber !== null) {
-        return parsedNumber === 0 ? DEFAULT_STEP : Math.abs(parsedNumber)
-      } else return DEFAULT_STEP
+        return parsedNumber === 0 ? 1 : Math.abs(parsedNumber)
+      }
+      return 1
     },
-    safeMin () {
+    mergedMin () {
       const parsedNumber = parseNumber(this.min)
       if (parsedNumber !== null) return parsedNumber
       else return null
     },
+    mergedMax () {
+      const parsedNumber = parseNumber(this.max)
+      if (parsedNumber !== null) return parsedNumber
+      else return null
+    },
     invalid () {
-      if (this.value === null) return false
-      if (this.validator && !this.validator(this.value)) return true
-      if (this.safeMin !== null && this.value < this.safeMin) return true
-      if (this.safeMax !== null && this.value > this.safeMax) return true
+      const { mergedValue } = this
+      if (mergedValue === null) return false
+      const { validator } = this
+      if (validator && !validator(mergedValue)) return true
+      const { mergedMin } = this
+      if (mergedMin !== null && mergedValue < mergedMin) return true
+      const { mergedMax } = this
+      if (mergedMax !== null && mergedValue > mergedMax) return true
       return false
     },
     minusable () {
-      if (this.validator) {
-        if (this.value !== null) return this.validator(this.value - this.step)
+      const { mergedValue, validator } = this
+      if (validator) {
+        if (mergedValue !== null) return validator(mergedValue - this.step)
         else return false
       } else {
         return !(
-          this.value !== null &&
-          this.safeMin !== null &&
-          this.value <= this.safeMin
+          mergedValue !== null &&
+          this.mergedMin !== null &&
+          mergedValue <= this.mergedMin
         )
       }
     },
     addable () {
-      if (this.validator) {
-        if (this.value !== null) return this.validator(this.value + this.step)
+      const { mergedValue, validator } = this
+      if (validator) {
+        if (mergedValue !== null) return validator(mergedValue + this.step)
         else return false
       } else {
         return !(
-          this.value !== null &&
-          this.safeMax !== null &&
-          this.value >= this.safeMax
+          mergedValue !== null &&
+          this.mergedMax !== null &&
+          mergedValue >= this.mergedMax
         )
       }
-    },
-    safeMax () {
-      const parsedNumber = parseNumber(this.max)
-      if (parsedNumber !== null) return parsedNumber
-      else return null
     }
   },
   methods: {
     doUpdateValue (value) {
-      if (value !== this.value) {
-        const {
-          'onUpdate:value': onUpdateValue,
-          onChange,
-          nTriggerFormInput,
-          nTriggerFormChange
-        } = this
-        if (onChange) call(onChange, value)
-        if (onUpdateValue) call(onUpdateValue, value)
-        nTriggerFormInput()
-        nTriggerFormChange()
-      }
+      const { mergedValue } = this
+      if (value === mergedValue) return
+      const {
+        'onUpdate:value': onUpdateValue,
+        onChange,
+        nTriggerFormInput,
+        nTriggerFormChange
+      } = this
+      if (onChange) call(onChange, value)
+      if (onUpdateValue) call(onUpdateValue, value)
+      this.uncontrolledValue = value
+      nTriggerFormInput()
+      nTriggerFormChange()
     },
     doFocus (e) {
       const { onFocus, nTriggerFormFocus } = this
@@ -239,7 +263,7 @@ export default {
       nTriggerFormFocus()
     },
     doBlur (e) {
-      const value = this.adjustValue(e.target.value)
+      const value = this.sanitizeValue(e.target.value)
       e.target.value = value
       this.doUpdateValue(value)
       const { onBlur, nTriggerFormBlur } = this
@@ -248,10 +272,10 @@ export default {
     },
     createValidValue () {
       if (this.validator) return null
-      if (this.safeMin !== null) {
-        return Math.max(0, this.safeMin)
-      } else if (this.safeMax !== null) {
-        return Math.min(0, this.safeMax)
+      if (this.mergedMin !== null) {
+        return Math.max(0, this.mergedMin)
+      } else if (this.mergedMax !== null) {
+        return Math.min(0, this.mergedMax)
       } else {
         return 0
       }
@@ -264,33 +288,39 @@ export default {
     },
     add () {
       if (!this.addable) return
-      if (this.value === null) {
+      const { mergedValue } = this
+      if (mergedValue === null) {
         this.doUpdateValue(this.createValidValue())
       } else {
-        const valueAfterChange = this.adjustValue(this.value + this.safeStep)
+        const valueAfterChange = this.sanitizeValue(
+          mergedValue + this.mergedStep
+        )
         this.doUpdateValue(valueAfterChange)
       }
     },
     minus () {
       if (!this.minusable) return
-      if (this.value === null) {
+      const { mergedValue } = this
+      if (mergedValue === null) {
         this.doUpdateValue(this.createValidValue())
       } else {
-        const valueAfterChange = this.adjustValue(this.value - this.safeStep)
+        const valueAfterChange = this.sanitizeValue(
+          mergedValue - this.mergedStep
+        )
         this.doUpdateValue(valueAfterChange)
       }
     },
     handleEnter (e) {
-      const value = this.adjustValue(this.$refs.input.value)
+      const value = this.sanitizeValue(this.$refs.input.value)
       this.$refs.input.value = value
       this.doUpdateValue(value)
     },
-    adjustValue (value) {
+    sanitizeValue (value) {
       value = String(value).trim() || ''
       if (value.trim() === '') {
         value = null
       } else if (Number.isNaN(Number(value))) {
-        value = this.value
+        value = this.mergedValue
       } else {
         value = Number(value)
       }
@@ -304,9 +334,8 @@ export default {
           return null
         }
       } else {
-        if (this.safeMin !== null && value < this.safeMin) value = this.safeMin
-        else if (this.safeMax !== null && value > this.safeMax) {
-          value = this.safeMax
+        if (this.mergedMin !== null && value < this.mergedMin) { value = this.mergedMin } else if (this.mergedMax !== null && value > this.mergedMax) {
+          value = this.mergedMax
         }
       }
       return value
