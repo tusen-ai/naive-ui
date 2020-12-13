@@ -103,6 +103,8 @@
     - `v-model` => `v-model:value`
   - deprecate
     - `on-change` => `on-update:value`
+  - new
+    - `default-value` prop
 - [x] descriptions
 - [x] divider
 - [x] drawer

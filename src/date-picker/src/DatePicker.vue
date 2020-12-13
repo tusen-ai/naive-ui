@@ -83,7 +83,7 @@
             v-if="type === 'datetime' && active"
             ref="panelRef"
             v-clickoutside="handleClickOutside"
-            :value="value"
+            :value="mergedValue"
             :active="active"
             :actions="actions"
             :theme="mergedTheme"
@@ -98,7 +98,7 @@
             v-else-if="type === 'date' && active"
             ref="panelRef"
             v-clickoutside="handleClickOutside"
-            :value="value"
+            :value="mergedValue"
             :active="active"
             :actions="actions"
             :theme="mergedTheme"
@@ -112,7 +112,7 @@
             v-else-if="type === 'daterange' && active"
             ref="panelRef"
             v-clickoutside="handleClickOutside"
-            :value="value"
+            :value="mergedValue"
             :active="active"
             :actions="actions"
             :theme="mergedTheme"
@@ -127,7 +127,7 @@
             ref="panelRef"
             v-clickoutside="handleClickOutside"
             :format="computedFormat"
-            :value="value"
+            :value="mergedValue"
             :active="active"
             :actions="actions"
             :theme="mergedTheme"
@@ -144,7 +144,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, toRef } from 'vue'
 import { VBinder, VTarget, VFollower } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import {
@@ -155,7 +155,7 @@ import {
   locale
 } from '../../_mixins'
 import { warn, call, useAdjustedTo } from '../../_utils'
-import { useIsMounted } from 'vooks'
+import { useIsMounted, useMergedState } from 'vooks'
 
 import DatetimePanel from './panel/datetime.vue'
 import DatetimerangePanel from './panel/datetimerange.vue'
@@ -221,6 +221,10 @@ export default {
       type: Boolean,
       default: false
     },
+    defaultValue: {
+      type: [Number, Array],
+      default: null
+    },
     disabled: {
       type: Boolean,
       default: false
@@ -231,7 +235,7 @@ export default {
     },
     value: {
       type: [Number, Array],
-      default: null
+      default: undefined
     },
     size: {
       validator (value) {
@@ -305,23 +309,27 @@ export default {
     }
   },
   setup (props) {
+    const uncontrolledValueRef = ref(props.defaultValue)
+    const controlledValueRef = toRef(props, 'value')
+    const mergedValueRef = useMergedState(
+      controlledValueRef,
+      uncontrolledValueRef
+    )
     return {
+      uncontrolledValue: uncontrolledValueRef,
+      mergedValue: mergedValueRef,
       panelRef: ref(null),
       trackingRef: ref(null),
       triggerRef: ref(null),
       inputRef: ref(null),
       isMounted: useIsMounted(),
+      displayTime: ref(''),
+      displayStartTime: ref(''),
+      displayEndTime: ref(''),
+      active: ref(false),
       adjustedTo: useAdjustedTo(props),
-      ...uniCalendarValidation(props),
-      ...dualCalendarValidation(props)
-    }
-  },
-  data () {
-    return {
-      displayTime: '',
-      displayStartTime: '',
-      displayEndTime: '',
-      active: false
+      ...uniCalendarValidation(props, mergedValueRef),
+      ...dualCalendarValidation(props, mergedValueRef)
     }
   },
   computed: {
@@ -385,23 +393,25 @@ export default {
      * If new value is valid, set calendarTime and refresh display strings.
      * If new value is invalid, do nothing.
      */
-    value (value, oldValue) {
+    mergedValue (value, oldValue) {
       this.refresh(value)
     }
   },
   created () {
-    this.refresh(this.value)
+    this.refresh(this.mergedValue)
   },
   methods: {
-    doUpdateValue (...args) {
+    doUpdateValue (value) {
+      if (value === this.mergedValue) return
       const {
         'onUpdate:value': onUpdateValue,
         onChange,
         nTriggerFormChange,
         nTriggerFormInput
       } = this
-      if (onUpdateValue) call(onUpdateValue, ...args)
-      if (onChange) call(onChange, ...args)
+      if (onUpdateValue) call(onUpdateValue, value)
+      if (onChange) call(onChange, value)
+      this.uncontrolledValue = value
       nTriggerFormChange()
       nTriggerFormInput()
     },
@@ -416,12 +426,10 @@ export default {
       nTriggerFormBlur()
     },
     handleKeyDown (e) {
-      const value = this.value
+      const { mergedValue } = this
       if (this.type === 'date') {
-        const nextValue = getDerivedTimeFromKeyboardEvent(value, e)
-        if (value !== nextValue) {
-          this.doUpdateValue(nextValue)
-        }
+        const nextValue = getDerivedTimeFromKeyboardEvent(mergedValue, e)
+        this.doUpdateValue(nextValue)
       }
     },
     handleClear (e) {
@@ -541,7 +549,7 @@ export default {
           new Date()
         )
         if (!isValid(startDateTime) || !isValid(endDateTime)) {
-          this.refresh(this.value)
+          this.refresh(this.mergedValue)
         } else {
           this.changeStartEndTime(startDateTime, endDateTime)
         }
@@ -554,7 +562,7 @@ export default {
         if (isValid(newSelectedDateTime)) {
           this.doUpdateValue(getTime(newSelectedDateTime))
         } else {
-          this.refreshDisplayTime(this.value)
+          this.refreshDisplayTime(this.mergedValue)
         }
       }
     },
@@ -633,12 +641,12 @@ export default {
       if (typeof time !== 'number') {
         time = getTime(time)
       }
-      if (this.value === null) {
+      if (this.mergedValue === null) {
         this.doUpdateValue([time, time])
         this.refresh([time, time])
       } else {
-        const newValue = [time, Math.max(this.value[1], time)]
-        if (!isEqual(newValue, this.value)) {
+        const newValue = [time, Math.max(this.mergedValue[1], time)]
+        if (!isEqual(newValue, this.mergedValue)) {
           this.doUpdateValue(newValue)
           this.refresh(newValue)
         }
@@ -648,12 +656,12 @@ export default {
       if (typeof time !== 'number') {
         time = getTime(time)
       }
-      if (this.value === null) {
+      if (this.mergedValue === null) {
         this.doUpdateValue([time, time])
         this.refresh([time, time])
       } else {
-        const newValue = [Math.min(this.value[0], time), time]
-        if (!isEqual(newValue, this.value)) {
+        const newValue = [Math.min(this.mergedValue[0], time), time]
+        if (!isEqual(newValue, this.mergedValue)) {
           this.doUpdateValue(newValue)
           this.refresh(newValue)
         }

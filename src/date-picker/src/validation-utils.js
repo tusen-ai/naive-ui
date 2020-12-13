@@ -1,12 +1,13 @@
 import { computed, toRef } from 'vue'
 import { getHours, getMinutes, getSeconds } from 'date-fns'
 
-export function uniCalendarValidation (props) {
+export function uniCalendarValidation (props, mergedValueRef) {
   // date, datetime
   const timePickerValidatorRef = computed(() => {
-    const { isTimeDisabled, value } = props
+    const { isTimeDisabled } = props
+    const { value } = mergedValueRef
     if (value === null) return undefined
-    return isTimeDisabled && isTimeDisabled(props.value)
+    return isTimeDisabled && isTimeDisabled(value)
   })
   const isHourDisabledRef = computed(() => {
     return timePickerValidatorRef.value?.isHourDisabled
@@ -18,7 +19,8 @@ export function uniCalendarValidation (props) {
     return timePickerValidatorRef.value?.isSecondDisabled
   })
   const isDateInvalidRef = computed(() => {
-    const { value, type, isDateDisabled } = props
+    const { type, isDateDisabled } = props
+    const { value } = mergedValueRef
     if (
       value === null ||
       !['date', 'datetime'].includes(type) ||
@@ -29,7 +31,8 @@ export function uniCalendarValidation (props) {
     return isDateDisabled(value)
   })
   const isTimeInvalidRef = computed(() => {
-    const { value, type } = props
+    const { type } = props
+    const { value } = mergedValueRef
     if (value === null || !(type !== 'datetime')) return false
     const time = new Date(value)
     const hour = time.getHours()
@@ -65,10 +68,11 @@ export function uniCalendarValidation (props) {
   }
 }
 
-export function dualCalendarValidation (props) {
+export function dualCalendarValidation (props, mergedValueRef) {
   // daterange, datetimerange
   const timePickerValidatorRef = computed(() => {
-    const { value, isTimeDisabled } = props
+    const { isTimeDisabled } = props
+    const { value } = mergedValueRef
     if (value === null || !isTimeDisabled) return [undefined, undefined]
     return [
       isTimeDisabled && isTimeDisabled(value[0], 'start', value),
@@ -102,7 +106,8 @@ export function dualCalendarValidation (props) {
     isEndSecondDisabled: toRef(isSecondDisabledRef.value, '1')
   }
   const isDateInvalidRef = computed(() => {
-    const { value, type, isDateDisabled } = props
+    const { type, isDateDisabled } = props
+    const { value } = mergedValueRef
     if (
       value === null ||
       !['daterange', 'datetimerange'].includes(type) ||
@@ -116,7 +121,8 @@ export function dualCalendarValidation (props) {
     ]
   })
   const isTimeInvalidRef = computed(() => {
-    const { value, type } = props
+    const { type } = props
+    const { value } = mergedValueRef
     if (value === null || type !== 'datetimerange') return false
     const startHours = getHours(value[0])
     const startMinutes = getMinutes(value[0])

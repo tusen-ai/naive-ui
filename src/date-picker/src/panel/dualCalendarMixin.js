@@ -97,9 +97,10 @@ export default {
      * If value is not valid, return moment(value)
      */
     valueAsDateArray () {
-      if (this.value === null || this.value === undefined) return null
-      const startMoment = new Date(this.value[0])
-      const endMoment = new Date(this.value[1])
+      const { value } = this
+      if (value === null || value === undefined) return null
+      const startMoment = new Date(value[0])
+      const endMoment = new Date(value[1])
       if (isValid(startMoment)) {
         return [startMoment, endMoment]
       } else return null

@@ -24,11 +24,12 @@ format
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | clearable | `boolean` | `false` |  |
+| default-value | `number \| [number, number] \| null` | `null` |  |
 | disabled | `boolean` | `false` |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | theme | `'light' \| 'dark' \| string` | `undefined` |  |
-| type | `'date' \| 'datetime' \| 'daterange' \|'datetimerange'` | `'date` |  |
-| value | `number` | `null` |  |
+| type | `'date' \| 'datetime' \| 'daterange' \|'datetimerange'` | `'date'` |  |
+| value | `number \| [number, number] \| null` | `undefined` |  |
 | on-blur | `() => any` | `undefined` |  |
 | on-focus | `() => any` | `undefined` |  |
 
