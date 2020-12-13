@@ -117,7 +117,7 @@
     "vfonts": "^0.0.1",
     "vooks": "^0.0.6",
     "vue": "^3.0.4",
-    "vueuc": "^0.0.1"
+    "vueuc": "0.0.2"
   },
   "sideEffects": false,
   "husky": {

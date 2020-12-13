@@ -1,5 +1,7 @@
 # Migrate from V1
+
 ## General Breaking Changes
+
 - css
   - css index `naive-ui/lib|es/styles/index.css` has been removed, do not import it any more!
 - fonts
@@ -10,6 +12,7 @@
 - `n-nimbus-icon` is removed
 
 ## Components
+
 - [x] form
   - form-item
     - new
@@ -52,6 +55,7 @@
   - new
     - `cascade` prop
     - `show-path` prop
+    - `default-value` prop
   - deprecated
     - `on-change` => `on-update:value`
 - [x] checkbox
@@ -149,13 +153,13 @@
 - [x] input-number
   - deprecate
     - `on-change` => `on-update:value`
+  - new
+    - `default-value` prop
 - [x] layout
   - layout-content, layout
-    - breaking
-      `use-native-scrollbar` => `native-scrollbar`
+    - breaking `use-native-scrollbar` => `native-scrollbar`
   - layout-sider
-    - breaking
-      `use-native-scrollbar` => `native-scrollbar`
+    - breaking `use-native-scrollbar` => `native-scrollbar`
     - deprecate
       - `on-expand` => `on-update:collapsed`
       - `on-collapse` => `on-update:collapsed`
@@ -259,6 +263,8 @@
 - [x] slider
   - deprecated
     - `on-change` => `on-update:value`
+  - new
+    - `default-value` prop
   - bug
     - vue refs https://github.com/vuejs/vue-next/issues/2283
     - drag logic
@@ -313,9 +319,9 @@
       - `as` => `tag`
 - [x] upload
 - [x] nimbus-service-layout
+
   - breaking
     - `v-model` => `v-model:value`
-
 
 - TODO
   - [x] vooks
@@ -323,8 +329,7 @@
   - [x] fonts from `vfonts`
   - [x] vite-build
   - [x] rollup-build
-    - [x] wait for new version of rollup-plugin-vue,
-      https://github.com/vuejs/rollup-plugin-vue/issues/408
+    - [x] wait for new version of rollup-plugin-vue, https://github.com/vuejs/rollup-plugin-vue/issues/408
   - tusimple theme
   - [x] clean delegate
   - [x] site production tag (bug)
@@ -334,8 +339,7 @@
   - [x] remove hollowoutable
   - [x] styleScheme, css variables 组件
     - 文档之后再说
-  - [x] use-global-style ? 感觉效果不会特别好而且还是很无谓的性能开销
-    这个问题可以之后再思考，现阶段 vue 的写法还是全局 install
+  - [x] use-global-style ? 感觉效果不会特别好而且还是很无谓的性能开销这个问题可以之后再思考，现阶段 vue 的写法还是全局 install
   - [x] dynamic-input, no value
   - [x] button, input 的 css 变量名需要修改一下
   - [x] test rollup treeshaking
@@ -360,6 +364,5 @@
   - [ ] date-picker input 的 clear 有时候不会清除，看起来是 vue 的 bug...
 
 ## Info
-https://github.com/vuejs/vue-next/issues/2549
-last cherry-picked commit: 6560ae34d71b81d584af79f810cb9dfa87119d1a
 
+https://github.com/vuejs/vue-next/issues/2549 last cherry-picked commit: 6560ae34d71b81d584af79f810cb9dfa87119d1a

@@ -150,6 +150,10 @@ export default {
   },
   mixins: [configurable, themeable, withCssr(styles), asFormItem()],
   props: {
+    defaultValue: {
+      type: [Number, Array],
+      default: null
+    },
     marks: {
       type: Object,
       default: undefined
@@ -176,7 +180,7 @@ export default {
     },
     value: {
       type: [Number, Array],
-      default: null
+      default: undefined
     },
     placement: {
       type: String,
@@ -206,6 +210,13 @@ export default {
     }
   },
   setup (props) {
+    const uncontrolledValueRef = ref(props.defaultValue)
+    const controlledValueRef = toRef(props, 'value')
+    const mergedValueRef = useMergedState(
+      controlledValueRef,
+      uncontrolledValueRef
+    )
+
     const handleActive1Ref = ref(false)
     const handleActive2Ref = ref(false)
     const handleClicked1Ref = ref(false)
@@ -234,6 +245,8 @@ export default {
       return handleClicked1Ref.value || handleClicked2Ref.value
     })
     return {
+      uncontrolledValue: uncontrolledValueRef,
+      mergedValue: mergedValueRef,
       isMounted: useIsMounted(),
       adjustedTo: useAdjustedTo(props),
       mergedShowTooltip1: mergedShowTooltip1Ref,
@@ -289,25 +302,27 @@ export default {
       }
     },
     handleValue1 () {
+      const { mergedValue, sanitizeValue } = this
       if (this.range) {
-        if (this.value) {
-          if (this.value[0] > this.value[1]) {
-            return this.justifyValue(this.value[1])
+        if (mergedValue) {
+          if (mergedValue[0] > mergedValue[1]) {
+            return sanitizeValue(mergedValue[1])
           } else {
-            return this.justifyValue(this.value[0])
+            return sanitizeValue(mergedValue[0])
           }
         }
         return null
       } else {
-        return this.justifyValue(this.value)
+        return sanitizeValue(mergedValue)
       }
     },
     handleValue2 () {
-      if (this.range && this.value) {
-        if (this.value[0] > this.value[1]) {
-          return this.justifyValue(this.value[0])
+      const { mergedValue, range } = this
+      if (range && mergedValue) {
+        if (mergedValue[0] > mergedValue[1]) {
+          return this.sanitizeValue(mergedValue[0])
         } else {
-          return this.justifyValue(this.value[1])
+          return this.sanitizeValue(mergedValue[1])
         }
       }
       return null
@@ -328,7 +343,7 @@ export default {
     }
   },
   watch: {
-    value (newValue, oldValue) {
+    mergedValue (newValue, oldValue) {
       const { changeSource } = this
       if (this.range && newValue) {
         if (oldValue && oldValue[1] !== newValue[1]) {
@@ -387,6 +402,7 @@ export default {
       } = this
       if (onChange) call(onChange, value)
       if (onUpdateValue) call(onUpdateValue, value)
+      this.uncontrolledValue = value
       nTriggerFormInput()
       nTriggerFormChange()
     },
@@ -427,7 +443,7 @@ export default {
         this.dispatchValueUpdate(newValue, { source: 'click' })
         this.handleRef1.focus()
       } else {
-        if (this.value) {
+        if (this.mergedValue) {
           if (
             Math.abs(this.handleValue1 - newValue) <
             Math.abs(this.handleValue2 - newValue)
@@ -563,7 +579,7 @@ export default {
         return closestValue
       }
     },
-    justifyValue (value) {
+    sanitizeValue (value) {
       let justifiedValue = value
       justifiedValue = Math.max(this.min, justifiedValue)
       justifiedValue = Math.min(this.max, justifiedValue)
@@ -602,7 +618,7 @@ export default {
     handleHandleMouseUp (e) {
       if (
         !this.handleRef1.contains(e.target) &&
-        !this.handleRef2.contains(e.target)
+        (this.range ? !this.handleRef2.contains(e.target) : true)
       ) {
         this.doUpdateShow(false, false)
       }
@@ -614,14 +630,15 @@ export default {
     },
     dispatchValueUpdate (value, options = { source: null }) {
       const { source } = options
-      if (this.range) {
+      const { range, sanitizeValue } = this
+      if (range) {
         if (Array.isArray(value)) {
           if (value[0] > value[1]) {
-            value = [this.justifyValue(value[1]), this.justifyValue(value[0])]
+            value = [sanitizeValue(value[1]), sanitizeValue(value[0])]
           } else {
-            value = [this.justifyValue(value[0]), this.justifyValue(value[1])]
+            value = [sanitizeValue(value[0]), sanitizeValue(value[1])]
           }
-          const { value: oldValue } = this
+          const { mergedValue: oldValue } = this
           if (
             !Array.isArray(oldValue) ||
             oldValue[0] !== value[0] ||
@@ -632,7 +649,7 @@ export default {
           }
         }
       } else {
-        const { value: oldValue, max, min } = this
+        const { mergedValue: oldValue, max, min } = this
         if (value > max) {
           if (oldValue !== max) {
             this.changeSource = source
@@ -644,7 +661,7 @@ export default {
             this.doUpdateValue(min)
           }
         } else {
-          const newValue = this.justifyValue(value)
+          const newValue = this.sanitizeValue(value)
           if (oldValue !== newValue) {
             this.changeSource = source
             this.doUpdateValue(newValue)

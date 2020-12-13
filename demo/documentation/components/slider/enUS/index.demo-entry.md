@@ -14,6 +14,7 @@ mark
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| default-value | `number \| [number, number] \| null` | `null` |  |
 | disabled | `boolean` | `false` |  |
 | marks | `{ [markValue: number]: string }` | `undefined` |  |
 | max | `number` | `100` |  |
@@ -21,5 +22,5 @@ mark
 | range | `boolean` | `false` |  |
 | step | `number` | `1` |  |
 | theme | `'light' \| 'dark' \| string` | `undefined` |  |
-| value | `number \| [number, number]` | `null` |
+| value | `number \| [number, number] \| null` | `undefined` |
 | on-update:value | `(value: number \| [number, number]) => any` | `undefined` |  |
