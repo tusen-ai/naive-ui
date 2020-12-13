@@ -17,6 +17,7 @@ filterable
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
+| default-value | `Array<string \| number> \| null` | `null` |  |
 | disabled | `boolean` | `true` |  |
 | filterable | `boolean` | `false` |  |
 | filter | `(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean` | 一个简单的标签字符串匹配函数 |  |
@@ -27,7 +28,7 @@ filterable
 | target-filter-placeholder | `string` | `undefined` |  |
 | target-title | `string` | `'目标项'` |  |
 | theme | `'light' \| 'dark' \| string` | `undefined` |  |
-| value | `Array<string \| number>` | `null` |  |
+| value | `Array<string \| number> \| null` | `undefined` |  |
 | on-update:value | `(value: Array<string \| number>) => any` | `undefined` |  |
 | virtual-scroll | `boolean` | `false` | If use virtual scroll on transfer. If set to `true` it can handles large data (and turn transfer animation off) |
 

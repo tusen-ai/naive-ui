@@ -1,19 +1,25 @@
-import { ref, computed } from 'vue'
-import { useMemo } from 'vooks'
+import { ref, computed, toRef } from 'vue'
+import { useMemo, useMergedState } from 'vooks'
 
 export function data (props) {
+  const uncontrolledValueRef = ref(props.defaultValue)
+  const controlledValueRef = toRef(props, 'value')
+  const mergedValueRef = useMergedState(
+    controlledValueRef,
+    uncontrolledValueRef
+  )
   const optMapRef = computed(() => {
     const map = new Map()
     ;(props.options || []).forEach((opt) => map.set(opt.value, opt))
     return map
   })
-  const tgtValueSetRef = computed(() => new Set(props.value || []))
+  const tgtValueSetRef = computed(() => new Set(mergedValueRef.value || []))
   const srcOptsRef = computed(() =>
     props.options.filter((option) => !tgtValueSetRef.value.has(option.value))
   )
   const tgtOptsRef = computed(() => {
     const optMap = optMapRef.value
-    return (props.value || []).map((v) => optMap.get(v))
+    return (mergedValueRef.value || []).map((v) => optMap.get(v))
   })
   const srcPatternRef = ref('')
   const tgtPatternRef = ref('')
@@ -121,6 +127,8 @@ export function data (props) {
     isInputingRef.value = false
   }
   return {
+    uncontrolledValue: uncontrolledValueRef,
+    mergedValue: mergedValueRef,
     avlSrcValueSet: avlSrcValueSetRef,
     avlTgtValueSet: avlTgtValueSetRef,
     tgtOpts: tgtOptsRef,

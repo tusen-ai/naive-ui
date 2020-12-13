@@ -303,6 +303,8 @@
     - `v-model` => `v-model:value`
   - deprecate
     - `on-change` => `on-update:value`
+  - new
+    - `default-value` prop
 - [x] tree
   - break
     - `v-model` => `v-model:selected-keys`

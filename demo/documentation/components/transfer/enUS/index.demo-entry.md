@@ -13,12 +13,11 @@ size
 filterable
 ```
 
-<!--  -->
-
 ## Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| default-value | `Array<string \| number> \| null` | `null` |  |
 | disabled | `boolean` | `true` |  |
 | filterable | `boolean` | `false` |  |
 | filter | `(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean` | A basic label string match function |  |
@@ -29,7 +28,7 @@ filterable
 | target-filter-placeholder | `string` | `undefined` |  |
 | target-title | `string` | `'Target'` |  |
 | theme | `'light' \| 'dark' \| string` | `undefined` |  |
-| value | `Array<string \| number>` | `null` |  |
+| value | `Array<string \| number> \| null` | `undefined` |  |
 | on-update:value | `(value: Array<string \| number>) => any` | `undefined` |  |
 | virtual-scroll | `boolean` | `false` | If use virtual scroll on transfer. If set to `true` it can handles large data (and turn transfer animation off) |
 

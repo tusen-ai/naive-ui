@@ -261,6 +261,10 @@ export default {
   props: {
     value: {
       type: Array,
+      default: undefined
+    },
+    defaultValue: {
+      type: Array,
       default: null
     },
     options: {
@@ -346,15 +350,16 @@ export default {
     }
   },
   methods: {
-    doUpdateValue (...args) {
+    doUpdateValue (value) {
       const {
         'onUpdate:value': onUpdateValue,
         onChange,
         nTriggerFormInput,
         nTriggerFormChange
       } = this
-      if (onUpdateValue) call(onUpdateValue, ...args)
-      if (onChange) call(onChange, ...args)
+      if (onUpdateValue) call(onUpdateValue, value)
+      if (onChange) call(onChange, value)
+      this.uncontrolledValue = value
       nTriggerFormInput()
       nTriggerFormChange()
     },
@@ -399,13 +404,13 @@ export default {
       }
     },
     handleToTgtClick () {
-      this.doUpdateValue(this.srcCheckedValues.concat(this.value || []))
+      this.doUpdateValue(this.srcCheckedValues.concat(this.mergedValue || []))
       this.srcCheckedValues = []
     },
     handleToSrcClick () {
       const tgtCheckedValueSet = new Set(this.tgtCheckedValues)
       this.doUpdateValue(
-        (this.value || []).filter((v) => !tgtCheckedValueSet.has(v))
+        (this.mergedValue || []).filter((v) => !tgtCheckedValueSet.has(v))
       )
       this.tgtCheckedValues = []
     },
