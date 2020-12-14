@@ -21,7 +21,8 @@ export default create({
       textColor1Overlay,
       textColor3Overlay,
       borderRadius,
-      fontWeightStrong
+      fontWeightStrong,
+      boxShadow2
     } = vars
     return {
       borderRadius,
@@ -38,7 +39,8 @@ export default create({
       headerTextColor: textColor1Overlay,
       contentTextColor: textColor2,
       descriptionTextColor: textColor3Overlay,
-      actionTextColor: textColor2
+      actionTextColor: textColor2,
+      boxShadow: boxShadow2
     }
   }
 })

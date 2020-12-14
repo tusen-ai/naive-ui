@@ -45,6 +45,7 @@ export default c([
             cB('scrollbar-content', {
               raw: `
                 padding-top: 12px;
+                padding-bottom: 33px;
               `
             })
           ])
@@ -57,23 +58,26 @@ export default c([
   ]),
   ({ props }) => {
     const {
-      cubicBezierEaseOut,
-      cubicBezierEaseIn,
-      cubicBezierEaseInOut
-    } = props.$global
-    const {
-      color,
-      textColor,
-      closeColor,
-      closeColorHover,
-      closeColorPressed,
-      headerTextColor,
-      contentTextColor,
-      descriptionTextColor,
-      actionTextColor,
-      borderRadius,
-      headerFontWeight
-    } = props.$local
+      $local: {
+        color,
+        textColor,
+        closeColor,
+        closeColorHover,
+        closeColorPressed,
+        headerTextColor,
+        contentTextColor,
+        descriptionTextColor,
+        actionTextColor,
+        borderRadius,
+        headerFontWeight,
+        boxShadow
+      },
+      $global: {
+        cubicBezierEaseOut,
+        cubicBezierEaseIn,
+        cubicBezierEaseInOut
+      }
+    } = props
     return [
       cB('notification', [
         c('&-transition-enter-from, &-transition-leave-to', {
@@ -122,13 +126,13 @@ export default c([
           overflow: hidden;
           flex-shrink: 0;
           margin-bottom: 12px;
-          margin-left: 12px;
+          margin-left: 28px;
           margin-right: 16px;
           padding-left: 16px;
           padding-right: 16px;
           width: 365px;
           border-radius: ${borderRadius};
-          box-shadow:  0px 2px 12px 0px rgba(0, 0, 0, 0.18);
+          box-shadow: ${boxShadow};
           box-sizing: border-box;
           opacity: 1;
         `
@@ -199,7 +203,7 @@ export default c([
               display: flex;
               align-items: center;
               justify-content: space-between;
-              margin-top: 8px;
+              margin-top: 12px;
             `
           }, [
             cE('meta', {
@@ -235,7 +239,7 @@ export default c([
           }),
           cE('content', {
             raw: `
-              line-height: 1.75;
+              line-height: 1.5;
               margin: 12px 0 0 0;
               font-family: inherit;
               white-space: pre-wrap;
