@@ -96,7 +96,7 @@ export default {
         insidePopover,
         level
       } = this
-      if (insidePopover && level === 1) return 12
+      if (insidePopover && level === 1) return 18
       const mergedRootIndent = rootIndent === undefined ? indent : rootIndent
       const menuCollapsedPaddingLeft =
         collapsedWidth / 2 - collapsedIconSize / 2

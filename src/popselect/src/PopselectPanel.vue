@@ -25,11 +25,7 @@ export default {
   },
   cssrName: 'Popselect',
   mixins: [configurable, themeable, withCssr(styles)],
-  inject: {
-    NPopselect: {
-      default: null
-    }
-  },
+  inject: ['NPopselect'],
   props: {
     multiple: {
       type: Boolean,

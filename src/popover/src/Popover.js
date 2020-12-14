@@ -80,14 +80,6 @@ export default {
       type: String,
       default: 'bottom'
     },
-    bodyClass: {
-      type: String,
-      default: undefined
-    },
-    bodyStyle: {
-      type: Object,
-      default: undefined
-    },
     x: {
       type: Number,
       default: undefined
@@ -121,9 +113,9 @@ export default {
       default: true
     },
     // private
-    zIndex: {
-      type: String,
-      default: undefined
+    padded: {
+      type: Boolean,
+      default: true
     },
     shadow: {
       type: Boolean,
@@ -307,6 +299,7 @@ export default {
           h(
             NPopoverBody,
             keep(this.$props, bodyPropKeys, {
+              ...this.$attrs,
               show: this.mergedShow
             }),
             slots

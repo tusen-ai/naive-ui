@@ -178,8 +178,6 @@
     - `scrollToTop` => `scrollTo`
     - `scrollToBottom` => `scrollTo`
 - [x] menu
-  - new
-    - `popover-body-style`
   - deprecate
     - `on-expanded-names-change` => `on-update:expanded-keys`
     - `on-select` => `on-update:value`
@@ -233,6 +231,8 @@
     - `width`
     - `min-width`
     - `manual` trigger is removed, use `null` instead
+    - `body-class`, use `class` instead
+    - `body-style`, use `style` instead
   - other
     - set default trigger to `null`
 - [x] popselect

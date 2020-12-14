@@ -46,8 +46,10 @@ export default c([
             raw: `
               background-color: ${color};
               border-radius: ${borderRadius};
-              padding: ${padding};
             `
+          }),
+          cM('padded', {
+            padding
           })
         ]),
         cB('popover-arrow-wrapper', {

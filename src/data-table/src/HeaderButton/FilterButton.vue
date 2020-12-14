@@ -3,7 +3,7 @@
     v-model:show="showPopover"
     trigger="click"
     :theme="NDataTable.mergedTheme"
-    :body-style="popoverBodyStyle"
+    :padded="false"
   >
     <template #trigger>
       <render-filter
@@ -75,8 +75,7 @@ export default {
   },
   data () {
     return {
-      showPopover: false,
-      popoverBodyStyle: { padding: 0 }
+      showPopover: false
     }
   },
   computed: {

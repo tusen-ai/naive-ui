@@ -8,7 +8,9 @@ export default {
     default: 'default'
   },
   content: {
-    type: [String, Function],
+    validator () {
+      return true
+    },
     default: undefined
   },
   closable: {

@@ -2,30 +2,35 @@ import { c, cTB, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 import fadeInHeightExpandTransition from '../../../_styles/transitions/fade-in-height-expand'
 
 export default c([
+  cTB('menu-popover', {
+    minWidth: '180px'
+  }),
   ({ props }) => {
     const {
-      itemTextColor,
-      itemTextColorHover,
-      itemTextColorChildSelected,
-      groupTextColor,
-      borderColorHorizontal,
-      itemIconColor,
-      itemIconColorHover,
-      itemIconColorCollapsed,
-      itemIconColorSelected,
-      itemIconColorChildSelected,
-      itemColorMatch,
-      itemTextColorSelected,
-      itemExtraTextColor,
-      itemExtraTextColorHover,
-      itemExtraTextColorSelected,
-      itemExtraTextColorChildSelected,
-      submenuArrowColor,
-      borderRadius
-    } = props.$local
-    const {
-      cubicBezierEaseInOut
-    } = props.$global
+      $local: {
+        itemTextColor,
+        itemTextColorHover,
+        itemTextColorChildSelected,
+        groupTextColor,
+        borderColorHorizontal,
+        itemIconColor,
+        itemIconColorHover,
+        itemIconColorCollapsed,
+        itemIconColorSelected,
+        itemIconColorChildSelected,
+        itemColorMatch,
+        itemTextColorSelected,
+        itemExtraTextColor,
+        itemExtraTextColorHover,
+        itemExtraTextColorSelected,
+        itemExtraTextColorChildSelected,
+        submenuArrowColor,
+        borderRadius
+      },
+      $global: {
+        cubicBezierEaseInOut
+      }
+    } = props
     return cTB('menu', {
       color: itemTextColor,
       overflow: 'hidden',

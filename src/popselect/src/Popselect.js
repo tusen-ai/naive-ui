@@ -1,4 +1,4 @@
-import { h } from 'vue'
+import { h, ref, provide, getCurrentInstance } from 'vue'
 import { NPopover } from '../../popover'
 import NPopselectPanel from './PopselectPanel.vue'
 import { omit, keep } from '../../_utils'
@@ -7,11 +7,6 @@ const NPopselectPanelPropsKey = Object.keys(NPopselectPanel.props)
 
 export default {
   name: 'Popselect',
-  provide () {
-    return {
-      NPopselect: this
-    }
-  },
   props: {
     ...NPopover.props,
     trigger: {
@@ -24,23 +19,26 @@ export default {
     },
     ...NPopselectPanel.props
   },
-  methods: {
-    syncPosition () {
-      this.$refs.popover.syncPosition()
-    },
-    setShow (value) {
-      this.$refs.popover.setShow(value)
+  setup () {
+    provide('NPopselect', getCurrentInstance().proxy)
+    const popoverRef = ref(null)
+    return {
+      popoverRef,
+      syncPosition () {
+        popoverRef.value.syncPosition?.()
+      },
+      setShow (value) {
+        popoverRef.value.setShow?.(value)
+      }
     }
   },
   render () {
     return h(
       NPopover,
       omit(this.$props, NPopselectPanelPropsKey, {
-        bodyStyle: {
-          padding: 0
-        },
-        ref: 'popover',
-        bodyClass: 'n-popselect'
+        raw: true,
+        ref: 'popoverRef',
+        class: 'n-popselect'
       }),
       {
         trigger: this.$slots.default,

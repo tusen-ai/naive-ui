@@ -73,15 +73,6 @@ export default {
       type: Boolean,
       default: false
     },
-    popoverBodyStyle: {
-      type: Object,
-      default () {
-        return {
-          padding: '2px 4px',
-          minWidth: '180px'
-        }
-      }
-    },
     'onUpdate:expandedKeys': {
       type: Function,
       default: () => {}

@@ -24,8 +24,6 @@ manual-position
 | --- | --- | --- | --- |
 | animated | `boolean` | `true` |  |
 | arrow-style | `Object` | `undefined` |  |
-| body-class | `string` | `undefined` |  |
-| body-style | `Object` | `undefined` |  |
 | delay | `number` | `200` | 悬浮触发弹出信息的延迟 |
 | disabled | `boolean` | `false` | 是否不能激活弹出信息 |
 | display-directive | `'if' \| 'show'` | `'if'` | 条件渲染使用的指令，`if` 会让内容被使用 `v-if` 渲染，`show` 会让内容被使用 `v-show` 渲染 |

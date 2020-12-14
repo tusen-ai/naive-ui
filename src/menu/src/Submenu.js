@@ -44,7 +44,6 @@ export default {
       selectedInside: useMemo(() => {
         return activePathRef.value.includes(props.internalKey)
       }),
-      popoverBodyStyle: useInjectionRef('NMenu', 'popoverBodyStyle'),
       popoverShow: ref(false)
     }
   },
@@ -138,11 +137,12 @@ export default {
       ? h(
         NPopover,
         {
+          class: 'n-menu-popover',
           trigger: 'hover',
           disabled: !this.popoverEnabled,
-          bodyStyle: this.popoverBodyStyle,
           placement: this.popoverPlacement,
           showArrow: false,
+          padded: false,
           'onUpdate:show': this.handlePopoverShowChange
         },
         {

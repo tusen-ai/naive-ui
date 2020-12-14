@@ -24,8 +24,6 @@ manual-position
 | --- | --- | --- | --- |
 | animated | `boolean` | `true` |  |
 | arrow-style | `Object` | `undefined` |  |
-| body-class | `string` | `undefined` |  |
-| body-style | `Object` | `undefined` |  |
 | delay | `number` | `200` | Popover showing delay when trigger is `hover` |
 | disabled | `boolean` | `false` | Whether the popover can't be activated. |
 | display-directive | `'if' \| 'show'` | `'if'` | The conditionally render directive to show popover content. `if` means using `v-if` to render content, `show` means using `v-show` to render content. |

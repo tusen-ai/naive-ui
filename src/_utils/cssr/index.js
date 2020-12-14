@@ -30,7 +30,7 @@ function insideFormItem (status, style) {
 }
 
 function insideModal (style) {
-  return c(`${prefix}modal-body-wrapper, ${prefix}drawer`, [style])
+  return c(`${prefix}modal, ${prefix}drawer`, [style])
 }
 
 function cTB (selector, ...rest) {

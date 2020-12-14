@@ -39,14 +39,6 @@ export default {
       type: Boolean,
       default: undefined
     },
-    bodyClass: {
-      type: String,
-      default: undefined
-    },
-    bodyStyle: {
-      type: Object,
-      default: undefined
-    },
     arrowStyle: {
       type: Object,
       default: undefined
@@ -73,6 +65,10 @@ export default {
     },
     // private
     shadow: {
+      type: Boolean,
+      default: undefined
+    },
+    padded: {
       type: Boolean,
       default: undefined
     },
@@ -139,7 +135,7 @@ export default {
         width: formatLength(this.width),
         maxWidth: formatLength(this.maxWidth),
         minWidth: formatLength(this.minWidth),
-        ...this.bodyStyle
+        ...this.$attrs.style
       }
     }
   },
@@ -185,15 +181,17 @@ export default {
           h(
             'div',
             {
+              ...this.$attrs,
               class: [
                 'n-popover',
                 {
                   [`n-${this.mergedTheme}-theme`]: this.mergedTheme,
                   'n-popover--no-arrow': !this.showArrow,
                   'n-popover--shadow': this.shadow,
-                  [this.bodyClass]: this.bodyClass,
+                  'n-popover--padded': this.padded,
                   'n-popover--raw': this.raw
-                }
+                },
+                this.$attrs.class
               ],
               ref: 'body',
               style: this.style,

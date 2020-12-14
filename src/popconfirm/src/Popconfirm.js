@@ -51,7 +51,7 @@ export default {
       NPopover,
       {
         ...omit(props, panelProps),
-        containerClass: 'n-popconfirm',
+        class: 'n-popconfirm',
         ref: 'popoverRef'
       },
       {
