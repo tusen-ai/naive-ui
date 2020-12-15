@@ -11,9 +11,10 @@
         <div v-if="show" class="n-drawer-mask" @click="handleMaskClick" />
       </transition>
       <n-drawer-body-wrapper
+        v-bind="$attrs"
+        :class="[$attrs.class, drawerClass]"
+        :style="[mergedBodyStyle, $attrs.style]"
         :placement="placement"
-        :body-style="mergedBodyStyle"
-        :body-class="compitableBodyClass"
         :scrollbar-props="scrollbarProps"
         :show="show"
         :display-directive="displayDirective"
@@ -29,7 +30,7 @@
 <script>
 import { VLazyTeleport } from 'vueuc'
 import { zindexable } from 'vdirs'
-import { useCompitable, useIsMounted } from 'vooks'
+import { useIsMounted } from 'vooks'
 import { configurable, themeable, withCssr } from '../../_mixins'
 import { warn, formatLength } from '../../_utils'
 import NDrawerBodyWrapper from './DrawerBodyWrapper.vue'
@@ -51,6 +52,7 @@ export default {
       NModal: null
     }
   },
+  inheritAttrs: false,
   props: {
     show: {
       type: Boolean,
@@ -73,14 +75,6 @@ export default {
     maskClosable: {
       type: Boolean,
       default: true
-    },
-    bodyClass: {
-      type: String,
-      default: undefined
-    },
-    bodyStyle: {
-      type: Object,
-      default: undefined
     },
     to: {
       type: [String, Object],
@@ -156,8 +150,6 @@ export default {
   },
   setup (props) {
     return {
-      compitableBodyClass: useCompitable(props, ['drawerClass', 'bodyClass']),
-      compitableBodyStyle: useCompitable(props, ['drawerStyle', 'bodyStyle']),
       isMounted: useIsMounted()
     }
   },
@@ -180,7 +172,7 @@ export default {
       return {
         width: this.styleWidth,
         height: this.styleHeight,
-        ...this.compitableBodyStyle
+        ...this.drawerStyle
       }
     }
   },

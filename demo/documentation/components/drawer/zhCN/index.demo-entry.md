@@ -18,8 +18,6 @@ dark-4-debug
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| body-class | `string` | `undefined` |  |
-| body-style | `Object` | `undefined` |  |
 | height | `number \| string` | `251` | 在位置是 `top` 和 `bottom` 时生效 |
 | mask-closable | `boolean` | `true` | 点击遮罩时是否发出 `update:show` 事件 |
 | native-scrollbar | `boolean` | `true` |  |

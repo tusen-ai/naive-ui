@@ -13,15 +13,15 @@
         v-show="show"
         ref="bodyRef"
         class="n-drawer"
+        v-bind="$attrs"
         :class="[
-          bodyClass,
+          $attrs.class,
           `n-drawer--${placement}-placement`,
           {
             [`n-drawer--native-scrollbar`]: nativeScrollbar,
             [`n-${theme}-theme`]: theme
           }
         ]"
-        :style="bodyStyle"
       >
         <template v-if="nativeScrollbar">
           <slot />
@@ -58,16 +58,9 @@ export default {
       default: null
     }
   },
+  inheritAttrs: false,
   props: {
     theme: {
-      type: String,
-      default: undefined
-    },
-    bodyStyle: {
-      type: Object,
-      default: undefined
-    },
-    bodyClass: {
       type: String,
       default: undefined
     },

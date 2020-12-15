@@ -14,8 +14,6 @@ target
 
 | Name | Parameters | Default | Description |
 | --- | --- | --- | --- |
-| body-class | `string` | `undefined` |  |
-| body-style | `Object` | `undefined` |  |
 | height | `number \| string` | `251` | Works when placement is `top` and `bottom`. |
 | native-scrollbar | `boolean` | `true` |  |
 | mask-closable | `boolean` | `true` | Whether to emit `hide` event when click mask. |
