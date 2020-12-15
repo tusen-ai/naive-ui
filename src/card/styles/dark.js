@@ -8,9 +8,10 @@ export default create({
   name: 'Card',
   peer: [baseDark, iconDark],
   getLocalVars (vars) {
-    const { borderRadius } = vars
+    const { borderRadius, lineHeight } = vars
     return {
       ...commonVariables,
+      lineHeight,
       color: vars.cardColor,
       textColor: vars.textColor2Overlay,
       titleTextColor: vars.textColor1Overlay,

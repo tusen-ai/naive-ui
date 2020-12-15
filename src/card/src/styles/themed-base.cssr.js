@@ -1,9 +1,13 @@
-import { c, cTB, cB, cE, cM } from '../../../_utils/cssr'
+import { c, cTB, cB, cE, cM, createKey } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
-    const base = props.$global
-    const cubicBezierEaseInOut = base.cubicBezierEaseInOut
+    const {
+      $local,
+      $global: {
+        cubicBezierEaseInOut
+      }
+    } = props
     const {
       color,
       textColor,
@@ -14,8 +18,9 @@ export default c([
       borderRadius,
       closeColor,
       closeColorHover,
-      closeColorPressed
-    } = props.$local
+      closeColorPressed,
+      lineHeight
+    } = $local
     return cTB(
       'card',
       {
@@ -35,6 +40,79 @@ export default c([
         `
       },
       [
+        ['small', 'medium', 'large', 'huge'].map(size => {
+          const {
+            [createKey('marginBottom', size)]: marginBottom,
+            [createKey('marginLeft', size)]: marginLeft,
+            [createKey('marginTop', size)]: marginTop,
+            [createKey('headerFontSize', size)]: headerFontSize,
+            [createKey('fontSize', size)]: fontSize
+          } = $local
+          return cM(`${size}-size`, {
+          }, [
+            cM('content-segmented', [
+              c('>', [
+                cE('content', {
+                  paddingTop: marginBottom
+                })
+              ])
+            ]),
+            cM('content-soft-segmented', [
+              c('>', [
+                cE('content', {
+                  raw: `
+                    margin: 0 ${marginLeft};
+                    padding: ${marginBottom} 0;
+                  `
+                })
+              ])
+            ]),
+            cM('footer-segmented', [
+              c('>', [
+                cE('footer', {
+                  paddingTop: marginBottom
+                })
+              ])
+            ]),
+            cM('footer-soft-segmented', [
+              c('>', [
+                cE('footer', {
+                  raw: `
+                    padding: ${marginBottom} 0;
+                    margin: 0 ${marginLeft};
+                  `
+                })
+              ])
+            ]),
+            c('>', [
+              cB('card-header', {
+                padding: `${marginTop} ${marginLeft} ${marginBottom} ${marginLeft}`
+              }, [
+                cE('main', {
+                  fontSize: headerFontSize
+                }),
+                cE('extra', {
+                  fontSize
+                })
+              ]),
+              cE('content, footer', {
+                padding: `0 ${marginLeft} ${marginBottom} ${marginLeft}`,
+                fontSize
+              }, [
+                c('&:first-child', {
+                  paddingTop: marginBottom
+                })
+              ]),
+              cE('action', {
+                raw: `
+                  background-color: ${actionColor};
+                  padding: ${marginBottom} ${marginLeft};
+                  font-size: ${fontSize};
+                `
+              })
+            ])
+          ])
+        }),
         cB('card-cover', {
           raw: `
             overflow: hidden;
@@ -88,15 +166,13 @@ export default c([
           cE('content', {
             raw: `
               box-sizing: border-box;
-              line-height: 1.75;
-              font-size: 14px;
+              line-height: ${lineHeight};
             `
           }),
           cE('footer', {
             raw: `
               box-sizing: border-box;
-              line-height: 1.75;
-              font-size: 14px;
+              line-height: ${lineHeight};
             `
           })
         ]),
@@ -120,7 +196,6 @@ export default c([
             cE('extra', {
               raw: `
                 font-weight: 400;
-                font-size: 14px;
                 transition: color .3s ${cubicBezierEaseInOut};
                 color: ${textColor};
               `
@@ -146,8 +221,7 @@ export default c([
               transition:
                 background-color .3s ${cubicBezierEaseInOut},
                 border-color .3s ${cubicBezierEaseInOut};
-              line-height: 1.75;
-              font-size: 14px;
+              line-height: ${lineHeight};
               background-clip: padding-box;
               background-color: ${actionColor};
             `
