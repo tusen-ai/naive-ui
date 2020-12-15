@@ -11,15 +11,11 @@
       <!--CONTENT_SLOT-->
     </template>
     <template #demo>
-      <div
-        class="demo-card__view"
-      >
-      <!--DEMO_SLOT-->
+      <div class="demo-card__view">
+        <!--DEMO_SLOT-->
       </div>
     </template>
-    <template
-      #code
-    >
+    <template #code>
       <!--CODE_SLOT-->
     </template>
   </component-demo>
@@ -29,8 +25,4 @@
 /** SCRIPT_SLOT */
 </script>
 
-<style scoped lang="scss">
-.demo-card__view, .naive-ui-doc {
-  /**STYLE_SLOT*/
-}
-</style>
+<!--STYLE_SLOT-->

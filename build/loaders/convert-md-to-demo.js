@@ -6,7 +6,9 @@ const mdRenderer = createRenderer()
 const codeRenderer = createRenderer(false)
 // const prettier = require('prettier')
 
-const demoBlock = fs.readFileSync(path.resolve(__dirname, 'ComponentDemoTemplate.vue')).toString()
+const demoBlock = fs
+  .readFileSync(path.resolve(__dirname, 'ComponentDemoTemplate.vue'))
+  .toString()
 
 function getPartsOfDemo (tokens) {
   let template = null
@@ -19,11 +21,20 @@ function getPartsOfDemo (tokens) {
   for (const token of tokens) {
     if (token.type === 'heading' && token.depth === 1) {
       title = token.text
-    } else if (token.type === 'code' && (token.lang === 'template' || token.lang === 'html')) {
+    } else if (
+      token.type === 'code' &&
+      (token.lang === 'template' || token.lang === 'html')
+    ) {
       template = token.text
-    } else if (token.type === 'code' && (token.lang === 'script' || token.lang === 'js')) {
+    } else if (
+      token.type === 'code' &&
+      (token.lang === 'script' || token.lang === 'js')
+    ) {
       script = token.text
-    } else if (token.type === 'code' && (token.lang === 'style' || token.lang === 'css')) {
+    } else if (
+      token.type === 'code' &&
+      (token.lang === 'style' || token.lang === 'css')
+    ) {
       style = token.text
     } else {
       contentTokens.push(token)
@@ -63,13 +74,39 @@ ${parts.script}
 ${parts.style}
 </style>`
   }
-  mergedParts.code = marked(`\`\`\`html
+  mergedParts.code = marked(
+    `\`\`\`html
 ${mergedParts.code}
-\`\`\``, {
-    renderer: codeRenderer
-  })
+\`\`\``,
+    {
+      renderer: codeRenderer
+    }
+  )
   // console.log(mergedParts.code)
   return mergedParts
+}
+
+const cssRuleRegex = /[^{\n]*\{[^}]*\}/g
+
+// simulate scss style
+// to remove dep of sass
+// xxx {
+//   mystyle
+// }
+function genStyle (sourceStyle) {
+  const rules = sourceStyle.match(cssRuleRegex)
+  if (rules === null) return null
+  return (
+    '<style scoped>\n' +
+    rules
+      .map((rule) => {
+        return `.demo-card__view ${rule}
+
+.naive-ui-doc ${rule}`
+      })
+      .join('\n') +
+    '</style>'
+  )
 }
 
 function genVueComponent (parts, fileName, relativeUrl, noRunning = false) {
@@ -79,7 +116,7 @@ function genVueComponent (parts, fileName, relativeUrl, noRunning = false) {
   const contentReg = /<!--CONTENT_SLOT-->/
   const codeReg = /<!--CODE_SLOT-->/
   const scriptReg = /\/\*\*\sSCRIPT_SLOT\s\*\//
-  const styleReg = /\/\*\*STYLE_SLOT\*\//g
+  const styleReg = /<!--STYLE_SLOT-->/
   const demoReg = /<!--DEMO_SLOT-->/
   let src = demoBlock
   src = src.replace(demoFileNameReg, fileName)
@@ -99,7 +136,10 @@ function genVueComponent (parts, fileName, relativeUrl, noRunning = false) {
     src = src.replace(scriptReg, 'export default {}')
   }
   if (parts.style) {
-    src = src.replace(styleReg, parts.style)
+    const style = genStyle(parts.style)
+    if (style !== null) {
+      src = src.replace(styleReg, style)
+    }
   }
   if (parts.template) {
     src = src.replace(demoReg, parts.template)
@@ -113,16 +153,18 @@ function getFileName (resourcePath) {
   return [fileNameWithExtension.split('.')[0], fileNameWithExtension]
 }
 
-function convertMd2Demo (text, {
-  resourcePath,
-  relativeUrl
-}) {
+function convertMd2Demo (text, { resourcePath, relativeUrl }) {
   const noRunning = /<!--no-running-->/.test(text)
   const tokens = marked.lexer(text)
   const parts = getPartsOfDemo(tokens)
   const mergedParts = mergeParts(parts)
   const [fileName] = getFileName(resourcePath)
-  const vueComponent = genVueComponent(mergedParts, fileName, relativeUrl, noRunning)
+  const vueComponent = genVueComponent(
+    mergedParts,
+    fileName,
+    relativeUrl,
+    noRunning
+  )
   return vueComponent
 }
 
