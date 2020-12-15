@@ -9,10 +9,14 @@ import {
   createKey,
   insideFormItem
 } from '../../../../_utils/cssr'
+import { formatLength } from '../../../../_utils'
 
 export default c([
   ({ props }) => {
-    const { $local } = props
+    const {
+      $local,
+      $global: { cubicBezierEaseInOut }
+    } = props
     const {
       borderRadius,
       color,
@@ -32,7 +36,6 @@ export default c([
       borderHover,
       borderActive
     } = $local
-    const { cubicBezierEaseInOut } = props.$global
     return cTB(
       'base-selection',
       {
@@ -48,6 +51,42 @@ export default c([
         borderRadius
       },
       [
+        ['small', 'medium', 'large'].map((size) => {
+          const {
+            [createKey('height', size)]: height,
+            [createKey('fontSize', size)]: fontSize
+          } = $local
+          return cM(
+            size + '-size',
+            {
+              minHeight: height,
+              lineHeight: height,
+              fontSize
+            },
+            [
+              cE('placeholder', {
+                height,
+                lineHeight: height
+              }),
+              cB('base-selection-label', {
+                height,
+                lineHeight: height
+              }),
+              cB(
+                'base-selection-tags',
+                {
+                  minHeight: height
+                },
+                [
+                  cB('base-selection-input-tag', {
+                    height: formatLength(height, { c: 1, offset: -6 }),
+                    lineHeight: formatLength(height, { c: 1, offset: -6 })
+                  })
+                ]
+              )
+            ]
+          )
+        }),
         cM('bordered', [
           cE('border', {
             border

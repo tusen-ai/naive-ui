@@ -1,8 +1,12 @@
-import { cTB, c, cB, cE, cM, cNotM } from '../../../../_utils/cssr'
+import { cTB, c, cB, cE, cM, cNotM, createKey } from '../../../../_utils/cssr'
+import { depx, pxfy } from 'seemly'
 
 export default c([
   ({ props }) => {
-    const { cubicBezierEaseInOut } = props.$global
+    const {
+      $global: { cubicBezierEaseInOut },
+      $local
+    } = props
     const {
       borderRadius,
       color,
@@ -22,21 +26,54 @@ export default c([
       'base-select-menu',
       {
         raw: `
-        outline: none;
-        margin-top: 4px;
-        margin-bottom: 4px;
-        z-index: 0;
-        position: relative;
-        border-radius: ${borderRadius};
-        transition:
-          background-color .3s ${cubicBezierEaseInOut},
-          box-shadow .3s ${cubicBezierEaseInOut};
-        overflow: hidden;
-        background-color: ${color};
-        box-shadow: ${boxShadow};
-      `
+          outline: none;
+          margin-top: 4px;
+          margin-bottom: 4px;
+          z-index: 0;
+          position: relative;
+          border-radius: ${borderRadius};
+          transition:
+            background-color .3s ${cubicBezierEaseInOut},
+            box-shadow .3s ${cubicBezierEaseInOut};
+          overflow: hidden;
+          background-color: ${color};
+          box-shadow: ${boxShadow};
+        `
       },
       [
+        ['small', 'medium', 'large'].map((size) => {
+          const {
+            [createKey('optionFontSize', size)]: fontSize,
+            [createKey('optionHeight', size)]: optionHeight,
+            [createKey('padding', size)]: padding
+          } = $local
+          const groupHeaderFontSize = pxfy(depx(fontSize) - 2)
+          const menuHeight = pxfy(depx(optionHeight) * 7.6)
+          return cM(
+            size + '-size',
+            {
+              padding
+            },
+            [
+              cB('scrollbar', {
+                maxHeight: menuHeight
+              }),
+              cB('virtual-list', {
+                maxHeight: menuHeight
+              }),
+              cB('base-select-option', {
+                height: optionHeight,
+                lineHeight: optionHeight,
+                fontSize: fontSize
+              }),
+              cB('base-select-group-header', {
+                height: optionHeight,
+                lineHeight: optionHeight,
+                fontSize: groupHeaderFontSize
+              })
+            ]
+          )
+        }),
         cB('base-select-menu-option-wrapper', {
           position: 'relative',
           width: '100%'
@@ -61,20 +98,20 @@ export default c([
           'base-select-option',
           {
             raw: `
-          cursor: pointer;
-          position: relative;
-          padding: 0 14px;
-          white-space: nowrap;
-          transition:
-            background-color .3s ${cubicBezierEaseInOut},
-            color .3s ${cubicBezierEaseInOut},
-            opacity .3s ${cubicBezierEaseInOut};
-          text-overflow: ellipsis;
-          overflow: hidden;
-          box-sizing: border-box;
-          color: ${optionTextColor};
-          opacity: 1;
-        `
+              cursor: pointer;
+              position: relative;
+              padding: 0 14px;
+              white-space: nowrap;
+              transition:
+                background-color .3s ${cubicBezierEaseInOut},
+                color .3s ${cubicBezierEaseInOut},
+                opacity .3s ${cubicBezierEaseInOut};
+              text-overflow: ellipsis;
+              overflow: hidden;
+              box-sizing: border-box;
+              color: ${optionTextColor};
+              opacity: 1;
+            `
           },
           [
             c('&:active', {
@@ -121,20 +158,20 @@ export default c([
               ]),
               c('&::after', {
                 raw: `
-              content: '';
-              height: 6px;
-              width: 3px;
-              position: absolute;
-              right: 14px;
-              transform: rotate(45deg) scale(.5);
-              top: calc(50% - 4px);
-              opacity: 0;
-              transition:
-                transform .3s ${cubicBezierEaseInOut},
-                opacity .3s ${cubicBezierEaseInOut};
-              border-right: 1px solid ${optionCheckColor};
-              border-bottom: 1px solid ${optionCheckColor};
-            `
+                  content: '';
+                  height: 6px;
+                  width: 3px;
+                  position: absolute;
+                  right: 14px;
+                  transform: rotate(45deg) scale(.5);
+                  top: calc(50% - 4px);
+                  opacity: 0;
+                  transition:
+                    transform .3s ${cubicBezierEaseInOut},
+                    opacity .3s ${cubicBezierEaseInOut};
+                  border-right: 1px solid ${optionCheckColor};
+                  border-bottom: 1px solid ${optionCheckColor};
+                `
               })
             ]
           )
