@@ -3,11 +3,13 @@ import { c, cTB } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      cubicBezierEaseInOut
-    } = props.$global
-    const {
-      aTextColor
-    } = props.$local
+      $global: {
+        cubicBezierEaseInOut
+      },
+      $local: {
+        aTextColor
+      }
+    } = props
     return cTB('a', {
       cursor: 'pointer',
       transition: `

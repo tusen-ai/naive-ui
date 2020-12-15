@@ -3,17 +3,19 @@ import { c, cTB, cM } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      cubicBezierEaseInOut
-    } = props.$global
-    const {
-      pFontSize,
-      pLineHeight,
-      pMargin,
-      pTextColor,
-      pTextColor1Depth,
-      pTextColor2Depth,
-      pTextColor3Depth
-    } = props.$local
+      $local: {
+        pFontSize,
+        pLineHeight,
+        pMargin,
+        pTextColor,
+        pTextColor1Depth,
+        pTextColor2Depth,
+        pTextColor3Depth
+      },
+      $global: {
+        cubicBezierEaseInOut
+      }
+    } = props
     return cTB('p', {
       raw: `
         box-sizing: border-box;

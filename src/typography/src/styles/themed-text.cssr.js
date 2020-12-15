@@ -3,26 +3,28 @@ import { c, cTB, cM } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      cubicBezierEaseInOut,
-      fontWeightStrong,
-      fontFamilyMono
-    } = props.$global
-    const {
-      textColor,
-      textColorStrong,
-      textColor1Depth,
-      textColor2Depth,
-      textColor3Depth,
-      textColor1,
-      textColorInfo,
-      textColorSuccess,
-      textColorWarning,
-      textColorError,
-      codeBorderRadius,
-      codeTextColor,
-      codeColor,
-      codeBorderColor
-    } = props.$local
+      $global: {
+        cubicBezierEaseInOut,
+        fontWeightStrong,
+        fontFamilyMono
+      },
+      $local: {
+        textColor,
+        textColorStrong,
+        textColor1Depth,
+        textColor2Depth,
+        textColor3Depth,
+        textColor1,
+        textColorInfo,
+        textColorSuccess,
+        textColorWarning,
+        textColorError,
+        codeBorderRadius,
+        codeTextColor,
+        codeColor,
+        codeBorderColor
+      }
+    } = props
     return cTB('text', {
       transition: `color .3s ${cubicBezierEaseInOut}`,
       color: textColor

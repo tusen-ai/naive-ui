@@ -11,21 +11,24 @@ export default c([
 
 function headerStyle (level, props) {
   const {
-    $local
+    $local,
+    $global: {
+      cubicBezierEaseInOut
+    }
   } = props
   const {
-    cubicBezierEaseInOut
-  } = props.$global
-  const {
     headerTextColor,
-    headerFontWeight
+    headerFontWeight,
+    [createKey('headerBarWidth', level)]: barWidth,
+    [createKey('headerFontSize', level)]: fontSize,
+    [createKey('headerMargin', level)]: margin,
+    [createKey('headerPrefixWidth', level)]: prefixWidth
   } = $local
-  const barWidth = $local[createKey('headerBarWidth', level)]
   const barRadius = pxfy(depx(barWidth) / 2)
   return cTB('h' + level, {
-    fontSize: $local[createKey('headerFontSize', level)],
+    fontSize,
     fontWeight: headerFontWeight,
-    margin: $local[createKey('headerMargin', level)],
+    margin,
     transition: `color .3s ${cubicBezierEaseInOut}`,
     color: headerTextColor
   }, [
@@ -34,13 +37,13 @@ function headerStyle (level, props) {
     }),
     cM('prefix-bar', {
       position: 'relative',
-      paddingLeft: $local[createKey('headerPrefixWidth', level)]
+      paddingLeft: prefixWidth
     }, [
       cM('align-text', {
         paddingLeft: 0
       }, [
         c('&::before', {
-          left: '-' + $local[createKey('headerPrefixWidth', level)]
+          left: '-' + prefixWidth
         })
       ]),
       c('&::before', {

@@ -3,16 +3,18 @@ import { c, cTB, cB, cM } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      cubicBezierEaseInOut
-    } = props.$global
-    const {
-      olPadding,
-      ulPadding,
-      liFontSize,
-      liMargin,
-      liLineHeight,
-      liTextColor
-    } = props.$local
+      $local: {
+        olPadding,
+        ulPadding,
+        liFontSize,
+        liMargin,
+        liLineHeight,
+        liTextColor
+      },
+      $global: {
+        cubicBezierEaseInOut
+      }
+    } = props
     return [
       cTB('ol', {
         fontSize: liFontSize,

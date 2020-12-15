@@ -2,14 +2,17 @@ import { c, cTB, cM } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
-    const { cubicBezierEaseInOut } = props.$global
     const {
-      blockquotePrefixColor,
-      blockquoteTextColor
-    } = props.$local
+      $global: { cubicBezierEaseInOut },
+      $local: {
+        blockquotePrefixColor,
+        blockquoteTextColor,
+        blockquoteLineHeight
+      }
+    } = props
     return cTB('blockquote', {
       raw: `
-        line-height: 1.75;
+        line-height: ${blockquoteLineHeight};
         margin: 0;
         margin-top: 12px;
         margin-bottom: 12px;
