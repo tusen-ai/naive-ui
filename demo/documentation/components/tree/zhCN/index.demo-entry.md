@@ -18,7 +18,7 @@ drag-drop-debug
 ## Props
 
 | 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- |
 | block-node | `boolean` | `false` |  |
 | cancelable | `boolean` | `false` | 选中之后是否允许取消 |
 | cascade | `boolean` | `false` | 是否关联选项 |
@@ -41,10 +41,13 @@ drag-drop-debug
 | on-update:selected-keys | `(keys: Array<string \| number>) => any` | `undefined` |  |
 | on-update:expanded-keys | `(keys: Array<string \| number>) => any` | `undefined` |  |
 | on-update:checked-keys | `(keys: Array<string \| number>) => any` | `undefined` |  |
-| <!-- | draggable | `boolean` | `false` |  | --> |
-| <!-- | expand-on-dragenter | `boolean` | `true` | 是否在拖入后展开节点 | --> |
-| <!-- | dragstart | `(data: { node: TreeNode, event: DragEvent })` |  |
+
+<!--
+| draggable | `boolean` | `false` |  |
+| expand-on-dragenter | `boolean` | `true` | 是否在拖入后展开节点 | |
+| dragstart | `(data: { node: TreeNode, event: DragEvent })` |  |
 | dragend | `(data: { node: TreeNode, event: DragEvent })` |  |
 | dragenter | `(data: { node: TreeNode, event: DragEvent })` |  |
 | dragleave | `(data: { node: TreeNode, event: DragEvent })` |  |
-| drop | `(data: { node: TreeNode, dragNode: TreeNode, dropPosition: 'top' \| 'center' \| 'bottom', event: DragEvent })` |  | --> |
+| drop | `(data: { node: TreeNode, dragNode: TreeNode, dropPosition: 'top' \| 'center' \| 'bottom', event: DragEvent })` |  |
+-->

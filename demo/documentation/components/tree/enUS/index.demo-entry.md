@@ -18,7 +18,7 @@ drag-drop-debug
 ## Props
 
 | Name | Type | default | Description |
-| --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- |
 | block-node | `boolean` | `false` |  |
 | cancelable | `boolean` | `false` | Whether node's select status can be cancelled. |
 | cascade | `boolean` | `false` | Whether to cascade checkboxes. |
@@ -41,10 +41,15 @@ drag-drop-debug
 | on-update:selected-keys | `(keys: Array<string \| number>) => any` | `undefined` |  |
 | on-update:expanded-keys | `(keys: Array<string \| number>) => any` | `undefined` |  |
 | on-update:checked-keys | `(keys: Array<string \| number>) => any` | `undefined` |  |
-| <!-- | draggable | `boolean` | `false` |  | --> |
-| <!-- | expand-on-dragenter | `boolean` | `true` | Whether to expand nodes after dragenter | --> |
-| <!-- | dragstart | `(data: { node: TreeNode, event: DragEvent })` |  |
+
+<!--
+
+| draggable | `boolean` | `false` |  |
+| expand-on-dragenter | `boolean` | `true` | Whether to expand nodes after dragenter |
+| dragstart | `(data: { node: TreeNode, event: DragEvent })` |  |
 | dragend | `(data: { node: TreeNode, event: DragEvent })` |  |
 | dragenter | `(data: { node: TreeNode, event: DragEvent })` |  |
 | dragleave | `(data: { node: TreeNode, event: DragEvent })` |  |
-| drop | `(data: { node: TreeNode, dragNode: TreeNode, dropPosition: 'top' \| 'center' \| 'bottom', event: DragEvent })` |  | --> |
+| drop | `(data: { node: TreeNode, dragNode: TreeNode, dropPosition: 'top' \| 'center' \| 'bottom', event: DragEvent })` |  |
+
+-->
