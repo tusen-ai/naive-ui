@@ -6,12 +6,6 @@
 <n-button @click="handleClick"> 成功 </n-button>
 ```
 
-```css
-.n-button {
-  margin: 0 12px 8px 0;
-}
-```
-
 ```js
 const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000))
 const countDown = (second) => `倒计时 ${second} 秒`

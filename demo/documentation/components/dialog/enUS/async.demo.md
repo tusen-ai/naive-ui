@@ -6,12 +6,6 @@ Dialog can be async.
 <n-button @click="handleClick"> Success </n-button>
 ```
 
-```css
-.n-button {
-  margin: 0 12px 8px 0;
-}
-```
-
 ```js
 const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000))
 const countDown = (second) => `Count down ${second} second`

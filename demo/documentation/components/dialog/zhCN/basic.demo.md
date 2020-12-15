@@ -3,15 +3,11 @@
 注入 `dialog` 来创建一个弹框。
 
 ```html
-<n-button @click="handleConfirm"> 警告 </n-button>
-<n-button @click="handleSuccess"> 成功 </n-button>
-<n-button @click="handleError"> 错误 </n-button>
-```
-
-```css
-.n-button {
-  margin: 0 12px 8px 0;
-}
+<n-space>
+  <n-button @click="handleConfirm"> 警告 </n-button>
+  <n-button @click="handleSuccess"> 成功 </n-button>
+  <n-button @click="handleError"> 错误 </n-button>
+</n-space>
 ```
 
 ```js

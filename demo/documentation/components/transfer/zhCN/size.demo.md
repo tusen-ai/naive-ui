@@ -3,18 +3,20 @@
 太小太大好像都不怎么好看。
 
 ```html
-<n-transfer
-  ref="transfer"
-  v-model:value="value"
-  :options="options"
-  size="small"
-/>
-<n-transfer
-  ref="transfer"
-  v-model:value="value"
-  :options="options"
-  size="large"
-/>
+<n-space vertical>
+  <n-transfer
+    ref="transfer"
+    v-model:value="value"
+    :options="options"
+    size="small"
+  />
+  <n-transfer
+    ref="transfer"
+    v-model:value="value"
+    :options="options"
+    size="large"
+  />
+</n-space>
 ```
 
 ```js
@@ -37,11 +39,5 @@ export default {
       value: createValues()
     }
   }
-}
-```
-
-```css
-.n-transfer {
-  margin-bottom: 8px;
 }
 ```

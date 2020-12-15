@@ -4,24 +4,26 @@ Javascript、Python、Cpp 的例子。
 
 ```html
 <div style="overflow: auto;">
-  <n-code
-    :code="`
+  <n-space vertical :size="16">
+    <n-code
+      :code="`
 function sleep (ms = 1000) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
 `"
-    language="javascript"
-  />
+      language="javascript"
+    />
 
-  <n-code
-    :code="`
+    <n-code
+      :code="`
 def say_hello():
     print('Hello Naive UI')
 `"
-    language="python"
-  />
+      language="python"
+    />
 
-  <n-code :code="cppCode" language="cpp" />
+    <n-code :code="cppCode" language="cpp" />
+  </n-space>
 </div>
 ```
 
@@ -35,11 +37,5 @@ export default {
 }`
     }
   }
-}
-```
-
-```css
-.n-code {
-  margin-bottom: 16px;
 }
 ```

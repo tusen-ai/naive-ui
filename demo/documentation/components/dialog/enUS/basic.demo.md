@@ -8,12 +8,6 @@ Inject `dialog` to create a dialog.
 <n-button @click="handleError"> Error </n-button>
 ```
 
-```css
-.n-button {
-  margin: 0 12px 8px 0;
-}
-```
-
 ```js
 export default {
   inject: ['dialog', 'message'],

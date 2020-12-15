@@ -19,10 +19,10 @@
     <n-anchor-link title="Props" href="#Props" />
   </n-anchor>
 </div>
-<div style="padding-left: 400px;">
+<n-space style="padding-left: 400px;">
   <n-button @click="scrollTo('#basic')">基础用法</n-button>
   <n-button @click="scrollTo('#affix')">固定</n-button>
-</div>
+</n-space>
 ```
 
 ```js
@@ -32,11 +32,5 @@ export default {
       this.$refs.anchor.scrollTo(href)
     }
   }
-}
-```
-
-```css
-.n-button {
-  margin: 0 8px 12px 0;
 }
 ```

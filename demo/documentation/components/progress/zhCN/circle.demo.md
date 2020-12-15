@@ -3,15 +3,17 @@
 进度可以是个圈，它支持 `default`、`info`、`success`、`warning` 和 `error` 的 `status`。
 
 ```html
-<n-progress type="circle" :percentage="percentage" />
-<n-progress type="circle" status="info" :percentage="percentage" />
-<n-progress type="circle" status="success" :percentage="percentage" />
-<n-progress type="circle" status="warning" :percentage="percentage" />
-<n-progress type="circle" status="error" :percentage="percentage" />
-<div>
+<n-space>
+  <n-progress type="circle" :percentage="percentage" />
+  <n-progress type="circle" status="info" :percentage="percentage" />
+  <n-progress type="circle" status="success" :percentage="percentage" />
+  <n-progress type="circle" status="warning" :percentage="percentage" />
+  <n-progress type="circle" status="error" :percentage="percentage" />
+</n-space>
+<n-space>
   <n-button @click="minus"> 减 10% </n-button>
   <n-button @click="add"> 加 10% </n-button>
-</div>
+</n-space>
 ```
 
 ```js
@@ -31,14 +33,5 @@ export default {
       if (this.percentage < 0) this.percentage = 100
     }
   }
-}
-```
-
-```css
-.n-progress {
-  margin: 0 8px 12px 0;
-}
-.n-button {
-  margin: 0 8px 12px 0;
 }
 ```
