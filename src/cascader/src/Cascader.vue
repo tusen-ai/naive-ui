@@ -92,7 +92,9 @@ import { warn, call } from '../../_utils'
 import CascaderMenu from './CascaderMenu.vue'
 import CascaderSelectMenu from './CascaderSelectMenu.vue'
 import styles from './styles'
+import { depx } from 'seemly'
 
+// TODO refactor cascader menu keyboard scroll (use virtual list)
 export default {
   name: 'Cascader',
   components: {
@@ -103,7 +105,15 @@ export default {
     VTarget,
     VFollower
   },
-  mixins: [configurable, themeable, locale('Cascader'), withCssr(styles)],
+  mixins: [
+    configurable,
+    themeable,
+    locale('Cascader'),
+    withCssr(styles, {
+      injectCssrProps: true,
+      themeKey: 'mergedTheme'
+    })
+  ],
   provide () {
     return {
       NCascader: this
@@ -275,9 +285,15 @@ export default {
       switch (direction) {
         case 'prev':
           if (keyboardKey !== null) {
-            const node = treeMate.getPrev(keyboardKey)
+            const node = treeMate.getPrev(keyboardKey, { loop: true })
             if (node !== null) {
               updateKeyboardKey(node.key)
+              this.cascaderMenuRef.submenuRefs[
+                node.level
+              ].scrollbarRef.scrollTo({
+                index: node.index,
+                elSize: depx(this.cssrProps.$local.optionHeight)
+              })
             }
           }
           break
@@ -286,11 +302,23 @@ export default {
             const node = treeMate.getFirstAvailableNode()
             if (node !== null) {
               updateKeyboardKey(node.key)
+              this.cascaderMenuRef.submenuRefs[
+                node.level
+              ].scrollbarRef.scrollTo({
+                index: node.index,
+                elSize: depx(this.cssrProps.$local.optionHeight)
+              })
             }
           } else {
-            const node = treeMate.getNext(keyboardKey)
+            const node = treeMate.getNext(keyboardKey, { loop: true })
             if (node !== null) {
               updateKeyboardKey(node.key)
+              this.cascaderMenuRef.submenuRefs[
+                node.level
+              ].scrollbarRef.scrollTo({
+                index: node.index,
+                elSize: depx(this.cssrProps.$local.optionHeight)
+              })
             }
           }
           break

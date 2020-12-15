@@ -335,7 +335,7 @@ export default {
           behavior
         )
       } else if (index !== undefined && elSize !== undefined) {
-        this.scrollToPosition(0, index * elSize, behavior, debounce, behavior)
+        this.scrollToPosition(0, index * elSize, elSize, debounce, behavior)
       } else if (position === 'bottom') {
         this.scrollToPosition(0, Number.MAX_SAFE_INTEGER, 0, false, behavior)
       } else if (position === 'top') {
