@@ -3,15 +3,15 @@ import { flatten, getSlot } from '../../_utils'
 import { configurable, themeable } from '../../_mixins'
 
 const HORIZONTAL_MARGIN = {
-  small: '8px',
-  medium: '12px',
-  large: '16px'
+  small: 8,
+  medium: 12,
+  large: 16
 }
 
 const VERTICAL_MARGIN = {
-  small: '4px',
-  medium: '8px',
-  large: '12px'
+  small: 4,
+  medium: 8,
+  large: 12
 }
 
 export default {
@@ -63,10 +63,13 @@ export default {
   render () {
     const { size, vertical, align, inline, justify, itemStyle } = this
     const children = flatten(getSlot(this))
-    const horizontalMargin =
-      typeof size === 'number' ? size + 'px' : HORIZONTAL_MARGIN[size]
-    const verticalMargin =
-      typeof size === 'number' ? size + 'px' : VERTICAL_MARGIN[size]
+    const sizeIsNumber = typeof size === 'number'
+    const horizontalMargin = sizeIsNumber
+      ? size
+      : HORIZONTAL_MARGIN[size] + 'px'
+    const verticalMargin = sizeIsNumber ? size : VERTICAL_MARGIN[size] + 'px'
+    const semiVerticalMargin =
+      (sizeIsNumber ? size : VERTICAL_MARGIN[size]) / 2 + 'px'
     const lastIndex = children.length - 1
     return h(
       'div',
@@ -77,7 +80,8 @@ export default {
           flexDirection: vertical ? 'column' : 'row',
           flexWrap: 'wrap',
           justifyContent: 'flex-' + justify,
-          marginBottom: vertical ? null : `-${verticalMargin}`,
+          marginTop: vertical ? '' : `-${semiVerticalMargin}`,
+          marginBottom: vertical ? '' : `-${semiVerticalMargin}`,
           alignItems: align
         }
       },
@@ -96,7 +100,8 @@ export default {
                 }
                 : {
                   marginRight: index !== lastIndex ? horizontalMargin : null,
-                  marginBottom: verticalMargin
+                  paddingTop: semiVerticalMargin,
+                  paddingBottom: semiVerticalMargin
                 }
             ]
           },
