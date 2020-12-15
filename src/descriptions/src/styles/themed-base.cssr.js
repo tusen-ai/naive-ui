@@ -1,7 +1,13 @@
-import { c, cTB, cB, cE, cM, insideModal } from '../../../_utils/cssr'
+import { c, cTB, cB, cE, cM, insideModal, createKey } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
+    const {
+      $global: {
+        cubicBezierEaseInOut
+      },
+      $local
+    } = props
     const {
       headerColor,
       headerTextColor,
@@ -10,13 +16,55 @@ export default c([
       contentColor,
       contentColorModal,
       borderColor,
-      borderRadius
-    } = props.$local
-    const {
-      cubicBezierEaseInOut
-    } = props.$global
+      borderRadius,
+      lineHeight
+    } = $local
     return [
       cTB('descriptions', [
+        ['small', 'medium', 'large'].map(size => {
+          const {
+            [createKey('padding', size)]: padding,
+            [createKey('paddingBordered', size)]: paddingBordered
+          } = $local
+          return cM(`${size}-size`, [
+            cB('descriptions-header', {
+              marginBottom: '12px'
+            }),
+            cM('bordered', [
+              cB('descriptions-table-wrapper', [
+                cB('descriptions-table', [
+                  cB('descriptions-table-row', [
+                    cB('descriptions-table-header', {
+                      padding: paddingBordered
+                    }),
+                    cB('descriptions-table-content', {
+                      padding: paddingBordered
+                    }),
+                    c('&:last-child', [
+                      cB('descriptions-table-content', {
+                        padding: paddingBordered
+                      })
+                    ])
+                  ])
+                ])
+              ])
+            ]),
+            cB('descriptions-table-wrapper', [
+              cB('descriptions-table', [
+                cB('descriptions-table-row', [
+                  cB('descriptions-table-content', {
+                    padding: `0 0 ${padding} 0`
+                  }),
+                  c('&:last-child', [
+                    cB('descriptions-table-content', {
+                      padding: 0
+                    })
+                  ])
+                ])
+              ])
+            ])
+          ])
+        }),
         cM('left-label-placement', [
           cB('descriptions-table-content', [
             c('> *', {
@@ -116,7 +164,7 @@ export default c([
               cB('descriptions-table-header', {
                 raw: `
                   font-weight: ${headerFontWeight};
-                  line-height: 1.75;
+                  line-height: ${lineHeight};
                   display: table-cell;
                   box-sizing: border-box;
                   transition:
@@ -129,7 +177,7 @@ export default c([
               cB('descriptions-table-content', {
                 raw: `
                   vertical-align: top;
-                  line-height: 1.75;
+                  line-height: ${lineHeight};
                   display: table-cell;
                   box-sizing: border-box;
                   transition:

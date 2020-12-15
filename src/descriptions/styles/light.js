@@ -16,10 +16,12 @@ export default create({
       modalColor,
       dividerColorOverlay,
       borderRadius,
-      fontWeightStrong
+      fontWeightStrong,
+      lineHeight
     } = vars
     return {
       ...commonVariables,
+      lineHeight,
       headerColor: composite(cardColor, tableHeaderColorOverlay),
       headerTextColor: textColor1Overlay,
       headerFontWeight: fontWeightStrong,

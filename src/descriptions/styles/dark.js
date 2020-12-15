@@ -15,10 +15,12 @@ export default create({
       modalColor,
       dividerColorOverlay,
       borderRadius,
-      fontWeightStrong
+      fontWeightStrong,
+      lineHeight
     } = vars
     return {
       ...commonVariables,
+      lineHeight,
       headerColor: tableHeaderColorOverlay,
       headerTextColor: textColor1Overlay,
       headerFontWeight: fontWeightStrong,
