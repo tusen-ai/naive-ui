@@ -21,8 +21,6 @@
   </component-demo>
 </template>
 
-<script>
-/** SCRIPT_SLOT */
-</script>
+<!--SCRIPT_SLOT-->
 
 <!--STYLE_SLOT-->

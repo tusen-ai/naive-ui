@@ -115,7 +115,7 @@ function genVueComponent (parts, fileName, relativeUrl, noRunning = false) {
   const titleReg = /<!--TITLE_SLOT-->/g
   const contentReg = /<!--CONTENT_SLOT-->/
   const codeReg = /<!--CODE_SLOT-->/
-  const scriptReg = /\/\*\*\sSCRIPT_SLOT\s\*\//
+  const scriptReg = /<!--SCRIPT_SLOT-->/
   const styleReg = /<!--STYLE_SLOT-->/
   const demoReg = /<!--DEMO_SLOT-->/
   let src = demoBlock
@@ -131,9 +131,7 @@ function genVueComponent (parts, fileName, relativeUrl, noRunning = false) {
     src = src.replace(codeReg, parts.code)
   }
   if (parts.script && !noRunning) {
-    src = src.replace(scriptReg, parts.script)
-  } else {
-    src = src.replace(scriptReg, 'export default {}')
+    src = src.replace(scriptReg, '<script>\n' + parts.script + '\n</script>')
   }
   if (parts.style) {
     const style = genStyle(parts.style)
