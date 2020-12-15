@@ -64,10 +64,9 @@ export default {
     const { size, vertical, align, inline, justify, itemStyle } = this
     const children = flatten(getSlot(this))
     const sizeIsNumber = typeof size === 'number'
-    const horizontalMargin = sizeIsNumber
-      ? size
-      : HORIZONTAL_MARGIN[size] + 'px'
-    const verticalMargin = sizeIsNumber ? size : VERTICAL_MARGIN[size] + 'px'
+    const horizontalMargin =
+      (sizeIsNumber ? size : HORIZONTAL_MARGIN[size]) + 'px'
+    const verticalMargin = (sizeIsNumber ? size : VERTICAL_MARGIN[size]) + 'px'
     const semiVerticalMargin =
       (sizeIsNumber ? size : VERTICAL_MARGIN[size]) / 2 + 'px'
     const lastIndex = children.length - 1
@@ -96,10 +95,10 @@ export default {
               },
               vertical
                 ? {
-                  marginBottom: index !== lastIndex ? verticalMargin : null
+                  marginBottom: index !== lastIndex ? verticalMargin : ''
                 }
                 : {
-                  marginRight: index !== lastIndex ? horizontalMargin : null,
+                  marginRight: index !== lastIndex ? horizontalMargin : '',
                   paddingTop: semiVerticalMargin,
                   paddingBottom: semiVerticalMargin
                 }
