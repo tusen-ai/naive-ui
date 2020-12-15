@@ -4,7 +4,7 @@
 
 ```html
 <n-select v-model:value="value" :options="options">
-  <template v-slot:action> 如果你点开了这个例子，你可能需要它 </template>
+  <template #action> 如果你点开了这个例子，你可能需要它 </template>
 </n-select>
 ```
 

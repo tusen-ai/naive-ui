@@ -3,7 +3,7 @@
 ```html
 <n-descriptions label-placement="top" title="Description">
   <n-descriptions-item>
-    <template v-slot:label> Breakfast </template>
+    <template #label> Breakfast </template>
     Apple
   </n-descriptions-item>
   <n-descriptions-item label="Brunch"> Apple </n-descriptions-item>

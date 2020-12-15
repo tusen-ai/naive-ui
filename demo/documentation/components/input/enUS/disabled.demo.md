@@ -27,7 +27,7 @@ Input can be disabled.
     clearable
     :disabled="!active"
   >
-    <template v-slot:affix>
+    <template #affix>
       <n-icon><cash-icon /></n-icon>
     </template>
   </n-input>

@@ -7,7 +7,7 @@
   @positive-click="handlePositiveClick"
   @negative-click="handleNegativeClick"
 >
-  <template v-slot:activator>
+  <template #activator>
     <n-button>Quit Game</n-button>
   </template>
   I heared that players will still be abused after purchasing in some games when

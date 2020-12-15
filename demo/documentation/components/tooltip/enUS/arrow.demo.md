@@ -2,7 +2,7 @@
 
 ```html
 <n-tooltip show-arrow trigger="hover">
-  <template v-slot:trigger>
+  <template #trigger>
     <n-button> No, no arrow by default </n-button>
   </template>
   Different from popover

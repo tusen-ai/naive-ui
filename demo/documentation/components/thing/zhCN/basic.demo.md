@@ -29,39 +29,39 @@ Thing 提供了很多 slot 来定制。
 </n-row>
 <n-divider />
 <n-thing>
-  <template v-slot:avatar v-if="avatar">
+  <template #avatar v-if="avatar">
     <n-avatar>
       <n-icon>
         <cash-icon />
       </n-icon>
     </n-avatar>
   </template>
-  <template v-slot:header v-if="header"> 货币 </template>
-  <template v-slot:header-extra v-if="headerExtra">
+  <template #header v-if="header"> 货币 </template>
+  <template #header-extra v-if="headerExtra">
     <n-button circle size="tiny">
-      <template v-slot:icon>
+      <template #icon>
         <cash-icon />
       </template>
     </n-button>
   </template>
-  <template v-slot:description v-if="description"> 描述 </template>
+  <template #description v-if="description"> 描述 </template>
   货币是为了提高交易效率而用于交换的中介商品。货币有多种形式，如贝壳粮食等自然物、金属纸张等加工品、银行卡信用卡等磁条卡、移动支付加密货币等APP。
-  <template v-slot:footer v-if="footer"> 尾部 </template>
-  <template v-slot:action v-if="action">
+  <template #footer v-if="footer"> 尾部 </template>
+  <template #action v-if="action">
     <n-button size="tiny" style="margin-right: 8px;">
-      <template v-slot:icon>
+      <template #icon>
         <cash-icon />
       </template>
       1 块钱
     </n-button>
     <n-button size="tiny" style="margin-right: 8px;">
-      <template v-slot:icon>
+      <template #icon>
         <cash-icon />
       </template>
       10 块钱
     </n-button>
     <n-button size="tiny">
-      <template v-slot:icon>
+      <template #icon>
         <cash-icon />
       </template>
       100 块钱

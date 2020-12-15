@@ -5,7 +5,7 @@ Some parts of component are detached to `document.body`. If you want to add a cl
 ```html
 <n-config-provider :namespace="ns">
   <n-tooltip placement="bottom" trigger="click">
-    <template v-slot:trigger>
+    <template #trigger>
       <n-button @click="isActive = true">
         Activate Component with Detached Content
       </n-button>

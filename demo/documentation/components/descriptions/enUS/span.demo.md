@@ -5,7 +5,7 @@ You can set span for each item.
 ```html
 <n-descriptions label-placement="top" bordered :column="6">
   <n-descriptions-item>
-    <template v-slot:label> Breakfast </template>
+    <template #label> Breakfast </template>
     Apple
   </n-descriptions-item>
   <n-descriptions-item label="Brunch"> Apple </n-descriptions-item>

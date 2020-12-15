@@ -5,7 +5,7 @@
 ```html
 <n-config-provider :namespace="ns">
   <n-tooltip placement="bottom" trigger="click">
-    <template v-slot:trigger>
+    <template #trigger>
       <n-button @click="isActive = true"> 激活含卸载内容的组件 </n-button>
     </template>
     <span> 卸载内容 </span>

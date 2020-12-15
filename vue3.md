@@ -223,7 +223,7 @@
   - new
     - `default-show`
   - deprecate
-    - `v-slot:activator` => `v-slot:trigger`
+    - `#activator` => `#trigger`
     - `overlay-xxx` => `body-xxx`
   - remove
     - `controller`
@@ -301,7 +301,8 @@
     - `v-model` => `v-model:value`
 - [x] timeline
 - [x] tooltip
-  - ref
+  - deprecate
+    - `#activator` => `#trigger`
 - [x] transfer
   - break
     - `v-model` => `v-model:value`

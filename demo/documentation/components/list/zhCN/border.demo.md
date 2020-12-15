@@ -4,13 +4,13 @@ List 可以控制边框。
 
 ```html
 <n-list>
-  <template v-slot:header> hhh </template>
-  <template v-slot:footer> fff </template>
+  <template #header> hhh </template>
+  <template #footer> fff </template>
   <n-list-item>
-    <template v-slot:prefix>
+    <template #prefix>
       <n-button>Prefix</n-button>
     </template>
-    <template v-slot:suffix>
+    <template #suffix>
       <n-button>Suffix</n-button>
     </template>
     <n-thing title="Thing" title-extra="extra" description="description">
@@ -25,7 +25,7 @@ List 可以控制边框。
       Biu<br />
       Biu<br />
     </n-thing>
-    <template v-slot:suffix>
+    <template #suffix>
       <n-button>Suffix</n-button>
     </template>
   </n-list-item>

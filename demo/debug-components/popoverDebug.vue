@@ -127,7 +127,7 @@
         v-model="v"
         trigger="manual"
       >
-        <template v-slot:activator>
+        <template #activator>
           <button
             v-if="v"
             @click="toggle"
@@ -146,7 +146,7 @@
         trigger="click"
         :value="true"
       >
-        <template v-slot:activator>
+        <template #activator>
           <span>LongLongLongLong</span>
         </template>
         <span>LongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLong</span>
@@ -158,7 +158,7 @@
         v-model="v"
         trigger="manual"
       >
-        <template v-slot:activator>
+        <template #activator>
           <button
             v-if="v"
             @click="toggle"
@@ -177,7 +177,7 @@
         trigger="click"
         :value="true"
       >
-        <template v-slot:activator>
+        <template #activator>
           <span>LongLongLongLong</span>
         </template>
         <span>LongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLong</span>

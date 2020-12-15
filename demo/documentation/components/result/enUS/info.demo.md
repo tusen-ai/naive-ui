@@ -6,7 +6,7 @@
   title="Information"
   description="In this era, info is about money and money is about info."
 >
-  <template v-slot:footer>
+  <template #footer>
     <n-button>I Want Information</n-button>
   </template>
 </n-result>

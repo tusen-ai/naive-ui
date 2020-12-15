@@ -25,12 +25,12 @@ Steps has `small`, `medium` size.
   <n-space>
     <n-button-group>
       <n-button @click="prev">
-        <template v-slot:icon>
+        <template #icon>
           <md-arrow-round-back />
         </template>
       </n-button>
       <n-button @click="next">
-        <template v-slot:icon>
+        <template #icon>
           <md-arrow-round-forward />
         </template>
       </n-button>

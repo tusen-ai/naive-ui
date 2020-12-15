@@ -5,11 +5,11 @@
 ```html
 <n-button @click="modalActive = true"> 来吧 </n-button>
 <n-modal v-model:show="modalActive" preset="confirm" title="Dialog">
-  <template v-slot:header>
+  <template #header>
     <div>标题</div>
   </template>
   <div>内容</div>
-  <template v-slot:action>
+  <template #action>
     <div>操作</div>
   </template>
 </n-modal>

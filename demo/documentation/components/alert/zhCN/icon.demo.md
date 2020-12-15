@@ -2,7 +2,7 @@
 
 ```html
 <n-alert title="Back in the U.S.S.R.">
-  <template v-slot:icon>
+  <template #icon>
     <n-icon>
       <ios-airplane />
     </n-icon>

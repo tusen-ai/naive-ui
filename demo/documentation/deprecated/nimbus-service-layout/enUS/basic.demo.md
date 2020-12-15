@@ -9,7 +9,7 @@
     @expandedNamesChange="changeOpen"
     @select="changeSelect"
   >
-    <template v-slot:drawer-header-icon>
+    <template #drawer-header-icon>
       <md-musical-notes />
     </template>
     Take me to the place where you go<br />

@@ -6,9 +6,9 @@
 <n-button @click="showModal = true"> 来吧 </n-button>
 <n-modal v-model:show="showModal">
   <n-card style="width: 600px;" title="模态框" :bordered="false" size="huge">
-    <template v-slot:header-extra> 噢！ </template>
+    <template #header-extra> 噢！ </template>
     内容
-    <template v-slot:footer> 尾部 </template>
+    <template #footer> 尾部 </template>
   </n-card>
 </n-modal>
 ```

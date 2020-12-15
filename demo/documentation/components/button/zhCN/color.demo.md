@@ -5,7 +5,7 @@
 ```html
 <n-space align="center">
   <n-button color="#8a2be2">
-    <template v-slot:icon>
+    <template #icon>
       <n-icon>
         <cash-icon />
       </n-icon>
@@ -13,7 +13,7 @@
     #8a2be2
   </n-button>
   <n-button color="#ff69b4">
-    <template v-slot:icon>
+    <template #icon>
       <n-icon>
         <cash-icon />
       </n-icon>
@@ -21,7 +21,7 @@
     #ff69b4
   </n-button>
   <n-button ghost color="#8a2be2">
-    <template v-slot:icon>
+    <template #icon>
       <n-icon>
         <cash-icon />
       </n-icon>
@@ -29,7 +29,7 @@
     #8a2be2
   </n-button>
   <n-button ghost color="#ff69b4">
-    <template v-slot:icon>
+    <template #icon>
       <n-icon>
         <cash-icon />
       </n-icon>
@@ -37,7 +37,7 @@
     #ff69b4
   </n-button>
   <n-button text color="#8a2be2">
-    <template v-slot:icon>
+    <template #icon>
       <n-icon>
         <cash-icon />
       </n-icon>
@@ -45,7 +45,7 @@
     #8a2be2
   </n-button>
   <n-button text color="#ff69b4">
-    <template v-slot:icon>
+    <template #icon>
       <n-icon>
         <cash-icon />
       </n-icon>

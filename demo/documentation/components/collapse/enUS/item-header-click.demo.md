@@ -6,15 +6,15 @@
   @item-header-click="handleItemHeaderClick"
 >
   <n-collapse-item name="1">
-    <template v-slot:header> Bronze </template>
+    <template #header> Bronze </template>
     <div>Okay</div>
   </n-collapse-item>
   <n-collapse-item name="2">
-    <template v-slot:header> Silver </template>
+    <template #header> Silver </template>
     <div>Good</div>
   </n-collapse-item>
   <n-collapse-item name="3">
-    <template v-slot:header> Gold </template>
+    <template #header> Gold </template>
     <div>Excellent</div>
   </n-collapse-item>
 </n-collapse>

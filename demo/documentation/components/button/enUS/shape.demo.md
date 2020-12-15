@@ -5,7 +5,7 @@ Button has different shapes.
 ```html
 <n-space>
   <n-button circle>
-    <template v-slot:icon>
+    <template #icon>
       <cash-icon />
     </template>
   </n-button>

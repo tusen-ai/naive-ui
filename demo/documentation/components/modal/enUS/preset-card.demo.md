@@ -16,9 +16,9 @@ Modal has some presets, which means you can use props & slots of the preset afte
     footer: 'soft'
   }"
 >
-  <template v-slot:header-extra> Oops! </template>
+  <template #header-extra> Oops! </template>
   Content
-  <template v-slot:footer> Footer </template>
+  <template #footer> Footer </template>
 </n-modal>
 ```
 

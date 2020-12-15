@@ -13,9 +13,9 @@
   :bordered="false"
   :segmented="segmented"
 >
-  <template v-slot:header-extra> 噢! </template>
+  <template #header-extra> 噢! </template>
   内容
-  <template v-slot:footer> 尾部 </template>
+  <template #footer> 尾部 </template>
 </n-modal>
 ```
 

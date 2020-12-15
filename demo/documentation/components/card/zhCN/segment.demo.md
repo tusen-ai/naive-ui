@@ -10,9 +10,9 @@
   footer: 'soft'
 }"
 >
-  <template v-slot:header-extra> v-slot:header-extra </template>
+  <template #header-extra> #header-extra </template>
   卡片内容
-  <template v-slot:footer> v-slot:footer </template>
-  <template v-slot:action> v-slot:action </template>
+  <template #footer> #footer </template>
+  <template #action> #action </template>
 </n-card>
 ```

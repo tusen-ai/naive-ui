@@ -5,7 +5,7 @@ You can adjust items per row by set column of descriptions.
 ```html
 <n-descriptions label-placement="top" :column="4">
   <n-descriptions-item>
-    <template v-slot:label> Breakfast </template>
+    <template #label> Breakfast </template>
     Apple
   </n-descriptions-item>
   <n-descriptions-item label="Brunch"> Apple </n-descriptions-item>

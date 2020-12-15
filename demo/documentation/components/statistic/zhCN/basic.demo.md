@@ -4,12 +4,12 @@
 <n-row>
   <n-col :span="12">
     <n-statistic label="统计数据" :value="99">
-      <template v-slot:prefix>
+      <template #prefix>
         <n-icon>
           <md-save />
         </n-icon>
       </template>
-      <template v-slot:suffix> / 100 </template>
+      <template #suffix> / 100 </template>
     </n-statistic>
   </n-col>
   <n-col :span="12">

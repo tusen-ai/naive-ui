@@ -5,17 +5,17 @@
 ```html
 <n-space vertical>
   <n-input v-model:value="value" placeholder="搜索">
-    <template v-slot:prefix>
+    <template #prefix>
       <n-icon>
         <search-outline />
       </n-icon>
     </template>
   </n-input>
   <n-input v-model:value="value" round placeholder="100,000,000">
-    <template v-slot:suffix> 元 </template>
+    <template #suffix> 元 </template>
   </n-input>
   <n-input v-model:value="value" round placeholder="搜索">
-    <template v-slot:suffix>
+    <template #suffix>
       <n-icon>
         <search-outline />
       </n-icon>

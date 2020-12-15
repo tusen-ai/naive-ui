@@ -2,7 +2,7 @@
 
 ```html
 <n-empty description="你什么也找不到">
-  <template v-slot:extra>
+  <template #extra>
     <n-button size="small">看看别的</n-button>
   </template>
 </n-empty>

@@ -3,7 +3,7 @@
 ```html
 <n-space vertical :size="12">
   <n-alert title="Default 类型" type="default">
-    <template v-slot:icon>
+    <template #icon>
       <n-icon>
         <ios-airplane />
       </n-icon>

@@ -2,7 +2,7 @@
 
 ```html
 <n-popconfirm :show-icon="false">
-  <template v-slot:activator>
+  <template #activator>
     <n-button>No Icon</n-button>
   </template>
   As is

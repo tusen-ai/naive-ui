@@ -2,7 +2,7 @@
 
 ```html
 <n-popconfirm :show-icon="false">
-  <template v-slot:trigger>
+  <template #trigger>
     <n-button>没图标</n-button>
   </template>
   就是这样

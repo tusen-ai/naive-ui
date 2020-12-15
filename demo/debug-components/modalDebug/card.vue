@@ -8,7 +8,7 @@
       {{ time }}
     </template>
     <template #footer>
-      v-slot:footer
+      #footer
     </template>
     <template #content>
       <n-input v-model="time" />

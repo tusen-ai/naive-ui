@@ -2,12 +2,12 @@
 
 ```html
 <n-popconfirm positive-text="ok" negative-text="not ok">
-  <template v-slot:icon>
+  <template #icon>
     <n-icon color="red">
       <hand-icon />
     </n-icon>
   </template>
-  <template v-slot:trigger>
+  <template #trigger>
     <n-button>Quit Game</n-button>
   </template>
   How can you be strong without purchasing?

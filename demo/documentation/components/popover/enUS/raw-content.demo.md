@@ -2,7 +2,7 @@
 
 ```html
 <n-popover trigger="hover" raw :show-arrow="false">
-  <template v-slot:trigger>
+  <template #trigger>
     <n-button> Hover </n-button>
   </template>
   <div

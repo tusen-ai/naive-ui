@@ -2,7 +2,7 @@
 
 ```html
 <n-popover trigger="hover" :delay="500" :duration="500">
-  <template v-slot:trigger>
+  <template #trigger>
     <n-button> Delay 500, Duration 500 </n-button>
   </template>
   <span>

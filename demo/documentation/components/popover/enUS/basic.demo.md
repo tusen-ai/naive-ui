@@ -2,7 +2,7 @@
 
 ```html
 <n-popover trigger="hover">
-  <template v-slot:trigger>
+  <template #trigger>
     <n-button> Hover </n-button>
   </template>
   <span>Maybe I don't really want to know how your garden grows</span>

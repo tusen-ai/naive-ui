@@ -4,7 +4,7 @@ Somebody also calls it `link` button.
 
 ```html
 <n-button text size="large">
-  <template v-slot:icon>
+  <template #icon>
     <n-icon>
       <train-icon />
     </n-icon>

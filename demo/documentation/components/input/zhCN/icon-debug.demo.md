@@ -4,46 +4,46 @@
 
 ```html
 <n-input v-model:value="value" placeholder="搜索" clearable>
-  <template v-slot:prefix>
+  <template #prefix>
     <n-icon>
       <md-search />
     </n-icon>
   </template>
 </n-input>
 <n-input v-model:value="value" placeholder="搜索" clearable>
-  <template v-slot:suffix> DOLLAR </template>
+  <template #suffix> DOLLAR </template>
 </n-input>
 <n-input v-model:value="value" round placeholder="搜索" size="small" clearable>
-  <template v-slot:suffix>
+  <template #suffix>
     <n-icon>
       <md-search />
     </n-icon>
   </template>
-  <template v-slot:prefix>
+  <template #prefix>
     <n-icon>
       <md-search />
     </n-icon>
   </template>
 </n-input>
 <n-input v-model:value="value" placeholder="搜索" size="large" clearable>
-  <template v-slot:suffix>
+  <template #suffix>
     <n-icon>
       <md-search />
     </n-icon>
   </template>
-  <template v-slot:prefix>
+  <template #prefix>
     <n-icon>
       <md-search />
     </n-icon>
   </template>
 </n-input>
 <n-input v-model:value="value" placeholder="搜索" size="small" clearable>
-  <template v-slot:suffix>
+  <template #suffix>
     <n-icon>
       <md-search />
     </n-icon>
   </template>
-  <template v-slot:prefix>
+  <template #prefix>
     <n-icon>
       <md-search />
     </n-icon>
@@ -57,12 +57,12 @@
   separator="-"
   clearable
 >
-  <template v-slot:suffix>
+  <template #suffix>
     <n-icon>
       <md-search />
     </n-icon>
   </template>
-  <template v-slot:prefix>
+  <template #prefix>
     <n-icon>
       <md-search />
     </n-icon>
@@ -76,31 +76,31 @@
   separator="-"
   clearable
 >
-  <template v-slot:suffix>
+  <template #suffix>
     <n-icon>
       <md-search />
     </n-icon>
   </template>
-  <template v-slot:prefix>
+  <template #prefix>
     <n-icon>
       <md-search />
     </n-icon>
   </template>
 </n-input>
 <n-input v-model:value="value" round placeholder="搜索" size="large" clearable>
-  <template v-slot:suffix>
+  <template #suffix>
     <n-icon>
       <md-search />
     </n-icon>
   </template>
-  <template v-slot:prefix>
+  <template #prefix>
     <n-icon>
       <md-search />
     </n-icon>
   </template>
 </n-input>
 <n-input v-model:value="value" round placeholder="搜索" clearable>
-  <template v-slot:suffix>
+  <template #suffix>
     <n-icon>
       <md-search />
     </n-icon>

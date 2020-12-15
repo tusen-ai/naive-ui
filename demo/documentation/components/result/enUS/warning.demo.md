@@ -6,7 +6,7 @@
   title="Warning"
   description="People seldom see it until it comes true."
 >
-  <template v-slot:footer>
+  <template #footer>
     <n-button>Hmm, Truly Sad, Isn't It?</n-button>
   </template>
 </n-result>

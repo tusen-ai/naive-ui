@@ -15,7 +15,7 @@
     :loading="loading"
     trim
   />
-  <template v-slot:action>
+  <template #action>
     <n-button @click="clear">Clear</n-button>
   </template>
 </n-card>

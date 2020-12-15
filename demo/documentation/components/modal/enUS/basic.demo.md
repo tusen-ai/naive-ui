@@ -15,9 +15,9 @@ Basic usage of modal. You can put anything in modal, a card for example.
       footer: 'soft'
     }"
   >
-    <template v-slot:header-extra> Oops! </template>
+    <template #header-extra> Oops! </template>
     Content
-    <template v-slot:footer> Footer </template>
+    <template #footer> Footer </template>
   </n-card>
 </n-modal>
 ```

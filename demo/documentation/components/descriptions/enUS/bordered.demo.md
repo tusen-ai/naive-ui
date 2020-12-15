@@ -6,7 +6,7 @@ If there are too many multiple line fields, you can set it to `bordered`.
 <n-space vertical :size="12">
   <n-descriptions bordered>
     <n-descriptions-item>
-      <template v-slot:label> Breakfast </template>
+      <template #label> Breakfast </template>
       Apple
     </n-descriptions-item>
     <n-descriptions-item label="Lunch"> Apple </n-descriptions-item>
@@ -38,7 +38,7 @@ If there are too many multiple line fields, you can set it to `bordered`.
   </n-descriptions>
   <n-descriptions label-placement="left" bordered>
     <n-descriptions-item>
-      <template v-slot:label> Breakfast </template>
+      <template #label> Breakfast </template>
       Apple
     </n-descriptions-item>
     <n-descriptions-item label="Lunch"> Apple </n-descriptions-item>

@@ -31,13 +31,13 @@
     </n-tbody>
   </n-table>
   <n-list>
-    <template v-slot:header> hhh </template>
-    <template v-slot:footer> fff </template>
+    <template #header> hhh </template>
+    <template #footer> fff </template>
     <n-list-item>
-      <template v-slot:prefix>
+      <template #prefix>
         <n-button>Prefix</n-button>
       </template>
-      <template v-slot:suffix>
+      <template #suffix>
         <n-button>Suffix</n-button>
       </template>
       <n-thing title="Thing" title-extra="extra" description="description">
@@ -52,19 +52,19 @@
         Biu<br />
         Biu<br />
       </n-thing>
-      <template v-slot:suffix>
+      <template #suffix>
         <n-button>Suffix</n-button>
       </template>
     </n-list-item>
   </n-list>
   <n-list bordered>
-    <template v-slot:header> hhh </template>
-    <template v-slot:footer> fff </template>
+    <template #header> hhh </template>
+    <template #footer> fff </template>
     <n-list-item>
-      <template v-slot:prefix>
+      <template #prefix>
         <n-button>Prefix</n-button>
       </template>
-      <template v-slot:suffix>
+      <template #suffix>
         <n-button>Suffix</n-button>
       </template>
       <n-thing title="Thing" title-extra="extra" description="description">
@@ -79,14 +79,14 @@
         Biu<br />
         Biu<br />
       </n-thing>
-      <template v-slot:suffix>
+      <template #suffix>
         <n-button>Suffix</n-button>
       </template>
     </n-list-item>
   </n-list>
   <n-descriptions bordered>
     <n-descriptions-item>
-      <template v-slot:label> Breakfast </template>
+      <template #label> Breakfast </template>
       Apple
     </n-descriptions-item>
     <n-descriptions-item label="Lunch"> Apple </n-descriptions-item>
@@ -118,7 +118,7 @@
   </n-descriptions>
   <n-descriptions label-placement="left" bordered>
     <n-descriptions-item>
-      <template v-slot:label> Breakfast </template>
+      <template #label> Breakfast </template>
       Apple
     </n-descriptions-item>
     <n-descriptions-item label="Lunch"> Apple </n-descriptions-item>
@@ -150,7 +150,7 @@
   </n-descriptions>
   <n-descriptions>
     <n-descriptions-item>
-      <template v-slot:label> Breakfast </template>
+      <template #label> Breakfast </template>
       Apple
     </n-descriptions-item>
     <n-descriptions-item label="Lunch"> Apple </n-descriptions-item>
@@ -182,7 +182,7 @@
   </n-descriptions>
   <n-descriptions label-placement="left">
     <n-descriptions-item>
-      <template v-slot:label> Breakfast </template>
+      <template #label> Breakfast </template>
       Apple
     </n-descriptions-item>
     <n-descriptions-item label="Lunch"> Apple </n-descriptions-item>
