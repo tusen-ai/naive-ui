@@ -16,11 +16,17 @@ export default create({
       dividerColorOverlay,
       borderRadius,
       fontWeightStrong,
-      lineHeight
+      lineHeight,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge
     } = vars
     return {
       ...commonVariables,
       lineHeight,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge,
       headerColor: tableHeaderColorOverlay,
       headerTextColor: textColor1Overlay,
       headerFontWeight: fontWeightStrong,

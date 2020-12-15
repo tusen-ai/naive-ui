@@ -24,12 +24,12 @@ export default c([
         ['small', 'medium', 'large'].map(size => {
           const {
             [createKey('padding', size)]: padding,
-            [createKey('paddingBordered', size)]: paddingBordered
+            [createKey('paddingBordered', size)]: paddingBordered,
+            [createKey('fontSize', size)]: fontSize
           } = $local
-          return cM(`${size}-size`, [
-            cB('descriptions-header', {
-              marginBottom: '12px'
-            }),
+          return cM(`${size}-size`, {
+            fontSize
+          }, [
             cM('bordered', [
               cB('descriptions-table-wrapper', [
                 cB('descriptions-table', [
@@ -68,31 +68,23 @@ export default c([
         cM('left-label-placement', [
           cB('descriptions-table-content', [
             c('> *', {
-              raw: `
-                vertical-align: top;
-              `
+              verticalAlign: 'top'
             })
           ])
         ]),
         cM('left-label-align', [
           c('th', {
-            raw: `
-              text-align: left;
-            `
+            textAlign: 'left'
           })
         ]),
         cM('center-label-align', [
           c('th', {
-            raw: `
-              text-align: center;
-            `
+            textAlign: 'center'
           })
         ]),
         cM('right-label-align', [
           c('th', {
-            raw: `
-              text-align: right;
-            `
+            textAlign: 'right'
           })
         ]),
         cM('bordered', [
@@ -137,8 +129,10 @@ export default c([
             font-weight: ${headerFontWeight};
             font-size: 18px;
             transition: color .3s ${cubicBezierEaseInOut};
-          `,
-          color: headerTextColor
+            line-height: ${lineHeight};
+            margin-bottom: 8px;
+            color: ${headerTextColor};
+          `
         }),
         cB('descriptions-table-wrapper', {
           raw: `
@@ -207,9 +201,7 @@ export default c([
               }),
               c('&:last-child', [
                 cB('descriptions-table-content', {
-                  raw: `
-                    padding: 0;
-                  `
+                  padding: 0
                 })
               ])
             ])

@@ -17,11 +17,17 @@ export default create({
       dividerColorOverlay,
       borderRadius,
       fontWeightStrong,
-      lineHeight
+      lineHeight,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge
     } = vars
     return {
       ...commonVariables,
       lineHeight,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge,
       headerColor: composite(cardColor, tableHeaderColorOverlay),
       headerTextColor: textColor1Overlay,
       headerFontWeight: fontWeightStrong,
