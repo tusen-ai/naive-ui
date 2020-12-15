@@ -81,7 +81,7 @@ export default c([
             raw: `
               transition: color .3s ${cubicBezierEaseInOut};
               user-select: none;
-              padding-left: 8px;
+              padding: 0 8px;
             `
           }, [
             c('&:empty', {
@@ -137,15 +137,6 @@ export default c([
           })
         ]
       ),
-      // checkbox-group
-      cB('checkbox-group', {
-        display: 'flex',
-        flexWrap: 'wrap'
-      }, [
-        cB('checkbox', {
-          marginRight: '18px'
-        })
-      ]),
       // modal table header checkbox
       insideModal(
         cTB('checkbox', [
