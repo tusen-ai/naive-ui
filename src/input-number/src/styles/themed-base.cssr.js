@@ -3,8 +3,11 @@ import { cTB, c, cB, cE, cM, createKey, insideFormItem } from '../../../_utils/c
 export default c([
   ({ props }) => {
     const {
-      cubicBezierEaseInOut
-    } = props.$global
+      $global: {
+        cubicBezierEaseInOut
+      },
+      $local
+    } = props
     const {
       buttonColorDisabled,
       buttonTextColorDisabled,
@@ -27,7 +30,7 @@ export default c([
       boxShadowFocus,
       placeholderColor,
       borderRadius
-    } = props.$local
+    } = $local
     return cTB('input-number', {
       raw: `
         position: relative;
@@ -38,6 +41,33 @@ export default c([
       `,
       borderRadius
     }, [
+      ['small', 'medium', 'large'].map(size => {
+        const {
+          [createKey('height', size)]: height,
+          [createKey('width', size)]: width,
+          [createKey('fontSize', size)]: fontSize,
+          [createKey('buttonIconSize', size)]: buttonIconSize,
+          [createKey('buttonWidth', size)]: buttonWidth
+        } = $local
+        return cM(size + '-size', {
+          height,
+          width,
+          lineHeight: height
+        }, [
+          cE('button, input', {
+            height,
+            lineHeight: height
+          }),
+          cE('button', {
+            width: buttonWidth,
+            fontSize: buttonIconSize
+          }),
+          cE('input', {
+            padding: `0 ${buttonWidth}`,
+            fontSize
+          })
+        ])
+      }),
       cE('border', {
         raw: `
           position: absolute;
