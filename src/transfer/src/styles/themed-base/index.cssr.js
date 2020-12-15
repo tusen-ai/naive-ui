@@ -1,24 +1,12 @@
-import { c, cTB, cB, cE, cM } from '../../../../_utils/cssr'
+import { c, cTB, cB, cE, cM, createKey } from '../../../../_utils/cssr'
+import { depx, pxfy } from 'seemly'
 import animationStyle from './animation.cssr.js'
 import fadeInTransition from '../../../../_styles/transitions/fade-in.js'
 
 export default c([
   ({ props }) => {
     const {
-      $local: {
-        borderRadius,
-        borderColor,
-        listColor,
-        headerColor,
-        headerTextColor,
-        headerTextColorDisabled,
-        headerExtraTextColor,
-        filterBorderColor,
-        itemTextColor,
-        itemColorPending,
-        itemTextColorDisabled,
-        extraFontSize
-      },
+      $local,
       $global: {
         cubicBezierEaseInOut,
         cubicBezierEaseIn,
@@ -26,12 +14,99 @@ export default c([
         fontWeightStrong
       }
     } = props
+    const {
+      width,
+      borderRadius,
+      borderColor,
+      listColor,
+      headerColor,
+      headerTextColor,
+      headerTextColorDisabled,
+      headerExtraTextColor,
+      filterBorderColor,
+      itemTextColor,
+      itemColorPending,
+      itemTextColorDisabled,
+      extraFontSize
+    } = $local
     return [
       animationStyle,
       cTB('transfer', {
         display: 'flex',
-        width: '444px'
+        width
       }, [
+        ['small', 'medium', 'large'].map(size => {
+          const {
+            [createKey('itemHeight', size)]: height,
+            [createKey('fontSize', size)]: fontSize
+          } = $local
+          return [
+            c(`@keyframes transfer-height-collapse--${size}`, {
+              raw: `
+                0% {
+                  max-height: ${height};
+                }
+                100% {
+                  max-height: 0;
+                }
+              `
+            }),
+            c(`@keyframes transfer-height-expand--${size}`, {
+              raw: `
+                0% {
+                  max-height: 0;
+                }
+                100% {
+                  max-height: ${height};
+                }
+              `
+            }),
+            cM(size + '-size', [
+              cM('filterable', [
+                cB('transfer-list', [
+                  cB('transfer-list-body', {
+                    height: pxfy(depx(height) * 5.6 + 45)
+                  })
+                ])
+              ]),
+              cB('transfer-list', [
+                cB('transfer-list-header', {
+                  fontSize,
+                  height: pxfy(depx(height) + 4)
+                }),
+                cB('empty', {
+                  fontSize
+                }),
+                cB('transfer-list-body', {
+                  height: pxfy(depx(height) * 5.6)
+                }, [
+                  cB('transfer-list-item', {
+                    fontSize,
+                    height,
+                    maxHeight: height
+                  }, [
+                    cM('source', [
+                      c('&.item-enter-active', {
+                        animationName: `transfer-height-expand--${size}, transfer-slide-in-from-right`
+                      }),
+                      c('&.item-leave-active', {
+                        animationName: `transfer-height-collapse--${size}, transfer-slide-out-to-right`
+                      })
+                    ]),
+                    cM('target', [
+                      c('&.item-enter-active', {
+                        animationName: `transfer-height-expand--${size}, transfer-slide-in-from-left`
+                      }),
+                      c('&.item-leave-active', {
+                        animationName: `transfer-height-collapse--${size}, transfer-slide-out-to-left`
+                      })
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ]
+        }),
         cB('transfer-list', {
           backgroundClip: 'padding-box',
           width: 'calc(50% - 36px)',

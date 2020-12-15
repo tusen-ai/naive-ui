@@ -1,7 +1,13 @@
-import { c, cE, cM, cTB, cNotM } from '../../../_utils/cssr'
-
+import { c, cE, cM, cTB, cNotM, createKey } from '../../../_utils/cssr'
+import { depx, pxfy } from 'seemly'
 export default c([
   ({ props }) => {
+    const {
+      $global: {
+        cubicBezierEaseInOut
+      },
+      $local
+    } = props
     const {
       closeMargin,
       borderRadius,
@@ -17,10 +23,7 @@ export default c([
       colorChecked,
       colorCheckedHover,
       colorCheckedPressed
-    } = props.$local
-    const {
-      cubicBezierEaseInOut
-    } = props.$global
+    } = $local
     return cTB('tag', {
       raw: `
         white-space: nowrap;
@@ -40,6 +43,59 @@ export default c([
         opacity .3s ${cubicBezierEaseInOut}
       `
     }, [
+      ['small', 'medium', 'large'].map(size => {
+        const {
+          [createKey('height', size)]: height,
+          [createKey('fontSize', size)]: fontSize,
+          [createKey('closeSize', size)]: closeSize
+        } = $local
+        const numericHalfHeight = depx(height) / 2
+        const halfHeight = pxfy(numericHalfHeight)
+        return cM(`${size}-size`, {
+          lineHeight: height,
+          height,
+          fontSize
+        }, [
+          cE('close', {
+            fontSize: closeSize
+          }),
+          cM('round', {
+            padding: `0 ${halfHeight}`,
+            borderRadius: halfHeight
+          })
+        ])
+      }),
+      ['info', 'success', 'warning', 'error', 'default'].map(type => {
+        const {
+          [createKey('borderColor', type)]: boxShadowColor,
+          [createKey('textColor', type)]: textColor,
+          [createKey('color', type)]: backgroundColor,
+          [createKey('closeColor', type)]: closeColor,
+          [createKey('closeColorHover', type)]: closeColorHover,
+          [createKey('closeColorPressed', type)]: closeColorPressed
+        } = $local
+        return cNotM('checkable', [
+          cM(`${type}-type`, {
+            boxShadow: `inset 0 0 0 1px ${boxShadowColor}`,
+            color: textColor,
+            backgroundColor
+          }, [
+            cE('close', {
+              color: closeColor
+            }),
+            cNotM('disabled', [
+              cE('close', [
+                c('&:hover', {
+                  color: closeColorHover
+                }),
+                c('&:active', {
+                  color: closeColorPressed
+                })
+              ])
+            ])
+          ])
+        ])
+      }),
       cE('content', {
         display: 'inline-block'
       }),
