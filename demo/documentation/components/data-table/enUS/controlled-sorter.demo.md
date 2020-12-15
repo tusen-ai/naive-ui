@@ -3,16 +3,20 @@
 If one of the column objects' `sortOrder` is set to `'ascend'`, `'descend'` or `false`. The sorting behavior the table will be in a controlled manner. If multiple columns' `sortOrder` are set to `'ascend'` or `'descend'`, only first column of them will be applied.
 
 ```html
-<n-button @click="sortName('ascend')">Sort By Name (Ascend)</n-button>
-<n-button @click="sortName('descend')">Sort By Name (Descend)</n-button>
-<n-button @click="clearSorter">Clear Sorter</n-button>
-<n-data-table
-  ref="table"
-  :columns="columns"
-  :data="data"
-  :pagination="pagination"
-  @update:sorter="handleSorterChange"
-/>
+<n-space vertical :size="12">
+  <n-space>
+    <n-button @click="sortName('ascend')">Sort By Name (Ascend)</n-button>
+    <n-button @click="sortName('descend')">Sort By Name (Descend)</n-button>
+    <n-button @click="clearSorter">Clear Sorter</n-button>
+  </n-space>
+  <n-data-table
+    ref="table"
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+    @update:sorter="handleSorterChange"
+  />
+</n-space>
 ```
 
 ```js
@@ -113,11 +117,5 @@ export default {
       })
     }
   }
-}
-```
-
-```css
-.n-button {
-  margin: 0 8px 12px 0;
 }
 ```

@@ -1,16 +1,20 @@
 # Uncontrolled Filter and Sorter
 
 ```html
-<n-button @click="sortName">Sort By Name (Ascend)</n-button>
-<n-button @click="filterAddress">Filter Address (London)</n-button>
-<n-button @click="clearFilters">Clear Filters</n-button>
-<n-button @click="clearSorter">Clear Sorter</n-button>
-<n-data-table
-  ref="table"
-  :columns="columns"
-  :data="data"
-  :pagination="pagination"
-/>
+<n-space vertical :size="12">
+  <n-space>
+    <n-button @click="sortName">Sort By Name (Ascend)</n-button>
+    <n-button @click="filterAddress">Filter Address (London)</n-button>
+    <n-button @click="clearFilters">Clear Filters</n-button>
+    <n-button @click="clearSorter">Clear Sorter</n-button>
+  </n-space>
+  <n-data-table
+    ref="table"
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+  />
+</n-space>
 ```
 
 ```js
@@ -97,11 +101,5 @@ export default {
       this.$refs.table.sort(null)
     }
   }
-}
-```
-
-```css
-.n-button {
-  margin: 0 8px 12px 0;
 }
 ```

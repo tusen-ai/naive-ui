@@ -3,16 +3,20 @@
 如果列对象的 `sortOrder` 属性被设为 `'ascend'`、`'descend'` 或者 `false`，表格的排序将为受控状态。如果很多列的 `sortOrder` 都被设定了，那么只有他们之中的第一列会生效。
 
 ```html
-<n-button @click="sortName('ascend')">Sort By Name (Ascend)</n-button>
-<n-button @click="sortName('descend')">Sort By Name (Descend)</n-button>
-<n-button @click="clearSorter">Clear Sorter</n-button>
-<n-data-table
-  ref="table"
-  :columns="columns"
-  :data="data"
-  :pagination="pagination"
-  @update:sorter="handleSorterChange"
-/>
+<n-space vertical :size="12">
+  <n-space>
+    <n-button @click="sortName('ascend')">Sort By Name (Ascend)</n-button>
+    <n-button @click="sortName('descend')">Sort By Name (Descend)</n-button>
+    <n-button @click="clearSorter">Clear Sorter</n-button>
+  </n-space>
+  <n-data-table
+    ref="table"
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+    @update:sorter="handleSorterChange"
+  />
+</n-space>
 ```
 
 ```js
@@ -113,11 +117,5 @@ export default {
       })
     }
   }
-}
-```
-
-```css
-.n-button {
-  margin: 0 8px 12px 0;
 }
 ```

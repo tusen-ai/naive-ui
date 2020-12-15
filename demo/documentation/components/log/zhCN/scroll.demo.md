@@ -3,29 +3,31 @@
 你可以很简单的让 Log 滚到顶部或者底部。同时你可以控制这个滚动操作是否发出事件。
 
 ```html
-<n-button-group>
-  <n-button @click="scrollTo({ position: 'bottom', slient: false })"
-    >滚动到底部</n-button
-  >
-  <n-button @click="scrollTo({ position: 'bottom', slient: true })"
-    >滚动到底部（无事件）</n-button
-  >
-  <n-button @click="scrollTo({ position: 'top', slient: false })"
-    >滚动到顶部</n-button
-  >
-  <n-button @click="scrollTo({ position: 'top', slient: true })"
-    >滚动到顶部（无事件）</n-button
-  >
-</n-button-group>
-<n-log
-  ref="log"
-  :log="log"
-  @require-more="handleRequireMore"
-  @reach-top="handleReachTop"
-  @reach-bottom="handleReachBottom"
-  :loading="loading"
-  trim
-/>
+<n-space vertical>
+  <n-button-group>
+    <n-button @click="scrollTo({ position: 'bottom', slient: false })"
+      >滚动到底部</n-button
+    >
+    <n-button @click="scrollTo({ position: 'bottom', slient: true })"
+      >滚动到底部（无事件）</n-button
+    >
+    <n-button @click="scrollTo({ position: 'top', slient: false })"
+      >滚动到顶部</n-button
+    >
+    <n-button @click="scrollTo({ position: 'top', slient: true })"
+      >滚动到顶部（无事件）</n-button
+    >
+  </n-button-group>
+  <n-log
+    ref="log"
+    :log="log"
+    @require-more="handleRequireMore"
+    @reach-top="handleReachTop"
+    @reach-bottom="handleReachBottom"
+    :loading="loading"
+    trim
+  />
+</n-space>
 ```
 
 ```js
@@ -72,11 +74,5 @@ export default {
       this.$refs.log.scrollTo(...args)
     }
   }
-}
-```
-
-```css
-.n-button-group {
-  margin-bottom: 12px;
 }
 ```

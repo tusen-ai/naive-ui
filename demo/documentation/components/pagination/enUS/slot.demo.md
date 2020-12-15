@@ -19,9 +19,3 @@ export default {
   }
 }
 ```
-
-```css
-.n-pagination {
-  margin-bottom: 12px;
-}
-```

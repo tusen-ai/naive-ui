@@ -19,9 +19,3 @@ export default {
   }
 }
 ```
-
-```css
-.n-date-picker {
-  margin-bottom: 8px;
-}
-```

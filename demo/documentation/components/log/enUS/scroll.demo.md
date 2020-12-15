@@ -3,29 +3,31 @@
 You can easily make log scroll to top or bottom. Also you can make the scroll action silent (don't trigger events of Log in this scroll action).
 
 ```html
-<n-button-group>
-  <n-button @click="scrollTo({ position: 'bottom', slient: false })"
-    >Scroll To Bottom</n-button
-  >
-  <n-button @click="scrollTo({ position: 'bottom', slient: true })"
-    >Scroll To Bottom (silent)</n-button
-  >
-  <n-button @click="scrollTo({ position: 'top', slient: false })"
-    >Scroll To Top</n-button
-  >
-  <n-button @click="scrollTo({ position: 'top', slient: true })"
-    >Scroll To Top (silent)</n-button
-  >
-</n-button-group>
-<n-log
-  ref="log"
-  :log="log"
-  @require-more="handleRequireMore"
-  @reach-top="handleReachTop"
-  @reach-bottom="handleReachBottom"
-  :loading="loading"
-  trim
-/>
+<n-space vertical>
+  <n-button-group>
+    <n-button @click="scrollTo({ position: 'bottom', slient: false })"
+      >Scroll To Bottom</n-button
+    >
+    <n-button @click="scrollTo({ position: 'bottom', slient: true })"
+      >Scroll To Bottom (silent)</n-button
+    >
+    <n-button @click="scrollTo({ position: 'top', slient: false })"
+      >Scroll To Top</n-button
+    >
+    <n-button @click="scrollTo({ position: 'top', slient: true })"
+      >Scroll To Top (silent)</n-button
+    >
+  </n-button-group>
+  <n-log
+    ref="log"
+    :log="log"
+    @require-more="handleRequireMore"
+    @reach-top="handleReachTop"
+    @reach-bottom="handleReachBottom"
+    :loading="loading"
+    trim
+  />
+</n-space>
 ```
 
 ```js
@@ -72,11 +74,5 @@ export default {
       this.$refs.log.scrollTo(...args)
     }
   }
-}
-```
-
-```css
-.n-button-group {
-  margin-bottom: 12px;
 }
 ```

@@ -49,9 +49,3 @@ export default {
   }
 }
 ```
-
-```css
-.n-button {
-  margin-top: 12px;
-}
-```

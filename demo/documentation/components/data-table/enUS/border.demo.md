@@ -1,19 +1,21 @@
 # Unbordered & Single Line
 
 ```html
-<n-data-table
-  :bordered="false"
-  :columns="columns"
-  :data="data"
-  :pagination="pagination"
-/>
-<n-data-table
-  :bordered="false"
-  :single-line="false"
-  :columns="columns"
-  :data="data"
-  :pagination="pagination"
-/>
+<n-space vertical :size="12">
+  <n-data-table
+    :bordered="false"
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+  />
+  <n-data-table
+    :bordered="false"
+    :single-line="false"
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+  />
+</n-space>
 ```
 
 ```js
@@ -116,11 +118,5 @@ export default {
       this.message.info('send mail to ' + rowData.name)
     }
   }
-}
-```
-
-```css
-.n-data-table {
-  margin-bottom: 12px;
 }
 ```

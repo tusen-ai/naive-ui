@@ -1,18 +1,20 @@
 # 尺寸
 
 ```html
-<n-data-table
-  size="small"
-  :columns="columns"
-  :data="data"
-  :pagination="pagination"
-/>
-<n-data-table
-  size="large"
-  :columns="columns"
-  :data="data"
-  :pagination="pagination"
-/>
+<n-space vertical :size="12">
+  <n-data-table
+    size="small"
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+  />
+  <n-data-table
+    size="large"
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+  />
+</n-space>
 ```
 
 ```js
@@ -115,11 +117,5 @@ export default {
       this.message.info('send mail to ' + rowData.name)
     }
   }
-}
-```
-
-```css
-.n-data-table {
-  margin-bottom: 12px;
 }
 ```

@@ -3,8 +3,10 @@
 Tree accept `pattern` and `filter` to do searching.
 
 ```html
-<n-input v-model:value="pattern" placeholder="Search" />
-<n-tree :pattern="pattern" :data="data" block-node />
+<n-space vertical :size="12">
+  <n-input v-model:value="pattern" placeholder="Search" />
+  <n-tree :pattern="pattern" :data="data" block-node />
+</n-space>
 ```
 
 ```js
@@ -34,11 +36,5 @@ export default {
       pattern: ''
     }
   }
-}
-```
-
-```css
-.n-input {
-  margin-bottom: 12px;
 }
 ```

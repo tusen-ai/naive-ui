@@ -1,15 +1,21 @@
 # 受控的过滤器
 
 ```html
-<n-button @click="filterAddress">Filter Address(Use Value 'London')</n-button>
-<n-button @click="unfilterAddress">Clear Address Filters</n-button>
-<n-data-table
-  ref="table"
-  :columns="columns"
-  :data="data"
-  :pagination="pagination"
-  @update:filters="handleFiltersChange"
-/>
+<n-space vertical :size="12">
+  <n-space>
+    <n-button @click="filterAddress"
+      >Filter Address(Use Value 'London')</n-button
+    >
+    <n-button @click="unfilterAddress">Clear Address Filters</n-button>
+  </n-space>
+  <n-data-table
+    ref="table"
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+    @update:filters="handleFiltersChange"
+  />
+</n-space>
 ```
 
 ```js
@@ -99,11 +105,5 @@ export default {
       this.addressColumn.filterOptionValue = filters[sourceColumn.key]
     }
   }
-}
-```
-
-```css
-.n-button {
-  margin: 0 8px 12px 0;
 }
 ```

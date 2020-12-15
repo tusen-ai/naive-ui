@@ -3,10 +3,6 @@
 A horiziontal menu.
 
 ```html
-<n-menu v-model="activeName" mode="horizontal" :items="menuItems" />
-```
-
-```html
 <n-menu v-model:value="activeKey" mode="horizontal" :items="menuItems" />
 ```
 
@@ -104,11 +100,5 @@ export default {
       menuItems
     }
   }
-}
-```
-
-```css
-.n-menu-item {
-  padding-right: 16px;
 }
 ```

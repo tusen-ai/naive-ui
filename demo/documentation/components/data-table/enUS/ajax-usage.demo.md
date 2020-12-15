@@ -159,9 +159,3 @@ export default {
   }
 }
 ```
-
-```css
-.n-button {
-  margin: 0 8px 12px 0;
-}
-```

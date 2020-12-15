@@ -102,9 +102,3 @@ export default {
   }
 }
 ```
-
-```css
-.n-menu-item {
-  padding-right: 16px;
-}
-```
