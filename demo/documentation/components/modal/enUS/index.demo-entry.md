@@ -19,7 +19,6 @@ preset-confirm-slot
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| body-style | `Object` | `undefined` | Body style when use modal preset. |
 | display-directive | `'if' \| 'show'` | `'if'` | Use which directive to control the rendering of modal body. |
 | mask-closable | `boolean` | `true` | Whether to emit `hide` event when click mask. |
 | preset | `'card' \| 'confirm'` | `undefined` |  |

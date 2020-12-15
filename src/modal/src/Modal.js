@@ -17,6 +17,7 @@ export default {
     }
   },
   mixins: [configurable, themeable, withCssr(styles)],
+  inheritAttrs: false,
   props: {
     show: {
       type: Boolean,
@@ -181,6 +182,7 @@ export default {
                 h(
                   NModalBodyWrapper,
                   {
+                    ...this.$attrs,
                     ref: 'bodyWrapper',
                     ...omit(this.$props, ['maskClosable', 'to']),
                     theme: this.mergedTheme,

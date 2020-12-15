@@ -7,7 +7,7 @@ Modal has some presets, which means you can use props & slots of the preset afte
 <n-modal
   v-model:show="modalActive"
   preset="card"
-  :body-style="bodyStyle"
+  :style="bodyStyle"
   title="Modal"
   :bordered="false"
   size="huge"

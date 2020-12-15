@@ -7,7 +7,7 @@
 <n-modal
   v-model:show="showModal"
   preset="card"
-  :body-style="bodyStyle"
+  :style="bodyStyle"
   title="卡片预设"
   size="huge"
   :bordered="false"

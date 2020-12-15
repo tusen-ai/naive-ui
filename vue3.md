@@ -114,8 +114,8 @@
     - `on-show` => `on-update:show`
     - `on-hide` => `on-update:show`
     - `target` => `to`
-    - `drawer-class` => `body-class` & `body-wrapper-class`
-    - `drawer-style` => `body-style` & `body-wrapper-style`
+    - `drawer-class` => `class`
+    - `drawer-style` => `style`
   - new
     - `display-directive` prop
 - [x] dropdown
@@ -203,7 +203,7 @@
     - `v-model`
     - `on-show` => `on-update:show`
     - `on-hide` => `on-update:show`
-    - `overlay-style` => `body-style`
+    - `overlay-style` => `style`
   - remove
     - default hide behavior for preset
   - BUG:

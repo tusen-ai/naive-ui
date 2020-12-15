@@ -23,6 +23,7 @@
         >
           <n-dialog
             v-if="preset === 'confirm' || preset === 'dialog'"
+            v-bind="$attrs"
             :style="compitableBodyStyle"
             :theme="theme"
             :title="title"
@@ -47,6 +48,7 @@
           </n-dialog>
           <n-card
             v-else-if="preset === 'card'"
+            v-bind="$attrs"
             :theme="theme"
             :style="compitableBodyStyle"
             :title="title"
@@ -104,6 +106,7 @@ export default {
       NDrawerBody: null
     }
   },
+  inheritAttrs: false,
   props: {
     show: {
       type: Boolean,
