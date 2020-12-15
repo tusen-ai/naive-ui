@@ -3,19 +3,23 @@ import { cTB, c, cB, cE, cM, insideModal } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
+      $global: {
+        cubicBezierEaseInOut
+      },
+      $local
+    } = props
+    const {
+      fontSize,
       textColor,
       color,
       colorModal,
       borderColor,
       borderRadius
-    } = props.$local
-    const {
-      cubicBezierEaseInOut
-    } = props.$global
+    } = $local
     return [
       cTB('list', {
         raw: `
-          font-size: 14px;
+          font-size: ${fontSize};
           transition:
             background-color .3s ${cubicBezierEaseInOut},
             color .3s ${cubicBezierEaseInOut},

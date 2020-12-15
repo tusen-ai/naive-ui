@@ -71,7 +71,8 @@ export default c([
         borderRadius,
         headerFontWeight,
         boxShadow,
-        lineHeight
+        lineHeight,
+        fontSize
       },
       $global: {
         cubicBezierEaseOut,
@@ -120,7 +121,7 @@ export default c([
             margin-bottom .3s linear,
             box-shadow .3s ${cubicBezierEaseInOut};
           font-family: inherit;
-          font-size: 14px;
+          font-size: ${fontSize};
           font-weight: 400;
           position: relative;
           display: flex;

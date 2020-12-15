@@ -2,17 +2,14 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
-    const { iconColor } = props.$local
-    const { cubicBezierEaseInOut } = props.$global
+    const { $local: { iconColor, fontSize }, $global: { cubicBezierEaseInOut } } = props
     return [
       cB('popconfirm-content', {
-        raw: `
-          padding: 4px 0;
-        `
+        padding: '4px 0'
       }, [
         cE('body', {
           raw: `
-            font-size: 14px;
+            font-size: ${fontSize};
             white-space: nowrap;
             position: relative;
           `

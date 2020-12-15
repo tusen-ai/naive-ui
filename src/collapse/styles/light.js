@@ -11,14 +11,15 @@ export default create({
       fontWeightStrong,
       textColor1,
       textColor2,
-      dividerColorOverlay
+      dividerColorOverlay,
+      fontSize
     } = vars
     return {
-      titleFontSize: '14px',
+      titleFontSize: fontSize,
       titleFontWeight: fontWeightStrong,
       dividerColor: dividerColorOverlay,
       titleTextColor: textColor1,
-      fontSize: '14px',
+      fontSize: fontSize,
       textColor: textColor2,
       arrowColor: textColor2
     }

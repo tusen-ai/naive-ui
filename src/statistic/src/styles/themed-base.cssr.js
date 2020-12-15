@@ -3,22 +3,25 @@ import { c, cTB, cB, cE } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      cubicBezierEaseInOut
-    } = props.$global
-    const {
-      labelFontWeight,
-      valueFontWeight,
-      valuePrefixTextColor,
-      labelTextColor,
-      valueSuffixTextColor,
-      valueTextColor
-    } = props.$local
+      $local: {
+        labelFontWeight,
+        valueFontWeight,
+        valuePrefixTextColor,
+        labelTextColor,
+        valueSuffixTextColor,
+        valueTextColor,
+        labelFontSize
+      },
+      $global: {
+        cubicBezierEaseInOut
+      }
+    } = props
     return cTB('statistic', [
       cE('label', {
         raw: `
           font-weight: ${labelFontWeight};
           transition: .3s color ${cubicBezierEaseInOut};
-          font-size: 14px;
+          font-size: ${labelFontSize};
         `,
         color: labelTextColor
       }),

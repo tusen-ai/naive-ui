@@ -20,10 +20,12 @@ export default create({
       textColor1,
       dividerColorOverlay,
       fontWeightStrong,
-      borderRadius
+      borderRadius,
+      fontSize
     } = vars
     return {
       ...sizeVariables,
+      labelFontSizeCard: fontSize,
       labelTextColor: textColor2,
       labelTextColorActive: primaryColor,
       labelTextColorHover: primaryColor,

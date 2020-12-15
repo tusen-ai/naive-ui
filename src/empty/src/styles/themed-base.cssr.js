@@ -1,24 +1,49 @@
-import { c, cTB, cE } from '../../../_utils/cssr'
+import { c, cTB, cE, cM, createKey } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
     const {
+      $global: {
+        cubicBezierEaseInOut
+      },
+      $local
+    } = props
+    const {
       textColor,
       iconColor,
       extraTextColor
-    } = props.$local
-    const base = props.$global
-    const cubicBezierEaseInOut = base.cubicBezierEaseInOut
+    } = $local
     return [
       cTB('empty', {
         raw: `
           display: flex;
           flex-direction: column;
           align-items: center;
-          font-size: 14px;
         `
       },
       [
+        ['small', 'medium', 'large', 'huge'].map(size => {
+          const {
+            [createKey('fontSize', size)]: fontSize,
+            [createKey('iconSize', size)]: iconSize
+          } = $local
+          return cM(
+            `${size}-size`,
+            {
+              fontSize
+            },
+            [
+              cE('icon', {
+                raw: `
+                  width: ${iconSize};
+                  height: ${iconSize};
+                  font-size: ${iconSize};
+                  line-height: ${iconSize};
+                `
+              })
+            ]
+          )
+        }),
         cE('icon', {
           raw: `
             color: ${iconColor};

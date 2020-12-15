@@ -10,6 +10,7 @@ export default create({
   peer: [baseLight, iconLight, buttonLight, popoverLight],
   getLocalVars (vars) {
     return {
+      fontSize: vars.fontSize,
       iconColor: vars.warningColor
     }
   }

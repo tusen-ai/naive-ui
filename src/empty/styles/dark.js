@@ -11,10 +11,18 @@ export default create({
     const {
       textColorDisabledOverlay,
       iconColorOverlay,
-      textColor2Overlay
+      textColor2Overlay,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge,
+      fontSizeHuge
     } = vars
     return {
       ...sizeVarables,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge,
+      fontSizeHuge,
       textColor: textColorDisabledOverlay,
       iconColor: iconColorOverlay,
       extraTextColor: textColor2Overlay

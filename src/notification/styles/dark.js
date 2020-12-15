@@ -23,11 +23,13 @@ export default create({
       borderRadius,
       fontWeightStrong,
       boxShadow2,
-      lineHeight
+      lineHeight,
+      fontSize
     } = vars
     return {
       borderRadius,
       lineHeight,
+      fontSize,
       headerFontWeight: fontWeightStrong,
       iconColorSuccess: successColor,
       iconColorInfo: infoColor,

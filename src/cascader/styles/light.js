@@ -30,7 +30,8 @@ export default create({
       primaryColor,
       textColorDisabled,
       dividerColorOverlay,
-      hoverColorOverlay
+      hoverColorOverlay,
+      fontSizeMedium
     } = vars
     return {
       ...sizeVariables,
@@ -39,6 +40,7 @@ export default create({
       menuBoxShadow: boxShadow2,
       menuBorderColor: dividerColorOverlay,
       arrowColor: textColor3,
+      optionFontSize: fontSizeMedium,
       optionColorHover: hoverColorOverlay,
       optionTextColor: textColor2,
       optionTextColorMatched: primaryColor,

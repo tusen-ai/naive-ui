@@ -7,10 +7,11 @@ export default create({
   name: 'Avatar',
   peer: [baseDark],
   getLocalVars (vars) {
-    const { borderRadius, avatarColorOverlay } = vars
+    const { borderRadius, avatarColorOverlay, fontSize } = vars
     return {
       ...commonVariables,
       borderRadius,
+      fontSize,
       color: avatarColorOverlay
     }
   }

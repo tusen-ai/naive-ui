@@ -9,9 +9,9 @@ const HORIZONTAL_MARGIN = {
 }
 
 const VERTICAL_MARGIN = {
-  small: '8px',
-  medium: '12px',
-  large: '16px'
+  small: '4px',
+  medium: '8px',
+  large: '12px'
 }
 
 export default {

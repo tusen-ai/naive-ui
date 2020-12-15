@@ -12,6 +12,9 @@ export default create({
   getLocalVars (vars) {
     return {
       ...commonVariables,
+      fontSizeSmall: vars.fontSizeSmall,
+      fontSizeMedium: vars.fontSizeMedium,
+      fontSizeLarge: vars.fontSizeLarge,
       borderRadius: vars.borderRadius,
       borderColor: 'transparent',
       listColor: vars.inputColorOverlay,

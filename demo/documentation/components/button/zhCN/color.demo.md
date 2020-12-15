@@ -3,7 +3,7 @@
 这两个颜色看起来像毒蘑菇。
 
 ```html
-<n-space>
+<n-space align="center">
   <n-button color="#8a2be2">
     <template v-slot:icon>
       <n-icon>

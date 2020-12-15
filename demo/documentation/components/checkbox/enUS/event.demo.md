@@ -1,17 +1,21 @@
 # Event
 
 ```html
-<n-checkbox
-  v-model:checked="checked"
-  @update:checked="handleCheckedChange"
-  label="Event"
-/>
-<n-checkbox-group v-model:value="cities" @update:value="handleUpdateValue">
-  <n-checkbox value="Beijing" label="Beijing" />
-  <n-checkbox value="Shanghai" label="Shanghai" />
-  <n-checkbox value="Guangzhou" label="Guangzhou" />
-  <n-checkbox value="Shenzen" label="Shenzhen" />
-</n-checkbox-group>
+<n-space item-style="display: flex;" vertical>
+  <n-checkbox
+    v-model:checked="checked"
+    @update:checked="handleCheckedChange"
+    label="Event"
+  />
+  <n-checkbox-group v-model:value="cities" @update:value="handleUpdateValue">
+    <n-space item-style="display: flex;" align="center">
+      <n-checkbox value="Beijing" label="Beijing" />
+      <n-checkbox value="Shanghai" label="Shanghai" />
+      <n-checkbox value="Guangzhou" label="Guangzhou" />
+      <n-checkbox value="Shenzen" label="Shenzhen" />
+    </n-space>
+  </n-checkbox-group>
+</n-space>
 ```
 
 ```js
@@ -33,12 +37,5 @@ export default {
       this.message.info(JSON.stringify(value))
     }
   }
-}
-```
-
-```css
-.n-checkbox,
-.n-button {
-  margin: 0 12px 8px 0;
 }
 ```

@@ -6,8 +6,14 @@ export default create({
   theme: 'dark',
   peer: [baseLight],
   getLocalVars (vars) {
-    const { textColor2Overlay, textColor1Overlay, fontWeightStrong } = vars
+    const {
+      textColor2Overlay,
+      textColor1Overlay,
+      fontWeightStrong,
+      fontSize
+    } = vars
     return {
+      labelFontSize: fontSize,
       labelFontWeight: fontWeightStrong,
       valueFontWeight: fontWeightStrong,
       labelTextColor: textColor2Overlay,

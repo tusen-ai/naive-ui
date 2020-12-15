@@ -3,30 +3,30 @@ import { c, cE, cTB, cM, cB, createKey } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      $local
+      $local,
+      $global: {
+        cubicBezierEaseInOut
+      }
     } = props
     const {
       borderRadius,
+      fontSize,
       color: backgroundColor
     } = $local
-    const {
-      cubicBezierEaseInOut
-    } = props.$global
     return cTB('avatar', {
       raw: `
         color: #FFF;
-        font-size: 14px;
+        font-size: ${fontSize};
         display: inline-block;
         position: relative;
         overflow: hidden;
         text-align: center;
-      `,
-      borderRadius,
-      transition: `
-        background-color .3s ${cubicBezierEaseInOut},
-        color .3s ${cubicBezierEaseInOut}
-      `,
-      backgroundColor
+        border-radius: ${borderRadius};
+        background-color: ${backgroundColor};
+        transition:
+          background-color .3s ${cubicBezierEaseInOut},
+          color .3s ${cubicBezierEaseInOut};
+      `
     }, [
       c('img', {
         width: '100%',

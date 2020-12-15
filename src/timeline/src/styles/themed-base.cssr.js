@@ -3,15 +3,18 @@ import { c, cTB, cB, cE, cM, createKey } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      cubicBezierEaseInOut
-    } = props.$global
-    const {
-      headerTextColor,
-      contentTextColor,
-      metaTextColor,
-      lineColor,
-      headerFontWeight
-    } = props.$local
+      $local: {
+        headerTextColor,
+        contentTextColor,
+        metaTextColor,
+        lineColor,
+        headerFontWeight,
+        fontSize
+      },
+      $global: {
+        cubicBezierEaseInOut
+      }
+    } = props
     return cTB('timeline', {
       raw: `
         position: relative;
@@ -80,7 +83,7 @@ export default c([
           cE('content', {
             raw: `
               transition: color .3s ${cubicBezierEaseInOut};
-              font-size: 14px;
+              font-size: ${fontSize};
               color: ${contentTextColor};
             `
           }),

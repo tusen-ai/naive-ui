@@ -16,10 +16,16 @@ export default create({
       textColorDisabled,
       borderColor,
       primaryColor,
-      textColor2
+      textColor2,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge
     } = vars
     return {
       ...commonVariables,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge,
       borderRadius: vars.borderRadiusSmall,
       color: baseColor,
       colorDisabled: inputColorDisabled,

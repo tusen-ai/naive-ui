@@ -2,18 +2,24 @@ import { c, cTB } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
-    const { fontFamilyMono, cubicBezierEaseInOut } = props.$global
     const {
-      textColor,
-      highlightStyle
-    } = props.$local
+      $global: {
+        fontFamilyMono,
+        cubicBezierEaseInOut
+      },
+      $local: {
+        textColor,
+        highlightStyle,
+        fontSize
+      }
+    } = props
     return [
       cTB(
         'code',
         {
           raw: `
             margin: 0;
-            font-size: 14px;
+            font-size: ${fontSize};
             font-family: ${fontFamilyMono};
           `
         },

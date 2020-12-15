@@ -4,19 +4,22 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 export default c([
   ({ props }) => {
     const {
-      textColor,
-      loaderTextColor,
-      loaderColor,
-      loaderBorderColor
-    } = props.$local
-    const {
-      cubicBezierEaseInOut,
-      fontFamilyMono
-    } = props.$global
+      $local: {
+        textColor,
+        loaderTextColor,
+        loaderColor,
+        loaderBorderColor,
+        fontSize
+      },
+      $global: {
+        cubicBezierEaseInOut,
+        fontFamilyMono
+      }
+    } = props
     return cTB('log', {
       raw: `
         position: relative;
-        font-size: 14px;
+        font-size: ${fontSize};
         box-sizing: border-box;
         color: ${textColor};
         transition:

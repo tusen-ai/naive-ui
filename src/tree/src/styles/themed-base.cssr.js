@@ -5,22 +5,23 @@ import iconSwitchTransition from '../../../_styles/transitions/icon-switch'
 export default c([
   ({ props }) => {
     const {
-      cubicBezierEaseInOut
-    } = props.$global
-    const {
-      nodeColorHover,
-      nodeColorPressed,
-      nodeColorSelected,
-      arrowColor,
-      nodeTextColor,
-      nodeTextColorDisabled,
-      borderRadiusSmall
-    } = props.$local
+      $global: {
+        cubicBezierEaseInOut
+      },
+      $local: {
+        nodeColorHover,
+        nodeColorPressed,
+        nodeColorSelected,
+        arrowColor,
+        nodeTextColor,
+        nodeTextColorDisabled,
+        borderRadiusSmall,
+        fontSize
+      }
+    } = props
     return [
       cTB('tree', {
-        raw: `
-          font-size: 14px;
-        `
+        fontSize
       }, [
         c('ul, li', {
           raw: `
@@ -37,16 +38,12 @@ export default c([
           ])
         ]),
         cB('tree-children-wrapper', {
-          raw: `
-            margin-left: 16px;
-          `
+          marginLeft: '16px'
         }, [
           fadeInHeightExpandTransition({ duration: '0.15s' })
         ]),
         cB('tree-node', {
-          raw: `
-            padding: 6px 0 0 0;
-          `
+          padding: '6px 0 0 0'
         }),
         cB('tree-node-switcher', {
           raw: `
@@ -88,14 +85,10 @@ export default c([
             ])
           ]),
           cM('hide', {
-            raw: `
-              visibility: hidden
-            `
+            visibility: 'hidden'
           }),
           cM('expanded', {
-            raw: `
-              transform: rotate(90deg);
-            `
+            transform: 'rotate(90deg)'
           })
         ]),
         cB('tree-node-checkbox', {
@@ -134,9 +127,7 @@ export default c([
           `
         }, [
           c('&:last-child', {
-            raw: `
-              margin-bottom: 0;
-            `
+            marginBottom: 0
           }),
           cE('padding-box', {
             raw: `
@@ -156,59 +147,39 @@ export default c([
             `
           }),
           cM('block', {
-            raw: `
-              width: calc(100% - 24px);
-            `
+            width: 'calc(100% - 24px)'
           }, [
             cM('checkable', {
-              raw: `
-                width: calc(100% - 48px);
-              `
+              width: 'calc(100% - 48px)'
             })
           ]),
           c('&:hover', {
-            raw: `
-              background-color: ${nodeColorHover};
-            `
+            backgroundColor: nodeColorHover
           }),
           c('&:active', {
-            raw: `
-              background-color: ${nodeColorPressed};
-            `
+            backgroundColor: nodeColorPressed
           }),
           cM('hightlight', [
             cE('text', {
-              raw: `
-                border-bottom-color: ${nodeTextColorDisabled};
-              `
+              borderBottomColor: nodeTextColorDisabled
             })
           ]),
           cM('pending', [
             c('&:hover', {
-              raw: `
-                background-color: transparent;
-              `
+              backgroundColor: 'transparent'
             }),
             cM('pending-bottom', {
-              raw: `
-                border-bottom: 3px solid ${nodeColorHover};
-              `
+              borderBottom: `3px solid ${nodeColorHover}`
             }),
             cM('pending-top', {
-              raw: `
-                border-top: 3px solid ${nodeColorHover};
-              `
+              borderTop: `3px solid ${nodeColorHover}`
             }),
             cM('pending-body', {
-              raw: `
-                background-color: ${nodeColorHover};
-              `
+              backgroundColor: nodeColorHover
             })
           ]),
           cM('selected', {
-            raw: `
-              background-color: ${nodeColorSelected};
-            `
+            backgroundColor: nodeColorSelected
           })
         ])
       ])

@@ -7,9 +7,16 @@ export default create({
   theme: 'light',
   peer: [baseLight],
   getLocalVars (vars) {
-    const { boxShadow2, popoverColor, textColor2, borderRadius } = vars
+    const {
+      boxShadow2,
+      popoverColor,
+      textColor2,
+      borderRadius,
+      fontSize
+    } = vars
     return {
       ...commonVariables,
+      fontSize,
       borderRadius,
       color: popoverColor,
       textColor: textColor2,

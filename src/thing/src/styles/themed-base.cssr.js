@@ -3,18 +3,21 @@ import { c, cTB, cB, cE } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      cubicBezierEaseInOut
-    } = props.$global
-    const {
-      headerTextColor,
-      textColor,
-      headerFontWeight
-    } = props.$local
+      $local: {
+        headerTextColor,
+        textColor,
+        headerFontWeight,
+        fontSize
+      },
+      $global: {
+        cubicBezierEaseInOut
+      }
+    } = props
     return cTB('thing', {
       raw: `
         display: flex;
         transition: color .3s ${cubicBezierEaseInOut};
-        font-size: 14px;
+        font-size: ${fontSize};
       `,
       color: textColor
     }, [

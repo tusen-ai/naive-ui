@@ -1,27 +1,28 @@
-import { cTB, c, cB, cM } from '../../../_utils/cssr'
+import { cTB, c, cB, cM, createKey } from '../../../_utils/cssr'
 import fadeDownTranstion from '../../../_styles/transitions/fade-down'
+import { pxfy, depx } from 'seemly'
 
 export default c([
   ({ props }) => {
     const {
-      $local: {
-        labelTextColor,
-        asteriskColor,
-        feedbackTextColorError,
-        feedbackTextColorWarning,
-        labelPaddingHorizontal,
-        labelPaddingVertical,
-        labelTextAlignHorizontal,
-        lineHeight
-      },
+      $local,
       $global: {
         cubicBezierEaseInOut
       }
     } = props
+    const {
+      labelTextColor,
+      asteriskColor,
+      feedbackTextColorError,
+      feedbackTextColorWarning,
+      labelPaddingHorizontal,
+      labelPaddingVertical,
+      labelTextAlignHorizontal,
+      lineHeight
+    } = $local
     return [
       cB('form', {
         width: '100%',
-        fontSize: '14px',
         lineHeight
       }, [
         cM('inline', {
@@ -42,6 +43,40 @@ export default c([
       cTB('form-item', {
         width: '100%'
       }, [
+        ['small', 'medium', 'large'].map(size => {
+          const {
+            [createKey('blankHeight', size)]: blankHeight,
+            [createKey('feedbackFontSize', size)]: feedbackFontSize,
+            [createKey('labelFontSizeTop', size)]: labelFontSizeTop,
+            [createKey('labelFontSizeLeft', size)]: labelFontSizeLeft,
+            [createKey('labelHeight', size)]: labelHeight
+          } = $local
+          return cM(size + '-size', [
+            cM('top-labelled', [
+              cM('no-label', {
+                paddingTop: labelHeight
+              }),
+              cB('form-item-label', {
+                fontSize: labelFontSizeTop,
+                height: labelHeight
+              })
+            ]),
+            cB('form-item-blank', {
+              minHeight: pxfy(depx(blankHeight) + 6)
+            }),
+            cM('left-labelled', [
+              cB('form-item-label', {
+                fontSize: labelFontSizeLeft,
+                height: pxfy(depx(blankHeight) + 6),
+                lineHeight: pxfy(depx(blankHeight) + 6)
+              })
+            ]),
+            cB('form-item-feedback-wrapper', {
+              minHeight: $local[createKey('feedbackHeight', size)],
+              fontSize: feedbackFontSize
+            })
+          ])
+        }),
         cM('top-labelled', {
           marginRight: '18px'
         }, [
@@ -118,7 +153,6 @@ export default c([
           raw: `
             display: inline-block;
             box-sizing: border-box;
-            font-size: 14px;
             transition: color .3s ${cubicBezierEaseInOut};
           `,
           color: labelTextColor
@@ -133,7 +167,6 @@ export default c([
             padding-top: 0px;
             box-sizing: border-box;
             min-height: 1.25em;
-            font-size: 14px;
             transform-origin: top left;
             line-height: 1.25;
           `

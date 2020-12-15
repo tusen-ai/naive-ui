@@ -14,10 +14,16 @@ export default create({
       disabledBackgroundColor,
       textColor2Overlay,
       opacityDisabled,
-      borderRadius
+      borderRadius,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge
     } = vars
     return {
       ...commonVariables,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge,
       boxShadow: `inset 0 0 0 1px ${borderColorOverlay}`,
       boxShadowActive: `inset 0 0 0 1px ${primaryColor}`,
       boxShadowFocus: `inset 0 0 0 1px ${primaryColor}, 0 0 0 2px ${changeColor(

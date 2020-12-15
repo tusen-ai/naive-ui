@@ -13,9 +13,11 @@ export default create({
       warningColor,
       errorColor,
       textColor2,
-      progressRailColor
+      progressRailColor,
+      fontSize
     } = vars
     return {
+      fontSize,
       fontSizeCircle: '28px',
       railColor: progressRailColor,
       railHeight: '10px',

@@ -23,10 +23,18 @@ export default create({
       errorColor,
       errorColorHover,
       borderRadius,
-      lineHeight
+      lineHeight,
+      fontSizeTiny,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge
     } = vars
     return {
       ...commonVariables,
+      fontSizeTiny,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge,
       lineHeightTextarea: lineHeight,
       borderRadius,
       iconSize: '16px',

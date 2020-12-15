@@ -20,7 +20,8 @@ export default c([
         itemIconColor,
         itemDisabledOpacity,
         lineHeight,
-        borderRadius
+        borderRadius,
+        fontSize
       }
     } = props
     const iconSwitchTransition = createIconSwitchTransition()
@@ -169,7 +170,7 @@ export default c([
                 overflow: hidden;
                 text-decoration: underline;
                 text-decoration-color: transparent;
-                font-size: 14px;
+                font-size: ${fontSize};
                 transition:
                   color .3s ${cubicBezierEaseInOut},
                   text-decoration-color .3s ${cubicBezierEaseInOut};

@@ -23,10 +23,12 @@ export default create({
       dividerColor,
       borderRadius,
       fontWeightStrong,
-      lineHeight
+      lineHeight,
+      fontSize
     } = vars
     return {
       ...commonVars,
+      fontSize,
       lineHeight,
       border: `1px solid ${dividerColor}`,
       headerTextColor: textColor1,

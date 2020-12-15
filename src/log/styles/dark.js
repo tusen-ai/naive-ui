@@ -8,12 +8,13 @@ export default create({
   theme: 'dark',
   peer: [baseDark, baseLoadingDark, scrollbarDark],
   getLocalVars (vars) {
-    const { textColor2Overlay, inputColorOverlay } = vars
+    const { textColor2Overlay, inputColorOverlay, fontSize } = vars
     return {
       textColor: textColor2Overlay,
       loaderTextColor: textColor2Overlay,
       loaderColor: inputColorOverlay,
-      loaderBorderColor: 'transparent'
+      loaderBorderColor: 'transparent',
+      fontSize
     }
   }
 })

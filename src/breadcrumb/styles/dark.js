@@ -9,6 +9,7 @@ export default create({
   getLocalVars (vars) {
     return {
       ...commonVariables,
+      fontSize: vars.fontSize,
       itemTextColor: vars.textColor3Overlay,
       itemTextColorHover: vars.primaryColorHover,
       itemTextColorPressed: vars.primaryColorPressed,

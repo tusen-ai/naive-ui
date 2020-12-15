@@ -23,10 +23,12 @@ export default create({
       dividerColorOverlay,
       borderRadius,
       fontWeightStrong,
-      lineHeight
+      lineHeight,
+      fontSize
     } = vars
     return {
       ...commonVars,
+      fontSize,
       lineHeight,
       border: `1px solid ${dividerColorOverlay}`,
       headerTextColor: textColor1Overlay,

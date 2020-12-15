@@ -7,9 +7,16 @@ export default create({
   theme: 'dark',
   peer: [baseDark],
   getLocalVars (vars) {
-    const { popoverColor, textColor2Overlay, boxShadow2, borderRadius } = vars
+    const {
+      popoverColor,
+      textColor2Overlay,
+      boxShadow2,
+      borderRadius,
+      fontSize
+    } = vars
     return {
       ...commonVariables,
+      fontSize,
       borderRadius,
       color: popoverColor,
       textColor: textColor2Overlay,

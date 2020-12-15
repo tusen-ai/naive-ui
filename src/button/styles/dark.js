@@ -9,7 +9,15 @@ export default create({
   peer: [baseDark, baseWaveDark],
   getLocalVars (vars) {
     return {
-      ...commonVariables(vars),
+      ...commonVariables,
+      borderRadiusTiny: vars.borderRadius,
+      borderRadiusSmall: vars.borderRadius,
+      borderRadiusMedium: vars.borderRadius,
+      borderRadiusLarge: vars.borderRadius,
+      fontSizeTiny: vars.fontSizeTiny,
+      fontSizeSmall: vars.fontSizeSmall,
+      fontSizeMedium: vars.fontSizeMedium,
+      fontSizeLarge: vars.fontSizeLarge,
       opacityDisabled: vars.opacityDisabled,
       // default type
       color: 'transparent',

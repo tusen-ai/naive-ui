@@ -15,10 +15,12 @@ export default create({
       popoverColor,
       textColor2Overlay,
       cardColor,
-      borderRadius
+      borderRadius,
+      fontSize
     } = vars
     return {
       ...sizeVariables,
+      fontSize,
       railColor: railColorOverlay,
       railColorHover: railColorOverlay,
       fillColor: primaryColorSuppl,

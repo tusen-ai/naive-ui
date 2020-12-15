@@ -36,12 +36,18 @@ export default create({
       primaryColor,
       fontWeightStrong,
       borderRadius,
-      lineHeight
+      lineHeight,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge
     } = vars
     return {
       ...commonVariables,
       borderRadius,
       lineHeight,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge,
       borderColor: composite(cardColor, dividerColorOverlay),
       tdColorHover: composite(cardColor, tableColorHoverOverlay),
       thColor: composite(cardColor, tableHeaderColorOverlay),

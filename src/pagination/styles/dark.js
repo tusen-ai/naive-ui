@@ -18,7 +18,8 @@ export default create({
       textColorDisabledOverlay,
       borderColorOverlay,
       opacity3,
-      borderRadius
+      borderRadius,
+      fontSize
     } = vars
     return {
       ...commonVariables,
@@ -39,6 +40,7 @@ export default create({
       itemBorderDisabled: '1px solid transparent',
       itemColorHover: 'transparent',
       itemBorderRadius: borderRadius,
+      itemFontSize: fontSize,
       jumperTextColor: textColor2Overlay,
       jumperTextColorDisabled: textColorDisabledOverlay
     }

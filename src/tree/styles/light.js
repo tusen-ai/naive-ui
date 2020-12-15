@@ -17,9 +17,11 @@ export default create({
       primaryColor,
       textColor3,
       textColor2,
-      textColorDisabled
+      textColorDisabled,
+      fontSize
     } = vars
     return {
+      fontSize,
       borderRadiusSmall,
       nodeColorHover: hoverColorOverlay,
       nodeColorPressed: activeColorOverlay,

@@ -5,6 +5,7 @@ export default c([
     const {
       $global: { cubicBezierEaseInOut },
       $local: {
+        blockquoteFontSize,
         blockquotePrefixColor,
         blockquoteTextColor,
         blockquoteLineHeight
@@ -12,6 +13,7 @@ export default c([
     } = props
     return cTB('blockquote', {
       raw: `
+        font-size: ${blockquoteFontSize};
         line-height: ${blockquoteLineHeight};
         margin: 0;
         margin-top: 12px;

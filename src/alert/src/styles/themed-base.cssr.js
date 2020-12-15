@@ -3,8 +3,10 @@ import fadeInHeightExpandTranstion from '../../../_styles/transitions/fade-in-he
 
 export default c([
   ({ props }) => {
-    const { cubicBezierEaseInOut } = props.$global
-    const { borderRadius, titleFontWeight, lineHeight } = props.$local
+    const {
+      $global: { cubicBezierEaseInOut },
+      $local: { borderRadius, titleFontWeight, lineHeight, fontSize }
+    } = props
     return cTB('alert', {
       lineHeight,
       borderRadius,
@@ -70,7 +72,7 @@ export default c([
         ]),
         cE('content', {
           transition: `color .3s ${cubicBezierEaseInOut}`,
-          fontSize: '14px'
+          fontSize
         })
       ]),
       cE('icon', {

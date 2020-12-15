@@ -12,6 +12,9 @@ export default create({
   getLocalVars (vars) {
     return {
       ...commonVars,
+      itemFontSize: vars.fontSize,
+      panelDayFontSize: vars.fontSize,
+      panelMonthFontSize: vars.fontSize,
       itemTextColor: vars.textColor2Overlay,
       itemTextColorMatched: vars.popoverColor,
       itemSupColor: vars.primaryColor,

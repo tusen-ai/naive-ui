@@ -16,7 +16,8 @@ export default create({
       infoColor,
       warningColor,
       lineHeight,
-      fontWeightStrong
+      fontWeightStrong,
+      fontSize
     } = vars
     return {
       ...sizeVariables,
@@ -24,6 +25,7 @@ export default create({
       headerFontWeight: fontWeightStrong,
       headerTextColor: textColor1Overlay,
       descriptionTextColor: textColor2Overlay,
+      descriptionFontSize: fontSize,
       iconColorError: errorColor,
       iconColorSuccess: successColor,
       iconColorInfo: infoColor,

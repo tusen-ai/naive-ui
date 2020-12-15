@@ -21,9 +21,11 @@ export default create({
       borderColor,
       hoverColorOverlay,
       lineHeight,
-      borderRadius
+      borderRadius,
+      fontSize
     } = vars
     return {
+      fontSize,
       lineHeight,
       borderRadius,
       draggerColor: actionColorOverlay,

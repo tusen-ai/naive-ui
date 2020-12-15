@@ -8,12 +8,13 @@ export default create({
   theme: 'light',
   peer: [baseLight, baseLoadingLight, scrollbarLight],
   getLocalVars (vars) {
-    const { textColor2, modalColor, borderColor } = vars
+    const { textColor2, modalColor, borderColor, fontSize } = vars
     return {
       textColor: textColor2,
       loaderTextColor: textColor2,
       loaderColor: modalColor,
-      loaderBorderColor: borderColor
+      loaderBorderColor: borderColor,
+      fontSize
     }
   }
 })

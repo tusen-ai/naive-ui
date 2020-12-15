@@ -36,7 +36,6 @@ export default c([
         raw: `
           font-variant-numeric: tabular-nums;
           line-height: ${lineHeight};
-          font-size: 14px;
           width: 100%;
           border-radius: ${borderRadius} ${borderRadius} 0 0;
           text-align: left;

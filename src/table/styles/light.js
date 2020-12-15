@@ -16,10 +16,16 @@ export default create({
       textColor2,
       borderRadius,
       fontWeightStrong,
-      lineHeight
+      lineHeight,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge
     } = vars
     return {
       ...sizeVariables,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge,
       lineHeight,
       borderColor: dividerColorOverlay,
       bodyColor: cardColor,

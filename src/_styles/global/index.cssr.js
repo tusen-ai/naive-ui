@@ -5,7 +5,7 @@ export default c([
   // virtualScrollerStyle,
   c('body', {
     margin: 0,
-    fontSize: '14px',
+    fontSize: commonVariables.fontSize,
     fontFamily: commonVariables.fontFamily
   }, [
     c('>', [

@@ -16,10 +16,12 @@ export default create({
       textColor1Overlay,
       textColor2Overlay,
       railColorOverlay,
-      fontWeightStrong
+      fontWeightStrong,
+      fontSize
     } = vars
     return {
       ...sizeVariables,
+      fontSize,
       headerFontWeight: fontWeightStrong,
       circleBorderColor: textColor3Overlay,
       circleBorderColorInfo: infoColorSuppl,

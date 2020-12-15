@@ -5,33 +5,36 @@ import { depx, pxfy } from 'seemly'
 export default c([
   ({ props }) => {
     const {
-      railColor,
-      railColorHover,
-      fillColor,
-      fillColorHover,
-      handleColor,
-      dotColor,
-      dotColorModal,
-      handleBoxShadow,
-      handleBoxShadowHover,
-      handleBoxShadowActive,
-      handleBoxShadowFocus,
-      indicatorColor,
-      indicatorBoxShadow,
-      indicatorTextColor,
-      dotBorder,
-      dotBoxShadow,
-      railHeight,
-      handleSize,
-      dotHeight,
-      dotWidth,
-      dotBorderRadius,
-      indicatorBorderRadius
-    } = props.$local
-    const {
-      cubicBezierEaseInOut,
-      transformDebounceScale
-    } = props.$global
+      $local: {
+        railColor,
+        railColorHover,
+        fillColor,
+        fillColorHover,
+        handleColor,
+        dotColor,
+        dotColorModal,
+        handleBoxShadow,
+        handleBoxShadowHover,
+        handleBoxShadowActive,
+        handleBoxShadowFocus,
+        indicatorColor,
+        indicatorBoxShadow,
+        indicatorTextColor,
+        dotBorder,
+        dotBoxShadow,
+        railHeight,
+        handleSize,
+        dotHeight,
+        dotWidth,
+        dotBorderRadius,
+        indicatorBorderRadius,
+        fontSize
+      },
+      $global: {
+        cubicBezierEaseInOut,
+        transformDebounceScale
+      }
+    } = props
     return [
       cTB('slider', {
         raw: `
@@ -166,7 +169,7 @@ export default c([
       cTB('slider-handle-indicator', {
         raw: `
           transform: ${transformDebounceScale};
-          font-size: 14px;
+          font-size: ${fontSize};
           padding: 8px 12px;
           margin-bottom: 12px;
         `,

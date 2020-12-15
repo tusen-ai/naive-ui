@@ -14,9 +14,5 @@ export default {
   headerFontSizeSmall: '16px',
   headerFontSizeMedium: '18px',
   headerFontSizeLarge: '18px',
-  headerFontSizeHuge: '18px',
-  fontSizeSmall: '14px',
-  fontSizeMedium: '14px',
-  fontSizeLarge: '14px',
-  fontSizeHuge: '14px'
+  headerFontSizeHuge: '18px'
 }

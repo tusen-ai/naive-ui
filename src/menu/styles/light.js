@@ -27,7 +27,8 @@ export default create({
       itemIconColorChildSelected: vars.primaryColor,
       itemIconColorCollapsed: vars.textColor1,
       borderColorHorizontal: 'transparent',
-      submenuArrowColor: vars.primaryColor
+      submenuArrowColor: vars.primaryColor,
+      fontSize: vars.fontSize
     }
   }
 })

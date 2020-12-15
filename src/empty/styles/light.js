@@ -8,9 +8,21 @@ export default create({
   name: 'Empty',
   peer: [baseLight, iconLight],
   getLocalVars (vars) {
-    const { textColorDisabled, iconColorOverlay, textColor2 } = vars
+    const {
+      textColorDisabled,
+      iconColorOverlay,
+      textColor2,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge,
+      fontSizeHuge
+    } = vars
     return {
       ...sizeVarables,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge,
+      fontSizeHuge,
       textColor: textColorDisabled,
       iconColor: iconColorOverlay,
       extraTextColor: textColor2

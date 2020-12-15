@@ -23,9 +23,11 @@ export default create({
       infoColor,
       successColor,
       warningColor,
-      errorColor
+      errorColor,
+      fontSize
     } = vars
     return {
+      fontSize,
       lineHeight,
       titleFontWeight: fontWeightStrong,
       borderRadius,

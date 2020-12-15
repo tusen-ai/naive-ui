@@ -3,7 +3,7 @@
 The two colors look like toadstool.
 
 ```html
-<n-space>
+<n-space align="center">
   <n-button color="#8a2be2">
     <template v-slot:icon>
       <n-icon>

@@ -12,6 +12,9 @@ export default create({
   getLocalVars (vars) {
     return {
       ...commonVars,
+      itemFontSize: vars.fontSize,
+      panelDayFontSize: vars.fontSize,
+      panelMonthFontSize: vars.fontSize,
       itemTextColor: vars.textColor2,
       itemTextColorDisabled: vars.textColorDisabled,
       itemTextColorMatched: vars.popoverColor,

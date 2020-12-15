@@ -5,24 +5,27 @@ import fadeInTransition from '../../../../_styles/transitions/fade-in.js'
 export default c([
   ({ props }) => {
     const {
-      cubicBezierEaseInOut,
-      cubicBezierEaseIn,
-      cubicBezierEaseOut,
-      fontWeightStrong
-    } = props.$global
-    const {
-      borderRadius,
-      borderColor,
-      listColor,
-      headerColor,
-      headerTextColor,
-      headerTextColorDisabled,
-      headerExtraTextColor,
-      filterBorderColor,
-      itemTextColor,
-      itemColorPending,
-      itemTextColorDisabled
-    } = props.$local
+      $local: {
+        borderRadius,
+        borderColor,
+        listColor,
+        headerColor,
+        headerTextColor,
+        headerTextColorDisabled,
+        headerExtraTextColor,
+        filterBorderColor,
+        itemTextColor,
+        itemColorPending,
+        itemTextColorDisabled,
+        extraFontSize
+      },
+      $global: {
+        cubicBezierEaseInOut,
+        cubicBezierEaseIn,
+        cubicBezierEaseOut,
+        fontWeightStrong
+      }
+    } = props
     return [
       animationStyle,
       cTB('transfer', {
@@ -90,7 +93,7 @@ export default c([
             ]),
             cE('extra', {
               transition: `color .3s ${cubicBezierEaseInOut}`,
-              fontSize: '12px',
+              fontSize: extraFontSize,
               justifySelf: 'flex-end',
               marginRight: '14px',
               whiteSpace: 'nowrap',

@@ -160,7 +160,7 @@ const TIME_CONST = {
   ]
 }
 
-const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+const daysKey = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 export default {
   mixins: [locale('DatePicker')],
@@ -214,7 +214,7 @@ export default {
       return this.NDatePicker.timePickerSize
     },
     weekdays () {
-      return weekdays.map((weekday) => this.localeNs[weekday])
+      return daysKey.map((weekday) => this.localeNs[weekday])
     }
   },
   methods: {

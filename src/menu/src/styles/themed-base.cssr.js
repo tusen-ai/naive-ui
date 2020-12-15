@@ -25,7 +25,8 @@ export default c([
         itemExtraTextColorSelected,
         itemExtraTextColorChildSelected,
         submenuArrowColor,
-        borderRadius
+        borderRadius,
+        fontSize
       },
       $global: {
         cubicBezierEaseInOut
@@ -37,7 +38,7 @@ export default c([
       transition: `background-color .3s ${cubicBezierEaseInOut}`,
       width: '100%',
       boxSizing: 'border-box',
-      fontSize: '14px',
+      fontSize,
       paddingBottom: '6px'
     }, [
       cM('transition-disabled', [

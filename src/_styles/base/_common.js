@@ -13,6 +13,13 @@ export default {
   borderRadius: '3px',
   borderRadiusSmall: '2px',
 
+  fontSize: '14px',
+  fontSizeTiny: '12px',
+  fontSizeSmall: '14px',
+  fontSizeMedium: '14px',
+  fontSizeLarge: '15px',
+  fontSizeHuge: '16px',
+
   lineHeight: '1.5',
 
   transformDebounceScale: 'scale(1)'

@@ -10,6 +10,7 @@ export default create({
   peer: [baseDark, iconDark, buttonDark, popoverDark],
   getLocalVars (vars) {
     return {
+      fontSize: vars.fontSize,
       iconColor: vars.warningColor
     }
   }

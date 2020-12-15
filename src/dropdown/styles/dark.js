@@ -13,7 +13,11 @@ export default create({
       dividerColorOverlay,
       hoverColorOverlay,
       popoverColor,
-      borderRadius
+      borderRadius,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge,
+      fontSizeHuge
     } = vars
     return {
       ...commonVariables,
@@ -23,7 +27,11 @@ export default create({
       boxShadow: boxShadow2,
       suffixColor: textColor2,
       prefixColor: textColor2,
-      optionColorHover: hoverColorOverlay
+      optionColorHover: hoverColorOverlay,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge,
+      fontSizeHuge
     }
   }
 })

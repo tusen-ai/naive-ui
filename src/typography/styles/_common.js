@@ -23,10 +23,8 @@ export default {
   headerBarWidth4: '3px',
   headerBarWidth5: '3px',
   headerBarWidth6: '3px',
-  pFontSize: '14px',
   pMargin: '0 0 16px 0',
   liMargin: '.25em 0 0 0',
-  liFontSize: '14px',
   olPadding: '0 0 0 2em',
   ulPadding: '0 0 0 2em'
 }

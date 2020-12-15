@@ -25,12 +25,18 @@ export default create({
       closeColorOverlay,
       closeColorHoverOverlay,
       closeColorPressedOverlay,
-      borderRadiusSmall: borderRadius
+      borderRadiusSmall: borderRadius,
+      fontSizeTiny,
+      fontSizeSmall,
+      fontSizeMedium
     } = vars
     return {
       ...commonVariables,
       borderRadius,
       opacityDisabled,
+      fontSizeSmall: fontSizeTiny,
+      fontSizeMedium: fontSizeSmall,
+      fontSizeLarge: fontSizeMedium,
       // checked
       textColorCheckable: textColor2Overlay,
       textColorHoverCheckable: primaryColorHover,

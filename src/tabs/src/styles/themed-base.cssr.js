@@ -24,7 +24,8 @@ export default c([
       tabBorderColor,
       paneTextColor,
       tabFontWeight,
-      tabBorderRadius
+      tabBorderRadius,
+      labelFontSizeCard
     } = $local
     return cTB('tabs', {
       raw: `
@@ -36,7 +37,7 @@ export default c([
     }, [
       ['small', 'medium', 'large', 'huge'].map(size => {
         const {
-          [createKey('labelFontSize', size)]: fontSize
+          [createKey('labelFontSizeLine', size)]: fontSize
         } = $local
         return cM(`${size}-size`, [
           cM('line-type', [
@@ -51,19 +52,13 @@ export default c([
       cM('flex', [
         cB('tabs-nav', [
           cB('tabs-nav-scroll', {
-            raw: `
-              width: 100%
-            `
+            width: '100%'
           }, [
             cB('tabs-label-wrapper', {
-              raw: `
-                width: 100%;
-              `
+              width: '100%'
             }, [
               cB('tabs-label', {
-                raw: `
-                  margin-right: 0;
-                `
+                marginRight: 0
               })
             ])
           ])
@@ -78,9 +73,7 @@ export default c([
         `
       }, [
         cB('tabs-nav-scroll', {
-          raw: `
-            overflow: hidden;
-          `
+          overflow: 'hidden'
         }),
         cB('tabs-nav-scroll-button', {
           raw: `
@@ -143,9 +136,7 @@ export default c([
           `
         }, [
           cM('disabled', {
-            raw: `
-              cursor: not-allowed
-            `
+            cursor: 'not-allowed'
           }),
           cE('close', {
             raw: `
@@ -161,20 +152,20 @@ export default c([
           cE('label', {
             raw: `
               transition: color .3s ${cubicBezierEaseInOut};
-            `,
-            color: labelTextColor
+              color: ${labelTextColor};
+            `
           })
         ])
       ]),
       cB('tab-panel', {
         raw: `
+          color: ${paneTextColor};
           width: 100%;
           margin-top: 8px;
           transition:
             color .3s ${cubicBezierEaseInOut},
             background-color .3s ${cubicBezierEaseInOut};
-        `,
-        color: paneTextColor
+        `
       }),
       cM('line-type', [
         cB('tabs-nav', [
@@ -191,15 +182,8 @@ export default c([
             vertical-align: bottom;
           `
         }, [
-          cE('label', {
-            raw: `
-              font-size: 14px;
-            `
-          }),
           c('&:not(:last-child)', {
-            raw: `
-             margin-right: 36px;
-            `
+            marginRight: '36px'
           }),
           c('&:hover', [
             cE('label', {
@@ -263,9 +247,7 @@ export default c([
           `
         }, [
           cE('label', {
-            raw: `
-              font-size: 14px;
-            `,
+            fontSize: labelFontSizeCard,
             color: tabTextColor
           }),
           c('&:hover', {
@@ -276,9 +258,6 @@ export default c([
             border: `1px solid ${tabBorderColorActive}`
           }, [
             cE('label', {
-              raw: `
-                font-size: 14px;
-              `,
               color: tabTextColorActive
             })
           ]),

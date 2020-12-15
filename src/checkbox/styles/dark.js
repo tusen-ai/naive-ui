@@ -15,10 +15,16 @@ export default create({
       borderColorOverlay,
       primaryColor,
       textColor2Overlay,
-      textColorDisabledOverlay
+      textColorDisabledOverlay,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge
     } = vars
     return {
       ...commonVariables,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge,
       borderRadius: vars.borderRadiusSmall,
       color: 'transparent',
       colorDisabled: inputColorDisabledOverlay,

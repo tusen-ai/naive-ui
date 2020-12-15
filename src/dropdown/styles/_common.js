@@ -19,9 +19,5 @@ export default {
   optionIconPrefixWidthSmall: '44px',
   optionIconPrefixWidthMedium: '44px',
   optionIconPrefixWidthLarge: '48px',
-  optionIconPrefixWidthHuge: '48px',
-  fontSizeSmall: '14px',
-  fontSizeMedium: '14px',
-  fontSizeLarge: '15px',
-  fontSizeHuge: '16px'
+  optionIconPrefixWidthHuge: '48px'
 }

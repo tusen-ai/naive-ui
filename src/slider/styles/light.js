@@ -14,10 +14,12 @@ export default create({
       primaryColor,
       baseColor,
       cardColor,
-      borderRadius
+      borderRadius,
+      fontSize
     } = vars
     return {
       ...sizeVariables,
+      fontSize,
       railColor: railColorOverlay,
       railColorHover: railColorOverlay,
       fillColor: primaryColor,

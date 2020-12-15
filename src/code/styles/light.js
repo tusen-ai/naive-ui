@@ -7,9 +7,10 @@ export default create({
   name: 'Code',
   peer: [baseLight],
   getLocalVars (vars) {
-    const { textColor2 } = vars
+    const { textColor2, fontSize } = vars
     return {
       textColor: textColor2,
+      fontSize,
       highlightStyle: [
         c(
           `

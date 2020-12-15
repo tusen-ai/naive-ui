@@ -11,14 +11,16 @@ export default create({
       cardColor,
       modalColor,
       dividerColorOverlay,
-      borderRadius
+      borderRadius,
+      fontSize
     } = vars
     return {
       textColor: textColor2Overlay,
       color: cardColor,
       colorModal: modalColor,
       borderColor: dividerColorOverlay,
-      borderRadius
+      borderRadius,
+      fontSize
     }
   }
 })

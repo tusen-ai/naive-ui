@@ -14,19 +14,20 @@ export default c([
       $global: {
         cubicBezierEaseInOut
       },
-      $local: {
-        headerTextColor,
-        descriptionTextColor,
-        lineHeight,
-        headerFontWeight
-      }
+      $local
     } = props
-    const { $local } = props
+    const {
+      headerTextColor,
+      descriptionTextColor,
+      descriptionFontSize,
+      lineHeight,
+      headerFontWeight
+    } = $local
     return cTB('result', {
       raw: `
         color: ${descriptionTextColor};
         line-height: ${lineHeight};
-        font-size: 14px;
+        font-size: ${descriptionFontSize};
         transition:
           color .3s ${cubicBezierEaseInOut};
       `
@@ -35,36 +36,30 @@ export default c([
         .map(status => createResultStatus(status, $local[createKey('iconColor', status)])),
       ['small', 'medium', 'large', 'huge'].map(size => {
         const {
-          $local: {
-            [createKey('iconSize', size)]: iconSize,
-            [createKey('headerFontSize', size)]: headerFontSize,
-            [createKey('descriptionFontSize', size)]: descriptionFontSize
-          }
-        } = props
-        return cTB('result',
-          [
-            cM(`${size}-size`, [
-              cB('result-icon', {
-                raw: `
+          [createKey('iconSize', size)]: iconSize,
+          [createKey('headerFontSize', size)]: headerFontSize,
+          [createKey('descriptionFontSize', size)]: descriptionFontSize
+        } = $local
+        return cM(`${size}-size`, [
+          cB('result-icon', {
+            raw: `
               display: flex;
               justify-content: center;
             `
-              }, [
-                cE('status-image', {
-                  width: iconSize
-                })
-              ]),
-              cB('result-header', [
-                cE('title', {
-                  fontSize: headerFontSize
-                }),
-                cE('description', {
-                  fontSize: descriptionFontSize
-                })
-              ])
-            ])
-          ]
-        )
+          }, [
+            cE('status-image', {
+              width: iconSize
+            })
+          ]),
+          cB('result-header', [
+            cE('title', {
+              fontSize: headerFontSize
+            }),
+            cE('description', {
+              fontSize: descriptionFontSize
+            })
+          ])
+        ])
       }),
       cB('result-icon', {
         raw: `

@@ -1,4 +1,4 @@
-import { cTB, c, cB, cE, cM } from '../../../_utils/cssr'
+import { cTB, c, cB, cE, cM, createKey } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
@@ -15,7 +15,8 @@ export default c([
         iconSizeLine,
         textColorCircle,
         textColorLineInner,
-        textColorLineOuter
+        textColorLineOuter,
+        fontSize
       }
     } = props
     return cTB('progress', {
@@ -58,7 +59,7 @@ export default c([
               color: ${textColorLineOuter};
               text-align: center;
               width: 40px;
-              font-size: 14px;
+              font-size: ${fontSize};
               padding-left: 4px;
               transition: color .3s ${cubicBezierEaseInOut};
             `
@@ -182,7 +183,7 @@ export default c([
                 marginLeft: '14px',
                 marginRight: '14px',
                 height: '21px',
-                fontSize: '14px',
+                fontSize,
                 lineHeight: '21px',
                 color: textColorLineInner,
                 fontWeight: fontWeightStrong,
@@ -201,7 +202,7 @@ export default c([
             }),
             cB('progress-graph-line-indicator', {
               raw: `
-                font-size: 14px;
+                font-size: ${fontSize};
                 transform: translateZ(0);
                 display: flex;
                 vertical-align: middle;
@@ -245,7 +246,83 @@ export default c([
             })
           ])
         ])
-      ])
+      ]),
+      ['info', 'success', 'warning', 'error', 'default'].map(status => {
+        const {
+          $local: {
+            lineBgProcessing,
+            textColorCircle,
+            [createKey('iconColor', status)]: iconColor,
+            [createKey('fillColor', status)]: fillColor
+          },
+          $global: {
+            cubicBezierEaseInOut
+          }
+        } = props
+        return cM(status, [
+          cB('progress-text', {
+            color: textColorCircle
+          }),
+          cB('progress-icon', [
+            cB('icon', {
+              color: iconColor
+            })
+          ]),
+          cB('progress-graph', [
+            cB('progress-graph-circle', [
+              cB('progress-graph-circle-fill', {
+                stroke: fillColor
+              })
+            ]),
+            cB('progress-graph-line', [
+              cB('progress-graph-line-rail', [
+                cB('progress-graph-line-fill', {
+                  background: fillColor
+                }, [
+                  cM('processing', [
+                    c('&::after', {
+                      content: "''",
+                      backgroundImage: lineBgProcessing,
+                      animation: `progress-processing-animation 2s ${cubicBezierEaseInOut} infinite`
+                    })
+                  ])
+                ])
+              ]),
+              cB('progress-graph-line-indicator', {
+                background: fillColor
+              })
+            ])
+          ])
+        ])
+      })
     ])
-  }
+  },
+  c('@keyframes progress-processing-animation', {
+    raw: `
+      0% {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 100%;
+        opacity: 1;
+      }
+      66% {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        opacity: 0;
+      }
+      100% {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        opacity: 0;
+      }
+    `
+  })
 ])

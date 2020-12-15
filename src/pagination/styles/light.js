@@ -16,7 +16,8 @@ export default create({
       inputColorDisabled,
       textColorDisabled,
       borderColor,
-      borderRadius
+      borderRadius,
+      fontSize
     } = vars
     return {
       ...commonVariables,
@@ -35,6 +36,7 @@ export default create({
       itemBorderActive: `1px solid ${primaryColor}`,
       itemBorderDisabled: `1px solid ${borderColor}`,
       itemBorderRadius: borderRadius,
+      itemFontSize: fontSize,
       jumperTextColor: textColor2,
       jumperTextColorDisabled: textColorDisabled
     }

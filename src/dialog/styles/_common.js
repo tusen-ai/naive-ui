@@ -1,7 +1,6 @@
 export default {
   headerFontSize: '18px',
   padding: '16px 28px 20px 28px',
-  fontSize: '14px',
   iconSize: '28px',
   actionSpace: '12px',
   contentMargin: '8px 0 16px 0',
