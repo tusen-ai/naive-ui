@@ -81,6 +81,18 @@ export default {
       default: null
     },
     // deprecated
+    overlayStyle: {
+      validator () {
+        if (__DEV__) {
+          warn(
+            'modal',
+            '`overlay-style` is deprecated, please use `style` instead.'
+          )
+        }
+        return true
+      },
+      default: undefined
+    },
     onBeforeHide: {
       validator () {
         if (__DEV__) {
@@ -183,6 +195,10 @@ export default {
                   NModalBodyWrapper,
                   {
                     ...this.$attrs,
+                    style: {
+                      ...this.$attrs.style,
+                      ...this.overlayStyle
+                    },
                     ref: 'bodyWrapper',
                     ...omit(this.$props, ['maskClosable', 'to']),
                     theme: this.mergedTheme,

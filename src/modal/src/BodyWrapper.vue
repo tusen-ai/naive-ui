@@ -24,7 +24,6 @@
           <n-dialog
             v-if="preset === 'confirm' || preset === 'dialog'"
             v-bind="$attrs"
-            :style="compitableBodyStyle"
             :theme="theme"
             :title="title"
             :closable="closable"
@@ -50,7 +49,6 @@
             v-else-if="preset === 'card'"
             v-bind="$attrs"
             :theme="theme"
-            :style="compitableBodyStyle"
             :title="title"
             :closable="closable"
             :size="size"
@@ -82,7 +80,6 @@
 <script>
 import { nextTick, reactive, toRefs, toRef, watch, ref, inject } from 'vue'
 import { clickoutside } from 'vdirs'
-import { useCompitable } from 'vooks'
 import { NScrollbar } from '../../scrollbar'
 import { NDialog } from '../../dialog'
 import { NCard } from '../../card'
@@ -162,7 +159,6 @@ export default {
     return {
       NModal,
       mousePosition: toRef(NModal, 'mousePosition'),
-      compitableBodyStyle: useCompitable(props, ['overlayStyle', 'bodyStyle']),
       bodyRef: ref(null),
       ...dataRefs
     }

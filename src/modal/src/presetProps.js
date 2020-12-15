@@ -1,8 +1,4 @@
 export default {
-  bodyStyle: {
-    type: Object,
-    default: undefined
-  },
   // For preset: confirm, card
   title: {
     type: String,

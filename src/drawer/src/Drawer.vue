@@ -104,7 +104,7 @@ export default {
       validator () {
         warn(
           'drawer',
-          '`draw-style` is deprecated, please use `body-style` instead.'
+          '`drawer-style` is deprecated, please use `style` instead.'
         )
         return true
       },
@@ -114,7 +114,7 @@ export default {
       validator () {
         warn(
           'drawer',
-          '`draw-class` is deprecated, please use `body-class` instead.'
+          '`drawer-class` is deprecated, please use `class` instead.'
         )
         return true
       },
