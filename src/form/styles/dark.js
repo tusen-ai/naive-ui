@@ -8,9 +8,10 @@ export default create({
   theme: 'dark',
   peer: [baseDark, gridDark],
   getLocalVars (vars) {
-    const { textColor1Overlay, errorColor, warningColor } = vars
+    const { textColor1Overlay, errorColor, warningColor, lineHeight } = vars
     return {
       ...commonVariables,
+      lineHeight,
       labelTextColor: textColor1Overlay,
       asteriskColor: errorColor,
       feedbackTextColorError: errorColor,

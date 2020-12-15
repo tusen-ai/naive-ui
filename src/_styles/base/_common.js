@@ -13,7 +13,7 @@ export default {
   borderRadius: '3px',
   borderRadiusSmall: '2px',
 
-  lineHeight: '1.75',
+  lineHeight: '1.5',
 
   transformDebounceScale: 'scale(1)'
 }

@@ -8,9 +8,10 @@ export default create({
   theme: 'light',
   peer: [baseLight, gridLight],
   getLocalVars (vars) {
-    const { textColor1, errorColor, warningColor } = vars
+    const { textColor1, errorColor, warningColor, lineHeight } = vars
     return {
       ...commonVariables,
+      lineHeight,
       labelTextColor: textColor1,
       asteriskColor: errorColor,
       feedbackTextColorError: errorColor,

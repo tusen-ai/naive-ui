@@ -22,10 +22,12 @@ export default create({
       warningColorHover,
       errorColor,
       errorColorHover,
-      borderRadius
+      borderRadius,
+      lineHeight
     } = vars
     return {
       ...commonVariables,
+      lineHeightTextarea: lineHeight,
       borderRadius,
       iconSize: '16px',
       textColor: textColor2,

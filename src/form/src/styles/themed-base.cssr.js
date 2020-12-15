@@ -4,22 +4,25 @@ import fadeDownTranstion from '../../../_styles/transitions/fade-down'
 export default c([
   ({ props }) => {
     const {
-      labelTextColor,
-      asteriskColor,
-      feedbackTextColorError,
-      feedbackTextColorWarning,
-      labelPaddingHorizontal,
-      labelPaddingVertical,
-      labelTextAlignHorizontal
-    } = props.$local
-    const {
-      cubicBezierEaseInOut
-    } = props.$global
+      $local: {
+        labelTextColor,
+        asteriskColor,
+        feedbackTextColorError,
+        feedbackTextColorWarning,
+        labelPaddingHorizontal,
+        labelPaddingVertical,
+        labelTextAlignHorizontal,
+        lineHeight
+      },
+      $global: {
+        cubicBezierEaseInOut
+      }
+    } = props
     return [
       cB('form', {
         width: '100%',
         fontSize: '14px',
-        lineHeight: '1.5'
+        lineHeight
       }, [
         cM('inline', {
           width: '100%',

@@ -2,23 +2,26 @@ import { c, cTB, cB, cE, cM, cNotM, insideModal, createKey } from '../../../_uti
 
 export default c([
   ({ props }) => {
-    const { cubicBezierEaseInOut } = props.$global
-    const { borderRadius } = props.$local
     const {
-      borderColor,
-      tdColorHover,
-      thColor,
-      thColorHover,
-      tdColor,
-      tdTextColor,
-      thTextColor,
-      thFontWeight,
-      thButtonColorHover,
-      thButtonIconColor,
-      thButtonIconColorActive,
-      fixedColumnBoxShadowColor,
-      filterSize
-    } = props.$local
+      $global: { cubicBezierEaseInOut },
+      $local: {
+        borderColor,
+        tdColorHover,
+        thColor,
+        thColorHover,
+        tdColor,
+        tdTextColor,
+        thTextColor,
+        thFontWeight,
+        thButtonColorHover,
+        thButtonIconColor,
+        thButtonIconColorActive,
+        fixedColumnBoxShadowColor,
+        filterSize,
+        borderRadius,
+        lineHeight
+      }
+    } = props
     const fixedColumnStyle = createFixedColumnStyle({ cubicBezierEaseInOut, fixedColumnBoxShadowColor })
     return [
       cTB('data-table', {
@@ -57,7 +60,7 @@ export default c([
             border-top-left-radius: ${borderRadius};
             border-top-right-radius: ${borderRadius};
             overflow: hidden;
-            line-height: 1.5;
+            line-height: ${lineHeight};
           `
         }),
         cM('single-column', [
@@ -345,12 +348,14 @@ export default c([
 
 function createStyleInsideModal (props) {
   const {
-    tdColorModal,
-    thColorModal,
-    borderColorModal,
-    thColorHoverModal,
-    tdColorHoverModal
-  } = props.$local
+    $local: {
+      tdColorModal,
+      thColorModal,
+      borderColorModal,
+      thColorHoverModal,
+      tdColorHoverModal
+    }
+  } = props
   return insideModal(cTB('data-table', [
     cB('data-table-table', {
       backgroundColor: tdColorModal

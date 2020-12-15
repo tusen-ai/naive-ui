@@ -8,7 +8,7 @@ export default c([
     const fontSize = props.$local[createKey('fontSize', size)]
     const lineHeight = pxfy(Math.round(depx(fontSize) * 1.5))
     const paddingTop = pxfy((depx(height) - depx(lineHeight)) / 2)
-    const roundBorderRadius = pxfy(depx(height) / 2)
+    const borderRadiusRound = pxfy(depx(height) / 2)
     const {
       paddingLeft,
       paddingRight,
@@ -16,7 +16,7 @@ export default c([
     } = props.$local
     return cTB('input', [
       cM(size + '-size', {
-        lineHeight: lineHeight,
+        lineHeight,
         fontSize
       }, [
         cE('input', {
@@ -87,7 +87,7 @@ export default c([
         }),
         cM('round', [
           cNotM('textarea', {
-            borderRadius: roundBorderRadius
+            borderRadius: borderRadiusRound
           }, [
             cE('input', {
               paddingLeft: paddingLeft,
@@ -98,7 +98,7 @@ export default c([
               right: paddingRight
             }),
             cE('box-shadow, border, state-border', {
-              borderRadius: roundBorderRadius
+              borderRadius: borderRadiusRound
             })
           ])
         ])

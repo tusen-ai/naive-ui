@@ -1,4 +1,5 @@
 import create from '../../_styles/utils/create-component-base'
+import commonVars from './_common'
 import { baseDark } from '../../_styles/base'
 import { affixDark } from '../../affix/styles'
 import { changeColor } from 'seemly'
@@ -17,6 +18,7 @@ export default create({
       textColor2Overlay
     } = vars
     return {
+      ...commonVars,
       borderRadius,
       railColor: railColorOverlay,
       railColorActive: primaryColor,

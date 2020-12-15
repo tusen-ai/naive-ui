@@ -4,30 +4,31 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 export default c([
   ({ props }) => {
     const {
-      borderRadius,
-      iconSize
-    } = props.$local
-    const {
-      placeholderColor,
-      color,
-      border,
-      borderHover,
-      colorFocus,
-      borderFocus,
-      boxShadowFocus,
-      iconColor,
-      iconOpacity,
-      textColor,
-      caretColor,
-      borderDisabled,
-      colorDisabled,
-      textColorDisabled,
-      placeholderColorDisabled,
-      textDecorationColor
-    } = props.$local
-    const {
-      cubicBezierEaseInOut
-    } = props.$global
+      $local: {
+        placeholderColor,
+        color,
+        border,
+        borderHover,
+        colorFocus,
+        borderFocus,
+        boxShadowFocus,
+        iconColor,
+        iconOpacity,
+        textColor,
+        caretColor,
+        borderDisabled,
+        colorDisabled,
+        textColorDisabled,
+        placeholderColorDisabled,
+        textDecorationColor,
+        lineHeightTextarea,
+        borderRadius,
+        iconSize
+      },
+      $global: {
+        cubicBezierEaseInOut
+      }
+    } = props
     return cTB('input', {
       raw: `
         z-index: auto;
@@ -156,7 +157,7 @@ export default c([
       cE('suffix, prefix', {
         raw: `
           position: absolute;
-          line-height: 1.75;
+          line-height: 1;
           height: 0;
           white-space: nowrap;
           display: flex;
@@ -193,7 +194,7 @@ export default c([
           box-sizing: border-box;
           font-family: inherit;
           font-size: inherit;
-          line-height: 1.75;
+          line-height: ${lineHeightTextarea};
           margin: 0;
           resize: vertical;
           padding-left: 14px;

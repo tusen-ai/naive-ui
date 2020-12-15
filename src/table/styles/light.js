@@ -15,10 +15,12 @@ export default create({
       textColor1,
       textColor2,
       borderRadius,
-      fontWeightStrong
+      fontWeightStrong,
+      lineHeight
     } = vars
     return {
       ...sizeVariables,
+      lineHeight,
       borderColor: dividerColorOverlay,
       bodyColor: cardColor,
       bodyColorModal: modalColor,

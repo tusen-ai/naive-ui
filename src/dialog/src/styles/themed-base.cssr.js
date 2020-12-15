@@ -28,13 +28,14 @@ export default c([
       closeColor,
       closeColorHover,
       closeColorPressed,
-      fontSize
+      fontSize,
+      lineHeight
     } = $local
     const dialogStyle = cTB(
       'dialog',
       {
         raw: `
-          line-height: 1.5;
+          line-height: ${lineHeight};
           position: relative;
           background: ${color};
           color: ${textColor};

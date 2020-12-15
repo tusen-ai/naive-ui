@@ -19,10 +19,13 @@ export default create({
       opacityDisabled,
       actionColorOverlay,
       borderColor,
-      hoverColorOverlay
+      hoverColorOverlay,
+      lineHeight,
+      borderRadius
     } = vars
-
     return {
+      lineHeight,
+      borderRadius,
       draggerColor: actionColorOverlay,
       draggerBorder: `1px dashed ${borderColor}`,
       draggerBorderHover: `1px dashed ${primaryColor}`,

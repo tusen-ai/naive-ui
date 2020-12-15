@@ -9,6 +9,7 @@ export default create({
   peer: [baseDark, iconDark],
   getLocalVars (vars) {
     const {
+      lineHeight,
       borderRadius,
       fontWeightStrong,
       dividerColorOverlay,
@@ -24,6 +25,7 @@ export default create({
       errorColorSuppl
     } = vars
     return {
+      lineHeight,
       titleFontWeight: fontWeightStrong,
       borderRadius,
       border: `1px solid ${dividerColorOverlay}`,

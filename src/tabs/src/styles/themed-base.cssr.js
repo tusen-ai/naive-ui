@@ -1,7 +1,13 @@
-import { c, cM, cTB, cB, cE } from '../../../_utils/cssr'
+import { c, cM, cTB, cB, cE, createKey } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
+    const {
+      $local,
+      $global: {
+        cubicBezierEaseInOut
+      }
+    } = props
     const {
       labelTextColor,
       labelTextColorActive,
@@ -19,10 +25,7 @@ export default c([
       paneTextColor,
       tabFontWeight,
       tabBorderRadius
-    } = props.$local
-    const {
-      cubicBezierEaseInOut
-    } = props.$global
+    } = $local
     return cTB('tabs', {
       raw: `
         width: 100%;
@@ -31,6 +34,20 @@ export default c([
           border-color .3s ${cubicBezierEaseInOut};
       `
     }, [
+      ['small', 'medium', 'large', 'huge'].map(size => {
+        const {
+          [createKey('labelFontSize', size)]: fontSize
+        } = $local
+        return cM(`${size}-size`, [
+          cM('line-type', [
+            cB('tabs-label', [
+              cE('label', {
+                fontSize
+              })
+            ])
+          ])
+        ])
+      }),
       cM('flex', [
         cB('tabs-nav', [
           cB('tabs-nav-scroll', {

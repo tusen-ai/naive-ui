@@ -70,7 +70,8 @@ export default c([
         actionTextColor,
         borderRadius,
         headerFontWeight,
-        boxShadow
+        boxShadow,
+        lineHeight
       },
       $global: {
         cubicBezierEaseOut,
@@ -239,7 +240,7 @@ export default c([
           }),
           cE('content', {
             raw: `
-              line-height: 1.5;
+              line-height: ${lineHeight};
               margin: 12px 0 0 0;
               font-family: inherit;
               white-space: pre-wrap;

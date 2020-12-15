@@ -3,17 +3,20 @@ import { c, cE, cB, cM, cTB } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      railColor,
-      linkColor,
-      railColorActive,
-      linkTextColor,
-      linkTextColorHover,
-      linkTextColorPressed,
-      linkTextColorActive
-    } = props.$local
-    const {
-      cubicBezierEaseInOut
-    } = props.$global
+      $local: {
+        railColor,
+        linkColor,
+        railColorActive,
+        linkTextColor,
+        linkTextColorHover,
+        linkTextColorPressed,
+        linkTextColorActive,
+        linkFontSize
+      },
+      $global: {
+        cubicBezierEaseInOut
+      }
+    } = props
     return cTB('anchor', {
       raw: `
         padding-left: 4px;
@@ -77,8 +80,8 @@ export default c([
           margin-top: .5em;
           padding-left: 16px;
           position: relative;
-          line-height: 1.5em;
-          font-size: 13px;
+          line-height: 1.5;
+          font-size: ${linkFontSize};
           min-height: 1.5em;
           display: flex;
           flex-direction: column;

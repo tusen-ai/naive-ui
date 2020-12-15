@@ -22,10 +22,12 @@ export default create({
       errorColor,
       dividerColorOverlay,
       borderRadius,
-      fontWeightStrong
+      fontWeightStrong,
+      lineHeight
     } = vars
     return {
       ...commonVars,
+      lineHeight,
       border: `1px solid ${dividerColorOverlay}`,
       headerTextColor: textColor1Overlay,
       textColor: textColor2Overlay,

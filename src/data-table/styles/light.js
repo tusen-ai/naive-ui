@@ -35,10 +35,12 @@ export default create({
       iconColorOverlay,
       primaryColor,
       fontWeightStrong,
-      borderRadius
+      borderRadius,
+      lineHeight
     } = vars
     return {
       ...commonVariables,
+      lineHeight,
       borderRadius,
       borderColor: composite(cardColor, dividerColorOverlay),
       tdColorHover: composite(cardColor, tableColorHoverOverlay),

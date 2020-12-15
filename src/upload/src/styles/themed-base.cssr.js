@@ -5,23 +5,25 @@ import createIconSwitchTransition from '../../../_styles/transitions/icon-switch
 export default c([
   ({ props }) => {
     const {
-      cubicBezierEaseInOut,
-      borderRadius
-    } = props.$global
-    const {
-      draggerColor,
-      draggerBorder,
-      draggerBorderHover,
-      itemColorHover,
-      itemColorHoverError,
-      itemTextColorError,
-      itemTextColorSuccess,
-      itemTextColor,
-      itemIconColor,
-      itemDisabledOpacity
-    } = props.$local
+      $global: {
+        cubicBezierEaseInOut
+      },
+      $local: {
+        draggerColor,
+        draggerBorder,
+        draggerBorderHover,
+        itemColorHover,
+        itemColorHoverError,
+        itemTextColorError,
+        itemTextColorSuccess,
+        itemTextColor,
+        itemIconColor,
+        itemDisabledOpacity,
+        lineHeight,
+        borderRadius
+      }
+    } = props
     const iconSwitchTransition = createIconSwitchTransition()
-
     return cTB('upload', [
       cE('file-input', {
         raw: `
@@ -65,7 +67,7 @@ export default c([
       cB('upload-file-list', {
         raw: `
           margin-top: 8px;
-          line-height: 1.75;
+          line-height: ${lineHeight};
         `
       }, [
         cB('upload-file', {

@@ -24,7 +24,8 @@ export default c([
         headerTextColor,
         bodyTextColor,
         borderRadius,
-        headFontWeight
+        headFontWeight,
+        lineHeight
       },
       $global: {
         cubicBezierEaseInOut
@@ -34,7 +35,7 @@ export default c([
       cTB('table', {
         raw: `
           font-variant-numeric: tabular-nums;
-          line-height: 1.5;
+          line-height: ${lineHeight};
           font-size: 14px;
           width: 100%;
           border-radius: ${borderRadius} ${borderRadius} 0 0;

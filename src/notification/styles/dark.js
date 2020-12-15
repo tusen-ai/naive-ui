@@ -22,10 +22,12 @@ export default create({
       textColor3Overlay,
       borderRadius,
       fontWeightStrong,
-      boxShadow2
+      boxShadow2,
+      lineHeight
     } = vars
     return {
       borderRadius,
+      lineHeight,
       headerFontWeight: fontWeightStrong,
       iconColorSuccess: successColor,
       iconColorInfo: infoColor,
