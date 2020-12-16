@@ -13,6 +13,9 @@ export default create({
   getLocalVars (vars) {
     return {
       ...commonVariables,
+      itemHeightSmall: vars.heightSmall,
+      itemHeightMedium: vars.heightMedium,
+      itemHeightLarge: vars.heightLarge,
       fontSizeSmall: vars.fontSizeSmall,
       fontSizeMedium: vars.fontSizeMedium,
       fontSizeLarge: vars.fontSizeLarge,

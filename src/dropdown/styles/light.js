@@ -17,10 +17,18 @@ export default create({
       fontSizeSmall,
       fontSizeMedium,
       fontSizeLarge,
-      fontSizeHuge
+      fontSizeHuge,
+      heightSmall,
+      heightMedium,
+      heightLarge,
+      heightHuge
     } = vars
     return {
       ...commonVariables,
+      optionHeightSmall: heightSmall,
+      optionHeightMedium: heightMedium,
+      optionHeightLarge: heightLarge,
+      optionHeightHuge: heightHuge,
       color: popoverColor,
       dividerColor,
       borderRadius,

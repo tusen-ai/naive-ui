@@ -1,5 +1,4 @@
 import create from '../../_styles/utils/create-component-base'
-import commonVariables from '../../input/styles/_common'
 import { baseLight } from '../../_styles/base'
 
 export default create({
@@ -8,7 +7,10 @@ export default create({
   peer: [baseLight],
   getLocalVars (vars) {
     return {
-      ...commonVariables,
+      heightTiny: vars.heightTiny,
+      heightSmall: vars.heightSmall,
+      heightMedium: vars.heightMedium,
+      heightLarge: vars.heightLarge,
       borderRadius: vars.borderRadius,
       color: vars.actionColor,
       textColor: vars.textColor2,

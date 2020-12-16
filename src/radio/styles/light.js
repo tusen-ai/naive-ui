@@ -17,10 +17,16 @@ export default create({
       borderRadius,
       fontSizeSmall,
       fontSizeMedium,
-      fontSizeLarge
+      fontSizeLarge,
+      heightSmall,
+      heightMedium,
+      heightLarge
     } = vars
     return {
       ...commonVariables,
+      buttonHeightSmall: heightSmall,
+      buttonHeightMedium: heightMedium,
+      buttonHeightLarge: heightLarge,
       fontSizeSmall,
       fontSizeMedium,
       fontSizeLarge,

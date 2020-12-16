@@ -27,7 +27,11 @@ export default create({
       placeholderColor,
       textColor5: placeholderColorDisabled,
       inputColor: color,
-      borderRadius
+      borderRadius,
+      heightTiny,
+      heightSmall,
+      heightMedium,
+      heightLarge
     } = vars
     const buttonTextColor = textColor
     const buttonColorDisabled = colorDisabled
@@ -41,6 +45,10 @@ export default create({
     return {
       ...commonVars,
       borderRadius,
+      heightTiny,
+      heightSmall,
+      heightMedium,
+      heightLarge,
       // default
       buttonColorDisabled,
       buttonTextColorDisabled,

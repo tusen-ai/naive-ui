@@ -28,10 +28,16 @@ export default create({
       borderRadiusSmall: borderRadius,
       fontSizeTiny,
       fontSizeSmall,
-      fontSizeMedium
+      fontSizeMedium,
+      heightTiny,
+      heightSmall,
+      heightMedium
     } = vars
     return {
       ...commonVariables,
+      heightSmall: heightTiny,
+      heightMedium: heightSmall,
+      heightLarge: heightMedium,
       borderRadius,
       opacityDisabled,
       fontSizeSmall: fontSizeTiny,

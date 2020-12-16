@@ -1,5 +1,4 @@
 import create from '../../_styles/utils/create-component-base'
-import sizeVariables from './_common'
 import { baseDark } from '../../_styles/base'
 import { baseMenuMaskDark } from '../../_base/menu-mask/styles'
 import { baseLoadingDark } from '../../_base/loading/styles'
@@ -31,15 +30,16 @@ export default create({
       textColorDisabledOverlay,
       dividerColorOverlay,
       hoverColorOverlay,
-      fontSizeMedium
+      fontSizeMedium,
+      heightMedium
     } = vars
     return {
-      ...sizeVariables,
       menuBorderRadius: borderRadius,
       menuColor: popoverColor,
       menuBoxShadow: boxShadow2,
       menuBorderColor: dividerColorOverlay,
       arrowColor: textColor3Overlay,
+      optionHeight: heightMedium,
       optionFontSize: fontSizeMedium,
       optionColorHover: hoverColorOverlay,
       optionTextColor: textColor2Overlay,

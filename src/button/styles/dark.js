@@ -10,6 +10,10 @@ export default create({
   getLocalVars (vars) {
     return {
       ...commonVariables,
+      heightTiny: vars.heightTiny,
+      heightSmall: vars.heightSmall,
+      heightMedium: vars.heightMedium,
+      heightLarge: vars.heightLarge,
       borderRadiusTiny: vars.borderRadius,
       borderRadiusSmall: vars.borderRadius,
       borderRadiusMedium: vars.borderRadius,

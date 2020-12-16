@@ -1,9 +1,5 @@
 export default {
   padding: '4px 0',
-  optionHeightSmall: '28px',
-  optionHeightMedium: '34px',
-  optionHeightLarge: '40px',
-  optionHeightHuge: '46px',
   optionSuffixWidthSmall: '28px',
   optionSuffixWidthMedium: '28px',
   optionSuffixWidthLarge: '32px',

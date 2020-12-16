@@ -1,8 +1,4 @@
 export default {
-  heightTiny: '22px',
-  heightSmall: '28px',
-  heightMedium: '34px',
-  heightLarge: '40px',
   paddingTiny: '0 6px',
   paddingSmall: '0 10px',
   paddingMedium: '0 14px',

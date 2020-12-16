@@ -26,7 +26,11 @@ export default create({
       placeholdeColor,
       placeholderColorDisabled,
       actionColorOverlay,
-      borderRadius
+      borderRadius,
+      heightTiny,
+      heightSmall,
+      heightMedium,
+      heightLarge
     } = vars
     const color = inputColorOverlay
     const buttonTextColor = textColor
@@ -41,6 +45,10 @@ export default create({
     return {
       ...commonVars,
       borderRadius,
+      heightTiny,
+      heightSmall,
+      heightMedium,
+      heightLarge,
       // default
       buttonColorDisabled,
       buttonTextColorDisabled,

@@ -1,5 +1,4 @@
 import create from '../../_styles/utils/create-component-base'
-import sizeVariables from './_common'
 import { baseDark } from '../../_styles/base'
 import { baseLoadingDark } from '../../_base/loading/styles'
 
@@ -8,9 +7,20 @@ export default create({
   theme: 'dark',
   peer: [baseDark, baseLoadingDark],
   getLocalVars (vars) {
-    const { opacityDisabled } = vars
+    const {
+      opacityDisabled,
+      heightTiny,
+      heightSmall,
+      heightMedium,
+      heightLarge,
+      heightHuge
+    } = vars
     return {
-      ...sizeVariables,
+      heightTiny,
+      heightSmall,
+      heightMedium,
+      heightLarge,
+      heightHuge,
       opacitySpinning: opacityDisabled
     }
   }

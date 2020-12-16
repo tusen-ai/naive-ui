@@ -1,7 +1,4 @@
 export default {
-  heightSmall: '22px',
-  heightMedium: '28px',
-  heightLarge: '34px',
   closeSizeSmall: '12px',
   closeSizeMedium: '12px',
   closeSizeLarge: '12px',

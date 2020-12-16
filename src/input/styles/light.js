@@ -27,10 +27,18 @@ export default create({
       fontSizeTiny,
       fontSizeSmall,
       fontSizeMedium,
-      fontSizeLarge
+      fontSizeLarge,
+      heightTiny,
+      heightSmall,
+      heightMedium,
+      heightLarge
     } = vars
     return {
       ...commonVariables,
+      heightTiny,
+      heightSmall,
+      heightMedium,
+      heightLarge,
       fontSizeTiny,
       fontSizeSmall,
       fontSizeMedium,
