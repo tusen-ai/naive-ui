@@ -2,9 +2,10 @@ const cssRenderPlugin = require('./build/rollup-plugin-css-render')
 const { nodeResolve } = require('@rollup/plugin-node-resolve')
 const { terser } = require('rollup-plugin-terser')
 const replace = require('@rollup/plugin-replace')
+const { babel } = require('@rollup/plugin-babel')
 
 function externalValidator (patterns) {
-  return id => patterns.some(pattern => id.startsWith(pattern))
+  return (id) => patterns.some((pattern) => id.startsWith(pattern))
 }
 
 // do not use babel when build library, use it when only build the site
@@ -31,6 +32,9 @@ module.exports = {
       extensions: ['.js', '.json']
     }),
     cssRenderPlugin(),
+    babel({
+      babelHelpers: 'bundled'
+    }),
     terser({
       mangle: false,
       output: {
