@@ -326,15 +326,17 @@ export const childRoutes = withPrefix('/:lang/:theme/doc', [
 
 export const routes = [
   {
+    name: 'site',
     path: '/:lang/:theme',
     component: () => import('../SiteProvider.vue'),
     children: [
       {
+        name: 'home',
         path: '/:lang/:theme',
-        component: () => import('../documentation/landing/index.vue'),
-        name: 'home'
+        component: () => import('../documentation/landing/index.vue')
       },
       {
+        name: 'doc',
         path: '/:lang/:theme/doc',
         component: () => import('../Documentation.vue'),
         children: childRoutes
@@ -344,6 +346,12 @@ export const routes = [
   {
     name: 'not-found',
     path: '/:pathMatch(.*)*',
-    redirect: '/zh-CN/os-theme'
+    redirect: {
+      name: 'home',
+      params: {
+        lang: 'zh-CN',
+        theme: 'os-theme'
+      }
+    }
   }
 ]
