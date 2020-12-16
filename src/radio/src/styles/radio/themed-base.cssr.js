@@ -1,4 +1,4 @@
-import { c, cTB, cE, cM, cNotM, cB, createKey } from '../../../../_utils/cssr'
+import { c, cTB, cE, cM, cNotM, createKey } from '../../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
@@ -57,18 +57,14 @@ export default c([
           cE('dot', {
             raw: `
               transition:
-              background-color .3s ${cubicBezierEaseInOut},
-              box-shadow .3s ${cubicBezierEaseInOut};
-              position: relative;
-              border-radius: 50%;
+                background-color .3s ${cubicBezierEaseInOut},
+                box-shadow .3s ${cubicBezierEaseInOut};
+                position: relative;
+                border-radius: 50%;
             `,
             backgroundColor: color,
             boxShadow: boxShadow
-          }
-          , [
-            c('&:not(:last-child)', {
-              marginRight: '9px'
-            }),
+          }, [
             c('&::before', {
               raw: `
                 content: "";
@@ -100,6 +96,7 @@ export default c([
           ]),
           cE('label', {
             raw: `
+              padding: 0 8px;
               display: inline-block;
               white-space: nowrap;
               transition: color .3s ${cubicBezierEaseInOut};
@@ -148,18 +145,7 @@ export default c([
             })
           ])
         ]
-      ),
-      cTB('radio-group', {
-        raw: `
-          display: inline-block;
-        `
-      }, [
-        cB('radio', {
-          raw: `
-            margin-right: 18px;
-          `
-        })
-      ])
+      )
     ]
   }
 ])

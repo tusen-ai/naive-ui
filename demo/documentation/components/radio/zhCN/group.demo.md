@@ -4,9 +4,11 @@
 
 ```html
 <n-radio-group v-model:value="value" name="radiogroup">
-  <n-radio v-for="song in songs" :key="song.value" :value="song.value">
-    {{ song.label }}
-  </n-radio>
+  <n-space>
+    <n-radio v-for="song in songs" :key="song.value" :value="song.value">
+      {{ song.label }}
+    </n-radio>
+  </n-space>
 </n-radio-group>
 ```
 

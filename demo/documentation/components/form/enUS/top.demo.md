@@ -69,16 +69,20 @@
       path="checkboxGroupValue"
     >
       <n-checkbox-group v-model:value="model.checkboxGroupValue">
-        <n-checkbox value="Option 1">Option 1</n-checkbox>
-        <n-checkbox value="Option 2">Option 2</n-checkbox>
-        <n-checkbox value="Option 3">Option 3</n-checkbox>
+        <n-space>
+          <n-checkbox value="Option 1">Option 1</n-checkbox>
+          <n-checkbox value="Option 2">Option 2</n-checkbox>
+          <n-checkbox value="Option 3">Option 3</n-checkbox>
+        </n-space>
       </n-checkbox-group>
     </n-form-item-col>
     <n-form-item-col :span="12" label="Radio Group" path="radioGroupValue">
       <n-radio-group v-model:value="model.radioGroupValue" name="radiogroup1">
-        <n-radio value="Radio 1">Radio 1</n-radio>
-        <n-radio value="Radio 2">Radio 2</n-radio>
-        <n-radio value="Radio 3">Radio 3</n-radio>
+        <n-space>
+          <n-radio value="Radio 1">Radio 1</n-radio>
+          <n-radio value="Radio 2">Radio 2</n-radio>
+          <n-radio value="Radio 3">Radio 3</n-radio>
+        </n-space>
       </n-radio-group>
     </n-form-item-col>
   </n-row>

@@ -368,7 +368,8 @@
   - [x] transfer 打包之后有问题
   - [x] side effects = false 好像会影响 rollup 的打包（这让我很不安，要是生效 css 怎么办？要是不生效 JS 怎么办？）（事实上确实会影响网站对于 fonts 的打包，只能先靠脚本凑活一下） https://github.com/rollup/plugins/issues/692
   - [x] vue 在 $attrs 的处理上 dev 和 prod 还是有差别 https://github.com/vuejs/vue-next/issues/2741
-  - [ ] date-picker input 的 clear 有时候不会清除，看起来是 vue 的 bug...
+  - [ ] date-picker input 的 clear 有时候不会清除，看起来是 vue 的 bug
+  - [ ] radio-group 影响主题切换，看起来是 vue 的 bug
 
 ## Info
 

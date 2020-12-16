@@ -8,23 +8,23 @@ function mapSlot (h, defaultSlot, groupInstance) {
   let isButtonGroup = false
   for (let i = 0; i < defaultSlot.length; ++i) {
     const wrappedInstance = defaultSlot[i]
-    const instanceOptions = wrappedInstance.type
-    const name = instanceOptions.name
-    if (
-      __DEV__ &&
-      (!instanceOptions || !['Radio', 'RadioButton'].includes(name))
-    ) {
+    const name = wrappedInstance.type?.name
+    if (name === 'RadioButton') {
+      isButtonGroup = true
+    }
+    if (__DEV__ && isButtonGroup && name !== 'RadioButton') {
       warn(
         'radio-group',
-        '`n-radio-group` only taks `n-radio` and `n-radio-button` as children.'
+        '`n-radio-group` in button mode only takes `n-radio-button` as children.'
       )
       continue
     }
     const instanceProps = wrappedInstance.props
-    if (name === 'RadioButton') {
-      isButtonGroup = true
+    if (name !== 'RadioButton') {
+      children.push(wrappedInstance)
+      continue
     }
-    if (i === 0 || name === 'Radio') {
+    if (i === 0) {
       children.push(wrappedInstance)
     } else {
       const lastInstanceProps = children[children.length - 1].props
@@ -136,7 +136,6 @@ export default {
   },
   render () {
     const { children, isButtonGroup } = mapSlot(h, flatten(getSlot(this)), this)
-    this.isButtonGroup = isButtonGroup
     const { mergedTheme, mergedSize } = this
     return h(
       'div',
