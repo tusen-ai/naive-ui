@@ -6,7 +6,7 @@
       'n-radio--checked': renderSafeChecked,
       'n-radio--focus': focus,
       [`n-radio--${mergedSize}-size`]: true,
-      [`n-${mergedTheme}-theme`]: mergedTheme
+      [`n-${renderedTheme}-theme`]: renderedTheme
     }"
     @keyup.enter="handleKeyUpEnter"
     @click="handleClick"
@@ -75,7 +75,7 @@ export default {
   },
   setup,
   computed: {
-    mergedTheme () {
+    renderedTheme () {
       const { theme, NRadioGroup } = this
       if (theme !== undefined) {
         return theme

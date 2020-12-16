@@ -3,7 +3,7 @@ import { configurable, themeable, asFormItem, withCssr } from '../../_mixins'
 import { getSlot, flatten, warn } from '../../_utils'
 import styles from './styles/radio-group/index.js'
 
-function mapSlot (h, defaultSlot, groupInstance) {
+function mapSlot (defaultSlot, groupInstance) {
   const children = []
   let isButtonGroup = false
   for (let i = 0; i < defaultSlot.length; ++i) {
@@ -135,7 +135,7 @@ export default {
     }
   },
   render () {
-    const { children, isButtonGroup } = mapSlot(h, flatten(getSlot(this)), this)
+    const { children, isButtonGroup } = mapSlot(flatten(getSlot(this)), this)
     const { mergedTheme, mergedSize } = this
     return h(
       'div',
