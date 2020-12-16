@@ -2,8 +2,7 @@ import create from '../../_styles/utils/create-component-base'
 import { changeColor } from 'seemly'
 import { baseDark } from '../../_styles/base'
 import { iconDark } from '../../icon/styles'
-import inputCommonVariables from '../../input/styles/_common'
-import inputNumberCommonVariables from './_common'
+import commonVars from './_common'
 
 export default create({
   name: 'InputNumber',
@@ -40,8 +39,7 @@ export default create({
     const buttonTextColorHover = primaryColorHover
     const buttonTextColorPressed = primaryColorPressed
     return {
-      ...inputCommonVariables,
-      ...inputNumberCommonVariables,
+      ...commonVars,
       borderRadius,
       // default
       buttonColorDisabled,
