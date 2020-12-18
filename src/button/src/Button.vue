@@ -69,7 +69,7 @@ import {
   NBaseWave
 } from '../../_base'
 import { NIcon } from '../../icon'
-import styles from './styles/index.js'
+import styles from './styles/button/index.js'
 import {
   createHoverColor,
   createPressedColor

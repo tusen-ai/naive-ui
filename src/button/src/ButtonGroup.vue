@@ -11,10 +11,11 @@
 
 <script>
 import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles/index.js'
+import styles from './styles/button-group/index.js'
 
 export default {
   name: 'ButtonGroup',
+  cssrName: 'Button',
   mixins: [configurable, themeable, withCssr(styles)],
   provide () {
     return {

@@ -166,7 +166,7 @@ import {
   withCssr
 } from '../../_mixins'
 import { call } from '../../_utils'
-import styles from './styles'
+import styles from './styles/input'
 
 export default {
   name: 'Input',

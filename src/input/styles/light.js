@@ -31,7 +31,8 @@ export default create({
       heightTiny,
       heightSmall,
       heightMedium,
-      heightLarge
+      heightLarge,
+      actionColor
     } = vars
     return {
       ...commonVariables,
@@ -46,6 +47,7 @@ export default create({
       lineHeightTextarea: lineHeight,
       borderRadius,
       iconSize: '16px',
+      groupLabelColor: actionColor,
       textColor: textColor2,
       textColorDisabled: textColor4,
       textDecorationColor: textColor2,

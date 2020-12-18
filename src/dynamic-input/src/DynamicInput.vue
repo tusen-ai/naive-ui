@@ -60,8 +60,7 @@
 
 <script>
 import { ref, toRef, isProxy, toRaw } from 'vue'
-import { NButton } from '../../button'
-import { NButtonGroup } from '../../button-group'
+import { NButton, NButtonGroup } from '../../button'
 import { RemoveIcon, AddIcon } from '../../_base/icons'
 import NDynamicInputInputPreset from './InputPreset.vue'
 import NDynamicInputPairPreset from './PairPreset.vue'

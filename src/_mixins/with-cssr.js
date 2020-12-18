@@ -51,7 +51,7 @@ function setupMutableStyle (vm, theme, depKey, CNode) {
     $options: options
   } = vm
   const resolveId = options.cssrName || options.name
-  const mountPrefix = options.cssrId || resolveId
+  const mountPrefix = options.cssrId || options.name
   const depValue =
     depKey === 'mergedTheme' || depKey === 'theme' ? theme : vm[depKey]
   if (depValue === null || depValue === undefined) {

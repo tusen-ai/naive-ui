@@ -1,4 +1,4 @@
-import baseStyle from './base.cssr.js'
+import baseStyle from './themed-base.cssr.js'
 
 export default [
   {

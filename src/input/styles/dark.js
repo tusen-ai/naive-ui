@@ -45,6 +45,7 @@ export default create({
       lineHeightTextarea: lineHeight,
       borderRadius,
       iconSize: '16px',
+      groupLabelColor: inputColorOverlay,
       textColor: textColor2Overlay,
       textColorDisabled: textColor4Overlay,
       textDecorationColor: textColor2Overlay,
