@@ -30,4 +30,30 @@ const app = createApp()
 app.use(naive)
 ```
 
-## Import on Demand (Working in Progress)
+## Import on Demand
+
+Here is a minimal example.
+
+```js
+import { createApp } from 'vue'
+import {
+  // create naive ui
+  create,
+  // component
+  NButton,
+  // component style
+  buttonLight,
+  // locale
+  zhCN
+} from 'naive-ui'
+
+const naive = create({
+  locales: [zhCN],
+  styles: [buttonLight],
+  components: [NButton]
+})
+
+const app = createApp()
+
+app.use(naive)
+```

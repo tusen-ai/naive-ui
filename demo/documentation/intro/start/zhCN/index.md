@@ -30,4 +30,30 @@ const app = createApp()
 app.use(naive)
 ```
 
-## 按需引入（正在开发）
+## 按需引入
+
+下面是一个按需引入的最小例子。
+
+```js
+import { createApp } from 'vue'
+import {
+  // create naive ui
+  create,
+  // component
+  NButton,
+  // component style
+  buttonLight,
+  // locale
+  zhCN
+} from 'naive-ui'
+
+const naive = create({
+  locales: [zhCN],
+  styles: [buttonLight],
+  components: [NButton]
+})
+
+const app = createApp()
+
+app.use(naive)
+```
