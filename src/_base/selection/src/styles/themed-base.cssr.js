@@ -40,14 +40,14 @@ export default c([
       'base-selection',
       {
         raw: `
-        position: relative;
-        z-index: auto;
-        box-shadow: none;
-        width: 100%;
-        max-width: 100%;
-        display: inline-block;
-        vertical-align: bottom;
-      `,
+          position: relative;
+          z-index: auto;
+          box-shadow: none;
+          width: 100%;
+          max-width: 100%;
+          display: inline-block;
+          vertical-align: bottom;
+        `,
         borderRadius
       },
       [
@@ -94,13 +94,13 @@ export default c([
         ]),
         cE('border, state-border', {
           raw: `
-          position: absolute;
-          left: 0;
-          right: 0;
-          top: 0;
-          bottom: 0;
-          pointer-events: none;
-        `,
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            pointer-events: none;
+          `,
           border,
           borderColor: 'transparent',
           borderRadius,
@@ -111,25 +111,25 @@ export default c([
         }),
         cE('box-shadow', {
           raw: `
-          position: absolute;
-          left: 0;
-          right: 0;
-          top: 0;
-          bottom: 0;
-          pointer-events: none;
-          z-index: 1;
-        `,
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 1;
+          `,
           borderRadius,
           transition: `box-shadow .3s ${cubicBezierEaseInOut}`
         }),
         cE('mark', {
           raw: `
-          cursor: pointer;
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          right: 10px;
-        `
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 10px;
+          `
         }),
         cM('selected', [
           cE('placeholder', {
@@ -138,12 +138,12 @@ export default c([
         ]),
         cE('placeholder', {
           raw: `
-          pointer-events: none;
-          position: absolute;
-          left: 14px;
-          top: 0;
-          opacity: 1;
-        `,
+            pointer-events: none;
+            position: absolute;
+            left: 14px;
+            top: 0;
+            opacity: 1;
+          `,
           transition: `color .3s ${cubicBezierEaseInOut}`,
           color: placeholderColor
         }),
@@ -151,42 +151,43 @@ export default c([
           'base-selection-tags',
           {
             raw: `
-          cursor: pointer;
-          outline: none;
-          box-sizing: border-box;
-          position: relative;
-          z-index: auto;
-          display: flex;
-          padding: 3px 26px 0 14px;
-          flex-wrap: wrap;
-          align-items: center;
-          width: 100%;
-          vertical-align: bottom;
-        `,
+              cursor: pointer;
+              outline: none;
+              box-sizing: border-box;
+              position: relative;
+              z-index: auto;
+              display: flex;
+              padding: 3px 26px 0 14px;
+              flex-wrap: wrap;
+              align-items: center;
+              width: 100%;
+              vertical-align: bottom;
+            `,
             backgroundColor: color,
             borderRadius,
             transition: `
-          color .3s ${cubicBezierEaseInOut},
-          box-shadow .3s ${cubicBezierEaseInOut},
-          background-color .3s ${cubicBezierEaseInOut}
-        `
+              color .3s ${cubicBezierEaseInOut},
+              box-shadow .3s ${cubicBezierEaseInOut},
+              background-color .3s ${cubicBezierEaseInOut}
+            `
           },
           [
             cB(
               'tag',
               {
                 raw: `
-            margin-right: 7px;
-            margin-bottom: 3px;
-            font-size: 14px;
-            max-width: 100%;
-          `
+                  margin-right: 7px;
+                  margin-bottom: 3px;
+                  font-size: 14px;
+                  max-width: 100%;
+                `
               },
               [
                 cE('content', {
                   raw: `
-              text-overflow: ellipsis;
-              overflow: hidden;`
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                  `
                 })
               ]
             )
@@ -196,38 +197,38 @@ export default c([
           'base-selection-label',
           {
             raw: `
-          display: inline-block;
-          width: 100%;
-          vertical-align: bottom;
-          cursor: pointer;
-          outline: none;
-          z-index: auto;
-          box-sizing: border-box;
-          position: relative;
-        `,
+              display: inline-block;
+              width: 100%;
+              vertical-align: bottom;
+              cursor: pointer;
+              outline: none;
+              z-index: auto;
+              box-sizing: border-box;
+              position: relative;
+            `,
             transition: `
-          color .3s ${cubicBezierEaseInOut},
-          box-shadow .3s ${cubicBezierEaseInOut},
-          background-color .3s ${cubicBezierEaseInOut}
-        `,
+              color .3s ${cubicBezierEaseInOut},
+              box-shadow .3s ${cubicBezierEaseInOut},
+              background-color .3s ${cubicBezierEaseInOut}
+            `,
             borderRadius: borderRadius,
             backgroundColor: color
           },
           [
             cE('input', {
               raw: `
-            line-height: inherit;
-            outline: none;
-            cursor: pointer;
-            box-sizing: border-box;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            border:none;
-            width: 100%;
-            white-space: nowrap;
-            padding: ${paddingSingle};
-            background-color: transparent;
-          `,
+                line-height: inherit;
+                outline: none;
+                cursor: pointer;
+                box-sizing: border-box;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                border:none;
+                width: 100%;
+                white-space: nowrap;
+                padding: ${paddingSingle};
+                background-color: transparent;
+              `,
               color: textColor,
               transition: `color .3s ${cubicBezierEaseInOut}`
             }),
@@ -356,41 +357,41 @@ export default c([
           'base-selection-input-tag',
           {
             raw: `
-          outline: none;
-          display: none;
-          position: relative;
-          margin-bottom: 3px;
-          max-width: 100%;
-          vertical-align: bottom;
-        `
+              outline: none;
+              display: none;
+              position: relative;
+              margin-bottom: 3px;
+              max-width: 100%;
+              vertical-align: bottom;
+            `
           },
           [
             cE('input', {
               raw: `
-            padding: 0;
-            background-color: transparent;
-            outline: none;
-            border: none;
-            max-width: 100%;
-            overflow: hidden;
-            width: 1em;
-            line-height: inherit;
-            cursor: pointer;
-          `,
+                padding: 0;
+                background-color: transparent;
+                outline: none;
+                border: none;
+                max-width: 100%;
+                overflow: hidden;
+                width: 1em;
+                line-height: inherit;
+                cursor: pointer;
+              `,
               color: textColor,
               caretColor
             }),
             cE('mirror', {
               raw: `
-            position: absolute;
-            padding-right: 1em;
-            left: 0;
-            top: 0;
-            white-space: pre;
-            visibility: hidden;
-            user-select: none;
-            opacity: 0;
-          `
+                position: absolute;
+                padding-right: 1em;
+                left: 0;
+                top: 0;
+                white-space: pre;
+                visibility: hidden;
+                user-select: none;
+                opacity: 0;
+              `
             })
           ]
         )

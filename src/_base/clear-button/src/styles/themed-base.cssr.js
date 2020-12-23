@@ -1,4 +1,4 @@
-import { cTB, c, cB, cE } from '../../../../_utils/cssr'
+import { cTB, c, cE } from '../../../../_utils/cssr'
 import createIconSwitchTransition from '../../../../_styles/transitions/icon-switch'
 
 export default c([
@@ -34,7 +34,10 @@ export default c([
             color: colorPressed
           })
         ]),
-        cB('icon', {
+        cE('placeholder', {
+          display: 'flex'
+        }),
+        cE('clear, placeholder', {
           position: 'absolute',
           left: '50%',
           top: '50%',

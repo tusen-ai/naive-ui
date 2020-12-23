@@ -156,11 +156,12 @@ export default c([
                   transform: 'rotate(45deg) scale(1)'
                 })
               ]),
+              // TODO: use SVG icon
               c('&::after', {
                 raw: `
                   content: '';
-                  height: 6px;
-                  width: 3px;
+                  height: 8px;
+                  width: 4px;
                   position: absolute;
                   right: 14px;
                   transform: rotate(45deg) scale(.5);

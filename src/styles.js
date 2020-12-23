@@ -1,4 +1,8 @@
 // unified entry for styles
+export {
+  baseClearButtonDark,
+  baseClearButtonLight
+} from './_base/clear-button/styles'
 export { baseLoadingDark, baseLoadingLight } from './_base/loading/styles'
 export { baseMenuMaskDark, baseMenuMaskLight } from './_base/menu-mask/styles'
 export { baseSelectionDark, baseSelectionLight } from './_base/selection/styles'
@@ -10,7 +14,6 @@ export {
   baseSlotMachineDark,
   baseSlotMachineLight
 } from './_base/slot-machine/styles'
-export { baseSuffixDark, baseSuffixLight } from './_base/suffix/styles'
 export { baseWaveDark, baseWaveLight } from './_base/wave/styles'
 // exposed style
 export { baseDark, baseLight } from './_styles/base'

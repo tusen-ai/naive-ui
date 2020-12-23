@@ -1,12 +1,12 @@
 import create from '../../../_styles/utils/create-component-base'
 import commonVariables from './_common'
 import { changeColor } from 'seemly'
-import suffixStyle from '../../suffix/styles/dark'
+import { baseClearButtonLight } from '../../clear-button/styles'
 
 export default create({
   name: 'BaseSelection',
   theme: 'light',
-  peer: [suffixStyle],
+  peer: [baseClearButtonLight],
   getLocalVars (vars) {
     return {
       ...commonVariables,

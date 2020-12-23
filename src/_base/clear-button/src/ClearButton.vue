@@ -19,14 +19,9 @@
       >
         <dismiss-circle-icon />
       </n-icon>
-      <n-icon
-        v-else
-        key="icon"
-        :theme="theme"
-        class="n-base-clear-button__placeholder"
-      >
+      <div v-else key="icon" class="n-base-clear-button__placeholder">
         <slot />
-      </n-icon>
+      </div>
     </n-icon-switch-transition>
   </div>
 </template>

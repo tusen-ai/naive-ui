@@ -37,16 +37,17 @@
         >
           {{ option.label }}
         </n-tag>
-        <n-base-suffix
+        <n-base-clear-button
+          v-if="showArrow"
           class="n-base-selection__mark"
-          :loading="loading"
           :theme="theme"
-          :arrow="showArrow"
-          :disabled="disabled"
-          :active="active"
-          :clearable="mergedClearable && selected"
+          :show="mergedClearable && selected"
           @clear="handleClear"
-        />
+        >
+          <n-icon depth="4">
+            <chevron-down-icon />
+          </n-icon>
+        </n-base-clear-button>
       </div>
       <div class="n-base-selection__placeholder">
         {{ placeholder }}
@@ -90,16 +91,17 @@
             class="n-base-selection-input-tag__mirror"
           >{{ pattern ? pattern : '&nbsp;' }}</span>
         </div>
-        <n-base-suffix
+        <n-base-clear-button
+          v-if="showArrow"
           class="n-base-selection__mark"
-          :arrow="showArrow"
           :theme="theme"
-          :disabled="disabled"
-          :active="active"
-          :clearable="mergedClearable && selected"
-          :loading="loading"
+          :show="mergedClearable && selected"
           @clear="handleClear"
-        />
+        >
+          <n-icon depth="4">
+            <chevron-down-icon />
+          </n-icon>
+        </n-base-clear-button>
       </div>
       <div class="n-base-selection__placeholder">
         {{ placeholder }}
@@ -136,16 +138,17 @@
         >
           {{ filterablePlaceholder }}
         </div>
-        <n-base-suffix
+        <n-base-clear-button
+          v-if="showArrow"
           class="n-base-selection__mark"
-          :loading="loading"
           :theme="theme"
-          :arrow="showArrow"
-          :disabled="disabled"
-          :active="active"
-          :clearable="mergedClearable && selected"
+          :show="mergedClearable && selected"
           @clear="handleClear"
-        />
+        >
+          <n-icon depth="4">
+            <chevron-down-icon />
+          </n-icon>
+        </n-base-clear-button>
       </div>
     </template>
     <template v-else-if="!multiple && !filterable">
@@ -165,16 +168,17 @@
         >
           {{ placeholder }}
         </div>
-        <n-base-suffix
+        <n-base-clear-button
+          v-if="showArrow"
           class="n-base-selection__mark"
           :theme="theme"
-          :arrow="showArrow"
-          :disabled="disabled"
-          :active="active"
-          :clearable="mergedClearable && selected"
-          :loading="loading"
+          :show="mergedClearable && selected"
           @clear="handleClear"
-        />
+        >
+          <n-icon depth="4">
+            <chevron-down-icon />
+          </n-icon>
+        </n-base-clear-button>
       </div>
     </template>
     <div class="n-base-selection__border" />
@@ -184,7 +188,8 @@
 </template>
 
 <script>
-import NBaseSuffix from '../../suffix/index.js'
+import NBaseClearButton from '../../clear-button'
+import { ChevronDownIcon } from '../../icons'
 import { NTag } from '../../../tag/index.js'
 import { withCssr } from '../../../_mixins'
 import styles from './styles/index.js'
@@ -192,7 +197,8 @@ import styles from './styles/index.js'
 export default {
   name: 'BaseSelection',
   components: {
-    NBaseSuffix,
+    ChevronDownIcon,
+    NBaseClearButton,
     NTag
   },
   mixins: [withCssr(styles)],
@@ -203,7 +209,7 @@ export default {
     },
     theme: {
       type: String,
-      default: null
+      default: undefined
     },
     active: {
       type: Boolean,
@@ -215,7 +221,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: null
+      default: undefined
     },
     selectedOption: {
       validator () {
@@ -261,6 +267,10 @@ export default {
       type: Boolean,
       default: false
     },
+    showArrow: {
+      type: Boolean,
+      default: true
+    },
     onBlur: {
       type: Function,
       default: undefined
@@ -298,11 +308,7 @@ export default {
   },
   computed: {
     mergedClearable () {
-      return this.clearable && !this.disabled
-    },
-    showArrow () {
-      if (!this.mergedClearable) return true
-      else return !(this.hover && this.selected)
+      return this.clearable && !this.disabled && (this.hover || this.active)
     },
     filterablePlaceholder () {
       return this.selectedOption ? this.selectedOption.label : this.placeholder
