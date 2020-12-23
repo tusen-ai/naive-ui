@@ -8,6 +8,7 @@
     <n-space><n-switch v-model:value="showPath" />Show Path</n-space>
   </n-space>
   <n-cascader
+    show
     v-model:value="value"
     placeholder="没啥用的值"
     :options="options"
@@ -34,23 +35,21 @@ function genChildren (option) {
   return children
 }
 
-const options = [
-  {
-    label: 'l-0',
-    value: 'v-0',
-    depth: 1,
-    isLeaf: false
-  }
-]
-
 export default {
   data () {
     return {
+      options: [
+        {
+          label: 'l-0',
+          value: 'v-0',
+          depth: 1,
+          isLeaf: false
+        }
+      ],
       leafOnly: true,
       cascade: true,
       showPath: true,
-      value: null,
-      options: options
+      value: null
     }
   },
   methods: {

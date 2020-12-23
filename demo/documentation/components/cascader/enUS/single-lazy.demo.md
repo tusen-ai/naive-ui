@@ -34,15 +34,6 @@ function genChildren (option) {
   return children
 }
 
-const options = [
-  {
-    label: 'l-0',
-    value: 'v-0',
-    depth: 1,
-    isLeaf: false
-  }
-]
-
 export default {
   data () {
     return {
@@ -50,7 +41,14 @@ export default {
       cascade: true,
       showPath: true,
       value: null,
-      options: options
+      options: [
+        {
+          label: 'l-0',
+          value: 'v-0',
+          depth: 1,
+          isLeaf: false
+        }
+      ]
     }
   },
   methods: {

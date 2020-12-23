@@ -372,6 +372,7 @@
     - https://github.com/vuejs/vue-next/issues/2768
   - [ ] radio-group 影响主题切换，看起来是 vue 的 bug
     - https://github.com/vuejs/vue-next/issues/2829
+  - [x] cascader demo async 切换未重置数据，demo 写的有问题
 
 ## Info
 
