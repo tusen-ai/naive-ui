@@ -1,11 +1,15 @@
-import { c, cTB, cM, cB } from '../../../_utils/cssr'
+import { c, cTB, cM } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
     const {
-      color
-    } = props.$local
-    const { cubicBezierEaseInOut } = props.$global
+      $global: {
+        cubicBezierEaseInOut
+      },
+      $local: {
+        color
+      }
+    } = props
     return [
       cTB('icon', {
         raw: `
@@ -34,16 +38,7 @@ export default c([
             opacity: props.$local[`opacity${v}Depth`]
           })
         ]))
-      ]),
-      [1, 2, 3, 4, 5].map(v => cB(`icon-${v}-depth >`, [
-        cTB('icon', {
-          color
-        }, [
-          c('svg', {
-            opacity: props.$local[`opacity${v}Depth`]
-          })
-        ])
-      ]))
+      ])
     ]
   }
 ])
