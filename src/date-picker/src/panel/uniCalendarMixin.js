@@ -39,7 +39,7 @@ export default {
       return dateArray(this.calendarDateTime, this.valueAsDateTime, this.now)
     },
     calendarMonth () {
-      return this.localeNs[format(this.calendarDateTime, 'MMM')]
+      return this.locale[format(this.calendarDateTime, 'MMM')]
     },
     calendarYear () {
       return format(this.calendarDateTime, 'yyyy')

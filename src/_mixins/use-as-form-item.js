@@ -1,20 +1,24 @@
 import { computed, inject, provide, onBeforeUnmount } from 'vue'
 
 export default function useFormItem (props, options = {}) {
-  const { defaultSize = 'medium' } = options
+  const { defaultSize = 'medium', mergedSize } = options
   const NFormItem = inject('NFormItem', null)
   provide('NFormItem', null)
-  const mergedSizeRef = computed(() => {
-    const { size } = props
-    if (size) return size
-    if (NFormItem) {
-      const { mergedSize } = NFormItem
-      if (mergedSize) {
-        return mergedSize
+  const mergedSizeRef = computed(
+    mergedSize
+      ? () => mergedSize(NFormItem)
+      : () => {
+        const { size } = props
+        if (size) return size
+        if (NFormItem) {
+          const { mergedSize } = NFormItem
+          if (mergedSize) {
+            return mergedSize
+          }
+        }
+        return defaultSize
       }
-    }
-    return defaultSize
-  })
+  )
   onBeforeUnmount(() => {
     if (NFormItem) {
       NFormItem.restoreValidation()

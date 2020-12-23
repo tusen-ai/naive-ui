@@ -3,7 +3,7 @@
     <n-base-loading :stroke-width="24" :theme="theme" /><span
       class="n-log-loader__content"
     >
-      {{ localeNs.loading }}
+      {{ locale.loading }}
     </span>
   </div>
 </template>

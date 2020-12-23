@@ -117,7 +117,7 @@ import { ref, toRef, computed, watch, nextTick } from 'vue'
 import { VBinder, VTarget, VFollower } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
 import { on, off } from 'evtd'
-import { configurable, themeable, asFormItem, withCssr } from '../../_mixins'
+import { configurable, themeable, useFormItem, withCssr } from '../../_mixins'
 import styles from './styles'
 import { warn, call, useAdjustedTo } from '../../_utils'
 
@@ -148,7 +148,7 @@ export default {
     VTarget,
     VFollower
   },
-  mixins: [configurable, themeable, withCssr(styles), asFormItem()],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     defaultValue: {
       type: [Number, Array],
@@ -265,7 +265,8 @@ export default {
       handleRef2: ref(null),
       railRef: ref(null),
       followerRef1: ref(null),
-      followerRef2: ref(null)
+      followerRef2: ref(null),
+      ...useFormItem(props)
     }
   },
   computed: {

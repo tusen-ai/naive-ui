@@ -95,9 +95,9 @@ import { clickoutside } from 'vdirs'
 import {
   configurable,
   themeable,
-  asFormItem,
   locale,
-  withCssr
+  withCssr,
+  useFormItem
 } from '../../_mixins'
 import { warn, call, useAdjustedTo } from '../../_utils'
 import { NBaseSelectMenu, NBaseSelection } from '../../_base'
@@ -163,13 +163,7 @@ export default {
   directives: {
     clickoutside
   },
-  mixins: [
-    configurable,
-    themeable,
-    locale('Select'),
-    asFormItem(),
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, locale('Select'), withCssr(styles)],
   provide () {
     return {
       NSelect: this
@@ -363,12 +357,13 @@ export default {
       memoValOptMap: ref(new Map()),
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
-      followerRef
+      followerRef,
+      ...useFormItem(props)
     }
   },
   computed: {
     localizedPlaceholder () {
-      return this.placeholder ?? this.localeNs.placeholder
+      return this.placeholder ?? this.locale.placeholder
     },
     localOptions () {
       return this.compitableOptions

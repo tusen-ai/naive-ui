@@ -1,7 +1,7 @@
 import { computed, ref, watch, toRef } from 'vue'
 import { TreeMate, SubtreeNotLoadedError } from 'treemate'
 import { useIsMounted, useMergedState } from 'vooks'
-import { useAsFormItem } from '../../_mixins'
+import { useFormItem } from '../../_mixins'
 import { call, useAdjustedTo } from '../../_utils'
 
 export function useCascader (props) {
@@ -11,7 +11,7 @@ export function useCascader (props) {
     controlledValueRef,
     uncontrolledValueRef
   )
-  const formItem = useAsFormItem(props)
+  const formItem = useFormItem(props)
   const cascaderMenuRef = ref(null)
   const selectMenuRef = ref(null)
   const triggerRef = ref(null)

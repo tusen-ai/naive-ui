@@ -19,7 +19,7 @@
         :class="{
           'n-date-panel-date-input--invalid': isStartValueInvalid
         }"
-        :placeholder="localeNs.selectDate"
+        :placeholder="locale.selectDate"
         @blur="handleStartDateInputBlur"
         @input="handleStartDateInput"
       />
@@ -29,7 +29,7 @@
         :show-icon="false"
         :theme="theme"
         :stateful="false"
-        :placeholder="localeNs.selectTime"
+        :placeholder="locale.selectTime"
         :format="timeFormat"
         :value="startTimeValue"
         :is-hour-disabled="isStartHourDisabled"
@@ -46,7 +46,7 @@
         :class="{
           'n-date-panel-date-input--invalid': isEndValueInvalid
         }"
-        :placeholder="localeNs.selectDate"
+        :placeholder="locale.selectDate"
         @blur="handleEndDateInputBlur"
         @input="handleEndDateInput"
       />
@@ -57,7 +57,7 @@
         :size="timePickerSize"
         :stateful="false"
         :format="timeFormat"
-        :placeholder="localeNs.selectTime"
+        :placeholder="locale.selectTime"
         position-mode="absolute"
         :value="endTimeValue"
         :is-hour-disabled="isEndHourDisabled"
@@ -190,7 +190,7 @@
         size="tiny"
         @click="clearValue"
       >
-        {{ localeNs.clear }}
+        {{ locale.clear }}
       </n-button>
       <n-button
         v-if="actions.includes('confirm')"
@@ -200,7 +200,7 @@
         type="primary"
         @click="handleConfirmClick"
       >
-        {{ localeNs.confirm }}
+        {{ locale.confirm }}
       </n-button>
     </div>
     <div v-else style="height: 12px" />

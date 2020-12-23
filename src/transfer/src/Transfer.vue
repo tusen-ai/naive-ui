@@ -17,7 +17,7 @@
           />
         </div>
         <div class="n-transfer-list-header__header">
-          {{ sourceTitle || localeNs.sourceTitle }}
+          {{ sourceTitle || locale.sourceTitle }}
         </div>
         <n-transfer-header-extra :source="true" />
       </div>
@@ -116,7 +116,7 @@
           />
         </div>
         <div class="n-transfer-list-header__header">
-          {{ targetTitle || localeNs.targetTitle }}
+          {{ targetTitle || locale.targetTitle }}
         </div>
         <n-transfer-header-extra />
       </div>
@@ -217,7 +217,7 @@ import {
 } from '../../_base/icons'
 import {
   configurable,
-  asFormItem,
+  useFormItem,
   themeable,
   withCssr,
   locale
@@ -250,8 +250,7 @@ export default {
       themeKey: 'mergedTheme',
       injectCssrProps: true
     }),
-    locale('Transfer'),
-    asFormItem()
+    locale('Transfer')
   ],
   provide () {
     return {
@@ -339,7 +338,8 @@ export default {
       tgtScrollerRef: ref(null),
       srcVlRef: ref(null),
       tgtVlRef: ref(null),
-      ...data(props)
+      ...data(props),
+      ...useFormItem(props)
     }
   },
   computed: {

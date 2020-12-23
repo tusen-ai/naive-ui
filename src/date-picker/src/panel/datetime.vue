@@ -18,7 +18,7 @@
         :class="{
           'n-date-panel-date-input--invalid': isDateInvalid
         }"
-        :placeholder="localeNs.selectDate"
+        :placeholder="locale.selectDate"
         @blur="handleDateInputBlur"
         @input="handleDateInput"
       />
@@ -30,7 +30,7 @@
         teleport-disabled
         :size="timePickerSize"
         :value="value"
-        :placeholder="localeNs.selectTime"
+        :placeholder="locale.selectTime"
         :is-hour-disabled="isHourDisabled"
         :is-minute-disabled="isMinuteDisabled"
         :is-second-disabled="isSecondDisabled"
@@ -95,7 +95,7 @@
         size="tiny"
         @click="clearValue"
       >
-        {{ localeNs.clear }}
+        {{ locale.clear }}
       </n-button>
       <n-button
         v-if="actions.includes('now')"
@@ -103,7 +103,7 @@
         size="tiny"
         @click="setSelectedDateTimeToNow"
       >
-        {{ localeNs.now }}
+        {{ locale.now }}
       </n-button>
       <n-button
         v-if="actions.includes('confirm')"
@@ -113,7 +113,7 @@
         :disabled="isDateTimeInvalid"
         @click="handleConfirmClick"
       >
-        {{ localeNs.confirm }}
+        {{ locale.confirm }}
       </n-button>
     </div>
     <n-base-focus-detector @focus="handleFocusDetectorFocus" />

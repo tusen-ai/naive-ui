@@ -161,9 +161,9 @@ import { NBaseSuffix } from '../../_base'
 import {
   configurable,
   themeable,
-  asFormItem,
   locale,
-  withCssr
+  withCssr,
+  useFormItem
 } from '../../_mixins'
 import { call } from '../../_utils'
 import styles from './styles/input'
@@ -173,13 +173,7 @@ export default {
   components: {
     NBaseSuffix
   },
-  mixins: [
-    configurable,
-    themeable,
-    locale('Input'),
-    asFormItem(),
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, locale('Input'), withCssr(styles)],
   props: {
     bordered: {
       type: Boolean,
@@ -347,7 +341,8 @@ export default {
       focused: ref(false),
       hover: ref(false),
       isComposing: ref(false),
-      inputFocused: ref(false)
+      inputFocused: ref(false),
+      ...useFormItem(props)
     }
   },
   computed: {
@@ -360,7 +355,7 @@ export default {
           return [placeholder, placeholder]
         }
       } else if (placeholder === undefined) {
-        return [this.localeNs.placeholder]
+        return [this.locale.placeholder]
       } else {
         return [placeholder]
       }

@@ -73,10 +73,10 @@ export default {
       )
     },
     startCalendarMonth () {
-      return this.localeNs[format(this.startCalendarDateTime, 'MMM')]
+      return this.locale[format(this.startCalendarDateTime, 'MMM')]
     },
     endCalendarMonth () {
-      return this.localeNs[format(this.endCalendarDateTime, 'MMM')]
+      return this.locale[format(this.endCalendarDateTime, 'MMM')]
     },
     startCalendarYear () {
       return format(this.startCalendarDateTime, 'yyyy')

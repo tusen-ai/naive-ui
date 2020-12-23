@@ -19,13 +19,13 @@
 <script>
 import { ref, toRef } from 'vue'
 import { useMergedState } from 'vooks'
-import { configurable, themeable, asFormItem, withCssr } from '../../_mixins'
+import { configurable, themeable, useFormItem, withCssr } from '../../_mixins'
 import { call, warn } from '../../_utils'
 import styles from './styles'
 
 export default {
   name: 'Switch',
-  mixins: [configurable, themeable, asFormItem(), withCssr(styles)],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     size: {
       type: String,
@@ -70,7 +70,8 @@ export default {
     )
     return {
       mergedValue: mergedValueRef,
-      uncontrolledValue: uncontrolledValueRef
+      uncontrolledValue: uncontrolledValueRef,
+      ...useFormItem(props)
     }
   },
   methods: {

@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { configurable, themeable, withCssr, asFormItem } from '../../_mixins'
+import { configurable, themeable, withCssr, useFormItem } from '../../_mixins'
 import { toRef, ref } from 'vue'
 import { useMergedState } from 'vooks'
 import { call } from '../../_utils'
@@ -39,7 +39,7 @@ export default {
     NIcon,
     StarIcon
   },
-  mixins: [configurable, themeable, asFormItem(), withCssr(styles)],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     count: {
       type: Number,
@@ -65,7 +65,8 @@ export default {
     return {
       mergedValue: useMergedState(controlledValueRef, uncontrolledValueRef),
       uncontrolledValue: uncontrolledValueRef,
-      hoverIndex: ref(null)
+      hoverIndex: ref(null),
+      ...useFormItem(props)
     }
   },
   methods: {

@@ -56,7 +56,7 @@ export default {
   },
   computed: {
     localizedDescription () {
-      return this.description || this.localeNs.description
+      return this.description || this.locale.description
     }
   }
 }

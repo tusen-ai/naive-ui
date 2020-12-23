@@ -52,9 +52,7 @@ export default {
       ($slots.default &&
         $slots.default({
           theme: mergedTheme,
-          namespace: NConfigProvider
-            ? NConfigProvider.inheritedNamespace
-            : null,
+          namespace: NConfigProvider ? NConfigProvider.mergedNamespace : null,
           themeEnvironment: mergedThemeEnvironment,
           styleScheme: mergedTheme ? styleScheme[mergedTheme] : null
         })) ||

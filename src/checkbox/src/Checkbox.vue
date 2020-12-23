@@ -36,7 +36,7 @@
 <script>
 import { computed, inject, ref, toRef } from 'vue'
 import { useMergedState, useMemo } from 'vooks'
-import { configurable, themeable, asFormItem, withCssr } from '../../_mixins'
+import { configurable, themeable, useFormItem, withCssr } from '../../_mixins'
 import CheckMark from './CheckMark.vue'
 import LineMark from './LineMark.vue'
 import { NIconSwitchTransition } from '../../_base'
@@ -51,31 +51,7 @@ export default {
     LineMark,
     render
   },
-  mixins: [
-    configurable,
-    themeable,
-    asFormItem({
-      mergedSize () {
-        const { size } = this
-        if (size !== undefined) return size
-        const { NCheckboxGroup } = this
-        if (NCheckboxGroup && NCheckboxGroup.mergedSize !== undefined) {
-          return NCheckboxGroup.mergedSize
-        }
-        const { NFormItem } = this
-        if (NFormItem && NFormItem.mergedSize) {
-          return NFormItem.mergedSize
-        }
-        return 'medium'
-      }
-    }),
-    withCssr(styles)
-  ],
-  inject: {
-    NCheckboxGroup: {
-      default: null
-    }
-  },
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     size: {
       validator (value) {
@@ -148,9 +124,27 @@ export default {
       return props.disabled || (NCheckboxGroup && NCheckboxGroup.disabled)
     })
     return {
+      NCheckboxGroup,
       mergedCheck: useMergedState(controlledCheckedRef, uncontrolledCheckedRef),
       mergedDisabled: mergedDisabledRef,
-      renderSafeChecked: useMemo(() => mergedCheckedRef.value)
+      renderSafeChecked: useMemo(() => mergedCheckedRef.value),
+      ...useFormItem(props, {
+        mergedSize (NFormItem) {
+          const { size } = props
+          if (size !== undefined) return size
+          if (NCheckboxGroup) {
+            const { mergedSize } = NCheckboxGroup
+            if (mergedSize !== undefined) {
+              return mergedSize
+            }
+          }
+          if (NFormItem) {
+            const { mergedSize } = NFormItem
+            if (mergedSize !== undefined) return mergedSize
+          }
+          return 'medium'
+        }
+      })
     }
   },
   methods: {

@@ -1,5 +1,4 @@
-export { default as useAsFormItem } from './use-as-form-item'
-export { default as asFormItem } from './as-form-item'
+export { default as useFormItem } from './use-as-form-item'
 export { default as locale } from './locale'
 export { default as themeable } from './themeable'
 export { default as configurable } from './configurable'

@@ -6,16 +6,10 @@ export default {
   },
   computed: {
     mergedBordered () {
-      const { bordered } = this
-      if (bordered !== undefined) return bordered
-      const {
-        NConfigProvider: { bordered: inheritedBordered }
-      } = this
-      if (inheritedBordered !== undefined) return inheritedBordered
-      return true
+      return this.bordered ?? this.NConfigProvider?.mergedBordered ?? true
     },
     namespace () {
-      return (this.NConfigProvider && this.NConfigProvider.namespace) || null
+      return this.NConfigProvider?.namespace
     }
   }
 }

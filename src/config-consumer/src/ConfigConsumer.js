@@ -23,11 +23,11 @@ export default {
       const { onThemeChange } = this
       if (onThemeChange) onThemeChange(value, oldValue)
     },
-    'NConfigProvider.inheritedNamespace' (value, oldValue) {
+    'NConfigProvider.mergedNamespace' (value, oldValue) {
       const { onNamespaceChange } = this
       if (onNamespaceChange) onNamespaceChange(value, oldValue)
     },
-    'NConfigProvider.inheritedLanguage' (value, oldValue) {
+    'NConfigProvider.mergedLanguage' (value, oldValue) {
       const { onLanguageChange } = this
       if (onLanguageChange) onLanguageChange(value, oldValue)
     }
@@ -38,10 +38,8 @@ export default {
     return defaultSlot
       ? defaultSlot({
         theme: this.mergedTheme,
-        language: NConfigProvider ? NConfigProvider.inheritedLanguage : null,
-        namespace: NConfigProvider
-          ? NConfigProvider.inheritedNamespace
-          : null,
+        language: NConfigProvider ? NConfigProvider.mergedLanguage : null,
+        namespace: NConfigProvider ? NConfigProvider.mergedNamespace : null,
         themeEnvironment: this.mergedThemeEnvironment,
         styleScheme: styleScheme[this.mergedTheme]
       })

@@ -37,34 +37,14 @@
 </template>
 
 <script>
-import { configurable, themeable, asFormItem, withCssr } from '../../_mixins'
+import { configurable, themeable, withCssr } from '../../_mixins'
 import radioMixin from './radio-mixin'
 import styles from './styles/radio/index.js'
 import setup from './radio-setup'
 
 export default {
   name: 'Radio',
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles),
-    asFormItem({
-      mergedSize () {
-        const { size } = this
-        if (size !== undefined) return size
-        const { NRadioGroup } = this
-        if (NRadioGroup && NRadioGroup.mergedSize) {
-          return NRadioGroup.mergedSize
-        }
-        const { NFormItem } = this
-        if (NFormItem && NFormItem.mergedSize) {
-          return NFormItem.mergedSize
-        }
-        return 'medium'
-      }
-    }),
-    radioMixin
-  ],
+  mixins: [configurable, themeable, withCssr(styles), radioMixin],
   props: {
     size: {
       validator (value) {

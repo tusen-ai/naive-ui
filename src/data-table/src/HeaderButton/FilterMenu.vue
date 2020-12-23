@@ -40,7 +40,7 @@
     <n-divider :theme="theme" />
     <div class="n-data-table-filter-menu__action">
       <n-button size="tiny" :theme="theme" @click="handleCancelClick">
-        {{ NDataTable.localeNs.clear }}
+        {{ NDataTable.locale.clear }}
       </n-button>
       <n-button
         :theme="theme"
@@ -48,7 +48,7 @@
         size="tiny"
         @click="handleConfirmClick"
       >
-        {{ NDataTable.localeNs.confirm }}
+        {{ NDataTable.locale.confirm }}
       </n-button>
     </div>
   </div>

@@ -66,7 +66,7 @@ import { createTreeMate } from 'treemate'
 import { VBinder, VTarget, VFollower } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
-import { configurable, themeable, asFormItem, withCssr } from '../../_mixins'
+import { configurable, themeable, useFormItem, withCssr } from '../../_mixins'
 import { call, warn, useAdjustedTo } from '../../_utils'
 import { NBaseSelectMenu } from '../../_base'
 import { NInput } from '../../input'
@@ -85,7 +85,7 @@ export default {
   directives: {
     clickoutside
   },
-  mixins: [configurable, themeable, asFormItem(), withCssr(styles)],
+  mixins: [configurable, themeable, withCssr(styles)],
   inheritAttrs: false,
   props: {
     bordered: {
@@ -172,7 +172,8 @@ export default {
       canBeActivated: ref(false),
       isComposing: ref(false),
       menuRef: ref(null),
-      triggerRef: ref(null)
+      triggerRef: ref(null),
+      ...useFormItem(props)
     }
   },
   computed: {

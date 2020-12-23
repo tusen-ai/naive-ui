@@ -92,7 +92,7 @@ import {
   themeable,
   locale,
   withCssr,
-  asFormItem
+  useFormItem
 } from '../../_mixins'
 import {
   isValid,
@@ -129,13 +129,7 @@ export default {
   directives: {
     clickoutside
   },
-  mixins: [
-    configurable,
-    themeable,
-    locale('TimePicker'),
-    asFormItem(),
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, locale('TimePicker'), withCssr(styles)],
   props: {
     bordered: {
       type: Boolean,
@@ -256,7 +250,8 @@ export default {
       inputRef: ref(null),
       panelRef: ref(null),
       adjustedTo: useAdjustedTo(props),
-      keyboardState: useKeyboard()
+      keyboardState: useKeyboard(),
+      ...useFormItem(props)
     }
   },
   data () {
@@ -275,17 +270,17 @@ export default {
   },
   computed: {
     localizedNow () {
-      return this.localeNs.now
+      return this.locale.now
     },
     localizedPlaceholder () {
       if (this.placeholder !== undefined) return this.placeholder
-      return this.localeNs.placeholder
+      return this.locale.placeholder
     },
     localizedNegativeText () {
-      return this.localeNs.negativeText
+      return this.locale.negativeText
     },
     localizedPositiveText () {
-      return this.localeNs.positiveText
+      return this.locale.positiveText
     },
     dateFnsOptions () {
       return {

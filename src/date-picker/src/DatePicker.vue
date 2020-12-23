@@ -150,7 +150,7 @@ import { clickoutside } from 'vdirs'
 import {
   configurable,
   themeable,
-  asFormItem,
+  useFormItem,
   withCssr,
   locale
 } from '../../_mixins'
@@ -200,13 +200,7 @@ export default {
     DaterangePanel,
     CalendarIcon
   },
-  mixins: [
-    configurable,
-    themeable,
-    locale('DatePicker'),
-    asFormItem(),
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, locale('DatePicker'), withCssr(styles)],
   provide () {
     return {
       NDatePicker: this
@@ -329,7 +323,8 @@ export default {
       active: ref(false),
       adjustedTo: useAdjustedTo(props),
       ...uniCalendarValidation(props, mergedValueRef),
-      ...dualCalendarValidation(props, mergedValueRef)
+      ...dualCalendarValidation(props, mergedValueRef),
+      ...useFormItem(props)
     }
   },
   computed: {
@@ -346,14 +341,14 @@ export default {
     },
     localizedSeperator () {
       if (this.separator !== undefined) return this.separator
-      return this.localeNs.separator
+      return this.locale.separator
     },
     localizedPlacehoder () {
       if (this.placeholder === undefined) {
         if (this.type === 'date') {
-          return this.localeNs.datePlaceholder
+          return this.locale.datePlaceholder
         } else if (this.type === 'datetime') {
-          return this.localeNs.datetimePlaceholder
+          return this.locale.datetimePlaceholder
         }
         return this.placeholder
       } else {
@@ -363,9 +358,9 @@ export default {
     localizedStartPlaceholder () {
       if (this.startPlaceholder === undefined) {
         if (this.type === 'daterange') {
-          return this.localeNs.startDatePlaceholder
+          return this.locale.startDatePlaceholder
         } else if (this.type === 'datetimerange') {
-          return this.localeNs.startDatetimePlaceholder
+          return this.locale.startDatetimePlaceholder
         }
         return this.startPlaceholder
       } else {
@@ -375,9 +370,9 @@ export default {
     localizedEndPlaceholder () {
       if (this.endPlaceholder === undefined) {
         if (this.type === 'daterange') {
-          return this.localeNs.endDatePlaceholder
+          return this.locale.endDatePlaceholder
         } else if (this.type === 'datetimerange') {
-          return this.localeNs.endDatetimePlaceholder
+          return this.locale.endDatetimePlaceholder
         }
         return this.endPlaceholder
       } else {

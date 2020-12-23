@@ -47,9 +47,13 @@ function createMutableStyleId (
 
 function setupMutableStyle (vm, theme, depKey, CNode) {
   const {
-    $naive: { styles },
-    $options: options
+    $options: options,
+    // deprecated
+    // finally, we shouldn't use any value comes from $naive
+    // NConfigProvider should do all the stuff
+    $naive: { styles }
   } = vm
+  const resolvedStyles = vm.NConfigProvider?.mergedStyles ?? styles
   const resolveId = options.cssrName || options.name
   const mountPrefix = options.cssrId || options.name
   const depValue =
@@ -67,9 +71,9 @@ function setupMutableStyle (vm, theme, depKey, CNode) {
   const mountId = createMutableStyleId(mountPrefix, theme, depKey, depValue)
   if (find(mountId)) return
   // get global style
-  const globalVars = getGlobalVars(styles, theme)
+  const globalVars = getGlobalVars(resolvedStyles, theme)
   // get component sytle
-  const localStyle = getLocalStyle(styles, theme, resolveId)
+  const localStyle = getLocalStyle(resolvedStyles, theme, resolveId)
   const localVars = getLocalVars(localStyle, globalVars)
   // get cssr props
   const cssrProps = createCssrProps(vm, theme, globalVars, localVars)
@@ -92,12 +96,16 @@ function createCssrProps (vm, theme, globalVars, localVars) {
 
 function getCssrProps (vm, theme) {
   const {
-    $naive: { styles },
-    $options: options
+    $options: options,
+    // deprecated
+    // finally, we shouldn't use any value comes from $naive
+    // NConfigProvider should do all the stuff
+    $naive: { styles }
   } = vm
+  const resolvedStyles = vm.NConfigProvider?.mergedStyles ?? styles
   const resolveId = options.cssrName || options.name
-  const globalVars = getGlobalVars(styles, theme)
-  const localStyle = getLocalStyle(styles, theme, resolveId)
+  const globalVars = getGlobalVars(resolvedStyles, theme)
+  const localStyle = getLocalStyle(resolvedStyles, theme, resolveId)
   const localVars = getLocalVars(localStyle, globalVars)
   return createCssrProps(vm, theme, globalVars, localVars)
 }

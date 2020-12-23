@@ -31,12 +31,10 @@ export default {
     mergedThemeEnvironment () {
       const { NConfigProvider } = this
       if (NConfigProvider) {
-        const { inheritedThemeEnvironments } = NConfigProvider
-        if (inheritedThemeEnvironments) {
+        const { mergedThemeEnvironments } = NConfigProvider
+        if (mergedThemeEnvironments) {
           const { mergedTheme } = this
-          return (
-            inheritedThemeEnvironments[mergedTheme || fallbackTheme] || null
-          )
+          return mergedThemeEnvironments[mergedTheme || fallbackTheme] || null
         }
       }
       return null

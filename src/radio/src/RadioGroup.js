@@ -1,5 +1,5 @@
 import { h } from 'vue'
-import { configurable, themeable, asFormItem, withCssr } from '../../_mixins'
+import { configurable, themeable, useFormItem, withCssr } from '../../_mixins'
 import { getSlot, flatten, warn } from '../../_utils'
 import styles from './styles/radio-group/index.js'
 
@@ -91,7 +91,7 @@ export default {
   name: 'RadioGroup',
   cssrName: 'Radio',
   cssrId: 'RadioGroup',
-  mixins: [configurable, themeable, withCssr(styles), asFormItem()],
+  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     name: {
       type: String,
@@ -133,6 +133,9 @@ export default {
     return {
       NRadioGroup: this
     }
+  },
+  setup (props) {
+    return useFormItem(props)
   },
   render () {
     const { children, isButtonGroup } = mapSlot(flatten(getSlot(this)), this)

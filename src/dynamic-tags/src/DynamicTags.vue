@@ -43,13 +43,14 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 import { NTag } from '../../tag'
 import { NIcon } from '../../icon'
 import { AddIcon } from '../../_base/icons'
 import {
   configurable,
   themeable,
-  asFormItem,
+  useFormItem,
   locale,
   withCssr
 } from '../../_mixins'
@@ -64,13 +65,7 @@ export default {
     NIcon,
     AddIcon
   },
-  mixins: [
-    configurable,
-    themeable,
-    locale('Tag'),
-    asFormItem(),
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, locale('Tag'), withCssr(styles)],
   props: {
     ...commonProps,
     closable: {
@@ -118,16 +113,17 @@ export default {
       default: undefined
     }
   },
-  data () {
+  setup (props) {
     return {
-      inputValue: '',
-      inputVisible: false,
-      inputForceFocused: true
+      inputValue: ref(''),
+      inputVisible: ref(false),
+      inputForceFocused: ref(true),
+      ...useFormItem(props)
     }
   },
   computed: {
     localizedAdd () {
-      return this.localeNs.add
+      return this.locale.add
     },
     inputSize () {
       const sizes = ['small', 'medium', 'large']

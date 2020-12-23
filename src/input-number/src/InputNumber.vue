@@ -68,7 +68,7 @@ import { RemoveIcon, AddIcon } from '../../_base/icons'
 import {
   configurable,
   themeable,
-  asFormItem,
+  useFormItem,
   withCssr,
   locale
 } from '../../_mixins'
@@ -95,13 +95,7 @@ export default {
     RemoveIcon,
     AddIcon
   },
-  mixins: [
-    configurable,
-    themeable,
-    locale('InputNumber'),
-    asFormItem(),
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, locale('InputNumber'), withCssr(styles)],
   props: {
     placeholder: {
       type: String,
@@ -177,14 +171,15 @@ export default {
     )
     return {
       uncontrolledValue: uncontrolledValueRef,
-      mergedValue: mergedValueRef
+      mergedValue: mergedValueRef,
+      ...useFormItem(props)
     }
   },
   computed: {
     mergedPlaceholder () {
       const { placeholder } = this
       if (placeholder !== undefined) return placeholder
-      return this.localeNs.placeholder
+      return this.locale.placeholder
     },
     mergedStep () {
       const parsedNumber = parseNumber(this.step)
@@ -334,7 +329,9 @@ export default {
           return null
         }
       } else {
-        if (this.mergedMin !== null && value < this.mergedMin) { value = this.mergedMin } else if (this.mergedMax !== null && value > this.mergedMax) {
+        if (this.mergedMin !== null && value < this.mergedMin) {
+          value = this.mergedMin
+        } else if (this.mergedMax !== null && value > this.mergedMax) {
           value = this.mergedMax
         }
       }

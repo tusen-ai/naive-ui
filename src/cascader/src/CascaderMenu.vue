@@ -109,7 +109,7 @@ export default {
     showErrorMessage (label) {
       const {
         NCascader: {
-          localeNs: { loadingRequiredMessage }
+          locale: { loadingRequiredMessage }
         },
         maskRef
       } = this

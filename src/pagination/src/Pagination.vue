@@ -73,7 +73,7 @@
       @update:value="handleSizePickerChange"
     />
     <div v-if="showQuickJumper" class="n-pagination-quick-jumper">
-      {{ localeNs.goto }}
+      {{ locale.goto }}
       <n-input
         v-model:value="quickJumperValue"
         :size="inputSize"
@@ -191,7 +191,7 @@ export default {
   },
   computed: {
     pageSizeOptions () {
-      const suffix = this.localeNs.selectionSuffix
+      const suffix = this.locale.selectionSuffix
       return this.pageSizes.map((size) => ({
         label: `${size} / ${suffix}`,
         value: size

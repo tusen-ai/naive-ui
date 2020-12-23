@@ -133,7 +133,7 @@
         size="tiny"
         @click="clearValue"
       >
-        {{ localeNs.clear }}
+        {{ locale.clear }}
       </n-button>
       <n-button
         v-if="actions.includes('confirm')"
@@ -143,7 +143,7 @@
         :disabled="isRangeInvalid"
         @click="handleConfirmClick"
       >
-        {{ localeNs.confirm }}
+        {{ locale.confirm }}
       </n-button>
     </div>
     <n-base-focus-detector @focus="handleFocusDetectorFocus" />

@@ -1,10 +1,10 @@
 import { h } from 'vue'
-import { configurable, themeable, asFormItem } from '../../_mixins'
+import { configurable, themeable, useFormItem } from '../../_mixins'
 import { warn, call, getSlot } from '../../_utils'
 
 export default {
   name: 'CheckboxGroup',
-  mixins: [configurable, themeable, asFormItem()],
+  mixins: [configurable, themeable],
   provide () {
     return {
       NCheckboxGroup: this
@@ -43,6 +43,9 @@ export default {
       },
       default: undefined
     }
+  },
+  setup (props) {
+    return useFormItem(props)
   },
   computed: {
     valueSet () {

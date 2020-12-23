@@ -15,10 +15,10 @@ export function useSiteLang () {
 export const i18n = function (data) {
   const configProvider = inject('NConfigProvider', null)
   return {
-    locale: toRef(configProvider, 'inheritedLanguage'),
+    locale: toRef(configProvider, 'mergedLanguage'),
     t (key) {
-      const { inheritedLanguage } = configProvider
-      return data[inheritedLanguage][key]
+      const { mergedLanguage } = configProvider
+      return data[mergedLanguage][key]
     }
   }
 }

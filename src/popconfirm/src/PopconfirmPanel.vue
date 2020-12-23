@@ -66,10 +66,10 @@ export default {
   },
   computed: {
     localizedPositiveText () {
-      return this.positiveText || this.localeNs.positiveText
+      return this.positiveText || this.locale.positiveText
     },
     localizedNegativeText () {
-      return this.negativeText || this.localeNs.negativeText
+      return this.negativeText || this.locale.negativeText
     }
   },
   methods: {

@@ -214,7 +214,7 @@ export default {
       return this.NDatePicker.timePickerSize
     },
     weekdays () {
-      return daysKey.map((weekday) => this.localeNs[weekday])
+      return daysKey.map((weekday) => this.locale[weekday])
     }
   },
   methods: {

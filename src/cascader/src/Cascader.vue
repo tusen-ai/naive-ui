@@ -223,7 +223,7 @@ export default {
   computed: {
     localizedPlaceholder () {
       if (this.placeholder !== undefined) return this.placeholder
-      return this.localeNs.placeholder
+      return this.locale.placeholder
     },
     // select option related
     showSelectMenu () {

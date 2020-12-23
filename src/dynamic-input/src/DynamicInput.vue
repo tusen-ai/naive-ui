@@ -10,7 +10,7 @@
       <template #icon>
         <add-icon />
       </template>
-      {{ localeNs.create }}
+      {{ locale.create }}
     </n-button>
     <div
       v-for="(_, index) in mergedValue"
@@ -68,7 +68,7 @@ import {
   configurable,
   themeable,
   withCssr,
-  asFormItem,
+  useFormItem,
   locale
 } from '../../_mixins'
 import { createId } from 'seemly'
@@ -88,13 +88,7 @@ export default {
     AddIcon,
     RemoveIcon
   },
-  mixins: [
-    configurable,
-    themeable,
-    locale('DynamicInput'),
-    asFormItem(),
-    withCssr(styles)
-  ],
+  mixins: [configurable, themeable, locale('DynamicInput'), withCssr(styles)],
   provide () {
     return {
       NDynamicInput: this
@@ -185,7 +179,8 @@ export default {
     return {
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: useMergedState(controlledValueRef, uncontrolledValueRef),
-      dataKeyMap: globalDataKeyMap
+      dataKeyMap: globalDataKeyMap,
+      ...useFormItem(props)
     }
   },
   computed: {
