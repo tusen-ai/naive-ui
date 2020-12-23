@@ -3,6 +3,7 @@
     :theme="theme"
     class="n-base-selection__mark"
     :stroke-width="20"
+    :scale="0.8"
     :show="loading"
   >
     <n-base-clear-button

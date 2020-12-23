@@ -1,29 +1,30 @@
 import { c, cTB, cB, cE, cM } from '../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up'
-import iconSwitchTransition from '../../../_styles/transitions/icon-switch'
 import { depx, pxfy } from 'seemly'
 
 export default
 c([
   ({ props }) => {
     const {
-      cubicBezierEaseInOut,
-      transformDebounceScale
-    } = props.$global
-    const {
-      arrowColor,
-      optionTextColor,
-      optionTextColorMatched,
-      optionTextColorDisabled,
-      optionCheckMarkColor,
-      menuColor,
-      menuBoxShadow,
-      menuBorderColor,
-      menuBorderRadius,
-      optionColorHover,
-      optionHeight,
-      optionFontSize
-    } = props.$local
+      $local: {
+        arrowColor,
+        optionTextColor,
+        optionTextColorMatched,
+        optionTextColorDisabled,
+        optionCheckMarkColor,
+        menuColor,
+        menuBoxShadow,
+        menuBorderColor,
+        menuBorderRadius,
+        optionColorHover,
+        optionHeight,
+        optionFontSize
+      },
+      $global: {
+        cubicBezierEaseInOut,
+        transformDebounceScale
+      }
+    } = props
     const menuHeight = pxfy(depx(optionHeight) * 6.6)
     return cTB(
       'cascader-menu',
@@ -119,19 +120,13 @@ c([
             justifyContent: 'center'
           }),
           cB('cascader-option-icon-placeholder', {
+            lineHeight: 0,
             position: 'relative',
             width: '16px',
             height: '16px',
             fontSize: '16px'
           }, [
-            cB('cascader-option-icon', {
-              position: 'absolute',
-              left: 0,
-              right: 0,
-              top: 0,
-              bottom: 0
-            }, [
-              iconSwitchTransition(),
+            cB('cascader-option-icon', [
               cM('checkmark', {
                 color: optionCheckMarkColor
               }, [
@@ -143,9 +138,7 @@ c([
             ])
           ]),
           cM('selected', {
-            raw: `
-              color: ${optionTextColorMatched}
-            `
+            color: optionTextColorMatched
           }),
           cM('active', {
             color: optionTextColorMatched,

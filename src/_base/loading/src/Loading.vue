@@ -11,15 +11,15 @@
         v-if="show"
         key="loading"
         class="n-base-loading-circular n-base-loading__icon"
-        :viewBox="`0 0 ${radius * 2} ${radius * 2}`"
+        :viewBox="`0 0 ${(radius * 2) / scale} ${(radius * 2) / scale}`"
       >
         <circle
           :style="{
             strokeWidth
           }"
           class="n-base-loading-circular-path"
-          :cx="radius"
-          :cy="radius"
+          :cx="radius / scale"
+          :cy="radius / scale"
           fill="none"
           :r="radius - strokeWidth / 2"
         />
@@ -43,6 +43,10 @@ export default {
   },
   mixins: [withCssr(styles)],
   props: {
+    scale: {
+      type: Number,
+      default: 1
+    },
     radius: {
       type: Number,
       default: 100

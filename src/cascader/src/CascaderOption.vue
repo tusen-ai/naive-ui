@@ -21,21 +21,21 @@
     <span class="n-cascader-option__label">{{ label }}</span>
     <div class="n-cascader-option__suffix">
       <div class="n-cascader-option-icon-placeholder">
-        <n-icon-switch-transition v-if="!isLeaf">
-          <n-base-loading
-            v-if="isLoading"
-            key="loading"
-            class="n-cascader-option-icon"
-            :theme="NCascader.mergedTheme"
-          />
+        <n-base-loading
+          v-if="!isLeaf"
+          :scale="0.8"
+          :stroke-width="20"
+          :show="isLoading"
+          class="n-cascader-option-icon"
+          :theme="NCascader.mergedTheme"
+        >
           <n-icon
-            v-else
             key="arrow"
             class="n-cascader-option-icon n-cascader-option-icon--arrow"
           >
             <chevron-right-icon />
           </n-icon>
-        </n-icon-switch-transition>
+        </n-base-loading>
         <transition
           v-else-if="!multiple && leafOnly"
           name="n-fade-in-scale-up-transition"
@@ -55,7 +55,7 @@
 <script>
 import { computed, inject, toRef } from 'vue'
 import { NCheckbox } from '../../checkbox'
-import { NBaseLoading, NIconSwitchTransition } from '../../_base'
+import { NBaseLoading } from '../../_base'
 import { ChevronRightIcon, CheckmarkIcon } from '../../_base/icons'
 import { useMemo } from 'vooks'
 
@@ -64,7 +64,6 @@ export default {
   components: {
     NCheckbox,
     NBaseLoading,
-    NIconSwitchTransition,
     ChevronRightIcon,
     CheckmarkIcon
   },
