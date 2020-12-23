@@ -166,6 +166,9 @@ export default c([
         `,
         width: iconSize
       }, [
+        cB('base-clear-button', {
+          fontSize: iconSize
+        }),
         cB('icon', {
           justifySelf: 'center',
           fontSize: iconSize,

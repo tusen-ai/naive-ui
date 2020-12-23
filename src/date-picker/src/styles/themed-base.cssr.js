@@ -4,42 +4,44 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 export default c([
   ({ props }) => {
     const {
-      transformDebounceScale,
-      cubicBezierEaseInOut
-    } = props.$global
-    const {
-      panelMonthFontSize,
-      panelDayFontSize,
-      itemFontSize,
-      itemTextColor,
-      itemTextColorMatched,
-      itemSupColor,
-      itemSupColorMatch,
-      itemColorHover,
-      itemColorActive,
-      itemBorderRadius,
-      panelColor,
-      panelTextColor,
-      panelArrowButtonColor,
-      panelMonthTextColor,
-      panelActionDivider,
-      panelHeaderDividerColor,
-      panelDayDividerColor,
-      panelBoxShadow,
-      panelBorderRadius,
-      panelMonthFontWeight,
-      panelActionPadding,
-      itemSize,
-      itemSpaceWidth,
-      itemSpaceHeight,
-      panelMonthPadding,
-      panelMonthHeight,
-      panelDatePaddingDate,
-      panelDatePaddingDateTime,
-      panelArrowButtonSize,
-      panelHeaderPadding,
-      panelVerticalDividerColor
-    } = props.$local
+      $global: {
+        transformDebounceScale,
+        cubicBezierEaseInOut
+      },
+      $local: {
+        panelMonthFontSize,
+        panelDayFontSize,
+        itemFontSize,
+        itemTextColor,
+        itemTextColorMatched,
+        itemSupColor,
+        itemSupColorMatch,
+        itemColorHover,
+        itemColorActive,
+        itemBorderRadius,
+        panelColor,
+        panelTextColor,
+        panelArrowButtonColor,
+        panelMonthTextColor,
+        panelActionDivider,
+        panelHeaderDividerColor,
+        panelDayDividerColor,
+        panelBoxShadow,
+        panelBorderRadius,
+        panelMonthFontWeight,
+        panelActionPadding,
+        itemSize,
+        itemSpaceWidth,
+        itemSpaceHeight,
+        panelMonthPadding,
+        panelMonthHeight,
+        panelDatePaddingDate,
+        panelDatePaddingDateTime,
+        panelArrowButtonSize,
+        panelHeaderPadding,
+        panelVerticalDividerColor
+      }
+    } = props
     return [
       cTB('date-picker', {
         position: 'relative'
@@ -277,7 +279,7 @@ export default c([
               c('&::after', {
                 raw: `
                   position: absolute;
-                  top: 3px;
+                  top: 2px;
                   right: 2px;
                   content: "";
                   height: 4px;

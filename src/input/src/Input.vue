@@ -117,31 +117,26 @@
         {{ mergedPlaceholder[1] }}
       </div>
     </div>
-    <div
+    <n-icon-config-provider
       v-if="$slots.affix || $slots.prefix"
       class="n-input__prefix"
-      :class="disabled ? 'n-icon-5-depth' : 'n-icon-4-depth'"
+      :depth="disabled ? 5 : 4"
     >
       <slot name="affix">
         <slot name="prefix" />
       </slot>
-    </div>
-    <transition name="n-button-suffix-transition">
-      <div
-        class="n-input__suffix"
-        :class="disabled ? 'n-icon-5-depth' : 'n-icon-4-depth'"
+    </n-icon-config-provider>
+    <n-icon-config-provider class="n-input__suffix" :depth="disabled ? 5 : 4">
+      <slot name="suffix" />
+      <n-base-clear-button
+        v-if="clearable"
+        :theme="mergedTheme"
+        :show="showClearButton"
+        @clear="handleClear"
       >
-        <div class="n-input-clear">
-          <n-base-suffix
-            :theme="mergedTheme"
-            :show="showClearButton"
-            :clearable="clearable"
-            @clear="handleClear"
-          />
-        </div>
-        <slot name="suffix" />
-      </div>
-    </transition>
+        <slot name="clear" />
+      </n-base-clear-button>
+    </n-icon-config-provider>
     <div
       v-if="isTextarea && !isComposing && placeholder && !pair && !mergedValue"
       class="n-input__placeholder"
@@ -157,7 +152,7 @@
 <script>
 import { ref, toRef } from 'vue'
 import { useMergedState } from 'vooks'
-import { NBaseSuffix } from '../../_base'
+import { NBaseClearButton } from '../../_base'
 import {
   configurable,
   themeable,
@@ -167,11 +162,13 @@ import {
 } from '../../_mixins'
 import { call } from '../../_utils'
 import styles from './styles/input'
+import NIconConfigProvider from '../../icon/src/IconConfigProvider.vue'
 
 export default {
   name: 'Input',
   components: {
-    NBaseSuffix
+    NIconConfigProvider,
+    NBaseClearButton
   },
   mixins: [configurable, themeable, locale('Input'), withCssr(styles)],
   props: {

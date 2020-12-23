@@ -2,12 +2,12 @@ import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
 import { changeColor } from 'seemly'
 import { baseDark } from '../../_styles/base'
-import { baseSuffixDark } from '../../_base/suffix/styles'
+import { baseClearButtonDark } from '../../_base/clear-button/styles'
 
 export default create({
   name: 'Input',
   theme: 'dark',
-  peer: [baseDark, baseSuffixDark],
+  peer: [baseDark, baseClearButtonDark],
   getLocalVars (vars) {
     const {
       textColor2Overlay,

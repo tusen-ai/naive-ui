@@ -38,7 +38,7 @@
           @deactivate="handleRangeInputDeactivate"
           @input="handleRangeInput"
         >
-          <template #suffix>
+          <template #clear>
             <n-icon>
               <calendar-icon />
             </n-icon>
@@ -65,7 +65,7 @@
           @input="handleTimeInput"
           @clear="handleClear"
         >
-          <template #suffix>
+          <template #clear>
             <n-icon>
               <calendar-icon />
             </n-icon>
