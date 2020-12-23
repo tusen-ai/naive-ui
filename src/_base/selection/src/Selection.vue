@@ -37,17 +37,13 @@
         >
           {{ option.label }}
         </n-tag>
-        <n-base-clear-button
-          v-if="showArrow"
-          class="n-base-selection__mark"
+        <suffix
           :theme="theme"
-          :show="mergedClearable && selected"
+          :loading="loading"
+          :show-arrow="showArrow"
+          :show-clear="mergedClearable && selected"
           @clear="handleClear"
-        >
-          <n-icon depth="4">
-            <chevron-down-icon />
-          </n-icon>
-        </n-base-clear-button>
+        />
       </div>
       <div class="n-base-selection__placeholder">
         {{ placeholder }}
@@ -91,17 +87,13 @@
             class="n-base-selection-input-tag__mirror"
           >{{ pattern ? pattern : '&nbsp;' }}</span>
         </div>
-        <n-base-clear-button
-          v-if="showArrow"
-          class="n-base-selection__mark"
+        <suffix
           :theme="theme"
-          :show="mergedClearable && selected"
+          :loading="loading"
+          :show-arrow="showArrow"
+          :show-clear="mergedClearable && selected"
           @clear="handleClear"
-        >
-          <n-icon depth="4">
-            <chevron-down-icon />
-          </n-icon>
-        </n-base-clear-button>
+        />
       </div>
       <div class="n-base-selection__placeholder">
         {{ placeholder }}
@@ -138,17 +130,13 @@
         >
           {{ filterablePlaceholder }}
         </div>
-        <n-base-clear-button
-          v-if="showArrow"
-          class="n-base-selection__mark"
+        <suffix
           :theme="theme"
-          :show="mergedClearable && selected"
+          :loading="loading"
+          :show-arrow="showArrow"
+          :show-clear="mergedClearable && selected"
           @clear="handleClear"
-        >
-          <n-icon depth="4">
-            <chevron-down-icon />
-          </n-icon>
-        </n-base-clear-button>
+        />
       </div>
     </template>
     <template v-else-if="!multiple && !filterable">
@@ -168,17 +156,13 @@
         >
           {{ placeholder }}
         </div>
-        <n-base-clear-button
-          v-if="showArrow"
-          class="n-base-selection__mark"
+        <suffix
           :theme="theme"
-          :show="mergedClearable && selected"
+          :loading="loading"
+          :show-arrow="showArrow"
+          :show-clear="mergedClearable && selected"
           @clear="handleClear"
-        >
-          <n-icon depth="4">
-            <chevron-down-icon />
-          </n-icon>
-        </n-base-clear-button>
+        />
       </div>
     </template>
     <div class="n-base-selection__border" />
@@ -188,8 +172,7 @@
 </template>
 
 <script>
-import NBaseClearButton from '../../clear-button'
-import { ChevronDownIcon } from '../../icons'
+import Suffix from './Suffix.vue'
 import { NTag } from '../../../tag/index.js'
 import { withCssr } from '../../../_mixins'
 import styles from './styles/index.js'
@@ -197,8 +180,7 @@ import styles from './styles/index.js'
 export default {
   name: 'BaseSelection',
   components: {
-    ChevronDownIcon,
-    NBaseClearButton,
+    Suffix,
     NTag
   },
   mixins: [withCssr(styles)],

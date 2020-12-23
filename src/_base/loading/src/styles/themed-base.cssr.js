@@ -1,25 +1,46 @@
-import { cTB, c, cB } from '../../../../_utils/cssr'
+import { cTB, c, cB, cE } from '../../../../_utils/cssr'
+import iconSwitchTransition from '../../../../_styles/transitions/icon-switch'
 
 const dashOffset = 500
 
 export default c([
   ({ props }) => {
     const {
-      cubicBezierEaseInOut
-    } = props.$global
-    const {
-      color
-    } = props.$local
+      $global: {
+        cubicBezierEaseInOut
+      },
+      $local: {
+        color
+      }
+    } = props
     return [
       cTB('base-loading', {
         raw: `
-          line-height: 1;
-          stroke: ${color};
+          position: relative;
+          line-height: 0;
+          width: 1em;
+          height: 1em;
           transition: stroke .3s ${cubicBezierEaseInOut};
         `
       }, [
+        cE('placeholder', {
+          position: 'absolute',
+          left: '50%',
+          top: '50%',
+          transform: 'translateX(-50%) translateY(-50%)'
+        }, [
+          iconSwitchTransition({
+            left: '50%',
+            top: '50%',
+            originalTransform: 'translateX(-50%) translateY(-50%)'
+          })
+        ]),
+        cE('icon', [
+          iconSwitchTransition()
+        ]),
         cB('base-loading-circular', {
           raw: `
+            stroke: ${color};
             height: 100%;
             width: 100%;
             animation: n-base-loading-rotate 1.5s linear infinite;
