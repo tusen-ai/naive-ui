@@ -8,7 +8,7 @@
   <n-button @click="theme = 'light'">浅色主题</n-button>
 </div>
 <n-config-provider :theme="theme" :theme-environments="env">
-  <n-config-consumer v-slot="{ themeEnvironment }">
+  <n-config-consumer #="{ themeEnvironment }">
     <n-card>
       <n-tag>{{ themeEnvironment }}</n-tag>
     </n-card>

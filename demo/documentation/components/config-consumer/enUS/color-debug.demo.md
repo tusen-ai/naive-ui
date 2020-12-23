@@ -6,7 +6,7 @@ To make sure you know what do these colors mean. See [Caveat on Using Style Sche
 
 ```html
 <div style="overflow: auto;">
-  <n-config-consumer v-slot="{ styleScheme }">
+  <n-config-consumer #="{ styleScheme }">
     <pre
       :style="{
         color: styleScheme.secondaryTextColor,

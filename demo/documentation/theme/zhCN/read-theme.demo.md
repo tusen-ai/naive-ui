@@ -10,7 +10,7 @@
   </n-space>
   <n-config-provider :theme="theme">
     <n-card>
-      <n-config-consumer @theme-change="handleThemeChange" v-slot="{ theme }">
+      <n-config-consumer @theme-change="handleThemeChange" #="{ theme }">
         <div>主题：{{ theme }}</div>
       </n-config-consumer>
     </n-card>

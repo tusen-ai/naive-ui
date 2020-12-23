@@ -7,7 +7,7 @@ Get current theme and namespace.
   @theme-change="handleThemeChange"
   @namespace-change="handleNamespaceChange"
 >
-  <template v-slot="{ theme, namespace }">
+  <template #="{ theme, namespace }">
     <div>
       <div>theme: {{ theme }}</div>
       <div>namespace: {{ namespace }}</div>

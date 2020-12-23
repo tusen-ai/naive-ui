@@ -14,7 +14,7 @@
     key-field="key"
     :on-create="onCreate"
   >
-    <template v-slot="{ index, value }">
+    <template #="{ index, value }">
       <div style="display: flex;">
         <!--
           Usually, the path change will cause the form-item verification content

@@ -9,7 +9,7 @@ Sometimes you may need some component to access some values at specific theme. Y
 </div>
 <n-config-provider :theme="theme" :theme-environments="env">
   <n-card>
-    <n-config-consumer v-slot="{ themeEnvironment }">
+    <n-config-consumer #="{ themeEnvironment }">
       <n-tag>{{ themeEnvironment }}</n-tag>
     </n-config-consumer>
   </n-card>

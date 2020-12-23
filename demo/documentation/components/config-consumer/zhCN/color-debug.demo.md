@@ -6,7 +6,7 @@ Naive UI 有内置的一组样式变量，你可以使用它来完成和 Naive U
 
 ```html
 <div style="overflow: auto;">
-  <n-config-consumer v-slot="{ styleScheme }">
+  <n-config-consumer #="{ styleScheme }">
     <pre
       :style="{
         color: styleScheme.secondaryTextColor,

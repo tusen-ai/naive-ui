@@ -9,7 +9,7 @@ Get current theme environment.
     <n-button @click="theme = 'light'">Light Theme</n-button>
   </n-space>
   <n-config-provider :theme="theme" :theme-environments="env">
-    <n-config-consumer v-slot="{ themeEnvironment }">
+    <n-config-consumer #="{ themeEnvironment }">
       <n-card>
         <n-tag>{{ themeEnvironment }}</n-tag>
       </n-card>

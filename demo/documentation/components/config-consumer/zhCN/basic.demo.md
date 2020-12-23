@@ -7,7 +7,7 @@
   @theme-change="handleThemeChange"
   @namespace-change="handleNamespaceChange"
 >
-  <template v-slot="{ theme, namespace }">
+  <template #="{ theme, namespace }">
     <div>
       <div>主题：{{ theme }}</div>
       <div>命名空间：{{ namespace }}</div>

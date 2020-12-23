@@ -13,7 +13,7 @@
     key-field="key"
     :on-create="onCreate"
   >
-    <template v-slot="{ index, value }">
+    <template #="{ index, value }">
       <div style="display: flex;">
         <!--
           通常，path 的变化会导致 form-item 验证内容或规则的改变，所以 naive-ui 会清理掉

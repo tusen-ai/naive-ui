@@ -4,7 +4,7 @@ If you are not satisfied with builtin colors.
 
 ```html
 <n-config-consumer>
-  <template v-slot="{ styleScheme }">
+  <template #="{ styleScheme }">
     <div>
       <n-progress
         style="margin: 0 8px 12px 0;"

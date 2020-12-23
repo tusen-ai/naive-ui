@@ -4,7 +4,7 @@ You can replace auto-complete's input element.
 
 ```html
 <n-auto-complete :options="options" v-model:value="value">
-  <template v-slot="{ handleInput, handleBlur, handleFocus, value }">
+  <template #="{ handleInput, handleBlur, handleFocus, value }">
     <n-input
       type="textarea"
       @input="handleInput"

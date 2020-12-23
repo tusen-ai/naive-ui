@@ -8,7 +8,6 @@
     <n-space><n-switch v-model:value="showPath" />Show Path</n-space>
   </n-space>
   <n-cascader
-    show
     v-model:value="value"
     placeholder="没啥用的值"
     :options="options"

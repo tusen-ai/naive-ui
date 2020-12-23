@@ -7,7 +7,7 @@ Maybe your product manager will need it.
 ```html
 <n-space vertical>
   <n-config-consumer>
-    <template v-slot="{ styleScheme }">
+    <template #="{ styleScheme }">
       <n-progress
         type="multiple-circle"
         :stroke-width="6"

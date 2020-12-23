@@ -6,12 +6,14 @@ function createRenderer (wrapCodeWithCard = true) {
   const overrides = {
     table (header, body) {
       if (body) body = '<tbody class="n-table__tbody">' + body + '</tbody>'
-      return '<n-table single-column class="md-table">\n' +
+      return (
+        '<n-table single-column class="md-table">\n' +
         '<thead class="n-table__thead">\n' +
         header +
         '</thead>\n' +
         body +
         '</n-table>\n'
+      )
     },
 
     tablerow (content) {
@@ -21,7 +23,12 @@ function createRenderer (wrapCodeWithCard = true) {
     tablecell (content, flags) {
       const type = flags.header ? 'th' : 'td'
       const tag = flags.align
-        ? '<' + type + ` class="n-table__${type}"` + ' align="' + flags.align + '">'
+        ? '<' +
+          type +
+          ` class="n-table__${type}"` +
+          ' align="' +
+          flags.align +
+          '">'
         : '<' + type + ` class="n-table__${type}"` + '>'
       return tag + content + '</' + type + '>\n'
     },
@@ -29,11 +36,15 @@ function createRenderer (wrapCodeWithCard = true) {
     code: (code, language) => {
       const isLanguageValid = !!(language && hljs.getLanguage(language))
       if (!isLanguageValid) {
-        throw new Error(`MdRendererError: ${language} is not valid for code - ${code}`)
+        throw new Error(
+          `MdRendererError: ${language} is not valid for code - ${code}`
+        )
       }
       const highlighted = hljs.highlight(language, code).value
-      return `${wrapCodeWithCard ? '<n-card size="small" class="md-card">' : ''}<n-config-consumer>
-  <template v-slot="{ theme }">
+      return `${
+        wrapCodeWithCard ? '<n-card size="small" class="md-card">' : ''
+      }<n-config-consumer>
+  <template #="{ theme }">
     <pre class="n-code" :class="'n-' + theme + '-theme'"><code v-pre>${highlighted}</code><n-code style="display: none;" /></pre>
   </template>
 </n-config-consumer>${wrapCodeWithCard ? '</n-card>' : ''}`
@@ -42,20 +53,20 @@ function createRenderer (wrapCodeWithCard = true) {
       const id = text.replace(/ /g, '-')
       return `<n-h${level} id="${id}">${text}</n-h${level}>`
     },
-    blockquote: quote => {
+    blockquote: (quote) => {
       return `<n-blockquote>${quote}</n-blockquote>`
     },
     hr: () => '<n-hr />',
-    paragraph: text => {
+    paragraph: (text) => {
       return `<n-p>${text}</n-p>`
     },
     link (href, title, text) {
-      if (/^(http:|https:)/.test(href)) return `<n-a href="${href}" target="_blank">${text}</n-a>`
+      if (/^(http:|https:)/.test(href)) { return `<n-a href="${href}" target="_blank">${text}</n-a>` }
       return `<n-a to="${href}" >${text}</n-a>`
     },
     list (body, ordered, start) {
       const type = ordered ? 'n-ol' : 'n-ul'
-      const startatt = (ordered && start !== 1) ? (' start="' + start + '"') : ''
+      const startatt = ordered && start !== 1 ? ' start="' + start + '"' : ''
       return `<${type}${startatt}>\n` + body + `</${type}>\n`
     },
     listitem (text) {
@@ -72,7 +83,7 @@ function createRenderer (wrapCodeWithCard = true) {
     }
   }
 
-  Object.keys(overrides).forEach(key => {
+  Object.keys(overrides).forEach((key) => {
     renderer[key] = overrides[key]
   })
   return renderer

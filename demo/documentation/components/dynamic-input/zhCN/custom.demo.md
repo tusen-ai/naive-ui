@@ -2,7 +2,7 @@
 
 ```html
 <n-dynamic-input v-model:value="customValue" :on-create="onCreate">
-  <template v-slot="{ value }">
+  <template #="{ value }">
     <div style="width: 100%;">
       <div style="display: flex; align-items: center;">
         <n-checkbox

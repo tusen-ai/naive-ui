@@ -9,7 +9,7 @@ Components inside naive-ui may use different variables in different themes. Beca
 In most case you may want to use a `x-overlay-color`: For example is you use `primary-text-color` in the dark mode. It will darker than `primary-text-overlay-color`. Because `primary-text-color` is composited based on pure black(#000). But text are always not placed in a pure black background. In the light mode, those two colors usually looks the same, because `primary-text-overlay-color` is usually be displayed in a pure white background.
 
 ```html
-<n-config-consumer v-slot="{ styleScheme }">
+<n-config-consumer #="{ styleScheme }">
   <button
     :style="{
       fontSize: '14px',
@@ -25,7 +25,7 @@ In most case you may want to use a `x-overlay-color`: For example is you use `pr
   </button>
 </n-config-consumer>
 <br />
-<n-element tag="div" style="overflow: auto;" v-slot="{ styleScheme }">
+<n-element tag="div" style="overflow: auto;" #="{ styleScheme }">
   <pre
     :style="{
       color: styleScheme.secondaryTextColor,
