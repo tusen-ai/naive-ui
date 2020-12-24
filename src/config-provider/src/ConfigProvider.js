@@ -84,16 +84,24 @@ export default {
     const NConfigProvider = inject('NConfigProvider', null)
     return {
       mergedBordered: useMemo(() => {
-        return props.bordered ?? NConfigProvider?.mergedBordered
+        const { bordered } = props
+        return bordered === undefined
+          ? NConfigProvider?.mergedBordered
+          : bordered
       }),
       mergedTheme: useMemo(() => {
-        return props.theme ?? NConfigProvider?.mergedTheme
+        const { theme } = props
+        return theme === undefined ? NConfigProvider?.mergedTheme : theme
       }),
       mergedNamespace: useMemo(() => {
-        return props.namespace ?? NConfigProvider?.mergedNamespace
+        const { namespace } = props
+        return namespace === undefined
+          ? NConfigProvider?.mergedNamespace
+          : namespace
       }),
       mergedLocale: computed(() => {
-        return props.locale ?? NConfigProvider?.mergedLocale
+        const { locale } = props
+        return locale === undefined ? NConfigProvider?.mergedLocale : locale
       }),
       mergedStyles: computed(() => {
         // TODO, merged styles together
@@ -101,14 +109,20 @@ export default {
       }),
       // deprecated
       mergedLanguage: useMemo(() => {
-        return props.language ?? props.lang ?? NConfigProvider?.mergedLanguage
+        const { language, lang } = props
+        return language === undefined
+          ? lang === undefined
+            ? NConfigProvider?.mergedLanguage
+            : lang
+          : language
       }),
       mergedThemeEnvironments: computed(() => {
-        return (
-          props.themeEnvironments ??
-          props.themeEnvironment ??
-          NConfigProvider?.mergedThemeEnvironments
-        )
+        const { themeEnvironments, themeEnvironment } = props
+        return themeEnvironments === undefined
+          ? themeEnvironment === undefined
+            ? NConfigProvider?.mergedThemeEnvironments
+            : themeEnvironment
+          : themeEnvironments
       })
     }
   },
