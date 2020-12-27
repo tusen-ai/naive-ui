@@ -329,17 +329,21 @@ export default {
       return null
     },
     firstHandleStyle () {
+      const { handleValue1, max, min, handleClicked1 } = this
+      const percentage = ((handleValue1 - min) / (max - min)) * 100
       return {
-        left:
-          ((this.handleValue1 - this.min) / (this.max - this.min)) * 100 + '%',
-        zIndex: this.handleClicked1 ? 1 : 0
+        left: `${percentage}%`,
+        transform: `translateX(${-percentage}%)`,
+        zIndex: handleClicked1 ? 1 : 0
       }
     },
     secondHandleStyle () {
+      const { handleValue2, max, min, handleClicked2 } = this
+      const percentage = ((handleValue2 - min) / (max - min)) * 100
       return {
-        left:
-          ((this.handleValue2 - this.min) / (this.max - this.min)) * 100 + '%',
-        zIndex: this.handleClicked2 ? 1 : 0
+        left: `${percentage}%`,
+        transform: `translateX(${-percentage}%)`,
+        zIndex: handleClicked2 ? 1 : 0
       }
     }
   },

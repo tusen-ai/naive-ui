@@ -42,31 +42,27 @@ export default c([
           padding: calc((${handleSize} - ${railHeight}) / 2) 0;
           position: relative;
           z-index: 0;
-          width: calc(100% - 14px);
-          margin-left: 7px;
-          margin-right: 7px;
+          width: 100%;
           cursor: pointer;
         `
       }, [
         cB('slider-marks', {
           raw: `
             position: absolute;
-            top: 14px;
+            top: 18px;
             left: 0;
             right: 0;
           `
         }, [
           cB('slider-mark', {
-            raw: `
-              position: absolute;
-              transform: translateX(-50%);
-            `
+            position: 'absolute',
+            transform: 'translateX(-50%)'
           })
         ]),
         cM('with-mark', {
           raw: `
-            width: calc(100% - 24px);
-            margin: 8px 12px 32px 12px;
+            width: 100%;
+            margin: 8px 0 32px 0;
           `
         }),
         c('&:hover', [
