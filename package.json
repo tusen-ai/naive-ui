@@ -113,10 +113,10 @@
     "vue": "^3.0.4",
     "vueuc": "0.0.3"
   },
-  "sideEffects": false,
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  }
+  },
+  "sideEffects": false
 }

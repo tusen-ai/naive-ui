@@ -37,6 +37,7 @@ export default c([
       padding,
       borderRadius,
       transition: `
+        border-color .3s ${cubicBezierEaseInOut},
         background-color .3s ${cubicBezierEaseInOut},
         color .3s ${cubicBezierEaseInOut},
         box-shadow .3s ${cubicBezierEaseInOut},
