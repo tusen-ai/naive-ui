@@ -121,23 +121,24 @@ import { configurable, themeable, useFormItem, withCssr } from '../../_mixins'
 import styles from './styles'
 import { warn, call, useAdjustedTo } from '../../_utils'
 
-function handleFirstHandleMouseMove (e) {
-  const railRect = this.railRef.getBoundingClientRect()
-  const offsetRatio = (e.clientX - railRect.left) / railRect.width
-  const newValue = this.min + (this.max - this.min) * offsetRatio
-  if (this.range) {
-    this.dispatchValueUpdate([this.memoziedOtherValue, newValue])
+function handleHandleMouseMove (e, handleIndex) {
+  const { width: handleWidth } = this.handleRef1.getBoundingClientRect()
+  const {
+    width: railWidth,
+    left: railLeft
+  } = this.railRef.getBoundingClientRect()
+  const { min, max, range } = this
+  const offsetRatio =
+    (e.clientX - railLeft - handleWidth / 2) / (railWidth - handleWidth)
+  const newValue = min + (max - min) * offsetRatio
+  if (range) {
+    if (handleIndex === 0) {
+      this.dispatchValueUpdate([this.memoziedOtherValue, newValue])
+    } else {
+      this.dispatchValueUpdate([newValue, this.memoziedOtherValue])
+    }
   } else {
     this.dispatchValueUpdate(newValue)
-  }
-}
-
-function handleSecondHandleMouseMove (e) {
-  const railRect = this.railRef.getBoundingClientRect()
-  const offsetRatio = (e.clientX - railRect.left) / railRect.width
-  const newValue = this.min + (this.max - this.min) * offsetRatio
-  if (this.range) {
-    this.dispatchValueUpdate([this.memoziedOtherValue, newValue])
   }
 }
 
@@ -674,9 +675,12 @@ export default {
         }
       }
     },
-    /** do not throttle to make ui sync with action after final move */
-    handleFirstHandleMouseMove,
-    handleSecondHandleMouseMove,
+    handleFirstHandleMouseMove (e) {
+      handleHandleMouseMove.call(this, e, 0)
+    },
+    handleSecondHandleMouseMove (e) {
+      handleHandleMouseMove.call(this, e, 1)
+    },
     handleFirstHandleMouseEnter () {
       if (!this.active) {
         this.doUpdateShow(true, undefined)
