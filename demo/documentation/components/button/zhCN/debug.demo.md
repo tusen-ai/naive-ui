@@ -401,10 +401,8 @@ export default {
   background-color: transparent;
   transition: background-color 0.3s ease-in-out;
 }
-.n-light-theme {
-  .debug-zone {
-    border-radius: 4px;
-    background-color: #ececec;
-  }
+.n-light-theme .debug-zone {
+  border-radius: 4px;
+  background-color: #ececec;
 }
 ```
