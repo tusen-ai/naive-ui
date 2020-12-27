@@ -12,11 +12,20 @@
   >
     <div ref="railRef" class="n-slider-rail" @click="handleRailClick">
       <div class="n-slider-rail__fill" :style="fillStyle" />
-      <div v-if="marks" class="n-slider-dots">
+      <div
+        v-if="marks"
+        class="n-slider-dots"
+        :class="{
+          'n-slider-dots--transition-disabled': dotTransitionDisabled
+        }"
+      >
         <div
           v-for="mark in computedMarks"
           :key="mark.label"
           class="n-slider-dot"
+          :class="{
+            'n-slider-dot--active': mark.active
+          }"
           :style="{
             ...mark.style
           }"
@@ -261,6 +270,7 @@ export default {
       active: activeRef,
       prevActive: prevActiveRef,
       clicked: clickedRef,
+      dotTransitionDisabled: ref(false),
       // https://github.com/vuejs/vue-next/issues/2283
       handleRef1: ref(null),
       handleRef2: ref(null),
@@ -272,17 +282,21 @@ export default {
   },
   computed: {
     computedMarks () {
-      const marks = []
-      for (const value of Object.keys(this.marks)) {
-        marks.push({
-          label: this.marks[value],
+      const mergedMarks = []
+      const { marks, max, min, range, mergedValue } = this
+      for (const key of Object.keys(marks)) {
+        const num = Number(key)
+        mergedMarks.push({
+          active: range
+            ? mergedValue[0] <= num && mergedValue[1] >= num
+            : mergedValue >= num,
+          label: marks[key],
           style: {
-            left:
-              ((Number(value) - this.min) / (this.max - this.min)) * 100 + '%'
+            left: ((num - min) / (max - min)) * 100 + '%'
           }
         })
       }
-      return marks
+      return mergedMarks
     },
     fillStyle () {
       if (this.range) {
@@ -351,6 +365,13 @@ export default {
   watch: {
     mergedValue (newValue, oldValue) {
       const { changeSource } = this
+      if (this.marks) {
+        if (this.dotTransitionDisabled) return
+        this.dotTransitionDisabled = true
+        this.$nextTick(() => {
+          this.dotTransitionDisabled = false
+        })
+      }
       if (this.range && newValue) {
         if (oldValue && oldValue[1] !== newValue[1]) {
           this.$nextTick(() => {

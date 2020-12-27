@@ -28,7 +28,8 @@ export default c([
         dotWidth,
         dotBorderRadius,
         indicatorBorderRadius,
-        fontSize
+        fontSize,
+        dotBorderActive
       },
       $global: {
         cubicBezierEaseInOut,
@@ -50,8 +51,8 @@ export default c([
           raw: `
             position: absolute;
             top: 18px;
-            left: 0;
-            right: 0;
+            left: calc(${handleSize} / 2);
+            right: calc(${handleSize} / 2);
           `
         }, [
           cB('slider-mark', {
@@ -137,11 +138,16 @@ export default c([
         cB('slider-dots', {
           raw: `
             position: absolute;
-            left: 0;
             top: 50%;
-            right: 0;
+            left: calc(${handleSize} / 2);
+            right: calc(${handleSize} / 2);
           `
         }, [
+          cM('transition-disabled', [
+            cB('slider-dot', {
+              transition: 'none'
+            })
+          ]),
           cB('slider-dot', {
             raw: `
               transition:
@@ -159,7 +165,11 @@ export default c([
             border: dotBorder,
             backgroundColor: dotColor,
             boxShadow: dotBoxShadow
-          })
+          }, [
+            cM('active', {
+              border: dotBorderActive
+            })
+          ])
         ])
       ]),
       cTB('slider-handle-indicator', {

@@ -39,7 +39,8 @@ export default create({
       indicatorBoxShadow: boxShadow,
       indicatorTextColor: baseColor,
       indicatorBorderRadius: borderRadius,
-      dotBorder: `2px solid ${primaryColor}`,
+      dotBorder: `2px solid ${railColorOverlay}`,
+      dotBorderActive: `2px solid ${primaryColor}`,
       dotBoxShadow: null
     }
   }
