@@ -17,7 +17,7 @@ const plugin = BEMPlugin({
 cssr.use(plugin)
 const { c, context, find } = cssr
 context.theme = null
-context.pallete = null
+context.palette = null
 const { cB, cE, cM, cNotM } = plugin
 
 function insideFormItem (status, style) {

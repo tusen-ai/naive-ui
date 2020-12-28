@@ -3,32 +3,32 @@ import iconSwitchTransition from '../../../_styles/transitions/icon-switch'
 
 function typeStyle (
   type,
-  pallete
+  palette
 ) {
   return cM(`${type}-type`, {
     raw: `
-      color: ${pallete[createKey('textColor', type)]};
-      background-color: ${pallete[createKey('color', type)]};
-      box-shadow: ${pallete[createKey('boxShadow', type)]};
+      color: ${palette[createKey('textColor', type)]};
+      background-color: ${palette[createKey('color', type)]};
+      box-shadow: ${palette[createKey('boxShadow', type)]};
     `
   }, [
     cE('icon', [
       cB('icon', {
-        color: pallete[createKey('iconColor', type)]
+        color: palette[createKey('iconColor', type)]
       })
     ]),
     cE('close', [
       cB('icon', {
         raw: `
           cursor: pointer;
-          color: ${pallete[createKey('closeColor', type)]};
+          color: ${palette[createKey('closeColor', type)]};
         `
       }, [
         c('&:hover', {
-          color: pallete[createKey('closeColorHover', type)]
+          color: palette[createKey('closeColorHover', type)]
         }),
         c('&:active', {
-          color: pallete[createKey('closeColorPressed', type)]
+          color: palette[createKey('closeColorPressed', type)]
         })
       ])
     ])

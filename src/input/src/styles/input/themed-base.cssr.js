@@ -273,33 +273,33 @@ export default c([
       'warning',
       'error'
     ].map(status => {
-      const pallete = props.$local
+      const palette = props.$local
       return insideFormItem(
         status,
         cTB('input', [
           cM('stateful', [
             cE('state-border', {
-              border: pallete[createKey('border', status)]
+              border: palette[createKey('border', status)]
             }),
             cNotM('disabled', [
               c('&:hover', [
                 cE('state-border', {
-                  border: pallete[createKey('borderHover', status)]
+                  border: palette[createKey('borderHover', status)]
                 })
               ]),
               cM('focus', {
-                backgroundColor: pallete[createKey('colorFocus', status)]
+                backgroundColor: palette[createKey('colorFocus', status)]
               }, [
                 cE('state-border', {
-                  border: pallete[createKey('borderFocus', status)]
+                  border: palette[createKey('borderFocus', status)]
                 }),
                 cE('box-shadow', {
-                  boxShadow: pallete[createKey('boxShadowFocus', status)]
+                  boxShadow: palette[createKey('boxShadowFocus', status)]
                 })
               ])
             ]),
             cE('input, textarea', {
-              caretColor: pallete[createKey('caretColor', status)]
+              caretColor: palette[createKey('caretColor', status)]
             })
           ])
         ])

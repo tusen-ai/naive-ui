@@ -136,12 +136,12 @@ export default c([
   }
 ])
 
-function itemTypeStyle (type, pallete) {
+function itemTypeStyle (type, palette) {
   return cM(`${type}-type`, [
     cB('timeline-item-timeline', [
       cE('circle', {
         raw: `
-          border-color: ${pallete[createKey('circleBorderColor', type)]}
+          border-color: ${palette[createKey('circleBorderColor', type)]}
         `
       })
     ])

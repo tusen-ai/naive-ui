@@ -3,14 +3,14 @@ import { c, cB, cTB, cE, cM, cNotM, createKey } from '../../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const type = props.$vm.type
-    const pallete = extractPallete(props.$local, type)
+    const palette = extractPalette(props.$local, type)
     return [
       createRippleAnimation(),
       cTB(
         'button',
         [
           cM(`${type}-type`, {
-            '--ripple-color': pallete.rippleColor
+            '--ripple-color': palette.rippleColor
           }, [
             // wave animation
             cB('base-wave', [
@@ -20,16 +20,16 @@ export default c([
               })
             ]),
             // background-color
-            createBackgroundStyle(pallete),
+            createBackgroundStyle(palette),
             // text-color
-            ['base', 'ghost', 'text'].map(appearance => createTextStyle(pallete, appearance)),
+            ['base', 'ghost', 'text'].map(appearance => createTextStyle(palette, appearance)),
             cM('base', [
               cM('custom-color', {
                 color: `${props.$local.textColorPrimary} !important`
               })
             ]),
             // border-color
-            createBorderStyle(pallete)
+            createBorderStyle(palette)
           ])
         ]
       )
@@ -37,7 +37,7 @@ export default c([
   }
 ])
 
-function extractPallete (props, type) {
+function extractPalette (props, type) {
   return {
     color: props[createKey('color', type)],
     colorHover: props[createKey('colorHover', type)],
@@ -103,7 +103,7 @@ function createBorderMaskStyle (color) {
   })
 }
 
-function createTextStyle (pallete, appearance) {
+function createTextStyle (palette, appearance) {
   // textColor for base
   // textColorGhost for ghost
   // textColorText for text
@@ -117,56 +117,56 @@ function createTextStyle (pallete, appearance) {
   const hoverKey = createKey(propPrefix, 'hover')
   const pressedKey = createKey(propPrefix, 'pressed')
   return cM(appearance, {
-    color: `var(--color, ${pallete[propPrefix]})`
+    color: `var(--color, ${palette[propPrefix]})`
   }, [
     cM('disabled', {
-      color: `var(--color-disabled, ${pallete[disabledKey]})`
+      color: `var(--color-disabled, ${palette[disabledKey]})`
     }),
     cNotM('disabled', [
       c('&:focus', {
-        color: `var(--color-focus, ${pallete[focusKey]})`
+        color: `var(--color-focus, ${palette[focusKey]})`
       }),
       c('&:hover', {
-        color: `var(--color-hover, ${pallete[hoverKey]})`
+        color: `var(--color-hover, ${palette[hoverKey]})`
       }),
       c('&:active', {
-        color: `var(--color-pressed, ${pallete[pressedKey]})`
+        color: `var(--color-pressed, ${palette[pressedKey]})`
       }),
       cM('pressed', {
-        color: `var(--color-pressed, ${pallete[pressedKey]})`
+        color: `var(--color-pressed, ${palette[pressedKey]})`
       })
     ])
   ])
 }
 
-function createBorderStyle (pallete) {
+function createBorderStyle (palette) {
   return [
     cM('ghost, base', {
-      borderColor: `var(--color, ${pallete.borderColor})`
+      borderColor: `var(--color, ${palette.borderColor})`
     }, [
       cM('disabled', {
-        borderColor: `var(--color-disabled, ${pallete.borderColorDisabled})`
+        borderColor: `var(--color-disabled, ${palette.borderColorDisabled})`
       }),
       cNotM('disabled', [
         c('&:focus', {
-          borderColor: `var(--color-focus, ${pallete.borderColorFocus})`
+          borderColor: `var(--color-focus, ${palette.borderColorFocus})`
         }, [
-          createBorderMaskStyle(`var(--color-focus, ${pallete.borderColorFocus})`)
+          createBorderMaskStyle(`var(--color-focus, ${palette.borderColorFocus})`)
         ]),
         c('&:hover', {
-          borderColor: `var(--color-hover, ${pallete.borderColorHover})`
+          borderColor: `var(--color-hover, ${palette.borderColorHover})`
         }, [
-          createBorderMaskStyle(`var(--color-hover, ${pallete.borderColorHover})`)
+          createBorderMaskStyle(`var(--color-hover, ${palette.borderColorHover})`)
         ]),
         c('&:active', {
-          borderColor: `var(--color-pressed, ${pallete.borderColorPressed})`
+          borderColor: `var(--color-pressed, ${palette.borderColorPressed})`
         }, [
-          createBorderMaskStyle(`var(--color-pressed, ${pallete.borderColorPressed})`)
+          createBorderMaskStyle(`var(--color-pressed, ${palette.borderColorPressed})`)
         ]),
         cM('pressed', {
-          borderColor: `var(--color-pressed, ${pallete.borderColorPressed})`
+          borderColor: `var(--color-pressed, ${palette.borderColorPressed})`
         }, [
-          createBorderMaskStyle(`var(--color-pressed, ${pallete.borderColorPressed})`)
+          createBorderMaskStyle(`var(--color-pressed, ${palette.borderColorPressed})`)
         ])
       ])
     ]),
@@ -176,26 +176,26 @@ function createBorderStyle (pallete) {
   ]
 }
 
-function createBackgroundStyle (pallete) {
+function createBackgroundStyle (palette) {
   return [
     cM('base', {
-      backgroundColor: `var(--color, ${pallete.color})`
+      backgroundColor: `var(--color, ${palette.color})`
     }, [
       cM('disabled', {
-        backgroundColor: `var(--color-disabled, ${pallete.colorDisabled})`
+        backgroundColor: `var(--color-disabled, ${palette.colorDisabled})`
       }),
       cNotM('disabled', [
         c('&:focus', {
-          backgroundColor: `var(--color-focus, ${pallete.colorFocus})`
+          backgroundColor: `var(--color-focus, ${palette.colorFocus})`
         }),
         c('&:hover', {
-          backgroundColor: `var(--color-hover, ${pallete.colorHover})`
+          backgroundColor: `var(--color-hover, ${palette.colorHover})`
         }),
         c('&:active', {
-          backgroundColor: `var(--color-pressed, ${pallete.colorPressed})`
+          backgroundColor: `var(--color-pressed, ${palette.colorPressed})`
         }),
         cM('pressed', {
-          backgroundColor: `var(--color-pressed, ${pallete.colorPressed})`
+          backgroundColor: `var(--color-pressed, ${palette.colorPressed})`
         })
       ])
     ]),
