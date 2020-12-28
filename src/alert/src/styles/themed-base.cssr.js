@@ -1,18 +1,47 @@
-import { c, cTB, cB, cE, cM } from '../../../_utils/cssr'
+import { c, cTB, cB, cE, cM, createKey } from '../../../_utils/cssr'
 import fadeInHeightExpandTranstion from '../../../_styles/transitions/fade-in-height-expand'
 
 export default c([
   ({ props }) => {
     const {
       $global: { cubicBezierEaseInOut },
-      $local: { borderRadius, titleFontWeight, lineHeight, fontSize }
+      $local
     } = props
+    const { borderRadius, titleFontWeight, lineHeight, fontSize } = $local
     return cTB('alert', {
       lineHeight,
       borderRadius,
       position: 'relative',
       transition: `background-color .3s ${cubicBezierEaseInOut}`
     }, [
+      ['default', 'info', 'success', 'warning', 'error'].map(type => cM(type + '-type', {
+        backgroundColor: $local[createKey('color', type)],
+        textAlign: 'start'
+      }, [
+        cE('close', {
+          color: $local[createKey('closeColor', type)]
+        }, [
+          c('&:hover', {
+            color: $local[createKey('closeColorHover', type)]
+          }),
+          c('&:active', {
+            color: $local[createKey('closeColorPressed', type)]
+          })
+        ]),
+        cE('icon', {
+          color: $local[createKey('iconColor', type)]
+        }),
+        cB('alert-body', {
+          border: $local[createKey('border', type)]
+        }, [
+          cE('title', {
+            color: $local[createKey('titleTextColor', type)]
+          }),
+          cE('content', {
+            color: $local[createKey('contentTextColor', type)]
+          })
+        ])
+      ])),
       fadeInHeightExpandTranstion({
         originalTransition: `transform .3s ${cubicBezierEaseInOut}`,
         enterToProps: {
