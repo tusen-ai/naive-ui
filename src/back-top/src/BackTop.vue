@@ -5,6 +5,7 @@
     style="display: none"
     aria-hidden
   >
+    <!-- placeholder exists to find scroll parent, later we may use vue's placeholder -->
     <v-lazy-teleport :to="to" :show="mergedShow">
       <transition
         name="n-fade-in-scale-up-transition"
@@ -13,17 +14,16 @@
       >
         <div
           v-if="mergedShow"
+          v-bind="$attrs"
+          class="n-back-top"
           :class="{
-            [`n-${mergedTheme}-theme`]: mergedTheme,
             'n-back-top--transition-disabled': transitionDisabled
           }"
           :style="{
-            ...mergedStyle,
             right: styleRight,
-            bottom: styleBottom
+            bottom: styleBottom,
+            ...cssVars
           }"
-          class="n-back-top"
-          v-bind="$attrs"
           @click="handleClick"
         >
           <slot>
@@ -42,9 +42,10 @@ import { ref, computed, toRef, watch, nextTick } from 'vue'
 import { VLazyTeleport } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
 import { getScrollParent, unwrapElement } from 'seemly'
-import { configurable, themeable, withCssr } from '../../_mixins'
+import { useTheme } from '../../_mixins'
 import { formatLength, warn } from '../../_utils'
-import styles from './styles'
+import { backTopLight } from '../styles'
+import style from './styles/index.cssr.js'
 import BackTopIcon from './BackTopIcon.vue'
 
 export default {
@@ -53,7 +54,6 @@ export default {
     VLazyTeleport,
     BackTopIcon
   },
-  mixins: [configurable, themeable, withCssr(styles)],
   inheritAttrs: false,
   props: {
     show: {
@@ -126,6 +126,7 @@ export default {
         props.onHide()
       }
     })
+    const themeRef = useTheme('BackTop', 'BackTop', style, backTopLight, props)
     return {
       mergedShow: mergedShowRef,
       isMounted: useIsMounted(),
@@ -133,7 +134,39 @@ export default {
       scrollTop: scrollTopRef,
       transitionDisabled: ref(true),
       scrollListenerRegistered: ref(false),
-      DomInfoReady: DomInfoReadyRef
+      DomInfoReady: DomInfoReadyRef,
+      cssVars: computed(() => {
+        const {
+          self: {
+            color,
+            boxShadow,
+            boxShadowHover,
+            boxShadowPressed,
+            iconColor,
+            iconColorHover,
+            iconColorPressed,
+            width,
+            height,
+            iconSize,
+            borderRadius
+          },
+          common: { cubicBezierEaseInOut }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--border-radius': borderRadius,
+          '--height': height,
+          '--width': width,
+          '--box-shadow': boxShadow,
+          '--box-shadow-hover': boxShadowHover,
+          '--box-shadow-pressed': boxShadowPressed,
+          '--color': color,
+          '--icon-size': iconSize,
+          '--icon-color': iconColor,
+          '--icon-color-hover': iconColorHover,
+          '--icon-color-pressed': iconColorPressed
+        }
+      })
     }
   },
   computed: {

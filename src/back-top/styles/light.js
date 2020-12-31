@@ -1,13 +1,11 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseLight } from '../../_styles/base'
-import { iconLight } from '../../icon/styles'
 import commonVariables from './_common.js'
+import { iconLight } from '../../icon/styles'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
-  theme: 'light',
-  name: 'BackTop',
-  peer: [baseLight, iconLight],
-  getLocalVars (vars) {
+export default {
+  common: commonLight,
+  peer: [iconLight],
+  self (vars) {
     const {
       popoverColor,
       textColor2,
@@ -25,4 +23,4 @@ export default create({
       boxShadowPressed: '0 2px 12px 0px rgba(0, 0, 0, .18)'
     }
   }
-})
+}

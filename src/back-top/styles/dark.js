@@ -1,13 +1,11 @@
-import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common.js'
-import { baseDark } from '../../_styles/base'
 import { iconDark } from '../../icon/styles'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
-  theme: 'dark',
-  name: 'BackTop',
-  peer: [baseDark, iconDark],
-  getLocalVars (vars) {
+export default {
+  common: commonDark,
+  peers: [iconDark],
+  self (vars) {
     const {
       popoverColor,
       textColor2Overlay,
@@ -25,4 +23,4 @@ export default create({
       boxShadowPressed: '0 2px 12px 0px rgba(0, 0, 0, .18)'
     }
   }
-})
+}
