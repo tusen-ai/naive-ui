@@ -1,12 +1,9 @@
-import create from '../../_styles/utils/create-component-base'
 import { baseSelectMenuLight } from '../../_base/select-menu/styles'
 import { inputLight } from '../../input/styles'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
-  theme: 'light',
-  name: 'AutoComplete',
-  peer: [baseSelectMenuLight, inputLight],
-  getLocalVars () {
-    return {}
-  }
-})
+export default {
+  common: commonLight,
+  self () {},
+  peers: [baseSelectMenuLight, inputLight]
+}

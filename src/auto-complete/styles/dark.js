@@ -1,12 +1,9 @@
-import create from '../../_styles/utils/create-component-base'
 import { baseSelectMenuDark } from '../../_base/select-menu/styles'
 import { inputDark } from '../../input/styles'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
-  theme: 'dark',
-  name: 'AutoComplete',
-  peer: [baseSelectMenuDark, inputDark],
-  getLocalVars () {
-    return {}
-  }
-})
+export default {
+  common: commonDark,
+  self () {},
+  peers: [baseSelectMenuDark, inputDark]
+}

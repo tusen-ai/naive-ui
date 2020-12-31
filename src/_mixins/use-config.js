@@ -9,8 +9,6 @@ export default function useConfig (props) {
       if (bordered !== undefined) return bordered
       return NConfigProvider?.mergedBordered || true
     }),
-    namespace () {
-      return NConfigProvider?.namespace
-    }
+    namespace: computed(() => NConfigProvider?.namespace)
   }
 }

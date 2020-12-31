@@ -15,11 +15,10 @@
           :handleFocus="handleFocus"
           :handleBlur="handleBlur"
           :value="mergedValue"
-          :theme="mergedTheme"
         >
           <n-input
             :bordered="mergedBordered"
-            :theme="mergedTheme"
+            :theme="'light'"
             :value="mergedValue"
             :placeholder="placeholder"
             :size="mergedSize"
@@ -48,7 +47,8 @@
           v-clickoutside="handleClickOutsideMenu"
           auto-pending
           class="n-auto-complete-menu"
-          :theme="mergedTheme"
+          :style="cssVars"
+          :theme="'light'"
           :pattern="value"
           :tree-mate="treeMate"
           :multiple="false"
@@ -61,17 +61,18 @@
 </template>
 
 <script>
-import { ref, toRef } from 'vue'
+import { ref, toRef, computed } from 'vue'
 import { createTreeMate } from 'treemate'
 import { VBinder, VTarget, VFollower } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
-import { configurable, themeable, useFormItem, withCssr } from '../../_mixins'
+import { useFormItem, useTheme, useConfig } from '../../_mixins'
 import { call, warn, useAdjustedTo } from '../../_utils'
 import { NBaseSelectMenu } from '../../_base'
 import { NInput } from '../../input'
-import styles from './styles'
+import { autoCompleteLight } from '../styles'
 import { mapAutoCompleteOptionsToSelectOptions } from './utils'
+import style from './styles/index.cssr'
 
 export default {
   name: 'AutoComplete',
@@ -85,7 +86,6 @@ export default {
   directives: {
     clickoutside
   },
-  mixins: [configurable, themeable, withCssr(styles)],
   inheritAttrs: false,
   props: {
     bordered: {
@@ -164,6 +164,13 @@ export default {
       controlledValueRef,
       uncontrolledValueRef
     )
+    const themeRef = useTheme(
+      'AutoComplete',
+      'AutoComplete',
+      style,
+      autoCompleteLight,
+      props
+    )
     return {
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
@@ -173,6 +180,15 @@ export default {
       isComposing: ref(false),
       menuRef: ref(null),
       triggerRef: ref(null),
+      cssVars: computed(() => {
+        const {
+          common: { cubicBezierEaseInOut }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut
+        }
+      }),
+      ...useConfig(props),
       ...useFormItem(props)
     }
   },
