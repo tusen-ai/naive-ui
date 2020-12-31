@@ -18,7 +18,7 @@ export { baseWaveDark, baseWaveLight } from './_base/wave/styles'
 // exposed style
 export { baseDark, baseLight } from './_styles/base'
 // export { affixDark, affixLight } from './affix/styles'
-export { alertDark, alertLight } from './alert/styles'
+// export { alertDark, alertLight } from './alert/styles'
 export { anchorDark, anchorLight } from './anchor/styles'
 export { autoCompleteDark, autoCompleteLight } from './auto-complete/styles'
 export { avatarDark, avatarLight } from './avatar/styles'

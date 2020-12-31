@@ -39,7 +39,11 @@ export default function useTheme (
     const {
       mergedUnstableTheme: {
         common: injectedGlobalCommon,
-        [resolveId]: { injectedCommon, injectedSelf, injectedPeers = {} } = {}
+        [resolveId]: {
+          common: injectedCommon,
+          self: injectedSelf,
+          peers: injectedPeers = {}
+        } = {}
       } = {},
       mergedUnstableThemeOverrides: {
         common: injectedGlobalCommonOverrides,
@@ -60,13 +64,14 @@ export default function useTheme (
       injectedCommonOverrides,
       commonOverrides
     )
+    const mergedSelf = merge(
+      (self || injectedSelf || defaultTheme.self || {})(mergedCommon),
+      injectedSelfOverrides,
+      selfOverrides
+    )
     return {
       common: mergedCommon,
-      self: merge(
-        (self || injectedSelf || defaultTheme.self || {})(mergedCommon),
-        injectedSelfOverrides,
-        selfOverrides
-      ),
+      self: mergedSelf,
       peersTheme: merge(peers, injectedPeers),
       peersOverride: merge(peersOverrides, injectedPeersOverrides)
     }

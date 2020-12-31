@@ -5,12 +5,9 @@
       class="n-alert"
       :class="{
         [`n-alert--${type}-type`]: true,
-        'n-alert--no-icon': showIcon === false,
-        [`n-${mergedTheme}-theme`]: mergedTheme
+        'n-alert--no-icon': showIcon === false
       }"
-      :style="{
-        ...mergedStyle
-      }"
+      :style="cssVars"
     >
       <div v-if="closable" class="n-alert__close" @click="handleCloseClick">
         <n-icon>
@@ -49,11 +46,13 @@
 </template>
 
 <script>
+import { ref, computed } from 'vue'
 import { NIcon } from '../../icon'
 import { NFadeInExpandTransition } from '../../_base'
-import { configurable, themeable, withCssr } from '../../_mixins'
-import { warn } from '../../_utils'
-import styles from './styles'
+import { useTheme } from '../../_mixins'
+import { warn, createKey } from '../../_utils'
+import { alertLight } from '../styles'
+import style from './styles/index.cssr'
 
 // icons
 import {
@@ -75,8 +74,15 @@ export default {
     ErrorIcon,
     CloseIcon
   },
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
+    unstableTheme: {
+      type: Object,
+      default: undefined
+    },
+    unstableThemeOverrides: {
+      type: Object,
+      default: undefined
+    },
     title: {
       type: String,
       default: undefined
@@ -116,28 +122,61 @@ export default {
       default: undefined
     }
   },
-  data () {
-    return {
-      visible: true
-    }
-  },
-  methods: {
-    doAfterLeave () {
+  setup (props) {
+    const themeRef = useTheme('Alert', 'Alert', style, alertLight, props)
+    const cssVars = computed(() => {
+      const {
+        common: { cubicBezierEaseInOut },
+        self
+      } = themeRef.value
+      const {
+        fontSize,
+        borderRadius,
+        titleFontWeight,
+        lineHeight,
+        contentTextColor,
+        titleTextColor
+      } = self
+      const { type } = props
+      return {
+        '--bezier': cubicBezierEaseInOut,
+        '--color': self[createKey('color', type)],
+        '--close-color': self[createKey('closeColor', type)],
+        '--close-color-hover': self[createKey('closeColorHover', type)],
+        '--close-color-pressed': self[createKey('closeColorPressed', type)],
+        '--icon-color': self[createKey('iconColor', type)],
+        '--border': self[createKey('border', type)],
+        '--title-text-color': titleTextColor,
+        '--content-text-color': contentTextColor,
+        '--line-height': lineHeight,
+        '--border-radius': borderRadius,
+        '--font-size': fontSize,
+        '--title-font-weight': titleFontWeight
+      }
+    })
+    const visibleRef = ref(true)
+    const doAfterLeave = () => {
       const {
         onAfterLeave,
         onAfterHide // deprecated
-      } = this
+      } = props
       if (onAfterLeave) onAfterLeave()
       if (onAfterHide) onAfterHide()
-    },
-    handleCloseClick () {
-      Promise.resolve(this.onClose()).then((result) => {
+    }
+    const handleCloseClick = () => {
+      Promise.resolve(props.onClose()).then((result) => {
         if (result === false) return
-        this.visible = false
+        visibleRef.value = false
       })
-    },
-    handleAfterLeave () {
-      this.doAfterLeave()
+    }
+    const handleAfterLeave = () => {
+      doAfterLeave()
+    }
+    return {
+      visible: visibleRef,
+      handleCloseClick,
+      handleAfterLeave,
+      cssVars
     }
   }
 }

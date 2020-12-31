@@ -1,13 +1,9 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseLight } from '../../_styles/base'
-import { iconLight } from '../../icon/styles'
-import { composite, changeColor } from 'seemly'
+import { changeColor, composite } from 'seemly'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
-  theme: 'light',
-  name: 'Alert',
-  peer: [baseLight, iconLight],
-  getLocalVars (vars) {
+export default {
+  common: commonLight,
+  self (vars) {
     const {
       lineHeight,
       borderRadius,
@@ -94,4 +90,4 @@ export default create({
       closeColorPressedError: closeColorPressed
     }
   }
-})
+}

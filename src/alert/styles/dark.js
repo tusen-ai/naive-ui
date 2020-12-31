@@ -1,13 +1,9 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseDark } from '../../_styles/base'
-import { iconDark } from '../../icon/styles'
 import { changeColor } from 'seemly'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
-  theme: 'dark',
-  name: 'Alert',
-  peer: [baseDark, iconDark],
-  getLocalVars (vars) {
+export default {
+  common: commonDark,
+  self (vars) {
     const {
       lineHeight,
       borderRadius,
@@ -76,4 +72,4 @@ export default create({
       closeColorPressedError: closeColorPressedOverlay
     }
   }
-})
+}
