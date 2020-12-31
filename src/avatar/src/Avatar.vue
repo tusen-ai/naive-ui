@@ -1,26 +1,21 @@
 <template>
   <span
+    ref="selfRef"
     class="n-avatar"
     :class="{
       [`n-avatar--${size}-size`]: typeof size !== 'number',
-      [`n-avatar--circle-shaped`]: circle || round,
-      [`n-${mergedTheme}-theme`]: mergedTheme
+      [`n-avatar--circle-shaped`]: circle || round
     }"
-    :style="{
-      width: styleWidth,
-      height: styleWidth,
-      borderRadius: styleBorderRadius,
-      ...mergedStyle
-    }"
+    :style="cssVars"
   >
     <img v-if="!$slots.default && src" :src="src">
     <slot v-else-if="$slots.icon" name="icon" />
     <span
       v-else
-      ref="text"
+      ref="textRef"
       class="n-avatar__text"
       :style="{
-        transform: styleTransfrom,
+        transform: styleTransform,
         backgroundColor: color
       }"
     >
@@ -30,14 +25,24 @@
 </template>
 
 <script>
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles'
+import { ref, computed, onUpdated, onMounted } from 'vue'
+import { useTheme } from '../../_mixins'
+import { avatarLight } from '../styles'
+import style from './styles/index.cssr.js'
 import { validSize } from './config'
+import { createKey } from '../../_utils'
 
 export default {
   name: 'Avatar',
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
+    unstableTheme: {
+      type: Object,
+      default: undefined
+    },
+    unstableThemeOverrides: {
+      type: Object,
+      default: undefined
+    },
     size: {
       validator (value) {
         return validSize.includes(value) || typeof value === 'number'
@@ -61,66 +66,77 @@ export default {
       default: undefined
     }
   },
-  data () {
-    return {
-      ratio: 1,
-      memorizedTextHTML: null
-    }
-  },
-  computed: {
-    styleTransfrom () {
-      if (this.ratio !== 1) {
-        return `translateX(-50%) translateY(-50%) scale(${this.ratio})`
+  setup (props) {
+    const ratioRef = ref(1)
+    const memorizedTextHtmlRef = ref(null)
+    const styleTransformRef = computed(() => {
+      const { value } = ratioRef
+      if (value !== 1) {
+        return `translateX(-50%) translateY(-50%) scale(${value})`
       }
       return 'translateX(-50%) translateY(-50%)'
-    },
-    styleWidth () {
-      if (typeof this.size === 'number') {
-        return `${this.size}px`
+    })
+    const styleBorderRadiusRef = computed(() => {
+      if (!props.circle && !props.round) return ''
+      const { size } = props
+      if (typeof size === 'number') {
+        return `${size / 2}px`
       }
-      return null
-    },
-    styleBorderRadius () {
-      if (!this.circle && !this.round) return null
-      if (typeof this.size === 'number') {
-        return `${this.size / 2}px`
-      }
-      return null
-    },
-    // TODO: refactor, bad implementation
-    cssrSize () {
-      return typeof this.size === 'number' ? 'medium' : this.size
-    }
-  },
-  updated () {
-    this.adjustText()
-  },
-  mounted () {
-    this.adjustText()
-  },
-  methods: {
-    adjustText () {
-      const textEl = this.$refs.text
+      return ''
+    })
+    const textRef = ref(null)
+    const selfRef = ref(null)
+    const adjustText = () => {
+      const textEl = textRef.value
       if (textEl) {
-        const memorizedTextHTML = this.memorizedTextHTML
+        const memorizedTextHtml = memorizedTextHtmlRef.value
         if (
-          memorizedTextHTML === null ||
-          memorizedTextHTML !== textEl.innerHTML
+          memorizedTextHtml === null ||
+          memorizedTextHtml !== textEl.innerHtml
         ) {
-          this.memorizedTextHTML = textEl.innerHTML
-          const selfEl = this.$el
+          memorizedTextHtmlRef.value = textEl.innerHtml
+          const selfEl = selfRef.value
           const elWidth = selfEl.offsetWidth
           const textWidth = textEl.offsetWidth
           const elHeight = selfEl.offsetHeight
           const textHeight = textEl.offsetHeight
-          const radix = this.circle || this.round ? 0.75 : 0.85
+          const radix = props.circle || props.round ? 0.75 : 0.85
           const ratio = Math.min(
             (elWidth / textWidth) * radix,
             (elHeight / textHeight) * radix
           )
-          this.ratio = Math.min(1, ratio)
+          ratioRef.value = Math.min(1, ratio)
         }
       }
+    }
+    // Not Good Impl
+    onMounted(() => adjustText())
+    onUpdated(() => adjustText())
+    const themeRef = useTheme('Avatar', 'Avatar', style, avatarLight, props)
+    return {
+      styleTransform: styleTransformRef,
+      styleBorderRadius: styleBorderRadiusRef,
+      textRef,
+      selfRef,
+      cssVars: computed(() => {
+        const { size, round, circle } = props
+        const {
+          self: {
+            borderRadius,
+            fontSize,
+            color,
+            [createKey('height', String(size))]: height
+          },
+          common: { cubicBezierEaseInOut }
+        } = themeRef.value
+        return {
+          '--font-size': fontSize,
+          '--border-radius': round || circle ? '50%' : borderRadius,
+          '--color': color,
+          '--bezier': cubicBezierEaseInOut,
+          '--size': height || `${size}px`
+        }
+      })
     }
   }
 }

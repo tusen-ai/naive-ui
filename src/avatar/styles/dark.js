@@ -1,11 +1,8 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseDark } from '../../_styles/base'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
-  theme: 'dark',
-  name: 'Avatar',
-  peer: [baseDark],
-  getLocalVars (vars) {
+export default {
+  common: commonDark,
+  self (vars) {
     const {
       borderRadius,
       avatarColorOverlay,
@@ -27,4 +24,4 @@ export default create({
       color: avatarColorOverlay
     }
   }
-})
+}

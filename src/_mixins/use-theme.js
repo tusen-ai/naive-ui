@@ -65,7 +65,7 @@ export default function useTheme (
       commonOverrides
     )
     const mergedSelf = merge(
-      (self || injectedSelf || defaultTheme.self || {})(mergedCommon),
+      (self || injectedSelf || defaultTheme.self)?.(mergedCommon) || {},
       injectedSelfOverrides,
       selfOverrides
     )
