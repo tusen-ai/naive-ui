@@ -1,25 +1,27 @@
 <template>
   <div
+    ref="selfRef"
     class="n-affix"
     :class="{
       [`n-affix--affixed`]: affixed,
       [`n-affix--absolute-positioned`]: position === 'absolute'
     }"
-    :style="style"
+    :style="mergedstyle"
   >
     <slot />
   </div>
 </template>
 
 <script>
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { getScrollParent, unwrapElement } from 'seemly'
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles/index.js'
+import { useConfig, useTheme } from '../../_mixins'
 import { warn } from '../../_utils'
+import { affixLight } from '../styles'
+import style from './styles/index.cssr'
 
 export default {
   name: 'Affix',
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     listenTo: {
       type: [String, Object],
@@ -54,54 +56,35 @@ export default {
       default: undefined
     }
   },
-  data () {
-    return {
-      scrollElement: null,
-      stickToTop: false,
-      stickToBottom: false,
-      bottomAffixedTriggerScrollTop: null,
-      topAffixedTriggerScrollTop: null
-    }
-  },
-  computed: {
-    affixed () {
-      return this.stickToBottom || this.stickToTop
-    },
-    mergedOffsetTop () {
-      return this.offsetTop === undefined ? this.top : this.offsetTop
-    },
-    mergedTop () {
-      return this.top === undefined ? this.offsetTop : this.top
-    },
-    mergedBottom () {
-      return this.bottom === undefined ? this.offsetBottom : this.bottom
-    },
-    mergedOffsetBottom () {
-      return this.offsetBottom === undefined ? this.bottom : this.offsetBottom
-    },
-    style () {
-      const style = {}
-      if (this.stickToTop && this.mergedOffsetTop !== undefined) {
-        style.top = `${this.mergedTop}px`
-      }
-      if (this.stickToBottom && this.mergedOffsetBottom !== undefined) {
-        style.bottom = `${this.mergedBottom}px`
-      }
-      return style
-    }
-  },
-  mounted () {
-    this.init()
-  },
-  beforeUnmount () {
-    const { scrollElement } = this
-    if (scrollElement) {
-      scrollElement.removeEventListener('scroll', this.handleScroll)
-    }
-  },
-  methods: {
-    init () {
-      const { target: getScrollTarget, listenTo } = this
+  setup (props) {
+    useTheme('Affix', 'Affix', style, affixLight, props)
+    const scrollElementRef = ref(null)
+    const stickToTopRef = ref(false)
+    const stickToBottomRef = ref(false)
+    const bottomAffixedTriggerScrollTopRef = ref(null)
+    const topAffixedTriggerScrollTopRef = ref(null)
+    const affixedRef = computed(() => {
+      return stickToBottomRef.value || stickToTopRef.value
+    })
+    const mergedOffsetTopRef = computed(() => {
+      const { offsetTop, top } = props
+      return offsetTop === undefined ? top : offsetTop
+    })
+    const mergedTopRef = computed(() => {
+      const { offsetTop, top } = props
+      return top === undefined ? offsetTop : top
+    })
+    const mergedBottomRef = computed(() => {
+      const { offsetBottom, bottom } = props
+      return bottom === undefined ? offsetBottom : bottom
+    })
+    const mergedOffsetBottomRef = computed(() => {
+      const { offsetBottom, bottom } = props
+      return offsetBottom === undefined ? bottom : offsetBottom
+    })
+    const selfRef = ref(null)
+    const init = () => {
+      const { target: getScrollTarget, listenTo } = props
       let scrollElement
       if (getScrollTarget) {
         // deprecated
@@ -109,55 +92,88 @@ export default {
       } else if (listenTo) {
         scrollElement = unwrapElement(listenTo)
       } else {
-        scrollElement = getScrollParent(this.$el)
+        scrollElement = getScrollParent(selfRef.value)
       }
       if (scrollElement) {
-        this.scrollElement = scrollElement
+        scrollElementRef.value = scrollElement
       } else if (__DEV__) {
         warn('affix', 'Target to be listened to is not valid.')
       }
       if (scrollElement) {
-        scrollElement.addEventListener('scroll', this.handleScroll)
-        this.handleScroll()
+        scrollElement.addEventListener('scroll', handleScroll)
+        handleScroll()
       }
-    },
-    handleScroll (e) {
-      const containerEl = this.scrollElement
-      if (this.affixed) {
-        if (containerEl.scrollTop < this.topAffixedTriggerScrollTop) {
-          this.stickToTop = false
-          this.topAffixedTriggerScrollTop = null
+    }
+    const handleScroll = (e) => {
+      const containerEl = scrollElementRef.value
+      if (affixedRef.value) {
+        if (containerEl.scrollTop < topAffixedTriggerScrollTopRef.value) {
+          stickToTopRef.value = false
+          topAffixedTriggerScrollTopRef.value = null
         }
-        if (containerEl.scrollTop > this.bottomAffixedTriggerScrollTop) {
-          this.stickToBottom = false
-          this.bottomAffixedTriggerScrollTop = null
+        if (containerEl.scrollTop > bottomAffixedTriggerScrollTopRef.value) {
+          stickToBottomRef.value = false
+          bottomAffixedTriggerScrollTopRef.value = null
         }
         return
       }
       const containerRect = containerEl.getBoundingClientRect()
-      const affixRect = this.$el.getBoundingClientRect()
+      const affixRect = selfRef.value.getBoundingClientRect()
       const pxToTop = affixRect.top - containerRect.top
       const pxToBottom = containerRect.bottom - affixRect.bottom
-      const { mergedOffsetTop, mergedOffsetBottom } = this
+      const mergedOffsetTop = mergedOffsetTopRef.value
+      const mergedOffsetBottom = mergedOffsetBottomRef.value
       if (mergedOffsetTop !== undefined && pxToTop <= mergedOffsetTop) {
-        this.stickToTop = true
-        this.topAffixedTriggerScrollTop =
+        stickToTopRef.value = true
+        topAffixedTriggerScrollTopRef.value =
           containerEl.scrollTop - (mergedOffsetTop - pxToTop)
       } else {
-        this.stickToTop = false
-        this.topAffixedTriggerScrollTop = null
+        stickToTopRef.value = false
+        topAffixedTriggerScrollTopRef.value = null
       }
       if (
         mergedOffsetBottom !== undefined &&
         pxToBottom <= mergedOffsetBottom
       ) {
-        this.stickToBottom = true
-        this.bottomAffixedTriggerScrollTop =
+        stickToBottomRef.value = true
+        bottomAffixedTriggerScrollTopRef.value =
           containerEl.scrollTop + mergedOffsetBottom - pxToBottom
       } else {
-        this.stickToBottom = false
-        this.bottomAffixedTriggerScrollTop = null
+        stickToBottomRef.value = false
+        bottomAffixedTriggerScrollTopRef.value = null
       }
+    }
+    onMounted(() => {
+      init()
+    })
+    onBeforeUnmount(() => {
+      const scrollElement = scrollElementRef.value
+      if (scrollElement) {
+        scrollElement.removeEventListener('scroll', handleScroll)
+      }
+    })
+    return {
+      ...useConfig(props),
+      selfRef,
+      scrollElement: scrollElementRef,
+      stickToTop: stickToTopRef,
+      stickToBottom: stickToBottomRef,
+      bottomAffixedTriggerScrollTop: bottomAffixedTriggerScrollTopRef,
+      topAffixedTriggerScrollTop: topAffixedTriggerScrollTopRef,
+      affixed: affixedRef,
+      mergedstyle: computed(() => {
+        const style = {}
+        if (stickToTopRef.value && mergedOffsetTopRef.value !== undefined) {
+          style.top = `${mergedTopRef.value}px`
+        }
+        if (
+          stickToBottomRef.value &&
+          mergedOffsetBottomRef.value !== undefined
+        ) {
+          style.bottom = `${mergedBottomRef.value}px`
+        }
+        return style
+      })
     }
   }
 }

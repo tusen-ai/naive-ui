@@ -51,7 +51,11 @@ export default function useTheme (
       } = {}
     } = NConfigProvider
     const mergedCommon = merge(
-      common || injectedCommon || injectedGlobalCommon || defaultTheme.common,
+      common ||
+        injectedCommon ||
+        injectedGlobalCommon ||
+        defaultTheme.common ||
+        {},
       injectedGlobalCommonOverrides,
       injectedCommonOverrides,
       commonOverrides
@@ -59,7 +63,7 @@ export default function useTheme (
     return {
       common: mergedCommon,
       self: merge(
-        (self || injectedSelf || defaultTheme.self)(mergedCommon),
+        (self || injectedSelf || defaultTheme.self || {})(mergedCommon),
         injectedSelfOverrides,
         selfOverrides
       ),
