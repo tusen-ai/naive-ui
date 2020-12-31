@@ -6,6 +6,7 @@ import { anchorDark } from './anchor/styles'
 import { autoCompleteDark } from './auto-complete/styles'
 import { avatarDark } from './avatar/styles'
 import { backTopDark } from './back-top/styles'
+import { badgeDark } from './badge/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -15,5 +16,6 @@ export const darkTheme = {
   AutoComplete: autoCompleteDark,
   Avatar: avatarDark,
   BackTop: backTopDark,
+  Badge: badgeDark,
   Divider: dividerDark
 }

@@ -1,20 +1,14 @@
 <template>
   <div
     class="n-badge"
-    :class="{
-      'n-badge--dot': dot,
-      [`n-badge--${type}-type`]: true,
-      [`n-${mergedTheme}-theme`]: mergedTheme,
-      [`n-badge--as-is`]: !$slots.default
-    }"
-    :style="
-      color
-        ? {
-          '--color': color,
-          '--ripple-color': color
-        }
-        : null
-    "
+    :class="[
+      `n-badge--${type}-type`,
+      {
+        'n-badge--dot': dot,
+        [`n-badge--as-is`]: !$slots.default
+      }
+    ]"
+    :style="cssVars"
   >
     <slot />
     <transition
@@ -37,9 +31,12 @@
 </template>
 
 <script>
-import { configurable, themeable, withCssr } from '../../_mixins'
+import { computed, onMounted, ref } from 'vue'
+import { useTheme } from '../../_mixins'
 import { NBaseSlotMachine, NBaseWave } from '../../_base'
-import styles from './styles/index.js'
+import { createKey } from '../../_utils'
+import { badgeLight } from '../styles'
+import style from './styles/index.cssr.js'
 
 export default {
   name: 'Badge',
@@ -47,7 +44,6 @@ export default {
     NBaseSlotMachine,
     NBaseWave
   },
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     value: {
       type: [String, Number],
@@ -84,36 +80,51 @@ export default {
       default: undefined
     }
   },
-  data () {
-    return {
-      appeared: false
+  setup (props) {
+    const themeRef = useTheme('Badge', 'Badge', style, badgeLight, props)
+    const appearedRef = ref(false)
+    const handleAfterEnter = () => {
+      appearedRef.value = true
     }
-  },
-  computed: {
-    number () {
-      return this.max === undefined || typeof value === 'string'
-        ? this.value
-        : this.value > this.max
-          ? `${this.max}+`
-          : this.value
-    },
-    showBadge () {
+    const handleAfterLeave = () => {
+      appearedRef.value = false
+    }
+    const showBadgeRef = computed(() => {
       return (
-        this.show &&
-        (this.dot ||
-          (this.value !== undefined && !(!this.showZero && this.value <= 0)))
+        props.show &&
+        (props.dot ||
+          (props.value !== undefined && !(!props.showZero && props.value <= 0)))
       )
-    }
-  },
-  mounted () {
-    if (this.showBadge) this.appeared = true
-  },
-  methods: {
-    handleAfterEnter () {
-      this.appeared = true
-    },
-    handleAfterLeave () {
-      this.appeared = false
+    })
+    onMounted(() => {
+      if (showBadgeRef.value) appearedRef.value = true
+    })
+    return {
+      appeared: ref(false),
+      number: computed(() => {
+        const { max, value } = props
+        return max === undefined || typeof value === 'string'
+          ? value
+          : value > max
+            ? `${max}+`
+            : value
+      }),
+      showBadge: showBadgeRef,
+      handleAfterEnter,
+      handleAfterLeave,
+      cssVars: computed(() => {
+        const { type, color: propColor } = props
+        const {
+          common: { cubicBezierEaseInOut, cubicBezierEaseOut },
+          self: { [createKey('color', type)]: color }
+        } = themeRef.value
+        return {
+          '--color': propColor || color,
+          '--ripple-color': propColor || color,
+          '--bezier': cubicBezierEaseInOut,
+          '--ripple-bezier': cubicBezierEaseOut
+        }
+      })
     }
   }
 }

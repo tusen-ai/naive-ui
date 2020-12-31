@@ -1,19 +1,24 @@
-import create from '../../_styles/utils/create-component-base'
 import { baseDark } from '../../_styles/base'
 import { baseSlotMachineDark } from '../../_base/slot-machine/styles'
 import { baseWaveDark } from '../../_base/wave/styles'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
-  name: 'Badge',
-  theme: 'dark',
-  peer: [baseDark, baseWaveDark, baseSlotMachineDark],
-  getLocalVars (vars) {
+export default {
+  common: commonDark,
+  peers: [baseDark, baseWaveDark, baseSlotMachineDark],
+  self (vars) {
+    const {
+      errorColorSuppl,
+      infoColorSuppl,
+      successColorSuppl,
+      warningColorSuppl
+    } = vars
     return {
-      color: vars.errorColorSuppl,
-      colorInfo: vars.infoColorSuppl,
-      colorSuccess: vars.successColorSuppl,
-      colorError: vars.errorColorSuppl,
-      colorWarning: vars.warningColorSuppl
+      color: errorColorSuppl,
+      colorInfo: infoColorSuppl,
+      colorSuccess: successColorSuppl,
+      colorError: errorColorSuppl,
+      colorWarning: warningColorSuppl
     }
   }
-})
+}
