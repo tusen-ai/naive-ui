@@ -1,12 +1,9 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseLight } from '../../_styles/base'
 import commonVariables from './_common'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
-  theme: 'light',
-  name: 'Breadcrumb',
-  peer: [baseLight],
-  getLocalVars (vars) {
+export default {
+  common: commonLight,
+  self (vars) {
     return {
       ...commonVariables,
       fontSize: vars.fontSize,
@@ -17,4 +14,4 @@ export default create({
       separatorColor: vars.textColor3
     }
   }
-})
+}

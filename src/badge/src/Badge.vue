@@ -19,7 +19,7 @@
       <sup v-if="showBadge" class="n-badge-sup">
         <n-base-slot-machine
           v-if="!dot"
-          :theme="mergedTheme"
+          :theme="'light'"
           :appeared="appeared"
           :max="max"
           :value="value"

@@ -1,12 +1,9 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseDark } from '../../_styles/base'
 import commonVariables from './_common'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
-  theme: 'dark',
-  name: 'Breadcrumb',
-  peer: [baseDark],
-  getLocalVars (vars) {
+export default {
+  common: commonDark,
+  self (vars) {
     return {
       ...commonVariables,
       fontSize: vars.fontSize,
@@ -17,4 +14,4 @@ export default create({
       separatorColor: vars.textColor3Overlay
     }
   }
-})
+}

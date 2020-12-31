@@ -7,6 +7,7 @@ import { autoCompleteDark } from './auto-complete/styles'
 import { avatarDark } from './avatar/styles'
 import { backTopDark } from './back-top/styles'
 import { badgeDark } from './badge/styles'
+import { breadcrumbDark } from './breadcrumb/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -17,5 +18,6 @@ export const darkTheme = {
   Avatar: avatarDark,
   BackTop: backTopDark,
   Badge: badgeDark,
+  Breadcrumb: breadcrumbDark,
   Divider: dividerDark
 }
