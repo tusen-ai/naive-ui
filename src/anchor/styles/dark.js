@@ -1,14 +1,11 @@
-import create from '../../_styles/utils/create-component-base'
-import commonVars from './_common'
-import { baseDark } from '../../_styles/base'
-import { affixDark } from '../../affix/styles'
 import { changeColor } from 'seemly'
+import { commonDark } from '../../_styles/new-common'
+import { affixDark } from '../../affix/styles'
+import commonVars from './_common'
 
-export default create({
-  theme: 'dark',
-  name: 'Anchor',
-  peer: [baseDark, affixDark],
-  getLocalVars (vars) {
+export default {
+  common: commonDark,
+  self (vars) {
     const {
       borderRadius,
       primaryColor,
@@ -28,5 +25,6 @@ export default create({
       linkTextColorPressed: primaryColorPressed,
       linkTextColorActive: primaryColor
     }
-  }
-})
+  },
+  peers: [affixDark]
+}

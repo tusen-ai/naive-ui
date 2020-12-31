@@ -2,7 +2,7 @@
   <n-base-anchor
     v-if="!affix"
     ref="anchor"
-    :theme="theme"
+    :unstable-theme="unstableTheme"
     :listen-to="listenTo"
     :bound="bound"
     :target="target"
@@ -22,7 +22,7 @@
   >
     <n-base-anchor
       ref="anchor"
-      :theme="theme"
+      :unstable-theme="unstableTheme"
       :bound="bound"
       :listen-to="listenTo"
       :ignore-gap="ignoreGap"
@@ -36,7 +36,6 @@
 <script>
 import NBaseAnchor from './BaseAnchor.vue'
 import { NAffix } from '../../affix'
-import { themeable } from '../../_mixins'
 
 export default {
   name: 'Anchor',
@@ -44,8 +43,11 @@ export default {
     NBaseAnchor,
     NAffix
   },
-  mixins: [themeable],
   props: {
+    unstableTheme: {
+      type: Object,
+      default: undefined
+    },
     top: {
       type: Number,
       default: undefined

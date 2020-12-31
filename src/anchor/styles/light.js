@@ -1,14 +1,11 @@
-import create from '../../_styles/utils/create-component-base'
-import commonVars from './_common'
-import { baseLight } from '../../_styles/base'
-import { affixLight } from '../../affix/styles'
 import { changeColor } from 'seemly'
+import { commonLight } from '../../_styles/new-common'
+import { affixLight } from '../../affix/styles'
+import commonVars from './_common'
 
-export default create({
-  theme: 'light',
-  name: 'Anchor',
-  peer: [baseLight, affixLight],
-  getLocalVars (vars) {
+export default {
+  common: commonLight,
+  self (vars) {
     const {
       borderRadius,
       railColorOverlay,
@@ -28,5 +25,6 @@ export default create({
       linkTextColorPressed: primaryColorPressed,
       linkTextColorActive: primaryColor
     }
-  }
-})
+  },
+  peer: [affixLight]
+}

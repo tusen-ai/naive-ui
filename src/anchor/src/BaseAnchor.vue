@@ -1,11 +1,5 @@
 <template>
-  <div
-    class="n-anchor"
-    :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme
-    }"
-    :style="mergedStyle"
-  >
+  <div class="n-anchor" :style="cssVars">
     <div ref="slot" class="n-anchor-link-background" />
     <div class="n-anchor-rail">
       <div
@@ -21,12 +15,13 @@
 </template>
 
 <script>
-import { nextTick, ref, markRaw, getCurrentInstance } from 'vue'
+import { nextTick, ref, markRaw, getCurrentInstance, computed } from 'vue'
 import { getScrollParent, unwrapElement } from 'seemly'
-import { configurable, themeable, withCssr } from '../../_mixins'
 import { onFontsReady } from 'vooks'
+import { useTheme } from '../../_mixins'
 import { warn } from '../../_utils'
-import styles from './styles'
+import { anchorLight } from '../styles'
+import style from './styles/index.cssr'
 
 function getOffset (el, container) {
   const { top: elTop, height } = el.getBoundingClientRect()
@@ -40,13 +35,16 @@ function getOffset (el, container) {
 export default {
   name: 'BaseAnchor',
   cssrName: 'Anchor',
-  mixins: [configurable, themeable, withCssr(styles)],
   provide () {
     return {
       NAnchor: this
     }
   },
   props: {
+    unstableTheme: {
+      type: Object,
+      default: undefined
+    },
     listenTo: {
       type: [String, Object],
       default: undefined
@@ -73,18 +71,45 @@ export default {
       default: undefined
     }
   },
-  setup () {
+  setup (props) {
     const vm = getCurrentInstance().proxy
     onFontsReady(() => {
       vm.init()
       vm.setActiveHref(window.location)
       vm.handleScroll(false)
     })
+    const themeRef = useTheme('Anchor', 'Anchor', style, anchorLight, props)
     return {
       collectedLinkHrefs: markRaw([]),
       titleEls: markRaw([]),
       activeHref: ref(null),
-      scrollElement: ref(null)
+      scrollElement: ref(null),
+      cssVars: computed(() => {
+        const {
+          self: {
+            railColor,
+            linkColor,
+            railColorActive,
+            linkTextColor,
+            linkTextColorHover,
+            linkTextColorPressed,
+            linkTextColorActive,
+            linkFontSize
+          },
+          common: { cubicBezierEaseInOut }
+        } = themeRef.value
+        return {
+          '--link-color': linkColor,
+          '--link-font-size': linkFontSize,
+          '--link-text-color': linkTextColor,
+          '--link-text-color-hover': linkTextColorHover,
+          '--link-text-color-active': linkTextColorActive,
+          '--link-text-color-pressed': linkTextColorPressed,
+          '--bezier': cubicBezierEaseInOut,
+          '--rail-color': railColor,
+          '--rail-color-active': railColorActive
+        }
+      })
     }
   },
   watch: {
