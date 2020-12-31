@@ -6,9 +6,9 @@
       'n-divider--no-title': !$slots.default,
       'n-divider--dashed': dashed,
       [`n-divider--title-position-${titlePlacement}`]:
-        $slots.default && titlePlacement,
-      [`n-${mergedTheme}-theme`]: mergedTheme
+        $slots.default && titlePlacement
     }"
+    :style="cssVars"
   >
     <hr v-if="!vertical" class="n-divider__line n-divider__line--left">
     <div v-if="!vertical && $slots.default" class="n-divider__title">
@@ -22,13 +22,22 @@
 </template>
 
 <script>
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles'
+import { computed } from 'vue'
+import { useConfig, useTheme } from '../../_mixins'
+import { dividerLight } from '../styles'
+import style from './styles/index.cssr'
 
 export default {
   name: 'Divider',
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
+    unstableTheme: {
+      type: Object,
+      default: undefined
+    },
+    unstableThemeOverrides: {
+      type: Object,
+      default: undefined
+    },
     titlePlacement: {
       type: String,
       default: 'center'
@@ -40,6 +49,24 @@ export default {
     vertical: {
       type: Boolean,
       default: false
+    }
+  },
+  setup (props) {
+    const themeRef = useTheme('Divider', 'Divider', style, dividerLight, props)
+    return {
+      ...useConfig(props),
+      cssVars: computed(() => {
+        const {
+          common: { cubicBezierEaseInOut },
+          self: { color, textColor, fontWeight }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--color': color,
+          '--text-color': textColor,
+          '--font-weight': fontWeight
+        }
+      })
     }
   }
 }

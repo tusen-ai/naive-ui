@@ -16,16 +16,20 @@ const unconfigurableStyle = c([
     })
   ]),
   cB('tag', [
-    cE('close', {
-      borderRadius: '50%'
-    }, [
-      c('&:hover', {
-        backgroundColor: changeColor('#D7DAE0', { alpha: 0.5 })
-      }),
-      c('&:hover', {
-        backgroundColor: changeColor('#D7DAE0', { alpha: 0.25 })
-      })
-    ])
+    cE(
+      'close',
+      {
+        borderRadius: '50%'
+      },
+      [
+        c('&:hover', {
+          backgroundColor: changeColor('#D7DAE0', { alpha: 0.5 })
+        }),
+        c('&:hover', {
+          backgroundColor: changeColor('#D7DAE0', { alpha: 0.25 })
+        })
+      ]
+    )
   ]),
   cB('message', [
     cE('close', [
@@ -48,7 +52,8 @@ const unconfigurableStyle = c([
     ]),
     cM('info', [
       cB('progress-graph-line-fill', {
-        background: 'linear-gradient(270deg, #FFAC26 0%, #F2E93D 100%) !important'
+        background:
+          'linear-gradient(270deg, #FFAC26 0%, #F2E93D 100%) !important'
       }),
       cM('circle', [
         cB('progress-graph-circle-fill', {
@@ -58,7 +63,8 @@ const unconfigurableStyle = c([
     ]),
     cM('success', [
       cB('progress-graph-line-fill', {
-        background: 'linear-gradient(270deg, #4FB233 0%, #AFF25E 100%) !important'
+        background:
+          'linear-gradient(270deg, #4FB233 0%, #AFF25E 100%) !important'
       }),
       cM('circle', [
         cB('progress-graph-circle-fill', {
@@ -68,7 +74,8 @@ const unconfigurableStyle = c([
     ]),
     cM('warning', [
       cB('progress-graph-line-fill', {
-        background: 'linear-gradient(270deg, #FF66BA 0%, #D92149 100%) !important'
+        background:
+          'linear-gradient(270deg, #FF66BA 0%, #D92149 100%) !important'
       }),
       cM('circle', [
         cB('progress-graph-circle-fill', {
@@ -78,7 +85,8 @@ const unconfigurableStyle = c([
     ]),
     cM('error', [
       cB('progress-graph-line-fill', {
-        background: 'linear-gradient(270deg, #FF66BA 0%, #D92149 100%) !important'
+        background:
+          'linear-gradient(270deg, #FF66BA 0%, #D92149 100%) !important'
       }),
       cM('circle', [
         cB('progress-graph-circle-fill', {
@@ -96,14 +104,18 @@ const unconfigurableStyle = c([
       ])
     ]),
     cM('disabled', [
-      cE('rail', {
-        backgroundColor: '#EBEDF0'
-      }, [
-        c('&::before', {
-          backgroundColor: '#EBEDF0',
-          backgroundImage: 'unset'
-        })
-      ]),
+      cE(
+        'rail',
+        {
+          backgroundColor: '#EBEDF0'
+        },
+        [
+          c('&::before', {
+            backgroundColor: '#EBEDF0',
+            backgroundImage: 'unset'
+          })
+        ]
+      ),
       cM('active', [
         cE('rail', [
           c('&::before', {
@@ -158,9 +170,7 @@ function tusimpleTheme (naive) {
   </defs>`
   const svgEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
   svgEl.innerHTML = svgDefs
-  document.body.appendChild(
-    svgEl
-  )
+  document.body.appendChild(svgEl)
   const primaryColor = '#4FB233'
   const inputColorDisabled = '#EBEDF0'
   naive.styles.light.override({
@@ -191,9 +201,7 @@ function tusimpleTheme (naive) {
     optionColorHover: composite(primaryColor, 'rgba(255, 255, 255, .1)'),
     clearIconColor: composite('#FFF', 'rgba(0, 0, 0, .4)')
   })
-  const {
-    vars
-  } = naive.styles.light.base
+  const { vars } = naive.styles.light.base
 
   naive.styles.light.Button.override({
     textColorWarning: '#333',
@@ -424,9 +432,12 @@ function tusimpleTheme (naive) {
     iconColor: 'rgba(0, 0, 0, .8)',
     iconColorHover: vars.primaryColor,
     iconColorPressed: vars.primaryColorPressed,
-    boxShadow: '0 40px 16px -24px rgba(0,0,0,0.04), 0 8px 16px -8px rgba(0,0,0,0.12), 0 16px 40px 16px rgba(0,0,0,0.04)',
-    boxShadowHover: '0 40px 16px -24px rgba(0,0,0,0.04), 0 8px 16px -8px rgba(0,0,0,0.12), 0 16px 40px 16px rgba(0,0,0,0.04)',
-    boxShadowPressed: '0 40px 16px -24px rgba(0,0,0,0.04), 0 8px 16px -8px rgba(0,0,0,0.12), 0 16px 40px 16px rgba(0,0,0,0.04)'
+    boxShadow:
+      '0 40px 16px -24px rgba(0,0,0,0.04), 0 8px 16px -8px rgba(0,0,0,0.12), 0 16px 40px 16px rgba(0,0,0,0.04)',
+    boxShadowHover:
+      '0 40px 16px -24px rgba(0,0,0,0.04), 0 8px 16px -8px rgba(0,0,0,0.12), 0 16px 40px 16px rgba(0,0,0,0.04)',
+    boxShadowPressed:
+      '0 40px 16px -24px rgba(0,0,0,0.04), 0 8px 16px -8px rgba(0,0,0,0.12), 0 16px 40px 16px rgba(0,0,0,0.04)'
   })
   naive.styles.light.Breadcrumb.override({
     fontSize: '16px',
@@ -531,6 +542,12 @@ function tusimpleTheme (naive) {
   naive.styles.light.Tooltip.override({
     padding: '20px',
     fontSize: '16px'
+  })
+  naive.styles.light.Typography.override({
+    headerPrefixWidth3: '15px',
+    headerPrefixWidth4: '15px',
+    headerPrefixWidth5: '15px',
+    headerPrefixWidth6: '15px'
   })
 }
 

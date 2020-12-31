@@ -2,16 +2,6 @@ import { h, inject, computed } from 'vue'
 import { useMemo } from 'vooks'
 import { warn, getSlot } from '../../_utils'
 
-function createStyleMap (styles) {
-  if (!styles) return undefined
-  return styles.reduce((map, style) => {
-    const { theme, name } = style
-    if (!map[theme]) map[theme] = {}
-    map[theme][name] = style
-    return map
-  }, {})
-}
-
 export default {
   name: 'ConfigProvider',
   alias: ['App'],
@@ -37,16 +27,21 @@ export default {
       type: String,
       default: undefined
     },
-    styles: {
-      type: Array,
-      default: undefined
-    },
     tag: {
       type: String,
       default: 'div'
     },
     theme: {
       type: String,
+      default: undefined
+    },
+    // wip, unstable
+    unstableTheme: {
+      type: Object,
+      default: undefined
+    },
+    unstableThemeOverrides: {
+      type: Object,
       default: undefined
     },
     // deprecated
@@ -103,9 +98,18 @@ export default {
         const { locale } = props
         return locale === undefined ? NConfigProvider?.mergedLocale : locale
       }),
-      mergedStyles: computed(() => {
-        // TODO, merged styles together
-        return createStyleMap(props.styles) ?? NConfigProvider?.mergedStyles
+      // wip, unstable
+      mergedUnstableTheme: computed(() => {
+        const { unstableTheme } = props
+        return unstableTheme === undefined
+          ? NConfigProvider?.unstableTheme
+          : unstableTheme
+      }),
+      mergedUnstableThemeOverrides: computed(() => {
+        const { unstableThemeOverrides } = props
+        return unstableThemeOverrides === undefined
+          ? NConfigProvider?.unstableThemeOverrides
+          : unstableThemeOverrides
       }),
       // deprecated
       mergedLanguage: useMemo(() => {

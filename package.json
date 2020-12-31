@@ -95,12 +95,12 @@
     "vue-router": "^4.0.0-rc.1"
   },
   "dependencies": {
-    "@css-render/plugin-bem": "^0.11.1",
+    "@css-render/plugin-bem": "^0.12.0",
     "@vicons/fluent": "~0.0.3",
     "@vicons/ionicons-v4": "~0.0.3",
     "@vicons/ionicons-v5": "~0.0.3",
     "async-validator": "^3.4.0",
-    "css-render": "^0.11.1",
+    "css-render": "^0.12.0",
     "date-fns": "^2.9.0",
     "evtd": "^0.1.0",
     "highlight.js": "^10.4.1",

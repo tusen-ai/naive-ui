@@ -1,16 +1,13 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseLight } from '../../_styles/base'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
-  theme: 'light',
-  name: 'Divider',
-  peer: [baseLight],
-  getLocalVars (vars) {
-    const { textColor1, dividerColorOverlay } = vars
+export default {
+  common: commonLight,
+  self (vars) {
+    const { textColor1, dividerColorOverlay, fontWeightStrong } = vars
     return {
       textColor: textColor1,
       color: dividerColorOverlay,
-      fontWeight: vars.fontWeightStrong
+      fontWeight: fontWeightStrong
     }
   }
-})
+}

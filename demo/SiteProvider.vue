@@ -3,6 +3,7 @@
     class="demo"
     namespace="naive-ui-doc"
     :theme="theme"
+    :unstable-theme="theme === 'dark' ? darkTheme : undefined"
     :language="lang"
   >
     <n-loading-bar-provider ref="loadingBar">
@@ -21,6 +22,7 @@
 import { ref, computed } from 'vue'
 import Site from './Site.vue'
 import { useRoute, useRouter } from 'vue-router'
+import { darkTheme } from '../src/styles.new'
 
 export default {
   name: 'SiteProvider',
@@ -77,7 +79,9 @@ export default {
     return {
       displayMode: displayModeComputed,
       theme: themeRef,
-      lang: langRef
+      lang: langRef,
+      // unstable
+      darkTheme
     }
   }
 }

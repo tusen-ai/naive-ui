@@ -1,16 +1,13 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseDark } from '../../_styles/base'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
-  theme: 'dark',
-  name: 'Divider',
-  peer: [baseDark],
-  getLocalVars (vars) {
-    const { textColor1Overlay, dividerColorOverlay } = vars
+export default {
+  common: commonDark,
+  self (vars) {
+    const { textColor1Overlay, dividerColorOverlay, fontWeightStrong } = vars
     return {
       textColor: textColor1Overlay,
       color: dividerColorOverlay,
-      fontWeight: vars.fontWeightStrong
+      fontWeight: fontWeightStrong
     }
   }
-})
+}
