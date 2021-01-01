@@ -6,7 +6,7 @@ Button has different shapes.
 <n-space>
   <n-button circle>
     <template #icon>
-      <cash-icon />
+      <n-icon><cash-icon /></n-icon>
     </template>
   </n-button>
   <n-button round>Round</n-button>

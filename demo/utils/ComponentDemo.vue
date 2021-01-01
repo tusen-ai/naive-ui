@@ -34,7 +34,9 @@
             @click="toggleCodeDisplay"
           >
             <template #icon>
-              <code-outline />
+              <n-icon>
+                <code-outline />
+              </n-icon>
             </template>
           </n-button>
         </template>

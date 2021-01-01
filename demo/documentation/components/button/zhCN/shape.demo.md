@@ -6,7 +6,7 @@
 <n-space>
   <n-button circle>
     <template #icon>
-      <cash-icon />
+      <n-icon><cash-icon /></n-icon>
     </template>
   </n-button>
   <n-button round>圆角</n-button>

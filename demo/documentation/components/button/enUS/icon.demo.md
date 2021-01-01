@@ -6,13 +6,17 @@ Use icon in button.
 <n-space>
   <n-button>
     <template #icon>
-      <cash-icon />
+      <n-icon>
+        <cash-icon />
+      </n-icon>
     </template>
     +100$
   </n-button>
   <n-button icon-placement="right">
     <template #icon>
-      <cash-icon />
+      <n-icon>
+        <cash-icon />
+      </n-icon>
     </template>
     +100$
   </n-button>

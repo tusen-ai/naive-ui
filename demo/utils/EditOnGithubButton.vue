@@ -6,7 +6,9 @@
     @click="handleEditOnGithubClick"
   >
     <template #icon>
-      <edit-icon />
+      <n-icon>
+        <edit-icon />
+      </n-icon>
     </template>
   </n-button>
 </template>

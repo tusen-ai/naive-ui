@@ -15,5 +15,5 @@ export default {
   iconSizeSmall: '18px',
   iconSizeMedium: '18px',
   iconSizeLarge: '20px',
-  waveDuration: '.6s'
+  rippleDuration: '.6s'
 }

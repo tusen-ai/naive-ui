@@ -10,13 +10,11 @@
 </template>
 
 <script>
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles/button-group/index.js'
+import { useTheme } from '../../_mixins'
+import style from './styles/button-group/index.cssr.js'
 
 export default {
   name: 'ButtonGroup',
-  cssrName: 'Button',
-  mixins: [configurable, themeable, withCssr(styles)],
   provide () {
     return {
       NButtonGroup: this
@@ -33,6 +31,9 @@ export default {
       type: Boolean,
       default: false
     }
+  },
+  setup (props) {
+    useTheme('Button', 'ButtonGroup', style, undefined, props)
   }
 }
 </script>

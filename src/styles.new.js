@@ -8,6 +8,7 @@ import { avatarDark } from './avatar/styles'
 import { backTopDark } from './back-top/styles'
 import { badgeDark } from './badge/styles'
 import { breadcrumbDark } from './breadcrumb/styles'
+import { buttonDark } from './button/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -19,5 +20,6 @@ export const darkTheme = {
   BackTop: backTopDark,
   Badge: badgeDark,
   Breadcrumb: breadcrumbDark,
+  Button: buttonDark,
   Divider: dividerDark
 }
