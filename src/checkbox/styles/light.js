@@ -1,13 +1,10 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseLight } from '../../_styles/base'
 import commonVariables from './_common'
 import { changeColor } from 'seemly'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
-  theme: 'light',
-  name: 'Checkbox',
-  peer: [baseLight],
-  getLocalVars (vars) {
+export default {
+  common: commonLight,
+  self (vars) {
     const {
       baseColor,
       inputColorDisabled,
@@ -19,26 +16,29 @@ export default create({
       textColor2,
       fontSizeSmall,
       fontSizeMedium,
-      fontSizeLarge
+      fontSizeLarge,
+      borderRadiusSmall
     } = vars
     return {
       ...commonVariables,
       fontSizeSmall,
       fontSizeMedium,
       fontSizeLarge,
-      borderRadius: vars.borderRadiusSmall,
+      borderRadius: borderRadiusSmall,
       color: baseColor,
+      colorActive: primaryColor,
       colorDisabled: inputColorDisabled,
       colorTableHeader: cardColor,
       colorTableHeaderModal: modalColor,
-      iconColor: baseColor,
-      iconColorDisabled: textColorDisabled,
-      borderColor: borderColor,
-      borderColorDisabled: borderColor,
-      borderColorActive: primaryColor,
-      boxShadowColorActive: changeColor(primaryColor, { alpha: 0.3 }),
-      labelTextColor: textColor2,
-      labelTextColorDisabled: textColorDisabled
+      checkMarkColor: baseColor,
+      checkMarkColorDisabled: textColorDisabled,
+      border: `1px solid ${borderColor}`,
+      borderDisabled: `1px solid ${borderColor}`,
+      borderActive: `1px solid ${primaryColor}`,
+      borderFocus: `1px solid ${primaryColor}`,
+      boxShadowFocus: `0 0 0 2px ${changeColor(primaryColor, { alpha: 0.3 })}`,
+      textColor: textColor2,
+      textColorDisabled: textColorDisabled
     }
   }
-})
+}

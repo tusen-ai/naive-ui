@@ -2,14 +2,14 @@
   <div
     class="n-checkbox"
     :class="{
-      'n-checkbox--checked': renderSafeChecked,
+      'n-checkbox--checked': renderedChecked,
       'n-checkbox--disabled': mergedDisabled,
       'n-checkbox--indeterminate': indeterminate,
       'n-checkbox--table-header': tableHeader,
-      [`n-checkbox--${mergedSize}-size`]: true,
-      [`n-${mergedTheme}-theme`]: mergedTheme
+      [`n-checkbox--${mergedSize}-size`]: true
     }"
     :tabindex="mergedDisabled ? false : 0"
+    :style="cssVars"
     @keyup.enter="handleKeyUpEnter"
     @keyup.space="handleKeyUpSpace"
     @keydown.space="handleKeyDownSpace"
@@ -24,6 +24,7 @@
           <check-mark class="n-checkbox-icon__check" />
         </div>
       </n-icon-switch-transition>
+      <div class="n-checkbox-box__border" />
     </div>
     <span v-if="label !== null || $slots.default" class="n-checkbox__label">
       <slot>
@@ -34,16 +35,17 @@
 </template>
 
 <script>
-import { computed, inject, ref, toRef } from 'vue'
+import { defineComponent, computed, inject, ref, toRef } from 'vue'
 import { useMergedState, useMemo } from 'vooks'
-import { configurable, themeable, useFormItem, withCssr } from '../../_mixins'
+import { useFormItem, useTheme } from '../../_mixins'
+import { NIconSwitchTransition } from '../../_base'
+import { warn, call, render, createKey } from '../../_utils'
+import { checkboxLight } from '../styles'
 import CheckMark from './CheckMark.vue'
 import LineMark from './LineMark.vue'
-import { NIconSwitchTransition } from '../../_base'
-import styles from './styles'
-import { warn, call, render } from '../../_utils'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Checkbox',
   components: {
     NIconSwitchTransition,
@@ -51,7 +53,6 @@ export default {
     LineMark,
     render
   },
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     size: {
       validator (value) {
@@ -107,7 +108,13 @@ export default {
   },
   setup (props) {
     const NCheckboxGroup = inject('NCheckboxGroup', null)
-    const mergedCheckedRef = computed(() => {
+    const uncontrolledCheckedRef = ref(props.defaultChecked)
+    const controlledCheckedRef = toRef(props, 'checked')
+    const mergedCheckedRef = useMergedState(
+      controlledCheckedRef,
+      uncontrolledCheckedRef
+    )
+    const renderedCheckedRef = useMemo(() => {
       if (NCheckboxGroup) {
         const groupValueSet = NCheckboxGroup.valueSet
         if (groupValueSet) {
@@ -115,43 +122,94 @@ export default {
         }
         return false
       } else {
-        return props.checked ?? props.value
+        return mergedCheckedRef.value
       }
     })
-    const uncontrolledCheckedRef = ref(props.defaultChecked)
-    const controlledCheckedRef = toRef(props, 'checked')
     const mergedDisabledRef = computed(() => {
       return props.disabled || (NCheckboxGroup && NCheckboxGroup.disabled)
     })
-    return {
+    const formItem = useFormItem(props, {
+      mergedSize (NFormItem) {
+        const { size } = props
+        if (size !== undefined) return size
+        if (NCheckboxGroup) {
+          const { mergedSize } = NCheckboxGroup
+          if (mergedSize !== undefined) {
+            return mergedSize
+          }
+        }
+        if (NFormItem) {
+          const { mergedSize } = NFormItem
+          if (mergedSize !== undefined) return mergedSize
+        }
+        return 'medium'
+      }
+    })
+    const themeRef = useTheme(
+      'Checkbox',
+      'Checkbox',
+      style,
+      checkboxLight,
+      props
+    )
+    return Object.assign(formItem, {
       NCheckboxGroup,
-      mergedCheck: useMergedState(controlledCheckedRef, uncontrolledCheckedRef),
       mergedDisabled: mergedDisabledRef,
-      renderSafeChecked: useMemo(() => mergedCheckedRef.value),
-      ...useFormItem(props, {
-        mergedSize (NFormItem) {
-          const { size } = props
-          if (size !== undefined) return size
-          if (NCheckboxGroup) {
-            const { mergedSize } = NCheckboxGroup
-            if (mergedSize !== undefined) {
-              return mergedSize
-            }
+      renderedChecked: renderedCheckedRef,
+      cssVars: computed(() => {
+        const {
+          mergedSize: { value: mergedSize }
+        } = formItem
+        const {
+          common: { cubicBezierEaseInOut },
+          self: {
+            borderRadius,
+            color,
+            colorActive,
+            colorDisabled,
+            colorTableHeader,
+            colorTableHeaderModal,
+            checkMarkColor,
+            checkMarkColorDisabled,
+            border,
+            borderFocus,
+            borderDisabled,
+            borderActive,
+            boxShadowFocus,
+            textColor,
+            textColorDisabled,
+            [createKey('fontSize', mergedSize)]: fontSize,
+            [createKey('size', mergedSize)]: size
           }
-          if (NFormItem) {
-            const { mergedSize } = NFormItem
-            if (mergedSize !== undefined) return mergedSize
-          }
-          return 'medium'
+        } = themeRef.value
+        return {
+          '--size': size,
+          '--bezier': cubicBezierEaseInOut,
+          '--border-radius': borderRadius,
+          '--border': border,
+          '--border-active': borderActive,
+          '--border-focus': borderFocus,
+          '--border-disabled': borderDisabled,
+          '--box-shadow-focus': boxShadowFocus,
+          '--color': color,
+          '--color-active': colorActive,
+          '--color-table-header': colorTableHeader,
+          '--color-table-header-modal': colorTableHeaderModal,
+          '--color-disabled': colorDisabled,
+          '--text-color': textColor,
+          '--text-color-disabled': textColorDisabled,
+          '--check-mark-color': checkMarkColor,
+          '--check-mark-color-disabled': checkMarkColorDisabled,
+          '--font-size': fontSize
         }
       })
-    }
+    })
   },
   methods: {
     toggle () {
       const { NCheckboxGroup } = this
       if (NCheckboxGroup) {
-        NCheckboxGroup.toggleCheckbox(!this.renderSafeChecked, this.value)
+        NCheckboxGroup.toggleCheckbox(!this.renderedChecked, this.value)
       } else {
         const {
           onChange,
@@ -159,7 +217,7 @@ export default {
           nTriggerFormInput,
           nTriggerFormChange
         } = this
-        const nextChecked = !this.renderSafeChecked
+        const nextChecked = !this.renderedChecked
         if (onUpdateCheck) call(onUpdateCheck, nextChecked)
         if (onChange) call(onChange, nextChecked) // deprecated
         nTriggerFormInput()
@@ -184,5 +242,5 @@ export default {
       this.handleKeyUpEnter()
     }
   }
-}
+})
 </script>

@@ -1,13 +1,10 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseDark } from '../../_styles/base'
 import commonVariables from './_common'
 import { changeColor } from 'seemly'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
-  theme: 'dark',
-  name: 'Checkbox',
-  peer: [baseDark],
-  getLocalVars (vars) {
+export default {
+  common: commonDark,
+  self (vars) {
     const {
       inputColorDisabledOverlay,
       cardColor,
@@ -18,26 +15,29 @@ export default create({
       textColorDisabledOverlay,
       fontSizeSmall,
       fontSizeMedium,
-      fontSizeLarge
+      fontSizeLarge,
+      borderRadiusSmall
     } = vars
     return {
       ...commonVariables,
       fontSizeSmall,
       fontSizeMedium,
       fontSizeLarge,
-      borderRadius: vars.borderRadiusSmall,
+      borderRadius: borderRadiusSmall,
       color: 'transparent',
+      colorActive: primaryColor,
       colorDisabled: inputColorDisabledOverlay,
       colorTableHeader: cardColor,
       colorTableHeaderModal: modalColor,
-      iconColor: cardColor,
-      iconColorDisabled: textColorDisabledOverlay,
-      borderColor: borderColorOverlay,
-      borderColorDisabled: borderColorOverlay,
-      borderColorActive: primaryColor,
-      boxShadowColorActive: changeColor(primaryColor, { alpha: 0.3 }),
-      labelTextColor: textColor2Overlay,
-      labelTextColorDisabled: textColorDisabledOverlay
+      checkMarkColor: cardColor,
+      checkMarkColorDisabled: textColorDisabledOverlay,
+      border: `1px solid ${borderColorOverlay}`,
+      borderDisabled: `1px solid ${borderColorOverlay}`,
+      borderActive: `1px solid ${primaryColor}`,
+      borderFocus: `1px solid ${primaryColor}`,
+      boxShadowFocus: `0 0 0 2px ${changeColor(primaryColor, { alpha: 0.3 })}`,
+      textColor: textColor2Overlay,
+      textColorDisabled: textColorDisabledOverlay
     }
   }
-})
+}
