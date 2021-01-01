@@ -6,7 +6,7 @@
           ref="triggerRef"
           :bordered="mergedBordered"
           :size="mergedSize"
-          :theme="mergedTheme"
+          :theme="'light'"
           :active="mergedShow"
           :pattern="pattern"
           :placeholder="localizedPlaceholder"
@@ -50,9 +50,10 @@
           }"
           :value="mergedValue"
           :show="mergedShow && !showSelectMenu"
-          :theme="mergedTheme"
+          :theme="'light'"
           :size="mergedSize"
           :menu-model="menuModel"
+          :style="cssVars"
         />
       </v-follower>
       <v-follower
@@ -71,7 +72,7 @@
           }"
           :value="mergedValue"
           :show="mergedShow && showSelectMenu"
-          :theme="mergedTheme"
+          :theme="'light'"
           :pattern="pattern"
           :size="mergedSize"
           :multiple="multiple"
@@ -84,18 +85,20 @@
 </template>
 
 <script>
+import { defineComponent, computed } from 'vue'
 import { VBinder, VTarget, VFollower } from 'vueuc'
+import { depx } from 'seemly'
 import { NBaseSelection } from '../../_base'
-import { configurable, themeable, locale, withCssr } from '../../_mixins'
-import { useCascader } from './composables'
+import { locale, useTheme, useConfig } from '../../_mixins'
 import { warn, call } from '../../_utils'
+import { cascaderLight } from '../styles'
+import { useCascader } from './composables'
 import CascaderMenu from './CascaderMenu.vue'
 import CascaderSelectMenu from './CascaderSelectMenu.vue'
-import styles from './styles'
-import { depx } from 'seemly'
+import style from './styles/index.cssr.js'
 
 // TODO refactor cascader menu keyboard scroll (use virtual list)
-export default {
+export default defineComponent({
   name: 'Cascader',
   components: {
     CascaderMenu,
@@ -105,15 +108,7 @@ export default {
     VTarget,
     VFollower
   },
-  mixins: [
-    configurable,
-    themeable,
-    locale('Cascader'),
-    withCssr(styles, {
-      injectCssrProps: true,
-      themeKey: 'mergedTheme'
-    })
-  ],
+  mixins: [locale('Cascader')],
   provide () {
     return {
       NCascader: this
@@ -218,7 +213,53 @@ export default {
     }
   },
   setup (props) {
-    return useCascader(props)
+    const themeRef = useTheme(
+      'Cascader',
+      'Cascader',
+      style,
+      cascaderLight,
+      props
+    )
+    return Object.assign(useCascader(props), useConfig(props), {
+      optionHeight: computed(() => {
+        return themeRef.value.self.optionHeight
+      }),
+      cssVars: computed(() => {
+        const {
+          self: {
+            optionArrowColor,
+            optionTextColor,
+            optionTextColorActive,
+            optionTextColorDisabled,
+            optionCheckMarkColor,
+            menuColor,
+            menuBoxShadow,
+            menuDividerColor,
+            menuBorderRadius,
+            optionColorHover,
+            optionHeight,
+            optionFontSize
+          },
+          common: { cubicBezierEaseInOut }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--menu-border-radius': menuBorderRadius,
+          '--menu-box-shadow': menuBoxShadow,
+          '--menu-height': `calc(6.6 * ${optionHeight})`,
+          '--menu-color': menuColor,
+          '--menu-divider-color': menuDividerColor,
+          '--option-height': optionHeight,
+          '--option-font-size': optionFontSize,
+          '--option-text-color': optionTextColor,
+          '--option-text-color-disabled': optionTextColorDisabled,
+          '--option-text-color-active': optionTextColorActive,
+          '--option-color-hover': optionColorHover,
+          '--option-check-mark-color': optionCheckMarkColor,
+          '--option-arrow-color': optionArrowColor
+        }
+      })
+    })
   },
   computed: {
     localizedPlaceholder () {
@@ -292,7 +333,7 @@ export default {
                 node.level
               ].scrollbarRef.scrollTo({
                 index: node.index,
-                elSize: depx(this.cssrProps.$local.optionHeight)
+                elSize: depx(this.optionHeight)
               })
             }
           }
@@ -306,7 +347,7 @@ export default {
                 node.level
               ].scrollbarRef.scrollTo({
                 index: node.index,
-                elSize: depx(this.cssrProps.$local.optionHeight)
+                elSize: depx(this.optionHeight)
               })
             }
           } else {
@@ -317,7 +358,7 @@ export default {
                 node.level
               ].scrollbarRef.scrollTo({
                 index: node.index,
-                elSize: depx(this.cssrProps.$local.optionHeight)
+                elSize: depx(this.optionHeight)
               })
             }
           }
@@ -519,5 +560,5 @@ export default {
       this.cascaderMenuFollowerRef.syncPosition()
     }
   }
-}
+})
 </script>

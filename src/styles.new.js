@@ -10,6 +10,7 @@ import { breadcrumbDark } from './breadcrumb/styles'
 import { buttonDark } from './button/styles'
 import { cardDark } from './card/styles'
 import { dividerDark } from './divider/styles'
+import { cascaderDark } from './cascader/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -23,5 +24,6 @@ export const darkTheme = {
   Breadcrumb: breadcrumbDark,
   Button: buttonDark,
   Card: cardDark,
+  Cascader: cascaderDark,
   Divider: dividerDark
 }

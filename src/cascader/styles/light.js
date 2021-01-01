@@ -1,25 +1,22 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseLight } from '../../_styles/base'
 import { baseMenuMaskLight } from '../../_base/menu-mask/styles'
 import { baseLoadingLight } from '../../_base/loading/styles'
 import { baseSelectionLight } from '../../_base/selection/styles'
 import { baseSelectMenuLight } from '../../_base/select-menu/styles'
 import { scrollbarLight } from '../../scrollbar/styles'
 import { checkboxLight } from '../../checkbox/styles'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
-  theme: 'light',
-  name: 'Cascader',
-  peer: [
-    baseLight,
-    baseMenuMaskLight,
-    baseSelectionLight,
-    baseSelectMenuLight,
-    baseLoadingLight,
-    scrollbarLight,
-    checkboxLight
-  ],
-  getLocalVars (vars) {
+export default {
+  common: commonLight,
+  peers: {
+    BaseMenuMask: baseMenuMaskLight,
+    BaseSelectMenu: baseSelectMenuLight,
+    BaseSelection: baseSelectionLight,
+    BaseLoading: baseLoadingLight,
+    Scrollbar: scrollbarLight,
+    Checkbox: checkboxLight
+  },
+  self (vars) {
     const {
       borderRadius,
       boxShadow2,
@@ -37,15 +34,15 @@ export default create({
       menuBorderRadius: borderRadius,
       menuColor: popoverColor,
       menuBoxShadow: boxShadow2,
-      menuBorderColor: dividerColorOverlay,
-      arrowColor: textColor3,
+      menuDividerColor: dividerColorOverlay,
+      optionArrowColor: textColor3,
       optionHeight: heightMedium,
       optionFontSize: fontSizeMedium,
       optionColorHover: hoverColorOverlay,
       optionTextColor: textColor2,
-      optionTextColorMatched: primaryColor,
+      optionTextColorActive: primaryColor,
       optionTextColorDisabled: textColorDisabled,
       optionCheckMarkColor: primaryColor
     }
   }
-})
+}

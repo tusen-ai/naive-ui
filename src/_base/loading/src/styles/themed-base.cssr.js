@@ -7,7 +7,6 @@ export default c([
   ({ props }) => {
     return [
       cTB('base-loading', `
-        stroke: currentColor;
         position: relative;
         line-height: 0;
         width: 1em;
@@ -29,6 +28,7 @@ export default c([
           iconSwitchTransition()
         ]),
         cB('base-loading-circular', `
+          stroke: currentColor;
           height: 100%;
           width: 100%;
           animation: n-base-loading-rotate 1.5s linear infinite;
