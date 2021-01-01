@@ -11,10 +11,9 @@
       [`n-card--action-segmented`]:
         segmented === true || (segmented && segmented.action),
       [`n-card--${size}-size`]: true,
-      'n-card--bordered': bordered,
-      [`n-${mergedTheme}-theme`]: mergedTheme
+      'n-card--bordered': bordered
     }"
-    :style="mergedStyle"
+    :style="cssVars"
   >
     <div v-if="$slots.cover" class="n-card-cover">
       <slot name="cover" />
@@ -51,18 +50,20 @@
 </template>
 
 <script>
-import { configurable, themeable, withCssr } from '../../_mixins'
+import { defineComponent, computed } from 'vue'
+import { useTheme } from '../../_mixins'
+import { createKey } from '../../_utils'
 import { NIcon } from '../../icon'
 import { CloseIcon } from '../../_base/icons'
-import styles from './styles'
+import { cardLight } from '../styles'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Card',
   components: {
     CloseIcon,
     NIcon
   },
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     title: {
       type: String,
@@ -97,11 +98,61 @@ export default {
       default: undefined
     }
   },
-  methods: {
-    handleCloseClick () {
-      const { onClose } = this
+  setup (props) {
+    const handleCloseClick = () => {
+      const { onClose } = props
       if (onClose) onClose()
     }
+    const themeRef = useTheme('Card', 'Card', style, cardLight, props)
+    return {
+      handleCloseClick,
+      cssVars: computed(() => {
+        const { size } = props
+        const {
+          self: {
+            color,
+            textColor,
+            titleTextColor,
+            titleFontWeight,
+            borderColor,
+            actionColor,
+            borderRadius,
+            closeColor,
+            closeColorHover,
+            closeColorPressed,
+            lineHeight,
+            [createKey('paddingTop', size)]: paddingTop,
+            [createKey('paddingBottom', size)]: paddingBottom,
+            [createKey('paddingLeft', size)]: paddingLeft,
+            [createKey('paddingRight', size)]: paddingRight,
+            [createKey('fontSize', size)]: fontSize,
+            [createKey('titleFontSize', size)]: titleFontSize
+          },
+          common: { cubicBezierEaseInOut }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--border-radius': borderRadius,
+          '--color': color,
+          '--text-color': textColor,
+          '--line-height': lineHeight,
+          '--action-color': actionColor,
+          '--title-text-color': titleTextColor,
+          '--title-font-weight': titleFontWeight,
+          '--close-color': closeColor,
+          '--close-color-hover': closeColorHover,
+          '--close-color-pressed': closeColorPressed,
+          '--border-color': borderColor,
+          // size
+          '--padding-top': paddingTop,
+          '--padding-right': paddingRight,
+          '--padding-bottom': paddingBottom,
+          '--padding-left': paddingLeft,
+          '--font-size': fontSize,
+          '--title-font-size': titleFontSize
+        }
+      })
+    }
   }
-}
+})
 </script>

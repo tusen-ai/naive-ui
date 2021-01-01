@@ -1,5 +1,4 @@
 import { commonDark } from './_styles/new-common'
-import { dividerDark } from './divider/styles'
 import { alertDark } from './alert/styles'
 import { affixDark } from './affix/styles'
 import { anchorDark } from './anchor/styles'
@@ -9,6 +8,8 @@ import { backTopDark } from './back-top/styles'
 import { badgeDark } from './badge/styles'
 import { breadcrumbDark } from './breadcrumb/styles'
 import { buttonDark } from './button/styles'
+import { cardDark } from './card/styles'
+import { dividerDark } from './divider/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -21,5 +22,6 @@ export const darkTheme = {
   Badge: badgeDark,
   Breadcrumb: breadcrumbDark,
   Button: buttonDark,
+  Card: cardDark,
   Divider: dividerDark
 }

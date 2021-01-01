@@ -1,26 +1,37 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseLight } from '../../_styles/base'
 import { iconLight } from '../../icon/styles'
 import commonVariables from './_common'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
-  theme: 'light',
-  name: 'Card',
-  peer: [baseLight, iconLight],
-  getLocalVars (vars) {
-    const { borderRadius, lineHeight, fontSize } = vars
+export default {
+  common: commonLight,
+  peers: [iconLight],
+  self (vars) {
+    const {
+      borderRadius,
+      lineHeight,
+      fontSize,
+      cardColor,
+      textColor2,
+      textColor1,
+      dividerColorOverlay,
+      actionColorOverlay,
+      fontWeightStrong,
+      closeColor,
+      closeColorHover,
+      closeColorPressed
+    } = vars
     return {
       ...commonVariables,
       lineHeight,
-      color: vars.cardColor,
-      textColor: vars.textColor2,
-      titleTextColor: vars.textColor1,
-      borderColor: vars.dividerColorOverlay,
-      actionColor: vars.actionColorOverlay,
-      titleFontWeight: vars.fontWeightStrong,
-      closeColor: vars.closeColor,
-      closeColorHover: vars.closeColorHover,
-      closeColorPressed: vars.closeColorPressed,
+      color: cardColor,
+      textColor: textColor2,
+      titleTextColor: textColor1,
+      borderColor: dividerColorOverlay,
+      actionColor: actionColorOverlay,
+      titleFontWeight: fontWeightStrong,
+      closeColor: closeColor,
+      closeColorHover: closeColorHover,
+      closeColorPressed: closeColorPressed,
       fontSizeSmall: fontSize,
       fontSizeMedium: fontSize,
       fontSizeLarge: fontSize,
@@ -28,4 +39,4 @@ export default create({
       borderRadius
     }
   }
-})
+}

@@ -1,0 +1,187 @@
+import { c, cB, cE, cM } from '../../../_utils/cssr'
+
+// vars:
+// --bezier
+// --border-radius
+// --color
+// --text-color
+// --line-height
+// --padding-top
+// --padding-right
+// --padding-bottom
+// --padding-left
+// --font-size
+// --action-color
+// --title-font-weight
+// --title-font-size
+// --title-text-color
+// --close-color
+// --close-color-hover
+// --close-color-pressed
+// --border-color
+export default cB(
+  'card', `
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    border-radius: var(--border-radius);
+    background-color: var(--color);
+    color: var(--text-color);
+    transition: 
+      color .3s var(--bezier),
+      background-color .3s var(--bezier),
+      border-color .3s var(--bezier);
+  `,
+  [
+    cM('content-segmented', [
+      c('>', [
+        cE('content', {
+          paddingTop: 'var(--padding-bottom)'
+        })
+      ])
+    ]),
+    cM('content-soft-segmented', [
+      c('>', [
+        cE('content', `
+          margin: 0 var(--padding-left);
+          padding: var(--padding-bottom) 0;
+        `)
+      ])
+    ]),
+    cM('footer-segmented', [
+      c('>', [
+        cE('footer', {
+          paddingTop: 'var(--padding-bottom)'
+        })
+      ])
+    ]),
+    cM('footer-soft-segmented', [
+      c('>', [
+        cE('footer', `
+          padding: var(--padding-bottom) 0;
+          margin: 0 var(--padding-left);
+        `)
+      ])
+    ]),
+    c('>', [
+      cB('card-header', {
+        padding: 'var(--padding-top) var(--padding-left) var(--padding-bottom) var(--padding-left)'
+      }, [
+        cE('main', {
+          fontSize: 'var(--title-font-size)'
+        }),
+        cE('extra', {
+          fontSize: 'var(--font-size)'
+        })
+      ]),
+      cE('content, footer', {
+        padding: '0 var(--padding-left) var(--padding-bottom) var(--padding-left)',
+        fontSize: 'var(--font-size)'
+      }, [
+        c('&:first-child', {
+          paddingTop: 'var(--padding-bottom)'
+        })
+      ]),
+      cE('action', `
+        background-color: var(--action-color);
+        padding: var(--padding-bottom) var(--padding-left);
+      `)
+    ]),
+    cB('card-cover', `
+      overflow: hidden;
+      width: 100%;
+      border-radius: var(--border-radius) var(--border-radius) 0 0;
+    `,
+    [
+      c('img', `
+        display: block;
+        width: 100%;
+      `)
+    ]),
+    cM('bordered', {
+      border: '1px solid var(--border-color)'
+    }),
+    cM('action-segmented', [
+      c('>', [
+        cE('action', [
+          c('&:not(:first-child)', {
+            borderTop: '1px solid var(--border-color)'
+          })
+        ])
+      ])
+    ]),
+    cM('content-segmented, content-soft-segmented', [
+      c('>', [
+        cE('content', {
+          transition: 'border-color 0.3s var(--bezier)'
+        }, [
+          c('&:not(:first-child)', {
+            borderTop: '1px solid var(--border-color)'
+          })
+        ])
+      ])
+    ]),
+    cM('footer-segmented, footer-soft-segmented', [
+      c('>', [
+        cE('footer', {
+          transition: 'border-color 0.3s var(--bezier)'
+        }, [
+          c('&:not(:first-child)', {
+            borderTop: '1px solid var(--border-color)'
+          })
+        ])
+      ])
+    ]),
+    c('>', [
+      cE('content', `
+        box-sizing: border-box;
+      `),
+      cE('footer', `
+        box-sizing: border-box;
+      `)
+    ]),
+    c('>', [
+      cB('card-header', `
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+      `, [
+        cE('main', `
+          font-weight: var(--title-font-weight);
+          font-size: 18px;
+          transition: color .3s var(--bezier);
+          flex: 1;
+          color: var(--title-text-color);
+        `),
+        cE('extra', `
+          font-weight: 400;
+          transition: color .3s var(--bezier);
+          color: var(--text-color);
+        `),
+        cE('close-mark', `
+          cursor: pointer;
+          transition: color .3s var(--bezier);
+          color: var(--close-color);
+        `, [
+          c('&:hover', {
+            color: 'var(--close-color-hover)'
+          }),
+          c('&:active', {
+            color: 'var(--close-color-pressed)'
+          })
+        ])
+      ]),
+      cE('action', `
+        box-sizing: border-box;
+        transition:
+          background-color .3s var(--bezier),
+          border-color .3s var(--bezier);
+        background-clip: padding-box;
+        background-color: var(--action-color);
+      `)
+    ])
+  ]
+)
