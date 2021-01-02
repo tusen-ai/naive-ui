@@ -40,14 +40,14 @@ function createRenderer (wrapCodeWithCard = true) {
           `MdRendererError: ${language} is not valid for code - ${code}`
         )
       }
-      const highlighted = hljs.highlight(language, code).value
+      const highlighted = hljs
+        .highlight(language, code)
+        .value.replace(/\n/g, '<br />')
       return `${
         wrapCodeWithCard ? '<n-card size="small" class="md-card">' : ''
-      }<n-config-consumer>
-  <template #="{ theme }">
-    <pre class="n-code" :class="'n-' + theme + '-theme'"><code v-pre>${highlighted}</code><n-code style="display: none;" /></pre>
-  </template>
-</n-config-consumer>${wrapCodeWithCard ? '</n-card>' : ''}`
+      }<n-code><code v-pre>${highlighted}</code></n-code>${
+        wrapCodeWithCard ? '</n-card>' : ''
+      }`
     },
     heading: (text, level) => {
       const id = text.replace(/ /g, '-')
@@ -61,7 +61,9 @@ function createRenderer (wrapCodeWithCard = true) {
       return `<n-p>${text}</n-p>`
     },
     link (href, title, text) {
-      if (/^(http:|https:)/.test(href)) { return `<n-a href="${href}" target="_blank">${text}</n-a>` }
+      if (/^(http:|https:)/.test(href)) {
+        return `<n-a href="${href}" target="_blank">${text}</n-a>`
+      }
       return `<n-a to="${href}" >${text}</n-a>`
     },
     list (body, ordered, start) {

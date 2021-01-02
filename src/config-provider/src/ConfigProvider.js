@@ -31,6 +31,10 @@ export default {
       type: String,
       default: 'div'
     },
+    hljs: {
+      type: Object,
+      default: undefined
+    },
     theme: {
       type: String,
       default: undefined
@@ -84,10 +88,6 @@ export default {
           ? NConfigProvider?.mergedBordered
           : bordered
       }),
-      mergedTheme: useMemo(() => {
-        const { theme } = props
-        return theme === undefined ? NConfigProvider?.mergedTheme : theme
-      }),
       mergedNamespace: useMemo(() => {
         const { namespace } = props
         return namespace === undefined
@@ -112,6 +112,10 @@ export default {
           : unstableThemeOverrides
       }),
       // deprecated
+      mergedTheme: useMemo(() => {
+        const { theme } = props
+        return theme === undefined ? NConfigProvider?.mergedTheme : theme
+      }),
       mergedLanguage: useMemo(() => {
         const { language, lang } = props
         return language === undefined
@@ -135,12 +139,7 @@ export default {
       ? h(
         this.as || this.tag,
         {
-          class: [
-            'n-config-provider',
-            {
-              [`n-${this.theme}-theme`]: this.theme
-            }
-          ]
+          class: ['n-config-provider']
         },
         getSlot(this)
       )

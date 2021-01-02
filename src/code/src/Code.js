@@ -1,11 +1,21 @@
-import { h, nextTick } from 'vue'
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles/index.js'
+import {
+  defineComponent,
+  h,
+  nextTick,
+  toRef,
+  watch,
+  getCurrentInstance,
+  onMounted,
+  ref,
+  computed
+} from 'vue'
+import { useTheme, useConfig } from '../../_mixins'
 import { warn } from '../../_utils'
+import { codeLight } from '../styles'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Code',
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     language: {
       type: String,
@@ -24,67 +34,100 @@ export default {
       default: undefined
     }
   },
-  watch: {
-    language () {
-      nextTick(this.setCode)
-    },
-    code () {
-      nextTick(this.setCode)
-    }
-  },
-  created () {
-    if (__DEV__ && !this.hljs && !this.$naive.hljs) {
+  setup (props, { slots }) {
+    const vm = getCurrentInstance().proxy
+    const codeRef = ref(null)
+    const { NConfigProvider } = useConfig(props)
+    if (__DEV__ && !props.hljs && !NConfigProvider.hljs && !vm.$naive.hljs) {
       warn('code', 'hljs is not set.')
     }
-  },
-  mounted () {
-    this.setCode()
-  },
-  methods: {
-    getHljs () {
-      return this.hljs || this.$naive.hljs
-    },
-    generateCodeHTML (language, code, trim) {
-      const languageValid = !!(language && this.getHljs().getLanguage(language))
+    const getHljs = () => {
+      return props.hljs || NConfigProvider.hljs || vm.$naive.hljs
+    }
+    const generateCodeHTML = (language, code, trim) => {
+      const hljs = getHljs()
+      const languageValid = !!(language && hljs.getLanguage(language))
       if (trim) code = code.trim()
       return {
         valid: languageValid,
-        content: this.getHljs().highlight(language, code).value
+        content: hljs.highlight(language, code).value
       }
-    },
-    setCode () {
-      const { code, language } = this
+    }
+    const setCode = () => {
+      if (slots.default) return
+      const { code, language } = props
       if (language) {
-        const { valid, content } = this.generateCodeHTML(
-          language,
-          code,
-          this.trim
-        )
+        const { valid, content } = generateCodeHTML(language, code, props.trim)
         if (valid) {
-          this.$refs.code.innerHTML = content
+          codeRef.value.innerHTML = content
           return
         }
       }
-      this.$refs.code.textContent = code
+      codeRef.value.textContent = code
+    }
+    onMounted(setCode)
+    watch(toRef(props, 'language'), () => {
+      nextTick(setCode)
+    })
+    watch(toRef(props, 'code'), () => {
+      nextTick(setCode)
+    })
+    const themeRef = useTheme('Code', 'Code', style, codeLight, props)
+    return {
+      codeRef,
+      cssVars: computed(() => {
+        const {
+          common: { cubicBezierEaseInOut, fontFamilyMono },
+          self: {
+            textColor,
+            fontSize,
+            fontWeightStrong,
+            // extracted from hljs atom-one-light.scss
+            'mono-3': $1,
+            'hue-1': $2,
+            'hue-2': $3,
+            'hue-3': $4,
+            'hue-4': $5,
+            'hue-5': $6,
+            'hue-5-2': $7,
+            'hue-6': $8,
+            'hue-6-2': $9
+          }
+        } = themeRef.value
+        return {
+          '--font-size': fontSize,
+          '--font-family': fontFamilyMono,
+          '--font-weight-strong': fontWeightStrong,
+          '--bezier': cubicBezierEaseInOut,
+          '--text-color': textColor,
+          '--mono-3': $1,
+          '--hue-1': $2,
+          '--hue-2': $3,
+          '--hue-3': $4,
+          '--hue-4': $5,
+          '--hue-5': $6,
+          '--hue-5-2': $7,
+          '--hue-6': $8,
+          '--hue-6-2': $9
+        }
+      })
     }
   },
   render () {
-    const { mergedTheme } = this
+    const { default: defaultSlot } = this.$slots
     return h(
       'pre',
       {
-        class: [
-          'n-code',
-          {
-            [`n-${mergedTheme}-theme`]: mergedTheme
-          }
-        ]
+        class: 'n-code',
+        style: this.cssVars
       },
       [
-        h('code', {
-          ref: 'code'
-        })
+        defaultSlot
+          ? defaultSlot()
+          : h('code', {
+            ref: 'codeRef'
+          })
       ]
     )
   }
-}
+})

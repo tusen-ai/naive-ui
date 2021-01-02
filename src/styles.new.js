@@ -12,6 +12,7 @@ import { cardDark } from './card/styles'
 import { dividerDark } from './divider/styles'
 import { cascaderDark } from './cascader/styles'
 import { checkboxDark } from './checkbox/styles'
+import { codeDark } from './code/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -27,5 +28,6 @@ export const darkTheme = {
   Card: cardDark,
   Cascader: cascaderDark,
   Checkbox: checkboxDark,
+  Code: codeDark,
   Divider: dividerDark
 }

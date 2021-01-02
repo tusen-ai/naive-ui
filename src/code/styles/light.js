@@ -1,122 +1,23 @@
-import create from '../../_styles/utils/create-component-base'
-import { c } from '../../_utils/cssr'
-import { baseLight } from '../../_styles/base'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
-  theme: 'light',
-  name: 'Code',
-  peer: [baseLight],
-  getLocalVars (vars) {
-    const { textColor2, fontSize } = vars
+export default {
+  common: commonLight,
+  self (vars) {
+    const { textColor2, fontSize, fontWeightStrong } = vars
     return {
       textColor: textColor2,
       fontSize,
-      highlightStyle: [
-        c(
-          `
-          .hljs-comment,
-          .hljs-quote
-        `,
-          {
-            raw: `
-            color: #a0a1a7;
-            font-style: italic;
-          `
-          }
-        ),
-        c(
-          `
-          .hljs-doctag,
-          .hljs-keyword,
-          .hljs-formula
-        `,
-          {
-            color: '#a626a4'
-          }
-        ),
-        c(
-          `
-          .hljs-section, 
-          .hljs-name,
-          .hljs-selector-tag,
-          .hljs-deletion,
-          .hljs-subst
-        `,
-          {
-            color: '#e45649'
-          }
-        ),
-        c('.hljs-literal', {
-          color: '#0184bb'
-        }),
-        c(
-          `
-          .hljs-string,
-          .hljs-regexp,
-          .hljs-addition,
-          .hljs-attribute,
-          .hljs-meta-string
-        `,
-          {
-            color: '#50a14f'
-          }
-        ),
-        c(
-          `
-          .hljs-built_in,
-          .hljs-class .hljs-title
-        `,
-          {
-            color: '#c18401'
-          }
-        ),
-        c(
-          `
-          .hljs-attr,
-          .hljs-variable,
-          .hljs-template-variable,
-          .hljs-type,
-          .hljs-selector-class,
-          .hljs-selector-attr,
-          .hljs-selector-pseudo,
-          .hljs-number
-        `,
-          {
-            color: '#986801'
-          }
-        ),
-        c(
-          `
-          .hljs-symbol,
-          .hljs-bullet,
-          .hljs-link,
-          .hljs-meta,
-          .hljs-selector-id,
-          .hljs-title
-        `,
-          {
-            color: '#4078f2'
-          }
-        ),
-        c('.hljs-emphasis', {
-          fontStyle: 'italic'
-        }),
-        c('.hljs-strong', {
-          fontWeight: vars.fontWeightStrong
-        }),
-        c('.hljs-link', {
-          textDecoration: 'underline'
-        }),
-        c(
-          `
-          .hljs-function .hljs-params,
-          .hljs-function .hljs-params .hljs-typing
-        `,
-          {
-            color: '#383a42'
-          }
-        )
-      ]
+      fontWeightStrong,
+      // extracted from hljs atom-one-light.scss
+      'mono-3': '#a0a1a7',
+      'hue-1': '#0184bb',
+      'hue-2': '#4078f2',
+      'hue-3': '#a626a4',
+      'hue-4': '#50a14f',
+      'hue-5': '#e45649',
+      'hue-5-2': '#c91243',
+      'hue-6': '#986801',
+      'hue-6-2': '#c18401'
     }
   }
-})
+}

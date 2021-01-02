@@ -64,6 +64,10 @@ function cRB (selector, ...rest) {
   return c(`${prefix}${selector}`, ...rest)
 }
 
+function withPrefix (selector) {
+  return `${prefix}${selector}`
+}
+
 export {
   c,
   cTB,
@@ -74,6 +78,7 @@ export {
   cNotM,
   insideFormItem,
   insideModal,
+  withPrefix,
   prefix,
   namespace,
   createKey,
