@@ -1,12 +1,10 @@
-import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
-import { baseDark } from '../../_styles/base'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
-  theme: 'dark',
+export default {
   name: 'Descriptions',
-  peer: [baseDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  self (vars) {
     const {
       tableHeaderColorOverlay,
       textColor1Overlay,
@@ -27,14 +25,14 @@ export default create({
       fontSizeSmall,
       fontSizeMedium,
       fontSizeLarge,
-      headerColor: tableHeaderColorOverlay,
-      headerTextColor: textColor1Overlay,
-      headerFontWeight: fontWeightStrong,
-      contentTextColor: textColor2Overlay,
-      contentColor: cardColor,
-      contentColorModal: modalColor,
+      thColor: tableHeaderColorOverlay,
+      thTextColor: textColor1Overlay,
+      thFontWeight: fontWeightStrong,
+      tdTextColor: textColor2Overlay,
+      tdColor: cardColor,
+      tdColorModal: modalColor,
       borderColor: dividerColorOverlay,
       borderRadius: borderRadius
     }
   }
-})
+}

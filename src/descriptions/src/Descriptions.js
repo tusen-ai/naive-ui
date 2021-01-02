@@ -1,13 +1,13 @@
-import { h } from 'vue'
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles'
-import { warn, getSlot, getVNodeChildren } from '../../_utils'
+import { computed, h, defineComponent } from 'vue'
+import { useTheme } from '../../_mixins'
+import style from './styles/index.cssr.js'
+import { warn, getSlot, getVNodeChildren, createKey } from '../../_utils'
 import { useCompitable } from 'vooks'
 import { isDescriptionsItem } from './utils'
+import { descriptionsLight } from '../styles'
 
-export default {
+export default defineComponent({
   name: 'Descriptions',
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     title: {
       type: String,
@@ -45,7 +45,55 @@ export default {
     }
   },
   setup (props) {
+    const themeRef = useTheme(
+      'Description',
+      'Description',
+      style,
+      descriptionsLight,
+      props
+    )
     return {
+      cssVars: computed(() => {
+        const { size, bordered } = props
+        const {
+          common: { cubicBezierEaseInOut },
+          self: {
+            thColor,
+            thTextColor,
+            thFontWeight,
+            tdTextColor,
+            tdColor,
+            tdColorModal,
+            borderColor,
+            borderRadius,
+            lineHeight,
+            [createKey('fontSize', size)]: fontSize,
+            [createKey(
+              bordered ? 'thPaddingBordered' : 'thPadding',
+              size
+            )]: thPadding,
+            [createKey(
+              bordered ? 'tdPaddingBordered' : 'tdPadding',
+              size
+            )]: tdPadding
+          }
+        } = themeRef.value
+        return {
+          '--th-padding': thPadding,
+          '--td-padding': tdPadding,
+          '--font-size': fontSize,
+          '--bezier': cubicBezierEaseInOut,
+          '--th-font-weight': thFontWeight,
+          '--line-height': lineHeight,
+          '--th-text-color': thTextColor,
+          '--td-text-color': tdTextColor,
+          '--th-color': thColor,
+          '--td-color': tdColor,
+          '--td-color-modal': tdColorModal,
+          '--border-radius': borderRadius,
+          '--border-color': borderColor
+        }
+      }),
       compitableColumn: useCompitable(props, ['columns', 'column'])
     }
   },
@@ -54,13 +102,12 @@ export default {
     const memorizedLength = children.length
     const {
       compitableColumn,
-      mergedTheme,
       labelPlacement,
       labelAlign,
       size,
       bordered,
       title,
-      mergedStyle
+      cssVars
     } = this
     children = children.filter((child) => isDescriptionsItem(child))
     if (__DEV__ && memorizedLength !== children.length) {
@@ -190,14 +237,13 @@ export default {
     return h(
       'div',
       {
-        style: mergedStyle,
+        style: cssVars,
         class: [
           'n-descriptions',
           `n-descriptions--${labelPlacement}-label-placement`,
           `n-descriptions--${labelAlign}-label-align`,
           `n-descriptions--${size}-size`,
           {
-            [`n-${mergedTheme}-theme`]: mergedTheme,
             'n-descriptions--bordered': bordered
           }
         ]
@@ -230,4 +276,4 @@ export default {
       ]
     )
   }
-}
+})

@@ -16,6 +16,7 @@ import { codeDark } from './code/styles'
 import { collapseDark } from './collapse/styles'
 import { dataTableDark } from './data-table/styles'
 import { datePickerDark } from './date-picker/styles'
+import { descriptionsDark } from './descriptions/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -35,5 +36,6 @@ export const darkTheme = {
   Collapse: collapseDark,
   DataTable: dataTableDark,
   DatePicker: datePickerDark,
+  Descriptions: descriptionsDark,
   Divider: dividerDark
 }

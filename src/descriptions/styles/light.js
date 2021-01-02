@@ -1,13 +1,11 @@
-import create from '../../_styles/utils/create-component-base'
-import commonVariables from './_common'
-import { baseLight } from '../../_styles/base'
 import { composite } from 'seemly'
+import commonVariables from './_common'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
-  theme: 'light',
+export default {
   name: 'Descriptions',
-  peer: [baseLight],
-  getLocalVars (vars) {
+  common: commonLight,
+  self (vars) {
     const {
       tableHeaderColorOverlay,
       textColor1Overlay,
@@ -28,14 +26,14 @@ export default create({
       fontSizeSmall,
       fontSizeMedium,
       fontSizeLarge,
-      headerColor: composite(cardColor, tableHeaderColorOverlay),
-      headerTextColor: textColor1Overlay,
-      headerFontWeight: fontWeightStrong,
-      contentTextColor: textColor2Overlay,
-      contentColor: cardColor,
-      contentColorModal: modalColor,
+      thColor: composite(cardColor, tableHeaderColorOverlay),
+      thTextColor: textColor1Overlay,
+      thFontWeight: fontWeightStrong,
+      tdTextColor: textColor2Overlay,
+      tdColor: cardColor,
+      tdColorModal: modalColor,
       borderColor: dividerColorOverlay,
       borderRadius: borderRadius
     }
   }
-})
+}

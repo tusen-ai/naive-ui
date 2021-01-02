@@ -1,6 +1,7 @@
+import { defineComponent } from 'vue'
 import { DESCRIPTION_ITEM_FLAG } from './utils'
 
-export default {
+export default defineComponent({
   name: 'DescriptionsItem',
   [DESCRIPTION_ITEM_FLAG]: true,
   props: {
@@ -16,4 +17,4 @@ export default {
   render () {
     return null
   }
-}
+})
