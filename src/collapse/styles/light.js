@@ -1,14 +1,14 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseLight } from '../../_styles/base'
 import { iconLight } from '../../icon/styles'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
-  theme: 'light',
-  name: 'Collapse',
-  peer: [baseLight, iconLight],
-  getLocalVars (vars) {
+export default {
+  common: commonLight,
+  peers: {
+    Icon: iconLight
+  },
+  self (vars) {
     const {
-      fontWeightStrong,
+      fontWeight,
       textColor1,
       textColor2,
       dividerColorOverlay,
@@ -16,7 +16,7 @@ export default create({
     } = vars
     return {
       titleFontSize: fontSize,
-      titleFontWeight: fontWeightStrong,
+      titleFontWeight: fontWeight,
       dividerColor: dividerColorOverlay,
       titleTextColor: textColor1,
       fontSize: fontSize,
@@ -24,4 +24,4 @@ export default create({
       arrowColor: textColor2
     }
   }
-})
+}

@@ -1,8 +1,9 @@
-import { h, markRaw } from 'vue'
+import { computed, h, markRaw } from 'vue'
 import { intersection } from 'lodash-es'
-import { configurable, themeable, withCssr } from '../../_mixins'
+import { useTheme } from '../../_mixins'
 import { call, warn } from '../../_utils'
-import styles from './styles/index.js'
+import { collapseLight } from '../styles'
+import style from './styles/index.cssr.js'
 
 export default {
   name: 'Collapse',
@@ -11,7 +12,6 @@ export default {
       NCollapse: this
     }
   },
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     expandedNames: {
       type: [Array, String],
@@ -55,9 +55,40 @@ export default {
       default: undefined
     }
   },
-  setup () {
+  setup (props) {
+    const themeRef = useTheme(
+      'Collapse',
+      'Collapse',
+      style,
+      collapseLight,
+      props
+    )
     return {
-      collectedItemNames: markRaw([])
+      collectedItemNames: markRaw([]),
+      cssVars: computed(() => {
+        const {
+          common: { cubicBezierEaseInOut },
+          self: {
+            titleFontWeight,
+            dividerColor,
+            titleTextColor,
+            textColor,
+            arrowColor,
+            fontSize,
+            titleFontSize
+          }
+        } = themeRef.value
+        return {
+          '--font-size': fontSize,
+          '--bezier': cubicBezierEaseInOut,
+          '--text-color': textColor,
+          '--divider-color': dividerColor,
+          '--title-font-size': titleFontSize,
+          '--title-text-color': titleTextColor,
+          '--title-font-weight': titleFontWeight,
+          '--arrow-color': arrowColor
+        }
+      })
     }
   },
   methods: {
@@ -108,20 +139,13 @@ export default {
     }
   },
   render () {
-    const { mergedTheme } = this
     return h(
       'div',
       {
-        class: [
-          'n-collapse',
-          {
-            [`n-${mergedTheme}-theme`]: mergedTheme
-          }
-        ]
+        class: 'n-collapse',
+        style: this.cssVars
       },
-      {
-        ...this.$slots
-      }
+      this.$slots
     )
   }
 }

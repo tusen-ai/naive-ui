@@ -13,6 +13,7 @@ import { dividerDark } from './divider/styles'
 import { cascaderDark } from './cascader/styles'
 import { checkboxDark } from './checkbox/styles'
 import { codeDark } from './code/styles'
+import { collapseDark } from './collapse/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -29,5 +30,6 @@ export const darkTheme = {
   Cascader: cascaderDark,
   Checkbox: checkboxDark,
   Code: codeDark,
+  Collapse: collapseDark,
   Divider: dividerDark
 }
