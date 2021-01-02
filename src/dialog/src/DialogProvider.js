@@ -1,17 +1,11 @@
-import { Fragment, ref, h, reactive } from 'vue'
+import { defineComponent, Fragment, ref, h, reactive } from 'vue'
 import { createId } from 'seemly'
 import { omit } from '../../_utils'
 import DialogEnvironment from './DialogEnvironment.vue'
 import { useClicked, useClickPosition } from 'vooks'
 
-export default {
+export default defineComponent({
   name: 'DialogProvider',
-  props: {
-    to: {
-      type: [String, Object],
-      default: undefined
-    }
-  },
   provide () {
     return {
       dialog: {
@@ -21,6 +15,12 @@ export default {
         error: this.error,
         info: this.info
       }
+    }
+  },
+  props: {
+    to: {
+      type: [String, Object],
+      default: undefined
     }
   },
   setup () {
@@ -75,4 +75,4 @@ export default {
       this.$slots.default()
     ])
   }
-}
+})

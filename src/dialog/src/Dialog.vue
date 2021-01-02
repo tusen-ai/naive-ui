@@ -2,12 +2,11 @@
   <div
     class="n-dialog"
     :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme,
       'n-dialog--bordered': bordered,
       [`n-dialog--icon-${mergedIconPlacement}`]: true,
       [`n-dialog--${type}-type`]: type
     }"
-    :style="mergedStyle"
+    :style="cssVars"
   >
     <n-icon v-if="closable" class="n-dialog__close" @click="handleCloseClick">
       <close-icon />
@@ -46,7 +45,7 @@
       <slot name="action">
         <n-button
           v-if="negativeText"
-          :theme="theme"
+          :theme="'light'"
           ghost
           size="small"
           @click="handleNegativeClick"
@@ -54,7 +53,7 @@
           <render :render="negativeText" />
         </n-button>
         <n-button
-          :theme="theme"
+          :theme="'light'"
           :disabled="loading === true"
           :loading="loading"
           size="small"
@@ -69,8 +68,9 @@
 </template>
 
 <script>
-import { configurable, themeable, withCssr } from '../../_mixins'
-import { render } from '../../_utils'
+import { defineComponent, computed } from 'vue'
+import { useTheme } from '../../_mixins'
+import { render, createKey } from '../../_utils'
 import { NIcon } from '../../icon'
 import { NButton } from '../../button'
 import {
@@ -80,9 +80,10 @@ import {
   WarningIcon,
   ErrorIcon
 } from '../../_base/icons'
-import styles from './styles/index.js'
+import { dialogLight } from '../styles'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Dialog',
   alias: [
     'NimbusConfirmCard', // deprecated
@@ -98,7 +99,6 @@ export default {
     InfoIcon,
     render
   },
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     icon: {
       type: Function,
@@ -157,6 +157,66 @@ export default {
       default: undefined
     }
   },
+  setup (props) {
+    const themeRef = useTheme('Dialog', 'Dialog', style, dialogLight, props)
+    return {
+      cssVars: computed(() => {
+        const { type, iconPlacement } = props
+        const {
+          common: { cubicBezierEaseInOut },
+          self: {
+            fontSize,
+            lineHeight,
+            border,
+            titleTextColor,
+            textColor,
+            color,
+            closeColor,
+            closeColorHover,
+            closeColorPressed,
+            borderRadius,
+            titleFontWeight,
+            titleFontSize,
+            padding,
+            iconSize,
+            actionSpace,
+            contentMargin,
+            closeSize,
+            [iconPlacement === 'top'
+              ? 'iconMarginIconTop'
+              : 'iconMargin']: iconMargin,
+            [iconPlacement === 'top'
+              ? 'closeMarginIconTop'
+              : 'closeMargin']: closeMargin,
+            [createKey('iconColor', type)]: iconColor
+          }
+        } = themeRef.value
+        return {
+          '--font-size': fontSize,
+          '--icon-color': iconColor,
+          '--bezier': cubicBezierEaseInOut,
+          '--close-margin': closeMargin,
+          '--icon-margin': iconMargin,
+          '--icon-size': iconSize,
+          '--close-size': closeSize,
+          '--close-color': closeColor,
+          '--close-color-hover': closeColorHover,
+          '--close-color-pressed': closeColorPressed,
+          '--color': color,
+          '--text-color': textColor,
+          '--border-radius': borderRadius,
+          '--padding': padding,
+          '--line-height': lineHeight,
+          '--border': border,
+          '--content-margin': contentMargin,
+          '--title-font-size': titleFontSize,
+          '--title-font-weight': titleFontWeight,
+          '--title-text-color': titleTextColor,
+          '--action-space': actionSpace
+        }
+      })
+    }
+  },
   computed: {
     mergedIconPlacement () {
       return (
@@ -193,5 +253,5 @@ export default {
       if (onClose) onClose()
     }
   }
-}
+})
 </script>

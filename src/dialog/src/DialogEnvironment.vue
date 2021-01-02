@@ -28,10 +28,11 @@
 <script>
 // use absolute path to make sure no circular ref of style
 // this -> modal-index -> modal-style
+import { defineComponent } from 'vue'
 import NModal from '../../modal/src/Modal'
 import NDialog from './Dialog.vue'
 
-export default {
+export default defineComponent({
   name: 'DialogEnvironment',
   components: {
     NModal,
@@ -107,5 +108,5 @@ export default {
       this.show = false
     }
   }
-}
+})
 </script>

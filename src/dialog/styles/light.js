@@ -1,14 +1,16 @@
-import create from '../../_styles/utils/create-component-base'
 import commonVars from './_common'
-import { baseLight } from '../../_styles/base'
 import { iconLight } from '../../icon/styles'
 import { buttonLight } from '../../button/styles'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
-  theme: 'light',
+export default {
   name: 'Dialog',
-  peer: [baseLight, iconLight, buttonLight],
-  getLocalVars (vars) {
+  common: commonLight,
+  peers: {
+    Icon: iconLight,
+    Button: buttonLight
+  },
+  self (vars) {
     const {
       textColor1,
       textColor2,
@@ -31,7 +33,7 @@ export default create({
       fontSize,
       lineHeight,
       border: `1px solid ${dividerColor}`,
-      headerTextColor: textColor1,
+      titleTextColor: textColor1,
       textColor: textColor2,
       color: cardColor,
       closeColor: closeColor,
@@ -42,7 +44,7 @@ export default create({
       iconColorWarning: warningColor,
       iconColorError: errorColor,
       borderRadius,
-      headerFontWeight: fontWeightStrong
+      titleFontWeight: fontWeightStrong
     }
   }
-})
+}

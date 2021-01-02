@@ -1,5 +1,5 @@
 export default {
-  headerFontSize: '18px',
+  titleFontSize: '18px',
   padding: '16px 28px 20px 28px',
   iconSize: '28px',
   actionSpace: '12px',

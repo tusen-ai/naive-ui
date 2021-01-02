@@ -1,14 +1,16 @@
-import create from '../../_styles/utils/create-component-base'
 import commonVars from './_common'
-import { baseDark } from '../../_styles/base'
 import { iconDark } from '../../icon/styles'
 import { buttonDark } from '../../button/styles'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
-  theme: 'dark',
+export default {
   name: 'Dialog',
-  peer: [baseDark, iconDark, buttonDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  peers: {
+    Icon: iconDark,
+    Button: buttonDark
+  },
+  self (vars) {
     const {
       textColor1Overlay,
       textColor2Overlay,
@@ -31,7 +33,7 @@ export default create({
       fontSize,
       lineHeight,
       border: `1px solid ${dividerColorOverlay}`,
-      headerTextColor: textColor1Overlay,
+      titleTextColor: textColor1Overlay,
       textColor: textColor2Overlay,
       color: modalColor,
       closeColor: closeColorOverlay,
@@ -42,7 +44,7 @@ export default create({
       iconColorWarning: warningColor,
       iconColorError: errorColor,
       borderRadius,
-      headerFontWeight: fontWeightStrong
+      titleFontWeight: fontWeightStrong
     }
   }
-})
+}

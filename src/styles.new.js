@@ -9,7 +9,6 @@ import { badgeDark } from './badge/styles'
 import { breadcrumbDark } from './breadcrumb/styles'
 import { buttonDark } from './button/styles'
 import { cardDark } from './card/styles'
-import { dividerDark } from './divider/styles'
 import { cascaderDark } from './cascader/styles'
 import { checkboxDark } from './checkbox/styles'
 import { codeDark } from './code/styles'
@@ -17,6 +16,8 @@ import { collapseDark } from './collapse/styles'
 import { dataTableDark } from './data-table/styles'
 import { datePickerDark } from './date-picker/styles'
 import { descriptionsDark } from './descriptions/styles'
+import { dialogDark } from './dialog/styles'
+import { dividerDark } from './divider/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -37,5 +38,6 @@ export const darkTheme = {
   DataTable: dataTableDark,
   DatePicker: datePickerDark,
   Descriptions: descriptionsDark,
+  Dialog: dialogDark,
   Divider: dividerDark
 }
