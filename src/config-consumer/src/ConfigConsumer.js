@@ -1,35 +1,39 @@
-import { configurable, themeable } from '../../_mixins'
-import styleScheme from '../../_deprecated/style-scheme'
+import { defineComponent, inject, toRef, watch } from 'vue'
+import useLegacy from './use-legacy'
 
-export default {
+export default defineComponent({
   name: 'ConfigConsumer',
   props: {
-    onThemeChange: {
-      type: Function,
-      default: undefined
-    },
     onNamespaceChange: {
       type: Function,
       default: undefined
     },
+    /**
+     * @deprecated
+     */
+    onThemeChange: {
+      type: Function,
+      default: undefined
+    },
+    /**
+     * @deprecated
+     */
     onLanguageChange: {
       type: Function,
       default: undefined
     }
   },
-  mixins: [configurable, themeable],
-  watch: {
-    mergedTheme (value, oldValue) {
-      const { onThemeChange } = this
-      if (onThemeChange) onThemeChange(value, oldValue)
-    },
-    'NConfigProvider.mergedNamespace' (value, oldValue) {
-      const { onNamespaceChange } = this
-      if (onNamespaceChange) onNamespaceChange(value, oldValue)
-    },
-    'NConfigProvider.mergedLanguage' (value, oldValue) {
-      const { onLanguageChange } = this
-      if (onLanguageChange) onLanguageChange(value, oldValue)
+  setup (props) {
+    const NConfigProvider = inject('NConfigProvider', null)
+    if (NConfigProvider) {
+      watch(toRef(NConfigProvider, 'mergedNamespace'), (value, oldValue) => {
+        const { onNamespaceChange } = props
+        if (onNamespaceChange) onNamespaceChange(value, oldValue)
+      })
+    }
+    return {
+      NConfigProvider,
+      ...useLegacy(NConfigProvider, props)
     }
   },
   render () {
@@ -37,12 +41,13 @@ export default {
     const { NConfigProvider } = this
     return defaultSlot
       ? defaultSlot({
-        theme: this.mergedTheme,
-        language: NConfigProvider ? NConfigProvider.mergedLanguage : null,
         namespace: NConfigProvider ? NConfigProvider.mergedNamespace : null,
-        themeEnvironment: this.mergedThemeEnvironment,
-        styleScheme: styleScheme[this.mergedTheme]
+        // deprecated
+        theme: this.legacyTheme,
+        language: this.legacyLanguage,
+        themeEnvironment: this.legacyThemeEnvironment,
+        styleScheme: this.legacyStyleScheme
       })
       : []
   }
-}
+})
