@@ -6,20 +6,20 @@
       :class="{
         [namespace]: namespace
       }"
+      :style="cssVars"
     >
       <transition name="n-fade-in-transition" :appear="isMounted">
         <div v-if="show" class="n-drawer-mask" @click="handleMaskClick" />
       </transition>
       <n-drawer-body-wrapper
         v-bind="$attrs"
-        :class="[$attrs.class, drawerClass]"
-        :style="[mergedBodyStyle, $attrs.style]"
+        :class="drawerClass"
+        :style="mergedBodyStyle"
         :placement="placement"
         :scrollbar-props="scrollbarProps"
         :show="show"
         :display-directive="displayDirective"
         :native-scrollbar="nativeScrollbar"
-        :theme="mergedTheme"
       >
         <slot />
       </n-drawer-body-wrapper>
@@ -28,15 +28,17 @@
 </template>
 
 <script>
+import { defineComponent, computed } from 'vue'
 import { VLazyTeleport } from 'vueuc'
 import { zindexable } from 'vdirs'
 import { useIsMounted } from 'vooks'
-import { configurable, themeable, withCssr } from '../../_mixins'
+import { useTheme, useConfig } from '../../_mixins'
 import { warn, formatLength } from '../../_utils'
+import { drawerLight } from '../styles'
 import NDrawerBodyWrapper from './DrawerBodyWrapper.vue'
-import styles from './styles/index'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Drawer',
   components: {
     VLazyTeleport,
@@ -45,7 +47,6 @@ export default {
   directives: {
     zindexable
   },
-  mixins: [configurable, themeable, withCssr(styles)],
   provide () {
     return {
       NDrawer: this,
@@ -149,7 +150,28 @@ export default {
     }
   },
   setup (props) {
+    const themeRef = useTheme('Drawer', 'Drawer', style, drawerLight, props)
     return {
+      ...useConfig(props),
+      cssVars: computed(() => {
+        const {
+          common: {
+            cubicBezierEaseInOut,
+            cubicBezierEaseIn,
+            cubicBezierEaseOut
+          },
+          self: { color, textColor, boxShadow, lineHeight }
+        } = themeRef.value
+        return {
+          '--line-height': lineHeight,
+          '--color': color,
+          '--text-color': textColor,
+          '--box-shadow': boxShadow,
+          '--bezier': cubicBezierEaseInOut,
+          '--bezier-out': cubicBezierEaseOut,
+          '--bezier-in': cubicBezierEaseIn
+        }
+      }),
       isMounted: useIsMounted()
     }
   },
@@ -186,5 +208,5 @@ export default {
       }
     }
   }
-}
+})
 </script>

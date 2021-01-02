@@ -1,15 +1,18 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseLight } from '../../_styles/base'
+import { commonLight } from '../../_styles/new-common'
+import { scrollbarLight } from '../../scrollbar/styles'
 
-export default create({
-  theme: 'light',
+export default {
   name: 'Drawer',
-  peer: [baseLight],
-  getLocalVars (vars) {
+  common: commonLight,
+  peers: {
+    Scrollbar: scrollbarLight
+  },
+  self (vars) {
+    const { modalColor, textColor2Overlay, boxShadow3 } = vars
     return {
-      color: vars.modalColor,
-      textColor: vars.textColor2Overlay,
-      boxShadow: vars.boxShadow3
+      color: modalColor,
+      textColor: textColor2Overlay,
+      boxShadow: boxShadow3
     }
   }
-})
+}

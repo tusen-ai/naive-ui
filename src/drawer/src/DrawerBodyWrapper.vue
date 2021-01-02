@@ -18,8 +18,7 @@
           $attrs.class,
           `n-drawer--${placement}-placement`,
           {
-            [`n-drawer--native-scrollbar`]: nativeScrollbar,
-            [`n-${theme}-theme`]: theme
+            [`n-drawer--native-scrollbar`]: nativeScrollbar
           }
         ]"
       >
@@ -30,6 +29,7 @@
           v-else
           v-bind="scrollbarProps"
           content-class="n-drawer-scroll-content"
+          :theme="'light'"
         >
           <slot />
         </n-scrollbar>
@@ -39,10 +39,10 @@
 </template>
 
 <script>
-import { ref, computed, watchEffect } from 'vue'
+import { defineComponent, ref, computed, watchEffect } from 'vue'
 import { NScrollbar } from '../../scrollbar'
 
-export default {
+export default defineComponent({
   name: 'NDrawerContent',
   components: {
     NScrollbar
@@ -60,10 +60,6 @@ export default {
   },
   inheritAttrs: false,
   props: {
-    theme: {
-      type: String,
-      default: undefined
-    },
     show: {
       type: Boolean,
       default: undefined
@@ -108,5 +104,5 @@ export default {
       this.displayed = false
     }
   }
-}
+})
 </script>

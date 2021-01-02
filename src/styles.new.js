@@ -18,6 +18,7 @@ import { datePickerDark } from './date-picker/styles'
 import { descriptionsDark } from './descriptions/styles'
 import { dialogDark } from './dialog/styles'
 import { dividerDark } from './divider/styles'
+import { drawerDark } from './drawer/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -39,5 +40,6 @@ export const darkTheme = {
   DatePicker: datePickerDark,
   Descriptions: descriptionsDark,
   Dialog: dialogDark,
-  Divider: dividerDark
+  Divider: dividerDark,
+  Drawer: drawerDark
 }
