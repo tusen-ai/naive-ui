@@ -2,14 +2,14 @@
   <div
     class="n-data-table"
     :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme,
       'n-data-table--bordered': bordered,
       'n-data-table--single-line': singleLine,
       'n-data-table--single-column': singleColumn,
       [`n-data-table--${size}-size`]: true
     }"
+    :style="cssVars"
   >
-    <n-spin :show="loading" :theme="mergedTheme">
+    <n-spin :show="loading" :theme="'light'">
       <div class="n-data-table-wrapper">
         <base-table
           ref="mainTableRef"
@@ -30,13 +30,13 @@
               'n-data-table-empty--hide': loading
             }"
           >
-            <n-empty :theme="mergedTheme" />
+            <n-empty :theme="'light'" />
           </div>
         </base-table>
       </div>
       <div v-if="pagination" class="n-data-table__pagination">
         <n-pagination
-          :theme="mergedTheme"
+          :theme="'light'"
           :page="mergedPagination.page"
           :page-count="mergedPagination.pageCount"
           :page-size="mergedPagination.pageSize"
@@ -54,16 +54,17 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { nextFrame } from 'seemly'
-import { configurable, themeable, withCssr, locale } from '../../_mixins'
-import { setCheckStatusOfRow, createRowKey } from './utils'
+import { isPlainObject } from 'lodash-es'
+import { locale, useTheme } from '../../_mixins'
 import BaseTable from './BaseTable.vue'
 import { NEmpty } from '../../empty'
 import { NPagination } from '../../pagination'
-import { isPlainObject } from 'lodash-es'
-import styles from './styles'
-import { warn, call, formatLength } from '../../_utils'
+import { warn, call, formatLength, createKey } from '../../_utils'
+import { dataTableLight } from '../styles'
+import { setCheckStatusOfRow, createRowKey } from './utils'
+import style from './styles/index.cssr.js'
 
 function createShallowClonedObject (object) {
   if (!object) return object
@@ -124,7 +125,7 @@ export default {
     NEmpty,
     NPagination
   },
-  mixins: [configurable, themeable, withCssr(styles), locale('DataTable')],
+  mixins: [locale('DataTable')],
   provide () {
     return {
       NDataTable: this
@@ -292,9 +293,71 @@ export default {
       default: undefined
     }
   },
-  setup () {
+  setup (props) {
+    const themeRef = useTheme(
+      'DataTable',
+      'DataTable',
+      style,
+      dataTableLight,
+      props
+    )
     return {
-      mainTableRef: ref(null)
+      mainTableRef: ref(null),
+      cssVars: computed(() => {
+        const { size } = props
+        const {
+          common: { cubicBezierEaseInOut },
+          self: {
+            borderColor,
+            tdColorHover,
+            thColor,
+            thColorHover,
+            tdColor,
+            tdTextColor,
+            thTextColor,
+            thFontWeight,
+            thButtonColorHover,
+            thIconColor,
+            thIconColorActive,
+            filterSize,
+            borderRadius,
+            lineHeight,
+            tdColorModal,
+            thColorModal,
+            borderColorModal,
+            thColorHoverModal,
+            tdColorHoverModal,
+            [createKey('fontSize', size)]: fontSize,
+            [createKey('thPadding', size)]: thPadding,
+            [createKey('tdPadding', size)]: tdPadding
+          }
+        } = themeRef.value
+        return {
+          '--font-size': fontSize,
+          '--th-padding': thPadding,
+          '--td-padding': tdPadding,
+          '--bezier': cubicBezierEaseInOut,
+          '--border-radius': borderRadius,
+          '--line-height': lineHeight,
+          '--border-color': borderColor,
+          '--border-color-modal': borderColorModal,
+          '--th-color': thColor,
+          '--th-color-hover': thColorHover,
+          '--th-color-modal': thColorModal,
+          '--th-color-hover-modal': thColorHoverModal,
+          '--td-color': tdColor,
+          '--td-color-hover': tdColorHover,
+          '--td-color-modal': tdColorModal,
+          '--td-color-hover-modal': tdColorHoverModal,
+          '--th-text-color': thTextColor,
+          '--td-text-color': tdTextColor,
+          '--th-font-weight': thFontWeight,
+          '--th-button-color-hover': thButtonColorHover,
+          '--th-icon-color': thIconColor,
+          '--th-icon-color-active': thIconColorActive,
+          '--filter-size': filterSize
+        }
+      })
     }
   },
   data () {

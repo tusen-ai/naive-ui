@@ -7,7 +7,7 @@
     >
       <n-checkbox-group
         v-if="multiple"
-        :theme="theme"
+        :theme="'light'"
         :value="cachedValue"
         class="n-data-table-filter-menu__group"
         @update:value="handleChange"
@@ -22,7 +22,7 @@
       </n-checkbox-group>
       <n-radio-group
         v-else
-        :theme="theme"
+        :theme="'light'"
         :name="radioGroupName"
         class="n-data-table-filter-menu__group"
         :value="radioGroupValue"
@@ -37,13 +37,13 @@
         </n-radio>
       </n-radio-group>
     </n-scrollbar>
-    <n-divider :theme="theme" />
+    <n-divider :theme="'light'" />
     <div class="n-data-table-filter-menu__action">
-      <n-button size="tiny" :theme="theme" @click="handleCancelClick">
+      <n-button size="tiny" :theme="'light'" @click="handleCancelClick">
         {{ NDataTable.locale.clear }}
       </n-button>
       <n-button
-        :theme="theme"
+        :theme="'light'"
         type="primary"
         size="tiny"
         @click="handleConfirmClick"
@@ -131,9 +131,6 @@ export default {
     }
   },
   computed: {
-    theme () {
-      return this.NDataTable.mergedTheme
-    },
     radioGroupValue () {
       const cachedValue = this.cachedValue
       if (this.multiple || shouldUseArrayInSingleMode(this.column)) {

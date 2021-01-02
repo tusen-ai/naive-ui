@@ -1,7 +1,5 @@
-import create from '../../_styles/utils/create-component-base'
 import { composite } from 'seemly'
 import commonVariables from './_common'
-import { baseDark } from '../../_styles/base'
 import { iconDark } from '../../icon/styles'
 import { buttonDark } from '../../button/styles'
 import { checkboxDark } from '../../checkbox/styles'
@@ -9,21 +7,20 @@ import { radioDark } from '../../radio/styles'
 import { paginationDark } from '../../pagination/styles'
 import { scrollbarDark } from '../../scrollbar/styles'
 import { dividerDark } from '../../divider/styles'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
-  theme: 'dark',
-  name: 'DataTable',
-  peer: [
-    baseDark,
-    iconDark,
-    buttonDark,
-    checkboxDark,
-    radioDark,
-    paginationDark,
-    scrollbarDark,
-    dividerDark
-  ],
-  getLocalVars (vars) {
+export default {
+  common: commonDark,
+  peers: {
+    Icon: iconDark,
+    Button: buttonDark,
+    Checkbox: checkboxDark,
+    Radio: radioDark,
+    Pagination: paginationDark,
+    Scrolllbar: scrollbarDark,
+    Divider: dividerDark
+  },
+  self (vars) {
     const {
       cardColor,
       modalColor,
@@ -60,8 +57,8 @@ export default create({
       thTextColor: textColor1Overlay,
       thFontWeight: fontWeightStrong,
       thButtonColorHover: tableColorHoverOverlay,
-      thButtonIconColor: iconColorOverlay,
-      thButtonIconColorActive: primaryColor,
+      thIconColor: iconColorOverlay,
+      thIconColorActive: primaryColor,
       // modal
       borderColorModal: composite(modalColor, dividerColorOverlay),
       tdColorHoverModal: composite(modalColor, tableColorHoverOverlay),
@@ -73,4 +70,4 @@ export default create({
       tdColorModal: modalColor
     }
   }
-})
+}

@@ -13,10 +13,6 @@ export default {
       // asc, desc
       type: [String, Boolean],
       default: undefined
-    },
-    theme: {
-      type: String,
-      default: undefined
     }
   },
   render () {

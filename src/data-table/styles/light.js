@@ -1,7 +1,5 @@
-import create from '../../_styles/utils/create-component-base'
 import { composite } from 'seemly'
 import commonVariables from './_common'
-import { baseLight } from '../../_styles/base'
 import { iconLight } from '../../icon/styles'
 import { buttonLight } from '../../button/styles'
 import { checkboxLight } from '../../checkbox/styles'
@@ -9,21 +7,20 @@ import { radioLight } from '../../radio/styles'
 import { paginationLight } from '../../pagination/styles'
 import { scrollbarLight } from '../../scrollbar/styles'
 import { dividerLight } from '../../divider/styles'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
-  theme: 'light',
-  name: 'DataTable',
-  peer: [
-    baseLight,
-    iconLight,
-    buttonLight,
-    checkboxLight,
-    radioLight,
-    paginationLight,
-    scrollbarLight,
-    dividerLight
-  ],
-  getLocalVars (vars) {
+export default {
+  common: commonLight,
+  peers: {
+    Icon: iconLight,
+    Button: buttonLight,
+    Checkbox: checkboxLight,
+    Radio: radioLight,
+    Pagination: paginationLight,
+    Scrollbar: scrollbarLight,
+    Divider: dividerLight
+  },
+  self (vars) {
     const {
       cardColor,
       modalColor,
@@ -60,8 +57,8 @@ export default create({
       thTextColor: textColor1,
       thFontWeight: fontWeightStrong,
       thButtonColorHover: tableColorHoverOverlay,
-      thButtonIconColor: iconColorOverlay,
-      thButtonIconColorActive: primaryColor,
+      thIconColor: iconColorOverlay,
+      thIconColorActive: primaryColor,
       // modal
       borderColorModal: composite(modalColor, dividerColorOverlay),
       tdColorHoverModal: composite(modalColor, tableColorHoverOverlay),
@@ -73,4 +70,4 @@ export default create({
       tdColorModal: modalColor
     }
   }
-})
+}

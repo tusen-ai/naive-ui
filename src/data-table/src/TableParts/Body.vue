@@ -2,7 +2,7 @@
   <n-scrollbar
     ref="scrollbarRef"
     class="n-data-table-base-table-body"
-    :theme="NDataTable.mergedTheme"
+    :theme="'light'"
     :content-style="{
       minWidth: formatedScrollX
     }"

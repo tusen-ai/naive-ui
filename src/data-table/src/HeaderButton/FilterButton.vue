@@ -2,7 +2,7 @@
   <n-popover
     v-model:show="showPopover"
     trigger="click"
-    :theme="NDataTable.mergedTheme"
+    :theme="'light'"
     :padded="false"
   >
     <template #trigger>
@@ -11,7 +11,7 @@
         :render="mergedRenderFilter"
         :active="active"
         :show="showPopover"
-        :theme="NDataTable.mergedTheme"
+        :theme="'light'"
         @click.stop
       />
       <div

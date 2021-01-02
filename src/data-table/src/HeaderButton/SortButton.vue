@@ -4,7 +4,7 @@
     :render="mergedRenderSorter"
     :order="mergedSortOrder"
     :active="active"
-    :theme="NDataTable.mergedTheme"
+    :theme="'light'"
   />
   <span
     v-else

@@ -1,11 +1,5 @@
 <template>
-  <div
-    :class="{
-      [`n-${theme}-theme`]: theme
-    }"
-    :style="headerStyle"
-    class="n-data-table-base-table-header"
-  >
+  <div :style="headerStyle" class="n-data-table-base-table-header">
     <table
       ref="body"
       class="n-data-table-table"
@@ -163,9 +157,6 @@ export default {
     },
     currentPage () {
       return (this.pagination && this.pagination.page) || null
-    },
-    theme () {
-      return this.NDataTable.mergedTheme
     },
     checkboxIndererminate () {
       return this.NDataTable.someRowsChecked

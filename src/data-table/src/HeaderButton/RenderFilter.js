@@ -12,10 +12,6 @@ export default {
     show: {
       type: Boolean,
       default: false
-    },
-    theme: {
-      type: String,
-      default: undefined
     }
   },
   render () {
