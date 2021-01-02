@@ -38,11 +38,16 @@ export default defineComponent({
     const vm = getCurrentInstance().proxy
     const codeRef = ref(null)
     const { NConfigProvider } = useConfig(props)
-    if (__DEV__ && !props.hljs && !NConfigProvider.hljs && !vm.$naive.hljs) {
+    if (
+      __DEV__ &&
+      !props.hljs &&
+      !NConfigProvider.mergedHljs &&
+      !vm.$naive.hljs
+    ) {
       warn('code', 'hljs is not set.')
     }
     const getHljs = () => {
-      return props.hljs || NConfigProvider.hljs || vm.$naive.hljs
+      return props.hljs || NConfigProvider.mergedHljs || vm.$naive.hljs
     }
     const generateCodeHTML = (language, code, trim) => {
       const hljs = getHljs()

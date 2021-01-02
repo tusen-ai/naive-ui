@@ -98,6 +98,10 @@ export default {
         const { locale } = props
         return locale === undefined ? NConfigProvider?.mergedLocale : locale
       }),
+      mergedHljs: computed(() => {
+        const { hljs } = props
+        return hljs === undefined ? NConfigProvider?.mergedHljs : hljs
+      }),
       // wip, unstable
       mergedUnstableTheme: computed(() => {
         const { unstableTheme } = props
