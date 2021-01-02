@@ -1,9 +1,9 @@
-import { h } from 'vue'
+import { defineComponent, h } from 'vue'
 import NDropdownOption from './DropdownOption'
 import NDropdownDivider from './DropdownDivider.vue'
 import { isSubmenuNode } from './utils'
 
-export default {
+export default defineComponent({
   name: 'DropdownMenu',
   inject: ['NDropdown'],
   provide () {
@@ -14,7 +14,7 @@ export default {
   props: {
     tmNodes: {
       type: Array,
-      require: true
+      required: true
     },
     parentKey: {
       type: [String, Number],
@@ -31,18 +31,12 @@ export default {
   },
   render () {
     const {
-      NDropdown: { size, mergedTheme }
+      NDropdown: { size }
     } = this
     return h(
       'div',
       {
-        class: [
-          'n-dropdown-menu',
-          `n-dropdown-menu--${size}-size`,
-          {
-            [`n-${mergedTheme}-theme`]: mergedTheme
-          }
-        ]
+        class: ['n-dropdown-menu', `n-dropdown-menu--${size}-size`]
       },
       [
         this.tmNodes.map((tmNode) => {
@@ -60,4 +54,4 @@ export default {
       ]
     )
   }
-}
+})

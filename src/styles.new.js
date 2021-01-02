@@ -19,6 +19,7 @@ import { descriptionsDark } from './descriptions/styles'
 import { dialogDark } from './dialog/styles'
 import { dividerDark } from './divider/styles'
 import { drawerDark } from './drawer/styles'
+import { dropdownDark } from './dropdown/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -41,5 +42,6 @@ export const darkTheme = {
   Descriptions: descriptionsDark,
   Dialog: dialogDark,
   Divider: dividerDark,
-  Drawer: drawerDark
+  Drawer: drawerDark,
+  Dropdown: dropdownDark
 }

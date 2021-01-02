@@ -1,4 +1,4 @@
-import { h, computed, inject, ref, Transition } from 'vue'
+import { h, computed, inject, ref, Transition, defineComponent } from 'vue'
 import { VBinder, VTarget, VFollower } from 'vueuc'
 import { render } from '../../_utils'
 import { ChevronRightIcon } from '../../_base/icons'
@@ -8,7 +8,7 @@ import { useDelayedTrue } from '../../_utils/composable'
 import NDropdownMenu from './DropdownMenu'
 import { isSubmenuNode } from './utils'
 
-export default {
+export default defineComponent({
   name: 'DropdownOption',
   provide () {
     return {
@@ -252,4 +252,4 @@ export default {
       ]
     )
   }
-}
+})

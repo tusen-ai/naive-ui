@@ -1,12 +1,10 @@
-import create from '../../_styles/utils/create-component-base'
+import { commonDark } from '../../_styles/new-common'
 import commonVariables from './_common'
-import { baseDark } from '../../_styles/base'
 
-export default create({
-  theme: 'dark',
+export default {
   name: 'Dropdown',
-  peer: [baseDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  self (vars) {
     const {
       textColor2,
       boxShadow2,
@@ -29,6 +27,7 @@ export default create({
       optionHeightMedium: heightMedium,
       optionHeightLarge: heightLarge,
       optionHeightHuge: heightHuge,
+      optionTextColor: textColor2,
       color: popoverColor,
       dividerColor: dividerColorOverlay,
       borderRadius,
@@ -42,4 +41,4 @@ export default create({
       fontSizeHuge
     }
   }
-})
+}

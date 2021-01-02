@@ -1,16 +1,24 @@
-import { h, computed, ref, toRef, getCurrentInstance } from 'vue'
+import {
+  defineComponent,
+  h,
+  computed,
+  ref,
+  toRef,
+  getCurrentInstance
+} from 'vue'
 import { TreeMate } from 'treemate'
-import { configurable, themeable, withCssr } from '../../_mixins'
-import { NPopover } from '../../popover'
-import NDropdownMenu from './DropdownMenu.js'
 import {
   useMergedState,
   useFalseUntilTruthy,
   useKeyboard,
   useMemo
 } from 'vooks'
-import { keep, call } from '../../_utils'
-import styles from './styles'
+import { useTheme } from '../../_mixins'
+import { NPopover } from '../../popover'
+import { keep, call, createKey } from '../../_utils'
+import { dropdownLight } from '../styles'
+import NDropdownMenu from './DropdownMenu.js'
+import style from './styles/index.cssr.js'
 
 const treemateOptions = {
   getKey (node) {
@@ -61,9 +69,8 @@ const dropdownProps = {
 
 const popoverPropKeys = Object.keys(NPopover.props)
 
-export default {
+export default defineComponent({
   name: 'Dropdown',
-  mixins: [configurable, themeable, withCssr(styles)],
   provide () {
     return {
       NDropdown: this
@@ -150,6 +157,13 @@ export default {
       keyboardEnabledRef
     )
 
+    const themeRef = useTheme(
+      'Dropdown',
+      'Dropdown',
+      style,
+      dropdownLight,
+      props
+    )
     return {
       // data
       tm: treemateRef,
@@ -167,7 +181,48 @@ export default {
       mergedShow: mergedShowRef,
       // methods
       getPath: getPathRef,
-      getFirstAvailableNode: getFirstAvailableNodeRef
+      getFirstAvailableNode: getFirstAvailableNodeRef,
+      cssVars: computed(() => {
+        const { size } = props
+        const {
+          common: { cubicBezierEaseInOut },
+          self: {
+            padding,
+            color,
+            dividerColor,
+            borderRadius,
+            boxShadow,
+            suffixColor,
+            prefixColor,
+            optionColorHover,
+            optionTextColor,
+            [createKey('optionIconSuffixWidth', size)]: optionIconSuffixWidth,
+            [createKey('optionSuffixWidth', size)]: optionSuffixWidth,
+            [createKey('optionIconPrefixWidth', size)]: optionIconPrefixWidth,
+            [createKey('optionPrefixWidth', size)]: optionPrefixWidth,
+            [createKey('fontSize', size)]: fontSize,
+            [createKey('optionHeight', size)]: optionHeight
+          }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--font-size': fontSize,
+          '--option-color-hover': optionColorHover,
+          '--divider-color': dividerColor,
+          '--color': color,
+          '--padding': padding,
+          '--border-radius': borderRadius,
+          '--box-shadow': boxShadow,
+          '--option-height': optionHeight,
+          '--option-prefix-width': optionPrefixWidth,
+          '--option-icon-prefix-width': optionIconPrefixWidth,
+          '--option-suffix-width': optionSuffixWidth,
+          '--option-icon-suffix-width': optionIconSuffixWidth,
+          '--option-text-color': optionTextColor,
+          '--prefix-color': prefixColor,
+          '--suffix-color': suffixColor
+        }
+      })
     }
   },
   watch: {
@@ -265,10 +320,11 @@ export default {
         trigger: this.$slots.default,
         default: () => {
           return h(NDropdownMenu, {
-            tmNodes: this.tmNodes
+            tmNodes: this.tmNodes,
+            style: this.cssVars
           })
         }
       }
     )
   }
-}
+})
