@@ -2,17 +2,14 @@
   <div
     tabindex="0"
     class="n-date-panel n-date-panel--datetimerange"
-    :class="{
-      [`n-${theme}-theme`]: theme
-    }"
     @click.capture="resetSelectingStatus"
     @keydown="handlePanelKeyDown"
     @focus="handlePanelFocus"
   >
-    <div class="n-date-panel-input-wrapper">
+    <div class="n-date-panel-header">
       <n-input
         v-model:value="startDateDisplayString"
-        :theme="theme"
+        :theme="'light'"
         :size="timePickerSize"
         :stateful="false"
         class="n-date-panel-date-input"
@@ -27,7 +24,7 @@
         :size="timePickerSize"
         teleport-disabled
         :show-icon="false"
-        :theme="theme"
+        :theme="'light'"
         :stateful="false"
         :placeholder="locale.selectTime"
         :format="timeFormat"
@@ -39,7 +36,7 @@
       />
       <n-input
         v-model:value="endDateDisplayString"
-        :theme="theme"
+        :theme="'light'"
         :stateful="false"
         :size="timePickerSize"
         class="n-date-panel-date-input"
@@ -52,7 +49,7 @@
       />
       <n-time-picker
         :show-icon="false"
-        :theme="theme"
+        :theme="'light'"
         teleport-disabled
         :size="timePickerSize"
         :stateful="false"
@@ -186,7 +183,7 @@
     <div v-if="actions && actions.length" class="n-date-panel-actions">
       <n-button
         v-if="actions.includes('clear')"
-        :theme="theme"
+        :theme="'light'"
         size="tiny"
         @click="clearValue"
       >
@@ -194,7 +191,7 @@
       </n-button>
       <n-button
         v-if="actions.includes('confirm')"
-        :theme="theme"
+        :theme="'light'"
         :disabled="isRangeInvalid"
         size="tiny"
         type="primary"
@@ -209,6 +206,7 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import { NButton } from '../../../button'
 import { NTimePicker } from '../../../time-picker'
 import { NInput } from '../../../input'
@@ -234,7 +232,7 @@ const DATE_VALIDATE_FORMAT = [
   'yyyy-M-dd'
 ]
 
-export default {
+export default defineComponent({
   components: {
     NButton,
     NTimePicker,
@@ -421,5 +419,5 @@ export default {
       this.changeEndDateTime(value)
     }
   }
-}
+})
 </script>

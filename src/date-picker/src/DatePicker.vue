@@ -2,7 +2,6 @@
   <div
     ref="triggerRef"
     :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme,
       'n-date-picker--disabled': disabled,
       'n-date-picker--range': isRange,
       'n-date-picker--invalid': isValueInvalid && !isRange,
@@ -19,7 +18,7 @@
           ref="inputRef"
           :bordered="mergedBordered"
           :size="mergedSize"
-          :theme="mergedTheme"
+          :theme="'light'"
           passively-activated
           :disabled="disabled"
           :value="[displayStartTime, displayEndTime]"
@@ -48,7 +47,7 @@
           v-else
           ref="inputRef"
           v-model:value="displayTime"
-          :theme="mergedTheme"
+          :theme="'light'"
           passively-activated
           :size="mergedSize"
           :force-focus="active"
@@ -86,8 +85,8 @@
             :value="mergedValue"
             :active="active"
             :actions="actions"
-            :theme="mergedTheme"
             :format="computedFormat"
+            :style="cssVars"
             @update:value="handlePanelInput"
             @tab-out="handlePanelTabOut"
             @close="handlePanelClose"
@@ -101,7 +100,7 @@
             :value="mergedValue"
             :active="active"
             :actions="actions"
-            :theme="mergedTheme"
+            :style="cssVars"
             @update:value="handlePanelInput"
             @tab-out="handlePanelTabOut"
             @close="handlePanelClose"
@@ -115,7 +114,7 @@
             :value="mergedValue"
             :active="active"
             :actions="actions"
-            :theme="mergedTheme"
+            :style="cssVars"
             @update:value="handleRangePanelInput"
             @tab-out="handlePanelTabOut"
             @close="handlePanelClose"
@@ -130,7 +129,7 @@
             :value="mergedValue"
             :active="active"
             :actions="actions"
-            :theme="mergedTheme"
+            :style="cssVars"
             @update:value="handleRangePanelInput"
             @close="handlePanelClose"
             @tab-out="handlePanelTabOut"
@@ -144,33 +143,24 @@
 </template>
 
 <script>
-import { ref, toRef } from 'vue'
+import { defineComponent, ref, toRef, computed } from 'vue'
 import { VBinder, VTarget, VFollower } from 'vueuc'
 import { clickoutside } from 'vdirs'
-import {
-  configurable,
-  themeable,
-  useFormItem,
-  withCssr,
-  locale
-} from '../../_mixins'
-import { warn, call, useAdjustedTo } from '../../_utils'
+import { format, getTime, isValid } from 'date-fns'
+import { isEqual } from 'lodash-es'
 import { useIsMounted, useMergedState } from 'vooks'
-
+import { NInput } from '../../input'
+import { NIcon } from '../../icon'
+import { locale, useFormItem, useTheme, useConfig } from '../../_mixins'
+import { CalendarIcon } from '../../_base/icons'
+import { warn, call, useAdjustedTo, createKey } from '../../_utils'
+import { datePickerLight } from '../styles'
+import { strictParse, getDerivedTimeFromKeyboardEvent } from './utils'
 import DatetimePanel from './panel/datetime.vue'
 import DatetimerangePanel from './panel/datetimerange.vue'
 import DatePanel from './panel/date.vue'
 import DaterangePanel from './panel/daterange.vue'
-
-import { NInput } from '../../input'
-import { NIcon } from '../../icon'
-import { CalendarIcon } from '../../_base/icons'
-
-import { format, getTime, isValid } from 'date-fns'
-import { strictParse, getDerivedTimeFromKeyboardEvent } from './utils'
-import { isEqual } from 'lodash-es'
-
-import styles from './styles'
+import style from './styles/index.cssr.js'
 import {
   uniCalendarValidation,
   dualCalendarValidation
@@ -183,7 +173,7 @@ const DATE_FORMAT = {
   datetimerange: 'yyyy-MM-dd HH:mm:ss'
 }
 
-export default {
+export default defineComponent({
   name: 'DatePicker',
   directives: {
     clickoutside
@@ -200,7 +190,7 @@ export default {
     DaterangePanel,
     CalendarIcon
   },
-  mixins: [configurable, themeable, locale('DatePicker'), withCssr(styles)],
+  mixins: [locale('DatePicker')],
   provide () {
     return {
       NDatePicker: this
@@ -309,6 +299,13 @@ export default {
       controlledValueRef,
       uncontrolledValueRef
     )
+    const themeRef = useTheme(
+      'DatePicker',
+      'DatePicker',
+      style,
+      datePickerLight,
+      props
+    )
     return {
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
@@ -324,7 +321,91 @@ export default {
       adjustedTo: useAdjustedTo(props),
       ...uniCalendarValidation(props, mergedValueRef),
       ...dualCalendarValidation(props, mergedValueRef),
-      ...useFormItem(props)
+      ...useFormItem(props),
+      ...useConfig(props),
+      cssVars: computed(() => {
+        const { type } = props
+        const {
+          common: { cubicBezierEaseInOut },
+          self: {
+            calendarTitleFontSize,
+            calendarDaysFontSize,
+            itemFontSize,
+            itemTextColor,
+            itemColorHover,
+            itemColorActive,
+            itemBorderRadius,
+            panelColor,
+            panelTextColor,
+            arrowColor,
+            calendarTitleTextColor,
+            panelActionDividerColor,
+            panelHeaderDividerColor,
+            calendarDaysDividerColor,
+            panelBoxShadow,
+            panelBorderRadius,
+            calendarTitleFontWeight,
+            panelActionPadding,
+            itemSize,
+            itemCellWidth,
+            itemCellHeight,
+            calendarTitlePadding,
+            calendarTitleHeight,
+            calendarDaysHeight,
+            calendarDaysTextColor,
+            arrowSize,
+            panelHeaderPadding,
+            calendarDividerColor,
+            calendarTitleGridTempateColumns,
+            [createKey('calendarLeftPadding', type)]: calendarLeftPadding,
+            [createKey('calendarRightPadding', type)]: calendarRightPadding
+          }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--panel-border-radius': panelBorderRadius,
+          '--panel-color': panelColor,
+          '--panel-box-shadow': panelBoxShadow,
+          '--panel-text-color': panelTextColor,
+
+          // panel header
+          '--panel-header-padding': panelHeaderPadding,
+          '--panel-header-divider-color': panelHeaderDividerColor,
+
+          // panel calendar
+          '--calendar-left-padding': calendarLeftPadding,
+          '--calendar-right-padding': calendarRightPadding,
+          '--calendar-title-height': calendarTitleHeight,
+          '--calendar-title-padding': calendarTitlePadding,
+          '--calendar-title-font-size': calendarTitleFontSize,
+          '--calendar-title-font-weight': calendarTitleFontWeight,
+          '--calendar-title-text-color': calendarTitleTextColor,
+          '--calendar-title-grid-template-columns': calendarTitleGridTempateColumns,
+          '--calendar-days-height': calendarDaysHeight,
+          '--calendar-days-divider-color': calendarDaysDividerColor,
+          '--calendar-days-font-size': calendarDaysFontSize,
+          '--calendar-days-text-color': calendarDaysTextColor,
+          '--calendar-divider-color': calendarDividerColor,
+
+          // panel action
+          '--panel-action-padding': panelActionPadding,
+          '--panel-action-divider-color': panelActionDividerColor,
+
+          // panel item
+          '--item-font-size': itemFontSize,
+          '--item-border-radius': itemBorderRadius,
+          '--item-size': itemSize,
+          '--item-cell-width': itemCellWidth,
+          '--item-cell-height': itemCellHeight,
+          '--item-text-color': itemTextColor,
+          '--item-color-hover': itemColorHover,
+          '--item-color-active': itemColorActive,
+
+          // panel arrow
+          '--arrow-size': arrowSize,
+          '--arrow-color': arrowColor
+        }
+      })
     }
   },
   computed: {
@@ -674,5 +755,5 @@ export default {
       this.refresh([startTime, endTime])
     }
   }
-}
+})
 </script>

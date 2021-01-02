@@ -1,38 +1,54 @@
-import create from '../../_styles/utils/create-component-base'
 import { changeColor } from 'seemly'
-import { baseDark } from '../../_styles/base'
 import { inputDark } from '../../input/styles'
 import { iconDark } from '../../icon/styles'
 import commonVars from './_common'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
-  theme: 'dark',
+export default {
   name: 'DatePicker',
-  peer: [baseDark, inputDark, iconDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  peers: {
+    Input: inputDark,
+    Icon: iconDark
+  },
+  self (vars) {
+    const {
+      fontSize,
+      textColorDisabledOverlay,
+      textColor2Overlay,
+      textColor1Overlay,
+      popoverColor,
+      primaryColor,
+      borderRadiusSmall,
+      iconColorOverlay,
+      dividerColorOverlay,
+      boxShadow2,
+      borderRadius,
+      fontWeightStrong
+    } = vars
     return {
       ...commonVars,
-      itemFontSize: vars.fontSize,
-      panelDayFontSize: vars.fontSize,
-      panelMonthFontSize: vars.fontSize,
-      itemTextColor: vars.textColor2Overlay,
-      itemTextColorMatched: vars.popoverColor,
-      itemSupColor: vars.primaryColor,
-      itemSupColorMatch: vars.popoverColor,
-      itemColorHover: changeColor(vars.primaryColor, { alpha: 0.15 }),
-      itemColorActive: vars.primaryColor,
-      itemBorderRadius: vars.borderRadiusSmall,
-      panelColor: vars.popoverColor,
-      panelTextColor: vars.textColor2Overlay,
-      panelArrowButtonColor: vars.iconColorOverlay,
-      panelMonthTextColor: vars.textColorPrimaryOverlay,
-      panelHeaderDividerColor: vars.dividerColorOverlay,
-      panelDayDividerColor: vars.dividerColorOverlay,
-      panelVerticalDividerColor: vars.dividerColorOverlay,
-      panelActionDivider: vars.dividerColorOverlay,
-      panelBorderRadius: vars.borderRadius,
-      panelBoxShadow: vars.boxShadow2,
-      panelMonthFontWeight: vars.fontWeightStrong
+      itemFontSize: fontSize,
+      calendarDaysFontSize: fontSize,
+      calendarTitleFontSize: fontSize,
+      itemTextColor: textColor2Overlay,
+      itemTextColorDisabled: textColorDisabledOverlay,
+      itemTextColorActive: popoverColor,
+      itemColorHover: changeColor(primaryColor, { alpha: 0.15 }),
+      itemColorActive: primaryColor,
+      itemBorderRadius: borderRadiusSmall,
+      panelColor: popoverColor,
+      panelTextColor: textColor2Overlay,
+      arrowColor: iconColorOverlay,
+      calendarTitleTextColor: textColor1Overlay,
+      calendarDaysTextColor: textColor2Overlay,
+      panelHeaderDividerColor: dividerColorOverlay,
+      calendarDaysDividerColor: dividerColorOverlay,
+      calendarDividerColor: dividerColorOverlay,
+      panelActionDividerColor: dividerColorOverlay,
+      panelBorderRadius: borderRadius,
+      panelBoxShadow: boxShadow2,
+      calendarTitleFontWeight: fontWeightStrong
     }
   }
-})
+}

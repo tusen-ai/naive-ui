@@ -15,6 +15,7 @@ import { checkboxDark } from './checkbox/styles'
 import { codeDark } from './code/styles'
 import { collapseDark } from './collapse/styles'
 import { dataTableDark } from './data-table/styles'
+import { datePickerDark } from './date-picker/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -33,5 +34,6 @@ export const darkTheme = {
   Code: codeDark,
   Collapse: collapseDark,
   DataTable: dataTableDark,
+  DatePicker: datePickerDark,
   Divider: dividerDark
 }

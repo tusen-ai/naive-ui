@@ -2,9 +2,6 @@
   <div
     tabindex="0"
     class="n-date-panel n-date-panel--date"
-    :class="{
-      [`n-${theme}-theme`]: theme
-    }"
     @focus="handlePanelFocus"
     @keydown="handlePanelKeyDown"
   >
@@ -62,7 +59,7 @@
     <div v-if="actions && actions.length" class="n-date-panel-actions">
       <n-button
         v-if="actions.includes('clear')"
-        :theme="theme"
+        :theme="'light'"
         size="tiny"
         @click="clearValue"
       >
@@ -70,7 +67,7 @@
       </n-button>
       <n-button
         v-if="actions.includes('now')"
-        :theme="theme"
+        :theme="'light'"
         size="tiny"
         @click="setSelectedDateTimeToNow"
       >
@@ -78,7 +75,7 @@
       </n-button>
       <n-button
         v-if="actions.includes('confirm')"
-        :theme="theme"
+        :theme="'light'"
         size="tiny"
         type="primary"
         :disabled="isDateInvalid"
@@ -92,6 +89,7 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import uniCalendarMixin from './uniCalendarMixin'
 import { startOfDay } from 'date-fns'
 import { NButton } from '../../../button'
@@ -106,7 +104,7 @@ const DATE_VALIDATE_FORMAT = [
   'YYYY-M-DD'
 ]
 
-export default {
+export default defineComponent({
   components: {
     NButton
   },
@@ -131,5 +129,5 @@ export default {
       return startOfDay(value)
     }
   }
-}
+})
 </script>

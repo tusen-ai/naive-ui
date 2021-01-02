@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import { nextFrame } from 'seemly'
 import { isPlainObject } from 'lodash-es'
 import { locale, useTheme } from '../../_mixins'
@@ -117,7 +117,7 @@ function normalizeColumn (column) {
   return defaultColumn
 }
 
-export default {
+export default defineComponent({
   name: 'DataTable',
   alias: ['AdvancedTable'],
   components: {
@@ -841,5 +841,5 @@ export default {
       this.changeCheckedRowKeys(checkedRowKeys)
     }
   }
-}
+})
 </script>

@@ -177,10 +177,6 @@ export default {
     ForwardIcon
   },
   props: {
-    theme: {
-      type: String,
-      default: undefined
-    },
     active: {
       type: Boolean,
       default: undefined

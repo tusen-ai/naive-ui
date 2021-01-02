@@ -2,9 +2,6 @@
   <div
     tabindex="0"
     class="n-date-panel n-date-panel--daterange"
-    :class="{
-      [`n-${theme}-theme`]: theme
-    }"
     @click.capture="resetSelectingStatus"
     @keydown="handlePanelKeyDown"
     @focus="handlePanelFocus"
@@ -129,7 +126,7 @@
     <div v-if="actions && actions.length" class="n-date-panel-actions">
       <n-button
         v-if="actions.includes('clear')"
-        :theme="theme"
+        :theme="'light'"
         size="tiny"
         @click="clearValue"
       >
@@ -137,7 +134,7 @@
       </n-button>
       <n-button
         v-if="actions.includes('confirm')"
-        :theme="theme"
+        :theme="'light'"
         size="tiny"
         type="primary"
         :disabled="isRangeInvalid"
@@ -151,6 +148,7 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import { NButton } from '../../../button'
 import dualCalendarMixin from './dualCalendarMixin'
 import { startOfDay } from 'date-fns'
@@ -158,7 +156,7 @@ import { dualCalendarSetup } from '../composables'
 
 const DATE_FORMAT = 'yyyy-MM-dd'
 
-export default {
+export default defineComponent({
   components: {
     NButton
   },
@@ -195,5 +193,5 @@ export default {
       return startOfDay(datetime)
     }
   }
-}
+})
 </script>

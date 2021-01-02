@@ -2,16 +2,13 @@
   <div
     tabindex="0"
     class="n-date-panel n-date-panel--datetime"
-    :class="{
-      [`n-${theme}-theme`]: theme
-    }"
     @keydown="handlePanelKeyDown"
     @focus="handlePanelFocus"
   >
-    <div class="n-date-panel-input-wrapper">
+    <div class="n-date-panel-header">
       <n-input
         v-model:value="displayDateString"
-        :theme="theme"
+        :theme="'light'"
         :stateful="false"
         :size="timePickerSize"
         class="n-date-panel-date-input"
@@ -26,7 +23,7 @@
         :show-icon="false"
         :format="timeFormat"
         :stateful="false"
-        :theme="theme"
+        :theme="'light'"
         teleport-disabled
         :size="timePickerSize"
         :value="value"
@@ -91,7 +88,7 @@
     <div v-if="actions && actions.length" class="n-date-panel-actions">
       <n-button
         v-if="actions.includes('clear')"
-        :theme="theme"
+        :theme="'light'"
         size="tiny"
         @click="clearValue"
       >
@@ -99,7 +96,7 @@
       </n-button>
       <n-button
         v-if="actions.includes('now')"
-        :theme="theme"
+        :theme="'light'"
         size="tiny"
         @click="setSelectedDateTimeToNow"
       >
@@ -107,7 +104,7 @@
       </n-button>
       <n-button
         v-if="actions.includes('confirm')"
-        :theme="theme"
+        :theme="'light'"
         size="tiny"
         type="primary"
         :disabled="isDateTimeInvalid"
@@ -121,6 +118,7 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import uniCalendarMixin from './uniCalendarMixin'
 import { startOfSecond } from 'date-fns'
 import { NButton } from '../../../button'
@@ -137,7 +135,7 @@ const DATE_VALIDATE_FORMAT = [
   'YYYY-M-DD'
 ]
 
-export default {
+export default defineComponent({
   components: {
     NButton,
     NTimePicker,
@@ -183,5 +181,5 @@ export default {
       this.doUpdateValue(value)
     }
   }
-}
+})
 </script>
