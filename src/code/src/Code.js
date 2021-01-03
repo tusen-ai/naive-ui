@@ -122,7 +122,7 @@ export default defineComponent({
   render () {
     const { default: defaultSlot } = this.$slots
     return h(
-      'pre',
+      'code',
       {
         class: 'n-code',
         style: this.cssVars
@@ -130,7 +130,7 @@ export default defineComponent({
       [
         defaultSlot
           ? defaultSlot()
-          : h('code', {
+          : h('pre', {
             ref: 'codeRef'
           })
       ]

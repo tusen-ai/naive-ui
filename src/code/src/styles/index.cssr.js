@@ -19,14 +19,15 @@ const codeClass = withPrefix('code')
 // --hue-6-2
 export default c([
   cB('code', `
-    margin: 0;
+    display: block;
     font-size: var(--font-size);
     font-family: var(--font-family);
   `,
   [
-    c('code, pre', {
-      fontFamily: 'var(--font-family)'
-    }),
+    c('pre', `
+      margin: 0;
+      fontFamily: var(--font-family);
+    `),
     c('[class^=hljs]', {
       color: 'var(--text-color)',
       transition: `
