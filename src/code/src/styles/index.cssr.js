@@ -24,7 +24,7 @@ export default c([
     font-family: var(--font-family);
   `,
   [
-    c('code', {
+    c('code, pre', {
       fontFamily: 'var(--font-family)'
     }),
     c('[class^=hljs]', {
