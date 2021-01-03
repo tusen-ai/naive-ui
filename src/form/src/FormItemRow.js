@@ -1,34 +1,34 @@
-import { h, ref } from 'vue'
-import NFormItemCol from './FormItemCol.js'
+import { h, ref, defineComponent } from 'vue'
 import NRow from '../../grid/src/Row.vue'
 import { keep } from '../../_utils'
+import NFormItemCol from './FormItemCol.js'
 
 const rowPropsKey = Object.keys(NRow.props)
 const formItemColPropsKey = Object.keys(NFormItemCol.props)
 
-export default {
+export default defineComponent({
   name: 'FormItemRow',
   props: {
     ...NRow.props,
     ...NFormItemCol.props
   },
   setup () {
-    return {
-      formItemColRef: ref(null)
+    const formItemColRef = ref(null)
+    const validate = (...args) => {
+      const { value } = formItemColRef
+      if (value) {
+        return value.validate(...args)
+      }
     }
-  },
-  methods: {
-    validate (...args) {
-      const { formItemColRef } = this
-      if (formItemColRef) {
-        return formItemColRef.validate(...args)
+    const clearValidationEffect = (...args) => {
+      const { value } = formItemColRef
+      if (value) {
+        return value.clearValidationEffect(...args)
       }
-    },
-    clearValidationEffect (...args) {
-      const { formItemColRef } = this
-      if (formItemColRef) {
-        return formItemColRef.clearValidationEffect(...args)
-      }
+    }
+    return {
+      validate,
+      clearValidationEffect
     }
   },
   render () {
@@ -41,10 +41,8 @@ export default {
             ...keep(this.$props, formItemColPropsKey),
             span: 24
           },
-          {
-            default: this.$slots.default
-          }
+          this.$slots
         )
     })
   }
-}
+})

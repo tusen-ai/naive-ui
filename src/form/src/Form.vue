@@ -11,9 +11,12 @@
 </template>
 
 <script>
-import { markRaw } from 'vue'
+import { defineComponent, markRaw } from 'vue'
+import { useTheme } from '../../_mixins'
+import { formLight } from '../styles'
+import style from './styles/form.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Form',
   provide () {
     return {
@@ -64,7 +67,8 @@ export default {
       default: (e) => e.preventDefault()
     }
   },
-  setup () {
+  setup (props) {
+    useTheme('Form', 'Form', style, formLight, props)
     return {
       formItems: markRaw({})
     }
@@ -113,5 +117,5 @@ export default {
       }
     }
   }
-}
+})
 </script>

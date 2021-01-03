@@ -1,85 +1,86 @@
 <template>
   <div
     class="n-form-item"
-    :class="{
-      [`n-form-item--${mergedSize}-size`]: true,
-      [`n-${mergedTheme}-theme`]: mergedTheme,
-      [`n-form-item--${mergedLabelPlacement}-labelled`]: true,
-      [`n-form-item--${mergedLabelAlign}-label-aligned`]: true,
-      [`n-form-item--required`]:
-        mergedShowRequireMark === undefined
-          ? mergedShowRequireMark
-          : mergedRequired,
-      [`n-form-item--no-label`]: !(label || $slots.label)
-    }"
+    :class="[
+      `n-form-item--${mergedSize}-size`,
+      `n-form-item--${mergedLabelPlacement}-labelled`
+    ]"
+    :style="cssVars"
   >
     <label
       v-if="label || $slots.label"
-      :class="`n-form-item-label`"
+      class="n-form-item-label"
       :style="mergedLabelStyle"
     >
-      <template v-if="$slots.label"><slot name="label" /></template>
-      <template v-else>{{ label }}</template>
+      <slot name="label">{{ label }}</slot>
+      <span
+        v-if="
+          mergedShowRequireMark !== undefined
+            ? mergedShowRequireMark
+            : mergedRequired
+        "
+        class="n-form-item-label__asterisk"
+      >&nbsp;*</span>
     </label>
-    <div class="n-form-item-control">
-      <div
-        class="n-form-item-blank"
-        :class="{
-          [`n-form-item-blank--${mergedValidationStatus}`]: mergedValidationStatus
-        }"
+    <div
+      class="n-form-item-blank"
+      :class="{
+        [`n-form-item-blank--${mergedValidationStatus}`]: mergedValidationStatus
+      }"
+    >
+      <slot />
+    </div>
+    <div
+      v-if="mergedShowFeedback"
+      :key="feedbackId"
+      class="n-form-item-feedback-wrapper"
+    >
+      <transition
+        name="n-fade-down-transition"
+        :mode="mergedValidationStatus ? 'out-in' : undefined"
       >
-        <slot />
-      </div>
-      <div
-        v-if="mergedShowFeedback"
-        :key="feedbackId"
-        class="n-form-item-feedback-wrapper"
-      >
-        <transition
-          name="n-fade-down-transition"
-          :mode="mergedValidationStatus ? 'out-in' : undefined"
-        >
-          <template v-if="hasFeedback">
-            <div
-              v-if="mergedValidationStatus === 'warning'"
-              key="controlled-warning"
-              class="n-form-item-feedback n-form-item-feedback--warning"
-            >
-              <feedbacks :explains="explains" :feedback="feedback" />
-            </div>
-            <div
-              v-else-if="mergedValidationStatus === 'error'"
-              key="controlled-error"
-              class="n-form-item-feedback n-form-item-feedback--error"
-            >
-              <feedbacks :explains="explains" :feedback="feedback" />
-            </div>
-            <div
-              v-else-if="mergedValidationStatus === 'success'"
-              key="controlled-success"
-              class="n-form-item-feedback n-form-item-feedback--success"
-            >
-              <feedbacks :explains="explains" :feedback="feedback" />
-            </div>
-            <div v-else key="controlled-default" class="n-form-item-feedback">
-              <feedbacks :explains="explains" :feedback="feedback" />
-            </div>
-          </template>
-        </transition>
-      </div>
+        <template v-if="hasFeedback">
+          <div
+            v-if="mergedValidationStatus === 'warning'"
+            key="controlled-warning"
+            class="n-form-item-feedback n-form-item-feedback--warning"
+          >
+            <feedbacks :explains="explains" :feedback="feedback" />
+          </div>
+          <div
+            v-else-if="mergedValidationStatus === 'error'"
+            key="controlled-error"
+            class="n-form-item-feedback n-form-item-feedback--error"
+          >
+            <feedbacks :explains="explains" :feedback="feedback" />
+          </div>
+          <div
+            v-else-if="mergedValidationStatus === 'success'"
+            key="controlled-success"
+            class="n-form-item-feedback n-form-item-feedback--success"
+          >
+            <feedbacks :explains="explains" :feedback="feedback" />
+          </div>
+          <div v-else key="controlled-default" class="n-form-item-feedback">
+            <feedbacks :explains="explains" :feedback="feedback" />
+          </div>
+        </template>
+      </transition>
     </div>
   </div>
 </template>
 
 <script>
+import { defineComponent, computed } from 'vue'
 import Schema from 'async-validator'
 import { get } from 'lodash-es'
 import { createId } from 'seemly'
-import { configurable, themeable, withCssr, registerable } from '../../_mixins'
-import styles from './styles'
-import { warn } from '../../_utils'
+import { registerable, useTheme } from '../../_mixins'
+import { warn, createKey } from '../../_utils'
+import { formLight } from '../styles'
 import { formItemMisc, formItemSize, formItemRule } from './utils'
 import Feedbacks from './Feedbacks.vue'
+import style from './styles/form-item.cssr.js'
 
 function wrapValidator (validator) {
   if (typeof validator === 'function') {
@@ -118,18 +119,13 @@ function wrapValidator (validator) {
   return validator
 }
 
-export default {
+export default defineComponent({
   name: 'FormItem',
   cssrName: 'Form',
   components: {
     Feedbacks
   },
-  mixins: [
-    registerable('NForm', 'formItems', 'path'),
-    configurable,
-    themeable,
-    withCssr(styles)
-  ],
+  mixins: [registerable('NForm', 'formItems', 'path')],
   inject: {
     NForm: {
       default: null
@@ -211,10 +207,54 @@ export default {
     }
   },
   setup (props) {
+    const formItemSizeReactive = formItemSize(props)
+    const formItemMiscReactive = formItemMisc(props)
+    const { mergedSize: mergedSizeRef } = formItemSizeReactive
+    const { mergedLabelPlacement: labelPlacementRef } = formItemMiscReactive
+    const themeRef = useTheme('Form', 'FormItem', style, formLight, props)
     return {
-      ...formItemSize(props),
-      ...formItemMisc(props),
-      ...formItemRule(props)
+      ...formItemSizeReactive,
+      ...formItemMiscReactive,
+      ...formItemRule(props),
+      cssVars: computed(() => {
+        const { value: size } = mergedSizeRef
+        const { value: labelPlacement } = labelPlacementRef
+        const direction = labelPlacement === 'top' ? 'vertical' : 'horizontal'
+        const {
+          common: { cubicBezierEaseInOut },
+          self: {
+            labelTextColor,
+            asteriskColor,
+            lineHeight,
+            feedbackTextColorWarning,
+            feedbackTextColorError,
+            feedbackPadding,
+            [createKey('labelHeight', size)]: labelHeight,
+            [createKey('blankHeight', size)]: blankHeight,
+            [createKey('feedbackFontSize', size)]: feedbackFontSize,
+            [createKey('feedbackHeight', size)]: feedbackHeight,
+            [createKey('labelPadding', direction)]: labelPadding,
+            [createKey('labelTextAlign', direction)]: labelTextAlign,
+            [createKey('labelFontSize', labelPlacement, size)]: labelFontSize
+          }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--line-height': lineHeight,
+          '--blank-height': blankHeight,
+          '--label-font-size': labelFontSize,
+          '--label-height': labelHeight,
+          '--label-padding': labelPadding,
+          '--asterisk-color': asteriskColor,
+          '--label-text-color': labelTextColor,
+          '--feedback-padding': feedbackPadding,
+          '--feedback-font-size': feedbackFontSize,
+          '--feedback-height': feedbackHeight,
+          '--feedback-text-color-warning': feedbackTextColorWarning,
+          '--feedback-text-color-error': feedbackTextColorError,
+          '--label-text-align': labelTextAlign
+        }
+      })
     }
   },
   data () {
@@ -368,5 +408,5 @@ export default {
       this.validationErrored = false
     }
   }
-}
+})
 </script>

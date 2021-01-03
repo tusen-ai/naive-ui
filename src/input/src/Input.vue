@@ -129,7 +129,6 @@
     <n-icon-config-provider class="n-input__suffix" :depth="disabled ? 5 : 4">
       <slot name="suffix" />
       <n-base-clear-button
-        v-if="clearable"
         :theme="mergedTheme"
         :show="showClearButton"
         @clear="handleClear"

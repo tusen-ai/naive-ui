@@ -1,34 +1,34 @@
-import { h, ref } from 'vue'
-import NFormItem from './FormItem.vue'
+import { h, ref, defineComponent } from 'vue'
 import NCol from '../../grid/src/Col.vue'
 import { keep } from '../../_utils'
+import NFormItem from './FormItem.vue'
 
 const formItemPropsKey = Object.keys(NFormItem.props)
 const colPropsKey = Object.keys(NCol.props)
 
-export default {
+export default defineComponent({
   name: 'FormItemCol',
   props: {
     ...NCol.props,
     ...NFormItem.props
   },
   setup () {
-    return {
-      formItemRef: ref(null)
+    const formItemRef = ref(null)
+    const validate = (...args) => {
+      const { value } = formItemRef
+      if (value) {
+        return value.validate(...args)
+      }
     }
-  },
-  methods: {
-    validate (...args) {
-      const { formItemRef } = this
-      if (formItemRef) {
-        return formItemRef.validate(...args)
+    const clearValidationEffect = (...args) => {
+      const { value } = formItemRef
+      if (value) {
+        return value.clearValidationEffect(...args)
       }
-    },
-    clearValidationEffect (...args) {
-      const { formItemRef } = this
-      if (formItemRef) {
-        return formItemRef.clearValidationEffect(...args)
-      }
+    }
+    return {
+      validate,
+      clearValidationEffect
     }
   },
   render () {
@@ -40,11 +40,9 @@ export default {
             ref: 'formItemRef',
             ...keep(this.$props, formItemPropsKey)
           },
-          {
-            default: this.$slots.default
-          }
+          this.$slots
         )
       }
     })
   }
-}
+})
