@@ -3,7 +3,7 @@
     <n-tag
       v-for="(tag, index) in value"
       :key="index"
-      :theme="theme"
+      :theme="'light'"
       :style="tagStyle"
       :type="type"
       :round="round"
@@ -19,7 +19,7 @@
       ref="tagInput"
       v-model:value="inputValue"
       :force-focus="inputForceFocused"
-      :theme="theme"
+      :theme="'light'"
       :style="inputStyle"
       :size="inputSize"
       placeholder=""
@@ -29,7 +29,7 @@
     <n-button
       v-else
       dashed
-      :theme="theme"
+      :theme="'light'"
       :size="inputSize"
       @click="handleAddClick"
     >
@@ -43,29 +43,24 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { NTag } from '../../tag'
 import { NIcon } from '../../icon'
 import { AddIcon } from '../../_base/icons'
-import {
-  configurable,
-  themeable,
-  useFormItem,
-  locale,
-  withCssr
-} from '../../_mixins'
+import { useTheme, useFormItem, locale } from '../../_mixins'
 import commonProps from '../../tag/src/common-props'
-import styles from './styles'
 import { warn, call } from '../../_utils'
+import { dynamicTagsLight } from '../styles'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'DynamicTags',
   components: {
     NTag,
     NIcon,
     AddIcon
   },
-  mixins: [configurable, themeable, locale('Tag'), withCssr(styles)],
+  mixins: [locale('Tag')],
   props: {
     ...commonProps,
     closable: {
@@ -114,6 +109,7 @@ export default {
     }
   },
   setup (props) {
+    useTheme('DynamicTags', 'DynamicTags', style, dynamicTagsLight, props)
     return {
       inputValue: ref(''),
       inputVisible: ref(false),
@@ -171,5 +167,5 @@ export default {
       })
     }
   }
-}
+})
 </script>

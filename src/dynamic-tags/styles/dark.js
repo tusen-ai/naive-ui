@@ -1,14 +1,14 @@
-import create from '../../_styles/utils/create-component-base'
-import { tagDark } from '../../tag/styles'
-import { baseDark } from '../../_styles/base'
+import { tagLight } from '../../tag/styles'
 import { inputDark } from '../../input/styles'
 import { buttonDark } from '../../button/styles'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'DynamicTags',
-  theme: 'dark',
-  peer: [baseDark, tagDark, inputDark, buttonDark],
-  getLocalVars (vars) {
-    return {}
+  common: commonDark,
+  peers: {
+    Input: inputDark,
+    Button: buttonDark,
+    Tag: tagLight
   }
-})
+}
