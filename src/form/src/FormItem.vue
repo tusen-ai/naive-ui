@@ -121,7 +121,6 @@ function wrapValidator (validator) {
 
 export default defineComponent({
   name: 'FormItem',
-  cssrName: 'Form',
   components: {
     Feedbacks
   },

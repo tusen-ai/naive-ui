@@ -34,7 +34,6 @@ function getOffset (el, container) {
 
 export default {
   name: 'BaseAnchor',
-  cssrName: 'Anchor',
   provide () {
     return {
       NAnchor: this
