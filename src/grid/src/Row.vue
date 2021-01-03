@@ -16,14 +16,14 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
+import { useMemo } from 'vooks'
 import { formatLength } from '../../_utils'
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles'
+import { useTheme } from '../../_mixins'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Row',
-  cssrName: 'Grid',
-  mixins: [configurable, themeable, withCssr(styles)],
   provide () {
     return {
       NRow: this
@@ -47,27 +47,32 @@ export default {
       default: undefined
     }
   },
-  computed: {
-    verticalGutter () {
-      const gutter = this.gutter
+  setup (props) {
+    useTheme('Grid', 'Grid', style, null, null)
+    const verticalGutterRef = useMemo(() => {
+      const { gutter } = props
       if (Array.isArray(gutter)) {
         return gutter[1] || 0
       }
       return 0
-    },
-    horizontalGutter () {
-      const gutter = this.gutter
+    })
+    const horizontalGutterRef = useMemo(() => {
+      const { gutter } = props
       if (Array.isArray(gutter)) {
         return gutter[0]
       }
       return gutter
-    },
-    styleMargin () {
-      return `0px -${formatLength(this.horizontalGutter, { c: 0.5 })}`
-    },
-    styleWidth () {
-      return `calc(100% + ${formatLength(this.horizontalGutter)})`
+    })
+    return {
+      verticalGutter: verticalGutterRef,
+      horizontalGutter: horizontalGutterRef,
+      styleMargin: useMemo(
+        () => `0px -${formatLength(horizontalGutterRef.value, { c: 0.5 })}`
+      ),
+      styleWidth: useMemo(
+        () => `calc(100% + ${formatLength(horizontalGutterRef.value)})`
+      )
     }
   }
-}
+})
 </script>

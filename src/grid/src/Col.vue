@@ -3,8 +3,8 @@
     class="n-col"
     :class="{
       [`n-col--${span}-span`]: true,
-      [`n-col--${computedPush}-push`]: computedPush > 0,
-      [`n-col--${-computedPush}-pull`]: computedPush < 0,
+      [`n-col--${mergedPush}-push`]: mergedPush > 0,
+      [`n-col--${-mergedPush}-pull`]: mergedPush < 0,
       [`n-col--${offset}-offset`]: offset
     }"
     :style="{
@@ -21,15 +21,13 @@
 </template>
 
 <script>
+import { computed, defineComponent, inject } from 'vue'
 import { formatLength } from '../../_utils'
+import { useTheme } from '../../_mixins'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Col',
-  inject: {
-    NRow: {
-      default: null
-    }
-  },
   props: {
     span: {
       type: [String, Number],
@@ -48,18 +46,19 @@ export default {
       default: 0
     }
   },
-  computed: {
-    gutter () {
-      return this.NRow.gutter
-    },
-    stylePadding () {
-      return `${formatLength(this.NRow.verticalGutter, {
-        c: 0.5
-      })} ${formatLength(this.NRow.horizontalGutter, { c: 0.5 })}`
-    },
-    computedPush () {
-      return this.push - this.pull
+  setup (props) {
+    useTheme('Grid', 'Grid', style, null, null)
+    const NRow = inject('NRow')
+    return {
+      gutter: computed(() => NRow.gutter),
+      stylePadding: computed(
+        () =>
+          `${formatLength(NRow.verticalGutter, {
+            c: 0.5
+          })} ${formatLength(NRow.horizontalGutter, { c: 0.5 })}`
+      ),
+      mergedPush: computed(() => props.push - props.pull)
     }
   }
-}
+})
 </script>
