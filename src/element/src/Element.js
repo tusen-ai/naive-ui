@@ -1,13 +1,17 @@
-import { h } from 'vue'
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styleScheme from '../../_deprecated/style-scheme'
-import style from './styles'
+import { computed, h, defineComponent } from 'vue'
+import { kebabCase } from 'lodash-es'
+import { useConfig, useTheme } from '../../_mixins'
 import { warn } from '../../_utils'
 
-export default {
+/**
+ * @deprecated
+ */
+import useLegacy from '../../config-consumer/src/use-legacy'
+import { elementLight } from '../styles'
+
+export default defineComponent({
   name: 'Element',
   alias: ['El'],
-  mixins: [configurable, themeable, withCssr(style)],
   props: {
     tag: {
       type: String,
@@ -26,37 +30,51 @@ export default {
       default: undefined
     }
   },
-  watch: {
-    mergedTheme: function (value, oldValue) {
-      const { onThemeChange } = this
-      if (onThemeChange) onThemeChange(value, oldValue)
+  setup (props) {
+    const themeRef = useTheme('Element', 'Element', null, elementLight, props)
+    return {
+      ...useLegacy(props),
+      ...useConfig(props),
+      cssVars: computed(() => {
+        const { common } = themeRef.value
+        return Object.keys(common).reduce((prevValue, key) => {
+          prevValue[`--${kebabCase(key)}`] = common[key]
+          return prevValue
+        }, {})
+      })
     }
   },
   render () {
     const {
       as,
       tag,
-      mergedTheme,
-      NConfigProvider,
-      mergedThemeEnvironment,
-      $slots
+      namespace,
+      $slots,
+      cssVars,
+      // deprecated
+      legacyTheme,
+      legacyThemeEnvironment,
+      legacyStyleScheme
     } = this
     return h(
       as || tag,
       {
-        class: {
-          'n-element': true,
-          [`n-${mergedTheme}-theme`]: mergedTheme
-        }
+        class: [
+          'n-element',
+          {
+            [`n-${legacyTheme}-theme`]: legacyTheme
+          }
+        ],
+        style: cssVars
       },
       ($slots.default &&
         $slots.default({
-          theme: mergedTheme,
-          namespace: NConfigProvider ? NConfigProvider.mergedNamespace : null,
-          themeEnvironment: mergedThemeEnvironment,
-          styleScheme: mergedTheme ? styleScheme[mergedTheme] : null
+          namespace: namespace,
+          theme: legacyTheme,
+          themeEnvironment: legacyThemeEnvironment,
+          styleScheme: legacyStyleScheme
         })) ||
         null
     )
   }
-}
+})

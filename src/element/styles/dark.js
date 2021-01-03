@@ -1,11 +1,6 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseDark } from '../../_styles/base'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
-  theme: 'dark',
+export default {
   name: 'Element',
-  peer: [baseDark],
-  getLocalVars (vars) {
-    return vars
-  }
-})
+  common: commonDark
+}

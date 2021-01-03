@@ -1,11 +1,6 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseLight } from '../../_styles/base'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
-  theme: 'light',
+export default {
   name: 'Element',
-  peer: [baseLight],
-  getLocalVars (vars) {
-    return vars
-  }
-})
+  common: commonLight
+}

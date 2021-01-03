@@ -22,9 +22,10 @@ export default function useTheme (
   props
 ) {
   onBeforeMount(() => {
-    style.mount({
-      target: mountId
-    })
+    style &&
+      style.mount({
+        target: mountId
+      })
   })
   const NConfigProvider = inject('NConfigProvider', {})
   const mergedThemeRef = computed(() => {
