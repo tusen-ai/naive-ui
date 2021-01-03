@@ -2,10 +2,9 @@
   <div
     class="n-empty"
     :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme,
       [`n-empty--${size}-size`]: true
     }"
-    :style="mergedStyle"
+    :style="cssVars"
   >
     <div class="n-empty__icon">
       <slot name="icon">
@@ -26,18 +25,21 @@
 </template>
 
 <script>
-import { configurable, themeable, locale, withCssr } from '../../_mixins'
+import { defineComponent, computed } from 'vue'
+import { locale, useTheme } from '../../_mixins'
+import { createKey } from '../../_utils'
 import { EmptyIcon } from '../../_base/icons'
 import { NIcon } from '../../icon'
-import styles from './styles/index'
+import { emptyLight } from '../styles'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Empty',
   components: {
     EmptyIcon,
     NIcon
   },
-  mixins: [configurable, themeable, locale('Empty'), withCssr(styles)],
+  mixins: [locale('Empty')],
   props: {
     description: {
       type: String,
@@ -54,10 +56,36 @@ export default {
       default: 'medium'
     }
   },
+  setup (props) {
+    const themeRef = useTheme('Empty', 'Empty', style, emptyLight, props)
+    return {
+      cssVars: computed(() => {
+        const { size } = props
+        const {
+          common: { cubicBezierEaseInOut },
+          self: {
+            [createKey('iconSize', size)]: iconSize,
+            [createKey('fontSize', size)]: fontSize,
+            textColor,
+            iconColor,
+            extraTextColor
+          }
+        } = themeRef.value
+        return {
+          '--icon-size': iconSize,
+          '--font-size': fontSize,
+          '--bezier': cubicBezierEaseInOut,
+          '--text-color': textColor,
+          '--icon-color': iconColor,
+          '--extra-text-color': extraTextColor
+        }
+      })
+    }
+  },
   computed: {
     localizedDescription () {
       return this.description || this.locale.description
     }
   }
-}
+})
 </script>

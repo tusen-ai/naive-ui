@@ -1,13 +1,14 @@
-import create from '../../_styles/utils/create-component-base'
-import sizeVarables from './_common'
-import { baseLight } from '../../_styles/base'
+import commonVars from './_common'
+import { commonLight } from '../../_styles/new-common'
 import { iconLight } from '../../icon/styles'
 
-export default create({
-  theme: 'light',
+export default {
   name: 'Empty',
-  peer: [baseLight, iconLight],
-  getLocalVars (vars) {
+  common: commonLight,
+  peers: {
+    Icon: iconLight
+  },
+  self (vars) {
     const {
       textColorDisabled,
       iconColorOverlay,
@@ -18,7 +19,7 @@ export default create({
       fontSizeHuge
     } = vars
     return {
-      ...sizeVarables,
+      ...commonVars,
       fontSizeSmall,
       fontSizeMedium,
       fontSizeLarge,
@@ -28,4 +29,4 @@ export default create({
       extraTextColor: textColor2
     }
   }
-})
+}

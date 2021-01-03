@@ -23,6 +23,7 @@ import { dropdownDark } from './dropdown/styles'
 import { dynamicInputDark } from './dynamic-input/styles'
 import { dynamicTagsDark } from './dynamic-tags/styles'
 import { elementDark } from './element/styles'
+import { emptyDark } from './empty/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -49,5 +50,6 @@ export const darkTheme = {
   Dropdown: dropdownDark,
   DynamicInput: dynamicInputDark,
   DynamicTags: dynamicTagsDark,
-  Element: elementDark
+  Element: elementDark,
+  Empty: emptyDark
 }

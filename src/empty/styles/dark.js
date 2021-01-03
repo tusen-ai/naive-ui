@@ -1,13 +1,14 @@
-import create from '../../_styles/utils/create-component-base'
+import { commonDark } from '../../_styles/new-common'
 import sizeVarables from './_common'
-import { baseDark } from '../../_styles/base'
 import { iconDark } from '../../icon/styles'
 
-export default create({
-  theme: 'dark',
+export default {
   name: 'Empty',
-  peer: [baseDark, iconDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  peers: {
+    Icon: iconDark
+  },
+  self (vars) {
     const {
       textColorDisabledOverlay,
       iconColorOverlay,
@@ -28,4 +29,4 @@ export default create({
       extraTextColor: textColor2Overlay
     }
   }
-})
+}
