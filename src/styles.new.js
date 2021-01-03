@@ -24,6 +24,8 @@ import { dynamicInputDark } from './dynamic-input/styles'
 import { dynamicTagsDark } from './dynamic-tags/styles'
 import { elementDark } from './element/styles'
 import { emptyDark } from './empty/styles'
+import { formDark } from './form/styles'
+import { gradientTextDark } from './gradient-text/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -51,5 +53,7 @@ export const darkTheme = {
   DynamicInput: dynamicInputDark,
   DynamicTags: dynamicTagsDark,
   Element: elementDark,
-  Empty: emptyDark
+  Empty: emptyDark,
+  Form: formDark,
+  GradientText: gradientTextDark
 }

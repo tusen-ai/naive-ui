@@ -2,13 +2,12 @@
   <span
     class="n-gradient-text"
     :class="{
-      [`n-gradient-text--${computedType}-type`]: true,
-      [`n-${mergedTheme}-theme`]: mergedTheme
+      [`n-gradient-text--${compatibleType}-type`]: true
     }"
     :style="{
-      ...mergedStyle,
       fontSize: styleFontSize,
-      backgroundImage: styleBackgroundImage
+      backgroundImage: styleBgImage,
+      ...cssVars
     }"
   >
     <slot />
@@ -16,15 +15,16 @@
 </template>
 
 <script>
-import { configurable, themeable, withCssr } from '../../_mixins'
-import { formatLength } from '../../_utils'
-import styles from './styles/index'
+import { defineComponent, computed, onBeforeMount } from 'vue'
+import { useTheme } from '../../_mixins'
+import { createKey, formatLength } from '../../_utils'
+import { gradientTextLight } from '../styles'
+import style from './styles/index.cssr.js'
 
 let houdiniRegistered = false
 
-export default {
+export default defineComponent({
   name: 'GradientText',
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     size: {
       type: [String, Number],
@@ -47,18 +47,38 @@ export default {
       default: undefined
     }
   },
-  computed: {
-    computedType () {
-      if (this.type === 'danger') return 'error'
-      return this.type
-    },
-    styleFontSize () {
-      let fontSize = this.size || this.fontSize
+  setup (props) {
+    onBeforeMount(() => {
+      if (!houdiniRegistered) {
+        houdiniRegistered = true
+        if (window?.CSS?.registerProperty) {
+          CSS.registerProperty({
+            name: '--start-stop',
+            syntax: '<color>',
+            inherits: false,
+            initialValue: 'transparent'
+          })
+          CSS.registerProperty({
+            name: '--end-stop',
+            syntax: '<color>',
+            inherits: false,
+            initialValue: 'transparent'
+          })
+        }
+      }
+    })
+    const compatibleTypeRef = computed(() => {
+      const { type } = props
+      if (type === 'danger') return 'error'
+      return type
+    })
+    const styleFontSizeRef = computed(() => {
+      let fontSize = props.size || props.fontSize
       if (fontSize) fontSize = formatLength(fontSize)
       return fontSize || undefined
-    },
-    styleBackgroundImage () {
-      const gradient = this.color || this.gradient
+    })
+    const styleBgImageRef = computed(() => {
+      const gradient = props.color || props.gradient
       if (typeof gradient === 'string') {
         return gradient
       } else if (gradient) {
@@ -68,26 +88,38 @@ export default {
         return `linear-gradient(${deg}deg, ${from} 0%, ${to} 100%)`
       }
       return undefined
-    }
-  },
-  beforeMount () {
-    if (!houdiniRegistered) {
-      houdiniRegistered = true
-      if (window?.CSS?.registerProperty) {
-        CSS.registerProperty({
-          name: '--start-stop',
-          syntax: '<color>',
-          inherits: false,
-          initialValue: 'transparent'
-        })
-        CSS.registerProperty({
-          name: '--end-stop',
-          syntax: '<color>',
-          inherits: false,
-          initialValue: 'transparent'
-        })
-      }
+    })
+    const themeRef = useTheme(
+      'GradientText',
+      'GradientText',
+      style,
+      gradientTextLight,
+      props
+    )
+    return {
+      compatibleType: compatibleTypeRef,
+      styleFontSize: styleFontSizeRef,
+      styleBgImage: styleBgImageRef,
+      cssVars: computed(() => {
+        const { value: type } = compatibleTypeRef
+        const {
+          common: { cubicBezierEaseInOut },
+          self: {
+            rotate,
+            [createKey('colorStart', type)]: colorStart,
+            [createKey('colorEnd', type)]: colorEnd,
+            fontWeight
+          }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--rotate': rotate,
+          '--color-start': colorStart,
+          '--color-end': colorEnd,
+          '--font-weight': fontWeight
+        }
+      })
     }
   }
-}
+})
 </script>

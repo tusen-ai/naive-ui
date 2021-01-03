@@ -1,11 +1,9 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseDark } from '../../_styles/base'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
-  theme: 'dark',
+export default {
   name: 'GradientText',
-  peer: [baseDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  self (vars) {
     const {
       primaryColor,
       successColor,
@@ -33,4 +31,4 @@ export default create({
       colorEndSuccess: successColorSuppl
     }
   }
-})
+}
