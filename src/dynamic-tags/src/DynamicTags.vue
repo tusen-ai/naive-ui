@@ -62,6 +62,7 @@ export default defineComponent({
   },
   mixins: [locale('Tag')],
   props: {
+    ...useTheme.props,
     ...commonProps,
     closable: {
       type: Boolean,

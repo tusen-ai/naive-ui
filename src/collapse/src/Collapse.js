@@ -13,6 +13,7 @@ export default {
     }
   },
   props: {
+    ...useTheme.props,
     expandedNames: {
       type: [Array, String],
       default: undefined

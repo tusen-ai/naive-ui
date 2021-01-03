@@ -1,9 +1,9 @@
-import create from '../../_styles/utils/create-component-base'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
-  theme: 'light',
+export default {
   name: 'Icon',
-  getLocalVars (vars) {
+  common: commonLight,
+  self (vars) {
     const {
       textColorBase,
       opacity1,
@@ -21,4 +21,4 @@ export default create({
       opacity5Depth: opacity5
     }
   }
-})
+}

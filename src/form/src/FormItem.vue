@@ -137,6 +137,7 @@ export default defineComponent({
     }
   },
   props: {
+    ...useTheme.props,
     label: {
       type: [Number, String],
       default: undefined

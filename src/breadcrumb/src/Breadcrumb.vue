@@ -18,6 +18,7 @@ export default {
     }
   },
   props: {
+    ...useTheme.props,
     separator: {
       type: String,
       default: '/'

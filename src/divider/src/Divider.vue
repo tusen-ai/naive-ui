@@ -30,14 +30,7 @@ import style from './styles/index.cssr'
 export default {
   name: 'Divider',
   props: {
-    unstableTheme: {
-      type: Object,
-      default: undefined
-    },
-    unstableThemeOverrides: {
-      type: Object,
-      default: undefined
-    },
+    ...useTheme.props,
     titlePlacement: {
       type: String,
       default: 'center'

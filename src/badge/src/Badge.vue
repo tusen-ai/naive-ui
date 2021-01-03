@@ -45,6 +45,7 @@ export default {
     NBaseWave
   },
   props: {
+    ...useTheme.props,
     value: {
       type: [String, Number],
       default: undefined

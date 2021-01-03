@@ -88,6 +88,7 @@ export default {
   },
   inheritAttrs: false,
   props: {
+    ...useTheme.props,
     bordered: {
       type: Boolean,
       default: undefined

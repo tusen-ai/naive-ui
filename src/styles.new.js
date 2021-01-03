@@ -27,6 +27,7 @@ import { emptyDark } from './empty/styles'
 import { formDark } from './form/styles'
 import { gradientTextDark } from './gradient-text/styles'
 import { gridDark } from './grid/styles'
+import { iconDark } from './icon/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -57,5 +58,6 @@ export const darkTheme = {
   Empty: emptyDark,
   Form: formDark,
   GradientText: gradientTextDark,
-  Grid: gridDark
+  Grid: gridDark,
+  Icon: iconDark
 }

@@ -24,6 +24,7 @@ export default defineComponent({
     }
   },
   props: {
+    ...useTheme.props,
     inline: {
       type: Boolean,
       default: false

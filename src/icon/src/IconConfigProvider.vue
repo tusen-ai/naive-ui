@@ -6,10 +6,10 @@
 
 <script>
 // private
-import { provide } from 'vue'
+import { provide, defineComponent } from 'vue'
 import commonProps from './common-props'
 
-export default {
+export default defineComponent({
   name: 'NIconConfigProvider',
   props: {
     ...commonProps
@@ -17,5 +17,5 @@ export default {
   setup (props) {
     provide('NIconConfigProvider', props)
   }
-}
+})
 </script>

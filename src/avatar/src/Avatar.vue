@@ -35,14 +35,7 @@ import { createKey } from '../../_utils'
 export default {
   name: 'Avatar',
   props: {
-    unstableTheme: {
-      type: Object,
-      default: undefined
-    },
-    unstableThemeOverrides: {
-      type: Object,
-      default: undefined
-    },
+    ...useTheme.props,
     size: {
       validator (value) {
         return validSize.includes(value) || typeof value === 'number'

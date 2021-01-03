@@ -1,19 +1,16 @@
-import { h } from 'vue'
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles/index'
-import { formatLength, getSlot } from '../../_utils'
+import { h, defineComponent, computed, inject, mergeProps } from 'vue'
+import { useTheme } from '../../_mixins'
+import { formatLength, warn } from '../../_utils'
+import { iconLight } from '../styles'
 import commonProps from './common-props'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   __NAIVE_ICON__: true,
   name: 'Icon',
-  inject: {
-    NIconConfigProvider: {
-      default: null
-    }
-  },
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
+    ...useTheme.props,
+    ...commonProps,
     size: {
       type: [Number, String],
       default: undefined
@@ -31,48 +28,66 @@ export default {
     colorTransition: {
       type: Boolean,
       default: false
-    },
-    ...commonProps
+    }
   },
-  computed: {
-    styles () {
-      const { size, color } = this
-      return {
-        fontSize: formatLength(size),
-        color
-      }
-    },
-    mergedDepth () {
-      const { depth } = this
+  setup (props) {
+    const NIconConfigProvider = inject('NIconConfigProvider', null)
+    const mergedDepthRef = computed(() => {
+      const { depth } = props
       if (depth !== undefined) return depth
-      return this.NIconConfigProvider?.depth
+      return NIconConfigProvider?.depth
+    })
+    const themeRef = useTheme('Icon', 'Icon', style, iconLight, props)
+    return {
+      mergedStyle: computed(() => {
+        const { size, color } = props
+        return {
+          fontSize: formatLength(size),
+          color
+        }
+      }),
+      mergedDepth: mergedDepthRef,
+      cssVars: computed(() => {
+        const { value: depth } = mergedDepthRef
+        const {
+          common: { cubicBezierEaseInOut },
+          self
+        } = themeRef.value
+        if (depth !== undefined) {
+          const { color, [`opacity${depth}Depth`]: opacity } = self
+          return {
+            '--bezier': cubicBezierEaseInOut,
+            '--color': color,
+            '--opacity': opacity
+          }
+        }
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--color': '"unset"',
+          '--opacity': '"unset"'
+        }
+      })
     }
   },
   render () {
-    const parent = this.$parent
-    if (parent && parent.$options.__NAIVE_ICON__) return getSlot(this)
-    else {
-      const { mergedTheme, mergedDepth, colorTransition } = this
-      return h(
-        'i',
-        {
-          ...this.$attrs,
-          class: [
-            'n-icon',
-            {
-              [`n-${mergedTheme}-theme`]: mergedTheme,
-              [`n-icon--${mergedDepth}-depth`]: mergedDepth,
-              'n-icon--color-transition':
-                colorTransition || mergedDepth !== undefined
-            }
-          ],
-          style: {
-            ...this.styles,
-            ...this.mergedStyle
-          }
-        },
-        this.$slots
-      )
+    const { $parent, mergedDepth, colorTransition } = this
+    if ($parent && $parent.$options.__NAIVE_ICON__) {
+      warn('icon', "don't render `n-icon` inside `n-icon`")
     }
+    return h(
+      'i',
+      mergeProps(this.$attrs, {
+        class: [
+          'n-icon',
+          {
+            [`n-icon--${mergedDepth}-depth`]: mergedDepth,
+            'n-icon--color-transition':
+              colorTransition || mergedDepth !== undefined
+          }
+        ],
+        style: Object.assign(this.cssVars, this.mergedStyle)
+      }),
+      this.$slots
+    )
   }
-}
+})

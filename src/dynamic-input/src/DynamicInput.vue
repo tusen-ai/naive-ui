@@ -88,6 +88,7 @@ export default defineComponent({
     }
   },
   props: {
+    ...useTheme.props,
     max: {
       type: Number,
       default: undefined

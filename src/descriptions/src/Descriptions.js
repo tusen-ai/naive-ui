@@ -9,6 +9,7 @@ import { descriptionsLight } from '../styles'
 export default defineComponent({
   name: 'Descriptions',
   props: {
+    ...useTheme.props,
     title: {
       type: String,
       default: undefined

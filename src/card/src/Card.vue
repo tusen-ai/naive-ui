@@ -65,6 +65,7 @@ export default defineComponent({
     NIcon
   },
   props: {
+    ...useTheme.props,
     title: {
       type: String,
       default: undefined

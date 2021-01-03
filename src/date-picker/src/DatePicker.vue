@@ -197,6 +197,7 @@ export default defineComponent({
     }
   },
   props: {
+    ...useTheme.props,
     bordered: {
       type: Boolean,
       default: undefined

@@ -56,6 +56,7 @@ export default {
   },
   inheritAttrs: false,
   props: {
+    ...useTheme.props,
     show: {
       type: Boolean,
       default: undefined

@@ -75,14 +75,7 @@ export default {
     CloseIcon
   },
   props: {
-    unstableTheme: {
-      type: Object,
-      default: undefined
-    },
-    unstableThemeOverrides: {
-      type: Object,
-      default: undefined
-    },
+    ...useTheme.props,
     title: {
       type: String,
       default: undefined

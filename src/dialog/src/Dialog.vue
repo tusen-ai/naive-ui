@@ -100,6 +100,7 @@ export default defineComponent({
     render
   },
   props: {
+    ...useTheme.props,
     icon: {
       type: Function,
       default: undefined

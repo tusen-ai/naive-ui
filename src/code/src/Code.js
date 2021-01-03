@@ -17,6 +17,7 @@ import style from './styles/index.cssr.js'
 export default defineComponent({
   name: 'Code',
   props: {
+    ...useTheme.props,
     language: {
       type: String,
       default: undefined

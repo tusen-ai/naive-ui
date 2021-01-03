@@ -41,6 +41,7 @@ export default defineComponent({
   },
   mixins: [locale('Empty')],
   props: {
+    ...useTheme.props,
     description: {
       type: String,
       default: undefined

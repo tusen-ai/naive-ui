@@ -41,10 +41,6 @@ export default {
     }
   },
   props: {
-    unstableTheme: {
-      type: Object,
-      default: undefined
-    },
     listenTo: {
       type: [String, Object],
       default: undefined

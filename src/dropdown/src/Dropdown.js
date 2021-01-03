@@ -77,6 +77,7 @@ export default defineComponent({
     }
   },
   props: {
+    ...useTheme.props,
     ...NPopover.props,
     ...dropdownProps
   },

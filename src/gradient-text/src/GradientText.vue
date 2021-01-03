@@ -26,6 +26,7 @@ let houdiniRegistered = false
 export default defineComponent({
   name: 'GradientText',
   props: {
+    ...useTheme.props,
     size: {
       type: [String, Number],
       default: undefined

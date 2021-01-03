@@ -29,6 +29,7 @@ import style from './styles/index.cssr.js'
 export default defineComponent({
   name: 'Col',
   props: {
+    ...useTheme.props,
     span: {
       type: [String, Number],
       default: 1

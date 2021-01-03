@@ -54,6 +54,7 @@ export default defineComponent({
     render
   },
   props: {
+    ...useTheme.props,
     size: {
       validator (value) {
         return ['small', 'medium', 'large'].includes(value)

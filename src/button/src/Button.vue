@@ -100,6 +100,7 @@ export default {
     NFadeInExpandTransition
   },
   props: {
+    ...useTheme.props,
     color: {
       type: String,
       default: undefined

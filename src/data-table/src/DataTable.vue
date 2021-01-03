@@ -132,6 +132,7 @@ export default defineComponent({
     }
   },
   props: {
+    ...useTheme.props,
     pagination: {
       type: [Object, Boolean],
       default: false

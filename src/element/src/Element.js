@@ -13,15 +13,19 @@ export default defineComponent({
   name: 'Element',
   alias: ['El'],
   props: {
+    ...useTheme.props,
     tag: {
       type: String,
       default: 'div'
     },
+    // deprecated
     onThemeChange: {
-      type: Function,
+      validator () {
+        warn('element', '`on-theme-change` is deprecated.')
+        return true
+      },
       default: undefined
     },
-    // deprecated
     as: {
       validator () {
         warn('element', '`as` is deprecated, please use `tag` instead.')

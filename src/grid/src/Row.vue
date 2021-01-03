@@ -30,6 +30,7 @@ export default defineComponent({
     }
   },
   props: {
+    ...useTheme.props,
     gutter: {
       type: [Array, Number, String],
       default: 0
