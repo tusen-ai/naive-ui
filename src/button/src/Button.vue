@@ -190,8 +190,8 @@ export default {
       const NButtonGroup = inject('NButtonGroup', {})
       const { size: buttonGroupSize } = NButtonGroup
       if (buttonGroupSize) return buttonGroupSize
-      const NFormItem = inject('NFormItem', {})
-      const { mergedSize: formItemSize } = NFormItem
+      const NFormItem = inject('NFormItem', null)
+      const { mergedSize: formItemSize } = NFormItem || {}
       if (formItemSize) {
         return formItemSize
       }

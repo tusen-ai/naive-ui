@@ -9,9 +9,10 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import { NInput } from '../../input'
 
-export default {
+export default defineComponent({
   name: 'DynamicInputInputPreset',
   components: {
     NInput
@@ -45,5 +46,5 @@ export default {
       this['onUpdate:value'](value)
     }
   }
-}
+})
 </script>

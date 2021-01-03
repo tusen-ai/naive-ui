@@ -16,9 +16,10 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import { NInput } from '../../input'
 
-export default {
+export default defineComponent({
   name: 'DynamicInputPairPreset',
   components: {
     NInput
@@ -64,5 +65,5 @@ export default {
       })
     }
   }
-}
+})
 </script>

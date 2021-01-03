@@ -1,5 +1,5 @@
 <template>
-  <div class="n-dynamic-input">
+  <div class="n-dynamic-input" :style="cssVars">
     <n-button
       v-if="!mergedValue || mergedValue.length === 0"
       block
@@ -37,7 +37,6 @@
       <div class="n-dynamic-input-item__action">
         <n-button-group>
           <n-button v-if="!removeDisabled" circle @click="remove(index)">
-            {{ index }}
             <template #icon>
               <remove-icon />
             </template>
@@ -47,7 +46,6 @@
             circle
             @click="createItem(index)"
           >
-            {{ index }}
             <template #icon>
               <add-icon />
             </template>
@@ -59,26 +57,21 @@
 </template>
 
 <script>
-import { ref, toRef, isProxy, toRaw } from 'vue'
+import { ref, toRef, isProxy, toRaw, computed, defineComponent } from 'vue'
+import { useMergedState } from 'vooks'
+import { createId } from 'seemly'
 import { NButton, NButtonGroup } from '../../button'
 import { RemoveIcon, AddIcon } from '../../_base/icons'
+import { useFormItem, useTheme, locale } from '../../_mixins'
+import { warn, call } from '../../_utils'
+import { dynamicInputLight } from '../styles'
 import NDynamicInputInputPreset from './InputPreset.vue'
 import NDynamicInputPairPreset from './PairPreset.vue'
-import {
-  configurable,
-  themeable,
-  withCssr,
-  useFormItem,
-  locale
-} from '../../_mixins'
-import { createId } from 'seemly'
-import styles from './styles'
-import { warn, call } from '../../_utils'
-import { useMergedState } from 'vooks'
+import style from './styles/index.cssr.js'
 
 const globalDataKeyMap = new WeakMap()
 
-export default {
+export default defineComponent({
   name: 'DynamicInput',
   components: {
     NDynamicInputInputPreset,
@@ -88,7 +81,7 @@ export default {
     AddIcon,
     RemoveIcon
   },
-  mixins: [configurable, themeable, locale('DynamicInput'), withCssr(styles)],
+  mixins: [locale('DynamicInput')],
   provide () {
     return {
       NDynamicInput: this
@@ -176,11 +169,26 @@ export default {
   setup (props) {
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
+    const themeRef = useTheme(
+      'DynamicInput',
+      'DynamicInput',
+      style,
+      dynamicInputLight,
+      props
+    )
     return {
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: useMergedState(controlledValueRef, uncontrolledValueRef),
       dataKeyMap: globalDataKeyMap,
-      ...useFormItem(props)
+      ...useFormItem(props),
+      cssVars: computed(() => {
+        const {
+          self: { actionMargin }
+        } = themeRef.value
+        return {
+          '--action-margin': actionMargin
+        }
+      })
     }
   },
   computed: {
@@ -279,5 +287,5 @@ export default {
       if (onRemove) onRemove(index)
     }
   }
-}
+})
 </script>

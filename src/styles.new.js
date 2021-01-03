@@ -20,6 +20,7 @@ import { dialogDark } from './dialog/styles'
 import { dividerDark } from './divider/styles'
 import { drawerDark } from './drawer/styles'
 import { dropdownDark } from './dropdown/styles'
+import { dynamicInputDark } from './dynamic-input/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -43,5 +44,6 @@ export const darkTheme = {
   Dialog: dialogDark,
   Divider: dividerDark,
   Drawer: drawerDark,
-  Dropdown: dropdownDark
+  Dropdown: dropdownDark,
+  DynamicInput: dynamicInputDark
 }
