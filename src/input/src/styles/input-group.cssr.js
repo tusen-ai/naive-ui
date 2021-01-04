@@ -23,11 +23,11 @@ export default cB('input-group', `
         border-top-right-radius: 0!important;
         border-bottom-right-radius: 0!important;
       `, [
-        cE('input, add-button, border-mask, border', `
+        cE('input, add-button, state-border, border', `
           border-top-right-radius: 0!important;
           border-bottom-right-radius: 0!important;
         `, [
-          cB('input-number-button-border-mask', `
+          cB('input-number-button-state-border', `
             border-top-right-radius: 0!important;
             border-bottom-right-radius: 0!important;
           `),
@@ -44,11 +44,11 @@ export default cB('input-group', `
         border-top-left-radius: 0!important;
         border-bottom-left-radius: 0!important;
       `, [
-        cE('input, minus-button, border-mask, border', `
+        cE('input, minus-button, state-border, border', `
           border-top-left-radius: 0!important;
           border-bottom-left-radius: 0!important;
         `, [
-          cB('input-number-button-border-mask', `
+          cB('input-number-button-state-border', `
             border-top-left-radius: 0!important;
             border-bottom-left-radius: 0!important;
           `),
@@ -63,7 +63,7 @@ export default cB('input-group', `
         border-top-right-radius: 0!important;
         border-bottom-right-radius: 0!important;
       `, [
-        cE('border-mask, border', `
+        cE('state-border, border', `
           border-top-right-radius: 0!important;
           border-bottom-right-radius: 0!important;
         `)
@@ -72,7 +72,7 @@ export default cB('input-group', `
         border-top-left-radius: 0!important;
         border-bottom-left-radius: 0!important;
       `, [
-        cE('border-mask, border', `
+        cE('state-border, border', `
           border-top-left-radius: 0!important;
           border-bottom-left-radius: 0!important;
         `)

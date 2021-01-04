@@ -84,7 +84,7 @@
           @keyup="handleKeyUp"
         >
         <div v-if="showPlaceholder1" class="n-input__placeholder">
-          {{ mergedPlaceholder[0] }}
+          <span>{{ mergedPlaceholder[0] }}</span>
         </div>
       </div>
       <n-icon-config-provider
@@ -126,7 +126,7 @@
           @keyup="handleKeyUp"
         >
         <div v-if="showPlaceholder2" class="n-input__placeholder">
-          {{ mergedPlaceholder[1] }}
+          <span>{{ mergedPlaceholder[1] }}</span>
         </div>
       </div>
       <n-icon-config-provider class="n-input__suffix" :depth="disabled ? 5 : 4">
@@ -287,9 +287,10 @@ function createMethods (
     }
     if (
       !(
-        e.relatedTarget === inputRef.value ||
-        e.relatedTarget === input2Ref.value ||
-        e.relatedTarget === textareaRef.value
+        e.relatedTarget !== null &&
+        (e.relatedTarget === inputRef.value ||
+          e.relatedTarget === input2Ref.value ||
+          e.relatedTarget === textareaRef.value)
       )
     ) {
       inputFocusedRef.value = false
@@ -318,10 +319,11 @@ function createMethods (
   }
   const dealWithEvent = (e, type) => {
     if (
-      e.relatedTarget === inputRef.value ||
-      e.relatedTarget === input2Ref.value ||
-      e.relatedTarget === textareaRef.value ||
-      e.relatedTarget === wrapperRef.value
+      e.relatedTarget !== null &&
+      (e.relatedTarget === inputRef.value ||
+        e.relatedTarget === input2Ref.value ||
+        e.relatedTarget === textareaRef.value ||
+        e.relatedTarget === wrapperRef.value)
     ) {
       /**
        * activeElement transfer inside the input, do nothing
@@ -421,6 +423,7 @@ export default defineComponent({
     NBaseClearButton
   },
   props: {
+    ...useTheme.props,
     bordered: {
       type: Boolean,
       default: undefined

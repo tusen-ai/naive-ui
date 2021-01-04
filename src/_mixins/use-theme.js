@@ -13,12 +13,13 @@ function useTheme (resolveId, mountId, style, defaultTheme, props) {
     // keep props to make theme overrideable
     const {
       unstableTheme: { common, self, peers = {} } = {},
-      unstableThemeOverrides: {
-        common: commonOverrides,
-        self: selfOverrides,
-        peers: peersOverrides = {}
-      } = {}
+      unstableThemeOverrides: selfOverrides = {},
+      builtinThemeOverrides: builtinOverrides = {}
     } = props
+    const {
+      common: commonOverrides,
+      peers: peersOverrides = {}
+    } = selfOverrides
     const {
       mergedUnstableTheme: {
         common: injectedGlobalCommon,
@@ -30,13 +31,13 @@ function useTheme (resolveId, mountId, style, defaultTheme, props) {
       } = {},
       mergedUnstableThemeOverrides: {
         common: injectedGlobalCommonOverrides,
-        [resolveId]: {
-          common: injectedCommonOverrides,
-          self: injectedSelfOverrides,
-          peers: injectedPeersOverrides = {}
-        } = {}
+        [resolveId]: injectedSelfOverrides = {}
       } = {}
     } = NConfigProvider
+    const {
+      common: injectedCommonOverrides,
+      peers: injectedPeersOverrides = {}
+    } = injectedSelfOverrides
     const mergedCommon = merge(
       common ||
         injectedCommon ||
@@ -49,6 +50,7 @@ function useTheme (resolveId, mountId, style, defaultTheme, props) {
     )
     const mergedSelf = merge(
       (self || injectedSelf || defaultTheme.self)?.(mergedCommon) || {},
+      builtinOverrides,
       injectedSelfOverrides,
       selfOverrides
     )
@@ -68,6 +70,10 @@ useTheme.props = {
     default: undefined
   },
   unstableThemeOverrides: {
+    type: Object,
+    default: undefined
+  },
+  builtinThemeOverrides: {
     type: Object,
     default: undefined
   }

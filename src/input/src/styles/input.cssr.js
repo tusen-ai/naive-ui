@@ -50,6 +50,7 @@ export default c([
       border: none;
       outline: none;
       background-color: transparent;
+      text-align: inherit;
       transition:
         caret-color .3s var(--bezier),
         color .3s var(--bezier),
@@ -81,7 +82,12 @@ export default c([
       bottom: 0;
       overflow: hidden;
       color: var(--placeholder-color);
-    `),
+    `, [
+      c('span', {
+        width: '100%',
+        display: 'inline-block'
+      })
+    ]),
     // input
     cB('input-wrapper', `
       display: inline-flex;
@@ -149,7 +155,6 @@ export default c([
         color: var(--text-color);
       `)
     ]),
-
     cM('disabled', {
       cursor: 'not-allowed',
       backgroundColor: 'var(--color-disabled)'
@@ -219,8 +224,7 @@ export default c([
         fontSize: 'var(--icon-size)'
       }),
       cB('icon', {
-        fontSize: 'var(--icon-size)',
-        transition: 'color .3s var(--bezier)'
+        fontSize: 'var(--icon-size)'
       })
     ])
   ])
