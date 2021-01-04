@@ -1,14 +1,15 @@
-import create from '../../_styles/utils/create-component-base'
 import { changeColor } from 'seemly'
-import { baseDark } from '../../_styles/base'
 import { iconDark } from '../../icon/styles'
 import commonVars from './_common'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'InputNumber',
-  theme: 'dark',
-  peer: [baseDark, iconDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  peers: {
+    Icon: iconDark
+  },
+  self (vars) {
     const {
       primaryColor,
       primaryColorHover,
@@ -94,4 +95,4 @@ export default create({
       buttonTextColorPressedError: errorColorPressed
     }
   }
-})
+}

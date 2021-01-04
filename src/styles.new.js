@@ -29,6 +29,7 @@ import { gradientTextDark } from './gradient-text/styles'
 import { gridDark } from './grid/styles'
 import { iconDark } from './icon/styles'
 import { inputDark } from './input/styles'
+import { inputNumberDark } from './input-number/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -61,5 +62,6 @@ export const darkTheme = {
   GradientText: gradientTextDark,
   Grid: gridDark,
   Icon: iconDark,
-  Input: inputDark
+  Input: inputDark,
+  InputNumber: inputNumberDark
 }

@@ -1,14 +1,13 @@
-import create from '../../_styles/utils/create-component-base'
 import { changeColor } from 'seemly'
-import { baseLight } from '../../_styles/base'
 import { iconLight } from '../../icon/styles'
 import commonVars from './_common'
 
-export default create({
+export default {
   name: 'InputNumber',
-  theme: 'light',
-  peer: [baseLight, iconLight],
-  getLocalVars (vars) {
+  peers: {
+    Icon: iconLight
+  },
+  self (vars) {
     const {
       primaryColor,
       primaryColorHover,
@@ -94,4 +93,4 @@ export default create({
       buttonTextColorPressedError: errorColorPressed
     }
   }
-})
+}
