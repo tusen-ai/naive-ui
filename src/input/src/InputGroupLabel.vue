@@ -47,13 +47,13 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--ip-bezier': cubicBezierEaseInOut,
-          '--ip-group-label-color': groupLabelColor,
-          '--ip-border-radius': borderRadius,
-          '--ip-text-color': textColor,
-          '--ip-font-size': fontSize,
-          '--ip-line-height': lineHeight,
-          '--ip-height': height
+          '--bezier': cubicBezierEaseInOut,
+          '--group-label-color': groupLabelColor,
+          '--border-radius': borderRadius,
+          '--text-color': textColor,
+          '--font-size': fontSize,
+          '--line-height': lineHeight,
+          '--height': height
         }
       })
     }

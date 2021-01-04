@@ -1,28 +1,28 @@
 import { cB, cE } from '../../../_utils/cssr'
 
 // vars:
-// --ip-bezier
-// --ip-group-label-color
-// --ip-border-radius
-// --ip-text-color
-// --ip-font-size
-// --ip-height
+// --bezier
+// --group-label-color
+// --border-radius
+// --text-color
+// --font-size
+// --height
 export default cB('input-group-label', `
   position: relative;
   user-select: none;
   box-sizing: border-box;
   padding: 0 12px;
   display: inline-block;
-  border-radius: var(--ip-border-radius);
-  background-color: var(--ip-group-label-color);
-  color: var(--ip-text-color);
-  font-size: var(--ip-font-size);
-  line-height: var(--ip-height);
-  height: var(--ip-height);
+  border-radius: var(--border-radius);
+  background-color: var(--group-label-color);
+  color: var(--text-color);
+  font-size: var(--font-size);
+  line-height: var(--height);
+  height: var(--height);
   transition: 
-    color .3s var(--ip-bezier),
-    background-color .3s var(--ip-bezier),
-    box-shadow .3s var(--ip-bezier);
+    color .3s var(--bezier),
+    background-color .3s var(--bezier),
+    box-shadow .3s var(--bezier);
 `, [
   cE('border', `
     position: absolute;
@@ -31,7 +31,7 @@ export default cB('input-group-label', `
     top: 0;
     bottom: 0;
     border-radius: inherit;
-    border: var(--ip-border);
-    transition: 'border-color .3s var(--ip-bezier);
+    border: var(--border);
+    transition: 'border-color .3s var(--bezier);
   `)
 ])

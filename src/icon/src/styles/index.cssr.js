@@ -12,16 +12,21 @@ export default cB('icon', `
   display: inline-block;
   position: relative;
   fill: currentColor;
-  color: var(--color);
 `,
 [
   cM('color-transition', {
     transition: 'color .3s var(--bezier)'
   }),
+  cM('depth', {
+    color: 'var(--color)'
+  }, [
+    c('svg', {
+      opacity: 'var(--opacity)',
+      transition: 'opacity .3s var(--bezier)'
+    })
+  ]),
   c('svg', {
     height: '1em',
-    width: '1em',
-    opacity: 'var(--opacity)',
-    transition: 'opacity .3s var(--bezier)'
+    width: '1em'
   })
 ])

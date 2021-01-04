@@ -28,14 +28,19 @@ export default defineComponent({
     colorTransition: {
       type: Boolean,
       default: false
+    },
+    // private
+    configurable: {
+      type: Boolean,
+      default: true
     }
   },
   setup (props) {
     const NIconConfigProvider = inject('NIconConfigProvider', null)
     const mergedDepthRef = computed(() => {
-      const { depth } = props
+      const { depth, configurable } = props
       if (depth !== undefined) return depth
-      return NIconConfigProvider?.depth
+      return configurable ? NIconConfigProvider?.depth : undefined
     })
     const themeRef = useTheme('Icon', 'Icon', style, iconLight, props)
     return {
@@ -53,7 +58,7 @@ export default defineComponent({
           common: { cubicBezierEaseInOut },
           self
         } = themeRef.value
-        if (depth !== undefined && depth !== null) {
+        if (depth !== undefined) {
           const { color, [`opacity${depth}Depth`]: opacity } = self
           return {
             '--bezier': cubicBezierEaseInOut,
@@ -62,9 +67,7 @@ export default defineComponent({
           }
         }
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--color': '"unset"',
-          '--opacity': '"unset"'
+          '--bezier': cubicBezierEaseInOut
         }
       })
     }
@@ -80,9 +83,8 @@ export default defineComponent({
         class: [
           'n-icon',
           {
-            [`n-icon--${mergedDepth}-depth`]: mergedDepth,
-            'n-icon--color-transition':
-              colorTransition || mergedDepth !== undefined
+            'n-icon--depth': mergedDepth,
+            'n-icon--color-transition': colorTransition || mergedDepth
           }
         ],
         style: Object.assign(this.cssVars, this.mergedStyle)

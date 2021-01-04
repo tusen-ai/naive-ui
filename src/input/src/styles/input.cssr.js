@@ -2,28 +2,28 @@ import { cB, c, cE, cM, cNotM } from '../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up'
 
 // vars:
-// --ip-bezier
-// --ip-color
-// --ip-font-size
-// --ip-border-radius
-// --ip-height
-// --ip-padding-left
-// --ip-padding-right
-// --ip-text-color
-// --ip-text-color-disabled
-// --ip-caret-color
-// --ip-text-decoration-color
-// --ip-border
-// --ip-border-disabled
-// --ip-border-hover
-// --ip-border-focus
-// --ip-placeholder-color
-// --ip-placeholder-color-disabled
-// --ip-line-height-textarea
-// --ip-color-disabled
-// --ip-color-focus
-// --ip-box-shadow-focus
-// --ip-icon-size
+// --bezier
+// --color
+// --font-size
+// --border-radius
+// --height
+// --padding-left
+// --padding-right
+// --text-color
+// --text-color-disabled
+// --caret-color
+// --text-decoration-color
+// --border
+// --border-disabled
+// --border-hover
+// --border-focus
+// --placeholder-color
+// --placeholder-color-disabled
+// --line-height-textarea
+// --color-disabled
+// --color-focus
+// --box-shadow-focus
+// --icon-size
 export default c([
   cB('input', `
     line-height: 1.5;
@@ -33,20 +33,20 @@ export default c([
     position: relative;
     width: 100%;
     display: inline-block;
-    border-radius: var(--ip-border-radius);
-    background-color: var(--ip-color);
-    transition: background-color .3s var(--ip-bezier);
-    --ip-padding-vertical: calc((var(--ip-height) - 1.5 * var(--ip-font-size)) / 2);
+    border-radius: var(--border-radius);
+    background-color: var(--color);
+    transition: background-color .3s var(--bezier);
+    --padding-vertical: calc((var(--height) - 1.5 * var(--font-size)) / 2);
   `, [
     cE('input', {
-      height: 'var(--ip-height)'
+      height: 'var(--height)'
     }),
     cE('input, textarea, textarea-mirror, splitor, placeholder', `
-      padding-left: var(--ip-padding-left);
-      padding-right: var(--ip-padding-right);
-      padding-top: var(--ip-padding-vertical);
-      padding-bottom: var(--ip-padding-vertical);
-      font-size: var(--ip-font-size);
+      padding-left: var(--padding-left);
+      padding-right: var(--padding-right);
+      padding-top: var(--padding-vertical);
+      padding-bottom: var(--padding-vertical);
+      font-size: var(--font-size);
       line-height: 1.5;
     `),
     // cM('suffix, clearable', [
@@ -99,7 +99,7 @@ export default c([
     // ]),
     cM('round', [
       cNotM('textarea', {
-        borderRadius: 'calc(var(--ip-height) / 2)'
+        borderRadius: 'calc(var(--height) / 2)'
       })
     ]),
     cM('split', {
@@ -121,34 +121,34 @@ export default c([
     ]),
     cM('disabled', {
       cursor: 'not-allowed',
-      backgroundColor: 'var(--ip-color-disabled)'
+      backgroundColor: 'var(--color-disabled)'
     }, [
       cE('border', {
-        border: 'var(--ip-border-disabled)'
+        border: 'var(--border-disabled)'
       }),
       cE('input, textarea', {
         cursor: 'not-allowed',
-        color: 'var(--ip-text-color-disabled)'
+        color: 'var(--text-color-disabled)'
       }),
       cE('placeholder', {
-        color: 'var(--ip-placeholder-color-disabled)'
+        color: 'var(--placeholder-color-disabled)'
       }),
       cE('splitor', {
-        color: 'var(--ip-text-color-disabled)'
+        color: 'var(--text-color-disabled)'
       })
     ]),
     cNotM('disabled', [
       cM('focus', {
-        backgroundColor: 'var(--ip-color-focus)'
+        backgroundColor: 'var(--color-focus)'
       }, [
         cE('state-border', {
-          border: 'var(--ip-border-focus)',
-          boxShadow: 'var(--ip-box-shadow-focus)'
+          border: 'var(--border-focus)',
+          boxShadow: 'var(--box-shadow-focus)'
         })
       ]),
       c('&:hover', [
         cE('state-border', {
-          border: 'var(--ip-border-focus)'
+          border: 'var(--border-focus)'
         })
       ])
     ]),
@@ -161,10 +161,10 @@ export default c([
       bottom: 0;
       pointer-events: none;
       border-radius: inherit;
-      border: var(--ip-border);
+      border: var(--border);
       transition:
-        box-shadow .3s var(--ip-bezier),
-        border-color .3s var(--ip-bezier);
+        box-shadow .3s var(--bezier),
+        border-color .3s var(--bezier);
     `),
     cE('state-border', {
       borderColor: 'transparent',
@@ -179,8 +179,8 @@ export default c([
       top: 0;
       bottom: 0;
       overflow: hidden;
-      transition: color .3s var(--ip-bezier);
-      color: var(--ip-placeholder-color);
+      transition: color .3s var(--bezier);
+      color: var(--placeholder-color);
     `),
     cE('suffix, prefix', `
       position: absolute;
@@ -190,16 +190,15 @@ export default c([
       display: flex;
       align-items: center;
       top: 50%;
-      width: var(--ip-icon-size);
+      width: var(--icon-size);
     `, [
       cB('base-clear-button', {
-        fontSize: 'var(--ip-icon-size)'
+        fontSize: 'var(--icon-size)'
       }),
       cB('icon', {
         justifySelf: 'center',
-        fontSize: 'var(--ip-icon-color)',
-        color: 'var(--ip-icon-color)',
-        transition: 'color .3s var(--ip-bezier)'
+        fontSize: 'var(--icon-size)',
+        transition: 'color .3s var(--bezier)'
       })
     ]),
     cE('suffix', {
@@ -218,7 +217,7 @@ export default c([
       box-sizing: border-box;
       font-family: inherit;
       font-size: inherit;
-      line-height: var(--ip-line-height-textarea);
+      line-height: var(--line-height-textarea);
       margin: 0;
       resize: vertical;
       padding-left: 14px;
@@ -250,21 +249,21 @@ export default c([
       width: 100%;
       background-color: transparent;
       min-width: 0;
-      text-decoration-color: var(--ip-text-decoration-color);
-      color: var(--ip-text-color);
-      caret-color: var(--ip-caret-color);
+      text-decoration-color: var(--text-decoration-color);
+      color: var(--text-color);
+      caret-color: var(--caret-color);
       transition:
-        caret-color .3s var(--ip-bezier),
-        color .3s var(--ip-bezier),
-        text-decoration-color .3s var(--ip-bezier);
+        caret-color .3s var(--bezier),
+        color .3s var(--bezier),
+        text-decoration-color .3s var(--bezier);
     `, [
       c('&::placeholder', {
         color: 'transparent'
       })
     ]),
     cE('splitor', {
-      transition: 'color .3s var(--ip-bezier)',
-      color: 'var(--ip-text-color)',
+      transition: 'color .3s var(--bezier)',
+      color: 'var(--text-color)',
       paddingLeft: '0 !important',
       paddingRight: '0 !important'
     }),

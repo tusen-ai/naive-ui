@@ -2,11 +2,11 @@ import { cB, c, cE } from '../../../../_utils/cssr'
 import createIconSwitchTransition from '../../../../_styles/transitions/icon-switch'
 
 // vars:
-// --cb-bezier
-// --cb-color
-// --cb-size
-// --cb-color-hover
-// --cb-color-pressed
+// --bezier
+// --color
+// --size
+// --color-hover
+// --color-pressed
 export default cB('base-clear-button', {
   flexShrink: 0,
   height: '1em',
@@ -15,16 +15,16 @@ export default cB('base-clear-button', {
 }, [
   c('>', [
     cE('clear', {
-      fontSize: 'var(--cb-size)!important',
+      fontSize: 'var(--size)',
       cursor: 'pointer',
-      color: 'var(--cb-color)!important',
-      transition: 'color .3s var(--cb-bezier)!important'
+      color: 'var(--color)',
+      transition: 'color .3s var(--bezier)'
     }, [
       c('&:hover', {
-        color: 'var(--cb-color-hover)!important'
+        color: 'var(--color-hover)!important'
       }),
       c('&:active', {
-        color: 'var(--cb-color-pressed)!important'
+        color: 'var(--color-pressed)!important'
       })
     ]),
     cE('placeholder', {

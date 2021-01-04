@@ -4,7 +4,7 @@
       <n-icon
         v-if="show"
         key="dismiss"
-        :depth="null"
+        :configurable="false"
         class="n-base-clear-button__clear"
         @click="onClear"
         @mousedown.prevent
@@ -20,10 +20,10 @@
 
 <script>
 import { computed, defineComponent } from 'vue'
-import { DismissCircleIcon } from '../../icons'
 import { NIcon } from '../../../icon'
 import { NIconSwitchTransition } from '../../../_base'
 import { useTheme } from '../../../_mixins'
+import { DismissCircleIcon } from '../../icons'
 import { baseClearButtonLight } from '../styles'
 import style from './styles/index.cssr.js'
 
