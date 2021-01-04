@@ -28,6 +28,7 @@ import { formDark } from './form/styles'
 import { gradientTextDark } from './gradient-text/styles'
 import { gridDark } from './grid/styles'
 import { iconDark } from './icon/styles'
+import { inputDark } from './input/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -59,5 +60,6 @@ export const darkTheme = {
   Form: formDark,
   GradientText: gradientTextDark,
   Grid: gridDark,
-  Icon: iconDark
+  Icon: iconDark,
+  Input: inputDark
 }

@@ -53,74 +53,94 @@
       @change="handleChange"
       @keyup="handleKeyUp"
     />
-    <div v-else class="n-input-first-input">
-      <input
-        ref="input"
-        :type="type"
-        class="n-input__input n-input__input--first"
-        :tabindex="passivelyActivated && !inputFocused ? -1 : false"
-        :placeholder="mergedPlaceholder[0]"
-        :disabled="disabled"
-        :maxlength="maxlength"
-        :minlength="minlength"
-        :value="pair ? mergedValue && mergedValue[0] : mergedValue"
-        :readonly="readonly"
-        :autofocus="autofocus"
-        :size="attrSize"
-        @blur="handleInputBlur"
-        @focus="handleInputFocus"
-        @input="handleInput($event, 0)"
-        @change="handleChange($event, 0)"
-        @keyup="handleKeyUp"
+    <div v-else class="n-input-wrapper">
+      <n-icon-config-provider
+        v-if="$slots.affix || $slots.prefix"
+        class="n-input__prefix"
+        :depth="disabled ? 5 : 4"
       >
-      <div v-if="showPlaceholder1" class="n-input__placeholder">
-        {{ mergedPlaceholder[0] }}
+        <slot name="affix">
+          <slot name="prefix" />
+        </slot>
+      </n-icon-config-provider>
+      <div class="n-input__input">
+        <input
+          ref="inputRef"
+          :type="type"
+          class="n-input__input-el"
+          :tabindex="passivelyActivated && !inputFocused ? -1 : false"
+          :placeholder="mergedPlaceholder[0]"
+          :disabled="disabled"
+          :maxlength="maxlength"
+          :minlength="minlength"
+          :value="pair ? mergedValue && mergedValue[0] : mergedValue"
+          :readonly="readonly"
+          :autofocus="autofocus"
+          :size="attrSize"
+          @blur="handleInputBlur"
+          @focus="handleInputFocus"
+          @input="handleInput($event, 0)"
+          @change="handleChange($event, 0)"
+          @keyup="handleKeyUp"
+        >
+        <div v-if="showPlaceholder1" class="n-input__placeholder">
+          {{ mergedPlaceholder[0] }}
+        </div>
       </div>
+      <n-icon-config-provider
+        v-if="!pair"
+        class="n-input__suffix"
+        :depth="disabled ? 5 : 4"
+      >
+        <slot name="suffix" />
+        <n-base-clear-button
+          v-if="clearable || $slots.clear"
+          :theme="'light'"
+          :show="showClearButton"
+          @clear="handleClear"
+        >
+          <slot name="clear" />
+        </n-base-clear-button>
+      </n-icon-config-provider>
     </div>
     <span v-if="pair" class="n-input__splitor">
       {{ separator }}
     </span>
-    <div v-if="pair" class="n-input-second-input">
-      <input
-        ref="input2"
-        :type="type"
-        class="n-input__input n-input__input--second"
-        :tabindex="passivelyActivated && !inputFocused ? -1 : false"
-        :placeholder="mergedPlaceholder[1]"
-        :disabled="disabled"
-        :maxlength="maxlength"
-        :minlength="minlength"
-        :value="mergedValue && mergedValue[1]"
-        :readonly="readonly"
-        @blur="handleInputBlur"
-        @focus="handleInputFocus"
-        @input="handleInput($event, 1)"
-        @change="handleChange($event, 1)"
-        @keyup="handleKeyUp"
-      >
-      <div v-if="showPlaceholder2" class="n-input__placeholder">
-        {{ mergedPlaceholder[1] }}
+    <div v-if="pair" class="n-input-wrapper">
+      <div class="n-input__input">
+        <input
+          ref="input2Ref"
+          :type="type"
+          class="n-input__input-el"
+          :tabindex="passivelyActivated && !inputFocused ? -1 : false"
+          :placeholder="mergedPlaceholder[1]"
+          :disabled="disabled"
+          :maxlength="maxlength"
+          :minlength="minlength"
+          :value="mergedValue && mergedValue[1]"
+          :readonly="readonly"
+          @blur="handleInputBlur"
+          @focus="handleInputFocus"
+          @input="handleInput($event, 1)"
+          @change="handleChange($event, 1)"
+          @keyup="handleKeyUp"
+        >
+        <div v-if="showPlaceholder2" class="n-input__placeholder">
+          {{ mergedPlaceholder[1] }}
+        </div>
       </div>
+      <n-icon-config-provider class="n-input__suffix" :depth="disabled ? 5 : 4">
+        <slot name="suffix" />
+        <n-base-clear-button
+          v-if="clearable || $slots.clear"
+          :theme="'light'"
+          :show="showClearButton"
+          @clear="handleClear"
+        >
+          <slot name="clear" />
+        </n-base-clear-button>
+      </n-icon-config-provider>
     </div>
-    <n-icon-config-provider
-      v-if="$slots.affix || $slots.prefix"
-      class="n-input__prefix"
-      :depth="disabled ? 5 : 4"
-    >
-      <slot name="affix">
-        <slot name="prefix" />
-      </slot>
-    </n-icon-config-provider>
-    <n-icon-config-provider class="n-input__suffix" :depth="disabled ? 5 : 4">
-      <slot name="suffix" />
-      <n-base-clear-button
-        :theme="'light'"
-        :show="showClearButton"
-        @clear="handleClear"
-      >
-        <slot name="clear" />
-      </n-base-clear-button>
-    </n-icon-config-provider>
     <div v-if="showTextareaPlaceholder" class="n-input__placeholder">
       {{ placeholder }}
     </div>
@@ -137,7 +157,8 @@ import {
   ref,
   toRef,
   watch,
-  onMounted
+  onMounted,
+  getCurrentInstance
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { NBaseClearButton } from '../../_base'
@@ -164,6 +185,7 @@ function createMethods (
     textareaMirrorRef
   }
 ) {
+  const vm = getCurrentInstance().proxy
   const doInput = (value) => {
     const { 'onUpdate:value': onUpdateValue, onInput } = props
     const { nTriggerFormInput } = formItem
@@ -254,8 +276,9 @@ function createMethods (
       value[index] = changedValue
       event === 'input' ? doInput(value) : doChange(value)
     }
-    /** force update to sync input's view with value */
-    // ? this.$forceUpdate()
+    // force update to sync input's view with value
+    // if not set, after input, input value won't sync with dom input value
+    vm.$forceUpdate()
   }
   const handleInputBlur = (e) => {
     doInputBlur(e)
@@ -336,8 +359,11 @@ function createMethods (
   }
   const handleWrapperKeyDownEnter = (e) => {
     if (props.passivelyActivated) {
-      if (inputFocusedRef.value && props.deactivateOnEnter) {
-        handleWrapperKeyDownEsc()
+      const { value: focused } = inputFocusedRef
+      if (focused) {
+        if (props.deactivateOnEnter) {
+          handleWrapperKeyDownEsc()
+        }
         return
       }
       e.preventDefault()
@@ -383,7 +409,8 @@ function createMethods (
     handleChange,
     handleClick,
     handleClear,
-    handleWrapperKeyDownEnter
+    handleWrapperKeyDownEnter,
+    handleWrapperKeyDownEsc
   }
 }
 

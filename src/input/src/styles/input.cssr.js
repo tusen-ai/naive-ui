@@ -1,5 +1,4 @@
 import { cB, c, cE, cM, cNotM } from '../../../_utils/cssr'
-import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up'
 
 // vars:
 // --bezier
@@ -32,93 +31,125 @@ export default c([
     box-sizing: border-box;
     position: relative;
     width: 100%;
-    display: inline-block;
+    display: inline-flex;
     border-radius: var(--border-radius);
     background-color: var(--color);
     transition: background-color .3s var(--bezier);
     --padding-vertical: calc((var(--height) - 1.5 * var(--font-size)) / 2);
   `, [
-    cE('input', {
-      height: 'var(--height)'
-    }),
-    cE('input, textarea, textarea-mirror, splitor, placeholder', `
-      padding-left: var(--padding-left);
-      padding-right: var(--padding-right);
-      padding-top: var(--padding-vertical);
-      padding-bottom: var(--padding-vertical);
-      font-size: var(--font-size);
-      line-height: 1.5;
+    // common
+    cE('input', `
+      flex-grow: 1;
+      position: relative;
     `),
-    // cM('suffix, clearable', [
-    //   cM('split', [
-    //     cE('input', [
-    //       cM('second', {
-    //         // paddingRight: `${paddingIcon} !important`
-    //       }, [
-    //         c('& +', [
-    //           cE('placeholder', {
-    //             // right: `${paddingIcon} !important`
-    //           })
-    //         ])
-    //       ])
-    //     ])
-    //   ]),
-    //   cNotM('split', [
-    //     cE('input', [
-    //       cM('first', {
-    //         // paddingRight: `${paddingIcon} !important`
-    //       })
-    //     ]),
-    //     cE('placeholder', {
-    //       //right: `${paddingIcon} !important`
-    //     })
-    //   ])
-    // ]),
-    // cM('prefix', [
-    //   cNotM('split', [
-    //     cE('placeholder', {
-    //       left: `${paddingIcon} !important`
-    //     })
-    //   ]),
-    //   cM('split', [
-    //     cE('input', [
-    //       cM('first', [
-    //         c('& +', [
-    //           cE('placeholder', {
-    //             left: `${paddingIcon} !important`
-    //           })
-    //         ])
-    //       ])
-    //     ])
-    //   ]),
-    //   cE('input', [
-    //     cM('first', {
-    //       paddingLeft: `${paddingIcon} !important`
-    //     })
-    //   ])
-    // ]),
+    cE('input-el, textarea, textarea-mirror, splitor, placeholder', `
+      box-sizing: border-box;
+      font-size: inherit;
+      line-height: 1.5;
+      font-family: inherit;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      transition:
+        caret-color .3s var(--bezier),
+        color .3s var(--bezier),
+        text-decoration-color .3s var(--bezier);
+    `),
+    cE('input-el, textarea', `
+      -webkit-appearance: none;
+      width: 100%;
+      min-width: 0;
+      text-decoration-color: var(--text-decoration-color);
+      color: var(--text-color);
+      caret-color: var(--caret-color);
+    `, [
+      c('&::placeholder', {
+        color: 'transparent'
+      })
+    ]),
     cM('round', [
       cNotM('textarea', {
         borderRadius: 'calc(var(--height) / 2)'
       })
     ]),
-    cM('split', {
-      display: 'inline-flex'
+    cE('placeholder', `
+      pointer-events: none;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      overflow: hidden;
+      color: var(--placeholder-color);
+    `),
+    // input
+    cB('input-wrapper', `
+      display: inline-flex;
+      flex-grow: 1;
+      position: relative;
+      padding-left: var(--padding-left);
+      padding-right: var(--padding-right);
+    `),
+    cE('input-el', {
+      padding: 0,
+      height: 'var(--height)'
     }, [
-      cE('input, placeholder', {
-        textAlign: 'center'
-      })
+      c('+', [
+        cE('placeholder', `
+          display: flex;
+          align-items: center;  
+        `)
+      ])
     ]),
     cNotM('textarea', [
       cE('placeholder', {
         whiteSpace: 'nowrap'
       })
     ]),
+    // textarea
     cM('textarea', [
-      cE('placeholder', {
-        whiteSpace: 'unset'
-      })
+      cE('textarea, textarea-mirror, placeholder', `
+        padding-left: var(--padding-left);
+        padding-right: var(--padding-right);
+        padding-top: var(--padding-vertical);
+        padding-bottom: var(--padding-vertical);
+        display: inline-block;
+        vertical-align: bottom;
+        box-sizing: border-box;
+        line-height: var(--line-height-textarea);
+        margin: 0;
+        resize: vertical;
+      `),
+      cE('textarea', [
+        cM('autosize', `
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          resize: none;
+        `)
+      ]),
+      cE('textarea-mirror', `
+        overflow: hidden;
+        visibility: hidden;
+        position: static;
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+      `)
     ]),
+    // pair
+    cM('split', [
+      cE('input-el, placeholder', {
+        textAlign: 'center'
+      }),
+      cE('splitor', `
+        display: flex;
+        align-items: center;
+        transition: color .3s var(--bezier);
+        color: var(--text-color);
+      `)
+    ]),
+
     cM('disabled', {
       cursor: 'not-allowed',
       backgroundColor: 'var(--color-disabled)'
@@ -126,7 +157,7 @@ export default c([
       cE('border', {
         border: 'var(--border-disabled)'
       }),
-      cE('input, textarea', {
+      cE('input-el, textarea', {
         cursor: 'not-allowed',
         color: 'var(--text-color-disabled)'
       }),
@@ -166,118 +197,31 @@ export default c([
         box-shadow .3s var(--bezier),
         border-color .3s var(--bezier);
     `),
-    cE('state-border', {
-      borderColor: 'transparent',
-      zIndex: 1
-    }),
-    cE('placeholder', `
-      box-sizing: border-box;
-      pointer-events: none;
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      overflow: hidden;
-      transition: color .3s var(--bezier);
-      color: var(--placeholder-color);
+    cE('state-border', `
+      border-color: transparent;
+      z-index: 1;
     `),
+    cE('prefix', {
+      marginRight: '4px'
+    }),
+    cE('suffix', {
+      marginLeft: '4px'
+    }),
     cE('suffix, prefix', `
-      position: absolute;
-      line-height: 1;
-      height: 0;
+      line-height: 1.5;
       white-space: nowrap;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      top: 50%;
-      width: var(--icon-size);
+      justify-content: center;
+      min-width: var(--icon-size);
     `, [
       cB('base-clear-button', {
         fontSize: 'var(--icon-size)'
       }),
       cB('icon', {
-        justifySelf: 'center',
         fontSize: 'var(--icon-size)',
         transition: 'color .3s var(--bezier)'
       })
-    ]),
-    cE('suffix', {
-      justifyContent: 'flex-end',
-      right: '12px'
-    }, [
-      fadeInScaleUpTransition() // button suffix
-    ]),
-    cE('prefix', {
-      justifyContent: 'flex-start',
-      left: '12px'
-    }),
-    cE('textarea, textarea-mirror', `
-      display: inline-block;
-      vertical-align: bottom;
-      box-sizing: border-box;
-      font-family: inherit;
-      font-size: inherit;
-      line-height: var(--line-height-textarea);
-      margin: 0;
-      resize: vertical;
-      padding-left: 14px;
-      padding-right: 14px;
-    `),
-    cE('textarea', [
-      cM('autosize', `
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        resize: none;
-      `)
-    ]),
-    cE('textarea-mirror', `
-      overflow: hidden;
-      visibility: hidden;
-      position: static;
-      white-space: pre-wrap;
-      overflow-wrap: break-word;
-    `),
-    cE('input, textarea', `
-      -webkit-appearance: none;
-      box-sizing: border-box;
-      border: none;
-      font-size: inherit;
-      outline: none;
-      font-family: inherit;
-      width: 100%;
-      background-color: transparent;
-      min-width: 0;
-      text-decoration-color: var(--text-decoration-color);
-      color: var(--text-color);
-      caret-color: var(--caret-color);
-      transition:
-        caret-color .3s var(--bezier),
-        color .3s var(--bezier),
-        text-decoration-color .3s var(--bezier);
-    `, [
-      c('&::placeholder', {
-        color: 'transparent'
-      })
-    ]),
-    cE('splitor', {
-      transition: 'color .3s var(--bezier)',
-      color: 'var(--text-color)',
-      paddingLeft: '0 !important',
-      paddingRight: '0 !important'
-    }),
-    cB('input-clear', {
-      display: 'flex',
-      marginRight: '4px'
-    }),
-    cB('input-first-input', {
-      flexGrow: 1,
-      position: 'relative'
-    }),
-    cB('input-second-input', {
-      flexGrow: 1,
-      position: 'relative'
-    })
+    ])
   ])
 ])

@@ -32,6 +32,6 @@ export default cB('input-group-label', `
     bottom: 0;
     border-radius: inherit;
     border: var(--border);
-    transition: 'border-color .3s var(--bezier);
+    transition: border-color .3s var(--bezier);
   `)
 ])

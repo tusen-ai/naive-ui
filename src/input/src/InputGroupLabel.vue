@@ -43,12 +43,14 @@ export default defineComponent({
             textColor,
             lineHeight,
             fontSize,
+            border,
             [createKey('height', size)]: height
           }
         } = themeRef.value
         return {
           '--bezier': cubicBezierEaseInOut,
           '--group-label-color': groupLabelColor,
+          '--border': border,
           '--border-radius': borderRadius,
           '--text-color': textColor,
           '--font-size': fontSize,

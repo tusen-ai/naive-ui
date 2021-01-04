@@ -11,22 +11,12 @@ export default cB('input-group', `
       c('&:not(:last-child)', `
         border-top-right-radius: 0!important;
         border-bottom-right-radius: 0!important;
-      `, [
-        cE('box-shadow, state-border, border', `
-          border-top-right-radius: 0!important;
-          border-bottom-right-radius: 0!important;
-        `)
-      ]),
+      `),
       c('&:not(:first-child)', `
         border-top-left-radius: 0!important;
         border-bottom-left-radius: 0!important;
         margin-left: -1px!important;
-      `, [
-        cE('box-shadow, state-border, border', `
-          border-top-left-radius: 0!important;
-          border-bottom-left-radius: 0!important;
-        `)
-      ])
+      `)
     ]),
     cB('input-number', [
       c('&:not(:last-child)', `
@@ -97,12 +87,7 @@ export default cB('input-group', `
           cB('input', `
             border-top-right-radius: 0!important;
             border-bottom-right-radius: 0!important;
-          `, [
-            cE('box-shadow, state-border, border', `
-              border-top-right-radius: 0!important;
-              border-bottom-right-radius: 0!important;
-            `)
-          ]),
+          `),
           cB('base-selection', [
             cB('base-selection-label', `
               border-top-right-radius: 0!important;
@@ -128,12 +113,7 @@ export default cB('input-group', `
           cB('input', `
             border-top-left-radius: 0!important;
             border-bottom-left-radius: 0!important;
-          `, [
-            cE('box-shadow, border, state-border', `
-              border-top-left-radius: 0!important;
-              border-bottom-left-radius: 0!important;
-            `)
-          ]),
+          `),
           cB('base-selection', [
             cB('base-selection-label', `
               border-top-left-radius: 0!important;
