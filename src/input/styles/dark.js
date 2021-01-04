@@ -1,14 +1,15 @@
-import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
 import { changeColor } from 'seemly'
-import { baseDark } from '../../_styles/base'
 import { baseClearButtonDark } from '../../_base/clear-button/styles'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'Input',
-  theme: 'dark',
-  peer: [baseDark, baseClearButtonDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  peers: {
+    BaseClearButton: baseClearButtonDark
+  },
+  self (vars) {
     const {
       textColor2Overlay,
       textColor4Overlay,
@@ -80,4 +81,4 @@ export default create({
       caretColorError: errorColor
     }
   }
-})
+}

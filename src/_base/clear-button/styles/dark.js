@@ -1,11 +1,15 @@
-import create from '../../../_styles/utils/create-component-base'
 import commonVariables from './_common'
 import { scaleColor } from 'seemly'
+import { commonDark } from '../../../_styles/new-common'
+import { iconDark } from '../../../icon/styles'
 
-export default create({
+export default {
   name: 'BaseClearButton',
-  theme: 'dark',
-  getLocalVars (vars) {
+  common: commonDark,
+  peers: {
+    Icon: iconDark
+  },
+  self (vars) {
     const { textColor4Overlay } = vars
     return {
       ...commonVariables,
@@ -14,4 +18,4 @@ export default create({
       colorPressed: scaleColor(textColor4Overlay, { alpha: 0.75 })
     }
   }
-})
+}

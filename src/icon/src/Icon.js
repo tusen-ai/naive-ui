@@ -53,7 +53,7 @@ export default defineComponent({
           common: { cubicBezierEaseInOut },
           self
         } = themeRef.value
-        if (depth !== undefined) {
+        if (depth !== undefined && depth !== null) {
           const { color, [`opacity${depth}Depth`]: opacity } = self
           return {
             '--bezier': cubicBezierEaseInOut,

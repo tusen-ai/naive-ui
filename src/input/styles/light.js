@@ -1,14 +1,15 @@
-import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
 import { changeColor } from 'seemly'
-import { baseLight } from '../../_styles/base'
 import { baseClearButtonLight } from '../../_base/clear-button/styles'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'Input',
-  theme: 'light',
-  peer: [baseLight, baseClearButtonLight],
-  getLocalVars (vars) {
+  common: commonLight,
+  peers: {
+    BaseClearButton: baseClearButtonLight
+  },
+  self (vars) {
     const {
       textColor2,
       textColor4,
@@ -82,4 +83,4 @@ export default create({
       caretColorError: errorColor
     }
   }
-})
+}

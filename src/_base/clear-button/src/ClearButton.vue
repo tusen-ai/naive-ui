@@ -1,17 +1,9 @@
 <template>
-  <div
-    :class="[
-      'n-base-clear-button',
-      {
-        [`n-${theme}-theme`]: theme
-      }
-    ]"
-  >
+  <div class="n-base-clear-button" :style="cssVars">
     <n-icon-switch-transition>
       <n-icon
         v-if="show"
         key="dismiss"
-        :theme="null"
         :depth="null"
         class="n-base-clear-button__clear"
         @click="onClear"
@@ -27,25 +19,23 @@
 </template>
 
 <script>
+import { computed, defineComponent } from 'vue'
 import { DismissCircleIcon } from '../../icons'
 import { NIcon } from '../../../icon'
 import { NIconSwitchTransition } from '../../../_base'
-import { withCssr } from '../../../_mixins'
-import styles from './styles'
+import { useTheme } from '../../../_mixins'
+import { baseClearButtonLight } from '../styles'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'BaseClearButton',
   components: {
     NIcon,
     DismissCircleIcon,
     NIconSwitchTransition
   },
-  mixins: [withCssr(styles)],
   props: {
-    theme: {
-      type: String,
-      default: undefined
-    },
+    ...useTheme.props,
     show: {
       type: Boolean,
       default: false
@@ -54,6 +44,30 @@ export default {
       type: Function,
       default: undefined
     }
+  },
+  setup (props) {
+    const themeRef = useTheme(
+      'BaseClearButton',
+      'BaseClearButton',
+      style,
+      baseClearButtonLight,
+      props
+    )
+    return {
+      cssVars: computed(() => {
+        const {
+          common: { cubicBezierEaseInOut },
+          self: { size, color, colorHover, colorPressed }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--color': color,
+          '--size': size,
+          '--color-hover': colorHover,
+          '--color-pressed': colorPressed
+        }
+      })
+    }
   }
-}
+})
 </script>

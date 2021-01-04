@@ -5,12 +5,16 @@
 </template>
 
 <script>
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles/input-group'
+import { defineComponent } from 'vue'
+import { useTheme } from '../../_mixins'
+import { inputLight } from '../styles'
+import style from './styles/input-group.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'InputGroup',
-  cssrName: 'Input',
-  mixins: [configurable, themeable, withCssr(styles)]
-}
+  props: useTheme.props,
+  setup (props) {
+    useTheme('Input', 'InputGroup', style, inputLight, props)
+  }
+})
 </script>

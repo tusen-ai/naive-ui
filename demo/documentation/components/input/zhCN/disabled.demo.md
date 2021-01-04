@@ -5,7 +5,6 @@
 ```html
 <n-space vertical>
   <n-input
-    v-model:value="value"
     type="input"
     size="small"
     placeholder="噢！它被禁用了。"
@@ -13,20 +12,13 @@
     round
   />
   <n-input
-    v-model:value="value"
     type="textarea"
     size="small"
     placeholder="噢！它被禁用了。"
     :disabled="!active"
     round
   />
-  <n-input
-    pair
-    separator="to"
-    v-model:value="value"
-    clearable
-    :disabled="!active"
-  >
+  <n-input pair separator="to" clearable :disabled="!active">
     <template #affix>
       <n-icon><cash-icon /></n-icon>
     </template>
@@ -44,8 +36,7 @@ export default {
   },
   data () {
     return {
-      active: false,
-      value: null
+      active: false
     }
   }
 }
