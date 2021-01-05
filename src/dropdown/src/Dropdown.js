@@ -197,6 +197,7 @@ export default defineComponent({
             prefixColor,
             optionColorHover,
             optionTextColor,
+            groupHeaderTextColor,
             [createKey('optionIconSuffixWidth', size)]: optionIconSuffixWidth,
             [createKey('optionSuffixWidth', size)]: optionSuffixWidth,
             [createKey('optionIconPrefixWidth', size)]: optionIconPrefixWidth,
@@ -221,7 +222,8 @@ export default defineComponent({
           '--option-icon-suffix-width': optionIconSuffixWidth,
           '--option-text-color': optionTextColor,
           '--prefix-color': prefixColor,
-          '--suffix-color': suffixColor
+          '--suffix-color': suffixColor,
+          '--group-header-text-color': groupHeaderTextColor
         }
       })
     }

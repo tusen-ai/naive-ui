@@ -29,15 +29,32 @@ export default cB('dropdown-menu', {
   `
 }, [
   fadeInScaleUpTransition(),
-  cB('dropdown-option', [
+  cB('dropdown-option', {
+    position: 'relative'
+  }, [
     cB('dropdown-option-body', {
       display: 'flex',
+      cursor: 'default',
       height: 'var(--option-height)',
       lineHeight: 'var(--option-height)',
       fontSize: 'var(--font-size)',
       color: 'var(--option-text-color)',
       transition: 'color .3s var(--bezier)'
     }, [
+      cM('pending', {
+        backgroundColor: 'var(--option-color-hover)'
+      }),
+      cM('group', {
+        color: 'var(--group-header-text-color)'
+      }, [
+        cE('prefix', {
+          width: 'calc(var(--option-prefix-width) / 2)'
+        }, [
+          cM('show-icon', {
+            width: 'calc(var(--option-icon-prefix-width) / 2)'
+          })
+        ])
+      ]),
       cE('prefix', {
         width: 'var(--option-prefix-width)',
         display: 'flex',
@@ -75,23 +92,13 @@ export default cB('dropdown-menu', {
           color: 'var(--suffix-color)',
           fontSize: '16px'
         })
-      ])
-    ])
-  ]),
-  cB('dropdown-divider', {
-    transition: 'background-color .3s var(--bezier)',
-    backgroundColor: 'var(--divider-color)',
-    height: '1px',
-    margin: '4px 0'
-  }),
-  cB('dropdown-option', {
-    position: 'relative'
-  }, [
-    cB('dropdown-option-body', {
-      cursor: 'default'
-    }, [
-      cM('pending', {
-        backgroundColor: 'var(--option-color-hover)'
+      ]),
+      cB('dropdown-menu', {
+        pointerEvents: 'all'
+      }),
+      cB('dropdown-menu-wrapper', {
+        transformOrigin: 'inherit',
+        width: 'fit-content'
       })
     ]),
     cB('dropdown-offset-container', {
@@ -101,13 +108,12 @@ export default cB('dropdown-menu', {
       right: 0,
       top: '-4px',
       bottom: '-4px'
-    }),
-    cB('dropdown-menu', {
-      pointerEvents: 'all'
-    }),
-    cB('dropdown-menu-wrapper', {
-      transformOrigin: 'inherit',
-      width: 'fit-content'
     })
-  ])
+  ]),
+  cB('dropdown-divider', {
+    transition: 'background-color .3s var(--bezier)',
+    backgroundColor: 'var(--divider-color)',
+    height: '1px',
+    margin: '4px 0'
+  })
 ])

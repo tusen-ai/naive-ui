@@ -19,7 +19,8 @@ export default {
       heightSmall,
       heightMedium,
       heightLarge,
-      heightHuge
+      heightHuge,
+      textColor3Overlay
     } = vars
     return {
       ...commonVariables,
@@ -35,6 +36,7 @@ export default {
       suffixColor: textColor2,
       prefixColor: textColor2,
       optionColorHover: hoverColorOverlay,
+      groupHeaderTextColor: textColor3Overlay,
       fontSizeSmall,
       fontSizeMedium,
       fontSizeLarge,

@@ -1,7 +1,8 @@
 import { defineComponent, h } from 'vue'
 import NDropdownOption from './DropdownOption'
 import NDropdownDivider from './DropdownDivider.vue'
-import { isSubmenuNode } from './utils'
+import NDropdownGroup from './DropdownGroup'
+import { isSubmenuNode, isGroupNode, isDividerNode } from './utils'
 
 export default defineComponent({
   name: 'DropdownMenu',
@@ -23,35 +24,50 @@ export default defineComponent({
   },
   computed: {
     showIcon () {
-      return this.tmNodes.some((tmNode) => tmNode.rawNode.icon)
+      return this.tmNodes.some((tmNode) => {
+        const { rawNode } = tmNode
+        if (isGroupNode(rawNode)) {
+          return !!rawNode.children?.some((rawChild) => rawChild.icon)
+        }
+        return rawNode.icon
+      })
     },
     hasSubmenu () {
-      return this.tmNodes.some((tmNode) => isSubmenuNode(tmNode.rawNode))
+      return this.tmNodes.some((tmNode) => {
+        const { rawNode } = tmNode
+        if (isGroupNode(rawNode)) {
+          return !!rawNode.children?.some((rawChild) => isSubmenuNode(rawChild))
+        }
+        return isSubmenuNode(rawNode)
+      })
     }
   },
   render () {
-    const {
-      NDropdown: { size }
-    } = this
+    const { parentKey } = this
     return h(
       'div',
       {
-        class: ['n-dropdown-menu', `n-dropdown-menu--${size}-size`]
+        class: 'n-dropdown-menu'
       },
-      [
-        this.tmNodes.map((tmNode) => {
-          if (tmNode.rawNode.type === 'divider') {
-            return h(NDropdownDivider, {
-              key: tmNode.key
-            })
-          }
-          return h(NDropdownOption, {
-            tmNode: tmNode,
-            parentKey: this.parentKey,
+      this.tmNodes.map((tmNode) => {
+        if (isDividerNode(tmNode.rawNode)) {
+          return h(NDropdownDivider, {
             key: tmNode.key
           })
+        }
+        if (isGroupNode(tmNode.rawNode)) {
+          return h(NDropdownGroup, {
+            tmNode,
+            parentKey,
+            key: tmNode.key
+          })
+        }
+        return h(NDropdownOption, {
+          tmNode,
+          parentKey,
+          key: tmNode.key
         })
-      ]
+      })
     )
   }
 })

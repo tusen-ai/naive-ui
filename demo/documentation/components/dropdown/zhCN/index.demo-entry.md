@@ -11,6 +11,7 @@ cascade
 placement
 size
 manual-position
+group-debug
 ```
 
 ## Props
@@ -45,6 +46,16 @@ manual-position
 | 属性 | 类型 | 说明 |
 | --- | --- | --- |
 | type | `'submenu'` |  |
+| label | `string` |  |
+| icon | `() => VNode` |  |
+| key | `string \| number` | 需要唯一 |
+| children | `Array<DropdownOption \| DropdownDivider \| DropdownGroup \| DropdownSubmenu>` |  |
+
+### DropdownGroup Type
+
+| 属性 | 类型 | 说明 |
+| --- | --- | --- |
+| type | `'group'` |  |
 | label | `string` |  |
 | icon | `() => VNode` |  |
 | key | `string \| number` | 需要唯一 |

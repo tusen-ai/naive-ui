@@ -27,18 +27,18 @@ For other props, see [Popover Props](n-popover#Props). Note that `arrow`, `raw` 
 
 ### DropdownOption Type
 
-| Property | Type               | Description      |
-| -------- | ------------------ | ---------------- |
-| icon     | `() => VNode`      |                  |
-| key      | `string \| number` | Should be unique |
-| label    | `string`           |                  |
+| Property | Type               | Description       |
+| -------- | ------------------ | ----------------- |
+| icon     | `() => VNode`      |                   |
+| key      | `string \| number` | Should be unique. |
+| label    | `string`           |                   |
 
 ### DropdownDivider Type
 
-| Property | Type               | Description      |
-| -------- | ------------------ | ---------------- |
-| type     | `'divider'`        |                  |
-| key      | `string \| number` | Should be unique |
+| Property | Type               | Description       |
+| -------- | ------------------ | ----------------- |
+| type     | `'divider'`        |                   |
+| key      | `string \| number` | Should be unique. |
 
 ### DropdownSubmenu Type
 
@@ -47,5 +47,15 @@ For other props, see [Popover Props](n-popover#Props). Note that `arrow`, `raw` 
 | type | `'submenu'` |  |
 | label | `string` |  |
 | icon | `() => VNode` |  |
-| key | `string \| number` | Should be unique |
+| key | `string \| number` | Should be unique. |
+| children | `Array<DropdownOption \| DropdownDivider \| DropdownSubmenu>` |  |
+
+### DropdownGroup Type
+
+| Property | Type | Description |
+| --- | --- | --- |
+| type | `'group'` |  |
+| label | `string` |  |
+| icon | `() => VNode` |  |
+| key | `string \| number` | Should be unique. |
 | children | `Array<DropdownOption \| DropdownDivider \| DropdownSubmenu>` |  |
