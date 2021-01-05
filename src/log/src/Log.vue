@@ -1,57 +1,55 @@
 <template>
   <div
     class="n-log"
-    :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme
-    }"
     :style="{
       lineHeight: lineHeight,
-      height: styleHeight
+      height: styleHeight,
+      ...cssVars
     }"
     @wheel.passive="handleWheel"
   >
-    <n-scrollbar
-      ref="scrollbarRef"
-      class="n-code"
-      :theme="mergedTheme"
-      @scroll="handleScroll"
-    >
-      <n-log-line
-        v-for="(line, index) in mergedLines"
-        :key="index"
-        :line="line"
-      />
+    <n-scrollbar ref="scrollbarRef" :theme="'light'" @scroll="handleScroll">
+      <n-code>
+        <n-log-line
+          v-for="(line, index) in mergedLines"
+          :key="index"
+          :line="line"
+        />
+      </n-code>
     </n-scrollbar>
     <transition name="n-fade-in-scale-up-transition">
-      <n-log-loader v-if="loading" :theme="mergedTheme" />
+      <n-log-loader v-if="loading" :theme="'light'" />
     </transition>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
-import { configurable, themeable, withCssr } from '../../_mixins'
+import { defineComponent, ref, computed } from 'vue'
+import { throttle } from 'lodash-es'
+import { useTheme } from '../../_mixins'
+import { warn } from '../../_utils'
 import { NScrollbar } from '../../scrollbar'
+import { NCode } from '../../code'
+import { logLight } from '../styles'
 import NLogLoader from './LogLoader.vue'
 import NLogLine from './LogLine.vue'
-import { throttle } from 'lodash-es'
-import { warn } from '../../_utils'
-import styles from './styles'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Log',
   components: {
     NScrollbar,
+    NCode,
     NLogLoader,
     NLogLine
   },
-  mixins: [configurable, themeable, withCssr(styles)],
   provide () {
     return {
       NLog: this
     }
   },
   props: {
+    ...useTheme.props,
     loading: {
       type: Boolean,
       default: false
@@ -109,9 +107,30 @@ export default {
       default: undefined
     }
   },
-  setup () {
+  setup (props) {
+    const themeRef = useTheme('Log', 'Log', style, logLight, props)
     return {
-      scrollbarRef: ref(null)
+      scrollbarRef: ref(null),
+      cssVars: computed(() => {
+        const {
+          self: {
+            loaderFontSize,
+            loaderTextColor,
+            loaderColor,
+            loaderBorder,
+            loadingColor
+          },
+          common: { cubicBezierEaseInOut }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--loader-font-size': loaderFontSize,
+          '--loader-border': loaderBorder,
+          '--loader-color': loaderColor,
+          '--loader-text-color': loaderTextColor,
+          '--loading-color': loadingColor
+        }
+      })
     }
   },
   data () {
@@ -135,13 +154,16 @@ export default {
     }
   },
   created () {
+    // TODO: refactor
     this.handleWheel = throttle(this.handleWheel, 300)
   },
   methods: {
     getHljs () {
       return this.hljs || this.$naive.hljs
     },
-    handleScroll (e, container, content) {
+    handleScroll (e) {
+      const container = e.target
+      const content = e.target.firstElementChild
       if (this.slient) {
         this.$nextTick(() => {
           this.slient = false
@@ -229,5 +251,5 @@ export default {
       })
     }
   }
-}
+})
 </script>

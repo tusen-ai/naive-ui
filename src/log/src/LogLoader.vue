@@ -9,19 +9,24 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import { NBaseLoading } from '../../_base'
-import { locale } from '../../_mixins'
+import { useLocale } from '../../_mixins'
 
-export default {
+export default defineComponent({
   components: {
     NBaseLoading
   },
-  mixins: [locale('Log')],
   props: {
     theme: {
       type: String,
       default: undefined
     }
+  },
+  setup () {
+    return {
+      ...useLocale('Log')
+    }
   }
-}
+})
 </script>

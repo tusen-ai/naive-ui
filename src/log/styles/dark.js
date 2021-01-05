@@ -1,20 +1,29 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseDark } from '../../_styles/base'
 import { baseLoadingDark } from '../../_base/loading/styles'
 import { scrollbarDark } from '../../scrollbar/styles'
+import { commonDark } from '../../_styles/new-common'
+import { codeDark } from '../../code/styles'
 
-export default create({
+export default {
   name: 'Log',
-  theme: 'dark',
-  peer: [baseDark, baseLoadingDark, scrollbarDark],
-  getLocalVars (vars) {
-    const { textColor2Overlay, inputColorOverlay, fontSize } = vars
+  common: commonDark,
+  peers: {
+    BaseLoading: baseLoadingDark,
+    Scrollbar: scrollbarDark,
+    Code: codeDark
+  },
+  self (vars) {
+    const {
+      textColor2Overlay,
+      inputColorOverlay,
+      fontSize,
+      primaryColor
+    } = vars
     return {
-      textColor: textColor2Overlay,
+      loaderFontSize: fontSize,
       loaderTextColor: textColor2Overlay,
       loaderColor: inputColorOverlay,
-      loaderBorderColor: 'transparent',
-      fontSize
+      loaderBorder: '1px solid transparent',
+      loadingColor: primaryColor
     }
   }
-})
+}

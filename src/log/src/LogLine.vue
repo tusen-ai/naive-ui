@@ -3,7 +3,9 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from 'vue'
+
+export default defineComponent({
   inject: {
     NLog: {
       default: null
@@ -60,5 +62,5 @@ export default {
       }
     }
   }
-}
+})
 </script>
