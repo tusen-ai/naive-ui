@@ -6,7 +6,7 @@
   title="Dark Modal Debug"
   preset="card"
   v-model:show="modalActive"
-  :overlay-style="{ marginTop: '24px', marginBottom: '24px', width: '800px' }"
+  :style="{ marginTop: '24px', marginBottom: '24px', width: '800px' }"
 >
   <n-data-table
     ref="table"
