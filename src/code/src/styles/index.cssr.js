@@ -26,7 +26,7 @@ export default c([
   [
     c('pre', `
       margin: 0;
-      fontFamily: var(--font-family);
+      font-family: inherit;
     `),
     c('[class^=hljs]', {
       color: 'var(--text-color)',
