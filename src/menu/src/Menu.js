@@ -1,9 +1,10 @@
 import { h, nextTick, ref, toRef, computed, onMounted } from 'vue'
 import { createTreeMate } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles/index'
+import { useTheme } from '../../_mixins'
 import { itemRenderer } from './utils'
+import { menuLight } from '../styles'
+import style from './styles/index.cssr.js'
 
 export default {
   name: 'Menu',
@@ -13,7 +14,6 @@ export default {
       NSubmenu: null
     }
   },
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     items: {
       type: Array,
@@ -104,6 +104,7 @@ export default {
     }
   },
   setup (props) {
+    const themeRef = useTheme('Menu', 'Menu', style, menuLight, props)
     const treeMateRef = computed(() =>
       createTreeMate(props.items, {
         getKey (node) {
@@ -149,7 +150,55 @@ export default {
       mergedValue: mergedValueRef,
       activePath: activePathRef,
       tmNodes: tmNodesRef,
-      transitionDisabled: transitionDisabledRef
+      transitionDisabled: transitionDisabledRef,
+      cssVars: computed(() => {
+        const {
+          common: { cubicBezierEaseInOut },
+          self: {
+            borderRadius,
+            groupTextColor,
+            itemColorActive,
+            itemTextColor,
+            itemTextColorHover,
+            itemTextColorChildActive,
+            itemTextColorActive,
+            itemExtraTextColor,
+            itemExtraTextColorHover,
+            itemExtraTextColorChildActive,
+            itemExtraTextColorActive,
+            itemIconColor,
+            itemIconColorHover,
+            itemIconColorActive,
+            itemIconColorChildActive,
+            itemIconColorCollapsed,
+            borderColorHorizontal,
+            arrowColor,
+            fontSize
+          }
+        } = themeRef.value
+        return {
+          '--group-text-color': groupTextColor,
+          '--bezier': cubicBezierEaseInOut,
+          '--item-text-color': itemTextColor,
+          '--font-size': fontSize,
+          '--border-color-horizontal': borderColorHorizontal,
+          '--border-radius': borderRadius,
+          '--arrow-color': arrowColor,
+          '--item-icon-color': itemIconColor,
+          '--item-extra-text-color': itemExtraTextColor,
+          '--item-text-color-hover': itemTextColorHover,
+          '--item-icon-color-hover': itemIconColorHover,
+          '--item-extra-text-color-hover': itemExtraTextColorHover,
+          '--item-text-color-active': itemTextColorActive,
+          '--item-icon-color-active': itemIconColorActive,
+          '--item-extra-text-color-active': itemExtraTextColorActive,
+          '--item-icon-color-collapsed': itemIconColorCollapsed,
+          '--item-color-active': itemColorActive,
+          '--item-text-color-child-active': itemTextColorChildActive,
+          '--item-extra-text-color-child-active': itemExtraTextColorChildActive,
+          '--item-icon-color-child-active': itemIconColorChildActive
+        }
+      })
     }
   },
   methods: {
@@ -179,7 +228,6 @@ export default {
     }
   },
   render () {
-    const { mergedTheme } = this
     return h(
       'div',
       {
@@ -187,11 +235,11 @@ export default {
           'n-menu',
           `n-menu--${this.mode}`,
           {
-            [`n-${mergedTheme}-theme`]: mergedTheme,
             'n-menu--collapsed': this.collapsed,
             'n-menu--transition-disabled': this.transitionDisabled
           }
-        ]
+        ],
+        style: this.cssVars
       },
       this.tmNodes.map((tmNode) => itemRenderer(tmNode))
     )

@@ -110,7 +110,7 @@ export default {
         extra,
         showArrow: !horizontal && !insidePopover,
         uncollapsable: insidePopover,
-        childSelected: selectedInside,
+        childActive: selectedInside,
         icon,
         hover: popoverShow,
         onClick: handleClick
@@ -158,16 +158,10 @@ export default {
               ]
             ),
           default: () => {
-            const theme = this.NMenu.mergedTheme
             return h(
               'div',
               {
-                class: [
-                  'n-menu',
-                  {
-                    [`n-${theme}-theme`]: theme
-                  }
-                ]
+                class: 'n-menu'
               },
               createSubmenuChildren(true)
             )

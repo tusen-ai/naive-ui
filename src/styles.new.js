@@ -34,6 +34,7 @@ import { layoutDark } from './layout/styles'
 import { listDark } from './list/styles'
 import { loadingBarDark } from './loading-bar/styles'
 import { logDark } from './log/styles'
+import { menuDark } from './menu/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -71,5 +72,6 @@ export const darkTheme = {
   Layout: layoutDark,
   List: listDark,
   LoadingBar: loadingBarDark,
-  Log: logDark
+  Log: logDark,
+  Menu: menuDark
 }

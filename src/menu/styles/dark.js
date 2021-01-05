@@ -1,34 +1,45 @@
-import create from '../../_styles/utils/create-component-base'
 import { changeColor } from 'seemly'
-import { baseDark } from '../../_styles/base'
 import { iconDark } from '../../icon/styles'
 import { tooltipDark } from '../../tooltip/styles'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
-  theme: 'dark',
+export default {
   name: 'Menu',
-  peer: [baseDark, iconDark, tooltipDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  peers: {
+    Icon: iconDark,
+    Tooltip: tooltipDark
+  },
+  self (vars) {
+    const {
+      borderRadius,
+      textColor3Overlay,
+      primaryColor,
+      textColor2Overlay,
+      primaryColorHover,
+      textColor1Overlay,
+      fontSize
+    } = vars
     return {
-      borderRadius: vars.borderRadius,
-      groupTextColor: vars.textColor3Overlay,
-      itemColorMatch: changeColor(vars.primaryColor, { alpha: 0.15 }),
-      itemTextColor: vars.textColor2Overlay,
-      itemTextColorHover: vars.primaryColorHover,
-      itemTextColorChildSelected: vars.primaryColor,
-      itemTextColorSelected: vars.primaryColor,
-      itemExtraTextColor: vars.textColor3Overlay,
-      itemExtraTextColorHover: vars.primaryColorHover,
-      itemExtraTextColorChildSelected: vars.primaryColor,
-      itemExtraTextColorSelected: vars.primaryColor,
-      itemIconColor: vars.textColor1Overlay,
-      itemIconColorHover: vars.primaryColorHover,
-      itemIconColorSelected: vars.primaryColor,
-      itemIconColorChildSelected: vars.primaryColor,
-      itemIconColorCollapsed: vars.textColor1Overlay,
+      borderRadius: borderRadius,
+      groupTextColor: textColor3Overlay,
+      itemColorActive: changeColor(primaryColor, { alpha: 0.15 }),
+      itemTextColor: textColor2Overlay,
+      itemTextColorHover: primaryColorHover,
+      itemTextColorChildActive: primaryColor,
+      itemTextColorActive: primaryColor,
+      itemExtraTextColor: textColor3Overlay,
+      itemExtraTextColorHover: primaryColorHover,
+      itemExtraTextColorChildActive: primaryColor,
+      itemExtraTextColorActive: primaryColor,
+      itemIconColor: textColor1Overlay,
+      itemIconColorHover: primaryColorHover,
+      itemIconColorActive: primaryColor,
+      itemIconColorChildActive: primaryColor,
+      itemIconColorCollapsed: textColor1Overlay,
       borderColorHorizontal: 'transparent',
-      submenuArrowColor: vars.primaryColor,
-      fontSize: vars.fontSize
+      arrowColor: primaryColor,
+      fontSize
     }
   }
-})
+}
