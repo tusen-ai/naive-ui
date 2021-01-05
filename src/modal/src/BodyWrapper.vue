@@ -17,14 +17,11 @@
           ref="bodyRef"
           v-clickoutside="handleClickOutside"
           class="n-modal"
-          :class="{
-            [`n-${theme}-theme`]: theme
-          }"
         >
           <n-dialog
             v-if="preset === 'confirm' || preset === 'dialog'"
             v-bind="$attrs"
-            :theme="theme"
+            :theme="'light'"
             :title="title"
             :closable="closable"
             :positive-text="positiveText"
@@ -48,7 +45,7 @@
           <n-card
             v-else-if="preset === 'card'"
             v-bind="$attrs"
-            :theme="theme"
+            :theme="'light'"
             :title="title"
             :closable="closable"
             :size="size"
@@ -83,7 +80,6 @@ import { clickoutside } from 'vdirs'
 import { NScrollbar } from '../../scrollbar'
 import { NDialog } from '../../dialog'
 import { NCard } from '../../card'
-import { themeable } from '../../_mixins'
 import presetProps from './presetProps'
 
 export default {
@@ -96,7 +92,6 @@ export default {
     NDialog,
     NCard
   },
-  mixins: [themeable],
   provide () {
     return {
       NModalBody: this,

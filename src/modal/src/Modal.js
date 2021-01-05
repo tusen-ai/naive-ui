@@ -1,12 +1,13 @@
-import { h, withDirectives, Transition, ref, computed } from 'vue'
+import { h, withDirectives, Transition, ref, computed, mergeProps } from 'vue'
 import { zindexable } from 'vdirs'
 import { useIsMounted, useClicked, useClickPosition } from 'vooks'
 import { VLazyTeleport } from 'vueuc'
-import { configurable, themeable, withCssr } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import presetProps from './presetProps'
 import { warn, omit } from '../../_utils'
 import NModalBodyWrapper from './BodyWrapper.vue'
-import styles from './styles'
+import style from './styles/index.cssr.js'
+import { modalLight } from '../styles'
 
 export default {
   name: 'Modal',
@@ -16,7 +17,6 @@ export default {
       NDrawer: null
     }
   },
-  mixins: [configurable, themeable, withCssr(styles)],
   inheritAttrs: false,
   props: {
     show: {
@@ -126,9 +126,11 @@ export default {
     }
   },
   setup (props) {
+    const themeRef = useTheme('Modal', 'Modal', style, modalLight, props)
     const clickedRef = useClicked(64)
     const clickedPositionRef = useClickPosition()
     return {
+      ...useConfig(props),
       isMounted: useIsMounted(),
       containerRef: ref(null),
       mousePosition: computed(() => {
@@ -140,6 +142,18 @@ export default {
           return clickedPositionRef.value
         }
         return null
+      }),
+      cssVars: computed(() => {
+        const {
+          common: { cubicBezierEaseOut },
+          self: { boxShadow, color, textColor }
+        } = themeRef.value
+        return {
+          '--bezier-ease-out': cubicBezierEaseOut,
+          '--box-shadow': boxShadow,
+          '--color': color,
+          '--text-color': textColor
+        }
       })
     }
   },
@@ -170,7 +184,8 @@ export default {
                   {
                     [this.namespace]: this.namespace
                   }
-                ]
+                ],
+                style: this.cssVars
               },
               [
                 h(
@@ -193,15 +208,10 @@ export default {
                 ),
                 h(
                   NModalBodyWrapper,
-                  {
-                    ...this.$attrs,
-                    style: {
-                      ...this.$attrs.style,
-                      ...this.overlayStyle
-                    },
+                  mergeProps(this.$attrs, {
+                    style: this.overlayStyle,
                     ref: 'bodyWrapper',
                     ...omit(this.$props, ['maskClosable', 'to']),
-                    theme: this.mergedTheme,
                     show: this.show,
                     onClose: () => {
                       const { onClose = () => {} } = this
@@ -244,10 +254,8 @@ export default {
                         }
                       }
                     }
-                  },
-                  {
-                    ...this.$slots
-                  }
+                  }),
+                  this.$slots
                 )
               ]
             ),

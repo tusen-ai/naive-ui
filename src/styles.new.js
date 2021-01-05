@@ -36,6 +36,7 @@ import { loadingBarDark } from './loading-bar/styles'
 import { logDark } from './log/styles'
 import { menuDark } from './menu/styles'
 import { messageDark } from './message/styles'
+import { modalDark } from './modal/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -75,5 +76,6 @@ export const darkTheme = {
   LoadingBar: loadingBarDark,
   Log: logDark,
   Menu: menuDark,
-  Message: messageDark
+  Message: messageDark,
+  Modal: modalDark
 }

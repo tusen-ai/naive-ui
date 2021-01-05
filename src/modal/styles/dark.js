@@ -1,14 +1,17 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseDark } from '../../_styles/base'
 import { scrollbarDark } from '../../scrollbar/styles'
 import { dialogDark } from '../../dialog/styles'
 import { cardDark } from '../../card/styles'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'Modal',
-  theme: 'dark',
-  peer: [baseDark, scrollbarDark, dialogDark, cardDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  peers: {
+    Scrollbar: scrollbarDark,
+    Dialog: dialogDark,
+    Card: cardDark
+  },
+  self (vars) {
     const { modalColor, textColor2Overlay, boxShadow3 } = vars
     return {
       color: modalColor,
@@ -16,4 +19,4 @@ export default create({
       boxShadow: boxShadow3
     }
   }
-})
+}

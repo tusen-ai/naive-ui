@@ -1,14 +1,17 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseLight } from '../../_styles/base'
 import { scrollbarLight } from '../../scrollbar/styles'
 import { dialogLight } from '../../dialog/styles'
 import { cardLight } from '../../card/styles'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'Modal',
-  theme: 'light',
-  peer: [baseLight, scrollbarLight, dialogLight, cardLight],
-  getLocalVars (vars) {
+  common: commonLight,
+  peers: {
+    Scrollbar: scrollbarLight,
+    Dialog: dialogLight,
+    Card: cardLight
+  },
+  self (vars) {
     const { modalColor, textColor2, boxShadow3 } = vars
     return {
       color: modalColor,
@@ -16,4 +19,4 @@ export default create({
       boxShadow: boxShadow3
     }
   }
-})
+}
