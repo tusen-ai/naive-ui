@@ -1,13 +1,14 @@
-import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
-import { baseDark } from '../../_styles/base'
-import { iconDark } from '../../icon/styles'
+import { iconLight } from '../../icon/styles'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'Message',
-  theme: 'light',
-  peer: [baseDark, iconDark],
-  getLocalVars (vars) {
+  common: commonLight,
+  peers: {
+    Icon: iconLight
+  },
+  self (vars) {
     const {
       textColor2,
       baseColor,
@@ -18,7 +19,8 @@ export default create({
       errorColor,
       warningColor,
       popoverColor,
-      boxShadow2
+      boxShadow2,
+      primaryColor
     } = vars
     const coloredBoxShadow = '0px 2px 18px 0px rgba(0, 0, 0, 0.27)'
     return {
@@ -57,7 +59,8 @@ export default create({
       closeColorPressedWarning: 'rgba(255, 255, 255, .4)',
       closeColorLoading: closeColor,
       closeColorHoverLoading: closeColorHover,
-      closeColorPressedLoading: closeColor
+      closeColorPressedLoading: closeColor,
+      loadingColor: primaryColor
     }
   }
-})
+}

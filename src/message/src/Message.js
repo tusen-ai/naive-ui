@@ -1,4 +1,4 @@
-import { h } from 'vue'
+import { computed, h } from 'vue'
 import { NIcon } from '../../icon'
 import {
   InfoIcon,
@@ -8,31 +8,80 @@ import {
   CloseIcon
 } from '../../_base/icons'
 import { NIconSwitchTransition, NBaseLoading } from '../../_base'
-import { render } from '../../_utils'
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles'
+import { render, createKey } from '../../_utils'
+import { useTheme } from '../../_mixins'
+import { messageLight } from '../styles'
 import props from './message-props'
+import style from './styles/index.cssr.js'
 
 export default {
   name: 'Message',
-  mixins: [configurable, themeable, withCssr(styles)],
   props,
-  methods: {
-    handleClose () {
-      this.onClose()
+  setup (props) {
+    const themeRef = useTheme('Message', 'Message', style, messageLight, props)
+    return {
+      handleClose () {
+        props.onClose()
+      },
+      cssVars: computed(() => {
+        const { type } = props
+        const {
+          common: { cubicBezierEaseInOut },
+          self: {
+            height,
+            padding,
+            paddingClosable,
+            maxWidth,
+            iconMargin,
+            closeMargin,
+            closeSize,
+            iconSize,
+            fontSize,
+            loadingColor,
+            [createKey('textColor', type)]: textColor,
+            [createKey('boxShadow', type)]: boxShadow,
+            [createKey('color', type)]: color,
+            [createKey('iconColor', type)]: iconColor,
+            [createKey('closeColor', type)]: closeColor,
+            [createKey('closeColorPressed', type)]: closeColorPressed,
+            [createKey('closeColorHover', type)]: closeColorHover
+          }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--padding': padding,
+          '--height': height,
+          '--max-width': maxWidth,
+          '--font-size': fontSize,
+          '--icon-margin': iconMargin,
+          '--icon-size': iconSize,
+          '--close-size': closeSize,
+          '--close-margin': closeMargin,
+          '--padding-closable': paddingClosable,
+          '--text-color': textColor,
+          '--color': color,
+          '--box-shadow': boxShadow,
+          '--icon-color': iconColor,
+          '--close-color': closeColor,
+          '--close-color-pressed': closeColorPressed,
+          '--close-color-hover': closeColorHover,
+          '--loading-color': loadingColor
+        }
+      })
     }
   },
   render () {
-    const { icon, type, mergedTheme, closable, content, handleClose } = this
+    const { icon, type, closable, content, handleClose, cssVars } = this
     return h(
       'div',
       {
-        class: {
-          'n-message': true,
-          'n-message--closable': closable,
-          [`n-message--${type}-type`]: true,
-          [`n-${mergedTheme}-theme`]: mergedTheme
-        }
+        style: cssVars,
+        class: [
+          'n-message',
+          {
+            'n-message--closable': closable
+          }
+        ]
       },
       [
         h(
@@ -44,7 +93,7 @@ export default {
             h(NIcon, null, {
               default: () => [
                 h(NIconSwitchTransition, null, {
-                  default: () => [createIconVNode(icon, type, mergedTheme)]
+                  default: () => [createIconVNode(icon, type)]
                 })
               ]
             })
@@ -85,7 +134,7 @@ export default {
   }
 }
 
-function createIconVNode (icon, type, theme) {
+function createIconVNode (icon, type) {
   if (typeof icon === 'function') {
     return icon()
   } else {
@@ -108,7 +157,6 @@ function createIconVNode (icon, type, theme) {
         })
       case 'loading':
         return h(NBaseLoading, {
-          theme,
           strokeWidth: 24,
           key: 'loading'
         })

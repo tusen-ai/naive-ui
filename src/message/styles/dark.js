@@ -1,14 +1,15 @@
-import create from '../../_styles/utils/create-component-base'
 import { changeColor } from 'seemly'
 import commonVariables from './_common'
-import { baseDark } from '../../_styles/base'
 import { iconDark } from '../../icon/styles'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'Message',
-  theme: 'dark',
-  peer: [baseDark, iconDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  peers: {
+    Icon: iconDark
+  },
+  self (vars) {
     const {
       textColorBase,
       textColor2Overlay,
@@ -17,7 +18,8 @@ export default create({
       errorColorSuppl,
       warningColorSuppl,
       popoverColor,
-      boxShadow2
+      boxShadow2,
+      primaryColor
     } = vars
     return {
       ...commonVariables,
@@ -63,7 +65,8 @@ export default create({
       closeColorPressedWarning: 'rgba(255, 255, 255, .4)',
       closeColorLoading: 'rgba(255, 255, 255, .5)',
       closeColorHoverLoading: 'rgba(255, 255, 255, .6)',
-      closeColorPressedLoading: 'rgba(255, 255, 255, .4)'
+      closeColorPressedLoading: 'rgba(255, 255, 255, .4)',
+      loadingColor: primaryColor
     }
   }
-})
+}
