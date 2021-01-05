@@ -1,11 +1,9 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseDark } from '../../_styles/base'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'List',
-  theme: 'dark',
-  peer: [baseDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  self (vars) {
     const {
       textColor2Overlay,
       cardColor,
@@ -23,4 +21,4 @@ export default create({
       fontSize
     }
   }
-})
+}
