@@ -42,7 +42,7 @@ export default c([
       flex-grow: 1;
       position: relative;
     `),
-    cE('input-el, textarea, textarea-mirror, splitor, placeholder', `
+    cE('input-el, textarea, textarea-mirror, separator, placeholder', `
       box-sizing: border-box;
       font-size: inherit;
       line-height: 1.5;
@@ -144,11 +144,11 @@ export default c([
       `)
     ]),
     // pair
-    cM('split', [
+    cM('pair', [
       cE('input-el, placeholder', {
         textAlign: 'center'
       }),
-      cE('splitor', `
+      cE('separator', `
         display: flex;
         align-items: center;
         transition: color .3s var(--bezier);
@@ -164,12 +164,13 @@ export default c([
       }),
       cE('input-el, textarea', {
         cursor: 'not-allowed',
-        color: 'var(--text-color-disabled)'
+        color: 'var(--text-color-disabled)',
+        textDecorationColor: 'var(--text-color-disabled)'
       }),
       cE('placeholder', {
         color: 'var(--placeholder-color-disabled)'
       }),
-      cE('splitor', {
+      cE('separator', {
         color: 'var(--text-color-disabled)'
       })
     ]),
@@ -213,6 +214,8 @@ export default c([
       marginLeft: '4px'
     }),
     cE('suffix, prefix', `
+      flex-wrap: nowrap;
+      flex-shrink: 0;
       line-height: 1.5;
       white-space: nowrap;
       display: inline-flex;

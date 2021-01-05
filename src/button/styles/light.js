@@ -3,8 +3,11 @@ import commonVariables from './_common'
 import { commonLight } from '../../_styles/new-common'
 
 export default {
+  name: 'Button',
   common: commonLight,
-  peers: [baseWaveLight],
+  peers: {
+    BaseWave: baseWaveLight
+  },
   self (vars) {
     const {
       heightTiny,

@@ -1,47 +1,60 @@
 <template>
-  <div
-    class="n-input-number"
-    :class="[
-      `n-input-number--${mergedSize}-size`,
-      {
-        'n-input-number--disabled': disabled,
-        'n-input-number--invalid': invalid
-      }
-    ]"
-  >
+  <div class="n-input-number">
     <n-input
+      ref="inputRef"
+      v-model:value="displayedValue"
+      passively-activated
+      :size="mergedSize"
       :placeholder="mergedPlaceholder"
       :disabled="disabled ? 'disabled' : false"
-      :value="stringifiedValue"
       :builtin-theme-overrides="inputThemeOverrides"
-      @focus="doFocus"
-      @blur="doBlur"
-      @keyup.enter="handleEnter"
+      :text-decoration="displayedValueInvalid ? 'line-through' : null"
+      @focus="handleFocus"
+      @blur="handleBlur"
+      @keydown.enter="handleKeyDownEnter"
+      @mousedown="handleMouseDown"
     >
-      <template #prefix>
-        <n-icon :configurable="false" @mousedown.prevent>
-          <remove-icon @click="minus" />
-        </n-icon>
-      </template>
       <template #suffix>
-        <n-icon :configurable="false" @mousedown.prevent>
-          <add-icon @click="add" />
-        </n-icon>
+        <n-button
+          text
+          :disabled="!minusable || disabled"
+          :focusable="false"
+          :builtin-theme-overrides="buttonThemeOverrides"
+          @mousedown.prevent
+        >
+          <n-icon :configurable="false">
+            <remove-icon @click="handleMinusClick" />
+          </n-icon>
+        </n-button>
+        <n-button
+          text
+          :disabled="!addable || disabled"
+          :focusable="false"
+          :builtin-theme-overrides="buttonThemeOverrides"
+          @mousedown.prevent
+        >
+          <n-icon :configurable="false">
+            <add-icon @click="handleAddClick" />
+          </n-icon>
+        </n-button>
       </template>
     </n-input>
   </div>
 </template>
 
 <script>
-import { defineComponent, ref, toRef, computed } from 'vue'
-import { useMergedState } from 'vooks'
+import { defineComponent, ref, toRef, watch, computed } from 'vue'
+import { rgba } from 'seemly'
+import { useMemo, useMergedState } from 'vooks'
 import { NInput } from '../../input'
 import { NIcon } from '../../icon'
+import { NButton } from '../../button'
 import { RemoveIcon, AddIcon } from '../../_base/icons'
 import { useTheme, useFormItem, useLocale } from '../../_mixins'
 import { warn, call } from '../../_utils'
-// import { inputNumberLight } from '../styles'
-// import style from './styles/index.cssr.js'
+import { inputNumberLight } from '../styles'
+import { parse, validator, format } from './utils'
+import style from './styles/index.cssr.js'
 
 function parseNumber (number) {
   if (number === null) return null
@@ -60,6 +73,8 @@ function useMethods (
   props,
   formItem,
   {
+    doUpdateValue,
+    deriveValueFromDisplayedValue,
     uncontrolledValueRef,
     mergedValueRef,
     addableRef,
@@ -67,20 +82,10 @@ function useMethods (
     mergedMaxRef,
     mergedMinRef,
     inputRef,
-    mergedStepRef
+    mergedStepRef,
+    displayedValueRef
   }
 ) {
-  const doUpdateValue = (value) => {
-    const { value: mergedValue } = mergedValueRef
-    if (value === mergedValue) return
-    const { 'onUpdate:value': onUpdateValue, onChange } = props
-    const { nTriggerFormInput, nTriggerFormChange } = formItem
-    if (onChange) call(onChange, value)
-    if (onUpdateValue) call(onUpdateValue, value)
-    uncontrolledValueRef.value = value
-    nTriggerFormInput()
-    nTriggerFormChange()
-  }
   const doFocus = (e) => {
     const { onFocus } = props
     const { nTriggerFormFocus } = formItem
@@ -88,14 +93,38 @@ function useMethods (
     nTriggerFormFocus()
   }
   const doBlur = (e) => {
-    const value = sanitizeValue(e.target.value)
-    e.target.value = value
-    doUpdateValue(value)
+    const value = deriveValueFromDisplayedValue()
+    // make sure e.target.value is correct in blur callback
+    if (value !== false) e.target.value = value
     const { onBlur } = props
     const { nTriggerFormBlur } = formItem
     if (onBlur) call(onBlur, e)
     nTriggerFormBlur()
   }
+  const doAdd = () => {
+    const { value: addable } = addableRef
+    if (!addable) return
+    const { value: mergedValue } = mergedValueRef
+    if (mergedValue === null) {
+      doUpdateValue(createValidValue())
+    } else {
+      const { value: mergedStep } = mergedStepRef
+      deriveValueFromDisplayedValue(mergedStep)
+    }
+  }
+  const doMinus = () => {
+    const { value: minusable } = minusableRef
+    if (!minusable) return
+    const { value: mergedValue } = mergedValueRef
+    if (mergedValue === null) {
+      doUpdateValue(createValidValue())
+    } else {
+      const { value: mergedStep } = mergedStepRef
+      deriveValueFromDisplayedValue(-mergedStep)
+    }
+  }
+  const handleFocus = (e) => doFocus(e)
+  const handleBlur = (e) => doBlur(e)
   const createValidValue = () => {
     if (props.validator) return null
     const { value: mergedMin } = mergedMinRef
@@ -109,77 +138,28 @@ function useMethods (
     }
   }
   const handleMouseDown = (e) => {
-    if (document.activeElement !== inputRef.value) {
-      inputRef.value.focus()
-    }
-    e.preventDefault()
+    inputRef.value.activate()
   }
-  const add = () => {
-    const { value: addable } = addableRef
-    if (!addable) return
-    const { value: mergedValue } = mergedValueRef
-    if (mergedValue === null) {
-      doUpdateValue(createValidValue())
-    } else {
-      const { value: mergedStep } = mergedStepRef
-      const valueAfterChange = sanitizeValue(mergedValue + mergedStep)
-      doUpdateValue(valueAfterChange)
+  const handleAddClick = () => doAdd()
+  const handleMinusClick = () => doMinus()
+  const handleKeyDownEnter = (e) => {
+    if (e.target === inputRef.value.$el) {
+      // hit input wrapper
+      // which means not activated
+      return
     }
-  }
-  const minus = () => {
-    const { value: minusable } = minusableRef
-    if (!minusable) return
-    const { value: mergedValue } = mergedValueRef
-    if (mergedValue === null) {
-      doUpdateValue(createValidValue())
-    } else {
-      const { value: mergedStep } = mergedStepRef
-      const valueAfterChange = sanitizeValue(mergedValue - mergedStep)
-      doUpdateValue(valueAfterChange)
+    const value = deriveValueFromDisplayedValue()
+    if (value !== false) {
+      inputRef.value.deactivate()
     }
-  }
-  const handleEnter = (e) => {
-    const value = sanitizeValue(inputRef.value.value)
-    inputRef.value.value = value
-    doUpdateValue(value)
-  }
-  const sanitizeValue = (value) => {
-    value = String(value).trim() || ''
-    if (value.trim() === '') {
-      value = null
-    } else if (Number.isNaN(Number(value))) {
-      value = this.mergedValue
-    } else {
-      value = Number(value)
-    }
-    if (value === null) {
-      return null
-    }
-    const { validator } = props
-    if (validator) {
-      if (validator(value)) {
-        return value
-      } else {
-        return null
-      }
-    } else {
-      const { value: mergedMin } = mergedMinRef
-      const { value: mergedMax } = mergedMaxRef
-      if (mergedMin !== null && value < mergedMin) {
-        value = mergedMin
-      } else if (mergedMax !== null && value > mergedMax) {
-        value = mergedMax
-      }
-    }
-    return value
   }
   return {
-    handleEnter,
+    handleKeyDownEnter,
     handleMouseDown,
-    add,
-    minus,
-    doFocus,
-    doBlur
+    handleAddClick,
+    handleMinusClick,
+    handleFocus,
+    handleBlur
   }
 }
 
@@ -188,6 +168,7 @@ export default defineComponent({
   components: {
     NIcon,
     NInput,
+    NButton,
     RemoveIcon,
     AddIcon
   },
@@ -259,7 +240,13 @@ export default defineComponent({
     }
   },
   setup (props) {
-    // const themeRef = useTheme('InputNumber', 'InputNumber', style, inputNumberLight, props)
+    const themeRef = useTheme(
+      'InputNumber',
+      'InputNumber',
+      style,
+      inputNumberLight,
+      props
+    )
     const { locale } = useLocale('InputNumber')
     const formItem = useFormItem(props)
     // dom ref
@@ -271,80 +258,112 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
-    const mergedPlaceholderRef = computed(() => {
+    const displayedValueRef = ref('')
+    const mergedPlaceholderRef = useMemo(() => {
       const { placeholder } = props
       if (placeholder !== undefined) return placeholder
       return locale.placeholder
     })
-    const mergedStepRef = computed(() => {
+    const mergedStepRef = useMemo(() => {
       const parsedNumber = parseNumber(props.step)
       if (parsedNumber !== null) {
         return parsedNumber === 0 ? 1 : Math.abs(parsedNumber)
       }
       return 1
     })
-    const mergedMinRef = computed(() => {
+    const mergedMinRef = useMemo(() => {
       const parsedNumber = parseNumber(props.min)
       if (parsedNumber !== null) return parsedNumber
       else return null
     })
-    const mergedMaxRef = computed(() => {
+    const mergedMaxRef = useMemo(() => {
       const parsedNumber = parseNumber(props.max)
       if (parsedNumber !== null) return parsedNumber
       else return null
     })
-    const invalidRef = computed(() => {
+    // import methods, can be created in useMethods
+    const doUpdateValue = (value) => {
       const { value: mergedValue } = mergedValueRef
-      if (mergedValue === null) return false
-      const { validator } = props
-      if (validator && !validator(mergedValue)) return true
-      const { value: mergedMin } = mergedMinRef
-      if (mergedMin !== null && mergedValue < mergedMin) return true
-      const { value: mergedMax } = mergedMaxRef
-      if (mergedMax !== null && mergedValue > mergedMax) return true
+      if (value === mergedValue) return
+      const { 'onUpdate:value': onUpdateValue, onChange } = props
+      const { nTriggerFormInput, nTriggerFormChange } = formItem
+      if (onChange) call(onChange, value)
+      if (onUpdateValue) call(onUpdateValue, value)
+      uncontrolledValueRef.value = value
+      nTriggerFormInput()
+      nTriggerFormChange()
+    }
+    const deriveValueFromDisplayedValue = (offset = 0, postUpdate = true) => {
+      const { value: displayedValue } = displayedValueRef
+      const parsedValue = parse(displayedValue)
+      if (parsedValue === null) return null
+      if (validator(parsedValue)) {
+        let nextValue = parsedValue + offset
+        if (validator(nextValue)) {
+          const { value: mergedMax } = mergedMaxRef
+          const { value: mergedMin } = mergedMinRef
+          if (mergedMax !== null && nextValue > mergedMax) {
+            if (!postUpdate) return false
+            nextValue = mergedMax
+          }
+          if (mergedMin !== null && nextValue < mergedMin) {
+            if (!postUpdate) return false
+            nextValue = mergedMin
+          }
+          if (props.validator && !props.validator(nextValue)) return false
+          if (postUpdate) doUpdateValue(nextValue)
+          return nextValue
+        }
+      }
       return false
-    })
-    const minusableRef = computed(() => {
+    }
+    const deriveDisplayedValueFromValue = () => {
       const { value: mergedValue } = mergedValueRef
-      const { value: mergedMin } = mergedMinRef
-      const { validator } = props
-      if (validator) {
-        if (mergedValue !== null) return validator(mergedValue - props.step)
-        else return false
+      if (validator(mergedValue)) {
+        displayedValueRef.value = format(mergedValue)
       } else {
-        return !(
-          mergedValue !== null &&
-          mergedMin !== null &&
-          mergedValue <= mergedMin
-        )
+        displayedValueRef.value = mergedValue
       }
+    }
+    deriveDisplayedValueFromValue()
+    const displayedValueInvalidRef = useMemo(() => {
+      const derivedValue = deriveValueFromDisplayedValue(0, false)
+      return derivedValue === false
     })
-    const addableRef = computed(() => {
+    const minusableRef = useMemo(() => {
       const { value: mergedValue } = mergedValueRef
-      const { value: mergedMax } = mergedMaxRef
-      const { validator } = props
-      if (validator) {
-        if (mergedValue !== null) return validator(mergedValue + props.step)
-        else return false
-      } else {
-        return !(
-          mergedValue !== null &&
-          mergedMax !== null &&
-          mergedValue >= mergedMax
-        )
+      if (props.validator && mergedValue === null) {
+        return false
       }
+      const { value: mergedStep } = mergedStepRef
+      const derivedNextValue = deriveValueFromDisplayedValue(-mergedStep, false)
+      return derivedNextValue !== false
+    })
+    const addableRef = useMemo(() => {
+      const { value: mergedValue } = mergedValueRef
+      if (props.validator && mergedValue === null) {
+        return false
+      }
+      const { value: mergedStep } = mergedStepRef
+      const derivedNextValue = deriveValueFromDisplayedValue(+mergedStep, false)
+      return derivedNextValue !== false
+    })
+    watch(mergedValueRef, () => {
+      deriveDisplayedValueFromValue()
     })
     return {
+      inputRef,
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
       mergedPlaceholder: mergedPlaceholderRef,
-      invalid: invalidRef,
-      stringifiedValue: computed(() => {
-        const { value } = mergedValueRef
-        return value === undefined || value === null ? value : String(value)
-      }),
+      displayedValueInvalid: displayedValueInvalidRef,
       mergedSize: formItem.mergedSize,
+      displayedValue: displayedValueRef,
+      addable: addableRef,
+      minusable: minusableRef,
       ...useMethods(props, formItem, {
+        deriveValueFromDisplayedValue,
+        doUpdateValue,
         uncontrolledValueRef,
         mergedValueRef,
         addableRef,
@@ -352,22 +371,23 @@ export default defineComponent({
         mergedMaxRef,
         mergedMinRef,
         inputRef,
-        mergedStepRef
+        mergedStepRef,
+        displayedValueRef
       }),
-      cssVars () {
-        // const {
-        //   common {
-        //   },
-        //   self {
-        //   }
-        // } = themeRef.value
-        // return {
-        // }
-      },
+      // theme
       inputThemeOverrides: {
-        paddingLeft: '8px',
         paddingRight: '8px'
-      }
+      },
+      buttonThemeOverrides: computed(() => {
+        const {
+          self: { iconColorDisabled }
+        } = themeRef.value
+        const [r, g, b, a] = rgba(iconColorDisabled)
+        return {
+          textColorTextDisabled: `rgb(${r}, ${g}, ${b})`,
+          opacityDisabled: a
+        }
+      })
     }
   }
 })

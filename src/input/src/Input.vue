@@ -4,18 +4,14 @@
     class="n-input"
     :class="{
       'n-input--disabled': disabled,
-      [`n-input--${mergedSize}-size`]: true,
       'n-input--textarea': type === 'textarea',
       'n-input--round': round && !(type === 'textarea'),
-      'n-input--clearable': clearable,
-      'n-input--split': pair,
+      'n-input--pair': pair,
       'n-input--focus': mergedFocus,
-      'n-input--suffix': $slots.suffix,
-      'n-input--prefix': $slots.prefix || $slots.affix,
       'n-input--stateful': stateful
     }"
     :style="cssVars"
-    :tabindex="!disabled && passivelyActivated && !inputFocused ? 0 : false"
+    :tabindex="!disabled && passivelyActivated && !activated ? 0 : false"
     @focus="handleWrapperFocus"
     @blur="handleWrapperBlur"
     @keydown.enter="handleWrapperKeyDownEnter"
@@ -46,7 +42,8 @@
       :maxlength="maxlength"
       :minlength="minlength"
       :readonly="readonly"
-      :tabindex="passivelyActivated && !inputFocused ? -1 : false"
+      :tabindex="passivelyActivated && !activated ? -1 : false"
+      :style="textDecorationStyle[0]"
       @blur="handleInputBlur"
       @focus="handleInputFocus"
       @input="handleInput"
@@ -68,7 +65,7 @@
           ref="inputRef"
           :type="type"
           class="n-input__input-el"
-          :tabindex="passivelyActivated && !inputFocused ? -1 : false"
+          :tabindex="passivelyActivated && !activated ? -1 : false"
           :placeholder="mergedPlaceholder[0]"
           :disabled="disabled"
           :maxlength="maxlength"
@@ -77,6 +74,7 @@
           :readonly="readonly"
           :autofocus="autofocus"
           :size="attrSize"
+          :style="textDecorationStyle[0]"
           @blur="handleInputBlur"
           @focus="handleInputFocus"
           @input="handleInput($event, 0)"
@@ -103,7 +101,7 @@
         </n-base-clear-button>
       </n-icon-config-provider>
     </div>
-    <span v-if="pair" class="n-input__splitor">
+    <span v-if="pair" class="n-input__separator">
       {{ separator }}
     </span>
     <div v-if="pair" class="n-input-wrapper">
@@ -112,13 +110,14 @@
           ref="input2Ref"
           :type="type"
           class="n-input__input-el"
-          :tabindex="passivelyActivated && !inputFocused ? -1 : false"
+          :tabindex="passivelyActivated && !activated ? -1 : false"
           :placeholder="mergedPlaceholder[1]"
           :disabled="disabled"
           :maxlength="maxlength"
           :minlength="minlength"
           :value="mergedValue && mergedValue[1]"
           :readonly="readonly"
+          :style="textDecorationStyle[1]"
           @blur="handleInputBlur"
           @focus="handleInputFocus"
           @input="handleInput($event, 1)"
@@ -177,7 +176,7 @@ function createMethods (
     isComposingRef,
     focusedRef,
     hoverRef,
-    inputFocusedRef,
+    activatedRef,
     wrapperRef,
     inputRef,
     input2Ref,
@@ -293,14 +292,14 @@ function createMethods (
           e.relatedTarget === textareaRef.value)
       )
     ) {
-      inputFocusedRef.value = false
+      activatedRef.value = false
     }
     dealWithEvent(e, 'blur')
   }
   const handleInputFocus = (e) => {
     doInputFocus(e)
     focusedRef.value = true
-    inputFocusedRef.value = true
+    activatedRef.value = true
     doActivate()
     dealWithEvent(e, 'focus')
   }
@@ -361,7 +360,7 @@ function createMethods (
   }
   const handleWrapperKeyDownEnter = (e) => {
     if (props.passivelyActivated) {
-      const { value: focused } = inputFocusedRef
+      const { value: focused } = activatedRef
       if (focused) {
         if (props.deactivateOnEnter) {
           handleWrapperKeyDownEsc()
@@ -378,7 +377,7 @@ function createMethods (
   }
   const handleWrapperKeyDownEsc = () => {
     if (props.passivelyActivated) {
-      inputFocusedRef.value = false
+      activatedRef.value = false
       nextTick(() => {
         wrapperRef.value.focus()
       })
@@ -544,6 +543,10 @@ export default defineComponent({
       default: undefined
     },
     /** private */
+    textDecoration: {
+      type: String,
+      default: undefined
+    },
     attrSize: {
       type: Number,
       default: 20
@@ -601,7 +604,7 @@ export default defineComponent({
     const focusedRef = ref(false)
     const hoverRef = ref(false)
     const isComposingRef = ref(false)
-    const inputFocusedRef = ref(false)
+    const activatedRef = ref(false)
     // placeholder
     const mergedPlaceholderRef = computed(() => {
       const { placeholder, pair } = props
@@ -672,6 +675,21 @@ export default defineComponent({
     const mergedFocusRef = computed(() => {
       return props.forceFocus || focusedRef.value
     })
+    // text-decoration
+    const textDecorationStyleRef = computed(() => {
+      const { textDecoration } = props
+      if (!textDecoration) return [null, null]
+      if (Array.isArray(textDecoration)) {
+        return textDecoration.map((v) => ({
+          textDecoration: v
+        }))
+      }
+      return [
+        {
+          textDecoration
+        }
+      ]
+    })
     // textarea autosize
     const updateTextAreaStyle = () => {
       if (props.type === 'textarea') {
@@ -710,7 +728,7 @@ export default defineComponent({
       isComposingRef,
       focusedRef,
       hoverRef,
-      inputFocusedRef,
+      activatedRef,
       wrapperRef,
       inputRef,
       input2Ref,
@@ -724,6 +742,24 @@ export default defineComponent({
       } else {
         if (textareaRef.value) textareaRef.value.focus()
         else if (inputRef.value) inputRef.value.focus()
+      }
+    }
+    const blur = () => {
+      if (wrapperRef.value.contains(document.activeElement)) {
+        document.activeElement.blur()
+      }
+    }
+    const activate = () => {
+      if (props.disabled) return
+      if (textareaRef.value) textareaRef.value.focus()
+      else if (inputRef.value) inputRef.value.focus()
+    }
+    const deactivate = () => {
+      if (
+        wrapperRef.value.contains(document.activeElement) &&
+        wrapperRef.value !== document.activeElement
+      ) {
+        methods.handleWrapperKeyDownEsc()
       }
     }
     return {
@@ -742,11 +778,15 @@ export default defineComponent({
       showTextareaPlaceholder: showTextareaPlaceholderRef,
       mergedFocus: mergedFocusRef,
       isComposing: isComposingRef,
-      inputFocused: inputFocusedRef,
+      activated: activatedRef,
       showClearButton,
       mergedSize: mergedSizeRef,
+      textDecorationStyle: textDecorationStyleRef,
       // methods
       focus,
+      blur,
+      deactivate,
+      activate,
       ...methods,
       ...useConfig(props),
       cssVars: computed(() => {

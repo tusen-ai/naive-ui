@@ -198,8 +198,9 @@ export default c([
         fadeInWidthExpandTransition()
       ]),
       cE('content', `
-        line-height: inherit;
-        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
       `, [
         c('~', [
           cE('icon', {
