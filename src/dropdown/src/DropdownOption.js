@@ -122,6 +122,7 @@ export default defineComponent({
   render () {
     const {
       NDropdown: { animated },
+      rawNode,
       mergedShowSubmenu
     } = this
     const submenuVNode = mergedShowSubmenu
@@ -163,7 +164,7 @@ export default defineComponent({
                 ],
                 'n-dropdown-option': true
               },
-              [h(render, { render: this.rawNode.icon })]
+              [h(render, { render: rawNode.icon })]
             ),
             h(
               'div',
@@ -171,7 +172,8 @@ export default defineComponent({
                 class: 'n-dropdown-option-body__label',
                 'n-dropdown-option': true
               },
-              [h(render, { render: this.rawNode.label })]
+              // TODO: Workaround, menu campatible
+              [h(render, { render: rawNode.label ?? rawNode.title })]
             ),
             h(
               'div',

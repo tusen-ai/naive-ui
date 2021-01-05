@@ -1,4 +1,12 @@
-import { h, nextTick, ref, toRef, computed, onMounted } from 'vue'
+import {
+  h,
+  nextTick,
+  ref,
+  toRef,
+  computed,
+  onMounted,
+  defineComponent
+} from 'vue'
 import { createTreeMate } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
 import { useTheme } from '../../_mixins'
@@ -6,7 +14,7 @@ import { itemRenderer } from './utils'
 import { menuLight } from '../styles'
 import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Menu',
   provide () {
     return {
@@ -244,4 +252,4 @@ export default {
       this.tmNodes.map((tmNode) => itemRenderer(tmNode))
     )
   }
-}
+})

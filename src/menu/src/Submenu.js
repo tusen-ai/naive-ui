@@ -1,13 +1,13 @@
-import { h, withDirectives, vShow, ref } from 'vue'
+import { h, withDirectives, vShow, ref, defineComponent } from 'vue'
 import { NFadeInExpandTransition } from '../../_base'
-import { NPopover } from '../../popover'
+import { NDropdown } from '../../dropdown'
 import NMenuItemContent from './MenuItemContent.vue'
 import menuChildMixin from './menu-child-mixin'
 import { itemRenderer } from './utils'
 import { useMemo } from 'vooks'
 import { useInjectionRef } from '../../_utils/composable'
 
-export default {
+export default defineComponent({
   name: 'Submenu',
   mixins: [menuChildMixin],
   provide () {
@@ -17,6 +17,14 @@ export default {
     }
   },
   props: {
+    rawNodes: {
+      type: Array,
+      required: true
+    },
+    tmNodes: {
+      type: Array,
+      required: true
+    },
     extra: {
       type: [String, Function],
       default: undefined
@@ -24,10 +32,6 @@ export default {
     disabled: {
       type: Boolean,
       default: false
-    },
-    tmNodes: {
-      type: Array,
-      required: true
     },
     icon: {
       type: Function,
@@ -41,10 +45,10 @@ export default {
   setup (props) {
     const activePathRef = useInjectionRef('NMenu', 'activePath')
     return {
-      selectedInside: useMemo(() => {
+      childActive: useMemo(() => {
         return activePathRef.value.includes(props.internalKey)
       }),
-      popoverShow: ref(false)
+      dropdownShow: ref(false)
     }
   },
   computed: {
@@ -56,13 +60,12 @@ export default {
     },
     collapsed () {
       if (this.horizontal) return false
-      if (this.insidePopover) return false
       if (this.menuCollapsed) {
         return true
       }
       return !this.NMenu.mergedExpandedKeys.includes(this.internalKey)
     },
-    popoverEnabled () {
+    dropdownEnabled () {
       return !this.mergedDisabled && (this.horizontal || this.menuCollapsed)
     }
   },
@@ -80,7 +83,7 @@ export default {
       }
     },
     handlePopoverShowChange (value) {
-      this.popoverShow = value
+      this.dropdownShow = value
     }
   },
   render () {
@@ -94,11 +97,10 @@ export default {
         title,
         extra,
         horizontal,
-        selectedInside,
+        childActive,
         icon,
         handleClick,
-        popoverShow,
-        insidePopover
+        dropdownShow
       } = this
       return h(NMenuItemContent, {
         paddingLeft: delayedPaddingLeft,
@@ -108,15 +110,14 @@ export default {
         activeIconSize,
         title,
         extra,
-        showArrow: !horizontal && !insidePopover,
-        uncollapsable: insidePopover,
-        childActive: selectedInside,
+        showArrow: !horizontal,
+        childActive: childActive,
         icon,
-        hover: popoverShow,
+        hover: dropdownShow,
         onClick: handleClick
       })
     }
-    const createSubmenuChildren = (insidePopover = false) => {
+    const createSubmenuChildren = () => {
       return h(NFadeInExpandTransition, null, {
         default: () => {
           const { tmNodes, collapsed } = this
@@ -126,27 +127,31 @@ export default {
               {
                 class: 'n-submenu-children'
               },
-              tmNodes.map((item) => itemRenderer(item, insidePopover))
+              tmNodes.map((item) => itemRenderer(item))
             ),
-            [[vShow, insidePopover || !collapsed]]
+            [[vShow, !collapsed]]
           )
         }
       })
     }
     return this.root
       ? h(
-        NPopover,
+        NDropdown,
         {
-          class: 'n-menu-popover',
+          builtinThemeOverrides: {
+            fontSizeLarge: '14px',
+            optionIconSizeLarge: '18px'
+          },
+          size: 'large',
           trigger: 'hover',
-          disabled: !this.popoverEnabled,
-          placement: this.popoverPlacement,
-          showArrow: false,
-          padded: false,
-          'onUpdate:show': this.handlePopoverShowChange
+          disabled: !this.dropdownEnabled,
+          placement: this.dropdownPlacement,
+          'onUpdate:show': this.handlePopoverShowChange,
+          options: this.rawNodes,
+          onSelect: this.NMenu.doSelect
         },
         {
-          trigger: () =>
+          default: () =>
             h(
               'div',
               {
@@ -154,18 +159,9 @@ export default {
               },
               [
                 createSubmenuItem(),
-                !this.horizontal ? createSubmenuChildren() : null
+                this.horizontal ? null : createSubmenuChildren()
               ]
-            ),
-          default: () => {
-            return h(
-              'div',
-              {
-                class: 'n-menu'
-              },
-              createSubmenuChildren(true)
             )
-          }
         }
       )
       : h(
@@ -176,4 +172,4 @@ export default {
         [createSubmenuItem(), createSubmenuChildren()]
       )
   }
-}
+})

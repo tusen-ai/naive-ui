@@ -18,6 +18,7 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // --option-text-color
 // --prefix-color
 // --suffix-color
+// --option-icon-size
 export default cB('dropdown-menu', {
   transformOrigin: 'inherit',
   padding: 'var(--padding)',
@@ -46,6 +47,7 @@ export default cB('dropdown-menu', {
         backgroundColor: 'var(--option-color-hover)'
       }),
       cM('group', {
+        fontSize: 'calc(var(--font-size) - 1px)',
         color: 'var(--group-header-text-color)'
       }, [
         cE('prefix', {
@@ -68,7 +70,7 @@ export default cB('dropdown-menu', {
         cB('icon', {
           transition: 'color .3s var(--bezier)',
           color: 'var(--prefix-color)',
-          fontSize: '16px'
+          fontSize: 'var(--option-icon-size)'
         })
       ]),
       cE('label', {
@@ -91,7 +93,7 @@ export default cB('dropdown-menu', {
         cB('icon', {
           transition: 'color .3s var(--bezier)',
           color: 'var(--suffix-color)',
-          fontSize: '16px'
+          fontSize: 'var(--option-icon-size)'
         })
       ]),
       cB('dropdown-menu', {

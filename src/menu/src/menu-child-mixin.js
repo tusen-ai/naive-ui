@@ -28,10 +28,6 @@ export default {
     title: {
       type: [String, Function],
       default: undefined
-    },
-    insidePopover: {
-      type: Boolean,
-      default: false
     }
   },
   data () {
@@ -53,7 +49,7 @@ export default {
     horizontal () {
       return this.NMenu.mode === 'horizontal'
     },
-    popoverPlacement () {
+    dropdownPlacement () {
       if (this.horizontal) {
         return 'bottom'
       }
@@ -84,7 +80,6 @@ export default {
       return collapsedIconSize === undefined ? iconSize : collapsedIconSize
     },
     paddingLeft () {
-      // TODO handle popover
       const {
         NMenu: { collapsedWidth, indent, rootIndent },
         NSubmenu,
@@ -92,11 +87,8 @@ export default {
         root,
         horizontal,
         collapsedIconSize,
-        menuCollapsed,
-        insidePopover,
-        level
+        menuCollapsed
       } = this
-      if (insidePopover && level === 1) return 18
       const mergedRootIndent = rootIndent === undefined ? indent : rootIndent
       const menuCollapsedPaddingLeft =
         collapsedWidth / 2 - collapsedIconSize / 2

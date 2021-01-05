@@ -4,10 +4,9 @@
     :style="style"
     :class="{
       'n-menu-item-content--collapsed': collapsed,
-      'n-menu-item-content--child-selected': childSelected,
+      'n-menu-item-content--child-active': childActive,
       'n-menu-item-content--disabled': disabled,
-      'n-menu-item-content--hover': hover,
-      'n-menu-item-content--uncollapsable': uncollapsable
+      'n-menu-item-content--hover': hover
     }"
     @click="handleClick"
   >
@@ -25,9 +24,10 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import { render } from '../../_utils'
 
-export default {
+export default defineComponent({
   name: 'MenuItemContent',
   components: {
     render
@@ -69,15 +69,11 @@ export default {
       type: Boolean,
       default: false
     },
-    childSelected: {
+    childActive: {
       type: Boolean,
       default: false
     },
     hover: {
-      type: Boolean,
-      default: false
-    },
-    uncollapsable: {
       type: Boolean,
       default: false
     },
@@ -105,5 +101,5 @@ export default {
       this.onClick()
     }
   }
-}
+})
 </script>

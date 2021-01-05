@@ -203,7 +203,9 @@ export default defineComponent({
             [createKey('optionIconPrefixWidth', size)]: optionIconPrefixWidth,
             [createKey('optionPrefixWidth', size)]: optionPrefixWidth,
             [createKey('fontSize', size)]: fontSize,
-            [createKey('optionHeight', size)]: optionHeight
+            [createKey('optionHeight', size)]: optionHeight,
+            [createKey('optionIconSize', size)]: optionIconSize,
+            [createKey('groupHeaderFontSize', size)]: groupHeaderFontSize
           }
         } = themeRef.value
         return {
@@ -223,7 +225,9 @@ export default defineComponent({
           '--option-text-color': optionTextColor,
           '--prefix-color': prefixColor,
           '--suffix-color': suffixColor,
-          '--group-header-text-color': groupHeaderTextColor
+          '--group-header-text-color': groupHeaderTextColor,
+          '--group-header-font-size': groupHeaderFontSize,
+          '--option-icon-size': optionIconSize
         }
       })
     }

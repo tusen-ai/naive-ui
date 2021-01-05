@@ -44,7 +44,8 @@ export default defineComponent({
                 class: 'n-dropdown-option-body__label',
                 'n-dropdown-option': true
               },
-              [h(render, { render: rawNode.label })]
+              // TODO: Workaround, menu campatible
+              [h(render, { render: rawNode.label ?? rawNode.title })]
             ),
             h('div', {
               class: [

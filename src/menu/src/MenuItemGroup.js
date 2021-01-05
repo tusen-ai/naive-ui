@@ -1,9 +1,9 @@
-import { h } from 'vue'
+import { h, defineComponent } from 'vue'
 import { render } from '../../_utils'
 import { itemRenderer } from './utils'
 import menuChildMixin from './menu-child-mixin'
 
-export default {
+export default defineComponent({
   name: 'MenuItemGroup',
   mixins: [menuChildMixin],
   provide () {
@@ -44,4 +44,4 @@ export default {
       ]
     )
   }
-}
+})

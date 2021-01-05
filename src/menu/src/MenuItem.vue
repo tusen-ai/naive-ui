@@ -8,8 +8,8 @@
   >
     <n-tooltip
       trigger="hover"
-      :placement="popoverPlacement"
-      :disabled="!popoverEnabled"
+      :placement="dropdownPlacement"
+      :disabled="!dropdownEnabled"
     >
       <template #trigger>
         <n-menu-item-content
@@ -29,14 +29,14 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, defineComponent } from 'vue'
 import NMenuItemContent from './MenuItemContent.vue'
 import { NTooltip } from '../../tooltip'
 import menuChildMixin from './menu-child-mixin'
 import { useMemo } from 'vooks'
 import { useInjectionRef } from '../../_utils/composable'
 
-export default {
+export default defineComponent({
   name: 'MenuItem',
   components: {
     NMenuItemContent,
@@ -84,11 +84,11 @@ export default {
     }
   },
   computed: {
-    popoverEnabled () {
+    dropdownEnabled () {
       return (
-        !this.horizontal &&
         this.root &&
         this.menuCollapsed &&
+        !this.horizontal &&
         !this.mergedDisabled
       )
     }
@@ -105,5 +105,5 @@ export default {
       }
     }
   }
-}
+})
 </script>

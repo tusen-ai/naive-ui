@@ -12,10 +12,9 @@ const menuItemGroupProps = Object.keys(NMenuItemGroup.props).concat(
   menuChildProps
 )
 
-export function itemRenderer (tmNode, insidePopover = false) {
+export function itemRenderer (tmNode) {
   const { rawNode, key, level } = tmNode
   const props = {
-    insidePopover,
     ...rawNode,
     extra: rawNode.extra ?? rawNode.titleExtra,
     key,
@@ -33,6 +32,7 @@ export function itemRenderer (tmNode, insidePopover = false) {
     return h(
       NSubmenu,
       keep(props, submenuProps, {
+        rawNodes: tmNode.rawNode.children,
         tmNodes: tmNode.children
       })
     )
