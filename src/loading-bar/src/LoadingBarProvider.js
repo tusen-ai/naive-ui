@@ -1,19 +1,17 @@
-import { Fragment, h, ref, Teleport } from 'vue'
+import {
+  Fragment,
+  h,
+  ref,
+  Teleport,
+  defineComponent,
+  provide,
+  nextTick
+} from 'vue'
 import { useIsMounted } from 'vooks'
 import NLoadingBar from './LoadingBar.vue'
 
-export default {
+export default defineComponent({
   name: 'LoadingBarProvider',
-  provide () {
-    return {
-      loadingBar: {
-        start: this.start,
-        finish: this.finish,
-        error: this.error,
-        update: this.update
-      }
-    }
-  },
   props: {
     to: {
       type: [String, Object],
@@ -21,48 +19,50 @@ export default {
     }
   },
   setup () {
-    return {
-      isMounted: useIsMounted(),
-      loadingBarRef: ref(null)
+    const isMountedRef = useIsMounted()
+    const loadingBarRef = ref(null)
+    const methods = {
+      start () {
+        if (isMountedRef.value) {
+          loadingBarRef.value.start()
+        } else {
+          nextTick(() => {
+            loadingBarRef.value.start()
+          })
+        }
+      },
+      error () {
+        if (isMountedRef.value) {
+          loadingBarRef.value.error()
+        } else {
+          nextTick(() => {
+            loadingBarRef.value.error()
+          })
+        }
+      },
+      finish () {
+        if (isMountedRef.value) {
+          loadingBarRef.value.finish()
+        } else {
+          nextTick(() => {
+            loadingBarRef.value.finish()
+          })
+        }
+      },
+      update (options) {
+        const { percent } = options
+        if (isMountedRef.value) {
+          loadingBarRef.value.update(percent)
+        } else {
+          nextTick(() => {
+            loadingBarRef.value.update(percent)
+          })
+        }
+      }
     }
-  },
-  methods: {
-    start () {
-      if (this.isMounted) {
-        this.loadingBarRef.start()
-      } else {
-        this.$nextTick(() => {
-          this.loadingBarRef.start()
-        })
-      }
-    },
-    error () {
-      if (this.isMounted) {
-        this.loadingBarRef.error()
-      } else {
-        this.$nextTick(() => {
-          this.loadingBarRef.error()
-        })
-      }
-    },
-    finish () {
-      if (this.isMounted) {
-        this.loadingBarRef.finish()
-      } else {
-        this.$nextTick(() => {
-          this.loadingBarRef.finish()
-        })
-      }
-    },
-    update (options) {
-      const { percent } = options
-      if (this.isMounted) {
-        this.loadingBarRef.update(percent)
-      } else {
-        this.$nextTick(() => {
-          this.loadingBarRef.update(percent)
-        })
-      }
+    provide('loadingBar', methods)
+    return {
+      loadingBarRef
     }
   },
   render () {
@@ -81,4 +81,4 @@ export default {
       this.$slots.default()
     ])
   }
-}
+})

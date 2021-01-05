@@ -377,6 +377,7 @@
   - [ ] gradient-text transition 又没了
   - [x] md-loader code
   - [ ] input + form-item style
+  - [ ] loadingbar theme
 
 ## Info
 

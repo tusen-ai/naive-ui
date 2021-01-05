@@ -1,11 +1,9 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseDark } from '../../_styles/base'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'LoadingBar',
-  theme: 'dark',
-  peer: [baseDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  self (vars) {
     const { successColor } = vars
     return {
       colorError: 'red',
@@ -13,4 +11,4 @@ export default create({
       height: '2px'
     }
   }
-})
+}

@@ -32,6 +32,7 @@ import { inputDark } from './input/styles'
 import { inputNumberDark } from './input-number/styles'
 import { layoutDark } from './layout/styles'
 import { listDark } from './list/styles'
+import { loadingBarDark } from './loading-bar/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -67,5 +68,6 @@ export const darkTheme = {
   Input: inputDark,
   InputNumber: inputNumberDark,
   Layout: layoutDark,
-  List: listDark
+  List: listDark,
+  LoadingBar: loadingBarDark
 }

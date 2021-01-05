@@ -14,26 +14,45 @@
     <div
       v-show="loading || (!loading && entering)"
       class="n-loading-bar-container"
-      :class="{
-        [`n-${mergedTheme}-theme`]: mergedTheme
-      }"
     >
-      <div ref="loadingBar" class="n-loading-bar" />
+      <div ref="loadingBar" class="n-loading-bar" :style="cssVars" />
     </div>
   </transition>
 </template>
 
 <script>
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles'
+import { computed, defineComponent } from 'vue'
+import { useTheme } from '../../_mixins'
+import { loadingBarLight } from '../styles'
+import style from './styles/index.cssr.js'
 
 function createClassName (status) {
   return `n-loading-bar n-loading-bar--${status}`
 }
 
-export default {
+export default defineComponent({
   name: 'LoadingBar',
-  mixins: [configurable, themeable, withCssr(styles)],
+  setup (props) {
+    const themeRef = useTheme(
+      'LoadingBar',
+      'LoadingBar',
+      style,
+      loadingBarLight,
+      props
+    )
+    return {
+      cssVars: computed(() => {
+        const {
+          self: { height, colorError, colorLoading }
+        } = themeRef.value
+        return {
+          '--height': height,
+          '--color-loading': colorLoading,
+          '--color-error': colorError
+        }
+      })
+    }
+  },
   data () {
     return {
       entering: false,
@@ -112,5 +131,5 @@ export default {
       this.init()
     }
   }
-}
+})
 </script>
