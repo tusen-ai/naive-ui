@@ -19,6 +19,7 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // --prefix-color
 // --suffix-color
 export default cB('dropdown-menu', {
+  transformOrigin: 'inherit',
   padding: 'var(--padding)',
   backgroundColor: 'var(--color)',
   borderRadius: 'var(--border-radius)',
@@ -95,10 +96,6 @@ export default cB('dropdown-menu', {
       ]),
       cB('dropdown-menu', {
         pointerEvents: 'all'
-      }),
-      cB('dropdown-menu-wrapper', {
-        transformOrigin: 'inherit',
-        width: 'fit-content'
       })
     ]),
     cB('dropdown-offset-container', {
@@ -115,5 +112,9 @@ export default cB('dropdown-menu', {
     backgroundColor: 'var(--divider-color)',
     height: '1px',
     margin: '4px 0'
+  }),
+  cB('dropdown-menu-wrapper', {
+    transformOrigin: 'inherit',
+    width: 'fit-content'
   })
 ])
