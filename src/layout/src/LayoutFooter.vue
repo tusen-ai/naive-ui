@@ -3,30 +3,51 @@
     class="n-layout-footer"
     :class="{
       [`n-layout-footer--${position}-positioned`]: position,
-      [`n-${mergedTheme}-theme`]: mergedTheme,
       [`n-layout-footer--bordered`]: bordered
     }"
-    :style="mergedStyle"
+    :style="cssVars"
   >
     <slot />
   </div>
 </template>
 
 <script>
+import { computed, defineComponent } from 'vue'
 import layoutModeMixin from './layoutModeMixin'
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles/layout-header-footer'
+import { useTheme } from '../../_mixins'
+import { layoutLight } from '../styles'
+import style from './styles/layout-footer.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'LayoutFooter',
-  cssrName: 'Layout',
-  cssrId: 'LayoutHeaderFooter',
-  mixins: [configurable, themeable, layoutModeMixin, withCssr(styles)],
+  mixins: [layoutModeMixin],
   props: {
+    ...useTheme.props,
     bordered: {
       type: Boolean,
       default: false
     }
+  },
+  setup (props) {
+    const themeRef = useTheme(
+      'Layout',
+      'LayoutFooter',
+      style,
+      layoutLight,
+      props
+    )
+    return {
+      cssVars: computed(() => {
+        const {
+          common: { cubicBezierEaseInOut },
+          self: { footerBorderColor }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--footer-border-color': footerBorderColor
+        }
+      })
+    }
   }
-}
+})
 </script>

@@ -1,12 +1,14 @@
-import create from '../../_styles/utils/create-component-base'
 import { composite } from 'seemly'
-import { baseLight } from '../../_styles/base'
+import { commonLight } from '../../_styles/new-common'
+import { scrollbarLight } from '../../scrollbar/styles'
 
-export default create({
+export default {
   name: 'Layout',
-  theme: 'light',
-  peer: [baseLight],
-  getLocalVars (vars) {
+  common: commonLight,
+  peers: {
+    Scrollbar: scrollbarLight
+  },
+  self (vars) {
     const {
       textColor2,
       bodyColor,
@@ -28,4 +30,4 @@ export default create({
       siderToggleBarColorHover: composite(bodyColor, scrollbarColorHoverOverlay)
     }
   }
-})
+}

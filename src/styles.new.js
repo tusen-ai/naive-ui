@@ -30,6 +30,7 @@ import { gridDark } from './grid/styles'
 import { iconDark } from './icon/styles'
 import { inputDark } from './input/styles'
 import { inputNumberDark } from './input-number/styles'
+import { layoutDark } from './layout/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -63,5 +64,6 @@ export const darkTheme = {
   Grid: gridDark,
   Icon: iconDark,
   Input: inputDark,
-  InputNumber: inputNumberDark
+  InputNumber: inputNumberDark,
+  Layout: layoutDark
 }

@@ -5,11 +5,10 @@
       [`n-layout-sider--${position}-positioned`]: position,
       [`n-layout-sider--bordered`]: bordered,
       [`n-layout-sider--collapsed`]: collapsed,
-      [`n-layout-sider--show-content`]: showContent,
-      [`n-${mergedTheme}-theme`]: mergedTheme
+      [`n-layout-sider--show-content`]: showContent
     }"
     :style="{
-      ...mergedStyle,
+      ...cssVars,
       transform: styleTransform,
       maxWidth: styleMaxWidth,
       width: styleWidth
@@ -19,7 +18,7 @@
       v-if="!nativeScrollbar"
       ref="scrollbar"
       class="n-layout-sider__content"
-      :theme="mergedTheme"
+      :theme="'light'"
       v-bind="scrollbarProps"
     >
       <slot />
@@ -45,25 +44,25 @@
 </template>
 
 <script>
-import { nextTick } from 'vue'
+import { defineComponent, computed, nextTick } from 'vue'
+import { useTheme } from '../../_mixins'
+import { NScrollbar } from '../../scrollbar'
+import { layoutLight } from '../styles'
+import style from './styles/layout-sider.cssr.js'
 import layoutModeMixin from './layoutModeMixin'
-import { configurable, themeable, withCssr } from '../../_mixins'
 import ToggleButton from './ToggleButton.vue'
 import ToggleBar from './ToggleBar.vue'
-import { NScrollbar } from '../../scrollbar'
-import styles from './styles/layout-sider'
 
-export default {
+export default defineComponent({
   name: 'LayoutSider',
-  cssrName: 'Layout',
-  cssrId: 'LayoutSider',
   components: {
     ToggleButton,
     ToggleBar,
     NScrollbar
   },
-  mixins: [configurable, themeable, layoutModeMixin, withCssr(styles)],
+  mixins: [layoutModeMixin],
   props: {
+    ...useTheme.props,
     bordered: {
       type: Boolean,
       default: false
@@ -123,6 +122,37 @@ export default {
     onCollapse: {
       type: Function,
       default: undefined
+    }
+  },
+  setup (props) {
+    const themeRef = useTheme(
+      'Layout',
+      'LayoutSider',
+      style,
+      layoutLight,
+      props
+    )
+    return {
+      cssVars: computed(() => {
+        const {
+          common: { cubicBezierEaseInOut },
+          self: {
+            siderColor,
+            siderToggleButtonColor,
+            siderBorderColor,
+            siderToggleBarColor,
+            siderToggleBarColorHover
+          }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--sider-color': siderColor,
+          '--sider-border-color': siderBorderColor,
+          '--sider-toggle-button-color': siderToggleButtonColor,
+          '--sider-toggle-bar-color': siderToggleBarColor,
+          '--sider-toggle-bar-color-hover': siderToggleBarColorHover
+        }
+      })
     }
   },
   data () {
@@ -249,5 +279,5 @@ export default {
       }
     }
   }
-}
+})
 </script>

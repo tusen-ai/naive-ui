@@ -1,12 +1,14 @@
-import create from '../../_styles/utils/create-component-base'
 import { composite } from 'seemly'
-import { baseDark } from '../../_styles/base'
+import { commonDark } from '../../_styles/new-common'
+import { scrollbarDark } from '../../scrollbar/styles'
 
-export default create({
+export default {
   name: 'Layout',
-  theme: 'dark',
-  peer: [baseDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  peers: {
+    Scrollbar: scrollbarDark
+  },
+  self (vars) {
     const {
       textColor2Overlay,
       bodyColor,
@@ -28,4 +30,4 @@ export default create({
       siderToggleBarColorHover: composite(bodyColor, scrollbarColorHoverOverlay)
     }
   }
-})
+}

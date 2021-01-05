@@ -4,7 +4,6 @@
     :class="{
       [`n-layout--${position}-positioned`]: true,
       'n-layout--has-sider': hasSider,
-      [`n-${mergedTheme}-theme`]: mergedTheme,
       [`n-layout--${siderCollapseMode}-collapse-mode`]: siderCollapseMode
     }"
     :style="mergedLayoutStyle"
@@ -12,7 +11,7 @@
     <n-scrollbar
       v-if="!nativeScrollbar"
       ref="scrollbar"
-      :theme="mergedTheme"
+      :theme="'light'"
       v-bind="scrollbarProps"
     >
       <slot />
@@ -22,27 +21,27 @@
 </template>
 
 <script>
-import { nextTick } from 'vue'
+import { nextTick, defineComponent, computed } from 'vue'
 import { NScrollbar } from '../../scrollbar'
+import { useTheme } from '../../_mixins'
+import { layoutLight } from '../styles'
 import layoutModeMixin from './layoutModeMixin'
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles/layout'
+import style from './styles/layout.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Layout',
   alias: ['LayoutContent'],
-  cssrName: 'Layout',
-  cssrId: 'Layout',
   components: {
     NScrollbar
   },
-  mixins: [configurable, themeable, layoutModeMixin, withCssr(styles)],
+  mixins: [layoutModeMixin],
   provide () {
     return {
       NLayout: this
     }
   },
   props: {
+    ...useTheme.props,
     nativeScrollbar: {
       type: Boolean,
       default: true
@@ -50,6 +49,22 @@ export default {
     scrollbarProps: {
       type: Object,
       default: undefined
+    }
+  },
+  setup (props) {
+    const themeRef = useTheme('Layout', 'Layout', style, layoutLight, props)
+    const {
+      common: { cubicBezierEaseInOut },
+      self: { color, textColor }
+    } = themeRef.value
+    return {
+      cssVars: computed(() => {
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--color': color,
+          '--text-color': textColor
+        }
+      })
     }
   },
   data () {
@@ -86,7 +101,7 @@ export default {
           marginLeft: this.styleMarginLeft,
           transition: this.transitionDisabled ? 'none' : null
         },
-        this.mergedStyle
+        this.cssVars
       )
     },
     transitionDisabled () {
@@ -113,5 +128,5 @@ export default {
       })
     }
   }
-}
+})
 </script>

@@ -3,30 +3,52 @@
     class="n-layout-header"
     :class="{
       [`n-layout-header--${position}-positioned`]: position,
-      [`n-${mergedTheme}-theme`]: mergedTheme,
       [`n-layout-header--bordered`]: bordered
     }"
-    :style="mergedStyle"
+    :style="cssVars"
   >
     <slot />
   </div>
 </template>
 
 <script>
+import { defineComponent, computed } from 'vue'
+import { useTheme } from '../../_mixins'
 import layoutModeMixin from './layoutModeMixin'
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles/layout-header-footer'
+import { layoutLight } from '../styles'
+import style from './styles/layout-header.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'LayoutHeader',
-  cssrName: 'Layout',
-  cssrId: 'LayoutHeaderFooter',
-  mixins: [configurable, themeable, layoutModeMixin, withCssr(styles)],
+  mixins: [layoutModeMixin],
   props: {
+    ...useTheme.props,
     bordered: {
       type: Boolean,
       default: false
     }
+  },
+  setup (props) {
+    const themeRef = useTheme(
+      'Layout',
+      'LayoutHeader',
+      style,
+      layoutLight,
+      props
+    )
+    return {
+      cssVars: computed(() => {
+        const {
+          common: { cubicBezierEaseInOut },
+          self: { headerColor, headerBorderColor }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--header-color': headerColor,
+          '--header-border-color': headerBorderColor
+        }
+      })
+    }
   }
-}
+})
 </script>
