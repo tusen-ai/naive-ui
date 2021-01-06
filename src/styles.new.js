@@ -43,6 +43,7 @@ import { popconfirmDark } from './popconfirm/styles'
 import { popoverDark } from './popover/styles'
 import { popselectDark } from './popselect/styles'
 import { progressDark } from './progress/styles'
+import { radioDark } from './radio/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -89,5 +90,6 @@ export const darkTheme = {
   Popconfirm: popconfirmDark,
   Popover: popoverDark,
   Popselect: popselectDark,
-  Progress: progressDark
+  Progress: progressDark,
+  Radio: radioDark
 }

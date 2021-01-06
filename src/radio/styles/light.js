@@ -1,11 +1,11 @@
-import create from '../../_styles/utils/create-component-base'
 import { changeColor } from 'seemly'
 import commonVariables from './_common'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
-  theme: 'light',
+export default {
   name: 'Radio',
-  getLocalVars (vars) {
+  common: commonLight,
+  self (vars) {
     const {
       borderColor,
       primaryColor,
@@ -62,4 +62,4 @@ export default create({
       buttonBorderRadius: borderRadius
     }
   }
-})
+}

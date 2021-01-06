@@ -5,8 +5,7 @@
       'n-radio--disabled': mergedDisabled,
       'n-radio--checked': renderSafeChecked,
       'n-radio--focus': focus,
-      [`n-radio--${mergedSize}-size`]: true,
-      [`n-${renderedTheme}-theme`]: renderedTheme
+      [`n-radio--${mergedSize}-size`]: true
     }"
     @keyup.enter="handleKeyUpEnter"
     @click="handleClick"
@@ -37,35 +36,20 @@
 </template>
 
 <script>
-import { configurable, themeable, withCssr } from '../../_mixins'
-import radioMixin from './radio-mixin'
-import styles from './styles/radio/index.js'
-import setup from './radio-setup'
+import { defineComponent, computed } from 'vue'
+import { useTheme } from '../../_mixins'
+import { radioLight } from '../styles'
+import useRadio from './use-radio'
+import style from './styles/radio.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Radio',
-  mixins: [configurable, themeable, withCssr(styles), radioMixin],
-  props: {
-    size: {
-      validator (value) {
-        return ['small', 'medium', 'large'].includes(value)
-      },
-      default: undefined
-    }
-  },
-  setup,
-  computed: {
-    renderedTheme () {
-      const { theme, NRadioGroup } = this
-      if (theme !== undefined) {
-        return theme
-      } else if (NRadioGroup && NRadioGroup.mergedTheme) {
-        return NRadioGroup.mergedTheme
-      } else {
-        const { NConfigProvider } = this
-        return (NConfigProvider && NConfigProvider.mergedTheme) || undefined
-      }
+  props: useRadio.props,
+  setup (props) {
+    useTheme('Radio', 'Radio', style, radioLight, props)
+    return {
+      cssVars: computed(() => {})
     }
   }
-}
+})
 </script>

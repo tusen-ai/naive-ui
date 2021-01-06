@@ -1,7 +1,8 @@
-import { h } from 'vue'
-import { configurable, themeable, useFormItem, withCssr } from '../../_mixins'
+import { h, defineComponent, computed } from 'vue'
+import { useTheme, useFormItem } from '../../_mixins'
 import { getSlot, flatten, warn } from '../../_utils'
-import styles from './styles/radio-group/index.js'
+import { radioLight } from '../styles'
+import style from './styles/radio-group.cssr.js'
 
 function mapSlot (defaultSlot, groupInstance) {
   const children = []
@@ -87,11 +88,13 @@ function mapSlot (defaultSlot, groupInstance) {
   }
 }
 
-export default {
+export default defineComponent({
   name: 'RadioGroup',
-  cssrName: 'Radio',
-  cssrId: 'RadioGroup',
-  mixins: [configurable, themeable, withCssr(styles)],
+  provide () {
+    return {
+      NRadioGroup: this
+    }
+  },
   props: {
     name: {
       type: String,
@@ -111,6 +114,7 @@ export default {
       type: Boolean,
       default: false
     },
+    // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:value': {
       type: Function,
       default: undefined
@@ -129,17 +133,16 @@ export default {
       default: undefined
     }
   },
-  provide () {
-    return {
-      NRadioGroup: this
-    }
-  },
   setup (props) {
-    return useFormItem(props)
+    useTheme('Radio', 'RadioGroup', style, radioLight, props)
+    return {
+      ...useFormItem(props),
+      cssVars: computed(() => {})
+    }
   },
   render () {
     const { children, isButtonGroup } = mapSlot(flatten(getSlot(this)), this)
-    const { mergedTheme, mergedSize } = this
+    const { mergedSize } = this
     return h(
       'div',
       {
@@ -147,7 +150,6 @@ export default {
           'n-radio-group',
           `n-radio-group--${mergedSize}-size`,
           {
-            [`n-${mergedTheme}-theme`]: mergedTheme,
             'n-radio-group--button-group': isButtonGroup
           }
         ]
@@ -155,4 +157,4 @@ export default {
       children
     )
   }
-}
+})

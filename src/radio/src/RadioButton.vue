@@ -22,22 +22,26 @@
       @focus="handleRadioInputFocus"
       @blur="handleRadioInputBlur"
     >
-    <div class="n-radio-button__border-mask" />
+    <div class="n-radio-button__state-border" />
     <slot />
   </div>
 </template>
 
 <script>
-import radioMixin from './radio-mixin'
-import setup from './radio-setup'
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles/radio-button/index.js'
+import { defineComponent, computed } from 'vue'
+import { useTheme } from '../../_mixins'
+import { radioLight } from '../styles'
+import useRadio from './use-radio'
+import style from './styles/radio-button.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'RadioButton',
-  cssrName: 'Radio',
-  cssrId: 'RadioButton',
-  mixins: [configurable, themeable, radioMixin, withCssr(styles)],
-  setup
-}
+  props: useRadio.props,
+  setup (props) {
+    useTheme('Radio', 'RadioButton', style, radioLight, props)
+    return {
+      cssVars: computed(() => {})
+    }
+  }
+})
 </script>
