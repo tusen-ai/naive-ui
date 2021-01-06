@@ -37,6 +37,7 @@ import { logDark } from './log/styles'
 import { menuDark } from './menu/styles'
 import { messageDark } from './message/styles'
 import { modalDark } from './modal/styles'
+import { notificationDark } from './notification/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -77,5 +78,6 @@ export const darkTheme = {
   Log: logDark,
   Menu: menuDark,
   Message: messageDark,
-  Modal: modalDark
+  Modal: modalDark,
+  Notification: notificationDark
 }

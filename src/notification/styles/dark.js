@@ -1,14 +1,17 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseDark } from '../../_styles/base'
 import { avatarDark } from '../../avatar/styles'
 import { scrollbarDark } from '../../scrollbar/styles'
 import { iconDark } from '../../icon/styles'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'Notification',
-  theme: 'dark',
-  peer: [baseDark, iconDark, avatarDark, scrollbarDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  peers: {
+    Icon: iconDark,
+    Avatar: avatarDark,
+    Scrollbar: scrollbarDark
+  },
+  self (vars) {
     const {
       textColor2Overlay,
       successColor,
@@ -41,10 +44,9 @@ export default create({
       closeColorHover: closeColorHoverOverlay,
       closeColorPressed: closeColorOverlay,
       headerTextColor: textColor1Overlay,
-      contentTextColor: textColor2Overlay,
       descriptionTextColor: textColor3Overlay,
       actionTextColor: textColor2Overlay,
       boxShadow: boxShadow2
     }
   }
-})
+}

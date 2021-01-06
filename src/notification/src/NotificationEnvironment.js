@@ -1,7 +1,7 @@
-import { nextTick, Transition, h } from 'vue'
+import { nextTick, Transition, h, defineComponent } from 'vue'
 import NNotification from './Notification.vue'
 
-export default {
+export default defineComponent({
   name: 'NotificationEnvironment',
   props: {
     duration: {
@@ -171,4 +171,4 @@ export default {
       }
     )
   }
-}
+})

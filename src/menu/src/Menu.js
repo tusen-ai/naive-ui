@@ -81,10 +81,12 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:expandedKeys': {
       type: Function,
       default: () => {}
     },
+    // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:value': {
       type: Function,
       default: () => {}

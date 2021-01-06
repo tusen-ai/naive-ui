@@ -1,10 +1,10 @@
-import { Fragment, h, reactive, ref, Teleport } from 'vue'
+import { Fragment, h, reactive, ref, Teleport, defineComponent } from 'vue'
 import { createId } from 'seemly'
 import { omit } from '../../_utils'
 import NotificationContainer from './NotificationContainer.vue'
 import NotificationEnvironment from './NotificationEnvironment'
 
-export default {
+export default defineComponent({
   name: 'NotificationProvider',
   provide () {
     return {
@@ -94,4 +94,4 @@ export default {
       this.$slots.default()
     ])
   }
-}
+})

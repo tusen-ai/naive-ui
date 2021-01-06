@@ -1,14 +1,17 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseLight } from '../../_styles/base'
 import { avatarLight } from '../../avatar/styles'
 import { scrollbarLight } from '../../scrollbar/styles'
 import { iconLight } from '../../icon/styles'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'Notification',
-  theme: 'light',
-  peer: [baseLight, iconLight, avatarLight, scrollbarLight],
-  getLocalVars (vars) {
+  common: commonLight,
+  peers: {
+    Icon: iconLight,
+    Avatar: avatarLight,
+    Scrollbar: scrollbarLight
+  },
+  self (vars) {
     const {
       textColor2,
       successColor,
@@ -41,10 +44,9 @@ export default create({
       closeColorHover: closeColorHover,
       closeColorPressed: closeColor,
       headerTextColor: textColor1Overlay,
-      contentTextColor: textColor2,
       descriptionTextColor: textColor3Overlay,
       actionTextColor: textColor2,
       boxShadow: boxShadow2
     }
   }
-})
+}

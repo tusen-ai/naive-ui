@@ -13,9 +13,10 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import { NScrollbar } from '../../scrollbar'
 
-export default {
+export default defineComponent({
   name: 'NotificationContainer',
   components: {
     NScrollbar
@@ -26,5 +27,5 @@ export default {
       required: true
     }
   }
-}
+})
 </script>

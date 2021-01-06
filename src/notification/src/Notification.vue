@@ -1,12 +1,11 @@
 <template>
   <div
     :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme,
       'n-notification--closable': closable,
-      'n-notification--show-avatar': showAvatar,
-      [`n-notification--${type}-type`]: type
+      'n-notification--show-avatar': showAvatar
     }"
     class="n-notification"
+    :style="cssVars"
   >
     <div v-if="showAvatar" class="n-notification__avatar">
       <render v-if="avatar" :render="avatar" />
@@ -50,9 +49,9 @@
 </template>
 
 <script>
-import { configurable, themeable, withCssr } from '../../_mixins'
-import { render } from '../../_utils'
-import styles from './styles'
+import { defineComponent, computed } from 'vue'
+import { useTheme } from '../../_mixins'
+import { createKey, render } from '../../_utils'
 import { NIcon } from '../../icon'
 import {
   CloseIcon,
@@ -61,8 +60,10 @@ import {
   WarningIcon,
   ErrorIcon
 } from '../../_base/icons'
+import { notificationLight } from '../styles'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Notification',
   components: {
     NIcon,
@@ -73,7 +74,6 @@ export default {
     InfoIcon,
     ErrorIcon
   },
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     closable: {
       type: Boolean,
@@ -116,15 +116,67 @@ export default {
       required: true
     }
   },
-  computed: {
-    showAvatar () {
-      return this.avatar || this.type !== 'default'
-    }
-  },
-  methods: {
-    handleCloseClick () {
-      this.onClose()
+  setup (props) {
+    const themeRef = useTheme(
+      'Notification',
+      'Notification',
+      style,
+      notificationLight,
+      props
+    )
+    return {
+      showAvatar: computed(() => {
+        return props.avatar || props.type !== 'default'
+      }),
+      handleCloseClick () {
+        this.onClose()
+      },
+      cssVars: computed(() => {
+        const { type } = props
+        const {
+          self: {
+            color,
+            textColor,
+            closeColor,
+            closeColorHover,
+            closeColorPressed,
+            headerTextColor,
+            descriptionTextColor,
+            actionTextColor,
+            borderRadius,
+            headerFontWeight,
+            boxShadow,
+            lineHeight,
+            fontSize,
+            [createKey('iconColor', type)]: iconColor
+          },
+          common: {
+            cubicBezierEaseOut,
+            cubicBezierEaseIn,
+            cubicBezierEaseInOut
+          }
+        } = themeRef.value
+        return {
+          '--color': color,
+          '--font-size': fontSize,
+          '--text-color': textColor,
+          '--description-text-color': descriptionTextColor,
+          '--action-text-color': actionTextColor,
+          '--title-text-color': headerTextColor,
+          '--title-font-weight': headerFontWeight,
+          '--bezier': cubicBezierEaseInOut,
+          '--bezier-ease-out': cubicBezierEaseOut,
+          '--bezier-ease-in': cubicBezierEaseIn,
+          '--border-radius': borderRadius,
+          '--box-shadow': boxShadow,
+          '--close-color': closeColor,
+          '--close-color-hover': closeColorHover,
+          '--close-color-pressed': closeColorPressed,
+          '--line-height': lineHeight,
+          '--icon-color': iconColor
+        }
+      })
     }
   }
-}
+})
 </script>
