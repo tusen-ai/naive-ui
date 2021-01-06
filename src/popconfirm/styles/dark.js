@@ -1,17 +1,23 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseDark } from '../../_styles/base'
 import { iconDark } from '../../icon/styles'
 import { buttonDark } from '../../button/styles'
 import { popoverDark } from '../../popover/styles'
+import { commonDark } from '../../_styles/new-common'
+import commonVars from './_common'
 
-export default create({
+export default {
   name: 'Popconfirm',
-  theme: 'dark',
-  peer: [baseDark, iconDark, buttonDark, popoverDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  peers: {
+    Icon: iconDark,
+    Button: buttonDark,
+    Popover: popoverDark
+  },
+  self (vars) {
+    const { fontSize, warningColor } = vars
     return {
-      fontSize: vars.fontSize,
-      iconColor: vars.warningColor
+      ...commonVars,
+      fontSize: fontSize,
+      iconColor: warningColor
     }
   }
-})
+}

@@ -4,6 +4,7 @@
     :class="{
       'n-popconfirm-content--show-icon': showIcon
     }"
+    :style="cssVars"
   >
     <div class="n-popconfirm-content__body">
       <slot v-if="showIcon" name="icon">
@@ -27,21 +28,21 @@
 </template>
 
 <script>
+import { defineComponent, computed } from 'vue'
 import { NButton } from '../../button'
 import { NIcon } from '../../icon'
 import { WarningIcon } from '../../_base/icons'
-import { configurable, themeable, locale, withCssr } from '../../_mixins'
-import styles from './styles'
+import { useTheme, useLocale } from '../../_mixins'
+import { popconfirmLight } from '../styles'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'NPopconfirmPanel',
-  cssrName: 'Popconfirm',
   components: {
     NButton,
     NIcon,
     WarningIcon
   },
-  mixins: [locale('Popconfirm'), configurable, themeable, withCssr(styles)],
   props: {
     positiveText: {
       type: String,
@@ -64,21 +65,42 @@ export default {
       required: true
     }
   },
-  computed: {
-    localizedPositiveText () {
-      return this.positiveText || this.locale.positiveText
-    },
-    localizedNegativeText () {
-      return this.negativeText || this.locale.negativeText
-    }
-  },
-  methods: {
-    handlePositiveClick () {
-      this.onPositiveClick()
-    },
-    handleNegativeClick () {
-      this.onNegativeClick()
+  setup (props) {
+    const themeRef = useTheme(
+      'Popconfirm',
+      'Popconfirm',
+      style,
+      popconfirmLight,
+      props
+    )
+    const { locale: localeRef } = useLocale('Popconfirm')
+    return {
+      ...useLocale('Popconfirm'),
+      localizedPositiveText: computed(() => {
+        return props.positiveText || localeRef.value.positiveText
+      }),
+      localizedNegativeText: computed(() => {
+        return props.negativeText || localeRef.value.negativeText
+      }),
+      handlePositiveClick () {
+        props.onPositiveClick()
+      },
+      handleNegativeClick () {
+        props.onNegativeClick()
+      },
+      cssVars: computed(() => {
+        const {
+          common: { cubicBezierEaseInOut },
+          self: { fontSize, iconSize, iconColor }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--font-size': fontSize,
+          '--icon-size': iconSize,
+          '--icon-color': iconColor
+        }
+      })
     }
   }
-}
+})
 </script>

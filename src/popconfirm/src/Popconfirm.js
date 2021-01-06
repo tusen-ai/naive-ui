@@ -1,4 +1,4 @@
-import { h, ref } from 'vue'
+import { h, ref, defineComponent } from 'vue'
 import { NPopover } from '../../popover'
 import PopconfirmPanel from './PopconfirmPanel.vue'
 import { omit, keep } from '../../_utils'
@@ -11,7 +11,7 @@ const panelProps = [
   'onNegativeClick'
 ]
 
-export default {
+export default defineComponent({
   name: 'Popconfirm',
   props: {
     ...NPopover.props,
@@ -93,4 +93,4 @@ export default {
       }
     )
   }
-}
+})
