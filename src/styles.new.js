@@ -42,6 +42,7 @@ import { paginationDark } from './pagination/styles'
 import { popconfirmDark } from './popconfirm/styles'
 import { popoverDark } from './popover/styles'
 import { popselectDark } from './popselect/styles'
+import { progressDark } from './progress/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -87,5 +88,6 @@ export const darkTheme = {
   Pagination: paginationDark,
   Popconfirm: popconfirmDark,
   Popover: popoverDark,
-  Popselect: popselectDark
+  Popselect: popselectDark,
+  Progress: progressDark
 }

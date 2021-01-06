@@ -1,12 +1,13 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseLight } from '../../_styles/base'
 import { iconLight } from '../../icon/styles'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'Progress',
-  theme: 'light',
-  peer: [baseLight, iconLight],
-  getLocalVars (vars) {
+  common: commonLight,
+  peers: {
+    Icon: iconLight
+  },
+  self (vars) {
     const {
       infoColor,
       successColor,
@@ -40,4 +41,4 @@ export default create({
         'linear-gradient(90deg, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, .5) 100%)'
     }
   }
-})
+}

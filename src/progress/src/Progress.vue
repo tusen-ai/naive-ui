@@ -1,12 +1,5 @@
 <template>
-  <div
-    class="n-progress"
-    :class="{
-      [`n-progress--${status}`]: status,
-      [`n-progress--${type}`]: type,
-      [`n-${mergedTheme}-theme`]: mergedTheme
-    }"
-  >
+  <div class="n-progress" :class="[`n-progress--${type}`]" :style="cssVars">
     <div v-if="type === 'circle'" class="n-progress-content">
       <div class="n-progress-graph">
         <div class="n-progress-graph-circle">
@@ -223,7 +216,8 @@
 </template>
 
 <script>
-import { nextTick, getCurrentInstance } from 'vue'
+import { nextTick, getCurrentInstance, computed, defineComponent } from 'vue'
+import { onFontsReady } from 'vooks'
 import { NIcon } from '../../icon'
 import {
   CheckmarkIcon as SuccessIcon,
@@ -233,10 +227,10 @@ import {
   ErrorIcon as ErrorCircleIcon,
   SuccessIcon as SuccessCircleIcon
 } from '../../_base/icons'
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles/index.js'
-import { formatLength } from '../../_utils'
-import { onFontsReady } from 'vooks'
+import { useTheme } from '../../_mixins'
+import { createKey, formatLength } from '../../_utils'
+import { progressLight } from '../styles'
+import style from './styles/index.cssr.js'
 
 function circlePath (r, sw, vw = 100) {
   return `m ${vw / 2} ${vw / 2 - r} a ${r} ${r} 0 1 1 0 ${
@@ -244,7 +238,7 @@ function circlePath (r, sw, vw = 100) {
   } a ${r} ${r} 0 1 1 0 -${2 * r}`
 }
 
-export default {
+export default defineComponent({
   name: 'Progress',
   components: {
     NIcon,
@@ -255,7 +249,6 @@ export default {
     SuccessCircleIcon,
     ErrorCircleIcon
   },
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     processing: {
       type: Boolean,
@@ -336,7 +329,14 @@ export default {
       default: undefined
     }
   },
-  setup () {
+  setup (props) {
+    const themeRef = useTheme(
+      'Progress',
+      'Progress',
+      style,
+      progressLight,
+      props
+    )
     const vm = getCurrentInstance().proxy
     onFontsReady(() => {
       if (vm.mergedIndicatorPlacement === 'inside-label') {
@@ -349,6 +349,43 @@ export default {
         })
       }
     })
+    return {
+      cssVars: computed(() => {
+        const { status } = props
+        const {
+          common: { cubicBezierEaseInOut },
+          self: {
+            fontSize,
+            fontSizeCircle,
+            railColor,
+            railHeight,
+            iconSizeCircle,
+            iconSizeLine,
+            textColorCircle,
+            textColorLineInner,
+            textColorLineOuter,
+            lineBgProcessing,
+            [createKey('iconColor', status)]: iconColor,
+            [createKey('fillColor', status)]: fillColor
+          }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--fill-color': fillColor,
+          '--font-size': fontSize,
+          '--font-size-circle': fontSizeCircle,
+          '--icon-color': iconColor,
+          '--icon-size-circle': iconSizeCircle,
+          '--icon-size-line': iconSizeLine,
+          '--line-bg-processing': lineBgProcessing,
+          '--rail-color': railColor,
+          '--rail-height': railHeight,
+          '--text-color-circle': textColorCircle,
+          '--text-color-line-inner': textColorLineInner,
+          '--text-color-line-outer': textColorLineOuter
+        }
+      })
+    }
   },
   data () {
     return {
@@ -409,24 +446,25 @@ export default {
       }
     },
     iconType () {
-      if (this.type === 'circle') {
-        if (this.status === 'success') {
+      const { type, status } = this
+      if (type === 'circle') {
+        if (status === 'success') {
           return 'success-icon'
-        } else if (this.status === 'error') {
+        } else if (status === 'error') {
           return 'error-icon'
-        } else if (this.status === 'warning') {
+        } else if (status === 'warning') {
           return 'warning-icon'
-        } else if (this.status === 'info') {
+        } else if (status === 'info') {
           return 'info-circle-icon'
         }
-      } else if (this.type === 'line') {
-        if (this.status === 'success') {
+      } else if (type === 'line') {
+        if (status === 'success') {
           return 'success-circle-icon'
-        } else if (this.status === 'error') {
+        } else if (status === 'error') {
           return 'error-circle-icon'
-        } else if (this.status === 'warning') {
+        } else if (status === 'warning') {
           return 'warning-icon'
-        } else if (this.status === 'info') {
+        } else if (status === 'info') {
           return 'info-circle-icon'
         }
       }
@@ -472,5 +510,5 @@ export default {
       return indicatorPercentage
     }
   }
-}
+})
 </script>
