@@ -284,7 +284,7 @@ export default {
     },
     dateFnsOptions () {
       return {
-        locale: this.dateFnsLocale
+        locale: this.dateLocale
       }
     },
     hourInFormat () {

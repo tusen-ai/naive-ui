@@ -1,19 +1,24 @@
-import create from '../../_styles/utils/create-component-base'
 import { changeColor } from 'seemly'
 import { selectDark } from '../../select/styles'
 import { inputDark } from '../../input/styles'
 import { iconDark } from '../../icon/styles'
-import { baseDark } from '../../_styles/base'
 import commonVariables from './_common.js'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'Pagination',
-  theme: 'dark',
-  peer: [baseDark, selectDark, inputDark, iconDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  peers: {
+    Select: selectDark,
+    Input: inputDark,
+    Icon: iconDark
+  },
+  self (vars) {
     const {
       textColor2Overlay,
       primaryColor,
+      primaryColorHover,
+      primaryColorPressed,
       inputColorDisabledOverlay,
       textColorDisabledOverlay,
       borderColorOverlay,
@@ -21,28 +26,39 @@ export default create({
       borderRadius,
       fontSize
     } = vars
+    const borderColor = changeColor(primaryColor, {
+      alpha: opacity3
+    })
     return {
       ...commonVariables,
+      buttonColor: 'transparent',
+      buttonColorHover: 'transparent',
+      buttonColorPressed: 'transparent',
       buttonBorder: `1px solid ${borderColorOverlay}`,
+      buttonBorderHover: `1px solid ${borderColorOverlay}`,
+      buttonBorderPressed: `1px solid ${borderColorOverlay}`,
       buttonIconColor: textColor2Overlay,
       buttonIconColorHover: textColor2Overlay,
+      buttonIconColorPressed: textColor2Overlay,
       itemTextColor: textColor2Overlay,
-      itemTextColorHover: primaryColor,
+      itemTextColorHover: primaryColorHover,
+      itemTextColorPressed: primaryColorPressed,
       itemTextColorActive: primaryColor,
       itemTextColorDisabled: textColorDisabledOverlay,
       itemColor: 'transparent',
+      itemColorHover: 'transparent',
+      itemColorPressed: 'transparent',
       itemColorActive: 'transparent',
       itemColorDisabled: inputColorDisabledOverlay,
       itemBorder: '1px solid transparent',
-      itemBorderActive: `1px solid ${changeColor(primaryColor, {
-        alpha: opacity3
-      })}`,
+      itemBorderHover: '1px solid transparent',
+      itemBorderPressed: '1px solid transparent',
+      itemBorderActive: `1px solid ${borderColor}`,
       itemBorderDisabled: '1px solid transparent',
-      itemColorHover: 'transparent',
       itemBorderRadius: borderRadius,
       itemFontSize: fontSize,
       jumperTextColor: textColor2Overlay,
       jumperTextColorDisabled: textColorDisabledOverlay
     }
   }
-})
+}

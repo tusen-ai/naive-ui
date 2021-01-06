@@ -17,7 +17,7 @@ export default function createLocaleMixin (componentLocaleNamespace) {
         } = this
         return locales[mergedLanguage ?? fallbackLocale]
       },
-      dateFnsLocale () {
+      dateLocale () {
         return this.globalLocale._dateFns
       },
       locale () {

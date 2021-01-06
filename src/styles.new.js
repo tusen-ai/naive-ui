@@ -38,6 +38,7 @@ import { menuDark } from './menu/styles'
 import { messageDark } from './message/styles'
 import { modalDark } from './modal/styles'
 import { notificationDark } from './notification/styles'
+import { paginationDark } from './pagination/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -79,5 +80,6 @@ export const darkTheme = {
   Menu: menuDark,
   Message: messageDark,
   Modal: modalDark,
-  Notification: notificationDark
+  Notification: notificationDark,
+  Pagination: paginationDark
 }

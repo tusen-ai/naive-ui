@@ -1,10 +1,9 @@
 import { h, createTextVNode } from 'vue'
 import { format, formatDistance, fromUnixTime } from 'date-fns'
-import locale from '../../_mixins/locale'
+import { useLocale } from '../../_mixins'
 
 export default {
   name: 'Time',
-  mixins: [locale('Time')],
   props: {
     time: {
       type: [Number, Date],
@@ -33,10 +32,13 @@ export default {
       default: false
     }
   },
+  setup () {
+    return useLocale('Time')
+  },
   computed: {
     dateFnsOptions () {
       return {
-        locale: this.dateFnsLocale
+        locale: this.dateLocale
       }
     },
     mergedTime () {
@@ -65,7 +67,7 @@ export default {
       } else {
         return formatDistance(this.mergedTime, this.mergedTo, {
           addSuffix: true,
-          locale: this.dateFnsLocale
+          locale: this.dateLocale
         })
       }
     }
