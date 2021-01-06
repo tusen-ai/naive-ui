@@ -1,4 +1,4 @@
-import { h, ref, computed, watch, createTextVNode } from 'vue'
+import { h, ref, computed, watch, createTextVNode, defineComponent } from 'vue'
 import { VBinder, VTarget } from 'vueuc'
 import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
 import { call, keep, warn } from '../../_utils'
@@ -37,7 +37,7 @@ function getFirstSlotVNode (slots, slotName = 'default') {
 
 const textVNodeType = createTextVNode('').type
 
-export default {
+export default defineComponent({
   name: 'Popover',
   provide () {
     return {
@@ -308,4 +308,4 @@ export default {
       }
     })
   }
-}
+})

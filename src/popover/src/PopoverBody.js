@@ -1,13 +1,22 @@
-import { h, vShow, withDirectives, Transition, ref } from 'vue'
+import {
+  h,
+  vShow,
+  withDirectives,
+  Transition,
+  ref,
+  defineComponent,
+  computed,
+  mergeProps
+} from 'vue'
 import { VFollower } from 'vueuc'
 import { clickoutside, mousemoveoutside } from 'vdirs'
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles'
+import { useTheme, useConfig } from '../../_mixins'
 import { formatLength, useAdjustedTo, getSlot } from '../../_utils'
+import { popoverLight } from '../styles'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'PopoverBody',
-  cssrName: 'Popover',
   inject: {
     NPopover: {
       default: null
@@ -90,29 +99,52 @@ export default {
       default: undefined
     }
   },
-  mixins: [configurable, themeable, withCssr(styles)],
   setup (props) {
+    const themeRef = useTheme('Popover', 'Popover', style, popoverLight, props)
     return {
+      ...useConfig(props),
       adjustedTo: useAdjustedTo(props),
       followerEnabled: ref(props.show),
-      followerRef: ref(null)
-    }
-  },
-  watch: {
-    show (value) {
-      if (value) this.followerEnabled = true
-      else {
-        if (!this.animated) {
-          this.followerEnabled = false
+      followerRef: ref(null),
+      cssVars: computed(() => {
+        const {
+          common: {
+            cubicBezierEaseInOut,
+            cubicBezierEaseIn,
+            cubicBezierEaseOut
+          },
+          self: {
+            space,
+            spaceArrow,
+            padding,
+            fontSize,
+            textColor,
+            color,
+            boxShadow,
+            borderRadius,
+            arrowHeight,
+            arrowOffset,
+            arrowOffsetVertical
+          }
+        } = themeRef.value
+        return {
+          '--box-shadow': boxShadow,
+          '--bezier': cubicBezierEaseInOut,
+          '--bezier-ease-in': cubicBezierEaseIn,
+          '--bezier-ease-out': cubicBezierEaseOut,
+          '--font-size': fontSize,
+          '--text-color': textColor,
+          '--color': color,
+          '--border-radius': borderRadius,
+          '--arrow-height': arrowHeight,
+          '--arrow-offset': arrowOffset,
+          '--arrow-offset-vertical': arrowOffsetVertical,
+          '--padding': padding,
+          '--space': space,
+          '--space-arrow': spaceArrow
         }
-      }
+      })
     }
-  },
-  created () {
-    this.NPopover.bodyInstance = this
-  },
-  beforeUnmount () {
-    this.NPopover.bodyInstance = null
   },
   computed: {
     useVShow () {
@@ -131,13 +163,31 @@ export default {
       return directives
     },
     style () {
-      return {
-        width: formatLength(this.width),
-        maxWidth: formatLength(this.maxWidth),
-        minWidth: formatLength(this.minWidth),
-        ...this.$attrs.style
+      return [
+        {
+          width: formatLength(this.width),
+          maxWidth: formatLength(this.maxWidth),
+          minWidth: formatLength(this.minWidth)
+        },
+        this.cssVars
+      ]
+    }
+  },
+  watch: {
+    show (value) {
+      if (value) this.followerEnabled = true
+      else {
+        if (!this.animated) {
+          this.followerEnabled = false
+        }
       }
     }
+  },
+  created () {
+    this.NPopover.bodyInstance = this
+  },
+  beforeUnmount () {
+    this.NPopover.bodyInstance = null
   },
   methods: {
     syncPosition () {
@@ -180,24 +230,24 @@ export default {
         ? withDirectives(
           h(
             'div',
-            {
-              ...this.$attrs,
-              class: [
-                'n-popover',
-                {
-                  [`n-${this.mergedTheme}-theme`]: this.mergedTheme,
-                  'n-popover--no-arrow': !this.showArrow,
-                  'n-popover--shadow': this.shadow,
-                  'n-popover--padded': this.padded,
-                  'n-popover--raw': this.raw
-                },
-                this.$attrs.class
-              ],
-              ref: 'body',
-              style: this.style,
-              onMouseEnter: this.handleMouseEnter,
-              onMouseLeave: this.handleMouseLeave
-            },
+            mergeProps(
+              {
+                class: [
+                  'n-popover',
+                  {
+                    'n-popover--no-arrow': !this.showArrow,
+                    'n-popover--shadow': this.shadow,
+                    'n-popover--padded': this.padded,
+                    'n-popover--raw': this.raw
+                  }
+                ],
+                ref: 'body',
+                style: this.style,
+                onMouseEnter: this.handleMouseEnter,
+                onMouseLeave: this.handleMouseLeave
+              },
+              this.$attrs
+            ),
             [
               getSlot(this),
               this.showArrow
@@ -252,4 +302,4 @@ export default {
       }
     )
   }
-}
+})

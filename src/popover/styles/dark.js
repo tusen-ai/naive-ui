@@ -1,12 +1,10 @@
-import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
-import { baseDark } from '../../_styles/base'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'Popover',
-  theme: 'dark',
-  peer: [baseDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  self (vars) {
     const {
       popoverColor,
       textColor2Overlay,
@@ -23,4 +21,4 @@ export default create({
       boxShadow: boxShadow2
     }
   }
-})
+}

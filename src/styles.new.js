@@ -40,6 +40,7 @@ import { modalDark } from './modal/styles'
 import { notificationDark } from './notification/styles'
 import { paginationDark } from './pagination/styles'
 import { popconfirmDark } from './popconfirm/styles'
+import { popoverDark } from './popover/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -83,5 +84,6 @@ export const darkTheme = {
   Modal: modalDark,
   Notification: notificationDark,
   Pagination: paginationDark,
-  Popconfirm: popconfirmDark
+  Popconfirm: popconfirmDark,
+  Popover: popoverDark
 }
