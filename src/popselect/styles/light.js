@@ -1,12 +1,12 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseLight } from '../../_styles/base'
 import { baseSelectMenuLight } from '../../_base/select-menu/styles'
+import { commonLight } from '../../_styles/new-common'
+import { popoverLight } from '../../popover/styles'
 
-export default create({
+export default {
   name: 'Popselect',
-  theme: 'light',
-  peer: [baseLight, baseSelectMenuLight],
-  getLocalVars (vars) {
-    return {}
+  common: commonLight,
+  peers: {
+    Popover: popoverLight,
+    BaseSelectMenu: baseSelectMenuLight
   }
-})
+}

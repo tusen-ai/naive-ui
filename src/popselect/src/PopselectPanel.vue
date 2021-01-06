@@ -1,6 +1,6 @@
 <template>
   <n-base-select-menu
-    :theme="mergedTheme"
+    :theme="'light'"
     :multiple="multiple"
     :tree-mate="treeMate"
     :size="size"
@@ -13,18 +13,19 @@
 </template>
 
 <script>
+import { computed, defineComponent } from 'vue'
 import { createTreeMate } from 'treemate'
 import { NBaseSelectMenu } from '../../_base'
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles'
+import { useTheme } from '../../_mixins'
 import { call, warn } from '../../_utils'
+import { popselectLight } from '../styles'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
+  name: 'PopselectPanel',
   components: {
     NBaseSelectMenu
   },
-  cssrName: 'Popselect',
-  mixins: [configurable, themeable, withCssr(styles)],
   inject: ['NPopselect'],
   props: {
     multiple: {
@@ -72,12 +73,15 @@ export default {
       default: undefined
     }
   },
-  computed: {
-    treeMate () {
-      return createTreeMate(this.options, {
-        getKey (node) {
-          return node.value
-        }
+  setup (props) {
+    useTheme('Popseelect', 'Popselect', style, popselectLight, props)
+    return {
+      treeMate: computed(() => {
+        return createTreeMate(props.options, {
+          getKey (node) {
+            return node.value
+          }
+        })
       })
     }
   },
@@ -133,5 +137,5 @@ export default {
       })
     }
   }
-}
+})
 </script>

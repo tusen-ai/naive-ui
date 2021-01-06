@@ -1,18 +1,20 @@
-import { h, ref, provide, getCurrentInstance } from 'vue'
+import { h, ref, provide, getCurrentInstance, defineComponent } from 'vue'
 import { NPopover } from '../../popover'
 import NPopselectPanel from './PopselectPanel.vue'
 import { omit, keep } from '../../_utils'
 
 const NPopselectPanelPropsKey = Object.keys(NPopselectPanel.props)
 
-export default {
+export default defineComponent({
   name: 'Popselect',
   props: {
     ...NPopover.props,
+    // eslint-disable-next-line vue/require-prop-types
     trigger: {
       ...NPopover.props.trigger,
       default: 'hover'
     },
+    // eslint-disable-next-line vue/require-prop-types
     showArrow: {
       ...NPopover.props.showArrow,
       default: false
@@ -48,4 +50,4 @@ export default {
       }
     )
   }
-}
+})
