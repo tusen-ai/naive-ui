@@ -1,17 +1,15 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseLight } from '../../_styles/base'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'Thing',
-  theme: 'light',
-  peer: [baseLight],
+  common: commonLight,
   getLocalVars (vars) {
     const { textColor1, textColor2, fontWeightStrong, fontSize } = vars
     return {
       fontSize,
-      headerTextColor: textColor1,
+      titleTextColor: textColor1,
       textColor: textColor2,
-      headerFontWeight: fontWeightStrong
+      titleFontWeight: fontWeightStrong
     }
   }
-})
+}

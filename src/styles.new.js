@@ -56,6 +56,7 @@ import { switchDark } from './switch/styles'
 import { tableDark } from './table/styles'
 import { tabsDark } from './tabs/styles'
 import { tagDark } from './tag/styles'
+import { thingDark } from './thing/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -115,5 +116,6 @@ export const darkTheme = {
   Switch: switchDark,
   Table: tableDark,
   Tabs: tabsDark,
-  Tag: tagDark
+  Tag: tagDark,
+  Thing: thingDark
 }

@@ -1,11 +1,5 @@
 <template>
-  <div
-    class="n-thing"
-    :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme
-    }"
-    :style="mergedStyle"
-  >
+  <div class="n-thing" :style="cssVars">
     <div v-if="$slots.avatar && contentIndented" class="n-thing-avatar">
       <slot name="avatar" />
     </div>
@@ -97,12 +91,13 @@
 </template>
 
 <script>
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles'
+import { defineComponent, computed } from 'vue'
+import { useTheme } from '../../_mixins'
+import { thingLight } from '../styles'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Thing',
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     title: {
       type: String,
@@ -124,6 +119,24 @@ export default {
       type: Boolean,
       default: false
     }
+  },
+  setup (props) {
+    const themeRef = useTheme('Thing', 'Thing', style, thingLight, props)
+    return {
+      cssVars: computed(() => {
+        const {
+          self: { titleTextColor, textColor, titleFontWeight, fontSize },
+          common: { cubicBezierEaseInOut }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--font-size': fontSize,
+          '--text-color': textColor,
+          '--title-font-weight': titleFontWeight,
+          '--title-text-color': titleTextColor
+        }
+      })
+    }
   }
-}
+})
 </script>

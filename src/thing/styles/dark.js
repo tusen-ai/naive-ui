@@ -1,11 +1,9 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseDark } from '../../_styles/base'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'Thing',
-  theme: 'dark',
-  peer: [baseDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  self (vars) {
     const {
       textColor1Overlay,
       textColor2Overlay,
@@ -14,9 +12,9 @@ export default create({
     } = vars
     return {
       fontSize,
-      headerTextColor: textColor1Overlay,
+      titleTextColor: textColor1Overlay,
       textColor: textColor2Overlay,
-      headerFontWeight: fontWeightStrong
+      titleFontWeight: fontWeightStrong
     }
   }
-})
+}
