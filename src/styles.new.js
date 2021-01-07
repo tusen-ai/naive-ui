@@ -45,6 +45,7 @@ import { popselectDark } from './popselect/styles'
 import { progressDark } from './progress/styles'
 import { radioDark } from './radio/styles'
 import { rateDark } from './rate/styles'
+import { resultDark } from './result/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -93,5 +94,6 @@ export const darkTheme = {
   Popselect: popselectDark,
   Progress: progressDark,
   Radio: radioDark,
-  Rate: rateDark
+  Rate: rateDark,
+  Result: resultDark
 }

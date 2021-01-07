@@ -1,13 +1,14 @@
-import create from '../../_styles/utils/create-component-base'
 import sizeVariables from './_common'
-import { baseLight } from '../../_styles/base'
 import { iconLight } from '../../icon/styles'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'Result',
-  theme: 'light',
-  peer: [baseLight, iconLight],
-  getLocalVars (vars) {
+  common: commonLight,
+  peers: {
+    Icon: iconLight
+  },
+  self (vars) {
     const {
       textColor2,
       textColor1,
@@ -16,20 +17,18 @@ export default create({
       infoColor,
       warningColor,
       lineHeight,
-      fontWeightStrong,
-      fontSize
+      fontWeightStrong
     } = vars
     return {
       ...sizeVariables,
       lineHeight,
-      headerFontWeight: fontWeightStrong,
-      headerTextColor: textColor1,
-      descriptionTextColor: textColor2,
-      descriptionFontSize: fontSize,
+      titleFontWeight: fontWeightStrong,
+      titleTextColor: textColor1,
+      textColor: textColor2,
       iconColorError: errorColor,
       iconColorSuccess: successColor,
       iconColorInfo: infoColor,
       iconColorWarning: warningColor
     }
   }
-})
+}

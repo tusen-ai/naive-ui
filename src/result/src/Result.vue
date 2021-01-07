@@ -1,12 +1,5 @@
 <template>
-  <div
-    class="n-result"
-    :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme,
-      [`n-result--${status}-status`]: status,
-      [`n-result--${size}-size`]: size
-    }"
-  >
+  <div class="n-result" :style="cssVars">
     <div class="n-result-icon">
       <image-404
         v-if="status === 404 || status === '404'"
@@ -55,7 +48,9 @@
 </template>
 
 <script>
-import { configurable, themeable, withCssr } from '../../_mixins'
+import { defineComponent, computed } from 'vue'
+import { useTheme } from '../../_mixins'
+import { createKey } from '../../_utils'
 import {
   InfoIcon,
   SuccessIcon,
@@ -63,13 +58,14 @@ import {
   ErrorIcon
 } from '../../_base/icons'
 import { NIcon } from '../../icon'
+import { resultLight } from '../styles'
 import image404 from './404.vue'
 import image500 from './500.vue'
 import image418 from './418.vue'
 import image403 from './403.vue'
-import styles from './styles'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Result',
   components: {
     InfoIcon,
@@ -82,7 +78,6 @@ export default {
     image418,
     image500
   },
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     size: {
       validator (value) {
@@ -102,6 +97,38 @@ export default {
       type: String,
       default: undefined
     }
+  },
+  setup (props) {
+    const themeRef = useTheme('Result', 'Result', style, resultLight, props)
+    return {
+      cssVars: computed(() => {
+        const { size, status } = props
+        const {
+          common: { cubicBezierEaseInOut },
+          self: {
+            textColor,
+            lineHeight,
+            titleTextColor,
+            titleFontWeight,
+            [createKey('iconColor', status)]: iconColor,
+            [createKey('fontSize', size)]: fontSize,
+            [createKey('titleFontSize', size)]: titleFontSize,
+            [createKey('iconSize', size)]: iconSize
+          }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--font-size': fontSize,
+          '--icon-size': iconSize,
+          '--line-height': lineHeight,
+          '--text-color': textColor,
+          '--title-font-size': titleFontSize,
+          '--title-font-weight': titleFontWeight,
+          '--title-text-color': titleTextColor,
+          '--icon-color': iconColor
+        }
+      })
+    }
   }
-}
+})
 </script>

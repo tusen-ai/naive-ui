@@ -1,13 +1,14 @@
-import create from '../../_styles/utils/create-component-base'
 import sizeVariables from './_common'
-import { baseDark } from '../../_styles/base'
 import { iconDark } from '../../icon/styles'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'Result',
-  theme: 'dark',
-  peer: [baseDark, iconDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  peers: {
+    Icon: iconDark
+  },
+  self (vars) {
     const {
       textColor1Overlay,
       textColor2Overlay,
@@ -16,20 +17,18 @@ export default create({
       infoColor,
       warningColor,
       lineHeight,
-      fontWeightStrong,
-      fontSize
+      fontWeightStrong
     } = vars
     return {
       ...sizeVariables,
       lineHeight,
-      headerFontWeight: fontWeightStrong,
-      headerTextColor: textColor1Overlay,
-      descriptionTextColor: textColor2Overlay,
-      descriptionFontSize: fontSize,
+      titleFontWeight: fontWeightStrong,
+      titleTextColor: textColor1Overlay,
+      textColor: textColor2Overlay,
       iconColorError: errorColor,
       iconColorSuccess: successColor,
       iconColorInfo: infoColor,
       iconColorWarning: warningColor
     }
   }
-})
+}
