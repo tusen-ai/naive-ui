@@ -13,11 +13,5 @@ export default {
   railHeightLarge: '26px',
   railWidthSmall: '32px',
   railWidthMedium: '40px',
-  railWidthLarge: '48px',
-  railBorderRadiusSmall: '9px',
-  railBorderRadiusMedium: '11px',
-  railBorderRadiusLarge: '13px',
-  buttonBorderRadiusSmall: '7px',
-  buttonBorderRadiusMedium: '9px',
-  buttonBorderRadiusLarge: '11px'
+  railWidthLarge: '48px'
 }

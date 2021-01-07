@@ -2,12 +2,12 @@
   <div
     class="n-switch"
     :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme,
-      [`n-switch--${mergedSize}-size`]: true,
       'n-switch--active': mergedValue,
-      'n-switch--disabled': disabled
+      'n-switch--disabled': disabled,
+      'n-switch--round': round
     }"
     :tabindex="!disabled ? 0 : false"
+    :style="cssVars"
     @click="handleClick"
     @focus="handleFocus"
     @blur="handleBlur"
@@ -17,15 +17,16 @@
 </template>
 
 <script>
-import { ref, toRef } from 'vue'
+import { ref, toRef, defineComponent, computed } from 'vue'
+import { depx, pxfy } from 'seemly'
 import { useMergedState } from 'vooks'
-import { configurable, themeable, useFormItem, withCssr } from '../../_mixins'
-import { call, warn } from '../../_utils'
-import styles from './styles'
+import { useFormItem, useTheme } from '../../_mixins'
+import { call, warn, createKey } from '../../_utils'
+import style from './styles/index.cssr.js'
+import { switchLight } from '../styles'
 
-export default {
+export default defineComponent({
   name: 'Switch',
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     size: {
       type: String,
@@ -42,6 +43,10 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    round: {
+      type: Boolean,
+      default: true
     },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:value': {
@@ -62,6 +67,9 @@ export default {
     }
   },
   setup (props) {
+    const themeRef = useTheme('Switch', 'Switch', style, switchLight, props)
+    const formItem = useFormItem(props)
+    const { mergedSize: mergedSizeRef } = formItem
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(
@@ -69,9 +77,53 @@ export default {
       uncontrolledValueRef
     )
     return {
+      ...formItem,
       mergedValue: mergedValueRef,
       uncontrolledValue: uncontrolledValueRef,
-      ...useFormItem(props)
+      cssVars: computed(() => {
+        const { value: size } = mergedSizeRef
+        const {
+          self: {
+            opacityDisabled,
+            railColor,
+            railColorActive,
+            buttonBoxShadow,
+            buttonColor,
+            [createKey('buttonHeight', size)]: buttonHeight,
+            [createKey('buttonWidth', size)]: buttonWidth,
+            [createKey('buttonWidthPressed', size)]: buttonWidthPressed,
+            [createKey('railHeight', size)]: railHeight,
+            [createKey('railWidth', size)]: railWidth,
+            [createKey('railBorderRadius', size)]: railBorderRadius,
+            [createKey('buttonBorderRadius', size)]: buttonBorderRadius
+          },
+          common: { cubicBezierEaseInOut }
+        } = themeRef.value
+        const offset = pxfy((depx(railHeight) - depx(buttonHeight)) / 2)
+        const height = pxfy(Math.max(depx(railHeight), depx(buttonHeight)))
+        const width =
+          depx(railHeight) > depx(buttonHeight)
+            ? railWidth
+            : pxfy(depx(railWidth) + depx(buttonHeight) - depx(railHeight))
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--button-border-radius': buttonBorderRadius,
+          '--button-box-shadow': buttonBoxShadow,
+          '--button-color': buttonColor,
+          '--button-width': buttonWidth,
+          '--button-width-pressed': buttonWidthPressed,
+          '--button-height': buttonHeight,
+          '--height': height,
+          '--offset': offset,
+          '--opacity-disabled': opacityDisabled,
+          '--rail-border-radius': railBorderRadius,
+          '--rail-color': railColor,
+          '--rail-color-active': railColorActive,
+          '--rail-height': railHeight,
+          '--rail-width': railWidth,
+          '--width': width
+        }
+      })
     }
   },
   methods: {
@@ -110,5 +162,5 @@ export default {
       this.doBlur(e)
     }
   }
-}
+})
 </script>
