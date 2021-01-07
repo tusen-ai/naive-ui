@@ -2,24 +2,25 @@
   <table
     class="n-table"
     :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme,
-      [`n-table--${size}-size`]: true,
       'n-table--bordered': bordered,
       'n-table--single-line': singleLine,
       'n-table--single-column': singleColumn
     }"
+    :style="cssVars"
   >
     <slot />
   </table>
 </template>
 
 <script>
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles'
+import { defineComponent, computed } from 'vue'
+import { useTheme } from '../../_mixins'
+import { createKey } from '../../_utils'
+import { tableLight } from '../styles'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Table',
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     bordered: {
       type: Boolean,
@@ -39,6 +40,46 @@ export default {
       },
       default: 'medium'
     }
+  },
+  setup (props) {
+    const themeRef = useTheme('Table', 'Table', style, tableLight, props)
+    return {
+      cssVars: computed(() => {
+        const { size } = props
+        const {
+          self: {
+            borderColor,
+            bodyColor,
+            bodyColorModal,
+            thColor,
+            thTextColor,
+            tdTextColor,
+            borderRadius,
+            tdFontWeight,
+            lineHeight,
+            [createKey('fontSize', size)]: fontSize,
+            [createKey('tdPadding', size)]: tdPadding,
+            [createKey('thPadding', size)]: thPadding
+          },
+          common: { cubicBezierEaseInOut }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--td-color': bodyColor,
+          '--td-color-modal': bodyColorModal,
+          '--td-text-color': tdTextColor,
+          '--border-color': borderColor,
+          '--border-radius': borderRadius,
+          '--font-size': fontSize,
+          '--th-color': thColor,
+          '--th-font-weight': tdFontWeight,
+          '--th-text-color': thTextColor,
+          '--line-height': lineHeight,
+          '--td-padding': tdPadding,
+          '--th-padding': thPadding
+        }
+      })
+    }
   }
-}
+})
 </script>

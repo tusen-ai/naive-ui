@@ -53,6 +53,7 @@ import { spinDark } from './spin/styles'
 import { statisticDark } from './statistic/styles'
 import { stepsDark } from './steps/styles'
 import { switchDark } from './switch/styles'
+import { tableDark } from './table/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -109,5 +110,6 @@ export const darkTheme = {
   Spin: spinDark,
   Statistic: statisticDark,
   Steps: stepsDark,
-  Switch: switchDark
+  Switch: switchDark,
+  Table: tableDark
 }

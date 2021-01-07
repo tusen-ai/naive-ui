@@ -1,12 +1,10 @@
-import create from '../../_styles/utils/create-component-base'
 import sizeVariables from './_common'
-import { baseLight } from '../../_styles/base'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
-  theme: 'light',
+export default {
   name: 'Table',
-  peer: [baseLight],
-  getLocalVars (vars) {
+  common: commonLight,
+  self (vars) {
     const {
       dividerColorOverlay,
       cardColor,
@@ -27,14 +25,14 @@ export default create({
       fontSizeMedium,
       fontSizeLarge,
       lineHeight,
+      borderRadius,
       borderColor: dividerColorOverlay,
       bodyColor: cardColor,
       bodyColorModal: modalColor,
-      headerColor: actionColorOverlay,
-      headerTextColor: textColor1,
-      bodyTextColor: textColor2,
-      borderRadius,
-      headFontWeight: fontWeightStrong
+      thColor: actionColorOverlay,
+      thTextColor: textColor1,
+      tdTextColor: textColor2,
+      tdFontWeight: fontWeightStrong
     }
   }
-})
+}
