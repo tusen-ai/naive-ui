@@ -1,27 +1,30 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseLight } from '../../_styles/base'
 import { baseLoadingLight } from '../../_base/loading/styles'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'Spin',
-  theme: 'light',
-  peer: [baseLight, baseLoadingLight],
-  getLocalVars (vars) {
+  common: commonLight,
+  peers: {
+    BaseLoading: baseLoadingLight
+  },
+  self (vars) {
     const {
       opacityDisabled,
       heightTiny,
       heightSmall,
       heightMedium,
       heightLarge,
-      heightHuge
+      heightHuge,
+      primaryColor
     } = vars
     return {
-      heightTiny,
-      heightSmall,
-      heightMedium,
-      heightLarge,
-      heightHuge,
+      sizeTiny: heightTiny,
+      sizeSmall: heightSmall,
+      sizeMedium: heightMedium,
+      sizeLarge: heightLarge,
+      sizeHuge: heightHuge,
+      color: primaryColor,
       opacitySpinning: opacityDisabled
     }
   }
-})
+}

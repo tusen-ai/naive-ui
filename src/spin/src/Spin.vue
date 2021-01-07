@@ -1,11 +1,5 @@
 <template>
-  <div
-    v-if="$slots.default"
-    class="n-spin-container"
-    :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme
-    }"
-  >
+  <div v-if="$slots.default" class="n-spin-container" :style="cssVars">
     <div
       :class="{
         'n-spin-content--spinning': compitableShow
@@ -17,36 +11,31 @@
     <transition name="n-fade-in-transition">
       <n-base-loading
         v-if="compitableShow"
-        :class="{
-          [`n-spin--${size}-size`]: true,
-          [`n-${mergedTheme}-theme`]: mergedTheme
-        }"
         :stroke="stroke"
         :stroke-width="mergedStrokeWidth"
-        :theme="mergedTheme"
+        :theme="'light'"
         class="n-spin"
       />
     </transition>
   </div>
   <n-base-loading
     v-else
-    :class="{
-      [`n-spin--${size}-size`]: size
-    }"
+    :style="cssVars"
     :stroke="stroke"
     :stroke-width="mergedStrokeWidth"
-    :theme="mergedTheme"
+    :theme="'light'"
     class="n-spin"
   />
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { useCompitable } from 'vooks'
 import { NBaseLoading } from '../../_base'
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles'
-import { warn } from '../../_utils'
+import { useTheme } from '../../_mixins'
+import { createKey, warn } from '../../_utils'
+import { spinLight } from '../styles'
+import style from './styles/index.cssr.js'
 
 const STROKE_WIDTH = {
   small: 22,
@@ -54,12 +43,11 @@ const STROKE_WIDTH = {
   large: 18
 }
 
-export default {
+export default defineComponent({
   name: 'Spin',
   components: {
     NBaseLoading
   },
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     stroke: {
       type: String,
@@ -86,6 +74,7 @@ export default {
     }
   },
   setup (props) {
+    const themeRef = useTheme('Spin', 'Spin', style, spinLight, props)
     return {
       compitableShow: useCompitable(props, ['spinning', 'show']),
       mergedStrokeWidth: computed(() => {
@@ -93,8 +82,21 @@ export default {
         if (strokeWidth !== undefined) return strokeWidth
         const { size } = props
         return STROKE_WIDTH[size]
+      }),
+      cssVars: computed(() => {
+        const { size: spinSize } = props
+        const {
+          common: { cubicBezierEaseInOut },
+          self: { opacitySpinning, color, [createKey('size', spinSize)]: size }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--opacity-spinning': opacitySpinning,
+          '--size': size,
+          '--color': color
+        }
       })
     }
   }
-}
+})
 </script>
