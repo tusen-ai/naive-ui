@@ -44,6 +44,7 @@ export default defineComponent({
     WarningIcon
   },
   props: {
+    ...useTheme.props,
     positiveText: {
       type: String,
       default: undefined

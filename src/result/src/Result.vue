@@ -79,6 +79,7 @@ export default defineComponent({
     image500
   },
   props: {
+    ...useTheme.props,
     size: {
       validator (value) {
         return ['small', 'medium', 'large', 'huge'].includes(value)

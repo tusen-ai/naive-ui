@@ -235,6 +235,7 @@ export default {
     FastBackwardIcon
   },
   props: {
+    ...useTheme.props,
     page: {
       type: Number,
       required: true

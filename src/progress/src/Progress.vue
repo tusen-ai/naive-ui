@@ -250,6 +250,7 @@ export default defineComponent({
     ErrorCircleIcon
   },
   props: {
+    ...useTheme.props,
     processing: {
       type: Boolean,
       default: false

@@ -4,9 +4,7 @@
     <div
       v-bind="$attrs"
       class="n-scrollbar"
-      :class="{
-        [`n-${mergedTheme}-theme`]: mergedTheme
-      }"
+      :style="cssVars"
       @mouseenter="handleMouseEnterWrapper"
       @mouseleave="handleMouseLeaveWrapper"
     >
@@ -88,20 +86,21 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, defineComponent, computed } from 'vue'
 import { on, off } from 'evtd'
 import { VResizeObserver } from 'vueuc'
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles/index.js'
 import { useIsIos } from 'vooks'
+import { useTheme } from '../../_mixins'
+import { scrollbarLight } from '../styles'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Scrollbar',
   components: {
     VResizeObserver
   },
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
+    ...useTheme.props,
     size: {
       type: Number,
       default: 5
@@ -151,12 +150,30 @@ export default {
       default: undefined
     }
   },
-  setup () {
+  setup (props) {
+    const themeRef = useTheme(
+      'Scrollbar',
+      'Scrollbar',
+      style,
+      scrollbarLight,
+      props
+    )
     return {
       containerRef: ref(null),
       contentRef: ref(null),
       yRailRef: ref(null),
-      xRailRef: ref(null)
+      xRailRef: ref(null),
+      cssVars: computed(() => {
+        const {
+          common: { cubicBezierEaseInOut },
+          self: { color, colorHover }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--color': color,
+          '--color-hover': colorHover
+        }
+      })
     }
   },
   data () {
@@ -516,5 +533,5 @@ export default {
       }
     }
   }
-}
+})
 </script>

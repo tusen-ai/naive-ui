@@ -1,7 +1,7 @@
 import { h, ref, defineComponent } from 'vue'
 import { NPopover } from '../../popover'
-import PopconfirmPanel from './PopconfirmPanel.vue'
 import { omit, keep } from '../../_utils'
+import PopconfirmPanel from './PopconfirmPanel.vue'
 
 const panelProps = [
   'positiveText',

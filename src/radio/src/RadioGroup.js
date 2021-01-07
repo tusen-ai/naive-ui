@@ -81,6 +81,7 @@ export default defineComponent({
     }
   },
   props: {
+    ...useTheme.props,
     name: {
       type: String,
       default: undefined

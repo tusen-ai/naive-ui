@@ -2,6 +2,7 @@ import { h, ref, computed, watch, createTextVNode, defineComponent } from 'vue'
 import { VBinder, VTarget } from 'vueuc'
 import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
 import { call, keep, warn } from '../../_utils'
+import { useTheme } from '../../_mixins'
 import NPopoverBody from './PopoverBody'
 
 const bodyPropKeys = Object.keys(NPopoverBody.props)
@@ -46,6 +47,7 @@ export default defineComponent({
   },
   inheritAttrs: false,
   props: {
+    ...useTheme.props,
     show: {
       type: Boolean,
       default: undefined

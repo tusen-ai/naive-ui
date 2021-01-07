@@ -46,6 +46,7 @@ import { progressDark } from './progress/styles'
 import { radioDark } from './radio/styles'
 import { rateDark } from './rate/styles'
 import { resultDark } from './result/styles'
+import { scrollbarDark } from './scrollbar/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -95,5 +96,6 @@ export const darkTheme = {
   Progress: progressDark,
   Radio: radioDark,
   Rate: rateDark,
-  Result: resultDark
+  Result: resultDark,
+  Scrollbar: scrollbarDark
 }

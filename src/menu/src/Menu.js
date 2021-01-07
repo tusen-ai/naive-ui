@@ -23,6 +23,7 @@ export default defineComponent({
     }
   },
   props: {
+    ...useTheme.props,
     items: {
       type: Array,
       required: true

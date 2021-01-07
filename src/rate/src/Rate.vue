@@ -35,6 +35,7 @@ export default defineComponent({
     StarIcon
   },
   props: {
+    ...useTheme.props,
     count: {
       type: Number,
       default: 5

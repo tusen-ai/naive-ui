@@ -28,6 +28,7 @@ export default defineComponent({
   },
   inject: ['NPopselect'],
   props: {
+    ...useTheme.props,
     multiple: {
       type: Boolean,
       default: false

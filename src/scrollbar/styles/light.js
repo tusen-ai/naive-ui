@@ -1,15 +1,13 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseLight } from '../../_styles/base'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'Scrollbar',
-  theme: 'light',
-  peer: [baseLight],
-  getLocalVars (vars) {
+  common: commonLight,
+  self (vars) {
     const { scrollbarColorOverlay, scrollbarColorHoverOverlay } = vars
     return {
       color: scrollbarColorOverlay,
       colorHover: scrollbarColorHoverOverlay
     }
   }
-})
+}

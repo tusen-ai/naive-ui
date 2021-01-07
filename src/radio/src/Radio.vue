@@ -45,7 +45,10 @@ import { createKey } from '../../_utils'
 
 export default defineComponent({
   name: 'Radio',
-  props: useRadio.props,
+  props: {
+    ...useTheme.props,
+    ...useRadio.props
+  },
   setup (props) {
     const themeRef = useTheme('Radio', 'Radio', style, radioLight, props)
     const radio = useRadio(props)
