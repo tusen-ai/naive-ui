@@ -1,11 +1,5 @@
 <template>
-  <div
-    class="n-rate"
-    :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme
-    }"
-    @mouseleave="handleMouseLeave(index)"
-  >
+  <div class="n-rate" :style="cssVars" @mouseleave="handleMouseLeave(index)">
     <div
       v-for="index in count"
       :key="index"
@@ -25,21 +19,21 @@
 </template>
 
 <script>
-import { configurable, themeable, withCssr, useFormItem } from '../../_mixins'
-import { toRef, ref } from 'vue'
+import { toRef, ref, computed, defineComponent } from 'vue'
 import { useMergedState } from 'vooks'
-import { call } from '../../_utils'
-import styles from './styles'
-import StarIcon from './StarIcon.vue'
 import { NIcon } from '../../icon'
+import { useTheme, useFormItem } from '../../_mixins'
+import { call } from '../../_utils'
+import { rateLight } from '../styles'
+import style from './styles/index.cssr.js'
+import StarIcon from './StarIcon.vue'
 
-export default {
+export default defineComponent({
   name: 'Rate',
   components: {
     NIcon,
     StarIcon
   },
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     count: {
       type: Number,
@@ -60,13 +54,26 @@ export default {
     }
   },
   setup (props) {
+    const themeRef = useTheme('Rate', 'Rate', style, rateLight, props)
     const controlledValueRef = toRef(props, 'value')
     const uncontrolledValueRef = ref(props.defaultValue)
     return {
+      ...useFormItem(props),
       mergedValue: useMergedState(controlledValueRef, uncontrolledValueRef),
       uncontrolledValue: uncontrolledValueRef,
       hoverIndex: ref(null),
-      ...useFormItem(props)
+      cssVars: computed(() => {
+        const {
+          common: { cubicBezierEaseInOut },
+          self: { itemColor, itemColorActive, itemSize }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--item-color': itemColor,
+          '--item-color-active': itemColorActive,
+          '--item-size': itemSize
+        }
+      })
     }
   },
   methods: {
@@ -93,5 +100,5 @@ export default {
       this.doUpdateValue(index + 1)
     }
   }
-}
+})
 </script>

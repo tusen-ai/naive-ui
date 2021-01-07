@@ -44,6 +44,7 @@ import { popoverDark } from './popover/styles'
 import { popselectDark } from './popselect/styles'
 import { progressDark } from './progress/styles'
 import { radioDark } from './radio/styles'
+import { rateDark } from './rate/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -91,5 +92,6 @@ export const darkTheme = {
   Popover: popoverDark,
   Popselect: popselectDark,
   Progress: progressDark,
-  Radio: radioDark
+  Radio: radioDark,
+  Rate: rateDark
 }

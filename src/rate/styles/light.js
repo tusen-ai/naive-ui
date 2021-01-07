@@ -1,15 +1,18 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseLight } from '../../_styles/base'
 import { iconLight } from '../../icon/styles'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
-  theme: 'light',
+export default {
   name: 'Rate',
-  peer: [baseLight, iconLight],
-  getLocalVars (vars) {
+  common: commonLight,
+  peers: {
+    Icon: iconLight
+  },
+  self (vars) {
+    const { railColor } = vars
     return {
-      itemColor: vars.railColor,
-      itemColorActive: '#FFCC33'
+      itemColor: railColor,
+      itemColorActive: '#FFCC33',
+      itemSize: '20px'
     }
   }
-})
+}
