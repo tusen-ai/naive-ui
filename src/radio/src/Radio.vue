@@ -4,15 +4,15 @@
     :class="{
       'n-radio--disabled': mergedDisabled,
       'n-radio--checked': renderSafeChecked,
-      'n-radio--focus': focus,
-      [`n-radio--${mergedSize}-size`]: true
+      'n-radio--focus': focus
     }"
+    :style="cssVars"
     @keyup.enter="handleKeyUpEnter"
     @click="handleClick"
     @mousedown="handleMouseDown"
   >
     <input
-      ref="input"
+      ref="inputRef"
       type="radio"
       class="n-radio__radio-input"
       :value="value"
@@ -29,7 +29,7 @@
         'n-radio__dot--checked': renderSafeChecked
       }"
     />
-    <div v-if="$slots.default" class="n-radio__label">
+    <div v-if="$slots.default" ref="labelRef" class="n-radio__label">
       <slot />
     </div>
   </div>
@@ -41,15 +41,55 @@ import { useTheme } from '../../_mixins'
 import { radioLight } from '../styles'
 import useRadio from './use-radio'
 import style from './styles/radio.cssr.js'
+import { createKey } from '../../_utils'
 
 export default defineComponent({
   name: 'Radio',
   props: useRadio.props,
   setup (props) {
-    useTheme('Radio', 'Radio', style, radioLight, props)
-    return {
-      cssVars: computed(() => {})
-    }
+    const themeRef = useTheme('Radio', 'Radio', style, radioLight, props)
+    const radio = useRadio(props)
+    return Object.assign(radio, {
+      cssVars: computed(() => {
+        const {
+          mergedSize: { value: size }
+        } = radio
+        const {
+          common: { cubicBezierEaseInOut },
+          self: {
+            boxShadow,
+            boxShadowActive,
+            boxShadowDisabled,
+            boxShadowFocus,
+            boxShadowHover,
+            color,
+            colorDisabled,
+            textColor,
+            textColorDisabled,
+            dotColorActive,
+            dotColorDisabled,
+            [createKey('fontSize', size)]: fontSize,
+            [createKey('radioSize', size)]: radioSize
+          }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--box-shadow': boxShadow,
+          '--box-shadow-active': boxShadowActive,
+          '--box-shadow-disabled': boxShadowDisabled,
+          '--box-shadow-focus': boxShadowFocus,
+          '--box-shadow-hover': boxShadowHover,
+          '--color': color,
+          '--color-disabled': colorDisabled,
+          '--dot-color-active': dotColorActive,
+          '--dot-color-disabled': dotColorDisabled,
+          '--font-size': fontSize,
+          '--radio-size': radioSize,
+          '--text-color': textColor,
+          '--text-color-disabled': textColorDisabled
+        }
+      })
+    })
   }
 })
 </script>

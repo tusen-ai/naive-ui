@@ -151,7 +151,6 @@ export default cB(
       `, [
         cE('main', `
           font-weight: var(--title-font-weight);
-          font-size: 18px;
           transition: color .3s var(--bezier);
           flex: 1;
           color: var(--title-text-color);

@@ -22,6 +22,7 @@ function setup (props) {
     }
   })
   const inputRef = ref(null)
+  const labelRef = ref(null)
   const NRadioGroup = inject('NRadioGroup', null)
   const uncontrolledCheckedRef = ref(props.defaultChecked)
   const controlledCheckedRef = toRef(props, 'checked')
@@ -83,7 +84,7 @@ function setup (props) {
   function handleMouseDown () {
     if (mergedDisabledRef.value) return
     setTimeout(() => {
-      if (!(inputRef.value === document.activeElement)) {
+      if (!labelRef.value.contains(document.activeElement)) {
         inputRef.value.focus()
       }
     }, 0)
@@ -95,6 +96,7 @@ function setup (props) {
   }
   return {
     inputRef,
+    labelRef,
     NRadioGroup,
     mergedName: mergedNameRef,
     mergedDisabled: mergedDisabledRef,

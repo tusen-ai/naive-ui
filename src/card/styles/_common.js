@@ -11,8 +11,8 @@ export default {
   paddingBottomMedium: '20px',
   paddingBottomLarge: '24px',
   paddingBottomHuge: '28px',
-  headerFontSizeSmall: '16px',
-  headerFontSizeMedium: '18px',
-  headerFontSizeLarge: '18px',
-  headerFontSizeHuge: '18px'
+  titleFontSizeSmall: '16px',
+  titleFontSizeMedium: '18px',
+  titleFontSizeLarge: '18px',
+  titleFontSizeHuge: '18px'
 }

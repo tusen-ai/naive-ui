@@ -10,7 +10,6 @@
       }-segmented`]: segmented === true || (segmented && segmented.footer),
       [`n-card--action-segmented`]:
         segmented === true || (segmented && segmented.action),
-      [`n-card--${size}-size`]: true,
       'n-card--bordered': bordered
     }"
     :style="cssVars"

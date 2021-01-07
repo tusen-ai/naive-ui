@@ -11,7 +11,7 @@
     @mousedown="handleMouseDown"
   >
     <input
-      ref="input"
+      ref="inputRef"
       type="radio"
       class="n-radio-button__radio-input"
       :value="value"
@@ -23,25 +23,21 @@
       @blur="handleRadioInputBlur"
     >
     <div class="n-radio-button__state-border" />
-    <slot />
+    <span ref="labelRef">
+      <slot />
+    </span>
   </div>
 </template>
 
 <script>
-import { defineComponent, computed } from 'vue'
-import { useTheme } from '../../_mixins'
-import { radioLight } from '../styles'
+import { defineComponent } from 'vue'
 import useRadio from './use-radio'
-import style from './styles/radio-button.cssr.js'
 
 export default defineComponent({
   name: 'RadioButton',
   props: useRadio.props,
   setup (props) {
-    useTheme('Radio', 'RadioButton', style, radioLight, props)
-    return {
-      cssVars: computed(() => {})
-    }
+    return useRadio(props)
   }
 })
 </script>

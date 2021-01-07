@@ -1,6 +1,6 @@
 import { h, defineComponent, computed } from 'vue'
 import { useTheme, useFormItem } from '../../_mixins'
-import { getSlot, flatten, warn } from '../../_utils'
+import { getSlot, flatten, warn, createKey } from '../../_utils'
 import { radioLight } from '../styles'
 import style from './styles/radio-group.cssr.js'
 
@@ -35,33 +35,18 @@ function mapSlot (defaultSlot, groupInstance) {
       const currentInstanceChecked =
         groupInstance.$props.value === instanceProps.value
       const currentInstanceDisabled = instanceProps.disabled
-      let lastInstancePriority
-      let currentInstancePriority
-      if (groupInstance.mergedTheme === 'dark') {
-        /**
-         * Priority of button splitor:
-         * !disabled  checked >
-         * !disabled !checked >
-         *  disabled  checked >
-         *  disabled !checked
-         */
-        lastInstancePriority =
-          (!lastInstanceDisabled ? 2 : 0) + (lastInstanceChecked ? 1 : 0)
-        currentInstancePriority =
-          (!currentInstanceDisabled ? 2 : 0) + (currentInstanceChecked ? 1 : 0)
-      } else {
-        /**
-         * Priority of button splitor:
-         * !disabled  checked >
-         *  disabled  checked >
-         * !disabled !checked >
-         *  disabled !checked
-         */
-        lastInstancePriority =
-          (lastInstanceChecked ? 2 : 0) + (!lastInstanceDisabled ? 1 : 0)
-        currentInstancePriority =
-          (currentInstanceChecked ? 2 : 0) + (!currentInstanceDisabled ? 1 : 0)
-      }
+
+      /**
+       * Priority of button splitor:
+       * !disabled  checked >
+       *  disabled  checked >
+       * !disabled !checked >
+       *  disabled !checked
+       */
+      const lastInstancePriority =
+        (lastInstanceChecked ? 2 : 0) + (!lastInstanceDisabled ? 1 : 0)
+      const currentInstancePriority =
+        (currentInstanceChecked ? 2 : 0) + (!currentInstanceDisabled ? 1 : 0)
       const lastInstanceClass = {
         'n-radio-group__splitor--disabled': lastInstanceDisabled,
         'n-radio-group__splitor--checked': lastInstanceChecked
@@ -134,25 +119,60 @@ export default defineComponent({
     }
   },
   setup (props) {
-    useTheme('Radio', 'RadioGroup', style, radioLight, props)
+    const formItem = useFormItem(props)
+    const themeRef = useTheme('Radio', 'RadioGroup', style, radioLight, props)
+    const { mergedSize: mergedSizeRef } = formItem
     return {
-      ...useFormItem(props),
-      cssVars: computed(() => {})
+      ...formItem,
+      cssVars: computed(() => {
+        const { value: size } = mergedSizeRef
+        const {
+          common: { cubicBezierEaseInOut },
+          self: {
+            buttonBorderColor,
+            buttonBorderColorActive,
+            buttonBorderRadius,
+            buttonBoxShadow,
+            buttonBoxShadowFocus,
+            buttonBoxShadowHover,
+            buttonColorActive,
+            buttonTextColor,
+            buttonTextColorActive,
+            buttonTextColorHover,
+            opacityDisabled,
+            [createKey('buttonHeight', size)]: height
+          }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--button-border-color': buttonBorderColor,
+          '--button-border-color-active': buttonBorderColorActive,
+          '--button-border-radius': buttonBorderRadius,
+          '--button-box-shadow': buttonBoxShadow,
+          '--button-box-shadow-focus': buttonBoxShadowFocus,
+          '--button-box-shadow-hover': buttonBoxShadowHover,
+          '--button-color-active': buttonColorActive,
+          '--button-text-color': buttonTextColor,
+          '--button-text-color-hover': buttonTextColorHover,
+          '--button-text-color-active': buttonTextColorActive,
+          '--height': height,
+          '--opacity-disabled': opacityDisabled
+        }
+      })
     }
   },
   render () {
     const { children, isButtonGroup } = mapSlot(flatten(getSlot(this)), this)
-    const { mergedSize } = this
     return h(
       'div',
       {
         class: [
           'n-radio-group',
-          `n-radio-group--${mergedSize}-size`,
           {
             'n-radio-group--button-group': isButtonGroup
           }
-        ]
+        ],
+        style: this.cssVars
       },
       children
     )
