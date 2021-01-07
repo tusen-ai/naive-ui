@@ -4,7 +4,7 @@ export { default as configurable } from './configurable'
 export { default as withCssr } from './with-cssr'
 export { default as registerable } from './registerable'
 
-export { default as useFormItem } from './use-as-form-item'
+export { default as useFormItem } from './use-form-item'
 export { default as useTheme } from './use-theme'
 export { default as useConfig } from './use-config'
 export { default as useLocale } from './use-locale'

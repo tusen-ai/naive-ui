@@ -67,20 +67,53 @@ export default cB(
       ])
     ]),
     c('>', [
-      cB('card-header', {
-        padding: 'var(--padding-top) var(--padding-left) var(--padding-bottom) var(--padding-left)'
-      }, [
-        cE('main', {
-          fontSize: 'var(--title-font-size)'
-        }),
-        cE('extra', {
-          fontSize: 'var(--font-size)'
-        })
+      cB('card-header', `
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        padding: var(--padding-top) var(--padding-left) var(--padding-bottom) var(--padding-left);
+      `, [
+        cE('main', `
+          font-size: var(--title-font-size);
+          font-weight: var(--title-font-weight);
+          transition: color .3s var(--bezier);
+          flex: 1;
+          color: var(--title-text-color);
+        `),
+        cE('extra', `
+          display: flex;
+          align-items: center;
+          font-size: var(--font-size);
+          font-weight: 400;
+          transition: color .3s var(--bezier);
+          color: var(--text-color);
+        `),
+        cE('close-mark', `
+          cursor: pointer;
+          transition: color .3s var(--bezier);
+          color: var(--close-color);
+        `, [
+          c('&:hover', {
+            color: 'var(--close-color-hover)'
+          }),
+          c('&:active', {
+            color: 'var(--close-color-pressed)'
+          })
+        ])
       ]),
-      cE('content, footer', {
-        padding: '0 var(--padding-left) var(--padding-bottom) var(--padding-left)',
-        fontSize: 'var(--font-size)'
-      }, [
+      cE('action', `
+        box-sizing: border-box;
+        transition:
+          background-color .3s var(--bezier),
+          border-color .3s var(--bezier);
+        background-clip: padding-box;
+        background-color: var(--action-color);
+      `),
+      cE('content, footer', `
+        box-sizing: border-box;
+        padding: 0 var(--padding-left) var(--padding-bottom) var(--padding-left);
+        font-size: var(--font-size);
+      `, [
         c('&:first-child', {
           paddingTop: 'var(--padding-bottom)'
         })
@@ -134,53 +167,6 @@ export default cB(
           })
         ])
       ])
-    ]),
-    c('>', [
-      cE('content', `
-        box-sizing: border-box;
-      `),
-      cE('footer', `
-        box-sizing: border-box;
-      `)
-    ]),
-    c('>', [
-      cB('card-header', `
-        box-sizing: border-box;
-        display: flex;
-        align-items: center;
-      `, [
-        cE('main', `
-          font-weight: var(--title-font-weight);
-          transition: color .3s var(--bezier);
-          flex: 1;
-          color: var(--title-text-color);
-        `),
-        cE('extra', `
-          font-weight: 400;
-          transition: color .3s var(--bezier);
-          color: var(--text-color);
-        `),
-        cE('close-mark', `
-          cursor: pointer;
-          transition: color .3s var(--bezier);
-          color: var(--close-color);
-        `, [
-          c('&:hover', {
-            color: 'var(--close-color-hover)'
-          }),
-          c('&:active', {
-            color: 'var(--close-color-pressed)'
-          })
-        ])
-      ]),
-      cE('action', `
-        box-sizing: border-box;
-        transition:
-          background-color .3s var(--bezier),
-          border-color .3s var(--bezier);
-        background-clip: padding-box;
-        background-color: var(--action-color);
-      `)
     ])
   ]
 )

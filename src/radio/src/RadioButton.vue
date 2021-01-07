@@ -23,9 +23,7 @@
       @blur="handleRadioInputBlur"
     >
     <div class="n-radio-button__state-border" />
-    <span ref="labelRef">
-      <slot />
-    </span>
+    <span ref="labelRef"><slot /></span>
   </div>
 </template>
 

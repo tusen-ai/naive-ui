@@ -89,7 +89,7 @@ import {
 } from '../../_utils/color/index.js'
 import { createKey } from '../../_utils'
 import { buttonLight } from '../styles'
-import style from './styles/button/index.cssr.js'
+import style from './styles/button.cssr.js'
 
 export default {
   name: 'Button',

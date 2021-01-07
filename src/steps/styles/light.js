@@ -1,40 +1,50 @@
-import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
-import { baseDark } from '../../_styles/base'
 import { iconDark } from '../../icon/styles'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
-  theme: 'light',
+export default {
   name: 'Steps',
-  peer: [baseDark, iconDark],
-  getLocalVars (vars) {
+  common: commonLight,
+  peers: {
+    Icon: iconDark
+  },
+  self (vars) {
+    const {
+      fontWeightStrong,
+      baseColor,
+      textColorDisabled,
+      primaryColor,
+      errorColor,
+      textColor1,
+      textColor2
+    } = vars
     return {
       ...commonVariables,
-      stepHeaderFontWeight: vars.fontWeightStrong,
-      indicatorTextColorProcess: vars.baseColor,
-      indicatorTextColorWait: vars.textColorDisabled,
-      indicatorTextColorFinish: vars.primaryColor,
-      indicatorTextColorError: vars.errorColor,
-      indicatorBorderColorProcess: vars.primaryColor,
-      indicatorBorderColorWait: vars.textColorDisabled,
-      indicatorBorderColorFinish: vars.primaryColor,
-      indicatorBorderColorError: vars.errorColor,
-      indicatorColorProcess: vars.primaryColor,
+      stepHeaderFontWeight: fontWeightStrong,
+      indicatorTextColorProcess: baseColor,
+      indicatorTextColorWait: textColorDisabled,
+      indicatorTextColorFinish: primaryColor,
+      indicatorTextColorError: errorColor,
+      indicatorBorderColorProcess: primaryColor,
+      indicatorBorderColorWait: textColorDisabled,
+      indicatorBorderColorFinish: primaryColor,
+      indicatorBorderColorError: errorColor,
+      indicatorColorProcess: primaryColor,
       indicatorColorWait: 'transparent',
       indicatorColorFinish: 'transparent',
       indicatorColorError: 'transparent',
-      splitorColorProcess: vars.textColorDisabled,
-      splitorColorWait: vars.textColorDisabled,
-      splitorColorFinish: vars.primaryColor,
-      splitorColorError: vars.textColorDisabled,
-      headerTextColorProcess: vars.textColor1,
-      headerTextColorWait: vars.textColorDisabled,
-      headerTextColorFinish: vars.textColorDisabled,
-      headerTextColorError: vars.errorColor,
-      descriptionTextColorProcess: vars.textColor2,
-      descriptionTextColorWait: vars.textColorDisabled,
-      descriptionTextColorFinish: vars.textColorDisabled,
-      descriptionTextColorError: vars.errorColor
+      splitorColorProcess: textColorDisabled,
+      splitorColorWait: textColorDisabled,
+      splitorColorFinish: primaryColor,
+      splitorColorError: textColorDisabled,
+      headerTextColorProcess: textColor1,
+      headerTextColorWait: textColorDisabled,
+      headerTextColorFinish: textColorDisabled,
+      headerTextColorError: errorColor,
+      descriptionTextColorProcess: textColor2,
+      descriptionTextColorWait: textColorDisabled,
+      descriptionTextColorFinish: textColorDisabled,
+      descriptionTextColorError: errorColor
     }
   }
-})
+}

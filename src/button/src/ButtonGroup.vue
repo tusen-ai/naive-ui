@@ -11,7 +11,7 @@
 
 <script>
 import { useTheme } from '../../_mixins'
-import style from './styles/button-group/index.cssr.js'
+import style from './styles/button-group.cssr.js'
 
 export default {
   name: 'ButtonGroup',

@@ -1,40 +1,49 @@
-import create from '../../_styles/utils/create-component-base'
+import { commonDark } from '../../_styles/new-common'
 import commonVariables from './_common'
-import { baseDark } from '../../_styles/base'
 import { iconDark } from '../../icon/styles'
 
-export default create({
-  theme: 'dark',
+export default {
   name: 'Steps',
-  peer: [baseDark, iconDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  peers: {
+    Icon: iconDark
+  },
+  self (vars) {
+    const {
+      fontWeightStrong,
+      textColorDisabledOverlay,
+      primaryColor,
+      errorColor,
+      textColor1Overlay,
+      textColor2Overlay
+    } = vars
     return {
       ...commonVariables,
-      stepHeaderFontWeight: vars.fontWeightStrong,
+      stepHeaderFontWeight: fontWeightStrong,
       indicatorTextColorProcess: 'black',
-      indicatorTextColorWait: vars.textColorDisabledOverlay,
-      indicatorTextColorFinish: vars.primaryColor,
-      indicatorTextColorError: vars.errorColor,
-      indicatorBorderColorProcess: vars.primaryColor,
-      indicatorBorderColorWait: vars.textColorDisabledOverlay,
-      indicatorBorderColorFinish: vars.primaryColor,
-      indicatorBorderColorError: vars.errorColor,
-      indicatorColorProcess: vars.primaryColor,
+      indicatorTextColorWait: textColorDisabledOverlay,
+      indicatorTextColorFinish: primaryColor,
+      indicatorTextColorError: errorColor,
+      indicatorBorderColorProcess: primaryColor,
+      indicatorBorderColorWait: textColorDisabledOverlay,
+      indicatorBorderColorFinish: primaryColor,
+      indicatorBorderColorError: errorColor,
+      indicatorColorProcess: primaryColor,
       indicatorColorWait: 'transparent',
       indicatorColorFinish: 'transparent',
       indicatorColorError: 'transparent',
-      splitorColorProcess: vars.textColorDisabledOverlay,
-      splitorColorWait: vars.textColorDisabledOverlay,
-      splitorColorFinish: vars.primaryColor,
-      splitorColorError: vars.textColorDisabledOverlay,
-      headerTextColorProcess: vars.textColor1Overlay,
-      headerTextColorWait: vars.textColorDisabledOverlay,
-      headerTextColorFinish: vars.textColorDisabledOverlay,
-      headerTextColorError: vars.errorColor,
-      descriptionTextColorProcess: vars.textColor2Overlay,
-      descriptionTextColorWait: vars.textColorDisabledOverlay,
-      descriptionTextColorFinish: vars.textColorDisabledOverlay,
-      descriptionTextColorError: vars.errorColor
+      splitorColorProcess: textColorDisabledOverlay,
+      splitorColorWait: textColorDisabledOverlay,
+      splitorColorFinish: primaryColor,
+      splitorColorError: textColorDisabledOverlay,
+      headerTextColorProcess: textColor1Overlay,
+      headerTextColorWait: textColorDisabledOverlay,
+      headerTextColorFinish: textColorDisabledOverlay,
+      headerTextColorError: errorColor,
+      descriptionTextColorProcess: textColor2Overlay,
+      descriptionTextColorWait: textColorDisabledOverlay,
+      descriptionTextColorFinish: textColorDisabledOverlay,
+      descriptionTextColorError: errorColor
     }
   }
-})
+}

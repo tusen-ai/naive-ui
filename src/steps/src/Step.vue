@@ -1,10 +1,5 @@
 <template>
-  <div
-    class="n-step"
-    :class="{
-      [`n-step--${mergedStatus}`]: mergedStatus
-    }"
-  >
+  <div class="n-step" :style="cssVars">
     <div class="n-step-indicator">
       <div class="n-step-indicator-slot">
         <n-icon-switch-transition>
@@ -43,27 +38,25 @@
 </template>
 
 <script>
-import { NIcon } from '../../icon'
+import { defineComponent, computed, inject } from 'vue'
 import {
   CheckmarkIcon as FinishedIcon,
   CloseIcon as ErrorIcon
 } from '../../_base/icons'
-import { themeable } from '../../_mixins'
+import { NIcon } from '../../icon'
+import { useTheme } from '../../_mixins'
 import { NIconSwitchTransition } from '../../_base'
+import { createKey } from '../../_utils'
+import { stepsLight } from '../styles'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Step',
   components: {
     NIcon,
     FinishedIcon,
     ErrorIcon,
     NIconSwitchTransition
-  },
-  mixins: [themeable],
-  inject: {
-    NSteps: {
-      default: null
-    }
   },
   props: {
     status: {
@@ -86,28 +79,68 @@ export default {
       default: undefined
     }
   },
-  computed: {
-    vertical () {
-      return !!(this.NSteps && this.NSteps.vertical)
-    },
-    current () {
-      return this.NSteps && this.NSteps.current
-    },
-    stepsStatus () {
-      return this.NSteps && this.NSteps.status
-    },
-    mergedStatus () {
-      if (this.status) {
-        return this.status
-      } else if (this.index < this.current) {
-        return 'finish'
-      } else if (this.index === this.current) {
-        return this.stepsStatus || 'process'
-      } else if (this.index > this.current) {
-        return 'wait'
+  setup (props) {
+    const themeRef = useTheme('Steps', 'Steps', style, stepsLight, props)
+    const NSteps = inject('NSteps')
+
+    const verticalRef = computed(() => {
+      return NSteps.vertical
+    })
+    const mergedStatusRef = computed(() => {
+      const { status } = props
+      if (status) {
+        return status
+      } else {
+        const { index } = props
+        const { current } = NSteps
+        if (index < current) {
+          return 'finish'
+        } else if (index === current) {
+          return NSteps.status || 'process'
+        } else if (index > current) {
+          return 'wait'
+        }
       }
       return undefined
+    })
+    return {
+      vertical: verticalRef,
+      mergedStatus: mergedStatusRef,
+      cssVars: computed(() => {
+        const { value: status } = mergedStatusRef
+        const { size } = NSteps
+        const {
+          common: { cubicBezierEaseInOut },
+          self: {
+            stepHeaderFontWeight,
+            [createKey('stepHeaderFontSize', size)]: stepHeaderFontSize,
+            [createKey('indicatorIndexFontSize', size)]: indicatorIndexFontSize,
+            [createKey('indicatorSize', size)]: indicatorSize,
+            [createKey('indicatorIconSize', size)]: indicatorIconSize,
+            [createKey('indicatorTextColor', status)]: indicatorTextColor,
+            [createKey('indicatorBorderColor', status)]: indicatorBorderColor,
+            [createKey('headerTextColor', status)]: headerTextColor,
+            [createKey('splitorColor', status)]: splitorColor,
+            [createKey('indicatorColor', status)]: indicatorColor,
+            [createKey('descriptionTextColor', status)]: descriptionTextColor
+          }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--description-text-color': descriptionTextColor,
+          '--header-text-color': headerTextColor,
+          '--indicator-border-color': indicatorBorderColor,
+          '--indicator-color': indicatorColor,
+          '--indicator-icon-size': indicatorIconSize,
+          '--indicator-index-font-size': indicatorIndexFontSize,
+          '--indicator-size': indicatorSize,
+          '--indicator-text-color': indicatorTextColor,
+          '--splitor-color': splitorColor,
+          '--step-header-font-size': stepHeaderFontSize,
+          '--step-header-font-weight': stepHeaderFontWeight
+        }
+      })
     }
   }
-}
+})
 </script>

@@ -26,12 +26,16 @@
     <n-button-group>
       <n-button @click="prev">
         <template #icon>
-          <md-arrow-round-back />
+          <n-icon>
+            <md-arrow-round-back />
+          </n-icon>
         </template>
       </n-button>
       <n-button @click="next">
         <template #icon>
-          <md-arrow-round-forward />
+          <n-icon>
+            <md-arrow-round-forward />
+          </n-icon>
         </template>
       </n-button>
     </n-button-group>

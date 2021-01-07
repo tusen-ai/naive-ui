@@ -1,7 +1,6 @@
-import { h } from 'vue'
-import { configurable, themeable, withCssr } from '../../_mixins'
+import { h, defineComponent } from 'vue'
+import { useTheme } from '../../_mixins'
 import { getSlot } from '../../_utils'
-import styles from './styles/steps'
 
 function stepWithIndex (step, i) {
   if (!step.props) step.props = {}
@@ -13,15 +12,15 @@ function stepsWithIndex (props, steps) {
   return steps.map((step, i) => stepWithIndex(step, i, props))
 }
 
-export default {
+export default defineComponent({
   name: 'Steps',
   provide () {
     return {
       NSteps: this
     }
   },
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
+    ...useTheme.props,
     current: {
       type: Number,
       default: undefined
@@ -46,8 +45,6 @@ export default {
         class: [
           'n-steps',
           {
-            [`n-${this.mergedTheme}-theme`]: this.mergedTheme,
-            [`n-steps--${this.size}-size`]: true,
             'n-steps--vertical': this.vertical
           }
         ]
@@ -55,4 +52,4 @@ export default {
       stepsWithIndex({ ...this.$props }, getSlot(this))
     )
   }
-}
+})
