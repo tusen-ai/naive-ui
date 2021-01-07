@@ -2,12 +2,13 @@ import { inject, computed, onBeforeMount } from 'vue'
 import { merge } from 'lodash-es'
 
 function useTheme (resolveId, mountId, style, defaultTheme, props) {
-  onBeforeMount(() => {
-    style &&
+  if (style) {
+    onBeforeMount(() => {
       style.mount({
         target: mountId
       })
-  })
+    })
+  }
   const NConfigProvider = inject('NConfigProvider', {})
   const mergedThemeRef = computed(() => {
     // keep props to make theme overrideable

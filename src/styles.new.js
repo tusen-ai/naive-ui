@@ -48,6 +48,7 @@ import { rateDark } from './rate/styles'
 import { resultDark } from './result/styles'
 import { scrollbarDark } from './scrollbar/styles'
 import { sliderDark } from './slider/styles'
+import { spaceDark } from './space/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -99,5 +100,6 @@ export const darkTheme = {
   Rate: rateDark,
   Result: resultDark,
   Scrollbar: scrollbarDark,
-  Slider: sliderDark
+  Slider: sliderDark,
+  Space: spaceDark
 }

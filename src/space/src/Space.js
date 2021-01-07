@@ -1,23 +1,13 @@
-import { h } from 'vue'
-import { flatten, getSlot } from '../../_utils'
-import { configurable, themeable } from '../../_mixins'
+import { h, defineComponent, computed } from 'vue'
+import { createKey, flatten, getSlot } from '../../_utils'
+import { useTheme } from '../../_mixins'
+import { spaceLight } from '../styles'
+import { depx } from 'seemly'
 
-const HORIZONTAL_MARGIN = {
-  small: 8,
-  medium: 12,
-  large: 16
-}
-
-const VERTICAL_MARGIN = {
-  small: 4,
-  medium: 8,
-  large: 12
-}
-
-export default {
+export default defineComponent({
   name: 'Space',
-  mixins: [configurable, themeable],
   props: {
+    ...useTheme.props,
     align: {
       validator (value) {
         return [
@@ -60,15 +50,33 @@ export default {
       default: undefined
     }
   },
+  setup (props) {
+    const themeRef = useTheme('Space', 'Space', null, spaceLight, props)
+    return {
+      margin: computed(() => {
+        const { size } = props
+        if (typeof size === 'number') return null
+        const {
+          self: {
+            [createKey('marginHorizontal', size)]: marginHorizontal,
+            [createKey('marginVertical', size)]: marginVertical
+          }
+        } = themeRef.value
+        return {
+          horizontal: depx(marginHorizontal),
+          vertical: depx(marginVertical)
+        }
+      })
+    }
+  },
   render () {
-    const { size, vertical, align, inline, justify, itemStyle } = this
+    const { size, vertical, align, inline, justify, itemStyle, margin } = this
     const children = flatten(getSlot(this))
     const sizeIsNumber = typeof size === 'number'
-    const horizontalMargin =
-      (sizeIsNumber ? size : HORIZONTAL_MARGIN[size]) + 'px'
-    const verticalMargin = (sizeIsNumber ? size : VERTICAL_MARGIN[size]) + 'px'
+    const horizontalMargin = (sizeIsNumber ? size : margin.horizontal) + 'px'
+    const verticalMargin = (sizeIsNumber ? size : margin.vertical) + 'px'
     const semiVerticalMargin =
-      (sizeIsNumber ? size : VERTICAL_MARGIN[size]) / 2 + 'px'
+      (sizeIsNumber ? size : margin.vertical) / 2 + 'px'
     const lastIndex = children.length - 1
     return h(
       'div',
@@ -109,4 +117,4 @@ export default {
       )
     )
   }
-}
+})

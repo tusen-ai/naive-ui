@@ -1,9 +1,8 @@
-import create from '../../_styles/utils/create-component-base'
+import commonVars from './_common'
 
-export default create({
-  theme: 'dark',
+export default {
   name: 'Space',
-  getLocalVars (vars) {
-    return {}
+  self () {
+    return commonVars
   }
-})
+}
