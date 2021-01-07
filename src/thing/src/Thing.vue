@@ -99,6 +99,7 @@ import style from './styles/index.cssr.js'
 export default defineComponent({
   name: 'Thing',
   props: {
+    ...useTheme.props,
     title: {
       type: String,
       default: undefined

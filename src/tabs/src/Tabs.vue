@@ -110,6 +110,7 @@ export default defineComponent({
     }
   },
   props: {
+    ...useTheme.props,
     value: {
       type: String || Number,
       required: true

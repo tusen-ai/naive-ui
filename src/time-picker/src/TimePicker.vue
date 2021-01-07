@@ -2,8 +2,7 @@
   <div
     class="n-time-picker"
     :class="{
-      'n-time-picker--invalid': isValueInvalid,
-      [`n-${mergedTheme}-theme`]: mergedTheme
+      'n-time-picker--invalid': isValueInvalid
     }"
   >
     <v-binder>
@@ -15,7 +14,7 @@
           passively-activated
           deactivate-on-enter
           :attr-size="mergedAttrSize"
-          :theme="mergedTheme"
+          :theme="'light'"
           :stateful="stateful"
           :size="mergedSize"
           :force-focus="active"
@@ -48,7 +47,7 @@
             v-if="active"
             ref="panelRef"
             v-clickoutside="handleClickOutside"
-            :theme="mergedTheme"
+            :style="cssVars"
             :transition-disabled="transitionDisabled"
             :hour-value="hourValue"
             :show-hour="hourInFormat"
@@ -81,19 +80,10 @@
 </template>
 
 <script>
-import { ref, toRef } from 'vue'
+import { ref, toRef, defineComponent, computed } from 'vue'
 import { useIsMounted, useKeyboard, useMergedState } from 'vooks'
 import { VBinder, VTarget, VFollower } from 'vueuc'
 import { clickoutside } from 'vdirs'
-import { NInput } from '../../input'
-import { NIcon } from '../../icon'
-import {
-  configurable,
-  themeable,
-  locale,
-  withCssr,
-  useFormItem
-} from '../../_mixins'
 import {
   isValid,
   startOfSecond,
@@ -109,13 +99,17 @@ import {
   getHours,
   getSeconds
 } from 'date-fns'
+import { NInput } from '../../input'
+import { NIcon } from '../../icon'
+import { useConfig, useTheme, useLocale, useFormItem } from '../../_mixins'
 import { strictParse } from '../../date-picker/src/utils'
 import { TimeIcon } from '../../_base/icons'
-import styles from './styles'
 import { warn, call, useAdjustedTo } from '../../_utils'
+import { timePickerLight } from '../styles'
 import Panel from './Panel.vue'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'TimePicker',
   components: {
     NInput,
@@ -129,8 +123,8 @@ export default {
   directives: {
     clickoutside
   },
-  mixins: [configurable, themeable, locale('TimePicker'), withCssr(styles)],
   props: {
+    ...useTheme.props,
     bordered: {
       type: Boolean,
       default: undefined
@@ -237,6 +231,13 @@ export default {
     }
   },
   setup (props) {
+    const themeRef = useTheme(
+      'TimePicker',
+      'TimePicker',
+      style,
+      timePickerLight,
+      props
+    )
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(
@@ -251,7 +252,43 @@ export default {
       panelRef: ref(null),
       adjustedTo: useAdjustedTo(props),
       keyboardState: useKeyboard(),
-      ...useFormItem(props)
+      ...useLocale('TimePicker'),
+      ...useConfig(props),
+      ...useFormItem(props),
+      cssVars: computed(() => {
+        const {
+          self: {
+            panelColor,
+            itemTextColor,
+            itemTextColorActive,
+            itemColorHover,
+            panelDividerColor,
+            panelBoxShadow,
+            itemOpacityDisabled,
+            borderRadius,
+            itemFontSize,
+            itemWidth,
+            itemHeight,
+            panelActionPadding
+          },
+          common: { cubicBezierEaseInOut }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--border-radius': borderRadius,
+          '--item-color-hover': itemColorHover,
+          '--item-font-size': itemFontSize,
+          '--item-height': itemHeight,
+          '--item-opacity-disabled': itemOpacityDisabled,
+          '--item-text-color': itemTextColor,
+          '--item-text-color-active': itemTextColorActive,
+          '--item-width': itemWidth,
+          '--panel-action-padding': panelActionPadding,
+          '--panel-box-shadow': panelBoxShadow,
+          '--panel-color': panelColor,
+          '--panel-divider-color': panelDividerColor
+        }
+      })
     }
   },
   data () {
@@ -591,5 +628,5 @@ export default {
       }
     }
   }
-}
+})
 </script>

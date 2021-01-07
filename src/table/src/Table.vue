@@ -22,6 +22,7 @@ import style from './styles/index.cssr.js'
 export default defineComponent({
   name: 'Table',
   props: {
+    ...useTheme.props,
     bordered: {
       type: Boolean,
       default: true

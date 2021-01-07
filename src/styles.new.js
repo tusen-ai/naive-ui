@@ -57,6 +57,7 @@ import { tableDark } from './table/styles'
 import { tabsDark } from './tabs/styles'
 import { tagDark } from './tag/styles'
 import { thingDark } from './thing/styles'
+import { timeDark } from './time/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -117,5 +118,6 @@ export const darkTheme = {
   Table: tableDark,
   Tabs: tabsDark,
   Tag: tagDark,
-  Thing: thingDark
+  Thing: thingDark,
+  Time: timeDark
 }

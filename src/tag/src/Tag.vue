@@ -42,6 +42,7 @@ export default defineComponent({
     NIcon
   },
   props: {
+    ...useTheme.props,
     ...commonProps,
     checked: {
       type: Boolean,

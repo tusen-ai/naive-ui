@@ -28,6 +28,7 @@ import { switchLight } from '../styles'
 export default defineComponent({
   name: 'Switch',
   props: {
+    ...useTheme.props,
     size: {
       type: String,
       default: 'medium'

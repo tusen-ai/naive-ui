@@ -1,11 +1,5 @@
 <template>
-  <div
-    tabindex="0"
-    class="n-time-picker-panel"
-    :class="{
-      [`n-${theme}-theme`]: theme
-    }"
-  >
+  <div tabindex="0" class="n-time-picker-panel">
     <div class="n-time-picker-cols">
       <div
         v-if="showHour"
@@ -110,7 +104,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, defineComponent } from 'vue'
 import { NScrollbar } from '../../scrollbar'
 import { NBaseFocusDetector } from '../../_base'
 
@@ -268,7 +262,7 @@ const time = {
   period: ['AM', 'PM']
 }
 
-export default {
+export default defineComponent({
   name: 'TimePickerPanel',
   components: {
     NScrollbar,
@@ -381,5 +375,5 @@ export default {
       ...time
     }
   }
-}
+})
 </script>

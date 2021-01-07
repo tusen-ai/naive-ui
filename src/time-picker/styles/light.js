@@ -1,14 +1,16 @@
-import create from '../../_styles/utils/create-component-base'
 import commonVars from './_common'
-import { baseLight } from '../../_styles/base'
 import { iconLight } from '../../icon/styles'
-import { scrollbarLight } from '../../scrollbar/styles'
+import { scrollbarDark } from '../../scrollbar/styles'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'TimePicker',
-  theme: 'light',
-  peer: [baseLight, iconLight, scrollbarLight],
-  getLocalVars (vars) {
+  common: commonLight,
+  peers: {
+    Icon: iconLight,
+    Scrollbar: scrollbarDark
+  },
+  self (vars) {
     const {
       modalColor,
       textColor2Overlay,
@@ -19,7 +21,6 @@ export default create({
       boxShadow2,
       borderRadius
     } = vars
-
     return {
       ...commonVars,
       panelColor: modalColor,
@@ -29,9 +30,7 @@ export default create({
       itemTextColorActive: primaryColor,
       itemColorHover: hoverColorOverlay,
       itemOpacityDisabled: opacityDisabled,
-      triggerTextDecorationColor: textColor2Overlay,
-      triggerTextDecorationColorActive: primaryColor,
       borderRadius
     }
   }
-})
+}
