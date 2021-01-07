@@ -50,6 +50,7 @@ import { scrollbarDark } from './scrollbar/styles'
 import { sliderDark } from './slider/styles'
 import { spaceDark } from './space/styles'
 import { spinDark } from './spin/styles'
+import { statisticDark } from './statistic/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -103,5 +104,6 @@ export const darkTheme = {
   Scrollbar: scrollbarDark,
   Slider: sliderDark,
   Space: spaceDark,
-  Spin: spinDark
+  Spin: spinDark,
+  Statistic: statisticDark
 }

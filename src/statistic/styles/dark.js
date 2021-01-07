@@ -1,11 +1,9 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseLight } from '../../_styles/base'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'Statistic',
-  theme: 'dark',
-  peer: [baseLight],
-  getLocalVars (vars) {
+  common: commonDark,
+  self (vars) {
     const {
       textColor2Overlay,
       textColor1Overlay,
@@ -22,4 +20,4 @@ export default create({
       valueTextColor: textColor1Overlay
     }
   }
-})
+}

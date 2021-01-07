@@ -49,6 +49,7 @@ export default defineComponent({
     NBaseLoading
   },
   props: {
+    ...useTheme.props,
     stroke: {
       type: String,
       default: undefined

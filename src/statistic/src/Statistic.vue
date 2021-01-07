@@ -1,15 +1,10 @@
 <template>
-  <div
-    class="n-statistic"
-    :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme
-    }"
-  >
+  <div class="n-statistic" :style="cssVars">
     <div class="n-statistic__label">
       {{ label }}
     </div>
     <div class="n-statistic-value">
-      <span class="n-statistic-value__prefix">
+      <span v-if="$slots.prefix" class="n-statistic-value__prefix">
         <slot name="prefix" />
       </span>
       <span v-if="value" class="n-statistic-value__content">
@@ -18,7 +13,7 @@
       <span v-else-if="$slots.default" class="n-statistic-value__content">
         <slot />
       </span>
-      <span class="n-statistic-value__suffix">
+      <span v-if="$slots.suffix" class="n-statistic-value__suffix">
         <slot name="suffix" />
       </span>
     </div>
@@ -26,13 +21,15 @@
 </template>
 
 <script>
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles'
+import { defineComponent, computed } from 'vue'
+import { useTheme } from '../../_mixins'
+import { statisticLight } from '../styles'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Statistic',
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
+    ...useTheme.props,
     label: {
       type: String,
       default: undefined
@@ -45,6 +42,41 @@ export default {
       type: [Object, String],
       default: undefined
     }
+  },
+  setup (props) {
+    const themeRef = useTheme(
+      'Statistic',
+      'Statistic',
+      style,
+      statisticLight,
+      props
+    )
+    return {
+      cssVars: computed(() => {
+        const {
+          self: {
+            labelFontWeight,
+            valueFontWeight,
+            valuePrefixTextColor,
+            labelTextColor,
+            valueSuffixTextColor,
+            valueTextColor,
+            labelFontSize
+          },
+          common: { cubicBezierEaseInOut }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--label-font-size': labelFontSize,
+          '--label-font-weight': labelFontWeight,
+          '--label-text-color': labelTextColor,
+          '--value-font-weight': valueFontWeight,
+          '--value-prefix-text-color': valuePrefixTextColor,
+          '--value-suffix-text-color': valueSuffixTextColor,
+          '--value-text-color': valueTextColor
+        }
+      })
+    }
   }
-}
+})
 </script>

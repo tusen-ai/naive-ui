@@ -1,11 +1,9 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseDark } from '../../_styles/base'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'Statistic',
-  theme: 'light',
-  peer: [baseDark],
-  getLocalVars (vars) {
+  common: commonLight,
+  self (vars) {
     const { textColor2, textColor1, fontWeightStrong, fontSize } = vars
     return {
       labelFontSize: fontSize,
@@ -17,4 +15,4 @@ export default create({
       valueTextColor: textColor1
     }
   }
-})
+}
