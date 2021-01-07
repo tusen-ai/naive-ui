@@ -47,6 +47,7 @@ import { radioDark } from './radio/styles'
 import { rateDark } from './rate/styles'
 import { resultDark } from './result/styles'
 import { scrollbarDark } from './scrollbar/styles'
+import { sliderDark } from './slider/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -97,5 +98,6 @@ export const darkTheme = {
   Radio: radioDark,
   Rate: rateDark,
   Result: resultDark,
-  Scrollbar: scrollbarDark
+  Scrollbar: scrollbarDark,
+  Slider: sliderDark
 }

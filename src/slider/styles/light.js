@@ -1,12 +1,10 @@
-import create from '../../_styles/utils/create-component-base'
 import sizeVariables from './_common'
-import { baseLight } from '../../_styles/base'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'Slider',
-  theme: 'light',
-  peer: [baseLight],
-  getLocalVars (vars) {
+  common: commonLight,
+  self (vars) {
     const indicatorColor = 'rgba(0, 0, 0, .85)'
     const boxShadow = '0 2px 8px 0 rgba(0, 0, 0, 0.12)'
     const {
@@ -44,4 +42,4 @@ export default create({
       dotBoxShadow: null
     }
   }
-})
+}

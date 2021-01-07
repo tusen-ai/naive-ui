@@ -4,9 +4,9 @@
     :class="{
       'n-slider--disabled': disabled,
       'n-slider--active': active,
-      'n-slider--with-mark': marks,
-      [`n-${mergedTheme}-theme`]: mergedTheme
+      'n-slider--with-mark': marks
     }"
+    :style="cssVars"
     @keydown.right="handleKeyDownRight"
     @keydown.left="handleKeyDownLeft"
   >
@@ -61,9 +61,7 @@
           <div
             v-if="mergedShowTooltip1"
             class="n-slider-handle-indicator"
-            :class="{
-              [`n-${mergedTheme}-theme`]: mergedTheme
-            }"
+            :style="indicatorCssVars"
           >
             {{ handleValue1 }}
           </div>
@@ -99,9 +97,7 @@
           <div
             v-if="mergedShowTooltip2"
             class="n-slider-handle-indicator"
-            :class="{
-              [`n-${mergedTheme}-theme`]: mergedTheme
-            }"
+            :style="indicatorCssVars"
           >
             {{ handleValue2 }}
           </div>
@@ -122,13 +118,14 @@
 </template>
 
 <script>
-import { ref, toRef, computed, watch, nextTick } from 'vue'
+import { ref, toRef, computed, watch, nextTick, defineComponent } from 'vue'
 import { VBinder, VTarget, VFollower } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
 import { on, off } from 'evtd'
-import { configurable, themeable, useFormItem, withCssr } from '../../_mixins'
-import styles from './styles'
+import { useTheme, useFormItem, useConfig } from '../../_mixins'
 import { warn, call, useAdjustedTo } from '../../_utils'
+import { sliderLight } from '../styles'
+import style from './styles/index.cssr.js'
 
 function handleHandleMouseMove (e, handleIndex) {
   const { width: handleWidth } = this.handleRef1.getBoundingClientRect()
@@ -151,14 +148,13 @@ function handleHandleMouseMove (e, handleIndex) {
   }
 }
 
-export default {
+export default defineComponent({
   name: 'Slider',
   components: {
     VBinder,
     VTarget,
     VFollower
   },
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     defaultValue: {
       type: [Number, Array],
@@ -220,6 +216,8 @@ export default {
     }
   },
   setup (props) {
+    const themeRef = useTheme('Slider', 'Slider', style, sliderLight, props)
+
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(
@@ -255,6 +253,8 @@ export default {
       return handleClicked1Ref.value || handleClicked2Ref.value
     })
     return {
+      ...useConfig(props),
+      ...useFormItem(props),
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
       isMounted: useIsMounted(),
@@ -277,7 +277,74 @@ export default {
       railRef: ref(null),
       followerRef1: ref(null),
       followerRef2: ref(null),
-      ...useFormItem(props)
+      indicatorCssVars: computed(() => {
+        const {
+          self: {
+            fontSize,
+            indicatorColor,
+            indicatorBoxShadow,
+            indicatorTextColor,
+            indicatorBorderRadius
+          }
+        } = themeRef.value
+        return {
+          '--font-size': fontSize,
+          '--indicator-border-radius': indicatorBorderRadius,
+          '--indicator-box-shadow': indicatorBoxShadow,
+          '--indicator-color': indicatorColor,
+          '--indicator-text-color': indicatorTextColor
+        }
+      }),
+      cssVars: computed(() => {
+        const {
+          self: {
+            railColor,
+            railColorHover,
+            fillColor,
+            fillColorHover,
+            handleColor,
+            dotColor,
+            dotColorModal,
+            handleBoxShadow,
+            handleBoxShadowHover,
+            handleBoxShadowActive,
+            handleBoxShadowFocus,
+            dotBorder,
+            dotBoxShadow,
+            railHeight,
+            handleSize,
+            dotHeight,
+            dotWidth,
+            dotBorderRadius,
+            fontSize,
+            dotBorderActive
+          },
+          common: { cubicBezierEaseInOut }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--dot-border': dotBorder,
+          '--dot-border-active': dotBorderActive,
+          '--dot-border-radius': dotBorderRadius,
+          '--dot-box-shadow': dotBoxShadow,
+          '--dot-color': dotColor,
+          '--dot-color-modal': dotColorModal,
+          '--dot-height': dotHeight,
+          '--dot-width': dotWidth,
+          '--fill-color': fillColor,
+          '--fill-color-hover': fillColorHover,
+          '--font-size': fontSize,
+          '--handle-box-shadow': handleBoxShadow,
+          '--handle-box-shadow-active': handleBoxShadowActive,
+          '--handle-box-shadow-focus': handleBoxShadowFocus,
+          '--handle-box-shadow-hover': handleBoxShadowHover,
+          '--handle-color': handleColor,
+          '--handle-size': handleSize,
+          '--rail-color': railColor,
+          '--rail-color-hover': railColorHover,
+          '--rail-height': railHeight
+        }
+      })
     }
   },
   computed: {
@@ -756,5 +823,5 @@ export default {
       }
     }
   }
-}
+})
 </script>
