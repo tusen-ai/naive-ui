@@ -1,12 +1,10 @@
-import create from '../../_styles/utils/create-component-base'
 import sizeVariables from './_common'
-import { baseDark } from '../../_styles/base'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'Timeline',
-  theme: 'dark',
-  peer: [baseDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  self (vars) {
     const {
       textColor3Overlay,
       infoColorSuppl,
@@ -21,17 +19,17 @@ export default create({
     } = vars
     return {
       ...sizeVariables,
-      fontSize,
-      headerFontWeight: fontWeightStrong,
-      circleBorderColor: textColor3Overlay,
-      circleBorderColorInfo: infoColorSuppl,
-      circleBorderColorError: errorColorSuppl,
-      circleBorderColorSuccess: successColorSuppl,
-      circleBorderColorWarning: warningColorSuppl,
-      headerTextColor: textColor1Overlay,
+      contentFontSize: fontSize,
+      titleFontWeight: fontWeightStrong,
+      circleBorder: `2px solid ${textColor3Overlay}`,
+      circleBorderInfo: `2px solid ${infoColorSuppl}`,
+      circleBorderError: `2px solid ${errorColorSuppl}`,
+      circleBorderSuccess: `2px solid ${successColorSuppl}`,
+      circleBorderWarning: `2px solid ${warningColorSuppl}`,
+      titleTextColor: textColor1Overlay,
       contentTextColor: textColor2Overlay,
       metaTextColor: textColor3Overlay,
       lineColor: railColorOverlay
     }
   }
-})
+}

@@ -1,6 +1,6 @@
 export default {
-  headerMarginTopMedium: 0,
-  headerMarginTopLarge: '-1px',
-  headerFontSizeMedium: '14px',
-  headerFontSizeLarge: '16px'
+  titleMarginMedium: 0,
+  titleMarginLarge: '-2px 0 0 0',
+  titleFontSizeMedium: '14px',
+  titleFontSizeLarge: '16px'
 }

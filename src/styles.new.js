@@ -58,6 +58,8 @@ import { tabsDark } from './tabs/styles'
 import { tagDark } from './tag/styles'
 import { thingDark } from './thing/styles'
 import { timeDark } from './time/styles'
+import { timePickerDark } from './time-picker/styles'
+import { timelineDark } from './timeline/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -119,5 +121,7 @@ export const darkTheme = {
   Tabs: tabsDark,
   Tag: tagDark,
   Thing: thingDark,
-  Time: timeDark
+  Time: timeDark,
+  TimePicker: timePickerDark,
+  Timeline: timelineDark
 }

@@ -1,12 +1,10 @@
-import create from '../../_styles/utils/create-component-base'
 import sizeVariables from './_common'
-import { baseLight } from '../../_styles/base'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'Timeline',
-  theme: 'light',
-  peer: [baseLight],
-  getLocalVars (vars) {
+  common: commonLight,
+  self (vars) {
     const {
       textColor3,
       infoColor,
@@ -21,17 +19,17 @@ export default create({
     } = vars
     return {
       ...sizeVariables,
-      fontSize,
-      headerFontWeight: fontWeightStrong,
-      circleBorderColor: textColor3,
-      circleBorderColorInfo: infoColor,
-      circleBorderColorError: errorColor,
-      circleBorderColorSuccess: successColor,
-      circleBorderColorWarning: warningColor,
-      headerTextColor: textColor1,
+      contentFontSize: fontSize,
+      titleFontWeight: fontWeightStrong,
+      circleBorder: `2px solid ${textColor3}`,
+      circleBorderInfo: `2px solid ${infoColor}`,
+      circleBorderError: `2px solid ${errorColor}`,
+      circleBorderSuccess: `2px solid ${successColor}`,
+      circleBorderWarning: `2px solid ${warningColor}`,
+      titleTextColor: textColor1,
       contentTextColor: textColor2,
       metaTextColor: textColor3,
       lineColor: railColorOverlay
     }
   }
-})
+}
