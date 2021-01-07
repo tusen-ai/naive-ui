@@ -5,9 +5,9 @@
       [`n-tabs--${type}-type`]: true,
       'n-tabs--scroll': showScrollButton,
       [`n-tabs--${labelSize}-size`]: labelSize,
-      [`n-tabs--flex`]: justifyContent,
-      [`n-${mergedTheme}-theme`]: mergedTheme
+      [`n-tabs--flex`]: justifyContent
     }"
+    :style="cssVars"
   >
     <v-resize-observer @resize="handleNavResize">
       <div ref="navRef" class="n-tabs-nav" :style="navStyle">
@@ -80,21 +80,22 @@
 </template>
 
 <script>
-import { ref, getCurrentInstance } from 'vue'
-import { NIcon } from '../../icon'
-import { configurable, themeable, withCssr } from '../../_mixins'
+import { ref, getCurrentInstance, defineComponent, computed } from 'vue'
+import { VResizeObserver } from 'vueuc'
+import { throttle } from 'lodash-es'
+import { useCompitable, onFontsReady } from 'vooks'
 import {
   ChevronLeftIcon as BackwardIcon,
   ChevronRightIcon as ForwardIcon,
   CloseIcon
 } from '../../_base/icons'
-import { VResizeObserver } from 'vueuc'
-import { throttle } from 'lodash-es'
-import styles from './styles'
-import { warn } from '../../_utils'
-import { useCompitable, onFontsReady } from 'vooks'
+import { NIcon } from '../../icon'
+import { useTheme } from '../../_mixins'
+import { warn, createKey } from '../../_utils'
+import { tabsLight } from '../styles'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Tabs',
   components: {
     NIcon,
@@ -103,7 +104,6 @@ export default {
     CloseIcon,
     VResizeObserver
   },
-  mixins: [configurable, themeable, withCssr(styles)],
   provide () {
     return {
       NTab: this
@@ -180,6 +180,7 @@ export default {
     }
   },
   setup (props) {
+    const themeRef = useTheme('Tabs', 'Tabs', style, tabsLight, props)
     const vm = getCurrentInstance().proxy
     onFontsReady(() => {
       vm.updateScrollStatus()
@@ -196,7 +197,54 @@ export default {
       navScrollRef: ref(null),
       labelWrapperRef: ref(null),
       navRef: ref(null),
-      labelBarRef: ref(null)
+      labelBarRef: ref(null),
+      cssVars: computed(() => {
+        const { labelSize } = props
+        const {
+          self: {
+            labelTextColor,
+            labelTextColorActive,
+            labelTextColorHover,
+            labelTextColorDisabled,
+            labelBarColor,
+            scrollButtonColor,
+            scrollButtonColorDisabled,
+            tabCloseColor,
+            tabColor,
+            tabBorderColorActive,
+            tabTextColor,
+            tabTextColorActive,
+            tabBorderColor,
+            paneTextColor,
+            tabFontWeight,
+            tabBorderRadius,
+            labelFontSizeCard,
+            [createKey('labelFontSizeLine', labelSize)]: labelFontSizeLine
+          },
+          common: { cubicBezierEaseInOut }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--label-bar-color': labelBarColor,
+          '--label-font-size-card': labelFontSizeCard,
+          '--label-font-size-line': labelFontSizeLine,
+          '--label-text-color': labelTextColor,
+          '--label-text-color-active': labelTextColorActive,
+          '--label-text-color-disabled': labelTextColorDisabled,
+          '--label-text-color-hover': labelTextColorHover,
+          '--pane-text-color': paneTextColor,
+          '--scroll-button-color': scrollButtonColor,
+          '--scroll-button-color-disabled': scrollButtonColorDisabled,
+          '--tab-border-color': tabBorderColor,
+          '--tab-border-color-active': tabBorderColorActive,
+          '--tab-border-radius': tabBorderRadius,
+          '--tab-close-color': tabCloseColor,
+          '--tab-color': tabColor,
+          '--tab-font-weight': tabFontWeight,
+          '--tab-text-color': tabTextColor,
+          '--tab-text-color-active': tabTextColorActive
+        }
+      })
     }
   },
   data () {
@@ -343,5 +391,5 @@ export default {
       this.updateScrollStatus()
     }, 64)
   }
-}
+})
 </script>

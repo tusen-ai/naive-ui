@@ -1,13 +1,14 @@
-import create from '../../_styles/utils/create-component-base'
 import sizeVariables from './_common'
-import { baseDark } from '../../_styles/base'
 import { iconDark } from '../../icon/styles'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'Tabs',
-  theme: 'dark',
-  peer: [baseDark, iconDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  peers: {
+    Icon: iconDark
+  },
+  self (vars) {
     const {
       textColor2Overlay,
       primaryColor,
@@ -43,4 +44,4 @@ export default create({
       paneTextColor: textColor2Overlay
     }
   }
-})
+}

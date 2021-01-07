@@ -1,7 +1,7 @@
-import { h, withDirectives, vShow } from 'vue'
+import { h, withDirectives, vShow, defineComponent } from 'vue'
 import { getSlot } from '../../_utils'
 
-export default {
+export default defineComponent({
   name: 'TabPane',
   alias: ['TabPanel'],
   inject: ['NTab'],
@@ -55,4 +55,4 @@ export default {
       )
       : null
   }
-}
+})

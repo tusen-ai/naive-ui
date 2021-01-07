@@ -2,7 +2,7 @@ export default {
   blankHeightSmall: '28px',
   blankHeightMedium: '34px',
   blankHeightLarge: '40px',
-  feedbackPadding: '3px 0 0 2px',
+  feedbackPadding: '4px 0 0 2px',
   feedbackHeightSmall: '21px',
   feedbackHeightMedium: '21px',
   feedbackHeightLarge: '24px',
@@ -18,7 +18,7 @@ export default {
   labelHeightSmall: '21px',
   labelHeightMedium: '21px',
   labelHeightLarge: '24px',
-  labelPaddingVertical: '0 0 3px 2px',
+  labelPaddingVertical: '0 0 4px 2px',
   labelPaddingHorizontal: '0 12px 0 0',
   labelTextAlignVertical: 'left',
   labelTextAlignHorizontal: 'right'
