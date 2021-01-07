@@ -381,6 +381,7 @@
   - [ ] dropdown group + menu use dropdown
   - [ ] 多行 message
   - [ ] progress height
+  - [ ] close 重构
 
 ## Info
 

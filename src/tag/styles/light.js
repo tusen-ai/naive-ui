@@ -1,14 +1,15 @@
-import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
 import { changeColor } from 'seemly'
-import { baseLight } from '../../_styles/base'
 import { iconLight } from '../../icon/styles'
+import { commonLight } from '../../_styles/new-common'
 
-export default create({
-  theme: 'light',
+export default {
   name: 'Tag',
-  peer: [baseLight, iconLight],
-  getLocalVars (vars) {
+  common: commonLight,
+  peers: {
+    Icon: iconLight
+  },
+  self (vars) {
     const {
       textColor2Overlay,
       primaryColorHover,
@@ -93,4 +94,4 @@ export default create({
       closeColorPressedError: changeColor(errorColor, { alpha: 0.8 })
     }
   }
-})
+}

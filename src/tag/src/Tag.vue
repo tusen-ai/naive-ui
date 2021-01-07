@@ -6,12 +6,11 @@
       [`n-tag--${type}-type`]: true,
       'n-tag--closable': !checkable && closable,
       'n-tag--disabled': disabled,
-      [`n-${mergedTheme}-theme`]: mergedTheme,
       'n-tag--checkable': checkable,
       'n-tag--checked': checkable && checked,
       'n-tag--round': round
     }"
-    :style="mergedStyle"
+    :style="cssVars"
     @click="handleClick"
   >
     <span class="n-tag__content"><slot /></span>
@@ -27,20 +26,21 @@
 </template>
 
 <script>
-import { configurable, themeable, withCssr } from '../../_mixins'
+import { defineComponent, computed } from 'vue'
 import { CloseIcon } from '../../_base/icons'
+import { useTheme } from '../../_mixins'
 import { NIcon } from '../../icon'
-import { warn } from '../../_utils'
+import { warn, createKey } from '../../_utils'
+import { tagLight } from '../styles'
 import commonProps from './common-props'
-import styles from './styles'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Tag',
   components: {
     CloseIcon,
     NIcon
   },
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
     ...commonProps,
     checked: {
@@ -79,6 +79,68 @@ export default {
       default: undefined
     }
   },
+  setup (props) {
+    const themeRef = useTheme('Tag', 'Tag', style, tagLight, props)
+    return {
+      cssVars: computed(() => {
+        const { type, size } = props
+        const {
+          common: { cubicBezierEaseInOut },
+          self: {
+            padding,
+            closeMargin,
+            borderRadius,
+            opacityDisabled,
+            textColorCheckable,
+            textColorHoverCheckable,
+            textColorPressedCheckable,
+            textColorChecked,
+            colorCheckable,
+            colorHoverCheckable,
+            colorPressedCheckable,
+            colorChecked,
+            colorCheckedHover,
+            colorCheckedPressed,
+            [createKey('closeSize', size)]: closeSize,
+            [createKey('fontSize', size)]: fontSize,
+            [createKey('height', size)]: height,
+            [createKey('color', type)]: color,
+            [createKey('textColor', type)]: textColor,
+            [createKey('borderColor', type)]: borderColor,
+            [createKey('closeColor', type)]: closeColor,
+            [createKey('closeColorHover', type)]: closeColorHover,
+            [createKey('closeColorPressed', type)]: closeColorPressed
+          }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--border-radius': borderRadius,
+          '--border-color': borderColor,
+          '--close-color': closeColor,
+          '--close-color-hover': closeColorHover,
+          '--close-color-pressed': closeColorPressed,
+          '--close-margin': closeMargin,
+          '--close-size': closeSize,
+          '--color': color,
+          '--color-checkable': colorCheckable,
+          '--color-checked': colorChecked,
+          '--color-checked-hover': colorCheckedHover,
+          '--color-checked-pressed': colorCheckedPressed,
+          '--color-hover-checkable': colorHoverCheckable,
+          '--color-pressed-checkable': colorPressedCheckable,
+          '--font-size': fontSize,
+          '--height': height,
+          '--opacity-disabled': opacityDisabled,
+          '--padding': padding,
+          '--text-color': textColor,
+          '--text-color-checkable': textColorCheckable,
+          '--text-color-checked': textColorChecked,
+          '--text-color-hover-checkable': textColorHoverCheckable,
+          '--text-color-pressed-checkable': textColorPressedCheckable
+        }
+      })
+    }
+  },
   methods: {
     handleClick (e) {
       if (!this.disabled) {
@@ -104,5 +166,5 @@ export default {
       }
     }
   }
-}
+})
 </script>
