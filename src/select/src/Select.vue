@@ -1,10 +1,5 @@
 <template>
-  <div
-    class="n-select"
-    :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme
-    }"
-  >
+  <div class="n-select">
     <v-binder>
       <v-target>
         <n-base-selection
@@ -21,7 +16,7 @@
           :clearable="clearable"
           :disabled="disabled"
           :size="mergedSize"
-          :theme="mergedTheme"
+          :theme="'light'"
           :loading="loading"
           :autofocus="autofocus"
           @click="handleTriggerClick"
@@ -60,12 +55,11 @@
             v-clickoutside="handleMenuClickOutside"
             class="n-select-menu"
             auto-pending
-            :theme="mergedTheme"
+            :theme="'light'"
             :pattern="pattern"
             :tree-mate="treeMate"
             :multiple="multiple"
             size="medium"
-            :filterable="filterable"
             :value="mergedValue"
             @menu-toggle-option="handleToggleOption"
             @scroll="handleMenuScroll"
@@ -87,21 +81,16 @@
 </template>
 
 <script>
-import { ref, computed, toRef } from 'vue'
+import { ref, computed, toRef, defineComponent } from 'vue'
 import { createTreeMate } from 'treemate'
 import { VBinder, VFollower, VTarget } from 'vueuc'
 import { useIsMounted, useMergedState, useCompitable } from 'vooks'
 import { clickoutside } from 'vdirs'
-import {
-  configurable,
-  themeable,
-  locale,
-  withCssr,
-  useFormItem
-} from '../../_mixins'
+import { useTheme, useConfig, useLocale, useFormItem } from '../../_mixins'
 import { warn, call, useAdjustedTo } from '../../_utils'
 import { NBaseSelectMenu, NBaseSelection } from '../../_base'
-import styles from './styles/index.js'
+import { selectLight } from '../styles'
+import style from './styles/index.cssr.js'
 
 function patternMatched (pattern, value) {
   try {
@@ -151,7 +140,7 @@ function createValOptMap (options) {
   return valOptMap
 }
 
-export default {
+export default defineComponent({
   name: 'Select',
   components: {
     NBaseSelectMenu,
@@ -163,7 +152,6 @@ export default {
   directives: {
     clickoutside
   },
-  mixins: [configurable, themeable, locale('Select'), withCssr(styles)],
   provide () {
     return {
       NSelect: this
@@ -311,6 +299,7 @@ export default {
     }
   },
   setup (props) {
+    useTheme('Select', 'Select', style, selectLight, props)
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(
@@ -337,6 +326,9 @@ export default {
     )
     const followerRef = ref(null)
     return {
+      ...useFormItem(props),
+      ...useConfig(props),
+      ...useLocale('Select'),
       treeMate: treeMateRef,
       flattenedNodes: computed(() => {
         return treeMateRef.value.flattenedNodes
@@ -357,8 +349,7 @@ export default {
       memoValOptMap: ref(new Map()),
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
-      followerRef,
-      ...useFormItem(props)
+      followerRef
     }
   },
   computed: {
@@ -719,5 +710,5 @@ export default {
       this.followerRef.syncPosition()
     }
   }
-}
+})
 </script>
