@@ -67,8 +67,8 @@ export default c([
         transition: background-color .3s var(--bezier);
         position: absolute;
         display: block;
-        width: calc(var(--arrow-height) * 1.5);
-        height: calc(var(--arrow-height) * 1.5);
+        width: calc(var(--arrow-height) * 1.414);
+        height: calc(var(--arrow-height) * 1.414);
         box-shadow: 0 0 8px 0 rgba(0, 0, 0, .12);
         transform: rotate(45deg);
         background-color: var(--color);
@@ -80,55 +80,55 @@ export default c([
     })
   ]),
   placementStyle('top-start', `
-    top: calc(-1 * var(--arrow-height));
+    top: calc(-0.707 * var(--arrow-height));
     left: var(--arrow-offset);
   `),
   placementStyle('top', `
-    top: calc(-1 * var(--arrow-height));
-    transform: translateX(calc(-1 * var(--arrow-height))) rotate(45deg);
+    top: calc(-0.707 * var(--arrow-height));
+    transform: translateX(calc(-0.707 * var(--arrow-height))) rotate(45deg);
     left: 50%;
   `),
   placementStyle('top-end', `
-    top: calc(-1 * var(--arrow-height));
+    top: calc(-0.707 * var(--arrow-height));
     right: var(--arrow-offset);
   `),
   placementStyle('bottom-start', `
-    bottom: calc(-1 * var(--arrow-height));
+    bottom: calc(-0.707 * var(--arrow-height));
     left: var(--arrow-offset);
   `),
   placementStyle('bottom', `
-    bottom: calc(-1 * var(--arrow-height));
-    transform: translateX(calc(-1 * var(--arrow-height))) rotate(45deg);
+    bottom: calc(-0.707 * var(--arrow-height));
+    transform: translateX(calc(-0.707 * var(--arrow-height))) rotate(45deg);
     left: 50%;
   `),
   placementStyle('bottom-end', `
-    bottom: calc(-1 * var(--arrow-height));
+    bottom: calc(-0.707 * var(--arrow-height));
     right: var(--arrow-offset);
   `),
   placementStyle('left-start', `
-    left: calc(-1 * var(--arrow-height));
+    left: calc(-0.707 * var(--arrow-height));
     top: var(--arrow-offset-vertical);
   `),
   placementStyle('left', `
-    left: calc(-1 * var(--arrow-height));
-    transform: translateY(calc(-1 * var(--arrow-height))) rotate(45deg);
+    left: calc(-0.707 * var(--arrow-height));
+    transform: translateY(calc(-0.707 * var(--arrow-height))) rotate(45deg);
     top: 50%;
   `),
   placementStyle('left-end', `
-    left: calc(-1 * var(--arrow-height));
+    left: calc(-0.707 * var(--arrow-height));
     bottom: var(--arrow-offset-vertical);
   `),
   placementStyle('right-start', `
-    right: calc(-1 * var(--arrow-height));
+    right: calc(-0.707 * var(--arrow-height));
     top: var(--arrow-offset-vertical);
   `),
   placementStyle('right', `
-    right: calc(-1 * var(--arrow-height));
-    transform: translateY(calc(-1 * var(--arrow-height))) rotate(45deg);
+    right: calc(-0.707 * var(--arrow-height));
+    transform: translateY(calc(-0.707 * var(--arrow-height))) rotate(45deg);
     top: 50%;
   `),
   placementStyle('right-end', `
-    right: calc(-1 * var(--arrow-height));
+    right: calc(-0.707 * var(--arrow-height));
     bottom: var(--arrow-offset-vertical);
   `)
 ])
