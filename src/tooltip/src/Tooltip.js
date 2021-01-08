@@ -1,22 +1,30 @@
 // Tooltip: popover wearing waistcoat
+import { h, defineComponent, ref, computed } from 'vue'
 import { NPopover } from '../../popover'
-import { h } from 'vue'
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles'
+import { useTheme } from '../../_mixins'
+import { tooltipLight } from '../styles'
 
-export default {
+export default defineComponent({
   name: 'Tooltip',
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
+    ...useTheme.props,
     ...NPopover.props,
     showArrow: {
       type: Boolean,
       default: false
     }
   },
-  methods: {
-    syncPosition () {
-      this.$refs.popover.syncPosition()
+  setup (props) {
+    const themeRef = useTheme('Tooltip', 'Tooltip', null, tooltipLight, props)
+    const popoverRef = ref(null)
+    return {
+      popoverRef,
+      syncPosition () {
+        popoverRef.value.syncPosition()
+      },
+      popoverThemeOverrides: computed(() => {
+        return themeRef.value.self
+      })
     }
   },
   render () {
@@ -24,12 +32,11 @@ export default {
       NPopover,
       {
         ...this.$props,
+        builtinThemeOverrides: this.popoverThemeOverrides,
         class: 'n-tooltip n-popover--tooltip',
-        ref: 'popover'
+        ref: 'popoverRef'
       },
-      {
-        ...this.$slots
-      }
+      this.$slots
     )
   }
-}
+})

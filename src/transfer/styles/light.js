@@ -47,7 +47,7 @@ export default {
       borderRadius: borderRadius,
       borderColor: borderColor,
       listColor: cardColor,
-      headerColor: composite(vars.cardColor, tableHeaderColorOverlay),
+      headerColor: composite(cardColor, tableHeaderColorOverlay),
       titleTextColor: textColor1,
       titleTextColorDisabled: textColorDisabled,
       headerExtraTextColor: textColor2,

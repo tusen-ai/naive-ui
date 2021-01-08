@@ -124,6 +124,7 @@ export default defineComponent({
       default: true
     },
     // events
+    // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:show': {
       type: Function,
       default: undefined

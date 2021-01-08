@@ -64,6 +64,7 @@ import { transferDark } from './transfer/styles'
 import { typographyDark } from './typography/styles'
 import { treeDark } from './tree/styles'
 import { uploadDark } from './upload/styles'
+import { tooltipDark } from './tooltip/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -128,6 +129,7 @@ export const darkTheme = {
   Time: timeDark,
   TimePicker: timePickerDark,
   Timeline: timelineDark,
+  Tooltip: tooltipDark,
   Transfer: transferDark,
   Tree: treeDark,
   Typography: typographyDark,

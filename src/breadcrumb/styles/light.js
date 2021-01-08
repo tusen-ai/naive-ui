@@ -4,14 +4,21 @@ import { commonLight } from '../../_styles/new-common'
 export default {
   common: commonLight,
   self (vars) {
+    const {
+      fontSize,
+      textColor3,
+      primaryColorHover,
+      primaryColorPressed,
+      textColor2
+    } = vars
     return {
       ...commonVariables,
-      fontSize: vars.fontSize,
-      itemTextColor: vars.textColor3,
-      itemTextColorHover: vars.primaryColorHover,
-      itemTextColorPressed: vars.primaryColorPressed,
-      itemTextColorActive: vars.textColor2,
-      separatorColor: vars.textColor3
+      fontSize: fontSize,
+      itemTextColor: textColor3,
+      itemTextColorHover: primaryColorHover,
+      itemTextColorPressed: primaryColorPressed,
+      itemTextColorActive: textColor2,
+      separatorColor: textColor3
     }
   }
 }

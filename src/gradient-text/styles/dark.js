@@ -14,10 +14,11 @@ export default {
       successColorSuppl,
       warningColorSuppl,
       errorColorSuppl,
-      infoColorSuppl
+      infoColorSuppl,
+      fontWeightStrong
     } = vars
     return {
-      fontWeight: vars.fontWeightStrong,
+      fontWeight: fontWeightStrong,
       rotate: '252deg',
       colorStartPrimary: primaryColor,
       colorEndPrimary: primaryColorSuppl,

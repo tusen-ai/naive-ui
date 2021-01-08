@@ -1,19 +1,21 @@
-import create from '../../_styles/utils/create-component-base'
-import { baseLight } from '../../_styles/base'
+import { commonLight } from '../../_styles/new-common'
 import { popoverLight } from '../../popover/styles'
 import commonVars from './_common'
 
-export default create({
-  theme: 'light',
+export default {
   name: 'Tooltip',
-  peer: [baseLight, popoverLight],
-  getLocalVars (vars) {
+  common: commonLight,
+  peers: {
+    Popover: popoverLight
+  },
+  self (vars) {
+    const { borderRadius, boxShadow2, baseColor } = vars
     return {
       ...commonVars,
-      borderRadius: vars.borderRadius,
-      boxShadow: vars.boxShadow2,
+      borderRadius: borderRadius,
+      boxShadow: boxShadow2,
       color: 'rgba(0, 0, 0, .85)',
-      textColor: vars.baseColor
+      textColor: baseColor
     }
   }
-})
+}

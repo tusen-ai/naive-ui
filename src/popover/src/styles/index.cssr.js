@@ -50,11 +50,10 @@ export default c([
         opacity .15s var(--bezier-ease-in),
         transform .15s var(--bezier-ease-in);
     `),
-    cNotM('raw', [
-      cNotM('tooltip', `
-        background-color: var(--color);
-        border-radius: var(--border-radius);
-      `),
+    cNotM('raw', `
+      background-color: var(--color);
+      border-radius: var(--border-radius);
+    `, [
       cM('padded', {
         padding: 'var(--padding)'
       })

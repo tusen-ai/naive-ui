@@ -6,7 +6,8 @@ import {
   ref,
   defineComponent,
   computed,
-  mergeProps
+  mergeProps,
+  inject
 } from 'vue'
 import { VFollower } from 'vueuc'
 import { clickoutside, mousemoveoutside } from 'vdirs'
@@ -17,11 +18,6 @@ import style from './styles/index.cssr.js'
 
 export default defineComponent({
   name: 'PopoverBody',
-  inject: {
-    NPopover: {
-      default: null
-    }
-  },
   inheritAttrs: false,
   props: {
     ...useTheme.props,
@@ -102,8 +98,10 @@ export default defineComponent({
   },
   setup (props) {
     const themeRef = useTheme('Popover', 'Popover', style, popoverLight, props)
+    const NPopover = inject('NPopover')
     return {
       ...useConfig(props),
+      NPopover,
       adjustedTo: useAdjustedTo(props),
       followerEnabled: ref(props.show),
       followerRef: ref(null),

@@ -10,10 +10,11 @@ export default {
       successColor,
       warningColor,
       errorColor,
-      infoColor
+      infoColor,
+      fontWeightStrong
     } = vars
     return {
-      fontWeight: vars.fontWeightStrong,
+      fontWeight: fontWeightStrong,
       rotate: '252deg',
       colorStartPrimary: changeColor(primaryColor, { alpha: 0.6 }),
       colorEndPrimary: primaryColor,
