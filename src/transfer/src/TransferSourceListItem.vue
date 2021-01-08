@@ -8,7 +8,7 @@
   >
     <div class="n-transfer-list-item__checkbox">
       <n-checkbox
-        :theme="NTransfer.mergedTheme"
+        :theme="'light'"
         :disabled="disabled"
         :checked="checked"
         :size="NTransfer.mergedSize"
@@ -21,11 +21,11 @@
 </template>
 
 <script>
-import { inject } from 'vue'
-import { NCheckbox } from '../../checkbox'
+import { inject, defineComponent } from 'vue'
 import { useMemo } from 'vooks'
+import { NCheckbox } from '../../checkbox'
 
-export default {
+export default defineComponent({
   name: 'NTransferListItem',
   components: {
     NCheckbox
@@ -62,5 +62,5 @@ export default {
       }
     }
   }
-}
+})
 </script>

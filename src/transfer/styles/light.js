@@ -1,35 +1,61 @@
-import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
 import { composite } from 'seemly'
-import { baseLight } from '../../_styles/base'
 import { checkboxLight } from '../../checkbox/styles'
 import { scrollbarLight } from '../../scrollbar/styles'
 import { inputLight } from '../../input/styles'
+import { commonLight } from '../../_styles/new-common'
+import { emptyLight } from '../../empty/styles'
+import { buttonLight } from '../../button/styles'
 
-export default create({
-  theme: 'light',
+export default {
   name: 'Transfer',
-  peer: [baseLight, checkboxLight, scrollbarLight, inputLight],
-  getLocalVars (vars) {
+  common: commonLight,
+  peers: {
+    Checkbox: checkboxLight,
+    Scrollbar: scrollbarLight,
+    Input: inputLight,
+    Empty: emptyLight,
+    Button: buttonLight
+  },
+  self (vars) {
+    const {
+      fontSizeLarge,
+      fontSizeMedium,
+      fontSizeSmall,
+      heightLarge,
+      heightMedium,
+      heightSmall,
+      borderRadius,
+      cardColor,
+      tableHeaderColorOverlay,
+      textColor1,
+      textColorDisabled,
+      textColor2,
+      borderColorOverlay,
+      hoverColorOverlay,
+      borderColor,
+      fontWeightStrong
+    } = vars
     return {
       ...commonVariables,
-      itemHeightSmall: vars.heightSmall,
-      itemHeightMedium: vars.heightMedium,
-      itemHeightLarge: vars.heightLarge,
-      fontSizeSmall: vars.fontSizeSmall,
-      fontSizeMedium: vars.fontSizeMedium,
-      fontSizeLarge: vars.fontSizeLarge,
-      borderRadius: vars.borderRadius,
-      borderColor: vars.borderColor,
-      listColor: vars.cardColor,
-      headerColor: composite(vars.cardColor, vars.tableHeaderColorOverlay),
-      headerTextColor: vars.textColor1,
-      headerTextColorDisabled: vars.textColorDisabled,
-      headerExtraTextColor: vars.textColor2,
-      filterBorderColor: vars.borderColorOverlay,
-      itemTextColor: vars.textColor2,
-      itemTextColorDisabled: vars.textColorDisabled,
-      itemColorPending: vars.hoverColorOverlay
+      itemHeightSmall: heightSmall,
+      itemHeightMedium: heightMedium,
+      itemHeightLarge: heightLarge,
+      fontSizeSmall: fontSizeSmall,
+      fontSizeMedium: fontSizeMedium,
+      fontSizeLarge: fontSizeLarge,
+      borderRadius: borderRadius,
+      borderColor: borderColor,
+      listColor: cardColor,
+      headerColor: composite(vars.cardColor, tableHeaderColorOverlay),
+      titleTextColor: textColor1,
+      titleTextColorDisabled: textColorDisabled,
+      headerExtraTextColor: textColor2,
+      filterDividerColor: borderColorOverlay,
+      itemTextColor: textColor2,
+      itemTextColorDisabled: textColorDisabled,
+      itemColorPending: hoverColorOverlay,
+      titleFontWeight: fontWeightStrong
     }
   }
-})
+}

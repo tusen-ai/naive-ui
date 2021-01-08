@@ -1,6 +1,6 @@
 <template>
   <n-checkbox
-    :theme="theme"
+    :theme="'light'"
     :checked="checkboxProps.checked"
     :indeterminate="checkboxProps.indeterminate"
     :disabled="checkboxProps.disabled"
@@ -10,9 +10,10 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import { NCheckbox } from '../../checkbox'
 
-export default {
+export default defineComponent({
   name: 'NTransferHeaderCheckbox',
   components: {
     NCheckbox
@@ -23,10 +24,6 @@ export default {
     }
   },
   props: {
-    theme: {
-      type: String,
-      default: null
-    },
     source: {
       type: Boolean,
       default: false
@@ -46,5 +43,5 @@ export default {
       }
     }
   }
-}
+})
 </script>

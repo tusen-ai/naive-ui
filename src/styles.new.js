@@ -60,6 +60,7 @@ import { thingDark } from './thing/styles'
 import { timeDark } from './time/styles'
 import { timePickerDark } from './time-picker/styles'
 import { timelineDark } from './timeline/styles'
+import { transferDark } from './transfer/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -123,5 +124,6 @@ export const darkTheme = {
   Thing: thingDark,
   Time: timeDark,
   TimePicker: timePickerDark,
-  Timeline: timelineDark
+  Timeline: timelineDark,
+  Transfer: transferDark
 }

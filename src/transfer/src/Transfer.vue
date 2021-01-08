@@ -2,17 +2,15 @@
   <div
     class="n-transfer"
     :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme,
-      [`n-transfer--filterable`]: filterable,
-      [`n-transfer--${mergedSize}-size`]: true
+      [`n-transfer--filterable`]: filterable
     }"
+    :style="cssVars"
   >
     <div class="n-transfer-list">
       <div class="n-transfer-list-header">
         <div class="n-transfer-list-header__checkbox">
           <n-transfer-header-checkbox
             :source="true"
-            :theme="mergedTheme"
             @change="handleSrcHeaderCheck"
           />
         </div>
@@ -43,7 +41,7 @@
             <n-scrollbar
               v-if="virtualScroll"
               ref="srcScrollerRef"
-              :theme="mergedTheme"
+              :theme="'light'"
               :container="srcScrollContainer"
               :content="srcScrollContent"
             >
@@ -66,7 +64,7 @@
                 </template>
               </virtual-list>
             </n-scrollbar>
-            <n-scrollbar v-else :theme="mergedTheme">
+            <n-scrollbar v-else :theme="'theme'">
               <div class="n-transfer-list-content">
                 <transition-group
                   name="item"
@@ -93,7 +91,7 @@
           </transition>
         </div>
       </div>
-      <div class="n-transfer-list__border-mask" />
+      <div class="n-transfer-list__border" />
     </div>
     <div class="n-transfer-gap">
       <n-button :disabled="toButtonDisabled" @click="handleToTgtClick">
@@ -110,10 +108,7 @@
     <div class="n-transfer-list">
       <div class="n-transfer-list-header">
         <div class="n-transfer-list-header__checkbox">
-          <n-transfer-header-checkbox
-            :theme="mergedTheme"
-            @change="handleTgtHeaderCheck"
-          />
+          <n-transfer-header-checkbox @change="handleTgtHeaderCheck" />
         </div>
         <div class="n-transfer-list-header__header">
           {{ targetTitle || locale.targetTitle }}
@@ -142,7 +137,7 @@
             <n-scrollbar
               v-if="virtualScroll"
               ref="tgtScrollerRef"
-              :theme="mergedTheme"
+              :theme="'light'"
               :container="tgtScrollContainer"
               :content="tgtScrollContent"
             >
@@ -165,7 +160,7 @@
                 </template>
               </virtual-list>
             </n-scrollbar>
-            <n-scrollbar v-else :theme="mergedTheme">
+            <n-scrollbar v-else :theme="'light'">
               <div class="n-transfer-list-content">
                 <transition-group
                   name="item"
@@ -192,42 +187,37 @@
           </transition>
         </div>
       </div>
-      <div class="n-transfer-list__border-mask" />
+      <div class="n-transfer-list__border" />
     </div>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { computed, ref, defineComponent } from 'vue'
 import { VirtualList } from 'vueuc'
 import { useIsMounted } from 'vooks'
 import { depx } from 'seemly'
-import { NScrollbar } from '../../scrollbar'
-import NTransferHeaderCheckbox from './TransferHeaderCheckbox.vue'
-import NTransferHeaderExtra from './TransferHeaderExtra.vue'
-import NTransferSourceListItem from './TransferSourceListItem.vue'
-import NTransferTargetListItem from './TransferTargetListItem.vue'
-import { NInput } from '../../input'
-import { NIcon } from '../../icon'
-import { NEmpty } from '../../empty'
 import {
   SearchIcon,
   ChevronLeftIcon,
   ChevronRightIcon
 } from '../../_base/icons'
-import {
-  configurable,
-  useFormItem,
-  themeable,
-  withCssr,
-  locale
-} from '../../_mixins'
-import styles from './styles'
+import { NScrollbar } from '../../scrollbar'
+import { NInput } from '../../input'
+import { NIcon } from '../../icon'
+import { NEmpty } from '../../empty'
+import { useLocale, useFormItem, useTheme } from '../../_mixins'
 import { createKey } from '../../_utils/cssr'
 import { warn, call } from '../../_utils'
+import NTransferHeaderCheckbox from './TransferHeaderCheckbox.vue'
+import NTransferHeaderExtra from './TransferHeaderExtra.vue'
+import NTransferSourceListItem from './TransferSourceListItem.vue'
+import NTransferTargetListItem from './TransferTargetListItem.vue'
 import { data } from './data-utils'
+import style from './styles/index.cssr.js'
+import { transferLight } from '../styles'
 
-export default {
+export default defineComponent({
   name: 'Transfer',
   components: {
     NTransferHeaderCheckbox,
@@ -243,15 +233,6 @@ export default {
     ChevronLeftIcon,
     ChevronRightIcon
   },
-  mixins: [
-    configurable,
-    themeable,
-    withCssr(styles, {
-      themeKey: 'mergedTheme',
-      injectCssrProps: true
-    }),
-    locale('Transfer')
-  ],
   provide () {
     return {
       NTransfer: this
@@ -332,21 +313,84 @@ export default {
     }
   },
   setup (props) {
+    const themeRef = useTheme(
+      'Transfer',
+      'Transfer',
+      style,
+      transferLight,
+      props
+    )
+    const formItem = useFormItem(props)
+    const itemSizeRef = computed(() => {
+      const {
+        mergedSize: { value: size }
+      } = formItem
+      const {
+        self: { [createKey('itemHeight', size)]: itemSize }
+      } = themeRef.value
+      return depx(itemSize)
+    })
     return {
+      ...data(props),
+      ...formItem,
+      ...useLocale('Transfer'),
+      itemSize: itemSizeRef,
       isMounted: useIsMounted(),
       srcScrollerRef: ref(null),
       tgtScrollerRef: ref(null),
       srcVlRef: ref(null),
       tgtVlRef: ref(null),
-      ...data(props),
-      ...useFormItem(props)
-    }
-  },
-  computed: {
-    itemSize () {
-      return depx(
-        this.cssrProps.$local[createKey('itemHeight', this.mergedSize)]
-      )
+      cssVars: computed(() => {
+        const {
+          mergedSize: { value: size }
+        } = formItem
+        const {
+          common: {
+            cubicBezierEaseInOut,
+            cubicBezierEaseIn,
+            cubicBezierEaseOut
+          },
+          self: {
+            width,
+            borderRadius,
+            borderColor,
+            listColor,
+            headerColor,
+            titleTextColor,
+            titleTextColorDisabled,
+            headerExtraTextColor,
+            filterDividerColor,
+            itemTextColor,
+            itemColorPending,
+            itemTextColorDisabled,
+            extraFontSize,
+            titleFontWeight,
+            [createKey('fontSize', size)]: fontSize,
+            [createKey('itemHeight', size)]: itemHeight
+          }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--bezier-ease-in': cubicBezierEaseIn,
+          '--bezier-ease-out': cubicBezierEaseOut,
+          '--border-color': borderColor,
+          '--border-radius': borderRadius,
+          '--extra-font-size': extraFontSize,
+          '--filter-divider-color': filterDividerColor,
+          '--font-size': fontSize,
+          '--header-color': headerColor,
+          '--header-extra-text-color': headerExtraTextColor,
+          '--header-font-weight': titleFontWeight,
+          '--header-text-color': titleTextColor,
+          '--header-text-color-disabled': titleTextColorDisabled,
+          '--item-color-pending': itemColorPending,
+          '--item-height': itemHeight,
+          '--item-text-color': itemTextColor,
+          '--item-text-color-disabled': itemTextColorDisabled,
+          '--list-color': listColor,
+          '--width': width
+        }
+      })
     }
   },
   methods: {
@@ -436,5 +480,5 @@ export default {
       return this.tgtVlRef?.itemsRef
     }
   }
-}
+})
 </script>

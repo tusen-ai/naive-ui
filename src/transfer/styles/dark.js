@@ -1,34 +1,59 @@
-import create from '../../_styles/utils/create-component-base'
 import commonVariables from './_common'
-import { baseDark } from '../../_styles/base'
 import { checkboxDark } from '../../checkbox/styles'
 import { scrollbarDark } from '../../scrollbar/styles'
 import { inputDark } from '../../input/styles'
+import { commonDark } from '../../_styles/new-common'
+import { emptyDark } from '../../empty/styles'
+import { buttonDark } from '../../button/styles'
 
-export default create({
-  theme: 'dark',
+export default {
   name: 'Transfer',
-  peer: [baseDark, checkboxDark, scrollbarDark, inputDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  peers: {
+    Checkbox: checkboxDark,
+    Scrollbar: scrollbarDark,
+    Input: inputDark,
+    Empty: emptyDark,
+    Button: buttonDark
+  },
+  self (vars) {
+    const {
+      fontSizeLarge,
+      fontSizeMedium,
+      fontSizeSmall,
+      heightLarge,
+      heightMedium,
+      heightSmall,
+      borderRadius,
+      inputColorOverlay,
+      tableHeaderColorOverlay,
+      textColor1Overlay,
+      textColorDisabledOverlay,
+      textColor2Overlay,
+      borderColorOverlay,
+      hoverColorOverlay,
+      fontWeightStrong
+    } = vars
     return {
       ...commonVariables,
-      itemHeightSmall: vars.heightSmall,
-      itemHeightMedium: vars.heightMedium,
-      itemHeightLarge: vars.heightLarge,
-      fontSizeSmall: vars.fontSizeSmall,
-      fontSizeMedium: vars.fontSizeMedium,
-      fontSizeLarge: vars.fontSizeLarge,
-      borderRadius: vars.borderRadius,
+      itemHeightSmall: heightSmall,
+      itemHeightMedium: heightMedium,
+      itemHeightLarge: heightLarge,
+      fontSizeSmall: fontSizeSmall,
+      fontSizeMedium: fontSizeMedium,
+      fontSizeLarge: fontSizeLarge,
+      borderRadius: borderRadius,
       borderColor: 'transparent',
-      listColor: vars.inputColorOverlay,
-      headerColor: vars.tableHeaderColorOverlay,
-      headerTextColor: vars.textColor1Overlay,
-      headerTextColorDisabled: vars.textColorDisabledOverlay,
-      headerExtraTextColor: vars.textColor2Overlay,
-      filterBorderColor: vars.borderColorOverlay,
-      itemTextColor: vars.textColor2Overlay,
-      itemTextColorDisabled: vars.textColorDisabledOverlay,
-      itemColorPending: vars.hoverColorOverlay
+      listColor: inputColorOverlay,
+      headerColor: tableHeaderColorOverlay,
+      titleTextColor: textColor1Overlay,
+      titleTextColorDisabled: textColorDisabledOverlay,
+      headerExtraTextColor: textColor2Overlay,
+      filterDividerColor: borderColorOverlay,
+      itemTextColor: textColor2Overlay,
+      itemTextColorDisabled: textColorDisabledOverlay,
+      itemColorPending: hoverColorOverlay,
+      titleFontWeight: fontWeightStrong
     }
   }
-})
+}
