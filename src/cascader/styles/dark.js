@@ -1,4 +1,3 @@
-import { baseMenuMaskDark } from '../../_base/menu-mask/styles'
 import { baseSelectionDark } from '../../_base/selection/styles'
 import { baseSelectMenuDark } from '../../_base/select-menu/styles'
 import { scrollbarDark } from '../../scrollbar/styles'
@@ -6,9 +5,9 @@ import { checkboxDark } from '../../checkbox/styles'
 import { commonDark } from '../../_styles/new-common'
 
 export default {
+  name: 'Cascader',
   common: commonDark,
   peers: {
-    BaseMenuMask: baseMenuMaskDark,
     BaseSelectMenu: baseSelectMenuDark,
     BaseSelection: baseSelectionDark,
     Scrollbar: scrollbarDark,

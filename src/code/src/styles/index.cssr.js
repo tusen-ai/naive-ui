@@ -22,8 +22,7 @@ export default c([
     display: block;
     font-size: var(--font-size);
     font-family: var(--font-family);
-  `,
-  [
+  `, [
     c('pre', `
       margin: 0;
       font-family: inherit;

@@ -3,7 +3,10 @@ import { inputDark } from '../../input/styles'
 import { commonDark } from '../../_styles/new-common'
 
 export default {
+  name: 'AutoComplete',
   common: commonDark,
-  self () {},
-  peers: [baseSelectMenuDark, inputDark]
+  peers: {
+    BaseSelectMenu: baseSelectMenuDark,
+    Input: inputDark
+  }
 }

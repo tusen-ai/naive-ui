@@ -27,9 +27,9 @@
           @click="handleClick"
         >
           <slot>
-            <n-icon>
+            <n-base-icon>
               <back-top-icon />
-            </n-icon>
+            </n-base-icon>
           </slot>
         </div>
       </transition>
@@ -38,21 +38,23 @@
 </template>
 
 <script>
-import { ref, computed, toRef, watch, nextTick } from 'vue'
+import { ref, computed, toRef, watch, nextTick, defineComponent } from 'vue'
 import { VLazyTeleport } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
 import { getScrollParent, unwrapElement } from 'seemly'
 import { useTheme } from '../../_mixins'
+import { NBaseIcon } from '../../_base'
 import { formatLength, warn } from '../../_utils'
 import { backTopLight } from '../styles'
-import style from './styles/index.cssr.js'
 import BackTopIcon from './BackTopIcon.vue'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'BackTop',
   components: {
     VLazyTeleport,
-    BackTopIcon
+    BackTopIcon,
+    NBaseIcon
   },
   inheritAttrs: false,
   props: {
@@ -149,7 +151,8 @@ export default {
             width,
             height,
             iconSize,
-            borderRadius
+            borderRadius,
+            textColor
           },
           common: { cubicBezierEaseInOut }
         } = themeRef.value
@@ -165,7 +168,8 @@ export default {
           '--icon-size': iconSize,
           '--icon-color': iconColor,
           '--icon-color-hover': iconColorHover,
-          '--icon-color-pressed': iconColorPressed
+          '--icon-color-pressed': iconColorPressed,
+          '--text-color': textColor
         }
       })
     }
@@ -243,5 +247,5 @@ export default {
       this.transitionDisabled = false
     }
   }
-}
+})
 </script>

@@ -3,7 +3,10 @@ import { inputLight } from '../../input/styles'
 import { commonLight } from '../../_styles/new-common'
 
 export default {
+  name: 'AutoComplete',
   common: commonLight,
-  self () {},
-  peers: [baseSelectMenuLight, inputLight]
+  peers: {
+    BaseSelectMenu: baseSelectMenuLight,
+    Input: inputLight
+  }
 }

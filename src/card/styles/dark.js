@@ -1,10 +1,9 @@
-import { iconDark } from '../../icon/styles'
-import commonVariables from './_common'
 import { commonDark } from '../../_styles/new-common'
+import commonVariables from './_common'
 
 export default {
+  name: 'Card',
   common: commonDark,
-  peers: [iconDark],
   self (vars) {
     const {
       borderRadius,

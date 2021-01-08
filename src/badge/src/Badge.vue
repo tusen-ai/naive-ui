@@ -1,13 +1,10 @@
 <template>
   <div
     class="n-badge"
-    :class="[
-      `n-badge--${type}-type`,
-      {
-        'n-badge--dot': dot,
-        [`n-badge--as-is`]: !$slots.default
-      }
-    ]"
+    :class="{
+      'n-badge--dot': dot,
+      [`n-badge--as-is`]: !$slots.default
+    }"
     :style="cssVars"
   >
     <slot />
@@ -19,7 +16,6 @@
       <sup v-if="showBadge" class="n-badge-sup">
         <n-base-slot-machine
           v-if="!dot"
-          :theme="'light'"
           :appeared="appeared"
           :max="max"
           :value="value"

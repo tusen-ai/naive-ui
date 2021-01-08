@@ -2,6 +2,7 @@ import commonVariables from './_common'
 import { commonLight } from '../../_styles/new-common'
 
 export default {
+  name: 'Breadcrumb',
   common: commonLight,
   self (vars) {
     const {

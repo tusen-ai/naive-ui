@@ -1,22 +1,22 @@
 // unified entry for styles
-export {
-  baseClearButtonDark,
-  baseClearButtonLight
-} from './_base/clear-button/styles'
+// export {
+//   baseClearButtonDark,
+//   baseClearButtonLight
+// } from './_base/clear-button/styles'
 // export { baseLoadingDark, baseLoadingLight } from './_base/loading/styles'
-export { baseMenuMaskDark, baseMenuMaskLight } from './_base/menu-mask/styles'
-export { baseSelectionDark, baseSelectionLight } from './_base/selection/styles'
-export {
-  baseSelectMenuDark,
-  baseSelectMenuLight
-} from './_base/select-menu/styles'
-export {
-  baseSlotMachineDark,
-  baseSlotMachineLight
-} from './_base/slot-machine/styles'
+// export { baseMenuMaskDark, baseMenuMaskLight } from './_base/menu-mask/styles'
+// export { baseSelectionDark, baseSelectionLight } from './_base/selection/styles'
+// export {
+//   baseSelectMenuDark,
+//   baseSelectMenuLight
+// } from './_base/select-menu/styles'
+// export {
+//   baseSlotMachineDark,
+//   baseSlotMachineLight
+// } from './_base/slot-machine/styles'
 // export { baseWaveDark, baseWaveLight } from './_base/wave/styles'
 // exposed style
-export { baseDark, baseLight } from './_styles/base'
+// export { baseDark, baseLight } from './_styles/base'
 // export { affixDark, affixLight } from './affix/styles'
 // export { alertDark, alertLight } from './alert/styles'
 // export { anchorDark, anchorLight } from './anchor/styles'

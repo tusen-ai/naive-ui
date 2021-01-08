@@ -17,8 +17,9 @@
           :value="mergedValue"
         >
           <n-input
+            :unstable-theme="theme.peers.Input"
+            :unstable-theme-overrides="theme.overrides.Input"
             :bordered="mergedBordered"
-            :theme="'light'"
             :value="mergedValue"
             :placeholder="placeholder"
             :size="mergedSize"
@@ -45,10 +46,11 @@
           v-if="active"
           ref="menuRef"
           v-clickoutside="handleClickOutsideMenu"
+          :unstable-theme="theme.peers.BaseSelectMenu"
+          :unstable-theme-overrides="theme.overrides.BaseSelectMenu"
           auto-pending
           class="n-auto-complete-menu"
           :style="cssVars"
-          :theme="'light'"
           :pattern="value"
           :tree-mate="treeMate"
           :multiple="false"
@@ -61,7 +63,7 @@
 </template>
 
 <script>
-import { ref, toRef, computed } from 'vue'
+import { ref, toRef, computed, defineComponent } from 'vue'
 import { createTreeMate } from 'treemate'
 import { VBinder, VTarget, VFollower } from 'vueuc'
 import { clickoutside } from 'vdirs'
@@ -72,9 +74,9 @@ import { NBaseSelectMenu } from '../../_base'
 import { NInput } from '../../input'
 import { autoCompleteLight } from '../styles'
 import { mapAutoCompleteOptionsToSelectOptions } from './utils'
-import style from './styles/index.cssr'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'AutoComplete',
   components: {
     NInput,
@@ -181,6 +183,7 @@ export default {
       isComposing: ref(false),
       menuRef: ref(null),
       triggerRef: ref(null),
+      theme: themeRef,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut }
@@ -315,5 +318,5 @@ export default {
       }
     }
   }
-}
+})
 </script>

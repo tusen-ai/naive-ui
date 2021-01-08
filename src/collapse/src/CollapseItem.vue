@@ -18,9 +18,9 @@
       </slot>
       <div class="n-collapse-item-arrow">
         <slot name="arrow" :collapsed="collapsed">
-          <n-icon color-transition>
+          <n-base-icon>
             <arrow-icon />
-          </n-icon>
+          </n-base-icon>
         </slot>
       </div>
       <slot v-if="arrowPlacement === 'left'" name="header">
@@ -37,16 +37,16 @@
 </template>
 
 <script>
-import { toRef } from 'vue'
-import { NIcon } from '../../icon'
+import { toRef, defineComponent } from 'vue'
 import { ChevronRightIcon as ArrowIcon } from '../../_base/icons'
-import NCollapseItemContent from './CollapseItemContent.js'
+import { NBaseIcon } from '../../_base'
 import { useInjectionCollection } from '../../_utils/composable'
+import NCollapseItemContent from './CollapseItemContent.js'
 
-export default {
+export default defineComponent({
   name: 'CollapseItem',
   components: {
-    NIcon,
+    NBaseIcon,
     NCollapseItemContent,
     ArrowIcon
   },
@@ -107,5 +107,5 @@ export default {
       }
     }
   }
-}
+})
 </script>

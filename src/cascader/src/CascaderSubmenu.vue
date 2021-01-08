@@ -1,6 +1,10 @@
 <template>
   <div class="n-cascader-submenu">
-    <n-scrollbar ref="scrollbarRef">
+    <n-scrollbar
+      ref="scrollbarRef"
+      :unstable-theme="NCascader.theme.peers.Scrollbar"
+      :unstable-theme-overrides="NCascader.theme.overrides.Scrollbar"
+    >
       <n-cascader-option
         v-for="tmNode in tmNodes"
         ref="options"
@@ -12,11 +16,11 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, defineComponent } from 'vue'
 import NCascaderOption from './CascaderOption.vue'
 import { NScrollbar } from '../../scrollbar'
 
-export default {
+export default defineComponent({
   name: 'NCascaderSubmenu',
   components: {
     NCascaderOption,
@@ -38,5 +42,5 @@ export default {
       scrollbarRef: ref(null)
     }
   }
-}
+})
 </script>

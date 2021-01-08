@@ -6,7 +6,8 @@
           ref="triggerRef"
           :bordered="mergedBordered"
           :size="mergedSize"
-          :theme="'light'"
+          :unstable-theme="theme.peers.BaseSelection"
+          :unstable-theme-overrides="theme.overrides.BaseSelection"
           :active="mergedShow"
           :pattern="pattern"
           :placeholder="localizedPlaceholder"
@@ -50,7 +51,6 @@
           }"
           :value="mergedValue"
           :show="mergedShow && !showSelectMenu"
-          :theme="'light'"
           :size="mergedSize"
           :menu-model="menuModel"
           :style="cssVars"
@@ -72,7 +72,6 @@
           }"
           :value="mergedValue"
           :show="mergedShow && showSelectMenu"
-          :theme="'light'"
           :pattern="pattern"
           :size="mergedSize"
           :multiple="multiple"
@@ -85,9 +84,9 @@
 </template>
 
 <script>
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, provide, getCurrentInstance } from 'vue'
 import { VBinder, VTarget, VFollower } from 'vueuc'
-import { depx } from 'seemly'
+import { depx, changeColor } from 'seemly'
 import { NBaseSelection } from '../../_base'
 import { useLocale, useTheme, useConfig } from '../../_mixins'
 import { warn, call } from '../../_utils'
@@ -107,11 +106,6 @@ export default defineComponent({
     VBinder,
     VTarget,
     VFollower
-  },
-  provide () {
-    return {
-      NCascader: this
-    }
   },
   props: {
     ...useTheme.props,
@@ -220,6 +214,7 @@ export default defineComponent({
       cascaderLight,
       props
     )
+    provide('NCascader', getCurrentInstance().proxy)
     return Object.assign(
       useCascader(props),
       useConfig(props),
@@ -228,6 +223,7 @@ export default defineComponent({
         optionHeight: computed(() => {
           return themeRef.value.self.optionHeight
         }),
+        theme: themeRef,
         cssVars: computed(() => {
           const {
             self: {
@@ -260,7 +256,8 @@ export default defineComponent({
             '--option-text-color-active': optionTextColorActive,
             '--option-color-hover': optionColorHover,
             '--option-check-mark-color': optionCheckMarkColor,
-            '--option-arrow-color': optionArrowColor
+            '--option-arrow-color': optionArrowColor,
+            '--menu-mask-color': changeColor(menuColor, { alpha: 0.75 })
           }
         })
       }

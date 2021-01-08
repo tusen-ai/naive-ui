@@ -1,5 +1,5 @@
 <template>
-  <div class="n-anchor" :style="cssVars">
+  <div class="n-anchor">
     <div ref="slot" class="n-anchor-link-background" />
     <div class="n-anchor-rail">
       <div
@@ -15,13 +15,10 @@
 </template>
 
 <script>
-import { nextTick, ref, markRaw, getCurrentInstance, computed } from 'vue'
+import { nextTick, ref, markRaw, getCurrentInstance } from 'vue'
 import { getScrollParent, unwrapElement } from 'seemly'
 import { onFontsReady } from 'vooks'
-import { useTheme } from '../../_mixins'
 import { warn } from '../../_utils'
-import { anchorLight } from '../styles'
-import style from './styles/index.cssr'
 
 function getOffset (el, container) {
   const { top: elTop, height } = el.getBoundingClientRect()
@@ -73,38 +70,11 @@ export default {
       vm.setActiveHref(window.location)
       vm.handleScroll(false)
     })
-    const themeRef = useTheme('Anchor', 'Anchor', style, anchorLight, props)
     return {
       collectedLinkHrefs: markRaw([]),
       titleEls: markRaw([]),
       activeHref: ref(null),
-      scrollElement: ref(null),
-      cssVars: computed(() => {
-        const {
-          self: {
-            railColor,
-            linkColor,
-            railColorActive,
-            linkTextColor,
-            linkTextColorHover,
-            linkTextColorPressed,
-            linkTextColorActive,
-            linkFontSize
-          },
-          common: { cubicBezierEaseInOut }
-        } = themeRef.value
-        return {
-          '--link-color': linkColor,
-          '--link-font-size': linkFontSize,
-          '--link-text-color': linkTextColor,
-          '--link-text-color-hover': linkTextColorHover,
-          '--link-text-color-active': linkTextColorActive,
-          '--link-text-color-pressed': linkTextColorPressed,
-          '--bezier': cubicBezierEaseInOut,
-          '--rail-color': railColor,
-          '--rail-color-active': railColorActive
-        }
-      })
+      scrollElement: ref(null)
     }
   },
   watch: {

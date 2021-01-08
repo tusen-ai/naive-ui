@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, defineComponent } from 'vue'
 import { VirtualList } from 'vueuc'
 import { depx } from 'seemly'
 import { NEmpty } from '../../../empty'
@@ -82,7 +82,7 @@ import NSelectGroupHeader from './SelectGroupHeader.js'
 import style from './styles/index.cssr.js'
 import { baseSelectMenuLight } from '../styles'
 
-export default {
+export default defineComponent({
   name: 'BaseSelectMenu',
   components: {
     VirtualList,
@@ -97,6 +97,7 @@ export default {
     }
   },
   props: {
+    ...useTheme.props,
     scrollable: {
       type: Boolean,
       default: true
@@ -318,5 +319,5 @@ export default {
       }
     }
   }
-}
+})
 </script>

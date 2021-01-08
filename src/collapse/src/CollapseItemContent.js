@@ -1,7 +1,7 @@
-import { h, withDirectives, vShow } from 'vue'
+import { h, withDirectives, vShow, defineComponent } from 'vue'
 import { NFadeInExpandTransition } from '../../_base'
 
-export default {
+export default defineComponent({
   name: 'NCollapseItemContent',
   props: {
     displayDirective: {
@@ -49,4 +49,4 @@ export default {
           : null
     })
   }
-}
+})

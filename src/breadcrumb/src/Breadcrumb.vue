@@ -5,12 +5,12 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { useTheme } from '../../_mixins'
 import { breadcrumbLight } from '../styles'
 import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Breadcrumb',
   provide () {
     return {
@@ -59,5 +59,5 @@ export default {
       })
     }
   }
-}
+})
 </script>

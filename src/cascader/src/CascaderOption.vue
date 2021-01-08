@@ -15,6 +15,8 @@
         :disabled="disabled"
         :checked="checked"
         :indeterminate="indeterminate"
+        :unstable-theme="NCascader.theme.peers.Checkbox"
+        :unstable-theme-overrides="NCascader.theme.overrides.Checkbox"
         @click.stop="handleCheck"
       />
     </div>
@@ -27,7 +29,6 @@
           :stroke-width="20"
           :show="isLoading"
           class="n-cascader-option-icon"
-          :theme="NCascader.mergedTheme"
         >
           <n-icon
             key="arrow"
@@ -53,13 +54,13 @@
 </template>
 
 <script>
-import { computed, inject, toRef } from 'vue'
+import { computed, inject, toRef, defineComponent } from 'vue'
 import { NCheckbox } from '../../checkbox'
 import { NBaseLoading } from '../../_base'
 import { ChevronRightIcon, CheckmarkIcon } from '../../_base/icons'
 import { useMemo } from 'vooks'
 
-export default {
+export default defineComponent({
   name: 'NCascaderOption',
   components: {
     NCheckbox,
@@ -67,6 +68,7 @@ export default {
     ChevronRightIcon,
     CheckmarkIcon
   },
+  inject: ['NCascader'],
   props: {
     tmNode: {
       type: Object,
@@ -199,5 +201,5 @@ export default {
       }
     }
   }
-}
+})
 </script>

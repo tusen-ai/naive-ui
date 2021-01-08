@@ -5,8 +5,7 @@
       'n-checkbox--checked': renderedChecked,
       'n-checkbox--disabled': mergedDisabled,
       'n-checkbox--indeterminate': indeterminate,
-      'n-checkbox--table-header': tableHeader,
-      [`n-checkbox--${mergedSize}-size`]: true
+      'n-checkbox--table-header': tableHeader
     }"
     :tabindex="mergedDisabled ? false : 0"
     :style="cssVars"
@@ -157,6 +156,7 @@ export default defineComponent({
       NCheckboxGroup,
       mergedDisabled: mergedDisabledRef,
       renderedChecked: renderedCheckedRef,
+      theme: themeRef,
       cssVars: computed(() => {
         const {
           mergedSize: { value: mergedSize }

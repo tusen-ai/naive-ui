@@ -4,7 +4,11 @@ import { affixDark } from '../../affix/styles'
 import commonVars from './_common'
 
 export default {
+  name: 'Anchor',
   common: commonDark,
+  peers: {
+    Affix: affixDark
+  },
   self (vars) {
     const {
       borderRadius,
@@ -25,6 +29,5 @@ export default {
       linkTextColorPressed: primaryColorPressed,
       linkTextColorActive: primaryColor
     }
-  },
-  peers: [affixDark]
+  }
 }

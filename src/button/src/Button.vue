@@ -3,17 +3,12 @@
     ref="selfRef"
     class="n-button"
     :class="{
-      'n-button--round': round,
-      'n-button--circle': circle,
       'n-button--disabled': disabled,
       'n-button--block': block,
       'n-button--pressed': enterPressed,
-      'n-button--ghost': !text && (ghost || dashed),
-      'n-button--text': text,
       'n-button--dashed': !text && dashed,
       'n-button--color': color,
-      [`n-button--${type}-type`]: true,
-      [`n-button--${mergedSize}-size`]: true
+      [`n-button--${type}-type`]: true
     }"
     :tabindex="mergedFocusable ? 0 : -1"
     :type="attrType"
@@ -76,6 +71,10 @@
 <script>
 import { ref, computed, inject, nextTick } from 'vue'
 import { useMemo } from 'vooks'
+import {
+  createHoverColor,
+  createPressedColor
+} from '../../_utils/color/index.js'
 import { useTheme } from '../../_mixins'
 import {
   NFadeInExpandTransition,
@@ -83,10 +82,6 @@ import {
   NBaseLoading,
   NBaseWave
 } from '../../_base'
-import {
-  createHoverColor,
-  createPressedColor
-} from '../../_utils/color/index.js'
 import { createKey } from '../../_utils'
 import { buttonLight } from '../styles'
 import style from './styles/button.cssr.js'

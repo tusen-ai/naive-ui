@@ -1,6 +1,7 @@
 import { commonLight } from '../../_styles/new-common'
 
 export default {
+  name: 'Code',
   common: commonLight,
   self (vars) {
     const { textColor2, fontSize, fontWeightStrong } = vars

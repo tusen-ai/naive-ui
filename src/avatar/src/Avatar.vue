@@ -1,13 +1,5 @@
 <template>
-  <span
-    ref="selfRef"
-    class="n-avatar"
-    :class="{
-      [`n-avatar--${size}-size`]: typeof size !== 'number',
-      [`n-avatar--circle-shaped`]: circle || round
-    }"
-    :style="cssVars"
-  >
+  <span ref="selfRef" class="n-avatar" :style="cssVars">
     <img v-if="!$slots.default && src" :src="src">
     <slot v-else-if="$slots.icon" name="icon" />
     <span
@@ -25,14 +17,14 @@
 </template>
 
 <script>
-import { ref, computed, onUpdated, onMounted } from 'vue'
+import { ref, computed, onUpdated, onMounted, defineComponent } from 'vue'
 import { useTheme } from '../../_mixins'
 import { avatarLight } from '../styles'
-import style from './styles/index.cssr.js'
-import { validSize } from './config'
 import { createKey } from '../../_utils'
+import { validSize } from './config'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Avatar',
   props: {
     ...useTheme.props,
@@ -132,5 +124,5 @@ export default {
       })
     }
   }
-}
+})
 </script>

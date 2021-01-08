@@ -1,11 +1,11 @@
-import { computed, h, markRaw } from 'vue'
+import { computed, h, markRaw, defineComponent } from 'vue'
 import { intersection } from 'lodash-es'
 import { useTheme } from '../../_mixins'
 import { call, warn } from '../../_utils'
 import { collapseLight } from '../styles'
 import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Collapse',
   provide () {
     return {
@@ -38,6 +38,7 @@ export default {
       type: Function,
       default: undefined
     },
+    // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:expandedNames': {
       type: Function,
       default: undefined
@@ -66,6 +67,7 @@ export default {
     )
     return {
       collectedItemNames: markRaw([]),
+      theme: themeRef,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
@@ -149,4 +151,4 @@ export default {
       this.$slots
     )
   }
-}
+})

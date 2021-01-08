@@ -15,14 +15,14 @@ import fadeInHeightExpandTranstion from '../../../_styles/transitions/fade-in-he
 // --border-radius
 // --font-size
 // --title-font-weight
-export default cB('alert', {
-  lineHeight: 'var(--line-height)',
-  borderRadius: 'var(--border-radius)',
-  position: 'relative',
-  transition: 'background-color .3s var(--bezier)',
-  backgroundColor: 'var(--color)',
-  textAlign: 'start'
-}, [
+export default cB('alert', `
+  line-height: var(--line-height);
+  border-radius: var(--border-radius);
+  position: relative;
+  transition: background-color .3s var(--bezier);
+  background-color: var(--color);
+  text-align: start;
+`, [
   cE('close', {
     color: 'var(--close-color)'
   }, [
@@ -82,17 +82,17 @@ export default cB('alert', {
       cursor: 'pointer'
     })
   ]),
-  cB('alert-body', {
-    borderRadius: 'var(--border-radius)',
-    padding: '15px 15px 15px 47px',
-    transition: 'border-color .3s var(--bezier)'
-  }, [
-    cE('title', {
-      transition: 'color .3s var(--bezier)',
-      fontSize: '16px',
-      lineHeight: '19px',
-      fontWeight: 'var(--title-font-weight)'
-    }, [
+  cB('alert-body', `
+    border-radius: var(--border-radius);
+    padding: 15px 15px 15px 47px;
+    transition: border-color .3s var(--bezier);
+  `, [
+    cE('title', `
+      transition: color .3s var(--bezier);
+      font-size: 16px;
+      line-height: 19px;
+      font-weight: var(--title-font-weight);
+    `, [
       c('& +', [
         cE('content', {
           marginTop: '9px'

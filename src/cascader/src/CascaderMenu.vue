@@ -7,10 +7,6 @@
       v-if="show"
       v-clickoutside="handleClickOutside"
       class="n-cascader-menu"
-      :class="{
-        [`n-${theme}-theme`]: theme,
-        [`n-cascader-menu--${size}-size`]: size
-      }"
       @mousedown.capture="handleMenuMouseDown"
     >
       <!-- TODO: refactor ref -->
@@ -26,17 +22,17 @@
         :tm-nodes="submenuOptions"
         :depth="index + 1"
       />
-      <n-base-menu-mask ref="maskRef" :theme="theme" />
+      <n-base-menu-mask ref="maskRef" />
     </div>
   </transition>
 </template>
 <script>
-import { ref } from 'vue'
+import { ref, defineComponent } from 'vue'
 import { clickoutside } from 'vdirs'
 import { NBaseMenuMask } from '../../_base'
 import NCascaderSubmenu from './CascaderSubmenu.vue'
 
-export default {
+export default defineComponent({
   name: 'NCascaderMenu',
   components: {
     NCascaderSubmenu,
@@ -121,5 +117,5 @@ export default {
       this.NCascader.handleCascaderMenuClickOutside(e)
     }
   }
-}
+})
 </script>

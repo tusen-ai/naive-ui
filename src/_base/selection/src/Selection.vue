@@ -178,6 +178,7 @@ export default defineComponent({
     NTag
   },
   props: {
+    ...useTheme.props,
     bordered: {
       type: Boolean,
       default: undefined

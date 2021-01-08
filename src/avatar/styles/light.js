@@ -1,6 +1,7 @@
 import { commonLight } from '../../_styles/new-common'
 
 export default {
+  name: 'Avatar',
   common: commonLight,
   self (vars) {
     const {

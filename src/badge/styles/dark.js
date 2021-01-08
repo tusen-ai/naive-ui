@@ -1,11 +1,8 @@
-import { baseSlotMachineDark } from '../../_base/slot-machine/styles'
 import { commonDark } from '../../_styles/new-common'
 
 export default {
+  name: 'Badge',
   common: commonDark,
-  peers: {
-    BaseSlotMachine: baseSlotMachineDark
-  },
   self (vars) {
     const {
       errorColorSuppl,

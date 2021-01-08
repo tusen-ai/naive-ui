@@ -4,7 +4,11 @@ import { affixLight } from '../../affix/styles'
 import commonVars from './_common'
 
 export default {
+  name: 'Anchor',
   common: commonLight,
+  peers: {
+    Affix: affixLight
+  },
   self (vars) {
     const {
       borderRadius,

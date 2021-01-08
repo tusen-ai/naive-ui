@@ -13,14 +13,14 @@
 </template>
 
 <script>
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, defineComponent } from 'vue'
 import { getScrollParent, unwrapElement } from 'seemly'
 import { useConfig, useTheme } from '../../_mixins'
 import { warn } from '../../_utils'
 import { affixLight } from '../styles'
 import style from './styles/index.cssr'
 
-export default {
+export default defineComponent({
   name: 'Affix',
   props: {
     listenTo: {
@@ -176,5 +176,5 @@ export default {
       })
     }
   }
-}
+})
 </script>

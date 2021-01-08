@@ -58,8 +58,8 @@ function useTheme (resolveId, mountId, style, defaultTheme, props) {
     return {
       common: mergedCommon,
       self: mergedSelf,
-      peersTheme: merge(peers, injectedPeers),
-      peersOverride: merge(peersOverrides, injectedPeersOverrides)
+      peers: merge(peers, injectedPeers),
+      overrides: merge(peersOverrides, injectedPeersOverrides)
     }
   })
   return mergedThemeRef

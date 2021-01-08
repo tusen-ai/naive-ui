@@ -65,7 +65,6 @@ import { transferDark } from './transfer/styles'
 import { typographyDark } from './typography/styles'
 import { treeDark } from './tree/styles'
 import { uploadDark } from './upload/styles'
-import { baseSelectionDark } from './_base/selection/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -134,7 +133,5 @@ export const darkTheme = {
   Transfer: transferDark,
   Tree: treeDark,
   Typography: typographyDark,
-  Upload: uploadDark,
-  // danger zone
-  BaseSelection: baseSelectionDark
+  Upload: uploadDark
 }

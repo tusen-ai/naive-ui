@@ -1,8 +1,9 @@
-import commonVariables from './_common'
 import { changeColor } from 'seemly'
 import { commonLight } from '../../_styles/new-common'
+import commonVariables from './_common'
 
 export default {
+  name: 'Checkbox',
   common: commonLight,
   self (vars) {
     const {

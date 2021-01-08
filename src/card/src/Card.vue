@@ -26,15 +26,14 @@
       <div v-if="$slots['header-extra']" class="n-card-header__extra">
         <slot name="header-extra" />
       </div>
-      <n-icon
+      <n-base-icon
         v-if="closable"
-        class="n-card-header__close-mark"
+        class="n-card-header__close"
         size="16"
-        color-transition
         @click="handleCloseClick"
       >
         <close-icon />
-      </n-icon>
+      </n-base-icon>
     </div>
     <div class="n-card__content" :style="contentStyle">
       <slot />
@@ -50,10 +49,10 @@
 
 <script>
 import { defineComponent, computed } from 'vue'
+import { CloseIcon } from '../../_base/icons'
 import { useTheme } from '../../_mixins'
 import { createKey } from '../../_utils'
-import { NIcon } from '../../icon'
-import { CloseIcon } from '../../_base/icons'
+import { NBaseIcon } from '../../_base'
 import { cardLight } from '../styles'
 import style from './styles/index.cssr.js'
 
@@ -61,7 +60,7 @@ export default defineComponent({
   name: 'Card',
   components: {
     CloseIcon,
-    NIcon
+    NBaseIcon
   },
   props: {
     ...useTheme.props,
@@ -106,6 +105,7 @@ export default defineComponent({
     const themeRef = useTheme('Card', 'Card', style, cardLight, props)
     return {
       handleCloseClick,
+      theme: themeRef,
       cssVars: computed(() => {
         const { size } = props
         const {

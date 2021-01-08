@@ -1,7 +1,8 @@
 <template>
   <n-base-anchor
     v-if="!affix"
-    ref="anchor"
+    ref="anchorRef"
+    :style="cssVars"
     :listen-to="listenTo"
     :bound="bound"
     :target="target"
@@ -11,6 +12,8 @@
   </n-base-anchor>
   <n-affix
     v-else
+    :unstable-theme="theme.peers.Affix"
+    :unstable-theme-overrides="theme.overrides.Affix"
     :listen-to="listenTo"
     :top="top"
     :bottom="bottom"
@@ -20,8 +23,8 @@
     :target="target"
   >
     <n-base-anchor
-      ref="anchor"
-      :unstable-theme="unstableTheme"
+      ref="anchorRef"
+      :style="cssVars"
       :bound="bound"
       :listen-to="listenTo"
       :ignore-gap="ignoreGap"
@@ -33,11 +36,14 @@
 </template>
 
 <script>
-import { useTheme } from '../../_mixins'
+import { defineComponent, computed, ref } from 'vue'
 import { NAffix } from '../../affix'
+import { useTheme } from '../../_mixins'
+import { anchorLight } from '../styles'
+import style from './styles/index.cssr'
 import NBaseAnchor from './BaseAnchor.vue'
 
-export default {
+export default defineComponent({
   name: 'Anchor',
   components: {
     NBaseAnchor,
@@ -89,10 +95,42 @@ export default {
       default: undefined
     }
   },
-  methods: {
-    scrollTo (href) {
-      this.$refs.anchor.setActiveHref(href)
+  setup (props) {
+    const themeRef = useTheme('Anchor', 'Anchor', style, anchorLight, props)
+    const anchorRef = ref(null)
+    return {
+      anchorRef,
+      scrollTo (href) {
+        anchorRef.value.setActiveHref(href)
+      },
+      theme: themeRef,
+      cssVars: computed(() => {
+        const {
+          self: {
+            railColor,
+            linkColor,
+            railColorActive,
+            linkTextColor,
+            linkTextColorHover,
+            linkTextColorPressed,
+            linkTextColorActive,
+            linkFontSize
+          },
+          common: { cubicBezierEaseInOut }
+        } = themeRef.value
+        return {
+          '--link-color': linkColor,
+          '--link-font-size': linkFontSize,
+          '--link-text-color': linkTextColor,
+          '--link-text-color-hover': linkTextColorHover,
+          '--link-text-color-active': linkTextColorActive,
+          '--link-text-color-pressed': linkTextColorPressed,
+          '--bezier': cubicBezierEaseInOut,
+          '--rail-color': railColor,
+          '--rail-color-active': railColorActive
+        }
+      })
     }
   }
-}
+})
 </script>

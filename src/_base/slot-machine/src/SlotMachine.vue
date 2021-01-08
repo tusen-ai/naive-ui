@@ -1,5 +1,5 @@
 <template>
-  <span v-if="valueIsNumber" class="n-base-slot-machine" :style="cssVars">
+  <span v-if="valueIsNumber" class="n-base-slot-machine">
     <transition-group name="n-fade-up-width-expand-transition" tag="span">
       <slot-machine-number
         v-for="(number, i) in numbers"
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { defineComponent, computed } from 'vue'
+import { defineComponent } from 'vue'
 import { NFadeInExpandTransition } from '../../../_base'
 import { useStyle } from '../../../_mixins'
 import SlotMachineNumber from './SlotMachineNumber.vue'
@@ -46,17 +46,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const themeRef = useStyle('BaseSlotMachine', style)
-    return {
-      cssVars: computed(() => {
-        const {
-          common: { cubicBezierEaseOut }
-        } = themeRef.value
-        return {
-          '--bezier-ease-out': cubicBezierEaseOut
-        }
-      })
-    }
+    useStyle('BaseSlotMachine', style)
   },
   data () {
     return {

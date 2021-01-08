@@ -4,31 +4,30 @@
       v-if="visible"
       class="n-alert"
       :class="{
-        [`n-alert--${type}-type`]: true,
         'n-alert--no-icon': showIcon === false
       }"
       :style="cssVars"
+      v-bind="$attrs"
     >
       <div v-if="closable" class="n-alert__close" @click="handleCloseClick">
-        <n-icon>
+        <n-icon
+          :unstable-theme="theme.peers.Icon"
+          :unstable-theme-overrides="theme.overrides.Icon"
+        >
           <close-icon />
         </n-icon>
       </div>
       <div v-if="showIcon" class="n-alert__icon">
-        <n-icon v-if="$slots.icon">
-          <slot name="icon" />
-        </n-icon>
-        <n-icon v-else-if="type === 'success'">
-          <success-icon />
-        </n-icon>
-        <n-icon v-else-if="type === 'info'">
-          <info-icon />
-        </n-icon>
-        <n-icon v-else-if="type === 'warning'">
-          <warning-icon />
-        </n-icon>
-        <n-icon v-else-if="type === 'error'">
-          <error-icon />
+        <slot v-if="$slots.icon" name="icon" />
+        <n-icon
+          v-else
+          :unstable-theme="theme.peers.Icon"
+          :unstable-theme-overrides="theme.overrides.Icon"
+        >
+          <success-icon v-if="type === 'success'" />
+          <info-icon v-else-if="type === 'info'" />
+          <warning-icon v-else-if="type === 'warning'" />
+          <error-icon v-else-if="type === 'error'" />
         </n-icon>
       </div>
       <div class="n-alert-body">
@@ -46,15 +45,7 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
-import { NIcon } from '../../icon'
-import { NFadeInExpandTransition } from '../../_base'
-import { useTheme } from '../../_mixins'
-import { warn, createKey } from '../../_utils'
-import { alertLight } from '../styles'
-import style from './styles/index.cssr'
-
-// icons
+import { ref, computed, defineComponent } from 'vue'
 import {
   InfoIcon,
   SuccessIcon,
@@ -62,8 +53,14 @@ import {
   ErrorIcon,
   CloseIcon
 } from '../../_base/icons'
+import { NIcon } from '../../icon'
+import { NFadeInExpandTransition } from '../../_base'
+import { useTheme } from '../../_mixins'
+import { warn, createKey } from '../../_utils'
+import { alertLight } from '../styles'
+import style from './styles/index.cssr'
 
-export default {
+export default defineComponent({
   name: 'Alert',
   components: {
     NIcon,
@@ -74,6 +71,7 @@ export default {
     ErrorIcon,
     CloseIcon
   },
+  inheritAttrs: false,
   props: {
     ...useTheme.props,
     title: {
@@ -169,8 +167,9 @@ export default {
       visible: visibleRef,
       handleCloseClick,
       handleAfterLeave,
+      theme: themeRef,
       cssVars
     }
   }
-}
+})
 </script>

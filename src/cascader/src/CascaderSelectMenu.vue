@@ -9,7 +9,8 @@
       v-clickoutside="handleClickOutside"
       class="n-cascader-menu"
       auto-pending
-      :theme="theme"
+      :unstable-theme-overrides="NCascader.theme.peers.BaseSelectMenu"
+      :unstable-theme="NCascader.theme.overrides.BaseSelectMenu"
       :pattern="pattern"
       :tree-mate="selectTreeMate"
       :multiple="multiple"
@@ -21,13 +22,13 @@
 </template>
 
 <script>
-import { ref, inject, toRef } from 'vue'
+import { ref, inject, toRef, defineComponent } from 'vue'
 import { clickoutside } from 'vdirs'
 import { createTreeMate } from 'treemate'
 import { NBaseSelectMenu } from '../../_base'
 import { createSelectOptions } from './utils'
 
-export default {
+export default defineComponent({
   name: 'NCascaderSelectMenu',
   components: {
     NBaseSelectMenu
@@ -35,6 +36,7 @@ export default {
   directives: {
     clickoutside
   },
+  inject: ['NCascader'],
   props: {
     value: {
       type: [String, Number, Array],
@@ -164,5 +166,5 @@ export default {
       this.NCascader.handleSelectMenuClickOutside(e)
     }
   }
-}
+})
 </script>

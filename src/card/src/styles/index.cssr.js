@@ -88,7 +88,8 @@ export default cB(
           transition: color .3s var(--bezier);
           color: var(--text-color);
         `),
-        cE('close-mark', `
+        cE('close', `
+          font-size: 16px;
           cursor: pointer;
           transition: color .3s var(--bezier);
           color: var(--close-color);

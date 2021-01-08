@@ -1,10 +1,9 @@
 import commonVariables from './_common.js'
-import { iconLight } from '../../icon/styles'
 import { commonLight } from '../../_styles/new-common'
 
 export default {
+  name: 'BackTop',
   common: commonLight,
-  peer: [iconLight],
   self (vars) {
     const {
       popoverColor,
@@ -15,6 +14,7 @@ export default {
     return {
       ...commonVariables,
       color: popoverColor,
+      textColor: textColor2,
       iconColor: textColor2,
       iconColorHover: primaryColorHover,
       iconColorPressed: primaryColorPressed,

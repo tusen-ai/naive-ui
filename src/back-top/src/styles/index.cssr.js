@@ -14,29 +14,31 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // --icon-color
 // --icon-color-hover
 // --icon-color-pressed
+// --text-color
 export default cB('back-top', `
-    position: fixed;
-    right: 40px;
-    bottom: 40px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition:
-      color .3s var(--bezier),
-      box-shadow .3s var(--bezier),
-      background-color .3s var(--bezier);
-    border-radius: var(--border-radius);
-    height: var(--height);
-    min-width: var(--width);
-    box-shadow: var(--box-shadow);
-    background-color: var(--color);
-  `, [
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+  transition:
+    color .3s var(--bezier),
+    box-shadow .3s var(--bezier),
+    background-color .3s var(--bezier);
+  border-radius: var(--border-radius);
+  height: var(--height);
+  min-width: var(--width);
+  box-shadow: var(--box-shadow);
+  background-color: var(--color);
+`, [
   fadeInScaleUpTransition(),
   cM('transition-disabled', {
     transition: 'none !important'
   }),
-  cB('icon', `
+  cB('base-icon', `
     font-size: var(--icon-size);
     color: var(--icon-color);
     transition: color .3s var(--bezier);
@@ -47,14 +49,14 @@ export default cB('back-top', `
   c('&:hover', {
     boxShadow: 'var(--box-shadow-hover)'
   }, [
-    cB('icon', {
+    cB('base-icon', {
       color: 'var(--icon-color-hover)'
     })
   ]),
   c('&:active', {
     boxShadow: 'var(--box-shadow-pressed)'
   }, [
-    cB('icon', {
+    cB('base-icon', {
       color: 'var(--icon-color-pressed)'
     })
   ])

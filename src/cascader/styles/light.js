@@ -1,4 +1,3 @@
-import { baseMenuMaskLight } from '../../_base/menu-mask/styles'
 import { baseSelectionLight } from '../../_base/selection/styles'
 import { baseSelectMenuLight } from '../../_base/select-menu/styles'
 import { scrollbarLight } from '../../scrollbar/styles'
@@ -6,9 +5,9 @@ import { checkboxLight } from '../../checkbox/styles'
 import { commonLight } from '../../_styles/new-common'
 
 export default {
+  name: 'Cascader',
   common: commonLight,
   peers: {
-    BaseMenuMask: baseMenuMaskLight,
     BaseSelectMenu: baseSelectMenuLight,
     BaseSelection: baseSelectionLight,
     Scrollbar: scrollbarLight,
