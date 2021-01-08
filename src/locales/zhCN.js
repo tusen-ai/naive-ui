@@ -69,7 +69,7 @@ export default {
     goto: '跳至',
     selectionSuffix: '页'
   },
-  Tag: {
+  DynamicTags: {
     add: '添加'
   },
   Log: {

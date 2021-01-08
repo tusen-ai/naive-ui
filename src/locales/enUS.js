@@ -70,7 +70,7 @@ export default {
     goto: 'Goto',
     selectionSuffix: 'page'
   },
-  Tag: {
+  DynamicTags: {
     add: 'Add'
   },
   Log: {

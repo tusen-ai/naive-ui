@@ -151,7 +151,7 @@ import { isEqual } from 'lodash-es'
 import { useIsMounted, useMergedState } from 'vooks'
 import { NInput } from '../../input'
 import { NIcon } from '../../icon'
-import { locale, useFormItem, useTheme, useConfig } from '../../_mixins'
+import { useFormItem, useTheme, useConfig, useLocale } from '../../_mixins'
 import { CalendarIcon } from '../../_base/icons'
 import { warn, call, useAdjustedTo, createKey } from '../../_utils'
 import { datePickerLight } from '../styles'
@@ -190,7 +190,6 @@ export default defineComponent({
     DaterangePanel,
     CalendarIcon
   },
-  mixins: [locale('DatePicker')],
   provide () {
     return {
       NDatePicker: this
@@ -322,6 +321,7 @@ export default defineComponent({
       adjustedTo: useAdjustedTo(props),
       ...uniCalendarValidation(props, mergedValueRef),
       ...dualCalendarValidation(props, mergedValueRef),
+      ...useLocale('DatePicker'),
       ...useFormItem(props),
       ...useConfig(props),
       cssVars: computed(() => {

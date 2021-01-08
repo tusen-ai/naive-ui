@@ -57,7 +57,7 @@
 import { computed, defineComponent, ref } from 'vue'
 import { nextFrame } from 'seemly'
 import { isPlainObject } from 'lodash-es'
-import { locale, useTheme } from '../../_mixins'
+import { useLocale, useTheme } from '../../_mixins'
 import BaseTable from './BaseTable.vue'
 import { NEmpty } from '../../empty'
 import { NPagination } from '../../pagination'
@@ -125,7 +125,6 @@ export default defineComponent({
     NEmpty,
     NPagination
   },
-  mixins: [locale('DataTable')],
   provide () {
     return {
       NDataTable: this
@@ -303,6 +302,7 @@ export default defineComponent({
       props
     )
     return {
+      ...useLocale('DataTable'),
       mainTableRef: ref(null),
       cssVars: computed(() => {
         const { size } = props

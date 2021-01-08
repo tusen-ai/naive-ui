@@ -89,7 +89,7 @@ import { defineComponent, computed } from 'vue'
 import { VBinder, VTarget, VFollower } from 'vueuc'
 import { depx } from 'seemly'
 import { NBaseSelection } from '../../_base'
-import { locale, useTheme, useConfig } from '../../_mixins'
+import { useLocale, useTheme, useConfig } from '../../_mixins'
 import { warn, call } from '../../_utils'
 import { cascaderLight } from '../styles'
 import { useCascader } from './composables'
@@ -108,7 +108,6 @@ export default defineComponent({
     VTarget,
     VFollower
   },
-  mixins: [locale('Cascader')],
   provide () {
     return {
       NCascader: this
@@ -221,46 +220,51 @@ export default defineComponent({
       cascaderLight,
       props
     )
-    return Object.assign(useCascader(props), useConfig(props), {
-      optionHeight: computed(() => {
-        return themeRef.value.self.optionHeight
-      }),
-      cssVars: computed(() => {
-        const {
-          self: {
-            optionArrowColor,
-            optionTextColor,
-            optionTextColorActive,
-            optionTextColorDisabled,
-            optionCheckMarkColor,
-            menuColor,
-            menuBoxShadow,
-            menuDividerColor,
-            menuBorderRadius,
-            optionColorHover,
-            optionHeight,
-            optionFontSize
-          },
-          common: { cubicBezierEaseInOut }
-        } = themeRef.value
-        return {
-          '--bezier': cubicBezierEaseInOut,
-          '--menu-border-radius': menuBorderRadius,
-          '--menu-box-shadow': menuBoxShadow,
-          '--menu-height': `calc(6.6 * ${optionHeight})`,
-          '--menu-color': menuColor,
-          '--menu-divider-color': menuDividerColor,
-          '--option-height': optionHeight,
-          '--option-font-size': optionFontSize,
-          '--option-text-color': optionTextColor,
-          '--option-text-color-disabled': optionTextColorDisabled,
-          '--option-text-color-active': optionTextColorActive,
-          '--option-color-hover': optionColorHover,
-          '--option-check-mark-color': optionCheckMarkColor,
-          '--option-arrow-color': optionArrowColor
-        }
-      })
-    })
+    return Object.assign(
+      useCascader(props),
+      useConfig(props),
+      useLocale('Cascader'),
+      {
+        optionHeight: computed(() => {
+          return themeRef.value.self.optionHeight
+        }),
+        cssVars: computed(() => {
+          const {
+            self: {
+              optionArrowColor,
+              optionTextColor,
+              optionTextColorActive,
+              optionTextColorDisabled,
+              optionCheckMarkColor,
+              menuColor,
+              menuBoxShadow,
+              menuDividerColor,
+              menuBorderRadius,
+              optionColorHover,
+              optionHeight,
+              optionFontSize
+            },
+            common: { cubicBezierEaseInOut }
+          } = themeRef.value
+          return {
+            '--bezier': cubicBezierEaseInOut,
+            '--menu-border-radius': menuBorderRadius,
+            '--menu-box-shadow': menuBoxShadow,
+            '--menu-height': `calc(6.6 * ${optionHeight})`,
+            '--menu-color': menuColor,
+            '--menu-divider-color': menuDividerColor,
+            '--option-height': optionHeight,
+            '--option-font-size': optionFontSize,
+            '--option-text-color': optionTextColor,
+            '--option-text-color-disabled': optionTextColorDisabled,
+            '--option-text-color-active': optionTextColorActive,
+            '--option-color-hover': optionColorHover,
+            '--option-check-mark-color': optionCheckMarkColor,
+            '--option-arrow-color': optionArrowColor
+          }
+        })
+      }
+    )
   },
   computed: {
     localizedPlaceholder () {

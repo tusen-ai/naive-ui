@@ -1,10 +1,9 @@
 import { h } from 'vue'
-import { configurable, themeable, useFormItem } from '../../_mixins'
+import { useFormItem } from '../../_mixins'
 import { warn, call, getSlot } from '../../_utils'
 
 export default {
   name: 'CheckboxGroup',
-  mixins: [configurable, themeable],
   provide () {
     return {
       NCheckboxGroup: this

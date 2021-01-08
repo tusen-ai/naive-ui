@@ -1,13 +1,9 @@
-import { baseWaveDark } from '../../_base/wave/styles'
 import commonVariables from './_common'
 import { commonDark } from '../../_styles/new-common'
 
 export default {
   name: 'Button',
   common: commonDark,
-  peers: {
-    BaseWave: baseWaveDark
-  },
   self (vars) {
     const {
       heightTiny,

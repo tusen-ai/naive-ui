@@ -1,7 +1,6 @@
 import { changeColor } from 'seemly'
 import { iconDark } from '../../icon/styles'
 import { checkboxDark } from '../../checkbox/styles'
-import { baseLoadingDark } from '../../_base/loading/styles'
 import { commonDark } from '../../_styles/new-common'
 
 export default {
@@ -9,8 +8,7 @@ export default {
   common: commonDark,
   peers: {
     Icon: iconDark,
-    Checkbox: checkboxDark,
-    BaseLoading: baseLoadingDark
+    Checkbox: checkboxDark
   },
   self (vars) {
     const {

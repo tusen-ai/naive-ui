@@ -62,7 +62,7 @@ import { useMergedState } from 'vooks'
 import { createId } from 'seemly'
 import { NButton, NButtonGroup } from '../../button'
 import { RemoveIcon, AddIcon } from '../../_base/icons'
-import { useFormItem, useTheme, locale } from '../../_mixins'
+import { useFormItem, useTheme, useLocale } from '../../_mixins'
 import { warn, call } from '../../_utils'
 import { dynamicInputLight } from '../styles'
 import NDynamicInputInputPreset from './InputPreset.vue'
@@ -81,7 +81,6 @@ export default defineComponent({
     AddIcon,
     RemoveIcon
   },
-  mixins: [locale('DynamicInput')],
   provide () {
     return {
       NDynamicInput: this
@@ -178,6 +177,7 @@ export default defineComponent({
       props
     )
     return {
+      ...useLocale('DynamicInput'),
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: useMergedState(controlledValueRef, uncontrolledValueRef),
       dataKeyMap: globalDataKeyMap,

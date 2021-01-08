@@ -1,5 +1,4 @@
 import { baseMenuMaskDark } from '../../_base/menu-mask/styles'
-import { baseLoadingDark } from '../../_base/loading/styles'
 import { baseSelectionDark } from '../../_base/selection/styles'
 import { baseSelectMenuDark } from '../../_base/select-menu/styles'
 import { scrollbarDark } from '../../scrollbar/styles'
@@ -12,7 +11,6 @@ export default {
     BaseMenuMask: baseMenuMaskDark,
     BaseSelectMenu: baseSelectMenuDark,
     BaseSelection: baseSelectionDark,
-    BaseLoading: baseLoadingDark,
     Scrollbar: scrollbarDark,
     Checkbox: checkboxDark
   },

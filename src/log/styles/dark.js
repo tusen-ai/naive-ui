@@ -1,4 +1,3 @@
-import { baseLoadingDark } from '../../_base/loading/styles'
 import { scrollbarDark } from '../../scrollbar/styles'
 import { commonDark } from '../../_styles/new-common'
 import { codeDark } from '../../code/styles'
@@ -7,7 +6,6 @@ export default {
   name: 'Log',
   common: commonDark,
   peers: {
-    BaseLoading: baseLoadingDark,
     Scrollbar: scrollbarDark,
     Code: codeDark
   },

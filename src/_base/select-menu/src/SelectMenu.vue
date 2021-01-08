@@ -2,9 +2,7 @@
   <div
     class="n-base-select-menu"
     :class="{
-      [`n-base-select-menu--${size}-size`]: true,
-      'n-base-select-menu--multiple': multiple,
-      [`n-${theme}-theme`]: theme
+      'n-base-select-menu--multiple': multiple
     }"
     :style="style"
     @keyup.up.stop="handleKeyUpUp"
@@ -65,14 +63,15 @@
 import { ref, onMounted, computed } from 'vue'
 import { VirtualList } from 'vueuc'
 import { depx } from 'seemly'
-import { NScrollbar } from '../../../scrollbar'
-import NSelectOption from './SelectOption.js'
-import NSelectGroupHeader from './SelectGroupHeader.js'
 import { NEmpty } from '../../../empty'
+import { NScrollbar } from '../../../scrollbar'
 import { formatLength } from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
-import { withCssr } from '../../../_mixins'
-import styles from './styles'
+import { useTheme } from '../../../_mixins'
+import NSelectOption from './SelectOption.js'
+import NSelectGroupHeader from './SelectGroupHeader.js'
+import style from './styles/index.cssr.js'
+import { baseSelectMenuLight } from '../styles'
 
 export default {
   name: 'BaseSelectMenu',
@@ -83,22 +82,12 @@ export default {
     NEmpty,
     NSelectGroupHeader
   },
-  mixins: [
-    withCssr(styles, {
-      themeKey: 'theme',
-      injectCssrProps: true
-    })
-  ],
   provide () {
     return {
       NBaseSelectMenu: this
     }
   },
   props: {
-    theme: {
-      type: String,
-      default: undefined
-    },
     scrollable: {
       type: Boolean,
       default: true
@@ -146,6 +135,13 @@ export default {
     }
   },
   setup (props) {
+    const themeRef = useTheme(
+      'BaseSelectMenu',
+      'BaseSelectMenu',
+      style,
+      baseSelectMenuLight,
+      props
+    )
     const virtualListRef = ref(null)
     const scrollbarRef = ref(null)
     const { treeMate } = props
@@ -160,6 +156,9 @@ export default {
             : treeMate.getNode(props.value) || treeMate.getFirstAvailableNode()
         : null
     )
+    const itemSizeRef = computed(() => {
+      return depx(themeRef.value.self[createKey('optionHeight', props.size)])
+    })
     onMounted(() => {
       const { value } = scrollbarRef
       if (value) value.sync()
@@ -177,7 +176,49 @@ export default {
         return value && value.itemsRef
       },
       pendingTmNode: pendingNodeRef,
-      defaultScrollIndex: pendingNodeRef.value?.fIndex
+      defaultScrollIndex: pendingNodeRef.value?.fIndex,
+      itemSize: itemSizeRef,
+      cssVars: computed(() => {
+        const { size } = props
+        const {
+          common: { cubicBezierEaseInOut },
+          self: {
+            borderRadius,
+            color,
+            boxShadow,
+            groupHeaderTextColor,
+            actionDividerColor,
+            optionTextColorPressed,
+            optionTextColor,
+            optionTextColorDisabled,
+            optionTextColorActive,
+            optionOpacityDisabled,
+            optionCheckColor,
+            actionTextColor,
+            optionColorPending,
+            [createKey('optionFontSize', size)]: fontSize,
+            [createKey('optionHeight', size)]: optionHeight
+          }
+        } = themeRef.value
+        return {
+          '--action-divider-color': actionDividerColor,
+          '--action-text-color': actionTextColor,
+          '--bezier': cubicBezierEaseInOut,
+          '--border-radius': borderRadius,
+          '--box-shadow': boxShadow,
+          '--color': color,
+          '--option-font-size': fontSize,
+          '--group-header-text-color': groupHeaderTextColor,
+          '--option-check-color': optionCheckColor,
+          '--option-color-pending': optionColorPending,
+          '--option-height': optionHeight,
+          '--option-opacity-disabled': optionOpacityDisabled,
+          '--option-text-color': optionTextColor,
+          '--option-text-color-active': optionTextColorActive,
+          '--option-text-color-disabled': optionTextColorDisabled,
+          '--option-text-color-pressed': optionTextColorPressed
+        }
+      })
     }
   },
   computed: {
@@ -189,12 +230,10 @@ export default {
       const { tmNodes } = this
       return tmNodes && tmNodes.length === 0
     },
-    itemSize () {
-      return depx(this.cssrProps.$local[createKey('optionHeight', this.size)])
-    },
     style () {
       return {
-        width: formatLength(this.width)
+        width: formatLength(this.width),
+        ...this.cssVars
       }
     }
   },

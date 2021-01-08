@@ -47,7 +47,7 @@ import { defineComponent, ref } from 'vue'
 import { NTag } from '../../tag'
 import { NIcon } from '../../icon'
 import { AddIcon } from '../../_base/icons'
-import { useTheme, useFormItem, locale } from '../../_mixins'
+import { useTheme, useFormItem, useLocale } from '../../_mixins'
 import commonProps from '../../tag/src/common-props'
 import { warn, call } from '../../_utils'
 import { dynamicTagsLight } from '../styles'
@@ -60,7 +60,6 @@ export default defineComponent({
     NIcon,
     AddIcon
   },
-  mixins: [locale('Tag')],
   props: {
     ...useTheme.props,
     ...commonProps,
@@ -112,6 +111,7 @@ export default defineComponent({
   setup (props) {
     useTheme('DynamicTags', 'DynamicTags', style, dynamicTagsLight, props)
     return {
+      ...useLocale('DynamicTags'),
       inputValue: ref(''),
       inputVisible: ref(false),
       inputForceFocused: ref(true),

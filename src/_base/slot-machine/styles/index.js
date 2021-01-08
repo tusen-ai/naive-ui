@@ -1,2 +1,2 @@
-export { default as baseSelectionLight } from './light'
-export { default as baseSelectionDark } from './dark'
+export { default as baseSlotMachineLight } from './light'
+export { default as baseSlotMachineDark } from './dark'

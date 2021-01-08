@@ -1,11 +1,10 @@
-import { NBaseFocusDetector } from '../../../_base'
 import {
   FastForwardIcon,
   FastBackwardIcon,
   BackwardIcon,
   ForwardIcon
 } from '../../../_base/icons'
-import { locale } from '../../../_mixins'
+import { NBaseFocusDetector } from '../../../_base'
 
 const TIME_CONST = {
   hours: [
@@ -163,7 +162,6 @@ const TIME_CONST = {
 const daysKey = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 export default {
-  mixins: [locale('DatePicker')],
   inject: {
     NDatePicker: {
       default: null
@@ -210,7 +208,7 @@ export default {
       return this.NDatePicker.timePickerSize
     },
     weekdays () {
-      return daysKey.map((weekday) => this.locale[weekday])
+      return daysKey.map((weekday) => this.NDatePicker.locale[weekday])
     }
   },
   methods: {

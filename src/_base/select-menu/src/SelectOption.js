@@ -1,7 +1,7 @@
-import { h, inject, toRef } from 'vue'
+import { h, inject, toRef, defineComponent } from 'vue'
 import { useMemo } from 'vooks'
 
-export default {
+export default defineComponent({
   name: 'NBaseSelectOption',
   inject: {
     NBaseSelectMenu: {
@@ -87,4 +87,4 @@ export default {
       children
     )
   }
-}
+})

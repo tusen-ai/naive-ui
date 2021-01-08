@@ -1,27 +1,44 @@
-import create from '../../../_styles/utils/create-component-base'
+import { emptyDark } from '../../../empty/styles'
 import { scrollbarDark } from '../../../scrollbar/styles'
+import { commonDark } from '../../../_styles/new-common'
 import commonVariables from './_common'
 
-export default create({
+export default {
   name: 'BaseSelectMenu',
-  theme: 'dark',
-  peer: [scrollbarDark],
+  common: commonDark,
+  peers: {
+    Scrollbar: scrollbarDark,
+    Empty: emptyDark
+  },
   getLocalVars (vars) {
+    const {
+      borderRadius,
+      popoverColor,
+      boxShadow2,
+      textColor3Overlay,
+      dividerColorOverlay,
+      textColor2Overlay,
+      primaryColorPressed,
+      textColorDisabledOverlay,
+      opacityDisabled,
+      primaryColor,
+      hoverColorOverlay
+    } = vars
     return {
       ...commonVariables,
-      borderRadius: vars.borderRadius,
-      color: vars.popoverColor,
-      boxShadow: vars.boxShadow2,
-      groupHeaderTextColor: vars.textColor3Overlay,
-      actionDividerColor: vars.dividerColorOverlay,
-      optionTextColor: vars.textColor2Overlay,
-      optionTextColorPressed: vars.primaryColorPressed,
-      optionTextColorDisabled: vars.textColorDisabledOverlay,
-      optionTextColorSelected: vars.primaryColor,
-      optionOpacityDisabled: vars.opacityDisabled,
-      optionCheckColor: vars.primaryColor,
-      optionColorPending: vars.hoverColorOverlay,
-      actionTextColor: vars.textColor2Overlay
+      borderRadius: borderRadius,
+      color: popoverColor,
+      boxShadow: boxShadow2,
+      groupHeaderTextColor: textColor3Overlay,
+      actionDividerColor: dividerColorOverlay,
+      optionTextColor: textColor2Overlay,
+      optionTextColorPressed: primaryColorPressed,
+      optionTextColorDisabled: textColorDisabledOverlay,
+      optionTextColorActive: primaryColor,
+      optionOpacityDisabled: opacityDisabled,
+      optionCheckColor: primaryColor,
+      optionColorPending: hoverColorOverlay,
+      actionTextColor: textColor2Overlay
     }
   }
-})
+}

@@ -1,27 +1,44 @@
-import create from '../../../_styles/utils/create-component-base'
+import { emptyLight } from '../../../empty/styles'
 import { scrollbarLight } from '../../../scrollbar/styles'
+import { commonLight } from '../../../_styles/new-common'
 import commonVariables from './_common'
 
-export default create({
+export default {
   name: 'BaseSelectMenu',
-  theme: 'light',
-  peer: [scrollbarLight],
-  getLocalVars (vars) {
+  common: commonLight,
+  peers: {
+    Scrollbar: scrollbarLight,
+    Empty: emptyLight
+  },
+  self (vars) {
+    const {
+      borderRadius,
+      popoverColor,
+      boxShadow2,
+      textColor3,
+      dividerColorOverlay,
+      textColor2,
+      primaryColorPressed,
+      textColorDisabled,
+      primaryColor,
+      opacityDisabled,
+      hoverColorOverlay
+    } = vars
     return {
       ...commonVariables,
-      borderRadius: vars.borderRadius,
-      color: vars.popoverColor,
-      boxShadow: vars.boxShadow2,
-      groupHeaderTextColor: vars.textColor3,
-      actionDividerColor: vars.dividerColorOverlay,
-      optionTextColor: vars.textColor2,
-      optionTextColorPressed: vars.primaryColorPressed,
-      optionTextColorDisabled: vars.textColorDisabled,
-      optionTextColorSelected: vars.primaryColor,
-      optionOpacityDisabled: vars.opacityDisabled,
-      optionCheckColor: vars.primaryColor,
-      optionColorPending: vars.hoverColorOverlay,
-      actionTextColor: vars.textColor2
+      borderRadius: borderRadius,
+      color: popoverColor,
+      boxShadow: boxShadow2,
+      groupHeaderTextColor: textColor3,
+      actionDividerColor: dividerColorOverlay,
+      optionTextColor: textColor2,
+      optionTextColorPressed: primaryColorPressed,
+      optionTextColorDisabled: textColorDisabled,
+      optionTextColorActive: primaryColor,
+      optionOpacityDisabled: opacityDisabled,
+      optionCheckColor: primaryColor,
+      optionColorPending: hoverColorOverlay,
+      actionTextColor: textColor2
     }
   }
-})
+}

@@ -26,9 +26,9 @@
 
 <script>
 import { defineComponent, computed } from 'vue'
-import { locale, useTheme } from '../../_mixins'
-import { createKey } from '../../_utils'
 import { EmptyIcon } from '../../_base/icons'
+import { useLocale, useTheme } from '../../_mixins'
+import { createKey } from '../../_utils'
 import { NIcon } from '../../icon'
 import { emptyLight } from '../styles'
 import style from './styles/index.cssr.js'
@@ -39,7 +39,6 @@ export default defineComponent({
     EmptyIcon,
     NIcon
   },
-  mixins: [locale('Empty')],
   props: {
     ...useTheme.props,
     description: {
@@ -60,6 +59,7 @@ export default defineComponent({
   setup (props) {
     const themeRef = useTheme('Empty', 'Empty', style, emptyLight, props)
     return {
+      ...useLocale('Empty'),
       cssVars: computed(() => {
         const { size } = props
         const {

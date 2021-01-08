@@ -1,12 +1,8 @@
-import { baseLoadingDark } from '../../_base/loading/styles'
 import { commonDark } from '../../_styles/new-common'
 
 export default {
   name: 'Spin',
   common: commonDark,
-  peers: {
-    BaseLoading: baseLoadingDark
-  },
   self (vars) {
     const {
       opacityDisabled,
