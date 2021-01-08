@@ -1,15 +1,18 @@
-import create from '../../_styles/utils/create-component-base'
 import { changeColor } from 'seemly'
-import { baseDark } from '../../_styles/base'
 import { buttonDark } from '../../button/styles'
 import { iconDark } from '../../icon/styles'
 import { progressDark } from '../../progress/styles'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
+export default {
   name: 'Upload',
-  theme: 'dark',
-  peer: [baseDark, buttonDark, iconDark, progressDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  peers: {
+    Button: buttonDark,
+    Icon: iconDark,
+    Progress: progressDark
+  },
+  self (vars) {
     const {
       iconColorOverlay,
       primaryColor,
@@ -42,4 +45,4 @@ export default create({
       itemDisabledOpacity: opacityDisabled
     }
   }
-})
+}

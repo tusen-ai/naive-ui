@@ -54,8 +54,7 @@
 </template>
 
 <script>
-import { NButton } from '../../button'
-import NUploadProgress from './UploadProgress.vue'
+import { defineComponent } from 'vue'
 import {
   CancelIcon,
   DeleteIcon,
@@ -63,10 +62,12 @@ import {
   DownloadIcon
 } from '../../_base/icons'
 import { NIcon } from '../../icon'
+import { NButton } from '../../button'
 import { NIconSwitchTransition } from '../../_base'
 import { warn } from '../../_utils'
+import NUploadProgress from './UploadProgress.vue'
 
-export default {
+export default defineComponent({
   name: 'UploadFile',
   components: {
     NButton,
@@ -172,5 +173,5 @@ export default {
       this.handleRemove(Object.assign({}, file))
     }
   }
-}
+})
 </script>

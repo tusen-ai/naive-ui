@@ -12,10 +12,11 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import { NFadeInExpandTransition } from '../../_base'
 import { NProgress } from '../../progress'
 
-export default {
+export default defineComponent({
   name: 'UploadProgress',
   components: {
     NProgress,
@@ -57,5 +58,5 @@ export default {
   created () {
     this.postponedShow = this.show
   }
-}
+})
 </script>

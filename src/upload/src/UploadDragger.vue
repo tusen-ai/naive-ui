@@ -5,7 +5,9 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from 'vue'
+
+export default defineComponent({
   name: 'UploadDragger',
   inject: {
     NUpload: {
@@ -18,5 +20,5 @@ export default {
   beforeUnmount () {
     this.NUpload && (this.NUpload.draggerInside = false)
   }
-}
+})
 </script>

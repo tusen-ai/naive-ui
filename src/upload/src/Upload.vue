@@ -2,11 +2,11 @@
   <div
     class="n-upload"
     :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme,
       'n-upload--dragger-inside': draggerInside,
       'n-upload--drag-over': dragOver,
       'n-upload--disabled': disabled
     }"
+    :style="cssVars"
   >
     <input
       ref="input"
@@ -40,12 +40,14 @@
 </template>
 
 <script>
+import { defineComponent, computed } from 'vue'
 import { createId } from 'seemly'
-import { configurable, themeable, withCssr } from '../../_mixins'
+import { useTheme } from '../../_mixins'
 import { warn } from '../../_utils'
-import NUploadFile from './UploadFile.vue'
 import { NFadeInExpandTransition } from '../../_base'
-import styles from './styles'
+import { uploadLight } from '../styles'
+import NUploadFile from './UploadFile.vue'
+import style from './styles/index.cssr.js'
 
 /**
  * fils status ['pending', 'uploading', 'finished', 'removed', 'error']
@@ -151,13 +153,12 @@ function submit (
   componentInstance.change(fileAfterChange)
 }
 
-export default {
+export default defineComponent({
   name: 'Upload',
   components: {
     NUploadFile,
     NFadeInExpandTransition
   },
-  mixins: [configurable, themeable, withCssr(styles)],
   provide () {
     return {
       NUpload: this
@@ -248,6 +249,47 @@ export default {
     showDownloadButton: {
       type: Boolean,
       default: false
+    }
+  },
+  setup (props) {
+    const themeRef = useTheme('Upload', 'Upload', style, uploadLight, props)
+    return {
+      cssVars: computed(() => {
+        const {
+          common: { cubicBezierEaseInOut },
+          self: {
+            draggerColor,
+            draggerBorder,
+            draggerBorderHover,
+            itemColorHover,
+            itemColorHoverError,
+            itemTextColorError,
+            itemTextColorSuccess,
+            itemTextColor,
+            itemIconColor,
+            itemDisabledOpacity,
+            lineHeight,
+            borderRadius,
+            fontSize
+          }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--border-radius': borderRadius,
+          '--dragger-border': draggerBorder,
+          '--dragger-border-hover': draggerBorderHover,
+          '--dragger-color': draggerColor,
+          '--font-size': fontSize,
+          '--item-color-hover': itemColorHover,
+          '--item-color-hover-error': itemColorHoverError,
+          '--item-disabled-opacity': itemDisabledOpacity,
+          '--item-icon-color': itemIconColor,
+          '--item-text-color': itemTextColor,
+          '--item-text-color-error': itemTextColorError,
+          '--item-text-color-success': itemTextColorSuccess,
+          '--line-height': lineHeight
+        }
+      })
     }
   },
   data () {
@@ -382,5 +424,5 @@ export default {
       }
     }
   }
-}
+})
 </script>
