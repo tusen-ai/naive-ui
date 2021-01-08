@@ -10,15 +10,15 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from 'vue'
+
+export default defineComponent({
   name: 'Li',
-  cssrName: 'Typography',
-  cssrId: 'TypographyList',
   props: {
     alignText: {
       type: Boolean,
       default: false
     }
   }
-}
+})
 </script>

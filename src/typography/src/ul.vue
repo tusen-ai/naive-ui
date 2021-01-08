@@ -2,29 +2,61 @@
   <ul
     class="n-ul"
     :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme,
       'n-ul--align-text': alignText
     }"
-    v-bind="$attrs"
+    :style="cssVars"
   >
     <slot />
   </ul>
 </template>
 
 <script>
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles/list'
+import { defineComponent, computed } from 'vue'
+import { useTheme } from '../../_mixins'
+import { typographyLight } from '../styles'
+import style from './styles/list.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Ul',
-  cssrName: 'Typography',
-  cssrId: 'TypographyList',
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
+    ...useTheme.props,
     alignText: {
       type: Boolean,
       default: false
     }
+  },
+  setup (props) {
+    const themeRef = useTheme(
+      'Typography',
+      'Ol&Ul',
+      style,
+      typographyLight,
+      props
+    )
+    return {
+      cssVars: computed(() => {
+        const {
+          common: { cubicBezierEaseInOut },
+          self: {
+            olPadding,
+            ulPadding,
+            liMargin,
+            liTextColor,
+            liLineHeight,
+            liFontSize
+          }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--font-size': liFontSize,
+          '--line-height': liLineHeight,
+          '--text-color': liTextColor,
+          '--li-margin': liMargin,
+          '--ol-padding': olPadding,
+          '--ul-padding': ulPadding
+        }
+      })
+    }
   }
-}
+})
 </script>

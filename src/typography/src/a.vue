@@ -1,37 +1,39 @@
 <template>
-  <router-link
-    v-if="to"
-    class="n-a"
-    :to="to"
-    :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme
-    }"
-  >
+  <router-link v-if="to" class="n-a" :to="to" :style="cssVars">
     <slot />
   </router-link>
-  <a
-    v-else
-    class="n-a"
-    :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme
-    }"
-  ><slot /></a>
+  <a v-else class="n-a" :style="cssVars"><slot /></a>
 </template>
 
 <script>
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles/a'
+import { defineComponent, computed } from 'vue'
+import { useTheme } from '../../_mixins'
+import { typographyLight } from '../styles'
+import style from './styles/a.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'A',
-  cssrName: 'Typography',
-  cssrId: 'TypographyA',
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
+    ...useTheme.props,
     to: {
       type: [String, Object],
       default: null
     }
+  },
+  setup (props) {
+    const themeRef = useTheme('Typography', 'A', style, typographyLight, props)
+    return {
+      cssVars: computed(() => {
+        const {
+          common: { cubicBezierEaseInOut },
+          self: { aTextColor }
+        } = themeRef.value
+        return {
+          '--text-color': aTextColor,
+          '--bezier': cubicBezierEaseInOut
+        }
+      })
+    }
   }
-}
+})
 </script>

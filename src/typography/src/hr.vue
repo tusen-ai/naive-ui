@@ -1,22 +1,27 @@
 <template>
-  <ul
-    class="n-hr"
-    :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme
-    }"
-  >
+  <ul class="n-hr" :style="cssVars">
     <slot />
   </ul>
 </template>
 
 <script>
-import { configurable, themeable, withCssr } from '../../_mixins'
-import styles from './styles/hr'
+import { defineComponent, computed } from 'vue'
+import { useTheme } from '../../_mixins'
+import { typographyLight } from '../styles'
+import style from './styles/hr.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Hr',
-  cssrName: 'Typography',
-  cssrId: 'TypographyHr',
-  mixins: [configurable, themeable, withCssr(styles)]
-}
+  props: useTheme.props,
+  setup (props) {
+    const themeRef = useTheme('Typography', 'Hr', style, typographyLight, props)
+    return {
+      cssVars: computed(() => {
+        return {
+          '--color': themeRef.value.self.hrColor
+        }
+      })
+    }
+  }
+})
 </script>

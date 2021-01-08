@@ -3,67 +3,55 @@
     v-if="code"
     class="n-text"
     :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme,
       'n-text--code': code,
-      [`n-text--${type}-type`]: type,
       'n-text--delete': $props.delete,
       'n-text--strong': strong,
       'n-text--italic': italic,
-      'n-text--disabled': disabled,
-      'n-text--underline': underline,
-      [`n-text--${depth}-depth`]: depth
+      'n-text--underline': underline
     }"
-    v-bind="$attrs"
+    :style="cssVars"
   ><template v-if="!$props.delete"><slot /></template><del v-else><slot /></del></code>
   <del
     v-else-if="$props.delete"
     class="n-text"
     :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme,
       'n-text--code': code,
-      [`n-text--${type}-type`]: type,
       'n-text--delete': $props.delete,
       'n-text--strong': strong,
       'n-text--italic': italic,
-      'n-text--disabled': disabled,
-      'n-text--underline': underline,
-      [`n-text--${depth}-depth`]: depth
+      'n-text--underline': underline
     }"
-    v-bind="$attrs"
+    :style="cssVars"
   ><slot /></del>
   <component
     :is="compitableTag || 'span'"
     v-else
     class="n-text"
     :class="{
-      [`n-${mergedTheme}-theme`]: mergedTheme,
       'n-text--code': code,
-      [`n-text--${type}-type`]: type,
       'n-text--delete': $props.delete,
       'n-text--strong': strong,
       'n-text--italic': italic,
-      'n-text--disabled': disabled,
-      'n-text--underline': underline,
-      [`n-text--${depth}-depth`]: depth
+      'n-text--underline': underline
     }"
-    v-bind="$attrs"
+    :style="cssVars"
   >
     <slot />
   </component>
 </template>
 
 <script>
-import { configurable, themeable, withCssr } from '../../_mixins'
-import { warn } from '../../_utils'
+import { defineComponent, computed } from 'vue'
 import { useCompitable } from 'vooks'
-import styles from './styles/text'
+import { useTheme } from '../../_mixins'
+import { warn, createKey } from '../../_utils'
+import { typographyLight } from '../styles'
+import style from './styles/text.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Text',
-  cssrName: 'Typography',
-  cssrId: 'TypographyText',
-  mixins: [configurable, themeable, withCssr(styles)],
   props: {
+    ...useTheme.props,
     code: {
       type: Boolean,
       default: false
@@ -81,10 +69,6 @@ export default {
       default: false
     },
     italic: {
-      type: Boolean,
-      default: false
-    },
-    disabled: {
       type: Boolean,
       default: false
     },
@@ -114,9 +98,44 @@ export default {
     }
   },
   setup (props) {
+    const themeRef = useTheme(
+      'Typography',
+      'Text',
+      style,
+      typographyLight,
+      props
+    )
     return {
-      compitableTag: useCompitable(props, ['as', 'tag'])
+      compitableTag: useCompitable(props, ['as', 'tag']),
+      cssVars: computed(() => {
+        const { depth, type } = props
+        const textColorKey =
+          type === 'default'
+            ? depth === undefined
+              ? 'textColor'
+              : `textColor${depth}Depth`
+            : createKey('textColor', type)
+        const {
+          common: { fontWeightStrong, fontFamilyMono },
+          self: {
+            codeTextColor,
+            codeBorderRadius,
+            codeColor,
+            codeBorder,
+            [textColorKey]: textColor
+          }
+        } = themeRef.value
+        return {
+          '--text-color': textColor,
+          '--font-weight-strong': fontWeightStrong,
+          '--font-famliy-mono': fontFamilyMono,
+          '--code-border-radius': codeBorderRadius,
+          '--code-text-color': codeTextColor,
+          '--code-color': codeColor,
+          '--code-border': codeBorder
+        }
+      })
     }
   }
-}
+})
 </script>

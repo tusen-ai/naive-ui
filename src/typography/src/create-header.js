@@ -1,41 +1,79 @@
-import { h } from 'vue'
-import { configurable, themeable, withCssr } from '../../_mixins'
-import { getSlot } from '../../_utils'
-import styles from './styles/header'
+import { h, defineComponent, computed } from 'vue'
+import { useTheme } from '../../_mixins'
+import { getSlot, createKey } from '../../_utils'
+import { typographyLight } from '../styles'
+import style from './styles/header.cssr.js'
 
-export default (level) => ({
-  name: 'H' + level,
-  cssrName: 'Typography',
-  cssrId: 'TypographyHeader',
-  props: {
-    type: {
-      type: String,
-      default: 'default'
-    },
-    prefix: {
-      type: String,
-      default: undefined
-    },
-    alignText: {
-      type: Boolean,
-      default: false
-    }
-  },
-  mixins: [configurable, themeable, withCssr(styles)],
-  render () {
-    const props = this.$props
-    return h(
-      `h${level}`,
-      {
-        class: {
-          [`n-h${level}`]: true,
-          [`n-${this.mergedTheme}-theme`]: this.mergedTheme,
-          [`n-h${level}--${props.type}-type`]: props.type,
-          [`n-h${level}--prefix-bar`]: props.prefix,
-          [`n-h${level}--align-text`]: props.alignText
-        }
+export default (level) =>
+  defineComponent({
+    name: 'H' + level,
+    props: {
+      ...useTheme.props,
+      type: {
+        type: String,
+        default: 'default'
       },
-      getSlot(this)
-    )
-  }
-})
+      prefix: {
+        type: String,
+        default: undefined
+      },
+      alignText: {
+        type: Boolean,
+        default: false
+      }
+    },
+    setup (props) {
+      const themeRef = useTheme(
+        'Typography',
+        'H',
+        style,
+        typographyLight,
+        props
+      )
+      return {
+        cssVars: computed(() => {
+          const { type } = props
+          const {
+            common: { cubicBezierEaseInOut },
+            self: {
+              headerFontWeight,
+              headerTextColor,
+              [`headerPrefixWidth${level}`]: prefixWidth,
+              [`headerFontSize${level}`]: fontSize,
+              [`headerMargin${level}`]: margin,
+              [`headerBarWidth${level}`]: barWidth,
+              [createKey('headerBarColor', type)]: barColor
+            }
+          } = themeRef.value
+          return {
+            '--bezier': cubicBezierEaseInOut,
+            '--font-size': fontSize,
+            '--margin': margin,
+            '--bar-color': barColor,
+            '--bar-width': barWidth,
+            '--font-weight': headerFontWeight,
+            '--text-color': headerTextColor,
+            '--prefix-width': prefixWidth
+          }
+        })
+      }
+    },
+    render () {
+      const { prefix, alignText, cssVars } = this
+      return h(
+        `h${level}`,
+        {
+          class: [
+            'n-h',
+            `n-h${level}`,
+            {
+              'n-h--prefix-bar': prefix,
+              'n-h--align-text': alignText
+            }
+          ],
+          style: cssVars
+        },
+        getSlot(this)
+      )
+    }
+  })
