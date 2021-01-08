@@ -8,7 +8,9 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from 'vue'
+
+export default defineComponent({
   props: {
     onFocus: {
       type: Function,
@@ -29,5 +31,5 @@ export default {
       if (onBlur) onBlur(e)
     }
   }
-}
+})
 </script>

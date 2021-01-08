@@ -1,6 +1,6 @@
-import { h, nextTick, Transition } from 'vue'
+import { h, nextTick, Transition, defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   name: 'NBaseIconSwitchTransition',
   data () {
     return {
@@ -22,4 +22,4 @@ export default {
       this.$slots
     )
   }
-}
+})

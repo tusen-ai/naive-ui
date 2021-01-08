@@ -1,12 +1,8 @@
-import { baseLoadingLight } from '../../_base/loading/styles'
 import { commonLight } from '../../_styles/new-common'
 
 export default {
   name: 'Spin',
   common: commonLight,
-  peers: {
-    BaseLoading: baseLoadingLight
-  },
   self (vars) {
     const {
       opacityDisabled,

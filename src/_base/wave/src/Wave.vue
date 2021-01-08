@@ -8,17 +8,14 @@
 </template>
 
 <script>
-import { withCssr } from '../../../_mixins'
-import styles from './styles/index.js'
+import { defineComponent } from 'vue'
+import { useStyle } from '../../../_mixins'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'BaseWave',
-  mixins: [withCssr(styles)],
-  props: {
-    theme: {
-      type: String,
-      default: undefined
-    }
+  setup () {
+    useStyle('BaseWave', style)
   },
   data () {
     return {
@@ -50,5 +47,5 @@ export default {
       })
     }
   }
-}
+})
 </script>

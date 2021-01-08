@@ -1,10 +1,6 @@
-import create from '../../../_styles/utils/create-component-base'
+import { commonDark } from '../../../_styles/new-common'
 
-// no style, placeholder
-export default create({
-  theme: 'dark',
+export default {
   name: 'BaseSlotMachine',
-  getLocalVars (vars) {
-    return {}
-  }
-})
+  common: commonDark
+}

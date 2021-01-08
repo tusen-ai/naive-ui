@@ -1,5 +1,4 @@
 import { baseMenuMaskLight } from '../../_base/menu-mask/styles'
-import { baseLoadingLight } from '../../_base/loading/styles'
 import { baseSelectionLight } from '../../_base/selection/styles'
 import { baseSelectMenuLight } from '../../_base/select-menu/styles'
 import { scrollbarLight } from '../../scrollbar/styles'
@@ -12,7 +11,6 @@ export default {
     BaseMenuMask: baseMenuMaskLight,
     BaseSelectMenu: baseSelectMenuLight,
     BaseSelection: baseSelectionLight,
-    BaseLoading: baseLoadingLight,
     Scrollbar: scrollbarLight,
     Checkbox: checkboxLight
   },

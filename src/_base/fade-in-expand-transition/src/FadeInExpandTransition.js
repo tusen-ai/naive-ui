@@ -1,6 +1,6 @@
-import { h, Transition, TransitionGroup } from 'vue'
+import { h, Transition, TransitionGroup, defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   name: 'FadeInExpandTransition',
   props: {
     appear: {
@@ -96,4 +96,4 @@ export default {
       }
     )
   }
-}
+})

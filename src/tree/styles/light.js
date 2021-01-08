@@ -1,7 +1,6 @@
 import { changeColor } from 'seemly'
 import { iconLight } from '../../icon/styles'
 import { checkboxLight } from '../../checkbox/styles'
-import { baseLoadingLight } from '../../_base/loading/styles'
 import { commonLight } from '../../_styles/new-common'
 
 export default {
@@ -9,8 +8,7 @@ export default {
   common: commonLight,
   peers: {
     Icon: iconLight,
-    Checkbox: checkboxLight,
-    BaseLoading: baseLoadingLight
+    Checkbox: checkboxLight
   },
   self (vars) {
     const {

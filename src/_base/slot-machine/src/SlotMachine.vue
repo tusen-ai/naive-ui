@@ -1,5 +1,5 @@
 <template>
-  <span v-if="valueIsNumber" class="n-base-slot-machine">
+  <span v-if="valueIsNumber" class="n-base-slot-machine" :style="cssVars">
     <transition-group name="n-fade-up-width-expand-transition" tag="span">
       <slot-machine-number
         v-for="(number, i) in numbers"
@@ -19,23 +19,21 @@
 </template>
 
 <script>
+import { defineComponent, computed } from 'vue'
 import { NFadeInExpandTransition } from '../../../_base'
+import { useTheme } from '../../../_mixins'
+import { baseSlotMachineLight } from '../styles'
 import SlotMachineNumber from './SlotMachineNumber.vue'
-import { withCssr } from '../../../_mixins'
-import styles from './styles/index.js'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'BaseSlotMachine',
   components: {
     NFadeInExpandTransition,
     SlotMachineNumber
   },
-  mixins: [withCssr(styles)],
   props: {
-    theme: {
-      type: String,
-      default: undefined
-    },
+    ...useTheme.props,
     value: {
       type: [Number, String],
       default: 0
@@ -47,6 +45,25 @@ export default {
     appeared: {
       type: Boolean,
       required: true
+    }
+  },
+  setup (props) {
+    const themeRef = useTheme(
+      'BaseSlotMachine',
+      'BaseSlotMachine',
+      style,
+      baseSlotMachineLight,
+      props
+    )
+    return {
+      cssVars: computed(() => {
+        const {
+          common: { cubicBezierEaseOut }
+        } = themeRef.value
+        return {
+          '--bezier-ease-out': cubicBezierEaseOut
+        }
+      })
     }
   },
   data () {
@@ -84,5 +101,5 @@ export default {
       this.oldValue = oldValue
     }
   }
-}
+})
 </script>

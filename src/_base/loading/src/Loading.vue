@@ -1,6 +1,5 @@
 <template>
   <div
-    :class="{ [`n-${theme}-theme`]: theme }"
     class="n-base-loading"
     :style="{
       stroke
@@ -32,16 +31,16 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import { NIconSwitchTransition } from '../../../_base'
-import { withCssr } from '../../../_mixins'
-import styles from './styles/'
+import { useStyle } from '../../../_mixins'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'BaseLoading',
   components: {
     NIconSwitchTransition
   },
-  mixins: [withCssr(styles)],
   props: {
     scale: {
       type: Number,
@@ -50,10 +49,6 @@ export default {
     radius: {
       type: Number,
       default: 100
-    },
-    theme: {
-      type: String,
-      default: undefined
     },
     strokeWidth: {
       type: Number,
@@ -67,6 +62,9 @@ export default {
       type: Boolean,
       default: true
     }
+  },
+  setup () {
+    useStyle('BaseLoading', style)
   }
-}
+})
 </script>
