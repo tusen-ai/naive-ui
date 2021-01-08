@@ -1,11 +1,11 @@
-import { h, inject, computed } from 'vue'
+import { h, inject, computed, defineComponent } from 'vue'
 import { useMemo } from 'vooks'
 import NTreeNodeSwitcher from './TreeNodeSwitcher.vue'
 import NTreeNodeCheckbox from './TreeNodeCheckbox.vue'
 import NTreeNodeContent from './TreeNodeContent.vue'
 import { NFadeInExpandTransition } from '../../_base'
 
-const TreeNode = {
+const TreeNode = defineComponent({
   name: 'NTreeNode',
   inject: {
     NTree: {
@@ -200,6 +200,6 @@ const TreeNode = {
       ]
     )
   }
-}
+})
 
 export default TreeNode

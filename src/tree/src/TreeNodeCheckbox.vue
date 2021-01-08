@@ -1,7 +1,7 @@
 <template>
   <span class="n-tree-node-checkbox">
     <n-checkbox
-      :theme="NTree.mergedTheme"
+      :theme="'light'"
       :checked="checked"
       :indeterminate="indeterminate"
       @update:checked="handleUpdateValue"
@@ -10,9 +10,10 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import { NCheckbox } from '../../checkbox'
 
-export default {
+export default defineComponent({
   name: 'NTreeNodeCheckbox',
   components: {
     NCheckbox
@@ -49,5 +50,5 @@ export default {
       }
     }
   }
-}
+})
 </script>

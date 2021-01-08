@@ -27,7 +27,9 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from 'vue'
+
+export default defineComponent({
   name: 'NTreeNodeContent',
   props: {
     disabled: {
@@ -171,5 +173,5 @@ export default {
       this.doDrop(e, dropPosition)
     }
   }
-}
+})
 </script>

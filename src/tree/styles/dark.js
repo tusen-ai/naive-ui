@@ -1,15 +1,18 @@
-import create from '../../_styles/utils/create-component-base'
 import { changeColor } from 'seemly'
-import { baseDark } from '../../_styles/base'
 import { iconDark } from '../../icon/styles'
 import { checkboxDark } from '../../checkbox/styles'
 import { baseLoadingDark } from '../../_base/loading/styles'
+import { commonDark } from '../../_styles/new-common'
 
-export default create({
-  theme: 'dark',
+export default {
   name: 'Tree',
-  peer: [baseDark, iconDark, checkboxDark, baseLoadingDark],
-  getLocalVars (vars) {
+  common: commonDark,
+  peers: {
+    Icon: iconDark,
+    Checkbox: checkboxDark,
+    BaseLoading: baseLoadingDark
+  },
+  self (vars) {
     const {
       borderRadiusSmall,
       hoverColorOverlay,
@@ -22,13 +25,14 @@ export default create({
     } = vars
     return {
       fontSize,
-      borderRadiusSmall,
+      nodeBorderRadius: borderRadiusSmall,
       nodeColorHover: hoverColorOverlay,
       nodeColorPressed: activeColorOverlay,
-      nodeColorSelected: changeColor(primaryColor, { alpha: 0.15 }),
+      nodeColorActive: changeColor(primaryColor, { alpha: 0.15 }),
       arrowColor: textColor3Overlay,
       nodeTextColor: textColor2Overlay,
-      nodeTextColorDisabled: textColorDisabledOverlay
+      nodeTextColorDisabled: textColorDisabledOverlay,
+      loadingColor: primaryColor
     }
   }
-})
+}

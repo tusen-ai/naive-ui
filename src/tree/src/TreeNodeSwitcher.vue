@@ -12,17 +12,18 @@
         <n-icon v-if="!loading" key="switcher">
           <switcher-icon />
         </n-icon>
-        <n-base-loading v-else key="loading" :theme="NTree.mergedTheme" />
+        <n-base-loading v-else key="loading" :theme="'light'" />
       </n-icon-switch-transition>
     </div>
   </span>
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import { SwitcherIcon } from '../../_base/icons'
 import { NIconSwitchTransition, NBaseLoading } from '../../_base'
 
-export default {
+export default defineComponent({
   name: 'NTreeSwitcher',
   components: {
     SwitcherIcon,
@@ -61,5 +62,5 @@ export default {
       this.doClick()
     }
   }
-}
+})
 </script>

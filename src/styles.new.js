@@ -62,6 +62,7 @@ import { timePickerDark } from './time-picker/styles'
 import { timelineDark } from './timeline/styles'
 import { transferDark } from './transfer/styles'
 import { typographyDark } from './typography/styles'
+import { treeDark } from './tree/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -127,5 +128,6 @@ export const darkTheme = {
   TimePicker: timePickerDark,
   Timeline: timelineDark,
   Transfer: transferDark,
+  Tree: treeDark,
   Typography: typographyDark
 }

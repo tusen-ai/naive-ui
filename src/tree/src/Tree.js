@@ -1,15 +1,15 @@
-import { h, ref, toRef, computed } from 'vue'
+import { h, ref, toRef, computed, defineComponent } from 'vue'
 import { createTreeMate } from 'treemate'
 import { useMergedState } from 'vooks'
-import { configurable, themeable, withCssr } from '../../_mixins'
+import { useTheme } from '../../_mixins'
+import { call, warn } from '../../_utils'
+import { treeLight } from '../styles'
 import NTreeNode from './TreeNode'
 import { keysWithFilter } from './utils'
-import styles from './styles'
-import { call, warn } from '../../_utils'
+import style from './styles/index.cssr.js'
 
-export default {
+export default defineComponent({
   name: 'Tree',
-  mixins: [configurable, themeable, withCssr(styles)],
   provide () {
     return { NTree: this }
   },
@@ -52,7 +52,7 @@ export default {
     },
     defaultCheckedKeys: {
       type: Array,
-      default: []
+      default: () => []
     },
     expandedKeys: {
       type: Array,
@@ -60,7 +60,7 @@ export default {
     },
     defaultExpandedKeys: {
       type: Array,
-      default: []
+      default: () => []
     },
     selectedKeys: {
       type: Array,
@@ -68,7 +68,7 @@ export default {
     },
     defaultSelectedKeys: {
       type: Array,
-      default: []
+      default: () => []
     },
     remote: {
       type: Boolean,
@@ -121,14 +121,17 @@ export default {
       type: [Function, Array],
       default: undefined
     },
+    // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:expandedKeys': {
       type: [Function, Array],
       default: undefined
     },
+    // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:checkedKeys': {
       type: [Function, Array],
       default: undefined
     },
+    // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:selectedKeys': {
       type: [Function, Array],
       default: undefined
@@ -166,6 +169,7 @@ export default {
     }
   },
   setup (props) {
+    const themeRef = useTheme('Tree', 'Tree', style, treeLight, props)
     const treeMateRef = computed(() => createTreeMate(props.data))
     const uncontrolledCheckedKeysRef = ref(
       props.defaultCheckedKeys || props.checkedKeys
@@ -215,7 +219,35 @@ export default {
       uncontrolledExpandedKeys: uncontrolledExpandedKeysRef,
       mergedExpandedKeys: mergedExpandedKeysRef,
       highlightKeys: ref([]),
-      loadingKeys: ref([])
+      loadingKeys: ref([]),
+      cssVars: computed(() => {
+        const {
+          common: { cubicBezierEaseInOut },
+          self: {
+            fontSize,
+            nodeBorderRadius,
+            nodeColorHover,
+            nodeColorPressed,
+            nodeColorActive,
+            arrowColor,
+            loadingColor,
+            nodeTextColor,
+            nodeTextColorDisabled
+          }
+        } = themeRef.value
+        return {
+          '--arrow-color': arrowColor,
+          '--loading-color': loadingColor,
+          '--bezier': cubicBezierEaseInOut,
+          '--font-size': fontSize,
+          '--node-border-radius': nodeBorderRadius,
+          '--node-color-active': nodeColorActive,
+          '--node-color-hover': nodeColorHover,
+          '--node-color-pressed': nodeColorPressed,
+          '--node-text-color': nodeTextColor,
+          '--node-text-color-disabled': nodeTextColorDisabled
+        }
+      })
     }
   },
   data () {
@@ -415,16 +447,11 @@ export default {
     }
   },
   render () {
-    const { mergedTheme } = this
     return h(
       'div',
       {
-        class: [
-          'n-tree',
-          {
-            [`n-${mergedTheme}-theme`]: mergedTheme
-          }
-        ]
+        class: 'n-tree',
+        style: this.cssVars
       },
       this.tmNodes.map((tmNode) =>
         h(NTreeNode, {
@@ -434,4 +461,4 @@ export default {
       )
     )
   }
-}
+})
