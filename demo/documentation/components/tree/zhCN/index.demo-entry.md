@@ -37,7 +37,6 @@ drag-drop-debug
 | remote | `boolean` | `false` | 是否异步获取选项，和 onLoad 配合 |
 | selectable | `boolean` | `true` |  |
 | selected-keys | `Array<string \| number>` | `undefined` | 如果设定则 selected 状态受控 |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 | on-update:selected-keys | `(keys: Array<string \| number>) => any` | `undefined` |  |
 | on-update:expanded-keys | `(keys: Array<string \| number>) => any` | `undefined` |  |
 | on-update:checked-keys | `(keys: Array<string \| number>) => any` | `undefined` |  |

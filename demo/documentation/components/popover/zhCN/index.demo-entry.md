@@ -33,7 +33,6 @@ manual-position
 | raw | `boolean` | `false` | 是否不添加默认样式 |
 | show-arrow | `boolean` | `true` |  |
 | show | `boolean` | `undefined` | 是否展示 popover |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 | trigger | `'hover' \| 'click' \| null` | `null` |  |
 | x | `number` | `undefined` | 手动控制位置时填出内容的 CSS `left` 的像素值 |
 | y | `number` | `undefined` | 手动控制位置时填出内容的 CSS `top` 的像素值 |

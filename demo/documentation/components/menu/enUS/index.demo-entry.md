@@ -31,7 +31,6 @@ collapse
 | items | `Array<MenuItem \| Submenu \| MenuItemGroup>` | `[]` | Items data of menu. |
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` |  |
 | root-indent | `number` | `undefined` | The indent of menu's first level children. If not set, menu will use `indent` in place of it. |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 | value | `string \| null` | `undefined` | The selected name of menu. |
 | on-update:expanded-keys | `(value: string[]) => any` | `undefined` |  |
 | on-update:value | `(value: string, item: MenuItem) => any` | `undefined` |  |

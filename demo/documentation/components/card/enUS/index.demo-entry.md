@@ -25,8 +25,6 @@ closable
 | header-style | `Object \| string` | `undefined` |  |
 | segmented | `boolean \| { [part in 'content' \| 'footer' \| 'action']?: boolean \| 'soft' \| 'hard' }` | `false` |  |
 | size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` |  |
-| themed-style | `{ [themeName: string]: Object }` | `undefined` |  |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 | title | `string` | `undefined` |  |
 | on-close | `() => any` | `undefined` |  |
 

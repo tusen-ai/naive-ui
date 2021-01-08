@@ -17,7 +17,6 @@ from-end
 | align | `'start' \| 'end' \| 'center' \| 'baseline' \| 'stretch'` | `undefined` |  |
 | inline | `boolean` | `false` |  |
 | item-style | `string \| object` | `undefined` |  |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 | justify | `'start' \| 'end'` | `'start'` |  |
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` |  |
 | vertical | `boolean` | `false` |  |

@@ -37,7 +37,6 @@ drag-drop-debug
 | remote | `boolean` | `false` | Whether to load nodes async. It should work with `on-load` |
 | selectable | `boolean` | `true` |  |
 | selected-keys | `Array<string \| number>` | `undefined` | If set, selected status will work in controlled manner. |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 | on-update:selected-keys | `(keys: Array<string \| number>) => any` | `undefined` |  |
 | on-update:expanded-keys | `(keys: Array<string \| number>) => any` | `undefined` |  |
 | on-update:checked-keys | `(keys: Array<string \| number>) => any` | `undefined` |  |

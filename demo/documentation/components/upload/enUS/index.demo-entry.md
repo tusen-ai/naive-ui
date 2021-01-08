@@ -34,7 +34,6 @@ default-files
 | name | `string` | `'file'` | The field name of file in form data. |
 | show-cancel-button | `boolean` | `true` | Whether to show remove button (at file pending, uploadin, error status). Click on cancel button will fire `on-remove` callback. |
 | show-remove-button | `boolean` | `true` | Whether to show remove button (at file finished status). Click on remove button will fire `on-remove` callback. |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 | with-credentials | `boolean` | `false` | If cookie attached. |
 | on-change | `(options: { file: UploadFile, fileList: Array<UploadFile>, event?: Event }) => any` | `() => {}` | The callback of status change of the component. Any file status change would fire the callback. |
 | on-finish | `(options: { file: UploadFile }) => UploadFile \| void` | `({ file }) => file` | The callback of file upload finish. You can modify the UploadFile or retun a new UploadFile. |

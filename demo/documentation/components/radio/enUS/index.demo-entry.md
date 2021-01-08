@@ -23,7 +23,6 @@ size
 | default-checked | `boolean` | `false` |  |
 | name | `string` | `undefined` | The name attribute of the radio element. If not set, name of `radio-group` will be used. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 只用于 `n-radio` |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 | value | `string` | `undefined` |  |
 | on-update:checked | `(check: boolean) => any` | `undefined` |  |
 
@@ -34,6 +33,5 @@ size
 | disabled | `boolean` | `false` |  |
 | name | `string` | `undefined` | The name attribute of the radio elements inside the group. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 | value | `string \| null` | `null` |  |
 | on-update:value | `(value: string) => any` | `undefined` |  |

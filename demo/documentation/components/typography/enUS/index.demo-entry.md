@@ -16,9 +16,8 @@ text
 
 ### All Typography Components Props
 
-| Name  | Type                          | Default     | Description |
-| ----- | ----------------------------- | ----------- | ----------- |
-| theme | `'light' \| 'dark' \| string` | `undefined` |             |
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
 
 ### Text Props
 

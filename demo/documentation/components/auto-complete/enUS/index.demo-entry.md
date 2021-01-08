@@ -24,7 +24,6 @@ after-select
 | options | `Array<string \| AutoCompleteOption \| AutoCompleteOptionGroup>` | `[]` |  |
 | placeholder | `string` | `'Please Input'` |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 | value | `string` | `undefined` |  |
 | on-blur | `(event: FocusEvent) => any` | `undefined` |  |
 | on-focus | `(event: FocusEvent) => any` | `undefined` |  |

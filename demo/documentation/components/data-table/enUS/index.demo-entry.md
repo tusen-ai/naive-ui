@@ -31,7 +31,6 @@ ajax-usage
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 | data | `Array<Object>` | `[]` | Data to display. |
 | columns | `Array<Column>` | required | Columns to display. |
 | max-height | `number \| string` | `undefined` | The max-height of the table. If content height is larger than it, the header will be fixed at top |

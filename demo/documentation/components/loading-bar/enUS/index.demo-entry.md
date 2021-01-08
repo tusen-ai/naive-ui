@@ -48,5 +48,4 @@ basic
 #### LoadingBarOption Properties
 
 | Name | Type | Description |
-| --- | --- | --- |
-| theme | `'light' \| 'dark'` | If set it will be used as the theme of loading bar. If not the theme of `n-loading-bar-provider`'s context will be used. |
+| ---- | ---- | ----------- |

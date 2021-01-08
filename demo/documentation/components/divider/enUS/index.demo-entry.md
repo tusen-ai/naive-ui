@@ -12,12 +12,11 @@ vertical
 
 ## Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| dashed | `boolean` | `false` |  |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
-| title-placement | `'left' \| 'right' \| 'center'` | `'center'` |  |
-| vertical | `boolean` | `false` |  |
+| Name            | Type                            | Default    | Description |
+| --------------- | ------------------------------- | ---------- | ----------- |
+| dashed          | `boolean`                       | `false`    |             |
+| title-placement | `'left' \| 'right' \| 'center'` | `'center'` |             |
+| vertical        | `boolean`                       | `false`    |             |
 
 ## Slots
 

@@ -32,7 +32,6 @@ multiple-lazy
 | show | `boolean` | `undefined` | Whether to show menu. |
 | show-path | `boolean` | `true` | Whether to show path in selector. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 | value | `string \| number \| Array<number \| string> \| null` | `undefined` |  |
 | on-blur | `() => any` | `undefined` |  |
 | on-focus | `() => any` | `undefined` |

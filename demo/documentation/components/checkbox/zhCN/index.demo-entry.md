@@ -17,15 +17,14 @@ event
 
 ### Checkbox Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| checked | `boolean` | `undefined` |  |
-| default-checked | `boolean` | `false` |  |
-| disabled | `boolean` | `false` |  |
-| label | `string \| function` | `undefined` | 可以是渲染函数 |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
-| value | `string \| number` | `undefined` |  |
-| on-update:checked | `(checked: boolean)` | `undefined` |  |
+| 名称              | 类型                 | 默认值      | 说明           |
+| ----------------- | -------------------- | ----------- | -------------- |
+| checked           | `boolean`            | `undefined` |                |
+| default-checked   | `boolean`            | `false`     |                |
+| disabled          | `boolean`            | `false`     |                |
+| label             | `string \| function` | `undefined` | 可以是渲染函数 |
+| value             | `string \| number`   | `undefined` |                |
+| on-update:checked | `(checked: boolean)` | `undefined` |                |
 
 ### Checkbox Group Props
 

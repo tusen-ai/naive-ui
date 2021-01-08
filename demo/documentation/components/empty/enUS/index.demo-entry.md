@@ -15,7 +15,6 @@ basic
 | description | `string` | `'No Data'` |  |
 | show-description | `boolean` | `true` |  |
 | size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` |  |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 
 ## Slots
 

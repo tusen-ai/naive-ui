@@ -48,5 +48,4 @@ basic
 #### LoadingBarOption Properties
 
 | 名称 | 类型 | 说明 |
-| --- | --- | --- |
-| theme | `'light' \| 'dark'` | 如果设定会将该加载条的主题设为该主题，如果没有设定则会使用 `n-loading-bar-provider` 所处位置的主题 |
+| ---- | ---- | ---- |

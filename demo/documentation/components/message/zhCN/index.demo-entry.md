@@ -68,7 +68,6 @@ about-theme
 | closable | `boolean` |  |
 | content | `string \| (() => VNode \| Array<VNode>)` | 信息内容 |
 | icon | `() => VNode` | 信息图标 |
-| theme | `'light' \| 'dark' \| string \| null` |  |
 | onAfterLeave | `Function` | 信息消失动画结束的回调 |
 | onLeave | `Function` | 信息开始消失的回调 |
 
@@ -79,7 +78,6 @@ about-theme
 | closable | `boolean` |  |
 | content | `string \| (() => VNode \| Array<VNode>)` | 信息内容 |
 | icon | `() => VNode` | 信息图标 |
-| theme | `'light' \| 'dark' \| string \| null` |  |
 | type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` |  |
 | onAfterLeave | `Function` | 信息消失动画结束的回调 |
 | onLeave | `Function` | 信息开始消失的回调 |

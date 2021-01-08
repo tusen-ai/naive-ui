@@ -20,8 +20,6 @@ name-size
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` |  |
 | src | `string` | `undefined` |  |
 | round | `boolean` | `false` |  |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
-| themed-style | `{ [themeName: string]: Object }` | `undefined` |  |
 
 ## Slots
 

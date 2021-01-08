@@ -31,7 +31,6 @@ collapse
 | items | `Array<MenuItem \| Submenu \| MenuItemGroup>` | `[]` | 菜单的数据 |
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` |  |
 | root-indent | `number` | `32` | 菜单第一级的缩进，如果没有设定，使用 `indent` 代替 |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 | value | `string \| null` | `undefined` | 菜单当前的选中值 |
 | on-update:expanded-keys | `(value: string[]) => any` | `undefined` |  |
 | on-update:value | `(value: string, item: MenuItem) => any` | `undefined` |  |

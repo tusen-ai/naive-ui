@@ -68,7 +68,6 @@ about-theme
 | closable | `boolean` |  |
 | content | `string \| (() => VNode \| Array<VNode>)` | Message content. |
 | icon | `() => VNode` | Message icon. |
-| theme | `'light' \| 'dark' \| string \| null` |  |
 | onAfterLeave | `Function` | Callback after message disappeared. |
 | onLeave | `Function` | Callback when message start to disappear. |
 
@@ -79,7 +78,6 @@ about-theme
 | closable | `boolean` |  |
 | content | `string \| (() => VNode \| Array<VNode>)` | Message content. |
 | icon | `() => VNode` | Message icon. |
-| theme | `'light' \| 'dark' \| string \| null` |  |
 | type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` |  |
 | onAfterLeave | `Function` | Callback after message disappeared. |
 | onLeave | `Function` | Callback when message start to disappear. |

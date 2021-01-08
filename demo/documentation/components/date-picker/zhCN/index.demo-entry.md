@@ -27,7 +27,6 @@ format
 | default-value | `number \| [number, number] \| null` | `null` |  |
 | disabled | `boolean` | `false` |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 | type | `'date' \| 'datetime' \| 'daterange' \|'datetimerange'` | `'date'` |  |
 | value | `number \| [number, number] \| null` | `undefined` |  |
 | on-blur | `() => any` | `undefined` |  |

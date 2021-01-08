@@ -17,6 +17,5 @@ event
 | default-value | `boolean` | `false` |  |
 | disabled | `boolean` | `false` |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 | value | `boolean` | `undefined` |  |
 | on-update:value | `(value: boolean) => any` | `undefined` |  |

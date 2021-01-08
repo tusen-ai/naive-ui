@@ -21,6 +21,5 @@ mark
 | min | `number` | `0` |  |
 | range | `boolean` | `false` |  |
 | step | `number` | `1` |  |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 | value | `number \| [number, number] \| null` | `undefined` |
 | on-update:value | `(value: number \| [number, number]) => any` | `undefined` |  |

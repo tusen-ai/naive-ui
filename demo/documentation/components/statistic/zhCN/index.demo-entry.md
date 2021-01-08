@@ -10,11 +10,10 @@ basic
 
 ## Props
 
-| 名称  | 类型                          | 默认值      | 说明 |
-| ----- | ----------------------------- | ----------- | ---- |
-| label | `string`                      | `undefined` |      |
-| theme | `'light' \| 'dark' \| string` | `undefined` |      |
-| value | `string`                      | `undefined` |      |
+| 名称  | 类型     | 默认值      | 说明 |
+| ----- | -------- | ----------- | ---- |
+| label | `string` | `undefined` |      |
+| value | `string` | `undefined` |      |
 
 ## Slots
 

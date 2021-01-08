@@ -22,7 +22,6 @@ scrollto
 | bound | `number` | `12` |  |
 | ignore-gap | `boolean` | `false` | If set to `true`, it will be displayed on the exact href |
 | listen-to | `string \| HTMLElement` | `undefined` | The scrolling element to listen scrolling. If not set it will listen to the nearest scrollable ascendant element. |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 
 ## Methods
 

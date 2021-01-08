@@ -63,7 +63,6 @@ use-component
 | negative-text | `string` | `undefined` | Corresponding button won't show if not set. |
 | positive-text | `string` | `undefined` | Corresponding button won't show if not set. |
 | show-icon | `boolean` | `true` |  |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 | title | `string \| (() => VNode \| Array<VNode>)` | `undefined` | Can be a render function. |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` |  |
 | onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior. |
@@ -87,7 +86,6 @@ All the properties can be modified dynamically.
 | negative-text | `string` | Corresponding button won't show if not set. |
 | positive-text | `string` | Corresponding button won't show if not set. |
 | show-icon | `boolean` |  |
-| theme | `'light' \| 'dark'` |  |
 | title | `string \| (() => VNode \| Array<VNode>)` | Can be a render function. |
 | type | `'error \| 'success' \| 'warning'` |  |
 | onClose | `() => boolean \| Promise<boolean> \| any` |  |

@@ -31,7 +31,6 @@ ajax-usage
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 | data | `Array<Object>` | `[]` | 需要展示的数据 |
 | columns | `Array<Column>` |  | 需要展示的列，**必需** |
 | max-height | `number \| string` | `undefined` | 表格的最大高度，如果内容高度高于它，那么表头将固定 |

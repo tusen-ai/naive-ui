@@ -35,6 +35,5 @@ radio-focus-debug
 | disabled | `boolean` | `false` |  |
 | name | `string` | `undefined` | 选项组内部 radio 元素的 name 属性 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 | value | `string \| null` | `null` |  |
 | on-update:value | `(value: string) => any` | `undefined` |  |

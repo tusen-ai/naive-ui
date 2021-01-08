@@ -72,7 +72,6 @@ duration
 | description | `string \| (() => VNode \| Array<VNode>)` | `undefined` | 可以是 render 函数 |
 | duration | `number` | `undefined` | 如果没有设定则不会自动关闭，单位毫秒 |
 | meta | `string \| (() => VNode \| Array<VNode>)` | `undefined` | 可以是 render 函数 |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 | title | `string \| (() => VNode \| Array<VNode>)` | `undefined` | 可以是 render 函数 |
 | onAfterEnter | `Function` | `undefined` |  |
 | onAfterLeave | `Function` | `undefined` |  |
@@ -93,7 +92,6 @@ NotificationReactive 实例的属性可以被动态改变。
 | content | `string \| (() => VNode \| Array<VNode>)` | 可以是 render 函数 |
 | description | `string \| (() => VNode \| Array<VNode>)` | 可以是 render 函数 |
 | meta | `string \| (() => VNode \| Array<VNode>)` | 可以是 render 函数 |
-| theme | `'light' \| 'dark' \| null \| string` |  |
 | title | `string \| (() => VNode \| Array<VNode>)` | 可以是 render 函数 |
 | onAfterEnter | `Function` |  |
 | onAfterLeave | `Function` |  |

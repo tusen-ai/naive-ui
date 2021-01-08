@@ -39,7 +39,6 @@ fallback-option
 | remote | `boolean` | `false` | If you want to async get options. Note that if remote is set, `filter` & `tag` won't work on `options`. At that time, you are taking all control of `options`. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | tag | `boolean` | `false` | Whether it can create new option, should be used with `filterable`. |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` |  |
 | on-blur | `() => any` | Selection blur. |
 | on-create | `(label: string) => SelectOption` | `label => ({ label, value: label })` | How to create a option when you input a string to create a option. Note that `filter` will be applied to the created option too. And make sure the value of the created option is not the same as any other option. |

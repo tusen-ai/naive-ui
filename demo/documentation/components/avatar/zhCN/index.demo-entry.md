@@ -15,13 +15,11 @@ name-size
 
 ## Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` |  |
-| src | `string` | `undefined` |  |
-| round | `boolean` | `false` |  |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
-| themed-style | `{ [themeName: string]: Object }` | `undefined` |  |
+| 名称  | 类型                                       | 默认值      | 说明 |
+| ----- | ------------------------------------------ | ----------- | ---- |
+| size  | `'small' \| 'medium' \| 'large' \| number` | `'medium'`  |      |
+| src   | `string`                                   | `undefined` |      |
+| round | `boolean`                                  | `false`     |      |
 
 ## Slots
 

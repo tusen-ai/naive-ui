@@ -25,7 +25,6 @@ validator
 | placeholder | `string` | `'Please Input'` |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | step | `number` | `1` |  |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 | validator | `(value) => boolean` | `undefined` |  |
 | value | `number` | `undefined` |  |
 | on-blur | `(event: FocusEvent) => any` | `undefined` |  |

@@ -33,7 +33,6 @@ processing
 | show-indicator | `boolean` | `true` |  |
 | status | `'default' \| 'success' \| 'error' \| 'warning' \| 'info'` | `'default'` |  |
 | stroke-width | `number` | `7` |  |
-| theme | `'light' \| 'dark' \| string` | `undefined` |  |
 | type | `'line' \| 'circle' \| 'multiple-circle'` | `line` |  |
 | unit | `string` | `%` |  |
 
