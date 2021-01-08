@@ -5,12 +5,10 @@
       'n-base-selection--active': active,
       'n-base-selection--selected': selected || (active && pattern),
       'n-base-selection--disabled': disabled,
-      [`n-base-selection--${size}-size`]: true,
       'n-base-selection--multiple': multiple,
-      'n-base-selection--focus': patternInputFocused,
-      'n-base-selection--bordered': bordered,
-      [`n-${theme}-theme`]: theme
+      'n-base-selection--focus': patternInputFocused
     }"
+    :style="cssVars"
     @click="handleClick"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
@@ -28,7 +26,6 @@
         <n-tag
           v-for="option in selectedOptions"
           :key="option.value"
-          :theme="theme"
           :size="size"
           closable
           :disabled="disabled"
@@ -38,7 +35,6 @@
           {{ option.label }}
         </n-tag>
         <suffix
-          :theme="theme"
           :loading="loading"
           :show-arrow="showArrow"
           :show-clear="mergedClearable && selected"
@@ -60,7 +56,6 @@
         <n-tag
           v-for="option in selectedOptions"
           :key="option.value"
-          :theme="theme"
           :size="size"
           :disabled="disabled"
           closable
@@ -88,7 +83,6 @@
           >{{ pattern ? pattern : '&nbsp;' }}</span>
         </div>
         <suffix
-          :theme="theme"
           :loading="loading"
           :show-arrow="showArrow"
           :show-clear="mergedClearable && selected"
@@ -131,7 +125,6 @@
           {{ filterablePlaceholder }}
         </div>
         <suffix
-          :theme="theme"
           :loading="loading"
           :show-arrow="showArrow"
           :show-clear="mergedClearable && selected"
@@ -157,7 +150,6 @@
           {{ placeholder }}
         </div>
         <suffix
-          :theme="theme"
           :loading="loading"
           :show-arrow="showArrow"
           :show-clear="mergedClearable && selected"
@@ -165,32 +157,29 @@
         />
       </div>
     </template>
-    <div class="n-base-selection__border" />
-    <div class="n-base-selection__state-border" />
-    <div class="n-base-selection__box-shadow" />
+    <div v-if="bordered" class="n-base-selection__border" />
+    <div v-if="bordered" class="n-base-selection__state-border" />
   </div>
 </template>
 
 <script>
+import { defineComponent, computed } from 'vue'
+import { NTag } from '../../../tag'
+import { useTheme } from '../../../_mixins'
+import { createKey } from '../../../_utils'
 import Suffix from './Suffix.vue'
-import { NTag } from '../../../tag/index.js'
-import { withCssr } from '../../../_mixins'
-import styles from './styles/index.js'
+import style from './styles/index.cssr.js'
+import { baseSelectionLight } from '../styles'
 
-export default {
+export default defineComponent({
   name: 'BaseSelection',
   components: {
     Suffix,
     NTag
   },
-  mixins: [withCssr(styles)],
   props: {
     bordered: {
       type: Boolean,
-      default: undefined
-    },
-    theme: {
-      type: String,
       default: undefined
     },
     active: {
@@ -280,6 +269,102 @@ export default {
     onPatternInput: {
       type: Function,
       default: undefined
+    }
+  },
+  setup (props) {
+    const themeRef = useTheme(
+      'BaseSelection',
+      'BaseSelection',
+      style,
+      baseSelectionLight,
+      props
+    )
+    return {
+      cssVars: computed(() => {
+        const { size } = props
+        const {
+          common: { cubicBezierEaseInOut },
+          self: {
+            borderRadius,
+            color,
+            placeholderColor,
+            textColor,
+            paddingSingle,
+            caretColor,
+            colorDisabled,
+            textColorDisabled,
+            placeholderColorDisabled,
+            colorActive,
+            boxShadowFocus,
+            boxShadowActive,
+            boxShadowHover,
+            border,
+            borderFocus,
+            borderHover,
+            borderActive,
+            // form warning
+            colorActiveWarning,
+            boxShadowFocusWarning,
+            boxShadowActiveWarning,
+            boxShadowHoverWarning,
+            borderWarning,
+            borderFocusWarning,
+            borderHoverWarning,
+            borderActiveWarning,
+            // form error
+            colorActiveError,
+            boxShadowFocusError,
+            boxShadowActiveError,
+            boxShadowHoverError,
+            borderError,
+            borderFocusError,
+            borderHoverError,
+            borderActiveError,
+            [createKey('height', size)]: height,
+            [createKey('fontSize', size)]: fontSize
+          }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--border': border,
+          '--border-active': borderActive,
+          '--border-focus': borderFocus,
+          '--border-hover': borderHover,
+          '--border-radius': borderRadius,
+          '--box-shadow-active': boxShadowActive,
+          '--box-shadow-focus': boxShadowFocus,
+          '--box-shadow-hover': boxShadowHover,
+          '--caret-color': caretColor,
+          '--color': color,
+          '--color-active': colorActive,
+          '--color-disabled': colorDisabled,
+          '--font-size': fontSize,
+          '--height': height,
+          '--padding-single': paddingSingle,
+          '--placeholder-color': placeholderColor,
+          '--placeholder-color-disabled': placeholderColorDisabled,
+          '--text-color': textColor,
+          '--text-color-disabled': textColorDisabled,
+          // form warning
+          'color-active-warning': colorActiveWarning,
+          'box-shadow-focus-warning': boxShadowFocusWarning,
+          'box-shadow-active-warning': boxShadowActiveWarning,
+          'box-shadow-hover-warning': boxShadowHoverWarning,
+          'border-warning': borderWarning,
+          'border-focus-warning': borderFocusWarning,
+          'border-hover-warning': borderHoverWarning,
+          'border-active-warning': borderActiveWarning,
+          // form error
+          'color-active-error': colorActiveError,
+          'box-shadow-focus-error': boxShadowFocusError,
+          'box-shadow-active-error': boxShadowActiveError,
+          'box-shadow-hover-error': boxShadowHoverError,
+          'border-error': borderError,
+          'border-focus-error': borderFocusError,
+          'border-hover-error': borderHoverError,
+          'border-active-error': borderActiveError
+        }
+      })
     }
   },
   data () {
@@ -448,5 +533,5 @@ export default {
       }
     }
   }
-}
+})
 </script>

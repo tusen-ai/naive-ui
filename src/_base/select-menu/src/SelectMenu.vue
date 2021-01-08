@@ -25,6 +25,8 @@
         :item-size="itemSize"
         :show-scrollbar="false"
         :default-scroll-index="defaultScrollIndex"
+        :padding-top="4"
+        :padding-bottom="4"
         @resize="handleVirtualListResize"
         @scroll="handleVirtualListScroll"
       >
@@ -37,7 +39,14 @@
           <n-select-option v-else :key="tmNode.key" :tm-node="tmNode" />
         </template>
       </virtual-list>
-      <div v-else class="n-base-select-menu-option-wrapper">
+      <div
+        v-else
+        class="n-base-select-menu-option-wrapper"
+        :style="{
+          paddingTop: 4,
+          paddingBottom: 4
+        }"
+      >
         <template v-for="tmNode in tmNodes">
           <n-select-group-header
             v-if="tmNode.rawNode.type === 'group'"

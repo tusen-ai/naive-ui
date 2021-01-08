@@ -1,58 +1,75 @@
-import create from '../../../_styles/utils/create-component-base'
-import commonVariables from './_common'
 import { changeColor } from 'seemly'
+import { commonLight } from '../../../_styles/new-common'
 import { baseClearButtonLight } from '../../clear-button/styles'
+import commonVariables from './_common'
 
-export default create({
+export default {
   name: 'BaseSelection',
-  theme: 'light',
-  peer: [baseClearButtonLight],
-  getLocalVars (vars) {
+  common: commonLight,
+  peers: {
+    BaseClearButton: baseClearButtonLight
+  },
+  self (vars) {
+    const {
+      borderRadius,
+      textColor2,
+      textColor4,
+      textColor5,
+      inputColor,
+      inputColorDisabled,
+      primaryColor,
+      primaryColorHover,
+      warningColor,
+      warningColorHover,
+      errorColor,
+      errorColorHover,
+      borderColor
+    } = vars
     return {
       ...commonVariables,
-      borderRadius: vars.borderRadius,
+      borderRadius: borderRadius,
       // default
-      textColor: vars.textColor2,
-      textColorDisabled: vars.textColor4,
-      placeholderColor: vars.textColor4,
-      placeholderColorDisabled: vars.textColor5,
-      color: vars.inputColor,
-      colorDisabled: vars.inputColorDisabled,
-      colorActive: vars.inputColor,
-      border: `1px solid ${vars.borderColor}`,
-      borderHover: `1px solid ${vars.primaryColorHover}`,
-      borderActive: `1px solid ${vars.primaryColor}`,
-      borderFocus: `1px solid ${vars.primaryColorHover}`,
+      textColor: textColor2,
+      textColorDisabled: textColor4,
+      placeholderColor: textColor4,
+      placeholderColorDisabled: textColor5,
+      color: inputColor,
+      colorDisabled: inputColorDisabled,
+      colorActive: inputColor,
+      border: `1px solid ${borderColor}`,
+      borderHover: `1px solid ${primaryColorHover}`,
+      borderActive: `1px solid ${primaryColor}`,
+      borderFocus: `1px solid ${primaryColorHover}`,
       boxShadowHover: null,
-      boxShadowActive: `0 0 0 2px ${changeColor(vars.primaryColor, {
+      boxShadowActive: `0 0 0 2px ${changeColor(primaryColor, {
         alpha: 0.2
       })}`,
       boxShadowFocus: null,
-      caretColor: vars.primaryColor,
+      caretColor: primaryColor,
       // warning
-      borderWarning: `1px solid ${vars.warningColor}`,
-      borderHoverWarning: `1px solid ${vars.warningColorHover}`,
-      borderActiveWarning: `1px solid ${vars.warningColor}`,
-      borderFocusWarning: `1px solid ${vars.warningColorHover}`,
+      borderWarning: `1px solid ${warningColor}`,
+      borderHoverWarning: `1px solid ${warningColorHover}`,
+      borderActiveWarning: `1px solid ${warningColor}`,
+      borderFocusWarning: `1px solid ${warningColorHover}`,
       boxShadowHoverWarning: null,
-      boxShadowActiveWarning: `0 0 0 2px ${changeColor(vars.warningColor, {
+      boxShadowActiveWarning: `0 0 0 2px ${changeColor(warningColor, {
         alpha: 0.2
       })}`,
       boxShadowFocusWarning: null,
-      colorActiveWarning: vars.inputColor,
-      caretColorWarning: vars.warningColor,
+      colorActiveWarning: inputColor,
+      caretColorWarning: warningColor,
       // error
-      borderError: `1px solid ${vars.errorColor}`,
-      borderHoverError: `1px solid ${vars.errorColorHover}`,
-      borderActiveError: `1px solid ${vars.errorColor}`,
-      borderFocusError: `1px solid ${vars.errorColorHover}`,
+      borderError: `1px solid ${errorColor}`,
+      borderHoverError: `1px solid ${errorColorHover}`,
+      borderActiveError: `1px solid ${errorColor}`,
+      borderFocusError: `1px solid ${errorColorHover}`,
       boxShadowHoverError: null,
-      boxShadowActiveError: `0 0 0 2px ${changeColor(vars.errorColor, {
+      boxShadowActiveError: `0 0 0 2px ${changeColor(errorColor, {
         alpha: 0.2
       })}`,
       boxShadowFocusError: null,
-      colorActiveError: vars.inputColor,
-      caretColorError: vars.errorColor
+      colorActiveError: inputColor,
+      caretColorError: errorColor
     }
   }
-})
+}

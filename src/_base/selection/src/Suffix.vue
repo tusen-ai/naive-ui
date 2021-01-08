@@ -20,11 +20,12 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import NBaseClearButton from '../../clear-button'
 import NBaseLoading from '../../loading'
 import { ChevronDownIcon } from '../../icons'
 
-export default {
+export default defineComponent({
   name: 'BaseSelectionSuffix',
   components: {
     ChevronDownIcon,
@@ -53,5 +54,5 @@ export default {
       default: undefined
     }
   }
-}
+})
 </script>

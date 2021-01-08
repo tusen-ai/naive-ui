@@ -60,11 +60,12 @@ import { thingDark } from './thing/styles'
 import { timeDark } from './time/styles'
 import { timePickerDark } from './time-picker/styles'
 import { timelineDark } from './timeline/styles'
+import { tooltipDark } from './tooltip/styles'
 import { transferDark } from './transfer/styles'
 import { typographyDark } from './typography/styles'
 import { treeDark } from './tree/styles'
 import { uploadDark } from './upload/styles'
-import { tooltipDark } from './tooltip/styles'
+import { baseSelectionDark } from './_base/selection/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -133,5 +134,7 @@ export const darkTheme = {
   Transfer: transferDark,
   Tree: treeDark,
   Typography: typographyDark,
-  Upload: uploadDark
+  Upload: uploadDark,
+  // danger zone
+  BaseSelection: baseSelectionDark
 }
