@@ -1,7 +1,5 @@
 import CSSRender from 'css-render'
 import BEMPlugin from '@css-render/plugin-bem'
-import { fallbackTheme } from '../../_mixins/themeable'
-import { warn } from '../naive'
 
 const namespace = 'n'
 const prefix = `.${namespace}-`
@@ -33,21 +31,6 @@ function insideModal (style) {
   return c(`${prefix}modal, ${prefix}drawer`, [style])
 }
 
-function cTB (selector, ...rest) {
-  return cB(selector, [
-    c(({ props }) => {
-      const theme = props.$theme
-      if (__DEV__ && !theme) {
-        warn(
-          'utils/cssr',
-          'No theme when rendering styles, this could be a bug of naive-ui.'
-        )
-      }
-      return theme === fallbackTheme ? '' : `&.${namespace}-${theme}-theme`
-    }, ...rest)
-  ])
-}
-
 function createKey (keyPrefix, ...suffixs) {
   return (
     keyPrefix +
@@ -70,7 +53,6 @@ function withPrefix (selector) {
 
 export {
   c,
-  cTB,
   cRB,
   cB,
   cE,
