@@ -2,8 +2,7 @@ import { c, cB, cE, cM } from '../../../../_utils/cssr'
 import fadeInWidthExpandTransition from '../../../../_styles/transitions/fade-in-width-expand'
 import fadeUpWidthExpandTransition from '../../../../_styles/transitions/fade-up-width-expand'
 
-// vars:
-// --bezier-ease-out
+// ease-out: cubic-bezier(0, 0, .2, 1)
 export default c([
   c('@keyframes n-base-slot-machine-fade-up-in', `
     from {
@@ -76,11 +75,11 @@ export default c([
           transform: 'translateY(100%)'
         }),
         cM('down-scroll', {
-          animation: 'n-base-slot-machine-fade-down-out .2s var(--bezier-ease-out)',
+          animation: 'n-base-slot-machine-fade-down-out .2s cubic-bezier(0, 0, .2, 1)',
           animationIterationCount: 1
         }),
         cM('up-scroll', {
-          animation: 'n-base-slot-machine-fade-up-out .2s var(--bezier-ease-out)',
+          animation: 'n-base-slot-machine-fade-up-out .2s cubic-bezier(0, 0, .2, 1)',
           animationIterationCount: 1
         })
       ]),
@@ -96,11 +95,11 @@ export default c([
         width: .6em;
       `, [
         cM('down-scroll', {
-          animation: 'n-base-slot-machine-fade-down-in .2s var(--bezier-ease-out)',
+          animation: 'n-base-slot-machine-fade-down-in .2s cubic-bezier(0, 0, .2, 1)',
           animationIterationCount: 1
         }),
         cM('up-scroll', {
-          animation: 'n-base-slot-machine-fade-up-in .2s var(--bezier-ease-out)',
+          animation: 'n-base-slot-machine-fade-up-in .2s cubic-bezier(0, 0, .2, 1)',
           animationIterationCount: 1
         }),
         cE('inner', `

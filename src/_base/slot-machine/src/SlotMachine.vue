@@ -21,8 +21,7 @@
 <script>
 import { defineComponent, computed } from 'vue'
 import { NFadeInExpandTransition } from '../../../_base'
-import { useTheme } from '../../../_mixins'
-import { baseSlotMachineLight } from '../styles'
+import { useStyle } from '../../../_mixins'
 import SlotMachineNumber from './SlotMachineNumber.vue'
 import style from './styles/index.cssr.js'
 
@@ -33,7 +32,6 @@ export default defineComponent({
     SlotMachineNumber
   },
   props: {
-    ...useTheme.props,
     value: {
       type: [Number, String],
       default: 0
@@ -48,13 +46,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const themeRef = useTheme(
-      'BaseSlotMachine',
-      'BaseSlotMachine',
-      style,
-      baseSlotMachineLight,
-      props
-    )
+    const themeRef = useStyle('BaseSlotMachine', style)
     return {
       cssVars: computed(() => {
         const {

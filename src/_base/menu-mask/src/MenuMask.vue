@@ -1,12 +1,6 @@
 <template>
   <transition name="n-fade-in-transition">
-    <div
-      v-if="show"
-      class="n-base-menu-mask"
-      :class="{
-        [`n-${theme}-theme`]: theme
-      }"
-    >
+    <div v-if="show" class="n-base-menu-mask">
       <slot />
       {{ message }}
     </div>
@@ -15,19 +9,13 @@
 
 <script>
 import { ref, onBeforeUnmount } from 'vue'
-import { withCssr } from '../../../_mixins'
-import styles from './styles'
+import { useStyle } from '../../../_mixins'
+import style from './styles/index.cssr.js'
 
 export default {
   name: 'BaseMenuMask',
-  mixins: [withCssr(styles)],
-  props: {
-    theme: {
-      type: String,
-      default: null
-    }
-  },
   setup () {
+    useStyle('BaseMenuMask', style)
     const messageRef = ref(null)
     const timerIdRef = ref(null)
     const uncontrolledShowRef = ref(false)
