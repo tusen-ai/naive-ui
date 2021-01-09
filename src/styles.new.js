@@ -26,7 +26,6 @@ import { elementDark } from './element/styles'
 import { emptyDark } from './empty/styles'
 import { formDark } from './form/styles'
 import { gradientTextDark } from './gradient-text/styles'
-import { gridDark } from './grid/styles'
 import { iconDark } from './icon/styles'
 import { inputDark } from './input/styles'
 import { inputNumberDark } from './input-number/styles'
@@ -57,7 +56,6 @@ import { tableDark } from './table/styles'
 import { tabsDark } from './tabs/styles'
 import { tagDark } from './tag/styles'
 import { thingDark } from './thing/styles'
-import { timeDark } from './time/styles'
 import { timePickerDark } from './time-picker/styles'
 import { timelineDark } from './timeline/styles'
 import { tooltipDark } from './tooltip/styles'
@@ -95,7 +93,6 @@ export const darkTheme = {
   Empty: emptyDark,
   Form: formDark,
   GradientText: gradientTextDark,
-  Grid: gridDark,
   Icon: iconDark,
   Input: inputDark,
   InputNumber: inputNumberDark,
@@ -126,7 +123,6 @@ export const darkTheme = {
   Tabs: tabsDark,
   Tag: tagDark,
   Thing: thingDark,
-  Time: timeDark,
   TimePicker: timePickerDark,
   Timeline: timelineDark,
   Tooltip: tooltipDark,

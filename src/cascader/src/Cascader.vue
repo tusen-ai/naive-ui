@@ -6,8 +6,8 @@
           ref="triggerRef"
           :bordered="mergedBordered"
           :size="mergedSize"
-          :unstable-theme="theme.peers.BaseSelection"
-          :unstable-theme-overrides="theme.overrides.BaseSelection"
+          :unstable-theme="mergedTheme.peers.BaseSelection"
+          :unstable-theme-overrides="mergedTheme.overrides.BaseSelection"
           :active="mergedShow"
           :pattern="pattern"
           :placeholder="localizedPlaceholder"
@@ -223,7 +223,7 @@ export default defineComponent({
         optionHeight: computed(() => {
           return themeRef.value.self.optionHeight
         }),
-        theme: themeRef,
+        mergedTheme: themeRef,
         cssVars: computed(() => {
           const {
             self: {

@@ -15,7 +15,6 @@
         class="n-drawer"
         v-bind="$attrs"
         :class="[
-          $attrs.class,
           `n-drawer--${placement}-placement`,
           {
             [`n-drawer--native-scrollbar`]: nativeScrollbar
@@ -29,7 +28,8 @@
           v-else
           v-bind="scrollbarProps"
           content-class="n-drawer-scroll-content"
-          :theme="'light'"
+          :unstable-theme="NDrawer.mergedTheme.peers.Scrollbar"
+          :unstable-theme-overrides="NDrawer.mergedTheme.overrides.Scrollbar"
         >
           <slot />
         </n-scrollbar>
@@ -53,11 +53,7 @@ export default defineComponent({
       NModalBody: null
     }
   },
-  inject: {
-    NDrawer: {
-      default: null
-    }
-  },
+  inject: ['NDrawer'],
   inheritAttrs: false,
   props: {
     show: {

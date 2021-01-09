@@ -19,6 +19,7 @@ import style from './styles/input-group-label.cssr.js'
 export default defineComponent({
   name: 'InputGroupLabel',
   props: {
+    ...useTheme.props,
     size: {
       type: String,
       default: 'medium'

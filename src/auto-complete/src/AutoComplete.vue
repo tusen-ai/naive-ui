@@ -17,8 +17,8 @@
           :value="mergedValue"
         >
           <n-input
-            :unstable-theme="theme.peers.Input"
-            :unstable-theme-overrides="theme.overrides.Input"
+            :unstable-theme="mergedTheme.peers.Input"
+            :unstable-theme-overrides="mergedTheme.overrides.Input"
             :bordered="mergedBordered"
             :value="mergedValue"
             :placeholder="placeholder"
@@ -46,8 +46,8 @@
           v-if="active"
           ref="menuRef"
           v-clickoutside="handleClickOutsideMenu"
-          :unstable-theme="theme.peers.BaseSelectMenu"
-          :unstable-theme-overrides="theme.overrides.BaseSelectMenu"
+          :unstable-theme="mergedTheme.peers.BaseSelectMenu"
+          :unstable-theme-overrides="mergedTheme.overrides.BaseSelectMenu"
           auto-pending
           class="n-auto-complete-menu"
           :style="cssVars"
@@ -183,7 +183,7 @@ export default defineComponent({
       isComposing: ref(false),
       menuRef: ref(null),
       triggerRef: ref(null),
-      theme: themeRef,
+      mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut }

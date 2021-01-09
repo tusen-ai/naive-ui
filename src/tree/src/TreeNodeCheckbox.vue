@@ -1,7 +1,8 @@
 <template>
   <span class="n-tree-node-checkbox">
     <n-checkbox
-      :theme="'light'"
+      :unstable-theme="NTree.mergedTheme.peers.Checkbox"
+      :unstable-theme-overrides="NTree.mergedTheme.overrides.Checkbox"
       :checked="checked"
       :indeterminate="indeterminate"
       @update:checked="handleUpdateValue"

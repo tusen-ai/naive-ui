@@ -14,7 +14,8 @@
           passively-activated
           deactivate-on-enter
           :attr-size="mergedAttrSize"
-          :theme="'light'"
+          :unstable-theme="mergedTheme.peers.Input"
+          :unstable-theme-overrides="mergedTheme.overrides.Input"
           :stateful="stateful"
           :size="mergedSize"
           :force-focus="active"
@@ -29,7 +30,10 @@
           @clear="handleTimeInputClear"
         >
           <template v-if="showIcon" #suffix>
-            <n-icon>
+            <n-icon
+              :unstable-theme="mergedTheme.peers.Icon"
+              :unstable-theme-overrides="mergedTheme.overrides.Icon"
+            >
               <time-icon />
             </n-icon>
           </template>
@@ -99,11 +103,11 @@ import {
   getHours,
   getSeconds
 } from 'date-fns'
+import { strictParse } from '../../date-picker/src/utils'
+import { TimeIcon } from '../../_base/icons'
 import { NInput } from '../../input'
 import { NIcon } from '../../icon'
 import { useConfig, useTheme, useLocale, useFormItem } from '../../_mixins'
-import { strictParse } from '../../date-picker/src/utils'
-import { TimeIcon } from '../../_base/icons'
 import { warn, call, useAdjustedTo } from '../../_utils'
 import { timePickerLight } from '../styles'
 import Panel from './Panel.vue'
@@ -122,6 +126,11 @@ export default defineComponent({
   },
   directives: {
     clickoutside
+  },
+  provide () {
+    return {
+      NTimePicker: this
+    }
   },
   props: {
     ...useTheme.props,
@@ -255,6 +264,7 @@ export default defineComponent({
       ...useLocale('TimePicker'),
       ...useConfig(props),
       ...useFormItem(props),
+      mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
           self: {

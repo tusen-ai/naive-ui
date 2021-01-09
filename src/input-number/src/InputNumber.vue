@@ -4,6 +4,8 @@
       ref="inputRef"
       v-model:value="displayedValue"
       passively-activated
+      :unstable-theme="mergedTheme.peers.Input"
+      :unstable-theme-overrides="mergedTheme.overrides.Input"
       :size="mergedSize"
       :placeholder="mergedPlaceholder"
       :disabled="disabled ? 'disabled' : false"
@@ -22,9 +24,9 @@
           :builtin-theme-overrides="buttonThemeOverrides"
           @mousedown.prevent
         >
-          <n-icon :configurable="false">
+          <n-base-icon>
             <remove-icon @click="handleMinusClick" />
-          </n-icon>
+          </n-base-icon>
         </n-button>
         <n-button
           text
@@ -33,9 +35,9 @@
           :builtin-theme-overrides="buttonThemeOverrides"
           @mousedown.prevent
         >
-          <n-icon :configurable="false">
+          <n-base-icon>
             <add-icon @click="handleAddClick" />
-          </n-icon>
+          </n-base-icon>
         </n-button>
       </template>
     </n-input>
@@ -46,15 +48,14 @@
 import { defineComponent, ref, toRef, watch, computed } from 'vue'
 import { rgba } from 'seemly'
 import { useMemo, useMergedState } from 'vooks'
-import { NInput } from '../../input'
-import { NIcon } from '../../icon'
-import { NButton } from '../../button'
 import { RemoveIcon, AddIcon } from '../../_base/icons'
+import { NInput } from '../../input'
+import { NBaseIcon } from '../../_base'
+import { NButton } from '../../button'
 import { useTheme, useFormItem, useLocale } from '../../_mixins'
 import { warn, call } from '../../_utils'
 import { inputNumberLight } from '../styles'
 import { parse, validator, format } from './utils'
-import style from './styles/index.cssr.js'
 
 function parseNumber (number) {
   if (number === null) return null
@@ -166,7 +167,7 @@ function useMethods (
 export default defineComponent({
   name: 'InputNumber',
   components: {
-    NIcon,
+    NBaseIcon,
     NInput,
     NButton,
     RemoveIcon,
@@ -243,7 +244,7 @@ export default defineComponent({
     const themeRef = useTheme(
       'InputNumber',
       'InputNumber',
-      style,
+      null,
       inputNumberLight,
       props
     )
@@ -375,6 +376,7 @@ export default defineComponent({
         displayedValueRef
       }),
       // theme
+      mergedTheme: themeRef,
       inputThemeOverrides: {
         paddingRight: '8px'
       },

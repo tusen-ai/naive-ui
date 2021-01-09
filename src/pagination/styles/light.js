@@ -1,16 +1,14 @@
 import { selectLight } from '../../select/styles'
 import { inputLight } from '../../input/styles'
-import { iconLight } from '../../icon/styles'
-import commonVariables from './_common.js'
 import { commonLight } from '../../_styles/new-common'
+import commonVariables from './_common.js'
 
 export default {
   name: 'Pagination',
   common: commonLight,
   peers: {
     Select: selectLight,
-    Input: inputLight,
-    Icon: iconLight
+    Input: inputLight
   },
   self (vars) {
     const {

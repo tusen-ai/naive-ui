@@ -17,18 +17,18 @@
         v-else-if="status === 481 || status === '418'"
         class="n-result-icon__status-image"
       />
-      <n-icon v-else-if="status === 'success'" size="80">
+      <n-base-icon v-else-if="status === 'success'" size="80">
         <success-icon />
-      </n-icon>
-      <n-icon v-else-if="status === 'info'" size="80">
+      </n-base-icon>
+      <n-base-icon v-else-if="status === 'info'" size="80">
         <info-icon />
-      </n-icon>
-      <n-icon v-else-if="status === 'warning'" size="80">
+      </n-base-icon>
+      <n-base-icon v-else-if="status === 'warning'" size="80">
         <warning-icon />
-      </n-icon>
-      <n-icon v-else-if="status === 'error'" size="80">
+      </n-base-icon>
+      <n-base-icon v-else-if="status === 'error'" size="80">
         <error-icon />
-      </n-icon>
+      </n-base-icon>
     </div>
     <div class="n-result-header">
       <div class="n-result-header__title">
@@ -57,7 +57,7 @@ import {
   WarningIcon,
   ErrorIcon
 } from '../../_base/icons'
-import { NIcon } from '../../icon'
+import { NBaseIcon } from '../../_base'
 import { resultLight } from '../styles'
 import image404 from './404.vue'
 import image500 from './500.vue'
@@ -72,7 +72,7 @@ export default defineComponent({
     SuccessIcon,
     WarningIcon,
     ErrorIcon,
-    NIcon,
+    NBaseIcon,
     image404,
     image403,
     image418,

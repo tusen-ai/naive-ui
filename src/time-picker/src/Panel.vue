@@ -9,7 +9,13 @@
           'n-time-picker-col--transition-disabled': transitionDisabled
         }"
       >
-        <n-scrollbar ref="hoursRef" :theme="theme">
+        <n-scrollbar
+          ref="hoursRef"
+          :unstable-theme="NTimePicker.mergedTheme.peers.Scrollbar"
+          :unstable-theme-overrides="
+            NTimePicker.mergedTheme.overrides.Scrollbar
+          "
+        >
           <div
             v-for="hour in hours"
             :key="hour"
@@ -34,7 +40,13 @@
           'n-time-picker-col--invalid': isMinuteInvalid
         }"
       >
-        <n-scrollbar ref="minutesRef" :theme="theme">
+        <n-scrollbar
+          ref="minutesRef"
+          :unstable-theme="NTimePicker.mergedTheme.peers.Scrollbar"
+          :unstable-theme-overrides="
+            NTimePicker.mergedTheme.overrides.Scrollbar
+          "
+        >
           <div
             v-for="minute in minutes"
             :key="minute"
@@ -62,7 +74,13 @@
           'n-time-picker-col--transition-disabled': transitionDisabled
         }"
       >
-        <n-scrollbar ref="secondsRef" :theme="theme">
+        <n-scrollbar
+          ref="secondsRef"
+          :unstable-theme="NTimePicker.mergedTheme.peers.Scrollbar"
+          :unstable-theme-overrides="
+            NTimePicker.mergedTheme.overrides.Scrollbar
+          "
+        >
           <div
             v-for="second in seconds"
             :key="second"
@@ -85,14 +103,20 @@
       </div>
     </div>
     <div class="n-time-picker-actions">
-      <n-button size="tiny" :theme="theme" @click="onNowClick">
+      <n-button
+        size="tiny"
+        :unstable-theme="NTimePicker.mergedTheme.peers.Button"
+        :unstable-theme-overrides="NTimePicker.mergedTheme.overrides.Button"
+        @click="onNowClick"
+      >
         {{ nowText }}
       </n-button>
       <n-button
         size="tiny"
         type="primary"
         class="n-time-picker-actions__confirm"
-        :theme="theme"
+        :unstable-theme="NTimePicker.mergedTheme.peers.Button"
+        :unstable-theme-overrides="NTimePicker.mergedTheme.overrides.Button"
         :disabled="isValueInvalid"
         @click="onConfirmClick"
       >
@@ -268,11 +292,8 @@ export default defineComponent({
     NScrollbar,
     NBaseFocusDetector
   },
+  inject: ['NTimePicker'],
   props: {
-    theme: {
-      type: String,
-      default: undefined
-    },
     showHour: {
       type: Boolean,
       default: true

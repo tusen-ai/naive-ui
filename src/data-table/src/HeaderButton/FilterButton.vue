@@ -2,7 +2,8 @@
   <n-popover
     v-model:show="showPopover"
     trigger="click"
-    :theme="'light'"
+    :unstable-theme="NDataTable.mergedTheme.peers.Popover"
+    :unstable-theme-overrides="NDataTable.mergedTheme.overrides.Popover"
     :padded="false"
   >
     <template #trigger>
@@ -11,7 +12,6 @@
         :render="mergedRenderFilter"
         :active="active"
         :show="showPopover"
-        :theme="'light'"
         @click.stop
       />
       <div
@@ -42,11 +42,12 @@
 </template>
 
 <script>
-import RenderFilter from './RenderFilter'
-import { NIcon } from '../../../icon'
-import NDataTableFilterMenu from './FilterMenu.vue'
-import { NPopover } from '../../../popover'
+import { defineComponent } from 'vue'
 import { FilterIcon } from '../../../_base/icons'
+import { NIcon } from '../../../icon'
+import { NPopover } from '../../../popover'
+import RenderFilter from './RenderFilter'
+import NDataTableFilterMenu from './FilterMenu.vue'
 
 function createActiveFilters (allFilters, columnKey, mergedFilterValue) {
   const activeFilters = Object.assign({}, allFilters)
@@ -54,7 +55,7 @@ function createActiveFilters (allFilters, columnKey, mergedFilterValue) {
   return activeFilters
 }
 
-export default {
+export default defineComponent({
   components: {
     NIcon,
     RenderFilter,
@@ -117,5 +118,5 @@ export default {
       this.showPopover = false
     }
   }
-}
+})
 </script>

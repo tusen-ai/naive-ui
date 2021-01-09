@@ -4,8 +4,7 @@ import { c, cB, cM, cE } from '../../../_utils/cssr'
 // --action-margin
 export default cB('dynamic-input', {
   width: '100%'
-},
-[
+}, [
   cB('dynamic-input-item', `
     margin-bottom: 10px;
     display: flex;
@@ -50,14 +49,3 @@ export default cB('dynamic-input', {
     })
   ])
 ])
-
-// export default c([
-//   ({ props }) => {
-//     const {
-//       actionMargin
-//     } = props.$local
-//     return [
-
-//     ]
-//   }
-// ])

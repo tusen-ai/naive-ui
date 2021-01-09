@@ -3,7 +3,8 @@
     <n-tag
       v-for="(tag, index) in value"
       :key="index"
-      :theme="'light'"
+      :unstable-theme="mergedTheme.peers.Tag"
+      :unstable-theme-overrides="mergedTheme.overrides.Tag"
       :style="tagStyle"
       :type="type"
       :round="round"
@@ -19,7 +20,8 @@
       ref="tagInput"
       v-model:value="inputValue"
       :force-focus="inputForceFocused"
-      :theme="'light'"
+      :unstable-theme="mergedTheme.peers.Input"
+      :unstable-theme-overrides="mergedTheme.overrides.Input"
       :style="inputStyle"
       :size="inputSize"
       placeholder=""
@@ -29,14 +31,15 @@
     <n-button
       v-else
       dashed
-      :theme="'light'"
+      :unstable-theme="mergedTheme.peers.Button"
+      :unstable-theme-overrides="mergedTheme.overrides.Button"
       :size="inputSize"
       @click="handleAddClick"
     >
       <template #icon>
-        <n-icon>
+        <n-base-icon>
           <add-icon />
-        </n-icon>
+        </n-base-icon>
       </template>
     </n-button>
   </div>
@@ -44,11 +47,12 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
-import { NTag } from '../../tag'
-import { NIcon } from '../../icon'
-import { AddIcon } from '../../_base/icons'
-import { useTheme, useFormItem, useLocale } from '../../_mixins'
 import commonProps from '../../tag/src/common-props'
+import { AddIcon } from '../../_base/icons'
+import { NButton } from '../../button'
+import { NTag } from '../../tag'
+import { NBaseIcon } from '../../_base'
+import { useTheme, useFormItem, useLocale } from '../../_mixins'
 import { warn, call } from '../../_utils'
 import { dynamicTagsLight } from '../styles'
 import style from './styles/index.cssr.js'
@@ -57,7 +61,8 @@ export default defineComponent({
   name: 'DynamicTags',
   components: {
     NTag,
-    NIcon,
+    NButton,
+    NBaseIcon,
     AddIcon
   },
   props: {
@@ -109,12 +114,19 @@ export default defineComponent({
     }
   },
   setup (props) {
-    useTheme('DynamicTags', 'DynamicTags', style, dynamicTagsLight, props)
+    const themeRef = useTheme(
+      'DynamicTags',
+      'DynamicTags',
+      style,
+      dynamicTagsLight,
+      props
+    )
     return {
       ...useLocale('DynamicTags'),
       inputValue: ref(''),
       inputVisible: ref(false),
       inputForceFocused: ref(true),
+      mergedTheme: themeRef,
       ...useFormItem(props)
     }
   },

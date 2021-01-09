@@ -1,15 +1,19 @@
 import { changeColor } from 'seemly'
 import { inputDark } from '../../input/styles'
 import { iconDark } from '../../icon/styles'
-import commonVars from './_common'
 import { commonDark } from '../../_styles/new-common'
+import { buttonDark } from '../../button/styles'
+import { timePickerDark } from '../../time-picker/styles'
+import commonVars from './_common'
 
 export default {
   name: 'DatePicker',
   common: commonDark,
   peers: {
     Input: inputDark,
-    Icon: iconDark
+    Icon: iconDark,
+    Button: buttonDark,
+    TimePicker: timePickerDark
   },
   self (vars) {
     const {

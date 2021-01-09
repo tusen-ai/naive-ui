@@ -1,13 +1,9 @@
 import commonVariables from './_common'
-import { iconLight } from '../../icon/styles'
 import { commonLight } from '../../_styles/new-common'
 
 export default {
   name: 'Message',
   common: commonLight,
-  peers: {
-    Icon: iconLight
-  },
   self (vars) {
     const {
       textColor2,

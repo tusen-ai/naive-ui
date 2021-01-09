@@ -1,13 +1,11 @@
 import { avatarDark } from '../../avatar/styles'
 import { scrollbarDark } from '../../scrollbar/styles'
-import { iconDark } from '../../icon/styles'
 import { commonDark } from '../../_styles/new-common'
 
 export default {
   name: 'Notification',
   common: commonDark,
   peers: {
-    Icon: iconDark,
     Avatar: avatarDark,
     Scrollbar: scrollbarDark
   },

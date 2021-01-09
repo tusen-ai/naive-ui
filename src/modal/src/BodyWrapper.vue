@@ -4,7 +4,12 @@
     v-show="displayDirective === 'if' || displayed || show"
     class="n-modal-body-wrapper"
   >
-    <n-scrollbar ref="scrollbar" content-class="n-modal-scroll-content">
+    <n-scrollbar
+      ref="scrollbar"
+      :unstable-theme="NModal.mergedTheme.peers.Scrollbar"
+      :unstable-theme-overrides="NModal.mergedTheme.overrides.Scrollbar"
+      content-class="n-modal-scroll-content"
+    >
       <transition
         name="n-fade-in-scale-up-transition"
         :appear="NModal.appear ?? NModal.isMounted"
@@ -21,7 +26,8 @@
           <n-dialog
             v-if="preset === 'confirm' || preset === 'dialog'"
             v-bind="$attrs"
-            :theme="'light'"
+            :unstable-theme="mergedTheme.peers.Dialog"
+            :unstable-theme-overrides="mergedTheme.overrides.Dialog"
             :title="title"
             :closable="closable"
             :positive-text="positiveText"
@@ -45,7 +51,8 @@
           <n-card
             v-else-if="preset === 'card'"
             v-bind="$attrs"
-            :theme="'light'"
+            :unstable-theme="mergedTheme.peers.Card"
+            :unstable-theme-overrides="mergedTheme.overrides.Card"
             :title="title"
             :closable="closable"
             :size="size"
@@ -75,14 +82,23 @@
 </template>
 
 <script>
-import { nextTick, reactive, toRefs, toRef, watch, ref, inject } from 'vue'
+import {
+  nextTick,
+  reactive,
+  toRefs,
+  toRef,
+  watch,
+  ref,
+  inject,
+  defineComponent
+} from 'vue'
 import { clickoutside } from 'vdirs'
 import { NScrollbar } from '../../scrollbar'
 import { NDialog } from '../../dialog'
 import { NCard } from '../../card'
 import presetProps from './presetProps'
 
-export default {
+export default defineComponent({
   name: 'ModalBody',
   directives: {
     clickoutside
@@ -211,5 +227,5 @@ export default {
       this.onClickoutside(e)
     }
   }
-}
+})
 </script>

@@ -1,15 +1,12 @@
-import { h, ref, defineComponent } from 'vue'
+import { h, ref, defineComponent, provide, getCurrentInstance } from 'vue'
 import { NPopover } from '../../popover'
 import { omit, keep } from '../../_utils'
+import { useTheme } from '../../_mixins'
+import { popconfirmLight } from '../styles'
 import PopconfirmPanel from './PopconfirmPanel.vue'
+import style from './styles/index.cssr.js'
 
-const panelProps = [
-  'positiveText',
-  'negativeText',
-  'showIcon',
-  'onPositiveClick',
-  'onNegativeClick'
-]
+const panelProps = Object.keys(PopconfirmPanel.props)
 
 export default defineComponent({
   name: 'Popconfirm',
@@ -40,17 +37,29 @@ export default defineComponent({
       default: undefined
     }
   },
-  setup () {
+  setup (props) {
+    const themeRef = useTheme(
+      'Popconfirm',
+      'Popconfirm',
+      style,
+      popconfirmLight,
+      props
+    )
+    provide('NPopconfirm', getCurrentInstance().proxy)
     return {
+      mergedTheme: themeRef,
       popoverRef: ref(null)
     }
   },
   render () {
-    const { $slots: slots, $props: props } = this
+    const { $slots: slots, $props: props, mergedTheme } = this
     return h(
       NPopover,
       {
-        ...omit(props, panelProps),
+        ...omit(props, panelProps, {
+          unstableTheme: mergedTheme.peers.Popover,
+          unstableThemeOverrides: mergedTheme.overrides.Popover
+        }),
         class: 'n-popconfirm',
         ref: 'popoverRef'
       },

@@ -232,7 +232,7 @@ export default c([
                   animation-duration: .25s, .25s;
                   animation-timing-function: var(--bezier), var(--bezier-ease-in);
                   animation-delay: .25s, 0s;
-                  animation-name: ransfer-height-collapse, transfer-slide-out-to-right;
+                  animation-name: transfer-height-collapse, transfer-slide-out-to-right;
                 `)
               ]),
               cM('target', {

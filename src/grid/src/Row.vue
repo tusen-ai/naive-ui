@@ -19,7 +19,7 @@
 import { defineComponent } from 'vue'
 import { useMemo } from 'vooks'
 import { formatLength } from '../../_utils'
-import { useTheme } from '../../_mixins'
+import { useStyle } from '../../_mixins'
 import style from './styles/index.cssr.js'
 
 export default defineComponent({
@@ -30,7 +30,6 @@ export default defineComponent({
     }
   },
   props: {
-    ...useTheme.props,
     gutter: {
       type: [Array, Number, String],
       default: 0
@@ -49,7 +48,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    useTheme('Grid', 'Grid', style, null, null)
+    useStyle('Grid', style)
     const verticalGutterRef = useMemo(() => {
       const { gutter } = props
       if (Array.isArray(gutter)) {

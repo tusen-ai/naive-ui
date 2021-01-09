@@ -1,13 +1,9 @@
 import sizeVariables from './_common'
-import { iconLight } from '../../icon/styles'
 import { commonLight } from '../../_styles/new-common'
 
 export default {
   name: 'Result',
   common: commonLight,
-  peers: {
-    Icon: iconLight
-  },
   self (vars) {
     const {
       textColor2,

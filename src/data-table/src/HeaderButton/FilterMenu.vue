@@ -7,7 +7,6 @@
     >
       <n-checkbox-group
         v-if="multiple"
-        :theme="'light'"
         :value="cachedValue"
         class="n-data-table-filter-menu__group"
         @update:value="handleChange"
@@ -15,6 +14,8 @@
         <n-checkbox
           v-for="option in options"
           :key="option.value"
+          :unstable-theme="NDataTable.mergedTheme.peers.Checkbox"
+          :unstable-theme-overrides="NDataTable.mergedTheme.overrides.Checkbox"
           :value="option.value"
         >
           {{ option.label }}
@@ -22,7 +23,6 @@
       </n-checkbox-group>
       <n-radio-group
         v-else
-        :theme="'light'"
         :name="radioGroupName"
         class="n-data-table-filter-menu__group"
         :value="radioGroupValue"
@@ -32,18 +32,29 @@
           v-for="option in options"
           :key="option.value"
           :value="option.value"
+          :unstable-theme-overrides="NDataTable.mergedTheme.overrides.Radio"
+          :unstable-theme="NDataTable.mergedTheme.peers.Radio"
         >
           {{ option.label }}
         </n-radio>
       </n-radio-group>
     </n-scrollbar>
-    <n-divider :theme="'light'" />
+    <n-divider
+      :unstable-theme-overrides="NDataTable.mergedTheme.overrides.Divider"
+      :unstable-theme="NDataTable.mergedTheme.peers.Divider"
+    />
     <div class="n-data-table-filter-menu__action">
-      <n-button size="tiny" :theme="'light'" @click="handleCancelClick">
+      <n-button
+        size="tiny"
+        :unstable-theme-overrides="NDataTable.mergedTheme.overrides.Button"
+        :unstable-theme="NDataTable.mergedTheme.peers.Button"
+        @click="handleCancelClick"
+      >
         {{ NDataTable.locale.clear }}
       </n-button>
       <n-button
-        :theme="'light'"
+        :unstable-theme-overrides="NDataTable.mergedTheme.overrides.Button"
+        :unstable-theme="NDataTable.mergedTheme.peers.Button"
         type="primary"
         size="tiny"
         @click="handleConfirmClick"
@@ -55,6 +66,7 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import { NCheckbox, NCheckboxGroup } from '../../../checkbox'
 import { NRadio, NRadioGroup } from '../../../radio'
 import { NDivider } from '../../../divider'
@@ -75,7 +87,7 @@ function isEqual (value, oldValue) {
   }
 }
 
-export default {
+export default defineComponent({
   components: {
     NCheckboxGroup,
     NCheckbox,
@@ -85,11 +97,7 @@ export default {
     NButton,
     NScrollbar
   },
-  inject: {
-    NDataTable: {
-      default: null
-    }
-  },
+  inject: ['NDataTable'],
   props: {
     column: {
       type: Object,
@@ -173,5 +181,5 @@ export default {
       this.onCancel()
     }
   }
-}
+})
 </script>

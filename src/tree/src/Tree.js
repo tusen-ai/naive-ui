@@ -220,6 +220,7 @@ export default defineComponent({
       mergedExpandedKeys: mergedExpandedKeysRef,
       highlightKeys: ref([]),
       loadingKeys: ref([]),
+      mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },

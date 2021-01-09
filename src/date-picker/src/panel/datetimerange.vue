@@ -9,7 +9,8 @@
     <div class="n-date-panel-header">
       <n-input
         v-model:value="startDateDisplayString"
-        :theme="'light'"
+        :unstable-theme="NDatePicker.mergedTheme.peers.Input"
+        :unstable-theme-overrides="NDatePicker.mergedTheme.overrides.Input"
         :size="timePickerSize"
         :stateful="false"
         class="n-date-panel-date-input"
@@ -24,7 +25,8 @@
         :size="timePickerSize"
         teleport-disabled
         :show-icon="false"
-        :theme="'light'"
+        :unstable-theme="NDatePicker.mergedTheme.peers.TimePicker"
+        :unstable-theme-overrides="NDatePicker.mergedTheme.overrides.TimePicker"
         :stateful="false"
         :placeholder="locale.selectTime"
         :format="timeFormat"
@@ -36,7 +38,8 @@
       />
       <n-input
         v-model:value="endDateDisplayString"
-        :theme="'light'"
+        :unstable-theme="NDatePicker.mergedTheme.peers.Input"
+        :unstable-theme-overrides="NDatePicker.mergedTheme.overrides.Input"
         :stateful="false"
         :size="timePickerSize"
         class="n-date-panel-date-input"
@@ -49,7 +52,8 @@
       />
       <n-time-picker
         :show-icon="false"
-        :theme="'light'"
+        :unstable-theme="NDatePicker.mergedTheme.peers.TimePicker"
+        :unstable-theme-overrides="NDatePicker.mergedTheme.overrides.TimePicker"
         teleport-disabled
         :size="timePickerSize"
         :stateful="false"
@@ -183,7 +187,8 @@
     <div v-if="actions && actions.length" class="n-date-panel-actions">
       <n-button
         v-if="actions.includes('clear')"
-        :theme="'light'"
+        :unstable-theme="NDatePicker.mergedTheme.peers.Button"
+        :unstable-theme-overrides="NDatePicker.mergedTheme.overrides.Button"
         size="tiny"
         @click="clearValue"
       >
@@ -191,7 +196,8 @@
       </n-button>
       <n-button
         v-if="actions.includes('confirm')"
-        :theme="'light'"
+        :unstable-theme="NDatePicker.mergedTheme.peers.Button"
+        :unstable-theme-overrides="NDatePicker.mergedTheme.overrides.Button"
         :disabled="isRangeInvalid"
         size="tiny"
         type="primary"

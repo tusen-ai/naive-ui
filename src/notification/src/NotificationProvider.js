@@ -1,13 +1,17 @@
 import { Fragment, h, reactive, ref, Teleport, defineComponent } from 'vue'
 import { createId } from 'seemly'
+import { useTheme } from '../../_mixins'
 import { omit } from '../../_utils'
+import { notificationLight } from '../styles'
 import NotificationContainer from './NotificationContainer.vue'
 import NotificationEnvironment from './NotificationEnvironment'
+import style from './styles/index.cssr.js'
 
 export default defineComponent({
   name: 'NotificationProvider',
   provide () {
     return {
+      NNotificationProvider: this,
       notification: {
         create: this.create,
         info: this.info,
@@ -18,6 +22,7 @@ export default defineComponent({
     }
   },
   props: {
+    ...useTheme.props,
     to: {
       type: [String, Object],
       default: undefined
@@ -27,10 +32,18 @@ export default defineComponent({
       default: true
     }
   },
-  setup () {
+  setup (props) {
     const notificationListRef = ref([])
+    const themeRef = useTheme(
+      'Notification',
+      'Notification',
+      style,
+      notificationLight,
+      props
+    )
     return {
-      notificationList: notificationListRef
+      notificationList: notificationListRef,
+      mergedTheme: themeRef
     }
   },
   methods: {

@@ -16,9 +16,9 @@
       }"
       @click="handleBackwardClick"
     >
-      <n-icon>
+      <n-base-icon>
         <backward-icon />
-      </n-icon>
+      </n-base-icon>
     </div>
     <div
       v-for="(pageItem, index) in pageItems"
@@ -36,20 +36,20 @@
         {{ pageItem.label }}
       </template>
       <template v-if="pageItem.type === 'fastBackward'">
-        <n-icon v-if="showFastBackward">
+        <n-base-icon v-if="showFastBackward">
           <fast-backward-icon />
-        </n-icon>
-        <n-icon v-else>
+        </n-base-icon>
+        <n-base-icon v-else>
           <more-icon />
-        </n-icon>
+        </n-base-icon>
       </template>
       <template v-if="pageItem.type === 'fastForward'">
-        <n-icon v-if="showFastForward">
+        <n-base-icon v-if="showFastForward">
           <fast-forward-icon />
-        </n-icon>
-        <n-icon v-else>
+        </n-base-icon>
+        <n-base-icon v-else>
           <more-icon />
-        </n-icon>
+        </n-base-icon>
       </template>
     </div>
     <div
@@ -60,9 +60,9 @@
       }"
       @click="handleForwardClick"
     >
-      <n-icon>
+      <n-base-icon>
         <forward-icon />
-      </n-icon>
+      </n-base-icon>
     </div>
     <n-select
       v-if="showSizePicker"
@@ -71,6 +71,8 @@
       :options="pageSizeOptions"
       :value="pageSize"
       :disabled="disabled"
+      :unstable-theme="mergedTheme.peers.Select"
+      :unstable-theme-overrides="mergedTheme.overrides.Select"
       @update:value="handleSizePickerChange"
     />
     <div v-if="showQuickJumper" class="n-pagination-quick-jumper">
@@ -80,6 +82,8 @@
         :size="inputSize"
         placeholder=""
         :disabled="disabled"
+        :unstable-theme="mergedTheme.peers.Input"
+        :unstable-theme-overrides="mergedTheme.overrides.Input"
         @keyup="handleQuickJumperKeyUp"
       />
     </div>
@@ -91,7 +95,7 @@ import { nextTick, computed, ref, toRef, watch } from 'vue'
 import { useCompitable, useMergedState } from 'vooks'
 import { NSelect } from '../../select'
 import { NInput } from '../../input'
-import { NIcon } from '../../icon'
+import { NBaseIcon } from '../../_base'
 import {
   FastForwardIcon,
   FastBackwardIcon,
@@ -227,7 +231,7 @@ export default {
   components: {
     NSelect,
     NInput,
-    NIcon,
+    NBaseIcon,
     BackwardIcon,
     ForwardIcon,
     MoreIcon,
@@ -358,6 +362,7 @@ export default {
       ),
       jumperValue: jumperValueRef,
       transitionDisabled: transitionDisabledRef,
+      mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
           self: {
@@ -427,10 +432,10 @@ export default {
           '--jumper-text-color': jumperTextColor,
           '--jumper-text-color-disabled': jumperTextColorDisabled,
           '--item-margin': itemMargin,
-          '--button-icon-size': buttonIconSize,
-          '--button-icon-color': buttonIconColor,
-          '--button-icon-color-hover': buttonIconColorHover,
-          '--button-icon-color-pressed': buttonIconColorPressed,
+          '--button-base-icon-size': buttonIconSize,
+          '--button-base-icon-color': buttonIconColor,
+          '--button-base-icon-color-hover': buttonIconColorHover,
+          '--button-base-icon-color-pressed': buttonIconColorPressed,
           '--button-border': buttonBorder,
           '--button-border-hover': buttonBorderHover,
           '--button-border-pressed': buttonBorderPressed

@@ -198,10 +198,10 @@ export default c([
       fadeInWidthExpandTransition()
     ]),
     cE('content', `
-        display: flex;
-        align-items: center;
-        flex-wrap: nowrap;
-      `, [
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+    `, [
       c('~', [
         cE('icon', {
           margin: 'var(--icon-margin)',
@@ -210,9 +210,9 @@ export default c([
       ])
     ]),
     cM('block', `
-        display: flex;
-        width: 100%;
-      `),
+      display: flex;
+      width: 100%;
+    `),
     cM('dashed', [
       cE('border, state-border', {
         borderStyle: 'dashed !important'
@@ -222,8 +222,7 @@ export default c([
       cursor: 'not-allowed',
       opacity: 'var(--opacity-disabled)'
     })
-  ]
-  ),
+  ]),
   c('@keyframes button-wave-spread', {
     from: {
       boxShadow: '0 0 0.5px 0 var(--ripple-color)'

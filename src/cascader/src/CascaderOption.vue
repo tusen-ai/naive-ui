@@ -15,8 +15,8 @@
         :disabled="disabled"
         :checked="checked"
         :indeterminate="indeterminate"
-        :unstable-theme="NCascader.theme.peers.Checkbox"
-        :unstable-theme-overrides="NCascader.theme.overrides.Checkbox"
+        :unstable-theme="NCascader.mergedTheme.peers.Checkbox"
+        :unstable-theme-overrides="NCascader.mergedTheme.overrides.Checkbox"
         @click.stop="handleCheck"
       />
     </div>

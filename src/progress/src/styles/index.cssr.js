@@ -18,20 +18,18 @@ export default c([
   cB('progress', {
     display: 'inline-block'
   }, [
-    cB('progress-icon', [
-      cB('icon', {
-        color: 'var(--icon-color)',
-        transition: 'color .3s var(--bezier)'
-      })
-    ]),
-    cM('line', {
-      width: '100%',
-      display: 'block'
-    }, [
-      cB('progress-content', {
-        display: 'flex',
-        alignItems: 'center'
-      }, [
+    cB('progress-icon', `
+      color: var(--icon-color);
+      transition: color .3s var(--bezier);
+    `),
+    cM('line', `
+      width: 100%;
+      display: block;
+    `, [
+      cB('progress-content', `
+        display: flex;
+        align-items: center;
+      `, [
         cB('progress-graph', {
           flex: 1
         })

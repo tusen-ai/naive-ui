@@ -1,4 +1,6 @@
-export default {
+import { defineComponent } from 'vue'
+
+export default defineComponent({
   name: 'DataTableSorterRender',
   props: {
     render: {
@@ -22,4 +24,4 @@ export default {
       order
     })
   }
-}
+})

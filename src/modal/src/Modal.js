@@ -1,15 +1,23 @@
-import { h, withDirectives, Transition, ref, computed, mergeProps } from 'vue'
+import {
+  h,
+  withDirectives,
+  Transition,
+  ref,
+  computed,
+  mergeProps,
+  defineComponent
+} from 'vue'
 import { zindexable } from 'vdirs'
 import { useIsMounted, useClicked, useClickPosition } from 'vooks'
 import { VLazyTeleport } from 'vueuc'
 import { useConfig, useTheme } from '../../_mixins'
-import presetProps from './presetProps'
 import { warn, omit } from '../../_utils'
+import { modalLight } from '../styles'
+import presetProps from './presetProps'
 import NModalBodyWrapper from './BodyWrapper.vue'
 import style from './styles/index.cssr.js'
-import { modalLight } from '../styles'
 
-export default {
+export default defineComponent({
   name: 'Modal',
   provide () {
     return {
@@ -44,6 +52,7 @@ export default {
     },
     ...presetProps,
     // events
+    // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:show': {
       type: Function,
       default: undefined
@@ -144,6 +153,7 @@ export default {
         }
         return null
       }),
+      mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseOut },
@@ -273,4 +283,4 @@ export default {
       }
     )
   }
-}
+})

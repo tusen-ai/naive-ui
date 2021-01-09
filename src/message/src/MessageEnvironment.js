@@ -1,8 +1,8 @@
-import { h, Transition } from 'vue'
+import { h, Transition, defineComponent } from 'vue'
 import NMessage from './Message.js'
 import props from './message-props'
 
-export default {
+export default defineComponent({
   name: 'MessageEnvironment',
   props: {
     ...props,
@@ -96,4 +96,4 @@ export default {
       }
     )
   }
-}
+})

@@ -12,8 +12,7 @@ export default cB('empty', `
   flex-direction: column;
   align-items: center;
   font-size: var(--font-size);
-`,
-[
+`, [
   cE('icon', `
     width: var(--icon-size);
     height: var(--icon-size);

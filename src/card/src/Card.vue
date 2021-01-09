@@ -105,7 +105,7 @@ export default defineComponent({
     const themeRef = useTheme('Card', 'Card', style, cardLight, props)
     return {
       handleCloseClick,
-      theme: themeRef,
+      mergedTheme: themeRef,
       cssVars: computed(() => {
         const { size } = props
         const {

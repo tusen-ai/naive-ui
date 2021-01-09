@@ -42,9 +42,9 @@
           <slot />
         </div>
         <div v-else-if="status !== 'default'" class="n-progress-icon">
-          <n-icon>
+          <n-base-icon>
             <component :is="iconType" />
-          </n-icon>
+          </n-base-icon>
         </div>
         <div
           v-else
@@ -139,9 +139,9 @@
           {{ percentage }}{{ unit }}
         </div>
         <div v-else-if="status" class="n-progress-icon">
-          <n-icon>
+          <n-base-icon>
             <component :is="iconType" />
-          </n-icon>
+          </n-base-icon>
         </div>
         <div
           v-else
@@ -218,7 +218,7 @@
 <script>
 import { nextTick, getCurrentInstance, computed, defineComponent } from 'vue'
 import { onFontsReady } from 'vooks'
-import { NIcon } from '../../icon'
+import { NBaseIcon } from '../../_base'
 import {
   CheckmarkIcon as SuccessIcon,
   CloseIcon as ErrorIcon,
@@ -241,7 +241,7 @@ function circlePath (r, sw, vw = 100) {
 export default defineComponent({
   name: 'Progress',
   components: {
-    NIcon,
+    NBaseIcon,
     SuccessIcon,
     ErrorIcon,
     WarningIcon,

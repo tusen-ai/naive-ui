@@ -162,6 +162,7 @@ export default defineComponent({
       activePath: activePathRef,
       tmNodes: tmNodesRef,
       transitionDisabled: transitionDisabledRef,
+      mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },

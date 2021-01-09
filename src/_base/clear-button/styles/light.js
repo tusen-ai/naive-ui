@@ -1,14 +1,10 @@
 import commonVariables from './_common'
 import { scaleColor } from 'seemly'
 import { commonLight } from '../../../_styles/new-common'
-import { iconLight } from '../../../icon/styles'
 
 export default {
   name: 'BaseClearButton',
   common: commonLight,
-  peers: {
-    Icon: iconLight
-  },
   self (vars) {
     const { textColor4Overlay } = vars
     return {

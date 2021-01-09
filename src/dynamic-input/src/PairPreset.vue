@@ -1,12 +1,16 @@
 <template>
   <div class="n-dynamic-input-preset-pair">
     <n-input
+      :unstable-theme="NDynamicInput.mergedTheme.peers.Input"
+      :unstable-theme-overrides="NDynamicInput.mergedTheme.overrides.Input"
       :value="value.key"
       class="n-dynamic-input-pair-input"
       :placeholder="NDynamicInput.keyPlaceholder"
       @update:value="handleKeyInput"
     />
     <n-input
+      :unstable-theme="NDynamicInput.mergedTheme.peers.Input"
+      :unstable-theme-overrides="NDynamicInput.mergedTheme.overrides.Input"
       :value="value.value"
       class="n-dynamic-input-pair-input"
       :placeholder="NDynamicInput.valuePlaceholder"

@@ -8,9 +8,9 @@
   >
     <div class="n-popconfirm-content__body">
       <slot v-if="showIcon" name="icon">
-        <n-icon>
+        <n-base-icon>
           <warning-icon />
-        </n-icon>
+        </n-base-icon>
       </slot>
       <slot />
     </div>
@@ -28,23 +28,20 @@
 </template>
 
 <script>
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, inject } from 'vue'
 import { NButton } from '../../button'
-import { NIcon } from '../../icon'
+import { NBaseIcon } from '../../_base'
 import { WarningIcon } from '../../_base/icons'
-import { useTheme, useLocale } from '../../_mixins'
-import { popconfirmLight } from '../styles'
-import style from './styles/index.cssr.js'
+import { useLocale } from '../../_mixins'
 
 export default defineComponent({
   name: 'NPopconfirmPanel',
   components: {
     NButton,
-    NIcon,
+    NBaseIcon,
     WarningIcon
   },
   props: {
-    ...useTheme.props,
     positiveText: {
       type: String,
       default: undefined
@@ -67,14 +64,8 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const themeRef = useTheme(
-      'Popconfirm',
-      'Popconfirm',
-      style,
-      popconfirmLight,
-      props
-    )
     const { locale: localeRef } = useLocale('Popconfirm')
+    const NPopconfirm = inject('NPopconfirm')
     return {
       ...useLocale('Popconfirm'),
       localizedPositiveText: computed(() => {
@@ -93,7 +84,7 @@ export default defineComponent({
         const {
           common: { cubicBezierEaseInOut },
           self: { fontSize, iconSize, iconColor }
-        } = themeRef.value
+        } = NPopconfirm.mergedTheme
         return {
           '--bezier': cubicBezierEaseInOut,
           '--font-size': fontSize,

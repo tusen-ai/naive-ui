@@ -1,16 +1,10 @@
-import { Fragment, ref, h, reactive, Teleport } from 'vue'
+import { Fragment, ref, h, reactive, Teleport, defineComponent } from 'vue'
 import { createId } from 'seemly'
 import { omit } from '../../_utils'
 import MessageEnvironment from './MessageEnvironment.js'
 
-export default {
+export default defineComponent({
   name: 'MessageProvider',
-  props: {
-    to: {
-      type: [String, Object],
-      default: undefined
-    }
-  },
   provide () {
     return {
       message: {
@@ -20,6 +14,12 @@ export default {
         error: this.error,
         loading: this.loading
       }
+    }
+  },
+  props: {
+    to: {
+      type: [String, Object],
+      default: undefined
     }
   },
   setup () {
@@ -88,4 +88,4 @@ export default {
       this.$slots.default()
     ])
   }
-}
+})

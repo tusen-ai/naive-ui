@@ -18,46 +18,6 @@ export default cB('input-group', `
         margin-left: -1px!important;
       `)
     ]),
-    cB('input-number', [
-      c('&:not(:last-child)', `
-        border-top-right-radius: 0!important;
-        border-bottom-right-radius: 0!important;
-      `, [
-        cE('input, add-button, state-border, border', `
-          border-top-right-radius: 0!important;
-          border-bottom-right-radius: 0!important;
-        `, [
-          cB('input-number-button-state-border', `
-            border-top-right-radius: 0!important;
-            border-bottom-right-radius: 0!important;
-          `),
-          cB('input-number-button-border', `
-            border-top-right-radius: 0!important;
-            border-bottom-right-radius: 0!important;
-          `),
-          cB('input-number-button-boundary', `  
-            background-color: transparent !important;
-          `)
-        ])
-      ]),
-      c('&:not(:first-child)', `
-        border-top-left-radius: 0!important;
-        border-bottom-left-radius: 0!important;
-      `, [
-        cE('input, minus-button, state-border, border', `
-          border-top-left-radius: 0!important;
-          border-bottom-left-radius: 0!important;
-        `, [
-          cB('input-number-button-state-border', `
-            border-top-left-radius: 0!important;
-            border-bottom-left-radius: 0!important;
-          `),
-          cB('input-number-button-boundary', `
-            background-color: transparent !important;
-          `)
-        ])
-      ])
-    ]),
     cB('button', [
       c('&:not(:last-child)', `
         border-top-right-radius: 0!important;

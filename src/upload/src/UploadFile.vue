@@ -11,12 +11,14 @@
   >
     <div class="n-upload-file-info">
       <div class="n-upload-file-info__name">
-        <n-icon><attach-icon /></n-icon>{{ file.name }}
+        <n-base-icon><attach-icon /></n-base-icon>{{ file.name }}
       </div>
       <div class="n-upload-file-info__action">
         <n-button
           v-if="showRemoveButton || showCancelButton"
           key="cancelOrTrash"
+          :unstable-theme="NUpload.mergedTheme.peers.Button"
+          :unstable-theme-overrides="NUpload.mergedTheme.overrides.Button"
           circle
           size="tiny"
           ghost
@@ -61,9 +63,8 @@ import {
   AttachIcon,
   DownloadIcon
 } from '../../_base/icons'
-import { NIcon } from '../../icon'
 import { NButton } from '../../button'
-import { NIconSwitchTransition } from '../../_base'
+import { NIconSwitchTransition, NBaseIcon } from '../../_base'
 import { warn } from '../../_utils'
 import NUploadProgress from './UploadProgress.vue'
 
@@ -74,16 +75,12 @@ export default defineComponent({
     NUploadProgress,
     AttachIcon,
     CancelIcon,
-    NIcon,
+    NBaseIcon,
     DownloadIcon,
     DeleteIcon,
     NIconSwitchTransition
   },
-  inject: {
-    NUpload: {
-      default: null
-    }
-  },
+  inject: ['NUpload'],
   props: {
     file: {
       type: Object,

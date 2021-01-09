@@ -67,7 +67,7 @@ export default defineComponent({
     )
     return {
       collectedItemNames: markRaw([]),
-      theme: themeRef,
+      mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },

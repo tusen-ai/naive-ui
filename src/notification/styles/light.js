@@ -1,13 +1,11 @@
 import { avatarLight } from '../../avatar/styles'
 import { scrollbarLight } from '../../scrollbar/styles'
-import { iconLight } from '../../icon/styles'
 import { commonLight } from '../../_styles/new-common'
 
 export default {
   name: 'Notification',
   common: commonLight,
   peers: {
-    Icon: iconLight,
     Avatar: avatarLight,
     Scrollbar: scrollbarLight
   },

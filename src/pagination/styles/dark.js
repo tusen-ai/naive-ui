@@ -1,17 +1,15 @@
 import { changeColor } from 'seemly'
 import { selectDark } from '../../select/styles'
 import { inputDark } from '../../input/styles'
-import { iconDark } from '../../icon/styles'
-import commonVariables from './_common.js'
 import { commonDark } from '../../_styles/new-common'
+import commonVariables from './_common.js'
 
 export default {
   name: 'Pagination',
   common: commonDark,
   peers: {
     Select: selectDark,
-    Input: inputDark,
-    Icon: iconDark
+    Input: inputDark
   },
   self (vars) {
     const {

@@ -8,10 +8,11 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import { render } from '../../../_utils'
 
-export default {
-  name: 'NDataTableCell',
+export default defineComponent({
+  name: 'DataTableCell',
   components: {
     render
   },
@@ -33,5 +34,5 @@ export default {
       default: null
     }
   }
-}
+})
 </script>

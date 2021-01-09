@@ -22,12 +22,12 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { dividerLight } from '../styles'
 import style from './styles/index.cssr'
 
-export default {
+export default defineComponent({
   name: 'Divider',
   props: {
     ...useTheme.props,
@@ -62,5 +62,5 @@ export default {
       })
     }
   }
-}
+})
 </script>

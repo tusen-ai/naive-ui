@@ -9,9 +9,9 @@
   >
     <div class="n-tree-node-switcher__icon">
       <n-icon-switch-transition>
-        <n-icon v-if="!loading" key="switcher">
+        <n-base-icon v-if="!loading" key="switcher">
           <switcher-icon />
-        </n-icon>
+        </n-base-icon>
         <n-base-loading v-else key="loading" :theme="'light'" />
       </n-icon-switch-transition>
     </div>
@@ -21,12 +21,13 @@
 <script>
 import { defineComponent } from 'vue'
 import { SwitcherIcon } from '../../_base/icons'
-import { NIconSwitchTransition, NBaseLoading } from '../../_base'
+import { NIconSwitchTransition, NBaseLoading, NBaseIcon } from '../../_base'
 
 export default defineComponent({
   name: 'NTreeSwitcher',
   components: {
     SwitcherIcon,
+    NBaseIcon,
     NBaseLoading,
     NIconSwitchTransition
   },

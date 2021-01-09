@@ -108,6 +108,9 @@ export default c([
       cE('avatar', [
         cB('icon', {
           color: 'var(--icon-color)'
+        }),
+        cB('base-icon', {
+          color: 'var(--icon-color)'
         })
       ]),
       cM('show-avatar', [

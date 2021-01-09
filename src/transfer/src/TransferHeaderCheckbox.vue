@@ -1,6 +1,7 @@
 <template>
   <n-checkbox
-    :theme="'light'"
+    :unstable-theme="NTransfer.mergedTheme.peers.Checkbox"
+    :unstable-theme-overrides="NTransfer.mergedTheme.overrides.Checkbox"
     :checked="checkboxProps.checked"
     :indeterminate="checkboxProps.indeterminate"
     :disabled="checkboxProps.disabled"

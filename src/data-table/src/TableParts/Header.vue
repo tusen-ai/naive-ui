@@ -81,10 +81,11 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
+import { render } from '../../../_utils'
 import SortButton from '../HeaderButton/SortButton.vue'
 import FilterButton from '../HeaderButton/FilterButton.vue'
 import { createCustomWidthStyle } from '../utils'
-import { render } from '../../../_utils'
 
 function isColumnSortable (column) {
   return !!column.sorter
@@ -114,7 +115,8 @@ function createNextSorter (columnKey, activeSorter, sorter) {
   }
 }
 
-export default {
+export default defineComponent({
+  name: 'DataTableHeader',
   components: {
     render,
     SortButton,
@@ -199,5 +201,5 @@ export default {
       this.NDataTable.changeSorter(nextSorter)
     }
   }
-}
+})
 </script>

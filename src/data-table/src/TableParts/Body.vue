@@ -2,7 +2,8 @@
   <n-scrollbar
     ref="scrollbarRef"
     class="n-data-table-base-table-body"
-    :theme="'light'"
+    :unstable-theme="NDataTable.mergedTheme.peers.Scrollbar"
+    :unstable-theme-overrides="NDataTable.mergedTheme.overrides.Scrollbar"
     :content-style="{
       minWidth: formatedScrollX
     }"
@@ -72,17 +73,18 @@
 </template>
 
 <script>
-import { ref } from 'vue'
-import Cell from './Cell.vue'
+import { ref, defineComponent } from 'vue'
+import { NScrollbar } from '../../../scrollbar'
+import { formatLength } from '../../../_utils'
 import {
   createCustomWidthStyle,
   setCheckStatusOfRow,
   createRowKey
 } from '../utils'
-import { NScrollbar } from '../../../scrollbar'
-import { formatLength } from '../../../_utils'
+import Cell from './Cell.vue'
 
-export default {
+export default defineComponent({
+  name: 'DataTableBody',
   components: {
     NScrollbar,
     Cell
@@ -166,5 +168,5 @@ export default {
       this.NDataTable.handleTableBodyScroll(event)
     }
   }
-}
+})
 </script>

@@ -3,27 +3,30 @@
     class="n-dialog"
     :class="{
       'n-dialog--bordered': bordered,
-      [`n-dialog--icon-${mergedIconPlacement}`]: true,
-      [`n-dialog--${type}-type`]: type
+      [`n-dialog--icon-${mergedIconPlacement}`]: true
     }"
     :style="cssVars"
   >
-    <n-icon v-if="closable" class="n-dialog__close" @click="handleCloseClick">
+    <n-base-icon
+      v-if="closable"
+      class="n-dialog__close"
+      @click="handleCloseClick"
+    >
       <close-icon />
-    </n-icon>
+    </n-base-icon>
     <div
       v-if="mergedShowIcon && mergedIconPlacement === 'top'"
       class="n-dialog-icon-container"
     >
-      <n-icon class="n-dialog__icon">
+      <n-base-icon class="n-dialog__icon">
         <slot name="icon">
           <render v-if="icon" :render="icon" />
           <component :is="iconType" v-else-if="type !== 'default'" />
         </slot>
-      </n-icon>
+      </n-base-icon>
     </div>
     <div class="n-dialog__title">
-      <n-icon
+      <n-base-icon
         v-if="mergedShowIcon && mergedIconPlacement === 'left'"
         class="n-dialog__icon"
       >
@@ -31,7 +34,7 @@
           <render v-if="icon" :render="icon" />
           <component :is="iconType" v-else-if="type !== 'default'" />
         </slot>
-      </n-icon>
+      </n-base-icon>
       <slot name="header">
         <render :render="title" />
       </slot>
@@ -45,7 +48,8 @@
       <slot name="action">
         <n-button
           v-if="negativeText"
-          :theme="'light'"
+          :unstable-theme="mergedTheme.peers.Button"
+          :unstable-theme-overrides="mergedTheme.overrides.Button"
           ghost
           size="small"
           @click="handleNegativeClick"
@@ -53,8 +57,9 @@
           <render :render="negativeText" />
         </n-button>
         <n-button
-          :theme="'light'"
-          :disabled="loading === true"
+          :unstable-theme="mergedTheme.peers.Button"
+          :unstable-theme-overrides="mergedTheme.overrides.Button"
+          :disabled="loading"
           :loading="loading"
           size="small"
           :type="type === 'default' ? 'primary' : type"
@@ -71,7 +76,7 @@
 import { defineComponent, computed } from 'vue'
 import { useTheme } from '../../_mixins'
 import { render, createKey } from '../../_utils'
-import { NIcon } from '../../icon'
+import { NBaseIcon } from '../../_base'
 import { NButton } from '../../button'
 import {
   InfoIcon,
@@ -90,7 +95,7 @@ export default defineComponent({
     'Confirm' // deprecated
   ],
   components: {
-    NIcon,
+    NBaseIcon,
     NButton,
     CloseIcon,
     WarningIcon,
@@ -161,6 +166,7 @@ export default defineComponent({
   setup (props) {
     const themeRef = useTheme('Dialog', 'Dialog', style, dialogLight, props)
     return {
+      mergedTheme: themeRef,
       cssVars: computed(() => {
         const { type, iconPlacement } = props
         const {

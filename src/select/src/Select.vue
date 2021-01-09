@@ -16,8 +16,8 @@
           :clearable="clearable"
           :disabled="disabled"
           :size="mergedSize"
-          :unstable-theme="theme.peers.BaseSelection"
-          :unstable-theme-overrides="theme.overrides.BaseSelection"
+          :unstable-theme="mergedTheme.peers.BaseSelection"
+          :unstable-theme-overrides="mergedTheme.overrides.BaseSelection"
           :loading="loading"
           :autofocus="autofocus"
           @click="handleTriggerClick"
@@ -56,8 +56,8 @@
             v-clickoutside="handleMenuClickOutside"
             class="n-select-menu"
             auto-pending
-            :unstable-theme="theme.peers.BaseSelectMenu"
-            :unstable-theme-overrides="theme.overrides.BaseSelectMenu"
+            :unstable-theme="mergedTheme.peers.BaseSelectMenu"
+            :unstable-theme-overrides="mergedTheme.overrides.BaseSelectMenu"
             :pattern="pattern"
             :tree-mate="treeMate"
             :multiple="multiple"
@@ -301,7 +301,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    useTheme('Select', 'Select', style, selectLight, props)
+    const themeRef = useTheme('Select', 'Select', style, selectLight, props)
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(
@@ -351,7 +351,8 @@ export default defineComponent({
       memoValOptMap: ref(new Map()),
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
-      followerRef
+      followerRef,
+      mergedTheme: themeRef
     }
   },
   computed: {

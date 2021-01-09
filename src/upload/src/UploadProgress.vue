@@ -7,6 +7,8 @@
       :percentage="percentage"
       :status="status"
       :height="2"
+      :unstable-theme="NUpload.mergedTheme.peers.Progress"
+      :unstable-theme-overrides="NUpload.mergedTheme.overrides.Progress"
     />
   </n-fade-in-expand-transition>
 </template>
@@ -22,6 +24,7 @@ export default defineComponent({
     NProgress,
     NFadeInExpandTransition
   },
+  inject: ['NUpload'],
   props: {
     show: {
       type: Boolean,

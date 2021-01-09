@@ -1,13 +1,9 @@
 import { commonDark } from '../../_styles/new-common'
 import commonVariables from './_common'
-import { iconDark } from '../../icon/styles'
 
 export default {
   name: 'Steps',
   common: commonDark,
-  peers: {
-    Icon: iconDark
-  },
   self (vars) {
     const {
       fontWeightStrong,

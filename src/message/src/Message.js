@@ -1,5 +1,4 @@
 import { computed, h } from 'vue'
-import { NIcon } from '../../icon'
 import {
   InfoIcon,
   SuccessIcon,
@@ -7,7 +6,7 @@ import {
   ErrorIcon,
   CloseIcon
 } from '../../_base/icons'
-import { NIconSwitchTransition, NBaseLoading } from '../../_base'
+import { NIconSwitchTransition, NBaseLoading, NBaseIcon } from '../../_base'
 import { render, createKey } from '../../_utils'
 import { useTheme } from '../../_mixins'
 import { messageLight } from '../styles'
@@ -90,7 +89,7 @@ export default {
             class: 'n-message__icon'
           },
           [
-            h(NIcon, null, {
+            h(NBaseIcon, null, {
               default: () => [
                 h(NIconSwitchTransition, null, {
                   default: () => [createIconVNode(icon, type)]
@@ -118,7 +117,7 @@ export default {
             },
             [
               h(
-                NIcon,
+                NBaseIcon,
                 {
                   onClick: handleClose
                 },

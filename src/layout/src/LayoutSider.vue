@@ -18,7 +18,8 @@
       v-if="!nativeScrollbar"
       ref="scrollbar"
       class="n-layout-sider__content"
-      :theme="'light'"
+      :unstable-theme="NLayout.mergedTheme.peers.Scrollbar"
+      :unstable-theme-overrides="NLayout.mergedTheme.overrides.Scrollbar"
       v-bind="scrollbarProps"
     >
       <slot />

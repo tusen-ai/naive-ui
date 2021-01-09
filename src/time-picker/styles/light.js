@@ -2,13 +2,15 @@ import commonVars from './_common'
 import { iconLight } from '../../icon/styles'
 import { scrollbarDark } from '../../scrollbar/styles'
 import { commonLight } from '../../_styles/new-common'
+import { buttonDark } from '../../button/styles'
 
 export default {
   name: 'TimePicker',
   common: commonLight,
   peers: {
     Icon: iconLight,
-    Scrollbar: scrollbarDark
+    Scrollbar: scrollbarDark,
+    Button: buttonDark
   },
   self (vars) {
     const {

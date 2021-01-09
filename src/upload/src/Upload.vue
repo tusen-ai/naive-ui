@@ -254,6 +254,7 @@ export default defineComponent({
   setup (props) {
     const themeRef = useTheme('Upload', 'Upload', style, uploadLight, props)
     return {
+      mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },

@@ -2,8 +2,8 @@
   <div class="n-cascader-submenu">
     <n-scrollbar
       ref="scrollbarRef"
-      :unstable-theme="NCascader.theme.peers.Scrollbar"
-      :unstable-theme-overrides="NCascader.theme.overrides.Scrollbar"
+      :unstable-theme="NCascader.mergedTheme.peers.Scrollbar"
+      :unstable-theme-overrides="NCascader.mergedTheme.overrides.Scrollbar"
     >
       <n-cascader-option
         v-for="tmNode in tmNodes"

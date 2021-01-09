@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { useTheme } from '../../_mixins'
+import { useStyle } from '../../_mixins'
 import style from './styles/button-group.cssr.js'
 
 export default {
@@ -32,8 +32,8 @@ export default {
       default: false
     }
   },
-  setup (props) {
-    useTheme('Button', 'ButtonGroup', style, undefined, props)
+  setup () {
+    useStyle('ButtonGroup', style)
   }
 }
 </script>

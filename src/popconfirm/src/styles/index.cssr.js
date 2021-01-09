@@ -13,7 +13,7 @@ export default cB('popconfirm-content', {
     white-space: nowrap;
     position: relative;
   `, [
-    cB('icon', `
+    cB('base-icon', `
       position: absolute;
       font-size: var(--icon-size);
       left: 0;

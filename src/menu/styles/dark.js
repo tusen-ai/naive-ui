@@ -1,5 +1,4 @@
 import { changeColor } from 'seemly'
-import { iconDark } from '../../icon/styles'
 import { tooltipDark } from '../../tooltip/styles'
 import { commonDark } from '../../_styles/new-common'
 
@@ -7,7 +6,6 @@ export default {
   name: 'Menu',
   common: commonDark,
   peers: {
-    Icon: iconDark,
     Tooltip: tooltipDark
   },
   self (vars) {

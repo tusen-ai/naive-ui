@@ -43,8 +43,8 @@
         v-else
         class="n-base-select-menu-option-wrapper"
         :style="{
-          paddingTop: 4,
-          paddingBottom: 4
+          paddingTop: '4px',
+          paddingBottom: '4px'
         }"
       >
         <template v-for="tmNode in tmNodes">

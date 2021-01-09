@@ -19,9 +19,9 @@
           }"
           @click="scroll('left')"
         >
-          <n-icon>
+          <n-base-icon>
             <backward-icon />
-          </n-icon>
+          </n-base-icon>
         </div>
         <div ref="navScrollRef" class="n-tabs-nav-scroll">
           <v-resize-observer @resize="handleScrollContentResize">
@@ -44,9 +44,9 @@
                     class="n-tabs-label__close"
                     @click.stop="handleCloseClick(panel)"
                   >
-                    <n-icon>
+                    <n-base-icon>
                       <close-icon />
-                    </n-icon>
+                    </n-base-icon>
                   </div>
                 </div>
               </div>
@@ -69,9 +69,9 @@
           }"
           @click="scroll('right')"
         >
-          <n-icon>
+          <n-base-icon>
             <forward-icon />
-          </n-icon>
+          </n-base-icon>
         </div>
       </div>
     </v-resize-observer>
@@ -89,7 +89,7 @@ import {
   ChevronRightIcon as ForwardIcon,
   CloseIcon
 } from '../../_base/icons'
-import { NIcon } from '../../icon'
+import { NBaseIcon } from '../../_base'
 import { useTheme } from '../../_mixins'
 import { warn, createKey } from '../../_utils'
 import { tabsLight } from '../styles'
@@ -98,7 +98,7 @@ import style from './styles/index.cssr.js'
 export default defineComponent({
   name: 'Tabs',
   components: {
-    NIcon,
+    NBaseIcon,
     BackwardIcon,
     ForwardIcon,
     CloseIcon,

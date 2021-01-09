@@ -1,5 +1,4 @@
 import { changeColor } from 'seemly'
-import { iconDark } from '../../icon/styles'
 import { checkboxDark } from '../../checkbox/styles'
 import { commonDark } from '../../_styles/new-common'
 
@@ -7,7 +6,6 @@ export default {
   name: 'Tree',
   common: commonDark,
   peers: {
-    Icon: iconDark,
     Checkbox: checkboxDark
   },
   self (vars) {

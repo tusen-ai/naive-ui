@@ -8,7 +8,8 @@
   >
     <div class="n-transfer-list-item__checkbox">
       <n-checkbox
-        :theme="'light'"
+        :unstable-theme="NTransfer.mergedTheme.peers.Checkbox"
+        :unstable-theme-overrides="NTransfer.mergedTheme.overrides.Checkbox"
         :disabled="disabled"
         :checked="checked"
         :size="NTransfer.mergedSize"

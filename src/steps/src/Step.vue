@@ -10,12 +10,12 @@
           >
             {{ index }}
           </div>
-          <n-icon v-else-if="mergedStatus === 'finish'" key="finish">
+          <n-base-icon v-else-if="mergedStatus === 'finish'" key="finish">
             <finished-icon />
-          </n-icon>
-          <n-icon v-else-if="mergedStatus === 'error'" key="error">
+          </n-base-icon>
+          <n-base-icon v-else-if="mergedStatus === 'error'" key="error">
             <error-icon />
-          </n-icon>
+          </n-base-icon>
         </n-icon-switch-transition>
       </div>
       <div v-if="vertical" class="n-step-splitor" />
@@ -43,9 +43,8 @@ import {
   CheckmarkIcon as FinishedIcon,
   CloseIcon as ErrorIcon
 } from '../../_base/icons'
-import { NIcon } from '../../icon'
 import { useTheme } from '../../_mixins'
-import { NIconSwitchTransition } from '../../_base'
+import { NIconSwitchTransition, NBaseIcon } from '../../_base'
 import { createKey } from '../../_utils'
 import { stepsLight } from '../styles'
 import style from './styles/index.cssr.js'
@@ -53,7 +52,7 @@ import style from './styles/index.cssr.js'
 export default defineComponent({
   name: 'Step',
   components: {
-    NIcon,
+    NBaseIcon,
     FinishedIcon,
     ErrorIcon,
     NIconSwitchTransition

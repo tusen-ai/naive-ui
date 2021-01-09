@@ -5,7 +5,13 @@
       'n-notification-container--scrollable': scrollable
     }"
   >
-    <n-scrollbar v-if="scrollable">
+    <n-scrollbar
+      v-if="scrollable"
+      :unstable-theme="NNotificationProvider.mergedmergedTheme.peers.Scrollbar"
+      :unstable-theme-overrides="
+        NNotificationProvider.mergedmergedTheme.overrides.Scrollbar
+      "
+    >
       <slot />
     </n-scrollbar>
     <slot v-else />
@@ -13,7 +19,7 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent, inject } from 'vue'
 import { NScrollbar } from '../../scrollbar'
 
 export default defineComponent({
@@ -25,6 +31,11 @@ export default defineComponent({
     scrollable: {
       type: Boolean,
       required: true
+    }
+  },
+  setup () {
+    return {
+      NNotificationProvider: inject('NNotificationProvider')
     }
   }
 })

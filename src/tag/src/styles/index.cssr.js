@@ -68,12 +68,6 @@ export default cB('tag', `
       })
     ])
   ]),
-  cE('content', {
-    display: 'inline-block'
-  }),
-  cM('checkable', {
-    cursor: 'pointer'
-  }),
   cM('disabled', {
     cursor: 'not-allowed !important',
     opacity: 'var(--opacity-disabled)'
@@ -83,7 +77,8 @@ export default cB('tag', `
     })
   ]),
   cM('checkable', `
-    box-shadow: 'none',
+    cursor: pointer;
+    box-shadow: none;
     color: var(--text-color-checkable);
     background-color: var(--color-checkable);
   `, [

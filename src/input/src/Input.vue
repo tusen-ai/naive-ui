@@ -93,7 +93,8 @@
         <slot name="suffix" />
         <n-base-clear-button
           v-if="clearable || $slots.clear"
-          :theme="'light'"
+          :unstable-theme="mergedTheme.peers.BaseClearButton"
+          :unstable-theme-overrides="mergedTheme.overrides.BaseClearButton"
           :show="showClearButton"
           @clear="handleClear"
         >
@@ -160,12 +161,12 @@ import {
   getCurrentInstance
 } from 'vue'
 import { useMergedState } from 'vooks'
+import NIconConfigProvider from '../../icon/src/IconConfigProvider.vue'
 import { NBaseClearButton } from '../../_base'
 import { useTheme, useLocale, useFormItem, useConfig } from '../../_mixins'
 import { call, createKey } from '../../_utils'
-import NIconConfigProvider from '../../icon/src/IconConfigProvider.vue'
-import style from './styles/input.cssr.js'
 import { inputLight } from '../styles'
+import style from './styles/input.cssr.js'
 
 function createMethods (
   props,
@@ -789,6 +790,7 @@ export default defineComponent({
       activate,
       ...methods,
       ...useConfig(props),
+      mergedTheme: themeRef,
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
         const {

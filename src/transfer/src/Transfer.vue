@@ -25,14 +25,16 @@
             v-model:value="srcPattern"
             clearable
             size="small"
+            :unstable-theme="mergedTheme.peers.Input"
+            :unstable-theme-overrides="mergedTheme.overrides.Input"
             :placeholder="targetFilterPlaceholder"
             @focus="handleInputFocus"
             @blur="handleInputBlur"
           >
             <template #suffix>
-              <n-icon :size="16">
+              <n-base-icon>
                 <search-icon />
-              </n-icon>
+              </n-base-icon>
             </template>
           </n-input>
         </div>
@@ -41,7 +43,8 @@
             <n-scrollbar
               v-if="virtualScroll"
               ref="srcScrollerRef"
-              :theme="'light'"
+              :unstable-theme="mergedTheme.peers.Scrollbar"
+              :unstable-theme-overrides="mergedTheme.overrides.Scrollbar"
               :container="srcScrollContainer"
               :content="srcScrollContent"
             >
@@ -64,7 +67,11 @@
                 </template>
               </virtual-list>
             </n-scrollbar>
-            <n-scrollbar v-else :theme="'theme'">
+            <n-scrollbar
+              v-else
+              :unstable-theme="mergedTheme.peers.Scrollbar"
+              :unstable-theme-overrides="mergedTheme.overrides.Scrollbar"
+            >
               <div class="n-transfer-list-content">
                 <transition-group
                   name="item"
@@ -94,14 +101,28 @@
       <div class="n-transfer-list__border" />
     </div>
     <div class="n-transfer-gap">
-      <n-button :disabled="toButtonDisabled" @click="handleToTgtClick">
+      <n-button
+        :disabled="toButtonDisabled"
+        :unstable-theme="mergedTheme.peers.Button"
+        :unstable-theme-overrides="mergedTheme.overrides.Button"
+        @click="handleToTgtClick"
+      >
         <template #icon>
-          <chevron-right-icon />
+          <n-base-icon>
+            <chevron-right-icon />
+          </n-base-icon>
         </template>
       </n-button>
-      <n-button :disabled="fromButtonDisabled" @click="handleToSrcClick">
+      <n-button
+        :disabled="fromButtonDisabled"
+        :unstable-theme="mergedTheme.peers.Button"
+        :unstable-theme-overrides="mergedTheme.overrides.Button"
+        @click="handleToSrcClick"
+      >
         <template #icon>
-          <chevron-left-icon />
+          <n-base-icon>
+            <chevron-left-icon />
+          </n-base-icon>
         </template>
       </n-button>
     </div>
@@ -119,6 +140,8 @@
         <div v-if="filterable" class="n-transfer-filter">
           <n-input
             v-model:value="tgtPattern"
+            :unstable-theme="mergedTheme.peers.Input"
+            :unstable-theme-overrides="mergedTheme.overrides.Input"
             clearable
             size="small"
             :placeholder="targetFilterPlaceholder"
@@ -126,9 +149,9 @@
             @blur="handleInputBlur"
           >
             <template #suffix>
-              <n-icon :size="16">
+              <n-base-icon>
                 <search-icon />
-              </n-icon>
+              </n-base-icon>
             </template>
           </n-input>
         </div>
@@ -137,7 +160,8 @@
             <n-scrollbar
               v-if="virtualScroll"
               ref="tgtScrollerRef"
-              :theme="'light'"
+              :unstable-theme="mergedTheme.peers.Scrollbar"
+              :unstable-theme-overrides="mergedTheme.overrides.Scrollbar"
               :container="tgtScrollContainer"
               :content="tgtScrollContent"
             >
@@ -160,7 +184,11 @@
                 </template>
               </virtual-list>
             </n-scrollbar>
-            <n-scrollbar v-else :theme="'light'">
+            <n-scrollbar
+              v-else
+              :unstable-theme="mergedTheme.peers.Scrollbar"
+              :unstable-theme-overrides="mergedTheme.overrides.Scrollbar"
+            >
               <div class="n-transfer-list-content">
                 <transition-group
                   name="item"
@@ -183,7 +211,11 @@
             :appear="isMounted"
             :css="!isInputing"
           >
-            <n-empty v-if="!filteredTgtOpts.length" />
+            <n-empty
+              v-if="!filteredTgtOpts.length"
+              :unstable-theme="mergedTheme.peers.Empty"
+              :unstable-theme-overrides="mergedTheme.overrides.Empty"
+            />
           </transition>
         </div>
       </div>
@@ -202,20 +234,20 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon
 } from '../../_base/icons'
+import { NBaseIcon } from '../../_base'
 import { NScrollbar } from '../../scrollbar'
 import { NInput } from '../../input'
-import { NIcon } from '../../icon'
 import { NEmpty } from '../../empty'
 import { useLocale, useFormItem, useTheme } from '../../_mixins'
 import { createKey } from '../../_utils/cssr'
 import { warn, call } from '../../_utils'
+import { transferLight } from '../styles'
 import NTransferHeaderCheckbox from './TransferHeaderCheckbox.vue'
 import NTransferHeaderExtra from './TransferHeaderExtra.vue'
 import NTransferSourceListItem from './TransferSourceListItem.vue'
 import NTransferTargetListItem from './TransferTargetListItem.vue'
 import { data } from './data-utils'
 import style from './styles/index.cssr.js'
-import { transferLight } from '../styles'
 
 export default defineComponent({
   name: 'Transfer',
@@ -226,7 +258,7 @@ export default defineComponent({
     NTransferSourceListItem,
     NTransferTargetListItem,
     NInput,
-    NIcon,
+    NBaseIcon,
     NEmpty,
     SearchIcon,
     VirtualList,
@@ -239,6 +271,7 @@ export default defineComponent({
     }
   },
   props: {
+    ...useTheme.props,
     value: {
       type: Array,
       default: undefined
@@ -340,6 +373,7 @@ export default defineComponent({
       tgtScrollerRef: ref(null),
       srcVlRef: ref(null),
       tgtVlRef: ref(null),
+      mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
           mergedSize: { value: size }

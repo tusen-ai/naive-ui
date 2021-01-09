@@ -23,13 +23,12 @@
 <script>
 import { computed, defineComponent, inject } from 'vue'
 import { formatLength } from '../../_utils'
-import { useTheme } from '../../_mixins'
+import { useStyle } from '../../_mixins'
 import style from './styles/index.cssr.js'
 
 export default defineComponent({
   name: 'Col',
   props: {
-    ...useTheme.props,
     span: {
       type: [String, Number],
       default: 1
@@ -48,7 +47,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    useTheme('Grid', 'Grid', style, null, null)
+    useStyle('Grid', style)
     const NRow = inject('NRow')
     return {
       gutter: computed(() => NRow.gutter),

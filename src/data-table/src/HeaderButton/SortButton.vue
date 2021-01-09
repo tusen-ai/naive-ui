@@ -4,7 +4,6 @@
     :render="mergedRenderSorter"
     :order="mergedSortOrder"
     :active="active"
-    :theme="'light'"
   />
   <span
     v-else
@@ -14,21 +13,22 @@
       'n-data-table-sorter--desc': active && mergedSortOrder === 'descend'
     }"
   >
-    <n-icon>
+    <n-base-icon>
       <arrow-down-icon />
-    </n-icon>
+    </n-base-icon>
   </span>
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import { ArrowDownIcon } from '../../../_base/icons'
-import { NIcon } from '../../../icon'
+import { NBaseIcon } from '../../../_base'
 import RenderSorter from './RenderSorter'
 
-export default {
+export default defineComponent({
   name: 'SortIcon',
   components: {
-    NIcon,
+    NBaseIcon,
     RenderSorter,
     ArrowDownIcon
   },
@@ -62,5 +62,5 @@ export default {
       )
     }
   }
-}
+})
 </script>

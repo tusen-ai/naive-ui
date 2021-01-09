@@ -1,4 +1,6 @@
-export default {
+import { defineComponent } from 'vue'
+
+export default defineComponent({
   name: 'DataTableFilterRender',
   props: {
     render: {
@@ -21,4 +23,4 @@ export default {
       show
     })
   }
-}
+})

@@ -1,5 +1,4 @@
 import commonVars from './_common'
-import { iconLight } from '../../icon/styles'
 import { buttonLight } from '../../button/styles'
 import { commonLight } from '../../_styles/new-common'
 
@@ -7,7 +6,6 @@ export default {
   name: 'Dialog',
   common: commonLight,
   peers: {
-    Icon: iconLight,
     Button: buttonLight
   },
   self (vars) {

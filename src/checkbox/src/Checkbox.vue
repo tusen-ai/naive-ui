@@ -156,7 +156,7 @@ export default defineComponent({
       NCheckboxGroup,
       mergedDisabled: mergedDisabledRef,
       renderedChecked: renderedCheckedRef,
-      theme: themeRef,
+      mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
           mergedSize: { value: mergedSize }

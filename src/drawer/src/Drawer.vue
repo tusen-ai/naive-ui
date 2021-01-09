@@ -154,6 +154,7 @@ export default defineComponent({
     const themeRef = useTheme('Drawer', 'Drawer', style, drawerLight, props)
     return {
       ...useConfig(props),
+      mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
           common: {

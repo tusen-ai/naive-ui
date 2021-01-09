@@ -1,4 +1,4 @@
-import { tagLight } from '../../tag/styles'
+import { tagDark } from '../../tag/styles'
 import { inputDark } from '../../input/styles'
 import { buttonDark } from '../../button/styles'
 import { commonDark } from '../../_styles/new-common'
@@ -9,6 +9,6 @@ export default {
   peers: {
     Input: inputDark,
     Button: buttonDark,
-    Tag: tagLight
+    Tag: tagDark
   }
 }

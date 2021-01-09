@@ -12,8 +12,8 @@
   </n-base-anchor>
   <n-affix
     v-else
-    :unstable-theme="theme.peers.Affix"
-    :unstable-theme-overrides="theme.overrides.Affix"
+    :unstable-theme="mergedTheme.peers.Affix"
+    :unstable-theme-overrides="mergedTheme.overrides.Affix"
     :listen-to="listenTo"
     :top="top"
     :bottom="bottom"
@@ -103,7 +103,7 @@ export default defineComponent({
       scrollTo (href) {
         anchorRef.value.setActiveHref(href)
       },
-      theme: themeRef,
+      mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
           self: {

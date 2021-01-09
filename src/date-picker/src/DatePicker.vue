@@ -18,7 +18,8 @@
           ref="inputRef"
           :bordered="mergedBordered"
           :size="mergedSize"
-          :theme="'light'"
+          :unstable-theme-overrides="mergedTheme.overrides.Input"
+          :unstable-theme="mergedTheme.peers.Input"
           passively-activated
           :disabled="disabled"
           :value="[displayStartTime, displayEndTime]"
@@ -38,7 +39,10 @@
           @input="handleRangeInput"
         >
           <template #clear>
-            <n-icon>
+            <n-icon
+              :unstable-theme-overrides="mergedTheme.overrides.NIcon"
+              :unstable-theme="mergedTheme.peers.NIcon"
+            >
               <calendar-icon />
             </n-icon>
           </template>
@@ -47,7 +51,8 @@
           v-else
           ref="inputRef"
           v-model:value="displayTime"
-          :theme="'light'"
+          :unstable-theme-overrides="mergedTheme.overrides.Input"
+          :unstable-theme="mergedTheme.peers.Input"
           passively-activated
           :size="mergedSize"
           :force-focus="active"
@@ -65,7 +70,10 @@
           @clear="handleClear"
         >
           <template #clear>
-            <n-icon>
+            <n-icon
+              :unstable-theme-overrides="mergedTheme.overrides.Icon"
+              :unstable-theme="mergedTheme.peers.Icon"
+            >
               <calendar-icon />
             </n-icon>
           </template>
@@ -156,15 +164,15 @@ import { CalendarIcon } from '../../_base/icons'
 import { warn, call, useAdjustedTo, createKey } from '../../_utils'
 import { datePickerLight } from '../styles'
 import { strictParse, getDerivedTimeFromKeyboardEvent } from './utils'
+import {
+  uniCalendarValidation,
+  dualCalendarValidation
+} from './validation-utils'
 import DatetimePanel from './panel/datetime.vue'
 import DatetimerangePanel from './panel/datetimerange.vue'
 import DatePanel from './panel/date.vue'
 import DaterangePanel from './panel/daterange.vue'
 import style from './styles/index.cssr.js'
-import {
-  uniCalendarValidation,
-  dualCalendarValidation
-} from './validation-utils'
 
 const DATE_FORMAT = {
   date: 'yyyy-MM-dd',
@@ -324,6 +332,7 @@ export default defineComponent({
       ...useLocale('DatePicker'),
       ...useFormItem(props),
       ...useConfig(props),
+      mergedTheme: themeRef,
       cssVars: computed(() => {
         const { type } = props
         const {

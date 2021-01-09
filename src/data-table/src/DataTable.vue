@@ -4,12 +4,15 @@
     :class="{
       'n-data-table--bordered': bordered,
       'n-data-table--single-line': singleLine,
-      'n-data-table--single-column': singleColumn,
-      [`n-data-table--${size}-size`]: true
+      'n-data-table--single-column': singleColumn
     }"
     :style="cssVars"
   >
-    <n-spin :show="loading" :theme="'light'">
+    <n-spin
+      :show="loading"
+      :unstable-theme="mergedTheme.peers.Spin"
+      :unstable-theme-overrides="mergedTheme.overrides.Spin"
+    >
       <div class="n-data-table-wrapper">
         <base-table
           ref="mainTableRef"
@@ -30,13 +33,17 @@
               'n-data-table-empty--hide': loading
             }"
           >
-            <n-empty :theme="'light'" />
+            <n-empty
+              :unstable-theme="mergedTheme.peers.Empty"
+              :unstable-theme-overrides="mergedTheme.overrides.Empty"
+            />
           </div>
         </base-table>
       </div>
       <div v-if="pagination" class="n-data-table__pagination">
         <n-pagination
-          :theme="'light'"
+          :unstable-theme="mergedTheme.peers.Pagination"
+          :unstable-theme-overrides="mergedTheme.overrides.Pagination"
           :page="mergedPagination.page"
           :page-count="mergedPagination.pageCount"
           :page-size="mergedPagination.pageSize"
@@ -58,12 +65,12 @@ import { computed, defineComponent, ref } from 'vue'
 import { nextFrame } from 'seemly'
 import { isPlainObject } from 'lodash-es'
 import { useLocale, useTheme } from '../../_mixins'
-import BaseTable from './BaseTable.vue'
 import { NEmpty } from '../../empty'
 import { NPagination } from '../../pagination'
 import { warn, call, formatLength, createKey } from '../../_utils'
 import { dataTableLight } from '../styles'
 import { setCheckStatusOfRow, createRowKey } from './utils'
+import BaseTable from './BaseTable.vue'
 import style from './styles/index.cssr.js'
 
 function createShallowClonedObject (object) {
@@ -304,6 +311,7 @@ export default defineComponent({
     return {
       ...useLocale('DataTable'),
       mainTableRef: ref(null),
+      mergedTheme: themeRef,
       cssVars: computed(() => {
         const { size } = props
         const {

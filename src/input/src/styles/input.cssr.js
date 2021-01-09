@@ -228,6 +228,9 @@ export default c([
       }),
       cB('icon', {
         fontSize: 'var(--icon-size)'
+      }),
+      cB('base-icon', {
+        fontSize: 'var(--icon-size)'
       })
     ])
   ])

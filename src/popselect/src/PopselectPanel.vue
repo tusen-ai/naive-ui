@@ -1,6 +1,7 @@
 <template>
   <n-base-select-menu
-    :theme="'light'"
+    :unstable-theme="NPopselect.mergedTheme.peers.BaseSelectMenu"
+    :unstable-theme-overrides="NPopselect.mergedTheme.overrides.BaseSelectMenu"
     :multiple="multiple"
     :tree-mate="treeMate"
     :size="size"

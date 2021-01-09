@@ -126,7 +126,8 @@
     <div v-if="actions && actions.length" class="n-date-panel-actions">
       <n-button
         v-if="actions.includes('clear')"
-        :theme="'light'"
+        :unstable-theme="NDatePicker.mergedTheme.peers.Button"
+        :unstable-theme-overrides="NDatePicker.mergedTheme.overrides.Button"
         size="tiny"
         @click="clearValue"
       >
@@ -134,7 +135,8 @@
       </n-button>
       <n-button
         v-if="actions.includes('confirm')"
-        :theme="'light'"
+        :unstable-theme="NDatePicker.mergedTheme.peers.Button"
+        :unstable-theme-overrides="NDatePicker.mergedTheme.overrides.Button"
         size="tiny"
         type="primary"
         :disabled="isRangeInvalid"

@@ -7,7 +7,6 @@ import { tooltipLight } from '../styles'
 export default defineComponent({
   name: 'Tooltip',
   props: {
-    ...useTheme.props,
     ...NPopover.props,
     showArrow: {
       type: Boolean,
@@ -22,16 +21,20 @@ export default defineComponent({
       syncPosition () {
         popoverRef.value.syncPosition()
       },
+      mergedTheme: themeRef,
       popoverThemeOverrides: computed(() => {
         return themeRef.value.self
       })
     }
   },
   render () {
+    const { mergedTheme } = this
     return h(
       NPopover,
       {
         ...this.$props,
+        unstableTheme: mergedTheme.peers.Popover,
+        unstableThemeOverrides: mergedTheme.overrides.Popover,
         builtinThemeOverrides: this.popoverThemeOverrides,
         class: 'n-tooltip n-popover--tooltip',
         ref: 'popoverRef'

@@ -1,13 +1,9 @@
-import commonVariables from './_common'
-import { gridLight } from '../../grid/styles'
 import { commonLight } from '../../_styles/new-common'
+import commonVariables from './_common'
 
 export default {
   name: 'Form',
   common: commonLight,
-  peers: {
-    Grid: gridLight
-  },
   self (vars) {
     const { textColor1, errorColor, warningColor, lineHeight } = vars
     return {

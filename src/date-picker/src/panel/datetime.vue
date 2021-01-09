@@ -8,7 +8,8 @@
     <div class="n-date-panel-header">
       <n-input
         v-model:value="displayDateString"
-        :theme="'light'"
+        :unstable-theme="NDatePicker.mergedTheme.peers.Input"
+        :unstable-theme-overrides="NDatePicker.mergedTheme.overrides.Input"
         :stateful="false"
         :size="timePickerSize"
         class="n-date-panel-date-input"
@@ -23,7 +24,8 @@
         :show-icon="false"
         :format="timeFormat"
         :stateful="false"
-        :theme="'light'"
+        :unstable-theme="NDatePicker.mergedTheme.peers.TimePicker"
+        :unstable-theme-overrides="NDatePicker.mergedTheme.overrides.TimePicker"
         teleport-disabled
         :size="timePickerSize"
         :value="value"
@@ -88,7 +90,8 @@
     <div v-if="actions && actions.length" class="n-date-panel-actions">
       <n-button
         v-if="actions.includes('clear')"
-        :theme="'light'"
+        :unstable-theme="NDatePicker.mergedTheme.peers.Button"
+        :unstable-theme-overrides="NDatePicker.mergedTheme.overrides.Button"
         size="tiny"
         @click="clearValue"
       >
@@ -96,7 +99,8 @@
       </n-button>
       <n-button
         v-if="actions.includes('now')"
-        :theme="'light'"
+        :unstable-theme="NDatePicker.mergedTheme.peers.Button"
+        :unstable-theme-overrides="NDatePicker.mergedTheme.overrides.Button"
         size="tiny"
         @click="setSelectedDateTimeToNow"
       >
@@ -104,7 +108,8 @@
       </n-button>
       <n-button
         v-if="actions.includes('confirm')"
-        :theme="'light'"
+        :unstable-theme="NDatePicker.mergedTheme.peers.Button"
+        :unstable-theme-overrides="NDatePicker.mergedTheme.overrides.Button"
         size="tiny"
         type="primary"
         :disabled="isDateTimeInvalid"

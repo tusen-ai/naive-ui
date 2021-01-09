@@ -11,9 +11,9 @@
       @click="handleClick(index)"
       @mouseenter="handleMouseEnter(index)"
     >
-      <n-icon>
+      <n-base-icon>
         <star-icon />
-      </n-icon>
+      </n-base-icon>
     </div>
   </div>
 </template>
@@ -21,7 +21,7 @@
 <script>
 import { toRef, ref, computed, defineComponent } from 'vue'
 import { useMergedState } from 'vooks'
-import { NIcon } from '../../icon'
+import { NBaseIcon } from '../../_base'
 import { useTheme, useFormItem } from '../../_mixins'
 import { call } from '../../_utils'
 import { rateLight } from '../styles'
@@ -31,7 +31,7 @@ import StarIcon from './StarIcon.vue'
 export default defineComponent({
   name: 'Rate',
   components: {
-    NIcon,
+    NBaseIcon,
     StarIcon
   },
   props: {

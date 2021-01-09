@@ -1,6 +1,5 @@
 import { changeColor } from 'seemly'
 import { buttonDark } from '../../button/styles'
-import { iconDark } from '../../icon/styles'
 import { progressDark } from '../../progress/styles'
 import { commonDark } from '../../_styles/new-common'
 
@@ -9,7 +8,6 @@ export default {
   common: commonDark,
   peers: {
     Button: buttonDark,
-    Icon: iconDark,
     Progress: progressDark
   },
   self (vars) {

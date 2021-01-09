@@ -7,6 +7,8 @@
     }"
   >
     <n-tooltip
+      :unstable-theme="NMenu.mergedTheme.peers.Tooltip"
+      :unstable-theme-overrides="NMenu.mergedTheme.overrides.Tooltip"
       trigger="hover"
       :placement="dropdownPlacement"
       :disabled="!dropdownEnabled"
@@ -30,11 +32,11 @@
 
 <script>
 import { computed, defineComponent } from 'vue'
-import NMenuItemContent from './MenuItemContent.vue'
-import { NTooltip } from '../../tooltip'
-import menuChildMixin from './menu-child-mixin'
 import { useMemo } from 'vooks'
 import { useInjectionRef } from '../../_utils/composable'
+import { NTooltip } from '../../tooltip'
+import NMenuItemContent from './MenuItemContent.vue'
+import menuChildMixin from './menu-child-mixin'
 
 export default defineComponent({
   name: 'MenuItem',

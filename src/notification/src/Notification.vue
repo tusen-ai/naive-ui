@@ -9,21 +9,21 @@
   >
     <div v-if="showAvatar" class="n-notification__avatar">
       <render v-if="avatar" :render="avatar" />
-      <n-icon v-else>
+      <n-base-icon v-else>
         <info-icon v-if="type === 'info'" />
         <warning-icon v-else-if="type === 'warning'" />
         <error-icon v-else-if="type === 'error'" />
         <success-icon v-else-if="type === 'success'" />
-      </n-icon>
+      </n-base-icon>
     </div>
     <div
       v-if="closable"
       class="n-notification__close"
       @click="handleCloseClick"
     >
-      <n-icon>
+      <n-base-icon>
         <close-icon />
-      </n-icon>
+      </n-base-icon>
     </div>
     <div ref="body" class="n-notification-main">
       <div v-if="title" class="n-notification-main__header">
@@ -49,10 +49,9 @@
 </template>
 
 <script>
-import { defineComponent, computed } from 'vue'
-import { useTheme } from '../../_mixins'
+import { defineComponent, computed, inject } from 'vue'
 import { createKey, render } from '../../_utils'
-import { NIcon } from '../../icon'
+import { NBaseIcon } from '../../_base'
 import {
   CloseIcon,
   InfoIcon,
@@ -60,13 +59,11 @@ import {
   WarningIcon,
   ErrorIcon
 } from '../../_base/icons'
-import { notificationLight } from '../styles'
-import style from './styles/index.cssr.js'
 
 export default defineComponent({
   name: 'Notification',
   components: {
-    NIcon,
+    NBaseIcon,
     render,
     CloseIcon,
     SuccessIcon,
@@ -117,13 +114,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const themeRef = useTheme(
-      'Notification',
-      'Notification',
-      style,
-      notificationLight,
-      props
-    )
+    const NNotificationProvider = inject('NNotificationProvider')
     return {
       showAvatar: computed(() => {
         return props.avatar || props.type !== 'default'
@@ -155,7 +146,7 @@ export default defineComponent({
             cubicBezierEaseIn,
             cubicBezierEaseInOut
           }
-        } = themeRef.value
+        } = NNotificationProvider.mergedTheme
         return {
           '--color': color,
           '--font-size': fontSize,

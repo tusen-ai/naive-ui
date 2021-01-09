@@ -8,8 +8,16 @@
     }"
     @wheel.passive="handleWheel"
   >
-    <n-scrollbar ref="scrollbarRef" :theme="'light'" @scroll="handleScroll">
-      <n-code>
+    <n-scrollbar
+      ref="scrollbarRef"
+      :unstable-theme="mergedTheme.peers.Scrollbar"
+      :unstable-theme-overrides="mergedTheme.overrides.Scrollbar"
+      @scroll="handleScroll"
+    >
+      <n-code
+        :unstable-theme="mergedTheme.peers.Code"
+        :unstable-theme-overrides="mergedTheme.overrides.Code"
+      >
         <n-log-line
           v-for="(line, index) in mergedLines"
           :key="index"
@@ -111,6 +119,7 @@ export default defineComponent({
     const themeRef = useTheme('Log', 'Log', style, logLight, props)
     return {
       scrollbarRef: ref(null),
+      mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
           self: {

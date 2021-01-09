@@ -9,8 +9,8 @@
       v-clickoutside="handleClickOutside"
       class="n-cascader-menu"
       auto-pending
-      :unstable-theme-overrides="NCascader.theme.peers.BaseSelectMenu"
-      :unstable-theme="NCascader.theme.overrides.BaseSelectMenu"
+      :unstable-theme-overrides="NCascader.mergedTheme.peers.BaseSelectMenu"
+      :unstable-theme="NCascader.mergedTheme.overrides.BaseSelectMenu"
       :pattern="pattern"
       :tree-mate="selectTreeMate"
       :multiple="multiple"

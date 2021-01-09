@@ -7,9 +7,12 @@ import { radioDark } from '../../radio/styles'
 import { paginationDark } from '../../pagination/styles'
 import { scrollbarDark } from '../../scrollbar/styles'
 import { dividerDark } from '../../divider/styles'
+import { spinDark } from '../../spin/styles'
+import { emptyDark } from '../../empty/styles'
 import { commonDark } from '../../_styles/new-common'
 
 export default {
+  name: 'DataTable',
   common: commonDark,
   peers: {
     Icon: iconDark,
@@ -18,7 +21,9 @@ export default {
     Radio: radioDark,
     Pagination: paginationDark,
     Scrolllbar: scrollbarDark,
-    Divider: dividerDark
+    Divider: dividerDark,
+    Spin: spinDark,
+    Empty: emptyDark
   },
   self (vars) {
     const {

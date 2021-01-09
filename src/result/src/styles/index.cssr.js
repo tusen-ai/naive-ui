@@ -20,9 +20,10 @@ export default cB('result', `
     justify-content: center;
     transition: color .3s var(--bezier);
     color: var(--icon-color);
+    font-size: var(--icon-size);
   `, [
     cE('status-image', {
-      width: 'var(--icon-size)'
+      width: '1em'
     })
   ]),
   cB('result-content', {

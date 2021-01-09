@@ -5,10 +5,17 @@
       block
       ghost
       dashed
+      :unstable-theme="mergedTheme.peers.Button"
+      :unstable-theme-overrides="mergedTheme.overrides.Button"
       @click="handleCreateClick"
     >
       <template #icon>
-        <add-icon />
+        <n-icon
+          :unstable-theme="mergedTheme.peers.Icon"
+          :unstable-theme-overrides="mergedTheme.overrides.Icon"
+        >
+          <add-icon />
+        </n-icon>
       </template>
       {{ locale.create }}
     </n-button>
@@ -36,18 +43,36 @@
       />
       <div class="n-dynamic-input-item__action">
         <n-button-group>
-          <n-button v-if="!removeDisabled" circle @click="remove(index)">
+          <n-button
+            v-if="!removeDisabled"
+            :unstable-theme="mergedTheme.peers.Button"
+            :unstable-theme-overrides="mergedTheme.overrides.Button"
+            circle
+            @click="remove(index)"
+          >
             <template #icon>
-              <remove-icon />
+              <n-icon
+                :unstable-theme="mergedTheme.peers.Icon"
+                :unstable-theme-overrides="mergedTheme.overrides.Icon"
+              >
+                <remove-icon />
+              </n-icon>
             </template>
           </n-button>
           <n-button
             :disabled="insertionDisabled"
             circle
+            :unstable-theme="mergedTheme.peers.Button"
+            :unstable-theme-overrides="mergedTheme.overrides.Button"
             @click="createItem(index)"
           >
             <template #icon>
-              <add-icon />
+              <n-icon
+                :unstable-theme="mergedTheme.peers.Icon"
+                :unstable-theme-overrides="mergedTheme.overrides.Icon"
+              >
+                <add-icon />
+              </n-icon>
             </template>
           </n-button>
         </n-button-group>
@@ -60,8 +85,9 @@
 import { ref, toRef, isProxy, toRaw, computed, defineComponent } from 'vue'
 import { useMergedState } from 'vooks'
 import { createId } from 'seemly'
-import { NButton, NButtonGroup } from '../../button'
 import { RemoveIcon, AddIcon } from '../../_base/icons'
+import { NIcon } from '../../icon'
+import { NButton, NButtonGroup } from '../../button'
 import { useFormItem, useTheme, useLocale } from '../../_mixins'
 import { warn, call } from '../../_utils'
 import { dynamicInputLight } from '../styles'
@@ -78,6 +104,7 @@ export default defineComponent({
     NDynamicInputPairPreset,
     NButtonGroup,
     NButton,
+    NIcon,
     AddIcon,
     RemoveIcon
   },
@@ -182,6 +209,7 @@ export default defineComponent({
       mergedValue: useMergedState(controlledValueRef, uncontrolledValueRef),
       dataKeyMap: globalDataKeyMap,
       ...useFormItem(props),
+      mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
           self: { actionMargin }

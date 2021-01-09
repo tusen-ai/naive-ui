@@ -1,6 +1,8 @@
 <template>
   <div class="n-dynamic-input-preset-input">
     <n-input
+      :unstable-theme="NDynamicInput.mergedTheme.peers.Input"
+      :unstable-theme-overrides="NDynamicInput.mergedTheme.overrides.Input"
       :value="value"
       :placeholder="NDynamicInput.placeholder"
       @update:value="handleInput"

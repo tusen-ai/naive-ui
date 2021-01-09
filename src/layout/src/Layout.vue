@@ -11,7 +11,8 @@
     <n-scrollbar
       v-if="!nativeScrollbar"
       ref="scrollbar"
-      :theme="'light'"
+      :unstable-theme="mergedTheme.peers.Scrollbar"
+      :unstable-theme-overrides="mergedTheme.overrides.Scrollbar"
       v-bind="scrollbarProps"
     >
       <slot />
@@ -58,6 +59,7 @@ export default defineComponent({
       self: { color, textColor }
     } = themeRef.value
     return {
+      mergedTheme: themeRef,
       cssVars: computed(() => {
         return {
           '--bezier': cubicBezierEaseInOut,

@@ -57,10 +57,11 @@ export default c([
       height: var(--height);
       line-height: var(--height);
       align-items: center;
+      color: var(--icon-color);
+      font-size: var(--icon-size);
+      
     `, [
-      cB('icon', `
-        font-size: var(--icon-size);
-      `, [
+      cB('base-icon', [
         cB('base-loading', {
           color: 'var(--loading-color)'
         }, [
@@ -88,11 +89,6 @@ export default c([
     cM('closable', {
       padding: 'var(--padding-closable)'
     }),
-    cE('icon', [
-      cB('icon', {
-        color: 'var(--icon-color)'
-      })
-    ]),
     cE('close', [
       cB('icon', `
         cursor: pointer;

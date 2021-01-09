@@ -92,7 +92,6 @@ export default cB('steps', `
       line-height: var(--indicator-icon-size);
     `, [
       cE('index', `
-        color: var(--indicator-text-color);
         display: inline-block;
         text-align: center;
         position: absolute;
@@ -102,11 +101,12 @@ export default cB('steps', `
         width: var(--indicator-icon-size);
         height: var(--indicator-icon-size);
         line-height: var(--indicator-icon-size);
+        color: var(--indicator-text-color);
         transition: color .3s var(--bezier);
       `, [
         iconSwitchTransition()
       ]),
-      cB('icon', `
+      cB('base-icon', `
         color: var(--indicator-text-color);
         transition: color .3s var(--bezier);
       `, [

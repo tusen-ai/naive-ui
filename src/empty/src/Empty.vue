@@ -1,16 +1,10 @@
 <template>
-  <div
-    class="n-empty"
-    :class="{
-      [`n-empty--${size}-size`]: true
-    }"
-    :style="cssVars"
-  >
+  <div class="n-empty" :style="cssVars">
     <div class="n-empty__icon">
       <slot name="icon">
-        <n-icon>
+        <n-base-icon>
           <empty-icon />
-        </n-icon>
+        </n-base-icon>
       </slot>
     </div>
     <div v-if="showDescription" class="n-empty__description">
@@ -29,7 +23,7 @@ import { defineComponent, computed } from 'vue'
 import { EmptyIcon } from '../../_base/icons'
 import { useLocale, useTheme } from '../../_mixins'
 import { createKey } from '../../_utils'
-import { NIcon } from '../../icon'
+import { NBaseIcon } from '../../_base'
 import { emptyLight } from '../styles'
 import style from './styles/index.cssr.js'
 
@@ -37,7 +31,7 @@ export default defineComponent({
   name: 'Empty',
   components: {
     EmptyIcon,
-    NIcon
+    NBaseIcon
   },
   props: {
     ...useTheme.props,

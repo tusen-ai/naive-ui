@@ -1,16 +1,15 @@
 <template>
   <div class="n-base-clear-button" :style="cssVars">
     <n-icon-switch-transition>
-      <n-icon
+      <n-base-icon
         v-if="show"
         key="dismiss"
-        :configurable="false"
         class="n-base-clear-button__clear"
         @click="onClear"
         @mousedown.prevent
       >
         <dismiss-circle-icon />
-      </n-icon>
+      </n-base-icon>
       <div v-else key="icon" class="n-base-clear-button__placeholder">
         <slot />
       </div>
@@ -20,7 +19,7 @@
 
 <script>
 import { computed, defineComponent } from 'vue'
-import { NIcon } from '../../../icon'
+import NBaseIcon from '../../icon'
 import { NIconSwitchTransition } from '../../../_base'
 import { useTheme } from '../../../_mixins'
 import { DismissCircleIcon } from '../../icons'
@@ -30,7 +29,7 @@ import style from './styles/index.cssr.js'
 export default defineComponent({
   name: 'BaseClearButton',
   components: {
-    NIcon,
+    NBaseIcon,
     DismissCircleIcon,
     NIconSwitchTransition
   },

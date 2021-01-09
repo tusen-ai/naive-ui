@@ -11,8 +11,8 @@
     >
       <div v-if="closable" class="n-alert__close" @click="handleCloseClick">
         <n-icon
-          :unstable-theme="theme.peers.Icon"
-          :unstable-theme-overrides="theme.overrides.Icon"
+          :unstable-theme="mergedTheme.peers.Icon"
+          :unstable-theme-overrides="mergedTheme.overrides.Icon"
         >
           <close-icon />
         </n-icon>
@@ -21,8 +21,8 @@
         <slot v-if="$slots.icon" name="icon" />
         <n-icon
           v-else
-          :unstable-theme="theme.peers.Icon"
-          :unstable-theme-overrides="theme.overrides.Icon"
+          :unstable-theme="mergedTheme.peers.Icon"
+          :unstable-theme-overrides="mergedTheme.overrides.Icon"
         >
           <success-icon v-if="type === 'success'" />
           <info-icon v-else-if="type === 'info'" />
@@ -167,7 +167,7 @@ export default defineComponent({
       visible: visibleRef,
       handleCloseClick,
       handleAfterLeave,
-      theme: themeRef,
+      mergedTheme: themeRef,
       cssVars
     }
   }
