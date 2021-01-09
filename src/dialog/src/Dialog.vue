@@ -7,13 +7,11 @@
     }"
     :style="cssVars"
   >
-    <n-base-icon
+    <n-base-close
       v-if="closable"
       class="n-dialog__close"
       @click="handleCloseClick"
-    >
-      <close-icon />
-    </n-base-icon>
+    />
     <div
       v-if="mergedShowIcon && mergedIconPlacement === 'top'"
       class="n-dialog-icon-container"
@@ -76,12 +74,11 @@
 import { defineComponent, computed } from 'vue'
 import { useTheme } from '../../_mixins'
 import { render, createKey } from '../../_utils'
-import { NBaseIcon } from '../../_base'
+import { NBaseIcon, NBaseClose } from '../../_base'
 import { NButton } from '../../button'
 import {
   InfoIcon,
   SuccessIcon,
-  CloseIcon,
   WarningIcon,
   ErrorIcon
 } from '../../_base/icons'
@@ -97,7 +94,7 @@ export default defineComponent({
   components: {
     NBaseIcon,
     NButton,
-    CloseIcon,
+    NBaseClose,
     WarningIcon,
     SuccessIcon,
     ErrorIcon,

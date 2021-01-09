@@ -91,15 +91,15 @@
         :depth="disabled ? 5 : 4"
       >
         <slot name="suffix" />
-        <n-base-clear-button
+        <n-base-clear
           v-if="clearable || $slots.clear"
-          :unstable-theme="mergedTheme.peers.BaseClearButton"
-          :unstable-theme-overrides="mergedTheme.overrides.BaseClearButton"
+          :unstable-theme="mergedTheme.peers.BaseClear"
+          :unstable-theme-overrides="mergedTheme.overrides.BaseClear"
           :show="showClearButton"
           @clear="handleClear"
         >
           <slot name="clear" />
-        </n-base-clear-button>
+        </n-base-clear>
       </n-icon-config-provider>
     </div>
     <span v-if="pair" class="n-input__separator">
@@ -131,15 +131,15 @@
       </div>
       <n-icon-config-provider class="n-input__suffix" :depth="disabled ? 5 : 4">
         <slot name="suffix" />
-        <n-base-clear-button
+        <n-base-clear
           v-if="clearable || $slots.clear"
-          :unstable-theme="mergedTheme.peers.BaseClearButton"
-          :unstable-theme-overrides="mergedTheme.overrides.BaseClearButton"
+          :unstable-theme="mergedTheme.peers.BaseClear"
+          :unstable-theme-overrides="mergedTheme.overrides.BaseClear"
           :show="showClearButton"
           @clear="handleClear"
         >
           <slot name="clear" />
-        </n-base-clear-button>
+        </n-base-clear>
       </n-icon-config-provider>
     </div>
     <div v-if="showTextareaPlaceholder" class="n-input__placeholder">
@@ -163,7 +163,7 @@ import {
 } from 'vue'
 import { useMergedState } from 'vooks'
 import NIconConfigProvider from '../../icon/src/IconConfigProvider.vue'
-import { NBaseClearButton } from '../../_base'
+import { NBaseClear } from '../../_base'
 import { useTheme, useLocale, useFormItem, useConfig } from '../../_mixins'
 import { call, createKey } from '../../_utils'
 import { inputLight } from '../styles'
@@ -421,7 +421,7 @@ export default defineComponent({
   name: 'Input',
   components: {
     NIconConfigProvider,
-    NBaseClearButton
+    NBaseClear
   },
   props: {
     ...useTheme.props,

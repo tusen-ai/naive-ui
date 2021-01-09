@@ -7,7 +7,7 @@ import createIconSwitchTransition from '../../../../_styles/transitions/icon-swi
 // --size
 // --color-hover
 // --color-pressed
-export default cB('base-clear-button', {
+export default cB('base-clear', {
   flexShrink: 0,
   height: '1em',
   width: '1em',

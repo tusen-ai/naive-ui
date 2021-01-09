@@ -39,15 +39,11 @@
                   @click="handleTabClick($event, panel.name, panel.disabled)"
                 >
                   <span class="n-tabs-label__label">{{ panel.label }}</span>
-                  <div
+                  <n-base-close
                     v-if="closable && typeIsCard"
                     class="n-tabs-label__close"
                     @click.stop="handleCloseClick(panel)"
-                  >
-                    <n-base-icon>
-                      <close-icon />
-                    </n-base-icon>
-                  </div>
+                  />
                 </div>
               </div>
               <div
@@ -86,10 +82,9 @@ import { throttle } from 'lodash-es'
 import { useCompitable, onFontsReady } from 'vooks'
 import {
   ChevronLeftIcon as BackwardIcon,
-  ChevronRightIcon as ForwardIcon,
-  CloseIcon
+  ChevronRightIcon as ForwardIcon
 } from '../../_base/icons'
-import { NBaseIcon } from '../../_base'
+import { NBaseIcon, NBaseClose } from '../../_base'
 import { useTheme } from '../../_mixins'
 import { warn, createKey } from '../../_utils'
 import { tabsLight } from '../styles'
@@ -101,7 +96,7 @@ export default defineComponent({
     NBaseIcon,
     BackwardIcon,
     ForwardIcon,
-    CloseIcon,
+    NBaseClose,
     VResizeObserver
   },
   provide () {
@@ -210,7 +205,9 @@ export default defineComponent({
             labelBarColor,
             scrollButtonColor,
             scrollButtonColorDisabled,
-            tabCloseColor,
+            closeColor,
+            closeColorHover,
+            closeColorPressed,
             tabColor,
             tabBorderColorActive,
             tabTextColor,
@@ -239,7 +236,9 @@ export default defineComponent({
           '--tab-border-color': tabBorderColor,
           '--tab-border-color-active': tabBorderColorActive,
           '--tab-border-radius': tabBorderRadius,
-          '--tab-close-color': tabCloseColor,
+          '--close-color': closeColor,
+          '--close-color-hover': closeColorHover,
+          '--close-color-pressed': closeColorPressed,
           '--tab-color': tabColor,
           '--tab-font-weight': tabFontWeight,
           '--tab-text-color': tabTextColor,

@@ -68,22 +68,12 @@ export default c([
       ]),
       cE('close', `
         font-size: var(--close-size);
-        cursor: pointer;
         position: absolute;
         right: 0;
         top: 0;
-        color: var(--close-color);
         margin: var(--close-margin);
         transition: .3s color var(--bezier);
-      `,
-      [
-        c('&:hover', {
-          color: 'var(--close-color-hover)'
-        }),
-        c('&:active', {
-          color: 'var(--close-color-pressed)'
-        })
-      ]),
+      `),
       cE('content', `
         font-size: var(--font-size);
         margin: var(--content-margin);

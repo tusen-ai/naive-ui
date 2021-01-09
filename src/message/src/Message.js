@@ -3,10 +3,14 @@ import {
   InfoIcon,
   SuccessIcon,
   WarningIcon,
-  ErrorIcon,
-  CloseIcon
+  ErrorIcon
 } from '../../_base/icons'
-import { NIconSwitchTransition, NBaseLoading, NBaseIcon } from '../../_base'
+import {
+  NIconSwitchTransition,
+  NBaseLoading,
+  NBaseIcon,
+  NBaseClose
+} from '../../_base'
 import { render, createKey } from '../../_utils'
 import { useTheme } from '../../_mixins'
 import { messageLight } from '../styles'
@@ -110,23 +114,10 @@ export default {
           ]
         ),
         closable
-          ? h(
-            'div',
-            {
-              class: 'n-message__close'
-            },
-            [
-              h(
-                NBaseIcon,
-                {
-                  onClick: handleClose
-                },
-                {
-                  default: () => [h(CloseIcon)]
-                }
-              )
-            ]
-          )
+          ? h(NBaseClose, {
+            class: 'n-message__close',
+            onClick: handleClose
+          })
           : null
       ]
     )

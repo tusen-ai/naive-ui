@@ -1,16 +1,16 @@
 <template>
-  <div class="n-base-clear-button" :style="cssVars">
+  <div class="n-base-clear" :style="cssVars">
     <n-icon-switch-transition>
       <n-base-icon
         v-if="show"
         key="dismiss"
-        class="n-base-clear-button__clear"
+        class="n-base-clear__clear"
         @click="onClear"
         @mousedown.prevent
       >
         <dismiss-circle-icon />
       </n-base-icon>
-      <div v-else key="icon" class="n-base-clear-button__placeholder">
+      <div v-else key="icon" class="n-base-clear__placeholder">
         <slot />
       </div>
     </n-icon-switch-transition>
@@ -23,11 +23,11 @@ import NBaseIcon from '../../icon'
 import { NIconSwitchTransition } from '../../../_base'
 import { useTheme } from '../../../_mixins'
 import { DismissCircleIcon } from '../../icons'
-import { baseClearButtonLight } from '../styles'
+import { baseClearLight } from '../styles'
 import style from './styles/index.cssr.js'
 
 export default defineComponent({
-  name: 'BaseClearButton',
+  name: 'BaseClear',
   components: {
     NBaseIcon,
     DismissCircleIcon,
@@ -46,10 +46,10 @@ export default defineComponent({
   },
   setup (props) {
     const themeRef = useTheme(
-      'BaseClearButton',
-      'BaseClearButton',
+      'BaseClear',
+      'BaseClear',
       style,
-      baseClearButtonLight,
+      baseClearLight,
       props
     )
     return {

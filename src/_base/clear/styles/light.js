@@ -3,7 +3,7 @@ import { scaleColor } from 'seemly'
 import { commonLight } from '../../../_styles/new-common'
 
 export default {
-  name: 'BaseClearButton',
+  name: 'BaseClear',
   common: commonLight,
   self (vars) {
     const { textColor4Overlay } = vars

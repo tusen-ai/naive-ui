@@ -1,13 +1,9 @@
 import { changeColor } from 'seemly'
 import { commonDark } from '../../_styles/new-common'
-import { iconDark } from '../../icon/styles'
 
 export default {
   name: 'Alert',
   common: commonDark,
-  peers: {
-    Icon: iconDark
-  },
   self (vars) {
     const {
       lineHeight,

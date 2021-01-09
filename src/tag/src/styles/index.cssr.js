@@ -49,33 +49,19 @@ export default cB('tag', `
     font-size: var(--font-size);
 `, [
   cE('close', `
-    color: var(--close-color);
     font-size: var(--close-size);
     margin: var(--close-margin);
+    transition: color .3s var(--bezier);
     cursor: pointer;
   `),
   cM('round', `
     padding: 0 calc(var(--height) / 2);
     border-radius: calc(var(--height) / 2);
   `),
-  cNotM('disabled', [
-    cE('close', [
-      c('&:hover', {
-        color: 'var(--close-color-hover)'
-      }),
-      c('&:active', {
-        color: 'var(--close-color-pressed)'
-      })
-    ])
-  ]),
   cM('disabled', {
     cursor: 'not-allowed !important',
     opacity: 'var(--opacity-disabled)'
-  }, [
-    cE('close', {
-      cursor: 'not-allowed !important'
-    })
-  ]),
+  }),
   cM('checkable', `
     cursor: pointer;
     box-shadow: none;

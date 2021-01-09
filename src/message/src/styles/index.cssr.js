@@ -73,35 +73,13 @@ export default c([
       ])
     ]),
     cE('close', `
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: var(--close-size);
-      width: var(--close-size);
-      border-radius: 100px;
       font-size: var(--close-size);
       margin: var(--close-margin);
-    `, [
-      cB('icon', {
-        transition: 'color .3s var(--bezier)'
-      })
-    ]),
+      transition: color .3s var(--bezier);
+    `),
     cM('closable', {
       padding: 'var(--padding-closable)'
-    }),
-    cE('close', [
-      cB('icon', `
-        cursor: pointer;
-        color: var(--close-color);
-      `, [
-        c('&:hover', {
-          color: 'var(--close-color-hover)'
-        }),
-        c('&:active', {
-          color: 'var(--close-color-pressed)'
-        })
-      ])
-    ])
+    })
   ]),
   cB('message-container', `
     z-index: 6000;

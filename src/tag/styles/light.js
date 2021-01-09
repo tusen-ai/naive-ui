@@ -1,14 +1,10 @@
 import commonVariables from './_common'
 import { changeColor } from 'seemly'
-import { iconLight } from '../../icon/styles'
 import { commonLight } from '../../_styles/new-common'
 
 export default {
   name: 'Tag',
   common: commonLight,
-  peers: {
-    Icon: iconLight
-  },
   self (vars) {
     const {
       textColor2Overlay,

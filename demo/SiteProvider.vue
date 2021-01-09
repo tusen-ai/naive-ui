@@ -4,6 +4,7 @@
     namespace="naive-ui-doc"
     :theme="theme"
     :unstable-theme="theme === 'dark' ? darkTheme : undefined"
+    :unstable-theme-overrides="overrides"
     :language="lang"
   >
     <n-loading-bar-provider ref="loadingBar">
@@ -22,7 +23,7 @@
 import { ref, computed } from 'vue'
 import Site from './Site.vue'
 import { useRoute, useRouter } from 'vue-router'
-import { darkTheme } from '../src/styles.new'
+import { darkTheme } from '../src'
 
 export default {
   name: 'SiteProvider',
@@ -81,7 +82,12 @@ export default {
       theme: themeRef,
       lang: langRef,
       // unstable
-      darkTheme
+      darkTheme,
+      overrides: {
+        // common: {
+        //   primaryColor: 'rgb(255, 0, 0)'
+        // }
+      }
     }
   }
 }

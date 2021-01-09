@@ -9,26 +9,19 @@
       :style="cssVars"
       v-bind="$attrs"
     >
-      <div v-if="closable" class="n-alert__close" @click="handleCloseClick">
-        <n-icon
-          :unstable-theme="mergedTheme.peers.Icon"
-          :unstable-theme-overrides="mergedTheme.overrides.Icon"
-        >
-          <close-icon />
-        </n-icon>
-      </div>
+      <n-base-close
+        v-if="closable"
+        class="n-alert__close"
+        @click="handleCloseClick"
+      />
       <div v-if="showIcon" class="n-alert__icon">
         <slot v-if="$slots.icon" name="icon" />
-        <n-icon
-          v-else
-          :unstable-theme="mergedTheme.peers.Icon"
-          :unstable-theme-overrides="mergedTheme.overrides.Icon"
-        >
+        <n-base-icon v-else>
           <success-icon v-if="type === 'success'" />
           <info-icon v-else-if="type === 'info'" />
           <warning-icon v-else-if="type === 'warning'" />
           <error-icon v-else-if="type === 'error'" />
-        </n-icon>
+        </n-base-icon>
       </div>
       <div class="n-alert-body">
         <div v-if="title !== undefined" class="n-alert-body__title">
@@ -50,11 +43,9 @@ import {
   InfoIcon,
   SuccessIcon,
   WarningIcon,
-  ErrorIcon,
-  CloseIcon
+  ErrorIcon
 } from '../../_base/icons'
-import { NIcon } from '../../icon'
-import { NFadeInExpandTransition } from '../../_base'
+import { NFadeInExpandTransition, NBaseClose, NBaseIcon } from '../../_base'
 import { useTheme } from '../../_mixins'
 import { warn, createKey } from '../../_utils'
 import { alertLight } from '../styles'
@@ -63,13 +54,13 @@ import style from './styles/index.cssr'
 export default defineComponent({
   name: 'Alert',
   components: {
-    NIcon,
+    NBaseClose,
+    NBaseIcon,
     NFadeInExpandTransition,
     SuccessIcon,
     WarningIcon,
     InfoIcon,
-    ErrorIcon,
-    CloseIcon
+    ErrorIcon
   },
   inheritAttrs: false,
   props: {

@@ -84,7 +84,6 @@ export default defineComponent({
         default: () => [
           this.show
             ? h(NMessage, {
-              theme: this.theme,
               content: this.content,
               type: this.type,
               icon: this.icon,

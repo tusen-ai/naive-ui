@@ -1,13 +1,13 @@
 import commonVariables from './_common'
 import { changeColor } from 'seemly'
-import { baseClearButtonDark } from '../../_base/clear-button/styles'
+import { baseClearDark } from '../../_base/clear/styles'
 import { commonDark } from '../../_styles/new-common'
 
 export default {
   name: 'Input',
   common: commonDark,
   peers: {
-    BaseClearButton: baseClearButtonDark
+    BaseClear: baseClearDark
   },
   self (vars) {
     const {

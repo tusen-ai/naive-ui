@@ -2,6 +2,9 @@ import { c, cM, cB, cE } from '../../../_utils/cssr'
 
 // vars:
 // --bezier
+// --close-color
+// --close-color-hover
+// --close-color-pressed
 // --label-bar-color
 // --label-font-size-card
 // --label-font-size-line
@@ -15,7 +18,6 @@ import { c, cM, cB, cE } from '../../../_utils/cssr'
 // --tab-border-color
 // --tab-border-color-active
 // --tab-border-radius
-// --tab-close-color
 // --tab-color
 // --tab-font-weight
 // --tab-text-color
@@ -108,10 +110,6 @@ export default cB('tabs', `
       cE('close', `
         margin-left: 8px;
         font-size: 16px;
-        line-height: 16px;
-        height: 16px;
-        cursor: pointer;
-        color: var(--tab-close-color);
         transition: color .3s var(--bezier);
       `),
       cE('label', `

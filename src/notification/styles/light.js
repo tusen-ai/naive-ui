@@ -1,4 +1,3 @@
-import { avatarLight } from '../../avatar/styles'
 import { scrollbarLight } from '../../scrollbar/styles'
 import { commonLight } from '../../_styles/new-common'
 
@@ -6,7 +5,6 @@ export default {
   name: 'Notification',
   common: commonLight,
   peers: {
-    Avatar: avatarLight,
     Scrollbar: scrollbarLight
   },
   self (vars) {

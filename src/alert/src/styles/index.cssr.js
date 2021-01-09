@@ -23,16 +23,6 @@ export default cB('alert', `
   background-color: var(--color);
   text-align: start;
 `, [
-  cE('close', {
-    color: 'var(--close-color)'
-  }, [
-    c('&:hover', {
-      color: 'var(--close-color-hover)'
-    }),
-    c('&:active', {
-      color: 'var(--close-color-pressed)'
-    })
-  ]),
   cE('icon', {
     color: 'var(--icon-color)'
   }),
@@ -63,25 +53,15 @@ export default cB('alert', `
     justify-content: center;
     width: 26px;
     height: 26px;
-  `, [
-    cB('icon', {
-      fontSize: '26px'
-    })
-  ]),
+    font-size: 26px;
+  `),
   cE('close', `
+    transition: color .3s var(--bezier);
     position: absolute;
     right: 16px;
     font-size: 14px;
     top: 14px;
-    width: 1em;
-    height: 1em;
-    line-height: 0;
-    transition: color .3s var(--bezier);
-  `, [
-    cB('icon', {
-      cursor: 'pointer'
-    })
-  ]),
+  `),
   cB('alert-body', `
     border-radius: var(--border-radius);
     padding: 15px 15px 15px 47px;

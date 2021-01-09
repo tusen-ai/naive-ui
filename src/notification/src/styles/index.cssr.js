@@ -130,17 +130,8 @@ export default c([
           top: 16px;
           right: 12px;
           font-size: 14px;
-          cursor: pointer;
           transition: color .3s var(--bezier);
-          color: var(--close-color);
-        `, [
-          c('&:hover', {
-            color: 'var(--close-color-hover)'
-          }),
-          c('&:active', {
-            color: 'var(--close-color-pressed)'
-          })
-        ])
+        `)
       ]),
       cE('avatar', `
         position: absolute;

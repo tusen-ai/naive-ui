@@ -90,17 +90,8 @@ export default cB(
         `),
         cE('close', `
           font-size: 16px;
-          cursor: pointer;
           transition: color .3s var(--bezier);
-          color: var(--close-color);
-        `, [
-          c('&:hover', {
-            color: 'var(--close-color-hover)'
-          }),
-          c('&:active', {
-            color: 'var(--close-color-pressed)'
-          })
-        ])
+        `)
       ]),
       cE('action', `
         box-sizing: border-box;

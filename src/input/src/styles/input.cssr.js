@@ -223,7 +223,7 @@ export default c([
       justify-content: center;
       min-width: var(--icon-size);
     `, [
-      cB('base-clear-button', {
+      cB('base-clear', {
         fontSize: 'var(--icon-size)'
       }),
       cB('icon', {

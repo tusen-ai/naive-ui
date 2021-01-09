@@ -16,15 +16,11 @@
         <success-icon v-else-if="type === 'success'" />
       </n-base-icon>
     </div>
-    <div
+    <n-base-close
       v-if="closable"
       class="n-notification__close"
       @click="handleCloseClick"
-    >
-      <n-base-icon>
-        <close-icon />
-      </n-base-icon>
-    </div>
+    />
     <div ref="body" class="n-notification-main">
       <div v-if="title" class="n-notification-main__header">
         <render :render="title" />
@@ -51,9 +47,8 @@
 <script>
 import { defineComponent, computed, inject } from 'vue'
 import { createKey, render } from '../../_utils'
-import { NBaseIcon } from '../../_base'
+import { NBaseIcon, NBaseClose } from '../../_base'
 import {
-  CloseIcon,
   InfoIcon,
   SuccessIcon,
   WarningIcon,
@@ -65,7 +60,7 @@ export default defineComponent({
   components: {
     NBaseIcon,
     render,
-    CloseIcon,
+    NBaseClose,
     SuccessIcon,
     WarningIcon,
     InfoIcon,

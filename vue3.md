@@ -381,7 +381,7 @@
   - [ ] dropdown group + menu use dropdown
   - [ ] 多行 message
   - [ ] progress height
-  - [ ] close 重构
+  - [x] close 重构
   - [ ] data-table, radio style 重构
   - [ ] message icon style
   - [ ] transfer icon style

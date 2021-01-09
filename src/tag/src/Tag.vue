@@ -2,9 +2,6 @@
   <div
     class="n-tag"
     :class="{
-      [`n-tag--${size}-size`]: true,
-      [`n-tag--${type}-type`]: true,
-      'n-tag--closable': !checkable && closable,
       'n-tag--disabled': disabled,
       'n-tag--checkable': checkable,
       'n-tag--checked': checkable && checked,
@@ -14,22 +11,19 @@
     @click="handleClick"
   >
     <span class="n-tag__content"><slot /></span>
-    <n-icon
+    <n-base-close
       v-if="!checkable && closable"
       class="n-tag__close"
-      color-transition
+      :disabled="disabled"
       @click="handleCloseClick"
-    >
-      <close-icon />
-    </n-icon>
+    />
   </div>
 </template>
 
 <script>
 import { defineComponent, computed } from 'vue'
-import { CloseIcon } from '../../_base/icons'
 import { useTheme } from '../../_mixins'
-import { NIcon } from '../../icon'
+import { NBaseClose } from '../../_base'
 import { warn, createKey } from '../../_utils'
 import { tagLight } from '../styles'
 import commonProps from './common-props'
@@ -38,8 +32,7 @@ import style from './styles/index.cssr.js'
 export default defineComponent({
   name: 'Tag',
   components: {
-    CloseIcon,
-    NIcon
+    NBaseClose
   },
   props: {
     ...useTheme.props,
