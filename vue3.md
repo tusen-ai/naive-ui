@@ -385,6 +385,7 @@
   - [ ] data-table, radio style 重构
   - [ ] message icon style
   - [ ] transfer icon style
+  - [ ] base selection icon style
 
 ## Info
 

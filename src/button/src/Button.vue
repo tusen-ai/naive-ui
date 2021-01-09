@@ -39,7 +39,6 @@
             v-if="loading"
             key="loading"
             class="n-icon-slot"
-            :theme="'light'"
             :stroke-width="24"
           />
           <div v-else key="icon" class="n-icon-slot">
@@ -54,7 +53,7 @@
     >
       <slot />
     </span>
-    <n-base-wave v-if="!text" ref="waveRef" :theme="'light'" />
+    <n-base-wave v-if="!text" ref="waveRef" />
     <div
       v-if="showBorder"
       class="n-button__border"

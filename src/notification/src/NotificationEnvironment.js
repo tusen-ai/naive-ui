@@ -12,10 +12,6 @@ export default defineComponent({
       type: String,
       default: undefined
     },
-    theme: {
-      type: String,
-      default: undefined
-    },
     avatar: {
       type: Function,
       default: undefined

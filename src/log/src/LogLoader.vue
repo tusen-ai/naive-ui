@@ -1,8 +1,6 @@
 <template>
   <div class="n-log-loader">
-    <n-base-loading :stroke-width="24" :theme="theme" /><span
-      class="n-log-loader__content"
-    >
+    <n-base-loading :stroke-width="24" /><span class="n-log-loader__content">
       {{ locale.loading }}
     </span>
   </div>
@@ -16,12 +14,6 @@ import { useLocale } from '../../_mixins'
 export default defineComponent({
   components: {
     NBaseLoading
-  },
-  props: {
-    theme: {
-      type: String,
-      default: undefined
-    }
   },
   setup () {
     return {

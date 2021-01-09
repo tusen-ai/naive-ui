@@ -13,7 +13,6 @@
         v-if="compitableShow"
         :stroke="stroke"
         :stroke-width="mergedStrokeWidth"
-        :theme="'light'"
         class="n-spin"
       />
     </transition>
@@ -23,7 +22,6 @@
     :style="cssVars"
     :stroke="stroke"
     :stroke-width="mergedStrokeWidth"
-    :theme="'light'"
     class="n-spin"
   />
 </template>

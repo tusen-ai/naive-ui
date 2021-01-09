@@ -54,10 +54,6 @@ export default defineComponent({
       },
       default: undefined
     },
-    theme: {
-      type: String,
-      default: undefined
-    },
     placement: {
       type: String,
       default: 'bottom-start'

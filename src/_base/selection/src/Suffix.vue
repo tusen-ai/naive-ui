@@ -1,6 +1,5 @@
 <template>
   <n-base-loading
-    :theme="theme"
     class="n-base-selection__mark"
     :stroke-width="20"
     :scale="0.8"
@@ -8,13 +7,16 @@
   >
     <n-base-clear-button
       v-if="showArrow"
-      :theme="theme"
+      :unstable-theme="BaseSelection.mergedTheme.peers.BaseClearButton"
+      :unstable-theme-overrides="
+        BaseSelection.mergedTheme.overrides.BaseClearButton
+      "
       :show="showClear"
       @clear="onClear"
     >
-      <n-icon depth="4">
+      <n-base-icon depth="4">
         <chevron-down-icon />
-      </n-icon>
+      </n-base-icon>
     </n-base-clear-button>
   </n-base-loading>
 </template>
@@ -23,20 +25,19 @@
 import { defineComponent } from 'vue'
 import NBaseClearButton from '../../clear-button'
 import NBaseLoading from '../../loading'
+import NBaseIcon from '../../icon'
 import { ChevronDownIcon } from '../../icons'
 
 export default defineComponent({
   name: 'BaseSelectionSuffix',
   components: {
     ChevronDownIcon,
+    NBaseIcon,
     NBaseLoading,
     NBaseClearButton
   },
+  inject: ['BaseSelection'],
   props: {
-    theme: {
-      type: String,
-      default: undefined
-    },
     showArrow: {
       type: Boolean,
       default: undefined

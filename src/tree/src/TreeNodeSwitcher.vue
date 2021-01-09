@@ -12,7 +12,7 @@
         <n-base-icon v-if="!loading" key="switcher">
           <switcher-icon />
         </n-base-icon>
-        <n-base-loading v-else key="loading" :theme="'light'" />
+        <n-base-loading v-else key="loading" />
       </n-icon-switch-transition>
     </div>
   </span>

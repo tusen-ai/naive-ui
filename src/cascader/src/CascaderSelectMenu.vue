@@ -46,10 +46,6 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    theme: {
-      type: String,
-      default: undefined
-    },
     pattern: {
       type: String,
       default: undefined

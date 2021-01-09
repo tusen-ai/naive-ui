@@ -102,10 +102,6 @@ export default defineComponent({
       type: Object,
       default: undefined
     },
-    theme: {
-      type: String,
-      default: undefined
-    },
     filp: {
       type: Boolean,
       default: true

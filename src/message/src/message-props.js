@@ -17,10 +17,6 @@ export default {
     type: Boolean,
     default: false
   },
-  theme: {
-    type: String,
-    default: undefined
-  },
   onClose: {
     type: Function,
     default: () => {}

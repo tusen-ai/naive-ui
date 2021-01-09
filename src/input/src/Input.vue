@@ -133,7 +133,8 @@
         <slot name="suffix" />
         <n-base-clear-button
           v-if="clearable || $slots.clear"
-          :theme="'light'"
+          :unstable-theme="mergedTheme.peers.BaseClearButton"
+          :unstable-theme-overrides="mergedTheme.overrides.BaseClearButton"
           :show="showClearButton"
           @clear="handleClear"
         >

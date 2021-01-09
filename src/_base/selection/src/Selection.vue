@@ -177,6 +177,11 @@ export default defineComponent({
     Suffix,
     NTag
   },
+  provide () {
+    return {
+      BaseSelection: this
+    }
+  },
   props: {
     ...useTheme.props,
     bordered: {
@@ -281,6 +286,7 @@ export default defineComponent({
       props
     )
     return {
+      mergedTheme: themeRef,
       cssVars: computed(() => {
         const { size } = props
         const {

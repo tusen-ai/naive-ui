@@ -26,7 +26,7 @@
       </n-code>
     </n-scrollbar>
     <transition name="n-fade-in-scale-up-transition">
-      <n-log-loader v-if="loading" :theme="'light'" />
+      <n-log-loader v-if="loading" />
     </transition>
   </div>
 </template>
