@@ -1,4 +1,2 @@
-import { baseDark, baseLight } from '../base/index'
-
-export const commonDark = baseDark.vars
-export const commonLight = baseLight.vars
+export { default as commonDark } from './dark'
+export { default as commonLight } from './light'

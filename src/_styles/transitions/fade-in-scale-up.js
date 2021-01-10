@@ -1,5 +1,5 @@
 import { c, namespace } from '../../_utils/cssr'
-import commonVariables from '../base/_common'
+import commonVariables from '../new-common/_common'
 
 const {
   cubicBezierEaseIn,
@@ -7,14 +7,13 @@ const {
   transformDebounceScale
 } = commonVariables
 
-export default function (options = {}) {
-  const {
-    transformOrigin = 'inherit',
-    duration = '.2s',
-    enterScale = '.9',
-    originalTransform = '',
-    originalTransition = ''
-  } = options
+export default function ({
+  transformOrigin = 'inherit',
+  duration = '.2s',
+  enterScale = '.9',
+  originalTransform = '',
+  originalTransition = ''
+} = {}) {
   return [
     c(`&.${namespace}-fade-in-scale-up-transition-leave-active`, {
       transformOrigin,

@@ -1,5 +1,5 @@
 import { c, namespace } from '../../_utils/cssr'
-import commonVariables from '../base/_common'
+import commonVariables from '../new-common/_common'
 
 const { cubicBezierEaseInOut } = commonVariables
 

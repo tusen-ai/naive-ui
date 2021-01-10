@@ -1,7 +1,7 @@
 import { c, namespace } from '../../_utils/cssr'
-import commonVariables from '../base/_common'
+import commonVariables from '../new-common/_common'
 
-const cubicBezierEaseInOut = commonVariables.cubicBezierEaseInOut
+const { cubicBezierEaseInOut } = commonVariables
 
 export default function ({ duration = '.2s', delay = '.1s' } = {}) {
   return [

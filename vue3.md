@@ -388,6 +388,7 @@
   - [ ] base selection icon style
   - [ ] date picker not working
   - [ ] avatar font size bug
+  - [ ] handle global style
 
 ## Info
 

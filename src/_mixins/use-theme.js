@@ -1,6 +1,10 @@
 import { inject, computed, onBeforeMount } from 'vue'
 import { merge } from 'lodash-es'
+import globalStyle from '../_styles/global/index.cssr.js'
 
+globalStyle.mount({
+  id: 'naive-ui-global'
+})
 function useTheme (resolveId, mountId, style, defaultTheme, props) {
   if (style) {
     onBeforeMount(() => {

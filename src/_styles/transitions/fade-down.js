@@ -1,17 +1,16 @@
 import { c, namespace } from '../../_utils/cssr'
-import commonVariables from '../base/_common'
+import commonVariables from '../new-common/_common'
 
 const { cubicBezierEaseInOut } = commonVariables
 
-export default function (options = {}) {
-  const {
-    name = 'fade-down',
-    fromOffset = '-4px',
-    enterDuration = '.3s',
-    leaveDuration = '.3s',
-    enterCubicBezier = cubicBezierEaseInOut,
-    leaveCubicBezier = cubicBezierEaseInOut
-  } = options
+export default function ({
+  name = 'fade-down',
+  fromOffset = '-4px',
+  enterDuration = '.3s',
+  leaveDuration = '.3s',
+  enterCubicBezier = cubicBezierEaseInOut,
+  leaveCubicBezier = cubicBezierEaseInOut
+} = {}) {
   return [
     c(
       `&.${namespace}-${name}-transition-enter-from, &.${namespace}-${name}-transition-leave-to`,
