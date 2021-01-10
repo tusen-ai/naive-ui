@@ -7,9 +7,9 @@
   >
     <n-scrollbar
       v-if="scrollable"
-      :unstable-theme="NNotificationProvider.mergedmergedTheme.peers.Scrollbar"
+      :unstable-theme="NNotificationProvider.mergedTheme.peers.Scrollbar"
       :unstable-theme-overrides="
-        NNotificationProvider.mergedmergedTheme.overrides.Scrollbar
+        NNotificationProvider.mergedTheme.overrides.Scrollbar
       "
     >
       <slot />

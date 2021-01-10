@@ -115,7 +115,7 @@ export default defineComponent({
         return props.avatar || props.type !== 'default'
       }),
       handleCloseClick () {
-        this.onClose()
+        props.onClose()
       },
       cssVars: computed(() => {
         const { type } = props

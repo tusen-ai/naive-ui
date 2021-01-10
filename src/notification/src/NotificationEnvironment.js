@@ -152,7 +152,6 @@ export default defineComponent({
           this.show
             ? h(NNotification, {
               type: this.type,
-              theme: this.theme,
               avatar: this.avatar,
               title: this.title,
               description: this.description,
