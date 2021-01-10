@@ -124,67 +124,23 @@
 
 <script>
 import { defineComponent } from 'vue'
-import uniCalendarMixin from './uniCalendarMixin'
-import { startOfSecond } from 'date-fns'
 import { NButton } from '../../../button'
 import { NTimePicker } from '../../../time-picker'
 import { NInput } from '../../../input'
-import { uniCalendarSetup } from '../composables'
-
-const DATETIME_FORMAT = 'yyyy-MM-dd HH:mm:ss'
-const DATE_FORMAT = 'yyyy-MM-dd'
-const DATE_VALIDATE_FORMAT = [
-  'YYYY-MM-DD',
-  'YYYY-MM-D',
-  'YYYY-M-D',
-  'YYYY-M-DD'
-]
+import { useCalendar } from './use-calendar'
 
 export default defineComponent({
   components: {
     NButton,
     NTimePicker,
-    NInput
+    NInput,
+    ...useCalendar.components
   },
-  mixins: [uniCalendarMixin],
   props: {
-    format: {
-      type: String,
-      default: DATETIME_FORMAT
-    }
+    ...useCalendar.props
   },
-  setup () {
-    return uniCalendarSetup()
-  },
-  data () {
-    return {
-      dateFormat: DATE_FORMAT,
-      detaValidateFormat: DATE_VALIDATE_FORMAT
-    }
-  },
-  computed: {
-    timeFormat () {
-      return /(H|h|K|k|m|s).*(H|h|K|k|m|s)/.exec(this.format)[0]
-    }
-  },
-  watch: {
-    active () {
-      if (this.active) {
-        this.initialValue = this.value
-      } else {
-        if (this.isTimeInvalid || this.isDateInvalid) {
-          this.doUpdateValue(this.initialValue)
-        }
-      }
-    }
-  },
-  methods: {
-    adjustValue (datetime) {
-      return startOfSecond(datetime)
-    },
-    handleTimePickerChange (value) {
-      this.doUpdateValue(value)
-    }
+  setup (props) {
+    return useCalendar(props, 'datetime')
   }
 })
 </script>

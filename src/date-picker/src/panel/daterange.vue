@@ -152,48 +152,18 @@
 <script>
 import { defineComponent } from 'vue'
 import { NButton } from '../../../button'
-import dualCalendarMixin from './dualCalendarMixin'
-import { startOfDay } from 'date-fns'
-import { dualCalendarSetup } from '../composables'
-
-const DATE_FORMAT = 'yyyy-MM-dd'
+import { useDualCalendar } from './use-dual-calendar'
 
 export default defineComponent({
   components: {
-    NButton
+    NButton,
+    ...useDualCalendar.components
   },
-  mixins: [dualCalendarMixin],
   props: {
-    format: {
-      type: String,
-      default: DATE_FORMAT
-    }
+    ...useDualCalendar.props
   },
-  setup () {
-    return dualCalendarSetup()
-  },
-  watch: {
-    active (newActive) {
-      if (newActive) {
-        this.syncCalendarTimeWithValue(this.value)
-      }
-    },
-    valueAsDateArray (newValue) {
-      if (this.isSelecting) return
-      if (newValue !== null) {
-        this.syncCalendarTimeWithValue(newValue)
-      }
-    }
-  },
-  created () {
-    if (this.valueAsDateArray !== null) {
-      this.syncCalendarTimeWithValue(this.valueAsDateArray)
-    }
-  },
-  methods: {
-    adjustValue (datetime) {
-      return startOfDay(datetime)
-    }
+  setup (props) {
+    return useDualCalendar(props, 'daterange')
   }
 })
 </script>
