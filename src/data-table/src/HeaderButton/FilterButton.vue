@@ -23,9 +23,9 @@
         }"
         @click.stop
       >
-        <n-icon>
+        <n-base-icon>
           <filter-icon />
-        </n-icon>
+        </n-base-icon>
       </div>
     </template>
     <n-data-table-filter-menu
@@ -44,7 +44,7 @@
 <script>
 import { defineComponent } from 'vue'
 import { FilterIcon } from '../../../_base/icons'
-import { NIcon } from '../../../icon'
+import { NBaseIcon } from '../../../_base'
 import { NPopover } from '../../../popover'
 import RenderFilter from './RenderFilter'
 import NDataTableFilterMenu from './FilterMenu.vue'
@@ -57,7 +57,7 @@ function createActiveFilters (allFilters, columnKey, mergedFilterValue) {
 
 export default defineComponent({
   components: {
-    NIcon,
+    NBaseIcon,
     RenderFilter,
     NDataTableFilterMenu,
     NPopover,

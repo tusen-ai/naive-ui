@@ -1,20 +1,16 @@
 <template>
-  <div
-    class="n-popconfirm-content"
-    :class="{
-      'n-popconfirm-content--show-icon': showIcon
-    }"
-    :style="cssVars"
-  >
-    <div class="n-popconfirm-content__body">
-      <slot v-if="showIcon" name="icon">
-        <n-base-icon>
-          <warning-icon />
-        </n-base-icon>
-      </slot>
+  <div :style="cssVars">
+    <div class="n-popconfirm__body">
+      <div v-if="showIcon" class="n-popconfirm__icon">
+        <slot name="icon">
+          <n-base-icon>
+            <warning-icon />
+          </n-base-icon>
+        </slot>
+      </div>
       <slot />
     </div>
-    <div class="n-popconfirm-content__action">
+    <div class="n-popconfirm__action">
       <slot name="action">
         <n-button size="small" @click="handleNegativeClick">
           {{ localizedNegativeText }}

@@ -52,21 +52,20 @@ export default cB('tree', {
       display: flex;
       color: var(--arrow-color);
       transition: color .3s var(--bezier);
+      font-size: 14px;
     `, [
-      cB('icon', {
-        fontSize: '14px'
-      }, [
+      cB('icon', [
         iconSwitchTransition()
       ]),
       cB('base-loading', `
         color: var(--loading-color);
         position: absolute;
-        left: 1px;
-        top: 1px;
-        height: 12px;
-        width: 12px;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
       `, [
-        iconSwitchTransition({ left: '1px', top: '1px' })
+        iconSwitchTransition()
       ])
     ]),
     cM('hide', {
@@ -160,26 +159,3 @@ export default cB('tree', {
     })
   ])
 ])
-
-// export default c([
-//   ({ props }) => {
-//     const {
-//       $global: {
-//         cubicBezierEaseInOut
-//       },
-//       $local: {
-//         nodeColorHover,
-//         nodeColorPressed,
-//         nodeColorActive,
-//         arrowColor,
-//         nodeTextColor,
-//         nodeTextColorDisabled,
-//         borderRadiusSmall,
-//         fontSize
-//       }
-//     } = props
-//     return [
-
-//     ]
-//   }
-// ])

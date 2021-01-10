@@ -221,7 +221,6 @@ export default c([
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: var(--icon-size);
     `, [
       cB('base-clear', {
         fontSize: 'var(--icon-size)'

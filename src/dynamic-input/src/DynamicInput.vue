@@ -10,10 +10,7 @@
       @click="handleCreateClick"
     >
       <template #icon>
-        <n-base-icon
-          :unstable-theme="mergedTheme.peers.Icon"
-          :unstable-theme-overrides="mergedTheme.overrides.Icon"
-        >
+        <n-base-icon>
           <add-icon />
         </n-base-icon>
       </template>
@@ -51,10 +48,7 @@
             @click="remove(index)"
           >
             <template #icon>
-              <n-base-icon
-                :unstable-theme="mergedTheme.peers.Icon"
-                :unstable-theme-overrides="mergedTheme.overrides.Icon"
-              >
+              <n-base-icon>
                 <remove-icon />
               </n-base-icon>
             </template>
@@ -67,10 +61,7 @@
             @click="createItem(index)"
           >
             <template #icon>
-              <n-base-icon
-                :unstable-theme="mergedTheme.peers.Icon"
-                :unstable-theme-overrides="mergedTheme.overrides.Icon"
-              >
+              <n-base-icon>
                 <add-icon />
               </n-base-icon>
             </template>

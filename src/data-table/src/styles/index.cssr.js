@@ -274,26 +274,22 @@ export default c([
           display: flex;
           justify-content: center;
           align-items: center;
-          transition: background-color .3s var(--bezier);
+          transition:
+            background-color .3s var(--bezier),
+            color .3s var(--bezier);
+          font-size: var(--filter-size);
+          color: var(--th-icon-color);
         `, [
           c('&:hover', {
             backgroundColor: 'var(--th-button-color-hover)'
           }),
-          cB('icon', {
-            fontSize: 'var(--filter-size)',
-            color: 'var(--th-icon-color)',
-            transition: 'color .3s var(--bezier)'
-          }),
           cM('show', {
             backgroundColor: 'var(--th-button-color-hover)'
           }),
-          cM('active', {
-            backgroundColor: 'var(--th-button-color-hover)'
-          }, [
-            cB('icon', {
-              color: 'var(--th-icon-color-active)'
-            })
-          ])
+          cM('active', `
+            background-color: var(--th-button-color-hover);
+            color: var(--th-icon-color-active);
+          `)
         ])
       ])
     ])

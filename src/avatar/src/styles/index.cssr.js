@@ -33,13 +33,10 @@ export default cB('avatar', `
     top: 50%;
   `),
   cB('icon', {
-    color: '#FFF',
-    verticalAlign: 'bottom'
+    verticalAlign: 'bottom',
+    fontSize: 'var(--size)'
   }),
   cE('text', {
     lineHeight: 1.25
-  }),
-  cB('icon', {
-    fontSize: 'var(--size)'
   })
 ])

@@ -1,31 +1,25 @@
-import { c, cB, cE, cM } from '../../../_utils/cssr'
+import { c, cB, cE } from '../../../_utils/cssr'
 
 // vars:
 // --font-size
 // --icon-size
 // --bezier
 // --icon-color
-export default cB('popconfirm-content', {
-  padding: '4px 0'
-}, [
+export default cB('popconfirm', [
   cE('body', `
     font-size: var(--font-size);
-    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
     position: relative;
   `, [
-    cB('base-icon', `
-      position: absolute;
+    cE('icon', `
+      display: flex;
       font-size: var(--icon-size);
-      left: 0;
-      top: -2px;
-      transition: color .3s var(--bezier);
       color: var(--icon-color);
+      transition: color .3s var(--bezier);
+      margin: 0 8px 0 0;
     `)
-  ]),
-  cM('show-icon', [
-    cE('body', {
-      paddingLeft: '26px'
-    })
   ]),
   cE('action', `
     margin-top: 14px;

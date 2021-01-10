@@ -28,9 +28,9 @@
 <script>
 import { ref, defineComponent } from 'vue'
 import { VResizeObserver } from 'vueuc'
+import { formatLength } from '../../_utils/css'
 import TableHeader from './TableParts/Header.vue'
 import TableBody from './TableParts/Body.vue'
-import { formatLength } from '../../_utils/css'
 
 export default defineComponent({
   components: {

@@ -387,6 +387,7 @@
   - [ ] transfer search icon style
   - [ ] base selection icon style
   - [ ] date picker not working
+  - [ ] avatar font size bug
 
 ## Info
 

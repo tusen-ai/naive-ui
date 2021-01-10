@@ -1,6 +1,5 @@
 import { composite } from 'seemly'
 import commonVariables from './_common'
-import { iconDark } from '../../icon/styles'
 import { buttonDark } from '../../button/styles'
 import { checkboxDark } from '../../checkbox/styles'
 import { radioDark } from '../../radio/styles'
@@ -15,7 +14,6 @@ export default {
   name: 'DataTable',
   common: commonDark,
   peers: {
-    Icon: iconDark,
     Button: buttonDark,
     Checkbox: checkboxDark,
     Radio: radioDark,
