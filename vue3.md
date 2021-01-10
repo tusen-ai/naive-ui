@@ -387,8 +387,11 @@
   - [ ] transfer search icon style
   - [ ] base selection icon style
   - [ ] date picker not working
-  - [ ] avatar font size bug
-  - [ ] handle global style
+  - [x] avatar font size bug
+  - [x] handle global style
+    - 暂时放在 useTheme + useStyle 中... 似乎没啥太好的办法，最终还是要想办法让样式不要溢出
+  - [ ] prefixCls ?
+  - [ ] select menu padding top & bottom
 
 ## Info
 

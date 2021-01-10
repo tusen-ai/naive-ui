@@ -7,7 +7,6 @@ Words' sizing would be auto adjusted in avatar.
   <n-space>
     <n-avatar>{{ value }}</n-avatar>
     <n-avatar circle>{{ value }}</n-avatar>
-    <n-avatar circle>the <br />{{ value }}</n-avatar>
   </n-space>
   <n-input v-model:value="value" />
 </n-space>

@@ -7,8 +7,7 @@
       ref="textRef"
       class="n-avatar__text"
       :style="{
-        transform: styleTransform,
-        backgroundColor: color
+        background: color
       }"
     >
       <slot />
@@ -52,55 +51,35 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const ratioRef = ref(1)
-    const memorizedTextHtmlRef = ref(null)
-    const styleTransformRef = computed(() => {
-      const { value } = ratioRef
-      if (value !== 1) {
-        return `translateX(-50%) translateY(-50%) scale(${value})`
-      }
-      return 'translateX(-50%) translateY(-50%)'
-    })
-    const styleBorderRadiusRef = computed(() => {
-      if (!props.circle && !props.round) return ''
-      const { size } = props
-      if (typeof size === 'number') {
-        return `${size / 2}px`
-      }
-      return ''
-    })
+    let memoedTextHtml = null
     const textRef = ref(null)
     const selfRef = ref(null)
     const adjustText = () => {
-      const textEl = textRef.value
+      const { value: textEl } = textRef
       if (textEl) {
-        const memorizedTextHtml = memorizedTextHtmlRef.value
-        if (
-          memorizedTextHtml === null ||
-          memorizedTextHtml !== textEl.innerHtml
-        ) {
-          memorizedTextHtmlRef.value = textEl.innerHtml
-          const selfEl = selfRef.value
-          const elWidth = selfEl.offsetWidth
-          const textWidth = textEl.offsetWidth
-          const elHeight = selfEl.offsetHeight
-          const textHeight = textEl.offsetHeight
-          const radix = props.circle || props.round ? 0.75 : 0.85
+        if (memoedTextHtml === null || memoedTextHtml !== textEl.innerHTML) {
+          memoedTextHtml = textEl.innerHTML
+          const { value: selfEl } = selfRef
+          const { offsetWidth: elWidth, offsetHeight: elHeight } = selfEl
+          const { offsetWidth: textWidth, offsetHeight: textHeight } = textEl
+          const radix = 0.9
           const ratio = Math.min(
             (elWidth / textWidth) * radix,
-            (elHeight / textHeight) * radix
+            (elHeight / textHeight) * radix,
+            1
           )
-          ratioRef.value = Math.min(1, ratio)
+          textEl.style.transform = `translateX(-50%) translateY(-50%) scale(${ratio})`
         }
       }
     }
     // Not Good Impl
     onMounted(() => adjustText())
-    onUpdated(() => adjustText())
+    onUpdated(() => {
+      console.log('updated')
+      adjustText()
+    })
     const themeRef = useTheme('Avatar', 'Avatar', style, avatarLight, props)
     return {
-      styleTransform: styleTransformRef,
-      styleBorderRadius: styleBorderRadiusRef,
       textRef,
       selfRef,
       cssVars: computed(() => {
