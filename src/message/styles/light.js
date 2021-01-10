@@ -16,7 +16,9 @@ export default {
       warningColor,
       popoverColor,
       boxShadow2,
-      primaryColor
+      primaryColor,
+      lineHeight,
+      borderRadius
     } = vars
     const coloredBoxShadow = '0px 2px 18px 0px rgba(0, 0, 0, 0.27)'
     return {
@@ -56,7 +58,9 @@ export default {
       closeColorLoading: closeColor,
       closeColorHoverLoading: closeColorHover,
       closeColorPressedLoading: closeColor,
-      loadingColor: primaryColor
+      loadingColor: primaryColor,
+      lineHeight,
+      borderRadius
     }
   }
 }

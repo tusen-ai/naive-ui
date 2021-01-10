@@ -1,4 +1,5 @@
-import { h, Transition, defineComponent } from 'vue'
+import { h, defineComponent } from 'vue'
+import { NFadeInExpandTransition } from '../../_base'
 import NMessage from './Message.js'
 import props from './message-props'
 
@@ -74,9 +75,8 @@ export default defineComponent({
   },
   render () {
     return h(
-      Transition,
+      NFadeInExpandTransition,
       {
-        name: 'message-transition',
         appear: true,
         onAfterLeave: this.handleAfterLeave
       },

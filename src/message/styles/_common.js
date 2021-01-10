@@ -1,7 +1,6 @@
 export default {
-  height: '40px',
-  padding: ' 0 40px',
-  paddingClosable: '0 24px 0 40px',
+  margin: '0 0 8px 0',
+  padding: '10px 20px',
   maxWidth: '720px',
   minWidth: '420px',
   iconMargin: '10px',

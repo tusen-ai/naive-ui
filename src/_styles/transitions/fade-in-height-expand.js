@@ -7,16 +7,15 @@ const {
   cubicBezierEaseIn
 } = commonVariables
 
-export default function (options = {}) {
-  const {
-    overflow = 'hidden',
-    duration = '.3s',
-    originalTransition = '',
-    leavingDelay = '0s',
-    foldPadding = false,
-    enterToProps = null,
-    leaveToProps = null
-  } = options
+export default function ({
+  overflow = 'hidden',
+  duration = '.3s',
+  originalTransition = '',
+  leavingDelay = '0s',
+  foldPadding = false,
+  enterToProps = null,
+  leaveToProps = null
+} = {}) {
   return [
     c(
       `&.${namespace}-fade-in-height-expand-transition-leave-from, &.${namespace}-fade-in-height-expand-transition-enter-to`,
@@ -36,31 +35,33 @@ export default function (options = {}) {
         paddingBottom: foldPadding ? '0 !important' : null
       }
     ),
-    c(`&.${namespace}-fade-in-height-expand-transition-leave-active`, {
-      raw: `
-        overflow: ${overflow};
-        transition:
-          max-height ${duration} ${cubicBezierEaseInOut} ${leavingDelay},
-          opacity ${duration} ${cubicBezierEaseOut} ${leavingDelay},
-          margin-top ${duration} ${cubicBezierEaseInOut} ${leavingDelay},
-          margin-bottom ${duration} ${cubicBezierEaseInOut} ${leavingDelay},
-          padding-top ${duration} ${cubicBezierEaseInOut} ${leavingDelay},
-          padding-bottom ${duration} ${cubicBezierEaseInOut} ${leavingDelay}
-          ${originalTransition ? ',' + originalTransition : ''}
+    c(
+      `&.${namespace}-fade-in-height-expand-transition-leave-active`,
       `
-    }),
-    c(`&.${namespace}-fade-in-height-expand-transition-enter-active`, {
-      raw: `
-        overflow: ${overflow};
-        transition:
-          max-height ${duration} ${cubicBezierEaseInOut},
-          opacity ${duration} ${cubicBezierEaseIn},
-          margin-top ${duration} ${cubicBezierEaseInOut},
-          margin-bottom ${duration} ${cubicBezierEaseInOut},
-          padding-top ${duration} ${cubicBezierEaseInOut},
-          padding-bottom ${duration} ${cubicBezierEaseInOut}
-          ${originalTransition ? ',' + originalTransition : ''}
+      overflow: ${overflow};
+      transition:
+        max-height ${duration} ${cubicBezierEaseInOut} ${leavingDelay},
+        opacity ${duration} ${cubicBezierEaseOut} ${leavingDelay},
+        margin-top ${duration} ${cubicBezierEaseInOut} ${leavingDelay},
+        margin-bottom ${duration} ${cubicBezierEaseInOut} ${leavingDelay},
+        padding-top ${duration} ${cubicBezierEaseInOut} ${leavingDelay},
+        padding-bottom ${duration} ${cubicBezierEaseInOut} ${leavingDelay}
+        ${originalTransition ? ',' + originalTransition : ''}
+    `
+    ),
+    c(
+      `&.${namespace}-fade-in-height-expand-transition-enter-active`,
       `
-    })
+      overflow: ${overflow};
+      transition:
+        max-height ${duration} ${cubicBezierEaseInOut},
+        opacity ${duration} ${cubicBezierEaseIn},
+        margin-top ${duration} ${cubicBezierEaseInOut},
+        margin-bottom ${duration} ${cubicBezierEaseInOut},
+        padding-top ${duration} ${cubicBezierEaseInOut},
+        padding-bottom ${duration} ${cubicBezierEaseInOut}
+        ${originalTransition ? ',' + originalTransition : ''}
+    `
+    )
   ]
 }

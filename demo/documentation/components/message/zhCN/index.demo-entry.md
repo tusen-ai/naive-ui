@@ -39,6 +39,7 @@ closable
 modify-content
 manually-close
 about-theme
+multiple-line
 ```
 
 ## API

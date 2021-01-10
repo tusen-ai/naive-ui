@@ -1,10 +1,11 @@
-import { c, cB, cE, cM } from '../../../_utils/cssr'
+import { c, cB, cE } from '../../../_utils/cssr'
 import iconSwitchTransition from '../../../_styles/transitions/icon-switch'
+import fadeInHeightExpand from '../../../_styles/transitions/fade-in-height-expand'
 
 // vars:
+// --margin
 // --bezier
 // --padding
-// --height
 // --max-width
 // --font-size
 // --icon-margin
@@ -19,8 +20,26 @@ import iconSwitchTransition from '../../../_styles/transitions/icon-switch'
 // --close-color-pressed
 // --close-color-hover
 // --loading-color
+// --border-radius
 export default c([
+  cB('message-wrapper', `
+    margin: var(--margin);
+    z-index: 0;
+    transform-origin: top center;
+  `, [
+    fadeInHeightExpand({
+      overflow: 'visible',
+      originalTransition: 'transform .3s var(--bezier)',
+      enterToProps: {
+        transform: 'scale(1)'
+      },
+      leaveToProps: {
+        transform: 'scale(0.85)'
+      }
+    })
+  ]),
   cB('message', `
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     transition:
@@ -29,16 +48,10 @@ export default c([
       background-color .3s var(--bezier),
       opacity .3s var(--bezier),
       transform .3s var(--bezier),
-      max-height .3s var(--bezier),
       margin-bottom .3s var(--bezier);
-    opacity: 1;
-    margin-bottom: 12px;
     padding: var(--padding);
-    height: var(--height);
-    max-height: var(--height);
-    border-radius: 20px;
-    flex-shrink: 0;
-    font-weight: 400;
+    border-radius: var(--border-radius);
+    flex-wrap: nowrap;
     overflow: hidden;
     max-width: var(--max-width);
     color: var(--text-color);
@@ -47,39 +60,39 @@ export default c([
   `, [
     cE('content', `
       display: inline-block;
-      height: var(--height);
-      line-height: var(--height);
+      line-height: var(--line-height);
       font-size: var(--font-size);
     `),
     cE('icon', `
+      position: relative;
       margin-right: var(--icon-margin);
-      display: inline-flex;
-      height: var(--height);
-      line-height: var(--height);
-      align-items: center;
+      height: var(--icon-size);
+      width: var(--icon-size);
       color: var(--icon-color);
       font-size: var(--icon-size);
-      
+      transition: color .3s var(--bezier);
+      flex-shrink: 0;
     `, [
-      cB('base-icon', [
-        cB('base-loading', {
-          color: 'var(--loading-color)'
-        }, [
-          iconSwitchTransition()
-        ]),
-        c('svg', [
-          iconSwitchTransition()
-        ])
+      cB('base-loading', `
+        color: var(--loading-color);
+        transition: color .3s var(--bezier);
+      `),
+      c('> *', {
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        right: 0,
+        bottom: 0
+      }, [
+        iconSwitchTransition()
       ])
     ]),
     cE('close', `
       font-size: var(--close-size);
       margin: var(--close-margin);
       transition: color .3s var(--bezier);
-    `),
-    cM('closable', {
-      padding: 'var(--padding-closable)'
-    })
+      flex-shrink: 0;
+    `)
   ]),
   cB('message-container', `
     z-index: 6000;
@@ -92,15 +105,5 @@ export default c([
     display: flex;
     flex-direction: column;
     align-items: center;
-  `),
-  // TODO: refactor transition style
-  cB('message', [
-    c('&.message-transition-enter-from, &.message-transition-leave-to', `
-      opacity: 0;
-      transform: translateY(-12px) scale(.5);
-      transform-origin: top center;
-      max-height: 0;
-      margin-bottom: 0;
-    `)
-  ])
+  `)
 ])

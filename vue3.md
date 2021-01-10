@@ -379,11 +379,11 @@
   - [ ] input + form-item style
   - [ ] loadingbar theme
   - [ ] dropdown group + menu use dropdown
-  - [ ] 多行 message
+  - [x] 多行 message
   - [ ] progress height
   - [x] close 重构
   - [ ] data-table, radio style 重构
-  - [ ] message icon style
+  - [x] message icon style
   - [ ] transfer icon style
   - [ ] base selection icon style
 

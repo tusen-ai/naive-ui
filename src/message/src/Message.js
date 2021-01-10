@@ -17,6 +17,14 @@ import { messageLight } from '../styles'
 import props from './message-props'
 import style from './styles/index.cssr.js'
 
+const iconMap = {
+  info: InfoIcon,
+  success: SuccessIcon,
+  warning: WarningIcon,
+  error: ErrorIcon,
+  loading: NBaseLoading
+}
+
 export default {
   name: 'Message',
   props,
@@ -31,9 +39,8 @@ export default {
         const {
           common: { cubicBezierEaseInOut },
           self: {
-            height,
             padding,
-            paddingClosable,
+            margin,
             maxWidth,
             iconMargin,
             closeMargin,
@@ -41,6 +48,8 @@ export default {
             iconSize,
             fontSize,
             loadingColor,
+            lineHeight,
+            borderRadius,
             [createKey('textColor', type)]: textColor,
             [createKey('boxShadow', type)]: boxShadow,
             [createKey('color', type)]: color,
@@ -52,15 +61,14 @@ export default {
         } = themeRef.value
         return {
           '--bezier': cubicBezierEaseInOut,
+          '--margin': margin,
           '--padding': padding,
-          '--height': height,
           '--max-width': maxWidth,
           '--font-size': fontSize,
           '--icon-margin': iconMargin,
           '--icon-size': iconSize,
           '--close-size': closeSize,
           '--close-margin': closeMargin,
-          '--padding-closable': paddingClosable,
           '--text-color': textColor,
           '--color': color,
           '--box-shadow': boxShadow,
@@ -68,7 +76,9 @@ export default {
           '--close-color': closeColor,
           '--close-color-pressed': closeColorPressed,
           '--close-color-hover': closeColorHover,
-          '--loading-color': loadingColor
+          '--loading-color': loadingColor,
+          '--line-height': lineHeight,
+          '--border-radius': borderRadius
         }
       })
     }
@@ -78,47 +88,51 @@ export default {
     return h(
       'div',
       {
-        style: cssVars,
-        class: [
-          'n-message',
-          {
-            'n-message--closable': closable
-          }
-        ]
+        class: 'n-message-wrapper',
+        style: cssVars
       },
       [
         h(
           'div',
           {
-            class: 'n-message__icon'
+            class: [
+              'n-message',
+              {
+                'n-message--closable': closable
+              }
+            ]
           },
           [
-            h(NBaseIcon, null, {
-              default: () => [
+            h(
+              'div',
+              {
+                class: 'n-message__icon'
+              },
+              [
                 h(NIconSwitchTransition, null, {
                   default: () => [createIconVNode(icon, type)]
                 })
               ]
-            })
+            ),
+            h(
+              'div',
+              {
+                class: 'n-message__content'
+              },
+              [
+                h(render, {
+                  render: content
+                })
+              ]
+            ),
+            closable
+              ? h(NBaseClose, {
+                class: 'n-message__close',
+                onClick: handleClose
+              })
+              : null
           ]
-        ),
-        h(
-          'div',
-          {
-            class: 'n-message__content'
-          },
-          [
-            h(render, {
-              render: content
-            })
-          ]
-        ),
-        closable
-          ? h(NBaseClose, {
-            class: 'n-message__close',
-            onClick: handleClose
-          })
-          : null
+        )
       ]
     )
   }
@@ -128,28 +142,14 @@ function createIconVNode (icon, type) {
   if (typeof icon === 'function') {
     return icon()
   } else {
-    switch (type) {
-      case 'info':
-        return h(InfoIcon, {
-          key: 'info'
-        })
-      case 'success':
-        return h(SuccessIcon, {
-          key: 'success'
-        })
-      case 'warning':
-        return h(WarningIcon, {
-          key: 'warning'
-        })
-      case 'error':
-        return h(ErrorIcon, {
-          key: 'error'
-        })
-      case 'loading':
-        return h(NBaseLoading, {
-          strokeWidth: 24,
-          key: 'loading'
-        })
-    }
+    return h(
+      NBaseIcon,
+      {
+        key: type
+      },
+      {
+        default: () => h(iconMap[type])
+      }
+    )
   }
 }

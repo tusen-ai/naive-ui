@@ -15,7 +15,9 @@ export default {
       warningColorSuppl,
       popoverColor,
       boxShadow2,
-      primaryColor
+      primaryColor,
+      lineHeight,
+      borderRadius
     } = vars
     return {
       ...commonVariables,
@@ -62,7 +64,9 @@ export default {
       closeColorLoading: 'rgba(255, 255, 255, .5)',
       closeColorHoverLoading: 'rgba(255, 255, 255, .6)',
       closeColorPressedLoading: 'rgba(255, 255, 255, .4)',
-      loadingColor: primaryColor
+      loadingColor: primaryColor,
+      lineHeight,
+      borderRadius
     }
   }
 }

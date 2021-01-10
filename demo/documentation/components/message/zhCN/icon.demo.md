@@ -6,6 +6,7 @@
 
 ```js
 import { h } from 'vue'
+import { NIcon } from 'naive-ui'
 import { MdHourglass } from '@vicons/ionicons-v4'
 
 export default {
@@ -13,7 +14,7 @@ export default {
   methods: {
     createMessage () {
       this.message.warning("I never needed anybody's help in any way", {
-        icon: () => h(MdHourglass)
+        icon: () => h(NIcon, null, { default: () => h(MdHourglass) })
       })
     }
   }
