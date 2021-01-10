@@ -39,13 +39,8 @@ basic
 
 ### `loadingBar` Injection Methods
 
-| Name   | Type                                 | Description |
-| ------ | ------------------------------------ | ----------- |
-| error  | `(option: LoadingBarOption) => void` |             |
-| finish | `(option: LoadingBarOption) => void` |             |
-| start  | `(option: LoadingBarOption) => void` |             |
-
-#### LoadingBarOption Properties
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name   | Type         | Description |
+| ------ | ------------ | ----------- |
+| error  | `() => void` |             |
+| finish | `() => void` |             |
+| start  | `() => void` |             |

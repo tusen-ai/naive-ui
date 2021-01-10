@@ -377,7 +377,7 @@
   - [ ] gradient-text transition 又没了
   - [x] md-loader code
   - [ ] input + form-item style
-  - [ ] loadingbar theme
+  - [x] loadingbar theme
   - [ ] dropdown group + menu use dropdown
   - [x] 多行 message
   - [ ] progress height

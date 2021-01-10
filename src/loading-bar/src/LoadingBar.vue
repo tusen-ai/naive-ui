@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, inject } from 'vue'
 import { useTheme } from '../../_mixins'
 import { loadingBarLight } from '../styles'
 import style from './styles/index.cssr.js'
@@ -32,13 +32,14 @@ function createClassName (status) {
 
 export default defineComponent({
   name: 'LoadingBar',
-  setup (props) {
+  setup () {
+    const loadingBarProps = inject('NLoadingBarProps')
     const themeRef = useTheme(
       'LoadingBar',
       'LoadingBar',
       style,
       loadingBarLight,
-      props
+      loadingBarProps
     )
     return {
       cssVars: computed(() => {

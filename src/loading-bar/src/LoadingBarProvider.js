@@ -8,17 +8,19 @@ import {
   nextTick
 } from 'vue'
 import { useIsMounted } from 'vooks'
+import { useTheme } from '../../_mixins'
 import NLoadingBar from './LoadingBar.vue'
 
 export default defineComponent({
   name: 'LoadingBarProvider',
   props: {
+    ...useTheme.props,
     to: {
       type: [String, Object],
       default: undefined
     }
   },
-  setup () {
+  setup (props) {
     const isMountedRef = useIsMounted()
     const loadingBarRef = ref(null)
     const methods = {
@@ -61,6 +63,7 @@ export default defineComponent({
       }
     }
     provide('loadingBar', methods)
+    provide('NLoadingBarProps', props)
     return {
       loadingBarRef
     }
