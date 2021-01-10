@@ -4,7 +4,7 @@
     :unstable-theme-overrides="NTransfer.mergedTheme.overrides.Checkbox"
     :checked="checkboxProps.checked"
     :indeterminate="checkboxProps.indeterminate"
-    :disabled="checkboxProps.disabled"
+    :disabled="checkboxProps.disabled || NTransfer.disabled"
     :size="NTransfer.mergedSize"
     @update:checked="onChange"
   />

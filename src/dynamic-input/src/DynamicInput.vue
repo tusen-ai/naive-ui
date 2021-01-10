@@ -10,12 +10,12 @@
       @click="handleCreateClick"
     >
       <template #icon>
-        <n-icon
+        <n-base-icon
           :unstable-theme="mergedTheme.peers.Icon"
           :unstable-theme-overrides="mergedTheme.overrides.Icon"
         >
           <add-icon />
-        </n-icon>
+        </n-base-icon>
       </template>
       {{ locale.create }}
     </n-button>
@@ -51,12 +51,12 @@
             @click="remove(index)"
           >
             <template #icon>
-              <n-icon
+              <n-base-icon
                 :unstable-theme="mergedTheme.peers.Icon"
                 :unstable-theme-overrides="mergedTheme.overrides.Icon"
               >
                 <remove-icon />
-              </n-icon>
+              </n-base-icon>
             </template>
           </n-button>
           <n-button
@@ -67,12 +67,12 @@
             @click="createItem(index)"
           >
             <template #icon>
-              <n-icon
+              <n-base-icon
                 :unstable-theme="mergedTheme.peers.Icon"
                 :unstable-theme-overrides="mergedTheme.overrides.Icon"
               >
                 <add-icon />
-              </n-icon>
+              </n-base-icon>
             </template>
           </n-button>
         </n-button-group>
@@ -86,7 +86,7 @@ import { ref, toRef, isProxy, toRaw, computed, defineComponent } from 'vue'
 import { useMergedState } from 'vooks'
 import { createId } from 'seemly'
 import { RemoveIcon, AddIcon } from '../../_base/icons'
-import { NIcon } from '../../icon'
+import { NBaseIcon } from '../../_base'
 import { NButton, NButtonGroup } from '../../button'
 import { useFormItem, useTheme, useLocale } from '../../_mixins'
 import { warn, call } from '../../_utils'
@@ -104,7 +104,7 @@ export default defineComponent({
     NDynamicInputPairPreset,
     NButtonGroup,
     NButton,
-    NIcon,
+    NBaseIcon,
     AddIcon,
     RemoveIcon
   },

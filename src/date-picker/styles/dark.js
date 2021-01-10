@@ -1,6 +1,5 @@
 import { changeColor } from 'seemly'
 import { inputDark } from '../../input/styles'
-import { iconDark } from '../../icon/styles'
 import { commonDark } from '../../_styles/new-common'
 import { buttonDark } from '../../button/styles'
 import { timePickerDark } from '../../time-picker/styles'
@@ -11,7 +10,6 @@ export default {
   common: commonDark,
   peers: {
     Input: inputDark,
-    Icon: iconDark,
     Button: buttonDark,
     TimePicker: timePickerDark
   },
@@ -25,6 +23,7 @@ export default {
       primaryColor,
       borderRadiusSmall,
       iconColorOverlay,
+      iconColorDisabledOverlay,
       dividerColorOverlay,
       boxShadow2,
       borderRadius,
@@ -52,7 +51,9 @@ export default {
       panelActionDividerColor: dividerColorOverlay,
       panelBorderRadius: borderRadius,
       panelBoxShadow: boxShadow2,
-      calendarTitleFontWeight: fontWeightStrong
+      calendarTitleFontWeight: fontWeightStrong,
+      iconColor: iconColorOverlay,
+      iconColorDisabled: iconColorDisabledOverlay
     }
   }
 }

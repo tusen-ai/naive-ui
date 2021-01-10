@@ -31,7 +31,7 @@
             @focus="handleInputFocus"
             @blur="handleInputBlur"
           >
-            <template #suffix>
+            <template #clear>
               <n-base-icon>
                 <search-icon />
               </n-base-icon>
@@ -61,7 +61,7 @@
                   <n-transfer-source-list-item
                     :key="item.value"
                     :value="item.value"
-                    :disabled="item.disabled"
+                    :disabled="item.disabled || disabled"
                     :label="item.label"
                   />
                 </template>
@@ -82,7 +82,7 @@
                     v-for="option in filteredSrcOpts"
                     :key="option.value"
                     :value="option.value"
-                    :disabled="!!option.disabled"
+                    :disabled="!!option.disabled || disabled"
                     :label="option.label"
                   />
                 </transition-group>
@@ -102,7 +102,7 @@
     </div>
     <div class="n-transfer-gap">
       <n-button
-        :disabled="toButtonDisabled"
+        :disabled="toButtonDisabled || disabled"
         :unstable-theme="mergedTheme.peers.Button"
         :unstable-theme-overrides="mergedTheme.overrides.Button"
         @click="handleToTgtClick"
@@ -114,7 +114,7 @@
         </template>
       </n-button>
       <n-button
-        :disabled="fromButtonDisabled"
+        :disabled="fromButtonDisabled || disabled"
         :unstable-theme="mergedTheme.peers.Button"
         :unstable-theme-overrides="mergedTheme.overrides.Button"
         @click="handleToSrcClick"
@@ -148,7 +148,7 @@
             @focus="handleInputFocus"
             @blur="handleInputBlur"
           >
-            <template #suffix>
+            <template #clear>
               <n-base-icon>
                 <search-icon />
               </n-base-icon>
@@ -178,7 +178,7 @@
                   <n-transfer-target-list-item
                     :key="option.value"
                     :value="option.value"
-                    :disabled="!!option.disabled"
+                    :disabled="!!option.disabled || disabled"
                     :label="option.label"
                   />
                 </template>
@@ -199,7 +199,7 @@
                     v-for="option in filteredTgtOpts"
                     :key="option.value"
                     :value="option.value"
-                    :disabled="!!option.disabled"
+                    :disabled="!!option.disabled || disabled"
                     :label="option.label"
                   />
                 </transition-group>

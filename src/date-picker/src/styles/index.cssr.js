@@ -4,6 +4,9 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // vars:
 // --bezier
 
+// --icon-color
+// --icon-color-disabled
+
 // --panel-border-radius
 // --panel-color
 // --panel-box-shadow
@@ -49,6 +52,15 @@ export default c([
   cB('date-picker', {
     position: 'relative'
   }, [
+    cB('date-picker-icon', `
+      color: var(--icon-color);
+      transition: color .3s var(--bezier);
+    `),
+    cM('disabled', [
+      cB('date-picker-icon', {
+        color: 'var(--icon-color-disabled)'
+      })
+    ]),
     cM('invalid', [
       c('input', {
         textDecoration: 'line-through'

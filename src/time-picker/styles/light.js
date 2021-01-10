@@ -1,5 +1,4 @@
 import commonVars from './_common'
-import { iconLight } from '../../icon/styles'
 import { scrollbarDark } from '../../scrollbar/styles'
 import { commonLight } from '../../_styles/new-common'
 import { buttonDark } from '../../button/styles'
@@ -8,7 +7,6 @@ export default {
   name: 'TimePicker',
   common: commonLight,
   peers: {
-    Icon: iconLight,
     Scrollbar: scrollbarDark,
     Button: buttonDark
   },
@@ -21,7 +19,9 @@ export default {
       dividerColorOverlay,
       opacityDisabled,
       boxShadow2,
-      borderRadius
+      borderRadius,
+      iconColor,
+      iconColorDisabled
     } = vars
     return {
       ...commonVars,
@@ -32,7 +32,9 @@ export default {
       itemTextColorActive: primaryColor,
       itemColorHover: hoverColorOverlay,
       itemOpacityDisabled: opacityDisabled,
-      borderRadius
+      borderRadius,
+      iconColor,
+      iconColorDisabled
     }
   }
 }

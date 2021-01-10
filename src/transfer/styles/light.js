@@ -33,8 +33,7 @@ export default {
       textColor2,
       borderColorOverlay,
       hoverColorOverlay,
-      borderColor,
-      fontWeightStrong
+      borderColor
     } = vars
     return {
       ...commonVariables,
@@ -55,7 +54,7 @@ export default {
       itemTextColor: textColor2,
       itemTextColorDisabled: textColorDisabled,
       itemColorPending: hoverColorOverlay,
-      titleFontWeight: fontWeightStrong
+      titleFontWeight: 400
     }
   }
 }

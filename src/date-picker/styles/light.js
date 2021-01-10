@@ -1,6 +1,5 @@
 import { changeColor } from 'seemly'
 import { inputLight } from '../../input/styles'
-import { iconLight } from '../../icon/styles'
 import { commonLight } from '../../_styles/new-common'
 import { buttonLight } from '../../button/styles'
 import { timePickerLight } from '../../time-picker/styles'
@@ -11,7 +10,6 @@ export default {
   common: commonLight,
   peers: {
     Input: inputLight,
-    Icon: iconLight,
     Button: buttonLight,
     TimePicker: timePickerLight
   },
@@ -24,6 +22,7 @@ export default {
       primaryColor,
       borderRadiusSmall,
       iconColor,
+      iconColorDisabled,
       textColorPrimary,
       dividerColor,
       boxShadow2,
@@ -53,7 +52,9 @@ export default {
       panelActionDividerColor: dividerColor,
       panelBoxShadow: boxShadow2,
       panelBorderRadius: borderRadius,
-      calendarTitleFontWeight: fontWeightStrong
+      calendarTitleFontWeight: fontWeightStrong,
+      iconColor: iconColor,
+      iconColorDisabled: iconColorDisabled
     }
   }
 }

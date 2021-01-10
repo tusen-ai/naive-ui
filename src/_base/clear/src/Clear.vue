@@ -1,10 +1,11 @@
 <template>
-  <div class="n-base-clear" :style="cssVars">
+  <div class="n-base-clear">
     <n-icon-switch-transition>
       <n-base-icon
         v-if="show"
         key="dismiss"
         class="n-base-clear__clear"
+        :style="cssVars"
         @click="onClear"
         @mousedown.prevent
       >

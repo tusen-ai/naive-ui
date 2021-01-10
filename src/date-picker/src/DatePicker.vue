@@ -9,6 +9,7 @@
       'n-date-picker--end-invalid': isEndValueInvalid
     }"
     class="n-date-picker"
+    :style="triggerCssVars"
     @keydown="handleKeyDown"
   >
     <v-binder>
@@ -39,12 +40,9 @@
           @input="handleRangeInput"
         >
           <template #clear>
-            <n-icon
-              :unstable-theme-overrides="mergedTheme.overrides.NIcon"
-              :unstable-theme="mergedTheme.peers.NIcon"
-            >
+            <n-base-icon class="n-date-picker-icon">
               <calendar-icon />
-            </n-icon>
+            </n-base-icon>
           </template>
         </n-input>
         <n-input
@@ -70,12 +68,9 @@
           @clear="handleClear"
         >
           <template #clear>
-            <n-icon
-              :unstable-theme-overrides="mergedTheme.overrides.Icon"
-              :unstable-theme="mergedTheme.peers.Icon"
-            >
+            <n-base-icon class="n-date-picker-icon">
               <calendar-icon />
-            </n-icon>
+            </n-base-icon>
           </template>
         </n-input>
       </v-target>
@@ -158,7 +153,7 @@ import { format, getTime, isValid } from 'date-fns'
 import { isEqual } from 'lodash-es'
 import { useIsMounted, useMergedState } from 'vooks'
 import { NInput } from '../../input'
-import { NIcon } from '../../icon'
+import { NBaseIcon } from '../../_base'
 import { useFormItem, useTheme, useConfig, useLocale } from '../../_mixins'
 import { CalendarIcon } from '../../_base/icons'
 import { warn, call, useAdjustedTo, createKey } from '../../_utils'
@@ -191,7 +186,7 @@ export default defineComponent({
     VTarget,
     VFollower,
     NInput,
-    NIcon,
+    NBaseIcon,
     DatetimePanel,
     DatePanel,
     DatetimerangePanel,
@@ -333,6 +328,17 @@ export default defineComponent({
       ...useFormItem(props),
       ...useConfig(props),
       mergedTheme: themeRef,
+      triggerCssVars: computed(() => {
+        const {
+          common: { cubicBezierEaseInOut },
+          self: { iconColor, iconColorDisabled }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--icon-color': iconColor,
+          '--icon-color-disabled': iconColorDisabled
+        }
+      }),
       cssVars: computed(() => {
         const { type } = props
         const {
@@ -373,6 +379,7 @@ export default defineComponent({
         } = themeRef.value
         return {
           '--bezier': cubicBezierEaseInOut,
+
           '--panel-border-radius': panelBorderRadius,
           '--panel-color': panelColor,
           '--panel-box-shadow': panelBoxShadow,

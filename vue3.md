@@ -384,8 +384,9 @@
   - [x] close 重构
   - [ ] data-table, radio style 重构
   - [x] message icon style
-  - [ ] transfer icon style
+  - [ ] transfer search icon style
   - [ ] base selection icon style
+  - [ ] date picker not working
 
 ## Info
 

@@ -1,7 +1,6 @@
 import { inputLight } from '../../input/styles'
 import { buttonLight } from '../../button/styles'
 import { commonLight } from '../../_styles/new-common'
-import { iconLight } from '../../icon/styles'
 import commonVariables from './_common'
 
 export default {
@@ -9,8 +8,7 @@ export default {
   common: commonLight,
   peers: {
     Input: inputLight,
-    Button: buttonLight,
-    Icon: iconLight
+    Button: buttonLight
   },
   self () {
     return {

@@ -2,8 +2,10 @@
   <div
     class="n-time-picker"
     :class="{
+      'n-time-picker--disabled': disabled,
       'n-time-picker--invalid': isValueInvalid
     }"
+    :style="triggerCssVars"
   >
     <v-binder>
       <v-target>
@@ -30,12 +32,9 @@
           @clear="handleTimeInputClear"
         >
           <template v-if="showIcon" #suffix>
-            <n-icon
-              :unstable-theme="mergedTheme.peers.Icon"
-              :unstable-theme-overrides="mergedTheme.overrides.Icon"
-            >
+            <n-base-icon class="n-time-picker-icon">
               <time-icon />
-            </n-icon>
+            </n-base-icon>
           </template>
         </n-input>
       </v-target>
@@ -106,7 +105,7 @@ import {
 import { strictParse } from '../../date-picker/src/utils'
 import { TimeIcon } from '../../_base/icons'
 import { NInput } from '../../input'
-import { NIcon } from '../../icon'
+import { NBaseIcon } from '../../_base'
 import { useConfig, useTheme, useLocale, useFormItem } from '../../_mixins'
 import { warn, call, useAdjustedTo } from '../../_utils'
 import { timePickerLight } from '../styles'
@@ -117,7 +116,7 @@ export default defineComponent({
   name: 'TimePicker',
   components: {
     NInput,
-    NIcon,
+    NBaseIcon,
     VBinder,
     VTarget,
     VFollower,
@@ -265,6 +264,17 @@ export default defineComponent({
       ...useConfig(props),
       ...useFormItem(props),
       mergedTheme: themeRef,
+      triggerCssVars: computed(() => {
+        const {
+          common: { cubicBezierEaseInOut },
+          self: { iconColor, iconColorDisabled }
+        } = themeRef.value
+        return {
+          '--icon-color': iconColor,
+          '--icon-color-disabled': iconColorDisabled,
+          '--bezier': cubicBezierEaseInOut
+        }
+      }),
       cssVars: computed(() => {
         const {
           self: {
