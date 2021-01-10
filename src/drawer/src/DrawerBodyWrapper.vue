@@ -2,8 +2,11 @@
   <div
     v-if="displayDirective === 'show' || displayed || show"
     v-show="displayDirective === 'if' || displayed || show"
-    class="n-drawer-container"
   >
+    <!--
+      Keep the wrapper dom. Make sure the drawer has a host. Nor the detached
+      content will disappear without transition
+    -->
     <transition
       :name="transitionName"
       :appear="NDrawer.isMounted"

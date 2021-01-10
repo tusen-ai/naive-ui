@@ -2,10 +2,12 @@
   <v-lazy-teleport :to="to" :show="show">
     <div
       v-zindexable="{ enabled: show }"
-      class="n-positioning-container"
-      :class="{
-        [namespace]: namespace
-      }"
+      :class="[
+        'n-drawer-container',
+        {
+          [namespace]: namespace
+        }
+      ]"
       :style="cssVars"
     >
       <transition name="n-fade-in-transition" :appear="isMounted">

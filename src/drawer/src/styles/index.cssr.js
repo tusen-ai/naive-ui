@@ -62,6 +62,26 @@ export default c([
       right: 0;
     `)
   ]),
+  c('body', [
+    c('>', [
+      cB('drawer-container', {
+        position: 'fixed'
+      })
+    ])
+  ]),
+  cB('drawer-container', `
+    position: relative;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    pointer-events: none;
+  `, [
+    c('> *', {
+      pointerEvents: 'all'
+    })
+  ]),
   cB('drawer-mask', `
     background-color: rgba(0, 0, 0, .3);
     position: absolute;
@@ -69,22 +89,12 @@ export default c([
     right: 0;
     top: 0;
     bottom: 0;
-    pointer-events: all;
   `, [
     fadeInTransition({
-      enterDuration: '0.3s',
-      leaveDuration: '0.3s',
+      enterDuration: '0.2s',
+      leaveDuration: '0.2s',
       enterCubicBezier: 'var(--bezier-in)',
       leaveCubicBezier: 'var(--bezier-out)'
     })
-  ]),
-  cB('drawer-container', `
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    pointer-events: none;
-    overflow: hidden;
-  `)
+  ])
 ])
