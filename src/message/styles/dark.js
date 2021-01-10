@@ -1,4 +1,3 @@
-import { changeColor } from 'seemly'
 import commonVariables from './_common'
 import { commonDark } from '../../_styles/new-common'
 
@@ -7,64 +6,57 @@ export default {
   common: commonDark,
   self (vars) {
     const {
-      textColorBase,
       textColor2Overlay,
-      infoColorSuppl,
-      successColorSuppl,
-      errorColorSuppl,
-      warningColorSuppl,
+      infoColor,
+      successColor,
+      errorColor,
+      warningColor,
       popoverColor,
       boxShadow2,
       primaryColor,
       lineHeight,
-      borderRadius
+      borderRadius,
+      closeColorOverlay,
+      closeColorHoverOverlay,
+      closeColorPressedOverlay
     } = vars
     return {
       ...commonVariables,
-      textColorInfo: textColorBase,
-      textColorSuccess: textColorBase,
-      textColorError: textColorBase,
-      textColorWarning: textColorBase,
+      textColorInfo: textColor2Overlay,
+      textColorSuccess: textColor2Overlay,
+      textColorError: textColor2Overlay,
+      textColorWarning: textColor2Overlay,
       textColorLoading: textColor2Overlay,
-      colorInfo: infoColorSuppl,
-      colorSuccess: successColorSuppl,
-      colorError: errorColorSuppl,
-      colorWarning: warningColorSuppl,
+      colorInfo: popoverColor,
+      colorSuccess: popoverColor,
+      colorError: popoverColor,
+      colorWarning: popoverColor,
       colorLoading: popoverColor,
-      boxShadowInfo: `0 2px 12px 0 ${changeColor(infoColorSuppl, {
-        alpha: '0.4'
-      })}`,
-      boxShadowSuccess: `0 2px 12px 0 ${changeColor(successColorSuppl, {
-        alpha: '0.4'
-      })}`,
-      boxShadowError: `0 2px 12px 0 ${changeColor(errorColorSuppl, {
-        alpha: '0.4'
-      })}`,
-      boxShadowWarning: `0 2px 12px 0 ${changeColor(warningColorSuppl, {
-        alpha: '0.4'
-      })}`,
+      boxShadowInfo: boxShadow2,
+      boxShadowSuccess: boxShadow2,
+      boxShadowError: boxShadow2,
+      boxShadowWarning: boxShadow2,
       boxShadowLoading: boxShadow2,
-      iconColorInfo: 'rgba(255, 255, 255, .5)',
-      iconColorSuccess: 'rgba(255, 255, 255, .5)',
-      iconColorWarning: 'rgba(255, 255, 255, .5)',
-      iconColorError: 'rgba(255, 255, 255, .5)',
-      iconColorLoading: 'rgba(255, 255, 255, .5)',
-      closeColorInfo: 'rgba(255, 255, 255, .5)',
-      closeColorHoverInfo: 'rgba(255, 255, 255, .6)',
-      closeColorPressedInfo: 'rgba(255, 255, 255, .4)',
-      closeColorSuccess: 'rgba(255, 255, 255, .5)',
-      closeColorHoverSuccess: 'rgba(255, 255, 255, .6)',
-      closeColorPressedSuccess: 'rgba(255, 255, 255, .4)',
-      closeColorError: 'rgba(255, 255, 255, .5)',
-      closeColorHoverError: 'rgba(255, 255, 255, .6)',
-      closeColorPressedError: 'rgba(255, 255, 255, .4)',
-      closeColorWarning: 'rgba(255, 255, 255, .5)',
-      closeColorHoverWarning: 'rgba(255, 255, 255, .6)',
-      closeColorPressedWarning: 'rgba(255, 255, 255, .4)',
-      closeColorLoading: 'rgba(255, 255, 255, .5)',
-      closeColorHoverLoading: 'rgba(255, 255, 255, .6)',
-      closeColorPressedLoading: 'rgba(255, 255, 255, .4)',
-      loadingColor: primaryColor,
+      iconColorInfo: infoColor,
+      iconColorSuccess: successColor,
+      iconColorWarning: warningColor,
+      iconColorError: errorColor,
+      iconColorLoading: primaryColor,
+      closeColorInfo: closeColorOverlay,
+      closeColorHoverInfo: closeColorHoverOverlay,
+      closeColorPressedInfo: closeColorPressedOverlay,
+      closeColorSuccess: closeColorOverlay,
+      closeColorHoverSuccess: closeColorHoverOverlay,
+      closeColorPressedSuccess: closeColorPressedOverlay,
+      closeColorError: closeColorOverlay,
+      closeColorHoverError: closeColorHoverOverlay,
+      closeColorPressedError: closeColorPressedOverlay,
+      closeColorWarning: closeColorOverlay,
+      closeColorHoverWarning: closeColorHoverOverlay,
+      closeColorPressedWarning: closeColorPressedOverlay,
+      closeColorLoading: closeColorOverlay,
+      closeColorHoverLoading: closeColorHoverOverlay,
+      closeColorPressedLoading: closeColorPressedOverlay,
       lineHeight,
       borderRadius
     }

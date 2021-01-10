@@ -1,4 +1,4 @@
-import { c, cB, cE } from '../../../_utils/cssr'
+import { c, cB, cE, cM } from '../../../_utils/cssr'
 import iconSwitchTransition from '../../../_styles/transitions/icon-switch'
 import fadeInHeightExpand from '../../../_styles/transitions/fade-in-height-expand'
 
@@ -15,11 +15,14 @@ import fadeInHeightExpand from '../../../_styles/transitions/fade-in-height-expa
 // --text-color
 // --color
 // --box-shadow
-// --icon-color
+// --icon-color-info
+// --icon-color-success
+// --icon-color-warning
+// --icon-color-error
+// --icon-color-loading
 // --close-color
 // --close-color-pressed
 // --close-color-hover
-// --loading-color
 // --border-radius
 export default c([
   cB('message-wrapper', `
@@ -68,15 +71,15 @@ export default c([
       margin-right: var(--icon-margin);
       height: var(--icon-size);
       width: var(--icon-size);
-      color: var(--icon-color);
       font-size: var(--icon-size);
-      transition: color .3s var(--bezier);
       flex-shrink: 0;
     `, [
-      cB('base-loading', `
-        color: var(--loading-color);
-        transition: color .3s var(--bezier);
-      `),
+      ['info', 'success', 'warning', 'error', 'loading'].map(type => cM(`${type}-type`, [
+        c('> *', `
+          color: var(--icon-color-${type});
+          transition: color .3s var(--bezier);
+        `)
+      ])),
       c('> *', {
         position: 'absolute',
         left: 0,

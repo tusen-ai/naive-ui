@@ -47,13 +47,16 @@ export default {
             closeSize,
             iconSize,
             fontSize,
-            loadingColor,
             lineHeight,
             borderRadius,
+            iconColorInfo,
+            iconColorSuccess,
+            iconColorWarning,
+            iconColorError,
+            iconColorLoading,
             [createKey('textColor', type)]: textColor,
             [createKey('boxShadow', type)]: boxShadow,
             [createKey('color', type)]: color,
-            [createKey('iconColor', type)]: iconColor,
             [createKey('closeColor', type)]: closeColor,
             [createKey('closeColorPressed', type)]: closeColorPressed,
             [createKey('closeColorHover', type)]: closeColorHover
@@ -72,11 +75,14 @@ export default {
           '--text-color': textColor,
           '--color': color,
           '--box-shadow': boxShadow,
-          '--icon-color': iconColor,
+          '--icon-color-info': iconColorInfo,
+          '--icon-color-success': iconColorSuccess,
+          '--icon-color-warning': iconColorWarning,
+          '--icon-color-error': iconColorError,
+          '--icon-color-loading': iconColorLoading,
           '--close-color': closeColor,
           '--close-color-pressed': closeColorPressed,
           '--close-color-hover': closeColorHover,
-          '--loading-color': loadingColor,
           '--line-height': lineHeight,
           '--border-radius': borderRadius
         }
@@ -95,18 +101,16 @@ export default {
         h(
           'div',
           {
-            class: [
-              'n-message',
-              {
-                'n-message--closable': closable
-              }
-            ]
+            class: 'n-message'
           },
           [
             h(
               'div',
               {
-                class: 'n-message__icon'
+                class: [
+                  'n-message__icon',
+                  `n-message__icon n-message__icon--${type}-type`
+                ]
               },
               [
                 h(NIconSwitchTransition, null, {
@@ -148,7 +152,8 @@ function createIconVNode (icon, type) {
         key: type
       },
       {
-        default: () => h(iconMap[type])
+        default: () =>
+          h(iconMap[type], type === 'loading' ? { scale: 0.85 } : undefined)
       }
     )
   }
