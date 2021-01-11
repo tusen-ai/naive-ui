@@ -54,13 +54,13 @@ export default defineComponent({
         houdiniRegistered = true
         if (window?.CSS?.registerProperty) {
           CSS.registerProperty({
-            name: '--start-stop',
+            name: '--color-start',
             syntax: '<color>',
             inherits: false,
             initialValue: 'transparent'
           })
           CSS.registerProperty({
-            name: '--end-stop',
+            name: '--color-end',
             syntax: '<color>',
             inherits: false,
             initialValue: 'transparent'
