@@ -353,23 +353,23 @@ export default defineComponent({
           '--text-color': textColor,
           '--text-color-disabled': textColorDisabled,
           // form warning
-          'color-active-warning': colorActiveWarning,
-          'box-shadow-focus-warning': boxShadowFocusWarning,
-          'box-shadow-active-warning': boxShadowActiveWarning,
-          'box-shadow-hover-warning': boxShadowHoverWarning,
-          'border-warning': borderWarning,
-          'border-focus-warning': borderFocusWarning,
-          'border-hover-warning': borderHoverWarning,
-          'border-active-warning': borderActiveWarning,
+          '--color-active-warning': colorActiveWarning,
+          '--box-shadow-focus-warning': boxShadowFocusWarning,
+          '--box-shadow-active-warning': boxShadowActiveWarning,
+          '--box-shadow-hover-warning': boxShadowHoverWarning,
+          '--border-warning': borderWarning,
+          '--border-focus-warning': borderFocusWarning,
+          '--border-hover-warning': borderHoverWarning,
+          '--border-active-warning': borderActiveWarning,
           // form error
-          'color-active-error': colorActiveError,
-          'box-shadow-focus-error': boxShadowFocusError,
-          'box-shadow-active-error': boxShadowActiveError,
-          'box-shadow-hover-error': boxShadowHoverError,
-          'border-error': borderError,
-          'border-focus-error': borderFocusError,
-          'border-hover-error': borderHoverError,
-          'border-active-error': borderActiveError
+          '--color-active-error': colorActiveError,
+          '--box-shadow-focus-error': boxShadowFocusError,
+          '--box-shadow-active-error': boxShadowActiveError,
+          '--box-shadow-hover-error': boxShadowHoverError,
+          '--border-error': borderError,
+          '--border-focus-error': borderFocusError,
+          '--border-hover-error': borderHoverError,
+          '--border-active-error': borderActiveError
         }
       })
     }

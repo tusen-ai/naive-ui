@@ -818,6 +818,18 @@ export default defineComponent({
             textColorDisabled,
             boxShadowFocus,
             iconSize,
+            colorFocusWarning,
+            boxShadowFocusWarning,
+            boxShadowHoverWarning,
+            borderWarning,
+            borderFocusWarning,
+            borderHoverWarning,
+            colorFocusError,
+            boxShadowFocusError,
+            boxShadowHoverError,
+            borderError,
+            borderFocusError,
+            borderHoverError,
             [createKey('fontSize', size)]: fontSize,
             [createKey('height', size)]: height
           }
@@ -844,7 +856,21 @@ export default defineComponent({
           '--color-disabled': colorDisabled,
           '--color-focus': colorFocus,
           '--text-color-disabled': textColorDisabled,
-          '--box-shadow-focus': boxShadowFocus
+          '--box-shadow-focus': boxShadowFocus,
+          // form warning
+          '--color-focus-warning': colorFocusWarning,
+          '--box-shadow-focus-warning': boxShadowFocusWarning,
+          '--box-shadow-hover-warning': boxShadowHoverWarning,
+          '--border-warning': borderWarning,
+          '--border-focus-warning': borderFocusWarning,
+          '--border-hover-warning': borderHoverWarning,
+          // form error
+          '--color-focus-error': colorFocusError,
+          '--box-shadow-focus-error': boxShadowFocusError,
+          '--box-shadow-hover-error': boxShadowHoverError,
+          '--border-error': borderError,
+          '--border-focus-error': borderFocusError,
+          '--border-hover-error': borderHoverError
         }
       })
     }

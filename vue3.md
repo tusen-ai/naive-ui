@@ -376,7 +376,7 @@
   - [x] cascader demo async 切换未重置数据，demo 写的有问题
   - [ ] gradient-text transition 又没了
   - [x] md-loader code
-  - [ ] input + form-item style
+  - [x] input + form-item style
   - [x] loadingbar theme
   - [ ] dropdown group + menu use dropdown
   - [x] 多行 message

@@ -1,4 +1,4 @@
-import { cB, c, cE, cM, cNotM } from '../../../_utils/cssr'
+import { cB, c, cE, cM, cNotM, insideFormItem } from '../../../_utils/cssr'
 
 // vars:
 // --bezier
@@ -232,5 +232,34 @@ export default c([
         fontSize: 'var(--icon-size)'
       })
     ])
-  ])
+  ]),
+  ['warning', 'error'].map(status => insideFormItem(status,
+    cB('input', [
+      cNotM('disabled', [
+        cE('state-border', {
+          border: `var(--border-${status})`
+        }),
+        c('&:hover', [
+          cE('state-border', `
+            box-shadow: var(--box-shadow-hover-${status});
+            border: var(--border-hover-${status});
+          `)
+        ]),
+        c('&:focus', {
+          backgroundColor: `var(--color-focus-${status})`
+        }, [
+          cE('state-border', `
+            box-shadow: var(--box-shadow-focus-${status});
+            border: var(--border-focus-${status});
+          `)
+        ]),
+        cM('focus', [
+          cE('state-border', `
+            box-shadow: var(--box-shadow-focus-${status});
+            border: var(--border-focus-${status});
+          `)
+        ])
+      ])
+    ])
+  ))
 ])
