@@ -22,7 +22,9 @@ export default {
       warningColor,
       warningColorHover,
       errorColor,
-      errorColorHover
+      errorColorHover,
+      iconColorOverlay,
+      iconColorDisabledOverlay
     } = vars
     return {
       ...commonVars,
@@ -45,6 +47,8 @@ export default {
       })}`,
       boxShadowFocus: null,
       caretColor: primaryColor,
+      arrowColor: iconColorOverlay,
+      arrowColorDisabled: iconColorDisabledOverlay,
       // warning
       borderWarning: `1px solid ${warningColor}`,
       borderHoverWarning: `1px solid ${warningColorHover}`,

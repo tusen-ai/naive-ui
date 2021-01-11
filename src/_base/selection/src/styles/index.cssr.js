@@ -29,6 +29,7 @@ import {
 // --placeholder-color-disabled
 // --text-color
 // --text-color-disabled
+// --arrow-color
 // ...form item vars
 export default c([
   cB('base-selection', `
@@ -44,10 +45,6 @@ export default c([
     line-height: var(--height);
     font-size: var(--font-size);
   `, [
-    cE('placeholder', `
-      height: var(--height);
-      line-height: var(--height);
-    `),
     cB('base-selection-label', `
       height: var(--height);
       line-height: var(--height);
@@ -84,17 +81,27 @@ export default c([
       transform: translateY(-50%);
       right: 10px;
     `),
+    cE('arrow', `
+      color: var(--arrow-color);
+      transition: color .3s var(--bezier);
+    `),
     cM('selected', [
-      cE('placeholder', {
-        opacity: 0
+      cB('base-selection-placeholder', {
+        display: 'none'
       })
     ]),
-    cE('placeholder', `
+    cB('base-selection-placeholder', `
+      white-space: nowrap;
+      overflow: hidden;
+      height: var(--height);
+      line-height: var(--height);
       pointer-events: none;
       position: absolute;
-      left: 14px;
       top: 0;
-      opacity: 1;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      padding: var(--padding-single);
       transition: color .3s var(--bezier);
       color: var(--placeholder-color);
     `),
@@ -159,20 +166,6 @@ export default c([
         background-color: transparent;
         color: var(--text-color);
         transition: color .3s var(--bezier);
-      `),
-      cE('placeholder', `
-        line-height: inherit;
-        pointer-events: none;
-        position: absolute;
-        white-space: nowrap;
-        overflow: hidden;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        padding: 0 26px 0 14px;
-        color: var(--placeholder-color);
-        transition: color .3s var(--bezier);
       `)
     ]),
     cNotM('disabled', [
@@ -231,6 +224,9 @@ export default c([
     cM('disabled', {
       cursor: 'not-allowed'
     }, [
+      cE('arrow', `
+        color: var(--arrow-color-disabled);
+      `),
       cB('base-selection-label', `
         cursor: not-allowed;
         background-color: var(--color-disabled);
@@ -238,20 +234,13 @@ export default c([
         cE('input', `
           cursor: not-allowed;
           color: var(--text-color-disabled);
-        `, [
-          cM('placeholder', {
-            color: 'var(--placeholder-color-disabled)'
-          }),
-          c('&::placeholder', {
-            color: 'var(--placeholder-color-disabled)'
-          })
-        ])
+        `)
       ]),
       cB('base-selection-tags', `
-        cursor: now-allowed;
+        cursor: not-allowed;
         background-color: var(--color-disabled);
       `),
-      cE('placeholder', `
+      cB('base-selection-placeholder', `
         cursor: not-allowed;
         color: var(--placeholder-color-disabled);
       `)

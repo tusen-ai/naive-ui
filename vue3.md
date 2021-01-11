@@ -384,8 +384,8 @@
   - [x] close 重构
   - [ ] data-table, radio style 重构
   - [x] message icon style
-  - [ ] transfer search icon style
-  - [ ] base selection icon style
+  - [x] transfer search icon style
+  - [x] base selection icon style
   - [x] date picker not working
   - [x] avatar font size bug
   - [x] handle global style
@@ -396,6 +396,7 @@
   - [x] date-picker invalid
   - [ ] vooks `useNow`
   - [ ] treemate activePath includeGroup: false
+  - [ ] select menu multiple, when show=true, checkmark transiton not working
 
 ## Info
 

@@ -134,7 +134,7 @@ const derived = {
   iconColor: neutral(base.alpha4),
   iconColorOverlay: overlay(base.alpha4),
   iconColorDisabled: neutral(base.alpha5),
-  iconColorDisabledOverlay: neutral(base.alpha5),
+  iconColorDisabledOverlay: overlay(base.alpha5),
 
   opacity1: base.alpha1,
   opacity2: base.alpha2,

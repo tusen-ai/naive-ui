@@ -1,4 +1,5 @@
 import { c, cB, cE, cM, cNotM } from '../../../../_utils/cssr'
+import fadeInScaleUpTransition from '../../../../_styles/transitions/fade-in-scale-up'
 
 export default cB('base-select-menu', `
   outline: none;
@@ -85,35 +86,24 @@ export default cB('base-select-menu', `
     ]),
     cM('pending', {
       backgroundColor: 'var(--option-color-pending)'
-    })
+    }),
+    cE('check', `
+      font-size: 14px;
+      position: absolute;
+      right: 8px;
+      top: calc(var(--option-height) / 2 - 7px);
+      color: var(--option-check-color);
+      transition: color .3s var(--bezier);
+    `, [
+      fadeInScaleUpTransition({
+        enterScale: 0.5
+      })
+    ])
   ]),
   cM('multiple', [
     cB('base-select-option', `
       position: relative;
       padding-right: 28px;
-    `, [
-      cM('selected', [
-        c('&::after', `
-          opacity: 1;
-          transform: rotate(45deg) scale(1);
-        `)
-      ]),
-      // TODO: use SVG icon
-      c('&::after', `
-        content: '';
-        height: 8px;
-        width: 4px;
-        position: absolute;
-        right: 14px;
-        transform: rotate(45deg) scale(.5);
-        top: calc(50% - 4px);
-        opacity: 0;
-        transition:
-          transform .3s var(--bezier),
-          opacity .3s var(--bezier);
-        border-right: 1px solid var(--option-check-color);
-        border-bottom: 1px solid var(--option-check-color);
-      `)
-    ])
+    `)
   ])
 ])

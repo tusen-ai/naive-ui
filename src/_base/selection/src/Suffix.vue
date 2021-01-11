@@ -12,7 +12,7 @@
       :show="showClear"
       @clear="onClear"
     >
-      <n-base-icon depth="4">
+      <n-base-icon class="n-base-selection__arrow">
         <chevron-down-icon />
       </n-base-icon>
     </n-base-clear>

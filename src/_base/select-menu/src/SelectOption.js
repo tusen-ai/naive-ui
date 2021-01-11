@@ -1,5 +1,24 @@
-import { h, inject, toRef, defineComponent } from 'vue'
+import { h, inject, toRef, defineComponent, Transition } from 'vue'
 import { useMemo } from 'vooks'
+import { CheckmarkIcon } from '../../icons'
+import NBaseIcon from '../../icon'
+
+const checkMark = h(NBaseIcon, null, {
+  default: () => h(CheckmarkIcon)
+})
+
+function renderCheckMark (show) {
+  return h(
+    Transition,
+    {
+      name: 'n-fade-in-scale-up-transition',
+      class: 'n-base-select-option__check'
+    },
+    {
+      default: () => (show ? checkMark : null)
+    }
+  )
+}
 
 export default defineComponent({
   name: 'NBaseSelectOption',
@@ -18,6 +37,7 @@ export default defineComponent({
     const NBaseSelectMenu = inject('NBaseSelectMenu')
     const rawNodeRef = toRef(props.tmNode, 'rawNode')
     return {
+      NBaseSelectMenu,
       rawNode: rawNodeRef,
       isGrouped: useMemo(() => {
         const { tmNode } = props
@@ -60,10 +80,20 @@ export default defineComponent({
     }
   },
   render () {
-    const { rawNode } = this
+    const {
+      rawNode,
+      isSelected,
+      isPending,
+      isGrouped,
+      handleClick,
+      handleMouseEnter,
+      handleMouseMove,
+      NBaseSelectMenu: { multiple }
+    } = this
+    const showCheckMark = multiple & isSelected
     const children = rawNode.render
-      ? rawNode.render(rawNode, this.isSelected)
-      : [rawNode.label]
+      ? [rawNode.render(rawNode, isSelected), renderCheckMark(showCheckMark)]
+      : [rawNode.label, renderCheckMark(showCheckMark)]
     return h(
       'div',
       {
@@ -73,16 +103,16 @@ export default defineComponent({
             rawNode.class,
             {
               'n-base-select-option--disabled': rawNode.disabled,
-              'n-base-select-option--selected': this.isSelected,
-              'n-base-select-option--grouped': this.isGrouped,
-              'n-base-select-option--pending': this.isPending
+              'n-base-select-option--selected': isSelected,
+              'n-base-select-option--grouped': isGrouped,
+              'n-base-select-option--pending': isPending
             }
           ]
         ],
         style: rawNode.style,
-        onClick: this.handleClick,
-        onMouseEnter: this.handleMouseEnter,
-        onMouseMove: this.handleMouseMove
+        onClick: handleClick,
+        onMouseEnter: handleMouseEnter,
+        onMouseMove: handleMouseMove
       },
       children
     )

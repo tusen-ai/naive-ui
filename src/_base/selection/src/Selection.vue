@@ -41,7 +41,7 @@
           @clear="handleClear"
         />
       </div>
-      <div class="n-base-selection__placeholder">
+      <div class="n-base-selection-placeholder">
         {{ placeholder }}
       </div>
     </template>
@@ -89,7 +89,7 @@
           @clear="handleClear"
         />
       </div>
-      <div class="n-base-selection__placeholder">
+      <div class="n-base-selection-placeholder">
         {{ placeholder }}
       </div>
     </template>
@@ -120,7 +120,7 @@
         >
         <div
           v-if="!pattern && (active || !selectedOption)"
-          class="n-base-selection-label__placeholder"
+          class="n-base-selection-placeholder"
         >
           {{ filterablePlaceholder }}
         </div>
@@ -145,7 +145,7 @@
         </div>
         <div
           v-if="!(label && label.length)"
-          class="n-base-selection-label__placeholder"
+          class="n-base-selection-placeholder"
         >
           {{ placeholder }}
         </div>
@@ -309,6 +309,8 @@ export default defineComponent({
             borderFocus,
             borderHover,
             borderActive,
+            arrowColor,
+            arrowColorDisabled,
             // form warning
             colorActiveWarning,
             boxShadowFocusWarning,
@@ -352,6 +354,8 @@ export default defineComponent({
           '--placeholder-color-disabled': placeholderColorDisabled,
           '--text-color': textColor,
           '--text-color-disabled': textColorDisabled,
+          '--arrow-color': arrowColor,
+          '--arrow-color-disabled': arrowColorDisabled,
           // form warning
           '--color-active-warning': colorActiveWarning,
           '--box-shadow-focus-warning': boxShadowFocusWarning,
