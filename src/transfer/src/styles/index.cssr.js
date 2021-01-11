@@ -65,6 +65,15 @@ export default c([
         })
       ])
     ]),
+    cB('transfer-icon', `
+      color: var(--icon-color);
+      transition: color .3s var(--bezier);
+    `),
+    cM('disabled', [
+      cB('transfer-icon', {
+        color: 'var(--icon-color-disabled)'
+      })
+    ]),
     cB('transfer-list', `
       background-clip: padding-box;
       width: calc(50% - 36px);

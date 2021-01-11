@@ -2,7 +2,8 @@
   <div
     class="n-transfer"
     :class="{
-      [`n-transfer--filterable`]: filterable
+      'n-transfer--disabled': disabled,
+      'n-transfer--filterable': filterable
     }"
     :style="cssVars"
   >
@@ -25,6 +26,7 @@
             v-model:value="srcPattern"
             clearable
             size="small"
+            :disabled="disabled"
             :unstable-theme="mergedTheme.peers.Input"
             :unstable-theme-overrides="mergedTheme.overrides.Input"
             :placeholder="targetFilterPlaceholder"
@@ -32,7 +34,7 @@
             @blur="handleInputBlur"
           >
             <template #clear>
-              <n-base-icon>
+              <n-base-icon class="n-transfer-icon">
                 <search-icon />
               </n-base-icon>
             </template>
@@ -140,6 +142,7 @@
         <div v-if="filterable" class="n-transfer-filter">
           <n-input
             v-model:value="tgtPattern"
+            :disabled="disabled"
             :unstable-theme="mergedTheme.peers.Input"
             :unstable-theme-overrides="mergedTheme.overrides.Input"
             clearable
@@ -149,7 +152,7 @@
             @blur="handleInputBlur"
           >
             <template #clear>
-              <n-base-icon>
+              <n-base-icon class="n-transfer-icon">
                 <search-icon />
               </n-base-icon>
             </template>
@@ -399,6 +402,8 @@ export default defineComponent({
             itemTextColorDisabled,
             extraFontSize,
             titleFontWeight,
+            iconColor,
+            iconColorDisabled,
             [createKey('fontSize', size)]: fontSize,
             [createKey('itemHeight', size)]: itemHeight
           }
@@ -422,7 +427,9 @@ export default defineComponent({
           '--item-text-color': itemTextColor,
           '--item-text-color-disabled': itemTextColorDisabled,
           '--list-color': listColor,
-          '--width': width
+          '--width': width,
+          '--icon-color': iconColor,
+          '--icon-color-disabled': iconColorDisabled
         }
       })
     }

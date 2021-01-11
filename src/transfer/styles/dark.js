@@ -18,6 +18,9 @@ export default {
   },
   self (vars) {
     const {
+      iconColorDisabledOverlay,
+      iconColorOverlay,
+      fontWeight,
       fontSizeLarge,
       fontSizeMedium,
       fontSizeSmall,
@@ -30,7 +33,7 @@ export default {
       textColor1Overlay,
       textColorDisabledOverlay,
       textColor2Overlay,
-      borderColorOverlay,
+      dividerColorOverlay,
       hoverColorOverlay
     } = vars
     return {
@@ -48,11 +51,13 @@ export default {
       titleTextColor: textColor1Overlay,
       titleTextColorDisabled: textColorDisabledOverlay,
       headerExtraTextColor: textColor2Overlay,
-      filterDividerColor: borderColorOverlay,
+      filterDividerColor: dividerColorOverlay,
       itemTextColor: textColor2Overlay,
       itemTextColorDisabled: textColorDisabledOverlay,
       itemColorPending: hoverColorOverlay,
-      titleFontWeight: 400
+      titleFontWeight: fontWeight,
+      iconColor: iconColorOverlay,
+      iconColorDisabled: iconColorDisabledOverlay
     }
   }
 }

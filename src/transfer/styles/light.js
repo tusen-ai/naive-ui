@@ -19,6 +19,9 @@ export default {
   },
   self (vars) {
     const {
+      fontWeight,
+      iconColorDisabled,
+      iconColor,
       fontSizeLarge,
       fontSizeMedium,
       fontSizeSmall,
@@ -54,7 +57,9 @@ export default {
       itemTextColor: textColor2,
       itemTextColorDisabled: textColorDisabled,
       itemColorPending: hoverColorOverlay,
-      titleFontWeight: 400
+      titleFontWeight: fontWeight,
+      iconColor,
+      iconColorDisabled
     }
   }
 }
