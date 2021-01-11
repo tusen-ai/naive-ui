@@ -17,7 +17,7 @@ import { dateArray, strictParse } from '../utils'
 import { usePanelCommon } from './use-panel-common'
 
 function useCalendar (props, type) {
-  const calendar = usePanelCommon(props)
+  const panelCommon = usePanelCommon(props)
   const NDatePicker = inject('NDatePicker')
   const { locale } = NDatePicker
   const validation = {
@@ -38,17 +38,8 @@ function useCalendar (props, type) {
   )
   const nowRef = ref(new Date())
   const selectedDateRef = ref(null)
-  const valueAsDateTimeRef = computed(() => {
-    const { value } = props
-    if (value === null || value === undefined) return null
-    return new Date(value)
-  })
   const dateArrayRef = computed(() => {
-    return dateArray(
-      calendarDateTimeRef.value,
-      valueAsDateTimeRef.value,
-      nowRef.value
-    )
+    return dateArray(calendarDateTimeRef.value, props.value, nowRef.value)
   })
   const calendarMonthRef = computed(() => {
     return locale[format(calendarDateTimeRef.value, 'MMM')]
@@ -56,20 +47,17 @@ function useCalendar (props, type) {
   const calendarYearRef = computed(() => {
     return format(calendarDateTimeRef.value, 'yyyy')
   })
-  const timeFormat = computed(() => {
-    return /(H|h|K|k|m|s).*(H|h|K|k|m|s)/.exec(props.format)[0]
-  })
   watch(calendarDateTimeRef, (value, oldValue) => {
     if (!isSameMonth(value, oldValue)) {
-      calendar.disableTransitionOneTick()
+      panelCommon.disableTransitionOneTick()
     }
   })
   watch(toRef(props, 'active'), (value) => {
     if (value) {
-      calendar.memorizedValue.value = props.value
+      panelCommon.memorizedValue.value = props.value
     } else {
       if (validation.isTimeInvalid.value || validation.isDateInvalid.value) {
-        calendar.doUpdateValue(calendar.memorizedValue.value)
+        panelCommon.doUpdateValue(panelCommon.memorizedValue.value)
       }
     }
   })
@@ -81,27 +69,27 @@ function useCalendar (props, type) {
       displayDateStringRef.value = ''
     }
   })
-  function adjustValue (value) {
+  function sanitizeValue (value) {
     if (type === 'datetime') return startOfSecond(value)
     if (type === 'date') return startOfDay(value)
   }
-  function isCalendarDateDisabled (timestamp) {
-    const { isDateDisabled } = this
+  function isCalendarDateDisabled (ts) {
+    const { isDateDisabled } = props
     if (!isDateDisabled) return false
-    return isDateDisabled(timestamp)
+    return isDateDisabled(ts)
   }
   function handleDateInput (value) {
     const date = strictParse(value, props.dateFormat, new Date())
     if (isValid(date)) {
-      if (!valueAsDateTimeRef.value) {
-        calendar.doUpdateValue(getTime(adjustValue(new Date())))
+      if (props.value === null) {
+        panelCommon.doUpdateValue(getTime(sanitizeValue(new Date())))
       } else {
-        const newDateTime = set(valueAsDateTimeRef.value, {
+        const newDateTime = set(props.value, {
           year: getYear(date),
           month: getMonth(date),
           date: getDate(date)
         })
-        calendar.doUpdateValue(getTime(adjustValue(newDateTime)))
+        panelCommon.doUpdateValue(getTime(sanitizeValue(newDateTime)))
       }
     }
   }
@@ -112,64 +100,64 @@ function useCalendar (props, type) {
       new Date()
     )
     if (isValid(date)) {
-      if (!valueAsDateTimeRef.value) {
-        calendar.doUpdateValue(getTime(adjustValue(new Date())))
+      if (props.value === null) {
+        panelCommon.doUpdateValue(getTime(sanitizeValue(new Date())))
       } else {
-        const newDateTime = set(valueAsDateTimeRef.value, {
+        const newDateTime = set(props.value, {
           year: getYear(date),
           month: getMonth(date),
           date: getDate(date)
         })
-        calendar.doUpdateValue(getTime(adjustValue(newDateTime)))
+        panelCommon.doUpdateValue(getTime(sanitizeValue(newDateTime)))
       }
     } else {
       refreshDisplayDateString()
     }
   }
   function clearSelectedDateTime () {
-    calendar.doUpdateValue(null)
+    panelCommon.doUpdateValue(null)
     displayDateStringRef.value = ''
   }
-  function setSelectedDateTimeToNow () {
-    calendar.doUpdateValue(getTime(adjustValue(new Date())))
+  function handleNowClick () {
+    panelCommon.doUpdateValue(getTime(sanitizeValue(new Date())))
     calendarDateTimeRef.value = new Date()
   }
   function handleDateClick (dateItem) {
-    if (isCalendarDateDisabled(dateItem.timestamp)) {
+    if (isCalendarDateDisabled(dateItem.ts)) {
       return
     }
-    let newSelectedDateTime = new Date()
-    if (valueAsDateTimeRef.value !== null) {
-      newSelectedDateTime = valueAsDateTimeRef.value
+    let newValue = new Date()
+    if (props.value !== null) {
+      newValue = props.value
+    } else {
+      newValue = new Date()
     }
-    newSelectedDateTime = set(newSelectedDateTime, dateItem.dateObject)
+    newValue = set(newValue, dateItem.dateObject)
     selectedDateRef.value = dateItem.dateObject
-    calendar.doUpdateValue(getTime(adjustValue(newSelectedDateTime)))
+    panelCommon.doUpdateValue(getTime(sanitizeValue(newValue)))
   }
-  /**
-   * If not selected, display nothing,
-   * else update datetime related string
-   */
   function refreshDisplayDateString (time) {
-    if (valueAsDateTimeRef.value === null) {
+    // If not selected, display nothing,
+    // else update datetime related string
+    if (props.value === null) {
       displayDateStringRef.value = ''
       return
     }
     if (time === undefined) {
-      time = valueAsDateTimeRef.value
+      time = props.value
     }
     displayDateStringRef.value = format(time, props.dateFormat)
   }
   function handleConfirmClick () {
-    if (validation.isDateInvalid || validation.isTimeInvalid.value) {
+    if (validation.isDateInvalid.value || validation.isTimeInvalid.value) {
       return
     }
-    calendar.doConfirm()
+    panelCommon.doConfirm()
     closeCalendar()
   }
   function closeCalendar () {
     if (props.active) {
-      calendar.doClose()
+      panelCommon.doClose()
     }
   }
   function nextYear () {
@@ -184,36 +172,50 @@ function useCalendar (props, type) {
   function prevMonth () {
     calendarDateTimeRef.value = addMonths(calendarDateTimeRef.value, -1)
   }
+  function handleTimePickerChange (value) {
+    panelCommon.doUpdateValue(value)
+  }
   return {
+    locale: panelCommon.locale,
+    NDatePicker,
     dateArray: dateArrayRef,
     calendarYear: calendarYearRef,
     calendarMonth: calendarMonthRef,
-    setSelectedDateTimeToNow,
-    handleDateClick,
-    handleDateInputBlur,
-    handleDateInput,
-    clearSelectedDateTime,
-    timeFormat,
-    handleConfirmClick,
+    weekdays: panelCommon.weekdays,
+    transitionDisabled: panelCommon.transitionDisabled,
+    isCalendarDateDisabled,
     nextYear,
     prevYear,
     nextMonth,
-    prevMonth
+    prevMonth,
+    handleNowClick,
+    handleClearClick: panelCommon.handleClearClick,
+    handleConfirmClick,
+    handleFocusDetectorFocus: panelCommon.handleFocusDetectorFocus,
+    ...validation,
+    // datetime only
+    handleDateClick,
+    handleDateInputBlur,
+    handleDateInput,
+    handleTimePickerChange,
+    clearSelectedDateTime,
+    timePickerSize: panelCommon.timePickerSize,
+    displayDateString: displayDateStringRef
   }
 }
 
 useCalendar.components = usePanelCommon.components
 
 useCalendar.props = {
+  ...usePanelCommon.props,
   value: {
     type: Number,
-    default: undefined
+    default: null
   },
   actions: {
     type: Array,
     default: () => ['now', 'clear', 'confirm']
-  },
-  ...usePanelCommon
+  }
 }
 
 export { useCalendar }

@@ -41,12 +41,16 @@ function matchDate (sourceTime, patternTime) {
   }
 }
 
-function dateItem (time, displayTime, selectedTime, currentTime) {
-  let isInSpan = false
-  if (Array.isArray(selectedTime)) {
-    if (selectedTime[0] < time && time < selectedTime[1]) {
-      isInSpan = true
+function dateItem (time, monthTs, valueTs, currentTs) {
+  let inSpan = false
+  let startOfSpan = false
+  let endOfSpan = false
+  if (Array.isArray(valueTs)) {
+    if (valueTs[0] < time && time < valueTs[1]) {
+      inSpan = true
     }
+    if (matchDate(valueTs[0], time)) startOfSpan = true
+    if (matchDate(valueTs[1], time)) endOfSpan = true
   }
   return {
     dateObject: {
@@ -54,49 +58,47 @@ function dateItem (time, displayTime, selectedTime, currentTime) {
       month: getMonth(time),
       year: getYear(time)
     },
-    isDateOfDisplayMonth: isSameMonth(time, displayTime),
-    isInSpan,
-    isSelectedDate: selectedTime !== null && matchDate(selectedTime, time),
-    isCurrentDate: matchDate(currentTime, time),
-    timestamp: getTime(time)
+    inCurrentMonth: isSameMonth(time, monthTs),
+    isCurrentDate: matchDate(currentTs, time),
+    inSpan,
+    startOfSpan,
+    endOfSpan,
+    selected: valueTs !== null && matchDate(valueTs, time),
+    ts: getTime(time)
   }
 }
 
 /**
  * Given time to display calendar, given the selected time, given current time,
  * return the date array of display time's month.
- * @param {number} displayTime
- * @param {number} selectedTime
- * @param {number} currentTime
+ * @param {number} monthTs
+ * @param {number} valueTs
+ * @param {number} currentTs
  */
-function dateArray (displayTime, selectedTime, currentTime) {
-  const displayMonth = getMonth(displayTime)
-  /**
-   * First day of current month
-   */
-  let displayMonthIterator = startOfMonth(displayTime)
-  /**
-   * Last day of last month
-   */
+function dateArray (monthTs, valueTs, currentTs) {
+  const displayMonth = getMonth(monthTs)
+  // First day of current month
+  let displayMonthIterator = startOfMonth(monthTs)
+  // Last day of last month
   let lastMonthIterator = addDays(displayMonthIterator, -1)
   const calendarDays = []
   let protectLastMonthDateIsShownFlag = true
   while (getDay(lastMonthIterator) !== 6 || protectLastMonthDateIsShownFlag) {
     calendarDays.unshift(
-      dateItem(lastMonthIterator, displayTime, selectedTime, currentTime)
+      dateItem(lastMonthIterator, monthTs, valueTs, currentTs)
     )
     lastMonthIterator = addDays(lastMonthIterator, -1)
     protectLastMonthDateIsShownFlag = false
   }
   while (getMonth(displayMonthIterator) === displayMonth) {
     calendarDays.push(
-      dateItem(displayMonthIterator, displayTime, selectedTime, currentTime)
+      dateItem(displayMonthIterator, monthTs, valueTs, currentTs)
     )
     displayMonthIterator = addDays(displayMonthIterator, 1)
   }
   while (calendarDays.length < 42) {
     calendarDays.push(
-      dateItem(displayMonthIterator, displayTime, selectedTime, currentTime)
+      dateItem(displayMonthIterator, monthTs, valueTs, currentTs)
     )
     displayMonthIterator = addDays(displayMonthIterator, 1)
   }

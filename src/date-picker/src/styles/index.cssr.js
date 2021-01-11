@@ -44,6 +44,8 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // --item-color-hover
 // --item-color-active
 // --item-font-size
+// --item-text-color-disabled
+// --item-text-color-active
 
 // panel arrow
 // --arrow-size
@@ -250,18 +252,18 @@ export default c([
               background-color .2s var(--bezier);
           `)
         ]),
-        cM('covered', [
-          cNotM('selected', [
+        cM('covered, start, end', [
+          cNotM('excluded', [
             c('&::before', `
-              content: "";
-              z-index: -1;
-              position: absolute;
-              left: calc((var(--item-size) - var(--item-cell-width)) / 2);
-              right: calc((var(--item-size) - var(--item-cell-width)) / 2);
-              top: 0;
-              bottom: 0;
-              background-color: var(--item-color-hover);
-            `),
+            content: "";
+            z-index: -1;
+            position: absolute;
+            left: calc((var(--item-size) - var(--item-cell-width)) / 2);
+            right: calc((var(--item-size) - var(--item-cell-width)) / 2);
+            top: 0;
+            bottom: 0;
+            background-color: var(--item-color-hover);
+          `),
             c('&:nth-child(7n + 1)::before', {
               borderTopLeftRadius: 'var(--item-border-radius)',
               borderBottomLeftRadius: 'var(--item-border-radius)'
@@ -273,19 +275,29 @@ export default c([
           ])
         ]),
         cM('selected', {
-          color: 'var(--panel-color)',
+          color: 'var(--item-text-color-active)',
           backgroundColor: 'var(--item-color-active)'
         }, [
+          cM('start', [
+            c('&::before', {
+              left: '50%'
+            })
+          ]),
+          cM('end', [
+            c('&::before', {
+              right: '50%'
+            })
+          ]),
           c('&::after', {
             backgroundColor: 'var(--panel-color)'
           })
         ]),
         cM('excluded', {
-          opacity: 0.45
+          opacity: 'var(--item-text-color-disabled)'
         }),
         cM('disabled', {
           cursor: 'not-allowed',
-          opacity: 0.45
+          opacity: 'var(--item-text-color-disabled)'
         })
       ])
     ]),

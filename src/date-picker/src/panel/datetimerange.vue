@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="selfRef"
     tabindex="0"
     class="n-date-panel n-date-panel--datetimerange"
     @click.capture="resetSelectingStatus"
@@ -68,7 +69,7 @@
       />
     </div>
     <div
-      ref="startDates"
+      ref="startDatesRef"
       class="n-date-panel-calendar n-date-panel-calendar--start"
     >
       <div class="n-date-panel-month">
@@ -110,14 +111,14 @@
           :key="i"
           class="n-date-panel-date"
           :class="{
+            'n-date-panel-date--excluded': !dateItem.inCurrentMonth,
             'n-date-panel-date--current': dateItem.isCurrentDate,
-            'n-date-panel-date--selected': dateItem.isSelectedDate,
-            'n-date-panel-date--excluded': !dateItem.isDateOfDisplayMonth,
-            'n-date-panel-date--covered': dateItem.isInSpan,
-            'n-date-panel-date--transition-disabled': noTransition,
-            'n-date-panel-date--disabled': isCalendarDateDisabled(
-              dateItem.timestamp
-            )
+            'n-date-panel-date--selected': dateItem.selected,
+            'n-date-panel-date--covered': dateItem.inSpan,
+            'n-date-panel-date--start': dateItem.startOfSpan,
+            'n-date-panel-date--end': dateItem.endOfSpan,
+            'n-date-panel-date--transition-disabled': transitionDisabled,
+            'n-date-panel-date--disabled': isCalendarDateDisabled(dateItem.ts)
           }"
           @click="handleDateClick(dateItem)"
           @mouseenter="handleDateMouseEnter(dateItem)"
@@ -128,7 +129,7 @@
     </div>
     <div class="n-date-panel__vertical-divider" />
     <div
-      ref="endDates"
+      ref="endDatesRef"
       class="n-date-panel-calendar n-date-panel-calendar--end"
     >
       <div class="n-date-panel-month">
@@ -165,23 +166,19 @@
           class="n-date-panel-date"
           :class="{
             'n-date-panel-date--current': dateItem.isCurrentDate,
-            'n-date-panel-date--selected': dateItem.isSelectedDate,
-            'n-date-panel-date--excluded': !dateItem.isDateOfDisplayMonth,
-            'n-date-panel-date--covered': dateItem.isInSpan,
-            'n-date-panel-date--transition-disabled': noTransition,
-            'n-date-panel-date--disabled': isCalendarDateDisabled(
-              dateItem.timestamp
-            )
+            'n-date-panel-date--selected': dateItem.selected,
+            'n-date-panel-date--excluded': !dateItem.inCurrentMonth,
+            'n-date-panel-date--covered': dateItem.inSpan,
+            'n-date-panel-date--start': dateItem.startOfSpan,
+            'n-date-panel-date--end': dateItem.endOfSpan,
+            'n-date-panel-date--transition-disabled': transitionDisabled,
+            'n-date-panel-date--disabled': isCalendarDateDisabled(dateItem.ts)
           }"
           @click="handleDateClick(dateItem)"
           @mouseenter="handleDateMouseEnter(dateItem)"
         >
           {{ dateItem.dateObject.date }}
         </div>
-        <div
-          v-if="!(actions && actions.length)"
-          style="height: 6px; width: 100%"
-        />
       </div>
     </div>
     <div v-if="actions && actions.length" class="n-date-panel-actions">
@@ -190,7 +187,7 @@
         :unstable-theme="NDatePicker.mergedTheme.peers.Button"
         :unstable-theme-overrides="NDatePicker.mergedTheme.overrides.Button"
         size="tiny"
-        @click="clearValue"
+        @click="handleClearClick"
       >
         {{ locale.clear }}
       </n-button>
@@ -206,7 +203,6 @@
         {{ locale.confirm }}
       </n-button>
     </div>
-    <div v-else style="height: 12px" />
     <n-base-focus-detector @focus="handleFocusDetectorFocus" />
   </div>
 </template>

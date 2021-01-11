@@ -10,15 +10,8 @@ import { NBaseFocusDetector } from '../../../_base'
 
 const daysKey = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
-const DATETIME_FORMAT = 'yyyy-MM-dd HH:mm:ss'
-
-// const DATE_FORMAT = 'yyyy-MM-dd'
-// const DATE_VALIDATE_FORMAT = [
-//   'YYYY-MM-DD',
-//   'YYYY-MM-D',
-//   'YYYY-M-D',
-//   'YYYY-M-DD'
-// ]
+const DATE_FORMAT = 'yyyy-MM-dd'
+const TIME_FORMAT = 'HH:mm:ss'
 
 function usePanelCommon (props) {
   const NDatePicker = inject('NDatePicker')
@@ -42,7 +35,7 @@ function usePanelCommon (props) {
     const { onTabOut } = props
     if (onTabOut) onTabOut(...args)
   }
-  function clearValue () {
+  function handleClearClick () {
     doUpdateValue(null)
   }
   function handleFocusDetectorFocus (e) {
@@ -87,11 +80,13 @@ function usePanelCommon (props) {
     ),
     transitionDisabled: transitionDisabledRef,
     memorizedValue: memorizedValueRef,
+    selfRef,
+    locale: NDatePicker.locale,
     doConfirm,
     doClose,
     doUpdateValue,
     doTabOut,
-    clearValue,
+    handleClearClick,
     handleFocusDetectorFocus,
     disableTransitionOneTick,
     handlePanelKeyDown,
@@ -103,6 +98,13 @@ usePanelCommon.props = {
   active: {
     type: Boolean,
     default: undefined
+  },
+  dateFormat: {
+    type: String,
+    default: DATE_FORMAT
+  },
+  timeFormat: {
+    type: TIME_FORMAT
   },
   onConfirm: {
     type: Function,
@@ -119,10 +121,6 @@ usePanelCommon.props = {
   onTabOut: {
     type: Function,
     default: undefined
-  },
-  format: {
-    type: String,
-    default: DATETIME_FORMAT
   }
 }
 

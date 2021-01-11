@@ -88,7 +88,6 @@
             :value="mergedValue"
             :active="active"
             :actions="actions"
-            :format="computedFormat"
             :style="cssVars"
             @update:value="handlePanelInput"
             @tab-out="handlePanelTabOut"
@@ -128,7 +127,6 @@
             v-else-if="type === 'datetimerange' && active"
             ref="panelRef"
             v-clickoutside="handleClickOutside"
-            :format="computedFormat"
             :value="mergedValue"
             :active="active"
             :actions="actions"
@@ -256,6 +254,14 @@ export default defineComponent({
       type: String,
       default: undefined
     },
+    dateFormat: {
+      type: String,
+      default: undefined
+    },
+    timeFormat: {
+      type: String,
+      default: undefined
+    },
     actions: {
       type: Array,
       default: undefined
@@ -351,6 +357,8 @@ export default defineComponent({
             itemColorHover,
             itemColorActive,
             itemBorderRadius,
+            itemTextColorDisabled,
+            itemTextColorActive,
             panelColor,
             panelTextColor,
             arrowColor,
@@ -417,6 +425,8 @@ export default defineComponent({
           '--item-text-color': itemTextColor,
           '--item-color-hover': itemColorHover,
           '--item-color-active': itemColorActive,
+          '--item-text-color-disabled': itemTextColorDisabled,
+          '--item-text-color-active': itemTextColorActive,
 
           // panel arrow
           '--arrow-size': arrowSize,
@@ -477,7 +487,7 @@ export default defineComponent({
         return this.endPlaceholder
       }
     },
-    computedFormat () {
+    mergedFormat () {
       return this.format || DATE_FORMAT[this.type]
     }
   },
@@ -581,7 +591,7 @@ export default defineComponent({
       if (value === null) {
         this.displayTime = ''
       } else {
-        this.displayTime = format(value, this.computedFormat)
+        this.displayTime = format(value, this.mergedFormat)
       }
     },
     refreshDisplayRange (values) {
@@ -589,8 +599,8 @@ export default defineComponent({
         this.displayStartTime = ''
         this.displayEndTime = ''
       } else {
-        this.displayStartTime = format(values[0], this.computedFormat)
-        this.displayEndTime = format(values[1], this.computedFormat)
+        this.displayStartTime = format(values[0], this.mergedFormat)
+        this.displayEndTime = format(values[1], this.mergedFormat)
       }
     },
     handleInputActivate () {
@@ -633,12 +643,12 @@ export default defineComponent({
       if (this.isRange) {
         const startDateTime = strictParse(
           this.displayStartTime,
-          this.computedFormat,
+          this.mergedFormat,
           new Date()
         )
         const endDateTime = strictParse(
           this.displayEndTime,
-          this.computedFormat,
+          this.mergedFormat,
           new Date()
         )
         if (!isValid(startDateTime) || !isValid(endDateTime)) {
@@ -649,7 +659,7 @@ export default defineComponent({
       } else {
         const newSelectedDateTime = strictParse(
           this.displayTime,
-          this.computedFormat,
+          this.mergedFormat,
           new Date()
         )
         if (isValid(newSelectedDateTime)) {
@@ -665,7 +675,7 @@ export default defineComponent({
     handleTimeInput (v) {
       const newSelectedDateTime = strictParse(
         this.displayTime,
-        this.computedFormat,
+        this.mergedFormat,
         new Date()
       )
       if (isValid(newSelectedDateTime)) {
@@ -675,15 +685,11 @@ export default defineComponent({
     handleRangeInput (v) {
       if (v === null) v = [null, null]
       const [startTime, endTime] = v
-      const newStartTime = strictParse(
-        startTime,
-        this.computedFormat,
-        new Date()
-      )
+      const newStartTime = strictParse(startTime, this.mergedFormat, new Date())
       if (startTime !== this.displayStartTime && isValid(newStartTime)) {
         this.changeStartDateTime(newStartTime)
       }
-      const newEndTime = strictParse(endTime, this.computedFormat, new Date())
+      const newEndTime = strictParse(endTime, this.mergedFormat, new Date())
       if (endTime !== this.displayEndTime && isValid(newEndTime)) {
         this.changeEndDateTime(newEndTime)
       }
