@@ -392,7 +392,7 @@
     - 暂时放在 useTheme + useStyle 中... 似乎没啥太好的办法，最终还是要想办法让样式不要溢出
   - [ ] prefixCls ?
   - [x] select menu padding top & bottom
-  - [ ] time-picker invalid
+  - [x] time-picker invalid
   - [ ] date-picker invalid
   - [ ] vooks `useNow`
   - [ ] treemate activePath includeGroup: false

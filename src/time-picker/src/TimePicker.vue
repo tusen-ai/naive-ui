@@ -2,8 +2,7 @@
   <div
     class="n-time-picker"
     :class="{
-      'n-time-picker--disabled': disabled,
-      'n-time-picker--invalid': isValueInvalid
+      'n-time-picker--disabled': disabled
     }"
     :style="triggerCssVars"
   >
@@ -24,6 +23,7 @@
           :placeholder="localizedPlaceholder"
           :clearable="clearable"
           :disabled="disabled"
+          :text-decoration="isValueInvalid ? 'line-through' : undefined"
           @focus="handleTimeInputFocus"
           @blur="handleTimeInputBlur"
           @activate="handleTimeInputActivate"
