@@ -14,9 +14,7 @@
         :stateful="false"
         :size="timePickerSize"
         class="n-date-panel-date-input"
-        :class="{
-          'n-date-panel-date-input--invalid': isDateInvalid
-        }"
+        :text-decoration="isDateInvalid ? 'line-through' : ''"
         :placeholder="locale.selectDate"
         @blur="handleDateInputBlur"
         @input="handleDateInput"
@@ -74,11 +72,12 @@
             'n-date-panel-date--selected': dateItem.selected,
             'n-date-panel-date--excluded': !dateItem.inCurrentMonth,
             'n-date-panel-date--transition-disabled': transitionDisabled,
-            'n-date-panel-date--disabled': isCalendarDateDisabled(dateItem.ts)
+            'n-date-panel-date--disabled': mergedIsDateDisabled(dateItem.ts)
           }"
           @click="handleDateClick(dateItem)"
         >
           {{ dateItem.dateObject.date }}
+          <div v-if="dateItem.isCurrentDate" class="n-date-panel-date__sup" />
         </div>
       </div>
     </div>
@@ -131,9 +130,7 @@ export default defineComponent({
     NInput,
     ...useCalendar.components
   },
-  props: {
-    ...useCalendar.props
-  },
+  props: useCalendar.props,
   setup (props) {
     return useCalendar(props, 'datetime')
   }

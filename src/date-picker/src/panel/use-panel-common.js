@@ -18,7 +18,7 @@ function usePanelCommon (props) {
   const transitionDisabledRef = ref(false)
   const memorizedValueRef = ref(props.value)
   const selfRef = ref(null)
-  const keyboardStateRef = useKeyboard()
+  const keyboardState = useKeyboard()
   function doConfirm (...args) {
     const { onConfirm } = props
     if (onConfirm) onConfirm(...args)
@@ -54,22 +54,14 @@ function usePanelCommon (props) {
     }
   }
   function handlePanelKeyDown (e) {
-    if (
-      e.key === 'Tab' &&
-      e.target === selfRef.value &&
-      keyboardStateRef.value.shift
-    ) {
+    if (e.key === 'Tab' && e.target === selfRef.value && keyboardState.shift) {
       e.preventDefault()
       doTabOut()
     }
   }
   function handlePanelFocus (e) {
     const { value: el } = selfRef
-    if (
-      keyboardStateRef.value.tab &&
-      e.target === el &&
-      el.contains(e.relatedTarget)
-    ) {
+    if (keyboardState.tab && e.target === el && el.contains(e.relatedTarget)) {
       doTabOut()
     }
   }

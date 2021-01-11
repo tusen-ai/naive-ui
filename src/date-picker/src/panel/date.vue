@@ -43,11 +43,12 @@
             'n-date-panel-date--selected': dateItem.selected,
             'n-date-panel-date--excluded': !dateItem.inCurrentMonth,
             'n-date-panel-date--transition-disabled': transitionDisabled,
-            'n-date-panel-date--disabled': isCalendarDateDisabled(dateItem.ts)
+            'n-date-panel-date--disabled': mergedIsDateDisabled(dateItem.ts)
           }"
           @click="handleDateClick(dateItem)"
         >
           {{ dateItem.dateObject.date }}
+          <div v-if="dateItem.isCurrentDate" class="n-date-panel-date__sup" />
         </div>
       </div>
     </div>
@@ -96,9 +97,7 @@ export default defineComponent({
     NButton,
     ...useCalendar.components
   },
-  props: {
-    ...useCalendar.props
-  },
+  props: useCalendar.props,
   setup (props) {
     return useCalendar(props, 'date')
   }

@@ -188,16 +188,18 @@ function useDualCalendar (props, type = 'datetime') {
     endCalendarDateTimeRef.value = addMonths(endCalendarDateTimeRef.value, -1)
     adjustCalendarTimes(false)
   }
-  function isCalendarDateDisabled (ts) {
-    const { isDateDisabled } = props
+  function mergedIsDateDisabled (ts) {
+    const {
+      isDateDisabled: { value: isDateDisabled }
+    } = validation
     if (!isDateDisabled) return false
     if (selectingPhaseRef.value === 'start') {
-      return isDateDisabled(ts, 'start', props.value)
+      return isDateDisabled(ts, 'start', props.value) === true
     } else {
-      if (ts < props.value[1]) {
-        return isDateDisabled(ts, 'start', props.value)
+      if (ts < memorizedStartDateTimeRef.value) {
+        return isDateDisabled(ts, 'start', props.value) === true
       } else {
-        return isDateDisabled(ts, 'end', props.value)
+        return isDateDisabled(ts, 'end', props.value) === true
       }
     }
   }
@@ -222,7 +224,7 @@ function useDualCalendar (props, type = 'datetime') {
     }
   }
   function handleDateClick (dateItem) {
-    if (isCalendarDateDisabled(dateItem.ts)) {
+    if (mergedIsDateDisabled(dateItem.ts)) {
       return
     }
     if (!isSelectingRef.value) {
@@ -235,7 +237,7 @@ function useDualCalendar (props, type = 'datetime') {
   }
   function handleDateMouseEnter (dateItem) {
     if (isSelectingRef.value) {
-      if (isCalendarDateDisabled(dateItem.ts)) return
+      if (mergedIsDateDisabled(dateItem.ts)) return
       if (dateItem.ts >= memorizedStartDateTimeRef.value) {
         changeStartEndTime(memorizedStartDateTimeRef.value, dateItem.ts)
       } else {
@@ -412,6 +414,7 @@ function useDualCalendar (props, type = 'datetime') {
     changeEndDateTime(value)
   }
   return {
+    selfRef: panelCommon.selfRef,
     locale: panelCommon.locale,
     NDatePicker,
     startDatesRef,
@@ -431,7 +434,7 @@ function useDualCalendar (props, type = 'datetime') {
     endCalendarPrevMonth,
     endCalendarNextMonth,
     endCalendarNextYear,
-    isCalendarDateDisabled,
+    mergedIsDateDisabled,
     startCalendarMonth: startCalendarMonthRef,
     startCalendarYear: startCalendarYearRef,
     endCalendarMonth: endCalendarMonthRef,

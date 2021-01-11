@@ -3,10 +3,7 @@
     ref="triggerRef"
     :class="{
       'n-date-picker--disabled': disabled,
-      'n-date-picker--range': isRange,
-      'n-date-picker--invalid': isValueInvalid && !isRange,
-      'n-date-picker--start-invalid': isStartValueInvalid,
-      'n-date-picker--end-invalid': isEndValueInvalid
+      'n-date-picker--range': isRange
     }"
     class="n-date-picker"
     :style="triggerCssVars"
@@ -26,9 +23,12 @@
           :value="[displayStartTime, displayEndTime]"
           :placeholder="[localizedStartPlaceholder, localizedEndPlaceholder]"
           :readonly="disabled ? 'disabled' : false"
-          :separator="localizedSeperator"
           :force-focus="active"
           :clearable="clearable"
+          :text-decoration="[
+            isStartValueInvalid ? 'line-through' : '',
+            isEndValueInvalid ? 'line-through' : ''
+          ]"
           pair
           deactivate-on-enter
           @clear="handleClear"
@@ -39,6 +39,11 @@
           @deactivate="handleRangeInputDeactivate"
           @input="handleRangeInput"
         >
+          <template #separator>
+            <n-base-icon class="n-date-picker-icon">
+              <fast-forward-icon />
+            </n-base-icon>
+          </template>
           <template #clear>
             <n-base-icon class="n-date-picker-icon">
               <calendar-icon />
@@ -58,6 +63,7 @@
           :placeholder="localizedPlacehoder"
           :readonly="disabled ? 'disabled' : false"
           :clearable="clearable"
+          :text-decoration="isValueInvalid && !isRange ? 'line-through' : ''"
           deactivate-on-enter
           @click="handleActivatorClick"
           @focus="handleInputFocus"
@@ -153,7 +159,7 @@ import { useIsMounted, useMergedState } from 'vooks'
 import { NInput } from '../../input'
 import { NBaseIcon } from '../../_base'
 import { useFormItem, useTheme, useConfig, useLocale } from '../../_mixins'
-import { CalendarIcon } from '../../_base/icons'
+import { CalendarIcon, FastForwardIcon } from '../../_base/icons'
 import { warn, call, useAdjustedTo, createKey } from '../../_utils'
 import { datePickerLight } from '../styles'
 import { strictParse, getDerivedTimeFromKeyboardEvent } from './utils'
@@ -189,7 +195,8 @@ export default defineComponent({
     DatePanel,
     DatetimerangePanel,
     DaterangePanel,
-    CalendarIcon
+    CalendarIcon,
+    FastForwardIcon
   },
   provide () {
     return {
@@ -354,6 +361,8 @@ export default defineComponent({
             calendarDaysFontSize,
             itemFontSize,
             itemTextColor,
+            itemColorDisabled,
+            itemColorIncluded,
             itemColorHover,
             itemColorActive,
             itemBorderRadius,
@@ -423,6 +432,8 @@ export default defineComponent({
           '--item-cell-width': itemCellWidth,
           '--item-cell-height': itemCellHeight,
           '--item-text-color': itemTextColor,
+          '--item-color-included': itemColorIncluded,
+          '--item-color-disabled': itemColorDisabled,
           '--item-color-hover': itemColorHover,
           '--item-color-active': itemColorActive,
           '--item-text-color-disabled': itemTextColorDisabled,
@@ -446,10 +457,6 @@ export default defineComponent({
     },
     isRange () {
       return ['daterange', 'datetimerange'].includes(this.type)
-    },
-    localizedSeperator () {
-      if (this.separator !== undefined) return this.separator
-      return this.locale.separator
     },
     localizedPlacehoder () {
       if (this.placeholder === undefined) {

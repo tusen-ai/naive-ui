@@ -41,6 +41,8 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // --item-cell-width
 // --item-cell-height
 // --item-text-color
+// --item-color-included
+// --item-color-disabled
 // --item-color-hover
 // --item-color-active
 // --item-font-size
@@ -61,21 +63,6 @@ export default c([
     cM('disabled', [
       cB('date-picker-icon', {
         color: 'var(--icon-color-disabled)'
-      })
-    ]),
-    cM('invalid', [
-      c('input', {
-        textDecoration: 'line-through'
-      })
-    ]),
-    cM('start-invalid', [
-      c('input:nth-of-type(1)', {
-        textDecoration: 'line-through'
-      })
-    ]),
-    cM('end-invalid', [
-      c('input:nth-of-type(2)', {
-        textDecoration: 'line-through'
       })
     ])
   ]),
@@ -153,13 +140,6 @@ export default c([
         cB('time-picker', {
           zIndex: 1
         })
-      ]),
-      cB('data-panel-date-input', [
-        cM('invalid', [
-          c('input', {
-            textDecoration: 'line-through'
-          })
-        ])
       ])
     ]),
     cB('date-panel-month', `
@@ -230,7 +210,11 @@ export default c([
       `, [
         cM('transition-disabled', {
           transition: 'none !important'
-        }),
+        }, [
+          c('&::before, &::after', {
+            transition: 'none !important'
+          })
+        ]),
         cNotM('disabled', [
           cNotM('selected', [
             c('&:hover', {
@@ -239,7 +223,7 @@ export default c([
           ])
         ]),
         cM('current', [
-          c('&::after', `
+          cE('sup', `
             position: absolute;
             top: 2px;
             right: 2px;
@@ -252,18 +236,29 @@ export default c([
               background-color .2s var(--bezier);
           `)
         ]),
+        c('&::after', `
+          content: "";
+          z-index: -1;
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          border-radius: inherit;
+          transition: background-color .3s var(--bezier);
+        `),
         cM('covered, start, end', [
           cNotM('excluded', [
             c('&::before', `
-            content: "";
-            z-index: -1;
-            position: absolute;
-            left: calc((var(--item-size) - var(--item-cell-width)) / 2);
-            right: calc((var(--item-size) - var(--item-cell-width)) / 2);
-            top: 0;
-            bottom: 0;
-            background-color: var(--item-color-hover);
-          `),
+              content: "";
+              z-index: -2;
+              position: absolute;
+              left: calc((var(--item-size) - var(--item-cell-width)) / 2);
+              right: calc((var(--item-size) - var(--item-cell-width)) / 2);
+              top: 0;
+              bottom: 0;
+              background-color: var(--item-color-included);
+            `),
             c('&:nth-child(7n + 1)::before', {
               borderTopLeftRadius: 'var(--item-border-radius)',
               borderBottomLeftRadius: 'var(--item-border-radius)'
@@ -275,9 +270,11 @@ export default c([
           ])
         ]),
         cM('selected', {
-          color: 'var(--item-text-color-active)',
-          backgroundColor: 'var(--item-color-active)'
+          color: 'var(--item-text-color-active)'
         }, [
+          c('&::after', {
+            backgroundColor: 'var(--item-color-active)'
+          }),
           cM('start', [
             c('&::before', {
               left: '50%'
@@ -288,17 +285,37 @@ export default c([
               right: '50%'
             })
           ]),
-          c('&::after', {
+          cE('sup', {
             backgroundColor: 'var(--panel-color)'
           })
         ]),
         cM('excluded', {
-          opacity: 'var(--item-text-color-disabled)'
-        }),
+          color: 'var(--item-text-color-disabled)'
+        }, [
+          cM('selected', [
+            c('&::after', {
+              backgroundColor: 'var(--item-color-disabled)'
+            })
+          ])
+        ]),
         cM('disabled', {
           cursor: 'not-allowed',
-          opacity: 'var(--item-text-color-disabled)'
-        })
+          color: 'var(--item-text-color-disabled)'
+        }, [
+          cM('covered', [
+            c('&::before', {
+              backgroundColor: 'var(--item-color-disabled)'
+            })
+          ]),
+          cM('selected', [
+            c('&::before', {
+              backgroundColor: 'var(--item-color-disabled)'
+            }),
+            c('&::after', {
+              backgroundColor: 'var(--item-color-disabled)'
+            })
+          ])
+        ])
       ])
     ]),
     cE('vertical-divider', `

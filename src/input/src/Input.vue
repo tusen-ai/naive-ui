@@ -103,7 +103,9 @@
       </n-icon-config-provider>
     </div>
     <span v-if="pair" class="n-input__separator">
-      {{ separator }}
+      <slot name="separator">
+        {{ separator }}
+      </slot>
     </span>
     <div v-if="pair" class="n-input-wrapper">
       <div class="n-input__input">
@@ -546,7 +548,7 @@ export default defineComponent({
     },
     /** private */
     textDecoration: {
-      type: String,
+      type: [String, Array],
       default: undefined
     },
     attrSize: {
@@ -680,7 +682,7 @@ export default defineComponent({
     // text-decoration
     const textDecorationStyleRef = computed(() => {
       const { textDecoration } = props
-      if (!textDecoration) return [null, null]
+      if (!textDecoration) return ['', '']
       if (Array.isArray(textDecoration)) {
         return textDecoration.map((v) => ({
           textDecoration: v

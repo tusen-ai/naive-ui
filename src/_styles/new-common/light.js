@@ -142,7 +142,6 @@ const derived = {
   opacity4: base.alpha4,
   opacity5: base.alpha5,
   opacityPending: base.alphaPending,
-  inputOpacityDisabled: base.alphaDisabledInput,
 
   dividerColor: neutral(base.alphaDivider),
   dividerColorOverlay: overlay(base.alphaDivider),
@@ -188,6 +187,7 @@ const derived = {
   actionColorOverlay: overlay(base.alphaAction),
   tableHeaderColorOverlay: overlay(base.alphaAction),
 
+  hoverColor: neutral(base.alphaPending),
   hoverColorOverlay: overlay(base.alphaPending),
   tableColorHoverOverlay: overlay(base.alphaTablePending),
   activeColorOverlay: overlay(base.alphaActive),

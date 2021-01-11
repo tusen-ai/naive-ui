@@ -15,9 +15,7 @@
         :size="timePickerSize"
         :stateful="false"
         class="n-date-panel-date-input"
-        :class="{
-          'n-date-panel-date-input--invalid': isStartValueInvalid
-        }"
+        :text-decoration="isStartValueInvalid ? 'line-through' : ''"
         :placeholder="locale.selectDate"
         @blur="handleStartDateInputBlur"
         @input="handleStartDateInput"
@@ -44,9 +42,7 @@
         :stateful="false"
         :size="timePickerSize"
         class="n-date-panel-date-input"
-        :class="{
-          'n-date-panel-date-input--invalid': isEndValueInvalid
-        }"
+        :text-decoration="isEndValueInvalid ? 'line-through' : ''"
         :placeholder="locale.selectDate"
         @blur="handleEndDateInputBlur"
         @input="handleEndDateInput"
@@ -118,12 +114,13 @@
             'n-date-panel-date--start': dateItem.startOfSpan,
             'n-date-panel-date--end': dateItem.endOfSpan,
             'n-date-panel-date--transition-disabled': transitionDisabled,
-            'n-date-panel-date--disabled': isCalendarDateDisabled(dateItem.ts)
+            'n-date-panel-date--disabled': mergedIsDateDisabled(dateItem.ts)
           }"
           @click="handleDateClick(dateItem)"
           @mouseenter="handleDateMouseEnter(dateItem)"
         >
           {{ dateItem.dateObject.date }}
+          <div v-if="dateItem.isCurrentDate" class="n-date-panel-date__sup" />
         </div>
       </div>
     </div>
@@ -172,12 +169,13 @@
             'n-date-panel-date--start': dateItem.startOfSpan,
             'n-date-panel-date--end': dateItem.endOfSpan,
             'n-date-panel-date--transition-disabled': transitionDisabled,
-            'n-date-panel-date--disabled': isCalendarDateDisabled(dateItem.ts)
+            'n-date-panel-date--disabled': mergedIsDateDisabled(dateItem.ts)
           }"
           @click="handleDateClick(dateItem)"
           @mouseenter="handleDateMouseEnter(dateItem)"
         >
           {{ dateItem.dateObject.date }}
+          <div v-if="dateItem.isCurrentDate" class="n-date-panel-date__sup" />
         </div>
       </div>
     </div>
@@ -222,9 +220,7 @@ export default defineComponent({
     NInput,
     ...useDualCalendar.components
   },
-  props: {
-    ...useDualCalendar.props
-  },
+  props: useDualCalendar.props,
   setup (props) {
     return useDualCalendar(props, 'datetimerange')
   }

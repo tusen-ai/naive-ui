@@ -15,6 +15,7 @@ export default {
   },
   self (vars) {
     const {
+      hoverColorOverlay,
       fontSize,
       textColorDisabledOverlay,
       textColor2Overlay,
@@ -37,7 +38,9 @@ export default {
       itemTextColor: textColor2Overlay,
       itemTextColorDisabled: textColorDisabledOverlay,
       itemTextColorActive: popoverColor,
-      itemColorHover: changeColor(primaryColor, { alpha: 0.15 }),
+      itemColorDisabled: hoverColorOverlay,
+      itemColorIncluded: changeColor(primaryColor, { alpha: 0.15 }),
+      itemColorHover: hoverColorOverlay,
       itemColorActive: primaryColor,
       itemBorderRadius: borderRadiusSmall,
       panelColor: popoverColor,

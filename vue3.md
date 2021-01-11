@@ -386,14 +386,14 @@
   - [x] message icon style
   - [ ] transfer search icon style
   - [ ] base selection icon style
-  - [ ] date picker not working
+  - [x] date picker not working
   - [x] avatar font size bug
   - [x] handle global style
     - 暂时放在 useTheme + useStyle 中... 似乎没啥太好的办法，最终还是要想办法让样式不要溢出
   - [ ] prefixCls ?
   - [x] select menu padding top & bottom
   - [x] time-picker invalid
-  - [ ] date-picker invalid
+  - [x] date-picker invalid
   - [ ] vooks `useNow`
   - [ ] treemate activePath includeGroup: false
 

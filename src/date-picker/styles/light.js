@@ -1,9 +1,9 @@
-import { changeColor } from 'seemly'
 import { inputLight } from '../../input/styles'
 import { commonLight } from '../../_styles/new-common'
 import { buttonLight } from '../../button/styles'
 import { timePickerLight } from '../../time-picker/styles'
 import commonVars from './_common'
+import { changeColor } from 'seemly'
 
 export default {
   name: 'DatePicker',
@@ -15,6 +15,7 @@ export default {
   },
   self (vars) {
     const {
+      hoverColor,
       fontSize,
       textColor2,
       textColorDisabled,
@@ -38,7 +39,9 @@ export default {
       itemTextColorDisabled: textColorDisabled,
       itemTextColorActive: popoverColor,
       itemTextColorCurrent: primaryColor,
-      itemColorHover: changeColor(primaryColor, { alpha: 0.1 }),
+      itemColorIncluded: changeColor(primaryColor, { alpha: 0.1 }),
+      itemColorHover: hoverColor,
+      itemColorDisabled: hoverColor,
       itemColorActive: primaryColor,
       itemBorderRadius: borderRadiusSmall,
       panelColor: popoverColor,

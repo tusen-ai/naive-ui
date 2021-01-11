@@ -73,10 +73,12 @@ function useCalendar (props, type) {
     if (type === 'datetime') return startOfSecond(value)
     if (type === 'date') return startOfDay(value)
   }
-  function isCalendarDateDisabled (ts) {
-    const { isDateDisabled } = props
+  function mergedIsDateDisabled (ts) {
+    const {
+      isDateDisabled: { value: isDateDisabled }
+    } = validation
     if (!isDateDisabled) return false
-    return isDateDisabled(ts)
+    return isDateDisabled(ts) === true
   }
   function handleDateInput (value) {
     const date = strictParse(value, props.dateFormat, new Date())
@@ -123,7 +125,7 @@ function useCalendar (props, type) {
     calendarDateTimeRef.value = new Date()
   }
   function handleDateClick (dateItem) {
-    if (isCalendarDateDisabled(dateItem.ts)) {
+    if (mergedIsDateDisabled(dateItem.ts)) {
       return
     }
     let newValue = new Date()
@@ -176,6 +178,7 @@ function useCalendar (props, type) {
     panelCommon.doUpdateValue(value)
   }
   return {
+    selfRef: panelCommon.selfRef,
     locale: panelCommon.locale,
     NDatePicker,
     dateArray: dateArrayRef,
@@ -183,7 +186,7 @@ function useCalendar (props, type) {
     calendarMonth: calendarMonthRef,
     weekdays: panelCommon.weekdays,
     transitionDisabled: panelCommon.transitionDisabled,
-    isCalendarDateDisabled,
+    mergedIsDateDisabled,
     nextYear,
     prevYear,
     nextMonth,
