@@ -7,8 +7,8 @@ export default {
   optionHeightMedium: '34px',
   optionHeightLarge: '40px',
   optionHeightHuge: '48px',
-  paddingSmall: '0',
-  paddingMedium: '0',
-  paddingLarge: '0',
-  paddingHuge: '0'
+  paddingSmall: '4px 0',
+  paddingMedium: '4px 0',
+  paddingLarge: '4px 0',
+  paddingHuge: '4px 0'
 }

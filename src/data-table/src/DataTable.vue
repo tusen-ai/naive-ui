@@ -62,7 +62,7 @@
 
 <script>
 import { computed, defineComponent, ref } from 'vue'
-import { nextFrame } from 'seemly'
+import { beforeNextFrame } from 'seemly'
 import { isPlainObject } from 'lodash-es'
 import { useLocale, useTheme } from '../../_mixins'
 import { NEmpty } from '../../empty'
@@ -746,7 +746,7 @@ export default defineComponent({
         case null:
           this.scrollingPart = 'header'
           this.scrollReceived = true
-          nextFrame(this.syncScrollState)
+          beforeNextFrame(this.syncScrollState)
           break
         case 'body':
           this.scrollingPart = null
@@ -761,7 +761,7 @@ export default defineComponent({
         case null:
           this.scrollingPart = 'body'
           this.scrollReceived = true
-          nextFrame(this.syncScrollState)
+          beforeNextFrame(this.syncScrollState)
           break
         case 'header':
           this.scrollingPart = null

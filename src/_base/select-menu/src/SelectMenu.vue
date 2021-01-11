@@ -25,8 +25,8 @@
         :item-size="itemSize"
         :show-scrollbar="false"
         :default-scroll-index="defaultScrollIndex"
-        :padding-top="4"
-        :padding-bottom="4"
+        :padding-top="padding.top"
+        :padding-bottom="padding.bottom"
         @resize="handleVirtualListResize"
         @scroll="handleVirtualListScroll"
       >
@@ -43,8 +43,8 @@
         v-else
         class="n-base-select-menu-option-wrapper"
         :style="{
-          paddingTop: '4px',
-          paddingBottom: '4px'
+          paddingTop: padding.top,
+          paddingBottom: padding.bottom
         }"
       >
         <template v-for="tmNode in tmNodes">
@@ -71,7 +71,7 @@
 <script>
 import { ref, onMounted, computed, defineComponent } from 'vue'
 import { VirtualList } from 'vueuc'
-import { depx } from 'seemly'
+import { depx, getPadding } from 'seemly'
 import { NEmpty } from '../../../empty'
 import { NScrollbar } from '../../../scrollbar'
 import { formatLength } from '../../../_utils'
@@ -169,6 +169,9 @@ export default defineComponent({
     const itemSizeRef = computed(() => {
       return depx(themeRef.value.self[createKey('optionHeight', props.size)])
     })
+    const paddingRef = computed(() => {
+      return getPadding(themeRef.value.self[createKey('padding', props.size)])
+    })
     onMounted(() => {
       const { value } = scrollbarRef
       if (value) value.sync()
@@ -188,6 +191,7 @@ export default defineComponent({
       pendingTmNode: pendingNodeRef,
       defaultScrollIndex: pendingNodeRef.value?.fIndex,
       itemSize: itemSizeRef,
+      padding: paddingRef,
       cssVars: computed(() => {
         const { size } = props
         const {

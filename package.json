@@ -105,13 +105,13 @@
     "evtd": "^0.1.0",
     "highlight.js": "^10.4.1",
     "lodash-es": "^4.17.15",
-    "seemly": "0.0.5",
+    "seemly": "^0.1.2",
     "treemate": "^0.1.11",
     "vdirs": "^0.0.3",
     "vfonts": "^0.0.1",
     "vooks": "^0.0.6",
     "vue": "^3.0.5",
-    "vueuc": "0.0.5"
+    "vueuc": "0.0.8"
   },
   "husky": {
     "hooks": {
