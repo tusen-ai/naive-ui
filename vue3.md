@@ -395,7 +395,7 @@
   - [x] time-picker invalid
   - [x] date-picker invalid
   - [ ] vooks `useNow`
-  - [ ] treemate activePath includeGroup: false
+  - [x] treemate activePath includeGroup: false
   - [ ] select menu multiple, when show=true, checkmark transiton not working
 
 ## Info
