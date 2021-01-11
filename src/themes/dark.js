@@ -63,6 +63,7 @@ import { transferDark } from '../transfer/styles'
 import { typographyDark } from '../typography/styles'
 import { treeDark } from '../tree/styles'
 import { uploadDark } from '../upload/styles'
+import { selectDark } from '../select/styles'
 
 export const darkTheme = {
   common: commonDark,
@@ -113,6 +114,7 @@ export const darkTheme = {
   Rate: rateDark,
   Result: resultDark,
   Scrollbar: scrollbarDark,
+  Select: selectDark,
   Slider: sliderDark,
   Space: spaceDark,
   Spin: spinDark,
