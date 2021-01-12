@@ -5,7 +5,9 @@ const replace = require('@rollup/plugin-replace')
 const { babel } = require('@rollup/plugin-babel')
 
 function externalValidator (patterns) {
-  return (id) => patterns.some((pattern) => id.startsWith(pattern))
+  return (id) => {
+    return patterns.some((pattern) => id.startsWith(pattern))
+  }
 }
 
 // do not use babel when build library, use it when only build the site

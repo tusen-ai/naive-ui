@@ -1,32 +1,53 @@
+const createVuePlugin = require('@vitejs/plugin-vue')
 const getDemoByPath = require('./utils/get-demo-by-path')
+const createRollupCssRenderPlugin = require('./rollup-plugin-css-render')
+const demoIndexTransFormPlugin = require('./vite-plugin-index-tranform')
 
-module.exports = function () {
-  const configureServer = [
-    async ({ app, resolver, watcher }) => {
-      // check and send hmr message
-      watcher.on('change', async (file) => {
-        if (file.endsWith('.md')) {
-          const content = await getDemoByPath(file)
-          watcher.handleVueReload(file, Date.now(), content)
-        }
-      })
-      app.use(async (ctx, next) => {
-        if (/\/@modules\/naive-ui\/?/.test(ctx.path)) {
-          ctx.path = ctx.path.replace(/\/@modules\/naive-ui\/?/, '/@naive-ui/index.js')
-        }
-        if (/\.md$/.test(ctx.path) || /\.entry$/.test(ctx.path)) {
-          const publicPath = ctx.path
-          const filePath = resolver.requestToFile(publicPath)
-          const content = await getDemoByPath(filePath)
-          // make it Treat as vue
-          ctx.vue = true
-          ctx.body = content
-        }
-        await next()
-      })
+const fileRegex = /\.(md)|(entry)$/
+
+const fn = async (id) => {
+  if (fileRegex.test(id)) {
+    const code = await getDemoByPath(id)
+    return {
+      code: code,
+      map: null
     }
-  ]
-  return {
-    configureServer
   }
 }
+const vuePlugin = createVuePlugin({
+  include: [/\.vue$/, /\.md$/, /\.entry$/]
+})
+
+const createNaiveDemoVitePlugin = () => {
+  const naiveDemoVitePlugin = {
+    name: 'demo-vite',
+    transform (_, id) {
+      return fn(id)
+    },
+    config () {
+      return {
+        transformInclude: /\.(md|entry)$/
+      }
+    },
+    async handleHotUpdate (ctx) {
+      const { file } = ctx
+      if (fileRegex.test(file)) {
+        const code = await getDemoByPath(file)
+        return vuePlugin.handleHotUpdate({
+          ...ctx,
+          read: () => code
+        })
+      }
+    }
+  }
+  const rollupCssRenderPlugin = createRollupCssRenderPlugin()
+
+  return [
+    demoIndexTransFormPlugin,
+    naiveDemoVitePlugin,
+    vuePlugin,
+    rollupCssRenderPlugin
+  ]
+}
+
+module.exports = createNaiveDemoVitePlugin
