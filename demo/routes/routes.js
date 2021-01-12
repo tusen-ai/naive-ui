@@ -34,287 +34,271 @@ export const childRoutes = withPrefix('/:lang/:theme/doc', [
   // components
   {
     path: '/n-layout',
-    component: () => import('../documentation/components/layout/index.entry')
+    component: () => import('../../src/layout/demos/index.entry')
   },
   {
     path: '/n-gradient-text',
-    component: () =>
-      import('../documentation/components/gradient-text/index.entry')
+    component: () => import('../../src/gradient-text/demos/index.entry')
   },
   {
     path: '/n-icon',
-    component: () => import('../documentation/components/icon/index.entry')
+    component: () => import('../../src/icon/demos/index.entry')
   },
   {
     path: '/n-checkbox',
-    component: () => import('../documentation/components/checkbox/index.entry')
+    component: () => import('../../src/checkbox/demos/index.entry')
   },
   {
     path: '/n-button',
-    component: () => import('../documentation/components/button/index.entry')
+    component: () => import('../../src/button/demos/index.entry')
   },
   {
     path: '/n-switch',
-    component: () => import('../documentation/components/switch/index.entry')
+    component: () => import('../../src/switch/demos/index.entry')
   },
   {
     path: '/n-data-table',
-    component: () =>
-      import('../documentation/components/data-table/index.entry')
+    component: () => import('../../src/data-table/demos/index.entry')
   },
   {
     path: '/n-input',
-    component: () => import('../documentation/components/input/index.entry')
+    component: () => import('../../src/input/demos/index.entry')
   },
   {
     path: '/n-select',
-    component: () => import('../documentation/components/select/index.entry')
+    component: () => import('../../src/select/demos/index.entry')
   },
   {
     path: '/n-cascader',
-    component: () => import('../documentation/components/cascader/index.entry')
+    component: () => import('../../src/cascader/demos/index.entry')
   },
   {
     path: '/n-dynamic-input',
-    component: () =>
-      import('../documentation/components/dynamic-input/index.entry')
+    component: () => import('../../src/dynamic-input/demos/index.entry')
   },
   {
     path: '/n-modal',
-    component: () => import('../documentation/components/modal/index.entry')
+    component: () => import('../../src/modal/demos/index.entry')
   },
   {
     path: '/n-message',
-    component: () => import('../documentation/components/message/index.entry')
+    component: () => import('../../src/message/demos/index.entry')
   },
   {
     path: '/n-tooltip',
-    component: () => import('../documentation/components/tooltip/index.entry')
+    component: () => import('../../src/tooltip/demos/index.entry')
   },
   {
     path: '/n-popover',
-    component: () => import('../documentation/components/popover/index.entry')
+    component: () => import('../../src/popover/demos/index.entry')
   },
   {
     path: '/n-notification',
-    component: () =>
-      import('../documentation/components/notification/index.entry')
+    component: () => import('../../src/notification/demos/index.entry')
   },
   {
     path: '/n-pagination',
-    component: () =>
-      import('../documentation/components/pagination/index.entry')
+    component: () => import('../../src/pagination/demos/index.entry')
   },
   {
     path: '/n-alert',
-    component: () => import('../documentation/components/alert/index.entry')
+    component: () => import('../../src/alert/demos/index.entry')
   },
   {
     path: '/n-date-picker',
-    component: () =>
-      import('../documentation/components/date-picker/index.entry')
+    component: () => import('../../src/date-picker/demos/index.entry')
   },
   {
     path: '/n-input-number',
-    component: () =>
-      import('../documentation/components/input-number/index.entry')
+    component: () => import('../../src/input-number/demos/index.entry')
   },
   {
     path: '/n-radio',
-    component: () => import('../documentation/components/radio/index.entry')
+    component: () => import('../../src/radio/demos/index.entry')
   },
   {
     path: '/n-form',
-    component: () => import('../documentation/components/form/index.entry')
+    component: () => import('../../src/form/demos/index.entry')
   },
   {
     path: '/n-tabs',
-    component: () => import('../documentation/components/tabs/index.entry')
+    component: () => import('../../src/tabs/demos/index.entry')
   },
   {
     path: '/n-time-picker',
-    component: () =>
-      import('../documentation/components/time-picker/index.entry')
+    component: () => import('../../src/time-picker/demos/index.entry')
   },
   {
     path: '/n-dialog',
-    component: () => import('../documentation/components/dialog/index.entry')
+    component: () => import('../../src/dialog/demos/index.entry')
   },
   {
     path: '/n-badge',
-    component: () => import('../documentation/components/badge/index.entry')
+    component: () => import('../../src/badge/demos/index.entry')
   },
   {
     path: '/n-steps',
-    component: () => import('../documentation/components/steps/index.entry')
+    component: () => import('../../src/steps/demos/index.entry')
   },
   {
     path: '/n-collapse',
-    component: () => import('../documentation/components/collapse/index.entry')
+    component: () => import('../../src/collapse/demos/index.entry')
   },
   {
     path: '/n-progress',
-    component: () => import('../documentation/components/progress/index.entry')
+    component: () => import('../../src/progress/demos/index.entry')
   },
   {
     path: '/n-tag',
-    component: () => import('../documentation/components/tag/index.entry')
+    component: () => import('../../src/tag/demos/index.entry')
   },
   {
     path: '/n-menu',
-    component: () => import('../documentation/components/menu/index.entry')
+    component: () => import('../../src/menu/demos/index.entry')
   },
   {
     path: '/n-timeline',
-    component: () => import('../documentation/components/timeline/index.entry')
+    component: () => import('../../src/timeline/demos/index.entry')
   },
   {
     path: '/n-back-top',
-    component: () => import('../documentation/components/back-top/index.entry')
+    component: () => import('../../src/back-top/demos/index.entry')
   },
   {
     path: '/n-divider',
-    component: () => import('../documentation/components/divider/index.entry')
+    component: () => import('../../src/divider/demos/index.entry')
   },
   {
     path: '/n-popconfirm',
-    component: () =>
-      import('../documentation/components/popconfirm/index.entry')
+    component: () => import('../../src/popconfirm/demos/index.entry')
   },
   {
     path: '/n-anchor',
-    component: () => import('../documentation/components/anchor/index.entry')
+    component: () => import('../../src/anchor/demos/index.entry')
   },
   {
     path: '/n-dropdown',
-    component: () => import('../documentation/components/dropdown/index.entry')
+    component: () => import('../../src/dropdown/demos/index.entry')
   },
   {
     path: '/n-popselect',
-    component: () => import('../documentation/components/popselect/index.entry')
+    component: () => import('../../src/popselect/demos/index.entry')
   },
   {
     path: '/n-config-provider',
-    component: () =>
-      import('../documentation/components/config-provider/index.entry')
+    component: () => import('../../src/config-provider/demos/index.entry')
   },
   {
     path: '/n-transfer',
-    component: () => import('../documentation/components/transfer/index.entry')
+    component: () => import('../../src/transfer/demos/index.entry')
   },
   {
     path: '/n-spin',
-    component: () => import('../documentation/components/spin/index.entry')
+    component: () => import('../../src/spin/demos/index.entry')
   },
   {
     path: '/n-drawer',
-    component: () => import('../documentation/components/drawer/index.entry')
+    component: () => import('../../src/drawer/demos/index.entry')
   },
   {
     path: '/n-loading-bar',
-    component: () =>
-      import('../documentation/components/loading-bar/index.entry')
+    component: () => import('../../src/loading-bar/demos/index.entry')
   },
   {
     path: '/n-time',
-    component: () => import('../documentation/components/time/index.entry')
+    component: () => import('../../src/time/demos/index.entry')
   },
   {
     path: '/n-slider',
-    component: () => import('../documentation/components/slider/index.entry')
+    component: () => import('../../src/slider/demos/index.entry')
   },
   {
     path: '/n-tree',
-    component: () => import('../documentation/components/tree/index.entry')
+    component: () => import('../../src/tree/demos/index.entry')
   },
   {
     path: '/n-affix',
-    component: () => import('../documentation/components/affix/index.entry')
+    component: () => import('../../src/affix/demos/index.entry')
   },
   {
     path: '/n-statistic',
-    component: () => import('../documentation/components/statistic/index.entry')
+    component: () => import('../../src/statistic/demos/index.entry')
   },
   {
     path: '/n-grid',
-    component: () => import('../documentation/components/grid/index.entry')
+    component: () => import('../../src/grid/demos/index.entry')
   },
   {
     path: '/n-breadcrumb',
-    component: () =>
-      import('../documentation/components/breadcrumb/index.entry')
+    component: () => import('../../src/breadcrumb/demos/index.entry')
   },
   {
     path: '/n-config-consumer',
-    component: () =>
-      import('../documentation/components/config-consumer/index.entry')
+    component: () => import('../../src/config-consumer/demos/index.entry')
   },
   {
     path: '/n-descriptions',
-    component: () =>
-      import('../documentation/components/descriptions/index.entry')
+    component: () => import('../../src/descriptions/demos/index.entry')
   },
   {
     path: '/n-list',
-    component: () => import('../documentation/components/list/index.entry')
+    component: () => import('../../src/list/demos/index.entry')
   },
   {
     path: '/n-card',
-    component: () => import('../documentation/components/card/index.entry')
+    component: () => import('../../src/card/demos/index.entry')
   },
   {
     path: '/n-avatar',
-    component: () => import('../documentation/components/avatar/index.entry')
+    component: () => import('../../src/avatar/demos/index.entry')
   },
   {
     path: '/n-result',
-    component: () => import('../documentation/components/result/index.entry')
+    component: () => import('../../src/result/demos/index.entry')
   },
   {
     path: '/n-thing',
-    component: () => import('../documentation/components/thing/index.entry')
+    component: () => import('../../src/thing/demos/index.entry')
   },
   {
     path: '/n-auto-complete',
-    component: () =>
-      import('../documentation/components/auto-complete/index.entry')
+    component: () => import('../../src/auto-complete/demos/index.entry')
   },
   {
     path: '/n-empty',
-    component: () => import('../documentation/components/empty/index.entry')
+    component: () => import('../../src/empty/demos/index.entry')
   },
   {
     path: '/n-element',
-    component: () => import('../documentation/components/element/index.entry')
+    component: () => import('../../src/element/demos/index.entry')
   },
   {
     path: '/n-log',
-    component: () => import('../documentation/components/log/index.entry')
+    component: () => import('../../src/log/demos/index.entry')
   },
   {
     path: '/n-code',
-    component: () => import('../documentation/components/code/index.entry')
+    component: () => import('../../src/code/demos/index.entry')
   },
   {
     path: '/n-typography',
-    component: () =>
-      import('../documentation/components/typography/index.entry')
+    component: () => import('../../src/typography/demos/index.entry')
   },
   {
     path: '/n-upload',
-    component: () => import('../documentation/components/upload/index.entry')
+    component: () => import('../../src/upload/demos/index.entry')
   },
   {
     path: '/n-table',
-    component: () => import('../documentation/components/table/index.entry')
+    component: () => import('../../src/table/demos/index.entry')
   },
   {
     path: '/n-space',
-    component: () => import('../documentation/components/space/index.entry')
+    component: () => import('../../src/space/demos/index.entry')
   },
   {
     path: '/n-rate',
-    component: () => import('../documentation/components/rate/index.entry')
+    component: () => import('../../src/rate/demos/index.entry')
   },
   // deprecated
   {

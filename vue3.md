@@ -401,8 +401,8 @@
   - [ ] 拆分 dateFns locale
   - [ ] 更新一波文档 props
   - [ ] 更新样式的文档
-  - [ ] 试图把组件的 demo 放到 src 里面
-  - [ ] 去掉仅存的 mixin
+  - [x] 试图把组件的 demo 放到 src 里面
+  - [x] 去掉仅存的 mixin
   - [ ] form item default type explain
   - [x] selection focus style
 
