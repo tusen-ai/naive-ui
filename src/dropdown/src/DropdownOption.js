@@ -43,17 +43,17 @@ export default defineComponent({
         hoverKey,
         keyboardKey,
         lastToggledSubmenuKey,
-        activeKeyPath
+        pendingKeyPath
       } = NDropdown
       const { key } = props.tmNode
-      if (hoverKey !== null) return activeKeyPath.includes(key)
+      if (hoverKey !== null) return pendingKeyPath.includes(key)
       if (keyboardKey !== null) {
         return (
-          activeKeyPath.includes(key) &&
-          activeKeyPath[activeKeyPath.length - 1] !== key
+          pendingKeyPath.includes(key) &&
+          pendingKeyPath[pendingKeyPath.length - 1] !== key
         )
       }
-      if (lastToggledSubmenuKey !== null) return activeKeyPath.includes(key)
+      if (lastToggledSubmenuKey !== null) return pendingKeyPath.includes(key)
       return false
     })
     const shouldDelayRef = computed(() => {
@@ -75,9 +75,14 @@ export default defineComponent({
       rawNode: rawNodeRef,
       hasSubmenu: hasSubmenuRef,
       pending: useMemo(() => {
+        const { pendingKeyPath } = NDropdown
+        const { key } = props.tmNode
+        return pendingKeyPath.includes(key)
+      }),
+      active: useMemo(() => {
         const { activeKeyPath } = NDropdown
         const { key } = props.tmNode
-        return activeKeyPath.includes(key) || activeKeyPath.includes(key)
+        return activeKeyPath.includes(key)
       }),
       NDropdownOption
     }
@@ -143,7 +148,8 @@ export default defineComponent({
             class: [
               'n-dropdown-option-body',
               {
-                'n-dropdown-option-body--pending': this.pending
+                'n-dropdown-option-body--pending': this.pending,
+                'n-dropdown-option-body--active': this.active
               }
             ],
             onMouseMove: this.handleMouseMove,

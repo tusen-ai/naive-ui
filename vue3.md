@@ -185,8 +185,8 @@
     - `expanded-names` => `expanded-keys`
     - `default-expanded-names` => `default-expanded-keys`
     - `item.name` => `item.key`
-    - `item.titleExtra` => `item.extra`
   - remove
+    - `item.titleExtra`
     - `overlay-width`
     - `overlay-min-width`
 - [x] message
@@ -378,7 +378,7 @@
   - [x] md-loader code
   - [x] input + form-item style
   - [x] loadingbar theme
-  - [ ] dropdown group + menu use dropdown
+  - [x] dropdown group + menu use dropdown
   - [x] 多行 message
   - [ ] progress height
   - [x] close 重构
@@ -394,7 +394,7 @@
   - [x] select menu padding top & bottom
   - [x] time-picker invalid
   - [x] date-picker invalid
-  - [ ] vooks `useNow`
+  - [x] vooks `useNow`
   - [x] treemate activePath includeGroup: false
   - [ ] select menu multiple, when show=true, checkmark transiton not working
 

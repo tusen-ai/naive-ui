@@ -159,10 +159,6 @@ export default defineComponent({
             itemTextColorHover,
             itemTextColorChildActive,
             itemTextColorActive,
-            itemExtraTextColor,
-            itemExtraTextColorHover,
-            itemExtraTextColorChildActive,
-            itemExtraTextColorActive,
             itemIconColor,
             itemIconColorHover,
             itemIconColorActive,
@@ -182,17 +178,13 @@ export default defineComponent({
           '--border-radius': borderRadius,
           '--arrow-color': arrowColor,
           '--item-icon-color': itemIconColor,
-          '--item-extra-text-color': itemExtraTextColor,
           '--item-text-color-hover': itemTextColorHover,
           '--item-icon-color-hover': itemIconColorHover,
-          '--item-extra-text-color-hover': itemExtraTextColorHover,
           '--item-text-color-active': itemTextColorActive,
           '--item-icon-color-active': itemIconColorActive,
-          '--item-extra-text-color-active': itemExtraTextColorActive,
           '--item-icon-color-collapsed': itemIconColorCollapsed,
           '--item-color-active': itemColorActive,
           '--item-text-color-child-active': itemTextColorChildActive,
-          '--item-extra-text-color-child-active': itemExtraTextColorChildActive,
           '--item-icon-color-child-active': itemIconColorChildActive
         }
       })

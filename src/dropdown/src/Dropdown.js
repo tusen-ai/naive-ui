@@ -64,6 +64,11 @@ const dropdownProps = {
   containerClass: {
     type: String,
     default: 'n-dropdown'
+  },
+  // for menu
+  value: {
+    type: String,
+    default: undefined
   }
 }
 
@@ -121,8 +126,12 @@ export default defineComponent({
         null
       )
     })
-    const activeKeyPathRef = computed(
+    const pendingKeyPathRef = computed(
       () => getPathRef.value(pendingKeyRef.value).keyPath
+    )
+
+    const activeKeyPathRef = computed(
+      () => getPathRef.value(props.value).keyPath
     )
 
     const keyboardEnabledRef = useMemo(() => {
@@ -171,12 +180,14 @@ export default defineComponent({
       tmNodes: tmNodesRef,
       tmNodeMap: tmNodeMap,
       // pending state
-      activeKeyPath: activeKeyPathRef,
+      pendingKeyPath: pendingKeyPathRef,
       hoverKey: hoverKeyRef,
       keyboardKey: keyboardKeyRef,
       lastToggledSubmenuKey: lastToggledSubmenuKeyRef,
       pendingKey: pendingKeyRef,
       keyboardHandlerRegistered: ref(false),
+      // active state
+      activeKeyPath: activeKeyPathRef,
       // show
       uncontrolledShow: uncontrolledShowRef,
       mergedShow: mergedShowRef,
@@ -197,6 +208,7 @@ export default defineComponent({
             prefixColor,
             optionColorHover,
             optionTextColor,
+            optionTextColorActive,
             groupHeaderTextColor,
             [createKey('optionIconSuffixWidth', size)]: optionIconSuffixWidth,
             [createKey('optionSuffixWidth', size)]: optionSuffixWidth,
@@ -223,6 +235,7 @@ export default defineComponent({
           '--option-suffix-width': optionSuffixWidth,
           '--option-icon-suffix-width': optionIconSuffixWidth,
           '--option-text-color': optionTextColor,
+          '--option-text-color-active': optionTextColorActive,
           '--prefix-color': prefixColor,
           '--suffix-color': suffixColor,
           '--group-header-text-color': groupHeaderTextColor,

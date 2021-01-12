@@ -16,6 +16,7 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // --option-suffix-width
 // --option-icon-suffix-width
 // --option-text-color
+// --option-text-color-active
 // --prefix-color
 // --suffix-color
 // --option-icon-size
@@ -46,6 +47,13 @@ export default cB('dropdown-menu', {
       cM('pending', {
         backgroundColor: 'var(--option-color-hover)'
       }),
+      cM('active', {
+        color: 'var(--option-text-color-active)'
+      }, [
+        cE('prefix, suffix', {
+          color: 'var(--option-text-color-active)'
+        })
+      ]),
       cM('group', {
         fontSize: 'calc(var(--font-size) - 1px)',
         color: 'var(--group-header-text-color)'
@@ -62,14 +70,14 @@ export default cB('dropdown-menu', {
         width: 'var(--option-prefix-width)',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        color: 'var(--prefix-color)',
+        transition: 'color .3s var(--bezier)'
       }, [
         cM('show-icon', {
           width: 'var(--option-icon-prefix-width)'
         }),
         cB('icon', {
-          transition: 'color .3s var(--bezier)',
-          color: 'var(--prefix-color)',
           fontSize: 'var(--option-icon-size)'
         })
       ]),
@@ -85,14 +93,14 @@ export default cB('dropdown-menu', {
         justifyContent: 'flex-end',
         alignItems: 'center',
         minWidth: 'var(--option-suffix-width)',
-        padding: '0 8px'
+        padding: '0 8px',
+        transition: 'color .3s var(--bezier)',
+        color: 'var(--suffix-color)'
       }, [
         cM('has-submenu', {
           width: 'var(--option-icon-suffix-width)'
         }),
         cB('icon', {
-          transition: 'color .3s var(--bezier)',
-          color: 'var(--suffix-color)',
           fontSize: 'var(--option-icon-size)'
         })
       ]),

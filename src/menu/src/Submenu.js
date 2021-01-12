@@ -25,10 +25,6 @@ export default defineComponent({
       type: Array,
       required: true
     },
-    extra: {
-      type: [String, Function],
-      default: undefined
-    },
     disabled: {
       type: Boolean,
       default: false
@@ -95,7 +91,6 @@ export default defineComponent({
         maxIconSize,
         activeIconSize,
         title,
-        extra,
         horizontal,
         childActive,
         icon,
@@ -111,7 +106,6 @@ export default defineComponent({
         maxIconSize,
         activeIconSize,
         title,
-        extra,
         showArrow: !horizontal,
         childActive: childActive,
         icon,
@@ -143,6 +137,7 @@ export default defineComponent({
             fontSizeLarge: '14px',
             optionIconSizeLarge: '18px'
           },
+          value: this.NMenu.mergedValue,
           size: 'large',
           trigger: 'hover',
           disabled: !this.dropdownEnabled,

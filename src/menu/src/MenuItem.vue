@@ -21,7 +21,6 @@
           :active-icon-size="activeIconSize"
           :title="title"
           :disabled="mergedDisabled"
-          :extra="extra"
           :icon="icon"
           @click="handleClick"
         />
@@ -50,10 +49,6 @@ export default defineComponent({
     tmNode: {
       type: Object,
       required: true
-    },
-    extra: {
-      type: [String, Function],
-      default: undefined
     },
     disabled: {
       type: Boolean,

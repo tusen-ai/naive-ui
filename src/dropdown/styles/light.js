@@ -6,6 +6,7 @@ export default {
   common: commonLight,
   self (vars) {
     const {
+      primaryColor,
       textColor2,
       boxShadow2,
       dividerColor,
@@ -29,6 +30,7 @@ export default {
       optionHeightLarge: heightLarge,
       optionHeightHuge: heightHuge,
       optionTextColor: textColor2,
+      optionTextColorActive: primaryColor,
       color: popoverColor,
       dividerColor,
       borderRadius,

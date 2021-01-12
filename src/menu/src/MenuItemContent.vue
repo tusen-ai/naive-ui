@@ -15,9 +15,6 @@
     </div>
     <div class="n-menu-item-content-header">
       <render :render="title" />
-      <span v-if="extra" class="n-menu-item-content-header__extra">
-        <render :render="extra" />
-      </span>
     </div>
     <n-base-icon v-if="showArrow" class="n-menu-item-content__arrow">
       <chevron-down-filled-icon />
@@ -60,10 +57,6 @@ export default defineComponent({
       default: undefined
     },
     title: {
-      type: [String, Function],
-      default: undefined
-    },
-    extra: {
       type: [String, Function],
       default: undefined
     },

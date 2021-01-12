@@ -7,6 +7,7 @@
   <n-switch v-model:value="collapsed" />
   <n-layout>
     <n-layout-sider
+      bordered
       collapse-mode="width"
       :collapsed-width="64"
       :width="240"

@@ -11,16 +11,12 @@ import fadeInHeightExpandTransition from '../../../_styles/transitions/fade-in-h
 // --item-color-active
 // --item-text-color
 // --item-icon-color
-// --item-extra-text-color
 // --item-text-color-hover
 // --item-icon-color-hover
-// --item-extra-text-color-hover
 // --item-text-color-active
 // --item-icon-color-active
-// --item-extra-text-color-active
 // --item-icon-color-collapsed
 // --item-text-color-child-active
-// --item-extra-text-color-child-active
 // --item-icon-color-child-active
 export default cB('menu', {
   color: 'var(--item-text-color)',
@@ -115,11 +111,7 @@ export default cB('menu', {
         }),
         cB('menu-item-content-header', {
           color: 'var(--item-text-color-active)'
-        }, [
-          cE('extra', {
-            color: 'var(--item-extra-text-color-active)'
-          })
-        ])
+        })
       ])
     ])
   ]),
@@ -152,11 +144,7 @@ export default cB('menu', {
     cM('child-active', [
       cB('menu-item-content-header', {
         color: 'var(--item-text-color-child-active)'
-      }, [
-        cE('extra', {
-          color: 'var(--item-extra-text-color-child-active)'
-        })
-      ]),
+      }),
       cE('icon', {
         color: 'var(--item-icon-color-child-active)'
       })
@@ -168,11 +156,7 @@ export default cB('menu', {
         }),
         cB('menu-item-content-header', {
           color: 'var(--item-text-color-hover)'
-        }, [
-          cE('extra', {
-            color: 'var(--item-extra-text-color-hover)'
-          })
-        ])
+        })
       ])
     ]),
     cE('icon', `
@@ -207,16 +191,7 @@ export default cB('menu', {
       overflow: hidden;
       text-overflow: ellipsis;
       color: var(--item-text-color);
-    `, [
-      cE('extra', `
-        white-space: nowrap;
-        margin-left: 6px;
-        display: inline-block;
-        transition: color 0.3s var(--bezier);
-        font-size: 13px;
-        color: var(--item-extra-text-color);
-      `)
-    ])
+    `)
   ]),
   cB('submenu', {
     cursor: 'pointer',
