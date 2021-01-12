@@ -397,6 +397,7 @@
   - [x] vooks `useNow`
   - [x] treemate activePath includeGroup: false
   - [ ] select menu multiple, when show=true, checkmark transiton not working
+  - [ ] menu + dropdown collapsed 时候 menu item 不更新
 
 ## Info
 

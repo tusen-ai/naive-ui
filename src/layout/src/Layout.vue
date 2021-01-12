@@ -54,13 +54,13 @@ export default defineComponent({
   },
   setup (props) {
     const themeRef = useTheme('Layout', 'Layout', style, layoutLight, props)
-    const {
-      common: { cubicBezierEaseInOut },
-      self: { color, textColor }
-    } = themeRef.value
     return {
       mergedTheme: themeRef,
       cssVars: computed(() => {
+        const {
+          common: { cubicBezierEaseInOut },
+          self: { color, textColor }
+        } = themeRef.value
         return {
           '--bezier': cubicBezierEaseInOut,
           '--color': color,
