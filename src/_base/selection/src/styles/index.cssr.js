@@ -192,30 +192,30 @@ export default c([
       ]),
       cNotM('active', [
         cRB('base-selection-label', [
-          c('&:focus ~', [
-            cE('state-border', `
-              box-shadow: var(--box-shadow-focus)
-              border: var(--border-focus);
-            `)
-          ]),
           c('&:hover ~', [
             cE('state-border', `
               box-shadow: var(--box-shadow-hover);
               border: var(--border-hover);
+            `)
+          ]),
+          c('&:focus ~', [
+            cE('state-border', `
+              box-shadow: var(--box-shadow-focus);
+              border: var(--border-focus);
             `)
           ])
         ]),
         cRB('base-selection-tags', [
-          c('&:focus ~', [
-            cE('state-border', `
-              boxShadow: var(--box-shadow-focus);
-              border: var(--border-focus);
-            `)
-          ]),
           c('&:hover ~', [
             cE('state-border', `
               box-shadow: var(--box-shadow-hover);
               border: var(--border-hover);
+            `)
+          ]),
+          c('&:focus ~', [
+            cE('state-border', `
+              box-shadow: var(--box-shadow-focus);
+              border: var(--border-focus);
             `)
           ])
         ])

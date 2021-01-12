@@ -46,7 +46,9 @@ export default {
       boxShadowActive: `0 0 0 2px ${changeColor(primaryColor, {
         alpha: 0.2
       })}`,
-      boxShadowFocus: null,
+      boxShadowFocus: `0 0 0 2px ${changeColor(primaryColor, {
+        alpha: 0.2
+      })}`,
       caretColor: primaryColor,
       arrowColor: iconColor,
       arrowColorDisabled: iconColorDisabled,
@@ -59,7 +61,9 @@ export default {
       boxShadowActiveWarning: `0 0 0 2px ${changeColor(warningColor, {
         alpha: 0.2
       })}`,
-      boxShadowFocusWarning: null,
+      boxShadowFocusWarning: `0 0 0 2px ${changeColor(warningColor, {
+        alpha: 0.2
+      })}`,
       colorActiveWarning: inputColor,
       caretColorWarning: warningColor,
       // error
@@ -71,7 +75,9 @@ export default {
       boxShadowActiveError: `0 0 0 2px ${changeColor(errorColor, {
         alpha: 0.2
       })}`,
-      boxShadowFocusError: null,
+      boxShadowFocusError: `0 0 0 2px ${changeColor(errorColor, {
+        alpha: 0.2
+      })}`,
       colorActiveError: inputColor,
       caretColorError: errorColor
     }

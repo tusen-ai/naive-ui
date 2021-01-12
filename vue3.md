@@ -404,6 +404,7 @@
   - [ ] 试图把组件的 demo 放到 src 里面
   - [ ] 去掉仅存的 mixin
   - [ ] form item default type explain
+  - [x] selection focus style
 
 ## Info
 

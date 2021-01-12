@@ -45,7 +45,9 @@ export default {
       boxShadowActive: `0 0 8px 0 ${changeColor(primaryColor, {
         alpha: 0.4
       })}`,
-      boxShadowFocus: null,
+      boxShadowFocus: `0 0 8px 0 ${changeColor(primaryColor, {
+        alpha: 0.4
+      })}`,
       caretColor: primaryColor,
       arrowColor: iconColorOverlay,
       arrowColorDisabled: iconColorDisabledOverlay,
@@ -55,10 +57,12 @@ export default {
       borderActiveWarning: `1px solid ${warningColor}`,
       borderFocusWarning: `1px solid ${warningColorHover}`,
       boxShadowHoverWarning: null,
-      boxShadowActiveWarning: ` 0 0 8px 0 ${changeColor(warningColor, {
+      boxShadowActiveWarning: `0 0 8px 0 ${changeColor(warningColor, {
         alpha: 0.4
       })}`,
-      boxShadowFocusWarning: null,
+      boxShadowFocusWarning: `0 0 8px 0 ${changeColor(warningColor, {
+        alpha: 0.4
+      })}`,
       colorActiveWarning: changeColor(warningColor, { alpha: 0.1 }),
       caretColorWarning: warningColor,
       // error
@@ -70,7 +74,9 @@ export default {
       boxShadowActiveError: `0 0 8px 0 ${changeColor(errorColor, {
         alpha: 0.4
       })}`,
-      boxShadowFocusError: null,
+      boxShadowFocusError: `0 0 8px 0 ${changeColor(errorColor, {
+        alpha: 0.4
+      })}`,
       colorActiveError: changeColor(errorColor, { alpha: 0.1 }),
       caretColorError: errorColor
     }
