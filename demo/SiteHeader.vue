@@ -51,10 +51,11 @@
 import { computed, readonly, ref } from 'vue'
 import version from '../src/version'
 import {
-  useSiteTheme,
-  useSiteLang,
+  useSiteThemeName,
+  useSiteLocaleName,
   useSiteDisplayMode,
-  i18n
+  i18n,
+  useSiteFlattenedOptions
 } from './util-composables'
 
 function match (pattern, string) {
@@ -67,12 +68,6 @@ function match (pattern, string) {
 export default {
   name: 'SiteHeader',
   inject: ['message'],
-  props: {
-    items: {
-      type: Array,
-      default: () => []
-    }
-  },
   setup () {
     const { t } = i18n({
       'zh-CN': {
@@ -124,8 +119,9 @@ export default {
       version,
       dev: __DEV__,
       displayMode: useSiteDisplayMode(),
-      lang: useSiteLang(),
-      theme: useSiteTheme(),
+      lang: useSiteLocaleName(),
+      theme: useSiteThemeName(),
+      items: useSiteFlattenedOptions(),
       menuItems: menuItemsRef,
       themeOptions: themeOptionsRef,
       langOptions: readonly({

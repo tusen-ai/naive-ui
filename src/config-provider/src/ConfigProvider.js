@@ -23,6 +23,10 @@ export default {
       type: Object,
       default: undefined
     },
+    dateLocale: {
+      type: Object,
+      default: undefined
+    },
     namespace: {
       type: String,
       default: undefined
@@ -97,6 +101,12 @@ export default {
       mergedLocale: computed(() => {
         const { locale } = props
         return locale === undefined ? NConfigProvider?.mergedLocale : locale
+      }),
+      mergedDateLocale: computed(() => {
+        const { dateLocale } = props
+        return dateLocale === undefined
+          ? NConfigProvider?.mergedLocale
+          : dateLocale
       }),
       mergedHljs: computed(() => {
         const { hljs } = props

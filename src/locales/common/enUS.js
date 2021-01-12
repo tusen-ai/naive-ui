@@ -1,8 +1,5 @@
-import { enUS } from 'date-fns/locale'
-
 export default {
-  _name: 'en-US',
-  _dateFns: enUS,
+  name: 'en-US',
   Popconfirm: {
     positiveText: 'Confirm',
     negativeText: 'Cancel'

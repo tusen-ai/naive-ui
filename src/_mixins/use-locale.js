@@ -1,19 +1,29 @@
 import { inject, computed, getCurrentInstance } from 'vue'
+import { enUS, dateEnUS } from '../locales'
 
-export default function createLocaleMixin (componentLocaleNamespace) {
+export default function createLocaleMixin (ns) {
   const vm = getCurrentInstance().proxy
   const NConfigProvider = inject('NConfigProvider', {})
-  const globalLocaleRef = computed(() => {
-    const { locale } = NConfigProvider
-    if (locale) return locale
+  const localeRef = computed(() => {
+    const { mergedLocale } = NConfigProvider
+    if (mergedLocale) return mergedLocale[ns]
     const { mergedLanguage } = NConfigProvider
-    const {
-      $naive: { locales, fallbackLocale }
-    } = vm
-    return locales[mergedLanguage ?? fallbackLocale]
+    if (mergedLanguage) {
+      // legacy start
+      const {
+        $naive: { locales = [], fallbackLocale }
+      } = vm
+      return locales[mergedLanguage ?? fallbackLocale][ns]
+    } else {
+      return enUS[ns]
+    }
+  })
+  const dateLocaleRef = computed(() => {
+    const { mergedDateLocale } = NConfigProvider
+    return mergedDateLocale ?? dateEnUS
   })
   return {
-    dateLocale: computed(() => globalLocaleRef.value._dateFns),
-    locale: computed(() => globalLocaleRef.value[componentLocaleNamespace])
+    dateLocale: dateLocaleRef,
+    locale: localeRef
   }
 }

@@ -341,7 +341,7 @@ export default defineComponent({
     },
     dateFnsOptions () {
       return {
-        locale: this.dateLocale
+        locale: this.dateLocale.locale
       }
     },
     hourInFormat () {

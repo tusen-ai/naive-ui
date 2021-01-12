@@ -15,55 +15,28 @@ function createLocalesObject (locales) {
   )
 }
 
-function createStylesObject (styles) {
-  const styleMap = {}
-  function traverse (rootStyles) {
-    rootStyles.forEach((style) => {
-      const { theme, name, peer } = style
-      if (!styleMap[theme]) {
-        styleMap[theme] = {}
-        styleMap[theme].override = (...args) => {
-          styleMap[theme].base.override(...args)
-        }
-      }
-      if (!styleMap[theme][name]) {
-        styleMap[theme][name] = style
-      }
-      if (peer) {
-        traverse(peer)
-      }
-    })
-  }
-  traverse(styles)
-  return styleMap
-}
-
-function create (options = {}) {
-  const {
-    componentPrefix = 'N',
-    components = [],
-    styles = [],
-    locales = [],
-    hljs
-  } = options
+function create ({
+  componentPrefix = 'N',
+  components = [],
+  locales = [],
+  hljs
+} = {}) {
   const fallbackLocale = locales[0]
   if (!fallbackLocale) warn('create', '`locales` is empty.')
   const installTargets = []
   const naive = {
-    componentPrefix,
-    locales: createLocalesObject(locales),
-    fallbackLocale,
-    hljs,
-    components: {},
-    styles: createStylesObject(styles),
-    // external
     version,
-    setHljs,
-    setHighlightjs: setHljs,
     use (plugin) {
       plugin.install(naive)
     },
-    install
+    install,
+    // deprecated
+    componentPrefix,
+    hljs,
+    setHljs,
+    setHighlightjs: setHljs,
+    locales: createLocalesObject(locales),
+    fallbackLocale
   }
   function registerComponent (app, name, component) {
     const registered = app.component(componentPrefix + name)
@@ -84,10 +57,6 @@ function create (options = {}) {
         })
       }
     })
-  }
-  if (__DEV__) {
-    if (!window.naive) window.naive = {}
-    window.naive.styles = styles
   }
   return naive
 }

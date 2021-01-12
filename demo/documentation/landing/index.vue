@@ -58,7 +58,7 @@
 import LandingFooter from './Footer.vue'
 import leftImage from './Left.vue'
 import rightImage from './Right.vue'
-import { i18n, useSiteTheme } from '../../util-composables'
+import { i18n, useSiteThemeName } from '../../util-composables'
 
 export default {
   components: {
@@ -68,7 +68,7 @@ export default {
   },
   setup () {
     return {
-      theme: useSiteTheme(),
+      theme: useSiteThemeName(),
       ...i18n({
         'zh-CN': {
           start: '开始使用',

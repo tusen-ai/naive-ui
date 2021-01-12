@@ -1,6 +1,6 @@
 <template>
   <n-layout position="absolute" class="root-layout">
-    <site-header :items="flattenedItems" />
+    <site-header />
     <n-layout
       class="home-layout"
       style="top: 64px; overflow: hidden"
@@ -12,56 +12,15 @@
 </template>
 
 <script>
-import { computed } from 'vue'
 import SiteHeader from './SiteHeader.vue'
-import menuOptions from './menu-options'
 import { loadingBarApiRef } from './routes/router'
-import {
-  useSiteDisplayMode,
-  useSiteTheme,
-  useSiteLang
-} from './util-composables'
 
 export default {
   name: 'Site',
   components: {
     SiteHeader
   },
-  inject: ['SiteProvider', 'loadingBar'],
-  provide () {
-    return {
-      Site: this
-    }
-  },
-  setup () {
-    const themeRef = useSiteTheme()
-    const langRef = useSiteLang()
-    const displayModeRef = useSiteDisplayMode()
-    const itemsRef = computed(() =>
-      menuOptions({
-        theme: themeRef.value,
-        lang: langRef.value,
-        mode: displayModeRef.value
-      })
-    )
-    const flattenedItemsRef = computed(() => {
-      const flattenedItems = []
-      const traverse = (items) => {
-        if (items) {
-          items.forEach((item) => {
-            if (item.childItems) traverse(item.childItems)
-            else flattenedItems.push(item)
-          })
-        }
-      }
-      traverse(itemsRef.value)
-      return flattenedItems
-    })
-    return {
-      items: itemsRef,
-      flattenedItems: flattenedItemsRef
-    }
-  },
+  inject: ['loadingBar'],
   mounted () {
     this.loadingBar.finish()
     loadingBarApiRef.value = this.loadingBar

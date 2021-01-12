@@ -1,8 +1,5 @@
-import { zhCN } from 'date-fns/locale'
-
 export default {
-  _name: 'zh-CN',
-  _dateFns: zhCN,
+  name: 'zh-CN',
   Popconfirm: {
     positiveText: '确认',
     negativeText: '取消'

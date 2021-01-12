@@ -2,10 +2,9 @@
   <n-config-provider
     class="demo"
     namespace="naive-ui-doc"
-    :theme="theme"
-    :unstable-theme="theme === 'dark' ? darkTheme : undefined"
-    :unstable-theme-overrides="overrides"
-    :language="lang"
+    :unstable-theme="theme"
+    :locale="locale"
+    :date-locale="dateLocale"
   >
     <n-loading-bar-provider ref="loadingBar">
       <n-message-provider>
@@ -20,20 +19,17 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
-import Site from './Site.vue'
+import { ref, computed, provide, getCurrentInstance } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { darkTheme } from '../src'
+import { useOsTheme } from 'vooks'
+import { darkTheme, enUS, zhCN, dateEnUS, dateZhCN } from '../src'
+import { i18n } from './util-composables'
+import Site from './Site.vue'
 
 export default {
   name: 'SiteProvider',
   components: {
     Site
-  },
-  provide () {
-    return {
-      SiteProvider: this
-    }
   },
   beforeRouteEnter (to, from, next) {
     next()
@@ -42,31 +38,45 @@ export default {
     next()
   },
   setup () {
-    const displayModeRef = ref(localStorage.getItem('mode') ?? 'debug')
-    const displayModeComputed = computed({
+    // provide
+    provide('SiteProvider', getCurrentInstance().proxy)
+    // route
+    const route = useRoute()
+    const router = useRouter()
+    // display mode: if is debug
+    const _displayModeRef = ref(localStorage.getItem('mode') ?? 'debug')
+    const displayModeRef = computed({
       get () {
-        return displayModeRef.value
+        return _displayModeRef.value
       },
       set (value) {
-        displayModeRef.value = value
+        _displayModeRef.value = value
         localStorage.setItem('mode', value)
       }
     })
-    const route = useRoute()
-    const router = useRouter()
-    const langRef = computed({
+    // locale
+    const localeNameRef = computed({
       get () {
-        return route.params.lang || 'en-US'
+        return route.params.lang === 'zh-CN' ? 'zh-CN' : 'en-US'
       },
-      set (lang) {
-        router.push(changeLangInPath(route.fullPath, lang))
+      set (locale) {
+        router.push(changeLangInPath(route.fullPath, locale))
       }
     })
-    const themeRef = computed({
+    const localeRef = computed(() => {
+      return localeNameRef.value === 'zh-CN' ? zhCN : enUS
+    })
+    const dateLocaleRef = computed(() => {
+      return route.params.lang === 'zh-CN' ? dateZhCN : dateEnUS
+    })
+    i18n.provide(computed(() => localeRef.value.name))
+    // theme
+    const osThemeRef = useOsTheme()
+    const themeNameRef = computed({
       get () {
         switch (route.params.theme) {
           case 'os-theme':
-            return 'light'
+            return osThemeRef.value
           case 'dark':
             return 'dark'
           default:
@@ -77,17 +87,17 @@ export default {
         router.push(changeThemeInPath(route.fullPath, theme))
       }
     })
+    const themeRef = computed(() => {
+      const { value } = themeNameRef
+      return value === 'dark' ? darkTheme : undefined
+    })
     return {
-      displayMode: displayModeComputed,
+      displayMode: displayModeRef,
+      themeName: themeNameRef,
       theme: themeRef,
-      lang: langRef,
-      // unstable
-      darkTheme,
-      overrides: {
-        // common: {
-        //   primaryColor: 'rgb(255, 0, 0)'
-        // }
-      }
+      localeName: localeNameRef,
+      locale: localeRef,
+      dateLocale: dateLocaleRef
     }
   }
 }

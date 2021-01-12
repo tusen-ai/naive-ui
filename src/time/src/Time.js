@@ -37,8 +37,9 @@ export default {
   },
   computed: {
     dateFnsOptions () {
+      console.log('dateFnsOptions time', this.dateLocale)
       return {
-        locale: this.dateLocale
+        locale: this.dateLocale.locale
       }
     },
     mergedTime () {
@@ -67,7 +68,7 @@ export default {
       } else {
         return formatDistance(this.mergedTime, this.mergedTo, {
           addSuffix: true,
-          locale: this.dateLocale
+          locale: this.dateLocale.locale
         })
       }
     }

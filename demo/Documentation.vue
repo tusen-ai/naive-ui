@@ -2,9 +2,8 @@
   <n-service-layout
     ref="layout"
     :padding-body="false"
-    :items="Site.items"
+    :items="items"
     :sider-props="siderProps"
-    :content-props="contentProps"
   >
     <router-view />
     <landing-footer
@@ -15,6 +14,7 @@
 
 <script>
 import LandingFooter from './documentation/landing/Footer.vue'
+import { useSiteOptions } from './util-composables'
 
 export default {
   components: {
@@ -25,25 +25,18 @@ export default {
       NDocRoot: this
     }
   },
-  inject: ['Site'],
   beforeRouteUpdate (to, from, next) {
     this.memorizedPath = from ? from.path : null
     next()
   },
-  data () {
+  setup () {
     return {
+      items: useSiteOptions(),
       memorizedPath: null,
       siderProps: {
         style: {
           height: '100%'
         }
-      },
-      contentProps: {
-        // themedStyle: {
-        //   light: {
-        //     backgroundColor: '#FFF'
-        //   }
-        // }
       }
     }
   },
