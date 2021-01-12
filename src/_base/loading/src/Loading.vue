@@ -32,8 +32,8 @@
 
 <script>
 import { defineComponent } from 'vue'
-import { NIconSwitchTransition } from '../../../_base'
 import { useStyle } from '../../../_mixins'
+import NIconSwitchTransition from '../../icon-switch-transition'
 import style from './styles/index.cssr.js'
 
 export default defineComponent({

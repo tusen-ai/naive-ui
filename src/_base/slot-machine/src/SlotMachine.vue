@@ -20,7 +20,7 @@
 
 <script>
 import { defineComponent } from 'vue'
-import { NFadeInExpandTransition } from '../../../_base'
+import NFadeInExpandTransition from '../../fade-in-expand-transition'
 import { useStyle } from '../../../_mixins'
 import SlotMachineNumber from './SlotMachineNumber.vue'
 import style from './styles/index.cssr.js'

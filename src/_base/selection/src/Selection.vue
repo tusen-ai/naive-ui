@@ -167,9 +167,9 @@ import { defineComponent, computed } from 'vue'
 import { NTag } from '../../../tag'
 import { useTheme } from '../../../_mixins'
 import { createKey } from '../../../_utils'
+import { baseSelectionLight } from '../styles'
 import Suffix from './Suffix.vue'
 import style from './styles/index.cssr.js'
-import { baseSelectionLight } from '../styles'
 
 export default defineComponent({
   name: 'BaseSelection',

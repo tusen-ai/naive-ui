@@ -20,10 +20,10 @@
 
 <script>
 import { computed, defineComponent } from 'vue'
-import NBaseIcon from '../../icon'
-import { NIconSwitchTransition } from '../../../_base'
 import { useTheme } from '../../../_mixins'
 import { DismissCircleIcon } from '../../icons'
+import NBaseIcon from '../../icon'
+import NIconSwitchTransition from '../../icon-switch-transition'
 import { baseClearLight } from '../styles'
 import style from './styles/index.cssr.js'
 
