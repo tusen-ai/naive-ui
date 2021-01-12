@@ -79,7 +79,11 @@
           <backward-icon />
         </div>
         <div class="n-date-panel-month__month-year">
-          {{ startCalendarMonth }} {{ startCalendarYear }}
+          {{
+            locale.monthBeforeYear
+              ? `${startCalendarMonth} ${startCalendarYear}`
+              : `${startCalendarYear} ${startCalendarMonth}`
+          }}
         </div>
         <div class="n-date-panel-month__next" @click="startCalendarNextMonth">
           <forward-icon />
@@ -137,7 +141,11 @@
           <backward-icon />
         </div>
         <div class="n-date-panel-month__month-year">
-          {{ endCalendarMonth }} {{ endCalendarYear }}
+          {{
+            locale.monthBeforeYear
+              ? `${endCalendarMonth} ${endCalendarYear}`
+              : `${endCalendarYear} ${endCalendarMonth}`
+          }}
         </div>
         <div class="n-date-panel-month__next" @click="endCalendarNextMonth">
           <forward-icon />

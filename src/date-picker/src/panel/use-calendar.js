@@ -19,7 +19,6 @@ import { usePanelCommon } from './use-panel-common'
 function useCalendar (props, type) {
   const panelCommon = usePanelCommon(props)
   const NDatePicker = inject('NDatePicker')
-  const { locale } = NDatePicker
   const validation = {
     isDateDisabled: toRef(NDatePicker, 'isDateDisabled'),
     isTimeDisabled: toRef(NDatePicker, 'isTimeDisabled'),
@@ -41,11 +40,29 @@ function useCalendar (props, type) {
   const dateArrayRef = computed(() => {
     return dateArray(calendarDateTimeRef.value, props.value, nowRef.value)
   })
+  const weekdaysRef = computed(() => {
+    return dateArrayRef.value.slice(0, 7).map((dateItem) => {
+      const { ts } = dateItem
+      return format(
+        ts,
+        NDatePicker.locale.dayFormat,
+        panelCommon.dateFnsOptions.value
+      )
+    })
+  })
   const calendarMonthRef = computed(() => {
-    return locale[format(calendarDateTimeRef.value, 'MMM')]
+    return format(
+      calendarDateTimeRef.value,
+      NDatePicker.locale.monthFormat,
+      panelCommon.dateFnsOptions.value
+    )
   })
   const calendarYearRef = computed(() => {
-    return format(calendarDateTimeRef.value, 'yyyy')
+    return format(
+      calendarDateTimeRef.value,
+      NDatePicker.locale.yearFormat,
+      panelCommon.dateFnsOptions.value
+    )
   })
   watch(calendarDateTimeRef, (value, oldValue) => {
     if (!isSameMonth(value, oldValue)) {
@@ -63,7 +80,11 @@ function useCalendar (props, type) {
   })
   watch(toRef(props, 'value'), (value) => {
     if (value !== null) {
-      displayDateStringRef.value = format(value, props.dateFormat)
+      displayDateStringRef.value = format(
+        value,
+        props.dateFormat,
+        panelCommon.dateFnsOptions.value
+      )
       calendarDateTimeRef.value = value
     } else {
       displayDateStringRef.value = ''
@@ -148,7 +169,11 @@ function useCalendar (props, type) {
     if (time === undefined) {
       time = props.value
     }
-    displayDateStringRef.value = format(time, props.dateFormat)
+    displayDateStringRef.value = format(
+      time,
+      props.dateFormat,
+      panelCommon.dateFnsOptions.value
+    )
   }
   function handleConfirmClick () {
     if (validation.isDateInvalid.value || validation.isTimeInvalid.value) {
@@ -184,7 +209,7 @@ function useCalendar (props, type) {
     dateArray: dateArrayRef,
     calendarYear: calendarYearRef,
     calendarMonth: calendarMonthRef,
-    weekdays: panelCommon.weekdays,
+    weekdays: weekdaysRef,
     transitionDisabled: panelCommon.transitionDisabled,
     mergedIsDateDisabled,
     nextYear,

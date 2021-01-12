@@ -18,7 +18,6 @@ import { usePanelCommon } from './use-panel-common'
 
 function useDualCalendar (props, type = 'datetime') {
   const NDatePicker = inject('NDatePicker')
-  const { locale } = NDatePicker
   const panelCommon = usePanelCommon(props)
   const validation = {
     isDateDisabled: toRef(NDatePicker, 'isDateDisabled'),
@@ -48,10 +47,14 @@ function useDualCalendar (props, type = 'datetime') {
   const { value, dateFormat } = props
 
   const startDateDisplayStringRef = ref(
-    value === null ? '' : format(value[0], dateFormat)
+    value === null
+      ? ''
+      : format(value[0], dateFormat, panelCommon.dateFnsOptions.value)
   )
   const endDateDisplayStringRef = ref(
-    value === null ? '' : format(value[1], dateFormat)
+    value === null
+      ? ''
+      : format(value[1], dateFormat, panelCommon.dateFnsOptions.value)
   )
   syncCalendarTimeWithValue(value)
 
@@ -66,17 +69,43 @@ function useDualCalendar (props, type = 'datetime') {
   const endDateArrayRef = computed(() => {
     return dateArray(endCalendarDateTimeRef.value, props.value, nowRef.value)
   })
+  const weekdaysRef = computed(() => {
+    return startDateArrayRef.value.slice(0, 7).map((dateItem) => {
+      const { ts } = dateItem
+      return format(
+        ts,
+        NDatePicker.locale.dayFormat,
+        panelCommon.dateFnsOptions.value
+      )
+    })
+  })
   const startCalendarMonthRef = computed(() => {
-    return locale[format(startCalendarDateTimeRef.value, 'MMM')]
+    return format(
+      startCalendarDateTimeRef.value,
+      NDatePicker.locale.monthFormat,
+      panelCommon.dateFnsOptions.value
+    )
   })
   const endCalendarMonthRef = computed(() => {
-    return locale[format(endCalendarDateTimeRef.value, 'MMM')]
+    return format(
+      endCalendarDateTimeRef.value,
+      NDatePicker.locale.monthFormat,
+      panelCommon.dateFnsOptions.value
+    )
   })
   const startCalendarYearRef = computed(() => {
-    return format(startCalendarDateTimeRef.value, 'yyyy')
+    return format(
+      startCalendarDateTimeRef.value,
+      NDatePicker.locale.yearFormat,
+      panelCommon.dateFnsOptions.value
+    )
   })
   const endCalendarYearRef = computed(() => {
-    return format(endCalendarDateTimeRef.value, 'yyyy')
+    return format(
+      endCalendarDateTimeRef.value,
+      NDatePicker.locale.yearFormat,
+      panelCommon.dateFnsOptions.value
+    )
   })
   const startTimeValueRef = computed(() => {
     const { value } = props
@@ -110,8 +139,16 @@ function useDualCalendar (props, type = 'datetime') {
     if (value !== null) {
       const [startMoment, endMoment] = value
       const { dateFormat } = props
-      startDateDisplayStringRef.value = format(startMoment, dateFormat)
-      endDateDisplayStringRef.value = format(endMoment, dateFormat)
+      startDateDisplayStringRef.value = format(
+        startMoment,
+        dateFormat,
+        panelCommon.dateFnsOptions.value
+      )
+      endDateDisplayStringRef.value = format(
+        endMoment,
+        dateFormat,
+        panelCommon.dateFnsOptions.value
+      )
       if (!isSelectingRef.value) {
         syncCalendarTimeWithValue(value)
       }
@@ -404,8 +441,16 @@ function useDualCalendar (props, type = 'datetime') {
     if (times === undefined) {
       times = value
     }
-    startDateDisplayStringRef.value = format(times[0], dateFormat)
-    endDateDisplayStringRef.value = format(times[1], dateFormat)
+    startDateDisplayStringRef.value = format(
+      times[0],
+      dateFormat,
+      panelCommon.dateFnsOptions.value
+    )
+    endDateDisplayStringRef.value = format(
+      times[1],
+      dateFormat,
+      panelCommon.dateFnsOptions.value
+    )
   }
   function handleStartTimePickerChange (value) {
     changeStartDateTime(value)
@@ -439,7 +484,7 @@ function useDualCalendar (props, type = 'datetime') {
     startCalendarYear: startCalendarYearRef,
     endCalendarMonth: endCalendarMonthRef,
     endCalendarYear: endCalendarYearRef,
-    weekdays: panelCommon.weekdays,
+    weekdays: weekdaysRef,
     startDateArray: startDateArrayRef,
     endDateArray: endDateArrayRef,
     transitionDisabled: panelCommon.transitionDisabled,

@@ -15,7 +15,11 @@
           <backward-icon />
         </div>
         <div class="n-date-panel-month__month-year">
-          {{ calendarMonth }} {{ calendarYear }}
+          {{
+            locale.monthBeforeYear
+              ? `${calendarMonth} ${calendarYear}`
+              : `${calendarYear} ${calendarMonth}`
+          }}
         </div>
         <div class="n-date-panel-month__next" @click="nextMonth">
           <forward-icon />

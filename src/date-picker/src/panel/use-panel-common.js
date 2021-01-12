@@ -8,13 +8,16 @@ import {
 } from '../../../_base/icons'
 import { NBaseFocusDetector } from '../../../_base'
 
-const daysKey = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-
 const DATE_FORMAT = 'yyyy-MM-dd'
 const TIME_FORMAT = 'HH:mm:ss'
 
 function usePanelCommon (props) {
   const NDatePicker = inject('NDatePicker')
+  const dateFnsOptionsRef = computed(() => {
+    return {
+      locale: NDatePicker.dateLocale.locale
+    }
+  })
   const transitionDisabledRef = ref(false)
   const memorizedValueRef = ref(props.value)
   const selfRef = ref(null)
@@ -66,10 +69,8 @@ function usePanelCommon (props) {
     }
   }
   return {
+    dateFnsOptions: dateFnsOptionsRef,
     timePickerSize: computed(() => NDatePicker.timePickerSize),
-    weekdays: computed(() =>
-      daysKey.map((weekday) => NDatePicker.locale[weekday])
-    ),
     transitionDisabled: transitionDisabledRef,
     memorizedValue: memorizedValueRef,
     selfRef,
