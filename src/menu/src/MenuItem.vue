@@ -16,6 +16,7 @@
       <template #trigger>
         <n-menu-item-content
           :padding-left="paddingLeft"
+          :icon-margin-right="iconMarginRight"
           :max-icon-size="maxIconSize"
           :active-icon-size="activeIconSize"
           :title="title"

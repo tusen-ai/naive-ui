@@ -19,18 +19,24 @@
         <render :render="extra" />
       </span>
     </div>
-    <div v-if="showArrow" class="n-menu-item-content__arrow" />
+    <n-base-icon v-if="showArrow" class="n-menu-item-content__arrow">
+      <chevron-down-filled-icon />
+    </n-base-icon>
   </div>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
+import { ChevronDownFilledIcon } from '../../_base/icons'
 import { render } from '../../_utils'
+import { NBaseIcon } from '../../_base'
 
 export default defineComponent({
   name: 'MenuItemContent',
   components: {
-    render
+    render,
+    NBaseIcon,
+    ChevronDownFilledIcon
   },
   props: {
     collapsed: {
@@ -77,6 +83,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    iconMarginRight: {
+      type: Number,
+      required: true
+    },
     onClick: {
       type: Function,
       default: () => {}
@@ -88,11 +98,12 @@ export default defineComponent({
       return { paddingLeft: paddingLeft && paddingLeft + 'px' }
     },
     iconStyle () {
-      const { maxIconSize, activeIconSize } = this
+      const { maxIconSize, activeIconSize, iconMarginRight } = this
       return {
         width: maxIconSize + 'px',
         height: maxIconSize + 'px',
-        fontSize: activeIconSize + 'px'
+        fontSize: activeIconSize + 'px',
+        marginRight: iconMarginRight + 'px'
       }
     }
   },

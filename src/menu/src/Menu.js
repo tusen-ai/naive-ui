@@ -1,12 +1,4 @@
-import {
-  h,
-  nextTick,
-  ref,
-  toRef,
-  computed,
-  onMounted,
-  defineComponent
-} from 'vue'
+import { h, ref, toRef, computed, defineComponent } from 'vue'
 import { createTreeMate } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
 import { useTheme } from '../../_mixins'
@@ -147,12 +139,6 @@ export default defineComponent({
     const activePathRef = computed(() => {
       return treeMateRef.value.getPath(mergedValueRef.value).keyPath
     })
-    const transitionDisabledRef = ref(true)
-    onMounted(() => {
-      nextTick(() => {
-        transitionDisabledRef.value = false
-      })
-    })
     return {
       controlledExpandedKeys: controlledExpandedKeysRef,
       uncontrolledExpanededKeys: uncontrolledExpandedKeysRef,
@@ -161,7 +147,6 @@ export default defineComponent({
       mergedValue: mergedValueRef,
       activePath: activePathRef,
       tmNodes: tmNodesRef,
-      transitionDisabled: transitionDisabledRef,
       mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
@@ -247,8 +232,7 @@ export default defineComponent({
           'n-menu',
           `n-menu--${this.mode}`,
           {
-            'n-menu--collapsed': this.collapsed,
-            'n-menu--transition-disabled': this.transitionDisabled
+            'n-menu--collapsed': this.collapsed
           }
         ],
         style: this.cssVars

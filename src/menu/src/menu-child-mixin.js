@@ -69,18 +69,14 @@ export default {
         NMenuItemGroup,
         root,
         horizontal,
-        collapsedIconSize,
+        maxIconSize,
         menuCollapsed
       } = this
       const mergedRootIndent = rootIndent === undefined ? indent : rootIndent
-      const menuCollapsedPaddingLeft =
-        collapsedWidth / 2 - collapsedIconSize / 2
-      const menuCollapsedPaddingDiff = menuCollapsed
-        ? mergedRootIndent - menuCollapsedPaddingLeft
-        : 0
       if (root) {
         if (horizontal) return undefined
-        return mergedRootIndent - menuCollapsedPaddingDiff
+        if (menuCollapsed) return collapsedWidth / 2 - maxIconSize / 2
+        return mergedRootIndent
       }
       if (NMenuItemGroup) {
         return indent / 2 + NMenuItemGroup.paddingLeft
@@ -89,6 +85,22 @@ export default {
         return indent + NSubmenu.paddingLeft
       }
       return undefined
+    },
+    iconMarginRight () {
+      const {
+        NMenu: { collapsedWidth, indent, rootIndent },
+        root,
+        maxIconSize,
+        horizontal,
+        menuCollapsed
+      } = this
+      if (horizontal) return 8
+      if (!root) return 8
+      if (!menuCollapsed) return 8
+      const mergedRootIndent = rootIndent === undefined ? indent : rootIndent
+      return (
+        mergedRootIndent + maxIconSize + 8 - (collapsedWidth + maxIconSize) / 2
+      )
     }
   }
 }

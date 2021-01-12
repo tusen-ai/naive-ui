@@ -12,6 +12,7 @@ export default cB('icon', `
   display: inline-block;
   position: relative;
   fill: currentColor;
+  transform: translateZ(0);
 `, [
   cM('color-transition', {
     transition: 'color .3s var(--bezier)'

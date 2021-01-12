@@ -31,20 +31,6 @@ export default cB('menu', {
   fontSize: 'var(--font-size)',
   paddingBottom: '6px'
 }, [
-  cM('transition-disabled', [
-    cB('menu-item-content', [
-      cE('icon', {
-        transition: 'none !important'
-      })
-    ]),
-    cB('menu-item-content-header', {
-      transition: 'none !important'
-    }, [
-      cE('extra', {
-        transition: 'none !important'
-      })
-    ])
-  ]),
   cM('horizontal', {
     display: 'flex',
     paddingBottom: 0
@@ -141,12 +127,14 @@ export default cB('menu', {
     box-sizing: border-box;
     line-height: 1.75;
     height: 100%;
-    display: flex;
+    display: grid;
+    grid-template-areas: "icon content arrow";
+    grid-template-columns: auto 1fr auto;
     align-items: center;
     cursor: pointer;
     position: relative;
     z-index: auto;
-    padding-right: 12px;
+    padding-right: 18px;
     transition:
       background-color .3s var(--bezier),
       padding-left .3s var(--bezier),
@@ -157,14 +145,9 @@ export default cB('menu', {
       cursor: 'not-allowed'
     }),
     cM('collapsed', [
-      cE('arrow', {
-        transition: `
-          transform 0.2s var(--bezier),
-          opacity 0.2s var(--bezier),
-          border-color 0.3s var(--bezier)
-        `,
-        transform: 'rotate(225deg)'
-      })
+      cE('arrow', `
+        transform: rotate(0);
+      `)
     ]),
     cM('child-active', [
       cB('menu-item-content-header', {
@@ -193,42 +176,33 @@ export default cB('menu', {
       ])
     ]),
     cE('icon', `
+      grid-area: icon;
       color: var(--item-icon-color);
       transition:
         color .3s var(--bezier),
         font-size .3s var(--bezier),
-        padding-right .3s var(--bezier);
+        margin-right .3s var(--bezier);
       box-sizing: content-box;
-      flex-shrink: 0;
-      padding-right: 8px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
     `),
     cE('arrow', `
-      content: '';
-      height: 6px;
-      width: 6px;
-      position: absolute;
-      right: 24px;
-      top: calc(50% - 2px);
-      transform: rotate(45deg);
-      transform-origin: 25% 25%;
+      grid-area: arrow;
+      font-size: 16px;
+      color: var(--arrow-color);
+      transform: rotate(180deg);
       opacity: 1;
-      border-left: 2px solid var(--arrow-color);
-      border-top: 2px solid var(--arrow-color);
       transition:
         transform 0.2s var(--bezier),
-        opacity 0.2s var(--bezier) .1s,
-        border-color 0.3s var(--bezier);
+        opacity 0.2s var(--bezier);
     `),
     cB('menu-item-content-header', `
+      grid-area: content;
       transition:
         color .3s var(--bezier),
         opacity .3s var(--bezier);
       opacity: 1;
-      flex-grow: 1;
-      flex-shrink: 1;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -257,7 +231,7 @@ export default cB('menu', {
       padding: 0
     }, [
       fadeInHeightExpandTransition({
-        duration: '.3s'
+        duration: '.2s'
       })
     ])
   ]),

@@ -100,12 +100,14 @@ export default defineComponent({
         childActive,
         icon,
         handleClick,
-        dropdownShow
+        dropdownShow,
+        iconMarginRight
       } = this
       return h(NMenuItemContent, {
         paddingLeft,
         collapsed,
         disabled: mergedDisabled,
+        iconMarginRight,
         maxIconSize,
         activeIconSize,
         title,
