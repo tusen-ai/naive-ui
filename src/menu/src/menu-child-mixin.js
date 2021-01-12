@@ -1,5 +1,3 @@
-import { nextTick } from 'vue'
-
 export default {
   inject: {
     NMenu: {
@@ -28,21 +26,6 @@ export default {
     title: {
       type: [String, Function],
       default: undefined
-    }
-  },
-  data () {
-    return {
-      delayedPaddingLeft: undefined
-    }
-  },
-  created () {
-    this.delayedPaddingLeft = this.paddingLeft
-  },
-  watch: {
-    paddingLeft (value) {
-      nextTick(() => {
-        this.delayedPaddingLeft = value
-      })
     }
   },
   computed: {

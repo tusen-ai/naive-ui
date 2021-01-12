@@ -257,7 +257,7 @@ export default cB('menu', {
       padding: 0
     }, [
       fadeInHeightExpandTransition({
-        duration: '.2s'
+        duration: '.3s'
       })
     ])
   ]),

@@ -1,4 +1,4 @@
-import { h, withDirectives, vShow, ref, defineComponent } from 'vue'
+import { h, ref, defineComponent } from 'vue'
 import { NFadeInExpandTransition } from '../../_base'
 import { NDropdown } from '../../dropdown'
 import NMenuItemContent from './MenuItemContent.vue'
@@ -89,7 +89,7 @@ export default defineComponent({
   render () {
     const createSubmenuItem = () => {
       const {
-        delayedPaddingLeft,
+        paddingLeft,
         collapsed,
         mergedDisabled,
         maxIconSize,
@@ -103,7 +103,7 @@ export default defineComponent({
         dropdownShow
       } = this
       return h(NMenuItemContent, {
-        paddingLeft: delayedPaddingLeft,
+        paddingLeft,
         collapsed,
         disabled: mergedDisabled,
         maxIconSize,
@@ -121,16 +121,15 @@ export default defineComponent({
       return h(NFadeInExpandTransition, null, {
         default: () => {
           const { tmNodes, collapsed } = this
-          return withDirectives(
-            h(
+          return !collapsed
+            ? h(
               'div',
               {
                 class: 'n-submenu-children'
               },
               tmNodes.map((item) => itemRenderer(item))
-            ),
-            [[vShow, !collapsed]]
-          )
+            )
+            : null
         }
       })
     }

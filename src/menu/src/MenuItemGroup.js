@@ -29,7 +29,7 @@ export default defineComponent({
           'span',
           {
             class: 'n-menu-item-group-title',
-            style: `padding-left: ${this.delayedPaddingLeft}px;`
+            style: `padding-left: ${this.paddingLeft}px;`
           },
           [
             h(render, {
