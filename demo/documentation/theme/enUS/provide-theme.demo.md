@@ -3,21 +3,26 @@
 Use `n-config-provider` to set the theme of all its descedant components.
 
 ```html
-<n-config-provider :theme="theme">
+<n-config-provider :unstable-theme="theme">
   <n-card>
     <n-space>
-      <n-button @click="theme = 'dark'">Dark</n-button>
-      <n-button @click="theme = 'light'">Light</n-button>
+      <n-button @click="theme = darkTheme">Dark</n-button>
+      <n-button @click="theme = lightTheme">Light</n-button>
     </n-space>
   </n-card>
 </n-config-provider>
 ```
 
 ```js
+import { ref } from 'vue'
+import { darkTheme, lightTheme } from 'naive-ui'
+
 export default {
-  data () {
+  setup () {
     return {
-      theme: 'dark'
+      darkTheme,
+      lightTheme,
+      theme: ref(lightTheme)
     }
   }
 }

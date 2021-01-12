@@ -3,18 +3,23 @@
 Naive UI provides `useOsTheme` to get the current theme of your OS.
 
 ```html
-<n-config-provider :theme="theme">
-  <n-card> Your current system theme is {{ theme }}. </n-card>
+<n-config-provider :unstable-theme="theme">
+  <n-card> Your current system theme is {{ osTheme }}. </n-card>
 </n-config-provider>
 ```
 
 ```js
-import { useOsTheme } from 'naive-ui'
+import { computed } from 'vue'
+import { useOsTheme, lightTheme, darkTheme } from 'naive-ui'
 
 export default {
   setup () {
+    const osThemeRef = useOsTheme()
     return {
-      theme: useOsTheme()
+      theme: computed(() =>
+        osThemeRef.value === 'dark' ? darkTheme : lightTheme
+      ),
+      osTheme: osThemeRef
     }
   }
 }

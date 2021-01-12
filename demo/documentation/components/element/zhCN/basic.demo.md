@@ -1,23 +1,37 @@
 # 基础
 
-当配置提供者提供深色主题时，它上面会有 `n-dark-theme` 类。当配置提供者提供浅色主题时，它上面会有 `n-light-theme` 类。若非二者之一，它不会添加额外的类，这种行为和其他的 Naive UI 组件类似。
-
 创建特定主题的组件十分管用。
 
 ```html
-<n-element tag="span" class="myel"> 我的元素 </n-element>
+<n-space vertical>
+  <n-space>
+    <n-button @click="theme = darkTheme">深色</n-button>
+    <n-button @click="theme = lightTheme">浅色</n-button>
+  </n-space>
+  <n-config-provider :unstable-theme="theme">
+    <n-card>
+      <n-el
+        tag="span"
+        style="color: var(--primary-color); transition: .3s var(--cubic-bezier-ease-in-out);"
+      >
+        我是个 span 标签
+      </n-el>
+    </n-card>
+  </n-config-provider>
+</n-space>
 ```
 
-```css
-.myel {
-  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+```js
+import { ref } from 'vue'
+import { darkTheme, lightTheme } from 'naive-ui'
 
-.myel.n-light-theme {
-  color: green;
-}
-
-.myel.n-dark-theme {
-  color: aquamarine;
+export default {
+  setup () {
+    return {
+      darkTheme,
+      lightTheme,
+      theme: ref(lightTheme)
+    }
+  }
 }
 ```

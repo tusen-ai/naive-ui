@@ -1,12 +1,12 @@
-# Use Themed Style
+# 使用带主题的样式（deprecated)
 
-Some of components has `themed-style` prop to help you simply modify the style of outer element's style of a component. For some simple components it could be very useful.
+一些组件有 `themed-style` 属性来帮你调整这个组件最外层元素的样式，对于一些简单的组件，这是很有效的方式。
 
 ```html
 <n-space vertical>
   <n-space>
-    <n-button @click="theme = 'dark'">Dark</n-button>
-    <n-button @click="theme = 'light'">Light</n-button>
+    <n-button @click="theme = 'dark'">深色</n-button>
+    <n-button @click="theme = 'light'">浅色</n-button>
   </n-space>
   <n-config-provider :theme="theme">
     <n-card>

@@ -8,4 +8,4 @@ export * from './locales'
 export * from './components'
 export * from './styles'
 
-export { darkTheme } from './themes'
+export { darkTheme, lightTheme } from './themes'

@@ -1,17 +1,17 @@
-# Get Theme
+# 获取主题（deprecated)
 
-Use `n-config-consumer` to get the theme at current position.
+使用配置消费者 `n-config-consumer` 来获取当前位置上的主题。
 
 ```html
 <n-space vertical>
   <n-space>
-    <n-button @click="theme = 'dark'">Dark</n-button>
-    <n-button @click="theme = 'light'">Light</n-button>
+    <n-button @click="theme = 'dark'">深色</n-button>
+    <n-button @click="theme = 'light'">浅色</n-button>
   </n-space>
   <n-config-provider :theme="theme">
     <n-card>
       <n-config-consumer @theme-change="handleThemeChange" #="{ theme }">
-        <div>theme: {{ theme }}</div>
+        <div>主题：{{ theme }}</div>
       </n-config-consumer>
     </n-card>
   </n-config-provider>

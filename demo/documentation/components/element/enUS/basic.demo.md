@@ -1,23 +1,37 @@
 # Basic
 
-When `n-config-provider` provides dark theme, it applies `n-dark-theme` class on `n-element`. When `n-config-provider` provides light theme, it applies `n-light-theme` class on it. If neither, it won't apply any additional class on it. Just like other themed Naive UI components.
-
 It is very useful to create themed component.
 
 ```html
-<n-element tag="span" class="myel"> My Element </n-element>
+<n-space vertical>
+  <n-space>
+    <n-button @click="theme = darkTheme">Dark</n-button>
+    <n-button @click="theme = lightTheme">Light</n-button>
+  </n-space>
+  <n-config-provider :unstable-theme="theme">
+    <n-card>
+      <n-el
+        tag="span"
+        style="color: var(--primary-color); transition: .3s var(--cubic-bezier-ease-in-out);"
+      >
+        I am a Span.
+      </n-el>
+    </n-card>
+  </n-config-provider>
+</n-space>
 ```
 
-```css
-.myel {
-  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+```js
+import { ref } from 'vue'
+import { darkTheme, lightTheme } from 'naive-ui'
 
-.myel.n-light-theme {
-  color: green;
-}
-
-.myel.n-dark-theme {
-  color: aquamarine;
+export default {
+  setup () {
+    return {
+      darkTheme,
+      lightTheme,
+      theme: ref(lightTheme)
+    }
+  }
 }
 ```

@@ -1,4 +1,4 @@
-# 使用样式方案（弃用）
+# 使用样式方案（deprecated)
 
 Naive UI 有一组内置的样式方案，对创建一个 Naive UI 相同风格的组件时很有帮助。配置消费者 `n-config-consumer` 和元素 `n-element` 可以读取样式方案。
 

@@ -5,36 +5,33 @@ Naive UI has `n-element` component. See [Element](n-element).
 ```html
 <n-space vertical>
   <n-space>
-    <n-button @click="theme = 'dark'">Dark</n-button>
-    <n-button @click="theme = 'light'">Light</n-button>
+    <n-button @click="theme = darkTheme">Dark</n-button>
+    <n-button @click="theme = lightTheme">Light</n-button>
   </n-space>
-  <n-config-provider :theme="theme">
+  <n-config-provider :unstable-theme="theme">
     <n-card>
-      <n-el tag="span" class="oops"> I am a span </n-el>
+      <n-el
+        tag="span"
+        style="color: var(--primary-color); transition: .3s var(--cubic-bezier-ease-in-out);"
+      >
+        I am a Span.
+      </n-el>
     </n-card>
   </n-config-provider>
 </n-space>
 ```
 
 ```js
+import { ref } from 'vue'
+import { darkTheme, lightTheme } from 'naive-ui'
+
 export default {
-  data () {
+  setup () {
     return {
-      theme: 'dark'
+      darkTheme,
+      lightTheme,
+      theme: ref(lightTheme)
     }
   }
-}
-```
-
-```css
-.oops {
-  color: #000;
-  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.oops.n-light-theme {
-  color: green;
-}
-.oops.n-dark-theme {
-  color: aquamarine;
 }
 ```
