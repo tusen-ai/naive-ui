@@ -2,7 +2,7 @@ import { h, computed, inject, ref, Transition, defineComponent } from 'vue'
 import { VBinder, VTarget, VFollower } from 'vueuc'
 import { useMemo } from 'vooks'
 import { ChevronRightIcon } from '../../_base/icons'
-import { useDelayedTrue } from '../../_utils/composable'
+import { useDeferredTrue } from '../../_utils/composable'
 import { render } from '../../_utils'
 import { NIcon } from '../../icon'
 import { isSubmenuNode } from './utils'
@@ -59,7 +59,7 @@ export default defineComponent({
     const shouldDelayRef = computed(() => {
       return NDropdown.keyboardKey === null && NDropdown.animated === false
     })
-    const delayedSubmenuRef = useDelayedTrue(
+    const delayedSubmenuRef = useDeferredTrue(
       showSubmenuRef,
       300,
       shouldDelayRef

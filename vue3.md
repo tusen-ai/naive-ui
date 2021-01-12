@@ -398,6 +398,12 @@
   - [x] treemate activePath includeGroup: false
   - [ ] select menu multiple, when show=true, checkmark transiton not working
   - [ ] menu + dropdown collapsed 时候 menu item 不更新
+  - [ ] 拆分 dateFns locale
+  - [ ] 更新一波文档 props
+  - [ ] 更新样式的文档
+  - [ ] 试图把组件的 demo 放到 src 里面
+  - [ ] 去掉仅存的 mixin
+  - [ ] form item default type explain
 
 ## Info
 

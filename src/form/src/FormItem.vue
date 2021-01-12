@@ -71,12 +71,12 @@
 </template>
 
 <script>
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, toRef } from 'vue'
 import Schema from 'async-validator'
 import { get } from 'lodash-es'
 import { createId } from 'seemly'
-import { registerable, useTheme } from '../../_mixins'
-import { warn, createKey } from '../../_utils'
+import { useTheme } from '../../_mixins'
+import { warn, createKey, useInjectionInstanceCollection } from '../../_utils'
 import { formLight } from '../styles'
 import { formItemMisc, formItemSize, formItemRule } from './utils'
 import Feedbacks from './Feedbacks.vue'
@@ -124,7 +124,6 @@ export default defineComponent({
   components: {
     Feedbacks
   },
-  mixins: [registerable('NForm', 'formItems', 'path')],
   inject: {
     NForm: {
       default: null
@@ -207,6 +206,7 @@ export default defineComponent({
     }
   },
   setup (props) {
+    useInjectionInstanceCollection('NForm', 'formItems', toRef(props, 'path'))
     const formItemSizeReactive = formItemSize(props)
     const formItemMiscReactive = formItemMisc(props)
     const { mergedSize: mergedSizeRef } = formItemSizeReactive
@@ -337,7 +337,7 @@ export default defineComponent({
         suppressWarning: true
       }
     ) {
-      const path = this.path
+      const { path } = this
       /**
        * If not path is specified, not data will be validated, so any value will
        * be valid.

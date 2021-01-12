@@ -78,7 +78,7 @@ export default defineComponent({
     validate (callback, shouldRuleBeApplied = () => true) {
       return new Promise((resolve, reject) => {
         const formItemValidationPromises = []
-        const formItems = this.formItems
+        const { formItems } = this
         for (const key of Object.keys(formItems)) {
           const formItemInstances = formItems[key]
           for (const formItemInstance of formItemInstances) {

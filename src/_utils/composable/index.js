@@ -14,6 +14,39 @@ export function useInjectionRef (injectionName, key, fallback) {
   return toRef(injection, key)
 }
 
+export function useInjectionInstanceCollection (
+  injectionName,
+  collectionKey,
+  registerKeyRef
+) {
+  const injection = inject(injectionName, null)
+  if (injection === null) return
+  const vm = getCurrentInstance().proxy
+  watch(registerKeyRef, registerInstance)
+  registerInstance(registerKeyRef.value)
+  onBeforeUnmount(() => {
+    registerInstance(undefined, registerKeyRef.value)
+  })
+  function registerInstance (key, oldKey) {
+    const collection = injection[collectionKey]
+    if (oldKey !== undefined) removeInstance(collection, oldKey)
+    if (key !== undefined) addInstance(collection, key)
+  }
+  function removeInstance (collection, key) {
+    if (!collection[key]) collection[key] = []
+    collection[key].splice(
+      collection[key].findIndex((instance) => instance === vm),
+      1
+    )
+  }
+  function addInstance (collection, key) {
+    if (!collection[key]) collection[key] = []
+    if (!~collection[key].findIndex((instance) => instance === vm)) {
+      collection[key].push(vm)
+    }
+  }
+}
+
 export function useInjectionCollection (injectionName, collectionKey, valueRef) {
   const injection = inject(injectionName, null)
   if (injection === null) return
@@ -62,7 +95,7 @@ export function useInjectionElementCollection (
   })
 }
 
-export function useDelayedTrue (valueRef, delay, shouldDelayRef) {
+export function useDeferredTrue (valueRef, delay, shouldDelayRef) {
   if (!delay) return valueRef
   const delayedRef = ref(valueRef.value)
   let timerId = null

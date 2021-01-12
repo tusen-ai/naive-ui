@@ -1,5 +1,3 @@
-export { default as registerable } from './registerable'
-
 export { default as useFormItem } from './use-form-item'
 export { default as useTheme } from './use-theme'
 export { default as useConfig } from './use-config'
