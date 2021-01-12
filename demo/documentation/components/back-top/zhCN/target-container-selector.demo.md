@@ -3,21 +3,7 @@
 你可以设定监听哪个元素来触发 Back Top。
 
 ```html
-<n-back-top
-  :listen-to="target"
-  :bottom="220"
-  :visibility-height="10"
-  :themed-style="{
-    light: {
-      color: 'rgb(0, 0, 0)',
-      backgroundColor: 'rgba(0, 0, 0, .3)'
-    },
-    dark: {
-      color: 'rgb(255, 255, 255)',
-      backgroundColor: 'rgba(255, 255, 255, .3)'
-    }
-  }"
->
+<n-back-top :listen-to="target" :bottom="220" :visibility-height="10">
   <div
     style="width: 200px; height: 40px; line-height: 40px; text-align: center; font-size: 14px;"
   >

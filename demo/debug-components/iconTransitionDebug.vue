@@ -14,18 +14,7 @@
     </n-button>
     <div style="position: relative">
       <n-base-icon-transition v-if="show">
-        <n-icon
-          v-if="i === 0"
-          :size="60"
-          :themed-style="{
-            dark: {
-              fill: 'white'
-            },
-            light: {
-              fill: 'black'
-            }
-          }"
-        >
+        <n-icon v-if="i === 0" :size="60">
           <md-cash />
         </n-icon>
         <n-icon v-else-if="i === 1" :size="60">
