@@ -34,7 +34,7 @@
 <script>
 import { defineComponent, ref, computed } from 'vue'
 import { throttle } from 'lodash-es'
-import { useTheme } from '../../_mixins'
+import { useTheme, useHljs } from '../../_mixins'
 import { warn } from '../../_utils'
 import { NScrollbar } from '../../scrollbar'
 import { NCode } from '../../code'
@@ -120,6 +120,7 @@ export default defineComponent({
     return {
       scrollbarRef: ref(null),
       mergedTheme: themeRef,
+      mergedHljs: useHljs(props),
       cssVars: computed(() => {
         const {
           self: {
@@ -167,9 +168,6 @@ export default defineComponent({
     this.handleWheel = throttle(this.handleWheel, 300)
   },
   methods: {
-    getHljs () {
-      return this.hljs || this.$naive.hljs
-    },
     handleScroll (e) {
       const container = e.target
       const content = e.target.firstElementChild

@@ -50,7 +50,7 @@
 <script>
 import { computed, readonly, ref } from 'vue'
 import version from '../src/version'
-import { i18n } from './util-composables'
+import { i18n } from './utils/composables'
 import {
   useThemeName,
   useLocaleName,

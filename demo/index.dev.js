@@ -1,16 +1,12 @@
 import { createApp } from 'vue'
 import { installDemoComponents } from './init'
-import hljs from './hljs'
 import SiteRoot from './SiteRoot.vue'
 import naive from '../src/index'
-import './font'
 import { routes, childRoutes } from './routes/routes'
 import createDemoRouter from './routes/router'
 
 import debugRouteMixin from './routes/debug-route-mixin'
 debugRouteMixin(routes, childRoutes)
-
-naive.setHljs(hljs)
 
 const app = createApp(SiteRoot)
 

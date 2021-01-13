@@ -10,20 +10,33 @@ If you have some logs to show, use log.
 
 In hightlight demo, we defined a language called `naive-log` which will highlight all the numbers of line. The following code shows how we defined it. If you want to know more about hightlight.js, see <n-a href="https://highlightjs.org/">hightlight.js</n-a> and <n-a href="https://highlightjs.readthedocs.io/en/latest/index.html">highlight.js developer documentation</n-a>
 
-```js
-// ...
-hljs.registerLanguage('naive-log', () => ({
-  contains: [
-    {
-      className: 'number',
-      begin: /\d+/
-    }
-  ]
-}))
+```html
+<template>
+  <n-config-provider :hljs="hljs">
+    <my-app />
+  </n-config-provider>
+</template>
 
-naive.setHljs(hljs)
-app.use(naive)
-// ...
+<script>
+  import hljs from 'highlight.js/lib/core'
+
+  hljs.registerLanguage('naive-log', () => ({
+    contains: [
+      {
+        className: 'number',
+        begin: /\d+/
+      }
+    ]
+  }))
+
+  export default {
+    setup() {
+      return {
+        hljs
+      }
+    }
+  }
+</script>
 ```
 
 ## Demos

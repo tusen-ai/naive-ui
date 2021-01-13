@@ -5,6 +5,7 @@
     :unstable-theme="theme"
     :locale="locale"
     :date-locale="dateLocale"
+    :hljs="hljs"
   >
     <n-loading-bar-provider>
       <n-message-provider>

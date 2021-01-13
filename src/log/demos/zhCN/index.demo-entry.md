@@ -10,20 +10,33 @@
 
 在本页如何高亮的演示中，我们定义了一个叫做 `naive-log` 的语言来高亮全部的数字。下面的代码是我们怎么定义的。如果你想了解 highlight.js，可以参考 <n-a href="https://highlightjs.org/">hightlight.js</n-a> 和 <n-a href="https://highlightjs.readthedocs.io/en/latest/index.html">highlight.js developer documentation</n-a>
 
-```js
-// ...
-hljs.registerLanguage('naive-log', () => ({
-  contains: [
-    {
-      className: 'number',
-      begin: /\d+/
-    }
-  ]
-}))
+```html
+<template>
+  <n-config-provider :hljs="hljs">
+    <my-app />
+  </n-config-provider>
+</template>
 
-naive.setHljs(hljs)
-app.use(naive)
-// ...
+<script>
+  import hljs from 'highlight.js/lib/core'
+
+  hljs.registerLanguage('naive-log', () => ({
+    contains: [
+      {
+        className: 'number',
+        begin: /\d+/
+      }
+    ]
+  }))
+
+  export default {
+    setup() {
+      return {
+        hljs
+      }
+    }
+  }
+</script>
 ```
 
 ## 演示

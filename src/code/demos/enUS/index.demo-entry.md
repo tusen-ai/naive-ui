@@ -6,19 +6,29 @@
   Due to package size, Naive UI doesn't include highlight.js. If you want use Code, make sure you have set highlightjs before using it.
 </n-alert>
 
-The following code shows how to set hljs of Naive UI. Importing highlight.js on demand is recommonded, because it can significantly reduce bundle size of your app.
+The following code shows how to set hljs of Code. Importing highlight.js on demand is recommonded, because it can significantly reduce bundle size of your app.
 
-```js
-// ...
-import naive from 'naive-ui'
-import hljs from 'highlight.js/lib/core'
-import cpp from 'highlight.js/lib/languages/cpp'
+```html
+<template>
+  <n-config-provider :hljs="hljs">
+    <my-app />
+  </n-config-provider>
+</template>
 
-hljs.registerLanguage('cpp', cpp)
-naive.setHljs(hljs)
+<script>
+  import hljs from 'highlight.js/lib/core'
+  import cpp from 'highlight.js/lib/languages/cpp'
 
-// ...
-app.use(naive)
+  hljs.registerLanguage('cpp', cpp)
+
+  export default {
+    setup() {
+      return {
+        hljs
+      }
+    }
+  }
+</script>
 ```
 
 ## Demos

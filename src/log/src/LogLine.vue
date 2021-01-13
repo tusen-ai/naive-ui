@@ -4,6 +4,7 @@
 
 <script>
 import { defineComponent } from 'vue'
+import { useConfig } from '../../_mixins'
 
 export default defineComponent({
   inject: {
@@ -15,6 +16,11 @@ export default defineComponent({
     line: {
       type: String,
       default: undefined
+    }
+  },
+  setup (props) {
+    return {
+      ...useConfig(props)
     }
   },
   computed: {
@@ -50,15 +56,13 @@ export default defineComponent({
         ).content
       }
     },
-    getHljs () {
-      return this.hljs || this.$naive.hljs
-    },
     generateCodeHTML (language, code, trim) {
-      const languageValid = !!(language && this.getHljs().getLanguage(language))
+      const { mergedHljs: hljs } = this.NLog
+      const languageValid = !!(language && hljs.getLanguage(language))
       if (trim) code = code.trim()
       return {
         valid: languageValid,
-        content: this.getHljs().highlight(language, code).value
+        content: hljs.highlight(language, code).value
       }
     }
   }

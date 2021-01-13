@@ -57,7 +57,7 @@
 import { nextTick } from 'vue'
 import { CodeOutline } from '@vicons/ionicons-v5'
 import { useDisplayMode } from '../store'
-import { i18n } from '../util-composables'
+import { i18n } from '../utils/composables'
 
 export default {
   components: {

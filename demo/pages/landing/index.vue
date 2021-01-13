@@ -54,7 +54,7 @@
 import LandingFooter from './Footer.vue'
 import leftImage from './Left.vue'
 import rightImage from './Right.vue'
-import { i18n } from '../../util-composables'
+import { i18n } from '../../utils/composables'
 import { useThemeName } from '../../store'
 
 export default {

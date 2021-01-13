@@ -4,13 +4,11 @@ import {
   nextTick,
   toRef,
   watch,
-  getCurrentInstance,
   onMounted,
   ref,
   computed
 } from 'vue'
-import { useTheme, useConfig } from '../../_mixins'
-import { warn } from '../../_utils'
+import { useTheme, useHljs } from '../../_mixins'
 import { codeLight } from '../styles'
 import style from './styles/index.cssr.js'
 
@@ -36,22 +34,10 @@ export default defineComponent({
     }
   },
   setup (props, { slots }) {
-    const vm = getCurrentInstance().proxy
     const codeRef = ref(null)
-    const { NConfigProvider } = useConfig(props)
-    if (
-      __DEV__ &&
-      !props.hljs &&
-      !NConfigProvider.mergedHljs &&
-      !vm.$naive.hljs
-    ) {
-      warn('code', 'hljs is not set.')
-    }
-    const getHljs = () => {
-      return props.hljs || NConfigProvider.mergedHljs || vm.$naive.hljs
-    }
+    const hljsRef = useHljs(props)
     const generateCodeHTML = (language, code, trim) => {
-      const hljs = getHljs()
+      const { value: hljs } = hljsRef
       const languageValid = !!(language && hljs.getLanguage(language))
       if (trim) code = code.trim()
       return {

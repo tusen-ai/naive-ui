@@ -1,13 +1,9 @@
 import { createApp } from 'vue'
 import naive from 'naive-ui'
 import { installDemoComponents } from './init'
-import hljs from './hljs'
 import SiteRoot from './SiteRoot.vue'
-import './font'
 import { routes } from './routes/routes'
 import createDemoRouter from './routes/router'
-
-naive.setHljs(hljs)
 
 const app = createApp(SiteRoot)
 

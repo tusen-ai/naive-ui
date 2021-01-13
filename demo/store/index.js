@@ -1,8 +1,9 @@
 import { computed, ref, provide, reactive, toRef, inject } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { darkTheme, enUS, zhCN, dateEnUS, dateZhCN } from '../../src'
-import menuOptions from './menu-options'
 import { i18n } from '../utils/composables'
+import menuOptions from './menu-options'
+import hljs from './hljs'
 
 const storeKey = 'site-store'
 
@@ -88,6 +89,7 @@ export function siteSetup () {
   )
   i18n.provide(computed(() => localeNameRef.value))
   return {
+    hljs,
     theme: themeRef,
     locale: localeRef,
     dateLocale: dateLocaleRef

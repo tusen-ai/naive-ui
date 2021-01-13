@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { i18n } from '../util-composables'
+import { i18n } from '../utils/composables'
 
 export default {
   name: 'EditOnGithubHeader',
