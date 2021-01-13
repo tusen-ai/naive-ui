@@ -13,11 +13,6 @@
   />
   <n-progress
     type="line"
-    :percentage="percentage"
-    :indicator-placement="'inside-label'"
-  />
-  <n-progress
-    type="line"
     status="info"
     :percentage="percentage"
     :show-indicator="false"
@@ -28,12 +23,6 @@
     status="info"
     :percentage="percentage"
     :indicator-placement="'inside'"
-  />
-  <n-progress
-    type="line"
-    status="info"
-    :percentage="percentage"
-    :indicator-placement="'inside-label'"
   />
   <n-progress
     type="line"
@@ -50,12 +39,6 @@
   />
   <n-progress
     type="line"
-    status="success"
-    :percentage="percentage"
-    :indicator-placement="'inside-label'"
-  />
-  <n-progress
-    type="line"
     status="warning"
     :percentage="percentage"
     :show-indicator="false"
@@ -69,12 +52,6 @@
   />
   <n-progress
     type="line"
-    status="warning"
-    :percentage="percentage"
-    :indicator-placement="'inside-label'"
-  />
-  <n-progress
-    type="line"
     status="error"
     :percentage="percentage"
     :show-indicator="false"
@@ -85,12 +62,6 @@
     status="error"
     :percentage="percentage"
     :indicator-placement="'inside'"
-  />
-  <n-progress
-    type="line"
-    status="error"
-    :percentage="percentage"
-    :indicator-placement="'inside-label'"
   />
   <n-space>
     <n-button @click="minus"> 减 10% </n-button>

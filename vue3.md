@@ -406,7 +406,6 @@
   - [x] form item default type explain
   - [x] selection focus style
   - [x] refactor site use store!!! singleton
-  - [ ] vooks without life cycle hooks
 
 ## Info
 

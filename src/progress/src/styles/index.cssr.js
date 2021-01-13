@@ -143,12 +143,12 @@ export default c([
       cB('progress-graph-line', [
         cM('indicator-inside', [
           cB('progress-graph-line-rail', {
-            height: '21px',
-            borderRadius: '10.5px'
+            height: '16px',
+            borderRadius: '10px'
           }, [
             cB('progress-graph-line-fill', {
-              height: '21px',
-              borderRadius: '10.5px'
+              height: 'inherit',
+              borderRadius: '10px'
             }),
             cB('progress-graph-line-indicator', `
               background: transparent;
@@ -156,16 +156,16 @@ export default c([
               text-align: right;
               margin-left: 14px;
               margin-right: 14px;
-              height: 21px;
-              font-size: var(--font-size);
-              line-height: 21px;
+              height: inherit;
+              line-height: inherit;
+              font-size: 12px;
               color: var(--text-color-line-inner);
               transition: color .3s var(--bezier);
             `)
           ])
         ]),
         cM('indicator-inside-label', `
-          height: 21px;
+          height: 16px;
           display: flex;
           align-items: center;
         `, [
@@ -175,14 +175,14 @@ export default c([
           }),
           cB('progress-graph-line-indicator', `
             background: var(--fill-color);
-            font-size: var(--font-size);
+            font-size: 12px;
             transform: translateZ(0);
             display: flex;
             vertical-align: middle;
-            height: 21px;
-            line-height: 21px;
+            height: 16px;
+            line-height: 16px;
             padding: 0 10px;
-            border-radius: 10.5px;
+            border-radius: 10px;
             position: absolute;
             white-space: nowrap;
             color: var(--text-color-line-inner);

@@ -13,11 +13,6 @@ In fact, progress of line type don't need four different styles. However, since 
   />
   <n-progress
     type="line"
-    :percentage="percentage"
-    :indicator-placement="'inside-label'"
-  />
-  <n-progress
-    type="line"
     status="info"
     :percentage="percentage"
     :show-indicator="false"
@@ -28,12 +23,6 @@ In fact, progress of line type don't need four different styles. However, since 
     status="info"
     :percentage="percentage"
     :indicator-placement="'inside'"
-  />
-  <n-progress
-    type="line"
-    status="info"
-    :percentage="percentage"
-    :indicator-placement="'inside-label'"
   />
   <n-progress
     type="line"
@@ -50,12 +39,6 @@ In fact, progress of line type don't need four different styles. However, since 
   />
   <n-progress
     type="line"
-    status="success"
-    :percentage="percentage"
-    :indicator-placement="'inside-label'"
-  />
-  <n-progress
-    type="line"
     status="warning"
     :percentage="percentage"
     :show-indicator="false"
@@ -69,12 +52,6 @@ In fact, progress of line type don't need four different styles. However, since 
   />
   <n-progress
     type="line"
-    status="warning"
-    :percentage="percentage"
-    :indicator-placement="'inside-label'"
-  />
-  <n-progress
-    type="line"
     status="error"
     :percentage="percentage"
     :show-indicator="false"
@@ -85,12 +62,6 @@ In fact, progress of line type don't need four different styles. However, since 
     status="error"
     :percentage="percentage"
     :indicator-placement="'inside'"
-  />
-  <n-progress
-    type="line"
-    status="error"
-    :percentage="percentage"
-    :indicator-placement="'inside-label'"
   />
   <n-space>
     <n-button @click="minus"> Minus 10% </n-button>

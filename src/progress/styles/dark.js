@@ -17,7 +17,7 @@ export default {
       fontSize,
       fontSizeCircle: '28px',
       railColor: progressRailColorOverlay,
-      railHeight: '10px',
+      railHeight: '8px',
       iconSizeCircle: '36px',
       iconSizeLine: '18px',
       iconColor: infoColor,
