@@ -4,32 +4,31 @@ export const childRoutes = withPrefix('/:lang/:theme/doc', [
   // basic docs
   {
     path: '/intro',
-    component: () => import('../documentation/intro/intro/index.entry')
+    component: () => import('../pages/doc/intro/index.entry')
   },
   {
     path: '/start',
-    component: () => import('../documentation/intro/start/index.entry')
+    component: () => import('../pages/doc/start/index.entry')
   },
   {
     path: '/from-v1',
-    component: () => import('../documentation/intro/vue3/index.entry')
+    component: () => import('../pages/doc/vue3/index.entry')
   },
   {
     path: '/experimental-features',
-    component: () =>
-      import('../documentation/intro/experimental-features/index.entry')
+    component: () => import('../pages/doc/experimental-features/index.entry')
   },
   {
     path: '/changelog',
-    component: () => import('../documentation/intro/changelog/index.entry')
+    component: () => import('../pages/doc/changelog/index.entry')
   },
   {
     path: '/dev-guidelines',
-    component: () => import('../documentation/intro/dev-guidelines/index.entry')
+    component: () => import('../pages/doc/dev-guidelines/index.entry')
   },
   {
     path: '/n-theme',
-    component: () => import('../documentation/theme/index.entry')
+    component: () => import('../pages/doc/theme/index.entry')
   },
   // components
   {
@@ -304,7 +303,7 @@ export const childRoutes = withPrefix('/:lang/:theme/doc', [
   {
     path: '/n-nimbus-service-layout',
     component: () =>
-      import('../documentation/deprecated/nimbus-service-layout/index.entry')
+      import('../pages/doc/deprecated/nimbus-service-layout/index.entry')
   }
 ])
 
@@ -312,17 +311,17 @@ export const routes = [
   {
     name: 'site',
     path: '/:lang/:theme',
-    component: () => import('../SiteProvider.vue'),
+    component: () => import('../Site.vue'),
     children: [
       {
         name: 'home',
         path: '/:lang/:theme',
-        component: () => import('../documentation/landing/index.vue')
+        component: () => import('../pages/landing/index.vue')
       },
       {
         name: 'doc',
         path: '/:lang/:theme/doc',
-        component: () => import('../Documentation.vue'),
+        component: () => import('../pages/doc/index.vue'),
         children: childRoutes
       }
     ]

@@ -1,64 +1,61 @@
 <template>
-  <n-config-consumer>
-    <template #default="{ theme }">
+  <div>
+    <n-layout-footer position="absolute" style="z-index: auto">
+      <landing-footer style="max-width: 1200px; margin: auto" />
+    </n-layout-footer>
+    <div class="banner">
+      <left-image class="left-image" />
+      <right-image class="right-image" />
+      <n-h1 style="margin-top: 0" class="naive-title">
+        <span
+          @mouseenter="handleTitleMouseEnter"
+          @mouseleave="handleTitleMouseLeave"
+        >Na{{ hover ? 'ï' : 'i' }}ve UI</span>
+      </n-h1>
+      <n-p style="font-size: 16px; margin-bottom: 0">
+        {{ t('intro1') }}
+      </n-p>
+      <n-p
+        style="
+          font-size: 16px;
+          margin-bottom: 4px;
+          margin-top: 4px;
+          font-weight: 500;
+        "
+      >
+        {{ t('intro2') }}
+      </n-p>
+      <n-p style="font-size: 16px; margin-top: 0">
+        {{ t('intro3') }}
+      </n-p>
       <div>
-        <n-layout-footer position="absolute" style="z-index: auto">
-          <landing-footer style="max-width: 1200px; margin: auto" />
-        </n-layout-footer>
-        <div class="banner">
-          <left-image class="left-image" />
-          <right-image class="right-image" />
-          <n-h1 style="margin-top: 0" class="naive-title">
-            <span
-              @mouseenter="handleTitleMouseEnter"
-              @mouseleave="handleTitleMouseLeave"
-            >Na{{ hover ? 'ï' : 'i' }}ve UI</span>
-          </n-h1>
-          <n-p style="font-size: 16px; margin-bottom: 0">
-            {{ t('intro1') }}
-          </n-p>
-          <n-p
-            style="
-              font-size: 16px;
-              margin-bottom: 4px;
-              margin-top: 4px;
-              font-weight: 500;
-            "
-          >
-            {{ t('intro2') }}
-          </n-p>
-          <n-p style="font-size: 16px; margin-top: 0">
-            {{ t('intro3') }}
-          </n-p>
-          <div>
-            <n-button
-              type="default"
-              size="large"
-              style="margin-right: 12px"
-              @click="handleThemeChangeClick"
-            >
-              {{ t('intro4') }}
-            </n-button>
-            <n-button
-              type="primary"
-              :ghost="theme === 'dark'"
-              size="large"
-              @click="handleStartClick"
-            >
-              {{ t('start') }}
-            </n-button>
-          </div>
-        </div>
+        <n-button
+          type="default"
+          size="large"
+          style="margin-right: 12px"
+          @click="handleThemeChangeClick"
+        >
+          {{ t('intro4') }}
+        </n-button>
+        <n-button
+          type="primary"
+          :ghost="theme === 'dark'"
+          size="large"
+          @click="handleStartClick"
+        >
+          {{ t('start') }}
+        </n-button>
       </div>
-    </template>
-  </n-config-consumer>
+    </div>
+  </div>
 </template>
 
 <script>
 import LandingFooter from './Footer.vue'
 import leftImage from './Left.vue'
 import rightImage from './Right.vue'
-import { i18n, useSiteThemeName } from '../../util-composables'
+import { i18n } from '../../util-composables'
+import { useThemeName } from '../../store'
 
 export default {
   components: {
@@ -68,7 +65,7 @@ export default {
   },
   setup () {
     return {
-      theme: useSiteThemeName(),
+      theme: useThemeName(),
       ...i18n({
         'zh-CN': {
           start: '开始使用',

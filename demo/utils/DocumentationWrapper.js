@@ -1,4 +1,4 @@
-import { i18n } from '../util-composables'
+import { i18n } from './composables'
 
 export default {
   setup () {

@@ -405,6 +405,7 @@
   - [x] 去掉仅存的 mixin
   - [ ] form item default type explain
   - [x] selection focus style
+  - [ ] refactor site use store!!! singleton
 
 ## Info
 

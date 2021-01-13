@@ -50,13 +50,13 @@
 <script>
 import { computed, readonly, ref } from 'vue'
 import version from '../src/version'
+import { i18n } from './util-composables'
 import {
-  useSiteThemeName,
-  useSiteLocaleName,
-  useSiteDisplayMode,
-  i18n,
-  useSiteFlattenedOptions
-} from './util-composables'
+  useThemeName,
+  useLocaleName,
+  useDisplayMode,
+  useFlattenedDocOptions
+} from './store'
 
 function match (pattern, string) {
   if (!pattern.length) return true
@@ -118,10 +118,10 @@ export default {
       searchInputValue: ref(''),
       version,
       dev: __DEV__,
-      displayMode: useSiteDisplayMode(),
-      lang: useSiteLocaleName(),
-      theme: useSiteThemeName(),
-      items: useSiteFlattenedOptions(),
+      displayMode: useDisplayMode(),
+      lang: useLocaleName(),
+      theme: useThemeName(),
+      items: useFlattenedDocOptions(),
       menuItems: menuItemsRef,
       themeOptions: themeOptionsRef,
       langOptions: readonly({

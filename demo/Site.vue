@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { onMounted, inject } from 'vue'
 import SiteHeader from './SiteHeader.vue'
 import { loadingBarApiRef } from './routes/router'
 
@@ -20,10 +21,12 @@ export default {
   components: {
     SiteHeader
   },
-  inject: ['loadingBar'],
-  mounted () {
-    this.loadingBar.finish()
-    loadingBarApiRef.value = this.loadingBar
+  setup () {
+    const loadingBar = inject('loadingBar')
+    onMounted(() => {
+      loadingBarApiRef.value = loadingBar
+      loadingBar.finish()
+    })
   }
 }
 </script>

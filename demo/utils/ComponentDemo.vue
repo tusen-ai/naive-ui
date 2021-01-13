@@ -56,7 +56,8 @@
 <script>
 import { nextTick } from 'vue'
 import { CodeOutline } from '@vicons/ionicons-v5'
-import { i18n, useSiteDisplayMode } from '../util-composables'
+import { useDisplayMode } from '../store'
+import { i18n } from '../util-composables'
 
 export default {
   components: {
@@ -79,7 +80,7 @@ export default {
   },
   setup () {
     return {
-      displayMode: useSiteDisplayMode(),
+      displayMode: useDisplayMode(),
       ...i18n({
         'zh-CN': {
           show: '显示代码',

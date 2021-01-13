@@ -6,20 +6,13 @@
     :sider-props="siderProps"
   >
     <router-view />
-    <landing-footer
-      style="padding: 32px 204px 16px 56px; text-align: left; font-size: 14px"
-    />
   </n-service-layout>
 </template>
 
 <script>
-import LandingFooter from './documentation/landing/Footer.vue'
-import { useSiteOptions } from './util-composables'
+import { useDocOptions } from '../../store'
 
 export default {
-  components: {
-    LandingFooter
-  },
   provide () {
     return {
       NDocRoot: this
@@ -31,7 +24,7 @@ export default {
   },
   setup () {
     return {
-      items: useSiteOptions(),
+      items: useDocOptions(),
       memorizedPath: null,
       siderProps: {
         style: {

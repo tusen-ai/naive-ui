@@ -5,6 +5,8 @@ import DocumentationWrapper from './utils/DocumentationWrapper.js'
 import EditOnGithubButton from './utils/EditOnGithubButton.vue'
 import EditOnGithubHeader from './utils/EditOnGithubHeader.vue'
 import './styles/demo.css'
+import 'vfonts/Inter.css'
+import 'vfonts/FiraCode.css'
 
 export function installDemoComponents (app) {
   app.component('ComponentDemo', ComponentDemo)

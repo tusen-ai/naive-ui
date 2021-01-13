@@ -65,7 +65,8 @@ export default defineComponent({
     provide('loadingBar', methods)
     provide('NLoadingBarProps', props)
     return {
-      loadingBarRef
+      loadingBarRef,
+      ...methods
     }
   },
   render () {

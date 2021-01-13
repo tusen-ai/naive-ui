@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import naive from 'naive-ui'
 import { installDemoComponents } from './init'
 import hljs from './hljs'
-import DemoRouterView from './DemoRouterView.vue'
+import SiteRoot from './SiteRoot.vue'
 import './font'
 import { routes } from './routes/routes'
 import createDemoRouter from './routes/router'
@@ -11,7 +11,7 @@ import tusimpleTheme from '../themes/tusimple'
 naive.setHljs(hljs)
 naive.use(tusimpleTheme)
 
-const app = createApp(DemoRouterView)
+const app = createApp(SiteRoot)
 
 const router = createDemoRouter(app, routes)
 

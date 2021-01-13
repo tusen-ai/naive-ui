@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import { installDemoComponents } from './init'
 import hljs from './hljs'
-import DemoRouterView from './DemoRouterView.vue'
+import SiteRoot from './SiteRoot.vue'
 import naive from '../src/index'
 import './font'
 import { routes, childRoutes } from './routes/routes'
@@ -12,7 +12,7 @@ debugRouteMixin(routes, childRoutes)
 
 naive.setHljs(hljs)
 
-const app = createApp(DemoRouterView)
+const app = createApp(SiteRoot)
 
 const router = createDemoRouter(app, routes)
 
