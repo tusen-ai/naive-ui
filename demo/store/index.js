@@ -1,6 +1,13 @@
 import { computed, ref, provide, reactive, toRef, inject } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { darkTheme, enUS, zhCN, dateEnUS, dateZhCN } from '../../src'
+import {
+  darkTheme,
+  enUS,
+  zhCN,
+  dateEnUS,
+  dateZhCN,
+  useOsTheme
+} from '../../src'
 import { i18n } from '../utils/composables'
 import menuOptions from './menu-options'
 import hljs from './hljs'
@@ -37,11 +44,12 @@ export function siteSetup () {
     return route.params.lang === 'zh-CN' ? dateZhCN : dateEnUS
   })
   // theme
+  const osThemeRef = useOsTheme()
   const themeNameRef = computed({
     get () {
       switch (route.params.theme) {
         case 'os-theme':
-          return 'light'
+          return osThemeRef.value
         case 'dark':
           return 'dark'
         default:
