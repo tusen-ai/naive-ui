@@ -1,4 +1,4 @@
-const cleanCssr = require('./utils/clean-cssr')
+const cleanCssr = require('./utils/terse-cssr')
 
 module.exports = () => {
   return {

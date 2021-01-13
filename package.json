@@ -58,13 +58,16 @@
     ]
   },
   "devDependencies": {
+    "@babel/generator": "^7.12.11",
+    "@babel/parser": "^7.12.11",
     "@babel/preset-env": "^7.12.10",
+    "@babel/traverse": "^7.12.12",
     "@rollup/plugin-babel": "^5.2.2",
     "@rollup/plugin-node-resolve": "^10.0.0",
     "@rollup/plugin-replace": "^2.3.4",
     "@types/jest": "^26.0.15",
-    "@vue/compiler-sfc": "^3.0.5",
     "@vitejs/plugin-vue": "^1.0.4",
+    "@vue/compiler-sfc": "^3.0.5",
     "@vue/eslint-config-standard": "^5.1.2",
     "@vue/test-utils": "^2.0.0-beta.12",
     "autoprefixer": "^9.8.6",
