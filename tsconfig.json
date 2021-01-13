@@ -1,0 +1,17 @@
+{
+  "include": ["src/**/*"],
+  "exclude": ["src/_deprecated/icons/**/*", "src/**/*.spec.js"],
+  "compilerOptions": {
+    "strict": true,
+    "strictNullChecks": true,
+    "allowJs": true,
+    "checkJs": true,
+    "module": "ES6",
+    "moduleResolution": "Node",
+    "target": "ES6",
+    "lib": [
+      "ESNext",
+      "DOM"
+    ]
+  }
+}

@@ -1,0 +1,124 @@
+import {
+  ref,
+  watch,
+  onMounted,
+  inject,
+  Ref,
+  getCurrentInstance,
+  onBeforeUnmount
+} from 'vue'
+
+// injection.collection {
+//   key1: [insta, instb]
+//   key2: [instc]
+// }
+export function useInjectionInstanceCollection (
+  injectionName: string,
+  collectionKey: string,
+  registerKeyRef: Ref<any>
+) {
+  const injection = inject<any | null>(injectionName, null)
+  if (injection === null) return
+  const vm = getCurrentInstance()?.proxy
+  watch(registerKeyRef, registerInstance)
+  registerInstance(registerKeyRef.value)
+  onBeforeUnmount(() => {
+    registerInstance(undefined, registerKeyRef.value)
+  })
+  function registerInstance (key?: string, oldKey?: string) {
+    const collection = injection[collectionKey]
+    if (oldKey !== undefined) removeInstance(collection, oldKey)
+    if (key !== undefined) addInstance(collection, key)
+  }
+  function removeInstance (collection: Record<string, any[]>, key: string) {
+    if (!collection[key]) collection[key] = []
+    collection[key].splice(
+      collection[key].findIndex((instance) => instance === vm),
+      1
+    )
+  }
+  function addInstance (collection: Record<string, any[]>, key: string) {
+    if (!collection[key]) collection[key] = []
+    if (!~collection[key].findIndex((instance) => instance === vm)) {
+      collection[key].push(vm)
+    }
+  }
+}
+
+// injection.collection {
+//   key1: [insta.value, instb.value]
+//   key2: [instc.value]
+// }
+export function useInjectionCollection (injectionName: string, collectionKey: string, valueRef: Ref<any>) {
+  const injection = inject<Record<any, any[]> | null>(injectionName, null)
+  if (injection === null) return
+  if (!(collectionKey in injection)) {
+    injection[collectionKey] = []
+  }
+  injection[collectionKey].push(valueRef.value)
+  watch(valueRef, (value, prevValue) => {
+    const collectionArray = injection[collectionKey]
+    const index = collectionArray.findIndex(
+      (collectionValue) => collectionValue === prevValue
+    )
+    if (~index) collectionArray.splice(index, 1)
+    collectionArray.push(value)
+  })
+  onBeforeUnmount(() => {
+    const collectionArray = injection[collectionKey]
+    const index = collectionArray.findIndex(
+      (collectionValue) => collectionValue === valueRef.value
+    )
+    if (~index) collectionArray.splice(index, 1)
+  })
+}
+
+// injection.collection {
+//   key1: [insta.$el, instb.$el]
+//   key2: [instc.$el]
+// }
+export function useInjectionElementCollection (
+  injectionName: string,
+  collectionKey: string,
+  getElement: () => Element
+) {
+  const injection = inject<Record<string, any[]> | null>(injectionName, null)
+  if (injection === null) return
+  if (!(collectionKey in injection)) {
+    injection[collectionKey] = []
+  }
+  onMounted(() => {
+    injection[collectionKey].push(getElement())
+  })
+  onBeforeUnmount(() => {
+    const collectionArray = injection[collectionKey]
+    const element = getElement()
+    const index = collectionArray.findIndex(
+      (collectionElement) => collectionElement === element
+    )
+    if (~index) collectionArray.splice(index, 1)
+  })
+}
+
+export function useDeferredTrue (valueRef: Ref<any>, delay: number, shouldDelayRef: Ref<boolean>): Ref<boolean> {
+  if (!delay) return valueRef
+  const delayedRef = ref(valueRef.value)
+  let timerId: number | null = null
+  watch(valueRef, (value) => {
+    if (timerId !== null) window.clearTimeout(timerId)
+    if (value === true) {
+      if (shouldDelayRef && shouldDelayRef.value === false) {
+        delayedRef.value = true
+      } else {
+        timerId = window.setTimeout(() => {
+          delayedRef.value = true
+        }, delay)
+      }
+    } else {
+      delayedRef.value = false
+    }
+  })
+  return delayedRef
+}
+
+export { useAdjustedTo } from './use-adjusted-to'
