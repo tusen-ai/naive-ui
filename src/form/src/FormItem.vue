@@ -35,10 +35,7 @@
       :key="feedbackId"
       class="n-form-item-feedback-wrapper"
     >
-      <transition
-        name="n-fade-down-transition"
-        :mode="mergedValidationStatus ? 'out-in' : undefined"
-      >
+      <transition name="n-fade-down-transition" mode="out-in">
         <template v-if="hasFeedback">
           <div
             v-if="mergedValidationStatus === 'warning'"
@@ -226,6 +223,7 @@ export default defineComponent({
             labelTextColor,
             asteriskColor,
             lineHeight,
+            feedbackTextColor,
             feedbackTextColorWarning,
             feedbackTextColorError,
             feedbackPadding,
@@ -250,6 +248,7 @@ export default defineComponent({
           '--feedback-padding': feedbackPadding,
           '--feedback-font-size': feedbackFontSize,
           '--feedback-height': feedbackHeight,
+          '--feedback-text-color': feedbackTextColor,
           '--feedback-text-color-warning': feedbackTextColorWarning,
           '--feedback-text-color-error': feedbackTextColorError,
           '--label-text-align': labelTextAlign

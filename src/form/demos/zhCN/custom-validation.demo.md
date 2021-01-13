@@ -32,7 +32,7 @@
 function createStatus (value) {
   switch (value) {
     case '10: 30':
-      return 'success'
+      return undefined
     case '10: 29':
       return 'warning'
     default:
@@ -43,7 +43,7 @@ function createStatus (value) {
 function createFeedback (value) {
   switch (value) {
     case '10: 30':
-      return null
+      return '十点半的飞机已经到了'
     case '10: 29':
       return '虽然差不多了，请把时间调到 10: 30'
     default:

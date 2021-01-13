@@ -13,6 +13,7 @@ import fadeDownTranstion from '../../../_styles/transitions/fade-down'
 // --asterisk-color
 // --label-text-color
 // --bezier
+// --feedback-text-color
 // --feedback-text-color-warning
 // --feedback-text-color-error
 // --label-text-align
@@ -85,7 +86,8 @@ export default cB('form-item', {
     transform-origin: top left;
   `, [
     cB('form-item-feedback', {
-      transition: 'color .3s var(--bezier)'
+      transition: 'color .3s var(--bezier)',
+      color: 'var(--feedback-text-color)'
     }, [
       cM('warning', {
         color: 'var(--feedback-text-color-warning)'

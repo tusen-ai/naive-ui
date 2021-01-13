@@ -5,14 +5,21 @@ export default {
   name: 'Form',
   common: commonLight,
   self (vars) {
-    const { textColor1, errorColor, warningColor, lineHeight } = vars
+    const {
+      textColor1,
+      errorColor,
+      warningColor,
+      lineHeight,
+      textColor3
+    } = vars
     return {
       ...commonVariables,
       lineHeight,
       labelTextColor: textColor1,
       asteriskColor: errorColor,
       feedbackTextColorError: errorColor,
-      feedbackTextColorWarning: warningColor
+      feedbackTextColorWarning: warningColor,
+      feedbackTextColor: textColor3
     }
   }
 }

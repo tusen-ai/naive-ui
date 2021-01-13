@@ -37,7 +37,7 @@ You may need to manually custom the timing and the effect of a validation. Use `
 function createStatus (value) {
   switch (value) {
     case '10: 30':
-      return 'success'
+      return undefined
     case '10: 29':
       return 'warning'
     default:
@@ -48,7 +48,7 @@ function createStatus (value) {
 function createFeedback (value) {
   switch (value) {
     case '10: 30':
-      return null
+      return 'The plane of 10:30 has arrived.'
     case '10: 29':
       return 'Almost there, please set the time to 10: 30'
     default:
