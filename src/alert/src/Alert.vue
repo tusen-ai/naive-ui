@@ -37,8 +37,8 @@
   </n-fade-in-expand-transition>
 </template>
 
-<script>
-import { ref, computed, defineComponent } from 'vue'
+<script lang="ts">
+import { ref, computed, defineComponent, PropType } from 'vue'
 import {
   InfoIcon,
   SuccessIcon,
@@ -48,7 +48,8 @@ import {
 import { NFadeInExpandTransition, NBaseClose, NBaseIcon } from '../../_base'
 import { useTheme } from '../../_mixins'
 import { warn, createKey } from '../../_utils'
-import { alertLight } from '../styles'
+import { alertLight } from '../styles/index'
+import type { AlertThemeVars } from '../styles/index'
 import style from './styles/index.cssr'
 
 export default defineComponent({
@@ -74,9 +75,9 @@ export default defineComponent({
       default: true
     },
     type: {
-      validator (type) {
-        return ['info', 'warning', 'error', 'success', 'default'].includes(type)
-      },
+      type: String as PropType<
+        'info' | 'warning' | 'error' | 'success' | 'default'
+      >,
       default: 'default'
     },
     closable: {
@@ -92,7 +93,8 @@ export default defineComponent({
       default: undefined
     },
     onAfterHide: {
-      validator () {
+      type: Function,
+      validator: () => {
         if (__DEV__) {
           warn(
             'alert',
@@ -105,7 +107,13 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const themeRef = useTheme('Alert', 'Alert', style, alertLight, props)
+    const themeRef = useTheme<AlertThemeVars>(
+      'Alert',
+      'Alert',
+      style,
+      alertLight,
+      props
+    )
     const cssVars = computed(() => {
       const {
         common: { cubicBezierEaseInOut },
