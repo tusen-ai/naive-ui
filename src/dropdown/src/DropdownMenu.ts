@@ -1,20 +1,20 @@
-import { defineComponent, h } from 'vue'
+import { computed, defineComponent, h, PropType, provide, reactive } from 'vue'
+import { TreeNode } from 'treemate'
 import NDropdownOption from './DropdownOption'
 import NDropdownDivider from './DropdownDivider.vue'
 import NDropdownGroup from './DropdownGroup'
 import { isSubmenuNode, isGroupNode, isDividerNode } from './utils'
 
+export interface NDropdownMenuInjection {
+  showIcon: boolean
+  hasSubmenu: boolean
+}
+
 export default defineComponent({
   name: 'DropdownMenu',
-  inject: ['NDropdown'],
-  provide () {
-    return {
-      NDropdownMenu: this
-    }
-  },
   props: {
     tmNodes: {
-      type: Array,
+      type: Array as PropType<TreeNode[]>,
       required: true
     },
     parentKey: {
@@ -22,25 +22,32 @@ export default defineComponent({
       default: null
     }
   },
-  computed: {
-    showIcon () {
-      return this.tmNodes.some((tmNode) => {
-        const { rawNode } = tmNode
-        if (isGroupNode(rawNode)) {
-          return !!rawNode.children?.some((rawChild) => rawChild.icon)
-        }
-        return rawNode.icon
+  setup (props) {
+    provide<NDropdownMenuInjection>(
+      'NDropdownMenu',
+      reactive({
+        showIcon: computed(() => {
+          return props.tmNodes.some((tmNode) => {
+            const { rawNode } = tmNode
+            if (isGroupNode(rawNode)) {
+              return !!rawNode.children?.some((rawChild) => rawChild.icon)
+            }
+            return rawNode.icon
+          })
+        }),
+        hasSubmenu: computed(() => {
+          return props.tmNodes.some((tmNode) => {
+            const { rawNode } = tmNode
+            if (isGroupNode(rawNode)) {
+              return !!rawNode.children?.some((rawChild) =>
+                isSubmenuNode(rawChild)
+              )
+            }
+            return isSubmenuNode(rawNode)
+          })
+        })
       })
-    },
-    hasSubmenu () {
-      return this.tmNodes.some((tmNode) => {
-        const { rawNode } = tmNode
-        if (isGroupNode(rawNode)) {
-          return !!rawNode.children?.some((rawChild) => isSubmenuNode(rawChild))
-        }
-        return isSubmenuNode(rawNode)
-      })
-    }
+    )
   },
   render () {
     const { parentKey } = this

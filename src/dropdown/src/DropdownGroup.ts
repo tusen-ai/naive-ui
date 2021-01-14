@@ -1,4 +1,5 @@
-import { defineComponent, Fragment, h } from 'vue'
+import { defineComponent, Fragment, h, PropType, VNode } from 'vue'
+import { TreeNode } from 'treemate'
 import { warn } from '../../_utils'
 import NDropdownOption from './DropdownOption'
 import NDropdownDivider from './DropdownDivider.vue'
@@ -9,7 +10,7 @@ export default defineComponent({
   name: 'NDropdownGroup',
   props: {
     tmNode: {
-      type: Object,
+      type: Object as PropType<TreeNode>,
       required: true
     },
     parentKey: {
@@ -28,7 +29,7 @@ export default defineComponent({
           key: tmNode.key
         })
       ].concat(
-        children.map((child) => {
+        children?.map((child) => {
           if (isDividerNode(child.rawNode)) {
             return h(NDropdownDivider, {
               key: child.key
@@ -46,7 +47,7 @@ export default defineComponent({
             parentKey,
             key: child.key
           })
-        })
+        }) as VNode[]
       )
     )
   }

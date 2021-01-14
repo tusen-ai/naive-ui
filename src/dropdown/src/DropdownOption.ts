@@ -1,21 +1,30 @@
-import { h, computed, inject, ref, Transition, defineComponent } from 'vue'
-import { VBinder, VTarget, VFollower } from 'vueuc'
+import {
+  h,
+  computed,
+  inject,
+  ref,
+  Transition,
+  defineComponent,
+  provide,
+  reactive,
+  PropType
+} from 'vue'
+import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { useMemo } from 'vooks'
 import { ChevronRightIcon } from '../../_base/icons'
 import { useDeferredTrue } from '../../_utils/composable'
 import { render } from '../../_utils'
 import { NIcon } from '../../icon'
+import NDropdownMenu, { NDropdownMenuInjection } from './DropdownMenu'
+import { DropdownInjection } from './Dropdown'
 import { isSubmenuNode } from './utils'
-import NDropdownMenu from './DropdownMenu'
+
+interface NDropdownOptionInjection {
+  enteringSubmenu: boolean
+}
 
 export default defineComponent({
   name: 'DropdownOption',
-  provide () {
-    return {
-      NDropdownOption: this
-    }
-  },
-  inject: ['NDropdown', 'NDropdownMenu'],
   props: {
     tmNode: {
       type: Object,
@@ -26,13 +35,21 @@ export default defineComponent({
       default: null
     },
     placement: {
-      type: String,
+      type: String as PropType<FollowerPlacement>,
       default: 'right-start'
     }
   },
   setup (props) {
-    const NDropdown = inject('NDropdown')
-    const NDropdownOption = inject('NDropdownOption', null)
+    const NDropdown = inject<DropdownInjection>(
+      'NDropdown'
+    ) as DropdownInjection
+    const NDropdownOption = inject<NDropdownOptionInjection | null>(
+      'NDropdownOption',
+      null
+    )
+    const NDropdownMenu = inject<NDropdownMenuInjection>(
+      'NDropdownMenu'
+    ) as NDropdownMenuInjection
     const rawNodeRef = computed(() => props.tmNode.rawNode)
     const hasSubmenuRef = computed(() => {
       return isSubmenuNode(props.tmNode.rawNode)
@@ -67,8 +84,55 @@ export default defineComponent({
     const parentEnteringSubmenuRef = computed(() => {
       return !!(NDropdownOption && NDropdownOption.enteringSubmenu)
     })
+    const enteringSubmenuRef = ref(false)
+    provide<NDropdownOptionInjection>(
+      'NDropdownOption',
+      reactive({
+        enteringSubmenu: enteringSubmenuRef
+      })
+    )
+    // methods
+    function handleSubmenuBeforeEnter () {
+      enteringSubmenuRef.value = true
+    }
+    function handleSubmenuAfterEnter () {
+      enteringSubmenuRef.value = false
+    }
+    function handleMouseEnter () {
+      const { parentKey, tmNode } = props
+      if (!NDropdown.mergedShow) return
+      NDropdown.lastToggledSubmenuKey = parentKey
+      NDropdown.keyboardKey = null
+      NDropdown.hoverKey = tmNode.key
+    }
+    function handleMouseMove () {
+      const { tmNode } = props
+      if (!NDropdown.mergedShow) return
+      if (NDropdown.hoverKey === tmNode.key) return
+      handleMouseEnter()
+    }
+    function handleMouseLeave (e: MouseEvent) {
+      if (!NDropdown.mergedShow) return
+      const { relatedTarget } = e
+      if (
+        relatedTarget &&
+        !(relatedTarget as HTMLElement).getAttribute('n-dropdown-option')
+      ) {
+        NDropdown.hoverKey = null
+      }
+    }
+    function handleClick () {
+      const { value: hasSubmenu } = hasSubmenuRef
+      const { tmNode } = props
+      if (!NDropdown.mergedShow) return
+      if (!hasSubmenu && !tmNode.disabled) {
+        NDropdown.doSelect(tmNode.key, tmNode.r)
+        NDropdown.doUpdateShow(false)
+      }
+    }
     return {
-      enteringSubmenu: ref(false),
+      NDropdown,
+      NDropdownMenu,
       mergedShowSubmenu: computed(() => {
         return delayedSubmenuRef.value && !parentEnteringSubmenuRef.value
       }),
@@ -84,44 +148,12 @@ export default defineComponent({
         const { key } = props.tmNode
         return activeKeyPath.includes(key)
       }),
-      NDropdownOption
-    }
-  },
-  methods: {
-    handleSubmenuBeforeEnter () {
-      this.enteringSubmenu = true
-    },
-    handleSubmenuAfterEnter () {
-      this.enteringSubmenu = false
-    },
-    handleMouseEnter () {
-      const { NDropdown, parentKey, tmNode } = this
-      if (!NDropdown.mergedShow) return
-      NDropdown.lastToggledSubmenuKey = parentKey
-      NDropdown.keyboardKey = null
-      NDropdown.hoverKey = tmNode.key
-    },
-    handleMouseMove (e) {
-      const { NDropdown, tmNode } = this
-      if (!NDropdown.mergedShow) return
-      if (NDropdown.hoverKey === tmNode.key) return
-      this.handleMouseEnter(e)
-    },
-    handleMouseLeave (e) {
-      const { NDropdown } = this
-      if (!NDropdown.mergedShow) return
-      const { relatedTarget } = e
-      if (relatedTarget && !relatedTarget.getAttribute('n-dropdown-option')) {
-        NDropdown.hoverKey = null
-      }
-    },
-    handleClick () {
-      const { NDropdown, hasSubmenu, tmNode } = this
-      if (!NDropdown.mergedShow) return
-      if (!hasSubmenu && !tmNode.disabled) {
-        NDropdown.doSelect(tmNode.key)
-        NDropdown.doUpdateShow(false)
-      }
+      handleClick,
+      handleMouseMove,
+      handleMouseEnter,
+      handleMouseLeave,
+      handleSubmenuBeforeEnter,
+      handleSubmenuAfterEnter
     }
   },
   render () {

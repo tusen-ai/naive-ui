@@ -1,13 +1,20 @@
-import { defineComponent, h } from 'vue'
+import { defineComponent, h, inject } from 'vue'
 import { render } from '../../_utils'
+import { NDropdownMenuInjection } from './DropdownMenu'
 
 export default defineComponent({
   name: 'DropdownGroupHeader',
-  inject: ['NDropdown', 'NDropdownMenu'],
   props: {
     tmNode: {
       type: Object,
       required: true
+    }
+  },
+  setup () {
+    return {
+      NDropdownMenu: inject<NDropdownMenuInjection>(
+        'NDropdownMenu'
+      ) as NDropdownMenuInjection
     }
   },
   render () {

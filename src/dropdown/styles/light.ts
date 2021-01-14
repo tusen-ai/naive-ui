@@ -1,15 +1,16 @@
-import { commonDark } from '../../_styles/new-common'
+import { commonLight } from '../../_styles/new-common'
+import type { ThemeCommonVars } from '../../_styles/new-common'
 import commonVariables from './_common'
 
-export default {
+const dropdownLight = {
   name: 'Dropdown',
-  common: commonDark,
-  self (vars) {
+  common: commonLight,
+  self (vars: ThemeCommonVars) {
     const {
       primaryColor,
       textColor2,
       boxShadow2,
-      dividerColorOverlay,
+      dividerColor,
       hoverColorOverlay,
       popoverColor,
       borderRadius,
@@ -21,7 +22,7 @@ export default {
       heightMedium,
       heightLarge,
       heightHuge,
-      textColor3Overlay
+      textColor3
     } = vars
     return {
       ...commonVariables,
@@ -32,13 +33,13 @@ export default {
       optionTextColor: textColor2,
       optionTextColorActive: primaryColor,
       color: popoverColor,
-      dividerColor: dividerColorOverlay,
+      dividerColor,
       borderRadius,
       boxShadow: boxShadow2,
       suffixColor: textColor2,
       prefixColor: textColor2,
       optionColorHover: hoverColorOverlay,
-      groupHeaderTextColor: textColor3Overlay,
+      groupHeaderTextColor: textColor3,
       fontSizeSmall,
       fontSizeMedium,
       fontSizeLarge,
@@ -46,3 +47,6 @@ export default {
     }
   }
 }
+
+export default dropdownLight
+export type DropdownThemeVars = ReturnType<typeof dropdownLight.self>
