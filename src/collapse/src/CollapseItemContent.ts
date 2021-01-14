@@ -1,4 +1,10 @@
-import { h, withDirectives, vShow, defineComponent } from 'vue'
+import {
+  h,
+  withDirectives,
+  vShow,
+  defineComponent,
+  DirectiveArguments
+} from 'vue'
 import { NFadeInExpandTransition } from '../../_base'
 
 export default defineComponent({
@@ -22,7 +28,7 @@ export default defineComponent({
   render () {
     const { show, displayDirective } = this
     const useVShow = displayDirective === 'show'
-    const directives = useVShow ? [[vShow, show]] : []
+    const directives: DirectiveArguments = useVShow ? [[vShow, show]] : []
     return h(NFadeInExpandTransition, null, {
       default: () =>
         useVShow || show

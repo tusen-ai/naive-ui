@@ -36,12 +36,13 @@
   </div>
 </template>
 
-<script>
-import { toRef, defineComponent } from 'vue'
+<script lang="ts">
+import { toRef, defineComponent, PropType, inject, computed } from 'vue'
 import { ChevronRightIcon as ArrowIcon } from '../../_base/icons'
 import { NBaseIcon } from '../../_base'
 import { useInjectionCollection } from '../../_utils/composable'
-import NCollapseItemContent from './CollapseItemContent.js'
+import NCollapseItemContent from './CollapseItemContent'
+import { NCollapseInjection } from './Collapse'
 
 export default defineComponent({
   name: 'CollapseItem',
@@ -50,60 +51,56 @@ export default defineComponent({
     NCollapseItemContent,
     ArrowIcon
   },
-  inject: {
-    NCollapse: {
-      default: null
-    }
-  },
   props: {
     title: {
       type: String,
       default: undefined
     },
     name: {
-      type: [String, Number],
+      type: String,
       default: undefined
     },
     displayDirective: {
-      validator (value) {
-        return ['if', 'show'].includes(value)
-      },
+      type: String as PropType<'if' | 'show' | undefined>,
       default: undefined
     }
   },
   setup (props) {
+    const NCollapse = inject<NCollapseInjection>(
+      'NCollapse'
+    ) as NCollapseInjection
     useInjectionCollection(
       'NCollapse',
       'collectedItemNames',
       toRef(props, 'name')
     )
-  },
-  computed: {
-    mergedDisplayDirective () {
-      const { displayDirective, NCollapse } = this
-      if (displayDirective) {
-        return displayDirective
-      } else {
-        return NCollapse.displayDirective
-      }
-    },
-    arrowPlacement () {
-      return this.NCollapse.arrowPlacement
-    },
-    collapsed () {
-      const { NCollapse } = this
-      if (NCollapse && Array.isArray(NCollapse.expandedNames)) {
-        const itemName = this.name
-        return !~NCollapse.expandedNames.findIndex((name) => name === itemName)
+    const collapsedRef = computed<boolean>(() => {
+      const { expandedNames } = NCollapse
+      if (Array.isArray(expandedNames)) {
+        const { name } = props
+        return !~expandedNames.findIndex(
+          (expandedName) => expandedName === name
+        )
       }
       return true
-    }
-  },
-  methods: {
-    handleClick (e) {
-      const { NCollapse } = this
-      if (NCollapse) {
-        NCollapse.toggleItem(this.collapsed, this.name, e)
+    })
+    return {
+      collapsed: collapsedRef,
+      mergedDisplayDirective: computed<'if' | 'show'>(() => {
+        const { displayDirective } = props
+        if (displayDirective) {
+          return displayDirective
+        } else {
+          return NCollapse.displayDirective
+        }
+      }),
+      arrowPlacement: computed<'left' | 'right'>(() => {
+        return NCollapse.arrowPlacement
+      }),
+      handleClick (e: MouseEvent) {
+        if (NCollapse) {
+          NCollapse.toggleItem(collapsedRef.value, props.name, e)
+        }
       }
     }
   }

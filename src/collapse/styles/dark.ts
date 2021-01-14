@@ -1,9 +1,11 @@
-import { commonLight } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/new-common'
+import type { ThemeCommonVars } from '../../_styles/new-common'
+import type { CollapseThemeVars } from './light'
 
 export default {
   name: 'Collapse',
-  common: commonLight,
-  self (vars) {
+  common: commonDark,
+  self (vars: ThemeCommonVars): CollapseThemeVars {
     const {
       fontWeight,
       textColor1,
@@ -16,7 +18,7 @@ export default {
       titleFontWeight: fontWeight,
       dividerColor: dividerColorOverlay,
       titleTextColor: textColor1,
-      fontSize: fontSize,
+      fontSize,
       textColor: textColor2,
       arrowColor: textColor2
     }
