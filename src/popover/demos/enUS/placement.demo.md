@@ -97,6 +97,10 @@
 </div>
 ```
 
+```script
+console.log('wow')
+```
+
 ```css
 .popover-grid {
   display: grid;

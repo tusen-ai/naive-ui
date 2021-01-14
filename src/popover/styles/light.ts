@@ -1,10 +1,11 @@
-import commonVariables from './_common'
 import { commonLight } from '../../_styles/new-common'
+import type { ThemeCommonVars } from '../../_styles/new-common'
+import commonVariables from './_common'
 
-export default {
+const popoverLight = {
   name: 'Popover',
   common: commonLight,
-  self (vars) {
+  self (vars: ThemeCommonVars) {
     const {
       boxShadow2,
       popoverColor,
@@ -22,3 +23,7 @@ export default {
     }
   }
 }
+
+export default popoverLight
+
+export type PopoverThemeVars = ReturnType<typeof popoverLight.self>
