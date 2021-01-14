@@ -10,12 +10,7 @@ import {
   reactive
 } from 'vue'
 import { RawNode, TreeMate } from 'treemate'
-import {
-  useMergedState,
-  // useFalseUntilTruthy,
-  useKeyboard,
-  useMemo
-} from 'vooks'
+import { useMergedState, useKeyboard, useMemo } from 'vooks'
 import { useTheme } from '../../_mixins'
 import { NPopover, popoverProps } from '../../popover'
 import { keep, call, createKey } from '../../_utils'
@@ -105,7 +100,6 @@ export default defineComponent({
       toRef(props, 'show'),
       uncontrolledShowRef
     )
-    // const dataNeededRef = useFalseUntilTruthy(mergedShowRef)
     const treemateRef = computed(() => {
       return TreeMate(props.options, treemateOptions)
     })

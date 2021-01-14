@@ -21,11 +21,6 @@ import {
 export default defineComponent({
   name: 'ConfigProvider',
   alias: ['App'],
-  provide () {
-    return {
-      NConfigProvider: this
-    }
-  },
   props: {
     abstract: {
       type: Boolean,

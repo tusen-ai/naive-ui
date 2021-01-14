@@ -1,9 +1,11 @@
 import { commonDark } from '../../_styles/new-common'
+import type { ThemeCommonVars } from '../../_styles/new-common'
+import type { CodeThemeVars } from './light'
 
 export default {
   name: 'Code',
   common: commonDark,
-  self (vars) {
+  self (vars: ThemeCommonVars): CodeThemeVars {
     const { textColor2, fontSize, fontWeightStrong } = vars
     return {
       textColor: textColor2,

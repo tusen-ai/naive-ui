@@ -1,16 +1,8 @@
-import {
-  defineComponent,
-  h,
-  nextTick,
-  toRef,
-  watch,
-  onMounted,
-  ref,
-  computed
-} from 'vue'
+import { defineComponent, h, toRef, watch, onMounted, ref, computed } from 'vue'
 import { useTheme, useHljs } from '../../_mixins'
 import { codeLight } from '../styles'
-import style from './styles/index.cssr.js'
+import type { CodeThemeVars } from '../styles'
+import style from './styles/index.cssr'
 
 export default defineComponent({
   name: 'Code',
@@ -34,37 +26,43 @@ export default defineComponent({
     }
   },
   setup (props, { slots }) {
-    const codeRef = ref(null)
+    const codeRef = ref<HTMLElement | null>(null)
     const hljsRef = useHljs(props)
-    const generateCodeHTML = (language, code, trim) => {
+    const createCodeHtml = (language: string, code: string, trim: boolean) => {
       const { value: hljs } = hljsRef
-      const languageValid = !!(language && hljs.getLanguage(language))
-      if (trim) code = code.trim()
-      return {
-        valid: languageValid,
-        content: hljs.highlight(language, code).value
+      if (!hljs) {
+        return null
       }
+      if (!(language && hljs.getLanguage(language))) {
+        return null
+      }
+      return hljs.highlight(language, trim ? code.trim() : code).value
     }
     const setCode = () => {
       if (slots.default) return
+      const { value: codeEl } = codeRef
+      if (!codeEl) return
       const { code, language } = props
       if (language) {
-        const { valid, content } = generateCodeHTML(language, code, props.trim)
-        if (valid) {
-          codeRef.value.innerHTML = content
+        const html = createCodeHtml(language, code, props.trim)
+        if (html !== null) {
+          codeEl.innerHTML = html
           return
         }
       }
-      codeRef.value.textContent = code
+      codeEl.textContent = code
     }
     onMounted(setCode)
-    watch(toRef(props, 'language'), () => {
-      nextTick(setCode)
-    })
-    watch(toRef(props, 'code'), () => {
-      nextTick(setCode)
-    })
-    const themeRef = useTheme('Code', 'Code', style, codeLight, props)
+    watch(toRef(props, 'language'), setCode)
+    watch(toRef(props, 'code'), setCode)
+    watch(hljsRef, setCode)
+    const themeRef = useTheme<CodeThemeVars>(
+      'Code',
+      'Code',
+      style,
+      codeLight,
+      props
+    )
     return {
       codeRef,
       cssVars: computed(() => {

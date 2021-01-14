@@ -1,9 +1,10 @@
 import { commonLight } from '../../_styles/new-common'
+import type { ThemeCommonVars } from '../../_styles/new-common'
 
-export default {
+const codeLight = {
   name: 'Code',
   common: commonLight,
-  self (vars) {
+  self (vars: ThemeCommonVars) {
     const { textColor2, fontSize, fontWeightStrong } = vars
     return {
       textColor: textColor2,
@@ -22,3 +23,6 @@ export default {
     }
   }
 }
+
+export default codeLight
+export type CodeThemeVars = ReturnType<typeof codeLight.self>
