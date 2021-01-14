@@ -1,4 +1,5 @@
 import { defineComponent, inject, toRef, watch } from 'vue'
+import { ConfigProviderInjection } from '../../config-provider'
 import useLegacy from './use-legacy'
 
 export default defineComponent({
@@ -24,7 +25,10 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const NConfigProvider = inject('NConfigProvider', null)
+    const NConfigProvider = inject<ConfigProviderInjection | null>(
+      'NConfigProvider',
+      null
+    )
     if (NConfigProvider) {
       watch(toRef(NConfigProvider, 'mergedNamespace'), (value, oldValue) => {
         const { onNamespaceChange } = props

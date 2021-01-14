@@ -1,7 +1,18 @@
 import { computed, watch, toRef } from 'vue'
+import { ConfigProviderInjection } from '../../config-provider'
 import styleScheme from '../../_deprecated/style-scheme'
 
-export default function useLegacy (NConfigProvider, props) {
+interface UseLegacyProps {
+  onLanguageChange: (
+    lang: string | undefined,
+    oldLang: string | undefined
+  ) => void
+}
+
+export default function useLegacy (
+  NConfigProvider: ConfigProviderInjection | null,
+  props: UseLegacyProps
+) {
   if (NConfigProvider) {
     watch(toRef(NConfigProvider, 'mergedLanguage'), (value, oldValue) => {
       const { onLanguageChange } = props
@@ -22,7 +33,7 @@ export default function useLegacy (NConfigProvider, props) {
         : null
     }),
     legacyStyleScheme: computed(() => {
-      return styleScheme[NConfigProvider.mergedTheme || 'light']
+      return (styleScheme as any)[NConfigProvider?.mergedTheme || 'light']
     })
   }
 }
