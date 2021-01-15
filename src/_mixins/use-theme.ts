@@ -26,20 +26,20 @@ type UseThemeProps<T> = Readonly<{
   [key: string]: unknown
 }>
 
-export interface MergedTheme<T> {
+export interface MergedTheme<T, R = any> {
   common: ThemeCommonVars
   self: T
-  peers: any
+  peers: R
   overrides: any
 }
 
-function useTheme<T> (
+function useTheme<T, R> (
   resolveId: string,
   mountId: string,
   style: CNode | undefined,
-  defaultTheme: Theme<T>,
+  defaultTheme: Theme<T, R>,
   props: UseThemeProps<T>
-): ComputedRef<MergedTheme<T>> {
+): ComputedRef<MergedTheme<T, R>> {
   if (style) {
     onBeforeMount(() => {
       style.mount({

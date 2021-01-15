@@ -52,13 +52,13 @@ export type DropdownThemeVars = ReturnType<typeof self>
 const dropdownLight: Theme<
   DropdownThemeVars,
   {
-    NPopover: PopoverTheme
+    Popover?: PopoverTheme
   }
 > = {
   name: 'Dropdown',
   common: commonLight,
   peers: {
-    NPopover: popoverLight
+    Popover: popoverLight
   },
   self
 }

@@ -64,6 +64,10 @@ const textVNodeType = createTextVNode('').type
 
 type BodyInstance = { syncPosition: () => void; [key: string]: unknown }
 
+export interface PopoverRef {
+  syncPosition(): void
+}
+
 export interface PopoverInjection {
   handleMouseLeave: (e: MouseEvent) => void
   handleMouseEnter: (e: MouseEvent) => void

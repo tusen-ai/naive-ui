@@ -7,7 +7,7 @@ const dropdownDark: DropdownTheme = {
   name: 'Dropdown',
   common: commonDark,
   peers: {
-    NPopover: popoverDark
+    Popover: popoverDark
   },
   self (vars) {
     const {

@@ -1,8 +1,9 @@
 import { commonDark } from '../../_styles/new-common'
 import { popoverDark } from '../../popover/styles'
 import commonVars from './_common'
+import type { TooltipTheme } from './light'
 
-export default {
+const tooltipDark: TooltipTheme = {
   name: 'Tooltip',
   common: commonDark,
   peers: {
@@ -19,3 +20,5 @@ export default {
     }
   }
 }
+
+export default tooltipDark
