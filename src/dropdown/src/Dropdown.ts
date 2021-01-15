@@ -9,7 +9,7 @@ import {
   provide,
   reactive
 } from 'vue'
-import { RawNode, TreeMate } from 'treemate'
+import { RawNode, TreeMate, Key } from 'treemate'
 import { useMergedState, useKeyboard, useMemo } from 'vooks'
 import { useTheme } from '../../_mixins'
 import { NPopover, popoverProps } from '../../popover'
@@ -19,7 +19,6 @@ import type { DropdownThemeVars } from '../styles'
 import NDropdownMenu from './DropdownMenu'
 import style from './styles/index.cssr'
 
-type Key = string | number
 type OnSelect = (key: Key, rawNode: RawNode) => void
 
 const treemateOptions = {
@@ -79,7 +78,7 @@ const dropdownProps = {
   },
   // for menu
   value: {
-    type: String,
+    type: [String, Number] as PropType<Key>,
     default: undefined
   }
 } as const
@@ -92,7 +91,8 @@ export default defineComponent({
   name: 'Dropdown',
   props: {
     ...popoverProps,
-    ...dropdownProps
+    ...dropdownProps,
+    ...useTheme.createProps<DropdownThemeVars>()
   },
   setup (props) {
     const uncontrolledShowRef = ref(false)
@@ -162,7 +162,7 @@ export default defineComponent({
       keyboardEnabledRef
     )
 
-    const themeRef = useTheme<DropdownThemeVars>(
+    const themeRef = useTheme(
       'Dropdown',
       'Dropdown',
       style,
@@ -332,7 +332,9 @@ export default defineComponent({
         'onUpdate:show': this.doUpdateShow,
         showArrow: false,
         raw: true,
-        shadow: false
+        shadow: false,
+        // TODO: using peers
+        unstableTheme: undefined
       }),
       {
         trigger: this.$slots.default,

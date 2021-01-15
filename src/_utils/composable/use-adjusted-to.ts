@@ -1,19 +1,22 @@
 import { useMemo } from 'vooks'
-import { inject } from 'vue'
+import { ComputedRef, inject } from 'vue'
 
 interface UseAdjustedToProps {
   to?: string
+  [key: string]: unknown
 }
 
 interface ModalInjection {
-  bodyRef: Element
+  bodyRef: HTMLElement
 }
 
 interface DrawerInjection {
-  bodyRef: Element
+  bodyRef: HTMLElement
 }
 
-export function useAdjustedTo (props: UseAdjustedToProps) {
+export function useAdjustedTo (
+  props: UseAdjustedToProps
+): ComputedRef<HTMLElement | string> {
   const modal = inject<ModalInjection | null>('NModalBody', null)
   const drawer = inject<DrawerInjection | null>('NDrawerBody', null)
   return useMemo(() => {

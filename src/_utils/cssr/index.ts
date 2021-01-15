@@ -31,18 +31,6 @@ function insideModal (style: CNode) {
   return c(`${prefix}modal, ${prefix}drawer`, [style])
 }
 
-function createKey (keyPrefix: string, ...suffixs: string[]) {
-  return (
-    keyPrefix +
-    suffixs
-      .map((suffix) => {
-        if (suffix === 'default') return ''
-        return suffix.replace(/^[a-z]/, (startChar) => startChar.toUpperCase())
-      })
-      .join('')
-  )
-}
-
 function cRB (selector: string, ...rest: any[]): CNode {
   return (c as any)(`${prefix}${selector}`, ...rest)
 }
@@ -63,6 +51,7 @@ export {
   withPrefix,
   prefix,
   namespace,
-  createKey,
   find
 }
+
+export { createKey } from './create-key'

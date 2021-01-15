@@ -1,14 +1,15 @@
 import { changeColor } from 'seemly'
 import { tooltipLight } from '../../tooltip/styles'
 import { commonLight } from '../../_styles/new-common'
+import type { ThemeCommonVars } from '../../_styles/new-common'
 
-export default {
+const menuLight = {
   name: 'Menu',
   common: commonLight,
   peers: {
     Tooltip: tooltipLight
   },
-  self (vars) {
+  self (vars: ThemeCommonVars) {
     const {
       borderRadius,
       textColor3,
@@ -37,3 +38,7 @@ export default {
     }
   }
 }
+
+export default menuLight
+
+export type MenuThemeVars = ReturnType<typeof menuLight.self>

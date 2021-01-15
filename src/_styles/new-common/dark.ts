@@ -1,5 +1,6 @@
 import { rgba, composite } from 'seemly'
-import commonVariables from './_common.js'
+import type { ThemeCommonVars } from './light'
+import commonVariables from './_common'
 
 const base = {
   neutralBase: '#000',
@@ -72,15 +73,18 @@ const baseBackgroundRgb = rgba(base.neutralBase)
 const baseInvertBackgroundRgb = rgba(base.neutralInvertBase)
 const overlayPrefix =
   'rgba(' + baseInvertBackgroundRgb.slice(0, 3).join(', ') + ', '
-function overlay (alpha) {
+function overlay (alpha: number | string) {
   return overlayPrefix + String(alpha) + ')'
 }
-function neutral (alpha) {
+function neutral (alpha: number | string) {
   const overlayRgba = Array.from(baseInvertBackgroundRgb)
   overlayRgba[3] = Number(alpha)
-  return composite(baseBackgroundRgb, overlayRgba as any)
+  return composite(
+    baseBackgroundRgb,
+    overlayRgba as [number, number, number, number]
+  )
 }
-const derived = {
+const derived: ThemeCommonVars = {
   ...commonVariables,
 
   baseColor: base.neutralBase,

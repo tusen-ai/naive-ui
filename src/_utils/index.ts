@@ -5,6 +5,7 @@ export {
   flatten,
   getSlot,
   getVNodeChildren,
+  keysOf,
   render
 } from './vue'
 export { warn, warnOnce } from './naive'

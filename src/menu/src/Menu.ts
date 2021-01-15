@@ -1,23 +1,29 @@
-import { h, ref, toRef, computed, defineComponent } from 'vue'
-import { createTreeMate } from 'treemate'
+import {
+  h,
+  ref,
+  toRef,
+  computed,
+  defineComponent,
+  provide,
+  reactive,
+  PropType
+} from 'vue'
+import { createTreeMate, Key, RawNode } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
 import { useTheme } from '../../_mixins'
+import { call, warn } from '../../_utils'
 import { itemRenderer } from './utils'
 import { menuLight } from '../styles'
-import style from './styles/index.cssr.js'
+import type { MenuThemeVars } from '../styles'
+import { MenuInjection } from './use-menu-child'
+import style from './styles/index.cssr'
 
 export default defineComponent({
   name: 'Menu',
-  provide () {
-    return {
-      NMenu: this,
-      NSubmenu: null
-    }
-  },
   props: {
-    ...useTheme.props,
+    ...useTheme.createProps<MenuThemeVars>(),
     items: {
-      type: Array,
+      type: Array as PropType<RawNode[]>,
       required: true
     },
     collapsed: {
@@ -49,25 +55,23 @@ export default defineComponent({
       default: false
     },
     defaultExpandedKeys: {
-      type: Array,
+      type: Array as PropType<Key[]>,
       default: () => []
     },
     expandedKeys: {
-      type: Array,
+      type: Array as PropType<Key[]>,
       default: undefined
     },
     value: {
-      type: String,
+      type: [String, Number] as PropType<Key>,
       default: undefined
     },
     defaultValue: {
-      type: String,
+      type: [String, Number] as PropType<Key>,
       default: null
     },
     mode: {
-      validator (value) {
-        return ['vertical', 'horizontal'].includes(value)
-      },
+      type: String as PropType<'vertical' | 'horizontal'>,
       default: 'vertical'
     },
     disabled: {
@@ -76,38 +80,74 @@ export default defineComponent({
     },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:expandedKeys': {
-      type: Function,
-      default: () => {}
+      type: Function as PropType<(value: Key[]) => void>,
+      default: undefined
     },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:value': {
-      type: Function,
-      default: () => {}
+      type: Function as PropType<(value: Key) => void>,
+      default: undefined
     },
     // deprecated
     onOpenNamesChange: {
-      type: Function,
-      default: () => {}
+      type: Function as PropType<(value: Key[]) => void>,
+      validator: () => {
+        warn(
+          'menu',
+          '`on-open-names-change` is deprecated, please use `on-update:expanded-keys` instead.'
+        )
+        return true
+      },
+      default: undefined
     },
     onSelect: {
-      type: Function,
-      default: () => {}
+      type: Function as PropType<(value: Key) => void>,
+      validator: () => {
+        warn(
+          'menu',
+          '`on-select` is deprecated, please use `on-update:value` instead.'
+        )
+        return true
+      },
+      default: undefined
     },
     onExpandedNamesChange: {
-      type: Function,
-      default: () => {}
+      type: Function as PropType<(value: Key[]) => void>,
+      validator: () => {
+        warn(
+          'menu',
+          '`on-expanded-names-change` is deprecated, please use `on-update:expanded-keys` instead.'
+        )
+        return true
+      },
+      default: undefined
     },
     expandedNames: {
-      type: Array,
+      type: Array as PropType<Key[]>,
+      validator: () => {
+        warn(
+          'menu',
+          '`expanded-names` is deprecated, please use `expanded-keys` instead.'
+        )
+        return true
+      },
       default: undefined
     },
     defaultExpandedNames: {
-      type: Array,
+      type: Array as PropType<Key[]>,
+      validator: () => {
+        warn(
+          'menu',
+          '`default-expanded-names` is deprecated, please use `default-expanded-keys` instead.'
+        )
+        return true
+      },
       default: undefined
     }
   },
   setup (props) {
     const themeRef = useTheme('Menu', 'Menu', style, menuLight, props)
+
     const treeMateRef = computed(() =>
       createTreeMate(props.items, {
         getKey (node) {
@@ -120,11 +160,10 @@ export default defineComponent({
         ? treeMateRef.value.getNonLeafKeys()
         : props.defaultExpandedNames || props.defaultExpandedKeys
     )
-    const controlledExpandedKeysRef = useCompitable(
-      props,
+    const controlledExpandedKeysRef = useCompitable(props, [
       'expandedNames',
       'expandedKeys'
-    )
+    ])
     const mergedExpandedKeysRef = useMergedState(
       controlledExpandedKeysRef,
       uncontrolledExpandedKeysRef
@@ -139,6 +178,64 @@ export default defineComponent({
     const activePathRef = computed(() => {
       return treeMateRef.value.getPath(mergedValueRef.value).keyPath
     })
+    provide<MenuInjection>(
+      'NMenu',
+      reactive({
+        mergedTheme: themeRef,
+        mode: toRef(props, 'mode'),
+        collapsed: toRef(props, 'collapsed'),
+        iconSize: toRef(props, 'iconSize'),
+        indent: toRef(props, 'indent'),
+        rootIndent: toRef(props, 'rootIndent'),
+        collapsedWidth: toRef(props, 'collapsedWidth'),
+        disabled: toRef(props, 'disabled'),
+        mergedValue: mergedValueRef,
+        mergedExpandedKeys: mergedExpandedKeysRef,
+        activePath: activePathRef,
+        doSelect,
+        toggleExpand
+      })
+    )
+    function doSelect (value: Key, item: RawNode) {
+      const { 'onUpdate:value': onUpdateValue, onSelect } = props
+      if (onUpdateValue) {
+        call(onUpdateValue, value, item)
+      }
+      if (onSelect) {
+        call(onSelect, value, item)
+      }
+      uncontrolledValueRef.value = value
+    }
+    function doUpdateExpandedKeys (value: Key[]) {
+      const {
+        'onUpdate:expandedKeys': onUpdateExpandedKeys,
+        onExpandedNamesChange,
+        onOpenNamesChange
+      } = props
+      if (onUpdateExpandedKeys) {
+        call(onUpdateExpandedKeys, value)
+      }
+      // deprecated
+      if (onExpandedNamesChange) {
+        call(onExpandedNamesChange, value)
+      }
+      if (onOpenNamesChange) {
+        call(onOpenNamesChange, value)
+      }
+      uncontrolledExpandedKeysRef.value = value
+    }
+    function toggleExpand (key: Key) {
+      const currentExpandedKeys = Array.from(mergedExpandedKeysRef.value)
+      const index = currentExpandedKeys.findIndex(
+        (expanededKey) => expanededKey === key
+      )
+      if (~index) {
+        currentExpandedKeys.splice(index, 1)
+      } else {
+        currentExpandedKeys.push(key)
+      }
+      doUpdateExpandedKeys(currentExpandedKeys)
+    }
     return {
       controlledExpandedKeys: controlledExpandedKeysRef,
       uncontrolledExpanededKeys: uncontrolledExpandedKeysRef,
@@ -188,32 +285,6 @@ export default defineComponent({
           '--item-icon-color-child-active': itemIconColorChildActive
         }
       })
-    }
-  },
-  methods: {
-    doSelect (value, item) {
-      this['onUpdate:value'](value, item)
-      // deprecated
-      this.onSelect(value, item)
-      this.uncontrolledValue = value
-    },
-    toggleExpand (key) {
-      const currentExpandedKeys = Array.from(this.mergedExpandedKeys)
-      const index = currentExpandedKeys.findIndex(
-        (expanededKey) => expanededKey === key
-      )
-      if (~index) {
-        currentExpandedKeys.splice(index, 1)
-      } else {
-        currentExpandedKeys.push(key)
-      }
-      if (this.controlledExpandedKeys === undefined) {
-        this.uncontrolledExpanededKeys = currentExpandedKeys
-      }
-      this['onUpdate:expandedKeys'](currentExpandedKeys)
-      // deprecated
-      this.onExpandedNamesChange(currentExpandedKeys)
-      this.onOpenNamesChange(currentExpandedKeys)
     }
   },
   render () {
