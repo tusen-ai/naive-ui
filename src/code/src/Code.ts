@@ -7,7 +7,7 @@ import style from './styles/index.cssr'
 export default defineComponent({
   name: 'Code',
   props: {
-    ...useTheme.props,
+    ...useTheme.createProps<CodeThemeVars>(),
     language: {
       type: String,
       default: undefined
@@ -56,13 +56,7 @@ export default defineComponent({
     watch(toRef(props, 'language'), setCode)
     watch(toRef(props, 'code'), setCode)
     watch(hljsRef, setCode)
-    const themeRef = useTheme<CodeThemeVars>(
-      'Code',
-      'Code',
-      style,
-      codeLight,
-      props
-    )
+    const themeRef = useTheme('Code', 'Code', style, codeLight, props)
     return {
       codeRef,
       cssVars: computed(() => {

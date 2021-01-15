@@ -1,5 +1,6 @@
 <template>
   <span
+    ref="selfRef"
     class="n-tree-node-content"
     :class="{
       'n-tree-node-content--pending': pending,
@@ -26,8 +27,8 @@
   </span>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   name: 'NTreeNodeContent',
@@ -81,96 +82,110 @@ export default defineComponent({
       default: undefined
     }
   },
-  data () {
-    return {
-      pending: false,
-      pendingPosition: null
-    }
-  },
-  methods: {
-    doClick () {
-      const { onClick } = this
+  setup (props) {
+    const pendingRef = ref(false)
+    const pendingPositionRef = ref<'top' | 'center' | 'bottom' | null>(null)
+    const selfRef = ref<HTMLElement | null>(null)
+    function doClick () {
+      const { onClick } = props
       if (onClick) onClick()
-    },
-    doDragStart (e) {
-      const { onDragStart } = this
+    }
+    function doDragStart (e: DragEvent) {
+      const { onDragStart } = props
       if (onDragStart) onDragStart(e)
-    },
-    doDragEnter (e) {
-      const { onDragEnter } = this
+    }
+    function doDragEnter (e: DragEvent) {
+      const { onDragEnter } = props
       if (onDragEnter) onDragEnter(e)
-    },
-    doDragEnd (e) {
-      const { onDragEnd } = this
+    }
+    function doDragEnd (e: DragEvent) {
+      const { onDragEnd } = props
       if (onDragEnd) onDragEnd(e)
-    },
-    doDragLeave (e) {
-      const { onDragLeave } = this
+    }
+    function doDragLeave (e: DragEvent) {
+      const { onDragLeave } = props
       if (onDragLeave) onDragLeave(e)
-    },
-    doDragOver (e) {
-      const { onDragOver } = this
-      if (onDragOver) onDragOver(e)
-    },
-    doDrop (e, dropPosition) {
-      const { onDrop } = this
+    }
+    // function doDragOver (e: DragEvent) {
+    //   const { onDragOver } = props
+    //   if (onDragOver) onDragOver(e)
+    // }
+    function doDrop (e: DragEvent, dropPosition: 'top' | 'bottom' | 'center') {
+      const { onDrop } = props
       if (onDrop) onDrop(e, dropPosition)
-    },
-    handleClick () {
-      this.doClick()
-    },
-    handleContentDragStart (e) {
-      this.doDragStart(e)
-    },
-    handleContentDragEnter (e) {
+    }
+    function handleClick () {
+      doClick()
+    }
+    function handleContentDragStart (e: DragEvent) {
+      doDragStart(e)
+    }
+    function handleContentDragEnter (e: DragEvent) {
       if (
         e.currentTarget &&
         e.relatedTarget &&
-        e.currentTarget.contains(e.relatedTarget)
+        (e.currentTarget as HTMLElement).contains(
+          e.relatedTarget as HTMLElement
+        )
       ) {
         return
       }
-      this.doDragEnter(e)
-    },
-    handleDragOverContent (e) {
+      doDragEnter(e)
+    }
+    function handleDragOverContent (e: DragEvent) {
       e.preventDefault()
-      const el = this.$el
-      this.pending = true
+      const el = selfRef.value as HTMLElement
+      pendingRef.value = true
       const elOffsetHeight = el.offsetHeight
       const elClientTop = el.getBoundingClientRect().top
       const eventOffsetY = e.clientY - elClientTop
       if (eventOffsetY <= 8) {
-        this.pendingPosition = 'top'
+        pendingPositionRef.value = 'top'
       } else if (eventOffsetY >= elOffsetHeight - 8) {
-        this.pendingPosition = 'bottom'
+        pendingPositionRef.value = 'bottom'
       } else {
-        this.pendingPosition = 'body'
+        pendingPositionRef.value = 'center'
       }
-      this.doDragOver(e)
-    },
-    handleContentDragEnd (e) {
-      this.doDragEnd(e)
-    },
-    handleContentDragLeave (e) {
+    }
+    function handleContentDragEnd (e: DragEvent) {
+      doDragEnd(e)
+    }
+    function handleContentDragLeave (e: DragEvent) {
       if (
         e.currentTarget &&
         e.relatedTarget &&
-        e.currentTarget.contains(e.relatedTarget)
+        (e.currentTarget as HTMLElement).contains(
+          e.relatedTarget as HTMLElement
+        )
       ) {
         return
       }
-      this.pending = false
-      this.doDragLeave(e)
-    },
-    handleContentDrop (e) {
+      pendingRef.value = false
+      doDragLeave(e)
+    }
+    function handleContentDrop (e: DragEvent) {
       e.preventDefault()
-      this.pending = false
-      const dropPosition = {
-        top: 'top',
-        bottom: 'bottom',
-        body: 'center'
-      }[this.pendingPosition]
-      this.doDrop(e, dropPosition)
+      pendingRef.value = false
+      if (pendingPositionRef.value !== null) {
+        const dropPosition = {
+          top: 'top',
+          bottom: 'bottom',
+          center: 'center'
+        }[pendingPositionRef.value]
+        doDrop(e, dropPosition as 'top' | 'bottom' | 'center')
+      }
+    }
+    return {
+      selfRef,
+      pending: pendingRef,
+      pendingPosition: pendingPositionRef,
+      handleContentDragLeave,
+      handleContentDragStart,
+      handleDragOverContent,
+      handleContentDragEnd,
+      handleContentDragEnter,
+      handleContentDrop,
+      handleClick
     }
   }
 })

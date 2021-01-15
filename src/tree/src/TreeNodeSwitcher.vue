@@ -18,7 +18,7 @@
   </span>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from 'vue'
 import { SwitcherIcon } from '../../_base/icons'
 import { NIconSwitchTransition, NBaseLoading, NBaseIcon } from '../../_base'
@@ -54,13 +54,15 @@ export default defineComponent({
       default: undefined
     }
   },
-  methods: {
-    doClick () {
-      const { onClick } = this
+  setup (props) {
+    function doClick () {
+      const { onClick } = props
       if (onClick) onClick()
-    },
-    handleClick () {
-      this.doClick()
+    }
+    return {
+      handleClick () {
+        doClick()
+      }
     }
   }
 })

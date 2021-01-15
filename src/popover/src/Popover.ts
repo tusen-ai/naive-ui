@@ -15,6 +15,7 @@ import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
 import { call, keep, warn } from '../../_utils'
 import { useTheme } from '../../_mixins'
 import NPopoverBody, { popoverBodyProps } from './PopoverBody'
+import type { PopoverThemeVars } from '../styles'
 
 const bodyPropKeys = Object.keys(
   popoverBodyProps
@@ -73,7 +74,7 @@ export interface PopoverInjection {
 }
 
 export const popoverProps = {
-  ...useTheme.props,
+  ...useTheme.createProps<PopoverThemeVars>(),
   show: {
     type: Boolean,
     default: undefined

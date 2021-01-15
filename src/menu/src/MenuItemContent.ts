@@ -114,7 +114,9 @@ export default defineComponent({
             {
               class: 'n-menu-item-content__arrow'
             },
-            [h(ChevronDownFilledIcon)]
+            {
+              default: () => h(ChevronDownFilledIcon)
+            }
           )
           : null
       ]

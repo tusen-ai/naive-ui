@@ -1,6 +1,5 @@
 import { commonLight } from '../_styles/new-common'
 import { alertLight } from '../alert/styles'
-import { affixLight } from '../affix/styles'
 import { anchorLight } from '../anchor/styles'
 import { autoCompleteLight } from '../auto-complete/styles'
 import { avatarLight } from '../avatar/styles'
@@ -68,7 +67,6 @@ import { selectLight } from '../select/styles'
 export const lightTheme = {
   common: commonLight,
   Alert: alertLight,
-  Affix: affixLight,
   Anchor: anchorLight,
   AutoComplete: autoCompleteLight,
   Avatar: avatarLight,

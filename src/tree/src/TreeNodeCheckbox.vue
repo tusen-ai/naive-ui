@@ -10,19 +10,15 @@
   </span>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script lang="ts">
+import { defineComponent, inject } from 'vue'
 import { NCheckbox } from '../../checkbox'
+import type { TreeInjection } from './Tree'
 
 export default defineComponent({
   name: 'NTreeNodeCheckbox',
   components: {
     NCheckbox
-  },
-  inject: {
-    NTree: {
-      default: null
-    }
   },
   props: {
     checked: {
@@ -38,17 +34,22 @@ export default defineComponent({
       default: undefined
     }
   },
-  methods: {
-    doCheck (value) {
-      const { onCheck } = this
+  setup (props) {
+    const NTree = inject<TreeInjection>('NTree')
+    function doCheck (value: boolean) {
+      const { onCheck } = props
       if (onCheck) return onCheck(value)
-    },
-    handleUpdateValue (value) {
-      if (this.indeterminate) {
-        this.doCheck(false)
+    }
+    function handleUpdateValue (value: boolean) {
+      if (props.indeterminate) {
+        doCheck(false)
       } else {
-        this.doCheck(value)
+        doCheck(value)
       }
+    }
+    return {
+      handleUpdateValue,
+      NTree
     }
   }
 })

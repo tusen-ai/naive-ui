@@ -24,7 +24,7 @@ import { PopoverThemeVars } from '../styles/light'
 import { PopoverInjection } from './Popover'
 
 export const popoverBodyProps = {
-  ...useTheme.props,
+  ...useTheme.createProps<PopoverThemeVars>(),
   show: {
     type: Boolean,
     default: undefined
@@ -106,13 +106,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: popoverBodyProps,
   setup (props) {
-    const themeRef = useTheme<PopoverThemeVars>(
-      'Popover',
-      'Popover',
-      style,
-      popoverLight,
-      props
-    )
+    const themeRef = useTheme('Popover', 'Popover', style, popoverLight, props)
     const followerRef = ref<FollowerRef | null>(null)
     const NPopover = inject<PopoverInjection>('NPopover') as PopoverInjection
     const followerEnabledRef = ref(props.show)
@@ -125,7 +119,9 @@ export default defineComponent({
       if (trigger === 'hover') {
         directives.push([mousemoveoutside, handleMouseMoveOutside])
       }
-      if (props.displayDirective === 'show') { directives.push([vShow, props.show]) }
+      if (props.displayDirective === 'show') {
+        directives.push([vShow, props.show])
+      }
       return directives as DirectiveArguments
     })
     const styleRef = computed(() => {

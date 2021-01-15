@@ -65,7 +65,7 @@ export default defineComponent({
   },
   inheritAttrs: false,
   props: {
-    ...useTheme.props,
+    ...useTheme.createProps<AlertThemeVars>(),
     title: {
       type: String,
       default: undefined
@@ -107,13 +107,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const themeRef = useTheme<AlertThemeVars>(
-      'Alert',
-      'Alert',
-      style,
-      alertLight,
-      props
-    )
+    const themeRef = useTheme('Alert', 'Alert', style, alertLight, props)
     const cssVars = computed(() => {
       const {
         common: { cubicBezierEaseInOut },

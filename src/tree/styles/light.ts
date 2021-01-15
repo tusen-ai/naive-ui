@@ -1,14 +1,15 @@
 import { changeColor } from 'seemly'
 import { checkboxLight } from '../../checkbox/styles'
 import { commonLight } from '../../_styles/new-common'
+import type { ThemeCommonVars } from '../../_styles/new-common'
 
-export default {
+const treeLight = {
   name: 'Tree',
   common: commonLight,
   peers: {
     Checkbox: checkboxLight
   },
-  self (vars) {
+  self (vars: ThemeCommonVars) {
     const {
       borderRadiusSmall,
       hoverColorOverlay,
@@ -32,3 +33,6 @@ export default {
     }
   }
 }
+
+export default treeLight
+export type TreeThemeVars = ReturnType<typeof treeLight.self>
