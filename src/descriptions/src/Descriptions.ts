@@ -1,15 +1,17 @@
-import { computed, h, defineComponent } from 'vue'
-import { useTheme } from '../../_mixins'
-import style from './styles/index.cssr.js'
-import { warn, getSlot, getVNodeChildren, createKey } from '../../_utils'
+import { computed, h, defineComponent, PropType, VNode } from 'vue'
 import { useCompitable } from 'vooks'
-import { isDescriptionsItem } from './utils'
+import { useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
+import { warn, getSlot, getVNodeChildren, createKey } from '../../_utils'
 import { descriptionsLight } from '../styles'
+import type { DescriptionsTheme } from '../styles'
+import { isDescriptionsItem } from './utils'
+import style from './styles/index.cssr'
 
 export default defineComponent({
   name: 'Descriptions',
   props: {
-    ...useTheme.props,
+    ...(useTheme.props as ThemeProps<DescriptionsTheme>),
     title: {
       type: String,
       default: undefined
@@ -23,22 +25,16 @@ export default defineComponent({
       default: undefined
     },
     labelPlacement: {
-      default: 'top',
-      validator (value) {
-        return ['left', 'top'].includes(value)
-      }
+      type: String as PropType<'left' | 'top'>,
+      default: 'top'
     },
     labelAlign: {
-      default: 'left',
-      validator (value) {
-        return ['left', 'right', 'center'].includes(value)
-      }
+      type: String as PropType<'left' | 'right' | 'center'>,
+      default: 'left'
     },
     size: {
-      default: 'medium',
-      validator (value) {
-        return ['small', 'medium', 'large'].includes(value)
-      }
+      type: String as PropType<'small' | 'medium' | 'large'>,
+      default: 'medium'
     },
     bordered: {
       type: Boolean,
@@ -117,7 +113,7 @@ export default defineComponent({
         '`n-descriptions` only takes `n-descriptions-item` as children.'
       )
     }
-    children = children.reduce(
+    const itemState = children.reduce(
       (state, vNode, index) => {
         const props = vNode.props || {}
         const isLastIteration = children.length - 1 === index
@@ -224,9 +220,14 @@ export default defineComponent({
         row: [],
         secondRow: [],
         rows: []
+      } as {
+        span: number
+        row: VNode[]
+        secondRow: VNode[]
+        rows: VNode[][]
       }
     )
-    children = children.rows.map((row) =>
+    const rows = itemState.rows.map((row) =>
       h(
         'tr',
         {
@@ -270,7 +271,7 @@ export default defineComponent({
               {
                 class: 'n-descriptions-table'
               },
-              [h('tbody', null, children)]
+              [h('tbody', null, rows)]
             )
           ]
         )

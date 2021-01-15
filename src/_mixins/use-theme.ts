@@ -136,6 +136,12 @@ export type ThemeProps<T> = {
   }
 }
 
+export type ThemePropsReactive<T> = {
+  unstableTheme: T
+  unstableThemeOverrides: Record<string, any>
+  builtinThemeOverrides: Record<string, any>
+}
+
 /**
  * props.unstableTheme:
  * { common, self(), peers }

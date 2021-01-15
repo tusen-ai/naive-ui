@@ -1,10 +1,10 @@
-import { composite } from 'seemly'
 import commonVariables from './_common'
-import { commonLight } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/new-common'
+import type { DescriptionsTheme } from './light'
 
-export default {
+const descriptionsDark: DescriptionsTheme = {
   name: 'Descriptions',
-  common: commonLight,
+  common: commonDark,
   self (vars) {
     const {
       tableHeaderColorOverlay,
@@ -26,7 +26,7 @@ export default {
       fontSizeSmall,
       fontSizeMedium,
       fontSizeLarge,
-      thColor: composite(cardColor, tableHeaderColorOverlay),
+      thColor: tableHeaderColorOverlay,
       thTextColor: textColor1Overlay,
       thFontWeight: fontWeightStrong,
       tdTextColor: textColor2Overlay,
@@ -37,3 +37,5 @@ export default {
     }
   }
 }
+
+export default descriptionsDark
