@@ -1,27 +1,27 @@
-import { h, defineComponent } from 'vue'
+import { h, defineComponent, ref, onMounted, PropType } from 'vue'
 import { NFadeInExpandTransition } from '../../_base'
 import NMessage from './Message.js'
-import props from './message-props'
+import { messageProps } from './message-props'
 
 export default defineComponent({
   name: 'MessageEnvironment',
   props: {
-    ...props,
+    ...messageProps,
     duration: {
       type: Number,
       default: 3000
-    },
-    onClose: {
-      type: Function,
-      default: undefined
     },
     onAfterLeave: {
       type: Function,
       default: undefined
     },
+    internalKey: {
+      type: String,
+      required: true
+    },
     // private
     onInternalAfterLeave: {
-      type: Function,
+      type: Function as PropType<(key: string) => void>,
       default: undefined
     },
     // deprecated
@@ -34,43 +34,51 @@ export default defineComponent({
       default: undefined
     }
   },
-  data () {
-    return {
-      // internal state
-      timerId: null,
-      show: true
-    }
-  },
-  mounted () {
-    if (this.duration) {
-      this.timerId = window.setTimeout(this.hide, this.duration)
-    }
-  },
-  methods: {
-    hide () {
-      const { timerId, onHide } = this
-      this.show = false
+  setup (props) {
+    const timerIdRef = ref<number | null>(null)
+    const showRef = ref<boolean>(true)
+    onMounted(() => {
+      const { duration } = props
+      if (duration) {
+        timerIdRef.value = window.setTimeout(hide, duration)
+      }
+    })
+    function hide () {
+      const { value: timerId } = timerIdRef
+      const { onHide } = props
+      showRef.value = false
       if (timerId) {
         window.clearTimeout(timerId)
       }
       // deprecated
       if (onHide) onHide()
-    },
-    handleClose () {
-      const { onClose } = this
+    }
+    function handleClose () {
+      const { onClose } = props
       if (onClose) onClose()
-      this.hide()
-    },
-    handleAfterLeave () {
-      const { onAfterLeave, onInternalAfterLeave, onAfterHide } = this
+      hide()
+    }
+    function handleAfterLeave () {
+      const {
+        onAfterLeave,
+        onInternalAfterLeave,
+        onAfterHide,
+        internalKey
+      } = props
       if (onAfterLeave) onAfterLeave()
-      if (onInternalAfterLeave) onInternalAfterLeave(this._.vnode.key)
+      if (onInternalAfterLeave) onInternalAfterLeave(internalKey)
       // deprecated
       if (onAfterHide) onAfterHide()
-    },
+    }
     // deprecated
-    deactivate () {
-      this.hide()
+    function deactivate () {
+      hide()
+    }
+    return {
+      show: showRef,
+      handleClose,
+      handleAfterLeave,
+      deactivate
     }
   },
   render () {

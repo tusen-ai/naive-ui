@@ -1,4 +1,4 @@
-import { computed, h } from 'vue'
+import { computed, h, defineComponent, inject, VNodeChild } from 'vue'
 import {
   InfoIcon,
   SuccessIcon,
@@ -12,9 +12,9 @@ import {
   NBaseClose
 } from '../../_base'
 import { render, createKey } from '../../_utils'
-import { useTheme } from '../../_mixins'
-import { messageLight } from '../styles'
-import props from './message-props'
+import { ThemePropsReactive, useTheme } from '../../_mixins'
+import { messageLight, MessageTheme } from '../styles'
+import { messageProps, MessageType } from './message-props'
 import style from './styles/index.cssr.js'
 
 const iconMap = {
@@ -25,11 +25,21 @@ const iconMap = {
   loading: NBaseLoading
 }
 
-export default {
+export default defineComponent({
   name: 'Message',
-  props,
+  props: messageProps,
   setup (props) {
-    const themeRef = useTheme('Message', 'Message', style, messageLight, props)
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const themeProps = inject<ThemePropsReactive<MessageTheme>>(
+      'NMessageProvider'
+    )!
+    const themeRef = useTheme(
+      'Message',
+      'Message',
+      style,
+      messageLight,
+      themeProps
+    )
     return {
       handleClose () {
         props.onClose()
@@ -140,9 +150,9 @@ export default {
       ]
     )
   }
-}
+})
 
-function createIconVNode (icon, type) {
+function createIconVNode (icon: () => VNodeChild, type: MessageType) {
   if (typeof icon === 'function') {
     return icon()
   } else {

@@ -1,7 +1,8 @@
 import commonVariables from './_common'
 import { commonDark } from '../../_styles/new-common'
+import type { MessageTheme } from './light'
 
-export default {
+const messageDark: MessageTheme = {
   name: 'Message',
   common: commonDark,
   self (vars) {
@@ -58,7 +59,10 @@ export default {
       closeColorHoverLoading: closeColorHoverOverlay,
       closeColorPressedLoading: closeColorPressedOverlay,
       lineHeight,
-      borderRadius
+      borderRadius,
+      loadingColor: primaryColor
     }
   }
 }
+
+export default messageDark

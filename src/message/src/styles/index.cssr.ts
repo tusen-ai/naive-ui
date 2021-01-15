@@ -25,23 +25,29 @@ import fadeInHeightExpand from '../../../_styles/transitions/fade-in-height-expa
 // --close-color-hover
 // --border-radius
 export default c([
-  cB('message-wrapper', `
+  cB(
+    'message-wrapper',
+    `
     margin: var(--margin);
     z-index: 0;
     transform-origin: top center;
-  `, [
-    fadeInHeightExpand({
-      overflow: 'visible',
-      originalTransition: 'transform .3s var(--bezier)',
-      enterToProps: {
-        transform: 'scale(1)'
-      },
-      leaveToProps: {
-        transform: 'scale(0.85)'
-      }
-    })
-  ]),
-  cB('message', `
+  `,
+    [
+      fadeInHeightExpand({
+        overflow: 'visible',
+        originalTransition: 'transform .3s var(--bezier)',
+        enterToProps: {
+          transform: 'scale(1)'
+        },
+        leaveToProps: {
+          transform: 'scale(0.85)'
+        }
+      })
+    ]
+  ),
+  cB(
+    'message',
+    `
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -60,44 +66,65 @@ export default c([
     color: var(--text-color);
     background-color: var(--color);
     box-shadow: var(--box-shadow);
-  `, [
-    cE('content', `
+  `,
+    [
+      cE(
+        'content',
+        `
       display: inline-block;
       line-height: var(--line-height);
       font-size: var(--font-size);
-    `),
-    cE('icon', `
+    `
+      ),
+      cE(
+        'icon',
+        `
       position: relative;
       margin-right: var(--icon-margin);
       height: var(--icon-size);
       width: var(--icon-size);
       font-size: var(--icon-size);
       flex-shrink: 0;
-    `, [
-      ['info', 'success', 'warning', 'error', 'loading'].map(type => cM(`${type}-type`, [
-        c('> *', `
+    `,
+        [
+          ['info', 'success', 'warning', 'error', 'loading'].map((type) =>
+            cM(`${type}-type`, [
+              c(
+                '> *',
+                `
           color: var(--icon-color-${type});
           transition: color .3s var(--bezier);
-        `)
-      ])),
-      c('> *', {
-        position: 'absolute',
-        left: 0,
-        top: 0,
-        right: 0,
-        bottom: 0
-      }, [
-        iconSwitchTransition()
-      ])
-    ]),
-    cE('close', `
+        `
+              )
+            ])
+          ),
+          c(
+            '> *',
+            {
+              position: 'absolute',
+              left: 0,
+              top: 0,
+              right: 0,
+              bottom: 0
+            },
+            [iconSwitchTransition()]
+          )
+        ]
+      ),
+      cE(
+        'close',
+        `
       font-size: var(--close-size);
       margin: var(--close-margin);
       transition: color .3s var(--bezier);
       flex-shrink: 0;
-    `)
-  ]),
-  cB('message-container', `
+    `
+      )
+    ]
+  ),
+  cB(
+    'message-container',
+    `
     z-index: 6000;
     position: fixed;
     top: 12px;
@@ -108,5 +135,6 @@ export default c([
     display: flex;
     flex-direction: column;
     align-items: center;
-  `)
+  `
+  )
 ])
