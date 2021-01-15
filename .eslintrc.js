@@ -1,12 +1,10 @@
 module.exports = {
   extends: [
-    'plugin:vue/recommended',
+    'plugin:vue/essential',
     '@vue/standard',
+    '@vue/typescript/recommended',
     'plugin:markdown/recommended'
   ],
-  parserOptions: {
-    parser: 'babel-eslint'
-  },
   rules: {
     'vue/max-attributes-per-line': [
       2,
@@ -24,6 +22,12 @@ module.exports = {
     'no-void': 0
   },
   overrides: [
+    {
+      files: ['light.ts'],
+      rules: {
+        '@typescript-eslint/explicit-module-boundary-types': 0
+      }
+    },
     {
       files: '**/*.md/*.js',
       rules: {

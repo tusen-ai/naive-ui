@@ -1,10 +1,5 @@
 import { computed, inject, provide, onBeforeUnmount } from 'vue'
 
-interface UseFormItemOptions {
-  defaultSize?: string
-  mergedSize?: (formItem: FormItemInjection | null) => string
-}
-
 interface FormItemInjection {
   size: string | undefined
   mergedSize: string
@@ -15,11 +10,19 @@ interface FormItemInjection {
   handleContentChange: () => void
 }
 
+interface UseFormItemOptions {
+  defaultSize?: string
+  mergedSize?: (formItem: FormItemInjection | null) => string
+}
+
 interface UseFormItemProps {
   size?: string
 }
 
-export default function useFormItem (props: UseFormItemProps, { defaultSize = 'medium', mergedSize }: UseFormItemOptions = {}) {
+export default function useFormItem (
+  props: UseFormItemProps,
+  { defaultSize = 'medium', mergedSize }: UseFormItemOptions = {}
+) {
   const NFormItem = inject<FormItemInjection | null>('NFormItem', null)
   provide('NFormItem', null)
   const mergedSizeRef = computed(

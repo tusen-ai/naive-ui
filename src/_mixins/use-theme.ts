@@ -1,20 +1,45 @@
-import { inject, computed, onBeforeMount } from 'vue'
+import { inject, computed, onBeforeMount, ComputedRef, PropType } from 'vue'
 import { merge } from 'lodash-es'
-import globalStyle from '../_styles/global/index.cssr.js'
+import globalStyle from '../_styles/global/index.cssr'
 import { CNode } from 'css-render'
-import { ConfigProviderInjection, Theme, ThemeOverrides } from '../config-provider/index.js'
+import {
+  ConfigProviderInjection,
+  ThemeOverrides
+} from '../config-provider/index.js'
+import type { ThemeCommonVars } from '../_styles/new-common'
 
 globalStyle.mount({
   id: 'naive-ui-global'
 })
 
-interface UseThemeProps {
-  unstableTheme: Theme
-  unstableThemeOverrides: ThemeOverrides
-  builtinThemeOverrides: ThemeOverrides
+interface Theme<T> {
+  name: string
+  common?: any
+  peers?: any
+  self(vars: ThemeCommonVars): T
 }
 
-function useTheme (resolveId: string, mountId: string, style: CNode | undefined, defaultTheme: Theme, props: UseThemeProps) {
+type UseThemeProps<T> = Readonly<{
+  unstableTheme: Theme<T>
+  unstableThemeOverrides: ThemeOverrides
+  builtinThemeOverrides: ThemeOverrides
+  [key: string]: unknown
+}>
+
+export interface MergedTheme<T> {
+  common: ThemeCommonVars
+  self: T
+  peers: any
+  overrides: any
+}
+
+function useTheme<T> (
+  resolveId: string,
+  mountId: string,
+  style: CNode | undefined,
+  defaultTheme: Theme<T>,
+  props: UseThemeProps<T>
+): ComputedRef<MergedTheme<T>> {
   if (style) {
     onBeforeMount(() => {
       style.mount({
@@ -22,7 +47,10 @@ function useTheme (resolveId: string, mountId: string, style: CNode | undefined,
       })
     })
   }
-  const NConfigProvider = inject<ConfigProviderInjection | null>('NConfigProvider', null)
+  const NConfigProvider = inject<ConfigProviderInjection | null>(
+    'NConfigProvider',
+    null
+  )
   const mergedThemeRef = computed(() => {
     // keep props to make theme overrideable
     const {
@@ -71,7 +99,7 @@ function useTheme (resolveId: string, mountId: string, style: CNode | undefined,
     return {
       common: mergedCommon,
       self: mergedSelf,
-      peers: merge(peers, injectedPeers),
+      peers: merge(defaultTheme.peers, peers, injectedPeers),
       overrides: merge(peersOverrides, injectedPeersOverrides)
     }
   })
@@ -90,6 +118,23 @@ useTheme.props = {
   builtinThemeOverrides: {
     type: Object,
     default: undefined
+  }
+}
+
+useTheme.createProps = function <T> () {
+  return {
+    unstableTheme: {
+      type: Object as PropType<Theme<T>>,
+      default: undefined
+    },
+    unstableThemeOverrides: {
+      type: Object,
+      default: undefined
+    },
+    builtinThemeOverrides: {
+      type: Object,
+      default: undefined
+    }
   }
 }
 

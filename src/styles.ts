@@ -1,6 +1,5 @@
 export { commonDark } from './_styles/new-common'
 export { alertDark } from './alert/styles'
-export { affixDark } from './affix/styles'
 export { anchorDark } from './anchor/styles'
 export { autoCompleteDark } from './auto-complete/styles'
 export { avatarDark } from './avatar/styles'

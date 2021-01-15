@@ -1,12 +1,22 @@
-import { inject, computed } from 'vue'
+import { inject, computed, ComputedRef } from 'vue'
 import { ConfigProviderInjection } from '../config-provider'
 
-interface UseConfigProps {
+type UseConfigProps = Readonly<{
   bordered?: boolean
-}
+  [key: string]: unknown
+}>
 
-export default function useConfig (props: UseConfigProps) {
-  const NConfigProvider = inject<ConfigProviderInjection | null>('NConfigProvider', null)
+export default function useConfig (
+  props: UseConfigProps
+): {
+  NConfigProvider: ConfigProviderInjection | null
+  mergedBordered: ComputedRef<boolean>
+  namespace: ComputedRef<string | undefined>
+} {
+  const NConfigProvider = inject<ConfigProviderInjection | null>(
+    'NConfigProvider',
+    null
+  )
   return {
     NConfigProvider,
     mergedBordered: computed(() => {
