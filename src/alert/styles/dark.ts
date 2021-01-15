@@ -1,12 +1,11 @@
 import { changeColor } from 'seemly'
 import { commonDark } from '../../_styles/new-common'
-import type { ThemeCommonVars } from '../../_styles/new-common'
-import type { AlertThemeVars } from './light'
+import type { AlertTheme } from './light'
 
-export default {
+const alertDark: AlertTheme = {
   name: 'Alert',
   common: commonDark,
-  self (vars: ThemeCommonVars): AlertThemeVars {
+  self (vars) {
     const {
       lineHeight,
       borderRadius,
@@ -76,3 +75,5 @@ export default {
     }
   }
 }
+
+export default alertDark

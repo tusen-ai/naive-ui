@@ -9,8 +9,9 @@ import {
 } from 'vue'
 import { intersection } from 'lodash-es'
 import { useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import { call, warn } from '../../_utils'
-import { collapseLight } from '../styles'
+import { collapseLight, CollapseTheme } from '../styles'
 import type { CollapseThemeVars } from '../styles'
 import style from './styles/index.cssr'
 
@@ -25,7 +26,7 @@ export interface NCollapseInjection {
 export default defineComponent({
   name: 'Collapse',
   props: {
-    ...useTheme.props,
+    ...(useTheme.props as ThemeProps<CollapseTheme>),
     expandedNames: {
       type: [Array, String] as PropType<string | string[]>,
       default: undefined

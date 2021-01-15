@@ -1,16 +1,15 @@
 import { changeColor } from 'seemly'
 import { checkboxDark } from '../../checkbox/styles'
 import { commonDark } from '../../_styles/new-common'
-import type { ThemeCommonVars } from '../../_styles/new-common'
-import type { TreeThemeVars } from './light'
+import type { TreeTheme } from './light'
 
-export default {
+const treeDark: TreeTheme = {
   name: 'Tree',
   common: commonDark,
   peers: {
     Checkbox: checkboxDark
   },
-  self (vars: ThemeCommonVars): TreeThemeVars {
+  self (vars) {
     const {
       borderRadiusSmall,
       hoverColorOverlay,
@@ -34,3 +33,5 @@ export default {
     }
   }
 }
+
+export default treeDark

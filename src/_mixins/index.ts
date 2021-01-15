@@ -1,5 +1,6 @@
 export { default as useFormItem } from './use-form-item'
 export { default as useTheme } from './use-theme'
+export type { ThemeProps, MergedTheme } from './use-theme'
 export { default as useConfig } from './use-config'
 export { default as useLocale } from './use-locale'
 export { default as useStyle } from './use-style'

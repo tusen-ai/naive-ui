@@ -12,10 +12,11 @@ import {
 import { RawNode, TreeMate, Key } from 'treemate'
 import { useMergedState, useKeyboard, useMemo } from 'vooks'
 import { useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import { NPopover, popoverProps } from '../../popover'
 import { keep, call, createKey } from '../../_utils'
 import { dropdownLight } from '../styles'
-import type { DropdownThemeVars } from '../styles'
+import type { DropdownTheme } from '../styles'
 import NDropdownMenu from './DropdownMenu'
 import style from './styles/index.cssr'
 
@@ -92,7 +93,7 @@ export default defineComponent({
   props: {
     ...popoverProps,
     ...dropdownProps,
-    ...useTheme.createProps<DropdownThemeVars>()
+    ...(useTheme.props as ThemeProps<DropdownTheme>)
   },
   setup (props) {
     const uncontrolledShowRef = ref(false)

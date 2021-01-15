@@ -47,9 +47,10 @@ import {
 } from '../../_base/icons'
 import { NFadeInExpandTransition, NBaseClose, NBaseIcon } from '../../_base'
 import { useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import { warn, createKey } from '../../_utils'
-import { alertLight } from '../styles/index'
-import type { AlertThemeVars } from '../styles/index'
+import { alertLight } from '../styles'
+import type { AlertTheme } from '../styles'
 import style from './styles/index.cssr'
 
 export default defineComponent({
@@ -65,7 +66,7 @@ export default defineComponent({
   },
   inheritAttrs: false,
   props: {
-    ...useTheme.createProps<AlertThemeVars>(),
+    ...(useTheme.props as ThemeProps<AlertTheme>),
     title: {
       type: String,
       default: undefined

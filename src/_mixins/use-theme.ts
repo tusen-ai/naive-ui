@@ -12,10 +12,10 @@ globalStyle.mount({
   id: 'naive-ui-global'
 })
 
-interface Theme<T> {
+export interface Theme<T, R = any> {
   name: string
-  common?: any
-  peers?: any
+  common?: ThemeCommonVars
+  peers?: R
   self(vars: ThemeCommonVars): T
 }
 
@@ -119,22 +119,20 @@ useTheme.props = {
     type: Object,
     default: undefined
   }
-}
+} as const
 
-useTheme.createProps = function <T> () {
-  return {
-    unstableTheme: {
-      type: Object as PropType<Theme<T>>,
-      default: undefined
-    },
-    unstableThemeOverrides: {
-      type: Object,
-      default: undefined
-    },
-    builtinThemeOverrides: {
-      type: Object,
-      default: undefined
-    }
+export type ThemeProps<T> = {
+  unstableTheme: {
+    type: PropType<T>
+    default: undefined
+  }
+  unstableThemeOverrides: {
+    type: ObjectConstructor
+    default: undefined
+  }
+  builtinThemeOverrides: {
+    type: ObjectConstructor
+    default: undefined
   }
 }
 

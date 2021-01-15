@@ -1,13 +1,14 @@
 import { defineComponent, h, toRef, watch, onMounted, ref, computed } from 'vue'
 import { useTheme, useHljs } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import { codeLight } from '../styles'
-import type { CodeThemeVars } from '../styles'
+import type { CodeTheme } from '../styles'
 import style from './styles/index.cssr'
 
 export default defineComponent({
   name: 'Code',
   props: {
-    ...useTheme.createProps<CodeThemeVars>(),
+    ...(useTheme.props as ThemeProps<CodeTheme>),
     language: {
       type: String,
       default: undefined

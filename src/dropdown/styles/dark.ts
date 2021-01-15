@@ -1,12 +1,15 @@
 import { commonDark } from '../../_styles/new-common'
-import type { ThemeCommonVars } from '../../_styles/new-common'
-import type { DropdownThemeVars } from './light'
+import { popoverDark } from '../../popover/styles'
+import type { DropdownTheme } from './light'
 import commonVariables from './_common'
 
-export default {
+const dropdownDark: DropdownTheme = {
   name: 'Dropdown',
   common: commonDark,
-  self (vars: ThemeCommonVars): DropdownThemeVars {
+  peers: {
+    NPopover: popoverDark
+  },
+  self (vars) {
     const {
       primaryColor,
       textColor2,
@@ -48,3 +51,5 @@ export default {
     }
   }
 }
+
+export default dropdownDark

@@ -14,8 +14,9 @@ import { VBinder, VTarget, FollowerPlacement } from 'vueuc'
 import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
 import { call, keep, warn } from '../../_utils'
 import { useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import NPopoverBody, { popoverBodyProps } from './PopoverBody'
-import type { PopoverThemeVars } from '../styles'
+import type { PopoverTheme } from '../styles'
 
 const bodyPropKeys = Object.keys(
   popoverBodyProps
@@ -74,7 +75,7 @@ export interface PopoverInjection {
 }
 
 export const popoverProps = {
-  ...useTheme.createProps<PopoverThemeVars>(),
+  ...(useTheme.props as ThemeProps<PopoverTheme>),
   show: {
     type: Boolean,
     default: undefined

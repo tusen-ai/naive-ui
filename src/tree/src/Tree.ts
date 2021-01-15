@@ -12,10 +12,10 @@ import {
 import { createTreeMate, Key, KeyedRawNode, TreeNode } from 'treemate'
 import { useMergedState } from 'vooks'
 import { useTheme } from '../../_mixins'
-import type { MergedTheme } from '../../_mixins/use-theme'
+import type { ThemeProps, MergedTheme } from '../../_mixins'
 import { call, warn } from '../../_utils'
 import { treeLight } from '../styles'
-import type { TreeThemeVars } from '../styles'
+import type { TreeThemeVars, TreeTheme } from '../styles'
 import NTreeNode from './TreeNode'
 import { keysWithFilter } from './utils'
 import style from './styles/index.cssr'
@@ -56,7 +56,7 @@ export interface TreeInjection {
 export default defineComponent({
   name: 'Tree',
   props: {
-    ...useTheme.createProps<TreeThemeVars>(),
+    ...(useTheme.props as ThemeProps<TreeTheme>),
     data: {
       type: Array as PropType<KeyedRawNode[]>,
       required: true

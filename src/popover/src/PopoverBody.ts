@@ -17,14 +17,15 @@ import {
 import { VFollower, FollowerPlacement, FollowerRef } from 'vueuc'
 import { clickoutside, mousemoveoutside } from 'vdirs'
 import { useTheme, useConfig } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import { formatLength, useAdjustedTo, getSlot } from '../../_utils'
 import { popoverLight } from '../styles'
+import type { PopoverTheme } from '../styles'
 import style from './styles/index.cssr'
-import { PopoverThemeVars } from '../styles/light'
-import { PopoverInjection } from './Popover'
+import type { PopoverInjection } from './Popover'
 
 export const popoverBodyProps = {
-  ...useTheme.createProps<PopoverThemeVars>(),
+  ...(useTheme.props as ThemeProps<PopoverTheme>),
   show: {
     type: Boolean,
     default: undefined

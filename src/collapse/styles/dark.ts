@@ -1,11 +1,10 @@
 import { commonDark } from '../../_styles/new-common'
-import type { ThemeCommonVars } from '../../_styles/new-common'
-import type { CollapseThemeVars } from './light'
+import type { CollapseTheme } from './light'
 
-export default {
+const collapseDark: CollapseTheme = {
   name: 'Collapse',
   common: commonDark,
-  self (vars: ThemeCommonVars): CollapseThemeVars {
+  self (vars) {
     const {
       fontWeight,
       textColor1,
@@ -24,3 +23,5 @@ export default {
     }
   }
 }
+
+export default collapseDark

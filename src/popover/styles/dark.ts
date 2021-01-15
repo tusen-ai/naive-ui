@@ -1,12 +1,11 @@
 import { commonDark } from '../../_styles/new-common'
-import type { ThemeCommonVars } from '../../_styles/new-common'
 import commonVariables from './_common'
-import { PopoverThemeVars } from './light'
+import type { PopoverTheme } from './light'
 
-export default {
+const popoverDark: PopoverTheme = {
   name: 'Popover',
   common: commonDark,
-  self (vars: ThemeCommonVars): PopoverThemeVars {
+  self (vars) {
     const {
       popoverColor,
       textColor2Overlay,
@@ -24,3 +23,5 @@ export default {
     }
   }
 }
+
+export default popoverDark

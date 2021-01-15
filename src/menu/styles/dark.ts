@@ -1,16 +1,15 @@
 import { changeColor } from 'seemly'
 import { tooltipDark } from '../../tooltip/styles'
 import { commonDark } from '../../_styles/new-common'
-import type { ThemeCommonVars } from '../../_styles/new-common'
-import type { MenuThemeVars } from './light'
+import type { MenuTheme } from './light'
 
-export default {
+const menuDark: MenuTheme = {
   name: 'Menu',
   common: commonDark,
   peers: {
     Tooltip: tooltipDark
   },
-  self (vars: ThemeCommonVars): MenuThemeVars {
+  self (vars) {
     const {
       borderRadius,
       textColor3Overlay,
@@ -39,3 +38,5 @@ export default {
     }
   }
 }
+
+export default menuDark

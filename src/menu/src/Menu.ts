@@ -11,17 +11,18 @@ import {
 import { createTreeMate, Key, RawNode } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
 import { useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import { call, warn } from '../../_utils'
 import { itemRenderer } from './utils'
 import { menuLight } from '../styles'
-import type { MenuThemeVars } from '../styles'
+import type { MenuTheme } from '../styles'
 import { MenuInjection } from './use-menu-child'
 import style from './styles/index.cssr'
 
 export default defineComponent({
   name: 'Menu',
   props: {
-    ...useTheme.createProps<MenuThemeVars>(),
+    ...(useTheme.props as ThemeProps<MenuTheme>),
     items: {
       type: Array as PropType<RawNode[]>,
       required: true
