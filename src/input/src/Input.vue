@@ -25,8 +25,7 @@
     <pre
       v-if="type === 'textarea' && autosize"
       ref="textareaMirrorRef"
-      class="n-input__textarea-mirror"
-    >{{ mergedValue }}<br></pre>
+      class="n-input__textarea-mirror">{{ mergedValue }}<br></pre>
     <textarea
       v-if="type === 'textarea'"
       ref="textareaRef"
@@ -80,7 +79,7 @@
           @input="handleInput($event, 0)"
           @change="handleChange($event, 0)"
           @keyup="handleKeyUp"
-        >
+        />
         <div v-if="showPlaceholder1" class="n-input__placeholder">
           <span>{{ mergedPlaceholder[0] }}</span>
         </div>
@@ -126,7 +125,7 @@
           @input="handleInput($event, 1)"
           @change="handleChange($event, 1)"
           @keyup="handleKeyUp"
-        >
+        />
         <div v-if="showPlaceholder2" class="n-input__placeholder">
           <span>{{ mergedPlaceholder[1] }}</span>
         </div>
@@ -164,7 +163,7 @@ import {
   getCurrentInstance
 } from 'vue'
 import { useMergedState } from 'vooks'
-import NIconConfigProvider from '../../icon/src/IconConfigProvider.vue'
+import NIconConfigProvider from '../../icon/src/IconConfigProvider'
 import { NBaseClear } from '../../_base'
 import { useTheme, useLocale, useFormItem, useConfig } from '../../_mixins'
 import { call, createKey } from '../../_utils'

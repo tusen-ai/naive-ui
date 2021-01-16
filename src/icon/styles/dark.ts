@@ -1,5 +1,7 @@
 import { commonDark } from '../../_styles/new-common'
-export default {
+import type { IconTheme } from './light'
+
+const iconDark: IconTheme = {
   name: 'Icon',
   common: commonDark,
   self (vars) {
@@ -21,3 +23,5 @@ export default {
     }
   }
 }
+
+export default iconDark

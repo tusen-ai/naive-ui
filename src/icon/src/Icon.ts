@@ -1,33 +1,31 @@
 import { h, defineComponent, computed, inject, mergeProps } from 'vue'
 import { useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import { formatLength, warn } from '../../_utils'
 import { iconLight } from '../styles'
+import type { IconTheme } from '../styles'
 import commonProps from './common-props'
-import style from './styles/index.cssr.js'
+import style from './styles/index.cssr'
+
+import type { Depth } from './common-props'
+
+export interface IconConfigProviderInjection {
+  depth: Depth
+}
 
 export default defineComponent({
   __NAIVE_ICON__: true,
   name: 'Icon',
   props: {
-    ...useTheme.props,
+    ...(useTheme.props as ThemeProps<IconTheme>),
     ...commonProps,
     size: {
       type: [Number, String],
       default: undefined
     },
-    depth: {
-      validator (value) {
-        return [1, 2, 3, 4, 5, '1', '2', '3', '4', '5'].includes(value)
-      },
-      default: undefined
-    },
     color: {
       type: String,
       default: undefined
-    },
-    colorTransition: {
-      type: Boolean,
-      default: false
     },
     // private
     configurable: {
@@ -36,7 +34,10 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const NIconConfigProvider = inject('NIconConfigProvider', null)
+    const NIconConfigProvider = inject<IconConfigProviderInjection | null>(
+      'NIconConfigProvider',
+      null
+    )
     const mergedDepthRef = computed(() => {
       const { depth, configurable } = props
       if (depth !== undefined) return depth
@@ -59,7 +60,10 @@ export default defineComponent({
           self
         } = themeRef.value
         if (depth !== undefined) {
-          const { color, [`opacity${depth}Depth`]: opacity } = self
+          const {
+            color,
+            [`opacity${depth}Depth` as 'opacity1Depth']: opacity
+          } = self
           return {
             '--bezier': cubicBezierEaseInOut,
             '--color': color,
@@ -73,9 +77,9 @@ export default defineComponent({
     }
   },
   render () {
-    const { $parent, mergedDepth, colorTransition } = this
+    const { $parent, mergedDepth } = this
     if ($parent && $parent.$options.__NAIVE_ICON__) {
-      warn('icon', "don't render `n-icon` inside `n-icon`")
+      warn('icon', "don't wrap `n-icon` inside `n-icon`")
     }
     return h(
       'i',
@@ -84,7 +88,7 @@ export default defineComponent({
           'n-icon',
           {
             'n-icon--depth': mergedDepth,
-            'n-icon--color-transition': colorTransition || mergedDepth
+            'n-icon--color-transition': mergedDepth
           }
         ],
         style: Object.assign(this.cssVars, this.mergedStyle)
