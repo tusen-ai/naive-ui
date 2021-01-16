@@ -18,7 +18,7 @@ from-end
 | inline | `boolean` | `false` |  |
 | item-style | `string \| object` | `undefined` |  |
 | justify | `'start' \| 'end'` | `'start'` |  |
-| size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` |  |
+| size | `'small' \| 'medium' \| 'large' \| [number, number]` | `'medium'` |  |
 | vertical | `boolean` | `false` |  |
 
 ## Slots

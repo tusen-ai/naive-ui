@@ -1,31 +1,30 @@
-import { h, defineComponent, computed } from 'vue'
+import { h, defineComponent, computed, PropType } from 'vue'
+import { depx } from 'seemly'
 import { createKey, flatten, getSlot } from '../../_utils'
 import { useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import { spaceLight } from '../styles'
-import { depx } from 'seemly'
+import type { SpaceTheme } from '../styles'
+
+type Align =
+  | 'stretch'
+  | 'baseline'
+  | 'start'
+  | 'end'
+  | 'center'
+  | 'flex-end'
+  | 'flex-start'
 
 export default defineComponent({
   name: 'Space',
   props: {
-    ...useTheme.props,
+    ...(useTheme.props as ThemeProps<SpaceTheme>),
     align: {
-      validator (value) {
-        return [
-          'stretch',
-          'baseline',
-          'start',
-          'end',
-          'center',
-          'flex-end',
-          'flex-start'
-        ].includes(value)
-      },
+      type: String as PropType<Align>,
       default: undefined
     },
     justify: {
-      validator (value) {
-        return ['start', 'end'].includes(value)
-      },
+      type: String as PropType<'start' | 'end'>,
       default: 'start'
     },
     inline: {
@@ -37,12 +36,9 @@ export default defineComponent({
       default: false
     },
     size: {
-      validator (value) {
-        return (
-          ['small', 'medium', 'large'].includes(value) ||
-          typeof value === 'number'
-        )
-      },
+      type: [String, Array] as PropType<
+        'small' | 'medium' | 'large' | [number, number]
+      >,
       default: 'medium'
     },
     itemStyle: {
@@ -51,11 +47,16 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const themeRef = useTheme('Space', 'Space', null, spaceLight, props)
+    const themeRef = useTheme('Space', 'Space', undefined, spaceLight, props)
     return {
-      margin: computed(() => {
+      margin: computed<{ horizontal: number; vertical: number }>(() => {
         const { size } = props
-        if (typeof size === 'number') return null
+        if (Array.isArray(size)) {
+          return {
+            horizontal: size[0],
+            vertical: size[1]
+          }
+        }
         const {
           self: {
             [createKey('marginHorizontal', size)]: marginHorizontal,
@@ -70,13 +71,11 @@ export default defineComponent({
     }
   },
   render () {
-    const { size, vertical, align, inline, justify, itemStyle, margin } = this
+    const { vertical, align, inline, justify, itemStyle, margin } = this
     const children = flatten(getSlot(this))
-    const sizeIsNumber = typeof size === 'number'
-    const horizontalMargin = (sizeIsNumber ? size : margin.horizontal) + 'px'
-    const verticalMargin = (sizeIsNumber ? size : margin.vertical) + 'px'
-    const semiVerticalMargin =
-      (sizeIsNumber ? size : margin.vertical) / 2 + 'px'
+    const horizontalMargin = margin.horizontal + 'px'
+    const verticalMargin = margin.vertical + 'px'
+    const semiVerticalMargin = margin.vertical / 2 + 'px'
     const lastIndex = children.length - 1
     return h(
       'div',
