@@ -1,3 +1,4 @@
+import { CNode } from 'css-render'
 import { FollowerPlacement } from 'vueuc'
 import { c, cB, cM, cNotM } from '../../../_utils/cssr'
 
@@ -23,9 +24,7 @@ const oppositePlacement = {
 // --space
 // --space-arrow
 export default c([
-  cB(
-    'popover',
-    `
+  cB('popover', `
     transition:
       background-color .3s var(--bezier),
       color .3s var(--bezier);
@@ -33,62 +32,40 @@ export default c([
     position: relative;
     font-size: var(--font-size);
     color: var(--text-color);
-  `,
-    [
-      // body transition
-      c(
-        '&.popover-transition-enter-from, &.popover-transition-leave-to',
-        `
+  `, [
+    // body transition
+    c('&.popover-transition-enter-from, &.popover-transition-leave-to', `
       opacity: 0;
       transform: scale(.85);
-    `
-      ),
-      c(
-        '&.popover-transition-enter-to, &.popover-transition-leave-from',
-        `
+    `),
+    c('&.popover-transition-enter-to, &.popover-transition-leave-from', `
       transform: scale(1);
       opacity: 1;
-    `
-      ),
-      c(
-        '&.popover-transition-enter-active',
-        `
+    `),
+    c('&.popover-transition-enter-active', `
       transition:
         opacity .15s var(--bezier-ease-out),
         transform .15s var(--bezier-ease-out);
-    `
-      ),
-      c(
-        '&.popover-transition-leave-active',
-        `
+    `),
+    c('&.popover-transition-leave-active', `
       transition:
         opacity .15s var(--bezier-ease-in),
         transform .15s var(--bezier-ease-in);
-    `
-      ),
-      cNotM(
-        'raw',
-        `
+    `),
+    cNotM('raw', `
       background-color: var(--color);
       border-radius: var(--border-radius);
-    `,
-        [
-          cM('padded', {
-            padding: 'var(--padding)'
-          })
-        ]
-      ),
-      cB(
-        'popover-arrow-wrapper',
-        `
+    `, [
+      cM('padded', {
+        padding: 'var(--padding)'
+      })
+    ]),
+    cB('popover-arrow-wrapper', `
       position: absolute;
       overflow: hidden;
       pointer-events: none;
-    `,
-        [
-          cB(
-            'popover-arrow',
-            `
+    `, [
+      cB('popover-arrow', `
         transition: background-color .3s var(--bezier);
         position: absolute;
         display: block;
@@ -98,109 +75,70 @@ export default c([
         transform: rotate(45deg);
         background-color: var(--color);
         pointer-events: all;
-      `
-          )
-        ]
-      ),
-      cM('shadow', {
-        boxShadow: 'var(--box-shadow)'
-      })
-    ]
-  ),
-  placementStyle(
-    'top-start',
-    `
+      `)
+    ]),
+    cM('shadow', {
+      boxShadow: 'var(--box-shadow)'
+    })
+  ]),
+  placementStyle('top-start', `
     top: calc(-0.707 * var(--arrow-height));
     left: var(--arrow-offset);
-  `
-  ),
-  placementStyle(
-    'top',
-    `
+  `),
+  placementStyle('top', `
     top: calc(-0.707 * var(--arrow-height));
     transform: translateX(calc(-0.707 * var(--arrow-height))) rotate(45deg);
     left: 50%;
-  `
-  ),
-  placementStyle(
-    'top-end',
-    `
+  `),
+  placementStyle('top-end', `
     top: calc(-0.707 * var(--arrow-height));
     right: var(--arrow-offset);
-  `
-  ),
-  placementStyle(
-    'bottom-start',
-    `
+  `),
+  placementStyle('bottom-start', `
     bottom: calc(-0.707 * var(--arrow-height));
     left: var(--arrow-offset);
-  `
-  ),
-  placementStyle(
-    'bottom',
-    `
+  `),
+  placementStyle('bottom', `
     bottom: calc(-0.707 * var(--arrow-height));
     transform: translateX(calc(-0.707 * var(--arrow-height))) rotate(45deg);
     left: 50%;
-  `
-  ),
-  placementStyle(
-    'bottom-end',
-    `
+  `),
+  placementStyle('bottom-end', `
     bottom: calc(-0.707 * var(--arrow-height));
     right: var(--arrow-offset);
-  `
-  ),
-  placementStyle(
-    'left-start',
-    `
+  `),
+  placementStyle('left-start', `
     left: calc(-0.707 * var(--arrow-height));
     top: var(--arrow-offset-vertical);
-  `
-  ),
-  placementStyle(
-    'left',
-    `
+  `),
+  placementStyle('left', `
     left: calc(-0.707 * var(--arrow-height));
     transform: translateY(calc(-0.707 * var(--arrow-height))) rotate(45deg);
     top: 50%;
-  `
-  ),
-  placementStyle(
-    'left-end',
-    `
+  `),
+  placementStyle('left-end', `
     left: calc(-0.707 * var(--arrow-height));
     bottom: var(--arrow-offset-vertical);
-  `
-  ),
-  placementStyle(
-    'right-start',
-    `
+  `),
+  placementStyle('right-start', `
     right: calc(-0.707 * var(--arrow-height));
     top: var(--arrow-offset-vertical);
-  `
-  ),
-  placementStyle(
-    'right',
-    `
+  `),
+  placementStyle('right', `
     right: calc(-0.707 * var(--arrow-height));
     transform: translateY(calc(-0.707 * var(--arrow-height))) rotate(45deg);
     top: 50%;
-  `
-  ),
-  placementStyle(
-    'right-end',
-    `
+  `),
+  placementStyle('right-end', `
     right: calc(-0.707 * var(--arrow-height));
     bottom: var(--arrow-offset-vertical);
-  `
-  )
+  `)
 ])
 
 function placementStyle (
   placement: FollowerPlacement,
   arrowStyleLiteral: string
-) {
+): CNode {
   const position = placement.split('-')[0] as
     | 'top'
     | 'right'
@@ -210,22 +148,14 @@ function placementStyle (
     ? 'height: var(--space-arrow);'
     : 'width: var(--space-arrow);'
   return c(`[v-placement="${placement}"]`, [
-    cB(
-      'popover',
-      `
+    cB('popover', `
       margin-${oppositePlacement[position]}: var(--space-arrow);
-    `,
-      [
-        cM(
-          'no-arrow',
-          `
+    `, [
+      cM('no-arrow', `
         margin-${position}: var(--space);
         margin-${oppositePlacement[position]}: var(--space);
-      `
-        ),
-        cB(
-          'popover-arrow-wrapper',
-          `
+      `),
+      cB('popover-arrow-wrapper', `
         right: 0;
         left: 0;
         top: 0;
@@ -233,10 +163,9 @@ function placementStyle (
         ${position}: 100%;
         ${oppositePlacement[position]}: auto;
         ${sizeStyle}
-      `,
-          [cB('popover-arrow', arrowStyleLiteral)]
-        )
-      ]
-    )
+      `, [
+        cB('popover-arrow', arrowStyleLiteral)
+      ])
+    ])
   ])
 }

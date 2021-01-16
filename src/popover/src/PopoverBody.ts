@@ -183,21 +183,21 @@ export default defineComponent({
         }
       }
     })
-    function syncPosition () {
+    function syncPosition (): void {
       // eslint-disable-next-line no-unused-expressions
       followerRef.value?.syncPosition()
     }
-    function handleMouseEnter (e: MouseEvent) {
+    function handleMouseEnter (e: MouseEvent): void {
       if (props.trigger === 'hover') {
         NPopover.handleMouseEnter(e)
       }
     }
-    function handleMouseLeave (e: MouseEvent) {
+    function handleMouseLeave (e: MouseEvent): void {
       if (props.trigger === 'hover') {
         NPopover.handleMouseLeave(e)
       }
     }
-    function handleMouseMoveOutside (e: MouseEvent) {
+    function handleMouseMoveOutside (e: MouseEvent): void {
       if (
         props.trigger === 'hover' &&
         !getTriggerElement().contains(e.target as Node)
@@ -205,7 +205,7 @@ export default defineComponent({
         NPopover.handleMouseMoveOutside(e)
       }
     }
-    function handleClickOutside (e: MouseEvent) {
+    function handleClickOutside (e: MouseEvent): void {
       if (
         props.trigger === 'click' &&
         !getTriggerElement().contains(e.target as Node)
@@ -213,7 +213,7 @@ export default defineComponent({
         NPopover.handleClickOutside(e)
       }
     }
-    function getTriggerElement () {
+    function getTriggerElement (): HTMLElement {
       return NPopover.getTriggerElement()
     }
     return {

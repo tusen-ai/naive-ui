@@ -18,9 +18,9 @@ import type { ThemeProps } from '../../_mixins'
 import NPopoverBody, { popoverBodyProps } from './PopoverBody'
 import type { PopoverTheme } from '../styles'
 
-const bodyPropKeys = Object.keys(
-  popoverBodyProps
-) as (keyof typeof popoverBodyProps)[]
+const bodyPropKeys = Object.keys(popoverBodyProps) as Array<
+keyof typeof popoverBodyProps
+>
 
 function appendEvents (
   vNode: VNode,
@@ -62,10 +62,13 @@ function getFirstSlotVNode (slots: Slots, slotName = 'default'): VNode | null {
 
 const textVNodeType = createTextVNode('').type
 
-type BodyInstance = { syncPosition: () => void; [key: string]: unknown }
+interface BodyInstance {
+  syncPosition: () => void
+  [key: string]: unknown
+}
 
 export interface PopoverRef {
-  syncPosition(): void
+  syncPosition: () => void
 }
 
 export interface PopoverInjection {
@@ -221,7 +224,7 @@ export default defineComponent({
     const showTimerIdRef = ref<number | null>(null)
     const hideTimerIdRef = ref<number | null>(null)
     // methods
-    function doUpdateShow (value: boolean) {
+    function doUpdateShow (value: boolean): void {
       const { 'onUpdate:show': onUpdateShow, onShow, onHide } = props
       uncontrolledShowRef.value = value
       if (onUpdateShow) {
@@ -234,12 +237,12 @@ export default defineComponent({
         call(onHide, false)
       }
     }
-    function syncPosition () {
+    function syncPosition (): void {
       if (bodyInstance) {
         bodyInstance.syncPosition()
       }
     }
-    function clearTimer () {
+    function clearTimer (): void {
       const { value: showTimerId } = showTimerIdRef
       const { value: hideTimerId } = hideTimerIdRef
       if (showTimerId) {
@@ -251,7 +254,7 @@ export default defineComponent({
         hideTimerIdRef.value = null
       }
     }
-    function handleMouseEnter () {
+    function handleMouseEnter (): void {
       if (props.trigger === 'hover' && !props.disabled) {
         clearTimer()
         if (mergedShowRef.value) return
@@ -261,7 +264,7 @@ export default defineComponent({
         }, props.delay)
       }
     }
-    function handleMouseLeave () {
+    function handleMouseLeave (): void {
       if (props.trigger === 'hover' && !props.disabled) {
         clearTimer()
         if (!mergedShowRef.value) return
@@ -272,28 +275,28 @@ export default defineComponent({
       }
     }
     // will be called in popover-content
-    function handleMouseMoveOutside () {
+    function handleMouseMoveOutside (): void {
       handleMouseLeave()
     }
     // will be called in popover-content
-    function handleClickOutside () {
+    function handleClickOutside (): void {
       if (!mergedShowRef.value) return
       if (props.trigger === 'click') {
         clearTimer()
         doUpdateShow(false)
       }
     }
-    function handleClick () {
+    function handleClick (): void {
       if (props.trigger === 'click' && !props.disabled) {
         clearTimer()
         const nextShow = !mergedShowRef.value
         doUpdateShow(nextShow)
       }
     }
-    function setShow (value: boolean) {
+    function setShow (value: boolean): void {
       uncontrolledShowRef.value = value
     }
-    function getTriggerElement () {
+    function getTriggerElement (): HTMLElement {
       return triggerVNode?.el as HTMLElement
     }
     function setBodyInstance (value: BodyInstance | null): void {
