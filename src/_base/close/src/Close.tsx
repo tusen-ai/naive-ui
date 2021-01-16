@@ -2,7 +2,7 @@ import { h, defineComponent } from 'vue'
 import { useStyle } from '../../../_mixins'
 import NBaseIcon from '../../icon'
 import { CloseIcon } from '../../icons'
-import style from './styles/index.cssr.js'
+import style from './styles/index.cssr'
 
 export default defineComponent({
   name: 'BaseClose',

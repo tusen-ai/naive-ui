@@ -1,36 +1,37 @@
-import { commonLight } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/new-common'
 import commonVariables from './_common'
+import type { CardTheme } from './light'
 
-export default {
+const cardDark: CardTheme = {
   name: 'Card',
-  common: commonLight,
+  common: commonDark,
   self (vars) {
     const {
       borderRadius,
       lineHeight,
       fontSize,
       cardColor,
-      textColor2,
-      textColor1,
+      textColor2Overlay,
+      textColor1Overlay,
       dividerColorOverlay,
       actionColorOverlay,
       fontWeightStrong,
-      closeColor,
-      closeColorHover,
-      closeColorPressed
+      closeColorOverlay,
+      closeColorHoverOverlay,
+      closeColorPressedOverlay
     } = vars
     return {
       ...commonVariables,
       lineHeight,
       color: cardColor,
-      textColor: textColor2,
-      titleTextColor: textColor1,
+      textColor: textColor2Overlay,
+      titleTextColor: textColor1Overlay,
       borderColor: dividerColorOverlay,
       actionColor: actionColorOverlay,
       titleFontWeight: fontWeightStrong,
-      closeColor: closeColor,
-      closeColorHover: closeColorHover,
-      closeColorPressed: closeColorPressed,
+      closeColor: closeColorOverlay,
+      closeColorHover: closeColorHoverOverlay,
+      closeColorPressed: closeColorPressedOverlay,
       fontSizeSmall: fontSize,
       fontSizeMedium: fontSize,
       fontSizeLarge: fontSize,
@@ -39,3 +40,5 @@ export default {
     }
   }
 }
+
+export default cardDark
