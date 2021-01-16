@@ -6,7 +6,9 @@ import { c, cE, cB } from '../../../_utils/cssr'
 // --color
 // --bezier
 // --size
-export default cB('avatar', `
+export default cB(
+  'avatar',
+  `
     width: var(--size);
     height: var(--size);
     color: #FFF;
@@ -20,23 +22,28 @@ export default cB('avatar', `
     transition:
       background-color .3s var(--bezier),
       color .3s var(--bezier);
-  `, [
-  c('img', {
-    width: '100%',
-    height: '100%'
-  }),
-  cE('text', `
+  `,
+  [
+    c('img', {
+      width: '100%',
+      height: '100%'
+    }),
+    cE(
+      'text',
+      `
     white-space: nowrap;
     display: inline-block;
     position: absolute;
     left: 50%;
     top: 50%;
-  `),
-  cB('icon', {
-    verticalAlign: 'bottom',
-    fontSize: 'var(--size)'
-  }),
-  cE('text', {
-    lineHeight: 1.25
-  })
-])
+  `
+    ),
+    cB('icon', {
+      verticalAlign: 'bottom',
+      fontSize: 'var(--size)'
+    }),
+    cE('text', {
+      lineHeight: 1.25
+    })
+  ]
+)

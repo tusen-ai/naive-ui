@@ -1,8 +1,9 @@
-import { commonLight } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/new-common'
+import { AvatarTheme } from './light'
 
-export default {
+const avatarDark: AvatarTheme = {
   name: 'Avatar',
-  common: commonLight,
+  common: commonDark,
   self (vars) {
     const {
       borderRadius,
@@ -26,3 +27,5 @@ export default {
     }
   }
 }
+
+export default avatarDark

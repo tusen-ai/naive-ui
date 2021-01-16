@@ -49,6 +49,10 @@
       "prettier --write",
       "eslint --fix"
     ],
+    "*.tsx": [
+      "prettier --write",
+      "eslint --fix"
+    ],
     "*.vue": [
       "prettier --parser=vue --write",
       "eslint --fix"
@@ -83,12 +87,14 @@
     "babel-jest": "^26.6.2",
     "cross-env": "^5.2.1",
     "cssnano": "^4.1.10",
-    "eslint": "^7.0.0",
+    "eslint": "^7.18.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-config-standard-with-typescript": "^19.0.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-markdown": "^2.0.0-rc.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.2",
+    "eslint-plugin-standard": "^4.1.0",
     "eslint-plugin-vue": "^7.0.0",
     "fs-extra": "^9.0.1",
     "husky": "^4.3.5",
