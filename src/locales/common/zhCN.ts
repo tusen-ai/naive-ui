@@ -1,4 +1,6 @@
-export default {
+import type { NaiveLocale } from './enUS'
+
+const zhCN: NaiveLocale = {
   name: 'zh-CN',
   Popconfirm: {
     positiveText: '确认',
@@ -7,7 +9,12 @@ export default {
   Cascader: {
     placeholder: '请选择',
     loading: '加载中',
-    loadingRequiredMessage: (label) => `加载全部 ${label} 的子节点后才可选中`
+    loadingRequiredMessage: (label: string): string =>
+      `加载全部 ${label} 的子节点后才可选中`
+  },
+  Time: {
+    dateFormat: 'yyyy-MM-dd',
+    dateTimeFormat: 'yyyy-MM-dd hh:mm:ss'
   },
   DatePicker: {
     yearFormat: 'yyyy年',
@@ -66,3 +73,5 @@ export default {
     create: '添加'
   }
 }
+
+export default zhCN

@@ -1,3 +1,3 @@
 /* istanbul ignore file */
-export { default as NDescriptions } from './src/Descriptions.js'
-export { default as NDescriptionsItem } from './src/DescriptionsItem.js'
+export { default as NDescriptions } from './src/Descriptions'
+export { default as NDescriptionsItem } from './src/DescriptionsItem'

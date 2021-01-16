@@ -12,7 +12,7 @@ import { createId } from 'seemly'
 import { omit } from '../../_utils'
 import { ThemePropsReactive, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import MessageEnvironment from './MessageEnvironment.js'
+import MessageEnvironment from './MessageEnvironment'
 import { MessageType } from './message-props'
 import { MessageTheme } from '../styles'
 

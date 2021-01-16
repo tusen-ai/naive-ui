@@ -36,8 +36,8 @@ export default defineComponent({
       default: false
     },
     size: {
-      type: [String, Array] as PropType<
-        'small' | 'medium' | 'large' | [number, number]
+      type: [String, Number, Array] as PropType<
+        'small' | 'medium' | 'large' | number | [number, number]
       >,
       default: 'medium'
     },
@@ -55,6 +55,12 @@ export default defineComponent({
           return {
             horizontal: size[0],
             vertical: size[1]
+          }
+        }
+        if (typeof size === 'number') {
+          return {
+            horizontal: size,
+            vertical: size
           }
         }
         const {

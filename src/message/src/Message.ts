@@ -15,7 +15,7 @@ import { render, createKey } from '../../_utils'
 import { ThemePropsReactive, useTheme } from '../../_mixins'
 import { messageLight, MessageTheme } from '../styles'
 import { messageProps, MessageType } from './message-props'
-import style from './styles/index.cssr.js'
+import style from './styles/index.cssr'
 
 const iconMap = {
   info: InfoIcon,

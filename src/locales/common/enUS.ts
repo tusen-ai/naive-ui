@@ -1,4 +1,4 @@
-export default {
+const enUS = {
   name: 'en-US',
   Popconfirm: {
     positiveText: 'Confirm',
@@ -7,8 +7,12 @@ export default {
   Cascader: {
     placeholder: 'Please Select',
     loading: 'Loading',
-    loadingRequiredMessage: (label) =>
+    loadingRequiredMessage: (label: string): string =>
       `Please load all ${label}'s descedants before checking it.`
+  },
+  Time: {
+    dateFormat: 'yyyy-MM-dd',
+    dateTimeFormat: 'yyyy-MM-dd hh:mm:ss'
   },
   DatePicker: {
     yearFormat: 'yyyy',
@@ -67,3 +71,6 @@ export default {
     create: 'Create'
   }
 }
+
+export type NaiveLocale = typeof enUS
+export default enUS

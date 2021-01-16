@@ -1,6 +1,6 @@
 import { h, defineComponent, ref, onMounted, PropType } from 'vue'
 import { NFadeInExpandTransition } from '../../_base'
-import NMessage from './Message.js'
+import NMessage from './Message'
 import { messageProps } from './message-props'
 
 export default defineComponent({
