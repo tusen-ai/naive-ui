@@ -1,8 +1,9 @@
-import { commonLight } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/new-common'
+import type { SpinTheme } from './light'
 
-export default {
+const spinDark: SpinTheme = {
   name: 'Spin',
-  common: commonLight,
+  common: commonDark,
   self (vars) {
     const {
       opacityDisabled,
@@ -24,3 +25,5 @@ export default {
     }
   }
 }
+
+export default spinDark

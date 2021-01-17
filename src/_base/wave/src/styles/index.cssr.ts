@@ -1,4 +1,4 @@
-import { cB } from '../../../../_utils/cssr/index.js'
+import { cB } from '../../../../_utils/cssr/index'
 
 export default cB('base-wave', `
   position: absolute;

@@ -1,39 +1,20 @@
-<template>
-  <div v-if="$slots.default" class="n-spin-container" :style="cssVars">
-    <div
-      :class="{
-        'n-spin-content--spinning': compitableShow
-      }"
-      class="n-spin-content"
-    >
-      <slot />
-    </div>
-    <transition name="n-fade-in-transition">
-      <n-base-loading
-        v-if="compitableShow"
-        :stroke="stroke"
-        :stroke-width="mergedStrokeWidth"
-        class="n-spin"
-      />
-    </transition>
-  </div>
-  <n-base-loading
-    v-else
-    :style="cssVars"
-    :stroke="stroke"
-    :stroke-width="mergedStrokeWidth"
-    class="n-spin"
-  />
-</template>
-
-<script>
-import { computed, defineComponent } from 'vue'
+import {
+  computed,
+  defineComponent,
+  h,
+  renderSlot,
+  Transition,
+  PropType,
+  CSSProperties
+} from 'vue'
 import { useCompitable } from 'vooks'
 import { NBaseLoading } from '../../_base'
 import { useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import { createKey, warn } from '../../_utils'
 import { spinLight } from '../styles'
-import style from './styles/index.cssr.js'
+import type { SpinTheme } from '../styles'
+import style from './styles/index.cssr'
 
 const STROKE_WIDTH = {
   small: 22,
@@ -43,17 +24,14 @@ const STROKE_WIDTH = {
 
 export default defineComponent({
   name: 'Spin',
-  components: {
-    NBaseLoading
-  },
   props: {
-    ...useTheme.props,
+    ...(useTheme.props as ThemeProps<SpinTheme>),
     stroke: {
       type: String,
       default: undefined
     },
     size: {
-      type: [String, Number],
+      type: [String, Number] as PropType<'small' | 'medium' | 'large'>,
       default: 'medium'
     },
     show: {
@@ -65,7 +43,8 @@ export default defineComponent({
       default: undefined
     },
     spinning: {
-      validator () {
+      type: Boolean,
+      validator: () => {
         warn('spin', '`spinning` is deprecated, please use `show` instead.')
         return true
       },
@@ -96,6 +75,41 @@ export default defineComponent({
         }
       })
     }
+  },
+  render () {
+    const { $slots } = this
+    return $slots.default ? (
+      <div class="n-spin-container" style={this.cssVars as CSSProperties}>
+        <div
+          class={[
+            'n-spin-content',
+            {
+              'n-spin-content--spinning': this.compitableShow
+            }
+          ]}
+        >
+          {renderSlot($slots, 'default')}
+        </div>
+        <Transition name="n-fade-in-transition">
+          {{
+            default: () =>
+              this.compitableShow ? (
+                <NBaseLoading
+                  stroke={this.stroke}
+                  strokeWidth={this.mergedStrokeWidth}
+                  class="n-spin"
+                />
+              ) : null
+          }}
+        </Transition>
+      </div>
+    ) : (
+      <NBaseLoading
+        style={this.cssVars as CSSProperties}
+        stroke={this.stroke}
+        stroke-width={this.mergedStrokeWidth}
+        class="n-spin"
+      />
+    )
   }
 })
-</script>

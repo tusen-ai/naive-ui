@@ -37,7 +37,7 @@ export default defineComponent({
     },
     size: {
       type: [String, Number, Array] as PropType<
-        'small' | 'medium' | 'large' | number | [number, number]
+      'small' | 'medium' | 'large' | number | [number, number]
       >,
       default: 'medium'
     },
@@ -49,7 +49,7 @@ export default defineComponent({
   setup (props) {
     const themeRef = useTheme('Space', 'Space', undefined, spaceLight, props)
     return {
-      margin: computed<{ horizontal: number; vertical: number }>(() => {
+      margin: computed<{ horizontal: number, vertical: number }>(() => {
         const { size } = props
         if (Array.isArray(size)) {
           return {
@@ -79,9 +79,9 @@ export default defineComponent({
   render () {
     const { vertical, align, inline, justify, itemStyle, margin } = this
     const children = flatten(getSlot(this))
-    const horizontalMargin = margin.horizontal + 'px'
-    const verticalMargin = margin.vertical + 'px'
-    const semiVerticalMargin = margin.vertical / 2 + 'px'
+    const horizontalMargin = `${margin.horizontal}px`
+    const verticalMargin = `${margin.vertical}px`
+    const semiVerticalMargin = `${margin.vertical / 2}px`
     const lastIndex = children.length - 1
     return h(
       'div',
