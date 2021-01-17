@@ -1,21 +1,22 @@
-import commonVariables from './_common.js'
-import { commonLight } from '../../_styles/new-common'
+import commonVariables from './_common'
+import { commonDark } from '../../_styles/new-common'
+import type { BackTopTheme } from './light'
 
-export default {
+const backTopDark: BackTopTheme = {
   name: 'BackTop',
-  common: commonLight,
+  common: commonDark,
   self (vars) {
     const {
       popoverColor,
-      textColor2,
+      textColor2Overlay,
       primaryColorHover,
       primaryColorPressed
     } = vars
     return {
       ...commonVariables,
       color: popoverColor,
-      textColor: textColor2,
-      iconColor: textColor2,
+      textColor: textColor2Overlay,
+      iconColor: textColor2Overlay,
       iconColorHover: primaryColorHover,
       iconColorPressed: primaryColorPressed,
       boxShadow: '0 2px 8px 0px rgba(0, 0, 0, .12)',
@@ -24,3 +25,5 @@ export default {
     }
   }
 }
+
+export default backTopDark
