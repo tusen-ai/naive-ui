@@ -1,8 +1,10 @@
-import { computed, inject, provide, onBeforeUnmount } from 'vue'
+import { computed, inject, provide, onBeforeUnmount, ComputedRef } from 'vue'
+
+type FormItemSize = 'small' | 'medium' | 'large'
+type AllowedSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge'
 
 interface FormItemInjection {
-  size: string | undefined
-  mergedSize: string
+  mergedSize: FormItemSize
   restoreValidation: () => void
   handleContentBlur: () => void
   handleContentFocus: () => void
@@ -10,19 +12,27 @@ interface FormItemInjection {
   handleContentChange: () => void
 }
 
-interface UseFormItemOptions {
-  defaultSize?: string
-  mergedSize?: (formItem: FormItemInjection | null) => string
+interface UseFormItemOptions<T> {
+  defaultSize?: FormItemSize
+  mergedSize?: (formItem: FormItemInjection | null) => T
 }
 
-interface UseFormItemProps {
-  size?: string
+interface UseFormItemProps<T> {
+  size?: T
 }
 
-export default function useFormItem (
-  props: UseFormItemProps,
-  { defaultSize = 'medium', mergedSize }: UseFormItemOptions = {}
-) {
+interface UseFormItem<T> {
+  mergedSize: ComputedRef<T>
+  nTriggerFormBlur: () => void
+  nTriggerFormChange: () => void
+  nTriggerFormFocus: () => void
+  nTriggerFormInput: () => void
+}
+
+export default function useFormItem<T extends AllowedSize = FormItemSize> (
+  props: UseFormItemProps<T>,
+  { defaultSize = 'medium', mergedSize }: UseFormItemOptions<T> = {}
+): UseFormItem<T> {
   const NFormItem = inject<FormItemInjection | null>('NFormItem', null)
   provide('NFormItem', null)
   const mergedSizeRef = computed(
@@ -34,10 +44,10 @@ export default function useFormItem (
         if (NFormItem) {
           const { mergedSize } = NFormItem
           if (mergedSize) {
-            return mergedSize
+            return (mergedSize as unknown) as T
           }
         }
-        return defaultSize
+        return (defaultSize as unknown) as T
       }
   )
   onBeforeUnmount(() => {

@@ -1,4 +1,4 @@
-import { h, defineComponent, PropType } from 'vue'
+import { h, defineComponent, PropType, renderSlot } from 'vue'
 import { useStyle } from '../../../_mixins'
 import { DismissCircleIcon } from '../../icons'
 import NBaseIcon from '../../icon'
@@ -43,11 +43,11 @@ export default defineComponent({
                   onClick={this.onClear}
                   onMousedown={this.handleMouseDown}
                 >
-                  <DismissCircleIcon />
+                  {{ default: () => <DismissCircleIcon /> }}
                 </NBaseIcon>
               ) : (
                 <div key="icon" class="n-base-clear__placeholder">
-                  <slot />
+                  {renderSlot(this.$slots, 'default')}
                 </div>
               )
             }

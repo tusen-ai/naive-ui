@@ -1,27 +1,18 @@
-<template>
-  <div
-    class="n-input-group-label"
-    :class="`n-input-group-label--${size}-size`"
-    :style="cssVars"
-  >
-    <slot />
-    <div class="n-input-group-label__border" />
-  </div>
-</template>
-
-<script>
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, renderSlot, h, PropType } from 'vue'
 import { useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils'
 import { inputLight } from '../styles'
-import style from './styles/input-group-label.cssr.js'
+import type { InputTheme } from '../styles'
+import style from './styles/input-group-label.cssr'
+import type { Size } from './interface'
 
 export default defineComponent({
   name: 'InputGroupLabel',
   props: {
-    ...useTheme.props,
+    ...(useTheme.props as ThemeProps<InputTheme>),
     size: {
-      type: String,
+      type: String as PropType<Size>,
       default: 'medium'
     }
   },
@@ -43,8 +34,8 @@ export default defineComponent({
             borderRadius,
             textColor,
             lineHeight,
-            fontSize,
             border,
+            [createKey('fontSize', size)]: fontSize,
             [createKey('height', size)]: height
           }
         } = themeRef.value
@@ -60,6 +51,13 @@ export default defineComponent({
         }
       })
     }
+  },
+  render () {
+    return (
+      <div class="n-input-group-label" style={this.cssVars as any}>
+        {renderSlot(this.$slots, 'default')}
+        <div class="n-input-group-label__border" />
+      </div>
+    )
   }
 })
-</script>

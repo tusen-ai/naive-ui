@@ -14,7 +14,7 @@ export default defineComponent({
   },
   setup (props) {
     useStyle('BaseClose', style)
-    return (
+    return () => (
       <NBaseIcon
         class={[
           'n-base-close',
@@ -23,7 +23,7 @@ export default defineComponent({
           }
         ]}
       >
-        <CloseIcon />
+        {{ default: () => <CloseIcon /> }}
       </NBaseIcon>
     )
   }

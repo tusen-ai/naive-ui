@@ -22,7 +22,10 @@ import { cB, c, cE, cM, cNotM, insideFormItem } from '../../../_utils/cssr'
 // --color-disabled
 // --color-focus
 // --box-shadow-focus
-// --icon-size
+// --clear-color
+// --clear-size
+// --clear-color-hover
+// --clear-color-pressed
 export default c([
   cB('input', `
     line-height: 1.5;
@@ -241,7 +244,6 @@ export default c([
         }),
         c('&:hover', [
           cE('state-border', `
-            box-shadow: var(--box-shadow-hover-${status});
             border: var(--border-hover-${status});
           `)
         ]),

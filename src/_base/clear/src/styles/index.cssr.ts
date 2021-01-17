@@ -3,10 +3,10 @@ import createIconSwitchTransition from '../../../../_styles/transitions/icon-swi
 
 // vars:
 // --bezier
-// --color
-// --size
-// --color-hover
-// --color-pressed
+// --clear-color
+// --clear-size
+// --clear-color-hover
+// --clear-color-pressed
 export default cB(
   'base-clear',
   {
@@ -22,15 +22,15 @@ export default cB(
         {
           fontSize: 'var(--size)',
           cursor: 'pointer',
-          color: 'var(--color)',
+          color: 'var(--clear-color)',
           transition: 'color .3s var(--bezier)'
         },
         [
           c('&:hover', {
-            color: 'var(--color-hover)!important'
+            color: 'var(--clear-color-hover)!important'
           }),
           c('&:active', {
-            color: 'var(--color-pressed)!important'
+            color: 'var(--clear-color-pressed)!important'
           })
         ]
       ),

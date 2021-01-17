@@ -1,14 +1,11 @@
 import commonVariables from './_common'
-import { changeColor } from 'seemly'
-import { baseClearDark } from '../../_base/clear/styles'
+import { changeColor, scaleColor } from 'seemly'
 import { commonDark } from '../../_styles/new-common'
+import type { InputTheme } from './light'
 
-export default {
+const inputDark: InputTheme = {
   name: 'Input',
   common: commonDark,
-  peers: {
-    BaseClear: baseClearDark
-  },
   self (vars) {
     const {
       textColor2Overlay,
@@ -43,6 +40,7 @@ export default {
       fontSizeSmall,
       fontSizeMedium,
       fontSizeLarge,
+      lineHeight,
       lineHeightTextarea: lineHeight,
       borderRadius,
       iconSize: '16px',
@@ -78,7 +76,12 @@ export default {
       boxShadowFocusError: `0 0 8px 0 ${changeColor(errorColor, {
         alpha: 0.3
       })}`,
-      caretColorError: errorColor
+      caretColorError: errorColor,
+      clearColor: textColor4Overlay,
+      clearColorHover: scaleColor(textColor4Overlay, { alpha: 1.25 }),
+      clearColorPressed: scaleColor(textColor4Overlay, { alpha: 0.75 })
     }
   }
 }
+
+export default inputDark
