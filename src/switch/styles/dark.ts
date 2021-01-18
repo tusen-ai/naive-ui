@@ -1,7 +1,8 @@
 import commonVars from './_common'
 import { commonDark } from '../../_styles/new-common'
+import type { SwitchTheme } from './light'
 
-export default {
+const switchDark: SwitchTheme = {
   name: 'Switch',
   common: commonDark,
   self (vars) {
@@ -23,3 +24,5 @@ export default {
     }
   }
 }
+
+export default switchDark

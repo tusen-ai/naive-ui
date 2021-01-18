@@ -1,6 +1,7 @@
 import { commonDark } from '../../_styles/new-common'
+import { GradientTextTheme } from './light'
 
-export default {
+const gradientTextDark: GradientTextTheme = {
   name: 'GradientText',
   common: commonDark,
   self (vars) {
@@ -33,3 +34,5 @@ export default {
     }
   }
 }
+
+export default gradientTextDark
