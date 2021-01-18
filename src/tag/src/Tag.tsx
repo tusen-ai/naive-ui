@@ -1,41 +1,24 @@
-<template>
-  <div
-    class="n-tag"
-    :class="{
-      'n-tag--disabled': disabled,
-      'n-tag--checkable': checkable,
-      'n-tag--checked': checkable && checked,
-      'n-tag--round': round
-    }"
-    :style="cssVars"
-    @click="handleClick"
-  >
-    <span class="n-tag__content"><slot /></span>
-    <n-base-close
-      v-if="!checkable && closable"
-      class="n-tag__close"
-      :disabled="disabled"
-      @click="handleCloseClick"
-    />
-  </div>
-</template>
-
-<script>
-import { defineComponent, computed } from 'vue'
+import {
+  h,
+  defineComponent,
+  computed,
+  PropType,
+  renderSlot,
+  CSSProperties
+} from 'vue'
 import { useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import { NBaseClose } from '../../_base'
 import { warn, createKey } from '../../_utils'
 import { tagLight } from '../styles'
+import type { TagTheme } from '../styles'
 import commonProps from './common-props'
-import style from './styles/index.cssr.js'
+import style from './styles/index.cssr'
 
 export default defineComponent({
   name: 'Tag',
-  components: {
-    NBaseClose
-  },
   props: {
-    ...useTheme.props,
+    ...(useTheme.props as ThemeProps<TagTheme>),
     ...commonProps,
     checked: {
       type: Boolean,
@@ -61,7 +44,8 @@ export default defineComponent({
     },
     // deprecated
     onCheckedChange: {
-      validator () {
+      type: Function as PropType<(checked: boolean) => void>,
+      validator: () => {
         if (__DEV__) {
           warn(
             'tag',
@@ -75,7 +59,32 @@ export default defineComponent({
   },
   setup (props) {
     const themeRef = useTheme('Tag', 'Tag', style, tagLight, props)
+    function handleClick (e: MouseEvent): void {
+      if (!props.disabled) {
+        if (props.checkable) {
+          const {
+            checked,
+            onCheckedChange,
+            'onUpdate:checked': onUpdateChecked
+          } = props
+          if (onUpdateChecked) onUpdateChecked(!checked)
+          // deprecated
+          if (onCheckedChange) onCheckedChange(!checked)
+        }
+      }
+    }
+    function handleCloseClick (e: MouseEvent): void {
+      if (props.stopClickPropagation) {
+        e.stopPropagation()
+      }
+      if (!props.disabled) {
+        const { onClose } = props
+        if (onClose) onClose()
+      }
+    }
     return {
+      handleClick,
+      handleCloseClick,
       cssVars: computed(() => {
         const { type, size } = props
         const {
@@ -135,30 +144,30 @@ export default defineComponent({
       })
     }
   },
-  methods: {
-    handleClick (e) {
-      if (!this.disabled) {
-        if (this.checkable) {
-          const {
-            checked,
-            onCheckedChange,
-            'onUpdate:checked': onUpdateChecked
-          } = this
-          if (onUpdateChecked) onUpdateChecked(!checked)
-          // deprecated
-          if (onCheckedChange) onCheckedChange(!checked)
-        }
-      }
-    },
-    handleCloseClick (e) {
-      if (this.stopClickPropagation) {
-        e.stopPropagation()
-      }
-      if (!this.disabled) {
-        const { onClose } = this
-        if (onClose) onClose()
-      }
-    }
+  render () {
+    return (
+      <div
+        class={[
+          'n-tag',
+          {
+            'n-tag--disabled': this.disabled,
+            'n-tag--checkable': this.checkable,
+            'n-tag--checked': this.checkable && this.checked,
+            'n-tag--round': this.round
+          }
+        ]}
+        style={this.cssVars as CSSProperties}
+        onClick={this.handleClick}
+      >
+        <span class="n-tag__content">{renderSlot(this.$slots, 'default')}</span>
+        {!this.checkable && this.closable ? (
+          <NBaseClose
+            class="n-tag__close"
+            disabled={this.disabled}
+            onClick={this.handleCloseClick}
+          />
+        ) : null}
+      </div>
+    )
   }
 })
-</script>

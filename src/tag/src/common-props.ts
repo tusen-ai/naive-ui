@@ -1,8 +1,10 @@
+import { PropType } from 'vue'
+
 export default {
   type: {
-    validator (value) {
-      return ['default', 'success', 'info', 'warning', 'error'].includes(value)
-    },
+    type: String as PropType<
+    'default' | 'success' | 'info' | 'warning' | 'error'
+    >,
     default: 'default'
   },
   round: {
@@ -10,9 +12,7 @@ export default {
     default: false
   },
   size: {
-    validator (value) {
-      return ['small', 'medium', 'large'].includes(value)
-    },
+    type: String as PropType<'small' | 'medium' | 'large'>,
     default: 'medium'
   },
   closable: {
@@ -23,4 +23,4 @@ export default {
     type: Boolean,
     default: false
   }
-}
+} as const
