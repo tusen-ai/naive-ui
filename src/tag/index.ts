@@ -1,2 +1,2 @@
 /* istanbul ignore file */
-export { default as NTag } from './src/Tag.vue'
+export { default as NTag } from './src/Tag'

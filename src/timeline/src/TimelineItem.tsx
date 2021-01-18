@@ -1,39 +1,17 @@
-<template>
-  <div
-    class="n-timeline-item"
-    :class="`n-timeline-item--${type}-type`"
-    :style="cssVars"
-  >
-    <div class="n-timeline-item-timeline">
-      <div class="n-timeline-item-timeline__line" />
-      <div class="n-timeline-item-timeline__circle" />
-    </div>
-    <div class="n-timeline-item-content">
-      <div v-if="title" class="n-timeline-item-content__title">
-        <slot name="header">
-          {{ title }}
-        </slot>
-      </div>
-      <div class="n-timeline-item-content__content">
-        <slot>
-          {{ content }}
-        </slot>
-      </div>
-      <div class="n-timeline-item-content__meta">
-        <slot name="footer">
-          {{ time }}
-        </slot>
-      </div>
-    </div>
-  </div>
-</template>
-
-<script>
-import { defineComponent, computed, inject } from 'vue'
+import {
+  defineComponent,
+  computed,
+  inject,
+  PropType,
+  h,
+  renderSlot,
+  CSSProperties
+} from 'vue'
 import { useTheme } from '../../_mixins'
 import { createKey } from '../../_utils'
 import { timelineLight } from '../styles'
-import style from './styles/index.cssr.js'
+import type { TimelineInjection } from './Timeline'
+import style from './styles/index.cssr'
 
 export default defineComponent({
   name: 'TimelineItem',
@@ -51,20 +29,22 @@ export default defineComponent({
       default: undefined
     },
     type: {
-      validator (type) {
-        return ['default', 'success', 'error', 'warning', 'info'].includes(type)
-      },
+      type: String as PropType<
+      'default' | 'success' | 'error' | 'warning' | 'info'
+      >,
       default: 'default'
     }
   },
   setup (props) {
-    const NTimeline = inject('NTimeline')
+    const NTimeline = inject<TimelineInjection>(
+      'NTimeline'
+    ) as TimelineInjection
     const themeRef = useTheme(
       'Timeline',
       'Timeline',
       style,
       timelineLight,
-      props
+      NTimeline
     )
     return {
       cssVars: computed(() => {
@@ -98,6 +78,33 @@ export default defineComponent({
         }
       })
     }
+  },
+  render () {
+    return (
+      <div
+        class={['n-timeline-item', `n-timeline-item--${this.type}-type`]}
+        style={this.cssVars as CSSProperties}
+      >
+        <div class="n-timeline-item-timeline">
+          <div class="n-timeline-item-timeline__line" />
+          <div class="n-timeline-item-timeline__circle" />
+        </div>
+        <div class="n-timeline-item-content">
+          {this.title ? (
+            <div class="n-timeline-item-content__title">
+              {renderSlot(this.$slots, 'header', undefined, () => [this.title])}
+            </div>
+          ) : null}
+          <div class="n-timeline-item-content__content">
+            {renderSlot(this.$slots, 'default', undefined, () => [
+              this.content
+            ])}
+          </div>
+          <div class="n-timeline-item-content__meta">
+            {renderSlot(this.$slots, 'footer', undefined, () => [this.time])}
+          </div>
+        </div>
+      </div>
+    )
   }
 })
-</script>

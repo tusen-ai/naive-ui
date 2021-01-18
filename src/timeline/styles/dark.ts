@@ -1,7 +1,8 @@
 import sizeVariables from './_common'
 import { commonDark } from '../../_styles/new-common'
+import type { TimelineTheme } from './light'
 
-export default {
+const timelineDark: TimelineTheme = {
   name: 'Timeline',
   common: commonDark,
   self (vars) {
@@ -33,3 +34,5 @@ export default {
     }
   }
 }
+
+export default timelineDark
