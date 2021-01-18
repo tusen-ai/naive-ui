@@ -1,4 +1,4 @@
-import { computed, watch, toRef } from 'vue'
+import { computed, watch, toRef, ComputedRef } from 'vue'
 import { ConfigProviderInjection } from '../../config-provider'
 import styleScheme from '../../_deprecated/style-scheme'
 
@@ -9,11 +9,18 @@ interface UseLegacyProps {
   ) => void
 }
 
+interface UseLegacy {
+  legacyTheme: ComputedRef<string | undefined>
+  legacyLanguage: ComputedRef<string | undefined>
+  legacyThemeEnvironment: ComputedRef<any>
+  legacyStyleScheme: ComputedRef<any>
+}
+
 export default function useLegacy (
   NConfigProvider: ConfigProviderInjection | null,
-  props: UseLegacyProps
-) {
-  if (NConfigProvider) {
+  props?: UseLegacyProps
+): UseLegacy {
+  if (NConfigProvider && props) {
     watch(toRef(NConfigProvider, 'mergedLanguage'), (value, oldValue) => {
       const { onLanguageChange } = props
       if (onLanguageChange) onLanguageChange(value, oldValue)
@@ -21,10 +28,10 @@ export default function useLegacy (
   }
   return {
     legacyTheme: computed(() => {
-      return (NConfigProvider && NConfigProvider.mergedTheme) || 'light'
+      return NConfigProvider?.mergedTheme || 'light'
     }),
     legacyLanguage: computed(() => {
-      return NConfigProvider ? NConfigProvider.mergedLanguage : null
+      return NConfigProvider ? NConfigProvider.mergedLanguage : undefined
     }),
     legacyThemeEnvironment: computed(() => {
       const { mergedThemeEnvironments, mergedTheme } = NConfigProvider || {}

@@ -1,6 +1,7 @@
-import { computed, h, defineComponent } from 'vue'
+import { computed, h, defineComponent, PropType } from 'vue'
 import { kebabCase } from 'lodash-es'
 import { useConfig, useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import { warn } from '../../_utils'
 
 /**
@@ -8,26 +9,29 @@ import { warn } from '../../_utils'
  */
 import useLegacy from '../../config-consumer/src/use-legacy'
 import { elementLight } from '../styles'
+import type { ElementTheme } from '../styles'
 
 export default defineComponent({
   name: 'Element',
   alias: ['El'],
   props: {
-    ...useTheme.props,
+    ...(useTheme.props as ThemeProps<ElementTheme>),
     tag: {
       type: String,
       default: 'div'
     },
     // deprecated
     onThemeChange: {
-      validator () {
+      type: Function as PropType<(theme: string | undefined) => void>,
+      validator: () => {
         warn('element', '`on-theme-change` is deprecated.')
         return true
       },
       default: undefined
     },
     as: {
-      validator () {
+      type: String,
+      validator: () => {
         warn('element', '`as` is deprecated, please use `tag` instead.')
         return true
       },
@@ -35,13 +39,22 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const themeRef = useTheme('Element', 'Element', null, elementLight, props)
+    const themeRef = useTheme(
+      'Element',
+      'Element',
+      undefined,
+      elementLight,
+      props
+    )
+    const { NConfigProvider, namespace } = useConfig(props)
     return {
-      ...useLegacy(props),
-      ...useConfig(props),
+      ...useLegacy(NConfigProvider),
+      namespace,
       cssVars: computed(() => {
         const { common } = themeRef.value
-        return Object.keys(common).reduce((prevValue, key) => {
+        return ((Object.keys(common) as unknown) as Array<
+        keyof typeof common
+        >).reduce<Record<string, string | number>>((prevValue, key) => {
           prevValue[`--${kebabCase(key)}`] = common[key]
           return prevValue
         }, {})
@@ -63,22 +76,15 @@ export default defineComponent({
     return h(
       as || tag,
       {
-        class: [
-          'n-element',
-          {
-            [`n-${legacyTheme}-theme`]: legacyTheme
-          }
-        ],
+        class: ['n-element', legacyTheme && `n-${legacyTheme}-theme`],
         style: cssVars
       },
-      ($slots.default &&
-        $slots.default({
-          namespace: namespace,
-          theme: legacyTheme,
-          themeEnvironment: legacyThemeEnvironment,
-          styleScheme: legacyStyleScheme
-        })) ||
-        null
+      ($slots.default?.({
+        namespace: namespace,
+        theme: legacyTheme,
+        themeEnvironment: legacyThemeEnvironment,
+        styleScheme: legacyStyleScheme
+      }) || null) as any
     )
   }
 })

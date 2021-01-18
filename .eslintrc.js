@@ -1,8 +1,5 @@
 module.exports = {
   extends: ['plugin:markdown/recommended'],
-  rules: {
-    'no-void': 0
-  },
   overrides: [
     {
       files: 'src/**/*.vue',
@@ -38,7 +35,9 @@ module.exports = {
       },
       rules: {
         '@typescript-eslint/strict-boolean-expressions': 0,
-        '@typescript-eslint/prefer-nullish-coalescing': 0
+        '@typescript-eslint/prefer-nullish-coalescing': 0,
+        '@typescript-eslint/naming-convention': 0,
+        'no-void': 0
       }
     },
     {

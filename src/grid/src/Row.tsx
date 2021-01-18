@@ -10,7 +10,7 @@ import {
 import { useMemo } from 'vooks'
 import { formatLength } from '../../_utils'
 import { useStyle } from '../../_mixins'
-import style from './styles/index.cssr.js'
+import style from './styles/index.cssr'
 
 export interface RowInjection {
   gutter: any

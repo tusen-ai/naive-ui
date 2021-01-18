@@ -1,2 +1,3 @@
 src/_deprecated/icons
 *.cssr.js
+*.cssr.ts
