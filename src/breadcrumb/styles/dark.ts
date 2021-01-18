@@ -1,7 +1,8 @@
 import commonVariables from './_common'
 import { commonDark } from '../../_styles/new-common'
+import type { BreadcrumbTheme } from './light'
 
-export default {
+const breadcrumbDark: BreadcrumbTheme = {
   name: 'Breadcrumb',
   common: commonDark,
   self (vars) {
@@ -23,3 +24,5 @@ export default {
     }
   }
 }
+
+export default breadcrumbDark

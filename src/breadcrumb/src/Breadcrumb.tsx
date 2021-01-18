@@ -1,24 +1,25 @@
-<template>
-  <div class="n-breadcrumb" :style="cssVars">
-    <slot />
-  </div>
-</template>
-
-<script>
-import { computed, defineComponent } from 'vue'
+import {
+  h,
+  computed,
+  defineComponent,
+  renderSlot,
+  CSSProperties,
+  provide
+} from 'vue'
 import { useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import { breadcrumbLight } from '../styles'
-import style from './styles/index.cssr.js'
+import type { BreadcrumbTheme } from '../styles'
+import style from './styles/index.cssr'
+
+export interface BreadcrumbInjection {
+  separator: string
+}
 
 export default defineComponent({
   name: 'Breadcrumb',
-  provide () {
-    return {
-      NBreadcrumb: this
-    }
-  },
   props: {
-    ...useTheme.props,
+    ...(useTheme.props as ThemeProps<BreadcrumbTheme>),
     separator: {
       type: String,
       default: '/'
@@ -32,6 +33,7 @@ export default defineComponent({
       breadcrumbLight,
       props
     )
+    provide<BreadcrumbInjection>('NBreadcrumb', props)
     return {
       cssVars: computed(() => {
         const {
@@ -58,6 +60,12 @@ export default defineComponent({
         }
       })
     }
+  },
+  render () {
+    return (
+      <div class="n-breadcrumb" style={this.cssVars as CSSProperties}>
+        {renderSlot(this.$slots, 'default')}
+      </div>
+    )
   }
 })
-</script>

@@ -15,10 +15,6 @@ import style from './styles/index.cssr'
 
 export default defineComponent({
   name: 'BaseSlotMachine',
-  components: {
-    NFadeInExpandTransition,
-    SlotMachineNumber
-  },
   props: {
     value: {
       type: [Number, String],
