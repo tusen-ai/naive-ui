@@ -1,37 +1,30 @@
-<template>
-  <div
-    class="n-row"
-    :class="{
-      'n-row--flex': flex
-    }"
-    :style="{
-      margin: styleMargin,
-      width: styleWidth,
-      alignItems: alignItems,
-      justifyContent: justifyContent
-    }"
-  >
-    <slot />
-  </div>
-</template>
-
-<script>
-import { defineComponent } from 'vue'
+import {
+  defineComponent,
+  h,
+  renderSlot,
+  PropType,
+  provide,
+  reactive,
+  toRef
+} from 'vue'
 import { useMemo } from 'vooks'
 import { formatLength } from '../../_utils'
 import { useStyle } from '../../_mixins'
 import style from './styles/index.cssr.js'
 
+export interface RowInjection {
+  gutter: any
+  verticalGutter: number
+  horizontalGutter: number
+}
+
 export default defineComponent({
   name: 'Row',
-  provide () {
-    return {
-      NRow: this
-    }
-  },
   props: {
     gutter: {
-      type: [Array, Number, String],
+      type: [Array, Number, String] as PropType<
+      string | number | [number, number]
+      >,
       default: 0
     },
     flex: {
@@ -61,11 +54,17 @@ export default defineComponent({
       if (Array.isArray(gutter)) {
         return gutter[0]
       }
-      return gutter
+      return Number(gutter)
     })
+    provide<RowInjection>(
+      'NRow',
+      reactive({
+        gutter: toRef(props, 'gutter'),
+        verticalGutter: verticalGutterRef,
+        horizontalGutter: horizontalGutterRef
+      })
+    )
     return {
-      verticalGutter: verticalGutterRef,
-      horizontalGutter: horizontalGutterRef,
       styleMargin: useMemo(
         () => `0px -${formatLength(horizontalGutterRef.value, { c: 0.5 })}`
       ),
@@ -73,6 +72,25 @@ export default defineComponent({
         () => `calc(100% + ${formatLength(horizontalGutterRef.value)})`
       )
     }
+  },
+  render () {
+    return (
+      <div
+        class={[
+          'n-row',
+          {
+            'n-row--flex': this.flex
+          }
+        ]}
+        style={{
+          margin: this.styleMargin,
+          width: this.styleWidth,
+          alignItems: this.alignItems,
+          justifyContent: this.justifyContent
+        }}
+      >
+        {renderSlot(this.$slots, 'default')}
+      </div>
+    )
   }
 })
-</script>
