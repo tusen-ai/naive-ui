@@ -1,18 +1,3 @@
-<template>
-  <div
-    ref="selfRef"
-    class="n-affix"
-    :class="{
-      [`n-affix--affixed`]: affixed,
-      [`n-affix--absolute-positioned`]: position === 'absolute'
-    }"
-    :style="mergedstyle"
-  >
-    <slot />
-  </div>
-</template>
-
-<script lang="ts">
 import {
   ref,
   computed,
@@ -20,10 +5,12 @@ import {
   onBeforeUnmount,
   defineComponent,
   CSSProperties,
-  PropType
+  PropType,
+  h,
+  renderSlot
 } from 'vue'
 import { getScrollParent, unwrapElement } from 'seemly'
-import { useConfig, useStyle } from '../../_mixins'
+import { useStyle } from '../../_mixins'
 import { warn } from '../../_utils'
 import style from './styles/index.cssr'
 
@@ -91,7 +78,7 @@ export default defineComponent({
       return offsetBottom === undefined ? bottom : offsetBottom
     })
     const selfRef = ref<Element | null>(null)
-    const init = () => {
+    const init = (): void => {
       const { target: getScrollTarget, listenTo } = props
       let scrollElement
       if (getScrollTarget) {
@@ -112,7 +99,7 @@ export default defineComponent({
         handleScroll()
       }
     }
-    const handleScroll = () => {
+    const handleScroll = (): void => {
       const { value: containerEl } = scrollElementRef
       const { value: selfEl } = selfRef
       if (!containerEl || !selfEl) return
@@ -169,13 +156,7 @@ export default defineComponent({
       }
     })
     return {
-      ...useConfig(props),
       selfRef,
-      scrollElement: scrollElementRef,
-      stickToTop: stickToTopRef,
-      stickToBottom: stickToBottomRef,
-      bottomAffixedTriggerScrollTop: bottomAffixedTriggerScrollTopRef,
-      topAffixedTriggerScrollTop: topAffixedTriggerScrollTopRef,
       affixed: affixedRef,
       mergedstyle: computed<CSSProperties>(() => {
         const style: CSSProperties = {}
@@ -191,6 +172,22 @@ export default defineComponent({
         return style
       })
     }
+  },
+  render () {
+    return (
+      <div
+        ref="selfRef"
+        class={[
+          'n-affix',
+          {
+            'n-affix--affixed': this.affixed,
+            'n-affix--absolute-positioned': this.position === 'absolute'
+          }
+        ]}
+        style={this.mergedstyle}
+      >
+        {renderSlot(this.$slots, 'default')}
+      </div>
+    )
   }
 })
-</script>
