@@ -1,7 +1,8 @@
 import { commonDark } from '../../_styles/new-common'
 import commonVariables from './_common'
+import type { StepsTheme } from './light'
 
-export default {
+const stepsDark: StepsTheme = {
   name: 'Steps',
   common: commonDark,
   self (vars) {
@@ -43,3 +44,5 @@ export default {
     }
   }
 }
+
+export default stepsDark

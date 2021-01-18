@@ -23,7 +23,6 @@ type UseThemeProps<T> = Readonly<{
   unstableTheme: Theme<T>
   unstableThemeOverrides: ThemeOverrides
   builtinThemeOverrides: ThemeOverrides
-  [key: string]: unknown
 }>
 
 export interface MergedTheme<T, R = any> {
