@@ -1,57 +1,23 @@
-<template>
-  <code
-    v-if="code"
-    class="n-text"
-    :class="{
-      'n-text--code': code,
-      'n-text--delete': $props.delete,
-      'n-text--strong': strong,
-      'n-text--italic': italic,
-      'n-text--underline': underline
-    }"
-    :style="cssVars"
-  ><template v-if="!$props.delete"><slot /></template><del v-else><slot /></del></code>
-  <del
-    v-else-if="$props.delete"
-    class="n-text"
-    :class="{
-      'n-text--code': code,
-      'n-text--delete': $props.delete,
-      'n-text--strong': strong,
-      'n-text--italic': italic,
-      'n-text--underline': underline
-    }"
-    :style="cssVars"
-  ><slot /></del>
-  <component
-    :is="compitableTag || 'span'"
-    v-else
-    class="n-text"
-    :class="{
-      'n-text--code': code,
-      'n-text--delete': $props.delete,
-      'n-text--strong': strong,
-      'n-text--italic': italic,
-      'n-text--underline': underline
-    }"
-    :style="cssVars"
-  >
-    <slot />
-  </component>
-</template>
-
-<script>
-import { defineComponent, computed } from 'vue'
+import {
+  h,
+  renderSlot,
+  defineComponent,
+  computed,
+  PropType,
+  CSSProperties
+} from 'vue'
 import { useCompitable } from 'vooks'
 import { useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import { warn, createKey } from '../../_utils'
 import { typographyLight } from '../styles'
-import style from './styles/text.cssr.js'
+import type { TypographyTheme } from '../styles'
+import style from './styles/text.cssr'
 
 export default defineComponent({
   name: 'Text',
   props: {
-    ...useTheme.props,
+    ...(useTheme.props as ThemeProps<TypographyTheme>),
     code: {
       type: Boolean,
       default: false
@@ -77,9 +43,9 @@ export default defineComponent({
       default: false
     },
     depth: {
-      validator (value) {
-        return [1, 2, 3, '1', '2', '3'].includes(value)
-      },
+      type: [String, Number] as PropType<
+      1 | 2 | 3 | '1' | '2' | '3' | undefined
+      >,
       default: undefined
     },
     tag: {
@@ -88,7 +54,8 @@ export default defineComponent({
     },
     // deprecated
     as: {
-      validator () {
+      type: String,
+      validator: () => {
         if (__DEV__) {
           warn('text', '`as` is deprecated, please use `tag` instead.')
         }
@@ -122,7 +89,7 @@ export default defineComponent({
             codeBorderRadius,
             codeColor,
             codeBorder,
-            [textColorKey]: textColor
+            [textColorKey as 'textColor']: textColor
           }
         } = themeRef.value
         return {
@@ -136,6 +103,33 @@ export default defineComponent({
         }
       })
     }
+  },
+  render () {
+    const textClass = [
+      'n-text',
+      {
+        'n-text--code': this.code,
+        'n-text--delete': this.delete,
+        'n-text--strong': this.strong,
+        'n-text--italic': this.italic,
+        'n-text--underline': this.underline
+      }
+    ]
+    const defaultSlot = renderSlot(this.$slots, 'default')
+    return this.code ? (
+      <code class={textClass} style={this.cssVars as CSSProperties}>
+        {this.delete ? <del>{defaultSlot}</del> : defaultSlot}
+      </code>
+    ) : this.delete ? (
+      <del class={textClass} style={this.cssVars as CSSProperties}>
+        {defaultSlot}
+      </del>
+    ) : (
+      h(
+        this.compitableTag || 'span',
+        { class: textClass, style: this.cssVars },
+        defaultSlot
+      )
+    )
   }
 })
-</script>

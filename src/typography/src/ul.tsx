@@ -1,25 +1,14 @@
-<template>
-  <ol
-    class="n-ol"
-    :class="{
-      'n-ol--align-text': alignText
-    }"
-    :style="cssVars"
-  >
-    <slot />
-  </ol>
-</template>
-
-<script>
-import { defineComponent, computed } from 'vue'
+import { h, defineComponent, computed, renderSlot, CSSProperties } from 'vue'
 import { useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import { typographyLight } from '../styles'
-import style from './styles/list.cssr.js'
+import type { TypographyTheme } from '../styles'
+import style from './styles/list.cssr'
 
 export default defineComponent({
-  name: 'Ol',
+  name: 'Ul',
   props: {
-    ...useTheme.props,
+    ...(useTheme.props as ThemeProps<TypographyTheme>),
     alignText: {
       type: Boolean,
       default: false
@@ -57,6 +46,20 @@ export default defineComponent({
         }
       })
     }
+  },
+  render () {
+    return (
+      <ul
+        class={[
+          'n-ul',
+          {
+            'n-ul--align-text': this.alignText
+          }
+        ]}
+        style={this.cssVars as CSSProperties}
+      >
+        {renderSlot(this.$slots, 'default')}
+      </ul>
+    )
   }
 })
-</script>

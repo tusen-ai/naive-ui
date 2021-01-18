@@ -1,21 +1,22 @@
 import commonVars from './_common'
-import { commonLight } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/new-common'
+import type { TypographyTheme } from './light'
 
-export default {
+const typographyDark: TypographyTheme = {
   name: 'Typography',
-  common: commonLight,
+  common: commonDark,
   self (vars) {
     const {
       primaryColor,
-      textColor2,
-      borderColor,
+      textColor2Overlay,
+      borderColorOverlay,
       lineHeight,
       fontSize,
       borderRadiusSmall,
-      dividerColor,
+      dividerColorOverlay,
       fontWeightStrong,
-      textColor1,
-      textColor3,
+      textColor1Overlay,
+      textColor3Overlay,
       infoColor,
       warningColor,
       errorColor,
@@ -25,21 +26,21 @@ export default {
     return {
       ...commonVars,
       aTextColor: primaryColor,
-      blockquoteTextColor: textColor2,
-      blockquotePrefixColor: borderColor,
+      blockquoteTextColor: textColor2Overlay,
+      blockquotePrefixColor: borderColorOverlay,
       blockquoteLineHeight: lineHeight,
       blockquoteFontSize: fontSize,
       codeBorderRadius: borderRadiusSmall,
-      liTextColor: textColor2,
+      liTextColor: textColor2Overlay,
       liLineHeight: lineHeight,
       liFontSize: fontSize,
-      hrColor: dividerColor,
+      hrColor: dividerColorOverlay,
       headerFontWeight: fontWeightStrong,
-      headerTextColor: textColor1,
-      pTextColor: textColor2,
-      pTextColor1Depth: textColor1,
-      pTextColor2Depth: textColor2,
-      pTextColor3Depth: textColor3,
+      headerTextColor: textColor1Overlay,
+      pTextColor: textColor2Overlay,
+      pTextColor1Depth: textColor1Overlay,
+      pTextColor2Depth: textColor2Overlay,
+      pTextColor3Depth: textColor3Overlay,
       pLineHeight: lineHeight,
       pFontSize: fontSize,
       headerBarColor: primaryColor,
@@ -48,18 +49,20 @@ export default {
       headerBarColorError: errorColor,
       headerBarColorWarning: warningColor,
       headerBarColorSuccess: successColor,
-      textColor: textColor2,
-      textColor1Depth: textColor1,
-      textColor2Depth: textColor2,
-      textColor3Depth: textColor3,
+      textColor: textColor2Overlay,
+      textColor1Depth: textColor1Overlay,
+      textColor2Depth: textColor2Overlay,
+      textColor3Depth: textColor3Overlay,
       textColorPrimary: primaryColor,
       textColorInfo: infoColor,
       textColorSuccess: successColor,
       textColorWarning: warningColor,
       textColorError: errorColor,
-      codeTextColor: textColor2,
+      codeTextColor: textColor2Overlay,
       codeColor: codeColorOverlay,
       codeBorder: '1px solid transparent'
     }
   }
 }
+
+export default typographyDark

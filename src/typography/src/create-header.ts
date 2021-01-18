@@ -1,16 +1,21 @@
-import { h, defineComponent, computed } from 'vue'
+import { h, defineComponent, computed, PropType } from 'vue'
 import { useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import { getSlot, createKey } from '../../_utils'
 import { typographyLight } from '../styles'
-import style from './styles/header.cssr.js'
+import type { TypographyTheme } from '../styles'
+import style from './styles/header.cssr'
 
-export default (level) =>
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export default (level: '1' | '2' | '3' | '4' | '5' | '6') =>
   defineComponent({
-    name: 'H' + level,
+    name: `H${level}`,
     props: {
-      ...useTheme.props,
+      ...(useTheme.props as ThemeProps<TypographyTheme>),
       type: {
-        type: String,
+        type: String as PropType<
+        'info' | 'success' | 'warning' | 'error' | 'default'
+        >,
         default: 'default'
       },
       prefix: {
@@ -38,10 +43,10 @@ export default (level) =>
             self: {
               headerFontWeight,
               headerTextColor,
-              [`headerPrefixWidth${level}`]: prefixWidth,
-              [`headerFontSize${level}`]: fontSize,
-              [`headerMargin${level}`]: margin,
-              [`headerBarWidth${level}`]: barWidth,
+              [createKey('headerPrefixWidth', level)]: prefixWidth,
+              [createKey('headerFontSize', level)]: fontSize,
+              [createKey('headerMargin', level)]: margin,
+              [createKey('headerBarWidth', level)]: barWidth,
               [createKey('headerBarColor', type)]: barColor
             }
           } = themeRef.value

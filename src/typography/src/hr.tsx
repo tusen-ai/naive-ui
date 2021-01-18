@@ -1,18 +1,15 @@
-<template>
-  <ul class="n-hr" :style="cssVars">
-    <slot />
-  </ul>
-</template>
-
-<script>
-import { defineComponent, computed } from 'vue'
+import { h, defineComponent, computed, CSSProperties } from 'vue'
 import { useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import { typographyLight } from '../styles'
-import style from './styles/hr.cssr.js'
+import type { TypographyTheme } from '../styles'
+import style from './styles/hr.cssr'
 
 export default defineComponent({
   name: 'Hr',
-  props: useTheme.props,
+  props: {
+    ...(useTheme.props as ThemeProps<TypographyTheme>)
+  },
   setup (props) {
     const themeRef = useTheme('Typography', 'Hr', style, typographyLight, props)
     return {
@@ -22,6 +19,8 @@ export default defineComponent({
         }
       })
     }
+  },
+  render () {
+    return <hr class="n-hr" style={this.cssVars as CSSProperties} />
   }
 })
-</script>

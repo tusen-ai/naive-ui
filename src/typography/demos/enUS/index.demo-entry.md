@@ -14,11 +14,6 @@ text
 
 ## Props
 
-### All Typography Components Props
-
-| Name | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-
 ### Text Props
 
 | Name | Type | Default | Description |

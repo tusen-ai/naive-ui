@@ -5,8 +5,8 @@ import { cB } from '../../../_utils/cssr'
 export default cB('hr', `
   margin: 12px 0;
   transition: border-color .3s var(--bezier);
-  borderLeft: none;
-  borderRight: none;
-  borderBottom: none;
-  borderTop: 1px solid var(--color);
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  border-top: 1px solid var(--color);
 `)

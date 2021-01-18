@@ -1,25 +1,14 @@
-<template>
-  <blockquote
-    class="n-blockquote"
-    :class="{
-      'n-blockquote--align-text': alignText
-    }"
-    :style="cssVars"
-  >
-    <slot />
-  </blockquote>
-</template>
-
-<script>
-import { defineComponent, computed } from 'vue'
+import { h, renderSlot, defineComponent, computed, CSSProperties } from 'vue'
 import { useTheme } from '../../_mixins'
-import style from './styles/blockquote.cssr.js'
+import type { ThemeProps } from '../../_mixins'
+import style from './styles/blockquote.cssr'
 import { typographyLight } from '../styles'
+import type { TypographyTheme } from '../styles'
 
 export default defineComponent({
   name: 'Blockquote',
   props: {
-    ...useTheme.props,
+    ...(useTheme.props as ThemeProps<TypographyTheme>),
     alignText: {
       type: Boolean,
       default: false
@@ -53,6 +42,20 @@ export default defineComponent({
         }
       })
     }
+  },
+  render () {
+    return (
+      <blockquote
+        class={[
+          'n-blockquote',
+          {
+            'n-blockquote--align-text': this.alignText
+          }
+        ]}
+        style={this.cssVars as CSSProperties}
+      >
+        {renderSlot(this.$slots, 'default')}
+      </blockquote>
+    )
   }
 })
-</script>
