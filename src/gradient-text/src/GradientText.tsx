@@ -1,32 +1,32 @@
-<template>
-  <span
-    class="n-gradient-text"
-    :class="{
-      [`n-gradient-text--${compatibleType}-type`]: true
-    }"
-    :style="{
-      fontSize: styleFontSize,
-      backgroundImage: styleBgImage,
-      ...cssVars
-    }"
-  >
-    <slot />
-  </span>
-</template>
-
-<script>
-import { defineComponent, computed, onBeforeMount } from 'vue'
+import {
+  defineComponent,
+  computed,
+  onBeforeMount,
+  renderSlot,
+  h,
+  PropType
+} from 'vue'
 import { useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import { createKey, formatLength } from '../../_utils'
 import { gradientTextLight } from '../styles'
-import style from './styles/index.cssr.js'
+import type { GradientTextTheme } from '../styles'
+import style from './styles/index.cssr'
 
 let houdiniRegistered = false
+
+type Gradient =
+  | string
+  | {
+    deg?: string | number
+    from: string
+    to: string
+  }
 
 export default defineComponent({
   name: 'GradientText',
   props: {
-    ...useTheme.props,
+    ...(useTheme.props as ThemeProps<GradientTextTheme>),
     size: {
       type: [String, Number],
       default: undefined
@@ -36,15 +36,17 @@ export default defineComponent({
       default: undefined
     },
     type: {
-      type: String,
+      type: String as PropType<
+      'info' | 'success' | 'warning' | 'error' | 'primary' | 'danger'
+      >,
       default: 'primary'
     },
     color: {
-      type: [Object, String],
+      type: [Object, String] as PropType<Gradient | undefined>,
       default: undefined
     },
     gradient: {
-      type: [Object, String],
+      type: [Object, String] as PropType<Gradient | undefined>,
       default: undefined
     }
   },
@@ -52,14 +54,14 @@ export default defineComponent({
     onBeforeMount(() => {
       if (!houdiniRegistered) {
         houdiniRegistered = true
-        if (window?.CSS?.registerProperty) {
-          CSS.registerProperty({
+        if ((window?.CSS as any)?.registerProperty) {
+          ;(CSS as any).registerProperty({
             name: '--color-start',
             syntax: '<color>',
             inherits: false,
             initialValue: 'transparent'
           })
-          CSS.registerProperty({
+          ;(CSS as any).registerProperty({
             name: '--color-end',
             syntax: '<color>',
             inherits: false,
@@ -68,7 +70,9 @@ export default defineComponent({
         }
       }
     })
-    const compatibleTypeRef = computed(() => {
+    const compatibleTypeRef = computed<
+    'info' | 'success' | 'warning' | 'error' | 'primary'
+    >(() => {
       const { type } = props
       if (type === 'danger') return 'error'
       return type
@@ -121,6 +125,22 @@ export default defineComponent({
         }
       })
     }
+  },
+  render () {
+    return (
+      <span
+        class={[
+          'n-gradient-text',
+          `n-gradient-text--${this.compatibleType}-type`
+        ]}
+        style={{
+          fontSize: this.styleFontSize,
+          backgroundImage: this.styleBgImage,
+          ...this.cssVars
+        }}
+      >
+        {renderSlot(this.$slots, 'default')}
+      </span>
+    )
   }
 })
-</script>

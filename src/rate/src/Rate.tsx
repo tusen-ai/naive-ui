@@ -121,9 +121,7 @@ export default defineComponent({
                 onClick={() => this.handleClick(index)}
                 onMouseenter={() => this.handleMouseEnter(index)}
               >
-                <n-base-icon>
-                  <star-icon />
-                </n-base-icon>
+                <NBaseIcon>{{ default: () => StarIcon }}</NBaseIcon>
               </div>
             ) as VNode
         )}
