@@ -1,6 +1,7 @@
 import { commonDark } from '../../_styles/new-common'
+import type { DividerTheme } from './light'
 
-export default {
+const dividerDark: DividerTheme = {
   name: 'Divider',
   common: commonDark,
   self (vars) {
@@ -12,3 +13,5 @@ export default {
     }
   }
 }
+
+export default dividerDark
