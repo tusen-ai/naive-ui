@@ -55,8 +55,7 @@ export default cB('alert', `
     width: 26px;
     height: 26px;
     font-size: 26px;
-  `
-  ),
+  `),
   cE('close', `
     transition: color .3s var(--bezier);
     position: absolute;
