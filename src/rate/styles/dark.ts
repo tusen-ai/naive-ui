@@ -1,6 +1,7 @@
 import { commonDark } from '../../_styles/new-common'
+import { RateTheme } from './light'
 
-export default {
+const rateDark: RateTheme = {
   name: 'Rate',
   common: commonDark,
   self (vars) {
@@ -12,3 +13,5 @@ export default {
     }
   }
 }
+
+export default rateDark
