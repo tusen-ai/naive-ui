@@ -1,11 +1,12 @@
-import { commonLight } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/new-common'
+import type { ListTheme } from './light'
 
-export default {
+const listDark: ListTheme = {
   name: 'List',
-  common: commonLight,
+  common: commonDark,
   self (vars) {
     const {
-      textColor2,
+      textColor2Overlay,
       cardColor,
       modalColor,
       dividerColorOverlay,
@@ -13,7 +14,7 @@ export default {
       fontSize
     } = vars
     return {
-      textColor: textColor2,
+      textColor: textColor2Overlay,
       color: cardColor,
       colorModal: modalColor,
       borderColor: dividerColorOverlay,
@@ -22,3 +23,5 @@ export default {
     }
   }
 }
+
+export default listDark
