@@ -1,47 +1,26 @@
-<template>
-  <div
-    class="n-badge"
-    :class="{
-      'n-badge--dot': dot,
-      [`n-badge--as-is`]: !$slots.default
-    }"
-    :style="cssVars"
-  >
-    <slot />
-    <transition
-      name="n-fade-in-scale-up-transition"
-      @after-enter="handleAfterEnter"
-      @after-leave="handleAfterLeave"
-    >
-      <sup v-if="showBadge" class="n-badge-sup">
-        <n-base-slot-machine
-          v-if="!dot"
-          :appeared="appeared"
-          :max="max"
-          :value="value"
-        />
-        <n-base-wave v-if="processing" />
-      </sup>
-    </transition>
-  </div>
-</template>
-
-<script>
-import { computed, onMounted, ref } from 'vue'
+import {
+  h,
+  computed,
+  onMounted,
+  ref,
+  PropType,
+  defineComponent,
+  renderSlot,
+  Transition,
+  CSSProperties
+} from 'vue'
 import { useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import { NBaseSlotMachine, NBaseWave } from '../../_base'
 import { createKey } from '../../_utils'
 import { badgeLight } from '../styles'
-import style from './styles/index.cssr.js'
+import type { BadgeTheme } from '../styles'
+import style from './styles/index.cssr'
 
-export default {
+export default defineComponent({
   name: 'Badge',
-  components: {
-    NBaseSlotMachine,
-    NBaseWave
-  },
   props: {
-    ...useTheme.props,
+    ...(useTheme.props as ThemeProps<BadgeTheme>),
     value: {
       type: [String, Number],
       default: undefined
@@ -55,9 +34,9 @@ export default {
       default: false
     },
     type: {
-      validator () {
-        return ['success', 'error', 'warning', 'info', 'default']
-      },
+      type: String as PropType<
+      'success' | 'error' | 'warning' | 'info' | 'default'
+      >,
       default: 'default'
     },
     show: {
@@ -80,10 +59,10 @@ export default {
   setup (props) {
     const themeRef = useTheme('Badge', 'Badge', style, badgeLight, props)
     const appearedRef = ref(false)
-    const handleAfterEnter = () => {
+    const handleAfterEnter = (): void => {
       appearedRef.value = true
     }
-    const handleAfterLeave = () => {
+    const handleAfterLeave = (): void => {
       appearedRef.value = false
     }
     const showBadgeRef = computed(() => {
@@ -123,6 +102,43 @@ export default {
         }
       })
     }
+  },
+  render () {
+    return (
+      <div
+        class={[
+          'n-badge',
+          {
+            'n-badge--dot': this.dot,
+            'n-badge--as-is': !this.$slots.default
+          }
+        ]}
+        style={this.cssVars as CSSProperties}
+      >
+        {renderSlot(this.$slots, 'default')}
+        <Transition
+          name="n-fade-in-scale-up-transition"
+          onAfterEnter={this.handleAfterEnter}
+          onAfterLeave={this.handleAfterLeave}
+        >
+          {{
+            default: () =>
+              this.showBadge ? (
+                <sup class="n-badge-sup">
+                  {!this.dot ? (
+                    <NBaseSlotMachine
+                      appeared={this.appeared}
+                      max={this.max}
+                      value={this.value}
+                    />
+                  ) : null}
+
+                  {this.processing ? <NBaseWave /> : null}
+                </sup>
+              ) : null
+          }}
+        </Transition>
+      </div>
+    )
   }
-}
-</script>
+})

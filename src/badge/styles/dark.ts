@@ -1,6 +1,7 @@
 import { commonDark } from '../../_styles/new-common'
+import type { BadgeTheme } from './light'
 
-export default {
+const badgeDark: BadgeTheme = {
   name: 'Badge',
   common: commonDark,
   self (vars) {
@@ -19,3 +20,5 @@ export default {
     }
   }
 }
+
+export default badgeDark
