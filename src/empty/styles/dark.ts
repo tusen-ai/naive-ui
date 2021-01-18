@@ -1,7 +1,8 @@
 import { commonDark } from '../../_styles/new-common'
 import sizeVarables from './_common'
+import type { EmptyTheme } from './light'
 
-export default {
+const emptyDark: EmptyTheme = {
   name: 'Empty',
   common: commonDark,
   self (vars) {
@@ -26,3 +27,5 @@ export default {
     }
   }
 }
+
+export default emptyDark
