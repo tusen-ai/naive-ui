@@ -1,7 +1,8 @@
 import commonVariables from './_common'
 import { commonDark } from '../../_styles/new-common'
+import type { ButtonTheme } from './light'
 
-export default {
+const buttonDark: ButtonTheme = {
   name: 'Button',
   common: commonDark,
   self (vars) {
@@ -215,3 +216,5 @@ export default {
     }
   }
 }
+
+export default buttonDark

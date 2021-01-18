@@ -1,9 +1,11 @@
+import { CNode } from 'css-render'
 import { c, cB, cM, cE, cNotM } from '../../../_utils/cssr/index'
+import { Type } from '../interface'
 
 const zero = '0!important'
 const n1 = '-1px!important'
 
-function createLeftBorderStyle (type) {
+function createLeftBorderStyle (type: Type): CNode {
   return cM(type + '-type', [
     c('& +', [
       cB('button', {}, [
@@ -20,7 +22,7 @@ function createLeftBorderStyle (type) {
   ])
 }
 
-function createTopBorderStyle (type) {
+function createTopBorderStyle (type: Type): CNode {
   return cM(type + '-type', [
     c('& +', [
       cB('button', [

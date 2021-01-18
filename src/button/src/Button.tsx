@@ -1,100 +1,36 @@
-<template>
-  <button
-    ref="selfRef"
-    class="n-button"
-    :class="{
-      'n-button--disabled': disabled,
-      'n-button--block': block,
-      'n-button--pressed': enterPressed,
-      'n-button--dashed': !text && dashed,
-      'n-button--color': color,
-      [`n-button--${type}-type`]: true
-    }"
-    :tabindex="mergedFocusable ? 0 : -1"
-    :type="attrType"
-    :style="cssVars"
-    :disabled="disabled"
-    @click="handleClick"
-    @blur="handleBlur"
-    @mousedown="handleMouseDown"
-    @keyup.enter="handleKeyUpEnter"
-    @keydown.enter="handleKeyDownEnter"
-  >
-    <div
-      v-if="$slots.default && iconPlacement === 'right'"
-      class="n-button__content"
-    >
-      <slot />
-    </div>
-    <n-fade-in-expand-transition width>
-      <span
-        v-if="$slots.icon || loading"
-        class="n-button__icon"
-        :style="{
-          margin: !$slots.default ? 0 : ''
-        }"
-      >
-        <n-icon-switch-transition>
-          <n-base-loading
-            v-if="loading"
-            key="loading"
-            class="n-icon-slot"
-            :stroke-width="24"
-          />
-          <div v-else key="icon" class="n-icon-slot">
-            <slot name="icon" />
-          </div>
-        </n-icon-switch-transition>
-      </span>
-    </n-fade-in-expand-transition>
-    <span
-      v-if="$slots.default && iconPlacement === 'left'"
-      class="n-button__content"
-    >
-      <slot />
-    </span>
-    <n-base-wave v-if="!text" ref="waveRef" />
-    <div
-      v-if="showBorder"
-      class="n-button__border"
-      :style="customColorCssVars"
-    />
-    <div
-      v-if="showBorder"
-      class="n-button__state-border"
-      :style="customColorCssVars"
-    />
-  </button>
-</template>
-
-<script>
-import { ref, computed, inject, nextTick } from 'vue'
-import { useMemo } from 'vooks'
 import {
-  createHoverColor,
-  createPressedColor
-} from '../../_utils/color/index.js'
-import { useTheme } from '../../_mixins'
+  h,
+  ref,
+  computed,
+  inject,
+  nextTick,
+  defineComponent,
+  PropType,
+  renderSlot,
+  CSSProperties
+} from 'vue'
+import { useMemo } from 'vooks'
+import { createHoverColor, createPressedColor } from '../../_utils/color/index'
+import { useFormItem, useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import {
   NFadeInExpandTransition,
   NIconSwitchTransition,
   NBaseLoading,
   NBaseWave
 } from '../../_base'
+import type { BaseWaveRef } from '../../_base'
 import { createKey } from '../../_utils'
 import { buttonLight } from '../styles'
-import style from './styles/button.cssr.js'
+import type { ButtonTheme } from '../styles'
+import type { ButtonGroupInjection } from './ButtonGroup'
+import type { Type, Size } from './interface'
+import style from './styles/button.cssr'
 
-export default {
+export default defineComponent({
   name: 'Button',
-  components: {
-    NBaseLoading,
-    NBaseWave,
-    NIconSwitchTransition,
-    NFadeInExpandTransition
-  },
   props: {
-    ...useTheme.props,
+    ...(useTheme.props as ThemeProps<ButtonTheme>),
     color: {
       type: String,
       default: undefined
@@ -120,9 +56,7 @@ export default {
       default: false
     },
     size: {
-      validator (value) {
-        return ['tiny', 'small', 'medium', 'large'].includes(value)
-      },
+      type: String as PropType<Size | undefined>,
       default: undefined
     },
     ghost: {
@@ -142,17 +76,7 @@ export default {
       default: true
     },
     type: {
-      // TODO: warning message
-      validator (value) {
-        return [
-          'default',
-          'primary',
-          'info',
-          'success',
-          'warning',
-          'error'
-        ].includes(value)
-      },
+      type: String as PropType<Type>,
       default: 'default'
     },
     dashed: {
@@ -160,51 +84,52 @@ export default {
       default: false
     },
     iconPlacement: {
-      default: 'left',
-      validator (value) {
-        return ['left', 'right'].includes(value)
-      }
+      type: String as PropType<'left' | 'right'>,
+      default: 'left'
     },
     attrType: {
-      default: 'button',
-      validator (value) {
-        return ['button', 'submit', 'reset'].includes(value)
-      }
+      type: String as PropType<'button' | 'submit' | 'reset'>,
+      default: 'button'
     }
   },
   setup (props) {
-    const selfRef = ref(null)
-    const waveRef = ref(null)
+    const selfRef = ref<HTMLElement | null>(null)
+    const waveRef = ref<BaseWaveRef | null>(null)
     const enterPressedRef = ref(false)
     const showBorderRef = useMemo(() => {
       return !props.text && (!props.color || props.ghost || props.dashed)
     })
-    const mergedSizeRef = computed(() => {
-      const { size } = props
-      if (size) return size
-      const NButtonGroup = inject('NButtonGroup', {})
-      const { size: buttonGroupSize } = NButtonGroup
-      if (buttonGroupSize) return buttonGroupSize
-      const NFormItem = inject('NFormItem', null)
-      const { mergedSize: formItemSize } = NFormItem || {}
-      if (formItemSize) {
-        return formItemSize
+    const NButtonGroup = inject<ButtonGroupInjection>('NButtonGroup', {})
+    const { mergedSize: mergedSizeRef } = useFormItem(
+      {},
+      {
+        defaultSize: 'medium',
+        mergedSize: (NFormItem) => {
+          const { size } = props
+          if (size) return size
+          const { size: buttonGroupSize } = NButtonGroup
+          if (buttonGroupSize) return buttonGroupSize
+          const { mergedSize: formItemSize } = NFormItem || {}
+          if (formItemSize) {
+            return formItemSize
+          }
+          return 'medium'
+        }
       }
-      return 'medium'
-    })
+    )
     const mergedFocusableRef = computed(() => {
       return props.focusable && !props.disabled
     })
-    const handleMouseDown = (e) => {
+    const handleMouseDown = (e: MouseEvent): void => {
       e.preventDefault()
       if (props.disabled) {
         return
       }
       if (mergedFocusableRef.value) {
-        selfRef.value.focus({ preventScroll: true })
+        selfRef.value?.focus({ preventScroll: true })
       }
     }
-    const handleClick = (e) => {
+    const handleClick = (): void => {
       if (!props.disabled) {
         if (!props.text) {
           const { value } = waveRef
@@ -214,24 +139,30 @@ export default {
         }
       }
     }
-    const handleKeyUpEnter = (e) => {
+    const handleKeyUp = (e: KeyboardEvent): void => {
       if (!props.keyboard) {
         e.preventDefault()
         return
       }
-      enterPressedRef.value = false
-      nextTick(() => {
-        if (!props.disabled) {
-          selfRef.value.click()
-        }
-      })
+      switch (e.code) {
+        case 'Enter':
+          enterPressedRef.value = false
+          void nextTick(() => {
+            if (!props.disabled) {
+              selfRef.value?.click()
+            }
+          })
+      }
     }
-    const handleKeyDownEnter = (e) => {
+    const handleKeyDown = (e: KeyboardEvent): void => {
       e.preventDefault()
       if (!props.keyboard) return
-      enterPressedRef.value = true
+      switch (e.code) {
+        case 'Enter':
+          enterPressedRef.value = true
+      }
     }
-    const handleBlur = (e) => {
+    const handleBlur = (): void => {
       enterPressedRef.value = false
     }
     const themeRef = useTheme('Button', 'Button', style, buttonLight, props)
@@ -243,9 +174,9 @@ export default {
       showBorder: showBorderRef,
       enterPressed: enterPressedRef,
       handleMouseDown,
-      handleKeyDownEnter,
+      handleKeyDown,
       handleBlur,
-      handleKeyUpEnter,
+      handleKeyUp,
       handleClick,
       customColorCssVars: computed(() => {
         const { color } = props
@@ -420,6 +351,85 @@ export default {
         }
       })
     }
+  },
+  render () {
+    const { $slots } = this
+    return (
+      <button
+        ref="selfRef"
+        class={[
+          'n-button',
+          `n-button--${this.type}-type`,
+          {
+            'n-button--disabled': this.disabled,
+            'n-button--block': this.block,
+            'n-button--pressed': this.enterPressed,
+            'n-button--dashed': !this.text && this.dashed,
+            'n-button--color': this.color,
+            'n-button--ghost': this.ghost // required for button group border collapse
+          }
+        ]}
+        tabindex={this.mergedFocusable ? 0 : -1}
+        type={this.attrType}
+        style={this.cssVars as CSSProperties}
+        disabled={this.disabled}
+        onClick={this.handleClick}
+        onBlur={this.handleBlur}
+        onMousedown={this.handleMouseDown}
+        onKeyup={this.handleKeyUp}
+        onKeydown={this.handleKeyDown}
+      >
+        {$slots.default && this.iconPlacement === 'right' ? (
+          <div class="n-button__content">{renderSlot($slots, 'default')}</div>
+        ) : null}
+
+        <NFadeInExpandTransition width>
+          {{
+            default: () =>
+              $slots.icon || this.loading ? (
+                <span
+                  class="n-button__icon"
+                  style={{
+                    margin: !$slots.default ? 0 : ''
+                  }}
+                >
+                  <NIconSwitchTransition>
+                    {{
+                      default: () =>
+                        this.loading ? (
+                          <NBaseLoading
+                            key="loading"
+                            class="n-icon-slot"
+                            strokeWidth={24}
+                          />
+                        ) : (
+                          <div key="icon" class="n-icon-slot">
+                            {renderSlot($slots, 'icon')}
+                          </div>
+                        )
+                    }}
+                  </NIconSwitchTransition>
+                </span>
+              ) : null
+          }}
+        </NFadeInExpandTransition>
+        {$slots.default && this.iconPlacement === 'left' ? (
+          <span class="n-button__content">{renderSlot($slots, 'default')}</span>
+        ) : null}
+        {!this.text ? <NBaseWave ref="waveRef" /> : null}
+        {this.showBorder ? (
+          <div
+            class="n-button__border"
+            style={this.customColorCssVars as CSSProperties}
+          />
+        ) : null}
+        {this.showBorder ? (
+          <div
+            class="n-button__state-border"
+            style={this.customColorCssVars as CSSProperties}
+          />
+        ) : null}
+      </button>
+    )
   }
-}
-</script>
+})
