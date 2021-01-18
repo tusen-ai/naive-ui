@@ -35,6 +35,7 @@ import iconSwitchTransition from '../../../_styles/transitions/icon-switch'
 // --border-color-xxx, used for custom color
 export default c([
   cB('button', `
+    line-height: 1;
     font-family: inherit;
     padding: var(--padding);
     height: var(--height);
@@ -188,7 +189,7 @@ export default c([
         left: 0;
         top: 50%;
         transform: translateY(-50%);
-        display: block;
+        display: flex;
       `, [
         iconSwitchTransition({
           top: '50%',

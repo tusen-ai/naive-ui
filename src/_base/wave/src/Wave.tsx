@@ -2,6 +2,10 @@ import { h, defineComponent, ref, onBeforeUnmount, nextTick } from 'vue'
 import { useStyle } from '../../../_mixins'
 import style from './styles/index.cssr'
 
+export interface BaseWaveRef {
+  play: () => void
+}
+
 export default defineComponent({
   name: 'BaseWave',
   setup () {
