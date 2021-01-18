@@ -1,7 +1,8 @@
-import sizeVariables from './_common'
+import commonVariables from './_common'
 import { commonDark } from '../../_styles/new-common'
+import type { ResultTheme } from './light'
 
-export default {
+const resultDark: ResultTheme = {
   name: 'Result',
   common: commonDark,
   self (vars) {
@@ -16,7 +17,7 @@ export default {
       fontWeightStrong
     } = vars
     return {
-      ...sizeVariables,
+      ...commonVariables,
       lineHeight,
       titleFontWeight: fontWeightStrong,
       titleTextColor: textColor1Overlay,
@@ -28,3 +29,5 @@ export default {
     }
   }
 }
+
+export default resultDark

@@ -10,5 +10,9 @@ export default {
   iconSizeSmall: '64px',
   iconSizeMedium: '80px',
   iconSizeLarge: '100px',
-  iconSizeHuge: '125px'
+  iconSizeHuge: '125px',
+  iconColor418: undefined,
+  iconColor404: undefined,
+  iconColor403: undefined,
+  iconColor500: undefined
 }
