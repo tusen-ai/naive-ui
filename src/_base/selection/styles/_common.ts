@@ -7,5 +7,6 @@ export default {
   fontSizeSmall: '14px',
   fontSizeMedium: '14px',
   fontSizeLarge: '15px',
-  paddingSingle: '0 26px 0 14px'
+  paddingSingle: '0 26px 0 14px',
+  clearSize: '16px'
 }

@@ -534,10 +534,10 @@ export default defineComponent({
     }
     function handleWrapperKeyDown (e: KeyboardEvent): void {
       switch (e.code) {
-        case 'ESC':
+        case 'Escape':
           handleWrapperKeyDownEsc()
           break
-        case 'ENTER':
+        case 'Enter':
           handleWrapperKeyDownEnter(e)
           break
       }

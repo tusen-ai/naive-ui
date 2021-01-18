@@ -30,6 +30,7 @@ import {
 // --text-color
 // --text-color-disabled
 // --arrow-color
+// ...clear vars
 // ...form item vars
 export default c([
   cB('base-selection', `

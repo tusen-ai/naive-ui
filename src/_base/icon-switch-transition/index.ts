@@ -1,1 +1,1 @@
-export { default } from './src/IconSwitchTransition.js'
+export { default } from './src/IconSwitchTransition'

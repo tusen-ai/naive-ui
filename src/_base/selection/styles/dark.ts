@@ -1,14 +1,11 @@
-import { changeColor } from 'seemly'
+import { changeColor, scaleColor } from 'seemly'
 import { commonDark } from '../../../_styles/new-common'
-import { baseClearDark } from '../../clear/styles'
 import commonVars from './_common'
+import type { BaseSelectionTheme } from './light'
 
-export default {
+const baseSelectionDark: BaseSelectionTheme = {
   name: 'BaseSelection',
   common: commonDark,
-  peers: {
-    BaseClear: baseClearDark
-  },
   self (vars) {
     const {
       borderRadius,
@@ -78,7 +75,12 @@ export default {
         alpha: 0.4
       })}`,
       colorActiveError: changeColor(errorColor, { alpha: 0.1 }),
-      caretColorError: errorColor
+      caretColorError: errorColor,
+      clearColor: textColor4Overlay,
+      clearColorHover: scaleColor(textColor4Overlay, { alpha: 1.25 }),
+      clearColorPressed: scaleColor(textColor4Overlay, { alpha: 0.75 })
     }
   }
 }
+
+export default baseSelectionDark
