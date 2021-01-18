@@ -1,6 +1,7 @@
 import { commonDark } from '../../_styles/new-common'
+import type { StatisticTheme } from './light'
 
-export default {
+const statisticDark: StatisticTheme = {
   name: 'Statistic',
   common: commonDark,
   self (vars) {
@@ -21,3 +22,5 @@ export default {
     }
   }
 }
+
+export default statisticDark

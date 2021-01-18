@@ -1,35 +1,21 @@
-<template>
-  <div class="n-statistic" :style="cssVars">
-    <div class="n-statistic__label">
-      {{ label }}
-    </div>
-    <div class="n-statistic-value">
-      <span v-if="$slots.prefix" class="n-statistic-value__prefix">
-        <slot name="prefix" />
-      </span>
-      <span v-if="value" class="n-statistic-value__content">
-        {{ value }}
-      </span>
-      <span v-else-if="$slots.default" class="n-statistic-value__content">
-        <slot />
-      </span>
-      <span v-if="$slots.suffix" class="n-statistic-value__suffix">
-        <slot name="suffix" />
-      </span>
-    </div>
-  </div>
-</template>
-
-<script>
-import { defineComponent, computed } from 'vue'
+import {
+  defineComponent,
+  computed,
+  CSSProperties,
+  PropType,
+  h,
+  renderSlot
+} from 'vue'
 import { useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import { statisticLight } from '../styles'
-import style from './styles/index.cssr.js'
+import type { StatisticTheme } from '../styles'
+import style from './styles/index.cssr'
 
 export default defineComponent({
   name: 'Statistic',
   props: {
-    ...useTheme.props,
+    ...(useTheme.props as ThemeProps<StatisticTheme>),
     label: {
       type: String,
       default: undefined
@@ -39,7 +25,7 @@ export default defineComponent({
       default: undefined
     },
     valueStyle: {
-      type: [Object, String],
+      type: [Object, String] as PropType<undefined | string | CSSProperties>,
       default: undefined
     }
   },
@@ -77,6 +63,32 @@ export default defineComponent({
         }
       })
     }
+  },
+  render () {
+    const { $slots } = this
+    return (
+      <div class="n-statistic" style={this.cssVars as CSSProperties}>
+        <div class="n-statistic__label">{this.label}</div>
+        <div class="n-statistic-value">
+          {$slots.prefix ? (
+            <span class="n-statistic-value__prefix">
+              {renderSlot($slots, 'prefix')}
+            </span>
+          ) : null}
+          {this.value !== undefined ? (
+            <span class="n-statistic-value__content">{this.value}</span>
+          ) : (
+            <span class="n-statistic-value__content">
+              {renderSlot($slots, 'default')}
+            </span>
+          )}
+          {$slots.suffix ? (
+            <span class="n-statistic-value__suffix">
+              {renderSlot($slots, 'suffix')}
+            </span>
+          ) : null}
+        </div>
+      </div>
+    )
   }
 })
-</script>
