@@ -1,7 +1,8 @@
 import sizeVariables from './_common'
 import { commonDark } from '../../_styles/new-common'
+import type { TableTheme } from './light'
 
-export default {
+const tableDark: TableTheme = {
   name: 'Table',
   common: commonDark,
   self (vars) {
@@ -36,3 +37,5 @@ export default {
     }
   }
 }
+
+export default tableDark

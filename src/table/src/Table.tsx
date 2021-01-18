@@ -1,28 +1,22 @@
-<template>
-  <table
-    class="n-table"
-    :class="{
-      'n-table--bordered': bordered,
-      'n-table--single-line': singleLine,
-      'n-table--single-column': singleColumn
-    }"
-    :style="cssVars"
-  >
-    <slot />
-  </table>
-</template>
-
-<script>
-import { defineComponent, computed } from 'vue'
+import {
+  defineComponent,
+  computed,
+  h,
+  renderSlot,
+  PropType,
+  CSSProperties
+} from 'vue'
 import { useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils'
 import { tableLight } from '../styles'
-import style from './styles/index.cssr.js'
+import type { TableTheme } from '../styles'
+import style from './styles/index.cssr'
 
 export default defineComponent({
   name: 'Table',
   props: {
-    ...useTheme.props,
+    ...(useTheme.props as ThemeProps<TableTheme>),
     bordered: {
       type: Boolean,
       default: true
@@ -36,9 +30,7 @@ export default defineComponent({
       default: false
     },
     size: {
-      validator (value) {
-        return ['small', 'medium', 'large'].includes(value)
-      },
+      type: String as PropType<'small' | 'medium' | 'large'>,
       default: 'medium'
     }
   },
@@ -81,6 +73,22 @@ export default defineComponent({
         }
       })
     }
+  },
+  render () {
+    return (
+      <table
+        class={[
+          'n-table',
+          {
+            'n-table--bordered': this.bordered,
+            'n-table--single-line': this.singleLine,
+            'n-table--single-column': this.singleColumn
+          }
+        ]}
+        style={this.cssVars as CSSProperties}
+      >
+        {renderSlot(this.$slots, 'default')}
+      </table>
+    )
   }
 })
-</script>

@@ -1,6 +1,0 @@
-export { default as NTable } from './src/Table.vue'
-export { default as NTh } from './src/Th.vue'
-export { default as NTr } from './src/Tr.vue'
-export { default as NTd } from './src/Td.vue'
-export { default as NThead } from './src/Thead.vue'
-export { default as NTbody } from './src/Tbody.vue'
