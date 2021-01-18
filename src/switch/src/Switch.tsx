@@ -1,36 +1,27 @@
-<template>
-  <div
-    class="n-switch"
-    :class="{
-      'n-switch--active': mergedValue,
-      'n-switch--disabled': disabled,
-      'n-switch--round': round
-    }"
-    :tabindex="!disabled ? 0 : false"
-    :style="cssVars"
-    @click="handleClick"
-    @focus="handleFocus"
-    @blur="handleBlur"
-  >
-    <div class="n-switch__rail" />
-  </div>
-</template>
-
-<script>
-import { ref, toRef, defineComponent, computed } from 'vue'
+import {
+  h,
+  ref,
+  toRef,
+  defineComponent,
+  computed,
+  CSSProperties,
+  PropType
+} from 'vue'
 import { depx, pxfy } from 'seemly'
 import { useMergedState } from 'vooks'
 import { useFormItem, useTheme } from '../../_mixins'
-import { call, warn, createKey } from '../../_utils'
-import style from './styles/index.cssr.js'
+import type { ThemeProps } from '../../_mixins'
+import { call, warn, createKey, MaybeArray } from '../../_utils'
+import style from './styles/index.cssr'
 import { switchLight } from '../styles'
+import type { SwitchTheme } from '../styles'
 
 export default defineComponent({
   name: 'Switch',
   props: {
-    ...useTheme.props,
+    ...(useTheme.props as ThemeProps<SwitchTheme>),
     size: {
-      type: String,
+      type: String as PropType<'small' | 'medium' | 'large'>,
       default: 'medium'
     },
     value: {
@@ -51,11 +42,12 @@ export default defineComponent({
     },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:value': {
-      type: [Function, Array],
+      type: [Function, Array] as PropType<MaybeArray<(value: boolean) => void>>,
       default: undefined
     },
     onChange: {
-      validator () {
+      type: [Function, Array] as PropType<MaybeArray<(value: boolean) => void>>,
+      validator: () => {
         if (__DEV__) {
           warn(
             'switch',
@@ -77,10 +69,39 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
+    function doUpdateValue (value: boolean): void {
+      const { 'onUpdate:value': onUpdateValue, onChange } = props
+      const { nTriggerFormInput, nTriggerFormChange } = formItem
+      if (onUpdateValue) call(onUpdateValue, value)
+      if (onChange) call(onChange, value)
+      uncontrolledValueRef.value = value
+      nTriggerFormInput()
+      nTriggerFormChange()
+    }
+    function doFocus (): void {
+      const { nTriggerFormFocus } = formItem
+      nTriggerFormFocus()
+    }
+    function doBlur (): void {
+      const { nTriggerFormBlur } = formItem
+      nTriggerFormBlur()
+    }
+    function handleClick (): void {
+      if (!props.disabled) {
+        doUpdateValue(!mergedValueRef.value)
+      }
+    }
+    function handleFocus (): void {
+      doFocus()
+    }
+    function handleBlur (): void {
+      doBlur()
+    }
     return {
-      ...formItem,
+      handleClick,
+      handleBlur,
+      handleFocus,
       mergedValue: mergedValueRef,
-      uncontrolledValue: uncontrolledValueRef,
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
         const {
@@ -127,41 +148,25 @@ export default defineComponent({
       })
     }
   },
-  methods: {
-    doUpdateValue (value) {
-      const {
-        'onUpdate:value': onUpdateValue,
-        onChange,
-        nTriggerFormInput,
-        nTriggerFormChange
-      } = this
-      if (onUpdateValue) call(onUpdateValue, value)
-      if (onChange) call(onChange, value)
-      this.uncontrolledValue = value
-      nTriggerFormInput()
-      nTriggerFormChange()
-    },
-    doFocus (...args) {
-      const { onFocus, nTriggerFormFocus } = this
-      if (onFocus) call(onFocus, ...args)
-      nTriggerFormFocus()
-    },
-    doBlur (...args) {
-      const { onBlur, nTriggerFormBlur } = this
-      if (onBlur) call(onBlur, ...args)
-      nTriggerFormBlur()
-    },
-    handleClick () {
-      if (!this.disabled) {
-        this.doUpdateValue(!this.mergedValue)
-      }
-    },
-    handleFocus (e) {
-      this.doFocus(e)
-    },
-    handleBlur (e) {
-      this.doBlur(e)
-    }
+  render () {
+    return (
+      <div
+        class={[
+          'n-switch',
+          {
+            'n-switch--active': this.mergedValue,
+            'n-switch--disabled': this.disabled,
+            'n-switch--round': this.round
+          }
+        ]}
+        tabindex={!this.disabled ? 0 : undefined}
+        style={this.cssVars as CSSProperties}
+        onClick={this.handleClick}
+        onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
+      >
+        <div class="n-switch__rail" />
+      </div>
+    )
   }
 })
-</script>
