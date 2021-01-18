@@ -136,7 +136,7 @@ export default defineComponent({
                   class: [
                     'n-alert',
                     {
-                      'n-alert--no-icon': this.showIcon
+                      'n-alert--no-icon': !this.showIcon
                     }
                   ],
                   style: this.cssVars
