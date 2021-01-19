@@ -1,8 +1,9 @@
-import { commonLight } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/new-common'
+import type { ScrollbarTheme } from './light'
 
-export default {
+const scrollbarDark: ScrollbarTheme = {
   name: 'Scrollbar',
-  common: commonLight,
+  common: commonDark,
   self (vars) {
     const { scrollbarColorOverlay, scrollbarColorHoverOverlay } = vars
     return {
@@ -11,3 +12,5 @@ export default {
     }
   }
 }
+
+export default scrollbarDark
