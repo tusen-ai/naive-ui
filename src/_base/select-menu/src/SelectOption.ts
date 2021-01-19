@@ -1,4 +1,14 @@
-import { h, inject, toRef, defineComponent, Transition } from 'vue'
+import {
+  h,
+  inject,
+  toRef,
+  defineComponent,
+  Transition,
+  PropType,
+  VNode
+} from 'vue'
+import { BaseSelectMenuInjection } from './SelectMenu'
+import { TreeNode } from 'treemate'
 import { useMemo } from 'vooks'
 import { CheckmarkIcon } from '../../icons'
 import NBaseIcon from '../../icon'
@@ -7,7 +17,7 @@ const checkMark = h(NBaseIcon, null, {
   default: () => h(CheckmarkIcon)
 })
 
-function renderCheckMark (show) {
+function renderCheckMark (show: boolean): VNode {
   return h(
     Transition,
     {
@@ -22,20 +32,38 @@ function renderCheckMark (show) {
 
 export default defineComponent({
   name: 'NBaseSelectOption',
-  inject: {
-    NBaseSelectMenu: {
-      default: null
-    }
-  },
   props: {
     tmNode: {
-      type: Object,
+      type: Object as PropType<TreeNode>,
       required: true
     }
   },
   setup (props) {
-    const NBaseSelectMenu = inject('NBaseSelectMenu')
+    const NBaseSelectMenu = inject<BaseSelectMenuInjection>(
+      'NBaseSelectMenu'
+    ) as BaseSelectMenuInjection
     const rawNodeRef = toRef(props.tmNode, 'rawNode')
+    const isPendingRef = useMemo(() => {
+      const { pendingTmNode } = NBaseSelectMenu
+      if (!pendingTmNode) return false
+      return props.tmNode.key === pendingTmNode.key
+    })
+    function handleClick (e: MouseEvent): void {
+      const { tmNode } = props
+      if (tmNode.disabled) return
+      NBaseSelectMenu.handleOptionClick(e, tmNode)
+    }
+    function handleMouseEnter (e: MouseEvent): void {
+      const { tmNode } = props
+      if (tmNode.disabled) return
+      NBaseSelectMenu.handleOptionMouseEnter(e, tmNode)
+    }
+    function handleMouseMove (e: MouseEvent): void {
+      const { tmNode } = props
+      const { value: isPending } = isPendingRef
+      if (tmNode.disabled || isPending) return
+      NBaseSelectMenu.handleOptionMouseEnter(e, tmNode)
+    }
     return {
       NBaseSelectMenu,
       rawNode: rawNodeRef,
@@ -44,11 +72,7 @@ export default defineComponent({
         const { parent } = tmNode
         return parent && parent.rawNode.type === 'group'
       }),
-      isPending: useMemo(() => {
-        const { pendingTmNode } = NBaseSelectMenu
-        if (!pendingTmNode) return false
-        return props.tmNode.key === pendingTmNode.key
-      }),
+      isPending: isPendingRef,
       isSelected: useMemo(() => {
         const { multiple, value } = NBaseSelectMenu
         if (value === null) return false
@@ -59,24 +83,10 @@ export default defineComponent({
         } else {
           return value === optionValue
         }
-      })
-    }
-  },
-  methods: {
-    handleClick (e) {
-      const { tmNode } = this
-      if (tmNode.disabled) return
-      this.NBaseSelectMenu.handleOptionClick(e, tmNode)
-    },
-    handleMouseEnter (e) {
-      const { tmNode } = this
-      if (tmNode.disabled) return
-      this.NBaseSelectMenu.handleOptionMouseEnter(e, tmNode)
-    },
-    handleMouseMove (e) {
-      const { tmNode, isPending } = this
-      if (tmNode.disabled || isPending) return
-      this.NBaseSelectMenu.handleOptionMouseEnter(e, tmNode)
+      }),
+      handleMouseMove,
+      handleMouseEnter,
+      handleClick
     }
   },
   render () {
@@ -90,7 +100,7 @@ export default defineComponent({
       handleMouseMove,
       NBaseSelectMenu: { multiple }
     } = this
-    const showCheckMark = multiple & isSelected
+    const showCheckMark = multiple && isSelected
     const children = rawNode.render
       ? [rawNode.render(rawNode, isSelected), renderCheckMark(showCheckMark)]
       : [rawNode.label, renderCheckMark(showCheckMark)]

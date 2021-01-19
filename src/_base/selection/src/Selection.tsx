@@ -20,7 +20,7 @@ import type { BaseSelectionTheme } from '../styles'
 import Suffix from './Suffix'
 import style from './styles/index.cssr'
 
-interface Option {
+export interface SelectOption {
   value: string | number
   label: string
 }
@@ -46,11 +46,11 @@ export default defineComponent({
       default: undefined
     },
     selectedOption: {
-      type: Object as PropType<Option | null>,
+      type: Object as PropType<SelectOption | null>,
       default: null
     },
     selectedOptions: {
-      type: Array as PropType<Option[] | null>,
+      type: Array as PropType<SelectOption[] | null>,
       default: null
     },
     multiple: {
@@ -184,7 +184,7 @@ export default defineComponent({
       const { onBlur } = props
       if (onBlur) onBlur(e)
     }
-    function doDeleteOption (value: Option): void {
+    function doDeleteOption (value: SelectOption): void {
       const { onDeleteOption } = props
       if (onDeleteOption) onDeleteOption(value)
     }
@@ -220,7 +220,9 @@ export default defineComponent({
       //     ', this may be a bug of naive-ui.'
       //   )
       // }
-      if (e.relatedTarget && selfRef.value?.contains(e.relatedTarget as Node)) { return }
+      if (e.relatedTarget && selfRef.value?.contains(e.relatedTarget as Node)) {
+        return
+      }
       doBlur(e)
     }
     function handleClear (e: MouseEvent): void {
@@ -248,7 +250,7 @@ export default defineComponent({
         }
       }
     }
-    function handleDeleteOption (option: Option): void {
+    function handleDeleteOption (option: SelectOption): void {
       doDeleteOption(option)
     }
     function handlePatternKeyDown (e: KeyboardEvent): void {
@@ -343,6 +345,7 @@ export default defineComponent({
             borderActive,
             arrowColor,
             arrowColorDisabled,
+            loadingColor,
             // form warning
             colorActiveWarning,
             boxShadowFocusWarning,
@@ -393,6 +396,7 @@ export default defineComponent({
           '--text-color-disabled': textColorDisabled,
           '--arrow-color': arrowColor,
           '--arrow-color-disabled': arrowColorDisabled,
+          '--loading-color': loadingColor,
           // form warning
           '--color-active-warning': colorActiveWarning,
           '--box-shadow-focus-warning': boxShadowFocusWarning,

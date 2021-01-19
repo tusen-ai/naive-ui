@@ -2,6 +2,7 @@ import { changeColor, scaleColor } from 'seemly'
 import { commonLight } from '../../../_styles/new-common'
 import type { ThemeCommonVars } from '../../../_styles/new-common'
 import commonVariables from './_common'
+import { createTheme } from '../../../_mixins'
 
 const self = (vars: ThemeCommonVars) => {
   const {
@@ -46,6 +47,7 @@ const self = (vars: ThemeCommonVars) => {
     caretColor: primaryColor,
     arrowColor: iconColor,
     arrowColorDisabled: iconColorDisabled,
+    loadingColor: primaryColor,
     // warning
     borderWarning: `1px solid ${warningColor}`,
     borderHoverWarning: `1px solid ${warningColorHover}`,
@@ -82,11 +84,11 @@ const self = (vars: ThemeCommonVars) => {
 
 export type BaseSelectionThemeVars = ReturnType<typeof self>
 
-const baseSelectionLight = {
+const baseSelectionLight = createTheme({
   name: 'BaseSelection',
   common: commonLight,
   self
-}
+})
 
 export default baseSelectionLight
 export type BaseSelectionTheme = typeof baseSelectionLight

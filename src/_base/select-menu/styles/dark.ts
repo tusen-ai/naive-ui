@@ -2,15 +2,16 @@ import { emptyDark } from '../../../empty/styles'
 import { scrollbarDark } from '../../../scrollbar/styles'
 import { commonDark } from '../../../_styles/new-common'
 import commonVariables from './_common'
+import type { BaseSelectMenuTheme } from './light'
 
-export default {
+const baseSelectMenuDark: BaseSelectMenuTheme = {
   name: 'BaseSelectMenu',
   common: commonDark,
   peers: {
     Scrollbar: scrollbarDark,
     Empty: emptyDark
   },
-  getLocalVars (vars) {
+  self (vars) {
     const {
       borderRadius,
       popoverColor,
@@ -42,3 +43,5 @@ export default {
     }
   }
 }
+
+export default baseSelectMenuDark

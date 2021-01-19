@@ -96,7 +96,7 @@ export default cB('base-select-menu', `
       transition: color .3s var(--bezier);
     `, [
       fadeInScaleUpTransition({
-        enterScale: 0.5
+        enterScale: '0.5'
       })
     ])
   ]),

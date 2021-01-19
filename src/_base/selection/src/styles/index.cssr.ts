@@ -30,6 +30,7 @@ import {
 // --text-color
 // --text-color-disabled
 // --arrow-color
+// --loading-color
 // ...clear vars
 // ...form item vars
 export default c([
@@ -46,6 +47,9 @@ export default c([
     line-height: var(--height);
     font-size: var(--font-size);
   `, [
+    cB('base-loading', `
+      color: var(--loading-color);
+    `),
     cB('base-selection-label', `
       height: var(--height);
       line-height: var(--height);

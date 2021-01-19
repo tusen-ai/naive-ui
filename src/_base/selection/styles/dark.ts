@@ -48,6 +48,7 @@ const baseSelectionDark: BaseSelectionTheme = {
       caretColor: primaryColor,
       arrowColor: iconColorOverlay,
       arrowColorDisabled: iconColorDisabledOverlay,
+      loadingColor: primaryColor,
       // warning
       borderWarning: `1px solid ${warningColor}`,
       borderHoverWarning: `1px solid ${warningColorHover}`,
