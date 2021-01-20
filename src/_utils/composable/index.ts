@@ -16,7 +16,7 @@ export function useInjectionInstanceCollection (
   injectionName: string,
   collectionKey: string,
   registerKeyRef: Ref<any>
-) {
+): void {
   const injection = inject<any | null>(injectionName, null)
   if (injection === null) return
   const vm = getCurrentInstance()?.proxy
@@ -25,19 +25,22 @@ export function useInjectionInstanceCollection (
   onBeforeUnmount(() => {
     registerInstance(undefined, registerKeyRef.value)
   })
-  function registerInstance (key?: string, oldKey?: string) {
+  function registerInstance (key?: string, oldKey?: string): void {
     const collection = injection[collectionKey]
     if (oldKey !== undefined) removeInstance(collection, oldKey)
     if (key !== undefined) addInstance(collection, key)
   }
-  function removeInstance (collection: Record<string, any[]>, key: string) {
+  function removeInstance (
+    collection: Record<string, any[]>,
+    key: string
+  ): void {
     if (!collection[key]) collection[key] = []
     collection[key].splice(
       collection[key].findIndex((instance) => instance === vm),
       1
     )
   }
-  function addInstance (collection: Record<string, any[]>, key: string) {
+  function addInstance (collection: Record<string, any[]>, key: string): void {
     if (!collection[key]) collection[key] = []
     if (!~collection[key].findIndex((instance) => instance === vm)) {
       collection[key].push(vm)
@@ -49,7 +52,11 @@ export function useInjectionInstanceCollection (
 //   key1: [insta.value, instb.value]
 //   key2: [instc.value]
 // }
-export function useInjectionCollection (injectionName: string, collectionKey: string, valueRef: Ref<any>) {
+export function useInjectionCollection (
+  injectionName: string,
+  collectionKey: string,
+  valueRef: Ref<any>
+): void {
   const injection = inject<Record<any, any[]> | null>(injectionName, null)
   if (injection === null) return
   if (!(collectionKey in injection)) {
@@ -80,15 +87,20 @@ export function useInjectionCollection (injectionName: string, collectionKey: st
 export function useInjectionElementCollection (
   injectionName: string,
   collectionKey: string,
-  getElement: () => Element
-) {
-  const injection = inject<Record<string, any[]> | null>(injectionName, null)
+  getElement: () => HTMLElement | null
+): void {
+  const injection = inject<Record<string, HTMLElement[]> | null>(
+    injectionName,
+    null
+  )
   if (injection === null) return
   if (!(collectionKey in injection)) {
     injection[collectionKey] = []
   }
   onMounted(() => {
-    injection[collectionKey].push(getElement())
+    const el = getElement()
+    if (!el) return
+    injection[collectionKey].push(el)
   })
   onBeforeUnmount(() => {
     const collectionArray = injection[collectionKey]
@@ -100,14 +112,18 @@ export function useInjectionElementCollection (
   })
 }
 
-export function useDeferredTrue (valueRef: Ref<any>, delay: number, shouldDelayRef: Ref<boolean>): Ref<boolean> {
+export function useDeferredTrue (
+  valueRef: Ref<any>,
+  delay: number,
+  shouldDelayRef: Ref<boolean>
+): Ref<boolean> {
   if (!delay) return valueRef
   const delayedRef = ref(valueRef.value)
   let timerId: number | null = null
   watch(valueRef, (value) => {
     if (timerId !== null) window.clearTimeout(timerId)
     if (value === true) {
-      if (shouldDelayRef && shouldDelayRef.value === false) {
+      if (shouldDelayRef && !shouldDelayRef.value) {
         delayedRef.value = true
       } else {
         timerId = window.setTimeout(() => {

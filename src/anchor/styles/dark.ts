@@ -1,14 +1,11 @@
 import { changeColor } from 'seemly'
 import { commonDark } from '../../_styles/new-common'
-import { affixDark } from '../../affix/styles'
+import type { AnchorTheme } from './light'
 import commonVars from './_common'
 
-export default {
+const anchorDark: AnchorTheme = {
   name: 'Anchor',
   common: commonDark,
-  peers: {
-    Affix: affixDark
-  },
   self (vars) {
     const {
       borderRadius,
@@ -31,3 +28,5 @@ export default {
     }
   }
 }
+
+export default anchorDark

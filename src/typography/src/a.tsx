@@ -40,13 +40,15 @@ export default defineComponent({
     const RouterLink = resolveComponent('router-link')
     if (RouterLink && this.to) {
       return h(
-        RouterLink,
+        RouterLink as any,
         {
           class: 'n-a',
           to: this.to,
           style: this.cssVars
         },
-        renderSlot(this.$slots, 'default')
+        {
+          default: () => renderSlot(this.$slots, 'default')
+        }
       )
     }
     return (

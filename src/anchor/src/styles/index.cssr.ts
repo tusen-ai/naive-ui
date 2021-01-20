@@ -11,9 +11,9 @@ import { c, cE, cB, cM } from '../../../_utils/cssr'
 // --rail-color
 // --rail-color-active
 export default cB('anchor', `
-    padding-left: 4px;
-    position: relative;
-  `, [
+  padding-left: 4px;
+  position: relative;
+`, [
   cB('anchor-link-background', `
     position: absolute;
     left: 2px;

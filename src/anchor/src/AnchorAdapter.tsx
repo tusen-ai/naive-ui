@@ -1,56 +1,29 @@
-<template>
-  <n-base-anchor
-    v-if="!affix"
-    ref="anchorRef"
-    :style="cssVars"
-    :listen-to="listenTo"
-    :bound="bound"
-    :target="target"
-    :ignore-gap="ignoreGap"
-  >
-    <slot />
-  </n-base-anchor>
-  <n-affix
-    v-else
-    :unstable-theme="mergedTheme.peers.Affix"
-    :unstable-theme-overrides="mergedTheme.overrides.Affix"
-    :listen-to="listenTo"
-    :top="top"
-    :bottom="bottom"
-    :offset-top="offsetTop"
-    :offset-bottom="offsetBottom"
-    :position="position"
-    :target="target"
-  >
-    <n-base-anchor
-      ref="anchorRef"
-      :style="cssVars"
-      :bound="bound"
-      :listen-to="listenTo"
-      :ignore-gap="ignoreGap"
-      :target="target"
-    >
-      <slot />
-    </n-base-anchor>
-  </n-affix>
-</template>
-
-<script>
-import { defineComponent, computed, ref } from 'vue'
+import {
+  h,
+  defineComponent,
+  computed,
+  ref,
+  renderSlot,
+  CSSProperties,
+  PropType
+} from 'vue'
 import { NAffix } from '../../affix'
 import { useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import { anchorLight } from '../styles'
+import type { AnchorTheme } from '../styles'
 import style from './styles/index.cssr'
-import NBaseAnchor from './BaseAnchor.vue'
+import NBaseAnchor from './BaseAnchor'
+import type { BaseAnchorRef } from './BaseAnchor'
+
+export interface AnchorRef {
+  scrollTo: (href: string) => void
+}
 
 export default defineComponent({
   name: 'Anchor',
-  components: {
-    NBaseAnchor,
-    NAffix
-  },
   props: {
-    ...useTheme.props,
+    ...(useTheme.props as ThemeProps<AnchorTheme>),
     top: {
       type: Number,
       default: undefined
@@ -84,12 +57,15 @@ export default defineComponent({
       default: false
     },
     listenTo: {
-      type: [String, Object],
+      type: [String, Object] as PropType<
+      string | (() => HTMLElement) | undefined
+      >,
       default: undefined
     },
     // deprecated
     target: {
-      validator () {
+      type: Function as PropType<(() => HTMLElement) | undefined>,
+      validator: () => {
         return true
       },
       default: undefined
@@ -97,11 +73,11 @@ export default defineComponent({
   },
   setup (props) {
     const themeRef = useTheme('Anchor', 'Anchor', style, anchorLight, props)
-    const anchorRef = ref(null)
+    const anchorRef = ref<BaseAnchorRef | null>(null)
     return {
       anchorRef,
-      scrollTo (href) {
-        anchorRef.value.setActiveHref(href)
+      scrollTo (href: string) {
+        anchorRef.value?.setActiveHref(href)
       },
       mergedTheme: themeRef,
       cssVars: computed(() => {
@@ -131,6 +107,34 @@ export default defineComponent({
         }
       })
     }
+  },
+  render () {
+    const anchorNode = (
+      <NBaseAnchor
+        ref="anchorRef"
+        style={this.cssVars as CSSProperties}
+        listenTo={this.listenTo}
+        bound={this.bound}
+        target={this.target}
+        ignoreGap={this.ignoreGap}
+      >
+        {{ default: () => renderSlot(this.$slots, 'default') }}
+      </NBaseAnchor>
+    )
+    return !this.affix ? (
+      anchorNode
+    ) : (
+      <NAffix
+        listenTo={this.listenTo}
+        top={this.top}
+        bottom={this.bottom}
+        offsetTop={this.offsetTop}
+        offsetBottom={this.offsetBottom}
+        position={this.position}
+        target={this.target}
+      >
+        {{ default: () => anchorNode }}
+      </NAffix>
+    )
   }
 })
-</script>

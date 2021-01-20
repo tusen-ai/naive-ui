@@ -18,7 +18,9 @@ export default defineComponent({
   name: 'Affix',
   props: {
     listenTo: {
-      type: [String, Object],
+      type: [String, Object] as PropType<
+      string | (() => HTMLElement) | undefined
+      >,
       default: undefined
     },
     offsetTop: {
@@ -43,7 +45,7 @@ export default defineComponent({
     },
     // deprecated
     target: {
-      type: (undefined as unknown) as PropType<() => HTMLElement>,
+      type: Function as PropType<(() => HTMLElement) | undefined>,
       validator: () => {
         warn('affix', '`target` is deprecated, please use `listen-to` instead.')
         return true
