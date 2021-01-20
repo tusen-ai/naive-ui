@@ -144,6 +144,13 @@ export default defineComponent({
       >,
       default: undefined
     },
+    // for jsx
+    onUpdateValue: {
+      type: [Function, Array] as PropType<
+      MaybeArray<(value: string | number | null) => void> | undefined
+      >,
+      default: undefined
+    },
     onBlur: {
       type: [Function, Array] as PropType<
       MaybeArray<(e: FocusEvent) => void> | undefined
@@ -315,10 +322,15 @@ export default defineComponent({
     function doUpdateValue (
       value: string | number | Array<string | number> | null
     ): void {
-      const { onChange, 'onUpdate:value': onUpdateValue } = props
+      const {
+        onChange,
+        'onUpdate:value': _onUpdateValue,
+        onUpdateValue
+      } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
       if (onChange) call(onChange, value)
       if (onUpdateValue) call(onUpdateValue, value)
+      if (_onUpdateValue) call(_onUpdateValue, value)
       uncontrolledValueRef.value = value
       nTriggerFormChange()
       nTriggerFormInput()

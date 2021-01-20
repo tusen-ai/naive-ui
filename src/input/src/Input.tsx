@@ -23,6 +23,11 @@ import { inputLight } from '../styles'
 import type { InputTheme } from '../styles'
 import style from './styles/input.cssr'
 
+export interface InputRef {
+  blur: () => void
+  focus: () => void
+}
+
 export default defineComponent({
   name: 'Input',
   props: {

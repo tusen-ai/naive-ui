@@ -2,9 +2,10 @@ import { changeColor } from 'seemly'
 import { selectDark } from '../../select/styles'
 import { inputDark } from '../../input/styles'
 import { commonDark } from '../../_styles/new-common'
-import commonVariables from './_common.js'
+import commonVariables from './_common'
+import type { PaginationTheme } from './light'
 
-export default {
+const paginationDark: PaginationTheme = {
   name: 'Pagination',
   common: commonDark,
   peers: {
@@ -25,7 +26,7 @@ export default {
       fontSize
     } = vars
     const borderColor = changeColor(primaryColor, {
-      alpha: opacity3
+      alpha: Number(opacity3)
     })
     return {
       ...commonVariables,
@@ -60,3 +61,5 @@ export default {
     }
   }
 }
+
+export default paginationDark

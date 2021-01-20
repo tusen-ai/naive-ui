@@ -1,4 +1,4 @@
-import { cB, c, cE, cM, cNotM } from '../../../_utils/cssr'
+import { cB, c, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --item-font-size
@@ -58,16 +58,7 @@ export default cB('pagination', `
     cB('input', `
       margin: var(--input-margin);
       width: var(--input-width);
-    `, [
-      cE('placeholder', {
-        left: '6px',
-        right: '6px'
-      }),
-      c('input', `
-        padding-left: 6px;
-        padding-right: 6px;
-      `)
-    ])
+    `)
   ]),
   cB('pagination-item', `
     position: relative;

@@ -1,9 +1,8 @@
-/**
- *
- * @param {number} currentPage
- * @param {number} pageCount
- */
-function pagesToShow (currentPage, pageCount, pageSlot = 9) {
+function pagesToShow (
+  currentPage: number,
+  pageCount: number,
+  pageSlot: number = 9
+): number[] {
   if (pageCount === 1) return [1]
   if (pageCount === 2) return [1, 2]
   const firstPage = 1
@@ -47,18 +46,32 @@ function pagesToShow (currentPage, pageCount, pageSlot = 9) {
   return items
 }
 
-function mapPagesToPageItems (pages, currentPage) {
+export type PageItem =
+  | {
+    type: 'fastBackward' | 'fastForward'
+    label: string
+    active: false
+  }
+  | {
+    type: 'page'
+    label: number
+    active: boolean
+  }
+
+function mapPagesToPageItems (pages: number[], currentPage: number): PageItem[] {
   return pages.map((page) => {
     switch (page) {
       case -2:
         return {
           type: 'fastBackward',
-          label: 'fastBackward'
+          label: 'fastBackward',
+          active: false
         }
       case -1:
         return {
           type: 'fastForward',
-          label: 'fastForward'
+          label: 'fastForward',
+          active: false
         }
       default:
         if (page === currentPage) {
@@ -78,10 +91,13 @@ function mapPagesToPageItems (pages, currentPage) {
   })
 }
 
-function pageItems (currentPage, pageCount, pageSlot) {
+function pageItems (
+  currentPage: number,
+  pageCount: number,
+  pageSlot: number
+): PageItem[] {
   const pages = pagesToShow(currentPage, pageCount, pageSlot)
-  const items = mapPagesToPageItems(pages, currentPage)
-  return items
+  return mapPagesToPageItems(pages, currentPage)
 }
 
 export { pagesToShow, mapPagesToPageItems, pageItems }
