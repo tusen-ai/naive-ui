@@ -1,8 +1,9 @@
 import { baseSelectionDark } from '../../_base/selection/styles'
 import { baseSelectMenuDark } from '../../_base/select-menu/styles'
 import { commonDark } from '../../_styles/new-common'
+import type { SelectTheme } from './light'
 
-export default {
+const selectDark: SelectTheme = {
   name: 'Select',
   common: commonDark,
   peers: {
@@ -10,3 +11,5 @@ export default {
     BaseSelectMenu: baseSelectMenuDark
   }
 }
+
+export default selectDark

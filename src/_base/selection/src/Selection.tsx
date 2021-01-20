@@ -19,10 +19,12 @@ import { baseSelectionLight } from '../styles'
 import type { BaseSelectionTheme } from '../styles'
 import Suffix from './Suffix'
 import style from './styles/index.cssr'
+import type { BaseOption } from '../../../select'
 
-export interface SelectOption {
-  value: string | number
-  label: string
+export interface BaseSelectionRef {
+  focusPatternInputWrapper: () => void
+  focusPatternInput: () => void
+  $el: HTMLElement
 }
 
 export default defineComponent({
@@ -46,11 +48,11 @@ export default defineComponent({
       default: undefined
     },
     selectedOption: {
-      type: Object as PropType<SelectOption | null>,
+      type: Object as PropType<BaseOption | null>,
       default: null
     },
     selectedOptions: {
-      type: Array as PropType<SelectOption[] | null>,
+      type: Array as PropType<BaseOption[] | null>,
       default: null
     },
     multiple: {
@@ -184,7 +186,7 @@ export default defineComponent({
       const { onBlur } = props
       if (onBlur) onBlur(e)
     }
-    function doDeleteOption (value: SelectOption): void {
+    function doDeleteOption (value: BaseOption): void {
       const { onDeleteOption } = props
       if (onDeleteOption) onDeleteOption(value)
     }
@@ -250,7 +252,7 @@ export default defineComponent({
         }
       }
     }
-    function handleDeleteOption (option: SelectOption): void {
+    function handleDeleteOption (option: BaseOption): void {
       doDeleteOption(option)
     }
     function handlePatternKeyDown (e: KeyboardEvent): void {
@@ -565,9 +567,11 @@ export default defineComponent({
               onBlur={this.handleBlur}
             >
               {this.label?.length ? (
-                <div class="n-base-selection-label__input">{this.label}</div>
+                <div class="n-base-selection-label__input" key="input">
+                  {this.label}
+                </div>
               ) : (
-                <div class="n-base-selection-placeholder">
+                <div class="n-base-selection-placeholder" key="placeholder">
                   {this.placeholder}
                 </div>
               )}

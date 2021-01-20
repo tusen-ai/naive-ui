@@ -12,12 +12,13 @@ import {
   provide,
   reactive
 } from 'vue'
-import { RawNode, TreeMate, TreeNode } from 'treemate'
+import { TreeMate, TreeNode } from 'treemate'
 import { VirtualList, VirtualListRef } from 'vueuc'
 import { depx, getPadding } from 'seemly'
 import { NEmpty } from '../../../empty'
 import { NScrollbar } from '../../../scrollbar'
 import type { ScrollbarRef } from '../../../scrollbar'
+import type { BaseOption, GroupOption, IgnoredOption } from '../../../select'
 import { formatLength } from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
 import { useTheme } from '../../../_mixins'
@@ -28,16 +29,18 @@ import style from './styles/index.cssr'
 import { baseSelectMenuLight, BaseSelectMenuTheme } from '../styles'
 
 export interface BaseSelectMenuInjection {
-  handleOptionMouseEnter: (e: MouseEvent, tmNode: TreeNode) => void
-  handleOptionClick: (e: MouseEvent, tmNode: TreeNode) => void
+  handleOptionMouseEnter: (e: MouseEvent, tmNode: TreeNode<BaseOption>) => void
+  handleOptionClick: (e: MouseEvent, tmNode: TreeNode<BaseOption>) => void
   valueSet: Set<number | string>
-  pendingTmNode: TreeNode | null
+  pendingTmNode: TreeNode<BaseOption> | null
   multiple: boolean
   value: string | number | Array<string | number> | null
 }
 
 export interface BaseSelectMenuRef {
-  getPendingOption: () => TreeNode | null
+  getPendingOption: () => BaseOption | null
+  prev: () => void
+  next: () => void
 }
 
 export default defineComponent({
@@ -49,7 +52,9 @@ export default defineComponent({
       default: true
     },
     treeMate: {
-      type: Object as PropType<TreeMate>,
+      type: Object as PropType<
+      TreeMate<BaseOption, GroupOption, IgnoredOption>
+      >,
       required: true
     },
     multiple: {
@@ -137,8 +142,8 @@ export default defineComponent({
     const styleRef = computed(() => {
       return [{ width: formatLength(props.width) }, cssVarsRef.value]
     })
-    const tmNodesRef = computed(() => {
-      return props.treeMate.treeNodes
+    const flattenedNodesRef = computed(() => {
+      return props.treeMate.flattenedNodes
     })
     watch(toRef(props, 'treeMate'), () => {
       if (props.autoPending) {
@@ -148,7 +153,7 @@ export default defineComponent({
         setPendingTmNode(null)
       }
     })
-    function doToggleOption (option: RawNode): void {
+    function doToggleOption (option: BaseOption): void {
       const { onMenuToggleOption } = props
       if (onMenuToggleOption) onMenuToggleOption(option)
     }
@@ -164,16 +169,22 @@ export default defineComponent({
     function handleVirtualListResize (): void {
       scrollbarRef.value?.sync()
     }
-    function getPendingOption (): RawNode | null {
+    function getPendingOption (): BaseOption | null {
       const { value: pendingTmNode } = pendingNodeRef
       if (pendingTmNode) return pendingTmNode.rawNode
       return null
     }
-    function handleOptionMouseEnter (e: MouseEvent, tmNode: TreeNode): void {
+    function handleOptionMouseEnter (
+      e: MouseEvent,
+      tmNode: TreeNode<BaseOption>
+    ): void {
       if (tmNode.disabled) return
       setPendingTmNode(tmNode, false)
     }
-    function handleOptionClick (e: MouseEvent, tmNode: TreeNode): void {
+    function handleOptionClick (
+      e: MouseEvent,
+      tmNode: TreeNode<BaseOption>
+    ): void {
       if (tmNode.disabled) return
       doToggleOption(tmNode.rawNode)
     }
@@ -203,7 +214,10 @@ export default defineComponent({
         setPendingTmNode(pendingTmNode.getPrev({ loop: true }), true)
       }
     }
-    function setPendingTmNode (tmNode: TreeNode | null, doScroll = false): void {
+    function setPendingTmNode (
+      tmNode: TreeNode<BaseOption> | null,
+      doScroll = false
+    ): void {
       pendingNodeRef.value = tmNode
       if (doScroll && tmNode) {
         if (props.virtualScroll) {
@@ -279,7 +293,7 @@ export default defineComponent({
       defaultScrollIndex: pendingNodeRef.value?.fIndex,
       itemSize: itemSizeRef,
       padding: paddingRef,
-      tmNodes: tmNodesRef,
+      flattenedNodes: flattenedNodesRef,
       empty: emptyRef,
       next,
       prev,
@@ -327,7 +341,7 @@ export default defineComponent({
                   <VirtualList
                     ref="virtualListRef"
                     class="n-virtual-list"
-                    items={this.tmNodes}
+                    items={this.flattenedNodes}
                     itemSize={this.itemSize}
                     showScrollbar={false}
                     defaultScrollIndex={this.defaultScrollIndex}
@@ -337,14 +351,23 @@ export default defineComponent({
                     onScroll={this.handleVirtualListScroll}
                   >
                     {{
-                      default: ({ item: tmNode }: { item: TreeNode }) => {
-                        return tmNode.rawNode.type === 'group' ? (
+                      default: ({
+                        item: tmNode
+                      }: {
+                        item: TreeNode<GroupOption | BaseOption | IgnoredOption>
+                      }) => {
+                        return tmNode.isGroup ? (
                           <NSelectGroupHeader
                             key={tmNode.key}
-                            tmNode={tmNode}
+                            tmNode={
+                              (tmNode as unknown) as TreeNode<GroupOption>
+                            }
                           />
-                        ) : (
-                          <NSelectOption key={tmNode.key} tmNode={tmNode} />
+                        ) : tmNode.ignored ? null : (
+                          <NSelectOption
+                            key={tmNode.key}
+                            tmNode={(tmNode as unknown) as TreeNode<BaseOption>}
+                          />
                         )
                       }
                     }}
@@ -357,11 +380,17 @@ export default defineComponent({
                       paddingBottom: this.padding.bottom
                     }}
                   >
-                    {this.tmNodes.map((tmNode) =>
+                    {this.flattenedNodes.map((tmNode) =>
                       tmNode.rawNode.type === 'group' ? (
-                        <NSelectGroupHeader key={tmNode.key} tmNode={tmNode} />
+                        <NSelectGroupHeader
+                          key={tmNode.key}
+                          tmNode={(tmNode as unknown) as TreeNode<GroupOption>}
+                        />
                       ) : (
-                        <NSelectOption key={tmNode.key} tmNode={tmNode} />
+                        <NSelectOption
+                          key={tmNode.key}
+                          tmNode={(tmNode as unknown) as TreeNode<BaseOption>}
+                        />
                       )
                     )}
                   </div>

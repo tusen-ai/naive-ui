@@ -19,6 +19,10 @@ export interface Theme<T = undefined, R = any> {
   self?: (vars: ThemeCommonVars) => T
 }
 
+export function createTheme<T, R> (theme: Theme<T, R>): Theme<T, R> {
+  return theme
+}
+
 type UseThemeProps<T> = Readonly<{
   unstableTheme: Theme<T>
   unstableThemeOverrides: ThemeOverrides

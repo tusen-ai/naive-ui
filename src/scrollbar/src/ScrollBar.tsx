@@ -22,40 +22,28 @@ import style from './styles/index.cssr'
 
 interface ScrollTo {
   (x: number, y: number): void
-  (
-    x: {
-      left?: number
-      top?: number
-      behavior?: ScrollBehavior
-      debounce?: boolean
-    },
-    y: number
-  ): void
-  (
-    x: {
-      el: HTMLElement
-      behavior?: ScrollBehavior
-      debounce?: boolean
-    },
-    y: number
-  ): void
-  (
-    x: {
-      index: number
-      elSize: number
-      behavior?: ScrollBehavior
-      debounce?: boolean
-    },
-    y: number
-  ): void
-  (
-    x: {
-      position: 'top' | 'bottom'
-      behavior?: ScrollBehavior
-      debounce?: boolean
-    },
-    y: number
-  ): void
+  (options: {
+    left?: number
+    top?: number
+    behavior?: ScrollBehavior
+    debounce?: boolean
+  }): void
+  (options: {
+    el: HTMLElement
+    behavior?: ScrollBehavior
+    debounce?: boolean
+  }): void
+  (options: {
+    index: number
+    elSize: number
+    behavior?: ScrollBehavior
+    debounce?: boolean
+  }): void
+  (options: {
+    position: 'top' | 'bottom'
+    behavior?: ScrollBehavior
+    debounce?: boolean
+  }): void
 }
 
 export interface ScrollbarRef {

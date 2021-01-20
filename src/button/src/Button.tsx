@@ -140,12 +140,12 @@ export default defineComponent({
       }
     }
     const handleKeyUp = (e: KeyboardEvent): void => {
-      if (!props.keyboard) {
-        e.preventDefault()
-        return
-      }
       switch (e.code) {
         case 'Enter':
+          if (!props.keyboard) {
+            e.preventDefault()
+            return
+          }
           enterPressedRef.value = false
           void nextTick(() => {
             if (!props.disabled) {
@@ -155,10 +155,10 @@ export default defineComponent({
       }
     }
     const handleKeyDown = (e: KeyboardEvent): void => {
-      e.preventDefault()
-      if (!props.keyboard) return
       switch (e.code) {
         case 'Enter':
+          if (!props.keyboard) return
+          e.preventDefault()
           enterPressedRef.value = true
       }
     }

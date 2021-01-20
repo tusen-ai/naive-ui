@@ -30,10 +30,10 @@ export default cB('text', `
       border-color .3s var(--bezier),
       background-color .3s var(--bezier);
     box-sizing: border-box;
-    padding: .15em .45em 0 .45em;
+    padding: .05em .35em 0 .35em;
     border-radius: var(--code-border-radius);
     font-size: .9em;
-    color: var(code-text-color);
+    color: var(--code-text-color);
     background-color: var(--code-color);
     border: var(--code-border);
   `)
