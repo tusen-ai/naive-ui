@@ -44,9 +44,7 @@ export default defineComponent({
                   {
                     class: 'n-collapse-item__content-inner'
                   },
-                  {
-                    ...this.$slots
-                  }
+                  this.$slots
                 )
               ]
             ),

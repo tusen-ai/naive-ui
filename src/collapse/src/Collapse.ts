@@ -12,7 +12,6 @@ import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, warn } from '../../_utils'
 import { collapseLight, CollapseTheme } from '../styles'
-import type { CollapseThemeVars } from '../styles'
 import style from './styles/index.cssr'
 
 export interface NCollapseInjection {
@@ -20,7 +19,7 @@ export interface NCollapseInjection {
   displayDirective: 'if' | 'show'
   expandedNames: string | string[]
   collectedItemNames: string[]
-  toggleItem(collapse: boolean, name: string, event: MouseEvent): void
+  toggleItem: (collapse: boolean, name: string, event: MouseEvent) => void
 }
 
 export default defineComponent({
@@ -69,14 +68,14 @@ export default defineComponent({
   },
   setup (props) {
     const collectedItemNames: string[] = []
-    const themeRef = useTheme<CollapseThemeVars>(
+    const themeRef = useTheme(
       'Collapse',
       'Collapse',
       style,
       collapseLight,
       props
     )
-    function doUpdateExpandedNames (names: string[]) {
+    function doUpdateExpandedNames (names: string[]): void {
       const {
         'onUpdate:expandedNames': updateExpandedNames,
         onExpandedNamesChange
@@ -88,11 +87,15 @@ export default defineComponent({
       name: string
       expanded: boolean
       event: MouseEvent
-    }) {
+    }): void {
       const { onItemHeaderClick } = props
       if (onItemHeaderClick) call(onItemHeaderClick, info)
     }
-    function toggleItem (collapse: boolean, name: string, event: MouseEvent) {
+    function toggleItem (
+      collapse: boolean,
+      name: string,
+      event: MouseEvent
+    ): void {
       const { accordion, expandedNames } = props
       if (accordion) {
         if (collapse) {

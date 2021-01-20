@@ -1,43 +1,13 @@
-<template>
-  <div
-    class="n-collapse-item"
-    :class="{
-      'n-collapse-item--active': !collapsed,
-      [`n-collapse-item--${arrowPlacement}-arrow-placement`]: true
-    }"
-  >
-    <div
-      class="n-collapse-item__header"
-      :class="{
-        'n-collapse-item__header--active': !collapsed
-      }"
-      @click="handleClick"
-    >
-      <slot v-if="arrowPlacement === 'right'" name="header">
-        {{ title }}
-      </slot>
-      <div class="n-collapse-item-arrow">
-        <slot name="arrow" :collapsed="collapsed">
-          <n-base-icon>
-            <arrow-icon />
-          </n-base-icon>
-        </slot>
-      </div>
-      <slot v-if="arrowPlacement === 'left'" name="header">
-        {{ title }}
-      </slot>
-    </div>
-    <n-collapse-item-content
-      :display-directive="mergedDisplayDirective"
-      :show="!collapsed"
-    >
-      <slot />
-    </n-collapse-item-content>
-  </div>
-</template>
-
-<script lang="ts">
-import { toRef, defineComponent, PropType, inject, computed } from 'vue'
+import {
+  h,
+  toRef,
+  defineComponent,
+  PropType,
+  inject,
+  computed,
+  renderSlot,
+  VNode
+} from 'vue'
 import { ChevronRightIcon as ArrowIcon } from '../../_base/icons'
 import { NBaseIcon } from '../../_base'
 import { useInjectionCollection } from '../../_utils/composable'
@@ -46,11 +16,6 @@ import { NCollapseInjection } from './Collapse'
 
 export default defineComponent({
   name: 'CollapseItem',
-  components: {
-    NBaseIcon,
-    NCollapseItemContent,
-    ArrowIcon
-  },
   props: {
     title: {
       type: String,
@@ -103,6 +68,48 @@ export default defineComponent({
         }
       }
     }
+  },
+  render () {
+    const { $slots, arrowPlacement, collapsed } = this
+    const headerNode = renderSlot($slots, 'header', undefined, () => [
+      this.title
+    ])
+    return (
+      <div
+        class={[
+          'n-collapse-item',
+          `n-collapse-item--${arrowPlacement}-arrow-placement`,
+          {
+            'n-collapse-item--active': !collapsed
+          }
+        ]}
+      >
+        <div
+          class={[
+            'n-collapse-item__header',
+            {
+              'n-collapse-item__header--active': !collapsed
+            }
+          ]}
+          onClick={this.handleClick}
+        >
+          {arrowPlacement === 'right' && headerNode}
+          <div class="n-collapse-item-arrow">
+            {renderSlot($slots, 'arrow', { collapsed: collapsed }, () => [
+              (
+                <NBaseIcon>{{ default: () => <ArrowIcon /> }}</NBaseIcon>
+              ) as VNode
+            ])}
+          </div>
+          {arrowPlacement === 'left' && headerNode}
+        </div>
+        <NCollapseItemContent
+          displayDirective={this.mergedDisplayDirective}
+          show={!collapsed}
+        >
+          {$slots}
+        </NCollapseItemContent>
+      </div>
+    )
   }
 })
-</script>
