@@ -1,20 +1,20 @@
 import { changeColor } from 'seemly'
-import { commonLight } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/new-common'
 import commonVariables from './_common'
+import type { CheckboxTheme } from './light'
 
-export default {
+const checkboxDark: CheckboxTheme = {
   name: 'Checkbox',
-  common: commonLight,
+  common: commonDark,
   self (vars) {
     const {
-      baseColor,
-      inputColorDisabled,
+      inputColorDisabledOverlay,
       cardColor,
       modalColor,
-      textColorDisabled,
-      borderColor,
+      borderColorOverlay,
       primaryColor,
-      textColor2,
+      textColor2Overlay,
+      textColorDisabledOverlay,
       fontSizeSmall,
       fontSizeMedium,
       fontSizeLarge,
@@ -26,20 +26,22 @@ export default {
       fontSizeMedium,
       fontSizeLarge,
       borderRadius: borderRadiusSmall,
-      color: baseColor,
+      color: 'transparent',
       colorActive: primaryColor,
-      colorDisabled: inputColorDisabled,
+      colorDisabled: inputColorDisabledOverlay,
       colorTableHeader: cardColor,
       colorTableHeaderModal: modalColor,
-      checkMarkColor: baseColor,
-      checkMarkColorDisabled: textColorDisabled,
-      border: `1px solid ${borderColor}`,
-      borderDisabled: `1px solid ${borderColor}`,
+      checkMarkColor: cardColor,
+      checkMarkColorDisabled: textColorDisabledOverlay,
+      border: `1px solid ${borderColorOverlay}`,
+      borderDisabled: `1px solid ${borderColorOverlay}`,
       borderActive: `1px solid ${primaryColor}`,
       borderFocus: `1px solid ${primaryColor}`,
       boxShadowFocus: `0 0 0 2px ${changeColor(primaryColor, { alpha: 0.3 })}`,
-      textColor: textColor2,
-      textColorDisabled: textColorDisabled
+      textColor: textColor2Overlay,
+      textColorDisabled: textColorDisabledOverlay
     }
   }
 }
+
+export default checkboxDark

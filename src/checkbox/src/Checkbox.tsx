@@ -1,63 +1,32 @@
-<template>
-  <div
-    class="n-checkbox"
-    :class="{
-      'n-checkbox--checked': renderedChecked,
-      'n-checkbox--disabled': mergedDisabled,
-      'n-checkbox--indeterminate': indeterminate,
-      'n-checkbox--table-header': tableHeader
-    }"
-    :tabindex="mergedDisabled ? false : 0"
-    :style="cssVars"
-    @keyup.enter="handleKeyUpEnter"
-    @keyup.space="handleKeyUpSpace"
-    @keydown.space="handleKeyDownSpace"
-    @click="handleClick"
-  >
-    <div class="n-checkbox-box">
-      <n-icon-switch-transition>
-        <div v-if="indeterminate" key="indeterminate" class="n-checkbox-icon">
-          <line-mark class="n-checkbox-icon__line" />
-        </div>
-        <div v-else key="check" class="n-checkbox-icon">
-          <check-mark class="n-checkbox-icon__check" />
-        </div>
-      </n-icon-switch-transition>
-      <div class="n-checkbox-box__border" />
-    </div>
-    <span v-if="label !== null || $slots.default" class="n-checkbox__label">
-      <slot>
-        <render :render="label" />
-      </slot>
-    </span>
-  </div>
-</template>
-
-<script>
-import { defineComponent, computed, inject, ref, toRef } from 'vue'
+import {
+  h,
+  defineComponent,
+  computed,
+  inject,
+  ref,
+  toRef,
+  renderSlot,
+  PropType,
+  CSSProperties
+} from 'vue'
 import { useMergedState, useMemo } from 'vooks'
 import { useFormItem, useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import { NIconSwitchTransition } from '../../_base'
-import { warn, call, render, createKey } from '../../_utils'
+import { warn, call, createKey, MaybeArray } from '../../_utils'
 import { checkboxLight } from '../styles'
-import CheckMark from './CheckMark.vue'
-import LineMark from './LineMark.vue'
-import style from './styles/index.cssr.js'
+import type { CheckboxTheme } from '../styles'
+import CheckMark from './CheckMark'
+import LineMark from './LineMark'
+import type { CheckboxGroupInjection } from './CheckboxGroup'
+import style from './styles/index.cssr'
 
 export default defineComponent({
   name: 'Checkbox',
-  components: {
-    NIconSwitchTransition,
-    CheckMark,
-    LineMark,
-    render
-  },
   props: {
-    ...useTheme.props,
+    ...(useTheme.props as ThemeProps<CheckboxTheme>),
     size: {
-      validator (value) {
-        return ['small', 'medium', 'large'].includes(value)
-      },
+      type: String as PropType<'small' | 'medium' | 'large' | undefined>,
       default: undefined
     },
     checked: {
@@ -81,12 +50,14 @@ export default defineComponent({
       default: false
     },
     label: {
-      type: [String, Function],
+      type: String,
       default: undefined
     },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:checked': {
-      type: [Function, Array],
+      type: [Function, Array] as PropType<
+      undefined | MaybeArray<(value: boolean) => void>
+      >,
       default: undefined
     },
     // private
@@ -96,7 +67,10 @@ export default defineComponent({
     },
     // deprecated
     onChange: {
-      validator () {
+      type: [Function, Array] as PropType<
+      undefined | MaybeArray<(value: boolean) => void>
+      >,
+      validator: () => {
         warn(
           'checkbox',
           '`on-change` is deprecated, please use `on-update:checked` instead.'
@@ -107,7 +81,10 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const NCheckboxGroup = inject('NCheckboxGroup', null)
+    const NCheckboxGroup = inject<CheckboxGroupInjection | null>(
+      'NCheckboxGroup',
+      null
+    )
     const uncontrolledCheckedRef = ref(props.defaultChecked)
     const controlledCheckedRef = toRef(props, 'checked')
     const mergedCheckedRef = useMergedState(
@@ -126,7 +103,7 @@ export default defineComponent({
       }
     })
     const mergedDisabledRef = computed(() => {
-      return props.disabled || (NCheckboxGroup && NCheckboxGroup.disabled)
+      return props.disabled || NCheckboxGroup?.disabled
     })
     const formItem = useFormItem(props, {
       mergedSize (NFormItem) {
@@ -152,11 +129,47 @@ export default defineComponent({
       checkboxLight,
       props
     )
+    function toggle (): void {
+      if (NCheckboxGroup) {
+        NCheckboxGroup.toggleCheckbox(!renderedCheckedRef.value, props.value)
+      } else {
+        const { onChange, 'onUpdate:checked': onUpdateCheck } = props
+        const { nTriggerFormInput, nTriggerFormChange } = formItem
+        const nextChecked = !renderedCheckedRef.value
+        if (onUpdateCheck) call(onUpdateCheck, nextChecked)
+        if (onChange) call(onChange, nextChecked) // deprecated
+        nTriggerFormInput()
+        nTriggerFormChange()
+        uncontrolledCheckedRef.value = nextChecked
+      }
+    }
+    function handleClick (): void {
+      if (!mergedDisabledRef.value) {
+        toggle()
+      }
+    }
+    function handleKeyUp (e: KeyboardEvent): void {
+      if (mergedDisabledRef.value) return
+      switch (e.code) {
+        case 'Space':
+        case 'Enter':
+          toggle()
+      }
+    }
+    function handleKeyDown (e: KeyboardEvent): void {
+      switch (e.code) {
+        case 'Space':
+          e.preventDefault()
+      }
+    }
     return Object.assign(formItem, {
       NCheckboxGroup,
       mergedDisabled: mergedDisabledRef,
       renderedChecked: renderedCheckedRef,
       mergedTheme: themeRef,
+      handleClick,
+      handleKeyUp,
+      handleKeyDown,
       cssVars: computed(() => {
         const {
           mergedSize: { value: mergedSize }
@@ -206,42 +219,60 @@ export default defineComponent({
       })
     })
   },
-  methods: {
-    toggle () {
-      const { NCheckboxGroup } = this
-      if (NCheckboxGroup) {
-        NCheckboxGroup.toggleCheckbox(!this.renderedChecked, this.value)
-      } else {
-        const {
-          onChange,
-          'onUpdate:checked': onUpdateCheck,
-          nTriggerFormInput,
-          nTriggerFormChange
-        } = this
-        const nextChecked = !this.renderedChecked
-        if (onUpdateCheck) call(onUpdateCheck, nextChecked)
-        if (onChange) call(onChange, nextChecked) // deprecated
-        nTriggerFormInput()
-        nTriggerFormChange()
-        this.uncontrolledChecked = nextChecked
-      }
-    },
-    handleClick () {
-      if (!this.mergedDisabled) {
-        this.toggle()
-      }
-    },
-    handleKeyUpEnter (e) {
-      if (!this.mergedDisabled) {
-        this.toggle()
-      }
-    },
-    handleKeyDownSpace (e) {
-      e.preventDefault()
-    },
-    handleKeyUpSpace (e) {
-      this.handleKeyUpEnter()
-    }
+  render () {
+    const {
+      $slots,
+      renderedChecked,
+      mergedDisabled,
+      indeterminate,
+      tableHeader,
+      cssVars,
+      label,
+      handleKeyUp,
+      handleKeyDown,
+      handleClick
+    } = this
+    return (
+      <div
+        class={[
+          'n-checkbox',
+          {
+            'n-checkbox--checked': renderedChecked,
+            'n-checkbox--disabled': mergedDisabled,
+            'n-checkbox--indeterminate': indeterminate,
+            'n-checkbox--table-header': tableHeader
+          }
+        ]}
+        tabindex={mergedDisabled ? undefined : 0}
+        style={cssVars as CSSProperties}
+        onKeyup={handleKeyUp}
+        onKeydown={handleKeyDown}
+        onClick={handleClick}
+      >
+        <div class="n-checkbox-box">
+          <NIconSwitchTransition>
+            {{
+              default: () =>
+                indeterminate ? (
+                  <div key="indeterminate" class="n-checkbox-icon">
+                    {LineMark}
+                  </div>
+                ) : (
+                  <div key="check" class="n-checkbox-icon">
+                    {CheckMark}
+                  </div>
+                )
+            }}
+          </NIconSwitchTransition>
+
+          <div class="n-checkbox-box__border" />
+        </div>
+        {label !== null || $slots.default ? (
+          <span class="n-checkbox__label">
+            {renderSlot($slots, 'default', undefined, () => [label])}
+          </span>
+        ) : null}
+      </div>
+    )
   }
 })
-</script>

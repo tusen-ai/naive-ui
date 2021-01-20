@@ -1,23 +1,31 @@
-import { h } from 'vue'
+import {
+  h,
+  defineComponent,
+  provide,
+  PropType,
+  computed,
+  reactive,
+  toRef
+} from 'vue'
 import { useFormItem } from '../../_mixins'
-import { warn, call, getSlot } from '../../_utils'
+import { warn, call, getSlot, MaybeArray } from '../../_utils'
 
-export default {
+export interface CheckboxGroupInjection {
+  disabled: boolean
+  valueSet: Set<string | number>
+  mergedSize: 'small' | 'medium' | 'large'
+  toggleCheckbox: (checked: boolean, checkboxValue: string | number) => void
+}
+
+export default defineComponent({
   name: 'CheckboxGroup',
-  provide () {
-    return {
-      NCheckboxGroup: this
-    }
-  },
   props: {
     size: {
-      validator (value) {
-        return ['small', 'medium', 'large'].includes(value)
-      },
+      type: String as PropType<'small' | 'medium' | 'large'>,
       default: undefined
     },
     value: {
-      type: Array,
+      type: Array as PropType<Array<string | number>>,
       default: null
     },
     disabled: {
@@ -26,12 +34,17 @@ export default {
     },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:value': {
-      type: [Function, Array],
+      type: [Function, Array] as PropType<
+      MaybeArray<(value: Array<string | number>) => void> | undefined
+      >,
       default: undefined
     },
     // deprecated
     onChange: {
-      validator () {
+      type: [Function, Array] as PropType<
+      MaybeArray<(value: Array<string | number>) => void> | undefined
+      >,
+      validator: () => {
         if (__DEV__) {
           warn(
             'checkbox-group',
@@ -44,24 +57,19 @@ export default {
     }
   },
   setup (props) {
-    return useFormItem(props)
-  },
-  computed: {
-    valueSet () {
-      if (Array.isArray(this.value)) return new Set(this.value)
-      return null
-    }
-  },
-  methods: {
-    toggleCheckbox (checked, checkboxValue) {
-      const {
-        onChange,
-        'onUpdate:value': onUpdateValue,
-        nTriggerFormInput,
-        nTriggerFormChange
-      } = this
-      if (Array.isArray(this.value)) {
-        const groupValue = Array.from(this.value)
+    const formItem = useFormItem(props)
+    const valueSetRef = computed<Set<string | number>>(() => {
+      if (Array.isArray(props.value)) return new Set(props.value)
+      return new Set()
+    })
+    function toggleCheckbox (
+      checked: boolean,
+      checkboxValue: string | number
+    ): void {
+      const { nTriggerFormInput, nTriggerFormChange } = formItem
+      const { onChange, 'onUpdate:value': onUpdateValue } = props
+      if (Array.isArray(props.value)) {
+        const groupValue = Array.from(props.value)
         const index = groupValue.findIndex((value) => value === checkboxValue)
         if (checked) {
           if (!~index) {
@@ -95,6 +103,15 @@ export default {
         }
       }
     }
+    provide<CheckboxGroupInjection>(
+      'NCheckboxGroup',
+      reactive({
+        valueSet: valueSetRef,
+        disabled: toRef(props, 'disabled'),
+        mergedSize: formItem.mergedSize,
+        toggleCheckbox
+      })
+    )
   },
   render () {
     return h(
@@ -105,4 +122,4 @@ export default {
       getSlot(this)
     )
   }
-}
+})
