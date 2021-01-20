@@ -27,10 +27,6 @@ export const menuItemProps = {
 
 export default defineComponent({
   name: 'MenuItem',
-  components: {
-    NMenuItemContent,
-    NTooltip
-  },
   props: menuItemProps,
   setup (props) {
     const MenuChild = useMenuChild(props)
@@ -41,7 +37,7 @@ export default defineComponent({
     const mergedDisabledRef = computed(() => {
       return submenuDisabledRef.value || props.disabled
     })
-    function doClick (e: MouseEvent) {
+    function doClick (e: MouseEvent): void {
       const { onClick } = props
       if (onClick) onClick(e)
     }

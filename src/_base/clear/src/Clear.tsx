@@ -7,11 +7,6 @@ import style from './styles/index.cssr'
 
 export default defineComponent({
   name: 'BaseClear',
-  components: {
-    NBaseIcon,
-    DismissCircleIcon,
-    NIconSwitchTransition
-  },
   props: {
     show: {
       type: Boolean,

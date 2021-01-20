@@ -22,10 +22,6 @@ import StarIcon from './StarIcon'
 
 export default defineComponent({
   name: 'Rate',
-  components: {
-    NBaseIcon,
-    StarIcon
-  },
   props: {
     ...(useTheme.props as ThemeProps<RateTheme>),
     count: {
