@@ -1,8 +1,9 @@
 import commonVars from './_common'
 import { buttonDark } from '../../button/styles'
 import { commonDark } from '../../_styles/new-common'
+import type { DialogTheme } from './light'
 
-export default {
+const dialogDark: DialogTheme = {
   name: 'Dialog',
   common: commonDark,
   peers: {
@@ -24,7 +25,8 @@ export default {
       borderRadius,
       fontWeightStrong,
       lineHeight,
-      fontSize
+      fontSize,
+      primaryColor
     } = vars
     return {
       ...commonVars,
@@ -37,6 +39,7 @@ export default {
       closeColor: closeColorOverlay,
       closeColorHover: closeColorHoverOverlay,
       closeColorPressed: closeColorPressedOverlay,
+      iconColor: primaryColor,
       iconColorInfo: infoColor,
       iconColorSuccess: successColor,
       iconColorWarning: warningColor,
@@ -46,3 +49,5 @@ export default {
     }
   }
 }
+
+export default dialogDark

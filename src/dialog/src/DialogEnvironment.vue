@@ -30,7 +30,7 @@
 // this -> modal-index -> modal-style
 import { defineComponent } from 'vue'
 import NModal from '../../modal/src/Modal'
-import NDialog from './Dialog.vue'
+import NDialog from './Dialog'
 
 export default defineComponent({
   name: 'DialogEnvironment',

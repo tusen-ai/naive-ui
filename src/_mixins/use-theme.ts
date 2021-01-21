@@ -29,12 +29,14 @@ type UseThemeProps<T> = Readonly<{
   builtinThemeOverrides: ThemeOverrides
 }>
 
-export interface MergedTheme<T, R = any> {
-  common: ThemeCommonVars
-  self: T
-  peers: R
-  overrides: any
-}
+export type MergedTheme<T> = T extends Theme<infer V, infer W>
+  ? {
+    common: ThemeCommonVars
+    self: V
+    peers: W
+    overrides: any
+  }
+  : T
 
 function useTheme<T, R> (
   resolveId: string,
@@ -42,7 +44,7 @@ function useTheme<T, R> (
   style: CNode | undefined,
   defaultTheme: Theme<T, R>,
   props: UseThemeProps<T>
-): ComputedRef<MergedTheme<T, R>> {
+): ComputedRef<MergedTheme<Theme<T, R>>> {
   if (style) {
     onBeforeMount(() => {
       style.mount({

@@ -1,7 +1,14 @@
-import { h, defineComponent, computed, PropType, renderSlot } from 'vue'
+import {
+  h,
+  defineComponent,
+  computed,
+  PropType,
+  renderSlot,
+  CSSProperties
+} from 'vue'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createKey } from '../../_utils'
+import { createKey, keysOf } from '../../_utils'
 import { NBaseClose } from '../../_base'
 import { cardLight } from '../styles'
 import type { CardTheme } from '../styles'
@@ -13,42 +20,38 @@ interface Segmented {
   action?: boolean | 'soft'
 }
 
+const cardProps = {
+  title: String,
+  contentStyle: [Object, String] as PropType<CSSProperties | string>,
+  headerStyle: [Object, String] as PropType<CSSProperties | string>,
+  segmented: {
+    type: [Boolean, Object] as PropType<boolean | Segmented>,
+    default: false
+  },
+  size: {
+    type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
+    default: 'medium'
+  },
+  bordered: {
+    type: Boolean,
+    default: true as boolean
+  },
+  closable: {
+    type: Boolean,
+    default: false as boolean
+  },
+  onClose: Function as PropType<() => void>
+} as const
+
+export { cardProps }
+export const cardPropKeys = keysOf(cardProps)
+export type CardProps = typeof cardProps
+
 export default defineComponent({
   name: 'Card',
   props: {
     ...(useTheme.props as ThemeProps<CardTheme>),
-    title: {
-      type: String,
-      default: undefined
-    },
-    contentStyle: {
-      type: [Object, String],
-      default: undefined
-    },
-    headerStyle: {
-      type: [Object, String],
-      default: undefined
-    },
-    segmented: {
-      type: [Boolean, Object] as PropType<boolean | Segmented>,
-      default: false
-    },
-    size: {
-      type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
-      default: 'medium'
-    },
-    bordered: {
-      type: Boolean,
-      default: true
-    },
-    closable: {
-      type: Boolean,
-      default: false
-    },
-    onClose: {
-      type: Function,
-      default: undefined
-    }
+    ...cardProps
   },
   setup (props) {
     const handleCloseClick = (): void => {

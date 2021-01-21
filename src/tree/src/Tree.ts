@@ -13,9 +13,9 @@ import { createTreeMate, Key, KeyedRawNode, TreeNode } from 'treemate'
 import { useMergedState } from 'vooks'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps, MergedTheme } from '../../_mixins'
-import { call, warn } from '../../_utils'
+import { call, MaybeArray, warn } from '../../_utils'
 import { treeLight } from '../styles'
-import type { TreeThemeVars, TreeTheme } from '../styles'
+import type { TreeTheme } from '../styles'
 import NTreeNode from './TreeNode'
 import { keysWithFilter } from './utils'
 import style from './styles/index.cssr'
@@ -50,7 +50,7 @@ export interface TreeInjection {
   handleDragLeave: (info: DragInfo) => void
   handleDragEnd: (info: DragInfo) => void
   handleDrop: (info: DropInfo) => void
-  mergedTheme: MergedTheme<TreeThemeVars>
+  mergedTheme: MergedTheme<TreeTheme>
 }
 
 export default defineComponent({
@@ -127,7 +127,7 @@ export default defineComponent({
     },
     filter: {
       type: Function as PropType<
-        (pattern: string, node: KeyedRawNode) => boolean
+      (pattern: string, node: KeyedRawNode) => boolean
       >,
       default: (pattern: string, node: KeyedRawNode) => {
         if (!pattern) return true
@@ -146,61 +146,35 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
-    onDragEnter: {
-      type: [Function, Array] as PropType<
-        (e: DragEvent) => void | ((e: DragEvent) => void)[]
-      >,
-      default: undefined
-    },
-    onDragLeave: {
-      type: [Function, Array] as PropType<
-        (e: DragEvent) => void | ((e: DragEvent) => void)[]
-      >,
-      default: undefined
-    },
-    onDragEnd: {
-      type: [Function, Array] as PropType<
-        (e: DragEvent) => void | ((e: DragEvent) => void)[]
-      >,
-      default: undefined
-    },
-    onDragStart: {
-      type: [Function, Array] as PropType<
-        (e: DragEvent) => void | ((e: DragEvent) => void)[]
-      >,
-      default: undefined
-    },
-    onDrop: {
-      type: [Function, Array] as PropType<
-        (e: DragEvent) => void | ((e: DragEvent) => void)[]
-      >,
-      default: undefined
-    },
+    onDragEnter: [Function, Array] as PropType<
+    MaybeArray<(e: DragEvent) => void>
+    >,
+    onDragLeave: [Function, Array] as PropType<
+    MaybeArray<(e: DragEvent) => void>
+    >,
+    onDragEnd: [Function, Array] as PropType<
+    MaybeArray<(e: DragEvent) => void>
+    >,
+    onDragStart: [Function, Array] as PropType<
+    MaybeArray<(e: DragEvent) => void>
+    >,
+    onDrop: [Function, Array] as PropType<MaybeArray<(e: DragEvent) => void>>,
     // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:expandedKeys': {
-      type: [Function, Array] as PropType<
-        (value: Key[]) => void | ((value: Key[]) => void)[]
-      >,
-      default: undefined
-    },
+    'onUpdate:expandedKeys': [Function, Array] as PropType<
+    MaybeArray<(value: Key[]) => void>
+    >,
     // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:checkedKeys': {
-      type: [Function, Array] as PropType<
-        (value: Key[]) => void | ((value: Key[]) => void)[]
-      >,
-      default: undefined
-    },
+    'onUpdate:checkedKeys': [Function, Array] as PropType<
+    MaybeArray<(value: Key[]) => void>
+    >,
     // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:selectedKeys': {
-      type: [Function, Array] as PropType<
-        (value: Key[]) => void | ((value: Key[]) => void)[]
-      >,
-      default: undefined
-    },
+    'onUpdate:selectedKeys': [Function, Array] as PropType<
+    MaybeArray<(value: Key[]) => void>
+    >,
     // deprecated
     onExpandedKeysChange: {
       type: [Function, Array] as PropType<
-        (value: Key[]) => void | ((value: Key[]) => void)[]
+      MaybeArray<(value: Key[]) => void> | undefined
       >,
       validator: () => {
         warn(
@@ -213,7 +187,7 @@ export default defineComponent({
     },
     onCheckedKeysChange: {
       type: [Function, Array] as PropType<
-        (value: Key[]) => void | ((value: Key[]) => void)[]
+      MaybeArray<(value: Key[]) => void> | undefined
       >,
       validator: () => {
         warn(
@@ -226,7 +200,7 @@ export default defineComponent({
     },
     onSelectedKeysChange: {
       type: [Function, Array] as PropType<
-        (value: Key[]) => void | ((value: Key[]) => void)[]
+      MaybeArray<(value: Key[]) => void> | undefined
       >,
       validator: () => {
         warn(
@@ -304,7 +278,7 @@ export default defineComponent({
       }
     })
 
-    function doExpandedKeysChange (value: Key[]) {
+    function doExpandedKeysChange (value: Key[]): void {
       const {
         'onUpdate:expandedKeys': onUpdateExpandedKeys,
         onExpandedKeysChange
@@ -313,7 +287,7 @@ export default defineComponent({
       if (onUpdateExpandedKeys) call(onUpdateExpandedKeys, value)
       if (onExpandedKeysChange) call(onExpandedKeysChange, value)
     }
-    function doCheckedKeysChange (value: Key[]) {
+    function doCheckedKeysChange (value: Key[]): void {
       const {
         'onUpdate:checkedKeys': onUpdateCheckedKeys,
         onCheckedKeysChange
@@ -322,7 +296,7 @@ export default defineComponent({
       if (onUpdateCheckedKeys) call(onUpdateCheckedKeys, value)
       if (onCheckedKeysChange) call(onCheckedKeysChange, value)
     }
-    function doSelectedKeysChange (value: Key[]) {
+    function doSelectedKeysChange (value: Key[]): void {
       const {
         'onUpdate:selectedKeys': onUpdateSelectedKeys,
         onSelectedKeysChange
@@ -332,32 +306,32 @@ export default defineComponent({
       if (onSelectedKeysChange) call(onSelectedKeysChange, value)
     }
     // Drag & Drop
-    function doDragEnter (info: DragInfo) {
+    function doDragEnter (info: DragInfo): void {
       const { onDragEnter } = props
       if (onDragEnter) call(onDragEnter, info)
     }
-    function doDragLeave (info: DragInfo) {
+    function doDragLeave (info: DragInfo): void {
       const { onDragLeave } = props
       if (onDragLeave) call(onDragLeave, info)
     }
-    function doDragEnd (info: DragInfo) {
+    function doDragEnd (info: DragInfo): void {
       const { onDragEnd } = props
       if (onDragEnd) call(onDragEnd, info)
     }
-    function doDragStart (info: DragInfo) {
+    function doDragStart (info: DragInfo): void {
       const { onDragStart } = props
       if (onDragStart) call(onDragStart, info)
     }
-    function doDrop (info: DropInfo & { dragNode: TreeNode }) {
+    function doDrop (info: DropInfo & { dragNode: TreeNode }): void {
       const { onDrop } = props
       if (onDrop) call(onDrop, info)
     }
-    function resetDragStatus () {
+    function resetDragStatus (): void {
       draggingNodeKeyRef.value = null
       draggingNodeRef.value = null
       droppingNodeKeyRef.value = null
     }
-    function handleCheck (node: TreeNode, checked: boolean) {
+    function handleCheck (node: TreeNode, checked: boolean): void {
       if (props.disabled || node.disabled) return
       const { checkedKeys } = treeMateRef.value[checked ? 'check' : 'uncheck'](
         node.key,
@@ -368,7 +342,7 @@ export default defineComponent({
       )
       doCheckedKeysChange(checkedKeys)
     }
-    function toggleExpand (node: TreeNode) {
+    function toggleExpand (node: TreeNode): void {
       if (props.disabled) return
       const { value: mergedExpandedKeys } = mergedExpandedKeysRef
       const index = mergedExpandedKeys.findIndex(
@@ -382,11 +356,11 @@ export default defineComponent({
         doExpandedKeysChange(mergedExpandedKeys.concat(node.key))
       }
     }
-    function handleSwitcherClick (node: TreeNode) {
+    function handleSwitcherClick (node: TreeNode): void {
       if (props.disabled || node.disabled) return
       toggleExpand(node)
     }
-    function handleSelect (node: TreeNode) {
+    function handleSelect (node: TreeNode): void {
       if (props.disabled || node.disabled || !props.selectable) return
       if (props.multiple) {
         const selectedKeys = mergedSelectedKeysRef.value
@@ -410,7 +384,7 @@ export default defineComponent({
         }
       }
     }
-    function handleDragEnter ({ event, node }: DragInfo) {
+    function handleDragEnter ({ event, node }: DragInfo): void {
       // node should be a tmNode
       if (!props.draggable || props.disabled || node.disabled) return
       doDragEnter({ event, node })
@@ -419,7 +393,7 @@ export default defineComponent({
       if (node.key === draggingNodeKeyRef.value) return
       if (!mergedExpandedKeysRef.value.includes(node.key) && !node.isLeaf) {
         window.clearTimeout(expandTimerIdRef.value)
-        const expand = () => {
+        const expand = (): void => {
           if (
             droppingNodeKeyRef.value === node.key &&
             !mergedExpandedKeysRef.value.includes(node.key)
@@ -431,7 +405,7 @@ export default defineComponent({
           if (!loadingKeysRef.value.includes(node.key)) {
             loadingKeysRef.value.push(node.key)
           }
-          props.onLoad(node).then(() => {
+          void props.onLoad(node).then(() => {
             loadingKeysRef.value.splice(
               loadingKeysRef.value.findIndex((key) => key === node.key),
               1
@@ -446,23 +420,23 @@ export default defineComponent({
         }, 800)
       }
     }
-    function handleDragLeave ({ event, node }: DragInfo) {
+    function handleDragLeave ({ event, node }: DragInfo): void {
       if (!props.draggable || props.disabled || node.disabled) return
       droppingNodeKeyRef.value = null
       doDragLeave({ event, node })
     }
-    function handleDragEnd ({ event, node }: DragInfo) {
+    function handleDragEnd ({ event, node }: DragInfo): void {
       if (!props.draggable || props.disabled || node.disabled) return
       doDragEnd({ event, node })
       resetDragStatus()
     }
-    function handleDragStart ({ event, node }: DragInfo) {
+    function handleDragStart ({ event, node }: DragInfo): void {
       if (!props.draggable || props.disabled || node.disabled) return
       draggingNodeKeyRef.value = node.key
       draggingNodeRef.value = node
       doDragStart({ event, node })
     }
-    function handleDrop ({ event, node, dropPosition }: DropInfo) {
+    function handleDrop ({ event, node, dropPosition }: DropInfo): void {
       if (!props.draggable || props.disabled || node.disabled) return
       doDrop({
         event,

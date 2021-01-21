@@ -49,6 +49,9 @@ interface ScrollTo {
 export interface ScrollbarRef {
   scrollTo: ScrollTo
   sync: () => void
+  containerRef: HTMLElement | null
+  contentRef: HTMLElement | null
+  containerScrollTop: number
 }
 
 export default defineComponent({
@@ -118,8 +121,8 @@ export default defineComponent({
     const containerWidthRef = ref<number | null>(null)
     const yRailSizeRef = ref<number | null>(null)
     const xRailSizeRef = ref<number | null>(null)
-    const containerScrollTopRef = ref<number | null>(null)
-    const containerScrollLeftRef = ref<number | null>(null)
+    const containerScrollTopRef = ref(0)
+    const containerScrollLeftRef = ref(0)
     const isShowXBarRef = ref(false)
     const isShowYBarRef = ref(false)
 
@@ -177,7 +180,6 @@ export default defineComponent({
       const { value: yRailSize } = yRailSizeRef
       if (
         containerHeight === null ||
-        containerScrollTop === null ||
         contentHeight === null ||
         yRailSize === null
       ) {
@@ -199,7 +201,6 @@ export default defineComponent({
       const { value: xRailSize } = xRailSizeRef
       if (
         containerWidth === null ||
-        containerScrollLeft === null ||
         contentWidth === null ||
         xRailSize === null
       ) {
@@ -408,7 +409,7 @@ export default defineComponent({
       xBarPressed = true
       on('mousemove', window, handleXScrollMouseMove, true)
       on('mouseup', window, handleXScrollMouseUp, true)
-      memoXLeft = containerScrollLeftRef.value as number
+      memoXLeft = containerScrollLeftRef.value
       memoMouseX = e.clientX
     }
     function handleXScrollMouseMove (e: MouseEvent): void {
@@ -453,7 +454,7 @@ export default defineComponent({
       yBarPressed = true
       on('mousemove', window, handleYScrollMouseMove, true)
       on('mouseup', window, handleYScrollMouseUp, true)
-      memoYTop = containerScrollTopRef.value as number
+      memoYTop = containerScrollTopRef.value
       memoMouseY = e.clientY
     }
     function handleYScrollMouseMove (e: MouseEvent): void {
@@ -524,6 +525,7 @@ export default defineComponent({
     return {
       sync,
       scrollTo,
+      containerScrollTop: containerScrollTopRef,
       containerRef,
       contentRef,
       yRailRef,

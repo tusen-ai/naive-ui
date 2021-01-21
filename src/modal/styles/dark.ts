@@ -2,8 +2,9 @@ import { scrollbarDark } from '../../scrollbar/styles'
 import { dialogDark } from '../../dialog/styles'
 import { cardDark } from '../../card/styles'
 import { commonDark } from '../../_styles/new-common'
+import { ModalTheme } from './light'
 
-export default {
+const modalDark: ModalTheme = {
   name: 'Modal',
   common: commonDark,
   peers: {
@@ -20,3 +21,5 @@ export default {
     }
   }
 }
+
+export default modalDark
