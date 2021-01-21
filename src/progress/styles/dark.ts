@@ -1,6 +1,7 @@
 import { commonDark } from '../../_styles/new-common'
+import type { ProgressTheme } from './light'
 
-export default {
+const progressDark: ProgressTheme = {
   name: 'Progress',
   common: commonDark,
   self (vars) {
@@ -38,3 +39,5 @@ export default {
     }
   }
 }
+
+export default progressDark

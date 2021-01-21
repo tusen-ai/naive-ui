@@ -214,7 +214,7 @@ export default c([
             cM('processing', [
               c('&::after', `
                 content: "";
-                backgroundImage: var(--line-bg-processing);
+                background-image: var(--line-bg-processing);
                 animation: progress-processing-animation 2s var(--bezier) infinite;
               `)
             ])
