@@ -1,52 +1,15 @@
-<template>
-  <div
-    class="n-radio"
-    :class="{
-      'n-radio--disabled': mergedDisabled,
-      'n-radio--checked': renderSafeChecked,
-      'n-radio--focus': focus
-    }"
-    :style="cssVars"
-    @keyup.enter="handleKeyUpEnter"
-    @click="handleClick"
-    @mousedown="handleMouseDown"
-  >
-    <input
-      ref="inputRef"
-      type="radio"
-      class="n-radio__radio-input"
-      :value="value"
-      :name="mergedName"
-      :checked="renderSafeChecked"
-      :disabled="mergedDisabled"
-      @change="handleRadioInputChange"
-      @focus="handleRadioInputFocus"
-      @blur="handleRadioInputBlur"
-    >
-    <div
-      class="n-radio__dot"
-      :class="{
-        'n-radio__dot--checked': renderSafeChecked
-      }"
-    />
-    <div v-if="$slots.default" ref="labelRef" class="n-radio__label">
-      <slot />
-    </div>
-  </div>
-</template>
-
-<script>
-import { defineComponent, computed } from 'vue'
+import { h, defineComponent, computed, CSSProperties } from 'vue'
 import { useTheme } from '../../_mixins'
-import { radioLight } from '../styles'
+import type { ThemeProps } from '../../_mixins'
+import { radioLight, RadioTheme } from '../styles'
 import useRadio from './use-radio'
-import style from './styles/radio.cssr.js'
+import style from './styles/radio.cssr'
 import { createKey } from '../../_utils'
 
 export default defineComponent({
   name: 'Radio',
   props: {
-    ...useTheme.props,
+    ...(useTheme.props as ThemeProps<RadioTheme>),
     ...useRadio.props
   },
   setup (props) {
@@ -93,6 +56,50 @@ export default defineComponent({
         }
       })
     })
+  },
+  render () {
+    const { $slots } = this
+    return (
+      <div
+        class={[
+          'n-radio',
+          {
+            'n-radio--disabled': this.mergedDisabled,
+            'n-radio--checked': this.renderSafeChecked,
+            'n-radio--focus': this.focus
+          }
+        ]}
+        style={this.cssVars as CSSProperties}
+        onKeyup={this.handleKeyUp}
+        onClick={this.handleClick}
+        onMousedown={this.handleMouseDown}
+      >
+        <input
+          ref="inputRef"
+          type="radio"
+          class="n-radio__radio-input"
+          value={this.value}
+          name={this.mergedName}
+          checked={this.renderSafeChecked}
+          disabled={this.mergedDisabled}
+          onChange={this.handleRadioInputChange}
+          onFocus={this.handleRadioInputFocus}
+          onBlur={this.handleRadioInputBlur}
+        />
+        <div
+          class={[
+            'n-radio__dot',
+            {
+              'n-radio__dot--checked': this.renderSafeChecked
+            }
+          ]}
+        />
+        {$slots.default ? (
+          <div ref="labelRef" class="n-radio__label">
+            {$slots.default()}
+          </div>
+        ) : null}
+      </div>
+    )
   }
 })
-</script>

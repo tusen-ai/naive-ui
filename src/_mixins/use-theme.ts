@@ -24,7 +24,7 @@ export function createTheme<T, R> (theme: Theme<T, R>): Theme<T, R> {
 }
 
 type UseThemeProps<T> = Readonly<{
-  unstableTheme: Theme<T>
+  unstableTheme: Theme<T> | undefined
   unstableThemeOverrides: ThemeOverrides
   builtinThemeOverrides: ThemeOverrides
 }>
@@ -126,7 +126,7 @@ useTheme.props = {
 
 export interface ThemeProps<T> {
   unstableTheme: {
-    type: PropType<T>
+    type: PropType<T | undefined>
     default: undefined
   }
   unstableThemeOverrides: {

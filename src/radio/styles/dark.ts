@@ -1,8 +1,9 @@
 import { changeColor } from 'seemly'
 import commonVariables from './_common'
 import { commonDark } from '../../_styles/new-common'
+import type { RadioTheme } from './light'
 
-export default {
+const radioDark: RadioTheme = {
   name: 'Radio',
   common: commonDark,
   self (vars) {
@@ -63,3 +64,5 @@ export default {
     }
   }
 }
+
+export default radioDark

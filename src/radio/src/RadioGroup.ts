@@ -1,15 +1,37 @@
-import { h, defineComponent, computed } from 'vue'
+import {
+  h,
+  defineComponent,
+  computed,
+  PropType,
+  VNode,
+  provide,
+  ref,
+  toRef,
+  reactive,
+  VNodeChild
+} from 'vue'
+import { useMergedState } from 'vooks'
 import { useTheme, useFormItem } from '../../_mixins'
-import { getSlot, flatten, warn, createKey } from '../../_utils'
+import type { ThemeProps } from '../../_mixins'
+import { getSlot, warn, createKey, call, flatten } from '../../_utils'
 import { radioLight } from '../styles'
-import style from './styles/radio-group.cssr.js'
+import type { RadioTheme } from '../styles'
+import type { RadioProps, RadioGroupInjection } from './use-radio'
+import style from './styles/radio-group.cssr'
 
-function mapSlot (defaultSlot, groupInstance) {
+function mapSlot (
+  defaultSlot: VNode[],
+  value: string | number | null
+): {
+    children: VNodeChild[]
+    isButtonGroup: boolean
+  } {
   const children = []
   let isButtonGroup = false
   for (let i = 0; i < defaultSlot.length; ++i) {
     const wrappedInstance = defaultSlot[i]
-    const name = wrappedInstance.type?.name
+    const name = (wrappedInstance.type as any)?.name
+    console.log(name)
     if (name === 'RadioButton') {
       isButtonGroup = true
     }
@@ -20,7 +42,7 @@ function mapSlot (defaultSlot, groupInstance) {
       )
       continue
     }
-    const instanceProps = wrappedInstance.props
+    const instanceProps: RadioProps = wrappedInstance.props as any
     if (name !== 'RadioButton') {
       children.push(wrappedInstance)
       continue
@@ -28,14 +50,12 @@ function mapSlot (defaultSlot, groupInstance) {
     if (i === 0) {
       children.push(wrappedInstance)
     } else {
-      const lastInstanceProps = children[children.length - 1].props
-      const lastInstanceChecked =
-        groupInstance.$props.value === lastInstanceProps.value
-      const lastInstanceDisabled = lastInstanceProps.disabled
-      const currentInstanceChecked =
-        groupInstance.$props.value === instanceProps.value
+      const lastInstanceProps: RadioProps = children[children.length - 1]
+        .props as any
+      const lastInstanceChecked = value === lastInstanceProps.value
+      const lastInstanceDisabled: boolean = lastInstanceProps.disabled
+      const currentInstanceChecked = value === instanceProps.value
       const currentInstanceDisabled = instanceProps.disabled
-
       /**
        * Priority of button splitor:
        * !disabled  checked >
@@ -43,7 +63,7 @@ function mapSlot (defaultSlot, groupInstance) {
        * !disabled !checked >
        *  disabled !checked
        */
-      const lastInstancePriority =
+      const lastInstancePriority: number =
         (lastInstanceChecked ? 2 : 0) + (!lastInstanceDisabled ? 1 : 0)
       const currentInstancePriority =
         (currentInstanceChecked ? 2 : 0) + (!currentInstanceDisabled ? 1 : 0)
@@ -75,39 +95,30 @@ function mapSlot (defaultSlot, groupInstance) {
 
 export default defineComponent({
   name: 'RadioGroup',
-  provide () {
-    return {
-      NRadioGroup: this
-    }
-  },
   props: {
-    ...useTheme.props,
-    name: {
-      type: String,
-      default: undefined
-    },
+    ...(useTheme.props as ThemeProps<RadioTheme>),
+    name: String,
     value: {
-      type: [Boolean, String, Number],
+      type: [String, Number] as PropType<string | number | undefined | null>
+    },
+    defaultValue: {
+      type: [String, Number] as PropType<string | number | null>,
       default: null
     },
-    size: {
-      validator (value) {
-        return ['small', 'medium', 'large'].includes(value)
-      },
-      default: undefined
-    },
+    size: String as PropType<'small' | 'medium' | 'large'>,
     disabled: {
       type: Boolean,
       default: false
     },
     // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': {
-      type: Function,
-      default: undefined
-    },
+    'onUpdate:value': Function as PropType<(value: string | number) => void>,
+    onUpdateValue: Function as PropType<(value: string | number) => void>,
     // deprecated
     onChange: {
-      validator () {
+      type: Function as PropType<
+      ((value: string | number) => void) | undefined
+      >,
+      validator: () => {
         if (__DEV__) {
           warn(
             'radio-group',
@@ -123,8 +134,41 @@ export default defineComponent({
     const formItem = useFormItem(props)
     const themeRef = useTheme('Radio', 'RadioGroup', style, radioLight, props)
     const { mergedSize: mergedSizeRef } = formItem
+    const uncontrolledValueRef = ref(props.defaultValue)
+    const controlledValueRef = toRef(props, 'value')
+    const mergedValueRef = useMergedState(
+      controlledValueRef,
+      uncontrolledValueRef
+    )
+    function doUpdateValue (value: string | number): void {
+      const {
+        onChange,
+        onUpdateValue,
+        'onUpdate:value': _onUpdateValue
+      } = props
+      if (onChange) {
+        onChange(value)
+      }
+      if (onUpdateValue) {
+        call(onUpdateValue, value)
+      }
+      if (_onUpdateValue) {
+        call(_onUpdateValue, value)
+      }
+      uncontrolledValueRef.value = value
+    }
+    provide<RadioGroupInjection>(
+      'NRadioGroup',
+      reactive({
+        name: toRef(props, 'name'),
+        value: mergedValueRef,
+        doUpdateValue,
+        disabled: toRef(props, 'disabled'),
+        mergedSize: formItem.mergedSize
+      })
+    )
     return {
-      ...formItem,
+      mergedValue: mergedValueRef,
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
         const {
@@ -163,7 +207,11 @@ export default defineComponent({
     }
   },
   render () {
-    const { children, isButtonGroup } = mapSlot(flatten(getSlot(this)), this)
+    const { mergedValue } = this
+    const { children, isButtonGroup } = mapSlot(
+      flatten(getSlot(this)),
+      mergedValue
+    )
     return h(
       'div',
       {

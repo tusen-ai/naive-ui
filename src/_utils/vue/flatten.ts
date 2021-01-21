@@ -1,11 +1,11 @@
-import { Fragment, VNodeChild } from 'vue'
+import { Fragment, VNodeChild, createTextVNode, VNode } from 'vue'
 
 // o(n) flatten
-export function flatten (vNodes: VNodeChild[], result: VNodeChild[] = []) {
+export function flatten (vNodes: VNodeChild[], result: VNode[] = []): VNode[] {
   vNodes.forEach((vNode) => {
     if (vNode === null) return
     if (typeof vNode !== 'object') {
-      result.push(vNode)
+      if (typeof vNode === 'string' || typeof vNode === 'number') { result.push(createTextVNode(String(vNode))) }
       return
     }
     if (Array.isArray(vNode)) {
