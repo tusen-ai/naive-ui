@@ -41,7 +41,7 @@ function createRenderer (wrapCodeWithCard = true) {
         )
       }
       const highlighted = hljs.highlight(language, code).value
-      const content = `<n-code><pre>${highlighted}</pre></n-code>`
+      const content = `<n-code><pre v-pre>${highlighted}</pre></n-code>`
       return wrapCodeWithCard
         ? `<n-card size="small" class="md-card">${content}</n-card>`
         : content

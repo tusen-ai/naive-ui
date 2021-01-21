@@ -31,7 +31,6 @@ function mapSlot (
   for (let i = 0; i < defaultSlot.length; ++i) {
     const wrappedInstance = defaultSlot[i]
     const name = (wrappedInstance.type as any)?.name
-    console.log(name)
     if (name === 'RadioButton') {
       isButtonGroup = true
     }
