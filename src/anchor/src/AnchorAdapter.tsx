@@ -1,12 +1,4 @@
-import {
-  h,
-  defineComponent,
-  computed,
-  ref,
-  renderSlot,
-  CSSProperties,
-  PropType
-} from 'vue'
+import { h, defineComponent, computed, ref, CSSProperties, PropType } from 'vue'
 import { NAffix } from '../../affix'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -118,7 +110,7 @@ export default defineComponent({
         target={this.target}
         ignoreGap={this.ignoreGap}
       >
-        {{ default: () => renderSlot(this.$slots, 'default') }}
+        {this.$slots}
       </NBaseAnchor>
     )
     return !this.affix ? (

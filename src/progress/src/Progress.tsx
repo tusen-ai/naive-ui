@@ -134,6 +134,7 @@ export default defineComponent({
     }
   },
   render () {
+    // it's ok to expand all prop here since no slots' deps
     const {
       type,
       cssVars,

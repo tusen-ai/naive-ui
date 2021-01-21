@@ -11,6 +11,7 @@ import { intersection } from 'lodash-es'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, warn } from '../../_utils'
+import type { MaybeArray } from '../../_utils'
 import { collapseLight, CollapseTheme } from '../styles'
 import style from './styles/index.cssr'
 
@@ -20,6 +21,12 @@ export interface NCollapseInjection {
   expandedNames: string | string[]
   collectedItemNames: string[]
   toggleItem: (collapse: boolean, name: string, event: MouseEvent) => void
+}
+
+interface HeaderClickInfo {
+  name: string
+  expanded: boolean
+  event: MouseEvent
 }
 
 export default defineComponent({
@@ -43,17 +50,18 @@ export default defineComponent({
       default: 'if'
     },
     onItemHeaderClick: {
-      type: Function,
+      type: Function as PropType<MaybeArray<(info: HeaderClickInfo) => void>>,
       default: undefined
     },
     // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:expandedNames': {
-      type: Function as PropType<(expandedNames: string[]) => void>,
-      default: undefined
-    },
+    'onUpdate:expandedNames': Function as PropType<
+    MaybeArray<(expandedNames: string[]) => void>
+    >,
     // deprecated
     onExpandedNamesChange: {
-      type: Function,
+      type: (Function as Function) as PropType<
+      MaybeArray<(expandedNames: string[]) => void> | undefined
+      >,
       validator: () => {
         if (__DEV__) {
           warn(
@@ -83,11 +91,7 @@ export default defineComponent({
       if (updateExpandedNames) call(updateExpandedNames, names)
       if (onExpandedNamesChange) call(onExpandedNamesChange, names)
     }
-    function doItemHeaderClick (info: {
-      name: string
-      expanded: boolean
-      event: MouseEvent
-    }): void {
+    function doItemHeaderClick (info: HeaderClickInfo): void {
       const { onItemHeaderClick } = props
       if (onItemHeaderClick) call(onItemHeaderClick, info)
     }

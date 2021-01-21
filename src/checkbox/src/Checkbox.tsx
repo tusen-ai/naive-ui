@@ -253,7 +253,7 @@ export default defineComponent({
           <NIconSwitchTransition>
             {{
               default: () =>
-                indeterminate ? (
+                this.indeterminate ? (
                   <div key="indeterminate" class="n-checkbox-icon">
                     {LineMark}
                   </div>

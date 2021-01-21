@@ -158,17 +158,13 @@ export default defineComponent({
   render () {
     const {
       NModal,
-      displayed,
-      displayDirective,
-      show,
+      $slots,
       handleEnter,
       handleAfterLeave,
       handleBeforeLeave,
-      handleClickOutside,
-      preset,
-      $slots
+      handleClickOutside
     } = this
-    return displayDirective === 'show' || displayed || show
+    return this.displayDirective === 'show' || this.displayed || this.show
       ? withDirectives(
         (
           <div class="n-modal-body-wrapper">
@@ -192,39 +188,40 @@ export default defineComponent({
                         withDirectives(
                           (
                             <div ref="bodyRef" class="n-modal">
-                              {preset === 'confirm' || preset === 'dialog' ? (
-                                <NDialog
-                                  {...this.$attrs}
-                                  unstableTheme={
-                                    NModal.mergedTheme.peers.Dialog
-                                  }
-                                  unstableThemeOverrides={
-                                    NModal.mergedTheme.overrides.Dialog
-                                  }
-                                  {...keep(this.$props, dialogPropKeys)}
-                                >
-                                  {$slots}
-                                </NDialog>
-                              ) : preset === 'card' ? (
-                                <NCard
-                                  {...this.$attrs}
-                                  unstableTheme={
-                                    NModal.mergedTheme.peers.Card
-                                  }
-                                  unstableThemeOverrides={
-                                    NModal.mergedTheme.overrides.Card
-                                  }
-                                  {...keep(this.$props, cardPropKeys)}
-                                >
-                                  {$slots}
-                                </NCard>
-                              ) : (
-                                renderSlot($slots, 'default')
-                              )}
+                              {this.preset === 'confirm' ||
+                                this.preset === 'dialog' ? (
+                                  <NDialog
+                                    {...this.$attrs}
+                                    unstableTheme={
+                                      NModal.mergedTheme.peers.Dialog
+                                    }
+                                    unstableThemeOverrides={
+                                      NModal.mergedTheme.overrides.Dialog
+                                    }
+                                    {...keep(this.$props, dialogPropKeys)}
+                                  >
+                                    {$slots}
+                                  </NDialog>
+                                ) : this.preset === 'card' ? (
+                                  <NCard
+                                    {...this.$attrs}
+                                    unstableTheme={
+                                      NModal.mergedTheme.peers.Card
+                                    }
+                                    unstableThemeOverrides={
+                                      NModal.mergedTheme.overrides.Card
+                                    }
+                                    {...keep(this.$props, cardPropKeys)}
+                                  >
+                                    {$slots}
+                                  </NCard>
+                                ) : (
+                                  renderSlot($slots, 'default')
+                                )}
                             </div>
                           ) as any,
                           [
-                            [vShow, show],
+                            [vShow, this.show],
                             [clickoutside, handleClickOutside]
                           ]
                         )
@@ -235,7 +232,12 @@ export default defineComponent({
             </NScrollbar>
           </div>
         ) as VNode,
-        [[vShow, displayDirective === 'if' || displayed || show]]
+        [
+          [
+            vShow,
+            this.displayDirective === 'if' || this.displayed || this.show
+          ]
+        ]
       )
       : null
   }

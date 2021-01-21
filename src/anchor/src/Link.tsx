@@ -20,10 +20,7 @@ export default defineComponent({
       type: String,
       required: true
     },
-    href: {
-      type: String,
-      default: undefined
-    }
+    href: String
   },
   setup (props, { slots }) {
     const titleRef = ref<HTMLElement | null>(null)
@@ -40,7 +37,9 @@ export default defineComponent({
       }
     })
     function handleClick (): void {
-      NAnchor.setActiveHref(props.href)
+      if (props.href !== undefined) {
+        NAnchor.setActiveHref(props.href)
+      }
     }
     return () => {
       return (

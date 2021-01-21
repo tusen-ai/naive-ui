@@ -39,12 +39,7 @@ function getOffset (
 export default defineComponent({
   name: 'BaseAnchor',
   props: {
-    listenTo: {
-      type: [String, Object] as PropType<
-      string | (() => HTMLElement) | undefined
-      >,
-      default: undefined
-    },
+    listenTo: [String, Object] as PropType<string | (() => HTMLElement)>,
     bound: {
       type: Number,
       default: 12

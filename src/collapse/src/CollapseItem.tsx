@@ -70,10 +70,14 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots, arrowPlacement, collapsed } = this
-    const headerNode = renderSlot($slots, 'header', undefined, () => [
-      this.title
-    ])
+    const {
+      $slots,
+      arrowPlacement,
+      collapsed,
+      title,
+      mergedDisplayDirective
+    } = this
+    const headerNode = renderSlot($slots, 'header', undefined, () => [title])
     return (
       <div
         class={[
@@ -104,7 +108,7 @@ export default defineComponent({
           {arrowPlacement === 'left' && headerNode}
         </div>
         <NCollapseItemContent
-          displayDirective={this.mergedDisplayDirective}
+          displayDirective={mergedDisplayDirective}
           show={!collapsed}
         >
           {$slots}
