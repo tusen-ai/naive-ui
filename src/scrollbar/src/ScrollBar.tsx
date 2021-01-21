@@ -9,7 +9,8 @@ import {
   mergeProps,
   renderSlot,
   Transition,
-  VNode
+  VNode,
+  ExtractPropTypes
 } from 'vue'
 import { on, off } from 'evtd'
 import { VResizeObserver } from 'vueuc'
@@ -54,58 +55,64 @@ export interface ScrollbarRef {
   containerScrollTop: number
 }
 
+const scrollbarProps = {
+  size: {
+    type: Number,
+    default: 5
+  },
+  duration: {
+    type: Number,
+    default: 0
+  },
+  scrollable: {
+    type: Boolean,
+    default: true
+  },
+  xScrollable: {
+    type: Boolean,
+    default: false
+  },
+  container: {
+    type: Function as PropType<undefined | (() => HTMLElement)>,
+    default: undefined
+  },
+  content: {
+    type: Function as PropType<undefined | (() => HTMLElement)>,
+    default: undefined
+  },
+  containerStyle: {
+    type: Object,
+    default: undefined
+  },
+  contentClass: {
+    type: String,
+    default: undefined
+  },
+  contentStyle: {
+    type: Object,
+    default: undefined
+  },
+  horizontalRailStyle: {
+    type: Object,
+    default: undefined
+  },
+  verticalRailStyle: {
+    type: Object,
+    default: undefined
+  },
+  onScroll: {
+    type: Function as PropType<((e: Event) => void) | undefined>,
+    default: undefined
+  }
+} as const
+
+export type ScrollbarProps = ExtractPropTypes<typeof scrollbarProps>
+
 export default defineComponent({
   name: 'Scrollbar',
   props: {
     ...(useTheme.props as ThemeProps<ScrollbarTheme>),
-    size: {
-      type: Number,
-      default: 5
-    },
-    duration: {
-      type: Number,
-      default: 0
-    },
-    scrollable: {
-      type: Boolean,
-      default: true
-    },
-    xScrollable: {
-      type: Boolean,
-      default: false
-    },
-    container: {
-      type: Function as PropType<undefined | (() => HTMLElement)>,
-      default: undefined
-    },
-    content: {
-      type: Function as PropType<undefined | (() => HTMLElement)>,
-      default: undefined
-    },
-    containerStyle: {
-      type: Object,
-      default: undefined
-    },
-    contentClass: {
-      type: String,
-      default: undefined
-    },
-    contentStyle: {
-      type: Object,
-      default: undefined
-    },
-    horizontalRailStyle: {
-      type: Object,
-      default: undefined
-    },
-    verticalRailStyle: {
-      type: Object,
-      default: undefined
-    },
-    onScroll: {
-      type: Function as PropType<((e: Event) => void) | undefined>,
-      default: undefined
-    }
+    ...scrollbarProps
   },
   setup (props) {
     // dom ref
