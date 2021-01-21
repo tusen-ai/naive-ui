@@ -41,10 +41,7 @@ export default defineComponent({
   name: 'Select',
   props: {
     ...(useTheme.props as ThemeProps<SelectTheme>),
-    bordered: {
-      type: Boolean,
-      default: undefined
-    },
+    bordered: Boolean,
     clearable: {
       type: Boolean,
       default: false
@@ -59,24 +56,15 @@ export default defineComponent({
       >,
       default: null
     },
-    value: {
-      type: [String, Number, Array] as PropType<
-      string | number | Array<string | number> | undefined
-      >,
-      default: undefined
-    },
-    placeholder: {
-      type: String,
-      default: undefined
-    },
+    value: [String, Number, Array] as PropType<
+    string | number | Array<string | number> | undefined
+    >,
+    placeholder: String,
     multiple: {
       type: Boolean,
       default: false
     },
-    size: {
-      type: String as PropType<'small' | 'medium' | 'large'>,
-      default: undefined
-    },
+    size: String as PropType<'small' | 'medium' | 'large'>,
     filterable: {
       type: Boolean,
       default: false
@@ -138,47 +126,38 @@ export default defineComponent({
       default: undefined
     },
     // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': {
-      type: [Function, Array] as PropType<
-      MaybeArray<(value: string | number | null) => void> | undefined
-      >,
-      default: undefined
-    },
+    'onUpdate:value': [Function, Array] as PropType<
+    | MaybeArray<
+    (value: string | number | Array<string | number> | null) => void
+    >
+    | undefined
+    >,
     // for jsx
-    onUpdateValue: {
-      type: [Function, Array] as PropType<
-      MaybeArray<(value: string | number | null) => void> | undefined
-      >,
-      default: undefined
-    },
-    onBlur: {
-      type: [Function, Array] as PropType<
-      MaybeArray<(e: FocusEvent) => void> | undefined
-      >,
-      default: undefined
-    },
-    onFocus: {
-      type: [Function, Array] as PropType<
-      MaybeArray<(e: FocusEvent) => void> | undefined
-      >,
-      default: undefined
-    },
-    onScroll: {
-      type: [Function, Array] as PropType<
-      MaybeArray<(e: Event) => void> | undefined
-      >,
-      default: undefined
-    },
-    onSearch: {
-      type: [Function, Array] as PropType<
-      MaybeArray<(value: string) => void> | undefined
-      >,
-      default: undefined
-    },
+    onUpdateValue: [Function, Array] as PropType<
+    | MaybeArray<
+    (value: string | number | Array<string | number> | null) => void
+    >
+    | undefined
+    >,
+    onBlur: [Function, Array] as PropType<
+    MaybeArray<(e: FocusEvent) => void> | undefined
+    >,
+    onFocus: [Function, Array] as PropType<
+    MaybeArray<(e: FocusEvent) => void> | undefined
+    >,
+    onScroll: [Function, Array] as PropType<
+    MaybeArray<(e: Event) => void> | undefined
+    >,
+    onSearch: [Function, Array] as PropType<
+    MaybeArray<(value: string) => void> | undefined
+    >,
     /** deprecated */
     onChange: {
       type: [Function, Array] as PropType<
-      MaybeArray<(value: string | number | null) => void> | undefined
+      | MaybeArray<
+      (value: string | number | Array<string | number> | null) => void
+      >
+      | undefined
       >,
       validator: () => {
         if (__DEV__) {
