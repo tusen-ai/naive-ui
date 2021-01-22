@@ -24,9 +24,9 @@ export function createTheme<T, R> (theme: Theme<T, R>): Theme<T, R> {
 }
 
 type UseThemeProps<T> = Readonly<{
-  unstableTheme: Theme<T> | undefined
-  unstableThemeOverrides: ThemeOverrides
-  builtinThemeOverrides: ThemeOverrides
+  unstableTheme?: Theme<T> | undefined
+  unstableThemeOverrides?: ThemeOverrides
+  builtinThemeOverrides?: ThemeOverrides
 }>
 
 export type MergedTheme<T> = T extends Theme<infer V, infer W>
@@ -142,9 +142,9 @@ export interface ThemeProps<T> {
 }
 
 export interface ThemePropsReactive<T> {
-  unstableTheme: T
-  unstableThemeOverrides: Record<string, any>
-  builtinThemeOverrides: Record<string, any>
+  unstableTheme?: T
+  unstableThemeOverrides?: Record<string, any>
+  builtinThemeOverrides?: Record<string, any>
 }
 
 /**

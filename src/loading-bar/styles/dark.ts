@@ -1,6 +1,7 @@
 import { commonDark } from '../../_styles/new-common'
+import type { LoadingBarTheme } from './light'
 
-export default {
+const loadingBarDark: LoadingBarTheme = {
   name: 'LoadingBar',
   common: commonDark,
   self (vars) {
@@ -12,3 +13,5 @@ export default {
     }
   }
 }
+
+export default loadingBarDark
