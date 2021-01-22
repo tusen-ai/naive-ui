@@ -1,22 +1,23 @@
-import { scrollbarLight } from '../../scrollbar/styles'
-import { commonLight } from '../../_styles/new-common'
+import { scrollbarDark } from '../../scrollbar/styles'
+import { commonDark } from '../../_styles/new-common'
+import type { NotificationTheme } from './light'
 
-export default {
+const notificationDark: NotificationTheme = {
   name: 'Notification',
-  common: commonLight,
+  common: commonDark,
   peers: {
-    Scrollbar: scrollbarLight
+    Scrollbar: scrollbarDark
   },
   self (vars) {
     const {
-      textColor2,
+      textColor2Overlay,
       successColor,
       infoColor,
       warningColor,
       errorColor,
       popoverColor,
-      closeColor,
-      closeColorHover,
+      closeColorOverlay,
+      closeColorHoverOverlay,
       textColor1Overlay,
       textColor3Overlay,
       borderRadius,
@@ -30,19 +31,22 @@ export default {
       lineHeight,
       fontSize,
       headerFontWeight: fontWeightStrong,
+      iconColor: textColor2Overlay,
       iconColorSuccess: successColor,
       iconColorInfo: infoColor,
       iconColorWarning: warningColor,
       iconColorError: errorColor,
       color: popoverColor,
-      textColor: textColor2,
-      closeColor: closeColor,
-      closeColorHover: closeColorHover,
-      closeColorPressed: closeColor,
+      textColor: textColor2Overlay,
+      closeColor: closeColorOverlay,
+      closeColorHover: closeColorHoverOverlay,
+      closeColorPressed: closeColorOverlay,
       headerTextColor: textColor1Overlay,
       descriptionTextColor: textColor3Overlay,
-      actionTextColor: textColor2,
+      actionTextColor: textColor2Overlay,
       boxShadow: boxShadow2
     }
   }
 }
+
+export default notificationDark
