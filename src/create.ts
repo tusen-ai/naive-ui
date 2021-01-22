@@ -7,12 +7,12 @@ type ComponentType = any
 
 interface NaiveUIInstance {
   version: string
-  install (app: App): void
-  use (plugin: { install: (naive: NaiveUIInstance) => void }): void
+  install: (app: App) => void
+  use: (plugin: { install: (naive: NaiveUIInstance) => void }) => void
   componentPrefix: string
   hljs: any
-  setHljs (hljs: any): void
-  setHighlightjs (hljs: any): void
+  setHljs: (hljs: any) => void
+  setHighlightjs: (hljs: any) => void
   locales: Record<string, NaiveLocale>
   fallbackLocale: NaiveLocale
 }
@@ -24,18 +24,28 @@ interface NaiveUICreateOptions {
   hljs?: Hljs
 }
 
-function setHljs (this: NaiveUIInstance, hljs: any) {
+function setHljs (this: NaiveUIInstance, hljs: any): void {
   this.hljs = hljs
 }
 
-function createLocalesObject (locales: NaiveLocale[]) {
-  return (
-    locales &&
-    locales.reduce((localeMap, locale) => {
-      localeMap[locale.name] = locale
-      return localeMap
-    }, {})
-  )
+function createLocalesObject (locales: NaiveLocale[]): any {
+  return locales.reduce((localeMap, locale) => {
+    localeMap[locale.name] = locale
+    return localeMap
+  }, {})
+}
+
+interface NaiveUI {
+  version: string
+  use: (plugin: any) => void
+  install: Function
+  // deprecated
+  componentPrefix: string
+  hljs: Hljs | undefined
+  setHljs: Function
+  setHighlightjs: Function
+  locales: any
+  fallbackLocale: any
 }
 
 function create ({
@@ -43,7 +53,7 @@ function create ({
   components = [],
   locales = [],
   hljs = undefined
-}: NaiveUICreateOptions = {}) {
+}: NaiveUICreateOptions = {}): NaiveUI {
   const fallbackLocale = locales[0]
   if (!fallbackLocale) warn('create', '`locales` is empty.')
   const installTargets: App[] = []
@@ -61,13 +71,17 @@ function create ({
     locales: createLocalesObject(locales),
     fallbackLocale
   }
-  function registerComponent (app: App, name: string, component: ComponentType) {
+  function registerComponent (
+    app: App,
+    name: string,
+    component: ComponentType
+  ): void {
     const registered = app.component(componentPrefix + name)
     if (!registered) {
       app.component(componentPrefix + name, component)
     }
   }
-  function install (app: App) {
+  function install (app: App): void {
     if (installTargets.includes(app)) return
     installTargets.push(app)
     app.config.globalProperties.$naive = naive

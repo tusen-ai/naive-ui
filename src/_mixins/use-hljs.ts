@@ -7,9 +7,9 @@ interface UseHljsProps {
   [key: string]: unknown
 }
 
-interface Hljs {
-  getLanguage(lang: string): string | undefined
-  highlight(language: string, code: string): { value: string }
+export interface Hljs {
+  getLanguage: (lang: string) => string | undefined
+  highlight: (language: string, code: string) => { value: string }
 }
 
 export default function useHljs (

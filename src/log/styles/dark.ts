@@ -1,8 +1,9 @@
 import { scrollbarDark } from '../../scrollbar/styles'
 import { commonDark } from '../../_styles/new-common'
 import { codeDark } from '../../code/styles'
+import type { LogTheme } from './light'
 
-export default {
+const logDark: LogTheme = {
   name: 'Log',
   common: commonDark,
   peers: {
@@ -25,3 +26,5 @@ export default {
     }
   }
 }
+
+export default logDark
