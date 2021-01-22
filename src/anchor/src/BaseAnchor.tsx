@@ -184,7 +184,7 @@ export default defineComponent({
         }
       })
       links.sort((a, b) => {
-        if (a.top > b.top || a.top === b.top) {
+        if (a.top >= b.top) {
           if (a.height < b.height) {
             return 1
           }

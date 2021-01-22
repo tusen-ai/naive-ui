@@ -1,4 +1,4 @@
-export function omit<T, K extends keyof T, R> (
+export function omit<T, K extends keyof T, R extends Record<string, any>> (
   object: T,
   keys: K[] = [],
   rest?: R
@@ -11,5 +11,5 @@ export function omit<T, K extends keyof T, R> (
       omitedObject[originalKey] = object[originalKey as keyof T]
     }
   })
-  return Object.assign(omitedObject, rest) as any
+  return Object.assign(omitedObject, rest)
 }

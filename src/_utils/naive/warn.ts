@@ -9,3 +9,7 @@ export function warnOnce (location: string, message: string): void {
 export function warn (location: string, message: string): void {
   console.error(`[naive/${location}]: ${message}`)
 }
+
+export function throwError (location: string, message: string): never {
+  throw new Error(`[naive/${location}]: ${message}`)
+}

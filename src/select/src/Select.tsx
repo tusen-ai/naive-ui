@@ -41,7 +41,10 @@ export default defineComponent({
   name: 'Select',
   props: {
     ...(useTheme.props as ThemeProps<SelectTheme>),
-    bordered: Boolean,
+    bordered: {
+      type: Boolean as PropType<boolean | undefined>,
+      default: undefined
+    },
     clearable: {
       type: Boolean,
       default: false

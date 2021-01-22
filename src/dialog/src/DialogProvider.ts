@@ -1,0 +1,123 @@
+import {
+  defineComponent,
+  Fragment,
+  ref,
+  h,
+  ExtractPropTypes,
+  provide,
+  PropType,
+  inject,
+  reactive
+} from 'vue'
+import { createId } from 'seemly'
+import { omit, throwError } from '../../_utils'
+import DialogEnvironment, { exposedDialogEnvProps } from './DialogEnvironment'
+import { useClicked, useClickPosition } from 'vooks'
+
+type DialogOptions = Partial<ExtractPropTypes<typeof exposedDialogEnvProps>>
+
+type DialogReactive = {
+  readonly key: string
+  readonly destroy: () => void
+} & DialogOptions
+
+interface DialogApiInjection {
+  create: (options: DialogOptions) => DialogReactive
+  success: (options: DialogOptions) => DialogReactive
+  warning: (options: DialogOptions) => DialogReactive
+  error: (options: DialogOptions) => DialogReactive
+  info: (options: DialogOptions) => DialogReactive
+}
+
+export interface DialogProviderInjection {
+  clicked: boolean
+  clickPosition: { x: number, y: number } | null
+}
+
+interface DialogInst {
+  hide: () => void
+}
+
+export function useDialog (): DialogApiInjection {
+  const dialog = inject<DialogApiInjection | null>('dialog', null)
+  if (dialog === null) throwError('use-dialog', 'Dialog injection not found.')
+  return dialog
+}
+
+export default defineComponent({
+  name: 'DialogProvider',
+  props: {
+    injectionKey: String,
+    to: [String, Object] as PropType<string | HTMLElement>
+  },
+  setup () {
+    const dialogListRef = ref<DialogReactive[]>([])
+    const dialogInstRefs: Record<string, DialogInst> = {}
+    function create (options: DialogOptions = {}): DialogReactive {
+      const key = createId()
+      const dialogReactive = reactive({
+        ...options,
+        key,
+        destroy: () => {
+          dialogInstRefs[`n-dialog-${key}`].hide()
+        }
+      })
+      dialogListRef.value.push(dialogReactive)
+      return dialogReactive
+    }
+    const typedApi = (['info', 'success', 'warning', 'error'] as Array<
+    'info' | 'success' | 'warning' | 'error'
+    >).map((type) => (options: DialogOptions): DialogReactive => {
+      return create({ ...options, type })
+    })
+    function handleAfterLeave (key: String): void {
+      const { value: dialogList } = dialogListRef
+      dialogList.splice(
+        dialogList.findIndex((dialog) => dialog.key === key),
+        1
+      )
+    }
+    provide<DialogApiInjection>('dialog', {
+      create,
+      info: typedApi[0],
+      success: typedApi[1],
+      warning: typedApi[2],
+      error: typedApi[3]
+    })
+    provide<DialogProviderInjection>(
+      'NDialogProvider',
+      reactive({
+        clicked: useClicked(64),
+        clickPosition: useClickPosition()
+      })
+    )
+    return {
+      dialogList: dialogListRef,
+      dialogInstRefs,
+      handleAfterLeave
+    }
+  },
+  render () {
+    return h(Fragment, null, [
+      this.dialogList.map((dialog) =>
+        h(
+          DialogEnvironment,
+          omit(dialog, ['destroy'], {
+            to: this.to,
+            ref: ((inst: DialogInst | null) => {
+              if (inst === null) {
+                // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+                delete this.dialogInstRefs[`n-dialog-${dialog.key}`]
+              } else {
+                this.dialogInstRefs[`n-dialog-${dialog.key}`] = inst
+              }
+            }) as any,
+            internalKey: dialog.key,
+            onInternalAfterLeave: this.handleAfterLeave
+          })
+        )
+      ),
+      this.$slots.default?.()
+    ])
+  }
+})

@@ -89,7 +89,7 @@ export default defineComponent({
       return ''
     }
     function syncTransformOrigin (el: HTMLElement): void {
-      const { mousePosition } = NModal
+      const mousePosition = NModal.getMousePosition()
       if (!mousePosition) {
         return
       }
@@ -178,7 +178,7 @@ export default defineComponent({
                 default: () => (
                   <Transition
                     name="n-fade-in-scale-up-transition"
-                    appear={NModal.isMounted}
+                    appear={NModal.appear ?? NModal.isMounted}
                     onEnter={handleEnter as any}
                     onAfterLeave={handleAfterLeave}
                     onBeforeLeave={handleBeforeLeave as any}

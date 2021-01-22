@@ -17,7 +17,10 @@ const radioProps = {
     type: [String, Number] as PropType<string | number>,
     default: 'on'
   },
-  checked: Boolean,
+  checked: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   defaultChecked: {
     type: Boolean,
     default: false

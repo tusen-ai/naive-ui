@@ -1,1 +1,1 @@
-export { warn, warnOnce } from './warn'
+export { warn, warnOnce, throwError } from './warn'

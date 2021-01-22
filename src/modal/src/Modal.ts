@@ -8,11 +8,14 @@ import {
   provide,
   reactive,
   PropType,
-  CSSProperties
+  CSSProperties,
+  toRef,
+  inject
 } from 'vue'
 import { zindexable } from 'vdirs'
 import { useIsMounted, useClicked, useClickPosition } from 'vooks'
 import { VLazyTeleport } from 'vueuc'
+import type { DialogProviderInjection } from '../../dialog/src/DialogProvider'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps, MergedTheme } from '../../_mixins'
 import { warn, keep, call } from '../../_utils'
@@ -24,12 +27,13 @@ import NModalBodyWrapper from './BodyWrapper'
 import style from './styles/index.cssr'
 
 export interface ModalInjection {
-  mousePosition: {
+  getMousePosition: () => {
     x: number
     y: number
   } | null
   mergedTheme: MergedTheme<ModalTheme>
   isMounted: boolean
+  appear: boolean | undefined
 }
 
 export default defineComponent({
@@ -55,7 +59,13 @@ export default defineComponent({
     // events
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:show': Function as PropType<MaybeArray<(value: boolean) => void>>,
+    onUpdateShow: Function as PropType<MaybeArray<(value: boolean) => void>>,
     // private
+    dialog: Boolean,
+    appear: {
+      type: Boolean as PropType<boolean | undefined>,
+      default: undefined
+    },
     onBeforeLeave: Function as PropType<() => void>,
     onAfterLeave: Function as PropType<() => void>,
     onClose: Function as PropType<() => Promise<boolean> | boolean | any>,
@@ -120,9 +130,13 @@ export default defineComponent({
     const clickedRef = useClicked(64)
     const clickedPositionRef = useClickPosition()
     const isMountedRef = useIsMounted()
+    const NDialogProvider = props.dialog
+      ? inject<DialogProviderInjection | null>('NDialogProvider', null)
+      : null
     function doUpdateShow (show: boolean): void {
-      const { 'onUpdate:show': onUpdateShow, onHide } = props
+      const { onUpdateShow, 'onUpdate:show': _onUpdateShow, onHide } = props
       if (onUpdateShow) call(onUpdateShow, show)
+      if (_onUpdateShow) call(_onUpdateShow, show)
       // deprecated
       if (onHide && !show) onHide(show)
     }
@@ -180,14 +194,20 @@ export default defineComponent({
     provide<ModalInjection>(
       'NModal',
       reactive({
-        mousePosition: computed(() => {
+        getMousePosition: () => {
+          if (NDialogProvider) {
+            if (NDialogProvider.clicked && NDialogProvider.clickPosition) {
+              return NDialogProvider.clickPosition
+            }
+          }
           if (clickedRef.value) {
             return clickedPositionRef.value
           }
           return null
-        }),
+        },
         mergedTheme: themeRef,
-        isMounted: isMountedRef
+        isMounted: isMountedRef,
+        appear: toRef(props, 'appear')
       })
     )
     provide('NDrawer', null)
@@ -234,7 +254,7 @@ export default defineComponent({
               'div',
               {
                 ref: 'containerRef',
-                class: ['n-modal-container', this.namespace || undefined],
+                class: ['n-modal-container', this.namespace],
                 style: this.cssVars as CSSProperties
               },
               [
@@ -243,7 +263,7 @@ export default defineComponent({
                   {
                     name: 'n-fade-in-transition',
                     key: 'mask',
-                    appear: this.isMounted
+                    appear: this.appear ?? this.isMounted
                   },
                   {
                     default: () => {
