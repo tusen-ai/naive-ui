@@ -1,7 +1,8 @@
 import sizeVariables from './_common'
 import { commonDark } from '../../_styles/new-common'
+import type { TabsTheme } from './light'
 
-export default {
+const tabsDark: TabsTheme = {
   name: 'Tabs',
   common: commonDark,
   self (vars) {
@@ -9,8 +10,6 @@ export default {
       textColor2Overlay,
       primaryColor,
       textColorDisabledOverlay,
-      iconColorOverlay,
-      iconColorDisabledOverlay,
       closeColorOverlay,
       closeColorHoverOverlay,
       closeColorPressedOverlay,
@@ -29,8 +28,6 @@ export default {
       labelTextColorHover: primaryColor,
       labelTextColorDisabled: textColorDisabledOverlay,
       labelBarColor: primaryColor,
-      scrollButtonColor: iconColorOverlay,
-      scrollButtonColorDisabled: iconColorDisabledOverlay,
       closeColor: closeColorOverlay,
       closeColorHover: closeColorHoverOverlay,
       closeColorPressed: closeColorPressedOverlay,
@@ -45,3 +42,5 @@ export default {
     }
   }
 }
+
+export default tabsDark

@@ -13,8 +13,6 @@ import { c, cM, cB, cE } from '../../../_utils/cssr'
 // --label-text-color-disabled
 // --label-text-color-hover
 // --pane-text-color
-// --scroll-button-color
-// --scroll-button-color-disabled
 // --tab-border-color
 // --tab-border-color-active
 // --tab-border-radius
@@ -29,17 +27,15 @@ export default cB('tabs', `
     border-color .3s var(--bezier);
 `, [
   cM('flex', [
-    cB('tabs-nav', [
-      cB('tabs-nav-scroll', {
+    cB('tabs-nav', {
+      width: '100%'
+    }, [
+      cB('tabs-label-wrapper', {
         width: '100%'
       }, [
-        cB('tabs-label-wrapper', {
-          width: '100%'
-        }, [
-          cB('tabs-label', {
-            marginRight: 0
-          })
-        ])
+        cB('tabs-label', {
+          marginRight: 0
+        })
       ])
     ])
   ]),
@@ -48,30 +44,13 @@ export default cB('tabs', `
     display: flex;
     background-clip: padding-box;
     transition: border-color .3s var(--bezier);
+    overflow: auto;
+    scrollbar-width: none;
   `, [
-    cB('tabs-nav-scroll', {
-      overflow: 'hidden'
-    }),
-    cB('tabs-nav-scroll-button', `
-      font-size: 20px;
-      height: 20px;
-      line-height: 20px;
-      align-self: center;
-      cursor: pointer;
-      color: var(--scroll-button-color);
-      transition: color .3s var(--bezier);
-    `, [
-      cM('left', {
-        marginRight: '8px'
-      }),
-      cM('right', {
-        marginLeft: '8px'
-      }),
-      cM('disabled', {
-        cursor: 'not-allowed',
-        color: 'var(--scroll-button-color-disabled)'
-      })
-    ])
+    c('&::-webkit-scrollbar', `
+      width: 0;
+      height: 0;
+    `)
   ]),
   cB('tabs-label-wrapper', `
     display: inline-block;
@@ -128,11 +107,6 @@ export default cB('tabs', `
       background-color .3s var(--bezier);
   `),
   cM('line-type', [
-    cB('tabs-nav', [
-      cB('tabs-nav-scroll-button', `
-        padding-bottom: 4px;
-      `)
-    ]),
     cB('tabs-label', `
       box-sizing: border-box;
       padding-bottom: 2px;
@@ -166,16 +140,6 @@ export default cB('tabs', `
       border-top: 1px solid var(--tab-border-color);
       border-bottom: 1px solid var(--tab-border-color);
     `, [
-      cB('tabs-nav-scroll-button', [
-        cM('left', `
-          margin-left: 2px;
-          margin-right: 2px;
-        `),
-        cM('right', `
-          margin-left: 2px;
-          margin-right: 2px;
-        `)
-      ]),
       cB('tabs-label-bar', `
         bottom: 0;
         border-radius: 0;
