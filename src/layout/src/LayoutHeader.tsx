@@ -1,28 +1,16 @@
-<template>
-  <div
-    class="n-layout-header"
-    :class="{
-      [`n-layout-header--${position}-positioned`]: position,
-      [`n-layout-header--bordered`]: bordered
-    }"
-    :style="cssVars"
-  >
-    <slot />
-  </div>
-</template>
-
-<script>
-import { defineComponent, computed } from 'vue'
+import { h, defineComponent, computed, CSSProperties } from 'vue'
 import { useTheme } from '../../_mixins'
-import layoutModeMixin from './layoutModeMixin'
+import type { ThemeProps } from '../../_mixins'
 import { layoutLight } from '../styles'
-import style from './styles/layout-header.cssr.js'
+import type { LayoutTheme } from '../styles'
+import { positionProp } from './interface'
+import style from './styles/layout-header.cssr'
 
 export default defineComponent({
   name: 'LayoutHeader',
-  mixins: [layoutModeMixin],
   props: {
-    ...useTheme.props,
+    ...(useTheme.props as ThemeProps<LayoutTheme>),
+    position: positionProp,
     bordered: {
       type: Boolean,
       default: false
@@ -49,6 +37,21 @@ export default defineComponent({
         }
       })
     }
+  },
+  render () {
+    return (
+      <div
+        class={[
+          'n-layout-header',
+          this.position && `n-layout-header--${this.position}-positioned`,
+          {
+            'n-layout-header--bordered': this.bordered
+          }
+        ]}
+        style={this.cssVars as CSSProperties}
+      >
+        {this.$slots}
+      </div>
+    )
   }
 })
-</script>

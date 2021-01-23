@@ -1,16 +1,17 @@
 import { composite } from 'seemly'
-import { commonLight } from '../../_styles/new-common'
-import { scrollbarLight } from '../../scrollbar/styles'
+import { commonDark } from '../../_styles/new-common'
+import { scrollbarDark } from '../../scrollbar/styles'
+import type { LayoutTheme } from './light'
 
-export default {
+const layoutDark: LayoutTheme = {
   name: 'Layout',
-  common: commonLight,
+  common: commonDark,
   peers: {
-    Scrollbar: scrollbarLight
+    Scrollbar: scrollbarDark
   },
   self (vars) {
     const {
-      textColor2,
+      textColor2Overlay,
       bodyColor,
       cardColor,
       dividerColorOverlay,
@@ -18,16 +19,18 @@ export default {
       scrollbarColorHoverOverlay
     } = vars
     return {
-      textColor: textColor2,
+      textColor: textColor2Overlay,
       color: bodyColor,
       headerColor: cardColor,
       headerBorderColor: dividerColorOverlay,
       footerBorderColor: dividerColorOverlay,
       siderBorderColor: dividerColorOverlay,
       siderColor: cardColor,
-      siderToggleButtonColor: 'rgba(0, 0, 0, .15)',
+      siderToggleButtonColor: 'rgba(255, 255, 255, .3)',
       siderToggleBarColor: composite(bodyColor, scrollbarColorOverlay),
       siderToggleBarColorHover: composite(bodyColor, scrollbarColorHoverOverlay)
     }
   }
 }
+
+export default layoutDark
