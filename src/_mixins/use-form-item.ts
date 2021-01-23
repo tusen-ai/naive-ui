@@ -17,9 +17,11 @@ interface UseFormItemOptions<T> {
   mergedSize?: (formItem: FormItemInjection | null) => T
 }
 
-interface UseFormItemProps<T> {
-  size?: T
-}
+type UseFormItemProps<T> =
+  | {
+    size?: T
+  }
+  | {}
 
 interface UseFormItem<T> {
   mergedSize: ComputedRef<T>
@@ -39,7 +41,7 @@ export default function useFormItem<T extends AllowedSize = FormItemSize> (
     mergedSize
       ? () => mergedSize(NFormItem)
       : () => {
-        const { size } = props
+        const { size } = props as any
         if (size) return size
         if (NFormItem) {
           const { mergedSize } = NFormItem

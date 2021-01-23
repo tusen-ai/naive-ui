@@ -1,7 +1,8 @@
 import sizeVariables from './_common'
 import { commonDark } from '../../_styles/new-common'
+import type { SliderTheme } from './light'
 
-export default {
+const sliderDark: SliderTheme = {
   name: 'Slider',
   common: commonDark,
   self (vars) {
@@ -40,3 +41,5 @@ export default {
     }
   }
 }
+
+export default sliderDark
