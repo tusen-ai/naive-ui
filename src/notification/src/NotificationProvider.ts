@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-dynamic-delete */
 import {
   Fragment,
   h,
@@ -148,10 +149,10 @@ export default defineComponent({
                     return h(NotificationEnvironment, {
                       ref: ((inst: NotificationRef) => {
                         const refKey = `n-notification-${notification.key}`
-                        // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
-                        if (inst === null) { delete this.notificationRefs[refKey] } else this.notificationRefs[refKey] = inst
+                        if (inst === null) {
+                          delete this.notificationRefs[refKey]
+                        } else this.notificationRefs[refKey] = inst
                       }) as any,
-                      // BUG: notification.title ? Why not!!!
                       ...omit(notification, [
                         'destroy',
                         'hide',

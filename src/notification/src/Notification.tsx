@@ -39,7 +39,7 @@ export const notificationProps = {
   avatar: Function as PropType<() => VNodeChild>,
   // BUG
   // Wired Case, can't be set to [String, Function] as PropType<string | (() => VNodeChild)>,
-  title: String,
+  title: [String, Function] as PropType<string | (() => VNodeChild)>,
   description: [String, Function] as PropType<string | (() => VNodeChild)>,
   content: [String, Function] as PropType<string | (() => VNodeChild)>,
   meta: [String, Function] as PropType<string | (() => VNodeChild)>,
