@@ -1,14 +1,15 @@
 import { changeColor } from 'seemly'
-import { buttonLight } from '../../button/styles'
-import { progressLight } from '../../progress/styles'
-import { commonLight } from '../../_styles/new-common'
+import { buttonDark } from '../../button/styles'
+import { progressDark } from '../../progress/styles'
+import { commonDark } from '../../_styles/new-common'
+import type { UploadTheme } from './light'
 
-export default {
+const uploadDark: UploadTheme = {
   name: 'Upload',
-  common: commonLight,
+  common: commonDark,
   peers: {
-    Button: buttonLight,
-    Progress: progressLight
+    Button: buttonDark,
+    Progress: progressDark
   },
   self (vars) {
     const {
@@ -34,7 +35,7 @@ export default {
       draggerBorderHover: `1px dashed ${primaryColor}`,
       itemColorHover: hoverColorOverlay,
       itemColorHoverError: changeColor(errorColor, {
-        alpha: 0.06
+        alpha: 0.09
       }),
       itemTextColor: textColor2,
       itemTextColorError: errorColor,
@@ -44,3 +45,5 @@ export default {
     }
   }
 }
+
+export default uploadDark

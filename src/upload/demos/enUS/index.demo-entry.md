@@ -24,7 +24,6 @@ default-files
 | data | `Object \| ({ file: UploadFile }) => Object` | `undefined` | The additional fileds data of HTTP request's form data. |
 | default-file-list | `Array<UploadFile>` | `[]` | The default file list in uncontrolled manner. |
 | default-upload | `boolean` | `false` | If file uploaded immediatelly after file is selected. |
-| directory | `boolean` | `false` | If directory upload supported. Browser support needed. See <n-a href="https://caniuse.com/#feat=input-file-directory">input-file-directory</n-a>. |
 | disabled | `boolean` | `false` |  |
 | file-list-style | `Object` | `undefined` | The style of file list area |
 | file-list | `Array<UploadFile>` | `undefined` | The file list of component. If set, the component will work in controlled manner. |

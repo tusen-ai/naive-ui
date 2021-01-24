@@ -9,11 +9,11 @@ export default cB('upload', [
     height: 0;
     opacity: 0;
   `),
-  cE('activator', `
+  cE('trigger', `
     display: inline-block;
   `),
   cM('dragger-inside', [
-    cE('activator', `
+    cE('trigger', `
       display: block;
     `)
   ]),
@@ -114,6 +114,8 @@ export default cB('upload', [
           ])
         ]),
         cE('name', `
+          display: flex;
+          align-items: center;
           text-overflow: ellipsis;
           overflow: hidden;
           text-decoration: underline;
@@ -137,7 +139,7 @@ export default cB('upload', [
   cM('disabled', `
     opacity: var(--item-disabled-opacity);
   `, [
-    cE('activator', `
+    cE('trigger', `
       cursor: not-allowed;
     `),
     cB('upload-file-list', `

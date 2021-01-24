@@ -24,7 +24,6 @@ default-files
 | data | `Object \| ({ file: UploadFile }) => Object` | `undefined` | 提交表单需要附加的数据 |
 | default-file-list | `Array<UploadFile>` | `[]` | 非受控状态下默认的文件列表 |
 | default-upload | `boolean` | `false` | 选择文件时候是否默认上传 |
-| directory | `boolean` | `false` | 是否支持目录上传，需要浏览器支持，参考 <n-a href="https://caniuse.com/#feat=input-file-directory">input-file-directory</n-a> |
 | disabled | `boolean` | `false` |  |
 | file-list-style | `Object` | `undefined` | 文件列表区域的样式 |
 | file-list | `Array<UploadFile>` | `undefined` | 文件列表，如果传入组件会处于受控状态 |
