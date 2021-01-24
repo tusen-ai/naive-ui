@@ -13,10 +13,12 @@ import {
 import { VBinder, VTarget, FollowerPlacement } from 'vueuc'
 import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
 import { call, keep, warn } from '../../_utils'
+import type { MaybeArray } from '../../_utils'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import NPopoverBody, { popoverBodyProps } from './PopoverBody'
 import type { PopoverTheme } from '../styles'
+import { PopoverTrigger } from './interface'
 
 const bodyPropKeys = Object.keys(popoverBodyProps) as Array<
 keyof typeof popoverBodyProps
@@ -67,10 +69,6 @@ interface BodyInstance {
   [key: string]: unknown
 }
 
-export interface PopoverRef {
-  syncPosition: () => void
-}
-
 export interface PopoverInjection {
   handleMouseLeave: (e: MouseEvent) => void
   handleMouseEnter: (e: MouseEvent) => void
@@ -82,7 +80,6 @@ export interface PopoverInjection {
 }
 
 export const popoverProps = {
-  ...(useTheme.props as ThemeProps<PopoverTheme>),
   show: {
     type: Boolean,
     default: undefined
@@ -96,7 +93,7 @@ export const popoverProps = {
     default: true
   },
   trigger: {
-    type: String as PropType<'hover' | 'click'>,
+    type: String as PropType<PopoverTrigger>,
     default: undefined
   },
   delay: {
@@ -154,13 +151,14 @@ export const popoverProps = {
   },
   // events
   // eslint-disable-next-line vue/prop-name-casing
-  'onUpdate:show': {
-    type: Function,
-    default: undefined
-  },
+  'onUpdate:show': Function as PropType<
+  MaybeArray<(value: boolean) => void> | undefined
+  >,
   // deprecated
   onShow: {
-    type: Function,
+    type: Function as PropType<
+    MaybeArray<(value: boolean) => void> | undefined
+    >,
     validator: (): boolean => {
       warn(
         'popover',
@@ -171,7 +169,9 @@ export const popoverProps = {
     default: undefined
   },
   onHide: {
-    type: Function,
+    type: Function as PropType<
+    MaybeArray<(value: boolean) => void> | undefined
+    >,
     validator: (): boolean => {
       warn(
         'popover',
@@ -202,7 +202,10 @@ export const popoverProps = {
 export default defineComponent({
   name: 'Popover',
   inheritAttrs: false,
-  props: popoverProps,
+  props: {
+    ...(useTheme.props as ThemeProps<PopoverTheme>),
+    ...popoverProps
+  },
   setup (props) {
     const isMountedRef = useIsMounted()
     // setup show

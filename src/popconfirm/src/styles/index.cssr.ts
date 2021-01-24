@@ -22,7 +22,7 @@ export default cB('popconfirm', [
     `)
   ]),
   cE('action', `
-    margin-top: 14px;
+    margin-top: 8px;
     display: flex;
     justify-content: flex-end;
   `, [

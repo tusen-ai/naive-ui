@@ -2,8 +2,9 @@ import { buttonDark } from '../../button/styles'
 import { popoverDark } from '../../popover/styles'
 import { commonDark } from '../../_styles/new-common'
 import commonVars from './_common'
+import type { PopconfirmTheme } from './light'
 
-export default {
+const popconfirmDark: PopconfirmTheme = {
   name: 'Popconfirm',
   common: commonDark,
   peers: {
@@ -19,3 +20,5 @@ export default {
     }
   }
 }
+
+export default popconfirmDark
