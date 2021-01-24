@@ -9,7 +9,8 @@ import {
   ComputedRef,
   watch,
   Transition,
-  withDirectives
+  withDirectives,
+  Ref
 } from 'vue'
 import { createTreeMate } from 'treemate'
 import { VBinder, VFollower, VTarget, FollowerRef } from 'vueuc'
@@ -17,7 +18,8 @@ import { useIsMounted, useMergedState, useCompitable } from 'vooks'
 import { clickoutside } from 'vdirs'
 import { useTheme, useConfig, useLocale, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn, call, useAdjustedTo, MaybeArray } from '../../_utils'
+import { warn, call, useAdjustedTo } from '../../_utils'
+import type { MaybeArray } from '../../_utils'
 import { NBaseSelectMenu, NBaseSelection, BaseSelectMenuRef } from '../../_base'
 import type { BaseSelectionRef } from '../../_base'
 import { selectLight, SelectTheme } from '../styles'
@@ -34,7 +36,9 @@ import type {
   Option,
   BaseOption,
   GroupOption,
-  IgnoredOption
+  IgnoredOption,
+  OnUpdateValue,
+  Value
 } from './interface'
 
 export default defineComponent({
@@ -54,14 +58,10 @@ export default defineComponent({
       required: true
     },
     defaultValue: {
-      type: [String, Number, Array] as PropType<
-      string | number | Array<string | number> | null
-      >,
+      type: [String, Number, Array] as PropType<Value | null>,
       default: null
     },
-    value: [String, Number, Array] as PropType<
-    string | number | Array<string | number> | undefined
-    >,
+    value: [String, Number, Array] as PropType<Value>,
     placeholder: String,
     multiple: {
       type: Boolean,
@@ -130,17 +130,11 @@ export default defineComponent({
     },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:value': [Function, Array] as PropType<
-    | MaybeArray<
-    (value: string | number | Array<string | number> | null) => void
-    >
-    | undefined
+    MaybeArray<OnUpdateValue> | undefined
     >,
     // for jsx
     onUpdateValue: [Function, Array] as PropType<
-    | MaybeArray<
-    (value: string | number | Array<string | number> | null) => void
-    >
-    | undefined
+    MaybeArray<OnUpdateValue> | undefined
     >,
     onBlur: [Function, Array] as PropType<
     MaybeArray<(e: FocusEvent) => void> | undefined
@@ -157,10 +151,7 @@ export default defineComponent({
     /** deprecated */
     onChange: {
       type: [Function, Array] as PropType<
-      | MaybeArray<
-      (value: string | number | Array<string | number> | null) => void
-      >
-      | undefined
+      MaybeArray<OnUpdateValue> | undefined
       >,
       validator: () => {
         if (__DEV__) {
@@ -191,7 +182,8 @@ export default defineComponent({
   setup (props) {
     const themeRef = useTheme('Select', 'Select', style, selectLight, props)
     const uncontrolledValueRef = ref(props.defaultValue)
-    const controlledValueRef = toRef(props, 'value')
+    // Vue bug
+    const controlledValueRef = toRef(props, 'value') as Ref<Value | undefined>
     const mergedValueRef = useMergedState(
       controlledValueRef,
       uncontrolledValueRef

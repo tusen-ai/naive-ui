@@ -1,8 +1,9 @@
 import { baseSelectMenuDark } from '../../_base/select-menu/styles'
 import { popoverDark } from '../../popover/styles'
 import { commonDark } from '../../_styles/new-common'
+import type { PopselectTheme } from './light'
 
-export default {
+const popselect: PopselectTheme = {
   name: 'Popselect',
   common: commonDark,
   peers: {
@@ -10,3 +11,5 @@ export default {
     BaseSelectMenu: baseSelectMenuDark
   }
 }
+
+export default popselect

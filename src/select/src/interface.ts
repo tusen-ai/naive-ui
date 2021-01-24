@@ -1,3 +1,5 @@
+import { TreeMate } from 'treemate'
+
 export type Options = Option[]
 export type Option = BaseOption | GroupOption | IgnoredOption
 
@@ -21,3 +23,12 @@ export interface IgnoredOption {
   value: string | number
   [k: string]: any
 }
+
+export type ValueAtom = string | number
+export type Value = ValueAtom | string[] | number[] | ValueAtom[]
+export type OnUpdateValue = <
+  T extends ValueAtom | string[] | number[] | ValueAtom[]
+>(
+  value: T | null
+) => void
+export type SelectTreeMate = TreeMate<BaseOption, GroupOption, IgnoredOption>

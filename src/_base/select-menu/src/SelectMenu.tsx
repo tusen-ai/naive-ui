@@ -12,13 +12,14 @@ import {
   provide,
   reactive
 } from 'vue'
-import { TreeMate, TreeNode } from 'treemate'
+import { TreeNode } from 'treemate'
 import { VirtualList, VirtualListRef } from 'vueuc'
 import { depx, getPadding } from 'seemly'
 import { NEmpty } from '../../../empty'
 import { NScrollbar } from '../../../scrollbar'
 import type { ScrollbarRef } from '../../../scrollbar'
 import type { BaseOption, GroupOption, IgnoredOption } from '../../../select'
+import type { Value, SelectTreeMate } from '../../../select/src/interface'
 import { formatLength } from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
 import { useTheme } from '../../../_mixins'
@@ -27,6 +28,7 @@ import NSelectOption from './SelectOption'
 import NSelectGroupHeader from './SelectGroupHeader'
 import style from './styles/index.cssr'
 import { baseSelectMenuLight, BaseSelectMenuTheme } from '../styles'
+import { Size } from './interface'
 
 export interface BaseSelectMenuInjection {
   handleOptionMouseEnter: (e: MouseEvent, tmNode: TreeNode<BaseOption>) => void
@@ -52,9 +54,7 @@ export default defineComponent({
       default: true
     },
     treeMate: {
-      type: Object as PropType<
-      TreeMate<BaseOption, GroupOption, IgnoredOption>
-      >,
+      type: Object as PropType<SelectTreeMate>,
       required: true
     },
     multiple: {
@@ -62,23 +62,15 @@ export default defineComponent({
       default: false
     },
     size: {
-      type: String as PropType<'small' | 'medium' | 'large'>,
+      type: String as PropType<Size>,
       default: 'medium'
     },
-    pattern: {
-      type: String,
-      default: undefined
-    },
+    pattern: String,
     value: {
-      type: [String, Number, Array] as PropType<
-      string | number | null | Array<string | number>
-      >,
+      type: [String, Number, Array] as PropType<Value | null>,
       default: null
     },
-    width: {
-      type: [Number, String],
-      default: undefined
-    },
+    width: [Number, String],
     autoPending: {
       type: Boolean,
       default: false
@@ -87,15 +79,9 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
-    onScroll: {
-      type: Function as PropType<((e: Event) => void) | undefined>,
-      default: undefined
-    },
+    onScroll: Function as PropType<(e: Event) => void>,
     // deprecated
-    onMenuToggleOption: {
-      type: Function,
-      default: undefined
-    }
+    onMenuToggleOption: Function as PropType<(value: BaseOption) => void>
   },
   setup (props) {
     const themeRef = useTheme(
