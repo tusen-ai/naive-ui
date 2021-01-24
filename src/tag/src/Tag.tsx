@@ -1,11 +1,4 @@
-import {
-  h,
-  defineComponent,
-  computed,
-  PropType,
-  renderSlot,
-  CSSProperties
-} from 'vue'
+import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseClose } from '../../_base'
@@ -159,7 +152,7 @@ export default defineComponent({
         style={this.cssVars as CSSProperties}
         onClick={this.handleClick}
       >
-        <span class="n-tag__content">{renderSlot(this.$slots, 'default')}</span>
+        <span class="n-tag__content">{this.$slots}</span>
         {!this.checkable && this.closable ? (
           <NBaseClose
             class="n-tag__close"

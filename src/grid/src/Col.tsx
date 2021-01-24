@@ -1,4 +1,4 @@
-import { h, computed, defineComponent, inject, renderSlot, PropType } from 'vue'
+import { h, computed, defineComponent, inject, PropType } from 'vue'
 import { formatLength } from '../../_utils'
 import { useStyle } from '../../_mixins'
 import type { RowInjection } from './Row'
@@ -105,11 +105,7 @@ export default defineComponent({
           padding: stylePadding
         }}
       >
-        {gutter ? (
-          <div>{renderSlot($slots, 'default')}</div>
-        ) : (
-          renderSlot($slots, 'default')
-        )}
+        {gutter ? <div>{$slots}</div> : $slots}
       </div>
     )
   }

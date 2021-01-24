@@ -183,10 +183,7 @@ export default defineComponent({
                       </div>
                     ) : null}
                     {this.$slots.default ? (
-                      <div class="n-alert-body__content">
-                        {renderSlot(this.$slots, 'default')}
-                        <slot />
-                      </div>
+                      <div class="n-alert-body__content">{this.$slots}</div>
                     ) : null}
                   </div>
                 ] as any

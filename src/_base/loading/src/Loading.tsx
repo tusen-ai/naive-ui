@@ -1,4 +1,4 @@
-import { h, defineComponent, renderSlot } from 'vue'
+import { h, defineComponent } from 'vue'
 import { useStyle } from '../../../_mixins'
 import NIconSwitchTransition from '../../icon-switch-transition'
 import style from './styles/index.cssr'
@@ -55,7 +55,7 @@ export default defineComponent({
                 </svg>
               ) : (
                 <div key="placeholder" class="n-base-loading__placeholder">
-                  {renderSlot(this.$slots, 'default')}
+                  {this.$slots}
                 </div>
               )
           }}

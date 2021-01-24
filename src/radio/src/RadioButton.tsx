@@ -1,4 +1,4 @@
-import { h, defineComponent, renderSlot } from 'vue'
+import { h, defineComponent } from 'vue'
 import useRadio from './use-radio'
 
 export default defineComponent({
@@ -35,7 +35,7 @@ export default defineComponent({
           onBlur={this.handleRadioInputBlur}
         />
         <div class="n-radio-button__state-border" />
-        <span ref="labelRef">{renderSlot(this.$slots, 'default')}</span>
+        <span ref="labelRef">{this.$slots}</span>
       </div>
     )
   }

@@ -1,12 +1,4 @@
-import {
-  defineComponent,
-  h,
-  renderSlot,
-  PropType,
-  provide,
-  reactive,
-  toRef
-} from 'vue'
+import { defineComponent, h, PropType, provide, reactive, toRef } from 'vue'
 import { useMemo } from 'vooks'
 import { formatLength } from '../../_utils'
 import { useStyle } from '../../_mixins'
@@ -89,7 +81,7 @@ export default defineComponent({
           justifyContent: this.justifyContent
         }}
       >
-        {renderSlot(this.$slots, 'default')}
+        {this.$slots}
       </div>
     )
   }

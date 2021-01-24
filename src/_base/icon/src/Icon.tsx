@@ -1,4 +1,4 @@
-import { h, defineComponent, renderSlot } from 'vue'
+import { h, defineComponent } from 'vue'
 import { useStyle } from '../../../_mixins'
 import style from './styles/index.cssr'
 
@@ -8,6 +8,6 @@ export default defineComponent({
     useStyle('BaseIcon', style)
   },
   render () {
-    return <i class="n-base-icon">{renderSlot(this.$slots, 'default')}</i>
+    return <i class="n-base-icon">{this.$slots}</i>
   }
 })

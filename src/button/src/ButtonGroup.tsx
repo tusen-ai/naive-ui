@@ -1,4 +1,4 @@
-import { h, renderSlot, PropType, defineComponent, provide } from 'vue'
+import { h, PropType, defineComponent, provide } from 'vue'
 import { useStyle } from '../../_mixins'
 import type { Size } from './interface'
 import style from './styles/button-group.cssr'
@@ -33,7 +33,7 @@ export default defineComponent({
           }
         ]}
       >
-        {renderSlot(this.$slots, 'default')}
+        {this.$slots}
       </div>
     )
   }

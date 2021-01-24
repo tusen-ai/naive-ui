@@ -1,11 +1,4 @@
-import {
-  defineComponent,
-  computed,
-  onBeforeMount,
-  renderSlot,
-  h,
-  PropType
-} from 'vue'
+import { defineComponent, computed, onBeforeMount, h, PropType } from 'vue'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey, formatLength } from '../../_utils'
@@ -27,28 +20,16 @@ export default defineComponent({
   name: 'GradientText',
   props: {
     ...(useTheme.props as ThemeProps<GradientTextTheme>),
-    size: {
-      type: [String, Number],
-      default: undefined
-    },
-    fontSize: {
-      type: [String, Number],
-      default: undefined
-    },
+    size: [String, Number],
+    fontSize: [String, Number],
     type: {
       type: String as PropType<
       'info' | 'success' | 'warning' | 'error' | 'primary' | 'danger'
       >,
       default: 'primary'
     },
-    color: {
-      type: [Object, String] as PropType<Gradient | undefined>,
-      default: undefined
-    },
-    gradient: {
-      type: [Object, String] as PropType<Gradient | undefined>,
-      default: undefined
-    }
+    color: [Object, String] as PropType<Gradient>,
+    gradient: [Object, String] as PropType<Gradient>
   },
   setup (props) {
     onBeforeMount(() => {
@@ -139,7 +120,7 @@ export default defineComponent({
           ...this.cssVars
         }}
       >
-        {renderSlot(this.$slots, 'default')}
+        {this.$slots}
       </span>
     )
   }

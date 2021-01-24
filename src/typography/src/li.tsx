@@ -1,4 +1,4 @@
-import { defineComponent, h, renderSlot } from 'vue'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   name: 'Li',
@@ -18,7 +18,7 @@ export default defineComponent({
           }
         ]}
       >
-        {renderSlot(this.$slots, 'default')}
+        {this.$slots}
       </li>
     )
   }

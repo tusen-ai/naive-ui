@@ -1,11 +1,4 @@
-import {
-  defineComponent,
-  computed,
-  h,
-  renderSlot,
-  PropType,
-  CSSProperties
-} from 'vue'
+import { defineComponent, computed, h, PropType, CSSProperties } from 'vue'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils'
@@ -87,7 +80,7 @@ export default defineComponent({
         ]}
         style={this.cssVars as CSSProperties}
       >
-        {renderSlot(this.$slots, 'default')}
+        {this.$slots}
       </table>
     )
   }

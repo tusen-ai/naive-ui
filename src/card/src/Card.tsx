@@ -157,7 +157,7 @@ export default defineComponent({
         ) : null}
         {
           <div class="n-card__content" style={this.contentStyle}>
-            {renderSlot($slots, 'default')}
+            {this.$slots}
           </div>
         }
         {$slots.footer ? (

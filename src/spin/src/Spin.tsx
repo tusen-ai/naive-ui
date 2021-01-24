@@ -2,7 +2,6 @@ import {
   computed,
   defineComponent,
   h,
-  renderSlot,
   Transition,
   PropType,
   CSSProperties
@@ -88,7 +87,7 @@ export default defineComponent({
             }
           ]}
         >
-          {renderSlot($slots, 'default')}
+          {$slots}
         </div>
         <Transition name="n-fade-in-transition">
           {{

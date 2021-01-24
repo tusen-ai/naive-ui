@@ -1,11 +1,5 @@
 // private
-import {
-  provide,
-  defineComponent,
-  openBlock,
-  renderSlot,
-  createBlock
-} from 'vue'
+import { provide, defineComponent } from 'vue'
 import commonProps from './common-props'
 import type { IconConfigProviderInjection } from './icon'
 
@@ -16,9 +10,6 @@ export default defineComponent({
     provide<IconConfigProviderInjection>('NIconConfigProvider', props)
   },
   render () {
-    return (
-      openBlock(),
-      createBlock('div', null, [renderSlot(this.$slots, 'default')])
-    )
+    return this.$slots.default?.()
   }
 })

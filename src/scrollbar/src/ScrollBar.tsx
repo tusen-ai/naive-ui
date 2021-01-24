@@ -606,7 +606,7 @@ export default defineComponent({
                             }
                             class={['n-scrollbar-content', this.contentClass]}
                           >
-                            {renderSlot($slots, 'default')}
+                            {$slots}
                           </div>
                         )
                       }}

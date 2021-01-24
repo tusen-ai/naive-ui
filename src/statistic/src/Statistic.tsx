@@ -78,9 +78,7 @@ export default defineComponent({
           {this.value !== undefined ? (
             <span class="n-statistic-value__content">{this.value}</span>
           ) : (
-            <span class="n-statistic-value__content">
-              {renderSlot($slots, 'default')}
-            </span>
+            <span class="n-statistic-value__content">{$slots}</span>
           )}
           {$slots.suffix ? (
             <span class="n-statistic-value__suffix">

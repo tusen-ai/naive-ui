@@ -4,8 +4,7 @@ import {
   defineComponent,
   CSSProperties,
   PropType,
-  Fragment,
-  renderSlot
+  Fragment
 } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -69,7 +68,7 @@ export default defineComponent({
         ) : null}
         {!vertical && $slots.default ? (
           <>
-            <div class="n-divider__title">{renderSlot($slots, 'default')}</div>
+            <div class="n-divider__title">{this.$slots}</div>
             <div class="n-divider__line n-divider__line--right" />
           </>
         ) : null}

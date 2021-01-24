@@ -12,8 +12,7 @@ import {
   withDirectives,
   vShow,
   Transition,
-  VNode,
-  renderSlot
+  VNode
 } from 'vue'
 import { clickoutside } from 'vdirs'
 import { NScrollbar, ScrollbarRef } from '../../scrollbar'
@@ -216,7 +215,7 @@ export default defineComponent({
                                     {$slots}
                                   </NCard>
                                 ) : (
-                                  renderSlot($slots, 'default')
+                                  $slots
                                 )}
                             </div>
                           ) as any,

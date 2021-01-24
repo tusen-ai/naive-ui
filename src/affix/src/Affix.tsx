@@ -6,8 +6,7 @@ import {
   defineComponent,
   CSSProperties,
   PropType,
-  h,
-  renderSlot
+  h
 } from 'vue'
 import { getScrollParent, unwrapElement } from 'seemly'
 import { useStyle } from '../../_mixins'
@@ -188,7 +187,7 @@ export default defineComponent({
         ]}
         style={this.mergedstyle}
       >
-        {renderSlot(this.$slots, 'default')}
+        {this.$slots}
       </div>
     )
   }

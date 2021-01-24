@@ -1,11 +1,4 @@
-import {
-  h,
-  renderSlot,
-  defineComponent,
-  PropType,
-  ExtractPropTypes,
-  provide
-} from 'vue'
+import { h, defineComponent, PropType, ExtractPropTypes, provide } from 'vue'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { TimelineTheme } from '../styles'
@@ -42,7 +35,7 @@ export default defineComponent({
           `n-timeline--${props.itemPlacement}-placement`
         ]}
       >
-        {renderSlot(slots, 'default')}
+        {slots}
       </div>
     )
   }

@@ -53,7 +53,7 @@ export default defineComponent({
     }
     return (
       <a class="n-a" style={this.cssVars as CSSProperties}>
-        {renderSlot(this.$slots, 'default')}
+        {this.$slots}
       </a>
     )
   }

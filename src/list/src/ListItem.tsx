@@ -9,9 +9,7 @@ export default defineComponent({
         {$slots.prefix ? (
           <div class="n-list-item__prefix">{renderSlot($slots, 'prefix')}</div>
         ) : null}
-        {$slots.default ? (
-          <div class="n-list-item__main">{renderSlot($slots, 'default')}</div>
-        ) : null}
+        {$slots.default ? <div class="n-list-item__main">{$slots}</div> : null}
         {$slots.suffix ? (
           <div class="n-list-item__suffix">{renderSlot($slots, 'suffix')}</div>
         ) : null}

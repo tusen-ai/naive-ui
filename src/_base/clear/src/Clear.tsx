@@ -1,4 +1,4 @@
-import { h, defineComponent, PropType, renderSlot } from 'vue'
+import { h, defineComponent, PropType } from 'vue'
 import { useStyle } from '../../../_mixins'
 import { DismissCircleIcon } from '../../icons'
 import NBaseIcon from '../../icon'
@@ -42,7 +42,7 @@ export default defineComponent({
                 </NBaseIcon>
               ) : (
                 <div key="icon" class="n-base-clear__placeholder">
-                  {renderSlot(this.$slots, 'default')}
+                  {this.$slots}
                 </div>
               )
             }

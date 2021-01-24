@@ -1,4 +1,4 @@
-import { h, defineComponent, inject, renderSlot } from 'vue'
+import { h, defineComponent, inject } from 'vue'
 import { NScrollbar } from '../../scrollbar'
 import { NotificationProviderInjection } from './NotificationProvider'
 
@@ -38,7 +38,7 @@ export default defineComponent({
             {$slots}
           </NScrollbar>
         ) : (
-          renderSlot($slots, 'default')
+          $slots
         )}
       </div>
     )

@@ -1,11 +1,4 @@
-import {
-  h,
-  computed,
-  defineComponent,
-  renderSlot,
-  CSSProperties,
-  provide
-} from 'vue'
+import { h, computed, defineComponent, CSSProperties, provide } from 'vue'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { breadcrumbLight } from '../styles'
@@ -64,7 +57,7 @@ export default defineComponent({
   render () {
     return (
       <div class="n-breadcrumb" style={this.cssVars as CSSProperties}>
-        {renderSlot(this.$slots, 'default')}
+        {this.$slots}
       </div>
     )
   }

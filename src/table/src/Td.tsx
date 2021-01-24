@@ -1,8 +1,8 @@
-import { defineComponent, h, renderSlot } from 'vue'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   name: 'Td',
   render () {
-    return <td class="n-table__td">{renderSlot(this.$slots, 'default')}</td>
+    return <td class="n-table__td">{this.$slots}</td>
   }
 })

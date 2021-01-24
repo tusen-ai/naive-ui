@@ -1,4 +1,4 @@
-import { h, defineComponent, computed, renderSlot, CSSProperties } from 'vue'
+import { h, defineComponent, computed, CSSProperties } from 'vue'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { typographyLight } from '../styles'
@@ -58,7 +58,7 @@ export default defineComponent({
         ]}
         style={this.cssVars as CSSProperties}
       >
-        {renderSlot(this.$slots, 'default')}
+        {this.$slots}
       </ol>
     )
   }

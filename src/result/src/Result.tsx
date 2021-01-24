@@ -110,9 +110,7 @@ export default defineComponent({
           <div class="n-result-header__title">{this.title}</div>
           <div class="n-result-header__description">{this.description}</div>
         </div>
-        {$slots.default ? (
-          <div class="n-result-content">{renderSlot($slots, 'default')}</div>
-        ) : null}
+        {$slots.default ? <div class="n-result-content">{$slots}</div> : null}
         <div class="n-result-footer">{renderSlot($slots, 'footer')}</div>
       </div>
     )

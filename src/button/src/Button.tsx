@@ -380,7 +380,7 @@ export default defineComponent({
         onKeydown={this.handleKeyDown}
       >
         {$slots.default && this.iconPlacement === 'right' ? (
-          <div class="n-button__content">{renderSlot($slots, 'default')}</div>
+          <div class="n-button__content">{$slots}</div>
         ) : null}
 
         <NFadeInExpandTransition width>
@@ -414,7 +414,7 @@ export default defineComponent({
           }}
         </NFadeInExpandTransition>
         {$slots.default && this.iconPlacement === 'left' ? (
-          <span class="n-button__content">{renderSlot($slots, 'default')}</span>
+          <span class="n-button__content">{$slots}</span>
         ) : null}
         {!this.text ? <NBaseWave ref="waveRef" /> : null}
         {this.showBorder ? (

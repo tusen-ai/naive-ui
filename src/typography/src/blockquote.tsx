@@ -1,4 +1,4 @@
-import { h, renderSlot, defineComponent, computed, CSSProperties } from 'vue'
+import { h, defineComponent, computed, CSSProperties } from 'vue'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import style from './styles/blockquote.cssr'
@@ -54,7 +54,7 @@ export default defineComponent({
         ]}
         style={this.cssVars as CSSProperties}
       >
-        {renderSlot(this.$slots, 'default')}
+        {this.$slots}
       </blockquote>
     )
   }
