@@ -1,5 +1,5 @@
 import { cB } from '../../../_utils/cssr'
-import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.js'
+import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up'
 
 // vars:
 // --bezier

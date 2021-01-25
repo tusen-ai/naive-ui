@@ -7,7 +7,8 @@ export interface BaseOption {
   value: string | number
   label: string
   disabled?: boolean
-  [k: string]: any
+  type?: never
+  ignored?: never
 }
 
 export interface GroupOption {
@@ -15,7 +16,7 @@ export interface GroupOption {
   name: string
   type: 'group'
   children: BaseOption[]
-  [k: string]: any
+  ignored?: never
 }
 
 export interface IgnoredOption {

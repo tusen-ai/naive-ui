@@ -65,7 +65,6 @@ export default defineComponent({
       type: String as PropType<Size>,
       default: 'medium'
     },
-    pattern: String,
     value: {
       type: [String, Number, Array] as PropType<Value | null>,
       default: null
