@@ -1,5 +1,5 @@
 // private
-import { provide, defineComponent } from 'vue'
+import { h, provide, defineComponent } from 'vue'
 import commonProps from './common-props'
 import type { IconConfigProviderInjection } from './icon'
 
@@ -10,6 +10,6 @@ export default defineComponent({
     provide<IconConfigProviderInjection>('NIconConfigProvider', props)
   },
   render () {
-    return this.$slots.default?.()
+    return <div>{this.$slots}</div>
   }
 })

@@ -21,47 +21,32 @@ import { call, createKey } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import { inputLight } from '../styles'
 import type { InputTheme } from '../styles'
+import type { OnUpdateValue, OnUpdateValueImpl, Size } from './interface'
 import style from './styles/input.cssr'
-
-export interface InputRef {
-  blur: () => void
-  focus: () => void
-}
 
 export default defineComponent({
   name: 'Input',
   props: {
     ...(useTheme.props as ThemeProps<InputTheme>),
     bordered: {
-      type: Boolean,
+      type: Boolean as PropType<boolean | undefined>,
       default: undefined
     },
     type: {
       type: String,
       default: 'text'
     },
-    placeholder: {
-      type: [Array, String] as PropType<undefined | string | [string, string]>,
-      default: undefined
-    },
+    placeholder: [Array, String] as PropType<string | [string, string]>,
     defaultValue: {
       type: [String, Array] as PropType<null | string | [string, string]>,
       default: null
     },
-    value: {
-      type: [String, Array] as PropType<
-      null | undefined | string | [string, string]
-      >,
-      default: undefined
-    },
+    value: [String, Array] as PropType<null | string | [string, string]>,
     disabled: {
       type: Boolean,
       default: false
     },
-    size: {
-      type: String as PropType<'small' | 'medium' | 'large' | undefined>,
-      default: undefined
-    },
+    size: String as PropType<Size>,
     rows: {
       type: [Number, String] as PropType<number | string>,
       default: 3
@@ -70,14 +55,8 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    minlength: {
-      type: [String, Number] as PropType<number | string | undefined>,
-      default: undefined
-    },
-    maxlength: {
-      type: [String, Number] as PropType<number | string | undefined>,
-      default: undefined
-    },
+    minlength: [String, Number] as PropType<number | string>,
+    maxlength: [String, Number] as PropType<number | string>,
     clearable: {
       type: Boolean,
       default: false
@@ -96,10 +75,7 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    separator: {
-      type: String,
-      default: undefined
-    },
+    separator: String,
     readonly: {
       type: [String, Boolean],
       default: false
@@ -120,94 +96,35 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    onInput: {
-      type: [Function, Array] as PropType<
-      | undefined
-      | MaybeArray<(value: string) => void>
-      | MaybeArray<(value: [string, string]) => void>
-      >,
-      default: undefined
-    },
-    onFocus: {
-      type: [Function, Array] as PropType<
-      undefined | MaybeArray<(e: FocusEvent) => void>
-      >,
-      default: undefined
-    },
-    onBlur: {
-      type: [Function, Array] as PropType<
-      undefined | MaybeArray<(e: FocusEvent) => void>
-      >,
-      default: undefined
-    },
-    onClick: {
-      type: [Function, Array] as PropType<
-      undefined | MaybeArray<(e: MouseEvent) => void>
-      >,
-      default: undefined
-    },
-    onChange: {
-      type: [Function, Array] as PropType<
-      | undefined
-      | MaybeArray<(value: string) => void>
-      | MaybeArray<(value: [string, string]) => void>
-      >,
-      default: undefined
-    },
-    onClear: {
-      type: [Function, Array] as PropType<
-      undefined | MaybeArray<(e: MouseEvent) => void>
-      >,
-      default: undefined
-    },
+    onInput: [Function, Array] as PropType<OnUpdateValue>,
+    onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
+    onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
+    onClick: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
+    onChange: [Function, Array] as PropType<OnUpdateValue>,
+    onClear: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
     // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': {
-      type: [Function, Array] as PropType<
-      undefined | MaybeArray<(value: string) => void>
-      >,
-      default: undefined
-    },
+    'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+    onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
     /** private */
-    textDecoration: {
-      type: [String, Array],
-      default: undefined
-    },
+    textDecoration: [String, Array] as PropType<string | [string, string]>,
     attrSize: {
       type: Number,
       default: 20
     },
-    onInputBlur: {
-      type: [Function, Array] as PropType<
-      undefined | MaybeArray<(e: FocusEvent) => void>
-      >,
-      default: undefined
-    },
-    onInputFocus: {
-      type: [Function, Array] as PropType<
-      undefined | MaybeArray<(e: FocusEvent) => void>
-      >,
-      default: undefined
-    },
-    onDeactivate: {
-      type: [Function, Array] as PropType<undefined | MaybeArray<() => void>>,
-      default: undefined
-    },
-    onActivate: {
-      type: [Function, Array] as PropType<undefined | MaybeArray<() => void>>,
-      default: undefined
-    },
-    onWrapperFocus: {
-      type: [Function, Array] as PropType<
-      undefined | MaybeArray<(e: FocusEvent) => void>
-      >,
-      default: undefined
-    },
-    onWrapperBlur: {
-      type: [Function, Array] as PropType<
-      undefined | MaybeArray<(e: FocusEvent) => void>
-      >,
-      default: undefined
-    },
+    onInputBlur: [Function, Array] as PropType<
+    MaybeArray<(e: FocusEvent) => void>
+    >,
+    onInputFocus: [Function, Array] as PropType<
+    MaybeArray<(e: FocusEvent) => void>
+    >,
+    onDeactivate: [Function, Array] as PropType<MaybeArray<() => void>>,
+    onActivate: [Function, Array] as PropType<MaybeArray<() => void>>,
+    onWrapperFocus: [Function, Array] as PropType<
+    MaybeArray<(e: FocusEvent) => void>
+    >,
+    onWrapperBlur: [Function, Array] as PropType<
+    MaybeArray<(e: FocusEvent) => void>
+    >,
     deactivateOnEnter: {
       type: Boolean,
       default: false
@@ -216,11 +133,11 @@ export default defineComponent({
   setup (props) {
     const themeRef = useTheme('Input', 'Input', style, inputLight, props)
     // dom refs
-    const wrapperRef = ref<HTMLElement | null>(null)
-    const textareaRef = ref<HTMLElement | null>(null)
-    const textareaMirrorRef = ref<HTMLElement | null>(null)
-    const inputRef = ref<HTMLElement | null>(null)
-    const input2Ref = ref<HTMLElement | null>(null)
+    const wrapperElRef = ref<HTMLElement | null>(null)
+    const textareaElRef = ref<HTMLElement | null>(null)
+    const textareaMirrorElRef = ref<HTMLElement | null>(null)
+    const inputElRef = ref<HTMLElement | null>(null)
+    const inputEl2Ref = ref<HTMLElement | null>(null)
     // local
     const { locale } = useLocale('Input')
     // value
@@ -329,28 +246,28 @@ export default defineComponent({
       if (props.type === 'textarea') {
         const { autosize } = props
         if (!autosize) return
-        if (!textareaRef.value) return
+        if (!textareaElRef.value) return
         const {
           paddingTop: stylePaddingTop,
           paddingBottom: stylePaddingBottom,
           lineHeight: styleLineHeight
-        } = window.getComputedStyle(textareaRef.value)
+        } = window.getComputedStyle(textareaElRef.value)
         const paddingTop = Number(stylePaddingTop.slice(0, -2))
         const paddingBottom = Number(stylePaddingBottom.slice(0, -2))
         const lineHeight = Number(styleLineHeight.slice(0, -2))
-        if (!textareaMirrorRef.value) return
+        if (!textareaMirrorElRef.value) return
         if (autosize.minRows) {
           const minRows = Math.max(autosize.minRows, 1)
           const styleMinHeight = `${
             paddingTop + paddingBottom + lineHeight * minRows
           }px`
-          textareaMirrorRef.value.style.minHeight = styleMinHeight
+          textareaMirrorElRef.value.style.minHeight = styleMinHeight
         }
         if (autosize.maxRows) {
           const styleMaxHeight = `${
             paddingTop + paddingBottom + lineHeight * autosize.maxRows
           }px`
-          textareaMirrorRef.value.style.maxHeight = styleMaxHeight
+          textareaMirrorElRef.value.style.maxHeight = styleMaxHeight
         }
       }
     }
@@ -364,10 +281,11 @@ export default defineComponent({
     function doInput (value: [string, string]): void
     function doInput (value: string): void
     function doInput (value: string | [string, string]): void {
-      const { 'onUpdate:value': onUpdateValue, onInput } = props
+      const { onUpdateValue, 'onUpdate:value': _onUpdateValue, onInput } = props
       const { nTriggerFormInput } = formItem
-      if (onUpdateValue) call(onUpdateValue, value)
-      if (onInput) call(onInput, value)
+      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
+      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
+      if (onInput) call(onInput as OnUpdateValueImpl, value)
       uncontrolledValueRef.value = value
       nTriggerFormInput()
     }
@@ -376,7 +294,7 @@ export default defineComponent({
     function doChange (value: string | [string, string]): void {
       const { onChange } = props
       const { nTriggerFormChange } = formItem
-      if (onChange) call(onChange, value)
+      if (onChange) call(onChange as OnUpdateValueImpl, value)
       uncontrolledValueRef.value = value
       nTriggerFormChange()
     }
@@ -430,7 +348,7 @@ export default defineComponent({
     }
     function handleCompositionEnd (e: CompositionEvent): void {
       isComposingRef.value = false
-      if (e.target === input2Ref.value) {
+      if (e.target === inputEl2Ref.value) {
         handleInput(e, 1)
       } else {
         handleInput(e, 0)
@@ -461,15 +379,15 @@ export default defineComponent({
     }
     function handleInputBlur (e: FocusEvent): void {
       doInputBlur(e)
-      if (e.relatedTarget === wrapperRef.value) {
+      if (e.relatedTarget === wrapperElRef.value) {
         doDeactivate()
       }
       if (
         !(
           e.relatedTarget !== null &&
-          (e.relatedTarget === inputRef.value ||
-            e.relatedTarget === input2Ref.value ||
-            e.relatedTarget === textareaRef.value)
+          (e.relatedTarget === inputElRef.value ||
+            e.relatedTarget === inputEl2Ref.value ||
+            e.relatedTarget === textareaElRef.value)
         )
       ) {
         activatedRef.value = false
@@ -499,10 +417,10 @@ export default defineComponent({
     function dealWithEvent (e: FocusEvent, type: 'focus' | 'blur'): void {
       if (
         e.relatedTarget !== null &&
-        (e.relatedTarget === inputRef.value ||
-          e.relatedTarget === input2Ref.value ||
-          e.relatedTarget === textareaRef.value ||
-          e.relatedTarget === wrapperRef.value)
+        (e.relatedTarget === inputElRef.value ||
+          e.relatedTarget === inputEl2Ref.value ||
+          e.relatedTarget === textareaElRef.value ||
+          e.relatedTarget === wrapperElRef.value)
       ) {
         /**
          * activeElement transfer inside the input, do nothing
@@ -558,9 +476,9 @@ export default defineComponent({
         }
         e.preventDefault()
         if (props.type === 'textarea') {
-          textareaRef.value?.focus()
+          textareaElRef.value?.focus()
         } else {
-          inputRef.value?.focus()
+          inputElRef.value?.focus()
         }
       }
     }
@@ -568,31 +486,31 @@ export default defineComponent({
       if (props.passivelyActivated) {
         activatedRef.value = false
         void nextTick(() => {
-          wrapperRef.value?.focus()
+          wrapperElRef.value?.focus()
         })
       }
     }
     function focus (): void {
       if (props.disabled) return
       if (props.passivelyActivated) {
-        wrapperRef.value?.focus()
+        wrapperElRef.value?.focus()
       } else {
-        textareaRef.value?.focus()
-        inputRef.value?.focus()
+        textareaElRef.value?.focus()
+        inputElRef.value?.focus()
       }
     }
     function blur (): void {
-      if (wrapperRef.value?.contains(document.activeElement)) {
+      if (wrapperElRef.value?.contains(document.activeElement)) {
         ;(document.activeElement as HTMLElement).blur()
       }
     }
     function activate (): void {
       if (props.disabled) return
-      if (textareaRef.value) textareaRef.value.focus()
-      else if (inputRef.value) inputRef.value.focus()
+      if (textareaElRef.value) textareaElRef.value.focus()
+      else if (inputElRef.value) inputElRef.value.focus()
     }
     function deactivate (): void {
-      const { value: wrapperEl } = wrapperRef
+      const { value: wrapperEl } = wrapperElRef
       if (
         wrapperEl?.contains(document.activeElement) &&
         wrapperEl !== document.activeElement
@@ -602,11 +520,11 @@ export default defineComponent({
     }
     return {
       // DOM ref
-      wrapperRef,
-      inputRef,
-      input2Ref,
-      textareaRef,
-      textareaMirrorRef,
+      wrapperElRef,
+      inputElRef,
+      inputEl2Ref,
+      textareaElRef,
+      textareaMirrorElRef,
       // value
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
@@ -729,7 +647,7 @@ export default defineComponent({
   render () {
     return (
       <div
-        ref="wrapperRef"
+        ref="wrapperElRef"
         class={[
           'n-input',
           {
@@ -758,7 +676,7 @@ export default defineComponent({
       >
         {/* textarea mirror */}
         {this.type === 'textarea' && this.autosize ? (
-          <pre ref="textareaMirrorRef" class="n-input__textarea-mirror">
+          <pre ref="textareaMirrorElRef" class="n-input__textarea-mirror">
             {this.mergedValue}
             <br />
           </pre>
@@ -766,7 +684,7 @@ export default defineComponent({
         {/* textarea & basic input */}
         {this.type === 'textarea' ? (
           <textarea
-            ref="textareaRef"
+            ref="textareaElRef"
             class={[
               'n-input__textarea',
               {
@@ -807,7 +725,7 @@ export default defineComponent({
             ) : null}
             <div class="n-input__input">
               <input
-                ref="inputRef"
+                ref="inputElRef"
                 type={this.type}
                 class="n-input__input-el"
                 tabindex={
@@ -871,7 +789,7 @@ export default defineComponent({
           <div v-if="pair" class="n-input-wrapper">
             <div class="n-input__input">
               <input
-                ref="input2Ref"
+                ref="inputEl2Ref"
                 type={this.type}
                 class="n-input__input-el"
                 tabindex={

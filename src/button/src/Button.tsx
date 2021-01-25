@@ -20,7 +20,8 @@ import {
   NBaseWave
 } from '../../_base'
 import type { BaseWaveRef } from '../../_base'
-import { createKey } from '../../_utils'
+import { call, createKey } from '../../_utils'
+import type { MaybeArray } from '../../_utils'
 import { buttonLight } from '../styles'
 import type { ButtonTheme } from '../styles'
 import type { ButtonGroupInjection } from './ButtonGroup'
@@ -90,7 +91,8 @@ export default defineComponent({
     attrType: {
       type: String as PropType<'button' | 'submit' | 'reset'>,
       default: 'button'
-    }
+    },
+    onClick: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>
   },
   setup (props) {
     const selfRef = ref<HTMLElement | null>(null)
@@ -129,8 +131,10 @@ export default defineComponent({
         selfRef.value?.focus({ preventScroll: true })
       }
     }
-    const handleClick = (): void => {
+    const handleClick = (e: MouseEvent): void => {
       if (!props.disabled) {
+        const { onClick } = props
+        if (onClick) call(onClick, e)
         if (!props.text) {
           const { value } = waveRef
           if (value) {
