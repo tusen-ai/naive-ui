@@ -29,7 +29,7 @@ export default defineComponent({
         }
         void nextTick(() => {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          void selfRef.value!.offsetHeight
+          void selfRef.value?.offsetHeight
           activeRef.value = true
           animationTimerId = window.setTimeout(() => {
             activeRef.value = false

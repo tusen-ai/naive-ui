@@ -1,18 +1,21 @@
 import commonVars from './_common'
 import { scrollbarDark } from '../../scrollbar/styles'
-import { commonLight } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/new-common'
 import { buttonDark } from '../../button/styles'
+import { inputDark } from '../../input/styles'
+import type { TimePickerTheme } from './light'
 
-export default {
+const timePickerDark: TimePickerTheme = {
   name: 'TimePicker',
-  common: commonLight,
+  common: commonDark,
   peers: {
     Scrollbar: scrollbarDark,
-    Button: buttonDark
+    Button: buttonDark,
+    Input: inputDark
   },
   self (vars) {
     const {
-      modalColor,
+      popoverColor,
       textColor2Overlay,
       primaryColor,
       hoverColorOverlay,
@@ -20,12 +23,12 @@ export default {
       opacityDisabled,
       boxShadow2,
       borderRadius,
-      iconColor,
-      iconColorDisabled
+      iconColorOverlay,
+      iconColorDisabledOverlay
     } = vars
     return {
       ...commonVars,
-      panelColor: modalColor,
+      panelColor: popoverColor,
       panelBoxShadow: boxShadow2,
       panelDividerColor: dividerColorOverlay,
       itemTextColor: textColor2Overlay,
@@ -33,8 +36,10 @@ export default {
       itemColorHover: hoverColorOverlay,
       itemOpacityDisabled: opacityDisabled,
       borderRadius,
-      iconColor,
-      iconColorDisabled
+      iconColor: iconColorOverlay,
+      iconColorDisabled: iconColorDisabledOverlay
     }
   }
 }
+
+export default timePickerDark

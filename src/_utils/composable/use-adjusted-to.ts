@@ -2,7 +2,7 @@ import { useMemo } from 'vooks'
 import { ComputedRef, inject } from 'vue'
 
 interface UseAdjustedToProps {
-  to?: string
+  to?: string | HTMLElement
   [key: string]: unknown
 }
 
