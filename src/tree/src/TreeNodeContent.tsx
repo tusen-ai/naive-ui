@@ -1,37 +1,7 @@
-<template>
-  <span
-    ref="selfRef"
-    class="n-tree-node-content"
-    :class="{
-      'n-tree-node-content--pending': pending,
-      'n-tree-node-content--pending-bottom': pendingPosition === 'bottom',
-      'n-tree-node-content--pending-body': pendingPosition === 'body',
-      'n-tree-node-content--pending-top': pendingPosition === 'top',
-      'n-tree-node-content--selected': selected,
-      'n-tree-node-content--block': blockNode,
-      'n-tree-node-content--checkable': checkable,
-      'n-tree-node-content--hightlight': highlight
-    }"
-    @dragleave="handleContentDragLeave"
-    @dragstart="handleContentDragStart"
-    @dragover="handleDragOverContent"
-    @dragend="handleContentDragEnd"
-    @dragenter="handleContentDragEnter"
-    @drop="handleContentDrop"
-    @click="handleClick"
-  >
-    <div class="n-tree-node-content__padding-box" />
-    <div class="n-tree-node-content__text">
-      <slot />
-    </div>
-  </span>
-</template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { h, defineComponent, ref, PropType } from 'vue'
 
 export default defineComponent({
-  name: 'NTreeNodeContent',
+  name: 'TreeNodeContent',
   props: {
     disabled: {
       type: Boolean,
@@ -53,56 +23,37 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    onClick: {
-      type: Function,
-      default: undefined
-    },
-    onDragStart: {
-      type: Function,
-      default: undefined
-    },
-    onDragEnd: {
-      type: Function,
-      default: undefined
-    },
-    onDragEnter: {
-      type: Function,
-      default: undefined
-    },
-    onDragOver: {
-      type: Function,
-      default: undefined
-    },
-    onDragLeave: {
-      type: Function,
-      default: undefined
-    },
-    onDrop: {
-      type: Function,
-      default: undefined
-    }
+    onClick: Function as PropType<(e: MouseEvent) => void>,
+    onDragStart: Function as PropType<(e: DragEvent) => void>,
+    onDragEnd: Function as PropType<(e: DragEvent) => void>,
+    onDragEnter: Function as PropType<(e: DragEvent) => void>,
+    onDragOver: Function as PropType<(e: DragEvent) => void>,
+    onDragLeave: Function as PropType<(e: DragEvent) => void>,
+    onDrop: Function as PropType<
+    (e: DragEvent, dropPosition: 'bottom' | 'center' | 'top') => void
+    >
   },
   setup (props) {
     const pendingRef = ref(false)
     const pendingPositionRef = ref<'top' | 'center' | 'bottom' | null>(null)
     const selfRef = ref<HTMLElement | null>(null)
-    function doClick () {
+    function doClick (e: MouseEvent): void {
       const { onClick } = props
-      if (onClick) onClick()
+      if (onClick) onClick(e)
     }
-    function doDragStart (e: DragEvent) {
+    function doDragStart (e: DragEvent): void {
       const { onDragStart } = props
       if (onDragStart) onDragStart(e)
     }
-    function doDragEnter (e: DragEvent) {
+    function doDragEnter (e: DragEvent): void {
       const { onDragEnter } = props
       if (onDragEnter) onDragEnter(e)
     }
-    function doDragEnd (e: DragEvent) {
+    function doDragEnd (e: DragEvent): void {
       const { onDragEnd } = props
       if (onDragEnd) onDragEnd(e)
     }
-    function doDragLeave (e: DragEvent) {
+    function doDragLeave (e: DragEvent): void {
       const { onDragLeave } = props
       if (onDragLeave) onDragLeave(e)
     }
@@ -110,17 +61,20 @@ export default defineComponent({
     //   const { onDragOver } = props
     //   if (onDragOver) onDragOver(e)
     // }
-    function doDrop (e: DragEvent, dropPosition: 'top' | 'bottom' | 'center') {
+    function doDrop (
+      e: DragEvent,
+      dropPosition: 'top' | 'bottom' | 'center'
+    ): void {
       const { onDrop } = props
       if (onDrop) onDrop(e, dropPosition)
     }
-    function handleClick () {
-      doClick()
+    function handleClick (e: MouseEvent): void {
+      doClick(e)
     }
-    function handleContentDragStart (e: DragEvent) {
+    function handleContentDragStart (e: DragEvent): void {
       doDragStart(e)
     }
-    function handleContentDragEnter (e: DragEvent) {
+    function handleContentDragEnter (e: DragEvent): void {
       if (
         e.currentTarget &&
         e.relatedTarget &&
@@ -132,7 +86,7 @@ export default defineComponent({
       }
       doDragEnter(e)
     }
-    function handleDragOverContent (e: DragEvent) {
+    function handleDragOverContent (e: DragEvent): void {
       e.preventDefault()
       const el = selfRef.value as HTMLElement
       pendingRef.value = true
@@ -147,10 +101,10 @@ export default defineComponent({
         pendingPositionRef.value = 'center'
       }
     }
-    function handleContentDragEnd (e: DragEvent) {
+    function handleContentDragEnd (e: DragEvent): void {
       doDragEnd(e)
     }
-    function handleContentDragLeave (e: DragEvent) {
+    function handleContentDragLeave (e: DragEvent): void {
       if (
         e.currentTarget &&
         e.relatedTarget &&
@@ -163,7 +117,7 @@ export default defineComponent({
       pendingRef.value = false
       doDragLeave(e)
     }
-    function handleContentDrop (e: DragEvent) {
+    function handleContentDrop (e: DragEvent): void {
       e.preventDefault()
       pendingRef.value = false
       if (pendingPositionRef.value !== null) {
@@ -187,6 +141,50 @@ export default defineComponent({
       handleContentDrop,
       handleClick
     }
+  },
+  render () {
+    const {
+      pending,
+      pendingPosition,
+      selected,
+      blockNode,
+      checkable,
+      highlight,
+      handleContentDragLeave,
+      handleContentDragStart,
+      handleDragOverContent,
+      handleContentDragEnd,
+      handleContentDragEnter,
+      handleContentDrop,
+      handleClick
+    } = this
+    return (
+      <span
+        ref="selfRef"
+        class={[
+          'n-tree-node-content',
+          {
+            'n-tree-node-content--pending': pending,
+            'n-tree-node-content--pending-bottom': pendingPosition === 'bottom',
+            'n-tree-node-content--pending-body': pendingPosition === 'center',
+            'n-tree-node-content--pending-top': pendingPosition === 'top',
+            'n-tree-node-content--selected': selected,
+            'n-tree-node-content--block': blockNode,
+            'n-tree-node-content--checkable': checkable,
+            'n-tree-node-content--hightlight': highlight
+          }
+        ]}
+        onDragleave={handleContentDragLeave}
+        onDragstart={handleContentDragStart}
+        onDragover={handleDragOverContent}
+        onDragend={handleContentDragEnd}
+        onDragenter={handleContentDragEnter}
+        onDrop={handleContentDrop}
+        onClick={handleClick}
+      >
+        <div class="n-tree-node-content__padding-box" />
+        <div class="n-tree-node-content__text">{this.$slots}</div>
+      </span>
+    )
   }
 })
-</script>

@@ -1,35 +1,34 @@
-import { Key, KeyedRawNode } from 'treemate'
+import { Key, BaseTreeNode } from './interface'
 
 function traverse (
-  nodes: KeyedRawNode[] | undefined,
-  callback: (node: KeyedRawNode) => void,
-  callbackAfter: (node: KeyedRawNode) => void
-) {
-  nodes &&
-    nodes.forEach((node) => {
-      callback(node)
-      traverse(node.children, callback, callbackAfter)
-      callbackAfter && callbackAfter(node)
-    })
+  nodes: BaseTreeNode[] | undefined,
+  callback: (node: BaseTreeNode) => void,
+  callbackAfter: (node: BaseTreeNode) => void
+): void {
+  nodes?.forEach((node) => {
+    callback(node)
+    traverse(node.children, callback, callbackAfter)
+    callbackAfter(node)
+  })
 }
 
 export function keysWithFilter (
-  nodes: KeyedRawNode[],
+  nodes: BaseTreeNode[],
   pattern: string,
-  filter: (pattern: string, node: KeyedRawNode) => boolean
+  filter: (pattern: string, node: BaseTreeNode) => boolean
 ): [Key[], Key[]] {
   const keys = new Set<Key>()
   const highlightKeys = new Set<Key>()
-  const path: KeyedRawNode[] = []
+  const path: BaseTreeNode[] = []
   traverse(
     nodes,
     (node) => {
       path.push(node)
       if (filter(pattern, node)) {
-        highlightKeys.add(node.key as Key)
+        highlightKeys.add(node.key)
         for (let i = path.length - 2; i >= 0; --i) {
-          if (!keys.has(path[i].key as Key)) {
-            keys.add(path[i].key as Key)
+          if (!keys.has(path[i].key)) {
+            keys.add(path[i].key)
           } else {
             return
           }

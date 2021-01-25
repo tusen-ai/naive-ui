@@ -1,78 +1,79 @@
 import { h, inject, computed, defineComponent, PropType } from 'vue'
 import { useMemo } from 'vooks'
-import { TreeNode, KeyedRawNode } from 'treemate'
-import NTreeNodeSwitcher from './TreeNodeSwitcher.vue'
-import NTreeNodeCheckbox from './TreeNodeCheckbox.vue'
-import NTreeNodeContent from './TreeNodeContent.vue'
+import NTreeNodeSwitcher from './TreeNodeSwitcher'
+import NTreeNodeCheckbox from './TreeNodeCheckbox'
+import NTreeNodeContent from './TreeNodeContent'
 import { NFadeInExpandTransition } from '../../_base'
-import type { TreeInjection } from './Tree'
+import type { TreeInjection, TmNode } from './interface'
 
 const TreeNode = defineComponent({
   name: 'NTreeNode',
   props: {
     tmNode: {
-      type: Object as PropType<TreeNode>,
+      type: Object as PropType<TmNode>,
       required: true
     }
   },
   setup (props) {
     const NTree = inject<TreeInjection>('NTree') as TreeInjection
-    function handleSwitcherClick () {
+    function handleSwitcherClick (): void {
       const { tmNode } = props
-      if (NTree.remote && !tmNode.isLeaf && !tmNode.isShallowLoaded) {
+      if (NTree.remote && !tmNode.isLeaf && !tmNode.shallowLoaded) {
         if (!NTree.loadingKeys.includes(tmNode.key)) {
           NTree.loadingKeys.push(tmNode.key)
         }
-        NTree.onLoad &&
-          NTree.onLoad(tmNode.rawNode as KeyedRawNode).then(() => {
+        const { onLoad } = NTree
+        if (onLoad) {
+          void onLoad(tmNode.rawNode).then(() => {
             NTree.loadingKeys.splice(
               NTree.loadingKeys.findIndex((key) => key === tmNode.key),
               1
             )
             NTree.handleSwitcherClick(tmNode)
           })
+        }
       } else {
         NTree.handleSwitcherClick(tmNode)
       }
     }
-    function handleContentClick () {
+    function handleContentClick (e: MouseEvent): void {
       NTree.handleSelect(props.tmNode)
     }
-    function handleDragEnter (e: DragEvent) {
+    function handleDragEnter (e: DragEvent): void {
       NTree.handleDragEnter({
         event: e,
-        node: props.tmNode.rawNode as KeyedRawNode
+        node: props.tmNode
       })
     }
-    function handleDragStart (e: DragEvent) {
+    function handleDragStart (e: DragEvent): void {
       NTree.handleDragStart({
         event: e,
-        node: props.tmNode.rawNode as KeyedRawNode
+        node: props.tmNode
       })
     }
-    function handleDragLeave (e: DragEvent) {
+    function handleDragLeave (e: DragEvent): void {
       NTree.handleDragLeave({
         event: e,
-        node: props.tmNode.rawNode as KeyedRawNode
+        node: props.tmNode
       })
     }
-    function handleDragEnd (e: DragEvent) {
+    function handleDragEnd (e: DragEvent): void {
       NTree.handleDragEnd({
         event: e,
-        node: props.tmNode.rawNode as KeyedRawNode
+        node: props.tmNode
       })
     }
     function handleDrop (
       e: DragEvent,
-      dropPosition: 'top' | 'center' | 'bottom'
-    ) {
+      dropPosition: 'bottom' | 'center' | 'top'
+    ): void {
       NTree.handleDrop({
         event: e,
-        node: props.tmNode.rawNode as KeyedRawNode,
+        node: props.tmNode,
         dropPosition
       })
     }
-    function handleCheck (checked: boolean) {
+    function handleCheck (checked: boolean): void {
       NTree.handleCheck(props.tmNode, checked)
     }
     return {
