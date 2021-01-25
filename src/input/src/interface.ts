@@ -1,4 +1,4 @@
-export type Size = 'small' | 'medium' | 'large'
+export type Size = 'tiny' | 'small' | 'medium' | 'large'
 
 // null is for clearable
 export type OnUpdateValue = <
