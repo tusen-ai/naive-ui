@@ -5,8 +5,9 @@ import { inputDark } from '../../input/styles'
 import { commonDark } from '../../_styles/new-common'
 import { emptyDark } from '../../empty/styles'
 import { buttonDark } from '../../button/styles'
+import type { TransferTheme } from './light'
 
-export default {
+const transferDark: TransferTheme = {
   name: 'Transfer',
   common: commonDark,
   peers: {
@@ -61,3 +62,5 @@ export default {
     }
   }
 }
+
+export default transferDark

@@ -171,7 +171,7 @@ export default defineComponent({
               ref="scrollbarRef"
               unstableTheme={NModal.mergedTheme.peers.Scrollbar}
               unstableThemeOverrides={NModal.mergedTheme.overrides.Scrollbar}
-              content-class="n-modal-scroll-content"
+              contentClass="n-modal-scroll-content"
             >
               {{
                 default: () => (

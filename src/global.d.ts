@@ -6,7 +6,7 @@ declare global {
 }
 
 // TODO: remove it, since it may conflict with user's d.ts
-type ConflictKeys = 'title' | 'label' | 'onDrop'
+type ConflictKeys = 'title' | 'label' | 'onDrop' | 'onChange'
 
 declare module 'vue' {
   interface ComponentCustomProps extends Omit<HTMLAttributes, ConflictKeys> {}

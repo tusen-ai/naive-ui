@@ -1,7 +1,18 @@
 import { ref, computed, toRef } from 'vue'
 import { useMemo, useMergedState } from 'vooks'
+import type { Option, OptionValue, Filter, CheckedStatus } from './interface'
 
-export function data (props) {
+interface UseTransferDataProps {
+  defaultValue: OptionValue[] | null
+  value?: OptionValue[] | null
+  options: Option[]
+  filterable: boolean
+  disabled: boolean
+  filter: Filter
+}
+
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export function useTransferData (props: UseTransferDataProps) {
   const uncontrolledValueRef = ref(props.defaultValue)
   const controlledValueRef = toRef(props, 'value')
   const mergedValueRef = useMergedState(
@@ -53,9 +64,9 @@ export function data (props) {
           .map((opt) => opt.value)
       )
   )
-  const srcCheckedValuesRef = ref([])
-  const tgtCheckedValuesRef = ref([])
-  const srcCheckedStatusRef = computed(() => {
+  const srcCheckedValuesRef = ref<OptionValue[]>([])
+  const tgtCheckedValuesRef = ref<OptionValue[]>([])
+  const srcCheckedStatusRef = computed<CheckedStatus>(() => {
     const srcCheckedLength = srcCheckedValuesRef.value.filter((v) =>
       avlSrcValueSetRef.value.has(v)
     ).length
@@ -120,11 +131,17 @@ export function data (props) {
     return srcCheckedValuesRef.value.length === 0
   })
   const isInputingRef = ref(false)
-  function handleInputFocus () {
+  function handleInputFocus (): void {
     isInputingRef.value = true
   }
-  function handleInputBlur () {
+  function handleInputBlur (): void {
     isInputingRef.value = false
+  }
+  function handleSrcFilterUpdateValue (value: string | null): void {
+    srcPatternRef.value = value ?? ''
+  }
+  function handleTgtFilterUpdateValue (value: string | null): void {
+    tgtPatternRef.value = value ?? ''
   }
   return {
     uncontrolledValue: uncontrolledValueRef,
@@ -145,6 +162,8 @@ export function data (props) {
     fromButtonDisabled: fromButtonDisabledRef,
     toButtonDisabled: toButtonDisabledRef,
     handleInputFocus,
-    handleInputBlur
+    handleInputBlur,
+    handleTgtFilterUpdateValue,
+    handleSrcFilterUpdateValue
   }
 }

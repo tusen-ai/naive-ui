@@ -54,12 +54,12 @@ export default defineComponent({
       default: undefined
     },
     // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:checked': {
-      type: [Function, Array] as PropType<
-      undefined | MaybeArray<(value: boolean) => void>
-      >,
-      default: undefined
-    },
+    'onUpdate:checked': [Function, Array] as PropType<
+    MaybeArray<(value: boolean) => void>
+    >,
+    onUpdateChecked: [Function, Array] as PropType<
+    MaybeArray<(value: boolean) => void>
+    >,
     // private
     tableHeader: {
       type: Boolean,
@@ -133,10 +133,15 @@ export default defineComponent({
       if (NCheckboxGroup) {
         NCheckboxGroup.toggleCheckbox(!renderedCheckedRef.value, props.value)
       } else {
-        const { onChange, 'onUpdate:checked': onUpdateCheck } = props
+        const {
+          onChange,
+          'onUpdate:checked': _onUpdateCheck,
+          onUpdateChecked
+        } = props
         const { nTriggerFormInput, nTriggerFormChange } = formItem
         const nextChecked = !renderedCheckedRef.value
-        if (onUpdateCheck) call(onUpdateCheck, nextChecked)
+        if (_onUpdateCheck) call(_onUpdateCheck, nextChecked)
+        if (onUpdateChecked) call(onUpdateChecked, nextChecked)
         if (onChange) call(onChange, nextChecked) // deprecated
         nTriggerFormInput()
         nTriggerFormChange()
