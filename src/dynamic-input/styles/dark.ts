@@ -2,8 +2,9 @@ import { inputDark } from '../../input/styles'
 import { buttonDark } from '../../button/styles'
 import { commonDark } from '../../_styles/new-common'
 import commonVariables from './_common'
+import { DynamicInputTheme } from './light'
 
-export default {
+const dynamicInputDark: DynamicInputTheme = {
   name: 'DynamicInput',
   common: commonDark,
   peers: {
@@ -11,8 +12,8 @@ export default {
     Button: buttonDark
   },
   self () {
-    return {
-      ...commonVariables
-    }
+    return commonVariables
   }
 }
+
+export default dynamicInputDark

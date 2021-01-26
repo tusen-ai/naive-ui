@@ -2,17 +2,23 @@ import { inputLight } from '../../input/styles'
 import { buttonLight } from '../../button/styles'
 import { commonLight } from '../../_styles/new-common'
 import commonVariables from './_common'
+import { createTheme } from '../../_mixins'
 
-export default {
+const self = () => {
+  return commonVariables
+}
+
+export type DynamicInputThemeVars = ReturnType<typeof self>
+
+const dynamicInputLight = createTheme({
   name: 'DynamicInput',
   common: commonLight,
   peers: {
     Input: inputLight,
     Button: buttonLight
   },
-  self () {
-    return {
-      ...commonVariables
-    }
-  }
-}
+  self
+})
+
+export default dynamicInputLight
+export type DynamicInputTheme = typeof dynamicInputLight
