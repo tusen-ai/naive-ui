@@ -1,0 +1,91 @@
+import { TreeNode } from 'treemate'
+import type { MergedTheme } from '../../_mixins'
+import type { CascaderTheme } from '../styles'
+
+export type Value = string | number | Array<string | number>
+
+export type Key = string | number
+
+export interface BaseOption {
+  label: string
+  value: string | number
+  disabled?: boolean
+  children?: BaseOption[]
+}
+
+export type ExpandTrigger = 'hover' | 'click'
+
+export type TmNode = TreeNode<BaseOption>
+
+export type Filter = (
+  pattern: string,
+  option: BaseOption,
+  path: BaseOption[]
+) => boolean
+
+export type OnLoad = (option: BaseOption) => Promise<void>
+
+export type OnUpdateValue = <
+  T extends string &
+  number &
+  string[] &
+  number[] &
+  Array<string | number> &
+  (string | null) &
+  (number | null) &
+  (string[] | null) &
+  (number[] | null) &
+  (Array<string | number> | null)
+>(
+  value: T | null
+) => void
+
+export type OnUpdateValueImpl = (
+  value: string | number | string[] | number[] | Array<string | number> | null
+) => void
+
+export type MenuModel = TmNode[][]
+
+export interface CascaderInjection {
+  mergedTheme: MergedTheme<CascaderTheme>
+  mergedValue: Value | null
+  checkedKeys: Key[]
+  indeterminateKeys: Key[]
+  hoverKeyPath: Key[]
+  leafOnly: boolean
+  multiple: boolean
+  keyboardKey: Key | null
+  hoverKey: Key | null
+  remote: boolean
+  loadingKeySet: Set<Key>
+  expandTrigger: ExpandTrigger
+  isMounted: boolean
+  syncCascaderMenuPosition: () => void
+  syncSelectMenuPosition: () => void
+  updateKeyboardKey: (value: Key | null) => void
+  updateHoverKey: (value: Key | null) => void
+  addLoadingKey: (value: Key) => void
+  deleteLoadingKey: (value: Key) => void
+  onLoad?: (value: BaseOption) => Promise<void>
+  doCheck: (value: Key) => void
+  doUncheck: (value: Key) => void
+  closeMenu: () => void
+  handleSelectMenuClickOutside: (e: MouseEvent) => void
+  handleCascaderMenuClickOutside: (e: MouseEvent) => void
+  locale: any
+}
+
+export interface CascaderSubmenuInstance {
+  scroll: (index: number, elSize: number) => void
+}
+
+export interface CascaderMenuInstance {
+  scroll: (depth: number, index: number, elSize: number) => void
+  showErrorMessage: (label: string) => void
+}
+
+export interface SelectMenuInstance {
+  prev: () => void
+  next: () => void
+  enter: () => boolean
+}

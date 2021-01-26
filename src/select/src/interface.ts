@@ -9,6 +9,7 @@ export interface BaseOption {
   disabled?: boolean
   type?: never
   ignored?: never
+  [k: string]: any
 }
 
 export interface GroupOption {

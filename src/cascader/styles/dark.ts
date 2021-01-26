@@ -3,8 +3,9 @@ import { baseSelectMenuDark } from '../../_base/select-menu/styles'
 import { scrollbarDark } from '../../scrollbar/styles'
 import { checkboxDark } from '../../checkbox/styles'
 import { commonDark } from '../../_styles/new-common'
+import type { CascaderTheme } from './light'
 
-export default {
+const cascaderDark: CascaderTheme = {
   name: 'Cascader',
   common: commonDark,
   peers: {
@@ -43,3 +44,5 @@ export default {
     }
   }
 }
+
+export default cascaderDark

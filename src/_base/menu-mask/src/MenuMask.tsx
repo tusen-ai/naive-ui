@@ -1,5 +1,6 @@
 import { h, ref, onBeforeUnmount, defineComponent, Transition } from 'vue'
 import { useStyle } from '../../../_mixins'
+import type { MenuMaskRef } from './interface'
 import style from './styles/index.cssr'
 
 export default defineComponent({
@@ -14,9 +15,7 @@ export default defineComponent({
         window.clearTimeout(timerId)
       }
     })
-    return {
-      message: messageRef,
-      show: uncontrolledShowRef,
+    const exposedRef: MenuMaskRef = {
       showOnce (message: string, duration = 1500) {
         if (timerId) window.clearTimeout(timerId)
         uncontrolledShowRef.value = true
@@ -26,6 +25,11 @@ export default defineComponent({
           messageRef.value = null
         }, duration)
       }
+    }
+    return {
+      message: messageRef,
+      show: uncontrolledShowRef,
+      ...exposedRef
     }
   },
   render () {
