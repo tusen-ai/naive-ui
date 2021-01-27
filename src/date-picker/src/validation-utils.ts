@@ -1,13 +1,25 @@
-import { computed } from 'vue'
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { computed, ComputedRef } from 'vue'
 import { getHours, getMinutes, getSeconds } from 'date-fns'
+import type { DatePickerProps } from './DatePicker'
+import {
+  IsRangeTimeDisabled,
+  IsSingleTimeDisabled,
+  IsSingleDateDisabled
+} from './interface'
 
-export function uniCalendarValidation (props, mergedValueRef) {
+export function uniCalendarValidation (
+  props: DatePickerProps,
+  mergedValueRef: ComputedRef<number | [number, number] | null>
+) {
   // date, datetime
   const timePickerValidatorRef = computed(() => {
-    const { isTimeDisabled } = props
+    const { isTimeDisabled } = props as {
+      isTimeDisabled?: IsSingleTimeDisabled
+    }
     const { value } = mergedValueRef
-    if (value === null) return undefined
-    return isTimeDisabled && isTimeDisabled(value)
+    if (value === null || Array.isArray(value)) return undefined
+    return isTimeDisabled?.(value)
   })
   const isHourDisabledRef = computed(() => {
     return timePickerValidatorRef.value?.isHourDisabled
@@ -23,17 +35,20 @@ export function uniCalendarValidation (props, mergedValueRef) {
     const { value } = mergedValueRef
     if (
       value === null ||
+      Array.isArray(value) ||
       !['date', 'datetime'].includes(type) ||
       !isDateDisabled
     ) {
       return false
     }
-    return isDateDisabled(value) === true
+    return (isDateDisabled as IsSingleDateDisabled)(value)
   })
   const isTimeInvalidRef = computed(() => {
     const { type } = props
     const { value } = mergedValueRef
-    if (value === null || !(type !== 'datetime')) return false
+    if (value === null || !(type !== 'datetime') || Array.isArray(value)) {
+      return false
+    }
     const time = new Date(value)
     const hour = time.getHours()
     const minute = time.getMinutes()
@@ -70,15 +85,20 @@ export function uniCalendarValidation (props, mergedValueRef) {
   }
 }
 
-export function dualCalendarValidation (props, mergedValueRef) {
+export function dualCalendarValidation (
+  props: DatePickerProps,
+  mergedValueRef: ComputedRef<number | [number, number] | null>
+) {
   // daterange, datetimerange
   const timePickerValidatorRef = computed(() => {
-    const { isTimeDisabled } = props
+    const { isTimeDisabled } = props as { isTimeDisabled?: IsRangeTimeDisabled }
     const { value } = mergedValueRef
-    if (value === null || !isTimeDisabled) return [undefined, undefined]
+    if (value === null || !Array.isArray(value) || !isTimeDisabled) {
+      return [undefined, undefined]
+    }
     return [
-      isTimeDisabled && isTimeDisabled(value[0], 'start', value),
-      isTimeDisabled && isTimeDisabled(value[0], 'end', value)
+      isTimeDisabled?.(value[0], 'start', value),
+      isTimeDisabled?.(value[0], 'end', value)
     ]
   })
   const timeValidator = {
@@ -106,6 +126,7 @@ export function dualCalendarValidation (props, mergedValueRef) {
     const { value } = mergedValueRef
     if (
       value === null ||
+      !Array.isArray(value) ||
       !['daterange', 'datetimerange'].includes(type) ||
       !isDateDisabled
     ) {
@@ -118,6 +139,7 @@ export function dualCalendarValidation (props, mergedValueRef) {
     const { value } = mergedValueRef
     if (
       value === null ||
+      !Array.isArray(value) ||
       !['daterange', 'datetimerange'].includes(type) ||
       !isDateDisabled
     ) {
@@ -128,7 +150,9 @@ export function dualCalendarValidation (props, mergedValueRef) {
   const isStartTimeInvalidRef = computed(() => {
     const { type } = props
     const { value } = mergedValueRef
-    if (value === null || type !== 'datetimerange') return false
+    if (value === null || !Array.isArray(value) || type !== 'datetimerange') {
+      return false
+    }
     const startHours = getHours(value[0])
     const startMinutes = getMinutes(value[0])
     const startSeconds = getSeconds(value[0])
@@ -152,7 +176,9 @@ export function dualCalendarValidation (props, mergedValueRef) {
   const isEndTimeInvalidRef = computed(() => {
     const { type } = props
     const { value } = mergedValueRef
-    if (value === null || type !== 'datetimerange') return false
+    if (value === null || !Array.isArray(value) || type !== 'datetimerange') {
+      return false
+    }
     const endHours = getHours(value[1])
     const endMinutes = getMinutes(value[1])
     const endSeconds = getSeconds(value[1])

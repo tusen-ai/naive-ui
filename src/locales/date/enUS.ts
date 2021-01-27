@@ -1,6 +1,9 @@
 import { enUS } from 'date-fns/locale'
 
-export default {
+const dateEnUs = {
   name: 'en-US',
   locale: enUS
 }
+
+export type NaiveDateLocale = typeof dateEnUs
+export default dateEnUs

@@ -5,9 +5,9 @@ import { ConfigProviderInjection } from '../config-provider'
 export default function createLocaleMixin<T extends keyof typeof enUS> (
   ns: T
 ): {
-  locale: Ref<typeof enUS[T]>
-  dateLocale: Ref<typeof dateEnUS>
-} {
+    locale: Ref<typeof enUS[T]>
+    dateLocale: Ref<typeof dateEnUS>
+  } {
   const vm = getCurrentInstance()?.proxy
   const NConfigProvider = inject<ConfigProviderInjection | null>(
     'NConfigProvider',

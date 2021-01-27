@@ -4,8 +4,9 @@ import { commonDark } from '../../_styles/new-common'
 import { buttonDark } from '../../button/styles'
 import { timePickerDark } from '../../time-picker/styles'
 import commonVars from './_common'
+import type { DatePickerTheme } from './light'
 
-export default {
+const datePickerDark: DatePickerTheme = {
   name: 'DatePicker',
   common: commonDark,
   peers: {
@@ -38,6 +39,7 @@ export default {
       itemTextColor: textColor2Overlay,
       itemTextColorDisabled: textColorDisabledOverlay,
       itemTextColorActive: popoverColor,
+      itemTextColorCurrent: primaryColor,
       itemColorDisabled: hoverColorOverlay,
       itemColorIncluded: changeColor(primaryColor, { alpha: 0.15 }),
       itemColorHover: hoverColorOverlay,
@@ -60,3 +62,5 @@ export default {
     }
   }
 }
+
+export default datePickerDark

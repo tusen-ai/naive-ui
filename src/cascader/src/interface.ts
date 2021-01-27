@@ -1,5 +1,6 @@
 import { TreeNode } from 'treemate'
 import type { MergedTheme } from '../../_mixins'
+import type { NaiveLocale } from '../../locales'
 import type { CascaderTheme } from '../styles'
 
 export type ValueAtom = string | number
@@ -71,7 +72,7 @@ export interface CascaderInjection {
   closeMenu: () => void
   handleSelectMenuClickOutside: (e: MouseEvent) => void
   handleCascaderMenuClickOutside: (e: MouseEvent) => void
-  locale: any
+  locale: NaiveLocale['Cascader']
 }
 
 export interface CascaderSubmenuInstance {

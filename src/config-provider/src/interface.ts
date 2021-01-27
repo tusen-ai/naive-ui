@@ -1,5 +1,3 @@
-import { reactive } from 'vue'
-
 export type NaiveLocale = any
 export type NaiveDateLocale = any
 export type Hljs = any

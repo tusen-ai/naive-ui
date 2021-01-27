@@ -1,17 +1,10 @@
 export type Size = 'tiny' | 'small' | 'medium' | 'large'
 
 // null is for clearable
-export type OnUpdateValue = <
-  T extends string &
-  (string | null) &
-  [string, string] &
-  ([string, string] | null)
->(
+export type OnUpdateValue = <T extends string & [string, string]>(
   value: T
 ) => void
-export type OnUpdateValueImpl = (
-  value: string | [string, string] | null
-) => void
+export type OnUpdateValueImpl = (value: string | [string, string]) => void
 
 export interface InputRef {
   wrapperElRef: HTMLElement

@@ -278,9 +278,9 @@ export default defineComponent({
     // other methods
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const vm = getCurrentInstance()!.proxy!
-    function doInput (value: [string, string]): void
-    function doInput (value: string): void
-    function doInput (value: string | [string, string]): void {
+    function doUpdateValue (value: [string, string]): void
+    function doUpdateValue (value: string): void
+    function doUpdateValue (value: string | [string, string]): void {
       const { onUpdateValue, 'onUpdate:value': _onUpdateValue, onInput } = props
       const { nTriggerFormInput } = formItem
       if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
@@ -314,11 +314,11 @@ export default defineComponent({
       const { onClear } = props
       if (onClear) call(onClear, e)
     }
-    function doInputBlur (e: FocusEvent): void {
+    function doUpdateValueBlur (e: FocusEvent): void {
       const { onInputBlur } = props
       if (onInputBlur) call(onInputBlur, e)
     }
-    function doInputFocus (e: FocusEvent): void {
+    function doUpdateValueFocus (e: FocusEvent): void {
       const { onInputFocus } = props
       if (onInputFocus) call(onInputFocus, e)
     }
@@ -362,7 +362,7 @@ export default defineComponent({
       if (isComposingRef.value) return
       const changedValue = (e.target as HTMLInputElement).value
       if (!props.pair) {
-        event === 'input' ? doInput(changedValue) : doChange(changedValue)
+        event === 'input' ? doUpdateValue(changedValue) : doChange(changedValue)
       } else {
         let { value } = mergedValueRef
         if (!Array.isArray(value)) {
@@ -371,14 +371,14 @@ export default defineComponent({
           value = [...value]
         }
         value[index] = changedValue
-        event === 'input' ? doInput(value) : doChange(value)
+        event === 'input' ? doUpdateValue(value) : doChange(value)
       }
       // force update to sync input's view with value
       // if not set, after input, input value won't sync with dom input value
       vm.$forceUpdate()
     }
     function handleInputBlur (e: FocusEvent): void {
-      doInputBlur(e)
+      doUpdateValueBlur(e)
       if (e.relatedTarget === wrapperElRef.value) {
         doDeactivate()
       }
@@ -395,7 +395,7 @@ export default defineComponent({
       dealWithEvent(e, 'blur')
     }
     function handleInputFocus (e: FocusEvent): void {
-      doInputFocus(e)
+      doUpdateValueFocus(e)
       focusedRef.value = true
       activatedRef.value = true
       doActivate()
@@ -444,9 +444,9 @@ export default defineComponent({
     function handleClear (e: MouseEvent): void {
       doClear(e)
       if (props.pair) {
-        doInput(['', ''])
+        doUpdateValue(['', ''])
       } else {
-        doInput('')
+        doUpdateValue('')
       }
     }
     function handleMouseEnter (): void {
