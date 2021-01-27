@@ -16,6 +16,7 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // --option-check-mark-color
 // --option-arrow-color
 // --menu-mask-color
+// --loading-color
 export default c([
   cB('cascader-menu', `
     position: relative;
@@ -35,6 +36,9 @@ export default c([
     }),
     cB('base-menu-mask', {
       backgroundColor: 'var(--menu-mask-color)'
+    }),
+    cB('base-loading', {
+      color: 'var(--loading-color)'
     }),
     cB('cascader-submenu', `
       height: var(--menu-height);

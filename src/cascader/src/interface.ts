@@ -2,13 +2,14 @@ import { TreeNode } from 'treemate'
 import type { MergedTheme } from '../../_mixins'
 import type { CascaderTheme } from '../styles'
 
-export type Value = string | number | Array<string | number>
+export type ValueAtom = string | number
+export type Value = ValueAtom | ValueAtom[]
 
-export type Key = string | number
+export type Key = ValueAtom
 
 export interface BaseOption {
   label: string
-  value: string | number
+  value: ValueAtom
   disabled?: boolean
   children?: BaseOption[]
 }
@@ -37,12 +38,10 @@ export type OnUpdateValue = <
   (number[] | null) &
   (Array<string | number> | null)
 >(
-  value: T | null
+  value: T
 ) => void
 
-export type OnUpdateValueImpl = (
-  value: string | number | string[] | number[] | Array<string | number> | null
-) => void
+export type OnUpdateValueImpl = (value: Value | null) => void
 
 export type MenuModel = TmNode[][]
 

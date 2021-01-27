@@ -151,7 +151,7 @@ export default defineComponent({
     )
     const patternRef = ref('')
     const formItem = useFormItem(props)
-    const cascaderMenuRef = ref<CascaderMenuInstance | null>(null)
+    const cascaderMenuInstRef = ref<CascaderMenuInstance | null>(null)
     const selectMenuInstRef = ref<SelectMenuInstance | null>(null)
     const triggerInstRef = ref<BaseSelectionRef | null>(null)
     const keyboardKeyRef = ref<Key | null>(null)
@@ -252,10 +252,10 @@ export default defineComponent({
           doUpdateValue(checkedKeys)
         } catch (err) {
           if (err instanceof SubtreeNotLoadedError) {
-            if (cascaderMenuRef.value) {
+            if (cascaderMenuInstRef.value) {
               const node = treeMateRef.value.getNode(key)
               if (node !== null) {
-                cascaderMenuRef.value.showErrorMessage(node.rawNode.label)
+                cascaderMenuInstRef.value.showErrorMessage(node.rawNode.label)
               }
             }
           } else {
@@ -401,7 +401,7 @@ export default defineComponent({
             const node = treeMate.getPrev(keyboardKey, { loop: true })
             if (node !== null) {
               updateKeyboardKey(node.key)
-              cascaderMenuRef.value?.scroll(
+              cascaderMenuInstRef.value?.scroll(
                 node.level,
                 node.index,
                 depx(optionHeightRef.value)
@@ -414,7 +414,7 @@ export default defineComponent({
             const node = treeMate.getFirstAvailableNode()
             if (node !== null) {
               updateKeyboardKey(node.key)
-              cascaderMenuRef.value?.scroll(
+              cascaderMenuInstRef.value?.scroll(
                 node.level,
                 node.index,
                 depx(optionHeightRef.value)
@@ -424,7 +424,7 @@ export default defineComponent({
             const node = treeMate.getNext(keyboardKey, { loop: true })
             if (node !== null) {
               updateKeyboardKey(node.key)
-              cascaderMenuRef.value?.scroll(
+              cascaderMenuInstRef.value?.scroll(
                 node.level,
                 node.index,
                 depx(optionHeightRef.value)
@@ -596,17 +596,16 @@ export default defineComponent({
       } else {
         doUpdateValue(null)
       }
-      // TODO ? what's this
-      // this.$el.focus()
     }
     function handleKeyDown (e: KeyboardEvent): void {
       switch (e.code) {
         case 'Space':
         case 'ArrowDown':
         case 'ArrowUp':
-          if (!props.filterable) {
-            e.preventDefault()
+          if (props.filterable && mergedShowRef.value) {
+            return
           }
+          e.preventDefault()
           break
       }
     }
@@ -650,6 +649,11 @@ export default defineComponent({
     )
     return Object.assign(
       {
+        selectMenuFollowerRef,
+        cascaderMenuFollowerRef,
+        triggerInstRef,
+        selectMenuInstRef,
+        cascaderMenuInstRef,
         mergedValue: mergedValueRef,
         mergedShow: mergedShowRef,
         showSelectMenu: showSelectMenuRef,
@@ -669,10 +673,7 @@ export default defineComponent({
         handleDeleteOption,
         handlePatternInput,
         handleKeyDown,
-        handleKeyUp
-      },
-      useConfig(props),
-      {
+        handleKeyUp,
         optionHeight: optionHeightRef,
         mergedTheme: themeRef,
         cssVars: computed(() => {
@@ -689,7 +690,8 @@ export default defineComponent({
               menuBorderRadius,
               optionColorHover,
               optionHeight,
-              optionFontSize
+              optionFontSize,
+              loadingColor
             },
             common: { cubicBezierEaseInOut }
           } = themeRef.value
@@ -708,10 +710,12 @@ export default defineComponent({
             '--option-color-hover': optionColorHover,
             '--option-check-mark-color': optionCheckMarkColor,
             '--option-arrow-color': optionArrowColor,
-            '--menu-mask-color': changeColor(menuColor, { alpha: 0.75 })
+            '--menu-mask-color': changeColor(menuColor, { alpha: 0.75 }),
+            '--loading-color': loadingColor
           }
         })
-      }
+      },
+      useConfig(props)
     )
   },
   render () {
@@ -764,7 +768,7 @@ export default defineComponent({
                 {{
                   default: () => (
                     <CascaderMenu
-                      ref="cascaderMenuRef"
+                      ref="cascaderMenuInstRef"
                       value={this.mergedValue}
                       show={this.mergedShow && !this.showSelectMenu}
                       menuModel={this.menuModel}

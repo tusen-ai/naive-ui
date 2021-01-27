@@ -40,7 +40,8 @@ const cascaderDark: CascaderTheme = {
       optionTextColor: textColor2Overlay,
       optionTextColorActive: primaryColor,
       optionTextColorDisabled: textColorDisabledOverlay,
-      optionCheckMarkColor: primaryColor
+      optionCheckMarkColor: primaryColor,
+      loadingColor: primaryColor
     }
   }
 }

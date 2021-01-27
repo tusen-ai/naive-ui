@@ -32,7 +32,8 @@ const self = (vars: ThemeCommonVars) => {
     optionTextColor: textColor2,
     optionTextColorActive: primaryColor,
     optionTextColorDisabled: textColorDisabled,
-    optionCheckMarkColor: primaryColor
+    optionCheckMarkColor: primaryColor,
+    loadingColor: primaryColor
   }
 }
 
