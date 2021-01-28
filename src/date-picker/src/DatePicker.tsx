@@ -26,7 +26,8 @@ import type { ThemeProps } from '../../_mixins'
 import { CalendarIcon, FastForwardIcon } from '../../_base/icons'
 import { warn, call, useAdjustedTo, createKey, MaybeArray } from '../../_utils'
 import { datePickerLight } from '../styles'
-import { strictParse, getDerivedTimeFromKeyboardEvent } from './utils'
+import { strictParse } from './utils'
+// import { getDerivedTimeFromKeyboardEvent } from './utils'
 import {
   uniCalendarValidation,
   dualCalendarValidation
@@ -220,17 +221,17 @@ export default defineComponent({
       nTriggerFormBlur()
     }
     function handleKeyDown (e: KeyboardEvent): void {
-      const { value: mergedValue } = mergedValueRef
       if (e.code === 'Escape') {
         closeCalendar({
           returnFocus: true
         })
-        return
       }
-      if (props.type === 'date' && !Array.isArray(mergedValue)) {
-        const nextValue = getDerivedTimeFromKeyboardEvent(mergedValue, e)
-        doUpdateValue(nextValue)
-      }
+      // We need to handle the conflict with normal date value input
+      // const { value: mergedValue } = mergedValueRef
+      // if (props.type === 'date' && !Array.isArray(mergedValue)) {
+      //   const nextValue = getDerivedTimeFromKeyboardEvent(mergedValue, e)
+      //   doUpdateValue(nextValue)
+      // }
     }
     function handleClear (e: MouseEvent): void {
       e.stopPropagation()
@@ -252,8 +253,8 @@ export default defineComponent({
         returnFocus: true
       })
     }
-    // --- Panel Input
-    function handlePanelInput (value: number): void {
+    // --- Panel update value
+    function handlePanelUpdateValue (value: number): void {
       doUpdateValue(value)
     }
     // --- Refresh
@@ -315,13 +316,16 @@ export default defineComponent({
         return
       }
       const newSelectedDateTime = strictParse(
-        singleInputValueRef.value,
+        v,
         mergedFormatRef.value,
         new Date(),
         dateFnsOptionsRef.value
       )
       if (isValid(newSelectedDateTime)) {
         doUpdateValue(getTime(newSelectedDateTime))
+        deriveInputState()
+      } else {
+        singleInputValueRef.value = v
       }
     }
     function handleRangeUpdateValue (v: [string, string]): void {
@@ -345,6 +349,9 @@ export default defineComponent({
       )
       if (isValid(newStartTime) && isValid(newEndTime)) {
         doUpdateValue([getTime(newStartTime), getTime(newEndTime)])
+        deriveInputState()
+      } else {
+        ;[rangeStartInputValueRef.value, rangeEndInputValueRef.value] = v
       }
     }
     // --- Click
@@ -430,7 +437,7 @@ export default defineComponent({
       handlePanelClose,
       handleRangeUpdateValue,
       handleSingleUpdateValue,
-      handlePanelInput,
+      handlePanelUpdateValue,
       ...useConfig(props),
       mergedTheme: themeRef,
       triggerCssVars: computed(() => {
@@ -558,7 +565,7 @@ export default defineComponent({
       onBlur: this.handleInputBlur
     }
     const commonPanelProps = {
-      onUpdateValue: this.handlePanelInput,
+      onUpdateValue: this.handlePanelUpdateValue,
       onTabOut: this.handlePanelTabOut,
       onClose: this.handlePanelClose,
       onKeydown: this.handleKeyDown,
@@ -582,89 +589,100 @@ export default defineComponent({
         onKeydown={this.handleKeyDown}
       >
         <VBinder>
-          <VTarget>
-            {{
-              default: () =>
-                this.isRange ? (
-                  <NInput
-                    ref="inputInstRef"
-                    value={[this.displayStartTime, this.displayEndTime]}
-                    placeholder={[
-                      this.localizedStartPlaceholder,
-                      this.localizedEndPlaceholder
-                    ]}
-                    textDecoration={[
-                      this.isStartValueInvalid ? 'line-through' : '',
-                      this.isEndValueInvalid ? 'line-through' : ''
-                    ]}
-                    pair
-                    onUpdateValue={this.handleRangeUpdateValue}
-                    {...commonInputProps}
-                  >
-                    {{
-                      separator: () => (
-                        <NBaseIcon class="n-date-picker-icon">
-                          {{ default: () => <FastForwardIcon /> }}
-                        </NBaseIcon>
-                      ),
-                      clear: () => (
-                        <NBaseIcon class="n-date-picker-icon">
-                          {{ default: () => <CalendarIcon /> }}
-                        </NBaseIcon>
-                      )
-                    }}
-                  </NInput>
-                ) : (
-                  <NInput
-                    ref="inputInstRef"
-                    value={this.displayTime}
-                    placeholder={this.localizedPlacehoder}
-                    textDecoration={
-                      this.isValueInvalid && !this.isRange ? 'line-through' : ''
-                    }
-                    onUpdateValue={this.handleSingleUpdateValue}
-                    {...commonInputProps}
-                  >
-                    {{
-                      clear: () => (
-                        <NBaseIcon class="n-date-picker-icon">
-                          {{ default: () => <CalendarIcon /> }}
-                        </NBaseIcon>
-                      )
-                    }}
-                  </NInput>
-                )
-            }}
-          </VTarget>
-          <VFollower
-            show={this.active}
-            containerClass={this.namespace}
-            to={this.adjustedTo}
-            placement="bottom-start"
-          >
-            <Transition
-              name="n-fade-in-scale-up-transition"
-              appear={this.isMounted}
-            >
-              {{
-                default: () =>
-                  this.active
-                    ? withDirectives(
-                      (this.type === 'datetime' ? (
-                        <DatetimePanel {...commonPanelProps} />
-                      ) : this.type === 'daterange' ? (
-                        <DaterangePanel {...commonPanelProps} />
-                      ) : this.type === 'datetimerange' ? (
-                        <DatetimerangePanel {...commonPanelProps} />
+          {{
+            default: () =>
+              [
+                <VTarget>
+                  {{
+                    default: () =>
+                      this.isRange ? (
+                        <NInput
+                          ref="inputInstRef"
+                          value={[this.displayStartTime, this.displayEndTime]}
+                          placeholder={[
+                            this.localizedStartPlaceholder,
+                            this.localizedEndPlaceholder
+                          ]}
+                          textDecoration={[
+                            this.isStartValueInvalid ? 'line-through' : '',
+                            this.isEndValueInvalid ? 'line-through' : ''
+                          ]}
+                          pair
+                          onUpdateValue={this.handleRangeUpdateValue}
+                          {...commonInputProps}
+                        >
+                          {{
+                            separator: () => (
+                              <NBaseIcon class="n-date-picker-icon">
+                                {{ default: () => <FastForwardIcon /> }}
+                              </NBaseIcon>
+                            ),
+                            clear: () => (
+                              <NBaseIcon class="n-date-picker-icon">
+                                {{ default: () => <CalendarIcon /> }}
+                              </NBaseIcon>
+                            )
+                          }}
+                        </NInput>
                       ) : (
-                        <DatePanel {...commonPanelProps} />
-                      )) as VNode,
-                      [[clickoutside, this.handleClickOutside]]
+                        <NInput
+                          ref="inputInstRef"
+                          value={this.displayTime}
+                          placeholder={this.localizedPlacehoder}
+                          textDecoration={
+                            this.isValueInvalid && !this.isRange
+                              ? 'line-through'
+                              : ''
+                          }
+                          onUpdateValue={this.handleSingleUpdateValue}
+                          {...commonInputProps}
+                        >
+                          {{
+                            clear: () => (
+                              <NBaseIcon class="n-date-picker-icon">
+                                {{ default: () => <CalendarIcon /> }}
+                              </NBaseIcon>
+                            )
+                          }}
+                        </NInput>
+                      )
+                  }}
+                </VTarget>,
+                <VFollower
+                  show={this.active}
+                  containerClass={this.namespace}
+                  to={this.adjustedTo}
+                  placement="bottom-start"
+                >
+                  {{
+                    default: () => (
+                      <Transition
+                        name="n-fade-in-scale-up-transition"
+                        appear={this.isMounted}
+                      >
+                        {{
+                          default: () =>
+                            this.active
+                              ? withDirectives(
+                                (this.type === 'datetime' ? (
+                                  <DatetimePanel {...commonPanelProps} />
+                                ) : this.type === 'daterange' ? (
+                                  <DaterangePanel {...commonPanelProps} />
+                                ) : this.type === 'datetimerange' ? (
+                                  <DatetimerangePanel {...commonPanelProps} />
+                                ) : (
+                                  <DatePanel {...commonPanelProps} />
+                                )) as VNode,
+                                [[clickoutside, this.handleClickOutside]]
+                              )
+                              : null
+                        }}
+                      </Transition>
                     )
-                    : null
-              }}
-            </Transition>
-          </VFollower>
+                  }}
+                </VFollower>
+              ] as VNode[]
+          }}
         </VBinder>
       </div>
     )

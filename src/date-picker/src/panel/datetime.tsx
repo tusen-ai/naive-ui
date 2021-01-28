@@ -28,7 +28,7 @@ export default defineComponent({
       >
         <div class="n-date-panel-header">
           <NInput
-            value={this.displayDateString}
+            value={this.dateInputValue}
             unstableTheme={this.NDatePicker.mergedTheme.peers.Input}
             unstableThemeOverrides={
               this.NDatePicker.mergedTheme.overrides.Input
@@ -52,7 +52,7 @@ export default defineComponent({
             teleport-disabled
             size={this.timePickerSize}
             value={this.value}
-            placeholder="locale.selectTime"
+            placeholder={this.locale.selectTime}
             isHourDisabled={this.isHourDisabled}
             isMinuteDisabled={this.isMinuteDisabled}
             isSecondDisabled={this.isSecondDisabled}
@@ -124,7 +124,7 @@ export default defineComponent({
                 size="tiny"
                 onClick={this.handleClearClick}
               >
-                {this.locale.clear}
+                {{ default: () => this.locale.clear }}
               </NButton>
             ) : null}
             {this.actions.includes('now') ? (
@@ -136,7 +136,7 @@ export default defineComponent({
                 size="tiny"
                 onClick={this.handleNowClick}
               >
-                {this.locale.now}
+                {{ default: () => this.locale.now }}
               </NButton>
             ) : null}
             {this.actions.includes('confirm') ? (
@@ -150,7 +150,7 @@ export default defineComponent({
                 disabled={this.isDateInvalid}
                 onClick={this.handleConfirmClick}
               >
-                {this.locale.confirm}
+                {{ default: () => this.locale.confirm }}
               </NButton>
             ) : null}
           </div>

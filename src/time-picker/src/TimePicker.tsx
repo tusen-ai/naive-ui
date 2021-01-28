@@ -184,7 +184,7 @@ export default defineComponent({
       const { isHourDisabled } = props
       if (!isHourDisabled) return false
       if (hourValueRef.value === null) return false
-      isHourDisabled(hourValueRef.value)
+      return isHourDisabled(hourValueRef.value)
     })
     const isMinuteInvalidRef = computed(() => {
       const { isMinuteDisabled } = props
@@ -259,7 +259,7 @@ export default defineComponent({
     function handleTimeInputClear (e: MouseEvent): void {
       e.stopPropagation()
       doChange(null)
-      refreshTimeString(null)
+      deriveInputValue(null)
     }
     function handleFocusDetectorFocus (): void {
       closePanel({
@@ -289,27 +289,6 @@ export default defineComponent({
         transitionDisabledRef.value = false
       })
     }
-    function justifyValueAfterInput (): void {
-      const time = strictParse(
-        displayTimeStringRef.value,
-        props.format,
-        new Date(),
-        dateFnsOptionsRef.value
-      )
-      if (isValid(time)) {
-        const { value: mergedValue } = mergedValueRef
-        if (mergedValue !== null) {
-          const newTime = set(mergedValue, {
-            hours: getHours(time),
-            minutes: getMinutes(time),
-            seconds: getSeconds(time)
-          })
-          doChange(getTime(newTime))
-        } else {
-          doChange(getTime(time))
-        }
-      }
-    }
     function handleHourClick (hour: number): void {
       if (mergedValueRef.value === null) {
         doChange(getTime(setHours(startOfHour(new Date()), hour)))
@@ -331,7 +310,7 @@ export default defineComponent({
         doChange(getTime(setSeconds(mergedValueRef.value, second)))
       }
     }
-    function refreshTimeString (time?: null | number): void {
+    function deriveInputValue (time?: null | number): void {
       if (time === undefined) time = mergedValueRef.value
       if (time === null) displayTimeStringRef.value = ''
       else {
@@ -367,7 +346,7 @@ export default defineComponent({
     }
     function handleTimeInputDeactivate (): void {
       if (props.disabled) return
-      refreshTimeString()
+      deriveInputValue()
       closePanel({
         returnFocus: false
       })
@@ -433,8 +412,31 @@ export default defineComponent({
         }
       }
     }
-    function handleTimeInput (): void {
-      justifyValueAfterInput()
+    function handleTimeInputUpdateValue (v: string): void {
+      if (v === '') {
+        doChange(null)
+        return
+      }
+      const time = strictParse(
+        v,
+        props.format,
+        new Date(),
+        dateFnsOptionsRef.value
+      )
+      displayTimeStringRef.value = v
+      if (isValid(time)) {
+        const { value: mergedValue } = mergedValueRef
+        if (mergedValue !== null) {
+          const newTime = set(mergedValue, {
+            hours: getHours(time),
+            minutes: getMinutes(time),
+            seconds: getSeconds(time)
+          })
+          doChange(getTime(newTime))
+        } else {
+          doChange(getTime(time))
+        }
+      }
     }
     function handleCancelClick (): void {
       doChange(memorizedValueRef.value)
@@ -455,7 +457,7 @@ export default defineComponent({
       }
     }
     function handleConfirmClick (): void {
-      refreshTimeString()
+      deriveInputValue()
       closePanel({
         returnFocus: true
       })
@@ -468,7 +470,7 @@ export default defineComponent({
       })
     }
     watch(mergedValueRef, (value) => {
-      refreshTimeString(value)
+      deriveInputValue(value)
       disableTransitionOneTick()
       void nextTick(scrollTimer)
     })
@@ -514,7 +516,7 @@ export default defineComponent({
       handleTimeInputBlur,
       handleNowClick,
       handleConfirmClick,
-      handleTimeInput,
+      handleTimeInputUpdateValue,
       handleMenuFocusOut,
       handleCancelClick,
       handleClickOutside,
@@ -586,7 +588,6 @@ export default defineComponent({
                     <NInput
                       ref="inputInstRef"
                       value={this.displayTimeString}
-                      onUpdateValue={(v) => (this.displayTimeString = v)}
                       bordered={this.mergedBordered}
                       passivelyActivated
                       deactivateOnEnter
@@ -606,7 +607,7 @@ export default defineComponent({
                       onBlur={this.handleTimeInputBlur}
                       onActivate={this.handleTimeInputActivate}
                       onDeactivate={this.handleTimeInputDeactivate}
-                      onInput={this.handleTimeInput}
+                      onUpdateValue={this.handleTimeInputUpdateValue}
                       onClear={this.handleTimeInputClear}
                     >
                       {this.showIcon

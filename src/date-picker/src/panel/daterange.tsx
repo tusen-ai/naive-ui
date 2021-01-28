@@ -185,7 +185,7 @@ export default defineComponent({
                 size="tiny"
                 onClick={this.handleClearClick}
               >
-                {this.locale.clear}
+                {{ default: () => this.locale.clear }}
               </NButton>
             ) : null}
             {this.actions.includes('confirm') ? (
@@ -199,7 +199,7 @@ export default defineComponent({
                 disabled={this.isRangeInvalid}
                 onClick={this.handleConfirmClick}
               >
-                {this.locale.confirm}
+                {{ default: () => this.locale.confirm }}
               </NButton>
             ) : null}
           </div>

@@ -1,2 +1,3 @@
-export { default as datePickerDark } from './dark.js'
-export { default as datePickerLight } from './light.js'
+export { default as datePickerDark } from './dark'
+export { default as datePickerLight } from './light'
+export type { DatePickerTheme, DatePickerThemeVars } from './light'

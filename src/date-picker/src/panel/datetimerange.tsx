@@ -22,7 +22,7 @@ export default defineComponent({
       <div
         ref="selfRef"
         tabindex={0}
-        class="n-date-panel n-date-panel--daterange"
+        class="n-date-panel n-date-panel--datetimerange"
         onClickCapture={this.resetSelectingStatus}
         onKeydown={this.handlePanelKeyDown}
         onFocus={this.handlePanelFocus}
@@ -60,7 +60,7 @@ export default defineComponent({
             onUpdateValue={this.handleStartTimePickerChange}
           />
           <NInput
-            value={this.endDateDisplayString}
+            value={this.endDateInput}
             unstableTheme={this.NDatePicker.mergedTheme.peers.Input}
             unstableThemeOverrides={
               this.NDatePicker.mergedTheme.overrides.Input
@@ -251,7 +251,7 @@ export default defineComponent({
                 size="tiny"
                 onClick={this.handleClearClick}
               >
-                {this.locale.clear}
+                {{ default: () => this.locale.clear }}
               </NButton>
             ) : null}
             {this.actions.includes('confirm') ? (
@@ -265,7 +265,7 @@ export default defineComponent({
                 disabled={this.isRangeInvalid}
                 onClick={this.handleConfirmClick}
               >
-                {this.locale.confirm}
+                {{ default: () => this.locale.confirm }}
               </NButton>
             ) : null}
           </div>

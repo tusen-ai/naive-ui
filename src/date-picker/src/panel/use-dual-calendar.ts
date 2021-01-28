@@ -59,12 +59,12 @@ function useDualCalendar (
 
   const { value, dateFormat } = props
 
-  const startDateDisplayStringRef = ref(
+  const startDateInput = ref(
     Array.isArray(value)
       ? format(value[0], dateFormat, panelCommon.dateFnsOptions.value)
       : ''
   )
-  const endDateDisplayStringRef = ref(
+  const endDateInputRef = ref(
     Array.isArray(value)
       ? format(value[1], dateFormat, panelCommon.dateFnsOptions.value)
       : ''
@@ -159,12 +159,12 @@ function useDualCalendar (
       if (value !== null && Array.isArray(value)) {
         const [startMoment, endMoment] = value
         const { dateFormat } = props
-        startDateDisplayStringRef.value = format(
+        startDateInput.value = format(
           startMoment,
           dateFormat,
           panelCommon.dateFnsOptions.value
         )
-        endDateDisplayStringRef.value = format(
+        endDateInputRef.value = format(
           endMoment,
           dateFormat,
           panelCommon.dateFnsOptions.value
@@ -173,8 +173,8 @@ function useDualCalendar (
           syncCalendarTimeWithValue(value)
         }
       } else {
-        startDateDisplayStringRef.value = ''
-        endDateDisplayStringRef.value = ''
+        startDateInput.value = ''
+        endDateInputRef.value = ''
       }
     }
   )
@@ -381,6 +381,8 @@ function useDualCalendar (
         })
         changeStartDateTime(sanitizeValue(getTime(newValue)))
       }
+    } else {
+      startDateInput.value = value
     }
   }
   function handleEndDateInput (value: string): void {
@@ -408,12 +410,12 @@ function useDualCalendar (
         changeEndDateTime(sanitizeValue(getTime(newValue)))
       }
     } else {
-      // do nothing
+      endDateInputRef.value = value
     }
   }
   function handleStartDateInputBlur (): void {
     const date = strictParse(
-      startDateDisplayStringRef.value,
+      startDateInput.value,
       props.dateFormat,
       new Date(),
       panelCommon.dateFnsOptions.value
@@ -441,7 +443,7 @@ function useDualCalendar (
   }
   function handleEndDateInputBlur (): void {
     const date = strictParse(
-      endDateDisplayStringRef.value,
+      endDateInputRef.value,
       props.dateFormat,
       new Date(),
       panelCommon.dateFnsOptions.value
@@ -472,20 +474,20 @@ function useDualCalendar (
     // else update datetime related string
     const { value } = props
     if (value === null || !Array.isArray(value)) {
-      startDateDisplayStringRef.value = ''
-      endDateDisplayStringRef.value = ''
+      startDateInput.value = ''
+      endDateInputRef.value = ''
       return
     }
     const { dateFormat } = props
     if (times === undefined) {
       times = value
     }
-    startDateDisplayStringRef.value = format(
+    startDateInput.value = format(
       times[0],
       dateFormat,
       panelCommon.dateFnsOptions.value
     )
-    endDateDisplayStringRef.value = format(
+    endDateInputRef.value = format(
       times[1],
       dateFormat,
       panelCommon.dateFnsOptions.value
@@ -524,8 +526,8 @@ function useDualCalendar (
     ...panelCommon,
     ...validation,
     // datetimerangeonly
-    startDateDisplayString: startDateDisplayStringRef,
-    endDateDisplayString: endDateDisplayStringRef,
+    startDateDisplayString: startDateInput,
+    endDateInput: endDateInputRef,
     timePickerSize: panelCommon.timePickerSize,
     startTimeValue: startTimeValueRef,
     endTimeValue: endTimeValueRef,

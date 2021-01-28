@@ -41,6 +41,7 @@ function useCalendar (
     'NDatePicker'
   ) as DatePickerInjection
   const validation = {
+    isValueInvalid: computed(() => NDatePicker.isValueInvalid),
     isDateDisabled: computed(() => NDatePicker.isDateDisabled),
     isDateInvalid: computed(() => NDatePicker.isDateInvalid),
     isTimeInvalid: computed(() => NDatePicker.isTimeInvalid),
@@ -49,12 +50,12 @@ function useCalendar (
     isMinuteDisabled: computed(() => NDatePicker.isMinuteDisabled),
     isSecondDisabled: computed(() => NDatePicker.isSecondDisabled)
   }
-  const displayDateStringRef = ref(
+  const dateInputValueRef = ref(
     props.value === null || Array.isArray(props.value)
       ? ''
       : format(props.value, props.dateFormat)
   )
-  const calendarDateTimeRef = ref(
+  const calendarValueRef = ref(
     props.value === null || Array.isArray(props.value)
       ? Date.now()
       : props.value
@@ -62,7 +63,7 @@ function useCalendar (
   const nowRef = ref(Date.now())
   const dateArrayRef = computed(() => {
     return dateArray(
-      calendarDateTimeRef.value,
+      calendarValueRef.value,
       ensureValidValue(props.value),
       nowRef.value
     )
@@ -79,19 +80,19 @@ function useCalendar (
   })
   const calendarMonthRef = computed(() => {
     return format(
-      calendarDateTimeRef.value,
+      calendarValueRef.value,
       NDatePicker.locale.monthFormat,
       panelCommon.dateFnsOptions.value
     )
   })
   const calendarYearRef = computed(() => {
     return format(
-      calendarDateTimeRef.value,
+      calendarValueRef.value,
       NDatePicker.locale.yearFormat,
       panelCommon.dateFnsOptions.value
     )
   })
-  watch(calendarDateTimeRef, (value, oldValue) => {
+  watch(calendarValueRef, (value, oldValue) => {
     if (!isSameMonth(value, oldValue)) {
       panelCommon.disableTransitionOneTick()
     }
@@ -100,7 +101,8 @@ function useCalendar (
     if (value) {
       panelCommon.memorizedValue.value = props.value
     } else {
-      if (validation.isTimeInvalid.value || validation.isDateInvalid.value) {
+      // restore original value is not valid
+      if (validation.isValueInvalid.value) {
         panelCommon.doUpdateValue(panelCommon.memorizedValue.value)
       }
     }
@@ -109,14 +111,14 @@ function useCalendar (
     computed(() => props.value),
     (value) => {
       if (value !== null && !Array.isArray(value)) {
-        displayDateStringRef.value = format(
+        dateInputValueRef.value = format(
           value,
           props.dateFormat,
           panelCommon.dateFnsOptions.value
         )
-        calendarDateTimeRef.value = value
+        calendarValueRef.value = value
       } else {
-        displayDateStringRef.value = ''
+        dateInputValueRef.value = ''
       }
     }
   )
@@ -149,11 +151,13 @@ function useCalendar (
         })
         panelCommon.doUpdateValue(getTime(sanitizeValue(getTime(newDateTime))))
       }
+    } else {
+      dateInputValueRef.value = value
     }
   }
   function handleDateInputBlur (): void {
     const date = strictParse(
-      displayDateStringRef.value,
+      dateInputValueRef.value,
       props.dateFormat,
       new Date(),
       panelCommon.dateFnsOptions.value
@@ -175,11 +179,11 @@ function useCalendar (
   }
   function clearSelectedDateTime (): void {
     panelCommon.doUpdateValue(null)
-    displayDateStringRef.value = ''
+    dateInputValueRef.value = ''
   }
   function handleNowClick (): void {
     panelCommon.doUpdateValue(getTime(sanitizeValue(Date.now())))
-    calendarDateTimeRef.value = Date.now()
+    calendarValueRef.value = Date.now()
   }
   function handleDateClick (dateItem: DateItem): void {
     if (mergedIsDateDisabled(dateItem.ts)) {
@@ -198,13 +202,13 @@ function useCalendar (
     // If not selected, display nothing,
     // else update datetime related string
     if (props.value === null || Array.isArray(props.value)) {
-      displayDateStringRef.value = ''
+      dateInputValueRef.value = ''
       return
     }
     if (time === undefined) {
       time = props.value
     }
-    displayDateStringRef.value = format(
+    dateInputValueRef.value = format(
       time,
       props.dateFormat,
       panelCommon.dateFnsOptions.value
@@ -223,18 +227,16 @@ function useCalendar (
     }
   }
   function nextYear (): void {
-    calendarDateTimeRef.value = getTime(addYears(calendarDateTimeRef.value, 1))
+    calendarValueRef.value = getTime(addYears(calendarValueRef.value, 1))
   }
   function prevYear (): void {
-    calendarDateTimeRef.value = getTime(addYears(calendarDateTimeRef.value, -1))
+    calendarValueRef.value = getTime(addYears(calendarValueRef.value, -1))
   }
   function nextMonth (): void {
-    calendarDateTimeRef.value = getTime(addMonths(calendarDateTimeRef.value, 1))
+    calendarValueRef.value = getTime(addMonths(calendarValueRef.value, 1))
   }
   function prevMonth (): void {
-    calendarDateTimeRef.value = getTime(
-      addMonths(calendarDateTimeRef.value, -1)
-    )
+    calendarValueRef.value = getTime(addMonths(calendarValueRef.value, -1))
   }
   function handleTimePickerChange (value: number): void {
     panelCommon.doUpdateValue(value)
@@ -261,7 +263,7 @@ function useCalendar (
     handleTimePickerChange,
     clearSelectedDateTime,
     timePickerSize: panelCommon.timePickerSize,
-    displayDateString: displayDateStringRef
+    dateInputValue: dateInputValueRef
   }
 }
 

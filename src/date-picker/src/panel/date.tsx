@@ -89,7 +89,7 @@ export default defineComponent({
                 size="tiny"
                 onClick={this.handleClearClick}
               >
-                {this.locale.clear}
+                {{ default: () => this.locale.clear }}
               </NButton>
             ) : null}
             {this.actions.includes('now') ? (
@@ -101,7 +101,7 @@ export default defineComponent({
                 size="tiny"
                 onClick={this.handleNowClick}
               >
-                {this.locale.now}
+                {{ default: () => this.locale.now }}
               </NButton>
             ) : null}
             {this.actions.includes('confirm') ? (
@@ -115,7 +115,7 @@ export default defineComponent({
                 disabled={this.isDateInvalid}
                 onClick={this.handleConfirmClick}
               >
-                {this.locale.confirm}
+                {{ default: () => this.locale.confirm }}
               </NButton>
             ) : null}
           </div>

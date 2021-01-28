@@ -32,7 +32,6 @@ const usePanelCommonProps = {
     type: [Array, Number] as PropType<Value | null>,
     default: null
   },
-  'onUpdate:value': Function as PropType<OnUpdateValue>,
   onConfirm: Function,
   onClose: Function,
   onTabOut: Function,
@@ -63,7 +62,7 @@ function usePanelCommon (props: UsePanelCommonProps) {
     if (onConfirm) onConfirm()
   }
   function doUpdateValue (value: Value | null): void {
-    const { 'onUpdate:value': onUpdateValue } = props
+    const { onUpdateValue } = props
     if (onUpdateValue) (onUpdateValue as OnUpdateValueImpl)(value)
   }
   function doClose (): void {
