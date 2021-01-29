@@ -43,7 +43,7 @@ export default defineComponent({
         timerIdRef.value = window.setTimeout(hide, duration)
       }
     })
-    function hide () {
+    function hide (): void {
       const { value: timerId } = timerIdRef
       const { onHide } = props
       showRef.value = false
@@ -53,12 +53,12 @@ export default defineComponent({
       // deprecated
       if (onHide) onHide()
     }
-    function handleClose () {
+    function handleClose (): void {
       const { onClose } = props
       if (onClose) onClose()
       hide()
     }
-    function handleAfterLeave () {
+    function handleAfterLeave (): void {
       const {
         onAfterLeave,
         onInternalAfterLeave,
@@ -71,11 +71,12 @@ export default defineComponent({
       if (onAfterHide) onAfterHide()
     }
     // deprecated
-    function deactivate () {
+    function deactivate (): void {
       hide()
     }
     return {
       show: showRef,
+      hide,
       handleClose,
       handleAfterLeave,
       deactivate

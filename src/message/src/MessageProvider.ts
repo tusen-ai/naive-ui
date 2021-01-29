@@ -13,7 +13,6 @@ import { omit } from '../../_utils'
 import { ThemePropsReactive, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import MessageEnvironment from './MessageEnvironment'
-import { MessageType } from './message-props'
 import { MessageTheme } from '../styles'
 
 interface MessageOptions {
@@ -24,11 +23,11 @@ interface MessageOptions {
 }
 
 interface MessageInjection {
-  info(content: string, options: MessageOptions): void
-  success(content: string, options: MessageOptions): void
-  warning(content: string, options: MessageOptions): void
-  error(content: string, options: MessageOptions): void
-  loading(content: string, options: MessageOptions): void
+  info: (content: string, options: MessageOptions) => void
+  success: (content: string, options: MessageOptions) => void
+  warning: (content: string, options: MessageOptions) => void
+  error: (content: string, options: MessageOptions) => void
+  loading: (content: string, options: MessageOptions) => void
 }
 
 interface MessageReactive {
@@ -61,21 +60,26 @@ export default defineComponent({
   setup (props) {
     const messageListRef = ref<PrivateMessageReactive[]>([])
     const messageRefs = ref<{ [key: string]: PrivateMessageRef }>({})
-    const api: MessageInjection = ([
-      'info',
-      'success',
-      'warning',
-      'error',
-      'loading'
-    ] as MessageType[]).reduce((api, type) => {
-      api[type] = function (content: string, options: MessageOptions) {
-        return create(content, { ...options, type })
+    const api: MessageInjection = {
+      info (content: string, options: MessageOptions) {
+        return create(content, { ...options, type: 'info' })
+      },
+      success (content: string, options: MessageOptions) {
+        return create(content, { ...options, type: 'success' })
+      },
+      warning (content: string, options: MessageOptions) {
+        return create(content, { ...options, type: 'warning' })
+      },
+      error (content: string, options: MessageOptions) {
+        return create(content, { ...options, type: 'error' })
+      },
+      loading (content: string, options: MessageOptions) {
+        return create(content, { ...options, type: 'loading' })
       }
-      return api
-    }, {} as MessageInjection)
+    }
     provide<ThemePropsReactive<MessageTheme>>('NMessageProvider', props)
     provide<MessageInjection>('message', api)
-    function create (content: string, options = {}) {
+    function create (content: string, options = {}): MessageReactive {
       const key = createId()
       const messageReactive = reactive({
         ...options,
@@ -88,7 +92,7 @@ export default defineComponent({
       messageListRef.value.push(messageReactive)
       return messageReactive
     }
-    function handleAfterLeave (key: string) {
+    function handleAfterLeave (key: string): void {
       messageListRef.value.splice(
         messageListRef.value.findIndex((message) => message.key === key),
         1
@@ -130,7 +134,7 @@ export default defineComponent({
           ]
         )
         : null,
-      defaultSlot && defaultSlot()
+      defaultSlot?.()
     ])
   }
 })

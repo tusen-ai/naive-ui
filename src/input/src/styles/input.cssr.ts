@@ -239,7 +239,7 @@ export default c([
   ['warning', 'error'].map(status => insideFormItem(status,
     cB('input', [
       cNotM('disabled', [
-        c('input', {
+        c('input, textarea', {
           caretColor: `var(--caret-color-${status})`
         }),
         cE('state-border', {

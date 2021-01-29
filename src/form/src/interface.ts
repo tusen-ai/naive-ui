@@ -17,7 +17,7 @@ export type FormItemRule = RuleItem & {
 
 export interface FormItemValidateOptions {
   trigger?: ValidationTrigger | string
-  callback?: Function
+  callback?: ValidateCallback
   shouldRuleBeApplied?: ApplyRule
   options?: ValidateOption
 }
@@ -55,7 +55,7 @@ export type Size = 'small' | 'medium' | 'large'
 export type ValidationTrigger = 'input' | 'change' | 'blur' | 'focus'
 
 export type ApplyRule = (rule: FormItemRule) => boolean
-export type ValidateCallback = Function
+export type ValidateCallback = (errors?: ErrorList) => void
 
 export type FormValidateCallback = (errors?: ErrorList[]) => void
 export type FormValidate = ((callback?: FormValidateCallback) => void) &

@@ -84,6 +84,9 @@ export default {
   methods: {
     handleValidateClick (e) {
       e.preventDefault()
+      const message = this.message.loading('Verifying', {
+        duration: 0
+      })
       this.$refs.form.validate((errors) => {
         if (!errors) {
           this.message.success('Valid')
@@ -91,6 +94,7 @@ export default {
           this.message.error('Invalid')
           console.log('errors', errors)
         }
+        message.destroy()
       })
     }
   }

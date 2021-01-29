@@ -29,6 +29,7 @@ export default c([
     display: inline-flex;
     align-items: center;
     white-space: nowrap;
+    vertical-align: middle;
   `,
   [
     c('&:hover', [

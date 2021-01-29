@@ -42,7 +42,7 @@ export default defineComponent({
     )
     return {
       handleClose () {
-        props.onClose()
+        props.onClose?.()
       },
       cssVars: computed(() => {
         const { type } = props
@@ -152,7 +152,10 @@ export default defineComponent({
   }
 })
 
-function createIconVNode (icon: () => VNodeChild, type: MessageType) {
+function createIconVNode (
+  icon: undefined | (() => VNodeChild),
+  type: MessageType
+): VNodeChild {
   if (typeof icon === 'function') {
     return icon()
   } else {
