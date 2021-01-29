@@ -40,7 +40,7 @@ export interface FormItemRef {
   validate: FormItemValidate
   restoreValidation: () => void
   path?: string
-  _validate: FormItemInternalValidate
+  internalValidate: FormItemInternalValidate
 }
 
 export type FormItemColRef = FormItemRef

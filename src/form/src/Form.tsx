@@ -71,7 +71,7 @@ export default defineComponent({
           for (const formItemInstance of formItemInstances) {
             if (formItemInstance.path) {
               formItemValidationPromises.push(
-                formItemInstance._validate(null, shouldRuleBeApplied)
+                formItemInstance.internalValidate(null, shouldRuleBeApplied)
               )
             }
           }
@@ -104,8 +104,8 @@ export default defineComponent({
       }
     }
     provide<FormInjection>('NForm', props)
+    provide('NFormRules', { formItems })
     return {
-      formItems,
       validate,
       restoreValidation
     }

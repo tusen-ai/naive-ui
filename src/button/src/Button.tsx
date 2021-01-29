@@ -113,7 +113,7 @@ export default defineComponent({
           if (buttonGroupSize) return buttonGroupSize
           const { mergedSize: formItemSize } = NFormItem || {}
           if (formItemSize) {
-            return formItemSize
+            return formItemSize.value
           }
           return 'medium'
         }

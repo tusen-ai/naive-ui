@@ -123,7 +123,11 @@ export default defineComponent({
   name: 'FormItem',
   props: formItemProps,
   setup (props) {
-    useInjectionInstanceCollection('NForm', 'formItems', toRef(props, 'path'))
+    useInjectionInstanceCollection(
+      'NFormRules',
+      'formItems',
+      toRef(props, 'path')
+    )
     const NForm = inject<FormInjection | null>('NForm', null)
     const formItemSizeRefs = formItemSize(props)
     const formItemMiscRefs = formItemMisc(props)
@@ -150,16 +154,16 @@ export default defineComponent({
       feedbackIdRef.value = createId()
     }
     function handleContentBlur (): void {
-      void _validate('blur')
+      void internalValidate('blur')
     }
     function handleContentChange (): void {
-      void _validate('change')
+      void internalValidate('change')
     }
     function handleContentFocus (): void {
-      void _validate('focus')
+      void internalValidate('focus')
     }
     function handleContentInput (): void {
-      void _validate('input')
+      void internalValidate('input')
     }
     // Resolve : ()
     // Reject  : (errors: AsyncValidator.ErrorList)
@@ -187,7 +191,7 @@ export default defineComponent({
         asyncValidatorOptions = options.options
       }
       return await new Promise((resolve, reject) => {
-        void _validate(
+        void internalValidate(
           trigger,
           shouldRuleBeApplied,
           asyncValidatorOptions
@@ -207,7 +211,7 @@ export default defineComponent({
         })
       })
     }
-    const _validate: FormItemInternalValidate = async (
+    const internalValidate: FormItemInternalValidate = async (
       trigger: ValidationTrigger | string | null = null,
       shouldRuleBeApplied: ApplyRule = () => true,
       options: ValidateOption = {
@@ -295,7 +299,7 @@ export default defineComponent({
     const exposedRef: FormItemRef = {
       validate,
       restoreValidation,
-      _validate
+      internalValidate
     }
     return {
       mergedRequired: mergedRequiredRef,
