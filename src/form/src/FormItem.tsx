@@ -131,6 +131,7 @@ export default defineComponent({
     const NForm = inject<FormInjection | null>('NForm', null)
     const formItemSizeRefs = formItemSize(props)
     const formItemMiscRefs = formItemMisc(props)
+    const { validationErrored: validationErroredRef } = formItemMiscRefs
     const {
       mergedRequired: mergedRequiredRef,
       mergedRules: mergedRulesRef
@@ -151,7 +152,10 @@ export default defineComponent({
     })
     function restoreValidation (): void {
       explainsRef.value = []
-      feedbackIdRef.value = createId()
+      validationErroredRef.value = false
+      if (props.feedback) {
+        feedbackIdRef.value = createId()
+      }
     }
     function handleContentBlur (): void {
       void internalValidate('blur')
@@ -239,6 +243,7 @@ export default defineComponent({
       const activeRules = (!trigger
         ? rules
         : rules.filter((rule) => {
+          // if (rule.trigger === undefined) return true
           if (Array.isArray(rule.trigger)) {
             return rule.trigger.includes(trigger)
           } else {
@@ -274,6 +279,7 @@ export default defineComponent({
           (errors, fields) => {
             if (errors?.length) {
               explainsRef.value = errors.map((error) => error.message)
+              validationErroredRef.value = true
               resolve({
                 valid: false,
                 errors
@@ -392,7 +398,7 @@ export default defineComponent({
         </div>
         {this.mergedShowFeedback ? (
           <div key={this.feedbackId} class="n-form-item-feedback-wrapper">
-            <Transition name="n-fade-down-Transition" mode="out-in">
+            <Transition name="n-fade-down-transition" mode="out-in">
               {{
                 default: () => {
                   const feedbacks = (

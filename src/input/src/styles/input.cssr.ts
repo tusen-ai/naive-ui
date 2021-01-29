@@ -239,6 +239,9 @@ export default c([
   ['warning', 'error'].map(status => insideFormItem(status,
     cB('input', [
       cNotM('disabled', [
+        c('input', {
+          caretColor: `var(--caret-color-${status})`
+        }),
         cE('state-border', {
           border: `var(--border-${status})`
         }),

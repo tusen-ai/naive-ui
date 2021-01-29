@@ -406,6 +406,15 @@
   - [x] form item default type explain
   - [x] selection focus style
   - [x] refactor site use store!!! singleton
+  - [ ] 文档网站主题切换
+  - [ ] 文档网站 demo 样式
+  - [ ] anchor bug！
+  - [ ] getKey select & autocomplete type safe & input event interface? onInput value | null or value
+  - [ ] vshow
+  - [ ] jsx focusin out
+  - [ ] inject key & value in type
+  - [ ] form item no label css
+  - [ ] unify treemate ignored
 
 ## Info
 

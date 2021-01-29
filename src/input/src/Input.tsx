@@ -569,6 +569,8 @@ export default defineComponent({
             paddingRight,
             textColor,
             caretColor,
+            caretColorError,
+            caretColorWarning,
             textDecorationColor,
             border,
             borderDisabled,
@@ -624,12 +626,14 @@ export default defineComponent({
           '--text-color-disabled': textColorDisabled,
           '--box-shadow-focus': boxShadowFocus,
           // form warning
+          '--caret-color-warning': caretColorWarning,
           '--color-focus-warning': colorFocusWarning,
           '--box-shadow-focus-warning': boxShadowFocusWarning,
           '--border-warning': borderWarning,
           '--border-focus-warning': borderFocusWarning,
           '--border-hover-warning': borderHoverWarning,
           // form error
+          '--caret-color-error': caretColorError,
           '--color-focus-error': colorFocusError,
           '--box-shadow-focus-error': boxShadowFocusError,
           '--border-error': borderError,
