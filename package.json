@@ -119,7 +119,7 @@
     "@vicons/ionicons-v5": "~0.0.3",
     "async-validator": "^3.4.0",
     "css-render": "^0.12.0",
-    "date-fns": "^2.9.0",
+    "date-fns": "^2.16.1",
     "evtd": "^0.1.0",
     "highlight.js": "^10.4.1",
     "lodash-es": "^4.17.15",
@@ -129,7 +129,7 @@
     "vfonts": "^0.0.1",
     "vooks": "0.0.8",
     "vue": "^3.0.5",
-    "vueuc": "^0.1.0"
+    "vueuc": "^0.1.1"
   },
   "husky": {
     "hooks": {

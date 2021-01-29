@@ -1,6 +1,6 @@
 import { defineComponent, h, PropType, provide, reactive, toRef } from 'vue'
 import { useMemo } from 'vooks'
-import { formatLength } from '../../_utils'
+import { formatLength, keysOf } from '../../_utils'
 import { useStyle } from '../../_mixins'
 import style from './styles/index.cssr'
 
@@ -10,28 +10,26 @@ export interface RowInjection {
   horizontalGutter: number
 }
 
+export const rowProps = {
+  gutter: {
+    type: [Array, Number, String] as PropType<
+    string | number | [number, number]
+    >,
+    default: 0
+  },
+  flex: {
+    type: Boolean,
+    default: false
+  },
+  alignItems: String,
+  justifyContent: String
+} as const
+
+export const rowPropKeys = keysOf(rowProps)
+
 export default defineComponent({
   name: 'Row',
-  props: {
-    gutter: {
-      type: [Array, Number, String] as PropType<
-      string | number | [number, number]
-      >,
-      default: 0
-    },
-    flex: {
-      type: Boolean,
-      default: false
-    },
-    alignItems: {
-      type: String,
-      default: undefined
-    },
-    justifyContent: {
-      type: String,
-      default: undefined
-    }
-  },
+  props: rowProps,
   setup (props) {
     useStyle('Grid', style)
     const verticalGutterRef = useMemo(() => {

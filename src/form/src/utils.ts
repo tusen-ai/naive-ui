@@ -1,49 +1,58 @@
-import { inject, computed, ref } from 'vue'
+import { inject, computed, ref, ComputedRef } from 'vue'
 import { get } from 'lodash-es'
 import { pxfy } from 'seemly'
+import { FormItemProps } from './FormItem'
+import { Size, FormInjection, FormItemRule } from './interface'
 
-export function formItemSize (props) {
-  const NForm = inject('NForm')
+export function formItemSize (
+  props: FormItemProps
+): {
+    mergedSize: ComputedRef<Size>
+  } {
+  const NForm = inject<FormInjection | null>('NForm', null)
   return {
     mergedSize: computed(() => {
       if (props.size !== undefined) return props.size
-      if (NForm && NForm.size !== undefined) return NForm.size
+      if (NForm?.size !== undefined) return NForm.size
       return 'medium'
     })
   }
 }
 
-export function formItemMisc (props) {
-  const NForm = inject('NForm')
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export function formItemMisc (props: FormItemProps) {
+  const NForm = inject<FormInjection | null>('NForm', null)
   const mergedLabelWidthRef = computed(() => {
     if (mergedLabelPlacementRef.value === 'top') return
     const { labelWidth } = props
     if (labelWidth !== undefined) return pxfy(labelWidth)
-    if (NForm && NForm.labelWidth !== undefined) return pxfy(NForm.labelWidth)
+    if (NForm?.labelWidth !== undefined) return pxfy(NForm.labelWidth)
     return undefined
   })
   const mergedLabelStyleRef = computed(() => {
-    return {
-      width: mergedLabelWidthRef.value,
-      ...props.labelStyle
-    }
+    return [
+      props.labelStyle,
+      {
+        width: mergedLabelWidthRef.value
+      }
+    ]
   })
   const mergedLabelPlacementRef = computed(() => {
     const { labelPlacement } = props
     if (labelPlacement !== undefined) return labelPlacement
-    if (NForm && NForm.labelPlacement) return NForm.labelPlacement
+    if (NForm?.labelPlacement) return NForm.labelPlacement
     return 'top'
   })
   const mergedLabelAlignRef = computed(() => {
     const { labelAlign } = props
     if (labelAlign) return labelAlign
-    if (NForm && NForm.labelAlign) return NForm.labelAlign
+    if (NForm?.labelAlign) return NForm.labelAlign
     return 'left'
   })
   const mergedShowRequireMarkRef = computed(() => {
     const { showRequireMark } = props
     if (showRequireMark !== undefined) return showRequireMark
-    if (NForm && NForm.showRequireMark !== undefined) {
+    if (NForm?.showRequireMark !== undefined) {
       return NForm.showRequireMark
     }
     return undefined
@@ -58,7 +67,7 @@ export function formItemMisc (props) {
   const mergedShowFeedbackRef = computed(() => {
     const { showFeedback } = props
     if (showFeedback) return showFeedback
-    if (NForm && NForm.showFeedback) return NForm.showFeedback
+    if (NForm?.showFeedback) return NForm.showFeedback
     return true
   })
   return {
@@ -72,8 +81,9 @@ export function formItemMisc (props) {
   }
 }
 
-export function formItemRule (props) {
-  const NForm = inject('NForm')
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export function formItemRule (props: FormItemProps) {
+  const NForm = inject<FormInjection | null>('NForm', null)
   const compatibleRulePathRef = computed(() => {
     const { rulePath } = props
     if (rulePath !== undefined) return rulePath
@@ -88,14 +98,18 @@ export function formItemRule (props) {
       if (Array.isArray(rule)) rules.push(...rule)
       else rules.push(rule)
     }
-    const { rules: formRules } = NForm
-    if (formRules !== undefined) {
-      const formRule = get(formRules, compatibleRulePathRef.value)
-      if (formRule !== undefined) {
-        if (Array.isArray(formRule)) {
-          rules.push(...formRule)
-        } else {
-          rules.push(formRule)
+    if (NForm) {
+      const { rules: formRules } = NForm
+      const { value: rulePath } = compatibleRulePathRef
+      if (formRules !== undefined && rulePath !== undefined) {
+        const formRule = get(formRules, rulePath)
+        if (formRule !== undefined) {
+          if (Array.isArray(formRule)) {
+            rules.push(...formRule)
+          } else {
+            // terminate object must be a form item rule
+            rules.push(formRule as FormItemRule)
+          }
         }
       }
     }

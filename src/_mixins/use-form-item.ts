@@ -3,8 +3,8 @@ import { computed, inject, provide, onBeforeUnmount, ComputedRef } from 'vue'
 type FormItemSize = 'small' | 'medium' | 'large'
 type AllowedSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge'
 
-interface FormItemInjection {
-  mergedSize: FormItemSize
+export interface FormItemInjection {
+  mergedSize: ComputedRef<FormItemSize>
   restoreValidation: () => void
   handleContentBlur: () => void
   handleContentFocus: () => void
@@ -45,11 +45,11 @@ export default function useFormItem<T extends AllowedSize = FormItemSize> (
         if (size) return size
         if (NFormItem) {
           const { mergedSize } = NFormItem
-          if (mergedSize) {
-            return (mergedSize as unknown) as T
+          if (mergedSize.value !== undefined) {
+            return mergedSize.value as T
           }
         }
-        return (defaultSize as unknown) as T
+        return defaultSize as T
       }
   )
   onBeforeUnmount(() => {

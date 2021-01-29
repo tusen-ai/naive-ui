@@ -1,25 +1,28 @@
-import { commonLight } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/new-common'
 import commonVariables from './_common'
+import type { FormTheme } from './light'
 
-export default {
+const formItemDark: FormTheme = {
   name: 'Form',
-  common: commonLight,
+  common: commonDark,
   self (vars) {
     const {
-      textColor1,
+      textColor1Overlay,
       errorColor,
       warningColor,
       lineHeight,
-      textColor3
+      textColor3Overlay
     } = vars
     return {
       ...commonVariables,
       lineHeight,
-      labelTextColor: textColor1,
+      labelTextColor: textColor1Overlay,
       asteriskColor: errorColor,
       feedbackTextColorError: errorColor,
       feedbackTextColorWarning: warningColor,
-      feedbackTextColor: textColor3
+      feedbackTextColor: textColor3Overlay
     }
   }
 }
+
+export default formItemDark

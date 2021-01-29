@@ -1,79 +1,34 @@
 import { h, computed, defineComponent, inject, PropType } from 'vue'
-import { formatLength } from '../../_utils'
+import { formatLength, keysOf } from '../../_utils'
 import { useStyle } from '../../_mixins'
 import type { RowInjection } from './Row'
 import style from './styles/index.cssr'
+import { Span } from './interface'
 
-type Span =
-  | 1
-  | 2
-  | 3
-  | 4
-  | 5
-  | 6
-  | 7
-  | 8
-  | 9
-  | 10
-  | 11
-  | 12
-  | 13
-  | 14
-  | 15
-  | 16
-  | 17
-  | 18
-  | 19
-  | 20
-  | 21
-  | 22
-  | 23
-  | 24
-  | '1'
-  | '2'
-  | '3'
-  | '4'
-  | '5'
-  | '6'
-  | '7'
-  | '8'
-  | '9'
-  | '10'
-  | '11'
-  | '12'
-  | '13'
-  | '14'
-  | '15'
-  | '16'
-  | '17'
-  | '18'
-  | '19'
-  | '20'
-  | '21'
-  | '22'
-  | '23'
-  | '24'
+export const colProps = {
+  span: {
+    type: [String, Number] as PropType<Span>,
+    default: 1
+  },
+  push: {
+    type: [String, Number] as PropType<Span>,
+    default: 0
+  },
+  pull: {
+    type: [String, Number] as PropType<Span>,
+    default: 0
+  },
+  offset: {
+    type: [String, Number] as PropType<Span>,
+    default: 0
+  }
+} as const
+
+export const colPropKeys = keysOf(colProps)
 
 export default defineComponent({
   name: 'Col',
-  props: {
-    span: {
-      type: [String, Number] as PropType<Span>,
-      default: 1
-    },
-    push: {
-      type: [String, Number] as PropType<Span>,
-      default: 0
-    },
-    pull: {
-      type: [String, Number] as PropType<Span>,
-      default: 0
-    },
-    offset: {
-      type: [String, Number] as PropType<Span>,
-      default: 0
-    }
-  },
+  props: colProps,
   setup (props) {
     useStyle('Grid', style)
     const NRow = inject<RowInjection>('NRow') as RowInjection
