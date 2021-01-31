@@ -35,6 +35,12 @@ export function createCustomWidthStyle (
       width: formatLength(width)
     }
   }
+  if (column.type === 'selection') {
+    return {
+      width: '40px'
+    }
+  }
+
   return undefined
 }
 
@@ -95,11 +101,20 @@ function getNextOrderOf (order: SortOrder): SortOrder {
 }
 
 export function createNextSorter (
+  column: TableColumnInfo,
   currentSortState: SortState | null
 ): SortState | null {
-  if (currentSortState === null) return null
-  return {
-    ...currentSortState,
-    order: getNextOrderOf(currentSortState.order)
+  if (column.sorter === undefined) return null
+  if (currentSortState === null || currentSortState.columnKey !== column.key) {
+    return {
+      columnKey: column.key,
+      sorter: column.sorter,
+      order: getNextOrderOf(false)
+    }
+  } else {
+    return {
+      ...currentSortState,
+      order: getNextOrderOf(currentSortState.order)
+    }
   }
 }

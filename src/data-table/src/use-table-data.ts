@@ -85,9 +85,9 @@ export function useTableData (props: DataTableProps) {
     const columnsWithControlledSortOrder = props.columns.filter(
       (column) =>
         column.sorter !== undefined &&
-        (column.sortOrder === false ||
-          column.sortOrder === 'ascend' ||
-          column.sortOrder === 'descend')
+        // skip column.sortOrder === false
+        // it doesn't affect sort state
+        (column.sortOrder === 'ascend' || column.sortOrder === 'descend')
     )
     const columnToSort = columnsWithControlledSortOrder[0]
     if (columnToSort) {
@@ -101,7 +101,7 @@ export function useTableData (props: DataTableProps) {
         sorter: columnToSort.sorter!
       }
     }
-    if (columnsWithControlledSortOrder.length) return null
+    if (!columnsWithControlledSortOrder.length) return null
     return uncontrolledActiveSorterRef.value
   })
 
@@ -118,7 +118,7 @@ export function useTableData (props: DataTableProps) {
         column.filterOptionValues || column.filterOptionValue || null
     })
     const activeFilters = Object.assign(
-      createShallowClonedObject(uncontrolledActiveFiltersRef),
+      createShallowClonedObject(uncontrolledActiveFiltersRef.value),
       controlledActiveFilters
     )
     return activeFilters
@@ -261,7 +261,7 @@ export function useTableData (props: DataTableProps) {
     const { 'onUpdate:page': onUpdatePage, onPageChange } = props
     if (onUpdatePage) call(onUpdatePage, page)
     if (onPageChange) call(onPageChange, page)
-    uncontrolledPageSizeRef.value = page
+    uncontrolledCurrentPageRef.value = page
   }
   function doUpdatePageSize (pageSize: number): void {
     const { 'onUpdate:pageSize': onUpdatePageSize, onPageSizeChange } = props

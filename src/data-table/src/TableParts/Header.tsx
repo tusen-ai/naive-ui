@@ -1,4 +1,5 @@
 import { h, defineComponent, inject, PropType } from 'vue'
+import { happensIn } from 'seemly'
 import { NCheckbox } from '../../../checkbox'
 import SortButton from '../HeaderButton/SortButton'
 import FilterButton from '../HeaderButton/FilterButton'
@@ -34,16 +35,10 @@ export default defineComponent({
       }
     }
     function handleHeaderClick (e: MouseEvent, column: TableColumnInfo): void {
-      // let filterRef = this.$refs[`${column.key}Filter`]
-      // if (Array.isArray(filterRef)) filterRef = filterRef[0]
-      // const filterElement = filterRef && filterRef.$el
-      // if (filterElement && filterElement.contains(e.target)) return
-
-      // I need to make filter click do not trigger resort
-
+      if (happensIn(e, 'dataTableFilter')) return
       if (!isColumnSortable(column)) return
       const activeSorter = NDataTable.mergedActiveSorter
-      const nextSorter = createNextSorter(activeSorter)
+      const nextSorter = createNextSorter(column, activeSorter)
       NDataTable.doUpdateSorter(nextSorter)
     }
     return {
@@ -107,7 +102,8 @@ export default defineComponent({
                       'n-data-table-th--shadow-before':
                         rightActiveFixedColKey === column.key,
                       'n-data-table-th--selection': column.type === 'selection'
-                    }
+                    },
+                    column.className
                   ]}
                   onClick={(e) => handleHeaderClick(e, column)}
                 >

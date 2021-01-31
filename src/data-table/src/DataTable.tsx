@@ -34,7 +34,8 @@ import {
   TableNode,
   OnUpdateFilters,
   MainTableRef,
-  DataTableInjection
+  DataTableInjection,
+  DataTableRef
 } from './interface'
 import style from './styles/index.cssr'
 
@@ -200,7 +201,13 @@ export default defineComponent({
       mergedActiveFilters,
       mergedActiveSorter,
       doUpdateFilters,
-      doUpdateSorter
+      doUpdateSorter,
+      filter,
+      filters,
+      clearFilter,
+      clearFilters,
+      page,
+      sort
     } = useTableData(props)
     const {
       doCheckAll,
@@ -247,6 +254,15 @@ export default defineComponent({
         renderSorter: toRef(props, 'renderSorter'),
         renderFilter: toRef(props, 'renderFilter'),
         rowKey: toRef(props, 'rowKey'),
+        filterMenuCssVars: computed(() => {
+          const {
+            self: { actionDividerColor }
+          } = themeRef.value
+          // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+          return {
+            '--action-divider-color': actionDividerColor
+          } as CSSProperties
+        }),
         doUpdateFilters,
         doUpdateSorter,
         doUpdateCheckedRowKeys,
@@ -256,11 +272,20 @@ export default defineComponent({
         handleTableBodyScroll
       })
     )
+    const exposedMethods: DataTableRef = {
+      filter,
+      filters,
+      clearFilter,
+      clearFilters,
+      page,
+      sort
+    }
     return {
       mainTableInstRef,
       mergedTheme: themeRef,
       paginatedData: paginatedDataRef,
       mergedPagination,
+      ...exposedMethods,
       cssVars: computed(() => {
         const { size } = props
         const {

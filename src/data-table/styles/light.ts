@@ -28,10 +28,12 @@ const self = (vars: ThemeCommonVars) => {
     lineHeight,
     fontSizeSmall,
     fontSizeMedium,
-    fontSizeLarge
+    fontSizeLarge,
+    dividerColor
   } = vars
   return {
     ...commonVariables,
+    actionDividerColor: dividerColor,
     lineHeight,
     borderRadius,
     fontSizeSmall,

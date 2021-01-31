@@ -27,6 +27,7 @@ const fixedColumnStyle = createFixedColumnStyle()
 // --th-icon-color
 // --th-icon-color-active
 // --filter-size
+// --action-divider-color
 export default c([
   cB('data-table', {
     width: '100%',
@@ -182,9 +183,8 @@ export default c([
         cM('selection', {
           lineHeight: 0
         }),
-        cM('ellipsis', `
+        cE('ellipsis', `
           display: inline-block;
-          vertical-align: middle;
           text-overflow: ellipsis;
           overflow: hidden;
           white-space: nowrap;
@@ -316,6 +316,7 @@ export default c([
       display: flex;
       flex-wrap: nowrap;
       justify-content: space-evenly;
+      border-top: 1px solid var(--action-divider-color);
     `, [
       cB('button', [
         c('&:not(:last-child)', {

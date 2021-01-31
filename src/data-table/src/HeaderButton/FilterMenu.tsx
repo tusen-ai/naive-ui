@@ -14,6 +14,7 @@ import {
 } from '../interface'
 
 export default defineComponent({
+  name: 'DataTableFilterMenu',
   props: {
     column: {
       type: Object as PropType<TableColumnInfo>,
@@ -41,7 +42,7 @@ export default defineComponent({
       type: Function as PropType<() => void>,
       required: true
     },
-    onCancel: {
+    onClear: {
       type: Function as PropType<() => void>,
       required: true
     },
@@ -106,7 +107,7 @@ export default defineComponent({
       } else {
         doChange(null)
       }
-      props.onCancel()
+      props.onClear()
     }
     return {
       NDataTable,

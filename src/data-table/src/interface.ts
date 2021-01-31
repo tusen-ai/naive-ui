@@ -1,4 +1,4 @@
-import { VNodeChild } from 'vue'
+import { CSSProperties, VNodeChild } from 'vue'
 import { NaiveLocale } from '../../locales'
 import { MergedTheme } from '../../_mixins'
 import { DataTableTheme } from '../styles'
@@ -79,6 +79,7 @@ export interface DataTableInjection {
   rowClassName?: string | CreateRowClassName
   mergedCheckedRowKeys: RowKey[]
   locale: NaiveLocale['DataTable']
+  filterMenuCssVars: CSSProperties
   renderSorter?: SorterRender
   renderFilter?: FilterRender
   rowKey?: CreateRowKey
@@ -151,3 +152,12 @@ export type OnFilterMenuChange = <
 export type OnFilterMenuChangeImpl = (
   value: FilterOptionValue[] | FilterOptionValue | null
 ) => void
+
+export interface DataTableRef {
+  filter: (filters: FilterState | null) => void
+  filters: (filters: FilterState | null) => void
+  clearFilter: () => void
+  clearFilters: () => void
+  page: (page: number) => void
+  sort: (columnKey: ColumnKey, order: SortOrder) => void
+}

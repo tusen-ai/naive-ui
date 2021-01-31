@@ -47,6 +47,7 @@ export default {
         },
         onPageSizeChange: (pageSize) => {
           this.pagination.pageSize = pageSize
+          this.pagination.page = 1
         }
       }
     }

@@ -44,6 +44,7 @@ const dataTableDark: DataTableTheme = {
     } = vars
     return {
       ...commonVariables,
+      actionDividerColor: dividerColorOverlay,
       borderRadius,
       lineHeight,
       fontSizeSmall,

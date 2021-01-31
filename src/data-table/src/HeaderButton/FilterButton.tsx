@@ -24,6 +24,7 @@ function createFilterState (
 }
 
 export default defineComponent({
+  name: 'DataTableFilterButton',
   props: {
     column: {
       type: Object as PropType<TableColumnInfo>,
@@ -107,13 +108,16 @@ export default defineComponent({
         {{
           trigger: () =>
             this.mergedRenderFilter ? (
-              <RenderFilter
-                render={this.mergedRenderFilter}
-                active={this.active}
-                show={this.showPopover}
-              />
+              <div data-data-table-filter>
+                <RenderFilter
+                  render={this.mergedRenderFilter}
+                  active={this.active}
+                  show={this.showPopover}
+                />
+              </div>
             ) : (
               <div
+                data-data-table-filter
                 class={[
                   'n-data-table-filter',
                   {
@@ -127,13 +131,14 @@ export default defineComponent({
             ),
           default: () => (
             <NDataTableFilterMenu
+              style={NDataTable.filterMenuCssVars}
               radioGroupName={String(this.column.key)}
               multiple={this.filterMultiple}
               value={this.mergedFilterValue}
               options={this.options}
               column={this.column}
               onChange={this.handleFilterChange}
-              onCancel={this.handleFilterMenuCancel}
+              onClear={this.handleFilterMenuCancel}
               onConfirm={this.handleFilterMenuConfirm}
             />
           )

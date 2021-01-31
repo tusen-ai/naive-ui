@@ -116,7 +116,7 @@ export default defineComponent({
     const { locale } = useLocale('Pagination')
     const selfRef = ref<HTMLElement | null>(null)
     const jumperRef = ref<InputRef | null>(null)
-    const compitablePageCountRef = useCompitable(props, ['total', 'pageCount'])
+    const compitablePageCountRef = useCompitable(props, ['pageCount', 'total'])
     const jumperValueRef = ref('')
     const uncontrolledPageRef = ref(props.defaultPage)
     const uncontrolledPageSizeRef = ref(props.defaultPageSize)
