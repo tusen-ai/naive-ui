@@ -1,3 +1,4 @@
+import { CNode } from 'css-render'
 import { c, cB, cE, cM, cNotM, insideModal } from '../../../_utils/cssr'
 
 const fixedColumnStyle = createFixedColumnStyle()
@@ -162,20 +163,19 @@ export default c([
           })
         ])
       ]),
-      cB('data-table-th', {
-        position: 'relative',
-        textAlign: 'start',
-        boxSizing: 'border-box',
-        backgroundColor: 'var(--th-color)',
-        borderColor: 'var(--border-color)',
-        color: 'var(--th-text-color)',
-        transition: `
+      cB('data-table-th', `
+        position: relative;
+        text-align: start;
+        box-sizing: border-box;
+        background-color: var(--th-color);
+        border-color: var(--border-color);
+        color: var(--th-text-color);
+        transition:
           border-color .3s var(--bezier),
           color .3s var(--bezier),
           background-color .3s var(--bezier);
-        `,
-        fontWeight: 'var(--th-font-weight)'
-      }, [
+        font-weight: var(--th-font-weight);
+      `, [
         cM('filterable', {
           paddingRight: '36px'
         }),
@@ -331,7 +331,7 @@ export default c([
   createStyleInsideModal()
 ])
 
-function createStyleInsideModal () {
+function createStyleInsideModal (): CNode {
   return insideModal(cB('data-table', [
     cB('data-table-table', {
       backgroundColor: 'var(--td-color-modal)'
@@ -406,7 +406,7 @@ function createStyleInsideModal () {
   ]))
 }
 
-function createFixedColumnStyle () {
+function createFixedColumnStyle (): CNode[] {
   return [
     cM('fixed-left', {
       left: 0,

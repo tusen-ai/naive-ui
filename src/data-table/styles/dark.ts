@@ -1,35 +1,36 @@
 import { composite } from 'seemly'
 import commonVariables from './_common'
-import { buttonLight } from '../../button/styles'
-import { checkboxLight } from '../../checkbox/styles'
-import { radioLight } from '../../radio/styles'
-import { paginationLight } from '../../pagination/styles'
-import { scrollbarLight } from '../../scrollbar/styles'
-import { dividerLight } from '../../divider/styles'
-import { spinLight } from '../../spin/styles'
+import { buttonDark } from '../../button/styles'
+import { checkboxDark } from '../../checkbox/styles'
+import { radioDark } from '../../radio/styles'
+import { paginationDark } from '../../pagination/styles'
+import { scrollbarDark } from '../../scrollbar/styles'
+import { popoverDark } from '../../popover/styles'
+import { spinDark } from '../../spin/styles'
 import { emptyDark } from '../../empty/styles'
-import { commonLight } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/new-common'
+import type { DataTableTheme } from './light'
 
-export default {
+const dataTableDark: DataTableTheme = {
   name: 'DataTable',
-  common: commonLight,
+  common: commonDark,
   peers: {
-    Button: buttonLight,
-    Checkbox: checkboxLight,
-    Radio: radioLight,
-    Pagination: paginationLight,
-    Scrollbar: scrollbarLight,
-    Divider: dividerLight,
-    Spin: spinLight,
-    Empty: emptyDark
+    Button: buttonDark,
+    Checkbox: checkboxDark,
+    Radio: radioDark,
+    Pagination: paginationDark,
+    Scrollbar: scrollbarDark,
+    Spin: spinDark,
+    Empty: emptyDark,
+    Popover: popoverDark
   },
   self (vars) {
     const {
       cardColor,
       modalColor,
       dividerColorOverlay,
-      textColor2,
-      textColor1,
+      textColor2Overlay,
+      textColor1Overlay,
       tableHeaderColorOverlay,
       tableColorHoverOverlay,
       iconColorOverlay,
@@ -43,8 +44,8 @@ export default {
     } = vars
     return {
       ...commonVariables,
-      lineHeight,
       borderRadius,
+      lineHeight,
       fontSizeSmall,
       fontSizeMedium,
       fontSizeLarge,
@@ -56,8 +57,8 @@ export default {
         tableHeaderColorOverlay
       ),
       tdColor: cardColor,
-      tdTextColor: textColor2,
-      thTextColor: textColor1,
+      tdTextColor: textColor2Overlay,
+      thTextColor: textColor1Overlay,
       thFontWeight: fontWeightStrong,
       thButtonColorHover: tableColorHoverOverlay,
       thIconColor: iconColorOverlay,
@@ -74,3 +75,5 @@ export default {
     }
   }
 }
+
+export default dataTableDark

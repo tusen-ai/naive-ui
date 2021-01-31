@@ -5,8 +5,10 @@ import {
   PropType,
   computed,
   reactive,
-  toRef
+  toRef,
+  ref
 } from 'vue'
+import { useMergedState } from 'vooks'
 import { useFormItem } from '../../_mixins'
 import { warn, call, getSlot, MaybeArray } from '../../_utils'
 
@@ -24,8 +26,9 @@ export default defineComponent({
       type: String as PropType<'small' | 'medium' | 'large'>,
       default: undefined
     },
-    value: {
-      type: Array as PropType<Array<string | number>>,
+    value: Array as PropType<Array<string | number> | null>,
+    defaultValue: {
+      type: Array as PropType<Array<string | number> | null>,
       default: null
     },
     disabled: {
@@ -33,12 +36,12 @@ export default defineComponent({
       default: false
     },
     // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': {
-      type: [Function, Array] as PropType<
-      MaybeArray<(value: Array<string | number>) => void> | undefined
-      >,
-      default: undefined
-    },
+    'onUpdate:value': [Function, Array] as PropType<
+    MaybeArray<(value: Array<string | number>) => void>
+    >,
+    onUpdateValue: [Function, Array] as PropType<
+    MaybeArray<(value: Array<string | number>) => void>
+    >,
     // deprecated
     onChange: {
       type: [Function, Array] as PropType<
@@ -58,8 +61,14 @@ export default defineComponent({
   },
   setup (props) {
     const formItem = useFormItem(props)
+    const uncontrolledValueRef = ref(props.defaultValue)
+    const controlledValueRef = computed(() => props.value)
+    const mergedValueRef = useMergedState(
+      controlledValueRef,
+      uncontrolledValueRef
+    )
     const valueSetRef = computed<Set<string | number>>(() => {
-      if (Array.isArray(props.value)) return new Set(props.value)
+      if (Array.isArray(mergedValueRef.value)) { return new Set(mergedValueRef.value) }
       return new Set()
     })
     function toggleCheckbox (
@@ -67,14 +76,19 @@ export default defineComponent({
       checkboxValue: string | number
     ): void {
       const { nTriggerFormInput, nTriggerFormChange } = formItem
-      const { onChange, 'onUpdate:value': onUpdateValue } = props
-      if (Array.isArray(props.value)) {
-        const groupValue = Array.from(props.value)
+      const {
+        onChange,
+        'onUpdate:value': _onUpdateValue,
+        onUpdateValue
+      } = props
+      if (Array.isArray(mergedValueRef.value)) {
+        const groupValue = Array.from(mergedValueRef.value)
         const index = groupValue.findIndex((value) => value === checkboxValue)
         if (checked) {
           if (!~index) {
             groupValue.push(checkboxValue)
             if (onUpdateValue) call(onUpdateValue, groupValue)
+            if (_onUpdateValue) call(_onUpdateValue, groupValue)
             nTriggerFormInput()
             nTriggerFormChange()
             // deprecated

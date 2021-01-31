@@ -154,6 +154,9 @@ export const popoverProps = {
   'onUpdate:show': Function as PropType<
   MaybeArray<(value: boolean) => void> | undefined
   >,
+  onUpdateShow: Function as PropType<
+  MaybeArray<(value: boolean) => void> | undefined
+  >,
   // deprecated
   onShow: {
     type: Function as PropType<
@@ -228,8 +231,16 @@ export default defineComponent({
     const hideTimerIdRef = ref<number | null>(null)
     // methods
     function doUpdateShow (value: boolean): void {
-      const { 'onUpdate:show': onUpdateShow, onShow, onHide } = props
+      const {
+        'onUpdate:show': _onUpdateShow,
+        onUpdateShow,
+        onShow,
+        onHide
+      } = props
       uncontrolledShowRef.value = value
+      if (_onUpdateShow) {
+        call(_onUpdateShow, value)
+      }
       if (onUpdateShow) {
         call(onUpdateShow, value)
       }

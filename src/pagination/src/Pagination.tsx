@@ -7,7 +7,8 @@ import {
   watch,
   defineComponent,
   PropType,
-  CSSProperties
+  CSSProperties,
+  ExtractPropTypes
 } from 'vue'
 import { useCompitable, useMergedState } from 'vooks'
 import { NSelect } from '../../select'
@@ -26,87 +27,83 @@ import { paginationLight, PaginationTheme } from '../styles'
 import { pageItems } from './utils'
 import type { PageItem } from './utils'
 import style from './styles/index.cssr'
+import { call, MaybeArray } from '../../_utils'
+
+const paginationProps = {
+  page: {
+    type: Number,
+    required: undefined
+  },
+  defaultPage: {
+    type: Number,
+    default: 1
+  },
+  pageCount: {
+    type: Number,
+    validator: (value: any) => {
+      return Number.isInteger(value) && value > 0
+    },
+    default: undefined
+  },
+  defaultPageCount: {
+    type: Number,
+    validator: (value: any) => {
+      return Number.isInteger(value) && value > 0
+    },
+    default: 1
+  },
+  showSizePicker: {
+    type: Boolean,
+    default: false
+  },
+  pageSize: Number as PropType<number>,
+  defaultPageSize: {
+    type: Number as PropType<number>,
+    default: 10
+  },
+  pageSizes: {
+    type: Array as PropType<number[]>,
+    default: () => [10]
+  },
+  showQuickJumper: {
+    type: Boolean,
+    default: false
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  pageSlot: {
+    type: Number,
+    default: 9
+  },
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:page': Function as PropType<MaybeArray<(page: number) => void>>,
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:pageSize': Function as PropType<
+  MaybeArray<(pageSize: number) => void>
+  >,
+  // deprecated
+  onPageSizeChange: Function as PropType<
+  MaybeArray<(pageSize: number) => void>
+  >,
+  onChange: Function as PropType<MaybeArray<(page: number) => void>>,
+  total: {
+    type: Number,
+    validator: (value: any) => {
+      return Number.isInteger(value) && value > 0
+    },
+    default: undefined
+  }
+} as const
+
+export type PaginationProps = Partial<ExtractPropTypes<typeof paginationProps>>
 
 export default defineComponent({
   name: 'Pagination',
   props: {
     ...(useTheme.props as ThemeProps<PaginationTheme>),
-    page: {
-      type: Number,
-      required: undefined
-    },
-    defaultPage: {
-      type: Number,
-      default: 1
-    },
-    pageCount: {
-      type: Number,
-      validator: (value: any) => {
-        return Number.isInteger(value) && value > 0
-      },
-      default: undefined
-    },
-    defaultPageCount: {
-      type: Number,
-      validator: (value: any) => {
-        return Number.isInteger(value) && value > 0
-      },
-      default: 1
-    },
-    showSizePicker: {
-      type: Boolean,
-      default: false
-    },
-    pageSize: {
-      type: Number,
-      default: undefined
-    },
-    defaultPageSize: {
-      type: Number,
-      default: null
-    },
-    pageSizes: {
-      type: Array as PropType<number[]>,
-      default: () => []
-    },
-    showQuickJumper: {
-      type: Boolean,
-      default: false
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    pageSlot: {
-      type: Number,
-      default: 9
-    },
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:page': {
-      type: Function,
-      default: undefined
-    },
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:pageSize': {
-      type: Function,
-      default: undefined
-    },
-    // deprecated
-    onPageSizeChange: {
-      type: Function,
-      default: undefined
-    },
-    onChange: {
-      type: Function,
-      default: undefined
-    },
-    total: {
-      type: Number,
-      validator: (value: any) => {
-        return Number.isInteger(value) && value > 0
-      },
-      default: undefined
-    }
+    ...paginationProps
   },
   setup (props) {
     const themeRef = useTheme(
@@ -163,16 +160,16 @@ export default defineComponent({
     function doUpdatePage (page: number): void {
       if (page === mergedPageRef.value) return
       const { 'onUpdate:page': onUpdatePage, onChange } = props
-      if (onUpdatePage) onUpdatePage(page)
+      if (onUpdatePage) call(onUpdatePage, page)
       // deprecated
-      if (onChange) onChange(page)
+      if (onChange) call(onChange, page)
     }
     function doUpdatePageSize (pageSize: number): void {
       if (pageSize === mergedPageSizeRef.value) return
       const { 'onUpdate:pageSize': onUpdatePageSize, onPageSizeChange } = props
-      if (onUpdatePageSize) onUpdatePageSize(pageSize)
+      if (onUpdatePageSize) call(onUpdatePageSize, pageSize)
       // deprecated
-      if (onPageSizeChange) onPageSizeChange(pageSize)
+      if (onPageSizeChange) call(onPageSizeChange, pageSize)
     }
     function forward (): void {
       if (props.disabled) return
@@ -489,7 +486,7 @@ export default defineComponent({
             <NInput
               ref="jumperRef"
               value={jumperValue}
-              onInput={handleJumperInput}
+              onUpdateValue={handleJumperInput}
               size={inputSize}
               placeholder=""
               disabled={disabled}
