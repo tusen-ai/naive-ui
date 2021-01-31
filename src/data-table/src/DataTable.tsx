@@ -18,7 +18,7 @@ import { NPagination } from '../../pagination'
 import { PaginationProps } from '../../pagination/src/Pagination'
 import { warn, createKey, MaybeArray } from '../../_utils'
 import { dataTableLight, DataTableTheme } from '../styles'
-import NBaseTable from './BaseTable'
+import NMainTable from './MainTable'
 import { useCheck } from './use-check'
 import { useTableData } from './use-table-data'
 import { useScroll } from './use-scroll'
@@ -366,7 +366,7 @@ export default defineComponent({
           {{
             default: () => [
               <div class="n-data-table-wrapper">
-                <NBaseTable
+                <NMainTable
                   ref="mainTableInstRef"
                   maxHeight={this.maxHeight}
                   minHeight={this.minHeight}
@@ -392,7 +392,7 @@ export default defineComponent({
                         </div>
                       ) : null
                   }}
-                </NBaseTable>
+                </NMainTable>
               </div>,
               this.pagination ? (
                 <div class="n-data-table__pagination">

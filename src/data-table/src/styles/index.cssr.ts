@@ -124,6 +124,10 @@ export default c([
         cB('scrollbar-content', {
           overflow: 'visible'
         })
+      ]),
+      cM('transition-disabled', [
+        cB('data-table-th', [c('&::after, &::before', { transition: 'none' })]),
+        cB('data-table-td', [c('&::after, &::before', { transition: 'none' })])
       ])
     ]),
     cB('data-table-table', `

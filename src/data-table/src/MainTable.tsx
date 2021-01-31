@@ -44,6 +44,11 @@ export default defineComponent({
     const headerInstRef = ref<MainTableHeaderRef | null>(null)
     const bodyInstRef = ref<MainTableBodyRef | null>(null)
 
+    const { rightFixedColumns, leftFixedColumns } = NDataTable
+    const fixedStateInitializedRef = ref(
+      !(leftFixedColumns.length || rightFixedColumns.length)
+    )
+
     const bodyStyleRef = computed(() => {
       return {
         maxHeight: formatLength(bodyMaxHeightRef.value),
@@ -55,6 +60,9 @@ export default defineComponent({
       deriveBodyMinMaxHeight(entry.contentRect.height)
       deriveActiveLeftFixedColumn(entry.target as HTMLElement)
       deriveActiveRightFixedColumn(entry.target as HTMLElement)
+      if (!fixedStateInitializedRef.value) {
+        fixedStateInitializedRef.value = true
+      }
     }
     function handleHeaderScroll (e: Event): void {
       deriveActiveRightFixedColumn(e.target as HTMLElement)
@@ -145,6 +153,7 @@ export default defineComponent({
       headerInstRef,
       bodyInstRef,
       bodyStyle: bodyStyleRef,
+      fixedStateInitialized: fixedStateInitializedRef,
       handleHeaderScroll,
       handleHeaderResize,
       ...exposedMethods
@@ -152,7 +161,15 @@ export default defineComponent({
   },
   render () {
     return (
-      <div class="n-data-table-base-table">
+      <div
+        class={[
+          'n-data-table-base-table',
+          {
+            'n-data-table-base-table--transition-disabled': !this
+              .fixedStateInitialized
+          }
+        ]}
+      >
         <VResizeObserver onResize={this.handleHeaderResize}>
           {{
             default: () => (
