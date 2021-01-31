@@ -86,6 +86,7 @@ export const dataTableProps = {
     type: String as PropType<'small' | 'medium' | 'large'>,
     default: 'medium'
   },
+  remote: Boolean,
   renderFilter: Function as PropType<FilterRender>,
   renderSorter: Function as PropType<SorterRender>,
   // eslint-disable-next-line vue/prop-name-casing
@@ -360,6 +361,7 @@ export default defineComponent({
           show={this.loading}
           unstableTheme={this.mergedTheme.peers.Spin}
           unstableThemeOverrides={this.mergedTheme.overrides.Spin}
+          size="small"
         >
           {{
             default: () => [

@@ -212,6 +212,7 @@ export function useTableData (props: DataTableProps) {
   })
 
   const paginatedDataRef = computed<TableNode[]>(() => {
+    if (props.remote) return props.data
     if (!props.pagination) return sortedDataRef.value
     const pageSize = mergedPageSizeRef.value
     const startIndex = (mergedCurrentPageRef.value - 1) * pageSize
