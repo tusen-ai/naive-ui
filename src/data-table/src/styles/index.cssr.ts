@@ -240,19 +240,18 @@ export default c([
         transition: 'border-color .3s var(--bezier)'
       }),
       cB('data-table-th', [
-        cB('data-table-sorter', {
-          height: '14px',
-          width: '14px',
-          marginLeft: '4px',
-          position: 'relative',
-          display: 'inline-flex',
-          verticalAlign: '-0.2em',
-          color: 'var(--th-icon-color)',
-          transition: `
+        cB('data-table-sorter', `
+          height: 14px;
+          width: 14px;
+          margin-left: 4px;
+          position: relative;
+          display: inline-flex;
+          vertical-align: -0.2em;
+          color: var(--th-icon-color);
+          transition: 
             transform .3s var(--bezier),
-            color .3s var(--bezier)
-          `
-        }, [
+            color .3s var(--bezier);
+        `, [
           cM('desc', {
             transform: 'rotate(0)'
           }),
@@ -312,12 +311,12 @@ export default c([
         marginRight: 0
       })
     ]),
-    cE('action', {
-      padding: '8px 12px',
-      display: 'flex',
-      flexWrap: 'nowrap',
-      justifyContent: 'space-evenly'
-    }, [
+    cE('action', `
+      padding: 8px 12px;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-evenly;
+    `, [
       cB('button', [
         c('&:not(:last-child)', {
           marginRight: '8px'

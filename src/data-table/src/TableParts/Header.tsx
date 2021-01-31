@@ -1,7 +1,7 @@
 import { h, defineComponent, inject, PropType } from 'vue'
+import { NCheckbox } from '../../../checkbox'
 import SortButton from '../HeaderButton/SortButton'
 import FilterButton from '../HeaderButton/FilterButton'
-import { NCheckbox } from '../../../checkbox'
 import {
   isColumnSortable,
   isColumnFilterable,

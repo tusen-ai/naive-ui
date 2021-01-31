@@ -336,44 +336,50 @@ export default defineComponent({
           unstableTheme={this.mergedTheme.peers.Spin}
           unstableThemeOverrides={this.mergedTheme.overrides.Spin}
         >
-          <div class="n-data-table-wrapper">
-            <NBaseTable
-              ref="mainTableInstRef"
-              maxHeight={this.maxHeight}
-              minHeight={this.minHeight}
-              bordered={this.bordered}
-            >
-              {{
-                default: () =>
-                  this.paginatedData.length === 0 ? (
-                    <div
-                      class={[
-                        'n-data-table-empty',
-                        {
-                          'n-data-table-empty--hide': this.loading
-                        }
-                      ]}
-                    >
-                      <NEmpty
-                        unstableTheme={this.mergedTheme.peers.Empty}
-                        unstableThemeOverrides={
-                          this.mergedTheme.overrides.Empty
-                        }
-                      />
-                    </div>
-                  ) : null
-              }}
-            </NBaseTable>
-          </div>
-          {this.pagination ? (
-            <div class="n-data-table__pagination">
-              <NPagination
-                unstableTheme={this.mergedTheme.peers.Pagination}
-                unstableThemeOverrides={this.mergedTheme.overrides.Pagination}
-                {...this.mergedPagination}
-              />
-            </div>
-          ) : null}
+          {{
+            default: () => [
+              <div class="n-data-table-wrapper">
+                <NBaseTable
+                  ref="mainTableInstRef"
+                  maxHeight={this.maxHeight}
+                  minHeight={this.minHeight}
+                  bordered={this.bordered}
+                >
+                  {{
+                    default: () =>
+                      this.paginatedData.length === 0 ? (
+                        <div
+                          class={[
+                            'n-data-table-empty',
+                            {
+                              'n-data-table-empty--hide': this.loading
+                            }
+                          ]}
+                        >
+                          <NEmpty
+                            unstableTheme={this.mergedTheme.peers.Empty}
+                            unstableThemeOverrides={
+                              this.mergedTheme.overrides.Empty
+                            }
+                          />
+                        </div>
+                      ) : null
+                  }}
+                </NBaseTable>
+              </div>,
+              this.pagination ? (
+                <div class="n-data-table__pagination">
+                  <NPagination
+                    unstableTheme={this.mergedTheme.peers.Pagination}
+                    unstableThemeOverrides={
+                      this.mergedTheme.overrides.Pagination
+                    }
+                    {...this.mergedPagination}
+                  />
+                </div>
+              ) : null
+            ]
+          }}
         </NSpin>
       </div>
     )
