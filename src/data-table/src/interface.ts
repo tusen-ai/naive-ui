@@ -73,8 +73,8 @@ export interface DataTableInjection {
   currentPage: number
   someRowsChecked: boolean
   allRowsChecked: boolean
-  mergedActiveSorter: SortState | null
-  mergedActiveFilters: FilterState
+  mergedSortState: SortState | null
+  mergedFilterState: FilterState
   loading: boolean
   rowClassName?: string | CreateRowClassName
   mergedCheckedRowKeys: RowKey[]

@@ -19,14 +19,14 @@ import { call, warn } from '../../_utils'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function useTableData (props: DataTableProps) {
-  const uncontrolledActiveFiltersRef = ref<FilterState>({})
-  const uncontrolledActiveSorterRef = ref<SortState | null>(null)
+  const uncontrolledFilterStateRef = ref<FilterState>({})
+  const uncontrolledSortStateRef = ref<SortState | null>(null)
   const uncontrolledCurrentPageRef = ref(1)
   const uncontrolledPageSizeRef = ref(10)
 
   props.columns.forEach((column) => {
     if (column.sorter !== undefined) {
-      uncontrolledActiveSorterRef.value = {
+      uncontrolledSortStateRef.value = {
         columnKey: column.key,
         sorter: column.sorter,
         order: column.defaultSortOrder ?? false
@@ -35,14 +35,14 @@ export function useTableData (props: DataTableProps) {
     if (column.filter) {
       const defaultFilterOptionValues = column.defaultFilterOptionValues
       if (column.filterMultiple) {
-        uncontrolledActiveFiltersRef.value[column.key] =
+        uncontrolledFilterStateRef.value[column.key] =
           defaultFilterOptionValues || []
       } else if (defaultFilterOptionValues !== undefined) {
         // this branch is for compatibility, someone may use `values` in single filter mode
-        uncontrolledActiveFiltersRef.value[column.key] =
+        uncontrolledFilterStateRef.value[column.key] =
           defaultFilterOptionValues === null ? [] : defaultFilterOptionValues
       } else {
-        uncontrolledActiveFiltersRef.value[column.key] =
+        uncontrolledFilterStateRef.value[column.key] =
           column.defaultFilterOptionValue ?? null
       }
     }
@@ -79,7 +79,7 @@ export function useTableData (props: DataTableProps) {
     return Math.ceil(filteredData.length / pageSize)
   })
 
-  const mergedActiveSorterRef = computed<SortState | null>(() => {
+  const mergedSortStateRef = computed<SortState | null>(() => {
     // If one of the columns's sort order is false or 'ascend' or 'descend',
     // the table's controll functionality should work in controlled manner.
     const columnsWithControlledSortOrder = props.columns.filter(
@@ -102,30 +102,30 @@ export function useTableData (props: DataTableProps) {
       }
     }
     if (!columnsWithControlledSortOrder.length) return null
-    return uncontrolledActiveSorterRef.value
+    return uncontrolledSortStateRef.value
   })
 
-  const mergedActiveFiltersRef = computed<FilterState>(() => {
+  const mergedFilterStateRef = computed<FilterState>(() => {
     const columnsWithControlledFilter = props.columns.filter((column) => {
       return (
         column.filterOptionValues !== undefined ||
         column.filterOptionValue !== undefined
       )
     })
-    const controlledActiveFilters: FilterState = {}
+    const controlledFilterState: FilterState = {}
     columnsWithControlledFilter.forEach((column) => {
-      controlledActiveFilters[column.key] =
+      controlledFilterState[column.key] =
         column.filterOptionValues || column.filterOptionValue || null
     })
     const activeFilters = Object.assign(
-      createShallowClonedObject(uncontrolledActiveFiltersRef.value),
-      controlledActiveFilters
+      createShallowClonedObject(uncontrolledFilterStateRef.value),
+      controlledFilterState
     )
     return activeFilters
   })
 
   const filteredDataRef = computed<TableNode[]>(() => {
-    const mergedActiveFilters = mergedActiveFiltersRef.value
+    const mergedFilterState = mergedFilterStateRef.value
     const { columns } = props
     function createDefaultFilter (columnKey: ColumnKey): Filter {
       return (filterOptionValue: FilterOptionValue, row: TableNode) =>
@@ -137,7 +137,7 @@ export function useTableData (props: DataTableProps) {
       ? data.filter((row) => {
         // traverse all filters
         for (const [columnKey, column] of columnEntries) {
-          let activeFilterOptionValues = mergedActiveFilters[columnKey]
+          let activeFilterOptionValues = mergedFilterState[columnKey]
           if (activeFilterOptionValues == null) continue
           if (!Array.isArray(activeFilterOptionValues)) {
             activeFilterOptionValues = [activeFilterOptionValues]
@@ -176,9 +176,9 @@ export function useTableData (props: DataTableProps) {
   })
 
   const sortedDataRef = computed<TableNode[]>(() => {
-    const activeSorter = mergedActiveSorterRef.value
+    const activeSorter = mergedSortStateRef.value
     if (activeSorter) {
-      // When async, mergedActiveSorter.sorter should be true
+      // When async, mergedSortState.sorter should be true
       // and we sort nothing, just return the filtered data
       if (activeSorter.sorter === true || activeSorter.sorter === false) {
         return filteredDataRef.value
@@ -274,7 +274,7 @@ export function useTableData (props: DataTableProps) {
     const { 'onUpdate:sorter': onUpdateSorter, onSorterChange } = props
     if (onUpdateSorter) call(onUpdateSorter, sorter)
     if (onSorterChange) call(onSorterChange, sorter)
-    uncontrolledActiveSorterRef.value = sorter
+    uncontrolledSortStateRef.value = sorter
   }
   function doUpdateFilters (
     filters: FilterState,
@@ -283,7 +283,7 @@ export function useTableData (props: DataTableProps) {
     const { 'onUpdate:filters': onUpdateFilters, onFiltersChange } = props
     if (onUpdateFilters) call(onUpdateFilters, filters, sourceColumn)
     if (onFiltersChange) call(onFiltersChange, filters, sourceColumn)
-    uncontrolledActiveFiltersRef.value = filters
+    uncontrolledFilterStateRef.value = filters
   }
   function page (page: number): void {
     doUpdatePage(page)
@@ -330,8 +330,8 @@ export function useTableData (props: DataTableProps) {
     mergedPagination: mergedPaginationRef,
     paginatedData: paginatedDataRef,
     currentPage: mergedCurrentPageRef,
-    mergedActiveFilters: mergedActiveFiltersRef,
-    mergedActiveSorter: mergedActiveSorterRef,
+    mergedFilterState: mergedFilterStateRef,
+    mergedSortState: mergedSortStateRef,
     doUpdateFilters,
     doUpdateSorter,
     doUpdatePageSize,

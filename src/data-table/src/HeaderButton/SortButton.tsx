@@ -17,7 +17,7 @@ export default defineComponent({
       'NDataTable'
     ) as DataTableInjection
     const sortStateRef = computed(() => {
-      return NDataTable.mergedActiveSorter
+      return NDataTable.mergedSortState
     })
     const activeRef = computed(() => {
       const { value } = sortStateRef

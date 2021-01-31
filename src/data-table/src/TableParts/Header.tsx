@@ -38,7 +38,7 @@ export default defineComponent({
     function handleHeaderClick (e: MouseEvent, column: TableColumnInfo): void {
       if (happensIn(e, 'dataTableFilter')) return
       if (!isColumnSortable(column)) return
-      const activeSorter = NDataTable.mergedActiveSorter
+      const activeSorter = NDataTable.mergedSortState
       const nextSorter = createNextSorter(column, activeSorter)
       NDataTable.doUpdateSorter(nextSorter)
     }

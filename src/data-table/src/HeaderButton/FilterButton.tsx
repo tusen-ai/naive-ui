@@ -41,7 +41,7 @@ export default defineComponent({
     ) as DataTableInjection
     const showPopoverRef = ref(false)
     const filterStateRef = computed(() => {
-      return NDataTable.mergedActiveFilters
+      return NDataTable.mergedFilterState
     })
     const filterMultipleRef = computed(() => {
       return props.column.filterMultiple !== false
@@ -68,12 +68,12 @@ export default defineComponent({
     function handleFilterChange (
       mergedFilterValue: FilterOptionValue | FilterOptionValue[] | null
     ): void {
-      const nextActiveFilters = createFilterState(
+      const nextFilterState = createFilterState(
         filterStateRef.value,
         props.column.key,
         mergedFilterValue
       )
-      NDataTable.doUpdateFilters(nextActiveFilters, props.column)
+      NDataTable.doUpdateFilters(nextFilterState, props.column)
     }
     function handleFilterMenuCancel (): void {
       showPopoverRef.value = false
