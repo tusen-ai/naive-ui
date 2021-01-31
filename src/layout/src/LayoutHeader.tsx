@@ -1,4 +1,10 @@
-import { h, defineComponent, computed, CSSProperties } from 'vue'
+import {
+  h,
+  defineComponent,
+  computed,
+  CSSProperties,
+  ExtractPropTypes
+} from 'vue'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { layoutLight } from '../styles'
@@ -6,15 +12,21 @@ import type { LayoutTheme } from '../styles'
 import { positionProp } from './interface'
 import style from './styles/layout-header.cssr'
 
+const headerProps = {
+  position: positionProp,
+  bordered: {
+    type: Boolean,
+    default: false
+  }
+} as const
+
+export type LayoutHeaderProps = ExtractPropTypes<typeof headerProps>
+
 export default defineComponent({
   name: 'LayoutHeader',
   props: {
     ...(useTheme.props as ThemeProps<LayoutTheme>),
-    position: positionProp,
-    bordered: {
-      type: Boolean,
-      default: false
-    }
+    ...headerProps
   },
   setup (props) {
     const themeRef = useTheme(

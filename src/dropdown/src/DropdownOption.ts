@@ -18,6 +18,12 @@ import { NIcon } from '../../icon'
 import NDropdownMenu, { NDropdownMenuInjection } from './DropdownMenu'
 import { DropdownInjection } from './Dropdown'
 import { isSubmenuNode } from './utils'
+import { TreeNode } from 'treemate'
+import {
+  DropdownGroup,
+  DropdownIgnoredOption,
+  DropdownOption
+} from './interface'
 
 interface NDropdownOptionInjection {
   enteringSubmenu: boolean
@@ -27,7 +33,9 @@ export default defineComponent({
   name: 'DropdownOption',
   props: {
     tmNode: {
-      type: Object,
+      type: Object as PropType<
+      TreeNode<DropdownOption, DropdownGroup, DropdownIgnoredOption>
+      >,
       required: true
     },
     parentKey: {
@@ -74,15 +82,15 @@ export default defineComponent({
       return false
     })
     const shouldDelayRef = computed(() => {
-      return NDropdown.keyboardKey === null && NDropdown.animated === false
+      return NDropdown.keyboardKey === null && NDropdown.animated
     })
-    const delayedSubmenuRef = useDeferredTrue(
+    const deferredShowSubmenuRef = useDeferredTrue(
       showSubmenuRef,
       300,
       shouldDelayRef
     )
     const parentEnteringSubmenuRef = computed(() => {
-      return !!(NDropdownOption && NDropdownOption.enteringSubmenu)
+      return !!NDropdownOption?.enteringSubmenu
     })
     const enteringSubmenuRef = ref(false)
     provide<NDropdownOptionInjection>(
@@ -92,26 +100,26 @@ export default defineComponent({
       })
     )
     // methods
-    function handleSubmenuBeforeEnter () {
+    function handleSubmenuBeforeEnter (): void {
       enteringSubmenuRef.value = true
     }
-    function handleSubmenuAfterEnter () {
+    function handleSubmenuAfterEnter (): void {
       enteringSubmenuRef.value = false
     }
-    function handleMouseEnter () {
+    function handleMouseEnter (): void {
       const { parentKey, tmNode } = props
       if (!NDropdown.mergedShow) return
       NDropdown.lastToggledSubmenuKey = parentKey
       NDropdown.keyboardKey = null
       NDropdown.hoverKey = tmNode.key
     }
-    function handleMouseMove () {
+    function handleMouseMove (): void {
       const { tmNode } = props
       if (!NDropdown.mergedShow) return
       if (NDropdown.hoverKey === tmNode.key) return
       handleMouseEnter()
     }
-    function handleMouseLeave (e: MouseEvent) {
+    function handleMouseLeave (e: MouseEvent): void {
       if (!NDropdown.mergedShow) return
       const { relatedTarget } = e
       if (
@@ -121,12 +129,15 @@ export default defineComponent({
         NDropdown.hoverKey = null
       }
     }
-    function handleClick () {
+    function handleClick (): void {
       const { value: hasSubmenu } = hasSubmenuRef
       const { tmNode } = props
       if (!NDropdown.mergedShow) return
       if (!hasSubmenu && !tmNode.disabled) {
-        NDropdown.doSelect(tmNode.key, tmNode.r)
+        NDropdown.doSelect(
+          tmNode.key,
+          ((tmNode as unknown) as TreeNode<DropdownOption>).rawNode
+        )
         NDropdown.doUpdateShow(false)
       }
     }
@@ -134,7 +145,7 @@ export default defineComponent({
       NDropdown,
       NDropdownMenu,
       mergedShowSubmenu: computed(() => {
-        return delayedSubmenuRef.value && !parentEnteringSubmenuRef.value
+        return deferredShowSubmenuRef.value && !parentEnteringSubmenuRef.value
       }),
       rawNode: rawNodeRef,
       hasSubmenu: hasSubmenuRef,

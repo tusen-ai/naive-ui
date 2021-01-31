@@ -3,12 +3,12 @@ import { render } from '../../_utils'
 import { useMenuChild } from './use-menu-child'
 import type { MenuItemGroupInjection } from './use-menu-child'
 import { itemRenderer } from './utils'
-import { TreeNode } from 'treemate'
+import { TmNode } from './interface'
 
 export const menuItemGroupProps = {
   ...useMenuChild.props,
   tmNodes: {
-    type: Array as PropType<TreeNode[]>,
+    type: Array as PropType<TmNode[]>,
     required: true
   }
 } as const

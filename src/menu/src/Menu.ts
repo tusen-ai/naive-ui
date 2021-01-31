@@ -8,24 +8,32 @@ import {
   reactive,
   PropType
 } from 'vue'
-import { createTreeMate, Key, RawNode } from 'treemate'
+import { createTreeMate, Key } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, warn } from '../../_utils'
+import { call, MaybeArray, warn } from '../../_utils'
 import { itemRenderer } from './utils'
 import { menuLight } from '../styles'
 import type { MenuTheme } from '../styles'
 import { MenuInjection } from './use-menu-child'
 import style from './styles/index.cssr'
+import {
+  MenuItem,
+  MenuItemGroup,
+  OnUpdateValue,
+  OnUpdateKeys,
+  OnUpdateValueImpl,
+  OnUpdateKeysImpl
+} from './interface'
 
 export default defineComponent({
   name: 'Menu',
   props: {
     ...(useTheme.props as ThemeProps<MenuTheme>),
     items: {
-      type: Array as PropType<RawNode[]>,
-      required: true
+      type: Array as PropType<Array<MenuItem | MenuItemGroup>>,
+      default: () => []
     },
     collapsed: {
       type: Boolean,
@@ -63,12 +71,9 @@ export default defineComponent({
       type: Array as PropType<Key[]>,
       default: undefined
     },
-    value: {
-      type: [String, Number] as PropType<Key>,
-      default: undefined
-    },
+    value: [String, Number] as PropType<Key | null>,
     defaultValue: {
-      type: [String, Number] as PropType<Key>,
+      type: [String, Number] as PropType<Key | null>,
       default: null
     },
     mode: {
@@ -80,18 +85,12 @@ export default defineComponent({
       default: false
     },
     // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:expandedKeys': {
-      type: Function as PropType<(value: Key[]) => void>,
-      default: undefined
-    },
+    'onUpdate:expandedKeys': Function as PropType<MaybeArray<OnUpdateKeys>>,
     // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': {
-      type: Function as PropType<(value: Key) => void>,
-      default: undefined
-    },
+    'onUpdate:value': Function as PropType<MaybeArray<OnUpdateValue>>,
     // deprecated
     onOpenNamesChange: {
-      type: Function as PropType<(value: Key[]) => void>,
+      type: Function as PropType<MaybeArray<OnUpdateKeys>>,
       validator: () => {
         warn(
           'menu',
@@ -102,7 +101,7 @@ export default defineComponent({
       default: undefined
     },
     onSelect: {
-      type: Function as PropType<(value: Key) => void>,
+      type: Function as PropType<MaybeArray<OnUpdateValue>>,
       validator: () => {
         warn(
           'menu',
@@ -113,7 +112,7 @@ export default defineComponent({
       default: undefined
     },
     onExpandedNamesChange: {
-      type: Function as PropType<(value: Key[]) => void>,
+      type: Function as PropType<MaybeArray<OnUpdateKeys>>,
       validator: () => {
         warn(
           'menu',
@@ -197,35 +196,35 @@ export default defineComponent({
         toggleExpand
       })
     )
-    function doSelect (value: Key, item: RawNode) {
+    function doSelect (value: Key, item: MenuItem): void {
       const { 'onUpdate:value': onUpdateValue, onSelect } = props
       if (onUpdateValue) {
-        call(onUpdateValue, value, item)
+        call(onUpdateValue as OnUpdateValueImpl, value, item)
       }
       if (onSelect) {
-        call(onSelect, value, item)
+        call(onSelect as OnUpdateValueImpl, value, item)
       }
       uncontrolledValueRef.value = value
     }
-    function doUpdateExpandedKeys (value: Key[]) {
+    function doUpdateExpandedKeys (value: Key[]): void {
       const {
         'onUpdate:expandedKeys': onUpdateExpandedKeys,
         onExpandedNamesChange,
         onOpenNamesChange
       } = props
       if (onUpdateExpandedKeys) {
-        call(onUpdateExpandedKeys, value)
+        call(onUpdateExpandedKeys as OnUpdateKeysImpl, value)
       }
       // deprecated
       if (onExpandedNamesChange) {
-        call(onExpandedNamesChange, value)
+        call(onExpandedNamesChange as OnUpdateKeysImpl, value)
       }
       if (onOpenNamesChange) {
-        call(onOpenNamesChange, value)
+        call(onOpenNamesChange as OnUpdateKeysImpl, value)
       }
       uncontrolledExpandedKeysRef.value = value
     }
-    function toggleExpand (key: Key) {
+    function toggleExpand (key: Key): void {
       const currentExpandedKeys = Array.from(mergedExpandedKeysRef.value)
       const index = currentExpandedKeys.findIndex(
         (expanededKey) => expanededKey === key

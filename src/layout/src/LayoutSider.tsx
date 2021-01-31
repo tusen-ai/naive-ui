@@ -9,7 +9,8 @@ import {
   CSSProperties,
   toRef,
   inject,
-  onBeforeUnmount
+  onBeforeUnmount,
+  ExtractPropTypes
 } from 'vue'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -25,56 +26,65 @@ import ToggleButton from './ToggleButton'
 import ToggleBar from './ToggleBar'
 import { positionProp } from './interface'
 
+const layoutSiderProps = {
+  position: positionProp,
+  bordered: {
+    type: Boolean,
+    default: false
+  },
+  collapsedWidth: {
+    type: Number,
+    default: 48
+  },
+  width: {
+    type: Number,
+    default: 272
+  },
+  collapseMode: {
+    type: String as PropType<'width' | 'transform'>,
+    default: 'transform'
+  },
+  collapsed: {
+    type: Boolean,
+    default: false
+  },
+  showContent: {
+    type: Boolean,
+    default: true
+  },
+  showTrigger: {
+    type: [Boolean, String] as PropType<boolean | 'arrow-circle' | 'bar'>,
+    default: false
+  },
+  nativeScrollbar: {
+    type: Boolean,
+    default: true
+  },
+  duration: {
+    type: Number,
+    default: 300
+  },
+  scrollbarProps: Object as PropType<
+  Partial<ScrollbarProps> & { style: CSSProperties }
+  >,
+  triggerStyle: Object as PropType<CSSProperties>,
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:collapsed': Function as PropType<
+  MaybeArray<(value: boolean) => void>
+  >,
+  onUpdateCollapsed: Function as PropType<MaybeArray<(value: boolean) => void>>,
+  // deprecated
+  onExpand: Function as PropType<MaybeArray<() => void>>,
+  onCollapse: Function as PropType<MaybeArray<() => void>>
+} as const
+
+export type LayoutSiderProps = ExtractPropTypes<typeof layoutSiderProps>
+
 export default defineComponent({
   name: 'LayoutSider',
   props: {
     ...(useTheme.props as ThemeProps<LayoutTheme>),
-    position: positionProp,
-    bordered: {
-      type: Boolean,
-      default: false
-    },
-    collapsedWidth: {
-      type: Number,
-      default: 48
-    },
-    width: {
-      type: Number,
-      default: 272
-    },
-    collapseMode: {
-      type: String as PropType<'width' | 'transform'>,
-      default: 'transform'
-    },
-    collapsed: {
-      type: Boolean,
-      default: false
-    },
-    showContent: {
-      type: Boolean,
-      default: true
-    },
-    showTrigger: {
-      type: [Boolean, String],
-      default: false
-    },
-    nativeScrollbar: {
-      type: Boolean,
-      default: true
-    },
-    duration: {
-      type: Number,
-      default: 300
-    },
-    scrollbarProps: Object as PropType<Partial<ScrollbarProps>>,
-    triggerStyle: Object as PropType<CSSProperties>,
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:collapsed': Function as PropType<
-    MaybeArray<(value: boolean) => void>
-    >,
-    // deprecated
-    onExpand: Function as PropType<MaybeArray<() => void>>,
-    onCollapse: Function as PropType<MaybeArray<() => void>>
+    ...layoutSiderProps
   },
   setup (props) {
     const selfRef = ref<HTMLElement | null>(null)
@@ -105,7 +115,8 @@ export default defineComponent({
     }
     function handleTriggerClick (): void {
       const {
-        'onUpdate:collapsed': onUpdateCollapsed,
+        'onUpdate:collapsed': _onUpdateCollapsed,
+        onUpdateCollapsed,
         collapsed,
         // deprecated
         onExpand,
@@ -113,6 +124,9 @@ export default defineComponent({
       } = props
       if (onUpdateCollapsed) {
         call(onUpdateCollapsed, !collapsed)
+      }
+      if (_onUpdateCollapsed) {
+        call(_onUpdateCollapsed, !collapsed)
       }
       if (collapsed) {
         if (onExpand) call(onExpand)

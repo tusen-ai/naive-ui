@@ -1,12 +1,9 @@
-import { defineComponent, createTextVNode, PropType, } from 'vue'
+import { defineComponent, createTextVNode, PropType } from 'vue'
 
 export const render = defineComponent({
   name: 'Render',
   props: {
-    render: {
-      type: [String, Number, Function] as PropType<string | number | null | undefined | Function>,
-      default: undefined
-    }
+    render: [String, Number, Function] as PropType<unknown>
   },
   render () {
     const { render } = this

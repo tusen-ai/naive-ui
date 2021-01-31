@@ -5,7 +5,8 @@ import {
   PropType,
   provide,
   computed,
-  reactive
+  reactive,
+  VNode
 } from 'vue'
 import { useMemo } from 'vooks'
 import { NFadeInExpandTransition } from '../../_base'
@@ -14,16 +15,17 @@ import NMenuItemContent from './MenuItemContent'
 import { itemRenderer } from './utils'
 import { useMenuChild } from './use-menu-child'
 import type { SubmenuInjection } from './use-menu-child'
-import { TreeNode, RawNode } from 'treemate'
+import { TreeNode } from 'treemate'
+import { MenuItemGroup, MenuItem } from './interface'
 
 export const submenuProps = {
   ...useMenuChild.props,
   rawNodes: {
-    type: Array as PropType<RawNode[]>,
+    type: Array as PropType<Array<MenuItem | MenuItemGroup>>,
     required: true
   },
   tmNodes: {
-    type: Array as PropType<TreeNode[]>,
+    type: Array as PropType<Array<TreeNode<MenuItem, MenuItemGroup>>>,
     required: true
   },
   disabled: {
@@ -48,7 +50,7 @@ export default defineComponent({
     const { NMenu, NSubmenu } = MenuChild
     const mergedDisabledRef = computed(() => {
       const { disabled } = props
-      if (NSubmenu && NSubmenu.mergedDisabled) return true
+      if (NSubmenu?.mergedDisabled) return true
       if (NMenu.disabled) return true
       return disabled
     })
@@ -61,11 +63,11 @@ export default defineComponent({
       })
     )
     provide('NMenuItemGroup', null)
-    function doClick () {
+    function doClick (): void {
       const { onClick } = props
       if (onClick) onClick()
     }
-    function handleClick () {
+    function handleClick (): void {
       if (!mergedDisabledRef.value) {
         if (!NMenu.collapsed) {
           NMenu.toggleExpand(props.internalKey)
@@ -73,7 +75,7 @@ export default defineComponent({
         doClick()
       }
     }
-    function handlePopoverShowChange (value: boolean) {
+    function handlePopoverShowChange (value: boolean): void {
       dropdownShowRef.value = value
     }
     return {
@@ -106,7 +108,7 @@ export default defineComponent({
     }
   },
   render () {
-    const createSubmenuItem = () => {
+    const createSubmenuItem = (): VNode => {
       const {
         NMenu,
         paddingLeft,
@@ -136,7 +138,7 @@ export default defineComponent({
         onClick: handleClick
       })
     }
-    const createSubmenuChildren = () => {
+    const createSubmenuChildren = (): VNode => {
       return h(NFadeInExpandTransition, null, {
         default: () => {
           const { tmNodes, collapsed } = this

@@ -1,9 +1,14 @@
 import { computed, defineComponent, h, PropType, provide, reactive } from 'vue'
 import { TreeNode } from 'treemate'
 import NDropdownOption from './DropdownOption'
-import NDropdownDivider from './DropdownDivider.vue'
+import NDropdownDivider from './DropdownDivider'
 import NDropdownGroup from './DropdownGroup'
 import { isSubmenuNode, isGroupNode, isDividerNode } from './utils'
+import {
+  DropdownGroup,
+  DropdownIgnoredOption,
+  DropdownOption
+} from './interface'
 
 export interface NDropdownMenuInjection {
   showIcon: boolean
@@ -14,8 +19,10 @@ export default defineComponent({
   name: 'DropdownMenu',
   props: {
     tmNodes: {
-      type: Array as PropType<TreeNode[]>,
-      required: true
+      type: Array as PropType<
+      Array<TreeNode<DropdownOption, DropdownGroup, DropdownIgnoredOption>>
+      >,
+      default: () => []
     },
     parentKey: {
       type: [String, Number],
@@ -30,7 +37,9 @@ export default defineComponent({
           return props.tmNodes.some((tmNode) => {
             const { rawNode } = tmNode
             if (isGroupNode(rawNode)) {
-              return !!rawNode.children?.some((rawChild) => rawChild.icon)
+              return !!(rawNode as DropdownGroup).children.some(
+                (rawChild) => rawChild.icon
+              )
             }
             return rawNode.icon
           })
@@ -39,7 +48,7 @@ export default defineComponent({
           return props.tmNodes.some((tmNode) => {
             const { rawNode } = tmNode
             if (isGroupNode(rawNode)) {
-              return !!rawNode.children?.some((rawChild) =>
+              return !!(rawNode as DropdownGroup).children.some((rawChild) =>
                 isSubmenuNode(rawChild)
               )
             }
@@ -70,7 +79,7 @@ export default defineComponent({
           })
         }
         return h(NDropdownOption, {
-          tmNode,
+          tmNode: tmNode,
           parentKey,
           key: tmNode.key
         })

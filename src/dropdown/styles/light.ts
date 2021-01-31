@@ -1,9 +1,8 @@
 import { commonLight } from '../../_styles/new-common'
 import type { ThemeCommonVars } from '../../_styles/new-common'
-import type { Theme } from '../../_mixins/use-theme'
+import { createTheme } from '../../_mixins/use-theme'
 import commonVariables from './_common'
 import { popoverLight } from '../../popover/styles'
-import type { PopoverTheme } from '../../popover/styles'
 
 const self = (vars: ThemeCommonVars) => {
   const {
@@ -49,19 +48,14 @@ const self = (vars: ThemeCommonVars) => {
 
 export type DropdownThemeVars = ReturnType<typeof self>
 
-const dropdownLight: Theme<
-  DropdownThemeVars,
-  {
-    Popover?: PopoverTheme
-  }
-> = {
+const dropdownLight = createTheme({
   name: 'Dropdown',
   common: commonLight,
   peers: {
     Popover: popoverLight
   },
   self
-}
+})
 
 export type DropdownTheme = typeof dropdownLight
 export default dropdownLight

@@ -1,6 +1,6 @@
 {
   "include": ["src/**/*"],
-  "exclude": ["src/_deprecated/icons/**/*", "src/**/*.spec.js"],
+  "exclude": ["src/**/*.spec.js"],
   "compilerOptions": {
     "strict": true,
     "strictNullChecks": true,

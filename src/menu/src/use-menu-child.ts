@@ -1,12 +1,13 @@
-import { RawNode, Key } from 'treemate'
+import { Key } from 'treemate'
 import { inject, computed, ComputedRef, PropType } from 'vue'
 import { MergedTheme } from '../../_mixins/use-theme'
-import { MenuThemeVars } from '../styles'
+import type { MenuTheme } from '../styles'
+import { OnUpdateValueImpl } from './interface'
 
 const ICON_MARGIN_RIGHT = 8
 
 export interface MenuInjection {
-  mergedValue: Key
+  mergedValue: Key | null
   mode: 'vertical' | 'horizontal'
   collapsed: boolean
   iconSize: number
@@ -17,8 +18,8 @@ export interface MenuInjection {
   disabled: boolean
   mergedExpandedKeys: Key[]
   activePath: Key[]
-  mergedTheme: MergedTheme<MenuThemeVars>
-  doSelect: (key: Key, node: RawNode) => void
+  mergedTheme: MergedTheme<MenuTheme>
+  doSelect: OnUpdateValueImpl
   toggleExpand: (key: Key) => void
 }
 

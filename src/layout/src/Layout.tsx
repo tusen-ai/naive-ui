@@ -6,7 +6,8 @@ import {
   reactive,
   inject,
   provide,
-  ref
+  ref,
+  ExtractPropTypes
 } from 'vue'
 import { NScrollbar } from '../../scrollbar'
 import type { ScrollbarProps, ScrollbarRef } from '../../scrollbar'
@@ -15,7 +16,7 @@ import type { ThemeProps } from '../../_mixins'
 import { layoutLight } from '../styles'
 import type { LayoutTheme } from '../styles'
 import style from './styles/layout.cssr'
-import { positionProp } from './interface'
+import { LayoutRef, positionProp } from './interface'
 
 export interface LayoutInjection {
   hasSider: boolean
@@ -26,17 +27,23 @@ export interface LayoutInjection {
   siderCollapsed: boolean | null
 }
 
+const layoutProps = {
+  position: positionProp,
+  nativeScrollbar: {
+    type: Boolean,
+    default: true
+  },
+  scrollbarProps: Object as PropType<Partial<ScrollbarProps>>
+} as const
+
+export type LayoutProps = ExtractPropTypes<typeof layoutProps>
+
 export default defineComponent({
   name: 'Layout',
   alias: ['LayoutContent'],
   props: {
     ...(useTheme.props as ThemeProps<LayoutTheme>),
-    position: positionProp,
-    nativeScrollbar: {
-      type: Boolean,
-      default: true
-    },
-    scrollbarProps: Object as PropType<Partial<ScrollbarProps>>
+    ...layoutProps
   },
   setup (props) {
     const selfRef = ref<HTMLElement | null>(null)
@@ -71,9 +78,10 @@ export default defineComponent({
         marginLeft: styleMarginLeftRef.value
       }
     })
-    function scrollTo (options: ScrollToOptions): void
-    function scrollTo (x: number, y: number): void
-    function scrollTo (options: ScrollToOptions | number, y?: number): void {
+    const scrollTo: LayoutRef['scrollTo'] = (
+      options: ScrollToOptions | number,
+      y?: number
+    ): void => {
       if (scrollbarRef.value) {
         scrollbarRef.value.scrollTo(options as any, y as any)
       } else if (selfRef.value) {

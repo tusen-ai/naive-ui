@@ -2,7 +2,7 @@ import { changeColor } from 'seemly'
 import { tooltipLight } from '../../tooltip/styles'
 import { commonLight } from '../../_styles/new-common'
 import type { ThemeCommonVars } from '../../_styles/new-common'
-import { Theme } from '../../_mixins/use-theme'
+import { createTheme } from '../../_mixins/use-theme'
 
 const self = (vars: ThemeCommonVars) => {
   const {
@@ -35,14 +35,14 @@ const self = (vars: ThemeCommonVars) => {
 
 export type MenuThemeVars = ReturnType<typeof self>
 
-const menuLight: Theme<MenuThemeVars> = {
+const menuLight = createTheme({
   name: 'Menu',
   common: commonLight,
   peers: {
     Tooltip: tooltipLight
   },
   self
-}
+})
 
 export default menuLight
 export type MenuTheme = typeof menuLight

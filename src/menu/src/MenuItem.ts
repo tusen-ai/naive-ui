@@ -3,12 +3,12 @@ import { useMemo } from 'vooks'
 import { NTooltip } from '../../tooltip'
 import NMenuItemContent from './MenuItemContent'
 import { useMenuChild } from './use-menu-child'
-import { TreeNode } from 'treemate'
+import { TmNode } from './interface'
 
 export const menuItemProps = {
   ...useMenuChild.props,
   tmNode: {
-    type: Object as PropType<TreeNode>,
+    type: Object as PropType<TmNode>,
     required: true
   },
   disabled: {

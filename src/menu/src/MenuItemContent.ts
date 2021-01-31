@@ -55,15 +55,15 @@ export default defineComponent({
     return {
       style: computed(() => {
         const { paddingLeft } = props
-        return { paddingLeft: paddingLeft && paddingLeft + 'px' }
+        return { paddingLeft: paddingLeft && `${paddingLeft}px` }
       }),
       iconStyle: computed(() => {
         const { maxIconSize, activeIconSize, iconMarginRight } = props
         return {
-          width: maxIconSize + 'px',
-          height: maxIconSize + 'px',
-          fontSize: activeIconSize + 'px',
-          marginRight: iconMarginRight + 'px'
+          width: `${maxIconSize}px`,
+          height: `${maxIconSize}px`,
+          fontSize: `${activeIconSize}px`,
+          marginRight: `${iconMarginRight}px`
         }
       })
     }

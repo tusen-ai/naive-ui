@@ -7,26 +7,32 @@ import {
   PropType,
   watch,
   provide,
-  reactive
+  reactive,
+  CSSProperties
 } from 'vue'
-import { RawNode, TreeMate, Key } from 'treemate'
+import { createTreeMate, Key, TreeNode } from 'treemate'
 import { useMergedState, useKeyboard, useMemo } from 'vooks'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NPopover, popoverProps } from '../../popover'
-import { keep, call, createKey } from '../../_utils'
+import { keep, call, createKey, MaybeArray } from '../../_utils'
 import { dropdownLight } from '../styles'
 import type { DropdownTheme } from '../styles'
 import NDropdownMenu from './DropdownMenu'
 import style from './styles/index.cssr'
-
-type OnSelect = (key: Key, rawNode: RawNode) => void
+import {
+  DropdownGroup,
+  DropdownIgnoredOption,
+  DropdownOption,
+  OnUpdateValue,
+  OnUpdateValueImpl
+} from './interface'
 
 const treemateOptions = {
-  getKey (node: RawNode) {
-    return node.key as Key
+  getKey (node: DropdownOption | DropdownGroup | DropdownIgnoredOption) {
+    return node.key
   },
-  getDisabled (node: RawNode) {
+  getDisabled (node: DropdownOption | DropdownGroup | DropdownIgnoredOption) {
     if (node.type === 'divider') return true
     return node.disabled === true
   }
@@ -40,7 +46,7 @@ export interface DropdownInjection {
   activeKeyPath: Key[]
   animated: boolean
   mergedShow: boolean
-  doSelect: OnSelect
+  doSelect: OnUpdateValueImpl
   doUpdateShow: (value: boolean) => void
 }
 
@@ -65,28 +71,24 @@ const dropdownProps = {
     type: Number,
     default: null
   },
-  onSelect: {
-    type: [Function, Array] as PropType<OnSelect | OnSelect[]>,
-    default: undefined
-  },
+  onSelect: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   options: {
-    type: Array as PropType<RawNode[]>,
-    required: true
+    type: Array as PropType<
+    Array<DropdownOption | DropdownGroup | DropdownIgnoredOption>
+    >,
+    default: () => []
   },
   containerClass: {
     type: String,
     default: 'n-dropdown'
   },
   // for menu
-  value: {
-    type: [String, Number] as PropType<Key>,
-    default: undefined
-  }
+  value: [String, Number] as PropType<Key | null>
 } as const
 
-const popoverPropKeys = Object.keys(
-  popoverProps
-) as (keyof typeof popoverProps)[]
+const popoverPropKeys = Object.keys(popoverProps) as Array<
+keyof typeof popoverProps
+>
 
 export default defineComponent({
   name: 'Dropdown',
@@ -102,13 +104,14 @@ export default defineComponent({
       uncontrolledShowRef
     )
     const treemateRef = computed(() => {
-      return TreeMate(props.options, treemateOptions)
+      return createTreeMate<
+      DropdownOption,
+      DropdownGroup,
+      DropdownIgnoredOption
+      >(props.options, treemateOptions)
     })
     const tmNodesRef = computed(() => {
       return treemateRef.value.treeNodes
-    })
-    const tmNodeMapRef = computed(() => {
-      return treemateRef.value.treeNodeMap
     })
 
     const hoverKeyRef = ref<Key | null>(null)
@@ -190,49 +193,49 @@ export default defineComponent({
       if (!value) clearPendingState()
     })
     // methods
-    function doSelect (key: Key, node: RawNode) {
+    function doSelect (key: Key, node: DropdownOption): void {
       const { onSelect } = props
-      if (onSelect) call(onSelect, key, node)
+      if (onSelect) call(onSelect as OnUpdateValueImpl, key, node)
     }
-    function doUpdateShow (value: boolean) {
+    function doUpdateShow (value: boolean): void {
       const { 'onUpdate:show': onUpdateShow } = props
       if (onUpdateShow) call(onUpdateShow, value)
       uncontrolledShowRef.value = value
     }
-    function clearPendingState () {
+    function clearPendingState (): void {
       hoverKeyRef.value = null
       keyboardKeyRef.value = null
       lastToggledSubmenuKeyRef.value = null
     }
-    function handleKeyDownEsc () {
+    function handleKeyDownEsc (): void {
       doUpdateShow(false)
     }
-    function handleKeyDownLeft () {
+    function handleKeyDownLeft (): void {
       handleKeyDown('left')
     }
-    function handleKeyDownRight () {
+    function handleKeyDownRight (): void {
       handleKeyDown('right')
     }
-    function handleKeyDownUp () {
+    function handleKeyDownUp (): void {
       handleKeyDown('up')
     }
-    function handleKeyDownDown () {
+    function handleKeyDownDown (): void {
       handleKeyDown('down')
     }
-    function handleKeyUpEnter () {
+    function handleKeyUpEnter (): void {
       const pendingNode = getPendingNode()
-      if (pendingNode && pendingNode.isLeaf) {
+      if (pendingNode?.isLeaf) {
         doSelect(pendingNode.key, pendingNode.rawNode)
         doUpdateShow(false)
       }
     }
-    function getPendingNode () {
-      const { value: tmNodeMap } = tmNodeMapRef
+    function getPendingNode (): TreeNode<DropdownOption> | null {
+      const { value: treeMate } = treemateRef
       const { value: pendingKey } = pendingKeyRef
-      if (!tmNodeMap || pendingKey === null) return null
-      return tmNodeMap.get(pendingKey) ?? null
+      if (!treeMate || pendingKey === null) return null
+      return treeMate.getNode(pendingKey) ?? null
     }
-    function handleKeyDown (direction: 'up' | 'right' | 'down' | 'left') {
+    function handleKeyDown (direction: 'up' | 'right' | 'down' | 'left'): void {
       const { value: pendingKey } = pendingKeyRef
       const {
         value: { getFirstAvailableNode }
@@ -270,6 +273,7 @@ export default defineComponent({
       }
     }
     return {
+      mergedTheme: themeRef,
       // data
       tmNodes: tmNodesRef,
       // show
@@ -334,15 +338,15 @@ export default defineComponent({
         showArrow: false,
         raw: true,
         shadow: false,
-        // TODO: using peers
-        unstableTheme: undefined
+        unstableTheme: this.mergedTheme.peers.Popover,
+        unstableThemeOverrides: this.mergedTheme.overrides.Popover
       }),
       {
         trigger: this.$slots.default,
         default: () => {
           return h(NDropdownMenu, {
             tmNodes: this.tmNodes,
-            style: this.cssVars
+            style: this.cssVars as CSSProperties
           })
         }
       }
