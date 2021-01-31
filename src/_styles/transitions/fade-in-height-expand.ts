@@ -1,3 +1,4 @@
+import { CNode } from 'css-render'
 import { c, namespace } from '../../_utils/cssr'
 import commonVariables from '../new-common/_common'
 
@@ -13,8 +14,8 @@ interface FadeInHeightExpandTransitionOption {
   originalTransition?: string
   leavingDelay?: string
   foldPadding?: boolean
-  enterToProps?: Record<string, string | number> | null
-  leaveToProps?: Record<string, string | number> | null
+  enterToProps?: Record<string, string | number> | undefined
+  leaveToProps?: Record<string, string | number> | undefined
 }
 
 export default function ({
@@ -23,9 +24,9 @@ export default function ({
   originalTransition = '',
   leavingDelay = '0s',
   foldPadding = false,
-  enterToProps = null,
-  leaveToProps = null
-}: FadeInHeightExpandTransitionOption = {}) {
+  enterToProps = undefined,
+  leaveToProps = undefined
+}: FadeInHeightExpandTransitionOption = {}): CNode[] {
   return [
     c(
       `&.${namespace}-fade-in-height-expand-transition-leave-from, &.${namespace}-fade-in-height-expand-transition-enter-to`,
@@ -41,8 +42,8 @@ export default function ({
         opacity: 0,
         marginTop: '0 !important',
         marginBottom: '0 !important',
-        paddingTop: foldPadding ? '0 !important' : null,
-        paddingBottom: foldPadding ? '0 !important' : null
+        paddingTop: foldPadding ? '0 !important' : undefined,
+        paddingBottom: foldPadding ? '0 !important' : undefined
       }
     ),
     c(

@@ -1,7 +1,8 @@
 import { App } from 'vue'
 import version from './version'
 import { warn } from './_utils'
-import { Hljs, NaiveLocale } from './config-provider'
+import { Hljs } from './config-provider'
+import { NaiveLocale } from './locales'
 
 type ComponentType = any
 
@@ -28,11 +29,14 @@ function setHljs (this: NaiveUIInstance, hljs: any): void {
   this.hljs = hljs
 }
 
-function createLocalesObject (locales: NaiveLocale[]): any {
+function createLocalesObject (
+  locales: NaiveLocale[]
+): { [key: string]: NaiveLocale } {
+  const defaultLocaleMap: { [key: string]: NaiveLocale } = {}
   return locales.reduce((localeMap, locale) => {
     localeMap[locale.name] = locale
     return localeMap
-  }, {})
+  }, defaultLocaleMap)
 }
 
 interface NaiveUI {

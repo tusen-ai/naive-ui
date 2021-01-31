@@ -29,6 +29,7 @@ import {
   BaseOption,
   SelectMenuInstance
 } from './interface'
+import { tmOptions } from '../../select/src/utils'
 
 export default defineComponent({
   name: 'NCascaderSelectMenu',
@@ -85,12 +86,7 @@ export default defineComponent({
     const selectTreeMateRef = computed(() => {
       return createTreeMate<BaseSelectOption, GroupOption, IgnoredOption>(
         filteredSelectOptionsRef.value,
-        {
-          getKey (node) {
-            if (!node.ignored && node.type === 'group') return node.name
-            return node.value
-          }
-        }
+        tmOptions
       )
     })
     watch(toRef(props, 'value'), () => {

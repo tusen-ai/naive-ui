@@ -117,7 +117,7 @@ export default defineComponent({
         }
         if (NFormItem) {
           const { mergedSize } = NFormItem
-          if (mergedSize !== undefined) return mergedSize
+          if (mergedSize !== undefined) return mergedSize.value
         }
         return 'medium'
       }

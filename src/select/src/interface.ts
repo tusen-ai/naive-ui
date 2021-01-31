@@ -1,4 +1,5 @@
 import { TreeMate } from 'treemate'
+import { VNodeChild } from 'vue'
 
 export type Options = Option[]
 export type Option = BaseOption | GroupOption | IgnoredOption
@@ -7,23 +8,26 @@ export interface BaseOption {
   value: string | number
   label: string
   disabled?: boolean
-  type?: never
-  ignored?: never
-  [k: string]: any
+  render?: (option: BaseOption, selected: boolean) => VNodeChild
+  [k: string]: unknown
 }
 
 export interface GroupOption {
-  label: string
-  name: string
   type: 'group'
+  label: string
+  value?: string | number
   children: BaseOption[]
-  ignored?: never
+  render?: (option: GroupOption) => VNodeChild
+  [k: string]: unknown
+
+  /** @deprecated should use value instead */
+  name?: string
 }
 
 export interface IgnoredOption {
-  ignored: true
+  type: 'ignored'
   value: string | number
-  [k: string]: any
+  [k: string]: unknown
 }
 
 export type ValueAtom = string | number

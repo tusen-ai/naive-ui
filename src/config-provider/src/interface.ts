@@ -1,8 +1,8 @@
 import { NaiveDateLocale, NaiveLocale } from '../../locales'
 
-type Hljs = any
-type Theme = any
-type ThemeOverrides = any
+export type Hljs = any
+export type Theme = any
+export type ThemeOverrides = any
 
 export interface ConfigProviderInjection {
   mergedBordered: boolean | undefined

@@ -23,7 +23,7 @@ export default defineComponent({
         ref="selfRef"
         tabindex={0}
         class="n-date-panel n-date-panel--datetimerange"
-        onClickCapture={this.resetSelectingStatus}
+        onClick={this.resetSelectingStatus}
         onKeydown={this.handlePanelKeyDown}
         onFocus={this.handlePanelFocus}
       >

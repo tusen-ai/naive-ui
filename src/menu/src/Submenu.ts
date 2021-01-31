@@ -6,7 +6,8 @@ import {
   provide,
   computed,
   reactive,
-  VNode
+  VNode,
+  VNodeChild
 } from 'vue'
 import { useMemo } from 'vooks'
 import { NFadeInExpandTransition } from '../../_base'
@@ -22,24 +23,18 @@ export const submenuProps = {
   ...useMenuChild.props,
   rawNodes: {
     type: Array as PropType<Array<MenuItem | MenuItemGroup>>,
-    required: true
+    default: () => []
   },
   tmNodes: {
     type: Array as PropType<Array<TreeNode<MenuItem, MenuItemGroup>>>,
-    required: true
+    default: () => []
   },
   disabled: {
     type: Boolean,
     default: false
   },
-  icon: {
-    type: Function,
-    default: undefined
-  },
-  onClick: {
-    type: Function,
-    default: undefined
-  }
+  icon: Function as PropType<() => VNodeChild>,
+  onClick: Function as PropType<() => void>
 } as const
 
 export default defineComponent({

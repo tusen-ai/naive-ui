@@ -9,12 +9,8 @@ export type AutoCompleteOption =
   | AutoCompleteGroupOption
 
 export type AutoCompleteBaseOption = string
-export interface AutoCompleteGroupOption {
-  type: 'group'
-  label: string
-  name: string
+export interface AutoCompleteGroupOption extends Omit<GroupOption, 'children'> {
   children: AutoCompleteBaseOption[]
-  ignored?: never
 }
 
 export type AutoCompleteOptions = Array<

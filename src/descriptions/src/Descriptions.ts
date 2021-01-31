@@ -95,7 +95,7 @@ export default defineComponent({
     }
   },
   render () {
-    let children = getSlot(this, 'default', [])
+    const children = getSlot(this, 'default', [])
     const memorizedLength = children.length
     const {
       compitableColumn,
@@ -106,127 +106,127 @@ export default defineComponent({
       title,
       cssVars
     } = this
-    children = children.filter((child) => isDescriptionsItem(child))
-    if (__DEV__ && memorizedLength !== children.length) {
+    const filteredChildren: VNode[] = children.filter((child) =>
+      isDescriptionsItem(child)
+    ) as VNode[]
+    if (__DEV__ && memorizedLength !== filteredChildren.length) {
       warn(
         'descriptions',
         '`n-descriptions` only takes `n-descriptions-item` as children.'
       )
     }
-    const itemState = children.reduce(
-      (state, vNode, index) => {
-        const props = vNode.props || {}
-        const isLastIteration = children.length - 1 === index
-        const itemLabel = [
-          'label' in props ? props.label : getVNodeChildren(vNode, 'label')
-        ]
-        const itemChildren = [getVNodeChildren(vNode)]
-        const itemSpan = props.span || 1
-        const memorizedSpan = state.span
-        state.span += itemSpan
-        if (labelPlacement === 'left') {
-          if (bordered) {
-            state.row.push(
-              h(
-                'th',
-                {
-                  class: 'n-descriptions-table-header',
-                  colspan: 1
-                },
-                itemLabel
-              ),
-              h(
-                'td',
-                {
-                  class: 'n-descriptions-table-content',
-                  colspan: isLastIteration
-                    ? (compitableColumn - memorizedSpan) * 2 + 1
-                    : itemSpan * 2 - 1
-                },
-                itemChildren
-              )
-            )
-          } else {
-            state.row.push(
-              h(
-                'td',
-                {
-                  class: 'n-descriptions-table-content',
-                  colspan: isLastIteration
-                    ? (compitableColumn - memorizedSpan) * 2
-                    : itemSpan * 2
-                },
-                [
-                  h(
-                    'span',
-                    {
-                      class: 'n-descriptions-table-content__label'
-                    },
-                    itemLabel.concat([': '])
-                  ),
-                  h(
-                    'span',
-                    {
-                      class: 'n-descriptions-table-content__content'
-                    },
-                    itemChildren
-                  )
-                ]
-              )
-            )
-          }
-        } else {
-          const colspan = isLastIteration
-            ? (compitableColumn - memorizedSpan) * 2
-            : itemSpan * 2
+    const defaultState: {
+      span: number
+      row: VNode[]
+      secondRow: VNode[]
+      rows: VNode[][]
+    } = {
+      span: 0,
+      row: [],
+      secondRow: [],
+      rows: []
+    }
+    const itemState = filteredChildren.reduce((state, vNode, index) => {
+      const props = vNode.props || {}
+      const isLastIteration = filteredChildren.length - 1 === index
+      const itemLabel = [
+        'label' in props ? props.label : getVNodeChildren(vNode, 'label')
+      ]
+      const itemChildren = [getVNodeChildren(vNode)]
+      const itemSpan = (props.span as number) || 1
+      const memorizedSpan = state.span
+      state.span += itemSpan
+      if (labelPlacement === 'left') {
+        if (bordered) {
           state.row.push(
             h(
               'th',
               {
                 class: 'n-descriptions-table-header',
-                colspan
+                colspan: 1
               },
               itemLabel
-            )
-          )
-          state.secondRow.push(
+            ),
             h(
               'td',
               {
                 class: 'n-descriptions-table-content',
-                colspan
+                colspan: isLastIteration
+                  ? (compitableColumn - memorizedSpan) * 2 + 1
+                  : itemSpan * 2 - 1
               },
               itemChildren
             )
           )
+        } else {
+          state.row.push(
+            h(
+              'td',
+              {
+                class: 'n-descriptions-table-content',
+                colspan: isLastIteration
+                  ? (compitableColumn - memorizedSpan) * 2
+                  : itemSpan * 2
+              },
+              [
+                h(
+                  'span',
+                  {
+                    class: 'n-descriptions-table-content__label'
+                  },
+                  itemLabel.concat([': '])
+                ),
+                h(
+                  'span',
+                  {
+                    class: 'n-descriptions-table-content__content'
+                  },
+                  itemChildren
+                )
+              ]
+            )
+          )
         }
-        if (state.span >= compitableColumn || isLastIteration) {
-          state.span = 0
-          if (state.row.length) {
-            state.rows.push(state.row)
-            state.row = []
-          }
-          if (labelPlacement !== 'left') {
-            if (state.secondRow.length) {
-              state.rows.push(state.secondRow)
-              state.secondRow = []
-            }
-          }
-        }
-        return state
-      },
-      {
-        span: 0,
-        row: [],
-        secondRow: [],
-        rows: []
-      } as {
-        span: number
-        row: VNode[]
-        secondRow: VNode[]
-        rows: VNode[][]
+      } else {
+        const colspan = isLastIteration
+          ? (compitableColumn - memorizedSpan) * 2
+          : itemSpan * 2
+        state.row.push(
+          h(
+            'th',
+            {
+              class: 'n-descriptions-table-header',
+              colspan
+            },
+            itemLabel
+          )
+        )
+        state.secondRow.push(
+          h(
+            'td',
+            {
+              class: 'n-descriptions-table-content',
+              colspan
+            },
+            itemChildren
+          )
+        )
       }
-    )
+      if (state.span >= compitableColumn || isLastIteration) {
+        state.span = 0
+        if (state.row.length) {
+          state.rows.push(state.row)
+          state.row = []
+        }
+        if (labelPlacement !== 'left') {
+          if (state.secondRow.length) {
+            state.rows.push(state.secondRow)
+            state.secondRow = []
+          }
+        }
+      }
+      return state
+    }, defaultState)
     const rows = itemState.rows.map((row) =>
       h(
         'tr',

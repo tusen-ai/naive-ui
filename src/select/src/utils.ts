@@ -8,8 +8,8 @@ import type {
 } from './interface'
 
 export function getKey (option: Option): string | number {
-  if (getIsGroup(option)) return (option as GroupOption).name
-  return option.value
+  if (getIsGroup(option)) { return (option as GroupOption).name || option.value || 'key-required' }
+  return (option as BaseOption | IgnoredOption).value
 }
 
 export function getIsGroup (option: Option): boolean {
@@ -17,7 +17,7 @@ export function getIsGroup (option: Option): boolean {
 }
 
 export function getIgnored (option: Option): boolean {
-  return !!option.ignored
+  return option.type === 'ignored'
 }
 
 export const tmOptions: TreeMateOptions<
@@ -42,7 +42,7 @@ export function patternMatched (pattern: string, value: string): boolean {
 
 export function filterOptions (
   originalOpts: Options,
-  filter: (pattern: string, option: Option) => boolean,
+  filter: (pattern: string, option: BaseOption) => boolean,
   pattern: string
 ): Options {
   if (!filter) return originalOpts
@@ -50,8 +50,8 @@ export function filterOptions (
     if (!Array.isArray(options)) return []
     const filteredOptions = []
     for (const option of options) {
-      if ('type' in option && option.type === 'group') {
-        const children = traverse(option.children)
+      if (getIsGroup(option)) {
+        const children = traverse((option as GroupOption).children)
         if (children.length) {
           filteredOptions.push(
             Object.assign({}, option, {
@@ -59,7 +59,9 @@ export function filterOptions (
             })
           )
         }
-      } else if (filter(pattern, option)) {
+      } else if (getIgnored(option)) {
+        continue
+      } else if (filter(pattern, option as BaseOption)) {
         filteredOptions.push(option)
       }
     }
@@ -73,8 +75,8 @@ export function createValOptMap (
 ): Map<string | number, BaseOption> {
   const valOptMap = new Map()
   options.forEach((option) => {
-    if (option.type === 'group') {
-      option.children.forEach((groupOption: GroupOption) => {
+    if (getIsGroup(option)) {
+      ;(option as GroupOption).children.forEach((groupOption: BaseOption) => {
         valOptMap.set(groupOption.value, groupOption)
       })
     } else {

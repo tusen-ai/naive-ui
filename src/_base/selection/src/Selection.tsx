@@ -467,7 +467,7 @@ export default defineComponent({
         style={this.cssVars as CSSProperties}
         onMouseenter={this.handleMouseEnter}
         onMouseleave={this.handleMouseLeave}
-        onMousedownCapture={this.handleMouseDown}
+        onMousedown={this.handleMouseDown}
         onFocusin={this.handleFocusin}
       >
         {/* multiple */}

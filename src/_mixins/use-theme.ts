@@ -2,15 +2,14 @@ import { inject, computed, onBeforeMount, ComputedRef, PropType } from 'vue'
 import { merge } from 'lodash-es'
 import globalStyle from '../_styles/global/index.cssr'
 import { CNode } from 'css-render'
-import {
-  ConfigProviderInjection,
-  ThemeOverrides
-} from '../config-provider/index.js'
+import { ConfigProviderInjection } from '../config-provider'
 import type { ThemeCommonVars } from '../_styles/new-common'
 
 globalStyle.mount({
   id: 'naive-ui-global'
 })
+
+type ThemeOverrides = any
 
 export interface Theme<T = undefined, R = any> {
   name: string

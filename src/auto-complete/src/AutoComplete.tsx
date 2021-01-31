@@ -32,6 +32,7 @@ import {
   OnSelect,
   OnUpdateImpl
 } from './interface'
+import { tmOptions } from '../../select/src/utils'
 
 export default defineComponent({
   name: 'AutoComplete',
@@ -127,17 +128,7 @@ export default defineComponent({
     const treeMateRef = computed(() =>
       createTreeMate<BaseOption, GroupOption, IgnoredOption>(
         selectOptionsRef.value,
-        {
-          getKey (node) {
-            if (node.ignored) {
-              return node.value
-            } else if (node.type === 'group') {
-              return node.name
-            } else {
-              return node.value
-            }
-          }
-        }
+        tmOptions
       )
     )
     function doUpdateValue (value: string | null): void {

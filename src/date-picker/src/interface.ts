@@ -1,6 +1,5 @@
 import { UnwrapRef } from 'vue'
-import { NaiveDateLocale } from '../../config-provider'
-import { NaiveLocale } from '../../locales'
+import { NaiveLocale, NaiveDateLocale } from '../../locales'
 import {
   IsHourDisabled,
   IsMinuteDisabled,

@@ -84,8 +84,7 @@ function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
         }
       }
       if (NFormItem) {
-        const { mergedSize } = NFormItem
-        return mergedSize
+        return NFormItem.mergedSize.value
       }
       return 'medium'
     }

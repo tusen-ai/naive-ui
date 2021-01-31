@@ -1,17 +1,18 @@
-import { h, defineComponent, VNode, provide, PropType } from 'vue'
+import { h, defineComponent, VNode, provide, PropType, VNodeChild } from 'vue'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps, ThemePropsReactive } from '../../_mixins'
 
 import { getSlot } from '../../_utils'
 import { StepsTheme } from '../styles'
 
-function stepWithIndex (step: VNode, i: number): VNode {
+function stepWithIndex (step: VNodeChild, i: number): VNode | null {
+  if (typeof step !== 'object' || step === null || Array.isArray(step)) { return null }
   if (!step.props) step.props = {}
   step.props.index = i + 1
   return step
 }
 
-function stepsWithIndex (steps: VNode[]): VNode[] {
+function stepsWithIndex (steps: VNodeChild[]): Array<VNode | null> {
   return steps.map((step, i) => stepWithIndex(step, i))
 }
 

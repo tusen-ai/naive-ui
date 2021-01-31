@@ -2,11 +2,13 @@ import { computed, watch, toRef, ComputedRef } from 'vue'
 import { ConfigProviderInjection } from '../../config-provider'
 import styleScheme from '../../_deprecated/style-scheme'
 
+export type OnLanguageChange = (
+  lang: string | undefined,
+  oldLang: string | undefined
+) => void
+
 interface UseLegacyProps {
-  onLanguageChange: (
-    lang: string | undefined,
-    oldLang: string | undefined
-  ) => void
+  onLanguageChange?: OnLanguageChange
 }
 
 interface UseLegacy {

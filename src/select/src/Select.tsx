@@ -33,7 +33,6 @@ import style from './styles/index.cssr'
 
 import type {
   Options,
-  Option,
   BaseOption,
   GroupOption,
   IgnoredOption,
@@ -85,10 +84,12 @@ export default defineComponent({
       default: false
     },
     filter: {
-      type: Function as PropType<(pattern: string, option: Option) => boolean>,
-      default: (pattern: string, option: Option) => {
+      type: Function as PropType<
+      (pattern: string, option: BaseOption) => boolean
+      >,
+      default: (pattern: string, option: BaseOption) => {
         if (!option) return false
-        if (option.label !== undefined) {
+        if (typeof option.label === 'string') {
           return patternMatched(pattern, option.label)
         } else if (option.value !== undefined) {
           return patternMatched(pattern, String(option.value))

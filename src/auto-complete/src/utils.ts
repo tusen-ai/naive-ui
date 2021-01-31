@@ -1,4 +1,9 @@
-import { BaseOption, Option, Options } from '../../select/src/interface'
+import {
+  BaseOption,
+  GroupOption,
+  Option,
+  Options
+} from '../../select/src/interface'
 import { AutoCompleteOption } from './interface'
 
 export function mapAutoCompleteOptionsToSelectOptions (
@@ -15,19 +20,18 @@ function convertAutoCompleteOptionToSelectOption (
       label: option,
       value: option
     }
-  } else if (option.ignored) {
-    return option
   } else if (option.type === 'group') {
-    return {
+    const groupOption: GroupOption = {
       type: 'group',
-      label: option.name,
-      name: option.name,
+      label: (option.label as any) ?? option.name,
+      name: (option.value as any) ?? option.name,
       children: (option.children as Array<string | BaseOption>).map(
         (groupOption) =>
           convertAutoCompleteOptionToSelectOption(groupOption) as BaseOption
       )
     }
+    return groupOption
   } else {
-    return option
+    return option as Option
   }
 }

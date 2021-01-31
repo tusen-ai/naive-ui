@@ -149,7 +149,7 @@ export default defineComponent({
     const themeRef = useTheme('Menu', 'Menu', style, menuLight, props)
 
     const treeMateRef = computed(() =>
-      createTreeMate(props.items, {
+      createTreeMate<MenuItem, MenuItemGroup>(props.items, {
         getKey (node) {
           return node.key ?? node.name
         }

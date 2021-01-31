@@ -51,7 +51,7 @@ export default defineComponent({
             }
             teleport-disabled
             size={this.timePickerSize}
-            value={this.value}
+            value={Array.isArray(this.value) ? null : this.value}
             placeholder={this.locale.selectTime}
             isHourDisabled={this.isHourDisabled}
             isMinuteDisabled={this.isMinuteDisabled}

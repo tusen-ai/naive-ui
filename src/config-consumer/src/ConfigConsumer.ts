@@ -1,6 +1,6 @@
-import { defineComponent, inject, toRef, watch } from 'vue'
+import { defineComponent, inject, toRef, watch, PropType } from 'vue'
 import { ConfigProviderInjection } from '../../config-provider'
-import useLegacy from './use-legacy'
+import useLegacy, { OnLanguageChange } from './use-legacy'
 
 export default defineComponent({
   name: 'ConfigConsumer',
@@ -19,10 +19,7 @@ export default defineComponent({
     /**
      * @deprecated
      */
-    onLanguageChange: {
-      type: Function,
-      default: undefined
-    }
+    onLanguageChange: Function as PropType<OnLanguageChange>
   },
   setup (props) {
     const NConfigProvider = inject<ConfigProviderInjection | null>(

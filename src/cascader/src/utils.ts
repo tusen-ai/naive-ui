@@ -20,8 +20,8 @@ function traverseWithCallback<T extends { children?: T[] }> (
 function createSelectOptions (
   tmNodes: TmNode[],
   leafOnly: boolean
-): BaseSelectOption[] {
-  const selectOptions: BaseSelectOption[] = []
+): Array<BaseSelectOption & { path: BaseOption[] }> {
+  const selectOptions: Array<BaseSelectOption & { path: BaseOption[] }> = []
   const path: BaseOption[] = []
   traverseWithCallback(
     tmNodes,

@@ -10,13 +10,12 @@ import {
 import { useMemo } from 'vooks'
 import { warn, getSlot } from '../../_utils'
 import {
-  Theme,
   ThemeOverrides,
-  NaiveDateLocale,
-  NaiveLocale,
   Hljs,
+  Theme,
   ConfigProviderInjection
 } from './interface'
+import { NaiveDateLocale, NaiveLocale } from '../../locales'
 
 export default defineComponent({
   name: 'ConfigProvider',
@@ -30,14 +29,8 @@ export default defineComponent({
       type: Boolean,
       default: undefined
     },
-    locale: {
-      type: Object as PropType<NaiveLocale>,
-      default: undefined
-    },
-    dateLocale: {
-      type: Object as PropType<NaiveDateLocale>,
-      default: undefined
-    },
+    locale: Object as PropType<NaiveLocale>,
+    dateLocale: Object as PropType<NaiveDateLocale>,
     namespace: {
       type: String,
       default: undefined
@@ -136,7 +129,7 @@ export default defineComponent({
         mergedDateLocale: computed(() => {
           const { dateLocale } = props
           return dateLocale === undefined
-            ? NConfigProvider?.mergedLocale
+            ? NConfigProvider?.mergedDateLocale
             : dateLocale
         }),
         mergedHljs: computed(() => {

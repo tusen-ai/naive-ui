@@ -1,15 +1,16 @@
 import { h, VNode } from 'vue'
-import type { TreeNode, RawNode } from 'treemate'
+import type { TreeNode } from 'treemate'
 import { keep, keysOf } from '../../_utils'
 import NMenuItemGroup, { menuItemGroupProps } from './MenuItemGroup'
 import NSubmenu, { submenuProps } from './Submenu'
 import NMenuItem, { menuItemProps } from './MenuItem'
+import { MenuItem, MenuItemGroup } from './interface'
 
 const groupPropKeys = keysOf(menuItemGroupProps)
 const itemPropKeys = keysOf(menuItemProps)
 const submenuPropKeys = keysOf(submenuProps)
 
-export function itemRenderer (tmNode: TreeNode): VNode {
+export function itemRenderer (tmNode: TreeNode<MenuItem, MenuItemGroup>): VNode {
   const { rawNode, key, level } = tmNode
   const props = {
     ...rawNode,
@@ -29,7 +30,7 @@ export function itemRenderer (tmNode: TreeNode): VNode {
     return h(
       NSubmenu,
       keep(props, submenuPropKeys, {
-        rawNodes: tmNode.rawNode.children as RawNode[],
+        rawNodes: tmNode.rawNode.children,
         tmNodes: tmNode.children
       })
     )

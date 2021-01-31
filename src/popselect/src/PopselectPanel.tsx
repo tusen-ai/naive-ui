@@ -22,6 +22,7 @@ import {
   IgnoredOption,
   ValueAtom
 } from '../../select/src/interface'
+import { tmOptions } from '../../select/src/utils'
 
 export const panelProps = {
   multiple: {
@@ -122,11 +123,7 @@ export default defineComponent({
       treeMate: computed(() => {
         return createTreeMate<BaseOption, GroupOption, IgnoredOption>(
           props.options,
-          {
-            getKey (node) {
-              return node.value
-            }
-          }
+          tmOptions
         )
       }),
       handleMenuToggleOption
