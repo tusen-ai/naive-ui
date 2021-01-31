@@ -1,5 +1,6 @@
 import { h, defineComponent, inject, PropType } from 'vue'
 import { happensIn } from 'seemly'
+import { formatLength } from '../../../_utils'
 import { NCheckbox } from '../../../checkbox'
 import SortButton from '../HeaderButton/SortButton'
 import FilterButton from '../HeaderButton/FilterButton'
@@ -54,6 +55,7 @@ export default defineComponent({
   render () {
     const {
       NDataTable: {
+        scrollX,
         columns,
         fixedColumnLeftMap,
         fixedColumnRightMap,
@@ -68,11 +70,15 @@ export default defineComponent({
     } = this
     return (
       <div
-        style={this.headerStyle}
+        style={headerStyle}
         class="n-data-table-base-table-header"
         onScroll={this.onScroll}
       >
-        <table ref="body" class="n-data-table-table" style={headerStyle}>
+        <table
+          ref="body"
+          class="n-data-table-table"
+          style={{ width: formatLength(scrollX) }}
+        >
           <colgroup>
             {columns.map((column, index) => (
               <col

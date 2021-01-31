@@ -119,12 +119,12 @@ export function useScroll (
     scrollMainTableBodyToTop()
   })
   return {
-    handleTableBodyScroll,
-    handleTableHeaderScroll,
     styleScrollXRef,
     fixedColumnLeftMap: fixedColumnLeftMapRef,
     fixedColumnRightMap: fixedColumnRightMapRef,
     leftFixedColumns: leftFixedColumnsRef,
-    rightFixedColumns: rightFixedColumnsRef
+    rightFixedColumns: rightFixedColumnsRef,
+    handleTableBodyScroll,
+    handleTableHeaderScroll
   }
 }

@@ -142,8 +142,8 @@ export default defineComponent({
       })
     )
     return {
-      headerInstRef: ref(null),
-      bodyInstRef: ref(null),
+      headerInstRef,
+      bodyInstRef,
       bodyStyle: bodyStyleRef,
       handleHeaderScroll,
       handleHeaderResize,
