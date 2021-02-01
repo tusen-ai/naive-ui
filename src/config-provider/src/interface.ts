@@ -67,8 +67,8 @@ import type { UploadTheme } from '../../upload/styles'
 import type { InternalSelectMenuTheme } from '../../_internal/select-menu/styles'
 import type { InternalSelectionTheme } from '../../_internal/selection/styles'
 import type { ExtractThemeOverrides } from '../../_mixins/use-theme'
+import type { Hljs } from '../../_mixins'
 
-export type Hljs = any
 export interface GlobalTheme {
   common: ThemeCommonVars
   Alert?: AlertTheme

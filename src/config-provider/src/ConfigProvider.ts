@@ -9,8 +9,8 @@ import {
 } from 'vue'
 import { useMemo } from 'vooks'
 import { warn, getSlot } from '../../_utils'
+import type { Hljs } from '../../_mixins'
 import {
-  Hljs,
   ConfigProviderInjection,
   GlobalTheme,
   GlobalThemeOverrides

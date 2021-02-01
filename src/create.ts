@@ -1,7 +1,7 @@
 import { App } from 'vue'
 import version from './version'
 import { warn } from './_utils'
-import { Hljs } from './config-provider'
+import type { Hljs } from './_mixins'
 import { NaiveLocale } from './locales'
 
 type ComponentType = any

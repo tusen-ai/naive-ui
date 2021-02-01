@@ -29,7 +29,11 @@ export default defineComponent({
   setup (props, { slots }) {
     const codeRef = ref<HTMLElement | null>(null)
     const hljsRef = useHljs(props)
-    const createCodeHtml = (language: string, code: string, trim: boolean) => {
+    const createCodeHtml = (
+      language: string,
+      code: string,
+      trim: boolean
+    ): string | null => {
       const { value: hljs } = hljsRef
       if (!hljs) {
         return null
@@ -39,7 +43,7 @@ export default defineComponent({
       }
       return hljs.highlight(language, trim ? code.trim() : code).value
     }
-    const setCode = () => {
+    const setCode = (): void => {
       if (slots.default) return
       const { value: codeEl } = codeRef
       if (!codeEl) return

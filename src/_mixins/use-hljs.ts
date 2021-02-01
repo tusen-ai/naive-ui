@@ -1,4 +1,5 @@
 import { inject, getCurrentInstance, computed, ComputedRef } from 'vue'
+import type { highlight, getLanguage } from 'highlight.js'
 import { ConfigProviderInjection } from '../config-provider'
 import { warn } from '../_utils'
 
@@ -8,10 +9,9 @@ interface UseHljsProps {
 }
 
 export interface Hljs {
-  getLanguage: (lang: string) => string | undefined
-  highlight: (language: string, code: string) => { value: string }
+  highlight: typeof highlight
+  getLanguage: typeof getLanguage
 }
-
 export default function useHljs (
   props: UseHljsProps
 ): ComputedRef<Hljs | undefined> {
