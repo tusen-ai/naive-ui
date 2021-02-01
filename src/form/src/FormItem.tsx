@@ -45,7 +45,7 @@ import {
 
 export const formItemProps = {
   ...(useTheme.props as ThemeProps<FormTheme>),
-  label: String,
+  label: String as PropType<string | false>,
   labelWidth: [Number, String] as PropType<string | number>,
   labelStyle: [String, Object] as PropType<CSSProperties | string>,
   labelAlign: String as PropType<LabelAlign>,
@@ -369,7 +369,8 @@ export default defineComponent({
           'n-form-item',
           [
             `n-form-item--${this.mergedSize}-size`,
-            `n-form-item--${this.mergedLabelPlacement}-labelled`
+            `n-form-item--${this.mergedLabelPlacement}-labelled`,
+            this.label === false && 'n-form-item--no-label'
           ]
         ]}
         style={this.cssVars as CSSProperties}

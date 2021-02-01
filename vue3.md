@@ -413,7 +413,7 @@
   - [x] vshow (maybe create a vue pr)
   - [x] jsx focusin out (waiting for vue update)
   - [ ] inject key & value in type
-  - [ ] form item no label css
+  - [x] form item no label css
   - [x] unify treemate ignored
   - [ ] fix menu extra
 

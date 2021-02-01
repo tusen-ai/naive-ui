@@ -65,6 +65,12 @@ export default cB('form-item', {
       "feedback";
     grid-template-rows: var(--label-height) 1fr;
   `, [
+    cM('no-label', `
+      grid-template-areas:
+        "blank"
+        "feedback";
+        grid-template-rows: 1fr;
+    `),
     cB('form-item-label', {
       display: 'flex',
       alignItems: 'flex-end'
