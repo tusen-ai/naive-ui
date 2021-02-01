@@ -4,13 +4,15 @@ import { keep, keysOf } from '../../_utils'
 import NMenuItemGroup, { menuItemGroupProps } from './MenuItemGroup'
 import NSubmenu, { submenuProps } from './Submenu'
 import NMenuItem, { menuItemProps } from './MenuItem'
-import { MenuItem, MenuItemGroup } from './interface'
+import { MenuOption, MenuGroupOption } from './interface'
 
 const groupPropKeys = keysOf(menuItemGroupProps)
 const itemPropKeys = keysOf(menuItemProps)
 const submenuPropKeys = keysOf(submenuProps)
 
-export function itemRenderer (tmNode: TreeNode<MenuItem, MenuItemGroup>): VNode {
+export function itemRenderer (
+  tmNode: TreeNode<MenuOption, MenuGroupOption>
+): VNode {
   const { rawNode, key, level } = tmNode
   const props = {
     ...rawNode,

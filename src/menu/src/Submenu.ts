@@ -17,16 +17,16 @@ import { itemRenderer } from './utils'
 import { useMenuChild } from './use-menu-child'
 import type { SubmenuInjection } from './use-menu-child'
 import { TreeNode } from 'treemate'
-import { MenuItemGroup, MenuItem } from './interface'
+import { MenuGroupOption, MenuOption } from './interface'
 
 export const submenuProps = {
   ...useMenuChild.props,
   rawNodes: {
-    type: Array as PropType<Array<MenuItem | MenuItemGroup>>,
+    type: Array as PropType<Array<MenuOption | MenuGroupOption>>,
     default: () => []
   },
   tmNodes: {
-    type: Array as PropType<Array<TreeNode<MenuItem, MenuItemGroup>>>,
+    type: Array as PropType<Array<TreeNode<MenuOption, MenuGroupOption>>>,
     default: () => []
   },
   disabled: {

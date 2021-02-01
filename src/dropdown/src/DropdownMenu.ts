@@ -5,7 +5,7 @@ import NDropdownDivider from './DropdownDivider'
 import NDropdownGroup from './DropdownGroup'
 import { isSubmenuNode, isGroupNode, isDividerNode } from './utils'
 import {
-  DropdownGroup,
+  DropdownOptionGroup,
   DropdownIgnoredOption,
   DropdownOption
 } from './interface'
@@ -20,7 +20,9 @@ export default defineComponent({
   props: {
     tmNodes: {
       type: Array as PropType<
-      Array<TreeNode<DropdownOption, DropdownGroup, DropdownIgnoredOption>>
+      Array<
+      TreeNode<DropdownOption, DropdownOptionGroup, DropdownIgnoredOption>
+      >
       >,
       default: () => []
     },
@@ -37,7 +39,7 @@ export default defineComponent({
           return props.tmNodes.some((tmNode) => {
             const { rawNode } = tmNode
             if (isGroupNode(rawNode)) {
-              return !!(rawNode as DropdownGroup).children.some(
+              return (rawNode as DropdownOptionGroup).children.some(
                 (rawChild) => rawChild.icon
               )
             }
@@ -48,8 +50,8 @@ export default defineComponent({
           return props.tmNodes.some((tmNode) => {
             const { rawNode } = tmNode
             if (isGroupNode(rawNode)) {
-              return !!(rawNode as DropdownGroup).children.some((rawChild) =>
-                isSubmenuNode(rawChild)
+              return (rawNode as DropdownOptionGroup).children.some(
+                (rawChild) => isSubmenuNode(rawChild)
               )
             }
             return isSubmenuNode(rawNode)

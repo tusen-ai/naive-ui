@@ -20,7 +20,7 @@ import { DropdownInjection } from './Dropdown'
 import { isSubmenuNode } from './utils'
 import { TreeNode } from 'treemate'
 import {
-  DropdownGroup,
+  DropdownOptionGroup,
   DropdownIgnoredOption,
   DropdownOption
 } from './interface'
@@ -34,7 +34,7 @@ export default defineComponent({
   props: {
     tmNode: {
       type: Object as PropType<
-      TreeNode<DropdownOption, DropdownGroup, DropdownIgnoredOption>
+      TreeNode<DropdownOption, DropdownOptionGroup, DropdownIgnoredOption>
       >,
       required: true
     },

@@ -10,7 +10,7 @@ import {
   reactive,
   CSSProperties
 } from 'vue'
-import { createTreeMate, Key, TreeNode } from 'treemate'
+import { createTreeMate, Key, TreeMateOptions, TreeNode } from 'treemate'
 import { useMergedState, useKeyboard, useMemo } from 'vooks'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -21,20 +21,27 @@ import type { DropdownTheme } from '../styles'
 import NDropdownMenu from './DropdownMenu'
 import style from './styles/index.cssr'
 import {
-  DropdownGroup,
+  DropdownOptionGroup,
   DropdownIgnoredOption,
   DropdownOption,
+  DropdownMixedOption,
   OnUpdateValue,
   OnUpdateValueImpl
 } from './interface'
 
-const treemateOptions = {
-  getKey (node: DropdownOption | DropdownGroup | DropdownIgnoredOption) {
+const treemateOptions: TreeMateOptions<
+DropdownOption,
+DropdownOptionGroup,
+DropdownIgnoredOption
+> = {
+  getKey (node) {
     return node.key
   },
-  getDisabled (node: DropdownOption | DropdownGroup | DropdownIgnoredOption) {
-    if (node.type === 'divider') return true
+  getDisabled (node) {
     return node.disabled === true
+  },
+  getIgnored (node) {
+    return node.type === 'divider'
   }
 }
 
@@ -73,9 +80,7 @@ const dropdownProps = {
   },
   onSelect: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   options: {
-    type: Array as PropType<
-    Array<DropdownOption | DropdownGroup | DropdownIgnoredOption>
-    >,
+    type: Array as PropType<DropdownMixedOption[]>,
     default: () => []
   },
   containerClass: {
@@ -106,7 +111,7 @@ export default defineComponent({
     const treemateRef = computed(() => {
       return createTreeMate<
       DropdownOption,
-      DropdownGroup,
+      DropdownOptionGroup,
       DropdownIgnoredOption
       >(props.options, treemateOptions)
     })

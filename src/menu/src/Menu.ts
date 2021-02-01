@@ -19,8 +19,8 @@ import type { MenuTheme } from '../styles'
 import { MenuInjection } from './use-menu-child'
 import style from './styles/index.cssr'
 import {
-  MenuItem,
-  MenuItemGroup,
+  MenuOption,
+  MenuGroupOption,
   OnUpdateValue,
   OnUpdateKeys,
   OnUpdateValueImpl,
@@ -32,7 +32,7 @@ export default defineComponent({
   props: {
     ...(useTheme.props as ThemeProps<MenuTheme>),
     items: {
-      type: Array as PropType<Array<MenuItem | MenuItemGroup>>,
+      type: Array as PropType<Array<MenuOption | MenuGroupOption>>,
       default: () => []
     },
     collapsed: {
@@ -149,7 +149,7 @@ export default defineComponent({
     const themeRef = useTheme('Menu', 'Menu', style, menuLight, props)
 
     const treeMateRef = computed(() =>
-      createTreeMate<MenuItem, MenuItemGroup>(props.items, {
+      createTreeMate<MenuOption, MenuGroupOption>(props.items, {
         getKey (node) {
           return node.key ?? node.name
         }
@@ -196,7 +196,7 @@ export default defineComponent({
         toggleExpand
       })
     )
-    function doSelect (value: Key, item: MenuItem): void {
+    function doSelect (value: Key, item: MenuOption): void {
       const { 'onUpdate:value': onUpdateValue, onSelect } = props
       if (onUpdateValue) {
         call(onUpdateValue as OnUpdateValueImpl, value, item)

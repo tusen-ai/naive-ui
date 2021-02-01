@@ -3,36 +3,39 @@ import { VNodeChild } from 'vue'
 
 export type Key = string | number
 
-// Aligned with Dropdown props, has some redundant
-export interface MenuItem {
+interface MenuOptionBase {
   key: Key
   disabled?: boolean
-  label?: string
   icon?: () => VNodeChild
-  children?: Array<MenuItem | MenuItemGroup>
+  children?: Array<MenuOption | MenuGroupOption>
+  extra?: string
   [key: string]: unknown
-  /** @deprecated */
-  title?: string | (() => VNodeChild)
-  /** @deprecated */
-  extra?: string | (() => VNodeChild)
 }
 
-export interface MenuItemGroup {
-  key: Key
+interface MenuGroupOptionBase extends MenuOptionBase {
   type: 'group'
-  label?: string
-  icon?: () => VNodeChild
-  children: Array<MenuItem | MenuItemGroup>
-  [key: string]: unknown
-  /** @deprecated */
-  title?: string | (() => VNodeChild)
+  children: Array<MenuOption | MenuGroupOption>
 }
 
-export type TmNode = TreeNode<MenuItem, MenuItemGroup>
+export type MenuOption =
+  | (MenuOptionBase & {
+    /** @deprecated */
+    title: string | (() => VNodeChild)
+  })
+  | (MenuOptionBase & { label: string | (() => VNodeChild) })
+
+export type MenuGroupOption =
+  | (MenuGroupOptionBase & {
+    /** @deprecated */
+    title: string | (() => VNodeChild)
+  })
+  | (MenuGroupOptionBase & { label: string | (() => VNodeChild) })
+
+export type TmNode = TreeNode<MenuOption, MenuGroupOption>
 
 export type OnUpdateValue = <T extends string & number & (string | number)>(
   value: T,
-  item: MenuItem
+  item: MenuOption
 ) => void
 export type OnUpdateKeys = <
   T extends string[] & number[] & Array<string | number>
@@ -42,7 +45,7 @@ export type OnUpdateKeys = <
 
 export type OnUpdateValueImpl = <T extends string | number | (string | number)>(
   value: T,
-  item: MenuItem
+  item: MenuOption
 ) => void
 export type OnUpdateKeysImpl = <
   T extends string[] | number[] | Array<string | number>
