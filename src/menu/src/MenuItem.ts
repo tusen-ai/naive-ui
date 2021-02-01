@@ -53,7 +53,7 @@ export default defineComponent({
       iconMarginRight: MenuChild.iconMarginRight,
       maxIconSize: MenuChild.maxIconSize,
       activeIconSize: MenuChild.activeIconSize,
-      mergedTheme: NMenu.mergedTheme,
+      mergedTheme: computed(() => NMenu.mergedTheme),
       dropdownEnabled: useMemo(() => {
         return (
           props.root &&
@@ -62,7 +62,10 @@ export default defineComponent({
           !mergedDisabledRef.value
         )
       }),
-      selected: useMemo(() => {
+      // Vue has bug when using vooks.useMemo
+      // menu item state won't be updated...
+      // a minimal reproduction is needed
+      selected: computed(() => {
         if (NMenu.mergedValue === props.internalKey) return true
         return false
       }),

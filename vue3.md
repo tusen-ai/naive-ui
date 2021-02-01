@@ -397,7 +397,7 @@
   - [x] vooks `useNow`
   - [x] treemate activePath includeGroup: false
   - [ ] select menu multiple, when show=true, checkmark transiton not working
-  - [ ] menu + dropdown collapsed 时候 menu item 不更新
+  - [x] menu + dropdown collapsed 时候 menu item 不更新（selected 从使用 useMemo 切换成 computed（性能下降）, Vue 在这种时候一定存在 bug，但是暂时没空找了...）
   - [x] 拆分 dateFns locale => dateLocale
   - [ ] 更新一波文档 props
   - [ ] 更新样式的文档
