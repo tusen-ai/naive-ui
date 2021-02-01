@@ -1,37 +1,37 @@
 import {
-  BaseOption,
-  GroupOption,
-  Option,
-  Options
+  SelectOption,
+  SelectGroupOption,
+  SelectMixedOption
 } from '../../select/src/interface'
 import { AutoCompleteOption } from './interface'
 
 export function mapAutoCompleteOptionsToSelectOptions (
-  options: Array<AutoCompleteOption | Option>
-): Options {
+  options: Array<AutoCompleteOption | SelectMixedOption>
+): SelectMixedOption[] {
   return options.map(convertAutoCompleteOptionToSelectOption)
 }
 
 function convertAutoCompleteOptionToSelectOption (
-  option: AutoCompleteOption | Option
-): Option {
+  option: AutoCompleteOption | SelectMixedOption
+): SelectMixedOption {
   if (typeof option === 'string') {
     return {
       label: option,
       value: option
     }
   } else if (option.type === 'group') {
-    const groupOption: GroupOption = {
+    const groupOption: SelectGroupOption = {
       type: 'group',
-      label: (option.label as any) ?? option.name,
-      name: (option.value as any) ?? option.name,
-      children: (option.children as Array<string | BaseOption>).map(
+      label: option.label ?? (option.name as any),
+      value: option.value ?? (option.name as any),
+      name: option.name as any,
+      children: (option.children as Array<string | SelectOption>).map(
         (groupOption) =>
-          convertAutoCompleteOptionToSelectOption(groupOption) as BaseOption
+          convertAutoCompleteOptionToSelectOption(groupOption) as SelectOption
       )
     }
     return groupOption
   } else {
-    return option as Option
+    return option as SelectMixedOption
   }
 }

@@ -1,5 +1,5 @@
 import type { TmNode, BaseOption } from './interface'
-import type { BaseOption as BaseSelectOption } from '../../select/src/interface'
+import type { SelectOption } from '../../select'
 
 function traverseWithCallback<T extends { children?: T[] }> (
   options: T[],
@@ -20,8 +20,8 @@ function traverseWithCallback<T extends { children?: T[] }> (
 function createSelectOptions (
   tmNodes: TmNode[],
   leafOnly: boolean
-): Array<BaseSelectOption & { path: BaseOption[] }> {
-  const selectOptions: Array<BaseSelectOption & { path: BaseOption[] }> = []
+): Array<SelectOption & { path: BaseOption[] }> {
+  const selectOptions: Array<SelectOption & { path: BaseOption[] }> = []
   const path: BaseOption[] = []
   traverseWithCallback(
     tmNodes,

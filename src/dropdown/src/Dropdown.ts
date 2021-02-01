@@ -21,7 +21,7 @@ import type { DropdownTheme } from '../styles'
 import NDropdownMenu from './DropdownMenu'
 import style from './styles/index.cssr'
 import {
-  DropdownOptionGroup,
+  DropdownGroupOption,
   DropdownIgnoredOption,
   DropdownOption,
   DropdownMixedOption,
@@ -31,7 +31,7 @@ import {
 
 const treemateOptions: TreeMateOptions<
 DropdownOption,
-DropdownOptionGroup,
+DropdownGroupOption,
 DropdownIgnoredOption
 > = {
   getKey (node) {
@@ -111,7 +111,7 @@ export default defineComponent({
     const treemateRef = computed(() => {
       return createTreeMate<
       DropdownOption,
-      DropdownOptionGroup,
+      DropdownGroupOption,
       DropdownIgnoredOption
       >(props.options, treemateOptions)
     })

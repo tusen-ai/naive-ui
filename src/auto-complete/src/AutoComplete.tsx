@@ -21,7 +21,11 @@ import { call, warn, useAdjustedTo, MaybeArray } from '../../_utils'
 import { NInternalSelectMenu, InternalSelectMenuRef } from '../../_internal'
 
 import { NInput } from '../../input'
-import type { BaseOption, GroupOption, IgnoredOption } from '../../select'
+import type {
+  SelectOption,
+  SelectGroupOption,
+  SelectIgnoredOption
+} from '../../select'
 import { autoCompleteLight } from '../styles'
 import type { AutoCompleteTheme } from '../styles'
 import { mapAutoCompleteOptionsToSelectOptions } from './utils'
@@ -126,7 +130,7 @@ export default defineComponent({
       )
     })
     const treeMateRef = computed(() =>
-      createTreeMate<BaseOption, GroupOption, IgnoredOption>(
+      createTreeMate<SelectOption, SelectGroupOption, SelectIgnoredOption>(
         selectOptionsRef.value,
         tmOptions
       )
@@ -186,7 +190,7 @@ export default defineComponent({
           break
       }
     }
-    function select (option: BaseOption): void {
+    function select (option: SelectOption): void {
       if (option) {
         if (props.clearAfterSelect) {
           doUpdateValue(null)
@@ -215,7 +219,7 @@ export default defineComponent({
       canBeActivatedRef.value = true
       doUpdateValue(value)
     }
-    function handleToggleOption (option: BaseOption): void {
+    function handleToggleOption (option: SelectOption): void {
       select(option)
     }
     function handleClickOutsideMenu (e: MouseEvent): void {

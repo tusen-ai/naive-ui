@@ -6,7 +6,7 @@ import NDropdownDivider from './DropdownDivider'
 import NDropdownGroupHeader from './DropdownGroupHeader'
 import { isDividerNode, isGroupNode } from './utils'
 import {
-  DropdownOptionGroup,
+  DropdownGroupOption,
   DropdownIgnoredOption,
   DropdownOption
 } from './interface'
@@ -16,7 +16,7 @@ export default defineComponent({
   props: {
     tmNode: {
       type: Object as PropType<
-      TreeNode<DropdownOption, DropdownOptionGroup, DropdownIgnoredOption>
+      TreeNode<DropdownOption, DropdownGroupOption, DropdownIgnoredOption>
       >,
       required: true
     },

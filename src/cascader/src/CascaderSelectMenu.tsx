@@ -15,10 +15,10 @@ import {
 import { clickoutside } from 'vdirs'
 import { createTreeMate } from 'treemate'
 import type {
-  BaseOption as BaseSelectOption,
-  GroupOption,
-  IgnoredOption
-} from '../../select/src/interface'
+  SelectOption,
+  SelectGroupOption,
+  SelectIgnoredOption
+} from '../../select'
 import { InternalSelectMenuRef, NInternalSelectMenu } from '../../_internal'
 import { createSelectOptions } from './utils'
 import {
@@ -84,10 +84,11 @@ export default defineComponent({
         }))
     })
     const selectTreeMateRef = computed(() => {
-      return createTreeMate<BaseSelectOption, GroupOption, IgnoredOption>(
-        filteredSelectOptionsRef.value,
-        tmOptions
-      )
+      return createTreeMate<
+      SelectOption,
+      SelectGroupOption,
+      SelectIgnoredOption
+      >(filteredSelectOptionsRef.value, tmOptions)
     })
     watch(toRef(props, 'value'), () => {
       void nextTick(() => {

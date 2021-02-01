@@ -1,29 +1,30 @@
 import { TreeMateOptions } from 'treemate'
 import type {
-  BaseOption,
-  GroupOption,
-  IgnoredOption,
-  Option,
-  Options
+  SelectOption,
+  SelectGroupOption,
+  SelectIgnoredOption,
+  SelectMixedOption
 } from './interface'
 
-export function getKey (option: Option): string | number {
-  if (getIsGroup(option)) { return (option as GroupOption).name || option.value || 'key-required' }
-  return (option as BaseOption | IgnoredOption).value
+export function getKey (option: SelectMixedOption): string | number {
+  if (getIsGroup(option)) {
+    return (option as SelectGroupOption).name || option.value || 'key-required'
+  }
+  return (option as SelectOption | SelectIgnoredOption).value
 }
 
-export function getIsGroup (option: Option): boolean {
+export function getIsGroup (option: SelectMixedOption): boolean {
   return option.type === 'group'
 }
 
-export function getIgnored (option: Option): boolean {
+export function getIgnored (option: SelectMixedOption): boolean {
   return option.type === 'ignored'
 }
 
 export const tmOptions: TreeMateOptions<
-BaseOption,
-GroupOption,
-IgnoredOption
+SelectOption,
+SelectGroupOption,
+SelectIgnoredOption
 > = {
   getKey,
   getIsGroup,
@@ -41,17 +42,17 @@ export function patternMatched (pattern: string, value: string): boolean {
 }
 
 export function filterOptions (
-  originalOpts: Options,
-  filter: (pattern: string, option: BaseOption) => boolean,
+  originalOpts: SelectMixedOption[],
+  filter: (pattern: string, option: SelectOption) => boolean,
   pattern: string
-): Options {
+): SelectMixedOption[] {
   if (!filter) return originalOpts
-  function traverse (options: Options): Options {
+  function traverse (options: SelectMixedOption[]): SelectMixedOption[] {
     if (!Array.isArray(options)) return []
     const filteredOptions = []
     for (const option of options) {
       if (getIsGroup(option)) {
-        const children = traverse((option as GroupOption).children)
+        const children = traverse((option as SelectGroupOption).children)
         if (children.length) {
           filteredOptions.push(
             Object.assign({}, option, {
@@ -61,7 +62,7 @@ export function filterOptions (
         }
       } else if (getIgnored(option)) {
         continue
-      } else if (filter(pattern, option as BaseOption)) {
+      } else if (filter(pattern, option as SelectOption)) {
         filteredOptions.push(option)
       }
     }
@@ -71,14 +72,16 @@ export function filterOptions (
 }
 
 export function createValOptMap (
-  options: Options
-): Map<string | number, BaseOption> {
+  options: SelectMixedOption[]
+): Map<string | number, SelectOption> {
   const valOptMap = new Map()
   options.forEach((option) => {
     if (getIsGroup(option)) {
-      ;(option as GroupOption).children.forEach((groupOption: BaseOption) => {
-        valOptMap.set(groupOption.value, groupOption)
-      })
+      ;(option as SelectGroupOption).children.forEach(
+        (SelectGroupOption: SelectOption) => {
+          valOptMap.set(SelectGroupOption.value, SelectGroupOption)
+        }
+      )
     } else {
       valOptMap.set(option.value, option)
     }

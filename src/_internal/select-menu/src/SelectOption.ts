@@ -10,7 +10,7 @@ import {
 import { InternalSelectMenuInjection } from './SelectMenu'
 import { TreeNode } from 'treemate'
 import { useMemo } from 'vooks'
-import type { BaseOption } from '../../../select'
+import type { SelectOption } from '../../../select'
 import { CheckmarkIcon } from '../../icons'
 import NBaseIcon from '../../icon'
 
@@ -35,7 +35,7 @@ export default defineComponent({
   name: 'NBaseSelectOption',
   props: {
     tmNode: {
-      type: Object as PropType<TreeNode<BaseOption>>,
+      type: Object as PropType<TreeNode<SelectOption>>,
       required: true
     }
   },

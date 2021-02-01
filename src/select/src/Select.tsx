@@ -36,10 +36,10 @@ import {
 import style from './styles/index.cssr'
 
 import type {
-  Options,
-  BaseOption,
-  GroupOption,
-  IgnoredOption,
+  SelectMixedOption,
+  SelectOption,
+  SelectGroupOption,
+  SelectIgnoredOption,
   OnUpdateValue,
   Value
 } from './interface'
@@ -57,7 +57,7 @@ export default defineComponent({
       default: false
     },
     options: {
-      type: Array as PropType<Options>,
+      type: Array as PropType<SelectMixedOption[]>,
       required: true
     },
     defaultValue: {
@@ -89,9 +89,9 @@ export default defineComponent({
     },
     filter: {
       type: Function as PropType<
-      (pattern: string, option: BaseOption) => boolean
+      (pattern: string, option: SelectOption) => boolean
       >,
-      default: (pattern: string, option: BaseOption) => {
+      default: (pattern: string, option: SelectOption) => {
         if (!option) return false
         if (typeof option.label === 'string') {
           return patternMatched(pattern, option.label)
@@ -114,7 +114,7 @@ export default defineComponent({
       default: false
     },
     onCreate: {
-      type: Function as PropType<(label: string) => BaseOption>,
+      type: Function as PropType<(label: string) => SelectOption>,
       default: (label: string) => ({
         label: label,
         value: label
@@ -122,7 +122,7 @@ export default defineComponent({
     },
     fallbackOption: {
       type: [Function, Boolean] as PropType<
-      (value: string | number) => BaseOption | false
+      (value: string | number) => SelectOption | false
       >,
       default: () => (value: string | number) => ({
         label: String(value),
@@ -170,7 +170,7 @@ export default defineComponent({
       default: undefined
     },
     items: {
-      type: Array as PropType<Options | undefined>,
+      type: Array as PropType<SelectMixedOption[] | undefined>,
       validator: () => {
         if (__DEV__) {
           warn('select', '`items` is deprecated, please use `options` instead.')
@@ -195,7 +195,7 @@ export default defineComponent({
     )
     const patternRef = ref('')
     const treeMateRef = computed(() =>
-      createTreeMate<BaseOption, GroupOption, IgnoredOption>(
+      createTreeMate<SelectOption, SelectGroupOption, SelectIgnoredOption>(
         filteredOptionsRef.value,
         tmOptions
       )
@@ -216,23 +216,23 @@ export default defineComponent({
     const compitableOptionsRef = useCompitable(props, [
       'items',
       'options'
-    ]) as ComputedRef<Options>
+    ]) as ComputedRef<SelectMixedOption[]>
 
-    const createdOptionsRef = ref<BaseOption[]>([])
-    const beingCreatedOptionsRef = ref<BaseOption[]>([])
-    const memoValOptMapRef = ref(new Map<string | number, BaseOption>())
+    const createdOptionsRef = ref<SelectOption[]>([])
+    const beingCreatedOptionsRef = ref<SelectOption[]>([])
+    const memoValOptMapRef = ref(new Map<string | number, SelectOption>())
 
     const wrappedFallbackOptionRef = computed(() => {
       const { fallbackOption } = props
       if (!fallbackOption) return false
       return (value: string | number) => {
-        return Object.assign(fallbackOption(value), { value }) as BaseOption
+        return Object.assign(fallbackOption(value), { value }) as SelectOption
       }
     })
-    const localOptionsRef = computed<Options>(() => {
+    const localOptionsRef = computed<SelectMixedOption[]>(() => {
       return (beingCreatedOptionsRef.value.concat(
         createdOptionsRef.value
-      ) as Options).concat(compitableOptionsRef.value)
+      ) as SelectMixedOption[]).concat(compitableOptionsRef.value)
     })
     const filteredOptionsRef = computed(() => {
       if (props.remote) {
@@ -256,7 +256,7 @@ export default defineComponent({
         const { value: memoValOptMap } = memoValOptMapRef
         const { value: valOptMap } = valOptMapRef
         const { value: wrappedFallbackOption } = wrappedFallbackOptionRef
-        const options: BaseOption[] = []
+        const options: SelectOption[] = []
         values.forEach((value) => {
           if (valOptMap.has(value)) {
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -275,7 +275,7 @@ export default defineComponent({
       }
       return null
     })
-    const selectedOptionRef = computed<BaseOption | null>(() => {
+    const selectedOptionRef = computed<SelectOption | null>(() => {
       const { value: mergedValue } = mergedValueRef
       if (!props.multiple && !Array.isArray(mergedValue)) {
         const { value: valOptMap } = valOptMapRef
@@ -410,7 +410,7 @@ export default defineComponent({
         }
       }
     }
-    function handleToggleOption (option: BaseOption): void {
+    function handleToggleOption (option: SelectOption): void {
       if (props.disabled) return
       const { tag, remote } = props
       if (tag && !remote) {

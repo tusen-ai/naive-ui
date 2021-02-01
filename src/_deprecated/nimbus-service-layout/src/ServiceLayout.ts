@@ -11,7 +11,8 @@ import {
 import { useMergedState } from 'vooks'
 import { useRoute, useRouter } from 'vue-router'
 import SiderHeader from './SiderHeader'
-import { MenuItem, NMenu } from '../../../menu'
+import { NMenu } from '../../../menu'
+import type { MenuOption } from '../../../menu'
 import NLayout from '../../../layout/src/Layout'
 import type { LayoutProps } from '../../../layout/src/Layout'
 import NLayoutSider from '../../../layout/src/LayoutSider'
@@ -81,7 +82,7 @@ export default defineComponent({
       if (onInput) onInput(value)
       if (onUpdateValue) onUpdateValue(value)
     }
-    function handleMenuUpdateValue (value: string, item: MenuItem): void {
+    function handleMenuUpdateValue (value: string, item: MenuOption): void {
       if (router && item.path) {
         // path is copied to menu item in utils.createItems
         Promise.resolve(router.push(item.path as string)).catch((err) => {

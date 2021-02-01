@@ -1,2 +1,2 @@
 export { default as NMenu } from './src/Menu'
-export type { MenuItem, MenuItemGroup } from './src/interface'
+export type { MenuOption, MenuGroupOption } from './src/interface'

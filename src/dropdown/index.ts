@@ -2,7 +2,7 @@
 export { default as NDropdown } from './src/Dropdown'
 export type {
   DropdownOption,
-  DropdownGroup,
+  DropdownGroupOption,
   DropdownIgnoredOption,
   DropdownDividerOption
 } from './src/interface'

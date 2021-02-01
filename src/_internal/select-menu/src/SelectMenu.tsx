@@ -18,7 +18,11 @@ import { depx, getPadding } from 'seemly'
 import { NEmpty } from '../../../empty'
 import { NScrollbar } from '../../../scrollbar'
 import type { ScrollbarRef } from '../../../scrollbar'
-import type { BaseOption, GroupOption, IgnoredOption } from '../../../select'
+import type {
+  SelectOption,
+  SelectGroupOption,
+  SelectIgnoredOption
+} from '../../../select'
 import type { Value, SelectTreeMate } from '../../../select/src/interface'
 import { formatLength } from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
@@ -31,16 +35,19 @@ import { internalSelectMenuLight, InternalSelectMenuTheme } from '../styles'
 import { Size } from './interface'
 
 export interface InternalSelectMenuInjection {
-  handleOptionMouseEnter: (e: MouseEvent, tmNode: TreeNode<BaseOption>) => void
-  handleOptionClick: (e: MouseEvent, tmNode: TreeNode<BaseOption>) => void
+  handleOptionMouseEnter: (
+    e: MouseEvent,
+    tmNode: TreeNode<SelectOption>
+  ) => void
+  handleOptionClick: (e: MouseEvent, tmNode: TreeNode<SelectOption>) => void
   valueSet: Set<number | string>
-  pendingTmNode: TreeNode<BaseOption> | null
+  pendingTmNode: TreeNode<SelectOption> | null
   multiple: boolean
   value: string | number | Array<string | number> | null
 }
 
 export interface InternalSelectMenuRef {
-  getPendingOption: () => BaseOption | null
+  getPendingOption: () => SelectOption | null
   prev: () => void
   next: () => void
 }
@@ -80,7 +87,7 @@ export default defineComponent({
     },
     onScroll: Function as PropType<(e: Event) => void>,
     // deprecated
-    onMenuToggleOption: Function as PropType<(value: BaseOption) => void>
+    onMenuToggleOption: Function as PropType<(value: SelectOption) => void>
   },
   setup (props) {
     const themeRef = useTheme(
@@ -138,7 +145,7 @@ export default defineComponent({
         setPendingTmNode(null)
       }
     })
-    function doToggleOption (option: BaseOption): void {
+    function doToggleOption (option: SelectOption): void {
       const { onMenuToggleOption } = props
       if (onMenuToggleOption) onMenuToggleOption(option)
     }
@@ -154,21 +161,21 @@ export default defineComponent({
     function handleVirtualListResize (): void {
       scrollbarRef.value?.sync()
     }
-    function getPendingOption (): BaseOption | null {
+    function getPendingOption (): SelectOption | null {
       const { value: pendingTmNode } = pendingNodeRef
       if (pendingTmNode) return pendingTmNode.rawNode
       return null
     }
     function handleOptionMouseEnter (
       e: MouseEvent,
-      tmNode: TreeNode<BaseOption>
+      tmNode: TreeNode<SelectOption>
     ): void {
       if (tmNode.disabled) return
       setPendingTmNode(tmNode, false)
     }
     function handleOptionClick (
       e: MouseEvent,
-      tmNode: TreeNode<BaseOption>
+      tmNode: TreeNode<SelectOption>
     ): void {
       if (tmNode.disabled) return
       doToggleOption(tmNode.rawNode)
@@ -200,7 +207,7 @@ export default defineComponent({
       }
     }
     function setPendingTmNode (
-      tmNode: TreeNode<BaseOption> | null,
+      tmNode: TreeNode<SelectOption> | null,
       doScroll = false
     ): void {
       pendingNodeRef.value = tmNode
@@ -339,19 +346,23 @@ export default defineComponent({
                       default: ({
                         item: tmNode
                       }: {
-                        item: TreeNode<GroupOption | BaseOption | IgnoredOption>
+                        item: TreeNode<
+                        SelectGroupOption | SelectOption | SelectIgnoredOption
+                        >
                       }) => {
                         return tmNode.isGroup ? (
                           <NSelectGroupHeader
                             key={tmNode.key}
                             tmNode={
-                              (tmNode as unknown) as TreeNode<GroupOption>
+                              (tmNode as unknown) as TreeNode<SelectGroupOption>
                             }
                           />
                         ) : tmNode.ignored ? null : (
                           <NSelectOption
                             key={tmNode.key}
-                            tmNode={(tmNode as unknown) as TreeNode<BaseOption>}
+                            tmNode={
+                              (tmNode as unknown) as TreeNode<SelectOption>
+                            }
                           />
                         )
                       }
@@ -366,15 +377,17 @@ export default defineComponent({
                     }}
                   >
                     {this.flattenedNodes.map((tmNode) =>
-                      tmNode.rawNode.type === 'group' ? (
+                      tmNode.isGroup ? (
                         <NSelectGroupHeader
                           key={tmNode.key}
-                          tmNode={(tmNode as unknown) as TreeNode<GroupOption>}
+                          tmNode={
+                            (tmNode as unknown) as TreeNode<SelectGroupOption>
+                          }
                         />
                       ) : (
                         <NSelectOption
                           key={tmNode.key}
-                          tmNode={(tmNode as unknown) as TreeNode<BaseOption>}
+                          tmNode={(tmNode as unknown) as TreeNode<SelectOption>}
                         />
                       )
                     )}

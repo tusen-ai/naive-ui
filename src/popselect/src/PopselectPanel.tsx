@@ -16,10 +16,10 @@ import type { PopselectSize, PopselectInjection } from './interface'
 import {
   OnUpdateValue,
   Value,
-  Options,
-  BaseOption,
-  GroupOption,
-  IgnoredOption,
+  SelectMixedOption,
+  SelectOption,
+  SelectGroupOption,
+  SelectIgnoredOption,
   ValueAtom
 } from '../../select/src/interface'
 import { tmOptions } from '../../select/src/utils'
@@ -39,7 +39,7 @@ export const panelProps = {
   },
   width: [Number, String] as PropType<string | number>,
   options: {
-    type: Array as PropType<Options>,
+    type: Array as PropType<SelectMixedOption[]>,
     required: true
   },
   size: {
@@ -81,7 +81,7 @@ export default defineComponent({
       if (onUpdateValue) call(onUpdateValue, value)
       if (onChange) call(onChange, value)
     }
-    function handleMenuToggleOption (option: BaseOption): void {
+    function handleMenuToggleOption (option: SelectOption): void {
       toggle(option.value)
     }
     function toggle (value: ValueAtom): void {
@@ -121,10 +121,11 @@ export default defineComponent({
     return {
       NPopselect,
       treeMate: computed(() => {
-        return createTreeMate<BaseOption, GroupOption, IgnoredOption>(
-          props.options,
-          tmOptions
-        )
+        return createTreeMate<
+        SelectOption,
+        SelectGroupOption,
+        SelectIgnoredOption
+        >(props.options, tmOptions)
       }),
       handleMenuToggleOption
     }

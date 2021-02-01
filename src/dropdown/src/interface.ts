@@ -5,7 +5,7 @@ export type Key = string | number
 
 // Aligned with MenuItem props, has some redundant fields
 export type DropdownOption = MenuOption
-export type DropdownOptionGroup = MenuGroupOption
+export type DropdownGroupOption = MenuGroupOption
 export interface DropdownIgnoredOption {
   key: Key
   type: 'ignored' | 'divider'
@@ -13,7 +13,7 @@ export interface DropdownIgnoredOption {
 }
 export type DropdownMixedOption =
   | DropdownOption
-  | DropdownOptionGroup
+  | DropdownGroupOption
   | DropdownIgnoredOption
 
 export interface DropdownDividerOption {
@@ -24,7 +24,7 @@ export interface DropdownDividerOption {
 
 export type TmNode = TreeNode<
 DropdownOption,
-DropdownOptionGroup,
+DropdownGroupOption,
 DropdownIgnoredOption
 >
 
