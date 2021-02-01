@@ -343,7 +343,7 @@ export default defineComponent({
         showArrow: false,
         raw: true,
         shadow: false,
-        unstableTheme: this.mergedTheme.peers.Popover,
+        theme: this.mergedTheme.peers.Popover,
         themeOverrides: this.mergedTheme.peerOverrides.Popover
       }),
       {

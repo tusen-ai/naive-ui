@@ -549,7 +549,7 @@ export default defineComponent({
     const commonInputProps = {
       bordered: this.mergedBordered,
       size: this.mergedSize,
-      unstableTheme: this.mergedTheme.peers.Input,
+      theme: this.mergedTheme.peers.Input,
       themeOverrides: this.mergedTheme.peerOverrides.Input,
       passivelyActivated: true,
       disabled: this.disabled,

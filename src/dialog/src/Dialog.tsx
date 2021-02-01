@@ -256,7 +256,7 @@ export default defineComponent({
               [
                 negativeText ? (
                   <NButton
-                    unstableTheme={mergedTheme.peers.Button}
+                    theme={mergedTheme.peers.Button}
                     themeOverrides={mergedTheme.peerOverrides.Button}
                     ghost
                     size="small"
@@ -269,7 +269,7 @@ export default defineComponent({
                   </NButton>
                 ) : null,
                 <NButton
-                  unstableTheme={mergedTheme.peers.Button}
+                  theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
                   disabled={loading}
                   loading={loading}

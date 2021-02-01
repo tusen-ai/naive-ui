@@ -731,7 +731,7 @@ export default defineComponent({
                       ref="triggerInstRef"
                       bordered={this.mergedBordered}
                       size={this.mergedSize}
-                      unstableTheme={this.mergedTheme.peers.InternalSelection}
+                      theme={this.mergedTheme.peers.InternalSelection}
                       themeOverrides={
                         this.mergedTheme.peerOverrides.InternalSelection
                       }

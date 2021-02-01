@@ -43,7 +43,7 @@ export default defineComponent({
       NPopover,
       {
         ...this.$props,
-        unstableTheme: mergedTheme.peers.Popover,
+        theme: mergedTheme.peers.Popover,
         themeOverrides: mergedTheme.peerOverrides.Popover,
         builtinThemeOverrides: this.popoverThemeOverrides,
         class: 'n-tooltip n-popover--tooltip',

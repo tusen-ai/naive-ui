@@ -81,7 +81,7 @@ export default defineComponent({
       this.virtualScroll ? (
         <NScrollbar
           ref="scrollerInstRef"
-          unstableTheme={NTransfer.mergedTheme.peers.Scrollbar}
+          theme={NTransfer.mergedTheme.peers.Scrollbar}
           themeOverrides={NTransfer.mergedTheme.peerOverrides.Scrollbar}
           container={this.scrollContainer}
           content={this.scrollContent}
@@ -117,7 +117,7 @@ export default defineComponent({
         </NScrollbar>
       ) : (
         <NScrollbar
-          unstableTheme={NTransfer.mergedTheme.peers.Scrollbar}
+          theme={NTransfer.mergedTheme.peers.Scrollbar}
           themeOverrides={NTransfer.mergedTheme.peerOverrides.Scrollbar}
         >
           {{
@@ -157,7 +157,7 @@ export default defineComponent({
         {{
           default: () => (
             <NEmpty
-              unstableTheme={NTransfer.mergedTheme.peers.Empty}
+              theme={NTransfer.mergedTheme.peers.Empty}
               themeOverrides={NTransfer.mergedTheme.peerOverrides.Empty}
             />
           )

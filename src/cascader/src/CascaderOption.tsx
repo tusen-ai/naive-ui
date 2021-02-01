@@ -175,7 +175,7 @@ export default defineComponent({
               disabled={this.disabled}
               checked={this.checked}
               indeterminate={this.indeterminate}
-              unstableTheme={NCascader.mergedTheme.peers.Checkbox}
+              theme={NCascader.mergedTheme.peers.Checkbox}
               themeOverrides={NCascader.mergedTheme.peerOverrides.Checkbox}
               onUpdateChecked={this.handleCheckboxUpdateValue}
             />

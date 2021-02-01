@@ -84,7 +84,7 @@ export default defineComponent({
       NPopover,
       {
         ...omit(props, panelPropKeys, {
-          unstableTheme: mergedTheme.peers.Popover,
+          theme: mergedTheme.peers.Popover,
           themeOverrides: mergedTheme.peerOverrides.Popover
         }),
         class: 'n-popconfirm',

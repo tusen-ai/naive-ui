@@ -30,10 +30,8 @@ export default defineComponent({
     return (
       <div class="n-dynamic-input-preset-input">
         <NInput
-          unstableTheme={NDynamicInput.mergedTheme.peers.Input}
-          unstableTheme-overrides={
-            NDynamicInput.mergedTheme.peerOverrides.Input
-          }
+          theme={NDynamicInput.mergedTheme.peers.Input}
+          theme-overrides={NDynamicInput.mergedTheme.peerOverrides.Input}
           value={value}
           placeholder={NDynamicInput.placeholder}
           onUpdateValue={onUpdateValue}

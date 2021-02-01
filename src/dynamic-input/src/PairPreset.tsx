@@ -46,20 +46,16 @@ export default defineComponent({
     return (
       <div class="n-dynamic-input-preset-pair">
         <NInput
-          unstableTheme={NDynamicInput.mergedTheme.peers.Input}
-          unstableTheme-overrides={
-            NDynamicInput.mergedTheme.peerOverrides.Input
-          }
+          theme={NDynamicInput.mergedTheme.peers.Input}
+          theme-overrides={NDynamicInput.mergedTheme.peerOverrides.Input}
           value={value.key}
           class="n-dynamic-input-pair-input"
           placeholder={NDynamicInput.keyPlaceholder}
           onUpdateValue={this.handleKeyInput}
         />
         <NInput
-          unstableTheme={NDynamicInput.mergedTheme.peers.Input}
-          unstableTheme-overrides={
-            NDynamicInput.mergedTheme.peerOverrides.Input
-          }
+          theme={NDynamicInput.mergedTheme.peers.Input}
+          theme-overrides={NDynamicInput.mergedTheme.peerOverrides.Input}
           value={value.value}
           class="n-dynamic-input-pair-input"
           placeholder={NDynamicInput.valuePlaceholder}

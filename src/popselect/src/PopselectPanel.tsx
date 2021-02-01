@@ -133,7 +133,7 @@ export default defineComponent({
   render () {
     return (
       <NInternalSelectMenu
-        unstableTheme={this.NPopselect.mergedTheme.peers.InternalSelectMenu}
+        theme={this.NPopselect.mergedTheme.peers.InternalSelectMenu}
         themeOverrides={
           this.NPopselect.mergedTheme.peerOverrides.InternalSelectMenu
         }

@@ -53,7 +53,7 @@ export default defineComponent({
       <NScrollbar
         ref="scrollbarInstRef"
         class="n-data-table-base-table-body"
-        unstableTheme={mergedTheme.peers.Scrollbar}
+        theme={mergedTheme.peers.Scrollbar}
         themeOverrides={mergedTheme.peerOverrides.Scrollbar}
         contentStyle={{
           minWidth: formatLength(scrollX)

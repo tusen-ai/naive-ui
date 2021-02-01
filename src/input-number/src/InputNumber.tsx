@@ -320,7 +320,7 @@ export default defineComponent({
           value={this.displayedValue}
           onUpdateValue={this.handleUpdateDisplayedValue}
           passively-activated
-          unstableTheme={this.mergedTheme.peers.Input}
+          theme={this.mergedTheme.peers.Input}
           themeOverrides={this.mergedTheme.peerOverrides.Input}
           builtinThemeOverrides={this.inputThemeOverrides}
           size={this.mergedSize}

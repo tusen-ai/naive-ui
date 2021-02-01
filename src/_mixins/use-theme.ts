@@ -18,13 +18,13 @@ export interface Theme<T = {}, R = any> {
 }
 
 export interface ThemeProps<T> {
-  unstableTheme: PropType<T>
+  theme: PropType<T>
   themeOverrides: PropType<ExtractThemeOverrides<T>>
   builtinThemeOverrides: PropType<ExtractThemeOverrides<T>>
 }
 
 export interface ThemePropsReactive<T> {
-  unstableTheme?: T
+  theme?: T
   themeOverrides?: ExtractThemeOverrides<T>
   builtinThemeOverrides?: ExtractThemeOverrides<T>
 }
@@ -58,7 +58,7 @@ export function createTheme<T, R> (theme: Theme<T, R>): Theme<T, R> {
 }
 
 type UseThemeProps<T> = Readonly<{
-  unstableTheme?: T | undefined
+  theme?: T | undefined
   themeOverrides?: ExtractThemeOverrides<T>
   builtinThemeOverrides?: ExtractThemeOverrides<T>
 }>
@@ -93,7 +93,7 @@ function useTheme<T, R> (
   const mergedThemeRef = computed(() => {
     // keep props to make theme overrideable
     const {
-      unstableTheme: { common: selfCommon, self, peers = {} } = {},
+      theme: { common: selfCommon, self, peers = {} } = {},
       themeOverrides: selfOverrides = {} as ExtractThemeOverrides<Theme<T, R>>,
       builtinThemeOverrides: builtinOverrides = {} as ExtractThemeOverrides<
       Theme<T, R>
@@ -143,19 +143,19 @@ function useTheme<T, R> (
 }
 
 useTheme.props = {
-  unstableTheme: Object,
+  theme: Object,
   themeOverrides: Object,
   builtinThemeOverrides: Object
 } as const
 
 /**
- * props.unstableTheme (Theme):
+ * props.theme (Theme):
  * {
  *   common: CommonThemeVars,
  *   self(): ThemeVars,
  *   peers: { Component: Theme }
  * }
- * provider.unstableTheme:
+ * provider.theme:
  * {
  *   common: CommonThemeVars,
  *   Button: Theme

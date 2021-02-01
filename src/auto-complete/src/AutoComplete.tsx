@@ -292,7 +292,7 @@ export default defineComponent({
                       () => [
                         (
                           <NInput
-                            unstableTheme={this.mergedTheme.peers.Input}
+                            theme={this.mergedTheme.peers.Input}
                             themeOverrides={
                               this.mergedTheme.peerOverrides.Input
                             }
@@ -334,7 +334,7 @@ export default defineComponent({
                             (
                               <NInternalSelectMenu
                                 ref="menuInstRef"
-                                unstableTheme={
+                                theme={
                                   this.mergedTheme.peers.InternalSelectMenu
                                 }
                                 themeOverrides={

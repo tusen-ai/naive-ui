@@ -160,7 +160,7 @@ export default defineComponent({
             >
               <NScrollbar
                 ref="hourScrollRef"
-                unstableTheme={this.NTimePicker.mergedTheme.peers.Scrollbar}
+                theme={this.NTimePicker.mergedTheme.peers.Scrollbar}
                 themeOverrides={
                   this.NTimePicker.mergedTheme.peerOverrides.Scrollbar
                 }
@@ -191,7 +191,7 @@ export default defineComponent({
             >
               <NScrollbar
                 ref="minuteScrollRef"
-                unstableTheme={this.NTimePicker.mergedTheme.peers.Scrollbar}
+                theme={this.NTimePicker.mergedTheme.peers.Scrollbar}
                 themeOverrides={
                   this.NTimePicker.mergedTheme.peerOverrides.Scrollbar
                 }
@@ -222,7 +222,7 @@ export default defineComponent({
             >
               <NScrollbar
                 ref="secondScrollRef"
-                unstableTheme={this.NTimePicker.mergedTheme.peers.Scrollbar}
+                theme={this.NTimePicker.mergedTheme.peers.Scrollbar}
                 themeOverrides={
                   this.NTimePicker.mergedTheme.peerOverrides.Scrollbar
                 }
@@ -244,7 +244,7 @@ export default defineComponent({
         <div class="n-time-picker-actions">
           <NButton
             size="tiny"
-            unstableTheme={this.NTimePicker.mergedTheme.peers.Button}
+            theme={this.NTimePicker.mergedTheme.peers.Button}
             themeOverrides={this.NTimePicker.mergedTheme.peerOverrides.Button}
             onClick={this.onNowClick}
           >
@@ -254,7 +254,7 @@ export default defineComponent({
             size="tiny"
             type="primary"
             class="n-time-picker-actions__confirm"
-            unstableTheme={this.NTimePicker.mergedTheme.peers.Button}
+            theme={this.NTimePicker.mergedTheme.peers.Button}
             themeOverrides={this.NTimePicker.mergedTheme.peerOverrides.Button}
             disabled={this.isValueInvalid}
             onClick={this.onConfirmClick}

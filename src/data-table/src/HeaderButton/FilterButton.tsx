@@ -101,7 +101,7 @@ export default defineComponent({
         show={this.showPopover}
         onUpdateShow={(v) => (this.showPopover = v)}
         trigger="click"
-        unstableTheme={mergedTheme.peers.Popover}
+        theme={mergedTheme.peers.Popover}
         themeOverrides={mergedTheme.peerOverrides.Popover}
         padded={false}
       >

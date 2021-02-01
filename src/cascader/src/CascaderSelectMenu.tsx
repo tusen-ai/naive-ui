@@ -171,7 +171,7 @@ export default defineComponent({
                 themeOverrides={
                   NCascader.mergedTheme.peerOverrides.InternalSelectMenu
                 }
-                unstableTheme={NCascader.mergedTheme.peers.InternalSelectMenu}
+                theme={NCascader.mergedTheme.peers.InternalSelectMenu}
                 treeMate={this.selectTreeMate}
                 multiple={this.multiple}
                 value={this.value}

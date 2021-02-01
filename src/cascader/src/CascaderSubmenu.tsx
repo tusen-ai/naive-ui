@@ -45,7 +45,7 @@ export default defineComponent({
       <div class="n-cascader-submenu">
         <NScrollbar
           ref="scrollbarInstRef"
-          unstableTheme={NCascader.mergedTheme.peers.Scrollbar}
+          theme={NCascader.mergedTheme.peers.Scrollbar}
           themeOverrides={NCascader.mergedTheme.peerOverrides.Scrollbar}
         >
           {{

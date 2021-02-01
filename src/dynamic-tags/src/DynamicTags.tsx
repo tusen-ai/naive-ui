@@ -152,7 +152,7 @@ export default defineComponent({
         {this.value.map((tag, index) => (
           <NTag
             key={index}
-            unstableTheme={mergedTheme.peers.Tag}
+            theme={mergedTheme.peers.Tag}
             themeOverrides={mergedTheme.peerOverrides.Tag}
             style={this.tagStyle}
             type={this.type}
@@ -173,7 +173,7 @@ export default defineComponent({
               this.inputValue = v
             }}
             forceFocus={this.inputForceFocused}
-            unstableTheme={mergedTheme.peers.Input}
+            theme={mergedTheme.peers.Input}
             themeOverrides={mergedTheme.peerOverrides.Input}
             style={this.inputStyle}
             size={this.inputSize}
@@ -184,7 +184,7 @@ export default defineComponent({
         ) : (
           <NButton
             dashed
-            unstableTheme={this.mergedTheme.peers.Button}
+            theme={this.mergedTheme.peers.Button}
             themeOverrides={this.mergedTheme.peerOverrides.Button}
             size={this.inputSize}
             onClick={this.handleAddClick}

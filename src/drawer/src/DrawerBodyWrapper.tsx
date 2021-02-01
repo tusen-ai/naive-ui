@@ -119,9 +119,7 @@ export default defineComponent({
                           <NScrollbar
                             {...this.scrollbarProps}
                             contentClass="n-drawer-scroll-content"
-                            unstableTheme={
-                              NDrawer.mergedTheme.peers.Scrollbar
-                            }
+                            theme={NDrawer.mergedTheme.peers.Scrollbar}
                             themeOverrides={
                               NDrawer.mergedTheme.peerOverrides.Scrollbar
                             }

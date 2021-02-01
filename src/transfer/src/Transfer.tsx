@@ -347,7 +347,7 @@ export default defineComponent({
         <div class="n-transfer-gap">
           <NButton
             disabled={this.toButtonDisabled || this.disabled}
-            unstableTheme={this.mergedTheme.peers.Button}
+            theme={this.mergedTheme.peers.Button}
             themeOverrides={this.mergedTheme.peerOverrides.Button}
             onClick={this.handleToTgtClick}
           >
@@ -359,7 +359,7 @@ export default defineComponent({
           </NButton>
           <NButton
             disabled={this.fromButtonDisabled || this.disabled}
-            unstableTheme={this.mergedTheme.peers.Button}
+            theme={this.mergedTheme.peers.Button}
             themeOverrides={this.mergedTheme.peerOverrides.Button}
             onClick={this.handleToSrcClick}
           >

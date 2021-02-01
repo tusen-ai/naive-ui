@@ -89,7 +89,7 @@ export default defineComponent({
         h(
           NTooltip,
           {
-            unstableTheme: this.mergedTheme.peers.Tooltip,
+            theme: this.mergedTheme.peers.Tooltip,
             themeOverrides: this.mergedTheme.peerOverrides.Tooltip,
             trigger: 'hover',
             placement: this.dropdownPlacement,

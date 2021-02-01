@@ -139,7 +139,7 @@ export default defineComponent({
                         return (
                           <NCheckbox
                             key={option.value}
-                            unstableTheme={mergedTheme.peers.Checkbox}
+                            theme={mergedTheme.peers.Checkbox}
                             themeOverrides={mergedTheme.peerOverrides.Checkbox}
                             value={option.value}
                           >
@@ -162,7 +162,7 @@ export default defineComponent({
                         <NRadio
                           key={option.value}
                           value={option.value}
-                          unstableTheme={mergedTheme.peers.Radio}
+                          theme={mergedTheme.peers.Radio}
                           themeOverrides={mergedTheme.peerOverrides.Radio}
                         >
                           {{ default: () => option.label }}
@@ -177,14 +177,14 @@ export default defineComponent({
         <div class="n-data-table-filter-menu__action">
           <NButton
             size="tiny"
-            unstableTheme={mergedTheme.peers.Button}
+            theme={mergedTheme.peers.Button}
             themeOverrides={mergedTheme.peerOverrides.Button}
             onClick={this.handleClearClick}
           >
             {{ default: () => locale.clear }}
           </NButton>
           <NButton
-            unstableTheme={mergedTheme.peers.Button}
+            theme={mergedTheme.peers.Button}
             themeOverrides={mergedTheme.peerOverrides.Button}
             type="primary"
             size="tiny"

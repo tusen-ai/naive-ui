@@ -359,7 +359,7 @@ export default defineComponent({
       >
         <NSpin
           show={this.loading}
-          unstableTheme={this.mergedTheme.peers.Spin}
+          theme={this.mergedTheme.peers.Spin}
           themeOverrides={this.mergedTheme.peerOverrides.Spin}
           size="small"
         >
@@ -384,7 +384,7 @@ export default defineComponent({
                           ]}
                         >
                           <NEmpty
-                            unstableTheme={this.mergedTheme.peers.Empty}
+                            theme={this.mergedTheme.peers.Empty}
                             themeOverrides={
                               this.mergedTheme.peerOverrides.Empty
                             }
@@ -397,7 +397,7 @@ export default defineComponent({
               this.pagination ? (
                 <div class="n-data-table__pagination">
                   <NPagination
-                    unstableTheme={this.mergedTheme.peers.Pagination}
+                    theme={this.mergedTheme.peers.Pagination}
                     themeOverrides={this.mergedTheme.peerOverrides.Pagination}
                     {...this.mergedPagination}
                   />

@@ -37,11 +37,10 @@ export default defineComponent({
       default: 'div'
     },
     hljs: Object as PropType<Hljs>,
-    // wip, unstable
-    unstableTheme: Object as PropType<GlobalTheme>,
+    theme: Object as PropType<GlobalTheme>,
     themeOverrides: Object as PropType<GlobalThemeOverrides>,
     // deprecated
-    theme: String,
+    legacyTheme: String,
     language: String,
     lang: String,
     as: {
@@ -75,10 +74,8 @@ export default defineComponent({
       null
     )
     const mergedUnstableThemeRef = computed(() => {
-      const { unstableTheme } = props
-      return unstableTheme === undefined
-        ? NConfigProvider?.mergedUnstableTheme
-        : unstableTheme
+      const { theme } = props
+      return theme === undefined ? NConfigProvider?.mergedUnstableTheme : theme
     })
     const mergedUnstableThemeOverridesRef = computed(() => {
       const { themeOverrides } = props
@@ -120,8 +117,10 @@ export default defineComponent({
         mergedUnstableThemeOverrides: mergedUnstableThemeOverridesRef,
         // deprecated
         mergedTheme: useMemo(() => {
-          const { theme } = props
-          return theme === undefined ? NConfigProvider?.mergedTheme : theme
+          const { legacyTheme } = props
+          return legacyTheme === undefined
+            ? NConfigProvider?.mergedTheme
+            : legacyTheme
         }),
         mergedLanguage: useMemo(() => {
           const { language, lang } = props

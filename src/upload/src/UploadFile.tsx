@@ -132,7 +132,7 @@ export default defineComponent({
             {this.showRemoveButton || this.showCancelButton ? (
               <NButton
                 key="cancelOrTrash"
-                unstableTheme={this.NUpload.mergedTheme.peers.Button}
+                theme={this.NUpload.mergedTheme.peers.Button}
                 themeOverrides={this.NUpload.mergedTheme.peerOverrides.Button}
                 circle
                 size="tiny"

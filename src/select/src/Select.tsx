@@ -648,7 +648,7 @@ export default defineComponent({
                       clearable={this.clearable}
                       disabled={this.disabled}
                       size={this.mergedSize}
-                      unstableTheme={this.mergedTheme.peers.InternalSelection}
+                      theme={this.mergedTheme.peers.InternalSelection}
                       themeOverrides={
                         this.mergedTheme.peerOverrides.InternalSelection
                       }
@@ -692,7 +692,7 @@ export default defineComponent({
                                 ref: 'menuRef',
                                 class: 'n-select-menu',
                                 autoPending: true,
-                                unstableTheme: this.mergedTheme.peers
+                                theme: this.mergedTheme.peers
                                   .InternalSelectMenu,
                                 themeOverrides: this.mergedTheme.peerOverrides
                                   .InternalSelectMenu,

@@ -260,7 +260,7 @@ export default defineComponent({
             block
             ghost
             dashed
-            unstableTheme={mergedTheme.peers.Button}
+            theme={mergedTheme.peers.Button}
             themeOverrides={mergedTheme.peerOverrides.Button}
             onClick={this.handleCreateClick}
           >
@@ -309,7 +309,7 @@ export default defineComponent({
                       [
                         !this.removeDisabled ? (
                           <NButton
-                            unstableTheme={mergedTheme.peers.Button}
+                            theme={mergedTheme.peers.Button}
                             themeOverrides={mergedTheme.peerOverrides.Button}
                             circle
                             onClick={() => remove(index)}
@@ -326,7 +326,7 @@ export default defineComponent({
                         <NButton
                           disabled={this.insertionDisabled}
                           circle
-                          unstableTheme={mergedTheme.peers.Button}
+                          theme={mergedTheme.peers.Button}
                           themeOverrides={mergedTheme.peerOverrides.Button}
                           onClick={() => createItem(index)}
                         >

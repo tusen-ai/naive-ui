@@ -59,7 +59,7 @@ export default defineComponent({
                 percentage={this.percentage}
                 status={this.status}
                 height={2}
-                unstableTheme={this.NUpload.mergedTheme.peers.Progress}
+                theme={this.NUpload.mergedTheme.peers.Progress}
                 themeOverrides={this.NUpload.mergedTheme.peerOverrides.Progress}
               />
             ) : null

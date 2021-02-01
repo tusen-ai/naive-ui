@@ -280,7 +280,7 @@ export default defineComponent({
             ref="scrollbarRef"
             class="n-layout-sider__content"
             {...this.scrollbarProps}
-            unstableTheme={this.mergedTheme.peers.Scrollbar}
+            theme={this.mergedTheme.peers.Scrollbar}
             themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
           >
             {this.$slots}

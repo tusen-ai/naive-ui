@@ -63,7 +63,7 @@ export default defineComponent({
         raw: true,
         ref: 'popoverInstRef',
         class: 'n-popselect',
-        unstableTheme: mergedTheme.peers.Popover,
+        theme: mergedTheme.peers.Popover,
         themeOverrides: mergedTheme.peerOverrides.Popover
       }),
       {

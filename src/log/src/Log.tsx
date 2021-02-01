@@ -249,14 +249,14 @@ export default defineComponent({
       [
         <NScrollbar
           ref="scrollbarRef"
-          unstableTheme={this.mergedTheme.peers.Scrollbar}
+          theme={this.mergedTheme.peers.Scrollbar}
           themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
           onScroll={this.handleScroll}
         >
           {{
             default: () => (
               <NCode
-                unstableTheme={this.mergedTheme.peers.Code}
+                theme={this.mergedTheme.peers.Code}
                 themeOverrides={this.mergedTheme.peerOverrides.Code}
               >
                 {{

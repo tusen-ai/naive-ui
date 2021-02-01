@@ -30,7 +30,7 @@ export default defineComponent({
         <div class="n-date-panel-header">
           <NInput
             value={this.startDateDisplayString}
-            unstableTheme={this.NDatePicker.mergedTheme.peers.Input}
+            theme={this.NDatePicker.mergedTheme.peers.Input}
             themeOverrides={this.NDatePicker.mergedTheme.peerOverrides.Input}
             size={this.timePickerSize}
             stateful={false}
@@ -44,7 +44,7 @@ export default defineComponent({
             size={this.timePickerSize}
             teleportDisabled
             showIcon={false}
-            unstableTheme={this.NDatePicker.mergedTheme.peers.TimePicker}
+            theme={this.NDatePicker.mergedTheme.peers.TimePicker}
             themeOverrides={
               this.NDatePicker.mergedTheme.peerOverrides.TimePicker
             }
@@ -59,7 +59,7 @@ export default defineComponent({
           />
           <NInput
             value={this.endDateInput}
-            unstableTheme={this.NDatePicker.mergedTheme.peers.Input}
+            theme={this.NDatePicker.mergedTheme.peers.Input}
             themeOverrides={this.NDatePicker.mergedTheme.peerOverrides.Input}
             stateful={false}
             size={this.timePickerSize}
@@ -71,7 +71,7 @@ export default defineComponent({
           />
           <NTimePicker
             showIcon={false}
-            unstableTheme={this.NDatePicker.mergedTheme.peers.TimePicker}
+            theme={this.NDatePicker.mergedTheme.peers.TimePicker}
             themeOverrides={
               this.NDatePicker.mergedTheme.peerOverrides.TimePicker
             }
@@ -240,7 +240,7 @@ export default defineComponent({
           <div class="n-date-panel-actions">
             {this.actions.includes('clear') ? (
               <NButton
-                unstableTheme={this.NDatePicker.mergedTheme.peers.Button}
+                theme={this.NDatePicker.mergedTheme.peers.Button}
                 themeOverrides={
                   this.NDatePicker.mergedTheme.peerOverrides.Button
                 }
@@ -252,7 +252,7 @@ export default defineComponent({
             ) : null}
             {this.actions.includes('confirm') ? (
               <NButton
-                unstableTheme={this.NDatePicker.mergedTheme.peers.Button}
+                theme={this.NDatePicker.mergedTheme.peers.Button}
                 themeOverrides={
                   this.NDatePicker.mergedTheme.peerOverrides.Button
                 }
