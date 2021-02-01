@@ -17,13 +17,23 @@ export interface Theme<T = {}, R = any> {
   self?: (vars: ThemeCommonVars) => T
 }
 
-export type ExtractThemeVars<T> = T extends Theme<infer U, unknown> ? U : {}
+export type ExtractThemeVars<T> = T extends Theme<infer U, unknown>
+  ? unknown extends U
+    ? {}
+    : U
+  : {}
 
 export type ExtractPeerOverrides<T> = T extends Theme<unknown, infer V>
   ? {
     peers?: {
       [k in keyof V]?: ExtractThemeVars<V[k]>
     }
+  }
+  : T
+
+export type ExtractMergedPeerOverrides<T> = T extends Theme<unknown, infer V>
+  ? {
+    [k in keyof V]?: ExtractThemeVars<V[k]>
   }
   : T
 
@@ -45,7 +55,7 @@ export type MergedTheme<T> = T extends Theme<infer V, infer W>
     common: ThemeCommonVars
     self: V
     peers: W
-    overrides: any
+    overrides: ExtractMergedPeerOverrides<T>
   }
   : T
 
@@ -114,7 +124,7 @@ function useTheme<T, R> (
       common: mergedCommon,
       self: mergedSelf,
       peers: merge({}, defaultTheme.peers, peers, injectedPeers),
-      overrides: merge(peersOverrides, injectedPeersOverrides)
+      overrides: merge({}, peersOverrides, injectedPeersOverrides)
     }
   })
   return mergedThemeRef

@@ -2,7 +2,7 @@ import { changeColor } from 'seemly'
 import { checkboxLight } from '../../checkbox/styles'
 import { commonLight } from '../../_styles/new-common'
 import type { ThemeCommonVars } from '../../_styles/new-common'
-import { Theme } from '../../_mixins/use-theme'
+import { createTheme } from '../../_mixins/use-theme'
 
 const self = (vars: ThemeCommonVars) => {
   const {
@@ -30,14 +30,14 @@ const self = (vars: ThemeCommonVars) => {
 
 export type TreeThemeVars = ReturnType<typeof self>
 
-const treeLight: Theme<TreeThemeVars> = {
+const treeLight = createTheme({
   name: 'Tree',
   common: commonLight,
   peers: {
     Checkbox: checkboxLight
   },
   self
-}
+})
 
 export default treeLight
 export type TreeTheme = typeof treeLight
