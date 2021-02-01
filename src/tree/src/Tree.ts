@@ -16,16 +16,16 @@ import type { ThemeProps } from '../../_mixins'
 import { call, MaybeArray, warn } from '../../_utils'
 import { treeLight } from '../styles'
 import type { TreeTheme } from '../styles'
-import NTreeNode from './TreeNode'
+import NTreeOption from './TreeNode'
 import { keysWithFilter } from './utils'
 import style from './styles/index.cssr'
 import type {
   DragInfo,
   DropInfo,
   TreeInjection,
-  TreeData,
+  TreeOptions,
   Key,
-  BaseTreeNode,
+  TreeOption,
   TmNode,
   InternalDragInfo,
   InternalDropInfo
@@ -36,8 +36,8 @@ export default defineComponent({
   props: {
     ...(useTheme.props as ThemeProps<TreeTheme>),
     data: {
-      type: Array as PropType<TreeData>,
-      required: true
+      type: Array as PropType<TreeOptions>,
+      default: () => []
     },
     defaultExpandAll: {
       type: Boolean,
@@ -67,26 +67,17 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    checkedKeys: {
-      type: Array as PropType<Key[]>,
-      default: undefined
-    },
+    checkedKeys: Array as PropType<Key[]>,
     defaultCheckedKeys: {
       type: Array as PropType<Key[]>,
       default: () => []
     },
-    expandedKeys: {
-      type: Array as PropType<Key[]>,
-      default: undefined
-    },
+    expandedKeys: Array as PropType<Key[]>,
     defaultExpandedKeys: {
       type: Array as PropType<Key[]>,
       default: () => []
     },
-    selectedKeys: {
-      type: Array as PropType<Key[]>,
-      default: undefined
-    },
+    selectedKeys: Array as PropType<Key[]>,
     defaultSelectedKeys: {
       type: Array as PropType<Key[]>,
       default: () => []
@@ -105,14 +96,14 @@ export default defineComponent({
     },
     filter: {
       type: Function as PropType<
-      (pattern: string, node: BaseTreeNode) => boolean
+      (pattern: string, node: TreeOption) => boolean
       >,
-      default: (pattern: string, node: BaseTreeNode) => {
+      default: (pattern: string, node: TreeOption) => {
         if (!pattern) return true
         return ~node.label.toLowerCase().indexOf(pattern.toLowerCase())
       }
     },
-    onLoad: Function as PropType<(node: BaseTreeNode) => Promise<void>>,
+    onLoad: Function as PropType<(node: TreeOption) => Promise<void>>,
     cascade: {
       type: Boolean,
       default: false
@@ -227,7 +218,7 @@ export default defineComponent({
     )
 
     const draggingNodeKeyRef = ref<Key | null>(null)
-    const draggingNodeRef = ref<BaseTreeNode | null>(null)
+    const draggingNodeRef = ref<TreeOption | null>(null)
     const droppingNodeKeyRef = ref<Key | null>(null)
     const expandTimerIdRef = ref<number | undefined>(undefined)
     const highlightKeysRef = ref<Key[]>([])
@@ -417,7 +408,9 @@ export default defineComponent({
         props.disabled ||
         node.disabled ||
         !draggingNodeRef.value
-      ) { return }
+      ) {
+        return
+      }
       doDrop({
         event,
         node: node.rawNode,
@@ -491,7 +484,7 @@ export default defineComponent({
         style: this.cssVars
       },
       this.tmNodes.map((tmNode) =>
-        h(NTreeNode, {
+        h(NTreeOption, {
           tmNode,
           key: tmNode.key
         })

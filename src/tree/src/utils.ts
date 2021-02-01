@@ -1,9 +1,9 @@
-import { Key, BaseTreeNode } from './interface'
+import { Key, TreeOption } from './interface'
 
 function traverse (
-  nodes: BaseTreeNode[] | undefined,
-  callback: (node: BaseTreeNode) => void,
-  callbackAfter: (node: BaseTreeNode) => void
+  nodes: TreeOption[] | undefined,
+  callback: (node: TreeOption) => void,
+  callbackAfter: (node: TreeOption) => void
 ): void {
   nodes?.forEach((node) => {
     callback(node)
@@ -13,13 +13,13 @@ function traverse (
 }
 
 export function keysWithFilter (
-  nodes: BaseTreeNode[],
+  nodes: TreeOption[],
   pattern: string,
-  filter: (pattern: string, node: BaseTreeNode) => boolean
+  filter: (pattern: string, node: TreeOption) => boolean
 ): [Key[], Key[]] {
   const keys = new Set<Key>()
   const highlightKeys = new Set<Key>()
-  const path: BaseTreeNode[] = []
+  const path: TreeOption[] = []
   traverse(
     nodes,
     (node) => {
