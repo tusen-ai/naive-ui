@@ -26,47 +26,26 @@ export default defineComponent({
       default: false
     },
     bordered: {
-      type: Boolean,
+      type: Boolean as PropType<boolean | undefined>,
       default: undefined
     },
     locale: Object as PropType<NaiveLocale>,
     dateLocale: Object as PropType<NaiveDateLocale>,
-    namespace: {
-      type: String,
-      default: undefined
-    },
+    namespace: String,
     tag: {
       type: String,
       default: 'div'
     },
-    hljs: {
-      type: Object as PropType<Hljs>,
-      default: undefined
-    },
+    hljs: Object as PropType<Hljs>,
     // wip, unstable
-    unstableTheme: {
-      type: Object as PropType<Theme>,
-      default: undefined
-    },
-    unstableThemeOverrides: {
-      type: Object as PropType<ThemeOverrides>,
-      default: undefined
-    },
+    unstableTheme: Object as PropType<Theme>,
+    unstableThemeOverrides: Object as PropType<ThemeOverrides>,
     // deprecated
-    theme: {
-      type: String,
-      default: undefined
-    },
-    language: {
-      type: String,
-      default: undefined
-    },
-    lang: {
-      type: String,
-      default: undefined
-    },
+    theme: String,
+    language: String,
+    lang: String,
     as: {
-      type: Object as PropType<string>,
+      type: Object as PropType<string | undefined>,
       validator: () => {
         warn('config-provider', '`as` is deprecated, please use `tag` instead.')
         return true
@@ -74,7 +53,7 @@ export default defineComponent({
       default: undefined
     },
     themeEnvironment: {
-      type: Object as PropType<unknown>,
+      type: Object as PropType<unknown | undefined>,
       validator: () => {
         warn('config-provider', '`theme-environment` is deprecated.')
         return true
@@ -82,7 +61,7 @@ export default defineComponent({
       default: undefined
     },
     themeEnvironments: {
-      type: Object as PropType<unknown>,
+      type: Object as PropType<unknown | undefined>,
       validator: () => {
         warn('config-provider', '`theme-environments` is deprecated.')
         return true

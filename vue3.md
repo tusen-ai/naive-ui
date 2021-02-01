@@ -412,7 +412,7 @@
   - [ ] getKey select & autocomplete type safe & input event interface? onInput value | null or value
   - [x] vshow (maybe create a vue pr)
   - [x] jsx focusin out (waiting for vue update)
-  - [ ] inject key & value in type
+  - [x] inject key & value in type (I should use InjectionKey...)
   - [x] form item no label css
   - [x] unify treemate ignored
   - [ ] fix menu extra

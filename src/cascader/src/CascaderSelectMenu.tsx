@@ -168,9 +168,9 @@ export default defineComponent({
                 class="n-cascader-menu"
                 autoPending
                 unstableThemeOverrides={
-                  NCascader.mergedTheme.peers.BaseSelectMenu
+                  NCascader.mergedTheme.overrides.BaseSelectMenu
                 }
-                unstableTheme={NCascader.mergedTheme.overrides.BaseSelectMenu}
+                unstableTheme={NCascader.mergedTheme.peers.BaseSelectMenu}
                 treeMate={this.selectTreeMate}
                 multiple={this.multiple}
                 value={this.value}

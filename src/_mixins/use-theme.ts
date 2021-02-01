@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
 import { inject, computed, onBeforeMount, ComputedRef, PropType } from 'vue'
 import { merge } from 'lodash-es'
 import globalStyle from '../_styles/global/index.cssr'
@@ -9,23 +10,34 @@ globalStyle.mount({
   id: 'naive-ui-global'
 })
 
-type ThemeOverrides = any
-
-export interface Theme<T = undefined, R = any> {
+export interface Theme<T = {}, R = any> {
   name: string
   common?: ThemeCommonVars
   peers?: R
   self?: (vars: ThemeCommonVars) => T
 }
 
+export type ExtractThemeVars<T> = T extends Theme<infer U, unknown> ? U : {}
+
+export type ExtractPeerOverrides<T> = T extends Theme<unknown, infer V>
+  ? {
+    peers?: {
+      [k in keyof V]?: ExtractThemeVars<V[k]>
+    }
+  }
+  : T
+
+export type ExtractThemeOverrides<T> = Partial<ExtractThemeVars<T>> &
+ExtractPeerOverrides<T> & { common?: ThemeCommonVars }
+
 export function createTheme<T, R> (theme: Theme<T, R>): Theme<T, R> {
   return theme
 }
 
 type UseThemeProps<T> = Readonly<{
-  unstableTheme?: Theme<T> | undefined
-  unstableThemeOverrides?: ThemeOverrides
-  builtinThemeOverrides?: ThemeOverrides
+  unstableTheme?: T | undefined
+  unstableThemeOverrides?: ExtractThemeOverrides<T>
+  builtinThemeOverrides?: ExtractThemeOverrides<T>
 }>
 
 export type MergedTheme<T> = T extends Theme<infer V, infer W>
@@ -42,7 +54,7 @@ function useTheme<T, R> (
   mountId: string,
   style: CNode | undefined,
   defaultTheme: Theme<T, R>,
-  props: UseThemeProps<T>
+  props: UseThemeProps<Theme<T, R>>
 ): ComputedRef<MergedTheme<Theme<T, R>>> {
   if (style) {
     onBeforeMount(() => {
@@ -59,13 +71,14 @@ function useTheme<T, R> (
     // keep props to make theme overrideable
     const {
       unstableTheme: { common, self, peers = {} } = {},
-      unstableThemeOverrides: selfOverrides = {},
-      builtinThemeOverrides: builtinOverrides = {}
+      unstableThemeOverrides: selfOverrides = {} as ExtractThemeOverrides<
+      Theme<T, R>
+      >,
+      builtinThemeOverrides: builtinOverrides = {} as ExtractThemeOverrides<
+      Theme<T, R>
+      >
     } = props
-    const {
-      common: commonOverrides,
-      peers: peersOverrides = {}
-    } = selfOverrides
+    const { common: commonOverrides, peers: peersOverrides } = selfOverrides
     const {
       mergedUnstableTheme: {
         common: injectedGlobalCommon = undefined,
@@ -108,39 +121,21 @@ function useTheme<T, R> (
 }
 
 useTheme.props = {
-  unstableTheme: {
-    type: Object,
-    default: undefined
-  },
-  unstableThemeOverrides: {
-    type: Object,
-    default: undefined
-  },
-  builtinThemeOverrides: {
-    type: Object,
-    default: undefined
-  }
+  unstableTheme: Object,
+  unstableThemeOverrides: Object,
+  builtinThemeOverrides: Object
 } as const
 
 export interface ThemeProps<T> {
-  unstableTheme: {
-    type: PropType<T | undefined>
-    default: undefined
-  }
-  unstableThemeOverrides: {
-    type: ObjectConstructor
-    default: undefined
-  }
-  builtinThemeOverrides: {
-    type: ObjectConstructor
-    default: undefined
-  }
+  unstableTheme: PropType<T>
+  unstableThemeOverrides: PropType<ExtractThemeOverrides<T>>
+  builtinThemeOverrides: PropType<ExtractThemeOverrides<T>>
 }
 
 export interface ThemePropsReactive<T> {
   unstableTheme?: T
-  unstableThemeOverrides?: Record<string, any>
-  builtinThemeOverrides?: Record<string, any>
+  unstableThemeOverrides?: ExtractThemeOverrides<T>
+  builtinThemeOverrides?: ExtractThemeOverrides<T>
 }
 
 /**

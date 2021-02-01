@@ -247,8 +247,12 @@ export default defineComponent({
       }
     }
     function handleMouseDown (e: MouseEvent): void {
-      if (addButtonInstRef.value?.$el.contains(e.target as Node)) { e.preventDefault() }
-      if (minusButtonInstRef.value?.$el.contains(e.target as Node)) { e.preventDefault() }
+      if (addButtonInstRef.value?.$el.contains(e.target as Node)) {
+        e.preventDefault()
+      }
+      if (minusButtonInstRef.value?.$el.contains(e.target as Node)) {
+        e.preventDefault()
+      }
       inputInstRef.value?.activate()
     }
     const handleAddClick = doAdd
@@ -303,7 +307,7 @@ export default defineComponent({
         const [r, g, b, a] = rgba(iconColorDisabled)
         return {
           textColorTextDisabled: `rgb(${r}, ${g}, ${b})`,
-          opacityDisabled: a
+          opacityDisabled: `${a}`
         }
       })
     }
