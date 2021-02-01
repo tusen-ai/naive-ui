@@ -1,12 +1,12 @@
 import { defineComponent, h, PropType, computed } from 'vue'
 import { formatLength } from '../../_utils'
-import { NBaseIcon } from '../../_base'
+import { NBaseIcon } from '../../_internal'
 import {
   WarningIcon,
   InfoIcon as InfoCircleIcon,
   ErrorIcon as ErrorCircleIcon,
   SuccessIcon as SuccessCircleIcon
-} from '../../_base/icons'
+} from '../../_internal/icons'
 import { Status } from './interface'
 
 const iconMap = {

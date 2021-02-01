@@ -303,14 +303,14 @@ function tusimpleTheme (naive) {
     buttonFontSizeMedium: '24px',
     buttonFontSizeLarge: '24px'
   })
-  naive.styles.light.BaseSelectMenu.override({
+  naive.styles.light.InternalSelectMenu.override({
     boxShadow: vars.boxShadow2,
     paddingSmall: '4px 0',
     paddingMedium: '6px 0',
     paddingLarge: '6px 0',
     paddingHuge: '8px 0'
   })
-  naive.styles.light.BaseSelection.override({
+  naive.styles.light.InternalSelection.override({
     heightMedium: '32px',
     fontSizeMedium: '16px',
     paddingSingle: '0 36px 0 12px',

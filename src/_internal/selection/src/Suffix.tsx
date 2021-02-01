@@ -5,7 +5,7 @@ import NBaseIcon from '../../icon'
 import { ChevronDownIcon } from '../../icons'
 
 export default defineComponent({
-  name: 'BaseSelectionSuffix',
+  name: 'InternalSelectionSuffix',
   props: {
     showArrow: {
       type: Boolean,

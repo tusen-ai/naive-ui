@@ -1,5 +1,6 @@
 import { commonLight } from '../../_styles/new-common'
 import type { ThemeCommonVars } from '../../_styles/new-common'
+import { Theme } from '../../_mixins'
 
 const self = (vars: ThemeCommonVars) => {
   const { railColor } = vars
@@ -12,7 +13,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type RateThemeVars = ReturnType<typeof self>
 
-const themeLight = {
+const themeLight: Theme<RateThemeVars> = {
   name: 'Rate',
   common: commonLight,
   self

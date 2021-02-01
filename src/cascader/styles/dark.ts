@@ -1,5 +1,5 @@
-import { baseSelectionDark } from '../../_base/selection/styles'
-import { baseSelectMenuDark } from '../../_base/select-menu/styles'
+import { internalSelectionDark } from '../../_internal/selection/styles'
+import { internalSelectMenuDark } from '../../_internal/select-menu/styles'
 import { scrollbarDark } from '../../scrollbar/styles'
 import { checkboxDark } from '../../checkbox/styles'
 import { commonDark } from '../../_styles/new-common'
@@ -9,8 +9,8 @@ const cascaderDark: CascaderTheme = {
   name: 'Cascader',
   common: commonDark,
   peers: {
-    BaseSelectMenu: baseSelectMenuDark,
-    BaseSelection: baseSelectionDark,
+    InternalSelectMenu: internalSelectMenuDark,
+    InternalSelection: internalSelectionDark,
     Scrollbar: scrollbarDark,
     Checkbox: checkboxDark
   },

@@ -17,7 +17,7 @@ import {
 import { VResizeObserver } from 'vueuc'
 import { throttle } from 'lodash-es'
 import { useCompitable, onFontsReady, useMergedState } from 'vooks'
-import { NBaseClose } from '../../_base'
+import { NBaseClose } from '../../_internal'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { warn, createKey, call } from '../../_utils'

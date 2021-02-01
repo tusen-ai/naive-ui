@@ -9,8 +9,8 @@ import {
 } from 'vue'
 import { useMemo } from 'vooks'
 import { NCheckbox } from '../../checkbox'
-import { NBaseLoading, NBaseIcon } from '../../_base'
-import { ChevronRightIcon, CheckmarkIcon } from '../../_base/icons'
+import { NBaseLoading, NBaseIcon } from '../../_internal'
+import { ChevronRightIcon, CheckmarkIcon } from '../../_internal/icons'
 import { CascaderInjection, TmNode } from './interface'
 
 export default defineComponent({

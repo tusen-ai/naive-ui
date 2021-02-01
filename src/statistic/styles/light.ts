@@ -1,5 +1,6 @@
 import { commonLight } from '../../_styles/new-common'
 import type { ThemeCommonVars } from '../../_styles/new-common'
+import { Theme } from '../../_mixins'
 
 const self = (vars: ThemeCommonVars) => {
   const { textColor2, textColor1, fontWeightStrong, fontSize } = vars
@@ -16,7 +17,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type StatisticThemeVars = ReturnType<typeof self>
 
-const statisticLight = {
+const statisticLight: Theme<StatisticThemeVars> = {
   name: 'Statistic',
   common: commonLight,
   self

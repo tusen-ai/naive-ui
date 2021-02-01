@@ -3,7 +3,7 @@ import { inject, computed, onBeforeMount, ComputedRef, PropType } from 'vue'
 import { merge } from 'lodash-es'
 import globalStyle from '../_styles/global/index.cssr'
 import { CNode } from 'css-render'
-import { ConfigProviderInjection } from '../config-provider'
+import { ConfigProviderInjection, GlobalTheme } from '../config-provider'
 import type { ThemeCommonVars } from '../_styles/new-common'
 
 globalStyle.mount({
@@ -18,7 +18,7 @@ export interface Theme<T = {}, R = any> {
 }
 
 export type ExtractThemeVars<T> = T extends Theme<infer U, unknown>
-  ? unknown extends U
+  ? unknown extends U // self is undefined, ThemeVars is unknown
     ? {}
     : U
   : {}
@@ -60,7 +60,7 @@ export type MergedTheme<T> = T extends Theme<infer V, infer W>
   : T
 
 function useTheme<T, R> (
-  resolveId: string,
+  resolveId: Exclude<keyof GlobalTheme, 'common'>,
   mountId: string,
   style: CNode | undefined,
   defaultTheme: Theme<T, R>,
@@ -122,9 +122,9 @@ function useTheme<T, R> (
     )
     return {
       common: mergedCommon,
-      self: mergedSelf,
+      self: mergedSelf as any,
       peers: merge({}, defaultTheme.peers, peers, injectedPeers),
-      overrides: merge({}, peersOverrides, injectedPeersOverrides)
+      overrides: merge({}, peersOverrides, injectedPeersOverrides) as any
     }
   })
   return mergedThemeRef
@@ -149,16 +149,44 @@ export interface ThemePropsReactive<T> {
 }
 
 /**
- * props.unstableTheme:
- * { common, self(), peers }
+ * props.unstableTheme (Theme):
+ * {
+ *   common: CommonThemeVars,
+ *   self(): ThemeVars,
+ *   peers: { Component: Theme }
+ * }
  * provider.unstableTheme:
- * { common, Button: { common, self(), peers } }
+ * {
+ *   common: CommonThemeVars,
+ *   Button: Theme
+ *   ...
+ * }
  * defaultTheme:
- * { common, self(), peers }
+ * {
+ *   common: CommonThemeVars,
+ *   self(): ThemeVars,
+ *   peers: { Component: Theme }
+ * }
  *
- * props.themeOverrides:
- * { { common, self, peers } }
+ * props.themeOverrides (ThemeOverrides):
+ * {
+ *   common: CommonThemeVars,
+ *   peers: { Component: ThemeOverrides },
+ *   ...ThemeVars
+ * }
  * provider.themeOverrides:
- * { common, Button: { common, self, peers } }
+ * {
+ *   common: CommonThemeVars,
+ *   Component: ThemeOverrides
+ *   ...
+ * }
+ *
+ * mergedTheme:
+ * {
+ *   common: CommonThemeVars,
+ *   self: ThemeVars,
+ *   peers: { Component: Theme },
+ *   overrides: { Component: ThemeOverrides }
+ * }
  */
 export default useTheme

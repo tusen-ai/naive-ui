@@ -12,7 +12,7 @@ import {
 import { useMergedState, useMemo } from 'vooks'
 import { useFormItem, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { NIconSwitchTransition } from '../../_base'
+import { NIconSwitchTransition } from '../../_internal'
 import { warn, call, createKey, MaybeArray } from '../../_utils'
 import { checkboxLight } from '../styles'
 import type { CheckboxTheme } from '../styles'

@@ -43,8 +43,8 @@ export default defineComponent({
   },
   setup (props) {
     const themeRef = useTheme(
-      'Description',
-      'Description',
+      'Descriptions',
+      'Descriptions',
       style,
       descriptionsLight,
       props

@@ -14,8 +14,8 @@ import {
   SuccessIcon,
   WarningIcon,
   ErrorIcon
-} from '../../_base/icons'
-import { NBaseIcon } from '../../_base'
+} from '../../_internal/icons'
+import { NBaseIcon } from '../../_internal'
 import { resultLight } from '../styles'
 import type { ResultTheme } from '../styles'
 import image404 from './404'

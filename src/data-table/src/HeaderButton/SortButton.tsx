@@ -1,6 +1,6 @@
 import { defineComponent, PropType, h, computed, inject } from 'vue'
-import { ArrowDownIcon } from '../../../_base/icons'
-import { NBaseIcon } from '../../../_base'
+import { ArrowDownIcon } from '../../../_internal/icons'
+import { NBaseIcon } from '../../../_internal'
 import RenderSorter from './RenderSorter'
 import { DataTableInjection, TableColumnInfo } from '../interface'
 

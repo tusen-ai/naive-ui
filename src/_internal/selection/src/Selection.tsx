@@ -15,22 +15,22 @@ import { NTag } from '../../../tag'
 import { useTheme } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
 import { createKey } from '../../../_utils'
-import { baseSelectionLight } from '../styles'
-import type { BaseSelectionTheme } from '../styles'
+import { internalSelectionLight } from '../styles'
+import type { InternalSelectionTheme } from '../styles'
 import Suffix from './Suffix'
 import style from './styles/index.cssr'
 import type { BaseOption } from '../../../select'
 
-export interface BaseSelectionRef {
+export interface InternalSelectionRef {
   focusPatternInputWrapper: () => void
   focusPatternInput: () => void
   $el: HTMLElement
 }
 
 export default defineComponent({
-  name: 'BaseSelection',
+  name: 'InternalSelection',
   props: {
-    ...(useTheme.props as ThemeProps<BaseSelectionTheme>),
+    ...(useTheme.props as ThemeProps<InternalSelectionTheme>),
     bordered: {
       type: Boolean,
       default: undefined
@@ -128,10 +128,10 @@ export default defineComponent({
     const patternInputFocusedRef = ref(false)
     const hoverRef = ref(false)
     const themeRef = useTheme(
-      'BaseSelection',
-      'BaseSelection',
+      'InternalSelection',
+      'InternalSelection',
       style,
-      baseSelectionLight,
+      internalSelectionLight,
       props
     )
     const mergedClearableRef = computed(() => {

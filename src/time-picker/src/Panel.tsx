@@ -1,7 +1,7 @@
 import { h, ref, defineComponent, inject, PropType, computed, VNode } from 'vue'
 import { NScrollbar } from '../../scrollbar'
 import { NButton } from '../../button'
-import { NBaseFocusDetector } from '../../_base'
+import { NBaseFocusDetector } from '../../_internal'
 import { time } from './utils'
 import {
   IsHourDisabled,

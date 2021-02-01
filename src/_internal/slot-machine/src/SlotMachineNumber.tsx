@@ -52,7 +52,9 @@ export default defineComponent({
     function scroll (): void {
       const newOriginalNumber = props.newOriginalNumber
       const oldOriginalNumber = props.oldOriginalNumber
-      if (oldOriginalNumber === undefined || newOriginalNumber === undefined) { return }
+      if (oldOriginalNumber === undefined || newOriginalNumber === undefined) {
+        return
+      }
       if (newOriginalNumber > oldOriginalNumber) {
         scrollByDir('up')
       } else if (oldOriginalNumber > newOriginalNumber) {

@@ -3,7 +3,7 @@ import { useMemo } from 'vooks'
 import NTreeNodeSwitcher from './TreeNodeSwitcher'
 import NTreeNodeCheckbox from './TreeNodeCheckbox'
 import NTreeNodeContent from './TreeNodeContent'
-import { NFadeInExpandTransition } from '../../_base'
+import { NFadeInExpandTransition } from '../../_internal'
 import type { TreeInjection, TmNode } from './interface'
 
 const TreeNode = defineComponent({

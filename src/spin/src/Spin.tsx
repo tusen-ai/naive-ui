@@ -7,7 +7,7 @@ import {
   CSSProperties
 } from 'vue'
 import { useCompitable } from 'vooks'
-import { NBaseLoading } from '../../_base'
+import { NBaseLoading } from '../../_internal'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey, warn } from '../../_utils'

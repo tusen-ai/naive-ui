@@ -8,13 +8,13 @@ import {
   CSSProperties
 } from 'vue'
 import { createKey, keysOf, render as Render } from '../../_utils'
-import { NBaseIcon, NBaseClose } from '../../_base'
+import { NBaseIcon, NBaseClose } from '../../_internal'
 import {
   InfoIcon,
   SuccessIcon,
   WarningIcon,
   ErrorIcon
-} from '../../_base/icons'
+} from '../../_internal/icons'
 import { NotificationProviderInjection } from './NotificationProvider'
 
 const iconMap = {

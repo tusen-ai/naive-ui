@@ -1,6 +1,6 @@
 import { h, defineComponent } from 'vue'
-import { SwitcherIcon } from '../../_base/icons'
-import { NIconSwitchTransition, NBaseLoading, NBaseIcon } from '../../_base'
+import { SwitcherIcon } from '../../_internal/icons'
+import { NIconSwitchTransition, NBaseLoading, NBaseIcon } from '../../_internal'
 
 export default defineComponent({
   name: 'NTreeSwitcher',

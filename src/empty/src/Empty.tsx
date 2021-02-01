@@ -7,11 +7,11 @@ import {
   renderSlot,
   VNode
 } from 'vue'
-import { EmptyIcon } from '../../_base/icons'
+import { EmptyIcon } from '../../_internal/icons'
 import { useLocale, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils'
-import { NBaseIcon } from '../../_base'
+import { NBaseIcon } from '../../_internal'
 import { emptyLight } from '../styles'
 import type { EmptyTheme } from '../styles'
 import style from './styles/index.cssr'

@@ -18,8 +18,8 @@ import {
   NIconSwitchTransition,
   NBaseLoading,
   NBaseWave
-} from '../../_base'
-import type { BaseWaveRef } from '../../_base'
+} from '../../_internal'
+import type { BaseWaveRef } from '../../_internal'
 import { call, createKey } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import { buttonLight } from '../styles'

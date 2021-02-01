@@ -12,8 +12,8 @@ import {
   SuccessIcon,
   WarningIcon,
   ErrorIcon
-} from '../../_base/icons'
-import { NFadeInExpandTransition, NBaseClose, NBaseIcon } from '../../_base'
+} from '../../_internal/icons'
+import { NFadeInExpandTransition, NBaseClose, NBaseIcon } from '../../_internal'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { warn, createKey } from '../../_utils'

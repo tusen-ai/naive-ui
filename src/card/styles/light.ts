@@ -1,6 +1,7 @@
 import { commonLight } from '../../_styles/new-common'
 import type { ThemeCommonVars } from '../../_styles/new-common'
 import commonVariables from './_common'
+import { Theme } from '../../_mixins'
 
 const self = (vars: ThemeCommonVars) => {
   const {
@@ -39,7 +40,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type CardThemeVars = ReturnType<typeof self>
 
-const cardLight = {
+const cardLight: Theme<CardThemeVars> = {
   name: 'Card',
   common: commonLight,
   self

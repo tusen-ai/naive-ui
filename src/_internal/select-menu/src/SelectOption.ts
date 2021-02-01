@@ -7,7 +7,7 @@ import {
   PropType,
   VNode
 } from 'vue'
-import { BaseSelectMenuInjection } from './SelectMenu'
+import { InternalSelectMenuInjection } from './SelectMenu'
 import { TreeNode } from 'treemate'
 import { useMemo } from 'vooks'
 import type { BaseOption } from '../../../select'
@@ -40,33 +40,33 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const NBaseSelectMenu = inject<BaseSelectMenuInjection>(
-      'NBaseSelectMenu'
-    ) as BaseSelectMenuInjection
+    const NInternalSelectMenu = inject<InternalSelectMenuInjection>(
+      'NInternalSelectMenu'
+    ) as InternalSelectMenuInjection
     const rawNodeRef = toRef(props.tmNode, 'rawNode')
     const isPendingRef = useMemo(() => {
-      const { pendingTmNode } = NBaseSelectMenu
+      const { pendingTmNode } = NInternalSelectMenu
       if (!pendingTmNode) return false
       return props.tmNode.key === pendingTmNode.key
     })
     function handleClick (e: MouseEvent): void {
       const { tmNode } = props
       if (tmNode.disabled) return
-      NBaseSelectMenu.handleOptionClick(e, tmNode)
+      NInternalSelectMenu.handleOptionClick(e, tmNode)
     }
     function handleMouseEnter (e: MouseEvent): void {
       const { tmNode } = props
       if (tmNode.disabled) return
-      NBaseSelectMenu.handleOptionMouseEnter(e, tmNode)
+      NInternalSelectMenu.handleOptionMouseEnter(e, tmNode)
     }
     function handleMouseMove (e: MouseEvent): void {
       const { tmNode } = props
       const { value: isPending } = isPendingRef
       if (tmNode.disabled || isPending) return
-      NBaseSelectMenu.handleOptionMouseEnter(e, tmNode)
+      NInternalSelectMenu.handleOptionMouseEnter(e, tmNode)
     }
     return {
-      NBaseSelectMenu,
+      NInternalSelectMenu,
       rawNode: rawNodeRef,
       isGrouped: useMemo(() => {
         const { tmNode } = props
@@ -75,11 +75,11 @@ export default defineComponent({
       }),
       isPending: isPendingRef,
       isSelected: useMemo(() => {
-        const { multiple, value } = NBaseSelectMenu
+        const { multiple, value } = NInternalSelectMenu
         if (value === null) return false
         const optionValue = rawNodeRef.value.value
         if (multiple) {
-          const { valueSet } = NBaseSelectMenu
+          const { valueSet } = NInternalSelectMenu
           return valueSet.has(optionValue)
         } else {
           return value === optionValue
@@ -99,7 +99,7 @@ export default defineComponent({
       handleClick,
       handleMouseEnter,
       handleMouseMove,
-      NBaseSelectMenu: { multiple }
+      NInternalSelectMenu: { multiple }
     } = this
     const showCheckMark = multiple && isSelected
     const children = rawNode.render

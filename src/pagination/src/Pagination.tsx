@@ -13,14 +13,14 @@ import {
 import { useCompitable, useMergedState } from 'vooks'
 import { NSelect } from '../../select'
 import { InputRef, NInput } from '../../input'
-import { NBaseIcon } from '../../_base'
+import { NBaseIcon } from '../../_internal'
 import {
   FastForwardIcon,
   FastBackwardIcon,
   BackwardIcon,
   ForwardIcon,
   MoreIcon
-} from '../../_base/icons'
+} from '../../_internal/icons'
 import { useLocale, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { paginationLight, PaginationTheme } from '../styles'

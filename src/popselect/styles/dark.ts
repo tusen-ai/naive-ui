@@ -1,4 +1,4 @@
-import { baseSelectMenuDark } from '../../_base/select-menu/styles'
+import { internalSelectMenuDark } from '../../_internal/select-menu/styles'
 import { popoverDark } from '../../popover/styles'
 import { commonDark } from '../../_styles/new-common'
 import type { PopselectTheme } from './light'
@@ -8,7 +8,7 @@ const popselect: PopselectTheme = {
   common: commonDark,
   peers: {
     Popover: popoverDark,
-    BaseSelectMenu: baseSelectMenuDark
+    InternalSelectMenu: internalSelectMenuDark
   }
 }
 

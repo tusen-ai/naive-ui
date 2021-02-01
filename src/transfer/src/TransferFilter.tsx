@@ -1,6 +1,6 @@
 import { h, defineComponent, inject, PropType } from 'vue'
-import { SearchIcon } from '../../_base/icons'
-import { NBaseIcon } from '../../_base'
+import { SearchIcon } from '../../_internal/icons'
+import { NBaseIcon } from '../../_internal'
 import { NInput } from '../../input'
 import { TransferInjection } from './interface'
 

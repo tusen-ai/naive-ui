@@ -1,5 +1,5 @@
-import { baseSelectionLight } from '../../_base/selection/styles'
-import { baseSelectMenuLight } from '../../_base/select-menu/styles'
+import { internalSelectionLight } from '../../_internal/selection/styles'
+import { internalSelectMenuLight } from '../../_internal/select-menu/styles'
 import { commonLight } from '../../_styles/new-common'
 import { createTheme } from '../../_mixins'
 
@@ -7,8 +7,8 @@ const selectLight = createTheme({
   name: 'Select',
   common: commonLight,
   peers: {
-    BaseSelection: baseSelectionLight,
-    BaseSelectMenu: baseSelectMenuLight
+    InternalSelection: internalSelectionLight,
+    InternalSelectMenu: internalSelectMenuLight
   }
 })
 

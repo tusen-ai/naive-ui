@@ -9,7 +9,7 @@ import {
   nextTick
 } from 'vue'
 import { createTreeMate } from 'treemate'
-import { NBaseSelectMenu } from '../../_base'
+import { NInternalSelectMenu } from '../../_internal'
 import { call, keysOf, warn } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import type { PopselectSize, PopselectInjection } from './interface'
@@ -131,10 +131,10 @@ export default defineComponent({
   },
   render () {
     return (
-      <NBaseSelectMenu
-        unstableTheme={this.NPopselect.mergedTheme.peers.BaseSelectMenu}
+      <NInternalSelectMenu
+        unstableTheme={this.NPopselect.mergedTheme.peers.InternalSelectMenu}
         unstableThemeOverrides={
-          this.NPopselect.mergedTheme.overrides.BaseSelectMenu
+          this.NPopselect.mergedTheme.overrides.InternalSelectMenu
         }
         multiple={this.multiple}
         treeMate={this.treeMate}

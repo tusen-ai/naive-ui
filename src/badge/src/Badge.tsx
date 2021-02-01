@@ -11,7 +11,7 @@ import {
 } from 'vue'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { NBaseSlotMachine, NBaseWave } from '../../_base'
+import { NBaseSlotMachine, NBaseWave } from '../../_internal'
 import { createKey } from '../../_utils'
 import { badgeLight } from '../styles'
 import type { BadgeTheme } from '../styles'

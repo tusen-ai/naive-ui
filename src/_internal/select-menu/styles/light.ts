@@ -37,10 +37,10 @@ const self = (vars: ThemeCommonVars) => {
   }
 }
 
-export type BaseSelectMenuThemeVars = ReturnType<typeof self>
+export type InternalSelectMenuThemeVars = ReturnType<typeof self>
 
-const baseSelectMenuLight = createTheme({
-  name: 'BaseSelectMenu',
+const internalSelectMenuLight = createTheme({
+  name: 'InternalSelectMenu',
   common: commonLight,
   peers: {
     Scrollbar: scrollbarLight,
@@ -49,5 +49,5 @@ const baseSelectMenuLight = createTheme({
   self
 })
 
-export default baseSelectMenuLight
-export type BaseSelectMenuTheme = typeof baseSelectMenuLight
+export default internalSelectMenuLight
+export type InternalSelectMenuTheme = typeof internalSelectMenuLight

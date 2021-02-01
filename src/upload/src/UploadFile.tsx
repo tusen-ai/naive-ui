@@ -4,9 +4,9 @@ import {
   DeleteIcon,
   AttachIcon,
   DownloadIcon
-} from '../../_base/icons'
+} from '../../_internal/icons'
 import { NButton } from '../../button'
-import { NIconSwitchTransition, NBaseIcon } from '../../_base'
+import { NIconSwitchTransition, NBaseIcon } from '../../_internal'
 import { warn } from '../../_utils'
 import NUploadProgress from './UploadProgress'
 import type { FileInfo, UploadInjection } from './interface'

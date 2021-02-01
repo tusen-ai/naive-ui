@@ -1,11 +1,11 @@
 import { h, defineComponent, PropType, computed } from 'vue'
-import { NBaseIcon } from '../../_base'
+import { NBaseIcon } from '../../_internal'
 import {
   CheckmarkIcon as SuccessIcon,
   CloseIcon as ErrorIcon,
   WarningIcon,
   InfoIcon as InfoCircleIcon
-} from '../../_base/icons'
+} from '../../_internal/icons'
 import { Status } from './interface'
 
 const iconMap = {

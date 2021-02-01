@@ -4,13 +4,13 @@ import {
   SuccessIcon,
   WarningIcon,
   ErrorIcon
-} from '../../_base/icons'
+} from '../../_internal/icons'
 import {
   NIconSwitchTransition,
   NBaseLoading,
   NBaseIcon,
   NBaseClose
-} from '../../_base'
+} from '../../_internal'
 import { render, createKey } from '../../_utils'
 import { ThemePropsReactive, useTheme } from '../../_mixins'
 import { messageLight, MessageTheme } from '../styles'

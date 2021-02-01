@@ -1,6 +1,7 @@
 import sizeVariables from './_common'
 import { commonLight } from '../../_styles/new-common'
 import type { ThemeCommonVars } from '../../_styles/new-common'
+import { Theme } from '../../_mixins'
 
 const self = (vars: ThemeCommonVars) => {
   const {
@@ -36,7 +37,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type TableThemeVars = ReturnType<typeof self>
 
-const tableLight = {
+const tableLight: Theme<TableThemeVars> = {
   name: 'Table',
   common: commonLight,
   self

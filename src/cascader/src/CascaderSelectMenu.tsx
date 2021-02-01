@@ -19,7 +19,7 @@ import type {
   GroupOption,
   IgnoredOption
 } from '../../select/src/interface'
-import { BaseSelectMenuRef, NBaseSelectMenu } from '../../_base'
+import { InternalSelectMenuRef, NInternalSelectMenu } from '../../_internal'
 import { createSelectOptions } from './utils'
 import {
   CascaderInjection,
@@ -64,7 +64,7 @@ export default defineComponent({
     const NCascader = inject<CascaderInjection>(
       'NCascader'
     ) as CascaderInjection
-    const menuInstRef = ref<BaseSelectMenuRef | null>(null)
+    const menuInstRef = ref<InternalSelectMenuRef | null>(null)
     const selectOptionsRef = computed(() => {
       return createSelectOptions(props.tmNodes, NCascader.leafOnly)
     })
@@ -163,14 +163,14 @@ export default defineComponent({
         {this.show
           ? withDirectives(
             (
-              <NBaseSelectMenu
+              <NInternalSelectMenu
                 ref="menuInstRef"
                 class="n-cascader-menu"
                 autoPending
                 unstableThemeOverrides={
-                  NCascader.mergedTheme.overrides.BaseSelectMenu
+                  NCascader.mergedTheme.overrides.InternalSelectMenu
                 }
-                unstableTheme={NCascader.mergedTheme.peers.BaseSelectMenu}
+                unstableTheme={NCascader.mergedTheme.peers.InternalSelectMenu}
                 treeMate={this.selectTreeMate}
                 multiple={this.multiple}
                 value={this.value}

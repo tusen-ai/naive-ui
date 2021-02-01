@@ -2,10 +2,10 @@ import { emptyDark } from '../../../empty/styles'
 import { scrollbarDark } from '../../../scrollbar/styles'
 import { commonDark } from '../../../_styles/new-common'
 import commonVariables from './_common'
-import type { BaseSelectMenuTheme } from './light'
+import type { InternalSelectMenuTheme } from './light'
 
-const baseSelectMenuDark: BaseSelectMenuTheme = {
-  name: 'BaseSelectMenu',
+const internalSelectMenuDark: InternalSelectMenuTheme = {
+  name: 'InternalSelectMenu',
   common: commonDark,
   peers: {
     Scrollbar: scrollbarDark,
@@ -44,4 +44,4 @@ const baseSelectMenuDark: BaseSelectMenuTheme = {
   }
 }
 
-export default baseSelectMenuDark
+export default internalSelectMenuDark

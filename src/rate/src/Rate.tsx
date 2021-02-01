@@ -10,7 +10,7 @@ import {
   CSSProperties
 } from 'vue'
 import { useMergedState } from 'vooks'
-import { NBaseIcon } from '../../_base'
+import { NBaseIcon } from '../../_internal'
 import { useTheme, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call } from '../../_utils'

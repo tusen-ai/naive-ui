@@ -18,7 +18,7 @@ import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
 import { useFormItem, useTheme, useConfig, ThemeProps } from '../../_mixins'
 import { call, warn, useAdjustedTo, MaybeArray } from '../../_utils'
-import { NBaseSelectMenu, BaseSelectMenuRef } from '../../_base'
+import { NInternalSelectMenu, InternalSelectMenuRef } from '../../_internal'
 
 import { NInput } from '../../input'
 import type { BaseOption, GroupOption, IgnoredOption } from '../../select'
@@ -97,7 +97,7 @@ export default defineComponent({
     const formItem = useFormItem(props)
 
     const triggerElRef = ref<HTMLElement | null>(null)
-    const menuInstRef = ref<BaseSelectMenuRef | null>(null)
+    const menuInstRef = ref<InternalSelectMenuRef | null>(null)
 
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
@@ -328,13 +328,14 @@ export default defineComponent({
                         this.active
                           ? withDirectives(
                             (
-                              <NBaseSelectMenu
+                              <NInternalSelectMenu
                                 ref="menuInstRef"
                                 unstableTheme={
-                                  this.mergedTheme.peers.BaseSelectMenu
+                                  this.mergedTheme.peers.InternalSelectMenu
                                 }
                                 unstableThemeOverrides={
-                                  this.mergedTheme.overrides.BaseSelectMenu
+                                  this.mergedTheme.overrides
+                                    .InternalSelectMenu
                                 }
                                 auto-pending
                                 class="n-auto-complete-menu"

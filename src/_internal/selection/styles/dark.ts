@@ -1,10 +1,10 @@
 import { changeColor, scaleColor } from 'seemly'
 import { commonDark } from '../../../_styles/new-common'
 import commonVars from './_common'
-import type { BaseSelectionTheme } from './light'
+import type { InternalSelectionTheme } from './light'
 
-const baseSelectionDark: BaseSelectionTheme = {
-  name: 'BaseSelection',
+const internalSelectionDark: InternalSelectionTheme = {
+  name: 'InternalSelection',
   common: commonDark,
   self (vars) {
     const {
@@ -84,4 +84,4 @@ const baseSelectionDark: BaseSelectionTheme = {
   }
 }
 
-export default baseSelectionDark
+export default internalSelectionDark

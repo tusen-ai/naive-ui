@@ -14,7 +14,7 @@ import {
 } from 'vue'
 import { useMergedState } from 'vooks'
 import NIconConfigProvider from '../../icon/src/IconConfigProvider'
-import { NBaseClear } from '../../_base'
+import { NBaseClear } from '../../_internal'
 import { useTheme, useLocale, useFormItem, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, createKey } from '../../_utils'

@@ -8,8 +8,8 @@ import {
   renderSlot,
   VNode
 } from 'vue'
-import { ChevronRightIcon as ArrowIcon } from '../../_base/icons'
-import { NBaseIcon } from '../../_base'
+import { ChevronRightIcon as ArrowIcon } from '../../_internal/icons'
+import { NBaseIcon } from '../../_internal'
 import { useInjectionCollection } from '../../_utils/composable'
 import NCollapseItemContent from './CollapseItemContent'
 import { NCollapseInjection } from './Collapse'

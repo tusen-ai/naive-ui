@@ -7,8 +7,8 @@ import {
   FastBackwardIcon,
   ForwardIcon,
   FastForwardIcon
-} from '../../../_base/icons'
-import { NBaseFocusDetector } from '../../../_base'
+} from '../../../_internal/icons'
+import { NBaseFocusDetector } from '../../../_internal'
 import { useCalendar } from './use-calendar'
 
 export default defineComponent({

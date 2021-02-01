@@ -10,10 +10,10 @@ import {
 import { useMemo } from 'vooks'
 import { warn, getSlot } from '../../_utils'
 import {
-  ThemeOverrides,
   Hljs,
-  Theme,
-  ConfigProviderInjection
+  ConfigProviderInjection,
+  GlobalTheme,
+  GlobalThemeOverrides
 } from './interface'
 import { NaiveDateLocale, NaiveLocale } from '../../locales'
 
@@ -38,8 +38,8 @@ export default defineComponent({
     },
     hljs: Object as PropType<Hljs>,
     // wip, unstable
-    unstableTheme: Object as PropType<Theme>,
-    unstableThemeOverrides: Object as PropType<ThemeOverrides>,
+    unstableTheme: Object as PropType<GlobalTheme>,
+    unstableThemeOverrides: Object as PropType<GlobalThemeOverrides>,
     // deprecated
     theme: String,
     language: String,

@@ -9,9 +9,9 @@ import {
 import {
   CheckmarkIcon as FinishedIcon,
   CloseIcon as ErrorIcon
-} from '../../_base/icons'
+} from '../../_internal/icons'
 import { useTheme } from '../../_mixins'
-import { NIconSwitchTransition, NBaseIcon } from '../../_base'
+import { NIconSwitchTransition, NBaseIcon } from '../../_internal'
 import { createKey } from '../../_utils'
 import { stepsLight } from '../styles'
 import type { StepsInjection } from './Steps'

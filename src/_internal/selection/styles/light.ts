@@ -82,13 +82,13 @@ const self = (vars: ThemeCommonVars) => {
   }
 }
 
-export type BaseSelectionThemeVars = ReturnType<typeof self>
+export type InternalSelectionThemeVars = ReturnType<typeof self>
 
-const baseSelectionLight = createTheme({
-  name: 'BaseSelection',
+const internalSelectionLight = createTheme({
+  name: 'InternalSelection',
   common: commonLight,
   self
 })
 
-export default baseSelectionLight
-export type BaseSelectionTheme = typeof baseSelectionLight
+export default internalSelectionLight
+export type InternalSelectionTheme = typeof internalSelectionLight

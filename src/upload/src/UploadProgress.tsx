@@ -1,5 +1,5 @@
 import { h, defineComponent, inject, PropType } from 'vue'
-import { NFadeInExpandTransition } from '../../_base'
+import { NFadeInExpandTransition } from '../../_internal'
 import { NProgress } from '../../progress'
 import type { UploadInjection } from './interface'
 

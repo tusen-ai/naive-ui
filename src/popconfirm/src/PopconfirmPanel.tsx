@@ -9,8 +9,8 @@ import {
   CSSProperties
 } from 'vue'
 import { NButton } from '../../button'
-import { NBaseIcon } from '../../_base'
-import { WarningIcon } from '../../_base/icons'
+import { NBaseIcon } from '../../_internal'
+import { WarningIcon } from '../../_internal/icons'
 import { useLocale } from '../../_mixins'
 import { keysOf } from '../../_utils'
 import type { PopconfirmInjection } from './interface'

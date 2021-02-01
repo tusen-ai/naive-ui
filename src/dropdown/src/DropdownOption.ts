@@ -11,7 +11,7 @@ import {
 } from 'vue'
 import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { useMemo } from 'vooks'
-import { ChevronRightIcon } from '../../_base/icons'
+import { ChevronRightIcon } from '../../_internal/icons'
 import { useDeferredTrue } from '../../_utils/composable'
 import { render } from '../../_utils'
 import { NIcon } from '../../icon'

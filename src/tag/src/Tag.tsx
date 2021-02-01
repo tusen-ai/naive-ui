@@ -1,7 +1,7 @@
 import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { NBaseClose } from '../../_base'
+import { NBaseClose } from '../../_internal'
 import { warn, createKey } from '../../_utils'
 import { tagLight } from '../styles'
 import type { TagTheme } from '../styles'

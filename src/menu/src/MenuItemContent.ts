@@ -1,7 +1,7 @@
 import { computed, defineComponent, h } from 'vue'
-import { ChevronDownFilledIcon } from '../../_base/icons'
+import { ChevronDownFilledIcon } from '../../_internal/icons'
 import { render } from '../../_utils'
-import { NBaseIcon } from '../../_base'
+import { NBaseIcon } from '../../_internal'
 
 export default defineComponent({
   name: 'MenuItemContent',

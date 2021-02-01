@@ -27,10 +27,10 @@ import type { ThemeProps } from '../../../_mixins'
 import NSelectOption from './SelectOption'
 import NSelectGroupHeader from './SelectGroupHeader'
 import style from './styles/index.cssr'
-import { baseSelectMenuLight, BaseSelectMenuTheme } from '../styles'
+import { internalSelectMenuLight, InternalSelectMenuTheme } from '../styles'
 import { Size } from './interface'
 
-export interface BaseSelectMenuInjection {
+export interface InternalSelectMenuInjection {
   handleOptionMouseEnter: (e: MouseEvent, tmNode: TreeNode<BaseOption>) => void
   handleOptionClick: (e: MouseEvent, tmNode: TreeNode<BaseOption>) => void
   valueSet: Set<number | string>
@@ -39,16 +39,16 @@ export interface BaseSelectMenuInjection {
   value: string | number | Array<string | number> | null
 }
 
-export interface BaseSelectMenuRef {
+export interface InternalSelectMenuRef {
   getPendingOption: () => BaseOption | null
   prev: () => void
   next: () => void
 }
 
 export default defineComponent({
-  name: 'BaseSelectMenu',
+  name: 'InternalSelectMenu',
   props: {
-    ...(useTheme.props as ThemeProps<BaseSelectMenuTheme>),
+    ...(useTheme.props as ThemeProps<InternalSelectMenuTheme>),
     scrollable: {
       type: Boolean,
       default: true
@@ -84,10 +84,10 @@ export default defineComponent({
   },
   setup (props) {
     const themeRef = useTheme(
-      'BaseSelectMenu',
-      'BaseSelectMenu',
+      'InternalSelectMenu',
+      'InternalSelectMenu',
       style,
-      baseSelectMenuLight,
+      internalSelectMenuLight,
       props
     )
     const virtualListRef = ref<VirtualListRef | null>(null)
@@ -215,8 +215,8 @@ export default defineComponent({
         }
       }
     }
-    provide<BaseSelectMenuInjection>(
-      'NBaseSelectMenu',
+    provide<InternalSelectMenuInjection>(
+      'NInternalSelectMenu',
       reactive({
         handleOptionMouseEnter,
         handleOptionClick,

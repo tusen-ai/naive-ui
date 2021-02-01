@@ -13,8 +13,8 @@ import {
 } from 'vue'
 import { FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
-import { NBaseMenuMask } from '../../_base'
-import { MenuMaskRef } from '../../_base/menu-mask'
+import { NBaseMenuMask } from '../../_internal'
+import { MenuMaskRef } from '../../_internal/menu-mask'
 import NCascaderSubmenu from './CascaderSubmenu'
 import {
   CascaderInjection,

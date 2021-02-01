@@ -11,14 +11,14 @@ import {
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { render, createKey, keysOf } from '../../_utils'
-import { NBaseIcon, NBaseClose } from '../../_base'
+import { NBaseIcon, NBaseClose } from '../../_internal'
 import { NButton } from '../../button'
 import {
   InfoIcon,
   SuccessIcon,
   WarningIcon,
   ErrorIcon
-} from '../../_base/icons'
+} from '../../_internal/icons'
 import { dialogLight } from '../styles'
 import type { DialogTheme } from '../styles'
 import style from './styles/index.cssr'

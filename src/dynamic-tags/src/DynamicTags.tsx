@@ -8,11 +8,11 @@ import {
   nextTick
 } from 'vue'
 import commonProps from '../../tag/src/common-props'
-import { AddIcon } from '../../_base/icons'
+import { AddIcon } from '../../_internal/icons'
 import { NButton } from '../../button'
 import { InputRef, NInput } from '../../input'
 import { NTag } from '../../tag'
-import { NBaseIcon } from '../../_base'
+import { NBaseIcon } from '../../_internal'
 import { useTheme, useFormItem, useLocale } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { warn, call, MaybeArray, smallerSize } from '../../_utils'

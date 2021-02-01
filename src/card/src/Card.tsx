@@ -9,7 +9,7 @@ import {
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey, keysOf } from '../../_utils'
-import { NBaseClose } from '../../_base'
+import { NBaseClose } from '../../_internal'
 import { cardLight } from '../styles'
 import type { CardTheme } from '../styles'
 import style from './styles/index.cssr'

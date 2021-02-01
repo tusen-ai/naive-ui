@@ -10,7 +10,7 @@ import {
   VNodeChild
 } from 'vue'
 import { useMemo } from 'vooks'
-import { NFadeInExpandTransition } from '../../_base'
+import { NFadeInExpandTransition } from '../../_internal'
 import { NDropdown } from '../../dropdown'
 import NMenuItemContent from './MenuItemContent'
 import { itemRenderer } from './utils'

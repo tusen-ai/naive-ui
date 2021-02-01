@@ -1,5 +1,5 @@
-import { baseSelectionLight } from '../../_base/selection/styles'
-import { baseSelectMenuLight } from '../../_base/select-menu/styles'
+import { internalSelectionLight } from '../../_internal/selection/styles'
+import { internalSelectMenuLight } from '../../_internal/select-menu/styles'
 import { scrollbarLight } from '../../scrollbar/styles'
 import { checkboxLight } from '../../checkbox/styles'
 import { commonLight } from '../../_styles/new-common'
@@ -43,8 +43,8 @@ const cascaderLight = createTheme({
   name: 'Cascader',
   common: commonLight,
   peers: {
-    BaseSelectMenu: baseSelectMenuLight,
-    BaseSelection: baseSelectionLight,
+    InternalSelectMenu: internalSelectMenuLight,
+    InternalSelection: internalSelectionLight,
     Scrollbar: scrollbarLight,
     Checkbox: checkboxLight
   },

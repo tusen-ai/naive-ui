@@ -20,8 +20,12 @@ import { useTheme, useConfig, useLocale, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { warn, call, useAdjustedTo } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
-import { NBaseSelectMenu, NBaseSelection, BaseSelectMenuRef } from '../../_base'
-import type { BaseSelectionRef } from '../../_base'
+import {
+  NInternalSelectMenu,
+  NInternalSelection,
+  InternalSelectMenuRef
+} from '../../_internal'
+import type { InternalSelectionRef } from '../../_internal'
 import { selectLight, SelectTheme } from '../styles'
 import {
   tmOptions,
@@ -202,9 +206,9 @@ export default defineComponent({
       toRef(props, 'show'),
       uncontrolledShowRef
     )
-    const triggerRef = ref<BaseSelectionRef | null>(null)
+    const triggerRef = ref<InternalSelectionRef | null>(null)
     const followerRef = ref<FollowerRef | null>(null)
-    const menuRef = ref<BaseSelectMenuRef | null>(null)
+    const menuRef = ref<InternalSelectMenuRef | null>(null)
     const { locale } = useLocale('Select')
     const localizedPlaceholderRef = computed<string>(() => {
       return props.placeholder ?? locale.value.placeholder
@@ -630,7 +634,7 @@ export default defineComponent({
               <VTarget>
                 {{
                   default: () => (
-                    <NBaseSelection
+                    <NInternalSelection
                       ref="triggerRef"
                       bordered={this.mergedBordered}
                       active={this.mergedShow}
@@ -644,9 +648,9 @@ export default defineComponent({
                       clearable={this.clearable}
                       disabled={this.disabled}
                       size={this.mergedSize}
-                      unstableTheme={this.mergedTheme.peers.BaseSelection}
+                      unstableTheme={this.mergedTheme.peers.InternalSelection}
                       unstableThemeOverrides={
-                        this.mergedTheme.overrides.BaseSelection
+                        this.mergedTheme.overrides.InternalSelection
                       }
                       loading={this.loading}
                       autofocus={this.autofocus}
@@ -683,15 +687,15 @@ export default defineComponent({
                           this.mergedShow &&
                           withDirectives(
                             h(
-                              NBaseSelectMenu,
+                              NInternalSelectMenu,
                               {
                                 ref: 'menuRef',
                                 class: 'n-select-menu',
                                 autoPending: true,
                                 unstableTheme: this.mergedTheme.peers
-                                  .BaseSelectMenu,
+                                  .InternalSelectMenu,
                                 unstableThemeOverrides: this.mergedTheme
-                                  .overrides.BaseSelectMenu,
+                                  .overrides.InternalSelectMenu,
                                 pattern: this.pattern,
                                 treeMate: this.treeMate,
                                 multiple: this.multiple,

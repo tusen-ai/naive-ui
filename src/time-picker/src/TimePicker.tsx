@@ -33,9 +33,9 @@ import {
   getSeconds
 } from 'date-fns'
 import { strictParse } from '../../date-picker/src/utils'
-import { TimeIcon } from '../../_base/icons'
+import { TimeIcon } from '../../_internal/icons'
 import { InputRef, NInput } from '../../input'
-import { NBaseIcon } from '../../_base'
+import { NBaseIcon } from '../../_internal'
 import { useConfig, useTheme, useLocale, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { warn, call, useAdjustedTo, MaybeArray } from '../../_utils'

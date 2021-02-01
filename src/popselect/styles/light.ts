@@ -1,4 +1,4 @@
-import { baseSelectMenuLight } from '../../_base/select-menu/styles'
+import { internalSelectMenuLight } from '../../_internal/select-menu/styles'
 import { commonLight } from '../../_styles/new-common'
 import { popoverLight } from '../../popover/styles'
 import { createTheme } from '../../_mixins'
@@ -8,7 +8,7 @@ const popselectLight = createTheme({
   common: commonLight,
   peers: {
     Popover: popoverLight,
-    BaseSelectMenu: baseSelectMenuLight
+    InternalSelectMenu: internalSelectMenuLight
   }
 })
 

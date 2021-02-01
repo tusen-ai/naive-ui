@@ -5,7 +5,7 @@ import {
   defineComponent,
   DirectiveArguments
 } from 'vue'
-import { NFadeInExpandTransition } from '../../_base'
+import { NFadeInExpandTransition } from '../../_internal'
 
 export default defineComponent({
   name: 'NCollapseItemContent',
