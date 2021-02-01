@@ -23,7 +23,8 @@ module.exports = {
       'highlight.js/lib/languages/python',
       '@vicons/fluent/Compose16Regular.js',
       'date-fns/locale'
-    ]
+    ],
+    exclude: ['__INDEX__']
   },
   build: {
     outDir: 'site',
