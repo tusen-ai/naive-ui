@@ -406,15 +406,16 @@
   - [x] form item default type explain
   - [x] selection focus style
   - [x] refactor site use store!!! singleton
-  - [ ] 文档网站主题切换
+  - [x] 文档网站主题切换
   - [ ] 文档网站 demo 样式
-  - [ ] anchor bug！
+  - [x] anchor bug！
   - [ ] getKey select & autocomplete type safe & input event interface? onInput value | null or value
-  - [ ] vshow
-  - [ ] jsx focusin out
+  - [x] vshow (maybe create a vue pr)
+  - [x] jsx focusin out (waiting for vue update)
   - [ ] inject key & value in type
   - [ ] form item no label css
-  - [ ] unify treemate ignored
+  - [x] unify treemate ignored
+  - [ ] fix menu extra
 
 ## Info
 

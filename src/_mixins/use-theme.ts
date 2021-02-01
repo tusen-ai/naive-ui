@@ -85,11 +85,8 @@ function useTheme<T, R> (
       peers: injectedPeersOverrides = {}
     } = injectedSelfOverrides
     const mergedCommon = merge(
-      common ||
-        injectedCommon ||
-        injectedGlobalCommon ||
-        defaultTheme.common ||
-        {},
+      {},
+      common || injectedCommon || injectedGlobalCommon || defaultTheme.common,
       injectedGlobalCommonOverrides,
       injectedCommonOverrides,
       commonOverrides
@@ -103,7 +100,7 @@ function useTheme<T, R> (
     return {
       common: mergedCommon,
       self: mergedSelf,
-      peers: merge(defaultTheme.peers, peers, injectedPeers),
+      peers: merge({}, defaultTheme.peers, peers, injectedPeers),
       overrides: merge(peersOverrides, injectedPeersOverrides)
     }
   })
