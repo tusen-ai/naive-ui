@@ -134,8 +134,8 @@ export default defineComponent({
     return (
       <NInternalSelectMenu
         unstableTheme={this.NPopselect.mergedTheme.peers.InternalSelectMenu}
-        unstableThemeOverrides={
-          this.NPopselect.mergedTheme.overrides.InternalSelectMenu
+        themeOverrides={
+          this.NPopselect.mergedTheme.peerOverrides.InternalSelectMenu
         }
         multiple={this.multiple}
         treeMate={this.treeMate}

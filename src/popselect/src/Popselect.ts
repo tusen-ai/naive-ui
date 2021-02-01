@@ -64,7 +64,7 @@ export default defineComponent({
         ref: 'popoverInstRef',
         class: 'n-popselect',
         unstableTheme: mergedTheme.peers.Popover,
-        unstableThemeOverrides: mergedTheme.overrides.Popover
+        themeOverrides: mergedTheme.peerOverrides.Popover
       }),
       {
         trigger: this.$slots.default,

@@ -170,7 +170,7 @@ export default defineComponent({
             <NScrollbar
               ref="scrollbarRef"
               unstableTheme={NModal.mergedTheme.peers.Scrollbar}
-              unstableThemeOverrides={NModal.mergedTheme.overrides.Scrollbar}
+              themeOverrides={NModal.mergedTheme.peerOverrides.Scrollbar}
               contentClass="n-modal-scroll-content"
             >
               {{
@@ -194,8 +194,8 @@ export default defineComponent({
                                     unstableTheme={
                                       NModal.mergedTheme.peers.Dialog
                                     }
-                                    unstableThemeOverrides={
-                                      NModal.mergedTheme.overrides.Dialog
+                                    themeOverrides={
+                                      NModal.mergedTheme.peerOverrides.Dialog
                                     }
                                     {...keep(this.$props, dialogPropKeys)}
                                   >
@@ -207,8 +207,8 @@ export default defineComponent({
                                     unstableTheme={
                                       NModal.mergedTheme.peers.Card
                                     }
-                                    unstableThemeOverrides={
-                                      NModal.mergedTheme.overrides.Card
+                                    themeOverrides={
+                                      NModal.mergedTheme.peerOverrides.Card
                                     }
                                     {...keep(this.$props, cardPropKeys)}
                                   >

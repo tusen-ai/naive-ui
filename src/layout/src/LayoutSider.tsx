@@ -281,7 +281,7 @@ export default defineComponent({
             class="n-layout-sider__content"
             {...this.scrollbarProps}
             unstableTheme={this.mergedTheme.peers.Scrollbar}
-            unstableThemeOverrides={this.mergedTheme.overrides.Scrollbar}
+            themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
           >
             {this.$slots}
           </NScrollbar>

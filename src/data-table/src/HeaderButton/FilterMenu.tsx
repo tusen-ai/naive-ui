@@ -140,9 +140,7 @@ export default defineComponent({
                           <NCheckbox
                             key={option.value}
                             unstableTheme={mergedTheme.peers.Checkbox}
-                            unstableThemeOverrides={
-                              mergedTheme.overrides.Checkbox
-                            }
+                            themeOverrides={mergedTheme.peerOverrides.Checkbox}
                             value={option.value}
                           >
                             {{ default: () => option.label }}
@@ -165,7 +163,7 @@ export default defineComponent({
                           key={option.value}
                           value={option.value}
                           unstableTheme={mergedTheme.peers.Radio}
-                          unstableThemeOverrides={mergedTheme.overrides.Radio}
+                          themeOverrides={mergedTheme.peerOverrides.Radio}
                         >
                           {{ default: () => option.label }}
                         </NRadio>
@@ -180,14 +178,14 @@ export default defineComponent({
           <NButton
             size="tiny"
             unstableTheme={mergedTheme.peers.Button}
-            unstableThemeOverrides={mergedTheme.overrides.Button}
+            themeOverrides={mergedTheme.peerOverrides.Button}
             onClick={this.handleClearClick}
           >
             {{ default: () => locale.clear }}
           </NButton>
           <NButton
             unstableTheme={mergedTheme.peers.Button}
-            unstableThemeOverrides={mergedTheme.overrides.Button}
+            themeOverrides={mergedTheme.peerOverrides.Button}
             type="primary"
             size="tiny"
             onClick={this.handleConfirmClick}

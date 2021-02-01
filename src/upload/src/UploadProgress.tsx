@@ -60,9 +60,7 @@ export default defineComponent({
                 status={this.status}
                 height={2}
                 unstableTheme={this.NUpload.mergedTheme.peers.Progress}
-                unstableThemeOverrides={
-                  this.NUpload.mergedTheme.overrides.Progress
-                }
+                themeOverrides={this.NUpload.mergedTheme.peerOverrides.Progress}
               />
             ) : null
         }}

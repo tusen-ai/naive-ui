@@ -31,8 +31,8 @@ export default defineComponent({
         {scrollable ? (
           <NScrollbar
             unstableTheme={NNotificationProvider.mergedTheme.peers.Scrollbar}
-            unstableThemeOverrides={
-              NNotificationProvider.mergedTheme.overrides.Scrollbar
+            themeOverrides={
+              NNotificationProvider.mergedTheme.peerOverrides.Scrollbar
             }
           >
             {$slots}

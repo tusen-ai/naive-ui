@@ -46,7 +46,7 @@ export default defineComponent({
         <NScrollbar
           ref="scrollbarInstRef"
           unstableTheme={NCascader.mergedTheme.peers.Scrollbar}
-          unstableThemeOverrides={NCascader.mergedTheme.overrides.Scrollbar}
+          themeOverrides={NCascader.mergedTheme.peerOverrides.Scrollbar}
         >
           {{
             default: () =>

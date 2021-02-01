@@ -40,7 +40,7 @@ export default defineComponent({
           onUpdateValue={this.onUpdateValue}
           disabled={this.disabled}
           unstableTheme={NTransfer.mergedTheme.peers.Input}
-          unstableThemeOverrides={NTransfer.mergedTheme.overrides.Input}
+          themeOverrides={NTransfer.mergedTheme.peerOverrides.Input}
           clearable
           size="small"
           placeholder={this.placeholder}

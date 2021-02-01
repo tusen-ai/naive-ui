@@ -348,7 +348,7 @@ export default defineComponent({
           <NButton
             disabled={this.toButtonDisabled || this.disabled}
             unstableTheme={this.mergedTheme.peers.Button}
-            unstableThemeOverrides={this.mergedTheme.overrides.Button}
+            themeOverrides={this.mergedTheme.peerOverrides.Button}
             onClick={this.handleToTgtClick}
           >
             {{
@@ -360,7 +360,7 @@ export default defineComponent({
           <NButton
             disabled={this.fromButtonDisabled || this.disabled}
             unstableTheme={this.mergedTheme.peers.Button}
-            unstableThemeOverrides={this.mergedTheme.overrides.Button}
+            themeOverrides={this.mergedTheme.peerOverrides.Button}
             onClick={this.handleToSrcClick}
           >
             {{

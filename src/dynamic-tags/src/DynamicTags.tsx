@@ -153,7 +153,7 @@ export default defineComponent({
           <NTag
             key={index}
             unstableTheme={mergedTheme.peers.Tag}
-            unstableThemeOverrides={mergedTheme.overrides.Tag}
+            themeOverrides={mergedTheme.peerOverrides.Tag}
             style={this.tagStyle}
             type={this.type}
             round={this.round}
@@ -174,7 +174,7 @@ export default defineComponent({
             }}
             forceFocus={this.inputForceFocused}
             unstableTheme={mergedTheme.peers.Input}
-            unstableThemeOverrides={mergedTheme.overrides.Input}
+            themeOverrides={mergedTheme.peerOverrides.Input}
             style={this.inputStyle}
             size={this.inputSize}
             placeholder=""
@@ -185,7 +185,7 @@ export default defineComponent({
           <NButton
             dashed
             unstableTheme={this.mergedTheme.peers.Button}
-            unstableThemeOverrides={this.mergedTheme.overrides.Button}
+            themeOverrides={this.mergedTheme.peerOverrides.Button}
             size={this.inputSize}
             onClick={this.handleAddClick}
           >

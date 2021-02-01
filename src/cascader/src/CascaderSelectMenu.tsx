@@ -168,8 +168,8 @@ export default defineComponent({
                 ref="menuInstRef"
                 class="n-cascader-menu"
                 autoPending
-                unstableThemeOverrides={
-                  NCascader.mergedTheme.overrides.InternalSelectMenu
+                themeOverrides={
+                  NCascader.mergedTheme.peerOverrides.InternalSelectMenu
                 }
                 unstableTheme={NCascader.mergedTheme.peers.InternalSelectMenu}
                 treeMate={this.selectTreeMate}

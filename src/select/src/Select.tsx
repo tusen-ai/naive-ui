@@ -649,8 +649,8 @@ export default defineComponent({
                       disabled={this.disabled}
                       size={this.mergedSize}
                       unstableTheme={this.mergedTheme.peers.InternalSelection}
-                      unstableThemeOverrides={
-                        this.mergedTheme.overrides.InternalSelection
+                      themeOverrides={
+                        this.mergedTheme.peerOverrides.InternalSelection
                       }
                       loading={this.loading}
                       autofocus={this.autofocus}
@@ -694,8 +694,8 @@ export default defineComponent({
                                 autoPending: true,
                                 unstableTheme: this.mergedTheme.peers
                                   .InternalSelectMenu,
-                                unstableThemeOverrides: this.mergedTheme
-                                  .overrides.InternalSelectMenu,
+                                themeOverrides: this.mergedTheme.peerOverrides
+                                  .InternalSelectMenu,
                                 pattern: this.pattern,
                                 treeMate: this.treeMate,
                                 multiple: this.multiple,

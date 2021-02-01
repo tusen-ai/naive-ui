@@ -161,8 +161,8 @@ export default defineComponent({
               <NScrollbar
                 ref="hourScrollRef"
                 unstableTheme={this.NTimePicker.mergedTheme.peers.Scrollbar}
-                unstableThemeOverrides={
-                  this.NTimePicker.mergedTheme.overrides.Scrollbar
+                themeOverrides={
+                  this.NTimePicker.mergedTheme.peerOverrides.Scrollbar
                 }
               >
                 {{
@@ -192,8 +192,8 @@ export default defineComponent({
               <NScrollbar
                 ref="minuteScrollRef"
                 unstableTheme={this.NTimePicker.mergedTheme.peers.Scrollbar}
-                unstableThemeOverrides={
-                  this.NTimePicker.mergedTheme.overrides.Scrollbar
+                themeOverrides={
+                  this.NTimePicker.mergedTheme.peerOverrides.Scrollbar
                 }
               >
                 {{
@@ -223,8 +223,8 @@ export default defineComponent({
               <NScrollbar
                 ref="secondScrollRef"
                 unstableTheme={this.NTimePicker.mergedTheme.peers.Scrollbar}
-                unstableThemeOverrides={
-                  this.NTimePicker.mergedTheme.overrides.Scrollbar
+                themeOverrides={
+                  this.NTimePicker.mergedTheme.peerOverrides.Scrollbar
                 }
               >
                 {{
@@ -245,9 +245,7 @@ export default defineComponent({
           <NButton
             size="tiny"
             unstableTheme={this.NTimePicker.mergedTheme.peers.Button}
-            unstableThemeOverrides={
-              this.NTimePicker.mergedTheme.overrides.Button
-            }
+            themeOverrides={this.NTimePicker.mergedTheme.peerOverrides.Button}
             onClick={this.onNowClick}
           >
             {{ default: () => this.nowText }}
@@ -257,9 +255,7 @@ export default defineComponent({
             type="primary"
             class="n-time-picker-actions__confirm"
             unstableTheme={this.NTimePicker.mergedTheme.peers.Button}
-            unstableThemeOverrides={
-              this.NTimePicker.mergedTheme.overrides.Button
-            }
+            themeOverrides={this.NTimePicker.mergedTheme.peerOverrides.Button}
             disabled={this.isValueInvalid}
             onClick={this.onConfirmClick}
           >

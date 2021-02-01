@@ -593,7 +593,7 @@ export default defineComponent({
                       deactivateOnEnter
                       attrSize={this.mergedAttrSize}
                       unstableTheme={this.mergedTheme.peers.Input}
-                      unstableThemeOverrides={this.mergedTheme.overrides.Input}
+                      themeOverrides={this.mergedTheme.peerOverrides.Input}
                       stateful={this.stateful}
                       size={this.mergedSize}
                       forceFocus={this.active}

@@ -31,9 +31,7 @@ export default defineComponent({
           <NInput
             value={this.startDateDisplayString}
             unstableTheme={this.NDatePicker.mergedTheme.peers.Input}
-            unstableThemeOverrides={
-              this.NDatePicker.mergedTheme.overrides.Input
-            }
+            themeOverrides={this.NDatePicker.mergedTheme.peerOverrides.Input}
             size={this.timePickerSize}
             stateful={false}
             class="n-date-panel-date-input"
@@ -47,8 +45,8 @@ export default defineComponent({
             teleportDisabled
             showIcon={false}
             unstableTheme={this.NDatePicker.mergedTheme.peers.TimePicker}
-            unstableThemeOverrides={
-              this.NDatePicker.mergedTheme.overrides.TimePicker
+            themeOverrides={
+              this.NDatePicker.mergedTheme.peerOverrides.TimePicker
             }
             stateful={false}
             placeholder={this.locale.selectTime}
@@ -62,9 +60,7 @@ export default defineComponent({
           <NInput
             value={this.endDateInput}
             unstableTheme={this.NDatePicker.mergedTheme.peers.Input}
-            unstableThemeOverrides={
-              this.NDatePicker.mergedTheme.overrides.Input
-            }
+            themeOverrides={this.NDatePicker.mergedTheme.peerOverrides.Input}
             stateful={false}
             size={this.timePickerSize}
             class="n-date-panel-date-input"
@@ -76,8 +72,8 @@ export default defineComponent({
           <NTimePicker
             showIcon={false}
             unstableTheme={this.NDatePicker.mergedTheme.peers.TimePicker}
-            unstableThemeOverrides={
-              this.NDatePicker.mergedTheme.overrides.TimePicker
+            themeOverrides={
+              this.NDatePicker.mergedTheme.peerOverrides.TimePicker
             }
             teleportDisabled
             size={this.timePickerSize}
@@ -245,8 +241,8 @@ export default defineComponent({
             {this.actions.includes('clear') ? (
               <NButton
                 unstableTheme={this.NDatePicker.mergedTheme.peers.Button}
-                unstableThemeOverrides={
-                  this.NDatePicker.mergedTheme.overrides.Button
+                themeOverrides={
+                  this.NDatePicker.mergedTheme.peerOverrides.Button
                 }
                 size="tiny"
                 onClick={this.handleClearClick}
@@ -257,8 +253,8 @@ export default defineComponent({
             {this.actions.includes('confirm') ? (
               <NButton
                 unstableTheme={this.NDatePicker.mergedTheme.peers.Button}
-                unstableThemeOverrides={
-                  this.NDatePicker.mergedTheme.overrides.Button
+                themeOverrides={
+                  this.NDatePicker.mergedTheme.peerOverrides.Button
                 }
                 size="tiny"
                 type="primary"

@@ -476,7 +476,7 @@ export default defineComponent({
             value={pageSize}
             disabled={disabled}
             unstableTheme={mergedTheme.peers.Select}
-            unstableThemeOverrides={mergedTheme.overrides.Select}
+            themeOverrides={mergedTheme.peerOverrides.Select}
             onUpdateValue={handleSizePickerChange as any}
           />
         ) : null}
@@ -491,7 +491,7 @@ export default defineComponent({
               placeholder=""
               disabled={disabled}
               unstableTheme={mergedTheme.peers.Input}
-              unstableThemeOverrides={mergedTheme.overrides.Input}
+              themeOverrides={mergedTheme.peerOverrides.Input}
               onKeyup={handleQuickJumperKeyUp}
             />
           </div>

@@ -39,7 +39,7 @@ export default defineComponent({
     hljs: Object as PropType<Hljs>,
     // wip, unstable
     unstableTheme: Object as PropType<GlobalTheme>,
-    unstableThemeOverrides: Object as PropType<GlobalThemeOverrides>,
+    themeOverrides: Object as PropType<GlobalThemeOverrides>,
     // deprecated
     theme: String,
     language: String,
@@ -81,10 +81,10 @@ export default defineComponent({
         : unstableTheme
     })
     const mergedUnstableThemeOverridesRef = computed(() => {
-      const { unstableThemeOverrides } = props
-      return unstableThemeOverrides === undefined
+      const { themeOverrides } = props
+      return themeOverrides === undefined
         ? NConfigProvider?.mergedUnstableThemeOverrides
-        : unstableThemeOverrides
+        : themeOverrides
     })
     const mergedNamespaceRef = useMemo(() => {
       const { namespace } = props

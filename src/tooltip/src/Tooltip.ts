@@ -29,7 +29,7 @@ export default defineComponent({
     return {
       popoverRef,
       syncPosition () {
-        (popoverRef.value as PopoverRef).syncPosition()
+        ;(popoverRef.value as PopoverRef).syncPosition()
       },
       mergedTheme: themeRef,
       popoverThemeOverrides: computed(() => {
@@ -44,7 +44,7 @@ export default defineComponent({
       {
         ...this.$props,
         unstableTheme: mergedTheme.peers.Popover,
-        unstableThemeOverrides: mergedTheme.overrides.Popover,
+        themeOverrides: mergedTheme.peerOverrides.Popover,
         builtinThemeOverrides: this.popoverThemeOverrides,
         class: 'n-tooltip n-popover--tooltip',
         ref: 'popoverRef'

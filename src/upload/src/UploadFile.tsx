@@ -133,9 +133,7 @@ export default defineComponent({
               <NButton
                 key="cancelOrTrash"
                 unstableTheme={this.NUpload.mergedTheme.peers.Button}
-                unstableThemeOverrides={
-                  this.NUpload.mergedTheme.overrides.Button
-                }
+                themeOverrides={this.NUpload.mergedTheme.peerOverrides.Button}
                 circle
                 size="tiny"
                 ghost

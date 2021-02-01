@@ -39,7 +39,7 @@ export default defineComponent({
       <span class="n-tree-node-checkbox">
         <NCheckbox
           unstableTheme={NTree.mergedTheme.peers.Checkbox}
-          unstableThemeOverrides={NTree.mergedTheme.overrides.Checkbox}
+          themeOverrides={NTree.mergedTheme.peerOverrides.Checkbox}
           checked={checked}
           indeterminate={indeterminate}
           onUpdateChecked={handleUpdateValue}

@@ -122,8 +122,8 @@ export default defineComponent({
                             unstableTheme={
                               NDrawer.mergedTheme.peers.Scrollbar
                             }
-                            unstableThemeOverrides={
-                              NDrawer.mergedTheme.overrides.Scrollbar
+                            themeOverrides={
+                              NDrawer.mergedTheme.peerOverrides.Scrollbar
                             }
                           >
                             {$slots}

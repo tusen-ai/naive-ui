@@ -54,7 +54,7 @@ export default defineComponent({
         ref="scrollbarInstRef"
         class="n-data-table-base-table-body"
         unstableTheme={mergedTheme.peers.Scrollbar}
-        unstableThemeOverrides={mergedTheme.overrides.Scrollbar}
+        themeOverrides={mergedTheme.peerOverrides.Scrollbar}
         contentStyle={{
           minWidth: formatLength(scrollX)
         }}

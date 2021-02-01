@@ -293,8 +293,8 @@ export default defineComponent({
                         (
                           <NInput
                             unstableTheme={this.mergedTheme.peers.Input}
-                            unstableThemeOverrides={
-                              this.mergedTheme.overrides.Input
+                            themeOverrides={
+                              this.mergedTheme.peerOverrides.Input
                             }
                             bordered={this.mergedBordered}
                             value={this.mergedValue}
@@ -337,8 +337,8 @@ export default defineComponent({
                                 unstableTheme={
                                   this.mergedTheme.peers.InternalSelectMenu
                                 }
-                                unstableThemeOverrides={
-                                  this.mergedTheme.overrides
+                                themeOverrides={
+                                  this.mergedTheme.peerOverrides
                                     .InternalSelectMenu
                                 }
                                 auto-pending

@@ -83,8 +83,8 @@ export default defineComponent({
             {this.actions.includes('clear') ? (
               <NButton
                 unstableTheme={this.NDatePicker.mergedTheme.peers.Button}
-                unstableThemeOverrides={
-                  this.NDatePicker.mergedTheme.overrides.Button
+                themeOverrides={
+                  this.NDatePicker.mergedTheme.peerOverrides.Button
                 }
                 size="tiny"
                 onClick={this.handleClearClick}
@@ -95,8 +95,8 @@ export default defineComponent({
             {this.actions.includes('now') ? (
               <NButton
                 unstableTheme={this.NDatePicker.mergedTheme.peers.Button}
-                unstableThemeOverrides={
-                  this.NDatePicker.mergedTheme.overrides.Button
+                themeOverrides={
+                  this.NDatePicker.mergedTheme.peerOverrides.Button
                 }
                 size="tiny"
                 onClick={this.handleNowClick}
@@ -107,8 +107,8 @@ export default defineComponent({
             {this.actions.includes('confirm') ? (
               <NButton
                 unstableTheme={this.NDatePicker.mergedTheme.peers.Button}
-                unstableThemeOverrides={
-                  this.NDatePicker.mergedTheme.overrides.Button
+                themeOverrides={
+                  this.NDatePicker.mergedTheme.peerOverrides.Button
                 }
                 size="tiny"
                 type="primary"

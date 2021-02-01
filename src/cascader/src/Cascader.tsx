@@ -732,8 +732,8 @@ export default defineComponent({
                       bordered={this.mergedBordered}
                       size={this.mergedSize}
                       unstableTheme={this.mergedTheme.peers.InternalSelection}
-                      unstableThemeOverrides={
-                        this.mergedTheme.overrides.InternalSelection
+                      themeOverrides={
+                        this.mergedTheme.peerOverrides.InternalSelection
                       }
                       active={this.mergedShow}
                       pattern={this.pattern}

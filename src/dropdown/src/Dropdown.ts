@@ -344,7 +344,7 @@ export default defineComponent({
         raw: true,
         shadow: false,
         unstableTheme: this.mergedTheme.peers.Popover,
-        unstableThemeOverrides: this.mergedTheme.overrides.Popover
+        themeOverrides: this.mergedTheme.peerOverrides.Popover
       }),
       {
         trigger: this.$slots.default,

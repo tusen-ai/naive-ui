@@ -550,7 +550,7 @@ export default defineComponent({
       bordered: this.mergedBordered,
       size: this.mergedSize,
       unstableTheme: this.mergedTheme.peers.Input,
-      unstableThemeOverrides: this.mergedTheme.overrides.Input,
+      themeOverrides: this.mergedTheme.peerOverrides.Input,
       passivelyActivated: true,
       disabled: this.disabled,
       readonly: this.disabled,

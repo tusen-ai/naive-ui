@@ -67,7 +67,7 @@ export default defineComponent({
         <div class="n-transfer-list-item__checkbox">
           <NCheckbox
             unstableTheme={NTransfer.mergedTheme.peers.Checkbox}
-            unstableThemeOverrides={NTransfer.mergedTheme.overrides.Checkbox}
+            themeOverrides={NTransfer.mergedTheme.peerOverrides.Checkbox}
             disabled={disabled}
             checked={checked}
           />

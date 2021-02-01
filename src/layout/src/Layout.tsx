@@ -129,7 +129,7 @@ export default defineComponent({
             {...this.scrollbarProps}
             ref="scrollbarRef"
             unstableTheme={this.mergedTheme.peers.Scrollbar}
-            unstableThemeOverrides={this.mergedTheme.overrides.Scrollbar}
+            themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
           >
             {this.$slots}
           </NScrollbar>
