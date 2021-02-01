@@ -5,7 +5,6 @@ export type SelectMixedOption =
   | SelectOption
   | SelectGroupOption
   | SelectIgnoredOption
-
 export interface SelectOption {
   value: string | number
   label: string
@@ -16,17 +15,22 @@ export interface SelectOption {
   [k: string]: unknown
 }
 
-export interface SelectGroupOption {
-  type: 'group'
+interface SelectGroupOptionBase {
   label: string
-  value?: string | number
+  type: 'group'
   children: SelectOption[]
   render?: (option: SelectGroupOption) => VNodeChild
   [k: string]: unknown
-
-  /** @deprecated should use value instead */
-  name?: string
 }
+
+export type SelectGroupOption =
+  | (SelectGroupOptionBase & {
+    /** @deprecated should use value instead */
+    name?: string
+  })
+  | (SelectGroupOptionBase & {
+    value?: string | number
+  })
 
 export interface SelectIgnoredOption {
   type: 'ignored'
@@ -37,9 +41,29 @@ export interface SelectIgnoredOption {
 export type ValueAtom = string | number
 export type Value = ValueAtom | string[] | number[] | ValueAtom[]
 export type OnUpdateValue = <
-  T extends ValueAtom | string[] | number[] | ValueAtom[]
+  T extends ValueAtom &
+  string[] &
+  number[] &
+  ValueAtom[] &
+  (ValueAtom | null) &
+  (string[] | null) &
+  (number[] | null) &
+  (ValueAtom[] | null)
 >(
-  value: T | null
+  value: T
+) => void
+export type OnUpdateValueImpl = <
+  T extends
+  | ValueAtom
+  | string[]
+  | number[]
+  | ValueAtom[]
+  | (ValueAtom | null)
+  | (string[] | null)
+  | (number[] | null)
+  | (ValueAtom[] | null)
+>(
+  value: T
 ) => void
 export type SelectTreeMate = TreeMate<
 SelectOption,

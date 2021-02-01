@@ -8,7 +8,11 @@ import type {
 
 export function getKey (option: SelectMixedOption): string | number {
   if (getIsGroup(option)) {
-    return (option as SelectGroupOption).name || option.value || 'key-required'
+    return (
+      ((option as SelectGroupOption).name as any) ||
+      option.value ||
+      'key-required'
+    )
   }
   return (option as SelectOption | SelectIgnoredOption).value
 }

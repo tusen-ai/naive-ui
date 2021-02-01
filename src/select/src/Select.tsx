@@ -41,6 +41,7 @@ import type {
   SelectGroupOption,
   SelectIgnoredOption,
   OnUpdateValue,
+  OnUpdateValueImpl,
   Value
 } from './interface'
 
@@ -307,9 +308,9 @@ export default defineComponent({
         onUpdateValue
       } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
-      if (onChange) call(onChange, value)
-      if (onUpdateValue) call(onUpdateValue, value)
-      if (_onUpdateValue) call(_onUpdateValue, value)
+      if (onChange) call(onChange as OnUpdateValueImpl, value)
+      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
+      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
       uncontrolledValueRef.value = value
       nTriggerFormChange()
       nTriggerFormInput()

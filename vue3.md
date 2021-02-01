@@ -80,6 +80,7 @@
 - [x] config-consumer
 - [x] config-provider
   - break
+    - `theme` use new theme from naive export
     - `$NOs.theme` => `useOsTheme`
     - `theme` => `legacy-theme`
   - deprecate
@@ -416,6 +417,9 @@
   - [x] form item no label css
   - [x] unify treemate ignored
   - [ ] fix menu extra
+  - [ ] build icon
+  - [ ] compat
+  - [ ] on update value api
 
 ## Info
 

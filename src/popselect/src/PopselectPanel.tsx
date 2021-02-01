@@ -15,6 +15,7 @@ import type { MaybeArray } from '../../_utils'
 import type { PopselectSize, PopselectInjection } from './interface'
 import {
   OnUpdateValue,
+  OnUpdateValueImpl,
   Value,
   SelectMixedOption,
   SelectOption,
@@ -52,6 +53,7 @@ export const panelProps = {
   },
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   // deprecated
   onChange: {
     type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
@@ -77,9 +79,14 @@ export default defineComponent({
     ) as PopselectInjection
 
     function doUpdateValue (value: Value | null): void {
-      const { 'onUpdate:value': onUpdateValue, onChange } = props
-      if (onUpdateValue) call(onUpdateValue, value)
-      if (onChange) call(onChange, value)
+      const {
+        onUpdateValue,
+        'onUpdate:value': _onUpdateValue,
+        onChange
+      } = props
+      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
+      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
+      if (onChange) call(onChange as OnUpdateValueImpl, value)
     }
     function handleMenuToggleOption (option: SelectOption): void {
       toggle(option.value)

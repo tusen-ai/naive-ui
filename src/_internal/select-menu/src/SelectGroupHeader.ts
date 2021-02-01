@@ -14,7 +14,9 @@ export default defineComponent({
     const {
       tmNode: { rawNode }
     } = this
-    const children = rawNode.render ? [rawNode.render(rawNode)] : [rawNode.name]
+    const children = rawNode.render
+      ? [rawNode.render(rawNode)]
+      : [rawNode.label || (rawNode.name as any)]
     return h(
       'div',
       {

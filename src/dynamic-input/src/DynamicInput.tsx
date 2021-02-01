@@ -27,8 +27,7 @@ import type { DynamicInputTheme } from '../styles'
 import NDynamicInputInputPreset from './InputPreset'
 import NDynamicInputPairPreset from './PairPreset'
 import style from './styles/index.cssr'
-import { OnUpdateValue } from '../../select'
-import { DynamicInputInjection } from './interface'
+import { DynamicInputInjection, OnUpdateValue } from './interface'
 
 const globalDataKeyMap = new WeakMap()
 
