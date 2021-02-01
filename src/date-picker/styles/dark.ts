@@ -1,6 +1,6 @@
 import { changeColor } from 'seemly'
 import { inputDark } from '../../input/styles'
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import { buttonDark } from '../../button/styles'
 import { timePickerDark } from '../../time-picker/styles'
 import commonVars from './_common'

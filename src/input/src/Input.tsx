@@ -96,6 +96,9 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    onMousedown: Function as PropType<(e: MouseEvent) => void>,
+    onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
+    onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
     onInput: [Function, Array] as PropType<OnUpdateValue>,
     onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
     onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
@@ -456,6 +459,7 @@ export default defineComponent({
       hoverRef.value = false
     }
     function handleWrapperKeyDown (e: KeyboardEvent): void {
+      props.onKeydown?.(e)
       switch (e.code) {
         case 'Escape':
           handleWrapperKeyDownEsc()
@@ -672,10 +676,12 @@ export default defineComponent({
         onFocus={this.handleWrapperFocus}
         onBlur={this.handleWrapperBlur}
         onClick={this.handleClick}
+        onMousedown={this.onMousedown}
         onMouseenter={this.handleMouseEnter}
         onMouseleave={this.handleMouseLeave}
         onCompositionstart={this.handleCompositionStart}
         onCompositionend={this.handleCompositionEnd}
+        onKeyup={this.onKeyup}
         onKeydown={this.handleWrapperKeyDown}
       >
         {/* textarea mirror */}

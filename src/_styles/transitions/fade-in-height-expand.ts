@@ -1,6 +1,6 @@
 import { CNode } from 'css-render'
 import { c, namespace } from '../../_utils/cssr'
-import commonVariables from '../new-common/_common'
+import commonVariables from '../common/_common'
 
 const {
   cubicBezierEaseInOut,

@@ -1,6 +1,6 @@
 import { internalSelectionLight } from '../../_internal/selection/styles'
 import { internalSelectMenuLight } from '../../_internal/select-menu/styles'
-import { commonLight } from '../../_styles/new-common'
+import { commonLight } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
 
 const selectLight = createTheme({

@@ -1,7 +1,7 @@
 import { scrollbarDark } from '../../scrollbar/styles'
 import { dialogDark } from '../../dialog/styles'
 import { cardDark } from '../../card/styles'
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import { ModalTheme } from './light'
 
 const modalDark: ModalTheme = {

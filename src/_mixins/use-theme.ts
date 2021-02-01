@@ -4,7 +4,7 @@ import { merge } from 'lodash-es'
 import globalStyle from '../_styles/global/index.cssr'
 import { CNode } from 'css-render'
 import { ConfigProviderInjection, GlobalTheme } from '../config-provider'
-import type { ThemeCommonVars } from '../_styles/new-common'
+import type { ThemeCommonVars } from '../_styles/common'
 
 globalStyle.mount({
   id: 'naive-ui-global'
@@ -124,7 +124,7 @@ function useTheme<T, R> (
       common: mergedCommon,
       self: mergedSelf as any,
       peers: merge({}, defaultTheme.peers, peers, injectedPeers),
-      overrides: merge({}, peersOverrides, injectedPeersOverrides) as any
+      overrides: merge({}, peersOverrides, injectedPeersOverrides)
     }
   })
   return mergedThemeRef

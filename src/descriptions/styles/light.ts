@@ -1,6 +1,6 @@
 import { composite } from 'seemly'
 import commonVariables from './_common'
-import { commonLight, ThemeCommonVars } from '../../_styles/new-common'
+import { commonLight, ThemeCommonVars } from '../../_styles/common'
 import { Theme } from '../../_mixins/use-theme'
 
 const self = (vars: ThemeCommonVars) => {

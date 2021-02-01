@@ -1,5 +1,5 @@
 import { changeColor, scaleColor } from 'seemly'
-import { commonDark } from '../../../_styles/new-common'
+import { commonDark } from '../../../_styles/common'
 import commonVars from './_common'
 import type { InternalSelectionTheme } from './light'
 

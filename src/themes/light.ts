@@ -1,4 +1,4 @@
-import { commonLight } from '../_styles/new-common'
+import { commonLight } from '../_styles/common'
 import { alertLight } from '../alert/styles'
 import { anchorLight } from '../anchor/styles'
 import { autoCompleteLight } from '../auto-complete/styles'

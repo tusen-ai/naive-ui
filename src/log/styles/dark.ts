@@ -1,5 +1,5 @@
 import { scrollbarDark } from '../../scrollbar/styles'
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import { codeDark } from '../../code/styles'
 import type { LogTheme } from './light'
 

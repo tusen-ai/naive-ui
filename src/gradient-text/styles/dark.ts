@@ -1,4 +1,4 @@
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import { GradientTextTheme } from './light'
 
 const gradientTextDark: GradientTextTheme = {

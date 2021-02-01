@@ -1,7 +1,7 @@
 import { tagLight } from '../../tag/styles'
 import { inputLight } from '../../input/styles'
 import { buttonLight } from '../../button/styles'
-import { commonLight } from '../../_styles/new-common'
+import { commonLight } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
 
 const dynamicTagsLight = createTheme({

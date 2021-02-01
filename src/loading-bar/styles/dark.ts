@@ -1,4 +1,4 @@
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import type { LoadingBarTheme } from './light'
 
 const loadingBarDark: LoadingBarTheme = {

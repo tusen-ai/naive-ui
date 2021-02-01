@@ -1,4 +1,4 @@
-import { commonDark } from '../_styles/new-common'
+import { commonDark } from '../_styles/common'
 import { alertDark } from '../alert/styles'
 import { anchorDark } from '../anchor/styles'
 import { autoCompleteDark } from '../auto-complete/styles'

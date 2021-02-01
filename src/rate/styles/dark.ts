@@ -1,4 +1,4 @@
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import { RateTheme } from './light'
 
 const rateDark: RateTheme = {

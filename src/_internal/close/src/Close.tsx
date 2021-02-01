@@ -1,4 +1,4 @@
-import { h, defineComponent } from 'vue'
+import { h, defineComponent, PropType } from 'vue'
 import { useStyle } from '../../../_mixins'
 import NBaseIcon from '../../icon'
 import { CloseIcon } from '../../icons'
@@ -10,7 +10,8 @@ export default defineComponent({
     disabled: {
       type: Boolean,
       default: false
-    }
+    },
+    onClick: Function as PropType<(e: MouseEvent) => void>
   },
   setup (props) {
     useStyle('BaseClose', style)

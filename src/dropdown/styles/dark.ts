@@ -1,4 +1,4 @@
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import { popoverDark } from '../../popover/styles'
 import type { DropdownTheme } from './light'
 import commonVariables from './_common'

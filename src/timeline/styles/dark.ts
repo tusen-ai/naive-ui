@@ -1,5 +1,5 @@
 import sizeVariables from './_common'
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import type { TimelineTheme } from './light'
 
 const timelineDark: TimelineTheme = {

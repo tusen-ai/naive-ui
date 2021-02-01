@@ -1,8 +1,8 @@
 import { scrollbarLight } from '../../scrollbar/styles'
 import { dialogLight } from '../../dialog/styles'
 import { cardLight } from '../../card/styles'
-import { commonLight } from '../../_styles/new-common'
-import type { ThemeCommonVars } from '../../_styles/new-common'
+import { commonLight } from '../../_styles/common'
+import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
 
 const self = (vars: ThemeCommonVars) => {

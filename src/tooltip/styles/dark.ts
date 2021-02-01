@@ -1,4 +1,4 @@
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import { popoverDark } from '../../popover/styles'
 import commonVars from './_common'
 import type { TooltipTheme } from './light'

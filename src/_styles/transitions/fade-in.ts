@@ -1,5 +1,6 @@
+import { CNode } from 'css-render'
 import { c, namespace } from '../../_utils/cssr'
-import commonVariables from '../new-common/_common'
+import commonVariables from '../common/_common'
 
 const { cubicBezierEaseInOut } = commonVariables
 
@@ -17,7 +18,7 @@ export default function ({
   leaveDuration = '0.2s',
   enterCubicBezier = cubicBezierEaseInOut,
   leaveCubicBezier = cubicBezierEaseInOut
-}: FadeInTransitionOptions = {}) {
+}: FadeInTransitionOptions = {}): CNode[] {
   return [
     c(`&.${namespace}-${name}-transition-enter-active`, {
       transition: `all ${enterDuration} ${enterCubicBezier}!important`

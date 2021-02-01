@@ -1,5 +1,5 @@
 import commonVariables from './_common'
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import type { BackTopTheme } from './light'
 
 const backTopDark: BackTopTheme = {

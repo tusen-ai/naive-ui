@@ -91,22 +91,13 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
-    onBlur: {
-      type: Function as PropType<((e: FocusEvent) => void) | undefined>,
-      default: undefined
-    },
-    onFocus: {
-      type: Function as PropType<((e: FocusEvent) => void) | undefined>,
-      default: undefined
-    },
-    onDeleteOption: {
-      type: Function,
-      default: undefined
-    },
-    onDeleteLastOption: {
-      type: Function,
-      default: undefined
-    },
+    onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
+    onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
+    onClick: Function as PropType<(e: MouseEvent) => void>,
+    onBlur: Function as PropType<(e: FocusEvent) => void>,
+    onFocus: Function as PropType<(e: FocusEvent) => void>,
+    onDeleteOption: Function,
+    onDeleteLastOption: Function,
     onClear: {
       type: Function as PropType<((e: MouseEvent) => void) | undefined>,
       default: undefined
@@ -465,9 +456,12 @@ export default defineComponent({
           }
         ]}
         style={this.cssVars as CSSProperties}
+        onClick={this.onClick}
         onMouseenter={this.handleMouseEnter}
         onMouseleave={this.handleMouseLeave}
         onMousedown={this.handleMouseDown}
+        onKeyup={this.onKeyup}
+        onKeydown={this.onKeydown}
         onFocusin={this.handleFocusin}
       >
         {/* multiple */}

@@ -1,5 +1,5 @@
 import { Theme } from '../../_mixins'
-import { commonLight } from '../../_styles/new-common'
+import { commonLight } from '../../_styles/common'
 
 const elementLight: Theme = {
   name: 'Element',

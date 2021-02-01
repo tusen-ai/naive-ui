@@ -1,5 +1,4 @@
-import { commonDark } from '../../_styles/new-common'
-import type { ThemeCommonVars } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import type { CodeTheme } from './light'
 
 const codeDark: CodeTheme = {

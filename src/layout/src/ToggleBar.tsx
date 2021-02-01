@@ -1,7 +1,8 @@
-import { h, defineComponent } from 'vue'
+import { h, defineComponent, PropType } from 'vue'
 
 export default defineComponent({
   props: {
+    onClick: Function as PropType<(e: MouseEvent) => void>,
     collapsed: {
       type: Boolean,
       default: false
@@ -10,6 +11,7 @@ export default defineComponent({
   render () {
     return (
       <div
+        onClick={this.onClick}
         class={[
           'n-layout-toggle-bar',
           {

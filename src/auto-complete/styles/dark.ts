@@ -1,6 +1,6 @@
 import { internalSelectMenuDark } from '../../_internal/select-menu/styles'
 import { inputDark } from '../../input/styles'
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import type { AutoCompleteTheme } from './light'
 
 const autoCompleteDark: AutoCompleteTheme = {

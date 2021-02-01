@@ -1,6 +1,6 @@
 import { changeColor } from 'seemly'
 import { tooltipDark } from '../../tooltip/styles'
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import type { MenuTheme } from './light'
 
 const menuDark: MenuTheme = {

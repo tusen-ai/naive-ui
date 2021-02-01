@@ -8,7 +8,7 @@ import { scrollbarDark } from '../../scrollbar/styles'
 import { popoverDark } from '../../popover/styles'
 import { spinDark } from '../../spin/styles'
 import { emptyDark } from '../../empty/styles'
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import type { DataTableTheme } from './light'
 
 const dataTableDark: DataTableTheme = {

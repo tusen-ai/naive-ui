@@ -1,6 +1,6 @@
 import { internalSelectMenuDark } from '../../_internal/select-menu/styles'
 import { popoverDark } from '../../popover/styles'
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import type { PopselectTheme } from './light'
 
 const popselect: PopselectTheme = {

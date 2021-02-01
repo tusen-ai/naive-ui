@@ -101,7 +101,7 @@ export default defineComponent({
       updateHoverKey(value)
       updateKeyboardKey(value)
       if (isLeaf) {
-        handleCheckboxClick()
+        toggleCheckbox()
       }
     }
     function handleMouseEnter (): void {
@@ -115,8 +115,11 @@ export default defineComponent({
       if (!useHoverTriggerRef.value) return
       handleMouseEnter()
     }
-    function handleCheckboxClick (e?: MouseEvent): void {
-      e?.stopPropagation()
+    function handleCheckboxUpdateValue (): void {
+      const { value: isLeaf } = isLeafRef
+      if (!isLeaf) toggleCheckbox()
+    }
+    function toggleCheckbox (): void {
       const { doCheck, doUncheck, closeMenu, multiple } = NCascader
       const { value } = valueRef
       if (multiple) {
@@ -144,7 +147,7 @@ export default defineComponent({
       disabled: disabledRef,
       label: labelRef,
       handleClick,
-      handleCheckboxClick,
+      handleCheckboxUpdateValue,
       mergedHandleMouseEnter: mergedHandleMouseEnterRef,
       mergedHandleMouseMove: mergedHandleMouseMoveRef
     }
@@ -174,7 +177,7 @@ export default defineComponent({
               indeterminate={this.indeterminate}
               unstableTheme={NCascader.mergedTheme.peers.Checkbox}
               unstableThemeOverrides={NCascader.mergedTheme.overrides.Checkbox}
-              onClick={this.handleCheckboxClick}
+              onUpdateChecked={this.handleCheckboxUpdateValue}
             />
           </div>
         ) : null}

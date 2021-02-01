@@ -1,5 +1,5 @@
-import { commonLight } from '../../_styles/new-common'
-import type { ThemeCommonVars } from '../../_styles/new-common'
+import { commonLight } from '../../_styles/common'
+import type { ThemeCommonVars } from '../../_styles/common'
 import { popoverLight, PopoverTheme } from '../../popover/styles'
 import commonVars from './_common'
 import type { Theme } from '../../_mixins/use-theme'
@@ -18,10 +18,10 @@ const self = (vars: ThemeCommonVars) => {
 export type TooltipThemeVars = ReturnType<typeof self>
 
 const tooltipLight: Theme<
-  TooltipThemeVars,
-  {
-    Popover?: PopoverTheme
-  }
+TooltipThemeVars,
+{
+  Popover?: PopoverTheme
+}
 > = {
   name: 'Tooltip',
   common: commonLight,

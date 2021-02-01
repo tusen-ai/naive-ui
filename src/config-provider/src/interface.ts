@@ -1,5 +1,5 @@
 import type { NaiveDateLocale, NaiveLocale } from '../../locales'
-import type { ThemeCommonVars } from '../../_styles/new-common'
+import type { ThemeCommonVars } from '../../_styles/common'
 import type { AlertTheme } from '../../alert/styles'
 import type { AnchorTheme } from '../../anchor/styles'
 import type { AutoCompleteTheme } from '../../auto-complete/styles'

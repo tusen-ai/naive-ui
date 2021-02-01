@@ -1,5 +1,5 @@
 import { changeColor } from 'seemly'
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import commonVariables from './_common'
 import type { CheckboxTheme } from './light'
 

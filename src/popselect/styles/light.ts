@@ -1,5 +1,5 @@
 import { internalSelectMenuLight } from '../../_internal/select-menu/styles'
-import { commonLight } from '../../_styles/new-common'
+import { commonLight } from '../../_styles/common'
 import { popoverLight } from '../../popover/styles'
 import { createTheme } from '../../_mixins'
 

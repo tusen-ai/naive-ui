@@ -1,5 +1,6 @@
+import { CNode } from 'css-render'
 import { c, namespace } from '../../_utils/cssr'
-import commonVariables from '../new-common/_common'
+import commonVariables from '../common/_common'
 
 interface IconSwitchTransitionOptions {
   originalTransform?: string
@@ -13,7 +14,7 @@ export default function ({
   left = 0,
   top = 0,
   transition = `all .3s ${commonVariables.cubicBezierEaseInOut} !important`
-}: IconSwitchTransitionOptions = {}) {
+}: IconSwitchTransitionOptions = {}): CNode[] {
   return [
     c(
       `&.${namespace}-icon-switch-transition-enter-from, &.${namespace}-icon-switch-transition-leave-to`,

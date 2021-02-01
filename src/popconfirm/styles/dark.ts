@@ -1,6 +1,6 @@
 import { buttonDark } from '../../button/styles'
 import { popoverDark } from '../../popover/styles'
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import commonVars from './_common'
 import type { PopconfirmTheme } from './light'
 

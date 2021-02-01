@@ -1,6 +1,6 @@
 import commonVars from './_common'
 import { scrollbarDark } from '../../scrollbar/styles'
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import { buttonDark } from '../../button/styles'
 import { inputDark } from '../../input/styles'
 import type { TimePickerTheme } from './light'

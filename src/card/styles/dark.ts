@@ -1,4 +1,4 @@
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import commonVariables from './_common'
 import type { CardTheme } from './light'
 

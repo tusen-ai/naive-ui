@@ -1,5 +1,5 @@
 import { composite } from 'seemly'
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import { scrollbarDark } from '../../scrollbar/styles'
 import type { LayoutTheme } from './light'
 

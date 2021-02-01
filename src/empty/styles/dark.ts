@@ -1,4 +1,4 @@
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import sizeVarables from './_common'
 import type { EmptyTheme } from './light'
 

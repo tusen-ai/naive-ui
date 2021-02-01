@@ -1,6 +1,6 @@
 import { Theme } from '../../_mixins'
-import { commonLight } from '../../_styles/new-common'
-import type { ThemeCommonVars } from '../../_styles/new-common'
+import { commonLight } from '../../_styles/common'
+import type { ThemeCommonVars } from '../../_styles/common'
 
 const self = (vars: ThemeCommonVars) => {
   const {

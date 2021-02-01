@@ -1,7 +1,7 @@
 import { changeColor } from 'seemly'
 import { tooltipLight } from '../../tooltip/styles'
-import { commonLight } from '../../_styles/new-common'
-import type { ThemeCommonVars } from '../../_styles/new-common'
+import { commonLight } from '../../_styles/common'
+import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins/use-theme'
 
 const self = (vars: ThemeCommonVars) => {

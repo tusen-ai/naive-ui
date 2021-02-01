@@ -1,7 +1,7 @@
 import { tagDark } from '../../tag/styles'
 import { inputDark } from '../../input/styles'
 import { buttonDark } from '../../button/styles'
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import type { DynamicTagsTheme } from './light'
 
 const dynamicTagsDark: DynamicTagsTheme = {

@@ -1,5 +1,6 @@
+import { CNode } from 'css-render'
 import { c, namespace } from '../../_utils/cssr'
-import commonVariables from '../new-common/_common'
+import commonVariables from '../common/_common'
 
 const { cubicBezierEaseInOut } = commonVariables
 
@@ -8,7 +9,10 @@ interface FadeInWidthExpandTransition {
   delay?: string
 }
 
-export default function ({ duration = '.2s', delay = '.1s' }: FadeInWidthExpandTransition = {}) {
+export default function ({
+  duration = '.2s',
+  delay = '.1s'
+}: FadeInWidthExpandTransition = {}): CNode[] {
   return [
     c(
       `&.${namespace}-fade-in-width-expand-transition-leave-from, &.${namespace}-fade-in-width-expand-transition-enter-to`,

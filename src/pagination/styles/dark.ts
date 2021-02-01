@@ -1,7 +1,7 @@
 import { changeColor } from 'seemly'
 import { selectDark } from '../../select/styles'
 import { inputDark } from '../../input/styles'
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import commonVariables from './_common'
 import type { PaginationTheme } from './light'
 

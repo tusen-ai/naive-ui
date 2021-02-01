@@ -1,6 +1,6 @@
 import { internalSelectionDark } from '../../_internal/selection/styles'
 import { internalSelectMenuDark } from '../../_internal/select-menu/styles'
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import type { SelectTheme } from './light'
 
 const selectDark: SelectTheme = {

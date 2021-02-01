@@ -1,5 +1,5 @@
 import { changeColor } from 'seemly'
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import type { AnchorTheme } from './light'
 import commonVars from './_common'
 

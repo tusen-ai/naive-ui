@@ -1,5 +1,5 @@
 import { scrollbarDark } from '../../scrollbar/styles'
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import type { NotificationTheme } from './light'
 
 const notificationDark: NotificationTheme = {

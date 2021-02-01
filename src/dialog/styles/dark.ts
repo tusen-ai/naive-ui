@@ -1,6 +1,6 @@
 import commonVars from './_common'
 import { buttonDark } from '../../button/styles'
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import type { DialogTheme } from './light'
 
 const dialogDark: DialogTheme = {

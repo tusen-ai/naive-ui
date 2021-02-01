@@ -1,5 +1,5 @@
 import { c } from '../../_utils/cssr'
-import commonVariables from '../new-common/_common'
+import commonVariables from '../common/_common'
 
 export default c('body', {
   margin: 0,

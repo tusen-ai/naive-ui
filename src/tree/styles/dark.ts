@@ -1,6 +1,6 @@
 import { changeColor } from 'seemly'
 import { checkboxDark } from '../../checkbox/styles'
-import { commonDark } from '../../_styles/new-common'
+import { commonDark } from '../../_styles/common'
 import type { TreeTheme } from './light'
 
 const treeDark: TreeTheme = {
