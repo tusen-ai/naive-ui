@@ -7,7 +7,7 @@
 const fs = require('fs-extra')
 const path = require('path')
 
-const iconPath = path.resolve(__dirname, '..', 'src', '_deprecated', 'icons')
+const iconPath = path.resolve(__dirname, '..', 'compat', 'icons')
 
 const cjsIconPath = path.resolve(__dirname, '..', 'lib', 'icons')
 const esmIconPath = path.resolve(__dirname, '..', 'es', 'icons')

@@ -55,7 +55,7 @@ export interface RadioGroupInjection {
   doUpdateValue: (value: string | number) => void
 }
 
-interface UseRadio {
+export interface UseRadio {
   inputRef: Ref<HTMLElement | null>
   labelRef: Ref<HTMLElement | null>
   mergedName: Ref<string | undefined>

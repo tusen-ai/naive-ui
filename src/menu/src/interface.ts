@@ -3,7 +3,7 @@ import { VNodeChild } from 'vue'
 
 export type Key = string | number
 
-interface MenuOptionBase {
+export interface MenuOptionBase {
   key: Key
   disabled?: boolean
   icon?: () => VNodeChild
@@ -12,7 +12,7 @@ interface MenuOptionBase {
   [key: string]: unknown
 }
 
-interface MenuGroupOptionBase extends MenuOptionBase {
+export interface MenuGroupOptionBase extends MenuOptionBase {
   type: 'group'
   children: Array<MenuOption | MenuGroupOption>
 }

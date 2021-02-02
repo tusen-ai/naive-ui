@@ -22,7 +22,7 @@ import { scrollbarLight } from '../styles'
 import type { ScrollbarTheme } from '../styles'
 import style from './styles/index.cssr'
 
-interface ScrollTo {
+export interface ScrollTo {
   (x: number, y: number): void
   (options: {
     left?: number

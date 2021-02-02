@@ -14,7 +14,7 @@ import { cardLight } from '../styles'
 import type { CardTheme } from '../styles'
 import style from './styles/index.cssr'
 
-interface Segmented {
+export interface Segmented {
   content?: boolean | 'soft'
   footer?: boolean | 'soft'
   action?: boolean | 'soft'

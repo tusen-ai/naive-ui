@@ -23,7 +23,7 @@ type UseFormItemProps<T> =
   }
   | {}
 
-interface UseFormItem<T> {
+export interface UseFormItem<T> {
   mergedSize: ComputedRef<T>
   nTriggerFormBlur: () => void
   nTriggerFormChange: () => void

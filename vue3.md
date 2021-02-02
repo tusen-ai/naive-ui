@@ -7,9 +7,9 @@
 - fonts
   - `naive-ui/lib|es/styles/fonts/*` has been removed, use [`vfonts`](https://www.npmjs.com/package/vfonts)
 - icons
-  - `naive-ui/lib|es/icons/*` is deprecated, use [`vicons`](https://www.npmjs.com/package/vicons) instead.
+  - `naive-ui/lib|es/icons/*` is deprecated (vue-loader is required), use [`vicons`](https://www.npmjs.com/package/vicons) instead.
+- `n-nimbus-icon` is moved to `naive-ui/compat/nimbus-icon` (vue-loader is required)
 - `n-nimbus-form-card` is removed
-- `n-nimbus-icon` is removed
 
 ## Components
 
@@ -422,13 +422,14 @@
   - [x] form item no label css
   - [x] unify treemate ignored
   - [ ] fix menu extra
-  - [ ] build icon
-  - [ ] compat
+  - [x] build icon
+  - [x] compat
   - [ ] on update value api
-  - [ ] fix upload dragger
+  - [x] fix upload dragger
   - [x] fix table sorter
   - [x] tree 多选节点第二个 demo
   - [ ] table treemate!!!
+  - [ ] createTheme
 
 ## Info
 

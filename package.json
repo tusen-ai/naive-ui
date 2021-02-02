@@ -7,14 +7,15 @@
   "scripts": {
     "start": "npm run dev",
     "deprecated:build:icons": "npm run clean && node build/build-icons.js",
-    "build:js": "npm run gen-version && npm run clean && node build/before-build.js && rollup -c",
-    "build:package": "npm run gen-version && npm run clean && node build/build-icons.js && node build/before-build.js && rollup -c",
+    "build:js": "npm run gen-version && npm run clean && tsc -p tsconfig.esm.json && tsc -p tsconfig.cjs.json",
+    "build:package": "npm run gen-version && npm run clean && node build/build-icons.js && tsc -p tsconfig.esm.json && tsc -p tsconfig.cjs.json",
     "build:site": "npm run build:package && ./build/before-build-site.sh && node build/restore-side-effects.js && cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && rm -rf node_modules/naive-ui && cp site/index.html site/404.html && node build/clear-side-effects.js",
     "build:doc": "npm run gen-version && npm run build && rm -rf build-doc/dist && cross-env NODE_ENV=production webpack --config build/webpack.doc.js",
-    "clean": "rm -rf site lib es src-mirror node_modules/naive-ui",
+    "clean": "rm -rf site lib es node_modules/naive-ui",
     "dev": "npm run clean && npm run gen-version && cross-env NODE_ENV=development vite",
     "dev:ts": "npm run clean && npm run gen-version && cross-env NODE_ENV=development TUSIMPLE=true vite",
-    "lint": "npm run lint:code",
+    "lint": "npm run lint:code && npm run lint:type",
+    "lint:type": "tsc --noEmit",
     "lint:code": "eslint --fix \"{src,build,scripts,demo}/**/*.{js,vue,md}\"",
     "format": "npm run format:code && npm run format:md",
     "format:code": "prettier --write \"(src|demo)/**/*.(vue|js)\"",
@@ -34,6 +35,7 @@
     "registry": "***REMOVED***"
   },
   "files": [
+    "compat",
     "es",
     "lib",
     "src",
@@ -124,13 +126,13 @@
     "highlight.js": "^10.4.1",
     "lodash-es": "^4.17.15",
     "resize-observer-polyfill": "^1.5.1",
-    "seemly": "^0.1.5",
+    "seemly": "^0.1.6",
     "treemate": "^0.2.4",
     "vdirs": "^0.0.3",
     "vfonts": "^0.0.1",
     "vooks": "0.0.8",
     "vue": "^3.0.5",
-    "vueuc": "^0.1.1"
+    "vueuc": "^0.1.2"
   },
   "husky": {
     "hooks": {

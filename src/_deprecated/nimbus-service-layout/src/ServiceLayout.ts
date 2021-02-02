@@ -150,11 +150,12 @@ export default defineComponent({
       ref: 'bodyLayoutInstRef',
       nativeScrollbar: false,
       scrollbarProps: {
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
         contentStyle: {
           width: '100%',
           boxSizing: 'border-box',
-          padding: this.paddingBody ? '21px 48px' : null
-        }
+          padding: this.paddingBody ? '21px 48px' : ''
+        } as CSSProperties
       }
     }
     const headerProps = {

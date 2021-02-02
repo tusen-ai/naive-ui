@@ -39,7 +39,7 @@ function createLocalesObject (
   }, defaultLocaleMap)
 }
 
-interface NaiveUI {
+export interface NaiveUI {
   version: string
   use: (plugin: any) => void
   install: Function
