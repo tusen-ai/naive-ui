@@ -430,6 +430,11 @@
   - [x] tree 多选节点第二个 demo
   - [ ] table treemate!!!
   - [ ] createTheme
+  - [ ] build site
+
+## Build
+
+package: tsx => es|lib => terse cssr => release site: build package => move to node_modules => setup side effects => vite build
 
 ## Info
 
