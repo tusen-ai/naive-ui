@@ -1,4 +1,4 @@
-import { h, defineComponent, PropType, computed } from 'vue'
+import { h, defineComponent, PropType, computed, CSSProperties } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import {
   CheckmarkIcon as SuccessIcon,
@@ -26,14 +26,9 @@ export default defineComponent({
       type: Number,
       required: true
     },
-    fillColor: {
-      type: String,
-      default: undefined
-    },
-    railColor: {
-      type: String,
-      default: undefined
-    },
+    fillColor: String,
+    railColor: String,
+    railStyle: [String, Object] as PropType<string | CSSProperties>,
     percentage: {
       type: Number,
       required: true
@@ -42,14 +37,8 @@ export default defineComponent({
       type: Boolean,
       reqiuired: true
     },
-    indicatorTextColor: {
-      type: String,
-      default: undefined
-    },
-    unit: {
-      type: String,
-      default: undefined
-    },
+    indicatorTextColor: String,
+    unit: String,
     viewBoxWidth: {
       type: Number,
       required: true
@@ -63,6 +52,7 @@ export default defineComponent({
       const {
         fillColor,
         railColor,
+        railStyle,
         strokeWidth,
         status,
         percentage,
@@ -82,10 +72,15 @@ export default defineComponent({
                     stroke-width={strokeWidth * 1.1}
                     stroke-linecap="round"
                     fill="none"
-                    style={{
-                      strokeDashoffset: 0,
-                      stroke: railColor
-                    }}
+                    style={
+                      [
+                        {
+                          strokeDashoffset: 0,
+                          stroke: railColor
+                        },
+                        railStyle
+                      ] as any
+                    }
                   />
                 </g>
                 <g>

@@ -26,14 +26,11 @@ export default defineComponent({
       type: String as PropType<Status>,
       default: 'default'
     },
-    railColor: {
-      type: [String, Array] as PropType<string | string[] | undefined>,
-      default: undefined
-    },
-    color: {
-      type: [String, Array] as PropType<string | string[] | undefined>,
-      default: undefined
-    },
+    railColor: [String, Array] as PropType<string | string[]>,
+    railStyle: [String, Array] as PropType<
+    string | CSSProperties | Array<string | CSSProperties>
+    >,
+    color: [String, Array] as PropType<string | string[]>,
     viewBoxWidth: {
       type: Number,
       default: 100
@@ -142,6 +139,7 @@ export default defineComponent({
       showIndicator,
       status,
       railColor,
+      railStyle,
       color,
       percentage,
       viewBoxWidth,
@@ -165,8 +163,9 @@ export default defineComponent({
             status={status}
             showIndicator={showIndicator}
             indicatorTextColor={indicatorTextColor}
-            railColor={railColor as string | undefined}
-            fillColor={color as string | undefined}
+            railColor={railColor as any}
+            fillColor={color as any}
+            railStyle={railStyle as any}
             percentage={percentage as number}
             viewBoxWidth={viewBoxWidth}
             strokeWidth={strokeWidth}
@@ -179,8 +178,9 @@ export default defineComponent({
             status={status}
             showIndicator={showIndicator}
             indicatorTextColor={indicatorTextColor}
-            railColor={railColor as string | undefined}
-            fillColor={color as string | undefined}
+            railColor={railColor as any}
+            fillColor={color as any}
+            railStyle={railStyle as any}
             percentage={percentage as number}
             processing={processing}
             indicatorPlacement={mergedIndicatorPlacement}
@@ -194,8 +194,9 @@ export default defineComponent({
         ) : type === 'multiple-circle' ? (
           <MultipleCircle
             strokeWidth={strokeWidth}
-            railColor={railColor as string[] | undefined}
-            fillColor={color as string[] | undefined}
+            railColor={railColor as any}
+            fillColor={color as any}
+            railStyle={railStyle as any}
             viewBoxWidth={viewBoxWidth}
             percentage={percentage as number[]}
             showIndicator={showIndicator}

@@ -6,34 +6,33 @@
 
 ```html
 <n-space vertical>
-  <n-config-consumer>
-    <template #="{ styleScheme }">
-      <n-progress
-        type="multiple-circle"
-        :stroke-width="6"
-        :circle-gap="0.5"
-        :percentage="[
+  <n-el>
+    <n-progress
+      type="multiple-circle"
+      :stroke-width="6"
+      :circle-gap="0.5"
+      :percentage="[
         percentage,
         (percentage + 10) % 100,
         (percentage + 20) % 100,
-        (percentage + 30) % 100]"
-        :color="[
-        styleScheme.infoColor,
-        styleScheme.successColor,
-        styleScheme.warningColor,
-        styleScheme.errorColor
+        (percentage + 30) % 100
       ]"
-        :rail-color="[
-        styleScheme.infoColor + '30',
-        styleScheme.successColor + '30',
-        styleScheme.warningColor + '30',
-        styleScheme.errorColor + '30'
+      :color="[
+        'var(--info-color)',
+        'var(--success-color)',
+        'var(--warning-color)',
+        'var(--error-color)'
       ]"
-      >
-        <div style="text-align: center;">圈圈赛跑！</div>
-      </n-progress>
-    </template>
-  </n-config-consumer>
+      :rail-style="[
+        { stroke: 'var(--info-color)', opacity: 0.3 },
+        { stroke: 'var(--success-color)', opacity: 0.3 },
+        { stroke: 'var(--warning-color)', opacity: 0.3 },
+        { stroke: 'var(--error-color)', opacity: 0.3 },
+      ]"
+    >
+      <div style="text-align: center;">圈圈赛跑！</div>
+    </n-progress>
+  </n-el>
   <n-space>
     <n-button @click="minus"> 减 10% </n-button>
     <n-button @click="add"> 加 10% </n-button>

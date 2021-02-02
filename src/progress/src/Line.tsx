@@ -1,4 +1,4 @@
-import { defineComponent, h, PropType, computed } from 'vue'
+import { defineComponent, h, PropType, computed, CSSProperties } from 'vue'
 import { formatLength } from '../../_utils'
 import { NBaseIcon } from '../../_internal'
 import {
@@ -23,14 +23,9 @@ export default defineComponent({
       type: Number,
       required: true
     },
-    railColor: {
-      type: String,
-      default: undefined
-    },
-    fillColor: {
-      type: String,
-      default: undefined
-    },
+    railColor: String,
+    railStyle: [String, Object] as PropType<string | CSSProperties>,
+    fillColor: String,
     status: {
       type: String as PropType<Status>,
       required: true
@@ -39,14 +34,8 @@ export default defineComponent({
       type: String as PropType<'inside' | 'outside'>,
       required: true
     },
-    indicatorTextColor: {
-      type: String,
-      default: undefined
-    },
-    unit: {
-      type: String,
-      default: undefined
-    },
+    indicatorTextColor: String,
+    unit: String,
     processing: {
       type: Boolean,
       required: true
@@ -55,18 +44,9 @@ export default defineComponent({
       type: Boolean,
       required: true
     },
-    height: {
-      type: [String, Number],
-      default: undefined
-    },
-    railBorderRadius: {
-      type: [String, Number],
-      default: undefined
-    },
-    fillBorderRadius: {
-      type: [String, Number],
-      default: undefined
-    }
+    height: [String, Number],
+    railBorderRadius: [String, Number],
+    fillBorderRadius: [String, Number]
   },
   setup (props, { slots }) {
     const styleHeightRef = computed(() => {
@@ -97,6 +77,7 @@ export default defineComponent({
       const {
         indicatorPlacement,
         railColor,
+        railStyle,
         percentage,
         unit,
         indicatorTextColor,
@@ -118,11 +99,16 @@ export default defineComponent({
             >
               <div
                 class="n-progress-graph-line-rail"
-                style={{
-                  backgroundColor: railColor,
-                  height: styleHeightRef.value,
-                  borderRadius: styleRailBorderRadiusRef.value
-                }}
+                style={
+                  [
+                    {
+                      backgroundColor: railColor,
+                      height: styleHeightRef.value,
+                      borderRadius: styleRailBorderRadiusRef.value
+                    },
+                    railStyle
+                  ] as any
+                }
               >
                 <div
                   class={[
@@ -140,7 +126,7 @@ export default defineComponent({
                 >
                   {indicatorPlacement === 'inside' ? (
                     <div class="n-progress-graph-line-indicator">
-                      {`${percentage}${unit}`}
+                      {`${percentage}${unit || ''}`}
                     </div>
                   ) : null}
                 </div>

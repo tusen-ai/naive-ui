@@ -1,4 +1,4 @@
-import { h, defineComponent, computed, PropType } from 'vue'
+import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
 
 function circlePath (r: number, sw: number, vw: number = 100): string {
   return `m ${vw / 2} ${vw / 2 - r} a ${r} ${r} 0 1 1 0 ${
@@ -36,6 +36,10 @@ export default defineComponent({
     railColor: {
       type: Array as PropType<string[]>,
       default: []
+    },
+    railStyle: {
+      type: Array as PropType<Array<string | CSSProperties>>,
+      default: []
     }
   },
   setup (props, { slots }) {
@@ -60,6 +64,7 @@ export default defineComponent({
         showIndicator,
         fillColor,
         railColor,
+        railStyle,
         percentage
       } = props
       return (
@@ -82,10 +87,15 @@ export default defineComponent({
                         stroke-width={strokeWidth}
                         stroke-linecap="round"
                         fill="none"
-                        style={{
-                          strokeDashoffset: 0,
-                          stroke: railColor[index]
-                        }}
+                        style={
+                          [
+                            {
+                              strokeDashoffset: 0,
+                              stroke: railColor[index]
+                            },
+                            railStyle[index]
+                          ] as any
+                        }
                       />
                       <path
                         class={[

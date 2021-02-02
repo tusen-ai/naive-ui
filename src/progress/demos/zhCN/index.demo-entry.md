@@ -21,7 +21,7 @@ processing
 | --- | --- | --- | --- |
 | border-radius | `number \| string` | `undefined` | `'line'` 类型进度条的圆角半径，不填写则维持高度的一半 |
 | circle-gap | `number` | `1` | 当类型是 `'multiple-circle'` 的时候圈之间的距离，假设 viewbox 的尺寸是 100 |
-| color | `string \| Array<string>` | `undefined` |  |
+| color | `string \| string[]` | `undefined` |  |
 | fill-border-radius | `number \| string` | `undefined` | `'line'` 类型进度条填充的圆角半径，不填写则维持 `border-radius` |
 | height | `number` | `undefined` | `'line'` 类型进度条的高度，不填写则维持默认高度 |
 | indicator-placement | `'inside' \| 'inside-label' \| 'outside'` | `'outside'` |  |
@@ -29,7 +29,8 @@ processing
 | percentage | `number \| Array<number>` | `0` |  |
 | processing | `boolean` | `false` |  |
 | processing | `boolean` | `false` |  |
-| rail-color | `string \| Array<string>` | `undefined` |  |
+| rail-color | `string \| string[]` | `undefined` |  |
+| rail-style | `string \| CSS \| Array<string \| CSS>` | `undefined` |  |
 | show-indicator | `boolean` | `true` |  |
 | status | `'default' \| 'success' \| 'error' \| 'warning' \| 'info'` | `'default'` |  |
 | stroke-width | `number` | `7` |  |
