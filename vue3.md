@@ -423,6 +423,9 @@
   - [ ] build icon
   - [ ] compat
   - [ ] on update value api
+  - [ ] upload dragger
+  - [ ] fix table sorter
+  - [ ] tree 多选节点第二个 demo
 
 ## Info
 

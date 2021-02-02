@@ -14,11 +14,10 @@ item-placement
 
 ### Timeline Props
 
-| Name           | Type                          | Default     | Description |
-| -------------- | ----------------------------- | ----------- | ----------- |
-| item-placement | `'left' \| 'right'`           | `'left'`    |             |
-| size           | `'medium' \| 'large'`         | `'medium'`  |             |
-| theme          | `'light' \| 'dark' \| string` | `undefined` |             |
+| Name           | Type                  | Default    | Description |
+| -------------- | --------------------- | ---------- | ----------- |
+| item-placement | `'left' \| 'right'`   | `'left'`   |             |
+| size           | `'medium' \| 'large'` | `'medium'` |             |
 
 ### Timeline Item Props
 

@@ -26,7 +26,6 @@ size
 | label-align     | `'center' \| 'left' \| 'right'`  | `'left'`    |      |
 | label-placement | `'top' \| 'left'`                | `'top'`     |      |
 | size            | `'small' \| 'medium' \| 'large'` | `'medium'`  |      |
-| theme           | `'light' \| 'dark' \| string`    | `undefined` |      |
 | title           | `string`                         | `undefined` |      |
 
 ### Description Item Props

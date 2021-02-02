@@ -25,7 +25,6 @@ validator
 | placeholder     | `string`                         | `'请输入'`  |      |
 | size            | `'small' \| 'medium' \| 'large'` | `'medium'`  |      |
 | step            | `number`                         | `1`         |      |
-| theme           | `'light' \| 'dark' \| string`    | `undefined` |      |
 | validator       | `(value) => boolean`             | `undefined` |      |
 | value           | `number \| null`                 | `undefined` |      |
 | on-blur         | `(event: FocusEvent) => any`     | `undefined` |      |

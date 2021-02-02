@@ -13,14 +13,13 @@ indent
 
 ## Props
 
-| 名称             | 类型                          | 默认值      | 说明 |
-| ---------------- | ----------------------------- | ----------- | ---- |
-| content-indented | `boolean`                     | `false`     |      |
-| content          | `string`                      | `undefined` |      |
-| description      | `string`                      | `undefined` |      |
-| theme            | `'light' \| 'dark' \| string` | `undefined` |      |
-| title-extra      | `string`                      | `undefined` |      |
-| title            | `string`                      | `undefined` |      |
+| 名称             | 类型      | 默认值      | 说明 |
+| ---------------- | --------- | ----------- | ---- |
+| content-indented | `boolean` | `false`     |      |
+| content          | `string`  | `undefined` |      |
+| description      | `string`  | `undefined` |      |
+| title-extra      | `string`  | `undefined` |      |
+| title            | `string`  | `undefined` |      |
 
 ## Slots
 

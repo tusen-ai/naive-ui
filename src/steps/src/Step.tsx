@@ -4,7 +4,8 @@ import {
   computed,
   inject,
   PropType,
-  CSSProperties
+  CSSProperties,
+  renderSlot
 } from 'vue'
 import {
   CheckmarkIcon as FinishedIcon,
@@ -142,7 +143,9 @@ export default defineComponent({
           </div>
           {this.description !== undefined || this.$slots.default ? (
             <div class="n-step-content__description">
-              <slot>{this.description}</slot>
+              {renderSlot(this.$slots, 'default', undefined, () => [
+                this.description
+              ])}
             </div>
           ) : null}
         </div>

@@ -13,14 +13,13 @@ indent
 
 ## Props
 
-| Name             | Type                          | Default     | Description |
-| ---------------- | ----------------------------- | ----------- | ----------- |
-| content-indented | `boolean`                     | `false`     |             |
-| content          | `string`                      | `undefined` |             |
-| description      | `string`                      | `undefined` |             |
-| theme            | `'light' \| 'dark' \| string` | `undefined` |             |
-| title-extra      | `string`                      | `undefined` |             |
-| title            | `string`                      | `undefined` |             |
+| Name             | Type      | Default     | Description |
+| ---------------- | --------- | ----------- | ----------- |
+| content-indented | `boolean` | `false`     |             |
+| content          | `string`  | `undefined` |             |
+| description      | `string`  | `undefined` |             |
+| title-extra      | `string`  | `undefined` |             |
+| title            | `string`  | `undefined` |             |
 
 ## Slots
 

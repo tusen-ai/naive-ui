@@ -15,10 +15,9 @@ border
 
 ### List Props
 
-| Name     | Type                          | Default     | Description |
-| -------- | ----------------------------- | ----------- | ----------- |
-| bordered | `boolean`                     | `false`     |             |
-| theme    | `'light' \| 'dark' \| string` | `undefined` |             |
+| Name     | Type      | Default | Description |
+| -------- | --------- | ------- | ----------- |
+| bordered | `boolean` | `false` |             |
 
 ## Slots
 

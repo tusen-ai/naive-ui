@@ -12,10 +12,9 @@ basic
 
 ### Breadcrumb Props
 
-| Name      | Type                          | Default     | Description |
-| --------- | ----------------------------- | ----------- | ----------- |
-| theme     | `'light' \| 'dark' \| string` | `undefined` |             |
-| separator | `string`                      | `'/'`       |             |
+| Name      | Type     | Default | Description |
+| --------- | -------- | ------- | ----------- |
+| separator | `string` | `'/'`   |             |
 
 ## Slots
 

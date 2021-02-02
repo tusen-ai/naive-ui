@@ -16,6 +16,7 @@ export default cB('result', `
     color .3s var(--bezier);
 `, [
   cB('result-icon', `
+    height: 1em;
     display: flex;
     justify-content: center;
     transition: color .3s var(--bezier);

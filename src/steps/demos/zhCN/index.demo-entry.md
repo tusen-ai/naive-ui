@@ -22,7 +22,6 @@ content
 | current  | `number`                                     | `undefined` |      |
 | size     | `'small' \| 'medium'`                        | `'medium'`  |      |
 | status   | `'process' \| 'finish' \| 'error' \| 'wait'` | `'process'` |      |
-| theme    | `'light' \| 'dark' \| string`                | `undefined` |      |
 | vertical | `boolean`                                    | `false`     |      |
 
 ### Step Props

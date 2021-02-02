@@ -13,12 +13,11 @@ depth
 
 ## Props
 
-| Name  | Type                          | Default     | Description |
-| ----- | ----------------------------- | ----------- | ----------- |
-| color | `string`                      | `undefined` |             |
-| depth | `1 \| 2 \| 3 \| 4 \| 5`       | `undefined` |             |
-| size  | `number \| string`            | `undefined` |             |
-| theme | `'light' \| 'dark' \| string` | `undefined` |             |
+| Name  | Type                    | Default     | Description |
+| ----- | ----------------------- | ----------- | ----------- |
+| color | `string`                | `undefined` |             |
+| depth | `1 \| 2 \| 3 \| 4 \| 5` | `undefined` |             |
+| size  | `number \| string`      | `undefined` |             |
 
 ## Slots
 

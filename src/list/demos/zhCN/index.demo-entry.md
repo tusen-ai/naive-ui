@@ -15,10 +15,9 @@ border
 
 ### List Props
 
-| 名称     | 类型                          | 默认值      | 说明 |
-| -------- | ----------------------------- | ----------- | ---- |
-| bordered | `boolean`                     | `false`     |      |
-| theme    | `'light' \| 'dark' \| string` | `undefined` |      |
+| 名称     | 类型      | 默认值  | 说明 |
+| -------- | --------- | ------- | ---- |
+| bordered | `boolean` | `false` |      |
 
 ## Slots
 

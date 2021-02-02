@@ -88,7 +88,7 @@ export default cB('tabs', `
       }),
       cE('close', `
         margin-left: 8px;
-        font-size: 16px;
+        font-size: 14px;
         transition: color .3s var(--bezier);
       `),
       cE('label', `

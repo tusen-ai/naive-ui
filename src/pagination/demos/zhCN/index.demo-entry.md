@@ -16,15 +16,14 @@ disabled
 
 ## Props
 
-| 名称                | 类型                          | 默认值      | 说明 |
-| ------------------- | ----------------------------- | ----------- | ---- |
-| page-count          | `number`                      | required    |      |
-| page-sizes          | `Array<number>`               | `[]`        |      |
-| page-size           | `number`                      | `undefined` |      |
-| page-slot           | `number`                      | `9`         |      |
-| page                | `number`                      | required    |      |
-| show-quick-jumper   | `boolean`                     | `false`     |      |
-| show-size-picker    | `boolean`                     | `false`     |      |
-| theme               | `'light' \| 'dark' \| string` | `undefined` |      |
-| on-update:page      | `(page: number) => any`       | `undefined` |      |
-| on-update:page-size | `(pageSize: number) => any`   | `undefined` |      |
+| 名称                | 类型                        | 默认值      | 说明 |
+| ------------------- | --------------------------- | ----------- | ---- |
+| page-count          | `number`                    | required    |      |
+| page-sizes          | `Array<number>`             | `[]`        |      |
+| page-size           | `number`                    | `undefined` |      |
+| page-slot           | `number`                    | `9`         |      |
+| page                | `number`                    | required    |      |
+| show-quick-jumper   | `boolean`                   | `false`     |      |
+| show-size-picker    | `boolean`                   | `false`     |      |
+| on-update:page      | `(page: number) => any`     | `undefined` |      |
+| on-update:page-size | `(pageSize: number) => any` | `undefined` |      |
