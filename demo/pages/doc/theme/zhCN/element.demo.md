@@ -6,7 +6,7 @@ Naive UI 提供 `n-element` 组件，参考 [Element](n-element)。
 <n-space vertical>
   <n-space>
     <n-button @click="theme = darkTheme">深色</n-button>
-    <n-button @click="theme = lightTheme">浅色</n-button>
+    <n-button @click="theme = undefined">浅色</n-button>
   </n-space>
   <n-config-provider :unstable-theme="theme">
     <n-card>
@@ -23,14 +23,13 @@ Naive UI 提供 `n-element` 组件，参考 [Element](n-element)。
 
 ```js
 import { ref } from 'vue'
-import { darkTheme, lightTheme } from 'naive-ui'
+import { darkTheme } from 'naive-ui'
 
 export default {
   setup () {
     return {
       darkTheme,
-      lightTheme,
-      theme: ref(lightTheme)
+      theme: ref()
     }
   }
 }

@@ -63,8 +63,9 @@ import { typographyDark } from '../typography/styles'
 import { treeDark } from '../tree/styles'
 import { uploadDark } from '../upload/styles'
 import { selectDark } from '../select/styles'
+import type { BuiltInGlobalTheme } from './interface'
 
-export const darkTheme = {
+export const darkTheme: BuiltInGlobalTheme = {
   common: commonDark,
   Alert: alertDark,
   Anchor: anchorDark,

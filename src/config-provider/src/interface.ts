@@ -70,7 +70,7 @@ import type { ExtractThemeOverrides } from '../../_mixins/use-theme'
 import type { Hljs } from '../../_mixins'
 
 export interface GlobalTheme {
-  common: ThemeCommonVars
+  common?: ThemeCommonVars
   Alert?: AlertTheme
   Anchor?: AnchorTheme
   AutoComplete?: AutoCompleteTheme
