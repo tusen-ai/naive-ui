@@ -41,10 +41,12 @@ export default defineComponent({
       default: 'medium'
     },
     // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': {
-      type: [Function, Array] as PropType<MaybeArray<(value: number) => void>>,
-      default: undefined
-    }
+    'onUpdate:value': [Function, Array] as PropType<
+    MaybeArray<(value: number) => void>
+    >,
+    onUpdateValue: [Function, Array] as PropType<
+    MaybeArray<(value: number) => void>
+    >
   },
   setup (props) {
     const themeRef = useTheme('Rate', 'Rate', style, rateLight, props)
@@ -53,8 +55,11 @@ export default defineComponent({
     const hoverIndexRef = ref<number | null>(null)
     const formItem = useFormItem(props)
     function doUpdateValue (value: number): void {
-      const { 'onUpdate:value': onUpdateValue } = props
+      const { 'onUpdate:value': _onUpdateValue, onUpdateValue } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
+      if (_onUpdateValue) {
+        call(_onUpdateValue, value)
+      }
       if (onUpdateValue) {
         call(onUpdateValue, value)
       }

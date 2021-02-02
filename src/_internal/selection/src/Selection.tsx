@@ -505,7 +505,7 @@ export default defineComponent({
                   ref="patternInputMirrorRef"
                   class="n-base-selection-input-tag__mirror"
                 >
-                  {this.pattern ? this.pattern : ' '}
+                  {this.pattern ? this.pattern : ''}
                 </span>
               </div>
               {suffix}

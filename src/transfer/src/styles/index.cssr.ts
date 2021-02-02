@@ -1,4 +1,4 @@
-import { c, cB, cE, cM } from '../../../_utils/cssr'
+import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 import fadeInTransition from '../../../_styles/transitions/fade-in'
 
 const animation = c([
@@ -206,9 +206,11 @@ export default c([
               align-items: center;
               color: var(--item-text-color);
             `, [
-              c('&:hover', {
-                backgroundColor: 'var(--item-color-pending)'
-              }),
+              cNotM('disabled', [
+                c('&:hover', {
+                  backgroundColor: 'var(--item-color-pending)'
+                })
+              ]),
               cE('extra', `
                 text-overflow: ellipsis;
                 overflow: hidden;

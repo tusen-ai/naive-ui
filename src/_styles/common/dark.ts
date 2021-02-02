@@ -17,9 +17,9 @@ const base = {
   alpha4: '0.38',
   alpha5: '0.28',
 
-  alphaClose: 0.52,
+  alphaClose: '0.52',
 
-  alphaDisabled: '0.6',
+  alphaDisabled: '0.38',
   alphaDisabledInput: '0.06',
   alphaPending: '0.09',
   alphaTablePending: '0.06',

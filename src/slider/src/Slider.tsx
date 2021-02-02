@@ -68,6 +68,9 @@ export default defineComponent({
     'onUpdate:value': Function as PropType<
     MaybeArray<<T extends number | [number, number]>(value: T) => void>
     >,
+    onUpdateValue: Function as PropType<
+    MaybeArray<<T extends number | [number, number]>(value: T) => void>
+    >,
     // deprecated
     onChange: {
       type: Function as PropType<
@@ -205,10 +208,15 @@ export default defineComponent({
       }
     })
     function doUpdateValue (value: number | [number, number]): void {
-      const { onChange, 'onUpdate:value': onUpdateValue } = props
+      const {
+        onChange,
+        'onUpdate:value': _onUpdateValue,
+        onUpdateValue
+      } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
       if (onChange) call(onChange, value)
       if (onUpdateValue) call(onUpdateValue, value)
+      if (_onUpdateValue) call(_onUpdateValue, value)
       uncontrolledValueRef.value = value
       nTriggerFormInput()
       nTriggerFormChange()

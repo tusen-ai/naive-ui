@@ -25,7 +25,7 @@ export default defineComponent({
       default: 'medium'
     },
     value: {
-      type: Boolean,
+      type: Boolean as PropType<boolean | undefined>,
       default: undefined
     },
     defaultValue: {
@@ -41,12 +41,16 @@ export default defineComponent({
       default: true
     },
     // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': {
-      type: [Function, Array] as PropType<MaybeArray<(value: boolean) => void>>,
-      default: undefined
-    },
+    'onUpdate:value': [Function, Array] as PropType<
+    MaybeArray<(value: boolean) => void>
+    >,
+    onUpdateValue: [Function, Array] as PropType<
+    MaybeArray<(value: boolean) => void>
+    >,
     onChange: {
-      type: [Function, Array] as PropType<MaybeArray<(value: boolean) => void>>,
+      type: [Function, Array] as PropType<
+      MaybeArray<(value: boolean) => void> | undefined
+      >,
       validator: () => {
         if (__DEV__) {
           warn(
@@ -70,8 +74,13 @@ export default defineComponent({
       uncontrolledValueRef
     )
     function doUpdateValue (value: boolean): void {
-      const { 'onUpdate:value': onUpdateValue, onChange } = props
+      const {
+        'onUpdate:value': _onUpdateValue,
+        onChange,
+        onUpdateValue
+      } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
+      if (_onUpdateValue) call(_onUpdateValue, value)
       if (onUpdateValue) call(onUpdateValue, value)
       if (onChange) call(onChange, value)
       uncontrolledValueRef.value = value

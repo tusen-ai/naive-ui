@@ -41,7 +41,7 @@ export default cB('base-select-menu', `
     transition: 
       color .3s var(--bezier);
       border-color .3s var(--bezier);
-    borderTop: 1px solid var(--action-divider-color);
+    border-top: 1px solid var(--action-divider-color);
     color: var(--action-text-color);
   `),
   cB('base-select-group-header', `
