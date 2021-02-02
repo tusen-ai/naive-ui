@@ -410,7 +410,7 @@
   - [x] selection focus style
   - [x] refactor site use store!!! singleton
   - [x] 文档网站主题切换
-  - [ ] 文档网站 demo 样式
+  - [x] 文档网站 demo 样式
   - [x] anchor bug！
   - [ ] getKey select & autocomplete type safe & input event interface? onInput value | null or value
   - [x] vshow (maybe create a vue pr)
