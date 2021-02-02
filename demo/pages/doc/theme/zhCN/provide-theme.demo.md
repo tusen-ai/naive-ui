@@ -3,7 +3,7 @@
 使用 `n-config-provider` 来设定它全部的后代组件主题。
 
 ```html
-<n-config-provider :unstable-theme="theme">
+<n-config-provider :theme="theme">
   <n-card>
     <n-space>
       <n-button @click="theme = darkTheme">深色</n-button>

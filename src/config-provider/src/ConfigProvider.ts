@@ -29,16 +29,16 @@ export default defineComponent({
       type: Boolean as PropType<boolean | undefined>,
       default: undefined
     },
-    locale: Object as PropType<NaiveLocale>,
-    dateLocale: Object as PropType<NaiveDateLocale>,
+    locale: Object as PropType<NaiveLocale | null>,
+    dateLocale: Object as PropType<NaiveDateLocale | null>,
     namespace: String,
     tag: {
       type: String,
       default: 'div'
     },
     hljs: Object as PropType<Hljs>,
-    theme: Object as PropType<GlobalTheme>,
-    themeOverrides: Object as PropType<GlobalThemeOverrides>,
+    theme: Object as PropType<GlobalTheme | null>,
+    themeOverrides: Object as PropType<GlobalThemeOverrides | null>,
     // deprecated
     legacyTheme: String,
     language: {

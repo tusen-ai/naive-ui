@@ -2,11 +2,11 @@ module.exports = {
   extends: ['plugin:markdown/recommended'],
   overrides: [
     {
-      files: 'src/**/*.vue',
+      files: '**/*.vue',
       extends: [
         'plugin:vue/essential',
-        '@vue/standard',
-        '@vue/typescript/recommended'
+        '@vue/standard'
+        // '@vue/typescript/recommended'
       ],
       rules: {
         'vue/max-attributes-per-line': [

@@ -8,7 +8,7 @@ Naive UI 提供 `n-element` 组件，参考 [Element](n-element)。
     <n-button @click="theme = darkTheme">深色</n-button>
     <n-button @click="theme = null">浅色</n-button>
   </n-space>
-  <n-config-provider :unstable-theme="theme">
+  <n-config-provider :theme="theme">
     <n-card>
       <n-el
         tag="span"

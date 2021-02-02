@@ -2,7 +2,7 @@
   <n-config-provider
     class="demo"
     namespace="naive-ui-doc"
-    :unstable-theme="theme"
+    :theme="theme"
     :locale="locale"
     :date-locale="dateLocale"
     :hljs="hljs"
