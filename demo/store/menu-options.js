@@ -85,12 +85,6 @@ export default function (instance) {
           path: `/${lang}/${theme}/doc` + '/n-config-provider'
         },
         {
-          name: 'Config Consumer',
-          title: '配置消费者 ',
-          titleExtra: 'Config Consumer',
-          path: `/${lang}/${theme}/doc` + '/n-config-consumer'
-        },
-        {
           name: 'Element',
           title: '元素',
           titleExtra: 'Element',

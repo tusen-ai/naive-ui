@@ -77,7 +77,7 @@
     - `on-expanded-names-change` => `on-update:expanded-names`
   - removed
     - `v-model` => `v-model:expanded-names`
-- [x] config-consumer
+- [x] config-consumer (deprecated)
 - [x] config-provider
   - break
     - `theme` use new theme from naive export

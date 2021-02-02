@@ -232,10 +232,6 @@ export const childRoutes = withPrefix('/:lang/:theme/doc', [
     component: () => import('../../src/breadcrumb/demos/index.entry')
   },
   {
-    path: '/n-config-consumer',
-    component: () => import('../../src/config-consumer/demos/index.entry')
-  },
-  {
     path: '/n-descriptions',
     component: () => import('../../src/descriptions/demos/index.entry')
   },
