@@ -18,14 +18,14 @@ item-header-click
 ### Collapse Props
 
 | 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- |
 | accordion | `boolean` | `false` |  |
 | arrow-placement | `'left' \| 'right'` | `'left'` |  |
-| default-expanded-names | `string \| number | Array<string \| number> | null` | `null` | `accordion` 模式时不为数组 |
+| default-expanded-names | `string \| number \| Array<string \| number> \| null` | `null` | `accordion` 模式时不为数组 |
 | display-directive | `'if' \| 'show'` | `'if'` | 内部 `n-collapse-item` 在控制内容是否渲染时使用的指令，`'if'` 对应 `v-if`，`'show'` 对应 `v-show` |
-| expanded-names | `string \| number | Array<string \| number> | null` | `undefined` | `accordion` 模式时不为数组 |
-| on-update:expanded-names | `(expandedNames: Array<string \| number> | string | number | null) => any` | `undefined` |  |
-| on-item-header-click | `(data: { name: string | number, expanded: boolean, event: MouseEvent }) => any` | `undefined` |  |
+| expanded-names | `string \| number \| Array<string \| number> \| null` | `undefined` | `accordion` 模式时不为数组 |
+| on-update:expanded-names | `(expandedNames: Array<string \| number> \| string \| number \| null) => any` | `undefined` |  |
+| on-item-header-click | `(data: { name: string \| number, expanded: boolean, event: MouseEvent }) => any` | `undefined` |  |
 
 ### Collapse Item Props
 
