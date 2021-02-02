@@ -5,7 +5,6 @@
 ```html
 <n-space vertical>
   <n-input
-    v-model:value="value"
     @blur="handleBlur"
     @focus="handleFocus"
     @change="handleChange"
@@ -15,7 +14,6 @@
     passively-activated
   />
   <n-input
-    v-model:value="value"
     type="textarea"
     @blur="handleBlur"
     @focus="handleFocus"
@@ -28,7 +26,6 @@
   <n-input
     pair
     separator="to"
-    v-model:value="pair"
     @blur="handleBlur"
     @focus="handleFocus"
     passively-activated
@@ -39,12 +36,6 @@
 ```js
 export default {
   inject: ['message'],
-  data () {
-    return {
-      value: null,
-      pair: null
-    }
-  },
   methods: {
     handleFocus (e) {
       this.message.info('[Event focus]')

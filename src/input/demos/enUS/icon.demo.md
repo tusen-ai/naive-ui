@@ -4,17 +4,17 @@ Fill content in prefix or suffix of the input.
 
 ```html
 <n-space vertical>
-  <n-input v-model:value="value" placeholder="Search">
+  <n-input placeholder="Search">
     <template #prefix>
       <n-icon>
         <search-outline />
       </n-icon>
     </template>
   </n-input>
-  <n-input v-model:value="value" round placeholder="1,400,000">
+  <n-input round placeholder="1,400,000">
     <template #suffix> $ </template>
   </n-input>
-  <n-input v-model:value="value" round placeholder="Search">
+  <n-input round placeholder="Search">
     <template #suffix>
       <n-icon>
         <search-outline />
@@ -30,11 +30,6 @@ import { SearchOutline } from '@vicons/ionicons-v5'
 export default {
   components: {
     SearchOutline
-  },
-  data () {
-    return {
-      value: null
-    }
   }
 }
 ```

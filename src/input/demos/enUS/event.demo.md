@@ -3,7 +3,6 @@
 ```html
 <n-space vertical>
   <n-input
-    v-model:value="value"
     @blur="handleBlur"
     @focus="handleFocus"
     @change="handleChange"
@@ -12,7 +11,6 @@
     placeholder="Operate to trigger events"
   />
   <n-input
-    v-model:value="value"
     type="textarea"
     @blur="handleBlur"
     @focus="handleFocus"
@@ -27,12 +25,6 @@
 ```js
 export default {
   inject: ['message'],
-  data () {
-    return {
-      value: null,
-      pair: null
-    }
-  },
   methods: {
     handleFocus () {
       this.message.info('[Event focus]')

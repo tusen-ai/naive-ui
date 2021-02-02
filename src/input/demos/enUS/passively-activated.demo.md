@@ -5,7 +5,6 @@ If you want to activate input by pressing enter after focused, use `passively-ac
 ```html
 <n-space vertical>
   <n-input
-    v-model:value="value"
     @blur="handleBlur"
     @focus="handleFocus"
     @change="handleChange"
@@ -28,7 +27,6 @@ If you want to activate input by pressing enter after focused, use `passively-ac
   <n-input
     pair
     separator="to"
-    v-model:value="pair"
     @blur="handleBlur"
     @focus="handleFocus"
     :passively-activated="true"
@@ -39,12 +37,6 @@ If you want to activate input by pressing enter after focused, use `passively-ac
 ```js
 export default {
   inject: ['message'],
-  data () {
-    return {
-      value: null,
-      pair: null
-    }
-  },
   methods: {
     handleFocus (e) {
       this.message.info('[Event focus]')

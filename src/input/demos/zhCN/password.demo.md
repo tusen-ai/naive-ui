@@ -1,21 +1,5 @@
 # 密码
 
 ```html
-<n-input
-  v-model:value="value"
-  type="password"
-  icon="md-key"
-  placeholder="密码"
-  :maxlength="8"
-/>
-```
-
-```js
-export default {
-  data () {
-    return {
-      value: null
-    }
-  }
-}
+<n-input type="password" placeholder="密码" :maxlength="8" />
 ```

@@ -4,7 +4,6 @@
 <n-input
   pair
   separator="-"
-  v-model:value="value"
   :placeholder="placeholder"
   clearable
   @blur="handleInputBlur"
@@ -19,8 +18,7 @@ export default {
   inject: ['message'],
   data () {
     return {
-      placeholder: ['From', 'To'],
-      value: ['0', '100']
+      placeholder: ['From', 'To']
     }
   },
   methods: {

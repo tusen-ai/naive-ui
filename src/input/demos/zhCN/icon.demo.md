@@ -4,17 +4,17 @@
 
 ```html
 <n-space vertical>
-  <n-input v-model:value="value" placeholder="搜索">
+  <n-input placeholder="搜索">
     <template #prefix>
       <n-icon>
         <search-outline />
       </n-icon>
     </template>
   </n-input>
-  <n-input v-model:value="value" round placeholder="100,000,000">
+  <n-input round placeholder="100,000,000">
     <template #suffix> 元 </template>
   </n-input>
-  <n-input v-model:value="value" round placeholder="搜索">
+  <n-input round placeholder="搜索">
     <template #suffix>
       <n-icon>
         <search-outline />
@@ -30,11 +30,6 @@ import { SearchOutline } from '@vicons/ionicons-v5'
 export default {
   components: {
     SearchOutline
-  },
-  data () {
-    return {
-      value: null
-    }
   }
 }
 ```
