@@ -840,7 +840,7 @@ export default defineComponent({
                         show={this.showClearButton}
                         onClear={this.handleClear}
                       >
-                        {{ default: () => renderSlot(this.$slots, 'cleaar') }}
+                        {{ default: () => renderSlot(this.$slots, 'clear') }}
                       </NBaseClear>
                     ) : null
                   ]

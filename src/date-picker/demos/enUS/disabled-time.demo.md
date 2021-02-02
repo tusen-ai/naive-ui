@@ -2,25 +2,29 @@
 
 ```html
 <n-space vertical>
+  Disable first half of the month
   <n-date-picker
-    v-model:value="timestamp1"
     type="date"
+    :default-value="Date.now()"
     :is-date-disabled="dateDisabled"
   />
+  Disable first half of the month & AM at second half of the month
   <n-date-picker
-    v-model:value="timestamp2"
     type="datetime"
+    :default-value="Date.now()"
     :is-date-disabled="dateDisabled"
     :is-time-disabled="timeDisabled"
   />
+  At least 7 days
   <n-date-picker
-    v-model:value="timestamp3"
     type="daterange"
+    :default-value="[Date.now(), Date.now() + 86400000]"
     :is-date-disabled="isRangeDateDisabled"
   />
+  At least 7 days
   <n-date-picker
-    v-model:value="timestamp4"
     type="datetimerange"
+    :default-value="[Date.now(), Date.now() + 86400000]"
     :is-date-disabled="isRangeDateDisabled"
     :is-time-disabled="isRangeTimeDisabled"
   />
@@ -28,93 +32,96 @@
 ```
 
 ```js
+import { startOfDay } from 'date-fns'
+
+const d = 86400000
+const h = 3600000
+const m = 60000
+const s = 1000
+
 export default {
-  data () {
+  setup () {
     return {
-      timestamp1: 1576239200000,
-      timestamp2: 1576234000000,
-      timestamp3: [1576439200000, 1576739200000],
-      timestamp4: [1576234000000, 1576934000000]
-    }
-  },
-  methods: {
-    dateDisabled (current) {
-      const month = new Date(current).getMonth()
-      const date = new Date(current).getDate()
-      return month === 11 && date < 15
-    },
-    timeDisabled (current) {
-      const month = new Date(current).getMonth()
-      return {
-        isHourDisabled: (hour) => {
-          if (month === 11) {
-            return hour > 1 && hour <= 19
-          } else {
-            return false
-          }
-        },
-        isMinuteDisabled: (minute, selectedHour) => {
-          if (month === 11 && selectedHour === 22) {
-            return minute >= 20 && minute <= 30
-          } else {
-            return false
-          }
-        },
-        isSecondDisabled: (second, selectedMinute, selectedHour) => {
-          if (
-            month === 11 &&
-            selectedHour === 12 &&
-            selectedMinute >= 40 &&
-            selectedMinute <= 50
-          ) {
-            return second >= 20 && second <= 30
-          } else {
-            return false
+      dateDisabled (ts) {
+        const date = new Date(ts).getDate()
+        return date < 15
+      },
+      timeDisabled (ts) {
+        const date = new Date(ts).getDate()
+        return {
+          isHourDisabled: (hour) => {
+            return date >= 15 && hour < 12
           }
         }
-      }
-    },
-    isRangeDateDisabled (current, type, range) {
-      const currentDate = new Date(current)
-      if (type === 'start') {
-        if (currentDate.getMonth() === 11) {
-          return currentDate.getDate() > 15
+      },
+      isRangeDateDisabled (ts, type, range) {
+        if (type === 'start' && range !== null) {
+          return (
+            startOfDay(range[1]).valueOf() - startOfDay(ts).valueOf() <= d * 6
+          )
         }
-      } else if (type === 'end') {
-        if (range) {
-          const [start] = range
-          return currentDate < start
+        if (type === 'end' && range !== null) {
+          return (
+            startOfDay(ts).valueOf() - startOfDay(range[0]).valueOf() <= d * 6
+          )
         }
-      }
-    },
-    isRangeTimeDisabled (current, type, range) {
-      const month = new Date(current).getMonth()
-      return {
-        isHourDisabled: (hour) => {
-          if (month === 11) {
-            return hour > 1 && hour <= 19
-          } else {
-            return false
+      },
+      isRangeTimeDisabled (current, type, range) {
+        if (type === 'start') {
+          return {
+            isHourDisabled: (hour) => {
+              return (
+                range[1] - startOfDay(range[0]).valueOf() - hour * h < d * 7
+              )
+            },
+            isMinuteDisabled: (minute, hour) => {
+              return (
+                range[1] -
+                  startOfDay(range[0]).valueOf() -
+                  hour * h -
+                  minute * m <
+                d * 7
+              )
+            },
+            isSecondDisabled: (second, minute, hour) => {
+              return (
+                range[1] -
+                  startOfDay(range[0]).valueOf() -
+                  hour * h -
+                  minute * m -
+                  second * s <
+                d * 7
+              )
+            }
           }
-        },
-        isMinuteDisabled: (minute, selectedHour) => {
-          // debugger
-          if (month === 11 && selectedHour === 22) {
-            return minute >= 20 && minute <= 30
-          } else {
-            return false
-          }
-        },
-        isSecondDisabled: (second, selectedMinute, selectedHour) => {
-          if (
-            month === 11 &&
-            selectedHour === 12 &&
-            selectedMinute >= 40 &&
-            selectedMinute <= 50
-          ) {
-            return second >= 20 && second <= 30
-          } else {
-            return false
+        } else {
+          return {
+            isHourDisabled: (hour) => {
+              return (
+                startOfDay(range[1]).valueOf() + hour * h + (h - s) - range[0] <
+                d * 7
+              )
+            },
+            isMinuteDisabled: (minute, hour) => {
+              return (
+                startOfDay(range[1]).valueOf() +
+                  hour * h +
+                  minute * m +
+                  (m - s) -
+                  range[0] <
+                d * 7
+              )
+            },
+            isSecondDisabled: (second, minute, hour) => {
+              return (
+                startOfDay(range[1]).valueOf() +
+                  hour * h +
+                  minute * m +
+                  second * s -
+                  range[0] <
+                d * 7
+              )
+            }
           }
         }
       }

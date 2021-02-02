@@ -93,12 +93,12 @@ export function dualCalendarValidation (
   const timePickerValidatorRef = computed(() => {
     const { isTimeDisabled } = props as { isTimeDisabled?: IsRangeTimeDisabled }
     const { value } = mergedValueRef
-    if (value === null || !Array.isArray(value) || !isTimeDisabled) {
+    if (!Array.isArray(value) || !isTimeDisabled) {
       return [undefined, undefined]
     }
     return [
       isTimeDisabled?.(value[0], 'start', value),
-      isTimeDisabled?.(value[0], 'end', value)
+      isTimeDisabled?.(value[1], 'end', value)
     ]
   })
   const timeValidator = {
@@ -145,7 +145,7 @@ export function dualCalendarValidation (
     ) {
       return false
     }
-    isDateDisabled(value[0], 'end', value)
+    return isDateDisabled(value[1], 'end', value)
   })
   const isStartTimeInvalidRef = computed(() => {
     const { type } = props

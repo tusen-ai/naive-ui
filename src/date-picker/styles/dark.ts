@@ -1,4 +1,4 @@
-import { changeColor } from 'seemly'
+import { changeColor, composite } from 'seemly'
 import { inputDark } from '../../input/styles'
 import { commonDark } from '../../_styles/common'
 import { buttonDark } from '../../button/styles'
@@ -40,9 +40,9 @@ const datePickerDark: DatePickerTheme = {
       itemTextColorDisabled: textColorDisabledOverlay,
       itemTextColorActive: popoverColor,
       itemTextColorCurrent: primaryColor,
-      itemColorDisabled: hoverColorOverlay,
+      itemColorDisabled: composite(popoverColor, hoverColorOverlay),
       itemColorIncluded: changeColor(primaryColor, { alpha: 0.15 }),
-      itemColorHover: hoverColorOverlay,
+      itemColorHover: composite(popoverColor, hoverColorOverlay),
       itemColorActive: primaryColor,
       itemBorderRadius: borderRadiusSmall,
       panelColor: popoverColor,
