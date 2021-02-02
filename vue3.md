@@ -426,7 +426,7 @@
   - [ ] compat
   - [ ] on update value api
   - [ ] fix upload dragger
-  - [ ] fix table sorter
+  - [x] fix table sorter
   - [ ] tree 多选节点第二个 demo
   - [ ] table treemate!!!
 

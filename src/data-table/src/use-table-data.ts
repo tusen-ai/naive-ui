@@ -101,7 +101,6 @@ export function useTableData (props: DataTableProps) {
         sorter: columnToSort.sorter!
       }
     }
-    if (!columnsWithControlledSortOrder.length) return null
     return uncontrolledSortStateRef.value
   })
 
@@ -270,11 +269,11 @@ export function useTableData (props: DataTableProps) {
     if (onUpdatePageSize) call(onUpdatePageSize, pageSize)
     uncontrolledPageSizeRef.value = pageSize
   }
-  function doUpdateSorter (sorter: SortState | null): void {
+  function doUpdateSorter (sortState: SortState | null): void {
     const { 'onUpdate:sorter': onUpdateSorter, onSorterChange } = props
-    if (onUpdateSorter) call(onUpdateSorter, sorter)
-    if (onSorterChange) call(onSorterChange, sorter)
-    uncontrolledSortStateRef.value = sorter
+    if (onUpdateSorter) call(onUpdateSorter, sortState)
+    if (onSorterChange) call(onSorterChange, sortState)
+    uncontrolledSortStateRef.value = sortState
   }
   function doUpdateFilters (
     filters: FilterState,

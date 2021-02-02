@@ -35,7 +35,10 @@ export default defineComponent({
         NDataTable.doCheckAll(column)
       }
     }
-    function handleHeaderClick (e: MouseEvent, column: TableColumnInfo): void {
+    function handleColHeaderClick (
+      e: MouseEvent,
+      column: TableColumnInfo
+    ): void {
       if (happensIn(e, 'dataTableFilter')) return
       if (!isColumnSortable(column)) return
       const activeSorter = NDataTable.mergedSortState
@@ -49,7 +52,7 @@ export default defineComponent({
         overflow: 'scroll'
       },
       handleCheckboxUpdateChecked,
-      handleHeaderClick
+      handleColHeaderClick
     }
   },
   render () {
@@ -65,7 +68,7 @@ export default defineComponent({
       },
       NMainTable: { leftActiveFixedColKey, rightActiveFixedColKey },
       headerStyle,
-      handleHeaderClick,
+      handleColHeaderClick,
       handleCheckboxUpdateChecked
     } = this
     return (
@@ -111,7 +114,7 @@ export default defineComponent({
                     },
                     column.className
                   ]}
-                  onClick={(e) => handleHeaderClick(e, column)}
+                  onClick={(e) => handleColHeaderClick(e, column)}
                 >
                   {column.type === 'selection' ? (
                     <NCheckbox
