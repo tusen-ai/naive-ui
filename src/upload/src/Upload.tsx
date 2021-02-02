@@ -176,14 +176,8 @@ export default defineComponent({
       type: String,
       default: 'file'
     },
-    accept: {
-      type: String,
-      default: undefined
-    },
-    action: {
-      type: String,
-      default: undefined
-    },
+    accept: String,
+    action: String,
     // to be impl
     // directory: {
     //   type: Boolean,
@@ -197,14 +191,8 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    data: {
-      type: [Object, Function],
-      default: undefined
-    },
-    headers: {
-      type: [Object, Function],
-      default: undefined
-    },
+    data: [Object, Function] as PropType<FuncOrRecordOrUndef>,
+    headers: [Object, Function] as PropType<FuncOrRecordOrUndef>,
     withCredentials: {
       type: Boolean,
       default: false
@@ -332,11 +320,11 @@ export default defineComponent({
             file,
             formData,
             {
-              method: method,
-              action: action,
-              withCredentials: withCredentials,
-              headers: headers,
-              data: data
+              method,
+              action,
+              withCredentials,
+              headers,
+              data
             }
           )
         }
