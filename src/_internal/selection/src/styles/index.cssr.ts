@@ -273,7 +273,6 @@ export default c([
       `),
       cE('mirror', `
         position: absolute;
-        padding-right: 1em;
         left: 0;
         top: 0;
         white-space: pre;

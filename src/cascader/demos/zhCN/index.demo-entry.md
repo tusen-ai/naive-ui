@@ -37,3 +37,13 @@ multiple-lazy
 | on-focus | `() => any` | `undefined` |  |
 | on-load | `(option: CascaderOption) => Promise<any>` | `undefined` | 在点击未加载完成节点时的回调，在返回的 promise 中设定 `option.children`，在返回的 promise resolve 或 reject 之后完成加载 |
 | on-update:value | `(value: string \| number \| Array<string \| number> \| null) => any` | `undefined` |  |
+
+## API
+
+### CascaderOption Properties
+
+| 名称      | 类型               | 描述 |
+| --------- | ------------------ | ---- |
+| label     | `string`           |      |
+| style     | `string \| number` |
+| disabled? | `boolean`          |      |

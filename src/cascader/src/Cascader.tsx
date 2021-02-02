@@ -625,6 +625,7 @@ export default defineComponent({
         indeterminateKeys: indeterminateKeysRef,
         hoverKeyPath: hoverKeyPathRef,
         leafOnly: toRef(props, 'leafOnly'),
+        cascade: toRef(props, 'cascade'),
         multiple: toRef(props, 'multiple'),
         keyboardKey: keyboardKeyRef,
         hoverKey: hoverKeyRef,

@@ -161,26 +161,29 @@ export default defineComponent({
         name="n-fade-in-scale-up-transition"
         appear={NCascader.isMounted}
       >
-        {this.show
-          ? withDirectives(
-            (
-              <NInternalSelectMenu
-                ref="menuInstRef"
-                class="n-cascader-menu"
-                autoPending
-                themeOverrides={
-                  NCascader.mergedTheme.peerOverrides.InternalSelectMenu
-                }
-                theme={NCascader.mergedTheme.peers.InternalSelectMenu}
-                treeMate={this.selectTreeMate}
-                multiple={this.multiple}
-                value={this.value}
-                onMenuToggleOption={this.handleToggleOption}
-              />
-            ) as VNode,
-            [[clickoutside, this.handleClickOutside]]
-          )
-          : null}
+        {{
+          default: () =>
+            this.show
+              ? withDirectives(
+                (
+                  <NInternalSelectMenu
+                    ref="menuInstRef"
+                    class="n-cascader-menu"
+                    autoPending
+                    themeOverrides={
+                      NCascader.mergedTheme.peerOverrides.InternalSelectMenu
+                    }
+                    theme={NCascader.mergedTheme.peers.InternalSelectMenu}
+                    treeMate={this.selectTreeMate}
+                    multiple={this.multiple}
+                    value={this.value}
+                    onMenuToggleOption={this.handleToggleOption}
+                  />
+                ) as VNode,
+                [[clickoutside, this.handleClickOutside]]
+              )
+              : null
+        }}
       </Transition>
     )
   }

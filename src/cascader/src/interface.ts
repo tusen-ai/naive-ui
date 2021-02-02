@@ -60,6 +60,7 @@ export interface CascaderInjection {
   loadingKeySet: Set<Key>
   expandTrigger: ExpandTrigger
   isMounted: boolean
+  cascade: boolean
   syncCascaderMenuPosition: () => void
   syncSelectMenuPosition: () => void
   updateKeyboardKey: (value: Key | null) => void

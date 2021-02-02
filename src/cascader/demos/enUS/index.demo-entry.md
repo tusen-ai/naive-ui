@@ -37,3 +37,13 @@ multiple-lazy
 | on-focus | `() => any` | `undefined` |
 | on-load | `(option: CascaderOption) => Promise<any>` | `undefined` | Callback when click unloaded node. Set `option.children` in the returned promise. Loading is end after the promise is resolved or rejected. |
 | on-update:value | `(value: string \| number \| Array<string \| number> \| null) => any` | `undefined` |  |
+
+## API
+
+### CascaderOption Properties
+
+| Name      | Type               | Description |
+| --------- | ------------------ | ----------- |
+| label     | `string`           |             |
+| style     | `string \| number` |
+| disabled? | `boolean`          |             |

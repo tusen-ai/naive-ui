@@ -64,7 +64,7 @@ export default defineComponent({
       return false
     })
     const showCheckboxRef = computed(() => {
-      if (NCascader.multiple) return true
+      if (NCascader.multiple && NCascader.cascade) return true
       if (!NCascader.leafOnly) return true
     })
     const rawNodeRef = computed(() => props.tmNode.rawNode)
@@ -137,6 +137,7 @@ export default defineComponent({
       NCascader,
       leafOnly: toRef(NCascader, 'leafOnly'),
       multiple: toRef(NCascader, 'multiple'),
+      cascade: toRef(NCascader, 'cascade'),
       checked: checkedRef,
       indeterminate: indeterminateRef,
       hoverPending: hoverPendingRef,
@@ -204,7 +205,7 @@ export default defineComponent({
                   )
                 }}
               </NBaseLoading>
-            ) : !this.multiple && this.leafOnly ? (
+            ) : this.leafOnly && !(this.multiple && this.cascade) ? (
               <Transition name="n-fade-in-scale-up-transition">
                 {{
                   default: () =>
