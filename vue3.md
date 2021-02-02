@@ -427,7 +427,7 @@
   - [ ] on update value api
   - [ ] fix upload dragger
   - [x] fix table sorter
-  - [ ] tree 多选节点第二个 demo
+  - [x] tree 多选节点第二个 demo
   - [ ] table treemate!!!
 
 ## Info

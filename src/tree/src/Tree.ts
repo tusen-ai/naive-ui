@@ -211,7 +211,7 @@ export default defineComponent({
         ? treeMateRef.value.getNonLeafKeys()
         : props.defaultExpandedKeys || props.expandedKeys
     )
-    const controlledExpandedKeysRef = toRef(props, 'selectedKeys')
+    const controlledExpandedKeysRef = toRef(props, 'expandedKeys')
     const mergedExpandedKeysRef = useMergedState(
       controlledExpandedKeysRef,
       uncontrolledExpandedKeysRef

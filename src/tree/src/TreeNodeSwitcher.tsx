@@ -1,4 +1,4 @@
-import { h, defineComponent } from 'vue'
+import { h, defineComponent, PropType } from 'vue'
 import { SwitcherIcon } from '../../_internal/icons'
 import { NIconSwitchTransition, NBaseLoading, NBaseIcon } from '../../_internal'
 
@@ -17,18 +17,7 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    onClick: Function
-  },
-  setup (props) {
-    function doClick (): void {
-      const { onClick } = props
-      if (onClick) onClick()
-    }
-    return {
-      handleClick () {
-        doClick()
-      }
-    }
+    onClick: Function as PropType<(e: MouseEvent) => void>
   },
   render () {
     return (
@@ -40,7 +29,7 @@ export default defineComponent({
             'n-tree-node-switcher--hide': this.hide
           }
         ]}
-        onClick={this.handleClick}
+        onClick={this.onClick}
       >
         <div class="n-tree-node-switcher__icon">
           <NIconSwitchTransition>
