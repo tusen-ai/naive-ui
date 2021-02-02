@@ -220,6 +220,12 @@ export default function (instance) {
           path: `/${lang}/${theme}/doc` + '/n-dynamic-input'
         },
         {
+          name: 'Dynamic Tags',
+          title: '动态标签',
+          titleExtra: 'Dynamic Tags',
+          path: `/${lang}/${theme}/doc` + '/n-dynamic-tags'
+        },
+        {
           name: 'Form',
           title: '表单',
           titleExtra: 'Form',

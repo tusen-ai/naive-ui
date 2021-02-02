@@ -5,7 +5,8 @@ import {
   PropType,
   CSSProperties,
   computed,
-  nextTick
+  nextTick,
+  toRef
 } from 'vue'
 import commonProps from '../../tag/src/common-props'
 import { AddIcon } from '../../_internal/icons'
@@ -21,6 +22,7 @@ import type { DynamicTagsTheme } from '../styles'
 
 import type { OnUpdateValue } from './interface'
 import style from './styles/index.cssr'
+import { useMergedState } from 'vooks'
 
 export default defineComponent({
   name: 'DynamicTags',
@@ -31,12 +33,11 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
-    value: {
+    defaultValue: {
       type: Array as PropType<string[]>,
-      default: () => {
-        return []
-      }
+      default: () => []
     },
+    value: Array as PropType<string[]>,
     tagStyle: {
       type: Object as PropType<CSSProperties>,
       default: () => {
@@ -55,6 +56,7 @@ export default defineComponent({
     },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+    onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
     // deprecated
     onChange: {
       type: [Function, Array] as PropType<
@@ -86,6 +88,13 @@ export default defineComponent({
       dynamicTagsLight,
       props
     )
+    const uncontrolledValueRef = ref(props.defaultValue)
+    const controlledValueRef = toRef(props, 'value')
+    const mergedValueRef = useMergedState(
+      controlledValueRef,
+      uncontrolledValueRef
+    )
+
     const localizedAddRef = computed(() => {
       return locale.value.add
     })
@@ -93,15 +102,21 @@ export default defineComponent({
       return smallerSize(props.size)
     })
     function doChange (value: string[]): void {
-      const { onChange, 'onUpdate:value': onUpdateValue } = props
+      const {
+        onChange,
+        'onUpdate:value': _onUpdateValue,
+        onUpdateValue
+      } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
       if (onChange) call(onChange, value)
       if (onUpdateValue) call(onUpdateValue, value)
+      if (_onUpdateValue) call(_onUpdateValue, value)
+      uncontrolledValueRef.value = value
       nTriggerFormInput()
       nTriggerFormChange()
     }
     function handleCloseClick (index: number): void {
-      const tags = props.value.slice(0)
+      const tags = mergedValueRef.value.slice(0)
       tags.splice(index, 1)
       doChange(tags)
     }
@@ -113,7 +128,7 @@ export default defineComponent({
     }
     function handleInputConfirm (): void {
       if (inputValueRef.value) {
-        const tags = props.value.slice(0)
+        const tags = mergedValueRef.value.slice(0)
         tags.push(inputValueRef.value)
         doChange(tags)
       }
@@ -138,6 +153,7 @@ export default defineComponent({
       inputValue: inputValueRef,
       showInput: showInputRef,
       inputForceFocused: inputForceFocusedRef,
+      mergedValue: mergedValueRef,
       handleInputKeyUp,
       handleAddClick,
       handleInputBlur,
@@ -149,7 +165,7 @@ export default defineComponent({
     const { mergedTheme } = this
     return (
       <div class="n-dynamic-tags">
-        {this.value.map((tag, index) => (
+        {this.mergedValue.map((tag, index) => (
           <NTag
             key={index}
             theme={mergedTheme.peers.Tag}
@@ -162,7 +178,7 @@ export default defineComponent({
             disabled={this.disabled}
             onClose={() => this.handleCloseClick(index)}
           >
-            {{ defualt: () => tag }}
+            {{ default: () => tag }}
           </NTag>
         ))}
         {this.showInput ? (

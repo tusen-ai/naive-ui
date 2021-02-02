@@ -23,6 +23,7 @@ export default defineComponent({
             'n-base-close--disabled': props.disabled
           }
         ]}
+        onClick={props.onClick}
       >
         {{ default: () => <CloseIcon /> }}
       </NBaseIcon>

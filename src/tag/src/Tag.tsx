@@ -21,10 +21,7 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    onClose: {
-      type: Function,
-      default: undefined
-    },
+    onClose: Function,
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:checked': {
       type: Function,

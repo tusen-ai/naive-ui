@@ -82,7 +82,7 @@ export default defineComponent({
       return false
     })
     const shouldDelayRef = computed(() => {
-      return NDropdown.keyboardKey === null && NDropdown.animated
+      return NDropdown.keyboardKey === null && !NDropdown.animated
     })
     const deferredShowSubmenuRef = useDeferredTrue(
       showSubmenuRef,

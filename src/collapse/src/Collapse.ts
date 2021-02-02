@@ -84,7 +84,9 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const uncontrolledExpandedNamesRef = ref(null)
+    const uncontrolledExpandedNamesRef = ref<
+    string | number | Array<string | number> | null
+    >(null)
     const controlledExpandedNamesRef = computed(() => props.expandedNames)
     const mergedExpandedNames = useMergedState(
       controlledExpandedNamesRef,
@@ -115,6 +117,7 @@ export default defineComponent({
       if (onExpandedNamesChange) {
         call(onExpandedNamesChange as OnUpdateExpandedNamesImpl, names)
       }
+      uncontrolledExpandedNamesRef.value = names
     }
     function doItemHeaderClick<T extends string | number> (
       info: HeaderClickInfo<T>

@@ -295,6 +295,10 @@ export const childRoutes = withPrefix('/:lang/:theme/doc', [
     path: '/n-rate',
     component: () => import('../../src/rate/demos/index.entry')
   },
+  {
+    path: '/n-dynamic-tags',
+    component: () => import('../../src/dynamic-tags/demos/index.entry')
+  },
   // deprecated
   {
     path: '/n-nimbus-service-layout',
