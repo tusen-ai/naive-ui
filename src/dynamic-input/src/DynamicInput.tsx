@@ -55,6 +55,7 @@ export default defineComponent({
       default: 'input'
     },
     keyField: String,
+    itemStyle: [String, Object] as PropType<string | CSSProperties>,
     // for preset pair
     keyPlaceholder: {
       type: String,
@@ -246,6 +247,7 @@ export default defineComponent({
       keyField,
       $slots,
       preset,
+      itemStyle,
       NFormItem,
       ensureKey,
       handleValueChange,
@@ -276,6 +278,7 @@ export default defineComponent({
               key={keyField ? _[keyField] : ensureKey(_, index)}
               data-key={keyField ? _[keyField] : ensureKey(_, index)}
               class="n-dynamic-input-item"
+              style={itemStyle}
             >
               {$slots.default ? (
                 renderSlot($slots, 'default', {

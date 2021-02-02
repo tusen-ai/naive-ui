@@ -22,6 +22,7 @@ form
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | default-value | `Array<any>` | `[]` |  |
+| item-style | `string \| Object` | `undefined` |  |
 | key-field | `string` | `undefined` |  |
 | min | `number` | `0` | Min number of items. |
 | max | `number` | `undefined` | Max number of items. |

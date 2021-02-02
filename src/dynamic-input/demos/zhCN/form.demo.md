@@ -4,13 +4,9 @@
 
 ```html
 <n-form :model="model" ref="form">
-  <!--
-    设定 key-field 是为了每一项都能稳定的待在原地。如果不做设定可能会导致在增加删除项目时，表
-    项的验证信息消失或错位
-  -->
   <n-dynamic-input
+    item-style="margin-bottom: 0;"
     v-model:value="model.dynamicInputValue"
-    key-field="key"
     :on-create="onCreate"
   >
     <template #="{ index, value }">
@@ -77,9 +73,7 @@ export default {
     onCreate () {
       return {
         name: '',
-        value: '',
-        /** 生成 key ，目的是让这个值对应的表项的验证信息不错位 */
-        key: Math.random().toString(16).slice(2, 10)
+        value: ''
       }
     }
   }

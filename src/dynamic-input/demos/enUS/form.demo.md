@@ -4,14 +4,9 @@
 
 ```html
 <n-form :model="model" ref="form">
-  <!--
-    The key-field is set to make sure that each item can stay in the correct
-    place. If not set, it may cause the item verification information disappearance
-    or misplacement.
-  -->
   <n-dynamic-input
+    item-style="margin-bottom: 0;"
     v-model:value="model.dynamicInputValue"
-    key-field="key"
     :on-create="onCreate"
   >
     <template #="{ index, value }">
@@ -80,9 +75,7 @@ export default {
     onCreate () {
       return {
         name: '',
-        value: '',
-        /** Generate a key to make the verification information will not be misplaced */
-        key: Math.random().toString(16).slice(2, 10)
+        value: ''
       }
     }
   }

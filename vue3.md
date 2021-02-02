@@ -140,8 +140,9 @@
   - deprecate
     - `on-input` => `on-update:value`
   - new
-    - `min`
-    - `default-value`
+    - `item-style` prop
+    - `min` prop
+    - `default-value` prop
 - [x] dynamic-tags
   - break
     - `v-model` => `v-model:value`

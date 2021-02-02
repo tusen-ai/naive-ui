@@ -22,6 +22,7 @@ form
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | default-value | `Array<any>` | `[]` |  |
+| item-style | `string \| Object` | `undefined` |  |
 | key-field | `string` | `undefined` |  |
 | min | `number` | `0` | 最少有几项内容 |
 | max | `number` | `undefined` | 最多有几项内容 |

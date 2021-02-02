@@ -45,7 +45,7 @@ import {
 
 export const formItemProps = {
   ...(useTheme.props as ThemeProps<FormTheme>),
-  label: String as PropType<string | false>,
+  label: [String, Boolean] as PropType<string | false>,
   labelWidth: [Number, String] as PropType<string | number>,
   labelStyle: [String, Object] as PropType<CSSProperties | string>,
   labelAlign: String as PropType<LabelAlign>,
