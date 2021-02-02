@@ -3,21 +3,26 @@
 ```html
 <n-space vertical>
   <n-space>
-    <n-button @click="lang = 'en-US'">English</n-button>
-    <n-button @click="lang = 'zh-CN'">中文</n-button>
+    <n-button @click="locale = null; dateLocale = null">英文</n-button>
+    <n-button @click="locale = zhCN; dateLocale = dateZhCN">中文</n-button>
   </n-space>
-  <n-config-provider :language="lang">
-    <n-date-picker v-model:value="date" />
+  <n-config-provider :locale="locale" :date-locale="dateLocale">
+    <n-date-picker />
   </n-config-provider>
 </n-space>
 ```
 
 ```js
+import { ref } from 'vue'
+import { zhCN, dateZhCN } from 'naive-ui'
+
 export default {
-  data () {
+  setup () {
     return {
-      date: null,
-      lang: 'en-US'
+      zhCN,
+      dateZhCN,
+      locale: ref(null),
+      dateLocale: ref(null)
     }
   }
 }

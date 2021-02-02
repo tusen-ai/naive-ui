@@ -6,7 +6,7 @@ Naive UI has `n-element` component. See [Element](n-element).
 <n-space vertical>
   <n-space>
     <n-button @click="theme = darkTheme">Dark</n-button>
-    <n-button @click="theme = undefined">Light</n-button>
+    <n-button @click="theme = null">Light</n-button>
   </n-space>
   <n-config-provider :unstable-theme="theme">
     <n-card>
@@ -29,7 +29,7 @@ export default {
   setup () {
     return {
       darkTheme,
-      theme: ref()
+      theme: ref(null)
     }
   }
 }

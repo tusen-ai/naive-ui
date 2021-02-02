@@ -87,6 +87,8 @@
     - `as` => `tag`
     - `styleScheme` won't working in next version
   - new
+    - `date-locale` prop
+    - `locale` prop
     - provide `useOsTheme` hook
 - [x] confirm => `dialog`
   - break

@@ -41,10 +41,30 @@ export default defineComponent({
     themeOverrides: Object as PropType<GlobalThemeOverrides>,
     // deprecated
     legacyTheme: String,
-    language: String,
-    lang: String,
+    language: {
+      type: String as PropType<string | undefined>,
+      validator: () => {
+        warn(
+          'config-provider',
+          '`language` is deprecated, please use `locale` instead.'
+        )
+        return true
+      },
+      default: undefined
+    },
+    lang: {
+      type: String as PropType<string | undefined>,
+      validator: () => {
+        warn(
+          'config-provider',
+          '`lang` is deprecated, please use `locale` instead.'
+        )
+        return true
+      },
+      default: undefined
+    },
     as: {
-      type: Object as PropType<string | undefined>,
+      type: String as PropType<string | undefined>,
       validator: () => {
         warn('config-provider', '`as` is deprecated, please use `tag` instead.')
         return true
@@ -75,10 +95,12 @@ export default defineComponent({
     )
     const mergedUnstableThemeRef = computed(() => {
       const { theme } = props
+      if (theme === null) return undefined
       return theme === undefined ? NConfigProvider?.mergedUnstableTheme : theme
     })
     const mergedUnstableThemeOverridesRef = computed(() => {
       const { themeOverrides } = props
+      if (themeOverrides === null) return undefined
       return themeOverrides === undefined
         ? NConfigProvider?.mergedUnstableThemeOverrides
         : themeOverrides
@@ -100,10 +122,12 @@ export default defineComponent({
         mergedNamespace: mergedNamespaceRef,
         mergedLocale: computed(() => {
           const { locale } = props
+          if (locale === null) return undefined
           return locale === undefined ? NConfigProvider?.mergedLocale : locale
         }),
         mergedDateLocale: computed(() => {
           const { dateLocale } = props
+          if (dateLocale === null) return undefined
           return dateLocale === undefined
             ? NConfigProvider?.mergedDateLocale
             : dateLocale

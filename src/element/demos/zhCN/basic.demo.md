@@ -6,7 +6,7 @@
 <n-space vertical>
   <n-space>
     <n-button @click="theme = darkTheme">深色</n-button>
-    <n-button @click="theme = undefined">浅色</n-button>
+    <n-button @click="theme = null">浅色</n-button>
   </n-space>
   <n-config-provider :theme="theme">
     <n-card>
@@ -29,7 +29,7 @@ export default {
   setup () {
     return {
       darkTheme,
-      theme: ref()
+      theme: ref(null)
     }
   }
 }

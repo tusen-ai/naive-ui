@@ -16,9 +16,7 @@ export default {
   setup () {
     const osThemeRef = useOsTheme()
     return {
-      theme: computed(() =>
-        osThemeRef.value === 'dark' ? darkTheme : undefined
-      ),
+      theme: computed(() => (osThemeRef.value === 'dark' ? darkTheme : null)),
       osTheme: osThemeRef
     }
   }

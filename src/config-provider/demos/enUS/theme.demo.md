@@ -7,7 +7,7 @@ Set theme of inner components of `n-config-provider`.
   <n-card>
     <n-space>
       <n-button @click="theme = darkTheme">Dark</n-button>
-      <n-button @click="theme = undefined">Light</n-button>
+      <n-button @click="theme = null">Light</n-button>
     </n-space>
   </n-card>
 </n-config-provider>
@@ -21,7 +21,7 @@ export default {
   setup () {
     return {
       darkTheme,
-      theme: ref()
+      theme: ref(null)
     }
   }
 }

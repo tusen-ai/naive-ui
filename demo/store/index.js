@@ -18,14 +18,14 @@ export function siteSetup () {
   const route = useRoute()
   const router = useRouter()
   // display mode
-  const _displayModeRef = ref(localStorage.getItem('mode') ?? 'debug')
+  const _displayModeRef = ref(window.localStorage.getItem('mode') ?? 'debug')
   const displayModeRef = computed({
     get () {
       return _displayModeRef.value
     },
     set (value) {
       _displayModeRef.value = value
-      localStorage.setItem('mode', value)
+      window.localStorage.setItem('mode', value)
     }
   })
   // locale
@@ -62,7 +62,7 @@ export function siteSetup () {
   })
   const themeRef = computed(() => {
     const { value } = themeNameRef
-    return value === 'dark' ? darkTheme : undefined
+    return value === 'dark' ? darkTheme : null
   })
   // options
   const docOptionsRef = computed(() =>
