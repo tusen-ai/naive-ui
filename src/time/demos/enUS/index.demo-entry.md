@@ -17,7 +17,7 @@ unix
 | Name   | Type                                 | Default      | Description |
 | ------ | ------------------------------------ | ------------ | ----------- |
 | format | `string`                             | `undefined`  |             |
-| time   | `number \| Date`                     | `undefined`  |             |
-| to     | `number \| Date`                     | `new Date()` |             |
-| type   | `'relative' \| 'date' \| 'datetime'` | `'relative'` |             |
+| time   | `number \| Date`                     | `Date.now()` |             |
+| to     | `number \| Date`                     | `Date.now()` |             |
+| type   | `'relative' \| 'date' \| 'datetime'` | `'datetime'` |             |
 | unix   | `boolean`                            | `false`      |             |

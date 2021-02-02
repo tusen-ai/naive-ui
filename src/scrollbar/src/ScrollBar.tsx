@@ -10,7 +10,8 @@ import {
   renderSlot,
   Transition,
   VNode,
-  ExtractPropTypes
+  ExtractPropTypes,
+  CSSProperties
 } from 'vue'
 import { on, off } from 'evtd'
 import { VResizeObserver } from 'vueuc'
@@ -78,30 +79,12 @@ const scrollbarProps = {
   content: Function as PropType<
   undefined | (() => HTMLElement | null | undefined)
   >,
-  containerStyle: {
-    type: Object,
-    default: undefined
-  },
-  contentClass: {
-    type: String,
-    default: undefined
-  },
-  contentStyle: {
-    type: Object,
-    default: undefined
-  },
-  horizontalRailStyle: {
-    type: Object,
-    default: undefined
-  },
-  verticalRailStyle: {
-    type: Object,
-    default: undefined
-  },
-  onScroll: {
-    type: Function as PropType<((e: Event) => void) | undefined>,
-    default: undefined
-  }
+  containerStyle: [String, Object] as PropType<string | CSSProperties>,
+  contentClass: String,
+  contentStyle: [String, Object] as PropType<string | CSSProperties>,
+  horizontalRailStyle: [String, Object] as PropType<string | CSSProperties>,
+  verticalRailStyle: [String, Object] as PropType<string | CSSProperties>,
+  onScroll: Function as PropType<(e: Event) => void>
 } as const
 
 export type ScrollbarProps = ExtractPropTypes<typeof scrollbarProps>

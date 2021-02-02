@@ -16,18 +16,9 @@ import style from './styles/index.cssr'
 export default defineComponent({
   name: 'TimelineItem',
   props: {
-    time: {
-      type: [String, Number],
-      default: undefined
-    },
-    title: {
-      type: String,
-      default: undefined
-    },
-    content: {
-      type: String,
-      default: undefined
-    },
+    time: [String, Number],
+    title: String,
+    content: String,
     type: {
       type: String as PropType<
       'default' | 'success' | 'error' | 'warning' | 'info'

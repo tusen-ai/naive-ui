@@ -301,6 +301,8 @@
     - `on-checked-change` => `on-update:checked`
 - [x] thing
 - [x] time
+  - break
+    - `type` default from `'relative'` to `'date-time'`
 - [x] time-picker
   - break
     - `v-model` => `v-model:value`
@@ -413,7 +415,7 @@
   - [x] 文档网站主题切换
   - [x] 文档网站 demo 样式
   - [x] anchor bug！
-  - [ ] getKey select & autocomplete type safe & input event interface? onInput value | null or value
+  - [x] getKey select & autocomplete type safe & input event interface? onInput value | null or value
   - [x] vshow (maybe create a vue pr)
   - [x] jsx focusin out (waiting for vue update)
   - [x] inject key & value in type (I should use InjectionKey...)
@@ -423,9 +425,10 @@
   - [ ] build icon
   - [ ] compat
   - [ ] on update value api
-  - [ ] upload dragger
+  - [ ] fix upload dragger
   - [ ] fix table sorter
   - [ ] tree 多选节点第二个 demo
+  - [ ] table treemate!!!
 
 ## Info
 

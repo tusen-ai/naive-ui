@@ -7,24 +7,21 @@ export default defineComponent({
   props: {
     time: {
       type: [Number, Date] as PropType<number | Date>,
-      default: undefined
+      default: () => Date.now()
     },
     type: {
       type: String as PropType<'relative' | 'date' | 'datetime'>,
-      default: 'relative'
+      default: 'datetime'
     },
     to: {
       type: [Number, Date] as PropType<number | Date>,
-      default: () => new Date()
+      default: () => Date.now()
     },
     unix: {
       type: Boolean,
       default: false
     },
-    format: {
-      type: String,
-      default: undefined
-    },
+    format: String,
     text: {
       type: Boolean,
       default: false
