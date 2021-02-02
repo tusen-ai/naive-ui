@@ -5,7 +5,8 @@ import {
   PropType,
   toRef,
   reactive,
-  provide
+  provide,
+  ref
 } from 'vue'
 import { intersection } from 'lodash-es'
 import { useTheme } from '../../_mixins'
@@ -14,29 +15,37 @@ import { call, warn } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import { collapseLight, CollapseTheme } from '../styles'
 import style from './styles/index.cssr'
+import { useMergedState } from 'vooks'
+import {
+  OnItemHeaderClick,
+  OnUpdateExpandedNames,
+  OnUpdateExpandedNamesImpl,
+  HeaderClickInfo,
+  OnItemHeaderClickImpl
+} from './interface'
 
 export interface NCollapseInjection {
   arrowPlacement: 'left' | 'right'
   displayDirective: 'if' | 'show'
-  expandedNames: string | string[]
-  collectedItemNames: string[]
-  toggleItem: (collapse: boolean, name: string, event: MouseEvent) => void
-}
-
-interface HeaderClickInfo {
-  name: string
-  expanded: boolean
-  event: MouseEvent
+  expandedNames: string | number | Array<string | number> | null
+  collectedItemNames: Array<string | number>
+  toggleItem: (
+    collapse: boolean,
+    name: string | number,
+    event: MouseEvent
+  ) => void
 }
 
 export default defineComponent({
   name: 'Collapse',
   props: {
     ...(useTheme.props as ThemeProps<CollapseTheme>),
-    expandedNames: {
-      type: [Array, String] as PropType<string | string[]>,
-      default: undefined
-    },
+    defaultExpandesNames: [Array, String] as PropType<
+    string | number | Array<string | number> | null
+    >,
+    expandedNames: [Array, String] as PropType<
+    string | number | Array<string | number> | null
+    >,
     arrowPlacement: {
       type: String as PropType<'left' | 'right'>,
       default: 'left'
@@ -49,18 +58,18 @@ export default defineComponent({
       type: String as PropType<'if' | 'show'>,
       default: 'if'
     },
-    onItemHeaderClick: {
-      type: Function as PropType<MaybeArray<(info: HeaderClickInfo) => void>>,
-      default: undefined
-    },
+    onItemHeaderClick: Function as PropType<MaybeArray<OnItemHeaderClick>>,
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:expandedNames': Function as PropType<
-    MaybeArray<(expandedNames: string[]) => void>
+    MaybeArray<OnUpdateExpandedNames>
+    >,
+    onUpdateExpandedNames: Function as PropType<
+    MaybeArray<OnUpdateExpandedNames>
     >,
     // deprecated
     onExpandedNamesChange: {
       type: (Function as Function) as PropType<
-      MaybeArray<(expandedNames: string[]) => void> | undefined
+      MaybeArray<OnUpdateExpandedNames> | undefined
       >,
       validator: () => {
         if (__DEV__) {
@@ -75,6 +84,12 @@ export default defineComponent({
     }
   },
   setup (props) {
+    const uncontrolledExpandedNamesRef = ref(null)
+    const controlledExpandedNamesRef = computed(() => props.expandedNames)
+    const mergedExpandedNames = useMergedState(
+      controlledExpandedNamesRef,
+      uncontrolledExpandedNamesRef
+    )
     const collectedItemNames: string[] = []
     const themeRef = useTheme(
       'Collapse',
@@ -83,24 +98,39 @@ export default defineComponent({
       collapseLight,
       props
     )
-    function doUpdateExpandedNames (names: string[]): void {
+    function doUpdateExpandedNames (
+      names: Array<string | number> | string | number
+    ): void {
       const {
-        'onUpdate:expandedNames': updateExpandedNames,
+        'onUpdate:expandedNames': _onUpdateExpandedNames,
+        onUpdateExpandedNames,
         onExpandedNamesChange
       } = props
-      if (updateExpandedNames) call(updateExpandedNames, names)
-      if (onExpandedNamesChange) call(onExpandedNamesChange, names)
+      if (onUpdateExpandedNames) {
+        call(onUpdateExpandedNames as OnUpdateExpandedNamesImpl, names)
+      }
+      if (_onUpdateExpandedNames) {
+        call(_onUpdateExpandedNames as OnUpdateExpandedNamesImpl, names)
+      }
+      if (onExpandedNamesChange) {
+        call(onExpandedNamesChange as OnUpdateExpandedNamesImpl, names)
+      }
     }
-    function doItemHeaderClick (info: HeaderClickInfo): void {
+    function doItemHeaderClick<T extends string | number> (
+      info: HeaderClickInfo<T>
+    ): void {
       const { onItemHeaderClick } = props
-      if (onItemHeaderClick) call(onItemHeaderClick, info)
+      if (onItemHeaderClick) {
+        call(onItemHeaderClick as OnItemHeaderClickImpl, info)
+      }
     }
     function toggleItem (
       collapse: boolean,
-      name: string,
+      name: string | number,
       event: MouseEvent
     ): void {
-      const { accordion, expandedNames } = props
+      const { accordion } = props
+      const { value: expandedNames } = mergedExpandedNames
       if (accordion) {
         if (collapse) {
           doUpdateExpandedNames([name])
@@ -135,7 +165,7 @@ export default defineComponent({
       reactive({
         arrowPlacement: toRef(props, 'arrowPlacement'),
         displayDirective: toRef(props, 'displayDirective'),
-        expandedNames: toRef(props, 'expandedNames'),
+        expandedNames: mergedExpandedNames,
         collectedItemNames,
         toggleItem
       })

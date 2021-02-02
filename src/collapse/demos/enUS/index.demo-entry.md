@@ -18,13 +18,14 @@ item-header-click
 ### Collapse Props
 
 | Name | Type | Default | Description |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- | --- |
 | accordion | `boolean` | `false` |  |
 | arrow-placement | `'left' \| 'right'` | `'left'` |  |
+| default-expanded-names | `string \| number | Array<string \| number> | null` | `null` | If set to `accrodion`, it will be a non-array value. |
 | display-directive | `'if' \| 'show'` | `'if'` | The display directive to use when its inner `n-collapse-item` render content. `'if'` corresponds to `v-if` and `'show'` corresponds to `v-show`. |
-| expanded-names | `Array<string \| number>` | `undefined` |  |
-| on-update-expanded-names | `(expandedNames: Array<string>) => any` | `undefined` |  |
-| on-item-header-click | `(data: { name: string, expanded: boolean, event: MouseEvent }) => any` | `undefined` |  |
+| expanded-names | `string \| number | Array<string \| number> | null` | `undefined` | If set to `accrodion`, it will be a non-array value. |
+| on-update:expanded-names | `(expandedNames: Array<string \| number> | string | number | null) => any` | `undefined` |  |
+| on-item-header-click | `(data: { name: string | number, expanded: boolean, event: MouseEvent }) => any` | `undefined` |  |
 
 ### Collapse Item Props
 

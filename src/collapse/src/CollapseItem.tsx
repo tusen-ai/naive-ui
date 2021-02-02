@@ -17,18 +17,12 @@ import { NCollapseInjection } from './Collapse'
 export default defineComponent({
   name: 'CollapseItem',
   props: {
-    title: {
-      type: String,
-      default: undefined
-    },
+    title: String,
     name: {
-      type: String,
-      default: undefined
+      type: [String, Number],
+      default: ''
     },
-    displayDirective: {
-      type: String as PropType<'if' | 'show' | undefined>,
-      default: undefined
-    }
+    displayDirective: String as PropType<'if' | 'show'>
   },
   setup (props) {
     const NCollapse = inject<NCollapseInjection>(
