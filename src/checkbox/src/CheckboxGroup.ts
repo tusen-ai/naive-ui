@@ -10,7 +10,7 @@ import {
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { useFormItem } from '../../_mixins'
-import { warn, call, getSlot, MaybeArray } from '../../_utils'
+import { warn, call, MaybeArray } from '../../_utils'
 
 export interface CheckboxGroupInjection {
   disabled: boolean
@@ -68,7 +68,9 @@ export default defineComponent({
       uncontrolledValueRef
     )
     const valueSetRef = computed<Set<string | number>>(() => {
-      if (Array.isArray(mergedValueRef.value)) { return new Set(mergedValueRef.value) }
+      if (Array.isArray(mergedValueRef.value)) {
+        return new Set(mergedValueRef.value)
+      }
       return new Set()
     })
     function toggleCheckbox (
@@ -98,6 +100,7 @@ export default defineComponent({
           if (~index) {
             groupValue.splice(index, 1)
             if (onUpdateValue) call(onUpdateValue, groupValue)
+            if (_onUpdateValue) call(_onUpdateValue, groupValue)
             if (onChange) call(onChange, groupValue) // deprecated
             nTriggerFormInput()
             nTriggerFormChange()
@@ -106,11 +109,13 @@ export default defineComponent({
       } else {
         if (checked) {
           if (onUpdateValue) call(onUpdateValue, [checkboxValue])
+          if (_onUpdateValue) call(_onUpdateValue, [checkboxValue])
           if (onChange) call(onChange, [checkboxValue]) // deprecated
           nTriggerFormInput()
           nTriggerFormChange()
         } else {
           if (onUpdateValue) call(onUpdateValue, [])
+          if (_onUpdateValue) call(_onUpdateValue, [])
           if (onChange) call(onChange, []) // deprecated
           nTriggerFormInput()
           nTriggerFormChange()
@@ -133,7 +138,7 @@ export default defineComponent({
       {
         class: 'n-checkbox-group'
       },
-      getSlot(this)
+      this.$slots
     )
   }
 })

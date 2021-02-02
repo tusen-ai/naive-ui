@@ -25,22 +25,16 @@ export default defineComponent({
   name: 'Checkbox',
   props: {
     ...(useTheme.props as ThemeProps<CheckboxTheme>),
-    size: {
-      type: String as PropType<'small' | 'medium' | 'large' | undefined>,
-      default: undefined
-    },
+    size: String as PropType<'small' | 'medium' | 'large'>,
     checked: {
-      type: Boolean,
+      type: Boolean as PropType<boolean | undefined>,
       default: undefined
     },
     defaultChecked: {
       type: Boolean,
       default: false
     },
-    value: {
-      type: [String, Number],
-      default: undefined
-    },
+    value: [String, Number],
     disabled: {
       type: Boolean,
       default: false
@@ -94,7 +88,7 @@ export default defineComponent({
     const renderedCheckedRef = useMemo(() => {
       if (NCheckboxGroup) {
         const groupValueSet = NCheckboxGroup.valueSet
-        if (groupValueSet) {
+        if (groupValueSet && props.value !== undefined) {
           return groupValueSet.has(props.value)
         }
         return false
@@ -130,7 +124,7 @@ export default defineComponent({
       props
     )
     function toggle (): void {
-      if (NCheckboxGroup) {
+      if (NCheckboxGroup && props.value !== undefined) {
         NCheckboxGroup.toggleCheckbox(!renderedCheckedRef.value, props.value)
       } else {
         const {
@@ -269,7 +263,6 @@ export default defineComponent({
                 )
             }}
           </NIconSwitchTransition>
-
           <div class="n-checkbox-box__border" />
         </div>
         {label !== null || $slots.default ? (

@@ -28,12 +28,12 @@ event
 
 ### Checkbox Group Props
 
-| Name            | Type                          | Default     | Description |
-| --------------- | ----------------------------- | ----------- | ----------- |
-| disabled        | `boolean`                     | `false`     |             |
-| theme           | `'light' \| 'dark' \| string` | `undefined` |             |
-| value           | `Array<string \| number>`     | `null`      |             |
-| on-update:value | `(value: string \| number)`   | `undefined` |             |
+| Name            | Type                        | Default     | Description |
+| --------------- | --------------------------- | ----------- | ----------- | --- |
+| disabled        | `boolean`                   | `false`     |             |
+| default-value   | `Array<string \| number>    | null`       | `null`      |     |
+| value           | `Array<string \| number>    | null`       | `undefined` |     |
+| on-update:value | `(value: string \| number)` | `undefined` |             |
 
 ## Slots
 
