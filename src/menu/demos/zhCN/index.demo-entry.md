@@ -37,30 +37,30 @@ collapse
 
 ### MenuItem Properties
 
-| 名称 | 类型 | 说明 |
-| --- | --- | --- |
-| disabled | `boolean` |  |
-| extra | `string \| (() => VNode \| Array<VNode>)` |  |
-| icon | `() => VNode` |  |
-| key | `string` | 菜单项的标识符，**必需** |
-| title | `string \| (() => VNode \| Array<VNode>)` |  |
+| 名称      | 类型                         | 说明           |
+| --------- | ---------------------------- | -------------- |
+| disabled? | `boolean`                    |                |
+| extra?    | `string \| () => VNodeChild` |                |
+| icon?     | `() => VNode`                |                |
+| key       | `string`                     | 菜单项的标识符 |
+| title     | `string \| () => VNodeChild` |                |
 
 ### Submenu Properties
 
-| 名称 | 类型 | 说明 |
-| --- | --- | --- |
-| children | `Array<MenuItem \| Submenu \| MenuItemGroup>` | **必需** |
-| disabled | `boolean` |  |
-| extra | `string \| (() => VNode \| Array<VNode>)` |  |
-| icon | `() => VNode` |  |
-| key | `string` | 菜单项的标识符，**必需** |
-| title | `string \| (() => VNode \| Array<VNode>)` |  |
+| 名称      | 类型                                          | 说明           |
+| --------- | --------------------------------------------- | -------------- |
+| children  | `Array<MenuItem \| Submenu \| MenuItemGroup>` |                |
+| disabled? | `boolean`                                     |                |
+| extra?    | `string \| () => VNodeChild`                  |                |
+| icon?     | `() => VNodeChild`                            |                |
+| key       | `string`                                      | 菜单项的标识符 |
+| title     | `string \| (() => VNodeChild)`                |                |
 
 ### MenuItemGroup Properties
 
-| 名称 | 类型 | 说明 |
-| --- | --- | --- |
-| children | `Array<MenuItem \| Submenu \| MenuItemGroup>` | **必需** |
-| key | `string` | 菜单项的标识符，**必需** |
-| title | `string \| (() => VNode \| Array<VNode>)` |  |
-| type | `'group'` | **必需** |
+| 名称     | 类型                                          | 说明           |
+| -------- | --------------------------------------------- | -------------- |
+| children | `Array<MenuItem \| Submenu \| MenuItemGroup>` |                |
+| key      | `string`                                      | 菜单项的标识符 |
+| title    | `string \| (() => VNodeChild)`                |                |
+| type     | `'group'`                                     |                |

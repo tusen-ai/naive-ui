@@ -1,5 +1,5 @@
-import { h, defineComponent, provide, PropType, reactive } from 'vue'
-import { render } from '../../_utils'
+import { h, defineComponent, provide, PropType, reactive, Fragment } from 'vue'
+import { render as Render } from '../../_utils'
 import { useMenuChild } from './use-menu-child'
 import type { MenuItemGroupInjection } from './use-menu-child'
 import { itemRenderer } from './utils'
@@ -25,29 +25,26 @@ export default defineComponent({
     )
     return function () {
       const paddingLeft = MenuChild.paddingLeft.value
-      return h(
-        'div',
-        {
-          class: 'n-menu-item-group'
-        },
-        [
-          h(
-            'span',
-            {
-              class: 'n-menu-item-group-title',
-              style: paddingLeft && `padding-left: ${paddingLeft}px;`
-            },
-            [
-              h(render, {
-                render: props.title
-              })
-            ]
-          ),
-          h(
-            'div',
-            props.tmNodes.map((tmNode) => itemRenderer(tmNode))
-          )
-        ]
+      return (
+        <div class="n-menu-item-group">
+          <span
+            class="n-menu-item-group-title"
+            style={
+              paddingLeft !== undefined
+                ? `padding-left: ${paddingLeft}px;`
+                : undefined
+            }
+          >
+            <Render render={props.title} />
+            {props.extra ? (
+              <>
+                {' '}
+                <Render render={props.extra} />
+              </>
+            ) : null}
+          </span>
+          <div>{props.tmNodes.map((tmNode) => itemRenderer(tmNode))}</div>
+        </div>
       )
     }
   }

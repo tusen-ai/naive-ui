@@ -30,7 +30,7 @@ group-debug
 
 | 属性  | 类型               | 说明     |
 | ----- | ------------------ | -------- |
-| icon  | `() => VNode`      |          |
+| icon? | `() => VNodeChild` |          |
 | key   | `string \| number` | 需要唯一 |
 | label | `string`           |          |
 
@@ -47,7 +47,7 @@ group-debug
 | --- | --- | --- |
 | type | `'submenu'` |  |
 | label | `string` |  |
-| icon | `() => VNode` |  |
+| icon? | `() => VNodeChild` |  |
 | key | `string \| number` | 需要唯一 |
 | children | `Array<DropdownOption \| DropdownDivider \| DropdownGroup \| DropdownSubmenu>` |  |
 
@@ -57,6 +57,6 @@ group-debug
 | --- | --- | --- |
 | type | `'group'` |  |
 | label | `string` |  |
-| icon | `() => VNode` |  |
+| icon? | `() => VNodeChild` |  |
 | key | `string \| number` | 需要唯一 |
 | children | `Array<DropdownOption \| DropdownDivider \| DropdownSubmenu>` |  |

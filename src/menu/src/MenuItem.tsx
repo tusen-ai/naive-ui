@@ -15,14 +15,8 @@ export const menuItemProps = {
     type: Boolean,
     default: false
   },
-  icon: {
-    type: Function,
-    default: undefined
-  },
-  onClick: {
-    type: Function,
-    default: undefined
-  }
+  icon: Function,
+  onClick: Function
 } as const
 
 export default defineComponent({
@@ -74,28 +68,24 @@ export default defineComponent({
     }
   },
   render () {
-    return h(
-      'div',
-      {
-        class: [
+    return (
+      <div
+        class={[
           'n-menu-item',
           {
             'n-menu-item--selected': this.selected,
             'n-menu-item--disabled': this.mergedDisabled
           }
-        ]
-      },
-      [
-        h(
-          NTooltip,
-          {
-            theme: this.mergedTheme.peers.Tooltip,
-            themeOverrides: this.mergedTheme.peerOverrides.Tooltip,
-            trigger: 'hover',
-            placement: this.dropdownPlacement,
-            disabled: !this.dropdownEnabled
-          },
-          {
+        ]}
+      >
+        <NTooltip
+          theme={this.mergedTheme.peers.Tooltip}
+          themeOverrides={this.mergedTheme.peerOverrides.Tooltip}
+          trigger="hover"
+          placement={this.dropdownPlacement}
+          disabled={!this.dropdownEnabled}
+        >
+          {{
             default: () => this.title,
             trigger: () => {
               return h(NMenuItemContent, {
@@ -104,14 +94,15 @@ export default defineComponent({
                 maxIconSize: this.maxIconSize,
                 activeIconSize: this.activeIconSize,
                 title: this.title,
+                extra: this.extra,
                 disabled: this.mergedDisabled,
                 icon: this.icon,
                 onClick: this.handleClick
               })
             }
-          }
-        )
-      ]
+          }}
+        </NTooltip>
+      </div>
     )
   }
 })

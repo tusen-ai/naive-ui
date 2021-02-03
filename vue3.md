@@ -421,7 +421,7 @@
   - [x] inject key & value in type (I should use InjectionKey...)
   - [x] form item no label css
   - [x] unify treemate ignored
-  - [ ] fix menu extra
+  - [x] fix menu extra
   - [x] build icon
   - [x] compat
   - [ ] on update value api

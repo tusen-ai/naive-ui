@@ -29,7 +29,7 @@ For other props, see [Popover Props](n-popover#Props). Note that `arrow`, `raw` 
 
 | Property | Type               | Description       |
 | -------- | ------------------ | ----------------- |
-| icon     | `() => VNode`      |                   |
+| icon?    | `() => VNodeChild` |                   |
 | key      | `string \| number` | Should be unique. |
 | label    | `string`           |                   |
 
@@ -46,7 +46,7 @@ For other props, see [Popover Props](n-popover#Props). Note that `arrow`, `raw` 
 | --- | --- | --- |
 | type | `'submenu'` |  |
 | label | `string` |  |
-| icon | `() => VNode` |  |
+| icon? | `() => VNodeChild` |  |
 | key | `string \| number` | Should be unique. |
 | children | `Array<DropdownOption \| DropdownDivider \| DropdownSubmenu>` |  |
 
@@ -56,6 +56,6 @@ For other props, see [Popover Props](n-popover#Props). Note that `arrow`, `raw` 
 | --- | --- | --- |
 | type | `'group'` |  |
 | label | `string` |  |
-| icon | `() => VNode` |  |
+| icon? | `() => VNodeChild` |  |
 | key | `string \| number` | Should be unique. |
 | children | `Array<DropdownOption \| DropdownDivider \| DropdownSubmenu>` |  |

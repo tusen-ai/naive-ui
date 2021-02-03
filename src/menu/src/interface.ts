@@ -10,6 +10,8 @@ export interface MenuOptionBase {
   children?: Array<MenuOption | MenuGroupOption>
   extra?: string
   [key: string]: unknown
+  /** @deprecated */
+  titleExtra?: string | (() => VNodeChild)
 }
 
 export interface MenuGroupOptionBase extends MenuOptionBase {

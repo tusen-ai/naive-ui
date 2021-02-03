@@ -39,7 +39,7 @@ export default defineComponent({
       required: true
     },
     parentKey: {
-      type: [String, Number],
+      type: [String, Number] as PropType<string | number | null>,
       default: null
     },
     placement: {

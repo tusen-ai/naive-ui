@@ -1,7 +1,7 @@
 import { App } from 'vue'
 import version from './version'
-import type { Hljs } from './_mixins'
 import { NLocale } from './locales'
+import type { Hljs } from './_mixins'
 
 type ComponentType = any
 
@@ -12,11 +12,11 @@ interface NUiInstance {
   /** @deprecated */
   use: (plugin: { install: (naive: NUiInstance) => void }) => void
   /** @deprecated */
-  hljs: any
+  hljs?: Hljs
   /** @deprecated */
-  setHljs: (hljs: any) => void
+  setHljs: (hljs: Hljs) => void
   /** @deprecated */
-  setHighlightjs: (hljs: any) => void
+  setHighlightjs: (hljs: Hljs) => void
   /** @deprecated */
   locales: Record<string, NLocale>
   /** @deprecated */
@@ -32,7 +32,7 @@ interface NUiCreateOptions {
   hljs?: Hljs
 }
 
-function setHljs (this: NUiInstance, hljs: any): void {
+function setHljs (this: NUiInstance, hljs: Hljs): void {
   this.hljs = hljs
 }
 

@@ -120,7 +120,7 @@ const menuChildProps = {
   internalKey: {
     type: [String, Number] as PropType<Key>,
     required: true
-  } as const,
+  },
   root: {
     type: Boolean,
     default: false
@@ -129,11 +129,9 @@ const menuChildProps = {
     type: Number,
     required: true
   },
-  title: {
-    type: [String, Function],
-    default: undefined
-  }
-}
+  title: [String, Function] as PropType<string | Function>,
+  extra: [String, Function] as PropType<string | Function>
+} as const
 
 useMenuChild.props = menuChildProps
 

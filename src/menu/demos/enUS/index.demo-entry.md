@@ -37,30 +37,30 @@ collapse
 
 ### MenuItem Properties
 
-| Name     | Type          | Description                                    |
-| -------- | ------------- | ---------------------------------------------- |
-| disabled | `boolean`     |                                                |
-| extra    | `string`      |                                                |
-| icon     | `() => VNode` |                                                |
-| key      | `string`      | The indentifier of the menu item. **required** |
-| title    | `string`      |                                                |
+| Name | Type | Description |
+| --- | --- | --- |
+| disabled? | `boolean` |  |
+| extra? | `string \| (() => VNodeChild)` |  |
+| icon? | `() => VNodeChild` |  |
+| key | `string` | The indentifier of the menu item. |
+| title | `string \| (() => VNodeChild)` |  |
 
 ### Submenu Properties
 
 | Name | Type | Description |
 | --- | --- | --- |
-| children | `Array<MenuItem \| Submenu \| MenuItemGroup>` | **required** |
-| disabled | `boolean` |  |
-| extra | `string` |  |
-| icon | `() => VNode` |  |
-| key | `string` | The indentifier of the submenu. **required** |
-| title | `string` |  |
+| children | `Array<MenuItem \| Submenu \| MenuItemGroup>` |  |
+| disabled? | `boolean` |  |
+| extra? | `string \| (() => VNodeChild)` |  |
+| icon? | `() => VNodeChild` |  |
+| key | `string` | The indentifier of the submenu. |
+| title | `string \| (() => VNodeChild)` |  |
 
 ### MenuItemGroup Properties
 
 | Name | Type | Description |
 | --- | --- | --- |
 | children | `Array<MenuItem \| Submenu \| MenuItemGroup>` | **required** |
-| key | `string` | 菜单项的标识符，**必需** |
-| title | `string` |  |
+| key | `string` | The indentifier of the menu group. |
+| title | `string \| (() => VNodeChild)` |  |
 | type | `'group'` | **required** |
