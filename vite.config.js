@@ -23,14 +23,6 @@ module.exports = {
     __DEV__: process.env.NODE_ENV !== 'production'
   },
   optimizeDeps: {
-    include: [
-      'highlight.js/lib/core',
-      'highlight.js/lib/languages/cpp',
-      'highlight.js/lib/languages/javascript',
-      'highlight.js/lib/languages/python',
-      '@vicons/fluent/Compose16Regular.js',
-      'date-fns/locale'
-    ],
     exclude: ['__INDEX__']
   },
   build: {

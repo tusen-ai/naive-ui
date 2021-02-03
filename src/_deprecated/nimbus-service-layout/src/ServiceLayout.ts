@@ -68,8 +68,8 @@ export default defineComponent({
     })
     if (route) {
       syncValue(route.path)
-      watch(route, (to) => {
-        syncValue(to.path)
+      watch(toRef(route, 'path'), (path) => {
+        syncValue(path)
       })
     }
     function doUpdateCollapsed (value: boolean): void {
