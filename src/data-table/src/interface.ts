@@ -1,3 +1,4 @@
+import { TreeNode, TreeMate } from 'treemate'
 import { CSSProperties, VNodeChild } from 'vue'
 import { NLocale } from '../../locales'
 import { MergedTheme } from '../../_mixins'
@@ -27,6 +28,8 @@ export interface TableNode {
   [key: string]: unknown
   children?: TableNode[]
 }
+
+export type TmNode = TreeNode<TableNode>
 
 export type SortOrder = 'ascend' | 'descend' | false
 
@@ -65,7 +68,8 @@ export interface DataTableInjection {
   mergedTheme: MergedTheme<DataTableTheme>
   scrollX?: string | number
   columns: TableColumnInfo[]
-  paginatedData: TableNode[]
+  treeMate: TreeMate<TableNode>
+  paginatedData: TmNode[]
   leftFixedColumns: TableColumnInfo[]
   rightFixedColumns: TableColumnInfo[]
   fixedColumnLeftMap: Record<ColumnKey, number | undefined>

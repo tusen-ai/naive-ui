@@ -1,18 +1,19 @@
 import { computed, ComputedRef, ref, toRef } from 'vue'
 import { useMergedState } from 'vooks'
 import { DataTableProps } from './DataTable'
-import { RowKey, TableColumnInfo, TableNode } from './interface'
+import { RowKey, TableColumnInfo, TableNode, TmNode } from './interface'
 import { call } from '../../_utils'
-import { createRowKey, setCheckStatusOfRow } from './utils'
+import { TreeMate } from 'treemate'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function useCheck (
   props: DataTableProps,
   data: {
-    paginatedDataRef: ComputedRef<TableNode[]>
+    paginatedDataRef: ComputedRef<TmNode[]>
+    treeMateRef: ComputedRef<TreeMate<TableNode>>
   }
 ) {
-  const { paginatedDataRef } = data
+  const { paginatedDataRef, treeMateRef } = data
   const uncontrolledCheckedRowKeysRef = ref(props.defaultCheckedRowKeys)
   const controlledCheckedRowKeysRef = toRef(props, 'checkedRowKeys')
   const mergedCheckedRowKeysRef = useMergedState(
@@ -21,9 +22,8 @@ export function useCheck (
   )
   const countOfCurrentPageCheckedRowsRef = computed(() => {
     const { value: checkedRowKeys } = mergedCheckedRowKeysRef
-    const { rowKey } = props
-    return paginatedDataRef.value.reduce((total, row) => {
-      const key = createRowKey(row, rowKey)
+    return paginatedDataRef.value.reduce((total, tmNode) => {
+      const { key } = tmNode
       return total + (checkedRowKeys.includes(key) ? 1 : 0)
     }, 0)
   })
@@ -48,26 +48,35 @@ export function useCheck (
     uncontrolledCheckedRowKeysRef.value = keys
   }
   function doCheckAll (column: TableColumnInfo): void {
-    const checkedRowKeys = Array.from(mergedCheckedRowKeysRef.value)
-    const { rowKey } = props
-    paginatedDataRef.value.forEach((row) => {
-      if (column.disabled?.(row)) {
+    const rowKeysToCheck: RowKey[] = []
+    paginatedDataRef.value.forEach((tmNode) => {
+      if (column.disabled?.(tmNode.rawNode)) {
         return
       }
-      setCheckStatusOfRow(checkedRowKeys, row, true, rowKey)
+      if (!tmNode.disabled) {
+        rowKeysToCheck.push(tmNode.key)
+      }
     })
-    doUpdateCheckedRowKeys(checkedRowKeys)
+    doUpdateCheckedRowKeys(
+      treeMateRef.value.check(rowKeysToCheck, mergedCheckedRowKeysRef.value)
+        .checkedKeys
+    )
   }
   function doUncheckAll (column: TableColumnInfo): void {
-    const checkedRowKeys = Array.from(mergedCheckedRowKeysRef.value)
-    const { rowKey } = props
-    paginatedDataRef.value.forEach((row) => {
+    const rowKeysToUncheck: RowKey[] = []
+    paginatedDataRef.value.forEach((tmNode) => {
+      const { rawNode: row } = tmNode
       if (column.disabled?.(row)) {
         return
       }
-      setCheckStatusOfRow(checkedRowKeys, row, false, rowKey)
+      if (!tmNode.disabled) {
+        rowKeysToUncheck.push(tmNode.key)
+      }
     })
-    doUpdateCheckedRowKeys(checkedRowKeys)
+    doUpdateCheckedRowKeys(
+      treeMateRef.value.uncheck(rowKeysToUncheck, mergedCheckedRowKeysRef.value)
+        .checkedKeys
+    )
   }
   return {
     mergedCheckedRowKeys: mergedCheckedRowKeysRef,

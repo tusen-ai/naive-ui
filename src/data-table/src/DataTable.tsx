@@ -195,6 +195,7 @@ export default defineComponent({
     )
     const mainTableInstRef = ref<MainTableRef | null>(null)
     const {
+      treeMate: treeMateRef,
       mergedCurrentPage: mergedCurrentPageRef,
       paginatedData: paginatedDataRef,
       currentPage,
@@ -218,7 +219,8 @@ export default defineComponent({
       allRowsChecked,
       mergedCheckedRowKeys
     } = useCheck(props, {
-      paginatedDataRef
+      paginatedDataRef,
+      treeMateRef
     })
     const {
       handleTableBodyScroll,
@@ -235,6 +237,7 @@ export default defineComponent({
     provide<DataTableInjection>(
       'NDataTable',
       reactive({
+        treeMate: treeMateRef,
         mergedTheme: themeRef,
         scrollX: computed(() => props.scrollX),
         columns: toRef(props, 'columns'),

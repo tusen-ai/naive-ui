@@ -1,8 +1,6 @@
 import { CSSProperties } from 'vue'
 import { formatLength } from '../../_utils'
 import type {
-  CreateRowKey,
-  RowKey,
   SortOrder,
   TableColumnInfo,
   TableNode,
@@ -42,28 +40,6 @@ export function createCustomWidthStyle (
   }
 
   return undefined
-}
-
-export function setCheckStatusOfRow (
-  checkedRowKeys: RowKey[],
-  row: TableNode,
-  checked: boolean,
-  rowKey?: CreateRowKey
-): void {
-  const key = createRowKey(row, rowKey)
-  while (true) {
-    const checkedRowIndex = checkedRowKeys.findIndex(
-      (checkedRowKey) => checkedRowKey === key
-    )
-    if (~checkedRowIndex) checkedRowKeys.splice(checkedRowIndex, 1)
-    else break
-  }
-  if (checked) checkedRowKeys.push(key)
-}
-
-export function createRowKey (row: TableNode, rowKey?: CreateRowKey): RowKey {
-  if (rowKey) return rowKey(row)
-  return row.key as RowKey
 }
 
 export function createRowClassName (

@@ -1,5 +1,6 @@
 import { computed, ref } from 'vue'
 import { useMergedState } from 'vooks'
+import { createTreeMate } from 'treemate'
 import type { DataTableProps } from './DataTable'
 import type {
   ColumnKey,
@@ -9,7 +10,8 @@ import type {
   SortOrder,
   SortState,
   TableColumnInfo,
-  TableNode
+  TableNode,
+  TmNode
 } from './interface'
 import { createShallowClonedObject, getFlagOfOrder } from './utils'
 import { PaginationProps } from '../../pagination/src/Pagination'
@@ -19,6 +21,12 @@ import { call, warn } from '../../_utils'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function useTableData (props: DataTableProps) {
+  const treeMateRef = computed(() =>
+    createTreeMate<TableNode>(props.data, {
+      getKey: props.rowKey
+    })
+  )
+
   const uncontrolledFilterStateRef = ref<FilterState>({})
   const uncontrolledSortStateRef = ref<SortState | null>(null)
   const uncontrolledCurrentPageRef = ref(1)
@@ -123,17 +131,20 @@ export function useTableData (props: DataTableProps) {
     return activeFilters
   })
 
-  const filteredDataRef = computed<TableNode[]>(() => {
+  const filteredDataRef = computed<TmNode[]>(() => {
     const mergedFilterState = mergedFilterStateRef.value
     const { columns } = props
     function createDefaultFilter (columnKey: ColumnKey): Filter {
       return (filterOptionValue: FilterOptionValue, row: TableNode) =>
         !!~String(row[columnKey]).indexOf(String(filterOptionValue))
     }
-    const { data } = props
+    const {
+      value: { treeNodes: data }
+    } = treeMateRef
     const columnEntries = columns.map((column) => [column.key, column] as const)
     return data
-      ? data.filter((row) => {
+      ? data.filter((tmNode) => {
+        const { rawNode: row } = tmNode
         // traverse all filters
         for (const [columnKey, column] of columnEntries) {
           let activeFilterOptionValues = mergedFilterState[columnKey]
@@ -174,7 +185,7 @@ export function useTableData (props: DataTableProps) {
       : []
   })
 
-  const sortedDataRef = computed<TableNode[]>(() => {
+  const sortedDataRef = computed<TmNode[]>(() => {
     const activeSorter = mergedSortStateRef.value
     if (activeSorter) {
       // When async, mergedSortState.sorter should be true
@@ -204,14 +215,15 @@ export function useTableData (props: DataTableProps) {
           }
           : activeSorter.sorter
       return filteredData.sort(
-        (row1, row2) => getFlagOfOrder(order) * sorter(row1, row2)
+        (tmNode1, tmNode2) =>
+          getFlagOfOrder(order) * sorter(tmNode1.rawNode, tmNode2.rawNode)
       )
     }
     return filteredDataRef.value
   })
 
-  const paginatedDataRef = computed<TableNode[]>(() => {
-    if (props.remote) return props.data
+  const paginatedDataRef = computed<TmNode[]>(() => {
+    if (props.remote) return treeMateRef.value.treeNodes
     if (!props.pagination) return sortedDataRef.value
     const pageSize = mergedPageSizeRef.value
     const startIndex = (mergedCurrentPageRef.value - 1) * pageSize
@@ -325,6 +337,7 @@ export function useTableData (props: DataTableProps) {
     }
   }
   return {
+    treeMate: treeMateRef,
     mergedCurrentPage: mergedCurrentPageRef,
     mergedPagination: mergedPaginationRef,
     paginatedData: paginatedDataRef,

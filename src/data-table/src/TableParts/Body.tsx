@@ -2,13 +2,8 @@ import { h, ref, defineComponent, inject } from 'vue'
 import { NCheckbox } from '../../../checkbox'
 import { NScrollbar, ScrollbarRef } from '../../../scrollbar'
 import { formatLength } from '../../../_utils'
-import { DataTableInjection, MainTableInjection, TableNode } from '../interface'
-import {
-  createCustomWidthStyle,
-  setCheckStatusOfRow,
-  createRowKey,
-  createRowClassName
-} from '../utils'
+import { DataTableInjection, MainTableInjection, TmNode } from '../interface'
+import { createCustomWidthStyle, createRowClassName } from '../utils'
 import Cell from './Cell'
 
 export default defineComponent({
@@ -22,12 +17,20 @@ export default defineComponent({
     ) as MainTableInjection
     const scrollbarInstRef = ref<ScrollbarRef | null>(null)
     function handleCheckboxUpdateChecked (
-      row: TableNode,
+      tmNode: TmNode,
       checked: boolean
     ): void {
-      const newCheckedRowKeys = Array.from(NDataTable.mergedCheckedRowKeys)
-      setCheckStatusOfRow(newCheckedRowKeys, row, checked, NDataTable.rowKey)
-      NDataTable.doUpdateCheckedRowKeys(newCheckedRowKeys)
+      NDataTable.doUpdateCheckedRowKeys(
+        checked
+          ? NDataTable.treeMate.check(
+            tmNode.key,
+            NDataTable.mergedCheckedRowKeys
+          ).checkedKeys
+          : NDataTable.treeMate.uncheck(
+            tmNode.key,
+            NDataTable.mergedCheckedRowKeys
+          ).checkedKeys
+      )
     }
     function getScrollContainer (): HTMLElement | null {
       const { value } = scrollbarInstRef
@@ -75,7 +78,8 @@ export default defineComponent({
                 ))}
               </colgroup>
               <tbody ref="tbody" class="n-data-table-tbody">
-                {NDataTable.paginatedData.map((row, index) => {
+                {NDataTable.paginatedData.map((tmNode, index) => {
+                  const { rawNode: row } = tmNode
                   const { handleCheckboxUpdateChecked } = this
                   const {
                     columns,
@@ -83,7 +87,6 @@ export default defineComponent({
                     fixedColumnRightMap,
                     currentPage,
                     mergedCheckedRowKeys,
-                    rowKey,
                     rowClassName
                   } = NDataTable
                   const {
@@ -92,7 +95,7 @@ export default defineComponent({
                   } = NMainTable
                   return (
                     <tr
-                      key={createRowKey(row, rowKey)}
+                      key={tmNode.key}
                       class={[
                         'n-data-table-tr',
                         createRowClassName(row, index, rowClassName)
@@ -129,10 +132,10 @@ export default defineComponent({
                               key={currentPage}
                               disabled={column.disabled?.(row)}
                               checked={mergedCheckedRowKeys.includes(
-                                createRowKey(row, rowKey)
+                                tmNode.key
                               )}
                               onUpdateChecked={(checked) =>
-                                handleCheckboxUpdateChecked(row, checked)
+                                handleCheckboxUpdateChecked(tmNode, checked)
                               }
                             />
                           ) : (

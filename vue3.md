@@ -428,7 +428,7 @@
   - [x] fix upload dragger
   - [x] fix table sorter
   - [x] tree 多选节点第二个 demo
-  - [ ] table treemate!!!
+  - [x] table treemate!!!
   - [x] createTheme
   - [ ] build site
 
