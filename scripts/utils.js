@@ -8,3 +8,5 @@ exports.walk = async function * walk (dir) {
     else if (d.isFile()) yield entry
   }
 }
+
+exports.outDirs = ['es', 'lib'].map((d) => path.resolve(__dirname, '..', d))

@@ -434,7 +434,9 @@
 
 ## Build
 
-package: tsx => es|lib => terse cssr => release site: build package => move to node_modules => setup side effects => vite build
+package: tsx => es|lib => terse cssr => replace global vars => release
+
+site: build package => move to node_modules => setup side effects => vite build => release
 
 ## Info
 
