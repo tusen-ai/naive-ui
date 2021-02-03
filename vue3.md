@@ -388,7 +388,7 @@
   - [x] 多行 message
   - [x] progress height
   - [x] close 重构
-  - [ ] data-table, radio style 重构
+  - [x] data-table, radio style 重构
   - [x] message icon style
   - [x] transfer search icon style
   - [x] base selection icon style

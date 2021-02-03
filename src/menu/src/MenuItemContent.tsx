@@ -61,7 +61,6 @@ export default defineComponent({
     }
   },
   render () {
-    console.log('xxx')
     return (
       <div
         class={[

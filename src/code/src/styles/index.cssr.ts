@@ -18,31 +18,24 @@ const codeClass = withPrefix('code')
 // --hue-6
 // --hue-6-2
 export default c([
-  cB(
-    'code',
-    `
+  cB('code', `
     display: block;
     font-size: var(--font-size);
     font-family: var(--font-family);
-  `,
-    [
-      c(
-        'pre',
-        `
+  `, [
+    c('pre', `
       margin: 0;
       font-family: inherit;
-    `
-      ),
-      c('[class^=hljs]', {
-        color: 'var(--text-color)',
-        transition: `
+    `),
+    c('[class^=hljs]', {
+      color: 'var(--text-color)',
+      transition: `
         color .3s var(--bezier),
         background-color .3s var(--bezier)
       `
-      })
-    ]
-  ),
-  `${codeClass} .hljs-comment,
+    })
+  ]), `
+  ${codeClass} .hljs-comment,
   ${codeClass} .hljs-quote {
     color: var(--mono-3);
     font-style: italic;
