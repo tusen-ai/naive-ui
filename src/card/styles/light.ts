@@ -40,7 +40,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type CardThemeVars = ReturnType<typeof self>
 
-const cardLight: Theme<CardThemeVars> = {
+const cardLight: Theme<'Card', CardThemeVars> = {
   name: 'Card',
   common: commonLight,
   self

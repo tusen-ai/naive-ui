@@ -86,6 +86,8 @@ function neutral (alpha: string | number) {
   )
 }
 const derived = {
+  name: 'common' as const,
+
   ...commonVariables,
 
   baseColor: base.neutralBase,

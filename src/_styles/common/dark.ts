@@ -85,6 +85,8 @@ function neutral (alpha: number | string): string {
   )
 }
 const derived: ThemeCommonVars = {
+  name: 'common' as const,
+
   ...commonVariables,
 
   baseColor: base.neutralBase,

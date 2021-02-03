@@ -12,7 +12,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type ScrollbarThemeVars = ReturnType<typeof self>
 
-const scrollbarLight: Theme<ScrollbarThemeVars> = {
+const scrollbarLight: Theme<'Scrollbar', ScrollbarThemeVars> = {
   name: 'Scrollbar',
   common: commonLight,
   self

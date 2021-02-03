@@ -1,7 +1,7 @@
 import { Theme } from '../../_mixins'
 import { commonLight } from '../../_styles/common'
 
-const elementLight: Theme = {
+const elementLight: Theme<'Element'> = {
   name: 'Element',
   common: commonLight
 }

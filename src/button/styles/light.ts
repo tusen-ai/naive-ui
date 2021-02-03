@@ -216,7 +216,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type ButtonThemeVars = ReturnType<typeof self>
 
-const buttonLight: Theme<ButtonThemeVars> = {
+const buttonLight: Theme<'Button', ButtonThemeVars> = {
   name: 'Button',
   common: commonLight,
   self

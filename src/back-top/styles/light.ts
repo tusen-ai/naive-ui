@@ -25,7 +25,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type BackTopThemeVars = ReturnType<typeof self>
 
-const backTopLight: Theme<BackTopThemeVars> = {
+const backTopLight: Theme<'BackTop', BackTopThemeVars> = {
   name: 'BackTop',
   common: commonLight,
   self

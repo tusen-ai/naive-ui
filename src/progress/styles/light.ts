@@ -39,7 +39,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type ProgressThemeVars = ReturnType<typeof self>
 
-const progressLight: Theme<ProgressThemeVars> = {
+const progressLight: Theme<'Progress', ProgressThemeVars> = {
   name: 'Progress',
   common: commonLight,
   self

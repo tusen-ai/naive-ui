@@ -25,7 +25,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type SwitchThemeVars = ReturnType<typeof self>
 
-const switchLight: Theme<SwitchThemeVars> = {
+const switchLight: Theme<'Switch', SwitchThemeVars> = {
   name: 'Switch',
   common: commonLight,
   self

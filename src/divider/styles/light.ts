@@ -13,7 +13,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type DividerThemeVars = ReturnType<typeof self>
 
-const dividerLight: Theme<DividerThemeVars> = {
+const dividerLight: Theme<'Divider', DividerThemeVars> = {
   name: 'Divider',
   common: commonLight,
   self

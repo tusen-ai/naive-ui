@@ -28,7 +28,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type AnchorThemeVars = ReturnType<typeof self>
 
-const anchorLight: Theme<AnchorThemeVars> = {
+const anchorLight: Theme<'Anchor', AnchorThemeVars> = {
   name: 'Anchor',
   common: commonLight,
   self

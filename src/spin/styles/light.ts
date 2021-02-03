@@ -25,7 +25,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type SpinThemeVars = ReturnType<typeof self>
 
-const spinLight: Theme<SpinThemeVars> = {
+const spinLight: Theme<'Spin', SpinThemeVars> = {
   name: 'Spin',
   common: commonLight,
   self

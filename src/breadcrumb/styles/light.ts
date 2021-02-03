@@ -24,7 +24,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type BreadcrumbThemeVars = ReturnType<typeof self>
 
-const breadcrumbLight: Theme<BreadcrumbThemeVars> = {
+const breadcrumbLight: Theme<'Breadcrumb', BreadcrumbThemeVars> = {
   name: 'Breadcrumb',
   common: commonLight,
   self

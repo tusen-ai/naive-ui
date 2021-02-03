@@ -34,7 +34,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type TimelineThemeVars = ReturnType<typeof self>
 
-const timelineLight: Theme<TimelineThemeVars> = {
+const timelineLight: Theme<'Timeline', TimelineThemeVars> = {
   name: 'Timeline',
   common: commonLight,
   self

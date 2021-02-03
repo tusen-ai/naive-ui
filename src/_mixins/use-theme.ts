@@ -10,8 +10,8 @@ globalStyle.mount({
   id: 'naive-ui-global'
 })
 
-export interface Theme<T = {}, R = any> {
-  name: string
+export interface Theme<N, T = {}, R = any> {
+  name: N
   common?: ThemeCommonVars
   peers?: R
   self?: (vars: ThemeCommonVars) => T
@@ -29,13 +29,13 @@ export interface ThemePropsReactive<T> {
   builtinThemeOverrides?: ExtractThemeOverrides<T>
 }
 
-export type ExtractThemeVars<T> = T extends Theme<infer U, unknown>
+export type ExtractThemeVars<T> = T extends Theme<unknown, infer U, unknown>
   ? unknown extends U // self is undefined, ThemeVars is unknown
     ? {}
     : U
   : {}
 
-export type ExtractPeerOverrides<T> = T extends Theme<unknown, infer V>
+export type ExtractPeerOverrides<T> = T extends Theme<unknown, unknown, infer V>
   ? {
     peers?: {
       [k in keyof V]?: ExtractThemeOverrides<V[k]>
@@ -44,7 +44,11 @@ export type ExtractPeerOverrides<T> = T extends Theme<unknown, infer V>
   : T
 
 // V is peers theme
-export type ExtractMergedPeerOverrides<T> = T extends Theme<unknown, infer V>
+export type ExtractMergedPeerOverrides<T> = T extends Theme<
+unknown,
+unknown,
+infer V
+>
   ? {
     [k in keyof V]?: ExtractPeerOverrides<T>
   }
@@ -53,7 +57,9 @@ export type ExtractMergedPeerOverrides<T> = T extends Theme<unknown, infer V>
 export type ExtractThemeOverrides<T> = Partial<ExtractThemeVars<T>> &
 ExtractPeerOverrides<T> & { common?: ThemeCommonVars }
 
-export function createTheme<T, R> (theme: Theme<T, R>): Theme<T, R> {
+export function createTheme<N extends string, T, R> (
+  theme: Theme<N, T, R>
+): Theme<N, T, R> {
   return theme
 }
 
@@ -63,7 +69,7 @@ type UseThemeProps<T> = Readonly<{
   builtinThemeOverrides?: ExtractThemeOverrides<T>
 }>
 
-export type MergedTheme<T> = T extends Theme<infer V, infer W>
+export type MergedTheme<T> = T extends Theme<unknown, infer V, infer W>
   ? {
     common: ThemeCommonVars
     self: V
@@ -72,13 +78,13 @@ export type MergedTheme<T> = T extends Theme<infer V, infer W>
   }
   : T
 
-function useTheme<T, R> (
+function useTheme<N, T, R> (
   resolveId: Exclude<keyof GlobalTheme, 'common'>,
   mountId: string,
   style: CNode | undefined,
-  defaultTheme: Theme<T, R>,
-  props: UseThemeProps<Theme<T, R>>
-): ComputedRef<MergedTheme<Theme<T, R>>> {
+  defaultTheme: Theme<N, T, R>,
+  props: UseThemeProps<Theme<N, T, R>>
+): ComputedRef<MergedTheme<Theme<N, T, R>>> {
   if (style) {
     onBeforeMount(() => {
       style.mount({
@@ -94,9 +100,11 @@ function useTheme<T, R> (
     // keep props to make theme overrideable
     const {
       theme: { common: selfCommon, self, peers = {} } = {},
-      themeOverrides: selfOverrides = {} as ExtractThemeOverrides<Theme<T, R>>,
+      themeOverrides: selfOverrides = {} as ExtractThemeOverrides<
+      Theme<N, T, R>
+      >,
       builtinThemeOverrides: builtinOverrides = {} as ExtractThemeOverrides<
-      Theme<T, R>
+      Theme<N, T, R>
       >
     } = props
     const { common: selfCommonOverrides, peers: peersOverrides } = selfOverrides
@@ -126,15 +134,15 @@ function useTheme<T, R> (
       selfCommonOverrides
     )
     const mergedSelf = merge(
-      // executed every time, no need for empty obj
-      (self || globalSelf || defaultTheme.self)?.(mergedCommon) || {},
+      // {}, executed every time, no need for empty obj
+      (self || globalSelf || defaultTheme.self)?.(mergedCommon) as T,
       builtinOverrides,
       globalSelfOverrides,
       selfOverrides
     )
     return {
       common: mergedCommon,
-      self: mergedSelf as any,
+      self: mergedSelf,
       peers: merge({}, defaultTheme.peers, globalPeers, peers),
       peerOverrides: merge({}, globalPeersOverrides, peersOverrides)
     }

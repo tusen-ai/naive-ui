@@ -429,7 +429,7 @@
   - [x] fix table sorter
   - [x] tree 多选节点第二个 demo
   - [ ] table treemate!!!
-  - [ ] createTheme
+  - [x] createTheme
   - [ ] build site
 
 ## Build

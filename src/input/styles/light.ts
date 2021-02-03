@@ -85,7 +85,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type InputThemeVars = ReturnType<typeof self>
 
-const inputLight: Theme<InputThemeVars> = {
+const inputLight: Theme<'Input', InputThemeVars> = {
   name: 'Input',
   common: commonLight,
   self

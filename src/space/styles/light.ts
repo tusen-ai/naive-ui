@@ -7,7 +7,7 @@ const self = () => {
 
 export type SpaceThemeVars = ReturnType<typeof self>
 
-const spaceLight: Theme<SpaceThemeVars> = {
+const spaceLight: Theme<'Space', SpaceThemeVars> = {
   name: 'Space',
   self
 }

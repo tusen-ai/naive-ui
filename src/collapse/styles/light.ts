@@ -23,7 +23,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type CollapseThemeVars = ReturnType<typeof self>
 
-const collapseLight: Theme<CollapseThemeVars> = {
+const collapseLight: Theme<'Collapse', CollapseThemeVars> = {
   name: 'Collapse',
   common: commonLight,
   self

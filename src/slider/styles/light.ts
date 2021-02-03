@@ -44,7 +44,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type SliderThemeVars = ReturnType<typeof self>
 
-const sliderLight: Theme<SliderThemeVars> = {
+const sliderLight: Theme<'Slider', SliderThemeVars> = {
   name: 'Slider',
   common: commonLight,
   self

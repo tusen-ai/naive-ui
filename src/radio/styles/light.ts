@@ -64,7 +64,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type RadioThemeVars = ReturnType<typeof self>
 
-const radioLight: Theme<RadioThemeVars> = {
+const radioLight: Theme<'Radio', RadioThemeVars> = {
   name: 'Radio',
   common: commonLight,
   self

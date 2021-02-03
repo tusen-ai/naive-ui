@@ -44,7 +44,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type CheckboxThemeVars = ReturnType<typeof self>
 
-const checkboxLight: Theme<CheckboxThemeVars> = {
+const checkboxLight: Theme<'Checkbox', CheckboxThemeVars> = {
   name: 'Checkbox',
   common: commonLight,
   self

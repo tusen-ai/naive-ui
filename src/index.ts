@@ -6,6 +6,8 @@ export { default as create } from './create'
 
 export * from './locales'
 export * from './components'
-export * from './styles'
 
-export { darkTheme } from './themes'
+// component themes
+export * from './styles'
+// composed global theme, createTheme from component themes util
+export { darkTheme, createTheme } from './themes'

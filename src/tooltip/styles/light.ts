@@ -1,8 +1,8 @@
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
-import { popoverLight, PopoverTheme } from '../../popover/styles'
+import { popoverLight } from '../../popover/styles'
 import commonVars from './_common'
-import type { Theme } from '../../_mixins/use-theme'
+import { createTheme } from '../../_mixins/use-theme'
 
 const self = (vars: ThemeCommonVars) => {
   const { borderRadius, boxShadow2, baseColor } = vars
@@ -17,19 +17,14 @@ const self = (vars: ThemeCommonVars) => {
 
 export type TooltipThemeVars = ReturnType<typeof self>
 
-const tooltipLight: Theme<
-TooltipThemeVars,
-{
-  Popover?: PopoverTheme
-}
-> = {
+const tooltipLight = createTheme({
   name: 'Tooltip',
   common: commonLight,
   peers: {
     Popover: popoverLight
   },
   self
-}
+})
 
 export default tooltipLight
 export type TooltipTheme = typeof tooltipLight

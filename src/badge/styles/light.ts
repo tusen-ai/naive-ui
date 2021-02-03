@@ -15,7 +15,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type BadgeThemeVars = ReturnType<typeof self>
 
-const badgeLight: Theme<BadgeThemeVars> = {
+const badgeLight: Theme<'Badge', BadgeThemeVars> = {
   name: 'Badge',
   common: commonLight,
   self

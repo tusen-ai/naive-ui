@@ -18,7 +18,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type FormThemeVars = ReturnType<typeof self>
 
-const formLight: Theme<FormThemeVars> = {
+const formLight: Theme<'Form', FormThemeVars> = {
   name: 'Form',
   common: commonLight,
   self

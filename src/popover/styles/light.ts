@@ -17,7 +17,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type PopoverThemeVars = ReturnType<typeof self>
 
-const popoverLight: Theme<PopoverThemeVars> = {
+const popoverLight: Theme<'Popover', PopoverThemeVars> = {
   name: 'Popover',
   common: commonLight,
   self

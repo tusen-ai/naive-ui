@@ -64,7 +64,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type TypographyThemeVars = ReturnType<typeof self>
 
-const typographyLight: Theme<TypographyThemeVars> = {
+const typographyLight: Theme<'Typography', TypographyThemeVars> = {
   name: 'Typography',
   common: commonLight,
   self

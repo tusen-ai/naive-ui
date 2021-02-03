@@ -90,7 +90,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type AlertThemeVars = ReturnType<typeof self>
 
-const alertLight: Theme<AlertThemeVars> = {
+const alertLight: Theme<'Alert', AlertThemeVars> = {
   name: 'Alert',
   common: commonLight,
   self

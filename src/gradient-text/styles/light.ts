@@ -30,7 +30,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type GradientTextThemeVars = ReturnType<typeof self>
 
-const gradientTextLight: Theme<GradientTextThemeVars> = {
+const gradientTextLight: Theme<'GradientText', GradientTextThemeVars> = {
   name: 'GradientText',
   common: commonLight,
   self

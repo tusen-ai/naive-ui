@@ -92,7 +92,7 @@ const self = (vars: ThemeCommonVars) => {
 
 export type TagThemeVars = ReturnType<typeof self>
 
-const tagLight: Theme<TagThemeVars> = {
+const tagLight: Theme<'Tag', TagThemeVars> = {
   name: 'Tag',
   common: commonLight,
   self
