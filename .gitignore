@@ -9,11 +9,12 @@ test/unit/coverage
 package-lock.json
 playground/temp
 yarn.lock
-lib
-es
 .vscode
 *.swp
 *.tgz
 coverage
 /fonts
 /site
+/package
+/lib
+/es

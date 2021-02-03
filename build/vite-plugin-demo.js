@@ -1,7 +1,7 @@
 const createVuePlugin = require('@vitejs/plugin-vue')
 const getTransformedVueSrc = require('./utils/get-demo-by-path')
-const createRollupCssRenderPlugin = require('./rollup-plugin-css-render')
-const demoIndexTransFormPlugin = require('./vite-plugin-index-tranform')
+const createCssrPlugin = require('./vite-plugin-css-render')
+const siteIndexTransFormPlugin = require('./vite-plugin-index-tranform')
 
 const fileRegex = /\.(md|entry)$/
 
@@ -9,7 +9,7 @@ const vuePlugin = createVuePlugin({
   include: [/\.vue$/, /\.md$/, /\.entry$/]
 })
 
-const createNaiveDemoVitePlugin = () => {
+const createDemoPlugin = () => {
   const naiveDemoVitePlugin = {
     name: 'demo-vite',
     transform (_, id) {
@@ -29,14 +29,9 @@ const createNaiveDemoVitePlugin = () => {
     }
   }
 
-  const rollupCssRenderPlugin = createRollupCssRenderPlugin()
+  const cssrPlugin = createCssrPlugin()
 
-  return [
-    demoIndexTransFormPlugin,
-    naiveDemoVitePlugin,
-    vuePlugin,
-    rollupCssRenderPlugin
-  ]
+  return [siteIndexTransFormPlugin, naiveDemoVitePlugin, vuePlugin, cssrPlugin]
 }
 
-module.exports = createNaiveDemoVitePlugin
+module.exports = createDemoPlugin

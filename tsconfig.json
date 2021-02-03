@@ -1,11 +1,8 @@
 {
   "include": ["src/**/*"],
-  "exclude": ["src/**/*.spec.js"],
   "compilerOptions": {
     "strict": true,
     "strictNullChecks": true,
-    "allowJs": true,
-    "checkJs": true,
     "jsx": "react",
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",

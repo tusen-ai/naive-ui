@@ -9,4 +9,4 @@ exports.walk = async function * walk (dir) {
   }
 }
 
-exports.outDirs = ['es', 'lib'].map((d) => path.resolve(__dirname, '..', d))
+exports.outDirs = ['es', 'lib'].map((d) => path.resolve(__dirname, '../..', d))

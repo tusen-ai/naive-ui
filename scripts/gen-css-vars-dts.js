@@ -1,7 +1,7 @@
 const fs = require('fs').promises
 const path = require('path')
-const { genDts, collectVars } = require('./utils/collect-vars.js')
-const { walk } = require('../scripts/utils')
+const { genDts, collectVars } = require('./utils/collect-vars')
+const { walk } = require('./utils')
 
 const srcPath = path.resolve(__dirname, '..', 'src')
 

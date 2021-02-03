@@ -1,6 +1,6 @@
-const packageJson = require('../package.json')
+const packageJson = require('../../package.json')
 
-packageJson.sideEffects = false
+delete packageJson.sideEffects
 
 require('fs-extra').writeFileSync(
   require('path').resolve(__dirname, '..', 'package.json'),

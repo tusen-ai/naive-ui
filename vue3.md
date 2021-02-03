@@ -430,7 +430,7 @@
   - [x] tree 多选节点第二个 demo
   - [x] table treemate!!!
   - [x] createTheme
-  - [ ] build site
+  - [x] build site
 
 ## Build
 

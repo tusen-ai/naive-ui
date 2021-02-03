@@ -7,10 +7,10 @@
 const fs = require('fs-extra')
 const path = require('path')
 
-const iconPath = path.resolve(__dirname, '..', 'compat', 'icons')
+const iconPath = path.resolve(__dirname, '../..', 'compat', 'icons')
 
-const cjsIconPath = path.resolve(__dirname, '..', 'lib', 'icons')
-const esmIconPath = path.resolve(__dirname, '..', 'es', 'icons')
+const cjsIconPath = path.resolve(__dirname, '../..', 'lib', 'icons')
+const esmIconPath = path.resolve(__dirname, '../..', 'es', 'icons')
 
 function createDirIfNotExists (...args) {
   if (!fs.existsSync(path.resolve(...args))) {
@@ -18,7 +18,7 @@ function createDirIfNotExists (...args) {
   }
 }
 
-createDirIfNotExists(__dirname, '../lib')
+createDirIfNotExists(__dirname, '../../lib')
 fs.copySync(iconPath, cjsIconPath)
-createDirIfNotExists(__dirname, '../es')
+createDirIfNotExists(__dirname, '../../es')
 fs.copySync(iconPath, esmIconPath)

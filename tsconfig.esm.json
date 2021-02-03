@@ -1,5 +1,6 @@
 {
   "extends": "./tsconfig.json",
+  "exclude": ["src/**/*.spec.ts"],
   "compilerOptions": {
     "outDir": "es",
     "module": "ESNext",

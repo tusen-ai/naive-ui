@@ -1,16 +1,23 @@
 const path = require('path')
 const { babel } = require('@rollup/plugin-babel')
-const createNaiveDemoVitePlugin = require('./build/vite-plugin-demo')
+const createDemoPlugin = require('./build/vite-plugin-demo')
 
+/**
+ * @type {import('vite').UserConfig}
+ */
 module.exports = {
   root: __dirname,
-  plugins: createNaiveDemoVitePlugin(),
-  alias: [
-    {
-      find: 'naive-ui',
-      replacement: path.resolve(__dirname, './src')
-    }
-  ],
+  plugins: createDemoPlugin(),
+  alias:
+    // In production site build, we want to import naive-ui from node_modules
+    process.env.NODE_ENV !== 'production'
+      ? [
+        {
+          find: 'naive-ui',
+          replacement: path.resolve(__dirname, './src')
+        }
+      ]
+      : undefined,
   define: {
     'process.env.NODE_ENV': `'${process.env.NODE_ENV}'`,
     __DEV__: process.env.NODE_ENV !== 'production'
@@ -28,12 +35,10 @@ module.exports = {
   },
   build: {
     outDir: 'site',
-    minify: false,
     rollupOptions: {
       plugins: [
         babel({
           babelHelpers: 'bundled'
-          // exclude: 'node_modules/highlight.js/**'
         })
       ]
     }

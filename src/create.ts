@@ -5,7 +5,7 @@ import type { Hljs } from './_mixins'
 
 type ComponentType = any
 
-interface NUiInstance {
+export interface NUiInstance {
   version: string
   componentPrefix: string
   install: (app: App) => void
