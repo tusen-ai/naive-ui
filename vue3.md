@@ -431,6 +431,8 @@
   - [x] table treemate!!!
   - [x] createTheme
   - [x] build site
+  - [ ] anchor in modal page, maybe a bug of vue...
+  - [ ] table fixed col
 
 ## Build
 

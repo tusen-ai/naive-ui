@@ -1,9 +1,10 @@
-import { c, cB, cE, cM } from '../../../_utils/cssr'
+import { c, cB, cE, cM, insideModal } from '../../../_utils/cssr'
 
 // vars:
 // --bezier
 // --border-radius
 // --color
+// --color-modal
 // --text-color
 // --line-height
 // --padding-top
@@ -18,9 +19,8 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --close-color-hover
 // --close-color-pressed
 // --border-color
-export default cB(
-  'card',
-  `
+export default c([
+  cB('card', `
     font-size: var(--font-size);
     line-height: var(--line-height);
     display: block;
@@ -34,8 +34,7 @@ export default cB(
       color .3s var(--bezier),
       background-color .3s var(--bezier),
       border-color .3s var(--bezier);
-  `,
-  [
+  `, [
     cM('content-segmented', [
       c('>', [
         cE('content', {
@@ -45,13 +44,10 @@ export default cB(
     ]),
     cM('content-soft-segmented', [
       c('>', [
-        cE(
-          'content',
-          `
+        cE('content', `
           margin: 0 var(--padding-left);
           padding: var(--padding-bottom) 0;
-        `
-        )
+        `)
       ])
     ]),
     cM('footer-segmented', [
@@ -63,104 +59,75 @@ export default cB(
     ]),
     cM('footer-soft-segmented', [
       c('>', [
-        cE(
-          'footer',
-          `
+        cE('footer', `
           padding: var(--padding-bottom) 0;
           margin: 0 var(--padding-left);
-        `
-        )
+        `)
       ])
     ]),
     c('>', [
-      cB(
-        'card-header',
-        `
+      cB('card-header', `
         box-sizing: border-box;
         display: flex;
         align-items: center;
-        padding: var(--padding-top) var(--padding-left) var(--padding-bottom) var(--padding-left);
-      `,
-        [
-          cE(
-            'main',
-            `
+        padding:
+          var(--padding-top)
+          var(--padding-left)
+          var(--padding-bottom)
+          var(--padding-left);
+      `, [
+        cE('main', `
           font-size: var(--title-font-size);
           font-weight: var(--title-font-weight);
           transition: color .3s var(--bezier);
           flex: 1;
           color: var(--title-text-color);
-        `
-          ),
-          cE(
-            'extra',
-            `
+        `),
+        cE('extra', `
           display: flex;
           align-items: center;
           font-size: var(--font-size);
           font-weight: 400;
           transition: color .3s var(--bezier);
           color: var(--text-color);
-        `
-          ),
-          cE(
-            'close',
-            `
+        `),
+        cE('close', `
           font-size: 16px;
           transition: color .3s var(--bezier);
-        `
-          )
-        ]
-      ),
-      cE(
-        'action',
-        `
+        `)
+      ]),
+      cE('action', `
         box-sizing: border-box;
         transition:
           background-color .3s var(--bezier),
           border-color .3s var(--bezier);
         background-clip: padding-box;
         background-color: var(--action-color);
-      `
-      ),
-      cE(
-        'content, footer',
-        `
+      `),
+      cE('content, footer', `
         box-sizing: border-box;
         padding: 0 var(--padding-left) var(--padding-bottom) var(--padding-left);
         font-size: var(--font-size);
-      `,
-        [
-          c('&:first-child', {
-            paddingTop: 'var(--padding-bottom)'
-          })
-        ]
-      ),
-      cE(
-        'action',
-        `
+      `, [
+        c('&:first-child', {
+          paddingTop: 'var(--padding-bottom)'
+        })
+      ]),
+      cE('action', `
         background-color: var(--action-color);
         padding: var(--padding-bottom) var(--padding-left);
-      `
-      )
+      `)
     ]),
-    cB(
-      'card-cover',
-      `
+    cB('card-cover', `
       overflow: hidden;
       width: 100%;
       border-radius: var(--border-radius) var(--border-radius) 0 0;
-    `,
-      [
-        c(
-          'img',
-          `
+    `, [
+      c('img', `
         display: block;
         width: 100%;
-      `
-        )
-      ]
-    ),
+      `)
+    ]),
     cM('bordered', {
       border: '1px solid var(--border-color)'
     }),
@@ -175,33 +142,28 @@ export default cB(
     ]),
     cM('content-segmented, content-soft-segmented', [
       c('>', [
-        cE(
-          'content',
-          {
-            transition: 'border-color 0.3s var(--bezier)'
-          },
-          [
-            c('&:not(:first-child)', {
-              borderTop: '1px solid var(--border-color)'
-            })
-          ]
-        )
+        cE('content', {
+          transition: 'border-color 0.3s var(--bezier)'
+        }, [
+          c('&:not(:first-child)', {
+            borderTop: '1px solid var(--border-color)'
+          })
+        ])
       ])
     ]),
     cM('footer-segmented, footer-soft-segmented', [
       c('>', [
-        cE(
-          'footer',
-          {
-            transition: 'border-color 0.3s var(--bezier)'
-          },
-          [
-            c('&:not(:first-child)', {
-              borderTop: '1px solid var(--border-color)'
-            })
-          ]
-        )
+        cE('footer', {
+          transition: 'border-color 0.3s var(--bezier)'
+        }, [
+          c('&:not(:first-child)', {
+            borderTop: '1px solid var(--border-color)'
+          })
+        ])
       ])
     ])
-  ]
-)
+  ]),
+  insideModal(cB('card', {
+    background: 'var(--color-modal)'
+  }))
+])

@@ -67,6 +67,7 @@ export default defineComponent({
         const {
           self: {
             color,
+            colorModal,
             textColor,
             titleTextColor,
             titleFontWeight,
@@ -89,6 +90,7 @@ export default defineComponent({
           '--bezier': cubicBezierEaseInOut,
           '--border-radius': borderRadius,
           '--color': color,
+          '--color-modal': colorModal,
           '--text-color': textColor,
           '--line-height': lineHeight,
           '--action-color': actionColor,

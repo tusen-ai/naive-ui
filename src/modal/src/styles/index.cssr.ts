@@ -54,9 +54,6 @@ export default c([
       duration: '.25s',
       enterScale: '.5'
     }),
-    cB('card', `
-      background-color: var(--color);
-    `),
     cB('confirm', `
       width: 446px;
       max-width: calc(100vw - 32px);

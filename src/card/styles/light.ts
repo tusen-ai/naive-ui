@@ -16,12 +16,14 @@ const self = (vars: ThemeCommonVars) => {
     fontWeightStrong,
     closeColor,
     closeColorHover,
-    closeColorPressed
+    closeColorPressed,
+    modalColor
   } = vars
   return {
     ...commonVariables,
     lineHeight,
     color: cardColor,
+    colorModal: modalColor,
     textColor: textColor2,
     titleTextColor: textColor1,
     borderColor: dividerColorOverlay,
