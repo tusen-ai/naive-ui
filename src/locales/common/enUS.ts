@@ -72,5 +72,5 @@ const enUS = {
   }
 }
 
-export type NaiveLocale = typeof enUS
+export type NLocale = typeof enUS
 export default enUS

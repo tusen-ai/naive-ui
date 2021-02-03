@@ -15,7 +15,7 @@ import {
   GlobalTheme,
   GlobalThemeOverrides
 } from './interface'
-import { NaiveDateLocale, NaiveLocale } from '../../locales'
+import { NaiveDateLocale, NLocale } from '../../locales'
 
 export default defineComponent({
   name: 'ConfigProvider',
@@ -29,7 +29,7 @@ export default defineComponent({
       type: Boolean as PropType<boolean | undefined>,
       default: undefined
     },
-    locale: Object as PropType<NaiveLocale | null>,
+    locale: Object as PropType<NLocale | null>,
     dateLocale: Object as PropType<NaiveDateLocale | null>,
     namespace: String,
     tag: {

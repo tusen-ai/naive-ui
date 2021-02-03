@@ -32,7 +32,9 @@ app.use(naive)
 
 ## 按需引入
 
-下面是一个按需引入的最小例子。
+下面是几个按需引入的最小例子。
+
+### 全局安装
 
 ```js
 import { createApp } from 'vue'
@@ -40,20 +42,32 @@ import {
   // create naive ui
   create,
   // component
-  NButton,
-  // component style
-  buttonLight,
-  // locale
-  zhCN
+  NButton
 } from 'naive-ui'
 
 const naive = create({
-  locales: [zhCN],
-  styles: [buttonLight],
   components: [NButton]
 })
 
 const app = createApp()
 
 app.use(naive)
+```
+
+### 直接使用
+
+```vue
+<template>
+  <n-button>naive-ui</n-button>
+</template>
+
+<script>
+import { NButton } from 'naive-ui'
+
+export default {
+  components: {
+    NButton
+  }
+}
+</script>
 ```

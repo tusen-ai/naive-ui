@@ -1,5 +1,5 @@
 import { UnwrapRef } from 'vue'
-import { NaiveLocale, NaiveDateLocale } from '../../locales'
+import { NLocale, NaiveDateLocale } from '../../locales'
 import {
   IsHourDisabled,
   IsMinuteDisabled,
@@ -32,7 +32,7 @@ export interface PanelRef {
 export type DatePickerInjection = {
   mergedTheme: MergedTheme<DatePickerTheme>
   timePickerSize: 'small' | 'medium' | 'large'
-  locale: NaiveLocale['DatePicker']
+  locale: NLocale['DatePicker']
   dateLocale: NaiveDateLocale
   value: Value | null
   isDateDisabled: IsDateDisabled

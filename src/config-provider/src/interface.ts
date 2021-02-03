@@ -1,4 +1,4 @@
-import type { NaiveDateLocale, NaiveLocale } from '../../locales'
+import type { NaiveDateLocale, NLocale } from '../../locales'
 import type { ThemeCommonVars } from '../../_styles/common'
 import type { AlertTheme } from '../../alert/styles'
 import type { AnchorTheme } from '../../anchor/styles'
@@ -214,7 +214,7 @@ export interface GlobalThemeOverrides {
 export interface ConfigProviderInjection {
   mergedBordered: boolean | undefined
   mergedNamespace: string | undefined
-  mergedLocale: NaiveLocale | undefined
+  mergedLocale: NLocale | undefined
   mergedDateLocale: NaiveDateLocale | undefined
   mergedHljs: Hljs | undefined
   // wip, unstable

@@ -1,6 +1,6 @@
-import type { NaiveLocale } from './enUS'
+import type { NLocale } from './enUS'
 
-const zhCN: NaiveLocale = {
+const zhCN: NLocale = {
   name: 'zh-CN',
   Popconfirm: {
     positiveText: '确认',

@@ -1,55 +1,47 @@
 import { App } from 'vue'
 import version from './version'
-import { warn } from './_utils'
 import type { Hljs } from './_mixins'
-import { NaiveLocale } from './locales'
+import { NLocale } from './locales'
 
 type ComponentType = any
 
-interface NaiveUIInstance {
+interface NUiInstance {
   version: string
-  install: (app: App) => void
-  use: (plugin: { install: (naive: NaiveUIInstance) => void }) => void
   componentPrefix: string
+  install: (app: App) => void
+  /** @deprecated */
+  use: (plugin: { install: (naive: NUiInstance) => void }) => void
+  /** @deprecated */
   hljs: any
+  /** @deprecated */
   setHljs: (hljs: any) => void
+  /** @deprecated */
   setHighlightjs: (hljs: any) => void
-  locales: Record<string, NaiveLocale>
-  fallbackLocale: NaiveLocale
+  /** @deprecated */
+  locales: Record<string, NLocale>
+  /** @deprecated */
+  fallbackLocale: NLocale
 }
 
-interface NaiveUICreateOptions {
-  componentPrefix?: string
+interface NUiCreateOptions {
   components?: ComponentType[]
-  locales?: NaiveLocale[]
+  componentPrefix?: string
+  /** @deprecated */
+  locales?: NLocale[]
+  /** @deprecated */
   hljs?: Hljs
 }
 
-function setHljs (this: NaiveUIInstance, hljs: any): void {
+function setHljs (this: NUiInstance, hljs: any): void {
   this.hljs = hljs
 }
 
-function createLocalesObject (
-  locales: NaiveLocale[]
-): { [key: string]: NaiveLocale } {
-  const defaultLocaleMap: { [key: string]: NaiveLocale } = {}
+function createLocalesObject (locales: NLocale[]): { [key: string]: NLocale } {
+  const defaultLocaleMap: { [key: string]: NLocale } = {}
   return locales.reduce((localeMap, locale) => {
     localeMap[locale.name] = locale
     return localeMap
   }, defaultLocaleMap)
-}
-
-export interface NaiveUI {
-  version: string
-  use: (plugin: any) => void
-  install: Function
-  // deprecated
-  componentPrefix: string
-  hljs: Hljs | undefined
-  setHljs: Function
-  setHighlightjs: Function
-  locales: any
-  fallbackLocale: any
 }
 
 function create ({
@@ -57,11 +49,10 @@ function create ({
   components = [],
   locales = [],
   hljs = undefined
-}: NaiveUICreateOptions = {}): NaiveUI {
+}: NUiCreateOptions = {}): NUiInstance {
   const fallbackLocale = locales[0]
-  if (!fallbackLocale) warn('create', '`locales` is empty.')
   const installTargets: App[] = []
-  const naive: NaiveUIInstance = {
+  const naive: NUiInstance = {
     version,
     use (plugin: any) {
       plugin.install(naive)

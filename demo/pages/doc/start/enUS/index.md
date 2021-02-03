@@ -32,7 +32,9 @@ app.use(naive)
 
 ## Import on Demand
 
-Here is a minimal example.
+Here are some minimal examples.
+
+### Install Globally
 
 ```js
 import { createApp } from 'vue'
@@ -40,20 +42,32 @@ import {
   // create naive ui
   create,
   // component
-  NButton,
-  // component style
-  buttonLight,
-  // locale
-  zhCN
+  NButton
 } from 'naive-ui'
 
 const naive = create({
-  locales: [zhCN],
-  styles: [buttonLight],
   components: [NButton]
 })
 
 const app = createApp()
 
 app.use(naive)
+```
+
+### Use it Directly
+
+```vue
+<template>
+  <n-button>naive-ui</n-button>
+</template>
+
+<script>
+import { NButton } from 'naive-ui'
+
+export default {
+  components: {
+    NButton
+  }
+}
+</script>
 ```

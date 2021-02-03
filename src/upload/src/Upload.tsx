@@ -392,6 +392,7 @@ export default defineComponent({
       handleTriggerClick,
       handleFileInputChange,
       submit,
+      openFileDialog,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },

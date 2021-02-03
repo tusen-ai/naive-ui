@@ -1,5 +1,5 @@
 import { CSSProperties, VNodeChild } from 'vue'
-import { NaiveLocale } from '../../locales'
+import { NLocale } from '../../locales'
 import { MergedTheme } from '../../_mixins'
 import { DataTableTheme } from '../styles'
 
@@ -78,7 +78,7 @@ export interface DataTableInjection {
   loading: boolean
   rowClassName?: string | CreateRowClassName
   mergedCheckedRowKeys: RowKey[]
-  locale: NaiveLocale['DataTable']
+  locale: NLocale['DataTable']
   filterMenuCssVars: CSSProperties
   renderSorter?: SorterRender
   renderFilter?: FilterRender
