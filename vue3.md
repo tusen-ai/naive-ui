@@ -375,9 +375,9 @@
   - [x] transfer 打包之后有问题
   - [x] side effects = false 好像会影响 rollup 的打包（这让我很不安，要是生效 css 怎么办？要是不生效 JS 怎么办？）（事实上确实会影响网站对于 fonts 的打包，只能先靠脚本凑活一下） https://github.com/rollup/plugins/issues/692
   - [x] vue 在 $attrs 的处理上 dev 和 prod 还是有差别 https://github.com/vuejs/vue-next/issues/2741
-  - [ ] date-picker input 的 clear 有时候不会清除，看起来是 vue 的 bug
+  - [x] date-picker input 的 clear 有时候不会清除，看起来是 vue 的 bug
     - https://github.com/vuejs/vue-next/issues/2768
-  - [ ] radio-group 影响主题切换，看起来是 vue 的 bug
+  - [x] radio-group 影响主题切换，看起来是 vue 的 bug
     - https://github.com/vuejs/vue-next/issues/2829
   - [x] cascader demo async 切换未重置数据，demo 写的有问题
   - [x] gradient-text transition 又没了
@@ -396,17 +396,12 @@
   - [x] avatar font size bug
   - [x] handle global style
     - 暂时放在 useTheme + useStyle 中... 似乎没啥太好的办法，最终还是要想办法让样式不要溢出
-  - [ ] prefixCls ?
   - [x] select menu padding top & bottom
   - [x] time-picker invalid
   - [x] date-picker invalid
   - [x] vooks `useNow`
   - [x] treemate activePath includeGroup: false
-  - [ ] select menu multiple, when show=true, checkmark transiton not working
-  - [x] menu + dropdown collapsed 时候 menu item 不更新（selected 从使用 useMemo 切换成 computed（性能下降）, Vue 在这种时候一定存在 bug，但是暂时没空找了...）
   - [x] 拆分 dateFns locale => dateLocale
-  - [ ] 更新一波文档 props
-  - [ ] 更新样式的文档
   - [x] 试图把组件的 demo 放到 src 里面
   - [x] 去掉仅存的 mixin
   - [x] form item default type explain
@@ -424,15 +419,20 @@
   - [x] fix menu extra
   - [x] build icon
   - [x] compat
-  - [ ] on update value api
   - [x] fix upload dragger
   - [x] fix table sorter
   - [x] tree 多选节点第二个 demo
   - [x] table treemate!!!
   - [x] createTheme
   - [x] build site
+  - [x] table fixed col
+  - [ ] prefixCls，暂时不需要
+  - [ ] 更新一波文档 props
+  - [ ] 更新样式的文档
+  - [ ] on update value api
   - [ ] anchor in modal page, maybe a bug of vue...
-  - [ ] table fixed col
+  - [ ] menu + dropdown collapsed 时候 menu item 不更新（selected 从使用 useMemo 切换成 computed（性能下降）, Vue 在这种时候一定存在 bug，但是暂时没空找了...）
+  - [ ] select menu multiple, when show=true, checkmark transiton not working（推测是 vue 的 bug）
 
 ## Build
 
