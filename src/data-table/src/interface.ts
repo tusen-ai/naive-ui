@@ -62,8 +62,10 @@ export type TableColumnInfo = {
   defaultFilterOptionValue?: FilterOptionValue | null
   filterMultiple?: boolean
 
-  // for selection
   render?: (data: TableNode, index: number) => VNodeChild
+  renderFilterMenu?: FilterMenuRender
+  renderSorter?: SorterRender
+  renderFilter?: FilterRender
 } & CommonColInfo
 
 export type SelectionColInfo = {
@@ -100,9 +102,7 @@ export interface DataTableInjection {
   mergedCheckedRowKeys: RowKey[]
   locale: NLocale['DataTable']
   filterMenuCssVars: CSSProperties
-  renderSorter?: SorterRender
-  renderFilter?: FilterRender
-  rowKey?: CreateRowKey
+  rowKey: CreateRowKey | undefined
   doUpdateFilters: (
     filters: FilterState,
     sourceColumn?: TableColumnInfo
@@ -134,6 +134,8 @@ export type SorterRender = (props: {
   active: boolean
   order: SortOrder
 }) => VNodeChild
+
+export type FilterMenuRender = () => VNodeChild
 
 export type OnUpdateCheckedRowKeys = (keys: RowKey[]) => void
 export type OnUpdateSorter = (sortState: SortState | null) => void

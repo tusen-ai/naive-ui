@@ -25,11 +25,9 @@ import { useScroll } from './use-scroll'
 import {
   CreateRowClassName,
   CreateRowKey,
-  FilterRender,
   OnUpdateCheckedRowKeys,
   OnUpdateSorter,
   RowKey,
-  SorterRender,
   TableColumnInfo,
   TableNode,
   OnUpdateFilters,
@@ -88,8 +86,6 @@ export const dataTableProps = {
     default: 'medium'
   },
   remote: Boolean,
-  renderFilter: Function as PropType<FilterRender>,
-  renderSorter: Function as PropType<SorterRender>,
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:page': [Function, Array] as PropType<
   PaginationProps['onUpdate:page']
@@ -262,8 +258,6 @@ export default defineComponent({
         rowClassName: toRef(props, 'rowClassName'),
         mergedCheckedRowKeys,
         locale,
-        renderSorter: toRef(props, 'renderSorter'),
-        renderFilter: toRef(props, 'renderFilter'),
         rowKey: toRef(props, 'rowKey'),
         filterMenuCssVars: computed(() => {
           const {

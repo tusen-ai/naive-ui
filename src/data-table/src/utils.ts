@@ -78,7 +78,9 @@ export function isColumnSortable (
 export function isColumnFilterable (
   column: TableColumnInfo | SelectionColInfo
 ): boolean {
-  return !!column.filter && !!column.filterOptions
+  return (
+    !!column.filter && (!!column.filterOptions || !!column.renderFilterMenu)
+  )
 }
 
 function getNextOrderOf (order: SortOrder): SortOrder {

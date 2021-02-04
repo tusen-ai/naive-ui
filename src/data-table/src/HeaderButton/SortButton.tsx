@@ -30,7 +30,7 @@ export default defineComponent({
       return false
     })
     const mergedRenderSorterRef = computed(() => {
-      return NDataTable.renderSorter
+      return props.column.renderSorter
     })
     return {
       active: activeRef,

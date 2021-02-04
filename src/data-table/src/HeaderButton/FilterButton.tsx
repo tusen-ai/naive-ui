@@ -63,7 +63,7 @@ export default defineComponent({
       return filterValue !== null
     })
     const mergedRenderFilterRef = computed(() => {
-      return NDataTable.renderFilter
+      return props.column.renderFilter
     })
     function handleFilterChange (
       mergedFilterValue: FilterOptionValue | FilterOptionValue[] | null
@@ -129,19 +129,24 @@ export default defineComponent({
                 <NBaseIcon>{{ default: () => <FilterIcon /> }}</NBaseIcon>
               </div>
             ),
-          default: () => (
-            <NDataTableFilterMenu
-              style={NDataTable.filterMenuCssVars}
-              radioGroupName={String(this.column.key)}
-              multiple={this.filterMultiple}
-              value={this.mergedFilterValue}
-              options={this.options}
-              column={this.column}
-              onChange={this.handleFilterChange}
-              onClear={this.handleFilterMenuCancel}
-              onConfirm={this.handleFilterMenuConfirm}
-            />
-          )
+          default: () => {
+            const { renderFilterMenu } = this.column
+            return renderFilterMenu ? (
+              renderFilterMenu()
+            ) : (
+              <NDataTableFilterMenu
+                style={NDataTable.filterMenuCssVars}
+                radioGroupName={String(this.column.key)}
+                multiple={this.filterMultiple}
+                value={this.mergedFilterValue}
+                options={this.options}
+                column={this.column}
+                onChange={this.handleFilterChange}
+                onClear={this.handleFilterMenuCancel}
+                onConfirm={this.handleFilterMenuConfirm}
+              />
+            )
+          }
         }}
       </NPopover>
     )
