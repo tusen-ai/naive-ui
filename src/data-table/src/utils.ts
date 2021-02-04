@@ -1,13 +1,30 @@
 import { CSSProperties } from 'vue'
-import { formatLength } from '../../_utils'
+import { pxfy } from 'seemly'
 import type {
   SortOrder,
   TableColumnInfo,
   TableNode,
   SortOrderFlag,
   SortState,
-  CreateRowClassName
+  CreateRowClassName,
+  SelectionColInfo
 } from './interface'
+
+export const selectionColWidth = 40
+
+export function getColWidth (
+  col: TableColumnInfo | SelectionColInfo
+): number | undefined {
+  if (col.type === 'selection') return selectionColWidth
+  return col.width
+}
+
+export function getColKey (
+  col: TableColumnInfo | SelectionColInfo
+): string | number {
+  if (col.type === 'selection') return '__n_selection__'
+  return col.key
+}
 
 export function createShallowClonedObject<T> (object: T): T {
   if (!object) return object
@@ -24,22 +41,12 @@ export function getFlagOfOrder (order: SortOrder): SortOrderFlag {
 }
 
 export function createCustomWidthStyle (
-  column: TableColumnInfo,
+  column: TableColumnInfo | SelectionColInfo,
   index: number
-): CSSProperties | undefined {
-  if (column.width) {
-    const width = column.width
-    return {
-      width: formatLength(width)
-    }
+): CSSProperties {
+  return {
+    width: pxfy(getColWidth(column))
   }
-  if (column.type === 'selection') {
-    return {
-      width: '40px'
-    }
-  }
-
-  return undefined
 }
 
 export function createRowClassName (
@@ -62,11 +69,15 @@ export function shouldUseArrayInSingleMode (column: TableColumnInfo): boolean {
   )
 }
 
-export function isColumnSortable (column: TableColumnInfo): boolean {
+export function isColumnSortable (
+  column: TableColumnInfo | SelectionColInfo
+): boolean {
   return !!column.sorter
 }
 
-export function isColumnFilterable (column: TableColumnInfo): boolean {
+export function isColumnFilterable (
+  column: TableColumnInfo | SelectionColInfo
+): boolean {
   return !!column.filter && !!column.filterOptions
 }
 

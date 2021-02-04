@@ -1,7 +1,7 @@
 import { computed, ComputedRef, ref, toRef } from 'vue'
 import { useMergedState } from 'vooks'
 import { DataTableProps } from './DataTable'
-import { RowKey, TableColumnInfo, TableNode, TmNode } from './interface'
+import { RowKey, SelectionColInfo, TableNode, TmNode } from './interface'
 import { call } from '../../_utils'
 import { TreeMate } from 'treemate'
 
@@ -47,7 +47,7 @@ export function useCheck (
     if (onCheckedRowKeysChange) call(onCheckedRowKeysChange, keys)
     uncontrolledCheckedRowKeysRef.value = keys
   }
-  function doCheckAll (column: TableColumnInfo): void {
+  function doCheckAll (column: SelectionColInfo): void {
     const rowKeysToCheck: RowKey[] = []
     paginatedDataRef.value.forEach((tmNode) => {
       if (column.disabled?.(tmNode.rawNode)) {
@@ -62,7 +62,7 @@ export function useCheck (
         .checkedKeys
     )
   }
-  function doUncheckAll (column: TableColumnInfo): void {
+  function doUncheckAll (column: SelectionColInfo): void {
     const rowKeysToUncheck: RowKey[] = []
     paginatedDataRef.value.forEach((tmNode) => {
       const { rawNode: row } = tmNode

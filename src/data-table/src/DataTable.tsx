@@ -35,7 +35,8 @@ import {
   OnUpdateFilters,
   MainTableRef,
   DataTableInjection,
-  DataTableRef
+  DataTableRef,
+  SelectionColInfo
 } from './interface'
 import style from './styles/index.cssr'
 
@@ -48,7 +49,7 @@ export const dataTableProps = {
   minHeight: Number,
   maxHeight: Number,
   columns: {
-    type: Array as PropType<TableColumnInfo[]>,
+    type: Array as PropType<Array<TableColumnInfo | SelectionColInfo>>,
     required: true
   },
   data: {
@@ -225,6 +226,10 @@ export default defineComponent({
     const {
       handleTableBodyScroll,
       handleTableHeaderScroll,
+      deriveActiveRightFixedColumn,
+      deriveActiveLeftFixedColumn,
+      leftActiveFixedColKey,
+      rightActiveFixedColKey,
       leftFixedColumns,
       rightFixedColumns,
       fixedColumnLeftMap,
@@ -242,8 +247,10 @@ export default defineComponent({
         scrollX: computed(() => props.scrollX),
         columns: toRef(props, 'columns'),
         paginatedData: paginatedDataRef,
-        leftFixedColumns: leftFixedColumns,
-        rightFixedColumns: rightFixedColumns,
+        leftActiveFixedColKey,
+        rightActiveFixedColKey,
+        leftFixedColumns,
+        rightFixedColumns,
         fixedColumnLeftMap,
         fixedColumnRightMap,
         currentPage,
@@ -267,6 +274,8 @@ export default defineComponent({
             '--action-divider-color': actionDividerColor
           } as CSSProperties
         }),
+        deriveActiveRightFixedColumn,
+        deriveActiveLeftFixedColumn,
         doUpdateFilters,
         doUpdateSorter,
         doUpdateCheckedRowKeys,

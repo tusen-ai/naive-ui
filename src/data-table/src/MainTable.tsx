@@ -1,24 +1,13 @@
-import {
-  h,
-  ref,
-  defineComponent,
-  inject,
-  computed,
-  renderSlot,
-  provide,
-  reactive
-} from 'vue'
+import { h, ref, defineComponent, inject, computed, renderSlot } from 'vue'
 import { VResizeObserver } from 'vueuc'
 import 'resize-observer-polyfill'
 import { formatLength } from '../../_utils'
 import TableHeader from './TableParts/Header'
 import TableBody from './TableParts/Body'
 import {
-  ColumnKey,
   DataTableInjection,
   MainTableBodyRef,
   MainTableHeaderRef,
-  MainTableInjection,
   MainTableRef
 } from './interface'
 
@@ -36,11 +25,15 @@ export default defineComponent({
       'NDataTable'
     ) as DataTableInjection
 
+    const {
+      deriveActiveLeftFixedColumn,
+      deriveActiveRightFixedColumn
+    } = NDataTable
+
     let tableWidth: number = 0
     const bodyMaxHeightRef = ref<number | undefined>(undefined)
     const bodyMinHeightRef = ref<number | undefined>(undefined)
-    const leftActiveFixedColKeyRef = ref<ColumnKey | null>(null)
-    const rightActiveFixedColKeyRef = ref<ColumnKey | null>(null)
+
     const headerInstRef = ref<MainTableHeaderRef | null>(null)
     const bodyInstRef = ref<MainTableBodyRef | null>(null)
 
@@ -58,15 +51,15 @@ export default defineComponent({
     function handleHeaderResize (entry: ResizeObserverEntry): void {
       setTableWidth(entry.contentRect.width)
       deriveBodyMinMaxHeight(entry.contentRect.height)
-      deriveActiveLeftFixedColumn(entry.target as HTMLElement)
-      deriveActiveRightFixedColumn(entry.target as HTMLElement)
+      deriveActiveLeftFixedColumn(entry.target as HTMLElement, tableWidth)
+      deriveActiveRightFixedColumn(entry.target as HTMLElement, tableWidth)
       if (!fixedStateInitializedRef.value) {
         fixedStateInitializedRef.value = true
       }
     }
     function handleHeaderScroll (e: Event): void {
-      deriveActiveRightFixedColumn(e.target as HTMLElement)
-      deriveActiveLeftFixedColumn(e.target as HTMLElement)
+      deriveActiveRightFixedColumn(e.target as HTMLElement, tableWidth)
+      deriveActiveLeftFixedColumn(e.target as HTMLElement, tableWidth)
       NDataTable.handleTableHeaderScroll(e)
     }
     function getHeaderElement (): HTMLElement | null {
@@ -95,60 +88,10 @@ export default defineComponent({
         bodyMinHeightRef.value = minHeight + (bordered ? -2 : 0) - headerHeight
       }
     }
-    function deriveActiveRightFixedColumn (target: HTMLElement): void {
-      // target is header element
-      const { rightFixedColumns } = NDataTable
-      const { scrollLeft } = target
-      const scrollWidth = target.scrollWidth
-      let rightWidth = 0
-      let rightActiveFixedColKey = null
-      const { fixedColumnRightMap } = NDataTable
-      for (let i = rightFixedColumns.length - 1; i >= 0; --i) {
-        const key = rightFixedColumns[i].key
-        if (
-          scrollLeft +
-            (fixedColumnRightMap[key] || 0) +
-            tableWidth -
-            rightWidth <
-          scrollWidth
-        ) {
-          rightActiveFixedColKey = key
-          rightWidth += rightFixedColumns[i].width || 0
-        } else {
-          break
-        }
-      }
-      rightActiveFixedColKeyRef.value = rightActiveFixedColKey
-    }
-    function deriveActiveLeftFixedColumn (target: HTMLElement): void {
-      // target is header element
-      const { leftFixedColumns } = NDataTable
-      const scrollLeft = target.scrollLeft
-      let leftWidth = 0
-      const { fixedColumnLeftMap } = NDataTable
-      let leftActiveFixedColKey = null
-      for (let i = 0; i < leftFixedColumns.length; ++i) {
-        const key = leftFixedColumns[i].key
-        if (scrollLeft > (fixedColumnLeftMap[key] || 0) - leftWidth) {
-          leftActiveFixedColKey = key
-          leftWidth += leftFixedColumns[i].width || 0
-        } else {
-          break
-        }
-      }
-      leftActiveFixedColKeyRef.value = leftActiveFixedColKey
-    }
     const exposedMethods: MainTableRef = {
       getBodyElement,
       getHeaderElement
     }
-    provide<MainTableInjection>(
-      'NMainTable',
-      reactive({
-        leftActiveFixedColKey: leftActiveFixedColKeyRef,
-        rightActiveFixedColKey: rightActiveFixedColKeyRef
-      })
-    )
     return {
       headerInstRef,
       bodyInstRef,

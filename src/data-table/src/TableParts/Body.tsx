@@ -1,9 +1,10 @@
 import { h, ref, defineComponent, inject } from 'vue'
+import { pxfy } from 'seemly'
 import { NCheckbox } from '../../../checkbox'
 import { NScrollbar, ScrollbarRef } from '../../../scrollbar'
 import { formatLength } from '../../../_utils'
-import { DataTableInjection, MainTableInjection, TmNode } from '../interface'
-import { createCustomWidthStyle, createRowClassName } from '../utils'
+import { DataTableInjection, TmNode } from '../interface'
+import { createCustomWidthStyle, createRowClassName, getColKey } from '../utils'
 import Cell from './Cell'
 
 export default defineComponent({
@@ -12,9 +13,6 @@ export default defineComponent({
     const NDataTable = inject<DataTableInjection>(
       'NDataTable'
     ) as DataTableInjection
-    const NMainTable = inject<MainTableInjection>(
-      'NMainTable'
-    ) as MainTableInjection
     const scrollbarInstRef = ref<ScrollbarRef | null>(null)
     function handleCheckboxUpdateChecked (
       tmNode: TmNode,
@@ -42,7 +40,6 @@ export default defineComponent({
     }
     return {
       NDataTable,
-      NMainTable,
       scrollbarInstRef,
       getScrollContainer,
       handleScroll,
@@ -50,7 +47,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { NDataTable, NMainTable, handleScroll } = this
+    const { NDataTable, handleScroll } = this
     const { mergedTheme, scrollX } = NDataTable
     return (
       <NScrollbar
@@ -72,7 +69,7 @@ export default defineComponent({
               <colgroup>
                 {NDataTable.columns.map((column, index) => (
                   <col
-                    key={column.key}
+                    key={getColKey(column)}
                     style={createCustomWidthStyle(column, index)}
                   ></col>
                 ))}
@@ -87,12 +84,10 @@ export default defineComponent({
                     fixedColumnRightMap,
                     currentPage,
                     mergedCheckedRowKeys,
-                    rowClassName
-                  } = NDataTable
-                  const {
+                    rowClassName,
                     leftActiveFixedColKey,
                     rightActiveFixedColKey
-                  } = NMainTable
+                  } = NDataTable
                   return (
                     <tr
                       key={tmNode.key}
@@ -101,48 +96,51 @@ export default defineComponent({
                         createRowClassName(row, index, rowClassName)
                       ]}
                     >
-                      {columns.map((column) => (
-                        <td
-                          key={column.key}
-                          style={{
-                            textAlign: column.align || undefined,
-                            left: fixedColumnLeftMap[column.key],
-                            right: fixedColumnRightMap[column.key]
-                          }}
-                          class={[
-                            'n-data-table-td',
-                            column.className,
-                            column.fixed &&
-                              `n-data-table-td--fixed-${column.fixed}`,
-                            column.align &&
-                              `n-data-table-td--${column.align}-align`,
-                            {
-                              'n-data-table-td--ellipsis': column.ellipsis,
-                              'n-data-table-td--shadow-after':
-                                leftActiveFixedColKey === column.key,
-                              'n-data-table-td--shadow-before':
-                                rightActiveFixedColKey === column.key,
-                              'n-data-table-td--selection':
-                                column.type === 'selection'
-                            }
-                          ]}
-                        >
-                          {column.type === 'selection' ? (
-                            <NCheckbox
-                              key={currentPage}
-                              disabled={column.disabled?.(row)}
-                              checked={mergedCheckedRowKeys.includes(
-                                tmNode.key
-                              )}
-                              onUpdateChecked={(checked) =>
-                                handleCheckboxUpdateChecked(tmNode, checked)
+                      {columns.map((column) => {
+                        const key = getColKey(column)
+                        return (
+                          <td
+                            key={key}
+                            style={{
+                              textAlign: column.align || undefined,
+                              left: pxfy(fixedColumnLeftMap[key]),
+                              right: pxfy(fixedColumnRightMap[key])
+                            }}
+                            class={[
+                              'n-data-table-td',
+                              column.className,
+                              column.fixed &&
+                                `n-data-table-td--fixed-${column.fixed}`,
+                              column.align &&
+                                `n-data-table-td--${column.align}-align`,
+                              {
+                                'n-data-table-td--ellipsis': column.ellipsis,
+                                'n-data-table-td--shadow-after':
+                                  leftActiveFixedColKey === key,
+                                'n-data-table-td--shadow-before':
+                                  rightActiveFixedColKey === key,
+                                'n-data-table-td--selection':
+                                  column.type === 'selection'
                               }
-                            />
-                          ) : (
-                            <Cell index={index} row={row} column={column} />
-                          )}
-                        </td>
-                      ))}
+                            ]}
+                          >
+                            {column.type === 'selection' ? (
+                              <NCheckbox
+                                key={currentPage}
+                                disabled={column.disabled?.(row)}
+                                checked={mergedCheckedRowKeys.includes(
+                                  tmNode.key
+                                )}
+                                onUpdateChecked={(checked) =>
+                                  handleCheckboxUpdateChecked(tmNode, checked)
+                                }
+                              />
+                            ) : (
+                              <Cell index={index} row={row} column={column} />
+                            )}
+                          </td>
+                        )
+                      })}
                     </tr>
                   )
                 })}

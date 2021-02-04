@@ -33,13 +33,17 @@ export type TmNode = TreeNode<TableNode>
 
 export type SortOrder = 'ascend' | 'descend' | false
 
-export interface TableColumnInfo {
+export interface CommonColInfo {
   fixed?: 'left' | 'right'
+  width?: number
+  className?: string
   align?: 'left' | 'center' | 'right'
   ellipsis?: boolean
-  className?: string
+}
+
+export type TableColumnInfo = {
   title?: string | ((column: TableColumnInfo, index: number) => VNodeChild)
-  type?: 'selection'
+  type?: never
   key: ColumnKey
 
   sorter?: boolean | Sorter | 'default'
@@ -52,26 +56,34 @@ export interface TableColumnInfo {
   filterOptionValue?: FilterOptionValue | null // controlled
   filterMode?: 'or' | 'and'
 
-  /** it is undefined due to compatibility */
   defaultFilterOptionValues?: FilterOptionValue[] | null
   defaultFilterOptionValue?: FilterOptionValue | null
   filterMultiple?: boolean
-  width?: number
 
   // for selection
+  render?: (data: TableNode, index: number) => VNodeChild
+} & CommonColInfo
+
+export type SelectionColInfo = {
+  type: 'selection'
   disabled?: (row: TableNode) => boolean
 
-  render?: (data: TableNode, index: number) => VNodeChild
-}
+  // to suppress type error in utils
+  sorter?: never
+  filter?: never
+  filterOptions?: never
+} & CommonColInfo
 
 export interface DataTableInjection {
   mergedTheme: MergedTheme<DataTableTheme>
   scrollX?: string | number
-  columns: TableColumnInfo[]
+  columns: Array<TableColumnInfo | SelectionColInfo>
   treeMate: TreeMate<TableNode>
   paginatedData: TmNode[]
-  leftFixedColumns: TableColumnInfo[]
-  rightFixedColumns: TableColumnInfo[]
+  leftFixedColumns: Array<TableColumnInfo | SelectionColInfo>
+  rightFixedColumns: Array<TableColumnInfo | SelectionColInfo>
+  leftActiveFixedColKey: ColumnKey | null
+  rightActiveFixedColKey: ColumnKey | null
   fixedColumnLeftMap: Record<ColumnKey, number | undefined>
   fixedColumnRightMap: Record<ColumnKey, number | undefined>
   currentPage: number
@@ -93,10 +105,15 @@ export interface DataTableInjection {
   ) => void
   doUpdateSorter: (sorter: SortState | null) => void
   doUpdateCheckedRowKeys: (keys: RowKey[]) => void
-  doUncheckAll: (column: TableColumnInfo) => void
-  doCheckAll: (column: TableColumnInfo) => void
+  doUncheckAll: (column: SelectionColInfo) => void
+  doCheckAll: (column: SelectionColInfo) => void
   handleTableHeaderScroll: (e: Event) => void
   handleTableBodyScroll: (e: Event) => void
+  deriveActiveRightFixedColumn: (
+    target: HTMLElement,
+    tableWidth: number
+  ) => void
+  deriveActiveLeftFixedColumn: (target: HTMLElement, tableWidth: number) => void
 }
 
 export interface MainTableInjection {

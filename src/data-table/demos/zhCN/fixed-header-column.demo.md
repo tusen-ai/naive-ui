@@ -20,6 +20,10 @@ import { h } from 'vue'
 
 const columns = [
   {
+    type: 'selection',
+    fixed: 'left'
+  },
+  {
     title: 'Name',
     key: 'name',
     width: 200,
@@ -28,7 +32,8 @@ const columns = [
   {
     title: 'Age',
     key: 'age',
-    width: 100
+    width: 100,
+    fixed: 'left'
   },
   {
     title: 'Row',
@@ -49,7 +54,9 @@ const columns = [
     key: 'row2',
     render (row, index) {
       return h('span', ['row ', index])
-    }
+    },
+    width: 100,
+    fixed: 'right'
   },
   {
     title: 'Address',

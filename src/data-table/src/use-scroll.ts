@@ -1,8 +1,9 @@
 import { beforeNextFrame } from 'seemly'
-import { computed, ComputedRef, watch, Ref } from 'vue'
+import { computed, ComputedRef, watch, Ref, ref } from 'vue'
 import { formatLength, warn } from '../../_utils'
 import { DataTableProps } from './DataTable'
 import type { ColumnKey, MainTableRef } from './interface'
+import { getColWidth, getColKey } from './utils'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function useScroll (
@@ -16,6 +17,8 @@ export function useScroll (
   // which part is being scrolling: body left right header
   let scrollingPart: 'body' | 'left' | 'right' | 'header' | null = null
   let scrollReceived = false
+  const leftActiveFixedColKeyRef = ref<ColumnKey | null>(null)
+  const rightActiveFixedColKeyRef = ref<ColumnKey | null>(null)
   const styleScrollXRef = computed(() => {
     return formatLength(props.scrollX)
   })
@@ -29,8 +32,8 @@ export function useScroll (
     const columns: Record<ColumnKey, number | undefined> = {}
     let left = 0
     for (const column of leftFixedColumnsRef.value) {
-      columns[column.key] = left
-      left += column.width || 0
+      columns[getColKey(column)] = left
+      left += getColWidth(column) || 0
     }
     return columns
   })
@@ -38,11 +41,57 @@ export function useScroll (
     const columns: Record<ColumnKey, number | undefined> = {}
     let right = 0
     for (const column of rightFixedColumnsRef.value.reverse()) {
-      columns[column.key] = right
+      columns[getColKey(column)] = right
       right += column.width || 0
     }
     return columns
   })
+  function deriveActiveLeftFixedColumn (
+    target: HTMLElement,
+    tableWidth: number
+  ): void {
+    // target is header element
+    const { value: leftFixedColumns } = leftFixedColumnsRef
+    const scrollLeft = target.scrollLeft
+    let leftWidth = 0
+    const { value: fixedColumnLeftMap } = fixedColumnLeftMapRef
+    let leftActiveFixedColKey = null
+    for (let i = 0; i < leftFixedColumns.length; ++i) {
+      const key = getColKey(leftFixedColumns[i])
+      if (scrollLeft > (fixedColumnLeftMap[key] || 0) - leftWidth) {
+        leftActiveFixedColKey = key
+        leftWidth += getColWidth(leftFixedColumns[i]) || 0
+      } else {
+        break
+      }
+    }
+    leftActiveFixedColKeyRef.value = leftActiveFixedColKey
+  }
+  function deriveActiveRightFixedColumn (
+    target: HTMLElement,
+    tableWidth: number
+  ): void {
+    // target is header element
+    const { value: rightFixedColumns } = rightFixedColumnsRef
+    const { scrollLeft } = target
+    const scrollWidth = target.scrollWidth
+    let rightWidth = 0
+    let rightActiveFixedColKey = null
+    const { value: fixedColumnRightMap } = fixedColumnRightMapRef
+    for (let i = 0; i < rightFixedColumns.length; ++i) {
+      const key = getColKey(rightFixedColumns[i])
+      if (
+        scrollLeft + (fixedColumnRightMap[key] || 0) + tableWidth - rightWidth <
+        scrollWidth
+      ) {
+        rightActiveFixedColKey = key
+        rightWidth += getColWidth(rightFixedColumns[i]) || 0
+      } else {
+        break
+      }
+    }
+    rightActiveFixedColKeyRef.value = rightActiveFixedColKey
+  }
   function getScrollElements (): {
     header: HTMLElement | null
     body: HTMLElement | null
@@ -124,6 +173,10 @@ export function useScroll (
     fixedColumnRightMap: fixedColumnRightMapRef,
     leftFixedColumns: leftFixedColumnsRef,
     rightFixedColumns: rightFixedColumnsRef,
+    leftActiveFixedColKey: leftActiveFixedColKeyRef,
+    rightActiveFixedColKey: rightActiveFixedColKeyRef,
+    deriveActiveRightFixedColumn,
+    deriveActiveLeftFixedColumn,
     handleTableBodyScroll,
     handleTableHeaderScroll
   }
