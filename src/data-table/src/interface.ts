@@ -72,6 +72,8 @@ export type SelectionColInfo = {
   sorter?: never
   filter?: never
   filterOptions?: never
+  filterOptionValues?: never
+  filterOptionValue?: never
 } & CommonColInfo
 
 export interface DataTableInjection {

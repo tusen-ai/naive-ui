@@ -1,8 +1,16 @@
-import { VNode } from "vue"
+import { VNode } from 'vue'
 
-export function getVNodeChildren (vNode: VNode, slotName = 'default', fallback: VNode[] = []): VNode[] {
+export function getVNodeChildren (
+  vNode: VNode,
+  slotName = 'default',
+  fallback: VNode[] = []
+): VNode[] {
   const { children } = vNode
-  if (children !== null && typeof children === 'object' && !Array.isArray(children)) {
+  if (
+    children !== null &&
+    typeof children === 'object' &&
+    !Array.isArray(children)
+  ) {
     const slot = children[slotName]
     if (typeof slot === 'function') {
       return slot()

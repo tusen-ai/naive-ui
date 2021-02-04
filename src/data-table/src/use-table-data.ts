@@ -92,12 +92,13 @@ export function useTableData (props: DataTableProps) {
     // the table's controll functionality should work in controlled manner.
     const columnsWithControlledSortOrder = props.columns.filter(
       (column) =>
+        column.type !== 'selection' &&
         column.sorter !== undefined &&
         // skip column.sortOrder === false
         // it doesn't affect sort state
         (column.sortOrder === 'ascend' || column.sortOrder === 'descend')
     )
-    const columnToSort = columnsWithControlledSortOrder[0]
+    const columnToSort = columnsWithControlledSortOrder[0] as TableColumnInfo
     if (columnToSort) {
       return {
         columnKey: columnToSort.key,
@@ -121,6 +122,7 @@ export function useTableData (props: DataTableProps) {
     })
     const controlledFilterState: FilterState = {}
     columnsWithControlledFilter.forEach((column) => {
+      if (column.type === 'selection') return
       controlledFilterState[column.key] =
         column.filterOptionValues || column.filterOptionValue || null
     })
@@ -141,7 +143,11 @@ export function useTableData (props: DataTableProps) {
     const {
       value: { treeNodes: data }
     } = treeMateRef
-    const columnEntries = columns.map((column) => [column.key, column] as const)
+    const columnEntries: Array<[ColumnKey, TableColumnInfo]> = []
+    columns.forEach((column) => {
+      if (column.type === 'selection') return
+      columnEntries.push([column.key, column])
+    })
     return data
       ? data.filter((tmNode) => {
         const { rawNode: row } = tmNode
@@ -304,7 +310,7 @@ export function useTableData (props: DataTableProps) {
       clearSorter()
     } else {
       const columnToSort = props.columns.find(
-        (column) => column.key === columnKey
+        (column) => column.type !== 'selection' && column.key === columnKey
       )
       if (!columnToSort || !columnToSort.sorter) return
       const sorter = columnToSort.sorter
