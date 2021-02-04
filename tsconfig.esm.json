@@ -3,7 +3,7 @@
   "exclude": ["src/**/*.spec.ts"],
   "compilerOptions": {
     "outDir": "es",
-    "module": "ESNext",
-    "target": "ESNext"
+    "module": "ES6",
+    "target": "ES6"
   }
 }
