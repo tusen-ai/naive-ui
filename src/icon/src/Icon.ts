@@ -78,7 +78,7 @@ export default defineComponent({
   },
   render () {
     const { $parent, mergedDepth } = this
-    if ($parent && $parent.$options.__NAIVE_ICON__) {
+    if ($parent?.$options.__NAIVE_ICON__) {
       warn('icon', "don't wrap `n-icon` inside `n-icon`")
     }
     return h(

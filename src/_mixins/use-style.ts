@@ -6,7 +6,7 @@ globalStyle.mount({
   id: 'naive-ui-global'
 })
 
-export default function useStyle (mountId: string, style: CNode) {
+export default function useStyle (mountId: string, style: CNode): void {
   onBeforeMount(() => {
     style.mount({
       id: mountId

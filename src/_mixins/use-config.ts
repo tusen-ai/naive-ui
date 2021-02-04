@@ -9,10 +9,10 @@ type UseConfigProps = Readonly<{
 export default function useConfig (
   props: UseConfigProps
 ): {
-  NConfigProvider: ConfigProviderInjection | null
-  mergedBordered: ComputedRef<boolean>
-  namespace: ComputedRef<string | undefined>
-} {
+    NConfigProvider: ConfigProviderInjection | null
+    mergedBordered: ComputedRef<boolean>
+    namespace: ComputedRef<string | undefined>
+  } {
   const NConfigProvider = inject<ConfigProviderInjection | null>(
     'NConfigProvider',
     null

@@ -15,7 +15,7 @@
     "dev:ts": "npm run clean && npm run gen-version && cross-env NODE_ENV=development TUSIMPLE=true vite",
     "lint": "npm run lint:code && npm run lint:type",
     "lint:type": "tsc --noEmit",
-    "lint:code": "eslint --fix \"{src,build,scripts,demo}/**/*.{js,vue,md}\"",
+    "lint:code": "eslint --fix \"{src,build,scripts,demo}/**/*.{ts,tsx,js,vue,md}\"",
     "format": "npm run format:code && npm run format:md",
     "format:code": "prettier --write \"(src|demo)/**/*.(vue|js)\"",
     "format:md": "prettier --write --parser markdown --prose-wrap never \"demo/**/*.md\"",

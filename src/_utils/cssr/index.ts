@@ -18,7 +18,7 @@ context.theme = null
 context.palette = null
 const { cB, cE, cM, cNotM } = plugin
 
-function insideFormItem (status: string | null, style: CNode) {
+function insideFormItem (status: string | null, style: CNode): CNode {
   if (status === null) return style
   return c(`${prefix}form-item`, [
     c(`${prefix}form-item-blank`, [
@@ -27,7 +27,7 @@ function insideFormItem (status: string | null, style: CNode) {
   ])
 }
 
-function insideModal (style: CNode) {
+function insideModal (style: CNode): CNode {
   return c(`${prefix}modal, ${prefix}drawer`, [style])
 }
 
@@ -35,7 +35,7 @@ function cRB (selector: string, ...rest: any[]): CNode {
   return (c as any)(`${prefix}${selector}`, ...rest)
 }
 
-function withPrefix (selector: string) {
+function withPrefix (selector: string): string {
   return `${prefix}${selector}`
 }
 
