@@ -19,7 +19,7 @@
     "format": "npm run format:code && npm run format:md",
     "format:code": "prettier --write \"(src|demo)/**/*.(vue|js)\"",
     "format:md": "prettier --write --parser markdown --prose-wrap never \"demo/**/*.md\"",
-    "release:package": "npm run build:package && npm publish",
+    "release:package": "npm run build:package && npm publish --tag next",
     "test": "cross-env NODE_ENV=test jest",
     "gen-version": "node scripts/gen-version",
     "tusimple:dev": "npm run generate && cross-env NODE_ENV=development webpack-dev-server --config build/webpack.tusimple-dev.js",
