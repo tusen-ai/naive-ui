@@ -36,7 +36,7 @@ export default {
         renderFilterMenu: () => {
           return h(
             NSpace,
-            { style: { padding: '12px' } },
+            { style: { padding: '12px' }, vertical: true },
             {
               default: () => [
                 h(

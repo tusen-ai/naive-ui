@@ -71,6 +71,26 @@ custom-filter-menu
 ### Column Properties
 
 | 名称 | 类型 | 默认值 | 说明 |
-| ---- | ---- | ------ | ---- |
-
-| align | `'left' \| 'right' \| 'center'` | `'left'` | 列内的文本排列 | | className | `string` | `undefined` | | | defaultFilterOptionValue | `string \| number \| null` | `null` | 非受控状态下默认的过滤器选项值（过滤器单选时生效） | | defaultFilterOptionValues | `Array<string \| number>` | `[]` | 非受控状态下默认的过滤器选项值（过滤器多选时生效） | | defaultSortOrder | `'descend' \| 'ascend' \| false` | `false` | 非受控状态下表格默认的排序方式 | | disabled | `(rowData: Object, index: number) => boolean` | `undefined` | | | ellipsis | `boolean` | `false` | | | filter | `boolean \| (optionValue: string \| number, rowData: Object) => boolean \| 'default'` | `undefined` | 这一列的过滤方法。如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。 | | filterMode | `'and' \| 'or'` | `'or'` | | | filterMultiple | `boolean` | `true` | | | filterOptionValue | `string \| number \| null` | `undefined` | 受控状态下，当前激活的过滤器选项值。如果不做设定，这一列的过滤行为将是非受控的（过滤器单选时生效） | | filterOptionValues | `Array<string \| number> \| null` | `undefined` | 受控状态下，当前激活的过滤器选项值数组。如果不做设定，这一列的过滤行为将是非受控的（过滤器多选时生效） | | filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` | | | fixed | `'left \| 'right' \| false` | `false` | | | key | `string \| number` | **必须** | 这一列的 key，在表格未设定 row-key 的时候是**必须**的。 | | render | `(rowData: Object) => VNodeChild` | `undefined` | 渲染函数，渲染这一列的每一行的单元格 | | renderFilterMenu | `() => VNodeChild` | `undefined` | 渲染函数，渲染这一列的过滤器菜单 | | sortOrder | `'descend' \| 'ascend' \| false` | `undefined` | 受控状态下表格的排序方式。如果多列都设定了有效值，那么只有第一个会生效 | | sorter | `boolean \| function \| 'default'` | `undefined` | 这一列的排序方法。如果设为 `'default'` 表格将会使用一个内置的排序函数；如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。其他情况下它工作的方式类似 `Array.sort` 的对比函数 | | title | `string \| (() => VNodeChild)` | `undefined` | 可以是渲染函数 | | type | `'selection'` | `undefined` | | | width | `number \| string` | `undefined` | 列的宽度，在列固定时是**必需**的 |
+| --- | --- | --- | --- |
+| align | `'left' \| 'right' \| 'center'` | `'left'` | 列内的文本排列 |
+| className | `string` | `undefined` |  |
+| defaultFilterOptionValue | `string \| number \| null` | `null` | 非受控状态下默认的过滤器选项值（过滤器单选时生效） |
+| defaultFilterOptionValues | `Array<string \| number>` | `[]` | 非受控状态下默认的过滤器选项值（过滤器多选时生效） |
+| defaultSortOrder | `'descend' \| 'ascend' \| false` | `false` | 非受控状态下表格默认的排序方式 |
+| disabled | `(rowData: Object, index: number) => boolean` | `undefined` |  |
+| ellipsis | `boolean` | `false` |  |
+| filter | `boolean \| (optionValue: string \| number, rowData: Object) => boolean \| 'default'` | `undefined` | 这一列的过滤方法。如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。 |
+| filterMode | `'and' \| 'or'` | `'or'` |  |
+| filterMultiple | `boolean` | `true` |  |
+| filterOptionValue | `string \| number \| null` | `undefined` | 受控状态下，当前激活的过滤器选项值。如果不做设定，这一列的过滤行为将是非受控的（过滤器单选时生效） |
+| filterOptionValues | `Array<string \| number> \| null` | `undefined` | 受控状态下，当前激活的过滤器选项值数组。如果不做设定，这一列的过滤行为将是非受控的（过滤器多选时生效） |
+| filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` |  |
+| fixed | `'left \| 'right' \| false` | `false` |  |
+| key | `string \| number` | **必须** | 这一列的 key，在表格未设定 row-key 的时候是**必须**的。 |
+| render | `(rowData: Object) => VNodeChild` | `undefined` | 渲染函数，渲染这一列的每一行的单元格 |
+| renderFilterMenu | `() => VNodeChild` | `undefined` | 渲染函数，渲染这一列的过滤器菜单 |
+| sortOrder | `'descend' \| 'ascend' \| false` | `undefined` | 受控状态下表格的排序方式。如果多列都设定了有效值，那么只有第一个会生效 |
+| sorter | `boolean \| function \| 'default'` | `undefined` | 这一列的排序方法。如果设为 `'default'` 表格将会使用一个内置的排序函数；如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。其他情况下它工作的方式类似 `Array.sort` 的对比函数 |
+| title | `string \| (() => VNodeChild)` | `undefined` | 可以是渲染函数 |
+| type | `'selection'` | `undefined` |  |
+| width | `number \| string` | `undefined` | 列的宽度，在列固定时是**必需**的 |

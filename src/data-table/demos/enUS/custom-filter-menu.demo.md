@@ -1,4 +1,4 @@
-# 自定义过滤菜单
+# Custom Filter Menu
 
 ```html
 <n-data-table :columns="cols" :data="data" />
@@ -36,7 +36,7 @@ export default {
         renderFilterMenu: () => {
           return h(
             NSpace,
-            { style: { padding: '12px' } },
+            { style: { padding: '12px' }, vertical: true },
             {
               default: () => [
                 h(
