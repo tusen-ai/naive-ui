@@ -39,10 +39,10 @@ ajax-usage
 | scroll-x | `number \| string` | `undefined` | 表格内容的横向宽度，如果列被水平固定了，则需要设定它 |
 | pagination | `false \| Object` | `false` | 属性参考 [Pagination props](n-pagination#Props) |
 | paging | `boolean` | `true` | 表格是否自动分页数据，在异步的状况下你可能需要把它设为 `false` |
-| row-class-name | `string \| (rowData: Object, index : number) => string \| Object` | `null` |  |
-| checked-row-keys | `Array<string \| number> \| null` | `null` | 被选中的列的 key |
+| row-class-name | `string \| (rowData: Object, index : number) => string \| Object` | `undefined` |  |
+| checked-row-keys | `Array<string \| number>` | `undefined` | 被选中的列的 key |
 | default-checked-row-keys | `Array<string \| number>` | `[]` |  |
-| row-key | `(rowData: Object) => number \| string` | `null` | 通过行数据创建行的 key（如果你不想给每一行加上 key） |
+| row-key | `(rowData: Object) => number \| string` | `undefined` | 通过行数据创建行的 key（如果你不想给每一行加上 key） |
 | bordered | `boolean` | `true` |  |
 | single-line | `boolean` | `true` |  |
 | single-column | `boolean` | `false` |  |
@@ -60,7 +60,7 @@ ajax-usage
 | 名称 | 参数 | 说明 |
 | --- | --- | --- |
 | filters | `(filters: { [string \| number]: Array<string \| number> }) => void` | 设定表格当前的过滤器 |
-| sort | `(columnKey: string \| null, order: 'ascend' \| 'descend' \| false) => void` | 如果 columnKey 设为 `null`，那它和 clearSorter 效果一致 |
+| sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | 如果 columnKey 设为 `null`，那它和 clearSorter 效果一致 |
 | page | `(page: number) => void` |  |
 | clearFilters | `() => void` |  |
 | clearSorter | `() => void` |  |
@@ -71,24 +71,24 @@ ajax-usage
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| render | `(rowData: Object) => VNode \| Array<VNode>` | `null` | 渲染函数，渲染这一列的每一行的单元格 |
-| type | `'default' \| 'selection'` | `default` |  |
-| disabled | `(rowData: Object, index: number) => boolean` | `() => false` |  |
+| render | `(rowData: Object) => VNodeChild` | `undefined` | 渲染函数，渲染这一列的每一行的单元格 |
+| type | `'selection'` | `undefined` |  |
+| disabled | `(rowData: Object, index: number) => boolean` | `undefined` |  |
 | align | `'left' \| 'right' \| 'center'` | `'left'` | 列内的文本排列 |
 | ellipsis | `boolean` | `false` |  |
-| className | `string` | `null` |  |
-| title | `string \| (() => VNode \| Array<VNode>)` | `null` | 可以是渲染函数 |
-| key | `string` |  | 这一列的 key，在表格未设定 row-key 的时候是**必须**的。 |
-| sorter | `boolean \| function \| 'default'` | `false` | 这一列的排序方法。如果设为 `'default'` 表格将会使用一个内置的排序函数；如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。其他情况下它工作的方式类似 `Array.sort` 的对比函数 |
+| className | `string` | `undefined` |  |
+| title | `string \| (() => VNodeChild)` | `undefined` | 可以是渲染函数 |
+| key | `string \| number` | **必须** | 这一列的 key，在表格未设定 row-key 的时候是**必须**的。 |
+| sorter | `boolean \| function \| 'default'` | `undefined` | 这一列的排序方法。如果设为 `'default'` 表格将会使用一个内置的排序函数；如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。其他情况下它工作的方式类似 `Array.sort` 的对比函数 |
 | defaultSortOrder | `'descend' \| 'ascend' \| false` | `false` | 非受控状态下表格默认的排序方式 |
-| sortOrder | `'descend' \| 'ascend' \| false \| null` | `null` | 受控状态下表格的排序方式。如果不是 `null`，表格整体的排序将会是受控的。如果多列都设定了有效值，那么只有第一个会生效 |
-| filter | `boolean \| (optionValue: string \| number, rowData: Object) => boolean \| 'default'` | `false` | 这一列的过滤方法。如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。 |
+| sortOrder | `'descend' \| 'ascend' \| false` | `undefined` | 受控状态下表格的排序方式。如果多列都设定了有效值，那么只有第一个会生效 |
+| filter | `boolean \| (optionValue: string \| number, rowData: Object) => boolean \| 'default'` | `undefined` | 这一列的过滤方法。如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。 |
 | filterMode | `'and' \| 'or'` | `'or'` |  |
-| filterOptions | `Array<{ label: string, value: string \| number}>` | `[]` |  |
+| filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` |  |
 | filterOptionValues | `Array<string \| number> \| null` | `undefined` | 受控状态下，当前激活的过滤器选项值数组。如果不做设定，这一列的过滤行为将是非受控的（过滤器多选时生效） |
 | filterOptionValue | `string \| number \| null` | `undefined` | 受控状态下，当前激活的过滤器选项值。如果不做设定，这一列的过滤行为将是非受控的（过滤器单选时生效） |
 | defaultFilterOptionValues | `Array<string \| number>` | `[]` | 非受控状态下默认的过滤器选项值（过滤器多选时生效） |
-| defaultFilterOptionValue | `string \| number` | `null` | 非受控状态下默认的过滤器选项值（过滤器单选时生效） |
+| defaultFilterOptionValue | `string \| number \| null` | `null` | 非受控状态下默认的过滤器选项值（过滤器单选时生效） |
 | filterMultiple | `boolean` | `true` |  |
 | fixed | `'left \| 'right' \| false` | `false` |  |
-| width | `number \| string` | `null` | 列的宽度，在列固定时是**必需**的 |
+| width | `number \| string` | `undefined` | 列的宽度，在列固定时是**必需**的 |

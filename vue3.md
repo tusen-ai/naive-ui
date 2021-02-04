@@ -433,6 +433,7 @@
   - [ ] anchor in modal page, maybe a bug of vue...
   - [ ] menu + dropdown collapsed 时候 menu item 不更新（selected 从使用 useMemo 切换成 computed（性能下降）, Vue 在这种时候一定存在 bug，但是暂时没空找了...）
   - [ ] select menu multiple, when show=true, checkmark transiton not working（推测是 vue 的 bug）
+  - [ ] demo hmr
 
 ## Build
 

@@ -31,6 +31,7 @@ export interface TableNode {
 
 export type TmNode = TreeNode<TableNode>
 
+// for compat may add null
 export type SortOrder = 'ascend' | 'descend' | false
 
 export interface CommonColInfo {
@@ -43,6 +44,7 @@ export interface CommonColInfo {
 
 export type TableColumnInfo = {
   title?: string | ((column: TableColumnInfo, index: number) => VNodeChild)
+  // for compat maybe default
   type?: never
   key: ColumnKey
 

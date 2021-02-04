@@ -94,11 +94,16 @@ export function useTableData (props: DataTableProps) {
       (column) =>
         column.type !== 'selection' &&
         column.sorter !== undefined &&
-        // skip column.sortOrder === false
-        // it doesn't affect sort state
-        (column.sortOrder === 'ascend' || column.sortOrder === 'descend')
+        (column.sortOrder === 'ascend' ||
+          column.sortOrder === 'descend' ||
+          column.sortOrder === false)
     )
-    const columnToSort = columnsWithControlledSortOrder[0] as TableColumnInfo
+    // if multiple column is controlled sortable, then we need to find a column with active sortOrder
+    const columnToSort:
+    | TableColumnInfo
+    | undefined = (columnsWithControlledSortOrder as TableColumnInfo[]).filter(
+      (col: TableColumnInfo) => col.sortOrder !== false
+    )[0]
     if (columnToSort) {
       return {
         columnKey: columnToSort.key,
@@ -110,6 +115,7 @@ export function useTableData (props: DataTableProps) {
         sorter: columnToSort.sorter!
       }
     }
+    if (columnsWithControlledSortOrder.length) return null
     return uncontrolledSortStateRef.value
   })
 

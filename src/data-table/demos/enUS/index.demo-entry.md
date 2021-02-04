@@ -39,10 +39,10 @@ ajax-usage
 | scroll-x | `number \| string` | `undefined` | If columns are horizontal fixed, scroll-x need to be set |
 | pagination | `false \| Object` | `false` | See [Pagination props](n-pagination#Props) |
 | paging | `boolean` | `true` | If data-table do automatic paging. You may set it to `false` in async usage. |
-| row-class-name | `string \| (rowData: Object, index : number) => string \| Object` | `null` |  |
-| checked-row-keys | `Array<string \| number> \| null` | `null` | The keys of checked rows. |
+| row-class-name | `string \| (rowData: Object, index : number) => string \| Object` | `undefined` |  |
+| checked-row-keys | `Array<string \| number>` | `undefined` | The keys of checked rows. |
 | default-checked-row-keys | `Array<string \| number>` | `[]` |  |
-| row-key | `(rowData: Object) => number \| string` | `null` | Generate the key of the row by row data (if you don't want to set the key) |
+| row-key | `(rowData: Object) => number \| string` | `undefined` | Generate the key of the row by row data (if you don't want to set the key) |
 | bordered | `boolean` | `true` |  |
 | single-line | `boolean` | `true` |  |
 | single-column | `boolean` | `false` |  |
@@ -60,7 +60,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | Name | Type | Description |
 | --- | --- | --- |
 | filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }) => void` | Set the active filters of the table. |
-| sort | `(columnKey: string \| null, order: 'ascend' \| 'descend' \| false) => void` | If columnKey set to `null`, it is the same as clearSorter. |
+| sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | If columnKey set to `null`, it is the same as clearSorter. |
 | page | `(page: number) => void` |  |
 | clearFilters | `() => void` |  |
 | clearSorter | `() => void` |  |
@@ -81,24 +81,24 @@ These methods can help you control table in an uncontrolled manner. However, it'
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| render | `(rowData: Object) => VNode \| Array<VNode>` | `null` | Render function of column row cell |
+| render | `(rowData: Object) => VNodeChild` | `undefined` | Render function of column row cell |
 | type | `'default' \| 'selection'` | `default` |  |
 | disabled | `(rowData: Object, index: number) => boolean` | `() => false` |  |
 | align | `'left' \| 'right' \| 'center'` | `'left'` | Text align in column |
 | ellipsis | `boolean` | `false` |  |
-| className | `string` | `null` |  |
-| title | `string \| (() => VNode \| Array<VNode>)` | `null` | Can be a render function |
-| key | `string` |  | Unique key of this column, **required** when table's row-key is not set. |
+| className | `string` | `undefined` |  |
+| title | `string \| (() => VNodeChild)` | `undefined` | Can be a render function |
+| key | `string \| number` | **required** | Unique key of this column, **required** when table's row-key is not set. |
 | sorter | `boolean \| function \| 'default'` | `false` | The sorter of the column. If set `'default'`, it will use a basic builtin compare function. If set to `true`, it will only display sort icon on the column, which can be used in async status. Otherwise it works like `Array.sort`'s compare function. |
 | defaultSortOrder | `'descend' \| 'ascend' \| false` | `false` | The default sort order of the table in uncontrolled manner |
-| sortOrder | `'descend' \| 'ascend' \| false \| null` | `null` | The controlled sort order of the column. If it is not `null`, the table's sort status will be in controlled mode. If multiple columns' sortOrder is set, the first one will affect. |
+| sortOrder | `'descend' \| 'ascend' \| false` | `undefined` | The controlled sort order of the column. If multiple columns' sortOrder is set, the first one will affect. |
 | filter | `boolean \| (optionValue: string \| number, rowData: Object) => boolean \| 'default'` | `false` | The filter of the column. If set to `true`, it will only display filter button on the column, which can be used in async status. |
 | filterMode | `'and' \| 'or'` | `'or'` |  |
-| filterOptions | `Array<{ label: string, value: string \| number}>` | `[]` |  |
+| filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` |  |
 | filterOptionValues | `Array<string \| number> \| null` | `undefined` | The active filter option values in controlled manner. If not set, the filter of the column works in an uncontrolled manner. (works when there are multiple filters) |
 | filterOptionValue | `string \| number \| null` | `undefined` | The active filter option value in controlled manner. If not set, the filter of the column works in an uncontrolled manner. (works when not using multiple filters) |
 | defaultFilterOptionValues | `Array<string \| number>` | `[]` | The default active filter option values in uncontrolled manner. (works when there are multiple filters) |
-| defaultFilterOptionValue | `string \| number` | `null` | The default active filter option value in uncontrolled manner. (works when not using multiple filters) |
+| defaultFilterOptionValue | `string \| number \| null` | `null` | The default active filter option value in uncontrolled manner. (works when not using multiple filters) |
 | filterMultiple | `boolean` | `true` |  |
 | fixed | `'left \| 'right' \| false` | `false` |  |
-| width | `number \| string` | `null` | Width of the column, **required** when fixed |
+| width | `number \| string` | `undefined` | Width of the column, **required** when fixed |
