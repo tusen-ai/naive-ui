@@ -1,5 +1,14 @@
-import { defineComponent, h, toRef, watch, onMounted, ref, computed } from 'vue'
-import { useTheme, useHljs } from '../../_mixins'
+import {
+  defineComponent,
+  h,
+  toRef,
+  watch,
+  onMounted,
+  ref,
+  computed,
+  PropType
+} from 'vue'
+import { useTheme, useHljs, Hljs } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { codeLight } from '../styles'
 import type { CodeTheme } from '../styles'
@@ -9,10 +18,7 @@ export default defineComponent({
   name: 'Code',
   props: {
     ...(useTheme.props as ThemeProps<CodeTheme>),
-    language: {
-      type: String,
-      default: undefined
-    },
+    language: String,
     code: {
       type: String,
       default: ''
@@ -21,9 +27,10 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
-    hljs: {
-      type: Object,
-      default: undefined
+    hljs: Object as PropType<Hljs>,
+    uri: {
+      type: Boolean,
+      default: false
     }
   },
   setup (props, { slots }) {
@@ -47,7 +54,10 @@ export default defineComponent({
       if (slots.default) return
       const { value: codeEl } = codeRef
       if (!codeEl) return
-      const { code, language } = props
+      const { language } = props
+      const code = props.uri
+        ? window.decodeURIComponent(props.code)
+        : props.code
       if (language) {
         const html = createCodeHtml(language, code, props.trim)
         if (html !== null) {

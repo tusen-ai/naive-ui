@@ -3,8 +3,6 @@ const fs = require('fs')
 const path = require('path')
 const createRenderer = require('./md-renderer')
 const mdRenderer = createRenderer()
-const codeRenderer = createRenderer(false)
-// const prettier = require('prettier')
 
 const demoBlock = fs
   .readFileSync(path.resolve(__dirname, 'ComponentDemoTemplate.vue'))
@@ -15,7 +13,6 @@ function getPartsOfDemo (tokens) {
   let script = null
   let style = null
   let title = null
-  // let content = null
   const contentTokens = []
   contentTokens.links = tokens.links
   for (const token of tokens) {
@@ -74,14 +71,9 @@ ${parts.script}
 ${parts.style}
 </style>`
   }
-  mergedParts.code = marked(
-    `\`\`\`html
-${mergedParts.code}
-\`\`\``,
-    {
-      renderer: codeRenderer
-    }
-  )
+  mergedParts.code = `<n-code language="html" uri code="${encodeURIComponent(
+    mergedParts.code
+  )}" />`
   // console.log(mergedParts.code)
   return mergedParts
 }
@@ -167,10 +159,3 @@ function convertMd2Demo (text, { resourcePath, relativeUrl }) {
 }
 
 module.exports = convertMd2Demo
-// const startTime = new Date()
-// for (let i = 0; i < 100; ++i) {
-// const md = fs.readFileSync('./demo/documentation/components/input/enUS/lazyFocus.md').toString()
-// convertMd2Demo(md)
-// }
-// const endTime = new Date()
-// console.log(endTime - startTime)
