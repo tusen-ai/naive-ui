@@ -9,7 +9,7 @@
     "deprecated:build:icons": "npm run clean && node scripts/pre-build/deprecated-build-icons.js",
     "build:js": "npm run gen-version && npm run clean && tsc -p tsconfig.esm.json && tsc -p tsconfig.cjs.json && node scripts/post-build",
     "build:package": "npm run gen-version && npm run clean && node scripts/pre-build/deprecated-build-icons.js && tsc -p tsconfig.esm.json && tsc -p tsconfig.cjs.json && node scripts/post-build",
-    "build:site": "./scripts/pre-build-site/pre-build-site.sh && node scripts/pre-build-site/restore-side-effects && cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && rm -rf node_modules/naive-ui && cp site/index.html site/404.html && node scripts/post-build-site/clear-side-effects",
+    "build:site": "npm run build:package && ./scripts/pre-build-site/pre-build-site.sh && node scripts/pre-build-site/restore-side-effects && cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && rm -rf node_modules/naive-ui && cp site/index.html site/404.html && node scripts/post-build-site/clear-side-effects",
     "clean": "rm -rf site lib es node_modules/naive-ui",
     "dev": "npm run clean && npm run gen-version && cross-env NODE_ENV=development vite",
     "dev:ts": "npm run clean && npm run gen-version && cross-env NODE_ENV=development TUSIMPLE=true vite",
@@ -107,7 +107,7 @@
     "rollup-plugin-vue": "^6.0.0-beta.11",
     "tinycolor2": "^1.4.2",
     "typescript": "^4.1.3",
-    "vite": "^2.0.0-beta.60",
+    "vite": "^2.0.0-beta.64",
     "vue-jest": "^5.0.0-alpha.5",
     "vue-router": "^4.0.0-rc.1"
   },
