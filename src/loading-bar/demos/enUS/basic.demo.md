@@ -9,17 +9,21 @@
 ```
 
 ```js
+import { useLoadingBar } from 'naive-ui'
+
 export default {
-  inject: ['loadingBar'],
-  methods: {
-    handleStart () {
-      this.loadingBar.start()
-    },
-    handleFinish () {
-      this.loadingBar.finish()
-    },
-    handleError () {
-      this.loadingBar.error()
+  setup () {
+    const loadingBar = useLoadingBar()
+    return {
+      handleStart () {
+        loadingBar.start()
+      },
+      handleFinish () {
+        loadingBar.finish()
+      },
+      handleError () {
+        loadingBar.error()
+      }
     }
   }
 }

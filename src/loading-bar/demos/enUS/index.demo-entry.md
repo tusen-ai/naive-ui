@@ -16,12 +16,16 @@ For example:
 ```
 
 ```js
+import { useLoadingBar } from 'naive-ui'
+
 // content
 export default {
-  inject: ['loadingBar'],
-  methods: {
-    loading () {
-      this.loadingBar.start()
+  setup () {
+    const loadingBar = useLoadingBar()
+    return {
+      loading () {
+        loadingBar.start()
+      }
     }
   }
 }

@@ -94,7 +94,7 @@
   - break
     - rename `confirm` to `dialog`
   - remove
-    - `$NConfirm`, `$NModal` => `inject.dialog`
+    - `$NConfirm`, `$NModal` => `useDialog`
 - [x] data-table
   - deprecate
     - `on-filters-change` => `on-update:filters`
@@ -177,6 +177,7 @@
   - remove
     - `$NLoadingBar`
   - new
+    - `useLoadingBar`
     - `n-loading-bar-provider`
 - [x] log
   - deprecate
@@ -195,6 +196,8 @@
     - `overlay-min-width`
 - [x] message
   - rewrite message using `n-message-provider`
+  - new
+    - `useMessage`
   - deprecate
     - `onHide` => `onLeave`
     - `onAfterHide` => `onAfterLeave`
@@ -211,9 +214,9 @@
     - `overlay-style` => `style`
   - remove
     - default hide behavior for preset
-  - BUG:
-    - dialog preset slot (below vue 3.0.2)
 - [x] notification
+  - new
+    - `useNotification`
   - deprecate
     - `open` => `create`
     - `onHide` => `onLeave`
