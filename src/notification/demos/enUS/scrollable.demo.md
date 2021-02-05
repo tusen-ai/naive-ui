@@ -9,22 +9,26 @@ Change the property will cause all existing notifications to be cleaned, so plea
 ```
 
 ```js
+import { useNotification } from 'naive-ui'
+
 export default {
-  inject: ['notification'],
-  methods: {
-    handleClick (scrollable) {
-      Array.apply(null, { length: 5 }).forEach((notification) =>
-        this.notification.create({
-          title: 'Many Notifications',
-          content: `Try to scroll
+  setup () {
+    const notification = useNotification()
+    return {
+      handleClick (scrollable) {
+        Array.apply(null, { length: 5 }).forEach(() =>
+          notification.create({
+            title: 'Many Notifications',
+            content: `Try to scroll
 Try to scroll
 Try to scroll
 Try to scroll
 Try to scroll
 Try to scroll
 Try to scroll`
-        })
-      )
+          })
+        )
+      }
     }
   }
 }

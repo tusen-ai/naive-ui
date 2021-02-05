@@ -7,34 +7,38 @@
 ```
 
 ```js
+import { useNotification } from 'naive-ui'
+
 export default {
-  inject: ['notification'],
-  methods: {
-    handleClick () {
-      let count = 10
-      const notification = this.notification.create({
-        title: '平山道 + 雨 = 什么？',
-        content: `你有 ${count} 秒来回答这个问题`,
-        duration: 10000,
-        closable: false,
-        onAfterEnter: () => {
-          const minusCount = () => {
-            count--
-            notification.content = `你有 ${count} 秒来回答这个问题`
-            if (count > 0) {
-              window.setTimeout(minusCount, 1000)
+  setup () {
+    const notification = useNotification()
+    return {
+      handleClick () {
+        let count = 10
+        const n = notification.create({
+          title: '平山道 + 雨 = 什么？',
+          content: `你有 ${count} 秒来回答这个问题`,
+          duration: 10000,
+          closable: false,
+          onAfterEnter: () => {
+            const minusCount = () => {
+              count--
+              n.content = `你有 ${count} 秒来回答这个问题`
+              if (count > 0) {
+                window.setTimeout(minusCount, 1000)
+              }
             }
+            window.setTimeout(minusCount, 1000)
+          },
+          onAfterLeave: () => {
+            notification.create({
+              title: '答案是平山河',
+              content: '这其实连个冷笑话都算不上',
+              duration: 10000
+            })
           }
-          window.setTimeout(minusCount, 1000)
-        },
-        onAfterLeave: () => {
-          this.notification.create({
-            title: '答案是平山河',
-            content: '这其实连个冷笑话都算不上',
-            duration: 10000
-          })
-        }
-      })
+        })
+      }
     }
   }
 }

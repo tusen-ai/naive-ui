@@ -10,21 +10,20 @@
 ```
 
 ```js
-import { h, resolveComponent } from 'vue'
+import { h, ref } from 'vue'
+import { NAvatar, useNotification } from 'naive-ui'
 
 export default {
-  inject: ['notification'],
-  data () {
+  setup () {
+    const notification = useNotification()
+    const nRef = ref(null)
     return {
-      n: null
-    }
-  },
-  methods: {
-    open () {
-      this.n = this.notification.create({
-        title: "Wouldn't it be Nice",
-        description: 'From the Beach Boys',
-        content: `Wouldn't it be nice if we were older
+      n: nRef,
+      open () {
+        nRef.value = notification.create({
+          title: "Wouldn't it be Nice",
+          description: 'From the Beach Boys',
+          content: `Wouldn't it be nice if we were older
 Then we wouldn't have to wait so long
 And wouldn't it be nice to live together
 In the kind of world where we belong
@@ -34,25 +33,26 @@ Wouldn't it be nice if we could wake up
 In the morning when the day is new
 And after having spent the day together
 Hold each other close the whole night through`,
-        meta: '2019-5-27 15:11',
-        avatar: () =>
-          h(resolveComponent('n-avatar'), {
-            size: 'small',
-            round: true,
-            src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
-          }),
-        onClose: () => {
-          this.n = null
+          meta: '2019-5-27 15:11',
+          avatar: () =>
+            h(NAvatar, {
+              size: 'small',
+              round: true,
+              src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+            }),
+          onClose: () => {
+            nRef.value = null
+          }
+        })
+      },
+      change () {
+        if (nRef.value) {
+          nRef.value.content = () =>
+            h('img', {
+              src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
+              style: 'width: 100%;'
+            })
         }
-      })
-    },
-    change () {
-      if (this.n) {
-        this.n.content = () =>
-          h('img', {
-            src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
-            style: 'width: 100%;'
-          })
       }
     }
   }

@@ -18,12 +18,16 @@
 ```
 
 ```js
+import { useNotification } from 'naive-ui'
+
 // content
 export default {
-  inject: ['nofitication'],
-  methods: {
-    nofity () {
-      this.nofitication.create(options)
+  setup () {
+    const notification = useNotification()
+    return {
+      warning () {
+        notification.warning('...')
+      }
     }
   }
 }

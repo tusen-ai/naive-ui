@@ -10,14 +10,18 @@
 ```
 
 ```js
+import { useNotification } from 'naive-ui'
+
 export default {
-  inject: ['notification'],
-  methods: {
-    notify (type) {
-      this.notification[type]({
-        content: 'What to say?',
-        meta: "I don't know"
-      })
+  setup () {
+    const notification = useNotification()
+    return {
+      notify (type) {
+        notification[type]({
+          content: 'What to say?',
+          meta: "I don't know"
+        })
+      }
     }
   }
 }

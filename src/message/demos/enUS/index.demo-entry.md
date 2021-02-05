@@ -16,12 +16,16 @@ For example:
 ```
 
 ```js
+import { useMessage } from 'naive-ui'
+
 // content
 export default {
-  inject: ['message'],
-  methods: {
-    warning () {
-      this.message.warning('...')
+  setup () {
+    const message = useMessage()
+    return {
+      warning () {
+        message.warning('...')
+      }
     }
   }
 }

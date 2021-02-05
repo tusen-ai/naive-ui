@@ -9,22 +9,26 @@
 ```
 
 ```js
+import { useNotification } from 'naive-ui'
+
 export default {
-  inject: ['notification'],
-  methods: {
-    handleClick (scrollable) {
-      Array.apply(null, { length: 5 }).forEach((notification) =>
-        this.notification.create({
-          title: '很多个通知',
-          content: `试着滚起来
+  setup () {
+    const notification = useNotification()
+    return {
+      handleClick (scrollable) {
+        Array.apply(null, { length: 5 }).forEach(() =>
+          notification.create({
+            title: '很多个通知',
+            content: `试着滚起来
 试着滚起来
 试着滚起来
 试着滚起来
 试着滚起来
 试着滚起来
 试着滚起来`
-        })
-      )
+          })
+        )
+      }
     }
   }
 }
