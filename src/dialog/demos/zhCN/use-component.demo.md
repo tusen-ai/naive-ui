@@ -15,14 +15,18 @@
 ```
 
 ```js
+import { useMessage } from 'naive-ui'
+
 export default {
-  inject: ['message'],
-  methods: {
-    handleNegativeClick () {
-      this.message.warning('取消')
-    },
-    handlePositiveClick () {
-      this.message.success('确认')
+  setup () {
+    const message = useMessage()
+    return {
+      handleNegativeClick () {
+        message.warning('取消')
+      },
+      handlePositiveClick () {
+        message.success('确认')
+      }
     }
   }
 }

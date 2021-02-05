@@ -7,36 +7,41 @@
 ```
 
 ```js
+import { useDialog } from 'naive-ui'
+
 const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000))
 const countDown = (second) => `倒计时 ${second} 秒`
 
 export default {
   inject: ['dialog'],
-  methods: {
-    handleClick (e) {
-      const dialog = this.dialog.success({
-        title: '异步',
-        content: '点击，倒计时 3 秒',
-        positiveText: '确认',
-        onPositiveClick: () => {
-          dialog.loading = true
-          return new Promise((resolve) => {
-            sleep()
-              .then(() => {
-                dialog.content = countDown(2)
-                return sleep()
-              })
-              .then(() => {
-                dialog.content = countDown(1)
-                return sleep()
-              })
-              .then(() => {
-                dialog.content = countDown(0)
-              })
-              .then(resolve)
-          })
-        }
-      })
+  setup () {
+    const dialog = useDialog()
+    return {
+      handleClick () {
+        const d = dialog.success({
+          title: '异步',
+          content: '点击，倒计时 3 秒',
+          positiveText: '确认',
+          onPositiveClick: () => {
+            d.loading = true
+            return new Promise((resolve) => {
+              sleep()
+                .then(() => {
+                  d.content = countDown(2)
+                  return sleep()
+                })
+                .then(() => {
+                  d.content = countDown(1)
+                  return sleep()
+                })
+                .then(() => {
+                  d.content = countDown(0)
+                })
+                .then(resolve)
+            })
+          }
+        })
+      }
     }
   }
 }

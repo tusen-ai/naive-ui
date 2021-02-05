@@ -9,42 +9,47 @@ Inject `dialog` to create a dialog.
 ```
 
 ```js
+import { useMessage, useDialog } from 'naive-ui'
+
 export default {
-  inject: ['dialog', 'message'],
-  methods: {
-    handleConfirm (e) {
-      this.dialog.warning({
-        title: 'Confirm',
-        content: 'Are you sure?',
-        positiveText: 'Sure',
-        negativeText: 'Not Sure',
-        onPositiveClick: () => {
-          this.message.success('Sure')
-        },
-        onNegativeClick: () => {
-          this.message.error('Not Sure')
-        }
-      })
-    },
-    handleSuccess (e) {
-      this.dialog.success({
-        title: 'Success',
-        content: 'Cool',
-        positiveText: 'Wow!',
-        onPositiveClick: () => {
-          this.message.success('Great!')
-        }
-      })
-    },
-    handleError (e) {
-      this.dialog.error({
-        title: 'Error',
-        content: 'A mistake.',
-        positiveText: 'Ahhh!',
-        onPositiveClick: () => {
-          this.message.success('I knew it...')
-        }
-      })
+  setup () {
+    const message = useMessage()
+    const dialog = useDialog()
+    return {
+      handleConfirm () {
+        dialog.warning({
+          title: 'Confirm',
+          content: 'Are you sure?',
+          positiveText: 'Sure',
+          negativeText: 'Not Sure',
+          onPositiveClick: () => {
+            message.success('Sure')
+          },
+          onNegativeClick: () => {
+            message.error('Not Sure')
+          }
+        })
+      },
+      handleSuccess () {
+        dialog.success({
+          title: 'Success',
+          content: 'Cool',
+          positiveText: 'Wow!',
+          onPositiveClick: () => {
+            message.success('Great!')
+          }
+        })
+      },
+      handleError () {
+        dialog.error({
+          title: 'Error',
+          content: 'A mistake.',
+          positiveText: 'Ahhh!',
+          onPositiveClick: () => {
+            message.success('I knew it...')
+          }
+        })
+      }
     }
   }
 }

@@ -16,12 +16,17 @@ For example:
 ```
 
 ```js
+import { useDialog } from 'naive-ui'
+
 // content
 export default {
   inject: ['dialog'],
-  methods: {
-    warning () {
-      this.dialog.warning(options)
+  setup () {
+    const dialog = useDialog()
+    return {
+      warning () {
+        dialog.warning(options)
+      }
     }
   }
 }

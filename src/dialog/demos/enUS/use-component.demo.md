@@ -15,16 +15,18 @@ Sometimes you may want to use a component.
 ```
 
 ```js
+import { useMessage } from 'naive-ui'
+
 export default {
-  inject: ['message'],
-  methods: {
-    handleNegativeClick () {
-      this.message.warning('Cancel')
-      this.isActive = false
-    },
-    handlePositiveClick () {
-      this.message.success('Confirm')
-      this.isActive = false
+  setup () {
+    const message = useMessage()
+    return {
+      handleNegativeClick () {
+        message.warning('Cancel')
+      },
+      handlePositiveClick () {
+        message.success('Confirm')
+      }
     }
   }
 }
