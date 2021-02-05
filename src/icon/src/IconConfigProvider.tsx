@@ -1,7 +1,7 @@
 // private
 import { h, provide, defineComponent } from 'vue'
 import commonProps from './common-props'
-import type { IconConfigProviderInjection } from './icon'
+import type { IconConfigProviderInjection } from './Icon'
 
 export default defineComponent({
   name: 'IconConfigProvider',

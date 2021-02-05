@@ -9,6 +9,7 @@
     "module": "ES6",
     "moduleResolution": "Node",
     "declaration": true,
+    "forceConsistentCasingInFileNames": true,
     "lib": [
       "ESNext",
       "DOM"
