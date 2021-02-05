@@ -9,36 +9,31 @@
 ```
 
 ```js
+import { useMessage } from 'naive-ui'
+
 export default {
-  inject: ['message'],
-  data () {
+  setup () {
+    const message = useMessage()
+    let count = 0
+    let typeIndex = 0
+    const types = ['success', 'info', 'warning', 'error', 'loading']
+    let msg = null
     return {
-      count: 0,
-      typeIndex: 0,
-      types: ['success', 'info', 'warning', 'error', 'loading'],
-      msg: null
-    }
-  },
-  computed: {
-    type () {
-      return this.types[this.typeIndex]
-    }
-  },
-  methods: {
-    plus () {
-      if (this.msg) {
-        this.count++
-        this.msg.content = '' + this.count
+      plus () {
+        if (msg) {
+          count++
+          msg.content = '' + count
+        }
+      },
+      changeType () {
+        if (msg) {
+          typeIndex = (typeIndex + 1) % types.length
+          msg.type = types[typeIndex]
+        }
+      },
+      createMessage () {
+        msg = message[types[typeIndex]]('' + count, { duration: 10000 })
       }
-    },
-    changeType () {
-      if (this.msg) {
-        this.typeIndex = (this.typeIndex + 1) % this.types.length
-        this.msg.type = this.type
-      }
-    },
-    createMessage () {
-      this.msg = this.message[this.type]('' + this.count, { duration: 10000 })
     }
   }
 }

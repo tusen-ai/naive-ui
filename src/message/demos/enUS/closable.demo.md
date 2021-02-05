@@ -7,17 +7,21 @@ Set `closable` to make message closable by a click.
 ```
 
 ```js
+import { useMessage } from 'naive-ui'
+
 export default {
-  inject: ['message'],
-  methods: {
-    createMessage () {
-      this.message.info(
-        "I don't know why nobody told you how to unfold your love",
-        {
-          closable: true,
-          duration: 5000
-        }
-      )
+  setup () {
+    const message = useMessage()
+    return {
+      createMessage () {
+        message.info(
+          "I don't know why nobody told you how to unfold your love",
+          {
+            closable: true,
+            duration: 5000
+          }
+        )
+      }
     }
   }
 }

@@ -8,28 +8,30 @@
 ```
 
 ```js
+import { onBeforeUnmount } from 'vue'
+import { useMessage } from 'naive-ui'
+
 export default {
-  inject: ['message'],
-  data () {
-    return {
-      msg: null
-    }
-  },
-  beforeUnmount () {
-    this.removeMessage()
-  },
-  methods: {
-    createMessage () {
-      if (!this.msg) {
-        this.msg = this.message.info('3 * 3 * 4 * 4 * ?', {
-          duration: 0
-        })
+  setup () {
+    const message = useMessage()
+    let messageReactive = null
+
+    function removeMessage () {
+      if (messageReactive) {
+        messageReactive.destroy()
+        messageReactive = null
       }
-    },
-    removeMessage () {
-      if (this.msg) {
-        this.msg.destroy()
-        this.msg = null
+    }
+
+    onBeforeUnmount(removeMessage)
+    return {
+      removeMessage,
+      createMessage () {
+        if (!messageReactive) {
+          messageReactive = message.info('3 * 3 * 4 * 4 * ?', {
+            duration: 0
+          })
+        }
       }
     }
   }

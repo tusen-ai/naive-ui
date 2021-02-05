@@ -9,14 +9,18 @@ If you don't specified the theme, the theme of created message will be the same 
 ```
 
 ```js
+import { useMessage } from 'naive-ui'
+
 export default {
-  inject: ['message'],
-  methods: {
-    info () {
-      this.message.info(
-        "I don't know why nobody told you how to unfold your love",
-        { duration: 5000 }
-      )
+  setup () {
+    const message = useMessage()
+    return {
+      info () {
+        message.info(
+          "I don't know why nobody told you how to unfold your love",
+          { duration: 5000 }
+        )
+      }
     }
   }
 }
