@@ -24,12 +24,6 @@ import { siteSetup } from './store'
 
 export default {
   name: 'SiteProvider',
-  beforeRouteEnter (to, from, next) {
-    next()
-  },
-  beforeRouteUpdate (to, from, next) {
-    next()
-  },
   setup () {
     return siteSetup()
   }
