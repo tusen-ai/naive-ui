@@ -13,6 +13,7 @@ import { ThemePropsReactive, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import NLoadingBar from './LoadingBar'
 import type { LoadingBarTheme } from '../styles'
+import { LoadingBarApiInjection } from './interface'
 
 interface LoadingBarRef {
   start: () => void
@@ -61,7 +62,7 @@ export default defineComponent({
         }
       }
     }
-    provide('loadingBar', methods)
+    provide<LoadingBarApiInjection>('loadingBar', methods)
     provide<ThemePropsReactive<LoadingBarTheme>>('NLoadingBarProps', props)
     return () => {
       return h(Fragment, null, [

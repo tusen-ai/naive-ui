@@ -15,14 +15,14 @@ import type { ThemeProps } from '../../_mixins'
 import MessageEnvironment from './MessageEnvironment'
 import { MessageTheme } from '../styles'
 
-interface MessageOptions {
+export interface MessageOptions {
   duration?: number
   closable?: boolean
   icon?: () => VNodeChild
   onClose?: () => void
 }
 
-interface MessageInjection {
+export interface MessageApiInjection {
   info: (content: string, options: MessageOptions) => void
   success: (content: string, options: MessageOptions) => void
   warning: (content: string, options: MessageOptions) => void
@@ -30,7 +30,7 @@ interface MessageInjection {
   loading: (content: string, options: MessageOptions) => void
 }
 
-interface MessageReactive {
+export interface MessageReactive {
   content?: string
   duration?: number
   closable?: boolean
@@ -60,7 +60,7 @@ export default defineComponent({
   setup (props) {
     const messageListRef = ref<PrivateMessageReactive[]>([])
     const messageRefs = ref<{ [key: string]: PrivateMessageRef }>({})
-    const api: MessageInjection = {
+    const api: MessageApiInjection = {
       info (content: string, options: MessageOptions) {
         return create(content, { ...options, type: 'info' })
       },
@@ -78,7 +78,7 @@ export default defineComponent({
       }
     }
     provide<ThemePropsReactive<MessageTheme>>('NMessageProvider', props)
-    provide<MessageInjection>('message', api)
+    provide<MessageApiInjection>('message', api)
     function create (content: string, options = {}): MessageReactive {
       const key = createId()
       const messageReactive = reactive({

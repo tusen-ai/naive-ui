@@ -34,7 +34,7 @@ type TypedCreate = (
   options: Omit<NotificationOptions, 'type'>
 ) => NotificationReactive
 
-export interface NotificationInjection {
+export interface NotificationApiInjection {
   create: Create
   info: TypedCreate
   success: TypedCreate
@@ -105,7 +105,7 @@ export default defineComponent({
       notificationLight,
       props
     )
-    provide<NotificationInjection>('notification', {
+    provide<NotificationApiInjection>('notification', {
       create,
       info: apis[0],
       success: apis[1],

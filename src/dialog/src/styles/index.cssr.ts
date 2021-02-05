@@ -22,89 +22,86 @@ import { c, cB, cE, cM, insideModal } from '../../../_utils/cssr'
 // --title-text-color
 // --action-space
 export default c([
-  cB(
-    'dialog', `
-      line-height: var(--line-height);
-      position: relative;
-      background: var(--color);
-      color: var(--text-color);
-      box-sizing: border-box;
-      margin: auto;
-      border-radius: var(--border-radius);
-      padding: var(--padding);
-      transition: 
-        border-color .3s var(--bezier),
-        background-color .3s var(--bezier),
-        color .3s var(--bezier);
-    `,
-    [
+  cB('dialog', `
+    line-height: var(--line-height);
+    position: relative;
+    background: var(--color);
+    color: var(--text-color);
+    box-sizing: border-box;
+    margin: auto;
+    border-radius: var(--border-radius);
+    padding: var(--padding);
+    transition: 
+      border-color .3s var(--bezier),
+      background-color .3s var(--bezier),
+      color .3s var(--bezier);
+  `, [
+    cE('icon', {
+      color: 'var(--icon-color)'
+    }),
+    cM('bordered', {
+      border: 'var(--border)'
+    }),
+    cM('icon-top', [
+      cE('close', {
+        margin: 'var(--close-margin)'
+      }),
       cE('icon', {
-        color: 'var(--icon-color)'
+        margin: 'var(--icon-margin)'
       }),
-      cM('bordered', {
-        border: 'var(--border)'
+      cE('content', {
+        textAlign: 'center'
       }),
-      cM('icon-top', [
-        cE('close', {
-          margin: 'var(--close-margin)'
-        }),
-        cE('icon', {
-          margin: 'var(--icon-margin)'
-        }),
-        cE('content', {
-          textAlign: 'center'
-        }),
-        cE('title', {
-          justifyContent: 'center'
-        }),
-        cE('action', {
-          justifyContent: 'center'
-        })
-      ]),
-      cM('icon-left', [
-        cE('icon', {
-          margin: 'var(--icon-margin)'
-        })
-      ]),
-      cE('close', `
-        font-size: var(--close-size);
-        position: absolute;
-        right: 0;
-        top: 0;
-        margin: var(--close-margin);
-        transition: .3s color var(--bezier);
-      `),
-      cE('content', `
-        font-size: var(--font-size);
-        margin: var(--content-margin);
-        position: relative;
-      `),
-      cE('action', `
-        display: flex;
-        justify-content: flex-end;
-      `, [
-        c('> *:not(:last-child)', {
-          marginRight: 'var(--action-space)'
-        })
-      ]),
-      cE('icon', {
-        fontSize: 'var(--icon-size)',
-        transition: 'color .3s var(--bezier)'
+      cE('title', {
+        justifyContent: 'center'
       }),
-      cE('title', `
-        transition: color .3s var(--bezier);
-        display: flex;
-        align-items: center;
-        font-size: var(--title-font-size);
-        font-weight: var(--title-font-weight);
-        color: var(--title-text-color);
-      `),
-      cB('dialog-icon-container', {
-        display: 'flex',
+      cE('action', {
         justifyContent: 'center'
       })
-    ]
-  ),
+    ]),
+    cM('icon-left', [
+      cE('icon', {
+        margin: 'var(--icon-margin)'
+      })
+    ]),
+    cE('close', `
+      font-size: var(--close-size);
+      position: absolute;
+      right: 0;
+      top: 0;
+      margin: var(--close-margin);
+      transition: .3s color var(--bezier);
+    `),
+    cE('content', `
+      font-size: var(--font-size);
+      margin: var(--content-margin);
+      position: relative;
+    `),
+    cE('action', `
+      display: flex;
+      justify-content: flex-end;
+    `, [
+      c('> *:not(:last-child)', {
+        marginRight: 'var(--action-space)'
+      })
+    ]),
+    cE('icon', {
+      fontSize: 'var(--icon-size)',
+      transition: 'color .3s var(--bezier)'
+    }),
+    cE('title', `
+      transition: color .3s var(--bezier);
+      display: flex;
+      align-items: center;
+      font-size: var(--title-font-size);
+      font-weight: var(--title-font-weight);
+      color: var(--title-text-color);
+    `),
+    cB('dialog-icon-container', {
+      display: 'flex',
+      justifyContent: 'center'
+    })
+  ]),
   insideModal(
     cB('dialog', `
       width: 446px;

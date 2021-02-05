@@ -32,10 +32,7 @@ export default defineComponent({
   name: 'Button',
   props: {
     ...(useTheme.props as ThemeProps<ButtonTheme>),
-    color: {
-      type: String,
-      default: undefined
-    },
+    color: String,
     text: {
       type: Boolean,
       default: false
@@ -56,10 +53,7 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    size: {
-      type: String as PropType<Size | undefined>,
-      default: undefined
-    },
+    size: String as PropType<Size>,
     ghost: {
       type: Boolean,
       default: false

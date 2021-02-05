@@ -14,14 +14,16 @@ import { omit, throwError } from '../../_utils'
 import DialogEnvironment, { exposedDialogEnvProps } from './DialogEnvironment'
 import { useClicked, useClickPosition } from 'vooks'
 
-type DialogOptions = Partial<ExtractPropTypes<typeof exposedDialogEnvProps>>
+export type DialogOptions = Partial<
+ExtractPropTypes<typeof exposedDialogEnvProps>
+>
 
-type DialogReactive = {
+export type DialogReactive = {
   readonly key: string
   readonly destroy: () => void
 } & DialogOptions
 
-interface DialogApiInjection {
+export interface DialogApiInjection {
   create: (options: DialogOptions) => DialogReactive
   success: (options: DialogOptions) => DialogReactive
   warning: (options: DialogOptions) => DialogReactive
