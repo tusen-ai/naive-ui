@@ -8,7 +8,8 @@ import {
   PropType,
   VNode,
   Slots,
-  provide
+  provide,
+  CSSProperties
 } from 'vue'
 import { VBinder, VTarget, FollowerPlacement } from 'vueuc'
 import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
@@ -81,7 +82,7 @@ export interface PopoverInjection {
 
 export const popoverProps = {
   show: {
-    type: Boolean,
+    type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
   defaultShow: {
@@ -92,10 +93,7 @@ export const popoverProps = {
     type: Boolean,
     default: true
   },
-  trigger: {
-    type: String as PropType<PopoverTrigger>,
-    default: undefined
-  },
+  trigger: String as PropType<PopoverTrigger>,
   delay: {
     type: Number,
     default: 200
@@ -112,26 +110,17 @@ export const popoverProps = {
     type: String as PropType<FollowerPlacement>,
     default: 'bottom'
   },
-  x: {
-    type: Number,
-    default: undefined
-  },
-  y: {
-    type: Number,
-    default: undefined
-  },
+  x: Number,
+  y: Number,
   disabled: {
     type: Boolean,
     default: false
   },
   displayDirective: {
-    type: String,
+    type: String as PropType<'if' | 'show'>,
     default: 'if'
   },
-  arrowStyle: {
-    type: Object,
-    default: undefined
-  },
+  arrowStyle: [String, Object] as PropType<string | CSSProperties>,
   filp: {
     type: Boolean,
     default: true
@@ -157,7 +146,7 @@ export const popoverProps = {
   onUpdateShow: Function as PropType<
   MaybeArray<(value: boolean) => void> | undefined
   >,
-  // deprecated
+  /** @deprecated */
   onShow: {
     type: Function as PropType<
     MaybeArray<(value: boolean) => void> | undefined
@@ -171,6 +160,7 @@ export const popoverProps = {
     },
     default: undefined
   },
+  /** @deprecated */
   onHide: {
     type: Function as PropType<
     MaybeArray<(value: boolean) => void> | undefined
@@ -184,22 +174,17 @@ export const popoverProps = {
     },
     default: undefined
   },
+  /** @deprecated */
   arrow: {
-    type: Boolean,
+    type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  width: {
-    type: Number,
-    default: undefined
-  },
-  minWidth: {
-    type: Number,
-    default: undefined
-  },
-  maxWidth: {
-    type: Number,
-    default: undefined
-  }
+  /** @deprecated */
+  width: Number,
+  /** @deprecated */
+  minWidth: Number,
+  /** @deprecated */
+  maxWidth: Number
 }
 
 export default defineComponent({

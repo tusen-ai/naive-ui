@@ -23,83 +23,30 @@ import { popoverLight } from '../styles'
 import type { PopoverTheme } from '../styles'
 import style from './styles/index.cssr'
 import type { PopoverInjection } from './Popover'
+import { PopoverTrigger } from './interface'
 
 export const popoverBodyProps = {
   ...(useTheme.props as ThemeProps<PopoverTheme>),
-  show: {
-    type: Boolean,
-    default: undefined
-  },
-  trigger: {
-    type: String,
-    default: undefined
-  },
-  showArrow: {
-    type: Boolean,
-    default: undefined
-  },
-  delay: {
-    type: Number,
-    default: undefined
-  },
-  duration: {
-    type: Number,
-    default: undefined
-  },
-  raw: {
-    type: Boolean,
-    default: undefined
-  },
-  arrowStyle: {
-    type: Object,
-    default: undefined
-  },
-  displayDirective: {
-    type: String,
-    default: undefined
-  },
-  x: {
-    type: Number,
-    default: undefined
-  },
-  y: {
-    type: Number,
-    default: undefined
-  },
-  filp: {
-    type: Boolean,
-    default: undefined
-  },
-  placement: {
-    type: String as PropType<FollowerPlacement>,
-    default: undefined
-  },
+  show: Boolean,
+  trigger: String as PropType<PopoverTrigger>,
+  showArrow: Boolean,
+  delay: Number,
+  duration: Number,
+  raw: Boolean,
+  arrowStyle: [String, Object],
+  displayDirective: String as PropType<'if' | 'show'>,
+  x: Number,
+  y: Number,
+  filp: Boolean,
+  placement: String as PropType<FollowerPlacement>,
   // private
-  shadow: {
-    type: Boolean,
-    default: undefined
-  },
-  padded: {
-    type: Boolean,
-    default: undefined
-  },
-  animated: {
-    type: Boolean,
-    default: undefined
-  },
-  // deprecated
-  width: {
-    type: Number,
-    default: undefined
-  },
-  minWidth: {
-    type: Number,
-    default: undefined
-  },
-  maxWidth: {
-    type: Number,
-    default: undefined
-  }
+  shadow: Boolean,
+  padded: Boolean,
+  animated: Boolean,
+  /** @deprecated */
+  width: Number,
+  minWidth: Number,
+  maxWidth: Number
 }
 
 export default defineComponent({
