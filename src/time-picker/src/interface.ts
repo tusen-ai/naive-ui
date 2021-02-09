@@ -25,3 +25,5 @@ export type IsSecondDisabled = (
   minute: number | null,
   hour: number | null
 ) => boolean
+
+export type Size = 'small' | 'medium' | 'large'

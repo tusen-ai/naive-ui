@@ -21,13 +21,15 @@ import {
   ForwardIcon,
   MoreIcon
 } from '../../_internal/icons'
-import { useLocale, useTheme } from '../../_mixins'
+import { useConfig, useLocale, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { paginationLight, PaginationTheme } from '../styles'
 import { pageItems } from './utils'
 import type { PageItem } from './utils'
 import style from './styles/index.cssr'
 import { call, MaybeArray } from '../../_utils'
+import { Size as InputSize } from '../../input/src/interface'
+import { Size as SelectSize } from '../../select/src/interface'
 
 const paginationProps = {
   page: {
@@ -106,6 +108,7 @@ export default defineComponent({
     ...paginationProps
   },
   setup (props) {
+    const { NConfigProvider } = useConfig(props)
     const themeRef = useTheme(
       'Pagination',
       'Pagination',
@@ -139,14 +142,15 @@ export default defineComponent({
         value: size
       }))
     })
-    // unstable feature
-    const inputSizeRef = computed<'small'>(() => {
-      // const { unstableConfig } = this.$naive
-      // const size = unstableConfig?.Pagination?.inputSize
-      // if (size) {
-      //   return size
-      // }
-      return 'small'
+    const inputSizeRef = computed<InputSize>(() => {
+      return (
+        NConfigProvider?.mergedComponentProps?.Pagination?.inputSize || 'small'
+      )
+    })
+    const selectSizeRef = computed<SelectSize>(() => {
+      return (
+        NConfigProvider?.mergedComponentProps?.Pagination?.selectSize || 'small'
+      )
     })
 
     const disableTransitionOneTick = (): void => {
@@ -277,6 +281,7 @@ export default defineComponent({
       jumperValue: jumperValueRef,
       pageSizeOptions: pageSizeOptionsRef,
       inputSize: inputSizeRef,
+      selectSize: selectSizeRef,
       transitionDisabled: transitionDisabledRef,
       mergedTheme: themeRef,
       handleJumperInput,
@@ -383,6 +388,7 @@ export default defineComponent({
       mergedTheme,
       locale,
       inputSize,
+      selectSize,
       pageSize,
       pageSizeOptions,
       jumperValue,
@@ -470,7 +476,7 @@ export default defineComponent({
         </div>
         {showSizePicker ? (
           <NSelect
-            size={inputSize}
+            size={selectSize}
             placeholder=""
             options={pageSizeOptions}
             value={pageSize}

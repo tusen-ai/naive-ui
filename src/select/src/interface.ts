@@ -70,3 +70,5 @@ SelectOption,
 SelectGroupOption,
 SelectIgnoredOption
 >
+
+export type Size = 'small' | 'medium' | 'large'

@@ -47,6 +47,7 @@ import {
   IsDateDisabled,
   IsTimeDisabled
 } from './interface'
+import { Size as TimePickerSize } from '../../time-picker/src/interface'
 
 const DATE_FORMAT = {
   date: 'yyyy-MM-dd',
@@ -124,6 +125,7 @@ export default defineComponent({
   setup (props) {
     const { locale, dateLocale } = useLocale('DatePicker')
     const formItem = useFormItem(props)
+    const { NConfigProvider } = useConfig(props)
     const panelInstRef = ref<PanelRef | null>(null)
     const triggerElRef = ref<HTMLElement | null>(null)
     const inputInstRef = ref<InputRef | null>(null)
@@ -149,8 +151,11 @@ export default defineComponent({
         locale: dateLocale.value.locale
       }
     })
-    const timePickerSizeRef = computed<'small'>(() => {
-      return 'small'
+    const timePickerSizeRef = computed<TimePickerSize>(() => {
+      return (
+        NConfigProvider?.mergedComponentProps?.DatePicker?.timePickerSize ||
+        'small'
+      )
     })
     const isRangeRef = computed(() => {
       return ['daterange', 'datetimerange'].includes(props.type)

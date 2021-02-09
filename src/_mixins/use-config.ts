@@ -7,7 +7,7 @@ type UseConfigProps = Readonly<{
 }>
 
 export default function useConfig (
-  props: UseConfigProps
+  props: UseConfigProps = {}
 ): {
     NConfigProvider: ConfigProviderInjection | null
     mergedBordered: ComputedRef<boolean>

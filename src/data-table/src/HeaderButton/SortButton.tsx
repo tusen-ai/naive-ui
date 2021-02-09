@@ -3,6 +3,7 @@ import { ArrowDownIcon } from '../../../_internal/icons'
 import { NBaseIcon } from '../../../_internal'
 import RenderSorter from './RenderSorter'
 import { DataTableInjection, TableColumnInfo } from '../interface'
+import { useConfig } from '../../../_mixins'
 
 export default defineComponent({
   name: 'SortIcon',
@@ -13,6 +14,7 @@ export default defineComponent({
     }
   },
   setup (props) {
+    const { NConfigProvider } = useConfig()
     const NDataTable = inject<DataTableInjection>(
       'NDataTable'
     ) as DataTableInjection
@@ -30,7 +32,10 @@ export default defineComponent({
       return false
     })
     const mergedRenderSorterRef = computed(() => {
-      return props.column.renderSorter
+      return (
+        NConfigProvider?.mergedComponentProps?.DataTable?.renderSorter ||
+        props.column.renderSorter
+      )
     })
     return {
       active: activeRef,

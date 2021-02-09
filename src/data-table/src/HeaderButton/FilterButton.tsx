@@ -12,6 +12,7 @@ import {
   FilterState,
   TableColumnInfo
 } from '../interface'
+import { useConfig } from '../../../_mixins'
 
 function createFilterState (
   currentFilterState: FilterState,
@@ -36,6 +37,7 @@ export default defineComponent({
     }
   },
   setup (props) {
+    const { NConfigProvider } = useConfig()
     const NDataTable = inject<DataTableInjection>(
       'NDataTable'
     ) as DataTableInjection
@@ -63,7 +65,10 @@ export default defineComponent({
       return filterValue !== null
     })
     const mergedRenderFilterRef = computed(() => {
-      return props.column.renderFilter
+      return (
+        NConfigProvider?.mergedComponentProps?.DataTable?.renderFilter ||
+        props.column.renderFilter
+      )
     })
     function handleFilterChange (
       mergedFilterValue: FilterOptionValue | FilterOptionValue[] | null

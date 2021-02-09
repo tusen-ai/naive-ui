@@ -13,7 +13,8 @@ import type { Hljs } from '../../_mixins'
 import {
   ConfigProviderInjection,
   GlobalTheme,
-  GlobalThemeOverrides
+  GlobalThemeOverrides,
+  ComponentProps
 } from './interface'
 import { NaiveDateLocale, NLocale } from '../../locales'
 
@@ -39,6 +40,7 @@ export default defineComponent({
     hljs: Object as PropType<Hljs>,
     theme: Object as PropType<GlobalTheme | null>,
     themeOverrides: Object as PropType<GlobalThemeOverrides | null>,
+    componentProps: Object as PropType<ComponentProps>,
     // deprecated
     legacyTheme: String,
     language: {
@@ -115,9 +117,15 @@ export default defineComponent({
       const { bordered } = props
       return bordered === undefined ? NConfigProvider?.mergedBordered : bordered
     })
+    const mergedComponentPropsRef = computed(() => {
+      const { componentProps } = props
+      if (componentProps !== undefined) return componentProps
+      return undefined
+    })
     provide<ConfigProviderInjection>(
       'NConfigProvider',
       reactive({
+        mergedComponentProps: mergedComponentPropsRef,
         mergedBordered: mergedBorderedRef,
         mergedNamespace: mergedNamespaceRef,
         mergedLocale: computed(() => {

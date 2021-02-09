@@ -42,7 +42,8 @@ import type {
   SelectIgnoredOption,
   OnUpdateValue,
   OnUpdateValueImpl,
-  Value
+  Value,
+  Size
 } from './interface'
 
 export default defineComponent({
@@ -71,7 +72,7 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    size: String as PropType<'small' | 'medium' | 'large'>,
+    size: String as PropType<Size>,
     filterable: {
       type: Boolean,
       default: false

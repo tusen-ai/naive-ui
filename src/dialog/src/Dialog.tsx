@@ -8,7 +8,7 @@ import {
   VNode,
   CSSProperties
 } from 'vue'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { render, createKey, keysOf } from '../../_utils'
 import { NBaseIcon, NBaseClose } from '../../_internal'
@@ -21,6 +21,7 @@ import {
 } from '../../_internal/icons'
 import { dialogLight } from '../styles'
 import type { DialogTheme } from '../styles'
+import type { IconPlacement } from './interface'
 import style from './styles/index.cssr'
 
 const infoIcon = <InfoIcon />
@@ -62,7 +63,7 @@ const dialogProps = {
     default: false as boolean
   },
   iconPlacement: {
-    type: String as PropType<'left' | 'top'>,
+    type: String as PropType<IconPlacement>,
     default: 'left'
   },
   onPositiveClick: Function as PropType<(e: MouseEvent) => void>,
@@ -85,8 +86,12 @@ export default defineComponent({
     ...dialogProps
   },
   setup (props) {
+    const { NConfigProvider } = useConfig(props)
     const mergedIconPlacementRef = computed(() => {
-      return props.iconPlacement
+      return (
+        NConfigProvider?.mergedComponentProps?.Dialog?.iconPlacement ||
+        props.iconPlacement
+      )
     })
     function handlePositiveClick (e: MouseEvent): void {
       const { onPositiveClick } = props

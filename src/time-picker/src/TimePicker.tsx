@@ -50,7 +50,8 @@ import {
   OnUpdateValue,
   OnUpdateValueImpl,
   PanelRef,
-  TimePickerInjection
+  TimePickerInjection,
+  Size
 } from './interface'
 
 export default defineComponent({
@@ -76,7 +77,7 @@ export default defineComponent({
       default: 'HH:mm:ss'
     },
     isHourDisabled: Function as PropType<IsHourDisabled>,
-    size: String as PropType<'small' | 'medium' | 'large'>,
+    size: String as PropType<Size>,
     isMinuteDisabled: Function as PropType<IsMinuteDisabled>,
     isSecondDisabled: Function as PropType<IsSecondDisabled>,
     clearable: {
