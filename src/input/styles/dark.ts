@@ -1,5 +1,5 @@
 import commonVariables from './_common'
-import { changeColor, scaleColor } from 'seemly'
+import { changeColor } from 'seemly'
 import { commonDark } from '../../_styles/common'
 import type { InputTheme } from './light'
 
@@ -28,7 +28,10 @@ const inputDark: InputTheme = {
       heightTiny,
       heightSmall,
       heightMedium,
-      heightLarge
+      heightLarge,
+      clearColor,
+      clearColorHover,
+      clearColorPressed
     } = vars
     return {
       ...commonVariables,
@@ -77,9 +80,9 @@ const inputDark: InputTheme = {
         alpha: 0.3
       })}`,
       caretColorError: errorColor,
-      clearColor: textColor4Overlay,
-      clearColorHover: scaleColor(textColor4Overlay, { alpha: 1.25 }),
-      clearColorPressed: scaleColor(textColor4Overlay, { alpha: 0.75 })
+      clearColor,
+      clearColorHover,
+      clearColorPressed
     }
   }
 }

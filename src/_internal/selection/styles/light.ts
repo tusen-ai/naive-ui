@@ -1,4 +1,4 @@
-import { changeColor, scaleColor } from 'seemly'
+import { changeColor } from 'seemly'
 import { commonLight } from '../../../_styles/common'
 import type { ThemeCommonVars } from '../../../_styles/common'
 import commonVariables from './_common'
@@ -20,7 +20,10 @@ const self = (vars: ThemeCommonVars) => {
     errorColorHover,
     borderColor,
     iconColor,
-    iconColorDisabled
+    iconColorDisabled,
+    clearColor,
+    clearColorHover,
+    clearColorPressed
   } = vars
   return {
     ...commonVariables,
@@ -76,9 +79,9 @@ const self = (vars: ThemeCommonVars) => {
     })}`,
     colorActiveError: inputColor,
     caretColorError: errorColor,
-    clearColor: textColor4,
-    clearColorHover: scaleColor(textColor4, { lightness: 0.75 }),
-    clearColorPressed: scaleColor(textColor4, { lightness: 0.9 })
+    clearColor,
+    clearColorHover,
+    clearColorPressed
   }
 }
 

@@ -1,5 +1,5 @@
 import commonVariables from './_common'
-import { changeColor, scaleColor } from 'seemly'
+import { changeColor } from 'seemly'
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import type { Theme } from '../../_mixins'
@@ -28,7 +28,10 @@ const self = (vars: ThemeCommonVars) => {
     heightSmall,
     heightMedium,
     heightLarge,
-    actionColor
+    actionColor,
+    clearColor,
+    clearColorHover,
+    clearColorPressed
   } = vars
   return {
     ...commonVariables,
@@ -77,9 +80,9 @@ const self = (vars: ThemeCommonVars) => {
       alpha: 0.2
     })}`,
     caretColorError: errorColor,
-    clearColor: textColor4,
-    clearColorHover: scaleColor(textColor4, { lightness: 0.75 }),
-    clearColorPressed: scaleColor(textColor4, { lightness: 0.9 })
+    clearColor,
+    clearColorHover,
+    clearColorPressed
   }
 }
 

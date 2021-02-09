@@ -31,7 +31,7 @@ const self = (vars: ThemeCommonVars) => {
     thColor: actionColorOverlay,
     thTextColor: textColor1,
     tdTextColor: textColor2,
-    tdFontWeight: fontWeightStrong
+    thFontWeight: fontWeightStrong
   }
 }
 

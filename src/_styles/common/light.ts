@@ -1,4 +1,4 @@
-import { rgba, composite } from 'seemly'
+import { rgba, composite, scaleColor } from 'seemly'
 import commonVariables from './_common'
 
 const base = {
@@ -165,6 +165,11 @@ const derived = {
   closeOpacity: Number(base.alphaClose),
   closeOpacityHover: Number(base.alphaClose) * 0.8,
   closeOpacityPressed: Number(base.alphaClose) * 1.25,
+
+  // clear
+  clearColor: neutral(base.alpha4),
+  clearColorHover: scaleColor(neutral(base.alpha4), { lightness: 0.75 }),
+  clearColorPressed: scaleColor(neutral(base.alpha4), { lightness: 0.9 }),
 
   scrollbarColorOverlay: overlay(base.alphaScrollbar),
   scrollbarColorHoverOverlay: overlay(base.alphaScrollbarHover),

@@ -1,4 +1,4 @@
-import { changeColor, scaleColor } from 'seemly'
+import { changeColor } from 'seemly'
 import { commonDark } from '../../../_styles/common'
 import commonVars from './_common'
 import type { InternalSelectionTheme } from './light'
@@ -21,7 +21,10 @@ const internalSelectionDark: InternalSelectionTheme = {
       errorColor,
       errorColorHover,
       iconColorOverlay,
-      iconColorDisabledOverlay
+      iconColorDisabledOverlay,
+      clearColor,
+      clearColorHover,
+      clearColorPressed
     } = vars
     return {
       ...commonVars,
@@ -77,9 +80,9 @@ const internalSelectionDark: InternalSelectionTheme = {
       })}`,
       colorActiveError: changeColor(errorColor, { alpha: 0.1 }),
       caretColorError: errorColor,
-      clearColor: textColor4Overlay,
-      clearColorHover: scaleColor(textColor4Overlay, { alpha: 1.25 }),
-      clearColorPressed: scaleColor(textColor4Overlay, { alpha: 0.75 })
+      clearColor,
+      clearColorHover,
+      clearColorPressed
     }
   }
 }

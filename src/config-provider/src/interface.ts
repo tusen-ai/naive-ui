@@ -146,7 +146,7 @@ export interface GlobalTheme {
 }
 
 export interface GlobalThemeOverrides {
-  common?: ThemeCommonVars
+  common?: Partial<ThemeCommonVars>
   Alert?: ExtractThemeOverrides<AlertTheme>
   Anchor?: ExtractThemeOverrides<AnchorTheme>
   AutoComplete?: ExtractThemeOverrides<AutoCompleteTheme>

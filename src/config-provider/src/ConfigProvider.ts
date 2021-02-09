@@ -5,7 +5,8 @@ import {
   defineComponent,
   PropType,
   provide,
-  reactive
+  reactive,
+  onBeforeMount
 } from 'vue'
 import { useMemo } from 'vooks'
 import { warn, getSlot } from '../../_utils'
@@ -41,6 +42,7 @@ export default defineComponent({
     theme: Object as PropType<GlobalTheme | null>,
     themeOverrides: Object as PropType<GlobalThemeOverrides | null>,
     componentProps: Object as PropType<ComponentProps>,
+    onBeforeMount: Function,
     // deprecated
     legacyTheme: String,
     language: {
@@ -121,6 +123,10 @@ export default defineComponent({
       const { componentProps } = props
       if (componentProps !== undefined) return componentProps
       return undefined
+    })
+    onBeforeMount(() => {
+      const { onBeforeMount } = props
+      onBeforeMount?.()
     })
     provide<ConfigProviderInjection>(
       'NConfigProvider',

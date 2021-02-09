@@ -1,4 +1,4 @@
-export { commonDark } from './_styles/common'
+export { commonDark, commonLight } from './_styles/common'
 export { alertDark } from './alert/styles'
 export { anchorDark } from './anchor/styles'
 export { autoCompleteDark } from './auto-complete/styles'

@@ -33,7 +33,7 @@ const tableDark: TableTheme = {
       thColor: actionColorOverlay,
       thTextColor: textColor1Overlay,
       tdTextColor: textColor2Overlay,
-      tdFontWeight: fontWeightStrong
+      thFontWeight: fontWeightStrong
     }
   }
 }
