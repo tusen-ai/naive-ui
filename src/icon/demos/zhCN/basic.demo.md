@@ -10,7 +10,7 @@
 ```
 
 ```js
-import { GameControllerOutline, GameController } from '@vicons/ionicons-v5'
+import { GameControllerOutline, GameController } from '@vicons/ionicons5'
 
 export default {
   components: {

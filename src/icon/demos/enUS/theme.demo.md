@@ -9,7 +9,7 @@ Naive UI provides a simple way to custom style of icon in different themes.
 ```
 
 ```js
-import { CashOutline } from '@vicons/ionicons-v5'
+import { CashOutline } from '@vicons/ionicons5'
 
 export default {
   components: {

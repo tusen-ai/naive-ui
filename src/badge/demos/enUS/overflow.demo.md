@@ -32,7 +32,7 @@ Set `max` prop to handle overflow situation.
 ```
 
 ```js
-import { MdAdd, MdRemove } from '@vicons/ionicons-v4'
+import { MdAdd, MdRemove } from '@vicons/ionicons4'
 
 export default {
   components: {

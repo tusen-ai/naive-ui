@@ -55,7 +55,7 @@
 
 <script>
 import { nextTick } from 'vue'
-import { CodeOutline } from '@vicons/ionicons-v5'
+import { CodeOutline } from '@vicons/ionicons5'
 import { useDisplayMode } from '../store'
 import { i18n } from '../utils/composables'
 

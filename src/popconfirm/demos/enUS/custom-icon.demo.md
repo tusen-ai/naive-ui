@@ -15,7 +15,7 @@
 ```
 
 ```js
-import { MdHand as HandIcon } from '@vicons/ionicons-v4'
+import { MdHand as HandIcon } from '@vicons/ionicons4'
 
 export default {
   components: {

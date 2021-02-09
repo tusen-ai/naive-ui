@@ -376,7 +376,7 @@ Debug 用的。
 ```
 
 ```js
-import { LogInOutline, CashOutline } from '@vicons/ionicons-v5'
+import { LogInOutline, CashOutline } from '@vicons/ionicons5'
 
 export default {
   components: {

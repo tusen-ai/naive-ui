@@ -9,7 +9,7 @@ Naive UI 提供一些简单的方法来自定义不同主题下的样式。
 ```
 
 ```js
-import { CashOutline } from '@vicons/ionicons-v5'
+import { CashOutline } from '@vicons/ionicons5'
 
 export default {
   components: {

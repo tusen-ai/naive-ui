@@ -19,7 +19,7 @@
 ```
 
 ```js
-import { MdSave } from '@vicons/ionicons-v4'
+import { MdSave } from '@vicons/ionicons4'
 
 export default {
   components: {

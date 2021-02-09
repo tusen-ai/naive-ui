@@ -22,7 +22,7 @@
 ```
 
 ```js
-import { MdMusicalNotes } from '@vicons/ionicons-v4'
+import { MdMusicalNotes } from '@vicons/ionicons4'
 
 export default {
   components: {

@@ -11,7 +11,7 @@ I like using icon in avatar.
 ```
 
 ```js
-import { MdCash, MdContacts, IosContacts } from '@vicons/ionicons-v4'
+import { MdCash, MdContacts, IosContacts } from '@vicons/ionicons4'
 
 export default {
   components: {

@@ -8,7 +8,7 @@
 
 ```js
 import { resolveComponent, h } from 'vue'
-import { MdMusicalNote as MusicIcon } from '@vicons/ionicons-v4'
+import { MdMusicalNote as MusicIcon } from '@vicons/ionicons4'
 
 function render (option, selected) {
   return [

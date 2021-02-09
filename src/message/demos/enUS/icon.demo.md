@@ -7,7 +7,7 @@
 ```js
 import { h } from 'vue'
 import { NIcon, useMessage } from 'naive-ui'
-import { MdHourglass } from '@vicons/ionicons-v4'
+import { MdHourglass } from '@vicons/ionicons4'
 
 export default {
   setup () {

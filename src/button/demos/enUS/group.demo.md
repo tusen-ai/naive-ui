@@ -88,7 +88,7 @@ Button can be grouped.
 ```
 
 ```js
-import { LogInOutline as LogInIcon } from '@vicons/ionicons-v5'
+import { LogInOutline as LogInIcon } from '@vicons/ionicons5'
 
 export default {
   components: {

@@ -21,7 +21,7 @@
 ```
 
 ```js
-import { CashOutline } from '@vicons/ionicons-v5'
+import { CashOutline } from '@vicons/ionicons5'
 
 export default {
   components: {

@@ -50,7 +50,7 @@ Steps has `small`, `medium` size.
 ```
 
 ```js
-import { MdArrowRoundBack, MdArrowRoundForward } from '@vicons/ionicons-v4'
+import { MdArrowRoundBack, MdArrowRoundForward } from '@vicons/ionicons4'
 
 export default {
   components: {

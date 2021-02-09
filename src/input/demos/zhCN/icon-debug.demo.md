@@ -95,7 +95,7 @@
 ```
 
 ```js
-import { MdSearch } from '@vicons/ionicons-v4'
+import { MdSearch } from '@vicons/ionicons4'
 
 export default {
   components: {

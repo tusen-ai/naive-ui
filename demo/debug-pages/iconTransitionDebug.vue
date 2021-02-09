@@ -1,17 +1,9 @@
 <template>
   <div ref="doc" class="n-doc" style="padding: 150px">
-    <n-button @click="show = !show">
-      show
-    </n-button>
-    <n-button @click="i = 0">
-      cash
-    </n-button>
-    <n-button @click="i = 1">
-      contacts
-    </n-button>
-    <n-button @click="i = 2">
-      contacts2
-    </n-button>
+    <n-button @click="show = !show"> show </n-button>
+    <n-button @click="i = 0"> cash </n-button>
+    <n-button @click="i = 1"> contacts </n-button>
+    <n-button @click="i = 2"> contacts2 </n-button>
     <div style="position: relative">
       <n-base-icon-transition v-if="show">
         <n-icon v-if="i === 0" :size="60">
@@ -27,7 +19,7 @@
 </template>
 
 <script>
-import { MdCash, MdContacts } from '@vicons/ionicons-v4'
+import { MdCash, MdContacts } from '@vicons/ionicons4'
 
 export default {
   components: {

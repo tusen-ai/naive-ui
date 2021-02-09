@@ -15,7 +15,7 @@
 ```
 
 ```js
-import { MdCash } from '@vicons/ionicons-v4'
+import { MdCash } from '@vicons/ionicons4'
 
 export default {
   components: {

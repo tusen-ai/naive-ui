@@ -57,7 +57,7 @@ Use `collapsed-width` and `width` to set sider's width.
 ```
 
 ```js
-import { MdContacts } from '@vicons/ionicons-v4'
+import { MdContacts } from '@vicons/ionicons4'
 
 export default {
   components: {

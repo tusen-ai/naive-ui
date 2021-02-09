@@ -17,7 +17,7 @@
 ```
 
 ```js
-import { ArchiveOutline as ArchiveIcon } from '@vicons/ionicons-v5'
+import { ArchiveOutline as ArchiveIcon } from '@vicons/ionicons5'
 
 export default {
   components: {

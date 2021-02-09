@@ -14,7 +14,7 @@
 ```
 
 ```js
-import { TrainOutline as TrainIcon } from '@vicons/ionicons-v5'
+import { TrainOutline as TrainIcon } from '@vicons/ionicons5'
 
 export default {
   components: {
