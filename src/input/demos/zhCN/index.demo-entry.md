@@ -51,10 +51,11 @@ passively-activated
 
 ### Input Slots
 
-| 属性   | 类型 | 说明 |
-| ------ | ---- | ---- |
-| prefix | `()` |      |
-| suffix | `()` |      |
+| 属性      | 类型 | 说明 |
+| --------- | ---- | ---- |
+| prefix    | `()` |      |
+| suffix    | `()` |      |
+| separator | `()` |      |
 
 ### Input Group Slots
 

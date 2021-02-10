@@ -51,10 +51,11 @@ passively-activated
 
 ### Input Slots
 
-| Name   | Parameters | Description |
-| ------ | ---------- | ----------- |
-| prefix | `()`       |             |
-| suffix | `()`       |             |
+| Name      | Parameters | Description |
+| --------- | ---------- | ----------- |
+| prefix    | `()`       |             |
+| suffix    | `()`       |             |
+| separator | `()`       |             |
 
 ### Input Group Slots
 
