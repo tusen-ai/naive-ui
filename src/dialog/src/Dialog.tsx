@@ -62,10 +62,7 @@ const dialogProps = {
     type: Boolean,
     default: false as boolean
   },
-  iconPlacement: {
-    type: String as PropType<IconPlacement>,
-    default: 'left'
-  },
+  iconPlacement: String as PropType<IconPlacement>,
   onPositiveClick: Function as PropType<(e: MouseEvent) => void>,
   onNegativeClick: Function as PropType<(e: MouseEvent) => void>,
   onClose: Function as PropType<() => void>
@@ -88,9 +85,11 @@ export default defineComponent({
   setup (props) {
     const { NConfigProvider } = useConfig(props)
     const mergedIconPlacementRef = computed(() => {
+      const { iconPlacement } = props
       return (
-        NConfigProvider?.mergedComponentProps?.Dialog?.iconPlacement ||
-        props.iconPlacement
+        iconPlacement ??
+        NConfigProvider?.mergedComponentProps?.Dialog?.iconPlacement ??
+        'left'
       )
     })
     function handlePositiveClick (e: MouseEvent): void {

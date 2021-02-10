@@ -128,7 +128,7 @@ export default defineComponent({
     const mergedComponentPropsRef = computed(() => {
       const { componentProps } = props
       if (componentProps !== undefined) return componentProps
-      return undefined
+      return NConfigProvider?.mergedComponentProps
     })
     onBeforeMount(() => {
       const { onBeforeMount } = props
