@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import TsConfigProvider from '../themes/src/tusimple/ts-config-provider'
+import { TsConfigProvider } from '../themes/tusimple/src'
 import SiteRoot from './SiteRoot.vue'
 
 export default {

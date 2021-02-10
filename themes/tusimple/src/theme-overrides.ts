@@ -76,6 +76,9 @@ export const themeOverrides: GlobalThemeOverrides = {
     clearColor: composite('#FFF', 'rgba(0, 0, 0, .4)'),
     ...colors
   },
+  Avatar: {
+    borderRadius: '50%'
+  },
   BackTop: {
     width: '48px',
     height: '48px',

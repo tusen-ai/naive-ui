@@ -2,7 +2,7 @@ import { h, VNode } from 'vue'
 import { CaretUpOutline, CaretDownOutline } from '@vicons/ionicons5'
 import { colors } from './theme-overrides'
 import { GRAY_COLOR_4 } from './vars'
-import { FilterRender, SorterRender } from 'naive-ui'
+import type { FilterRender, SorterRender } from 'naive-ui'
 
 export const renderSorter: SorterRender = ({ order }) => {
   const chevronStyle = {
