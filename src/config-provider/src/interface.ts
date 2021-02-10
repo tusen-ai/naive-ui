@@ -1,3 +1,4 @@
+import { VNodeChild } from 'vue'
 import type { NDateLocale, NLocale } from '../../locales'
 import type { ThemeCommonVars } from '../../_styles/common'
 import type { AlertTheme } from '../../alert/styles'
@@ -223,6 +224,7 @@ export interface ConfigProviderInjection {
   mergedDateLocale: NDateLocale | undefined
   mergedHljs: Hljs | undefined
   mergedComponentProps: ComponentProps | undefined
+  mergedIcons: Icons | undefined
   // wip, unstable
   mergedUnstableTheme: GlobalTheme | undefined
   mergedUnstableThemeOverrides: GlobalThemeOverrides | undefined
@@ -247,4 +249,9 @@ export interface ComponentProps {
     renderFilter?: FilterRender
     renderSorter?: SorterRender
   }
+}
+
+export interface Icons {
+  clear?: () => VNodeChild
+  close?: () => VNodeChild
 }

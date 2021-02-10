@@ -1,5 +1,5 @@
 import { h, defineComponent, PropType } from 'vue'
-import { useStyle } from '../../../_mixins'
+import { useStyle, useConfig } from '../../../_mixins'
 import { DismissCircleIcon } from '../../icons'
 import NBaseIcon from '../../icon'
 import NIconSwitchTransition from '../../icon-switch-transition'
@@ -19,7 +19,9 @@ export default defineComponent({
   },
   setup () {
     useStyle('BaseClear', style)
+    const { NConfigProvider } = useConfig()
     return {
+      NConfigProvider,
       handleMouseDown (e: MouseEvent) {
         e.preventDefault()
       }
@@ -38,7 +40,13 @@ export default defineComponent({
                   onClick={this.onClear}
                   onMousedown={this.handleMouseDown}
                 >
-                  {{ default: () => <DismissCircleIcon /> }}
+                  {{
+                    default: () => {
+                      const { NConfigProvider } = this
+                      const clear = NConfigProvider?.mergedIcons?.clear
+                      return clear ? clear() : <DismissCircleIcon />
+                    }
+                  }}
                 </NBaseIcon>
               ) : (
                 <div key="icon" class="n-base-clear__placeholder">

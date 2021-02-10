@@ -15,7 +15,8 @@ import {
   ConfigProviderInjection,
   GlobalTheme,
   GlobalThemeOverrides,
-  ComponentProps
+  ComponentProps,
+  Icons
 } from './interface'
 import { NDateLocale, NLocale } from '../../locales'
 
@@ -42,6 +43,7 @@ export default defineComponent({
     theme: Object as PropType<GlobalTheme | null>,
     themeOverrides: Object as PropType<GlobalThemeOverrides | null>,
     componentProps: Object as PropType<ComponentProps>,
+    icons: Object as PropType<Icons>,
     onBeforeMount: Function,
     // deprecated
     legacyTheme: String,
@@ -119,6 +121,10 @@ export default defineComponent({
       const { bordered } = props
       return bordered === undefined ? NConfigProvider?.mergedBordered : bordered
     })
+    const mergedIconsRef = computed(() => {
+      const { icons } = props
+      return icons === undefined ? NConfigProvider?.mergedIcons : icons
+    })
     const mergedComponentPropsRef = computed(() => {
       const { componentProps } = props
       if (componentProps !== undefined) return componentProps
@@ -131,6 +137,7 @@ export default defineComponent({
     provide<ConfigProviderInjection>(
       'NConfigProvider',
       reactive({
+        mergedIcons: mergedIconsRef,
         mergedComponentProps: mergedComponentPropsRef,
         mergedBordered: mergedBorderedRef,
         mergedNamespace: mergedNamespaceRef,
