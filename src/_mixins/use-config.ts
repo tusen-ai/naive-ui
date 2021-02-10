@@ -7,7 +7,12 @@ type UseConfigProps = Readonly<{
 }>
 
 export default function useConfig (
-  props: UseConfigProps = {}
+  props: UseConfigProps = {},
+  options: {
+    defaultBordered?: boolean
+  } = {
+    defaultBordered: true
+  }
 ): {
     NConfigProvider: ConfigProviderInjection | null
     mergedBordered: ComputedRef<boolean>
@@ -22,7 +27,7 @@ export default function useConfig (
     mergedBordered: computed(() => {
       const { bordered } = props
       if (bordered !== undefined) return bordered
-      return NConfigProvider?.mergedBordered || true
+      return NConfigProvider?.mergedBordered ?? options.defaultBordered ?? true
     }),
     namespace: computed(() => NConfigProvider?.mergedNamespace)
   }

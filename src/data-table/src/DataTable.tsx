@@ -10,7 +10,7 @@ import {
   toRef,
   CSSProperties
 } from 'vue'
-import { useLocale, useTheme } from '../../_mixins'
+import { useConfig, useLocale, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NEmpty } from '../../empty'
 import { NSpin } from '../../spin'
@@ -61,8 +61,8 @@ export const dataTableProps = {
     default: false
   },
   bordered: {
-    type: Boolean,
-    default: true
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
   },
   scrollX: [Number, String] as PropType<string | number>,
   defaultCheckedRowKeys: {
@@ -183,6 +183,7 @@ export default defineComponent({
   alias: ['AdvancedTable'],
   props: dataTableProps,
   setup (props) {
+    const { mergedBordered } = useConfig(props)
     const themeRef = useTheme(
       'DataTable',
       'DataTable',
@@ -291,6 +292,7 @@ export default defineComponent({
       mainTableInstRef,
       mergedTheme: themeRef,
       paginatedData: paginatedDataRef,
+      mergedBordered,
       mergedPagination,
       ...exposedMethods,
       cssVars: computed(() => {
@@ -356,7 +358,7 @@ export default defineComponent({
         class={[
           'n-data-table',
           {
-            'n-data-table--bordered': this.bordered,
+            'n-data-table--bordered': this.mergedBordered,
             'n-data-table--single-line': this.singleLine,
             'n-data-table--single-column': this.singleColumn
           }
@@ -376,7 +378,7 @@ export default defineComponent({
                   ref="mainTableInstRef"
                   maxHeight={this.maxHeight}
                   minHeight={this.minHeight}
-                  bordered={this.bordered}
+                  bordered={this.mergedBordered}
                 >
                   {{
                     default: () =>
