@@ -33,6 +33,7 @@ const cascaderDark: CascaderTheme = {
       menuColor: popoverColor,
       menuBoxShadow: boxShadow2,
       menuDividerColor: dividerColorOverlay,
+      menuHeight: 'calc(var(--option-height) * 6.6)',
       optionArrowColor: textColor3Overlay,
       optionHeight: heightMedium,
       optionFontSize: fontSizeMedium,

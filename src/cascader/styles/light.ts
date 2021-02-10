@@ -25,6 +25,7 @@ const self = (vars: ThemeCommonVars) => {
     menuColor: popoverColor,
     menuBoxShadow: boxShadow2,
     menuDividerColor: dividerColorOverlay,
+    menuHeight: 'calc(var(--option-height) * 6.6)',
     optionArrowColor: textColor3,
     optionHeight: heightMedium,
     optionFontSize: fontSizeMedium,

@@ -159,6 +159,9 @@ export const themeOverrides: GlobalThemeOverrides = {
     iconMarginMedium: '8px',
     iconMarginLarge: '12px'
   },
+  Cascader: {
+    menuHeight: '290px'
+  },
   DataTable: {
     fontSizeMedium: '16px',
     thPaddingMedium: '12px 0 12px 20px',
