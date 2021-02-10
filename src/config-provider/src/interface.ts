@@ -1,4 +1,4 @@
-import type { NaiveDateLocale, NLocale } from '../../locales'
+import type { NDateLocale, NLocale } from '../../locales'
 import type { ThemeCommonVars } from '../../_styles/common'
 import type { AlertTheme } from '../../alert/styles'
 import type { AnchorTheme } from '../../anchor/styles'
@@ -220,7 +220,7 @@ export interface ConfigProviderInjection {
   mergedBordered: boolean | undefined
   mergedNamespace: string | undefined
   mergedLocale: NLocale | undefined
-  mergedDateLocale: NaiveDateLocale | undefined
+  mergedDateLocale: NDateLocale | undefined
   mergedHljs: Hljs | undefined
   mergedComponentProps: ComponentProps | undefined
   // wip, unstable

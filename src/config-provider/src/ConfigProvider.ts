@@ -17,7 +17,7 @@ import {
   GlobalThemeOverrides,
   ComponentProps
 } from './interface'
-import { NaiveDateLocale, NLocale } from '../../locales'
+import { NDateLocale, NLocale } from '../../locales'
 
 export default defineComponent({
   name: 'ConfigProvider',
@@ -32,7 +32,7 @@ export default defineComponent({
       default: undefined
     },
     locale: Object as PropType<NLocale | null>,
-    dateLocale: Object as PropType<NaiveDateLocale | null>,
+    dateLocale: Object as PropType<NDateLocale | null>,
     namespace: String,
     tag: {
       type: String,

@@ -1,5 +1,5 @@
 import { UnwrapRef } from 'vue'
-import { NLocale, NaiveDateLocale } from '../../locales'
+import { NLocale, NDateLocale } from '../../locales'
 import {
   IsHourDisabled,
   IsMinuteDisabled,
@@ -33,7 +33,7 @@ export type DatePickerInjection = {
   mergedTheme: MergedTheme<DatePickerTheme>
   timePickerSize: 'small' | 'medium' | 'large'
   locale: NLocale['DatePicker']
-  dateLocale: NaiveDateLocale
+  dateLocale: NDateLocale
   value: Value | null
   isDateDisabled: IsDateDisabled
 } & UnwrapRef<ReturnType<typeof uniCalendarValidation>> &

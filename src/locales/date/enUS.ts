@@ -5,5 +5,5 @@ const dateEnUs = {
   locale: enUS
 }
 
-export type NaiveDateLocale = typeof dateEnUs
+export type NDateLocale = typeof dateEnUs
 export default dateEnUs
