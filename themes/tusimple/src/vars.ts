@@ -1,9 +1,10 @@
-
 export const BORDER_RADIUS = '20px'
 
-export const NORMAL_BOX_SHADOW = '0 2px 16px 0 rgb(0,0,0,0.1), 0 0 16px -2px rgb(0,0,0,0.06)'
+export const NORMAL_BOX_SHADOW =
+  '0 2px 16px 0 rgb(0,0,0,0.1), 0 0 16px -2px rgb(0,0,0,0.06)'
 
-export const SEPCIAL_BOX_SHADOW = '0 40px 16px -24px rgb(0,0,0, 0.04), 0 8px 16px -8px rbg(0,0,0, 0.12), 0 16px 40px 16px rgb(0,0,0,0.04)'
+export const SEPCIAL_BOX_SHADOW =
+  '0 40px 16px -24px rgb(0,0,0, 0.04), 0 8px 16px -8px rbg(0,0,0, 0.12), 0 16px 40px 16px rgb(0,0,0,0.04)'
 
 export const SMALL_FRONT_SIZE = '12px'
 

@@ -1,15 +1,12 @@
 import { createApp } from 'vue'
 import { installDemoComponents } from './init'
-import SiteRoot from './SiteRoot.vue'
+import SiteRoot from './TsSiteRoot.vue'
 import naive from '../src/index'
 import { routes, childRoutes } from './routes/routes'
 import createDemoRouter from './routes/router'
-import tusimpleTheme from '../themes/tusimple'
 
 import debugRouteMixin from './routes/debug-route-mixin'
 debugRouteMixin(routes, childRoutes)
-
-naive.use(tusimpleTheme)
 
 const app = createApp(SiteRoot)
 
