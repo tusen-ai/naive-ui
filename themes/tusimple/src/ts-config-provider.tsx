@@ -3,6 +3,7 @@ import { NConfigProvider } from 'naive-ui'
 import { renderFilter, renderSorter } from './data-table'
 import { unconfigurableStyle, mountSvgDefs } from './unconfigurable-style'
 import { themeOverrides } from './theme-overrides'
+import { icons } from './icons'
 
 export default defineComponent({
   name: 'TsConfigProvider',
@@ -36,6 +37,7 @@ export default defineComponent({
       <NConfigProvider
         themeOverrides={themeOverrides}
         componentProps={this.componentProps}
+        icons={icons}
         onBeforeMount={this.onBeforeMount}
       >
         {this.$slots}

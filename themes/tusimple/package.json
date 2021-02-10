@@ -2,7 +2,7 @@
   "name": "@naive-ui/tusimple-theme",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "version": "2.0.0-beta.5",
+  "version": "0.1.0",
   "author": "07akioni",
   "license": "MIT",
   "publishConfig": {
