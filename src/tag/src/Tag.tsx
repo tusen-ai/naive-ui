@@ -1,5 +1,5 @@
 import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseClose } from '../../_internal'
 import { warn, createKey } from '../../_utils'
@@ -13,6 +13,10 @@ export default defineComponent({
   props: {
     ...(useTheme.props as ThemeProps<TagTheme>),
     ...commonProps,
+    bordered: {
+      type: Boolean as PropType<boolean | undefined>,
+      default: undefined
+    },
     checked: {
       type: Boolean,
       default: false
@@ -48,6 +52,7 @@ export default defineComponent({
     }
   },
   setup (props) {
+    const { mergedBordered } = useConfig(props)
     const themeRef = useTheme('Tag', 'Tag', style, tagLight, props)
     function handleClick (e: MouseEvent): void {
       if (!props.disabled) {
@@ -73,6 +78,7 @@ export default defineComponent({
       }
     }
     return {
+      mergedBordered,
       handleClick,
       handleCloseClick,
       cssVars: computed(() => {
@@ -99,7 +105,7 @@ export default defineComponent({
             [createKey('height', size)]: height,
             [createKey('color', type)]: color,
             [createKey('textColor', type)]: textColor,
-            [createKey('borderColor', type)]: borderColor,
+            [createKey('border', type)]: border,
             [createKey('closeColor', type)]: closeColor,
             [createKey('closeColorHover', type)]: closeColorHover,
             [createKey('closeColorPressed', type)]: closeColorPressed
@@ -108,7 +114,7 @@ export default defineComponent({
         return {
           '--bezier': cubicBezierEaseInOut,
           '--border-radius': borderRadius,
-          '--border-color': borderColor,
+          '--border': border,
           '--close-color': closeColor,
           '--close-color-hover': closeColorHover,
           '--close-color-pressed': closeColorPressed,
@@ -156,6 +162,9 @@ export default defineComponent({
             disabled={this.disabled}
             onClick={this.handleCloseClick}
           />
+        ) : null}
+        {!this.checkable && this.mergedBordered ? (
+          <div class="n-tag__border" />
         ) : null}
       </div>
     )

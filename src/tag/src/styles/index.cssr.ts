@@ -3,7 +3,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // vars:
 // --bezier
 // --border-radius
-// --border-color
+// --border
 // --close-color
 // --close-color-hover
 // --close-color-pressed
@@ -35,7 +35,6 @@ export default cB('tag', `
   flex-wrap: nowrap;
   padding: var(--padding);
   border-radius: var(--border-radius);
-  box-shadow: inset 0 0 0 1px var(--border-color);
   color: var(--text-color);
   background-color: var(--color);
   transition: 
@@ -48,6 +47,15 @@ export default cB('tag', `
     height: var(--height);
     font-size: var(--font-size);
 `, [
+  cE('border', `
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: inherit;
+    border: var(--border);
+  `),
   cE('close', `
     font-size: var(--close-size);
     margin: var(--close-margin);

@@ -19,6 +19,7 @@ shape
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
+| bordered | `boolean` | `true` |  |
 | checkable | `boolean` | `false` |  |
 | checked | `boolean` | `false` |  |
 | closable | `boolean` | `false` |  |

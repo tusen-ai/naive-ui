@@ -19,6 +19,7 @@ shape
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| bordered | `boolean` | `true` |  |
 | checkable | `boolean` | `false` |  |
 | checked | `boolean` | `false` |  |
 | closable | `boolean` | `false` |  |
