@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./es",
+    "module": "ES6",
+    "target": "ES6"
+  },
+  "references": [
+    { "path": "../../src/tsconfig.esm.json" }
+  ]
+}

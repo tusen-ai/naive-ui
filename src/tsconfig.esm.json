@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.json",
+  "exclude": ["./**/*.spec.*"],
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "../es",
+    "module": "ES6",
+    "target": "ES6"
+  }
+}

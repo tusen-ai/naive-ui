@@ -1,6 +1,8 @@
 {
-  "include": ["src/**/*"],
   "compilerOptions": {
+    "paths": {
+      "naive-ui": ["./src"]
+    },
     "strict": true,
     "strictNullChecks": true,
     "jsx": "react",
@@ -10,6 +12,7 @@
     "moduleResolution": "Node",
     "declaration": true,
     "forceConsistentCasingInFileNames": true,
+    "composite": true,
     "lib": [
       "ESNext",
       "DOM"

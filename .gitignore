@@ -16,5 +16,6 @@ coverage
 /fonts
 /site
 /package
-/lib
-/es
+lib
+es
+*.tsbuildinfo

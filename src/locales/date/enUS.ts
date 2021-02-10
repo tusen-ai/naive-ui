@@ -1,9 +1,15 @@
+import type { Locale } from 'date-fns'
 import { enUS } from 'date-fns/locale'
 
-const dateEnUs = {
+interface NDateLocale {
+  name: string
+  locale: Locale
+}
+
+const dateEnUs: NDateLocale = {
   name: 'en-US',
   locale: enUS
 }
 
-export type NDateLocale = typeof dateEnUs
+export { NDateLocale }
 export default dateEnUs

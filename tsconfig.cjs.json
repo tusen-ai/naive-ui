@@ -1,9 +1,11 @@
 {
-  "extends": "./tsconfig.json",
-  "exclude": ["src/**/*.spec.ts"],
-  "compilerOptions": {
-    "outDir": "lib",
-    "module": "CommonJS",
-    "target": "ES6"
-  }
+  "files": [],
+  "references": [
+    {
+      "path": "./src/tsconfig.cjs.json"
+    },
+    {
+      "path": "./themes/tusimple/tsconfig.cjs.json"
+    }
+  ]
 }

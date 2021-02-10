@@ -1,6 +1,9 @@
 import { zhCN } from 'date-fns/locale'
+import { NDateLocale } from './enUS'
 
-export default {
+const dateZhCN: NDateLocale = {
   name: 'zh-CN',
   locale: zhCN
 }
+
+export default dateZhCN
