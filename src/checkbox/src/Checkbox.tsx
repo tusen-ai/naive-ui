@@ -178,7 +178,7 @@ export default defineComponent({
           self: {
             borderRadius,
             color,
-            colorActive,
+            colorChecked,
             colorDisabled,
             colorTableHeader,
             colorTableHeaderModal,
@@ -187,10 +187,13 @@ export default defineComponent({
             border,
             borderFocus,
             borderDisabled,
-            borderActive,
+            borderChecked,
             boxShadowFocus,
             textColor,
             textColorDisabled,
+            checkMarkColorDisabledChecked,
+            colorDisabledChecked,
+            borderDisabledChecked,
             [createKey('fontSize', mergedSize)]: fontSize,
             [createKey('size', mergedSize)]: size
           }
@@ -200,19 +203,22 @@ export default defineComponent({
           '--bezier': cubicBezierEaseInOut,
           '--border-radius': borderRadius,
           '--border': border,
-          '--border-active': borderActive,
+          '--border-checked': borderChecked,
           '--border-focus': borderFocus,
           '--border-disabled': borderDisabled,
+          '--border-disabled-checked': borderDisabledChecked,
           '--box-shadow-focus': boxShadowFocus,
           '--color': color,
-          '--color-active': colorActive,
+          '--color-checked': colorChecked,
           '--color-table-header': colorTableHeader,
           '--color-table-header-modal': colorTableHeaderModal,
           '--color-disabled': colorDisabled,
+          '--color-disabled-checked': colorDisabledChecked,
           '--text-color': textColor,
           '--text-color-disabled': textColorDisabled,
           '--check-mark-color': checkMarkColor,
           '--check-mark-color-disabled': checkMarkColorDisabled,
+          '--check-mark-color-disabled-checked': checkMarkColorDisabledChecked,
           '--font-size': fontSize
         }
       })

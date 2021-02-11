@@ -59,7 +59,10 @@ export const colors = {
   errorColorPressed: createPressedColor('#D92149'),
   warningColor: '#FFAC26',
   warningColorHover: createHoverColor('#FFAC26', 0.2),
-  warningColorPressed: createPressedColor('#FFAC26', 0.05)
+  warningColorPressed: createPressedColor('#FFAC26', 0.05),
+  textColorDisabled: '#D7DAE0',
+  textColor1: '#333',
+  textColor2: '#333'
 }
 
 export const themeOverrides: GlobalThemeOverrides = {
@@ -68,7 +71,6 @@ export const themeOverrides: GlobalThemeOverrides = {
     boxShadow2: '0 2px 16px 0 rgba(0,0,0,0.10), 0 0 16px -2px rgba(0,0,0,0.06)',
     borderColor: '#999',
     dividerColor: '#EBEDF0',
-    textColor2: '#333',
     tableHeaderColorOverlay: '#EBEDF0',
     inputColorDisabled,
     actionColor: inputColorDisabled,
@@ -158,6 +160,19 @@ export const themeOverrides: GlobalThemeOverrides = {
     iconMarginSmall: '8px',
     iconMarginMedium: '8px',
     iconMarginLarge: '12px'
+  },
+  Checkbox: {
+    sizeMedium: '16px',
+    fontSizeMedium: '16px',
+    borderRadius: '4px',
+    borderDisabled: `1px solid ${colors.textColorDisabled}`,
+    borderDisabledChecked: '1px solid transparent',
+    checkMarkColorDisabled: colors.textColorDisabled,
+    checkMarkColorDisabledChecked: '#FFF',
+    colorDisabled: 'transparent',
+    colorDisabledChecked: '#D8D8D8',
+    textColor: commonLight.textColor1,
+    textColorDisabled: colors.textColorDisabled
   },
   Cascader: {
     menuHeight: '290px'

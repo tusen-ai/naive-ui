@@ -6,18 +6,21 @@ import iconSwitchTransition from '../../../_styles/transitions/icon-switch'
 // --size
 // --border
 // --border-focus
-// --border-active
+// --border-checked
 // --border-disabled
+// --border-disabled-checked
 // --box-shadow-focus
 // --color
-// --color-active
+// --color-checked
 // --color-table-header
 // --color-table-header-modal
 // --color-disabled
+// --color-disabled-checked
 // --text-color
 // --text-color-disabled
 // --check-mark-color
 // --check-mark-color-disabled
+// --check-mark-color-disabled-checked
 // --border-radius
 // --font-size
 export default c([
@@ -30,12 +33,11 @@ export default c([
     align-items: center;
     white-space: nowrap;
     vertical-align: middle;
-  `,
-  [
+  `, [
     c('&:hover', [
       cB('checkbox-box', [
         cE('border', {
-          border: 'var(--border-active)'
+          border: 'var(--border-checked)'
         })
       ])
     ]),
@@ -54,7 +56,7 @@ export default c([
     ]),
     cM('checked', [
       cB('checkbox-box', {
-        backgroundColor: 'var(--color-active)'
+        backgroundColor: 'var(--color-checked)'
       }, [
         cB('checkbox-icon', [
           cE('check', `
@@ -82,24 +84,38 @@ export default c([
       c('&:focus:not(:active)', [
         cB('checkbox-box', [
           cE('border', {
-            border: 'var(--border-active)',
+            border: 'var(--border-checked)',
             boxShadow: 'var(--box-shadow-focus)'
           })
         ])
       ]),
       cB('checkbox-box', `
-        background-color: var(--color-active);
+        background-color: var(--color-checked);
         border-left: 0;
         border-top: 0;
       `, [
         cE('border', {
-          border: 'var(--border-active)'
+          border: 'var(--border-checked)'
         })
       ])
     ]),
     cM('disabled', {
       cursor: 'not-allowed'
     }, [
+      cM('checked', [
+        cB('checkbox-box', `
+          background-color: var(--color-disabled-checked);
+        `, [
+          cE('border', {
+            border: 'var(--border-disabled-checked)'
+          }),
+          cB('checkbox-icon', [
+            cE('check, line', {
+              fill: 'var(--check-mark-color-disabled-checked)'
+            })
+          ])
+        ])
+      ]),
       cB('checkbox-box', `
         background-color: var(--color-disabled);
       `, [
