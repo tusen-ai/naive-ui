@@ -438,6 +438,7 @@
   - [ ] select menu multiple, when show=true, checkmark transiton not working（推测是 vue 的 bug）
   - [ ] demo hmr （或许是 vite-plugin-vue 或 vite 的 bug，修改内容不更新）
   - [ ] 不再提前编译 demo 的 highlight code，应该可以缩小很多打包体积
+  - [ ] fix input textarea clear...
 
 ## Build
 
