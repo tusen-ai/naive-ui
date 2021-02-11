@@ -39,7 +39,7 @@ export default defineComponent({
     },
     value: Array as PropType<string[]>,
     tagStyle: {
-      type: Object as PropType<CSSProperties>,
+      type: [String, Object] as PropType<string | CSSProperties>,
       default: () => {
         return {
           marginRight: '6px'
@@ -47,7 +47,7 @@ export default defineComponent({
       }
     },
     inputStyle: {
-      type: Object as PropType<CSSProperties>,
+      type: [String, Object] as PropType<string | CSSProperties>,
       default: () => {
         return {
           width: '64px'
