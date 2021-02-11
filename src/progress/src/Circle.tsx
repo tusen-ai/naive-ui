@@ -1,10 +1,10 @@
 import { h, defineComponent, PropType, computed, CSSProperties } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import {
-  CheckmarkIcon as SuccessIcon,
-  CloseIcon as ErrorIcon,
+  SuccessIcon,
+  ErrorIcon,
   WarningIcon,
-  InfoIcon as InfoCircleIcon
+  InfoIcon
 } from '../../_internal/icons'
 import { Status } from './interface'
 
@@ -12,7 +12,7 @@ const iconMap = {
   success: <SuccessIcon />,
   error: <ErrorIcon />,
   warning: <WarningIcon />,
-  info: <InfoCircleIcon />
+  info: <InfoIcon />
 }
 
 export default defineComponent({
