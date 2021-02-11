@@ -1,5 +1,5 @@
 import { computed, defineComponent, renderSlot, h, PropType } from 'vue'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils'
 import { inputLight } from '../styles'
@@ -14,6 +14,10 @@ export default defineComponent({
     size: {
       type: String as PropType<Size>,
       default: 'medium'
+    },
+    bordered: {
+      type: Boolean as PropType<boolean | undefined>,
+      default: undefined
     }
   },
   setup (props) {
@@ -24,7 +28,9 @@ export default defineComponent({
       inputLight,
       props
     )
+    const { mergedBordered } = useConfig(props)
     return {
+      mergedBordered,
       cssVars: computed(() => {
         const { size } = props
         const {
@@ -56,7 +62,9 @@ export default defineComponent({
     return (
       <div class="n-input-group-label" style={this.cssVars as any}>
         {renderSlot(this.$slots, 'default')}
-        <div class="n-input-group-label__border" />
+        {this.mergedBordered ? (
+          <div class="n-input-group-label__border" />
+        ) : null}
       </div>
     )
   }
