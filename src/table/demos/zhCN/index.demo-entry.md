@@ -22,9 +22,10 @@ single-line
 
 ### Table Props
 
-| 名称          | 类型                             | 默认值     | 说明 |
-| ------------- | -------------------------------- | ---------- | ---- |
-| bordered      | `boolean`                        | `true`     |      |
-| single-column | `boolean`                        | `false`    |      |
-| single-line   | `boolean`                        | `true`     |      |
-| size          | `'small' \| 'medium' \| 'large'` | `'medium'` |      |
+| 名称            | 类型                             | 默认值     | 说明 |
+| --------------- | -------------------------------- | ---------- | ---- |
+| buttom-bordered | `boolean`                        | `true`     |      |
+| bordered        | `boolean`                        | `true`     |      |
+| single-column   | `boolean`                        | `false`    |      |
+| single-line     | `boolean`                        | `true`     |      |
+| size            | `'small' \| 'medium' \| 'large'` | `'medium'` |      |

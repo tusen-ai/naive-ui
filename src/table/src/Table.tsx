@@ -14,6 +14,10 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
+    bottomBordered: {
+      type: Boolean,
+      default: true
+    },
     singleLine: {
       type: Boolean,
       default: true
@@ -73,6 +77,7 @@ export default defineComponent({
         class={[
           'n-table',
           {
+            'n-table--bottom-bordered': this.bottomBordered,
             'n-table--bordered': this.bordered,
             'n-table--single-line': this.singleLine,
             'n-table--single-column': this.singleColumn

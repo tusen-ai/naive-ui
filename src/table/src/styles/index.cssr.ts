@@ -1,4 +1,4 @@
-import { c, cB, cE, cM, insideModal } from '../../../_utils/cssr'
+import { c, cB, cE, cM, cNotM, insideModal } from '../../../_utils/cssr'
 
 // vars:
 // --bezier
@@ -90,9 +90,22 @@ export default c([
       `)
     ]),
     cM('single-column', [
-      cE('td', `
-        border-bottom: none;
-      `)
+      cE('tr', [
+        c('&:not(:last-child)', [
+          cE('td', `
+            border-bottom: none;
+          `)
+        ])
+      ])
+    ]),
+    cNotM('bottom-bordered', [
+      cE('tr', [
+        c('&:last-child', [
+          cE('td', `
+            border-bottom: none;
+          `)
+        ])
+      ])
     ])
   ]),
   insideModal(
