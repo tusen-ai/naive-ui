@@ -23,11 +23,11 @@ export interface MessageOptions {
 }
 
 export interface MessageApiInjection {
-  info: (content: string, options: MessageOptions) => void
-  success: (content: string, options: MessageOptions) => void
-  warning: (content: string, options: MessageOptions) => void
-  error: (content: string, options: MessageOptions) => void
-  loading: (content: string, options: MessageOptions) => void
+  info: (content: string, options: MessageOptions) => MessageReactive
+  success: (content: string, options: MessageOptions) => MessageReactive
+  warning: (content: string, options: MessageOptions) => MessageReactive
+  error: (content: string, options: MessageOptions) => MessageReactive
+  loading: (content: string, options: MessageOptions) => MessageReactive
 }
 
 export interface MessageReactive {
