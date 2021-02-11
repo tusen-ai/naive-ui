@@ -19,7 +19,7 @@ import { createId } from 'seemly'
 import { RemoveIcon, AddIcon } from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
 import { NButton, NButtonGroup } from '../../button'
-import { useTheme, useLocale } from '../../_mixins'
+import { useTheme, useLocale, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { warn, call, MaybeArray } from '../../_utils'
 import { dynamicInputLight } from '../styles'
@@ -102,6 +102,7 @@ export default defineComponent({
     }
   },
   setup (props, { slots }) {
+    const { NConfigProvider } = useConfig()
     const NFormItem = inject<FormItemInjection | null>('NFormItem', null)
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
@@ -218,6 +219,7 @@ export default defineComponent({
     )
     return {
       ...useLocale('DynamicInput'),
+      NConfigProvider,
       NFormItem,
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
@@ -254,6 +256,8 @@ export default defineComponent({
       remove,
       createItem
     } = this
+    const buttonSize = this.NConfigProvider?.mergedComponentProps?.DynamicInput
+      ?.buttonSize
     return (
       <div class="n-dynamic-input" style={this.cssVars as CSSProperties}>
         {!Array.isArray(mergedValue) || mergedValue.length === 0 ? (
@@ -261,6 +265,7 @@ export default defineComponent({
             block
             ghost
             dashed
+            size={buttonSize}
             theme={mergedTheme.peers.Button}
             themeOverrides={mergedTheme.peerOverrides.Button}
             onClick={this.handleCreateClick}
@@ -305,7 +310,7 @@ export default defineComponent({
                 />
               ) : null}
               <div class="n-dynamic-input-item__action">
-                <NButtonGroup>
+                <NButtonGroup size={buttonSize}>
                   {{
                     default: () =>
                       [

@@ -22,6 +22,9 @@ export default defineComponent({
         DataTable: {
           renderFilter,
           renderSorter
+        },
+        DynamicInput: {
+          buttonSize: 'small'
         }
       } as const,
       onBeforeMount () {

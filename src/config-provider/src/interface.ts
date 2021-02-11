@@ -72,6 +72,7 @@ import type { Hljs } from '../../_mixins'
 import { Size as TimePickerSize } from '../../time-picker/src/interface'
 import { Size as InputSize } from '../../input/src/interface'
 import { Size as SelectSize } from '../../select/src/interface'
+import { Size as ButtonSize } from '../../button/src/interface'
 import { FilterRender, SorterRender } from '../../data-table/src/interface'
 import { IconPlacement } from '../../dialog/src/interface'
 
@@ -248,6 +249,9 @@ export interface ComponentProps {
   DataTable?: {
     renderFilter?: FilterRender
     renderSorter?: SorterRender
+  }
+  DynamicInput?: {
+    buttonSize?: ButtonSize
   }
 }
 

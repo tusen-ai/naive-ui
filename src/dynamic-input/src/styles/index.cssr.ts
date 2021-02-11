@@ -12,11 +12,13 @@ export default cB('dynamic-input', {
   `,
   [
     cB('dynamic-input-preset-input', {
-      flex: 1
+      flex: 1,
+      alignItems: 'center'
     }),
     cB('dynamic-input-preset-pair', `
       flex: 1;
       display: flex;
+      align-items: center;
     `, [
       cB('dynamic-input-pair-input', [
         c('&:first-child', {
@@ -25,9 +27,9 @@ export default cB('dynamic-input', {
       ])
     ]),
     cE('action', `
+      align-self: flex-start;
       display: flex;
       justify-content: flex-end;
-      align-items: flex-start;
       flex-shrink: 0;
       flex-grow: 0;
       margin: var(--action-margin);
