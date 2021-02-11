@@ -130,10 +130,7 @@ export type FilterRender = (props: {
   show: boolean
 }) => VNodeChild
 
-export type SorterRender = (props: {
-  active: boolean
-  order: SortOrder
-}) => VNodeChild
+export type SorterRender = (props: { order: SortOrder | false }) => VNodeChild
 
 export type FilterMenuRender = () => VNodeChild
 

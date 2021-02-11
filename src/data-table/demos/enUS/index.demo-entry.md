@@ -12,6 +12,7 @@ DataTable is used to displays rows of structured data.
 
 ```demo
 basic
+empty
 border
 size
 filter-and-sorter

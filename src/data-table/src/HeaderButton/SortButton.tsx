@@ -28,7 +28,7 @@ export default defineComponent({
     })
     const mergedSortOrderRef = computed(() => {
       const { value } = sortStateRef
-      if (value) return value.order
+      if (value) return activeRef.value ? value.order : false
       return false
     })
     const mergedRenderSorterRef = computed(() => {
@@ -44,20 +44,16 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedRenderSorter, mergedSortOrder, active } = this
+    const { mergedRenderSorter, mergedSortOrder } = this
     return mergedRenderSorter ? (
-      <RenderSorter
-        render={mergedRenderSorter}
-        order={mergedSortOrder}
-        active={active}
-      />
+      <RenderSorter render={mergedRenderSorter} order={mergedSortOrder} />
     ) : (
       <span
         class={[
           'n-data-table-sorter',
           {
-            'n-data-table-sorter--asc': active && mergedSortOrder === 'ascend',
-            'n-data-table-sorter--desc': active && mergedSortOrder === 'descend'
+            'n-data-table-sorter--asc': mergedSortOrder === 'ascend',
+            'n-data-table-sorter--desc': mergedSortOrder === 'descend'
           }
         ]}
       >

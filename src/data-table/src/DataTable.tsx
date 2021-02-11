@@ -319,6 +319,10 @@ export default defineComponent({
             borderColorModal,
             thColorHoverModal,
             tdColorHoverModal,
+            paginationMargin,
+            emptyPadding,
+            actionPadding,
+            actionButtonMargin,
             [createKey('fontSize', size)]: fontSize,
             [createKey('thPadding', size)]: thPadding,
             [createKey('tdPadding', size)]: tdPadding
@@ -347,7 +351,11 @@ export default defineComponent({
           '--th-button-color-hover': thButtonColorHover,
           '--th-icon-color': thIconColor,
           '--th-icon-color-active': thIconColorActive,
-          '--filter-size': filterSize
+          '--filter-size': filterSize,
+          '--pagination-margin': paginationMargin,
+          '--empty-padding': emptyPadding,
+          '--action-padding': actionPadding,
+          '--action-button-margin': actionButtonMargin
         }
       })
     }

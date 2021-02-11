@@ -113,13 +113,12 @@ export default defineComponent({
         {{
           trigger: () =>
             this.mergedRenderFilter ? (
-              <div data-data-table-filter>
-                <RenderFilter
-                  render={this.mergedRenderFilter}
-                  active={this.active}
-                  show={this.showPopover}
-                />
-              </div>
+              <RenderFilter
+                data-data-table-filter
+                render={this.mergedRenderFilter}
+                active={this.active}
+                show={this.showPopover}
+              />
             ) : (
               <div
                 data-data-table-filter

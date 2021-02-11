@@ -12,6 +12,7 @@
 
 ```demo
 basic
+empty
 border
 size
 filter-and-sorter

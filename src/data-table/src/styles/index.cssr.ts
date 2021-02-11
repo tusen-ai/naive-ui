@@ -28,6 +28,10 @@ const fixedColumnStyle = createFixedColumnStyle()
 // --th-icon-color-active
 // --filter-size
 // --action-divider-color
+// --action-padding
+// --action-button-margin
+// --pagination-margin
+// --empty-padding
 export default c([
   cB('data-table', {
     width: '100%',
@@ -40,7 +44,7 @@ export default c([
       padding: 'var(--td-padding)'
     }),
     cB('data-table-empty', `
-      margin: 16px 0 14px 0;
+      padding: var(--empty-padding);
       flex-grow: 1;
       flex-shrink: 0;
       opacity: 1;
@@ -54,7 +58,7 @@ export default c([
       })
     ]),
     cE('pagination', `
-      margin-top: 12px;
+      margin: var(--pagination-margin);
       display: flex;
       justify-content: flex-end;
     `),
@@ -184,9 +188,11 @@ export default c([
         cM('filterable', {
           paddingRight: '36px'
         }),
-        cM('selection', {
-          lineHeight: 0
-        }),
+        cM('selection', `
+          padding: 0;
+          text-align: center;
+          line-height: 0;
+        `),
         cE('ellipsis', `
           display: inline-block;
           text-overflow: ellipsis;
@@ -224,9 +230,11 @@ export default c([
           overflow: hidden;
           white-space: nowrap;
         `),
-        cM('selection', {
-          lineHeight: 0
-        }),
+        cM('selection', `
+          text-align: center;
+          padding: 0;
+          line-height: 0;
+        `),
         fixedColumnStyle
       ])
     ]),
@@ -316,7 +324,7 @@ export default c([
       })
     ]),
     cE('action', `
-      padding: 8px 12px;
+      padding: var(--action-padding);
       display: flex;
       flex-wrap: nowrap;
       justify-content: space-evenly;
@@ -324,7 +332,10 @@ export default c([
     `, [
       cB('button', [
         c('&:not(:last-child)', {
-          marginRight: '8px'
+          margin: 'var(--action-button-margin)'
+        }),
+        c('&:last-child', {
+          marginRight: 0
         })
       ])
     ]),

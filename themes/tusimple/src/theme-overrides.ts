@@ -179,7 +179,6 @@ export const themeOverrides: GlobalThemeOverrides = {
   },
   DataTable: {
     fontSizeMedium: '16px',
-    thPaddingMedium: '12px 0 12px 20px',
     thColor: '#EBEDF0',
     thTextColor: commonLight.textColor2,
     thFontWeight: commonLight.fontWeight,
@@ -192,7 +191,13 @@ export const themeOverrides: GlobalThemeOverrides = {
     tdColorHoverModal: composite(
       commonLight.primaryColor,
       'rgba(255, 255, 255, .9)'
-    )
+    ),
+    thPaddingSmall: '10px 20px',
+    thPaddingMedium: '10px 20px',
+    thPaddingLarge: '10px 20px',
+    tdPaddingSmall: '10px 20px',
+    tdPaddingMedium: '10px 20px',
+    tdPaddingLarge: '10px 20px'
   },
   DatePicker: {
     itemBorderRadius: '14px',
@@ -237,6 +242,11 @@ export const themeOverrides: GlobalThemeOverrides = {
         heightSmall: '24px'
       }
     }
+  },
+  Empty: {
+    iconColor: colors.textColorDisabled,
+    textColor: colors.textColorDisabled,
+    extraTextColor: colors.textColorDisabled
   },
   Input: {
     heightMedium: '32px',
@@ -386,7 +396,14 @@ export const themeOverrides: GlobalThemeOverrides = {
   Table: {
     thColor: '#EBEDF0',
     thTextColor: commonLight.textColor2,
-    thFontWeight: commonLight.fontWeight
+    thFontWeight: commonLight.fontWeight,
+    borderColor: '#5B5B5B',
+    thPaddingSmall: '10px 20px',
+    thPaddingMedium: '10px 20px',
+    thPaddingLarge: '10px 20px',
+    tdPaddingSmall: '10px 20px',
+    tdPaddingMedium: '10px 20px',
+    tdPaddingLarge: '10px 20px'
   },
   Tag: {
     borderRadius: '16px',

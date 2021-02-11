@@ -7,7 +7,7 @@ import { paginationLight } from '../../pagination/styles'
 import { scrollbarLight } from '../../scrollbar/styles'
 import { popoverLight } from '../../popover/styles'
 import { spinLight } from '../../spin/styles'
-import { emptyDark } from '../../empty/styles'
+import { emptyLight } from '../../empty/styles'
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
@@ -77,7 +77,7 @@ const dataTableLight = createTheme({
     Pagination: paginationLight,
     Scrollbar: scrollbarLight,
     Spin: spinLight,
-    Empty: emptyDark,
+    Empty: emptyLight,
     Popover: popoverLight
   },
   self
