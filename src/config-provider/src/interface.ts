@@ -256,10 +256,14 @@ export interface ComponentProps {
 }
 
 export interface Icons {
+  attach?: () => VNodeChild
+  cancel?: () => VNodeChild
   clear?: () => VNodeChild
   close?: () => VNodeChild
+  download?: () => VNodeChild
+  error?: () => VNodeChild
   info?: () => VNodeChild
   success?: () => VNodeChild
+  trash?: () => VNodeChild
   warning?: () => VNodeChild
-  error?: () => VNodeChild
 }

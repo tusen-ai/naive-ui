@@ -320,7 +320,7 @@ export default defineComponent({
           [createKey('iconMargin', size)]: iconMargin
         } = self
         const sizeProps = {
-          '--width': circle ? height : 'initial',
+          '--width': circle && !text ? height : 'initial',
           '--height': text ? 'initial' : height,
           '--font-size': fontSize,
           '--padding': circle

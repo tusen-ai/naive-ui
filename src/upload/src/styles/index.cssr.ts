@@ -126,7 +126,7 @@ export default cB('upload', [
             text-decoration-color .3s var(--bezier);
           color: var(--item-text-color);    
         `, [
-          cB('icon', `
+          cB('base-icon', `
             font-size: 18px;
             margin-right: 2px;
             vertical-align: middle;

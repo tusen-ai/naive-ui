@@ -1,7 +1,7 @@
 import { h, defineComponent, PropType, computed, inject } from 'vue'
 import {
   CancelIcon,
-  DeleteIcon,
+  TrashIcon,
   AttachIcon,
   DownloadIcon
 } from '../../_internal/icons'
@@ -135,8 +135,7 @@ export default defineComponent({
                 theme={this.NUpload.mergedTheme.peers.Button}
                 themeOverrides={this.NUpload.mergedTheme.peerOverrides.Button}
                 circle
-                size="tiny"
-                ghost
+                text
                 type={this.buttonType}
                 onClick={this.handleRemoveOrCancelClick}
               >
@@ -147,7 +146,7 @@ export default defineComponent({
                         default: () =>
                           this.showRemoveButton ? (
                             <NBaseIcon key="trash">
-                              {{ default: () => <DeleteIcon /> }}
+                              {{ default: () => <TrashIcon /> }}
                             </NBaseIcon>
                           ) : (
                             <NBaseIcon key="cancel">
@@ -164,8 +163,7 @@ export default defineComponent({
               <NButton
                 key="download"
                 circle
-                size="tiny"
-                ghost
+                text
                 type={this.buttonType}
                 onClick={this.handleDownloadClick}
               >

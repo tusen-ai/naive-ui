@@ -67,6 +67,7 @@ export const colors = {
 
 export const themeOverrides: GlobalThemeOverrides = {
   common: {
+    fontWeightStrong: '700',
     borderRadius: '16px',
     boxShadow2: '0 2px 16px 0 rgba(0,0,0,0.10), 0 0 16px -2px rgba(0,0,0,0.06)',
     borderColor: '#999',
