@@ -10,11 +10,13 @@ const self = (vars: ThemeCommonVars) => {
     errorColor,
     textColor2,
     progressRailColor,
-    fontSize
+    fontSize,
+    fontWeight
   } = vars
   return {
     fontSize,
     fontSizeCircle: '28px',
+    fontWeightCircle: fontWeight,
     railColor: progressRailColor,
     railHeight: '8px',
     iconSizeCircle: '36px',

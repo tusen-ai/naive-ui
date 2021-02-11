@@ -108,6 +108,7 @@ export default defineComponent({
             textColorLineInner,
             textColorLineOuter,
             lineBgProcessing,
+            fontWeightCircle,
             [createKey('iconColor', status)]: iconColor,
             [createKey('fillColor', status)]: fillColor
           }
@@ -117,6 +118,7 @@ export default defineComponent({
           '--fill-color': fillColor,
           '--font-size': fontSize,
           '--font-size-circle': fontSizeCircle,
+          '--font-weight-circle': fontWeightCircle,
           '--icon-color': iconColor,
           '--icon-size-circle': iconSizeCircle,
           '--icon-size-line': iconSizeLine,

@@ -358,6 +358,7 @@ export const themeOverrides: GlobalThemeOverrides = {
     spaceArrow: '14px'
   },
   Progress: {
+    fontWeightCircle: '700',
     railHeight: '4px',
     fontSizeCircle: '24px',
     iconSizeCircle: '30px',

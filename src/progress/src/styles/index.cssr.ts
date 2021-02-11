@@ -1,10 +1,11 @@
-import { c, cB, cE, cM } from '../../../_utils/cssr'
+import { c, cB, cM } from '../../../_utils/cssr'
 
 // vars
 // --bezier
 // --fill-color
 // --font-size
 // --font-size-circle
+// --font-weight-circle
 // --icon-color
 // --icon-size-circle
 // --icon-size-line
@@ -74,18 +75,12 @@ export default c([
         display: flex;
         align-items: center;
         color: inherit;
-        font-size: 36px;
+        font-size: var(--font-size-circle);
         color: var(--text-color-circle);
+        font-weight: var(--font-weight-circle);
         transition: color .3s var(--bezier);
         white-space: nowrap;
-      `, [
-        cE('percentage', `
-          font-size: var(--font-size-circle);
-        `),
-        cE('unit', `
-          font-size: var(--font-size-circle);
-        `)
-      ]),
+      `),
       cB('progress-icon', `
         position: absolute;
         left: 50%;
@@ -102,6 +97,7 @@ export default c([
       color: 'inherit'
     }, [
       cB('progress-text', `
+        font-weight: var(--font-weight-circle);
         color: var(--text-color-circle);
         position: absolute;
         left: 50%;

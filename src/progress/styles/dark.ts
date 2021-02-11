@@ -12,9 +12,11 @@ const progressDark: ProgressTheme = {
       errorColor,
       textColor2,
       progressRailColorOverlay,
-      fontSize
+      fontSize,
+      fontWeight
     } = vars
     return {
+      fontWeightCircle: fontWeight,
       fontSize,
       fontSizeCircle: '28px',
       railColor: progressRailColorOverlay,
