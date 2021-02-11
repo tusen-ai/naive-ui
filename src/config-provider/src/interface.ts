@@ -254,4 +254,8 @@ export interface ComponentProps {
 export interface Icons {
   clear?: () => VNodeChild
   close?: () => VNodeChild
+  info?: () => VNodeChild
+  success?: () => VNodeChild
+  warning?: () => VNodeChild
+  error?: () => VNodeChild
 }

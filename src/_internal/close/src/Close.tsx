@@ -1,5 +1,5 @@
 import { h, defineComponent, PropType } from 'vue'
-import { useStyle, useConfig } from '../../../_mixins'
+import { useStyle } from '../../../_mixins'
 import NBaseIcon from '../../icon'
 import { CloseIcon } from '../../icons'
 import style from './styles/index.cssr'
@@ -15,7 +15,6 @@ export default defineComponent({
   },
   setup (props) {
     useStyle('BaseClose', style)
-    const { NConfigProvider } = useConfig()
     return () => (
       <NBaseIcon
         class={[
@@ -27,10 +26,7 @@ export default defineComponent({
         onClick={props.onClick}
       >
         {{
-          default: () => {
-            const close = NConfigProvider?.mergedIcons?.close
-            return close ? close() : <CloseIcon />
-          }
+          default: () => <CloseIcon />
         }}
       </NBaseIcon>
     )
