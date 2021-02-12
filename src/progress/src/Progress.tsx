@@ -157,7 +157,7 @@ export default defineComponent({
     } = this
     return (
       <div
-        class={['n-progress', `n-progress--${type}`]}
+        class={['n-progress', `n-progress--${type}`, `n-progress--${status}`]}
         style={cssVars as CSSProperties}
       >
         {type === 'circle' ? (

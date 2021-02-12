@@ -4,13 +4,17 @@ import { c, cB, cE, cM } from 'naive-ui'
 export function mountSvgDefs (): void {
   if (document.getElementById('naive-ui/tusimple/svg-defs')) return
   const svgDefs = `<defs>
+    <linearGradient id="progress-info">
+      <stop offset="0%" stop-color="#80c6ff" />
+      <stop offset="100%" stop-color="#335fff" />
+    </linearGradient>
     <linearGradient id="progress-success">
-      <stop offset="0%" stop-color="#4FB233" />
-      <stop offset="100%" stop-color="#AFF25E" />
+      <stop offset="0%" stop-color="#AFF25E" />
+      <stop offset="100%" stop-color="#4FB233" />
     </linearGradient>
     <linearGradient id="progress-warning">
-      <stop offset="0%" stop-color="#FFAC26" />
-      <stop offset="100%" stop-color="#F2E93D" />
+      <stop offset="0%" stop-color="#F2E93D" />
+      <stop offset="100%" stop-color="#FFAC26" />
     </linearGradient>
     <linearGradient id="progress-error">
       <stop offset="0%" stop-color="#FF66BA" />
