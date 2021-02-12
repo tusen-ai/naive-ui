@@ -38,6 +38,7 @@ export default c([
     border-radius: var(--border-radius);
     background-color: var(--color);
     transition: background-color .3s var(--bezier);
+    font-size: var(--font-size);
     --padding-vertical: calc((var(--height) - 1.5 * var(--font-size)) / 2);
   `, [
     // common

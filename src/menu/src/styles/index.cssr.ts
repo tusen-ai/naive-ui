@@ -210,7 +210,7 @@ export default cB('menu', {
       color: var(--item-text-color);
     `, [
       cE('extra', `
-        font-size: 13px;
+        font-size: .93em;
         color: var(--group-text-color);
         transition: color .3s var(--bezier);
       `)
@@ -239,7 +239,7 @@ export default cB('menu', {
       margin-top: 6px;
       color: var(--group-text-color);
       cursor: default;
-      font-size: 13px;
+      font-size: .93em;
       height: 36px;
       display: flex;
       align-items: center;
