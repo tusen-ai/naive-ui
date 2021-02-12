@@ -42,11 +42,11 @@ export default c([
     --padding-vertical: calc((var(--height) - 1.5 * var(--font-size)) / 2);
   `, [
     // common
-    cE('input', `
+    cE('input, textarea', `
       flex-grow: 1;
       position: relative;
     `),
-    cE('input-el, textarea, textarea-mirror, separator, placeholder', `
+    cE('input-el, textarea-el, textarea-mirror, separator, placeholder', `
       box-sizing: border-box;
       font-size: inherit;
       line-height: 1.5;
@@ -60,7 +60,7 @@ export default c([
         color .3s var(--bezier),
         text-decoration-color .3s var(--bezier);
     `),
-    cE('input-el, textarea', `
+    cE('input-el, textarea-el', `
       -webkit-appearance: none;
       width: 100%;
       min-width: 0;
@@ -118,9 +118,15 @@ export default c([
     ]),
     // textarea
     cM('textarea', [
-      cE('textarea, textarea-mirror, placeholder', `
-        padding-left: var(--padding-left);
-        padding-right: var(--padding-right);
+      cM('resizable', `
+        resize: vertical;
+        overflow: auto;
+        min-height: var(--height);
+      `),
+      cE('textarea-el, textarea-mirror, placeholder', `
+        height: 100%;
+        padding-left: 0;
+        padding-right: 0;
         padding-top: var(--padding-vertical);
         padding-bottom: var(--padding-vertical);
         display: inline-block;
@@ -128,15 +134,14 @@ export default c([
         box-sizing: border-box;
         line-height: var(--line-height-textarea);
         margin: 0;
-        resize: vertical;
+        resize: none;
       `),
-      cE('textarea', [
+      cE('textarea-el', [
         cM('autosize', `
           position: absolute;
           top: 0;
           left: 0;
           height: 100%;
-          resize: none;
         `)
       ]),
       cE('textarea-mirror', `
@@ -166,7 +171,7 @@ export default c([
       cE('border', {
         border: 'var(--border-disabled)'
       }),
-      cE('input-el, textarea', {
+      cE('input-el, textarea-el', {
         cursor: 'not-allowed',
         color: 'var(--text-color-disabled)',
         textDecorationColor: 'var(--text-color-disabled)'
@@ -240,7 +245,7 @@ export default c([
   ['warning', 'error'].map(status => insideFormItem(status,
     cB('input', [
       cNotM('disabled', [
-        c('input, textarea', {
+        c('input-el, textarea-el', {
           caretColor: `var(--caret-color-${status})`
         }),
         cE('state-border', {

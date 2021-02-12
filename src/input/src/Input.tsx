@@ -96,6 +96,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    resizable: {
+      type: Boolean,
+      default: true
+    },
     onMousedown: Function as PropType<(e: MouseEvent) => void>,
     onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
     onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
@@ -192,14 +196,6 @@ export default defineComponent({
         !isComposing &&
         mergedPlaceholder[1] &&
         (!mergedValue || (Array.isArray(mergedValue) && !mergedValue[1]))
-      )
-    })
-    const showTextareaPlaceholderRef = computed(() => {
-      return (
-        props.type === 'textarea' &&
-        !isComposingRef.value &&
-        !mergedValueRef.value &&
-        mergedPlaceholderRef.value
       )
     })
     // clear
@@ -535,7 +531,6 @@ export default defineComponent({
       mergedPlaceholder: mergedPlaceholderRef,
       showPlaceholder1: showPlaceholder1Ref,
       showPlaceholder2: showPlaceholder2Ref,
-      showTextareaPlaceholder: showTextareaPlaceholderRef,
       mergedFocus: mergedFocusRef,
       isComposing: isComposingRef,
       activated: activatedRef,
@@ -661,6 +656,7 @@ export default defineComponent({
           {
             'n-input--disabled': this.disabled,
             'n-input--textarea': this.type === 'textarea',
+            'n-input--resizable': this.resizable,
             'n-input--round': this.round && !(this.type === 'textarea'),
             'n-input--pair': this.pair,
             'n-input--focus': this.mergedFocus,
@@ -684,55 +680,65 @@ export default defineComponent({
         onKeyup={this.onKeyup}
         onKeydown={this.handleWrapperKeyDown}
       >
-        {/* textarea mirror */}
-        {this.type === 'textarea' && this.autosize ? (
-          <pre ref="textareaMirrorElRef" class="n-input__textarea-mirror">
-            {this.mergedValue}
-            <br />
-          </pre>
-        ) : null}
         {/* textarea & basic input */}
-        {this.type === 'textarea' ? (
-          <textarea
-            ref="textareaElRef"
-            class={[
-              'n-input__textarea',
-              {
-                'n-input__textarea--autosize': this.autosize
-              }
-            ]}
-            autofocus={this.autofocus}
-            rows={Number(this.rows)}
-            placeholder={this.placeholder as string | undefined}
-            value={this.mergedValue as string | undefined}
-            disabled={this.disabled}
-            maxlength={this.maxlength as any}
-            minlength={this.minlength as any}
-            readonly={this.readonly as any}
-            tabindex={
-              this.passivelyActivated && !this.activated ? -1 : undefined
-            }
-            style={this.textDecorationStyle[0] as any}
-            onBlur={this.handleInputBlur}
-            onFocus={this.handleInputFocus}
-            onInput={this.handleInput}
-            onChange={this.handleChange}
-          />
-        ) : (
-          <div class="n-input-wrapper">
-            {this.$slots.affix || this.$slots.prefix ? (
-              <NIconConfigProvider
-                class="n-input__prefix"
-                depth={this.disabled ? 5 : 4}
-              >
-                {{
-                  default: () =>
-                    renderSlot(this.$slots, 'affix', undefined, () => {
-                      return [renderSlot(this.$slots, 'prefix')]
-                    })
-                }}
-              </NIconConfigProvider>
-            ) : null}
+        <div class="n-input-wrapper">
+          {this.$slots.affix || this.$slots.prefix ? (
+            <NIconConfigProvider
+              class="n-input__prefix"
+              depth={this.disabled ? 5 : 4}
+            >
+              {{
+                default: () =>
+                  renderSlot(this.$slots, 'affix', undefined, () => {
+                    return [renderSlot(this.$slots, 'prefix')]
+                  })
+              }}
+            </NIconConfigProvider>
+          ) : null}
+          {this.type === 'textarea' ? (
+            <div class="n-input__textarea">
+              <textarea
+                ref="textareaElRef"
+                class={[
+                  'n-input__textarea-el',
+                  {
+                    'n-input__textarea-el--autosize': this.autosize
+                  }
+                ]}
+                autofocus={this.autofocus}
+                rows={Number(this.rows)}
+                placeholder={this.placeholder as string | undefined}
+                value={this.mergedValue as string | undefined}
+                disabled={this.disabled}
+                maxlength={this.maxlength as any}
+                minlength={this.minlength as any}
+                readonly={this.readonly as any}
+                tabindex={
+                  this.passivelyActivated && !this.activated ? -1 : undefined
+                }
+                style={this.textDecorationStyle[0] as any}
+                onBlur={this.handleInputBlur}
+                onFocus={this.handleInputFocus}
+                onInput={this.handleInput}
+                onChange={this.handleChange}
+              />
+              {this.showPlaceholder1 ? (
+                <div class="n-input__placeholder" key="placeholder">
+                  {this.mergedPlaceholder[0]}
+                </div>
+              ) : null}
+              {this.type === 'textarea' && this.autosize ? (
+                <pre
+                  ref="textareaMirrorElRef"
+                  class="n-input__textarea-mirror"
+                  key="mirror"
+                >
+                  {this.mergedValue}
+                  <br />
+                </pre>
+              ) : null}
+            </div>
+          ) : (
             <div class="n-input__input">
               <input
                 ref="inputElRef"
@@ -765,28 +771,28 @@ export default defineComponent({
                 </div>
               ) : null}
             </div>
-            {!this.pair ? (
-              <NIconConfigProvider
-                class="n-input__suffix"
-                depth={this.disabled ? 5 : 4}
-              >
-                {{
-                  default: () => [
-                    renderSlot(this.$slots, 'suffix'),
-                    this.clearable || this.$slots.clear ? (
-                      <NBaseClear
-                        show={this.showClearButton}
-                        onClear={this.handleClear}
-                      >
-                        {{ default: () => renderSlot(this.$slots, 'clear') }}
-                      </NBaseClear>
-                    ) : null
-                  ]
-                }}
-              </NIconConfigProvider>
-            ) : null}
-          </div>
-        )}
+          )}
+          {!this.pair && (this.$slots.suffix || this.clearable) ? (
+            <NIconConfigProvider
+              class="n-input__suffix"
+              depth={this.disabled ? 5 : 4}
+            >
+              {{
+                default: () => [
+                  renderSlot(this.$slots, 'suffix'),
+                  this.clearable || this.$slots.clear ? (
+                    <NBaseClear
+                      show={this.showClearButton}
+                      onClear={this.handleClear}
+                    >
+                      {{ default: () => renderSlot(this.$slots, 'clear') }}
+                    </NBaseClear>
+                  ) : null
+                ]
+              }}
+            </NIconConfigProvider>
+          ) : null}
+        </div>
         {/* pair input */}
         {this.pair ? (
           <span class="n-input__separator">
@@ -796,7 +802,7 @@ export default defineComponent({
           </span>
         ) : null}
         {this.pair ? (
-          <div v-if="pair" class="n-input-wrapper">
+          <div class="n-input-wrapper">
             <div class="n-input__input">
               <input
                 ref="inputEl2Ref"
@@ -848,10 +854,6 @@ export default defineComponent({
               }}
             </NIconConfigProvider>
           </div>
-        ) : null}
-        {/* textarea placeholder */}
-        {this.showTextareaPlaceholder ? (
-          <div class="n-input__placeholder">{this.placeholder}</div>
         ) : null}
         {/* border */}
         {this.mergedBordered ? <div class="n-input__border" /> : null}
