@@ -23,7 +23,7 @@ import { InputRef, NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
 import { useFormItem, useTheme, useConfig, useLocale } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { CalendarIcon, FastForwardIcon } from '../../_internal/icons'
+import { CalendarIcon, ToIcon } from '../../_internal/icons'
 import { warn, call, useAdjustedTo, createKey, MaybeArray } from '../../_utils'
 import { datePickerLight } from '../styles'
 import { strictParse } from './utils'
@@ -619,7 +619,7 @@ export default defineComponent({
                           {{
                             separator: () => (
                               <NBaseIcon class="n-date-picker-icon">
-                                {{ default: () => <FastForwardIcon /> }}
+                                {{ default: () => <ToIcon /> }}
                               </NBaseIcon>
                             ),
                             clear: () => (

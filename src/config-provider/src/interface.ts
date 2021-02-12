@@ -264,6 +264,7 @@ export interface Icons {
   error?: () => VNodeChild
   info?: () => VNodeChild
   success?: () => VNodeChild
+  to?: () => VNodeChild
   trash?: () => VNodeChild
   warning?: () => VNodeChild
 }

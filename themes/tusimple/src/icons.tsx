@@ -150,6 +150,31 @@ const retryIcon = (
   </svg>
 )
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const toIcon = (
+  <svg viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g
+        transform="translate(-339.000000, -1254.000000)"
+        fill="currentColor"
+        fill-rule="nonzero"
+      >
+        <g transform="translate(119.000000, 288.000000)">
+          <g transform="translate(0.000000, 900.000000)">
+            <g transform="translate(0.000000, 62.000000)">
+              <g transform="translate(100.000000, 0.000000)">
+                <g transform="translate(120.000000, 4.000000)">
+                  <path d="M14.2928932,7.29289322 C14.6533772,6.93240926 15.2206082,6.90467972 15.6128994,7.20970461 L15.7071068,7.29289322 L20.7071068,12.2928932 C21.3096819,12.8954683 20.9276677,13.9071808 20.1136309,13.9940167 L20,14 L4,14 C3.44771525,14 3,13.5522847 3,13 C3,12.4871642 3.38604019,12.0644928 3.88337887,12.0067277 L4,12 L17.585,12 L14.2928932,8.70710678 C13.9324093,8.34662282 13.9046797,7.77939176 14.2097046,7.38710056 L14.2928932,7.29289322 Z"></path>
+                </g>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </svg>
+)
+
 function clear (): VNode {
   return clearIcon as VNode
 }
@@ -178,6 +203,10 @@ function cancel (): VNode {
   return cancelIcon as VNode
 }
 
+function to (): VNode {
+  return toIcon as VNode
+}
+
 export const icons = {
   clear,
   success,
@@ -185,5 +214,6 @@ export const icons = {
   error,
   attach,
   trash,
-  cancel
+  cancel,
+  to
 }
