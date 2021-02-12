@@ -67,11 +67,14 @@ export const colors = {
 
 export const themeOverrides: GlobalThemeOverrides = {
   common: {
+    fontSize: '16px',
+    fontSizeMedium: '16px',
     fontWeightStrong: '700',
     borderRadius: '16px',
     boxShadow2: '0 2px 16px 0 rgba(0,0,0,0.10), 0 0 16px -2px rgba(0,0,0,0.06)',
     borderColor: '#999',
     dividerColor: '#EBEDF0',
+    dividerColorOverlay: '#EBEDF0',
     tableHeaderColorOverlay: '#EBEDF0',
     inputColorDisabled,
     actionColor: inputColorDisabled,
@@ -267,7 +270,9 @@ export const themeOverrides: GlobalThemeOverrides = {
     border: '1px solid transparent'
   },
   InternalSelectMenu: {
+    height: '290px',
     boxShadow: commonLight.boxShadow2,
+    optionHeightMedium: '38px',
     paddingSmall: '4px 0',
     paddingMedium: '6px 0',
     paddingLarge: '6px 0',
@@ -293,6 +298,10 @@ export const themeOverrides: GlobalThemeOverrides = {
     labelHeightMedium: '22px',
     labelHeightLarge: '22px',
     labelTextAlignHorizontal: 'left'
+  },
+  Menu: {
+    borderRadius: '100px',
+    itemIconColor: colors.textColor2
   },
   Message: {
     padding: '12px 20px 12px 12px',
@@ -405,7 +414,6 @@ export const themeOverrides: GlobalThemeOverrides = {
     thColor: '#EBEDF0',
     thTextColor: commonLight.textColor2,
     thFontWeight: commonLight.fontWeight,
-    borderColor: '#5B5B5B',
     thPaddingSmall: '10px 20px',
     thPaddingMedium: '10px 20px',
     thPaddingLarge: '10px 20px',
@@ -414,7 +422,7 @@ export const themeOverrides: GlobalThemeOverrides = {
     tdPaddingLarge: '10px 20px'
   },
   Tag: {
-    borderRadius: '16px',
+    borderRadius: '100px',
     border: '1px solid transparent',
     color: 'rgba(153,153,153,0.10)',
     closeColor: commonLight.closeColorOverlay,
@@ -451,6 +459,9 @@ export const themeOverrides: GlobalThemeOverrides = {
         fontSize: '16px'
       }
     }
+  },
+  Transfer: {
+    extraTextColor: colors.textColor1
   },
   Typography: {
     headerPrefixWidth3: '15px',

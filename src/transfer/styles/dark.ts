@@ -51,7 +51,7 @@ const transferDark: TransferTheme = {
       headerColor: tableHeaderColorOverlay,
       titleTextColor: textColor1Overlay,
       titleTextColorDisabled: textColorDisabledOverlay,
-      headerExtraTextColor: textColor2Overlay,
+      extraTextColor: textColor2Overlay,
       filterDividerColor: dividerColorOverlay,
       itemTextColor: textColor2Overlay,
       itemTextColorDisabled: textColorDisabledOverlay,

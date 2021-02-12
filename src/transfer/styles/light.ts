@@ -44,7 +44,7 @@ const self = (vars: ThemeCommonVars) => {
     headerColor: composite(cardColor, tableHeaderColorOverlay),
     titleTextColor: textColor1,
     titleTextColorDisabled: textColorDisabled,
-    headerExtraTextColor: textColor2,
+    extraTextColor: textColor2,
     filterDividerColor: borderColorOverlay,
     itemTextColor: textColor2,
     itemTextColorDisabled: textColorDisabled,
