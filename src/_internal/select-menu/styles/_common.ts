@@ -1,12 +1,5 @@
 export default {
-  optionFontSizeSmall: '14px',
-  optionFontSizeMedium: '14px',
-  optionFontSizeLarge: '15px',
-  optionFontSizeHuge: '16px',
-  optionHeightSmall: '28px',
-  optionHeightMedium: '34px',
-  optionHeightLarge: '40px',
-  optionHeightHuge: '48px',
+  height: 'calc(var(--option-height) * 7.6)',
   paddingSmall: '4px 0',
   paddingMedium: '4px 0',
   paddingLarge: '4px 0',

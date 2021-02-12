@@ -17,10 +17,26 @@ const self = (vars: ThemeCommonVars) => {
     textColorDisabled,
     primaryColor,
     opacityDisabled,
-    hoverColorOverlay
+    hoverColorOverlay,
+    fontSizeSmall,
+    fontSizeMedium,
+    fontSizeLarge,
+    fontSizeHuge,
+    heightSmall,
+    heightMedium,
+    heightLarge,
+    heightHuge
   } = vars
   return {
     ...commonVariables,
+    optionFontSizeSmall: fontSizeSmall,
+    optionFontSizeMedium: fontSizeMedium,
+    optionFontSizeLarge: fontSizeLarge,
+    optionFontSizeHuge: fontSizeHuge,
+    optionHeightSmall: heightSmall,
+    optionHeightMedium: heightMedium,
+    optionHeightLarge: heightLarge,
+    optionHeightHuge: heightHuge,
     borderRadius: borderRadius,
     color: popoverColor,
     boxShadow: boxShadow2,

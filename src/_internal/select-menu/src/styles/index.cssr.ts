@@ -16,10 +16,10 @@ export default cB('base-select-menu', `
   box-shadow: var(--box-shadow);
 `, [
   cB('scrollbar', `
-    max-height: calc(var(--option-height) * 7.6);
+    max-height: var(--height);
   `),
   cB('virtual-list', `
-    max-height: calc(var(--option-height) * 7.6);
+    max-height: var(--height);
   `),
   cB('base-select-option', `
     height: var(--option-height);

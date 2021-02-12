@@ -242,6 +242,7 @@ export default defineComponent({
       const {
         common: { cubicBezierEaseInOut },
         self: {
+          height,
           borderRadius,
           color,
           boxShadow,
@@ -260,6 +261,7 @@ export default defineComponent({
         }
       } = themeRef.value
       return {
+        '--height': height,
         '--action-divider-color': actionDividerColor,
         '--action-text-color': actionTextColor,
         '--bezier': cubicBezierEaseInOut,
