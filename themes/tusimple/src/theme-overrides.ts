@@ -255,9 +255,8 @@ export const themeOverrides: GlobalThemeOverrides = {
   Input: {
     heightMedium: '32px',
     fontSizeMedium: '16px',
-    paddingLeft: '12px',
-    paddingRight: '12px',
-    paddingIcon: '44px',
+    paddingLeftMedium: '12px',
+    paddingRightMedium: '12px',
     iconSize: '24px',
     borderHover: `1px solid ${colors.primaryColor}`,
     borderFocus: `1px solid ${colors.primaryColor}`,

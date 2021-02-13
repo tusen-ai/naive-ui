@@ -607,8 +607,6 @@ export default defineComponent({
           self: {
             color,
             borderRadius,
-            paddingLeft,
-            paddingRight,
             textColor,
             caretColor,
             caretColorError,
@@ -640,6 +638,8 @@ export default defineComponent({
             clearColor,
             clearColorHover,
             clearColorPressed,
+            [createKey('paddingLeft', size)]: paddingLeft,
+            [createKey('paddingRight', size)]: paddingRight,
             [createKey('fontSize', size)]: fontSize,
             [createKey('height', size)]: height
           }
