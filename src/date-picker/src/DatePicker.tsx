@@ -23,7 +23,7 @@ import { InputRef, NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
 import { useFormItem, useTheme, useConfig, useLocale } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { CalendarIcon, ToIcon } from '../../_internal/icons'
+import { DateIcon, ToIcon } from '../../_internal/icons'
 import { warn, call, useAdjustedTo, createKey, MaybeArray } from '../../_utils'
 import { datePickerLight } from '../styles'
 import { strictParse } from './utils'
@@ -624,7 +624,7 @@ export default defineComponent({
                             ),
                             clear: () => (
                               <NBaseIcon class="n-date-picker-icon">
-                                {{ default: () => <CalendarIcon /> }}
+                                {{ default: () => <DateIcon /> }}
                               </NBaseIcon>
                             )
                           }}
@@ -645,7 +645,7 @@ export default defineComponent({
                           {{
                             clear: () => (
                               <NBaseIcon class="n-date-picker-icon">
-                                {{ default: () => <CalendarIcon /> }}
+                                {{ default: () => <DateIcon /> }}
                               </NBaseIcon>
                             )
                           }}

@@ -260,11 +260,13 @@ export interface Icons {
   cancel?: () => VNodeChild
   clear?: () => VNodeChild
   close?: () => VNodeChild
+  date?: () => VNodeChild
   download?: () => VNodeChild
   error?: () => VNodeChild
   info?: () => VNodeChild
   retry?: () => VNodeChild
   success?: () => VNodeChild
+  time?: () => VNodeChild
   to?: () => VNodeChild
   trash?: () => VNodeChild
   warning?: () => VNodeChild
