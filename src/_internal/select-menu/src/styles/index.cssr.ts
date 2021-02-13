@@ -36,7 +36,7 @@ export default cB('base-select-menu', `
     width: 100%;
   `),
   cE('action', `
-    padding: 8px 14px;
+    padding: 8px var(--option-padding-left);
     font-size: var(--option-font-size);
     transition: 
       color .3s var(--bezier);
@@ -47,13 +47,13 @@ export default cB('base-select-menu', `
   cB('base-select-group-header', `
     position: relative;
     cursor: default;
-    padding: 0 14px;
+    padding: var(--option-padding);
     color: var(--group-header-text-color);
   `),
   cB('base-select-option', `
     cursor: pointer;
     position: relative;
-    padding: 0 14px;
+    padding: var(--option-padding);
     white-space: nowrap;
     transition:
       background-color .3s var(--bezier),
@@ -69,7 +69,7 @@ export default cB('base-select-menu', `
       color: 'var(--option-text-color-pressed)'
     }),
     cM('grouped', {
-      padding: '0 21px'
+      paddingLeft: 'calc(var(--option-padding-left) * 1.5)'
     }),
     cM('selected', {
       color: 'var(--option-text-color-active)'

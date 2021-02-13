@@ -257,7 +257,8 @@ export default defineComponent({
           actionTextColor,
           optionColorPending,
           [createKey('optionFontSize', size)]: fontSize,
-          [createKey('optionHeight', size)]: optionHeight
+          [createKey('optionHeight', size)]: optionHeight,
+          [createKey('optionPadding', size)]: optionPadding
         }
       } = themeRef.value
       return {
@@ -277,7 +278,9 @@ export default defineComponent({
         '--option-text-color': optionTextColor,
         '--option-text-color-active': optionTextColorActive,
         '--option-text-color-disabled': optionTextColorDisabled,
-        '--option-text-color-pressed': optionTextColorPressed
+        '--option-text-color-pressed': optionTextColorPressed,
+        '--option-padding': optionPadding,
+        '--option-padding-left': getPadding(optionPadding, 'left')
       }
     })
     return {
