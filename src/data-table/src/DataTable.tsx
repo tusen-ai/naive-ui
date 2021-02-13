@@ -262,10 +262,12 @@ export default defineComponent({
         rowKey: toRef(props, 'rowKey'),
         filterMenuCssVars: computed(() => {
           const {
-            self: { actionDividerColor }
+            self: { actionDividerColor, actionPadding, actionButtonMargin }
           } = themeRef.value
           // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
           return {
+            '--action-padding': actionPadding,
+            '--action-button-margin': actionButtonMargin,
             '--action-divider-color': actionDividerColor
           } as CSSProperties
         }),
@@ -321,8 +323,6 @@ export default defineComponent({
             tdColorHoverModal,
             paginationMargin,
             emptyPadding,
-            actionPadding,
-            actionButtonMargin,
             [createKey('fontSize', size)]: fontSize,
             [createKey('thPadding', size)]: thPadding,
             [createKey('tdPadding', size)]: tdPadding
@@ -353,9 +353,7 @@ export default defineComponent({
           '--th-icon-color-active': thIconColorActive,
           '--filter-size': filterSize,
           '--pagination-margin': paginationMargin,
-          '--empty-padding': emptyPadding,
-          '--action-padding': actionPadding,
-          '--action-button-margin': actionButtonMargin
+          '--empty-padding': emptyPadding
         }
       })
     }

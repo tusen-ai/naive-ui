@@ -8,10 +8,6 @@ export default defineComponent({
       type: Function as PropType<SorterRender>,
       required: true
     },
-    active: {
-      type: Boolean,
-      default: false
-    },
     order: {
       // asc, desc
       type: [String, Boolean] as PropType<SortOrder>,
@@ -19,9 +15,8 @@ export default defineComponent({
     }
   },
   render () {
-    const { render, active, order } = this
+    const { render, order } = this
     return render({
-      active,
       order
     })
   }
