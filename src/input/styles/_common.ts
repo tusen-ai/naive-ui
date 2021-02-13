@@ -1,6 +1,6 @@
 export default {
-  paddingLeft: '14px',
-  paddingRight: '8px',
+  paddingLeft: '12px',
+  paddingRight: '12px',
   paddingIcon: '38px',
   clearSize: '16px'
 }

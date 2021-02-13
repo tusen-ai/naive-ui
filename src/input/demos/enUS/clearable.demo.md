@@ -7,18 +7,5 @@ Make input clearable when value is set.
   <n-input type="input" placeholder="Content is clearable" clearable />
   <n-input type="password" placeholder="Content is clearable" clearable />
   <n-input type="textarea" placeholder="Content is clearable" round clearable />
-  <n-button size="small" @click="value = 'Content is clearable'"
-    >Fill Content</n-button
-  >
 </n-space>
-```
-
-```js
-export default {
-  data () {
-    return {
-      value: null
-    }
-  }
-}
 ```

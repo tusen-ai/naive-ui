@@ -143,6 +143,7 @@ export default defineComponent({
     const wrapperElRef = ref<HTMLElement | null>(null)
     const textareaElRef = ref<HTMLElement | null>(null)
     const textareaMirrorElRef = ref<HTMLElement | null>(null)
+    const inputMirrorElRef = ref<HTMLElement | null>(null)
     const inputElRef = ref<HTMLElement | null>(null)
     const inputEl2Ref = ref<HTMLElement | null>(null)
     // local
@@ -254,26 +255,34 @@ export default defineComponent({
         const paddingTop = Number(stylePaddingTop.slice(0, -2))
         const paddingBottom = Number(stylePaddingBottom.slice(0, -2))
         const lineHeight = Number(styleLineHeight.slice(0, -2))
-        if (!textareaMirrorElRef.value) return
+        const { value: textareaMirrorEl } = textareaMirrorElRef
+        if (!textareaMirrorEl) return
         if (autosize.minRows) {
           const minRows = Math.max(autosize.minRows, 1)
           const styleMinHeight = `${
             paddingTop + paddingBottom + lineHeight * minRows
           }px`
-          textareaMirrorElRef.value.style.minHeight = styleMinHeight
+          textareaMirrorEl.style.minHeight = styleMinHeight
         }
         if (autosize.maxRows) {
           const styleMaxHeight = `${
             paddingTop + paddingBottom + lineHeight * autosize.maxRows
           }px`
-          textareaMirrorElRef.value.style.maxHeight = styleMaxHeight
+          textareaMirrorEl.style.maxHeight = styleMaxHeight
         }
       }
     }
-    watch([mergedValueRef, mergedSizeRef], () => {
+    watch([toRef(props, 'autosize'), mergedSizeRef], () => {
       void nextTick(updateTextAreaStyle)
     })
-    onMounted(updateTextAreaStyle)
+    onMounted(() => {
+      updateTextAreaStyle()
+      // sync mirror if is not pair
+      const { value } = mergedValueRef
+      if (!Array.isArray(value)) {
+        syncMirror(value)
+      }
+    })
     // other methods
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const vm = getCurrentInstance()!.proxy!
@@ -358,8 +367,10 @@ export default defineComponent({
       index: 0 | 1 = 0,
       event = 'input'
     ): void {
+      const targetValue = (e.target as HTMLInputElement).value
+      syncMirror(targetValue)
       if (isComposingRef.value) return
-      const changedValue = (e.target as HTMLInputElement).value
+      const changedValue = targetValue
       if (!props.pair) {
         event === 'input' ? doUpdateValue(changedValue) : doChange(changedValue)
       } else {
@@ -448,6 +459,16 @@ export default defineComponent({
         doUpdateValue('')
       }
     }
+    function handleMouseDown (e: MouseEvent): void {
+      const { onMousedown } = props
+      if (onMousedown) onMousedown(e)
+      if ((e.target as HTMLElement).tagName !== 'INPUT') {
+        e.preventDefault()
+        if (!focusedRef.value) {
+          focus()
+        }
+      }
+    }
     function handleMouseEnter (): void {
       hoverRef.value = true
     }
@@ -518,10 +539,31 @@ export default defineComponent({
         handleWrapperKeyDownEsc()
       }
     }
+    function syncMirror (value: string | null): void {
+      const { type, pair, autosize } = props
+      if (!pair && autosize) {
+        if (type === 'textarea') {
+          const { value: textareaMirrorEl } = textareaMirrorElRef
+          if (textareaMirrorEl) {
+            textareaMirrorEl.textContent = (value ?? '') + '\r\n'
+          }
+        } else {
+          const { value: inputMirrorEl } = inputMirrorElRef
+          if (inputMirrorEl) {
+            if (value) {
+              inputMirrorEl.textContent = value
+            } else {
+              inputMirrorEl.innerHTML = '&nbsp;'
+            }
+          }
+        }
+      }
+    }
     return {
       // DOM ref
       wrapperElRef,
       inputElRef,
+      inputMirrorElRef,
       inputEl2Ref,
       textareaElRef,
       textareaMirrorElRef,
@@ -551,6 +593,7 @@ export default defineComponent({
       handleWrapperFocus,
       handleMouseEnter,
       handleMouseLeave,
+      handleMouseDown,
       handleChange,
       handleClick,
       handleClear,
@@ -657,6 +700,7 @@ export default defineComponent({
             'n-input--disabled': this.disabled,
             'n-input--textarea': this.type === 'textarea',
             'n-input--resizable': this.resizable,
+            'n-input--autosize': this.autosize,
             'n-input--round': this.round && !(this.type === 'textarea'),
             'n-input--pair': this.pair,
             'n-input--focus': this.mergedFocus,
@@ -672,7 +716,7 @@ export default defineComponent({
         onFocus={this.handleWrapperFocus}
         onBlur={this.handleWrapperBlur}
         onClick={this.handleClick}
-        onMousedown={this.onMousedown}
+        onMousedown={this.handleMouseDown}
         onMouseenter={this.handleMouseEnter}
         onMouseleave={this.handleMouseLeave}
         onCompositionstart={this.handleCompositionStart}
@@ -699,12 +743,7 @@ export default defineComponent({
             <div class="n-input__textarea">
               <textarea
                 ref="textareaElRef"
-                class={[
-                  'n-input__textarea-el',
-                  {
-                    'n-input__textarea-el--autosize': this.autosize
-                  }
-                ]}
+                class="n-input__textarea-el"
                 autofocus={this.autofocus}
                 rows={Number(this.rows)}
                 placeholder={this.placeholder as string | undefined}
@@ -727,15 +766,12 @@ export default defineComponent({
                   {this.mergedPlaceholder[0]}
                 </div>
               ) : null}
-              {this.type === 'textarea' && this.autosize ? (
+              {this.autosize ? (
                 <pre
                   ref="textareaMirrorElRef"
                   class="n-input__textarea-mirror"
                   key="mirror"
-                >
-                  {this.mergedValue}
-                  <br />
-                </pre>
+                ></pre>
               ) : null}
             </div>
           ) : (
@@ -768,6 +804,15 @@ export default defineComponent({
               {this.showPlaceholder1 ? (
                 <div class="n-input__placeholder">
                   <span>{this.mergedPlaceholder[0]}</span>
+                </div>
+              ) : null}
+              {this.autosize ? (
+                <div
+                  class="n-input__input-mirror"
+                  key="mirror"
+                  ref="inputMirrorElRef"
+                >
+                  &nbsp;
                 </div>
               ) : null}
             </div>

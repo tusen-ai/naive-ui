@@ -28,12 +28,13 @@ import { cB, c, cE, cM, cNotM, insideFormItem } from '../../../_utils/cssr'
 // --clear-color-pressed
 export default c([
   cB('input', `
+    max-width: 100%;
+    cursor: text;
     line-height: 1.5;
     z-index: auto;
     outline: none;
     box-sizing: border-box;
     position: relative;
-    width: 100%;
     display: inline-flex;
     border-radius: var(--border-radius);
     background-color: var(--color);
@@ -43,10 +44,11 @@ export default c([
   `, [
     // common
     cE('input, textarea', `
+      overflow: hidden;
       flex-grow: 1;
       position: relative;
     `),
-    cE('input-el, textarea-el, textarea-mirror, separator, placeholder', `
+    cE('input-el, textarea-el, input-mirror, textarea-mirror, separator, placeholder', `
       box-sizing: border-box;
       font-size: inherit;
       line-height: 1.5;
@@ -92,13 +94,33 @@ export default c([
         display: 'inline-block'
       })
     ]),
+    cNotM('autosize', {
+      width: '100%'
+    }),
+    cM('autosize', [
+      cE('textarea-el, input-el', `
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+      `)
+    ]),
     // input
     cB('input-wrapper', `
+      overflow: hidden;
       display: inline-flex;
       flex-grow: 1;
       position: relative;
       padding-left: var(--padding-left);
       padding-right: var(--padding-right);
+    `),
+    cE('input-mirror', `
+      padding: 0;
+      height: var(--height);
+      overflow: hidden;
+      visibility: hidden;
+      position: static;
+      white-space: nowrap;
     `),
     cE('input-el', {
       padding: 0,
@@ -117,7 +139,9 @@ export default c([
       })
     ]),
     // textarea
-    cM('textarea', [
+    cM('textarea', {
+      width: '100%'
+    }, [
       cM('resizable', `
         resize: vertical;
         overflow: auto;
@@ -136,14 +160,6 @@ export default c([
         margin: 0;
         resize: none;
       `),
-      cE('textarea-el', [
-        cM('autosize', `
-          position: absolute;
-          top: 0;
-          left: 0;
-          height: 100%;
-        `)
-      ]),
       cE('textarea-mirror', `
         overflow: hidden;
         visibility: hidden;

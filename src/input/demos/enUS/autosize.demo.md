@@ -1,11 +1,11 @@
 # Autosize
 
-Make textarea autosizable.
+Make input autosizable.
 
 ```html
 <n-space vertical>
+  <n-input placeholder="Autosizable" autosize style="min-width: 50%;" />
   <n-input
-    v-model:value="value"
     placeholder="Autosizable"
     type="textarea"
     size="small"
@@ -15,7 +15,6 @@ Make textarea autosizable.
     }"
   />
   <n-input
-    v-model:value="value"
     type="textarea"
     placeholder="Autosizable"
     :autosize="{
@@ -23,14 +22,4 @@ Make textarea autosizable.
     }"
   />
 </n-space>
-```
-
-```js
-export default {
-  data () {
-    return {
-      value: null
-    }
-  }
-}
 ```

@@ -1,11 +1,11 @@
 # 自动调整尺寸
 
-Textarea 自动调整尺寸。
+自动调整尺寸。
 
 ```html
 <n-space vertical>
+  <n-input placeholder="自动调整尺寸" autosize style="min-width: 50%;" />
   <n-input
-    v-model:value="value"
     placeholder="自动调整尺寸"
     type="textarea"
     size="small"
@@ -15,7 +15,6 @@ Textarea 自动调整尺寸。
     }"
   />
   <n-input
-    v-model:value="value"
     type="textarea"
     placeholder="自动调整尺寸"
     :autosize="{
@@ -23,14 +22,4 @@ Textarea 自动调整尺寸。
     }"
   />
 </n-space>
-```
-
-```js
-export default {
-  data () {
-    return {
-      value: null
-    }
-  }
-}
 ```
