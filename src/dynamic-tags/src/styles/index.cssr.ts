@@ -1,5 +1,9 @@
 import { cB } from '../../../_utils/cssr'
 
-export default cB('dynamic-tags', {
-  display: 'inline-flex'
-})
+// vars:
+// --input-width
+export default cB('dynamic-tags', [
+  cB('input', {
+    minWidth: 'var(--input-width)'
+  })
+])

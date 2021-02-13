@@ -63,7 +63,7 @@ export default defineComponent({
     },
     autosize: {
       type: [Boolean, Object] as PropType<
-      false | { minRows?: number, maxRows?: number }
+      boolean | { minRows?: number, maxRows?: number }
       >,
       default: false
     },
@@ -78,10 +78,6 @@ export default defineComponent({
     separator: String,
     readonly: {
       type: [String, Boolean],
-      default: false
-    },
-    forceFocus: {
-      type: Boolean,
       default: false
     },
     passivelyActivated: {
@@ -132,7 +128,11 @@ export default defineComponent({
     onWrapperBlur: [Function, Array] as PropType<
     MaybeArray<(e: FocusEvent) => void>
     >,
-    deactivateOnEnter: {
+    internalDeactivateOnEnter: {
+      type: Boolean,
+      default: false
+    },
+    internalForceFocus: {
       type: Boolean,
       default: false
     }
@@ -224,7 +224,7 @@ export default defineComponent({
     })
     // focus
     const mergedFocusRef = computed(() => {
-      return props.forceFocus || focusedRef.value
+      return props.internalForceFocus || focusedRef.value
     })
     // text-decoration
     const textDecorationStyleRef = computed(() => {
@@ -245,7 +245,7 @@ export default defineComponent({
     const updateTextAreaStyle = (): void => {
       if (props.type === 'textarea') {
         const { autosize } = props
-        if (!autosize) return
+        if (typeof autosize === 'boolean') return
         if (!textareaElRef.value) return
         const {
           paddingTop: stylePaddingTop,
@@ -490,7 +490,7 @@ export default defineComponent({
       if (props.passivelyActivated) {
         const { value: focused } = activatedRef
         if (focused) {
-          if (props.deactivateOnEnter) {
+          if (props.internalDeactivateOnEnter) {
             handleWrapperKeyDownEsc()
           }
           return

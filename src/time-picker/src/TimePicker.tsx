@@ -591,13 +591,11 @@ export default defineComponent({
                       value={this.displayTimeString}
                       bordered={this.mergedBordered}
                       passivelyActivated
-                      deactivateOnEnter
                       attrSize={this.mergedAttrSize}
                       theme={this.mergedTheme.peers.Input}
                       themeOverrides={this.mergedTheme.peerOverrides.Input}
                       stateful={this.stateful}
                       size={this.mergedSize}
-                      forceFocus={this.active}
                       placeholder={this.localizedPlaceholder}
                       clearable={this.clearable}
                       disabled={this.disabled}
@@ -610,6 +608,8 @@ export default defineComponent({
                       onDeactivate={this.handleTimeInputDeactivate}
                       onUpdateValue={this.handleTimeInputUpdateValue}
                       onClear={this.handleTimeInputClear}
+                      internalDeactivateOnEnter
+                      internalForceFocus={this.active}
                     >
                       {this.showIcon
                         ? {

@@ -2,7 +2,7 @@
 
 ```html
 <n-form :model="model" :rules="rules">
-  <n-form-item style="padding-top:0" path="tags">
+  <n-form-item path="tags" :label="false">
     <n-dynamic-tags v-model:value="model.tags" />
   </n-form-item>
 </n-form>

@@ -11,6 +11,7 @@ import {
 import commonProps from '../../tag/src/common-props'
 import { AddIcon } from '../../_internal/icons'
 import { NButton } from '../../button'
+import { NSpace } from '../../space'
 import { InputRef, NInput } from '../../input'
 import { NTag } from '../../tag'
 import { NBaseIcon } from '../../_internal'
@@ -19,9 +20,9 @@ import type { ThemeProps } from '../../_mixins'
 import { warn, call, MaybeArray, smallerSize } from '../../_utils'
 import { dynamicTagsLight } from '../styles'
 import type { DynamicTagsTheme } from '../styles'
+import style from './styles/index.cssr'
 
 import type { OnUpdateValue } from './interface'
-import style from './styles/index.cssr'
 import { useMergedState } from 'vooks'
 
 export default defineComponent({
@@ -38,22 +39,8 @@ export default defineComponent({
       default: () => []
     },
     value: Array as PropType<string[]>,
-    tagStyle: {
-      type: [String, Object] as PropType<string | CSSProperties>,
-      default: () => {
-        return {
-          marginRight: '6px'
-        }
-      }
-    },
-    inputStyle: {
-      type: [String, Object] as PropType<string | CSSProperties>,
-      default: () => {
-        return {
-          width: '64px'
-        }
-      }
-    },
+    inputStyle: [String, Object] as PropType<string | CSSProperties>,
+    tagStyle: [String, Object] as PropType<string | CSSProperties>,
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
     onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -158,61 +145,101 @@ export default defineComponent({
       handleAddClick,
       handleInputBlur,
       handleCloseClick,
-      mergedTheme: themeRef
+      mergedTheme: themeRef,
+      cssVars: computed(() => {
+        const {
+          self: { inputWidth }
+        } = themeRef.value
+        return {
+          '--input-width': inputWidth
+        }
+      })
     }
   },
   render () {
-    const { mergedTheme } = this
+    const { mergedTheme, cssVars } = this
     return (
-      <div class="n-dynamic-tags">
-        {this.mergedValue.map((tag, index) => (
-          <NTag
-            key={index}
-            theme={mergedTheme.peers.Tag}
-            themeOverrides={mergedTheme.peerOverrides.Tag}
-            style={this.tagStyle}
-            type={this.type}
-            round={this.round}
-            size={this.size}
-            closable={this.closable}
-            disabled={this.disabled}
-            onClose={() => this.handleCloseClick(index)}
-          >
-            {{ default: () => tag }}
-          </NTag>
-        ))}
-        {this.showInput ? (
-          <NInput
-            ref="inputInstRef"
-            value={this.inputValue}
-            onUpdateValue={(v) => {
-              this.inputValue = v
-            }}
-            forceFocus={this.inputForceFocused}
-            theme={mergedTheme.peers.Input}
-            themeOverrides={mergedTheme.peerOverrides.Input}
-            style={this.inputStyle}
-            size={this.inputSize}
-            placeholder=""
-            onKeyup={this.handleInputKeyUp}
-            onBlur={this.handleInputBlur}
-          />
-        ) : (
-          <NButton
-            dashed
-            theme={this.mergedTheme.peers.Button}
-            themeOverrides={this.mergedTheme.peerOverrides.Button}
-            size={this.inputSize}
-            onClick={this.handleAddClick}
-          >
-            {{
-              icon: () => (
-                <NBaseIcon>{{ default: () => <AddIcon /> }}</NBaseIcon>
+      <NSpace
+        class="n-dynamic-tags"
+        size="small"
+        style={cssVars as CSSProperties}
+        theme={mergedTheme.peers.Space}
+        themeOverrides={mergedTheme.peerOverrides.Space}
+      >
+        {{
+          default: () => {
+            const {
+              mergedTheme,
+              tagStyle,
+              type,
+              round,
+              size,
+              closable,
+              disabled,
+              showInput,
+              inputValue,
+              inputStyle,
+              inputSize,
+              inputForceFocused,
+              handleInputKeyUp,
+              handleInputBlur,
+              handleAddClick,
+              handleCloseClick
+            } = this
+            return this.mergedValue
+              .map((tag, index) => (
+                <NTag
+                  key={index}
+                  theme={mergedTheme.peers.Tag}
+                  themeOverrides={mergedTheme.peerOverrides.Tag}
+                  style={tagStyle}
+                  type={type}
+                  round={round}
+                  size={size}
+                  closable={closable}
+                  disabled={disabled}
+                  onClose={() => handleCloseClick(index)}
+                >
+                  {{ default: () => tag }}
+                </NTag>
+              ))
+              .concat(
+                showInput ? (
+                  <NInput
+                    ref="inputInstRef"
+                    autosize
+                    value={inputValue}
+                    onUpdateValue={(v) => {
+                      this.inputValue = v
+                    }}
+                    theme={mergedTheme.peers.Input}
+                    themeOverrides={mergedTheme.peerOverrides.Input}
+                    style={inputStyle}
+                    size={inputSize}
+                    placeholder=""
+                    onKeyup={handleInputKeyUp}
+                    onBlur={handleInputBlur}
+                    internalForceFocus={inputForceFocused}
+                  />
+                ) : (
+                  <NButton
+                    dashed
+                    theme={mergedTheme.peers.Button}
+                    themeOverrides={mergedTheme.peerOverrides.Button}
+                    size={inputSize}
+                    onClick={handleAddClick}
+                  >
+                    {{
+                      icon: () => (
+                        <NBaseIcon>{{ default: () => <AddIcon /> }}</NBaseIcon>
+                      )
+                    }}
+                  </NButton>
+                )
               )
-            }}
-          </NButton>
-        )}
-      </div>
+          }
+        }}
+      </NSpace>
     )
   }
 })
