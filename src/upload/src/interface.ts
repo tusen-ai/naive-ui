@@ -48,11 +48,13 @@ export interface UploadInjection {
   showCancelButton: boolean
   showRemoveButton: boolean
   showDownloadButton: boolean
+  showRetryButton: boolean
   mergedFileList: FileInfo[]
   XhrMap: Map<string, XMLHttpRequest>
+  submit: (fileId?: string) => void
   doChange: DoChange
-  onRemove?: OnRemove
-  onDownload?: OnDownload
+  onRemove: OnRemove | undefined
+  onDownload: OnDownload | undefined
 }
 
 export interface XhrHandlers {

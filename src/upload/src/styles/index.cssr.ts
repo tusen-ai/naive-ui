@@ -102,11 +102,14 @@ export default cB('upload', [
           display: flex;
           align-items: center;
           transition: opacity .2s var(--bezier);
-          flex-direction: row-reverse;
+          justify-content: flex-end;
           opacity: 0;
         `, [
           cB('button', [
-            cB('icon', [
+            c('&:not(:last-child)', {
+              marginRight: '4px'
+            }),
+            cB('base-icon', [
               c('svg', [
                 createIconSwitchTransition()
               ])

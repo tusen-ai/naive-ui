@@ -227,6 +227,10 @@ export default defineComponent({
     showDownloadButton: {
       type: Boolean,
       default: false
+    },
+    showRetryButton: {
+      type: Boolean,
+      default: true
     }
   },
   setup (props) {
@@ -308,7 +312,8 @@ export default defineComponent({
           ? mergedFileListRef.value.filter((file) => file.id === fileId)
           : mergedFileListRef.value
       filesToUpload.forEach((file) => {
-        if (file.status === 'pending') {
+        const { status } = file
+        if (status === 'pending' || status === 'error') {
           const formData = new FormData()
           formData.append(fieldName, file.file as File)
           submitImpl(
@@ -371,11 +376,13 @@ export default defineComponent({
         showCancelButton: toRef(props, 'showCancelButton'),
         showDownloadButton: toRef(props, 'showDownloadButton'),
         showRemoveButton: toRef(props, 'showRemoveButton'),
+        showRetryButton: toRef(props, 'showRetryButton'),
         draggerInside: draggerInsideRef,
         mergedFileList: mergedFileListRef,
         XhrMap,
         onRemove: toRef(props, 'onRemove'),
         onDownload: toRef(props, 'onDownload'),
+        submit,
         doChange
       })
     )

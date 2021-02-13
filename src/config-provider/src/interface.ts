@@ -263,6 +263,7 @@ export interface Icons {
   download?: () => VNodeChild
   error?: () => VNodeChild
   info?: () => VNodeChild
+  retry?: () => VNodeChild
   success?: () => VNodeChild
   to?: () => VNodeChild
   trash?: () => VNodeChild

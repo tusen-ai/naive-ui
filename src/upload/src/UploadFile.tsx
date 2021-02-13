@@ -3,6 +3,7 @@ import {
   CancelIcon,
   TrashIcon,
   AttachIcon,
+  RetryIcon,
   DownloadIcon
 } from '../../_internal/icons'
 import { NButton } from '../../button'
@@ -51,6 +52,14 @@ export default defineComponent({
       const { file } = props
       return ['finished'].includes(file.status)
     })
+    const showRetryButtonRef = computed(() => {
+      if (!NUpload.showRetryButton) return false
+      const { file } = props
+      return ['error'].includes(file.status)
+    })
+    function handleRetryClick (): void {
+      NUpload.submit(props.file.id)
+    }
     function handleRemoveOrCancelClick (e: MouseEvent): void {
       e.preventDefault()
       const { file } = props
@@ -107,8 +116,10 @@ export default defineComponent({
       showCancelButton: showCancelButtonRef,
       showRemoveButton: showRemoveButtonRef,
       showDownloadButton: showDownloadButtonRef,
+      showRetryButton: showRetryButtonRef,
       handleRemoveOrCancelClick,
-      handleDownloadClick
+      handleDownloadClick,
+      handleRetryClick
     }
   },
   render () {
@@ -134,7 +145,6 @@ export default defineComponent({
                 key="cancelOrTrash"
                 theme={this.NUpload.mergedTheme.peers.Button}
                 themeOverrides={this.NUpload.mergedTheme.peerOverrides.Button}
-                circle
                 text
                 type={this.buttonType}
                 onClick={this.handleRemoveOrCancelClick}
@@ -159,10 +169,23 @@ export default defineComponent({
                 }}
               </NButton>
             ) : null}
+            {this.showRetryButton ? (
+              <NButton
+                key="retry"
+                text
+                type={this.buttonType}
+                onClick={this.handleRetryClick}
+              >
+                {{
+                  icon: () => (
+                    <NBaseIcon>{{ default: () => <RetryIcon /> }}</NBaseIcon>
+                  )
+                }}
+              </NButton>
+            ) : null}
             {this.showDownloadButton ? (
               <NButton
                 key="download"
-                circle
                 text
                 type={this.buttonType}
                 onClick={this.handleDownloadClick}
