@@ -2,7 +2,7 @@
   <n-layout-header bordered>
     <div class="nav">
       <n-text tag="div" class="ui-logo" :depth="1" @click="handleLogoClick">
-        <img src="./assets/images/naivelogo.svg">
+        <img src="./assets/images/naivelogo.svg" />
         Naive UI
       </n-text>
       <div style="display: flex; align-items: center">
@@ -11,7 +11,7 @@
             mode="horizontal"
             :value="menuValue"
             :items="menuItems"
-            @select="handleMenuSelect"
+            @update:value="handleMenuSelect"
           />
         </div>
         <n-auto-complete

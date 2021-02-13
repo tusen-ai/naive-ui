@@ -14,7 +14,7 @@
     "dev": "npm run clean && npm run gen-version && cross-env NODE_ENV=development vite",
     "dev:ts": "npm run clean && npm run gen-version && cross-env NODE_ENV=development TUSIMPLE=true vite",
     "lint": "npm run lint:code && npm run lint:type",
-    "lint:type": "tsc --noEmit",
+    "lint:type": "tsc -b tsconfig.esm.json",
     "lint:code": "eslint --fix \"{src,build,scripts,demo}/**/*.{ts,tsx,js,vue,md}\"",
     "format": "npm run format:code && npm run format:md",
     "format:code": "prettier --write \"(src|demo)/**/*.(vue|js)\"",
