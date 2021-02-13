@@ -19,6 +19,7 @@ import { c, cB, cE, cM, insideModal } from '../../../_utils/cssr'
 // --close-color-hover
 // --close-color-pressed
 // --border-color
+// --close-size
 export default c([
   cB('card', `
     font-size: var(--font-size);
@@ -92,7 +93,7 @@ export default c([
           color: var(--text-color);
         `),
         cE('close', `
-          font-size: 16px;
+          font-size: var(--close-size);
           transition: color .3s var(--bezier);
         `)
       ]),

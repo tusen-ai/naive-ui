@@ -48,6 +48,7 @@ export default cB('tag', `
     font-size: var(--font-size);
 `, [
   cE('border', `
+    pointer-events: none;
     position: absolute;
     left: 0;
     right: 0;

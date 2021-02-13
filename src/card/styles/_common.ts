@@ -14,5 +14,6 @@ export default {
   titleFontSizeSmall: '16px',
   titleFontSizeMedium: '18px',
   titleFontSizeLarge: '18px',
-  titleFontSizeHuge: '18px'
+  titleFontSizeHuge: '18px',
+  closeSize: '18px'
 }

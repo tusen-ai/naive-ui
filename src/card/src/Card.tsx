@@ -78,6 +78,7 @@ export default defineComponent({
             closeColorHover,
             closeColorPressed,
             lineHeight,
+            closeSize,
             [createKey('paddingTop', size)]: paddingTop,
             [createKey('paddingBottom', size)]: paddingBottom,
             [createKey('paddingLeft', size)]: paddingLeft,
@@ -105,7 +106,8 @@ export default defineComponent({
           '--padding-bottom': paddingBottom,
           '--padding-left': paddingLeft,
           '--font-size': fontSize,
-          '--title-font-size': titleFontSize
+          '--title-font-size': titleFontSize,
+          '--close-size': closeSize
         }
       })
     }
