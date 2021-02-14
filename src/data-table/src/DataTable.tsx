@@ -64,6 +64,10 @@ export const dataTableProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
+  bottomBordered: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   scrollX: [Number, String] as PropType<string | number>,
   defaultCheckedRowKeys: {
     type: Array as PropType<RowKey[]>,
@@ -184,6 +188,11 @@ export default defineComponent({
   props: dataTableProps,
   setup (props) {
     const { mergedBordered } = useConfig(props)
+    const mergedBottomBorderedRef = computed(() => {
+      const { bottomBordered } = props
+      if (bottomBordered !== undefined) return bottomBordered
+      return true
+    })
     const themeRef = useTheme(
       'DataTable',
       'DataTable',
@@ -295,6 +304,7 @@ export default defineComponent({
       mergedTheme: themeRef,
       paginatedData: paginatedDataRef,
       mergedBordered,
+      mergedBottomBordered: mergedBottomBorderedRef,
       mergedPagination,
       ...exposedMethods,
       cssVars: computed(() => {
@@ -365,6 +375,7 @@ export default defineComponent({
           'n-data-table',
           {
             'n-data-table--bordered': this.mergedBordered,
+            'n-data-table--bottom-bordered': this.mergedBottomBordered,
             'n-data-table--single-line': this.singleLine,
             'n-data-table--single-column': this.singleColumn
           }

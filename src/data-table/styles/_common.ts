@@ -1,8 +1,8 @@
 export default {
-  thPaddingSmall: '6px',
+  thPaddingSmall: '8px',
   thPaddingMedium: '12px',
   thPaddingLarge: '12px',
-  tdPaddingSmall: '6px',
+  tdPaddingSmall: '8px',
   tdPaddingMedium: '12px',
   tdPaddingLarge: '12px',
   filterSize: '14px',

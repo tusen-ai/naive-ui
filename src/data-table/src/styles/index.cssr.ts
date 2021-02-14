@@ -91,14 +91,14 @@ export default c([
           cB('data-table-th', {
             borderRight: '1px solid var(--border-color)'
           }, [
-            cB('&:last-child', {
+            c('&:last-child', {
               borderRight: '0 solid var(--border-color)'
             })
           ]),
           cB('data-table-td', {
             borderRight: '1px solid var(--border-color)'
           }, [
-            cB('&:last-child', {
+            c('&:last-child', {
               borderRight: '0 solid var(--border-color)'
             })
           ])
@@ -134,6 +134,17 @@ export default c([
         cB('data-table-td', [c('&::after, &::before', { transition: 'none' })])
       ])
     ]),
+    cM('bottom-bordered', [
+      cB('data-table-table', [
+        cB('data-table-tr', [
+          c('&:last-child', [
+            cB('data-table-td', {
+              borderBottom: '1px solid var(--border-color)'
+            })
+          ])
+        ])
+      ])
+    ]),
     cB('data-table-table', `
       font-variant-numeric: tabular-nums;
       width: 100%;
@@ -155,7 +166,9 @@ export default c([
         transition: 'background-color .3s var(--bezier)'
       }, [
         c('&:last-child', [
-          cB('data-table-td', [
+          cB('data-table-td', {
+            borderBottom: '0 solid var(--border-color)'
+          }, [
             c('&::after', {
               bottom: '0 !important'
             }),

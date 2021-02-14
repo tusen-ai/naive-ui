@@ -442,7 +442,7 @@
   - [x] input auto size
   - [x] data table custom render sorter
   - [x] upload retry
-  - [ ] table bottom-bordered
+  - [x] table bottom-bordered
   - [x] data table filter menu
 
 ## Build

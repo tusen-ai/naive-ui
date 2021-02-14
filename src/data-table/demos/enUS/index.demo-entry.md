@@ -34,6 +34,7 @@ custom-filter-menu
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | bordered | `boolean` | `true` |  |
+| bottom-bordered | `boolean` | `true` |  |
 | checked-row-keys | `Array<string \| number>` | `undefined` | The keys of checked rows. |
 | columns | `Array<Column>` | required | Columns to display. |
 | data | `Array<Object>` | `[]` | Data to display. |

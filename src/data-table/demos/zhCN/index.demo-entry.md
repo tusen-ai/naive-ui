@@ -34,6 +34,7 @@ custom-filter-menu
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | bordered | `boolean` | `true` |  |
+| bottom-bordered | `boolean` | `true` |  |
 | checked-row-keys | `Array<string \| number>` | `undefined` | 被选中的列的 key |
 | columns | `Array<Column>` |  | 需要展示的列，**必需** |
 | data | `Array<Object>` | `[]` | 需要展示的数据 |
