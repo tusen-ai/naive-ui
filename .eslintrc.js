@@ -2,7 +2,7 @@ module.exports = {
   extends: ['plugin:markdown/recommended'],
   overrides: [
     {
-      files: '**/*.vue',
+      files: ['*.vue', '*.js'],
       extends: [
         'plugin:vue/essential',
         '@vue/standard'
@@ -25,7 +25,7 @@ module.exports = {
       }
     },
     {
-      files: ['*.ts', '*.js', '*.tsx'],
+      files: ['*.ts', '*.tsx'],
       extends: ['standard-with-typescript'],
       parserOptions: {
         project: './tsconfig.json',

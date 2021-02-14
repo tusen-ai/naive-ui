@@ -298,7 +298,9 @@ export default defineComponent({
       // theme
       mergedTheme: themeRef,
       inputThemeOverrides: {
-        paddingRight: '8px'
+        paddingRightSmall: '8px',
+        paddingRightMedium: '8px',
+        paddingRightLarge: '8px'
       },
       buttonThemeOverrides: computed(() => {
         const {

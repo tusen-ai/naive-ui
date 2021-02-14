@@ -13,7 +13,6 @@
     "declaration": true,
     "forceConsistentCasingInFileNames": true,
     "composite": true,
-    "allowJs": true,
     "lib": [
       "ESNext",
       "DOM"
