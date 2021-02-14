@@ -154,16 +154,17 @@ export default {
   },
   computed: {
     menuValue () {
-      if (/^(\/[^/]+){2}\/doc/.test(this.$route.path)) return 'doc'
+      if (/\/docs\//.test(this.$route.path)) return 'doc'
+      if (/\/components\//.test(this.$route.path)) return 'component'
       else if (this.$route.name === 'home') return 'home'
       return null
     },
     searchOptions () {
       function getLabel (item) {
-        if (item.title) {
-          return item.title + (item.titleExtra ? ' ' + item.titleExtra : '')
+        if (item.label) {
+          return item.label + (item.extra ? ' ' + item.extra : '')
         }
-        return item.name
+        return item.key
       }
       if (!this.searchInputValue) return []
       const replaceRegex = / |-/g

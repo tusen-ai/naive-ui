@@ -8,8 +8,10 @@ const appendCounts = (item) => {
   if (item.children) {
     item.children.forEach(appendCounts)
     item.count = item.children.reduce((sum, item) => sum + item.count, 0)
-    item.name += ` (${item.count})`
-    if (item.type === 'group' && item.title) item.title += ` (${item.count})`
+    if (item.type === 'group') {
+      item.en += ` (${item.count})`
+      item.zh += ` (${item.count})`
+    }
     return item
   }
 }
@@ -33,8 +35,8 @@ function createItems (lang, theme, prefix, items) {
     const item = {
       ...rawItem,
       key: rawItem.en,
-      title: rawItem[langKey],
-      enSuffix: true,
+      label: rawItem[langKey],
+      extra: rawItem.enSuffix && isZh ? rawItem.en : undefined,
       path: rawItem.path
         ? `/${lang}/${theme}` + prefix + rawItem.path
         : undefined

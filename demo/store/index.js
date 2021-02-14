@@ -85,12 +85,11 @@ export function siteSetup () {
   const flattenedDocOptionsRef = computed(() => {
     const flattenedItems = []
     const traverse = (items) => {
-      if (items) {
-        items.forEach((item) => {
-          if (item.children) traverse(item.children)
-          else flattenedItems.push(item)
-        })
-      }
+      if (!items) return
+      items.forEach((item) => {
+        if (item.children) traverse(item.children)
+        else flattenedItems.push(item)
+      })
     }
     traverse(docOptionsRef.value)
     traverse(componentOptionsRef.value)
