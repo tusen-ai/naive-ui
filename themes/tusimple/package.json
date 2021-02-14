@@ -5,6 +5,10 @@
   "version": "0.1.0",
   "author": "07akioni",
   "license": "MIT",
+  "files": [
+    "es",
+    "lib"
+  ],
   "publishConfig": {
     "registry": "***REMOVED***"
   }
