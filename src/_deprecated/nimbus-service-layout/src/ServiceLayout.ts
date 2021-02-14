@@ -97,10 +97,10 @@ export default defineComponent({
     function syncValue (path?: string, items?: Item[]): void {
       if (items === undefined) items = props.items
       for (const item of items) {
-        if (item.childItems) {
-          syncValue(path, item.childItems)
+        if (item.childItems || item.children) {
+          syncValue(path, item.childItems || item.children)
         } else if (item.path === path) {
-          doUpdateValue(item.name || '')
+          doUpdateValue(item.name || item.key || '')
           return
         }
       }

@@ -1,9 +1,7 @@
 <template>
   <div class="footer">
     <n-divider v-if="showDivider" style="margin: 0 0 16px 0" />
-    <n-text depth="3">
-      Made by Tusimple
-    </n-text>
+    <n-text depth="3"> Made by Tusimple </n-text>
   </div>
 </template>
 

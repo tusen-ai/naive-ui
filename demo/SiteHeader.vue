@@ -76,6 +76,7 @@ export default {
         searchPlaceholder: '搜索',
         home: '首页',
         doc: '文档',
+        component: '组件',
         common: '常规',
         debug: '调试',
         alreadyHome: '别点了，你已经在首页了'
@@ -86,6 +87,7 @@ export default {
         searchPlaceholder: 'Search',
         home: 'Home',
         doc: 'Documentation',
+        component: 'Component',
         common: 'Common',
         debug: 'Debug',
         alreadyHome: "You've already been in home page. No clicking."
@@ -94,12 +96,16 @@ export default {
     const menuItemsRef = computed(() => {
       return [
         {
-          name: 'home',
+          key: 'home',
           title: t('home')
         },
         {
-          name: 'doc',
+          key: 'doc',
           title: t('doc')
+        },
+        {
+          key: 'component',
+          title: t('component')
         }
       ]
     })
@@ -192,10 +198,19 @@ export default {
         this.$router.push(/^(\/[^/]+){2}/.exec(this.$route.path)[0])
       }
       if (value === 'doc') {
-        if (/^(\/[^/]+){2}\/doc/.test(this.$route.path)) {
+        if (/^(\/[^/]+){2}\/docs/.test(this.$route.path)) {
         } else {
           this.$router.push(
-            /^(\/[^/]+){2}/.exec(this.$route.path)[0] + '/doc/start'
+            /^(\/[^/]+){2}/.exec(this.$route.path)[0] + '/docs/start'
+          )
+        }
+      }
+      if (value === 'component') {
+        if (/^(\/[^/]+){2}\/components/.test(this.$route.path)) {
+        } else {
+          this.$router.push(
+            /^(\/[^/]+){2}/.exec(this.$route.path)[0] +
+              '/components/n-config-provider'
           )
         }
       }

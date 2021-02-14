@@ -3,7 +3,8 @@ export interface Item {
   path?: string
   title?: string
   disabled?: boolean
-  childItems?: Item[]
+  children?: Item[]
+  key?: string
   [key: string]: unknown
 
   /** @deprecated */
@@ -14,4 +15,6 @@ export interface Item {
   group?: boolean
   /** @deprecated */
   extra?: string
+  /** @deprecated */
+  childItems?: Item[]
 }

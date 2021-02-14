@@ -39,7 +39,7 @@ export default {
         },
         {
           name: 'Morning Glory',
-          childItems: [
+          children: [
             {
               name: 'Hello',
               path: '/en-US/dark/n-nimbus-service-layout?param=777'

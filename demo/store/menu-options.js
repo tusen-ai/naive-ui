@@ -1,13 +1,13 @@
 // rubbish code here
 
 const appendCounts = (item) => {
-  if (!item.childItems) {
+  if (!item.children) {
     item.count = 1
     return item
   }
-  if (item.childItems) {
-    item.childItems.forEach(appendCounts)
-    item.count = item.childItems.reduce((sum, item) => sum + item.count, 0)
+  if (item.children) {
+    item.children.forEach(appendCounts)
+    item.count = item.children.reduce((sum, item) => sum + item.count, 0)
     item.name += ` (${item.count})`
     if (item.type === 'group' && item.title) item.title += ` (${item.count})`
     return item
@@ -26,511 +26,521 @@ const createDebugDemos = (item, mode) => {
   } else return []
 }
 
-function createItems (lang, items) {
-  if (lang === 'zh-CN') return items
-  function traverse (children) {
-    children.forEach((child) => {
-      child.title = undefined
-      child.titleExtra = undefined
-      if (child.childItems) {
-        traverse(child.childItems)
-      }
-    })
-  }
-  traverse(items)
-  return items
+function createItems (lang, theme, prefix, items) {
+  const isZh = lang === 'zh-CN'
+  const langKey = isZh ? 'zh' : 'en'
+  return items.map((rawItem) => {
+    const item = {
+      ...rawItem,
+      key: rawItem.en,
+      title: rawItem[langKey],
+      enSuffix: true,
+      path: rawItem.path
+        ? `/${lang}/${theme}` + prefix + rawItem.path
+        : undefined
+    }
+    if (rawItem.children) {
+      item.children = createItems(lang, theme, prefix, rawItem.children)
+    }
+    return item
+  })
 }
 
-export default function (instance) {
-  const { lang, theme, mode } = instance
-  return createItems(lang, [
+export function createDocumentationMenuOptions ({ lang, theme, mode }) {
+  return createItems(lang, theme, '/docs', [
     {
-      name: 'Naive UI',
-      path: `/${lang}/${theme}/doc` + '/intro'
+      en: 'Naive UI',
+      zh: 'Naive UI',
+      path: '/intro'
     },
     {
-      name: 'Get Started',
-      title: '起步',
-      path: `/${lang}/${theme}/doc` + '/start'
+      en: 'Get Started',
+      zh: '起步',
+      path: '/start'
     },
     {
-      name: 'Change Log',
-      title: '变更日志',
-      path: `/${lang}/${theme}/doc` + '/changelog'
+      en: 'Change Log',
+      zh: '变更日志',
+      path: '/changelog'
     },
     {
-      name: 'Migrate From V1',
-      title: '从 V1 升级',
-      path: `/${lang}/${theme}/doc` + '/from-v1'
+      en: 'Migrate From V1',
+      zh: '从 V1 升级',
+      path: '/from-v1'
     },
     {
-      name: 'Create Themed Component',
-      title: '创建适配主题的组件',
-      path: `/${lang}/${theme}/doc` + '/n-theme'
+      en: 'Create Themed Component',
+      zh: '创建适配主题的组件',
+      path: '/n-theme'
     },
     {
-      name: 'Experimental Features',
-      title: '试验性特性',
-      path: `/${lang}/${theme}/doc` + '/experimental-features'
-    },
+      en: 'Experimental Features',
+      zh: '试验性特性',
+      path: '/experimental-features'
+    }
+  ])
+}
+
+export function createComponentMenuOptions ({ lang, theme, mode }) {
+  return createItems(lang, theme, '/components', [
     appendCounts({
-      title: '配置组件',
-      name: 'Config Components',
+      zh: '配置组件',
+      en: 'Config Components',
       type: 'group',
-      childItems: [
+      children: [
         {
-          name: 'Config Provider',
-          title: '配置提供者',
-          titleExtra: 'Config Provider',
-          path: `/${lang}/${theme}/doc` + '/n-config-provider'
+          en: 'Config Provider',
+          zh: '配置提供者',
+          enSuffix: true,
+          path: '/n-config-provider'
         },
         {
-          name: 'Element',
-          title: '元素',
-          titleExtra: 'Element',
-          path: `/${lang}/${theme}/doc` + '/n-element'
+          en: 'Element',
+          zh: '元素',
+          enSuffix: true,
+          path: '/n-element'
         }
       ]
     }),
     appendCounts({
-      title: '布局组件',
-      name: 'Layout Components',
+      zh: '布局组件',
+      en: 'Layout Components',
       type: 'group',
-      childItems: [
+      children: [
         {
-          name: 'Layout',
-          title: '布局',
-          titleExtra: 'Layout',
-          path: `/${lang}/${theme}/doc` + '/n-layout'
+          en: 'Layout',
+          zh: '布局',
+          enSuffix: true,
+          path: '/n-layout'
         },
         {
-          name: 'Grid',
-          title: '栅格',
-          titleExtra: 'Grid',
-          path: `/${lang}/${theme}/doc` + '/n-grid'
+          en: 'Grid',
+          zh: '栅格',
+          enSuffix: true,
+          path: '/n-grid'
         },
         {
-          name: 'Space',
-          title: '间距',
-          titleExtra: 'Space',
-          path: `/${lang}/${theme}/doc` + '/n-space'
+          en: 'Space',
+          zh: '间距',
+          enSuffix: true,
+          path: '/n-space'
         }
       ]
     }),
     appendCounts({
-      title: '通用组件',
-      name: 'Common Components',
+      zh: '通用组件',
+      en: 'Common Components',
       type: 'group',
-      childItems: [
+      children: [
         {
-          name: 'Avatar',
-          title: '头像',
-          titleExtra: 'Avatar',
-          path: `/${lang}/${theme}/doc` + '/n-avatar'
+          en: 'Avatar',
+          zh: '头像',
+          enSuffix: true,
+          path: '/n-avatar'
         },
         {
-          name: 'Button',
-          title: '按钮',
-          titleExtra: 'Button',
-          path: `/${lang}/${theme}/doc` + '/n-button'
+          en: 'Button',
+          zh: '按钮',
+          enSuffix: true,
+          path: '/n-button'
         },
         {
-          name: 'Card',
-          title: '卡片',
-          titleExtra: 'Card',
-          path: `/${lang}/${theme}/doc` + '/n-card'
+          en: 'Card',
+          zh: '卡片',
+          enSuffix: true,
+          path: '/n-card'
         },
         {
-          name: 'Collapse',
-          title: '折叠面板',
-          titleExtra: 'Collapse',
-          path: `/${lang}/${theme}/doc` + '/n-collapse'
+          en: 'Collapse',
+          zh: '折叠面板',
+          enSuffix: true,
+          path: '/n-collapse'
         },
         {
-          name: 'Divider',
-          title: '分割线',
-          titleExtra: 'Divider',
-          path: `/${lang}/${theme}/doc` + '/n-divider'
+          en: 'Divider',
+          zh: '分割线',
+          enSuffix: true,
+          path: '/n-divider'
         },
         {
-          name: 'Dropdown',
-          title: '下拉菜单',
-          titleExtra: 'Dropdown',
-          path: `/${lang}/${theme}/doc` + '/n-dropdown'
+          en: 'Dropdown',
+          zh: '下拉菜单',
+          enSuffix: true,
+          path: '/n-dropdown'
         },
         {
-          name: 'Gradient Text',
-          title: '渐变文字',
-          titleExtra: 'Gradient Text',
-          path: `/${lang}/${theme}/doc` + '/n-gradient-text'
+          en: 'Gradient Text',
+          zh: '渐变文字',
+          enSuffix: true,
+          path: '/n-gradient-text'
         },
         {
-          name: 'Icon',
-          title: '图标',
-          titleExtra: 'Icon',
-          path: `/${lang}/${theme}/doc` + '/n-icon'
+          en: 'Icon',
+          zh: '图标',
+          enSuffix: true,
+          path: '/n-icon'
         },
         {
-          name: 'Tag',
-          title: '标签',
-          titleExtra: 'Tag',
-          path: `/${lang}/${theme}/doc` + '/n-tag'
+          en: 'Tag',
+          zh: '标签',
+          enSuffix: true,
+          path: '/n-tag'
         },
         {
-          name: 'Typography',
-          title: '排印',
-          titleExtra: 'Typography',
-          path: `/${lang}/${theme}/doc` + '/n-typography'
+          en: 'Typography',
+          zh: '排印',
+          enSuffix: true,
+          path: '/n-typography'
         }
       ]
     }),
     appendCounts({
-      title: '数据录入组件',
-      name: 'Data Input Components',
+      zh: '数据录入组件',
+      en: 'Data Input Components',
       type: 'group',
-      childItems: [
+      children: [
         {
-          name: 'Auto Complete',
-          title: '自动填充',
-          titleExtra: 'Auto Complete',
-          path: `/${lang}/${theme}/doc` + '/n-auto-complete'
+          en: 'Auto Complete',
+          zh: '自动填充',
+          enSuffix: true,
+          path: '/n-auto-complete'
         },
         {
-          name: 'Cascader',
-          title: '级联选择',
-          titleExtra: 'Cascader',
-          path: `/${lang}/${theme}/doc` + '/n-cascader'
+          en: 'Cascader',
+          zh: '级联选择',
+          enSuffix: true,
+          path: '/n-cascader'
         },
         {
-          name: 'Checkbox',
-          title: '复选框',
-          titleExtra: 'Checkbox',
-          path: `/${lang}/${theme}/doc` + '/n-checkbox'
+          en: 'Checkbox',
+          zh: '复选框',
+          enSuffix: true,
+          path: '/n-checkbox'
         },
         {
-          name: 'Date Picker',
-          title: '日期选择器',
-          titleExtra: 'Date Picker',
-          path: `/${lang}/${theme}/doc` + '/n-date-picker'
+          en: 'Date Picker',
+          zh: '日期选择器',
+          enSuffix: true,
+          path: '/n-date-picker'
         },
         {
-          name: 'Dynamic Input',
-          title: '动态录入',
-          titleExtra: 'Dynamic Input',
-          path: `/${lang}/${theme}/doc` + '/n-dynamic-input'
+          en: 'Dynamic Input',
+          zh: '动态录入',
+          enSuffix: true,
+          path: '/n-dynamic-input'
         },
         {
-          name: 'Dynamic Tags',
-          title: '动态标签',
-          titleExtra: 'Dynamic Tags',
-          path: `/${lang}/${theme}/doc` + '/n-dynamic-tags'
+          en: 'Dynamic Tags',
+          zh: '动态标签',
+          enSuffix: true,
+          path: '/n-dynamic-tags'
         },
         {
-          name: 'Form',
-          title: '表单',
-          titleExtra: 'Form',
-          path: `/${lang}/${theme}/doc` + '/n-form'
+          en: 'Form',
+          zh: '表单',
+          enSuffix: true,
+          path: '/n-form'
         },
         {
-          name: 'Input',
-          title: '文本输入',
-          titleExtra: 'Input',
-          path: `/${lang}/${theme}/doc` + '/n-input'
+          en: 'Input',
+          zh: '文本输入',
+          enSuffix: true,
+          path: '/n-input'
         },
         {
-          name: 'Input Number',
-          title: '数字输入',
-          titleExtra: 'Input Number',
-          path: `/${lang}/${theme}/doc` + '/n-input-number'
+          en: 'Input Number',
+          zh: '数字输入',
+          enSuffix: true,
+          path: '/n-input-number'
         },
         {
-          name: 'Radio',
-          title: '单选',
-          titleExtra: 'Radio',
-          path: `/${lang}/${theme}/doc` + '/n-radio'
+          en: 'Radio',
+          zh: '单选',
+          enSuffix: true,
+          path: '/n-radio'
         },
         {
-          name: 'Rate',
-          title: '评分',
-          titleExtra: 'Rate',
-          path: `/${lang}/${theme}/doc` + '/n-rate'
+          en: 'Rate',
+          zh: '评分',
+          enSuffix: true,
+          path: '/n-rate'
         },
         {
-          name: 'Select',
-          title: '选择器',
-          titleExtra: 'Select',
-          path: `/${lang}/${theme}/doc` + '/n-select'
+          en: 'Select',
+          zh: '选择器',
+          enSuffix: true,
+          path: '/n-select'
         },
         {
-          name: 'Slider',
-          title: '滑动选择',
-          titleExtra: 'Slider',
-          path: `/${lang}/${theme}/doc` + '/n-slider'
+          en: 'Slider',
+          zh: '滑动选择',
+          enSuffix: true,
+          path: '/n-slider'
         },
         {
-          name: 'Switch',
-          title: '开关',
-          titleExtra: 'Switch',
-          path: `/${lang}/${theme}/doc` + '/n-switch'
+          en: 'Switch',
+          zh: '开关',
+          enSuffix: true,
+          path: '/n-switch'
         },
         {
-          name: 'Time Picker',
-          title: '时间选择器',
-          titleExtra: 'Time Picker',
-          path: `/${lang}/${theme}/doc` + '/n-time-picker'
+          en: 'Time Picker',
+          zh: '时间选择器',
+          enSuffix: true,
+          path: '/n-time-picker'
         },
         {
-          name: 'Transfer',
-          title: '穿梭框',
-          titleExtra: 'Transfer',
-          path: `/${lang}/${theme}/doc` + '/n-transfer'
+          en: 'Transfer',
+          zh: '穿梭框',
+          enSuffix: true,
+          path: '/n-transfer'
         },
         {
-          name: 'Upload',
-          title: '上传',
-          titleExtra: 'Upload',
-          path: `/${lang}/${theme}/doc` + '/n-upload'
+          en: 'Upload',
+          zh: '上传',
+          enSuffix: true,
+          path: '/n-upload'
         }
       ]
     }),
     appendCounts({
-      title: '数据展示组件',
-      name: 'Data Display Components',
+      zh: '数据展示组件',
+      en: 'Data Display Components',
       type: 'group',
-      childItems: [
+      children: [
         {
-          name: 'Code',
-          title: '代码',
-          titleExtra: 'Code',
-          path: `/${lang}/${theme}/doc` + '/n-code'
+          en: 'Code',
+          zh: '代码',
+          enSuffix: true,
+          path: '/n-code'
         },
         {
-          name: 'Data Table',
-          title: '数据表格',
-          titleExtra: 'Data Table',
-          path: `/${lang}/${theme}/doc` + '/n-data-table'
+          en: 'Data Table',
+          zh: '数据表格',
+          enSuffix: true,
+          path: '/n-data-table'
         },
         {
-          name: 'Descriptions',
-          title: '描述',
-          titleExtra: 'Descriptions',
-          path: `/${lang}/${theme}/doc` + '/n-descriptions'
+          en: 'Descriptions',
+          zh: '描述',
+          enSuffix: true,
+          path: '/n-descriptions'
         },
         {
-          name: 'Empty',
-          title: '无内容',
-          titleExtra: 'Empty',
-          path: `/${lang}/${theme}/doc` + '/n-empty'
+          en: 'Empty',
+          zh: '无内容',
+          enSuffix: true,
+          path: '/n-empty'
         },
         {
-          name: 'List',
-          title: '列表',
-          titleExtra: 'List',
-          path: `/${lang}/${theme}/doc` + '/n-list'
+          en: 'List',
+          zh: '列表',
+          enSuffix: true,
+          path: '/n-list'
         },
         {
-          name: 'Log',
-          title: '日志',
-          titleExtra: 'Log',
-          path: `/${lang}/${theme}/doc` + '/n-log'
+          en: 'Log',
+          zh: '日志',
+          enSuffix: true,
+          path: '/n-log'
         },
         {
-          name: 'Statistic',
-          title: '统计数据',
-          titleExtra: 'Statistic',
-          path: `/${lang}/${theme}/doc` + '/n-statistic'
+          en: 'Statistic',
+          zh: '统计数据',
+          enSuffix: true,
+          path: '/n-statistic'
         },
         {
-          name: 'Table',
-          title: '表格',
-          titleExtra: 'Table',
-          path: `/${lang}/${theme}/doc` + '/n-table'
+          en: 'Table',
+          zh: '表格',
+          enSuffix: true,
+          path: '/n-table'
         },
         {
-          name: 'Thing',
-          title: '东西',
-          titleExtra: 'Thing',
-          path: `/${lang}/${theme}/doc` + '/n-thing'
+          en: 'Thing',
+          zh: '东西',
+          enSuffix: true,
+          path: '/n-thing'
         },
         {
-          name: 'Time',
-          title: '时间',
-          titleExtra: 'Time',
-          path: `/${lang}/${theme}/doc` + '/n-time'
+          en: 'Time',
+          zh: '时间',
+          enSuffix: true,
+          path: '/n-time'
         },
         {
-          name: 'Timeline',
-          title: '时间线',
-          titleExtra: 'Timeline',
-          path: `/${lang}/${theme}/doc` + '/n-timeline'
+          en: 'Timeline',
+          zh: '时间线',
+          enSuffix: true,
+          path: '/n-timeline'
         },
         {
-          name: 'Tree',
-          title: '树',
-          titleExtra: 'Tree',
-          path: `/${lang}/${theme}/doc` + '/n-tree'
+          en: 'Tree',
+          zh: '树',
+          enSuffix: true,
+          path: '/n-tree'
         }
       ]
     }),
     appendCounts({
-      title: '导航组件',
-      name: 'Navigation Components',
+      zh: '导航组件',
+      en: 'Navigation Components',
       type: 'group',
-      childItems: [
+      children: [
         {
-          name: 'Affix',
-          title: '固钉',
-          titleExtra: 'Affix',
-          path: `/${lang}/${theme}/doc` + '/n-affix'
+          en: 'Affix',
+          zh: '固钉',
+          enSuffix: true,
+          path: '/n-affix'
         },
         {
-          name: 'Anchor',
-          title: '侧边导航',
-          titleExtra: 'Anchor',
-          path: `/${lang}/${theme}/doc` + '/n-anchor'
+          en: 'Anchor',
+          zh: '侧边导航',
+          enSuffix: true,
+          path: '/n-anchor'
         },
         {
-          name: 'Back Top',
-          title: '回到顶部',
-          titleExtra: 'Back Top',
-          path: `/${lang}/${theme}/doc` + '/n-back-top'
+          en: 'Back Top',
+          zh: '回到顶部',
+          enSuffix: true,
+          path: '/n-back-top'
         },
         {
-          name: 'Breadcrumb',
-          title: '面包屑',
-          titleExtra: 'Breadcrumb',
-          path: `/${lang}/${theme}/doc` + '/n-breadcrumb'
+          en: 'Breadcrumb',
+          zh: '面包屑',
+          enSuffix: true,
+          path: '/n-breadcrumb'
         },
         {
-          name: 'Loading Bar',
-          title: '加载条',
-          titleExtra: 'Loading Bar',
-          path: `/${lang}/${theme}/doc` + '/n-loading-bar'
+          en: 'Loading Bar',
+          zh: '加载条',
+          enSuffix: true,
+          path: '/n-loading-bar'
         },
         {
-          name: 'Menu',
-          title: '菜单',
-          titleExtra: 'Menu',
-          path: `/${lang}/${theme}/doc` + '/n-menu'
+          en: 'Menu',
+          zh: '菜单',
+          enSuffix: true,
+          path: '/n-menu'
         },
         {
-          name: 'Pagination',
-          title: '分页',
-          titleExtra: 'Pagination',
-          path: `/${lang}/${theme}/doc` + '/n-pagination'
+          en: 'Pagination',
+          zh: '分页',
+          enSuffix: true,
+          path: '/n-pagination'
         },
         {
-          name: 'Steps',
-          title: '步骤',
-          titleExtra: 'Steps',
-          path: `/${lang}/${theme}/doc` + '/n-steps'
+          en: 'Steps',
+          zh: '步骤',
+          enSuffix: true,
+          path: '/n-steps'
         },
         {
-          name: 'Tabs',
-          title: '标签页',
-          titleExtra: 'Tabs',
-          path: `/${lang}/${theme}/doc` + '/n-tabs'
+          en: 'Tabs',
+          zh: '标签页',
+          enSuffix: true,
+          path: '/n-tabs'
         }
       ]
     }),
     appendCounts({
-      title: '反馈组件',
-      name: 'Feedback Components',
+      zh: '反馈组件',
+      en: 'Feedback Components',
       type: 'group',
-      childItems: [
+      children: [
         {
-          name: 'Alert',
-          title: '警告信息',
-          titleExtra: 'Alert',
-          path: `/${lang}/${theme}/doc` + '/n-alert'
+          en: 'Alert',
+          zh: '警告信息',
+          enSuffix: true,
+          path: '/n-alert'
         },
         {
-          name: 'Badge',
-          title: '标记',
-          titleExtra: 'Badge',
-          path: `/${lang}/${theme}/doc` + '/n-badge'
+          en: 'Badge',
+          zh: '标记',
+          enSuffix: true,
+          path: '/n-badge'
         },
         {
-          name: 'Dialog',
-          title: '对话框',
-          titleExtra: 'Dialog',
-          path: `/${lang}/${theme}/doc` + '/n-dialog'
+          en: 'Dialog',
+          zh: '对话框',
+          enSuffix: true,
+          path: '/n-dialog'
         },
         {
-          name: 'Drawer',
-          title: '抽屉',
-          titleExtra: 'Drawer',
-          path: `/${lang}/${theme}/doc` + '/n-drawer'
+          en: 'Drawer',
+          zh: '抽屉',
+          enSuffix: true,
+          path: '/n-drawer'
         },
         {
-          name: 'Message',
-          title: '信息',
-          titleExtra: 'Message',
-          path: `/${lang}/${theme}/doc` + '/n-message'
+          en: 'Message',
+          zh: '信息',
+          enSuffix: true,
+          path: '/n-message'
         },
         {
-          name: 'Modal',
-          title: '模态框',
-          titleExtra: 'Modal',
-          path: `/${lang}/${theme}/doc` + '/n-modal'
+          en: 'Modal',
+          zh: '模态框',
+          enSuffix: true,
+          path: '/n-modal'
         },
         {
-          name: 'Notification',
-          title: '通知',
-          titleExtra: 'Notification',
-          path: `/${lang}/${theme}/doc` + '/n-notification'
+          en: 'Notification',
+          zh: '通知',
+          enSuffix: true,
+          path: '/n-notification'
         },
         {
-          name: 'Popconfirm',
-          title: '弹出确认',
-          titleExtra: 'Popconfirm',
-          path: `/${lang}/${theme}/doc` + '/n-popconfirm'
+          en: 'Popconfirm',
+          zh: '弹出确认',
+          enSuffix: true,
+          path: '/n-popconfirm'
         },
         {
-          name: 'Popover',
-          title: '弹出信息',
-          titleExtra: 'Popover',
-          path: `/${lang}/${theme}/doc` + '/n-popover'
+          en: 'Popover',
+          zh: '弹出信息',
+          enSuffix: true,
+          path: '/n-popover'
         },
         {
-          name: 'Popselect',
-          title: '弹出选择',
-          titleExtra: 'Popselect',
-          path: `/${lang}/${theme}/doc` + '/n-popselect'
+          en: 'Popselect',
+          zh: '弹出选择',
+          enSuffix: true,
+          path: '/n-popselect'
         },
         {
-          name: 'Progress',
-          title: '进度',
-          titleExtra: 'Progress',
-          path: `/${lang}/${theme}/doc` + '/n-progress'
+          en: 'Progress',
+          zh: '进度',
+          enSuffix: true,
+          path: '/n-progress'
         },
         {
-          name: 'Result',
-          title: '结果页',
-          titleExtra: 'Result',
-          path: `/${lang}/${theme}/doc` + '/n-result'
+          en: 'Result',
+          zh: '结果页',
+          enSuffix: true,
+          path: '/n-result'
         },
         {
-          name: 'Spin',
-          title: '加载',
-          titleExtra: 'Spin',
-          path: `/${lang}/${theme}/doc` + '/n-spin'
+          en: 'Spin',
+          zh: '加载',
+          enSuffix: true,
+          path: '/n-spin'
         },
         {
-          name: 'Tooltip',
-          title: '弹出提示',
-          titleExtra: 'Tooltip',
-          path: `/${lang}/${theme}/doc` + '/n-tooltip'
+          en: 'Tooltip',
+          zh: '弹出提示',
+          enSuffix: true,
+          path: '/n-tooltip'
         }
       ]
     }),
     ...createDeprecatedDemos(
       {
-        name: 'Deprecated',
-        childItems: [
+        en: 'Deprecated',
+        children: [
           {
-            name: 'Nimbus Service Layout',
-            path: `/${lang}/${theme}/doc` + '/n-nimbus-service-layout'
+            en: 'Nimbus Service Layout',
+            path: '/n-nimbus-service-layout'
           }
         ]
       },
@@ -538,55 +548,55 @@ export default function (instance) {
     ),
     ...createDebugDemos(
       {
-        name: 'Debug',
-        childItems: [
+        en: 'Debug',
+        children: [
           {
-            name: 'SuffixDebug',
-            path: `/${lang}/${theme}/doc` + '/n-base-suffix-debug'
+            en: 'SuffixDebug',
+            path: '/n-base-suffix-debug'
           },
           {
-            name: 'PopoverDebug',
+            en: 'PopoverDebug',
             path: '/n-popover-debug'
           },
           {
-            name: 'RouterDebug',
-            path: `/${lang}/${theme}/doc` + '/n-router-debug'
+            en: 'RouterDebug',
+            path: '/n-router-debug'
           },
           {
-            name: 'ModalDebug',
-            path: `/${lang}/${theme}/doc` + '/n-modal-debug'
+            en: 'ModalDebug',
+            path: '/n-modal-debug'
           },
           {
-            name: 'ScrollbarDebug',
-            path: `/${lang}/${theme}/doc` + '/n-scrollbar-debug'
+            en: 'ScrollbarDebug',
+            path: '/n-scrollbar-debug'
           },
           {
-            name: 'ScrollbarDebug2',
-            path: `/${lang}/${theme}/doc` + '/n-scrollbar-debug2'
+            en: 'ScrollbarDebug2',
+            path: '/n-scrollbar-debug2'
           },
           {
-            name: 'DatePickerDebug',
-            path: `/${lang}/${theme}/doc` + '/n-date-picker-debug'
+            en: 'DatePickerDebug',
+            path: '/n-date-picker-debug'
           },
           {
-            name: 'BackTopDebug',
+            en: 'BackTopDebug',
             path: '/n-back-top-debug'
           },
           {
-            name: 'CascaderDebug',
+            en: 'CascaderDebug',
             path: '/n-cascader-debug'
           },
           {
-            name: 'VerticalAlignDebug',
-            path: `/${lang}/${theme}/doc` + '/n-vertical-align-debug'
+            en: 'VerticalAlignDebug',
+            path: '/n-vertical-align-debug'
           },
           {
-            name: 'IconTransitionDebug',
-            path: `/${lang}/${theme}/doc` + '/n-icon-transition-debug'
+            en: 'IconTransitionDebug',
+            path: '/n-icon-transition-debug'
           },
           {
-            name: 'SelectDebug',
-            path: `/${lang}/${theme}/doc` + '/n-select-debug'
+            en: 'SelectDebug',
+            path: '/n-select-debug'
           }
         ]
       },

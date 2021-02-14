@@ -10,7 +10,8 @@
         <span
           @mouseenter="handleTitleMouseEnter"
           @mouseleave="handleTitleMouseLeave"
-        >Na{{ hover ? 'ï' : 'i' }}ve UI</span>
+          >Na{{ hover ? 'ï' : 'i' }}ve UI</span
+        >
       </n-h1>
       <n-p style="font-size: 16px; margin-bottom: 0">
         {{ t('intro1') }}

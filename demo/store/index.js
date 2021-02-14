@@ -9,7 +9,10 @@ import {
   useOsTheme
 } from '../../src'
 import { i18n } from '../utils/composables'
-import menuOptions from './menu-options'
+import {
+  createDocumentationMenuOptions,
+  createComponentMenuOptions
+} from './menu-options'
 import hljs from './hljs'
 
 const storeKey = 'site-store'
@@ -66,7 +69,14 @@ export function siteSetup () {
   })
   // options
   const docOptionsRef = computed(() =>
-    menuOptions({
+    createDocumentationMenuOptions({
+      theme: themeNameRef.value,
+      lang: localeNameRef.value,
+      mode: displayModeRef.value
+    })
+  )
+  const componentOptionsRef = computed(() =>
+    createComponentMenuOptions({
       theme: themeNameRef.value,
       lang: localeNameRef.value,
       mode: displayModeRef.value
@@ -77,12 +87,13 @@ export function siteSetup () {
     const traverse = (items) => {
       if (items) {
         items.forEach((item) => {
-          if (item.childItems) traverse(item.childItems)
+          if (item.children) traverse(item.children)
           else flattenedItems.push(item)
         })
       }
     }
     traverse(docOptionsRef.value)
+    traverse(componentOptionsRef.value)
     return flattenedItems
   })
   provide(
@@ -92,6 +103,7 @@ export function siteSetup () {
       localeName: localeNameRef,
       displayMode: displayModeRef,
       docOptions: docOptionsRef,
+      componentOptions: componentOptionsRef,
       flattenedDocOptions: flattenedDocOptionsRef
     })
   )
@@ -128,6 +140,10 @@ export function useThemeName () {
 
 export function useDocOptions () {
   return toRef(inject(storeKey), 'docOptions')
+}
+
+export function useComponentOptions () {
+  return toRef(inject(storeKey), 'componentOptions')
 }
 
 export function useFlattenedDocOptions () {
