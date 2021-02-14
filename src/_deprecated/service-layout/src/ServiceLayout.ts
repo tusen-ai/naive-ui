@@ -67,9 +67,12 @@ export default defineComponent({
       return createItems(props.items)
     })
     if (route) {
-      syncValue(route.path)
+      syncPath(route.path)
       watch(toRef(route, 'path'), (path) => {
-        syncValue(path)
+        syncPath(path)
+      })
+      watch(toRef(props, 'items'), () => {
+        syncPath(route.path)
       })
     }
     function doUpdateCollapsed (value: boolean): void {
@@ -94,11 +97,11 @@ export default defineComponent({
     const scrollTo: LayoutRef['scrollTo'] = (...args: any[]): void => {
       ;(bodyLayoutInstRef.value?.scrollTo as Function)(...args)
     }
-    function syncValue (path?: string, items?: Item[]): void {
+    function syncPath (path?: string, items?: Item[]): void {
       if (items === undefined) items = props.items
       for (const item of items) {
         if (item.childItems || item.children) {
-          syncValue(path, item.childItems || item.children)
+          syncPath(path, item.childItems || item.children)
         } else if (item.path === path) {
           doUpdateValue(item.name || item.key || '')
           return

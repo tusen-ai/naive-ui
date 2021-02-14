@@ -315,6 +315,8 @@ export const routes = [
   {
     name: 'site',
     path: '/:lang/:theme',
+    // Keep the wrapper router view, since if not the route won't be initialized
+    // after them site is mounted (no matched route)
     component: Site,
     children: [
       {
