@@ -43,7 +43,7 @@ collapse
 | extra? | `string \| (() => VNodeChild)` |  |
 | icon? | `() => VNodeChild` |  |
 | key | `string` | The indentifier of the menu item. |
-| title | `string \| (() => VNodeChild)` |  |
+| label | `string \| (() => VNodeChild)` |  |
 
 ### Submenu Properties
 
@@ -54,7 +54,7 @@ collapse
 | extra? | `string \| (() => VNodeChild)` |  |
 | icon? | `() => VNodeChild` |  |
 | key | `string` | The indentifier of the submenu. |
-| title | `string \| (() => VNodeChild)` |  |
+| label | `string \| (() => VNodeChild)` |  |
 
 ### MenuItemGroup Properties
 
@@ -62,5 +62,5 @@ collapse
 | --- | --- | --- |
 | children | `Array<MenuItem \| Submenu \| MenuItemGroup>` | **required** |
 | key | `string` | The indentifier of the menu group. |
-| title | `string \| (() => VNodeChild)` |  |
+| label | `string \| (() => VNodeChild)` |  |
 | type | `'group'` | **required** |

@@ -1,4 +1,4 @@
-import { h, VNode } from 'vue'
+import { h, VNode, VNodeChild } from 'vue'
 import type { TreeNode } from 'treemate'
 import { keep, keysOf } from '../../_utils'
 import NMenuItemGroup, { menuItemGroupProps } from './MenuItemGroup'
@@ -16,6 +16,7 @@ export function itemRenderer (
   const { rawNode, key, level } = tmNode
   const props = {
     ...rawNode,
+    title: (rawNode.title || rawNode.label) as string | (() => VNodeChild),
     extra: rawNode.titleExtra || rawNode.extra,
     key,
     internalKey: key, // since key can't be used as a prop

@@ -43,7 +43,7 @@ collapse
 | extra?    | `string \| () => VNodeChild` |                |
 | icon?     | `() => VNode`                |                |
 | key       | `string`                     | 菜单项的标识符 |
-| title     | `string \| () => VNodeChild` |                |
+| label     | `string \| () => VNodeChild` |                |
 
 ### Submenu Properties
 
@@ -54,7 +54,7 @@ collapse
 | extra?    | `string \| () => VNodeChild`                  |                |
 | icon?     | `() => VNodeChild`                            |                |
 | key       | `string`                                      | 菜单项的标识符 |
-| title     | `string \| (() => VNodeChild)`                |                |
+| label     | `string \| (() => VNodeChild)`                |                |
 
 ### MenuItemGroup Properties
 
@@ -62,5 +62,5 @@ collapse
 | -------- | --------------------------------------------- | -------------- |
 | children | `Array<MenuItem \| Submenu \| MenuItemGroup>` |                |
 | key      | `string`                                      | 菜单项的标识符 |
-| title    | `string \| (() => VNodeChild)`                |                |
+| label    | `string \| (() => VNodeChild)`                |                |
 | type     | `'group'`                                     |                |
