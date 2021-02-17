@@ -2,23 +2,23 @@ import { TreeMate } from 'treemate'
 import { CSSProperties, VNodeChild } from 'vue'
 
 export type SelectMixedOption =
-  | SelectOption
+  | SelectBaseOption
   | SelectGroupOption
   | SelectIgnoredOption
-export interface SelectOption {
+export interface SelectBaseOption {
   value: string | number
   label: string
   class?: string
   style?: string | CSSProperties
   disabled?: boolean
-  render?: (option: SelectOption, selected: boolean) => VNodeChild
+  render?: (option: SelectBaseOption, selected: boolean) => VNodeChild
   [k: string]: unknown
 }
 
-interface SelectGroupOptionBase {
+export interface SelectGroupOptionBase {
   label: string
   type: 'group'
-  children: SelectOption[]
+  children: SelectBaseOption[]
   render?: (option: SelectGroupOption) => VNodeChild
   [k: string]: unknown
 }
@@ -66,7 +66,7 @@ export type OnUpdateValueImpl = <
   value: T
 ) => void
 export type SelectTreeMate = TreeMate<
-SelectOption,
+SelectBaseOption,
 SelectGroupOption,
 SelectIgnoredOption
 >

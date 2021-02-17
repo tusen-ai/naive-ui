@@ -19,7 +19,7 @@ import { internalSelectionLight } from '../styles'
 import type { InternalSelectionTheme } from '../styles'
 import Suffix from './Suffix'
 import style from './styles/index.cssr'
-import type { SelectOption } from '../../../select'
+import type { SelectBaseOption } from '../../../select'
 
 export interface InternalSelectionRef {
   focusPatternInputWrapper: () => void
@@ -48,11 +48,11 @@ export default defineComponent({
       default: undefined
     },
     selectedOption: {
-      type: Object as PropType<SelectOption | null>,
+      type: Object as PropType<SelectBaseOption | null>,
       default: null
     },
     selectedOptions: {
-      type: Array as PropType<SelectOption[] | null>,
+      type: Array as PropType<SelectBaseOption[] | null>,
       default: null
     },
     multiple: {
@@ -177,7 +177,7 @@ export default defineComponent({
       const { onBlur } = props
       if (onBlur) onBlur(e)
     }
-    function doDeleteOption (value: SelectOption): void {
+    function doDeleteOption (value: SelectBaseOption): void {
       const { onDeleteOption } = props
       if (onDeleteOption) onDeleteOption(value)
     }
@@ -243,7 +243,7 @@ export default defineComponent({
         }
       }
     }
-    function handleDeleteOption (option: SelectOption): void {
+    function handleDeleteOption (option: SelectBaseOption): void {
       doDeleteOption(option)
     }
     function handlePatternKeyDown (e: KeyboardEvent): void {

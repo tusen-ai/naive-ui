@@ -34,7 +34,7 @@ fallback-option
 | filter | `(pattern: string, option: Object) => boolean` | A basic string based search method. |  |
 | loading | `boolean` | `false` |  |
 | multiple | `boolean` | `false` |  |
-| options | `Array<SelectOption \| SelectOptionGroup>` | `[]` |  |
+| options | `Array<SelectOption \| SelectGroupOption>` | `[]` |  |
 | placeholder | `string` | `'Please Select'` |  |
 | remote | `boolean` | `false` | If you want to async get options. Note that if remote is set, `filter` & `tag` won't work on `options`. At that time, you are taking all control of `options`. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
@@ -58,7 +58,7 @@ fallback-option
 | style    | `string`                          |                              |
 | value    | `string \| number`                | Should be unique in options. |
 
-### SelectOptionGroup Properties
+### SelectGroupOption Properties
 
 | Name     | Type                              | Description |
 | -------- | --------------------------------- | ----------- |

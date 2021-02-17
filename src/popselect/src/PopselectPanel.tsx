@@ -18,7 +18,7 @@ import {
   OnUpdateValueImpl,
   Value,
   SelectMixedOption,
-  SelectOption,
+  SelectBaseOption,
   SelectGroupOption,
   SelectIgnoredOption,
   ValueAtom
@@ -88,7 +88,7 @@ export default defineComponent({
       if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
       if (onChange) call(onChange as OnUpdateValueImpl, value)
     }
-    function handleMenuToggleOption (option: SelectOption): void {
+    function handleMenuToggleOption (option: SelectBaseOption): void {
       toggle(option.value)
     }
     function toggle (value: ValueAtom): void {
@@ -129,7 +129,7 @@ export default defineComponent({
       NPopselect,
       treeMate: computed(() => {
         return createTreeMate<
-        SelectOption,
+        SelectBaseOption,
         SelectGroupOption,
         SelectIgnoredOption
         >(props.options, tmOptions)

@@ -19,7 +19,7 @@ import { NEmpty } from '../../../empty'
 import { NScrollbar } from '../../../scrollbar'
 import type { ScrollbarRef } from '../../../scrollbar'
 import type {
-  SelectOption,
+  SelectBaseOption,
   SelectGroupOption,
   SelectIgnoredOption
 } from '../../../select'
@@ -37,17 +37,17 @@ import { Size } from './interface'
 export interface InternalSelectMenuInjection {
   handleOptionMouseEnter: (
     e: MouseEvent,
-    tmNode: TreeNode<SelectOption>
+    tmNode: TreeNode<SelectBaseOption>
   ) => void
-  handleOptionClick: (e: MouseEvent, tmNode: TreeNode<SelectOption>) => void
+  handleOptionClick: (e: MouseEvent, tmNode: TreeNode<SelectBaseOption>) => void
   valueSet: Set<number | string>
-  pendingTmNode: TreeNode<SelectOption> | null
+  pendingTmNode: TreeNode<SelectBaseOption> | null
   multiple: boolean
   value: string | number | Array<string | number> | null
 }
 
 export interface InternalSelectMenuRef {
-  getPendingOption: () => SelectOption | null
+  getPendingOption: () => SelectBaseOption | null
   prev: () => void
   next: () => void
 }
@@ -87,7 +87,7 @@ export default defineComponent({
     },
     onScroll: Function as PropType<(e: Event) => void>,
     // deprecated
-    onMenuToggleOption: Function as PropType<(value: SelectOption) => void>
+    onMenuToggleOption: Function as PropType<(value: SelectBaseOption) => void>
   },
   setup (props) {
     const themeRef = useTheme(
@@ -145,7 +145,7 @@ export default defineComponent({
         setPendingTmNode(null)
       }
     })
-    function doToggleOption (option: SelectOption): void {
+    function doToggleOption (option: SelectBaseOption): void {
       const { onMenuToggleOption } = props
       if (onMenuToggleOption) onMenuToggleOption(option)
     }
@@ -161,21 +161,21 @@ export default defineComponent({
     function handleVirtualListResize (): void {
       scrollbarRef.value?.sync()
     }
-    function getPendingOption (): SelectOption | null {
+    function getPendingOption (): SelectBaseOption | null {
       const { value: pendingTmNode } = pendingNodeRef
       if (pendingTmNode) return pendingTmNode.rawNode
       return null
     }
     function handleOptionMouseEnter (
       e: MouseEvent,
-      tmNode: TreeNode<SelectOption>
+      tmNode: TreeNode<SelectBaseOption>
     ): void {
       if (tmNode.disabled) return
       setPendingTmNode(tmNode, false)
     }
     function handleOptionClick (
       e: MouseEvent,
-      tmNode: TreeNode<SelectOption>
+      tmNode: TreeNode<SelectBaseOption>
     ): void {
       if (tmNode.disabled) return
       doToggleOption(tmNode.rawNode)
@@ -207,7 +207,7 @@ export default defineComponent({
       }
     }
     function setPendingTmNode (
-      tmNode: TreeNode<SelectOption> | null,
+      tmNode: TreeNode<SelectBaseOption> | null,
       doScroll = false
     ): void {
       pendingNodeRef.value = tmNode
@@ -352,7 +352,9 @@ export default defineComponent({
                         item: tmNode
                       }: {
                         item: TreeNode<
-                        SelectGroupOption | SelectOption | SelectIgnoredOption
+                        | SelectGroupOption
+                        | SelectBaseOption
+                        | SelectIgnoredOption
                         >
                       }) => {
                         return tmNode.isGroup ? (
@@ -366,7 +368,7 @@ export default defineComponent({
                           <NSelectOption
                             key={tmNode.key}
                             tmNode={
-                              (tmNode as unknown) as TreeNode<SelectOption>
+                              (tmNode as unknown) as TreeNode<SelectBaseOption>
                             }
                           />
                         )
@@ -392,7 +394,9 @@ export default defineComponent({
                       ) : (
                         <NSelectOption
                           key={tmNode.key}
-                          tmNode={(tmNode as unknown) as TreeNode<SelectOption>}
+                          tmNode={
+                            (tmNode as unknown) as TreeNode<SelectBaseOption>
+                          }
                         />
                       )
                     )}

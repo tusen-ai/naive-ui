@@ -21,7 +21,7 @@ after-select
 | clearable | `boolean` | `false` |  |
 | default-value | `string` | `null` |  |
 | disabled | `boolean` | `false` |  |
-| options | `Array<string \| AutoCompleteOption \| AutoCompleteOptionGroup>` | `[]` |  |
+| options | `Array<string \| AutoCompleteOption \| AutoCompleteGroupOption>` | `[]` |  |
 | placeholder | `string` | `'请输入'` |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | value | `string` | `undefined` |  |
@@ -39,7 +39,7 @@ after-select
 | render   | `Function`         |          |
 | value    | `string \| number` | 需要唯一 |
 
-### AutoCompleteOptionGroup Properties
+### AutoCompleteGroupOption Properties
 
 | 名称     | 类型                                  | 介绍 |
 | -------- | ------------------------------------- | ---- |

@@ -37,7 +37,7 @@ menu-debug
 | filter | `(pattern: string, option: Object) => boolean` | 一个简单的字符串搜索算法 |  |
 | loading | `boolean` | `false` |  |
 | multiple | `boolean` | `false` |  |
-| options | `Array<SelectOption \| SelectOptionGroup>` | `[]` |  |
+| options | `Array<SelectOption \| SelectGroupOption>` | `[]` |  |
 | placeholder | `string` | `'请选择'` |  |
 | remote | `boolean` | `false` | 是否要异步获取选项。注意如果设定了，那么 `fitler` 和 `tag` 都不会对 `options` 生效。这个时候你在全权控制 `options` |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
@@ -61,7 +61,7 @@ menu-debug
 | style    | `string`                          |                      |
 | value    | `string \| number`                | 在选项中应该是唯一的 |
 
-### SelectOptionGroup Properties
+### SelectGroupOption Properties
 
 | 名称     | 类型                              | 说明 |
 | -------- | --------------------------------- | ---- |

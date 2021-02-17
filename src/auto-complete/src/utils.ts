@@ -1,5 +1,5 @@
 import {
-  SelectOption,
+  SelectBaseOption,
   SelectGroupOption,
   SelectMixedOption
 } from '../../select/src/interface'
@@ -25,9 +25,11 @@ function convertAutoCompleteOptionToSelectOption (
       label: option.label ?? (option.name as any),
       value: option.value ?? (option.name as any),
       name: option.name as any,
-      children: (option.children as Array<string | SelectOption>).map(
+      children: (option.children as Array<string | SelectBaseOption>).map(
         (groupOption) =>
-          convertAutoCompleteOptionToSelectOption(groupOption) as SelectOption
+          convertAutoCompleteOptionToSelectOption(
+            groupOption
+          ) as SelectBaseOption
       )
     }
     return groupOption

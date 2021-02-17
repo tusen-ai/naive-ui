@@ -15,7 +15,7 @@ import {
 import { clickoutside } from 'vdirs'
 import { createTreeMate } from 'treemate'
 import type {
-  SelectOption,
+  SelectBaseOption,
   SelectGroupOption,
   SelectIgnoredOption
 } from '../../select'
@@ -85,7 +85,7 @@ export default defineComponent({
     })
     const selectTreeMateRef = computed(() => {
       return createTreeMate<
-      SelectOption,
+      SelectBaseOption,
       SelectGroupOption,
       SelectIgnoredOption
       >(filteredSelectOptionsRef.value, tmOptions)

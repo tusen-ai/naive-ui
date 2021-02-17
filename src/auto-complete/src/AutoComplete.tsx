@@ -22,7 +22,7 @@ import { NInternalSelectMenu, InternalSelectMenuRef } from '../../_internal'
 
 import { NInput } from '../../input'
 import type {
-  SelectOption,
+  SelectBaseOption,
   SelectGroupOption,
   SelectIgnoredOption
 } from '../../select'
@@ -130,7 +130,7 @@ export default defineComponent({
       )
     })
     const treeMateRef = computed(() =>
-      createTreeMate<SelectOption, SelectGroupOption, SelectIgnoredOption>(
+      createTreeMate<SelectBaseOption, SelectGroupOption, SelectIgnoredOption>(
         selectOptionsRef.value,
         tmOptions
       )
@@ -190,7 +190,7 @@ export default defineComponent({
           break
       }
     }
-    function select (option: SelectOption): void {
+    function select (option: SelectBaseOption): void {
       if (option) {
         if (props.clearAfterSelect) {
           doUpdateValue(null)
@@ -219,7 +219,7 @@ export default defineComponent({
       canBeActivatedRef.value = true
       doUpdateValue(value)
     }
-    function handleToggleOption (option: SelectOption): void {
+    function handleToggleOption (option: SelectBaseOption): void {
       select(option)
     }
     function handleClickOutsideMenu (e: MouseEvent): void {

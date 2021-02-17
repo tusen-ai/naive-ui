@@ -1,6 +1,6 @@
 import { TreeMateOptions } from 'treemate'
 import type {
-  SelectOption,
+  SelectBaseOption,
   SelectGroupOption,
   SelectIgnoredOption,
   SelectMixedOption
@@ -14,7 +14,7 @@ export function getKey (option: SelectMixedOption): string | number {
       'key-required'
     )
   }
-  return (option as SelectOption | SelectIgnoredOption).value
+  return (option as SelectBaseOption | SelectIgnoredOption).value
 }
 
 export function getIsGroup (option: SelectMixedOption): boolean {
@@ -26,7 +26,7 @@ export function getIgnored (option: SelectMixedOption): boolean {
 }
 
 export const tmOptions: TreeMateOptions<
-SelectOption,
+SelectBaseOption,
 SelectGroupOption,
 SelectIgnoredOption
 > = {
@@ -47,7 +47,7 @@ export function patternMatched (pattern: string, value: string): boolean {
 
 export function filterOptions (
   originalOpts: SelectMixedOption[],
-  filter: (pattern: string, option: SelectOption) => boolean,
+  filter: (pattern: string, option: SelectBaseOption) => boolean,
   pattern: string
 ): SelectMixedOption[] {
   if (!filter) return originalOpts
@@ -66,7 +66,7 @@ export function filterOptions (
         }
       } else if (getIgnored(option)) {
         continue
-      } else if (filter(pattern, option as SelectOption)) {
+      } else if (filter(pattern, option as SelectBaseOption)) {
         filteredOptions.push(option)
       }
     }
@@ -77,12 +77,12 @@ export function filterOptions (
 
 export function createValOptMap (
   options: SelectMixedOption[]
-): Map<string | number, SelectOption> {
+): Map<string | number, SelectBaseOption> {
   const valOptMap = new Map()
   options.forEach((option) => {
     if (getIsGroup(option)) {
       ;(option as SelectGroupOption).children.forEach(
-        (SelectGroupOption: SelectOption) => {
+        (SelectGroupOption: SelectBaseOption) => {
           valOptMap.set(SelectGroupOption.value, SelectGroupOption)
         }
       )

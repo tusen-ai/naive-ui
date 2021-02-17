@@ -21,7 +21,7 @@ after-select
 | clearable | `boolean` | `false` |  |
 | default-value | `string` | `null` |  |
 | disabled | `boolean` | `false` |  |
-| options | `Array<string \| AutoCompleteOption \| AutoCompleteOptionGroup>` | `[]` |  |
+| options | `Array<string \| AutoCompleteOption \| AutoCompleteGroupOption>` | `[]` |  |
 | placeholder | `string` | `'Please Input'` |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | value | `string` | `undefined` |  |
@@ -39,7 +39,7 @@ after-select
 | render   | `Function`         |                              |
 | value    | `string \| number` | Should be unique in options. |
 
-### AutoCompleteOptionGroup Properties
+### AutoCompleteGroupOption Properties
 
 | Name     | Type          | Description          |
 | -------- | ------------- | -------------------- | --- |
