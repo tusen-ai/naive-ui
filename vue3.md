@@ -443,7 +443,7 @@
   - [x] table bottom-bordered
   - [x] data table filter menu
   - [x] popover default trigger
-  - [ ] select option type
+  - [x] select option type
 
 ## Build
 
