@@ -8,16 +8,18 @@ const createDemoPlugin = require('./build/vite-plugin-demo')
 module.exports = {
   root: __dirname,
   plugins: createDemoPlugin(),
-  alias:
+  resolve: {
     // In production site build, we want to import naive-ui from node_modules
-    process.env.NODE_ENV !== 'production'
-      ? [
-        {
-          find: 'naive-ui',
-          replacement: path.resolve(__dirname, './src')
-        }
-      ]
-      : undefined,
+    alias:
+      process.env.NODE_ENV !== 'production'
+        ? [
+          {
+            find: 'naive-ui',
+            replacement: path.resolve(__dirname, './src')
+          }
+        ]
+        : undefined
+  },
   define: {
     'process.env.NODE_ENV': `'${process.env.NODE_ENV}'`,
     __DEV__: process.env.NODE_ENV !== 'production'

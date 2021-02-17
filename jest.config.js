@@ -18,10 +18,7 @@ module.exports = {
   collectCoverage: true,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
-  // collectCoverageFrom: [
-  //   '<rootDir>/src/**/*.js$',
-  //   '<rootDir>/src/**/*.vue$'
-  // ],
+  collectCoverageFrom: ['<rootDir>/src/**/*.(ts|tsx)$'],
 
   // The directory where Jest should output its coverage files
   coverageDirectory: 'coverage',
@@ -34,10 +31,7 @@ module.exports = {
   ],
 
   // A list of reporter names that Jest uses when writing coverage reports
-  coverageReporters: [
-    'text',
-    'lcov'
-  ],
+  coverageReporters: ['text', 'lcov'],
 
   // An object that configures minimum threshold enforcement for coverage results
   // coverageThreshold: undefined,
@@ -66,16 +60,10 @@ module.exports = {
   // maxWorkers: "50%",
 
   // An array of directory names to be searched recursively up from the requiring module's location
-  moduleDirectories: [
-    'node_modules'
-  ],
+  moduleDirectories: ['node_modules'],
 
   // An array of file extensions your modules use
-  moduleFileExtensions: [
-    'js',
-    'json',
-    'vue'
-  ],
+  moduleFileExtensions: ['js', 'json', 'ts', 'tsx'],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   // moduleNameMapper: {},
@@ -142,13 +130,11 @@ module.exports = {
   // The glob patterns Jest uses to detect test files
   testMatch: [
     // '<rootDir>/src/**/__tests__/**/*.[jt]s',
-    '<rootDir>/src/**/*.(spec|test).[tj]s'
+    '<rootDir>/src/**/*.(spec|test).ts'
   ],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
-  testPathIgnorePatterns: [
-    '/node_modules/'
-  ],
+  testPathIgnorePatterns: ['/node_modules/'],
 
   // The regexp pattern or array of patterns that Jest uses to detect test files
   // testRegex: [],
@@ -167,14 +153,11 @@ module.exports = {
 
   // A map from regular expressions to paths to transformers
   transform: {
-    '^.+\\.js$': 'babel-jest',
-    '^.+\\.vue$': 'vue-jest'
+    '^.+\\.(j|t)sx?$': 'babel-jest'
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
-  // transformIgnorePatterns: [
-  //   "/node_modules/"
-  // ],
+  transformIgnorePatterns: ['<rootDir>/node_modules/(?!lodash-es)'],
 
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
   // unmockedModulePathPatterns: undefined,

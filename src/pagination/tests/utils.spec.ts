@@ -81,11 +81,13 @@ describe('Pagination', function () {
         expect(mapPagesToPageItems([-2, -1, 1, 2], 1)).toEqual([
           {
             type: 'fastBackward',
-            label: 'fastBackward'
+            label: 'fastBackward',
+            active: false
           },
           {
             type: 'fastForward',
-            label: 'fastForward'
+            label: 'fastForward',
+            active: false
           },
           {
             type: 'page',
@@ -110,7 +112,8 @@ describe('Pagination', function () {
           },
           {
             type: 'fastBackward',
-            label: 'fastBackward'
+            label: 'fastBackward',
+            active: false
           },
           {
             type: 'page',
@@ -139,7 +142,8 @@ describe('Pagination', function () {
           },
           {
             type: 'fastForward',
-            label: 'fastForward'
+            label: 'fastForward',
+            active: false
           },
           {
             type: 'page',

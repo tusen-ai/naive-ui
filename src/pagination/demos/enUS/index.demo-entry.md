@@ -18,11 +18,13 @@ disabled
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| page-count | `number` | required |  |
-| page-sizes | `Array<number>` | `[]` |  |
+| default-page | `number` | `1` |  |
+| default-page-size | `number` | `10` |  |
+| page-count | `number` | `1` |  |
+| page-sizes | `Array<number>` | `['10']` |  |
 | page-size | `number` | `undefined` |  |
 | page-slot | `number` | `9` |  |
-| page | `number` | required |  |
+| page | `number` | `undefined` |  |
 | show-quick-jumper | `boolean` | `false` |  |
 | show-size-picker | `boolean` | `false` |  |
 | on-update:page | `(page: number) => any` | `undefined` |  |

@@ -94,7 +94,7 @@ function mapPagesToPageItems (pages: number[], currentPage: number): PageItem[] 
 function pageItems (
   currentPage: number,
   pageCount: number,
-  pageSlot: number
+  pageSlot?: number
 ): PageItem[] {
   const pages = pagesToShow(currentPage, pageCount, pageSlot)
   return mapPagesToPageItems(pages, currentPage)

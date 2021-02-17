@@ -95,7 +95,7 @@ const paginationProps = {
     validator: (value: any) => {
       return Number.isInteger(value) && value > 0
     },
-    default: undefined
+    default: 1
   }
 } as const
 
