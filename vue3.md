@@ -7,7 +7,7 @@
 - fonts
   - `naive-ui/lib|es/styles/fonts/*` has been removed, use [`vfonts`](https://www.npmjs.com/package/vfonts)
 - icons
-  - `naive-ui/lib|es/icons/*` is deprecated (vue-loader is required), use [`vicons`](https://www.npmjs.com/package/vicons) instead.
+  - `naive-ui/lib|es/icons/*` is deprecated (vue-loader is required), use [`xicons`](https://github.com/07akioni/xicons) instead.
 - `n-nimbus-icon` is moved to `naive-ui/compat/nimbus-icon` (vue-loader is required)
 - `n-nimbus-form-card` is removed
 
@@ -238,11 +238,9 @@
     - `max-width`
     - `width`
     - `min-width`
-    - `manual` trigger is removed, use `null` instead
+    - `manual` trigger is removed, use `show` to controll the popover
     - `body-class`, use `class` instead
     - `body-style`, use `style` instead
-  - other
-    - set default trigger to `null`
 - [x] popselect
   - break
     - `v-model` => `v-model:value`
@@ -444,6 +442,8 @@
   - [x] upload retry
   - [x] table bottom-bordered
   - [x] data table filter menu
+  - [x] popover default trigger
+  - [ ] select option type
 
 ## Build
 

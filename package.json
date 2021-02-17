@@ -127,8 +127,8 @@
     "vfonts": "^0.0.1",
     "vooks": "0.0.8",
     "vue": "^3.0.5",
-    "vueuc": "^0.1.2",
-    "vue-router": "^4.0.3"
+    "vue-router": "^4.0.3",
+    "vueuc": "^0.1.2"
   },
   "husky": {
     "hooks": {

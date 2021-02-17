@@ -93,7 +93,10 @@ export const popoverProps = {
     type: Boolean,
     default: true
   },
-  trigger: String as PropType<PopoverTrigger>,
+  trigger: {
+    type: String as PropType<PopoverTrigger>,
+    default: 'hover'
+  },
   delay: {
     type: Number,
     default: 200
