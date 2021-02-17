@@ -54,11 +54,14 @@ module.exports = {
       }
     },
     {
-      files: '*.spec.js',
+      files: '*.spec.ts',
       globals: {
         describe: 'readonly',
         it: 'readonly',
         expect: 'readonly'
+      },
+      rules: {
+        '@typescript-eslint/no-floating-promises': 0
       }
     },
     {
