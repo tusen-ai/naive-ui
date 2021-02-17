@@ -1,5 +1,5 @@
 import { h, defineComponent } from 'vue'
-import { NConfigProvider } from 'naive-ui'
+import { NConfigProvider, configProviderProps } from 'naive-ui'
 import { renderFilter, renderSorter } from './data-table'
 import { unconfigurableStyle, mountSvgDefs } from './unconfigurable-style'
 import { themeOverrides } from './theme-overrides'
@@ -7,9 +7,10 @@ import { icons } from './icons'
 
 export default defineComponent({
   name: 'TsConfigProvider',
+  props: configProviderProps,
   setup () {
     return {
-      componentProps: {
+      componentOptions: {
         Pagination: {
           inputSize: 'medium'
         },
@@ -38,8 +39,9 @@ export default defineComponent({
   render () {
     return (
       <NConfigProvider
+        {...this.$props}
         themeOverrides={themeOverrides}
-        componentProps={this.componentProps}
+        componentOptions={this.componentOptions}
         icons={icons}
         onBeforeMount={this.onBeforeMount}
       >

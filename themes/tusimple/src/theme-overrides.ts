@@ -3,36 +3,6 @@ import type { GlobalThemeOverrides } from 'naive-ui'
 import { commonLight } from 'naive-ui'
 import vars from './vars'
 
-const inputColorDisabled = '#EBEDF0'
-
-// naive.styles.light.BaseSuffix.override({
-//   iconSize: '24px',
-//   arrowSize: '13px',
-//   arrowBorderWidth: '2px',
-//   crossColor: commonLight.closeColor
-// })
-// naive.styles.light.InputGroupLabel.override({
-//   boxShadow: 'none'
-// })
-// naive.styles.light.InputNumber.override({
-//   boxShadow: 'none',
-//   borderColor: 'none',
-//   borderColorHover: commonLight.primaryColor,
-//   buttonTextColor: 'rgba(0, 0, 0, .6)',
-//   buttonTextColorHover: commonLight.primaryColor,
-//   widthSmall: '140px',
-//   widthMedium: '140px',
-//   widthLarge: '140px',
-//   heightMedium: '32px',
-//   fontSizeMedium: '16px',
-//   buttonWidthSmall: '28px',
-//   buttonWidthMedium: '32px',
-//   buttonWidthLarge: '40px',
-//   buttonFontSizeSmall: '16px',
-//   buttonFontSizeMedium: '24px',
-//   buttonFontSizeLarge: '24px'
-// })
-
 function createHoverColor (color: string, overlayAlpha: number = 0.15): string {
   return composite(color, [255, 255, 255, overlayAlpha])
 }
@@ -76,8 +46,8 @@ export const themeOverrides: GlobalThemeOverrides = {
     dividerColor: '#EBEDF0',
     dividerColorOverlay: '#EBEDF0',
     tableHeaderColorOverlay: '#EBEDF0',
-    inputColorDisabled,
-    actionColor: inputColorDisabled,
+    inputColorDisabled: '#EBEDF0',
+    actionColor: '#EBEDF0',
     hoverColor: composite(colors.primaryColor, 'rgba(255, 255, 255, .1)'),
     clearColor: composite('#FFF', 'rgba(0, 0, 0, .4)'),
     ...colors

@@ -20,80 +20,82 @@ import {
 } from './interface'
 import { NDateLocale, NLocale } from '../../locales'
 
+export const configProviderProps = {
+  abstract: {
+    type: Boolean,
+    default: false
+  },
+  bordered: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
+  locale: Object as PropType<NLocale | null>,
+  dateLocale: Object as PropType<NDateLocale | null>,
+  namespace: String,
+  tag: {
+    type: String,
+    default: 'div'
+  },
+  hljs: Object as PropType<Hljs>,
+  theme: Object as PropType<GlobalTheme | null>,
+  themeOverrides: Object as PropType<GlobalThemeOverrides | null>,
+  componentOptions: Object as PropType<ComponentProps>,
+  icons: Object as PropType<Icons>,
+  onBeforeMount: Function,
+  // deprecated
+  legacyTheme: String,
+  language: {
+    type: String as PropType<string | undefined>,
+    validator: () => {
+      warn(
+        'config-provider',
+        '`language` is deprecated, please use `locale` instead.'
+      )
+      return true
+    },
+    default: undefined
+  },
+  lang: {
+    type: String as PropType<string | undefined>,
+    validator: () => {
+      warn(
+        'config-provider',
+        '`lang` is deprecated, please use `locale` instead.'
+      )
+      return true
+    },
+    default: undefined
+  },
+  as: {
+    type: String as PropType<string | undefined>,
+    validator: () => {
+      warn('config-provider', '`as` is deprecated, please use `tag` instead.')
+      return true
+    },
+    default: undefined
+  },
+  themeEnvironment: {
+    type: Object as PropType<unknown | undefined>,
+    validator: () => {
+      warn('config-provider', '`theme-environment` is deprecated.')
+      return true
+    },
+    default: undefined
+  },
+  themeEnvironments: {
+    type: Object as PropType<unknown | undefined>,
+    validator: () => {
+      warn('config-provider', '`theme-environments` is deprecated.')
+      return true
+    },
+    default: undefined
+  }
+} as const
+
 export default defineComponent({
   name: 'ConfigProvider',
   alias: ['App'],
-  props: {
-    abstract: {
-      type: Boolean,
-      default: false
-    },
-    bordered: {
-      type: Boolean as PropType<boolean | undefined>,
-      default: undefined
-    },
-    locale: Object as PropType<NLocale | null>,
-    dateLocale: Object as PropType<NDateLocale | null>,
-    namespace: String,
-    tag: {
-      type: String,
-      default: 'div'
-    },
-    hljs: Object as PropType<Hljs>,
-    theme: Object as PropType<GlobalTheme | null>,
-    themeOverrides: Object as PropType<GlobalThemeOverrides | null>,
-    componentProps: Object as PropType<ComponentProps>,
-    icons: Object as PropType<Icons>,
-    onBeforeMount: Function,
-    // deprecated
-    legacyTheme: String,
-    language: {
-      type: String as PropType<string | undefined>,
-      validator: () => {
-        warn(
-          'config-provider',
-          '`language` is deprecated, please use `locale` instead.'
-        )
-        return true
-      },
-      default: undefined
-    },
-    lang: {
-      type: String as PropType<string | undefined>,
-      validator: () => {
-        warn(
-          'config-provider',
-          '`lang` is deprecated, please use `locale` instead.'
-        )
-        return true
-      },
-      default: undefined
-    },
-    as: {
-      type: String as PropType<string | undefined>,
-      validator: () => {
-        warn('config-provider', '`as` is deprecated, please use `tag` instead.')
-        return true
-      },
-      default: undefined
-    },
-    themeEnvironment: {
-      type: Object as PropType<unknown | undefined>,
-      validator: () => {
-        warn('config-provider', '`theme-environment` is deprecated.')
-        return true
-      },
-      default: undefined
-    },
-    themeEnvironments: {
-      type: Object as PropType<unknown | undefined>,
-      validator: () => {
-        warn('config-provider', '`theme-environments` is deprecated.')
-        return true
-      },
-      default: undefined
-    }
-  },
+  props: configProviderProps,
   setup (props) {
     const NConfigProvider = inject<ConfigProviderInjection | null>(
       'NConfigProvider',
@@ -126,8 +128,8 @@ export default defineComponent({
       return icons === undefined ? NConfigProvider?.mergedIcons : icons
     })
     const mergedComponentPropsRef = computed(() => {
-      const { componentProps } = props
-      if (componentProps !== undefined) return componentProps
+      const { componentOptions } = props
+      if (componentOptions !== undefined) return componentOptions
       return NConfigProvider?.mergedComponentProps
     })
     onBeforeMount(() => {
