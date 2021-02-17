@@ -48,7 +48,7 @@ export const dataTableProps = {
   maxHeight: Number,
   columns: {
     type: Array as PropType<Array<TableColumnInfo | SelectionColInfo>>,
-    required: true
+    default: () => []
   },
   data: {
     type: Array as PropType<TableNode[]>,

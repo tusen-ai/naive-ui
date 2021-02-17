@@ -56,7 +56,7 @@ export default defineComponent({
     },
     options: {
       type: Array as PropType<BaseOption[]>,
-      default: []
+      default: () => []
     },
     value: [String, Number, Array] as PropType<Value | null>,
     defaultValue: {

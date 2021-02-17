@@ -1,6 +1,6 @@
 export { NH1, NH2, NH3, NH4, NH5, NH6 } from './src/headers'
-export { default as A } from './src/a'
-export { default as P } from './src/p'
+export { default as NA } from './src/a'
+export { default as NP } from './src/p'
 export { default as NBlockquote } from './src/blockquote'
 export { default as NHr } from './src/hr'
 export { default as NUl } from './src/ul'

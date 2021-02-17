@@ -29,6 +29,6 @@ export default function useHljs (
     warn('code', 'hljs is not set.')
   }
   return computed(() => {
-    return props.hljs || NConfigProvider?.mergedHljs || vm.$naive.hljs
+    return props.hljs || NConfigProvider?.mergedHljs || vm?.$naive?.hljs
   })
 }

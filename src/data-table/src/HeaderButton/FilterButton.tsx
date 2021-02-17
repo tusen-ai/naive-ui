@@ -33,7 +33,7 @@ export default defineComponent({
     },
     options: {
       type: Array as PropType<FilterOption[]>,
-      default: []
+      default: () => []
     }
   },
   setup (props) {

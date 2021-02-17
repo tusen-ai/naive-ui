@@ -1,11 +1,5 @@
-import {
-  h,
-  defineComponent,
-  computed,
-  resolveComponent,
-  renderSlot,
-  CSSProperties
-} from 'vue'
+import { h, defineComponent, computed, renderSlot, CSSProperties } from 'vue'
+import { RouterLink } from 'vue-router'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { typographyLight } from '../styles'
@@ -37,8 +31,7 @@ export default defineComponent({
     }
   },
   render () {
-    const RouterLink = resolveComponent('router-link')
-    if (RouterLink && this.to) {
+    if (this.to) {
       return h(
         RouterLink as any,
         {

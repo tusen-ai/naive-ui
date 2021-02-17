@@ -1,4 +1,4 @@
-export { default as NMessagePrivider } from './src/MessageProvider'
+export { default as NMessageProvider } from './src/MessageProvider'
 export { useMessage } from './src/use-message'
 export type {
   MessageOptions,

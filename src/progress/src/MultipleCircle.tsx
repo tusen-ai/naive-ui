@@ -31,15 +31,15 @@ export default defineComponent({
     },
     fillColor: {
       type: Array as PropType<string[]>,
-      default: []
+      default: () => []
     },
     railColor: {
       type: Array as PropType<string[]>,
-      default: []
+      default: () => []
     },
     railStyle: {
       type: Array as PropType<Array<string | CSSProperties>>,
-      default: []
+      default: () => []
     }
   },
   setup (props, { slots }) {

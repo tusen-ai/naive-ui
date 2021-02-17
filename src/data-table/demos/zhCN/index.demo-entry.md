@@ -36,7 +36,7 @@ custom-filter-menu
 | bordered | `boolean` | `true` |  |
 | bottom-bordered | `boolean` | `true` |  |
 | checked-row-keys | `Array<string \| number>` | `undefined` | 被选中的列的 key |
-| columns | `Array<Column>` |  | 需要展示的列，**必需** |
+| columns | `Array<Column>` | `[]` | 需要展示的列 |
 | data | `Array<Object>` | `[]` | 需要展示的数据 |
 | default-checked-row-keys | `Array<string \| number>` | `[]` |  |
 | loading | `boolean` | `false` |  |

@@ -60,7 +60,7 @@ export default defineComponent({
     },
     options: {
       type: Array as PropType<SelectMixedOption[]>,
-      required: true
+      default: () => []
     },
     defaultValue: {
       type: [String, Number, Array] as PropType<Value | null>,

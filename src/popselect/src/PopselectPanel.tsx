@@ -41,7 +41,7 @@ export const panelProps = {
   width: [Number, String] as PropType<string | number>,
   options: {
     type: Array as PropType<SelectMixedOption[]>,
-    required: true
+    default: () => []
   },
   size: {
     type: String as PropType<PopselectSize>,

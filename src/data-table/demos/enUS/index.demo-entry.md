@@ -36,7 +36,7 @@ custom-filter-menu
 | bordered | `boolean` | `true` |  |
 | bottom-bordered | `boolean` | `true` |  |
 | checked-row-keys | `Array<string \| number>` | `undefined` | The keys of checked rows. |
-| columns | `Array<Column>` | required | Columns to display. |
+| columns | `Array<Column>` | `[]` | Columns to display. |
 | data | `Array<Object>` | `[]` | Data to display. |
 | default-checked-row-keys | `Array<string \| number>` | `[]` |  |
 | loading | `boolean` | `false` |  |
