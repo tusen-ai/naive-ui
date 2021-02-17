@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import naive from 'naive-ui'
-import { installDemoComponents } from './init'
+import { installDemoComponents } from './setup'
 import SiteRoot from './SiteRoot.vue'
 import { routes } from './routes/routes'
 import createDemoRouter from './routes/router'

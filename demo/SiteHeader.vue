@@ -35,6 +35,14 @@
           v-if="dev"
           size="small"
           class="nav-picker"
+          @click="handleConfigProviderChange"
+        >
+          {{ configProviderOptions[configProviderName].label }}
+        </n-button>
+        <n-button
+          v-if="dev"
+          size="small"
+          class="nav-picker"
           @click="handleModeChange"
         >
           {{ modeOptions[displayMode].label }}
@@ -55,7 +63,8 @@ import {
   useThemeName,
   useLocaleName,
   useDisplayMode,
-  useFlattenedDocOptions
+  useFlattenedDocOptions,
+  useConfigProviderName
 } from './store'
 
 function match (pattern, string) {
@@ -128,6 +137,7 @@ export default {
       lang: useLocaleName(),
       theme: useThemeName(),
       items: useFlattenedDocOptions(),
+      configProviderName: useConfigProviderName(),
       menuItems: menuItemsRef,
       themeOptions: themeOptionsRef,
       langOptions: readonly({
@@ -148,6 +158,16 @@ export default {
         common: {
           label: 'Debug',
           next: 'debug'
+        }
+      }),
+      configProviderOptions: readonly({
+        default: {
+          label: 'Tusimple',
+          next: 'tusimple'
+        },
+        tusimple: {
+          label: 'Default',
+          next: 'default'
         }
       })
     }
@@ -199,16 +219,14 @@ export default {
         this.$router.push(/^(\/[^/]+){2}/.exec(this.$route.path)[0])
       }
       if (value === 'doc') {
-        if (/^(\/[^/]+){2}\/docs/.test(this.$route.path)) {
-        } else {
+        if (!/^(\/[^/]+){2}\/docs/.test(this.$route.path)) {
           this.$router.push(
             /^(\/[^/]+){2}/.exec(this.$route.path)[0] + '/docs/start'
           )
         }
       }
       if (value === 'component') {
-        if (/^(\/[^/]+){2}\/components/.test(this.$route.path)) {
-        } else {
+        if (!/^(\/[^/]+){2}\/components/.test(this.$route.path)) {
           this.$router.push(
             /^(\/[^/]+){2}/.exec(this.$route.path)[0] +
               '/components/n-config-provider'
@@ -224,6 +242,11 @@ export default {
     },
     handleLanguageChange () {
       this.lang = this.langOptions[this.lang].next
+    },
+    handleConfigProviderChange () {
+      this.configProviderName = this.configProviderOptions[
+        this.configProviderName
+      ].next
     }
   }
 }

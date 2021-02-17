@@ -76,6 +76,9 @@ export const themeOverrides: GlobalThemeOverrides = {
   },
   Button: {
     textColorWarning: '#333',
+    textColorHoverWarning: '#333',
+    textColorFocusWarning: '#333',
+    textColorPressedWarning: '#333',
     iconSizeTiny: '16px',
     iconSizeSmall: '20px',
     iconSizeMedium: '20px',

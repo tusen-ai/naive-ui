@@ -1,6 +1,7 @@
 import { computed, ref, provide, reactive, toRef, inject } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import {
+  NConfigProvider,
   darkTheme,
   enUS,
   zhCN,
@@ -8,6 +9,7 @@ import {
   dateZhCN,
   useOsTheme
 } from '../../src'
+import { TsConfigProvider } from '../../themes/tusimple/src'
 import { i18n } from '../utils/composables'
 import {
   createDocumentationMenuOptions,
@@ -67,6 +69,14 @@ export function siteSetup () {
     const { value } = themeNameRef
     return value === 'dark' ? darkTheme : null
   })
+  // config provider
+  const configProviderNameRef = ref('default')
+  const configProviderRef = computed(() => {
+    if (process.env.TUSIMPLE) return TsConfigProvider
+    return configProviderNameRef.value === 'tusimple'
+      ? TsConfigProvider
+      : NConfigProvider
+  })
   // options
   const docOptionsRef = computed(() =>
     createDocumentationMenuOptions({
@@ -99,6 +109,7 @@ export function siteSetup () {
     storeKey,
     reactive({
       themeName: themeNameRef,
+      configProviderName: configProviderNameRef,
       localeName: localeNameRef,
       displayMode: displayModeRef,
       docOptions: docOptionsRef,
@@ -108,6 +119,7 @@ export function siteSetup () {
   )
   i18n.provide(computed(() => localeNameRef.value))
   return {
+    configProvider: configProviderRef,
     hljs,
     theme: themeRef,
     locale: localeRef,
@@ -147,4 +159,8 @@ export function useComponentOptions () {
 
 export function useFlattenedDocOptions () {
   return toRef(inject(storeKey), 'flattenedDocOptions')
+}
+
+export function useConfigProviderName () {
+  return toRef(inject(storeKey), 'configProviderName')
 }

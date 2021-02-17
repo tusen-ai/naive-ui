@@ -1,18 +1,12 @@
 const transformIndexHtml = (code) => {
-  const isTusimple = !!process.env.TUSIMPLE
   switch (process.env.NODE_ENV) {
     case 'production':
-      return code.replace(
-        /__INDEX__/,
-        '/demo/index.' + (isTusimple ? 'ts-prod.js' : 'prod.js')
-      )
+      return code.replace(/__INDEX__/, '/demo/index.prod.js')
     default:
-      return code.replace(
-        /__INDEX__/,
-        '/demo/index.' + (isTusimple ? 'ts-dev.js' : 'dev.js')
-      )
+      return code.replace(/__INDEX__/, '/demo/index.dev.js')
   }
 }
+
 const demoIndexTransFormPlugin = {
   name: 'demo-transform',
   enforce: 'pre',

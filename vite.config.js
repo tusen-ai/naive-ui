@@ -13,15 +13,16 @@ module.exports = {
     alias:
       process.env.NODE_ENV !== 'production'
         ? [
-          {
-            find: 'naive-ui',
-            replacement: path.resolve(__dirname, './src')
-          }
-        ]
+            {
+              find: 'naive-ui',
+              replacement: path.resolve(__dirname, './src')
+            }
+          ]
         : undefined
   },
   define: {
     'process.env.NODE_ENV': `'${process.env.NODE_ENV}'`,
+    'process.env.TUSIMPLE': !!process.env.TUSIMPLE,
     __DEV__: process.env.NODE_ENV !== 'production'
   },
   optimizeDeps: {

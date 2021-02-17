@@ -1,5 +1,6 @@
 <template>
-  <n-config-provider
+  <component
+    :is="configProvider"
     class="demo"
     namespace="naive-ui-doc"
     :theme="theme"
@@ -16,7 +17,7 @@
         </n-notification-provider>
       </n-message-provider>
     </n-loading-bar-provider>
-  </n-config-provider>
+  </component>
 </template>
 
 <script>

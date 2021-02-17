@@ -1,4 +1,4 @@
-import { upperFirst } from 'lodash'
+import { upperFirst } from 'lodash-es'
 import { defineComponent } from 'vue'
 import { Icons } from '../../config-provider'
 import { useConfig } from '../../_mixins'
