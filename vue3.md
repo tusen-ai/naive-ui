@@ -5,9 +5,9 @@
 - css
   - css index `naive-ui/lib|es/styles/index.css` has been removed, do not import it any more!
 - fonts
-  - `naive-ui/lib|es/styles/fonts/*` has been removed, use [`vfonts`](https://www.npmjs.com/package/vfonts)
+  - `naive-ui/lib|es/styles/fonts/*` has been removed, use [vfonts](https://www.npmjs.com/package/vfonts)
 - icons
-  - `naive-ui/lib|es/icons/*` is deprecated (vue-loader is required), use [`xicons`](https://github.com/07akioni/xicons) instead.
+  - `naive-ui/lib|es/icons/*` is deprecated (vue-loader is required), use [xicons](https://github.com/07akioni/xicons) instead.
 - `n-nimbus-icon` is moved to `naive-ui/compat/nimbus-icon` (vue-loader is required)
 - `n-nimbus-form-card` is removed
 

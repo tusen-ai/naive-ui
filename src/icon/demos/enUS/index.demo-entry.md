@@ -1,6 +1,6 @@
 # Icon
 
-It is recommend to use <n-a href="https://vicons.vercel.app/">vicons</n-a> as your icon library.
+It is recommend to use [xicons](https://xicons.vercel.app/) as your icon library.
 
 ## Demos
 
