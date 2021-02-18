@@ -155,6 +155,9 @@ function placementStyle (
         margin-${position}: var(--space);
         margin-${oppositePlacement[position]}: var(--space);
       `),
+      cM('overlap', `
+        margin: 0;
+      `),
       cB('popover-arrow-wrapper', `
         right: 0;
         left: 0;

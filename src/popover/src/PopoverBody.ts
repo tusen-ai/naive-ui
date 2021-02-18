@@ -38,6 +38,7 @@ export const popoverBodyProps = {
   x: Number,
   y: Number,
   filp: Boolean,
+  overlap: Boolean,
   placement: String as PropType<FollowerPlacement>,
   // private
   shadow: Boolean,
@@ -187,6 +188,7 @@ export default defineComponent({
                 class: [
                   'n-popover',
                   {
+                    'n-popover--overlap': this.overlap,
                     'n-popover--no-arrow': !this.showArrow,
                     'n-popover--shadow': this.shadow,
                     'n-popover--padded': this.padded,
@@ -231,7 +233,8 @@ export default defineComponent({
         y: this.y,
         placement: this.placement,
         containerClass: this.namespace,
-        ref: 'followerRef'
+        ref: 'followerRef',
+        overlap: this.overlap
       },
       {
         default: () => {

@@ -230,6 +230,7 @@
 - [x] popover
   - new
     - `default-show`
+    - `overlap`
   - deprecate
     - `#activator` => `#trigger`
     - `overlay-xxx` => `body-xxx`

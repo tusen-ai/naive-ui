@@ -141,6 +141,10 @@ export const popoverProps = {
     type: Boolean,
     default: true
   },
+  overlap: {
+    type: Boolean,
+    default: false
+  },
   // events
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:show': Function as PropType<
@@ -211,6 +215,10 @@ export default defineComponent({
     })
     // setup show-arrow
     const compatibleShowArrowRef = useCompitable(props, ['arrow', 'showArrow'])
+    const mergedShowArrowRef = computed(() => {
+      if (props.overlap) return false
+      return compatibleShowArrowRef.value
+    })
     // trigger
     let triggerVNode = null as VNode | null
     // bodyInstance
@@ -323,7 +331,7 @@ export default defineComponent({
       // if to show popover body
       uncontrolledShow: uncontrolledShowRef,
       mergedShow: mergedShowRef,
-      compatibleShowArrow: compatibleShowArrowRef,
+      mergedShowArrow: mergedShowArrowRef,
       setShow,
       handleClick,
       handleMouseEnter,
@@ -371,6 +379,7 @@ export default defineComponent({
             NPopoverBody,
             keep(this.$props, bodyPropKeys, {
               ...this.$attrs,
+              showArrow: this.mergedShowArrow,
               show: this.mergedShow
             }),
             slots

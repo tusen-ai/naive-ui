@@ -1,8 +1,10 @@
 # 位置
 
 ```html
+<n-switch v-model:value="overlap" /> 覆盖触发元素
+<n-divider />
 <div class="popover-grid">
-  <n-popover placement="top-start" trigger="click">
+  <n-popover :overlap="overlap" placement="top-start" trigger="click">
     <template #trigger>
       <n-button size="small" style="grid-area: 1 / 1 / 2 / 2;">
         Top Start
@@ -10,13 +12,13 @@
     </template>
     <div class="large-text">啊！</div>
   </n-popover>
-  <n-popover placement="top" trigger="click">
+  <n-popover :overlap="overlap" placement="top" trigger="click">
     <template #trigger>
       <n-button size="small" style="grid-area: 1 / 2 / 2 / 3;"> Top </n-button>
     </template>
     <div class="large-text">啊！</div>
   </n-popover>
-  <n-popover placement="top-end" trigger="click">
+  <n-popover :overlap="overlap" placement="top-end" trigger="click">
     <template #trigger>
       <n-button size="small" style="grid-area: 1 / 3 / 2 / 4;">
         Top End
@@ -24,7 +26,7 @@
     </template>
     <div class="large-text">啊！</div>
   </n-popover>
-  <n-popover placement="left-start" trigger="click">
+  <n-popover :overlap="overlap" placement="left-start" trigger="click">
     <template #trigger>
       <n-button size="small" style="grid-area: 2 / 1 / 3 / 2;">
         Left Start
@@ -32,13 +34,13 @@
     </template>
     <div class="large-text">啊！</div>
   </n-popover>
-  <n-popover placement="left" trigger="click">
+  <n-popover :overlap="overlap" placement="left" trigger="click">
     <template #trigger>
       <n-button size="small" style="grid-area: 3 / 1 / 4 / 2;"> Left </n-button>
     </template>
     <div class="large-text">啊！</div>
   </n-popover>
-  <n-popover placement="left-end" trigger="click">
+  <n-popover :overlap="overlap" placement="left-end" trigger="click">
     <template #trigger>
       <n-button size="small" style="grid-area: 4 / 1 / 5 / 2;">
         Left End
@@ -46,7 +48,7 @@
     </template>
     <div class="large-text">啊！</div>
   </n-popover>
-  <n-popover placement="right-start" trigger="click">
+  <n-popover :overlap="overlap" placement="right-start" trigger="click">
     <template #trigger>
       <n-button size="small" style="grid-area: 2 / 3 / 3 / 4;">
         Right Start
@@ -54,7 +56,7 @@
     </template>
     <div class="large-text">啊！</div>
   </n-popover>
-  <n-popover placement="right" trigger="click">
+  <n-popover :overlap="overlap" placement="right" trigger="click">
     <template #trigger>
       <n-button size="small" style="grid-area: 3 / 3 / 4 / 4;">
         Right
@@ -62,7 +64,7 @@
     </template>
     <div class="large-text">啊！</div>
   </n-popover>
-  <n-popover placement="right-end" trigger="click">
+  <n-popover :overlap="overlap" placement="right-end" trigger="click">
     <template #trigger>
       <n-button size="small" style="grid-area: 4 / 3 / 5 / 4;">
         Right End
@@ -70,7 +72,7 @@
     </template>
     <div class="large-text">啊！</div>
   </n-popover>
-  <n-popover placement="bottom-start" trigger="click">
+  <n-popover :overlap="overlap" placement="bottom-start" trigger="click">
     <template #trigger>
       <n-button size="small" style="grid-area: 5 / 1 / 6 / 2;">
         Bottom Start
@@ -78,7 +80,7 @@
     </template>
     <div class="large-text">啊！</div>
   </n-popover>
-  <n-popover placement="bottom" trigger="click">
+  <n-popover :overlap="overlap" placement="bottom" trigger="click">
     <template #trigger>
       <n-button size="small" style="grid-area: 5 / 2 / 6 / 3;">
         Bottom
@@ -86,7 +88,7 @@
     </template>
     <div class="large-text">啊！</div>
   </n-popover>
-  <n-popover placement="bottom-end" trigger="click">
+  <n-popover :overlap="overlap" placement="bottom-end" trigger="click">
     <template #trigger>
       <n-button size="small" style="grid-area: 5 / 3 / 6 / 4;">
         Bottom End
@@ -95,6 +97,18 @@
     <div class="large-text">啊！</div>
   </n-popover>
 </div>
+```
+
+```js
+import { ref } from 'vue'
+
+export default {
+  setup () {
+    return {
+      overlap: ref(false)
+    }
+  }
+}
 ```
 
 ```css
