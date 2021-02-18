@@ -24,17 +24,18 @@ body {
   white-space: nowrap;
 }
 
-.n-documentation .n-p, .n-blockquote {
+.n-documentation .n-p,
+.n-blockquote {
   max-width: 680px;
 }
 
 .md-table .n-table__td:nth-child(1) {
-  font-size: 13px !important;
+  font-size: 0.93em !important;
   font-family: v-mono, monospace;
 }
 
 .md-table .n-text.n-text--code {
-  font-size: 13px !important;
+  font-size: 0.93em !important;
 }
 
 .md-card {
