@@ -95,8 +95,8 @@ export default {
         light: 'Light',
         searchPlaceholder: 'Search',
         home: 'Home',
-        doc: 'Documentation',
-        component: 'Component',
+        doc: 'Docs',
+        component: 'Components',
         common: 'Common',
         debug: 'Debug',
         alreadyHome: "You've already been in home page. No clicking."
