@@ -88,7 +88,7 @@ export default cB('tabs', `
       }),
       cE('close', `
         margin-left: 8px;
-        font-size: 14px;
+        font-size: 16px;
         transition: color .3s var(--bezier);
       `),
       cE('label', `
@@ -150,7 +150,7 @@ export default cB('tabs', `
       box-sizing: border-box;
       height: 34px;
       line-height: 34px;
-      padding: 0 16px;
+      padding: 0 12px;
       position: relative;
       vertical-align: bottom;
       border-radius: var(--tab-border-radius);
