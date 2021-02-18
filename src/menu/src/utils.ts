@@ -28,12 +28,13 @@ export function itemRenderer (
     if (tmNode.isGroup) {
       return h(
         NMenuItemGroup,
-        keep(props, groupPropKeys, { tmNodes: tmNode.children })
+        keep(props, groupPropKeys, { tmNodes: tmNode.children, key })
       )
     }
     return h(
       NSubmenu,
       keep(props, submenuPropKeys, {
+        key,
         rawNodes: tmNode.rawNode.children,
         tmNodes: tmNode.children
       })
@@ -42,6 +43,7 @@ export function itemRenderer (
     return h(
       NMenuItem,
       keep(props, itemPropKeys, {
+        key,
         tmNode
       })
     )
