@@ -99,7 +99,7 @@ export default {
         component: 'Components',
         common: 'Common',
         debug: 'Debug',
-        alreadyHome: "You've already been in home page. No clicking."
+        alreadyHome: 'You are already in home page. No clicking anymore.'
       }
     })
     const menuItemsRef = computed(() => {

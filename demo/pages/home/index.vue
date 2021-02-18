@@ -101,9 +101,7 @@ export default {
   },
   methods: {
     handleStartClick () {
-      this.$router.push(
-        /^(\/[^/]+){2}/.exec(this.$route.path)[0] + '/doc/start'
-      )
+      this.$router.push(this.$route.path + '/docs/installation')
     },
     handleTitleMouseEnter () {
       this.hover = true
