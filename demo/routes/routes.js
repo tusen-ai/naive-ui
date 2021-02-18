@@ -4,12 +4,16 @@ import Site from '../Site.vue'
 export const docChildRoutes = withPrefix('/:lang/:theme/docs', [
   // basic docs
   {
-    path: '/intro',
-    component: () => import('../pages/docs/intro/index.entry')
+    path: '/installation',
+    component: () => import('../pages/docs/installation/index.entry')
   },
   {
-    path: '/start',
-    component: () => import('../pages/docs/start/index.entry')
+    path: '/usage',
+    component: () => import('../pages/docs/usage/index.entry')
+  },
+  {
+    path: '/supported-platforms',
+    component: () => import('../pages/docs/supported-platforms/index.entry')
   },
   {
     path: '/from-v1',
@@ -24,11 +28,7 @@ export const docChildRoutes = withPrefix('/:lang/:theme/docs', [
     component: () => import('../pages/docs/changelog/index.entry')
   },
   {
-    path: '/dev-guidelines',
-    component: () => import('../pages/docs/dev-guidelines/index.entry')
-  },
-  {
-    path: '/n-theme',
+    path: '/theme',
     component: () => import('../pages/docs/theme/index.entry')
   }
 ])

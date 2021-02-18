@@ -221,15 +221,14 @@ export default {
       if (value === 'doc') {
         if (!/^(\/[^/]+){2}\/docs/.test(this.$route.path)) {
           this.$router.push(
-            /^(\/[^/]+){2}/.exec(this.$route.path)[0] + '/docs/start'
+            /^(\/[^/]+){2}/.exec(this.$route.path)[0] + '/docs/installation'
           )
         }
       }
       if (value === 'component') {
         if (!/^(\/[^/]+){2}\/components/.test(this.$route.path)) {
           this.$router.push(
-            /^(\/[^/]+){2}/.exec(this.$route.path)[0] +
-              '/components/n-config-provider'
+            /^(\/[^/]+){2}/.exec(this.$route.path)[0] + '/components/n-button'
           )
         }
       }

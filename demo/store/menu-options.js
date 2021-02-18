@@ -51,84 +51,66 @@ function createItems (lang, theme, prefix, items) {
 export function createDocumentationMenuOptions ({ lang, theme, mode }) {
   return createItems(lang, theme, '/docs', [
     {
-      en: 'Naive UI',
-      zh: 'Naive UI',
-      path: '/intro'
+      en: 'Getting Started',
+      zh: '快速上手',
+      type: 'group',
+      children: [
+        {
+          en: 'Installation',
+          zh: '安装',
+          path: '/installation'
+        },
+        {
+          en: 'Usage',
+          zh: '使用方式',
+          path: '/usage'
+        },
+        {
+          en: 'Supported Platforms',
+          zh: '支持的平台',
+          path: '/supported-platforms'
+        }
+      ]
     },
     {
-      en: 'Get Started',
-      zh: '起步',
-      path: '/start'
+      en: 'Guides',
+      zh: '指南',
+      type: 'group',
+      children: [
+        {
+          en: 'Create Themed Component',
+          zh: '创建适配主题的组件',
+          path: '/theme'
+        },
+        {
+          en: 'Experimental Features',
+          zh: '试验性特性',
+          path: '/experimental-features'
+        }
+      ]
     },
     {
-      en: 'Change Log',
-      zh: '变更日志',
-      path: '/changelog'
-    },
-    {
-      en: 'Migrate From V1',
-      zh: '从 V1 升级',
-      path: '/from-v1'
-    },
-    {
-      en: 'Create Themed Component',
-      zh: '创建适配主题的组件',
-      path: '/n-theme'
-    },
-    {
-      en: 'Experimental Features',
-      zh: '试验性特性',
-      path: '/experimental-features'
+      en: 'Version',
+      zh: '版本',
+      type: 'group',
+      children: [
+        {
+          en: 'Change Log',
+          zh: '变更日志',
+          path: '/changelog'
+        },
+        {
+          en: 'Migrate From V1',
+          zh: '从 V1 升级',
+          path: '/from-v1'
+        }
+      ]
     }
   ])
 }
 
 export function createComponentMenuOptions ({ lang, theme, mode }) {
   return createItems(lang, theme, '/components', [
-    appendCounts({
-      zh: '配置组件',
-      en: 'Config Components',
-      type: 'group',
-      children: [
-        {
-          en: 'Config Provider',
-          zh: '配置提供者',
-          enSuffix: true,
-          path: '/n-config-provider'
-        },
-        {
-          en: 'Element',
-          zh: '元素',
-          enSuffix: true,
-          path: '/n-element'
-        }
-      ]
-    }),
-    appendCounts({
-      zh: '布局组件',
-      en: 'Layout Components',
-      type: 'group',
-      children: [
-        {
-          en: 'Layout',
-          zh: '布局',
-          enSuffix: true,
-          path: '/n-layout'
-        },
-        {
-          en: 'Grid',
-          zh: '栅格',
-          enSuffix: true,
-          path: '/n-grid'
-        },
-        {
-          en: 'Space',
-          zh: '间距',
-          enSuffix: true,
-          path: '/n-space'
-        }
-      ]
-    }),
     appendCounts({
       zh: '通用组件',
       en: 'Common Components',
@@ -533,6 +515,50 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           zh: '弹出提示',
           enSuffix: true,
           path: '/n-tooltip'
+        }
+      ]
+    }),
+    appendCounts({
+      zh: '布局组件',
+      en: 'Layout Components',
+      type: 'group',
+      children: [
+        {
+          en: 'Layout',
+          zh: '布局',
+          enSuffix: true,
+          path: '/n-layout'
+        },
+        {
+          en: 'Grid',
+          zh: '栅格',
+          enSuffix: true,
+          path: '/n-grid'
+        },
+        {
+          en: 'Space',
+          zh: '间距',
+          enSuffix: true,
+          path: '/n-space'
+        }
+      ]
+    }),
+    appendCounts({
+      zh: '配置组件',
+      en: 'Config Components',
+      type: 'group',
+      children: [
+        {
+          en: 'Config Provider',
+          zh: '配置提供者',
+          enSuffix: true,
+          path: '/n-config-provider'
+        },
+        {
+          en: 'Element',
+          zh: '元素',
+          enSuffix: true,
+          path: '/n-element'
         }
       ]
     }),

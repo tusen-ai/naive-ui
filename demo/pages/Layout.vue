@@ -2,7 +2,7 @@
   <n-service-layout
     ref="layoutInstRef"
     :padding-body="false"
-    :items="items"
+    :items="options"
     :sider-props="siderProps"
   >
     <router-view />
@@ -27,14 +27,18 @@ export default {
         : componentOptionsRef.value
     )
     watch(toRef(route, 'path'), (value, oldValue) => {
-      const langReg = /(zh-CN)|(en-US)/
-      if (value.replace(langReg, '') !== oldValue.replace(langReg, '')) {
+      const langAndThemeReg = /\/(zh-CN|en-US)\/(light|dark|os-theme)/g
+      // only theme & lang change do not restore the scroll status
+      if (
+        value.replace(langAndThemeReg, '') !==
+        oldValue.replace(langAndThemeReg, '')
+      ) {
         layoutInstRef.value.scrollTo(0, 0)
       }
     })
     return {
       layoutInstRef,
-      items: optionsRef,
+      options: optionsRef,
       siderProps: {
         style: {
           height: '100%'
