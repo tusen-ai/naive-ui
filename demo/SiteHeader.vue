@@ -28,25 +28,41 @@
         <n-button size="small" class="nav-picker" @click="handleThemeChange">
           {{ themeOptions[theme].label }}
         </n-button>
-        <n-button size="small" class="nav-picker" @click="handleLanguageChange">
-          {{ langOptions[lang].label }}
-        </n-button>
-        <n-button
+        <n-popselect
+          :options="langOptions"
+          v-model:value="lang"
+          overlap
+          placement="top"
+          trigger="click"
+        >
+          <n-button size="small" class="nav-picker">
+            {{ langOptionLabels[lang] }}
+          </n-button>
+        </n-popselect>
+        <n-popselect
           v-if="tusimple || dev"
-          size="small"
-          class="nav-picker"
-          @click="handleConfigProviderChange"
+          :options="configProviderOptions"
+          v-model:value="configProviderName"
+          overlap
+          placement="top"
+          trigger="click"
         >
-          {{ configProviderOptions[configProviderName].label }}
-        </n-button>
-        <n-button
+          <n-button size="small" class="nav-picker">
+            {{ configProviderLabels[configProviderName] }}
+          </n-button>
+        </n-popselect>
+        <n-popselect
           v-if="dev"
-          size="small"
-          class="nav-picker"
-          @click="handleModeChange"
+          :options="modeOptions"
+          v-model:value="displayMode"
+          overlap
+          placement="top"
+          trigger="click"
         >
-          {{ modeOptions[displayMode].label }}
-        </n-button>
+          <n-button size="small" class="nav-picker">{{
+            modeOptionLabels[displayMode]
+          }}</n-button>
+        </n-popselect>
         <n-button size="small">
           {{ version }}
         </n-button>
@@ -56,7 +72,7 @@
 </template>
 
 <script>
-import { computed, readonly, ref } from 'vue'
+import { computed, ref } from 'vue'
 import version from '../src/version'
 import { i18n } from './utils/composables'
 import {
@@ -141,36 +157,48 @@ export default {
       configProviderName: useConfigProviderName(),
       menuItems: menuItemsRef,
       themeOptions: themeOptionsRef,
-      langOptions: readonly({
-        'zh-CN': {
+      langOptionLabels: {
+        'zh-CN': '中文',
+        'en-US': 'English'
+      },
+      langOptions: [
+        {
           label: 'English',
-          next: 'en-US'
+          value: 'en-US'
         },
-        'en-US': {
+        {
           label: '中文',
-          next: 'zh-CN'
+          value: 'zh-CN'
         }
-      }),
-      modeOptions: readonly({
-        debug: {
-          label: 'Production',
-          next: 'common'
+      ],
+      modeOptionLabels: {
+        common: 'Prod',
+        debug: 'Debug'
+      },
+      modeOptions: [
+        {
+          label: 'Prod',
+          value: 'common'
         },
-        common: {
+        {
           label: 'Debug',
-          next: 'debug'
+          value: 'debug'
         }
-      }),
-      configProviderOptions: readonly({
-        default: {
-          label: 'Tusimple',
-          next: 'tusimple'
-        },
-        tusimple: {
+      ],
+      configProviderLabels: {
+        tusimple: 'Tusimple',
+        default: 'Default'
+      },
+      configProviderOptions: [
+        {
           label: 'Default',
-          next: 'default'
+          value: 'default'
+        },
+        {
+          label: 'Tusimple',
+          value: 'tusimple'
         }
-      })
+      ]
     }
   },
   computed: {

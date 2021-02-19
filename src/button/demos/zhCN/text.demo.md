@@ -3,7 +3,7 @@
 有些人也会叫他 `link` 按钮。
 
 ```html
-<n-button text size="large">
+<n-button text>
   <template #icon>
     <n-icon>
       <train-icon />
