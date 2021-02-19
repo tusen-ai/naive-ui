@@ -238,8 +238,7 @@ export const themeOverrides: GlobalThemeOverrides = {
   InternalSelection: {
     heightMedium: '32px',
     fontSizeMedium: '16px',
-    paddingSingle: '0 36px 0 12px',
-    border: '1px solid transparent'
+    paddingSingle: '0 36px 0 12px'
   },
   InternalSelectMenu: {
     height: '290px',
