@@ -232,8 +232,7 @@ export const themeOverrides: GlobalThemeOverrides = {
     paddingRightMedium: '12px',
     iconSize: '24px',
     borderHover: `1px solid ${colors.primaryColor}`,
-    borderFocus: `1px solid ${colors.primaryColor}`,
-    borderDisabled: '1px solid transparent'
+    borderFocus: `1px solid ${colors.primaryColor}`
   },
   InternalSelection: {
     heightMedium: '32px',
