@@ -1,4 +1,4 @@
-import { h, defineComponent } from 'vue'
+import { h, defineComponent, onBeforeMount, onBeforeUnmount } from 'vue'
 import { NConfigProvider, configProviderProps } from 'naive-ui'
 import { renderFilter, renderSorter } from './data-table'
 import { unconfigurableStyle, mountSvgDefs } from './unconfigurable-style'
@@ -9,6 +9,15 @@ export default defineComponent({
   name: 'TsConfigProvider',
   props: configProviderProps,
   setup () {
+    onBeforeMount(() => {
+      mountSvgDefs()
+      unconfigurableStyle.mount({
+        id: 'naive-ui/tusimple-theme'
+      })
+    })
+    onBeforeUnmount(() => {
+      unconfigurableStyle.unmount()
+    })
     return {
       componentOptions: {
         Pagination: {
@@ -27,13 +36,7 @@ export default defineComponent({
         DynamicInput: {
           buttonSize: 'small'
         }
-      } as const,
-      onBeforeMount () {
-        mountSvgDefs()
-        unconfigurableStyle.mount({
-          id: 'naive-ui/tusimple-theme'
-        })
-      }
+      } as const
     }
   },
   render () {
@@ -43,7 +46,6 @@ export default defineComponent({
         themeOverrides={themeOverrides}
         componentOptions={this.componentOptions}
         icons={icons}
-        onBeforeMount={this.onBeforeMount}
       >
         {this.$slots}
       </NConfigProvider>
