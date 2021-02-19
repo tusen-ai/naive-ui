@@ -32,7 +32,7 @@
           {{ langOptions[lang].label }}
         </n-button>
         <n-button
-          v-if="dev"
+          v-if="tusimple || dev"
           size="small"
           class="nav-picker"
           @click="handleConfigProviderChange"
@@ -133,6 +133,7 @@ export default {
       searchInputValue: ref(''),
       version,
       dev: __DEV__,
+      tusimple: process.env.TUSIMPLE,
       displayMode: useDisplayMode(),
       lang: useLocaleName(),
       theme: useThemeName(),

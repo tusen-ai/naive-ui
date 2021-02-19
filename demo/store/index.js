@@ -70,9 +70,10 @@ export function siteSetup () {
     return value === 'dark' ? darkTheme : null
   })
   // config provider
-  const configProviderNameRef = ref('default')
+  const configProviderNameRef = ref(
+    process.env.TUSIMPLE ? 'tusimple' : 'default'
+  )
   const configProviderRef = computed(() => {
-    if (process.env.TUSIMPLE) return TsConfigProvider
     return configProviderNameRef.value === 'tusimple'
       ? TsConfigProvider
       : NConfigProvider
