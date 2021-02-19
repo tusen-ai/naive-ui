@@ -8,13 +8,12 @@ import {
   CSSProperties,
   watch,
   nextTick,
-  onMounted,
   reactive,
   toRef,
   Ref,
   renderSlot
 } from 'vue'
-import { VResizeObserver } from 'vueuc'
+import { VResizeObserver, VXScroll } from 'vueuc'
 import { throttle } from 'lodash-es'
 import { useCompitable, onFontsReady, useMergedState } from 'vooks'
 import { NBaseClose } from '../../_internal'
@@ -93,11 +92,8 @@ export default defineComponent({
   setup (props) {
     const themeRef = useTheme('Tabs', 'Tabs', style, tabsLight, props)
 
-    const navRef = ref<HTMLElement | null>(null)
     const labelWrapperRef = ref<HTMLElement | null>(null)
     const labelBarRef = ref<HTMLElement | null>(null)
-
-    let preventYWheel = false
 
     const panelsRef = ref<TabPaneProps[]>([])
     const transitionDisabledRef = ref(false)
@@ -119,27 +115,11 @@ export default defineComponent({
         justifyContent: props.justifyContent
       }
     })
-    const panelLabelsRef = computed(() => {
-      return panelsRef.value.map((panel) => panel.label)
-    })
 
     watch(mergedValueRef, () => {
       updateCurrentBarPosition()
     })
-    watch(panelLabelsRef, () => {
-      void nextTick(updateScrollStatus)
-    })
 
-    function updateScrollStatus (): void {
-      const { value: navScrollEl } = navRef
-      if (navScrollEl) {
-        if (navScrollEl.scrollWidth > navScrollEl.offsetWidth) {
-          preventYWheel = true
-        } else {
-          preventYWheel = false
-        }
-      }
-    }
     function addPanel (panelProps: TabPaneProps): void {
       panelsRef.value.push(panelProps)
     }
@@ -166,7 +146,7 @@ export default defineComponent({
       const value = mergedValueRef.value
       for (const panel of panelsRef.value) {
         if (panel.name === value) {
-          const labelEl = navRef.value?.querySelector(
+          const labelEl = labelWrapperRef.value?.querySelector(
             `[data-name="${panel.name}"]`
           )
           if (labelEl) {
@@ -175,11 +155,6 @@ export default defineComponent({
           break
         }
       }
-    }
-    function handleTabsWheel (e: WheelEvent): void {
-      if (!preventYWheel || !e.deltaY) return
-      ;(e.currentTarget as HTMLElement).scrollLeft += e.deltaY + e.deltaX
-      e.preventDefault()
     }
     function handleTabClick (
       e: MouseEvent,
@@ -201,7 +176,7 @@ export default defineComponent({
     }
     const handleNavResize = throttle(function handleNavResize () {
       if (props.type === 'card') {
-        updateScrollStatus()
+        // do nothing
       } else if (props.type === 'line') {
         transitionDisabledRef.value = true
         void nextTick(() => {
@@ -210,12 +185,6 @@ export default defineComponent({
         })
       }
     }, 64)
-    const handleScrollContentResize = throttle(
-      function handleScrollContentResize () {
-        updateScrollStatus()
-      },
-      64
-    )
     provide<TabsInjection>(
       'NTabs',
       reactive({
@@ -225,27 +194,20 @@ export default defineComponent({
         addPanel
       })
     )
-    onMounted(() => {
-      updateScrollStatus()
-    })
     onFontsReady(() => {
-      updateScrollStatus()
       updateCurrentBarPosition()
     })
     return {
       mergedValue: mergedValueRef,
       compitableOnValueChange: compitableOnValueChangeRef,
-      navRef,
       labelWrapperRef,
       labelBarRef,
       labelWrapperStyle: labelWrapperStyleRef,
       panels: panelsRef,
       transitionDisabled: transitionDisabledRef,
       handleTabClick,
-      handleScrollContentResize,
       handleNavResize,
       handleCloseClick,
-      handleTabsWheel,
       cssVars: computed(() => {
         const { labelSize } = props
         const {
@@ -311,68 +273,55 @@ export default defineComponent({
         <VResizeObserver onResize={this.handleNavResize}>
           {{
             default: () => (
-              <div
-                ref="navRef"
-                class="n-tabs-nav"
-                onWheel={this.handleTabsWheel}
-                style={this.navStyle}
-              >
-                <VResizeObserver onResize={this.handleScrollContentResize}>
-                  {{
-                    default: () => (
-                      <div ref="labelWrapperRef" class="n-tabs-label-wrapper">
-                        <div style={this.labelWrapperStyle}>
-                          {this.panels.map((panel, i) => (
-                            <div
-                              key={i}
-                              data-name={panel.name}
-                              class={[
-                                'n-tabs-label',
-                                {
-                                  'n-tabs-label--active':
-                                    this.mergedValue === panel.name,
-                                  'n-tabs-label--disabled': panel.disabled
-                                }
-                              ]}
-                              onClick={(e) =>
-                                this.handleTabClick(
-                                  e,
-                                  panel.name,
-                                  panel.disabled
-                                )
-                              }
-                            >
-                              <span class="n-tabs-label__label">
-                                {panel.label}
-                              </span>
-                              {this.closable && this.type === 'card' ? (
-                                <NBaseClose
-                                  class="n-tabs-label__close"
-                                  onClick={(e) =>
-                                    this.handleCloseClick(e, panel)
-                                  }
-                                />
-                              ) : null}
-                            </div>
-                          ))}
-                        </div>
-                        {this.type === 'line' ? (
+              <VXScroll class="n-tabs-nav" style={this.navStyle}>
+                {{
+                  default: () => (
+                    <div ref="labelWrapperRef" class="n-tabs-label-wrapper">
+                      <div style={this.labelWrapperStyle}>
+                        {this.panels.map((panel, i) => (
                           <div
-                            ref="labelBarRef"
+                            key={i}
+                            data-name={panel.name}
                             class={[
-                              'n-tabs-label-bar',
+                              'n-tabs-label',
                               {
-                                'n-tabs-label-bar--transition-disabled': this
-                                  .transitionDisabled
+                                'n-tabs-label--active':
+                                  this.mergedValue === panel.name,
+                                'n-tabs-label--disabled': panel.disabled
                               }
                             ]}
-                          />
-                        ) : null}
+                            onClick={(e) =>
+                              this.handleTabClick(e, panel.name, panel.disabled)
+                            }
+                          >
+                            <span class="n-tabs-label__label">
+                              {panel.label}
+                            </span>
+                            {this.closable && this.type === 'card' ? (
+                              <NBaseClose
+                                class="n-tabs-label__close"
+                                onClick={(e) => this.handleCloseClick(e, panel)}
+                              />
+                            ) : null}
+                          </div>
+                        ))}
                       </div>
-                    )
-                  }}
-                </VResizeObserver>
-              </div>
+                      {this.type === 'line' ? (
+                        <div
+                          ref="labelBarRef"
+                          class={[
+                            'n-tabs-label-bar',
+                            {
+                              'n-tabs-label-bar--transition-disabled': this
+                                .transitionDisabled
+                            }
+                          ]}
+                        />
+                      ) : null}
+                    </div>
+                  )
+                }}
+              </VXScroll>
             )
           }}
         </VResizeObserver>
