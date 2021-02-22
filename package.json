@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "2.0.0-rc.1",
+  "version": "2.0.0-rc.2",
   "description": "A Vue UI Framework. Caring About Styles, Themed, Batteries Included, Not Rather Slow.",
   "main": "lib/index.js",
   "module": "es/index.js",
