@@ -12,7 +12,7 @@
       <n-message-provider>
         <n-notification-provider>
           <n-dialog-provider>
-            <router-view />
+            <Site />
           </n-dialog-provider>
         </n-notification-provider>
       </n-message-provider>
@@ -22,9 +22,13 @@
 
 <script>
 import { siteSetup } from './store'
+import Site from './Site.vue'
 
 export default {
   name: 'SiteProvider',
+  components: {
+    Site
+  },
   setup () {
     return siteSetup()
   }

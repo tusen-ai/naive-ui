@@ -1,5 +1,4 @@
 import { withPrefix } from './utils'
-import Site from '../Site.vue'
 
 export const docChildRoutes = withPrefix('/:lang/:theme/docs', [
   // basic docs
@@ -313,30 +312,21 @@ export const componentChildRoutes = withPrefix('/:lang/:theme/components', [
 
 export const routes = [
   {
-    name: 'site',
+    name: 'home',
     path: '/:lang/:theme',
-    // Keep the wrapper router view, since if not the route won't be initialized
-    // after them site is mounted (no matched route)
-    component: Site,
-    children: [
-      {
-        name: 'home',
-        path: '/:lang/:theme',
-        component: () => import('../pages/home/index.vue')
-      },
-      {
-        name: 'docs',
-        path: '/:lang/:theme/docs',
-        component: () => import('../pages/Layout.vue'),
-        children: docChildRoutes
-      },
-      {
-        name: 'components',
-        path: '/:lang/:theme/components',
-        component: () => import('../pages/Layout.vue'),
-        children: componentChildRoutes
-      }
-    ]
+    component: () => import('../pages/home/index.vue')
+  },
+  {
+    name: 'docs',
+    path: '/:lang/:theme/docs',
+    component: () => import('../pages/Layout.vue'),
+    children: docChildRoutes
+  },
+  {
+    name: 'components',
+    path: '/:lang/:theme/components',
+    component: () => import('../pages/Layout.vue'),
+    children: componentChildRoutes
   },
   {
     name: 'not-found',

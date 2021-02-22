@@ -16,4 +16,6 @@ app.use(router)
 app.use(naive)
 installDemoComponents(app)
 
-app.mount('#app')
+router.isReady().then(() => {
+  app.mount('#app')
+})
