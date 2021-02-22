@@ -1,4 +1,4 @@
-import { c, cB, cE, cM } from '../../../_utils/cssr'
+import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 import iconSwitchTransition from '../../../_styles/transitions/icon-switch'
 
 // vars:
@@ -117,6 +117,11 @@ export default cB('steps', `
   cM('vertical', {
     flexDirection: 'column'
   }, [
+    cNotM('show-description', [
+      cB('step', {
+        paddingBottom: '8px'
+      })
+    ]),
     cB('step', {
       marginBottom: '16px'
     }, [

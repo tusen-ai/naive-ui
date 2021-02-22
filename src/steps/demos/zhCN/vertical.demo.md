@@ -11,6 +11,7 @@
       title="Let It Be"
       description="When I find myself in times of trouble Mother Mary comes to me"
     />
+    <n-step title="Break" />
     <n-step
       title="Come Together"
       description="Here come old flat top He come grooving up slowly"

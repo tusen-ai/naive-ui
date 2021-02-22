@@ -107,8 +107,13 @@ export default defineComponent({
     }
   },
   render () {
+    const showDescription =
+      this.description !== undefined || this.$slots.default
     return (
-      <div class="n-step" style={this.cssVars as CSSProperties}>
+      <div
+        class={['n-step', { 'n-step--show-description': showDescription }]}
+        style={this.cssVars as CSSProperties}
+      >
         <div class="n-step-indicator">
           <div class="n-step-indicator-slot">
             <NIconSwitchTransition>
@@ -141,7 +146,7 @@ export default defineComponent({
             <div class="n-step-content-header__title">{this.title}</div>
             {!this.vertical ? <div class="n-step-splitor" /> : null}
           </div>
-          {this.description !== undefined || this.$slots.default ? (
+          {showDescription ? (
             <div class="n-step-content__description">
               {renderSlot(this.$slots, 'default', undefined, () => [
                 this.description
