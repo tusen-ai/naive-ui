@@ -195,9 +195,9 @@ export default defineComponent({
                 'n-dropdown-option-body--active': this.active
               }
             ],
-            onMouseMove: this.handleMouseMove,
-            onMouseEnter: this.handleMouseEnter,
-            onMouseLeave: this.handleMouseLeave,
+            onMousemove: this.handleMouseMove,
+            onMouseenter: this.handleMouseEnter,
+            onMouseleave: this.handleMouseLeave,
             onClick: this.handleClick
           },
           [

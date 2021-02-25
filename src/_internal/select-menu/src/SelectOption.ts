@@ -122,8 +122,8 @@ export default defineComponent({
         ],
         style: rawNode.style,
         onClick: handleClick,
-        onMouseEnter: handleMouseEnter,
-        onMouseMove: handleMouseMove
+        onMouseenter: handleMouseEnter,
+        onMousemove: handleMouseMove
       },
       children
     )

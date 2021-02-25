@@ -29,8 +29,8 @@ function appendEvents (
   vNode: VNode,
   events: {
     onClick: (e: MouseEvent) => void
-    onMouseEnter: (e: MouseEvent) => void
-    onMouseLeave: (e: MouseEvent) => void
+    onMouseenter: (e: MouseEvent) => void
+    onMouseleave: (e: MouseEvent) => void
   }
 ): void {
   Object.entries(events).forEach(([key, handler]) => {
@@ -360,8 +360,8 @@ export default defineComponent({
 
         appendEvents(triggerVNode, {
           onClick: this.handleClick,
-          onMouseEnter: this.handleMouseEnter,
-          onMouseLeave: this.handleMouseLeave
+          onMouseenter: this.handleMouseEnter,
+          onMouseleave: this.handleMouseLeave
         })
       }
       this.setTriggerVNode(triggerVNode)

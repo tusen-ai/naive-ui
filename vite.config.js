@@ -26,6 +26,22 @@ module.exports = {
     __DEV__: process.env.NODE_ENV !== 'production'
   },
   optimizeDeps: {
+    include: [
+      '@css-render/plugin-bem',
+      'async-validator',
+      'css-render',
+      'date-fns',
+      'evtd',
+      'highlight.js',
+      'lodash-es',
+      'seemly',
+      'treemate',
+      'vdirs',
+      'vooks',
+      'vue',
+      'vue-router',
+      'vueuc'
+    ],
     exclude: ['__INDEX__']
   },
   build: {

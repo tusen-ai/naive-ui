@@ -197,8 +197,8 @@ export default defineComponent({
                 ],
                 ref: 'body',
                 style: this.style,
-                onMouseEnter: this.handleMouseEnter,
-                onMouseLeave: this.handleMouseLeave
+                onMouseenter: this.handleMouseEnter,
+                onMouseleave: this.handleMouseLeave
               },
               this.$attrs
             ),
