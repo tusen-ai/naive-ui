@@ -81,8 +81,8 @@ export default defineComponent({
       default: false
     },
     onConfirmClick: Function as PropType<() => void>,
-    onFocusIn: Function as PropType<(e: FocusEvent) => void>,
-    onFocusOut: Function as PropType<(e: FocusEvent) => void>,
+    onFocusin: Function as PropType<(e: FocusEvent) => void>,
+    onFocusout: Function as PropType<(e: FocusEvent) => void>,
     onFocusDetectorFocus: Function as PropType<() => void>,
     onKeydown: Function as PropType<(e: KeyboardEvent) => void>
   },
@@ -141,8 +141,8 @@ export default defineComponent({
       {
         tabindex: 0,
         class: 'n-time-picker-panel',
-        onFocusIn: this.onFocusIn,
-        onFocusOut: this.onFocusOut,
+        onFocusin: this.onFocusin,
+        onFocusout: this.onFocusout,
         onKeydown: this.onKeydown
       },
       [

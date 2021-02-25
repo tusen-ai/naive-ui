@@ -24,11 +24,11 @@ export default defineComponent({
       default: false
     },
     onClick: Function as PropType<(e: MouseEvent) => void>,
-    onDragStart: Function as PropType<(e: DragEvent) => void>,
-    onDragEnd: Function as PropType<(e: DragEvent) => void>,
-    onDragEnter: Function as PropType<(e: DragEvent) => void>,
-    onDragOver: Function as PropType<(e: DragEvent) => void>,
-    onDragLeave: Function as PropType<(e: DragEvent) => void>,
+    onDragstart: Function as PropType<(e: DragEvent) => void>,
+    onDragend: Function as PropType<(e: DragEvent) => void>,
+    onDragenter: Function as PropType<(e: DragEvent) => void>,
+    onDragover: Function as PropType<(e: DragEvent) => void>,
+    onDragleave: Function as PropType<(e: DragEvent) => void>,
     onDrop: Function as PropType<
     (e: DragEvent, dropPosition: 'bottom' | 'center' | 'top') => void
     >
@@ -42,20 +42,20 @@ export default defineComponent({
       if (onClick) onClick(e)
     }
     function doDragStart (e: DragEvent): void {
-      const { onDragStart } = props
-      if (onDragStart) onDragStart(e)
+      const { onDragstart } = props
+      if (onDragstart) onDragstart(e)
     }
     function doDragEnter (e: DragEvent): void {
-      const { onDragEnter } = props
-      if (onDragEnter) onDragEnter(e)
+      const { onDragenter } = props
+      if (onDragenter) onDragenter(e)
     }
     function doDragEnd (e: DragEvent): void {
-      const { onDragEnd } = props
-      if (onDragEnd) onDragEnd(e)
+      const { onDragend } = props
+      if (onDragend) onDragend(e)
     }
     function doDragLeave (e: DragEvent): void {
-      const { onDragLeave } = props
-      if (onDragLeave) onDragLeave(e)
+      const { onDragleave } = props
+      if (onDragleave) onDragleave(e)
     }
     // function doDragOver (e: DragEvent) {
     //   const { onDragOver } = props

@@ -136,7 +136,7 @@ const TreeNode = defineComponent({
             onDragenter: this.handleDragEnter,
             onDragstart: this.handleDragStart,
             onDragleave: this.handleDragLeave,
-            onDragEnd: this.handleDragEnd,
+            onDragend: this.handleDragEnd,
             onDrop: this.handleDrop
           },
           {

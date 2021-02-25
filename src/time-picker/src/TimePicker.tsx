@@ -663,7 +663,7 @@ export default defineComponent({
                                   isValueInvalid={this.isValueInvalid}
                                   nowText={this.localizedNow}
                                   confirmText={this.localizedPositiveText}
-                                  onFocusOut={this.handleMenuFocusOut}
+                                  onFocusout={this.handleMenuFocusOut}
                                   onKeydown={this.handleMenuKeyDown}
                                   onHourClick={this.handleHourClick}
                                   onMinuteClick={this.handleMinuteClick}

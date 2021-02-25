@@ -112,14 +112,14 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
-    onDragEnter: [Function, Array] as PropType<
+    onDragenter: [Function, Array] as PropType<
     MaybeArray<(e: DragInfo) => void>
     >,
-    onDragLeave: [Function, Array] as PropType<
+    onDragleave: [Function, Array] as PropType<
     MaybeArray<(e: DragInfo) => void>
     >,
-    onDragEnd: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
-    onDragStart: [Function, Array] as PropType<
+    onDragend: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
+    onDragstart: [Function, Array] as PropType<
     MaybeArray<(e: DragInfo) => void>
     >,
     onDrop: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
@@ -271,20 +271,20 @@ export default defineComponent({
     }
     // Drag & Drop
     function doDragEnter (info: DragInfo): void {
-      const { onDragEnter } = props
-      if (onDragEnter) call(onDragEnter, info)
+      const { onDragenter } = props
+      if (onDragenter) call(onDragenter, info)
     }
     function doDragLeave (info: DragInfo): void {
-      const { onDragLeave } = props
-      if (onDragLeave) call(onDragLeave, info)
+      const { onDragleave } = props
+      if (onDragleave) call(onDragleave, info)
     }
     function doDragEnd (info: DragInfo): void {
-      const { onDragEnd } = props
-      if (onDragEnd) call(onDragEnd, info)
+      const { onDragend } = props
+      if (onDragend) call(onDragend, info)
     }
     function doDragStart (info: DragInfo): void {
-      const { onDragStart } = props
-      if (onDragStart) call(onDragStart, info)
+      const { onDragstart } = props
+      if (onDragstart) call(onDragstart, info)
     }
     function doDrop (info: DropInfo): void {
       const { onDrop } = props
