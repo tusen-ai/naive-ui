@@ -50,7 +50,7 @@ unknown,
 infer V
 >
   ? {
-    [k in keyof V]?: ExtractPeerOverrides<T>
+    [k in keyof V]?: ExtractPeerOverrides<V[k]>
   }
   : T
 

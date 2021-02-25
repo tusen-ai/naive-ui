@@ -1,6 +1,5 @@
 import { h, ref, defineComponent, inject, computed, renderSlot } from 'vue'
 import { VResizeObserver } from 'vueuc'
-import 'resize-observer-polyfill'
 import { formatLength } from '../../_utils'
 import TableHeader from './TableParts/Header'
 import TableBody from './TableParts/Body'

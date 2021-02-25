@@ -16,10 +16,7 @@ export default defineComponent({
       type: Number as PropType<number | null>,
       default: null
     },
-    onItemClick: {
-      type: Function as PropType<(value: number) => void>,
-      required: true
-    }
+    onItemClick: Function as PropType<(value: number) => void>
   },
   render () {
     const { activeValue, onItemClick } = this
