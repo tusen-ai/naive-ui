@@ -99,7 +99,7 @@
     "lodash": "^4.17.20",
     "marked": "^2.0.0",
     "prettier": "^2.2.1",
-    "typescript": "^4.1.3",
+    "typescript": "~4.1.3",
     "vite": "^2.0.1"
   },
   "dependencies": {
@@ -119,7 +119,7 @@
     "vdirs": "^0.0.3",
     "vfonts": "^0.0.1",
     "vooks": "0.0.8",
-    "vue": "^3.0.5",
+    "vue": "^3.0.6",
     "vue-router": "^4.0.3",
     "vueuc": "^0.2.4"
   },

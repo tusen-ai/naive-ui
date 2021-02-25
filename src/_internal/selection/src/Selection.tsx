@@ -461,7 +461,6 @@ export default defineComponent({
         onMousedown={this.handleMouseDown}
         onKeyup={this.onKeyup}
         onKeydown={this.onKeydown}
-        // @ts-expect-error
         onFocusin={this.handleFocusin}
       >
         {/* multiple */}
