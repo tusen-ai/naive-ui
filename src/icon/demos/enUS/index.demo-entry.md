@@ -1,6 +1,6 @@
 # Icon
 
-It is recommend to use [xicons](https://xicons.vercel.app/) as your icon library.
+It is recommend to use [xicons](https://www.xicons.org) as your icon library.
 
 ## Demos
 

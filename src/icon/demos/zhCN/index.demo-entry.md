@@ -1,6 +1,6 @@
 # 图标 Icon
 
-Naive-UI 推荐使用 [xicons](https://xicons.vercel.app/) 作为图标库。
+Naive-UI 推荐使用 [xicons](https://www.xicons.org) 作为图标库。
 
 ## 演示
 

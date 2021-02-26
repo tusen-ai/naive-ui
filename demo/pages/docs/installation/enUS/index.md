@@ -18,7 +18,7 @@ npm i -D vfonts
 
 ## Icons
 
-naive-ui recommends using [xicons](https://xicons.vercel.app/) as icon library.
+naive-ui recommends using [xicons](https://www.xicons.org) as icon library.
 
 ## Design Resources
 

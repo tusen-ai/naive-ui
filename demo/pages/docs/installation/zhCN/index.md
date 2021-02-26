@@ -18,7 +18,7 @@ npm i -D vfonts
 
 ## 图标
 
-naive-ui 建议使用 [xicons](https://xicons.vercel.app/) 作为图标库。
+naive-ui 建议使用 [xicons](https://www.xicons.org) 作为图标库。
 
 ## 设计资源
 
