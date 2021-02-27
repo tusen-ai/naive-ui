@@ -22,6 +22,9 @@
     - `target` => `listen-to`
 - [x] alert
 - [x] anchor
+  - new
+    - `show-rail` props
+    - `show-background` props
   - deprecate
     - `target` => `listen-to`
 - [x] auto-complete

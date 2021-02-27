@@ -10,48 +10,52 @@ import {
 } from 'vue'
 import { getScrollParent, unwrapElement } from 'seemly'
 import { useStyle } from '../../_mixins'
-import { warn } from '../../_utils'
+import { warn, keysOf } from '../../_utils'
 import style from './styles/index.cssr'
+
+export const affixProps = {
+  listenTo: {
+    type: [String, Object] as PropType<
+    string | (() => HTMLElement) | undefined
+    >,
+    default: undefined
+  },
+  offsetTop: {
+    type: Number,
+    default: undefined
+  },
+  top: {
+    type: Number,
+    default: undefined
+  },
+  offsetBottom: {
+    type: Number,
+    default: undefined
+  },
+  bottom: {
+    type: Number,
+    default: undefined
+  },
+  position: {
+    type: String,
+    default: 'fix'
+  },
+  // deprecated
+  target: {
+    type: Function as PropType<(() => HTMLElement) | undefined>,
+    validator: () => {
+      warn('affix', '`target` is deprecated, please use `listen-to` instead.')
+      return true
+    },
+    default: undefined
+  }
+} as const
+
+export const affixPropKeys = keysOf(affixProps)
 
 export default defineComponent({
   name: 'Affix',
-  props: {
-    listenTo: {
-      type: [String, Object] as PropType<
-      string | (() => HTMLElement) | undefined
-      >,
-      default: undefined
-    },
-    offsetTop: {
-      type: Number,
-      default: undefined
-    },
-    top: {
-      type: Number,
-      default: undefined
-    },
-    offsetBottom: {
-      type: Number,
-      default: undefined
-    },
-    bottom: {
-      type: Number,
-      default: undefined
-    },
-    position: {
-      type: String,
-      default: 'fix'
-    },
-    // deprecated
-    target: {
-      type: Function as PropType<(() => HTMLElement) | undefined>,
-      validator: () => {
-        warn('affix', '`target` is deprecated, please use `listen-to` instead.')
-        return true
-      },
-      default: undefined
-    }
-  },
+  props: affixProps,
   setup (props) {
     useStyle('Affix', style)
     const scrollElementRef = ref<HTMLElement | null>(null)

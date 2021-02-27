@@ -14,7 +14,7 @@ import {
 } from 'vue'
 import { getScrollParent, unwrapElement } from 'seemly'
 import { onFontsReady } from 'vooks'
-import { warn } from '../../_utils'
+import { warn, keysOf } from '../../_utils'
 import type { AnchorInjection } from './Link'
 
 export interface BaseAnchorRef {
@@ -36,33 +36,42 @@ function getOffset (
   }
 }
 
+export const baseAnchorProps = {
+  listenTo: [String, Object] as PropType<string | (() => HTMLElement)>,
+  showRail: {
+    type: Boolean,
+    default: true
+  },
+  showBackground: {
+    type: Boolean,
+    default: true
+  },
+  bound: {
+    type: Number,
+    default: 12
+  },
+  ignoreGap: {
+    type: Boolean,
+    default: false
+  },
+  // deprecated
+  target: {
+    type: Function as PropType<(() => HTMLElement) | undefined>,
+    validator: () => {
+      if (__DEV__) {
+        warn('anchor', '`target` is deprecated, please use`listen-to` instead.')
+      }
+      return true
+    },
+    default: undefined
+  }
+} as const
+
+export const baseAnchorPropKeys = keysOf(baseAnchorProps)
+
 export default defineComponent({
   name: 'BaseAnchor',
-  props: {
-    listenTo: [String, Object] as PropType<string | (() => HTMLElement)>,
-    bound: {
-      type: Number,
-      default: 12
-    },
-    ignoreGap: {
-      type: Boolean,
-      default: false
-    },
-    // deprecated
-    target: {
-      type: Function as PropType<(() => HTMLElement) | undefined>,
-      validator: () => {
-        if (__DEV__) {
-          warn(
-            'anchor',
-            '`target` is deprecated, please use`listen-to` instead.'
-          )
-        }
-        return true
-      },
-      default: undefined
-    }
-  },
+  props: baseAnchorProps,
   setup (props) {
     let scrollElement: HTMLElement | null
     const collectedLinkHrefs: string[] = markRaw([])
@@ -111,10 +120,10 @@ export default defineComponent({
       const { value: barEl } = barRef
       const { value: slotEl } = slotRef
       const { value: selfEl } = selfRef
-      if (!selfEl || !barEl || !slotEl) return
+      if (!selfEl || !barEl) return
       if (!transition) {
         barEl.style.transition = 'none'
-        slotEl.style.transition = 'none'
+        if (slotEl) slotEl.style.transition = 'none'
       }
       const { offsetHeight, offsetWidth } = linkTitleEl
       const {
@@ -129,15 +138,17 @@ export default defineComponent({
       const offsetLeft = linkTitleClientLeft - anchorClientLeft
       barEl.style.top = `${offsetTop}px`
       barEl.style.height = `${offsetHeight}px`
-      slotEl.style.top = `${offsetTop}px`
-      slotEl.style.height = `${offsetHeight}px`
-      slotEl.style.maxWidth = `${offsetWidth + offsetLeft}px`
+      if (slotEl) {
+        slotEl.style.top = `${offsetTop}px`
+        slotEl.style.height = `${offsetHeight}px`
+        slotEl.style.maxWidth = `${offsetWidth + offsetLeft}px`
+      }
       void barEl.offsetHeight
-      void slotEl.offsetHeight
+      if (slotEl) void slotEl.offsetHeight
 
       if (!transition) {
         barEl.style.transition = ''
-        slotEl.style.transition = ''
+        if (slotEl) slotEl.style.transition = ''
       }
     }
     function setActiveHref (href: string, transition = true): void {
@@ -286,19 +297,26 @@ export default defineComponent({
   },
   render () {
     return (
-      <div class="n-anchor" ref="selfRef">
-        <div ref="slotRef" class="n-anchor-link-background" />
-        <div class="n-anchor-rail">
-          <div
-            ref="barRef"
-            class={[
-              'n-anchor-rail__bar',
-              {
-                'n-anchor-rail__bar--active': this.activeHref !== null
-              }
-            ]}
-          />
-        </div>
+      <div
+        class={['n-anchor', this.showRail && 'n-anchor--show-rail']}
+        ref="selfRef"
+      >
+        {this.showRail && this.showBackground ? (
+          <div ref="slotRef" class="n-anchor-link-background" />
+        ) : null}
+        {this.showRail ? (
+          <div class="n-anchor-rail">
+            <div
+              ref="barRef"
+              class={[
+                'n-anchor-rail__bar',
+                {
+                  'n-anchor-rail__bar--active': this.activeHref !== null
+                }
+              ]}
+            />
+          </div>
+        ) : null}
         {renderSlot(this.$slots, 'default')}
       </div>
     )

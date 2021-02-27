@@ -1,4 +1,4 @@
-import { c, cE, cB, cM } from '../../../_utils/cssr'
+import { c, cE, cB, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --link-color
@@ -51,15 +51,16 @@ export default cB('anchor', `
       cM('active', {
         backgroundColor: 'var(--rail-color-active)'
       })
-    ]),
-    c('+', [
+    ])
+  ]),
+  cNotM('show-rail', [
+    c('>', [
       cB('anchor-link', {
-        marginTop: 0
+        paddingLeft: 0
       })
     ])
   ]),
   cB('anchor-link', `
-    margin-top: .5em;
     padding-left: 16px;
     position: relative;
     line-height: 1.5;
@@ -68,10 +69,10 @@ export default cB('anchor', `
     display: flex;
     flex-direction: column;
   `, [
-    c('+', [
-      cB('anchor-link', {
-        paddingLeft: '16px'
-      })
+    c('+, >', [
+      cB('anchor-link', `
+        margin-top: .5em;
+      `)
     ]),
     cE('title', `
       outline: none;

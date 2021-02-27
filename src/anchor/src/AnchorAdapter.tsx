@@ -1,11 +1,13 @@
-import { h, defineComponent, computed, ref, CSSProperties, PropType } from 'vue'
+import { h, defineComponent, computed, ref, CSSProperties } from 'vue'
 import { NAffix } from '../../affix'
+import { affixProps, affixPropKeys } from '../../affix/src/Affix'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
+import { keep } from '../../_utils'
 import { anchorLight } from '../styles'
 import type { AnchorTheme } from '../styles'
 import style from './styles/index.cssr'
-import NBaseAnchor from './BaseAnchor'
+import NBaseAnchor, { baseAnchorProps, baseAnchorPropKeys } from './BaseAnchor'
 import type { BaseAnchorRef } from './BaseAnchor'
 
 export interface AnchorRef {
@@ -16,52 +18,12 @@ export default defineComponent({
   name: 'Anchor',
   props: {
     ...(useTheme.props as ThemeProps<AnchorTheme>),
-    top: {
-      type: Number,
-      default: undefined
-    },
     affix: {
       type: Boolean,
       default: false
     },
-    position: {
-      type: String,
-      default: undefined
-    },
-    bottom: {
-      type: Number,
-      default: undefined
-    },
-    offsetBottom: {
-      type: Number,
-      default: undefined
-    },
-    offsetTop: {
-      type: Number,
-      default: undefined
-    },
-    bound: {
-      type: Number,
-      default: 12
-    },
-    ignoreGap: {
-      type: Boolean,
-      default: false
-    },
-    listenTo: {
-      type: [String, Object] as PropType<
-      string | (() => HTMLElement) | undefined
-      >,
-      default: undefined
-    },
-    // deprecated
-    target: {
-      type: Function as PropType<(() => HTMLElement) | undefined>,
-      validator: () => {
-        return true
-      },
-      default: undefined
-    }
+    ...affixProps,
+    ...baseAnchorProps
   },
   setup (props) {
     const themeRef = useTheme('Anchor', 'Anchor', style, anchorLight, props)
@@ -105,10 +67,7 @@ export default defineComponent({
       <NBaseAnchor
         ref="anchorRef"
         style={this.cssVars as CSSProperties}
-        listenTo={this.listenTo}
-        bound={this.bound}
-        target={this.target}
-        ignoreGap={this.ignoreGap}
+        {...keep(this, baseAnchorPropKeys)}
       >
         {this.$slots}
       </NBaseAnchor>
@@ -116,15 +75,7 @@ export default defineComponent({
     return !this.affix ? (
       anchorNode
     ) : (
-      <NAffix
-        listenTo={this.listenTo}
-        top={this.top}
-        bottom={this.bottom}
-        offsetTop={this.offsetTop}
-        offsetBottom={this.offsetBottom}
-        position={this.position}
-        target={this.target}
-      >
+      <NAffix {...keep(this, affixPropKeys)}>
         {{ default: () => anchorNode }}
       </NAffix>
     )

@@ -11,7 +11,6 @@ basic
 ignore-gap
 affix
 scrollto
-
 ```
 
 ## Props
@@ -22,6 +21,8 @@ scrollto
 | bound | `number` | `12` |  |
 | ignore-gap | `boolean` | `false` | If set to `true`, it will be displayed on the exact href |
 | listen-to | `string \| HTMLElement` | `undefined` | The scrolling element to listen scrolling. If not set it will listen to the nearest scrollable ascendant element. |
+| show-rail | `boolean` | `true` | Whether to show the sider rail. |
+| show-background | `boolean` | `true` | Whether to show background of links. |
 
 ## Methods
 
