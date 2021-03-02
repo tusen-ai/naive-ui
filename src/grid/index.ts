@@ -1,3 +1,2 @@
-/* istanbul ignore file */
-export { default as NRow } from './src/Row'
-export { default as NCol } from './src/Col'
+export { default as NGrid } from './src/Grid'
+export { default as NGridItem } from './src/GridItem'

@@ -562,6 +562,19 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
         }
       ]
     }),
+    {
+      zh: '废弃',
+      en: 'Deprecated',
+      type: 'group',
+      children: [
+        {
+          en: 'Legacy Grid',
+          zh: '旧版栅格',
+          enSuffix: true,
+          path: '/n-legacy-grid'
+        }
+      ]
+    },
     ...createDeprecatedDemos(
       {
         en: 'Deprecated',

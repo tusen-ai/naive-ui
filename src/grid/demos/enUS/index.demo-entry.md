@@ -2,34 +2,17 @@
 
 <!--single-column-->
 
-A basic grid system.
+Based on CSS Grid. Responsive. Keep away from IE.
 
-## Demos
+If you do need IE, try [Legacy Grid](n-legacy-grid).
 
 ```demo
 basic
-gutter
+gap
 offset
-push-pull
+grid-basic-debug
 ```
 
-## Props
+## Grid Props
 
-### Row Props
-
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| gutter | `number \| string \| [number, number] \| [string, string]` | `0` | `horizontal gutter` or `[horizontal gutter, vertical gutter]` |
-
-### Col Props
-
-| Name   | Type     | Default | Description |
-| ------ | -------- | ------- | ----------- |
-| span   | `number` | `1`     |             |
-| offset | `number` | `0`     |             |
-| push   | `number` | `0`     |             |
-| pull   | `number` | `0`     |             |
-
-## Notes
-
-The grid is not responsive, for I have not enough time, ha...
+## GridItem Props

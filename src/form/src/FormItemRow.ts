@@ -1,5 +1,5 @@
 import { h, ref, defineComponent } from 'vue'
-import NRow, { rowProps, rowPropKeys } from '../../grid/src/Row'
+import NRow, { rowProps, rowPropKeys } from '../../legacy-grid/src/Row'
 import { keep } from '../../_utils'
 import NFormItemCol, {
   formItemColProps,

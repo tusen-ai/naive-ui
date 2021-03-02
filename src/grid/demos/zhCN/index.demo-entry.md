@@ -1,35 +1,18 @@
-# 栅格 Grid
+# Grid 栅格
 
 <!--single-column-->
 
-一个基本的栅格系统。
+基于 CSS Grid，响应式，远离 IE。
 
-## 演示
+如果你一定要 IE，试试 [旧版栅格](n-legacy-grid).
 
 ```demo
 basic
-gutter
+gap
 offset
-push-pull
+grid-basic-debug
 ```
 
-## Props
+## Grid Props
 
-### Row Props
-
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| gutter | `number \| string \| [number, number] \| [string, string]` | `0` | `水平间隔` 或者 `[水平间隔, 垂直间隔]` |
-
-### Col Props
-
-| 名称   | 类型     | 默认值 | 说明 |
-| ------ | -------- | ------ | ---- |
-| span   | `number` | `1`    |      |
-| offset | `number` | `0`    |      |
-| push   | `number` | `0`    |      |
-| pull   | `number` | `0`    |      |
-
-## 备注
-
-栅格不是响应式的，因为不太有时间写，额...
+## GridItem Props

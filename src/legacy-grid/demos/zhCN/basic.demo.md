@@ -1,14 +1,20 @@
-# Offset
+# 基础用法
 
 ```html
-<n-grid :x-gap="12" :cols="4">
-  <n-grid-item :offset="1">
+<n-row gutter="12">
+  <n-col :span="6">
     <div class="light-green"></div>
-  </n-grid-item>
-  <n-grid-item :offset="1">
+  </n-col>
+  <n-col :span="6">
     <div class="green"></div>
-  </n-grid-item>
-</n-grid>
+  </n-col>
+  <n-col :span="6">
+    <div class="light-green"></div>
+  </n-col>
+  <n-col :span="6">
+    <div class="green"></div>
+  </n-col>
+</n-row>
 ```
 
 ```css

@@ -67,3 +67,5 @@ export * from './transfer'
 export * from './tree'
 export * from './typography'
 export * from './upload'
+
+export * from './legacy-grid'

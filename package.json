@@ -74,7 +74,7 @@
     "@typescript-eslint/eslint-plugin": "^4.15.1",
     "@typescript-eslint/parser": "^4.15.1",
     "@vitejs/plugin-vue": "^1.1.4",
-    "@vue/compiler-sfc": "^3.0.5",
+    "@vue/compiler-sfc": "^3.0.7",
     "@vue/eslint-config-standard": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
     "@vue/test-utils": "^2.0.0-rc.1",
@@ -113,14 +113,14 @@
     "evtd": "^0.1.0",
     "highlight.js": "^10.4.1",
     "lodash-es": "^4.17.15",
-    "seemly": "^0.1.11",
+    "seemly": "^0.1.16",
     "treemate": "^0.2.4",
     "vdirs": "^0.0.3",
     "vfonts": "^0.0.1",
-    "vooks": "^0.1.0",
-    "vue": "^3.0.6",
+    "vooks": "^0.1.1",
+    "vue": "^3.0.7",
     "vue-router": "^4.0.3",
-    "vueuc": "^0.2.4"
+    "vueuc": "^0.2.6"
   },
   "husky": {
     "hooks": {
