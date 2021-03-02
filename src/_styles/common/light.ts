@@ -120,26 +120,16 @@ const derived = {
   // text color
   textColorBase: base.neutralTextBase,
   textColor1: neutral(base.alpha1),
-  textColor1Overlay: overlay(base.alpha1),
   textColor2: neutral(base.alpha2),
-  textColor2Overlay: overlay(base.alpha2),
   textColor3: neutral(base.alpha3),
-  textColor3Overlay: overlay(base.alpha3),
   textColor4: neutral(base.alpha4), // disabled, placeholder, icon
-  textColor4Overlay: overlay(base.alpha4),
   textColor5: neutral(base.alpha5),
-  textColor5Overlay: overlay(base.alpha5),
 
   textColorDisabled: neutral(base.alpha4),
-  textColorDisabledOverlay: overlay(base.alpha4),
   placeholderColor: neutral(base.alpha4),
-  placeholderColorOverlay: overlay(base.alpha4),
   placeholderColorDisabled: neutral(base.alpha5),
-  placeholderColorDisabledOverlay: overlay(base.alpha5),
   iconColor: neutral(base.alpha4),
-  iconColorOverlay: overlay(base.alpha4),
   iconColorDisabled: neutral(base.alpha5),
-  iconColorDisabledOverlay: overlay(base.alpha5),
 
   opacity1: base.alpha1,
   opacity2: base.alpha2,
@@ -149,19 +139,13 @@ const derived = {
   opacityPending: base.alphaPending,
 
   dividerColor: neutral(base.alphaDivider),
-  dividerColorOverlay: overlay(base.alphaDivider),
   borderColor: neutral(base.alphaBorder),
-  borderColorOverlay: overlay(base.alphaBorder),
 
   // close
   closeColorHover: neutral(Number(base.alphaClose) * 0.8),
-  closeColorHoverOverlay: overlay(Number(base.alphaClose) * 0.8),
   closeColor: neutral(Number(base.alphaClose)),
-  closeColorOverlay: overlay(Number(base.alphaClose)),
   closeColorPressed: neutral(Number(base.alphaClose) * 1.25),
-  closeColorPressedOverlay: overlay(Number(base.alphaClose) * 1.25),
   closeColorDisabled: neutral(base.alpha4),
-  closeColorDisabledOverlay: overlay(base.alpha4),
   closeOpacity: Number(base.alphaClose),
   closeOpacityHover: Number(base.alphaClose) * 0.8,
   closeOpacityPressed: Number(base.alphaClose) * 1.25,
@@ -171,13 +155,11 @@ const derived = {
   clearColorHover: scaleColor(neutral(base.alpha4), { lightness: 0.75 }),
   clearColorPressed: scaleColor(neutral(base.alpha4), { lightness: 0.9 }),
 
-  scrollbarColorOverlay: overlay(base.alphaScrollbar),
-  scrollbarColorHoverOverlay: overlay(base.alphaScrollbarHover),
+  scrollbarColor: overlay(base.alphaScrollbar),
+  scrollbarColorHover: overlay(base.alphaScrollbarHover),
 
   progressRailColor: neutral(base.alphaProgressRail),
-  progressRailColorOverlay: overlay(base.alphaProgressRail),
   railColor: neutral(base.alphaRail),
-  railColorOverlay: overlay(base.alphaRail),
 
   popoverColor: base.neutralPopover,
   tableColor: base.neutralCard,
@@ -188,23 +170,17 @@ const derived = {
   avatarColor: neutral(base.alphaAvatar),
 
   inputColor: neutral(base.alphaInput),
-  inputColorOverlay: overlay(base.alphaInput),
   codeColor: neutral(base.alphaCode),
-  codeColorOverlay: overlay(base.alphaCode),
-  tabColorOverlay: overlay(base.alphaTab),
-  avatarColorOverlay: overlay(base.alphaAvatar),
+  tabColor: overlay(base.alphaTab),
   actionColor: neutral(base.alphaAction),
-  actionColorOverlay: overlay(base.alphaAction),
-  tableHeaderColorOverlay: overlay(base.alphaAction),
+  tableHeaderColor: overlay(base.alphaAction),
 
   hoverColor: neutral(base.alphaPending),
-  hoverColorOverlay: overlay(base.alphaPending),
-  tableColorHoverOverlay: overlay(base.alphaTablePending),
-  activeColorOverlay: overlay(base.alphaActive),
+  tableColorHover: overlay(base.alphaTablePending),
+  activeColor: overlay(base.alphaActive),
 
   opacityDisabled: base.alphaDisabled,
   inputColorDisabled: neutral(base.alphaDisabledInput),
-  inputColorDisabledOverlay: overlay(base.alphaDisabledInput),
 
   boxShadow2:
     '0 3px 6px -4px rgba(0, 0, 0, .12), 0 6px 16px 0 rgba(0, 0, 0, .08), 0 9px 28px 8px rgba(0, 0, 0, .05)',

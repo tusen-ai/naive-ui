@@ -7,7 +7,7 @@ const avatarDark: AvatarTheme = {
   self (vars) {
     const {
       borderRadius,
-      avatarColorOverlay,
+      avatarColor,
       fontSize,
       heightTiny,
       heightSmall,
@@ -23,7 +23,7 @@ const avatarDark: AvatarTheme = {
       heightMedium,
       heightLarge,
       heightHuge,
-      color: avatarColorOverlay
+      color: avatarColor
     }
   }
 }

@@ -14,18 +14,18 @@ const paginationDark: PaginationTheme = {
   },
   self (vars) {
     const {
-      textColor2Overlay,
+      textColor2,
       primaryColor,
       primaryColorHover,
       primaryColorPressed,
-      inputColorDisabledOverlay,
-      textColorDisabledOverlay,
-      borderColorOverlay,
+      inputColorDisabled,
+      textColorDisabled,
+      borderColor,
       opacity3,
       borderRadius,
       fontSize
     } = vars
-    const borderColor = changeColor(primaryColor, {
+    const borderColorActive = changeColor(primaryColor, {
       alpha: Number(opacity3)
     })
     return {
@@ -33,31 +33,31 @@ const paginationDark: PaginationTheme = {
       buttonColor: 'transparent',
       buttonColorHover: 'transparent',
       buttonColorPressed: 'transparent',
-      buttonBorder: `1px solid ${borderColorOverlay}`,
-      buttonBorderHover: `1px solid ${borderColorOverlay}`,
-      buttonBorderPressed: `1px solid ${borderColorOverlay}`,
-      buttonIconColor: textColor2Overlay,
-      buttonIconColorHover: textColor2Overlay,
-      buttonIconColorPressed: textColor2Overlay,
-      itemTextColor: textColor2Overlay,
+      buttonBorder: `1px solid ${borderColor}`,
+      buttonBorderHover: `1px solid ${borderColor}`,
+      buttonBorderPressed: `1px solid ${borderColor}`,
+      buttonIconColor: textColor2,
+      buttonIconColorHover: textColor2,
+      buttonIconColorPressed: textColor2,
+      itemTextColor: textColor2,
       itemTextColorHover: primaryColorHover,
       itemTextColorPressed: primaryColorPressed,
       itemTextColorActive: primaryColor,
-      itemTextColorDisabled: textColorDisabledOverlay,
+      itemTextColorDisabled: textColorDisabled,
       itemColor: 'transparent',
       itemColorHover: 'transparent',
       itemColorPressed: 'transparent',
       itemColorActive: 'transparent',
-      itemColorDisabled: inputColorDisabledOverlay,
+      itemColorDisabled: inputColorDisabled,
       itemBorder: '1px solid transparent',
       itemBorderHover: '1px solid transparent',
       itemBorderPressed: '1px solid transparent',
-      itemBorderActive: `1px solid ${borderColor}`,
+      itemBorderActive: `1px solid ${borderColorActive}`,
       itemBorderDisabled: '1px solid transparent',
       itemBorderRadius: borderRadius,
       itemFontSize: fontSize,
-      jumperTextColor: textColor2Overlay,
-      jumperTextColorDisabled: textColorDisabledOverlay
+      jumperTextColor: textColor2,
+      jumperTextColorDisabled: textColorDisabled
     }
   }
 }

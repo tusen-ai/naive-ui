@@ -13,15 +13,15 @@ const uploadDark: UploadTheme = {
   },
   self (vars) {
     const {
-      iconColorOverlay,
+      iconColor,
       primaryColor,
       errorColor,
       textColor2,
       successColor,
       opacityDisabled,
-      actionColorOverlay,
+      actionColor,
       borderColor,
-      hoverColorOverlay,
+      hoverColor,
       lineHeight,
       borderRadius,
       fontSize
@@ -30,17 +30,17 @@ const uploadDark: UploadTheme = {
       fontSize,
       lineHeight,
       borderRadius,
-      draggerColor: actionColorOverlay,
+      draggerColor: actionColor,
       draggerBorder: `1px dashed ${borderColor}`,
       draggerBorderHover: `1px dashed ${primaryColor}`,
-      itemColorHover: hoverColorOverlay,
+      itemColorHover: hoverColor,
       itemColorHoverError: changeColor(errorColor, {
         alpha: 0.09
       }),
       itemTextColor: textColor2,
       itemTextColorError: errorColor,
       itemTextColorSuccess: successColor,
-      itemIconColor: iconColorOverlay,
+      itemIconColor: iconColor,
       itemDisabledOpacity: opacityDisabled
     }
   }

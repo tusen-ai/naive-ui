@@ -8,15 +8,15 @@ const backTopDark: BackTopTheme = {
   self (vars) {
     const {
       popoverColor,
-      textColor2Overlay,
+      textColor2,
       primaryColorHover,
       primaryColorPressed
     } = vars
     return {
       ...commonVariables,
       color: popoverColor,
-      textColor: textColor2Overlay,
-      iconColor: textColor2Overlay,
+      textColor: textColor2,
+      iconColor: textColor2,
       iconColorHover: primaryColorHover,
       iconColorPressed: primaryColorPressed,
       boxShadow: '0 2px 8px 0px rgba(0, 0, 0, .12)',

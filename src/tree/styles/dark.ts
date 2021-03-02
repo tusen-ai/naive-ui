@@ -12,23 +12,23 @@ const treeDark: TreeTheme = {
   self (vars) {
     const {
       borderRadiusSmall,
-      hoverColorOverlay,
-      activeColorOverlay,
+      hoverColor,
+      activeColor,
       primaryColor,
-      textColor3Overlay,
-      textColor2Overlay,
-      textColorDisabledOverlay,
+      textColor3,
+      textColor2,
+      textColorDisabled,
       fontSize
     } = vars
     return {
       fontSize,
       nodeBorderRadius: borderRadiusSmall,
-      nodeColorHover: hoverColorOverlay,
-      nodeColorPressed: activeColorOverlay,
+      nodeColorHover: hoverColor,
+      nodeColorPressed: activeColor,
       nodeColorActive: changeColor(primaryColor, { alpha: 0.15 }),
-      arrowColor: textColor3Overlay,
-      nodeTextColor: textColor2Overlay,
-      nodeTextColorDisabled: textColorDisabledOverlay,
+      arrowColor: textColor3,
+      nodeTextColor: textColor2,
+      nodeTextColorDisabled: textColorDisabled,
       loadingColor: primaryColor
     }
   }

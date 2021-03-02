@@ -7,7 +7,7 @@ const self = (vars: ThemeCommonVars) => {
   const indicatorColor = 'rgba(0, 0, 0, .85)'
   const boxShadow = '0 2px 8px 0 rgba(0, 0, 0, 0.12)'
   const {
-    railColorOverlay,
+    railColor,
     primaryColor,
     baseColor,
     cardColor,
@@ -17,8 +17,8 @@ const self = (vars: ThemeCommonVars) => {
   return {
     ...sizeVariables,
     fontSize,
-    railColor: railColorOverlay,
-    railColorHover: railColorOverlay,
+    railColor: railColor,
+    railColorHover: railColor,
     fillColor: primaryColor,
     fillColorHover: primaryColor,
     handleColor: '#FFF',
@@ -36,7 +36,7 @@ const self = (vars: ThemeCommonVars) => {
     indicatorBoxShadow: boxShadow,
     indicatorTextColor: baseColor,
     indicatorBorderRadius: borderRadius,
-    dotBorder: `2px solid ${railColorOverlay}`,
+    dotBorder: `2px solid ${railColor}`,
     dotBorderActive: `2px solid ${primaryColor}`,
     dotBoxShadow: null
   }

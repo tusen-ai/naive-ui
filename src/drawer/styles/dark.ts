@@ -9,10 +9,10 @@ const drawerDark: DrawerTheme = {
     Scrollbar: scrollbarDark
   },
   self (vars) {
-    const { modalColor, textColor2Overlay, boxShadow3, lineHeight } = vars
+    const { modalColor, textColor2, boxShadow3, lineHeight } = vars
     return {
       color: modalColor,
-      textColor: textColor2Overlay,
+      textColor: textColor2,
       boxShadow: boxShadow3,
       lineHeight
     }

@@ -317,7 +317,8 @@ export default defineComponent({
           [createKey('paddingRound', size)]: paddingRound,
           [createKey('iconSize', size)]: iconSize,
           [createKey('borderRadius', size)]: borderRadius,
-          [createKey('iconMargin', size)]: iconMargin
+          [createKey('iconMargin', size)]: iconMargin,
+          waveOpacity
         } = self
         const sizeProps = {
           '--width': circle && !text ? height : 'initial',
@@ -343,6 +344,7 @@ export default defineComponent({
           '--bezier-ease-out': cubicBezierEaseOut,
           '--ripple-duration': rippleDuration,
           '--opacity-disabled': opacityDisabled,
+          '--wave-opacity': waveOpacity,
           ...colorProps,
           ...borderProps,
           ...sizeProps

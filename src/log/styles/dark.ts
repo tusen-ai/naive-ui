@@ -11,16 +11,11 @@ const logDark: LogTheme = {
     Code: codeDark
   },
   self (vars) {
-    const {
-      textColor2Overlay,
-      inputColorOverlay,
-      fontSize,
-      primaryColor
-    } = vars
+    const { textColor2, inputColor, fontSize, primaryColor } = vars
     return {
       loaderFontSize: fontSize,
-      loaderTextColor: textColor2Overlay,
-      loaderColor: inputColorOverlay,
+      loaderTextColor: textColor2,
+      loaderColor: inputColor,
       loaderBorder: '1px solid transparent',
       loadingColor: primaryColor
     }

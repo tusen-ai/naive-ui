@@ -7,14 +7,14 @@ const timelineDark: TimelineTheme = {
   common: commonDark,
   self (vars) {
     const {
-      textColor3Overlay,
+      textColor3,
       infoColorSuppl,
       errorColorSuppl,
       successColorSuppl,
       warningColorSuppl,
-      textColor1Overlay,
-      textColor2Overlay,
-      railColorOverlay,
+      textColor1,
+      textColor2,
+      railColor,
       fontWeightStrong,
       fontSize
     } = vars
@@ -22,15 +22,15 @@ const timelineDark: TimelineTheme = {
       ...sizeVariables,
       contentFontSize: fontSize,
       titleFontWeight: fontWeightStrong,
-      circleBorder: `2px solid ${textColor3Overlay}`,
+      circleBorder: `2px solid ${textColor3}`,
       circleBorderInfo: `2px solid ${infoColorSuppl}`,
       circleBorderError: `2px solid ${errorColorSuppl}`,
       circleBorderSuccess: `2px solid ${successColorSuppl}`,
       circleBorderWarning: `2px solid ${warningColorSuppl}`,
-      titleTextColor: textColor1Overlay,
-      contentTextColor: textColor2Overlay,
-      metaTextColor: textColor3Overlay,
-      lineColor: railColorOverlay
+      titleTextColor: textColor1,
+      contentTextColor: textColor2,
+      metaTextColor: textColor3,
+      lineColor: railColor
     }
   }
 }

@@ -5,20 +5,15 @@ const statisticDark: StatisticTheme = {
   name: 'Statistic',
   common: commonDark,
   self (vars) {
-    const {
-      textColor2Overlay,
-      textColor1Overlay,
-      fontWeightStrong,
-      fontSize
-    } = vars
+    const { textColor2, textColor1, fontWeightStrong, fontSize } = vars
     return {
       labelFontSize: fontSize,
       labelFontWeight: fontWeightStrong,
       valueFontWeight: fontWeightStrong,
-      labelTextColor: textColor2Overlay,
-      valuePrefixTextColor: textColor1Overlay,
-      valueSuffixTextColor: textColor1Overlay,
-      valueTextColor: textColor1Overlay
+      labelTextColor: textColor2,
+      valuePrefixTextColor: textColor1,
+      valueSuffixTextColor: textColor1,
+      valueTextColor: textColor1
     }
   }
 }

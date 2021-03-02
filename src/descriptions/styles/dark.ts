@@ -7,12 +7,12 @@ const descriptionsDark: DescriptionsTheme = {
   common: commonDark,
   self (vars) {
     const {
-      tableHeaderColorOverlay,
-      textColor1Overlay,
-      textColor2Overlay,
+      tableHeaderColor,
+      textColor1,
+      textColor2,
       cardColor,
       modalColor,
-      dividerColorOverlay,
+      dividerColor,
       borderRadius,
       fontWeightStrong,
       lineHeight,
@@ -26,13 +26,13 @@ const descriptionsDark: DescriptionsTheme = {
       fontSizeSmall,
       fontSizeMedium,
       fontSizeLarge,
-      thColor: tableHeaderColorOverlay,
-      thTextColor: textColor1Overlay,
+      thColor: tableHeaderColor,
+      thTextColor: textColor1,
       thFontWeight: fontWeightStrong,
-      tdTextColor: textColor2Overlay,
+      tdTextColor: textColor2,
       tdColor: cardColor,
       tdColorModal: modalColor,
-      borderColor: dividerColorOverlay,
+      borderColor: dividerColor,
       borderRadius: borderRadius
     }
   }

@@ -22,13 +22,12 @@ const self = (vars: ThemeCommonVars) => {
     heightSmall,
     borderRadius,
     cardColor,
-    tableHeaderColorOverlay,
+    tableHeaderColor,
     textColor1,
     textColorDisabled,
     textColor2,
-    borderColorOverlay,
-    hoverColorOverlay,
-    borderColor
+    borderColor,
+    hoverColor
   } = vars
   return {
     ...commonVariables,
@@ -41,14 +40,14 @@ const self = (vars: ThemeCommonVars) => {
     borderRadius: borderRadius,
     borderColor: borderColor,
     listColor: cardColor,
-    headerColor: composite(cardColor, tableHeaderColorOverlay),
+    headerColor: composite(cardColor, tableHeaderColor),
     titleTextColor: textColor1,
     titleTextColorDisabled: textColorDisabled,
     extraTextColor: textColor2,
-    filterDividerColor: borderColorOverlay,
+    filterDividerColor: borderColor,
     itemTextColor: textColor2,
     itemTextColorDisabled: textColorDisabled,
-    itemColorPending: hoverColorOverlay,
+    itemColorPending: hoverColor,
     titleFontWeight: fontWeight,
     iconColor,
     iconColorDisabled

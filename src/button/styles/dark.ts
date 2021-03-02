@@ -20,7 +20,7 @@ const buttonDark: ButtonTheme = {
       textColor2,
       primaryColorHover,
       primaryColorPressed,
-      borderColorOverlay,
+      borderColor,
       primaryColor,
       baseColor,
       infoColor,
@@ -72,11 +72,11 @@ const buttonDark: ButtonTheme = {
       textColorGhostPressed: primaryColorPressed,
       textColorGhostFocus: primaryColorHover,
       textColorGhostDisabled: textColor2,
-      border: `1px solid ${borderColorOverlay}`,
+      border: `1px solid ${borderColor}`,
       borderHover: `1px solid ${primaryColorHover}`,
       borderPressed: `1px solid ${primaryColorPressed}`,
       borderFocus: `1px solid ${primaryColorHover}`,
-      borderDisabled: `1px solid ${borderColorOverlay}`,
+      borderDisabled: `1px solid ${borderColor}`,
       rippleColor: primaryColor,
       // primary
       colorPrimary: primaryColor,
@@ -212,7 +212,8 @@ const buttonDark: ButtonTheme = {
       borderPressedError: `1px solid ${errorColorPressed}`,
       borderFocusError: `1px solid ${errorColorHover}`,
       borderDisabledError: `1px solid ${errorColor}`,
-      rippleColorError: errorColor
+      rippleColorError: errorColor,
+      waveOpacity: '.8'
     }
   }
 }

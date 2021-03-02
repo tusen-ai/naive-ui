@@ -8,19 +8,19 @@ const breadcrumbDark: BreadcrumbTheme = {
   self (vars) {
     const {
       fontSize,
-      textColor3Overlay,
+      textColor3,
       primaryColorHover,
       primaryColorPressed,
-      textColor2Overlay
+      textColor2
     } = vars
     return {
       ...commonVariables,
       fontSize: fontSize,
-      itemTextColor: textColor3Overlay,
+      itemTextColor: textColor3,
       itemTextColorHover: primaryColorHover,
       itemTextColorPressed: primaryColorPressed,
-      itemTextColorActive: textColor2Overlay,
-      separatorColor: textColor3Overlay
+      itemTextColorActive: textColor2,
+      separatorColor: textColor3
     }
   }
 }

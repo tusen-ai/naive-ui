@@ -13,8 +13,8 @@ const self = (vars: ThemeCommonVars) => {
     popoverColor,
     closeColor,
     closeColorHover,
-    textColor1Overlay,
-    textColor3Overlay,
+    textColor1,
+    textColor3,
     borderRadius,
     fontWeightStrong,
     boxShadow2,
@@ -36,8 +36,8 @@ const self = (vars: ThemeCommonVars) => {
     closeColor: closeColor,
     closeColorHover: closeColorHover,
     closeColorPressed: closeColor,
-    headerTextColor: textColor1Overlay,
-    descriptionTextColor: textColor3Overlay,
+    headerTextColor: textColor1,
+    descriptionTextColor: textColor3,
     actionTextColor: textColor2,
     boxShadow: boxShadow2
   }

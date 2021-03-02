@@ -7,7 +7,7 @@ const self = (vars: ThemeCommonVars) => {
     textColor2,
     cardColor,
     modalColor,
-    dividerColorOverlay,
+    dividerColor,
     borderRadius,
     fontSize
   } = vars
@@ -15,7 +15,7 @@ const self = (vars: ThemeCommonVars) => {
     textColor: textColor2,
     color: cardColor,
     colorModal: modalColor,
-    borderColor: dividerColorOverlay,
+    borderColor: dividerColor,
     borderRadius,
     fontSize
   }

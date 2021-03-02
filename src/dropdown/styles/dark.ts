@@ -14,8 +14,8 @@ const dropdownDark: DropdownTheme = {
       primaryColor,
       textColor2,
       boxShadow2,
-      dividerColorOverlay,
-      hoverColorOverlay,
+      dividerColor,
+      hoverColor,
       popoverColor,
       borderRadius,
       fontSizeSmall,
@@ -26,7 +26,7 @@ const dropdownDark: DropdownTheme = {
       heightMedium,
       heightLarge,
       heightHuge,
-      textColor3Overlay
+      textColor3
     } = vars
     return {
       ...commonVariables,
@@ -37,13 +37,13 @@ const dropdownDark: DropdownTheme = {
       optionTextColor: textColor2,
       optionTextColorActive: primaryColor,
       color: popoverColor,
-      dividerColor: dividerColorOverlay,
+      dividerColor: dividerColor,
       borderRadius,
       boxShadow: boxShadow2,
       suffixColor: textColor2,
       prefixColor: textColor2,
-      optionColorHover: hoverColorOverlay,
-      groupHeaderTextColor: textColor3Overlay,
+      optionColorHover: hoverColor,
+      groupHeaderTextColor: textColor3,
       fontSizeSmall,
       fontSizeMedium,
       fontSizeLarge,

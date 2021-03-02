@@ -5,7 +5,7 @@ import type { Theme } from '../../_mixins'
 const self = (vars: ThemeCommonVars) => {
   const {
     borderRadius,
-    avatarColorOverlay,
+    avatarColor,
     fontSize,
     heightTiny,
     heightSmall,
@@ -21,7 +21,7 @@ const self = (vars: ThemeCommonVars) => {
     heightMedium,
     heightLarge,
     heightHuge,
-    color: avatarColorOverlay
+    color: avatarColor
   }
 }
 

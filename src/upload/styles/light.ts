@@ -7,15 +7,15 @@ import { createTheme } from '../../_mixins'
 
 const self = (vars: ThemeCommonVars) => {
   const {
-    iconColorOverlay,
+    iconColor,
     primaryColor,
     errorColor,
     textColor2,
     successColor,
     opacityDisabled,
-    actionColorOverlay,
+    actionColor,
     borderColor,
-    hoverColorOverlay,
+    hoverColor,
     lineHeight,
     borderRadius,
     fontSize
@@ -24,17 +24,17 @@ const self = (vars: ThemeCommonVars) => {
     fontSize,
     lineHeight,
     borderRadius,
-    draggerColor: actionColorOverlay,
+    draggerColor: actionColor,
     draggerBorder: `1px dashed ${borderColor}`,
     draggerBorderHover: `1px dashed ${primaryColor}`,
-    itemColorHover: hoverColorOverlay,
+    itemColorHover: hoverColor,
     itemColorHoverError: changeColor(errorColor, {
       alpha: 0.06
     }),
     itemTextColor: textColor2,
     itemTextColorError: errorColor,
     itemTextColorSuccess: successColor,
-    itemIconColor: iconColorOverlay,
+    itemIconColor: iconColor,
     itemDisabledOpacity: opacityDisabled
   }
 }

@@ -8,11 +8,11 @@ const sliderDark: SliderTheme = {
   self (vars) {
     const boxShadow = '0 2px 8px 0 rgba(0, 0, 0, 0.12)'
     const {
-      railColorOverlay,
+      railColor,
       modalColor,
       primaryColorSuppl,
       popoverColor,
-      textColor2Overlay,
+      textColor2,
       cardColor,
       borderRadius,
       fontSize
@@ -20,8 +20,8 @@ const sliderDark: SliderTheme = {
     return {
       ...sizeVariables,
       fontSize,
-      railColor: railColorOverlay,
-      railColorHover: railColorOverlay,
+      railColor: railColor,
+      railColorHover: railColor,
       fillColor: primaryColorSuppl,
       fillColorHover: primaryColorSuppl,
       handleColor: '#FFF',
@@ -33,9 +33,9 @@ const sliderDark: SliderTheme = {
       handleBoxShadowFocus: '0px 2px 4px 0 rgba(0, 0, 0, 0.4)',
       indicatorColor: popoverColor,
       indicatorBoxShadow: boxShadow,
-      indicatorTextColor: textColor2Overlay,
+      indicatorTextColor: textColor2,
       indicatorBorderRadius: borderRadius,
-      dotBorder: `2px solid ${railColorOverlay}`,
+      dotBorder: `2px solid ${railColor}`,
       dotBorderActive: `2px solid ${primaryColorSuppl}`,
       dotBoxShadow: null
     }

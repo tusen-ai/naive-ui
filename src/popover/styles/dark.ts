@@ -8,7 +8,7 @@ const popoverDark: PopoverTheme = {
   self (vars) {
     const {
       popoverColor,
-      textColor2Overlay,
+      textColor2,
       boxShadow2,
       borderRadius,
       fontSize
@@ -18,7 +18,7 @@ const popoverDark: PopoverTheme = {
       fontSize,
       borderRadius,
       color: popoverColor,
-      textColor: textColor2Overlay,
+      textColor: textColor2,
       boxShadow: boxShadow2
     }
   }

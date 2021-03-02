@@ -16,28 +16,28 @@ const timePickerDark: TimePickerTheme = {
   self (vars) {
     const {
       popoverColor,
-      textColor2Overlay,
+      textColor2,
       primaryColor,
-      hoverColorOverlay,
-      dividerColorOverlay,
+      hoverColor,
+      dividerColor,
       opacityDisabled,
       boxShadow2,
       borderRadius,
-      iconColorOverlay,
-      iconColorDisabledOverlay
+      iconColor,
+      iconColorDisabled
     } = vars
     return {
       ...commonVars,
       panelColor: popoverColor,
       panelBoxShadow: boxShadow2,
-      panelDividerColor: dividerColorOverlay,
-      itemTextColor: textColor2Overlay,
+      panelDividerColor: dividerColor,
+      itemTextColor: textColor2,
       itemTextColorActive: primaryColor,
-      itemColorHover: hoverColorOverlay,
+      itemColorHover: hoverColor,
       itemOpacityDisabled: opacityDisabled,
       borderRadius,
-      iconColor: iconColorOverlay,
-      iconColorDisabled: iconColorDisabledOverlay
+      iconColor: iconColor,
+      iconColorDisabled: iconColorDisabled
     }
   }
 }

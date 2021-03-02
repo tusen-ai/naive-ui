@@ -5,16 +5,11 @@ const thingDark: ThingTheme = {
   name: 'Thing',
   common: commonDark,
   self (vars) {
-    const {
-      textColor1Overlay,
-      textColor2Overlay,
-      fontWeightStrong,
-      fontSize
-    } = vars
+    const { textColor1, textColor2, fontWeightStrong, fontSize } = vars
     return {
       fontSize,
-      titleTextColor: textColor1Overlay,
-      textColor: textColor2Overlay,
+      titleTextColor: textColor1,
+      textColor: textColor2,
       titleFontWeight: fontWeightStrong
     }
   }

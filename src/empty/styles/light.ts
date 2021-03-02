@@ -6,7 +6,7 @@ import type { Theme } from '../../_mixins'
 const self = (vars: ThemeCommonVars) => {
   const {
     textColorDisabled,
-    iconColorOverlay,
+    iconColor,
     textColor2,
     fontSizeSmall,
     fontSizeMedium,
@@ -20,7 +20,7 @@ const self = (vars: ThemeCommonVars) => {
     fontSizeLarge,
     fontSizeHuge,
     textColor: textColorDisabled,
-    iconColor: iconColorOverlay,
+    iconColor: iconColor,
     extraTextColor: textColor2
   }
 }
