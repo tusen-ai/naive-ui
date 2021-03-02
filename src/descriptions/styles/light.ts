@@ -5,12 +5,12 @@ import { Theme } from '../../_mixins/use-theme'
 
 const self = (vars: ThemeCommonVars) => {
   const {
-    tableHeaderColorOverlay,
-    textColor1Overlay,
-    textColor2Overlay,
+    tableHeaderColor,
+    textColor1,
+    textColor2,
     cardColor,
     modalColor,
-    dividerColorOverlay,
+    dividerColor,
     borderRadius,
     fontWeightStrong,
     lineHeight,
@@ -24,13 +24,13 @@ const self = (vars: ThemeCommonVars) => {
     fontSizeSmall,
     fontSizeMedium,
     fontSizeLarge,
-    thColor: composite(cardColor, tableHeaderColorOverlay),
-    thTextColor: textColor1Overlay,
+    thColor: composite(cardColor, tableHeaderColor),
+    thTextColor: textColor1,
     thFontWeight: fontWeightStrong,
-    tdTextColor: textColor2Overlay,
+    tdTextColor: textColor2,
     tdColor: cardColor,
     tdColorModal: modalColor,
-    borderColor: dividerColorOverlay,
+    borderColor: dividerColor,
     borderRadius: borderRadius
   }
 }

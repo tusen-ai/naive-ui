@@ -7,12 +7,12 @@ const tableDark: TableTheme = {
   common: commonDark,
   self (vars) {
     const {
-      dividerColorOverlay,
+      dividerColor,
       cardColor,
       modalColor,
-      actionColorOverlay,
-      textColor1Overlay,
-      textColor2Overlay,
+      actionColor,
+      textColor1,
+      textColor2,
       fontWeightStrong,
       borderRadius,
       lineHeight,
@@ -27,12 +27,12 @@ const tableDark: TableTheme = {
       fontSizeLarge,
       lineHeight,
       borderRadius,
-      borderColor: dividerColorOverlay,
+      borderColor: dividerColor,
       bodyColor: cardColor,
       bodyColorModal: modalColor,
-      thColor: actionColorOverlay,
-      thTextColor: textColor1Overlay,
-      tdTextColor: textColor2Overlay,
+      thColor: actionColor,
+      thTextColor: textColor1,
+      tdTextColor: textColor2,
       thFontWeight: fontWeightStrong
     }
   }

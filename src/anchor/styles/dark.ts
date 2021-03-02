@@ -12,16 +12,16 @@ const anchorDark: AnchorTheme = {
       primaryColor,
       primaryColorHover,
       primaryColorPressed,
-      railColorOverlay,
-      textColor2Overlay
+      railColor,
+      textColor2
     } = vars
     return {
       ...commonVars,
       borderRadius,
-      railColor: railColorOverlay,
+      railColor: railColor,
       railColorActive: primaryColor,
       linkColor: changeColor(primaryColor, { alpha: 0.15 }),
-      linkTextColor: textColor2Overlay,
+      linkTextColor: textColor2,
       linkTextColorHover: primaryColorHover,
       linkTextColorPressed: primaryColorPressed,
       linkTextColorActive: primaryColor

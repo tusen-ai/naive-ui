@@ -5,10 +5,10 @@ import { Theme } from '../../_mixins'
 
 const self = (vars: ThemeCommonVars) => {
   const {
-    dividerColorOverlay,
+    dividerColor,
     cardColor,
     modalColor,
-    actionColorOverlay,
+    actionColor,
     textColor1,
     textColor2,
     borderRadius,
@@ -25,10 +25,10 @@ const self = (vars: ThemeCommonVars) => {
     fontSizeLarge,
     lineHeight,
     borderRadius,
-    borderColor: dividerColorOverlay,
+    borderColor: dividerColor,
     bodyColor: cardColor,
     bodyColorModal: modalColor,
-    thColor: actionColorOverlay,
+    thColor: actionColor,
     thTextColor: textColor1,
     tdTextColor: textColor2,
     thFontWeight: fontWeightStrong

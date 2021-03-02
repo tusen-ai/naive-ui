@@ -11,7 +11,7 @@ const progressDark: ProgressTheme = {
       warningColor,
       errorColor,
       textColor2,
-      progressRailColorOverlay,
+      progressRailColor,
       fontSize,
       fontWeight
     } = vars
@@ -19,7 +19,7 @@ const progressDark: ProgressTheme = {
       fontWeightCircle: fontWeight,
       fontSize,
       fontSizeCircle: '28px',
-      railColor: progressRailColorOverlay,
+      railColor: progressRailColor,
       railHeight: '8px',
       iconSizeCircle: '36px',
       iconSizeLine: '18px',

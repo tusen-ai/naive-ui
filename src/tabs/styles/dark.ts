@@ -7,15 +7,15 @@ const tabsDark: TabsTheme = {
   common: commonDark,
   self (vars) {
     const {
-      textColor2Overlay,
+      textColor2,
       primaryColor,
-      textColorDisabledOverlay,
-      closeColorOverlay,
-      closeColorHoverOverlay,
-      closeColorPressedOverlay,
-      tabColorOverlay,
-      textColor1Overlay,
-      dividerColorOverlay,
+      textColorDisabled,
+      closeColor,
+      closeColorHover,
+      closeColorPressed,
+      tabColor,
+      textColor1,
+      dividerColor,
       fontWeightStrong,
       borderRadius,
       fontSize
@@ -23,22 +23,22 @@ const tabsDark: TabsTheme = {
     return {
       ...sizeVariables,
       labelFontSizeCard: fontSize,
-      labelTextColor: textColor2Overlay,
+      labelTextColor: textColor2,
       labelTextColorActive: primaryColor,
       labelTextColorHover: primaryColor,
-      labelTextColorDisabled: textColorDisabledOverlay,
+      labelTextColorDisabled: textColorDisabled,
       labelBarColor: primaryColor,
-      closeColor: closeColorOverlay,
-      closeColorHover: closeColorHoverOverlay,
-      closeColorPressed: closeColorPressedOverlay,
-      tabColor: tabColorOverlay,
+      closeColor: closeColor,
+      closeColorHover: closeColorHover,
+      closeColorPressed: closeColorPressed,
+      tabColor: tabColor,
       tabBorderColorActive: 'transparent',
-      tabTextColor: textColor2Overlay,
-      tabTextColorActive: textColor1Overlay,
-      tabBorderColor: dividerColorOverlay,
+      tabTextColor: textColor2,
+      tabTextColorActive: textColor1,
+      tabBorderColor: dividerColor,
       tabFontWeight: fontWeightStrong,
       tabBorderRadius: borderRadius,
-      paneTextColor: textColor2Overlay
+      paneTextColor: textColor2
     }
   }
 }

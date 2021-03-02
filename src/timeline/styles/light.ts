@@ -12,7 +12,7 @@ const self = (vars: ThemeCommonVars) => {
     warningColor,
     textColor1,
     textColor2,
-    railColorOverlay,
+    railColor,
     fontWeightStrong,
     fontSize
   } = vars
@@ -28,7 +28,7 @@ const self = (vars: ThemeCommonVars) => {
     titleTextColor: textColor1,
     contentTextColor: textColor2,
     metaTextColor: textColor3,
-    lineColor: railColorOverlay
+    lineColor: railColor
   }
 }
 

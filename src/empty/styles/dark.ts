@@ -7,9 +7,9 @@ const emptyDark: EmptyTheme = {
   common: commonDark,
   self (vars) {
     const {
-      textColorDisabledOverlay,
-      iconColorOverlay,
-      textColor2Overlay,
+      textColorDisabled,
+      iconColor,
+      textColor2,
       fontSizeSmall,
       fontSizeMedium,
       fontSizeLarge,
@@ -21,9 +21,9 @@ const emptyDark: EmptyTheme = {
       fontSizeMedium,
       fontSizeLarge,
       fontSizeHuge,
-      textColor: textColorDisabledOverlay,
-      iconColor: iconColorOverlay,
-      extraTextColor: textColor2Overlay
+      textColor: textColorDisabled,
+      iconColor: iconColor,
+      extraTextColor: textColor2
     }
   }
 }

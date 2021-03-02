@@ -28,12 +28,12 @@ const dataTableDark: DataTableTheme = {
     const {
       cardColor,
       modalColor,
-      dividerColorOverlay,
-      textColor2Overlay,
-      textColor1Overlay,
-      tableHeaderColorOverlay,
-      tableColorHoverOverlay,
-      iconColorOverlay,
+      dividerColor,
+      textColor2,
+      textColor1,
+      tableHeaderColor,
+      tableColorHover,
+      iconColor,
       primaryColor,
       fontWeightStrong,
       borderRadius,
@@ -44,33 +44,33 @@ const dataTableDark: DataTableTheme = {
     } = vars
     return {
       ...commonVariables,
-      actionDividerColor: dividerColorOverlay,
+      actionDividerColor: dividerColor,
       borderRadius,
       lineHeight,
       fontSizeSmall,
       fontSizeMedium,
       fontSizeLarge,
-      borderColor: composite(cardColor, dividerColorOverlay),
-      tdColorHover: composite(cardColor, tableColorHoverOverlay),
-      thColor: composite(cardColor, tableHeaderColorOverlay),
+      borderColor: composite(cardColor, dividerColor),
+      tdColorHover: composite(cardColor, tableColorHover),
+      thColor: composite(cardColor, tableHeaderColor),
       thColorHover: composite(
-        composite(cardColor, tableHeaderColorOverlay),
-        tableHeaderColorOverlay
+        composite(cardColor, tableHeaderColor),
+        tableHeaderColor
       ),
       tdColor: cardColor,
-      tdTextColor: textColor2Overlay,
-      thTextColor: textColor1Overlay,
+      tdTextColor: textColor2,
+      thTextColor: textColor1,
       thFontWeight: fontWeightStrong,
-      thButtonColorHover: tableColorHoverOverlay,
-      thIconColor: iconColorOverlay,
+      thButtonColorHover: tableColorHover,
+      thIconColor: iconColor,
       thIconColorActive: primaryColor,
       // modal
-      borderColorModal: composite(modalColor, dividerColorOverlay),
-      tdColorHoverModal: composite(modalColor, tableColorHoverOverlay),
-      thColorModal: composite(modalColor, tableHeaderColorOverlay),
+      borderColorModal: composite(modalColor, dividerColor),
+      tdColorHoverModal: composite(modalColor, tableColorHover),
+      thColorModal: composite(modalColor, tableHeaderColor),
       thColorHoverModal: composite(
-        composite(modalColor, tableHeaderColorOverlay),
-        tableHeaderColorOverlay
+        composite(modalColor, tableHeaderColor),
+        tableHeaderColor
       ),
       tdColorModal: modalColor
     }

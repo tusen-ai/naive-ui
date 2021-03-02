@@ -5,10 +5,10 @@ const scrollbarDark: ScrollbarTheme = {
   name: 'Scrollbar',
   common: commonDark,
   self (vars) {
-    const { scrollbarColorOverlay, scrollbarColorHoverOverlay } = vars
+    const { scrollbarColor, scrollbarColorHover } = vars
     return {
-      color: scrollbarColorOverlay,
-      colorHover: scrollbarColorHoverOverlay
+      color: scrollbarColor,
+      colorHover: scrollbarColorHover
     }
   }
 }

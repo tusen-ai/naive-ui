@@ -7,8 +7,8 @@ const resultDark: ResultTheme = {
   common: commonDark,
   self (vars) {
     const {
-      textColor1Overlay,
-      textColor2Overlay,
+      textColor1,
+      textColor2,
       errorColor,
       successColor,
       infoColor,
@@ -20,8 +20,8 @@ const resultDark: ResultTheme = {
       ...commonVariables,
       lineHeight,
       titleFontWeight: fontWeightStrong,
-      titleTextColor: textColor1Overlay,
-      textColor: textColor2Overlay,
+      titleTextColor: textColor1,
+      textColor: textColor2,
       iconColorError: errorColor,
       iconColorSuccess: successColor,
       iconColorInfo: infoColor,

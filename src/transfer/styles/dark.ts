@@ -19,8 +19,8 @@ const transferDark: TransferTheme = {
   },
   self (vars) {
     const {
-      iconColorDisabledOverlay,
-      iconColorOverlay,
+      iconColorDisabled,
+      iconColor,
       fontWeight,
       fontSizeLarge,
       fontSizeMedium,
@@ -29,13 +29,13 @@ const transferDark: TransferTheme = {
       heightMedium,
       heightSmall,
       borderRadius,
-      inputColorOverlay,
-      tableHeaderColorOverlay,
-      textColor1Overlay,
-      textColorDisabledOverlay,
-      textColor2Overlay,
-      dividerColorOverlay,
-      hoverColorOverlay
+      inputColor,
+      tableHeaderColor,
+      textColor1,
+      textColorDisabled,
+      textColor2,
+      dividerColor,
+      hoverColor
     } = vars
     return {
       ...commonVariables,
@@ -47,18 +47,18 @@ const transferDark: TransferTheme = {
       fontSizeLarge: fontSizeLarge,
       borderRadius: borderRadius,
       borderColor: 'transparent',
-      listColor: inputColorOverlay,
-      headerColor: tableHeaderColorOverlay,
-      titleTextColor: textColor1Overlay,
-      titleTextColorDisabled: textColorDisabledOverlay,
-      extraTextColor: textColor2Overlay,
-      filterDividerColor: dividerColorOverlay,
-      itemTextColor: textColor2Overlay,
-      itemTextColorDisabled: textColorDisabledOverlay,
-      itemColorPending: hoverColorOverlay,
+      listColor: inputColor,
+      headerColor: tableHeaderColor,
+      titleTextColor: textColor1,
+      titleTextColorDisabled: textColorDisabled,
+      extraTextColor: textColor2,
+      filterDividerColor: dividerColor,
+      itemTextColor: textColor2,
+      itemTextColorDisabled: textColorDisabled,
+      itemColorPending: hoverColor,
       titleFontWeight: fontWeight,
-      iconColor: iconColorOverlay,
-      iconColorDisabled: iconColorDisabledOverlay
+      iconColor: iconColor,
+      iconColorDisabled: iconColorDisabled
     }
   }
 }

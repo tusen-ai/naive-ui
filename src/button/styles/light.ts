@@ -210,7 +210,8 @@ const self = (vars: ThemeCommonVars) => {
     borderPressedError: `1px solid ${errorColorPressed}`,
     borderFocusError: `1px solid ${errorColorHover}`,
     borderDisabledError: `1px solid ${errorColor}`,
-    rippleColorError: errorColor
+    rippleColorError: errorColor,
+    waveOpacity: '0.6'
   }
 }
 

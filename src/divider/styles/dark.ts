@@ -5,10 +5,10 @@ const dividerDark: DividerTheme = {
   name: 'Divider',
   common: commonDark,
   self (vars) {
-    const { textColor1Overlay, dividerColorOverlay, fontWeightStrong } = vars
+    const { textColor1, dividerColor, fontWeightStrong } = vars
     return {
-      textColor: textColor1Overlay,
-      color: dividerColorOverlay,
+      textColor: textColor1,
+      color: dividerColor,
       fontWeight: fontWeightStrong
     }
   }

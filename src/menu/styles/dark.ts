@@ -12,26 +12,26 @@ const menuDark: MenuTheme = {
   self (vars) {
     const {
       borderRadius,
-      textColor3Overlay,
+      textColor3,
       primaryColor,
-      textColor2Overlay,
+      textColor2,
       primaryColorHover,
-      textColor1Overlay,
+      textColor1,
       fontSize
     } = vars
     return {
       borderRadius: borderRadius,
-      groupTextColor: textColor3Overlay,
+      groupTextColor: textColor3,
       itemColorActive: changeColor(primaryColor, { alpha: 0.15 }),
-      itemTextColor: textColor2Overlay,
+      itemTextColor: textColor2,
       itemTextColorHover: primaryColorHover,
       itemTextColorChildActive: primaryColor,
       itemTextColorActive: primaryColor,
-      itemIconColor: textColor1Overlay,
+      itemIconColor: textColor1,
       itemIconColorHover: primaryColorHover,
       itemIconColorActive: primaryColor,
       itemIconColorChildActive: primaryColor,
-      itemIconColorCollapsed: textColor1Overlay,
+      itemIconColorCollapsed: textColor1,
       borderColorHorizontal: 'transparent',
       arrowColor: primaryColor,
       fontSize

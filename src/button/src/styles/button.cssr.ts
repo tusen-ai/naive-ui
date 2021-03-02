@@ -30,6 +30,7 @@ import iconSwitchTransition from '../../../_styles/transitions/icon-switch'
 // --padding
 // --icon-size
 // --icon-margin
+// --wave-opacity
 //
 // private-vars:
 // --border-color-xxx, used for custom color
@@ -235,7 +236,7 @@ export default c([
   }),
   c('@keyframes button-wave-opacity', {
     from: {
-      opacity: 0.6
+      opacity: 'var(--wave-opacity)'
     },
     to: {
       opacity: 0

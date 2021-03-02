@@ -7,19 +7,19 @@ import commonVars from './_common'
 const self = (vars: ThemeCommonVars) => {
   const {
     borderRadius,
-    railColorOverlay,
+    railColor,
     primaryColor,
     primaryColorHover,
     primaryColorPressed,
-    textColor2Overlay
+    textColor2
   } = vars
   return {
     ...commonVars,
     borderRadius,
-    railColor: railColorOverlay,
+    railColor: railColor,
     railColorActive: primaryColor,
     linkColor: changeColor(primaryColor, { alpha: 0.15 }),
-    linkTextColor: textColor2Overlay,
+    linkTextColor: textColor2,
     linkTextColorHover: primaryColorHover,
     linkTextColorPressed: primaryColorPressed,
     linkTextColorActive: primaryColor

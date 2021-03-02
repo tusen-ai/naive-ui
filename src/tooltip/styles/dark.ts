@@ -10,13 +10,13 @@ const tooltipDark: TooltipTheme = {
     Popover: popoverDark
   },
   self (vars) {
-    const { borderRadius, boxShadow2, popoverColor, textColor2Overlay } = vars
+    const { borderRadius, boxShadow2, popoverColor, textColor2 } = vars
     return {
       ...commonVars,
       borderRadius: borderRadius,
       boxShadow: boxShadow2,
       color: popoverColor,
-      textColor: textColor2Overlay
+      textColor: textColor2
     }
   }
 }

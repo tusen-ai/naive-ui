@@ -6,18 +6,18 @@ const listDark: ListTheme = {
   common: commonDark,
   self (vars) {
     const {
-      textColor2Overlay,
+      textColor2,
       cardColor,
       modalColor,
-      dividerColorOverlay,
+      dividerColor,
       borderRadius,
       fontSize
     } = vars
     return {
-      textColor: textColor2Overlay,
+      textColor: textColor2,
       color: cardColor,
       colorModal: modalColor,
-      borderColor: dividerColorOverlay,
+      borderColor: dividerColor,
       borderRadius,
       fontSize
     }

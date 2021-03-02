@@ -7,8 +7,8 @@ import { createTheme } from '../../_mixins/use-theme'
 const self = (vars: ThemeCommonVars) => {
   const {
     borderRadiusSmall,
-    hoverColorOverlay,
-    activeColorOverlay,
+    hoverColor,
+    activeColor,
     primaryColor,
     textColor3,
     textColor2,
@@ -18,8 +18,8 @@ const self = (vars: ThemeCommonVars) => {
   return {
     fontSize,
     nodeBorderRadius: borderRadiusSmall,
-    nodeColorHover: hoverColorOverlay,
-    nodeColorPressed: activeColorOverlay,
+    nodeColorHover: hoverColor,
+    nodeColorPressed: activeColor,
     nodeColorActive: changeColor(primaryColor, { alpha: 0.1 }),
     arrowColor: textColor3,
     nodeTextColor: textColor2,

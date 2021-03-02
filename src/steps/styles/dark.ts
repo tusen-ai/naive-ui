@@ -8,38 +8,38 @@ const stepsDark: StepsTheme = {
   self (vars) {
     const {
       fontWeightStrong,
-      textColorDisabledOverlay,
+      textColorDisabled,
       primaryColor,
       errorColor,
-      textColor1Overlay,
-      textColor2Overlay
+      textColor1,
+      textColor2
     } = vars
     return {
       ...commonVariables,
       stepHeaderFontWeight: fontWeightStrong,
       indicatorTextColorProcess: 'black',
-      indicatorTextColorWait: textColorDisabledOverlay,
+      indicatorTextColorWait: textColorDisabled,
       indicatorTextColorFinish: primaryColor,
       indicatorTextColorError: errorColor,
       indicatorBorderColorProcess: primaryColor,
-      indicatorBorderColorWait: textColorDisabledOverlay,
+      indicatorBorderColorWait: textColorDisabled,
       indicatorBorderColorFinish: primaryColor,
       indicatorBorderColorError: errorColor,
       indicatorColorProcess: primaryColor,
       indicatorColorWait: 'transparent',
       indicatorColorFinish: 'transparent',
       indicatorColorError: 'transparent',
-      splitorColorProcess: textColorDisabledOverlay,
-      splitorColorWait: textColorDisabledOverlay,
+      splitorColorProcess: textColorDisabled,
+      splitorColorWait: textColorDisabled,
       splitorColorFinish: primaryColor,
-      splitorColorError: textColorDisabledOverlay,
-      headerTextColorProcess: textColor1Overlay,
-      headerTextColorWait: textColorDisabledOverlay,
-      headerTextColorFinish: textColorDisabledOverlay,
+      splitorColorError: textColorDisabled,
+      headerTextColorProcess: textColor1,
+      headerTextColorWait: textColorDisabled,
+      headerTextColorFinish: textColorDisabled,
       headerTextColorError: errorColor,
-      descriptionTextColorProcess: textColor2Overlay,
-      descriptionTextColorWait: textColorDisabledOverlay,
-      descriptionTextColorFinish: textColorDisabledOverlay,
+      descriptionTextColorProcess: textColor2,
+      descriptionTextColorWait: textColorDisabled,
+      descriptionTextColorFinish: textColorDisabled,
       descriptionTextColorError: errorColor
     }
   }

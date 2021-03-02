@@ -9,21 +9,21 @@ const self = (vars: ThemeCommonVars) => {
     textColor2,
     bodyColor,
     cardColor,
-    dividerColorOverlay,
-    scrollbarColorOverlay,
-    scrollbarColorHoverOverlay
+    dividerColor,
+    scrollbarColor,
+    scrollbarColorHover
   } = vars
   return {
     textColor: textColor2,
     color: bodyColor,
     headerColor: cardColor,
-    headerBorderColor: dividerColorOverlay,
-    footerBorderColor: dividerColorOverlay,
-    siderBorderColor: dividerColorOverlay,
+    headerBorderColor: dividerColor,
+    footerBorderColor: dividerColor,
+    siderBorderColor: dividerColor,
     siderColor: cardColor,
     siderToggleButtonColor: 'rgba(0, 0, 0, .15)',
-    siderToggleBarColor: composite(bodyColor, scrollbarColorOverlay),
-    siderToggleBarColorHover: composite(bodyColor, scrollbarColorHoverOverlay)
+    siderToggleBarColor: composite(bodyColor, scrollbarColor),
+    siderToggleBarColorHover: composite(bodyColor, scrollbarColorHover)
   }
 }
 

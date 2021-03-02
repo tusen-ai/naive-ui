@@ -19,7 +19,7 @@ const self = (vars: ThemeCommonVars) => {
     warningColor,
     errorColor,
     successColor,
-    codeColorOverlay
+    codeColor
   } = vars
   return {
     ...commonVars,
@@ -57,7 +57,7 @@ const self = (vars: ThemeCommonVars) => {
     textColorWarning: warningColor,
     textColorError: errorColor,
     codeTextColor: textColor2,
-    codeColor: codeColorOverlay,
+    codeColor: codeColor,
     codeBorder: '1px solid transparent'
   }
 }

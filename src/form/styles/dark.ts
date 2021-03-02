@@ -7,20 +7,20 @@ const formItemDark: FormTheme = {
   common: commonDark,
   self (vars) {
     const {
-      textColor1Overlay,
+      textColor1,
       errorColor,
       warningColor,
       lineHeight,
-      textColor3Overlay
+      textColor3
     } = vars
     return {
       ...commonVariables,
       lineHeight,
-      labelTextColor: textColor1Overlay,
+      labelTextColor: textColor1,
       asteriskColor: errorColor,
       feedbackTextColorError: errorColor,
       feedbackTextColorWarning: warningColor,
-      feedbackTextColor: textColor3Overlay
+      feedbackTextColor: textColor3
     }
   }
 }

@@ -3,10 +3,10 @@ import type { ThemeCommonVars } from '../../_styles/common'
 import type { Theme } from '../../_mixins'
 
 const self = (vars: ThemeCommonVars) => {
-  const { textColor1, dividerColorOverlay, fontWeightStrong } = vars
+  const { textColor1, dividerColor, fontWeightStrong } = vars
   return {
     textColor: textColor1,
-    color: dividerColorOverlay,
+    color: dividerColor,
     fontWeight: fontWeightStrong
   }
 }
