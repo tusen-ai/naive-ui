@@ -30,9 +30,9 @@ export const colors = {
   warningColor: '#FFAC26',
   warningColorHover: createHoverColor('#FFAC26', 0.2),
   warningColorPressed: createPressedColor('#FFAC26', 0.05),
-  textColorDisabled: '#D7DAE0',
-  textColor1: '#333',
-  textColor2: '#333'
+  textColorDisabled: '#5B5B5B',
+  textColor1: '#FFFFFF',
+  textColor2: '#D6D6D6'
 }
 
 export const themeOverrides: GlobalThemeOverrides = {
@@ -41,14 +41,33 @@ export const themeOverrides: GlobalThemeOverrides = {
     fontSizeMedium: '16px',
     fontWeightStrong: '700',
     borderRadius: '16px',
-    boxShadow2: vars.NORMAL_BOX_SHADOW,
     borderColor: '#999',
-    dividerColor: '#EBEDF0',
-    tableHeaderColor: '#EBEDF0',
-    inputColorDisabled: '#EBEDF0',
-    actionColor: '#EBEDF0',
-    hoverColor: composite(colors.primaryColor, 'rgba(255, 255, 255, .1)'),
-    clearColor: composite('#FFF', 'rgba(0, 0, 0, .4)'),
+    // dividerColorOverlay: '#EBEDF0',
+    // tableHeaderColorOverlay: '#EBEDF0',
+    // inputColorDisabled: '#EBEDF0',
+    // actionColor: '#EBEDF0',
+    // hoverColor: composite(colors.primaryColor, 'rgba(255, 255, 255, .1)'),
+    baseColor: '#FFFFFF',
+    dividerColor: '#5B5B5B',
+    popoverColor: '#333333',
+    inputColorOverlay: '#282828',
+    inputColorDisabledOverlay: '#333333',
+
+    textColor3: '#ADADAD',
+    textColor4: '#5B5B5B', // disabled, placeholder, icon
+    textColor5: '#848484',
+    tableHeaderColorOverlay: '#282828',
+    inputColorDisabled: '#5B5B5B',
+
+    borderColorOverlay: '#D6D6D6',
+    textColorDisabledOverlay: '#5B5B5B',
+    textColor2Overlay: '#FFFFFF',
+    hoverColorOverlay: 'rgba(79, 178, 51, 0.15)',
+    closeColorOverlay: '#D6D6D6',
+
+    modalColor: '#282828',
+    clearColor: '#ADADAD',
+    boxShadow2: vars.NORMAL_BOX_SHADOW_DARK_THEME,
     ...colors
   },
   Avatar: {
@@ -394,13 +413,13 @@ export const themeOverrides: GlobalThemeOverrides = {
     borderRadius: '100px',
     border: '1px solid transparent',
     color: 'rgba(153,153,153,0.10)',
-    closeColor: commonLight.closeColor,
-    closeColorHover: commonLight.closeColor,
-    closeColorPressed: commonLight.closeColor,
+    closeColor: commonLight.closeColorOverlay,
+    closeColorHover: commonLight.closeColorOverlay,
+    closeColorPressed: commonLight.closeColorOverlay,
     borderPrimary: '1px solid transparent',
-    closeColorPrimary: commonLight.closeColor,
-    closeColorHoverPrimary: commonLight.closeColor,
-    closeColorPressedPrimary: commonLight.closeColor,
+    closeColorPrimary: commonLight.closeColorOverlay,
+    closeColorHoverPrimary: commonLight.closeColorOverlay,
+    closeColorPressedPrimary: commonLight.closeColorOverlay,
     borderInfo: '1px solid transparent',
     borderSuccess: '1px solid transparent',
     borderWarning: '1px solid transparent',
