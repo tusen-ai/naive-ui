@@ -16,8 +16,6 @@
   <n-col :span="6">
     <div class="green"></div>
   </n-col>
-</n-row>
-<n-row :gutter="[12, 8]">
   <n-col :span="6">
     <div class="light-green"></div>
   </n-col>

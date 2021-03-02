@@ -17,10 +17,6 @@ export const rowProps = {
     >,
     default: 0
   },
-  flex: {
-    type: Boolean,
-    default: false
-  },
   alignItems: String,
   justifyContent: String
 } as const
@@ -56,7 +52,10 @@ export default defineComponent({
     )
     return {
       styleMargin: useMemo(
-        () => `0px -${formatLength(horizontalGutterRef.value, { c: 0.5 })}`
+        () =>
+          `-${formatLength(verticalGutterRef.value, {
+            c: 0.5
+          })} -${formatLength(horizontalGutterRef.value, { c: 0.5 })}`
       ),
       styleWidth: useMemo(
         () => `calc(100% + ${formatLength(horizontalGutterRef.value)})`
@@ -66,12 +65,7 @@ export default defineComponent({
   render () {
     return (
       <div
-        class={[
-          'n-row',
-          {
-            'n-row--flex': this.flex
-          }
-        ]}
+        class="n-row"
         style={{
           margin: this.styleMargin,
           width: this.styleWidth,

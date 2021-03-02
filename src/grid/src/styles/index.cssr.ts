@@ -23,13 +23,10 @@ const positionStyles = Array
 
 export default c([
   cB('row', {
-    width: '100%'
-  },
-  [
-    cM('flex', {
-      display: 'flex'
-    })
-  ]),
+    width: '100%',
+    display: 'flex',
+    flexWrap: 'wrap'
+  }),
   cB('col', {
     verticalAlign: 'top',
     boxSizing: 'border-box',
