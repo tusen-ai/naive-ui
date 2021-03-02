@@ -7,8 +7,8 @@ import {
 } from 'vue'
 import { NConfigProvider, configProviderProps } from 'naive-ui'
 import { renderFilter, renderSorter } from './data-table'
-import { unconfigurableStyle, mountSvgDefs } from './unconfigurable-style'
-import { themeOverrides } from './theme-overrides'
+import { unconfigurableStyle, mountSvgDefs } from './unconfigurable-style-light'
+import { themeOverrides } from './theme-overrides-light'
 import { icons } from './icons'
 
 export default defineComponent({
