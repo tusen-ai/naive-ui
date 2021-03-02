@@ -113,11 +113,11 @@
     "evtd": "^0.1.0",
     "highlight.js": "^10.4.1",
     "lodash-es": "^4.17.15",
-    "seemly": "^0.1.8",
+    "seemly": "^0.1.11",
     "treemate": "^0.2.4",
     "vdirs": "^0.0.3",
     "vfonts": "^0.0.1",
-    "vooks": "0.0.8",
+    "vooks": "^0.1.0",
     "vue": "^3.0.6",
     "vue-router": "^4.0.3",
     "vueuc": "^0.2.4"
