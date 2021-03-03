@@ -66,7 +66,7 @@ export function formItemMisc (props: FormItemProps) {
   })
   const mergedShowFeedbackRef = computed(() => {
     const { showFeedback } = props
-    if (showFeedback) return showFeedback
+    if (showFeedback !== undefined) return showFeedback
     if (NForm?.showFeedback) return NForm.showFeedback
     return true
   })

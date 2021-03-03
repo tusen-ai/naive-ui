@@ -104,7 +104,9 @@ export default {
         component: '组件',
         common: '常规',
         debug: '调试',
-        alreadyHome: '别点了，你已经在首页了'
+        alreadyHome: '别点了，你已经在首页了',
+        tusimpleTheme: '图森主题',
+        defaultTheme: '默认主题'
       },
       'en-US': {
         dark: 'Dark',
@@ -115,7 +117,9 @@ export default {
         component: 'Components',
         common: 'Common',
         debug: 'Debug',
-        alreadyHome: 'You are already in home page. No clicking anymore.'
+        alreadyHome: 'You are already in home page. No clicking anymore.',
+        tusimpleTheme: 'Tusimple Theme',
+        defaultTheme: 'Default Theme'
       }
     })
     const menuItemsRef = computed(() => {
@@ -144,6 +148,20 @@ export default {
         next: 'dark'
       }
     }))
+    const configProviderLabelsRef = computed(() => ({
+      tusimple: t('tusimpleTheme'),
+      default: t('defaultTheme')
+    }))
+    const configProviderOptionsRef = computed(() => [
+      {
+        label: t('defaultTheme'),
+        value: 'default'
+      },
+      {
+        label: t('tusimpleTheme'),
+        value: 'tusimple'
+      }
+    ])
     return {
       t,
       searchInputValue: ref(''),
@@ -185,20 +203,8 @@ export default {
           value: 'debug'
         }
       ],
-      configProviderLabels: {
-        tusimple: 'Tusimple',
-        default: 'Default'
-      },
-      configProviderOptions: [
-        {
-          label: 'Default',
-          value: 'default'
-        },
-        {
-          label: 'Tusimple',
-          value: 'tusimple'
-        }
-      ]
+      configProviderOptions: configProviderOptionsRef,
+      configProviderLabels: configProviderLabelsRef
     }
   },
   computed: {

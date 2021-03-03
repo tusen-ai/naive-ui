@@ -44,6 +44,10 @@ export default defineComponent({
     itemStyle: {
       type: [String, Object],
       default: undefined
+    },
+    wrap: {
+      type: Boolean,
+      default: true
     }
   },
   setup (props) {
@@ -77,7 +81,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { vertical, align, inline, justify, itemStyle, margin } = this
+    const { vertical, align, inline, justify, itemStyle, margin, wrap } = this
     const children = flatten(getSlot(this))
     const horizontalMargin = `${margin.horizontal}px`
     const verticalMargin = `${margin.vertical}px`
@@ -90,7 +94,7 @@ export default defineComponent({
         style: {
           display: inline ? 'inline-flex' : 'flex',
           flexDirection: vertical ? 'column' : 'row',
-          flexWrap: 'wrap',
+          flexWrap: !wrap ? 'nowrap' : 'wrap',
           justifyContent: 'flex-' + justify,
           marginTop: vertical ? '' : `-${semiVerticalMargin}`,
           marginBottom: vertical ? '' : `-${semiVerticalMargin}`,
