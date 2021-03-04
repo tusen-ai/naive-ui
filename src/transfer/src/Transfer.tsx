@@ -71,7 +71,10 @@ export default defineComponent({
           .indexOf(('' + pattern).toLowerCase())
       }
     },
-    size: String as PropType<'small' | 'medium' | 'large'>,
+    size: {
+      type: String as PropType<'small' | 'medium' | 'large' | undefined>,
+      default: undefined
+    },
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
     onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,

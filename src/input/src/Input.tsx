@@ -46,7 +46,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    size: String as PropType<Size>,
+    size: {
+      type: String as PropType<Size | undefined>,
+      default: undefined
+    },
     rows: {
       type: [Number, String] as PropType<number | string>,
       default: 3

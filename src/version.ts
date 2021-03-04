@@ -1,1 +1,1 @@
-export default '2.0.0-rc.4'
+export default '2.0.0-rc.5'
