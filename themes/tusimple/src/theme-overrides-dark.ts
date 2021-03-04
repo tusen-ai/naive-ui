@@ -1,6 +1,6 @@
 import { composite } from 'seemly'
 import type { GlobalThemeOverrides } from 'naive-ui'
-import { commonLight } from 'naive-ui'
+import { commonDark } from 'naive-ui'
 import vars from './vars'
 
 function createHoverColor (color: string, overlayAlpha: number = 0.15): string {
@@ -13,6 +13,21 @@ function createPressedColor (
 ): string {
   return composite(color, [0, 0, 0, overlayAlpha])
 }
+
+// TODO
+// 1. text button font weight
+// 2. input suffix & prefix text color
+// 3. input icon color?
+// 4. input group label text color
+// 5. table body color => td color
+// 6. notification size customization
+// 7. upload style
+// 8. missing attrs
+//
+// Some demands are really not easy to implement,
+// particularly related to component layout.
+//
+// It's nearly impossible to expose all layout params (with a balanced count)
 
 export const colors = {
   primaryColor: '#4FB233',
@@ -41,29 +56,30 @@ export const themeOverrides: GlobalThemeOverrides = {
     fontSizeMedium: '16px',
     fontWeightStrong: '700',
     borderRadius: '16px',
-    borderColor: '#999',
-    // dividerColorOverlay: '#EBEDF0',
-    // tableHeaderColorOverlay: '#EBEDF0',
+    borderColor: '#D6D6D6',
+    opacity1: '0.8',
+    opacity2: '0.6',
+    opacity3: '0.4',
+    opacity4: '0.2',
+    opacity5: '0.2',
+    // dividerColor: '#EBEDF0',
+    // tableHeaderColor: '#EBEDF0',
     // inputColorDisabled: '#EBEDF0',
     // actionColor: '#EBEDF0',
     // hoverColor: composite(colors.primaryColor, 'rgba(255, 255, 255, .1)'),
     baseColor: '#FFFFFF',
     dividerColor: '#5B5B5B',
     popoverColor: '#333333',
-    inputColorOverlay: '#282828',
-    inputColorDisabledOverlay: '#333333',
+    inputColor: '#282828',
+    inputColorDisabled: '#333333',
 
     textColor3: '#ADADAD',
     textColor4: '#5B5B5B', // disabled, placeholder, icon
     textColor5: '#848484',
-    tableHeaderColorOverlay: '#282828',
-    inputColorDisabled: '#5B5B5B',
+    tableHeaderColor: '#282828',
 
-    borderColorOverlay: '#D6D6D6',
-    textColorDisabledOverlay: '#5B5B5B',
-    textColor2Overlay: '#FFFFFF',
-    hoverColorOverlay: 'rgba(79, 178, 51, 0.15)',
-    closeColorOverlay: '#D6D6D6',
+    hoverColor: 'rgba(79, 178, 51, 0.15)',
+    closeColor: '#D6D6D6',
 
     modalColor: '#282828',
     clearColor: '#ADADAD',
@@ -73,14 +89,18 @@ export const themeOverrides: GlobalThemeOverrides = {
   Avatar: {
     borderRadius: '50%'
   },
+  Badge: {
+    color: '#EB3B61'
+  },
   BackTop: {
     width: '48px',
     height: '48px',
     iconSize: '24px',
     borderRadius: '24px',
-    iconColor: 'rgba(0, 0, 0, .8)',
-    iconColorHover: commonLight.primaryColor,
-    iconColorPressed: commonLight.primaryColorPressed,
+    color: '#333',
+    iconColor: '#ADADAD',
+    iconColorHover: colors.primaryColor,
+    iconColorPressed: colors.primaryColorPressed,
     boxShadow:
       '0 40px 16px -24px rgba(0,0,0,0.04), 0 8px 16px -8px rgba(0,0,0,0.12), 0 16px 40px 16px rgba(0,0,0,0.04)',
     boxShadowHover:
@@ -90,18 +110,20 @@ export const themeOverrides: GlobalThemeOverrides = {
   },
   Breadcrumb: {
     fontSize: '16px',
-    fontWeightActive: '500'
+    fontWeightActive: '500',
+    itemTextColorPressed: colors.primaryColor,
+    itemTextColor: '#ADADAD'
   },
   Button: {
+    textColor: '#FFFFFF',
     textColorWarning: '#333',
-    textColorHoverWarning: '#333',
-    textColorFocusWarning: '#333',
-    textColorPressedWarning: '#333',
-    iconSizeTiny: '16px',
-    iconSizeSmall: '20px',
-    iconSizeMedium: '20px',
-    iconSizeLarge: '28px',
-    borderRadiusTiny: '12px',
+    textColorSuccess: '#333',
+    textColorPrimary: '#333',
+    iconSizeTiny: '24px',
+    iconSizeSmall: '24px',
+    iconSizeMedium: '24px',
+    iconSizeLarge: '36px',
+    borderRadiusTiny: '16px',
     borderRadiusSmall: '16px',
     borderRadiusMedium: '24px',
     borderRadiusLarge: '40px',
@@ -113,7 +135,7 @@ export const themeOverrides: GlobalThemeOverrides = {
     fontSizeSmall: '16px',
     fontSizeMedium: '16px',
     fontSizeLarge: '24px',
-    paddingTiny: '0 12px',
+    paddingTiny: '0 16px',
     paddingSmall: '0 24px',
     paddingMedium: '0 48px',
     paddingLarge: '0 80px',
@@ -122,36 +144,38 @@ export const themeOverrides: GlobalThemeOverrides = {
     paddingRoundMedium: '0 48px',
     paddingRoundLarge: '0 80px',
     opacityDisabled: '1',
-    colorDisabled: '#EBEDF0',
-    colorDisabledPrimary: '#EBEDF0',
-    colorDisabledInfo: '#EBEDF0',
-    colorDisabledSuccess: '#EBEDF0',
-    colorDisabledWarning: '#EBEDF0',
-    colorDisabledError: '#EBEDF0',
-    borderDisabled: '1px solid #EBEDF0',
-    borderDisabledPrimary: '1px solid #EBEDF0',
-    borderDisabledInfo: '1px solid #EBEDF0',
-    borderDisabledSuccess: '1px solid #EBEDF0',
-    borderDisabledWarning: '1px solid #EBEDF0',
-    borderDisabledError: '1px solid #EBEDF0',
-    textColorDisabled: '#CCCCCC',
-    textColorDisabledPrimary: '#CCCCCC',
-    textColorDisabledInfo: '#CCCCCC',
-    textColorDisabledSuccess: '#CCCCCC',
-    textColorDisabledWarning: '#CCCCCC',
-    textColorDisabledError: '#CCCCCC',
-    textColorGhostDisabled: '#D7DAE0',
-    textColorGhostDisabledPrimary: '#D7DAE0',
-    textColorGhostDisabledInfo: '#D7DAE0',
-    textColorGhostDisabledSuccess: '#D7DAE0',
-    textColorGhostDisabledWarning: '#D7DAE0',
-    textColorGhostDisabledError: '#D7DAE0',
-    textColorTextDisabled: '#D7DAE0',
-    textColorTextDisabledPrimary: '#D7DAE0',
-    textColorTextDisabledInfo: '#D7DAE0',
-    textColorTextDisabledSuccess: '#D7DAE0',
-    textColorTextDisabledWarning: '#D7DAE0',
-    textColorTextDisabledError: '#D7DAE0',
+    colorDisabled: 'transparent',
+    colorDisabledPrimary: '#333',
+    colorDisabledInfo: '#333',
+    colorDisabledSuccess: '#333',
+    colorDisabledWarning: '#333',
+    colorDisabledError: '#333',
+    border: '1px solid #ADADAD',
+    borderDisabled: '1px solid #5B5B5B',
+    borderDisabledPrimary: '1px solid #333',
+    borderDisabledInfo: '1px solid #333',
+    borderDisabledSuccess: '1px solid #333',
+    borderDisabledWarning: '1px solid #333',
+    borderDisabledError: '1px solid #333',
+    textColorGhost: '#FFFFFF',
+    textColorDisabled: '#5B5B5B',
+    textColorDisabledPrimary: '#5B5B5B',
+    textColorDisabledInfo: '#5B5B5B',
+    textColorDisabledSuccess: '#5B5B5B',
+    textColorDisabledWarning: '#5B5B5B',
+    textColorDisabledError: '#5B5B5B',
+    textColorGhostDisabled: '#5B5B5B',
+    textColorGhostDisabledPrimary: '#5B5B5B',
+    textColorGhostDisabledInfo: '#5B5B5B',
+    textColorGhostDisabledSuccess: '#5B5B5B',
+    textColorGhostDisabledWarning: '#5B5B5B',
+    textColorGhostDisabledError: '#5B5B5B',
+    textColorTextDisabled: '#5B5B5B',
+    textColorTextDisabledPrimary: '#5B5B5B',
+    textColorTextDisabledInfo: '#5B5B5B',
+    textColorTextDisabledSuccess: '#5B5B5B',
+    textColorTextDisabledWarning: '#5B5B5B',
+    textColorTextDisabledError: '#5B5B5B',
     iconMarginSmall: '8px',
     iconMarginMedium: '8px',
     iconMarginLarge: '12px'
@@ -160,33 +184,47 @@ export const themeOverrides: GlobalThemeOverrides = {
     sizeMedium: '16px',
     fontSizeMedium: '16px',
     borderRadius: '4px',
-    borderDisabled: `1px solid ${colors.textColorDisabled}`,
-    borderDisabledChecked: '1px solid transparent',
-    checkMarkColorDisabled: colors.textColorDisabled,
-    checkMarkColorDisabledChecked: '#FFF',
+    borderDisabled: '1px solid #5B5B5B',
     colorDisabled: 'transparent',
     colorDisabledChecked: '#D8D8D8',
-    textColor: commonLight.textColor1,
-    textColorDisabled: colors.textColorDisabled
+    textColor: '#FFFFFF'
+  },
+  Card: {
+    paddingLeftSmall: '20px',
+    paddingLeftMedium: '20px',
+    paddingLeftHuge: '20px',
+    paddingLeftLarge: '20px',
+    paddingTopSmall: '20px',
+    paddingTopMedium: '20px',
+    paddingTopHuge: '20px',
+    paddingTopLarge: '20px',
+    paddingBottomSmall: '20px',
+    paddingBottomMedium: '20px',
+    paddingBottomHuge: '20px',
+    paddingBottomLarge: '20px',
+    color: '#282828',
+    borderColor: '#5b5b5b',
+    closeColorHover: colors.primaryColor,
+    closeColorPressed: colors.primaryColorPressed
   },
   Cascader: {
     menuHeight: '290px'
   },
   DataTable: {
     fontSizeMedium: '16px',
-    thColor: '#EBEDF0',
-    thTextColor: commonLight.textColor2,
-    thFontWeight: commonLight.fontWeight,
-    tdColorHover: composite(
-      commonLight.primaryColor,
-      'rgba(255, 255, 255, .9)'
-    ),
+    borderColor: '5B5B5B',
+    thColor: '#282828',
+    thTextColor: '#FFFFFF',
+    tdColor: '#1E1E1E',
+    tdTextColor: '#FFFFFF',
+    thFontWeight: commonDark.fontWeight,
+    tdColorHover: '#222C1F',
     thButtonColorHover: 'transparent',
-    thColorModal: '#EBEDF0',
-    tdColorHoverModal: composite(
-      commonLight.primaryColor,
-      'rgba(255, 255, 255, .9)'
-    ),
+    thColorModal: '#282828',
+    tdColorModal: '#1E1E1E',
+    tdColorHoverModal: '#222C1F',
+    thIconColor: '#848484',
+    thColorHover: 'transparent',
     thPaddingSmall: '10px 20px',
     thPaddingMedium: '10px 20px',
     thPaddingLarge: '10px 20px',
@@ -195,6 +233,10 @@ export const themeOverrides: GlobalThemeOverrides = {
     tdPaddingLarge: '10px 20px'
   },
   DatePicker: {
+    itemTextColor: '#FFF',
+    itemColorHover: 'rgba(79, 178, 51, 0.15)',
+    itemTextColorActive: '#333333',
+    iconColor: '#848484',
     itemBorderRadius: '14px',
     panelHeaderDividerColor: 'transparent',
     calendarDaysDividerColor: 'transparent',
@@ -221,13 +263,19 @@ export const themeOverrides: GlobalThemeOverrides = {
   Dialog: {
     padding: '40px',
     iconSize: '36px',
-    iconMarginIconTop: '0 0 12px 0',
+    iconMarginIconTop: '0 0 20px 0',
     closeMarginIconTop: '24px 24px 0 0',
     titleFontSize: '24px',
     fontSize: '16px',
     actionSpace: '20px',
-    contentMargin: '12px 0 40px 0'
+    contentMargin: '12px 0 40px 0',
+    closeColorHover: colors.primaryColor,
+    closeColorPressed: colors.primaryColorPressed
   },
+  Divider: {
+    color: '#5B5B5B'
+  },
+  Drawer: {},
   DynamicTags: {
     peers: {
       Tag: {
@@ -244,13 +292,28 @@ export const themeOverrides: GlobalThemeOverrides = {
     extraTextColor: colors.textColorDisabled
   },
   Input: {
+    heightSmall: '24px',
     heightMedium: '32px',
     fontSizeMedium: '16px',
     paddingLeftMedium: '12px',
     paddingRightMedium: '12px',
+    paddingLeftSmall: '12px',
+    paddingRightSmall: '12px',
+    paddingLeftLarge: '12px',
+    paddingRightLarge: '12px',
     iconSize: '24px',
+    border: '1px solid #5B5B5B',
+    borderWarning: '1px solid #FAB23E',
+    borderError: '1px solid EB3B61',
+    borderDisabled: '1px #333333 !important',
+    colorDisabled: '#333333',
     borderHover: `1px solid ${colors.primaryColor}`,
-    borderFocus: `1px solid ${colors.primaryColor}`
+    borderFocus: `1px solid ${colors.primaryColor}`,
+    color: '#282828',
+    textColor: '#FFFFFF',
+    placeholderColor: '#848484',
+    lineHeight: '22px',
+    groupLabelColor: '#5B5B5B'
   },
   InternalSelection: {
     heightMedium: '32px',
@@ -259,7 +322,10 @@ export const themeOverrides: GlobalThemeOverrides = {
   },
   InternalSelectMenu: {
     height: '290px',
-    boxShadow: commonLight.boxShadow2,
+    boxShadow: commonDark.boxShadow2,
+    optionTextColor: colors.textColor1,
+    optionFontSizeMedium: '16px',
+    optionPaddingMedium: '0 12px',
     optionHeightMedium: '38px',
     paddingSmall: '4px 0',
     paddingMedium: '6px 0',
@@ -287,13 +353,23 @@ export const themeOverrides: GlobalThemeOverrides = {
     labelHeightLarge: '22px',
     labelTextAlignHorizontal: 'left'
   },
+  Icon: {
+    color: '#848484',
+    opacity1Depth: '1',
+    opacity2Depth: '1',
+    opacity3Depth: '1'
+  },
+  List: {
+    color: '#333',
+    borderColor: '#5B5B5B'
+  },
   Menu: {
     borderRadius: '100px',
-    itemIconColor: colors.textColor2
+    itemIconColor: '#D6D6D6'
   },
   Message: {
     padding: '12px 20px 12px 12px',
-    borderRadius: '24px',
+    borderRadius: '32px',
     maxWidth: '720px',
     minWidth: '420px',
     iconMargin: '0 20px 0 0',
@@ -302,31 +378,50 @@ export const themeOverrides: GlobalThemeOverrides = {
     colorInfo: colors.warningColor,
     colorWarning: colors.errorColor,
     colorError: colors.errorColor,
+    boxShadowInfo: vars.SPECIAL_BOX_SHADOW_DARK_THEME,
+    boxShadowSuccess: vars.SPECIAL_BOX_SHADOW_DARK_THEME,
+    boxShadowError: vars.SPECIAL_BOX_SHADOW_DARK_THEME,
+    boxShadowWarning: vars.SPECIAL_BOX_SHADOW_DARK_THEME,
     textColorError: '#FFF',
     textColorSuccess: '#FFF',
     textColorInfo: '#FFF',
     textColorWarning: '#FFF',
-    iconColorInfo: 'rgb(0, 0, 0)',
-    iconColorSuccess: 'rgb(255, 255, 255)',
-    iconColorWarning: 'rgb(255, 255, 255)',
+    iconColorInfo: 'rgb(255, 255, 255)',
+    iconColorSuccess: '#333333',
+    iconColorWarning: '#333333',
     iconColorError: 'rgb(255, 255, 255)',
-    closeColorInfo: 'rgb(0, 0, 0)',
-    closeColorHoverInfo: 'rgb(0, 0, 0)',
-    closeColorPressedInfo: 'rgb(0, 0, 0)',
-    closeColorSuccess: 'rgb(255, 255, 255)',
-    closeColorHoverSuccess: 'rgb(255, 255, 255)',
-    closeColorPressedSuccess: 'rgb(255, 255, 255)',
+    iconColorLoading: 'rgb(255, 255, 255)',
+    closeColorInfo: 'rgb(255, 255, 255)',
+    closeColorHoverInfo: 'rgb(255, 255, 255)',
+    closeColorPressedInfo: 'rgb(255, 255, 255)',
+    closeColorSuccess: '#333333',
+    closeColorHoverSuccess: '#333333',
+    closeColorPressedSuccess: '#333333',
     closeColorError: 'rgb(255, 255, 255)',
     closeColorHoverError: 'rgb(255, 255, 255)',
     closeColorPressedError: 'rgb(255, 255, 255)',
-    closeColorWarning: 'rgb(255, 255, 255)',
-    closeColorHoverWarning: 'rgb(255, 255, 255)',
-    closeColorPressedWarning: 'rgb(255, 255, 255)',
-    closeColorLoading: 'rgb(0, 0, 0)',
-    closeColorHoverLoading: 'rgb(0, 0, 0)',
-    closeColorPressedLoading: 'rgb(0, 0, 0)',
-    closeSize: '15px',
+    closeColorWarning: '#333333',
+    closeColorHoverWarning: '#333333',
+    closeColorPressedWarning: '#333333',
+    closeColorLoading: 'rgb(255, 255, 255)',
+    closeColorHoverLoading: 'rgb(255, 255, 255)',
+    closeColorPressedLoading: 'rgb(255, 255, 255)',
+    closeSize: '24px',
     iconSize: '20px'
+  },
+  Modal: {
+    textColor: '#FFF',
+    color: '#545454'
+  },
+  Notification: {
+    fontSize: '16px',
+    headerTextColor: '#FFF',
+    descriptionTextColor: '#ADADAD',
+    textColor: colors.textColor2,
+    closeColor: '#FFFFFF',
+    closeColorHover: colors.primaryColor,
+    closeColorPressed: colors.primaryColorPressed,
+    boxShadow: vars.SPECIAL_BOX_SHADOW_DARK_THEME
   },
   Pagination: {
     itemSize: '32px',
@@ -341,17 +436,16 @@ export const themeOverrides: GlobalThemeOverrides = {
     itemBorderActive: 'none',
     itemBorderDisabled: 'none',
     itemColor: 'transparent',
-    itemColorHover: composite(
-      commonLight.primaryColor,
-      'rgba(255, 255, 255, 0.9)'
-    ),
+    itemColorHover: 'rgba(79, 178, 51, 0.15)',
     itemColorActive: 'transparent',
     itemColorDisabled: 'transparent',
     itemBorderRadius: '100px',
-    itemTextColorHover: commonLight.textColor2,
-    itemTextColorDisabled: '#D7DAE0',
+    itemTextColor: colors.textColor1,
+    itemTextColorHover: colors.primaryColor,
+    itemTextColorDisabled: '#5B5B5B',
+    buttonIconColor: '#FFFFFF',
     buttonBorder: 'none',
-    buttonIconColorHover: commonLight.primaryColor
+    buttonIconColorHover: commonDark.primaryColor
   },
   Popover: {
     padding: '20px',
@@ -359,7 +453,12 @@ export const themeOverrides: GlobalThemeOverrides = {
     arrowOffset: '40px',
     arrowOffsetVertical: '16px',
     arrowHeight: '8px',
-    spaceArrow: '14px'
+    spaceArrow: '14px',
+    textColor: '#FFF',
+    boxShadow: vars.NORMAL_BOX_SHADOW_DARK_THEME
+  },
+  Popconfirm: {
+    iconColor: '#FAB23E !important'
   },
   Progress: {
     fontWeightCircle: '700',
@@ -379,6 +478,24 @@ export const themeOverrides: GlobalThemeOverrides = {
     fillColorError: colors.errorColor,
     textColorCircle: '#666666'
   },
+  Radio: {
+    fontSizeMedium: '16px',
+    radioSizeMedium: '16px',
+    dotColorDisabled: '#5B5B5B',
+    boxShadowDisabled: 'inset 0 0 0 1px #5B5B5B'
+  },
+  Slider: {
+    railColor: '#5B5B5B',
+    fillColor: colors.primaryColor,
+    fillColorHover: colors.primaryColorHover,
+    handleBoxShadow: vars.NORMAL_BOX_SHADOW_DARK_THEME,
+    handleBoxShadowHover: vars.NORMAL_BOX_SHADOW_DARK_THEME,
+    handleBoxShadowActive: vars.NORMAL_BOX_SHADOW_DARK_THEME,
+    handleBoxShadowFocus: vars.NORMAL_BOX_SHADOW_DARK_THEME,
+    dotColor: '#333333',
+    dotBorder: '2px solid #333333',
+    dotBorderActive: `2px solid ${colors.primaryColor}`
+  },
   Switch: {
     railHeightMedium: '15px',
     railHeightLarge: '20px',
@@ -394,14 +511,18 @@ export const themeOverrides: GlobalThemeOverrides = {
     buttonWidthPressedLarge: '38px',
     buttonBorderRadiusMedium: '12px',
     buttonBorderRadiusLarge: '16px',
-    railColor: '#EBEDF0',
-    railColorActive: '#EBEDF0',
+    railColor: '#5B5B5B',
+    railColorActive: '#5B5B5B',
+    buttonColor: '#5B5B5B',
     buttonBoxShadow: '0 2px 3px 0 rgba(0,0,0,0.10)'
   },
   Table: {
-    thColor: '#EBEDF0',
-    thTextColor: commonLight.textColor2,
-    thFontWeight: commonLight.fontWeight,
+    thColor: '#282828',
+    thTextColor: '#FFFFFF',
+    bodyColor: '#1E1E1E',
+    tdTextColor: '#FFFFFF',
+    thFontWeight: commonDark.fontWeight,
+    borderColor: '#5B5B5B',
     thPaddingSmall: '10px 20px',
     thPaddingMedium: '10px 20px',
     thPaddingLarge: '10px 20px',
@@ -409,17 +530,35 @@ export const themeOverrides: GlobalThemeOverrides = {
     tdPaddingMedium: '10px 20px',
     tdPaddingLarge: '10px 20px'
   },
+  Tabs: {
+    labelTextColor: '#D6D6D6'
+  },
   Tag: {
     borderRadius: '100px',
     border: '1px solid transparent',
     color: 'rgba(153,153,153,0.10)',
-    closeColor: commonLight.closeColorOverlay,
-    closeColorHover: commonLight.closeColorOverlay,
-    closeColorPressed: commonLight.closeColorOverlay,
+    colorError: 'rgba(235,59,97,0.15)',
+    colorInfo: 'rgba(51,95,255,0.15)',
+    colorSuccess: 'rgba(79,178,51,0.15)',
+    closeColor: commonDark.closeColor,
+    closeColorHover: commonDark.closeColor,
+    closeColorPressed: commonDark.closeColor,
     borderPrimary: '1px solid transparent',
-    closeColorPrimary: commonLight.closeColorOverlay,
-    closeColorHoverPrimary: commonLight.closeColorOverlay,
-    closeColorPressedPrimary: commonLight.closeColorOverlay,
+    closeColorPrimary: commonDark.closeColor,
+    closeColorHoverPrimary: commonDark.closeColor,
+    closeColorPressedPrimary: commonDark.closeColor,
+    closeColorError: colors.errorColor,
+    closeColorHoverError: colors.errorColorHover,
+    closeColorPressedError: colors.errorColorPressed,
+    closeColorInfo: colors.infoColor,
+    closeColorHoverInfo: colors.infoColorHover,
+    closeColorPressedInfo: colors.infoColorPressed,
+    closeColorSuccess: colors.successColor,
+    closeColorHoverSuccess: colors.successColorHover,
+    closeColorPressedSuccess: colors.successColorPressed,
+    closeColorWarning: colors.warningColor,
+    closeColorHoverWarning: colors.warningColorHover,
+    closeColorPressedWarning: colors.warningColorPressed,
     borderInfo: '1px solid transparent',
     borderSuccess: '1px solid transparent',
     borderWarning: '1px solid transparent',
@@ -427,34 +566,55 @@ export const themeOverrides: GlobalThemeOverrides = {
     padding: '0 12px',
     closeMargin: '0 0 0 8px',
     heightMedium: '24px',
-    closeSizeSmall: '20px',
-    closeSizeMedium: '20px',
-    closeSizeLarge: '20px',
+    closeSizeSmall: '24px',
+    closeSizeMedium: '24px',
+    closeSizeLarge: '24px',
     fontSizeSmall: '12px',
     fontSizeMedium: '16px',
-    fontSizeLarge: '16px'
+    fontSizeLarge: '16px',
+    textColorCheckable: colors.textColor1,
+    textColorHoverCheckable: colors.primaryColor,
+    textColorChecked: '#000',
+    colorCheckable: 'rgba(173,173,173,0.20)',
+    colorHoverCheckable: 'rgba(79,178,51,0.15)',
+    colorPressedCheckable: 'rgba(79,178,51,0.15)',
+    colorChecked: colors.primaryColor,
+    colorCheckedHover: colors.primaryColorHover,
+    colorCheckedPressed: colors.primaryColorPressed
   },
   TimePicker: {
     itemFontSize: '16px',
     itemHeight: '38px',
     itemWidth: '66px',
-    panelActionPadding: '12px 20px'
+    panelActionPadding: '12px 20px',
+    itemTextColor: '#FFF'
   },
   Tooltip: {
     peers: {
       Popover: {
         padding: '20px',
-        fontSize: '16px'
+        fontSize: '16px',
+        color: '#D6D6D6',
+        textColor: '#333333'
       }
     }
   },
   Transfer: {
+    borderColor: '#5B5B5B',
+    headerColor: '#333333',
     extraTextColor: colors.textColor1
   },
   Typography: {
     headerPrefixWidth3: '15px',
     headerPrefixWidth4: '15px',
     headerPrefixWidth5: '15px',
-    headerPrefixWidth6: '15px'
+    headerPrefixWidth6: '15px',
+    headerBarColor: '#ADADAD'
+  },
+  Upload: {
+    itemColorHover: 'transparent',
+    itemColorHoverError: 'transparent',
+    itemIconColor: '#FFFFFF',
+    fontSize: '16px'
   }
 }
