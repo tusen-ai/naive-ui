@@ -35,7 +35,7 @@ export const colors = {
   textColor2: '#333'
 }
 
-export const themeOverrides: GlobalThemeOverrides = {
+export const themeOverridesLight: GlobalThemeOverrides = {
   common: {
     fontSize: '16px',
     fontSizeMedium: '16px',

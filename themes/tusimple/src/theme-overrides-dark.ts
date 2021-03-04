@@ -50,23 +50,18 @@ export const colors = {
   textColor2: '#D6D6D6'
 }
 
-export const themeOverrides: GlobalThemeOverrides = {
+export const themeOverridesDark: GlobalThemeOverrides = {
   common: {
     fontSize: '16px',
     fontSizeMedium: '16px',
     fontWeightStrong: '700',
     borderRadius: '16px',
-    borderColor: '#D6D6D6',
+    borderColor: '#5B5B5B',
     opacity1: '0.8',
     opacity2: '0.6',
     opacity3: '0.4',
     opacity4: '0.2',
     opacity5: '0.2',
-    // dividerColor: '#EBEDF0',
-    // tableHeaderColor: '#EBEDF0',
-    // inputColorDisabled: '#EBEDF0',
-    // actionColor: '#EBEDF0',
-    // hoverColor: composite(colors.primaryColor, 'rgba(255, 255, 255, .1)'),
     baseColor: '#FFFFFF',
     dividerColor: '#5B5B5B',
     popoverColor: '#333333',

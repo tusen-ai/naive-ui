@@ -3,6 +3,7 @@
     :is="configProvider"
     class="demo"
     namespace="naive-ui-doc"
+    :theme-name="themeName"
     :theme="theme"
     :locale="locale"
     :date-locale="dateLocale"

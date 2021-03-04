@@ -8,7 +8,8 @@ import {
 import { NConfigProvider, configProviderProps } from 'naive-ui'
 import { renderFilter, renderSorter } from './data-table'
 import { unconfigurableStyle, mountSvgDefs } from './unconfigurable-style-light'
-import { themeOverrides } from './theme-overrides-light'
+import { themeOverridesLight } from './theme-overrides-light'
+import { themeOverridesDark } from './theme-overrides-dark'
 import { icons } from './icons'
 
 export default defineComponent({
@@ -56,7 +57,9 @@ export default defineComponent({
       <NConfigProvider
         class={`ts-${this.themeName}-theme`}
         {...this.$props}
-        themeOverrides={themeOverrides}
+        themeOverrides={
+          this.themeName === 'light' ? themeOverridesLight : themeOverridesDark
+        }
         componentOptions={this.componentOptions}
         icons={icons}
       >
