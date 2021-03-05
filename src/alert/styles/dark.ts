@@ -1,6 +1,7 @@
 import { changeColor } from 'seemly'
 import { commonDark } from '../../_styles/common'
 import type { AlertTheme } from './light'
+import commonVars from './_common'
 
 const alertDark: AlertTheme = {
   name: 'Alert',
@@ -24,6 +25,7 @@ const alertDark: AlertTheme = {
       fontSize
     } = vars
     return {
+      ...commonVars,
       fontSize,
       lineHeight,
       titleFontWeight: fontWeightStrong,

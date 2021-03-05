@@ -15,6 +15,13 @@ import fadeInHeightExpandTranstion from '../../../_styles/transitions/fade-in-he
 // --border-radius
 // --font-size
 // --title-font-weight
+// --icon-size
+// --icon-margin
+// --close-size
+// --close-margin
+// --padding
+// --icon-margin-left
+// --icon-margin-right
 export default cB('alert', `
   line-height: var(--line-height);
   border-radius: var(--border-radius);
@@ -27,7 +34,8 @@ export default cB('alert', `
     color: 'var(--icon-color)'
   }),
   cB('alert-body', {
-    border: 'var(--border)'
+    border: 'var(--border)',
+    padding: 'var(--padding)'
   }, [
     cE('title', {
       color: 'var(--title-text-color)'
@@ -48,24 +56,31 @@ export default cB('alert', `
   }),
   cE('icon', `
     position: absolute;
-    left: 12px;
-    top: 14px;
+    left: 0;
+    top: 0;
     align-items: center;
     justify-content: center;
-    width: 26px;
-    height: 26px;
-    font-size: 26px;
+    display: flex;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    font-size: var(--icon-size);
+    margin: var(--icon-margin);
   `),
   cE('close', `
     transition: color .3s var(--bezier);
     position: absolute;
-    right: 16px;
-    font-size: 14px;
-    top: 14px;
+    right: 0;
+    top: 0;
+    margin: var(--close-margin);
+    font-size: var(--close-size);
   `),
+  cM('show-icon', [
+    cB('alert-body', {
+      paddingLeft: 'calc(var(--icon-margin-left) + var(--icon-size) + var(--icon-margin-right))'
+    })
+  ]),
   cB('alert-body', `
     border-radius: var(--border-radius);
-    padding: 15px 15px 15px 47px;
     transition: border-color .3s var(--bezier);
   `, [
     cE('title', `
@@ -87,10 +102,5 @@ export default cB('alert', `
   ]),
   cE('icon', {
     transition: 'color .3s var(--bezier)'
-  }),
-  cM('no-icon', [
-    cB('alert-body', {
-      paddingLeft: '19px'
-    })
-  ])
+  })
 ])
