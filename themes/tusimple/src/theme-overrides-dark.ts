@@ -15,7 +15,6 @@ function createPressedColor (
 }
 
 // TODO
-// 1. text button font weight
 // 2. input suffix & prefix text color
 // 3. input icon color?
 // 4. input group label text color
@@ -110,6 +109,7 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     itemTextColor: '#ADADAD'
   },
   Button: {
+    fontWeightText: commonDark.fontWeightStrong,
     textColor: '#FFFFFF',
     textColorWarning: '#333',
     textColorSuccess: '#333',

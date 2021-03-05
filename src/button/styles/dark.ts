@@ -34,7 +34,8 @@ const buttonDark: ButtonTheme = {
       warningColorPressed,
       errorColor,
       errorColorHover,
-      errorColorPressed
+      errorColorPressed,
+      fontWeight
     } = vars
     return {
       ...commonVariables,
@@ -213,7 +214,10 @@ const buttonDark: ButtonTheme = {
       borderFocusError: `1px solid ${errorColorHover}`,
       borderDisabledError: `1px solid ${errorColor}`,
       rippleColorError: errorColor,
-      waveOpacity: '.8'
+      waveOpacity: '.8',
+      fontWeightText: fontWeight,
+      fontWeight: fontWeight,
+      fontWeighGhost: fontWeight
     }
   }
 }
