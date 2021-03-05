@@ -2,7 +2,7 @@
 
 <!--single-column-->
 
-<n-alert title="Caveat" type="warning" style="margin-bottom: 12px">
+<n-alert title="Caveat" type="warning" style="margin-bottom: 16px">
   The legacy grid won't add any new features. Only use it when you really need to work with a browser not supporting CSS Grid. <br /> Most of time you should use <n-a to="n-grid">Grid</n-a>.
 </n-alert>
 
