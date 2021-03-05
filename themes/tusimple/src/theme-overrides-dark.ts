@@ -174,6 +174,7 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     iconMarginLarge: '12px'
   },
   Checkbox: {
+    labelPadding: '0 8px 0 12px',
     sizeMedium: '16px',
     fontSizeMedium: '16px',
     borderRadius: '4px',
@@ -475,6 +476,7 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     textColorCircle: '#666666'
   },
   Radio: {
+    labelPadding: '0 8px 0 12px',
     fontSizeMedium: '16px',
     radioSizeMedium: '16px',
     dotColorDisabled: '#5B5B5B',

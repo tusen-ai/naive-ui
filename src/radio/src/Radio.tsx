@@ -34,6 +34,7 @@ export default defineComponent({
             textColorDisabled,
             dotColorActive,
             dotColorDisabled,
+            labelPadding,
             [createKey('fontSize', size)]: fontSize,
             [createKey('radioSize', size)]: radioSize
           }
@@ -52,7 +53,8 @@ export default defineComponent({
           '--font-size': fontSize,
           '--radio-size': radioSize,
           '--text-color': textColor,
-          '--text-color-disabled': textColorDisabled
+          '--text-color-disabled': textColorDisabled,
+          '--label-padding': labelPadding
         }
       })
     })

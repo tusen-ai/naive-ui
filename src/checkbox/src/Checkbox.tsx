@@ -194,6 +194,7 @@ export default defineComponent({
             checkMarkColorDisabledChecked,
             colorDisabledChecked,
             borderDisabledChecked,
+            labelPadding,
             [createKey('fontSize', mergedSize)]: fontSize,
             [createKey('size', mergedSize)]: size
           }
@@ -219,7 +220,8 @@ export default defineComponent({
           '--check-mark-color': checkMarkColor,
           '--check-mark-color-disabled': checkMarkColorDisabled,
           '--check-mark-color-disabled-checked': checkMarkColorDisabledChecked,
-          '--font-size': fontSize
+          '--font-size': fontSize,
+          '--label-padding': labelPadding
         }
       })
     })
