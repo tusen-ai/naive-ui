@@ -84,7 +84,10 @@ const inputDark: InputTheme = {
       caretColorError: errorColor,
       clearColor,
       clearColorHover,
-      clearColorPressed
+      clearColorPressed,
+      iconColor: textColor4,
+      iconColorDisabled: textColor5,
+      suffixTextColor: textColor2
     }
   }
 }

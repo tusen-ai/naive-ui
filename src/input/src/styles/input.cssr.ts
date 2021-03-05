@@ -26,6 +26,11 @@ import { cB, c, cE, cM, cNotM, insideFormItem } from '../../../_utils/cssr'
 // --clear-size
 // --clear-color-hover
 // --clear-color-pressed
+// --suffix-text-color
+// --icon-color
+// --icon-color-disabled
+// --icon-alpha
+// --icon-alpha-disabled
 export default c([
   cB('input', `
     max-width: 100%;
@@ -178,7 +183,16 @@ export default c([
         align-items: center;
         transition: color .3s var(--bezier);
         color: var(--text-color);
-      `)
+      `, [
+        cB('icon', `
+          color: var(--icon-color);
+          opacity: var(--icon-alpha);
+        `),
+        cB('base-icon', `
+          color: var(--icon-color);
+          opacity: var(--icon-alpha);
+        `)
+      ])
     ]),
     cM('disabled', {
       cursor: 'not-allowed',
@@ -197,7 +211,28 @@ export default c([
       }),
       cE('separator', {
         color: 'var(--text-color-disabled)'
-      })
+      }, [
+        cB('icon', `
+          color: var(--icon-color-disabled);
+          opacity: var(--icon-alpha-disabled);
+        `),
+        cB('base-icon', `
+          color: var(--icon-color-disabled);
+          opacity: var(--icon-alpha-disabled);
+        `)
+      ]),
+      cE('suffix, prefix', {
+        color: 'var(--text-color-disabled)'
+      }, [
+        cB('icon', `
+          color: var(--icon-color-disabled);
+          opacity: var(--icon-alpha-disabled);
+        `),
+        cB('internal-icon', `
+          color: var(--icon-color-disabled);
+          opacity: var(--icon-alpha-disabled);
+        `)
+      ])
     ]),
     cNotM('disabled', [
       cM('focus', {
@@ -239,6 +274,7 @@ export default c([
       marginLeft: '4px'
     }),
     cE('suffix, prefix', `
+      transition: color .3s var(--bezier);
       flex-wrap: nowrap;
       flex-shrink: 0;
       line-height: 1.5;
@@ -246,13 +282,26 @@ export default c([
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      color: var(--suffix-text-color);
     `, [
       cB('base-clear', {
         fontSize: 'var(--icon-size)'
-      }),
-      cB('icon', {
-        fontSize: 'var(--icon-size)'
-      }),
+      }, [
+        cE('placeholder', [
+          cB('base-icon', `
+            transition: color .3s var(--bezier), opacity .3s var(--bezier);
+            color: var(--icon-color);
+            opacity: var(--icon-alpha);
+            font-size: var(--icon-size);
+          `)
+        ])
+      ]),
+      cB('icon', `
+        transition: color .3s var(--bezier), opacity .3s var(--bezier);
+        color: var(--icon-color);
+        opacity: var(--icon-alpha);
+        font-size: var(--icon-size);
+      `),
       cB('base-icon', {
         fontSize: 'var(--icon-size)'
       })
