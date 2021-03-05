@@ -17,7 +17,6 @@ function createPressedColor (
 // TODO
 // 2. input suffix & prefix text color
 // 3. input icon color?
-// 4. input group label text color
 // 5. table body color => td color
 // 6. notification size customization
 // 7. upload style
@@ -308,7 +307,8 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     textColor: '#FFFFFF',
     placeholderColor: '#848484',
     lineHeight: '22px',
-    groupLabelColor: '#5B5B5B'
+    groupLabelColor: '#5B5B5B',
+    groupLabelTextColor: '#FFF'
   },
   InternalSelection: {
     heightMedium: '32px',

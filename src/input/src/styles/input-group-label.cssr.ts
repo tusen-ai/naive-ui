@@ -4,9 +4,10 @@ import { cB, cE } from '../../../_utils/cssr'
 // --bezier
 // --group-label-color
 // --border-radius
-// --text-color
+// --group-label-text-color
 // --font-size
 // --height
+// --group-label-border
 export default cB('input-group-label', `
   position: relative;
   user-select: none;
@@ -15,7 +16,7 @@ export default cB('input-group-label', `
   display: inline-block;
   border-radius: var(--border-radius);
   background-color: var(--group-label-color);
-  color: var(--text-color);
+  color: var(--group-label-text-color);
   font-size: var(--font-size);
   line-height: var(--height);
   height: var(--height);
@@ -31,7 +32,7 @@ export default cB('input-group-label', `
     top: 0;
     bottom: 0;
     border-radius: inherit;
-    border: var(--border);
+    border: var(--group-label-border);
     transition: border-color .3s var(--bezier);
   `)
 ])

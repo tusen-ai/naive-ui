@@ -38,9 +38,9 @@ export default defineComponent({
           self: {
             groupLabelColor,
             borderRadius,
-            textColor,
+            groupLabelTextColor,
             lineHeight,
-            border,
+            groupLabelBorder,
             [createKey('fontSize', size)]: fontSize,
             [createKey('height', size)]: height
           }
@@ -48,9 +48,9 @@ export default defineComponent({
         return {
           '--bezier': cubicBezierEaseInOut,
           '--group-label-color': groupLabelColor,
-          '--border': border,
+          '--group-label-border': groupLabelBorder,
           '--border-radius': borderRadius,
-          '--text-color': textColor,
+          '--group-label-text-color': groupLabelTextColor,
           '--font-size': fontSize,
           '--line-height': lineHeight,
           '--height': height
