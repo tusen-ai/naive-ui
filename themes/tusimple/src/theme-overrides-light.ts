@@ -1,4 +1,4 @@
-import { composite } from 'seemly'
+import { composite, changeColor } from 'seemly'
 import type { GlobalThemeOverrides } from 'naive-ui'
 import { commonLight } from 'naive-ui'
 import vars from './vars'
@@ -47,7 +47,7 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     tableHeaderColor: '#EBEDF0',
     inputColorDisabled: '#EBEDF0',
     actionColor: '#EBEDF0',
-    hoverColor: composite(colors.primaryColor, 'rgba(255, 255, 255, .1)'),
+    hoverColor: changeColor(colors.primaryColor, { alpha: 0.1 }),
     clearColor: composite('#FFF', 'rgba(0, 0, 0, .4)'),
     ...colors
   },
