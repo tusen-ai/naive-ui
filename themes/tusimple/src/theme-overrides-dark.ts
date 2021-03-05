@@ -268,7 +268,9 @@ export const themeOverridesDark: GlobalThemeOverrides = {
   Divider: {
     color: '#5B5B5B'
   },
-  Drawer: {},
+  Drawer: {
+    padding: '20px'
+  },
   DynamicTags: {
     peers: {
       Tag: {

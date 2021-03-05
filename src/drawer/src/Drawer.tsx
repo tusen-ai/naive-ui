@@ -169,7 +169,7 @@ export default defineComponent({
             cubicBezierEaseIn,
             cubicBezierEaseOut
           },
-          self: { color, textColor, boxShadow, lineHeight }
+          self: { color, textColor, boxShadow, lineHeight, padding }
         } = themeRef.value
         return {
           '--line-height': lineHeight,
@@ -178,7 +178,8 @@ export default defineComponent({
           '--box-shadow': boxShadow,
           '--bezier': cubicBezierEaseInOut,
           '--bezier-out': cubicBezierEaseOut,
-          '--bezier-in': cubicBezierEaseIn
+          '--bezier-in': cubicBezierEaseIn,
+          '--padding': padding
         }
       }),
       isMounted: isMountedRef

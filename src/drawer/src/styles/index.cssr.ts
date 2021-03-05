@@ -13,6 +13,7 @@ import fadeInTransition from '../../../_styles/transitions/fade-in'
 // --bezier
 // --bezier-out
 // --bezier-in
+// --padding
 export default c([
   cB('drawer', `
     line-height: var(--line-height);
@@ -33,12 +34,12 @@ export default c([
     slideInFromBottomTransition(),
     cM('native-scrollbar', {
       boxSizing: 'border-box',
-      padding: '16px 24px'
+      padding: 'var(--padding)'
     }),
     cNotM('native-scrollbar', [
       cB('drawer-scroll-content', {
         boxSizing: 'border-box',
-        padding: '16px 24px'
+        padding: 'var(--padding)'
       })
     ]),
     cM('right-placement', `
