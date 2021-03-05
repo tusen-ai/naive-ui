@@ -17,7 +17,6 @@ function createPressedColor (
 // TODO
 // 2. input suffix & prefix text color
 // 3. input icon color?
-// 5. table body color => td color
 // 6. notification size customization
 // 7. upload style
 // 8. missing attrs
@@ -514,7 +513,7 @@ export const themeOverridesDark: GlobalThemeOverrides = {
   Table: {
     thColor: '#282828',
     thTextColor: '#FFFFFF',
-    bodyColor: '#1E1E1E',
+    tdColor: '#1E1E1E',
     tdTextColor: '#FFFFFF',
     thFontWeight: commonDark.fontWeight,
     borderColor: '#5B5B5B',
