@@ -1,5 +1,6 @@
 import { scrollbarDark } from '../../scrollbar/styles'
 import { commonDark } from '../../_styles/common'
+import commonVars from './_common'
 import type { NotificationTheme } from './light'
 
 const notificationDark: NotificationTheme = {
@@ -27,6 +28,7 @@ const notificationDark: NotificationTheme = {
       fontSize
     } = vars
     return {
+      ...commonVars,
       borderRadius,
       lineHeight,
       fontSize,
