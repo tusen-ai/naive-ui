@@ -48,6 +48,7 @@ const paginationDark: PaginationTheme = {
       itemColorHover: 'transparent',
       itemColorPressed: 'transparent',
       itemColorActive: 'transparent',
+      itemColorActiveHover: 'transparent',
       itemColorDisabled: inputColorDisabled,
       itemBorder: '1px solid transparent',
       itemBorderHover: '1px solid transparent',

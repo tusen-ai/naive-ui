@@ -319,10 +319,15 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     inputMargin: '0 20px',
     itemMargin: '0 20px 0 0',
     itemBorder: 'none',
+    itemBorderHover: 'none',
     itemBorderActive: 'none',
     itemBorderDisabled: 'none',
     itemColor: 'transparent',
     itemColorHover: composite(
+      commonLight.primaryColor,
+      'rgba(255, 255, 255, 0.9)'
+    ),
+    itemColorActiveHover: composite(
       commonLight.primaryColor,
       'rgba(255, 255, 255, 0.9)'
     ),
@@ -332,6 +337,8 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     itemTextColorHover: commonLight.textColor2,
     itemTextColorDisabled: '#D7DAE0',
     buttonBorder: 'none',
+    buttonBorderHover: 'none',
+    buttonBorderPressed: 'none',
     buttonIconColorHover: commonLight.primaryColor
   },
   Popover: {

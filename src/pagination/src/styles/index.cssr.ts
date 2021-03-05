@@ -14,6 +14,7 @@ import { cB, c, cM, cNotM } from '../../../_utils/cssr'
 // --item-color-hover
 // --item-color-disabled
 // --item-color-active
+// --item-color-active-hover
 // --item-border
 // --item-border-hover
 // --item-border-disabled
@@ -116,7 +117,11 @@ export default cB('pagination', `
         background: 'var(--item-color-active)',
         color: 'var(--item-text-color-active)',
         border: 'var(--item-border-active)'
-      })
+      }, [
+        c('&:hover', {
+          background: 'var(--item-color-active-hover)'
+        })
+      ])
     ]),
     cM('disabled', `
       cursor: not-allowed;
