@@ -268,20 +268,32 @@ export default defineComponent({
       if (props.trigger === 'hover' && !props.disabled) {
         clearTimer()
         if (mergedShowRef.value) return
-        showTimerIdRef.value = window.setTimeout(() => {
+        const delayCallback = (): void => {
           doUpdateShow(true)
           showTimerIdRef.value = null
-        }, props.delay)
+        }
+        const { delay } = props
+        if (delay === 0) {
+          delayCallback()
+        } else {
+          showTimerIdRef.value = window.setTimeout(delayCallback, delay)
+        }
       }
     }
     function handleMouseLeave (): void {
       if (props.trigger === 'hover' && !props.disabled) {
         clearTimer()
         if (!mergedShowRef.value) return
-        hideTimerIdRef.value = window.setTimeout(() => {
+        const delayedCallback = (): void => {
           doUpdateShow(false)
           hideTimerIdRef.value = null
-        }, props.duration)
+        }
+        const { duration } = props
+        if (duration === 0) {
+          delayedCallback()
+        } else {
+          hideTimerIdRef.value = window.setTimeout(delayedCallback, duration)
+        }
       }
     }
     // will be called in popover-content

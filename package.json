@@ -77,7 +77,7 @@
     "@vue/compiler-sfc": "^3.0.7",
     "@vue/eslint-config-standard": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
-    "@vue/test-utils": "^2.0.0-rc.1",
+    "@vue/test-utils": "^2.0.0-rc.3",
     "autoprefixer": "^9.8.6",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.3",
