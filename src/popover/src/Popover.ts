@@ -13,7 +13,7 @@ import {
 } from 'vue'
 import { VBinder, VTarget, FollowerPlacement } from 'vueuc'
 import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
-import { call, keep, warn } from '../../_utils'
+import { call, keep, warn, flatten } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -53,7 +53,7 @@ function getFirstSlotVNode (slots: Slots, slotName = 'default'): VNode | null {
     warn('getFirstSlotVNode', `slot[${slotName}] is empty`)
     return null
   }
-  const slotContent = slot()
+  const slotContent = flatten(slot())
   // vue will normalize the slot, so slot must be an array
   if (slotContent.length === 1) {
     return slotContent[0]
