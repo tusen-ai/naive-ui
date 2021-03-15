@@ -26,6 +26,12 @@ export default {
     onMounted(() => {
       loadingBarApiRef.value = loadingBar
       loadingBar.finish()
+      const memoedHash = window.location.hash
+      if (memoedHash) {
+        // scroll to hashed element
+        window.location.hash = ''
+        window.location.hash = memoedHash
+      }
     })
   }
 }
