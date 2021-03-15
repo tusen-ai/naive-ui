@@ -7,7 +7,12 @@
     }"
   >
     <template #header>
-      <slot name="title" />
+      <span
+style="cursor: pointer"
+@click="handleTitleClick"
+        ><slot
+name="title"
+      /></span>
     </template>
     <template #header-extra>
       <n-tooltip trigger="hover" :placement="'top'" :show-arrow="true">
@@ -78,8 +83,11 @@ export default {
       required: true
     }
   },
-  setup () {
+  setup (props) {
     return {
+      handleTitleClick: () => {
+        window.location.hash = `#${props.demoFileName}`
+      },
       displayMode: useDisplayMode(),
       ...i18n({
         'zh-CN': {
