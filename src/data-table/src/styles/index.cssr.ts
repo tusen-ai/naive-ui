@@ -91,7 +91,7 @@ export default c([
           cB('data-table-th', {
             borderRight: '1px solid var(--border-color)'
           }, [
-            c('&:last-child', {
+            cM('last', {
               borderRight: '0 solid var(--border-color)'
             })
           ]),
@@ -191,6 +191,7 @@ export default c([
         box-sizing: border-box;
         background-color: var(--th-color);
         border-color: var(--border-color);
+        border-bottom: 1px solid var(--border-color);
         color: var(--th-text-color);
         transition:
           border-color .3s var(--bezier),
@@ -259,10 +260,6 @@ export default c([
       c('&::-webkit-scrollbar', {
         width: 0,
         height: 0
-      }),
-      cB('data-table-table', {
-        borderBottom: '1px solid var(--border-color)',
-        transition: 'border-color .3s var(--bezier)'
       }),
       cB('data-table-th', [
         cB('data-table-sorter', `

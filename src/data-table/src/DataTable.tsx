@@ -28,15 +28,15 @@ import {
   OnUpdateCheckedRowKeys,
   OnUpdateSorter,
   RowKey,
-  TableColumnInfo,
+  TableColumns,
   TableNode,
   OnUpdateFilters,
   MainTableRef,
   DataTableInjection,
-  DataTableRef,
-  SelectionColInfo
+  DataTableRef
 } from './interface'
 import style from './styles/index.cssr'
+import { useGroupHeader } from './use-group-header'
 
 export const dataTableProps = {
   ...(useTheme.props as ThemeProps<DataTableTheme>),
@@ -47,7 +47,7 @@ export const dataTableProps = {
   minHeight: Number,
   maxHeight: Number,
   columns: {
-    type: Array as PropType<Array<TableColumnInfo | SelectionColInfo>>,
+    type: Array as PropType<TableColumns>,
     default: () => []
   },
   data: {
@@ -201,6 +201,7 @@ export default defineComponent({
       props
     )
     const mainTableInstRef = ref<MainTableRef | null>(null)
+    const { rows, cols, dataRelatedCols } = useGroupHeader(props)
     const {
       treeMate: treeMateRef,
       mergedCurrentPage: mergedCurrentPageRef,
@@ -217,7 +218,7 @@ export default defineComponent({
       clearFilters,
       page,
       sort
-    } = useTableData(props)
+    } = useTableData(props, { dataRelatedCols })
     const {
       doCheckAll,
       doUncheckAll,
@@ -251,7 +252,8 @@ export default defineComponent({
         treeMate: treeMateRef,
         mergedTheme: themeRef,
         scrollX: computed(() => props.scrollX),
-        columns: toRef(props, 'columns'),
+        rows,
+        cols,
         paginatedData: paginatedDataRef,
         leftActiveFixedColKey,
         rightActiveFixedColKey,

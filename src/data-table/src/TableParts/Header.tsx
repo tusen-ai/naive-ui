@@ -7,7 +7,6 @@ import FilterButton from '../HeaderButton/FilterButton'
 import {
   isColumnSortable,
   isColumnFilterable,
-  createCustomWidthStyle,
   createNextSorter,
   getColKey
 } from '../utils'
@@ -56,14 +55,15 @@ export default defineComponent({
     const {
       NDataTable: {
         scrollX,
-        columns,
         fixedColumnLeftMap,
         fixedColumnRightMap,
         currentPage,
         allRowsChecked,
         someRowsChecked,
         leftActiveFixedColKey,
-        rightActiveFixedColKey
+        rightActiveFixedColKey,
+        rows,
+        cols
       },
       headerStyle,
       handleColHeaderClick,
@@ -81,81 +81,88 @@ export default defineComponent({
           style={{ width: formatLength(scrollX) }}
         >
           <colgroup>
-            {columns.map((column, index) => (
-              <col
-                key={getColKey(column)}
-                style={createCustomWidthStyle(column, index)}
-              />
+            {cols.map((col) => (
+              <col key={col.key} style={col.style} />
             ))}
           </colgroup>
           <thead class="n-data-table-thead">
-            <tr class="n-data-table-tr">
-              {columns.map((column, index) => {
-                const key = getColKey(column)
-                return (
-                  <th
-                    key={key}
-                    style={{
-                      textAlign: column.align,
-                      left: pxfy(fixedColumnLeftMap[key]),
-                      right: pxfy(fixedColumnRightMap[key])
-                    }}
-                    class={[
-                      'n-data-table-th',
-                      column.fixed && `n-data-table-th--fixed-${column.fixed}`,
-                      {
-                        'n-data-table-th--filterable': isColumnFilterable(
-                          column
-                        ),
-                        'n-data-table-th--sortable': isColumnSortable(column),
-                        'n-data-table-th--shadow-after':
-                          leftActiveFixedColKey === key,
-                        'n-data-table-th--shadow-before':
-                          rightActiveFixedColKey === key,
-                        'n-data-table-th--selection':
-                          column.type === 'selection'
-                      },
-                      column.className
-                    ]}
-                    onClick={(e) => {
-                      column.type !== 'selection' &&
-                        handleColHeaderClick(e, column)
-                    }}
-                  >
-                    {column.type === 'selection' ? (
-                      <NCheckbox
-                        key={currentPage}
-                        tableHeader
-                        checked={allRowsChecked}
-                        indeterminate={someRowsChecked}
-                        onUpdateChecked={() =>
-                          handleCheckboxUpdateChecked(column)
-                        }
-                      />
-                    ) : column.ellipsis ? (
-                      <div class="n-data-table-th__ellipsis">
-                        {typeof column.title === 'function'
-                          ? column.title(column, index)
-                          : column.title}
-                      </div>
-                    ) : typeof column.title === 'function' ? (
-                      column.title(column, index)
-                    ) : (
-                      column.title
-                    )}
-                    {isColumnSortable(column) ? (
-                      <SortButton column={column as TableColumnInfo} />
-                    ) : null}
-                    {isColumnFilterable(column) ? (
-                      <FilterButton
-                        column={column as TableColumnInfo}
-                        options={column.filterOptions}
-                      />
-                    ) : null}
-                  </th>
-                )
-              })}
-            </tr>
+            {rows.map((row) => {
+              return (
+                <tr class="n-data-table-tr">
+                  {row.map(({ column, colSpan, rowSpan, isLast }) => {
+                    const key = getColKey(column)
+                    return (
+                      <th
+                        key={key}
+                        style={{
+                          textAlign: column.align,
+                          left: pxfy(fixedColumnLeftMap[key]),
+                          right: pxfy(fixedColumnRightMap[key])
+                        }}
+                        colspan={colSpan}
+                        rowspan={rowSpan}
+                        class={[
+                          'n-data-table-th',
+                          column.fixed &&
+                            `n-data-table-th--fixed-${column.fixed}`,
+                          {
+                            'n-data-table-th--filterable': isColumnFilterable(
+                              column
+                            ),
+                            'n-data-table-th--sortable': isColumnSortable(
+                              column
+                            ),
+                            'n-data-table-th--shadow-after':
+                              leftActiveFixedColKey === key,
+                            'n-data-table-th--shadow-before':
+                              rightActiveFixedColKey === key,
+                            'n-data-table-th--selection':
+                              column.type === 'selection',
+                            'n-data-table-th--last': isLast
+                          },
+                          column.className
+                        ]}
+                        onClick={(e) => {
+                          column.type !== 'selection' &&
+                            handleColHeaderClick(e, column)
+                        }}
+                      >
+                        {column.type === 'selection' ? (
+                          <NCheckbox
+                            key={currentPage}
+                            tableHeader
+                            checked={allRowsChecked}
+                            indeterminate={someRowsChecked}
+                            onUpdateChecked={() =>
+                              handleCheckboxUpdateChecked(column)
+                            }
+                          />
+                        ) : column.ellipsis ? (
+                          <div class="n-data-table-th__ellipsis">
+                            {typeof column.title === 'function'
+                              ? column.title(column)
+                              : column.title}
+                          </div>
+                        ) : typeof column.title === 'function' ? (
+                          column.title(column)
+                        ) : (
+                          column.title
+                        )}
+                        {isColumnSortable(column) ? (
+                          <SortButton column={column as TableColumnInfo} />
+                        ) : null}
+                        {isColumnFilterable(column) ? (
+                          <FilterButton
+                            column={column as TableColumnInfo}
+                            options={column.filterOptions}
+                          />
+                        ) : null}
+                      </th>
+                    )
+                  })}
+                </tr>
+              )
+            })}
           </thead>
         </table>
       </div>

@@ -7,7 +7,9 @@ import type {
   SortOrderFlag,
   SortState,
   CreateRowClassName,
-  SelectionColInfo
+  SelectionColInfo,
+  TableColumnGroup,
+  TableColumn
 } from './interface'
 
 export const selectionColWidth = 40
@@ -20,7 +22,7 @@ export function getColWidth (
 }
 
 export function getColKey (
-  col: TableColumnInfo | SelectionColInfo
+  col: TableColumnInfo | SelectionColInfo | TableColumnGroup
 ): string | number {
   if (col.type === 'selection') return '__n_selection__'
   return col.key
@@ -41,8 +43,7 @@ export function getFlagOfOrder (order: SortOrder): SortOrderFlag {
 }
 
 export function createCustomWidthStyle (
-  column: TableColumnInfo | SelectionColInfo,
-  index: number
+  column: TableColumnInfo | SelectionColInfo
 ): CSSProperties {
   return {
     width: pxfy(getColWidth(column))
@@ -69,15 +70,13 @@ export function shouldUseArrayInSingleMode (column: TableColumnInfo): boolean {
   )
 }
 
-export function isColumnSortable (
-  column: TableColumnInfo | SelectionColInfo
-): boolean {
+export function isColumnSortable (column: TableColumn): boolean {
+  if ('children' in column) return false
   return !!column.sorter
 }
 
-export function isColumnFilterable (
-  column: TableColumnInfo | SelectionColInfo
-): boolean {
+export function isColumnFilterable (column: TableColumn): boolean {
+  if ('children' in column) return false
   return (
     !!column.filter && (!!column.filterOptions || !!column.renderFilterMenu)
   )

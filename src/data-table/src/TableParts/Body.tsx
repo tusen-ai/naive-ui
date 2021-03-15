@@ -4,7 +4,7 @@ import { NCheckbox } from '../../../checkbox'
 import { NScrollbar, ScrollbarRef } from '../../../scrollbar'
 import { formatLength } from '../../../_utils'
 import { DataTableInjection, TmNode } from '../interface'
-import { createCustomWidthStyle, createRowClassName, getColKey } from '../utils'
+import { createRowClassName } from '../utils'
 import Cell from './Cell'
 
 export default defineComponent({
@@ -67,11 +67,8 @@ export default defineComponent({
           default: () => (
             <table ref="body" class="n-data-table-table">
               <colgroup>
-                {NDataTable.columns.map((column, index) => (
-                  <col
-                    key={getColKey(column)}
-                    style={createCustomWidthStyle(column, index)}
-                  ></col>
+                {NDataTable.cols.map((col) => (
+                  <col key={col.key} style={col.style}></col>
                 ))}
               </colgroup>
               <tbody ref="tbody" class="n-data-table-tbody">
@@ -79,7 +76,7 @@ export default defineComponent({
                   const { rawNode: row } = tmNode
                   const { handleCheckboxUpdateChecked } = this
                   const {
-                    columns,
+                    cols,
                     fixedColumnLeftMap,
                     fixedColumnRightMap,
                     currentPage,
@@ -96,8 +93,8 @@ export default defineComponent({
                         createRowClassName(row, index, rowClassName)
                       ]}
                     >
-                      {columns.map((column) => {
-                        const key = getColKey(column)
+                      {cols.map((col) => {
+                        const { key, column } = col
                         return (
                           <td
                             key={key}
