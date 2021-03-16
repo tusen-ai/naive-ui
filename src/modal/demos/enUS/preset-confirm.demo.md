@@ -9,7 +9,6 @@ An example of preset `dialog`.
   preset="confirm"
   title="Dialog"
   content="Are you sure?"
-  :closable="false"
   positive-text="Submit"
   @positive-click="submitCallback"
   @negative-click="cancelCallback"

@@ -9,7 +9,6 @@
   preset="confirm"
   title="确认"
   content="你确认?"
-  :closable="false"
   positive-text="确认"
   @positive-click="submitCallback"
   @negative-click="cancelCallback"
