@@ -7,13 +7,12 @@ import {
   defineComponent,
   PropType,
   VNode,
-  Slots,
   provide,
   CSSProperties
 } from 'vue'
 import { VBinder, VTarget, FollowerPlacement } from 'vueuc'
 import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
-import { call, keep, warn, flatten } from '../../_utils'
+import { call, keep, warn, getFirstSlotVNode } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -45,22 +44,6 @@ function appendEvents (
       }
     }
   })
-}
-
-function getFirstSlotVNode (slots: Slots, slotName = 'default'): VNode | null {
-  const slot = slots[slotName]
-  if (!slot) {
-    warn('getFirstSlotVNode', `slot[${slotName}] is empty`)
-    return null
-  }
-  const slotContent = flatten(slot())
-  // vue will normalize the slot, so slot must be an array
-  if (slotContent.length === 1) {
-    return slotContent[0]
-  } else {
-    warn('getFirstSlotVNode', `slot[${slotName}] should have exactly one child`)
-    return null
-  }
 }
 
 const textVNodeType = createTextVNode('').type

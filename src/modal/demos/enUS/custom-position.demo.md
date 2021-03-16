@@ -1,11 +1,14 @@
-# Basic
+# Custom Position
 
-Basic usage of modal. You can put anything in modal, a card for example.
+Use fixed position to set the position of the modal.
 
 ```html
 <n-button @click="showModal = true"> Start Me up </n-button>
-<n-modal v-model:show="showModal">
-  <n-card style="width: 600px;" title="Modal" :bordered="false" size="huge">
+<n-modal
+  v-model:show="showModal"
+  style="width: 600px; position: fixed; right: 100px; bottom: 100px;"
+>
+  <n-card title="Modal" :bordered="false" size="huge">
     <template #header-extra> Oops! </template>
     Content
     <template #footer> Footer </template>

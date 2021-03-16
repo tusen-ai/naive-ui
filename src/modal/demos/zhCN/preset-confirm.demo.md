@@ -3,9 +3,9 @@
 `dialog` 预设的例子。
 
 ```html
-<n-button @click="modalActive = true"> 来吧 </n-button>
+<n-button @click="showModal = true"> 来吧 </n-button>
 <n-modal
-  v-model:show="modalActive"
+  v-model:show="showModal"
   preset="confirm"
   title="确认"
   content="你确认?"
@@ -17,19 +17,20 @@
 ```
 
 ```js
+import { ref } from 'vue'
+import { useMessage } from 'naive-ui'
+
 export default {
-  inject: ['message'],
-  data () {
+  setup () {
+    const message = useMessage()
     return {
-      modalActive: false
-    }
-  },
-  methods: {
-    cancelCallback () {
-      this.message.success('算了')
-    },
-    submitCallback () {
-      this.message.success('确认')
+      showModal: ref(false),
+      cancelCallback () {
+        message.success('Cancel')
+      },
+      submitCallback () {
+        message.success('Submit')
+      }
     }
   }
 }

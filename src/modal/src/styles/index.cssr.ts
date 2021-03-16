@@ -42,21 +42,18 @@ export default c([
     cB('modal-scroll-content', `
       min-height: 100%;
       display: flex;
+      position: relative;
     `)
   ]),
   cB('modal', `
+    align-self: center;
     color: var(--text-color);
     margin: auto;
-    position: relative;
     box-shadow: var(--box-shadow);
   `, [
     fadeInScaleUpTransition({
       duration: '.25s',
       enterScale: '.5'
-    }),
-    cB('confirm', `
-      width: 446px;
-      max-width: calc(100vw - 32px);
-    `)
+    })
   ])
 ])

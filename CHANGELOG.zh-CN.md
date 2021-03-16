@@ -6,6 +6,7 @@
 
 - `n-layout-sider` 新增 `default-collapsed` 属性
 - `n-modal` 新增 `show-mask` 属性
+- `n-modal` 支持自定义位置
 
 ### Fixed
 

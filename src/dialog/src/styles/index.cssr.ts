@@ -1,4 +1,4 @@
-import { c, cB, cE, cM, insideModal } from '../../../_utils/cssr'
+import { asModal, c, cB, cE, cM, insideModal } from '../../../_utils/cssr'
 
 // vars:
 // --icon-color
@@ -107,5 +107,11 @@ export default c([
       width: 446px;
       max-width: calc(100vw - 32px);
     `)
-  )
+  ),
+  cB('dialog', [
+    asModal(`
+      width: 446px;
+      max-width: calc(100vw - 32px);
+    `)
+  ])
 ])

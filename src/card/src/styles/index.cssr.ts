@@ -1,4 +1,4 @@
-import { c, cB, cE, cM, insideModal } from '../../../_utils/cssr'
+import { asModal, c, cB, cE, cM, insideModal } from '../../../_utils/cssr'
 
 // vars:
 // --bezier
@@ -166,5 +166,10 @@ export default c([
   ]),
   insideModal(cB('card', {
     background: 'var(--color-modal)'
-  }))
+  })),
+  cB('card', [
+    asModal({
+      background: 'var(--color-modal)'
+    })
+  ])
 ])

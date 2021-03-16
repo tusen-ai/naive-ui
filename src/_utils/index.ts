@@ -6,7 +6,8 @@ export {
   getSlot,
   getVNodeChildren,
   keysOf,
-  render
+  render,
+  getFirstSlotVNode
 } from './vue'
 export type { MaybeArray } from './vue'
 export { warn, warnOnce, throwError, smallerSize, largerSize } from './naive'

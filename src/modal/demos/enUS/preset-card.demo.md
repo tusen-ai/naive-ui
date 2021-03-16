@@ -3,9 +3,9 @@
 Modal has some presets, which means you can use props & slots of the preset after set it.
 
 ```html
-<n-button @click="modalActive = true"> Start Me up </n-button>
+<n-button @click="showModal = true"> Start Me up </n-button>
 <n-modal
-  v-model:show="modalActive"
+  v-model:show="showModal"
   preset="card"
   :style="bodyStyle"
   title="Modal"
@@ -29,7 +29,7 @@ export default {
       bodyStyle: {
         width: '600px'
       },
-      modalActive: false
+      showModal: false
     }
   }
 }

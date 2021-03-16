@@ -1,13 +1,10 @@
 import { useMemo } from 'vooks'
-import { ComputedRef, inject } from 'vue'
+import { ComponentPublicInstance, ComputedRef, inject } from 'vue'
+import type { ModalBodyInjection } from '../../modal/src/BodyWrapper'
 
 interface UseAdjustedToProps {
   to?: string | HTMLElement
   [key: string]: unknown
-}
-
-interface ModalInjection {
-  bodyRef: HTMLElement
 }
 
 interface DrawerInjection {
@@ -17,12 +14,14 @@ interface DrawerInjection {
 export function useAdjustedTo (
   props: UseAdjustedToProps
 ): ComputedRef<HTMLElement | string> {
-  const modal = inject<ModalInjection | null>('NModalBody', null)
+  const modal = inject<ModalBodyInjection | null>('NModalBody', null)
   const drawer = inject<DrawerInjection | null>('NDrawerBody', null)
   return useMemo(() => {
     const { to } = props
     if (to !== undefined) return to
-    if (modal) return modal.bodyRef
+    if (modal?.bodyRef) {
+      return (modal.bodyRef as ComponentPublicInstance).$el ?? modal.bodyRef
+    }
     if (drawer) return drawer.bodyRef
     return to ?? 'body'
   })

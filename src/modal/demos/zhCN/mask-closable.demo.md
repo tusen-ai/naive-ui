@@ -18,21 +18,23 @@
 ```
 
 ```js
+import { ref } from 'vue'
+import { useMessage } from 'naive-ui'
+
 export default {
-  inject: ['message'],
-  data () {
+  setup () {
+    const message = useMessage()
+    const showModalRef = ref(false)
     return {
-      showModal: false
-    }
-  },
-  methods: {
-    onNegativeClick () {
-      this.message.success('算了')
-      this.showModal = false
-    },
-    onPositiveClick () {
-      this.message.success('确认')
-      this.showModal = false
+      showModal: showModalRef,
+      onNegativeClick () {
+        message.success('Cancel')
+        showModalRef.value = false
+      },
+      onPositiveClick () {
+        message.success('Submit')
+        showModalRef.value = false
+      }
     }
   }
 }

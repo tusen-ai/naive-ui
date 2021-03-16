@@ -8,6 +8,7 @@
 basic
 controlled
 mask-closable
+custom-position
 preset-card
 preset-confirm
 preset-confirm-slot

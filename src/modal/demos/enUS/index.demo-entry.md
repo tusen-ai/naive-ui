@@ -8,6 +8,7 @@ It just pops and shows you something.
 basic
 controlled
 mask-closable
+custom-position
 preset-card
 preset-confirm
 preset-confirm-slot

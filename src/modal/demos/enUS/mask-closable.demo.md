@@ -3,36 +3,38 @@
 Use `mask-closable=false` to make modal not emit the event which may close the modal.
 
 ```html
-<n-button @click="modalActive = true"> Start Me up </n-button>
+<n-button @click="showModal = true"> Start Me up </n-button>
 <n-modal
-  v-model:show="modalActive"
+  v-model:show="showModal"
   :mask-closable="false"
   preset="confirm"
   title="Dialog"
   content="Are you sure?"
   positive-text="Confirm"
-  @positive-click="submitCallback"
-  @negative-click="cancelCallback"
+  @positive-click="onPositiveClick"
+  @negative-click="onNegativeClick"
   negative-text="Cancel"
 />
 ```
 
 ```js
+import { ref } from 'vue'
+import { useMessage } from 'naive-ui'
+
 export default {
-  inject: ['message'],
-  data () {
+  setup () {
+    const message = useMessage()
+    const showModalRef = ref(false)
     return {
-      modalActive: false
-    }
-  },
-  methods: {
-    cancelCallback () {
-      this.message.success('Cancel')
-      this.modalActive = false
-    },
-    submitCallback () {
-      this.message.success('Submit')
-      this.modalActive = false
+      showModal: showModalRef,
+      onPositiveClick () {
+        message.success('Cancel')
+        showModalRef.value = false
+      },
+      onNegativeClick () {
+        message.success('Submit')
+        showModalRef.value = false
+      }
     }
   }
 }

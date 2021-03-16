@@ -3,9 +3,9 @@
 An example of preset `dialog`.
 
 ```html
-<n-button @click="modalActive = true"> Start Me up </n-button>
+<n-button @click="showModal = true"> Start Me up </n-button>
 <n-modal
-  v-model:show="modalActive"
+  v-model:show="showModal"
   preset="confirm"
   title="Dialog"
   content="Are you sure?"
@@ -17,19 +17,20 @@ An example of preset `dialog`.
 ```
 
 ```js
+import { ref } from 'vue'
+import { useMessage } from 'naive-ui'
+
 export default {
-  inject: ['message'],
-  data () {
+  setup () {
+    const message = useMessage()
     return {
-      modalActive: false
-    }
-  },
-  methods: {
-    cancelCallback () {
-      this.message.success('Cancel')
-    },
-    submitCallback () {
-      this.message.success('Submit')
+      showModal: ref(false),
+      cancelCallback () {
+        message.success('Cancel')
+      },
+      submitCallback () {
+        message.success('Submit')
+      }
     }
   }
 }

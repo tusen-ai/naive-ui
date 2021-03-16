@@ -3,8 +3,8 @@
 Slots are also related to preset.
 
 ```html
-<n-button @click="modalActive = true"> Start Me up </n-button>
-<n-modal v-model:show="modalActive" preset="confirm" title="Dialog">
+<n-button @click="showModal = true"> Start Me up </n-button>
+<n-modal v-model:show="showModal" preset="confirm" title="Dialog">
   <template #header>
     <div>title</div>
   </template>
@@ -21,7 +21,7 @@ Slots are also related to preset.
 export default {
   data () {
     return {
-      modalActive: false
+      showModal: false
     }
   }
 }

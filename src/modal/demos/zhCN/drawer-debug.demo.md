@@ -1,11 +1,11 @@
 # Drawer Debug
 
 ```html
-<n-button @click="modalActive = !modalActive">Toggle</n-button>
+<n-button @click="showModal = !showModal">Toggle</n-button>
 <n-modal
   title="Dark Modal Debug"
   preset="card"
-  v-model:show="modalActive"
+  v-model:show="showModal"
   :style="{ marginTop: '24px', marginBottom: '24px', width: '800px' }"
 >
   <n-button @click="drawerActive = !drawerActive">Open Drawer</n-button>
@@ -168,7 +168,7 @@ export default {
   data () {
     return {
       drawerActive: false,
-      modalActive: false,
+      showModal: false,
       size: 'medium',
       model: {
         inputValue: null,

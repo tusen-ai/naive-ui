@@ -1,4 +1,4 @@
-import CSSRender, { CNode } from 'css-render'
+import CSSRender, { CNode, CProperties } from 'css-render'
 import BEMPlugin from '@css-render/plugin-bem'
 
 const namespace = 'n'
@@ -35,6 +35,10 @@ function cRB (selector: string, ...rest: any[]): CNode {
   return (c as any)(`${prefix}${selector}`, ...rest)
 }
 
+function asModal (style: CProperties): CNode {
+  return c(`&${prefix}modal`, style)
+}
+
 function withPrefix (selector: string): string {
   return `${prefix}${selector}`
 }
@@ -49,6 +53,7 @@ export {
   insideFormItem,
   insideModal,
   withPrefix,
+  asModal,
   prefix,
   namespace,
   find
