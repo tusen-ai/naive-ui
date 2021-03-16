@@ -1,14 +1,14 @@
-# 水平菜单
+# 选中
 
-一个水平菜单
+使用 `@update:value` 监听菜单选择变化。
 
 ```html
-<n-menu v-model:value="activeKey" mode="horizontal" :items="menuItems" />
+<n-menu @update:value="handleUpdateValue" :items="menuItems" />
 ```
 
 ```js
 import { h } from 'vue'
-import { NIcon } from 'naive-ui'
+import { NIcon, useMessage } from 'naive-ui'
 import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
@@ -95,10 +95,14 @@ const menuItems = [
 ]
 
 export default {
-  data () {
+  setup () {
+    const message = useMessage()
     return {
-      activeKey: null,
-      menuItems
+      menuItems,
+      handleUpdateValue (key, item) {
+        message.info('[onUpdate:value]: ' + JSON.stringify(key))
+        message.info('[onUpdate:value]: ' + JSON.stringify(item))
+      }
     }
   }
 }

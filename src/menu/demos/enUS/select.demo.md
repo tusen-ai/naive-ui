@@ -1,41 +1,14 @@
-# Collapsed Menu
+# Select
 
-Use collapsable vertical menu with layout sider. Use `collapsed` to control collapse status of menu. You must set `collapsed-width` to make it collapse in a right manner. There are still some other collapse related props you can modify: `icon-size`, `collapsed-icon-size`. For details see API table at the bottom of the page.
+Use `@update:value` to listen to the select action of the menu.
 
 ```html
-<n-space vertical>
-  <n-switch v-model:value="collapsed" />
-  <n-layout>
-    <n-layout-sider
-      bordered
-      collapse-mode="width"
-      :collapsed-width="64"
-      :width="240"
-      :collapsed="collapsed"
-      show-toggle-button
-      @collapse="collapsed = true"
-      @expand="collapsed = false"
-    >
-      <n-menu
-        :collapsed="collapsed"
-        :collapsed-width="64"
-        :collapsed-icon-size="22"
-        :items="menuItems"
-        v-model:value="activeKey"
-      />
-    </n-layout-sider>
-    <n-layout>
-      <n-layout-content>
-        <span>Content</span>
-      </n-layout-content>
-    </n-layout>
-  </n-layout>
-</n-space>
+<n-menu @update:value="handleUpdateValue" :items="menuItems" />
 ```
 
 ```js
 import { h } from 'vue'
-import { NIcon } from 'naive-ui'
+import { NIcon, useMessage } from 'naive-ui'
 import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
@@ -122,11 +95,14 @@ const menuItems = [
 ]
 
 export default {
-  data () {
+  setup () {
+    const message = useMessage()
     return {
-      activeKey: null,
-      collapsed: true,
-      menuItems
+      menuItems,
+      handleUpdateValue (key, item) {
+        message.info('[onUpdate:value]: ' + JSON.stringify(key))
+        message.info('[onUpdate:value]: ' + JSON.stringify(item))
+      }
     }
   }
 }

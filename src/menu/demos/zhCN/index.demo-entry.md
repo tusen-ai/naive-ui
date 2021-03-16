@@ -8,6 +8,7 @@
 
 ```demo
 horizontal
+select
 default-expanded-keys
 indent
 collapse

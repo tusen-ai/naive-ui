@@ -8,6 +8,7 @@ No Food.
 
 ```demo
 horizontal
+select
 default-expanded-names
 indent
 collapse

@@ -4,15 +4,15 @@
 
 ```html
 <n-menu
-  v-model:value="activeKey"
-  :default-expanded-keys="defaultExpandedKeys"
   :items="menuItems"
+  :default-expanded-keys="defaultExpandedKeys"
   @update:expanded-keys="handleUpdateExpandedKeys"
 />
 ```
 
 ```js
-import { h, resolveComponent } from 'vue'
+import { h } from 'vue'
+import { NIcon, useMessage } from 'naive-ui'
 import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
@@ -20,7 +20,7 @@ import {
 } from '@vicons/ionicons5'
 
 function renderIcon (icon) {
-  return () => h(resolveComponent('n-icon'), null, { default: () => h(icon) })
+  return () => h(NIcon, null, { default: () => h(icon) })
 }
 
 const menuItems = [
@@ -99,17 +99,14 @@ const menuItems = [
 ]
 
 export default {
-  inject: ['message'],
-  data () {
+  setup () {
+    const message = useMessage()
     return {
+      menuItems,
       defaultExpandedKeys: ['dance-dance-dance', 'food'],
-      activeKey: null,
-      menuItems
-    }
-  },
-  methods: {
-    handleUpdateExpandedKeys (value) {
-      this.message.info('[onUpdate:expandedKeys]: ' + JSON.stringify(value))
+      handleUpdateExpandedKeys (keys) {
+        message.info('[onUpdate:expandedKeys]: ' + JSON.stringify(keys))
+      }
     }
   }
 }
