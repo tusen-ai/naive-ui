@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Feat
+
+- `n-layout-sider` 新增 `default-collapsed` 属性
+
 ### Fixed
 
 - 修正 `n-menu` 垂直折叠时 `n-menu-item` tooltip 不显示的问题

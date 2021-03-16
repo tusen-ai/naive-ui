@@ -12,9 +12,7 @@ A trigger button, for free.
       show-trigger
       :collapsed-width="120"
       :width="240"
-      :collapsed="collapsed"
-      @collapse="collapsed = true"
-      @expand="collapsed = false"
+      v-model:collapsed="collapsed"
     >
       <n-h1>Sider</n-h1>
     </n-layout-sider>
@@ -39,9 +37,7 @@ A trigger button, for free.
       collapse-mode="transform"
       :collapsed-width="120"
       :width="240"
-      :collapsed="collapsed"
-      @collapse="collapsed = true"
-      @expand="collapsed = false"
+      v-model:collapsed="collapsed"
     >
       <n-h1>Sider</n-h1>
     </n-layout-sider>

@@ -10,9 +10,7 @@
     show-trigger
     :collapsed-width="120"
     :width="240"
-    :collapsed="collapsed"
-    @collapse="collapsed = true"
-    @expand="collapsed = false"
+    v-model:collapsed="collapsed"
   >
     <n-h1>边栏</n-h1>
   </n-layout-sider>
@@ -31,9 +29,7 @@
     collapse-mode="transform"
     :collapsed-width="120"
     :width="240"
-    :collapsed="collapsed"
-    @collapse="collapsed = true"
-    @expand="collapsed = false"
+    v-model:collapsed="collapsed"
   >
     <n-h1>边栏</n-h1>
   </n-layout-sider>

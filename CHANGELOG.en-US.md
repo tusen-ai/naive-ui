@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Feat
+
+- `n-layout-sider` Add `default-collapsed` prop.
+
 ### Fixes
 
 - Fix `n-menu` tooltip of `n-menu-item` won't show when vertical collapsed.

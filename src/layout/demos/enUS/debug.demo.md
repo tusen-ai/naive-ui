@@ -9,10 +9,8 @@
   <n-layout position="absolute" style="top: 64px;">
     <n-layout-sider
       position="absolute"
-      :collapsed="collapsed"
+      v-model:collapsed="collapsed"
       show-toggle-button
-      @collapse="collapsed = true"
-      @expand="collapsed = false"
     >
       <n-h1>Sider</n-h1>
     </n-layout-sider>

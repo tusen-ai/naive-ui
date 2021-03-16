@@ -12,10 +12,8 @@ Sometimes you don't want to see content inside sider after it's collapsed.
       :show-content="!collapsed"
       :collapsed-width="120"
       :width="240"
-      :collapsed="collapsed"
+      v-model:collapsed="collapsed"
       show-toggle-button
-      @collapse="collapsed = true"
-      @expand="collapsed = false"
     >
       <n-h1>Sider</n-h1>
     </n-layout-sider>
@@ -40,10 +38,8 @@ Sometimes you don't want to see content inside sider after it's collapsed.
       :show-content="!collapsed"
       :collapsed-width="120"
       :width="240"
-      :collapsed="collapsed"
+      v-model:collapsed="collapsed"
       show-toggle-button
-      @collapse="collapsed = true"
-      @expand="collapsed = false"
     >
       <n-h1>Sider Sider Sider</n-h1>
     </n-layout-sider>
