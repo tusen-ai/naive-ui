@@ -52,7 +52,7 @@ export default defineComponent({
         return (
           props.root &&
           NMenu.collapsed &&
-          NMenu.mode === 'horizontal' &&
+          NMenu.mode !== 'horizontal' &&
           !mergedDisabledRef.value
         )
       }),
