@@ -32,8 +32,8 @@ collapse
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` |  |
 | root-indent | `number` | `undefined` | The indent of menu's first level children. If not set, menu will use `indent` in place of it. |
 | value | `string \| null` | `undefined` | The selected name of menu. |
-| on-update:expanded-keys | `(value: string[]) => any` | `undefined` |  |
-| on-update:value | `(value: string, item: MenuItem) => any` | `undefined` |  |
+| on-update:expanded-keys | `(keys: string[]) => void` | `undefined` | `keys` is the array of expanded menu items' `key`. |
+| on-update:value | `(key: string, item: MenuItem) => void` | `undefined` | Callback when select a menu item. `key` is the `key` of the selected menu item. `item` is then original data of the menu item. |
 
 ### MenuItem Properties
 
