@@ -5,12 +5,11 @@
 ```html
 <n-button @click="showModal = true"> 来吧 </n-button>
 <n-modal
-  :show="showModal"
+  v-model:show="showModal"
   :mask-closable="false"
   preset="confirm"
   title="确认"
   content="你确认"
-  :closable="false"
   positive-text="确认"
   @positive-click="onPositiveClick"
   @negative-click="onNegativeClick"

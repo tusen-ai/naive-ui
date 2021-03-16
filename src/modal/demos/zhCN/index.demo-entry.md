@@ -28,6 +28,7 @@ drawer-debug
 | mask-closable | `boolean` | `true` | 点击遮罩时是否发出 `update:show` 事件 |
 | preset | `'card' \| 'dialog'` | `undefined` | 模态框使用何种预设 |
 | show | `boolean` | `false` | 是否展示 Modal |
+| show-mask | `boolean` | `true` | 是否展示 Modal 的遮罩 |
 | on-update:show | `(value: boolean) => any` | `undefined` | 模态框更新是否展示状态的回调 |
 
 ### Modal（Card 预设）

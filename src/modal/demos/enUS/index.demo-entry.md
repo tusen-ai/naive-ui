@@ -23,6 +23,7 @@ preset-confirm-slot
 | mask-closable | `boolean` | `true` | Whether to emit `hide` event when click mask. |
 | preset | `'card' \| 'confirm'` | `undefined` |  |
 | show | `boolean` | `false` | Whether to show modal. |
+| show-mask | `boolean` | `true` | Whether to show mask of the modal. |
 | on-update:show | `(value: boolean) => any` | `undefined` | Callback when modal's display status is changed. |
 
 ### Modal with Preset Card

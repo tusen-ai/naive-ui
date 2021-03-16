@@ -10,7 +10,6 @@ Use `mask-closable=false` to make modal not emit the event which may close the m
   preset="confirm"
   title="Dialog"
   content="Are you sure?"
-  :closable="false"
   positive-text="Confirm"
   @positive-click="submitCallback"
   @negative-click="cancelCallback"

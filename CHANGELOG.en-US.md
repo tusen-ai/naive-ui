@@ -4,7 +4,8 @@
 
 ### Feat
 
-- `n-layout-sider` Add `default-collapsed` prop.
+- `n-layout-sider` add `default-collapsed` prop.
+- `n-modal` add `show-mask` prop.
 
 ### Fixes
 
