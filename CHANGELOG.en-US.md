@@ -6,6 +6,7 @@
 
 - Fix `n-menu` tooltip of `n-menu-item` won't show when vertical collapsed.
 - Fix `n-menu` `collapsed-icon-size` not working.
+- Fix `n-layout-sider` toggle button is covered.
 
 ## 2.0.0
 

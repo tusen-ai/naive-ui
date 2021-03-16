@@ -15,6 +15,7 @@ absolute
 scrollbar
 collapse
 trigger-button
+trigger-button-debug
 show-sider-content
 scroll-to
 ```

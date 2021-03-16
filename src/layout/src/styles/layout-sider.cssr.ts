@@ -10,7 +10,7 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 export default cB('layout-sider', `
   box-sizing: border-box;
   position: relative;
-  z-index: auto;
+  z-index: 1;
   transition:
     min-width .3s var(--bezier),
     max-width .3s var(--bezier),
@@ -19,7 +19,6 @@ export default cB('layout-sider', `
   background-color: var(--sider-color);
 `, [
   cB('layout-toggle-button', `
-    z-index: 1;
     transition:
       transform .3s var(--bezier),
       fill .3s var(--bezier);
