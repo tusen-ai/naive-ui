@@ -188,6 +188,7 @@ export default defineComponent({
         indent: toRef(props, 'indent'),
         rootIndent: toRef(props, 'rootIndent'),
         collapsedWidth: toRef(props, 'collapsedWidth'),
+        collapsedIconSize: toRef(props, 'collapsedIconSize'),
         disabled: toRef(props, 'disabled'),
         mergedValue: mergedValueRef,
         mergedExpandedKeys: mergedExpandedKeysRef,

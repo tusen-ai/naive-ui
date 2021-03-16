@@ -2,7 +2,10 @@
 
 ## Pending
 
+### Fixed
+
 - 修正 `n-menu` 垂直折叠时 `n-menu-item` tooltip 不显示的问题
+- 修正 `n-menu` `collapsed-icon-size` 不生效的问题
 
 ## 2.0.0
 

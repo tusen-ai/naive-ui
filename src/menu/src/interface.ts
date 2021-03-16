@@ -24,14 +24,14 @@ export type MenuOption =
     /** @deprecated */
     title: string | (() => VNodeChild)
   })
-  | (MenuOptionBase & { label: string | (() => VNodeChild) })
+  | (MenuOptionBase & { label?: string | (() => VNodeChild) })
 
 export type MenuGroupOption =
   | (MenuGroupOptionBase & {
     /** @deprecated */
     title: string | (() => VNodeChild)
   })
-  | (MenuGroupOptionBase & { label: string | (() => VNodeChild) })
+  | (MenuGroupOptionBase & { label?: string | (() => VNodeChild) })
 
 export type TmNode = TreeNode<MenuOption, MenuGroupOption>
 

@@ -25,9 +25,7 @@
       />
     </n-layout-sider>
     <n-layout>
-      <n-layout-content>
-        <span>内容</span>
-      </n-layout-content>
+      <span>内容</span>
     </n-layout>
   </n-layout>
 </n-space>

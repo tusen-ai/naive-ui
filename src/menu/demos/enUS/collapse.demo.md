@@ -25,9 +25,7 @@ Use collapsable vertical menu with layout sider. Use `collapsed` to control coll
       />
     </n-layout-sider>
     <n-layout>
-      <n-layout-content>
-        <span>Content</span>
-      </n-layout-content>
+      <span>Content</span>
     </n-layout>
   </n-layout>
 </n-space>
