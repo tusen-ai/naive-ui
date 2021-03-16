@@ -6,7 +6,7 @@
 
 <n-space vertical>
 <n-alert title="使用前提" type="warning">
-  如果你想使用通知，你需要把调用其方法的组件放在 <n-text code>n-nofitication-provider</n-text> 内部并且注入 <n-text code>nofitication</n-text>。
+  如果你想使用通知，你需要把调用其方法的组件放在 <n-text code>n-nofitication-provider</n-text> 内部并且使用 <n-text code>useNotification</n-text> 来获取 API。
 </n-alert>
 例如：
 
