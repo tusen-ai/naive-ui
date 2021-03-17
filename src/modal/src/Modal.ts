@@ -45,7 +45,7 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    showMask: {
+    unstableShowMask: {
       type: Boolean,
       default: true
     },
@@ -266,7 +266,7 @@ export default defineComponent({
                 style: this.cssVars as CSSProperties
               },
               [
-                this.showMask
+                this.unstableShowMask
                   ? h(
                     Transition,
                     {

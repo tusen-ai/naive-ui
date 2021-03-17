@@ -5,7 +5,6 @@
 ### Feat
 
 - `n-layout-sider` add `default-collapsed` prop.
-- `n-modal` add `show-mask` prop.
 - `n-modal` support custom position.
 
 ### Fixes
