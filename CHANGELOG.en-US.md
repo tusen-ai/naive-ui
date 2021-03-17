@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.0.1
 
 ### Feat
 
@@ -11,6 +11,7 @@
 
 - Fix `n-menu` tooltip of `n-menu-item` won't show when vertical collapsed.
 - Fix `n-menu` `collapsed-icon-size` not working.
+- Fix `n-menu` callback props validate array with error.
 - Fix `n-layout-sider` toggle button is covered.
 
 ## 2.0.0
