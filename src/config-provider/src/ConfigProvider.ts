@@ -8,6 +8,7 @@ import {
   reactive
 } from 'vue'
 import { useMemo } from 'vooks'
+import { merge } from 'lodash-es'
 import { warn, getSlot } from '../../_utils'
 import type { Hljs } from '../../_mixins'
 import {
@@ -106,10 +107,22 @@ export default defineComponent({
     })
     const mergedUnstableThemeOverridesRef = computed(() => {
       const { themeOverrides } = props
+      // stop inheriting themeOverrides
       if (themeOverrides === null) return undefined
-      return themeOverrides === undefined
-        ? NConfigProvider?.mergedUnstableThemeOverrides
-        : themeOverrides
+      // use inherited themeOverrides
+      if (themeOverrides === undefined) {
+        return NConfigProvider?.mergedUnstableThemeOverrides
+      } else {
+        const inheritedThemeOverrides =
+          NConfigProvider?.mergedUnstableThemeOverrides
+        if (inheritedThemeOverrides === undefined) {
+          // no inherited, use self overrides
+          return themeOverrides
+        } else {
+          // merge overrides
+          return merge({}, inheritedThemeOverrides, themeOverrides)
+        }
+      }
     })
     const mergedNamespaceRef = useMemo(() => {
       const { namespace } = props

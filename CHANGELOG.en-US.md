@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feat
+
+- `n-config-provider` prop `theme-overrides` support inheritance.
+
 ## 2.0.1
 
 ### Feat

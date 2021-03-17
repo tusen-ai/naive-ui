@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feat
+
+- `n-config-provider` 的 `theme-overrides` 支持继承
+
 ## 2.0.1
 
 ### Feat

@@ -11,6 +11,7 @@ inherit-theme
 os-theme
 language
 transparent
+overrides-inherit-debug
 theme-environment-debug
 ```
 
