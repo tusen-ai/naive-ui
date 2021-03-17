@@ -429,9 +429,9 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     selectWidth: '100px',
     inputMargin: '0 20px',
     itemMargin: '0 20px 0 0',
-    itemBorder: 'none',
-    itemBorderActive: 'none',
-    itemBorderDisabled: 'none',
+    itemBorder: '0 solid transparent',
+    itemBorderActive: '0 solid transparent',
+    itemBorderDisabled: '0 solid transparent',
     itemColor: 'transparent',
     itemColorHover: 'rgba(79, 178, 51, 0.15)',
     itemColorActive: 'transparent',
@@ -441,7 +441,7 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     itemTextColorHover: colors.primaryColor,
     itemTextColorDisabled: '#5B5B5B',
     buttonIconColor: '#FFFFFF',
-    buttonBorder: 'none',
+    buttonBorder: '0 solid transparent',
     buttonIconColorHover: commonDark.primaryColor
   },
   Popover: {

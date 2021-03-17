@@ -135,7 +135,8 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     textColorTextDisabledError: '#D7DAE0',
     iconMarginSmall: '8px',
     iconMarginMedium: '8px',
-    iconMarginLarge: '12px'
+    iconMarginLarge: '12px',
+    fontWeightText: '600'
   },
   Checkbox: {
     sizeMedium: '16px',
@@ -318,11 +319,15 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     selectWidth: '100px',
     inputMargin: '0 20px',
     itemMargin: '0 20px 0 0',
-    itemBorder: 'none',
-    itemBorderHover: 'none',
-    itemBorderActive: 'none',
-    itemBorderDisabled: 'none',
+    itemBorder: '0 solid transparent',
+    itemBorderHover: '0 solid transparent',
+    itemBorderActive: '0 solid transparent',
+    itemBorderDisabled: '0 solid transparent',
     itemColor: 'transparent',
+    itemColorPressed: composite(
+      commonLight.primaryColor,
+      'rgba(255, 255, 255, 0.9)'
+    ),
     itemColorHover: composite(
       commonLight.primaryColor,
       'rgba(255, 255, 255, 0.9)'
@@ -336,9 +341,9 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     itemBorderRadius: '100px',
     itemTextColorHover: commonLight.textColor2,
     itemTextColorDisabled: '#D7DAE0',
-    buttonBorder: 'none',
-    buttonBorderHover: 'none',
-    buttonBorderPressed: 'none',
+    buttonBorder: '0 solid transparent',
+    buttonBorderHover: '0 solid transparent',
+    buttonBorderPressed: '0 solid transparent',
     buttonIconColorHover: commonLight.primaryColor
   },
   Popover: {
