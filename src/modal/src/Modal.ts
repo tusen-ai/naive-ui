@@ -62,8 +62,12 @@ export default defineComponent({
     ...presetProps,
     // events
     // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:show': Function as PropType<MaybeArray<(value: boolean) => void>>,
-    onUpdateShow: Function as PropType<MaybeArray<(value: boolean) => void>>,
+    'onUpdate:show': [Function, Array] as PropType<
+    MaybeArray<(value: boolean) => void>
+    >,
+    onUpdateShow: [Function, Array] as PropType<
+    MaybeArray<(value: boolean) => void>
+    >,
     // private
     dialog: Boolean,
     appear: {

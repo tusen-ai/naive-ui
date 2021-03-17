@@ -85,12 +85,14 @@ export default defineComponent({
       default: false
     },
     // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:expandedKeys': Function as PropType<MaybeArray<OnUpdateKeys>>,
+    'onUpdate:expandedKeys': [Function, Array] as PropType<
+    MaybeArray<OnUpdateKeys>
+    >,
     // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': Function as PropType<MaybeArray<OnUpdateValue>>,
+    'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
     // deprecated
     onOpenNamesChange: {
-      type: Function as PropType<MaybeArray<OnUpdateKeys>>,
+      type: [Function, Array] as PropType<MaybeArray<OnUpdateKeys>>,
       validator: () => {
         warn(
           'menu',
@@ -101,7 +103,7 @@ export default defineComponent({
       default: undefined
     },
     onSelect: {
-      type: Function as PropType<MaybeArray<OnUpdateValue>>,
+      type: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
       validator: () => {
         warn(
           'menu',
@@ -112,7 +114,7 @@ export default defineComponent({
       default: undefined
     },
     onExpandedNamesChange: {
-      type: Function as PropType<MaybeArray<OnUpdateKeys>>,
+      type: [Function, Array] as PropType<MaybeArray<OnUpdateKeys>>,
       validator: () => {
         warn(
           'menu',
