@@ -2,34 +2,49 @@
 
 <!--single-column-->
 
-A basic grid system.
+Based on CSS Grid. Responsive. Keep away from IE.
 
-## Demos
+If you do need IE, try [Legacy Grid](n-legacy-grid).
 
 ```demo
 basic
-gutter
+gap
 offset
-push-pull
+responsive
+collapse
 ```
 
 ## Props
 
-### Row Props
+### Grid Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| gutter | `number \| string \| [number, number] \| [string, string]` | `0` | `horizontal gutter` or `[horizontal gutter, vertical gutter]` |
+| cols | `number \| ResponsiveDescription` | `24` |  |
+| collapsed | `boolean` | `false` |  |
+| collapsed-rows | `number` | `1` |  |
+| responsive | `'self' \| 'screen'` | `'screen'` | `'self'` triggers responsive layout by its own width. `'screen'` triggers responsive layout by viewport's witdh. |
+| x-gap | `number \| ResponsiveDescription` | `0` |  |
+| y-gap | `number \| ResponsiveDescription` | `0` |  |
 
-### Col Props
+### GridItem Props
 
-| Name   | Type     | Default | Description |
-| ------ | -------- | ------- | ----------- |
-| span   | `number` | `1`     |             |
-| offset | `number` | `0`     |             |
-| push   | `number` | `0`     |             |
-| pull   | `number` | `0`     |             |
+| Name   | Type      | Default | Description |
+| ------ | --------- | ------- | ----------- |
+| offset | `number`  | `0`     |             |
+| span   | `number`  | `1`     |             |
+| suffix | `boolean` | `false` |             |
 
-## Notes
+## Slots
 
-The grid is not responsive, for I have not enough time, ha...
+### Grid Slots
+
+| Name    | Parameters | Description |
+| ------- | ---------- | ----------- |
+| default | `()`       |             |
+
+### GridItem Slots
+
+| Name    | Parameters                | Description |
+| ------- | ------------------------- | ----------- |
+| default | `({ overflow: boolean })` |             |

@@ -16,7 +16,10 @@ export function itemRenderer (
   const { rawNode, key, level } = tmNode
   const props = {
     ...rawNode,
-    title: (rawNode.title || rawNode.label) as string | (() => VNodeChild),
+    title: (rawNode.title || rawNode.label) as
+      | string
+      | (() => VNodeChild)
+      | undefined,
     extra: rawNode.titleExtra || rawNode.extra,
     key,
     internalKey: key, // since key can't be used as a prop

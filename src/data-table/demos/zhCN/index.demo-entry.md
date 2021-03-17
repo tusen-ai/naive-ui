@@ -17,6 +17,7 @@ border
 size
 filter-and-sorter
 select
+group-header
 controlled-page
 controlled-filter
 controlled-sorter
@@ -75,6 +76,7 @@ custom-filter-menu
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | align | `'left' \| 'right' \| 'center'` | `'left'` | 列内的文本排列 |
+| children | `Column[]` | `undefined` | 成组列头的子节点 |
 | className | `string` | `undefined` |  |
 | defaultFilterOptionValue | `string \| number \| null` | `null` | 非受控状态下默认的过滤器选项值（过滤器单选时生效） |
 | defaultFilterOptionValues | `Array<string \| number>` | `[]` | 非受控状态下默认的过滤器选项值（过滤器多选时生效） |

@@ -1,4 +1,4 @@
-import { computed, ref } from 'vue'
+import { computed, ref, ComputedRef } from 'vue'
 import { useMergedState } from 'vooks'
 import { createTreeMate } from 'treemate'
 import type { DataTableProps } from './DataTable'
@@ -10,6 +10,7 @@ import type {
   SortOrder,
   SortState,
   TableColumnInfo,
+  SelectionColInfo,
   TableNode,
   TmNode
 } from './interface'
@@ -20,7 +21,14 @@ import { call, warn } from '../../_utils'
 // useTableData combines filter, sorter and pagination
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function useTableData (props: DataTableProps) {
+export function useTableData (
+  props: DataTableProps,
+  {
+    dataRelatedCols
+  }: {
+    dataRelatedCols: ComputedRef<Array<SelectionColInfo | TableColumnInfo>>
+  }
+) {
   const treeMateRef = computed(() =>
     createTreeMate<TableNode>(props.data, {
       getKey: props.rowKey
@@ -32,7 +40,7 @@ export function useTableData (props: DataTableProps) {
   const uncontrolledCurrentPageRef = ref(1)
   const uncontrolledPageSizeRef = ref(10)
 
-  props.columns.forEach((column) => {
+  dataRelatedCols.value.forEach((column) => {
     if (column.sorter !== undefined) {
       uncontrolledSortStateRef.value = {
         columnKey: column.key,
@@ -90,7 +98,7 @@ export function useTableData (props: DataTableProps) {
   const mergedSortStateRef = computed<SortState | null>(() => {
     // If one of the columns's sort order is false or 'ascend' or 'descend',
     // the table's controll functionality should work in controlled manner.
-    const columnsWithControlledSortOrder = props.columns.filter(
+    const columnsWithControlledSortOrder = dataRelatedCols.value.filter(
       (column) =>
         column.type !== 'selection' &&
         column.sorter !== undefined &&
@@ -120,12 +128,14 @@ export function useTableData (props: DataTableProps) {
   })
 
   const mergedFilterStateRef = computed<FilterState>(() => {
-    const columnsWithControlledFilter = props.columns.filter((column) => {
-      return (
-        column.filterOptionValues !== undefined ||
-        column.filterOptionValue !== undefined
-      )
-    })
+    const columnsWithControlledFilter = dataRelatedCols.value.filter(
+      (column) => {
+        return (
+          column.filterOptionValues !== undefined ||
+          column.filterOptionValue !== undefined
+        )
+      }
+    )
     const controlledFilterState: FilterState = {}
     columnsWithControlledFilter.forEach((column) => {
       if (column.type === 'selection') return
@@ -315,7 +325,7 @@ export function useTableData (props: DataTableProps) {
     if (!columnKey) {
       clearSorter()
     } else {
-      const columnToSort = props.columns.find(
+      const columnToSort = dataRelatedCols.value.find(
         (column) => column.type !== 'selection' && column.key === columnKey
       )
       if (!columnToSort || !columnToSort.sorter) return

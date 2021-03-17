@@ -39,8 +39,8 @@ export default defineComponent({
         const {
           self: {
             borderColor,
-            bodyColor,
-            bodyColorModal,
+            tdColor,
+            tdColorModal,
             thColor,
             thTextColor,
             tdTextColor,
@@ -55,8 +55,8 @@ export default defineComponent({
         } = themeRef.value
         return {
           '--bezier': cubicBezierEaseInOut,
-          '--td-color': bodyColor,
-          '--td-color-modal': bodyColorModal,
+          '--td-color': tdColor,
+          '--td-color-modal': tdColorModal,
           '--td-text-color': tdTextColor,
           '--border-color': borderColor,
           '--border-radius': borderRadius,

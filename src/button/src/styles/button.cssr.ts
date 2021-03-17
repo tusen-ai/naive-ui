@@ -31,11 +31,13 @@ import iconSwitchTransition from '../../../_styles/transitions/icon-switch'
 // --icon-size
 // --icon-margin
 // --wave-opacity
+// --font-weight
 //
 // private-vars:
 // --border-color-xxx, used for custom color
 export default c([
   cB('button', `
+    font-weight: var(--font-weight);
     line-height: 1;
     font-family: inherit;
     padding: var(--padding);

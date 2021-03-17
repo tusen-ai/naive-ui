@@ -51,12 +51,14 @@ const inputDark: InputTheme = {
       textColor: textColor2,
       textColorDisabled: textColor4,
       textDecorationColor: textColor2,
+      groupLabelTextColor: textColor2,
       caretColor: primaryColor,
       placeholderColor: textColor4,
       placeholderColorDisabled: textColor5,
       color: inputColor,
       colorDisabled: inputColorDisabled,
       colorFocus: changeColor(primaryColor, { alpha: 0.1 }),
+      groupLabelBorder: '1px solid transparent',
       border: '1px solid transparent',
       borderHover: `1px solid ${primaryColorHover}`,
       borderDisabled: '1px solid transparent',
@@ -82,7 +84,10 @@ const inputDark: InputTheme = {
       caretColorError: errorColor,
       clearColor,
       clearColorHover,
-      clearColorPressed
+      clearColorPressed,
+      iconColor: textColor4,
+      iconColorDisabled: textColor5,
+      suffixTextColor: textColor2
     }
   }
 }

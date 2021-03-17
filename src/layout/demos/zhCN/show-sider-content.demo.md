@@ -12,10 +12,8 @@
       :show-content="!collapsed"
       :collapsed-width="120"
       :width="240"
-      :collapsed="collapsed"
+      v-model:collapsed="collapsed"
       show-toggle-button
-      @collapse="collapsed = true"
-      @expand="collapsed = false"
     >
       <n-h1>酷的边栏</n-h1>
     </n-layout-sider>
@@ -40,10 +38,8 @@
       :show-content="!collapsed"
       :collapsed-width="120"
       :width="240"
-      :collapsed="collapsed"
+      v-model:collapsed="collapsed"
       show-toggle-button
-      @collapse="collapsed = true"
-      @expand="collapsed = false"
     >
       <n-h1>边栏 边栏 边栏</n-h1>
     </n-layout-sider>

@@ -52,7 +52,7 @@ export default defineComponent({
         return (
           props.root &&
           NMenu.collapsed &&
-          NMenu.mode === 'horizontal' &&
+          NMenu.mode !== 'horizontal' &&
           !mergedDisabledRef.value
         )
       }),
@@ -83,7 +83,7 @@ export default defineComponent({
           themeOverrides={this.mergedTheme.peerOverrides.Tooltip}
           trigger="hover"
           placement={this.dropdownPlacement}
-          disabled={!this.dropdownEnabled}
+          disabled={!this.dropdownEnabled || this.title === undefined}
         >
           {{
             default: () => this.title,

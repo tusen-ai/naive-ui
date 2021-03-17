@@ -7,7 +7,8 @@
 ```
 
 ```js
-import { h, resolveComponent } from 'vue'
+import { h } from 'vue'
+import { NIcon } from 'naive-ui'
 import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
@@ -15,7 +16,7 @@ import {
 } from '@vicons/ionicons5'
 
 function renderIcon (icon) {
-  return () => h(resolveComponent('n-icon'), null, { default: () => h(icon) })
+  return () => h(NIcon, null, { default: () => h(icon) })
 }
 
 const menuItems = [

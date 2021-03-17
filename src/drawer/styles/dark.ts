@@ -11,6 +11,7 @@ const drawerDark: DrawerTheme = {
   self (vars) {
     const { modalColor, textColor2, boxShadow3, lineHeight } = vars
     return {
+      padding: '16px 24px',
       color: modalColor,
       textColor: textColor2,
       boxShadow: boxShadow3,

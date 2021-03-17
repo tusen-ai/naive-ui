@@ -1,6 +1,6 @@
 import { h } from 'vue'
-import NCol from '../../src/grid/src/Col'
-import NRow from '../../src/grid/src/Row'
+import NCol from '../../src/legacy-grid/src/Col'
+import NRow from '../../src/legacy-grid/src/Row'
 
 export default {
   name: 'ComponentDemos',
@@ -12,10 +12,6 @@ export default {
   },
   render () {
     const defaultSlot = (this.$slots.default && this.$slots.default()) || []
-    // const anchorSlot = (this.$slots.anchor && this.$slots.anchor()) || []
-    // const anchor = [h('div', {
-    //   staticClass: 'n-documentation-anchor'
-    // }, anchorSlot)]
     if (this.singleColumn) {
       return h(
         NRow,
@@ -24,7 +20,6 @@ export default {
         },
         {
           default: () => h(NCol, { span: 24 }, this.$slots)
-          // h(NCol, { props: { span: 4 } }, anchorSlot)
         }
       )
     } else {

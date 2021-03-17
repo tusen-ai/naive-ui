@@ -1,35 +1,51 @@
-# 栅格 Grid
+# Grid 栅格
 
 <!--single-column-->
 
-一个基本的栅格系统。
+基于 CSS Grid，响应式，远离 IE。
 
-## 演示
+如果你一定要 IE，试试 [旧版栅格](n-legacy-grid).
 
 ```demo
 basic
-gutter
+gap
 offset
-push-pull
+responsive
+collapse
+grid-basic-debug
 ```
 
 ## Props
 
-### Row Props
+### Grid Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| gutter | `number \| string \| [number, number] \| [string, string]` | `0` | `水平间隔` 或者 `[水平间隔, 垂直间隔]` |
+| cols | `number \| ResponsiveDescription` | `24` |  |
+| collapsed | `boolean` | `false` |  |
+| collapsed-rows | `number` | `1` |  |
+| responsive | `'self' \| 'screen'` | `'self'` | `'self'` 根据自身宽度进行响应式布局，`'screen'` 根据屏幕断点进行响应式布局 |
+| x-gap | `number \| ResponsiveDescription` | `0` |  |
+| y-gap | `number \| ResponsiveDescription` | `0` |  |
 
-### Col Props
+### GridItem Props
 
-| 名称   | 类型     | 默认值 | 说明 |
-| ------ | -------- | ------ | ---- |
-| span   | `number` | `1`    |      |
-| offset | `number` | `0`    |      |
-| push   | `number` | `0`    |      |
-| pull   | `number` | `0`    |      |
+| 名称   | 类型      | 默认值  | 说明 |
+| ------ | --------- | ------- | ---- |
+| offset | `number`  | `0`     |      |
+| span   | `number`  | `1`     |      |
+| suffix | `boolean` | `false` |      |
 
-## 备注
+## Slots
 
-栅格不是响应式的，因为不太有时间写，额...
+### Grid Slots
+
+| 名称    | 参数 | 说明 |
+| ------- | ---- | ---- |
+| default | `()` |      |
+
+### GridItem Slots
+
+| 名称    | 参数                      | 说明 |
+| ------- | ------------------------- | ---- |
+| default | `({ overflow: boolean })` |      |

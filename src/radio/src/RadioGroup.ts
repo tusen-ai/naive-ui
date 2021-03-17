@@ -104,7 +104,10 @@ export default defineComponent({
       type: [String, Number] as PropType<string | number | null>,
       default: null
     },
-    size: String as PropType<'small' | 'medium' | 'large'>,
+    size: {
+      type: String as PropType<'small' | 'medium' | 'large' | undefined>,
+      default: undefined
+    },
     disabled: {
       type: Boolean,
       default: false

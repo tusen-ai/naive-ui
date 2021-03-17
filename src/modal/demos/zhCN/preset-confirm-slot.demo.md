@@ -3,8 +3,8 @@
 插槽也会随着预设变动。
 
 ```html
-<n-button @click="modalActive = true"> 来吧 </n-button>
-<n-modal v-model:show="modalActive" preset="confirm" title="Dialog">
+<n-button @click="showModal = true"> 来吧 </n-button>
+<n-modal v-model:show="showModal" preset="confirm" title="Dialog">
   <template #header>
     <div>标题</div>
   </template>
@@ -19,7 +19,7 @@
 export default {
   data () {
     return {
-      modalActive: false
+      showModal: false
     }
   }
 }

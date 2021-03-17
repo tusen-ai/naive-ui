@@ -1,13 +1,26 @@
-import { h, defineComponent, onBeforeMount, onBeforeUnmount } from 'vue'
+import {
+  h,
+  defineComponent,
+  onBeforeMount,
+  onBeforeUnmount,
+  PropType
+} from 'vue'
 import { NConfigProvider, configProviderProps } from 'naive-ui'
 import { renderFilter, renderSorter } from './data-table'
-import { unconfigurableStyle, mountSvgDefs } from './unconfigurable-style'
-import { themeOverrides } from './theme-overrides'
+import { unconfigurableStyle, mountSvgDefs } from './unconfigurable-style-light'
+import { themeOverridesLight } from './theme-overrides-light'
+import { themeOverridesDark } from './theme-overrides-dark'
 import { icons } from './icons'
 
 export default defineComponent({
   name: 'TsConfigProvider',
-  props: configProviderProps,
+  props: {
+    themeName: {
+      type: String as PropType<'light' | 'dark'>,
+      default: 'light'
+    },
+    ...configProviderProps
+  },
   setup () {
     onBeforeMount(() => {
       mountSvgDefs()
@@ -42,8 +55,11 @@ export default defineComponent({
   render () {
     return (
       <NConfigProvider
+        class={`ts-${this.themeName}-theme`}
         {...this.$props}
-        themeOverrides={themeOverrides}
+        themeOverrides={
+          this.themeName === 'light' ? themeOverridesLight : themeOverridesDark
+        }
         componentOptions={this.componentOptions}
         icons={icons}
       >

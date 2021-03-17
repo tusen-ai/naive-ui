@@ -60,7 +60,7 @@ export default defineComponent({
     return h(
       NPopover,
       omit(this.$props, panelPropKeys, {
-        raw: true,
+        padded: false,
         ref: 'popoverInstRef',
         class: 'n-popselect',
         theme: mergedTheme.peers.Popover,

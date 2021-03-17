@@ -5,12 +5,11 @@
 ```html
 <n-button @click="showModal = true"> 来吧 </n-button>
 <n-modal
-  :show="showModal"
+  v-model:show="showModal"
   :mask-closable="false"
   preset="confirm"
   title="确认"
   content="你确认"
-  :closable="false"
   positive-text="确认"
   @positive-click="onPositiveClick"
   @negative-click="onNegativeClick"
@@ -19,21 +18,23 @@
 ```
 
 ```js
+import { ref } from 'vue'
+import { useMessage } from 'naive-ui'
+
 export default {
-  inject: ['message'],
-  data () {
+  setup () {
+    const message = useMessage()
+    const showModalRef = ref(false)
     return {
-      showModal: false
-    }
-  },
-  methods: {
-    onNegativeClick () {
-      this.message.success('算了')
-      this.showModal = false
-    },
-    onPositiveClick () {
-      this.message.success('确认')
-      this.showModal = false
+      showModal: showModalRef,
+      onNegativeClick () {
+        message.success('Cancel')
+        showModalRef.value = false
+      },
+      onPositiveClick () {
+        message.success('Submit')
+        showModalRef.value = false
+      }
     }
   }
 }

@@ -194,9 +194,23 @@ export default defineComponent({
           common: { cubicBezierEaseInOut, cubicBezierEaseOut },
           self
         } = theme
-        const { rippleDuration, opacityDisabled } = self
+        const {
+          rippleDuration,
+          opacityDisabled,
+          fontWeightText,
+          fontWeighGhost,
+          fontWeight
+        } = self
         const size = mergedSizeRef.value
         const { dashed, type, ghost, text, color, round, circle } = props
+        // font
+        const fontProps = {
+          fontWeight: text
+            ? fontWeightText
+            : ghost
+              ? fontWeighGhost
+              : fontWeight
+        }
         // color
         let colorProps = {
           '--color': 'initial',
@@ -345,6 +359,7 @@ export default defineComponent({
           '--ripple-duration': rippleDuration,
           '--opacity-disabled': opacityDisabled,
           '--wave-opacity': waveOpacity,
+          ...fontProps,
           ...colorProps,
           ...borderProps,
           ...sizeProps

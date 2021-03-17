@@ -25,6 +25,7 @@ import type { LayoutInjection } from './Layout'
 import ToggleButton from './ToggleButton'
 import ToggleBar from './ToggleBar'
 import { positionProp } from './interface'
+import { useMergedState } from 'vooks'
 
 const layoutSiderProps = {
   position: positionProp,
@@ -45,6 +46,10 @@ const layoutSiderProps = {
     default: 'transform'
   },
   collapsed: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
+  defaultCollapsed: {
     type: Boolean,
     default: false
   },
@@ -93,9 +98,14 @@ export default defineComponent({
     const styleWidthRef = ref<string | null>(null)
     const styleMaxWidthRef = ref<string | null>(null)
     const NLayout = inject<LayoutInjection | null>('NLayout', null)
+    const uncontrolledCollapsedRef = ref(props.defaultCollapsed)
+    const mergedCollapsedRef = useMergedState(
+      toRef(props, 'collapsed'),
+      uncontrolledCollapsedRef
+    )
     const styleTransformRef = computed(() => {
       if (props.collapseMode === 'transform') {
-        if (!props.collapsed) return 'translateX(0)'
+        if (!mergedCollapsedRef.value) return 'translateX(0)'
         else return `translateX(-${props.width - props.collapsedWidth}px)`
       }
       return ''
@@ -117,17 +127,18 @@ export default defineComponent({
       const {
         'onUpdate:collapsed': _onUpdateCollapsed,
         onUpdateCollapsed,
-        collapsed,
         // deprecated
         onExpand,
         onCollapse
       } = props
+      const { value: collapsed } = mergedCollapsedRef
       if (onUpdateCollapsed) {
         call(onUpdateCollapsed, !collapsed)
       }
       if (_onUpdateCollapsed) {
         call(_onUpdateCollapsed, !collapsed)
       }
+      uncontrolledCollapsedRef.value = !collapsed
       if (collapsed) {
         if (onExpand) call(onExpand)
       } else {
@@ -154,7 +165,7 @@ export default defineComponent({
         NLayout.siderPosition = value
       }
     })
-    watch(toRef(props, 'collapsed'), (value) => {
+    watch(mergedCollapsedRef, (value) => {
       if (props.collapseMode === 'width') {
         if (collapseTimerId) {
           window.clearTimeout(collapseTimerId)
@@ -187,7 +198,7 @@ export default defineComponent({
     })
     // onCreated, init
     if (props.collapseMode === 'width') {
-      if (props.collapsed) {
+      if (mergedCollapsedRef.value) {
         styleWidthRef.value = `${props.collapsedWidth}px`
       } else {
         styleWidthRef.value = `${props.width}px`
@@ -201,7 +212,7 @@ export default defineComponent({
       NLayout.siderCollapsedWidth = props.collapsedWidth
       NLayout.siderCollapseMode = props.collapseMode
       NLayout.siderPosition = props.position
-      NLayout.siderCollapsed = props.collapsed
+      NLayout.siderCollapsed = mergedCollapsedRef.value
     }
     onBeforeUnmount(() => {
       if (NLayout) {
@@ -227,6 +238,7 @@ export default defineComponent({
       styleTransform: styleTransformRef,
       styleMaxWidth: styleMaxWidthRef,
       styleWidth: styleWidthRef,
+      mergedCollapsed: mergedCollapsedRef,
       scrollTo,
       handleTriggerClick,
       cssVars: computed(() => {
@@ -260,7 +272,7 @@ export default defineComponent({
           this.position && [`n-layout-sider--${this.position}-positioned`],
           {
             'n-layout-sider--bordered': this.bordered,
-            'n-layout-sider--collapsed': this.collapsed,
+            'n-layout-sider--collapsed': this.mergedCollapsed,
             'n-layout-sider--show-content': this.showContent
           }
         ]}
@@ -298,7 +310,7 @@ export default defineComponent({
             />
           ) : (
             <ToggleBar
-              collapsed={this.collapsed}
+              collapsed={this.mergedCollapsed}
               style={this.triggerStyle}
               onClick={this.handleTriggerClick}
             />

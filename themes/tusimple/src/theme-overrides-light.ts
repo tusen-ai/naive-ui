@@ -1,4 +1,4 @@
-import { composite } from 'seemly'
+import { composite, changeColor } from 'seemly'
 import type { GlobalThemeOverrides } from 'naive-ui'
 import { commonLight } from 'naive-ui'
 import vars from './vars'
@@ -35,19 +35,19 @@ export const colors = {
   textColor2: '#333'
 }
 
-export const themeOverrides: GlobalThemeOverrides = {
+export const themeOverridesLight: GlobalThemeOverrides = {
   common: {
     fontSize: '16px',
     fontSizeMedium: '16px',
     fontWeightStrong: '700',
     borderRadius: '16px',
-    boxShadow2: '0 2px 16px 0 rgba(0,0,0,0.10), 0 0 16px -2px rgba(0,0,0,0.06)',
+    boxShadow2: vars.NORMAL_BOX_SHADOW,
     borderColor: '#999',
     dividerColor: '#EBEDF0',
     tableHeaderColor: '#EBEDF0',
     inputColorDisabled: '#EBEDF0',
     actionColor: '#EBEDF0',
-    hoverColor: composite(colors.primaryColor, 'rgba(255, 255, 255, .1)'),
+    hoverColor: changeColor(colors.primaryColor, { alpha: 0.1 }),
     clearColor: composite('#FFF', 'rgba(0, 0, 0, .4)'),
     ...colors
   },
@@ -319,10 +319,15 @@ export const themeOverrides: GlobalThemeOverrides = {
     inputMargin: '0 20px',
     itemMargin: '0 20px 0 0',
     itemBorder: 'none',
+    itemBorderHover: 'none',
     itemBorderActive: 'none',
     itemBorderDisabled: 'none',
     itemColor: 'transparent',
     itemColorHover: composite(
+      commonLight.primaryColor,
+      'rgba(255, 255, 255, 0.9)'
+    ),
+    itemColorActiveHover: composite(
       commonLight.primaryColor,
       'rgba(255, 255, 255, 0.9)'
     ),
@@ -332,6 +337,8 @@ export const themeOverrides: GlobalThemeOverrides = {
     itemTextColorHover: commonLight.textColor2,
     itemTextColorDisabled: '#D7DAE0',
     buttonBorder: 'none',
+    buttonBorderHover: 'none',
+    buttonBorderPressed: 'none',
     buttonIconColorHover: commonLight.primaryColor
   },
   Popover: {

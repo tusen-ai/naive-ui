@@ -4,7 +4,7 @@
 
 <n-space vertical>
 <n-alert title="使用前提" type="warning">
-  如果你想使用对话框，你需要把调用其方法的组件放在 <n-text code>n-dialog-provider</n-text> 内部并且注入 <n-text code>dialog</n-text>。
+  如果你想使用对话框，你需要把调用其方法的组件放在 <n-text code>n-dialog-provider</n-text> 内部并且使用 <n-text code>useDialog</n-text> 去获取 API。
 </n-alert>
 例如：
 

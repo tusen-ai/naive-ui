@@ -1,20 +1,20 @@
 # 基础用法
 
 ```html
-<n-row gutter="12">
-  <n-col :span="6">
+<n-grid x-gap="12" :cols="4">
+  <n-grid-item>
     <div class="light-green"></div>
-  </n-col>
-  <n-col :span="6">
+  </n-grid-item>
+  <n-grid-item>
     <div class="green"></div>
-  </n-col>
-  <n-col :span="6">
+  </n-grid-item>
+  <n-grid-item>
     <div class="light-green"></div>
-  </n-col>
-  <n-col :span="6">
+  </n-grid-item>
+  <n-grid-item>
     <div class="green"></div>
-  </n-col>
-</n-row>
+  </n-grid-item>
+</n-grid>
 ```
 
 ```css

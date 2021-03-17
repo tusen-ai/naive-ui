@@ -7,6 +7,7 @@ import {
   VNodeChild,
   CSSProperties
 } from 'vue'
+import { getPadding } from 'seemly'
 import { createKey, keysOf, render as Render } from '../../_utils'
 import { NBaseIcon, NBaseClose } from '../../_internal'
 import {
@@ -83,6 +84,10 @@ export default defineComponent({
             boxShadow,
             lineHeight,
             fontSize,
+            closeMargin,
+            closeSize,
+            width,
+            padding,
             [createKey('iconColor', type)]: iconColor
           },
           common: {
@@ -91,6 +96,7 @@ export default defineComponent({
             cubicBezierEaseInOut
           }
         } = NNotificationProvider.mergedTheme
+        const { left, right, top, bottom } = getPadding(padding)
         return {
           '--color': color,
           '--font-size': fontSize,
@@ -108,7 +114,14 @@ export default defineComponent({
           '--close-color-hover': closeColorHover,
           '--close-color-pressed': closeColorPressed,
           '--line-height': lineHeight,
-          '--icon-color': iconColor
+          '--icon-color': iconColor,
+          '--close-margin': closeMargin,
+          '--close-size': closeSize,
+          '--width': width,
+          '--padding-left': left,
+          '--padding-right': right,
+          '--padding-top': top,
+          '--padding-bottom': bottom
         }
       })
     }

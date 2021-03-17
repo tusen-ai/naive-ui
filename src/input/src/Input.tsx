@@ -13,7 +13,7 @@ import {
   CSSProperties
 } from 'vue'
 import { useMergedState } from 'vooks'
-import NIconConfigProvider from '../../icon/src/IconConfigProvider'
+import { toRgbString, getAlphaString } from 'seemly'
 import { NBaseClear } from '../../_internal'
 import { useTheme, useLocale, useFormItem, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -46,7 +46,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    size: String as PropType<Size>,
+    size: {
+      type: String as PropType<Size | undefined>,
+      default: undefined
+    },
     rows: {
       type: [Number, String] as PropType<number | string>,
       default: 3
@@ -638,6 +641,9 @@ export default defineComponent({
             clearColor,
             clearColorHover,
             clearColorPressed,
+            iconColor,
+            iconColorDisabled,
+            suffixTextColor,
             [createKey('paddingLeft', size)]: paddingLeft,
             [createKey('paddingRight', size)]: paddingRight,
             [createKey('fontSize', size)]: fontSize,
@@ -685,7 +691,12 @@ export default defineComponent({
           '--clear-color': clearColor,
           '--clear-size': clearSize,
           '--clear-color-hover': clearColorHover,
-          '--clear-color-pressed': clearColorPressed
+          '--clear-color-pressed': clearColorPressed,
+          '--icon-color': toRgbString(iconColor),
+          '--icon-color-disabled': toRgbString(iconColorDisabled),
+          '--icon-alpha': getAlphaString(iconColor),
+          '--icon-alpha-disabled': getAlphaString(iconColorDisabled),
+          '--suffix-text-color': suffixTextColor
         }
       })
     }
@@ -727,17 +738,11 @@ export default defineComponent({
         {/* textarea & basic input */}
         <div class="n-input-wrapper">
           {this.$slots.affix || this.$slots.prefix ? (
-            <NIconConfigProvider
-              class="n-input__prefix"
-              depth={this.disabled ? 5 : 4}
-            >
-              {{
-                default: () =>
-                  renderSlot(this.$slots, 'affix', undefined, () => {
-                    return [renderSlot(this.$slots, 'prefix')]
-                  })
-              }}
-            </NIconConfigProvider>
+            <div class="n-input__prefix">
+              {renderSlot(this.$slots, 'affix', undefined, () => {
+                return [renderSlot(this.$slots, 'prefix')]
+              })}
+            </div>
           ) : null}
           {this.type === 'textarea' ? (
             <div class="n-input__textarea">
@@ -818,24 +823,19 @@ export default defineComponent({
             </div>
           )}
           {!this.pair && (this.$slots.suffix || this.clearable) ? (
-            <NIconConfigProvider
-              class="n-input__suffix"
-              depth={this.disabled ? 5 : 4}
-            >
-              {{
-                default: () => [
-                  renderSlot(this.$slots, 'suffix'),
-                  this.clearable || this.$slots.clear ? (
-                    <NBaseClear
-                      show={this.showClearButton}
-                      onClear={this.handleClear}
-                    >
-                      {{ default: () => renderSlot(this.$slots, 'clear') }}
-                    </NBaseClear>
-                  ) : null
-                ]
-              }}
-            </NIconConfigProvider>
+            <div class="n-input__suffix">
+              {[
+                renderSlot(this.$slots, 'suffix'),
+                this.clearable || this.$slots.clear ? (
+                  <NBaseClear
+                    show={this.showClearButton}
+                    onClear={this.handleClear}
+                  >
+                    {{ default: () => renderSlot(this.$slots, 'clear') }}
+                  </NBaseClear>
+                ) : null
+              ]}
+            </div>
           ) : null}
         </div>
         {/* pair input */}
@@ -878,26 +878,19 @@ export default defineComponent({
                 </div>
               ) : null}
             </div>
-            <NIconConfigProvider
-              class="n-input__suffix"
-              depth={this.disabled ? 5 : 4}
-            >
-              {{
-                default: () => {
-                  return [
-                    renderSlot(this.$slots, 'suffix'),
-                    this.clearable || this.$slots.clear ? (
-                      <NBaseClear
-                        show={this.showClearButton}
-                        onClear={this.handleClear}
-                      >
-                        {{ default: () => renderSlot(this.$slots, 'clear') }}
-                      </NBaseClear>
-                    ) : null
-                  ]
-                }
-              }}
-            </NIconConfigProvider>
+            <div class="n-input__suffix">
+              {[
+                renderSlot(this.$slots, 'suffix'),
+                this.clearable || this.$slots.clear ? (
+                  <NBaseClear
+                    show={this.showClearButton}
+                    onClear={this.handleClear}
+                  >
+                    {{ default: () => renderSlot(this.$slots, 'clear') }}
+                  </NBaseClear>
+                ) : null
+              ]}
+            </div>
           </div>
         ) : null}
         {/* border */}

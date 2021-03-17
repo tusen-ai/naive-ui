@@ -3,34 +3,32 @@
 设定水平、垂直间隔。
 
 ```html
-<n-row :gutter="[12, 8]">
-  <n-col :span="6">
+<n-grid :x-gap="12" :y-gap="8" :cols="4">
+  <n-grid-item>
     <div class="light-green"></div>
-  </n-col>
-  <n-col :span="6">
+  </n-grid-item>
+  <n-grid-item>
     <div class="green"></div>
-  </n-col>
-  <n-col :span="6">
+  </n-grid-item>
+  <n-grid-item>
     <div class="light-green"></div>
-  </n-col>
-  <n-col :span="6">
+  </n-grid-item>
+  <n-grid-item>
     <div class="green"></div>
-  </n-col>
-</n-row>
-<n-row :gutter="[12, 8]">
-  <n-col :span="6">
+  </n-grid-item>
+  <n-grid-item>
     <div class="light-green"></div>
-  </n-col>
-  <n-col :span="6">
+  </n-grid-item>
+  <n-grid-item>
     <div class="green"></div>
-  </n-col>
-  <n-col :span="6">
+  </n-grid-item>
+  <n-grid-item>
     <div class="light-green"></div>
-  </n-col>
-  <n-col :span="6">
+  </n-grid-item>
+  <n-grid-item>
     <div class="green"></div>
-  </n-col>
-</n-row>
+  </n-grid-item>
+</n-grid>
 ```
 
 ```css

@@ -11,7 +11,7 @@
     <n-text style="font-size: 16px;"
       >Click or drag file to this area to upload</n-text
     >
-    <n-p depth="3" style="margin-bottom: 0;"
+    <n-p depth="3" style="margin: 8px 0 0 0;"
       >Strictly prohibit from uploading sensitive information. For example, your
       deposit card's password or your credit card's expiration date and security
       code.</n-p

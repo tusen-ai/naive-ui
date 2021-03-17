@@ -1,18 +1,18 @@
-# Opened Submenu
+# Expand Submenu
 
 You can set `default-expanded-keys` to make menu work in an uncontrolled manner or use `expanded-keys` and `@update:expanded-keys` to make it work in a controlled manner.
 
 ```html
 <n-menu
-  v-model:value="activeKey"
-  :default-expanded-keys="defaultExpandedKeys"
   :items="menuItems"
+  :default-expanded-keys="defaultExpandedKeys"
   @update:expanded-keys="handleUpdateExpandedKeys"
 />
 ```
 
 ```js
-import { h, resolveComponent } from 'vue'
+import { h } from 'vue'
+import { NIcon, useMessage } from 'naive-ui'
 import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
@@ -20,7 +20,7 @@ import {
 } from '@vicons/ionicons5'
 
 function renderIcon (icon) {
-  return () => h(resolveComponent('n-icon'), null, { default: () => h(icon) })
+  return () => h(NIcon, null, { default: () => h(icon) })
 }
 
 const menuItems = [
@@ -48,8 +48,8 @@ const menuItems = [
     icon: renderIcon(BookIcon)
   },
   {
-    label: 'Dance',
-    key: 'Dance Dance Dance',
+    label: 'Dance Dance Dance',
+    key: 'dance-dance-dance',
     icon: renderIcon(BookIcon),
     children: [
       {
@@ -99,17 +99,14 @@ const menuItems = [
 ]
 
 export default {
-  inject: ['message'],
-  data () {
+  setup () {
+    const message = useMessage()
     return {
+      menuItems,
       defaultExpandedKeys: ['dance-dance-dance', 'food'],
-      activeKey: null,
-      menuItems
-    }
-  },
-  methods: {
-    handleUpdateExpandedKeys (value) {
-      this.message.info('[onUpdate:expandedKeys]: ' + JSON.stringify(value))
+      handleUpdateExpandedKeys (value) {
+        message.info('[onUpdate:expandedKeys]: ' + JSON.stringify(value))
+      }
     }
   }
 }

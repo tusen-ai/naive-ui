@@ -15,6 +15,7 @@ import { c, cE, cM, cNotM, cB } from '../../../_utils/cssr'
 // --radio-size
 // --text-color
 // --text-color-disabled
+// --label-padding
 export default cB('radio', `
   line-height: 1;
   outline: none;
@@ -72,7 +73,7 @@ export default cB('radio', `
   ]),
   cE('label', `
     color: var(--text-color);
-    padding: 0 8px;
+    padding: var(--label-padding);
     display: inline-block;
     white-space: nowrap;
     transition: color .3s var(--bezier);

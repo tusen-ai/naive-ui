@@ -3,6 +3,7 @@ import { CSSProperties, VNodeChild } from 'vue'
 import { NLocale } from '../../locales'
 import { MergedTheme } from '../../_mixins'
 import { DataTableTheme } from '../styles'
+import { RowItem, ColItem } from './use-group-header'
 
 export type FilterOptionValue = string | number
 export type ColumnKey = string | number
@@ -42,8 +43,22 @@ export interface CommonColInfo {
   ellipsis?: boolean
 }
 
+export type TableColumnTitle =
+  | string
+  | ((column: TableColumnInfo) => VNodeChild)
+
+export type TableColumnGroup = {
+  title?: TableColumnTitle
+  type?: never
+  key: ColumnKey
+  children: TableColumnInfo[]
+
+  // to suppress type error in table header
+  filterOptions?: never
+} & CommonColInfo
+
 export type TableColumnInfo = {
-  title?: string | ((column: TableColumnInfo, index: number) => VNodeChild)
+  title?: TableColumnTitle
   // for compat maybe default
   type?: never
   key: ColumnKey
@@ -80,14 +95,18 @@ export type SelectionColInfo = {
   filterOptionValue?: never
 } & CommonColInfo
 
+export type TableColumn = TableColumnGroup | TableColumnInfo | SelectionColInfo
+export type TableColumns = TableColumn[]
+
 export interface DataTableInjection {
   mergedTheme: MergedTheme<DataTableTheme>
   scrollX?: string | number
-  columns: Array<TableColumnInfo | SelectionColInfo>
+  rows: RowItem[][]
+  cols: ColItem[]
   treeMate: TreeMate<TableNode>
   paginatedData: TmNode[]
-  leftFixedColumns: Array<TableColumnInfo | SelectionColInfo>
-  rightFixedColumns: Array<TableColumnInfo | SelectionColInfo>
+  leftFixedColumns: TableColumns
+  rightFixedColumns: TableColumns
   leftActiveFixedColKey: ColumnKey | null
   rightActiveFixedColKey: ColumnKey | null
   fixedColumnLeftMap: Record<ColumnKey, number | undefined>

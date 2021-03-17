@@ -1,5 +1,5 @@
 import { h, ref, defineComponent } from 'vue'
-import NCol, { colProps, colPropKeys } from '../../grid/src/Col'
+import NCol, { colProps, colPropKeys } from '../../legacy-grid/src/Col'
 import { keep, keysOf } from '../../_utils'
 import NFormItem, { formItemProps, formItemPropKeys } from './FormItem'
 import { FormItemRef } from './interface'

@@ -7,6 +7,7 @@ import {
   mergeProps,
   renderSlot
 } from 'vue'
+import { getMargin } from 'seemly'
 import {
   InfoIcon,
   SuccessIcon,
@@ -79,9 +80,15 @@ export default defineComponent({
         titleFontWeight,
         lineHeight,
         contentTextColor,
-        titleTextColor
+        titleTextColor,
+        iconSize,
+        iconMargin,
+        closeSize,
+        closeMargin,
+        padding
       } = self
       const { type } = props
+      const { left, right } = getMargin(iconMargin)
       return {
         '--bezier': cubicBezierEaseInOut,
         '--color': self[createKey('color', type)],
@@ -95,7 +102,14 @@ export default defineComponent({
         '--line-height': lineHeight,
         '--border-radius': borderRadius,
         '--font-size': fontSize,
-        '--title-font-weight': titleFontWeight
+        '--title-font-weight': titleFontWeight,
+        '--icon-size': iconSize,
+        '--icon-margin': iconMargin,
+        '--close-size': closeSize,
+        '--close-margin': closeMargin,
+        '--padding': padding,
+        '--icon-margin-left': left,
+        '--icon-margin-right': right
       }
     })
     const visibleRef = ref(true)
@@ -136,7 +150,7 @@ export default defineComponent({
                   class: [
                     'n-alert',
                     {
-                      'n-alert--no-icon': !this.showIcon
+                      'n-alert--show-icon': this.showIcon
                     }
                   ],
                   style: this.cssVars

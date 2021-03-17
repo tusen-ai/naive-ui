@@ -23,6 +23,7 @@ import iconSwitchTransition from '../../../_styles/transitions/icon-switch'
 // --check-mark-color-disabled-checked
 // --border-radius
 // --font-size
+// --label-padding
 export default c([
   cB('checkbox', `
     line-height: 1;
@@ -184,7 +185,7 @@ export default c([
       color: var(--text-color);
       transition: color .3s var(--bezier);
       user-select: none;
-      padding: 0 8px;
+      padding: var(--label-padding);
     `, [
       c('&:empty', {
         display: 'none'

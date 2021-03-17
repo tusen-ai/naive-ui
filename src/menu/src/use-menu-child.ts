@@ -11,7 +11,7 @@ export interface MenuInjection {
   mode: 'vertical' | 'horizontal'
   collapsed: boolean
   iconSize: number
-  collapsedIconSize?: number
+  collapsedIconSize: number | undefined
   indent: number
   rootIndent: number
   collapsedWidth: number

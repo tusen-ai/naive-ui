@@ -1,11 +1,11 @@
 # Dark Debug 3
 
 ```html
-<n-button @click="modalActive = !modalActive">Toggle</n-button>
+<n-button @click="showModal = !showModal">Toggle</n-button>
 <n-modal
   title="Dark Modal Debug"
   preset="card"
-  v-model:show="modalActive"
+  v-model:show="showModal"
   :style="{ marginTop: '24px', marginBottom: '24px', width: '800px' }"
 >
   <n-data-table
@@ -101,7 +101,7 @@ export default {
   inject: ['message'],
   data () {
     return {
-      modalActive: false,
+      showModal: false,
       data,
       columns
     }

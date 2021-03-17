@@ -15,10 +15,8 @@ Use `collapsed-width` and `width` to set sider's width.
       collapse-mode="width"
       :collapsed-width="120"
       :width="240"
-      :collapsed="collapsed"
+      v-model:collapsed="collapsed"
       show-toggle-button
-      @collapse="collapsed = true"
-      @expand="collapsed = false"
     >
       Cool Sider Cool Sider Cool Sider
     </n-layout-sider>
@@ -42,10 +40,8 @@ Use `collapsed-width` and `width` to set sider's width.
       collapse-mode="transform"
       :collapsed-width="120"
       :width="240"
-      :collapsed="collapsed"
+      v-model:collapsed="collapsed"
       show-toggle-button
-      @collapse="collapsed = true"
-      @expand="collapsed = false"
     >
       <n-h1>Sider</n-h1>
     </n-layout-sider>

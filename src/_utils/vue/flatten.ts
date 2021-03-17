@@ -5,7 +5,9 @@ export function flatten (vNodes: VNodeChild[], result: VNode[] = []): VNode[] {
   vNodes.forEach((vNode) => {
     if (vNode === null) return
     if (typeof vNode !== 'object') {
-      if (typeof vNode === 'string' || typeof vNode === 'number') { result.push(createTextVNode(String(vNode))) }
+      if (typeof vNode === 'string' || typeof vNode === 'number') {
+        result.push(createTextVNode(String(vNode)))
+      }
       return
     }
     if (Array.isArray(vNode)) {

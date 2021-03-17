@@ -2,6 +2,7 @@ import { scrollbarLight } from '../../scrollbar/styles'
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
+import commonVars from './_common'
 
 const self = (vars: ThemeCommonVars) => {
   const {
@@ -22,6 +23,7 @@ const self = (vars: ThemeCommonVars) => {
     fontSize
   } = vars
   return {
+    ...commonVars,
     borderRadius,
     lineHeight,
     fontSize,

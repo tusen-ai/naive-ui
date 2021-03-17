@@ -12,11 +12,18 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --bezier-ease-in
 // --border-radius
 // --box-shadow
+// --close-margin
+// --close-size
 // --close-color
 // --close-color-hover
 // --close-color-pressed
 // --line-height
 // --icon-color
+// --width
+// --padding-top
+// --padding-bottom
+// --padding-left
+// --padding-right
 export default c([
   cB('notification-container', `
     z-index: 4000;
@@ -96,9 +103,9 @@ export default c([
       margin-bottom: 12px;
       margin-left: 28px;
       margin-right: 16px;
-      padding-left: 16px;
-      padding-right: 16px;
-      width: 365px;
+      padding-left: var(--padding-left);
+      padding-right: var(--padding-right);
+      width: var(--width);
       border-radius: var(--border-radius);
       box-shadow: var(--box-shadow);
       box-sizing: border-box;
@@ -127,16 +134,17 @@ export default c([
         ]),
         cE('close', `
           position: absolute;
-          top: 16px;
-          right: 12px;
-          font-size: 14px;
+          top: 0;
+          right: 0;
+          margin: var(--close-margin);
+          font-size: var(--close-size);
           transition: color .3s var(--bezier);
         `)
       ]),
       cE('avatar', `
         position: absolute;
-        top: 16px;
-        left: 16px;
+        top: var(--padding-top);
+        left: var(--padding-left);
         width: 28px;
         height: 28px;
         font-size: 28px;
@@ -146,8 +154,8 @@ export default c([
         })
       ]),
       cB('notification-main', `
-        padding-top: 16px;
-        padding-bottom: 16px;
+        padding-top: var(--padding-top);
+        padding-bottom: var(--padding-bottom);
         box-sizing: border-box;
         display: flex;
         flex-direction: column;

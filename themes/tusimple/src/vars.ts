@@ -1,10 +1,16 @@
 export const BORDER_RADIUS = '20px'
 
 export const NORMAL_BOX_SHADOW =
-  '0 2px 16px 0 rgb(0,0,0,0.1), 0 0 16px -2px rgb(0,0,0,0.06)'
+  '0 2px 16px 0 rgba(0,0,0,0.1), 0 0 16px -2px rgba(0,0,0,0.06)'
 
-export const SEPCIAL_BOX_SHADOW =
-  '0 40px 16px -24px rgb(0,0,0, 0.04), 0 8px 16px -8px rbg(0,0,0, 0.12), 0 16px 40px 16px rgb(0,0,0,0.04)'
+export const NORMAL_BOX_SHADOW_DARK_THEME =
+  '0 2px 16px 0 rgba(0,0,0,0.16), 0 0 16px -2px rgba(0,0,0,0.12)'
+
+export const SPECIAL_BOX_SHADOW =
+  '0 40px 16px -24px rgba(0,0,0, 0.04), 0 8px 16px -8px rgba(0,0,0, 0.12), 0 16px 40px 16px rgba(0,0,0,0.04)'
+
+export const SPECIAL_BOX_SHADOW_DARK_THEME =
+  '0 40px 16px -24px rgba(0,0,0, 0.48), 0 8px 16px -8px rgba(0,0,0, 0.96), 0 16px 40px 16px rgba(0,0,0,0.48)'
 
 export const SMALL_FRONT_SIZE = '12px'
 
@@ -29,7 +35,9 @@ export const CONTENT_SPACE = '20px'
 export default {
   BORDER_RADIUS,
   NORMAL_BOX_SHADOW,
-  SEPCIAL_BOX_SHADOW,
+  NORMAL_BOX_SHADOW_DARK_THEME,
+  SPECIAL_BOX_SHADOW,
+  SPECIAL_BOX_SHADOW_DARK_THEME,
   NORMAL_FRONT_SIZE,
   SPECIAL_FRONT_SIZE,
   SMALL_FRONT_SIZE,

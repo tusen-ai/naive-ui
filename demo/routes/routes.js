@@ -227,6 +227,10 @@ export const componentChildRoutes = withPrefix('/:lang/:theme/components', [
     component: () => import('../../src/statistic/demos/index.entry')
   },
   {
+    path: '/n-legacy-grid',
+    component: () => import('../../src/legacy-grid/demos/index.entry')
+  },
+  {
     path: '/n-grid',
     component: () => import('../../src/grid/demos/index.entry')
   },

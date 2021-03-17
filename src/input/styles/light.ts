@@ -48,6 +48,7 @@ const self = (vars: ThemeCommonVars) => {
     borderRadius,
     iconSize: '16px',
     groupLabelColor: actionColor,
+    groupLabelTextColor: textColor2,
     textColor: textColor2,
     textColorDisabled: textColor4,
     textDecorationColor: textColor2,
@@ -57,6 +58,7 @@ const self = (vars: ThemeCommonVars) => {
     color: inputColor,
     colorDisabled: inputColorDisabled,
     colorFocus: inputColor,
+    groupLabelBorder: `1px solid ${borderColor}`,
     border: `1px solid ${borderColor}`,
     borderHover: `1px solid ${primaryColorHover}`,
     borderDisabled: `1px solid ${borderColor}`,
@@ -82,7 +84,10 @@ const self = (vars: ThemeCommonVars) => {
     caretColorError: errorColor,
     clearColor,
     clearColorHover,
-    clearColorPressed
+    clearColorPressed,
+    iconColor: textColor4,
+    iconColorDisabled: textColor5,
+    suffixTextColor: textColor2
   }
 }
 

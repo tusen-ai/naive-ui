@@ -45,6 +45,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    showMask: {
+      type: Boolean,
+      default: true
+    },
     maskClosable: {
       type: Boolean,
       default: true
@@ -258,24 +262,26 @@ export default defineComponent({
                 style: this.cssVars as CSSProperties
               },
               [
-                h(
-                  Transition,
-                  {
-                    name: 'n-fade-in-transition',
-                    key: 'mask',
-                    appear: this.appear ?? this.isMounted
-                  },
-                  {
-                    default: () => {
-                      return this.show
-                        ? h('div', {
-                          ref: 'containerRef',
-                          class: 'n-modal-mask'
-                        })
-                        : null
+                this.showMask
+                  ? h(
+                    Transition,
+                    {
+                      name: 'n-fade-in-transition',
+                      key: 'mask',
+                      appear: this.appear ?? this.isMounted
+                    },
+                    {
+                      default: () => {
+                        return this.show
+                          ? h('div', {
+                            ref: 'containerRef',
+                            class: 'n-modal-mask'
+                          })
+                          : null
+                      }
                     }
-                  }
-                ),
+                  )
+                  : null,
                 h(
                   NModalBodyWrapper,
                   {

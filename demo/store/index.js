@@ -122,6 +122,7 @@ export function siteSetup () {
   return {
     configProvider: configProviderRef,
     hljs,
+    themeName: themeNameRef,
     theme: themeRef,
     locale: localeRef,
     dateLocale: dateLocaleRef

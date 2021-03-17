@@ -1,6 +1,6 @@
 import { defineComponent, h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NRow, NCol } from '../index'
+import { NGrid, NGridItem } from '../index'
 
 describe('n-grid', () => {
   it('should work with import on demand', () => {
@@ -8,11 +8,11 @@ describe('n-grid', () => {
       defineComponent({
         render () {
           return (
-            <NRow>
+            <NGrid>
               {{
-                default: () => [<NCol />]
+                default: () => [<NGridItem />]
               }}
-            </NRow>
+            </NGrid>
           )
         }
       })

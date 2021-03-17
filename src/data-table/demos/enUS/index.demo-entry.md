@@ -17,6 +17,7 @@ border
 size
 filter-and-sorter
 select
+group-header
 controlled-page
 controlled-filter
 controlled-sorter
@@ -75,6 +76,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | align | `'left' \| 'right' \| 'center'` | `'left'` | Text align in column |
+| children | `Column[]` | `undefined` | Child nodes of a grouped column |
 | className | `string` | `undefined` |  |
 | defaultFilterOptionValue | `string \| number \| null` | `null` | The default active filter option value in uncontrolled manner. (works when not using multiple filters) |
 | defaultFilterOptionValues | `Array<string \| number>` | `[]` | The default active filter option values in uncontrolled manner. (works when there are multiple filters) |

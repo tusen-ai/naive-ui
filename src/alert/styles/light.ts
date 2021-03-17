@@ -2,6 +2,7 @@ import { changeColor, composite } from 'seemly'
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import type { Theme } from '../../_mixins/use-theme'
+import commonVars from './_common'
 
 const self = (vars: ThemeCommonVars) => {
   const {
@@ -23,6 +24,7 @@ const self = (vars: ThemeCommonVars) => {
     fontSize
   } = vars
   return {
+    ...commonVars,
     fontSize,
     lineHeight,
     titleFontWeight: fontWeightStrong,

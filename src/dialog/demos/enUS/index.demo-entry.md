@@ -4,7 +4,7 @@ Before taking action, please confirm.
 
 <n-space vertical>
 <n-alert title="Prerequisite" type="warning">
-  If you want use dialog, you need to wrap the component where you call related methods inside <n-text code>n-dialog-provider</n-text> and inject <n-text code>dialog</n-text>.
+  If you want use dialog, you need to wrap the component where you call related methods inside <n-text code>n-dialog-provider</n-text> and use <n-text code>useDialog</n-text> to get the API.
 </n-alert>
 For example:
 

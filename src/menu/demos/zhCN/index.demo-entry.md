@@ -8,6 +8,7 @@
 
 ```demo
 horizontal
+select
 default-expanded-keys
 indent
 collapse
@@ -32,8 +33,8 @@ collapse
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` |  |
 | root-indent | `number` | `32` | 菜单第一级的缩进，如果没有设定，使用 `indent` 代替 |
 | value | `string \| null` | `undefined` | 菜单当前的选中值 |
-| on-update:expanded-keys | `(value: string[]) => any` | `undefined` |  |
-| on-update:value | `(value: string, item: MenuItem) => any` | `undefined` |  |
+| on-update:expanded-keys | `(keys: string[]) => void` | `undefined` | `keys` 是展开菜单项的 `key` 的数组 |
+| on-update:value | `(key: string, item: MenuItem) => void` | `undefined` | 选中菜单的回调，`key` 是选中菜单项的 `key`，`item` 是菜单项原始数据 |
 
 ### MenuItem Properties
 

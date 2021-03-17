@@ -12,18 +12,20 @@ import {
   withDirectives,
   vShow,
   Transition,
-  VNode
+  VNode,
+  ComponentPublicInstance,
+  mergeProps
 } from 'vue'
 import { clickoutside } from 'vdirs'
 import { NScrollbar, ScrollbarRef } from '../../scrollbar'
 import { NDialog, dialogPropKeys } from '../../dialog'
 import { NCard, cardPropKeys } from '../../card'
-import { keep } from '../../_utils'
+import { getFirstSlotVNode, keep, warn } from '../../_utils'
 import { presetProps } from './presetProps'
 import type { ModalInjection } from './Modal'
 
-interface ModalBodyInjection {
-  bodyRef: HTMLElement | null
+export interface ModalBodyInjection {
+  bodyRef: HTMLElement | ComponentPublicInstance | null
 }
 
 export default defineComponent({
@@ -67,7 +69,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const bodyRef = ref<HTMLElement | null>(null)
+    const bodyRef = ref<HTMLElement | ComponentPublicInstance | null>(null)
     const scrollbarRef = ref<ScrollbarRef | null>(null)
     const displayedRef = ref(props.show)
     const transformOriginXRef = ref<number | null>(null)
@@ -158,11 +160,28 @@ export default defineComponent({
     const {
       NModal,
       $slots,
+      $attrs,
       handleEnter,
       handleAfterLeave,
       handleBeforeLeave,
-      handleClickOutside
+      handleClickOutside,
+      preset
     } = this
+    let childNode: VNode | null = null
+    if (!preset) {
+      childNode = getFirstSlotVNode($slots)
+      if (!childNode) {
+        warn('modal', 'default slot is empty')
+        return
+      }
+      childNode.props = mergeProps(
+        {
+          class: 'n-modal'
+        },
+        $attrs,
+        childNode.props || {}
+      )
+    }
     return this.displayDirective === 'show' || this.displayed || this.show
       ? withDirectives(
         (
@@ -185,36 +204,36 @@ export default defineComponent({
                     {{
                       default: () =>
                         withDirectives(
-                          (
-                            <div ref="bodyRef" class="n-modal">
-                              {this.preset === 'confirm' ||
-                                this.preset === 'dialog' ? (
-                                  <NDialog
-                                    {...this.$attrs}
-                                    theme={NModal.mergedTheme.peers.Dialog}
-                                    themeOverrides={
-                                      NModal.mergedTheme.peerOverrides.Dialog
-                                    }
-                                    {...keep(this.$props, dialogPropKeys)}
-                                  >
-                                    {$slots}
-                                  </NDialog>
-                                ) : this.preset === 'card' ? (
-                                  <NCard
-                                    {...this.$attrs}
-                                    theme={NModal.mergedTheme.peers.Card}
-                                    themeOverrides={
-                                      NModal.mergedTheme.peerOverrides.Card
-                                    }
-                                    {...keep(this.$props, cardPropKeys)}
-                                  >
-                                    {$slots}
-                                  </NCard>
-                                ) : (
-                                  $slots
-                                )}
-                            </div>
-                          ) as any,
+                          (this.preset === 'confirm' ||
+                            this.preset === 'dialog' ? (
+                              <NDialog
+                                {...this.$attrs}
+                                class="n-modal"
+                                ref="bodyRef"
+                                theme={NModal.mergedTheme.peers.Dialog}
+                                themeOverrides={
+                                  NModal.mergedTheme.peerOverrides.Dialog
+                                }
+                                {...keep(this.$props, dialogPropKeys)}
+                              >
+                                {$slots}
+                              </NDialog>
+                            ) : this.preset === 'card' ? (
+                              <NCard
+                                {...this.$attrs}
+                                ref="bodyRef"
+                                class="n-modal"
+                                theme={NModal.mergedTheme.peers.Card}
+                                themeOverrides={
+                                  NModal.mergedTheme.peerOverrides.Card
+                                }
+                                {...keep(this.$props, cardPropKeys)}
+                              >
+                                {$slots}
+                              </NCard>
+                            ) : (
+                              childNode
+                            )) as any,
                           [
                             [vShow, this.show],
                             [clickoutside, handleClickOutside]

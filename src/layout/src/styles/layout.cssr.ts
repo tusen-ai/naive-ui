@@ -28,9 +28,5 @@ export default cB('layout', `
     right: 0;
     top: 0;
     bottom: 0;
-  `, [
-    cB('layout-sider', `
-      z-index: 1;
-    `)
-  ])
+  `)
 ])

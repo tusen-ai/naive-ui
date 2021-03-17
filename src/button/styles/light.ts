@@ -32,7 +32,8 @@ const self = (vars: ThemeCommonVars) => {
     warningColorPressed,
     errorColor,
     errorColorHover,
-    errorColorPressed
+    errorColorPressed,
+    fontWeight
   } = vars
   return {
     ...commonVariables,
@@ -211,7 +212,10 @@ const self = (vars: ThemeCommonVars) => {
     borderFocusError: `1px solid ${errorColorHover}`,
     borderDisabledError: `1px solid ${errorColor}`,
     rippleColorError: errorColor,
-    waveOpacity: '0.6'
+    waveOpacity: '0.6',
+    fontWeightText: fontWeight,
+    fontWeight: fontWeight,
+    fontWeighGhost: fontWeight
   }
 }
 

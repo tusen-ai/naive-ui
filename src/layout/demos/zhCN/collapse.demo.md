@@ -15,10 +15,8 @@
       collapse-mode="width"
       :collapsed-width="120"
       :width="240"
-      :collapsed="collapsed"
       show-toggle-button
-      @collapse="collapsed = true"
-      @expand="collapsed = false"
+      v-model:collapsed="collapsed"
     >
       <p>边栏 边栏 边栏 边栏 边栏</p>
     </n-layout-sider>
@@ -42,10 +40,8 @@
       collapse-mode="transform"
       :collapsed-width="120"
       :width="240"
-      :collapsed="collapsed"
       show-toggle-button
-      @collapse="collapsed = true"
-      @expand="collapsed = false"
+      v-model:collapsed="collapsed"
     >
       <n-h1>边栏</n-h1>
     </n-layout-sider>

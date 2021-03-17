@@ -14,7 +14,6 @@ If you want to activate input by pressing enter after focused, use `passively-ac
     :passively-activated="true"
   />
   <n-input
-    v-model:value="value"
     type="textarea"
     @blur="handleBlur"
     @focus="handleFocus"
