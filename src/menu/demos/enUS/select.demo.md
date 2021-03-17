@@ -1,6 +1,6 @@
-# Select
+# Select & Routing
 
-Use `@update:value` to listen to the select action of the menu.
+Use `@update:value` to listen to the select action of the menu. The firt argument of the callback is the `key` of the selected menu item. The second is the orginal data of the menu item. Usually you can use vue-router here to accomplish routing.
 
 ```html
 <n-menu @update:value="handleUpdateValue" :items="menuItems" />

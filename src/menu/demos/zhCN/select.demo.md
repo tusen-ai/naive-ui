@@ -1,6 +1,6 @@
-# 选中
+# 选中 & 路由
 
-使用 `@update:value` 监听菜单选择变化。
+使用 `@update:value` 监听菜单选择变化。这个回调首个参数为选中菜单项的 `key`，第二个参数为菜单项的原数据。你通常可以在这个地方配合 vue-router 完成路由。
 
 ```html
 <n-menu @update:value="handleUpdateValue" :items="menuItems" />
