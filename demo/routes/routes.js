@@ -29,6 +29,10 @@ export const docChildRoutes = withPrefix('/:lang/:theme/docs', [
   {
     path: '/theme',
     component: () => import('../pages/docs/theme/index.entry')
+  },
+  {
+    path: '/jsx',
+    component: () => import('../pages/docs/jsx/index.entry')
   }
 ])
 

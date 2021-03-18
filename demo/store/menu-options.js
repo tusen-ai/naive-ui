@@ -78,6 +78,11 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
       type: 'group',
       children: [
         {
+          en: 'JSX & TSX',
+          zh: 'JSX & TSX',
+          path: '/jsx'
+        },
+        {
           en: 'Create Themed Component',
           zh: '创建适配主题的组件',
           path: '/theme'
