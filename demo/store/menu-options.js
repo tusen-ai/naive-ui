@@ -550,7 +550,7 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
       children: [
         {
           en: 'Config Provider',
-          zh: '配置提供者',
+          zh: '全局化配置',
           enSuffix: true,
           path: '/n-config-provider'
         },
