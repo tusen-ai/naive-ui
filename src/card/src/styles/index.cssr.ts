@@ -20,6 +20,7 @@ import { asModal, c, cB, cE, cM, insideModal } from '../../../_utils/cssr'
 // --close-color-pressed
 // --border-color
 // --close-size
+// --box-shadow
 export default c([
   cB('card', `
     font-size: var(--font-size);
@@ -34,8 +35,12 @@ export default c([
     transition: 
       color .3s var(--bezier),
       background-color .3s var(--bezier),
+      box-shadow .3s var(--bezier),
       border-color .3s var(--bezier);
   `, [
+    cM('hoverable', [
+      c('&:hover', 'box-shadow: var(--box-shadow);')
+    ]),
     cM('content-segmented', [
       c('>', [
         cE('content', {

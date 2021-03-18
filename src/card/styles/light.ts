@@ -17,7 +17,8 @@ const self = (vars: ThemeCommonVars) => {
     closeColor,
     closeColorHover,
     closeColorPressed,
-    modalColor
+    modalColor,
+    boxShadow1
   } = vars
   return {
     ...commonVariables,
@@ -36,6 +37,7 @@ const self = (vars: ThemeCommonVars) => {
     fontSizeMedium: fontSize,
     fontSizeLarge: fontSize,
     fontSizeHuge: fontSize,
+    boxShadow: boxShadow1,
     borderRadius
   }
 }

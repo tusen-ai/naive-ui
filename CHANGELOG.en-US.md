@@ -5,6 +5,7 @@
 ### Feat
 
 - `n-config-provider` prop `theme-overrides` support inheritance.
+- `card` add `hoverable` prop.
 
 ## 2.0.1
 

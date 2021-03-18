@@ -5,6 +5,7 @@
 ### Feat
 
 - `n-config-provider` 的 `theme-overrides` 支持继承
+- `card` 新增 `hoverable` 属性
 
 ## 2.0.1
 

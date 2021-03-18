@@ -8,7 +8,7 @@ import {
 } from 'vue'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createKey, keysOf } from '../../_utils'
+import { call, createKey, keysOf, MaybeArray } from '../../_utils'
 import { NBaseClose } from '../../_internal'
 import { cardLight } from '../styles'
 import type { CardTheme } from '../styles'
@@ -40,7 +40,8 @@ const cardProps = {
     type: Boolean,
     default: false as boolean
   },
-  onClose: Function as PropType<() => void>
+  hoverable: Boolean,
+  onClose: Function as PropType<MaybeArray<() => void>>
 } as const
 
 export { cardProps }
@@ -56,7 +57,7 @@ export default defineComponent({
   setup (props) {
     const handleCloseClick = (): void => {
       const { onClose } = props
-      if (onClose) onClose()
+      if (onClose) call(onClose)
     }
     const themeRef = useTheme('Card', 'Card', style, cardLight, props)
     return {
@@ -79,6 +80,7 @@ export default defineComponent({
             closeColorPressed,
             lineHeight,
             closeSize,
+            boxShadow,
             [createKey('paddingTop', size)]: paddingTop,
             [createKey('paddingBottom', size)]: paddingBottom,
             [createKey('paddingLeft', size)]: paddingLeft,
@@ -101,6 +103,7 @@ export default defineComponent({
           '--close-color-hover': closeColorHover,
           '--close-color-pressed': closeColorPressed,
           '--border-color': borderColor,
+          '--box-shadow': boxShadow,
           // size
           '--padding-top': paddingTop,
           '--padding-bottom': paddingBottom,
@@ -113,7 +116,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { segmented, bordered, $slots } = this
+    const { segmented, bordered, hoverable, $slots } = this
     return (
       <div
         class={[
@@ -133,7 +136,8 @@ export default defineComponent({
               segmented === true || (segmented !== false && segmented.footer),
             'n-card--action-segmented':
               segmented === true || (segmented !== false && segmented.action),
-            'n-card--bordered': bordered
+            'n-card--bordered': bordered,
+            'n-card--hoverable': hoverable
           }
         ]}
         style={this.cssVars as any}

@@ -65,9 +65,7 @@ const base = {
   successHover: '#36ad6a',
   successDefault: '#18a058',
   successActive: '#0c7a43',
-  successSuppl: '#36ad6a',
-
-  boxShadow1: ''
+  successSuppl: '#36ad6a'
 }
 
 const baseBackgroundRgb = rgba(base.neutralBase)
@@ -181,6 +179,9 @@ const derived = {
 
   opacityDisabled: base.alphaDisabled,
   inputColorDisabled: neutral(base.alphaDisabledInput),
+
+  boxShadow1:
+    '0 1px 2px -2px rgba(0, 0, 0, .08), 0 3px 6px 0 rgba(0, 0, 0, .06), 0 5px 12px 4px rgba(0, 0, 0, .04)',
 
   boxShadow2:
     '0 3px 6px -4px rgba(0, 0, 0, .12), 0 6px 16px 0 rgba(0, 0, 0, .08), 0 9px 28px 8px rgba(0, 0, 0, .05)',

@@ -19,7 +19,8 @@ const cardDark: CardTheme = {
       fontWeightStrong,
       closeColor,
       closeColorHover,
-      closeColorPressed
+      closeColorPressed,
+      boxShadow1
     } = vars
     return {
       ...commonVariables,
@@ -38,6 +39,7 @@ const cardDark: CardTheme = {
       fontSizeMedium: fontSize,
       fontSizeLarge: fontSize,
       fontSizeHuge: fontSize,
+      boxShadow: boxShadow1,
       borderRadius
     }
   }
