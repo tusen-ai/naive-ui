@@ -27,7 +27,7 @@ closable
 | segmented | `boolean \| { [part in 'content' \| 'footer' \| 'action']?: boolean \| 'soft' \| 'hard' }` | `false` |  |
 | size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` |  |
 | title | `string` | `undefined` |  |
-| on-close | `() => any` | `undefined` | 点击卡片关闭图标时的回调 |
+| on-close | `() => void` | `undefined` | 点击卡片关闭图标时的回调 |
 
 ## Slots
 

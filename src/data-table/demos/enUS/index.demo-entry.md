@@ -51,11 +51,11 @@ custom-filter-menu
 | single-column | `boolean` | `false` |  |
 | single-line | `boolean` | `true` |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
-| on-update:checked-row-keys | `(keys: Array<string \| number>) => any` | `undefined` |  |
+| on-update:checked-row-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
 | on-update:filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: Column)` |  |
 | on-update:page | `(page: number)` | `undefined` |  |
-| on-update:page-size | `(pageSize: number) => any` | `undefined` |  |
-| on-update:sorter | `(options: { columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } \| null) => any` | `undefined` | If there won't be a active sorter after change, `options` will be `null` |
+| on-update:page-size | `(pageSize: number) => void` | `undefined` |  |
+| on-update:sorter | `(options: { columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } \| null) => void` | `undefined` | If there won't be a active sorter after change, `options` will be `null` |
 
 ## Methods
 

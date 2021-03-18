@@ -18,4 +18,4 @@ event
 | disabled        | `boolean`                        | `false`     |      |
 | size            | `'small' \| 'medium' \| 'large'` | `'medium'`  |      |
 | value           | `boolean`                        | `undefined` |      |
-| on-update:value | `(value: boolean) => any`        | `undefined` |      |
+| on-update:value | `(value: boolean) => void`       | `undefined` |      |

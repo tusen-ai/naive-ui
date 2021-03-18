@@ -27,6 +27,6 @@ validator
 | step | `number` | `1` |  |
 | validator | `(value) => boolean` | `undefined` |  |
 | value | `number` | `undefined` |  |
-| on-blur | `(event: FocusEvent) => any` | `undefined` |  |
-| on-focus | `(event: FocusEvent) => any` | `undefined` |  |
-| on-update:value | `(value: number) => any` | `undefined` |  |
+| on-blur | `(event: FocusEvent) => void` | `undefined` |  |
+| on-focus | `(event: FocusEvent) => void` | `undefined` |  |
+| on-update:value | `(value: number) => void` | `undefined` |  |

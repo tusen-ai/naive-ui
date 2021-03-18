@@ -22,4 +22,4 @@ form
 | tag-style | `string \| Object` | `undefined` |  |
 | type | `'default' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` |  |
 | value | `string[]` | `undefined` |  |
-| on-update:value | `(value: boolean) => any` | `undefined` |  |
+| on-update:value | `(value: boolean) => void` | `undefined` |  |

@@ -43,12 +43,12 @@ menu-debug
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | tag | `boolean` | `false` | 是否可以创建新的选项，需要和 `filterable` 一起使用 |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` |  |
-| on-blur | `() => any` | 选择器 Blur 时发出 |
+| on-blur | `() => void` | 选择器 Blur 时发出 |
 | on-create | `(label: string) => SelectOption` | `label => ({ label, value: label })` | 在输入内容时如何创建一个选项。注意 `filter` 对这个生成的选项同样会生效。同时确保这个选项和其他选项的 `value` 不要有重复 |
-| on-focus | `() => any` | 选择器 Focus 时发出 |
-| on-scroll | `(e: ScrollEvent) => any` | 选择菜单在滚动 |
-| on-search | `(value: string) => any` |  |
-| on-update:value | `(value: Array \| string \| number \| null) => any` |  |
+| on-focus | `() => void` | 选择器 Focus 时发出 |
+| on-scroll | `(e: ScrollEvent) => void` | 选择菜单在滚动 |
+| on-search | `(value: string) => void` |  |
+| on-update:value | `(value: Array \| string \| number \| null) => void` |  |
 
 ### SelectOption Properties
 

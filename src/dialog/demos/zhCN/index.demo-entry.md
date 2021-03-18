@@ -119,9 +119,9 @@ use-component
 | show-icon | `boolean` | `true` |  |
 | title | `string \| (() => VNode \| Array<VNode>)` | `undefined` | 可以是 render 函数 |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` |  |
-| on-close | `() => any` |  |
-| on-negative-click | `() => any` |  |
-| on-positive-click | `() => any` |  |
+| on-close | `() => void` |  |
+| on-negative-click | `() => void` |  |
+| on-positive-click | `() => void` |  |
 
 ## Slots
 

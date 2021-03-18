@@ -27,7 +27,7 @@ shape
 | round | `boolean` | `false` |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | type | `'default' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` |  |
-| on-update:checked | `(value: boolean) => any` | `undefined` |  |
+| on-update:checked | `(value: boolean) => void` | `undefined` |  |
 
 ## Slots
 

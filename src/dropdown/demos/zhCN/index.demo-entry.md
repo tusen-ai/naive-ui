@@ -22,7 +22,7 @@ group-debug
 | keyboard | `boolean` | `true` | 是否支持键盘操作（注意和其他内容键盘操作可能的冲突） |
 | options | `Array<DropdownOption \| DropdownDivider \| DropdownSubmenu>` | `[]` |  |
 | size | `'small'\|'medium'\|'large'\|'huge'` | `'medium'` |  |
-| on-select | `(key: string \| number) => any` | `undefined` |  |
+| on-select | `(key: string \| number) => void` | `undefined` |  |
 
 对于其他 Props，参考 [Popover Props](n-popover#Props)。注意 `arrow`, `raw` 属性不可用。
 

@@ -62,9 +62,9 @@ loading
 | log | `string` | `undefined` |  |
 | rows | `number` | `15` |  |
 | trim | `boolean` | `false` |  |
-| on-require-more | `(from: 'top' \| 'bottom') => any` | `undefined` |  |
-| on-reach-top | `() => any` | `undefined` |  |
-| on-reach-bottom | `() => any` | `undefined` |  |
+| on-require-more | `(from: 'top' \| 'bottom') => void` | `undefined` |  |
+| on-reach-top | `() => void` | `undefined` |  |
+| on-reach-bottom | `() => void` | `undefined` |  |
 
 ## Methods
 

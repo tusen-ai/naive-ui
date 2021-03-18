@@ -25,6 +25,6 @@ format
 | placeholder | `string` | `'Select Time'` |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | value | `number \| null` | `undefined` |  |
-| on-blur | `() => any` | `undefined` |  |
-| on-focus | `() => any` | `undefined` |  |
-| on-update:value | `(value: number \| null) => any` | `undefined` |  |
+| on-blur | `() => void` | `undefined` |  |
+| on-focus | `() => void` | `undefined` |  |
+| on-update:value | `(value: number \| null) => void` | `undefined` |  |

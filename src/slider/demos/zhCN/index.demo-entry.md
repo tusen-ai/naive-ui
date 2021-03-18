@@ -22,4 +22,4 @@ mark
 | range | `boolean` | `false` |  |
 | step | `number` | `1` |  |
 | value | `number \| [number, number] \| null` | `undefined` |
-| on-update:value | `(value: number \| [number, number]) => any` | `undefined` |  |
+| on-update:value | `(value: number \| [number, number]) => void` | `undefined` |  |

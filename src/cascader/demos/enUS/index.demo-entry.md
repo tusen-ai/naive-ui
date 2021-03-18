@@ -33,10 +33,10 @@ multiple-lazy
 | show-path | `boolean` | `true` | Whether to show path in selector. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | value | `string \| number \| Array<number \| string> \| null` | `undefined` |  |
-| on-blur | `() => any` | `undefined` |  |
-| on-focus | `() => any` | `undefined` |
+| on-blur | `() => void` | `undefined` |  |
+| on-focus | `() => void` | `undefined` |
 | on-load | `(option: CascaderOption) => Promise<any>` | `undefined` | Callback when click unloaded node. Set `option.children` in the returned promise. Loading is end after the promise is resolved or rejected. |
-| on-update:value | `(value: string \| number \| Array<string \| number> \| null) => any` | `undefined` |  |
+| on-update:value | `(value: string \| number \| Array<string \| number> \| null) => void` | `undefined` |  |
 
 ## API
 

@@ -51,20 +51,20 @@ loading
 
 ## Props
 
-| 名称            | 类型                               | 默认值      | 说明 |
-| --------------- | ---------------------------------- | ----------- | ---- |
-| font-size       | `number`                           | `14`        |      |
-| hljs            | `Object`                           | `undefined` |      |
-| language        | `string`                           | `undefined` |      |
-| line-height     | `number`                           | `1.25`      |      |
-| lines           | `Array<string>`                    | `undefined` |      |
-| loading         | `boolean`                          | `false`     |      |
-| log             | `string`                           | `undefined` |      |
-| rows            | `number`                           | `15`        |      |
-| trim            | `boolean`                          | `false`     |      |
-| on-require-more | `(from: 'top' \| 'bottom') => any` | `undefined` |      |
-| on-reach-top    | `() => any`                        | `undefined` |      |
-| on-reach-bottom | `() => any`                        | `undefined` |      |
+| 名称            | 类型                                | 默认值      | 说明 |
+| --------------- | ----------------------------------- | ----------- | ---- |
+| font-size       | `number`                            | `14`        |      |
+| hljs            | `Object`                            | `undefined` |      |
+| language        | `string`                            | `undefined` |      |
+| line-height     | `number`                            | `1.25`      |      |
+| lines           | `Array<string>`                     | `undefined` |      |
+| loading         | `boolean`                           | `false`     |      |
+| log             | `string`                            | `undefined` |      |
+| rows            | `number`                            | `15`        |      |
+| trim            | `boolean`                           | `false`     |      |
+| on-require-more | `(from: 'top' \| 'bottom') => void` | `undefined` |      |
+| on-reach-top    | `() => void`                        | `undefined` |      |
+| on-reach-bottom | `() => void`                        | `undefined` |      |
 
 ## Methods
 

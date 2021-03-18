@@ -12,7 +12,7 @@ basic
 
 | Name | Parameters | Default | Description |
 | --- | --- | --- | --- |
-| on-namespace-change | `(namespace: string) => any` | `undefined` |  |
+| on-namespace-change | `(namespace: string) => void` | `undefined` |  |
 
 ## Slots
 

@@ -29,8 +29,8 @@ format
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | type | `'date' \| 'datetime' \| 'daterange' \|'datetimerange'` | `'date'` |  |
 | value | `number \| [number, number] \| null` | `undefined` |  |
-| on-blur | `() => any` | `undefined` |  |
-| on-focus | `() => any` | `undefined` |  |
+| on-blur | `() => void` | `undefined` |  |
+| on-focus | `() => void` | `undefined` |  |
 
 ### Date Type Props
 
@@ -40,7 +40,7 @@ format
 | format | `string` | `'yyyy-MM-dd'` |  |
 | is-date-disabled | `(current: number) => boolean` | `() => false` |  |
 | placeholder | `string` | `'Select Date'` |  |
-| on-update:value | `(value: number \| null) => any` | `undefined` |  |
+| on-update:value | `(value: number \| null) => void` | `undefined` |  |
 
 ### DateTime Type Props
 
@@ -51,7 +51,7 @@ format
 | is-date-disabled | `(current: number) => boolean` | `() => false` |  |
 | is-time-disabled | `(current: number) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` |  |
 | placeholder | `string` | `'Select Date and Time'` |  |
-| on-update:value | `(value: number \| null) => any` | `undefined` |  |
+| on-update:value | `(value: number \| null) => void` | `undefined` |  |
 
 ### DateRange Type Props
 
@@ -64,7 +64,7 @@ format
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] | null) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` |  |
 | separator | `string` | `'to'` |  |
 | start-placeholder | `string` | `'Start Date'` |  |
-| on-update:value | `(value: [number, number] \| null) => any` | `undefined` |  |
+| on-update:value | `(value: [number, number] \| null) => void` | `undefined` |  |
 
 ### DateTimeRange Type Props
 
@@ -77,4 +77,4 @@ format
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` |  |
 | separator | `string` | `'to'` |  |
 | start-placeholder | `string` | `'Start Date and Time'` |  |
-| on-update:value | `(value: [number, number] \| null) => any` | `undefined` |  |
+| on-update:value | `(value: [number, number] \| null) => void` | `undefined` |  |

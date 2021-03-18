@@ -35,7 +35,7 @@ default-files
 | show-remove-button | `boolean` | `true` | Whether to show remove button (at file finished status). Click on remove button will fire `on-remove` callback. |
 | show-retry-button | `boolean` | `true` | Whether to show retry button (at file error status). |
 | with-credentials | `boolean` | `false` | If cookie attached. |
-| on-change | `(options: { file: UploadFile, fileList: Array<UploadFile>, event?: Event }) => any` | `() => {}` | The callback of status change of the component. Any file status change would fire the callback. |
+| on-change | `(options: { file: UploadFile, fileList: Array<UploadFile>, event?: Event }) => void` | `() => {}` | The callback of status change of the component. Any file status change would fire the callback. |
 | on-finish | `(options: { file: UploadFile }) => UploadFile \| void` | `({ file }) => file` | The callback of file upload finish. You can modify the UploadFile or retun a new UploadFile. |
 | on-remove | `(options: { file: UploadFile, fileList: Array<UploadFile> }) => boolean \| Promise<boolean> \| any` | `() => true` | The callback of file removal. Return false, promise resolve false or promise reject will cancel this removal. |
 

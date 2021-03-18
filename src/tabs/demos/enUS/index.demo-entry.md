@@ -22,7 +22,7 @@ display-directive
 | label-size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` | 标签的尺寸，只对线型的 Tabs 生效 |
 | type | `'line' \| 'card'` | `'line'` |  |
 | value | `string \| number` | required |  |
-| on-update:value | `(value: string \| number) => any` | `undefined` |  |
+| on-update:value | `(value: string \| number) => void` | `undefined` |  |
 
 ### Tab Pane Props
 

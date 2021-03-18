@@ -29,8 +29,8 @@ format
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | type | `'date' \| 'datetime' \| 'daterange' \|'datetimerange'` | `'date'` |  |
 | value | `number \| [number, number] \| null` | `undefined` |  |
-| on-blur | `() => any` | `undefined` |  |
-| on-focus | `() => any` | `undefined` |  |
+| on-blur | `() => void` | `undefined` |  |
+| on-focus | `() => void` | `undefined` |  |
 
 ### Date 类型的 Props
 
@@ -40,7 +40,7 @@ format
 | format | `string` | `'yyyy-MM-dd'` |  |
 | is-date-disabled | `(current: number) => boolean` | `undefined` |  |
 | placeholder | `string` | `'选择日期'` |  |
-| on-update:value | `(value: number \| null) => any` | `undefined` |  |
+| on-update:value | `(value: number \| null) => void` | `undefined` |  |
 
 ### DateTime 类型的 Props
 
@@ -51,7 +51,7 @@ format
 | is-date-disabled | `(current: number) => boolean` | `undefined` |  |
 | is-time-disabled | `(current: number) => { isHourDisabled: boolean, isMinuteDisabled: boolean, isSecondDisabled: boolean }` | `undefined` |  |
 | placeholder | `string` | `'选择日期时间'` |  |
-| on-update:value | `(value: number \| null) => any` | `undefined` |  |
+| on-update:value | `(value: number \| null) => void` | `undefined` |  |
 
 ### DateRange 类型的 Props
 
@@ -64,7 +64,7 @@ format
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] | null) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` |  |
 | separator | `string` | `'至'` |  |
 | start-placeholder | `string` | `'开始日期'` |  |
-| on-update:value | `(value: [number, number] \| null) => any` | `undefined` |  |
+| on-update:value | `(value: [number, number] \| null) => void` | `undefined` |  |
 
 ### DateTimeRange 类型的 Props
 
@@ -77,4 +77,4 @@ format
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` |  |
 | separator | `string` | `'to'` |  |
 | start-placeholder | `string` | `'开始日期时间'` |  |
-| on-update:value | `(value: [number, number] \| null) => any` | `undefined` |  |
+| on-update:value | `(value: [number, number] \| null) => void` | `undefined` |  |

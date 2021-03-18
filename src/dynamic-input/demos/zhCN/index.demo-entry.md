@@ -28,9 +28,9 @@ form
 | max | `number` | `undefined` | 最多有几项内容 |
 | preset | `'input' \| 'preset'` | `'input'` | 动态录入使用的预设，在不设定 `$slots.default` 的时候生效。 |
 | value | `Array<any>` | `undefined` |  |
-| on-create | `(index: number) => any` | `undefined` | 点击添加按钮时的回调，如果设定则返回值会被用作新添加的初始值。其中 `index` 是创建内容将要被放置到的位置对应的数组索引，从 1 (第二项)开始计算。 |
-| on-remove | `() => any` | `undefined` |  |
-| on-update:value | `(value: any) => any` | `undefined` |  |
+| on-create | `(index: number) => void` | `undefined` | 点击添加按钮时的回调，如果设定则返回值会被用作新添加的初始值。其中 `index` 是创建内容将要被放置到的位置对应的数组索引，从 1 (第二项)开始计算。 |
+| on-remove | `() => void` | `undefined` |  |
+| on-update:value | `(value: any) => void` | `undefined` |  |
 
 ### Dynamic Input Props(Input Preset)
 

@@ -120,9 +120,9 @@ All the properties can be modified dynamically.
 | show-icon | `boolean` | `true` |  |
 | title | `string \| (() => VNode \| Array<VNode>)` | `undefined` | Can be a render function. |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` |  |
-| on-close | `() => any` |  |
-| on-negative-click | `() => any` |  |
-| on-positive-click | `() => any` |  |
+| on-close | `() => void` |  |
+| on-negative-click | `() => void` |  |
+| on-positive-click | `() => void` |  |
 
 ## Slots
 

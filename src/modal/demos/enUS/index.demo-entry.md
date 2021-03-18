@@ -25,7 +25,7 @@ preset-confirm-slot
 | preset | `'card' \| 'confirm'` | `undefined` |  |
 | show | `boolean` | `false` | Whether to show modal. |
 | show-mask | `boolean` | `true` | Whether to show mask of the modal. |
-| on-update:show | `(value: boolean) => any` | `undefined` | Callback when modal's display status is changed. |
+| on-update:show | `(value: boolean) => void` | `undefined` | Callback when modal's display status is changed. |
 
 ### Modal with Preset Card
 

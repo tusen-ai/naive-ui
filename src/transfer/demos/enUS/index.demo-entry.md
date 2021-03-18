@@ -28,7 +28,7 @@ filterable
 | target-filter-placeholder | `string` | `undefined` |  |
 | target-title | `string` | `'Target'` |  |
 | value | `Array<string \| number> \| null` | `undefined` |  |
-| on-update:value | `(value: Array<string \| number>) => any` | `undefined` |  |
+| on-update:value | `(value: Array<string \| number>) => void` | `undefined` |  |
 | virtual-scroll | `boolean` | `false` | If use virtual scroll on transfer. If set to `true` it can handles large data (and turn transfer animation off) |
 
 ### TransferOption Type

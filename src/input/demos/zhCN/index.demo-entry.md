@@ -41,11 +41,11 @@ passively-activated
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | type | `'text' \| 'password' \| 'textarea'` | `'text'` |  |
 | value | `string \| [string, string] \| null` | `undefined` | 文本输入的值。如果是 `pair` 是 `true`，`value` 是一个数组 |
-| on-blur | `() => any` | `undefined` |  |
-| on-change | `(value: string \| [string, string]) => any` | `undefined` |  |
-| on-clear | `() => any` | `undefined` |  |
-| on-focus | `() => any` | `undefined` |  |
-| on-update:value | `(value: string \| [string, string]) => any` | `undefined` |  |
+| on-blur | `() => void` | `undefined` |  |
+| on-change | `(value: string \| [string, string]) => void` | `undefined` |  |
+| on-clear | `() => void` | `undefined` |  |
+| on-focus | `() => void` | `undefined` |  |
+| on-update:value | `(value: string \| [string, string]) => void` | `undefined` |  |
 
 ## Slots
 

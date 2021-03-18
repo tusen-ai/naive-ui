@@ -20,7 +20,7 @@ multiple
 | scrollable | `boolean` | `false` |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | value | `string \| number \| Array<string \| number> \| null` | `null` |  |
-| on-update:value | `(string \| number \| Array<string \| number> \| null) => any` | `undefined` |  |
+| on-update:value | `(string \| number \| Array<string \| number> \| null) => void` | `undefined` |  |
 
 对于 SelectOption & SelectGroupOption，参考 [Select](n-select#SelectOption-Type)
 

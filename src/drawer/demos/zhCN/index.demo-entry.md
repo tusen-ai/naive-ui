@@ -25,7 +25,7 @@ dark-4-debug
 | show | `boolean` | `false` |  |
 | to | `string \| HTMLElement` | `'body'` | 抽屉出现的区域 |
 | width | `number \| string` | `251` |  |
-| on-update:show | `(show: boolean) => any` | `undefined` |  |
+| on-update:show | `(show: boolean) => void` | `undefined` |  |
 
 ## Slots
 

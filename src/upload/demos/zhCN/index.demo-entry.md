@@ -35,7 +35,7 @@ default-files
 | show-remove-button | `boolean` | `true` | 是否显示删除按钮（在 finished 的时候展示），点击删除按钮会触发 `on-remove` 回调 |
 | show-retry-button | `boolean` | `true` | 是否显示重新上传按钮（在 error 时展示） |
 | with-credentials | `boolean` | `false` | 是否携带 Cookie |
-| on-change | `(options: { file: UploadFile, fileList: Array<UploadFile>, event?: Event }) => any` | `() => {}` | 组件状态变化的回调，组件的任何文件状态变化都会触发回调 |
+| on-change | `(options: { file: UploadFile, fileList: Array<UploadFile>, event?: Event }) => void` | `() => {}` | 组件状态变化的回调，组件的任何文件状态变化都会触发回调 |
 | on-finish | `(options: { file: UploadFile }) => UploadFile \| void` | `({ file }) => file` | 文件上传结束的回调，可以修改传入的 UploadFile 或者返回一个新的 UploadFile |
 | on-remove | `(options: { file: UploadFile, fileList: Array<UploadFile> }) => boolean \| Promise<boolean> \| any` | `() => true` | 文件移除的回调，返回 false 或者 promise resolve false 或者 promise reject 会不执行这次删除 |
 

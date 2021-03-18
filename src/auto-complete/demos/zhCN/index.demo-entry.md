@@ -25,10 +25,10 @@ after-select
 | placeholder | `string` | `'请输入'` |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | value | `string` | `undefined` |  |
-| on-blur | `(event: FocusEvent) => any` | `undefined` |  |
-| on-focus | `(event: FocusEvent) => any` | `undefined` |  |
-| on-select | `(value: string) => any` | `undefined` |  |
-| on-update:value | `(value: string \| null) => any` | `undefined` |  |
+| on-blur | `(event: FocusEvent) => void` | `undefined` |  |
+| on-focus | `(event: FocusEvent) => void` | `undefined` |  |
+| on-select | `(value: string) => void` | `undefined` |  |
+| on-update:value | `(value: string \| null) => void` | `undefined` |  |
 
 ### AutoCompleteOption Properties
 
@@ -51,4 +51,4 @@ after-select
 
 | 名称 | 参数 | 说明 |
 | --- | --- | --- |
-| default | `(options: { handleInput: (value: string) => any, handleFocus: function, handleBlur: function, value: string, theme: string \| null })` |  |
+| default | `(options: { handleInput: (value: string) => void, handleFocus: function, handleBlur: function, value: string, theme: string \| null })` |  |

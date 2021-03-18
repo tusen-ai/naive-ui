@@ -25,4 +25,4 @@ target-container-selector
 | show | `boolean` | `undefined` | Whether to show BackTop |
 | to | `string \| HTMLElement` | `'body'` | Container node to show BackTop |
 | visibility-height | `number` | `180` |  |
-| on-update:show | `(value: boolean) => any` | `undefined` |  |
+| on-update:show | `(value: boolean) => void` | `undefined` |  |

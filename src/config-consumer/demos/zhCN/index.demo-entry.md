@@ -12,9 +12,9 @@ color-debug
 
 ## Props
 
-| 名称                | 参数                         | 默认值      | 说明 |
-| ------------------- | ---------------------------- | ----------- | ---- |
-| on-namespace-change | `(namespace: string) => any` | `undefined` |      |
+| 名称                | 参数                          | 默认值      | 说明 |
+| ------------------- | ----------------------------- | ----------- | ---- |
+| on-namespace-change | `(namespace: string) => void` | `undefined` |      |
 
 ## Slots
 

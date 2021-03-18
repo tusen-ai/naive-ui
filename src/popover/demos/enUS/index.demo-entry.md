@@ -37,7 +37,7 @@ manual-position
 | trigger | `'hover' \| 'click'` | `'hover'` |  |
 | x | `number` | `undefined` | The CSS `left` pixel value when popover manually positioned. |
 | y | `number` | `undefined` | The CSS `top` pixel value when popover manually positioned. |
-| on-update:show | `(value: boolean) => any` |  |  |
+| on-update:show | `(value: boolean) => void` |  |  |
 
 ## Slots
 

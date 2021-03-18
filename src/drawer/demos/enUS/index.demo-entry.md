@@ -21,7 +21,7 @@ target
 | show | `boolean` | `false` |  |
 | to | `string \| HTMLElement` | `'body'` | Container node of the drawer. |
 | width | `number \| string` | `251` |  |
-| on-update:show | `(show: boolean) => any` | `undefined` |  |
+| on-update:show | `(show: boolean) => void` | `undefined` |  |
 
 ## Slots
 

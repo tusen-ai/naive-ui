@@ -27,5 +27,5 @@ disabled
 | page | `number` | `undefined` |  |
 | show-quick-jumper | `boolean` | `false` |  |
 | show-size-picker | `boolean` | `false` |  |
-| on-update:page | `(page: number) => any` | `undefined` |  |
-| on-update:page-size | `(pageSize: number) => any` | `undefined` |  |
+| on-update:page | `(page: number) => void` | `undefined` |  |
+| on-update:page-size | `(pageSize: number) => void` | `undefined` |  |
