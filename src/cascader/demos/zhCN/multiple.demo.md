@@ -8,11 +8,17 @@
     <n-space><n-switch v-model:value="showPath" />Show Path</n-space>
     <n-space><n-switch v-model:value="hoverTrigger" />Hover Trigger</n-space>
     <n-space><n-switch v-model:value="filterable" />Filterable</n-space>
+    <n-space
+      ><n-switch v-model:value="responsiveMaxTagCount" />Responsive
+      MaxTagCount</n-space
+    >
   </n-space>
   <n-cascader
     v-model:value="value"
     multiple
+    clearable
     placeholder="没啥用的值"
+    :max-tag-count="responsiveMaxTagCount ? 'responsive' : undefined"
     :expand-trigger="hoverTrigger ? 'hover' : 'click'"
     :options="options"
     :cascade="cascade"
@@ -62,6 +68,7 @@ export default {
       hoverTrigger: false,
       value: null,
       filterable: false,
+      responsiveMaxTagCount: true,
       options: genOptions()
     }
   }

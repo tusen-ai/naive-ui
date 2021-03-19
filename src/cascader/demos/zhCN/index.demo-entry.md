@@ -24,8 +24,9 @@ multiple-lazy
 | filterable | `boolean` | `false` | `remote` 被设定时不生效 |
 | filter | `(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean` | 一个基于字符串的过滤算法 |  |
 | leaf-only | `boolean` | `false` | 是否只允许 `value` 出现叶节点的值 |
+| max-tag-count | `number \| 'responsive'` | `undefined` | 多选标签的最大显示数量，`responsive` 会将所有标签保持在一行 |
 | multiple | `boolean` | `false` |  |
-| options | `Array<CascaderOption>` | required |  |
+| options | `Array<CascaderOption>` | `[]` |  |
 | placeholder | `string` | `'请选择'` |  |
 | remote | `boolean` | `false` |  |
 | separator | `string` | `' / '` |  |

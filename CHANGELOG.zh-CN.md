@@ -7,6 +7,11 @@
 - `n-config-provider` 的 `theme-overrides` 支持继承
 - `card` 新增 `hoverable` 属性
 - `select` 新增 `max-tag-count` 属性
+- `cascader` 新增 `max-tag-count` 属性
+
+### Fixes
+
+- 修正 `cascader` 再点击清除按钮后菜单出现
 
 ## 2.0.1
 

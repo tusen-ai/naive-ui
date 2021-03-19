@@ -26,7 +26,7 @@ max-tag-count
 ## Props
 
 | Name | Type | Default | Description |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- |
 | clearable | `boolean` | `false` |  |
 | default-value | `Array<string \| number> \| string \| number \| null` | `null` |  |
 | disabled | `boolean` | `false` |  |
@@ -34,7 +34,7 @@ max-tag-count
 | filterable | `boolean` | `false` | Whether it can filter options. |
 | filter | `(pattern: string, option: Object) => boolean` | A basic string based search method. |  |
 | loading | `boolean` | `false` |  |
-| max-tag-count | `number | 'responsive'` | `undefined` | Max tag count in multiple mode. `responsive` will keep all the tags in single line. |
+| max-tag-count | `number \| 'responsive'` | `undefined` | Max tag count in multiple mode. `responsive` will keep all the tags in single line. |
 | multiple | `boolean` | `false` |  |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` |  |
 | placeholder | `string` | `'Please Select'` |  |

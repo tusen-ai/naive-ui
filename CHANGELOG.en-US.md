@@ -7,6 +7,11 @@
 - `n-config-provider` prop `theme-overrides` support inheritance.
 - `card` add `hoverable` prop.
 - `select` add `max-tag-count` prop.
+- `cascader` add `max-tag-count` prop.
+
+### Fixes
+
+- Fix `cascader` menu appears after click clear button.
 
 ## 2.0.1
 

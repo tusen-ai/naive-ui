@@ -29,7 +29,7 @@ menu-debug
 ## Props
 
 | 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- |
 | clearable | `boolean` | `false` |  |
 | default-value | `Array<string \| number> \| string \| number \| null` | `null` |  |
 | disabled | `boolean` | `false` |  |
@@ -37,7 +37,7 @@ menu-debug
 | filterable | `boolean` | `false` | 是否可以过滤 |
 | filter | `(pattern: string, option: Object) => boolean` | 一个简单的字符串搜索算法 |  |
 | loading | `boolean` | `false` |  |
-| max-tag-count | `number | 'responsive'` | `undefined` | 多选标签的最大显示数量，`responsive` 会将所有标签保持在一行 |
+| max-tag-count | `number \| 'responsive'` | `undefined` | 多选标签的最大显示数量，`responsive` 会将所有标签保持在一行 |
 | multiple | `boolean` | `false` |  |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` |  |
 | placeholder | `string` | `'请选择'` |  |

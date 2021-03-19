@@ -115,6 +115,7 @@ export default defineComponent({
       type: Boolean as PropType<boolean | undefined>,
       default: undefined
     },
+    maxTagCount: [String, Number] as PropType<number | 'responsive'>,
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
     // deprecated
@@ -549,7 +550,8 @@ export default defineComponent({
       }
     }
     // --- search
-    function handleClear (): void {
+    function handleClear (e: MouseEvent): void {
+      e.stopPropagation()
       doUpdateValue(null)
     }
     function handleTriggerFocus (e: FocusEvent): void {
@@ -731,6 +733,7 @@ export default defineComponent({
                   default: () => (
                     <NInternalSelection
                       ref="triggerInstRef"
+                      maxTagCount={this.maxTagCount}
                       bordered={this.mergedBordered}
                       size={this.mergedSize}
                       theme={this.mergedTheme.peers.InternalSelection}

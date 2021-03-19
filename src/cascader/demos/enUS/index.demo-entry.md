@@ -24,6 +24,7 @@ multiple-lazy
 | filterable | `boolean` | `false` | If `remote` is set, it won't work. |
 | filter | `(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean` | A string based filter algorithm. |  |
 | leaf-only | `boolean` | `false` | If only allow value of leaf node to be in `value`. |
+| max-tag-count | `number \| 'responsive'` | `undefined` | Max tag count in multiple mode. `responsive` will keep all the tags in single line. |
 | multiple | `boolean` | `false` |  |
 | options | `Array<CascaderOption>` | required |  |
 | placeholder | `string` | `'Please Select'` |  |
