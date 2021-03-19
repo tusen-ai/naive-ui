@@ -1,35 +1,37 @@
-# UpdateValue 事件
+# 最大标签数量
 
-为什么 `update:value` 事件还是个例子？因为一开始的时候没什么可写的。
+可以设定固定的数量，或者使用 `responsive` 设定响应式的最大标签数量。
 
 ```html
 <n-space vertical>
   <n-select
-    placeholder="选择歌曲"
+    placeholder="maxTagCount = responsive"
+    v-model:value="value"
+    multiple
     :options="options"
-    @update:value="handleUpdateValue"
+    max-tag-count="responsive"
   />
   <n-select
+    placeholder="maxTagCount = 3"
+    v-model:value="value"
     multiple
-    placeholder="选择歌曲"
     :options="options"
-    @update:value="handleUpdateValue"
+    :max-tag-count="3"
   />
 </n-space>
 ```
 
 ```js
-import { defineComponent } from 'vue'
-import { useMessage } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const message = useMessage()
+export default {
+  data () {
     return {
-      handleUpdateValue (value) {
-        message.info('value: ' + JSON.stringify(value))
-      },
+      value: null,
       options: [
+        {
+          label: "Everybody's Got Something to Hide Except Me and My Monkey",
+          value: 'song0',
+          disabled: true
+        },
         {
           label: 'Drive My Car',
           value: 'song1'
@@ -40,7 +42,8 @@ export default defineComponent({
         },
         {
           label: "You Won't See",
-          value: 'song3'
+          value: 'song3',
+          disabled: true
         },
         {
           label: 'Nowhere Man',
@@ -56,7 +59,8 @@ export default defineComponent({
         },
         {
           label: 'Michelle',
-          value: 'song7'
+          value: 'song7',
+          disabled: true
         },
         {
           label: 'What goes on',
@@ -81,5 +85,5 @@ export default defineComponent({
       ]
     }
   }
-})
+}
 ```

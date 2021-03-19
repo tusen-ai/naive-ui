@@ -1,12 +1,19 @@
-import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
+import { h, defineComponent, computed, PropType, CSSProperties, ref } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseClose } from '../../_internal'
-import { warn, createKey } from '../../_utils'
+import { warn, createKey, MaybeArray, call } from '../../_utils'
 import { tagLight } from '../styles'
 import type { TagTheme } from '../styles'
 import commonProps from './common-props'
 import style from './styles/index.cssr'
+
+export interface TagPublicMethods {
+  setTextContent: (textContent: string) => void
+}
+export interface TagRef extends TagPublicMethods {
+  $el: HTMLElement
+}
 
 export default defineComponent({
   name: 'Tag',
@@ -25,14 +32,15 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    onClose: Function,
+    onClose: [Array, Function] as PropType<MaybeArray<() => void>>,
+    onMouseenter: Function as PropType<(e: MouseEvent) => void>,
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:checked': {
       type: Function,
       default: undefined
     },
     // private
-    stopClickPropagation: {
+    internalStopClickPropagation: {
       type: Boolean,
       default: false
     },
@@ -52,6 +60,7 @@ export default defineComponent({
     }
   },
   setup (props) {
+    const contentRef = ref<HTMLElement | null>(null)
     const { mergedBordered } = useConfig(props)
     const themeRef = useTheme('Tag', 'Tag', style, tagLight, props)
     function handleClick (e: MouseEvent): void {
@@ -69,15 +78,23 @@ export default defineComponent({
       }
     }
     function handleCloseClick (e: MouseEvent): void {
-      if (props.stopClickPropagation) {
+      if (props.internalStopClickPropagation) {
         e.stopPropagation()
       }
       if (!props.disabled) {
         const { onClose } = props
-        if (onClose) onClose()
+        if (onClose) call(onClose)
+      }
+    }
+    const tagPublicMethods: TagPublicMethods = {
+      setTextContent (textContent: string) {
+        const { value } = contentRef
+        if (value) value.textContent = textContent
       }
     }
     return {
+      ...tagPublicMethods,
+      contentRef,
       mergedBordered,
       handleClick,
       handleCloseClick,
@@ -154,8 +171,11 @@ export default defineComponent({
         ]}
         style={this.cssVars as CSSProperties}
         onClick={this.handleClick}
+        onMouseenter={this.onMouseenter}
       >
-        <span class="n-tag__content">{this.$slots}</span>
+        <span class="n-tag__content" ref="contentRef">
+          {this.$slots}
+        </span>
         {!this.checkable && this.closable ? (
           <NBaseClose
             class="n-tag__close"

@@ -1,32 +1,34 @@
-# Change Event
+# UpdateValue Event
 
-Why change event is an example? Because at first there isn't much to write.
+Why `update:value` event is an example? Because at first there isn't much to write.
 
 ```html
 <n-space vertical>
   <n-select
-    v-model:value="selectedValue"
     placeholder="Please Select a Song"
     :options="options"
-    @update:value="handleChange"
+    @update:value="handleUpdateValue"
   />
   <n-select
-    v-model:value="selectedArray"
     multiple
     placeholder="Please Select Songs"
     :options="options"
-    @update:value="handleChange"
+    @update:value="handleUpdateValue"
   />
 </n-space>
 ```
 
 ```js
-export default {
-  inject: ['message'],
-  data () {
+import { defineComponent } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const message = useMessage()
     return {
-      selectedValue: 'song1',
-      selectedArray: ['song1'],
+      handleUpdateValue (value) {
+        message.info('value: ' + JSON.stringify(value))
+      },
       options: [
         {
           label: 'Drive My Car',
@@ -78,11 +80,6 @@ export default {
         }
       ]
     }
-  },
-  methods: {
-    handleChange (value) {
-      this.message.info('value: ' + JSON.stringify(value))
-    }
   }
-}
+})
 ```

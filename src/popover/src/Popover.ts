@@ -115,6 +115,7 @@ export const popoverProps = {
     type: Boolean,
     default: true
   },
+  internalUseTriggerWidth: Boolean,
   // private
   padded: {
     type: Boolean,

@@ -20,6 +20,7 @@ many-options
 custom-option
 action
 fallback-option
+max-tag-count
 change-debug
 placeholder-debug
 menu-debug
@@ -28,7 +29,7 @@ menu-debug
 ## Props
 
 | 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | clearable | `boolean` | `false` |  |
 | default-value | `Array<string \| number> \| string \| number \| null` | `null` |  |
 | disabled | `boolean` | `false` |  |
@@ -36,10 +37,12 @@ menu-debug
 | filterable | `boolean` | `false` | 是否可以过滤 |
 | filter | `(pattern: string, option: Object) => boolean` | 一个简单的字符串搜索算法 |  |
 | loading | `boolean` | `false` |  |
+| max-tag-count | `number | 'responsive'` | `undefined` | 多选标签的最大显示数量，`responsive` 会将所有标签保持在一行 |
 | multiple | `boolean` | `false` |  |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` |  |
 | placeholder | `string` | `'请选择'` |  |
 | remote | `boolean` | `false` | 是否要异步获取选项。注意如果设定了，那么 `fitler` 和 `tag` 都不会对 `options` 生效。这个时候你在全权控制 `options` |
+| show | `boolean` | `undefined` | 是否展示菜单 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | tag | `boolean` | `false` | 是否可以创建新的选项，需要和 `filterable` 一起使用 |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` |  |
@@ -48,7 +51,7 @@ menu-debug
 | on-focus | `() => void` | 选择器 Focus 时发出 |
 | on-scroll | `(e: ScrollEvent) => void` | 选择菜单在滚动 |
 | on-search | `(value: string) => void` |  |
-| on-update:value | `(value: Array \| string \| number \| null) => void` |  |
+| on-update:value | `(value: Array \| string \| number \| null) => void` | 值更新的回调 |
 
 ### SelectOption Properties
 

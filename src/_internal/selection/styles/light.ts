@@ -1,5 +1,6 @@
 import { changeColor } from 'seemly'
 import { commonLight } from '../../../_styles/common'
+import { popoverLight } from '../../../popover/styles'
 import type { ThemeCommonVars } from '../../../_styles/common'
 import commonVariables from './_common'
 import { createTheme } from '../../../_mixins'
@@ -90,6 +91,9 @@ export type InternalSelectionThemeVars = ReturnType<typeof self>
 const internalSelectionLight = createTheme({
   name: 'InternalSelection',
   common: commonLight,
+  peers: {
+    popover: popoverLight
+  },
   self
 })
 

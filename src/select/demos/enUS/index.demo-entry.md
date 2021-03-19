@@ -20,12 +20,13 @@ many-options
 custom-option
 action
 fallback-option
+max-tag-count
 ```
 
 ## Props
 
 | Name | Type | Default | Description |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | clearable | `boolean` | `false` |  |
 | default-value | `Array<string \| number> \| string \| number \| null` | `null` |  |
 | disabled | `boolean` | `false` |  |
@@ -33,10 +34,12 @@ fallback-option
 | filterable | `boolean` | `false` | Whether it can filter options. |
 | filter | `(pattern: string, option: Object) => boolean` | A basic string based search method. |  |
 | loading | `boolean` | `false` |  |
+| max-tag-count | `number | 'responsive'` | `undefined` | Max tag count in multiple mode. `responsive` will keep all the tags in single line. |
 | multiple | `boolean` | `false` |  |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` |  |
 | placeholder | `string` | `'Please Select'` |  |
 | remote | `boolean` | `false` | If you want to async get options. Note that if remote is set, `filter` & `tag` won't work on `options`. At that time, you are taking all control of `options`. |
+| show | `boolean` | `undefined` | Whether to show menu. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | tag | `boolean` | `false` | Whether it can create new option, should be used with `filterable`. |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` |  |
@@ -45,7 +48,7 @@ fallback-option
 | on-focus | `() => void` | Selection focus. |
 | on-scroll | `(e: ScrollEvent) => void` | Menu scroll. |
 | on-search | `(value: string) => void` |  |
-| on-update:value | `(value: Array \| string \| number \| null) => void` |  |
+| on-update:value | `(value: Array \| string \| number \| null) => void` | Callback of value updating. |
 
 ### SelectOption Properties
 

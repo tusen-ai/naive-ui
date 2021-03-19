@@ -128,19 +128,7 @@ export default c([
         color .3s var(--bezier),
         box-shadow .3s var(--bezier),
         background-color .3s var(--bezier);
-    `, [
-      cB('tag', `
-        margin-right: 7px;
-        margin-bottom: 3px;
-        font-size: 14px;
-        max-width: 100%;
-      `, [
-        cE('content', `
-          text-overflow: ellipsis;
-          overflow: hidden;
-        `)
-      ])
-    ]),
+    `),
     cB('base-selection-label', `
       display: inline-block;
       width: 100%;
@@ -279,6 +267,28 @@ export default c([
         visibility: hidden;
         user-select: none;
         opacity: 0;
+      `)
+    ])
+  ]),
+  cB('base-selection-popover', `
+    margin-bottom: -3px;
+    display: flex;
+    flex-wrap: wrap;
+  `),
+  cB('base-selection-tag-wrapper', `
+    display: inline-flex;
+    padding: 0 7px 3px 0;
+  `, [
+    c('&:last-child', {
+      paddingRight: 0
+    }),
+    cB('tag', `
+      font-size: 14px;
+      max-width: 100%;
+    `, [
+      cE('content', `
+        text-overflow: ellipsis;
+        overflow: hidden;
       `)
     ])
   ]),

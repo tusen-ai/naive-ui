@@ -6,6 +6,7 @@
 
 - `n-config-provider` prop `theme-overrides` support inheritance.
 - `card` add `hoverable` prop.
+- `select` add `max-tag-count` prop.
 
 ## 2.0.1
 

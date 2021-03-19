@@ -40,6 +40,7 @@ export const popoverBodyProps = {
   filp: Boolean,
   overlap: Boolean,
   placement: String as PropType<FollowerPlacement>,
+  internalUseTriggerWidth: Boolean,
   // private
   shadow: Boolean,
   padded: Boolean,
@@ -234,7 +235,8 @@ export default defineComponent({
         placement: this.placement,
         containerClass: this.namespace,
         ref: 'followerRef',
-        overlap: this.overlap
+        overlap: this.overlap,
+        width: this.internalUseTriggerWidth ? 'target' : undefined
       },
       {
         default: () => {

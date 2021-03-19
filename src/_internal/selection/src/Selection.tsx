@@ -11,6 +11,8 @@ import {
   nextTick,
   CSSProperties
 } from 'vue'
+import { VOverflow, VOverflowRef } from 'vueuc'
+import { NPopover } from '../../../popover'
 import { NTag } from '../../../tag'
 import { useTheme } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
@@ -20,6 +22,7 @@ import type { InternalSelectionTheme } from '../styles'
 import Suffix from './Suffix'
 import style from './styles/index.cssr'
 import type { SelectBaseOption } from '../../../select'
+import type { TagRef } from '../../../tag/src/Tag'
 
 export interface InternalSelectionRef {
   focusPatternInputWrapper: () => void
@@ -98,6 +101,7 @@ export default defineComponent({
     onFocus: Function as PropType<(e: FocusEvent) => void>,
     onDeleteOption: Function,
     onDeleteLastOption: Function,
+    maxTagCount: [String, Number] as PropType<number | 'responsive'>,
     onClear: {
       type: Function as PropType<((e: MouseEvent) => void) | undefined>,
       default: undefined
@@ -115,7 +119,11 @@ export default defineComponent({
     const focusableEl1Ref = ref<HTMLElement | null>(null)
     const focusableEl2Ref = ref<HTMLElement | null>(null)
     const patternInputWrapperRef = ref<HTMLElement | null>(null)
+    const counterRef = ref<TagRef | null>(null)
+    const counterWrapperRef = ref<HTMLElement | null>(null)
+    const overflowRef = ref<VOverflowRef | null>(null)
 
+    const showTagsPopoverRef = ref<boolean>(false)
     const patternInputFocusedRef = ref(false)
     const hoverRef = ref(false)
     const themeRef = useTheme(
@@ -157,6 +165,9 @@ export default defineComponent({
             const { value: patternInputEl } = patternInputRef
             if (patternInputEl) {
               patternInputEl.style.width = `${patternInputMirrorEl.offsetWidth}px`
+              if (props.maxTagCount !== 'responsive') {
+                overflowRef.value?.sync()
+              }
             }
           }
         })
@@ -284,6 +295,26 @@ export default defineComponent({
         patternInputEl.blur()
       }
     }
+    function updateCounter (count: number): void {
+      const { value } = counterRef
+      if (value) {
+        value.setTextContent(`+${count}`)
+      }
+    }
+    function getCounter (): HTMLElement | null {
+      const { value } = counterWrapperRef
+      return value
+    }
+    function getTail (): HTMLElement | null {
+      return patternInputRef.value
+    }
+    function handleMouseEnterCounter (): void {
+      if (props.disabled || props.active) return
+      showTagsPopoverRef.value = true
+    }
+    function handleMouseLeaveTagsPanel (): void {
+      showTagsPopoverRef.value = false
+    }
     return {
       mergedTheme: themeRef,
       mergedClearable: mergedClearableRef,
@@ -291,7 +322,10 @@ export default defineComponent({
       filterablePlaceholder: filterablePlaceholderRef,
       label: labelRef,
       selected: selectedRef,
+      showTagsPanel: showTagsPopoverRef,
       // dom ref
+      counterRef,
+      counterWrapperRef,
       patternInputMirrorRef,
       patternInputRef,
       singleInputRef,
@@ -299,6 +333,7 @@ export default defineComponent({
       focusableEl1Ref,
       focusableEl2Ref,
       patternInputWrapperRef,
+      overflowRef,
       handleBlur,
       handleFocusin,
       handleClear,
@@ -310,9 +345,14 @@ export default defineComponent({
       handlePatternInputInput,
       handlePatternInputBlur,
       handlePatternInputFocus,
+      handleMouseEnterCounter,
+      handleMouseLeaveTagsPanel,
       focusPatternInputWrapper,
       focusPatternInput,
       blurPatternInput,
+      updateCounter,
+      getCounter,
+      getTail,
       cssVars: computed(() => {
         const { size } = props
         const {
@@ -417,21 +457,10 @@ export default defineComponent({
     }
   },
   render () {
-    const { multiple, size, disabled, filterable } = this
-    const tags = multiple
-      ? this.selectedOptions!.map((option) => (
-        <NTag
-          key={option.value}
-          size={size}
-          closable
-          disabled={disabled}
-          stopClickPropagation
-          onClose={() => this.handleDeleteOption(option)}
-        >
-          {{ default: () => option.label }}
-        </NTag>
-      ))
-      : null
+    const { multiple, size, disabled, filterable, maxTagCount, bordered } = this
+    const maxTagCountResponsive = maxTagCount === 'responsive'
+    const maxTagCountNumeric = typeof maxTagCount === 'number'
+    const useMaxTagCount = maxTagCountResponsive || maxTagCountNumeric
     const suffix = (
       <Suffix
         loading={this.loading}
@@ -440,81 +469,200 @@ export default defineComponent({
         onClear={this.handleClear}
       />
     )
-    return (
-      <div
-        ref="selfRef"
-        class={[
-          'n-base-selection',
-          {
-            'n-base-selection--active': this.active,
-            'n-base-selection--selected':
-              this.selected || (this.active && this.pattern),
-            'n-base-selection--disabled': this.disabled,
-            'n-base-selection--multiple': this.multiple,
-            'n-base-selection--focus': this.patternInputFocused
-          }
-        ]}
-        style={this.cssVars as CSSProperties}
-        onClick={this.onClick}
-        onMouseenter={this.handleMouseEnter}
-        onMouseleave={this.handleMouseLeave}
-        onMousedown={this.handleMouseDown}
-        onKeyup={this.onKeyup}
-        onKeydown={this.onKeydown}
-        onFocusin={this.handleFocusin}
-      >
-        {/* multiple */}
-        {this.multiple && !this.filterable ? (
-          <>
-            <div
-              ref="focusableEl1Ref"
-              class="n-base-selection-tags"
-              tabindex={disabled ? undefined : 0}
-              onBlur={this.handleBlur}
-            >
-              {tags}
-              {suffix}
+
+    let body: JSX.Element
+    if (multiple) {
+      const createTag = (option: SelectBaseOption): JSX.Element => (
+        <div class="n-base-selection-tag-wrapper" key={option.value}>
+          <NTag
+            size={size}
+            closable
+            disabled={disabled}
+            internalStopClickPropagation
+            onClose={() => this.handleDeleteOption(option)}
+          >
+            {{ default: () => option.label }}
+          </NTag>
+        </div>
+      )
+      const originalTags = (maxTagCountNumeric
+        ? this.selectedOptions!.slice(0, maxTagCount as number)
+        : this.selectedOptions!
+      ).map(createTag)
+      const input = filterable ? (
+        <div class="n-base-selection-input-tag">
+          <input
+            ref="patternInputRef"
+            tabindex={-1}
+            disabled={disabled}
+            value={this.pattern}
+            autofocus={this.autofocus}
+            class="n-base-selection-input-tag__input"
+            onBlur={this.handlePatternInputBlur}
+            onFocus={this.handlePatternInputFocus}
+            onKeydown={this.handlePatternKeyDown}
+            onInput={this.handlePatternInputInput as any}
+          />
+          <span
+            ref="patternInputMirrorRef"
+            class="n-base-selection-input-tag__mirror"
+          >
+            {this.pattern ? this.pattern : ''}
+          </span>
+        </div>
+      ) : null
+      // May Overflow
+      const renderCounter = maxTagCountResponsive
+        ? () => (
+          <div class="n-base-selection-tag-wrapper" ref="counterWrapperRef">
+            <NTag
+              ref="counterRef"
+              onMouseenter={this.handleMouseEnterCounter}
+              disabled={disabled}
+            />
+          </div>
+        )
+        : undefined
+      let counter: JSX.Element | undefined
+      if (maxTagCountNumeric) {
+        const rest = this.selectedOptions!.length - (maxTagCount as number)
+        if (rest > 0) {
+          counter = (
+            <div class="n-base-selection-tag-wrapper" key="__counter__">
+              <NTag
+                ref="counterRef"
+                onMouseenter={this.handleMouseEnterCounter}
+                disabled={disabled}
+              >
+                {{
+                  default: () => `+${rest}`
+                }}
+              </NTag>
             </div>
+          )
+        }
+      }
+      const tags = maxTagCountResponsive ? (
+        filterable ? (
+          <VOverflow
+            ref="overflowRef"
+            updateCounter={this.updateCounter}
+            getCounter={this.getCounter}
+            getTail={this.getTail}
+            style={{
+              width: '100%',
+              display: 'flex',
+              overflow: 'hidden'
+            }}
+          >
+            {{
+              default: () => originalTags,
+              counter: renderCounter,
+              tail: () => input
+            }}
+          </VOverflow>
+        ) : (
+          <VOverflow
+            ref="overflowRef"
+            updateCounter={this.updateCounter}
+            getCounter={this.getCounter}
+            style={{
+              width: '100%',
+              display: 'flex',
+              overflow: 'hidden'
+            }}
+          >
+            {{
+              default: () => originalTags,
+              counter: renderCounter
+            }}
+          </VOverflow>
+        )
+      ) : maxTagCountNumeric ? (
+        originalTags.concat(counter as JSX.Element)
+      ) : (
+        originalTags
+      )
+      const renderPopover = useMaxTagCount
+        ? (): JSX.Element => (
+          <div
+            class="n-base-selection-popover"
+            onMouseleave={this.handleMouseLeaveTagsPanel}
+          >
+            {maxTagCountResponsive
+              ? originalTags
+              : this.selectedOptions!.map(createTag)}
+          </div>
+        )
+        : undefined
+      const popoverProps = useMaxTagCount
+        ? ({
+          show: this.showTagsPanel,
+          trigger: 'manual',
+          overlap: true,
+          placement: 'top',
+          internalUseTriggerWidth: true
+        } as const)
+        : null
+      if (filterable) {
+        const popoverTrigger = (
+          <div
+            ref="patternInputWrapperRef"
+            class="n-base-selection-tags"
+            tabindex={disabled || this.patternInputFocused ? undefined : 0}
+            onBlur={this.handleBlur}
+          >
+            {tags}
+            {maxTagCountResponsive ? null : input}
+            {suffix}
+          </div>
+        )
+        body = (
+          <>
+            {useMaxTagCount ? (
+              <NPopover {...popoverProps}>
+                {{
+                  trigger: () => popoverTrigger,
+                  default: renderPopover
+                }}
+              </NPopover>
+            ) : (
+              popoverTrigger
+            )}
             <div class="n-base-selection-placeholder">{this.placeholder}</div>
           </>
-        ) : null}
-        {/* multiple filterable */}
-        {this.multiple && this.filterable ? (
+        )
+      } else {
+        const popoverTrigger = (
+          <div
+            ref="focusableEl1Ref"
+            class="n-base-selection-tags"
+            tabindex={disabled ? undefined : 0}
+            onBlur={this.handleBlur}
+          >
+            {tags}
+            {suffix}
+          </div>
+        )
+        body = (
           <>
-            <div
-              ref="patternInputWrapperRef"
-              class="n-base-selection-tags"
-              tabindex={disabled || this.patternInputFocused ? undefined : 0}
-              onBlur={this.handleBlur}
-            >
-              {tags}
-              <div class="n-base-selection-input-tag">
-                <input
-                  ref="patternInputRef"
-                  tabindex={-1}
-                  disabled={disabled}
-                  value={this.pattern}
-                  autofocus={this.autofocus}
-                  class="n-base-selection-input-tag__input"
-                  onBlur={this.handlePatternInputBlur}
-                  onFocus={this.handlePatternInputFocus}
-                  onKeydown={this.handlePatternKeyDown}
-                  onInput={this.handlePatternInputInput as any}
-                />
-                <span
-                  ref="patternInputMirrorRef"
-                  class="n-base-selection-input-tag__mirror"
-                >
-                  {this.pattern ? this.pattern : ''}
-                </span>
-              </div>
-              {suffix}
-            </div>
+            {useMaxTagCount ? (
+              <NPopover {...popoverProps}>
+                {{
+                  trigger: () => popoverTrigger,
+                  default: renderPopover
+                }}
+              </NPopover>
+            ) : (
+              popoverTrigger
+            )}
             <div class="n-base-selection-placeholder">{this.placeholder}</div>
           </>
-        ) : null}
-        {/* single filterable */}
-        {!multiple && filterable ? (
+        )
+      }
+    } else {
+      if (filterable) {
+        body = (
           <>
             <div
               ref="patternInputWrapperRef"
@@ -549,9 +697,9 @@ export default defineComponent({
               {suffix}
             </div>
           </>
-        ) : null}
-        {/* single */}
-        {!multiple && !filterable ? (
+        )
+      } else {
+        body = (
           <>
             <div
               ref="focusableEl2Ref"
@@ -571,9 +719,35 @@ export default defineComponent({
               {suffix}
             </div>
           </>
-        ) : null}
-        {this.bordered ? <div class="n-base-selection__border" /> : null}
-        {this.bordered ? <div class="n-base-selection__state-border" /> : null}
+        )
+      }
+    }
+    return (
+      <div
+        ref="selfRef"
+        class={[
+          'n-base-selection',
+          {
+            'n-base-selection--active': this.active,
+            'n-base-selection--selected':
+              this.selected || (this.active && this.pattern),
+            'n-base-selection--disabled': this.disabled,
+            'n-base-selection--multiple': this.multiple,
+            'n-base-selection--focus': this.patternInputFocused
+          }
+        ]}
+        style={this.cssVars as CSSProperties}
+        onClick={this.onClick}
+        onMouseenter={this.handleMouseEnter}
+        onMouseleave={this.handleMouseLeave}
+        onMousedown={this.handleMouseDown}
+        onKeyup={this.onKeyup}
+        onKeydown={this.onKeydown}
+        onFocusin={this.handleFocusin}
+      >
+        {body}
+        {bordered ? <div class="n-base-selection__border" /> : null}
+        {bordered ? <div class="n-base-selection__state-border" /> : null}
       </div>
     )
   }
