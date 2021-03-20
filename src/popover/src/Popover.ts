@@ -102,6 +102,7 @@ export const popoverProps = {
     type: Boolean,
     default: false
   },
+  getDisabled: Function as PropType<() => boolean>,
   displayDirective: {
     type: String as PropType<'if' | 'show'>,
     default: 'if'
@@ -194,9 +195,16 @@ export default defineComponent({
       controlledShowRef,
       uncontrolledShowRef
     )
-    const mergedShowRef = computed(() => {
-      return props.disabled ? false : mergedShowWithoutDisabledRef.value
-    })
+    const getMergedDisabled = (): boolean => {
+      if (props.disabled) return true
+      const { getDisabled } = props
+      if (getDisabled?.()) return true
+      return false
+    }
+    const getMergedShow = (): boolean => {
+      if (getMergedDisabled()) return false
+      return mergedShowWithoutDisabledRef.value
+    }
     // setup show-arrow
     const compatibleShowArrowRef = useCompitable(props, ['arrow', 'showArrow'])
     const mergedShowArrowRef = computed(() => {
@@ -249,9 +257,10 @@ export default defineComponent({
       }
     }
     function handleMouseEnter (): void {
-      if (props.trigger === 'hover' && !props.disabled) {
+      const mergedDisabled = getMergedDisabled()
+      if (props.trigger === 'hover' && !mergedDisabled) {
         clearTimer()
-        if (mergedShowRef.value) return
+        if (getMergedShow()) return
         const delayCallback = (): void => {
           doUpdateShow(true)
           showTimerIdRef.value = null
@@ -265,9 +274,10 @@ export default defineComponent({
       }
     }
     function handleMouseLeave (): void {
-      if (props.trigger === 'hover' && !props.disabled) {
+      const mergedDisabled = getMergedDisabled()
+      if (props.trigger === 'hover' && !mergedDisabled) {
         clearTimer()
-        if (!mergedShowRef.value) return
+        if (!getMergedShow()) return
         const delayedCallback = (): void => {
           doUpdateShow(false)
           hideTimerIdRef.value = null
@@ -286,7 +296,7 @@ export default defineComponent({
     }
     // will be called in popover-content
     function handleClickOutside (): void {
-      if (!mergedShowRef.value) return
+      if (!getMergedShow()) return
       if (props.trigger === 'click') {
         clearTimer()
         doUpdateShow(false)
@@ -295,7 +305,7 @@ export default defineComponent({
     function handleClick (): void {
       if (props.trigger === 'click' && !props.disabled) {
         clearTimer()
-        const nextShow = !mergedShowRef.value
+        const nextShow = !getMergedShow()
         doUpdateShow(nextShow)
       }
     }
@@ -326,8 +336,8 @@ export default defineComponent({
       }),
       // if to show popover body
       uncontrolledShow: uncontrolledShowRef,
-      mergedShow: mergedShowRef,
       mergedShowArrow: mergedShowArrowRef,
+      getMergedShow,
       setShow,
       handleClick,
       handleMouseEnter,
@@ -365,6 +375,7 @@ export default defineComponent({
 
     return h(VBinder, null, {
       default: () => {
+        const mergedShow = this.getMergedShow()
         return [
           positionManually
             ? null
@@ -376,7 +387,7 @@ export default defineComponent({
             keep(this.$props, bodyPropKeys, {
               ...this.$attrs,
               showArrow: this.mergedShowArrow,
-              show: this.mergedShow
+              show: mergedShow
             }),
             slots
           )
