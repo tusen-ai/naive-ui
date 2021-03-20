@@ -601,7 +601,9 @@ export default defineComponent({
           trigger: 'manual',
           overlap: true,
           placement: 'top',
-          internalUseTriggerWidth: true
+          internalUseTriggerWidth: true,
+          theme: this.mergedTheme.peers.popover,
+          themeOverrides: this.mergedTheme.peerOverrides.popover
         } as const)
         : null
       if (filterable) {
