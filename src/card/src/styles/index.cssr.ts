@@ -25,7 +25,8 @@ export default c([
   cB('card', `
     font-size: var(--font-size);
     line-height: var(--line-height);
-    display: block;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     box-sizing: border-box;
     position: relative;
@@ -110,6 +111,7 @@ export default c([
         background-clip: padding-box;
         background-color: var(--action-color);
       `),
+      cE('content', 'flex: 1;'),
       cE('content, footer', `
         box-sizing: border-box;
         padding: 0 var(--padding-left) var(--padding-bottom) var(--padding-left);

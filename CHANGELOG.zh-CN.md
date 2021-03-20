@@ -13,6 +13,7 @@
 ### Fixes
 
 - 修正 `n-cascader` 再点击清除按钮后菜单出现
+- 修正 `n-card` 设定高度后 action 不在底部的问题
 
 ## 2.0.1
 
@@ -27,6 +28,7 @@
 - 修正 `n-menu` `collapsed-icon-size` 不生效的问题
 - 修正 `n-menu` 回调类 prop 不接受数组
 - 修正 `n-layout-sider` 按钮被遮挡的问题
+- 新增 `n-ellipsis` 文本省略组件
 
 ## 2.0.0
 

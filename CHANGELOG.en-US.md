@@ -9,10 +9,12 @@
 - `n-select` add `max-tag-count` prop.
 - `n-cascader` add `max-tag-count` prop.
 - `n-popover` add `get-disabled` prop.
+- add `n-ellipsis` component.
 
 ### Fixes
 
 - Fix `n-cascader` menu appears after click clear button.
+- Fix `n-card`'s action not placed at bottom after style height is set.
 
 ## 2.0.1
 
