@@ -24,6 +24,7 @@ import type { DropdownTheme } from '../../dropdown/styles'
 import type { DynamicInputTheme } from '../../dynamic-input/styles'
 import type { DynamicTagsTheme } from '../../dynamic-tags/styles'
 import type { ElementTheme } from '../../element/styles'
+import type { EllipsisTheme } from '../../ellipsis/styles'
 import type { EmptyTheme } from '../../empty/styles'
 import type { FormTheme } from '../../form/styles'
 import type { GradientTextTheme } from '../../gradient-text/styles'
@@ -76,8 +77,7 @@ import { Size as ButtonSize } from '../../button/src/interface'
 import { FilterRender, SorterRender } from '../../data-table/src/interface'
 import { IconPlacement } from '../../dialog/src/interface'
 
-export interface GlobalTheme {
-  common?: ThemeCommonVars
+interface GlobalThemeWithoutCommon {
   Alert?: AlertTheme
   Anchor?: AnchorTheme
   AutoComplete?: AutoCompleteTheme
@@ -101,6 +101,7 @@ export interface GlobalTheme {
   DynamicInput?: DynamicInputTheme
   DynamicTags?: DynamicTagsTheme
   Element?: ElementTheme
+  Ellipsis?: EllipsisTheme
   Empty?: EmptyTheme
   Form?: FormTheme
   GradientText?: GradientTextTheme
@@ -147,75 +148,16 @@ export interface GlobalTheme {
   InternalSelection?: InternalSelectionTheme
 }
 
-export interface GlobalThemeOverrides {
+export interface GlobalTheme extends GlobalThemeWithoutCommon {
+  common?: ThemeCommonVars
+}
+
+export type GlobalThemeOverrides = {
   common?: Partial<ThemeCommonVars>
-  Alert?: ExtractThemeOverrides<AlertTheme>
-  Anchor?: ExtractThemeOverrides<AnchorTheme>
-  AutoComplete?: ExtractThemeOverrides<AutoCompleteTheme>
-  Avatar?: ExtractThemeOverrides<AvatarTheme>
-  BackTop?: ExtractThemeOverrides<BackTopTheme>
-  Badge?: ExtractThemeOverrides<BadgeTheme>
-  Breadcrumb?: ExtractThemeOverrides<BreadcrumbTheme>
-  Button?: ExtractThemeOverrides<ButtonTheme>
-  Card?: ExtractThemeOverrides<CardTheme>
-  Cascader?: ExtractThemeOverrides<CascaderTheme>
-  Checkbox?: ExtractThemeOverrides<CheckboxTheme>
-  Code?: ExtractThemeOverrides<CodeTheme>
-  Collapse?: ExtractThemeOverrides<CollapseTheme>
-  DataTable?: ExtractThemeOverrides<DataTableTheme>
-  DatePicker?: ExtractThemeOverrides<DatePickerTheme>
-  Descriptions?: ExtractThemeOverrides<DescriptionsTheme>
-  Dialog?: ExtractThemeOverrides<DialogTheme>
-  Divider?: ExtractThemeOverrides<DividerTheme>
-  Drawer?: ExtractThemeOverrides<DrawerTheme>
-  Dropdown?: ExtractThemeOverrides<DropdownTheme>
-  DynamicInput?: ExtractThemeOverrides<DynamicInputTheme>
-  DynamicTags?: ExtractThemeOverrides<DynamicTagsTheme>
-  Element?: ExtractThemeOverrides<ElementTheme>
-  Empty?: ExtractThemeOverrides<EmptyTheme>
-  Form?: ExtractThemeOverrides<FormTheme>
-  GradientText?: ExtractThemeOverrides<GradientTextTheme>
-  Icon?: ExtractThemeOverrides<IconTheme>
-  Input?: ExtractThemeOverrides<InputTheme>
-  InputNumber?: ExtractThemeOverrides<InputNumberTheme>
-  Layout?: ExtractThemeOverrides<LayoutTheme>
-  List?: ExtractThemeOverrides<ListTheme>
-  LoadingBar?: ExtractThemeOverrides<LoadingBarTheme>
-  Log?: ExtractThemeOverrides<LogTheme>
-  Menu?: ExtractThemeOverrides<MenuTheme>
-  Message?: ExtractThemeOverrides<MessageTheme>
-  Modal?: ExtractThemeOverrides<ModalTheme>
-  Notification?: ExtractThemeOverrides<NotificationTheme>
-  Pagination?: ExtractThemeOverrides<PaginationTheme>
-  Popconfirm?: ExtractThemeOverrides<PopconfirmTheme>
-  Popover?: ExtractThemeOverrides<PopoverTheme>
-  Popselect?: ExtractThemeOverrides<PopselectTheme>
-  Progress?: ExtractThemeOverrides<ProgressTheme>
-  Radio?: ExtractThemeOverrides<RadioTheme>
-  Rate?: ExtractThemeOverrides<RateTheme>
-  Result?: ExtractThemeOverrides<ResultTheme>
-  Select?: ExtractThemeOverrides<SelectTheme>
-  Scrollbar?: ExtractThemeOverrides<ScrollbarTheme>
-  Slider?: ExtractThemeOverrides<SliderTheme>
-  Space?: ExtractThemeOverrides<SpaceTheme>
-  Spin?: ExtractThemeOverrides<SpinTheme>
-  Statistic?: ExtractThemeOverrides<StatisticTheme>
-  Steps?: ExtractThemeOverrides<StepsTheme>
-  Switch?: ExtractThemeOverrides<SwitchTheme>
-  Table?: ExtractThemeOverrides<TableTheme>
-  Tabs?: ExtractThemeOverrides<TabsTheme>
-  Tag?: ExtractThemeOverrides<TagTheme>
-  Thing?: ExtractThemeOverrides<ThingTheme>
-  TimePicker?: ExtractThemeOverrides<TimePickerTheme>
-  Timeline?: ExtractThemeOverrides<TimelineTheme>
-  Tooltip?: ExtractThemeOverrides<TooltipTheme>
-  Transfer?: ExtractThemeOverrides<TransferTheme>
-  Typography?: ExtractThemeOverrides<TypographyTheme>
-  Tree?: ExtractThemeOverrides<TreeTheme>
-  Upload?: ExtractThemeOverrides<UploadTheme>
-  // internal
-  InternalSelectMenu?: ExtractThemeOverrides<InternalSelectMenuTheme>
-  InternalSelection?: ExtractThemeOverrides<InternalSelectionTheme>
+} & {
+  [key in keyof GlobalThemeWithoutCommon]: ExtractThemeOverrides<
+  GlobalThemeWithoutCommon[key]
+  >
 }
 
 export interface ConfigProviderInjection {

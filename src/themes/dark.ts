@@ -22,6 +22,7 @@ import { dropdownDark } from '../dropdown/styles'
 import { dynamicInputDark } from '../dynamic-input/styles'
 import { dynamicTagsDark } from '../dynamic-tags/styles'
 import { elementDark } from '../element/styles'
+import { ellipsisDark } from '../ellipsis/styles'
 import { emptyDark } from '../empty/styles'
 import { formDark } from '../form/styles'
 import { gradientTextDark } from '../gradient-text/styles'
@@ -91,6 +92,7 @@ export const darkTheme: BuiltInGlobalTheme = {
   DynamicTags: dynamicTagsDark,
   Element: elementDark,
   Empty: emptyDark,
+  Ellipsis: ellipsisDark,
   Form: formDark,
   GradientText: gradientTextDark,
   Icon: iconDark,

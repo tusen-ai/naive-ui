@@ -310,6 +310,10 @@ export const componentChildRoutes = withPrefix('/:lang/:theme/components', [
     path: '/n-dynamic-tags',
     component: () => import('../../src/dynamic-tags/demos/index.entry')
   },
+  {
+    path: '/n-ellipsis',
+    component: () => import('../../src/ellipsis/demos/index.entry')
+  },
   // deprecated
   {
     path: '/n-nimbus-service-layout',

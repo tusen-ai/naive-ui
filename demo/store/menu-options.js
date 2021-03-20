@@ -158,6 +158,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           path: '/n-dropdown'
         },
         {
+          en: 'Ellipsis',
+          zh: '文本省略',
+          enSuffix: true,
+          path: '/n-ellipsis'
+        },
+        {
           en: 'Gradient Text',
           zh: '渐变文字',
           enSuffix: true,

@@ -8,7 +8,8 @@ import {
   PropType,
   VNode,
   provide,
-  CSSProperties
+  CSSProperties,
+  ExtractPropTypes
 } from 'vue'
 import { VBinder, VTarget, FollowerPlacement } from 'vueuc'
 import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
@@ -179,6 +180,8 @@ export const popoverProps = {
   maxWidth: Number
 }
 
+export type PopoverProps = Partial<ExtractPropTypes<typeof popoverProps>>
+
 export default defineComponent({
   name: 'Popover',
   inheritAttrs: false,
@@ -303,7 +306,7 @@ export default defineComponent({
       }
     }
     function handleClick (): void {
-      if (props.trigger === 'click' && !props.disabled) {
+      if (props.trigger === 'click' && !getMergedDisabled()) {
         clearTimer()
         const nextShow = !getMergedShow()
         doUpdateShow(nextShow)

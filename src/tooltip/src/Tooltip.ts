@@ -7,6 +7,8 @@ import type { ThemeProps } from '../../_mixins'
 import { tooltipLight } from '../styles'
 import type { TooltipTheme } from '../styles'
 
+export type TooltipRef = PopoverRef
+
 export default defineComponent({
   name: 'Tooltip',
   props: {
@@ -26,11 +28,19 @@ export default defineComponent({
       props
     )
     const popoverRef = ref<PopoverRef | null>(null)
-    return {
-      popoverRef,
+    const tooltipExposedMethod: TooltipRef = {
       syncPosition () {
-        ;(popoverRef.value as PopoverRef).syncPosition()
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        popoverRef.value!.syncPosition()
       },
+      setShow (show: boolean) {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        popoverRef.value!.setShow(show)
+      }
+    }
+    return {
+      ...tooltipExposedMethod,
+      popoverRef,
       mergedTheme: themeRef,
       popoverThemeOverrides: computed(() => {
         return themeRef.value.self
