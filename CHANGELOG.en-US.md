@@ -2,6 +2,11 @@
 
 ## Pending
 
+## Breaking Changes
+
+- `n-popover` default `duration` is set to `100`.
+- `n-popover` default `delay` is set to `100`.
+
 ### Feat
 
 - `n-config-provider` prop `theme-overrides` support inheritance.

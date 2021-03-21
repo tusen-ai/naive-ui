@@ -83,11 +83,11 @@ export const popoverProps = {
   },
   delay: {
     type: Number,
-    default: 200
+    default: 100
   },
   duration: {
     type: Number,
-    default: 200
+    default: 100
   },
   raw: {
     type: Boolean,

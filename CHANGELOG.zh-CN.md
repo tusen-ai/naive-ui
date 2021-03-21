@@ -2,6 +2,11 @@
 
 ## Pending
 
+## Breaking Changes
+
+- `n-popover` 默认 `duration` 设为 `100`
+- `n-popover` 默认 `delay` 设为 `100`
+
 ### Feat
 
 - `n-config-provider` 的 `theme-overrides` 支持继承
