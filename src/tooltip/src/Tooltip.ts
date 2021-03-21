@@ -13,11 +13,7 @@ export default defineComponent({
   name: 'Tooltip',
   props: {
     ...popoverProps,
-    ...(useTheme.props as ThemeProps<TooltipTheme>),
-    showArrow: {
-      type: Boolean,
-      default: false
-    }
+    ...(useTheme.props as ThemeProps<TooltipTheme>)
   },
   setup (props) {
     const themeRef = useTheme(

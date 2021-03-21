@@ -1,10 +1,10 @@
-# Arrow
+# No Arrow
 
 ```html
 <n-tooltip show-arrow trigger="hover">
   <template #trigger>
-    <n-button> No, no arrow by default </n-button>
+    <n-button> Show arrow by default </n-button>
   </template>
-  Different from popover
+  The same as popover
 </n-tooltip>
 ```

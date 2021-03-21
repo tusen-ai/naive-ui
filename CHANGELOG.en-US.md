@@ -6,6 +6,7 @@
 
 - `n-popover` default `duration` is set to `100`.
 - `n-popover` default `delay` is set to `100`.
+- `n-tooltip` default `showArrow` is set to `true`.
 
 ### Feat
 

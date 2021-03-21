@@ -6,6 +6,7 @@
 
 - `n-popover` 默认 `duration` 设为 `100`
 - `n-popover` 默认 `delay` 设为 `100`
+- `n-tooltip` 默认 `showArrow` 设为 `true`
 
 ### Feat
 
