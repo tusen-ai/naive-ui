@@ -16,9 +16,9 @@ custom-tooltip
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
-| expand-trigger | `'click'` | `undefined` |  | 2.0.2 |
-| line-clamp | `number \| string` | `undefined` | 最大行数 | 2.0.2 |
-| tooltip | `boolean \| TooltipProps` | `true` | Tooltip 的属性 | 2.0.2 |
+| expand-trigger | `'click'` | `undefined` |  | 2.1.0 |
+| line-clamp | `number \| string` | `undefined` | 最大行数 | 2.1.0 |
+| tooltip | `boolean \| TooltipProps` | `true` | Tooltip 的属性 | 2.1.0 |
 
 ## Slots
 

@@ -16,9 +16,9 @@ custom-tooltip
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| expand-trigger | `'click'` | `undefined` |  | 2.0.2 |
-| line-clmap | `number \| string` | `undefined` | Max lines. | 2.0.2 |
-| tooltip | `boolean \| TooltipProps` | `true` | The props of tooltip. | 2.0.2 |
+| expand-trigger | `'click'` | `undefined` |  | 2.1.0 |
+| line-clmap | `number \| string` | `undefined` | Max lines. | 2.1.0 |
+| tooltip | `boolean \| TooltipProps` | `true` | The props of tooltip. | 2.1.0 |
 
 ## Slots
 
