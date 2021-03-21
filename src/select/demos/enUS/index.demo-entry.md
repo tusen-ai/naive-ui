@@ -43,12 +43,12 @@ max-tag-count
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | tag | `boolean` | `false` | Whether it can create new option, should be used with `filterable`. |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` |  |
-| on-blur | `() => void` | Selection blur. |
+| on-blur | `() => void` | `undefined` | Selection blur. |
 | on-create | `(label: string) => SelectOption` | `label => ({ label, value: label })` | How to create a option when you input a string to create a option. Note that `filter` will be applied to the created option too. And make sure the value of the created option is not the same as any other option. |
-| on-focus | `() => void` | Selection focus. |
-| on-scroll | `(e: ScrollEvent) => void` | Menu scroll. |
-| on-search | `(value: string) => void` |  |
-| on-update:value | `(value: Array \| string \| number \| null) => void` | Callback of value updating. |
+| on-focus | `() => void` | `undefined` | Selection focus. |
+| on-scroll | `(e: ScrollEvent) => void` | `undefined` | Menu scroll. |
+| on-search | `(value: string) => void` | `undefined` |  |
+| on-update:value | `(value: Array \| string \| number \| null) => void` | `undefined` | Callback of value updating. |
 
 ### SelectOption Properties
 
