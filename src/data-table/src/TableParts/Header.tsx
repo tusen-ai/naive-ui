@@ -1,7 +1,8 @@
-import { h, defineComponent, inject, PropType } from 'vue'
+import { h, defineComponent, inject, PropType, VNodeChild } from 'vue'
 import { happensIn, pxfy } from 'seemly'
 import { formatLength } from '../../../_utils'
 import { NCheckbox } from '../../../checkbox'
+import { NEllipsis } from '../../../ellipsis'
 import SortButton from '../HeaderButton/SortButton'
 import FilterButton from '../HeaderButton/FilterButton'
 import {
@@ -13,8 +14,15 @@ import {
 import {
   DataTableInjection,
   SelectionColInfo,
+  TableColumnGroup,
   TableColumnInfo
 } from '../interface'
+
+function renderTitle (column: TableColumnInfo | TableColumnGroup): VNodeChild {
+  return typeof column.title === 'function'
+    ? column.title(column)
+    : column.title
+}
 
 export default defineComponent({
   name: 'DataTableHeader',
@@ -63,7 +71,8 @@ export default defineComponent({
         leftActiveFixedColKey,
         rightActiveFixedColKey,
         rows,
-        cols
+        cols,
+        mergedTheme
       },
       headerStyle,
       handleColHeaderClick,
@@ -137,17 +146,27 @@ export default defineComponent({
                               handleCheckboxUpdateChecked(column)
                             }
                           />
-                        ) : column.ellipsis ? (
-                          <div class="n-data-table-th__ellipsis">
-                            {typeof column.title === 'function'
-                              ? column.title(column)
-                              : column.title}
-                          </div>
-                        ) : typeof column.title === 'function' ? (
-                          column.title(column)
-                        ) : (
-                          column.title
-                        )}
+                        ) : column.ellipsis === true ||
+                          (column.ellipsis && !column.ellipsis.tooltip) ? (
+                            <div class="n-data-table-th__ellipsis">
+                              {renderTitle(column)}
+                            </div>
+                          ) // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
+                          : column.ellipsis && column.ellipsis.tooltip ? (
+                            <NEllipsis
+                              tooltip={column.ellipsis.tooltip}
+                              theme={mergedTheme.peers.Ellipsis}
+                              themeOverrides={mergedTheme.peerOverrides.Ellipsis}
+                            >
+                              {{
+                                default: () => renderTitle(column)
+                              }}
+                            </NEllipsis>
+                          ) : typeof column.title === 'function' ? (
+                            column.title(column)
+                          ) : (
+                            column.title
+                          )}
                         {isColumnSortable(column) ? (
                           <SortButton column={column as TableColumnInfo} />
                         ) : null}

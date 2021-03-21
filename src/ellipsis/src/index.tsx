@@ -1,4 +1,12 @@
-import { defineComponent, h, ref, PropType, computed, mergeProps } from 'vue'
+import {
+  defineComponent,
+  h,
+  ref,
+  PropType,
+  computed,
+  mergeProps,
+  ExtractPropTypes
+} from 'vue'
 import type { PopoverProps } from '../../popover/src/Popover'
 import { TooltipRef } from '../../tooltip/src/Tooltip'
 import { NTooltip } from '../../tooltip'
@@ -10,17 +18,23 @@ import style from './styles/index.cssr'
 
 const lineClampClass = 'n-ellpisis--line-clamp'
 
+const ellpisisProps = {
+  expandTrigger: String as PropType<'click'>,
+  lineClamp: [Number, String] as PropType<string | number>,
+  tooltip: {
+    type: [Boolean, Object] as PropType<PopoverProps | boolean>,
+    default: true
+  }
+} as const
+
+export type EllipsisProps = Partial<ExtractPropTypes<typeof ellpisisProps>>
+
 export default defineComponent({
   name: 'Ellipsis',
   inheritAttrs: false,
   props: {
     ...(useTheme.props as ThemeProps<EllipsisTheme>),
-    expandTrigger: String as PropType<'click'>,
-    lineClamp: [Number, String],
-    tooltip: {
-      type: [Boolean, Object] as PropType<PopoverProps | boolean>,
-      default: true
-    }
+    ...ellpisisProps
   },
   setup (props, { slots, attrs }) {
     const mergedTheme = useTheme(

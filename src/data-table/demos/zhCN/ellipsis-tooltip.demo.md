@@ -1,6 +1,6 @@
-# 省略
+# 带提示的省略
 
-通过设定 `column.ellipsis` 省略单元格内容。
+通过设定 `column.ellipsis.tooltip` 使得省略内容有弹出提示。`column.ellipsis` 接受的属性和 `n-ellpisis` 相同。
 
 ```html
 <n-data-table
@@ -27,13 +27,17 @@ const columns = [
     title: 'Address',
     key: 'address',
     width: 100,
-    ellipsis: true
+    ellipsis: {
+      tooltip: true
+    }
   },
   {
     title: 'Another Address',
     key: 'anotherAddress',
     width: 100,
-    ellipsis: true
+    ellipsis: {
+      tooltip: true
+    }
   }
 ]
 

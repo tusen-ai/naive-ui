@@ -17,6 +17,7 @@
 - `n-popover` add `get-disabled` prop.
 - add `n-ellipsis` component.
 - `n-popover`'s `width` prop add `'trigger'` option.
+- `n-data-table`'s columns's `ellipsis` prop can be set as props of `n-ellipsis`.
 
 ### Fixes
 

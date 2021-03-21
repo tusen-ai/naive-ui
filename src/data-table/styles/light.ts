@@ -1,5 +1,6 @@
 import { composite } from 'seemly'
 import commonVariables from './_common'
+import { ellipsisLight } from '../../ellipsis/styles'
 import { buttonLight } from '../../button/styles'
 import { checkboxLight } from '../../checkbox/styles'
 import { radioLight } from '../../radio/styles'
@@ -77,7 +78,8 @@ const dataTableLight = createTheme({
     Scrollbar: scrollbarLight,
     Spin: spinLight,
     Empty: emptyLight,
-    Popover: popoverLight
+    Popover: popoverLight,
+    Ellipsis: ellipsisLight
   },
   self
 })

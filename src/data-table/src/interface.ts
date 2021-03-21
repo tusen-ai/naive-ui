@@ -1,5 +1,6 @@
 import { TreeNode, TreeMate } from 'treemate'
 import { CSSProperties, VNodeChild } from 'vue'
+import { EllipsisProps } from '../../ellipsis/src'
 import { NLocale } from '../../locales'
 import { MergedTheme } from '../../_mixins'
 import { DataTableTheme } from '../styles'
@@ -35,12 +36,14 @@ export type TmNode = TreeNode<TableNode>
 // for compat may add null
 export type SortOrder = 'ascend' | 'descend' | false
 
+export type Ellipsis = boolean | EllipsisProps
+
 export interface CommonColInfo {
   fixed?: 'left' | 'right'
   width?: number
   className?: string
   align?: 'left' | 'center' | 'right'
-  ellipsis?: boolean
+  ellipsis?: Ellipsis
 }
 
 export type TableColumnTitle =

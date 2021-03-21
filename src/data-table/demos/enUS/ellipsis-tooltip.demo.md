@@ -1,6 +1,6 @@
-# 省略
+# Ellipsis with Tooltip
 
-通过设定 `column.ellipsis` 省略单元格内容。
+Set `column.ellipsis.tooltip` to make ellipsis have tooltip. `column.ellipsis` accepts the same props as `n-ellpisis`.
 
 ```html
 <n-data-table
@@ -27,13 +27,17 @@ const columns = [
     title: 'Address',
     key: 'address',
     width: 100,
-    ellipsis: true
+    ellipsis: {
+      tooltip: true
+    }
   },
   {
     title: 'Another Address',
     key: 'anotherAddress',
     width: 100,
-    ellipsis: true
+    ellipsis: {
+      tooltip: true
+    }
   }
 ]
 

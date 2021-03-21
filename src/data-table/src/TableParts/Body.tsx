@@ -76,6 +76,7 @@ export default defineComponent({
                   const { rawNode: row } = tmNode
                   const { handleCheckboxUpdateChecked } = this
                   const {
+                    mergedTheme,
                     cols,
                     fixedColumnLeftMap,
                     fixedColumnRightMap,
@@ -111,7 +112,10 @@ export default defineComponent({
                               column.align &&
                                 `n-data-table-td--${column.align}-align`,
                               {
-                                'n-data-table-td--ellipsis': column.ellipsis,
+                                'n-data-table-td--ellipsis':
+                                  column.ellipsis === true ||
+                                  // don't add ellpisis class if tooltip exists
+                                  (column.ellipsis && !column.ellipsis.tooltip),
                                 'n-data-table-td--shadow-after':
                                   leftActiveFixedColKey === key,
                                 'n-data-table-td--shadow-before':
@@ -133,7 +137,12 @@ export default defineComponent({
                                 }
                               />
                             ) : (
-                              <Cell index={index} row={row} column={column} />
+                              <Cell
+                                index={index}
+                                row={row}
+                                column={column}
+                                mergedTheme={mergedTheme}
+                              />
                             )}
                           </td>
                         )

@@ -24,6 +24,7 @@ controlled-sorter
 fixed-header
 fixed-header-column
 ellipsis
+ellipsis-tooltip
 render-header
 custom-style
 ajax-usage
@@ -82,7 +83,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | defaultFilterOptionValues | `Array<string \| number>` | `[]` | The default active filter option values in uncontrolled manner. (works when there are multiple filters) |
 | defaultSortOrder | `'descend' \| 'ascend' \| false` | `false` | The default sort order of the table in uncontrolled manner |
 | disabled | `(rowData: Object, index: number) => boolean` | `() => false` |  |
-| ellipsis | `boolean` | `false` |  |
+| ellipsis | `boolean \| EllipsisProps` | `false` |  |
 | filter | `boolean \| (optionValue: string \| number, rowData: Object) => boolean \| 'default'` | `false` | The filter of the column. If set to `true`, it will only display filter button on the column, which can be used in async status. |
 | filterMode | `'and' \| 'or'` | `'or'` |  |
 | filterMultiple | `boolean` | `true` |  |

@@ -1,5 +1,6 @@
 import { composite } from 'seemly'
 import commonVariables from './_common'
+import { ellipsisDark } from '../../ellipsis/styles'
 import { buttonDark } from '../../button/styles'
 import { checkboxDark } from '../../checkbox/styles'
 import { radioDark } from '../../radio/styles'
@@ -22,7 +23,8 @@ const dataTableDark: DataTableTheme = {
     Scrollbar: scrollbarDark,
     Spin: spinDark,
     Empty: emptyDark,
-    Popover: popoverDark
+    Popover: popoverDark,
+    Ellipsis: ellipsisDark
   },
   self (vars) {
     const {

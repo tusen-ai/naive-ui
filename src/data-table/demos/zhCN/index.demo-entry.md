@@ -24,6 +24,7 @@ controlled-sorter
 fixed-header
 fixed-header-column
 ellipsis
+ellipsis-tooltip
 render-header
 custom-style
 ajax-usage
@@ -82,7 +83,7 @@ custom-filter-menu
 | defaultFilterOptionValues | `Array<string \| number>` | `[]` | 非受控状态下默认的过滤器选项值（过滤器多选时生效） |
 | defaultSortOrder | `'descend' \| 'ascend' \| false` | `false` | 非受控状态下表格默认的排序方式 |
 | disabled | `(rowData: Object, index: number) => boolean` | `undefined` |  |
-| ellipsis | `boolean` | `false` |  |
+| ellipsis | `boolean \| EllipsisProps` | `false` |  |
 | filter | `boolean \| (optionValue: string \| number, rowData: Object) => boolean \| 'default'` | `undefined` | 这一列的过滤方法。如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。 |
 | filterMode | `'and' \| 'or'` | `'or'` |  |
 | filterMultiple | `boolean` | `true` |  |

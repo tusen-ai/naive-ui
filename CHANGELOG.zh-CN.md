@@ -15,7 +15,9 @@
 - `n-select` 新增 `max-tag-count` 属性
 - `n-cascader` 新增 `max-tag-count` 属性
 - `n-popover` 新增 `get-disabled` 属性
+- 新增 `n-ellipsis` 文本省略组件
 - `n-popover` `width` prop 新增 `'trigger'` 的值
+- `n-data-table` 的列的 `ellipsis` 属性可设为 `n-ellipsis` 的 props
 
 ### Fixes
 
@@ -36,7 +38,6 @@
 - 修正 `n-menu` `collapsed-icon-size` 不生效的问题
 - 修正 `n-menu` 回调类 prop 不接受数组
 - 修正 `n-layout-sider` 按钮被遮挡的问题
-- 新增 `n-ellipsis` 文本省略组件
 
 ## 2.0.0
 

@@ -12,6 +12,8 @@ Ellipsize cell content via setting `column.ellipsis`.
 ```
 
 ```js
+import { defineComponent } from 'vue'
+
 const columns = [
   {
     title: 'Name',
@@ -59,19 +61,13 @@ const data = [
   }
 ]
 
-export default {
-  inject: ['message'],
-  data () {
+export default defineComponent({
+  setup () {
     return {
       data,
       columns,
       pagination: { pageSize: 10 }
     }
-  },
-  methods: {
-    sendMail (rowData) {
-      this.message.info('Send mail to ' + rowData.name)
-    }
   }
-}
+})
 ```
