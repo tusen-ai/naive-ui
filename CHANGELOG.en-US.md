@@ -22,6 +22,7 @@
 
 - Fix `n-cascader` menu appears after click clear button.
 - Fix `n-card`'s action not placed at bottom after style height is set.
+- Fix `n-popover`'s `duration` and `delay` prop works unexpectly.
 
 ## 2.0.1
 

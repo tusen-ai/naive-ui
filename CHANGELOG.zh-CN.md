@@ -21,6 +21,7 @@
 
 - 修正 `n-cascader` 再点击清除按钮后菜单出现
 - 修正 `n-card` 设定高度后 action 不在底部的问题
+- 修正 `n-popover` 的 `duration` 和 `delay` 属性执行有问题
 
 ## 2.0.1
 

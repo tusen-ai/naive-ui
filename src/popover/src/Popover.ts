@@ -248,13 +248,15 @@ export default defineComponent({
         bodyInstance.syncPosition()
       }
     }
-    function clearTimer (): void {
+    function clearShowTimer (): void {
       const { value: showTimerId } = showTimerIdRef
-      const { value: hideTimerId } = hideTimerIdRef
       if (showTimerId) {
         window.clearTimeout(showTimerId)
         showTimerIdRef.value = null
       }
+    }
+    function clearHideTimer (): void {
+      const { value: hideTimerId } = hideTimerIdRef
       if (hideTimerId) {
         window.clearTimeout(hideTimerId)
         hideTimerIdRef.value = null
@@ -263,7 +265,8 @@ export default defineComponent({
     function handleMouseEnter (): void {
       const mergedDisabled = getMergedDisabled()
       if (props.trigger === 'hover' && !mergedDisabled) {
-        clearTimer()
+        clearHideTimer()
+        if (showTimerIdRef.value !== null) return
         if (getMergedShow()) return
         const delayCallback = (): void => {
           doUpdateShow(true)
@@ -280,7 +283,8 @@ export default defineComponent({
     function handleMouseLeave (): void {
       const mergedDisabled = getMergedDisabled()
       if (props.trigger === 'hover' && !mergedDisabled) {
-        clearTimer()
+        clearShowTimer()
+        if (hideTimerIdRef.value !== null) return
         if (!getMergedShow()) return
         const delayedCallback = (): void => {
           doUpdateShow(false)
@@ -302,13 +306,15 @@ export default defineComponent({
     function handleClickOutside (): void {
       if (!getMergedShow()) return
       if (props.trigger === 'click') {
-        clearTimer()
+        clearShowTimer()
+        clearHideTimer()
         doUpdateShow(false)
       }
     }
     function handleClick (): void {
       if (props.trigger === 'click' && !getMergedDisabled()) {
-        clearTimer()
+        clearShowTimer()
+        clearHideTimer()
         const nextShow = !getMergedShow()
         doUpdateShow(nextShow)
       }
