@@ -448,6 +448,10 @@
   - [x] data table filter menu
   - [x] popover default trigger
   - [x] select option type
+  - [x] <del>popover after enter 之后关闭再生效</del> 把 duration 和 delay 弄小点，而且里面事件处理器其实写的有问题
+  - [x] popover width
+  - [ ] selection popover 滚动
+  - [x] card 设定高度
 
 ## Build
 
