@@ -122,7 +122,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { tooltip, renderTrigger } = this
+    const { tooltip, renderTrigger, $slots } = this
     if (tooltip) {
       const { mergedTheme } = this
       return (
@@ -136,7 +136,7 @@ export default defineComponent({
         >
           {{
             trigger: renderTrigger,
-            default: this.$slots.default
+            default: $slots.tooltip ?? $slots.default
           }}
         </NTooltip>
       )

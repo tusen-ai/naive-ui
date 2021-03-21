@@ -9,6 +9,7 @@ When you hearing somebody talks about subtle concept model, keep alert.
 ```demo
 basic
 line-clamp
+custom-tooltip
 ```
 
 ## Props
@@ -24,3 +25,4 @@ line-clamp
 | Name    | Parameters | Description |
 | ------- | ---------- | ----------- |
 | default | `()`       |             |
+| tooltip | `()`       |             |

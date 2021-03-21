@@ -9,6 +9,7 @@
 ```demo
 basic
 line-clamp
+custom-tooltip
 ```
 
 ## Props
@@ -24,3 +25,4 @@ line-clamp
 | 名称    | 参数 | 说明 |
 | ------- | ---- | ---- |
 | default | `()` |      |
+| tooltip | `()` |      |
