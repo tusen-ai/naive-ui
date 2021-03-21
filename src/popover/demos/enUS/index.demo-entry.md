@@ -14,7 +14,8 @@ no-arrow
 event
 placement
 raw-content
-width
+style
+trigger-width
 manual-position
 ```
 
@@ -35,6 +36,7 @@ manual-position
 | show-arrow | `boolean` | `true` |  |
 | show | `boolean` | `undefined` | Whether to show popover if set. |
 | trigger | `'hover' \| 'click'` | `'hover'` |  |
+| width | `number \| 'trigger'` | `undefined` | `'trigger'` means popover's witdh will follow its trigger's width. |
 | x | `number` | `undefined` | The CSS `left` pixel value when popover manually positioned. |
 | y | `number` | `undefined` | The CSS `top` pixel value when popover manually positioned. |
 | on-update:show | `(value: boolean) => void` |  |  |

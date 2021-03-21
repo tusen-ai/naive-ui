@@ -1,5 +1,7 @@
 # 主体样式
 
+可以通过设定 style 来设置 popover 的样式。
+
 ```html
 <n-popover :style="{ width: '500px' }" trigger="hover">
   <template #trigger>

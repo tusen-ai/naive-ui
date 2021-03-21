@@ -601,7 +601,7 @@ export default defineComponent({
           trigger: 'manual',
           overlap: true,
           placement: 'top',
-          internalUseTriggerWidth: true,
+          width: 'trigger',
           theme: this.mergedTheme.peers.popover,
           themeOverrides: this.mergedTheme.peerOverrides.popover
         } as const)

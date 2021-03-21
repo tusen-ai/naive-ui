@@ -10,6 +10,7 @@
 - `n-cascader` add `max-tag-count` prop.
 - `n-popover` add `get-disabled` prop.
 - add `n-ellipsis` component.
+- `n-popover`'s `width` prop add `'trigger'` option.
 
 ### Fixes
 

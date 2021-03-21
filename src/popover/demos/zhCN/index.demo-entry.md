@@ -14,7 +14,8 @@ no-arrow
 event
 placement
 raw-content
-width
+style
+trigger-width
 manual-position
 ```
 
@@ -35,6 +36,7 @@ manual-position
 | show-arrow | `boolean` | `true` |  |
 | show | `boolean` | `undefined` | 是否展示 popover |
 | trigger | `'hover' \| 'click'` | `'hover'` |  |
+| width | `number \| 'trigger'` | `undefined` | `'trigger'` 表示 popover 的宽度会和它的触发元素一致 |
 | x | `number` | `undefined` | 手动控制位置时填出内容的 CSS `left` 的像素值 |
 | y | `number` | `undefined` | 手动控制位置时填出内容的 CSS `top` 的像素值 |
 | on-update:show | `(value: boolean) => void` |  |  |

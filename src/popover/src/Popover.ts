@@ -117,7 +117,10 @@ export const popoverProps = {
     type: Boolean,
     default: true
   },
-  internalUseTriggerWidth: Boolean,
+  width: {
+    type: [Number, String] as PropType<number | 'trigger'>,
+    default: undefined
+  },
   // private
   padded: {
     type: Boolean,
@@ -172,8 +175,6 @@ export const popoverProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  /** @deprecated */
-  width: Number,
   /** @deprecated */
   minWidth: Number,
   /** @deprecated */

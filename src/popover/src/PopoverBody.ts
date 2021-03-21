@@ -40,13 +40,12 @@ export const popoverBodyProps = {
   filp: Boolean,
   overlap: Boolean,
   placement: String as PropType<FollowerPlacement>,
-  internalUseTriggerWidth: Boolean,
+  width: [Number, String] as PropType<number | 'trigger'>,
   // private
   shadow: Boolean,
   padded: Boolean,
   animated: Boolean,
   /** @deprecated */
-  width: Number,
   minWidth: Number,
   maxWidth: Number
 }
@@ -77,7 +76,7 @@ export default defineComponent({
     const styleRef = computed(() => {
       return [
         {
-          width: formatLength(props.width),
+          width: props.width === 'trigger' ? '' : formatLength(props.width),
           maxWidth: formatLength(props.maxWidth),
           minWidth: formatLength(props.minWidth)
         },
@@ -236,7 +235,7 @@ export default defineComponent({
         containerClass: this.namespace,
         ref: 'followerRef',
         overlap: this.overlap,
-        width: this.internalUseTriggerWidth ? 'target' : undefined
+        width: this.width === 'trigger' ? 'target' : undefined
       },
       {
         default: () => {

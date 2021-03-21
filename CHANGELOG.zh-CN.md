@@ -9,6 +9,7 @@
 - `n-select` 新增 `max-tag-count` 属性
 - `n-cascader` 新增 `max-tag-count` 属性
 - `n-popover` 新增 `get-disabled` 属性
+- `n-popover` `width` prop 新增 `'trigger'` 的值
 
 ### Fixes
 

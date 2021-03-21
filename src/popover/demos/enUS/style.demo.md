@@ -1,5 +1,7 @@
 # Body Style
 
+Set style attribute to style the popover.
+
 ```html
 <n-popover :style="{ width: '500px' }" trigger="hover">
   <template #trigger>
