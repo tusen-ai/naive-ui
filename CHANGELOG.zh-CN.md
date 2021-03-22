@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.1.1
+
+### Fixes
+
+- 修正 `n-select` 选择器溢出计数器 popover 触发区域有误
+
 ## 2.1.0
 
 ## Breaking Changes

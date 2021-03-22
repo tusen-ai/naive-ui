@@ -34,6 +34,7 @@ export default defineComponent({
     },
     onClose: [Array, Function] as PropType<MaybeArray<() => void>>,
     onMouseenter: Function as PropType<(e: MouseEvent) => void>,
+    onMouseleave: Function as PropType<(e: MouseEvent) => void>,
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:checked': {
       type: Function,
@@ -172,6 +173,7 @@ export default defineComponent({
         style={this.cssVars as CSSProperties}
         onClick={this.handleClick}
         onMouseenter={this.onMouseenter}
+        onMouseleave={this.onMouseleave}
       >
         <span class="n-tag__content" ref="contentRef">
           {this.$slots}

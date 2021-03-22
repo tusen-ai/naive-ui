@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.1.1
+
+### Fixes
+
+- Fix `n-select` selection overflow counter wrong popover trigger area
+
 ## 2.1.0
 
 ## Breaking Changes

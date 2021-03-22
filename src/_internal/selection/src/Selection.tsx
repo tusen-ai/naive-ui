@@ -308,12 +308,25 @@ export default defineComponent({
     function getTail (): HTMLElement | null {
       return patternInputRef.value
     }
+    let enterTimerId: number | null = null
+    function clearEnterTimer (): void {
+      if (enterTimerId !== null) window.clearTimeout(enterTimerId)
+    }
     function handleMouseEnterCounter (): void {
       if (props.disabled || props.active) return
-      showTagsPopoverRef.value = true
+      clearEnterTimer()
+      enterTimerId = window.setTimeout(() => {
+        showTagsPopoverRef.value = true
+      }, 100)
     }
-    function handleMouseLeaveTagsPanel (): void {
-      showTagsPopoverRef.value = false
+    function handleMouseLeaveCounter (): void {
+      clearEnterTimer()
+    }
+    function onPopoverUpdateShow (show: boolean): void {
+      if (!show) {
+        clearEnterTimer()
+        showTagsPopoverRef.value = false
+      }
     }
     return {
       mergedTheme: themeRef,
@@ -346,7 +359,8 @@ export default defineComponent({
       handlePatternInputBlur,
       handlePatternInputFocus,
       handleMouseEnterCounter,
-      handleMouseLeaveTagsPanel,
+      handleMouseLeaveCounter,
+      onPopoverUpdateShow,
       focusPatternInputWrapper,
       focusPatternInput,
       blurPatternInput,
@@ -518,6 +532,7 @@ export default defineComponent({
             <NTag
               ref="counterRef"
               onMouseenter={this.handleMouseEnterCounter}
+              onMouseleave={this.handleMouseLeaveCounter}
               disabled={disabled}
             />
           </div>
@@ -585,10 +600,7 @@ export default defineComponent({
       )
       const renderPopover = useMaxTagCount
         ? (): JSX.Element => (
-          <div
-            class="n-base-selection-popover"
-            onMouseleave={this.handleMouseLeaveTagsPanel}
-          >
+          <div class="n-base-selection-popover">
             {maxTagCountResponsive
               ? originalTags
               : this.selectedOptions!.map(createTag)}
@@ -598,10 +610,11 @@ export default defineComponent({
       const popoverProps = useMaxTagCount
         ? ({
           show: this.showTagsPanel,
-          trigger: 'manual',
+          trigger: 'hover',
           overlap: true,
           placement: 'top',
           width: 'trigger',
+          onUpdateShow: this.onPopoverUpdateShow,
           theme: this.mergedTheme.peers.popover,
           themeOverrides: this.mergedTheme.peerOverrides.popover
         } as const)
