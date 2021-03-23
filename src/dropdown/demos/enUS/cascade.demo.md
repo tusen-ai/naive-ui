@@ -14,7 +14,8 @@ Dropdown can be cascade.
 ```
 
 ```js
-import { h, resolveComponent } from 'vue'
+import { h, defineComponent } from 'vue'
+import { NIcon, useMessage } from 'naive-ui'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
 
 const options = [
@@ -25,7 +26,7 @@ const options = [
   {
     label: 'Daisy Buchanan',
     icon () {
-      return h(resolveComponent('n-icon'), null, {
+      return h(NIcon, null, {
         default: () => h(CashIcon)
       })
     },
@@ -69,17 +70,15 @@ const options = [
   }
 ]
 
-export default {
-  inject: ['message'],
+export default defineComponent({
   data () {
+    const message = useMessage()
     return {
-      options
-    }
-  },
-  methods: {
-    handleSelect (name) {
-      this.message.info(name)
+      options,
+      handleSelect (key) {
+        message.info(key)
+      }
     }
   }
-}
+})
 ```

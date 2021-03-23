@@ -20,6 +20,9 @@ For some special case, you may want to manually position the dropdown. For examp
 ```
 
 ```js
+import { defineComponent, ref } from 'vue'
+import { useMessage } from 'naive-ui'
+
 const options = [
   {
     label: 'Jay Gatsby',
@@ -67,33 +70,36 @@ const options = [
   }
 ]
 
-export default {
-  inject: ['message'],
-  methods: {
-    handleSelect (name) {
-      this.showDropdown = false
-      this.message.info(name)
-    },
-    handleBlur () {
-      this.showDropdown = false
-    },
-    handleContextMenu (e) {
-      e.preventDefault()
-      this.showDropdown = false
-      this.$nextTick().then(() => {
-        this.showDropdown = true
-        this.x = e.clientX
-        this.y = e.clientY
-      })
-    }
-  },
-  data () {
+export default defineComponent({
+  setup () {
+    const message = useMessage()
+
+    const showDropdownRef = ref(false)
+    const xRef = ref(0)
+    const yRef = ref(0)
+
     return {
       options,
-      showDropdown: false,
-      x: 0,
-      y: 0
+      showDropdown: showDropdownRef,
+      x: xRef,
+      y: yRef,
+      handleSelect (key) {
+        showDropdownRef.value = false
+        message.info(key)
+      },
+      handleBlur () {
+        showDropdownRef.value = false
+      },
+      handleContextMenu (e) {
+        e.preventDefault()
+        showDropdownRef.value = false
+        nextTick().then(() => {
+          showDropdownRef.value = true
+          xRef.value = e.clientX
+          yRef.value = e.clientY
+        })
+      }
     }
   }
-}
+})
 ```

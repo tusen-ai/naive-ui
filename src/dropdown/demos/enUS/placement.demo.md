@@ -16,9 +16,12 @@ Use different placement.
 ```
 
 ```js
-export default {
-  inject: ['message'],
-  data () {
+import { defineComponent } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const message = useMessage()
     return {
       options: [
         {
@@ -37,13 +40,11 @@ export default {
           label: 'The Beverly Hills Hotel, Los Angeles',
           key: 'The Beverly Hills Hotel, Los Angeles'
         }
-      ]
-    }
-  },
-  methods: {
-    handleSelect (name) {
-      this.message.info(name)
+      ],
+      handleSelect (key) {
+        message.info(key)
+      }
     }
   }
-}
+})
 ```

@@ -44,6 +44,9 @@ Dropdown has different size.
 ```
 
 ```js
+import { defineComponent } from 'vue'
+import { useMessage } from 'naive-ui'
+
 const options = [
   {
     label: 'Jay Gatsby',
@@ -91,17 +94,15 @@ const options = [
   }
 ]
 
-export default {
-  inject: ['message'],
-  data () {
+export default defineComponent({
+  setup () {
+    const message = useMessage()
     return {
-      options
-    }
-  },
-  methods: {
-    handleSelect (name) {
-      this.message.info(name)
+      options,
+      handleSelect (key) {
+        message.info(key)
+      }
     }
   }
-}
+})
 ```

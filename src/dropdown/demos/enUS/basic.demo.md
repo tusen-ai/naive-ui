@@ -11,9 +11,12 @@ Basic usage of dropdown
 ```
 
 ```js
-export default {
-  inject: ['message'],
-  data () {
+import { defineComponent } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const message = useMessage()
     return {
       options: [
         {
@@ -32,13 +35,11 @@ export default {
           label: 'The Beverly Hills Hotel, Los Angeles',
           key: 'the beverly hills hotel, los angeles'
         }
-      ]
-    }
-  },
-  methods: {
-    handleSelect (key) {
-      this.message.info(key)
+      ],
+      handleSelect (key) {
+        message.info(key)
+      }
     }
   }
-}
+})
 ```

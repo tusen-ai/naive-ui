@@ -19,9 +19,13 @@ Different trigger of dropdown.
 ```
 
 ```js
-export default {
-  inject: ['message'],
-  data () {
+import { defineComponent, ref } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const message = useMessage()
+    const showDropdownRef = ref(false)
     return {
       options: [
         {
@@ -41,16 +45,14 @@ export default {
           key: 'The Beverly Hills Hotel, Los Angeles'
         }
       ],
-      showDropdown: false
-    }
-  },
-  methods: {
-    handleSelect (name) {
-      this.message.info(name)
-    },
-    handleClick () {
-      this.showDropdown = !this.showDropdown
+      showDropdown: showDropdownRef,
+      handleSelect (key) {
+        message.info(key)
+      },
+      handleClick () {
+        showDropdownRef.value = !showDropdownRef.value
+      }
     }
   }
-}
+})
 ```

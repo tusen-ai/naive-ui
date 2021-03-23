@@ -9,9 +9,12 @@
 ```
 
 ```js
-export default {
-  inject: ['message'],
-  data () {
+import { defineComponent } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const message = useMessage()
     return {
       options: [
         {
@@ -30,13 +33,11 @@ export default {
           label: '比佛利山庄酒店，洛杉矶',
           key: 'the beverly hills hotel, los angeles'
         }
-      ]
-    }
-  },
-  methods: {
-    handleSelect (key) {
-      this.message.info(key)
+      ],
+      handleSelect (key) {
+        message.info(key)
+      }
     }
   }
-}
+})
 ```

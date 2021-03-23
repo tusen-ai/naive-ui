@@ -14,7 +14,8 @@
 ```
 
 ```js
-import { h, resolveComponent } from 'vue'
+import { h, defineComponent } from 'vue'
+import { NIcon, useMessage } from 'naive-ui'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
 
 const options = [
@@ -30,7 +31,7 @@ const options = [
       {
         label: '黛西·布坎南',
         icon () {
-          return h(resolveComponent('n-icon'), null, {
+          return h(NIcon, null, {
             default: () => h(CashIcon)
           })
         },
@@ -76,17 +77,15 @@ const options = [
   }
 ]
 
-export default {
-  inject: ['message'],
-  data () {
+export default defineComponent({
+  setup () {
+    const message = useMessage()
     return {
-      options
-    }
-  },
-  methods: {
-    handleSelect (key) {
-      this.message.info(key)
+      options,
+      handleSelect (key) {
+        message.info(key)
+      }
     }
   }
-}
+})
 ```

@@ -452,6 +452,7 @@
   - [x] popover width
   - [ ] selection popover 滚动
   - [x] card 设定高度
+  - [ ] dropdown 手动定位有 bug，mousemoveoutside
 
 ## Build
 
