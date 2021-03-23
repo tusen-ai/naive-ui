@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修正 `n-dropdown` 在设定 `x` 和 `y` 之后鼠标在外面移动会报错
+
 ## 2.1.1
 
 ### Fixes

@@ -61,6 +61,7 @@ export interface PopoverInjection {
   handleClickOutside: (e: MouseEvent) => void
   getTriggerElement: () => HTMLElement
   setBodyInstance: (value: BodyInstance | null) => void
+  positionManually: boolean
   isMounted: boolean
 }
 
@@ -221,6 +222,9 @@ export default defineComponent({
     let bodyInstance = null as BodyInstance | null
     const showTimerIdRef = ref<number | null>(null)
     const hideTimerIdRef = ref<number | null>(null)
+    const positionManuallyRef = useMemo(() => {
+      return props.x !== undefined && props.y !== undefined
+    })
     // methods
     function doUpdateShow (value: boolean): void {
       const {
@@ -337,13 +341,12 @@ export default defineComponent({
         handleClickOutside,
         handleMouseMoveOutside,
         setBodyInstance,
+        positionManually: positionManuallyRef,
         isMounted: isMountedRef
       })
     )
     return {
-      positionManually: useMemo(() => {
-        return props.x !== undefined && props.y !== undefined
-      }),
+      positionManually: positionManuallyRef,
       // if to show popover body
       uncontrolledShow: uncontrolledShowRef,
       mergedShowArrow: mergedShowArrowRef,

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-dropdown` with `x` and `y` set logs errors when mouse move outside it.
+
 ## 2.1.1
 
 ### Fixes

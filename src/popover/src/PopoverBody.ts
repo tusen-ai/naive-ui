@@ -62,11 +62,14 @@ export default defineComponent({
     const directivesRef = computed<DirectiveArguments>(() => {
       const { trigger } = props
       const directives = []
-      if (trigger === 'click') {
-        directives.push([clickoutside, handleClickOutside])
-      }
-      if (trigger === 'hover') {
-        directives.push([mousemoveoutside, handleMouseMoveOutside])
+      const { positionManually } = NPopover
+      if (!positionManually) {
+        if (trigger === 'click') {
+          directives.push([clickoutside, handleClickOutside])
+        }
+        if (trigger === 'hover') {
+          directives.push([mousemoveoutside, handleMouseMoveOutside])
+        }
       }
       if (props.displayDirective === 'show') {
         directives.push([vShow, props.show])
