@@ -59,7 +59,7 @@ export function createRowClassName (
   return rowClassName || ''
 }
 
-// for compitablilty
+// for compatibility
 // If column.filterOptionValues or column.defaultFilterOptionValues is set, use
 // array value
 export function shouldUseArrayInSingleMode (column: TableColumnInfo): boolean {
