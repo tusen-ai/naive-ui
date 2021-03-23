@@ -2,11 +2,12 @@ import { createApp } from 'vue'
 import { installDemoComponents } from './setup'
 import SiteRoot from './SiteRoot.vue'
 import naive from '../src/index'
-import { routes, componentChildRoutes } from './routes/routes'
+import { routes, zhDocRoutes, enDocRoutes } from './routes/routes'
 import createDemoRouter from './routes/router'
 
 import debugRouteMixin from './routes/debug-route-mixin'
-debugRouteMixin(routes, componentChildRoutes)
+debugRouteMixin(routes, zhDocRoutes)
+debugRouteMixin(routes, enDocRoutes)
 
 const app = createApp(SiteRoot)
 

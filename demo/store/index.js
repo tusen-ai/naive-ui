@@ -36,7 +36,7 @@ export function siteSetup () {
   // locale
   const localeNameRef = computed({
     get () {
-      return route.params.lang === 'zh-CN' ? 'zh-CN' : 'en-US'
+      return route.path.startsWith('/zh-CN') ? 'zh-CN' : 'en-US'
     },
     set (locale) {
       router.push(changeLangInPath(route.fullPath, locale))
