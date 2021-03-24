@@ -100,5 +100,6 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | sortOrder | `'descend' \| 'ascend' \| false` | `undefined` | The controlled sort order of the column. If multiple columns' sortOrder is set, the first one will affect. |
 | sorter | `boolean \| function \| 'default'` | `false` | The sorter of the column. If set `'default'`, it will use a basic builtin compare function. If set to `true`, it will only display sort icon on the column, which can be used in async status. Otherwise it works like `Array.sort`'s compare function. |
 | title | `string \| (() => VNodeChild)` | `undefined` | Can be a render function |
+| titleRowSpan | `number` | `undefined` |  |
 | type | `'default' \| 'selection'` | `default` |  |
 | width | `number \| string` | `undefined` | Width of the column, **required** when fixed |

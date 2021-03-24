@@ -1,6 +1,6 @@
 # Merge Cell
 
-Set colspan and rowspan by setting `colSpan` and `rowSpan` of column object.
+Set colspan and rowspan by setting `colSpan` and `rowSpan` of column object. Set colspan in header by setting `titleColSpan` of column object.
 
 ```html
 <n-data-table

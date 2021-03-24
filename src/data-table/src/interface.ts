@@ -62,6 +62,7 @@ export type TableColumnGroup = {
 
 export type TableColumnInfo = {
   title?: TableColumnTitle
+  titleColSpan?: number
   // for compat maybe default
   type?: never
   key: ColumnKey

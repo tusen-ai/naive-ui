@@ -33,6 +33,7 @@ function getRowsAndCols (
   const dataRelatedCols: Array<SelectionColInfo | TableColumnInfo> = []
   const rowItemMap: RowItemMap = new WeakMap()
   let maxDepth = -1
+  let totalRowSpan = 0
   function ensureMaxDepth (columns: TableColumns, currentDepth: number): void {
     if (currentDepth > maxDepth) {
       rows[currentDepth] = []
@@ -47,6 +48,7 @@ function getRowsAndCols (
           style: createCustomWidthStyle(column),
           column
         })
+        totalRowSpan += 1
         dataRelatedCols.push(column)
       }
     }
@@ -57,10 +59,13 @@ function getRowsAndCols (
     currentDepth: number,
     parentIsLast: boolean
   ): void {
+    let currentLeafIndex = -1
+    let hideUntilIndex = 0
     const lastIndex = columns.length - 1
     columns.forEach((column, index) => {
-      const isLast = parentIsLast && index === lastIndex
       if ('children' in column) {
+        // do not allow colSpan > 1 for non-leaf th
+        const isLast = parentIsLast && index === lastIndex
         const rowItem: RowItem = {
           column,
           colSpan: 0,
@@ -74,9 +79,21 @@ function getRowsAndCols (
         rowItemMap.set(column, rowItem)
         rows[currentDepth].push(rowItem)
       } else {
+        currentLeafIndex += 1
+        if (currentLeafIndex < hideUntilIndex) {
+          return
+        }
+        let colSpan: number = 1
+        if ('titleColSpan' in column) {
+          colSpan = column.titleColSpan ?? 1
+        }
+        if (colSpan > 1) {
+          hideUntilIndex = currentLeafIndex + colSpan
+        }
+        const isLast = currentLeafIndex + colSpan === totalRowSpan
         const rowItem: RowItem = {
           column,
-          colSpan: 1,
+          colSpan: colSpan,
           rowSpan: maxDepth - currentDepth + 1,
           isLast
         }

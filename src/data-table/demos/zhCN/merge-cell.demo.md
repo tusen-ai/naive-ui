@@ -1,6 +1,6 @@
 # 合并单元格
 
-设定列的 `colSpan` 和 `rowSpan` 来控制单元格的 `colspan` 和 `rowspan`。
+设定列的 `colSpan` 和 `rowSpan` 来控制单元格的 `colspan` 和 `rowspan`。设定列的 `titleColSpan` 控制表头的 colspan。
 
 ```html
 <n-data-table
@@ -19,6 +19,7 @@ const createColumns = ({ sendMail }) => {
   return [
     {
       title: 'Name',
+      titleColSpan: 2,
       key: 'name',
       width: '15%',
       rowSpan: (rowData, rowIndex) => (rowIndex === 0 ? 2 : 1),
@@ -39,6 +40,7 @@ const createColumns = ({ sendMail }) => {
       title: 'Tags',
       key: 'tags',
       width: '20%',
+      titleColSpan: 2,
       render (row) {
         const tags = row.tags.map((tagKey) => {
           return h(

@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-data-table`'s column add `colSpan` and `rowSpan` prop.
+- `n-data-table`'s column add `titleColSpan` prop.
 
 ### Fixes
 

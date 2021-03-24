@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-data-table` column 新增 `colSpan` 和 `rowSpan` 属性
+- `n-data-table` column 新增 `titleColSpan` 属性
 
 ### Fixes
 

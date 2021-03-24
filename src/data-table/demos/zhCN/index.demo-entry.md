@@ -100,5 +100,6 @@ custom-filter-menu
 | sortOrder | `'descend' \| 'ascend' \| false` | `undefined` | 受控状态下表格的排序方式。如果多列都设定了有效值，那么只有第一个会生效 |
 | sorter | `boolean \| function \| 'default'` | `undefined` | 这一列的排序方法。如果设为 `'default'` 表格将会使用一个内置的排序函数；如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。其他情况下它工作的方式类似 `Array.sort` 的对比函数 |
 | title | `string \| (() => VNodeChild)` | `undefined` | 可以是渲染函数 |
+| titleRowSpan | `number` | `undefined` |  |
 | type | `'selection'` | `undefined` |  |
 | width | `number \| string` | `undefined` | 列的宽度，在列固定时是**必需**的 |
