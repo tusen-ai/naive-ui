@@ -19,9 +19,10 @@
 ```
 
 ```js
-import { h, resolveComponent } from 'vue'
+import { h, defineComponent } from 'vue'
+import { NTag, NButton, useMessage } from 'naive-ui'
 
-const createColumns = (instance) => {
+const createColumns = ({ sendMail }) => {
   return [
     {
       title: 'Name',
@@ -45,14 +46,16 @@ const createColumns = (instance) => {
       render (row) {
         const tags = row.tags.map((tagKey) => {
           return h(
-            resolveComponent('n-tag'),
+            NTag,
             {
               style: {
                 marginRight: '6px'
               },
               type: 'info'
             },
-            { default: () => tagKey }
+            {
+              default: () => tagKey
+            }
           )
         })
         return tags
@@ -64,10 +67,10 @@ const createColumns = (instance) => {
       width: '20%',
       render (row) {
         return h(
-          resolveComponent('n-button'),
+          NButton,
           {
             size: 'small',
-            onClick: () => instance.sendMail(row)
+            onClick: () => sendMail(row)
           },
           { default: () => 'Send Email' }
         )
@@ -76,7 +79,7 @@ const createColumns = (instance) => {
   ]
 }
 
-const data = [
+const createData = () => [
   {
     key: 0,
     name: 'John Brown',
@@ -100,23 +103,20 @@ const data = [
   }
 ]
 
-export default {
-  inject: ['message'],
-  data () {
+export default defineComponent({
+  setup () {
+    const message = useMessage()
     return {
-      data: data,
-      columns: createColumns(this)
-    }
-  },
-  computed: {
-    pagination () {
-      return { pageSize: 10 }
-    }
-  },
-  methods: {
-    sendMail (rowData) {
-      this.message.info('send mail to ' + rowData.name)
+      data: createData(),
+      columns: createColumns({
+        sendMail (rowData) {
+          message.info('send mail to ' + rowData.name)
+        }
+      }),
+      pagination: {
+        pageSize: 10
+      }
     }
   }
-}
+})
 ```

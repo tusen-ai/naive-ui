@@ -14,7 +14,7 @@
     </template>
     <span> I wish they all could be California girls </span>
   </n-popover>
-  <n-popover :show="showPopover">
+  <n-popover trigger="manual" :show="showPopover">
     <template #trigger>
       <n-button @click="showPopover = !showPopover"> 手动 </n-button>
     </template>

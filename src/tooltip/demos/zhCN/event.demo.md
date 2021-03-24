@@ -14,7 +14,7 @@
     </template>
     <span> I wish they all could be California girls </span>
   </n-tooltip>
-  <n-tooltip :show="showPopover" placement="bottom">
+  <n-tooltip :show="showPopover" trigger="manual" placement="bottom">
     <template #trigger>
       <n-button @click="showPopover = !showPopover">
         手动（不会有事件发出来）
@@ -26,17 +26,18 @@
 ```
 
 ```js
-export default {
-  inject: ['message'],
-  data () {
+import { defineComponent, ref } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const message = useMessage()
     return {
-      showPopover: false
-    }
-  },
-  methods: {
-    handleUpdateShow (show) {
-      this.message.success(show)
+      showPopover: ref(false),
+      handleUpdateShow (show) {
+        message.success(show)
+      }
     }
   }
-}
+})
 ```

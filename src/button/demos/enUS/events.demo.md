@@ -3,16 +3,21 @@
 Handle events on button.
 
 ```html
-<n-button @click="handleClick"> Click Me </n-button>
+<n-button @click="handleClick">Click Me</n-button>
 ```
 
 ```js
-export default {
-  inject: ['message'],
-  methods: {
-    handleClick () {
-      this.message.info('Button Clicked')
+import { defineComponent } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const message = useMessage()
+    return {
+      handleClick () {
+        message.info('Button Clicked')
+      }
     }
   }
-}
+})
 ```

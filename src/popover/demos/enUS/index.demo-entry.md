@@ -35,7 +35,7 @@ manual-position
 | raw | `boolean` | `false` | Whether to use no default styles. |
 | show-arrow | `boolean` | `true` |  |
 | show | `boolean` | `undefined` | Whether to show popover if set. |
-| trigger | `'hover' \| 'click'` | `'hover'` |  |
+| trigger | `'hover' \| 'click' \| 'manual'` | `'hover'` |  |
 | width | `number \| 'trigger'` | `undefined` | `'trigger'` means popover's witdh will follow its trigger's width. |
 | x | `number` | `undefined` | The CSS `left` pixel value when popover manually positioned. |
 | y | `number` | `undefined` | The CSS `top` pixel value when popover manually positioned. |

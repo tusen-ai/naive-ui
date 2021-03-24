@@ -3,18 +3,23 @@
 You may need when use it in modal.
 
 ```html
-<n-card title="Card" closable @close="handleClose"> Card Content </n-card>
+<n-card title="Card" closable @close="handleClose">Card Content</n-card>
 ```
 
 ```js
-export default {
-  inject: ['message'],
-  methods: {
-    handleClose () {
-      this.message.info('Card Close')
+import { defineComponent } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const message = useMessage()
+    return {
+      handleClose () {
+        message.info('Card Close')
+      }
     }
   }
-}
+})
 ```
 
 ```css
