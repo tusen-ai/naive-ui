@@ -1,32 +1,28 @@
-# 无边框 & 单行
+# Merge Cell
+
+Set colspan and rowspan by setting `colSpan` and `rowSpan` of column object.
 
 ```html
-<n-space vertical :size="12">
-  <n-data-table
-    :bordered="false"
-    :columns="columns"
-    :data="data"
-    :pagination="pagination"
-  />
-  <n-data-table
-    :bordered="false"
-    :single-line="false"
-    :columns="columns"
-    :data="data"
-    :pagination="pagination"
-  />
-</n-space>
+<n-data-table
+  :columns="columns"
+  :data="data"
+  :pagination="pagination"
+  :single-line="false"
+/>
 ```
 
 ```js
-import { h, resolveComponent } from 'vue'
+import { h, defineComponent } from 'vue'
+import { NTag, NButton, useMessage } from 'naive-ui'
 
-const createColumns = (instance) => {
+const createColumns = ({ sendMail }) => {
   return [
     {
       title: 'Name',
       key: 'name',
-      width: '15%'
+      width: '15%',
+      rowSpan: (rowData, rowIndex) => (rowIndex === 0 ? 2 : 1),
+      colSpan: (rowData, rowIndex) => (rowIndex === 0 ? 2 : 1)
     },
     {
       title: 'Age',
@@ -36,7 +32,8 @@ const createColumns = (instance) => {
     {
       title: 'Address',
       key: 'address',
-      width: '20%'
+      width: '20%',
+      colSpan: (rowData, rowIndex) => (rowIndex === 2 ? 2 : 1)
     },
     {
       title: 'Tags',
@@ -45,14 +42,16 @@ const createColumns = (instance) => {
       render (row) {
         const tags = row.tags.map((tagKey) => {
           return h(
-            resolveComponent('n-tag'),
+            NTag,
             {
               style: {
                 marginRight: '6px'
               },
               type: 'info'
             },
-            { default: () => tagKey }
+            {
+              default: () => tagKey
+            }
           )
         })
         return tags
@@ -64,10 +63,10 @@ const createColumns = (instance) => {
       width: '20%',
       render (row) {
         return h(
-          resolveComponent('n-button'),
+          NButton,
           {
             size: 'small',
-            onClick: () => instance.sendMail(row)
+            onClick: () => sendMail(row)
           },
           { default: () => 'Send Email' }
         )
@@ -76,7 +75,7 @@ const createColumns = (instance) => {
   ]
 }
 
-const data = [
+const createData = () => [
   {
     key: 0,
     name: 'John Brown',
@@ -100,23 +99,20 @@ const data = [
   }
 ]
 
-export default {
-  inject: ['message'],
-  data () {
+export default defineComponent({
+  setup () {
+    const message = useMessage()
     return {
-      data: data,
-      columns: createColumns(this)
-    }
-  },
-  computed: {
-    pagination () {
-      return { pageSize: 10 }
-    }
-  },
-  methods: {
-    sendMail (rowData) {
-      this.message.info('send mail to ' + rowData.name)
+      data: createData(),
+      columns: createColumns({
+        sendMail (rowData) {
+          message.info('send mail to ' + rowData.name)
+        }
+      }),
+      pagination: {
+        pageSize: 10
+      }
     }
   }
-}
+})
 ```

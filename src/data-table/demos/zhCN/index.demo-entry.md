@@ -15,6 +15,7 @@ basic
 empty
 border
 size
+merge-cell
 filter-and-sorter
 select
 group-header
@@ -79,6 +80,7 @@ custom-filter-menu
 | align | `'left' \| 'right' \| 'center'` | `'left'` | 列内的文本排列 |
 | children | `Column[]` | `undefined` | 成组列头的子节点 |
 | className | `string` | `undefined` |  |
+| colSpan | `(rowData: Object, rowIndex: number) => number` | `undefined` |  |
 | defaultFilterOptionValue | `string \| number \| null` | `null` | 非受控状态下默认的过滤器选项值（过滤器单选时生效） |
 | defaultFilterOptionValues | `Array<string \| number>` | `[]` | 非受控状态下默认的过滤器选项值（过滤器多选时生效） |
 | defaultSortOrder | `'descend' \| 'ascend' \| false` | `false` | 非受控状态下表格默认的排序方式 |
@@ -94,6 +96,7 @@ custom-filter-menu
 | key | `string \| number` | **必须** | 这一列的 key，在表格未设定 row-key 的时候是**必须**的。 |
 | render | `(rowData: Object) => VNodeChild` | `undefined` | 渲染函数，渲染这一列的每一行的单元格 |
 | renderFilterMenu | `() => VNodeChild` | `undefined` | 渲染函数，渲染这一列的过滤器菜单 |
+| rowSpan | `(rowData: Object, rowIndex: number) => number` | `undefined` |  |
 | sortOrder | `'descend' \| 'ascend' \| false` | `undefined` | 受控状态下表格的排序方式。如果多列都设定了有效值，那么只有第一个会生效 |
 | sorter | `boolean \| function \| 'default'` | `undefined` | 这一列的排序方法。如果设为 `'default'` 表格将会使用一个内置的排序函数；如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。其他情况下它工作的方式类似 `Array.sort` 的对比函数 |
 | title | `string \| (() => VNodeChild)` | `undefined` | 可以是渲染函数 |

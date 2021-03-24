@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Feats
+
+- `n-data-table`'s column add `colSpan` and `rowSpan` prop.
+
 ### Fixes
 
 - Fix `n-dropdown` with `x` and `y` set logs errors when mouse move outside it.
@@ -20,7 +24,7 @@
 - `n-popover` default `delay` is set to `100`.
 - `n-tooltip` default `showArrow` is set to `true`.
 
-### Feat
+### Feats
 
 - `n-config-provider` prop `theme-overrides` support inheritance.
 - `n-card` add `hoverable` prop.
@@ -39,7 +43,7 @@
 
 ## 2.0.1
 
-### Feat
+### Feats
 
 - `n-layout-sider` add `default-collapsed` prop.
 - `n-modal` support custom position.

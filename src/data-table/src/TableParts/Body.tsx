@@ -64,95 +64,138 @@ export default defineComponent({
         onScroll={handleScroll}
       >
         {{
-          default: () => (
-            <table ref="body" class="n-data-table-table">
-              <colgroup>
-                {NDataTable.cols.map((col) => (
-                  <col key={col.key} style={col.style}></col>
-                ))}
-              </colgroup>
-              <tbody ref="tbody" class="n-data-table-tbody">
-                {NDataTable.paginatedData.map((tmNode, index) => {
-                  const { rawNode: row } = tmNode
-                  const { handleCheckboxUpdateChecked } = this
-                  const {
-                    mergedTheme,
-                    cols,
-                    fixedColumnLeftMap,
-                    fixedColumnRightMap,
-                    currentPage,
-                    mergedCheckedRowKeys,
-                    rowClassName,
-                    leftActiveFixedColKey,
-                    rightActiveFixedColKey
-                  } = NDataTable
-                  return (
-                    <tr
-                      key={tmNode.key}
-                      class={[
-                        'n-data-table-tr',
-                        createRowClassName(row, index, rowClassName)
-                      ]}
-                    >
-                      {cols.map((col) => {
-                        const { key, column } = col
-                        return (
-                          <td
-                            key={key}
-                            style={{
-                              textAlign: column.align || undefined,
-                              left: pxfy(fixedColumnLeftMap[key]),
-                              right: pxfy(fixedColumnRightMap[key])
-                            }}
-                            class={[
-                              'n-data-table-td',
-                              column.className,
-                              column.fixed &&
-                                `n-data-table-td--fixed-${column.fixed}`,
-                              column.align &&
-                                `n-data-table-td--${column.align}-align`,
-                              {
-                                'n-data-table-td--ellipsis':
-                                  column.ellipsis === true ||
-                                  // don't add ellpisis class if tooltip exists
-                                  (column.ellipsis && !column.ellipsis.tooltip),
-                                'n-data-table-td--shadow-after':
-                                  leftActiveFixedColKey === key,
-                                'n-data-table-td--shadow-before':
-                                  rightActiveFixedColKey === key,
-                                'n-data-table-td--selection':
-                                  column.type === 'selection'
-                              }
-                            ]}
-                          >
-                            {column.type === 'selection' ? (
-                              <NCheckbox
-                                key={currentPage}
-                                disabled={column.disabled?.(row)}
-                                checked={mergedCheckedRowKeys.includes(
-                                  tmNode.key
-                                )}
-                                onUpdateChecked={(checked) =>
-                                  handleCheckboxUpdateChecked(tmNode, checked)
+          default: () => {
+            const cordToPass: Record<number, number[]> = {}
+            return (
+              <table ref="body" class="n-data-table-table">
+                <colgroup>
+                  {NDataTable.cols.map((col) => (
+                    <col key={col.key} style={col.style}></col>
+                  ))}
+                </colgroup>
+                <tbody ref="tbody" class="n-data-table-tbody">
+                  {NDataTable.paginatedData.map((tmNode, rowIndex) => {
+                    const { rawNode: row } = tmNode
+                    const { handleCheckboxUpdateChecked } = this
+                    const {
+                      mergedTheme,
+                      cols,
+                      fixedColumnLeftMap,
+                      fixedColumnRightMap,
+                      currentPage,
+                      mergedCheckedRowKeys,
+                      rowClassName,
+                      leftActiveFixedColKey,
+                      rightActiveFixedColKey
+                    } = NDataTable
+                    return (
+                      <tr
+                        key={tmNode.key}
+                        class={[
+                          'n-data-table-tr',
+                          createRowClassName(row, rowIndex, rowClassName)
+                        ]}
+                      >
+                        {cols.map((col, colIndex) => {
+                          if (rowIndex in cordToPass) {
+                            const cordOfRowToPass = cordToPass[rowIndex]
+                            const indexInCordOfRowToPass = cordOfRowToPass.indexOf(
+                              colIndex
+                            )
+                            if (~indexInCordOfRowToPass) {
+                              cordOfRowToPass.splice(indexInCordOfRowToPass, 1)
+                              return null
+                            }
+                          }
+                          const { key, column } = col
+                          const { rowSpan, colSpan } = column
+                          const mergedColSpan = colSpan
+                            ? colSpan(row, rowIndex)
+                            : 1
+                          const mergedRowSpan = rowSpan
+                            ? rowSpan(row, rowIndex)
+                            : 1
+                          if (mergedColSpan > 1 || mergedRowSpan > 1) {
+                            for (
+                              let i = rowIndex;
+                              i < rowIndex + mergedRowSpan;
+                              ++i
+                            ) {
+                              for (
+                                let j = colIndex;
+                                j < colIndex + mergedColSpan;
+                                ++j
+                              ) {
+                                if (i === rowIndex && j === colIndex) continue
+                                if (!(i in cordToPass)) {
+                                  cordToPass[i] = [j]
+                                } else {
+                                  cordToPass[i].push(j)
                                 }
-                              />
-                            ) : (
-                              <Cell
-                                index={index}
-                                row={row}
-                                column={column}
-                                mergedTheme={mergedTheme}
-                              />
-                            )}
-                          </td>
-                        )
-                      })}
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
-          )
+                              }
+                            }
+                          }
+                          return (
+                            <td
+                              key={key}
+                              style={{
+                                textAlign: column.align || undefined,
+                                left: pxfy(fixedColumnLeftMap[key]),
+                                right: pxfy(fixedColumnRightMap[key])
+                              }}
+                              colspan={mergedColSpan}
+                              rowspan={mergedRowSpan}
+                              class={[
+                                'n-data-table-td',
+                                column.className,
+                                column.fixed &&
+                                  `n-data-table-td--fixed-${column.fixed}`,
+                                column.align &&
+                                  `n-data-table-td--${column.align}-align`,
+                                {
+                                  'n-data-table-td--ellipsis':
+                                    column.ellipsis === true ||
+                                    // don't add ellpisis class if tooltip exists
+                                    (column.ellipsis &&
+                                      !column.ellipsis.tooltip),
+                                  'n-data-table-td--shadow-after':
+                                    leftActiveFixedColKey === key,
+                                  'n-data-table-td--shadow-before':
+                                    rightActiveFixedColKey === key,
+                                  'n-data-table-td--selection':
+                                    column.type === 'selection'
+                                }
+                              ]}
+                            >
+                              {column.type === 'selection' ? (
+                                <NCheckbox
+                                  key={currentPage}
+                                  disabled={column.disabled?.(row)}
+                                  checked={mergedCheckedRowKeys.includes(
+                                    tmNode.key
+                                  )}
+                                  onUpdateChecked={(checked) =>
+                                    handleCheckboxUpdateChecked(tmNode, checked)
+                                  }
+                                />
+                              ) : (
+                                <Cell
+                                  index={rowIndex}
+                                  row={row}
+                                  column={column}
+                                  mergedTheme={mergedTheme}
+                                />
+                              )}
+                            </td>
+                          )
+                        })}
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            )
+          }
         }}
       </NScrollbar>
     )

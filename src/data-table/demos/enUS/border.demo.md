@@ -110,7 +110,7 @@ export default {
   },
   computed: {
     pagination () {
-      return { total: this.data.length, pageSize: 10 }
+      return { pageSize: 10 }
     }
   },
   methods: {

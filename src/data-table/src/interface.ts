@@ -84,6 +84,8 @@ export type TableColumnInfo = {
   renderFilterMenu?: FilterMenuRender
   renderSorter?: SorterRender
   renderFilter?: FilterRender
+  colSpan?: (data: TableNode, index: number) => number
+  rowSpan?: (data: TableNode, index: number) => number
 } & CommonColInfo
 
 export type SelectionColInfo = {
@@ -96,6 +98,8 @@ export type SelectionColInfo = {
   filterOptions?: never
   filterOptionValues?: never
   filterOptionValue?: never
+  colSpan?: never
+  rowSpan?: never
 } & CommonColInfo
 
 export type TableColumn = TableColumnGroup | TableColumnInfo | SelectionColInfo

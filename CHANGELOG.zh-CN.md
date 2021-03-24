@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Feats
+
+- `n-data-table` column 新增 `colSpan` 和 `rowSpan` 属性
+
 ### Fixes
 
 - 修正 `n-dropdown` 在设定 `x` 和 `y` 之后鼠标在外面移动会报错
@@ -20,7 +24,7 @@
 - `n-popover` 默认 `delay` 设为 `100`
 - `n-tooltip` 默认 `showArrow` 设为 `true`
 
-### Feat
+### Feats
 
 - `n-config-provider` 的 `theme-overrides` 支持继承
 - `n-card` 新增 `hoverable` 属性
@@ -39,7 +43,7 @@
 
 ## 2.0.1
 
-### Feat
+### Feats
 
 - `n-layout-sider` 新增 `default-collapsed` 属性
 - `n-modal` 支持自定义位置

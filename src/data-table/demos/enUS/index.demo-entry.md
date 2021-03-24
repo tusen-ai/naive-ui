@@ -15,6 +15,7 @@ basic
 empty
 border
 size
+merge-cell
 filter-and-sorter
 select
 group-header
@@ -79,6 +80,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | align | `'left' \| 'right' \| 'center'` | `'left'` | Text align in column |
 | children | `Column[]` | `undefined` | Child nodes of a grouped column |
 | className | `string` | `undefined` |  |
+| colSpan | `(rowData: Object, rowIndex: number) => number` | `undefined` |  |
 | defaultFilterOptionValue | `string \| number \| null` | `null` | The default active filter option value in uncontrolled manner. (works when not using multiple filters) |
 | defaultFilterOptionValues | `Array<string \| number>` | `[]` | The default active filter option values in uncontrolled manner. (works when there are multiple filters) |
 | defaultSortOrder | `'descend' \| 'ascend' \| false` | `false` | The default sort order of the table in uncontrolled manner |
@@ -94,6 +96,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | key | `string \| number` | **required** | Unique key of this column, **required** when table's row-key is not set. |
 | render | `(rowData: Object) => VNodeChild` | `undefined` | Render function of column row cell. |
 | renderFilterMenu | `() => VNodeChild` | `undefined` | Render function of column filter menu. |
+| rowSpan | `(rowData: Object, rowIndex: number) => number` | `undefined` |  |
 | sortOrder | `'descend' \| 'ascend' \| false` | `undefined` | The controlled sort order of the column. If multiple columns' sortOrder is set, the first one will affect. |
 | sorter | `boolean \| function \| 'default'` | `false` | The sorter of the column. If set `'default'`, it will use a basic builtin compare function. If set to `true`, it will only display sort icon on the column, which can be used in async status. Otherwise it works like `Array.sort`'s compare function. |
 | title | `string \| (() => VNodeChild)` | `undefined` | Can be a render function |
