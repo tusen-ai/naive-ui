@@ -5,17 +5,18 @@
 ```
 
 ```js
-export default {
-  inject: ['message'],
-  data () {
+import { defineComponent, ref } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const message = useMessage()
     return {
-      active: false
-    }
-  },
-  methods: {
-    handleChange (value) {
-      this.message.info(`Update value: ${value}`)
+      active: ref(false),
+      handleChange (value) {
+        message.info(`Update value: ${value}`)
+      }
     }
   }
-}
+})
 ```

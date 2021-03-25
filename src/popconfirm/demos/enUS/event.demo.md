@@ -16,15 +16,20 @@
 ```
 
 ```js
-export default {
-  inject: ['message'],
-  methods: {
-    handlePositiveClick () {
-      this.message.info('positive click')
-    },
-    handleNegativeClick () {
-      this.message.info('negative click')
+import { defineComponent } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const message = useMessage()
+    return {
+      handlePositiveClick () {
+        message.info('positive click')
+      },
+      handleNegativeClick () {
+        message.info('negative click')
+      }
     }
   }
-}
+})
 ```

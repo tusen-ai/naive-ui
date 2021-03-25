@@ -13,15 +13,20 @@
 ```
 
 ```js
-export default {
-  inject: ['message'],
-  methods: {
-    handlePositiveClick () {
-      this.message.success('是的')
-    },
-    handleNegativeClick () {
-      this.message.warning('并不')
+import { defineComponent } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const message = useMessage()
+    return {
+      handlePositiveClick () {
+        message.info('是的')
+      },
+      handleNegativeClick () {
+        message.info('并不')
+      }
     }
   }
-}
+})
 ```

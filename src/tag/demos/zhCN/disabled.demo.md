@@ -20,17 +20,18 @@
 ```
 
 ```js
-export default {
-  inject: ['message'],
-  methods: {
-    handleClose () {
-      this.message.info('tag close')
-    }
-  },
-  data () {
+import { defineComponent, ref } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const message = useMessage()
     return {
-      disabled: true
+      disabled: ref(true),
+      handleClose () {
+        message.info('tag close')
+      }
     }
   }
-}
+})
 ```

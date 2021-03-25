@@ -19,23 +19,26 @@
 ```
 
 ```js
-export default {
-  inject: ['message'],
-  data () {
+import { defineComponent, ref } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const checkedRef = ref(false)
+    const citiesRef = ref(null)
+    const message = useMessage()
     return {
-      checked: false,
-      cities: null
-    }
-  },
-  methods: {
-    handleCheckedChange (checked) {
-      this.checked = checked
-      this.message.info(JSON.stringify(checked))
-    },
-    handleUpdateValue (value) {
-      this.cities = value
-      this.message.info(JSON.stringify(value))
+      checked: checkedRef,
+      cities: citiesRef,
+      handleCheckedChange (checked) {
+        checkedRef.value = checked
+        message.info(JSON.stringify(checked))
+      },
+      handleUpdateValue (value) {
+        citiesRef.value = value
+        message.info(JSON.stringify(value))
+      }
     }
   }
-}
+})
 ```

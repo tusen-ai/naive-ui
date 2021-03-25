@@ -74,6 +74,7 @@
 <script>
 import { computed, ref } from 'vue'
 import version from '../src/version'
+import { useMessage } from '../src'
 import { i18n } from './utils/composables'
 import {
   useThemeName,
@@ -92,8 +93,8 @@ function match (pattern, string) {
 
 export default {
   name: 'SiteHeader',
-  inject: ['message'],
   setup () {
+    const message = useMessage()
     const { t } = i18n({
       'zh-CN': {
         dark: '深色',
@@ -164,6 +165,7 @@ export default {
     ])
     return {
       t,
+      message,
       searchInputValue: ref(''),
       version,
       dev: __DEV__,

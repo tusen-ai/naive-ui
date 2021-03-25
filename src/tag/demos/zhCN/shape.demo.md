@@ -15,12 +15,17 @@
 ```
 
 ```js
-export default {
-  inject: ['message'],
-  methods: {
-    handleClose () {
-      this.message.info('tag close')
+import { defineComponent } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const message = useMessage()
+    return {
+      handleClose () {
+        message.info('tag close')
+      }
     }
   }
-}
+})
 ```

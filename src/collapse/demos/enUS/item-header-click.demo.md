@@ -2,7 +2,7 @@
 
 ```html
 <n-collapse
-  v-model:expandedNames="activeNames"
+  v-model:expandedNames="expandedNames"
   @item-header-click="handleItemHeaderClick"
 >
   <n-collapse-item name="1">
@@ -21,17 +21,18 @@
 ```
 
 ```js
-export default {
-  inject: ['message'],
-  data () {
+import { defineComponent, ref } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const message = useMessage()
     return {
-      activeNames: []
-    }
-  },
-  methods: {
-    handleItemHeaderClick ({ name, expanded }) {
-      this.message.info(`Name: ${name}, Expanded: ${expanded}`)
+      expandedNames: ref([]),
+      handleItemHeaderClick ({ name, expanded }) {
+        message.info(`Name: ${name}, Expanded: ${expanded}`)
+      }
     }
   }
-}
+})
 ```

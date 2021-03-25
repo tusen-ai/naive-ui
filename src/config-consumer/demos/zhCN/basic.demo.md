@@ -14,10 +14,9 @@
 
 ```js
 export default {
-  inject: ['message'],
   methods: {
     handleNamespaceChange (value, oldValue) {
-      this.message.info('Namespace Change: `' + value + '` namespace')
+      console.log('Namespace Change: `' + value + '` namespace')
     }
   }
 }

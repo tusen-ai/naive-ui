@@ -20,7 +20,6 @@
 
 ```js
 export default {
-  inject: ['message'],
   data () {
     return {
       theme: 'dark'
@@ -28,7 +27,7 @@ export default {
   },
   methods: {
     handleThemeChange (theme) {
-      this.message.info(theme)
+      console.log(theme)
     }
   }
 }

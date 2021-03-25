@@ -10,23 +10,24 @@
 ```
 
 ```js
-export default {
-  inject: ['message'],
-  data () {
+import { defineComponent, ref } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const message = useMessage()
     return {
-      value: 0
-    }
-  },
-  methods: {
-    handleChange (v) {
-      this.message.info(`update:value(${v})`)
-    },
-    handleBlur () {
-      this.message.info('blur')
-    },
-    handleFocus () {
-      this.message.info('focus')
+      value: ref(0),
+      handleChange (v) {
+        message.info(`update:value(${v})`)
+      },
+      handleBlur () {
+        message.info('blur')
+      },
+      handleFocus () {
+        message.info('focus')
+      }
     }
   }
-}
+})
 ```
