@@ -63,6 +63,7 @@ const createColumns = ({ sendMail }) => {
       title: 'Action',
       key: 'actions',
       width: '20%',
+      rowSpan: (rowData, rowIndex) => (rowIndex === 0 ? 2 : 1),
       render (row) {
         return h(
           NButton,

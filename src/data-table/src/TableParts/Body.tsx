@@ -66,15 +66,18 @@ export default defineComponent({
         {{
           default: () => {
             const cordToPass: Record<number, number[]> = {}
+            const { cols, paginatedData } = NDataTable
+            const { length: colCount } = cols
+            const { length: rowCount } = paginatedData
             return (
               <table ref="body" class="n-data-table-table">
                 <colgroup>
-                  {NDataTable.cols.map((col) => (
+                  {cols.map((col) => (
                     <col key={col.key} style={col.style}></col>
                   ))}
                 </colgroup>
                 <tbody ref="tbody" class="n-data-table-tbody">
-                  {NDataTable.paginatedData.map((tmNode, rowIndex) => {
+                  {paginatedData.map((tmNode, rowIndex) => {
                     const { rawNode: row } = tmNode
                     const { handleCheckboxUpdateChecked } = this
                     const {
@@ -115,6 +118,10 @@ export default defineComponent({
                           const mergedRowSpan = rowSpan
                             ? rowSpan(row, rowIndex)
                             : 1
+                          const isLastCol =
+                            colIndex + mergedColSpan === colCount
+                          const isLastRow =
+                            rowIndex + mergedRowSpan === rowCount
                           if (mergedColSpan > 1 || mergedRowSpan > 1) {
                             for (
                               let i = rowIndex;
@@ -163,7 +170,9 @@ export default defineComponent({
                                   'n-data-table-td--shadow-before':
                                     rightActiveFixedColKey === key,
                                   'n-data-table-td--selection':
-                                    column.type === 'selection'
+                                    column.type === 'selection',
+                                  'n-data-table-td--last-col': isLastCol,
+                                  'n-data-table-td--last-row': isLastRow
                                 }
                               ]}
                             >

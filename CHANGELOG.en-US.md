@@ -1,6 +1,12 @@
 # CHANGELOG
 
-## Pending
+## 2.1.3
+
+### Fixes
+
+- Fix `n-data-table` has no right border of non-last td.
+
+## 2.1.2
 
 ### Feats
 

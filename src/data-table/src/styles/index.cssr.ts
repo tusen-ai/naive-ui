@@ -98,7 +98,7 @@ export default c([
           cB('data-table-td', {
             borderRight: '1px solid var(--border-color)'
           }, [
-            c('&:last-child', {
+            cM('last-col', {
               borderRight: '0 solid var(--border-color)'
             })
           ])
@@ -114,8 +114,8 @@ export default c([
       }, [
         cB('data-table-table', [
           cB('data-table-tr', [
-            c('&:last-child', [
-              cB('data-table-td', {
+            cB('data-table-td', [
+              cM('last-row', {
                 borderBottom: '0 solid var(--border-color)'
               })
             ])
@@ -137,8 +137,8 @@ export default c([
     cM('bottom-bordered', [
       cB('data-table-table', [
         cB('data-table-tr', [
-          c('&:last-child', [
-            cB('data-table-td', {
+          cB('data-table-td', [
+            cM('last-row', {
               borderBottom: '1px solid var(--border-color)'
             })
           ])
@@ -165,10 +165,12 @@ export default c([
         backgroundClip: 'padding-box',
         transition: 'background-color .3s var(--bezier)'
       }, [
-        c('&:last-child', [
-          cB('data-table-td', {
+        cB('data-table-td', [
+          cM('last-row', {
             borderBottom: '0 solid var(--border-color)'
           }, [
+            // make sure there is no overlap between bottom border and
+            // fixed column box shadow
             c('&::after', {
               bottom: '0 !important'
             }),
@@ -394,14 +396,14 @@ function createStyleInsideModal (): CNode {
           cB('data-table-th', {
             borderRight: '1px solid var(--border-color-modal)'
           }, [
-            c('&:last-child', {
+            cM('last', {
               borderRight: '0 solid var(--border-color-modal)'
             })
           ]),
           cB('data-table-td', {
             borderRight: '1px solid var(--border-color-modal)'
           }, [
-            c('&:last-child', {
+            cM('last-col', {
               borderRight: '0 solid var(--border-color-modal)'
             })
           ])
@@ -414,8 +416,8 @@ function createStyleInsideModal (): CNode {
       }, [
         cB('data-table-table', [
           cB('data-table-tr', [
-            c('&:last-child', [
-              cB('data-table-td', {
+            cB('data-table-td', [
+              cM('last-row', {
                 borderBottom: '0 solid var(--border-color-modal)'
               })
             ])

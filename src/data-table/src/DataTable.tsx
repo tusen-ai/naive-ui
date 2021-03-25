@@ -190,6 +190,9 @@ export default defineComponent({
     const { mergedBordered } = useConfig(props)
     const mergedBottomBorderedRef = computed(() => {
       const { bottomBordered } = props
+      // do not add bottom bordered class if bordered is true
+      // since border is displayed on wrapper
+      if (mergedBordered.value) return false
       if (bottomBordered !== undefined) return bottomBordered
       return true
     })
