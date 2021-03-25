@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `n-data-table` has no right border of non-last td.
+- Fix `n-data-table` header has no enough width when table width is more than `scroll-x`
 
 ## 2.1.2
 

@@ -87,7 +87,7 @@ export default defineComponent({
         <table
           ref="body"
           class="n-data-table-table"
-          style={{ width: formatLength(scrollX) }}
+          style={{ minWidth: formatLength(scrollX) }}
         >
           <colgroup>
             {cols.map((col) => (

@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修正 `n-data-table` 对于不是最后一个的 td 没有右侧边框
+- 修正 `n-data-table` 头部在表格宽度大于 `scroll-x` 的时候不够宽
 
 ## 2.1.2
 
