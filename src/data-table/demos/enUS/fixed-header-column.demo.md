@@ -16,7 +16,8 @@ Note that: If you have set fixed column, you should also set `scroll-x`.
 ```
 
 ```js
-import { h } from 'vue'
+import { h, defineComponent } from 'vue'
+import { useMessage } from 'naive-ui'
 
 const columns = [
   {
@@ -66,30 +67,22 @@ const columns = [
   }
 ]
 
-const data = Array.apply(null, { length: 46 }).map((_, index) => ({
-  key: index,
-  name: `Edward King ${index}`,
-  age: 32,
-  address: `London, Park Lane no. ${index}`
-}))
-
-export default {
-  inject: ['message'],
-  data () {
+export default defineComponent({
+  setup () {
+    const message = useMessage()
     return {
-      data,
-      columns
-    }
-  },
-  computed: {
-    pagination () {
-      return { pageSize: 10 }
-    }
-  },
-  methods: {
-    sendMail (rowData) {
-      this.message.info('send mail to ' + rowData.name)
+      data: Array.apply(null, { length: 46 }).map((_, index) => ({
+        key: index,
+        name: `Edward King ${index}`,
+        age: 32,
+        address: `London, Park Lane no. ${index}`
+      })),
+      columns,
+      pagination: { pageSize: 10 },
+      sendMail (rowData) {
+        message.info('send mail to ' + rowData.name)
+      }
     }
   }
-}
+})
 ```

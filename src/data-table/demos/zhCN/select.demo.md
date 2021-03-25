@@ -3,6 +3,8 @@
 可以通过把第一列的类型设为 `selection` 来让行变成可选的。
 
 ```html
+<n-p> 你选中了 {{ checkedRowKeys.length }} 行。 </n-p>
+
 <n-data-table
   ref="table"
   :columns="columns"
@@ -42,7 +44,6 @@ const data = Array.apply(null, { length: 46 }).map((_, index) => ({
 }))
 
 export default {
-  inject: ['message'],
   data () {
     return {
       data,
@@ -54,9 +55,6 @@ export default {
     }
   },
   methods: {
-    sendMail (rowData) {
-      this.message.info('send mail to ' + rowData.name)
-    },
     handleCheck (rowKeys) {
       this.checkedRowKeys = rowKeys
     }

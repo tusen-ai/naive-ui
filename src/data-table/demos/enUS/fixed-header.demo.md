@@ -13,6 +13,8 @@ Display large amounts of data in scrollable view by set `max-height`.
 ```
 
 ```js
+import { defineComponent } from 'vue'
+
 const columns = [
   {
     title: 'Name',
@@ -28,28 +30,20 @@ const columns = [
   }
 ]
 
-const data = Array.apply(null, { length: 46 }).map((_, index) => ({
-  key: index,
-  name: `Edward King ${index}`,
-  age: 32,
-  address: `London, Park Lane no. ${index}`
-}))
-
-export default {
-  inject: ['message'],
+export default defineComponent({
   data () {
     return {
-      data,
+      data: Array.apply(null, { length: 46 }).map((_, index) => ({
+        key: index,
+        name: `Edward King ${index}`,
+        age: 32,
+        address: `London, Park Lane no. ${index}`
+      })),
       columns,
       pagination: {
         pageSize: 15
       }
     }
-  },
-  methods: {
-    sendMail (rowData) {
-      this.message.info('send mail to ' + rowData.name)
-    }
   }
-}
+})
 ```

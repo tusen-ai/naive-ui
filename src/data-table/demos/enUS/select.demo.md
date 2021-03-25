@@ -3,10 +3,10 @@
 Rows can be selectable by making first column's type as `selection`.
 
 ```html
-<div>
+<n-p>
   You have selected {{ checkedRowKeys.length }} row{{ checkedRowKeys.length < 2
   ? '': 's'}}.
-</div>
+</n-p>
 
 <n-data-table
   ref="table"
@@ -47,7 +47,6 @@ const data = Array.apply(null, { length: 46 }).map((_, index) => ({
 }))
 
 export default {
-  inject: ['message'],
   data () {
     return {
       data,
@@ -59,9 +58,6 @@ export default {
     }
   },
   methods: {
-    sendMail (rowData) {
-      this.message.info('send mail to ' + rowData.name)
-    },
     handleCheck (rowKeys) {
       this.checkedRowKeys = rowKeys
     }
