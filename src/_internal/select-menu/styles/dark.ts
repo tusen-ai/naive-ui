@@ -15,7 +15,6 @@ const internalSelectMenuDark: InternalSelectMenuTheme = {
     const {
       borderRadius,
       popoverColor,
-      boxShadow2,
       textColor3,
       dividerColor,
       textColor2,
@@ -45,7 +44,6 @@ const internalSelectMenuDark: InternalSelectMenuTheme = {
       optionHeightHuge: heightHuge,
       borderRadius: borderRadius,
       color: popoverColor,
-      boxShadow: boxShadow2,
       groupHeaderTextColor: textColor3,
       actionDividerColor: dividerColor,
       optionTextColor: textColor2,

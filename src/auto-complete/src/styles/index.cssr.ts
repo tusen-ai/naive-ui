@@ -3,7 +3,11 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 
 // vars:
 // --bezier
-export default cB('auto-complete-menu', [
+// --menu-box-shadow
+export default cB('auto-complete-menu', `
+  margin: 4px 0;
+  box-shadow: var(--menu-box-shadow);
+`, [
   fadeInScaleUpTransition({
     originalTransition: 'background-color .3s var(--bezier)'
   })

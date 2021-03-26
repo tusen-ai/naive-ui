@@ -9,6 +9,12 @@ const selectLight = createTheme({
   peers: {
     InternalSelection: internalSelectionLight,
     InternalSelectMenu: internalSelectMenuLight
+  },
+  self (vars) {
+    const { boxShadow2 } = vars
+    return {
+      menuBoxShadow: boxShadow2
+    }
   }
 })
 

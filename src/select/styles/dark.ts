@@ -9,6 +9,12 @@ const selectDark: SelectTheme = {
   peers: {
     InternalSelection: internalSelectionDark,
     InternalSelectMenu: internalSelectMenuDark
+  },
+  self (vars) {
+    const { boxShadow2 } = vars
+    return {
+      menuBoxShadow: boxShadow2
+    }
   }
 }
 

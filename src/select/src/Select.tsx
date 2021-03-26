@@ -626,7 +626,15 @@ export default defineComponent({
       handleMenuLeave,
       handleMenuClickOutside,
       handleMenuScroll,
-      mergedTheme: themeRef
+      mergedTheme: themeRef,
+      cssVars: computed(() => {
+        const {
+          self: { menuBoxShadow }
+        } = themeRef.value
+        return {
+          '--menu-box-shadow': menuBoxShadow
+        }
+      })
     }
   },
   render () {
@@ -677,7 +685,7 @@ export default defineComponent({
                 ref="followerRef"
                 show={this.mergedShow}
                 to={this.adjustedTo}
-                containerClass="namespace"
+                containerClass={this.namespace}
                 width="target"
                 placement="bottom-start"
               >
@@ -707,6 +715,7 @@ export default defineComponent({
                                 multiple: this.multiple,
                                 size: 'medium',
                                 value: this.mergedValue,
+                                style: this.cssVars,
                                 onMenuToggleOption: this.handleToggleOption,
                                 onScroll: this.handleMenuScroll
                               },

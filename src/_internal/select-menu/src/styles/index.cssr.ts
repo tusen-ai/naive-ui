@@ -3,8 +3,6 @@ import fadeInScaleUpTransition from '../../../../_styles/transitions/fade-in-sca
 
 export default cB('base-select-menu', `
   outline: none;
-  margin-top: 4px;
-  margin-bottom: 4px;
   z-index: 0;
   position: relative;
   border-radius: var(--border-radius);
@@ -13,7 +11,6 @@ export default cB('base-select-menu', `
     box-shadow .3s var(--bezier);
   overflow: hidden;
   background-color: var(--color);
-  box-shadow: var(--box-shadow);
 `, [
   cB('scrollbar', `
     max-height: var(--height);

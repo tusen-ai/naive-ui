@@ -789,7 +789,7 @@ export default defineComponent({
                 key="selectMenu"
                 ref="selectMenuFollowerRef"
                 show={this.mergedShow && this.showSelectMenu}
-                containerClass="namespace"
+                containerClass={this.namespace}
                 width="target"
                 placement="bottom-start"
                 to={this.adjustedTo}
@@ -803,6 +803,7 @@ export default defineComponent({
                       pattern={this.pattern}
                       multiple={this.multiple}
                       tmNodes={this.treeMate.treeNodes}
+                      style={this.cssVars as CSSProperties}
                     />
                   )
                 }}

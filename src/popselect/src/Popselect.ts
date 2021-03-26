@@ -8,7 +8,6 @@ import type { ThemeProps } from '../../_mixins'
 import { popselectLight } from '../styles'
 import type { PopselectTheme } from '../styles'
 import type { PopselectInjection } from './interface'
-import style from './styles/index.cssr'
 
 export default defineComponent({
   name: 'Popselect',
@@ -31,7 +30,7 @@ export default defineComponent({
     const themeRef = useTheme(
       'Popselect',
       'Popselect',
-      style,
+      undefined,
       popselectLight,
       props
     )

@@ -10,6 +10,8 @@
 
 - Fix `n-input` focused background color not correct in warning & error status in dark theme.
 - Fix `n-input` caret color not correct in warning & error status
+- Fix `n-select`'s namespace not correct
+- Fix `n-cascader`'s namespace not correct
 
 ## 2.1.3
 

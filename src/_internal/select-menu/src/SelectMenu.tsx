@@ -245,7 +245,6 @@ export default defineComponent({
           height,
           borderRadius,
           color,
-          boxShadow,
           groupHeaderTextColor,
           actionDividerColor,
           optionTextColorPressed,
@@ -267,7 +266,6 @@ export default defineComponent({
         '--action-text-color': actionTextColor,
         '--bezier': cubicBezierEaseInOut,
         '--border-radius': borderRadius,
-        '--box-shadow': boxShadow,
         '--color': color,
         '--option-font-size': fontSize,
         '--group-header-text-color': groupHeaderTextColor,
@@ -406,7 +404,7 @@ export default defineComponent({
             }}
           </NScrollbar>
         ) : (
-          <div style="padding: 14px 0; width: 100%">
+          <div style="padding: 12px 20px; flex: 1;">
             {renderSlot($slots, 'empty', undefined, () => [
               (<NEmpty />) as VNode
             ])}

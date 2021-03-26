@@ -9,6 +9,12 @@ const autoCompleteDark: AutoCompleteTheme = {
   peers: {
     InternalSelectMenu: internalSelectMenuDark,
     Input: inputDark
+  },
+  self (vars) {
+    const { boxShadow2 } = vars
+    return {
+      menuBoxShadow: boxShadow2
+    }
   }
 }
 

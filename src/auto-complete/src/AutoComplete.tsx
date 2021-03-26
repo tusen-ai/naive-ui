@@ -254,9 +254,11 @@ export default defineComponent({
       mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
-          common: { cubicBezierEaseInOut }
+          common: { cubicBezierEaseInOut },
+          self: { menuBoxShadow }
         } = themeRef.value
         return {
+          '--menu-box-shadow': menuBoxShadow,
           '--bezier': cubicBezierEaseInOut
         }
       }),

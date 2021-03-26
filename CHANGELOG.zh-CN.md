@@ -10,6 +10,8 @@
 
 - 修正 `n-input` 在暗色主题 focus 状态下的背景颜色在 warning 和 error 的状态不正确
 - 修正 `n-input` 在 warning 和 error 状态下光标颜色不正确
+- 修正 `n-select` 的 namespace 不正确
+- 修正 `n-cascader` 的 namespace 不正确
 
 ## 2.1.3
 
