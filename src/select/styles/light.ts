@@ -1,7 +1,15 @@
 import { internalSelectionLight } from '../../_internal/selection/styles'
 import { internalSelectMenuLight } from '../../_internal/select-menu/styles'
 import { commonLight } from '../../_styles/common'
+import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
+
+function self (vars: ThemeCommonVars) {
+  const { boxShadow2 } = vars
+  return {
+    menuBoxShadow: boxShadow2
+  }
+}
 
 const selectLight = createTheme({
   name: 'Select',
@@ -10,13 +18,9 @@ const selectLight = createTheme({
     InternalSelection: internalSelectionLight,
     InternalSelectMenu: internalSelectMenuLight
   },
-  self (vars) {
-    const { boxShadow2 } = vars
-    return {
-      menuBoxShadow: boxShadow2
-    }
-  }
+  self
 })
 
 export default selectLight
+export type SelectThemeVars = ReturnType<typeof self>
 export type SelectTheme = typeof selectLight
