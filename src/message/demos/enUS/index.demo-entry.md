@@ -71,7 +71,7 @@ multiple-line
 | Name | Type | Description |
 | --- | --- | --- |
 | closable | `boolean` |  |
-| content | `string \| (() => VNode \| Array<VNode>)` | Message content. |
+| content | `string \| number \| boolean \| (() => VNode \| Array<VNode>)` | Message content. |
 | icon | `() => VNode` | Message icon. |
 | onAfterLeave | `Function` | Callback after message disappeared. |
 | onLeave | `Function` | Callback when message start to disappear. |

@@ -9,7 +9,9 @@ export const messageProps = {
     default: 'info'
   },
   content: {
-    type: [String, Number, Function] as PropType<string | (() => VNodeChild)>,
+    type: [String, Number, Boolean, Function] as PropType<
+    string | number | boolean | (() => VNodeChild)
+    >,
     default: undefined
   },
   closable: {

@@ -81,7 +81,7 @@ multiple-line
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
 | closable | `boolean` |  |
-| content | `string \| (() => VNode \| Array<VNode>)` | 信息内容 |
+| content | `string \| number \| boolean \| (() => VNode \| Array<VNode>)` | 信息内容 |
 | icon | `() => VNode` | 信息图标 |
 | type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` |  |
 | onAfterLeave | `Function` | 信息消失动画结束的回调 |
