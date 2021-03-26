@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-data-table` 支持行展开
+
 ## 2.1.3
 
 ### Fixes

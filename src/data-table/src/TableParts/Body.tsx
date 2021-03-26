@@ -3,9 +3,10 @@ import { pxfy } from 'seemly'
 import { NCheckbox } from '../../../checkbox'
 import { NScrollbar, ScrollbarRef } from '../../../scrollbar'
 import { formatLength } from '../../../_utils'
-import { DataTableInjection, TmNode } from '../interface'
+import { DataTableInjection, RowKey, TmNode } from '../interface'
 import { createRowClassName } from '../utils'
 import Cell from './Cell'
+import ExpandTrigger from './ExpandTrigger'
 
 export default defineComponent({
   name: 'DataTableBody',
@@ -38,12 +39,24 @@ export default defineComponent({
     function handleScroll (event: Event): void {
       NDataTable.handleTableBodyScroll(event)
     }
+    function handleUpdateExpanded (key: RowKey): void {
+      const { mergedExpandedRowKeys, doUpdateExpandedRowKeys } = NDataTable
+      const index = mergedExpandedRowKeys.indexOf(key)
+      const nextExpandedKeys = Array.from(mergedExpandedRowKeys)
+      if (~index) {
+        nextExpandedKeys.splice(index, 1)
+      } else {
+        nextExpandedKeys.push(key)
+      }
+      doUpdateExpandedRowKeys(nextExpandedKeys)
+    }
     return {
       NDataTable,
       scrollbarInstRef,
       getScrollContainer,
       handleScroll,
-      handleCheckboxUpdateChecked
+      handleCheckboxUpdateChecked,
+      handleUpdateExpanded
     }
   },
   render () {
@@ -65,10 +78,167 @@ export default defineComponent({
       >
         {{
           default: () => {
+            let hasExpandedRows = false
             const cordToPass: Record<number, number[]> = {}
-            const { cols, paginatedData } = NDataTable
+            const {
+              cols,
+              paginatedData,
+              mergedTheme,
+              fixedColumnLeftMap,
+              fixedColumnRightMap,
+              currentPage,
+              mergedCheckedRowKeys,
+              rowClassName,
+              leftActiveFixedColKey,
+              rightActiveFixedColKey,
+              renderExpand,
+              mergedExpandedRowKeys
+            } = NDataTable
             const { length: colCount } = cols
             const { length: rowCount } = paginatedData
+            const { handleCheckboxUpdateChecked, handleUpdateExpanded } = this
+            const rows = paginatedData.map((tmNode, rowIndex) => {
+              const { rawNode: rowData, key: rowKey } = tmNode
+              const expanded =
+                renderExpand && mergedExpandedRowKeys.includes(rowKey)
+              const row = (
+                <tr
+                  key={rowKey}
+                  class={[
+                    'n-data-table-tr',
+                    createRowClassName(rowData, rowIndex, rowClassName)
+                  ]}
+                >
+                  {cols.map((col, colIndex) => {
+                    if (rowIndex in cordToPass) {
+                      const cordOfRowToPass = cordToPass[rowIndex]
+                      const indexInCordOfRowToPass = cordOfRowToPass.indexOf(
+                        colIndex
+                      )
+                      if (~indexInCordOfRowToPass) {
+                        cordOfRowToPass.splice(indexInCordOfRowToPass, 1)
+                        return null
+                      }
+                    }
+                    const { key: colKey, column } = col
+                    const { rowSpan, colSpan } = column
+                    const mergedColSpan = colSpan
+                      ? colSpan(rowData, rowIndex)
+                      : 1
+                    const mergedRowSpan = rowSpan
+                      ? rowSpan(rowData, rowIndex)
+                      : 1
+                    const isLastCol = colIndex + mergedColSpan === colCount
+                    const isLastRow = rowIndex + mergedRowSpan === rowCount
+                    if (mergedColSpan > 1 || mergedRowSpan > 1) {
+                      for (
+                        let i = rowIndex;
+                        i < rowIndex + mergedRowSpan;
+                        ++i
+                      ) {
+                        for (
+                          let j = colIndex;
+                          j < colIndex + mergedColSpan;
+                          ++j
+                        ) {
+                          if (i === rowIndex && j === colIndex) continue
+                          if (!(i in cordToPass)) {
+                            cordToPass[i] = [j]
+                          } else {
+                            cordToPass[i].push(j)
+                          }
+                        }
+                      }
+                    }
+                    return (
+                      <td
+                        key={colKey}
+                        style={{
+                          textAlign: column.align || undefined,
+                          left: pxfy(fixedColumnLeftMap[colKey]),
+                          right: pxfy(fixedColumnRightMap[colKey])
+                        }}
+                        colspan={mergedColSpan}
+                        rowspan={mergedRowSpan}
+                        class={[
+                          'n-data-table-td',
+                          column.className,
+                          column.fixed &&
+                            `n-data-table-td--fixed-${column.fixed}`,
+                          column.align &&
+                            `n-data-table-td--${column.align}-align`,
+                          {
+                            'n-data-table-td--ellipsis':
+                              column.ellipsis === true ||
+                              // don't add ellpisis class if tooltip exists
+                              (column.ellipsis && !column.ellipsis.tooltip),
+                            'n-data-table-td--shadow-after':
+                              leftActiveFixedColKey === colKey,
+                            'n-data-table-td--shadow-before':
+                              rightActiveFixedColKey === colKey,
+                            'n-data-table-td--selection':
+                              column.type === 'selection',
+                            'n-data-table-td--expand': column.type === 'expand',
+                            'n-data-table-td--last-col': isLastCol,
+                            'n-data-table-td--last-row': isLastRow && !expanded
+                          }
+                        ]}
+                      >
+                        {column.type === 'selection' ? (
+                          <NCheckbox
+                            key={currentPage}
+                            disabled={column.disabled?.(rowData)}
+                            checked={mergedCheckedRowKeys.includes(rowKey)}
+                            onUpdateChecked={(checked) =>
+                              handleCheckboxUpdateChecked(tmNode, checked)
+                            }
+                          />
+                        ) : column.type === 'expand' ? (
+                          !column.expandable ||
+                          column.expandable?.(rowData, rowIndex) ? (
+                              <ExpandTrigger
+                                expanded={expanded}
+                                onClick={() => handleUpdateExpanded(rowKey)}
+                              />
+                            ) : null
+                        ) : (
+                          <Cell
+                            index={rowIndex}
+                            row={rowData}
+                            column={column}
+                            mergedTheme={mergedTheme}
+                          />
+                        )}
+                      </td>
+                    )
+                  })}
+                </tr>
+              )
+              if (expanded && renderExpand) {
+                if (!hasExpandedRows) {
+                  hasExpandedRows = true
+                }
+                return [
+                  row,
+                  <tr class="n-data-table-tr" key={`${rowKey}__expand`}>
+                    <td
+                      class={[
+                        'n-data-table-td',
+                        'n-data-table-td--last-col',
+                        {
+                          'n-data-table-td--last-row': rowIndex + 1 === rowCount
+                        }
+                      ]}
+                      colspan={colCount}
+                    >
+                      {renderExpand(rowData, rowIndex)}
+                    </td>
+                  </tr>
+                ]
+              }
+              return row
+            })
+
             return (
               <table ref="body" class="n-data-table-table">
                 <colgroup>
@@ -77,130 +247,7 @@ export default defineComponent({
                   ))}
                 </colgroup>
                 <tbody ref="tbody" class="n-data-table-tbody">
-                  {paginatedData.map((tmNode, rowIndex) => {
-                    const { rawNode: row } = tmNode
-                    const { handleCheckboxUpdateChecked } = this
-                    const {
-                      mergedTheme,
-                      cols,
-                      fixedColumnLeftMap,
-                      fixedColumnRightMap,
-                      currentPage,
-                      mergedCheckedRowKeys,
-                      rowClassName,
-                      leftActiveFixedColKey,
-                      rightActiveFixedColKey
-                    } = NDataTable
-                    return (
-                      <tr
-                        key={tmNode.key}
-                        class={[
-                          'n-data-table-tr',
-                          createRowClassName(row, rowIndex, rowClassName)
-                        ]}
-                      >
-                        {cols.map((col, colIndex) => {
-                          if (rowIndex in cordToPass) {
-                            const cordOfRowToPass = cordToPass[rowIndex]
-                            const indexInCordOfRowToPass = cordOfRowToPass.indexOf(
-                              colIndex
-                            )
-                            if (~indexInCordOfRowToPass) {
-                              cordOfRowToPass.splice(indexInCordOfRowToPass, 1)
-                              return null
-                            }
-                          }
-                          const { key, column } = col
-                          const { rowSpan, colSpan } = column
-                          const mergedColSpan = colSpan
-                            ? colSpan(row, rowIndex)
-                            : 1
-                          const mergedRowSpan = rowSpan
-                            ? rowSpan(row, rowIndex)
-                            : 1
-                          const isLastCol =
-                            colIndex + mergedColSpan === colCount
-                          const isLastRow =
-                            rowIndex + mergedRowSpan === rowCount
-                          if (mergedColSpan > 1 || mergedRowSpan > 1) {
-                            for (
-                              let i = rowIndex;
-                              i < rowIndex + mergedRowSpan;
-                              ++i
-                            ) {
-                              for (
-                                let j = colIndex;
-                                j < colIndex + mergedColSpan;
-                                ++j
-                              ) {
-                                if (i === rowIndex && j === colIndex) continue
-                                if (!(i in cordToPass)) {
-                                  cordToPass[i] = [j]
-                                } else {
-                                  cordToPass[i].push(j)
-                                }
-                              }
-                            }
-                          }
-                          return (
-                            <td
-                              key={key}
-                              style={{
-                                textAlign: column.align || undefined,
-                                left: pxfy(fixedColumnLeftMap[key]),
-                                right: pxfy(fixedColumnRightMap[key])
-                              }}
-                              colspan={mergedColSpan}
-                              rowspan={mergedRowSpan}
-                              class={[
-                                'n-data-table-td',
-                                column.className,
-                                column.fixed &&
-                                  `n-data-table-td--fixed-${column.fixed}`,
-                                column.align &&
-                                  `n-data-table-td--${column.align}-align`,
-                                {
-                                  'n-data-table-td--ellipsis':
-                                    column.ellipsis === true ||
-                                    // don't add ellpisis class if tooltip exists
-                                    (column.ellipsis &&
-                                      !column.ellipsis.tooltip),
-                                  'n-data-table-td--shadow-after':
-                                    leftActiveFixedColKey === key,
-                                  'n-data-table-td--shadow-before':
-                                    rightActiveFixedColKey === key,
-                                  'n-data-table-td--selection':
-                                    column.type === 'selection',
-                                  'n-data-table-td--last-col': isLastCol,
-                                  'n-data-table-td--last-row': isLastRow
-                                }
-                              ]}
-                            >
-                              {column.type === 'selection' ? (
-                                <NCheckbox
-                                  key={currentPage}
-                                  disabled={column.disabled?.(row)}
-                                  checked={mergedCheckedRowKeys.includes(
-                                    tmNode.key
-                                  )}
-                                  onUpdateChecked={(checked) =>
-                                    handleCheckboxUpdateChecked(tmNode, checked)
-                                  }
-                                />
-                              ) : (
-                                <Cell
-                                  index={rowIndex}
-                                  row={row}
-                                  column={column}
-                                  mergedTheme={mergedTheme}
-                                />
-                              )}
-                            </td>
-                          )
-                        })}
-                      </tr>
-                    )
-                  })}
+                  {hasExpandedRows ? rows.flat() : rows}
                 </tbody>
               </table>
             )

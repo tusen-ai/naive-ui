@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-data-table` supports expanding rows.
+
 ## 2.1.3
 
 ### Fixes

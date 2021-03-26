@@ -50,8 +50,14 @@ export type TableColumnTitle =
   | string
   | ((column: TableColumnInfo) => VNodeChild)
 
+export type ExpandColTitle = string | ((column: ExpandColInfo) => VNodeChild)
+
+export type TableColumnGroupTitle =
+  | string
+  | ((column: TableColumnGroup) => VNodeChild)
+
 export type TableColumnGroup = {
-  title?: TableColumnTitle
+  title?: TableColumnGroupTitle
   type?: never
   key: ColumnKey
   children: TableColumnInfo[]
@@ -81,12 +87,12 @@ export type TableColumnInfo = {
   defaultFilterOptionValue?: FilterOptionValue | null
   filterMultiple?: boolean
 
-  render?: (data: TableNode, index: number) => VNodeChild
+  render?: (rowData: TableNode, rowIndex: number) => VNodeChild
   renderFilterMenu?: FilterMenuRender
   renderSorter?: SorterRender
   renderFilter?: FilterRender
-  colSpan?: (data: TableNode, index: number) => number
-  rowSpan?: (data: TableNode, index: number) => number
+  colSpan?: (rowData: TableNode, rowIndex: number) => number
+  rowSpan?: (rowData: TableNode, rowIndex: number) => number
 } & CommonColInfo
 
 export type SelectionColInfo = {
@@ -103,7 +109,20 @@ export type SelectionColInfo = {
   rowSpan?: never
 } & CommonColInfo
 
-export type TableColumn = TableColumnGroup | TableColumnInfo | SelectionColInfo
+export type RenderExpand = (row: TableNode, index: number) => VNodeChild
+export type Expandable = (row: TableNode, index: number) => boolean
+export interface ExpandColInfo extends Omit<SelectionColInfo, 'type'> {
+  type: 'expand'
+  title?: ExpandColTitle
+  renderExpand: RenderExpand
+  expandable?: Expandable
+}
+
+export type TableColumn =
+  | TableColumnGroup
+  | TableColumnInfo
+  | SelectionColInfo
+  | ExpandColInfo
 export type TableColumns = TableColumn[]
 
 export interface DataTableInjection {
@@ -129,6 +148,9 @@ export interface DataTableInjection {
   mergedCheckedRowKeys: RowKey[]
   locale: NLocale['DataTable']
   filterMenuCssVars: CSSProperties
+  mergedExpandedRowKeys: RowKey[]
+  renderExpand: undefined | RenderExpand
+  doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   rowKey: CreateRowKey | undefined
   doUpdateFilters: (
     filters: FilterState,
@@ -161,6 +183,7 @@ export type SorterRender = (props: { order: SortOrder | false }) => VNodeChild
 
 export type FilterMenuRender = () => VNodeChild
 
+export type OnUpdateExpandedRowKeys = (keys: RowKey[]) => void
 export type OnUpdateCheckedRowKeys = (keys: RowKey[]) => void
 export type OnUpdateSorter = (sortState: SortState | null) => void
 export type OnUpdateFilters = (

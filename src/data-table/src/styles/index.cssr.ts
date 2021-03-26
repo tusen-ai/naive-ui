@@ -246,7 +246,7 @@ export default c([
           overflow: hidden;
           white-space: nowrap;
         `),
-        cM('selection', `
+        cM('selection, expand', `
           text-align: center;
           padding: 0;
           line-height: 0;

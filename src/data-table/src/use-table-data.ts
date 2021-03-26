@@ -12,7 +12,8 @@ import type {
   TableColumnInfo,
   SelectionColInfo,
   TableNode,
-  TmNode
+  TmNode,
+  ExpandColInfo
 } from './interface'
 import { createShallowClonedObject, getFlagOfOrder } from './utils'
 import { PaginationProps } from '../../pagination/src/Pagination'
@@ -26,7 +27,9 @@ export function useTableData (
   {
     dataRelatedCols
   }: {
-    dataRelatedCols: ComputedRef<Array<SelectionColInfo | TableColumnInfo>>
+    dataRelatedCols: ComputedRef<
+    Array<SelectionColInfo | TableColumnInfo | ExpandColInfo>
+    >
   }
 ) {
   const treeMateRef = computed(() =>
@@ -138,7 +141,7 @@ export function useTableData (
     )
     const controlledFilterState: FilterState = {}
     columnsWithControlledFilter.forEach((column) => {
-      if (column.type === 'selection') return
+      if (column.type === 'selection' || column.type === 'expand') return
       controlledFilterState[column.key] =
         column.filterOptionValues || column.filterOptionValue || null
     })
@@ -161,7 +164,13 @@ export function useTableData (
     } = treeMateRef
     const columnEntries: Array<[ColumnKey, TableColumnInfo]> = []
     columns.forEach((column) => {
-      if (column.type === 'selection') return
+      if (
+        column.type === 'selection' ||
+        column.type === 'expand' ||
+        'children' in column
+      ) {
+        return
+      }
       columnEntries.push([column.key, column])
     })
     return data
@@ -326,7 +335,10 @@ export function useTableData (
       clearSorter()
     } else {
       const columnToSort = dataRelatedCols.value.find(
-        (column) => column.type !== 'selection' && column.key === columnKey
+        (column) =>
+          column.type !== 'selection' &&
+          column.type !== 'expand' &&
+          column.key === columnKey
       )
       if (!columnToSort || !columnToSort.sorter) return
       const sorter = columnToSort.sorter

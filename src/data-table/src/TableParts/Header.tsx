@@ -13,14 +13,17 @@ import {
 } from '../utils'
 import {
   DataTableInjection,
+  ExpandColInfo,
   SelectionColInfo,
   TableColumnGroup,
   TableColumnInfo
 } from '../interface'
 
-function renderTitle (column: TableColumnInfo | TableColumnGroup): VNodeChild {
+function renderTitle (
+  column: ExpandColInfo | TableColumnInfo | TableColumnGroup
+): VNodeChild {
   return typeof column.title === 'function'
-    ? column.title(column)
+    ? column.title(column as any)
     : column.title
 }
 
@@ -131,10 +134,15 @@ export default defineComponent({
                           },
                           column.className
                         ]}
-                        onClick={(e) => {
+                        onClick={
                           column.type !== 'selection' &&
-                            handleColHeaderClick(e, column)
-                        }}
+                          column.type !== 'expand' &&
+                          !('children' in column)
+                            ? (e) => {
+                              handleColHeaderClick(e, column)
+                            }
+                            : undefined
+                        }
                       >
                         {column.type === 'selection' ? (
                           <NCheckbox
@@ -162,10 +170,8 @@ export default defineComponent({
                                 default: () => renderTitle(column)
                               }}
                             </NEllipsis>
-                          ) : typeof column.title === 'function' ? (
-                            column.title(column)
                           ) : (
-                            column.title
+                            renderTitle(column)
                           )}
                         {isColumnSortable(column) ? (
                           <SortButton column={column as TableColumnInfo} />

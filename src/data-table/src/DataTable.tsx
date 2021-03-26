@@ -33,10 +33,12 @@ import {
   OnUpdateFilters,
   MainTableRef,
   DataTableInjection,
-  DataTableRef
+  DataTableRef,
+  OnUpdateExpandedRowKeys
 } from './interface'
 import style from './styles/index.cssr'
 import { useGroupHeader } from './use-group-header'
+import { useExpand } from './use-expand'
 
 export const dataTableProps = {
   ...(useTheme.props as ThemeProps<DataTableTheme>),
@@ -90,6 +92,11 @@ export const dataTableProps = {
     default: 'medium'
   },
   remote: Boolean,
+  defaultExpandedRowKeys: {
+    type: Array as PropType<RowKey[]>,
+    default: []
+  },
+  expandedRowKeys: Array as PropType<RowKey[]>,
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:page': [Function, Array] as PropType<
   PaginationProps['onUpdate:page']
@@ -107,6 +114,12 @@ export const dataTableProps = {
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:checkedRowKeys': [Function, Array] as PropType<
   MaybeArray<OnUpdateCheckedRowKeys>
+  >,
+  'onUpdate:expandedRowKeys': [Function, Array] as PropType<
+  MaybeArray<OnUpdateExpandedRowKeys>
+  >,
+  onUpdateExpandedRowKeys: [Function, Array] as PropType<
+  MaybeArray<OnUpdateExpandedRowKeys>
   >,
   // deprecated
   onPageChange: {
@@ -234,6 +247,11 @@ export default defineComponent({
       treeMateRef
     })
     const {
+      mergedExpandedRowKeys,
+      renderExpand,
+      doUpdateExpandedRowKeys
+    } = useExpand(props)
+    const {
       handleTableBodyScroll,
       handleTableHeaderScroll,
       deriveActiveRightFixedColumn,
@@ -272,6 +290,7 @@ export default defineComponent({
         loading: toRef(props, 'loading'),
         rowClassName: toRef(props, 'rowClassName'),
         mergedCheckedRowKeys,
+        mergedExpandedRowKeys,
         locale,
         rowKey: toRef(props, 'rowKey'),
         filterMenuCssVars: computed(() => {
@@ -285,6 +304,7 @@ export default defineComponent({
             '--action-divider-color': actionDividerColor
           } as CSSProperties
         }),
+        renderExpand,
         deriveActiveRightFixedColumn,
         deriveActiveLeftFixedColumn,
         doUpdateFilters,
@@ -292,6 +312,7 @@ export default defineComponent({
         doUpdateCheckedRowKeys,
         doCheckAll,
         doUncheckAll,
+        doUpdateExpandedRowKeys,
         handleTableHeaderScroll,
         handleTableBodyScroll
       })

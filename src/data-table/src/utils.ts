@@ -8,23 +8,23 @@ import type {
   SortState,
   CreateRowClassName,
   SelectionColInfo,
-  TableColumnGroup,
-  TableColumn
+  TableColumn,
+  ExpandColInfo
 } from './interface'
 
 export const selectionColWidth = 40
+export const expandColWidth = 40
 
-export function getColWidth (
-  col: TableColumnInfo | SelectionColInfo
-): number | undefined {
+export function getColWidth (col: TableColumn): number | undefined {
   if (col.type === 'selection') return selectionColWidth
+  if (col.type === 'expand') return expandColWidth
+  if ('children' in col) return undefined
   return col.width
 }
 
-export function getColKey (
-  col: TableColumnInfo | SelectionColInfo | TableColumnGroup
-): string | number {
+export function getColKey (col: TableColumn): string | number {
   if (col.type === 'selection') return '__n_selection__'
+  if (col.type === 'expand') return '__n_expand__'
   return col.key
 }
 
@@ -43,7 +43,7 @@ export function getFlagOfOrder (order: SortOrder): SortOrderFlag {
 }
 
 export function createCustomWidthStyle (
-  column: TableColumnInfo | SelectionColInfo
+  column: TableColumnInfo | SelectionColInfo | ExpandColInfo
 ): CSSProperties {
   return {
     width: pxfy(getColWidth(column))
