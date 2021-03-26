@@ -31,6 +31,7 @@ import { cB, c, cE, cM, cNotM, insideFormItem } from '../../../_utils/cssr'
 // --icon-color-disabled
 // --icon-alpha
 // --icon-alpha-disabled
+// ...form item vars
 export default c([
   cB('input', `
     max-width: 100%;
@@ -329,7 +330,9 @@ export default c([
             border: var(--border-focus-${status});
           `)
         ]),
-        cM('focus', [
+        cM('focus', {
+          backgroundColor: `var(--color-focus-${status})`
+        }, [
           cE('state-border', `
             box-shadow: var(--box-shadow-focus-${status});
             border: var(--border-focus-${status});

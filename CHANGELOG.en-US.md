@@ -6,6 +6,10 @@
 
 - `n-data-table` supports expanding rows.
 
+### Fixes
+
+- Fix `n-input` focused background color not correct in warning & error status in dark theme.
+
 ## 2.1.3
 
 ### Fixes

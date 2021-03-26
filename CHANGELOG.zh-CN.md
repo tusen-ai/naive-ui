@@ -6,6 +6,10 @@
 
 - `n-data-table` 支持行展开
 
+### Fixes
+
+- 修正 `n-input` 在暗色主题 focus 状态下的背景颜色在 warning 和 error 的状态不正确
+
 ## 2.1.3
 
 ### Fixes
