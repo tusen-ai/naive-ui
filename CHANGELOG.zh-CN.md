@@ -13,6 +13,10 @@
 - 修正 `n-select` 的 namespace 不正确
 - 修正 `n-cascader` 的 namespace 不正确
 
+### Refactors
+
+- 替换了 `n-empty` 的图标 & 增大了它的尺寸
+
 ## 2.1.3
 
 ### Fixes

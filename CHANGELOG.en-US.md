@@ -13,6 +13,10 @@
 - Fix `n-select`'s namespace not correct
 - Fix `n-cascader`'s namespace not correct
 
+### Refactors
+
+- Change `n-empty`'s icon and make it size larger
+
 ## 2.1.3
 
 ### Fixes

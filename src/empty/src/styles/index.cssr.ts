@@ -23,14 +23,14 @@ export default cB('empty', `
       color .3s var(--bezier);
   `),
   cE('description', `
-    margin-top: 4px;
+    margin-top: 8px;
     transition: color .3s var(--bezier);
     color: var(--text-color);
   `),
   cE('extra', `
     text-align: center;
     transition: color .3s var(--bezier);
-    margin-top: 16px;
+    margin-top: 12px;
     color: var(--extra-text-color);
   `)
 ])
