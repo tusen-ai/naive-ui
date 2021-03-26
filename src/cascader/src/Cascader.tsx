@@ -8,7 +8,8 @@ import {
   watch,
   toRef,
   reactive,
-  CSSProperties
+  CSSProperties,
+  isReactive
 } from 'vue'
 import { createTreeMate, SubtreeNotLoadedError } from 'treemate'
 import {
@@ -217,12 +218,14 @@ export default defineComponent({
     const optionHeightRef = computed(() => {
       return themeRef.value.self.optionHeight
     })
-    watch(props.options, (value, oldValue) => {
-      if (!(value === oldValue)) {
-        hoverKeyRef.value = null
-        keyboardKeyRef.value = null
-      }
-    })
+    if (isReactive(props.options)) {
+      watch(props.options, (value, oldValue) => {
+        if (!(value === oldValue)) {
+          hoverKeyRef.value = null
+          keyboardKeyRef.value = null
+        }
+      })
+    }
     function doUpdateValue (value: Value | null): void {
       const { 'onUpdate:value': onUpdateValue, onChange } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
