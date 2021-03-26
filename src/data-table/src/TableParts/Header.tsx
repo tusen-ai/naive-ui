@@ -13,14 +13,14 @@ import {
 } from '../utils'
 import {
   DataTableInjection,
-  ExpandColInfo,
-  SelectionColInfo,
+  TableExpandColumn,
+  TableSelectionColumn,
   TableColumnGroup,
-  TableColumnInfo
+  TableBaseColumn
 } from '../interface'
 
 function renderTitle (
-  column: ExpandColInfo | TableColumnInfo | TableColumnGroup
+  column: TableExpandColumn | TableBaseColumn | TableColumnGroup
 ): VNodeChild {
   return typeof column.title === 'function'
     ? column.title(column as any)
@@ -36,7 +36,7 @@ export default defineComponent({
     const NDataTable = inject<DataTableInjection>(
       'NDataTable'
     ) as DataTableInjection
-    function handleCheckboxUpdateChecked (column: SelectionColInfo): void {
+    function handleCheckboxUpdateChecked (column: TableSelectionColumn): void {
       if (NDataTable.someRowsChecked || NDataTable.allRowsChecked) {
         NDataTable.doUncheckAll(column)
       } else {
@@ -45,7 +45,7 @@ export default defineComponent({
     }
     function handleColHeaderClick (
       e: MouseEvent,
-      column: TableColumnInfo
+      column: TableBaseColumn
     ): void {
       if (happensIn(e, 'dataTableFilter')) return
       if (!isColumnSortable(column)) return
@@ -174,11 +174,11 @@ export default defineComponent({
                             renderTitle(column)
                           )}
                         {isColumnSortable(column) ? (
-                          <SortButton column={column as TableColumnInfo} />
+                          <SortButton column={column as TableBaseColumn} />
                         ) : null}
                         {isColumnFilterable(column) ? (
                           <FilterButton
-                            column={column as TableColumnInfo}
+                            column={column as TableBaseColumn}
                             options={column.filterOptions}
                           />
                         ) : null}

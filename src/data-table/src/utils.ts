@@ -2,14 +2,14 @@ import { CSSProperties } from 'vue'
 import { pxfy } from 'seemly'
 import type {
   SortOrder,
-  TableColumnInfo,
-  TableNode,
+  TableBaseColumn,
+  RowData,
   SortOrderFlag,
   SortState,
   CreateRowClassName,
-  SelectionColInfo,
+  TableSelectionColumn,
   TableColumn,
-  ExpandColInfo
+  TableExpandColumn
 } from './interface'
 
 export const selectionColWidth = 40
@@ -43,7 +43,7 @@ export function getFlagOfOrder (order: SortOrder): SortOrderFlag {
 }
 
 export function createCustomWidthStyle (
-  column: TableColumnInfo | SelectionColInfo | ExpandColInfo
+  column: TableBaseColumn | TableSelectionColumn | TableExpandColumn
 ): CSSProperties {
   return {
     width: pxfy(getColWidth(column))
@@ -51,7 +51,7 @@ export function createCustomWidthStyle (
 }
 
 export function createRowClassName (
-  row: TableNode,
+  row: RowData,
   index: number,
   rowClassName?: string | CreateRowClassName
 ): string {
@@ -62,7 +62,7 @@ export function createRowClassName (
 // for compatibility
 // If column.filterOptionValues or column.defaultFilterOptionValues is set, use
 // array value
-export function shouldUseArrayInSingleMode (column: TableColumnInfo): boolean {
+export function shouldUseArrayInSingleMode (column: TableBaseColumn): boolean {
   return (
     column.filterOptionValues !== undefined ||
     (column.filterOptionValue === undefined &&
@@ -89,7 +89,7 @@ function getNextOrderOf (order: SortOrder): SortOrder {
 }
 
 export function createNextSorter (
-  column: TableColumnInfo,
+  column: TableBaseColumn,
   currentSortState: SortState | null
 ): SortState | null {
   if (column.sorter === undefined) return null

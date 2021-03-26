@@ -2,9 +2,9 @@ import { h, VNode } from 'vue'
 import { CaretUpOutline, CaretDownOutline } from '@vicons/ionicons5'
 import { colors } from './theme-overrides-light'
 import { GRAY_COLOR_4 } from './vars'
-import type { FilterRender, SorterRender } from 'naive-ui'
+import type { DataTableRenderFilter, DataTableRenderSorter } from 'naive-ui'
 
-export const renderSorter: SorterRender = ({ order }) => {
+export const renderSorter: DataTableRenderSorter = ({ order }) => {
   const chevronStyle = {
     height: '16px',
     width: '16px',
@@ -40,7 +40,7 @@ export const renderSorter: SorterRender = ({ order }) => {
   )
 }
 
-export const renderFilter: FilterRender = ({ active, show }) => {
+export const renderFilter: DataTableRenderFilter = ({ active, show }) => {
   const fill = active || show ? colors.successColor : GRAY_COLOR_4
   return (
     <div

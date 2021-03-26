@@ -1,11 +1,11 @@
 import { defineComponent, PropType } from 'vue'
-import { FilterRender } from '../interface'
+import { RenderFilter } from '../interface'
 
 export default defineComponent({
-  name: 'DataTableFilterRender',
+  name: 'DataTableRenderFilter',
   props: {
     render: {
-      type: Function as PropType<FilterRender>,
+      type: Function as PropType<RenderFilter>,
       required: true
     },
     active: {

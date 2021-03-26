@@ -10,7 +10,7 @@ import {
   FilterOption,
   FilterOptionValue,
   FilterState,
-  TableColumnInfo
+  TableBaseColumn
 } from '../interface'
 import { useConfig } from '../../../_mixins'
 
@@ -28,7 +28,7 @@ export default defineComponent({
   name: 'DataTableFilterButton',
   props: {
     column: {
-      type: Object as PropType<TableColumnInfo>,
+      type: Object as PropType<TableBaseColumn>,
       required: true
     },
     options: {

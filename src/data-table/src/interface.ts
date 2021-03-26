@@ -12,13 +12,13 @@ export type RowKey = string | number
 
 export type SortOrderFlag = 1 | -1 | 0
 
-export type CreateRowKey = (row: TableNode) => RowKey
-export type CreateRowClassName = (row: TableNode, index: number) => string
+export type CreateRowKey = (row: RowData) => RowKey
+export type CreateRowClassName = (row: RowData, index: number) => string
 
-export type Sorter = (row1: TableNode, row2: TableNode) => number
+export type Sorter = (row1: RowData, row2: RowData) => number
 export type Filter = (
   filterOptionValue: FilterOptionValue,
-  row: TableNode
+  row: RowData
 ) => boolean
 
 export interface FilterOption {
@@ -26,19 +26,19 @@ export interface FilterOption {
   value: FilterOptionValue
 }
 
-export interface TableNode {
+export interface RowData {
   [key: string]: unknown
-  children?: TableNode[]
+  children?: RowData[]
 }
 
-export type TmNode = TreeNode<TableNode>
+export type TmNode = TreeNode<RowData>
 
 // for compat may add null
 export type SortOrder = 'ascend' | 'descend' | false
 
 export type Ellipsis = boolean | EllipsisProps
 
-export interface CommonColInfo {
+export interface CommonColumnInfo {
   fixed?: 'left' | 'right'
   width?: number
   className?: string
@@ -48,9 +48,11 @@ export interface CommonColInfo {
 
 export type TableColumnTitle =
   | string
-  | ((column: TableColumnInfo) => VNodeChild)
+  | ((column: TableBaseColumn) => VNodeChild)
 
-export type ExpandColTitle = string | ((column: ExpandColInfo) => VNodeChild)
+export type TableExpandColumnTitle =
+  | string
+  | ((column: TableExpandColumn) => VNodeChild)
 
 export type TableColumnGroupTitle =
   | string
@@ -60,13 +62,13 @@ export type TableColumnGroup = {
   title?: TableColumnGroupTitle
   type?: never
   key: ColumnKey
-  children: TableColumnInfo[]
+  children: TableBaseColumn[]
 
   // to suppress type error in table header
   filterOptions?: never
-} & CommonColInfo
+} & CommonColumnInfo
 
-export type TableColumnInfo = {
+export type TableBaseColumn = {
   title?: TableColumnTitle
   titleColSpan?: number
   // for compat maybe default
@@ -87,17 +89,17 @@ export type TableColumnInfo = {
   defaultFilterOptionValue?: FilterOptionValue | null
   filterMultiple?: boolean
 
-  render?: (rowData: TableNode, rowIndex: number) => VNodeChild
-  renderFilterMenu?: FilterMenuRender
-  renderSorter?: SorterRender
-  renderFilter?: FilterRender
-  colSpan?: (rowData: TableNode, rowIndex: number) => number
-  rowSpan?: (rowData: TableNode, rowIndex: number) => number
-} & CommonColInfo
+  render?: (rowData: RowData, rowIndex: number) => VNodeChild
+  renderFilterMenu?: RenderFilterMenu
+  renderSorter?: RenderSorter
+  renderFilter?: RenderFilter
+  colSpan?: (rowData: RowData, rowIndex: number) => number
+  rowSpan?: (rowData: RowData, rowIndex: number) => number
+} & CommonColumnInfo
 
-export type SelectionColInfo = {
+export type TableSelectionColumn = {
   type: 'selection'
-  disabled?: (row: TableNode) => boolean
+  disabled?: (row: RowData) => boolean
 
   // to suppress type error in utils
   sorter?: never
@@ -107,22 +109,22 @@ export type SelectionColInfo = {
   filterOptionValue?: never
   colSpan?: never
   rowSpan?: never
-} & CommonColInfo
+} & CommonColumnInfo
 
-export type RenderExpand = (row: TableNode, index: number) => VNodeChild
-export type Expandable = (row: TableNode, index: number) => boolean
-export interface ExpandColInfo extends Omit<SelectionColInfo, 'type'> {
+export type RenderExpand = (row: RowData, index: number) => VNodeChild
+export type Expandable = (row: RowData, index: number) => boolean
+export interface TableExpandColumn extends Omit<TableSelectionColumn, 'type'> {
   type: 'expand'
-  title?: ExpandColTitle
+  title?: TableExpandColumnTitle
   renderExpand: RenderExpand
   expandable?: Expandable
 }
 
 export type TableColumn =
   | TableColumnGroup
-  | TableColumnInfo
-  | SelectionColInfo
-  | ExpandColInfo
+  | TableBaseColumn
+  | TableSelectionColumn
+  | TableExpandColumn
 export type TableColumns = TableColumn[]
 
 export interface DataTableInjection {
@@ -130,7 +132,7 @@ export interface DataTableInjection {
   scrollX?: string | number
   rows: RowItem[][]
   cols: ColItem[]
-  treeMate: TreeMate<TableNode>
+  treeMate: TreeMate<RowData>
   paginatedData: TmNode[]
   leftFixedColumns: TableColumns
   rightFixedColumns: TableColumns
@@ -154,12 +156,12 @@ export interface DataTableInjection {
   rowKey: CreateRowKey | undefined
   doUpdateFilters: (
     filters: FilterState,
-    sourceColumn?: TableColumnInfo
+    sourceColumn?: TableBaseColumn
   ) => void
   doUpdateSorter: (sorter: SortState | null) => void
   doUpdateCheckedRowKeys: (keys: RowKey[]) => void
-  doUncheckAll: (column: SelectionColInfo) => void
-  doCheckAll: (column: SelectionColInfo) => void
+  doUncheckAll: (column: TableSelectionColumn) => void
+  doCheckAll: (column: TableSelectionColumn) => void
   handleTableHeaderScroll: (e: Event) => void
   handleTableBodyScroll: (e: Event) => void
   deriveActiveRightFixedColumn: (
@@ -174,21 +176,21 @@ export interface MainTableInjection {
   rightActiveFixedColKey: ColumnKey | null
 }
 
-export type FilterRender = (props: {
+export type RenderFilter = (props: {
   active: boolean
   show: boolean
 }) => VNodeChild
 
-export type SorterRender = (props: { order: SortOrder | false }) => VNodeChild
+export type RenderSorter = (props: { order: SortOrder | false }) => VNodeChild
 
-export type FilterMenuRender = () => VNodeChild
+export type RenderFilterMenu = () => VNodeChild
 
 export type OnUpdateExpandedRowKeys = (keys: RowKey[]) => void
 export type OnUpdateCheckedRowKeys = (keys: RowKey[]) => void
 export type OnUpdateSorter = (sortState: SortState | null) => void
 export type OnUpdateFilters = (
   filterState: FilterState,
-  sourceColumn?: TableColumnInfo
+  sourceColumn?: TableBaseColumn
 ) => void
 
 export interface SortState {
@@ -227,7 +229,7 @@ export type OnFilterMenuChangeImpl = (
   value: FilterOptionValue[] | FilterOptionValue | null
 ) => void
 
-export interface DataTableRef {
+export interface DataTableInst {
   filter: (filters: FilterState | null) => void
   filters: (filters: FilterState | null) => void
   clearFilter: () => void

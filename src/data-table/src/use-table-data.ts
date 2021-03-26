@@ -9,11 +9,11 @@ import type {
   FilterState,
   SortOrder,
   SortState,
-  TableColumnInfo,
-  SelectionColInfo,
-  TableNode,
+  TableBaseColumn,
+  TableSelectionColumn,
+  RowData,
   TmNode,
-  ExpandColInfo
+  TableExpandColumn
 } from './interface'
 import { createShallowClonedObject, getFlagOfOrder } from './utils'
 import { PaginationProps } from '../../pagination/src/Pagination'
@@ -28,12 +28,12 @@ export function useTableData (
     dataRelatedCols
   }: {
     dataRelatedCols: ComputedRef<
-    Array<SelectionColInfo | TableColumnInfo | ExpandColInfo>
+    Array<TableSelectionColumn | TableBaseColumn | TableExpandColumn>
     >
   }
 ) {
   const treeMateRef = computed(() =>
-    createTreeMate<TableNode>(props.data, {
+    createTreeMate<RowData>(props.data, {
       getKey: props.rowKey
     })
   )
@@ -111,9 +111,9 @@ export function useTableData (
     )
     // if multiple column is controlled sortable, then we need to find a column with active sortOrder
     const columnToSort:
-    | TableColumnInfo
-    | undefined = (columnsWithControlledSortOrder as TableColumnInfo[]).filter(
-      (col: TableColumnInfo) => col.sortOrder !== false
+    | TableBaseColumn
+    | undefined = (columnsWithControlledSortOrder as TableBaseColumn[]).filter(
+      (col: TableBaseColumn) => col.sortOrder !== false
     )[0]
     if (columnToSort) {
       return {
@@ -156,13 +156,13 @@ export function useTableData (
     const mergedFilterState = mergedFilterStateRef.value
     const { columns } = props
     function createDefaultFilter (columnKey: ColumnKey): Filter {
-      return (filterOptionValue: FilterOptionValue, row: TableNode) =>
+      return (filterOptionValue: FilterOptionValue, row: RowData) =>
         !!~String(row[columnKey]).indexOf(String(filterOptionValue))
     }
     const {
       value: { treeNodes: data }
     } = treeMateRef
-    const columnEntries: Array<[ColumnKey, TableColumnInfo]> = []
+    const columnEntries: Array<[ColumnKey, TableBaseColumn]> = []
     columns.forEach((column) => {
       if (
         column.type === 'selection' ||
@@ -231,7 +231,7 @@ export function useTableData (
       const order = activeSorter.order
       const sorter =
         activeSorter.sorter === undefined || activeSorter.sorter === 'default'
-          ? (row1: TableNode, row2: TableNode) => {
+          ? (row1: RowData, row2: RowData) => {
             const value1 = row1[columnKey]
             const value2 = row2[columnKey]
             if (typeof value1 === 'number' && typeof value2 === 'number') {
@@ -320,7 +320,7 @@ export function useTableData (
   }
   function doUpdateFilters (
     filters: FilterState,
-    sourceColumn?: TableColumnInfo
+    sourceColumn?: TableBaseColumn
   ): void {
     const { 'onUpdate:filters': onUpdateFilters, onFiltersChange } = props
     if (onUpdateFilters) call(onUpdateFilters, filters, sourceColumn)

@@ -10,14 +10,14 @@ import {
   FilterOptionValue,
   OnFilterMenuChange,
   OnFilterMenuChangeImpl,
-  TableColumnInfo
+  TableBaseColumn
 } from '../interface'
 
 export default defineComponent({
   name: 'DataTableFilterMenu',
   props: {
     column: {
-      type: Object as PropType<TableColumnInfo>,
+      type: Object as PropType<TableBaseColumn>,
       required: true
     },
     radioGroupName: {

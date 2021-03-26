@@ -2,14 +2,14 @@ import { defineComponent, PropType, h, computed, inject } from 'vue'
 import { ArrowDownIcon } from '../../../_internal/icons'
 import { NBaseIcon } from '../../../_internal'
 import RenderSorter from './RenderSorter'
-import { DataTableInjection, TableColumnInfo } from '../interface'
+import { DataTableInjection, TableBaseColumn } from '../interface'
 import { useConfig } from '../../../_mixins'
 
 export default defineComponent({
   name: 'SortIcon',
   props: {
     column: {
-      type: Object as PropType<TableColumnInfo>,
+      type: Object as PropType<TableBaseColumn>,
       required: true
     }
   },

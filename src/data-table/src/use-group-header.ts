@@ -1,10 +1,10 @@
 import { CSSProperties, ComputedRef, computed } from 'vue'
 import { DataTableProps } from './DataTable'
 import type {
-  ExpandColInfo,
-  SelectionColInfo,
+  TableExpandColumn,
+  TableSelectionColumn,
   TableColumn,
-  TableColumnInfo,
+  TableBaseColumn,
   TableColumns
 } from './interface'
 import { getColKey, createCustomWidthStyle } from './utils'
@@ -18,7 +18,7 @@ export interface RowItem {
 export interface ColItem {
   key: string | number
   style: CSSProperties
-  column: SelectionColInfo | ExpandColInfo | TableColumnInfo
+  column: TableSelectionColumn | TableExpandColumn | TableBaseColumn
 }
 
 type RowItemMap = WeakMap<TableColumn, RowItem>
@@ -27,12 +27,14 @@ function getRowsAndCols (
 ): {
     rows: RowItem[][]
     cols: ColItem[]
-    dataRelatedCols: Array<SelectionColInfo | TableColumnInfo | ExpandColInfo>
+    dataRelatedCols: Array<
+    TableSelectionColumn | TableBaseColumn | TableExpandColumn
+    >
   } {
   const rows: RowItem[][] = []
   const cols: ColItem[] = []
   const dataRelatedCols: Array<
-  SelectionColInfo | TableColumnInfo | ExpandColInfo
+  TableSelectionColumn | TableBaseColumn | TableExpandColumn
   > = []
   const rowItemMap: RowItemMap = new WeakMap()
   let maxDepth = -1
@@ -120,7 +122,7 @@ export function useGroupHeader (
     rows: ComputedRef<RowItem[][]>
     cols: ComputedRef<ColItem[]>
     dataRelatedCols: ComputedRef<
-    Array<SelectionColInfo | TableColumnInfo | ExpandColInfo>
+    Array<TableSelectionColumn | TableBaseColumn | TableExpandColumn>
     >
   } {
   const rowsAndCols = computed(() => getRowsAndCols(props.columns))

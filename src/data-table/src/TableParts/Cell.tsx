@@ -1,14 +1,14 @@
 import { defineComponent, PropType, VNodeChild, h } from 'vue'
 import type { MergedTheme } from '../../../_mixins'
 import { NEllipsis } from '../../../ellipsis'
-import { TableColumnInfo, TableNode } from '../interface'
+import { TableBaseColumn, RowData } from '../interface'
 import type { DataTableTheme } from '../../styles'
 
 export default defineComponent({
   name: 'DataTableCell',
   props: {
     row: {
-      type: Object as PropType<TableNode>,
+      type: Object as PropType<RowData>,
       required: true
     },
     index: {
@@ -16,7 +16,7 @@ export default defineComponent({
       required: true
     },
     column: {
-      type: Object as PropType<TableColumnInfo>,
+      type: Object as PropType<TableBaseColumn>,
       required: true
     },
     mergedTheme: {

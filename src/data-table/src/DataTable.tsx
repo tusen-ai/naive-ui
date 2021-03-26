@@ -29,11 +29,11 @@ import {
   OnUpdateSorter,
   RowKey,
   TableColumns,
-  TableNode,
+  RowData,
   OnUpdateFilters,
   MainTableRef,
   DataTableInjection,
-  DataTableRef,
+  DataTableInst,
   OnUpdateExpandedRowKeys
 } from './interface'
 import style from './styles/index.cssr'
@@ -53,7 +53,7 @@ export const dataTableProps = {
     default: () => []
   },
   data: {
-    type: Array as PropType<TableNode[]>,
+    type: Array as PropType<RowData[]>,
     default: () => []
   },
   rowClassName: [String, Function] as PropType<string | CreateRowClassName>,
@@ -317,7 +317,7 @@ export default defineComponent({
         handleTableBodyScroll
       })
     )
-    const exposedMethods: DataTableRef = {
+    const exposedMethods: DataTableInst = {
       filter,
       filters,
       clearFilter,

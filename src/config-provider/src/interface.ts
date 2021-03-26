@@ -74,7 +74,7 @@ import { Size as TimePickerSize } from '../../time-picker/src/interface'
 import { Size as InputSize } from '../../input/src/interface'
 import { Size as SelectSize } from '../../select/src/interface'
 import { Size as ButtonSize } from '../../button/src/interface'
-import { FilterRender, SorterRender } from '../../data-table/src/interface'
+import { DataTableRenderFilter, DataTableRenderSorter } from '../../data-table'
 import { IconPlacement } from '../../dialog/src/interface'
 
 interface GlobalThemeWithoutCommon {
@@ -189,8 +189,8 @@ export interface ComponentProps {
     iconPlacement?: IconPlacement
   }
   DataTable?: {
-    renderFilter?: FilterRender
-    renderSorter?: SorterRender
+    renderFilter?: DataTableRenderFilter
+    renderSorter?: DataTableRenderSorter
   }
   DynamicInput?: {
     buttonSize?: ButtonSize
