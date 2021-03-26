@@ -14,7 +14,7 @@
   :model="model"
   :rules="rules"
   :size="size"
-  ref="form"
+  ref="formRef"
   label-placement="top"
 >
   <n-row :gutter="24">
@@ -150,12 +150,17 @@
 ```
 
 ```js
-export default {
-  inject: ['message'],
-  data () {
+import { defineComponent, ref } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const formRef = ref(null)
+    const message = useMessage()
     return {
-      size: 'medium',
-      model: {
+      formRef,
+      size: ref('medium'),
+      model: ref({
         inputValue: null,
         textareaValue: null,
         selectValue: null,
@@ -173,7 +178,7 @@ export default {
         timePickerValue: null,
         sliderValue: 0,
         transferValue: null
-      },
+      }),
       generalOptions: ['groode', 'veli good', 'emazing', 'lidiculous'].map(
         (v) => ({
           label: v,
@@ -267,21 +272,19 @@ export default {
           trigger: 'change',
           message: 'Please input transferValue'
         }
+      },
+      handleValidateButtonClick (e) {
+        e.preventDefault()
+        formRef.value.validate((errors) => {
+          if (!errors) {
+            message.success('Valid')
+          } else {
+            console.log(errors)
+            message.error('Invalid')
+          }
+        })
       }
     }
-  },
-  methods: {
-    handleValidateButtonClick (e) {
-      e.preventDefault()
-      this.$refs.form.validate((errors) => {
-        if (!errors) {
-          this.message.success('Valid')
-        } else {
-          console.log(errors)
-          this.message.error('Invalid')
-        }
-      })
-    }
   }
-}
+})
 ```

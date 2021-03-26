@@ -2,7 +2,7 @@ import { h, ref, defineComponent } from 'vue'
 import NCol, { colProps, colPropKeys } from '../../legacy-grid/src/Col'
 import { keep, keysOf } from '../../_utils'
 import NFormItem, { formItemProps, formItemPropKeys } from './FormItem'
-import { FormItemRef } from './interface'
+import { FormItemInst } from './interface'
 
 export const formItemColProps = {
   ...colProps,
@@ -15,14 +15,14 @@ export default defineComponent({
   name: 'FormItemCol',
   props: formItemColProps,
   setup () {
-    const formItemInstRef = ref<FormItemRef | null>(null)
-    const validate: FormItemRef['validate'] = ((...args: any[]) => {
+    const formItemInstRef = ref<FormItemInst | null>(null)
+    const validate: FormItemInst['validate'] = ((...args: any[]) => {
       const { value } = formItemInstRef
       if (value) {
         return (value.validate as any)(...args)
       }
     }) as any
-    const restoreValidation: FormItemRef['restoreValidation'] = () => {
+    const restoreValidation: FormItemInst['restoreValidation'] = () => {
       const { value } = formItemInstRef
       if (value) {
         return value.restoreValidation()

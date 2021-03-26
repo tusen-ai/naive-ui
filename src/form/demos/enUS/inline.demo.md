@@ -18,7 +18,7 @@ A Example of inline form.
   :model="formValue"
   :rules="rules"
   :size="size"
-  ref="form"
+  ref="formRef"
 >
   <n-form-item label="Name" path="user.name">
     <n-input v-model:value="formValue.user.name" placeholder="Input Name" />
@@ -40,18 +40,23 @@ A Example of inline form.
 ```
 
 ```js
-export default {
-  inject: ['message'],
-  data () {
+import { defineComponent, ref } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const formRef = ref(null)
+    const message = useMessage()
     return {
-      size: 'medium',
-      formValue: {
+      formRef,
+      size: ref('medium'),
+      formValue: ref({
         user: {
           name: '',
           age: ''
         },
         phone: ''
-      },
+      }),
       rules: {
         user: {
           name: {
@@ -70,21 +75,19 @@ export default {
           message: 'Please input your number',
           trigger: ['input']
         }
+      },
+      handleValidateClick (e) {
+        e.preventDefault()
+        formRef.value.validate((errors) => {
+          if (!errors) {
+            message.success('Valid')
+          } else {
+            console.log(errors)
+            message.error('Invalid')
+          }
+        })
       }
     }
-  },
-  methods: {
-    handleValidateClick (e) {
-      e.preventDefault()
-      this.$refs.form.validate((errors) => {
-        if (!errors) {
-          this.message.success('Valid')
-        } else {
-          console.log(errors)
-          this.message.error('Invalid')
-        }
-      })
-    }
   }
-}
+})
 ```

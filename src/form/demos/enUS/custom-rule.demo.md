@@ -3,7 +3,7 @@
 Sometimes builtin triggers don't meet you demand. You can custom you valiation by setting custom trigger in rules and manually trigger the validation.
 
 ```html
-<n-form :model="model" ref="form" :rules="rules">
+<n-form :model="model" ref="formRef" :rules="rules">
   <n-form-item-row path="age" label="Age">
     <n-input v-model:value="model.age" @keydown.enter.prevent />
   </n-form-item-row>
@@ -19,7 +19,7 @@ Sometimes builtin triggers don't meet you demand. You can custom you valiation b
     first
     path="reenteredPassword"
     label="Re-enter Password"
-    ref="reenteredPassword"
+    ref="rPasswordFormItemRef"
   >
     <n-input
       :disabled="!model.password"
@@ -50,15 +50,33 @@ Sometimes builtin triggers don't meet you demand. You can custom you valiation b
 ```
 
 ```js
-export default {
-  inject: ['message'],
-  data () {
+import { defineComponent, ref } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const formRef = ref(null)
+    const rPasswordFormItemRef = ref(null)
+    const message = useMessage()
+    const modelRef = ref({
+      age: null,
+      password: null,
+      reenteredPassword: null
+    })
+    function validatePasswordStartWith (rule, value) {
+      return (
+        modelRef.value.password &&
+        modelRef.value.password.startsWith(value) &&
+        modelRef.value.password.length >= value.length
+      )
+    }
+    function validatePasswordSame (rule, value) {
+      return value === modelRef.value.password
+    }
     return {
-      model: {
-        age: null,
-        password: null,
-        reenteredPassword: null
-      },
+      formRef,
+      rPasswordFormItemRef,
+      model: modelRef,
       rules: {
         age: [
           {
@@ -89,46 +107,34 @@ export default {
             trigger: ['input', 'blur']
           },
           {
-            validator: this.validatePasswordStartWith,
+            validator: validatePasswordStartWith,
             message: 'Password is not same as re-entered password!',
             trigger: 'input'
           },
           {
-            validator: this.validatePasswordSame,
+            validator: validatePasswordSame,
             message: 'Password is not same as re-entered password!',
             trigger: ['blur', 'password-input']
           }
         ]
-      }
-    }
-  },
-  methods: {
-    handlePasswordInput () {
-      if (this.model.reenteredPassword) {
-        this.$refs.reenteredPassword.validate({ trigger: 'password-input' })
-      }
-    },
-    handleValidateButtonClick (e) {
-      e.preventDefault()
-      this.$refs.form.validate((errors) => {
-        if (!errors) {
-          this.message.success('Valid')
-        } else {
-          console.log(errors)
-          this.message.error('Invalid')
+      },
+      handlePasswordInput () {
+        if (modelRef.value.reenteredPassword) {
+          rPasswordFormItemRef.value.validate({ trigger: 'password-input' })
         }
-      })
-    },
-    validatePasswordStartWith (rule, value) {
-      return (
-        this.model.password &&
-        this.model.password.startsWith(value) &&
-        this.model.password.length >= value.length
-      )
-    },
-    validatePasswordSame (rule, value) {
-      return value === this.model.password
+      },
+      handleValidateButtonClick (e) {
+        e.preventDefault()
+        formRef.value.validate((errors) => {
+          if (!errors) {
+            message.success('Valid')
+          } else {
+            console.log(errors)
+            message.error('Invalid')
+          }
+        })
+      }
     }
   }
-}
+})
 ```

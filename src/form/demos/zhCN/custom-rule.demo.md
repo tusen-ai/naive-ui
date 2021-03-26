@@ -50,15 +50,33 @@
 ```
 
 ```js
-export default {
-  inject: ['message'],
-  data () {
+import { defineComponent, ref } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const formRef = ref(null)
+    const rPasswordFormItemRef = ref(null)
+    const message = useMessage()
+    const modelRef = ref({
+      age: null,
+      password: null,
+      reenteredPassword: null
+    })
+    function validatePasswordStartWith (rule, value) {
+      return (
+        modelRef.value.password &&
+        modelRef.value.password.startsWith(value) &&
+        modelRef.value.password.length >= value.length
+      )
+    }
+    function validatePasswordSame (rule, value) {
+      return value === modelRef.value.password
+    }
     return {
-      model: {
-        age: null,
-        password: null,
-        reenteredPassword: null
-      },
+      formRef,
+      rPasswordFormItemRef,
+      model: modelRef,
       rules: {
         age: [
           {
@@ -89,46 +107,34 @@ export default {
             trigger: ['input', 'blur']
           },
           {
-            validator: this.validatePasswordStartWith,
+            validator: validatePasswordStartWith,
             message: '两次密码输入不一致',
             trigger: 'input'
           },
           {
-            validator: this.validatePasswordSame,
+            validator: validatePasswordSame,
             message: '两次密码输入不一致',
             trigger: ['blur', 'password-input']
           }
         ]
-      }
-    }
-  },
-  methods: {
-    handlePasswordInput () {
-      if (this.model.reenteredPassword) {
-        this.$refs.reenteredPassword.validate({ trigger: 'password-input' })
-      }
-    },
-    handleValidateButtonClick (e) {
-      e.preventDefault()
-      this.$refs.form.validate((errors) => {
-        if (!errors) {
-          this.message.success('验证成功')
-        } else {
-          console.log(errors)
-          this.message.error('验证失败')
+      },
+      handlePasswordInput () {
+        if (modelRef.value.reenteredPassword) {
+          rPasswordFormItemRef.value.validate({ trigger: 'password-input' })
         }
-      })
-    },
-    validatePasswordStartWith (rule, value) {
-      return (
-        this.model.password &&
-        this.model.password.startsWith(value) &&
-        this.model.password.length >= value.length
-      )
-    },
-    validatePasswordSame (rule, value) {
-      return value === this.model.password
+      },
+      handleValidateButtonClick (e) {
+        e.preventDefault()
+        formRef.value.validate((errors) => {
+          if (!errors) {
+            message.success('验证成功')
+          } else {
+            console.log(errors)
+            message.error('验证失败')
+          }
+        })
+      }
     }
   }
-}
+})
 ```

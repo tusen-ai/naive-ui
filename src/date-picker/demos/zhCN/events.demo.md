@@ -35,42 +35,43 @@
 ```
 
 ```js
-export default {
-  inject: ['message'],
-  data () {
+import { defineComponent, ref } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const message = useMessage()
     return {
-      datetime: 1183135260000,
-      date: null,
-      datetimerange: null,
-      daterange: null,
-      disabled: false
-    }
-  },
-  methods: {
-    onBlur1 () {
-      this.message.info('Blur-1')
-    },
-    onChange1 (v) {
-      this.message.info('Change-1 ' + v)
-    },
-    onBlur2 () {
-      this.message.error('Blur-2')
-    },
-    onChange2 (v) {
-      this.message.error('Change-2 ' + v)
-    },
-    onBlur3 () {
-      this.message.warning('Blur-3')
-    },
-    onChange3 (v) {
-      this.message.warning('Change-3 ' + v)
-    },
-    onBlur4 () {
-      this.message.success('Blur-4')
-    },
-    onChange4 (v) {
-      this.message.success('Change-4 ' + v)
+      datetime: ref(1183135260000),
+      date: ref(null),
+      datetimerange: ref(null),
+      daterange: ref(null),
+      disabled: ref(false),
+      onBlur1 () {
+        message.info('Blur-1')
+      },
+      onChange1 (v) {
+        message.info('Change-1 ' + v)
+      },
+      onBlur2 () {
+        message.error('Blur-2')
+      },
+      onChange2 (v) {
+        message.error('Change-2 ' + v)
+      },
+      onBlur3 () {
+        message.warning('Blur-3')
+      },
+      onChange3 (v) {
+        message.warning('Change-3 ' + v)
+      },
+      onBlur4 () {
+        message.success('Blur-4')
+      },
+      onChange4 (v) {
+        message.success('Change-4 ' + v)
+      }
     }
   }
-}
+})
 ```

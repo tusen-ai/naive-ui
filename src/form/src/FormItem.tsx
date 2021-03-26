@@ -39,7 +39,7 @@ import {
   ValidationTrigger,
   FormItemRuleValidator,
   FormItemValidateOptions,
-  FormItemRef,
+  FormItemInst,
   FormItemInternalValidate
 } from './interface'
 
@@ -305,7 +305,7 @@ export default defineComponent({
       handleContentFocus,
       handleContentInput
     })
-    const exposedRef: FormItemRef = {
+    const exposedRef: FormItemInst = {
       validate,
       restoreValidation,
       internalValidate

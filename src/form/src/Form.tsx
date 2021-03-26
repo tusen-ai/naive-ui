@@ -8,11 +8,12 @@ import style from './styles/form.cssr'
 import {
   ApplyRule,
   FormInjection,
-  FormItemRef,
+  FormItemInst,
   FormRules,
   FormValidateCallback,
   LabelAlign,
-  LabelPlacement
+  LabelPlacement,
+  FormInst
 } from './interface'
 import { keysOf } from '../../_utils'
 
@@ -59,7 +60,7 @@ export default defineComponent({
   setup (props) {
     useTheme('Form', 'Form', style, formLight, props)
     // from path to form-item
-    const formItems: Record<string, FormItemRef[]> = {}
+    const formItems: Record<string, FormItemInst[]> = {}
     async function validate (
       validateCallback?: FormValidateCallback,
       shouldRuleBeApplied: ApplyRule = () => true
@@ -105,10 +106,11 @@ export default defineComponent({
     }
     provide<FormInjection>('NForm', props)
     provide('NFormRules', { formItems })
-    return {
+    const formExposedMethod: FormInst = {
       validate,
       restoreValidation
     }
+    return formExposedMethod
   },
   render () {
     return (

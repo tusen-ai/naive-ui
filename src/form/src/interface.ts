@@ -36,15 +36,15 @@ export type FormItemValidate = ((
 ) => Promise<void>) &
 ((trigger?: string, callback?: ValidateCallback) => Promise<void>)
 
-export interface FormItemRef {
+export interface FormItemInst {
   validate: FormItemValidate
   restoreValidation: () => void
   path?: string
   internalValidate: FormItemInternalValidate
 }
 
-export type FormItemColRef = FormItemRef
-export type FormItemRowRef = FormItemRef
+export type FormItemColRef = FormItemInst
+export type FormItemRowRef = FormItemInst
 
 export type FormInjection = FormProps
 
@@ -61,6 +61,7 @@ export type FormValidateCallback = (errors?: ErrorList[]) => void
 export type FormValidate = ((callback?: FormValidateCallback) => void) &
 (() => Promise<void>)
 
-export interface FormRef {
+export interface FormInst {
   validate: FormValidate
+  restoreValidation: () => void
 }

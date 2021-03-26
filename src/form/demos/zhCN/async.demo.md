@@ -1,7 +1,13 @@
 # 异步验证
 
 ```html
-<n-form inline :label-width="80" :model="formValue" :rules="rules" ref="form">
+<n-form
+  inline
+  :label-width="80"
+  :model="formValue"
+  :rules="rules"
+  ref="formRef"
+>
   <n-form-item label="Name" path="user.name">
     <n-input v-model:value="formValue.user.name" placeholder="Input Name" />
   </n-form-item>
@@ -28,18 +34,23 @@
 ```
 
 ```js
-export default {
-  inject: ['message'],
-  data () {
+import { defineComponent, ref } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const formRef = ref()
+    const message = useMessage()
     return {
-      formValue: {
+      formRef,
+      formValue: ref({
         user: {
           name: 'name',
           age: '15',
           address: '0'
         },
         phone: '1251550092'
-      },
+      }),
       rules: {
         user: {
           name: {
@@ -78,25 +89,23 @@ export default {
             return /^[1]+[3,8]+\\d{9}$/.test(value)
           }
         }
+      },
+      handleValidateClick (e) {
+        e.preventDefault()
+        const messageReactive = message.loading('Verifying', {
+          duration: 0
+        })
+        formRef.value.validate((errors) => {
+          if (!errors) {
+            message.success('Valid')
+          } else {
+            message.error('Invalid')
+            console.log('errors', errors)
+          }
+          messageReactive.destroy()
+        })
       }
     }
-  },
-  methods: {
-    handleValidateClick (e) {
-      e.preventDefault()
-      const message = this.message.loading('Verifying', {
-        duration: 0
-      })
-      this.$refs.form.validate((errors) => {
-        if (!errors) {
-          this.message.success('Valid')
-        } else {
-          this.message.error('Invalid')
-          console.log('errors', errors)
-        }
-        message.destroy()
-      })
-    }
   }
-}
+})
 ```
