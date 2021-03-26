@@ -127,6 +127,7 @@ export default c([
       visibility: hidden;
       position: static;
       white-space: nowrap;
+      pointer-events: none;
     `),
     cE('input-el', {
       padding: 0,
@@ -148,11 +149,13 @@ export default c([
     cM('textarea', {
       width: '100%'
     }, [
-      cM('resizable', `
-        resize: vertical;
-        overflow: auto;
-        min-height: var(--height);
-      `),
+      cM('resizable', [
+        cB('input-wrapper', `
+          resize: vertical;
+          overflow: auto;
+          min-height: var(--height);
+        `)
+      ]),
       cE('textarea-el, textarea-mirror, placeholder', `
         height: 100%;
         padding-left: 0;
@@ -167,6 +170,7 @@ export default c([
         resize: none;
       `),
       cE('textarea-mirror', `
+        pointer-events: none;
         overflow: hidden;
         visibility: hidden;
         position: static;

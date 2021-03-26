@@ -12,6 +12,8 @@
 - Fix `n-input` caret color not correct in warning & error status
 - Fix `n-select`'s namespace not correct
 - Fix `n-cascader`'s namespace not correct
+- Fix `n-input` in textarea mode can't select text
+- Fix `n-input` in textarea mode has no box-shadow
 
 ### Refactors
 

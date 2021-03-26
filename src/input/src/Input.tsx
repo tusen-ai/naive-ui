@@ -21,7 +21,12 @@ import { call, createKey } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import { inputLight } from '../styles'
 import type { InputTheme } from '../styles'
-import type { OnUpdateValue, OnUpdateValueImpl, Size } from './interface'
+import type {
+  OnUpdateValue,
+  OnUpdateValueImpl,
+  Size,
+  InputWrappedRef
+} from './interface'
 import style from './styles/input.cssr'
 
 export default defineComponent({
@@ -144,11 +149,11 @@ export default defineComponent({
     const themeRef = useTheme('Input', 'Input', style, inputLight, props)
     // dom refs
     const wrapperElRef = ref<HTMLElement | null>(null)
-    const textareaElRef = ref<HTMLElement | null>(null)
+    const textareaElRef = ref<HTMLTextAreaElement | null>(null)
     const textareaMirrorElRef = ref<HTMLElement | null>(null)
     const inputMirrorElRef = ref<HTMLElement | null>(null)
-    const inputElRef = ref<HTMLElement | null>(null)
-    const inputEl2Ref = ref<HTMLElement | null>(null)
+    const inputElRef = ref<HTMLInputElement | null>(null)
+    const inputEl2Ref = ref<HTMLInputElement | null>(null)
     // local
     const { locale } = useLocale('Input')
     // value
@@ -465,7 +470,31 @@ export default defineComponent({
     function handleMouseDown (e: MouseEvent): void {
       const { onMousedown } = props
       if (onMousedown) onMousedown(e)
-      if ((e.target as HTMLElement).tagName !== 'INPUT') {
+      const { tagName } = e.target as HTMLElement
+      if (tagName !== 'INPUT' && tagName !== 'TEXTAREA') {
+        if (props.resizable) {
+          const { value: wrapperEl } = wrapperElRef
+          if (wrapperEl) {
+            const {
+              left,
+              top,
+              width,
+              height
+            } = wrapperEl.getBoundingClientRect()
+            const resizeHandleSize = 14
+            if (
+              left + width - resizeHandleSize < e.clientX &&
+              e.clientY < left + width &&
+              top + height - resizeHandleSize < e.clientY &&
+              e.clientY < top + height
+            ) {
+              // touching resize handle, just let it go.
+              // resize won't take focus, maybe there is a better way to do this.
+              // hope someone can figure out a better solution
+              return
+            }
+          }
+        }
         e.preventDefault()
         if (!focusedRef.value) {
           focus()
@@ -562,7 +591,20 @@ export default defineComponent({
         }
       }
     }
+
+    const exposedProps: InputWrappedRef = {
+      wrapperElRef,
+      inputElRef,
+      textareaElRef,
+      isCompositing: isComposingRef,
+      focus,
+      blur,
+      deactivate,
+      activate
+    }
+
     return {
+      ...exposedProps,
       // DOM ref
       wrapperElRef,
       inputElRef,
@@ -583,10 +625,6 @@ export default defineComponent({
       mergedSize: mergedSizeRef,
       textDecorationStyle: textDecorationStyleRef,
       // methods
-      focus,
-      blur,
-      deactivate,
-      activate,
       handleCompositionStart,
       handleCompositionEnd,
       handleInput,
@@ -710,7 +748,7 @@ export default defineComponent({
           {
             'n-input--disabled': this.disabled,
             'n-input--textarea': this.type === 'textarea',
-            'n-input--resizable': this.resizable,
+            'n-input--resizable': this.resizable && !this.autosize,
             'n-input--autosize': this.autosize,
             'n-input--round': this.round && !(this.type === 'textarea'),
             'n-input--pair': this.pair,

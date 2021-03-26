@@ -12,6 +12,8 @@
 - 修正 `n-input` 在 warning 和 error 状态下光标颜色不正确
 - 修正 `n-select` 的 namespace 不正确
 - 修正 `n-cascader` 的 namespace 不正确
+- 修正 `n-input` 在 textarea 模式无法选中
+- 修正 `n-input` 在 textarea 模式没有 box-shadow
 
 ### Refactors
 
