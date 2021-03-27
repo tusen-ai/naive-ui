@@ -53,7 +53,8 @@ const internalSelectMenuDark: InternalSelectMenuTheme = {
       optionOpacityDisabled: opacityDisabled,
       optionCheckColor: primaryColor,
       optionColorPending: hoverColor,
-      actionTextColor: textColor2
+      actionTextColor: textColor2,
+      loadingColor: primaryColor
     }
   }
 }

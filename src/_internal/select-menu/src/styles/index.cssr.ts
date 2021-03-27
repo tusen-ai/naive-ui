@@ -1,6 +1,8 @@
 import { c, cB, cE, cM, cNotM } from '../../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../../_styles/transitions/fade-in-scale-up'
 
+// --loading-color
+// --loading-size
 export default cB('base-select-menu', `
   outline: none;
   z-index: 0;
@@ -31,6 +33,16 @@ export default cB('base-select-menu', `
   cB('base-select-menu-option-wrapper', `
     position: relative;
     width: 100%;
+  `),
+  cE('loading, empty', `
+    display: flex;
+    padding: 12px 32px;
+    flex: 1;
+    justify-content: center;
+  `),
+  cE('loading', `
+    color: var(--loading-color);
+    font-size: var(--loading-size);
   `),
   cE('action', `
     padding: 8px var(--option-padding-left);

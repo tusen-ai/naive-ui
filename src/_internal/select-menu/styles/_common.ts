@@ -7,5 +7,6 @@ export default {
   optionPaddingSmall: '0 12px',
   optionPaddingMedium: '0 12px',
   optionPaddingLarge: '0 12px',
-  optionPaddingHuge: '0 12px'
+  optionPaddingHuge: '0 12px',
+  loadingSize: '18px'
 }

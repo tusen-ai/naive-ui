@@ -28,6 +28,7 @@ import { formatLength } from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
 import { useTheme } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
+import NInternalLoading from '../../loading'
 import NSelectOption from './SelectOption'
 import NSelectGroupHeader from './SelectGroupHeader'
 import style from './styles/index.cssr'
@@ -85,6 +86,7 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
+    loading: Boolean,
     onScroll: Function as PropType<(e: Event) => void>,
     // deprecated
     onMenuToggleOption: Function as PropType<(value: SelectBaseOption) => void>
@@ -255,6 +257,8 @@ export default defineComponent({
           optionCheckColor,
           actionTextColor,
           optionColorPending,
+          loadingColor,
+          loadingSize,
           [createKey('optionFontSize', size)]: fontSize,
           [createKey('optionHeight', size)]: optionHeight,
           [createKey('optionPadding', size)]: optionPadding
@@ -278,7 +282,9 @@ export default defineComponent({
         '--option-text-color-disabled': optionTextColorDisabled,
         '--option-text-color-pressed': optionTextColorPressed,
         '--option-padding': optionPadding,
-        '--option-padding-left': getPadding(optionPadding, 'left')
+        '--option-padding-left': getPadding(optionPadding, 'left'),
+        '--loading-color': loadingColor,
+        '--loading-size': loadingSize
       }
     })
     return {
@@ -322,7 +328,11 @@ export default defineComponent({
         onKeyup={this.handleKeyUp}
         onMousedown={this.handleMouseDown}
       >
-        {!this.empty ? (
+        {this.loading ? (
+          <div class="n-base-select-menu__loading">
+            <NInternalLoading strokeWidth={20} />
+          </div>
+        ) : !this.empty ? (
           <NScrollbar
             ref="scrollbarRef"
             scrollable={this.scrollable}
@@ -404,7 +414,7 @@ export default defineComponent({
             }}
           </NScrollbar>
         ) : (
-          <div style="padding: 12px 20px; flex: 1;">
+          <div class="n-base-select-menu__empty">
             {renderSlot($slots, 'empty', undefined, () => [
               (<NEmpty />) as VNode
             ])}
