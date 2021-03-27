@@ -4,6 +4,7 @@
 
 ### Feats
 
+- Add `n-mention` component.
 - `n-data-table` supports expanding rows.
 
 ### Fixes

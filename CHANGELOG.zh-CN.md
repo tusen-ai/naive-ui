@@ -4,6 +4,7 @@
 
 ### Feats
 
+- 新增 `n-mention` 组件
 - `n-data-table` 支持行展开
 
 ### Fixes

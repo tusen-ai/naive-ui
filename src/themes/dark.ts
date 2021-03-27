@@ -34,6 +34,7 @@ import { listDark } from '../list/styles'
 import { loadingBarDark } from '../loading-bar/styles'
 import { logDark } from '../log/styles'
 import { menuDark } from '../menu/styles'
+import { mentionDark } from '../mention/styles'
 import { messageDark } from '../message/styles'
 import { modalDark } from '../modal/styles'
 import { notificationDark } from '../notification/styles'
@@ -103,6 +104,7 @@ export const darkTheme: BuiltInGlobalTheme = {
   LoadingBar: loadingBarDark,
   Log: logDark,
   Menu: menuDark,
+  Mention: mentionDark,
   Message: messageDark,
   Modal: modalDark,
   Notification: notificationDark,

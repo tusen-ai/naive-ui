@@ -5,8 +5,8 @@ export type SelectMixedOption =
   | SelectBaseOption
   | SelectGroupOption
   | SelectIgnoredOption
-export interface SelectBaseOption {
-  value: string | number
+export interface SelectBaseOption<V = string | number> {
+  value: V
   label: string
   class?: string
   style?: string | CSSProperties

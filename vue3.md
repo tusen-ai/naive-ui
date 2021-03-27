@@ -453,6 +453,8 @@
   - [ ] selection popover 滚动
   - [x] card 设定高度
   - [x] dropdown 手动定位有 bug，mousemoveoutside
+  - [x] select menu loading
+  - [ ] refactor layout to make position work on first shot
 
 ## Build
 

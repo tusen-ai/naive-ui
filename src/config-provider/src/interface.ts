@@ -36,6 +36,7 @@ import type { ListTheme } from '../../list/styles'
 import type { LoadingBarTheme } from '../../loading-bar/styles'
 import type { LogTheme } from '../../log/styles'
 import type { MenuTheme } from '../../menu/styles'
+import type { MentionTheme } from '../../mention/styles'
 import type { MessageTheme } from '../../message/styles'
 import type { ModalTheme } from '../../modal/styles'
 import type { NotificationTheme } from '../../notification/styles'
@@ -113,6 +114,7 @@ interface GlobalThemeWithoutCommon {
   LoadingBar?: LoadingBarTheme
   Log?: LogTheme
   Menu?: MenuTheme
+  Mention?: MentionTheme
   Message?: MessageTheme
   Modal?: ModalTheme
   Notification?: NotificationTheme

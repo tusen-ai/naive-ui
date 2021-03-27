@@ -367,6 +367,10 @@ export const enComponentRoutes = [
     path: 'n-ellipsis',
     component: () => import('../../src/ellipsis/demos/enUS/index.demo-entry.md')
   },
+  {
+    path: 'n-mention',
+    component: () => import('../../src/mention/demos/enUS/index.demo-entry.md')
+  },
   // deprecated
   {
     path: 'n-nimbus-service-layout',
@@ -673,6 +677,10 @@ export const zhComponentRoutes = [
   {
     path: 'n-ellipsis',
     component: () => import('../../src/ellipsis/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'n-mention',
+    component: () => import('../../src/mention/demos/zhCN/index.demo-entry.md')
   },
   // deprecated
   {

@@ -249,6 +249,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           path: '/n-input-number'
         },
         {
+          en: 'Mention',
+          zh: '提及',
+          enSuffix: true,
+          path: '/n-mention'
+        },
+        {
           en: 'Radio',
           zh: '单选',
           enSuffix: true,
