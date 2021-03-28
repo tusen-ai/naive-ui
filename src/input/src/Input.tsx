@@ -9,7 +9,10 @@ import {
   getCurrentInstance,
   renderSlot,
   PropType,
-  CSSProperties
+  CSSProperties,
+  watch,
+  watchEffect,
+  WatchStopHandle
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { toRgbString, getAlphaString } from 'seemly'
@@ -171,6 +174,7 @@ export default defineComponent({
     const hoverRef = ref(false)
     const isComposingRef = ref(false)
     const activatedRef = ref(false)
+    let syncSource: string | null = null
     // placeholder
     const mergedPlaceholderRef = computed<[string, string] | [string]>(() => {
       const { placeholder, pair } = props
@@ -373,6 +377,7 @@ export default defineComponent({
     ): void {
       const targetValue = (e.target as HTMLInputElement).value
       syncMirror(targetValue)
+      syncSource = targetValue
       if (isComposingRef.value) return
       const changedValue = targetValue
       if (!props.pair) {
@@ -590,6 +595,20 @@ export default defineComponent({
     function handleTextAreaMirrorResize (): void {
       updateTextAreaStyle()
     }
+
+    let stopWatchMergedValue: WatchStopHandle | null = null
+    watchEffect(() => {
+      const { autosize, type } = props
+      if (autosize && type === 'textarea') {
+        stopWatchMergedValue = watch(mergedValueRef, (value) => {
+          if (!Array.isArray(value) && value !== syncSource) {
+            syncMirror(value)
+          }
+        })
+      } else {
+        stopWatchMergedValue?.()
+      }
+    })
 
     const exposedProps: InputWrappedRef = {
       wrapperElRef,

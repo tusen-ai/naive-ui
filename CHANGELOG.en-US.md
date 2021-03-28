@@ -16,6 +16,7 @@
 - Fix `n-input` in textarea mode can't select text.
 - Fix `n-input` in textarea mode has no box-shadow.
 - Fix `n-input` in textarea mode `autosize` line not correct due to inconsistant font family.
+- Fix `n-input` in textarea mode `autosize` rows not changed if props.value is changed from outside.
 
 ### Refactors
 

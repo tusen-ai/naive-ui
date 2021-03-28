@@ -157,6 +157,7 @@ export default c([
         `)
       ]),
       cE('textarea-el, textarea-mirror, placeholder', `
+        width: 100%;
         height: 100%;
         padding-left: 0;
         padding-right: 0;

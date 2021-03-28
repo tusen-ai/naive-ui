@@ -16,6 +16,7 @@
 - 修正 `n-input` 在 textarea 模式无法选中
 - 修正 `n-input` 在 textarea 模式没有 box-shadow
 - 修正 `n-input` 在 textarea 模式 `autosize` 由于字体不一致导致行数有误
+- 修正 `n-input` 在 textarea 模式 `autosize` 在外部使 props.value 改变的时候行数不会变化
 
 ### Refactors
 
