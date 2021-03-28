@@ -810,11 +810,11 @@ export default defineComponent({
                 </div>
               ) : null}
               {this.autosize ? (
-                <pre
+                <div
                   ref="textareaMirrorElRef"
                   class="n-input__textarea-mirror"
                   key="mirror"
-                ></pre>
+                />
               ) : null}
             </div>
           ) : (
