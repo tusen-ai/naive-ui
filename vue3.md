@@ -457,7 +457,7 @@
   - [ ] refactor layout to make position work on first shot
   - [ ] mention mention pending option not correct, sometimes it is not the first option
   - [x] code Deprecated as of 10.7.0. highlight(lang, code, ...args) has been deprecated.
-  - [ ] vdirs zindexable
+  - [x] vdirs zindexable https://github.com/vuejs/vue-next/issues/3497
 
 ## Build
 
