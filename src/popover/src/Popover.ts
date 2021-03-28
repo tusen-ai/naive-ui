@@ -137,15 +137,15 @@ export const popoverProps = {
   },
   // events
   // eslint-disable-next-line vue/prop-name-casing
-  'onUpdate:show': Function as PropType<
-  MaybeArray<(value: boolean) => void> | undefined
+  'onUpdate:show': [Function, Array] as PropType<
+  MaybeArray<(value: boolean) => void>
   >,
-  onUpdateShow: Function as PropType<
-  MaybeArray<(value: boolean) => void> | undefined
+  onUpdateShow: [Function, Array] as PropType<
+  MaybeArray<(value: boolean) => void>
   >,
   /** @deprecated */
   onShow: {
-    type: Function as PropType<
+    type: [Function, Array] as PropType<
     MaybeArray<(value: boolean) => void> | undefined
     >,
     validator: (): boolean => {
@@ -159,7 +159,7 @@ export const popoverProps = {
   },
   /** @deprecated */
   onHide: {
-    type: Function as PropType<
+    type: [Function, Array] as PropType<
     MaybeArray<(value: boolean) => void> | undefined
     >,
     validator: (): boolean => {

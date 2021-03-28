@@ -73,12 +73,8 @@ const scrollbarProps = {
     type: Boolean,
     default: false
   },
-  container: Function as PropType<
-  undefined | (() => HTMLElement | null | undefined)
-  >,
-  content: Function as PropType<
-  undefined | (() => HTMLElement | null | undefined)
-  >,
+  container: Function as PropType<() => HTMLElement | null | undefined>,
+  content: Function as PropType<() => HTMLElement | null | undefined>,
   containerStyle: [String, Object] as PropType<string | CSSProperties>,
   contentClass: String,
   contentStyle: [String, Object] as PropType<string | CSSProperties>,

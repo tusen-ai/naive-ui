@@ -98,7 +98,7 @@ export default defineComponent({
       default: undefined
     },
     onBeforeHide: {
-      type: Function as PropType<(() => void) | undefined>,
+      type: (Function as unknown) as PropType<(() => void) | undefined>,
       validator: () => {
         if (__DEV__) {
           warn(
@@ -111,7 +111,7 @@ export default defineComponent({
       default: undefined
     },
     onAfterHide: {
-      type: Function as PropType<(() => void) | undefined>,
+      type: (Function as unknown) as PropType<(() => void) | undefined>,
       validator: () => {
         if (__DEV__) {
           warn(
@@ -124,7 +124,9 @@ export default defineComponent({
       default: undefined
     },
     onHide: {
-      type: Function as PropType<((value: false) => void) | undefined>,
+      type: (Function as unknown) as PropType<
+      ((value: false) => void) | undefined
+      >,
       validator: () => {
         if (__DEV__) warn('modal', '`on-hide` is deprecated.')
         return true

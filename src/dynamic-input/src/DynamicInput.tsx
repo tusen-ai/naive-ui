@@ -88,7 +88,9 @@ export default defineComponent({
       default: undefined
     },
     onInput: {
-      type: Function as PropType<MaybeArray<OnUpdateValue>>,
+      type: [Function, Array] as PropType<
+      MaybeArray<OnUpdateValue> | undefined
+      >,
       validator: () => {
         if (__DEV__) {
           warn(

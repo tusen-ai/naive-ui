@@ -74,13 +74,15 @@ const layoutSiderProps = {
   >,
   triggerStyle: Object as PropType<CSSProperties>,
   // eslint-disable-next-line vue/prop-name-casing
-  'onUpdate:collapsed': Function as PropType<
+  'onUpdate:collapsed': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
-  onUpdateCollapsed: Function as PropType<MaybeArray<(value: boolean) => void>>,
+  onUpdateCollapsed: [Function, Array] as PropType<
+  MaybeArray<(value: boolean) => void>
+  >,
   // deprecated
-  onExpand: Function as PropType<MaybeArray<() => void>>,
-  onCollapse: Function as PropType<MaybeArray<() => void>>
+  onExpand: [Function, Array] as PropType<MaybeArray<() => void>>,
+  onCollapse: [Function, Array] as PropType<MaybeArray<() => void>>
 } as const
 
 export type LayoutSiderProps = ExtractPropTypes<typeof layoutSiderProps>

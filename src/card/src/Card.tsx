@@ -41,7 +41,7 @@ const cardProps = {
     default: false as boolean
   },
   hoverable: Boolean,
-  onClose: Function as PropType<MaybeArray<() => void>>
+  onClose: [Function, Array] as PropType<MaybeArray<() => void>>
 } as const
 
 export { cardProps }

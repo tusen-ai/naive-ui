@@ -73,11 +73,25 @@ export default defineComponent({
       default: undefined
     },
     onShow: {
-      type: Function as PropType<(() => void) | undefined>,
+      type: (Function as unknown) as PropType<(() => void) | undefined>,
+      validator: () => {
+        warn(
+          'back-top',
+          '`on-show` is deprecated, please use `on-update:show` instead.'
+        )
+        return true
+      },
       default: undefined
     },
     onHide: {
-      type: Function as PropType<(() => void) | undefined>,
+      type: (Function as unknown) as PropType<(() => void) | undefined>,
+      validator: () => {
+        warn(
+          'back-top',
+          '`on-hide` is deprecated, please use `on-update:show` instead.'
+        )
+        return true
+      },
       default: undefined
     }
   },

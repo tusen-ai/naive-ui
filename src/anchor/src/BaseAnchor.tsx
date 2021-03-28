@@ -56,7 +56,7 @@ export const baseAnchorProps = {
   },
   // deprecated
   target: {
-    type: Function as PropType<(() => HTMLElement) | undefined>,
+    type: (Function as unknown) as PropType<(() => HTMLElement) | undefined>,
     validator: () => {
       if (__DEV__) {
         warn('anchor', '`target` is deprecated, please use`listen-to` instead.')

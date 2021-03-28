@@ -25,6 +25,7 @@ import type { ThemeProps } from '../../_mixins'
 import { warn, call, useAdjustedTo, MaybeArray } from '../../_utils'
 import { sliderLight, SliderTheme } from '../styles'
 import style from './styles/index.cssr'
+import { OnUpdateValueImpl } from './interface'
 
 export default defineComponent({
   name: 'Slider',
@@ -65,16 +66,16 @@ export default defineComponent({
       default: undefined
     },
     // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': Function as PropType<
-    MaybeArray<<T extends number | [number, number]>(value: T) => void>
+    'onUpdate:value': [Function, Array] as PropType<
+    MaybeArray<<T extends number & [number, number]>(value: T) => void>
     >,
-    onUpdateValue: Function as PropType<
-    MaybeArray<<T extends number | [number, number]>(value: T) => void>
+    onUpdateValue: [Function, Array] as PropType<
+    MaybeArray<<T extends number & [number, number]>(value: T) => void>
     >,
     // deprecated
     onChange: {
-      type: Function as PropType<
-      MaybeArray<<T extends number | [number, number]>(value: T) => void>
+      type: [Function, Array] as PropType<
+      MaybeArray<<T extends number & [number, number]>(value: T) => void>
       >,
       validator: () => {
         if (__DEV__) {
@@ -214,9 +215,9 @@ export default defineComponent({
         onUpdateValue
       } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
-      if (onChange) call(onChange, value)
-      if (onUpdateValue) call(onUpdateValue, value)
-      if (_onUpdateValue) call(_onUpdateValue, value)
+      if (onChange) call(onChange as OnUpdateValueImpl, value)
+      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
+      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
       uncontrolledValueRef.value = value
       nTriggerFormInput()
       nTriggerFormChange()

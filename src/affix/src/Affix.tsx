@@ -42,7 +42,7 @@ export const affixProps = {
   },
   // deprecated
   target: {
-    type: Function as PropType<(() => HTMLElement) | undefined>,
+    type: (Function as unknown) as PropType<(() => HTMLElement) | undefined>,
     validator: () => {
       warn('affix', '`target` is deprecated, please use `listen-to` instead.')
       return true

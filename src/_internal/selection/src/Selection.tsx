@@ -102,14 +102,8 @@ export default defineComponent({
     onDeleteOption: Function,
     onDeleteLastOption: Function,
     maxTagCount: [String, Number] as PropType<number | 'responsive'>,
-    onClear: {
-      type: Function as PropType<((e: MouseEvent) => void) | undefined>,
-      default: undefined
-    },
-    onPatternInput: {
-      type: Function as PropType<((e: InputEvent) => void) | undefined>,
-      default: undefined
-    }
+    onClear: Function as PropType<(e: MouseEvent) => void>,
+    onPatternInput: Function as PropType<(e: InputEvent) => void>
   },
   setup (props) {
     const patternInputMirrorRef = ref<HTMLElement | null>(null)

@@ -80,16 +80,18 @@ const paginationProps = {
     default: 9
   },
   // eslint-disable-next-line vue/prop-name-casing
-  'onUpdate:page': Function as PropType<MaybeArray<(page: number) => void>>,
+  'onUpdate:page': [Function, Array] as PropType<
+  MaybeArray<(page: number) => void>
+  >,
   // eslint-disable-next-line vue/prop-name-casing
-  'onUpdate:pageSize': Function as PropType<
+  'onUpdate:pageSize': [Function, Array] as PropType<
   MaybeArray<(pageSize: number) => void>
   >,
   // deprecated
-  onPageSizeChange: Function as PropType<
+  onPageSizeChange: [Function, Array] as PropType<
   MaybeArray<(pageSize: number) => void>
   >,
-  onChange: Function as PropType<MaybeArray<(page: number) => void>>,
+  onChange: [Function, Array] as PropType<MaybeArray<(page: number) => void>>,
   total: {
     type: Number,
     validator: (value: any) => {

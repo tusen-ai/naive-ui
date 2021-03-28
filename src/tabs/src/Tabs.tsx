@@ -24,6 +24,7 @@ import type { MaybeArray } from '../../_utils'
 import { tabsLight } from '../styles'
 import type { TabsTheme } from '../styles'
 import type { TabsInjection, TabPaneProps } from './TabPane'
+import type { OnUpdateValueImpl } from './interface'
 import style from './styles/index.cssr'
 
 export default defineComponent({
@@ -51,14 +52,17 @@ export default defineComponent({
       default: 'medium'
     },
     navStyle: [String, Object] as PropType<string | CSSProperties>,
-    onScrollableChange: Function as PropType<
+    onScrollableChange: [Function, Array] as PropType<
     MaybeArray<(value: boolean) => void>
     >,
     // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': Function as PropType<
-    MaybeArray<<T extends string | number>(value: T) => void>
+    'onUpdate:value': [Function, Array] as PropType<
+    MaybeArray<(value: string & number) => void>
     >,
-    onClose: Function as PropType<MaybeArray<() => void>>,
+    onUpdateValue: [Function, Array] as PropType<
+    MaybeArray<(value: string & number) => void>
+    >,
+    onClose: [Function, Array] as PropType<MaybeArray<() => void>>,
     // deprecated
     activeName: {
       type: [String, Number] as PropType<string | number | undefined>,
@@ -74,8 +78,8 @@ export default defineComponent({
       default: undefined
     },
     onActiveNameChange: {
-      type: Function as PropType<
-      MaybeArray<<T extends string | number>(value: T) => void>
+      type: [Function, Array] as PropType<
+      MaybeArray<(value: string & number) => void> | undefined
       >,
       validator: () => {
         if (__DEV__) {
@@ -104,10 +108,6 @@ export default defineComponent({
       uncontrolledValueRef
     )
 
-    const compitableOnValueChangeRef = useCompitable(props, [
-      'onActiveNameChange',
-      'onUpdate:value'
-    ])
     const labelWrapperStyleRef = computed(() => {
       if (!props.justifyContent) return undefined
       return {
@@ -162,12 +162,18 @@ export default defineComponent({
       disabled: boolean
     ): void {
       if (!disabled) {
-        setPanelActive(panelName)
+        doUpdateValue(panelName)
       }
     }
-    function setPanelActive (panelName: string | number): void {
-      const { value: compitableOnValueChange } = compitableOnValueChangeRef
-      if (compitableOnValueChange) call(compitableOnValueChange, panelName)
+    function doUpdateValue (panelName: string | number): void {
+      const {
+        onActiveNameChange,
+        onUpdateValue,
+        'onUpdate:value': _onUpdateValue
+      } = props
+      if (onActiveNameChange) { call(onActiveNameChange as OnUpdateValueImpl, panelName) }
+      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, panelName)
+      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, panelName)
     }
     function handleCloseClick (e: MouseEvent, panel: TabPaneProps): void {
       const { onClose } = props
@@ -199,7 +205,6 @@ export default defineComponent({
     })
     return {
       mergedValue: mergedValueRef,
-      compitableOnValueChange: compitableOnValueChangeRef,
       labelWrapperRef,
       labelBarRef,
       labelWrapperStyle: labelWrapperStyleRef,

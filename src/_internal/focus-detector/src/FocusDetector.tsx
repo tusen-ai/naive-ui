@@ -2,14 +2,8 @@ import { h, defineComponent, PropType } from 'vue'
 
 export default defineComponent({
   props: {
-    onFocus: {
-      type: Function as PropType<((e: FocusEvent) => void) | undefined>,
-      default: undefined
-    },
-    onBlur: {
-      type: Function as PropType<((e: FocusEvent) => void) | undefined>,
-      default: undefined
-    }
+    onFocus: Function as PropType<(e: FocusEvent) => void>,
+    onBlur: Function as PropType<(e: FocusEvent) => void>
   },
   setup (props) {
     return () => (

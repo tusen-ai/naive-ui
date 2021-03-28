@@ -19,10 +19,7 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    onClear: {
-      type: Function as PropType<((e: MouseEvent) => void) | undefined>,
-      default: undefined
-    }
+    onClear: Function as PropType<(e: MouseEvent) => void>
   },
   setup (props) {
     return () => (

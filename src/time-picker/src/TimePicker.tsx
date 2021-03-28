@@ -109,7 +109,9 @@ export default defineComponent({
     },
     // deprecated
     onChange: {
-      type: Function as PropType<MaybeArray<OnUpdateValue> | undefined>,
+      type: [Function, Array] as PropType<
+      MaybeArray<OnUpdateValue> | undefined
+      >,
       validator: () => {
         if (__DEV__) {
           warn(

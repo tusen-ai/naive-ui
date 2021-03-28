@@ -59,7 +59,9 @@ export default defineComponent({
     },
     scrollbarProps: Object as PropType<ScrollbarProps>,
     // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:show': Function as PropType<MaybeArray<(value: boolean) => void>>,
+    'onUpdate:show': [Function, Array] as PropType<
+    MaybeArray<(value: boolean) => void>
+    >,
     // deprecated
     drawerStyle: {
       type: [Object, String] as PropType<CSSProperties | string | undefined>,
@@ -91,7 +93,7 @@ export default defineComponent({
       default: undefined
     },
     onShow: {
-      type: Function as PropType<
+      type: [Function, Array] as PropType<
       MaybeArray<(value: boolean) => void> | undefined
       >,
       validator: () => {
@@ -104,7 +106,7 @@ export default defineComponent({
       default: undefined
     },
     onHide: {
-      type: Function as PropType<
+      type: [Function, Array] as PropType<
       MaybeArray<(value: false) => void> | undefined
       >,
       validator: () => {

@@ -58,17 +58,19 @@ export default defineComponent({
       type: String as PropType<'if' | 'show'>,
       default: 'if'
     },
-    onItemHeaderClick: Function as PropType<MaybeArray<OnItemHeaderClick>>,
+    onItemHeaderClick: [Function, Array] as PropType<
+    MaybeArray<OnItemHeaderClick>
+    >,
     // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:expandedNames': Function as PropType<
+    'onUpdate:expandedNames': [Function, Array] as PropType<
     MaybeArray<OnUpdateExpandedNames>
     >,
-    onUpdateExpandedNames: Function as PropType<
+    onUpdateExpandedNames: [Function, Array] as PropType<
     MaybeArray<OnUpdateExpandedNames>
     >,
     // deprecated
     onExpandedNamesChange: {
-      type: (Function as Function) as PropType<
+      type: [Function, Array] as PropType<
       MaybeArray<OnUpdateExpandedNames> | undefined
       >,
       validator: () => {

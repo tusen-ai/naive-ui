@@ -117,7 +117,7 @@ export default defineComponent({
     onUpdateValue: Function as PropType<(value: string | number) => void>,
     // deprecated
     onChange: {
-      type: Function as PropType<
+      type: (Function as unknown) as PropType<
       ((value: string | number) => void) | undefined
       >,
       validator: () => {
