@@ -5,7 +5,6 @@ import {
   nextTick,
   ref,
   toRef,
-  watch,
   onMounted,
   getCurrentInstance,
   renderSlot,
@@ -14,6 +13,7 @@ import {
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { toRgbString, getAlphaString } from 'seemly'
+import { VResizeObserver } from 'vueuc'
 import { NBaseClear } from '../../_internal'
 import { useTheme, useLocale, useFormItem, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -280,11 +280,7 @@ export default defineComponent({
         }
       }
     }
-    watch([toRef(props, 'autosize'), mergedSizeRef], () => {
-      void nextTick(updateTextAreaStyle)
-    })
     onMounted(() => {
-      updateTextAreaStyle()
       // sync mirror if is not pair
       const { value } = mergedValueRef
       if (!Array.isArray(value)) {
@@ -591,6 +587,9 @@ export default defineComponent({
         }
       }
     }
+    function handleTextAreaMirrorResize (): void {
+      updateTextAreaStyle()
+    }
 
     const exposedProps: InputWrappedRef = {
       wrapperElRef,
@@ -639,6 +638,7 @@ export default defineComponent({
       handleClick,
       handleClear,
       handleWrapperKeyDown,
+      handleTextAreaMirrorResize,
       ...useConfig(props),
       mergedTheme: themeRef,
       cssVars: computed(() => {
@@ -810,11 +810,17 @@ export default defineComponent({
                 </div>
               ) : null}
               {this.autosize ? (
-                <div
-                  ref="textareaMirrorElRef"
-                  class="n-input__textarea-mirror"
-                  key="mirror"
-                />
+                <VResizeObserver onResize={this.handleTextAreaMirrorResize}>
+                  {{
+                    default: () => (
+                      <div
+                        ref="textareaMirrorElRef"
+                        class="n-input__textarea-mirror"
+                        key="mirror"
+                      />
+                    )
+                  }}
+                </VResizeObserver>
               ) : null}
             </div>
           ) : (
