@@ -386,7 +386,7 @@ export default defineComponent({
     }
     function isInternalFocusSwitch (e: FocusEvent): boolean {
       return !!(
-        inputInstRef.value?.wrapperElRef.contains(e.relatedTarget as Node) ||
+        inputInstRef.value?.wrapperElRef?.contains(e.relatedTarget as Node) ||
         panelInstRef.value?.$el.contains(e.relatedTarget as Node)
       )
     }
@@ -398,7 +398,7 @@ export default defineComponent({
     function handleClickOutside (e: MouseEvent): void {
       if (
         activeRef.value &&
-        !inputInstRef.value?.wrapperElRef.contains(e.target as Node)
+        !inputInstRef.value?.wrapperElRef?.contains(e.target as Node)
       ) {
         closePanel({
           returnFocus: false
