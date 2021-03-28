@@ -11,27 +11,28 @@ import {
   CSSProperties
 } from 'vue'
 import { createTreeMate } from 'treemate'
+import { VBinder, VFollower, VTarget, FollowerRef } from 'vueuc'
+import { useIsMounted, useMergedState } from 'vooks'
+import type { Size as InputSize } from '../../input/src/interface'
 import { NInput } from '../../input'
 import type { InputRef } from '../../input'
-import type { InternalSelectMenuRef } from '../../_internal'
-import { NInternalSelectMenu } from '../../_internal'
-import { Caret } from 'textarea-caret-ts'
-import { VBinder, VFollower, VTarget, FollowerRef } from 'vueuc'
-import {
+import type {
   SelectBaseOption,
   SelectGroupOption,
   SelectIgnoredOption
 } from '../../select'
+import { NInternalSelectMenu } from '../../_internal'
+import type { InternalSelectMenuRef } from '../../_internal'
 import { call, useAdjustedTo, warn } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
-import { useIsMounted, useMergedState } from 'vooks'
 import { useConfig, useFormItem, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { mentionLight } from '../styles'
 import type { MentionTheme } from '../styles'
+import { getRelativePosition } from './utils'
+
 import style from './styles/index.cssr'
 import type { MentionOption } from './interface'
-import type { Size as InputSize } from '../../input/src/interface'
 
 export default defineComponent({
   name: 'Mention',
@@ -209,10 +210,7 @@ export default defineComponent({
         left: number
         top: number
         height: number
-      } = Caret.getRelativePosition(inputEl)
-      if (props.type === 'textarea') {
-        cursorPos.top -= inputEl.scrollTop
-      }
+      } = getRelativePosition(inputEl)
       cursorPos.left += inputEl.parentElement!.offsetLeft
       cursorAnchor.style.left = `${cursorPos.left}px`
       cursorAnchor.style.top = `${cursorPos.top + cursorPos.height}px`
@@ -223,13 +221,12 @@ export default defineComponent({
     }
     function handleInputUpdateValue (value: string): void {
       doUpdateValue(value)
-      void nextTick().then(() => {
-        // dom (input value) is updated
-        deriveShowMenu()
-        syncCursor()
-        // menu is ready, we can sync menu position now
-        void nextTick().then(syncPosition)
-      })
+      // Vue update is mirco task.
+      // So DOM must have been done when sync start in marco task.
+      // I can't use nextTick(), Chrome doesn't update scrollLeft of INPUT
+      // element is immediatelly updated. The behavior is wired but that's what
+      // happens.
+      syncAfterCursorMove()
     }
     function syncAfterCursorMove (): void {
       setTimeout(() => {
@@ -323,6 +320,11 @@ export default defineComponent({
         deriveShowMenu()
       })
     }
+    function handleInputMouseDown (): void {
+      if (!props.disabled) {
+        syncAfterCursorMove()
+      }
+    }
     return {
       ...useConfig(props),
       mergedSize: formItem.mergedSize,
@@ -341,6 +343,7 @@ export default defineComponent({
       handleInputUpdateValue,
       handleInputKeyDown,
       handleSelect,
+      handleInputMouseDown,
       cssVars: computed(() => {
         const {
           self: { menuBoxShadow }
@@ -363,6 +366,7 @@ export default defineComponent({
           type={this.type}
           ref="inputInstRef"
           placeholder={this.placeholder}
+          onMousedown={this.handleInputMouseDown}
           onUpdateValue={this.handleInputUpdateValue}
           onKeydown={this.handleInputKeyDown}
           onFocus={this.handleInputFocus}
