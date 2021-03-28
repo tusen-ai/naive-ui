@@ -319,7 +319,6 @@ export const themeOverridesDark: GlobalThemeOverrides = {
   },
   InternalSelectMenu: {
     height: '290px',
-    boxShadow: commonDark.boxShadow2,
     optionTextColor: colors.textColor1,
     optionFontSizeMedium: '16px',
     optionPaddingMedium: '0 12px',

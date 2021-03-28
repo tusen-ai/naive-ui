@@ -241,7 +241,6 @@ export const themeOverridesLight: GlobalThemeOverrides = {
   },
   InternalSelectMenu: {
     height: '290px',
-    boxShadow: commonLight.boxShadow2,
     optionHeightMedium: '38px',
     paddingSmall: '4px 0',
     paddingMedium: '6px 0',
