@@ -149,7 +149,7 @@ export function getRelativePosition (
   const isInput = element.nodeName === 'INPUT'
 
   // Default textarea styles
-  style.whiteSpace = 'pre-wrap'
+  style.whiteSpace = isInput ? 'nowrap' : 'pre-wrap'
   if (!isInput) style.wordWrap = 'break-word' // only for textarea-s
 
   // Position off-screen
@@ -190,7 +190,7 @@ export function getRelativePosition (
       style.overflowY = 'scroll'
     }
   } else {
-    // style.overflow = 'hidden' // for Chrome to not render a scrollbar; IE keeps overflowY = 'scroll'
+    style.overflow = 'hidden' // for Chrome to not render a scrollbar; IE keeps overflowY = 'scroll'
   }
 
   div.textContent = element.value.substring(0, position)
