@@ -352,9 +352,12 @@ export default defineComponent({
     }
   },
   render () {
+    const { mergedTheme } = this
     return (
       <div class="n-mention" style={{ position: 'relative' }}>
         <NInput
+          themeOverrides={mergedTheme.peerOverrides.Input}
+          theme={mergedTheme.peers.Input}
           size={this.mergedSize}
           autosize={this.autosize}
           type={this.type}
@@ -401,9 +404,14 @@ export default defineComponent({
                       appear={this.isMounted}
                     >
                       {{
-                        default: () =>
-                          this.showMenu ? (
+                        default: () => {
+                          const { mergedTheme } = this
+                          return this.showMenu ? (
                             <NInternalSelectMenu
+                              theme={mergedTheme.peers.InternalSelectMenu}
+                              themeOverrides={
+                                mergedTheme.peerOverrides.InternalSelectMenu
+                              }
                               autoPending
                               ref="selectMenuInstRef"
                               class="n-mention-menu"
@@ -414,6 +422,7 @@ export default defineComponent({
                               onMenuToggleOption={this.handleSelect}
                             />
                           ) : null
+                        }
                       }}
                     </Transition>
                   )

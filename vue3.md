@@ -455,6 +455,7 @@
   - [x] dropdown 手动定位有 bug，mousemoveoutside
   - [x] select menu loading
   - [ ] refactor layout to make position work on first shot
+  - [ ] mention mention pending option not correct, sometimes it is not the first option
 
 ## Build
 
