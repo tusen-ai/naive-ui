@@ -40,7 +40,7 @@ function createRenderer (wrapCodeWithCard = true) {
           `MdRendererError: ${language} is not valid for code - ${code}`
         )
       }
-      const highlighted = hljs.highlight(language, code).value
+      const highlighted = hljs.highlight(code, { language }).value
       const content = `<n-code><pre v-pre>${highlighted}</pre></n-code>`
       return wrapCodeWithCard
         ? `<n-card size="small" class="md-card">${content}</n-card>`

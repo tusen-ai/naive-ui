@@ -48,7 +48,9 @@ export default defineComponent({
       if (!(language && hljs.getLanguage(language))) {
         return null
       }
-      return hljs.highlight(language, trim ? code.trim() : code).value
+      return hljs.highlight(trim ? code.trim() : code, {
+        language
+      }).value
     }
     const setCode = (): void => {
       if (slots.default) return

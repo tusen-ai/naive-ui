@@ -456,7 +456,7 @@
   - [x] select menu loading
   - [ ] refactor layout to make position work on first shot
   - [ ] mention mention pending option not correct, sometimes it is not the first option
-  - [ ] code Deprecated as of 10.7.0. highlight(lang, code, ...args) has been deprecated.
+  - [x] code Deprecated as of 10.7.0. highlight(lang, code, ...args) has been deprecated.
   - [ ] vdirs zindexable
 
 ## Build

@@ -29,7 +29,9 @@ export default defineComponent({
       if (trim) code = code.trim()
       const { mergedHljs: hljs } = NLog
       if (hljs) {
-        if (language && hljs.getLanguage(language)) { return hljs.highlight(language, code).value }
+        if (language && hljs.getLanguage(language)) {
+          return hljs.highlight(code, { language }).value
+        }
       }
       return code
     }
