@@ -62,6 +62,9 @@ export default defineComponent({
     'onUpdate:show': [Function, Array] as PropType<
     MaybeArray<(value: boolean) => void>
     >,
+    onUpdateShow: [Function, Array] as PropType<
+    MaybeArray<(value: boolean) => void>
+    >,
     // deprecated
     drawerStyle: {
       type: [Object, String] as PropType<CSSProperties | string | undefined>,
@@ -92,6 +95,7 @@ export default defineComponent({
       },
       default: undefined
     },
+
     onShow: {
       type: [Function, Array] as PropType<
       MaybeArray<(value: boolean) => void> | undefined
@@ -145,8 +149,9 @@ export default defineComponent({
     })
     function handleMaskClick (): void {
       if (props.maskClosable) {
-        const { onHide, 'onUpdate:show': onUpdateShow } = props
+        const { onHide, onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
         if (onUpdateShow) call(onUpdateShow, false)
+        if (_onUpdateShow) call(_onUpdateShow, false)
         // deprecated
         if (onHide) call(onHide, false)
       }
