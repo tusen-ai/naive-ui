@@ -20,7 +20,7 @@ export default {
   fontSizeLarge: '15px',
   fontSizeHuge: '16px',
 
-  lineHeight: '1.5',
+  lineHeight: '1.6',
 
   heightTiny: '22px',
   heightSmall: '28px',
