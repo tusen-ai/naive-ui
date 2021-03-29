@@ -139,13 +139,7 @@ export default defineComponent({
           flexShrink: 0
         }
       },
-      style: [
-        this.siderProps?.style,
-        {
-          display: 'flex',
-          justifyContent: 'flex-end'
-        }
-      ] as any,
+      style: this.siderProps?.style as any,
       onUpdateCollapsed: this.doUpdateCollapsed
     }
     const contentProps = {
@@ -181,6 +175,7 @@ export default defineComponent({
           h(
             NLayout,
             {
+              hasSider: true,
               style: {
                 top: navSlot ? '64px' : undefined
               },

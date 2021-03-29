@@ -1,7 +1,7 @@
 # 使用边框
 
 ```html
-<n-layout>
+<n-layout has-sider>
   <n-layout-sider bordered> 酷的边栏 </n-layout-sider>
   <n-layout>
     <n-layout-header bordered> 酷的页头 </n-layout-header>

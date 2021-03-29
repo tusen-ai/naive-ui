@@ -1,7 +1,7 @@
 # Border
 
 ```html
-<n-layout>
+<n-layout has-sider>
   <n-layout-sider bordered> Cool Sider </n-layout-sider>
   <n-layout>
     <n-layout-header bordered> Cool Header </n-layout-header>

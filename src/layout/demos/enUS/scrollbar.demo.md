@@ -5,13 +5,13 @@ Sometimes you will find native scrollbar doesn't meet the style of naive-ui. You
 ```html
 <n-layout style="height: 480px;">
   <n-layout-header style="height: 64px;"> Cool Header </n-layout-header>
-  <n-layout position="absolute" style="top: 64px; bottom: 64px;">
-    <n-layout-sider position="absolute" :native-scrollbar="false">
+  <n-layout position="absolute" style="top: 64px; bottom: 64px;" has-sider>
+    <n-layout-sider :native-scrollbar="false">
       <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1> <n-h1>Long</n-h1
       ><n-h1>Long</n-h1><n-h1>Long</n-h1> <n-h1>Long</n-h1><n-h1>Long</n-h1
       ><n-h1>Long</n-h1> <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>
     </n-layout-sider>
-    <n-layout position="absolute" :native-scrollbar="false">
+    <n-layout :native-scrollbar="false">
       <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1> <n-h1>Long</n-h1
       ><n-h1>Long</n-h1><n-h1>Long</n-h1> <n-h1>Long</n-h1><n-h1>Long</n-h1
       ><n-h1>Long</n-h1> <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>

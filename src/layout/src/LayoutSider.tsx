@@ -2,30 +2,27 @@ import {
   h,
   defineComponent,
   computed,
-  nextTick,
   PropType,
   ref,
-  watch,
   CSSProperties,
   toRef,
-  inject,
-  onBeforeUnmount,
-  ExtractPropTypes
+  ExtractPropTypes,
+  inject
 } from 'vue'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import type { MaybeArray } from '../../_utils'
-import { call } from '../../_utils'
+import { formatLength, MaybeArray, call, warn } from '../../_utils'
+
 import { NScrollbar } from '../../scrollbar'
 import type { ScrollbarProps, ScrollbarRef } from '../../scrollbar'
 import { layoutLight } from '../styles'
 import type { LayoutTheme } from '../styles'
 import style from './styles/layout-sider.cssr'
-import type { LayoutInjection } from './Layout'
 import ToggleButton from './ToggleButton'
 import ToggleBar from './ToggleBar'
 import { positionProp } from './interface'
 import { useMergedState } from 'vooks'
+import { layoutInjectionKey } from './Layout'
 
 const layoutSiderProps = {
   position: positionProp,
@@ -94,24 +91,39 @@ export default defineComponent({
     ...layoutSiderProps
   },
   setup (props) {
+    if (__DEV__) {
+      const layoutProps = inject(layoutInjectionKey)
+      if (!layoutProps) {
+        warn(
+          'layout-sider',
+          'Layout sider is not allowed to be put outside layout.'
+        )
+      } else {
+        if (!layoutProps.hasSider) {
+          warn(
+            'layout-sider',
+            "You are putting `n-layout-sider` in a `n-layout` but haven't set `has-sider` on the `n-layout`."
+          )
+        }
+      }
+    }
     const selfRef = ref<HTMLElement | null>(null)
     const scrollbarRef = ref<ScrollbarRef | null>(null)
-    let collapseTimerId: number | null = null
-    const styleWidthRef = ref<string | null>(null)
-    const styleMaxWidthRef = ref<string | null>(null)
-    const NLayout = inject<LayoutInjection | null>('NLayout', null)
+    const styleMaxWidthRef = computed(() => {
+      return formatLength(
+        mergedCollapsedRef.value ? props.collapsedWidth : props.width
+      )
+    })
+    const contentStyleRef = computed<CSSProperties>(() => {
+      return props.collapseMode === 'transform'
+        ? { width: formatLength(props.width), flexShrink: 0 }
+        : { width: '100%' }
+    })
     const uncontrolledCollapsedRef = ref(props.defaultCollapsed)
     const mergedCollapsedRef = useMergedState(
       toRef(props, 'collapsed'),
       uncontrolledCollapsedRef
     )
-    const styleTransformRef = computed(() => {
-      if (props.collapseMode === 'transform') {
-        if (!mergedCollapsedRef.value) return 'translateX(0)'
-        else return `translateX(-${props.width - props.collapsedWidth}px)`
-      }
-      return ''
-    })
     function scrollTo (options: ScrollToOptions): void
     function scrollTo (x: number, y: number): void
     function scrollTo (options: ScrollToOptions | number, y?: number): void {
@@ -147,85 +159,6 @@ export default defineComponent({
         if (onCollapse) call(onCollapse)
       }
     }
-    watch(toRef(props, 'width'), (value) => {
-      if (NLayout) {
-        NLayout.siderWidth = value
-      }
-    })
-    watch(toRef(props, 'collapsedWidth'), (value) => {
-      if (NLayout) {
-        NLayout.siderCollapsedWidth = value
-      }
-    })
-    watch(toRef(props, 'collapseMode'), (value) => {
-      if (NLayout) {
-        NLayout.siderCollapseMode = value
-      }
-    })
-    watch(toRef(props, 'position'), (value) => {
-      if (NLayout) {
-        NLayout.siderPosition = value
-      }
-    })
-    watch(mergedCollapsedRef, (value) => {
-      if (props.collapseMode === 'width') {
-        if (collapseTimerId) {
-          window.clearTimeout(collapseTimerId)
-        }
-        if (value) {
-          styleMaxWidthRef.value = `${props.width}px`
-          void nextTick(() => {
-            void selfRef.value?.offsetWidth
-            styleMaxWidthRef.value = `${props.collapsedWidth}px`
-          })
-          collapseTimerId = window.setTimeout(() => {
-            styleWidthRef.value = `${props.collapsedWidth}px`
-            styleMaxWidthRef.value = null
-          }, props.duration)
-        } else {
-          styleMaxWidthRef.value = `${props.collapsedWidth}px`
-          styleWidthRef.value = `${props.width}px`
-          void nextTick(() => {
-            void selfRef.value?.offsetWidth
-            styleMaxWidthRef.value = `${props.width}px`
-          })
-          collapseTimerId = window.setTimeout(() => {
-            styleMaxWidthRef.value = null
-          }, props.duration)
-        }
-      }
-      if (NLayout) {
-        NLayout.siderCollapsed = value
-      }
-    })
-    // onCreated, init
-    if (props.collapseMode === 'width') {
-      if (mergedCollapsedRef.value) {
-        styleWidthRef.value = `${props.collapsedWidth}px`
-      } else {
-        styleWidthRef.value = `${props.width}px`
-      }
-    } else {
-      styleWidthRef.value = `${props.width}px`
-    }
-    if (NLayout) {
-      NLayout.hasSider = true
-      NLayout.siderWidth = props.width
-      NLayout.siderCollapsedWidth = props.collapsedWidth
-      NLayout.siderCollapseMode = props.collapseMode
-      NLayout.siderPosition = props.position
-      NLayout.siderCollapsed = mergedCollapsedRef.value
-    }
-    onBeforeUnmount(() => {
-      if (NLayout) {
-        NLayout.hasSider = false
-        NLayout.siderWidth = null
-        NLayout.siderCollapsedWidth = null
-        NLayout.siderCollapseMode = null
-        NLayout.siderPosition = null
-        NLayout.siderCollapsed = null
-      }
-    })
     const themeRef = useTheme(
       'Layout',
       'LayoutSider',
@@ -237,10 +170,9 @@ export default defineComponent({
       selfRef,
       scrollbarRef,
       mergedTheme: themeRef,
-      styleTransform: styleTransformRef,
       styleMaxWidth: styleMaxWidthRef,
-      styleWidth: styleWidthRef,
       mergedCollapsed: mergedCollapsedRef,
+      contentStyle: contentStyleRef,
       scrollTo,
       handleTriggerClick,
       cssVars: computed(() => {
@@ -282,9 +214,8 @@ export default defineComponent({
           [
             this.cssVars,
             {
-              transform: this.styleTransform,
               maxWidth: this.styleMaxWidth,
-              width: this.styleWidth
+              width: formatLength(this.width)
             }
           ] as any
         }
@@ -293,6 +224,7 @@ export default defineComponent({
           <NScrollbar
             ref="scrollbarRef"
             class="n-layout-sider__content"
+            style={this.contentStyle}
             {...this.scrollbarProps}
             theme={this.mergedTheme.peers.Scrollbar}
             themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
@@ -300,9 +232,10 @@ export default defineComponent({
             {this.$slots}
           </NScrollbar>
         ) : (
-          <div class="n-layout-sider__content">{this.$slots}</div>
+          <div class="n-layout-sider__content" style={this.contentStyle}>
+            {this.$slots}
+          </div>
         )}
-
         {this.bordered ? <div class="n-layout-sider__border" /> : null}
         {this.showTrigger ? (
           this.showTrigger === 'arrow-circle' ? (

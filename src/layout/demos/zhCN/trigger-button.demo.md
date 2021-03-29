@@ -6,7 +6,7 @@
 <n-switch v-model:value="collapsed" />
 <n-layout style="height: 240px;">
   <n-layout-header style="height: 64px;"> 酷的页头 </n-layout-header>
-  <n-layout>
+  <n-layout position="absolute" style="top: 64px;" has-sider>
     <n-layout-sider
       collapse-mode="width"
       show-trigger
@@ -16,23 +16,15 @@
     >
       <n-h1>边栏</n-h1>
     </n-layout-sider>
-    <n-layout style="padding: 24px;">
-      <n-layout-content>
-        <span>内容</span>
-      </n-layout-content>
-      <n-layout-footer>
-        <n-h1>页脚</n-h1>
-      </n-layout-footer>
-    </n-layout>
+    <n-layout style="padding: 24px;"> 内容 </n-layout>
   </n-layout>
 </n-layout>
 <n-layout style="height: 240px; overflow: hidden;">
   <n-layout-header position="absolute" style="height: 64px;">
     酷的页头
   </n-layout-header>
-  <n-layout position="absolute" style="top: 64px;">
+  <n-layout position="absolute" style="top: 64px;" has-sider>
     <n-layout-sider
-      position="absolute"
       show-trigger="arrow-circle"
       collapse-mode="transform"
       :collapsed-width="120"
@@ -41,14 +33,7 @@
     >
       <n-h1>边栏</n-h1>
     </n-layout-sider>
-    <n-layout position="absolute" style="padding: 24px;">
-      <n-layout-content>
-        <span>内容</span>
-      </n-layout-content>
-      <n-layout-footer>
-        <n-h1>页脚</n-h1>
-      </n-layout-footer>
-    </n-layout>
+    <n-layout style="padding: 24px;"> 内容 </n-layout>
   </n-layout>
 </n-layout>
 ```

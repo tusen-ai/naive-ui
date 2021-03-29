@@ -6,6 +6,8 @@ Layout is for layout.
 
 The component is a bit complicated to use. But like a manual gear car, it worths a shot.
 
+If you are use version before v2.3.0, you may want to know about <n-a href="#Changes-After-v2.3.0">Changes After v2.3.0</n-a>.
+
 ## Demos
 
 ```demo
@@ -25,8 +27,9 @@ scroll-to
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| position | `'static' \| 'absolute'` | `'static'` | `static` position will make it css position set to `static`. `absolute` position will make it css position set to `absolute` and `left`, `right`, `top`, `bottom` to `0`. `absolute` position is very useful when you want to make content scroll in a fixed container or make the whole page's layout in a fixed position. You may need to change the style of the component to make it display as you expect. |
+| has-sider | `boolean` | `false` | Whether the component has sider inside. If so it must be `true`. |
 | native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on itself. If set to `false`, layout will use a naive-ui style scrollbar for content |
+| position | `'static' \| 'absolute'` | `'static'` | `static` position will make it css position set to `static`. `absolute` position will make it css position set to `absolute` and `left`, `right`, `top`, `bottom` to `0`. `absolute` position is very useful when you want to make content scroll in a fixed container or make the whole page's layout in a fixed position. You may need to change the style of the component to make it display as you expect. |
 
 ### Layout Footer Props
 
@@ -51,7 +54,7 @@ scroll-to
 | collapsed | `boolean` | `undefined` |  |
 | collapsed-width | `number` | `48` |  |
 | default-collapsed | `boolean` | `false` |  |
-| position | `'static' \| 'absolute'` | `'static'` | `static` position will make it css position set to `static`. `absolute` position will make it css position set to `absolute` and `left`, `top`, `bottom` to `0`. `absolute` position is very useful when you want to make content scroll in a fixed container or make the whole page's layout in a fixed position. You may need to change the style of the component to make it as you expect. Make sure its adjacent n-layout or n-layout-content position set to `'absolute'` when its position is `'absolute'`. |
+| position | `'static' \| 'absolute'` | `'static'` | `static` position will make it css position set to `static`. `absolute` position will make it css position set to `absolute` and `left`, `top`, `bottom` to `0`. `absolute` position is very useful when you want to make content scroll in a fixed container or make the whole page's layout in a fixed position. You may need to change the style of the component to make it as you expect. |
 | show-content | `boolean` | `true` | If set to `false`, sider content will be invisible. |
 | show-trigger | `boolean \| 'bar' \| 'arrow-circle'` | `false` | Whether to show the built-in trigger button on sider. |
 | native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on itself. If set to `false`, sider will use a naive-ui style scrollbar for content |
@@ -73,3 +76,21 @@ scroll-to
 | Name | Type | Description |
 | --- | --- | --- |
 | scrollTo | `((xCoord: number, yCoord: number) => void) \| (options: { left?: number, top?: number, behavior: 'smooth' \| 'auto' }) => void` | Scroll to somewhere. |
+
+## Changes After v2.3.0
+
+Due to concerns about performance and SSR, after v2.3.0 you need to specify `has-sider` on the `n-layout` which contains `n-layout-sider`. Collapsing won't work for `n-layout-sider` with `position="absolute"`.
+
+```html
+Before v2.3.0:
+<n-layout>
+  <n-layout-sider />
+  <n-layout />
+</n-layout>
+
+After v2.3.0:
+<n-layout has-sider>
+  <n-layout-sider />
+  <n-layout />
+</n-layout>
+```

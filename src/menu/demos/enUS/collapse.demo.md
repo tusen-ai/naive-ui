@@ -5,14 +5,14 @@ Use collapsable vertical menu with layout sider. Use `collapsed` to control coll
 ```html
 <n-space vertical>
   <n-switch v-model:value="collapsed" />
-  <n-layout>
+  <n-layout has-sider>
     <n-layout-sider
       bordered
       collapse-mode="width"
       :collapsed-width="64"
       :width="240"
       :collapsed="collapsed"
-      show-toggle-button
+      show-trigger
       @collapse="collapsed = true"
       @expand="collapsed = false"
     >

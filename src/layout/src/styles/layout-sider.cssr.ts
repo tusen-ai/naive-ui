@@ -17,6 +17,8 @@ export default cB('layout-sider', `
     transform .3s var(--bezier),
     background-color .3s var(--bezier);
   background-color: var(--sider-color);
+  display: flex;
+  justify-content: flex-end;
 `, [
   cB('layout-toggle-button', `
     transition:
@@ -89,6 +91,7 @@ export default cB('layout-sider', `
     transition: background-color .3s var(--bezier);
   `),
   cE('content', `
+    height: 100%;
     opacity: 0;
     transition: opacity .3s var(--bezier);
   `),

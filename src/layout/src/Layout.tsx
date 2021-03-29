@@ -3,11 +3,11 @@ import {
   defineComponent,
   computed,
   PropType,
-  reactive,
-  inject,
-  provide,
+  CSSProperties,
   ref,
-  ExtractPropTypes
+  ExtractPropTypes,
+  InjectionKey,
+  provide
 } from 'vue'
 import { NScrollbar } from '../../scrollbar'
 import type { ScrollbarProps, ScrollbarRef } from '../../scrollbar'
@@ -18,25 +18,21 @@ import type { LayoutTheme } from '../styles'
 import style from './styles/layout.cssr'
 import { LayoutRef, positionProp } from './interface'
 
-export interface LayoutInjection {
-  hasSider: boolean
-  siderWidth: number | null
-  siderCollapsedWidth: number | null
-  siderCollapseMode: 'width' | 'transform' | null
-  siderPosition: 'absolute' | 'static' | null
-  siderCollapsed: boolean | null
-}
-
 const layoutProps = {
   position: positionProp,
   nativeScrollbar: {
     type: Boolean,
     default: true
   },
-  scrollbarProps: Object as PropType<Partial<ScrollbarProps>>
+  scrollbarProps: Object as PropType<Partial<ScrollbarProps>>,
+  hasSider: Boolean
 } as const
 
 export type LayoutProps = ExtractPropTypes<typeof layoutProps>
+
+export const layoutInjectionKey: InjectionKey<LayoutProps> = Symbol(
+  'layoutInjectionKey'
+)
 
 export default defineComponent({
   name: 'Layout',
@@ -49,35 +45,6 @@ export default defineComponent({
     const selfRef = ref<HTMLElement | null>(null)
     const scrollbarRef = ref<ScrollbarRef | null>(null)
     const themeRef = useTheme('Layout', 'Layout', style, layoutLight, props)
-    const state = reactive<LayoutInjection>({
-      hasSider: false,
-      siderWidth: null,
-      siderCollapsedWidth: null,
-      siderCollapseMode: null,
-      siderPosition: null,
-      siderCollapsed: null
-    })
-    const NLayout = inject<LayoutInjection | null>('NLayout', null)
-    const styleMarginLeftRef = computed(() => {
-      if (NLayout?.hasSider) {
-        if (
-          NLayout.siderPosition === 'absolute' &&
-          props.position === 'absolute'
-        ) {
-          if (NLayout.siderCollapsed) {
-            return `${NLayout.siderCollapsedWidth as number}px`
-          } else {
-            return `${NLayout.siderWidth as number}px`
-          }
-        }
-      }
-      return ''
-    })
-    const mergedLayoutStyleRef = computed(() => {
-      return {
-        marginLeft: styleMarginLeftRef.value
-      }
-    })
     const scrollTo: LayoutRef['scrollTo'] = (
       options: ScrollToOptions | number,
       y?: number
@@ -88,12 +55,10 @@ export default defineComponent({
         selfRef.value.scrollTo(options as any, y as any)
       }
     }
-    provide<LayoutInjection>('NLayout', state)
+    if (__DEV__) provide(layoutInjectionKey, props)
     return {
       selfRef,
       scrollbarRef,
-      state,
-      mergedLayoutStyle: mergedLayoutStyleRef,
       scrollTo,
       mergedTheme: themeRef,
       cssVars: computed(() => {
@@ -116,13 +81,9 @@ export default defineComponent({
         class={[
           'n-layout',
           `n-layout--${this.position}-positioned`,
-          this.state.siderCollapseMode &&
-            `n-layout--${this.state.siderCollapseMode}-collapse-mode`,
-          {
-            'n-layout--has-sider': this.state.hasSider
-          }
+          this.hasSider && 'n-layout--has-sider'
         ]}
-        style={[this.mergedLayoutStyle, this.cssVars] as any}
+        style={this.cssVars as CSSProperties}
       >
         {!this.nativeScrollbar ? (
           <NScrollbar
