@@ -13,3 +13,5 @@ export * from './styles'
 export { darkTheme, createTheme } from './themes'
 
 export { c, cE, cM, cB, cNotM } from './_utils/cssr'
+
+export { default as version } from './version'
