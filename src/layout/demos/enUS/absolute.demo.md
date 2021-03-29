@@ -8,7 +8,7 @@ All layout components can use absolute positioning. It can be used when you want
     <n-layout-header style="height: 64px;"> Cool Header </n-layout-header>
     <n-layout has-sider position="absolute" style="top: 64px; bottom: 64px;">
       <n-layout-sider> Cool Sider </n-layout-sider>
-      <n-layout style="overflow: auto;">
+      <n-layout>
         <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1> <n-h1>Long</n-h1
         ><n-h1>Long</n-h1><n-h1>Long</n-h1> <n-h1>Long</n-h1><n-h1>Long</n-h1
         ><n-h1>Long</n-h1> <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>

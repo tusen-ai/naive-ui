@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.3.1
+
+### Fixes
+
+- Fix `n-layout-sider` horizontal content overflows.
+
 ## 2.3.0
 
 ## Breaking Changes

@@ -14,7 +14,7 @@
   <n-layout style="height: 480px;">
     <n-layout-header style="height: 64px;"> Cool Header </n-layout-header>
     <n-layout position="absolute" style="top: 64px; bottom: 64px;" has-sider>
-      <n-layout-sider ref="sider" style="overflow: auto;">
+      <n-layout-sider ref="sider">
         <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1> <n-h1>Long</n-h1
         ><n-h1>Long</n-h1><n-h1>Long</n-h1> <n-h1>Long</n-h1><n-h1>Long</n-h1
         ><n-h1>Long</n-h1> <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>

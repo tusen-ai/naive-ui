@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.3.1
+
+### Fixes
+
+- 修正 `n-layout-sider` 横向宽度溢出
+
 ## 2.3.0
 
 ## Breaking Changes

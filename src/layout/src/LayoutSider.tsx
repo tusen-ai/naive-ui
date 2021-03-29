@@ -115,9 +115,10 @@ export default defineComponent({
       )
     })
     const contentStyleRef = computed<CSSProperties>(() => {
+      const overflow = props.nativeScrollbar ? 'auto' : ''
       return props.collapseMode === 'transform'
-        ? { width: formatLength(props.width), flexShrink: 0 }
-        : { width: '100%' }
+        ? { width: formatLength(props.width), flexShrink: 0, overflow }
+        : { width: '100%', overflow }
     })
     const uncontrolledCollapsedRef = ref(props.defaultCollapsed)
     const mergedCollapsedRef = useMergedState(
