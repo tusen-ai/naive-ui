@@ -28,10 +28,13 @@ export default defineComponent({
         loadingRef.value = true
         searchTimerId = setTimeout(() => {
           optionsRef.value = [
-            '它烫不了你的舌',
-            '也烧不了你的口',
-            '喝醉吧',
-            '不要回头'
+            'We',
+            'all',
+            'live',
+            'in',
+            'a',
+            'yellow',
+            'submarine'
           ].map((v) => ({
             label: pattern + v,
             value: pattern + v
