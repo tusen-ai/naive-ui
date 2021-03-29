@@ -5,20 +5,25 @@ import {
   defineComponent,
   PropType,
   provide,
-  reactive
+  reactive,
+  InjectionKey
 } from 'vue'
 import { useMemo } from 'vooks'
 import { merge } from 'lodash-es'
 import { warn, getSlot } from '../../_utils'
 import type { Hljs } from '../../_mixins'
-import {
-  ConfigProviderInjection,
+import type {
   GlobalTheme,
   GlobalThemeOverrides,
-  ComponentProps,
-  Icons
+  GlobalComponentConfig,
+  GlobalIconConfig
 } from './interface'
+import type { ConfigProviderInjection } from './internal-interface'
 import { NDateLocale, NLocale } from '../../locales'
+
+export const configProviderInjectionKey: InjectionKey<ConfigProviderInjection> = Symbol(
+  'configProviderInjection'
+)
 
 export const configProviderProps = {
   abstract: {
@@ -39,8 +44,8 @@ export const configProviderProps = {
   hljs: Object as PropType<Hljs>,
   theme: Object as PropType<GlobalTheme | null>,
   themeOverrides: Object as PropType<GlobalThemeOverrides | null>,
-  componentOptions: Object as PropType<ComponentProps>,
-  icons: Object as PropType<Icons>,
+  componentOptions: Object as PropType<GlobalComponentConfig>,
+  icons: Object as PropType<GlobalIconConfig>,
   // deprecated
   legacyTheme: String,
   language: {
@@ -96,10 +101,7 @@ export default defineComponent({
   alias: ['App'],
   props: configProviderProps,
   setup (props) {
-    const NConfigProvider = inject<ConfigProviderInjection | null>(
-      'NConfigProvider',
-      null
-    )
+    const NConfigProvider = inject(configProviderInjectionKey, null)
     const mergedUnstableThemeRef = computed(() => {
       const { theme } = props
       if (theme === null) return undefined
@@ -143,8 +145,8 @@ export default defineComponent({
       if (componentOptions !== undefined) return componentOptions
       return NConfigProvider?.mergedComponentProps
     })
-    provide<ConfigProviderInjection>(
-      'NConfigProvider',
+    provide(
+      configProviderInjectionKey,
       reactive({
         mergedIcons: mergedIconsRef,
         mergedComponentProps: mergedComponentPropsRef,

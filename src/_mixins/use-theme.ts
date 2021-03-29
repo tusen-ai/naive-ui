@@ -3,7 +3,8 @@ import { inject, computed, onBeforeMount, ComputedRef, PropType } from 'vue'
 import { merge } from 'lodash-es'
 import globalStyle from '../_styles/global/index.cssr'
 import { CNode } from 'css-render'
-import { ConfigProviderInjection, GlobalTheme } from '../config-provider'
+import type { GlobalTheme } from '../config-provider'
+import { configProviderInjectionKey } from '../config-provider/src/ConfigProvider'
 import type { ThemeCommonVars } from '../_styles/common'
 
 globalStyle.mount({
@@ -92,10 +93,7 @@ function useTheme<N, T, R> (
       })
     })
   }
-  const NConfigProvider = inject<ConfigProviderInjection | null>(
-    'NConfigProvider',
-    null
-  )
+  const NConfigProvider = inject(configProviderInjectionKey, null)
   const mergedThemeRef = computed(() => {
     // keep props to make theme overrideable
     const {

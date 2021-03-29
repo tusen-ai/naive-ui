@@ -1,5 +1,5 @@
 import { defineComponent, inject, toRef, watch, PropType } from 'vue'
-import { ConfigProviderInjection } from '../../config-provider'
+import { configProviderInjectionKey } from '../../config-provider/src/ConfigProvider'
 import useLegacy, { OnLanguageChange } from './use-legacy'
 
 export default defineComponent({
@@ -22,10 +22,7 @@ export default defineComponent({
     onLanguageChange: Function as PropType<OnLanguageChange>
   },
   setup (props) {
-    const NConfigProvider = inject<ConfigProviderInjection | null>(
-      'NConfigProvider',
-      null
-    )
+    const NConfigProvider = inject(configProviderInjectionKey, null)
     if (NConfigProvider) {
       watch(toRef(NConfigProvider, 'mergedNamespace'), (value, oldValue) => {
         const { onNamespaceChange } = props

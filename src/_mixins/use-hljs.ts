@@ -1,6 +1,6 @@
 import { inject, getCurrentInstance, computed, ComputedRef } from 'vue'
 import type { highlight, getLanguage } from 'highlight.js'
-import { ConfigProviderInjection } from '../config-provider'
+import { configProviderInjectionKey } from '../config-provider/src/ConfigProvider'
 import { warn } from '../_utils'
 
 interface UseHljsProps {
@@ -15,10 +15,7 @@ export interface Hljs {
 export default function useHljs (
   props: UseHljsProps
 ): ComputedRef<Hljs | undefined> {
-  const NConfigProvider = inject<ConfigProviderInjection | null>(
-    'NConfigProvider',
-    null
-  )
+  const NConfigProvider = inject(configProviderInjectionKey, null)
   const vm = getCurrentInstance()?.proxy as any
   if (
     __DEV__ &&

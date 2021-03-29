@@ -1,5 +1,6 @@
 import { inject, computed, ComputedRef } from 'vue'
-import { ConfigProviderInjection } from '../config-provider'
+import type { ConfigProviderInjection } from '../config-provider/src/internal-interface'
+import { configProviderInjectionKey } from '../config-provider/src/ConfigProvider'
 
 type UseConfigProps = Readonly<{
   bordered?: boolean
@@ -18,10 +19,7 @@ export default function useConfig (
     mergedBordered: ComputedRef<boolean>
     namespace: ComputedRef<string | undefined>
   } {
-  const NConfigProvider = inject<ConfigProviderInjection | null>(
-    'NConfigProvider',
-    null
-  )
+  const NConfigProvider = inject(configProviderInjectionKey, null)
   return {
     NConfigProvider,
     mergedBordered: computed(() => {

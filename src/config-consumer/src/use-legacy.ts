@@ -1,5 +1,5 @@
 import { computed, watch, toRef, ComputedRef } from 'vue'
-import { ConfigProviderInjection } from '../../config-provider'
+import { ConfigProviderInjection } from '../../config-provider/src/internal-interface'
 import styleScheme from '../../_deprecated/style-scheme'
 
 export type OnLanguageChange = (
