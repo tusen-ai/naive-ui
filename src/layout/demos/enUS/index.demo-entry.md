@@ -13,6 +13,7 @@ If you are use version before v2.3.0, you may want to know about <n-a href="#Cha
 ```demo
 basic
 border
+set-padding
 absolute
 scrollbar
 collapse

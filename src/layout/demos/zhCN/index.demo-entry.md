@@ -12,6 +12,7 @@
 
 ```demo
 basic
+set-padding
 border
 absolute
 scrollbar
