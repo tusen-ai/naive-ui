@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-collapse` content is truncated by `overflow: hidden`.
+
 ## 2.3.1
 
 ### Fixes

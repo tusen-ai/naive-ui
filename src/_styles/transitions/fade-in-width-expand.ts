@@ -22,11 +22,11 @@ export default function ({
     ),
     c(
       `&.${namespace}-fade-in-width-expand-transition-leave-to, &.${namespace}-fade-in-width-expand-transition-enter-from`,
-      {
-        opacity: '0 !important',
-        marginLeft: '0 !important',
-        marginRight: '0 !important'
-      }
+      `
+      opacity: 0!important;
+      marginLeft: 0!important;
+      marginRight: 0!important;
+    `
     ),
     c(
       `&.${namespace}-fade-in-width-expand-transition-leave-active`,

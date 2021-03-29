@@ -1,6 +1,5 @@
 import {
   h,
-  toRef,
   defineComponent,
   PropType,
   inject,
@@ -8,35 +7,34 @@ import {
   renderSlot,
   VNode
 } from 'vue'
+import { createId } from 'seemly'
 import { ChevronRightIcon as ArrowIcon } from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
 import { useInjectionCollection } from '../../_utils/composable'
 import NCollapseItemContent from './CollapseItemContent'
 import { NCollapseInjection } from './Collapse'
+import { useMemo } from 'vooks'
 
 export default defineComponent({
   name: 'CollapseItem',
   props: {
     title: String,
-    name: {
-      type: [String, Number],
-      default: ''
-    },
+    name: [String, Number],
     displayDirective: String as PropType<'if' | 'show'>
   },
   setup (props) {
+    const randomName = createId()
+    const mergedNameRef = useMemo(() => {
+      return props.name ?? randomName
+    })
     const NCollapse = inject<NCollapseInjection>(
       'NCollapse'
     ) as NCollapseInjection
-    useInjectionCollection(
-      'NCollapse',
-      'collectedItemNames',
-      toRef(props, 'name')
-    )
+    useInjectionCollection('NCollapse', 'collectedItemNames', mergedNameRef)
     const collapsedRef = computed<boolean>(() => {
       const { expandedNames } = NCollapse
       if (Array.isArray(expandedNames)) {
-        const { name } = props
+        const { value: name } = mergedNameRef
         return !~expandedNames.findIndex(
           (expandedName) => expandedName === name
         )
@@ -44,6 +42,7 @@ export default defineComponent({
       return true
     })
     return {
+      randomName,
       collapsed: collapsedRef,
       mergedDisplayDirective: computed<'if' | 'show'>(() => {
         const { displayDirective } = props
@@ -58,7 +57,7 @@ export default defineComponent({
       }),
       handleClick (e: MouseEvent) {
         if (NCollapse) {
-          NCollapse.toggleItem(collapsedRef.value, props.name, e)
+          NCollapse.toggleItem(collapsedRef.value, mergedNameRef.value, e)
         }
       }
     }
@@ -77,17 +76,13 @@ export default defineComponent({
         class={[
           'n-collapse-item',
           `n-collapse-item--${arrowPlacement}-arrow-placement`,
-          {
-            'n-collapse-item--active': !collapsed
-          }
+          !collapsed && 'n-collapse-item--active'
         ]}
       >
         <div
           class={[
             'n-collapse-item__header',
-            {
-              'n-collapse-item__header--active': !collapsed
-            }
+            !collapsed && 'n-collapse-item__header--active'
           ]}
           onClick={this.handleClick}
         >

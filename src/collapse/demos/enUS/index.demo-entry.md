@@ -32,7 +32,7 @@ item-header-click
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | display-directive | `'if' \| 'show'` | `undefined` | The display directive to use when it is rendering its content. `'if'` corresponds to `v-if` and `'show'` corresponds to `v-show`. When it is set to `undefined` the value will follow its outer `n-collapse`. |
-| name | `string \| number` | required |  |
+| name | `string \| number` | random string |  |
 | title | `string` | `undefined` |  |
 
 ## Slots

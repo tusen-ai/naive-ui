@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修正 `n-collapse` 内容被 `overflow: hidden` 截断
+
 ## 2.3.1
 
 ### Fixes
