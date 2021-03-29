@@ -12,40 +12,30 @@ import iconSwitchTransition from '../../../_styles/transitions/icon-switch'
 // --node-color-pressed
 // --node-text-color
 // --node-text-color-disabled
-export default cB(
-  'tree',
-  {
-    fontSize: 'var(--font-size)'
-  },
-  [
-    c(
-      'ul, li',
-      `
+export default cB('tree', {
+  fontSize: 'var(--font-size)'
+}, [
+  c('ul, li', `
     margin: 0;
     padding: 0;
     list-style: none;
-  `
-    ),
-    c('>', [
-      cB('tree-node', [
-        c('&:first-child', {
-          paddingTop: 0
-        })
-      ])
-    ]),
-    cB(
-      'tree-children-wrapper',
-      {
-        marginLeft: '16px'
-      },
-      [fadeInHeightExpandTransition({ duration: '0.15s' })]
-    ),
-    cB('tree-node', {
-      padding: '6px 0 0 0'
-    }),
-    cB(
-      'tree-node-switcher',
-      `
+  `),
+  c('>', [
+    cB('tree-node', [
+      c('&:first-child', {
+        paddingTop: 0
+      })
+    ])
+  ]),
+  cB('tree-children-wrapper', {
+    marginLeft: '16px'
+  }, [
+    fadeInHeightExpandTransition({ duration: '0.15s' })
+  ]),
+  cB('tree-node', {
+    padding: '6px 0 0 0'
+  }),
+  cB('tree-node-switcher', `
     cursor: pointer;
     display: inline-flex;
     height: 24px;
@@ -54,11 +44,8 @@ export default cB(
     justify-content: center;
     transition: transform .15s var(--bezier);
     vertical-align: bottom;
-  `,
-      [
-        cE(
-          'icon',
-          `
+  `, [
+    cE('icon', `
       position: relative;
       height: 14px;
       width: 14px;
@@ -66,34 +53,27 @@ export default cB(
       color: var(--arrow-color);
       transition: color .3s var(--bezier);
       font-size: 14px;
-    `,
-          [
-            cB('icon', [iconSwitchTransition()]),
-            cB(
-              'base-loading',
-              `
+    `, [
+      cB('icon', [iconSwitchTransition()]),
+      cB('base-loading', `
         color: var(--loading-color);
         position: absolute;
         left: 0;
         top: 0;
         right: 0;
         bottom: 0;
-      `,
-              [iconSwitchTransition()]
-            )
-          ]
-        ),
-        cM('hide', {
-          visibility: 'hidden'
-        }),
-        cM('expanded', {
-          transform: 'rotate(90deg)'
-        })
-      ]
-    ),
-    cB(
-      'tree-node-checkbox',
-      `
+      `, [
+        iconSwitchTransition()
+      ])
+    ]),
+    cM('hide', {
+      visibility: 'hidden'
+    }),
+    cM('expanded', {
+      transform: 'rotate(90deg)'
+    })
+  ]),
+  cB('tree-node-checkbox', `
     display: inline-flex;
     height: 24px;
     width: 16px;
@@ -101,11 +81,8 @@ export default cB(
     align-items: center;
     justify-content: center;
     margin-right: 4px;
-  `
-    ),
-    cB(
-      'tree-node-content',
-      `
+  `),
+  cB('tree-node-content', `
     position: relative;
     display: inline-flex;
     height: 24px;
@@ -126,70 +103,57 @@ export default cB(
       text-decoration-color .3s var(--bezier),
       background-color .3s var(--bezier),
       border-color .3s var(--bezier);
-  `,
-      [
-        c('&:last-child', {
-          marginBottom: 0
-        }),
-        cE(
-          'padding-box',
-          `
+  `, [
+    c('&:last-child', {
+      marginBottom: 0
+    }),
+    cE('padding-box', `
       position: absolute;
       top: 0;
       bottom: 0;
       left: 0;
       right: 0;
       background-color: transparent;
-    `
-        ),
-        cE(
-          'text',
-          `
+    `),
+    cE('text', `
       line-height: 1.25;
       border-bottom: 1px solid transparent;
       transition: border-color .3s var(--bezier);
-    `
-        ),
-        cM(
-          'block',
-          {
-            width: 'calc(100% - 24px)'
-          },
-          [
-            cM('checkable', {
-              width: 'calc(100% - 48px)'
-            })
-          ]
-        ),
-        c('&:hover', {
-          backgroundColor: 'var(--node-color-hover)'
-        }),
-        c('&:active', {
-          backgroundColor: 'var(--node-color-pressed)'
-        }),
-        cM('hightlight', [
-          cE('text', {
-            borderBottomColor: 'var(--node-text-color-disabled)'
-          })
-        ]),
-        cM('pending', [
-          c('&:hover', {
-            backgroundColor: 'transparent'
-          }),
-          cM('pending-bottom', {
-            borderBottom: '3px solid var(--node-color-hover)'
-          }),
-          cM('pending-top', {
-            borderTop: '3px solid var(--node-color-hover)'
-          }),
-          cM('pending-body', {
-            backgroundColor: 'var(--node-color-hover)'
-          })
-        ]),
-        cM('selected', {
-          backgroundColor: 'var(--node-color-active)'
-        })
-      ]
-    )
-  ]
-)
+    `),
+    cM('block', {
+      width: 'calc(100% - 24px)'
+    }, [
+      cM('checkable', {
+        width: 'calc(100% - 48px)'
+      })
+    ]),
+    c('&:hover', {
+      backgroundColor: 'var(--node-color-hover)'
+    }),
+    c('&:active', {
+      backgroundColor: 'var(--node-color-pressed)'
+    }),
+    cM('hightlight', [
+      cE('text', {
+        borderBottomColor: 'var(--node-text-color-disabled)'
+      })
+    ]),
+    cM('pending', [
+      c('&:hover', {
+        backgroundColor: 'transparent'
+      }),
+      cM('pending-bottom', {
+        borderBottom: '3px solid var(--node-color-hover)'
+      }),
+      cM('pending-top', {
+        borderTop: '3px solid var(--node-color-hover)'
+      }),
+      cM('pending-body', {
+        backgroundColor: 'var(--node-color-hover)'
+      })
+    ]),
+    cM('selected', {
+      backgroundColor: 'var(--node-color-active)'
+    })
+  ])
+])
