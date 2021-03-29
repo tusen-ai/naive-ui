@@ -144,9 +144,9 @@ const derived = {
   closeColor: neutral(Number(base.alphaClose)),
   closeColorPressed: neutral(Number(base.alphaClose) * 1.25),
   closeColorDisabled: neutral(base.alpha4),
-  closeOpacity: Number(base.alphaClose),
-  closeOpacityHover: Number(base.alphaClose) * 0.8,
-  closeOpacityPressed: Number(base.alphaClose) * 1.25,
+  closeOpacity: base.alphaClose,
+  closeOpacityHover: String(Number(base.alphaClose) * 0.8),
+  closeOpacityPressed: String(Number(base.alphaClose) * 1.25),
 
   // clear
   clearColor: neutral(base.alpha4),

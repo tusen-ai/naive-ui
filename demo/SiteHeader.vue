@@ -73,8 +73,7 @@
 
 <script>
 import { computed, ref } from 'vue'
-import version from '../src/version'
-import { useMessage } from '../src'
+import { useMessage, version } from 'naive-ui'
 import { i18n } from './utils/composables'
 import {
   useThemeName,

@@ -25,6 +25,7 @@ export default cB('scrollbar', `
       `),
       c('>', [
         cB('scrollbar-content', `
+          box-sizing: border-box;
           overflow: hidden;
           min-width: 100%;
         `)

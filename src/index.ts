@@ -15,3 +15,5 @@ export { darkTheme, createTheme } from './themes'
 export { c, cE, cM, cB, cNotM } from './_utils/cssr'
 
 export { default as version } from './version'
+
+export { NThemeEditor } from './theme-editor'

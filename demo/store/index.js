@@ -1,5 +1,6 @@
 import { computed, ref, provide, reactive, toRef, inject } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useMemo } from 'vooks'
 import {
   NConfigProvider,
   darkTheme,
@@ -8,7 +9,7 @@ import {
   dateEnUS,
   dateZhCN,
   useOsTheme
-} from '../../src'
+} from 'naive-ui'
 import { TsConfigProvider } from '../../themes/tusimple/src'
 import { i18n } from '../utils/composables'
 import {
@@ -34,7 +35,7 @@ export function siteSetup () {
     }
   })
   // locale
-  const localeNameRef = computed({
+  const localeNameRef = useMemo({
     get () {
       return route.path.startsWith('/zh-CN') ? 'zh-CN' : 'en-US'
     },
@@ -45,12 +46,13 @@ export function siteSetup () {
   const localeRef = computed(() => {
     return localeNameRef.value === 'zh-CN' ? zhCN : enUS
   })
-  const dateLocaleRef = computed(() => {
+  // useMemo
+  const dateLocaleRef = useMemo(() => {
     return route.params.lang === 'zh-CN' ? dateZhCN : dateEnUS
   })
   // theme
   const osThemeRef = useOsTheme()
-  const themeNameRef = computed({
+  const themeNameRef = useMemo({
     get () {
       switch (route.params.theme) {
         case 'os-theme':

@@ -1,6 +1,5 @@
 import { h } from 'vue'
-import NCol from '../../src/legacy-grid/src/Col'
-import NRow from '../../src/legacy-grid/src/Row'
+import { NCol, NRow } from 'naive-ui'
 
 export default {
   name: 'ComponentDemos',

@@ -145,9 +145,9 @@ const derived: ThemeCommonVars = {
   closeColor: overlay(Number(base.alphaClose)),
   closeColorPressed: overlay(Number(base.alphaClose) * 0.8),
   closeColorDisabled: overlay(base.alpha4),
-  closeOpacity: Number(base.alphaClose),
-  closeOpacityHover: Number(base.alphaClose) * 1.25,
-  closeOpacityPressed: Number(base.alphaClose) * 0.8,
+  closeOpacity: base.alphaClose,
+  closeOpacityHover: String(Number(base.alphaClose) * 1.25),
+  closeOpacityPressed: String(Number(base.alphaClose) * 0.8),
 
   // clear
   clearColor: overlay(base.alpha4),

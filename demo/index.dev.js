@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
+import naive, { NThemeEditor } from '../src/index'
 import { installDemoComponents } from './setup'
 import SiteRoot from './SiteRoot.vue'
-import naive from '../src/index'
 import { routes, zhDocRoutes, enDocRoutes } from './routes/routes'
 import createDemoRouter from './routes/router'
 
@@ -15,6 +15,7 @@ const router = createDemoRouter(app, routes)
 
 app.use(router)
 app.use(naive)
+app.component('NThemeEditor', NThemeEditor)
 installDemoComponents(app)
 
 router.isReady().then(() => {
