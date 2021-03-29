@@ -51,8 +51,8 @@ scroll-to
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | bordered | `boolean` | `false` |  |
-| collapse-mode | `'transform' \| 'width'` | `'transform'` | If set to `'width'`, the sider's content width will be actually collapsed. If set to `'transform'`, the sider will only move it's position and won't change its content width. `'transform'` collapse mode only work with sider in `'absolute'` position. |
-| collapsed | `boolean` | `undefined` |  |
+| collapse-mode | `'transform' \| 'width'` | `'transform'` | If set to `'width'`, the sider's content width will be actually collapsed. If set to `'transform'`, the sider will only move it's position and won't change its content width. |
+| collapsed | `boolean` | `undefined` | Whether the sider is collapsed. It only works for when `position` is `'static'`. |
 | collapsed-width | `number` | `48` |  |
 | default-collapsed | `boolean` | `false` |  |
 | position | `'static' \| 'absolute'` | `'static'` | `static` position will make it css position set to `static`. `absolute` position will make it css position set to `absolute` and `left`, `top`, `bottom` to `0`. `absolute` position is very useful when you want to make content scroll in a fixed container or make the whole page's layout in a fixed position. You may need to change the style of the component to make it as you expect. |

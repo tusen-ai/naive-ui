@@ -51,8 +51,8 @@ scroll-to
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | bordered | `boolean` | `false` |  |
-| collapse-mode | `'transform' \| 'width'` | `'transform'` | 如果设定为 `'width'`，Sider 的内容宽度将会被实际改变；如果设定为 `'transform'`，边栏将只会移动它的位置而不会改变宽度。`'transform'` 的 collapse-mode 只适用于 `'absolute'` position 的 Sider |
-| collapsed | `boolean` | `undefined` |  |
+| collapse-mode | `'transform' \| 'width'` | `'transform'` | 如果设定为 `'width'`，Sider 的内容宽度将会被实际改变；如果设定为 `'transform'`，边栏将只会移动它的位置而不会改变宽度 |
+| collapsed | `boolean` | `undefined` | 边栏是否折叠。只在 `position` 为 `'static'` 时生效 |
 | collapsed-width | `number` | `48` |  |
 | default-collapsed | `boolean` | `false` |  |
 | position | `'static' \| 'absolute'` | `'static'` | `static` 模式将会把 CSS `position` 设为 `static`， `absolute` 模式将会把 CSS `position` 设为 `absolute`，还将 `left`、`top`、`bottom` 设为 `0`。`absolute` 模式在你想将内容在一个固定容器或者将这个页面的布局设为固定位置的时候很有用。你可能需要修改一些 style 来确保它按照你预想的方式展示 |
