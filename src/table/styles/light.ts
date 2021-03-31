@@ -8,7 +8,7 @@ const self = (vars: ThemeCommonVars) => {
     dividerColor,
     cardColor,
     modalColor,
-    actionColor,
+    tableHeaderColor,
     textColor1,
     textColor2,
     borderRadius,
@@ -28,7 +28,7 @@ const self = (vars: ThemeCommonVars) => {
     borderColor: dividerColor,
     tdColor: cardColor,
     tdColorModal: modalColor,
-    thColor: actionColor,
+    thColor: tableHeaderColor,
     thTextColor: textColor1,
     tdTextColor: textColor2,
     thFontWeight: fontWeightStrong

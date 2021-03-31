@@ -5,10 +5,10 @@ const loadingBarDark: LoadingBarTheme = {
   name: 'LoadingBar',
   common: commonDark,
   self (vars) {
-    const { successColor } = vars
+    const { primaryColor } = vars
     return {
       colorError: 'red',
-      colorLoading: successColor,
+      colorLoading: primaryColor,
       height: '2px'
     }
   }

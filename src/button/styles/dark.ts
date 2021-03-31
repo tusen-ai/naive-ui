@@ -39,10 +39,10 @@ const buttonDark: ButtonTheme = {
     } = vars
     return {
       ...commonVariables,
-      heightTiny: heightTiny,
-      heightSmall: heightSmall,
-      heightMedium: heightMedium,
-      heightLarge: heightLarge,
+      heightTiny,
+      heightSmall,
+      heightMedium,
+      heightLarge,
       borderRadiusTiny: borderRadius,
       borderRadiusSmall: borderRadius,
       borderRadiusMedium: borderRadius,

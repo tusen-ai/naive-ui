@@ -3,10 +3,10 @@ import type { ThemeCommonVars } from '../../_styles/common'
 import type { Theme } from '../../_mixins'
 
 const self = (vars: ThemeCommonVars) => {
-  const { successColor, errorColor } = vars
+  const { primaryColor, errorColor } = vars
   return {
     colorError: errorColor,
-    colorLoading: successColor,
+    colorLoading: primaryColor,
     height: '2px'
   }
 }

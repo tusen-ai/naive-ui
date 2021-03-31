@@ -10,7 +10,7 @@ const tableDark: TableTheme = {
       dividerColor,
       cardColor,
       modalColor,
-      actionColor,
+      tableHeaderColor,
       textColor1,
       textColor2,
       fontWeightStrong,
@@ -30,7 +30,7 @@ const tableDark: TableTheme = {
       borderColor: dividerColor,
       tdColor: cardColor,
       tdColorModal: modalColor,
-      thColor: actionColor,
+      thColor: tableHeaderColor,
       thTextColor: textColor1,
       tdTextColor: textColor2,
       thFontWeight: fontWeightStrong
