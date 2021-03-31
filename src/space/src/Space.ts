@@ -1,4 +1,4 @@
-import { h, defineComponent, computed, PropType } from 'vue'
+import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
 import { depx } from 'seemly'
 import { createKey, flatten, getSlot } from '../../_utils'
 import { useTheme } from '../../_mixins'
@@ -41,10 +41,7 @@ export default defineComponent({
       >,
       default: 'medium'
     },
-    itemStyle: {
-      type: [String, Object],
-      default: undefined
-    },
+    itemStyle: [String, Object] as PropType<string | CSSProperties>,
     wrap: {
       type: Boolean,
       default: true

@@ -5,7 +5,8 @@ import {
   renderSlot,
   ref,
   Fragment,
-  toRaw
+  toRaw,
+  watch
 } from 'vue'
 import { cloneDeep, merge } from 'lodash-es'
 import { rgba } from 'seemly'
@@ -55,6 +56,7 @@ const ColorWandIcon = (
 export default defineComponent({
   name: 'ThemeEditor',
   setup () {
+    const fileInputRef = ref<HTMLInputElement | null>(null)
     const { NConfigProvider } = useConfig()
     const theme = computed(() => {
       const mergedUnstableTheme: GlobalTheme =
@@ -78,8 +80,13 @@ export default defineComponent({
       }
       return overrides
     })
-    const overridesRef = ref<any>({})
-    const tempOverridesRef = ref<any>({})
+    const showPanelRef = ref(false)
+    const overridesRef = ref<any>(
+      JSON.parse(localStorage['naive-ui-theme-overrides'] || '{}')
+    )
+    const tempOverridesRef = ref<any>(
+      JSON.parse(localStorage['naive-ui-theme-overrides'] || '{}')
+    )
     const varNamePatternRef = ref('')
     const compNamePatternRef = ref('')
     const tempVarNamePatternRef = ref('')
@@ -121,22 +128,62 @@ export default defineComponent({
         delete compOverrides[varName]
       }
     }
-    function handleClearClick (): void {
+    function handleClearAllClick (): void {
       tempOverridesRef.value = {}
       overridesRef.value = {}
     }
+    function handleImportClick (): void {
+      const { value: fileInput } = fileInputRef
+      if (!fileInput) return
+      fileInput.click()
+    }
+    function handleInputFileChange (): void {
+      const { value: fileInput } = fileInputRef
+      if (!fileInput) return
+      const fileList = fileInput.files
+      const file = fileList?.[0]
+      if (!file) return
+      file
+        .text()
+        .then((value) => {
+          overridesRef.value = JSON.parse(value)
+        })
+        .catch((e) => {
+          alert('Imported File is Invalid')
+          console.error(e)
+        })
+    }
+    function handleExportClick (): void {
+      const url = URL.createObjectURL(
+        new Blob([JSON.stringify(overridesRef.value, undefined, 2)])
+      )
+      const a = document.createElement('a')
+      a.href = url
+      a.download = 'naive-ui-theme-overrides.json'
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+      URL.revokeObjectURL(url)
+    }
+    watch(overridesRef, (value) => {
+      localStorage['naive-ui-theme-overrides'] = JSON.stringify(value)
+    })
     return {
       theme,
-      showPanel: ref(false),
+      showPanel: showPanelRef,
       tempOverrides: tempOverridesRef,
       overrides: overridesRef,
       compNamePattern: compNamePatternRef,
       tempCompNamePattern: tempCompNamePatternRef,
       varNamePattern: varNamePatternRef,
       tempVarNamePattern: tempVarNamePatternRef,
+      fileInputRef,
       applyTempOverrides,
       setTempOverrides,
-      handleClearClick
+      handleClearAllClick,
+      handleExportClick,
+      handleImportClick,
+      handleInputFileChange
     }
   },
   render () {
@@ -193,6 +240,17 @@ export default defineComponent({
                             {{
                               default: () => (
                                 <>
+                                  <input
+                                    type="file"
+                                    ref="fileInputRef"
+                                    style={{
+                                      display: 'block',
+                                      width: 0,
+                                      height: 0,
+                                      visibility: 'hidden'
+                                    }}
+                                    onChange={this.handleInputFileChange}
+                                  />
                                   <div
                                     style={{
                                       marginBottom: '8px',
@@ -238,11 +296,33 @@ export default defineComponent({
                                   </NButton>
                                   <NButton
                                     size="small"
-                                    onClick={this.handleClearClick}
+                                    onClick={this.handleClearAllClick}
                                     block
                                   >
                                     {{ default: () => 'Clear All Variables' }}
                                   </NButton>
+                                  <NSpace itemStyle={{ flex: 1 }}>
+                                    {{
+                                      default: () => (
+                                        <>
+                                          <NButton
+                                            block
+                                            size="small"
+                                            onClick={this.handleImportClick}
+                                          >
+                                            {{ default: () => 'Import' }}
+                                          </NButton>
+                                          <NButton
+                                            block
+                                            size="small"
+                                            onClick={this.handleExportClick}
+                                          >
+                                            {{ default: () => 'Export' }}
+                                          </NButton>
+                                        </>
+                                      )
+                                    }}
+                                  </NSpace>
                                 </>
                               )
                             }}
