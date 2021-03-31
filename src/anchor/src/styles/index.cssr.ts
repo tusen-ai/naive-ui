@@ -10,13 +10,15 @@ import { c, cE, cB, cM, cNotM } from '../../../_utils/cssr'
 // --bezier
 // --rail-color
 // --rail-color-active
+// --rail-width
+// --link-padding
 export default cB('anchor', `
-  padding-left: 4px;
+  padding-left: var(--rail-width);
   position: relative;
 `, [
   cB('anchor-link-background', `
     position: absolute;
-    left: 2px;
+    left: calc(var(--rail-width) / 2);
     width: 100%;
     max-width: 0;
     border-top-right-radius: 10.5px;
@@ -32,8 +34,8 @@ export default cB('anchor', `
     left: 0;
     top: 0;
     bottom: 0;
-    width: 4px;
-    border-radius: 2px;
+    width: var(--rail-width);
+    border-radius: calc(var(--rail-width) / 2);
     overflow: hidden;
     transition: background-color .3s var(--bezier);
     background-color: var(--rail-color);
@@ -41,7 +43,7 @@ export default cB('anchor', `
     cE('bar', `
       position: absolute;
       left: 0;
-      width: 4px;
+      width: var(--rail-width);
       height: 21px;
       background-color: transparent;
       transition: 
@@ -61,7 +63,7 @@ export default cB('anchor', `
     ])
   ]),
   cB('anchor-link', `
-    padding-left: 16px;
+    padding: var(--link-padding);
     position: relative;
     line-height: 1.5;
     font-size: var(--link-font-size);

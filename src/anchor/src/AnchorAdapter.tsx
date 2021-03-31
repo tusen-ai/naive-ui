@@ -44,7 +44,9 @@ export default defineComponent({
             linkTextColorHover,
             linkTextColorPressed,
             linkTextColorActive,
-            linkFontSize
+            linkFontSize,
+            railWidth,
+            linkPadding
           },
           common: { cubicBezierEaseInOut }
         } = themeRef.value
@@ -55,9 +57,11 @@ export default defineComponent({
           '--link-text-color-hover': linkTextColorHover,
           '--link-text-color-active': linkTextColorActive,
           '--link-text-color-pressed': linkTextColorPressed,
+          '--link-padding': linkPadding,
           '--bezier': cubicBezierEaseInOut,
           '--rail-color': railColor,
-          '--rail-color-active': railColorActive
+          '--rail-color-active': railColorActive,
+          '--rail-width': railWidth
         }
       })
     }
