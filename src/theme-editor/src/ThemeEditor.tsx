@@ -157,6 +157,9 @@ export default defineComponent({
           alert('Imported File is Invalid')
           console.error(e)
         })
+        .finally(() => {
+          fileInput.value = ''
+        })
     }
     function handleExportClick (): void {
       const url = URL.createObjectURL(
