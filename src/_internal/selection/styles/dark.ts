@@ -15,7 +15,6 @@ const internalSelectionDark: InternalSelectionTheme = {
       borderRadius,
       textColor2,
       textColor4,
-      textColor5,
       inputColor,
       inputColorDisabled,
       primaryColor,
@@ -28,7 +27,9 @@ const internalSelectionDark: InternalSelectionTheme = {
       iconColorDisabled,
       clearColor,
       clearColorHover,
-      clearColorPressed
+      clearColorPressed,
+      placeholderColor,
+      placeholderColorDisabled
     } = vars
     return {
       ...commonVars,
@@ -36,8 +37,8 @@ const internalSelectionDark: InternalSelectionTheme = {
       // default
       textColor: textColor2,
       textColorDisabled: textColor4,
-      placeholderColor: textColor4,
-      placeholderColorDisabled: textColor5,
+      placeholderColor,
+      placeholderColorDisabled,
       color: inputColor,
       colorDisabled: inputColorDisabled,
       colorActive: changeColor(primaryColor, { alpha: 0.1 }),

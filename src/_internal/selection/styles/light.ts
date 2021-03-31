@@ -10,7 +10,6 @@ const self = (vars: ThemeCommonVars) => {
     borderRadius,
     textColor2,
     textColor4,
-    textColor5,
     inputColor,
     inputColorDisabled,
     primaryColor,
@@ -24,7 +23,9 @@ const self = (vars: ThemeCommonVars) => {
     iconColorDisabled,
     clearColor,
     clearColorHover,
-    clearColorPressed
+    clearColorPressed,
+    placeholderColor,
+    placeholderColorDisabled
   } = vars
   return {
     ...commonVariables,
@@ -32,8 +33,8 @@ const self = (vars: ThemeCommonVars) => {
     // default
     textColor: textColor2,
     textColorDisabled: textColor4,
-    placeholderColor: textColor4,
-    placeholderColorDisabled: textColor5,
+    placeholderColor,
+    placeholderColorDisabled,
     color: inputColor,
     colorDisabled: inputColorDisabled,
     colorActive: inputColor,

@@ -31,7 +31,9 @@ const inputDark: InputTheme = {
       heightLarge,
       clearColor,
       clearColorHover,
-      clearColorPressed
+      clearColorPressed,
+      placeholderColor,
+      placeholderColorDisabled
     } = vars
     return {
       ...commonVariables,
@@ -53,8 +55,8 @@ const inputDark: InputTheme = {
       textDecorationColor: textColor2,
       groupLabelTextColor: textColor2,
       caretColor: primaryColor,
-      placeholderColor: textColor4,
-      placeholderColorDisabled: textColor5,
+      placeholderColor,
+      placeholderColorDisabled,
       color: inputColor,
       colorDisabled: inputColorDisabled,
       colorFocus: changeColor(primaryColor, { alpha: 0.1 }),

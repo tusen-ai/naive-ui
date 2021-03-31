@@ -31,7 +31,9 @@ const self = (vars: ThemeCommonVars) => {
     actionColor,
     clearColor,
     clearColorHover,
-    clearColorPressed
+    clearColorPressed,
+    placeholderColor,
+    placeholderColorDisabled
   } = vars
   return {
     ...commonVariables,
@@ -53,8 +55,8 @@ const self = (vars: ThemeCommonVars) => {
     textColorDisabled: textColor4,
     textDecorationColor: textColor2,
     caretColor: primaryColor,
-    placeholderColor: textColor4,
-    placeholderColorDisabled: textColor5,
+    placeholderColor,
+    placeholderColorDisabled,
     color: inputColor,
     colorDisabled: inputColorDisabled,
     colorFocus: inputColor,
