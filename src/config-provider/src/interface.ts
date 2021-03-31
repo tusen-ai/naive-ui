@@ -9,7 +9,7 @@ export interface GlobalTheme extends GlobalThemeWithoutCommon {
 export type GlobalThemeOverrides = {
   common?: Partial<ThemeCommonVars>
 } & {
-  [key in keyof GlobalThemeWithoutCommon]: ExtractThemeOverrides<
+  [key in keyof GlobalThemeWithoutCommon]?: ExtractThemeOverrides<
   GlobalThemeWithoutCommon[key]
   >
 }

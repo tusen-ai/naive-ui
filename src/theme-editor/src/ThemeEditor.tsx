@@ -61,9 +61,11 @@ export default defineComponent({
     const theme = computed(() => {
       const mergedUnstableTheme: GlobalTheme =
         NConfigProvider?.mergedUnstableTheme || lightTheme
+      const mergedThemeOverrides = NConfigProvider?.mergedUnstableThemeOverrides
       const common = merge(
         {},
         mergedUnstableTheme.common || lightTheme.common,
+        mergedThemeOverrides?.common,
         overridesRef.value.common || {}
       ) as NonNullable<GlobalTheme['common']>
       const overrides: GlobalThemeOverrides = {
@@ -75,8 +77,11 @@ export default defineComponent({
         if (key === 'common') continue
         ;(overrides as any)[key] = (mergedUnstableTheme[key]?.self?.(common) ||
           lightTheme[key].self?.(common)) as any
-        // Here we must use as any, nor ts 2590 will be raised since the union is
-        // too complex
+        // There (last line) we must use as any, nor ts 2590 will be raised since the union
+        // is too complex
+        if (mergedThemeOverrides && (overrides as any)[key]) {
+          merge((overrides as any)[key], mergedThemeOverrides[key])
+        }
       }
       return overrides
     })
