@@ -7,7 +7,7 @@ import {
   Fragment,
   toRaw
 } from 'vue'
-import { cloneDeep } from 'lodash-es'
+import { cloneDeep, merge } from 'lodash-es'
 import { rgba } from 'seemly'
 import {
   GlobalTheme,
@@ -59,7 +59,11 @@ export default defineComponent({
     const theme = computed(() => {
       const mergedUnstableTheme: GlobalTheme =
         NConfigProvider?.mergedUnstableTheme || lightTheme
-      const common = mergedUnstableTheme.common || lightTheme.common
+      const common = merge(
+        {},
+        mergedUnstableTheme.common || lightTheme.common,
+        overridesRef.value.common || {}
+      ) as NonNullable<GlobalTheme['common']>
       const overrides: GlobalThemeOverrides = {
         common
       }
@@ -89,7 +93,11 @@ export default defineComponent({
         try {
           rgba(value)
         } catch {
-          setTempOverrides(compName, varName, '')
+          setTempOverrides(
+            compName,
+            varName,
+            overridesRef.value?.[compName]?.[varName] || ''
+          )
           alert(
             `${compName}.${varName} '${value}' is invalid Color. Only #000[0], #000000[00], rgb(0, 0, 0), rgba(0, 0, 0, 0) formatted color is supported.`
           )
@@ -185,6 +193,15 @@ export default defineComponent({
                             {{
                               default: () => (
                                 <>
+                                  <div
+                                    style={{
+                                      marginBottom: '8px',
+                                      fontSize: '18px',
+                                      fontWeight: 500
+                                    }}
+                                  >
+                                    Theme Editor
+                                  </div>
                                   Component Name
                                   <NInput
                                     onChange={() => {
@@ -194,8 +211,9 @@ export default defineComponent({
                                       this.tempCompNamePattern = value
                                     }}
                                     value={this.tempCompNamePattern}
+                                    placeholder="Filter Component Name"
                                   />
-                                  Variable Name
+                                  Filter Variable Name
                                   <NInput
                                     onChange={(value: string) => {
                                       this.varNamePattern = value
@@ -204,6 +222,7 @@ export default defineComponent({
                                       this.tempVarNamePattern = value
                                     }}
                                     value={this.tempVarNamePattern}
+                                    placeholder="Filter Variable Name"
                                   />
                                   <NButton
                                     size="small"
@@ -229,7 +248,7 @@ export default defineComponent({
                             }}
                           </NSpace>
                           <NDivider />
-                          <NCollapse displayDirective="show">
+                          <NCollapse>
                             {{
                               default: () => {
                                 const {
