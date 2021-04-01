@@ -217,9 +217,9 @@ export default defineComponent({
       return compatibleShowArrowRef.value
     })
     // trigger
-    let triggerVNode = null as VNode | null
+    let triggerVNode: VNode | null = null
     // bodyInstance
-    let bodyInstance = null as BodyInstance | null
+    let bodyInstance: BodyInstance | null = null
     const showTimerIdRef = ref<number | null>(null)
     const hideTimerIdRef = ref<number | null>(null)
     const positionManuallyRef = useMemo(() => {

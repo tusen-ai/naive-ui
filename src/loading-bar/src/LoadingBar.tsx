@@ -6,7 +6,6 @@ import {
   inject,
   withDirectives,
   vShow,
-  VNode,
   CSSProperties,
   ref,
   nextTick
@@ -153,21 +152,13 @@ export default defineComponent({
         {{
           default: () =>
             withDirectives(
-              h(
-                'div',
-                {
-                  class: 'n-loading-bar-container'
-                },
-                [
-                  (
-                    <div
-                      ref="loadingBarRef"
-                      class="n-loading-bar"
-                      style={this.cssVars as CSSProperties}
-                    />
-                  ) as VNode
-                ]
-              ),
+              <div class="n-loading-bar-container">
+                <div
+                  ref="loadingBarRef"
+                  class="n-loading-bar"
+                  style={this.cssVars as CSSProperties}
+                />
+              </div>,
               [[vShow, this.loading || (!this.loading && this.entering)]]
             )
         }}

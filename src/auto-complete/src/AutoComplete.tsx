@@ -8,7 +8,6 @@ import {
   PropType,
   mergeProps,
   renderSlot,
-  VNode,
   withDirectives,
   CSSProperties
 } from 'vue'
@@ -292,24 +291,20 @@ export default defineComponent({
                         value: this.mergedValue
                       },
                       () => [
-                        (
-                          <NInput
-                            theme={this.mergedTheme.peers.Input}
-                            themeOverrides={
-                              this.mergedTheme.peerOverrides.Input
-                            }
-                            bordered={this.mergedBordered}
-                            value={this.mergedValue}
-                            placeholder={this.placeholder}
-                            size={this.mergedSize}
-                            disabled={this.disabled}
-                            clearable={this.clearable}
-                            onClear={this.handleClear}
-                            onFocus={this.handleFocus}
-                            onUpdateValue={this.handleInput}
-                            onBlur={this.handleBlur}
-                          />
-                        ) as VNode
+                        <NInput
+                          theme={this.mergedTheme.peers.Input}
+                          themeOverrides={this.mergedTheme.peerOverrides.Input}
+                          bordered={this.mergedBordered}
+                          value={this.mergedValue}
+                          placeholder={this.placeholder}
+                          size={this.mergedSize}
+                          disabled={this.disabled}
+                          clearable={this.clearable}
+                          onClear={this.handleClear}
+                          onFocus={this.handleFocus}
+                          onUpdateValue={this.handleInput}
+                          onBlur={this.handleBlur}
+                        />
                       ]
                     )
                   )
@@ -333,25 +328,23 @@ export default defineComponent({
                       default: () =>
                         this.active
                           ? withDirectives(
-                            (
-                              <NInternalSelectMenu
-                                ref="menuInstRef"
-                                theme={
-                                  this.mergedTheme.peers.InternalSelectMenu
-                                }
-                                themeOverrides={
-                                  this.mergedTheme.peerOverrides
-                                    .InternalSelectMenu
-                                }
-                                auto-pending
-                                class="n-auto-complete-menu"
-                                style={this.cssVars as CSSProperties}
-                                treeMate={this.treeMate}
-                                multiple={false}
-                                size="medium"
-                                onMenuToggleOption={this.handleToggleOption}
-                              />
-                            ) as VNode,
+                            <NInternalSelectMenu
+                              ref="menuInstRef"
+                              theme={
+                                this.mergedTheme.peers.InternalSelectMenu
+                              }
+                              themeOverrides={
+                                this.mergedTheme.peerOverrides
+                                  .InternalSelectMenu
+                              }
+                              auto-pending
+                              class="n-auto-complete-menu"
+                              style={this.cssVars as CSSProperties}
+                              treeMate={this.treeMate}
+                              multiple={false}
+                              size="medium"
+                              onMenuToggleOption={this.handleToggleOption}
+                            />,
                             [[clickoutside, this.handleClickOutsideMenu]]
                           )
                           : null

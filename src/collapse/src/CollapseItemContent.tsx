@@ -1,4 +1,4 @@
-import { h, withDirectives, vShow, defineComponent, VNode, toRef } from 'vue'
+import { h, withDirectives, vShow, defineComponent, toRef } from 'vue'
 import { useFalseUntilTruthy } from 'vooks'
 import { NFadeInExpandTransition } from '../../_internal'
 
@@ -22,7 +22,7 @@ export default defineComponent({
               <div class="n-collapse-item__content-wrapper">
                 <div class="n-collapse-item__content-inner">{this.$slots}</div>
               </div>
-            ) as VNode
+            )
             return useVShow
               ? withDirectives(contentNode, [[vShow, show]])
               : show

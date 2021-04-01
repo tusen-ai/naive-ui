@@ -9,7 +9,6 @@ import {
   mergeProps,
   renderSlot,
   Transition,
-  VNode,
   ExtractPropTypes,
   CSSProperties
 } from 'vue'
@@ -650,7 +649,7 @@ export default defineComponent({
                     }}
                   </Transition>
                 </div>
-              ] as VNode[]
+              ]
             )
         }}
       </VResizeObserver>

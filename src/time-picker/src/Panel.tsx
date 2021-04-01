@@ -1,4 +1,4 @@
-import { h, ref, defineComponent, inject, PropType, computed, VNode } from 'vue'
+import { h, ref, defineComponent, inject, PropType, computed } from 'vue'
 import { NScrollbar } from '../../scrollbar'
 import { NButton } from '../../button'
 import { NBaseFocusDetector } from '../../_internal'
@@ -263,7 +263,7 @@ export default defineComponent({
           </NButton>
         </div>,
         <NBaseFocusDetector onFocus={this.onFocusDetectorFocus} />
-      ] as VNode[]
+      ]
     )
   }
 })

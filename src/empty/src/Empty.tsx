@@ -4,8 +4,7 @@ import {
   computed,
   PropType,
   CSSProperties,
-  renderSlot,
-  VNode
+  renderSlot
 } from 'vue'
 import { EmptyIcon } from '../../_internal/icons'
 import { useLocale, useTheme } from '../../_mixins'
@@ -69,7 +68,7 @@ export default defineComponent({
       <div class="n-empty" style={this.cssVars as CSSProperties}>
         <div class="n-empty__icon">
           {renderSlot($slots, 'icon', undefined, () => [
-            (<NBaseIcon>{{ default: () => <EmptyIcon /> }}</NBaseIcon>) as VNode
+            <NBaseIcon>{{ default: () => <EmptyIcon /> }}</NBaseIcon>
           ])}
         </div>
         {this.showDescription ? (

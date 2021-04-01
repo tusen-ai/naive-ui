@@ -8,7 +8,6 @@ import {
   PropType,
   watch,
   withDirectives,
-  VNode,
   ExtractPropTypes,
   CSSProperties,
   reactive,
@@ -595,98 +594,97 @@ export default defineComponent({
       >
         <VBinder>
           {{
-            default: () =>
-              [
-                <VTarget>
-                  {{
-                    default: () =>
-                      this.isRange ? (
-                        <NInput
-                          ref="inputInstRef"
-                          value={[this.displayStartTime, this.displayEndTime]}
-                          placeholder={[
-                            this.localizedStartPlaceholder,
-                            this.localizedEndPlaceholder
-                          ]}
-                          textDecoration={[
-                            this.isStartValueInvalid ? 'line-through' : '',
-                            this.isEndValueInvalid ? 'line-through' : ''
-                          ]}
-                          pair
-                          onUpdateValue={this.handleRangeUpdateValue}
-                          {...commonInputProps}
-                        >
-                          {{
-                            separator: () => (
-                              <NBaseIcon class="n-date-picker-icon">
-                                {{ default: () => <ToIcon /> }}
-                              </NBaseIcon>
-                            ),
-                            clear: () => (
-                              <NBaseIcon class="n-date-picker-icon">
-                                {{ default: () => <DateIcon /> }}
-                              </NBaseIcon>
-                            )
-                          }}
-                        </NInput>
-                      ) : (
-                        <NInput
-                          ref="inputInstRef"
-                          value={this.displayTime}
-                          placeholder={this.localizedPlacehoder}
-                          textDecoration={
-                            this.isValueInvalid && !this.isRange
-                              ? 'line-through'
-                              : ''
-                          }
-                          onUpdateValue={this.handleSingleUpdateValue}
-                          {...commonInputProps}
-                        >
-                          {{
-                            clear: () => (
-                              <NBaseIcon class="n-date-picker-icon">
-                                {{ default: () => <DateIcon /> }}
-                              </NBaseIcon>
-                            )
-                          }}
-                        </NInput>
-                      )
-                  }}
-                </VTarget>,
-                <VFollower
-                  show={this.active}
-                  containerClass={this.namespace}
-                  to={this.adjustedTo}
-                  placement="bottom-start"
-                >
-                  {{
-                    default: () => (
-                      <Transition
-                        name="n-fade-in-scale-up-transition"
-                        appear={this.isMounted}
+            default: () => [
+              <VTarget>
+                {{
+                  default: () =>
+                    this.isRange ? (
+                      <NInput
+                        ref="inputInstRef"
+                        value={[this.displayStartTime, this.displayEndTime]}
+                        placeholder={[
+                          this.localizedStartPlaceholder,
+                          this.localizedEndPlaceholder
+                        ]}
+                        textDecoration={[
+                          this.isStartValueInvalid ? 'line-through' : '',
+                          this.isEndValueInvalid ? 'line-through' : ''
+                        ]}
+                        pair
+                        onUpdateValue={this.handleRangeUpdateValue}
+                        {...commonInputProps}
                       >
                         {{
-                          default: () =>
-                            this.active
-                              ? withDirectives(
-                                (this.type === 'datetime' ? (
-                                  <DatetimePanel {...commonPanelProps} />
-                                ) : this.type === 'daterange' ? (
-                                  <DaterangePanel {...commonPanelProps} />
-                                ) : this.type === 'datetimerange' ? (
-                                  <DatetimerangePanel {...commonPanelProps} />
-                                ) : (
-                                  <DatePanel {...commonPanelProps} />
-                                )) as VNode,
-                                [[clickoutside, this.handleClickOutside]]
-                              )
-                              : null
+                          separator: () => (
+                            <NBaseIcon class="n-date-picker-icon">
+                              {{ default: () => <ToIcon /> }}
+                            </NBaseIcon>
+                          ),
+                          clear: () => (
+                            <NBaseIcon class="n-date-picker-icon">
+                              {{ default: () => <DateIcon /> }}
+                            </NBaseIcon>
+                          )
                         }}
-                      </Transition>
+                      </NInput>
+                    ) : (
+                      <NInput
+                        ref="inputInstRef"
+                        value={this.displayTime}
+                        placeholder={this.localizedPlacehoder}
+                        textDecoration={
+                          this.isValueInvalid && !this.isRange
+                            ? 'line-through'
+                            : ''
+                        }
+                        onUpdateValue={this.handleSingleUpdateValue}
+                        {...commonInputProps}
+                      >
+                        {{
+                          clear: () => (
+                            <NBaseIcon class="n-date-picker-icon">
+                              {{ default: () => <DateIcon /> }}
+                            </NBaseIcon>
+                          )
+                        }}
+                      </NInput>
                     )
-                  }}
-                </VFollower>
-              ] as VNode[]
+                }}
+              </VTarget>,
+              <VFollower
+                show={this.active}
+                containerClass={this.namespace}
+                to={this.adjustedTo}
+                placement="bottom-start"
+              >
+                {{
+                  default: () => (
+                    <Transition
+                      name="n-fade-in-scale-up-transition"
+                      appear={this.isMounted}
+                    >
+                      {{
+                        default: () =>
+                          this.active
+                            ? withDirectives(
+                              this.type === 'datetime' ? (
+                                <DatetimePanel {...commonPanelProps} />
+                              ) : this.type === 'daterange' ? (
+                                <DaterangePanel {...commonPanelProps} />
+                              ) : this.type === 'datetimerange' ? (
+                                <DatetimerangePanel {...commonPanelProps} />
+                              ) : (
+                                <DatePanel {...commonPanelProps} />
+                              ),
+                              [[clickoutside, this.handleClickOutside]]
+                            )
+                            : null
+                      }}
+                    </Transition>
+                  )
+                }}
+              </VFollower>
+            ]
           }}
         </VBinder>
       </div>

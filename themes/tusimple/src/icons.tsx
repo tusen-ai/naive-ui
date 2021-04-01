@@ -176,35 +176,35 @@ const toIcon = (
 )
 
 function clear (): VNode {
-  return clearIcon as VNode
+  return clearIcon
 }
 
 function success (): VNode {
-  return successIcon as VNode
+  return successIcon
 }
 
 function warning (): VNode {
-  return warningIcon as VNode
+  return warningIcon
 }
 
 function error (): VNode {
-  return errorIcon as VNode
+  return errorIcon
 }
 
 function attach (): VNode {
-  return attachIcon as VNode
+  return attachIcon
 }
 
 function trash (): VNode {
-  return trashIcon as VNode
+  return trashIcon
 }
 
 function cancel (): VNode {
-  return cancelIcon as VNode
+  return cancelIcon
 }
 
 function to (): VNode {
-  return toIcon as VNode
+  return toIcon
 }
 
 export const icons = {

@@ -11,7 +11,6 @@ import {
   PropType,
   withDirectives,
   vShow,
-  VNode,
   renderSlot,
   mergeProps
 } from 'vue'
@@ -88,53 +87,51 @@ export default defineComponent({
     const { NDrawer, $slots } = this
     return this.displayDirective === 'show' || this.displayed || this.show
       ? withDirectives(
-        (
-          <div>
-            {/* Keep the wrapper dom. Make sure the drawer has a host.
+        <div>
+          {/* Keep the wrapper dom. Make sure the drawer has a host.
             Nor the detached content will disappear without transition */}
-            <Transition
-              name={this.transitionName}
-              appear={this.NDrawer.isMounted}
-              onAfterLeave={this.handleAfterLeave}
-            >
-              {{
-                default: () =>
-                  withDirectives(
-                    h(
-                      'div',
-                      mergeProps(this.$attrs, {
-                        ref: 'bodyRef',
-                        class: [
-                          'n-drawer',
-                            `n-drawer--${this.placement}-placement`,
-                            {
-                              'n-drawer--native-scrollbar': this.nativeScrollbar
-                            }
-                        ]
-                      }),
-                      [
-                        this.nativeScrollbar ? (
-                          renderSlot($slots, 'default')
-                        ) : (
-                          <NScrollbar
-                            {...this.scrollbarProps}
-                            contentClass="n-drawer-scroll-content"
-                            theme={NDrawer.mergedTheme.peers.Scrollbar}
-                            themeOverrides={
-                              NDrawer.mergedTheme.peerOverrides.Scrollbar
-                            }
-                          >
-                            {$slots}
-                          </NScrollbar>
-                        )
-                      ] as VNode[]
-                    ),
-                    [[vShow, this.show]]
-                  )
-              }}
-            </Transition>
-          </div>
-        ) as VNode,
+          <Transition
+            name={this.transitionName}
+            appear={this.NDrawer.isMounted}
+            onAfterLeave={this.handleAfterLeave}
+          >
+            {{
+              default: () =>
+                withDirectives(
+                  h(
+                    'div',
+                    mergeProps(this.$attrs, {
+                      ref: 'bodyRef',
+                      class: [
+                        'n-drawer',
+                          `n-drawer--${this.placement}-placement`,
+                          {
+                            'n-drawer--native-scrollbar': this.nativeScrollbar
+                          }
+                      ]
+                    }),
+                    [
+                      this.nativeScrollbar ? (
+                        renderSlot($slots, 'default')
+                      ) : (
+                        <NScrollbar
+                          {...this.scrollbarProps}
+                          contentClass="n-drawer-scroll-content"
+                          theme={NDrawer.mergedTheme.peers.Scrollbar}
+                          themeOverrides={
+                            NDrawer.mergedTheme.peerOverrides.Scrollbar
+                          }
+                        >
+                          {$slots}
+                        </NScrollbar>
+                      )
+                    ]
+                  ),
+                  [[vShow, this.show]]
+                )
+            }}
+          </Transition>
+        </div>,
         [
           [
             vShow,

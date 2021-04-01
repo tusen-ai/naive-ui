@@ -9,7 +9,6 @@ import {
   renderSlot,
   mergeProps,
   Transition,
-  VNode,
   PropType,
   onMounted,
   onBeforeUnmount
@@ -286,11 +285,9 @@ export default defineComponent({
                             'default',
                             undefined,
                             () => [
-                              (
-                                <NBaseIcon>
-                                  {{ default: () => BackTopIcon }}
-                                </NBaseIcon>
-                              ) as VNode
+                              <NBaseIcon>
+                                {{ default: () => BackTopIcon }}
+                              </NBaseIcon>
                             ]
                           )
                         ]

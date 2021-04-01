@@ -1,12 +1,4 @@
-import {
-  h,
-  defineComponent,
-  PropType,
-  inject,
-  computed,
-  renderSlot,
-  VNode
-} from 'vue'
+import { h, defineComponent, PropType, inject, computed, renderSlot } from 'vue'
 import { createId } from 'seemly'
 import { ChevronRightIcon as ArrowIcon } from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
@@ -89,9 +81,7 @@ export default defineComponent({
           {arrowPlacement === 'right' && headerNode}
           <div class="n-collapse-item-arrow">
             {renderSlot($slots, 'arrow', { collapsed: collapsed }, () => [
-              (
-                <NBaseIcon>{{ default: () => <ArrowIcon /> }}</NBaseIcon>
-              ) as VNode
+              <NBaseIcon>{{ default: () => <ArrowIcon /> }}</NBaseIcon>
             ])}
           </div>
           {arrowPlacement === 'left' && headerNode}

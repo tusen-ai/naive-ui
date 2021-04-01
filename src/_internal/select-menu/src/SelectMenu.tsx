@@ -8,7 +8,6 @@ import {
   watch,
   toRef,
   renderSlot,
-  VNode,
   provide,
   reactive
 } from 'vue'
@@ -415,9 +414,7 @@ export default defineComponent({
           </NScrollbar>
         ) : (
           <div class="n-base-select-menu__empty">
-            {renderSlot($slots, 'empty', undefined, () => [
-              (<NEmpty />) as VNode
-            ])}
+            {renderSlot($slots, 'empty', undefined, () => [<NEmpty />])}
           </div>
         )}
         {$slots.action && (

@@ -1,4 +1,4 @@
-import { h, VNode } from 'vue'
+import { h } from 'vue'
 import { CaretUpOutline, CaretDownOutline } from '@vicons/ionicons5'
 import { colors } from './theme-overrides-light'
 import { GRAY_COLOR_4 } from './vars'
@@ -80,5 +80,5 @@ export const renderFilter: DataTableRenderFilter = ({ active, show }) => {
         </g>
       </svg>
     </div>
-  ) as VNode
+  )
 }

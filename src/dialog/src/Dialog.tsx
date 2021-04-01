@@ -5,7 +5,6 @@ import {
   VNodeChild,
   PropType,
   renderSlot,
-  VNode,
   CSSProperties
 } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
@@ -204,17 +203,11 @@ export default defineComponent({
             <NBaseIcon class="n-dialog__icon">
               {{
                 default: () =>
-                  renderSlot(
-                    $slots,
-                    'icon',
-                    undefined,
-                    () =>
-                      [
-                        this.icon
-                          ? h(render, { render: this.icon })
-                          : iconMap[this.type]
-                      ] as VNode[]
-                  )
+                  renderSlot($slots, 'icon', undefined, () => [
+                    this.icon
+                      ? h(render, { render: this.icon })
+                      : iconMap[this.type]
+                  ])
               }}
             </NBaseIcon>
           </div>
@@ -224,17 +217,11 @@ export default defineComponent({
             <NBaseIcon class="n-dialog__icon">
               {{
                 default: () =>
-                  renderSlot(
-                    $slots,
-                    'icon',
-                    undefined,
-                    () =>
-                      [
-                        this.icon
-                          ? h(render, { render: this.icon })
-                          : iconMap[this.type]
-                      ] as VNode[]
-                  )
+                  renderSlot($slots, 'icon', undefined, () => [
+                    this.icon
+                      ? h(render, { render: this.icon })
+                      : iconMap[this.type]
+                  ])
               }}
             </NBaseIcon>
           ) : null}
@@ -252,42 +239,34 @@ export default defineComponent({
           ])}
         </div>
         <div class="n-dialog__action">
-          {renderSlot(
-            $slots,
-            'action',
-            undefined,
-            () =>
-              [
-                negativeText ? (
-                  <NButton
-                    theme={mergedTheme.peers.Button}
-                    themeOverrides={mergedTheme.peerOverrides.Button}
-                    ghost
-                    size="small"
-                    onClick={handleNegativeClick}
-                  >
-                    {{
-                      default: () =>
-                        h(render, { render: () => this.negativeText })
-                    }}
-                  </NButton>
-                ) : null,
-                <NButton
-                  theme={mergedTheme.peers.Button}
-                  themeOverrides={mergedTheme.peerOverrides.Button}
-                  disabled={loading}
-                  loading={loading}
-                  size="small"
-                  type={type === 'default' ? 'primary' : type}
-                  onClick={handlePositiveClick}
-                >
-                  {{
-                    default: () =>
-                      h(render, { render: () => this.positiveText })
-                  }}
-                </NButton>
-              ] as VNode[]
-          )}
+          {renderSlot($slots, 'action', undefined, () => [
+            negativeText ? (
+              <NButton
+                theme={mergedTheme.peers.Button}
+                themeOverrides={mergedTheme.peerOverrides.Button}
+                ghost
+                size="small"
+                onClick={handleNegativeClick}
+              >
+                {{
+                  default: () => h(render, { render: () => this.negativeText })
+                }}
+              </NButton>
+            ) : null,
+            <NButton
+              theme={mergedTheme.peers.Button}
+              themeOverrides={mergedTheme.peerOverrides.Button}
+              disabled={loading}
+              loading={loading}
+              size="small"
+              type={type === 'default' ? 'primary' : type}
+              onClick={handlePositiveClick}
+            >
+              {{
+                default: () => h(render, { render: () => this.positiveText })
+              }}
+            </NButton>
+          ])}
         </div>
       </div>
     )

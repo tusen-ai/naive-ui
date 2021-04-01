@@ -7,7 +7,6 @@ import {
   CSSProperties,
   reactive,
   withDirectives,
-  VNode,
   Transition
 } from 'vue'
 import { VLazyTeleport } from 'vueuc'
@@ -198,39 +197,34 @@ export default defineComponent({
         {{
           default: () => {
             return withDirectives(
-              (
-                <div
-                  class={['n-drawer-container', this.namespace]}
-                  style={this.cssVars as CSSProperties}
+              <div
+                class={['n-drawer-container', this.namespace]}
+                style={this.cssVars as CSSProperties}
+              >
+                <Transition name="n-fade-in-transition" appear={this.isMounted}>
+                  {{
+                    default: () =>
+                      this.show ? (
+                        <div
+                          class="n-drawer-mask"
+                          onClick={this.handleMaskClick}
+                        />
+                      ) : null
+                  }}
+                </Transition>
+                <NDrawerBodyWrapper
+                  {...this.$attrs}
+                  class={[this.drawerClass, this.$attrs.class]}
+                  style={this.mergedBodyStyle as any}
+                  placement={this.placement}
+                  scrollbarProps={this.scrollbarProps}
+                  show={this.show}
+                  displayDirective={this.displayDirective}
+                  nativeScrollbar={this.nativeScrollbar}
                 >
-                  <Transition
-                    name="n-fade-in-transition"
-                    appear={this.isMounted}
-                  >
-                    {{
-                      default: () =>
-                        this.show ? (
-                          <div
-                            class="n-drawer-mask"
-                            onClick={this.handleMaskClick}
-                          />
-                        ) : null
-                    }}
-                  </Transition>
-                  <NDrawerBodyWrapper
-                    {...this.$attrs}
-                    class={[this.drawerClass, this.$attrs.class]}
-                    style={this.mergedBodyStyle as any}
-                    placement={this.placement}
-                    scrollbarProps={this.scrollbarProps}
-                    show={this.show}
-                    displayDirective={this.displayDirective}
-                    nativeScrollbar={this.nativeScrollbar}
-                  >
-                    {this.$slots}
-                  </NDrawerBodyWrapper>
-                </div>
-              ) as VNode,
+                  {this.$slots}
+                </NDrawerBodyWrapper>
+              </div>,
               [[zindexable, { enabled: this.show }]]
             )
           }

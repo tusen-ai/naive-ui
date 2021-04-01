@@ -10,7 +10,6 @@ import {
   provide,
   nextTick,
   watch,
-  VNode,
   CSSProperties,
   reactive
 } from 'vue'
@@ -645,38 +644,36 @@ export default defineComponent({
                         default: () =>
                           this.active
                             ? withDirectives(
-                              (
-                                <Panel
-                                  ref="panelInstRef"
-                                  style={this.cssVars as CSSProperties}
-                                  transitionDisabled={this.transitionDisabled}
-                                  hourValue={this.hourValue}
-                                  showHour={this.hourInFormat}
-                                  isHourInvalid={this.isHourInvalid}
-                                  isHourDisabled={this.isHourDisabled}
-                                  minuteValue={this.minuteValue}
-                                  showMinute={this.minuteInFormat}
-                                  isMinuteInvalid={this.isMinuteInvalid}
-                                  isMinuteDisabled={this.isMinuteDisabled}
-                                  secondValue={this.secondValue}
-                                  showSecond={this.secondInFormat}
-                                  isSecondInvalid={this.isSecondInvalid}
-                                  isSecondDisabled={this.isSecondDisabled}
-                                  isValueInvalid={this.isValueInvalid}
-                                  nowText={this.localizedNow}
-                                  confirmText={this.localizedPositiveText}
-                                  onFocusout={this.handleMenuFocusOut}
-                                  onKeydown={this.handleMenuKeyDown}
-                                  onHourClick={this.handleHourClick}
-                                  onMinuteClick={this.handleMinuteClick}
-                                  onSecondClick={this.handleSecondClick}
-                                  onNowClick={this.handleNowClick}
-                                  onConfirmClick={this.handleConfirmClick}
-                                  onFocusDetectorFocus={
-                                    this.handleFocusDetectorFocus
-                                  }
-                                />
-                              ) as VNode,
+                              <Panel
+                                ref="panelInstRef"
+                                style={this.cssVars as CSSProperties}
+                                transitionDisabled={this.transitionDisabled}
+                                hourValue={this.hourValue}
+                                showHour={this.hourInFormat}
+                                isHourInvalid={this.isHourInvalid}
+                                isHourDisabled={this.isHourDisabled}
+                                minuteValue={this.minuteValue}
+                                showMinute={this.minuteInFormat}
+                                isMinuteInvalid={this.isMinuteInvalid}
+                                isMinuteDisabled={this.isMinuteDisabled}
+                                secondValue={this.secondValue}
+                                showSecond={this.secondInFormat}
+                                isSecondInvalid={this.isSecondInvalid}
+                                isSecondDisabled={this.isSecondDisabled}
+                                isValueInvalid={this.isValueInvalid}
+                                nowText={this.localizedNow}
+                                confirmText={this.localizedPositiveText}
+                                onFocusout={this.handleMenuFocusOut}
+                                onKeydown={this.handleMenuKeyDown}
+                                onHourClick={this.handleHourClick}
+                                onMinuteClick={this.handleMinuteClick}
+                                onSecondClick={this.handleSecondClick}
+                                onNowClick={this.handleNowClick}
+                                onConfirmClick={this.handleConfirmClick}
+                                onFocusDetectorFocus={
+                                  this.handleFocusDetectorFocus
+                                }
+                              />,
                               [[clickoutside, this.handleClickOutside]]
                             )
                             : null

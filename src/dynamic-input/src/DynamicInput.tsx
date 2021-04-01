@@ -11,8 +11,7 @@ import {
   inject,
   CSSProperties,
   provide,
-  reactive,
-  VNode
+  reactive
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { createId } from 'seemly'
@@ -314,40 +313,39 @@ export default defineComponent({
               <div class="n-dynamic-input-item__action">
                 <NButtonGroup size={buttonSize}>
                   {{
-                    default: () =>
-                      [
-                        !this.removeDisabled ? (
-                          <NButton
-                            theme={mergedTheme.peers.Button}
-                            themeOverrides={mergedTheme.peerOverrides.Button}
-                            circle
-                            onClick={() => remove(index)}
-                          >
-                            {{
-                              icon: () => (
-                                <NBaseIcon>
-                                  {{ default: () => <RemoveIcon /> }}
-                                </NBaseIcon>
-                              )
-                            }}
-                          </NButton>
-                        ) : null,
+                    default: () => [
+                      !this.removeDisabled ? (
                         <NButton
-                          disabled={this.insertionDisabled}
-                          circle
                           theme={mergedTheme.peers.Button}
                           themeOverrides={mergedTheme.peerOverrides.Button}
-                          onClick={() => createItem(index)}
+                          circle
+                          onClick={() => remove(index)}
                         >
                           {{
                             icon: () => (
                               <NBaseIcon>
-                                {{ default: () => <AddIcon /> }}
+                                {{ default: () => <RemoveIcon /> }}
                               </NBaseIcon>
                             )
                           }}
                         </NButton>
-                      ] as VNode[]
+                      ) : null,
+                      <NButton
+                        disabled={this.insertionDisabled}
+                        circle
+                        theme={mergedTheme.peers.Button}
+                        themeOverrides={mergedTheme.peerOverrides.Button}
+                        onClick={() => createItem(index)}
+                      >
+                        {{
+                          icon: () => (
+                            <NBaseIcon>
+                              {{ default: () => <AddIcon /> }}
+                            </NBaseIcon>
+                          )
+                        }}
+                      </NButton>
+                    ]
                   }}
                 </NButtonGroup>
               </div>

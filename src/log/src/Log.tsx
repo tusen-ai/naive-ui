@@ -3,7 +3,6 @@ import {
   Transition,
   defineComponent,
   computed,
-  VNode,
   provide,
   PropType,
   nextTick,
@@ -272,7 +271,7 @@ export default defineComponent({
         <Transition name="n-fade-in-scale-up-transition">
           {{ default: () => (this.loading ? <NLogLoader /> : null) }}
         </Transition>
-      ] as VNode[]
+      ]
     )
   }
 })

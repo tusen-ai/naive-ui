@@ -5,7 +5,6 @@ import {
   inject,
   PropType,
   renderSlot,
-  VNode,
   CSSProperties
 } from 'vue'
 import { NButton } from '../../button'
@@ -84,24 +83,18 @@ export default defineComponent({
           {renderSlot(this.$slots, 'default')}
         </div>
         <div class="n-popconfirm__action">
-          {renderSlot(
-            this.$slots,
-            'action',
-            undefined,
-            () =>
-              [
-                <NButton size="small" onClick={this.handleNegativeClick}>
-                  {this.localizedNegativeText}
-                </NButton>,
-                <NButton
-                  size="small"
-                  type="primary"
-                  onClick={this.handlePositiveClick}
-                >
-                  {this.localizedPositiveText}
-                </NButton>
-              ] as VNode[]
-          )}
+          {renderSlot(this.$slots, 'action', undefined, () => [
+            <NButton size="small" onClick={this.handleNegativeClick}>
+              {this.localizedNegativeText}
+            </NButton>,
+            <NButton
+              size="small"
+              type="primary"
+              onClick={this.handlePositiveClick}
+            >
+              {this.localizedPositiveText}
+            </NButton>
+          ])}
         </div>
       </div>
     )

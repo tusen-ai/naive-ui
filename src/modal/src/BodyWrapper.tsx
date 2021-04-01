@@ -184,68 +184,66 @@ export default defineComponent({
     }
     return this.displayDirective === 'show' || this.displayed || this.show
       ? withDirectives(
-        (
-          <div class="n-modal-body-wrapper">
-            <NScrollbar
-              ref="scrollbarRef"
-              theme={NModal.mergedTheme.peers.Scrollbar}
-              themeOverrides={NModal.mergedTheme.peerOverrides.Scrollbar}
-              contentClass="n-modal-scroll-content"
-            >
-              {{
-                default: () => (
-                  <Transition
-                    name="n-fade-in-scale-up-transition"
-                    appear={NModal.appear ?? NModal.isMounted}
-                    onEnter={handleEnter as any}
-                    onAfterLeave={handleAfterLeave}
-                    onBeforeLeave={handleBeforeLeave as any}
-                  >
-                    {{
-                      default: () =>
-                        withDirectives(
-                          (this.preset === 'confirm' ||
-                            this.preset === 'dialog' ? (
-                              <NDialog
-                                {...this.$attrs}
-                                class="n-modal"
-                                ref="bodyRef"
-                                theme={NModal.mergedTheme.peers.Dialog}
-                                themeOverrides={
-                                  NModal.mergedTheme.peerOverrides.Dialog
-                                }
-                                {...keep(this.$props, dialogPropKeys)}
-                              >
-                                {$slots}
-                              </NDialog>
-                            ) : this.preset === 'card' ? (
-                              <NCard
-                                {...this.$attrs}
-                                ref="bodyRef"
-                                class="n-modal"
-                                theme={NModal.mergedTheme.peers.Card}
-                                themeOverrides={
-                                  NModal.mergedTheme.peerOverrides.Card
-                                }
-                                {...keep(this.$props, cardPropKeys)}
-                              >
-                                {$slots}
-                              </NCard>
-                            ) : (
-                              childNode
-                            )) as any,
-                          [
-                            [vShow, this.show],
-                            [clickoutside, handleClickOutside]
-                          ]
-                        )
-                    }}
-                  </Transition>
-                )
-              }}
-            </NScrollbar>
-          </div>
-        ) as VNode,
+        <div class="n-modal-body-wrapper">
+          <NScrollbar
+            ref="scrollbarRef"
+            theme={NModal.mergedTheme.peers.Scrollbar}
+            themeOverrides={NModal.mergedTheme.peerOverrides.Scrollbar}
+            contentClass="n-modal-scroll-content"
+          >
+            {{
+              default: () => (
+                <Transition
+                  name="n-fade-in-scale-up-transition"
+                  appear={NModal.appear ?? NModal.isMounted}
+                  onEnter={handleEnter as any}
+                  onAfterLeave={handleAfterLeave}
+                  onBeforeLeave={handleBeforeLeave as any}
+                >
+                  {{
+                    default: () =>
+                      withDirectives(
+                        (this.preset === 'confirm' ||
+                          this.preset === 'dialog' ? (
+                            <NDialog
+                              {...this.$attrs}
+                              class="n-modal"
+                              ref="bodyRef"
+                              theme={NModal.mergedTheme.peers.Dialog}
+                              themeOverrides={
+                                NModal.mergedTheme.peerOverrides.Dialog
+                              }
+                              {...keep(this.$props, dialogPropKeys)}
+                            >
+                              {$slots}
+                            </NDialog>
+                          ) : this.preset === 'card' ? (
+                            <NCard
+                              {...this.$attrs}
+                              ref="bodyRef"
+                              class="n-modal"
+                              theme={NModal.mergedTheme.peers.Card}
+                              themeOverrides={
+                                NModal.mergedTheme.peerOverrides.Card
+                              }
+                              {...keep(this.$props, cardPropKeys)}
+                            >
+                              {$slots}
+                            </NCard>
+                          ) : (
+                            childNode
+                          )) as any,
+                        [
+                          [vShow, this.show],
+                          [clickoutside, handleClickOutside]
+                        ]
+                      )
+                  }}
+                </Transition>
+              )
+            }}
+          </NScrollbar>
+        </div>,
         [
           [
             vShow,

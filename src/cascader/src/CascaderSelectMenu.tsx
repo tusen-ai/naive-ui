@@ -5,7 +5,6 @@ import {
   inject,
   toRef,
   defineComponent,
-  VNode,
   PropType,
   computed,
   watch,
@@ -165,21 +164,19 @@ export default defineComponent({
           default: () =>
             this.show
               ? withDirectives(
-                (
-                  <NInternalSelectMenu
-                    ref="menuInstRef"
-                    class="n-cascader-menu"
-                    autoPending
-                    themeOverrides={
-                      NCascader.mergedTheme.peerOverrides.InternalSelectMenu
-                    }
-                    theme={NCascader.mergedTheme.peers.InternalSelectMenu}
-                    treeMate={this.selectTreeMate}
-                    multiple={this.multiple}
-                    value={this.value}
-                    onMenuToggleOption={this.handleToggleOption}
-                  />
-                ) as VNode,
+                <NInternalSelectMenu
+                  ref="menuInstRef"
+                  class="n-cascader-menu"
+                  autoPending
+                  themeOverrides={
+                    NCascader.mergedTheme.peerOverrides.InternalSelectMenu
+                  }
+                  theme={NCascader.mergedTheme.peers.InternalSelectMenu}
+                  treeMate={this.selectTreeMate}
+                  multiple={this.multiple}
+                  value={this.value}
+                  onMenuToggleOption={this.handleToggleOption}
+                />,
                 [[clickoutside, this.handleClickOutside]]
               )
               : null

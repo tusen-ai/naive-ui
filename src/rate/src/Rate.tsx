@@ -5,7 +5,6 @@ import {
   computed,
   defineComponent,
   renderList,
-  VNode,
   PropType,
   CSSProperties
 } from 'vue'
@@ -104,28 +103,24 @@ export default defineComponent({
         style={this.cssVars as CSSProperties}
         onMouseleave={this.handleMouseLeave}
       >
-        {renderList(
-          this.count,
-          (_, index) =>
-            (
-              <div
-                key={index}
-                class={[
-                  'n-rate__item',
-                  {
-                    'n-rate__item--active':
-                      hoverIndex !== null
-                        ? index <= hoverIndex
-                        : index < mergedValue
-                  }
-                ]}
-                onClick={() => this.handleClick(index)}
-                onMouseenter={() => this.handleMouseEnter(index)}
-              >
-                <NBaseIcon>{{ default: () => StarIcon }}</NBaseIcon>
-              </div>
-            ) as VNode
-        )}
+        {renderList(this.count, (_, index) => (
+          <div
+            key={index}
+            class={[
+              'n-rate__item',
+              {
+                'n-rate__item--active':
+                  hoverIndex !== null
+                    ? index <= hoverIndex
+                    : index < mergedValue
+              }
+            ]}
+            onClick={() => this.handleClick(index)}
+            onMouseenter={() => this.handleMouseEnter(index)}
+          >
+            <NBaseIcon>{{ default: () => StarIcon }}</NBaseIcon>
+          </div>
+        ))}
       </div>
     )
   }

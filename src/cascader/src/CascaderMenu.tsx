@@ -8,8 +8,7 @@ import {
   inject,
   nextTick,
   Transition,
-  withDirectives,
-  VNode
+  withDirectives
 } from 'vue'
 import { FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
@@ -103,28 +102,26 @@ export default defineComponent({
           default: () =>
             this.show
               ? withDirectives(
-                (
-                  <div
-                    class="n-cascader-menu"
-                    onMousedown={this.handleMenuMouseDown}
-                  >
-                    {this.menuModel.map((submenuOptions, index) => {
-                      return (
-                        <NCascaderSubmenu
-                          ref={
-                            ((instance: CascaderSubmenuInstance) => {
-                              if (instance) submenuInstRefs[index] = instance
-                            }) as any
-                          }
-                          key={index}
-                          tmNodes={submenuOptions}
-                          depth={index + 1}
-                        />
-                      )
-                    })}
-                    <NBaseMenuMask ref="maskInstRef" />
-                  </div>
-                ) as VNode,
+                <div
+                  class="n-cascader-menu"
+                  onMousedown={this.handleMenuMouseDown}
+                >
+                  {this.menuModel.map((submenuOptions, index) => {
+                    return (
+                      <NCascaderSubmenu
+                        ref={
+                          ((instance: CascaderSubmenuInstance) => {
+                            if (instance) submenuInstRefs[index] = instance
+                          }) as any
+                        }
+                        key={index}
+                        tmNodes={submenuOptions}
+                        depth={index + 1}
+                      />
+                    )
+                  })}
+                  <NBaseMenuMask ref="maskInstRef" />
+                </div>,
                 [[clickoutside, this.handleClickOutside]]
               )
               : null
