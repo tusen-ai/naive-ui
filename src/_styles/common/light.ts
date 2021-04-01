@@ -117,9 +117,9 @@ const derived = {
   errorColorSuppl: base.errorSuppl,
   // text color
   textColorBase: base.neutralTextBase,
-  textColor1: neutral(base.alpha1),
-  textColor2: neutral(base.alpha2),
-  textColor3: neutral(base.alpha3),
+  textColor2: 'rgb(70, 74, 78)',
+  textColor1: 'rgb(44, 47, 50)',
+  textColor3: 'rgb(158, 164, 170)',
   // textColor4: neutral(base.alpha4), // disabled, placeholder, icon
   // textColor5: neutral(base.alpha5),
 
@@ -136,8 +136,8 @@ const derived = {
   opacity5: base.alpha5,
   opacityPending: base.alphaPending,
 
-  dividerColor: neutral(base.alphaDivider),
-  borderColor: neutral(base.alphaBorder),
+  dividerColor: 'rgb(239, 239, 245)',
+  borderColor: 'rgb(224, 224, 230)',
 
   // close
   closeColorHover: neutral(Number(base.alphaClose) * 0.8),
