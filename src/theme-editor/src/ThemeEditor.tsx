@@ -152,6 +152,7 @@ export default defineComponent({
         .text()
         .then((value) => {
           overridesRef.value = JSON.parse(value)
+          tempOverridesRef.value = JSON.parse(value)
         })
         .catch((e) => {
           alert('Imported File is Invalid')
