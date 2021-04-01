@@ -7,8 +7,7 @@ import type { Theme } from '../../_mixins'
 const self = (vars: ThemeCommonVars) => {
   const {
     textColor2,
-    textColor4,
-    textColor5,
+    textColorDisabled,
     primaryColor,
     primaryColorHover,
     inputColor,
@@ -52,7 +51,7 @@ const self = (vars: ThemeCommonVars) => {
     groupLabelColor: actionColor,
     groupLabelTextColor: textColor2,
     textColor: textColor2,
-    textColorDisabled: textColor4,
+    textColorDisabled,
     textDecorationColor: textColor2,
     caretColor: primaryColor,
     placeholderColor,
@@ -87,8 +86,8 @@ const self = (vars: ThemeCommonVars) => {
     clearColor,
     clearColorHover,
     clearColorPressed,
-    iconColor: textColor4,
-    iconColorDisabled: textColor5,
+    iconColor: placeholderColor,
+    iconColorDisabled: placeholderColorDisabled,
     suffixTextColor: textColor2
   }
 }

@@ -121,8 +121,8 @@ const derived: ThemeCommonVars = {
   textColor1: overlay(base.alpha1),
   textColor2: overlay(base.alpha2),
   textColor3: overlay(base.alpha3),
-  textColor4: overlay(base.alpha4), // disabled, placeholder, icon
-  textColor5: overlay(base.alpha5),
+  // textColor4: overlay(base.alpha4), // disabled, placeholder, icon
+  // textColor5: overlay(base.alpha5),
 
   textColorDisabled: overlay(base.alpha4),
   placeholderColor: overlay(base.alpha4),

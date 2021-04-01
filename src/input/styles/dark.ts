@@ -9,8 +9,7 @@ const inputDark: InputTheme = {
   self (vars) {
     const {
       textColor2,
-      textColor4,
-      textColor5,
+      textColorDisabled,
       primaryColor,
       primaryColorHover,
       inputColor,
@@ -51,7 +50,7 @@ const inputDark: InputTheme = {
       iconSize: '16px',
       groupLabelColor: inputColor,
       textColor: textColor2,
-      textColorDisabled: textColor4,
+      textColorDisabled,
       textDecorationColor: textColor2,
       groupLabelTextColor: textColor2,
       caretColor: primaryColor,
@@ -87,8 +86,8 @@ const inputDark: InputTheme = {
       clearColor,
       clearColorHover,
       clearColorPressed,
-      iconColor: textColor4,
-      iconColorDisabled: textColor5,
+      iconColor: placeholderColor,
+      iconColorDisabled: placeholderColorDisabled,
       suffixTextColor: textColor2
     }
   }

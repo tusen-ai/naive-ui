@@ -66,8 +66,8 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     inputColorDisabled: '#333333',
 
     textColor3: '#ADADAD',
-    textColor4: '#5B5B5B', // disabled, placeholder, icon
-    textColor5: '#848484',
+    placeholderColor: '#5B5B5B', // disabled, placeholder, icon
+    placeholderColorDisabled: '#848484',
     tableHeaderColor: '#282828',
 
     hoverColor: 'rgba(79, 178, 51, 0.15)',

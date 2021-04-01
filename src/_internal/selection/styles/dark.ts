@@ -14,7 +14,7 @@ const internalSelectionDark: InternalSelectionTheme = {
     const {
       borderRadius,
       textColor2,
-      textColor4,
+      textColorDisabled,
       inputColor,
       inputColorDisabled,
       primaryColor,
@@ -36,7 +36,7 @@ const internalSelectionDark: InternalSelectionTheme = {
       borderRadius: borderRadius,
       // default
       textColor: textColor2,
-      textColorDisabled: textColor4,
+      textColorDisabled,
       placeholderColor,
       placeholderColorDisabled,
       color: inputColor,

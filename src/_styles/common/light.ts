@@ -120,8 +120,8 @@ const derived = {
   textColor1: neutral(base.alpha1),
   textColor2: neutral(base.alpha2),
   textColor3: neutral(base.alpha3),
-  textColor4: neutral(base.alpha4), // disabled, placeholder, icon
-  textColor5: neutral(base.alpha5),
+  // textColor4: neutral(base.alpha4), // disabled, placeholder, icon
+  // textColor5: neutral(base.alpha5),
 
   textColorDisabled: neutral(base.alpha4),
   placeholderColor: neutral(base.alpha4),

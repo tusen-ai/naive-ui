@@ -9,7 +9,7 @@ const self = (vars: ThemeCommonVars) => {
   const {
     borderRadius,
     textColor2,
-    textColor4,
+    textColorDisabled,
     inputColor,
     inputColorDisabled,
     primaryColor,
@@ -32,7 +32,7 @@ const self = (vars: ThemeCommonVars) => {
     borderRadius: borderRadius,
     // default
     textColor: textColor2,
-    textColorDisabled: textColor4,
+    textColorDisabled,
     placeholderColor,
     placeholderColorDisabled,
     color: inputColor,
