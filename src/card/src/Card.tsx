@@ -13,6 +13,7 @@ import { NBaseClose } from '../../_internal'
 import { cardLight } from '../styles'
 import type { CardTheme } from '../styles'
 import style from './styles/index.cssr'
+import { getPadding } from 'seemly'
 
 export interface Segmented {
   content?: boolean | 'soft'
@@ -81,14 +82,17 @@ export default defineComponent({
             lineHeight,
             closeSize,
             boxShadow,
-            [createKey('paddingTop', size)]: paddingTop,
-            [createKey('paddingBottom', size)]: paddingBottom,
-            [createKey('paddingLeft', size)]: paddingLeft,
+            [createKey('padding', size)]: padding,
             [createKey('fontSize', size)]: fontSize,
             [createKey('titleFontSize', size)]: titleFontSize
           },
           common: { cubicBezierEaseInOut }
         } = themeRef.value
+        const {
+          top: paddingTop,
+          left: paddingLeft,
+          bottom: paddingBottom
+        } = getPadding(padding)
         return {
           '--bezier': cubicBezierEaseInOut,
           '--border-radius': borderRadius,

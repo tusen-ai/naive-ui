@@ -1,8 +1,5 @@
 export default {
-  marginHorizontalSmall: '8px',
-  marginHorizontalMedium: '12px',
-  marginHorizontalLarge: '16px',
-  marginVerticalSmall: '4px',
-  marginVerticalMedium: '8px',
-  marginVerticalLarge: '12px'
+  gapSmall: '4px 8px',
+  gapMedium: '8px 12px',
+  gapLarge: '12px 16px'
 }

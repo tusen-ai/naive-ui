@@ -15,7 +15,7 @@ import {
   WatchStopHandle
 } from 'vue'
 import { useMergedState } from 'vooks'
-import { toRgbString, getAlphaString } from 'seemly'
+import { toRgbString, getAlphaString, getPadding } from 'seemly'
 import { VResizeObserver } from 'vueuc'
 import { NBaseClear } from '../../_internal'
 import { useTheme, useLocale, useFormItem, useConfig } from '../../_mixins'
@@ -701,12 +701,12 @@ export default defineComponent({
             iconColor,
             iconColorDisabled,
             suffixTextColor,
-            [createKey('paddingLeft', size)]: paddingLeft,
-            [createKey('paddingRight', size)]: paddingRight,
+            [createKey('padding', size)]: padding,
             [createKey('fontSize', size)]: fontSize,
             [createKey('height', size)]: height
           }
         } = themeRef.value
+        const { left: paddingLeft, right: paddingRight } = getPadding(padding)
         return {
           '--bezier': cubicBezierEaseInOut,
           '--color': color,

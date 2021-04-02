@@ -1,11 +1,7 @@
 export default {
-  paddingLeftTiny: '8px',
-  paddingLeftSmall: '10px',
-  paddingLeftMedium: '12px',
-  paddingLeftLarge: '14px',
-  paddingRightTiny: '8px',
-  paddingRightSmall: '10px',
-  paddingRightMedium: '12px',
-  paddingRightLarge: '14px',
+  paddingTiny: '0 8px',
+  paddingSmall: '0 10px',
+  paddingMedium: '0 12px',
+  paddingLarge: '0 14px',
   clearSize: '16px'
 }

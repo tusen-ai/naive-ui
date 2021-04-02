@@ -5,6 +5,7 @@ import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { spaceLight } from '../styles'
 import type { SpaceTheme } from '../styles'
+import { getGap } from 'seemly/lib/css'
 
 type Align =
   | 'stretch'
@@ -65,14 +66,12 @@ export default defineComponent({
           }
         }
         const {
-          self: {
-            [createKey('marginHorizontal', size)]: marginHorizontal,
-            [createKey('marginVertical', size)]: marginVertical
-          }
+          self: { [createKey('gap', size)]: gap }
         } = themeRef.value
+        const { row, col } = getGap(gap)
         return {
-          horizontal: depx(marginHorizontal),
-          vertical: depx(marginVertical)
+          horizontal: depx(col),
+          vertical: depx(row)
         }
       })
     }
