@@ -1,4 +1,11 @@
-import { computed, h, defineComponent, PropType, VNode } from 'vue'
+import {
+  computed,
+  h,
+  defineComponent,
+  PropType,
+  VNode,
+  CSSProperties
+} from 'vue'
 import { useCompitable } from 'vooks'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -139,52 +146,40 @@ export default defineComponent({
       if (labelPlacement === 'left') {
         if (bordered) {
           state.row.push(
-            h(
-              'th',
-              {
-                class: 'n-descriptions-table-header',
-                colspan: 1
-              },
-              itemLabel
-            ),
-            h(
-              'td',
-              {
-                class: 'n-descriptions-table-content',
-                colspan: isLastIteration
+            <th class="n-descriptions-table-header" colspan={1}>
+              {itemLabel}
+            </th>,
+            <td
+              class="n-descriptions-table-content"
+              colspan={
+                isLastIteration
                   ? (compitableColumn - memorizedSpan) * 2 + 1
                   : itemSpan * 2 - 1
-              },
-              itemChildren
-            )
+              }
+            >
+              {itemChildren}
+            </td>
           )
         } else {
           state.row.push(
-            h(
-              'td',
-              {
-                class: 'n-descriptions-table-content',
-                colspan: isLastIteration
+            <td
+              class="n-descriptions-table-content"
+              colspan={
+                isLastIteration
                   ? (compitableColumn - memorizedSpan) * 2
                   : itemSpan * 2
-              },
-              [
-                h(
-                  'span',
-                  {
-                    class: 'n-descriptions-table-content__label'
-                  },
-                  itemLabel.concat([': '])
-                ),
-                h(
-                  'span',
-                  {
-                    class: 'n-descriptions-table-content__content'
-                  },
-                  itemChildren
-                )
-              ]
-            )
+              }
+            >
+              <span class="n-descriptions-table-content__label">
+                {[
+                  ...itemLabel,
+                  <span class="n-descriptions-separator">:</span>
+                ]}
+              </span>
+              <span class="n-descriptions-table-content__content">
+                {itemChildren}
+              </span>
+            </td>
           )
         }
       } else {
@@ -192,24 +187,14 @@ export default defineComponent({
           ? (compitableColumn - memorizedSpan) * 2
           : itemSpan * 2
         state.row.push(
-          h(
-            'th',
-            {
-              class: 'n-descriptions-table-header',
-              colspan
-            },
-            itemLabel
-          )
+          <th class="n-descriptions-table-header" colspan={colspan}>
+            {itemLabel}
+          </th>
         )
         state.secondRow.push(
-          h(
-            'td',
-            {
-              class: 'n-descriptions-table-content',
-              colspan
-            },
-            itemChildren
-          )
+          <td class="n-descriptions-table-content" colspan={colspan}>
+            {itemChildren}
+          </td>
         )
       }
       if (state.span >= compitableColumn || isLastIteration) {
@@ -227,55 +212,31 @@ export default defineComponent({
       }
       return state
     }, defaultState)
-    const rows = itemState.rows.map((row) =>
-      h(
-        'tr',
-        {
-          class: 'n-descriptions-table-row'
-        },
-        row
-      )
-    )
-    return h(
-      'div',
-      {
-        style: cssVars,
-        class: [
+    const rows = itemState.rows.map((row) => (
+      <tr class="n-descriptions-table-row">{row}</tr>
+    ))
+    return (
+      <div
+        style={cssVars as CSSProperties}
+        class={[
           'n-descriptions',
           `n-descriptions--${labelPlacement}-label-placement`,
           `n-descriptions--${labelAlign}-label-align`,
           `n-descriptions--${size}-size`,
-          {
-            'n-descriptions--bordered': bordered
-          }
-        ]
-      },
-      [
-        title || this.$slots.header
-          ? h(
-            'div',
-            {
-              class: 'n-descriptions-header'
-            },
-            title ? [title] : getSlot(this, 'header')
-          )
-          : null,
-        h(
-          'div',
-          {
-            class: 'n-descriptions-table-wrapper'
-          },
-          [
-            h(
-              'table',
-              {
-                class: 'n-descriptions-table'
-              },
-              [h('tbody', null, rows)]
-            )
-          ]
-        )
-      ]
+          bordered && 'n-descriptions--bordered'
+        ]}
+      >
+        {title || this.$slots.header ? (
+          <div class="n-descriptions-header">
+            {title || getSlot(this, 'header')}
+          </div>
+        ) : null}
+        <div class="n-descriptions-table-wrapper">
+          <table class="n-descriptions-table">
+            <tbody>{rows}</tbody>
+          </table>
+        </div>
+      </div>
     )
   }
 })
