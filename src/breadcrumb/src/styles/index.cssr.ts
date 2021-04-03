@@ -29,7 +29,7 @@ export default cB(
         color: 'var(--item-text-color)'
       }),
       cE('separator', {
-        margin: '0 6px',
+        margin: '0 8px',
         color: 'var(--separator-color)',
         transition: 'color .3s var(--bezier)'
       }),

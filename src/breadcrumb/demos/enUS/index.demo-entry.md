@@ -6,6 +6,9 @@ It doesn't look like what it calls.
 
 ```demo
 basic
+dropdown
+separator
+separator-per-item
 ```
 
 ## Props
@@ -15,6 +18,12 @@ basic
 | Name      | Type     | Default | Description |
 | --------- | -------- | ------- | ----------- |
 | separator | `string` | `'/'`   |             |
+
+### BreadcrumbItem Props
+
+| Name      | Type     | Default     | Description |
+| --------- | -------- | ----------- | ----------- |
+| separator | `string` | `undefined` |             |
 
 ## Slots
 
@@ -26,6 +35,7 @@ basic
 
 ### Breadcrumb Item Slots
 
-| Name    | Parameters | Description |
-| ------- | ---------- | ----------- |
-| default | `()`       |             |
+| Name      | Parameters | Description |
+| --------- | ---------- | ----------- |
+| default   | `()`       |             |
+| separator | `()`       |             |

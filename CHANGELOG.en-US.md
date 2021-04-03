@@ -5,7 +5,8 @@
 ### Feats
 
 - Add `n-page-header` component.
-- `n-statistic` add label slot.
+- `n-statistic` add `label` slot.
+- `n-breadcrumb-item` add `separator` slot & prop.
 
 ### Refactors
 

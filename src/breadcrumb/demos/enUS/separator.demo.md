@@ -1,9 +1,11 @@
-# Basic
+# Custom Separator
+
+Use separator prop to custom separator.
 
 ```html
-<n-breadcrumb>
-  <n-breadcrumb-item
-    ><n-icon><md-cash /></n-icon> Home</n-breadcrumb-item
+<n-breadcrumb separator=">">
+  <n-breadcrumb-item>
+    <n-icon><md-cash /></n-icon> Home</n-breadcrumb-item
   >
   <n-breadcrumb-item
     ><n-icon><md-cash /></n-icon> Account</n-breadcrumb-item
