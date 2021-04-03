@@ -2,6 +2,15 @@
 
 ## Pending
 
+### Feats
+
+- 添加 `n-page-header` 组件
+- `n-statistic` 增加 label slot
+
+### Refactors
+
+- 重构 `n-statistic` 样式
+
 ### Fixes
 
 - 修正 `n-collapse` 内容被 `overflow: hidden` 截断

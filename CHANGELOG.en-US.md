@@ -2,6 +2,15 @@
 
 ## Pending
 
+### Feats
+
+- Add `n-page-header` component.
+- `n-statistic` add label slot.
+
+### Refactors
+
+- Refactor `n-statistic`'s style
+
 ### Fixes
 
 - Fix `n-collapse` content is truncated by `overflow: hidden`.

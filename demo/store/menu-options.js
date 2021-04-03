@@ -176,6 +176,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           path: '/n-icon'
         },
         {
+          en: 'PageHeader',
+          zh: '页头',
+          enSuffix: true,
+          path: '/n-page-header'
+        },
+        {
           en: 'Tag',
           zh: '标签',
           enSuffix: true,
