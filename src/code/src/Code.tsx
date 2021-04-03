@@ -6,7 +6,8 @@ import {
   onMounted,
   ref,
   computed,
-  PropType
+  PropType,
+  CSSProperties
 } from 'vue'
 import { useTheme, useHljs, Hljs } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -116,19 +117,10 @@ export default defineComponent({
   },
   render () {
     const { default: defaultSlot } = this.$slots
-    return h(
-      'code',
-      {
-        class: 'n-code',
-        style: this.cssVars
-      },
-      [
-        defaultSlot
-          ? defaultSlot()
-          : h('pre', {
-            ref: 'codeRef'
-          })
-      ]
+    return (
+      <code class="n-code" style={this.cssVars as CSSProperties}>
+        {defaultSlot ? defaultSlot() : <pre ref="codeRef"></pre>}
+      </code>
     )
   }
 })

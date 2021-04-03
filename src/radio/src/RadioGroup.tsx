@@ -8,7 +8,8 @@ import {
   ref,
   toRef,
   reactive,
-  VNodeChild
+  VNodeChild,
+  CSSProperties
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { useTheme, useFormItem } from '../../_mixins'
@@ -79,9 +80,7 @@ function mapSlot (
           ? currentInstanceClass
           : lastInstanceClass
       children.push(
-        h('div', {
-          class: ['n-radio-group__splitor', splitorClass]
-        }),
+        <div class={['n-radio-group__splitor', splitorClass]}></div>,
         wrappedInstance
       )
     }
@@ -214,18 +213,16 @@ export default defineComponent({
       flatten(getSlot(this)),
       mergedValue
     )
-    return h(
-      'div',
-      {
-        class: [
+    return (
+      <div
+        class={[
           'n-radio-group',
-          {
-            'n-radio-group--button-group': isButtonGroup
-          }
-        ],
-        style: this.cssVars
-      },
-      children
+          isButtonGroup && 'n-radio-group--button-group'
+        ]}
+        style={this.cssVars as CSSProperties}
+      >
+        {children}
+      </div>
     )
   }
 })

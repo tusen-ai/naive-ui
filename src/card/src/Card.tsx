@@ -167,15 +167,12 @@ export default defineComponent({
             ) : null}
           </div>
         ) : null}
-        {
-          <div class="n-card__content" style={this.contentStyle}>
-            {this.$slots}
-          </div>
-        }
+        <div class="n-card__content" style={this.contentStyle}>
+          {$slots}
+        </div>
         {$slots.footer ? (
           <div class="n-card__footer">{renderSlot($slots, 'footer')}</div>
         ) : null}
-
         {$slots.action ? (
           <div class="n-card__action">{renderSlot($slots, 'action')}</div>
         ) : null}
