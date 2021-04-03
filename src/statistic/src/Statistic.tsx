@@ -68,7 +68,7 @@ export default defineComponent({
     const { $slots } = this
     return (
       <div class="n-statistic" style={this.cssVars as CSSProperties}>
-        <div class="n-statistic__label">{this.label}</div>
+        <div class="n-statistic__label">{this.label || $slots.label?.()}</div>
         <div class="n-statistic-value">
           {$slots.prefix ? (
             <span class="n-statistic-value__prefix">

@@ -21,8 +21,8 @@ export default cB('statistic', [
     font-weight: var(--value-font-weight);
   `, [
     cE('prefix', `
-      margin: 0 4px;
-      font-size: 18px;
+      margin: 0 4px 0 0;
+      font-size: 24px;
       transition: .3s color var(--bezier);
       color: var(--value-prefix-text-color);
     `, [
@@ -36,7 +36,8 @@ export default cB('statistic', [
       color: var(--value-text-color);
     `),
     cE('suffix', `
-      font-size: 18px;
+      margin: 0 0 0 4px;
+      font-size: 24px;
       transition: .3s color var(--bezier);
       color: var(--value-suffix-text-color);
     `, [

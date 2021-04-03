@@ -3,15 +3,15 @@ import type { ThemeCommonVars } from '../../_styles/common'
 import { Theme } from '../../_mixins'
 
 const self = (vars: ThemeCommonVars) => {
-  const { textColor2, textColor1, fontWeightStrong, fontSize } = vars
+  const { textColor2, textColor3, fontSize } = vars
   return {
     labelFontSize: fontSize,
-    labelFontWeight: fontWeightStrong,
-    valueFontWeight: fontWeightStrong,
-    labelTextColor: textColor2,
-    valuePrefixTextColor: textColor1,
-    valueSuffixTextColor: textColor1,
-    valueTextColor: textColor1
+    labelFontWeight: '400',
+    valueFontWeight: '400',
+    labelTextColor: textColor3,
+    valuePrefixTextColor: textColor2,
+    valueSuffixTextColor: textColor2,
+    valueTextColor: textColor2
   }
 }
 

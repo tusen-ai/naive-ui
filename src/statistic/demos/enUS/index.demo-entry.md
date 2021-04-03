@@ -17,7 +17,9 @@ basic
 
 ## Slots
 
-| Name   | Parameters | Description |
-| ------ | ---------- | ----------- |
-| prefix | `()`       |             |
-| suffix | `()`       |             |
+| Name    | Parameters | Description   |
+| ------- | ---------- | ------------- |
+| default | `()`       | Value slot.   |
+| label   | `()`       | Label slot.   |
+| prefix  | `()`       | Value prefix. |
+| suffix  | `()`       | Valut suffix. |
