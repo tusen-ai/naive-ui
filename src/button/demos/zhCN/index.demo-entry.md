@@ -28,6 +28,7 @@ debug
 | --- | --- | --- | --- |
 | attr-type | `'button' \| 'submit' \| 'reset'` | `'button'` | 按钮的 DOM `type` 属性 |
 | block | `boolean` | `false` |  |
+| bordered | `boolean` | `true` |  |
 | circle | `boolean` | `false` |  |
 | color | `string` | `undefined` | 只支持形如 `#FFF`, `#FFFFFF`, `rgb(0, 0, 0)` 的颜色 |
 | dashed | `boolean` | `false` |  |

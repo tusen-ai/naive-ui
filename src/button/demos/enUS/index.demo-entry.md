@@ -27,6 +27,7 @@ group
 | --- | --- | --- | --- |
 | attr-type | `'button' \| 'submit' \| 'reset'` | `'button'` | The DOM `type` attribute of the button. |
 | block | `boolean` | `false` |  |
+| bordered | `boolean` | `true` |  |
 | circle | `boolean` | `false` |  |
 | color | `string` | `undefined` | Only support `#FFF`, `#FFFFFF`, `rgb(0, 0, 0)` formatted colors. |
 | dashed | `boolean` | `false` |  |

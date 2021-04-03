@@ -86,14 +86,22 @@ export default defineComponent({
       type: String as PropType<'button' | 'submit' | 'reset'>,
       default: 'button'
     },
-    onClick: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>
+    onClick: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
+    bordered: {
+      type: Boolean,
+      default: true
+    }
   },
   setup (props) {
     const selfRef = ref<HTMLElement | null>(null)
     const waveRef = ref<BaseWaveRef | null>(null)
     const enterPressedRef = ref(false)
     const showBorderRef = useMemo(() => {
-      return !props.text && (!props.color || props.ghost || props.dashed)
+      return (
+        !props.text &&
+        (!props.color || props.ghost || props.dashed) &&
+        props.bordered
+      )
     })
     const NButtonGroup = inject<ButtonGroupInjection>('NButtonGroup', {})
     const { mergedSize: mergedSizeRef } = useFormItem(

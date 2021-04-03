@@ -7,6 +7,7 @@
 - Add `n-page-header` component.
 - `n-statistic` add `label` slot.
 - `n-breadcrumb-item` add `separator` slot & prop.
+- `n-button` add `bordered` prop.
 
 ### Refactors
 
