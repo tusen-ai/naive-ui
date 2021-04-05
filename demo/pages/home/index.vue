@@ -1,8 +1,5 @@
 <template>
   <div>
-    <n-layout-footer position="absolute" style="z-index: auto">
-      <landing-footer style="max-width: 1200px; margin: auto" />
-    </n-layout-footer>
     <div class="banner">
       <right-image class="right-image" v-if="!isMobile" />
       <n-h1 :style="titleStyle" class="naive-title">
@@ -48,6 +45,12 @@
       </div>
       <left-image class="left-image" />
     </div>
+    <n-layout-footer
+      :position="isMobile ? undefined : 'absolute'"
+      style="z-index: auto"
+    >
+      <landing-footer style="max-width: 1200px; margin: auto" />
+    </n-layout-footer>
   </div>
 </template>
 
@@ -179,15 +182,19 @@ export default {
 
 @media only screen and (max-width: 600px) {
   .banner {
+    position: static;
     text-align: left;
     margin-left: 16px;
-    top: calc(50vh - 64px);
+    transform: none;
+    margin-top: 60px;
+    min-height: 550px;
+    height: calc(100vh - 180px);
   }
   .left-image {
     position: relative;
     left: -16px;
     min-width: unset;
-    width: 72vw;
+    width: 300px;
     top: 8px;
     transform: none;
   }

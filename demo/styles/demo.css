@@ -4,6 +4,12 @@ body {
   overflow: hidden;
 }
 
+@media only screen and (max-width: 600px) {
+  body {
+    overflow: visible;
+  }
+}
+
 .demo-card .demo-card__view:not(:first-child) {
   margin-top: 16px;
 }

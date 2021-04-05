@@ -1,5 +1,5 @@
 <template>
-  <n-layout has-sider position="absolute">
+  <n-layout has-sider :position="isMobile ? undefined : 'absolute'">
     <n-layout-sider
       :native-scrollbar="false"
       bordered
@@ -23,6 +23,7 @@
 import { computed, watch, toRef, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { findMenuValue } from '../utils/route'
+import { useIsMobile } from '../utils/composables'
 import { useDocOptions, useComponentOptions } from '../store'
 import { useBreakpoint, useMemo } from 'vooks'
 
@@ -60,6 +61,7 @@ export default {
       layoutInstRef,
       options: optionsRef,
       menuValue: menuValueRef,
+      isMobile: useIsMobile(),
       handleMenuUpdateValue: (_, option) => {
         router.push(option.path)
       }
