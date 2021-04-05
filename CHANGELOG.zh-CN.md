@@ -25,7 +25,7 @@
 
 ## 2.3.0
 
-## Breaking Changes
+### Breaking Changes
 
 - 折叠对于 `position="absolute"` 的 `n-layout-sider` 不再生效
 - 对于包含 `n-layout-sider` 的 `n-layout` 必须设定 `has-sider`
@@ -78,7 +78,7 @@
 
 ## 2.1.0
 
-## Breaking Changes
+### Breaking Changes
 
 - `n-popover` 默认 `duration` 设为 `100`
 - `n-popover` 默认 `delay` 设为 `100`

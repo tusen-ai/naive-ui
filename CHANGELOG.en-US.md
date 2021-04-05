@@ -25,7 +25,7 @@
 
 ## 2.3.0
 
-## Breaking Changes
+### Breaking Changes
 
 - Collapsing won't work for `n-layout-sider` with `position="absolute"`.
 - For `n-layout` contains `n-layout-sider` as a direct child `has-sider` must be set.
@@ -78,7 +78,7 @@
 
 ## 2.1.0
 
-## Breaking Changes
+### Breaking Changes
 
 - `n-popover` default `duration` is set to `100`.
 - `n-popover` default `delay` is set to `100`.

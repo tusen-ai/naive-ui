@@ -7,12 +7,13 @@ function createRenderer (wrapCodeWithCard = true) {
     table (header, body) {
       if (body) body = '<tbody class="n-table__tbody">' + body + '</tbody>'
       return (
-        '<n-table single-column class="md-table">\n' +
+        '<div class="md-table-wrapper"><n-table single-column class="md-table">\n' +
         '<thead class="n-table__thead">\n' +
         header +
         '</thead>\n' +
         body +
-        '</n-table>\n'
+        '</n-table>\n' +
+        '</div>'
       )
     },
 
