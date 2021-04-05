@@ -71,6 +71,7 @@
       style="padding: 0; width: 288px"
       placement="bottom-end"
       display-directive="show"
+      trigger="click"
     >
       <template #trigger>
         <n-icon size="20" style="margin-left: 12px"><menu-outline /></n-icon>
