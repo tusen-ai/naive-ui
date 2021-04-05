@@ -1,11 +1,10 @@
 import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
-import { depx } from 'seemly'
+import { depx, getGap } from 'seemly'
 import { createKey, flatten, getSlot } from '../../_utils'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { spaceLight } from '../styles'
 import type { SpaceTheme } from '../styles'
-import { getGap } from 'seemly/lib/css'
 
 type Align =
   | 'stretch'
