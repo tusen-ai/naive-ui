@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="banner">
-      <right-image class="right-image" v-if="!isMobile" />
+      <right-image class="right-image" v-if="!isXs" />
       <n-h1 :style="titleStyle" class="naive-title">
         <span
           @mouseenter="handleTitleMouseEnter"
@@ -46,7 +46,7 @@
       <left-image class="left-image" />
     </div>
     <n-layout-footer
-      :position="isMobile ? undefined : 'absolute'"
+      :position="isXs ? undefined : 'absolute'"
       style="z-index: auto"
     >
       <landing-footer style="max-width: 1200px; margin: auto" />
@@ -59,7 +59,7 @@ import { computed } from 'vue'
 import LandingFooter from './Footer.vue'
 import leftImage from './Left.vue'
 import rightImage from './Right.vue'
-import { i18n, useIsMobile } from '../../utils/composables'
+import { i18n, useIsXs } from '../../utils/composables'
 import { useThemeName } from '../../store'
 
 export default {
@@ -69,12 +69,12 @@ export default {
     rightImage
   },
   setup () {
-    const isMobileRef = useIsMobile()
+    const isXsRef = useIsXs()
     return {
-      isMobile: isMobileRef,
+      isXs: isXsRef,
       theme: useThemeName(),
       titleStyle: computed(() => {
-        if (isMobileRef.value) {
+        if (isXsRef.value) {
           return 'margin-top: 0; font-size: 64px !important'
         } else {
           return 'margin-top: 0; font-size: 80px !important'
@@ -180,7 +180,7 @@ export default {
   transform: translateY(-50%);
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 639px) {
   .banner {
     position: static;
     text-align: left;

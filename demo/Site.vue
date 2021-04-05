@@ -1,10 +1,10 @@
 <template>
-  <n-layout :position="isMobile ? undefined : 'absolute'" class="root-layout">
+  <n-layout :position="isXs ? undefined : 'absolute'" class="root-layout">
     <site-header />
     <n-layout
       class="home-layout"
-      :style="isMobile ? undefined : 'top: 64px; overflow: hidden'"
-      :position="isMobile ? undefined : 'absolute'"
+      :style="isXs ? undefined : 'top: 64px; overflow: hidden'"
+      :position="isXs ? undefined : 'absolute'"
     >
       <router-view />
     </n-layout>
@@ -15,7 +15,7 @@
 import { onMounted, inject } from 'vue'
 import SiteHeader from './SiteHeader.vue'
 import { loadingBarApiRef } from './routes/router'
-import { useIsMobile } from './utils/composables'
+import { useIsXs } from './utils/composables'
 
 export default {
   name: 'Site',
@@ -24,7 +24,7 @@ export default {
   },
   setup () {
     const loadingBar = inject('loadingBar')
-    const isMobileRef = useIsMobile()
+    const isXsRef = useIsXs()
     onMounted(() => {
       loadingBarApiRef.value = loadingBar
       loadingBar.finish()
@@ -36,7 +36,7 @@ export default {
       }
     })
     return {
-      isMobile: isMobileRef
+      isXs: isXsRef
     }
   }
 }

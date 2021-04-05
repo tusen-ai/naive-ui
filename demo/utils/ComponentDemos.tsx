@@ -1,5 +1,5 @@
-import { defineComponent, Fragment, h } from 'vue'
-import { useMemo, useBreakpoint } from 'vooks'
+import { defineComponent, Fragment, h, computed } from 'vue'
+import { useIsM } from './composables'
 
 export default defineComponent({
   name: 'ComponentDemos',
@@ -10,9 +10,9 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const breakpointRef = useBreakpoint()
-    const mergedColsRef = useMemo(() => {
-      return ['xs', 's', 'm'].includes(breakpointRef.value) ? 1 : props.span
+    const isMRef = useIsM()
+    const mergedColsRef = computed(() => {
+      return isMRef.value ? 1 : props.span
     })
     return {
       mergedCols: mergedColsRef

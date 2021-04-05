@@ -600,7 +600,7 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
     },
     ...createDeprecatedDemos(
       {
-        en: 'Deprecated',
+        en: '--Deprecated',
         children: [
           {
             en: 'Nimbus Service Layout',
@@ -612,7 +612,7 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
     ),
     ...createDebugDemos(
       {
-        en: 'Debug',
+        en: '--Debug',
         children: [
           {
             en: 'SuffixDebug',

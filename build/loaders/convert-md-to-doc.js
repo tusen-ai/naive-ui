@@ -97,24 +97,25 @@ export default {
   },
   setup () {
     const breakpointRef = useBreakpoint()
-    const isMobileRef = useMemo(() => {
-      return breakpointRef.value === 'xs'
-    })
-    const showAnchorRef = computed(() => {
-      if (isMobileRef.value) {
+    const showAnchorRef = useMemo(() => {
+      const { value: breakpoint } = breakpointRef
+      if (breakpoint === 'xs' || breakpoint === 's') {
         return false
       }
       return ${showAnchor}
     })
+    const useSmallPaddingRef = useMemo(() => {
+      return breakpointRef.value === 'xs'
+    })
     return {
       showAnchor: showAnchorRef,
       wrapperStyle: computed(() => {
-        return !isMobileRef.value
+        return !useSmallPaddingRef.value
           ? 'display: flex; flex-wrap: nowrap; padding: 32px 24px 24px 56px;'
           : 'padding: 16px;'
       }),
       contentStyle: computed(() => {
-        return !isMobileRef.value
+        return showAnchorRef.value
           ? 'width: calc(100% - 180px); margin-right: 36px;'
           : 'width: 100%'; 
       }),

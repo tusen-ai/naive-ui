@@ -2,10 +2,10 @@
   <n-layout-header bordered class="nav" :style="style">
     <n-text tag="div" class="ui-logo" :depth="1" @click="handleLogoClick">
       <img src="./assets/images/naivelogo.svg" />
-      <span v-if="!isMobile">Naive UI</span>
+      <span v-if="!isXs">Naive UI</span>
     </n-text>
-    <div :style="!isMobile ? 'display: flex; align-items: center;' : ''">
-      <div class="nav-menu" v-if="!isMobile">
+    <div :style="!isXs ? 'display: flex; align-items: center;' : ''">
+      <div class="nav-menu" v-if="!isS">
         <n-menu
           mode="horizontal"
           :value="menuValue"
@@ -15,7 +15,7 @@
       </div>
       <n-auto-complete
         v-model:value="searchPattern"
-        :style="!isMobile ? 'width: 216px; margin-left: 24px' : undefined"
+        :style="!isXs ? 'width: 216px; margin-left: 24px' : undefined"
         :placeholder="t('searchPlaceholder')"
         :options="searchOptions"
         clear-after-select
@@ -23,7 +23,63 @@
         @select="handleSearch"
       />
     </div>
-    <div style="display: flex" v-if="!isMobile">
+    <n-popover
+      v-if="isXs"
+      style="padding: 0; width: 288px"
+      placement="bottom-end"
+      display-directive="show"
+      trigger="click"
+    >
+      <template #trigger>
+        <n-icon size="20" style="margin-left: 12px"><menu-outline /></n-icon>
+      </template>
+      <div style="overflow: auto; max-height: 80vh">
+        <n-menu
+          :value="xsMenuValue"
+          :options="xsMenuOptions"
+          :indent="18"
+          @update:value="handleUpdateXsMenu"
+        />
+      </div>
+    </n-popover>
+    <n-popover
+      v-else-if="isS"
+      style="padding: 0; width: 288px"
+      placement="bottom-end"
+      display-directive="show"
+      trigger="hover"
+    >
+      <template #trigger>
+        <n-icon size="20" style="margin-left: 12px"><menu-outline /></n-icon>
+      </template>
+      <div style="overflow: auto; max-height: 80vh">
+        <n-menu
+          :value="sMenuValue"
+          :options="sMenuOptions"
+          :indent="18"
+          @update:value="handleUpdateSMenu"
+        />
+      </div>
+    </n-popover>
+    <div style="display: flex" v-else-if="isM">
+      <n-popover
+        style="padding: 0; width: 180px"
+        placement="bottom-end"
+        display-directive="show"
+        trigger="hover"
+      >
+        <template #trigger>
+          <n-icon size="20" style="margin-left: 12px"><menu-outline /></n-icon>
+        </template>
+        <n-menu
+          :value="mMenuValue"
+          :options="mMenuOptions"
+          :indent="18"
+          @update:value="handleUpdateMMenu"
+        />
+      </n-popover>
+    </div>
+    <div style="display: flex" v-else>
       <n-button size="small" class="nav-picker" @click="handleThemeUpdate">
         {{ themeLabelMap[theme] }}
       </n-button>
@@ -66,25 +122,6 @@
         {{ version }}
       </n-button>
     </div>
-    <n-popover
-      v-else
-      style="padding: 0; width: 288px"
-      placement="bottom-end"
-      display-directive="show"
-      trigger="click"
-    >
-      <template #trigger>
-        <n-icon size="20" style="margin-left: 12px"><menu-outline /></n-icon>
-      </template>
-      <div style="overflow: auto; max-height: 80vh">
-        <n-menu
-          :value="mobileMenuValue"
-          :options="mobileMenuOptions"
-          :indent="18"
-          @update:value="handleMobileUpdateMenu"
-        />
-      </div>
-    </n-popover>
   </n-layout-header>
 </template>
 
@@ -93,7 +130,7 @@ import { computed, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useMessage, version } from 'naive-ui'
 import { MenuOutline } from '@vicons/ionicons5'
-import { i18n, useIsMobile } from './utils/composables'
+import { i18n, useIsXs, useIsM, useIsS } from './utils/composables'
 import { findMenuValue } from './utils/route'
 import {
   useThemeName,
@@ -199,10 +236,71 @@ export default {
       return null
     })
 
-    // mobile options
+    // m options
+    const mMenuOptionsRef = computed(() => [
+      {
+        key: 'theme',
+        title: themeLabelMapRef.value[themeNameRef.value]
+      },
+      {
+        key: 'locale',
+        title: localeNameRef.value === 'zh-CN' ? 'English' : '中文'
+      }
+    ])
+    function handleUpdateMMenu (value, { path }) {
+      if (value === 'theme') {
+        handleThemeUpdate()
+      } else if (value === 'locale') {
+        if (localeNameRef.value === 'zh-CN') {
+          localeNameRef.value = 'en-US'
+        } else {
+          localeNameRef.value = 'zh-CN'
+        }
+      }
+    }
+
+    // s opitions
+    const sMenuOptionsRef = computed(() => {
+      return [
+        {
+          key: 'theme',
+          title: themeLabelMapRef.value[themeNameRef.value]
+        },
+        {
+          key: 'locale',
+          title: localeNameRef.value === 'zh-CN' ? 'English' : '中文'
+        },
+        {
+          key: 'home',
+          title: t('home')
+        },
+        {
+          key: 'doc',
+          title: t('doc')
+        },
+        {
+          key: 'component',
+          title: t('component')
+        }
+      ]
+    })
+    function handleUpdateSMenu (value) {
+      if (value === 'theme') {
+        handleThemeUpdate()
+      } else if (value === 'locale') {
+        if (localeNameRef.value === 'zh-CN') {
+          localeNameRef.value = 'en-US'
+        } else {
+          localeNameRef.value = 'zh-CN'
+        }
+      } else {
+        handleMenuUpdateValue(value)
+      }
+    }
+    // xs options
     const docOptionsRef = useDocOptions()
     const componentOptionsRef = useComponentOptions()
-    const mobileMenuOptionsRef = computed(() => {
+    const xsMenuOptionsRef = computed(() => {
       return [
         {
           key: 'theme',
@@ -228,11 +326,11 @@ export default {
         }
       ]
     })
-    const mobileMenuValueRef = computed(() => {
+    const xsMenuValueRef = computed(() => {
       if (route.name === 'home') return 'home'
-      return findMenuValue(mobileMenuOptionsRef.value, route.path)
+      return findMenuValue(xsMenuOptionsRef.value, route.path)
     })
-    function handleMobileUpdateMenu (value, { path }) {
+    function handleUpdateXsMenu (value, { path }) {
       if (value === 'theme') {
         handleThemeUpdate()
       } else if (value === 'locale') {
@@ -344,7 +442,7 @@ export default {
     }
 
     // common
-    const isMobileRef = useIsMobile()
+    const isXsRef = useIsXs()
     function handleLogoClick () {
       if (/^(\/[^/]+){2}$/.test(route.path)) {
         message.info(t('alreadyHome'))
@@ -354,13 +452,15 @@ export default {
     }
 
     return {
-      // mobileMenuOptions,
+      // xsMenuOptions,
       tusimple: process.env.TUSIMPLE,
       dev: __DEV__,
       message,
       t,
       version,
-      isMobile: isMobileRef,
+      isXs: isXsRef,
+      isM: useIsM(),
+      isS: useIsS(),
       // theme
       theme: themeNameRef,
       handleThemeUpdate,
@@ -385,14 +485,22 @@ export default {
       menuOptions: menuOptionsRef,
       menuValue: menuValueRef,
       handleMenuUpdateValue,
-      // mobile menu
-      mobileMenuOptions: mobileMenuOptionsRef,
-      handleMobileUpdateMenu,
-      mobileMenuValue: mobileMenuValueRef,
+      // m menu
+      mMenuOptions: mMenuOptionsRef,
+      handleUpdateMMenu,
+      mMenuValue: null,
+      // s menu
+      sMenuOptions: sMenuOptionsRef,
+      handleUpdateSMenu,
+      sMenuValue: menuValueRef,
+      // xs menu
+      xsMenuOptions: xsMenuOptionsRef,
+      handleUpdateXsMenu,
+      xsMenuValue: xsMenuValueRef,
       // common
       handleLogoClick,
       style: computed(() => {
-        return isMobileRef.value
+        return isXsRef.value
           ? {
               '--side-padding': '16px',
               'grid-template-columns': 'auto 1fr auto'
