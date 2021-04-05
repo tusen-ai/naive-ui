@@ -11,7 +11,7 @@ import {
   useOsTheme
 } from 'naive-ui'
 import { TsConfigProvider } from '../../themes/tusimple/src'
-import { i18n } from '../utils/composables'
+import { i18n, useIsMobile } from '../utils/composables'
 import {
   createDocumentationMenuOptions,
   createComponentMenuOptions
@@ -121,7 +121,11 @@ export function siteSetup () {
     })
   )
   i18n.provide(computed(() => localeNameRef.value))
+  const isMobileRef = useIsMobile()
   return {
+    themeEditorStyle: computed(() => {
+      return isMobileRef.value ? 'right: 18px; bottom: 24px;' : undefined
+    }),
     configProvider: configProviderRef,
     hljs,
     themeName: themeNameRef,

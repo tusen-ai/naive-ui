@@ -2,6 +2,7 @@
   <n-card
     v-if="isShow"
     class="demo-card"
+    :id="demoFileName"
     :segmented="{
       footer: true
     }"

@@ -22,6 +22,7 @@
 // Frame component for components & docs page
 import { computed, watch, toRef, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { findMenuValue } from '../utils/route'
 import { useDocOptions, useComponentOptions } from '../store'
 import { useBreakpoint, useMemo } from 'vooks'
 
@@ -37,18 +38,7 @@ export default {
         ? docOptionsRef.value
         : componentOptionsRef.value
     )
-    function findMenuValue (options, path) {
-      for (const option of options) {
-        if (option.children) {
-          const value = findMenuValue(option.children, path)
-          if (value) return value
-        }
-        if (option.path === path) {
-          return option.key
-        }
-      }
-      return undefined
-    }
+
     const menuValueRef = computed(() => {
       return findMenuValue(optionsRef.value, route.path)
     })

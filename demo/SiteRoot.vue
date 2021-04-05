@@ -9,7 +9,7 @@
     :date-locale="dateLocale"
     :hljs="hljs"
   >
-    <n-theme-editor>
+    <n-theme-editor :style="themeEditorStyle">
       <n-loading-bar-provider>
         <n-message-provider>
           <n-notification-provider>

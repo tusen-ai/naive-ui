@@ -1,88 +1,110 @@
 <template>
-  <n-layout-header bordered>
-    <div class="nav">
-      <n-text tag="div" class="ui-logo" :depth="1" @click="handleLogoClick">
-        <img src="./assets/images/naivelogo.svg" />
-        Naive UI
-      </n-text>
-      <div style="display: flex; align-items: center">
-        <div class="nav-menu">
-          <n-menu
-            mode="horizontal"
-            :value="menuValue"
-            :items="menuItems"
-            @update:value="handleMenuSelect"
-          />
-        </div>
-        <n-auto-complete
-          v-model:value="searchInputValue"
-          style="width: 216px; margin-left: 24px"
-          :placeholder="t('searchPlaceholder')"
-          :options="searchOptions"
-          clear-after-select
-          blur-after-select
-          @select="handleSelect"
+  <n-layout-header bordered class="nav" :style="style">
+    <n-text tag="div" class="ui-logo" :depth="1" @click="handleLogoClick">
+      <img src="./assets/images/naivelogo.svg" />
+      <span v-if="!isMobile">Naive UI</span>
+    </n-text>
+    <div :style="!isMobile ? 'display: flex; align-items: center;' : ''">
+      <div class="nav-menu" v-if="!isMobile">
+        <n-menu
+          mode="horizontal"
+          :value="menuValue"
+          :options="menuOptions"
+          @update:value="handleMenuUpdateValue"
         />
       </div>
-      <div style="display: flex">
-        <n-button size="small" class="nav-picker" @click="handleThemeChange">
-          {{ themeOptions[theme].label }}
-        </n-button>
-        <n-popselect
-          :options="langOptions"
-          v-model:value="lang"
-          overlap
-          placement="top"
-          trigger="click"
-        >
-          <n-button size="small" class="nav-picker">
-            {{ langOptionLabels[lang] }}
-          </n-button>
-        </n-popselect>
-        <n-popselect
-          v-if="tusimple || dev"
-          :options="configProviderOptions"
-          v-model:value="configProviderName"
-          overlap
-          placement="top"
-          trigger="click"
-        >
-          <n-button size="small" class="nav-picker">
-            {{ configProviderLabels[configProviderName] }}
-          </n-button>
-        </n-popselect>
-        <n-popselect
-          v-if="dev"
-          :options="modeOptions"
-          v-model:value="displayMode"
-          overlap
-          placement="top"
-          trigger="click"
-        >
-          <n-button size="small" class="nav-picker">{{
-            modeOptionLabels[displayMode]
-          }}</n-button>
-        </n-popselect>
-        <n-button size="small">
-          {{ version }}
-        </n-button>
-      </div>
+      <n-auto-complete
+        v-model:value="searchPattern"
+        :style="!isMobile ? 'width: 216px; margin-left: 24px' : undefined"
+        :placeholder="t('searchPlaceholder')"
+        :options="searchOptions"
+        clear-after-select
+        blur-after-select
+        @select="handleSearch"
+      />
     </div>
+    <div style="display: flex" v-if="!isMobile">
+      <n-button size="small" class="nav-picker" @click="handleThemeUpdate">
+        {{ themeLabelMap[theme] }}
+      </n-button>
+      <n-popselect
+        :options="localeOptions"
+        v-model:value="locale"
+        overlap
+        placement="top"
+        trigger="click"
+      >
+        <n-button size="small" class="nav-picker">
+          {{ localeLabelMap[locale] }}
+        </n-button>
+      </n-popselect>
+      <n-popselect
+        v-if="tusimple || dev"
+        :options="configProviderOptions"
+        v-model:value="configProviderName"
+        overlap
+        placement="top"
+        trigger="click"
+      >
+        <n-button size="small" class="nav-picker">
+          {{ configProviderLabels[configProviderName] }}
+        </n-button>
+      </n-popselect>
+      <n-popselect
+        v-if="dev"
+        :options="displayModeOptions"
+        v-model:value="displayMode"
+        overlap
+        placement="top"
+        trigger="click"
+      >
+        <n-button size="small" class="nav-picker">{{
+          displayModeLabelMap[displayMode]
+        }}</n-button>
+      </n-popselect>
+      <n-button size="small">
+        {{ version }}
+      </n-button>
+    </div>
+    <n-popover
+      v-else
+      style="padding: 0; width: 288px"
+      placement="bottom-end"
+      display-directive="show"
+    >
+      <template #trigger>
+        <n-icon size="20" style="margin-left: 12px"><menu-outline /></n-icon>
+      </template>
+      <div style="overflow: auto; max-height: 80vh">
+        <n-menu
+          :value="mobileMenuValue"
+          :options="mobileMenuOptions"
+          :indent="18"
+          @update:value="handleMobileUpdateMenu"
+        />
+      </div>
+    </n-popover>
   </n-layout-header>
 </template>
 
 <script>
 import { computed, ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { useMessage, version } from 'naive-ui'
-import { i18n } from './utils/composables'
+import { MenuOutline } from '@vicons/ionicons5'
+import { i18n, useIsMobile } from './utils/composables'
+import { findMenuValue } from './utils/route'
 import {
   useThemeName,
   useLocaleName,
   useDisplayMode,
   useFlattenedDocOptions,
-  useConfigProviderName
+  useConfigProviderName,
+  useDocOptions,
+  useComponentOptions
 } from './store'
 
+// match substr
 function match (pattern, string) {
   if (!pattern.length) return true
   if (!string.length) return false
@@ -90,39 +112,50 @@ function match (pattern, string) {
   return match(pattern, string.slice(1))
 }
 
+const locales = {
+  'zh-CN': {
+    dark: '深色',
+    light: '浅色',
+    searchPlaceholder: '搜索',
+    home: '首页',
+    doc: '文档',
+    component: '组件',
+    common: '常规',
+    debug: '调试',
+    alreadyHome: '别点了，你已经在首页了',
+    tusimpleTheme: '图森主题',
+    defaultTheme: '默认主题'
+  },
+  'en-US': {
+    dark: 'Dark',
+    light: 'Light',
+    searchPlaceholder: 'Search',
+    home: 'Home',
+    doc: 'Docs',
+    component: 'Components',
+    common: 'Common',
+    debug: 'Debug',
+    alreadyHome: 'You are already in home page. No clicking anymore.',
+    tusimpleTheme: 'Tusimple Theme',
+    defaultTheme: 'Default Theme'
+  }
+}
+
 export default {
   name: 'SiteHeader',
+  components: {
+    MenuOutline
+  },
   setup () {
     const message = useMessage()
-    const { t } = i18n({
-      'zh-CN': {
-        dark: '深色',
-        light: '浅色',
-        searchPlaceholder: '搜索',
-        home: '首页',
-        doc: '文档',
-        component: '组件',
-        common: '常规',
-        debug: '调试',
-        alreadyHome: '别点了，你已经在首页了',
-        tusimpleTheme: '图森主题',
-        defaultTheme: '默认主题'
-      },
-      'en-US': {
-        dark: 'Dark',
-        light: 'Light',
-        searchPlaceholder: 'Search',
-        home: 'Home',
-        doc: 'Docs',
-        component: 'Components',
-        common: 'Common',
-        debug: 'Debug',
-        alreadyHome: 'You are already in home page. No clicking anymore.',
-        tusimpleTheme: 'Tusimple Theme',
-        defaultTheme: 'Default Theme'
-      }
-    })
-    const menuItemsRef = computed(() => {
+    const route = useRoute()
+    const router = useRouter()
+
+    // i18n
+    const { t } = i18n(locales)
+
+    // menu
+    const menuOptionsRef = computed(() => {
       return [
         {
           key: 'home',
@@ -138,16 +171,131 @@ export default {
         }
       ]
     })
-    const themeOptionsRef = computed(() => ({
-      dark: {
-        label: t('light'),
-        next: 'light'
-      },
-      light: {
-        label: t('dark'),
-        next: 'dark'
+    const themeAndLocaleReg = /^(\/[^/]+){2}/
+    function handleMenuUpdateValue (value) {
+      if (value === 'home') {
+        router.push(themeAndLocaleReg.exec(route.path)[0])
       }
+      if (value === 'doc') {
+        if (!/^(\/[^/]+){2}\/docs/.test(route.path)) {
+          router.push(
+            themeAndLocaleReg.exec(route.path)[0] + '/docs/installation'
+          )
+        }
+      }
+      if (value === 'component') {
+        if (!/^(\/[^/]+){2}\/components/.test(route.path)) {
+          router.push(
+            themeAndLocaleReg.exec(route.path)[0] + '/components/n-button'
+          )
+        }
+      }
+    }
+    const menuValueRef = computed(() => {
+      if (/\/docs\//.test(route.path)) return 'doc'
+      if (/\/components\//.test(route.path)) return 'component'
+      else if (route.name === 'home') return 'home'
+      return null
+    })
+
+    // mobile options
+    const docOptionsRef = useDocOptions()
+    const componentOptionsRef = useComponentOptions()
+    const mobileMenuOptionsRef = computed(() => {
+      return [
+        {
+          key: 'theme',
+          title: themeLabelMapRef.value[themeNameRef.value]
+        },
+        {
+          key: 'locale',
+          title: localeNameRef.value === 'zh-CN' ? 'English' : '中文'
+        },
+        {
+          key: 'home',
+          title: t('home')
+        },
+        {
+          key: 'doc',
+          title: t('doc'),
+          children: docOptionsRef.value
+        },
+        {
+          key: 'component',
+          title: t('component'),
+          children: componentOptionsRef.value
+        }
+      ]
+    })
+    const mobileMenuValueRef = computed(() => {
+      return findMenuValue(mobileMenuOptionsRef.value, route.path)
+    })
+    function handleMobileUpdateMenu (value, { path }) {
+      if (value === 'theme') {
+        handleThemeUpdate()
+      } else if (value === 'locale') {
+        if (localeNameRef.value === 'zh-CN') {
+          localeNameRef.value = 'en-US'
+        } else {
+          localeNameRef.value = 'zh-CN'
+        }
+      } else if (path) {
+        router.push(path)
+      } else {
+        handleMenuUpdateValue(value)
+      }
+    }
+
+    // theme
+    const themeNameRef = useThemeName()
+    const themeLabelMapRef = computed(() => ({
+      dark: t('light'),
+      light: t('dark')
     }))
+    function handleThemeUpdate () {
+      if (themeNameRef.value === 'dark') {
+        themeNameRef.value = 'light'
+      } else {
+        themeNameRef.value = 'dark'
+      }
+    }
+
+    // locale
+    const localeNameRef = useLocaleName()
+    const localeLabelMap = {
+      'zh-CN': '中文',
+      'en-US': 'English'
+    }
+    const localeOptions = [
+      {
+        label: 'English',
+        value: 'en-US'
+      },
+      {
+        label: '中文',
+        value: 'zh-CN'
+      }
+    ]
+
+    // display mode
+    const displayModeRef = useDisplayMode()
+    const displayModeLabelMap = {
+      common: 'Prod',
+      debug: 'Debug'
+    }
+    const displayModeOptions = [
+      {
+        label: 'Prod',
+        value: 'common'
+      },
+      {
+        label: 'Debug',
+        value: 'debug'
+      }
+    ]
+
+    // config provider
+    const configProviderNameRef = useConfigProviderName()
     const configProviderLabelsRef = computed(() => ({
       tusimple: t('tusimpleTheme'),
       default: t('defaultTheme')
@@ -162,71 +310,22 @@ export default {
         value: 'tusimple'
       }
     ])
-    return {
-      t,
-      message,
-      searchInputValue: ref(''),
-      version,
-      dev: __DEV__,
-      tusimple: process.env.TUSIMPLE,
-      displayMode: useDisplayMode(),
-      lang: useLocaleName(),
-      theme: useThemeName(),
-      items: useFlattenedDocOptions(),
-      configProviderName: useConfigProviderName(),
-      menuItems: menuItemsRef,
-      themeOptions: themeOptionsRef,
-      langOptionLabels: {
-        'zh-CN': '中文',
-        'en-US': 'English'
-      },
-      langOptions: [
-        {
-          label: 'English',
-          value: 'en-US'
-        },
-        {
-          label: '中文',
-          value: 'zh-CN'
-        }
-      ],
-      modeOptionLabels: {
-        common: 'Prod',
-        debug: 'Debug'
-      },
-      modeOptions: [
-        {
-          label: 'Prod',
-          value: 'common'
-        },
-        {
-          label: 'Debug',
-          value: 'debug'
-        }
-      ],
-      configProviderOptions: configProviderOptionsRef,
-      configProviderLabels: configProviderLabelsRef
-    }
-  },
-  computed: {
-    menuValue () {
-      if (/\/docs\//.test(this.$route.path)) return 'doc'
-      if (/\/components\//.test(this.$route.path)) return 'component'
-      else if (this.$route.name === 'home') return 'home'
-      return null
-    },
-    searchOptions () {
+
+    // search
+    const searchableOptionsRef = useFlattenedDocOptions()
+    const searchPatternRef = ref('')
+    const searchOptionsRef = computed(() => {
       function getLabel (item) {
         if (item.label) {
           return item.label + (item.extra ? ' ' + item.extra : '')
         }
         return item.key
       }
-      if (!this.searchInputValue) return []
+      if (!searchPatternRef.value) return []
       const replaceRegex = / |-/g
-      return this.items
+      return searchableOptionsRef.value
         .filter((item) => {
-          const pattern = this.searchInputValue
+          const pattern = searchPatternRef.value
             .toLowerCase()
             .replace(replaceRegex, '')
             .slice(0, 20)
@@ -237,51 +336,71 @@ export default {
           label: getLabel(item),
           value: item.path
         }))
+    })
+    function handleSearch (value) {
+      router.push(value)
     }
-  },
-  methods: {
-    handleLogoClick () {
-      if (/^(\/[^/]+){2}$/.test(this.$route.path)) {
-        this.message.info(this.t('alreadyHome'))
+
+    // common
+    const isMobileRef = useIsMobile()
+    function handleLogoClick () {
+      if (/^(\/[^/]+){2}$/.test(route.path)) {
+        message.info(t('alreadyHome'))
         return
       }
-      this.$router.push(/^(\/[^/]+){2}/.exec(this.$route.path)[0])
-    },
-    handleSelect (value) {
-      this.$router.push(value)
-    },
-    handleMenuSelect (value) {
-      if (value === 'home') {
-        this.$router.push(/^(\/[^/]+){2}/.exec(this.$route.path)[0])
-      }
-      if (value === 'doc') {
-        if (!/^(\/[^/]+){2}\/docs/.test(this.$route.path)) {
-          this.$router.push(
-            /^(\/[^/]+){2}/.exec(this.$route.path)[0] + '/docs/installation'
-          )
-        }
-      }
-      if (value === 'component') {
-        if (!/^(\/[^/]+){2}\/components/.test(this.$route.path)) {
-          this.$router.push(
-            /^(\/[^/]+){2}/.exec(this.$route.path)[0] + '/components/n-button'
-          )
-        }
-      }
-    },
-    handleThemeChange () {
-      this.theme = this.themeOptions[this.theme].next
-    },
-    handleModeChange () {
-      this.displayMode = this.modeOptions[this.displayMode].next
-    },
-    handleLanguageChange () {
-      this.lang = this.langOptions[this.lang].next
-    },
-    handleConfigProviderChange () {
-      this.configProviderName = this.configProviderOptions[
-        this.configProviderName
-      ].next
+      router.push(/^(\/[^/]+){2}/.exec(route.path)[0])
+    }
+
+    return {
+      // mobileMenuOptions,
+      tusimple: process.env.TUSIMPLE,
+      dev: __DEV__,
+      message,
+      t,
+      version,
+      isMobile: isMobileRef,
+      // theme
+      theme: themeNameRef,
+      handleThemeUpdate,
+      themeLabelMap: themeLabelMapRef,
+      // displayMode
+      displayMode: displayModeRef,
+      displayModeLabelMap,
+      displayModeOptions,
+      // locale
+      locale: localeNameRef,
+      localeLabelMap,
+      localeOptions,
+      // configProvider
+      configProviderName: configProviderNameRef,
+      configProviderOptions: configProviderOptionsRef,
+      configProviderLabels: configProviderLabelsRef,
+      // search
+      searchPattern: searchPatternRef,
+      searchOptions: searchOptionsRef,
+      handleSearch,
+      // menu
+      menuOptions: menuOptionsRef,
+      menuValue: menuValueRef,
+      handleMenuUpdateValue,
+      // mobile menu
+      mobileMenuOptions: mobileMenuOptionsRef,
+      handleMobileUpdateMenu,
+      mobileMenuValue: mobileMenuValueRef,
+      // common
+      handleLogoClick,
+      style: computed(() => {
+        return isMobileRef.value
+          ? {
+              '--side-padding': '16px',
+              'grid-template-columns': 'auto 1fr auto'
+            }
+          : {
+              '--side-padding': '32px',
+              'grid-template-columns':
+                'calc(272px - var(--side-padding)) 1fr auto'
+            }
+      })
     }
   }
 }
@@ -290,16 +409,15 @@ export default {
 <style scoped>
 .nav {
   display: grid;
-  grid-template-columns: 288px 1fr auto 32px;
   grid-template-rows: 63px;
   align-items: center;
+  padding: 0 var(--side-padding);
 }
 
 .ui-logo {
   cursor: pointer;
   display: flex;
   align-items: center;
-  padding-left: 36px;
   font-size: 18px;
 }
 

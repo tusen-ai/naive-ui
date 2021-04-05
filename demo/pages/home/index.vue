@@ -4,9 +4,8 @@
       <landing-footer style="max-width: 1200px; margin: auto" />
     </n-layout-footer>
     <div class="banner">
-      <left-image class="left-image" />
-      <right-image class="right-image" />
-      <n-h1 style="margin-top: 0" class="naive-title">
+      <right-image class="right-image" v-if="!isMobile" />
+      <n-h1 :style="titleStyle" class="naive-title">
         <span
           @mouseenter="handleTitleMouseEnter"
           @mouseleave="handleTitleMouseLeave"
@@ -47,15 +46,17 @@
           {{ t('start') }}
         </n-button>
       </div>
+      <left-image class="left-image" />
     </div>
   </div>
 </template>
 
 <script>
+import { computed } from 'vue'
 import LandingFooter from './Footer.vue'
 import leftImage from './Left.vue'
 import rightImage from './Right.vue'
-import { i18n } from '../../utils/composables'
+import { i18n, useIsMobile } from '../../utils/composables'
 import { useThemeName } from '../../store'
 
 export default {
@@ -65,8 +66,17 @@ export default {
     rightImage
   },
   setup () {
+    const isMobileRef = useIsMobile()
     return {
+      isMobile: isMobileRef,
       theme: useThemeName(),
+      titleStyle: computed(() => {
+        if (isMobileRef.value) {
+          return 'margin-top: 0; font-size: 64px !important'
+        } else {
+          return 'margin-top: 0; font-size: 80px !important'
+        }
+      }),
       ...i18n({
         'zh-CN': {
           start: '开始使用',
@@ -128,7 +138,6 @@ export default {
 
 .naive-title {
   font-family: Metropolis, sans-serif;
-  font-size: 80px !important;
   margin-bottom: 18px !important;
 }
 
@@ -166,5 +175,21 @@ export default {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+}
+
+@media only screen and (max-width: 600px) {
+  .banner {
+    text-align: left;
+    margin-left: 16px;
+    top: calc(50vh - 64px);
+  }
+  .left-image {
+    position: relative;
+    left: -16px;
+    min-width: unset;
+    width: 72vw;
+    top: 8px;
+    transform: none;
+  }
 }
 </style>
