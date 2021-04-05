@@ -35,7 +35,7 @@ function createItems (lang, theme, prefix, items) {
     const item = {
       ...rawItem,
       key: rawItem.en,
-      label: rawItem[langKey],
+      label: rawItem[langKey] || rawItem.en,
       extra: rawItem.enSuffix && isZh ? rawItem.en : undefined,
       path: rawItem.path
         ? `/${lang}/${theme}` + prefix + rawItem.path

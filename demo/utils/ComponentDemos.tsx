@@ -12,7 +12,7 @@ export default defineComponent({
   setup (props) {
     const breakpointRef = useBreakpoint()
     const mergedColsRef = useMemo(() => {
-      return breakpointRef.value === 'xs' ? 1 : props.span
+      return ['xs', 's', 'm'].includes(breakpointRef.value) ? 1 : props.span
     })
     return {
       mergedCols: mergedColsRef

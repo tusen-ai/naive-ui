@@ -6,6 +6,7 @@
     :segmented="{
       footer: true
     }"
+    footer-style="padding: 0;"
   >
     <template #header>
       <span
@@ -52,7 +53,7 @@ name="title"
     <slot name="content" />
     <slot name="demo" />
     <template v-if="showCode" #footer>
-      <n-scrollbar x-scrollable>
+      <n-scrollbar x-scrollable content-style="padding: 20px 24px;">
         <slot name="code" />
       </n-scrollbar>
     </template>

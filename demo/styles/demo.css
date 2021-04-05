@@ -9,6 +9,18 @@ body {
   body {
     overflow: visible;
   }
+  .md-table-wrapper {
+    overflow: auto;
+    margin: 0 -16px;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  .md-table-wrapper::before,
+  .md-table-wrapper::after {
+    content: '';
+    width: 16px;
+    flex-shrink: 0;
+  }
 }
 
 .demo-card .demo-card__view:not(:first-child) {
@@ -33,7 +45,6 @@ body {
 }
 
 .md-table-wrapper {
-  overflow: auto;
   margin-bottom: 16px;
 }
 
@@ -48,5 +59,4 @@ body {
 
 .md-card {
   margin-bottom: 16px;
-  overflow: auto;
 }
