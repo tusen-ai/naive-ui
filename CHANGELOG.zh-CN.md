@@ -19,6 +19,7 @@
 
 ### Fixes
 
+- 修正 `n-anchor` `ignore-gap` 不生效的问题
 - 修正 `n-collapse` 内容被 `overflow: hidden` 截断
 
 ## 2.3.1

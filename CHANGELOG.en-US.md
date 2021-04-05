@@ -19,6 +19,7 @@
 
 ### Fixes
 
+- Fix `n-anchor` `ignore-gap` not working
 - Fix `n-collapse` content is truncated by `overflow: hidden`.
 
 ## 2.3.1

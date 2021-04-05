@@ -459,11 +459,13 @@
   - [x] code Deprecated as of 10.7.0. highlight(lang, code, ...args) has been deprecated.
   - [x] vdirs zindexable https://github.com/vuejs/vue-next/issues/3497
   - [x] collapse-item overflow
-  - [ ] anchor ignore gap 有 bug
+  - [x] anchor ignore gap 有 bug
   - [x] popover click 移动端不生效
   - [ ] menu path 对应的问题
   - [ ] debug anchor 删除无用 link
   - [ ] popover inst methods
+  - [ ] ios 浏览器 demo code font size 不对
+  - [ ] table overflow bordered
 
 ## Build
 

@@ -195,16 +195,17 @@ export default defineComponent({
         }
       })
       links.sort((a, b) => {
-        if (a.top >= b.top) {
-          if (a.height < b.height) {
-            return 1
-          }
+        // ascend top
+        if (a.top > b.top) {
+          return 1
+          // descend height
+        } else if (a.top === b.top && a.height < b.height) {
+          return -1
         }
         return -1
       })
       const currentActiveHref = activeHrefRef.value
-      const bound = props.bound
-      const ignoreGap = props.ignoreGap
+      const { bound, ignoreGap } = props
       const activeLink = links.reduce((prevLink: LinkInfo | null, link) => {
         if (link.top + link.height < 0) {
           if (ignoreGap) {
