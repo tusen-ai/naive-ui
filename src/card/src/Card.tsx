@@ -144,7 +144,7 @@ export default defineComponent({
             'n-card--hoverable': hoverable
           }
         ]}
-        style={this.cssVars as any}
+        style={this.cssVars as CSSProperties}
       >
         {$slots.cover ? (
           <div class="n-card-cover">{renderSlot($slots, 'cover')}</div>
