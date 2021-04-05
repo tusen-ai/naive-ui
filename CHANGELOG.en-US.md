@@ -22,6 +22,7 @@
 
 - Fix `n-anchor` `ignore-gap` not working
 - Fix `n-collapse` content is truncated by `overflow: hidden`.
+- Fix `n-select` tag text overflow.
 
 ## 2.3.1
 

@@ -276,6 +276,7 @@ export default c([
     flex-wrap: wrap;
   `),
   cB('base-selection-tag-wrapper', `
+    max-width: 100%;
     display: inline-flex;
     padding: 0 7px 3px 0;
   `, [
