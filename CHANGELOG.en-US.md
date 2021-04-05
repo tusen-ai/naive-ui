@@ -12,6 +12,7 @@
 - `n-statistic` add `label` slot.
 - `n-breadcrumb-item` add `separator` slot & prop.
 - `n-button` add `bordered` prop.
+- `n-card` add `footer-style` prop.
 
 ### Refactors
 

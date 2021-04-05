@@ -22,6 +22,7 @@ closable
 | bordered | `boolean` | `true` |  |
 | closable | `boolean` | `false` |  |
 | content-style | `Object \| string` | `undefined` |  |
+| footer-style | `Object \| string` | `undefined` |  |
 | header-style | `Object \| string` | `undefined` |  |
 | hoverable | `boolean` | `false` |  |
 | segmented | `boolean \| { [part in 'content' \| 'footer' \| 'action']?: boolean \| 'soft' \| 'hard' }` | `false` |  |

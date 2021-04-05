@@ -25,6 +25,7 @@ const cardProps = {
   title: String,
   contentStyle: [Object, String] as PropType<CSSProperties | string>,
   headerStyle: [Object, String] as PropType<CSSProperties | string>,
+  footerStyle: [Object, String] as PropType<CSSProperties | string>,
   segmented: {
     type: [Boolean, Object] as PropType<boolean | Segmented>,
     default: false
@@ -171,7 +172,9 @@ export default defineComponent({
           {$slots}
         </div>
         {$slots.footer ? (
-          <div class="n-card__footer">{renderSlot($slots, 'footer')}</div>
+          <div class="n-card__footer" style={this.footerStyle}>
+            {renderSlot($slots, 'footer')}
+          </div>
         ) : null}
         {$slots.action ? (
           <div class="n-card__action">{renderSlot($slots, 'action')}</div>
