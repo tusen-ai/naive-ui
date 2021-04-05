@@ -4,7 +4,7 @@ You can set `default-expanded-keys` to make menu work in an uncontrolled manner 
 
 ```html
 <n-menu
-  :items="menuItems"
+  :options="menuOptions"
   :default-expanded-keys="defaultExpandedKeys"
   @update:expanded-keys="handleUpdateExpandedKeys"
 />
@@ -23,7 +23,7 @@ function renderIcon (icon) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
-const menuItems = [
+const menuOptions = [
   {
     label: 'Hear the Wind Sing',
     key: 'hear-the-wind-sing',
@@ -102,7 +102,7 @@ export default {
   setup () {
     const message = useMessage()
     return {
-      menuItems,
+      menuOptions,
       defaultExpandedKeys: ['dance-dance-dance', 'food'],
       handleUpdateExpandedKeys (value) {
         message.info('[onUpdate:expandedKeys]: ' + JSON.stringify(value))

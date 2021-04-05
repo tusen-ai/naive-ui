@@ -1,5 +1,5 @@
 import { Key } from 'treemate'
-import { inject, computed, ComputedRef, PropType } from 'vue'
+import { inject, computed, ComputedRef, PropType, ExtractPropTypes } from 'vue'
 import { MergedTheme } from '../../_mixins/use-theme'
 import type { MenuTheme } from '../styles'
 import { OnUpdateValueImpl } from './interface'
@@ -32,9 +32,22 @@ export interface MenuItemGroupInjection {
   paddingLeft: number | undefined
 }
 
-export interface UseMenuChildProps {
-  root: boolean
-}
+const menuChildProps = {
+  internalKey: {
+    type: [String, Number] as PropType<Key>,
+    required: true
+  },
+  root: Boolean,
+  isGroup: Boolean,
+  level: {
+    type: Number,
+    required: true
+  },
+  title: [String, Function] as PropType<string | Function>,
+  extra: [String, Function] as PropType<string | Function>
+} as const
+
+export type UseMenuChildProps = ExtractPropTypes<typeof menuChildProps>
 
 export interface UseMenuChild {
   dropdownPlacement: ComputedRef<'bottom' | 'right' | 'right-start'>
@@ -76,7 +89,7 @@ function useMenuChild (props: UseMenuChildProps): UseMenuChild {
   const paddingLeftRef = computed(() => {
     if (horizontalRef.value) return undefined
     const { collapsedWidth, indent, rootIndent } = NMenu
-    const { root } = props
+    const { root, isGroup } = props
     const mergedRootIndent = rootIndent === undefined ? indent : rootIndent
     if (root) {
       if (NMenu.collapsed) return collapsedWidth / 2 - maxIconSizeRef.value / 2
@@ -86,7 +99,7 @@ function useMenuChild (props: UseMenuChildProps): UseMenuChild {
       return indent / 2 + (NMenuItemGroup.paddingLeft as number)
     }
     if (NSubmenu) {
-      return indent + (NSubmenu.paddingLeft as number)
+      return (isGroup ? indent / 2 : indent) + (NSubmenu.paddingLeft as number)
     }
     return undefined as never
   })
@@ -115,23 +128,6 @@ function useMenuChild (props: UseMenuChildProps): UseMenuChild {
     NSubmenu
   }
 }
-
-const menuChildProps = {
-  internalKey: {
-    type: [String, Number] as PropType<Key>,
-    required: true
-  },
-  root: {
-    type: Boolean,
-    default: false
-  },
-  level: {
-    type: Number,
-    required: true
-  },
-  title: [String, Function] as PropType<string | Function>,
-  extra: [String, Function] as PropType<string | Function>
-} as const
 
 useMenuChild.props = menuChildProps
 

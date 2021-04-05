@@ -3,7 +3,7 @@
 使用 `@update:value` 监听菜单选择变化。这个回调首个参数为选中菜单项的 `key`，第二个参数为菜单项的原数据。你通常可以在这个地方配合 vue-router 完成路由。
 
 ```html
-<n-menu @update:value="handleUpdateValue" :items="menuItems" />
+<n-menu @update:value="handleUpdateValue" :options="menuOptions" />
 ```
 
 ```js
@@ -19,7 +19,7 @@ function renderIcon (icon) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
-const menuItems = [
+const menuOptions = [
   {
     label: '且听风吟',
     key: 'hear-the-wind-sing',
@@ -98,7 +98,7 @@ export default {
   setup () {
     const message = useMessage()
     return {
-      menuItems,
+      menuOptions,
       handleUpdateValue (key, item) {
         message.info('[onUpdate:value]: ' + JSON.stringify(key))
         message.info('[onUpdate:value]: ' + JSON.stringify(item))

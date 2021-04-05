@@ -4,7 +4,7 @@
 
 ```html
 <n-menu
-  :items="menuItems"
+  :options="menuOptions"
   :default-expanded-keys="defaultExpandedKeys"
   @update:expanded-keys="handleUpdateExpandedKeys"
 />
@@ -23,7 +23,7 @@ function renderIcon (icon) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
-const menuItems = [
+const menuOptions = [
   {
     label: '且听风吟',
     key: 'hear-the-wind-sing',
@@ -102,7 +102,7 @@ export default {
   setup () {
     const message = useMessage()
     return {
-      menuItems,
+      menuOptions,
       defaultExpandedKeys: ['dance-dance-dance', 'food'],
       handleUpdateExpandedKeys (keys) {
         message.info('[onUpdate:expandedKeys]: ' + JSON.stringify(keys))

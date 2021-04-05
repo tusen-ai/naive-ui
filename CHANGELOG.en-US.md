@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Refactors
+
+- `n-menu` add `options` prop to replace `items` prop, `items` prop is deprecated.
+
 ### Feats
 
 - Add `n-page-header` component.

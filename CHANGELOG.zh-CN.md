@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Refactors
+
+- `n-menu` 增加 `options` prop 去替代 `items` prop，`items` prop 被废弃
+
 ### Feats
 
 - 添加 `n-page-header` 组件

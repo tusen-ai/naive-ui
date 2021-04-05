@@ -31,9 +31,19 @@ export default defineComponent({
   name: 'Menu',
   props: {
     ...(useTheme.props as ThemeProps<MenuTheme>),
-    items: {
+    options: {
       type: Array as PropType<Array<MenuOption | MenuGroupOption>>,
       default: () => []
+    },
+    items: {
+      type: Array as PropType<Array<MenuOption | MenuGroupOption> | undefined>,
+      validator: () => {
+        if (__DEV__) {
+          warn('menu', '`items` is deprecated, please use `options` instead.')
+        }
+        return true
+      },
+      default: undefined
     },
     collapsed: {
       type: Boolean,
@@ -151,11 +161,14 @@ export default defineComponent({
     const themeRef = useTheme('Menu', 'Menu', style, menuLight, props)
 
     const treeMateRef = computed(() =>
-      createTreeMate<MenuOption, MenuGroupOption>(props.items, {
-        getKey (node) {
-          return node.key ?? node.name
+      createTreeMate<MenuOption, MenuGroupOption>(
+        props.items || props.options,
+        {
+          getKey (node) {
+            return node.key ?? node.name
+          }
         }
-      })
+      )
     )
     const uncontrolledExpandedKeysRef = ref(
       props.defaultExpandAll

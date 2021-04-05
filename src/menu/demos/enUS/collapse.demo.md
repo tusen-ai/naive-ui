@@ -20,7 +20,7 @@ Use collapsable vertical menu with layout sider. Use `collapsed` to control coll
         :collapsed="collapsed"
         :collapsed-width="64"
         :collapsed-icon-size="22"
-        :items="menuItems"
+        :options="menuOptions"
         v-model:value="activeKey"
       />
     </n-layout-sider>
@@ -44,7 +44,7 @@ function renderIcon (icon) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
-const menuItems = [
+const menuOptions = [
   {
     label: 'Hear the Wind Sing',
     key: 'hear-the-wind-sing',
@@ -124,7 +124,7 @@ export default {
     return {
       activeKey: null,
       collapsed: true,
-      menuItems
+      menuOptions
     }
   }
 }

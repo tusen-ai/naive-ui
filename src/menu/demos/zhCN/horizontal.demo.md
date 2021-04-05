@@ -3,7 +3,7 @@
 一个水平菜单
 
 ```html
-<n-menu v-model:value="activeKey" mode="horizontal" :items="menuItems" />
+<n-menu v-model:value="activeKey" mode="horizontal" :options="menuOptions" />
 ```
 
 ```js
@@ -19,7 +19,7 @@ function renderIcon (icon) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
-const menuItems = [
+const menuOptions = [
   {
     label: '且听风吟',
     key: 'hear-the-wind-sing',
@@ -98,7 +98,7 @@ export default {
   data () {
     return {
       activeKey: null,
-      menuItems
+      menuOptions
     }
   }
 }

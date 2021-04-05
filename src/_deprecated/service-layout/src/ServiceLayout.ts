@@ -199,7 +199,7 @@ export default defineComponent({
                       defaultExpandAll: true,
                       rootIndent: 36,
                       indent: 40,
-                      items: this.menuItems,
+                      options: this.menuItems,
                       'onUpdate:expandedKeys': this.onExpandedNamesChange,
                       'onUpdate:value': this.handleMenuUpdateValue
                     })

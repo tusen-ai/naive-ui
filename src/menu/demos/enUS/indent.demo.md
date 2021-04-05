@@ -7,7 +7,7 @@ You can specify `indent` & `root-indent` of the menu. `root-indent` only determi
   v-model:value="activeKey"
   :root-indent="36"
   :indent="12"
-  :items="menuItems"
+  :options="menuOptions"
 />
 ```
 
@@ -24,7 +24,7 @@ function renderIcon (icon) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
-const menuItems = [
+const menuOptions = [
   {
     label: 'Hear the Wind Sing',
     key: 'hear-the-wind-sing',
@@ -103,7 +103,7 @@ export default {
   data () {
     return {
       activeKey: null,
-      menuItems
+      menuOptions
     }
   }
 }

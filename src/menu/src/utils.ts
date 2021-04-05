@@ -13,7 +13,7 @@ const submenuPropKeys = keysOf(submenuProps)
 export function itemRenderer (
   tmNode: TreeNode<MenuOption, MenuGroupOption>
 ): VNode {
-  const { rawNode, key, level } = tmNode
+  const { rawNode, key, level, isGroup } = tmNode
   const props = {
     ...rawNode,
     title: (rawNode.title || rawNode.label) as
@@ -24,7 +24,8 @@ export function itemRenderer (
     key,
     internalKey: key, // since key can't be used as a prop
     level,
-    root: level === 0
+    root: level === 0,
+    isGroup
   }
 
   if (tmNode.children) {
