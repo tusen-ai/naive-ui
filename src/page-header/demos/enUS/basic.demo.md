@@ -7,7 +7,7 @@
 >
   <n-grid :cols="5">
     <n-gi>
-      <n-statistic label="Episode" value="125" />
+      <n-statistic label="Episodes" value="125" />
     </n-gi>
     <n-gi>
       <n-statistic label="Guests" value="22" />

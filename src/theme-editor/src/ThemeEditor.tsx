@@ -55,6 +55,7 @@ const ColorWandIcon = (
 
 export default defineComponent({
   name: 'ThemeEditor',
+  inheritAttrs: false,
   setup () {
     const fileInputRef = ref<HTMLInputElement | null>(null)
     const { NConfigProvider } = useConfig()
@@ -214,24 +215,27 @@ export default defineComponent({
               {{
                 trigger: () => (
                   <NElement
-                    style={{
-                      position: 'fixed',
-                      zIndex: 10,
-                      bottom: '40px',
-                      right: '40px',
-                      width: '44px',
-                      height: '44px',
-                      fontSize: '26px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      borderRadius: '50%',
-                      backgroundColor: 'var(--popover-color)',
-                      color: 'var(--text-color-2)',
-                      transition: 'all .3s var(--cubic-bezier-ease-in-out)',
-                      boxShadow: '0 2px 8px 0px rgba(0, 0, 0, .12)',
-                      cursor: 'pointer'
-                    }}
+                    style={[
+                      {
+                        position: 'fixed',
+                        zIndex: 10,
+                        bottom: '40px',
+                        right: '40px',
+                        width: '44px',
+                        height: '44px',
+                        fontSize: '26px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        borderRadius: '50%',
+                        backgroundColor: 'var(--popover-color)',
+                        color: 'var(--text-color-2)',
+                        transition: 'all .3s var(--cubic-bezier-ease-in-out)',
+                        boxShadow: '0 2px 8px 0px rgba(0, 0, 0, .12)',
+                        cursor: 'pointer'
+                      },
+                      this.$attrs.style
+                    ]}
                     // @ts-expect-error
                     onClick={() => {
                       this.showPanel = !this.showPanel

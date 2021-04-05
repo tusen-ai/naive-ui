@@ -458,7 +458,11 @@
   - [ ] mention mention pending option not correct, sometimes it is not the first option
   - [x] code Deprecated as of 10.7.0. highlight(lang, code, ...args) has been deprecated.
   - [x] vdirs zindexable https://github.com/vuejs/vue-next/issues/3497
-  - [ ] collapse-item overflow
+  - [x] collapse-item overflow
+  - [ ] anchor ignore gap 有 bug
+  - [ ] popover click 移动端不生效
+  - [ ] menu path 对应的问题
+  - [ ] debug anchor 删除无用 link
 
 ## Build
 
