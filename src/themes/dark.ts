@@ -66,6 +66,7 @@ import { treeDark } from '../tree/styles'
 import { uploadDark } from '../upload/styles'
 import { selectDark } from '../select/styles'
 import type { BuiltInGlobalTheme } from './interface'
+import { pageHeaderDark } from '../page-header/styles'
 
 export const darkTheme: BuiltInGlobalTheme = {
   common: commonDark,
@@ -108,6 +109,7 @@ export const darkTheme: BuiltInGlobalTheme = {
   Message: messageDark,
   Modal: modalDark,
   Notification: notificationDark,
+  PageHeader: pageHeaderDark,
   Pagination: paginationDark,
   Popconfirm: popconfirmDark,
   Popover: popoverDark,

@@ -68,6 +68,7 @@ import { treeLight } from '../tree/styles'
 import { uploadLight } from '../upload/styles'
 import { selectLight } from '../select/styles'
 import type { BuiltInGlobalTheme } from './interface'
+import { pageHeaderLight } from '../page-header/styles'
 
 export const lightTheme: BuiltInGlobalTheme = {
   common: commonLight,
@@ -110,6 +111,7 @@ export const lightTheme: BuiltInGlobalTheme = {
   Message: messageLight,
   Modal: modalLight,
   Notification: notificationLight,
+  PageHeader: pageHeaderLight,
   Pagination: paginationLight,
   Popconfirm: popconfirmLight,
   Popover: popoverLight,
