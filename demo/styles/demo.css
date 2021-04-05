@@ -4,10 +4,6 @@ body {
   overflow: hidden;
 }
 
-.demo-card {
-  margin-bottom: 16px;
-}
-
 .demo-card .demo-card__view:not(:first-child) {
   margin-top: 16px;
 }
@@ -29,6 +25,11 @@ body {
   max-width: 680px;
 }
 
+.md-table-wrapper {
+  overflow: auto;
+  margin-bottom: 16px;
+}
+
 .md-table .n-table__td:nth-child(1) {
   font-size: 0.93em !important;
   font-family: v-mono, monospace;
@@ -39,9 +40,5 @@ body {
 }
 
 .md-card {
-  margin-bottom: 16px;
-}
-
-.md-table {
   margin-bottom: 16px;
 }

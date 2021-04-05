@@ -3,7 +3,7 @@
     <span>{{ text }}</span>
     <span class="edit-button">
       <n-tooltip trigger="hover" placement="right" :show-arrow="true">
-        <template #activator>
+        <template #trigger>
           <edit-on-github-button
             text
             class="edit-button"

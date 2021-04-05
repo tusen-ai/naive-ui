@@ -68,7 +68,6 @@ export default {
   components: {
     CodeOutline
   },
-  inject: ['NDocumentation'],
   props: {
     title: {
       type: String,
@@ -125,30 +124,11 @@ export default {
       nextTick(() => {
         this.$refs.expandCodeButton.syncPosition()
       })
-    },
-    displayMode () {
-      this.init()
     }
-  },
-  created () {
-    this.init()
   },
   methods: {
     toggleCodeDisplay () {
       this.showCode = !this.showCode
-    },
-    init () {
-      const map = this.NDocumentation.anchorLinkMap
-      if (this.isDebugDemo) {
-        if (this.displayMode === 'debug') {
-          map.set(this.demoFileName, this.title)
-        } else {
-          map.delete(this.demoFileName)
-        }
-      } else {
-        map.set(this.demoFileName, this.title)
-      }
-      this.NDocumentation.anchorLinkMap = new Map(map)
     }
   }
 }
