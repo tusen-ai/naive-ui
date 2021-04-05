@@ -24,7 +24,8 @@
 </template>
 
 <script>
-import { siteSetup } from './store'
+import { useRouter, useRoute } from 'vue-router'
+import { initRouter, siteSetup } from './store'
 import Site from './Site.vue'
 
 export default {
@@ -33,6 +34,7 @@ export default {
     Site
   },
   setup () {
+    initRouter(useRouter(), useRoute())
     return siteSetup()
   }
 }

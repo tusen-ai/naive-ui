@@ -1,5 +1,4 @@
-import { computed, ref, provide, reactive, toRef, inject } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { computed, ref } from 'vue'
 import { useMemo } from 'vooks'
 import {
   NConfigProvider,
@@ -18,24 +17,13 @@ import {
 } from './menu-options'
 import hljs from './hljs'
 
-const storeKey = 'site-store'
+let route = null
+let router = null
 
-export function siteSetup () {
-  const route = useRoute()
-  const router = useRouter()
-  // display mode
-  const _displayModeRef = ref(window.localStorage.getItem('mode') ?? 'debug')
-  const displayModeRef = computed({
-    get () {
-      return _displayModeRef.value
-    },
-    set (value) {
-      _displayModeRef.value = value
-      window.localStorage.setItem('mode', value)
-    }
-  })
-  // locale
-  const localeNameRef = useMemo({
+export function initRouter (_router, _route) {
+  route = _route
+  router = _router
+  localeNameRef = useMemo({
     get () {
       return route.path.startsWith('/zh-CN') ? 'zh-CN' : 'en-US'
     },
@@ -43,16 +31,10 @@ export function siteSetup () {
       router.push(changeLangInPath(route.fullPath, locale))
     }
   })
-  const localeRef = computed(() => {
-    return localeNameRef.value === 'zh-CN' ? zhCN : enUS
-  })
-  // useMemo
-  const dateLocaleRef = useMemo(() => {
+  dateLocaleRef = useMemo(() => {
     return route.params.lang === 'zh-CN' ? dateZhCN : dateEnUS
   })
-  // theme
-  const osThemeRef = useOsTheme()
-  const themeNameRef = useMemo({
+  themeNameRef = useMemo({
     get () {
       switch (route.params.theme) {
         case 'os-theme':
@@ -67,59 +49,75 @@ export function siteSetup () {
       router.push(changeThemeInPath(route.fullPath, theme))
     }
   })
-  const themeRef = computed(() => {
-    const { value } = themeNameRef
-    return value === 'dark' ? darkTheme : null
+}
+
+// display mode
+const _displayModeRef = ref(window.localStorage.getItem('mode') ?? 'debug')
+const displayModeRef = computed({
+  get () {
+    return _displayModeRef.value
+  },
+  set (value) {
+    _displayModeRef.value = value
+    window.localStorage.setItem('mode', value)
+  }
+})
+
+// locale
+let localeNameRef = null
+const localeRef = computed(() => {
+  return localeNameRef.value === 'zh-CN' ? zhCN : enUS
+})
+
+// useMemo
+let dateLocaleRef = null
+
+// theme
+const osThemeRef = useOsTheme()
+let themeNameRef = null
+const themeRef = computed(() => {
+  const { value } = themeNameRef
+  return value === 'dark' ? darkTheme : null
+})
+
+// config provider
+const configProviderNameRef = ref(process.env.TUSIMPLE ? 'tusimple' : 'default')
+const configProviderRef = computed(() => {
+  return configProviderNameRef.value === 'tusimple'
+    ? TsConfigProvider
+    : NConfigProvider
+})
+
+// options
+const docOptionsRef = computed(() =>
+  createDocumentationMenuOptions({
+    theme: themeNameRef.value,
+    lang: localeNameRef.value,
+    mode: displayModeRef.value
   })
-  // config provider
-  const configProviderNameRef = ref(
-    process.env.TUSIMPLE ? 'tusimple' : 'default'
-  )
-  const configProviderRef = computed(() => {
-    return configProviderNameRef.value === 'tusimple'
-      ? TsConfigProvider
-      : NConfigProvider
+)
+const componentOptionsRef = computed(() =>
+  createComponentMenuOptions({
+    theme: themeNameRef.value,
+    lang: localeNameRef.value,
+    mode: displayModeRef.value
   })
-  // options
-  const docOptionsRef = computed(() =>
-    createDocumentationMenuOptions({
-      theme: themeNameRef.value,
-      lang: localeNameRef.value,
-      mode: displayModeRef.value
+)
+const flattenedDocOptionsRef = computed(() => {
+  const flattenedItems = []
+  const traverse = (items) => {
+    if (!items) return
+    items.forEach((item) => {
+      if (item.children) traverse(item.children)
+      else flattenedItems.push(item)
     })
-  )
-  const componentOptionsRef = computed(() =>
-    createComponentMenuOptions({
-      theme: themeNameRef.value,
-      lang: localeNameRef.value,
-      mode: displayModeRef.value
-    })
-  )
-  const flattenedDocOptionsRef = computed(() => {
-    const flattenedItems = []
-    const traverse = (items) => {
-      if (!items) return
-      items.forEach((item) => {
-        if (item.children) traverse(item.children)
-        else flattenedItems.push(item)
-      })
-    }
-    traverse(docOptionsRef.value)
-    traverse(componentOptionsRef.value)
-    return flattenedItems
-  })
-  provide(
-    storeKey,
-    reactive({
-      themeName: themeNameRef,
-      configProviderName: configProviderNameRef,
-      localeName: localeNameRef,
-      displayMode: displayModeRef,
-      docOptions: docOptionsRef,
-      componentOptions: componentOptionsRef,
-      flattenedDocOptions: flattenedDocOptionsRef
-    })
-  )
+  }
+  traverse(docOptionsRef.value)
+  traverse(componentOptionsRef.value)
+  return flattenedItems
+})
+
+export function siteSetup () {
   i18n.provide(computed(() => localeNameRef.value))
   const isMobileRef = useIsMobile()
   return {
@@ -146,29 +144,29 @@ function changeThemeInPath (path, theme) {
 }
 
 export function useDisplayMode () {
-  return toRef(inject(storeKey), 'displayMode')
+  return displayModeRef
 }
 
 export function useLocaleName () {
-  return toRef(inject(storeKey), 'localeName')
+  return localeNameRef
 }
 
 export function useThemeName () {
-  return toRef(inject(storeKey), 'themeName')
+  return themeNameRef
 }
 
 export function useDocOptions () {
-  return toRef(inject(storeKey), 'docOptions')
+  return docOptionsRef
 }
 
 export function useComponentOptions () {
-  return toRef(inject(storeKey), 'componentOptions')
+  return componentOptionsRef
 }
 
 export function useFlattenedDocOptions () {
-  return toRef(inject(storeKey), 'flattenedDocOptions')
+  return flattenedDocOptionsRef
 }
 
 export function useConfigProviderName () {
-  return toRef(inject(storeKey), 'configProviderName')
+  return configProviderNameRef
 }
