@@ -47,4 +47,5 @@ body {
 
 .md-card {
   margin-bottom: 16px;
+  overflow: auto;
 }

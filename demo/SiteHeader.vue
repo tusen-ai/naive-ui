@@ -229,6 +229,7 @@ export default {
       ]
     })
     const mobileMenuValueRef = computed(() => {
+      if (route.name === 'home') return 'home'
       return findMenuValue(mobileMenuOptionsRef.value, route.path)
     })
     function handleMobileUpdateMenu (value, { path }) {

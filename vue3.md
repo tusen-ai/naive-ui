@@ -460,9 +460,10 @@
   - [x] vdirs zindexable https://github.com/vuejs/vue-next/issues/3497
   - [x] collapse-item overflow
   - [ ] anchor ignore gap 有 bug
-  - [ ] popover click 移动端不生效
+  - [x] popover click 移动端不生效
   - [ ] menu path 对应的问题
   - [ ] debug anchor 删除无用 link
+  - [ ] popover inst methods
 
 ## Build
 
