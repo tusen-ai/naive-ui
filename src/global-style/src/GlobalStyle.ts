@@ -1,40 +1,38 @@
-import { defineComponent, watchEffect, onBeforeMount, onUnmounted } from 'vue'
-import { useTheme } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import type { GlobalStyleTheme } from '../styles'
-import { globalStyleLight } from '../styles'
+import {
+  defineComponent,
+  watchEffect,
+  onBeforeMount,
+  onUnmounted,
+  inject
+} from 'vue'
 import { warn } from '../../_utils'
+import { commonLight } from '../../_styles/common'
+import { configProviderInjectionKey } from '../../config-provider/src/ConfigProvider'
+import { merge } from 'lodash-es'
 
 export default defineComponent({
   name: 'GlobalStyle',
-  props: {
-    ...(useTheme.props as ThemeProps<GlobalStyleTheme>)
-  },
-  setup (props) {
-    const themeRef = useTheme(
-      'GlobalStyle',
-      'GlobalStyle',
-      undefined,
-      globalStyleLight,
-      props
-    )
+  setup () {
+    const NConfigProvider = inject(configProviderInjectionKey)
     const { body } = document
     const { style } = body
     let styleApplied = false
     onBeforeMount(() => {
       watchEffect(() => {
         const {
-          value: {
-            common: {
-              textColor2,
-              fontSize,
-              fontFamily,
-              bodyColor,
-              cubicBezierEaseInOut,
-              lineHeight
-            }
-          }
-        } = themeRef
+          textColor2,
+          fontSize,
+          fontFamily,
+          bodyColor,
+          cubicBezierEaseInOut,
+          lineHeight
+        } = NConfigProvider
+          ? merge(
+            {},
+            NConfigProvider.mergedTheme?.common || commonLight,
+            NConfigProvider.mergedThemeOverrides?.common
+          )
+          : commonLight
         if (styleApplied || !body.hasAttribute('n-styled')) {
           body.setAttribute('n-styled', '')
           styleApplied = true

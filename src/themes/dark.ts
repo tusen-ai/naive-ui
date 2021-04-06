@@ -25,7 +25,6 @@ import { elementDark } from '../element/styles'
 import { ellipsisDark } from '../ellipsis/styles'
 import { emptyDark } from '../empty/styles'
 import { formDark } from '../form/styles'
-import { globalStyleDark } from '../global-style/styles'
 import { gradientTextDark } from '../gradient-text/styles'
 import { iconDark } from '../icon/styles'
 import { inputDark } from '../input/styles'
@@ -97,7 +96,6 @@ export const darkTheme: BuiltInGlobalTheme = {
   Empty: emptyDark,
   Ellipsis: ellipsisDark,
   Form: formDark,
-  GlobalStyle: globalStyleDark,
   GradientText: gradientTextDark,
   Icon: iconDark,
   Input: inputDark,

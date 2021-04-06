@@ -27,7 +27,6 @@ import { elementLight } from '../element/styles'
 import { ellipsisLight } from '../ellipsis/styles'
 import { emptyLight } from '../empty/styles'
 import { formLight } from '../form/styles'
-import { globalStyleLight } from '../global-style/styles'
 import { gradientTextLight } from '../gradient-text/styles'
 import { iconLight } from '../icon/styles'
 import { inputLight } from '../input/styles'
@@ -99,7 +98,6 @@ export const lightTheme: BuiltInGlobalTheme = {
   Empty: emptyLight,
   Ellipsis: ellipsisLight,
   Form: formLight,
-  GlobalStyle: globalStyleLight,
   GradientText: gradientTextLight,
   Icon: iconLight,
   Input: inputLight,
