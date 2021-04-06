@@ -60,12 +60,12 @@ export default defineComponent({
     const fileInputRef = ref<HTMLInputElement | null>(null)
     const { NConfigProvider } = useConfig()
     const theme = computed(() => {
-      const mergedUnstableTheme: GlobalTheme =
-        NConfigProvider?.mergedUnstableTheme || lightTheme
-      const mergedThemeOverrides = NConfigProvider?.mergedUnstableThemeOverrides
+      const mergedTheme: GlobalTheme =
+        NConfigProvider?.mergedTheme || lightTheme
+      const mergedThemeOverrides = NConfigProvider?.mergedThemeOverrides
       const common = merge(
         {},
-        mergedUnstableTheme.common || lightTheme.common,
+        mergedTheme.common || lightTheme.common,
         mergedThemeOverrides?.common,
         overridesRef.value.common || {}
       ) as NonNullable<GlobalTheme['common']>
@@ -76,7 +76,7 @@ export default defineComponent({
       keyof typeof lightTheme
       >) {
         if (key === 'common') continue
-        ;(overrides as any)[key] = (mergedUnstableTheme[key]?.self?.(common) ||
+        ;(overrides as any)[key] = (mergedTheme[key]?.self?.(common) ||
           lightTheme[key].self?.(common)) as any
         // There (last line) we must use as any, nor ts 2590 will be raised since the union
         // is too complex

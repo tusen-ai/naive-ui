@@ -30,19 +30,20 @@ export default function useLegacy (
   }
   return {
     legacyTheme: computed(() => {
-      return NConfigProvider?.mergedTheme || 'light'
+      return NConfigProvider?.mergedLegacyTheme || 'light'
     }),
     legacyLanguage: computed(() => {
       return NConfigProvider ? NConfigProvider.mergedLanguage : undefined
     }),
     legacyThemeEnvironment: computed(() => {
-      const { mergedThemeEnvironments, mergedTheme } = NConfigProvider || {}
+      const { mergedThemeEnvironments, mergedLegacyTheme } =
+        NConfigProvider || {}
       return mergedThemeEnvironments
-        ? mergedThemeEnvironments[mergedTheme || 'light']
+        ? mergedThemeEnvironments[mergedLegacyTheme || 'light']
         : null
     }),
     legacyStyleScheme: computed(() => {
-      return (styleScheme as any)[NConfigProvider?.mergedTheme || 'light']
+      return (styleScheme as any)[NConfigProvider?.mergedLegacyTheme || 'light']
     })
   }
 }

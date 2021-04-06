@@ -10,6 +10,7 @@
   - `naive-ui/lib|es/icons/*` is deprecated (vue-loader is required), use [xicons](https://github.com/07akioni/xicons) instead.
 - `n-nimbus-icon` is moved to `naive-ui/compat/nimbus-icon` (vue-loader is required)
 - `n-nimbus-form-card` is removed
+- locale & theme on `n-config-provider` doesn't accept string any more (not it accepts object).
 
 ## Components
 

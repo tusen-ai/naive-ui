@@ -198,12 +198,11 @@ export interface ConfigProviderInjection {
   mergedHljs: Hljs | undefined
   mergedComponentProps: GlobalComponentConfig | undefined
   mergedIcons: GlobalIconConfig | undefined
-  // stable, name need to be refactored
-  mergedUnstableTheme: GlobalTheme | undefined
-  mergedUnstableThemeOverrides: GlobalThemeOverrides | undefined
+  mergedTheme: GlobalTheme | undefined
+  mergedThemeOverrides: GlobalThemeOverrides | undefined
   // deprecated
   /** @deprecated */
-  mergedTheme: string | undefined
+  mergedLegacyTheme: string | undefined
   /** @deprecated */
   mergedLanguage: string | undefined
   /** @deprecated */

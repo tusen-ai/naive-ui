@@ -1,6 +1,4 @@
 import * as components from './components'
-import { enUS, zhCN } from './locales'
-
 // deprecated
 import { NServiceLayout } from './_deprecated/service-layout/index'
 
@@ -13,7 +11,5 @@ export default create({
     ),
     // Deprecated
     NServiceLayout
-  ],
-  // deprecated
-  locales: [enUS, zhCN]
+  ]
 })

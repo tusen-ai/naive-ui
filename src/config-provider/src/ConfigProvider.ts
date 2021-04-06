@@ -103,21 +103,20 @@ export default defineComponent({
   props: configProviderProps,
   setup (props) {
     const NConfigProvider = inject(configProviderInjectionKey, null)
-    const mergedUnstableThemeRef = computed(() => {
+    const mergedThemeRef = computed(() => {
       const { theme } = props
       if (theme === null) return undefined
-      return theme === undefined ? NConfigProvider?.mergedUnstableTheme : theme
+      return theme === undefined ? NConfigProvider?.mergedTheme : theme
     })
-    const mergedUnstableThemeOverridesRef = computed(() => {
+    const mergedThemeOverridesRef = computed(() => {
       const { themeOverrides } = props
       // stop inheriting themeOverrides
       if (themeOverrides === null) return undefined
       // use inherited themeOverrides
       if (themeOverrides === undefined) {
-        return NConfigProvider?.mergedUnstableThemeOverrides
+        return NConfigProvider?.mergedThemeOverrides
       } else {
-        const inheritedThemeOverrides =
-          NConfigProvider?.mergedUnstableThemeOverrides
+        const inheritedThemeOverrides = NConfigProvider?.mergedThemeOverrides
         if (inheritedThemeOverrides === undefined) {
           // no inherited, use self overrides
           return themeOverrides
@@ -170,10 +169,10 @@ export default defineComponent({
           return hljs === undefined ? NConfigProvider?.mergedHljs : hljs
         }),
         // wip, unstable
-        mergedUnstableTheme: mergedUnstableThemeRef,
-        mergedUnstableThemeOverrides: mergedUnstableThemeOverridesRef,
+        mergedTheme: mergedThemeRef,
+        mergedThemeOverrides: mergedThemeOverridesRef,
         // deprecated
-        mergedTheme: useMemo(() => {
+        mergedLegacyTheme: useMemo(() => {
           const { legacyTheme } = props
           return legacyTheme === undefined
             ? NConfigProvider?.mergedTheme
@@ -200,8 +199,8 @@ export default defineComponent({
     return {
       mergedBordered: mergedBorderedRef,
       mergedNamespace: mergedNamespaceRef,
-      mergedUnstableTheme: mergedUnstableThemeRef,
-      mergedUnstableThemeOverrides: mergedUnstableThemeOverridesRef
+      mergedTheme: mergedThemeRef,
+      mergedThemeOverrides: mergedThemeOverridesRef
     }
   },
   render () {

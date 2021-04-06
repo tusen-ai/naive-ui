@@ -107,7 +107,7 @@ function useTheme<N, T, R> (
     } = props
     const { common: selfCommonOverrides, peers: peersOverrides } = selfOverrides
     const {
-      mergedUnstableTheme: {
+      mergedTheme: {
         common: globalCommon = undefined,
         [resolveId]: {
           common: globalSelfCommon = undefined,
@@ -115,7 +115,7 @@ function useTheme<N, T, R> (
           peers: globalPeers = {}
         } = {}
       } = {},
-      mergedUnstableThemeOverrides: {
+      mergedThemeOverrides: {
         common: globalCommonOverrides = undefined,
         [resolveId]: globalSelfOverrides = {}
       } = {}
