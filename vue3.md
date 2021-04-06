@@ -462,10 +462,10 @@
   - [x] anchor ignore gap 有 bug
   - [x] popover click 移动端不生效
   - [ ] menu path 对应的问题
-  - [ ] debug anchor 删除无用 link
+  - [x] debug anchor 删除无用 link
   - [ ] popover inst methods
-  - [ ] ios 浏览器 demo code font size 不对
-  - [ ] table overflow bordered
+  - [x] ios 浏览器 demo code font size 不对
+  - [ ] <del>table overflow bordered</del>
 
 ## Build
 

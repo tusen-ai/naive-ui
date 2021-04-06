@@ -21,10 +21,8 @@ async function resolveDemoInfos (literal, url, env) {
     .filter((id) => id.length)
   const infos = []
   for (const id of ids) {
-    if (
-      env === 'production' &&
-      (id.includes('debug') || id.includes('Debug'))
-    ) {
+    const debug = id.includes('debug') || id.includes('Debug')
+    if (env === 'production' && debug) {
       continue
     }
     const fileName = `${id}.demo.md`
@@ -34,7 +32,8 @@ async function resolveDemoInfos (literal, url, env) {
       variable,
       fileName,
       title: await resolveDemoTitle(fileName, url),
-      tag: `<${variable} />`
+      tag: `<${variable} />`,
+      debug
     })
   }
   return infos
@@ -52,8 +51,8 @@ function genAnchorTemplate (children, options = {}) {
 
 function genDemosAnchorTemplate (demoInfos) {
   const links = demoInfos.map(
-    ({ id, title }) => `<n-anchor-link
-    v-if="true"
+    ({ id, title, debug }) => `<n-anchor-link
+    v-if="(displayMode === 'debug') || ${!debug}"
     title="${title}"
     href="#${id}"
   />`
@@ -90,6 +89,7 @@ function genScript (demoInfos, components = [], url, forceShowAnchor) {
 ${importStmts}
 import { computed } from 'vue'
 import { useBreakpoint, useMemo } from 'vooks'
+import { useDisplayMode } from '/demo/store'
 
 export default {
   components: {
@@ -109,6 +109,7 @@ export default {
     })
     return {
       showAnchor: showAnchorRef,
+      displayMode: useDisplayMode(),
       wrapperStyle: computed(() => {
         return !useSmallPaddingRef.value
           ? 'display: flex; flex-wrap: nowrap; padding: 32px 24px 24px 56px;'

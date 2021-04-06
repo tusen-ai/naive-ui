@@ -286,9 +286,7 @@ Debug 用的。
   <n-button text type="warning">Warning</n-button>
   <n-button text type="error" icon-placement="right">
     <template #icon>
-      <n-icon>
-        <n-icon><cash-outline /></n-icon>
-      </n-icon>
+      <n-icon><cash-outline /></n-icon>
     </template>
     Error
   </n-button>
