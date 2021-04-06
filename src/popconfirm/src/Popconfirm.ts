@@ -2,7 +2,7 @@ import { h, ref, defineComponent, provide, PropType, reactive } from 'vue'
 import {
   NPopover,
   popoverProps,
-  PopoverRef,
+  PopoverInst,
   PopoverTrigger
 } from '../../popover'
 import { omit, keep, call } from '../../_utils'
@@ -44,7 +44,7 @@ export default defineComponent({
       popconfirmLight,
       props
     )
-    const popoverInstRef = ref<PopoverRef | null>(null)
+    const popoverInstRef = ref<PopoverInst | null>(null)
     function handlePositiveClick (e: MouseEvent): void {
       const { onPositiveClick, 'onUpdate:show': onUpdateShow } = props
       void Promise.resolve(onPositiveClick ? onPositiveClick(e) : true).then(

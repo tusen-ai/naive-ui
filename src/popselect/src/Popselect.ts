@@ -1,6 +1,6 @@
 import { h, ref, provide, defineComponent, reactive, PropType } from 'vue'
 import { NPopover, popoverProps } from '../../popover'
-import type { PopoverRef, PopoverTrigger } from '../../popover'
+import type { PopoverInst, PopoverTrigger } from '../../popover'
 import NPopselectPanel, { panelPropKeys, panelProps } from './PopselectPanel'
 import { omit, keep } from '../../_utils'
 import { useTheme } from '../../_mixins'
@@ -34,7 +34,7 @@ export default defineComponent({
       popselectLight,
       props
     )
-    const popoverInstRef = ref<PopoverRef | null>(null)
+    const popoverInstRef = ref<PopoverInst | null>(null)
     function syncPosition (): void {
       popoverInstRef.value?.syncPosition()
     }

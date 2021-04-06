@@ -47,3 +47,10 @@ manual-position
 | ------- | ---------- | ----------------------------------------------- |
 | trigger | `()`       | The element or component that triggers popover. |
 | default | `()`       | The content inside popover.                     |
+
+## Methods
+
+| Name         | Parameters        | Description                           |
+| ------------ | ----------------- | ------------------------------------- |
+| setShow      | `(show: boolean)` | Set show status in uncontrolled mode. |
+| syncPosition | `()`              | Sync popover position.                |

@@ -1,6 +1,6 @@
-import { defineComponent, h, Fragment } from 'vue'
+import { defineComponent, h, Fragment, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NPopover } from '../index'
+import { NPopover, PopoverInst } from '../index'
 import { createId } from 'seemly'
 
 async function sleep (ms: number): Promise<void> {
@@ -78,6 +78,21 @@ describe('n-popover', () => {
         expect(
           document.querySelector(`.star-kirby-${classNameHash}-content`)
         ).toEqual(null)
+
+        const inst = wrapper.vm as PopoverInst
+
+        inst.setShow(true)
+        await nextTick()
+        expect(
+          document.querySelector(`.star-kirby-${classNameHash}-content`)
+        ).not.toEqual(null)
+
+        inst.setShow(false)
+        await nextTick()
+        expect(
+          document.querySelector(`.star-kirby-${classNameHash}-content`)
+        ).toEqual(null)
+
         wrapper.unmount()
       })
     })

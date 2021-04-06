@@ -1,6 +1,6 @@
 export type PopoverTrigger = 'click' | 'hover' | 'manual'
 
-export interface PopoverRef {
+export interface PopoverInst {
   syncPosition: () => void
   setShow: (value: boolean) => void
 }

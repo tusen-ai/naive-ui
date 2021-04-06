@@ -8,7 +8,7 @@ import {
   ExtractPropTypes
 } from 'vue'
 import type { PopoverProps } from '../../popover/src/Popover'
-import { TooltipRef } from '../../tooltip/src/Tooltip'
+import { TooltipInst } from '../../tooltip/src/Tooltip'
 import { NTooltip } from '../../tooltip'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -45,7 +45,7 @@ export default defineComponent({
       props
     )
     const triggerRef = ref<HTMLElement | null>(null)
-    const tooltipRef = ref<TooltipRef | null>(null)
+    const tooltipRef = ref<TooltipInst | null>(null)
     const expandedRef = ref(false)
     const ellpisisStyleRef = computed(() => {
       const { lineClamp } = props
