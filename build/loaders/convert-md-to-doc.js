@@ -118,7 +118,7 @@ export default {
       contentStyle: computed(() => {
         return showAnchorRef.value
           ? 'width: calc(100% - 180px); margin-right: 36px;'
-          : 'width: 100%'; 
+          : 'width: 100%; padding-right: 12px;'; 
       }),
       url: ${JSON.stringify(url)}
     }

@@ -1,20 +1,13 @@
 # Global Style
 
-Sometimes you want apply some naive-ui style to document body. For example font family, background color & font...
+For the following reasons, you may need to set some styles on `document.body`
 
-A specific scene is on iOS Safari, if you over-scroll the page in dark mode, the overflowed part will be white. At that time you may want to set body's color.
+1. Naive-ui will mount some global style that is unresponsive (to theme, not media query). For example `font-family`. The style works fine by default, however they won't change when theme is changed.
+2. `n-config-provider` can't sync global style (for example, body's background color) outside it.
 
-If you want work with theme, put it inside `n-config-provider`.
+You can use `n-global-style` to sync common global style to the body element. In the following example, `n-global-style` will sync the theme provided by `n-config-provider` to `document.body`.
 
 ## Usage
-
-```html
-// default theme
-<app>
-  <n-global-style />
-  ...
-</app>
-```
 
 ```html
 // follow config-provider's theme

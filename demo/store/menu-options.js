@@ -83,6 +83,11 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           path: '/jsx'
         },
         {
+          en: 'Customize Theme',
+          zh: '调整主题',
+          path: '/customize-theme'
+        },
+        {
           en: 'Create Themed Component',
           zh: '创建适配主题的组件',
           path: '/theme'

@@ -2,6 +2,8 @@
 
 Config Provider is used to set global theme, set global language and set namespace for components (detached parts).
 
+For more info about theming, see [Customize Theme](../docs/customize-theme).
+
 ## Demos
 
 ```demo
