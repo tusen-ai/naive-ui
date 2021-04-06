@@ -1,16 +1,40 @@
 <!--anchor:on-->
 
+<!--anchor:on-->
+
 # Usage
 
 ## Quick Start
 
-Add the following lines in you entry point js file.
+### Import Directly
+
+Import component and use it.
+
+```html
+<template>
+  <n-button>naive-ui</n-button>
+</template>
+
+<script>
+  import { NButton } from 'naive-ui'
+
+  export default {
+    components: {
+      NButton
+    }
+  }
+</script>
+```
+
+### Install Entire UI Globally (not Recommended)
+
+No tree-shaking. Bundle will have redundant codes.
 
 ```js
 import { createApp } from 'vue'
 import naive from 'naive-ui'
 
-const app = createApp()
+const app = createApp(App)
 app.use(naive)
 ```
 
@@ -34,27 +58,34 @@ app.use(naive)
 
 ## Import on Demand (Tree Shaking)
 
-naive-ui support tree shaking, you can directly import components or install ui globally.
+Naive-ui support tree shaking for components, locales and themes.
 
-### Use Components Directly
+By default the component theme is light, locale is enUS, no extra imports is needed.
+
+For more info about theming, see [Customize Theme](customize-theme).
 
 ```html
-<template>
-  <n-button>naive-ui</n-button>
-</template>
-
 <script>
-  import { NButton } from 'naive-ui'
+  import { NConfigProvider, NButton, NDatePicker } from 'naive-ui'
+  // theme
+  import { createTheme, buttonDark, datePickerDark } from 'naive-ui'
+  // locale & dateLocale
+  import { zhCN, dateZhCN } from 'naive-ui'
 
-  export default {
-    components: {
-      NButton
-    }
-  }
+  ...
 </script>
+
+<template>
+  <n-config-provider :theme="darkTheme" :locale="zhCN" :date-locale="enUS">
+    <n-button>naive-ui</n-button>
+    <n-date-picker />
+  </n-config-provider>
+</template>
 ```
 
-### Install Globally
+### Install Globally (Not Recommended)
+
+It is not friendly with types.
 
 ```js
 import { createApp } from 'vue'
@@ -70,6 +101,5 @@ const naive = create({
 })
 
 const app = createApp()
-
 app.use(naive)
 ```
