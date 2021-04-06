@@ -2,7 +2,6 @@
 
 body {
   overflow: hidden;
-  -webkit-text-size-adjust: 100%;
 }
 
 @media only screen and (max-width: 639px) {
