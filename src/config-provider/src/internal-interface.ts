@@ -25,6 +25,7 @@ import type { ElementTheme } from '../../element/styles'
 import type { EllipsisTheme } from '../../ellipsis/styles'
 import type { EmptyTheme } from '../../empty/styles'
 import type { FormTheme } from '../../form/styles'
+import type { GlobalStyleTheme } from '../../global-style/styles'
 import type { GradientTextTheme } from '../../gradient-text/styles'
 import type { IconTheme } from '../../icon/styles'
 import type { InputTheme } from '../../input/styles'
@@ -105,6 +106,7 @@ export interface GlobalThemeWithoutCommon {
   Ellipsis?: EllipsisTheme
   Empty?: EmptyTheme
   Form?: FormTheme
+  GlobalStyle?: GlobalStyleTheme
   GradientText?: GradientTextTheme
   Icon?: IconTheme
   Input?: InputTheme

@@ -582,6 +582,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           zh: '元素',
           enSuffix: true,
           path: '/n-element'
+        },
+        {
+          en: 'Global Style',
+          zh: '全局样式',
+          enSuffix: true,
+          path: '/n-global-style'
         }
       ]
     }),

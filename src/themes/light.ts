@@ -27,6 +27,7 @@ import { elementLight } from '../element/styles'
 import { ellipsisLight } from '../ellipsis/styles'
 import { emptyLight } from '../empty/styles'
 import { formLight } from '../form/styles'
+import { globalStyleLight } from '../global-style/styles'
 import { gradientTextLight } from '../gradient-text/styles'
 import { iconLight } from '../icon/styles'
 import { inputLight } from '../input/styles'
@@ -40,6 +41,7 @@ import { mentionLight } from '../mention/styles'
 import { messageLight } from '../message/styles'
 import { modalLight } from '../modal/styles'
 import { notificationLight } from '../notification/styles'
+import { pageHeaderLight } from '../page-header/styles'
 import { paginationLight } from '../pagination/styles'
 import { popconfirmLight } from '../popconfirm/styles'
 import { popoverLight } from '../popover/styles'
@@ -68,7 +70,6 @@ import { treeLight } from '../tree/styles'
 import { uploadLight } from '../upload/styles'
 import { selectLight } from '../select/styles'
 import type { BuiltInGlobalTheme } from './interface'
-import { pageHeaderLight } from '../page-header/styles'
 
 export const lightTheme: BuiltInGlobalTheme = {
   common: commonLight,
@@ -98,6 +99,7 @@ export const lightTheme: BuiltInGlobalTheme = {
   Empty: emptyLight,
   Ellipsis: ellipsisLight,
   Form: formLight,
+  GlobalStyle: globalStyleLight,
   GradientText: gradientTextLight,
   Icon: iconLight,
   Input: inputLight,

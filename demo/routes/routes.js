@@ -376,6 +376,11 @@ export const enComponentRoutes = [
     component: () =>
       import('../../src/page-header/demos/enUS/index.demo-entry.md')
   },
+  {
+    path: 'n-global-style',
+    component: () =>
+      import('../../src/global-style/demos/enUS/index.demo-entry.md')
+  },
   // deprecated
   {
     path: 'n-nimbus-service-layout',
@@ -691,6 +696,11 @@ export const zhComponentRoutes = [
     path: 'n-page-header',
     component: () =>
       import('../../src/page-header/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'n-global-style',
+    component: () =>
+      import('../../src/global-style/demos/zhCN/index.demo-entry.md')
   },
   // deprecated
   {

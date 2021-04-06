@@ -33,7 +33,7 @@
       <template #trigger>
         <n-icon size="20" style="margin-left: 12px"><menu-outline /></n-icon>
       </template>
-      <div style="overflow: auto; max-height: 80vh">
+      <div style="overflow: auto; max-height: 79vh">
         <n-menu
           :value="xsMenuValue"
           :options="xsMenuOptions"
@@ -52,7 +52,7 @@
       <template #trigger>
         <n-icon size="20" style="margin-left: 12px"><menu-outline /></n-icon>
       </template>
-      <div style="overflow: auto; max-height: 80vh">
+      <div style="overflow: auto; max-height: 75vh">
         <n-menu
           :value="sMenuValue"
           :options="sMenuOptions"

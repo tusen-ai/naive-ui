@@ -6,11 +6,12 @@ import {
   PropType,
   provide,
   reactive,
-  InjectionKey
+  InjectionKey,
+  renderSlot
 } from 'vue'
 import { useMemo } from 'vooks'
 import { merge } from 'lodash-es'
-import { warn, getSlot } from '../../_utils'
+import { warn } from '../../_utils'
 import type { Hljs } from '../../_mixins'
 import type {
   GlobalTheme,
@@ -210,8 +211,8 @@ export default defineComponent({
         {
           class: ['n-config-provider']
         },
-        getSlot(this)
+        renderSlot(this.$slots, 'default')
       )
-      : getSlot(this)
+      : renderSlot(this.$slots, 'default')
   }
 })

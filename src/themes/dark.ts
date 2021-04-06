@@ -25,6 +25,7 @@ import { elementDark } from '../element/styles'
 import { ellipsisDark } from '../ellipsis/styles'
 import { emptyDark } from '../empty/styles'
 import { formDark } from '../form/styles'
+import { globalStyleDark } from '../global-style/styles'
 import { gradientTextDark } from '../gradient-text/styles'
 import { iconDark } from '../icon/styles'
 import { inputDark } from '../input/styles'
@@ -38,6 +39,7 @@ import { mentionDark } from '../mention/styles'
 import { messageDark } from '../message/styles'
 import { modalDark } from '../modal/styles'
 import { notificationDark } from '../notification/styles'
+import { pageHeaderDark } from '../page-header/styles'
 import { paginationDark } from '../pagination/styles'
 import { popconfirmDark } from '../popconfirm/styles'
 import { popoverDark } from '../popover/styles'
@@ -66,7 +68,6 @@ import { treeDark } from '../tree/styles'
 import { uploadDark } from '../upload/styles'
 import { selectDark } from '../select/styles'
 import type { BuiltInGlobalTheme } from './interface'
-import { pageHeaderDark } from '../page-header/styles'
 
 export const darkTheme: BuiltInGlobalTheme = {
   common: commonDark,
@@ -96,6 +97,7 @@ export const darkTheme: BuiltInGlobalTheme = {
   Empty: emptyDark,
   Ellipsis: ellipsisDark,
   Form: formDark,
+  GlobalStyle: globalStyleDark,
   GradientText: gradientTextDark,
   Icon: iconDark,
   Input: inputDark,

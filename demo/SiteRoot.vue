@@ -19,6 +19,7 @@
           </n-notification-provider>
         </n-message-provider>
       </n-loading-bar-provider>
+      <n-global-style />
     </n-theme-editor>
   </component>
 </template>

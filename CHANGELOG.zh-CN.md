@@ -8,6 +8,8 @@
 
 ### Feats
 
+- 添加 `n-global-style` 组件
+- 添加 `n-theme-editor` 组件
 - 添加 `n-page-header` 组件
 - `n-statistic` 增加 `label` slot
 - `n-breadcrumb-item` 增加 `separator` slot & prop

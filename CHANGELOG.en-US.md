@@ -8,6 +8,8 @@
 
 ### Feats
 
+- Add `n-global-style` component.
+- Add `n-theme-editor` component.
 - Add `n-page-header` component.
 - `n-statistic` add `label` slot.
 - `n-breadcrumb-item` add `separator` slot & prop.
