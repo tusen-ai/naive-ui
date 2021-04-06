@@ -25,6 +25,7 @@
 - 修正 `n-anchor` `ignore-gap` 不生效的问题
 - 修正 `n-collapse` 内容被 `overflow: hidden` 截断
 - 修正 `n-select` tag 文本溢出
+- 修正 `n-popover` 在移动端无法正常关闭的问题
 
 ## 2.3.1
 

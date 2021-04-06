@@ -117,8 +117,8 @@ const derived = {
   errorColorSuppl: base.errorSuppl,
   // text color
   textColorBase: base.neutralTextBase,
-  textColor2: 'rgb(70, 74, 78)',
-  textColor1: 'rgb(44, 47, 50)',
+  textColor1: 'rgb(31, 34, 37)',
+  textColor2: 'rgb(51, 54, 57)',
   textColor3: 'rgb(158, 164, 170)',
   // textColor4: neutral(base.alpha4), // disabled, placeholder, icon
   // textColor5: neutral(base.alpha5),
@@ -157,28 +157,28 @@ const derived = {
   scrollbarColorHover: overlay(base.alphaScrollbarHover),
 
   progressRailColor: neutral(base.alphaProgressRail),
-  railColor: neutral(base.alphaRail),
+  railColor: 'rgb(219, 219, 223)',
 
   popoverColor: base.neutralPopover,
   tableColor: base.neutralCard,
   cardColor: base.neutralCard,
   modalColor: base.neutralModal,
   bodyColor: base.neutralBody,
-  tagColor: neutral(base.alphaTag),
+  tagColor: 'rgb(250, 250, 252)',
   avatarColor: neutral(base.alphaAvatar),
 
   inputColor: neutral(base.alphaInput),
-  codeColor: neutral(base.alphaCode),
-  tabColor: overlay(base.alphaTab),
-  actionColor: neutral(base.alphaAction),
-  tableHeaderColor: overlay(base.alphaAction),
+  codeColor: 'rgb(244, 244, 248)',
+  tabColor: 'rgb(250, 250, 252)',
+  actionColor: 'rgb(250, 250, 252)',
+  tableHeaderColor: 'rgb(250, 250, 252)',
 
-  hoverColor: neutral(base.alphaPending),
+  hoverColor: 'rgb(246, 246, 250)',
   tableColorHover: overlay(base.alphaTablePending),
   activeColor: overlay(base.alphaActive),
 
   opacityDisabled: base.alphaDisabled,
-  inputColorDisabled: neutral(base.alphaDisabledInput),
+  inputColorDisabled: 'rgb(250, 250, 252)',
 
   boxShadow1:
     '0 1px 2px -2px rgba(0, 0, 0, .08), 0 3px 6px 0 rgba(0, 0, 0, .06), 0 5px 12px 4px rgba(0, 0, 0, .04)',
