@@ -1,4 +1,4 @@
-import { inject, computed, getCurrentInstance, Ref } from 'vue'
+import { inject, computed, Ref } from 'vue'
 import { enUS, dateEnUS } from '../locales'
 import { configProviderInjectionKey } from '../config-provider/src/ConfigProvider'
 
@@ -8,21 +8,11 @@ export default function createLocaleMixin<T extends keyof typeof enUS> (
     locale: Ref<typeof enUS[T]>
     dateLocale: Ref<typeof dateEnUS>
   } {
-  const vm = getCurrentInstance()?.proxy
   const NConfigProvider = inject(configProviderInjectionKey, null)
   const localeRef = computed(() => {
     const { mergedLocale } = NConfigProvider || {}
     if (mergedLocale) return mergedLocale[ns]
-    const { mergedLanguage } = NConfigProvider || {}
-    if (mergedLanguage) {
-      // legacy start
-      const {
-        $naive: { locales = [], fallbackLocale }
-      } = vm as any
-      return locales[mergedLanguage ?? fallbackLocale][ns]
-    } else {
-      return enUS[ns]
-    }
+    return enUS[ns]
   })
   const dateLocaleRef = computed(() => {
     const { mergedDateLocale } = NConfigProvider || {}

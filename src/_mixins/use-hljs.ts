@@ -1,4 +1,4 @@
-import { inject, getCurrentInstance, computed, ComputedRef } from 'vue'
+import { inject, computed, ComputedRef } from 'vue'
 import type { highlight, getLanguage } from 'highlight.js'
 import { configProviderInjectionKey } from '../config-provider/src/ConfigProvider'
 import { warn } from '../_utils'
@@ -16,16 +16,10 @@ export default function useHljs (
   props: UseHljsProps
 ): ComputedRef<Hljs | undefined> {
   const NConfigProvider = inject(configProviderInjectionKey, null)
-  const vm = getCurrentInstance()?.proxy as any
-  if (
-    __DEV__ &&
-    !props.hljs &&
-    !NConfigProvider?.mergedHljs &&
-    !vm.$naive.hljs
-  ) {
+  if (__DEV__ && !props.hljs && !NConfigProvider?.mergedHljs) {
     warn('code', 'hljs is not set.')
   }
   return computed(() => {
-    return props.hljs || NConfigProvider?.mergedHljs || vm?.$naive?.hljs
+    return (props.hljs as any) || NConfigProvider?.mergedHljs
   })
 }
