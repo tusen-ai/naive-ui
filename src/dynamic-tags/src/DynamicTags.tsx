@@ -165,6 +165,7 @@ export default defineComponent({
         style={cssVars as CSSProperties}
         theme={mergedTheme.peers.Space}
         themeOverrides={mergedTheme.peerOverrides.Space}
+        itemStyle="display: flex;"
       >
         {{
           default: () => {

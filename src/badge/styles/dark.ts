@@ -9,14 +9,17 @@ const badgeDark: BadgeTheme = {
       errorColorSuppl,
       infoColorSuppl,
       successColorSuppl,
-      warningColorSuppl
+      warningColorSuppl,
+      fontFamily
     } = vars
     return {
       color: errorColorSuppl,
       colorInfo: infoColorSuppl,
       colorSuccess: successColorSuppl,
       colorError: errorColorSuppl,
-      colorWarning: warningColorSuppl
+      colorWarning: warningColorSuppl,
+      fontSize: '12px',
+      fontFamily
     }
   }
 }

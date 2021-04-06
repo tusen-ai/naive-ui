@@ -3,13 +3,15 @@ import type { ThemeCommonVars } from '../../_styles/common'
 import { Theme } from '../../_mixins'
 
 const self = (vars: ThemeCommonVars) => {
-  const { errorColor, infoColor, successColor, warningColor } = vars
+  const { errorColor, infoColor, successColor, warningColor, fontFamily } = vars
   return {
     color: errorColor,
     colorInfo: infoColor,
     colorSuccess: successColor,
     colorError: errorColor,
-    colorWarning: warningColor
+    colorWarning: warningColor,
+    fontSize: '12px',
+    fontFamily
   }
 }
 

@@ -30,7 +30,8 @@ export default defineComponent({
               fontSize,
               fontFamily,
               bodyColor,
-              cubicBezierEaseInOut
+              cubicBezierEaseInOut,
+              lineHeight
             }
           }
         } = themeRef
@@ -41,6 +42,7 @@ export default defineComponent({
           style.color = textColor2
           style.fontSize = fontSize
           style.fontFamily = fontFamily
+          style.lineHeight = lineHeight
           style.transition = `color .3s ${cubicBezierEaseInOut}, background-color .3s ${cubicBezierEaseInOut}`
         } else if (__DEV__) {
           warn(

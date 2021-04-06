@@ -6,6 +6,8 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // --ripple-color
 // --bezier
 // --ripple-bezier
+// --font-size
+// --font-family
 export default c([
   c('@keyframes badge-wave-spread', {
     from: {
@@ -18,12 +20,13 @@ export default c([
       opacity: 0
     }
   }),
-  cB('badge', {
-    display: 'inline-flex',
-    position: 'relative',
-    verticalAlign: 'middle',
-    color: 'var(--color)'
-  }, [
+  cB('badge', `
+    display: inline-flex;
+    position: relative;
+    vertical-align: middle;
+    color: var(--color);
+    font-family: var(--font-family);
+  `, [
     cM('as-is', [
       cB('badge-sup', {
         position: 'static',
@@ -61,7 +64,7 @@ export default c([
       border-radius: 9px;
       padding: 0 6px;
       text-align: center;
-      font-size: 12px;
+      font-size: var(--font-size);
       transform: translateX(-50%);
       left: 100%;
       bottom: calc(100% - 9px);

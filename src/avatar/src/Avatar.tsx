@@ -24,10 +24,7 @@ export default defineComponent({
       >,
       default: 'medium'
     },
-    src: {
-      type: String,
-      default: undefined
-    },
+    src: String,
     circle: {
       type: Boolean,
       default: false
@@ -36,10 +33,7 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    color: {
-      type: String,
-      default: undefined
-    }
+    color: String
   },
   setup (props) {
     let memoedTextHtml: string | null = null
@@ -68,7 +62,6 @@ export default defineComponent({
     // Not Good Impl
     onMounted(() => adjustText())
     onUpdated(() => {
-      console.log('updated')
       adjustText()
     })
     const themeRef = useTheme('Avatar', 'Avatar', style, avatarLight, props)

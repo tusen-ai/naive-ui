@@ -92,9 +92,11 @@ export default defineComponent({
         const { type, color: propColor } = props
         const {
           common: { cubicBezierEaseInOut, cubicBezierEaseOut },
-          self: { [createKey('color', type)]: color }
+          self: { [createKey('color', type)]: color, fontFamily, fontSize }
         } = themeRef.value
         return {
+          '--font-size': fontSize,
+          '--font-family': fontFamily,
           '--color': propColor || color,
           '--ripple-color': propColor || color,
           '--bezier': cubicBezierEaseInOut,
@@ -132,7 +134,6 @@ export default defineComponent({
                       value={this.value}
                     />
                   ) : null}
-
                   {this.processing ? <NBaseWave /> : null}
                 </sup>
               ) : null
