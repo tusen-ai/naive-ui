@@ -1,10 +1,6 @@
 # CHANGELOG
 
-## Pending
-
-### Refactors
-
-- `n-menu` 增加 `options` prop 去替代 `items` prop，`items` prop 被废弃
+## 2.4.0
 
 ### Feats
 
@@ -20,6 +16,7 @@
 ### Refactors
 
 - 重构 `n-statistic` 样式
+- `n-menu` 增加 `options` prop 去替代 `items` prop，`items` prop 被废弃
 
 ### Fixes
 

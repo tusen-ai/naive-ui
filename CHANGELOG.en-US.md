@@ -1,10 +1,6 @@
 # CHANGELOG
 
-## Pending
-
-### Refactors
-
-- `n-menu` add `options` prop to replace `items` prop, `items` prop is deprecated.
+## 2.4.0
 
 ### Feats
 
@@ -20,6 +16,7 @@
 ### Refactors
 
 - Refactor `n-statistic`'s style
+- `n-menu` add `options` prop to replace `items` prop, `items` prop is deprecated.
 
 ### Fixes
 
