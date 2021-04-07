@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修正 `n-select` 单选过滤模式的光标颜色
+- 修正 `n-select` 菜单的 action 部分不能 focus
+
 ## 2.4.0
 
 ### Feats

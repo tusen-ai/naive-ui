@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-select` caret color in single filter mode.
+- Fix `n-select` menu action part can't be focused.
+
 ## 2.4.0
 
 ### Feats

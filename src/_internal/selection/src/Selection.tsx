@@ -9,7 +9,9 @@ import {
   watch,
   toRef,
   nextTick,
-  CSSProperties
+  CSSProperties,
+  watchEffect,
+  onMounted
 } from 'vue'
 import { VOverflow, VOverflowRef } from 'vueuc'
 import { NPopover } from '../../../popover'
@@ -25,8 +27,8 @@ import type { SelectBaseOption } from '../../../select'
 import type { TagRef } from '../../../tag/src/Tag'
 
 export interface InternalSelectionRef {
-  focusPatternInputWrapper: () => void
-  focusPatternInput: () => void
+  focus: () => void
+  focusInput: () => void
   $el: HTMLElement
 }
 
@@ -94,6 +96,7 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
+    forceFocus: Boolean,
     onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
     onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
     onClick: Function as PropType<(e: MouseEvent) => void>,
@@ -108,10 +111,9 @@ export default defineComponent({
   setup (props) {
     const patternInputMirrorRef = ref<HTMLElement | null>(null)
     const patternInputRef = ref<HTMLElement | null>(null)
-    const singleInputRef = ref<HTMLElement | null>(null)
     const selfRef = ref<HTMLElement | null>(null)
-    const focusableEl1Ref = ref<HTMLElement | null>(null)
-    const focusableEl2Ref = ref<HTMLElement | null>(null)
+    const multipleElRef = ref<HTMLElement | null>(null)
+    const singleElRef = ref<HTMLElement | null>(null)
     const patternInputWrapperRef = ref<HTMLElement | null>(null)
     const counterRef = ref<TagRef | null>(null)
     const counterWrapperRef = ref<HTMLElement | null>(null)
@@ -167,13 +169,6 @@ export default defineComponent({
         })
       }
     })
-    watch(toRef(props, 'active'), (active) => {
-      if (active) {
-        void nextTick(() => {
-          singleInputRef.value?.focus()
-        })
-      }
-    })
     function doFocus (e: FocusEvent): void {
       const { onFocus } = props
       if (onFocus) onFocus(e)
@@ -206,21 +201,8 @@ export default defineComponent({
         doFocus(e)
       }
     }
-    function handleBlur (e: FocusEvent): void {
-      // Blur to devtools to may trigger the branch, comment it for now
-      // if (
-      //   !e.relatedTarget &&
-      //   document.activeElement !== document.body
-      // ) {
-      //   console.warn(
-      //     '[naive-ui/base-selection]: blur event has no related target,',
-      //     e.relatedTarget,
-      //     ', this may be a bug of naive-ui.'
-      //   )
-      // }
-      if (e.relatedTarget && selfRef.value?.contains(e.relatedTarget as Node)) {
-        return
-      }
+    function handleFocusout (e: FocusEvent): void {
+      if (selfRef.value?.contains(e.relatedTarget as Node)) return
       doBlur(e)
     }
     function handleClear (e: MouseEvent): void {
@@ -233,20 +215,9 @@ export default defineComponent({
       hoverRef.value = false
     }
     function handleMouseDown (e: MouseEvent): void {
-      if (!props.active) return
-      const filterableElRefs = [
-        focusableEl1Ref,
-        focusableEl2Ref,
-        patternInputWrapperRef,
-        patternInputRef
-      ]
-      for (const filterableElRef of filterableElRefs) {
-        const el = filterableElRef.value
-        if (document.activeElement === el) {
-          e.preventDefault()
-          break
-        }
-      }
+      if (!props.active || !props.filterable) return
+      if (e.target === patternInputRef.value) return
+      e.preventDefault()
     }
     function handleDeleteOption (option: SelectBaseOption): void {
       doDeleteOption(option)
@@ -266,24 +237,29 @@ export default defineComponent({
     }
     function handlePatternInputBlur (e: FocusEvent): void {
       patternInputFocusedRef.value = false
-      handleBlur(e)
     }
-    function focusPatternInputWrapper (): void {
-      patternInputFocusedRef.value = false
-      void nextTick(() => {
+    function focus (): void {
+      if (props.filterable) {
+        patternInputFocusedRef.value = false
         const { value: patternInputWrapperEl } = patternInputWrapperRef
         if (patternInputWrapperEl) patternInputWrapperEl.focus()
-      })
+        console.log(document.activeElement)
+      } else if (props.multiple) {
+        const { value: multipleEl } = multipleElRef
+        multipleEl?.focus()
+      } else {
+        const { value: singleEl } = singleElRef
+        singleEl?.focus()
+      }
     }
-    function focusPatternInput (): void {
-      void nextTick(() => {
-        const { value: patternInputEl } = patternInputRef
-        if (patternInputEl) {
-          patternInputEl.focus()
-        }
-      })
+    function focusInput (): void {
+      const { value: patternInputEl } = patternInputRef
+      console.log('focusInput', patternInputEl)
+      if (patternInputEl) {
+        patternInputEl.focus()
+      }
     }
-    function blurPatternInput (): void {
+    function blurInput (): void {
       const { value: patternInputEl } = patternInputRef
       if (patternInputEl) {
         patternInputEl.blur()
@@ -322,6 +298,14 @@ export default defineComponent({
         showTagsPopoverRef.value = false
       }
     }
+    onMounted(() => {
+      watchEffect(() => {
+        const patternInputWrapperEl = patternInputWrapperRef.value
+        if (!patternInputWrapperEl) return
+        patternInputWrapperEl.tabIndex =
+          props.disabled || patternInputFocusedRef.value ? -1 : 0
+      })
+    })
     return {
       mergedTheme: themeRef,
       mergedClearable: mergedClearableRef,
@@ -335,18 +319,16 @@ export default defineComponent({
       counterWrapperRef,
       patternInputMirrorRef,
       patternInputRef,
-      singleInputRef,
       selfRef,
-      focusableEl1Ref,
-      focusableEl2Ref,
+      multipleElRef,
+      singleElRef,
       patternInputWrapperRef,
       overflowRef,
-      handleBlur,
+      handleMouseDown,
       handleFocusin,
       handleClear,
       handleMouseEnter,
       handleMouseLeave,
-      handleMouseDown,
       handleDeleteOption,
       handlePatternKeyDown,
       handlePatternInputInput,
@@ -354,10 +336,11 @@ export default defineComponent({
       handlePatternInputFocus,
       handleMouseEnterCounter,
       handleMouseLeaveCounter,
+      handleFocusout,
       onPopoverUpdateShow,
-      focusPatternInputWrapper,
-      focusPatternInput,
-      blurPatternInput,
+      focus,
+      focusInput,
+      blurInput,
       updateCounter,
       getCounter,
       getTail,
@@ -498,7 +481,7 @@ export default defineComponent({
         : this.selectedOptions!
       ).map(createTag)
       const input = filterable ? (
-        <div class="n-base-selection-input-tag">
+        <div class="n-base-selection-input-tag" key="__input-tag__">
           <input
             ref="patternInputRef"
             tabindex={-1}
@@ -613,14 +596,13 @@ export default defineComponent({
           themeOverrides: this.mergedTheme.peerOverrides.popover
         } as const)
         : null
+      const placeholder =
+        !this.selected && !this.pattern ? (
+          <div class="n-base-selection-placeholder">{this.placeholder}</div>
+        ) : null
       if (filterable) {
         const popoverTrigger = (
-          <div
-            ref="patternInputWrapperRef"
-            class="n-base-selection-tags"
-            tabindex={disabled || this.patternInputFocused ? undefined : 0}
-            onBlur={this.handleBlur}
-          >
+          <div ref="patternInputWrapperRef" class="n-base-selection-tags">
             {tags}
             {maxTagCountResponsive ? null : input}
             {suffix}
@@ -638,16 +620,15 @@ export default defineComponent({
             ) : (
               popoverTrigger
             )}
-            <div class="n-base-selection-placeholder">{this.placeholder}</div>
+            {placeholder}
           </>
         )
       } else {
         const popoverTrigger = (
           <div
-            ref="focusableEl1Ref"
+            ref="multipleElRef"
             class="n-base-selection-tags"
             tabindex={disabled ? undefined : 0}
-            onBlur={this.handleBlur}
           >
             {tags}
             {suffix}
@@ -665,27 +646,25 @@ export default defineComponent({
             ) : (
               popoverTrigger
             )}
-            <div class="n-base-selection-placeholder">{this.placeholder}</div>
+            {placeholder}
           </>
         )
       }
     } else {
       if (filterable) {
+        const showPlaceholder = !this.pattern && (this.active || !this.selected)
         body = (
           <>
-            <div
-              ref="patternInputWrapperRef"
-              class="n-base-selection-label"
-              tabindex={!disabled && !this.patternInputFocused ? 0 : undefined}
-              onBlur={this.handleBlur}
-            >
+            <div ref="patternInputWrapperRef" class="n-base-selection-label">
               <input
                 ref="patternInputRef"
                 class="n-base-selection-label__input"
                 value={
-                  this.patternInputFocused && this.active
-                    ? this.pattern
-                    : this.label
+                  showPlaceholder
+                    ? ''
+                    : this.patternInputFocused && this.active
+                      ? this.pattern
+                      : this.label
                 }
                 placeholder=""
                 readonly={
@@ -698,7 +677,7 @@ export default defineComponent({
                 onBlur={this.handlePatternInputBlur}
                 onInput={this.handlePatternInputInput as any}
               />
-              {!this.pattern && (this.active || !this.selectedOption) ? (
+              {!this.pattern && (this.active || !this.selected) ? (
                 <div class="n-base-selection-placeholder">
                   {this.filterablePlaceholder}
                 </div>
@@ -711,10 +690,9 @@ export default defineComponent({
         body = (
           <>
             <div
-              ref="focusableEl2Ref"
+              ref="singleElRef"
               class="n-base-selection-label"
               tabindex={this.disabled ? undefined : 0}
-              onBlur={this.handleBlur}
             >
               {this.label?.length ? (
                 <div class="n-base-selection-label__input" key="input">
@@ -742,17 +720,19 @@ export default defineComponent({
               this.selected || (this.active && this.pattern),
             'n-base-selection--disabled': this.disabled,
             'n-base-selection--multiple': this.multiple,
-            'n-base-selection--focus': this.patternInputFocused
+            'n-base-selection--focus':
+              this.patternInputFocused || this.forceFocus
           }
         ]}
         style={this.cssVars as CSSProperties}
         onClick={this.onClick}
         onMouseenter={this.handleMouseEnter}
         onMouseleave={this.handleMouseLeave}
-        onMousedown={this.handleMouseDown}
         onKeyup={this.onKeyup}
         onKeydown={this.onKeydown}
         onFocusin={this.handleFocusin}
+        onFocusout={this.handleFocusout}
+        onMousedown={this.handleMouseDown}
       >
         {body}
         {bordered ? <div class="n-base-selection__border" /> : null}

@@ -9,8 +9,7 @@ import {
   ComputedRef,
   watch,
   Transition,
-  withDirectives,
-  Ref
+  withDirectives
 } from 'vue'
 import { createTreeMate } from 'treemate'
 import { VBinder, VFollower, VTarget, FollowerRef } from 'vueuc'
@@ -190,12 +189,12 @@ export default defineComponent({
   setup (props) {
     const themeRef = useTheme('Select', 'Select', style, selectLight, props)
     const uncontrolledValueRef = ref(props.defaultValue)
-    // Vue bug
-    const controlledValueRef = toRef(props, 'value') as Ref<Value | undefined>
+    const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(
       controlledValueRef,
       uncontrolledValueRef
     )
+    const focusRef = ref(false)
     const patternRef = ref('')
     const treeMateRef = computed(() =>
       createTreeMate<SelectBaseOption, SelectGroupOption, SelectIgnoredOption>(
@@ -362,7 +361,7 @@ export default defineComponent({
         patternRef.value = ''
         uncontrolledShowRef.value = true
         if (props.filterable) {
-          triggerRef.value?.focusPatternInput()
+          focusSelectionInput()
         }
       }
     }
@@ -378,20 +377,42 @@ export default defineComponent({
         openMenu()
       } else {
         if (!props.filterable) {
+          // already focused, don't need to return focus
           closeMenu()
         }
       }
     }
     function handleTriggerBlur (e: FocusEvent): void {
+      if (menuRef.value?.selfRef?.contains(e.relatedTarget as any)) {
+        return
+      }
+      focusRef.value = false
       doBlur(e)
+      // outside select, don't need to return focus
       closeMenu()
     }
     function handleTriggerFocus (e: FocusEvent): void {
       doFocus(e)
+      focusRef.value = true
+    }
+    function handleMenuFocus (e: FocusEvent): void {
+      focusRef.value = true
+    }
+    function handleMenuBlur (e: FocusEvent): void {
+      if (triggerRef.value?.$el.contains(e.relatedTarget as any)) return
+      focusRef.value = false
+      doBlur(e)
+      // outside select, don't need to return focus
+      closeMenu()
+    }
+    function handleMenuTabOut (): void {
+      triggerRef.value?.focus()
+      closeMenu()
     }
     function handleMenuClickOutside (e: MouseEvent): void {
       if (mergedShowRef.value) {
         if (!triggerRef.value?.$el.contains(e.target as Node)) {
+          // outside select, don't need to return focus
           closeMenu()
         }
       }
@@ -447,6 +468,7 @@ export default defineComponent({
           changedValue.push(option.value)
           patternRef.value = ''
         }
+        focusSelectionInput()
         doUpdateValue(changedValue)
       } else {
         if (tag && !remote) {
@@ -459,9 +481,7 @@ export default defineComponent({
             createdOptionsRef.value = []
           }
         }
-        if (props.filterable && !props.multiple) {
-          returnFocusToWrapper()
-        }
+        focusSelection()
         closeMenu()
         doUpdateValue(option.value)
       }
@@ -542,7 +562,7 @@ export default defineComponent({
               handleToggleOption(pendingOptionData)
             } else {
               closeMenu()
-              returnFocusToWrapper()
+              focusSelection()
             }
           } else {
             openMenu()
@@ -563,7 +583,7 @@ export default defineComponent({
           break
         case 'Escape':
           closeMenu()
-          triggerRef.value?.focusPatternInputWrapper()
+          triggerRef.value?.focus()
           break
       }
     }
@@ -580,8 +600,11 @@ export default defineComponent({
           break
       }
     }
-    function returnFocusToWrapper (): void {
-      triggerRef.value?.focusPatternInputWrapper()
+    function focusSelection (): void {
+      triggerRef.value?.focus()
+    }
+    function focusSelectionInput (): void {
+      triggerRef.value?.focusInput()
     }
     function syncPosition (): void {
       followerRef.value?.syncPosition()
@@ -613,6 +636,10 @@ export default defineComponent({
       selectedOption: selectedOptionRef,
       selectedOptions: selectedOptionsRef,
       mergedSize: formItem.mergedSize,
+      focus: focusRef,
+      handleMenuFocus,
+      handleMenuBlur,
+      handleMenuTabOut,
       handleTriggerClick,
       handleDeleteLastOption,
       handleToggleOption,
@@ -626,6 +653,7 @@ export default defineComponent({
       handleMenuLeave,
       handleMenuClickOutside,
       handleMenuScroll,
+      handleMenuKeyup: handleKeyUp,
       mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
@@ -668,6 +696,7 @@ export default defineComponent({
                       }
                       loading={this.loading}
                       autofocus={this.autofocus}
+                      forceFocus={this.focus}
                       onClick={this.handleTriggerClick}
                       onDeleteLastOption={this.handleDeleteLastOption}
                       onDeleteOption={this.handleToggleOption}
@@ -700,27 +729,30 @@ export default defineComponent({
                         default: () =>
                           this.mergedShow &&
                           withDirectives(
-                            h(
-                              NInternalSelectMenu,
-                              {
-                                ref: 'menuRef',
-                                class: 'n-select-menu',
-                                autoPending: true,
-                                theme: this.mergedTheme.peers
-                                  .InternalSelectMenu,
-                                themeOverrides: this.mergedTheme.peerOverrides
-                                  .InternalSelectMenu,
-                                pattern: this.pattern,
-                                treeMate: this.treeMate,
-                                multiple: this.multiple,
-                                size: 'medium',
-                                value: this.mergedValue,
-                                style: this.cssVars,
-                                onMenuToggleOption: this.handleToggleOption,
-                                onScroll: this.handleMenuScroll
-                              },
-                              $slots
-                            ),
+                            <NInternalSelectMenu
+                              ref="menuRef"
+                              class="n-select-menu"
+                              focusable
+                              autoPending={true}
+                              theme={this.mergedTheme.peers.InternalSelectMenu}
+                              themeOverrides={
+                                this.mergedTheme.peerOverrides
+                                  .InternalSelectMenu
+                              }
+                              treeMate={this.treeMate}
+                              multiple={this.multiple}
+                              size="medium"
+                              value={this.mergedValue}
+                              style={this.cssVars}
+                              onMenuToggleOption={this.handleToggleOption}
+                              onScroll={this.handleMenuScroll}
+                              onFocus={this.handleMenuFocus}
+                              onBlur={this.handleMenuBlur}
+                              onKeyup={this.handleMenuKeyup}
+                              onTabOut={this.handleMenuTabOut}
+                            >
+                              {$slots}
+                            </NInternalSelectMenu>,
                             [[clickoutside, this.handleMenuClickOutside]]
                           )
                       }}

@@ -9,7 +9,9 @@ import {
   toRef,
   renderSlot,
   provide,
-  reactive
+  reactive,
+  Ref,
+  UnwrapRef
 } from 'vue'
 import { TreeNode } from 'treemate'
 import { VirtualList, VirtualListRef } from 'vueuc'
@@ -28,6 +30,7 @@ import { createKey } from '../../../_utils/cssr'
 import { useTheme } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
 import NInternalLoading from '../../loading'
+import NFocusDetector from '../../focus-detector'
 import NSelectOption from './SelectOption'
 import NSelectGroupHeader from './SelectGroupHeader'
 import style from './styles/index.cssr'
@@ -46,11 +49,14 @@ export interface InternalSelectMenuInjection {
   value: string | number | Array<string | number> | null
 }
 
-export interface InternalSelectMenuRef {
+interface InternalExposedProps {
+  selfRef: Ref<HTMLElement | null>
   getPendingOption: () => SelectBaseOption | null
   prev: () => void
   next: () => void
 }
+
+export type InternalSelectMenuRef = UnwrapRef<InternalExposedProps>
 
 export default defineComponent({
   name: 'InternalSelectMenu',
@@ -86,7 +92,12 @@ export default defineComponent({
       default: true
     },
     loading: Boolean,
+    focusable: Boolean,
     onScroll: Function as PropType<(e: Event) => void>,
+    onFocus: Function as PropType<(e: FocusEvent) => void>,
+    onBlur: Function as PropType<(e: FocusEvent) => void>,
+    onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
+    onTabOut: Function as PropType<() => void>,
     // deprecated
     onMenuToggleOption: Function as PropType<(value: SelectBaseOption) => void>
   },
@@ -98,6 +109,8 @@ export default defineComponent({
       internalSelectMenuLight,
       props
     )
+    const selfRef = ref<HTMLElement | null>(null)
+    const actionElRef = ref<HTMLElement | null>(null)
     const virtualListRef = ref<VirtualListRef | null>(null)
     const scrollbarRef = ref<ScrollbarRef | null>(null)
     const { treeMate } = props
@@ -183,16 +196,11 @@ export default defineComponent({
     }
     // keyboard related methods
     function handleKeyUp (e: KeyboardEvent): void {
-      switch (e.code) {
-        case 'ArrowUp':
-          prev()
-          break
-        case 'ArrowDown':
-          next()
-          break
-      }
+      if (actionElRef.value?.contains(e.target as Node)) return
+      props.onKeyup?.(e)
     }
     function handleMouseDown (e: MouseEvent): void {
+      if (props.focusable) return
       e.preventDefault()
     }
     function next (): void {
@@ -221,6 +229,16 @@ export default defineComponent({
             elSize: itemSizeRef.value
           })
         }
+      }
+    }
+    function handleFocusin (e: FocusEvent): void {
+      if (selfRef.value?.contains(e.target as any)) {
+        props.onFocus?.(e)
+      }
+    }
+    function handleFocusout (e: FocusEvent): void {
+      if (!selfRef.value?.contains(e.relatedTarget as any)) {
+        props.onBlur?.(e)
       }
     }
     provide<InternalSelectMenuInjection>(
@@ -286,17 +304,22 @@ export default defineComponent({
         '--loading-size': loadingSize
       }
     })
+    const exposedProps: InternalExposedProps = {
+      selfRef,
+      next,
+      prev,
+      getPendingOption
+    }
     return {
       virtualListRef,
       scrollbarRef,
+      actionElRef,
       style: styleRef,
       defaultScrollIndex: pendingNodeRef.value?.fIndex,
       itemSize: itemSizeRef,
       padding: paddingRef,
       flattenedNodes: flattenedNodesRef,
       empty: emptyRef,
-      next,
-      prev,
       virtualListContainer () {
         const { value } = virtualListRef
         return value?.listRef as HTMLElement
@@ -306,17 +329,21 @@ export default defineComponent({
         return value?.itemsRef as HTMLElement
       },
       doScroll,
+      handleFocusin,
+      handleFocusout,
       handleKeyUp,
       handleMouseDown,
       handleVirtualListResize,
       handleVirtualListScroll,
-      getPendingOption
+      ...exposedProps
     }
   },
   render () {
     const { $slots, virtualScroll } = this
     return (
       <div
+        ref="selfRef"
+        tabindex={this.focusable ? 0 : -1}
         class={[
           'n-base-select-menu',
           {
@@ -324,6 +351,8 @@ export default defineComponent({
           }
         ]}
         style={this.style as any}
+        onFocusin={this.handleFocusin}
+        onFocusout={this.handleFocusout}
         onKeyup={this.handleKeyUp}
         onMousedown={this.handleMouseDown}
       >
@@ -418,10 +447,11 @@ export default defineComponent({
           </div>
         )}
         {$slots.action && (
-          <div class="n-base-select-menu__action">
+          <div class="n-base-select-menu__action" ref="actionElRef">
             {renderSlot($slots, 'action')}
           </div>
         )}
+        {$slots.action && <NFocusDetector onFocus={this.onTabOut} />}
       </div>
     )
   }
