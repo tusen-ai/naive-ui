@@ -188,6 +188,10 @@ export interface GlobalIconConfig {
   to?: () => VNodeChild
   trash?: () => VNodeChild
   warning?: () => VNodeChild
+  rotateClockwise?: () => VNodeChild
+  rotateCounterclockwise?: () => VNodeChild
+  zoomIn?: () => VNodeChild
+  zoomOut?: () => VNodeChild
 }
 
 export interface ConfigProviderInjection {

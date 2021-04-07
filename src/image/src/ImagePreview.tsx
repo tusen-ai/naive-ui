@@ -17,17 +17,16 @@ import { useIsMounted } from 'vooks'
 import { LazyTeleport } from 'vueuc'
 import { on, off } from 'evtd'
 import { beforeNextFrameOnce } from 'seemly'
+import {
+  RotateClockwiseIcon,
+  RotateCounterclockwiseIcon,
+  ZoomInIcon,
+  ZoomOutIcon
+} from '../../_internal/icons'
 import { useTheme } from '../../_mixins'
 import { NBaseIcon } from '../../_internal'
 import { imageLight } from '../styles'
-import {
-  zoomInIcon,
-  zoomOutIcon,
-  rotateCounterclockwise,
-  rotateClockwise,
-  prevIcon,
-  nextIcon
-} from './icons'
+import { prevIcon, nextIcon } from './icons'
 import style from './styles/index.cssr'
 
 export interface ImagePreviewInst {
@@ -281,16 +280,20 @@ export default defineComponent({
                                 <NBaseIcon
                                   onClick={this.rotateCounterclockwise}
                                 >
-                                  {{ default: () => rotateCounterclockwise }}
+                                  {{
+                                    default: () => (
+                                      <RotateCounterclockwiseIcon />
+                                    )
+                                  }}
                                 </NBaseIcon>
                                 <NBaseIcon onClick={this.rotateClockwise}>
-                                  {{ default: () => rotateClockwise }}
+                                  {{ default: () => <RotateClockwiseIcon /> }}
                                 </NBaseIcon>
                                 <NBaseIcon onClick={this.zoomOut}>
-                                  {{ default: () => zoomOutIcon }}
+                                  {{ default: () => <ZoomOutIcon /> }}
                                 </NBaseIcon>
                                 <NBaseIcon onClick={this.zoomIn}>
-                                  {{ default: () => zoomInIcon }}
+                                  {{ default: () => <ZoomInIcon /> }}
                                 </NBaseIcon>
                               </div>
                             ) : null
