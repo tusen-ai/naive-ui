@@ -8,6 +8,7 @@
 
 ### Feats
 
+- Add `n-image` comopnent.
 - Add `n-global-style` component.
 - Add `n-theme-editor` component.
 - Add `n-page-header` component.

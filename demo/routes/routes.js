@@ -389,6 +389,10 @@ export const enComponentRoutes = [
     component: () =>
       import('../../src/global-style/demos/enUS/index.demo-entry.md')
   },
+  {
+    path: 'n-image',
+    component: () => import('../../src/image/demos/enUS/index.demo-entry.md')
+  },
   // deprecated
   {
     path: 'n-nimbus-service-layout',
@@ -709,6 +713,10 @@ export const zhComponentRoutes = [
     path: 'n-global-style',
     component: () =>
       import('../../src/global-style/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'n-image',
+    component: () => import('../../src/image/demos/zhCN/index.demo-entry.md')
   },
   // deprecated
   {

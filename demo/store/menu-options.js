@@ -345,6 +345,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           path: '/n-empty'
         },
         {
+          en: 'Image',
+          zh: '图像',
+          enSuffix: true,
+          path: '/n-image'
+        },
+        {
           en: 'List',
           zh: '列表',
           enSuffix: true,

@@ -8,6 +8,7 @@
 
 ### Feats
 
+- 添加 `n-image` 组件
 - 添加 `n-global-style` 组件
 - 添加 `n-theme-editor` 组件
 - 添加 `n-page-header` 组件
