@@ -4,11 +4,13 @@ import {
   CSSProperties,
   inject,
   renderSlot,
-  getCurrentInstance
+  getCurrentInstance,
+  PropType
 } from 'vue'
 import { pxfy } from 'seemly'
 import { gridInjectionKey } from './Grid'
 import type { NGridInjection } from './Grid'
+import { keysOf } from '../../_utils'
 
 export const defaultSpan = 1
 
@@ -19,26 +21,33 @@ interface GridItemVNodeProps {
   privateShow?: boolean
 }
 
+export const gridItemProps = {
+  span: {
+    type: [Number, String] as PropType<string | number>,
+    default: defaultSpan
+  },
+  offset: {
+    type: [Number, String] as PropType<string | number>,
+    default: 0
+  },
+  suffix: Boolean,
+  // private props
+  privateOffset: Number,
+  privateSpan: Number,
+  privateColStart: Number,
+  privateShow: {
+    type: Boolean,
+    default: true
+  }
+} as const
+
+export const gridItemPropKeys = keysOf(gridItemProps)
+
 export default defineComponent({
   __GRID_ITEM__: true,
   name: 'GridItem',
   alias: ['Gi'],
-  props: {
-    span: {
-      type: [Number, String],
-      default: defaultSpan
-    },
-    offset: {
-      type: [Number, String],
-      default: 0
-    },
-    suffix: Boolean,
-    // private props
-    privateOffset: Number,
-    privateSpan: Number,
-    privateColStart: Number,
-    privateShow: Boolean
-  },
+  props: gridItemProps,
   setup (props) {
     const NGrid = inject(gridInjectionKey, null) as NGridInjection
     const self = getCurrentInstance()

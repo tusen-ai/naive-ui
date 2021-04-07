@@ -433,10 +433,10 @@
   - [x] build site
   - [x] table fixed col
   - [ ] prefixCls，暂时不需要
-  - [ ] 更新一波文档 props
-  - [ ] 更新样式的文档
+  - [x] 更新一波文档 props
+  - [x] 更新样式的文档
   - [ ] on update value api
-  - [ ] anchor in modal page, maybe a bug of vue...
+  - [x] anchor in modal page, maybe a bug of vue...
   - [ ] menu + dropdown collapsed 时候 menu item 不更新（selected 从使用 useMemo 切换成 computed（性能下降）, Vue 在这种时候一定存在 bug，但是暂时没空找了...）
   - [ ] select menu multiple, when show=true, checkmark transiton not working（推测是 vue 的 bug）
   - [ ] demo hmr （或许是 vite-plugin-vue 或 vite 的 bug，修改内容不更新）
@@ -455,8 +455,8 @@
   - [x] card 设定高度
   - [x] dropdown 手动定位有 bug，mousemoveoutside
   - [x] select menu loading
-  - [ ] refactor layout to make position work on first shot
-  - [ ] mention mention pending option not correct, sometimes it is not the first option
+  - [x] refactor layout to make position work on first shot
+  - [x] <del>mention mention pending option not correct, sometimes it is not the first option</del> In fact it's caused by mouse hover on item...
   - [x] code Deprecated as of 10.7.0. highlight(lang, code, ...args) has been deprecated.
   - [x] vdirs zindexable https://github.com/vuejs/vue-next/issues/3497
   - [x] collapse-item overflow
@@ -464,9 +464,12 @@
   - [x] popover click 移动端不生效
   - [ ] menu path 对应的问题
   - [x] debug anchor 删除无用 link
-  - [ ] popover inst methods
+  - [x] popover inst methods
   - [x] ios 浏览器 demo code font size 不对
-  - [ ] <del>table overflow bordered</del>
+  - [x] <del>table overflow bordered</del>
+  - [x] table ellipisis vertical align
+  - [x] form item grid item
+  - [ ] select filter composite...
 
 ## Build
 

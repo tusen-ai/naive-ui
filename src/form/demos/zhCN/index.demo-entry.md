@@ -63,13 +63,9 @@ validator-debug
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | validation-status | `'error' \| 'success' \| 'warning'` | `undefined` | 表单的验证状态。不设为 `undefined`时，会覆盖规则验证的结果 |
 
-### FormItemRow Props
+### FormItemGi Props
 
-接受 FormItem & [Row](n-row#Row-Props) 所有的 Props。
-
-### FormItemCol Props
-
-接受 FormItem & [Col](n-row#Col-Props) 所有的 Props。
+接受 FormItem & [GridItem](grid#GridItem-Props) 所有的 Props。
 
 ## Methods
 
@@ -87,7 +83,7 @@ validator-debug
 | validate | `(validateCallback?: (errors?: Array<ValidationError>) => void, shouldRuleBeApplied?: FormItemRule => boolean) => Promise<void>` | 验证表单。Promise rejection 的返回值类型是 `Array<ValidationError>`。 |
 | clearValidationEffect | `() => void` |  |
 
-### FormItem, FormItemRow, FormItemCol Methods
+### FormItem, FormItemGi Methods
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
@@ -98,13 +94,13 @@ validator-debug
 
 ## Slots
 
-### Form, FormItem, FormItemRow, FormItemCol Slots
+### Form, FormItem, FormItemGi Slots
 
 | 名称    | 参数 | 说明 |
 | ------- | ---- | ---- |
 | default | `()` |      |
 
-### FormItem, FormItem Row, FormItemCol Slots
+### FormItem, FormItemGi Slots
 
 | 名称  | 参数 | 说明 |
 | ----- | ---- | ---- |

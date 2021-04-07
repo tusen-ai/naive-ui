@@ -103,7 +103,7 @@
         trigger="click"
       >
         <n-button size="small" class="nav-picker">
-          {{ configProviderLabels[configProviderName] }}
+          {{ cfgProviderLabelMap[configProviderName] }}
         </n-button>
       </n-popselect>
       <n-popselect
@@ -363,8 +363,8 @@ export default {
     // locale
     const localeNameRef = useLocaleName()
     const localeLabelMap = {
-      'zh-CN': '中文',
-      'en-US': 'English'
+      'zh-CN': 'English',
+      'en-US': '中文'
     }
     const localeOptions = [
       {
@@ -396,7 +396,7 @@ export default {
 
     // config provider
     const configProviderNameRef = useConfigProviderName()
-    const configProviderLabelsRef = computed(() => ({
+    const cfgProviderLabelMapRef = computed(() => ({
       tusimple: t('tusimpleTheme'),
       default: t('defaultTheme')
     }))
@@ -476,7 +476,7 @@ export default {
       // configProvider
       configProviderName: configProviderNameRef,
       configProviderOptions: configProviderOptionsRef,
-      configProviderLabels: configProviderLabelsRef,
+      cfgProviderLabelMap: cfgProviderLabelMapRef,
       // search
       searchPattern: searchPatternRef,
       searchOptions: searchOptionsRef,

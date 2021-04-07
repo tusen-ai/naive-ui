@@ -5,20 +5,20 @@ You can controlled whether to collapse the items that overflows. At the same tim
 Collapsing works in responsive layout.
 
 ```html
-<n-row>
-  <n-form-item-col label="Item Count" span="12">
+<n-grid :cols="2">
+  <n-form-item-gi label="Item Count">
     <n-input-number v-model:value="gridItemCount" :min="1" />
-  </n-form-item-col>
-  <n-form-item-col label="Max Rows After Collapsed" span="12">
+  </n-form-item-gi>
+  <n-form-item-gi label="Max Rows After Collapsed">
     <n-input-number v-model:value="gridCollapsedRows" :min="1" />
-  </n-form-item-col>
-  <n-form-item-col label="Show Suffix Node" span="12">
+  </n-form-item-gi>
+  <n-form-item-gi label="Show Suffix Node">
     <n-switch v-model:value="showSuffix" />
-  </n-form-item-col>
-  <n-form-item-col label="Grid Collapsed" span="12">
+  </n-form-item-gi>
+  <n-form-item-gi label="Grid Collapsed">
     <n-switch v-model:value="gridCollapsed" />
-  </n-form-item-col>
-</n-row>
+  </n-form-item-gi>
+</n-grid>
 <n-grid
   :cols="5"
   :collapsed="gridCollapsed"

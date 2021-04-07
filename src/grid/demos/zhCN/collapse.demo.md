@@ -5,20 +5,20 @@
 折叠在响应式布局下依然生效。
 
 ```html
-<n-row>
-  <n-form-item-col label="数量" span="12">
+<n-grid :cols="2">
+  <n-form-item-gi label="数量">
     <n-input-number v-model:value="gridItemCount" :min="1" />
-  </n-form-item-col>
-  <n-form-item-col label="折叠后行数" span="12">
+  </n-form-item-gi>
+  <n-form-item-gi label="折叠后行数">
     <n-input-number v-model:value="gridCollapsedRows" :min="1" />
-  </n-form-item-col>
-  <n-form-item-col label="打开后缀节点" span="12">
+  </n-form-item-gi>
+  <n-form-item-gi label="打开后缀节点">
     <n-switch v-model:value="showSuffix" />
-  </n-form-item-col>
-  <n-form-item-col label="折叠栅格" span="12">
+  </n-form-item-gi>
+  <n-form-item-gi label="折叠栅格">
     <n-switch v-model:value="gridCollapsed" />
-  </n-form-item-col>
-</n-row>
+  </n-form-item-gi>
+</n-grid>
 <n-grid
   :cols="5"
   :collapsed="gridCollapsed"

@@ -2,6 +2,10 @@
 
 ## 2.4.2
 
+### Feats
+
+- 添加 `n-form-item-gi` 组件
+
 ### Fixes
 
 - 修正 `n-ellipsis` & `n-data-table` ellpisis 单元格文本垂直排列错位

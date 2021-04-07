@@ -1,19 +1,21 @@
 # Basic
 
+`n-grid-item` has an alias called `n-gi`.
+
 ```html
 <n-grid x-gap="12" :cols="4">
-  <n-grid-item>
+  <n-gi>
     <div class="light-green"></div>
-  </n-grid-item>
-  <n-grid-item>
+  </n-gi>
+  <n-gi>
     <div class="green"></div>
-  </n-grid-item>
-  <n-grid-item>
+  </n-gi>
+  <n-gi>
     <div class="light-green"></div>
-  </n-grid-item>
-  <n-grid-item>
+  </n-gi>
+  <n-gi>
     <div class="green"></div>
-  </n-grid-item>
+  </n-gi>
 </n-grid>
 ```
 

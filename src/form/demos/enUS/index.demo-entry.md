@@ -62,13 +62,9 @@ async
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | validation-status | `'error' \| 'success' \| 'warning'` | `undefined` | The validation status of the form item. If not set to `undefined`, it will take place of the result of rule-based validation. |
 
-### Form Item Row Props
+### FormItemGi Props
 
-Accept all props from form-item & [Row](n-row#Row-Props)
-
-### Form Item Col Props
-
-Accept all props from form-item & [Col](n-row#Col-Props)
+Accept all props from FormItem & [GridItem](grid#GridItem-Props)
 
 ## Methods
 
@@ -86,7 +82,7 @@ Accept all props from form-item & [Col](n-row#Col-Props)
 | validate | `(validateCallback?: (errors?: Array<ValidationError>) => void, shouldRuleBeApplied?: FormItemRule => boolean) => Promise<void>` | Validate the form. The rejection value type of returned promise is `Array<ValidationError>`. |
 | clearValidationEffect | `() => void` |  |
 
-### Form Item, Form Item Row, Form Item Col Methods
+### FormItem, FormItemGi Methods
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -97,13 +93,13 @@ About AsyncValidatorOptions, see <n-a href="https://github.com/yiminghe/async-va
 
 ## Slots
 
-### Form, Form Item, Form Item Row, Form Item Col Slots
+### Form, FormItem, FormItemGi Slots
 
 | Name    | Parameters | Description |
 | ------- | ---------- | ----------- |
 | default | `()`       |             |
 
-### Form Item, Form Item Row, Form Item Col Slots
+### FormItem, FormItemGi Slots
 
 | Name  | Parameters | Description |
 | ----- | ---------- | ----------- |

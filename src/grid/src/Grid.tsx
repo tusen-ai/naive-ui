@@ -116,6 +116,7 @@ export default defineComponent({
     return {
       style: computed<CSSProperties>(() => {
         return {
+          width: '100%',
           display: 'grid',
           gridTemplateColumns: `repeat(${responsiveColsRef.value}, minmax(0, 1fr))`,
           columnGap: pxfy(responsiveXGapRef.value),

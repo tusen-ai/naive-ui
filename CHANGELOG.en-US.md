@@ -2,6 +2,10 @@
 
 ## 2.4.2
 
+### Feats
+
+- Add `n-form-item-gi` component.
+
 ### Fixes
 
 - Fix `n-ellipsis` & `n-data-table` ellpisis cell mis-vertical-aligned.
