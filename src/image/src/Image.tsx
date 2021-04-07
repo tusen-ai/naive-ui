@@ -8,7 +8,8 @@ export default defineComponent({
   props: {
     width: [String, Number],
     height: [String, Number],
-    src: String
+    src: String,
+    showToolbar: { type: Boolean, default: true }
   },
   setup (props) {
     const imageRef = ref<HTMLImageElement | null>(null)
@@ -46,7 +47,7 @@ export default defineComponent({
         />
       </div>
     ) : (
-      <NImagePreview ref="previewInstRef">
+      <NImagePreview ref="previewInstRef" showToolbar={this.showToolbar}>
         {{
           default: () => {
             return (

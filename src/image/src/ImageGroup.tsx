@@ -17,6 +17,9 @@ ImagePreviewInst & { groupId: string }
 
 export default defineComponent({
   name: 'ImageGroup',
+  props: {
+    showToolbar: { type: Boolean, default: true }
+  },
   setup () {
     let currentSrc: string | undefined
     const groupId = createId()
@@ -59,7 +62,12 @@ export default defineComponent({
   },
   render () {
     return (
-      <NImagePreview ref="previewInstRef" onPrev={this.prev} onNext={this.next}>
+      <NImagePreview
+        ref="previewInstRef"
+        onPrev={this.prev}
+        onNext={this.next}
+        showToolbar={this.showToolbar}
+      >
         {{
           default: () => renderSlot(this.$slots, 'default')
         }}
