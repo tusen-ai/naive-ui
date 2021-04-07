@@ -1,5 +1,4 @@
 import {
-  cRB,
   c,
   cB,
   cE,
@@ -153,6 +152,12 @@ export default c([
       `)
     ]),
     cNotM('disabled', [
+      c('&:hover', [
+        cE('state-border', `
+          box-shadow: var(--box-shadow-hover);
+          border: var(--border-hover);
+        `)
+      ]),
       cM('focus', [
         cE('state-border', `
           box-shadow: var(--box-shadow-focus);
@@ -170,52 +175,6 @@ export default c([
         cB('base-selection-tags', {
           backgroundColor: 'var(--color-active)'
         })
-      ]),
-      cNotM('active', [
-        cRB('base-selection-label', [
-          c('&:hover ~', [
-            cE('state-border', `
-              box-shadow: var(--box-shadow-hover);
-              border: var(--border-hover);
-            `)
-          ]),
-          c('&:focus ~', [
-            cE('state-border', `
-              box-shadow: var(--box-shadow-focus);
-              border: var(--border-focus);
-            `)
-          ]),
-          cM('focus', [
-            c('~', [
-              cE('state-border', `
-                box-shadow: var(--box-shadow-focus);
-                border: var(--border-focus);
-              `)
-            ])
-          ])
-        ]),
-        cRB('base-selection-tags', [
-          c('&:hover ~', [
-            cE('state-border', `
-              box-shadow: var(--box-shadow-hover);
-              border: var(--border-hover);
-            `)
-          ]),
-          c('&:focus ~', [
-            cE('state-border', `
-              box-shadow: var(--box-shadow-focus);
-              border: var(--border-focus);
-            `)
-          ]),
-          cM('focus', [
-            c('~', [
-              cE('state-border', `
-                box-shadow: var(--box-shadow-focus);
-                border: var(--border-focus);
-              `)
-            ])
-          ])
-        ])
       ])
     ]),
     cM('disabled', {
@@ -306,6 +265,12 @@ export default c([
         border: `var(--border-${status})`
       }),
       cNotM('disabled', [
+        c('&:hover', [
+          cE('state-border', `
+            box-shadow: var(--box-shadow-hover-${status});
+            border: var(--border-hover-${status});
+          `)
+        ]),
         cM('active', [
           cE('state-border', `
             box-shadow: var(--box-shadow-active-${status});
@@ -318,51 +283,11 @@ export default c([
             backgroundColor: `var(--box-shadow-active-${status})`
           })
         ]),
-        cNotM('active', [
-          cRB('base-selection-label', [
-            c('&:hover ~', [
-              cE('state-border', `
-                box-shadow: var(--box-shadow-hover-${status});
-                border: var(--border-hover-${status});
-              `)
-            ]),
-            c('&:focus ~', [
-              cE('state-border', `
-                box-shadow: var(--box-shadow-focus-${status});
-                border: var(--border-focus-${status});
-              `)
-            ]),
-            cM('focus', [
-              c('~', [
-                cE('state-border', `
-                  box-shadow: var(--box-shadow-focus);
-                  border: var(--border-focus);
-                `)
-              ])
-            ])
-          ]),
-          cRB('base-selection-tags', [
-            c('&:hover ~', [
-              cE('state-border', `
-                box-shadow: var(--box-shadow-hover-${status});
-                border: var(--border-hover-${status});
-              `)
-            ]),
-            c('&:focus ~', [
-              cE('state-border', `
-                box-shadow: var(--box-shadow-focus-${status});
-                border: var(--border-hover-${status});
-              `)
-            ]),
-            cM('focus', [
-              c('~', [
-                cE('state-border', `
-                  box-shadow: var(--box-shadow-focus);
-                  border: var(--border-focus);
-                `)
-              ])
-            ])
-          ])
+        cM('focus', [
+          cE('state-border', `
+            box-shadow: var(--box-shadow-focus-${status});
+            border: var(--border-focus-${status});
+          `)
         ])
       ])
     ])

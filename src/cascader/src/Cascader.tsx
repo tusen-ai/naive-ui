@@ -162,6 +162,7 @@ export default defineComponent({
     const selectMenuFollowerRef = ref<FollowerRef | null>(null)
     const cascaderMenuFollowerRef = ref<FollowerRef | null>(null)
     const adjustedToRef = useAdjustedTo(props)
+    const focusedRef = ref(false)
     const addLoadingKey = (key: Key): void => {
       loadingKeySetRef.value.add(key)
     }
@@ -375,7 +376,7 @@ export default defineComponent({
         patternRef.value = ''
         uncontrolledShowRef.value = true
         if (props.filterable) {
-          triggerInstRef.value?.focusPatternInput()
+          triggerInstRef.value?.focusInput()
         }
       }
     }
@@ -549,7 +550,7 @@ export default defineComponent({
           break
         case 'Escape':
           closeMenu()
-          triggerInstRef.value?.focusPatternInputWrapper()
+          triggerInstRef.value?.focus()
       }
     }
     // --- search
@@ -559,8 +560,10 @@ export default defineComponent({
     }
     function handleTriggerFocus (e: FocusEvent): void {
       doFocus(e)
+      focusedRef.value = true
     }
     function handleTriggerBlur (e: FocusEvent): void {
+      focusedRef.value = false
       doBlur(e)
       closeMenu()
     }
@@ -680,6 +683,7 @@ export default defineComponent({
         handlePatternInput,
         handleKeyDown,
         handleKeyUp,
+        focused: focusedRef,
         optionHeight: optionHeightRef,
         mergedTheme: themeRef,
         cssVars: computed(() => {
@@ -752,6 +756,7 @@ export default defineComponent({
                       filterable={this.filterable}
                       clearable={this.clearable}
                       disabled={this.disabled}
+                      focused={this.focused}
                       onFocus={this.handleTriggerFocus}
                       onBlur={this.handleTriggerBlur}
                       onClick={this.handleTriggerClick}

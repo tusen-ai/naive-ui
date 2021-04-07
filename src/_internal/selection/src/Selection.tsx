@@ -96,7 +96,7 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
-    forceFocus: Boolean,
+    focused: Boolean,
     onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
     onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
     onClick: Function as PropType<(e: MouseEvent) => void>,
@@ -254,7 +254,6 @@ export default defineComponent({
     }
     function focusInput (): void {
       const { value: patternInputEl } = patternInputRef
-      console.log('focusInput', patternInputEl)
       if (patternInputEl) {
         patternInputEl.focus()
       }
@@ -720,8 +719,10 @@ export default defineComponent({
               this.selected || (this.active && this.pattern),
             'n-base-selection--disabled': this.disabled,
             'n-base-selection--multiple': this.multiple,
-            'n-base-selection--focus':
-              this.patternInputFocused || this.forceFocus
+            // focus is not controlled by selection itself since it always need
+            // to be managed together with menu. provide :focus style will cause
+            // many redundant codes.
+            'n-base-selection--focus': this.focused
           }
         ]}
         style={this.cssVars as CSSProperties}

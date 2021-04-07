@@ -194,7 +194,7 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
-    const focusRef = ref(false)
+    const focusedRef = ref(false)
     const patternRef = ref('')
     const treeMateRef = computed(() =>
       createTreeMate<SelectBaseOption, SelectGroupOption, SelectIgnoredOption>(
@@ -386,21 +386,21 @@ export default defineComponent({
       if (menuRef.value?.selfRef?.contains(e.relatedTarget as any)) {
         return
       }
-      focusRef.value = false
+      focusedRef.value = false
       doBlur(e)
       // outside select, don't need to return focus
       closeMenu()
     }
     function handleTriggerFocus (e: FocusEvent): void {
       doFocus(e)
-      focusRef.value = true
+      focusedRef.value = true
     }
     function handleMenuFocus (e: FocusEvent): void {
-      focusRef.value = true
+      focusedRef.value = true
     }
     function handleMenuBlur (e: FocusEvent): void {
       if (triggerRef.value?.$el.contains(e.relatedTarget as any)) return
-      focusRef.value = false
+      focusedRef.value = false
       doBlur(e)
       // outside select, don't need to return focus
       closeMenu()
@@ -636,7 +636,7 @@ export default defineComponent({
       selectedOption: selectedOptionRef,
       selectedOptions: selectedOptionsRef,
       mergedSize: formItem.mergedSize,
-      focus: focusRef,
+      focused: focusedRef,
       handleMenuFocus,
       handleMenuBlur,
       handleMenuTabOut,
@@ -696,7 +696,7 @@ export default defineComponent({
                       }
                       loading={this.loading}
                       autofocus={this.autofocus}
-                      forceFocus={this.focus}
+                      focused={this.focused}
                       onClick={this.handleTriggerClick}
                       onDeleteLastOption={this.handleDeleteLastOption}
                       onDeleteOption={this.handleToggleOption}
