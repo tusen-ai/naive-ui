@@ -9,6 +9,7 @@
 ### Fixes
 
 - Fix `n-ellipsis` & `n-data-table` ellpisis cell mis-vertical-aligned.
+- Fix `n-select` filterable doesn't work with composite events.
 
 ## 2.4.1
 

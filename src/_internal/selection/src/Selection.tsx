@@ -37,21 +37,15 @@ export default defineComponent({
   props: {
     ...(useTheme.props as ThemeProps<InternalSelectionTheme>),
     bordered: {
-      type: Boolean,
+      type: Boolean as PropType<boolean | undefined>,
       default: undefined
     },
-    active: {
-      type: Boolean,
-      default: false
-    },
+    active: Boolean,
     pattern: {
       type: String,
       default: null
     },
-    placeholder: {
-      type: String,
-      default: undefined
-    },
+    placeholder: String,
     selectedOption: {
       type: Object as PropType<SelectBaseOption | null>,
       default: null
@@ -60,38 +54,17 @@ export default defineComponent({
       type: Array as PropType<SelectBaseOption[] | null>,
       default: null
     },
-    multiple: {
-      type: Boolean,
-      default: false
-    },
-    filterable: {
-      type: Boolean,
-      default: false
-    },
-    remote: {
-      type: Boolean,
-      default: false
-    },
-    clearable: {
-      type: Boolean,
-      default: false
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
+    multiple: Boolean,
+    filterable: Boolean,
+    remote: Boolean,
+    clearable: Boolean,
+    disabled: Boolean,
     size: {
       type: String as PropType<'small' | 'medium' | 'large'>,
       default: 'medium'
     },
-    loading: {
-      type: Boolean,
-      default: false
-    },
-    autofocus: {
-      type: Boolean,
-      default: false
-    },
+    loading: Boolean,
+    autofocus: Boolean,
     showArrow: {
       type: Boolean,
       default: true
@@ -153,20 +126,21 @@ export default defineComponent({
         return props.selectedOption !== null
       }
     })
+    function syncMirrorWidth (): void {
+      const { value: patternInputMirrorEl } = patternInputMirrorRef
+      if (patternInputMirrorEl) {
+        const { value: patternInputEl } = patternInputRef
+        if (patternInputEl) {
+          patternInputEl.style.width = `${patternInputMirrorEl.offsetWidth}px`
+          if (props.maxTagCount !== 'responsive') {
+            overflowRef.value?.sync()
+          }
+        }
+      }
+    }
     watch(toRef(props, 'pattern'), () => {
       if (props.multiple) {
-        void nextTick(() => {
-          const { value: patternInputMirrorEl } = patternInputMirrorRef
-          if (patternInputMirrorEl) {
-            const { value: patternInputEl } = patternInputRef
-            if (patternInputEl) {
-              patternInputEl.style.width = `${patternInputMirrorEl.offsetWidth}px`
-              if (props.maxTagCount !== 'responsive') {
-                overflowRef.value?.sync()
-              }
-            }
-          }
-        })
+        void nextTick(syncMirrorWidth)
       }
     })
     function doFocus (e: FocusEvent): void {
@@ -229,8 +203,25 @@ export default defineComponent({
         }
       }
     }
+    const isCompositingRef = ref(false)
     function handlePatternInputInput (e: InputEvent): void {
-      doPatternInput(e)
+      // we should sync mirror width here
+      const { value: patternInputMirrorEl } = patternInputMirrorRef
+      if (patternInputMirrorEl) {
+        const inputText: string = (e.target as any).value
+        patternInputMirrorEl.textContent = inputText
+        syncMirrorWidth()
+      }
+      if (!isCompositingRef.value) {
+        doPatternInput(e)
+      }
+    }
+    function handleCompositionStart (): void {
+      isCompositingRef.value = true
+    }
+    function handleCompositionEnd (e: CompositionEvent): void {
+      isCompositingRef.value = false
+      doPatternInput(e as InputEvent)
     }
     function handlePatternInputFocus (): void {
       patternInputFocusedRef.value = true
@@ -243,7 +234,6 @@ export default defineComponent({
         patternInputFocusedRef.value = false
         const { value: patternInputWrapperEl } = patternInputWrapperRef
         if (patternInputWrapperEl) patternInputWrapperEl.focus()
-        console.log(document.activeElement)
       } else if (props.multiple) {
         const { value: multipleEl } = multipleElRef
         multipleEl?.focus()
@@ -313,6 +303,7 @@ export default defineComponent({
       label: labelRef,
       selected: selectedRef,
       showTagsPanel: showTagsPopoverRef,
+      isCompositing: isCompositingRef,
       // dom ref
       counterRef,
       counterWrapperRef,
@@ -336,6 +327,8 @@ export default defineComponent({
       handleMouseEnterCounter,
       handleMouseLeaveCounter,
       handleFocusout,
+      handleCompositionEnd,
+      handleCompositionStart,
       onPopoverUpdateShow,
       focus,
       focusInput,
@@ -492,6 +485,8 @@ export default defineComponent({
             onFocus={this.handlePatternInputFocus}
             onKeydown={this.handlePatternKeyDown}
             onInput={this.handlePatternInputInput as any}
+            onCompositionstart={this.handleCompositionStart}
+            onCompositionend={this.handleCompositionEnd}
           />
           <span
             ref="patternInputMirrorRef"
@@ -596,7 +591,7 @@ export default defineComponent({
         } as const)
         : null
       const placeholder =
-        !this.selected && !this.pattern ? (
+        !this.selected && !this.pattern && !this.isCompositing ? (
           <div class="n-base-selection-placeholder">{this.placeholder}</div>
         ) : null
       if (filterable) {
@@ -651,7 +646,10 @@ export default defineComponent({
       }
     } else {
       if (filterable) {
-        const showPlaceholder = !this.pattern && (this.active || !this.selected)
+        const showPlaceholder =
+          !this.pattern &&
+          (this.active || !this.selected) &&
+          !this.isCompositing
         body = (
           <>
             <div ref="patternInputWrapperRef" class="n-base-selection-label">
@@ -675,8 +673,10 @@ export default defineComponent({
                 onFocus={this.handlePatternInputFocus}
                 onBlur={this.handlePatternInputBlur}
                 onInput={this.handlePatternInputInput as any}
+                onCompositionstart={this.handleCompositionStart}
+                onCompositionend={this.handleCompositionEnd}
               />
-              {!this.pattern && (this.active || !this.selected) ? (
+              {showPlaceholder ? (
                 <div class="n-base-selection-placeholder">
                   {this.filterablePlaceholder}
                 </div>
@@ -693,7 +693,7 @@ export default defineComponent({
               class="n-base-selection-label"
               tabindex={this.disabled ? undefined : 0}
             >
-              {this.label?.length ? (
+              {this.label !== undefined ? (
                 <div class="n-base-selection-label__input" key="input">
                   {this.label}
                 </div>

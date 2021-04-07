@@ -9,6 +9,7 @@
 ### Fixes
 
 - 修正 `n-ellipsis` & `n-data-table` ellpisis 单元格文本垂直排列错位
+- 修正 `n-select` 在输入法输入过程中就进行过滤
 
 ## 2.4.1
 

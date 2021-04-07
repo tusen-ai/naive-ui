@@ -204,7 +204,6 @@ export default c([
     cB('base-selection-input-tag', `
       height: calc(var(--height) - 6px);
       line-height: calc(var(--height) - 6px);
-      min-width: 1px;
       outline: none;
       display: inline-block;
       position: relative;
@@ -213,6 +212,7 @@ export default c([
       vertical-align: bottom;
     `, [
       cE('input', `
+        min-width: 1px;
         padding: 0;
         background-color: transparent;
         outline: none;

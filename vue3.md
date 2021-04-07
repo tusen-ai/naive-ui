@@ -469,7 +469,7 @@
   - [x] <del>table overflow bordered</del>
   - [x] table ellipisis vertical align
   - [x] form item grid item
-  - [ ] select filter composite...
+  - [x] select filter composite...
 
 ## Build
 
