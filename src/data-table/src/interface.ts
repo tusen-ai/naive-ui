@@ -1,6 +1,6 @@
 import { TreeNode, TreeMate } from 'treemate'
 import { CSSProperties, VNodeChild } from 'vue'
-import { EllipsisProps } from '../../ellipsis/src'
+import { EllipsisProps } from '../../ellipsis/src/Ellipsis'
 import { NLocale } from '../../locales'
 import { MergedTheme } from '../../_mixins'
 import { DataTableTheme } from '../styles'

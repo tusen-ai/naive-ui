@@ -1,1 +1,1 @@
-export { default as NEllipsis } from './src'
+export { default as NEllipsis } from './src/Ellipsis'

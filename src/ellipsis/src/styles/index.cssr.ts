@@ -6,6 +6,7 @@ export default cB('ellpisis', {
   cNotM('line-clamp', `
     white-space: nowrap;
     display: inline-block;
+    vertical-align: bottom;
     max-width: 100%;
   `),
   cM('line-clamp', `

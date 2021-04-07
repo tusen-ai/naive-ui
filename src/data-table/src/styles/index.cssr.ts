@@ -211,6 +211,7 @@ export default c([
         `),
         cE('ellipsis', `
           display: inline-block;
+          vertical-align: bottom;
           text-overflow: ellipsis;
           overflow: hidden;
           white-space: nowrap;

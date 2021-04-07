@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.4.2
+
+### Fixes
+
+- 修正 `n-ellipsis` & `n-data-table` ellpisis 单元格文本垂直排列错位
+
 ## 2.4.1
 
 ### Fixes
