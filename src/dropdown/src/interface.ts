@@ -3,7 +3,7 @@ import { MenuOption, MenuGroupOption } from '../../menu/src/interface'
 
 export type Key = string | number
 
-// Aligned with MenuItem props, has some redundant fields
+// Aligned with MenuOption props, has some redundant fields
 export type DropdownOption = MenuOption
 export type DropdownGroupOption = MenuGroupOption
 export interface DropdownIgnoredOption {

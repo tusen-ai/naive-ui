@@ -12,6 +12,7 @@ select
 default-expanded-names
 indent
 collapse
+long-label
 ```
 
 ## Props
@@ -29,14 +30,14 @@ collapse
 | expanded-keys | `Array<string>` | `undefined` | The expanded submenu keys. If set, menu will work in controlled manner and `default-expanded-names` won't work. |
 | icon-size | `number` | `20` | The icon size when menu is not collapsed. |
 | indent | `number` | `32` | The indend of menu |
-| options | `Array<MenuItem \| Submenu \| MenuItemGroup>` | `[]` | Items data of menu. |
+| options | `Array<MenuOption \| Submenu \| MenuOptionGroup>` | `[]` | Items data of menu. |
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` |  |
 | root-indent | `number` | `undefined` | The indent of menu's first level children. If not set, menu will use `indent` in place of it. |
 | value | `string \| null` | `undefined` | The selected name of menu. |
 | on-update:expanded-keys | `(keys: string[]) => void` | `undefined` | `keys` is the array of expanded menu options' `key`. |
-| on-update:value | `(key: string, item: MenuItem) => void` | `undefined` | Callback when select a menu item. `key` is the `key` of the selected menu item. `item` is then original data of the menu item. |
+| on-update:value | `(key: string, item: MenuOption) => void` | `undefined` | Callback when select a menu item. `key` is the `key` of the selected menu item. `item` is then original data of the menu item. |
 
-### MenuItem Properties
+### MenuOption Properties
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -50,18 +51,18 @@ collapse
 
 | Name | Type | Description |
 | --- | --- | --- |
-| children | `Array<MenuItem \| Submenu \| MenuItemGroup>` |  |
+| children | `Array<MenuOption \| Submenu \| MenuOptionGroup>` |  |
 | disabled? | `boolean` |  |
 | extra? | `string \| (() => VNodeChild)` |  |
 | icon? | `() => VNodeChild` |  |
 | key | `string` | The indentifier of the submenu. |
 | label | `string \| (() => VNodeChild)` |  |
 
-### MenuItemGroup Properties
+### MenuOptionGroup Properties
 
 | Name | Type | Description |
 | --- | --- | --- |
-| children | `Array<MenuItem \| Submenu \| MenuItemGroup>` | **required** |
+| children | `Array<MenuOption \| Submenu \| MenuOptionGroup>` | **required** |
 | key | `string` | The indentifier of the menu group. |
 | label | `string \| (() => VNodeChild)` |  |
 | type | `'group'` | **required** |

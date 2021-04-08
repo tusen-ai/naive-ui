@@ -28,7 +28,7 @@ export interface SubmenuInjection {
   mergedDisabled: boolean
 }
 
-export interface MenuItemGroupInjection {
+export interface MenuOptionGroupInjection {
   paddingLeft: number | undefined
 }
 
@@ -62,8 +62,8 @@ export interface UseMenuChild {
 function useMenuChild (props: UseMenuChildProps): UseMenuChild {
   const NMenu = inject<MenuInjection>('NMenu') as MenuInjection
   const NSubmenu = inject<SubmenuInjection | null>('NSubmenu', null)
-  const NMenuItemGroup = inject<MenuItemGroupInjection | null>(
-    'NMenuItemGroup',
+  const NMenuOptionGroup = inject<MenuOptionGroupInjection | null>(
+    'NMenuOptionGroup',
     null
   )
   const horizontalRef = computed(() => {
@@ -95,8 +95,8 @@ function useMenuChild (props: UseMenuChildProps): UseMenuChild {
       if (NMenu.collapsed) return collapsedWidth / 2 - maxIconSizeRef.value / 2
       return mergedRootIndent
     }
-    if (NMenuItemGroup) {
-      return indent / 2 + (NMenuItemGroup.paddingLeft as number)
+    if (NMenuOptionGroup) {
+      return indent / 2 + (NMenuOptionGroup.paddingLeft as number)
     }
     if (NSubmenu) {
       return (isGroup ? indent / 2 : indent) + (NSubmenu.paddingLeft as number)

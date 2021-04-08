@@ -1,7 +1,7 @@
 import { h, defineComponent, provide, PropType, reactive, Fragment } from 'vue'
 import { render as Render } from '../../_utils'
 import { useMenuChild } from './use-menu-child'
-import type { MenuItemGroupInjection } from './use-menu-child'
+import type { MenuOptionGroupInjection } from './use-menu-child'
 import { itemRenderer } from './utils'
 import { TmNode } from './interface'
 
@@ -14,13 +14,13 @@ export const menuItemGroupProps = {
 } as const
 
 export default defineComponent({
-  name: 'MenuItemGroup',
+  name: 'MenuOptionGroup',
   props: menuItemGroupProps,
   setup (props) {
     provide('NSubmenu', null)
     const MenuChild = useMenuChild(props)
-    provide<MenuItemGroupInjection>(
-      'NMenuItemGroup',
+    provide<MenuOptionGroupInjection>(
+      'NMenuOptionGroup',
       reactive({ paddingLeft: MenuChild.paddingLeft })
     )
     return function () {

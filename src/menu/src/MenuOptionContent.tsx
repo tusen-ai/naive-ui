@@ -4,7 +4,7 @@ import { render as Render } from '../../_utils'
 import { NBaseIcon } from '../../_internal'
 
 export default defineComponent({
-  name: 'MenuItemContent',
+  name: 'MenuOptionContent',
   props: {
     collapsed: {
       type: Boolean,

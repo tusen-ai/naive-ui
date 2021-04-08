@@ -1,7 +1,7 @@
 import { h, computed, defineComponent, toRef, PropType } from 'vue'
 import { useMemo } from 'vooks'
 import { NTooltip } from '../../tooltip'
-import NMenuItemContent from './MenuItemContent'
+import NMenuOptionContent from './MenuOptionContent'
 import { useMenuChild } from './use-menu-child'
 import { TmNode } from './interface'
 
@@ -20,7 +20,7 @@ export const menuItemProps = {
 } as const
 
 export default defineComponent({
-  name: 'MenuItem',
+  name: 'MenuOption',
   props: menuItemProps,
   setup (props) {
     const MenuChild = useMenuChild(props)
@@ -88,7 +88,7 @@ export default defineComponent({
           {{
             default: () => this.title,
             trigger: () => {
-              return h(NMenuItemContent, {
+              return h(NMenuOptionContent, {
                 paddingLeft: this.paddingLeft,
                 iconMarginRight: this.iconMarginRight,
                 maxIconSize: this.maxIconSize,

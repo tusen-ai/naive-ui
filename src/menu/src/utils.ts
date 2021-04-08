@@ -1,9 +1,9 @@
 import { h, VNode, VNodeChild } from 'vue'
 import type { TreeNode } from 'treemate'
 import { keep, keysOf } from '../../_utils'
-import NMenuItemGroup, { menuItemGroupProps } from './MenuItemGroup'
+import NMenuOptionGroup, { menuItemGroupProps } from './MenuOptionGroup'
 import NSubmenu, { submenuProps } from './Submenu'
-import NMenuItem, { menuItemProps } from './MenuItem'
+import NMenuOption, { menuItemProps } from './MenuOption'
 import { MenuOption, MenuGroupOption } from './interface'
 
 const groupPropKeys = keysOf(menuItemGroupProps)
@@ -31,7 +31,7 @@ export function itemRenderer (
   if (tmNode.children) {
     if (tmNode.isGroup) {
       return h(
-        NMenuItemGroup,
+        NMenuOptionGroup,
         keep(props, groupPropKeys, { tmNodes: tmNode.children, key })
       )
     }
@@ -45,7 +45,7 @@ export function itemRenderer (
     )
   } else {
     return h(
-      NMenuItem,
+      NMenuOption,
       keep(props, itemPropKeys, {
         key,
         tmNode

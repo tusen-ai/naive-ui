@@ -12,7 +12,7 @@ import {
 import { useMemo } from 'vooks'
 import { NFadeInExpandTransition } from '../../_internal'
 import { NDropdown } from '../../dropdown'
-import NMenuItemContent from './MenuItemContent'
+import NMenuOptionContent from './MenuOptionContent'
 import { itemRenderer } from './utils'
 import { useMenuChild } from './use-menu-child'
 import type { SubmenuInjection } from './use-menu-child'
@@ -57,7 +57,7 @@ export default defineComponent({
         mergedDisabled: mergedDisabledRef
       })
     )
-    provide('NMenuItemGroup', null)
+    provide('NMenuOptionGroup', null)
     function doClick (): void {
       const { onClick } = props
       if (onClick) onClick()
@@ -118,7 +118,7 @@ export default defineComponent({
         dropdownShow,
         iconMarginRight
       } = this
-      return h(NMenuItemContent, {
+      return h(NMenuOptionContent, {
         paddingLeft,
         collapsed,
         disabled: mergedDisabled,
