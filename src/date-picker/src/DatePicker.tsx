@@ -18,7 +18,7 @@ import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { format, getTime, isValid } from 'date-fns'
 import { useIsMounted, useMergedState } from 'vooks'
-import { InputRef, NInput } from '../../input'
+import { InputInst, InputProps, NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
 import { useFormItem, useTheme, useConfig, useLocale } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -127,7 +127,7 @@ export default defineComponent({
     const { NConfigProvider } = useConfig(props)
     const panelInstRef = ref<PanelRef | null>(null)
     const triggerElRef = ref<HTMLElement | null>(null)
-    const inputInstRef = ref<InputRef | null>(null)
+    const inputInstRef = ref<InputInst | null>(null)
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = computed(() => props.value)
     const mergedValueRef = useMergedState(
@@ -550,7 +550,7 @@ export default defineComponent({
     }
   },
   render () {
-    const commonInputProps = {
+    const commonInputProps: InputProps = {
       bordered: this.mergedBordered,
       size: this.mergedSize,
       theme: this.mergedTheme.peers.Input,
@@ -558,8 +558,8 @@ export default defineComponent({
       passivelyActivated: true,
       disabled: this.disabled,
       readonly: this.disabled,
-      forceFocus: this.active,
-      deactivateOnEnter: true,
+      internalForceFocus: this.active,
+      internalDeactivateOnEnter: true,
       clearable: this.clearable,
       onClear: this.handleClear,
       onClick: this.handleTriggerClick,

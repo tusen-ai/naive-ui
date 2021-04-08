@@ -12,7 +12,7 @@ import {
 } from 'vue'
 import { useCompitable, useMergedState } from 'vooks'
 import { NSelect } from '../../select'
-import { InputRef, NInput } from '../../input'
+import { InputInst, NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
 import {
   FastForwardIcon,
@@ -120,7 +120,7 @@ export default defineComponent({
     )
     const { locale } = useLocale('Pagination')
     const selfRef = ref<HTMLElement | null>(null)
-    const jumperRef = ref<InputRef | null>(null)
+    const jumperRef = ref<InputInst | null>(null)
     const compitablePageCountRef = useCompitable(props, ['pageCount', 'total'])
     const jumperValueRef = ref('')
     const uncontrolledPageRef = ref(props.defaultPage)

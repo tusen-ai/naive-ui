@@ -19,4 +19,4 @@ export interface InputWrappedRef {
   deactivate: () => void
 }
 
-export type InputRef = UnwrapRef<InputWrappedRef>
+export type InputInst = UnwrapRef<InputWrappedRef>

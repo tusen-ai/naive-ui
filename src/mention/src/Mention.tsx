@@ -15,7 +15,7 @@ import { VBinder, VFollower, VTarget, FollowerRef } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
 import type { Size as InputSize } from '../../input/src/interface'
 import { NInput } from '../../input'
-import type { InputRef } from '../../input'
+import type { InputInst } from '../../input'
 import type {
   SelectBaseOption,
   SelectGroupOption,
@@ -105,7 +105,7 @@ export default defineComponent({
       props
     )
     const formItem = useFormItem(props)
-    const inputInstRef = ref<InputRef | null>(null)
+    const inputInstRef = ref<InputInst | null>(null)
     const cursorRef = ref<HTMLElement | null>(null)
     const followerRef = ref<FollowerRef | null>(null)
     const partialPatternRef = ref<string>('')

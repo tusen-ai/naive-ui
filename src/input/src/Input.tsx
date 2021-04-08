@@ -12,7 +12,8 @@ import {
   CSSProperties,
   watch,
   watchEffect,
-  WatchStopHandle
+  WatchStopHandle,
+  ExtractPropTypes
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { toRgbString, getAlphaString, getPadding } from 'seemly'
@@ -32,122 +33,126 @@ import type {
 } from './interface'
 import style from './styles/input.cssr'
 
+const inputProps = {
+  ...(useTheme.props as ThemeProps<InputTheme>),
+  bordered: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
+  type: {
+    type: String,
+    default: 'text'
+  },
+  placeholder: [Array, String] as PropType<string | [string, string]>,
+  defaultValue: {
+    type: [String, Array] as PropType<null | string | [string, string]>,
+    default: null
+  },
+  value: [String, Array] as PropType<null | string | [string, string]>,
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  size: {
+    type: String as PropType<Size | undefined>,
+    default: undefined
+  },
+  rows: {
+    type: [Number, String] as PropType<number | string>,
+    default: 3
+  },
+  round: {
+    type: Boolean,
+    default: false
+  },
+  minlength: [String, Number] as PropType<number | string>,
+  maxlength: [String, Number] as PropType<number | string>,
+  clearable: {
+    type: Boolean,
+    default: false
+  },
+  autosize: {
+    type: [Boolean, Object] as PropType<
+    boolean | { minRows?: number, maxRows?: number }
+    >,
+    default: false
+  },
+  showWordLimit: {
+    type: Boolean,
+    default: false
+  },
+  pair: {
+    type: Boolean,
+    default: false
+  },
+  separator: String,
+  readonly: {
+    type: [String, Boolean],
+    default: false
+  },
+  passivelyActivated: {
+    type: Boolean,
+    default: false
+  },
+  stateful: {
+    type: Boolean,
+    default: true
+  },
+  autofocus: {
+    type: Boolean,
+    default: false
+  },
+  resizable: {
+    type: Boolean,
+    default: true
+  },
+  onMousedown: Function as PropType<(e: MouseEvent) => void>,
+  onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
+  onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
+  onInput: [Function, Array] as PropType<OnUpdateValue>,
+  onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
+  onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
+  onClick: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
+  onChange: [Function, Array] as PropType<OnUpdateValue>,
+  onClear: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  /** private */
+  textDecoration: [String, Array] as PropType<string | [string, string]>,
+  attrSize: {
+    type: Number,
+    default: 20
+  },
+  onInputBlur: [Function, Array] as PropType<
+  MaybeArray<(e: FocusEvent) => void>
+  >,
+  onInputFocus: [Function, Array] as PropType<
+  MaybeArray<(e: FocusEvent) => void>
+  >,
+  onDeactivate: [Function, Array] as PropType<MaybeArray<() => void>>,
+  onActivate: [Function, Array] as PropType<MaybeArray<() => void>>,
+  onWrapperFocus: [Function, Array] as PropType<
+  MaybeArray<(e: FocusEvent) => void>
+  >,
+  onWrapperBlur: [Function, Array] as PropType<
+  MaybeArray<(e: FocusEvent) => void>
+  >,
+  internalDeactivateOnEnter: {
+    type: Boolean,
+    default: false
+  },
+  internalForceFocus: {
+    type: Boolean,
+    default: false
+  }
+}
+
+export type InputProps = Partial<ExtractPropTypes<typeof inputProps>>
+
 export default defineComponent({
   name: 'Input',
-  props: {
-    ...(useTheme.props as ThemeProps<InputTheme>),
-    bordered: {
-      type: Boolean as PropType<boolean | undefined>,
-      default: undefined
-    },
-    type: {
-      type: String,
-      default: 'text'
-    },
-    placeholder: [Array, String] as PropType<string | [string, string]>,
-    defaultValue: {
-      type: [String, Array] as PropType<null | string | [string, string]>,
-      default: null
-    },
-    value: [String, Array] as PropType<null | string | [string, string]>,
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    size: {
-      type: String as PropType<Size | undefined>,
-      default: undefined
-    },
-    rows: {
-      type: [Number, String] as PropType<number | string>,
-      default: 3
-    },
-    round: {
-      type: Boolean,
-      default: false
-    },
-    minlength: [String, Number] as PropType<number | string>,
-    maxlength: [String, Number] as PropType<number | string>,
-    clearable: {
-      type: Boolean,
-      default: false
-    },
-    autosize: {
-      type: [Boolean, Object] as PropType<
-      boolean | { minRows?: number, maxRows?: number }
-      >,
-      default: false
-    },
-    showWordLimit: {
-      type: Boolean,
-      default: false
-    },
-    pair: {
-      type: Boolean,
-      default: false
-    },
-    separator: String,
-    readonly: {
-      type: [String, Boolean],
-      default: false
-    },
-    passivelyActivated: {
-      type: Boolean,
-      default: false
-    },
-    stateful: {
-      type: Boolean,
-      default: true
-    },
-    autofocus: {
-      type: Boolean,
-      default: false
-    },
-    resizable: {
-      type: Boolean,
-      default: true
-    },
-    onMousedown: Function as PropType<(e: MouseEvent) => void>,
-    onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
-    onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
-    onInput: [Function, Array] as PropType<OnUpdateValue>,
-    onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
-    onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
-    onClick: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
-    onChange: [Function, Array] as PropType<OnUpdateValue>,
-    onClear: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-    onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-    /** private */
-    textDecoration: [String, Array] as PropType<string | [string, string]>,
-    attrSize: {
-      type: Number,
-      default: 20
-    },
-    onInputBlur: [Function, Array] as PropType<
-    MaybeArray<(e: FocusEvent) => void>
-    >,
-    onInputFocus: [Function, Array] as PropType<
-    MaybeArray<(e: FocusEvent) => void>
-    >,
-    onDeactivate: [Function, Array] as PropType<MaybeArray<() => void>>,
-    onActivate: [Function, Array] as PropType<MaybeArray<() => void>>,
-    onWrapperFocus: [Function, Array] as PropType<
-    MaybeArray<(e: FocusEvent) => void>
-    >,
-    onWrapperBlur: [Function, Array] as PropType<
-    MaybeArray<(e: FocusEvent) => void>
-    >,
-    internalDeactivateOnEnter: {
-      type: Boolean,
-      default: false
-    },
-    internalForceFocus: {
-      type: Boolean,
-      default: false
-    }
-  },
+  props: inputProps,
   setup (props) {
     const themeRef = useTheme('Input', 'Input', style, inputLight, props)
     // dom refs

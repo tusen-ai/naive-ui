@@ -6,6 +6,10 @@
 
 - 添加 `n-skeleton` 组件
 
+### Fixes
+
+- 修正 `n-date-picker` 触发器在焦点在面板内的时候没有 focus 样式
+
 ## 2.4.2
 
 ### Feats

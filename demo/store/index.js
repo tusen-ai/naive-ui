@@ -32,7 +32,7 @@ export function initRouter (_router, _route) {
     }
   })
   dateLocaleRef = useMemo(() => {
-    return route.params.lang === 'zh-CN' ? dateZhCN : dateEnUS
+    return route.path.startsWith('/zh-CN') ? dateZhCN : dateEnUS
   })
   themeNameRef = useMemo({
     get () {

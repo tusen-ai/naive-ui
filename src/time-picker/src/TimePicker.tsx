@@ -33,7 +33,7 @@ import {
 } from 'date-fns'
 import { strictParse } from '../../date-picker/src/utils'
 import { TimeIcon } from '../../_internal/icons'
-import { InputRef, NInput } from '../../input'
+import { InputInst, NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
 import { useConfig, useTheme, useLocale, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -136,7 +136,7 @@ export default defineComponent({
 
     const keyboardState = useKeyboard()
 
-    const inputInstRef = ref<InputRef | null>(null)
+    const inputInstRef = ref<InputInst | null>(null)
     const panelInstRef = ref<PanelRef | null>(null)
 
     const uncontrolledValueRef = ref(props.defaultValue)

@@ -6,6 +6,10 @@
 
 - Add `n-skeleton` component.
 
+### Fixes
+
+- Fix `n-date-picker` trigger has no focus style in focus is in panel.
+
 ## 2.4.2
 
 ### Feats

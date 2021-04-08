@@ -12,7 +12,7 @@ import commonProps from '../../tag/src/common-props'
 import { AddIcon } from '../../_internal/icons'
 import { NButton } from '../../button'
 import { NSpace } from '../../space'
-import { InputRef, NInput } from '../../input'
+import { InputInst, NInput } from '../../input'
 import { NTag } from '../../tag'
 import { NBaseIcon } from '../../_internal'
 import { useTheme, useFormItem, useLocale } from '../../_mixins'
@@ -67,7 +67,7 @@ export default defineComponent({
     const inputValueRef = ref('')
     const showInputRef = ref(false)
     const inputForceFocusedRef = ref(true)
-    const inputInstRef = ref<InputRef | null>(null)
+    const inputInstRef = ref<InputInst | null>(null)
     const themeRef = useTheme(
       'DynamicTags',
       'DynamicTags',

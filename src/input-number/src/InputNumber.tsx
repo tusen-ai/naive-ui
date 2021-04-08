@@ -3,7 +3,7 @@ import { rgba } from 'seemly'
 import { useMemo, useMergedState } from 'vooks'
 import { RemoveIcon, AddIcon } from '../../_internal/icons'
 import { NInput } from '../../input'
-import type { InputRef } from '../../input'
+import type { InputInst } from '../../input'
 import { NBaseIcon } from '../../_internal'
 import { NButton } from '../../button'
 import { useTheme, useFormItem, useLocale } from '../../_mixins'
@@ -77,7 +77,7 @@ export default defineComponent({
     const { locale } = useLocale('InputNumber')
     const formItem = useFormItem(props)
     // dom ref
-    const inputInstRef = ref<InputRef | null>(null)
+    const inputInstRef = ref<InputInst | null>(null)
     const minusButtonInstRef = ref<{ $el: HTMLElement } | null>(null)
     const addButtonInstRef = ref<{ $el: HTMLElement } | null>(null)
     // value
