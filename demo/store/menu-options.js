@@ -539,6 +539,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           path: '/n-result'
         },
         {
+          en: 'Skeleton',
+          zh: '骨架屏',
+          enSuffix: true,
+          path: '/n-skeleton'
+        },
+        {
           en: 'Spin',
           zh: '加载',
           enSuffix: true,

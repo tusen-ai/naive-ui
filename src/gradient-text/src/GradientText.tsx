@@ -1,12 +1,10 @@
-import { defineComponent, computed, onBeforeMount, h, PropType } from 'vue'
+import { defineComponent, computed, h, PropType } from 'vue'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createKey, formatLength } from '../../_utils'
+import { createKey, formatLength, useHoudini } from '../../_utils'
 import { gradientTextLight } from '../styles'
 import type { GradientTextTheme } from '../styles'
 import style from './styles/index.cssr'
-
-let houdiniRegistered = false
 
 type Gradient =
   | string
@@ -32,25 +30,7 @@ export default defineComponent({
     gradient: [Object, String] as PropType<Gradient>
   },
   setup (props) {
-    onBeforeMount(() => {
-      if (!houdiniRegistered) {
-        houdiniRegistered = true
-        if ((window?.CSS as any)?.registerProperty) {
-          ;(CSS as any).registerProperty({
-            name: '--color-start',
-            syntax: '<color>',
-            inherits: false,
-            initialValue: 'transparent'
-          })
-          ;(CSS as any).registerProperty({
-            name: '--color-end',
-            syntax: '<color>',
-            inherits: false,
-            initialValue: 'transparent'
-          })
-        }
-      }
-    })
+    useHoudini()
     const compatibleTypeRef = computed<
     'info' | 'success' | 'warning' | 'error' | 'primary'
     >(() => {

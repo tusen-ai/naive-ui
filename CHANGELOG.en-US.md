@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- Add `n-skeleton` component.
+
 ## 2.4.2
 
 ### Feats

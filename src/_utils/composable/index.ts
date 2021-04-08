@@ -138,3 +138,4 @@ export function useDeferredTrue (
 }
 
 export { useAdjustedTo } from './use-adjusted-to'
+export { useHoudini } from './use-houdini'

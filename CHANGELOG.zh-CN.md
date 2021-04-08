@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- 添加 `n-skeleton` 组件
+
 ## 2.4.2
 
 ### Feats

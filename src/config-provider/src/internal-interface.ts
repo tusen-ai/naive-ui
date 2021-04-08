@@ -50,6 +50,7 @@ import type { RateTheme } from '../../rate/styles'
 import type { ResultTheme } from '../../result/styles'
 import type { ScrollbarTheme } from '../../scrollbar/styles'
 import type { SelectTheme } from '../../select/styles'
+import type { SkeletonTheme } from '../../skeleton/styles'
 import type { SliderTheme } from '../../slider/styles'
 import type { SpaceTheme } from '../../space/styles'
 import type { SpinTheme } from '../../spin/styles'
@@ -131,6 +132,7 @@ export interface GlobalThemeWithoutCommon {
   Result?: ResultTheme
   Scrollbar?: ScrollbarTheme
   Select?: SelectTheme
+  Skeleton?: SkeletonTheme
   Slider?: SliderTheme
   Space?: SpaceTheme
   Spin?: SpinTheme

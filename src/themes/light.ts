@@ -51,6 +51,8 @@ import { radioLight } from '../radio/styles'
 import { rateLight } from '../rate/styles'
 import { resultLight } from '../result/styles'
 import { scrollbarLight } from '../scrollbar/styles'
+import { selectLight } from '../select/styles'
+import { skeletonLight } from '../skeleton/styles'
 import { sliderLight } from '../slider/styles'
 import { spaceLight } from '../space/styles'
 import { spinLight } from '../spin/styles'
@@ -68,7 +70,6 @@ import { transferLight } from '../transfer/styles'
 import { typographyLight } from '../typography/styles'
 import { treeLight } from '../tree/styles'
 import { uploadLight } from '../upload/styles'
-import { selectLight } from '../select/styles'
 import type { BuiltInGlobalTheme } from './interface'
 
 export const lightTheme: BuiltInGlobalTheme = {
@@ -123,6 +124,7 @@ export const lightTheme: BuiltInGlobalTheme = {
   Rate: rateLight,
   Result: resultLight,
   Scrollbar: scrollbarLight,
+  Skeleton: skeletonLight,
   Select: selectLight,
   Slider: sliderLight,
   Space: spaceLight,

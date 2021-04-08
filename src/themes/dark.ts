@@ -49,6 +49,8 @@ import { radioDark } from '../radio/styles'
 import { rateDark } from '../rate/styles'
 import { resultDark } from '../result/styles'
 import { scrollbarDark } from '../scrollbar/styles'
+import { selectDark } from '../select/styles'
+import { skeletonDark } from '../skeleton/styles'
 import { sliderDark } from '../slider/styles'
 import { spaceDark } from '../space/styles'
 import { spinDark } from '../spin/styles'
@@ -66,7 +68,6 @@ import { transferDark } from '../transfer/styles'
 import { typographyDark } from '../typography/styles'
 import { treeDark } from '../tree/styles'
 import { uploadDark } from '../upload/styles'
-import { selectDark } from '../select/styles'
 import type { BuiltInGlobalTheme } from './interface'
 
 export const darkTheme: BuiltInGlobalTheme = {
@@ -122,6 +123,7 @@ export const darkTheme: BuiltInGlobalTheme = {
   Result: resultDark,
   Scrollbar: scrollbarDark,
   Select: selectDark,
+  Skeleton: skeletonDark,
   Slider: sliderDark,
   Space: spaceDark,
   Spin: spinDark,
