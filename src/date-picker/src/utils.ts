@@ -98,7 +98,8 @@ function dateItem (
 function dateArray (
   monthTs: number,
   valueTs: number | [number, number] | null,
-  currentTs: number
+  currentTs: number,
+  startDay: 0 | 1 | 2 | 3 | 4 | 5 | 6
 ): DateItem[] {
   const displayMonth = getMonth(monthTs)
   // First day of current month
@@ -107,7 +108,10 @@ function dateArray (
   let lastMonthIterator = getTime(addDays(displayMonthIterator, -1))
   const calendarDays = []
   let protectLastMonthDateIsShownFlag = true
-  while (getDay(lastMonthIterator) !== 6 || protectLastMonthDateIsShownFlag) {
+  while (
+    getDay(lastMonthIterator) !== startDay ||
+    protectLastMonthDateIsShownFlag
+  ) {
     calendarDays.unshift(
       dateItem(lastMonthIterator, monthTs, valueTs, currentTs)
     )

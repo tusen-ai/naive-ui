@@ -65,7 +65,8 @@ function useCalendar (
     return dateArray(
       calendarValueRef.value,
       ensureValidValue(props.value),
-      nowRef.value
+      nowRef.value,
+      NDatePicker.locale.firstDayOfWeek
     )
   })
   const weekdaysRef = computed(() => {

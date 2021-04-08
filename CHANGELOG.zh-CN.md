@@ -5,6 +5,7 @@
 ### Feats
 
 - 添加 `n-skeleton` 组件
+- `n-data-picker` locale 增加 `firstDayOfWeek`
 
 ### Fixes
 

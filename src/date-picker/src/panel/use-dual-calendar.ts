@@ -80,10 +80,20 @@ function useDualCalendar (
     else return 'start'
   })
   const startDateArrayRef = computed(() => {
-    return dateArray(startCalendarDateTimeRef.value, props.value, nowRef.value)
+    return dateArray(
+      startCalendarDateTimeRef.value,
+      props.value,
+      nowRef.value,
+      NDatePicker.locale.firstDayOfWeek
+    )
   })
   const endDateArrayRef = computed(() => {
-    return dateArray(endCalendarDateTimeRef.value, props.value, nowRef.value)
+    return dateArray(
+      endCalendarDateTimeRef.value,
+      props.value,
+      nowRef.value,
+      NDatePicker.locale.firstDayOfWeek
+    )
   })
   const weekdaysRef = computed(() => {
     return startDateArrayRef.value.slice(0, 7).map((dateItem) => {
