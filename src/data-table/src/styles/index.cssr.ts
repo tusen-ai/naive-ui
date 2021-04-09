@@ -38,10 +38,15 @@ const fixedColumnStyle = createFixedColumnStyle()
 // --pagination-margin
 // --empty-padding
 export default c([
-  cB('data-table', {
-    width: '100%',
-    fontSize: 'var(--font-size)'
-  }, [
+  cB('data-table', `
+    width: 100%;
+    font-size: var(--font-size);
+    --merged-th-color: var(--th-color);
+    --merged-td-color: var(--td-color);
+    --merged-border-color: var(--border-color);
+    --merged-th-color-hover: var(--th-color-hover);
+    --merged-td-color-hover: var(--td-color-hover);
+  `, [
     cB('data-table-th', {
       padding: 'var(--th-padding)'
     }),
@@ -80,7 +85,7 @@ export default c([
         cB('data-table-table', [
           cB('data-table-tr', [
             cB('data-table-td', {
-              borderBottom: '0 solid var(--border-color)'
+              borderBottom: '0 solid var(--merged-border-color)'
             }, [
               c('&::after, &::before', {
                 bottom: '0 !important'
@@ -94,17 +99,17 @@ export default c([
       cB('data-table-wrapper', [
         cB('data-table-table', [
           cB('data-table-th', {
-            borderRight: '1px solid var(--border-color)'
+            borderRight: '1px solid var(--merged-border-color)'
           }, [
             cM('last', {
-              borderRight: '0 solid var(--border-color)'
+              borderRight: '0 solid var(--merged-border-color)'
             })
           ]),
           cB('data-table-td', {
-            borderRight: '1px solid var(--border-color)'
+            borderRight: '1px solid var(--merged-border-color)'
           }, [
             cM('last-col', {
-              borderRight: '0 solid var(--border-color)'
+              borderRight: '0 solid var(--merged-border-color)'
             })
           ])
         ])
@@ -113,7 +118,7 @@ export default c([
     cM('bordered', [
       cB('data-table-wrapper', {
         overflow: 'hidden',
-        border: '1px solid var(--border-color)',
+        border: '1px solid var(--merged-border-color)',
         borderBottomLeftRadius: 'var(--border-radius)',
         borderBottomRightRadius: 'var(--border-radius)'
       }, [
@@ -121,7 +126,7 @@ export default c([
           cB('data-table-tr', [
             cB('data-table-td', [
               cM('last-row', {
-                borderBottom: '0 solid var(--border-color)'
+                borderBottom: '0 solid var(--merged-border-color)'
               })
             ])
           ])
@@ -144,7 +149,7 @@ export default c([
         cB('data-table-tr', [
           cB('data-table-td', [
             cM('last-row', {
-              borderBottom: '1px solid var(--border-color)'
+              borderBottom: '1px solid var(--merged-border-color)'
             })
           ])
         ])
@@ -159,11 +164,11 @@ export default c([
       transition: background-color .3s var(--bezier);
       border-collapse: separate;
       border-spacing: 0;
-      background-color: var(--td-color)
+      background-color: var(--merged-td-color)
     `, [
       cB('data-table-thead', {
         transition: 'background-color .3s var(--bezier)',
-        backgroundColor: 'var(--th-color)'
+        backgroundColor: 'var(--merged-th-color)'
       }),
       cB('data-table-tr', {
         boxSizing: 'border-box',
@@ -172,7 +177,7 @@ export default c([
       }, [
         cB('data-table-td', [
           cM('last-row', {
-            borderBottom: '0 solid var(--border-color)'
+            borderBottom: '0 solid var(--merged-border-color)'
           }, [
             // make sure there is no overlap between bottom border and
             // fixed column box shadow
@@ -185,10 +190,10 @@ export default c([
           ])
         ]),
         c('&:hover', {
-          backgroundColor: 'var(--td-color-hover)'
+          backgroundColor: 'var(--merged-td-color-hover)'
         }, [
           cB('data-table-td', {
-            backgroundColor: 'var(--td-color-hover)'
+            backgroundColor: 'var(--merged-td-color-hover)'
           })
         ])
       ]),
@@ -196,9 +201,9 @@ export default c([
         position: relative;
         text-align: start;
         box-sizing: border-box;
-        background-color: var(--th-color);
-        border-color: var(--border-color);
-        border-bottom: 1px solid var(--border-color);
+        background-color: var(--merged-th-color);
+        border-color: var(--merged-border-color);
+        border-bottom: 1px solid var(--merged-border-color);
         color: var(--th-text-color);
         transition:
           border-color .3s var(--bezier),
@@ -229,7 +234,7 @@ export default c([
             maxWidth: 'calc(100% - 18px)'
           }),
           c('&:hover', {
-            backgroundColor: 'var(--th-color-hover)'
+            backgroundColor: 'var(--merged-th-color-hover)'
           })
         ]),
         fixedColumnStyle
@@ -238,9 +243,9 @@ export default c([
         text-align: start;
         box-sizing: border-box;
         border: none;
-        background-color: var(--td-color);
+        background-color: var(--merged-td-color);
         color: var(--td-text-color);
-        border-bottom: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--merged-border-color);
         transition:
           box-shadow .3s var(--bezier),
           background-color .3s var(--bezier),
@@ -361,85 +366,21 @@ export default c([
       margin: '0!important'
     })
   ]),
-  createStyleInside('modal'),
-  createStyleInside('popover')
+  insideModal(cB('data-table', `
+    --merged-th-color: var(--th-color-modal);
+    --merged-td-color: var(--td-color-modal);
+    --merged-border-color: var(--border-color-modal);
+    --merged-th-color-hover: var(--th-color-hover-modal);
+    --merged-td-color-hover: var(--td-color-hover-modal);
+  `)),
+  insidePopover(cB('data-table', `
+    --merged-th-color: var(--th-color-popover);
+    --merged-td-color: var(--td-color-popover);
+    --merged-border-color: var(--border-color-popover);
+    --merged-th-color-hover: var(--th-color-hover-popover);
+    --merged-td-color-hover: var(--td-color-hover-popover);
+  `))
 ])
-
-function createStyleInside (target: 'modal' | 'popover'): CNode {
-  const style = cB('data-table', [
-    cB('data-table-table', {
-      backgroundColor: `var(--td-color-${target})`
-    }, [
-      cB('data-table-thead', {
-        backgroundColor: `var(--th-color-${target})`
-      }),
-      cB('data-table-th', {
-        borderColor: `var(--border-color-${target})`,
-        backgroundColor: `var(--th-color-${target})`
-      }, [
-        cM('sortable', [
-          c('&:hover', {
-            backgroundColor: `var(--th-color-hover-${target})`
-          })
-        ])
-      ]),
-      cB('data-table-tr', [
-        c('&:hover', {
-          backgroundColor: `var(--td-color-hover-${target})`
-        }, [
-          cB('data-table-td', {
-            backgroundColor: `var(--td-color-hover-${target})`
-          })
-        ])
-      ]),
-      cB('data-table-td', {
-        borderColor: `var(--border-color-${target})`,
-        backgroundColor: `var(--td-color-${target})`
-      })
-    ]),
-    cNotM('single-line', [
-      cB('data-table-wrapper', [
-        cB('data-table-table', [
-          cB('data-table-th', {
-            borderRight: `1px solid var(--border-color-${target})`
-          }, [
-            cM('last', {
-              borderRight: `0 solid var(--border-color-${target})`
-            })
-          ]),
-          cB('data-table-td', {
-            borderRight: `1px solid var(--border-color-${target})`
-          }, [
-            cM('last-col', {
-              borderRight: `0 solid var(--border-color-${target})`
-            })
-          ])
-        ])
-      ])
-    ]),
-    cM('bordered', [
-      cB('data-table-wrapper', {
-        border: `1px solid var(--border-color-${target})`
-      }, [
-        cB('data-table-table', [
-          cB('data-table-tr', [
-            cB('data-table-td', [
-              cM('last-row', {
-                borderBottom: `0 solid var(--border-color-${target})`
-              })
-            ])
-          ])
-        ])
-      ])
-    ]),
-    cB('data-table-base-table-header', [
-      cB('data-table-table', {
-        borderBottom: `1px solid var(--border-color-${target})`
-      })
-    ])
-  ])
-  return target === 'modal' ? insideModal(style) : insidePopover(style)
-}
 
 function createFixedColumnStyle (): CNode[] {
   return [
