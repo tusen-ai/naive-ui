@@ -1,3 +1,4 @@
+import { composite } from 'seemly'
 import sizeVariables from './_common'
 import { commonDark } from '../../_styles/common'
 import type { TableTheme } from './light'
@@ -10,6 +11,7 @@ const tableDark: TableTheme = {
       dividerColor,
       cardColor,
       modalColor,
+      popoverColor,
       tableHeaderColor,
       textColor1,
       textColor2,
@@ -27,10 +29,15 @@ const tableDark: TableTheme = {
       fontSizeLarge,
       lineHeight,
       borderRadius,
-      borderColor: dividerColor,
+      borderColor: composite(cardColor, dividerColor),
+      borderColorModal: composite(modalColor, dividerColor),
+      borderColorPopover: composite(popoverColor, dividerColor),
       tdColor: cardColor,
       tdColorModal: modalColor,
-      thColor: tableHeaderColor,
+      tdColorPopover: popoverColor,
+      thColor: composite(cardColor, tableHeaderColor),
+      thColorModal: composite(modalColor, tableHeaderColor),
+      thColorPopover: composite(popoverColor, tableHeaderColor),
       thTextColor: textColor1,
       tdTextColor: textColor2,
       thFontWeight: fontWeightStrong

@@ -1,14 +1,19 @@
-import { c, cB, cE, cM, cNotM, insideModal } from '../../../_utils/cssr'
+import { c, cB, cE, cM, cNotM, insideModal, insidePopover } from '../../../_utils/cssr'
 
 // vars:
 // --bezier
 // --td-color
 // --td-color-modal
+// --td-color-popover
 // --td-text-color
 // --border-color
+// --border-color-modal
+// --border-color-popover
 // --border-radius
 // --font-size
 // --th-color
+// --th-color-modal
+// --th-color-popover
 // --th-font-weight
 // --th-text-color
 // --line-height
@@ -30,9 +35,9 @@ export default c([
       background-color .3s var(--bezier),
       border-color .3s var(--bezier),
       color .3s var(--bezier);
+    --merged-border-color: var(--border-color);
   `, [
     cE('th', `
-      background-clip: padding-box;
       white-space: nowrap;
       transition:
         background-color .3s var(--bezier),
@@ -46,9 +51,9 @@ export default c([
       font-weight: var(--th-font-weight);
       color: var(--th-text-color);
       background-color: var(--th-color);
-      border-color: var(--border-color);
-      border-bottom: 1px solid var(--border-color);
-      border-right: 1px solid var(--border-color);
+      border-color: var(--merged-border-color);
+      border-bottom: 1px solid var(--merged-border-color);
+      border-right: 1px solid var(--merged-border-color);
     `, [
       c('&:last-child', `
         border-right: none;
@@ -62,15 +67,15 @@ export default c([
       padding: var(--td-padding);
       color: var(--td-text-color);
       background-color: var(--td-color);
-      border-right: 1px solid var(--border-color);
-      border-bottom: 1px solid var(--border-color);
+      border-right: 1px solid var(--merged-border-color);
+      border-bottom: 1px solid var(--merged-border-color);
     `, [
       c('&:last-child', `
         border-right: none;
       `)
     ]),
     cM('bordered', `
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--merged-border-color);
       border-radius: var(--border-radius);
     `, [
       cE('tr', [
@@ -111,9 +116,26 @@ export default c([
   insideModal(
     cB('table', `
       background-color: var(--td-color-modal);
+      --merged-border-color: var(--border-color-modal);
     `, [
+      cE('th', `
+        background-color: var(--th-color-modal);
+      `),
       cE('td', `
         background-color: var(--td-color-modal);
+      `)
+    ])
+  ),
+  insidePopover(
+    cB('table', `
+      background-color: var(--td-color-popover);
+      --merged-border-color: var(--border-color-popover);
+    `, [
+      cE('th', `
+        background-color: var(--th-color-popover);
+      `),
+      cE('td', `
+        background-color: var(--td-color-popover);
       `)
     ])
   )
