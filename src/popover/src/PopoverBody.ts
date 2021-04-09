@@ -31,6 +31,7 @@ import { modalBodyInjectionKey } from '../../modal/src/interface'
 
 export const popoverBodyProps = {
   ...(useTheme.props as ThemeProps<PopoverTheme>),
+  to: useAdjustedTo.propTo,
   show: Boolean,
   trigger: String as PropType<PopoverTrigger>,
   showArrow: Boolean,
@@ -247,7 +248,8 @@ export default defineComponent({
         containerClass: this.namespace,
         ref: 'followerRef',
         overlap: this.overlap,
-        width: this.width === 'trigger' ? 'target' : undefined
+        width: this.width === 'trigger' ? 'target' : undefined,
+        teleportDisabled: this.adjustedTo === useAdjustedTo.tdkey
       },
       {
         default: () => {

@@ -38,6 +38,7 @@ export default defineComponent({
   name: 'Mention',
   props: {
     ...(useTheme.props as ThemeProps<MentionTheme>),
+    to: useAdjustedTo.propTo,
     autosize: [Boolean, Object] as PropType<
     boolean | { maxRows?: number, minRows?: number }
     >,
@@ -60,7 +61,6 @@ export default defineComponent({
       },
       default: ' '
     },
-    to: [String, Object] as PropType<string | HTMLElement>,
     bordered: {
       type: Boolean as PropType<boolean | undefined>,
       default: undefined
@@ -400,6 +400,8 @@ export default defineComponent({
                 placement="bottom-start"
                 show={this.showMenu}
                 containerClass={this.namespace}
+                to={this.adjustedTo}
+                teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
               >
                 {{
                   default: () => (

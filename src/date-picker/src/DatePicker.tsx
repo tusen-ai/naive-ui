@@ -57,6 +57,7 @@ const DATE_FORMAT = {
 
 const datePickerProps = {
   ...(useTheme.props as ThemeProps<DatePickerTheme>),
+  to: useAdjustedTo.propTo,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -655,6 +656,7 @@ export default defineComponent({
                 show={this.active}
                 containerClass={this.namespace}
                 to={this.adjustedTo}
+                teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
                 placement="bottom-start"
               >
                 {{

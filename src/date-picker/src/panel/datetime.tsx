@@ -47,7 +47,7 @@ export default defineComponent({
             themeOverrides={
               this.NDatePicker.mergedTheme.peerOverrides.TimePicker
             }
-            teleport-disabled
+            to={false}
             size={this.timePickerSize}
             value={Array.isArray(this.value) ? null : this.value}
             placeholder={this.locale.selectTime}

@@ -31,6 +31,7 @@ export default defineComponent({
   name: 'Slider',
   props: {
     ...(useTheme.props as ThemeProps<SliderTheme>),
+    to: useAdjustedTo.propTo,
     defaultValue: {
       type: [Number, Array] as PropType<number | [number, number]>,
       default: 0
@@ -823,6 +824,7 @@ export default defineComponent({
                 ref="followerRef1"
                 show={this.mergedShowTooltip1}
                 to={this.adjustedTo}
+                teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
                 placement={this.placement}
                 containerClass={this.namespace}
               >
@@ -878,6 +880,7 @@ export default defineComponent({
                   to={this.adjustedTo}
                   placement={this.placement}
                   containerClass={this.namespace}
+                  teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
                 >
                   {{
                     default: () => (

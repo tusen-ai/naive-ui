@@ -42,6 +42,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     ...(useTheme.props as ThemeProps<AutoCompleteTheme>),
+    to: useAdjustedTo.propTo,
     bordered: {
       type: Boolean as PropType<boolean | undefined>,
       default: undefined
@@ -315,6 +316,7 @@ export default defineComponent({
               to={this.adjustedTo}
               containerClass={this.namespace}
               zIndex={this.zIndex}
+              teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
               placement="bottom-start"
               width="target"
             >

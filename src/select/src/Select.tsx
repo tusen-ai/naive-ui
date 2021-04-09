@@ -49,6 +49,7 @@ export default defineComponent({
   name: 'Select',
   props: {
     ...(useTheme.props as ThemeProps<SelectTheme>),
+    to: useAdjustedTo.propTo,
     bordered: {
       type: Boolean as PropType<boolean | undefined>,
       default: undefined
@@ -714,6 +715,7 @@ export default defineComponent({
                 ref="followerRef"
                 show={this.mergedShow}
                 to={this.adjustedTo}
+                teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
                 containerClass={this.namespace}
                 width="target"
                 placement="bottom-start"

@@ -43,7 +43,7 @@ export default defineComponent({
       default: 40
     },
     to: {
-      type: [String, Object],
+      type: [String, Object] as PropType<HTMLElement | string>,
       default: 'body'
     },
     visibilityHeight: {

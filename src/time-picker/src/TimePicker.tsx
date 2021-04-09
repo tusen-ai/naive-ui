@@ -57,6 +57,7 @@ export default defineComponent({
   name: 'TimePicker',
   props: {
     ...(useTheme.props as ThemeProps<TimePickerTheme>),
+    to: useAdjustedTo.propTo,
     bordered: {
       type: Boolean as PropType<boolean | undefined>,
       default: undefined
@@ -98,11 +99,6 @@ export default defineComponent({
       default: true
     },
     disabled: {
-      type: Boolean,
-      default: false
-    },
-    to: [String, Object] as PropType<HTMLElement | string>,
-    teleportDisabled: {
       type: Boolean,
       default: false
     },
@@ -628,7 +624,7 @@ export default defineComponent({
                 }}
               </VTarget>,
               <VFollower
-                teleportDisabled={this.teleportDisabled}
+                teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
                 show={this.active}
                 to={this.adjustedTo}
                 containerClass={this.namespace}

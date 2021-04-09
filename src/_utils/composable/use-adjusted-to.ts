@@ -1,15 +1,17 @@
 import { useMemo } from 'vooks'
-import { ComponentPublicInstance, ComputedRef, inject } from 'vue'
+import { ComponentPublicInstance, ComputedRef, inject, PropType } from 'vue'
 import { modalBodyInjectionKey } from '../../modal/src/interface'
 import { drawerBodyInjectionKey } from '../../drawer/src/interface'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
 
 interface UseAdjustedToProps {
-  to?: string | HTMLElement
+  to?: string | HTMLElement | boolean
   [key: string]: unknown
 }
 
-export function useAdjustedTo (
+const teleportDisabled = '__disabled__'
+
+function useAdjustedTo (
   props: UseAdjustedToProps
 ): ComputedRef<HTMLElement | string> {
   const modal = inject(modalBodyInjectionKey, null)
@@ -17,7 +19,11 @@ export function useAdjustedTo (
   const popover = inject(popoverBodyInjectionKey, null)
   return useMemo(() => {
     const { to } = props
-    if (to !== undefined) return to
+    if (to !== undefined) {
+      if (to === false) return teleportDisabled
+      if (to === true) return 'body'
+      return to
+    }
     if (modal?.value) {
       return (modal.value as ComponentPublicInstance).$el ?? modal.value
     }
@@ -26,3 +32,11 @@ export function useAdjustedTo (
     return to ?? 'body'
   })
 }
+
+// teleport disabled key
+useAdjustedTo.tdkey = teleportDisabled
+useAdjustedTo.propTo = [String, Object, Boolean] as PropType<
+HTMLElement | string | boolean
+>
+
+export { useAdjustedTo }

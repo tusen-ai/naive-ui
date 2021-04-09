@@ -51,6 +51,7 @@ export default defineComponent({
   name: 'Cascader',
   props: {
     ...(useTheme.props as ThemeProps<CascaderTheme>),
+    to: useAdjustedTo.propTo,
     bordered: {
       type: Boolean as PropType<boolean | undefined>,
       default: undefined
@@ -776,6 +777,7 @@ export default defineComponent({
                 show={this.mergedShow && !this.showSelectMenu}
                 containerClass={this.namespace}
                 placement="bottom-start"
+                teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
                 to={this.adjustedTo}
               >
                 {{
@@ -798,6 +800,7 @@ export default defineComponent({
                 width="target"
                 placement="bottom-start"
                 to={this.adjustedTo}
+                teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
               >
                 {{
                   default: () => (
