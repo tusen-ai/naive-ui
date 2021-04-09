@@ -32,7 +32,7 @@ function insideModal (style: CNode): CNode {
 }
 
 function insidePopover (style: CNode): CNode {
-  return c(`${prefix}popover`, [style])
+  return c(`${prefix}popover:not(${prefix}tooltip)`, [style])
 }
 
 function cRB (selector: string, ...rest: any[]): CNode {

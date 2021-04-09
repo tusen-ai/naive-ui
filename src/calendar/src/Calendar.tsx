@@ -19,18 +19,17 @@ import {
   startOfMonth,
   getMonth
 } from 'date-fns'
+import { useMergedState } from 'vooks'
 import { dateArray } from '../../date-picker/src/utils'
+import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
+import { NBaseIcon } from '../../_internal'
+import { call, MaybeArray } from '../../_utils'
 import { NButton, NButtonGroup } from '../../button'
-import style from './styles/index.cssr'
 import { useLocale, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { calendarLight } from '../styles'
 import type { CalendarTheme } from '../styles'
-import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
-import { NBaseIcon } from '../../_internal'
-import { composite } from 'seemly'
-import { call, MaybeArray } from '../../_utils'
-import { useMergedState } from 'vooks'
+import style from './styles/index.cssr'
 
 const calendarProps = {
   ...(useTheme.props as ThemeProps<CalendarTheme>),
@@ -124,6 +123,8 @@ export default defineComponent({
           common: { cubicBezierEaseInOut },
           self: {
             borderColor,
+            borderColorModal,
+            borderColorPopover,
             borderRadius,
             titleFontSize,
             textColor,
@@ -138,14 +139,16 @@ export default defineComponent({
             cellColor,
             cellColorModal,
             barColor,
-            cellColorPopover
+            cellColorPopover,
+            cellColorHoverModal,
+            cellColorHoverPopover
           }
         } = themeRef.value
         return {
           '--bezier': cubicBezierEaseInOut,
-          '--border-color': composite(cellColor, borderColor),
-          '--border-color-modal': composite(cellColorModal, borderColor),
-          '--border-color-popover': composite(cellColorPopover, borderColor),
+          '--border-color': borderColor,
+          '--border-color-modal': borderColorModal,
+          '--border-color-popover': borderColorPopover,
           '--border-radius': borderRadius,
           '--text-color': textColor,
           '--title-font-weight': titleFontWeight,
@@ -157,12 +160,11 @@ export default defineComponent({
           '--date-color-current': dateColorCurrent,
           '--date-text-color-current': dateTextColorCurrent,
           '--cell-color': cellColor,
-          '--cell-color-hover': composite(cellColor, cellColorHover),
-          '--cell-color-hover-modal': composite(cellColorModal, cellColorHover),
-          '--cell-color-hover-popover': composite(
-            cellColorPopover,
-            cellColorHover
-          ),
+          '--cell-color-modal': cellColorModal,
+          '--cell-color-popover': cellColorPopover,
+          '--cell-color-hover': cellColorHover,
+          '--cell-color-hover-modal': cellColorHoverModal,
+          '--cell-color-hover-popover': cellColorHoverPopover,
           '--bar-color': barColor
         }
       })

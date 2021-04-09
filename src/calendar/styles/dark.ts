@@ -1,3 +1,4 @@
+import { composite } from 'seemly'
 import { commonDark } from '../../_styles/common'
 import commonVariables from './_common'
 import type { CalendarTheme } from './light'
@@ -29,7 +30,9 @@ const calendarDark: CalendarTheme = {
     return {
       ...commonVariables,
       borderRadius,
-      borderColor: dividerColor,
+      borderColor: composite(cardColor, dividerColor),
+      borderColorModal: composite(modalColor, dividerColor),
+      borderColorPopover: composite(popoverColor, dividerColor),
       textColor: textColor2,
       titleTextColor: textColor1,
       titleFontWeight: fontWeightStrong,
@@ -38,7 +41,9 @@ const calendarDark: CalendarTheme = {
       lineHeight,
       dateColorCurrent: primaryColor,
       dateTextColorCurrent: baseColor,
-      cellColorHover: hoverColor,
+      cellColorHover: composite(cardColor, hoverColor),
+      cellColorHoverModal: composite(modalColor, hoverColor),
+      cellColorHoverPopover: composite(popoverColor, hoverColor),
       cellColor: cardColor,
       cellColorModal: modalColor,
       cellColorPopover: popoverColor,

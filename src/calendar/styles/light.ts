@@ -1,3 +1,4 @@
+import { composite } from 'seemly'
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import commonVariables from './_common'
@@ -24,7 +25,9 @@ const self = (vars: ThemeCommonVars) => {
   return {
     ...commonVariables,
     borderRadius,
-    borderColor: dividerColor,
+    borderColor: composite(cardColor, dividerColor),
+    borderColorModal: composite(modalColor, dividerColor),
+    borderColorPopover: composite(popoverColor, dividerColor),
     textColor: textColor2,
     titleFontWeight: fontWeightStrong,
     titleTextColor: textColor1,
@@ -33,7 +36,9 @@ const self = (vars: ThemeCommonVars) => {
     lineHeight,
     dateColorCurrent: primaryColor,
     dateTextColorCurrent: baseColor,
-    cellColorHover: hoverColor,
+    cellColorHover: composite(cardColor, hoverColor),
+    cellColorHoverModal: composite(modalColor, hoverColor),
+    cellColorHoverPopover: composite(popoverColor, hoverColor),
     cellColor: cardColor,
     cellColorModal: modalColor,
     cellColorPopover: popoverColor,
