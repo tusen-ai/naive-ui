@@ -24,8 +24,8 @@ export default function ({
       `&.${namespace}-fade-in-width-expand-transition-leave-to, &.${namespace}-fade-in-width-expand-transition-enter-from`,
       `
       opacity: 0!important;
-      marginLeft: 0!important;
-      marginRight: 0!important;
+      margin-left: 0!important;
+      margin-right: 0!important;
     `
     ),
     c(
