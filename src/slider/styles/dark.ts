@@ -27,6 +27,7 @@ const sliderDark: SliderTheme = {
       handleColor: '#FFF',
       dotColor: cardColor,
       dotColorModal: modalColor,
+      dotColorPopover: popoverColor,
       handleBoxShadow: '0px 2px 4px 0 rgba(0, 0, 0, 0.4)',
       handleBoxShadowHover: '0px 2px 4px 0 rgba(0, 0, 0, 0.4)',
       handleBoxShadowActive: '0px 2px 4px 0 rgba(0, 0, 0, 0.4)',
@@ -37,7 +38,7 @@ const sliderDark: SliderTheme = {
       indicatorBorderRadius: borderRadius,
       dotBorder: `2px solid ${railColor}`,
       dotBorderActive: `2px solid ${primaryColorSuppl}`,
-      dotBoxShadow: null
+      dotBoxShadow: ''
     }
   }
 }

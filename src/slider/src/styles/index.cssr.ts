@@ -1,4 +1,4 @@
-import { cB, c, cM, cE, insideModal } from '../../../_utils/cssr'
+import { cB, c, cM, cE, insideModal, insidePopover } from '../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up'
 
 // vars:
@@ -9,6 +9,7 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // --dot-box-shadow
 // --dot-color
 // --dot-color-modal
+// --dot-color-popover
 // --dot-height
 // --dot-width
 // --fill-color
@@ -141,7 +142,6 @@ export default c([
         box-sizing: border-box;
         border: var(--dot-border);
         background-color: var(--dot-color);
-        box-shadow: var(--dot-box-shadow);
       `, [
         cM('active', {
           border: 'var(--dot-border-active)'
@@ -164,6 +164,13 @@ export default c([
     cB('slider', [
       cB('slider-dot', {
         backgroundColor: 'var(--dot-color-modal)'
+      })
+    ])
+  ),
+  insidePopover(
+    cB('slider', [
+      cB('slider-dot', {
+        backgroundColor: 'var(--dot-color-popover)'
       })
     ])
   )

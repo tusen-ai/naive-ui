@@ -11,6 +11,8 @@ const self = (vars: ThemeCommonVars) => {
     primaryColor,
     baseColor,
     cardColor,
+    modalColor,
+    popoverColor,
     borderRadius,
     fontSize
   } = vars
@@ -23,7 +25,8 @@ const self = (vars: ThemeCommonVars) => {
     fillColorHover: primaryColor,
     handleColor: '#FFF',
     dotColor: cardColor,
-    dotColorModal: baseColor,
+    dotColorModal: modalColor,
+    dotColorPopover: popoverColor,
     handleBoxShadow:
       '0 1px 4px 0 rgba(0, 0, 0, 0.3), inset 0 0 1px 0 rgba(0, 0, 0, 0.05)',
     handleBoxShadowHover:
@@ -38,7 +41,7 @@ const self = (vars: ThemeCommonVars) => {
     indicatorBorderRadius: borderRadius,
     dotBorder: `2px solid ${railColor}`,
     dotBorderActive: `2px solid ${primaryColor}`,
-    dotBoxShadow: null
+    dotBoxShadow: ''
   }
 }
 

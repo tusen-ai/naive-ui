@@ -31,6 +31,10 @@ function insideModal (style: CNode): CNode {
   return c(`${prefix}modal, ${prefix}drawer`, [style])
 }
 
+function insidePopover (style: CNode): CNode {
+  return c(`${prefix}popover`, [style])
+}
+
 function cRB (selector: string, ...rest: any[]): CNode {
   return (c as any)(`${prefix}${selector}`, ...rest)
 }
@@ -52,6 +56,7 @@ export {
   cNotM,
   insideFormItem,
   insideModal,
+  insidePopover,
   withPrefix,
   asModal,
   prefix,

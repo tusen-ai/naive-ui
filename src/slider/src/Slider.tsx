@@ -725,7 +725,8 @@ export default defineComponent({
             dotWidth,
             dotBorderRadius,
             fontSize,
-            dotBorderActive
+            dotBorderActive,
+            dotColorPopover
           },
           common: { cubicBezierEaseInOut }
         } = themeRef.value
@@ -737,6 +738,7 @@ export default defineComponent({
           '--dot-box-shadow': dotBoxShadow,
           '--dot-color': dotColor,
           '--dot-color-modal': dotColorModal,
+          '--dot-color-popover': dotColorPopover,
           '--dot-height': dotHeight,
           '--dot-width': dotWidth,
           '--fill-color': fillColor,
