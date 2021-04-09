@@ -89,8 +89,7 @@ naive-ui 通过使用 `n-config-provider` 调整主题。
     <app />
     <n-global-style />
   </n-config-provider>
-  <template></template
-></template>
+</template>
 ```
 
 ## 主题编辑器
