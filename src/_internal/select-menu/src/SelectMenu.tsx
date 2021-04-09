@@ -97,6 +97,7 @@ export default defineComponent({
     onFocus: Function as PropType<(e: FocusEvent) => void>,
     onBlur: Function as PropType<(e: FocusEvent) => void>,
     onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
+    onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
     onTabOut: Function as PropType<() => void>,
     // deprecated
     onMenuToggleOption: Function as PropType<(value: SelectBaseOption) => void>
@@ -198,6 +199,10 @@ export default defineComponent({
     function handleKeyUp (e: KeyboardEvent): void {
       if (actionElRef.value?.contains(e.target as Node)) return
       props.onKeyup?.(e)
+    }
+    function handleKeyDown (e: KeyboardEvent): void {
+      if (actionElRef.value?.contains(e.target as Node)) return
+      props.onKeydown?.(e)
     }
     function handleMouseDown (e: MouseEvent): void {
       if (props.focusable) return
@@ -332,6 +337,7 @@ export default defineComponent({
       handleFocusin,
       handleFocusout,
       handleKeyUp,
+      handleKeyDown,
       handleMouseDown,
       handleVirtualListResize,
       handleVirtualListScroll,
@@ -354,6 +360,7 @@ export default defineComponent({
         onFocusin={this.handleFocusin}
         onFocusout={this.handleFocusout}
         onKeyup={this.handleKeyUp}
+        onKeydown={this.handleKeyDown}
         onMousedown={this.handleMouseDown}
       >
         {this.loading ? (

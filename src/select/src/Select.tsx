@@ -550,6 +550,7 @@ export default defineComponent({
       doScroll(e)
     }
     // keyboard events
+    // also for menu keyup
     function handleKeyUp (e: KeyboardEvent): void {
       switch (e.code) {
         case 'Space':
@@ -588,6 +589,7 @@ export default defineComponent({
           break
       }
     }
+    // also for menu
     function handleKeyDown (e: KeyboardEvent): void {
       switch (e.code) {
         case 'Space':
@@ -655,6 +657,7 @@ export default defineComponent({
       handleMenuClickOutside,
       handleMenuScroll,
       handleMenuKeyup: handleKeyUp,
+      handleMenuKeydown: handleKeyDown,
       mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
@@ -751,6 +754,7 @@ export default defineComponent({
                               onFocus={this.handleMenuFocus}
                               onBlur={this.handleMenuBlur}
                               onKeyup={this.handleMenuKeyup}
+                              onKeydown={this.handleMenuKeydown}
                               onTabOut={this.handleMenuTabOut}
                             >
                               {$slots}

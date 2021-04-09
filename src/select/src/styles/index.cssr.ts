@@ -7,6 +7,7 @@ export default c([
     z-index: auto;
     outline: none;
     width: 100%;
+    position: relative;
   `),
   cB('select-menu', `
     margin: 4px 0;

@@ -18,7 +18,10 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // --panel-color
 // --panel-divider-color
 export default c([
-  cB('time-picker', [
+  cB('time-picker', `
+    z-index: auto;
+    position: relative;
+  `, [
     cB('time-picker-icon', `
       color: var(--icon-color);
       transition: color .3s var(--bezier);

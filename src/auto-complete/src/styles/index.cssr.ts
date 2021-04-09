@@ -6,6 +6,8 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // --menu-box-shadow
 export default c([
   cB('auto-complete', `
+    z-index: auto;
+    position: relative;
     display: inline-flex;
     width: 100%;
   `),

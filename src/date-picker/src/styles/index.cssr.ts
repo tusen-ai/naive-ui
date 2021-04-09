@@ -53,9 +53,10 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // --arrow-size
 // --arrow-color
 export default c([
-  cB('date-picker', {
-    position: 'relative'
-  }, [
+  cB('date-picker', `
+    position: relative;
+    z-index: auto;
+  `, [
     cB('date-picker-icon', `
       color: var(--icon-color);
       transition: color .3s var(--bezier);

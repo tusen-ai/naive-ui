@@ -141,8 +141,9 @@ export default c([
       ])
     ])
   ]),
-  cB('cascader', {
-    zIndex: 'auto',
-    width: '100%'
-  })
+  cB('cascader', `
+    z-index: auto;
+    position: relative;
+    width: 100%;
+  `)
 ])

@@ -42,7 +42,7 @@ export default defineComponent({
           />
           <NTimePicker
             size={this.timePickerSize}
-            teleportDisabled
+            to={false}
             showIcon={false}
             theme={this.NDatePicker.mergedTheme.peers.TimePicker}
             themeOverrides={
@@ -75,7 +75,7 @@ export default defineComponent({
             themeOverrides={
               this.NDatePicker.mergedTheme.peerOverrides.TimePicker
             }
-            teleportDisabled
+            to={false}
             size={this.timePickerSize}
             stateful={false}
             format={this.timeFormat}
