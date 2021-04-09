@@ -97,6 +97,9 @@ export default defineComponent({
   },
   render () {
     const { repeat, style, $attrs } = this
+    // BUG:
+    // Chrome devtools can't read the element
+    // Maybe it's a bug of chrome
     const child = h(
       'div',
       mergeProps(

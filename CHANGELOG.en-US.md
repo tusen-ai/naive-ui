@@ -5,7 +5,8 @@
 ### Feats
 
 - Add `n-skeleton` component.
-- `n-data-picker` locale add `firstDayOfWeek`.
+- Add `n-calendar` comopnent.
+- `n-date-picker` locale add `firstDayOfWeek`.
 
 ### Fixes
 

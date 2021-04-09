@@ -32,7 +32,8 @@ const zhCN: NLocale = {
     startDatetimePlaceholder: '开始日期时间',
     endDatetimePlaceholder: '结束日期时间',
     monthBeforeYear: false,
-    firstDayOfWeek: 0
+    firstDayOfWeek: 0,
+    today: '今天'
   },
   DataTable: {
     confirm: '确认',

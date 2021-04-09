@@ -30,7 +30,8 @@ const enUS = {
     startDatetimePlaceholder: 'Start Date and Time',
     endDatetimePlaceholder: 'End Date and Time',
     monthBeforeYear: true,
-    firstDayOfWeek: 6 as 0 | 1 | 2 | 3 | 4 | 5 | 6
+    firstDayOfWeek: 6 as 0 | 1 | 2 | 3 | 4 | 5 | 6,
+    today: 'Today'
   },
   DataTable: {
     confirm: 'Confirm',

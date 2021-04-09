@@ -1,11 +1,14 @@
 import { commonDark } from '../../_styles/common'
 import commonVariables from './_common'
 import type { CalendarTheme } from './light'
-import { changeColor } from 'seemly'
+import { buttonDark } from '../../button/styles'
 
 const calendarDark: CalendarTheme = {
   name: 'Calendar',
   common: commonDark,
+  peers: {
+    Button: buttonDark
+  },
   self (vars) {
     const {
       borderRadius,
@@ -18,7 +21,9 @@ const calendarDark: CalendarTheme = {
       fontWeightStrong,
       primaryColor,
       baseColor,
-      hoverColor
+      hoverColor,
+      cardColor,
+      modalColor
     } = vars
     return {
       ...commonVariables,
@@ -33,7 +38,9 @@ const calendarDark: CalendarTheme = {
       dateColorCurrent: primaryColor,
       dateTextColorCurrent: baseColor,
       cellColorHover: hoverColor,
-      cellColorActive: changeColor(primaryColor, { alpha: 0.12 })
+      cellColor: cardColor,
+      cellColorModal: modalColor,
+      barColor: primaryColor
     }
   }
 }

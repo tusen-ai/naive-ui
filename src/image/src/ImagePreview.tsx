@@ -304,6 +304,9 @@ export default defineComponent({
                       name="n-fade-in-scale-up-transition"
                       onAfterLeave={this.handleAfterLeave}
                       appear={this.appear}
+                      // BUG:
+                      // onEnter will be called twice, I don't know why
+                      // Maybe it is a bug of vue
                       onEnter={this.syncTransformOrigin}
                       onBeforeLeave={this.syncTransformOrigin}
                     >

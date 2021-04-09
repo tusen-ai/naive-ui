@@ -1,8 +1,8 @@
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import commonVariables from './_common'
-import { Theme } from '../../_mixins'
-import { changeColor } from 'seemly'
+import { createTheme } from '../../_mixins'
+import { buttonLight } from '../../button/styles'
 
 const self = (vars: ThemeCommonVars) => {
   const {
@@ -16,7 +16,9 @@ const self = (vars: ThemeCommonVars) => {
     fontWeightStrong,
     primaryColor,
     baseColor,
-    hoverColor
+    hoverColor,
+    cardColor,
+    modalColor
   } = vars
   return {
     ...commonVariables,
@@ -31,17 +33,22 @@ const self = (vars: ThemeCommonVars) => {
     dateColorCurrent: primaryColor,
     dateTextColorCurrent: baseColor,
     cellColorHover: hoverColor,
-    cellColorActive: changeColor(primaryColor, { alpha: 0.12 })
+    cellColor: cardColor,
+    cellColorModal: modalColor,
+    barColor: primaryColor
   }
 }
 
 export type CalendarThemeVars = ReturnType<typeof self>
 
-const calendarLight: Theme<'Calendar', CalendarThemeVars> = {
+const calendarLight = createTheme({
   name: 'Calendar',
   common: commonLight,
+  peers: {
+    Button: buttonLight
+  },
   self
-}
+})
 
 export default calendarLight
 export type CalendarTheme = typeof calendarLight
