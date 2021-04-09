@@ -155,9 +155,12 @@ export default c([
         border-top-right-radius: 0;
       `, [
         cB('transfer-filter', `
-          padding: 8px 8px;
+          padding: 0 8px 8px 8px;
           box-sizing: border-box;
-          transition: border-color .3s var(--bezier);
+          background-color: var(--header-color);
+          transition:
+            border-color .3s var(--bezier),
+            background-color .3s var(--bezier);
           border-bottom: 1px solid var(--filter-divider-color);
         `),
         cB('transfer-list-flex-container', `

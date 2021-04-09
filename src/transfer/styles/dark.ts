@@ -34,7 +34,6 @@ const transferDark: TransferTheme = {
       textColor1,
       textColorDisabled,
       textColor2,
-      dividerColor,
       hoverColor
     } = vars
     return {
@@ -52,7 +51,7 @@ const transferDark: TransferTheme = {
       titleTextColor: textColor1,
       titleTextColorDisabled: textColorDisabled,
       extraTextColor: textColor2,
-      filterDividerColor: dividerColor,
+      filterDividerColor: 'transparent',
       itemTextColor: textColor2,
       itemTextColorDisabled: textColorDisabled,
       itemColorPending: hoverColor,
