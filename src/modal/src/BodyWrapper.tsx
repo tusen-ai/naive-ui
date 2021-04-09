@@ -1,7 +1,6 @@
 import {
   h,
   nextTick,
-  reactive,
   toRef,
   watch,
   ref,
@@ -23,10 +22,9 @@ import { NCard, cardPropKeys } from '../../card'
 import { getFirstSlotVNode, keep, warn } from '../../_utils'
 import { presetProps } from './presetProps'
 import type { ModalInjection } from './Modal'
-
-export interface ModalBodyInjection {
-  bodyRef: HTMLElement | ComponentPublicInstance | null
-}
+import { drawerBodyInjectionKey } from '../../drawer/src/interface'
+import { popoverBodyInjectionKey } from '../../popover/src/interface'
+import { modalBodyInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'ModalBody',
@@ -135,13 +133,9 @@ export default defineComponent({
     function handleClickOutside (e: MouseEvent): void {
       props.onClickoutside(e)
     }
-    provide<ModalBodyInjection>(
-      'NModalBody',
-      reactive({
-        bodyRef
-      })
-    )
-    provide('NDrawerBody', null)
+    provide(modalBodyInjectionKey, bodyRef)
+    provide(drawerBodyInjectionKey, null)
+    provide(popoverBodyInjectionKey, null)
     return {
       NModal,
       bodyRef,

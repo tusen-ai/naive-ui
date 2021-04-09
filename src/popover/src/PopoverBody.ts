@@ -12,7 +12,8 @@ import {
   DirectiveArguments,
   PropType,
   watch,
-  toRef
+  toRef,
+  provide
 } from 'vue'
 import { VFollower, FollowerPlacement, FollowerRef } from 'vueuc'
 import { clickoutside, mousemoveoutside } from 'vdirs'
@@ -23,7 +24,10 @@ import { popoverLight } from '../styles'
 import type { PopoverTheme } from '../styles'
 import style from './styles/index.cssr'
 import type { PopoverInjection } from './Popover'
-import { PopoverTrigger } from './interface'
+import type { PopoverTrigger } from './interface'
+import { popoverBodyInjectionKey } from './interface'
+import { drawerBodyInjectionKey } from '../../drawer/src/interface'
+import { modalBodyInjectionKey } from '../../modal/src/interface'
 
 export const popoverBodyProps = {
   ...(useTheme.props as ThemeProps<PopoverTheme>),
@@ -58,6 +62,7 @@ export default defineComponent({
     const themeRef = useTheme('Popover', 'Popover', style, popoverLight, props)
     const followerRef = ref<FollowerRef | null>(null)
     const NPopover = inject<PopoverInjection>('NPopover') as PopoverInjection
+    const bodyRef = ref<HTMLElement | null>(null)
     const followerEnabledRef = ref(props.show)
     const directivesRef = computed<DirectiveArguments>(() => {
       const { trigger } = props
@@ -167,10 +172,14 @@ export default defineComponent({
     function getTriggerElement (): HTMLElement {
       return NPopover.getTriggerElement()
     }
+    provide(popoverBodyInjectionKey, bodyRef)
+    provide(drawerBodyInjectionKey, null)
+    provide(modalBodyInjectionKey, null)
     return {
       ...useConfig(props),
       NPopover,
       followerRef,
+      bodyRef,
       adjustedTo: useAdjustedTo(props),
       followerEnabled: followerEnabledRef,
       style: styleRef,
@@ -198,7 +207,7 @@ export default defineComponent({
                     'n-popover--raw': this.raw
                   }
                 ],
-                ref: 'body',
+                ref: 'bodyRef',
                 style: this.style,
                 onMouseenter: this.handleMouseEnter,
                 onMouseleave: this.handleMouseLeave

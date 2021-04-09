@@ -7,7 +7,6 @@ import {
   watchEffect,
   provide,
   inject,
-  reactive,
   PropType,
   withDirectives,
   vShow,
@@ -18,16 +17,15 @@ import { NScrollbar } from '../../scrollbar'
 import type { ScrollbarProps } from '../../scrollbar'
 import type { MergedTheme } from '../../_mixins'
 import type { DrawerTheme } from '../styles'
+import { popoverBodyInjectionKey } from '../../popover/src/interface'
+import { modalBodyInjectionKey } from '../../modal/src/interface'
+import { drawerBodyInjectionKey } from './interface'
 
 export type Placement = 'left' | 'right' | 'top' | 'bottom'
 
 export interface DrawerInjection {
   isMounted: boolean
   mergedTheme: MergedTheme<DrawerTheme>
-}
-
-export interface DrawerBodyInjection {
-  bodyRef: HTMLElement | null
 }
 
 export default defineComponent({
@@ -62,13 +60,9 @@ export default defineComponent({
     function handleAfterLeave (): void {
       displayedRef.value = false
     }
-    provide<DrawerBodyInjection>(
-      'NDrawerBody',
-      reactive({
-        bodyRef
-      })
-    )
-    provide('NModalBody', null)
+    provide(drawerBodyInjectionKey, bodyRef)
+    provide(popoverBodyInjectionKey, null)
+    provide(modalBodyInjectionKey, null)
     return {
       NDrawer,
       displayed: displayedRef,
