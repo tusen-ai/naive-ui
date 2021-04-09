@@ -1,3 +1,4 @@
+import { composite } from 'seemly'
 import commonVariables from './_common'
 import { commonDark } from '../../_styles/common'
 import type { DescriptionsTheme } from './light'
@@ -12,6 +13,7 @@ const descriptionsDark: DescriptionsTheme = {
       textColor2,
       cardColor,
       modalColor,
+      popoverColor,
       dividerColor,
       borderRadius,
       fontWeightStrong,
@@ -26,13 +28,18 @@ const descriptionsDark: DescriptionsTheme = {
       fontSizeSmall,
       fontSizeMedium,
       fontSizeLarge,
-      thColor: tableHeaderColor,
+      thColor: composite(cardColor, tableHeaderColor),
+      thColorModal: composite(modalColor, tableHeaderColor),
+      thColorPopover: composite(popoverColor, tableHeaderColor),
       thTextColor: textColor1,
       thFontWeight: fontWeightStrong,
       tdTextColor: textColor2,
       tdColor: cardColor,
       tdColorModal: modalColor,
-      borderColor: dividerColor,
+      tdColorPopover: popoverColor,
+      borderColor: composite(cardColor, dividerColor),
+      borderColorModal: composite(modalColor, dividerColor),
+      borderColorPopover: composite(popoverColor, dividerColor),
       borderRadius: borderRadius
     }
   }

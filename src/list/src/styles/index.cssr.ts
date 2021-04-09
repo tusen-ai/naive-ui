@@ -13,6 +13,8 @@ import { cB, c, cE, cM, insideModal, insidePopover } from '../../../_utils/cssr'
 // --color-popover
 export default c([
   cB('list', `
+    --merged-border-color: var(--border-color);
+    --merged-color: var(--color)
     font-size: var(--font-size);
     transition:
       background-color .3s var(--bezier),
@@ -21,8 +23,7 @@ export default c([
     padding: 0;
     list-style-type: none;
     color: var(--text-color);
-    background-color: var(--color);
-    --merged-border-color: var(--border-color);
+    background-color: var(--merged-color);
   `, [
     cM('bordered', `
       border-radius: var(--border-radius);
@@ -78,20 +79,14 @@ export default c([
   ]),
   insideModal(
     cB('list', `
-      background-color: var(--color-modal);
-    `, [
-      cM('bordered', `
-        --merged-border-color: var(--border-color-modal);
-      `)
-    ])
+    --merged-color: var(--color-modal);
+      --merged-border-color: var(--border-color-modal);
+    `)
   ),
   insidePopover(
     cB('list', `
-      background-color: var(--color-popover);
-    `, [
-      cM('bordered', `
-        --merged-border-color: var(--border-color-popover);
-      `)
-    ])
+      --merged-color: var(--color-popover);
+      --merged-border-color: var(--border-color-popover);
+    `)
   )
 ])

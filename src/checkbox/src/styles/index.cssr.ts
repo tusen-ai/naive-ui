@@ -1,4 +1,4 @@
-import { c, cB, cE, cM, insideModal, cNotM, insidePopover } from '../../../_utils/cssr'
+import { c, cB, cE, cM, insideModal, insidePopover } from '../../../_utils/cssr'
 import iconSwitchTransition from '../../../_styles/transitions/icon-switch'
 
 // vars:
@@ -34,6 +34,7 @@ export default c([
     align-items: center;
     white-space: nowrap;
     vertical-align: middle;
+    --merged-color-table-header: var(--color-table-header-popover);
   `, [
     c('&:hover', [
       cB('checkbox-box', [
@@ -52,7 +53,7 @@ export default c([
     ]),
     cM('table-header', [
       cB('checkbox-box', {
-        backgroundColor: 'var(--color-table-header)'
+        backgroundColor: 'var(--merged-color-table-header)'
       })
     ]),
     cM('checked', [
@@ -194,34 +195,14 @@ export default c([
   ]),
   // modal table header checkbox
   insideModal(
-    cB('checkbox', [
-      cM('table-header', [
-        cNotM('checked', [
-          cNotM('indeterminate', [
-            cNotM('disabled', [
-              cB('checkbox-box', {
-                backgroundColor: 'var(--color-table-header-modal)'
-              })
-            ])
-          ])
-        ])
-      ])
-    ])
+    cB('checkbox', `
+      --merged-color-table-header: var(--color-table-header-modal);
+    `)
   ),
   // popover table header checkbox
   insidePopover(
-    cB('checkbox', [
-      cM('table-header', [
-        cNotM('checked', [
-          cNotM('indeterminate', [
-            cNotM('disabled', [
-              cB('checkbox-box', {
-                backgroundColor: 'var(--color-table-header-popover)'
-              })
-            ])
-          ])
-        ])
-      ])
-    ])
+    cB('checkbox', `
+      --merged-color-table-header: var(--color-table-header-popover);
+    `)
   )
 ])

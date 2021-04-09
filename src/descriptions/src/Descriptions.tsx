@@ -63,12 +63,17 @@ export default defineComponent({
           common: { cubicBezierEaseInOut },
           self: {
             thColor,
+            thColorModal,
+            thColorPopover,
             thTextColor,
             thFontWeight,
             tdTextColor,
             tdColor,
             tdColorModal,
+            tdColorPopover,
             borderColor,
+            borderColorModal,
+            borderColorPopover,
             borderRadius,
             lineHeight,
             [createKey('fontSize', size)]: fontSize,
@@ -92,10 +97,15 @@ export default defineComponent({
           '--th-text-color': thTextColor,
           '--td-text-color': tdTextColor,
           '--th-color': thColor,
+          '--th-color-modal': thColorModal,
+          '--th-color-popover': thColorPopover,
           '--td-color': tdColor,
           '--td-color-modal': tdColorModal,
+          '--td-color-popover': tdColorPopover,
           '--border-radius': borderRadius,
-          '--border-color': borderColor
+          '--border-color': borderColor,
+          '--border-color-modal': borderColorModal,
+          '--border-color-popover': borderColorPopover
         }
       }),
       compitableColumn: useCompitable(props, ['columns', 'column'])

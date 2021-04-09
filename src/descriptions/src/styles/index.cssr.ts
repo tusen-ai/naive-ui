@@ -1,4 +1,4 @@
-import { c, cB, cE, cM, cNotM, insideModal } from '../../../_utils/cssr'
+import { c, cB, cE, cM, cNotM, insideModal, insidePopover } from '../../../_utils/cssr'
 
 // vars:
 // --th-padding
@@ -10,10 +10,15 @@ import { c, cB, cE, cM, cNotM, insideModal } from '../../../_utils/cssr'
 // --th-text-color
 // --td-text-color
 // --th-color
+// --th-color-modal
+// --th-color-popover
 // --td-color
 // --td-color-modal
+// --td-color-popover
 // --border-radius
 // --border-color
+// --border-color-modal
+// --border-color-popover
 export default c([
   cB('descriptions', {
     fontSize: 'var(--font-size)'
@@ -73,31 +78,31 @@ export default c([
       cB('descriptions-table-wrapper', `
         border-radius: var(--border-radius);
         overflow: hidden;
-        background: var(--td-color);
-        border: 1px solid var(--border-color);
+        background: var(--merged-td-color);
+        border: 1px solid var(--merged-border-color);
       `, [
         cB('descriptions-table', [
           cB('descriptions-table-row', [
             c('&:not(:last-child)', [
               cB('descriptions-table-content', {
-                borderBottom: '1px solid var(--border-color)'
+                borderBottom: '1px solid var(--merged-border-color)'
               }),
               cB('descriptions-table-header', {
-                borderBottom: '1px solid var(--border-color)'
+                borderBottom: '1px solid var(--merged-border-color)'
               })
             ]),
             cB('descriptions-table-header', `
               font-weight: 400;
               background-clip: padding-box;
-              background-color: var(--th-color);
+              background-color: var(--merged-th-color);
             `, [
               c('&:not(:last-child)', {
-                borderRight: '1px solid var(--border-color)'
+                borderRight: '1px solid var(--merged-border-color)'
               })
             ]),
             cB('descriptions-table-content', [
               c('&:not(:last-child)', {
-                borderRight: '1px solid var(--border-color)'
+                borderRight: '1px solid var(--merged-border-color)'
               })
             ])
           ])
@@ -166,13 +171,23 @@ export default c([
       ])
     ])
   ]),
+  cB('descriptions-table-wrapper', `
+    --merged-th-color: var(--th-color);
+    --merged-td-color: var(--td-color);
+    --merged-border-color: var(--border-color);
+  `),
   insideModal(
-    cB('descriptions', [
-      cM('bordered', [
-        cB('descriptions-table-wrapper', {
-          background: 'var(--td-color-modal)'
-        })
-      ])
-    ])
+    cB('descriptions-table-wrapper', `
+      --merged-th-color: var(--th-color-modal);
+      --merged-td-color: var(--td-color-modal);
+      --merged-border-color: var(--border-color-modal);
+    `)
+  ),
+  insidePopover(
+    cB('descriptions-table-wrapper', `
+      --merged-th-color: var(--th-color-popover);
+      --merged-td-color: var(--td-color-popover);
+      --merged-border-color: var(--border-color-popover);
+    `)
   )
 ])

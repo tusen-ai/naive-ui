@@ -10,6 +10,7 @@ const self = (vars: ThemeCommonVars) => {
     textColor2,
     cardColor,
     modalColor,
+    popoverColor,
     dividerColor,
     borderRadius,
     fontWeightStrong,
@@ -25,12 +26,17 @@ const self = (vars: ThemeCommonVars) => {
     fontSizeMedium,
     fontSizeLarge,
     thColor: composite(cardColor, tableHeaderColor),
+    thColorModal: composite(modalColor, tableHeaderColor),
+    thColorPopover: composite(popoverColor, tableHeaderColor),
     thTextColor: textColor1,
     thFontWeight: fontWeightStrong,
     tdTextColor: textColor2,
     tdColor: cardColor,
     tdColorModal: modalColor,
-    borderColor: dividerColor,
+    tdColorPopover: popoverColor,
+    borderColor: composite(cardColor, dividerColor),
+    borderColorModal: composite(modalColor, dividerColor),
+    borderColorPopover: composite(popoverColor, dividerColor),
     borderRadius: borderRadius
   }
 }
