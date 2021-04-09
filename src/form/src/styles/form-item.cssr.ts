@@ -1,5 +1,5 @@
 import { cB, cE, cM } from '../../../_utils/cssr'
-import fadeDownTranstion from '../../../_styles/transitions/fade-down'
+import fadeDownTranstion from '../../../_styles/transitions/fade-down.cssr'
 
 // vars:
 // --line-height

@@ -22,20 +22,14 @@ export default function ({
   leaveCubicBezier = cubicBezierEaseInOut
 }: FadeDownTransitionOptions = {}): CNode[] {
   return [
-    c(
-      `&.${namespace}-${name}-transition-enter-from, &.${namespace}-${name}-transition-leave-to`,
-      {
-        opacity: 0,
-        transform: `translateY(${fromOffset})`
-      }
-    ),
-    c(
-      `&.${namespace}-${name}-transition-enter-to, &.${namespace}-${name}-transition-leave-from`,
-      {
-        opacity: 1,
-        transform: 'translateY(0)'
-      }
-    ),
+    c(`&.${namespace}-${name}-transition-enter-from, &.${namespace}-${name}-transition-leave-to`, {
+      opacity: 0,
+      transform: `translateY(${fromOffset})`
+    }),
+    c(`&.${namespace}-${name}-transition-enter-to, &.${namespace}-${name}-transition-leave-from`, {
+      opacity: 1,
+      transform: 'translateY(0)'
+    }),
     c(`&.${namespace}-${name}-transition-leave-active`, {
       transition: `opacity ${leaveDuration} ${leaveCubicBezier}, transform ${leaveDuration} ${leaveCubicBezier}`
     }),

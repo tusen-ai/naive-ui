@@ -1,6 +1,6 @@
 import { c, cB, cE, cM } from '../../../../_utils/cssr'
-import fadeInWidthExpandTransition from '../../../../_styles/transitions/fade-in-width-expand'
-import fadeUpWidthExpandTransition from '../../../../_styles/transitions/fade-up-width-expand'
+import fadeInWidthExpandTransition from '../../../../_styles/transitions/fade-in-width-expand.cssr'
+import fadeUpWidthExpandTransition from '../../../../_styles/transitions/fade-up-width-expand.cssr'
 
 // ease-out: cubic-bezier(0, 0, .2, 1)
 export default c([

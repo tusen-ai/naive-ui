@@ -1,6 +1,6 @@
 import { c, cM, cB, cE } from '../../../_utils/cssr'
-import fadeInHeightExpand from '../../../_styles/transitions/fade-in-height-expand'
-import createIconSwitchTransition from '../../../_styles/transitions/icon-switch'
+import fadeInHeightExpand from '../../../_styles/transitions/fade-in-height-expand.cssr'
+import createIconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
 
 export default cB('upload', [
   cE('file-input', `

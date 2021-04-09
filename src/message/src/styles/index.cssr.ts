@@ -1,6 +1,6 @@
 import { c, cB, cE, cM } from '../../../_utils/cssr'
-import iconSwitchTransition from '../../../_styles/transitions/icon-switch'
-import fadeInHeightExpand from '../../../_styles/transitions/fade-in-height-expand'
+import iconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
+import fadeInHeightExpand from '../../../_styles/transitions/fade-in-height-expand.cssr'
 
 // vars:
 // --margin

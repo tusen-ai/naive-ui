@@ -1,5 +1,5 @@
 import { cB, c, cM, cE } from '../../../_utils/cssr'
-import fadeInTransition from '../../../_styles/transitions/fade-in'
+import fadeInTransition from '../../../_styles/transitions/fade-in.cssr'
 
 // vars:
 // --bezier

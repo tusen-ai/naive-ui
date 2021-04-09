@@ -1,5 +1,5 @@
 import { cB, c, cM, cE, insideModal, insidePopover } from '../../../_utils/cssr'
-import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up'
+import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // vars:
 // --bezier

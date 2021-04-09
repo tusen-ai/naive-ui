@@ -1,6 +1,6 @@
 import { CNode, CNodeChildren, CProperties } from 'css-render'
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
-import fadeInHeightExpandTransition from '../../../_styles/transitions/fade-in-height-expand'
+import fadeInHeightExpandTransition from '../../../_styles/transitions/fade-in-height-expand.cssr'
 
 // vars:
 // --group-text-color

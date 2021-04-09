@@ -1,5 +1,5 @@
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
-import fadeInTransition from '../../../_styles/transitions/fade-in'
+import fadeInTransition from '../../../_styles/transitions/fade-in.cssr'
 
 const animation = c([
   c('@keyframes transfer-slide-in-from-left', `

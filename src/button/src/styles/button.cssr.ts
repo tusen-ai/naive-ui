@@ -1,10 +1,9 @@
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
-import fadeInWidthExpandTransition from '../../../_styles/transitions/fade-in-width-expand'
-import iconSwitchTransition from '../../../_styles/transitions/icon-switch'
+import fadeInWidthExpandTransition from '../../../_styles/transitions/fade-in-width-expand.cssr'
+import iconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
 
 // vars:
 // --bezier
-// --bezier-ease-out
 // --ripple-duration
 // --opacity-disabled
 // --text-color

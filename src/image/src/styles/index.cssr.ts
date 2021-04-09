@@ -1,6 +1,6 @@
 import { c, cB } from '../../../_utils/cssr'
-import fadeInTransition from '../../../_styles/transitions/fade-in'
-import fadeInzoomInTransiton from '../../../_styles/transitions/fade-in-scale-up'
+import fadeInTransition from '../../../_styles/transitions/fade-in.cssr'
+import fadeInzoomInTransiton from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // vars:
 // --icon-color

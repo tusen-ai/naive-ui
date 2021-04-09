@@ -36,19 +36,13 @@ export default function ({
         originalTransition && ',' + originalTransition
       }`
     }),
-    c(
-      `&.${namespace}-fade-in-scale-up-transition-enter-from, &.${namespace}-fade-in-scale-up-transition-leave-to`,
-      {
-        opacity: 0,
-        transform: `scale(${enterScale}) ${originalTransform}`
-      }
-    ),
-    c(
-      `&.${namespace}-fade-in-scale-up-transition-leave-from, &.${namespace}-fade-in-scale-up-transition-enter-to`,
-      {
-        opacity: 1,
-        transform: `scale(${transformDebounceScale}) ${originalTransform}`
-      }
-    )
+    c(`&.${namespace}-fade-in-scale-up-transition-enter-from, &.${namespace}-fade-in-scale-up-transition-leave-to`, {
+      opacity: 0,
+      transform: `scale(${enterScale}) ${originalTransform}`
+    }),
+    c(`&.${namespace}-fade-in-scale-up-transition-leave-from, &.${namespace}-fade-in-scale-up-transition-enter-to`, {
+      opacity: 1,
+      transform: `scale(${transformDebounceScale}) ${originalTransform}`
+    })
   ]
 }

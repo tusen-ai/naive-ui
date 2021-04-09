@@ -1,4 +1,4 @@
-import fadeInScaleUp from '../../../_styles/transitions/fade-in-scale-up'
+import fadeInScaleUp from '../../../_styles/transitions/fade-in-scale-up.cssr'
 import { c, cB } from '../../../_utils/cssr'
 
 // --menu-box-shadow

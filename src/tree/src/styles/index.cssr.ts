@@ -1,6 +1,6 @@
 import { c, cB, cE, cM } from '../../../_utils/cssr'
-import fadeInHeightExpandTransition from '../../../_styles/transitions/fade-in-height-expand'
-import iconSwitchTransition from '../../../_styles/transitions/icon-switch'
+import fadeInHeightExpandTransition from '../../../_styles/transitions/fade-in-height-expand.cssr'
+import iconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
 
 // vars:
 // --arrow-color

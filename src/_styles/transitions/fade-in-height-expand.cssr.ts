@@ -28,27 +28,19 @@ export default function ({
   leaveToProps = undefined
 }: FadeInHeightExpandTransitionOption = {}): CNode[] {
   return [
-    c(
-      `&.${namespace}-fade-in-height-expand-transition-leave-from, &.${namespace}-fade-in-height-expand-transition-enter-to`,
-      {
-        ...enterToProps,
-        opacity: 1
-      }
-    ),
-    c(
-      `&.${namespace}-fade-in-height-expand-transition-leave-to, &.${namespace}-fade-in-height-expand-transition-enter-from`,
-      {
-        ...leaveToProps,
-        opacity: 0,
-        marginTop: '0 !important',
-        marginBottom: '0 !important',
-        paddingTop: foldPadding ? '0 !important' : undefined,
-        paddingBottom: foldPadding ? '0 !important' : undefined
-      }
-    ),
-    c(
-      `&.${namespace}-fade-in-height-expand-transition-leave-active`,
-      `
+    c(`&.${namespace}-fade-in-height-expand-transition-leave-from, &.${namespace}-fade-in-height-expand-transition-enter-to`, {
+      ...enterToProps,
+      opacity: 1
+    }),
+    c(`&.${namespace}-fade-in-height-expand-transition-leave-to, &.${namespace}-fade-in-height-expand-transition-enter-from`, {
+      ...leaveToProps,
+      opacity: 0,
+      marginTop: '0 !important',
+      marginBottom: '0 !important',
+      paddingTop: foldPadding ? '0 !important' : undefined,
+      paddingBottom: foldPadding ? '0 !important' : undefined
+    }),
+    c(`&.${namespace}-fade-in-height-expand-transition-leave-active`, `
       overflow: ${overflow};
       transition:
         max-height ${duration} ${cubicBezierEaseInOut} ${leavingDelay},
@@ -58,11 +50,8 @@ export default function ({
         padding-top ${duration} ${cubicBezierEaseInOut} ${leavingDelay},
         padding-bottom ${duration} ${cubicBezierEaseInOut} ${leavingDelay}
         ${originalTransition ? ',' + originalTransition : ''}
-    `
-    ),
-    c(
-      `&.${namespace}-fade-in-height-expand-transition-enter-active`,
-      `
+    `),
+    c(`&.${namespace}-fade-in-height-expand-transition-enter-active`, `
       overflow: ${overflow};
       transition:
         max-height ${duration} ${cubicBezierEaseInOut},
@@ -72,7 +61,6 @@ export default function ({
         padding-top ${duration} ${cubicBezierEaseInOut},
         padding-bottom ${duration} ${cubicBezierEaseInOut}
         ${originalTransition ? ',' + originalTransition : ''}
-    `
-    )
+    `)
   ]
 }

@@ -3,7 +3,7 @@ import slideInFromRightTransition from '../../../_styles/transitions/slide-in-fr
 import slideInFromLeftTransition from '../../../_styles/transitions/slide-in-from-left'
 import slideInFromTopTransition from '../../../_styles/transitions/slide-in-from-top'
 import slideInFromBottomTransition from '../../../_styles/transitions/slide-in-from-bottom'
-import fadeInTransition from '../../../_styles/transitions/fade-in'
+import fadeInTransition from '../../../_styles/transitions/fade-in.cssr'
 
 // vars:
 // --line-height
