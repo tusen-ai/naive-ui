@@ -1,4 +1,4 @@
-import { c, cB, cE, cM, insideModal, cNotM } from '../../../_utils/cssr'
+import { c, cB, cE, cM, insideModal, cNotM, insidePopover } from '../../../_utils/cssr'
 import iconSwitchTransition from '../../../_styles/transitions/icon-switch'
 
 // vars:
@@ -201,6 +201,22 @@ export default c([
             cNotM('disabled', [
               cB('checkbox-box', {
                 backgroundColor: 'var(--color-table-header-modal)'
+              })
+            ])
+          ])
+        ])
+      ])
+    ])
+  ),
+  // popover table header checkbox
+  insidePopover(
+    cB('checkbox', [
+      cM('table-header', [
+        cNotM('checked', [
+          cNotM('indeterminate', [
+            cNotM('disabled', [
+              cB('checkbox-box', {
+                backgroundColor: 'var(--color-table-header-popover)'
               })
             ])
           ])

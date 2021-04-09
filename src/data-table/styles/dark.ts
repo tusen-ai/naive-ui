@@ -30,6 +30,7 @@ const dataTableDark: DataTableTheme = {
     const {
       cardColor,
       modalColor,
+      popoverColor,
       dividerColor,
       textColor2,
       textColor1,
@@ -74,7 +75,16 @@ const dataTableDark: DataTableTheme = {
         composite(modalColor, tableHeaderColor),
         tableHeaderColor
       ),
-      tdColorModal: modalColor
+      tdColorModal: modalColor,
+      // popover
+      borderColorPopover: composite(popoverColor, dividerColor),
+      tdColorHoverPopover: composite(popoverColor, tableColorHover),
+      thColorPopover: composite(popoverColor, tableHeaderColor),
+      thColorHoverPopover: composite(
+        composite(popoverColor, tableHeaderColor),
+        tableHeaderColor
+      ),
+      tdColorPopover: popoverColor
     }
   }
 }

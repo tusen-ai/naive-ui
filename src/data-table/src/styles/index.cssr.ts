@@ -1,5 +1,5 @@
 import { CNode } from 'css-render'
-import { c, cB, cE, cM, cNotM, insideModal } from '../../../_utils/cssr'
+import { c, cB, cE, cM, cNotM, insideModal, insidePopover } from '../../../_utils/cssr'
 
 const fixedColumnStyle = createFixedColumnStyle()
 
@@ -12,14 +12,19 @@ const fixedColumnStyle = createFixedColumnStyle()
 // --line-height
 // --border-color
 // --border-color-modal
+// --border-color-popover
 // --th-color
 // --th-color-hover
 // --th-color-modal
 // --th-color-hover-modal
+// --th-color-popover
+// --th-color-hover-popover
 // --td-color
 // --td-color-hover
 // --td-color-modal
 // --td-color-hover-modal
+// --td-color-popover
+// --td-color-hover-popover
 // --th-text-color
 // --td-text-color
 // --th-font-weight
@@ -356,56 +361,57 @@ export default c([
       margin: '0!important'
     })
   ]),
-  createStyleInsideModal()
+  createStyleInside('modal'),
+  createStyleInside('popover')
 ])
 
-function createStyleInsideModal (): CNode {
-  return insideModal(cB('data-table', [
+function createStyleInside (target: 'modal' | 'popover'): CNode {
+  const style = cB('data-table', [
     cB('data-table-table', {
-      backgroundColor: 'var(--td-color-modal)'
+      backgroundColor: `var(--td-color-${target})`
     }, [
       cB('data-table-thead', {
-        backgroundColor: 'var(--th-color-modal)'
+        backgroundColor: `var(--th-color-${target})`
       }),
       cB('data-table-th', {
-        borderColor: 'var(--border-color-modal)',
-        backgroundColor: 'var(--th-color-modal)'
+        borderColor: `var(--border-color-${target})`,
+        backgroundColor: `var(--th-color-${target})`
       }, [
         cM('sortable', [
           c('&:hover', {
-            backgroundColor: 'var(--th-color-hover-modal)'
+            backgroundColor: `var(--th-color-hover-${target})`
           })
         ])
       ]),
       cB('data-table-tr', [
         c('&:hover', {
-          backgroundColor: 'var(--td-color-hover-modal)'
+          backgroundColor: `var(--td-color-hover-${target})`
         }, [
           cB('data-table-td', {
-            backgroundColor: 'var(--td-color-hover-modal)'
+            backgroundColor: `var(--td-color-hover-${target})`
           })
         ])
       ]),
       cB('data-table-td', {
-        borderColor: 'var(--border-color-modal)',
-        backgroundColor: 'var(--td-color-modal)'
+        borderColor: `var(--border-color-${target})`,
+        backgroundColor: `var(--td-color-${target})`
       })
     ]),
     cNotM('single-line', [
       cB('data-table-wrapper', [
         cB('data-table-table', [
           cB('data-table-th', {
-            borderRight: '1px solid var(--border-color-modal)'
+            borderRight: `1px solid var(--border-color-${target})`
           }, [
             cM('last', {
-              borderRight: '0 solid var(--border-color-modal)'
+              borderRight: `0 solid var(--border-color-${target})`
             })
           ]),
           cB('data-table-td', {
-            borderRight: '1px solid var(--border-color-modal)'
+            borderRight: `1px solid var(--border-color-${target})`
           }, [
             cM('last-col', {
-              borderRight: '0 solid var(--border-color-modal)'
+              borderRight: `0 solid var(--border-color-${target})`
             })
           ])
         ])
@@ -413,13 +419,13 @@ function createStyleInsideModal (): CNode {
     ]),
     cM('bordered', [
       cB('data-table-wrapper', {
-        border: '1px solid var(--border-color-modal)'
+        border: `1px solid var(--border-color-${target})`
       }, [
         cB('data-table-table', [
           cB('data-table-tr', [
             cB('data-table-td', [
               cM('last-row', {
-                borderBottom: '0 solid var(--border-color-modal)'
+                borderBottom: `0 solid var(--border-color-${target})`
               })
             ])
           ])
@@ -428,10 +434,11 @@ function createStyleInsideModal (): CNode {
     ]),
     cB('data-table-base-table-header', [
       cB('data-table-table', {
-        borderBottom: '1px solid var(--border-color-modal)'
+        borderBottom: `1px solid var(--border-color-${target})`
       })
     ])
-  ]))
+  ])
+  return target === 'modal' ? insideModal(style) : insidePopover(style)
 }
 
 function createFixedColumnStyle (): CNode[] {

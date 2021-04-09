@@ -17,6 +17,7 @@ const self = (vars: ThemeCommonVars) => {
   const {
     cardColor,
     modalColor,
+    popoverColor,
     textColor2,
     textColor1,
     tableHeaderColor,
@@ -61,7 +62,16 @@ const self = (vars: ThemeCommonVars) => {
       composite(modalColor, tableHeaderColor),
       tableHeaderColor
     ),
-    tdColorModal: modalColor
+    tdColorModal: modalColor,
+    // popover
+    borderColorPopover: composite(popoverColor, dividerColor),
+    tdColorHoverPopover: composite(popoverColor, tableColorHover),
+    thColorPopover: composite(popoverColor, tableHeaderColor),
+    thColorHoverPopover: composite(
+      composite(popoverColor, tableHeaderColor),
+      tableHeaderColor
+    ),
+    tdColorPopover: popoverColor
   }
 }
 
