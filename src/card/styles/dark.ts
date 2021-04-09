@@ -20,13 +20,15 @@ const cardDark: CardTheme = {
       closeColor,
       closeColorHover,
       closeColorPressed,
-      boxShadow1
+      boxShadow1,
+      popoverColor
     } = vars
     return {
       ...commonVariables,
       lineHeight,
       color: cardColor,
       colorModal: modalColor,
+      colorPopover: popoverColor,
       textColor: textColor2,
       titleTextColor: textColor1,
       borderColor: dividerColor,

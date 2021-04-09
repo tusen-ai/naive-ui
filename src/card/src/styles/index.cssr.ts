@@ -1,10 +1,11 @@
-import { asModal, c, cB, cE, cM, insideModal } from '../../../_utils/cssr'
+import { asModal, c, cB, cE, cM, insideModal, insidePopover } from '../../../_utils/cssr'
 
 // vars:
 // --bezier
 // --border-radius
 // --color
 // --color-modal
+// --color-popover
 // --text-color
 // --line-height
 // --padding-top
@@ -173,6 +174,9 @@ export default c([
   ]),
   insideModal(cB('card', {
     background: 'var(--color-modal)'
+  })),
+  insidePopover(cB('card', {
+    background: 'var(--color-popover)'
   })),
   cB('card', [
     asModal({

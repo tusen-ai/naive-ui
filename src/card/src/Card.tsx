@@ -83,6 +83,7 @@ export default defineComponent({
             lineHeight,
             closeSize,
             boxShadow,
+            colorPopover,
             [createKey('padding', size)]: padding,
             [createKey('fontSize', size)]: fontSize,
             [createKey('titleFontSize', size)]: titleFontSize
@@ -99,6 +100,7 @@ export default defineComponent({
           '--border-radius': borderRadius,
           '--color': color,
           '--color-modal': colorModal,
+          '--color-popover': colorPopover,
           '--text-color': textColor,
           '--line-height': lineHeight,
           '--action-color': actionColor,
