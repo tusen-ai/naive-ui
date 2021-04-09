@@ -9,6 +9,7 @@ import { backTopLight } from '../back-top/styles'
 import { badgeLight } from '../badge/styles'
 import { breadcrumbLight } from '../breadcrumb/styles'
 import { buttonLight } from '../button/styles'
+import { calendarLight } from '../calendar/styles'
 import { cardLight } from '../card/styles'
 import { cascaderLight } from '../cascader/styles'
 import { checkboxLight } from '../checkbox/styles'
@@ -82,6 +83,7 @@ export const lightTheme: BuiltInGlobalTheme = {
   Badge: badgeLight,
   Breadcrumb: breadcrumbLight,
   Button: buttonLight,
+  Calendar: calendarLight,
   Card: cardLight,
   Cascader: cascaderLight,
   Checkbox: checkboxLight,

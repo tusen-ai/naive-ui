@@ -397,6 +397,10 @@ export const enComponentRoutes = [
     path: 'n-skeleton',
     component: () => import('../../src/skeleton/demos/enUS/index.demo-entry.md')
   },
+  {
+    path: 'n-calendar',
+    component: () => import('../../src/calendar/demos/enUS/index.demo-entry.md')
+  },
   // deprecated
   {
     path: 'n-nimbus-service-layout',
@@ -725,6 +729,10 @@ export const zhComponentRoutes = [
   {
     path: 'n-skeleton',
     component: () => import('../../src/skeleton/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'n-calendar',
+    component: () => import('../../src/calendar/demos/zhCN/index.demo-entry.md')
   },
   // deprecated
   {

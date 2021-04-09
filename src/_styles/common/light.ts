@@ -173,7 +173,7 @@ const derived = {
   actionColor: 'rgb(250, 250, 252)',
   tableHeaderColor: 'rgb(250, 250, 252)',
 
-  hoverColor: 'rgb(246, 246, 250)',
+  hoverColor: 'rgb(246, 246, 248)',
   tableColorHover: overlay(base.alphaTablePending),
   activeColor: overlay(base.alphaActive),
 

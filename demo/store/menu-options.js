@@ -321,6 +321,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
       type: 'group',
       children: [
         {
+          en: 'Calendar',
+          zh: '日历',
+          enSuffix: true,
+          path: '/n-calendar'
+        },
+        {
           en: 'Code',
           zh: '代码',
           enSuffix: true,

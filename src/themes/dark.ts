@@ -7,6 +7,7 @@ import { backTopDark } from '../back-top/styles'
 import { badgeDark } from '../badge/styles'
 import { breadcrumbDark } from '../breadcrumb/styles'
 import { buttonDark } from '../button/styles'
+import { calendarDark } from '../calendar/styles'
 import { cardDark } from '../card/styles'
 import { cascaderDark } from '../cascader/styles'
 import { checkboxDark } from '../checkbox/styles'
@@ -80,6 +81,7 @@ export const darkTheme: BuiltInGlobalTheme = {
   Badge: badgeDark,
   Breadcrumb: breadcrumbDark,
   Button: buttonDark,
+  Calendar: calendarDark,
   Card: cardDark,
   Cascader: cascaderDark,
   Checkbox: checkboxDark,

@@ -99,7 +99,8 @@ function dateArray (
   monthTs: number,
   valueTs: number | [number, number] | null,
   currentTs: number,
-  startDay: 0 | 1 | 2 | 3 | 4 | 5 | 6
+  startDay: 0 | 1 | 2 | 3 | 4 | 5 | 6,
+  stripTail: boolean = false
 ): DateItem[] {
   const displayMonth = getMonth(monthTs)
   // First day of current month
@@ -124,7 +125,8 @@ function dateArray (
     )
     displayMonthIterator = getTime(addDays(displayMonthIterator, 1))
   }
-  while (calendarDays.length < 42) {
+  const endIndex = calendarDays.length <= 35 && stripTail ? 35 : 42
+  while (calendarDays.length < endIndex) {
     calendarDays.push(
       dateItem(displayMonthIterator, monthTs, valueTs, currentTs)
     )

@@ -7,6 +7,7 @@ import type { BackTopTheme } from '../../back-top/styles'
 import type { BadgeTheme } from '../../badge/styles'
 import type { BreadcrumbTheme } from '../../breadcrumb/styles'
 import type { ButtonTheme } from '../../button/styles'
+import type { CalendarTheme } from '../../calendar/styles'
 import type { CardTheme } from '../../card/styles'
 import type { CascaderTheme } from '../../cascader/styles'
 import type { CheckboxTheme } from '../../checkbox/styles'
@@ -89,6 +90,7 @@ export interface GlobalThemeWithoutCommon {
   Badge?: BadgeTheme
   Breadcrumb?: BreadcrumbTheme
   Button?: ButtonTheme
+  Calendar?: CalendarTheme
   Card?: CardTheme
   Cascader?: CascaderTheme
   Checkbox?: CheckboxTheme
