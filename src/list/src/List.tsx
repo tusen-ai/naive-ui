@@ -36,7 +36,10 @@ export default defineComponent({
             textColor,
             color,
             colorModal,
+            colorPopover,
             borderColor,
+            borderColorModal,
+            borderColorPopover,
             borderRadius
           }
         } = themeRef.value
@@ -47,7 +50,10 @@ export default defineComponent({
           '--color': color,
           '--border-radius': borderRadius,
           '--border-color': borderColor,
-          '--color-modal': colorModal
+          '--border-color-modal': borderColorModal,
+          '--border-color-popover': borderColorPopover,
+          '--color-modal': colorModal,
+          '--color-popover': colorPopover
         }
       })
     }

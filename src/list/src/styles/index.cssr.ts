@@ -1,4 +1,4 @@
-import { cB, c, cE, cM, insideModal } from '../../../_utils/cssr'
+import { cB, c, cE, cM, insideModal, insidePopover } from '../../../_utils/cssr'
 
 // vars:
 // --font-size
@@ -7,7 +7,10 @@ import { cB, c, cE, cM, insideModal } from '../../../_utils/cssr'
 // --color
 // --border-radius
 // --border-color
+// --border-color-modal
+// --border-color-popover
 // --color-modal
+// --color-popover
 export default c([
   cB('list', `
     font-size: var(--font-size);
@@ -18,24 +21,25 @@ export default c([
     padding: 0;
     list-style-type: none;
     color: var(--text-color);
+    background-color: var(--color);
+    --merged-border-color: var(--border-color);
   `, [
     cM('bordered', `
-      background-color: var(--color);
       border-radius: var(--border-radius);
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--merged-border-color);
     `, [
       cB('list-item', `
         padding: 12px 20px;
       `, [
         c('&:not(:last-child)', `
-          border-bottom: 1px solid var(--border-color);
+          border-bottom: 1px solid var(--merged-border-color);
         `)
       ]),
       cE('header, footer', `
         padding: 12px 20px;
       `, [
         c('&:not(:last-child)', `
-          border-bottom: 1px solid var(--border-color);
+          border-bottom: 1px solid var(--merged-border-color);
         `)
       ])
     ]),
@@ -45,7 +49,7 @@ export default c([
       transition: border-color .3s var(--bezier);
     `, [
       c('&:not(:last-child)', `
-        border-bottom: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--merged-border-color);
       `)
     ]),
     cB('list-item', `
@@ -68,14 +72,25 @@ export default c([
         flex: 1;
       `),
       c('&:not(:last-child)', `
-        border-bottom: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--merged-border-color);
       `)
     ])
   ]),
   insideModal(
-    cB('list', [
+    cB('list', `
+      background-color: var(--color-modal);
+    `, [
       cM('bordered', `
-        background-color: var(--color-modal);
+        --merged-border-color: var(--border-color-modal);
+      `)
+    ])
+  ),
+  insidePopover(
+    cB('list', `
+      background-color: var(--color-popover);
+    `, [
+      cM('bordered', `
+        --merged-border-color: var(--border-color-popover);
       `)
     ])
   )

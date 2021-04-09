@@ -1,3 +1,4 @@
+import { composite } from 'seemly'
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { Theme } from '../../_mixins'
@@ -7,6 +8,7 @@ const self = (vars: ThemeCommonVars) => {
     textColor2,
     cardColor,
     modalColor,
+    popoverColor,
     dividerColor,
     borderRadius,
     fontSize
@@ -15,7 +17,10 @@ const self = (vars: ThemeCommonVars) => {
     textColor: textColor2,
     color: cardColor,
     colorModal: modalColor,
+    colorPopover: popoverColor,
     borderColor: dividerColor,
+    borderColorModal: composite(modalColor, dividerColor),
+    borderColorPopover: composite(popoverColor, dividerColor),
     borderRadius,
     fontSize
   }

@@ -1,3 +1,4 @@
+import { composite } from 'seemly'
 import { commonDark } from '../../_styles/common'
 import type { ListTheme } from './light'
 
@@ -9,6 +10,7 @@ const listDark: ListTheme = {
       textColor2,
       cardColor,
       modalColor,
+      popoverColor,
       dividerColor,
       borderRadius,
       fontSize
@@ -17,7 +19,10 @@ const listDark: ListTheme = {
       textColor: textColor2,
       color: cardColor,
       colorModal: modalColor,
+      colorPopover: popoverColor,
       borderColor: dividerColor,
+      borderColorModal: composite(modalColor, dividerColor),
+      borderColorPopover: composite(popoverColor, dividerColor),
       borderRadius,
       fontSize
     }
