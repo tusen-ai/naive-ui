@@ -1,8 +1,10 @@
-import { cB, cE, cM, c, insideModal } from '../../../_utils/cssr'
+import { cB, cE, cM, c, insideModal, insidePopover } from '../../../_utils/cssr'
 
 // vars:
 // --bezier
 // --border-color
+// --border-color-modal
+// --border-color-popover
 // --border-radius
 // --text-color
 // --title-font-weight
@@ -15,6 +17,7 @@ import { cB, cE, cM, c, insideModal } from '../../../_utils/cssr'
 // --cell-color
 // --cell-color-hover
 // --cell-color-hover-modal
+// --cell-color-hover-popover
 // --bar-color
 export default c([
   cB('calendar', `
@@ -162,6 +165,18 @@ export default c([
     `, [
       c('&:hover', `
         background-color: var(--cell-color-hover-modal);
+      `)
+    ])
+  ])),
+  insidePopover(cB('calendar', [
+    cB('calendar-dates', `
+      border-color: var(--border-color-popover);
+    `),
+    cB('calendar-cell', `
+      border-color: var(--border-color-popover);
+    `, [
+      c('&:hover', `
+        background-color: var(--cell-color-hover-popover);
       `)
     ])
   ]))

@@ -137,13 +137,15 @@ export default defineComponent({
             cellColorHover,
             cellColor,
             cellColorModal,
-            barColor
+            barColor,
+            cellColorPopover
           }
         } = themeRef.value
         return {
           '--bezier': cubicBezierEaseInOut,
           '--border-color': composite(cellColor, borderColor),
           '--border-color-modal': composite(cellColorModal, borderColor),
+          '--border-color-popover': composite(cellColorPopover, borderColor),
           '--border-radius': borderRadius,
           '--text-color': textColor,
           '--title-font-weight': titleFontWeight,
@@ -157,6 +159,10 @@ export default defineComponent({
           '--cell-color': cellColor,
           '--cell-color-hover': composite(cellColor, cellColorHover),
           '--cell-color-hover-modal': composite(cellColorModal, cellColorHover),
+          '--cell-color-hover-popover': composite(
+            cellColorPopover,
+            cellColorHover
+          ),
           '--bar-color': barColor
         }
       })

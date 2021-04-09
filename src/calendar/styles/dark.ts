@@ -23,7 +23,8 @@ const calendarDark: CalendarTheme = {
       baseColor,
       hoverColor,
       cardColor,
-      modalColor
+      modalColor,
+      popoverColor
     } = vars
     return {
       ...commonVariables,
@@ -40,6 +41,7 @@ const calendarDark: CalendarTheme = {
       cellColorHover: hoverColor,
       cellColor: cardColor,
       cellColorModal: modalColor,
+      cellColorPopover: popoverColor,
       barColor: primaryColor
     }
   }

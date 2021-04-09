@@ -18,7 +18,8 @@ const self = (vars: ThemeCommonVars) => {
     baseColor,
     hoverColor,
     cardColor,
-    modalColor
+    modalColor,
+    popoverColor
   } = vars
   return {
     ...commonVariables,
@@ -35,6 +36,7 @@ const self = (vars: ThemeCommonVars) => {
     cellColorHover: hoverColor,
     cellColor: cardColor,
     cellColorModal: modalColor,
+    cellColorPopover: popoverColor,
     barColor: primaryColor
   }
 }
