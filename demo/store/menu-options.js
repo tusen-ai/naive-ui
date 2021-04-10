@@ -218,6 +218,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           path: '/n-cascader'
         },
         {
+          en: 'Color Picker',
+          zh: '拾色器',
+          enSuffix: true,
+          path: '/n-color-picker'
+        },
+        {
           en: 'Checkbox',
           zh: '复选框',
           enSuffix: true,

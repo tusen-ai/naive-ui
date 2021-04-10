@@ -401,6 +401,11 @@ export const enComponentRoutes = [
     path: 'n-calendar',
     component: () => import('../../src/calendar/demos/enUS/index.demo-entry.md')
   },
+  {
+    path: 'n-color-picker',
+    component: () =>
+      import('../../src/color-picker/demos/enUS/index.demo-entry.md')
+  },
   // deprecated
   {
     path: 'n-nimbus-service-layout',
@@ -733,6 +738,11 @@ export const zhComponentRoutes = [
   {
     path: 'n-calendar',
     component: () => import('../../src/calendar/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'n-color-picker',
+    component: () =>
+      import('../../src/color-picker/demos/zhCN/index.demo-entry.md')
   },
   // deprecated
   {
