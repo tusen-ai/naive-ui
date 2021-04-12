@@ -1,5 +1,6 @@
 import { defineComponent, h, PropType, ref } from 'vue'
 import { off, on } from 'evtd'
+import { normalizeHue } from './utils'
 
 const HANDLE_SIZE = '12px'
 const RADIUS = '6px'
@@ -10,10 +11,9 @@ const GRADIENT =
 export default defineComponent({
   name: 'HueSlider',
   props: {
-    // 0 - 359
     hue: {
       type: Number,
-      default: 0
+      required: true
     },
     onUpdateHue: {
       type: Function as PropType<(value: number) => void>,
@@ -32,8 +32,8 @@ export default defineComponent({
       const { value: railEl } = railRef
       if (!railEl) return
       const { width, left } = railEl.getBoundingClientRect()
-      const newHue = Math.floor(((e.clientX - left) / width) * 360)
-      props.onUpdateHue(newHue >= 360 ? 359 : newHue < 0 ? 0 : newHue)
+      const newHue = normalizeHue(((e.clientX - left) / width) * 360)
+      props.onUpdateHue(newHue)
     }
     function handleMouseUp (): void {
       off('mousemove', document, handleMouseMove)
@@ -74,12 +74,9 @@ export default defineComponent({
             }}
           >
             <div
-              class="n-hue-slider__handle"
-              draggable="false"
+              class="n-color-picker-handler"
               style={{
-                userSelect: 'none',
                 position: 'absolute',
-                boxShadow: 'rgb(0 0 0 / 20%) 0px 0px 0px 1px',
                 left: `calc((${this.hue}%) / 359 * 100 - ${RADIUS})`,
                 boxSizing: 'border-box',
                 border: '2px solid white',

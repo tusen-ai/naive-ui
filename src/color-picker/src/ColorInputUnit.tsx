@@ -25,12 +25,21 @@ function normalizeSlvUnit (value: string): number | false {
   return false
 }
 
+function normalizeHexaUnit (value: string): boolean {
+  if (/^#[0-9a-fA-F]{3}([0-9a-fA-F]{3})?$/.test(value.trim())) return true
+  return false
+}
+
 // 0 - 100%
 function normalizeAlphaUnit (value: string): number | false {
   if (/^\d{1,3}\.?\d*%$/.test(value.trim())) {
     return Math.max(0, Math.min(parseInt(value), 100))
   }
   return false
+}
+
+const inputThemeOverrides = {
+  paddingSmall: '0 4px'
 }
 
 export default defineComponent({
@@ -41,33 +50,50 @@ export default defineComponent({
       required: true
     },
     value: {
-      type: Number as PropType<number | null>,
+      type: [Number, String] as PropType<number | string | null>,
       default: null
     },
     onUpdateValue: {
-      type: Function as PropType<(value: number) => void>,
+      type: Function as PropType<(value: number | string) => void>,
       required: true
     }
   },
   setup (props) {
     const inputValueRef = ref<string>('')
     watchEffect(() => {
-      inputValueRef.value = getIntegerString()
+      inputValueRef.value = getInputString()
     })
-    function getIntegerString (): string {
-      if (props.value === null) return ''
-      return String(Math.floor(props.value))
+    function getInputString (): string {
+      const { value } = props
+      if (value === null) return ''
+      const { label } = props
+      if (label === 'HEXA') {
+        return value as string
+      }
+      if (label === 'A') {
+        return `${Math.floor((value as number) * 100)}%`
+      }
+      return String(Math.floor(value as number))
     }
     function handleInputUpdateValue (value: string): void {
       inputValueRef.value = value
     }
     function handleInputChange (value: string): void {
       let unit: number | false
+      let valid: boolean
       switch (props.label) {
+        case 'HEXA':
+          valid = normalizeHexaUnit(value)
+          if (!valid) {
+            inputValueRef.value = getInputString()
+          } else {
+            props.onUpdateValue(value)
+          }
+          break
         case 'H':
           unit = normalizeHueUnit(value)
           if (!unit) {
-            inputValueRef.value = getIntegerString()
+            inputValueRef.value = getInputString()
           } else {
             props.onUpdateValue(unit)
           }
@@ -77,7 +103,7 @@ export default defineComponent({
         case 'V':
           unit = normalizeSlvUnit(value)
           if (!unit) {
-            inputValueRef.value = getIntegerString()
+            inputValueRef.value = getInputString()
           } else {
             props.onUpdateValue(unit)
           }
@@ -85,7 +111,7 @@ export default defineComponent({
         case 'A':
           unit = normalizeAlphaUnit(value)
           if (!unit) {
-            inputValueRef.value = getIntegerString()
+            inputValueRef.value = getInputString()
           } else {
             props.onUpdateValue(unit)
           }
@@ -95,7 +121,7 @@ export default defineComponent({
         case 'B':
           unit = normalizeRgbUnit(value)
           if (!unit) {
-            inputValueRef.value = getIntegerString()
+            inputValueRef.value = getInputString()
           } else {
             props.onUpdateValue(unit)
           }
@@ -112,7 +138,8 @@ export default defineComponent({
     return (
       <NInput
         size="small"
-        placeholder=""
+        placeholder={this.label}
+        builtinThemeOverrides={inputThemeOverrides}
         value={this.inputValue}
         onUpdateValue={this.handleInputUpdateValue}
         onChange={this.handleInputChange}

@@ -4,11 +4,12 @@ import {
   RGBA,
   toHsvaString,
   toRgbaString,
-  toHslaString
+  toHslaString,
+  toHexaString,
+  rgba
 } from 'seemly'
-import { h, defineComponent, PropType, Fragment } from 'vue'
+import { h, defineComponent, PropType } from 'vue'
 import { NInputGroup } from '../../input'
-import { NSelect } from '../../select'
 import ColorInputUnit from './ColorInputUnit'
 import type { ColorPickerMode } from './utils'
 
@@ -28,27 +29,17 @@ export default defineComponent({
       required: true
     },
     onUpdateMode: {
-      type: Function as PropType<(value: ColorPickerMode) => void>,
+      type: Function as PropType<() => void>,
       required: true
     }
   },
   setup (props) {
     return {
-      options: [
-        {
-          label: 'rgba',
-          value: 'rgba'
-        },
-        {
-          label: 'hsla',
-          value: 'hsla'
-        },
-        {
-          label: 'hsva',
-          value: 'hsva'
+      handleUnitUpdateValue (index: number, value: number | string) {
+        if (props.mode === 'hexa') {
+          props.onUpdateValue(toRgbaString(rgba(value as string)))
+          return
         }
-      ],
-      handleUnitUpdateValue (index: number, value: number) {
         let nextValueArr: any
         if (props.value === null) {
           nextValueArr = [0, 0, 0, 0]
@@ -73,20 +64,25 @@ export default defineComponent({
     }
   },
   render () {
-    const { value } = this
+    const { value, mode } = this
     return (
       <div class="n-color-input">
+        <div class="n-color-input__mode" onClick={this.onUpdateMode}>
+          {mode.toUpperCase()}
+        </div>
         <NInputGroup>
           {{
-            default: () => (
-              <>
-                <NSelect
-                  size="small"
-                  value={this.mode}
-                  options={this.options}
-                  onUpdateValue={this.onUpdateMode as (value: string) => void}
+            default: () =>
+              mode === 'hexa' ? (
+                <ColorInputUnit
+                  label={mode.toUpperCase()}
+                  value={value === null ? null : toHexaString(value)}
+                  onUpdateValue={(unitValue) => {
+                    this.handleUnitUpdateValue(0, unitValue)
+                  }}
                 />
-                {this.mode.split('').map((v, i) => (
+              ) : (
+                mode.split('').map((v, i) => (
                   <ColorInputUnit
                     label={v.toUpperCase()}
                     value={value === null ? null : value[i]}
@@ -94,9 +90,8 @@ export default defineComponent({
                       this.handleUnitUpdateValue(i, unitValue)
                     }}
                   />
-                ))}
-              </>
-            )
+                ))
+              )
           }}
         </NInputGroup>
       </div>
