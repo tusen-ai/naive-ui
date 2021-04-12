@@ -1,4 +1,12 @@
-import { h, defineComponent, ref, computed, PropType, toRef } from 'vue'
+import {
+  h,
+  defineComponent,
+  ref,
+  computed,
+  PropType,
+  toRef,
+  ComputedRef
+} from 'vue'
 import {
   hsv2rgb,
   rgb2hsv,
@@ -11,6 +19,7 @@ import {
   toRgbaString,
   toHsvaString,
   toHslaString,
+  toRgbString,
   HSVA,
   RGBA,
   HSLA
@@ -128,26 +137,51 @@ export default defineComponent({
     })
 
     const uncontrolledHueRef = ref<number>(0)
-    const displayedHueRef = computed(() => {
+    const displayedHueRef: ComputedRef<number> = computed(() => {
+      if (valueModeRef.value === 'rgba') {
+        const hash = getRgbString(rgbaRef.value)
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        if (hash) {
+          if (hash === cachedRgbStringRef.value) {
+            return cachedHueRef.value
+          }
+        }
+      }
       if (hsvaRef.value) return hsvaRef.value[0]
       return uncontrolledHueRef.value
     })
 
-    // const uncontrolledLvRef = ref<number>(0) // v, l in hsv, hsl
+    function getRgbString (rgba: null): null
+    function getRgbString (rgba: RGBA): string
+    function getRgbString (rgba: RGBA | null): null | string
+    function getRgbString (rgba: RGBA | null): null | string {
+      if (!rgba) return null
+      return toRgbString(rgba)
+    }
+    const cachedRgbStringRef = ref(
+      rgbaRef.value ? toRgbString(rgbaRef.value) : null
+    )
+    const cachedHueRef = ref(displayedHueRef.value)
 
     function handleUpdateSv (s: number, v: number): void {
       const { value: hsvaArr } = hsvaRef
       const hue = displayedHueRef.value
       const alpha = hsvaArr ? hsvaArr[3] : 1
+      let nextRgba: RGBA
+      let nextRgbaString: string
       switch (displayedModeRef.value) {
         case 'hsva':
           doUpdateValue(toHsvaString([hue, s, v, alpha]))
           break
-        case 'rgba':
-          doUpdateValue(toRgbaString([...hsv2rgb(hue, s, v), alpha]))
-          break
         case 'hsla':
           doUpdateValue(toHslaString([...hsv2hsl(hue, s, v), alpha]))
+          break
+        case 'rgba':
+          nextRgba = [...hsv2rgb(hue, s, v), alpha]
+          nextRgbaString = toRgbaString([...hsv2rgb(hue, s, v), alpha])
+          cachedRgbStringRef.value = toRgbString(nextRgba)
+          cachedHueRef.value = hue
+          doUpdateValue(nextRgbaString)
           break
       }
     }

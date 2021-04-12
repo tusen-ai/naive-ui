@@ -67,6 +67,7 @@ export default defineComponent({
       >
         <div
           style={{
+            userSelect: 'none',
             position: 'absolute',
             left: 0,
             right: 0,
