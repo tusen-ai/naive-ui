@@ -110,14 +110,13 @@ export default defineComponent({
   },
   render () {
     return (
-      <div class="n-color-input__unit">
-        <NInput
-          value={this.inputValue}
-          onUpdateValue={this.handleInputUpdateValue}
-          onChange={this.handleInputChange}
-        />
-        {this.label}
-      </div>
+      <NInput
+        size="small"
+        placeholder=""
+        value={this.inputValue}
+        onUpdateValue={this.handleInputUpdateValue}
+        onChange={this.handleInputChange}
+      />
     )
   }
 })

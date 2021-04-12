@@ -35,8 +35,9 @@ function useAdjustedTo (
 
 // teleport disabled key
 useAdjustedTo.tdkey = teleportDisabled
-useAdjustedTo.propTo = [String, Object, Boolean] as PropType<
-HTMLElement | string | boolean
->
+useAdjustedTo.propTo = {
+  type: [String, Object, Boolean] as PropType<HTMLElement | string | boolean>,
+  default: undefined
+}
 
 export { useAdjustedTo }

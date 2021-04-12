@@ -1,12 +1,4 @@
-import {
-  h,
-  defineComponent,
-  ref,
-  computed,
-  PropType,
-  toRef,
-  ComputedRef
-} from 'vue'
+import { h, defineComponent, ref, computed, PropType, toRef } from 'vue'
 import {
   hsv2rgb,
   rgb2hsv,
@@ -16,13 +8,15 @@ import {
   hsl2hsv,
   hsv2hsl,
   rgb2hsl,
+  hsl2rgb,
   toRgbaString,
   toHsvaString,
   toHslaString,
   toRgbString,
   HSVA,
   RGBA,
-  HSLA
+  HSLA,
+  toHslString
 } from 'seemly'
 import HueSlider from './HueSlider'
 import Pallete from './Pallete'
@@ -104,7 +98,7 @@ export default defineComponent({
           return [...hsv2rgb(h, s, v), a]
         case 'hsla':
           ;[h, s, l, a] = hsla(mergedValue)
-          return [...hsl2hsv(h, s, l), a]
+          return [...hsl2rgb(h, s, l), a]
       }
     })
 
@@ -137,50 +131,80 @@ export default defineComponent({
     })
 
     const uncontrolledHueRef = ref<number>(0)
-    const displayedHueRef: ComputedRef<number> = computed(() => {
-      if (valueModeRef.value === 'rgba') {
-        const hash = getRgbString(rgbaRef.value)
+    const shouldFollowMouseRef = computed(() => {
+      const { value: valueMode } = valueModeRef
+      console.log('cachedRgbStringRef.value', cachedRgbStringRef.value)
+      console.log('cachedHslStringRef.value', cachedHslStringRef.value)
+      if (valueMode === null) return true
+      if (valueMode === 'rgba') {
+        const { value } = rgbaRef
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        if (hash) {
-          if (hash === cachedRgbStringRef.value) {
-            return cachedHueRef.value
-          }
+        if (value && cachedRgbStringRef.value === toRgbString(value)) {
+          return true
+        }
+      } else if (valueMode === 'hsla') {
+        const { value } = hslaRef
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        if (value && cachedHslStringRef.value === toHslString(value)) {
+          return true
         }
       }
-      if (hsvaRef.value) return hsvaRef.value[0]
+      return false
+    })
+    const displayedHueRef = computed(() => {
+      if (shouldFollowMouseRef.value) {
+        return cachedHueRef.value
+      }
+      const { value } = hsvaRef
+      if (value) return value[0]
       return uncontrolledHueRef.value
     })
 
-    function getRgbString (rgba: null): null
-    function getRgbString (rgba: RGBA): string
-    function getRgbString (rgba: RGBA | null): null | string
-    function getRgbString (rgba: RGBA | null): null | string {
-      if (!rgba) return null
-      return toRgbString(rgba)
-    }
-    const cachedRgbStringRef = ref(
-      rgbaRef.value ? toRgbString(rgbaRef.value) : null
-    )
-    const cachedHueRef = ref(displayedHueRef.value)
+    // If you move in pallete, which means s, v in hsv is updated
+    // In hsv mode, everthing is fine. Howerer in hsl & rgb mode, the controlled
+    // value's change outside the component may cause cursor shifting!
+    //
+    // Before mousemove, everything is ok.
+    // During mousemove, I think the position should follows cursor if the
+    // controlled value outside is really the expected value.
+    //
+    // props.value rgba     => hsv(old cursor position) => new hsv => new rgba (cache)
+    // props.value new rgba => hsv(new cursor postion)
+    // If new rgba is the same as the cached new rgba, the cursor should follow
+    // mouse but not the new hsv value
+    // Also the hue slider will be influenced by rgba value.
+    // For hsl mode, keep the same way too.
+    const { value: initRgba } = rgbaRef
+    const { value: initHsla } = hslaRef
+    const { value: initHsva } = hsvaRef
+    const cachedRgbStringRef = ref(initRgba ? toRgbString(initRgba) : null)
+    const cachedHslStringRef = ref(initHsla ? toHslString(initHsla) : null)
+    const cachedHueRef = ref(initHsva?.[0] || uncontrolledHueRef.value)
 
     function handleUpdateSv (s: number, v: number): void {
       const { value: hsvaArr } = hsvaRef
       const hue = displayedHueRef.value
       const alpha = hsvaArr ? hsvaArr[3] : 1
       let nextRgba: RGBA
+      let nextHsla: HSLA
       let nextRgbaString: string
+      let nextHslaString: string
       switch (displayedModeRef.value) {
         case 'hsva':
           doUpdateValue(toHsvaString([hue, s, v, alpha]))
           break
         case 'hsla':
-          doUpdateValue(toHslaString([...hsv2hsl(hue, s, v), alpha]))
+          nextHsla = [...hsv2hsl(hue, s, v), alpha]
+          nextHslaString = toHslaString(nextHsla)
+          cachedHslStringRef.value = toHslString(nextHsla)
+          cachedHueRef.value = displayedHueRef.value
+          doUpdateValue(nextHslaString)
           break
         case 'rgba':
           nextRgba = [...hsv2rgb(hue, s, v), alpha]
           nextRgbaString = toRgbaString([...hsv2rgb(hue, s, v), alpha])
           cachedRgbStringRef.value = toRgbString(nextRgba)
-          cachedHueRef.value = hue
+          cachedHueRef.value = displayedHueRef.value
           doUpdateValue(nextRgbaString)
           break
       }
@@ -201,7 +225,7 @@ export default defineComponent({
           doUpdateValue(toRgbaString([...hsv2rgb(hue, s, v), a]))
           break
         case 'hsla':
-          doUpdateValue(toRgbaString([...hsv2hsl(hue, s, v), a]))
+          doUpdateValue(toHslaString([...hsv2hsl(hue, s, v), a]))
           break
       }
     }
@@ -220,6 +244,8 @@ export default defineComponent({
     return {
       mergedValue: mergedValueRef, // debug
       hsva: hsvaRef,
+      rgba: rgbaRef,
+      shouldFollowMouse: shouldFollowMouseRef,
       displayedHue: displayedHueRef,
       displayedMode: displayedModeRef,
       mergedValueArr: mergedValueArrRef,
@@ -231,20 +257,32 @@ export default defineComponent({
   },
   render () {
     return (
-      <div>
+      <div
+        class="n-color-picker-panel"
+        style={{
+          width: '180px'
+        }}
+      >
         <div>value: {this.mergedValue}</div>
         <Pallete
           hsva={this.hsva}
+          rgba={this.rgba}
+          shouldFollowMouse={this.shouldFollowMouse}
           displayedHue={this.displayedHue}
           onUpdateSV={this.handleUpdateSv}
         />
-        <HueSlider hue={this.displayedHue} onUpdateHue={this.handleUpdateHue} />
-        <ColorInput
-          mode={this.displayedMode}
-          onUpdateMode={this.handleUpdateDisplayedMode}
-          value={this.mergedValueArr}
-          onUpdateValue={this.handleInputUpdateValue}
-        />
+        <div class="n-color-picker-control">
+          <HueSlider
+            hue={this.displayedHue}
+            onUpdateHue={this.handleUpdateHue}
+          />
+          <ColorInput
+            mode={this.displayedMode}
+            onUpdateMode={this.handleUpdateDisplayedMode}
+            value={this.mergedValueArr}
+            onUpdateValue={this.handleInputUpdateValue}
+          />
+        </div>
       </div>
     )
   }

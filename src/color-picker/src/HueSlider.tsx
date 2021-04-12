@@ -33,7 +33,7 @@ export default defineComponent({
       if (!railEl) return
       const { width, left } = railEl.getBoundingClientRect()
       const newHue = Math.floor(((e.clientX - left) / width) * 360)
-      props.onUpdateHue(newHue > 360 ? 360 : newHue < 0 ? 0 : newHue)
+      props.onUpdateHue(newHue >= 360 ? 359 : newHue < 0 ? 0 : newHue)
     }
     function handleMouseUp (): void {
       off('mousemove', document, handleMouseMove)
@@ -46,10 +46,17 @@ export default defineComponent({
   },
   render () {
     return (
-      <div class="n-hue-slider">
+      <div
+        class="n-hue-slider"
+        style={{
+          marginBottom: '8px'
+        }}
+      >
         <div
           ref="railRef"
           style={{
+            boxShadow: 'inset 0 0 2px 0 rgba(0, 0, 0, .24)',
+            boxSizing: 'border-box',
             backgroundImage: GRADIENT,
             height: HANDLE_SIZE,
             borderRadius: RADIUS,
@@ -72,10 +79,10 @@ export default defineComponent({
               style={{
                 userSelect: 'none',
                 position: 'absolute',
-                top: 0,
-                left: `calc((${this.hue}%) / 18 * 5 - ${RADIUS})`,
+                boxShadow: 'rgb(0 0 0 / 20%) 0px 0px 0px 1px',
+                left: `calc((${this.hue}%) / 359 * 100 - ${RADIUS})`,
                 boxSizing: 'border-box',
-                border: '2px solid black',
+                border: '2px solid white',
                 backgroundColor: `hsl(${this.hue}, 100%, 50%)`,
                 borderRadius: RADIUS,
                 width: HANDLE_SIZE,

@@ -13,11 +13,16 @@ export default defineComponent({
       type: (Array as unknown) as PropType<HSVA | null>,
       default: null
     },
+    rgba: {
+      type: (Array as unknown) as PropType<HSVA | null>,
+      default: null
+    },
     // 0 - 360
     displayedHue: {
       type: Number,
       required: true
     },
+    shouldFollowMouse: Boolean,
     onUpdateSV: {
       type: Function as PropType<(s: number, v: number) => void>,
       required: true
@@ -25,6 +30,12 @@ export default defineComponent({
   },
   setup (props) {
     const palleteRef = ref<HTMLElement | null>(null)
+    const cachedLeftRef = ref('0')
+    const cachedBottomRef = ref('0')
+    function derivePosition (newS: number, newV: number): void {
+      cachedLeftRef.value = `calc(${newS}% - ${RADIUS})`
+      cachedBottomRef.value = `calc(${newV}% - ${RADIUS})`
+    }
     function handleMouseDown (e: MouseEvent): void {
       if (!palleteRef.value) return
       on('mousemove', document, handleMouseMove)
@@ -37,11 +48,10 @@ export default defineComponent({
       const { width, height, left, bottom } = palleteEl.getBoundingClientRect()
       const newV = (bottom - e.clientY) / height
       const newS = (e.clientX - left) / width
-
-      props.onUpdateSV(
-        100 * (newS > 100 ? 1 : newS < 0 ? 0 : newS),
-        100 * (newV > 100 ? 1 : newV < 0 ? 0 : newV)
-      )
+      const normalizedNewS = 100 * (newS > 1 ? 1 : newS < 0 ? 0 : newS)
+      const normalizedNewV = 100 * (newV > 1 ? 1 : newV < 0 ? 0 : newV)
+      derivePosition(normalizedNewS, normalizedNewV)
+      props.onUpdateSV(normalizedNewS, normalizedNewV)
     }
     function handleMouseUp (): void {
       off('mousemove', document, handleMouseMove)
@@ -50,10 +60,27 @@ export default defineComponent({
     return {
       palleteRef,
       handleColor: computed(() => {
-        // const [r, g, b] = hsv2rgb(props.hue, props.s, props.v)
-        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        // return `rgb(${r}, ${g}, ${b})`
-        return 'transparent'
+        const { rgba } = props
+        if (!rgba) return ''
+        return `rgb(${rgba[0]}, ${rgba[1]}, ${rgba[2]})`
+      }),
+      position: computed(() => {
+        if (props.shouldFollowMouse) {
+          return {
+            left: cachedLeftRef.value,
+            bottom: cachedBottomRef.value
+          }
+        }
+        if (!props.hsva) {
+          return {
+            left: '0',
+            bottom: '0'
+          }
+        }
+        return {
+          left: `calc(${props.hsva[1]}% - ${RADIUS})`,
+          bottom: `calc(${props.hsva[2]}% - ${RADIUS})`
+        }
       }),
       handleMouseDown
     }
@@ -61,7 +88,7 @@ export default defineComponent({
   render () {
     return (
       <div
-        style="height: 300px; position: relative;"
+        style="height: 180px; position: relative; margin-bottom: 8px;"
         onMousedown={this.handleMouseDown}
         ref="palleteRef"
       >
@@ -85,7 +112,8 @@ export default defineComponent({
             top: 0,
             bottom: 0,
             backgroundImage:
-              'linear-gradient(180deg, rgba(0, 0, 0, 0%), rgba(0, 0, 0, 100%))'
+              'linear-gradient(180deg, rgba(0, 0, 0, 0%), rgba(0, 0, 0, 100%))',
+            boxShadow: 'inset 0 0 2px 0 rgba(0, 0, 0, .24)'
           }}
         />
         {this.hsva && (
@@ -99,10 +127,9 @@ export default defineComponent({
               boxSizing: 'border-box',
               border: '2px solid white',
               position: 'absolute',
-              // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-              left: `calc(${this.hsva[1]}% - ${RADIUS})`,
-              // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-              bottom: `calc(${this.hsva[2]}% - ${RADIUS})`
+              boxShadow: 'rgb(0 0 0 / 20%) 0px 0px 0px 1px',
+              left: this.position.left,
+              bottom: this.position.bottom
             }}
           />
         )}

@@ -40,8 +40,10 @@ export interface SelectIgnoredOption {
 
 export type ValueAtom = string | number
 export type Value = ValueAtom | string[] | number[] | ValueAtom[]
-export type OnUpdateValue = <
-  T extends ValueAtom &
+export type OnUpdateValue = (
+  value: string &
+  number &
+  ValueAtom &
   string[] &
   number[] &
   ValueAtom[] &
@@ -49,11 +51,9 @@ export type OnUpdateValue = <
   (string[] | null) &
   (number[] | null) &
   (ValueAtom[] | null)
->(
-  value: T
 ) => void
-export type OnUpdateValueImpl = <
-  T extends
+export type OnUpdateValueImpl = (
+  value:
   | ValueAtom
   | string[]
   | number[]
@@ -62,8 +62,6 @@ export type OnUpdateValueImpl = <
   | (string[] | null)
   | (number[] | null)
   | (ValueAtom[] | null)
->(
-  value: T
 ) => void
 export type SelectTreeMate = TreeMate<
 SelectBaseOption,

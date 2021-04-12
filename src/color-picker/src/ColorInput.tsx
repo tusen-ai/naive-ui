@@ -6,7 +6,9 @@ import {
   toRgbaString,
   toHslaString
 } from 'seemly'
-import { h, defineComponent, PropType } from 'vue'
+import { h, defineComponent, PropType, Fragment } from 'vue'
+import { NInputGroup } from '../../input'
+import { NSelect } from '../../select'
 import ColorInputUnit from './ColorInputUnit'
 import type { ColorPickerMode } from './utils'
 
@@ -32,6 +34,20 @@ export default defineComponent({
   },
   setup (props) {
     return {
+      options: [
+        {
+          label: 'rgba',
+          value: 'rgba'
+        },
+        {
+          label: 'hsla',
+          value: 'hsla'
+        },
+        {
+          label: 'hsva',
+          value: 'hsva'
+        }
+      ],
       handleUnitUpdateValue (index: number, value: number) {
         let nextValueArr: any
         if (props.value === null) {
@@ -60,26 +76,29 @@ export default defineComponent({
     const { value } = this
     return (
       <div class="n-color-input">
-        {this.mode}
-        <select
-          value={this.mode}
-          onChange={(e) => {
-            this.onUpdateMode((e.target as any).value)
+        <NInputGroup>
+          {{
+            default: () => (
+              <>
+                <NSelect
+                  size="small"
+                  value={this.mode}
+                  options={this.options}
+                  onUpdateValue={this.onUpdateMode as (value: string) => void}
+                />
+                {this.mode.split('').map((v, i) => (
+                  <ColorInputUnit
+                    label={v.toUpperCase()}
+                    value={value === null ? null : value[i]}
+                    onUpdateValue={(unitValue) => {
+                      this.handleUnitUpdateValue(i, unitValue)
+                    }}
+                  />
+                ))}
+              </>
+            )
           }}
-        >
-          <option value="rgba">rgba</option>
-          <option value="hsla">hsla</option>
-          <option value="hsva">hsva</option>
-        </select>
-        {this.mode.split('').map((v, i) => (
-          <ColorInputUnit
-            label={v.toUpperCase()}
-            value={value === null ? null : value[i]}
-            onUpdateValue={(unitValue) => {
-              this.handleUnitUpdateValue(i, unitValue)
-            }}
-          />
-        ))}
+        </NInputGroup>
       </div>
     )
   }
