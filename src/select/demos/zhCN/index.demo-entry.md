@@ -43,6 +43,7 @@ menu-debug
 | placeholder | `string` | `'请选择'` |  |
 | remote | `boolean` | `false` | 是否要异步获取选项。注意如果设定了，那么 `fitler` 和 `tag` 都不会对 `options` 生效。这个时候你在全权控制 `options` |
 | show | `boolean` | `undefined` | 是否展示菜单 |
+| show-arrow | `boolean` | `true` | 是否展示箭头 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | tag | `boolean` | `false` | 是否可以创建新的选项，需要和 `filterable` 一起使用 |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` |  |

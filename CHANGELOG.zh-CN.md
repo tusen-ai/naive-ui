@@ -7,6 +7,7 @@
 - 添加 `n-skeleton` 组件
 - 添加 `n-calendar` 组件
 - `n-date-picker` locale 增加 `firstDayOfWeek`
+- `n-select` 增加 `showArrow` 属性
 
 ### Fixes
 

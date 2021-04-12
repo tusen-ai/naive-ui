@@ -7,6 +7,7 @@
 - Add `n-skeleton` component.
 - Add `n-calendar` comopnent.
 - `n-date-picker` locale add `firstDayOfWeek`.
+- `n-select` add `showArrow` prop.
 
 ### Fixes
 

@@ -135,6 +135,10 @@ export default defineComponent({
       type: Boolean,
       default: undefined
     },
+    showArrow: {
+      type: Boolean,
+      default: true
+    },
     maxTagCount: [Number, String] as PropType<number | 'responsive'>,
     // eslint-disable-next-line vue/prop-name-casing
     'onUpdate:value': [Function, Array] as PropType<
@@ -681,6 +685,7 @@ export default defineComponent({
                   default: () => (
                     <NInternalSelection
                       ref="triggerRef"
+                      showArrow={this.showArrow}
                       maxTagCount={this.maxTagCount}
                       bordered={this.mergedBordered}
                       active={this.mergedShow}

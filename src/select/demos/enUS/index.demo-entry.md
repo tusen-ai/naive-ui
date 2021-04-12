@@ -40,6 +40,7 @@ max-tag-count
 | placeholder | `string` | `'Please Select'` |  |
 | remote | `boolean` | `false` | If you want to async get options. Note that if remote is set, `filter` & `tag` won't work on `options`. At that time, you are taking all control of `options`. |
 | show | `boolean` | `undefined` | Whether to show menu. |
+| show-arrow | `boolean` | `true` | Whether to show arrow. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | tag | `boolean` | `false` | Whether it can create new option, should be used with `filterable`. |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` |  |
