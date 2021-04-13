@@ -12,7 +12,8 @@ import {
   CSSProperties,
   provide,
   InjectionKey,
-  ComputedRef
+  ComputedRef,
+  ExtractPropTypes
 } from 'vue'
 import {
   hsv2rgb,
@@ -32,22 +33,22 @@ import {
   HSLA,
   toHexaString
 } from 'seemly'
+import { useIsMounted, useMergedState } from 'vooks'
+import { VBinder, VFollower, VTarget } from 'vueuc'
+import { clickoutside } from 'vdirs'
+import { colorPickerLight } from '../styles'
+import type { ColorPickerTheme } from '../styles'
+import type { MergedTheme, ThemeProps } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
+import { call, MaybeArray, useAdjustedTo } from '../../_utils'
 import HueSlider from './HueSlider'
 import AlphaSlider from './AlphaSlider'
 import Pallete from './Pallete'
 import ColorInput from './ColorInput'
-import style from './styles/index.cssr'
-import type { MergedTheme, ThemeProps } from '../../_mixins'
-import { useConfig, useTheme } from '../../_mixins'
-import { useIsMounted, useMergedState } from 'vooks'
-import { call, MaybeArray, useAdjustedTo } from '../../_utils'
+import ColorPickerTrigger from './ColorPickerTrigger'
 import { getModeFromValue } from './utils'
 import type { ColorPickerMode } from './utils'
-import { VBinder, VFollower, VTarget } from 'vueuc'
-import ColorPickerTrigger from './ColorPickerTrigger'
-import { clickoutside } from 'vdirs'
-import { colorPickerLight } from '../styles'
-import type { ColorPickerTheme } from '../styles'
+import style from './styles/index.cssr'
 
 export const colorPickerPanelProps = {
   ...(useTheme.props as ThemeProps<ColorPickerTheme>),
@@ -62,7 +63,7 @@ export const colorPickerPanelProps = {
   },
   defaultValue: {
     type: String as PropType<string | null>,
-    default: null
+    default: '#000000'
   },
   modes: {
     type: Array as PropType<ColorPickerMode[]>,
@@ -84,6 +85,10 @@ export const colorPickerPanelProps = {
   MaybeArray<(value: string) => void>
   >
 } as const
+
+export type ColorPickerProps = Partial<
+ExtractPropTypes<typeof colorPickerPanelProps>
+>
 
 export const colorPickerThemeInjectionKey: InjectionKey<
 ComputedRef<MergedTheme<ColorPickerTheme>>
@@ -272,8 +277,10 @@ export default defineComponent({
           doUpdateValue(toHsvaString([hue, s, v, a]), 'cursor')
           break
         case 'rgba':
-        case 'hexa':
           doUpdateValue(toRgbaString([...hsv2rgb(hue, s, v), a]), 'cursor')
+          break
+        case 'hexa':
+          doUpdateValue(toHexaString([...hsv2rgb(hue, s, v), a]), 'cursor')
           break
         case 'hsla':
           doUpdateValue(toHslaString([...hsv2hsl(hue, s, v), a]), 'cursor')
@@ -289,10 +296,14 @@ export default defineComponent({
           doUpdateValue(toHsvaString([_h, s, v, alpha]), 'cursor')
           break
         case 'rgba':
-        case 'hexa':
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           ;[r, g, b] = rgbaRef.value!
           doUpdateValue(toRgbaString([r, g, b, alpha]), 'cursor')
+          break
+        case 'hexa':
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          ;[r, g, b] = rgbaRef.value!
+          doUpdateValue(toHexaString([r, g, b, alpha]), 'cursor')
           break
         case 'hsla':
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

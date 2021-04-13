@@ -1,9 +1,13 @@
+import { inputDark } from '../../input/styles'
 import { commonDark } from '../../_styles/common'
 import type { ColorPickerTheme } from './light'
 
 const colorPickerDark: ColorPickerTheme = {
   name: 'ColorPicker',
   common: commonDark,
+  peers: {
+    Input: inputDark
+  },
   self (vars) {
     const {
       fontSize,
