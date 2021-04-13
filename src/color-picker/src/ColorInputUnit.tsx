@@ -1,5 +1,6 @@
-import { defineComponent, h, PropType, ref, watchEffect } from 'vue'
+import { defineComponent, h, inject, PropType, ref, watchEffect } from 'vue'
 import { NInput } from '../../input'
+import { colorPickerThemeInjectionKey } from './ColorPicker'
 
 // 0 - 255
 function normalizeRgbUnit (value: string): number | false {
@@ -60,6 +61,8 @@ export default defineComponent({
   },
   setup (props) {
     const inputValueRef = ref<string>('')
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const themeRef = inject(colorPickerThemeInjectionKey, null)!
     watchEffect(() => {
       inputValueRef.value = getInputString()
     })
@@ -129,16 +132,20 @@ export default defineComponent({
       }
     }
     return {
+      mergedTheme: themeRef,
       inputValue: inputValueRef,
       handleInputChange,
       handleInputUpdateValue
     }
   },
   render () {
+    const { mergedTheme } = this
     return (
       <NInput
         size="small"
         placeholder={this.label}
+        theme={mergedTheme.peers.Input}
+        themeOverrides={mergedTheme.peerOverrides.Input}
         builtinThemeOverrides={inputThemeOverrides}
         value={this.inputValue}
         onUpdateValue={this.handleInputUpdateValue}

@@ -4,6 +4,7 @@ export const modes: ColorPickerMode[] = ['rgba', 'hsla', 'hsva']
 
 export function getModeFromValue (color: string | null): ColorPickerMode | null {
   if (color === null) return null
+  if (/^ *#/.test(color)) return 'hexa'
   for (const mode of modes) {
     if (color.includes(mode)) {
       return mode

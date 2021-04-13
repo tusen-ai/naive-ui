@@ -9,7 +9,10 @@ import {
   VNode,
   withDirectives,
   Transition,
-  CSSProperties
+  CSSProperties,
+  provide,
+  InjectionKey,
+  ComputedRef
 } from 'vue'
 import {
   hsv2rgb,
@@ -26,15 +29,15 @@ import {
   toHslaString,
   HSVA,
   RGBA,
-  HSLA
+  HSLA,
+  toHexaString
 } from 'seemly'
 import HueSlider from './HueSlider'
 import AlphaSlider from './AlphaSlider'
 import Pallete from './Pallete'
-import type { PalleteInst } from './Pallete'
 import ColorInput from './ColorInput'
 import style from './styles/index.cssr'
-import type { ThemeProps } from '../../_mixins'
+import type { MergedTheme, ThemeProps } from '../../_mixins'
 import { useConfig, useTheme } from '../../_mixins'
 import { useIsMounted, useMergedState } from 'vooks'
 import { call, MaybeArray, useAdjustedTo } from '../../_utils'
@@ -61,6 +64,11 @@ export const colorPickerPanelProps = {
     type: String as PropType<string | null>,
     default: null
   },
+  modes: {
+    type: Array as PropType<ColorPickerMode[]>,
+    // no hsva by default since browser doesn't support it
+    default: ['rgba', 'hexa', 'hsla']
+  },
   to: useAdjustedTo.propTo,
   onComplete: Function as PropType<(value: string) => void>,
   'onUpdate:show': [Function, Array] as PropType<
@@ -77,11 +85,14 @@ export const colorPickerPanelProps = {
   >
 } as const
 
+export const colorPickerThemeInjectionKey: InjectionKey<
+ComputedRef<MergedTheme<ColorPickerTheme>>
+> = Symbol('colorPickerThemeInjection')
+
 export default defineComponent({
   name: 'ColorPicker',
   props: colorPickerPanelProps,
   setup (props) {
-    const palleteInstRef = ref<PalleteInst | null>(null)
     const selfRef = ref<HTMLElement | null>(null)
     let upcomingValue: string | null = null
 
@@ -92,6 +103,9 @@ export default defineComponent({
       colorPickerLight,
       props
     )
+
+    provide(colorPickerThemeInjectionKey, themeRef)
+
     const uncontrolledShowRef = ref(props.defaultShow)
     const mergedShowRef = useMergedState(
       toRef(props, 'show'),
@@ -117,20 +131,35 @@ export default defineComponent({
     )
 
     function handleUpdateDisplayedMode (): void {
+      const { modes } = props
       const { value: displayedMode } = displayedModeRef
       switch (displayedMode) {
         case 'rgba':
-          displayedModeRef.value = 'hexa'
-          break
+          if (modes.includes('hexa')) {
+            displayedModeRef.value = 'hexa'
+            break
+          }
+        // eslint-disable-next-line no-fallthrough
         case 'hexa':
-          displayedModeRef.value = 'hsva'
-          break
+          if (modes.includes('hsva')) {
+            displayedModeRef.value = 'hsva'
+            break
+          }
+        // eslint-disable-next-line no-fallthrough
         case 'hsva':
-          displayedModeRef.value = 'hsla'
-          break
+          if (modes.includes('hsla')) {
+            displayedModeRef.value = 'hsla'
+            break
+          }
+        // eslint-disable-next-line no-fallthrough
         case 'hsla':
+          if (modes.includes('rgba')) {
+            displayedModeRef.value = 'rgba'
+            break
+          }
+        // eslint-disable-next-line no-fallthrough
+        default:
           displayedModeRef.value = 'rgba'
-          break
       }
     }
 
@@ -208,11 +237,13 @@ export default defineComponent({
 
     const displayedHueRef = ref<number>(0)
     const displayedAlphaRef = ref<number>(1)
+    const displayedSvRef = ref<[number, number]>([0, 0])
 
     function handleUpdateSv (s: number, v: number): void {
       const { value: hsvaArr } = hsvaRef
       const hue = displayedHueRef.value
       const alpha = hsvaArr ? hsvaArr[3] : 1
+      displayedSvRef.value = [s, v]
       switch (displayedModeRef.value) {
         case 'hsva':
           doUpdateValue(toHsvaString([hue, s, v, alpha]), 'cursor')
@@ -221,8 +252,10 @@ export default defineComponent({
           doUpdateValue(toHslaString([...hsv2hsl(hue, s, v), alpha]), 'cursor')
           break
         case 'rgba':
-        case 'hexa':
           doUpdateValue(toRgbaString([...hsv2rgb(hue, s, v), alpha]), 'cursor')
+          break
+        case 'hexa':
+          doUpdateValue(toHexaString([...hsv2rgb(hue, s, v), alpha]), 'cursor')
           break
       }
     }
@@ -306,7 +339,7 @@ export default defineComponent({
         if (value) {
           displayedHueRef.value = value[0]
           displayedAlphaRef.value = value[3]
-          palleteInstRef.value?.setSv(value[1], value[2])
+          displayedSvRef.value = [value[1], value[2]]
         }
       }
       upcomingValue = null
@@ -330,7 +363,6 @@ export default defineComponent({
 
     function renderPanel (): VNode {
       const { value: rgba } = rgbaRef
-      const { value: displayedMode } = displayedModeRef
       const { value: displayedHue } = displayedHueRef
       return (
         <div
@@ -341,9 +373,9 @@ export default defineComponent({
           style={cssVarsRef.value as CSSProperties}
         >
           <Pallete
-            ref={palleteInstRef}
             rgba={rgba}
             displayedHue={displayedHue}
+            displayedSv={displayedSvRef.value}
             onUpdateSV={handleUpdateSv}
             onComplete={handleComplete}
           />
@@ -360,7 +392,7 @@ export default defineComponent({
               onComplete={handleComplete}
             />
             <ColorInput
-              mode={displayedMode}
+              mode={displayedModeRef.value}
               onUpdateMode={handleUpdateDisplayedMode}
               value={mergedValueArrRef.value}
               onUpdateValue={handleInputUpdateValue}

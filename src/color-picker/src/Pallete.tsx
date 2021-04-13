@@ -2,10 +2,6 @@ import { HSVA } from 'seemly'
 import { on, off } from 'evtd'
 import { computed, defineComponent, h, PropType, ref } from 'vue'
 
-export interface PalleteInst {
-  setSv: (s: number, v: number) => void
-}
-
 const HANDLE_SIZE = '12px'
 const RADIUS = '6px'
 
@@ -21,6 +17,10 @@ export default defineComponent({
       type: Number,
       required: true
     },
+    displayedSv: {
+      type: (Array as unknown) as PropType<[number, number]>,
+      required: true
+    },
     onUpdateSV: {
       type: Function as PropType<(s: number, v: number) => void>,
       required: true
@@ -29,12 +29,6 @@ export default defineComponent({
   },
   setup (props) {
     const palleteRef = ref<HTMLElement | null>(null)
-    const sRef = ref(0)
-    const vRef = ref(0)
-    function setSv (s: number, v: number): void {
-      sRef.value = s
-      vRef.value = v
-    }
     function handleMouseDown (e: MouseEvent): void {
       if (!palleteRef.value) return
       on('mousemove', document, handleMouseMove)
@@ -49,7 +43,6 @@ export default defineComponent({
       const newS = (e.clientX - left) / width
       const normalizedNewS = 100 * (newS > 1 ? 1 : newS < 0 ? 0 : newS)
       const normalizedNewV = 100 * (newV > 1 ? 1 : newV < 0 ? 0 : newV)
-      setSv(normalizedNewS, normalizedNewV)
       props.onUpdateSV(normalizedNewS, normalizedNewV)
     }
     function handleMouseUp (): void {
@@ -64,10 +57,7 @@ export default defineComponent({
         if (!rgba) return ''
         return `rgb(${rgba[0]}, ${rgba[1]}, ${rgba[2]})`
       }),
-      s: sRef,
-      v: vRef,
-      handleMouseDown,
-      setSv
+      handleMouseDown
     }
   },
   render () {
@@ -98,8 +88,8 @@ export default defineComponent({
               width: HANDLE_SIZE,
               height: HANDLE_SIZE,
               borderRadius: RADIUS,
-              left: `calc(${this.s}% - ${RADIUS})`,
-              bottom: `calc(${this.v}% - ${RADIUS})`
+              left: `calc(${this.displayedSv[0]}% - ${RADIUS})`,
+              bottom: `calc(${this.displayedSv[1]}% - ${RADIUS})`
             }}
           >
             <div
