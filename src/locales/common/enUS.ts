@@ -75,6 +75,16 @@ const enUS = {
   },
   DynamicInput: {
     create: 'Create'
+  },
+  ThemeEditor: {
+    title: 'Theme Editor',
+    clearAllVars: 'Clear All Variables',
+    clearSearch: 'Clear Search',
+    filterCompName: 'Filter Component Name',
+    filterVarName: 'Filter Variable Name',
+    import: 'Import',
+    export: 'Export',
+    restore: 'Reset to Default'
   }
 }
 

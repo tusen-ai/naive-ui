@@ -105,7 +105,7 @@ ComputedRef<MergedTheme<ColorPickerTheme>>
 export default defineComponent({
   name: 'ColorPicker',
   props: colorPickerPanelProps,
-  setup (props) {
+  setup (props, { slots }) {
     const selfRef = ref<HTMLElement | null>(null)
     let upcomingValue: string | null = null
 
@@ -482,7 +482,9 @@ export default defineComponent({
               onUpdateValue={handleInputUpdateValue}
             />
           </div>
-          {internalActions ? (
+          {slots.action ? (
+            <div class="n-color-picker-action">{{ default: slots.action }}</div>
+          ) : internalActions ? (
             <div class="n-color-picker-action">
               {internalActions.includes('undo') && (
                 <NButton

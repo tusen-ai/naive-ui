@@ -77,6 +77,16 @@ const zhCN: NLocale = {
   },
   DynamicInput: {
     create: '添加'
+  },
+  ThemeEditor: {
+    title: '主题编辑器',
+    clearAllVars: '清除全部变量',
+    clearSearch: '清除搜索',
+    filterCompName: '过滤组件名',
+    filterVarName: '过滤变量名',
+    import: '导入',
+    export: '导出',
+    restore: '恢复默认'
   }
 }
 

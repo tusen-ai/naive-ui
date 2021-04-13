@@ -26,6 +26,7 @@ const oppositePlacement = {
 export default c([
   cB('popover', `
     transition:
+      box-shadow .3s var(--bezier),
       background-color .3s var(--bezier),
       color .3s var(--bezier);
     transform-origin: inherit;

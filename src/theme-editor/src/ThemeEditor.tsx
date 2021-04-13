@@ -9,7 +9,7 @@ import {
   watch
 } from 'vue'
 import { cloneDeep, merge } from 'lodash-es'
-import { rgba } from 'seemly'
+import { lightTheme } from '../../themes/light'
 import {
   GlobalTheme,
   GlobalThemeOverrides,
@@ -20,13 +20,12 @@ import { NScrollbar } from '../../scrollbar'
 import { NCollapse, NCollapseItem } from '../../collapse'
 import { NInput } from '../../input'
 import { NSpace } from '../../space'
-import { lightTheme } from '../../themes/light'
-import { useConfig } from '../../_mixins'
-import { NEmpty } from '../../empty'
+import { useConfig, useLocale } from '../../_mixins'
 import { NElement } from '../../element'
 import { NDivider } from '../../divider'
 import { NButton } from '../../button'
 import { NColorPicker } from '../../color-picker'
+import { NEmpty } from '../../empty'
 
 const ColorWandIcon = (
   <svg
@@ -53,8 +52,6 @@ const ColorWandIcon = (
     ></path>
   </svg>
 )
-
-const colorPickerActions = ['undo', 'redo'] as const
 
 export default defineComponent({
   name: 'ThemeEditor',
@@ -89,6 +86,9 @@ export default defineComponent({
       }
       return overrides
     })
+    const themeCommonDefaultRef = computed(() => {
+      return NConfigProvider?.mergedTheme?.common || lightTheme.common
+    })
     const showPanelRef = ref(false)
     const overridesRef = ref<any>(
       JSON.parse(localStorage['naive-ui-theme-overrides'] || '{}')
@@ -100,26 +100,7 @@ export default defineComponent({
     const compNamePatternRef = ref('')
     const tempVarNamePatternRef = ref('')
     const tempCompNamePatternRef = ref('')
-    function applyTempOverrides (
-      compName: string,
-      varName: string,
-      value: string
-    ): void {
-      if (value && (varName.includes('color') || varName.includes('Color'))) {
-        try {
-          rgba(value)
-        } catch {
-          setTempOverrides(
-            compName,
-            varName,
-            overridesRef.value?.[compName]?.[varName] || ''
-          )
-          alert(
-            `${compName}.${varName} '${value}' is invalid Color. Only #000[0], #000000[00], rgb(0, 0, 0), rgba(0, 0, 0, 0) formatted color is supported.`
-          )
-          return
-        }
-      }
+    function applyTempOverrides (): void {
       overridesRef.value = cloneDeep(toRaw(tempOverridesRef.value))
     }
     function setTempOverrides (
@@ -182,6 +163,8 @@ export default defineComponent({
       localStorage['naive-ui-theme-overrides'] = JSON.stringify(value)
     })
     return {
+      ...useLocale('ThemeEditor'),
+      themeCommonDefault: themeCommonDefaultRef,
       theme,
       showPanel: showPanelRef,
       tempOverrides: tempOverridesRef,
@@ -274,9 +257,9 @@ export default defineComponent({
                                       fontWeight: 500
                                     }}
                                   >
-                                    Theme Editor
+                                    {this.locale.title}
                                   </div>
-                                  Component Name
+                                  {this.locale.filterCompName}
                                   <NInput
                                     onChange={() => {
                                       this.compNamePattern = this.tempCompNamePattern
@@ -285,9 +268,9 @@ export default defineComponent({
                                       this.tempCompNamePattern = value
                                     }}
                                     value={this.tempCompNamePattern}
-                                    placeholder="Filter Component Name"
+                                    placeholder={this.locale.filterCompName}
                                   />
-                                  Filter Variable Name
+                                  {this.locale.filterVarName}
                                   <NInput
                                     onChange={(value: string) => {
                                       this.varNamePattern = value
@@ -296,7 +279,7 @@ export default defineComponent({
                                       this.tempVarNamePattern = value
                                     }}
                                     value={this.tempVarNamePattern}
-                                    placeholder="Filter Variable Name"
+                                    placeholder={this.locale.filterVarName}
                                   />
                                   <NButton
                                     size="small"
@@ -308,14 +291,16 @@ export default defineComponent({
                                     }}
                                     block
                                   >
-                                    {{ default: () => 'Clear Search' }}
+                                    {{ default: () => this.locale.clearSearch }}
                                   </NButton>
                                   <NButton
                                     size="small"
                                     onClick={this.handleClearAllClick}
                                     block
                                   >
-                                    {{ default: () => 'Clear All Variables' }}
+                                    {{
+                                      default: () => this.locale.clearAllVars
+                                    }}
                                   </NButton>
                                   <NSpace itemStyle={{ flex: 1 }}>
                                     {{
@@ -326,14 +311,18 @@ export default defineComponent({
                                             size="small"
                                             onClick={this.handleImportClick}
                                           >
-                                            {{ default: () => 'Import' }}
+                                            {{
+                                              default: () => this.locale.import
+                                            }}
                                           </NButton>
                                           <NButton
                                             block
                                             size="small"
                                             onClick={this.handleExportClick}
                                           >
-                                            {{ default: () => 'Export' }}
+                                            {{
+                                              default: () => this.locale.export
+                                            }}
                                           </NButton>
                                         </>
                                       )
@@ -355,13 +344,37 @@ export default defineComponent({
                                 const themeKeys = Object.keys(theme)
                                 const compNamePatternLower = compNamePattern.toLowerCase()
                                 const varNamePatternLower = varNamePattern.toLowerCase()
-                                return themeKeys
+                                let filteredItemsCount = 0
+                                const collapsedItems = themeKeys
                                   .filter((themeKey) => {
                                     return themeKey
                                       .toLowerCase()
                                       .includes(compNamePatternLower)
                                   })
                                   .map((themeKey) => {
+                                    const componentTheme:
+                                    | Record<string, string>
+                                    | undefined =
+                                      themeKey === 'common'
+                                        ? this.themeCommonDefault
+                                        : (theme as any)[themeKey]
+                                    if (componentTheme === undefined) {
+                                      return null
+                                    }
+                                    const varKeys = Object.keys(
+                                      componentTheme
+                                    ).filter((key) => {
+                                      return (
+                                        key !== 'name' &&
+                                        key
+                                          .toLowerCase()
+                                          .includes(varNamePatternLower)
+                                      )
+                                    })
+                                    if (!varKeys.length) {
+                                      return null
+                                    }
+                                    filteredItemsCount += 1
                                     return (
                                       <NCollapseItem
                                         title={themeKey}
@@ -369,27 +382,6 @@ export default defineComponent({
                                       >
                                         {{
                                           default: () => {
-                                            const componentTheme:
-                                            | Record<string, string>
-                                            | undefined = (theme as any)[
-                                              themeKey
-                                            ]
-                                            if (componentTheme === undefined) {
-                                              return <NEmpty />
-                                            }
-                                            const varKeys = Object.keys(
-                                              componentTheme
-                                            ).filter((key) => {
-                                              return (
-                                                key !== 'name' &&
-                                                key
-                                                  .toLowerCase()
-                                                  .includes(varNamePatternLower)
-                                              )
-                                            })
-                                            if (!varKeys.length) {
-                                              return <NEmpty />
-                                            }
                                             return (
                                               <NSpace vertical>
                                                 {{
@@ -409,9 +401,6 @@ export default defineComponent({
                                                         ) ? (
                                                             <NColorPicker
                                                               key={varKey}
-                                                              internalActions={
-                                                                colorPickerActions
-                                                              }
                                                               value={
                                                                 this
                                                                   .tempOverrides?.[
@@ -421,14 +410,9 @@ export default defineComponent({
                                                                 varKey
                                                               ]
                                                               }
-                                                              onComplete={(
-                                                                value: string
-                                                              ) =>
-                                                                this.applyTempOverrides(
-                                                                  themeKey,
-                                                                  varKey,
-                                                                  value
-                                                                )
+                                                              onComplete={
+                                                                this
+                                                                  .applyTempOverrides
                                                               }
                                                               onUpdateValue={(
                                                                 value: string
@@ -439,18 +423,47 @@ export default defineComponent({
                                                                   value
                                                                 )
                                                               }}
-                                                            />
+                                                            >
+                                                              {{
+                                                                action: () => (
+                                                                  <NButton
+                                                                    size="small"
+                                                                    disabled={
+                                                                      componentTheme[
+                                                                        varKey
+                                                                      ] ===
+                                                                    this
+                                                                      .tempOverrides?.[
+                                                                        themeKey
+                                                                      ]?.[varKey]
+                                                                    }
+                                                                    onClick={() => {
+                                                                      this.setTempOverrides(
+                                                                        themeKey,
+                                                                        varKey,
+                                                                        componentTheme[
+                                                                          varKey
+                                                                        ]
+                                                                      )
+                                                                      this.applyTempOverrides()
+                                                                    }}
+                                                                  >
+                                                                    {{
+                                                                      default: () =>
+                                                                        this
+                                                                          .locale
+                                                                          .restore
+                                                                    }}
+                                                                  </NButton>
+                                                                )
+                                                              }}
+                                                            </NColorPicker>
                                                           ) : (
                                                             <NInput
                                                               key={varKey}
-                                                              onChange={(
-                                                                value: string
-                                                              ) =>
-                                                                this.applyTempOverrides(
-                                                                  themeKey,
-                                                                  varKey,
-                                                                  value
-                                                                )
+                                                              onChange={
+                                                                this
+                                                                  .applyTempOverrides
                                                               }
                                                               onUpdateValue={(
                                                                 value: string
@@ -484,6 +497,8 @@ export default defineComponent({
                                       </NCollapseItem>
                                     )
                                   })
+                                if (!filteredItemsCount) return <NEmpty />
+                                return collapsedItems
                               }
                             }}
                           </NCollapse>
