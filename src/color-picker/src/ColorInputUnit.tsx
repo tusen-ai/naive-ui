@@ -26,7 +26,7 @@ function normalizeSlvUnit (value: string): number | false {
 }
 
 function normalizeHexaUnit (value: string): boolean {
-  if (/^#[0-9a-fA-F]{3}([0-9a-fA-F]{3})?$/.test(value.trim())) return true
+  if (/^#[0-9a-fA-F]{4}([0-9a-fA-F]{4})?$/.test(value.trim())) return true
   return false
 }
 

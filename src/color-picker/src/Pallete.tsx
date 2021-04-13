@@ -71,48 +71,45 @@ export default defineComponent({
   render () {
     return (
       <div
-        style="height: 180px; position: relative; margin-bottom: 8px;"
+        class="n-color-picker-pallete"
         onMousedown={this.handleMouseDown}
         ref="palleteRef"
       >
         <div
+          class="n-color-picker-pallete__layer"
           style={{
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            top: 0,
-            bottom: 0,
             // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
             backgroundImage: `linear-gradient(90deg, white, hsl(${this.displayedHue}, 100%, 50%))`
           }}
         />
         <div
+          class="n-color-picker-pallete__layer n-color-picker-pallete__layer--shadowed"
           style={{
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            top: 0,
-            bottom: 0,
             backgroundImage:
-              'linear-gradient(180deg, rgba(0, 0, 0, 0%), rgba(0, 0, 0, 100%))',
-            boxShadow: 'inset 0 0 2px 0 rgba(0, 0, 0, .24)'
+              'linear-gradient(180deg, rgba(0, 0, 0, 0%), rgba(0, 0, 0, 100%))'
           }}
         />
         {this.rgba && (
           <div
-            class="n-color-picker-handler"
+            class="n-color-picker-handle"
             style={{
               width: HANDLE_SIZE,
-              backgroundColor: this.handleColor,
               height: HANDLE_SIZE,
               borderRadius: RADIUS,
-              boxSizing: 'border-box',
-              border: '2px solid white',
-              position: 'absolute',
               left: `calc(${this.s}% - ${RADIUS})`,
               bottom: `calc(${this.v}% - ${RADIUS})`
             }}
-          />
+          >
+            <div
+              class="n-color-picker-handle__fill"
+              style={{
+                backgroundColor: this.handleColor,
+                borderRadius: RADIUS,
+                width: HANDLE_SIZE,
+                height: HANDLE_SIZE
+              }}
+            />
+          </div>
         )}
       </div>
     )

@@ -66,8 +66,8 @@ export default defineComponent({
   render () {
     const { value, mode } = this
     return (
-      <div class="n-color-input">
-        <div class="n-color-input__mode" onClick={this.onUpdateMode}>
+      <div class="n-color-picker-input">
+        <div class="n-color-picker-input__mode" onClick={this.onUpdateMode}>
           {mode.toUpperCase()}
         </div>
         <NInputGroup>

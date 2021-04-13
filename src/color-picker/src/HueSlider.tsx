@@ -3,7 +3,9 @@ import { off, on } from 'evtd'
 import { normalizeHue } from './utils'
 
 const HANDLE_SIZE = '12px'
+const HANDLE_SIZE_NUM = 12
 const RADIUS = '6px'
+const RADIUS_NUM = 6
 
 const GRADIENT =
   'linear-gradient(90deg,red,#ff0 16.66%,#0f0 33.33%,#0ff 50%,#00f 66.66%,#f0f 83.33%,red)'
@@ -32,7 +34,9 @@ export default defineComponent({
       const { value: railEl } = railRef
       if (!railEl) return
       const { width, left } = railEl.getBoundingClientRect()
-      const newHue = normalizeHue(((e.clientX - left) / width) * 360)
+      const newHue = normalizeHue(
+        ((e.clientX - left - RADIUS_NUM) / (width - HANDLE_SIZE_NUM)) * 360
+      )
       props.onUpdateHue(newHue)
     }
     function handleMouseUp (): void {
@@ -74,18 +78,24 @@ export default defineComponent({
             }}
           >
             <div
-              class="n-color-picker-handler"
+              class="n-color-picker-handle"
               style={{
-                position: 'absolute',
                 left: `calc((${this.hue}%) / 359 * 100 - ${RADIUS})`,
-                boxSizing: 'border-box',
-                border: '2px solid white',
-                backgroundColor: `hsl(${this.hue}, 100%, 50%)`,
                 borderRadius: RADIUS,
                 width: HANDLE_SIZE,
                 height: HANDLE_SIZE
               }}
-            />
+            >
+              <div
+                class="n-color-picker-handle__fill"
+                style={{
+                  backgroundColor: `hsl(${this.hue}, 100%, 50%)`,
+                  borderRadius: RADIUS,
+                  width: HANDLE_SIZE,
+                  height: HANDLE_SIZE
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>

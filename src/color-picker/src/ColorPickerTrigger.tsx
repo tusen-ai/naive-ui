@@ -13,12 +13,14 @@ export default defineComponent({
   render () {
     const { rgba } = this
     return (
-      <div
-        class="n-color-picker-trigger"
-        style={{
-          color: rgba ? toRgbaString(rgba) : ''
-        }}
-      />
+      <div class="n-color-picker-trigger">
+        <div
+          class="n-color-picker-trigger__fill"
+          style={{
+            color: rgba ? toRgbaString(rgba) : ''
+          }}
+        />
+      </div>
     )
   }
 })

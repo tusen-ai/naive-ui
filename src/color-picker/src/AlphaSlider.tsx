@@ -4,6 +4,7 @@ import { RGBA, toRgbaString } from 'seemly'
 import { normalizeAlpha } from './utils'
 
 const HANDLE_SIZE = '12px'
+const HANDLE_SIZE_NUM = 12
 const RADIUS = '6px'
 
 export default defineComponent({
@@ -34,7 +35,7 @@ export default defineComponent({
       const { value: railEl } = railRef
       if (!railEl) return
       const { width, left } = railEl.getBoundingClientRect()
-      const newAlpha = (e.clientX - left) / width
+      const newAlpha = (e.clientX - left) / (width - HANDLE_SIZE_NUM)
       props.onUpdateAlpha(normalizeAlpha(newAlpha))
     }
     function handleMouseUp (): void {
@@ -55,80 +56,55 @@ export default defineComponent({
     return (
       <div
         class="n-color-picker-slider"
+        ref="railRef"
         style={{
-          marginBottom: '8px'
+          height: HANDLE_SIZE,
+          borderRadius: RADIUS
         }}
+        onMousedown={this.handleMouseDown}
       >
         <div
-          ref="railRef"
           style={{
-            boxShadow: 'inset 0 0 2px 0 rgba(0, 0, 0, .24)',
-            boxSizing: 'border-box',
-            height: HANDLE_SIZE,
             borderRadius: RADIUS,
-            position: 'relative'
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+            overflow: 'hidden'
           }}
-          onMousedown={this.handleMouseDown}
         >
+          <div class="n-color-picker-slider__grid" />
+          <div class="n-color-picker-slider__grid n-color-picker-slider__grid--bottom" />
+          <div
+            class="n-color-picker-slider__image"
+            style={{
+              backgroundImage: this.railBackgroundImage
+            }}
+          />
+        </div>
+        {this.rgba && (
           <div
             style={{
-              borderRadius: RADIUS,
               position: 'absolute',
-              left: 0,
-              right: 0,
+              left: RADIUS,
+              right: RADIUS,
               top: 0,
-              bottom: 0,
-              overflow: 'hidden'
+              bottom: 0
             }}
           >
             <div
+              class="n-color-picker-handle"
               style={{
-                height: '6px',
-                backgroundImage:
-                  'linear-gradient(to right,#eee 6px,transparent 6px)',
-                backgroundSize: '12px 6px',
-                backgroundRepeat: 'repeat'
-              }}
-            ></div>
-            <div
-              style={{
-                position: 'relative',
-                right: '-6px',
-                height: '6px',
-                backgroundImage:
-                  'linear-gradient(to right,#eee 6px,transparent 6px)',
-                backgroundSize: '12px 6px',
-                backgroundRepeat: 'repeat'
-              }}
-            ></div>
-            <div
-              style={{
-                position: 'absolute',
-                left: 0,
-                right: 0,
-                top: 0,
-                bottom: 0,
-                backgroundImage: this.railBackgroundImage
-              }}
-            />
-          </div>
-          {this.rgba && (
-            <div
-              style={{
-                position: 'absolute',
-                left: RADIUS,
-                right: RADIUS,
-                top: 0,
-                bottom: 0
+                left: `calc(${this.alpha * 100}% - ${RADIUS})`,
+                borderRadius: RADIUS,
+                width: HANDLE_SIZE,
+                height: HANDLE_SIZE
               }}
             >
               <div
-                class="n-color-picker-handler n-color-picker-handler--alpha"
+                class="n-color-picker-handle__fill"
                 style={{
-                  position: 'absolute',
-                  left: `calc(${this.alpha * 100}% - ${RADIUS})`,
-                  boxSizing: 'border-box',
-                  border: '2px solid white',
                   backgroundColor: toRgbaString(this.rgba),
                   borderRadius: RADIUS,
                   width: HANDLE_SIZE,
@@ -136,8 +112,8 @@ export default defineComponent({
                 }}
               />
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     )
   }
