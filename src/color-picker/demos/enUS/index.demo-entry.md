@@ -1,6 +1,6 @@
 # Color Picker
 
-If there's no theme editor, I won't make the component.
+Compared with real world, its space is discrete.
 
 ## Demos
 
