@@ -219,7 +219,7 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
         },
         {
           en: 'Color Picker',
-          zh: '拾色器',
+          zh: '颜色选择器',
           enSuffix: true,
           path: '/n-color-picker'
         },

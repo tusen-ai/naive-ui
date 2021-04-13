@@ -15,15 +15,27 @@ const colorPickerDark: ColorPickerTheme = {
       popoverColor,
       textColor2,
       borderRadius,
-      borderColor
+      borderColor,
+      heightSmall,
+      heightMedium,
+      heightLarge,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge
     } = vars
     return {
-      fontSize,
+      panelFontSize: fontSize,
       boxShadow: boxShadow2,
       color: popoverColor,
       textColor: textColor2,
       borderRadius,
-      border: `1px solid ${borderColor}`
+      border: `1px solid ${borderColor}`,
+      heightSmall,
+      heightMedium,
+      heightLarge,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge
     }
   }
 }

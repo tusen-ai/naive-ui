@@ -5,19 +5,24 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // --color
 // --text-color
 // --border-radius
+// --panel-font-size
 // --font-size
+// --bezier
+// --height
+// --box-shadow
 export default c([
   cB('color-picker', `
     display: inline-block;
     box-sizing: border-box;
-    height: 34px;
+    height: var(--height);
+    font-size: var(--font-size);
     width: 100%;
     position: relative;
   `),
   cB('color-picker-panel', `
     margin: 4px 0;
     width: 240px;
-    font-size: var(--font-size);
+    font-size: var(--panel-font-size);
     color: var(--text-color);
     background-color: var(--color);
     transition:
@@ -106,13 +111,15 @@ export default c([
       transition: color .3s var(--bezier);
     `),
     cE('fill', `
-      text-align: center;
       border-radius: var(--border-radius);
       position: absolute;
-      left: 6px;
-      right: 6px;
-      top: 6px;
-      bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      left: 4px;
+      right: 4px;
+      top: 4px;
+      bottom: 4px;
     `)
   ])
 ])

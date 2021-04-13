@@ -45,8 +45,7 @@ import {
   useConfig,
   useTheme
 } from '../../_mixins'
-
-import { call, MaybeArray, useAdjustedTo } from '../../_utils'
+import { call, createKey, MaybeArray, useAdjustedTo } from '../../_utils'
 import HueSlider from './HueSlider'
 import AlphaSlider from './AlphaSlider'
 import Pallete from './Pallete'
@@ -77,6 +76,7 @@ export const colorPickerPanelProps = {
     default: ['rgba', 'hexa', 'hsla']
   },
   to: useAdjustedTo.propTo,
+  size: String as PropType<'small' | 'medium' | 'large'>,
   onComplete: Function as PropType<(value: string) => void>,
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
@@ -371,18 +371,30 @@ export default defineComponent({
     })
 
     const cssVarsRef = computed(() => {
+      const { value: mergedSize } = formItemRef.mergedSize
       const {
         common: { cubicBezierEaseInOut },
-        self: { textColor, color, fontSize, boxShadow, border, borderRadius }
+        self: {
+          textColor,
+          color,
+          panelFontSize,
+          boxShadow,
+          border,
+          borderRadius,
+          [createKey('height', mergedSize)]: height,
+          [createKey('fontSize', mergedSize)]: fontSize
+        }
       } = themeRef.value
       return {
         '--bezier': cubicBezierEaseInOut,
         '--text-color': textColor,
         '--color': color,
+        '--panel-font-size': panelFontSize,
         '--font-size': fontSize,
         '--box-shadow': boxShadow,
         '--border': border,
-        '--border-radius': borderRadius
+        '--border-radius': borderRadius,
+        '--height': height
       }
     })
 
@@ -449,7 +461,11 @@ export default defineComponent({
   },
   render () {
     return (
-      <div class="n-color-picker" ref="selfRef">
+      <div
+        class="n-color-picker"
+        ref="selfRef"
+        style={this.cssVars as CSSProperties}
+      >
         <VBinder>
           {{
             default: () => [
@@ -458,7 +474,6 @@ export default defineComponent({
                   default: () => (
                     <ColorPickerTrigger
                       value={this.mergedValue}
-                      style={this.cssVars as CSSProperties}
                       hsla={this.hsla}
                       onClick={this.handleTriggerClick}
                     />
