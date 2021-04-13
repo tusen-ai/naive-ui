@@ -28,7 +28,7 @@ export default defineComponent({
             <div
               class="n-color-picker-trigger__value"
               style={{
-                color: hsla[2] > 50 ? 'black' : 'white'
+                color: hsla[2] > 50 || hsla[3] < 0.5 ? 'black' : 'white'
               }}
             >
               {value}

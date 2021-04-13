@@ -1,4 +1,4 @@
-import { rgba, composite, scaleColor } from 'seemly'
+import { rgba, composite, scaleColor, roundAlpha } from 'seemly'
 import commonVariables from './_common'
 
 const base = {
@@ -142,11 +142,11 @@ const derived = {
   // close
   closeColorHover: neutral(Number(base.alphaClose) * 0.8),
   closeColor: neutral(Number(base.alphaClose)),
-  closeColorPressed: neutral(Number(base.alphaClose) * 1.25),
+  closeColorPressed: scaleColor(neutral(base.alphaClose), { lightness: 1.25 }),
   closeColorDisabled: neutral(base.alpha4),
   closeOpacity: base.alphaClose,
-  closeOpacityHover: String(Number(base.alphaClose) * 0.8),
-  closeOpacityPressed: String(Number(base.alphaClose) * 1.25),
+  closeOpacityHover: String(roundAlpha(Number(base.alphaClose) * 0.8)),
+  closeOpacityPressed: String(roundAlpha(Number(base.alphaClose) * 1.25)),
 
   // clear
   clearColor: neutral(base.alpha4),
