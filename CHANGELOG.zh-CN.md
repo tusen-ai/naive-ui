@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.5.0
 
 ### Feats
 
@@ -13,6 +13,9 @@
 ### Fixes
 
 - 修正 `n-date-picker` 触发器在焦点在面板内的时候没有 focus 样式
+- 修正 `n-button` 加载状态宽度闪烁的问题
+- 修正 `n-time-picker` 在 `n-date-picker` 内部关闭动画闪烁的问题
+- 修正 popover 内部的卸载组件应卸载于 popover 内部
 
 ## 2.4.2
 

@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.5.0
 
 ### Feats
 
@@ -13,6 +13,9 @@
 ### Fixes
 
 - Fix `n-date-picker` trigger has no focus style in focus is in panel.
+- Fix `n-button` loading's fade-in transtion drifts.
+- Fix `n-time-picker` close animation drifts in `n-date-picker`.
+- Fix detached components in popover should stay in popover.
 
 ## 2.4.2
 
