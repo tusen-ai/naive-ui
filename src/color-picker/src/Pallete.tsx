@@ -24,7 +24,8 @@ export default defineComponent({
     onUpdateSV: {
       type: Function as PropType<(s: number, v: number) => void>,
       required: true
-    }
+    },
+    onComplete: Function as PropType<() => void>
   },
   setup (props) {
     const palleteRef = ref<HTMLElement | null>(null)
@@ -54,6 +55,7 @@ export default defineComponent({
     function handleMouseUp (): void {
       off('mousemove', document, handleMouseMove)
       off('mouseup', document, handleMouseUp)
+      props.onComplete?.()
     }
     return {
       palleteRef,

@@ -1,16 +1,38 @@
 import { c, cB, cE, cM } from '../../../_utils/cssr'
+import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
+// vars:
+// --color
+// --text-color
+// --border-radius
+// --font-size
 export default c([
+  cB('color-picker', `
+    display: inline-block;
+    box-sizing: border-box;
+    height: 34px;
+    width: 100%;
+    position: relative;
+  `),
   cB('color-picker-panel', `
-    border-radius: 4px;
+    margin: 4px 0;
+    width: 240px;
+    font-size: var(--font-size);
+    color: var(--text-color);
+    background-color: var(--color);
+    transition:
+      box-shadow .3s var(--bezier),
+      color .3s var(--bezier),
+      background-color .3s var(--bezier);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
     padding: 12px;
   `, [
+    fadeInScaleUpTransition(),
     cB('input', `
       text-align: center;
     `)
   ]),
-  cB('color-picker-control', `
-  `),
   cB('color-picker-slider', `
     margin-bottom: 8px;
     position: relative;
@@ -19,7 +41,7 @@ export default c([
   `, [
     cE('grid', `
       height: 6px;
-      background-image: linear-gradient(to right,#eee 6px,transparent 6px);
+      background-image: linear-gradient(to right, rgba(0, 0, 0, .12) 6px,transparent 6px);
       background-size: 12px 6px;
       background-repeat: repeat;
       position: relative;
@@ -73,18 +95,24 @@ export default c([
     `)
   ]),
   cB('color-picker-trigger', `
-    display: inline-block;
-    height: 34px;
+    border: var(--border);
+    height: 100%;
     box-sizing: border-box;
-    width: 100%;
-    position: relative;
+    border-radius: var(--border-radius);
+    transition: border-color .3s var(--bezier);
+    cursor: pointer;
   `, [
+    cE('value', `
+      transition: color .3s var(--bezier);
+    `),
     cE('fill', `
+      text-align: center;
+      border-radius: var(--border-radius);
       position: absolute;
-      left: 4px;
-      right: 4px;
-      top: 4px;
-      bottom: 4px;
+      left: 6px;
+      right: 6px;
+      top: 6px;
+      bottom: 6px;
     `)
   ])
 ])

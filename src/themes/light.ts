@@ -15,6 +15,7 @@ import { cascaderLight } from '../cascader/styles'
 import { checkboxLight } from '../checkbox/styles'
 import { codeLight } from '../code/styles'
 import { collapseLight } from '../collapse/styles'
+import { colorPickerLight } from '../color-picker/styles'
 import { dataTableLight } from '../data-table/styles'
 import { datePickerLight } from '../date-picker/styles'
 import { descriptionsLight } from '../descriptions/styles'
@@ -89,6 +90,7 @@ export const lightTheme: BuiltInGlobalTheme = {
   Checkbox: checkboxLight,
   Code: codeLight,
   Collapse: collapseLight,
+  ColorPicker: colorPickerLight,
   DataTable: dataTableLight,
   DatePicker: datePickerLight,
   Descriptions: descriptionsLight,

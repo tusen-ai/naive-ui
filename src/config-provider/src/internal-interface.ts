@@ -13,6 +13,7 @@ import type { CascaderTheme } from '../../cascader/styles'
 import type { CheckboxTheme } from '../../checkbox/styles'
 import type { CodeTheme } from '../../code/styles'
 import type { CollapseTheme } from '../../collapse/styles'
+import type { ColorPickerTheme } from '../../color-picker/styles'
 import type { DataTableTheme } from '../../data-table/styles'
 import type { DatePickerTheme } from '../../date-picker/styles'
 import type { DescriptionsTheme } from '../../descriptions/styles'
@@ -96,6 +97,7 @@ export interface GlobalThemeWithoutCommon {
   Checkbox?: CheckboxTheme
   Code?: CodeTheme
   Collapse?: CollapseTheme
+  ColorPicker?: ColorPickerTheme
   DataTable?: DataTableTheme
   DatePicker?: DatePickerTheme
   Descriptions?: DescriptionsTheme

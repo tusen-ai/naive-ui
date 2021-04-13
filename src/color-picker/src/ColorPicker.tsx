@@ -6,7 +6,10 @@ import {
   PropType,
   toRef,
   watchEffect,
-  VNode
+  VNode,
+  withDirectives,
+  Transition,
+  CSSProperties
 } from 'vue'
 import {
   hsv2rgb,
@@ -31,18 +34,41 @@ import Pallete from './Pallete'
 import type { PalleteInst } from './Pallete'
 import ColorInput from './ColorInput'
 import style from './styles/index.cssr'
-import { useStyle } from '../../_mixins'
-import { useMergedState } from 'vooks'
-import { call, MaybeArray } from '../../_utils'
+import type { ThemeProps } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
+import { useIsMounted, useMergedState } from 'vooks'
+import { call, MaybeArray, useAdjustedTo } from '../../_utils'
 import { getModeFromValue } from './utils'
 import type { ColorPickerMode } from './utils'
+import { VBinder, VFollower, VTarget } from 'vueuc'
+import ColorPickerTrigger from './ColorPickerTrigger'
+import { clickoutside } from 'vdirs'
+import { colorPickerLight } from '../styles'
+import type { ColorPickerTheme } from '../styles'
 
 export const colorPickerPanelProps = {
+  ...(useTheme.props as ThemeProps<ColorPickerTheme>),
   value: String,
+  show: {
+    type: Boolean,
+    default: undefined
+  },
+  defaultShow: {
+    type: Boolean,
+    default: false
+  },
   defaultValue: {
     type: String as PropType<string | null>,
     default: null
   },
+  to: useAdjustedTo.propTo,
+  onComplete: Function as PropType<(value: string) => void>,
+  'onUpdate:show': [Function, Array] as PropType<
+  MaybeArray<(value: boolean) => void>
+  >,
+  onUpdateShow: [Function, Array] as PropType<
+  MaybeArray<(value: boolean) => void>
+  >,
   'onUpdate:value': [Function, Array] as PropType<
   MaybeArray<(value: string) => void>
   >,
@@ -56,9 +82,28 @@ export default defineComponent({
   props: colorPickerPanelProps,
   setup (props) {
     const palleteInstRef = ref<PalleteInst | null>(null)
+    const selfRef = ref<HTMLElement | null>(null)
     let upcomingValue: string | null = null
 
-    useStyle('ColorPicker', style)
+    const themeRef = useTheme(
+      'ColorPicker',
+      'ColorPicker',
+      style,
+      colorPickerLight,
+      props
+    )
+    const uncontrolledShowRef = ref(props.defaultShow)
+    const mergedShowRef = useMergedState(
+      toRef(props, 'show'),
+      uncontrolledShowRef
+    )
+    function doUpdateShow (value: boolean): void {
+      const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
+      if (onUpdateShow) call(onUpdateShow, value)
+      if (_onUpdateShow) call(_onUpdateShow, value)
+      uncontrolledShowRef.value = value
+    }
+
     const uncontrolledValueRef = ref(props.defaultValue)
     const mergedValueRef = useMergedState(
       toRef(props, 'value'),
@@ -242,6 +287,15 @@ export default defineComponent({
 
     function handleInputUpdateValue (value: string): void {
       doUpdateValue(value, 'input')
+      handleComplete()
+    }
+
+    function handleComplete (): void {
+      const { value } = mergedValueRef
+      // no value & only hue changes will complete with no value
+      if (value) {
+        props.onComplete?.(value)
+      }
     }
 
     watchEffect(() => {
@@ -258,6 +312,22 @@ export default defineComponent({
       upcomingValue = null
     })
 
+    const cssVarsRef = computed(() => {
+      const {
+        common: { cubicBezierEaseInOut },
+        self: { textColor, color, fontSize, boxShadow, border, borderRadius }
+      } = themeRef.value
+      return {
+        '--bezier': cubicBezierEaseInOut,
+        '--text-color': textColor,
+        '--color': color,
+        '--font-size': fontSize,
+        '--box-shadow': boxShadow,
+        '--border': border,
+        '--border-radius': borderRadius
+      }
+    })
+
     function renderPanel (): VNode {
       const { value: rgba } = rgbaRef
       const { value: displayedMode } = displayedModeRef
@@ -265,26 +335,29 @@ export default defineComponent({
       return (
         <div
           class="n-color-picker-panel"
-          style={{
-            width: '240px',
-            border: '1px solid rgba(0, 0, 0, .08)'
-          }}
           onDragstart={(e) => {
             e.preventDefault()
           }}
+          style={cssVarsRef.value as CSSProperties}
         >
           <Pallete
             ref={palleteInstRef}
             rgba={rgba}
             displayedHue={displayedHue}
             onUpdateSV={handleUpdateSv}
+            onComplete={handleComplete}
           />
           <div class="n-color-picker-control">
-            <HueSlider hue={displayedHue} onUpdateHue={handleUpdateHue} />
+            <HueSlider
+              hue={displayedHue}
+              onUpdateHue={handleUpdateHue}
+              onComplete={handleComplete}
+            />
             <AlphaSlider
               rgba={rgba}
               alpha={displayedAlphaRef.value}
               onUpdateAlpha={handleUpdateAlpha}
+              onComplete={handleComplete}
             />
             <ColorInput
               mode={displayedMode}
@@ -298,11 +371,72 @@ export default defineComponent({
     }
 
     return {
+      ...useConfig(props),
+      selfRef,
+      hsla: hslaRef,
       rgba: rgbaRef,
-      renderPanel
+      mergedShow: mergedShowRef,
+      isMounted: useIsMounted(),
+      adjustedTo: useAdjustedTo(props),
+      mergedValue: mergedValueRef,
+      handleTriggerClick () {
+        doUpdateShow(true)
+      },
+      handleClickOutside (e: MouseEvent) {
+        if (selfRef.value?.contains(e.target as Node)) return
+        doUpdateShow(false)
+      },
+      renderPanel,
+      cssVars: cssVarsRef
     }
   },
   render () {
-    return this.renderPanel()
+    return (
+      <div class="n-color-picker" ref="selfRef">
+        <VBinder>
+          {{
+            default: () => [
+              <VTarget>
+                {{
+                  default: () => (
+                    <ColorPickerTrigger
+                      value={this.mergedValue}
+                      style={this.cssVars as CSSProperties}
+                      hsla={this.hsla}
+                      onClick={this.handleTriggerClick}
+                    />
+                  )
+                }}
+              </VTarget>,
+              <VFollower
+                placement="bottom-start"
+                show={this.mergedShow}
+                containerClass={this.namespace}
+                teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
+                to={this.adjustedTo}
+              >
+                {{
+                  default: () => (
+                    <Transition
+                      name="n-fade-in-scale-up-transition"
+                      appear={this.isMounted}
+                    >
+                      {{
+                        default: () =>
+                          this.mergedShow
+                            ? withDirectives(this.renderPanel(), [
+                              [clickoutside, this.handleClickOutside]
+                            ])
+                            : null
+                      }}
+                    </Transition>
+                  )
+                }}
+              </VFollower>
+            ]
+          }}
+        </VBinder>
+      </div>
+    )
   }
 })

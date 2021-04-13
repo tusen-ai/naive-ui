@@ -21,7 +21,8 @@ export default defineComponent({
     onUpdateAlpha: {
       type: Function as PropType<(value: number) => void>,
       required: true
-    }
+    },
+    onComplete: Function as PropType<() => void>
   },
   setup (props) {
     const railRef = ref<HTMLElement | null>(null)
@@ -41,6 +42,7 @@ export default defineComponent({
     function handleMouseUp (): void {
       off('mousemove', document, handleMouseMove)
       off('mouseup', document, handleMouseUp)
+      props.onComplete?.()
     }
     return {
       railRef,

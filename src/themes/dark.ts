@@ -13,6 +13,7 @@ import { cascaderDark } from '../cascader/styles'
 import { checkboxDark } from '../checkbox/styles'
 import { codeDark } from '../code/styles'
 import { collapseDark } from '../collapse/styles'
+import { colorPickerDark } from '../color-picker/styles'
 import { dataTableDark } from '../data-table/styles'
 import { datePickerDark } from '../date-picker/styles'
 import { descriptionsDark } from '../descriptions/styles'
@@ -87,6 +88,7 @@ export const darkTheme: BuiltInGlobalTheme = {
   Checkbox: checkboxDark,
   Code: codeDark,
   Collapse: collapseDark,
+  ColorPicker: colorPickerDark,
   DataTable: dataTableDark,
   DatePicker: datePickerDark,
   Descriptions: descriptionsDark,
