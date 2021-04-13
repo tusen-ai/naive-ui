@@ -13,7 +13,9 @@ import {
   provide,
   InjectionKey,
   ComputedRef,
-  ExtractPropTypes
+  ExtractPropTypes,
+  Ref,
+  watch
 } from 'vue'
 import {
   hsv2rgb,
@@ -43,7 +45,8 @@ import {
   ThemeProps,
   useFormItem,
   useConfig,
-  useTheme
+  useTheme,
+  useLocale
 } from '../../_mixins'
 import { call, createKey, MaybeArray, useAdjustedTo } from '../../_utils'
 import HueSlider from './HueSlider'
@@ -54,6 +57,8 @@ import ColorPickerTrigger from './ColorPickerTrigger'
 import { getModeFromValue } from './utils'
 import type { ColorPickerMode } from './utils'
 import style from './styles/index.cssr'
+import { OnUpdateValue, OnUpdateValueImpl } from './interface'
+import { NButton } from '../../button'
 
 export const colorPickerPanelProps = {
   ...(useTheme.props as ThemeProps<ColorPickerTheme>),
@@ -76,20 +81,17 @@ export const colorPickerPanelProps = {
     default: ['rgba', 'hexa', 'hsla']
   },
   to: useAdjustedTo.propTo,
+  internalActions: Array as PropType<ReadonlyArray<'redo' | 'undo'>>,
   size: String as PropType<'small' | 'medium' | 'large'>,
-  onComplete: Function as PropType<(value: string) => void>,
+  onComplete: Function as PropType<OnUpdateValue>,
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
   onUpdateShow: [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
-  'onUpdate:value': [Function, Array] as PropType<
-  MaybeArray<(value: string) => void>
-  >,
-  onUpdateValue: [Function, Array] as PropType<
-  MaybeArray<(value: string) => void>
-  >
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 } as const
 
 export type ColorPickerProps = Partial<
@@ -108,6 +110,7 @@ export default defineComponent({
     let upcomingValue: string | null = null
 
     const formItemRef = useFormItem(props)
+    const { locale: localeRef } = useLocale('global')
 
     const themeRef = useTheme(
       'ColorPicker',
@@ -136,6 +139,9 @@ export default defineComponent({
       toRef(props, 'value'),
       uncontrolledValueRef
     )
+
+    const undoStackRef: Ref<Array<string | null>> = ref([mergedValueRef.value])
+    const valueIndexRef = ref(0)
 
     const valueModeRef = computed(() => getModeFromValue(mergedValueRef.value))
 
@@ -323,7 +329,7 @@ export default defineComponent({
     }
 
     function doUpdateValue (
-      value: string,
+      value: string | null,
       updateSource: 'cursor' | 'input'
     ): void {
       if (updateSource === 'cursor') {
@@ -333,8 +339,8 @@ export default defineComponent({
       }
       const { nTriggerFormChange, nTriggerFormInput } = formItemRef
       const { onUpdateValue, 'onUpdate:value': _onUpdateValue } = props
-      if (onUpdateValue) call(onUpdateValue, value)
-      if (_onUpdateValue) call(_onUpdateValue, value)
+      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
+      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
       nTriggerFormChange()
       nTriggerFormInput()
       uncontrolledValueRef.value = value
@@ -345,16 +351,53 @@ export default defineComponent({
       handleComplete()
     }
 
-    function handleComplete (): void {
+    function handleComplete (pushStack: boolean = true): void {
       const { value } = mergedValueRef
       // no value & only hue changes will complete with no value
       if (value) {
         const { nTriggerFormChange, nTriggerFormInput } = formItemRef
-        props.onComplete?.(value)
+        const { onComplete } = props
+        if (onComplete) {
+          ;(onComplete as OnUpdateValueImpl)(value)
+        }
+        const { value: undoStack } = undoStackRef
+        const { value: valueIndex } = valueIndexRef
+        if (pushStack) {
+          undoStack.splice(valueIndex + 1, undoStack.length, value)
+          valueIndexRef.value = valueIndex + 1
+        }
         nTriggerFormChange()
         nTriggerFormInput()
       }
     }
+
+    function undo (): void {
+      const { value: valueIndex } = valueIndexRef
+      if (valueIndex - 1 < 0) return
+      doUpdateValue(undoStackRef.value[valueIndex - 1], 'input')
+      handleComplete(false)
+      valueIndexRef.value = valueIndex - 1
+    }
+
+    function redo (): void {
+      const { value: valueIndex } = valueIndexRef
+      if (valueIndex < 0 || valueIndex + 1 >= undoStackRef.value.length) return
+      doUpdateValue(undoStackRef.value[valueIndex + 1], 'input')
+      handleComplete(false)
+      valueIndexRef.value = valueIndex + 1
+    }
+    const undoableRef = computed(() => valueIndexRef.value >= 1)
+    const redoableRef = computed(() => {
+      const { value: undoStack } = undoStackRef
+      return undoStack.length > 1 && valueIndexRef.value < undoStack.length - 1
+    })
+
+    watch(mergedShowRef, (value) => {
+      if (!value) {
+        undoStackRef.value = [mergedValueRef.value]
+        valueIndexRef.value = 0
+      }
+    })
 
     watchEffect(() => {
       if (upcomingValue && upcomingValue === mergedValueRef.value) {
@@ -381,6 +424,7 @@ export default defineComponent({
           boxShadow,
           border,
           borderRadius,
+          dividerColor,
           [createKey('height', mergedSize)]: height,
           [createKey('fontSize', mergedSize)]: fontSize
         }
@@ -394,13 +438,16 @@ export default defineComponent({
         '--box-shadow': boxShadow,
         '--border': border,
         '--border-radius': borderRadius,
-        '--height': height
+        '--height': height,
+        '--divider-color': dividerColor
       }
     })
 
     function renderPanel (): VNode {
       const { value: rgba } = rgbaRef
       const { value: displayedHue } = displayedHueRef
+      const { internalActions } = props
+      const { value: mergedTheme } = themeRef
       return (
         <div
           class="n-color-picker-panel"
@@ -409,14 +456,14 @@ export default defineComponent({
           }}
           style={cssVarsRef.value as CSSProperties}
         >
-          <Pallete
-            rgba={rgba}
-            displayedHue={displayedHue}
-            displayedSv={displayedSvRef.value}
-            onUpdateSV={handleUpdateSv}
-            onComplete={handleComplete}
-          />
           <div class="n-color-picker-control">
+            <Pallete
+              rgba={rgba}
+              displayedHue={displayedHue}
+              displayedSv={displayedSvRef.value}
+              onUpdateSV={handleUpdateSv}
+              onComplete={handleComplete}
+            />
             <HueSlider
               hue={displayedHue}
               onUpdateHue={handleUpdateHue}
@@ -435,6 +482,32 @@ export default defineComponent({
               onUpdateValue={handleInputUpdateValue}
             />
           </div>
+          {internalActions ? (
+            <div class="n-color-picker-action">
+              {internalActions.includes('undo') && (
+                <NButton
+                  size="small"
+                  onClick={undo}
+                  disabled={!undoableRef.value}
+                  theme={mergedTheme.peers.Button}
+                  themeOverrides={mergedTheme.peerOverrides.Button}
+                >
+                  {{ default: () => localeRef.value.undo }}
+                </NButton>
+              )}
+              {internalActions.includes('redo') && (
+                <NButton
+                  size="small"
+                  onClick={redo}
+                  disabled={!redoableRef.value}
+                  theme={mergedTheme.peers.Button}
+                  themeOverrides={mergedTheme.peerOverrides.Button}
+                >
+                  {{ default: () => localeRef.value.redo }}
+                </NButton>
+              )}
+            </div>
+          ) : null}
         </div>
       )
     }

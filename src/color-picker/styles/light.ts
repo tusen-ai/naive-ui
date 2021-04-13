@@ -2,6 +2,7 @@ import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins/use-theme'
 import { inputLight } from '../../input/styles'
+import { buttonLight } from '../../button/styles'
 
 const self = (vars: ThemeCommonVars) => {
   const {
@@ -16,7 +17,8 @@ const self = (vars: ThemeCommonVars) => {
     heightLarge,
     fontSizeSmall,
     fontSizeMedium,
-    fontSizeLarge
+    fontSizeLarge,
+    dividerColor
   } = vars
   return {
     panelFontSize: fontSize,
@@ -30,7 +32,8 @@ const self = (vars: ThemeCommonVars) => {
     heightLarge,
     fontSizeSmall,
     fontSizeMedium,
-    fontSizeLarge
+    fontSizeLarge,
+    dividerColor
   }
 }
 
@@ -40,7 +43,8 @@ const colorPickerLight = createTheme({
   name: 'ColorPicker',
   common: commonLight,
   peers: {
-    Input: inputLight
+    Input: inputLight,
+    Button: buttonLight
   },
   self
 })

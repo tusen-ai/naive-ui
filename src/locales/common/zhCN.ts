@@ -2,6 +2,10 @@ import type { NLocale } from './enUS'
 
 const zhCN: NLocale = {
   name: 'zh-CN',
+  global: {
+    undo: '撤销',
+    redo: '重做'
+  },
   Popconfirm: {
     positiveText: '确认',
     negativeText: '取消'

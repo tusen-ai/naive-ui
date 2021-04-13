@@ -10,6 +10,7 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // --bezier
 // --height
 // --box-shadow
+// --divider-color
 export default c([
   cB('color-picker', `
     display: inline-block;
@@ -31,7 +32,6 @@ export default c([
       background-color .3s var(--bezier);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
-    padding: 12px;
   `, [
     fadeInScaleUpTransition(),
     cB('input', `
@@ -98,6 +98,18 @@ export default c([
       width: 72px;
       text-align: center;
     `)
+  ]),
+  cB('color-picker-control', `
+    padding: 12px;
+  `),
+  cB('color-picker-action', `
+    display: flex;
+    margin-top: -4px;
+    border-top: 1px solid var(--divider-color);
+    padding: 8px 12px;
+    justify-content: flex-end;
+  `, [
+    cB('button', 'margin-left: 8px;')
   ]),
   cB('color-picker-trigger', `
     border: var(--border);

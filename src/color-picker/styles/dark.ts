@@ -1,3 +1,4 @@
+import { buttonDark } from '../../button/styles'
 import { inputDark } from '../../input/styles'
 import { commonDark } from '../../_styles/common'
 import type { ColorPickerTheme } from './light'
@@ -6,7 +7,8 @@ const colorPickerDark: ColorPickerTheme = {
   name: 'ColorPicker',
   common: commonDark,
   peers: {
-    Input: inputDark
+    Input: inputDark,
+    Button: buttonDark
   },
   self (vars) {
     const {
@@ -21,7 +23,8 @@ const colorPickerDark: ColorPickerTheme = {
       heightLarge,
       fontSizeSmall,
       fontSizeMedium,
-      fontSizeLarge
+      fontSizeLarge,
+      dividerColor
     } = vars
     return {
       panelFontSize: fontSize,
@@ -35,7 +38,8 @@ const colorPickerDark: ColorPickerTheme = {
       heightLarge,
       fontSizeSmall,
       fontSizeMedium,
-      fontSizeLarge
+      fontSizeLarge,
+      dividerColor
     }
   }
 }

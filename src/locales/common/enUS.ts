@@ -1,5 +1,9 @@
 const enUS = {
   name: 'en-US',
+  global: {
+    undo: 'Undo',
+    redo: 'Redo'
+  },
   Popconfirm: {
     positiveText: 'Confirm',
     negativeText: 'Cancel'

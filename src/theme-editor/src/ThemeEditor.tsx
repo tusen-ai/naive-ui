@@ -54,6 +54,8 @@ const ColorWandIcon = (
   </svg>
 )
 
+const colorPickerActions = ['undo', 'redo'] as const
+
 export default defineComponent({
   name: 'ThemeEditor',
   inheritAttrs: false,
@@ -407,6 +409,9 @@ export default defineComponent({
                                                         ) ? (
                                                             <NColorPicker
                                                               key={varKey}
+                                                              internalActions={
+                                                                colorPickerActions
+                                                              }
                                                               value={
                                                                 this
                                                                   .tempOverrides?.[
