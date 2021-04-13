@@ -2,7 +2,7 @@
 
 # 日历 Calendar
 
-我想着它凑活能用就好了，不能指望这个东西和 Google Calendar 一样复杂。
+时间过的快。
 
 ## 演示
 
@@ -17,7 +17,7 @@ basic
 | default-value | `number` | `null` | 默认被选中的日期的时间戳 |
 | is-date-disabled | `(timestamp: number) => boolean` | `undefined` |  |
 | value | `number \| null` | `undefined` | 被选中的日期的时间戳 |
-| on:update-value | `(timestamp: number, { year: number, month: number, date: number }) => void` | `undefined` | 选中日期的回调 |
+| on-update:value | `(timestamp: number, { year: number, month: number, date: number }) => void` | `undefined` | 选中日期的回调 |
 
 ## Slots
 
