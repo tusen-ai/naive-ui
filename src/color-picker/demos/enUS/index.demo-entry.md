@@ -6,6 +6,7 @@ If there's no theme editor, I won't make the component.
 
 ```demo
 basic
+form
 ```
 
 ## Props

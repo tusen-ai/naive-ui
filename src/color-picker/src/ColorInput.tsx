@@ -37,7 +37,7 @@ export default defineComponent({
     return {
       handleUnitUpdateValue (index: number, value: number | string) {
         if (props.mode === 'hexa') {
-          props.onUpdateValue(toRgbaString(rgba(value as string)))
+          props.onUpdateValue(toHexaString(rgba(value as string)))
           return
         }
         let nextValueArr: any
