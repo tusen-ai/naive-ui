@@ -38,8 +38,14 @@ import { VBinder, VFollower, VTarget } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { colorPickerLight } from '../styles'
 import type { ColorPickerTheme } from '../styles'
-import type { MergedTheme, ThemeProps } from '../../_mixins'
-import { useConfig, useTheme } from '../../_mixins'
+import {
+  MergedTheme,
+  ThemeProps,
+  useFormItem,
+  useConfig,
+  useTheme
+} from '../../_mixins'
+
 import { call, MaybeArray, useAdjustedTo } from '../../_utils'
 import HueSlider from './HueSlider'
 import AlphaSlider from './AlphaSlider'
@@ -100,6 +106,8 @@ export default defineComponent({
   setup (props) {
     const selfRef = ref<HTMLElement | null>(null)
     let upcomingValue: string | null = null
+
+    const formItemRef = useFormItem(props)
 
     const themeRef = useTheme(
       'ColorPicker',
@@ -323,9 +331,12 @@ export default defineComponent({
       } else {
         upcomingValue = null
       }
+      const { nTriggerFormChange, nTriggerFormInput } = formItemRef
       const { onUpdateValue, 'onUpdate:value': _onUpdateValue } = props
       if (onUpdateValue) call(onUpdateValue, value)
       if (_onUpdateValue) call(_onUpdateValue, value)
+      nTriggerFormChange()
+      nTriggerFormInput()
       uncontrolledValueRef.value = value
     }
 
@@ -338,7 +349,10 @@ export default defineComponent({
       const { value } = mergedValueRef
       // no value & only hue changes will complete with no value
       if (value) {
+        const { nTriggerFormChange, nTriggerFormInput } = formItemRef
         props.onComplete?.(value)
+        nTriggerFormChange()
+        nTriggerFormInput()
       }
     }
 
