@@ -7,7 +7,7 @@ type UseConfigProps = Readonly<{
   [key: string]: unknown
 }>
 
-export default function useConfig (
+export default function clsPrefix (
   props: UseConfigProps = {},
   options: {
     defaultBordered?: boolean
@@ -17,6 +17,7 @@ export default function useConfig (
 ): {
     NConfigProvider: ConfigProviderInjection | null
     mergedBordered: ComputedRef<boolean>
+    mergedClsPrefix: ComputedRef<string>
     namespace: ComputedRef<string | undefined>
   } {
   const NConfigProvider = inject(configProviderInjectionKey, null)
@@ -26,6 +27,10 @@ export default function useConfig (
       const { bordered } = props
       if (bordered !== undefined) return bordered
       return NConfigProvider?.mergedBordered ?? options.defaultBordered ?? true
+    }),
+    mergedClsPrefix: computed(() => {
+      const clsPrefix = NConfigProvider?.mergedClsPrefix
+      return clsPrefix || 'n'
     }),
     namespace: computed(() => NConfigProvider?.mergedNamespace)
   }

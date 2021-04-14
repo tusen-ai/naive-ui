@@ -201,6 +201,7 @@ export interface GlobalIconConfig {
 }
 
 export interface ConfigProviderInjection {
+  mergedClsPrefix: string | undefined
   mergedBordered: boolean | undefined
   mergedNamespace: string | undefined
   mergedLocale: NLocale | undefined

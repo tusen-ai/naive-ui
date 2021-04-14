@@ -8,7 +8,8 @@ import { configProviderInjectionKey } from '../config-provider/src/ConfigProvide
 import type { ThemeCommonVars } from '../_styles/common'
 
 globalStyle.mount({
-  id: 'naive-ui-global'
+  id: 'naive-ui-global',
+  head: true
 })
 
 export interface Theme<N, T = {}, R = any> {
@@ -84,12 +85,18 @@ function useTheme<N, T, R> (
   mountId: string,
   style: CNode | undefined,
   defaultTheme: Theme<N, T, R>,
-  props: UseThemeProps<Theme<N, T, R>>
+  props: UseThemeProps<Theme<N, T, R>>,
+  clsPrefixRef?: ComputedRef<string | undefined>
 ): ComputedRef<MergedTheme<Theme<N, T, R>>> {
   if (style) {
     onBeforeMount(() => {
+      const clsPrefix = clsPrefixRef?.value
       style.mount({
-        target: mountId
+        target: clsPrefix === undefined ? mountId : clsPrefix + mountId,
+        head: true,
+        props: {
+          bPrefix: clsPrefix ? `.${clsPrefix}-` : undefined
+        }
       })
     })
   }

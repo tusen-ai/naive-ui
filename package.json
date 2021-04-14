@@ -107,9 +107,9 @@
     "vite": "^2.1.3"
   },
   "dependencies": {
-    "@css-render/plugin-bem": "^0.13.2",
+    "@css-render/plugin-bem": "^0.13.6",
     "async-validator": "^3.5.1",
-    "css-render": "^0.13.2",
+    "css-render": "^0.13.6",
     "date-fns": "^2.19.0",
     "evtd": "^0.2.0",
     "highlight.js": "^10.7.1",

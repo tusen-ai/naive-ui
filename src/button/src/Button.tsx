@@ -11,7 +11,7 @@ import {
 } from 'vue'
 import { useMemo } from 'vooks'
 import { createHoverColor, createPressedColor } from '../../_utils/color/index'
-import { useFormItem, useTheme } from '../../_mixins'
+import { useConfig, useFormItem, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
   NFadeInExpandTransition,
@@ -171,10 +171,19 @@ export default defineComponent({
     const handleBlur = (): void => {
       enterPressedRef.value = false
     }
-    const themeRef = useTheme('Button', 'Button', style, buttonLight, props)
+    const { mergedClsPrefix } = useConfig(props)
+    const themeRef = useTheme(
+      'Button',
+      'Button',
+      style,
+      buttonLight,
+      props,
+      mergedClsPrefix
+    )
     return {
       selfRef,
       waveRef,
+      cPrefix: mergedClsPrefix,
       mergedFocusable: mergedFocusableRef,
       mergedSize: mergedSizeRef,
       showBorder: showBorderRef,
@@ -376,20 +385,20 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots } = this
+    const { $slots, cPrefix } = this
     return (
       <button
         ref="selfRef"
         class={[
-          'n-button',
-          `n-button--${this.type}-type`,
+          `${cPrefix}-button`,
+          `${cPrefix}-button--${this.type}-type`,
           {
-            'n-button--disabled': this.disabled,
-            'n-button--block': this.block,
-            'n-button--pressed': this.enterPressed,
-            'n-button--dashed': !this.text && this.dashed,
-            'n-button--color': this.color,
-            'n-button--ghost': this.ghost // required for button group border collapse
+            [`${cPrefix}-button--disabled`]: this.disabled,
+            [`${cPrefix}-button--block`]: this.block,
+            [`${cPrefix}-button--pressed`]: this.enterPressed,
+            [`${cPrefix}-button--dashed`]: !this.text && this.dashed,
+            [`${cPrefix}-button--color`]: this.color,
+            [`${cPrefix}-button--ghost`]: this.ghost // required for button group border collapse
           }
         ]}
         tabindex={this.mergedFocusable ? 0 : -1}
@@ -403,15 +412,14 @@ export default defineComponent({
         onKeydown={this.handleKeyDown}
       >
         {$slots.default && this.iconPlacement === 'right' ? (
-          <div class="n-button__content">{$slots}</div>
+          <div class={`${cPrefix}-button__content`}>{$slots}</div>
         ) : null}
-
         <NFadeInExpandTransition width>
           {{
             default: () =>
               $slots.icon || this.loading ? (
                 <span
-                  class="n-button__icon"
+                  class={`${cPrefix}-button__icon"`}
                   style={{
                     margin: !$slots.default ? 0 : ''
                   }}
@@ -422,11 +430,11 @@ export default defineComponent({
                         this.loading ? (
                           <NBaseLoading
                             key="loading"
-                            class="n-icon-slot"
+                            class={`${cPrefix}-icon-slot`}
                             strokeWidth={24}
                           />
                         ) : (
-                          <div key="icon" class="n-icon-slot">
+                          <div key="icon" class={`${cPrefix}-icon-slot`}>
                             {renderSlot($slots, 'icon')}
                           </div>
                         )
@@ -437,18 +445,18 @@ export default defineComponent({
           }}
         </NFadeInExpandTransition>
         {$slots.default && this.iconPlacement === 'left' ? (
-          <span class="n-button__content">{$slots}</span>
+          <span class={`${cPrefix}-button__content`}>{$slots}</span>
         ) : null}
         {!this.text ? <NBaseWave ref="waveRef" /> : null}
         {this.showBorder ? (
           <div
-            class="n-button__border"
+            class={`${cPrefix}-button__border`}
             style={this.customColorCssVars as CSSProperties}
           />
         ) : null}
         {this.showBorder ? (
           <div
-            class="n-button__state-border"
+            class={`${cPrefix}-button__state-border`}
             style={this.customColorCssVars as CSSProperties}
           />
         ) : null}
