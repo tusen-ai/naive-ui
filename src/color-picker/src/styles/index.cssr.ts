@@ -123,9 +123,6 @@ export default c([
     transition: border-color .3s var(--bezier);
     cursor: pointer;
   `, [
-    cE('value', `
-      transition: color .3s var(--bezier);
-    `),
     cE('fill', `
       border-radius: var(--border-radius);
       position: absolute;

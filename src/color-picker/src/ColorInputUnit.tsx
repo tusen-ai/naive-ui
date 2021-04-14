@@ -88,7 +88,7 @@ export default defineComponent({
       let unit: number | false
       let valid: boolean
       switch (props.label) {
-        case 'HEXA':
+        case 'HEX':
           valid = normalizeHexaUnit(value)
           if (!valid) {
             inputValueRef.value = getInputString()
