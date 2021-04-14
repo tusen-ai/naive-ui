@@ -6,7 +6,11 @@ import {
   toRgbaString,
   toHslaString,
   toHexaString,
-  rgba
+  rgba,
+  toHexString,
+  toHsvString,
+  toRgbString,
+  toHslString
 } from 'seemly'
 import { h, defineComponent, PropType } from 'vue'
 import { NInputGroup } from '../../input'
@@ -18,6 +22,10 @@ export default defineComponent({
   props: {
     mode: {
       type: String as PropType<ColorPickerMode>,
+      required: true
+    },
+    showAlpha: {
+      type: Boolean,
       required: true
     },
     value: {
@@ -36,8 +44,11 @@ export default defineComponent({
   setup (props) {
     return {
       handleUnitUpdateValue (index: number, value: number | string) {
-        if (props.mode === 'hexa') {
-          props.onUpdateValue(toHexaString(rgba(value as string)))
+        const { showAlpha } = props
+        if (props.mode === 'hex') {
+          props.onUpdateValue(
+            (showAlpha ? toHexaString : toHexString)(rgba(value as string))
+          )
           return
         }
         let nextValueArr: any
@@ -47,51 +58,63 @@ export default defineComponent({
           nextValueArr = Array.from(props.value) as typeof props.value
         }
         switch (props.mode) {
-          case 'hsva':
+          case 'hsv':
             nextValueArr[index] = value
-            props.onUpdateValue(toHsvaString(nextValueArr))
+            props.onUpdateValue(
+              (showAlpha ? toHsvaString : toHsvString)(nextValueArr)
+            )
             break
-          case 'rgba':
+          case 'rgb':
             nextValueArr[index] = value
-            props.onUpdateValue(toRgbaString(nextValueArr))
+            props.onUpdateValue(
+              (showAlpha ? toRgbaString : toRgbString)(nextValueArr)
+            )
             break
-          case 'hsla':
+          case 'hsl':
             nextValueArr[index] = value
-            props.onUpdateValue(toHslaString(nextValueArr))
+            props.onUpdateValue(
+              (showAlpha ? toHslaString : toHslString)(nextValueArr)
+            )
             break
         }
       }
     }
   },
   render () {
-    const { value, mode } = this
     return (
       <div class="n-color-picker-input">
         <div class="n-color-picker-input__mode" onClick={this.onUpdateMode}>
-          {mode.toUpperCase()}
+          {this.mode.toUpperCase()}
         </div>
         <NInputGroup>
           {{
-            default: () =>
-              mode === 'hexa' ? (
-                <ColorInputUnit
-                  label={mode.toUpperCase()}
-                  value={value === null ? null : toHexaString(value)}
-                  onUpdateValue={(unitValue) => {
-                    this.handleUnitUpdateValue(0, unitValue)
-                  }}
-                />
-              ) : (
-                mode.split('').map((v, i) => (
+            default: () => {
+              const { mode, value, showAlpha } = this
+              if (mode === 'hex') {
+                return (
                   <ColorInputUnit
-                    label={v.toUpperCase()}
-                    value={value === null ? null : value[i]}
+                    label={'HEX'}
+                    value={
+                      value === null
+                        ? null
+                        : (showAlpha ? toHexaString : toHexString)(value)
+                    }
                     onUpdateValue={(unitValue) => {
-                      this.handleUnitUpdateValue(i, unitValue)
+                      this.handleUnitUpdateValue(0, unitValue)
                     }}
                   />
-                ))
-              )
+                )
+              }
+              return (mode + (showAlpha ? 'a' : '')).split('').map((v, i) => (
+                <ColorInputUnit
+                  label={v.toUpperCase()}
+                  value={value === null ? null : value[i]}
+                  onUpdateValue={(unitValue) => {
+                    this.handleUnitUpdateValue(i, unitValue)
+                  }}
+                />
+              ))
+            }
           }}
         </NInputGroup>
       </div>

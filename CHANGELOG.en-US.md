@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-color-picker` add `show-alpha` prop.
+
 ## 2.5.0
 
 ### Feats

@@ -93,6 +93,10 @@ export default c([
     display: flex;
     align-items: center;
   `, [
+    cB('input', `
+      flex-grow: 1;
+      flex-basis: 0;
+    `),
     cE('mode', `
       cursor: pointer;
       width: 72px;

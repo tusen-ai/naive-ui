@@ -1,13 +1,11 @@
-export type ColorPickerMode = 'rgba' | 'hsla' | 'hsva' | 'hexa'
-
-export const modes: ColorPickerMode[] = ['rgba', 'hsla', 'hsva']
+export type ColorPickerMode = 'rgb' | 'hsl' | 'hsv' | 'hex'
 
 export function getModeFromValue (color: string | null): ColorPickerMode | null {
   if (color === null) return null
-  if (/^ *#/.test(color)) return 'hexa'
-  if (color.includes('rgb')) return 'rgba'
-  if (color.includes('hsl')) return 'hsla'
-  if (color.includes('hsv')) return 'hsva'
+  if (/^ *#/.test(color)) return 'hex'
+  if (color.includes('rgb')) return 'rgb'
+  if (color.includes('hsl')) return 'hsl'
+  if (color.includes('hsv')) return 'hsv'
   return null
 }
 

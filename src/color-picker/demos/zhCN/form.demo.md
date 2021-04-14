@@ -5,7 +5,7 @@
 ```html
 <n-form :model="model">
   <n-form-item label="颜色（#18a058）" path="color" :rule="colorRule">
-    <n-color-picker v-model:value="model.color" />
+    <n-color-picker v-model:value="model.color" :show-alpha="false" />
   </n-form-item>
 </n-form>
 ```

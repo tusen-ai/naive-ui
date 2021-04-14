@@ -73,7 +73,7 @@ export default defineComponent({
       const { value } = props
       if (value === null) return ''
       const { label } = props
-      if (label === 'HEXA') {
+      if (label === 'HEX') {
         return value as string
       }
       if (label === 'A') {
@@ -153,6 +153,8 @@ export default defineComponent({
         value={this.inputValue}
         onUpdateValue={this.handleInputUpdateValue}
         onChange={this.handleInputChange}
+        // add more space for xxx% input
+        style={this.label === 'A' ? 'flex-grow: 1.25;' : ''}
       />
     )
   }

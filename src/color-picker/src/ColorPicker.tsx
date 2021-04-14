@@ -33,7 +33,11 @@ import {
   HSVA,
   RGBA,
   HSLA,
-  toHexaString
+  toHexaString,
+  toHsvString,
+  toRgbString,
+  toHexString,
+  toHslString
 } from 'seemly'
 import { useIsMounted, useMergedState } from 'vooks'
 import { VBinder, VFollower, VTarget } from 'vueuc'
@@ -78,9 +82,13 @@ export const colorPickerPanelProps = {
   modes: {
     type: Array as PropType<ColorPickerMode[]>,
     // no hsva by default since browser doesn't support it
-    default: ['rgba', 'hexa', 'hsla']
+    default: ['rgb', 'hex', 'hsl']
   },
   to: useAdjustedTo.propTo,
+  showAlpha: {
+    type: Boolean,
+    default: true
+  },
   internalActions: Array as PropType<ReadonlyArray<'redo' | 'undo'>>,
   size: String as PropType<'small' | 'medium' | 'large'>,
   onComplete: Function as PropType<OnUpdateValue>,
@@ -146,39 +154,39 @@ export default defineComponent({
     const valueModeRef = computed(() => getModeFromValue(mergedValueRef.value))
 
     const displayedModeRef = ref<ColorPickerMode>(
-      getModeFromValue(mergedValueRef.value) || 'rgba'
+      getModeFromValue(mergedValueRef.value) || 'rgb'
     )
 
     function handleUpdateDisplayedMode (): void {
       const { modes } = props
       const { value: displayedMode } = displayedModeRef
       switch (displayedMode) {
-        case 'rgba':
-          if (modes.includes('hexa')) {
-            displayedModeRef.value = 'hexa'
+        case 'rgb':
+          if (modes.includes('hex')) {
+            displayedModeRef.value = 'hex'
             break
           }
         // eslint-disable-next-line no-fallthrough
-        case 'hexa':
-          if (modes.includes('hsva')) {
-            displayedModeRef.value = 'hsva'
+        case 'hex':
+          if (modes.includes('hsv')) {
+            displayedModeRef.value = 'hsv'
             break
           }
         // eslint-disable-next-line no-fallthrough
-        case 'hsva':
-          if (modes.includes('hsla')) {
-            displayedModeRef.value = 'hsla'
+        case 'hsv':
+          if (modes.includes('hsl')) {
+            displayedModeRef.value = 'hsl'
             break
           }
         // eslint-disable-next-line no-fallthrough
-        case 'hsla':
-          if (modes.includes('rgba')) {
-            displayedModeRef.value = 'rgba'
+        case 'hsl':
+          if (modes.includes('rgb')) {
+            displayedModeRef.value = 'rgb'
             break
           }
         // eslint-disable-next-line no-fallthrough
         default:
-          displayedModeRef.value = 'rgba'
+          displayedModeRef.value = 'rgb'
       }
     }
 
@@ -196,13 +204,13 @@ export default defineComponent({
       if (!mergedValue) return null
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       switch (valueModeRef.value!) {
-        case 'hsva':
+        case 'hsv':
           return hsva(mergedValue)
-        case 'hsla':
+        case 'hsl':
           ;[_h, s, l, a] = hsla(mergedValue)
           return [...hsl2hsv(_h, s, l), a]
-        case 'rgba':
-        case 'hexa':
+        case 'rgb':
+        case 'hex':
           ;[r, g, b, a] = rgba(mergedValue)
           return [...rgb2hsv(r, g, b), a]
       }
@@ -213,13 +221,13 @@ export default defineComponent({
       if (!mergedValue) return null
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       switch (valueModeRef.value!) {
-        case 'rgba':
-        case 'hexa':
+        case 'rgb':
+        case 'hex':
           return rgba(mergedValue)
-        case 'hsva':
+        case 'hsv':
           ;[_h, s, v, a] = hsva(mergedValue)
           return [...hsv2rgb(_h, s, v), a]
-        case 'hsla':
+        case 'hsl':
           ;[_h, s, l, a] = hsla(mergedValue)
           return [...hsl2rgb(_h, s, l), a]
       }
@@ -230,13 +238,13 @@ export default defineComponent({
       if (!mergedValue) return null
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       switch (valueModeRef.value!) {
-        case 'hsla':
+        case 'hsl':
           return hsla(mergedValue)
-        case 'hsva':
+        case 'hsv':
           ;[_h, s, v, a] = hsva(mergedValue)
           return [...hsv2hsl(_h, s, v), a]
-        case 'rgba':
-        case 'hexa':
+        case 'rgb':
+        case 'hex':
           ;[r, g, b, a] = rgba(mergedValue)
           return [...rgb2hsl(r, g, b), a]
       }
@@ -244,12 +252,12 @@ export default defineComponent({
 
     const mergedValueArrRef = computed(() => {
       switch (displayedModeRef.value) {
-        case 'rgba':
-        case 'hexa':
+        case 'rgb':
+        case 'hex':
           return rgbaRef.value
-        case 'hsva':
+        case 'hsv':
           return hsvaRef.value
-        case 'hsla':
+        case 'hsl':
           return hslaRef.value
       }
     })
@@ -263,18 +271,40 @@ export default defineComponent({
       const hue = displayedHueRef.value
       const alpha = hsvaArr ? hsvaArr[3] : 1
       displayedSvRef.value = [s, v]
+      const { showAlpha } = props
       switch (displayedModeRef.value) {
-        case 'hsva':
-          doUpdateValue(toHsvaString([hue, s, v, alpha]), 'cursor')
+        case 'hsv':
+          doUpdateValue(
+            (showAlpha ? toHsvaString : toHsvString)([hue, s, v, alpha]),
+            'cursor'
+          )
           break
-        case 'hsla':
-          doUpdateValue(toHslaString([...hsv2hsl(hue, s, v), alpha]), 'cursor')
+        case 'hsl':
+          doUpdateValue(
+            (showAlpha ? toHslaString : toHslString)([
+              ...hsv2hsl(hue, s, v),
+              alpha
+            ]),
+            'cursor'
+          )
           break
-        case 'rgba':
-          doUpdateValue(toRgbaString([...hsv2rgb(hue, s, v), alpha]), 'cursor')
+        case 'rgb':
+          doUpdateValue(
+            (showAlpha ? toRgbaString : toRgbString)([
+              ...hsv2rgb(hue, s, v),
+              alpha
+            ]),
+            'cursor'
+          )
           break
-        case 'hexa':
-          doUpdateValue(toHexaString([...hsv2rgb(hue, s, v), alpha]), 'cursor')
+        case 'hex':
+          doUpdateValue(
+            (showAlpha ? toHexaString : toHexString)([
+              ...hsv2rgb(hue, s, v),
+              alpha
+            ]),
+            'cursor'
+          )
           break
       }
     }
@@ -286,40 +316,62 @@ export default defineComponent({
         return
       }
       const [, s, v, a] = hsvaArr
+      const { showAlpha } = props
       switch (displayedModeRef.value) {
-        case 'hsva':
-          doUpdateValue(toHsvaString([hue, s, v, a]), 'cursor')
+        case 'hsv':
+          doUpdateValue(
+            (showAlpha ? toHsvaString : toHsvString)([hue, s, v, a]),
+            'cursor'
+          )
           break
-        case 'rgba':
-          doUpdateValue(toRgbaString([...hsv2rgb(hue, s, v), a]), 'cursor')
+        case 'rgb':
+          doUpdateValue(
+            (showAlpha ? toRgbaString : toRgbString)([
+              ...hsv2rgb(hue, s, v),
+              a
+            ]),
+            'cursor'
+          )
           break
-        case 'hexa':
-          doUpdateValue(toHexaString([...hsv2rgb(hue, s, v), a]), 'cursor')
+        case 'hex':
+          doUpdateValue(
+            (showAlpha ? toHexaString : toHexString)([
+              ...hsv2rgb(hue, s, v),
+              a
+            ]),
+            'cursor'
+          )
           break
-        case 'hsla':
-          doUpdateValue(toHslaString([...hsv2hsl(hue, s, v), a]), 'cursor')
+        case 'hsl':
+          doUpdateValue(
+            (showAlpha ? toHslaString : toHslString)([
+              ...hsv2hsl(hue, s, v),
+              a
+            ]),
+            'cursor'
+          )
           break
       }
     }
 
     function handleUpdateAlpha (alpha: number): void {
       switch (displayedModeRef.value) {
-        case 'hsva':
+        case 'hsv':
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           ;[_h, s, v] = hsvaRef.value!
           doUpdateValue(toHsvaString([_h, s, v, alpha]), 'cursor')
           break
-        case 'rgba':
+        case 'rgb':
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           ;[r, g, b] = rgbaRef.value!
           doUpdateValue(toRgbaString([r, g, b, alpha]), 'cursor')
           break
-        case 'hexa':
+        case 'hex':
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           ;[r, g, b] = rgbaRef.value!
           doUpdateValue(toHexaString([r, g, b, alpha]), 'cursor')
           break
-        case 'hsla':
+        case 'hsl':
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           ;[_h, s, l] = hslaRef.value!
           doUpdateValue(toHslaString([_h, s, l, alpha]), 'cursor')
@@ -469,13 +521,16 @@ export default defineComponent({
               onUpdateHue={handleUpdateHue}
               onComplete={handleComplete}
             />
-            <AlphaSlider
-              rgba={rgba}
-              alpha={displayedAlphaRef.value}
-              onUpdateAlpha={handleUpdateAlpha}
-              onComplete={handleComplete}
-            />
+            {props.showAlpha ? (
+              <AlphaSlider
+                rgba={rgba}
+                alpha={displayedAlphaRef.value}
+                onUpdateAlpha={handleUpdateAlpha}
+                onComplete={handleComplete}
+              />
+            ) : null}
             <ColorInput
+              showAlpha={props.showAlpha}
               mode={displayedModeRef.value}
               onUpdateMode={handleUpdateDisplayedMode}
               value={mergedValueArrRef.value}

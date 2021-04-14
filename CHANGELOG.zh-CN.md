@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-color-picker` 增加 `show-alpha` 属性
+
 ## 2.5.0
 
 ### Feats

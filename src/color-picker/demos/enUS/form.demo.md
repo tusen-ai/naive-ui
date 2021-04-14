@@ -5,7 +5,7 @@ It seems the example is useless. However since it's a data input component. I ju
 ```html
 <n-form :model="model">
   <n-form-item label="Color(#18a058)" path="color" :rule="colorRule">
-    <n-color-picker v-model:value="model.color" />
+    <n-color-picker v-model:value="model.color" :show-alpha="false" />
   </n-form-item>
 </n-form>
 ```

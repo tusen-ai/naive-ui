@@ -6,6 +6,7 @@
 
 ```demo
 basic
+alpha
 size
 form
 ```
@@ -19,6 +20,7 @@ form
 | modes | `Array<'rgba' \| 'hexa' \| 'hsla' \| 'hsva'>` | `['rgba', 'hexa', 'hsla']` | 颜色选择器支持颜色的格式，注意一旦你在某个模式下选择了值，颜色选择器值的格式将跟随这个格式 |
 | to | `string \| HTMLElement` | `'body'` | 面板的卸载位置 |
 | show | `boolean` | `undefined` | 是否展示面板 |
+| show-alpha | `boolean` | `true` | 是否可调节 alpha 通道 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | value | `string \| null` | `undefined` | 颜色选择器的值 |
 | on-complete | `(value: string) => void` | `undefined` | 颜色完成改变后的回调（在鼠标移动时候不会调用） |
