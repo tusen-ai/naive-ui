@@ -17,7 +17,7 @@ form
 | --- | --- | --- | --- |
 | default-show | `boolean` | `undefined` | Whether to show panel by default. |
 | default-value | `string` | `#000000` | Default value of the picker. |
-| modes | `Array<'rgba' \| 'hexa' \| 'hsla' \| 'hsva'>` | `['rgba', 'hexa', 'hsla']` | The value format of the picker. Notice that value will follow the mode once you select a new value from the picker. |
+| modes | `Array<'rgb' \| 'hex' \| 'hsl' \| 'hsv'>` | `['rgb', 'hex', 'hsl']` | The value format of the picker. Notice that value will follow the mode once you select a new value from the picker. |
 | to | `string \| HTMLElement` | `'body'` | Where to detach the panel. |
 | show | `boolean` | `undefined` | Whether to show the panel. |
 | show-alpha | `boolean` | `true` | Whether alpha can be adjusted. |

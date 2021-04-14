@@ -17,7 +17,7 @@ form
 | --- | --- | --- | --- |
 | default-show | `boolean` | `undefined` | 默认是否展示弹出层 |
 | default-value | `string` | `#000000` | 默认的颜色值 |
-| modes | `Array<'rgba' \| 'hexa' \| 'hsla' \| 'hsva'>` | `['rgba', 'hexa', 'hsla']` | 颜色选择器支持颜色的格式，注意一旦你在某个模式下选择了值，颜色选择器值的格式将跟随这个格式 |
+| modes | `Array<'rgb' \| 'hex' \| 'hsl' \| 'hsv'>` | `['rgb', 'hex', 'hsl']` | 颜色选择器支持颜色的格式，注意一旦你在某个模式下选择了值，颜色选择器值的格式将跟随这个格式 |
 | to | `string \| HTMLElement` | `'body'` | 面板的卸载位置 |
 | show | `boolean` | `undefined` | 是否展示面板 |
 | show-alpha | `boolean` | `true` | 是否可调节 alpha 通道 |
