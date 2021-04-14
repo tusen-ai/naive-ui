@@ -38,27 +38,49 @@ export default c([
       text-align: center;
     `)
   ]),
+  cB('color-picker-checkboard', `
+    background: white; 
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  `, [
+    c('&::after', `
+      background-image: linear-gradient(45deg, #DDD 25%, transparent 25%), linear-gradient(-45deg, #DDD 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #DDD 75%), linear-gradient(-45deg, transparent 75%, #DDD 75%);
+      background-size: 12px 12px;
+      background-position: 0 0, 0 6px, 6px -6px, -6px 0px;
+      background-repeat: repeat;
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    `)
+  ]),
   cB('color-picker-slider', `
     margin-bottom: 8px;
     position: relative;
     box-sizing: border-box;
-    box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, .24);
   `, [
-    cE('grid', `
-      height: 6px;
-      background-image: linear-gradient(to right, rgba(0, 0, 0, .12) 6px,transparent 6px);
-      background-size: 12px 6px;
-      background-repeat: repeat;
-      position: relative;
-    `, [
-      cM('bottom', 'right: -6px;')
-    ]),
     cE('image', `
       position: absolute;
       left: 0;
       right: 0;
       top: 0;
       bottom: 0;
+    `),
+    c('&::after', `
+      content: "";
+      position: absolute;
+      border-radius: inherit;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, .24);
+      pointer-events: none;
     `)
   ]),
   cB('color-picker-handle', `
@@ -123,6 +145,7 @@ export default c([
     transition: border-color .3s var(--bezier);
     cursor: pointer;
   `, [
+    cE('value', 'position: relative;'),
     cE('fill', `
       border-radius: var(--border-radius);
       position: absolute;
@@ -133,6 +156,15 @@ export default c([
       right: 4px;
       top: 4px;
       bottom: 4px;
-    `)
+    `),
+    cB('color-picker-checkboard', `
+      border-radius: var(--border-radius);
+    `, [
+      c('&::after', `
+        --block-size: calc((var(--height) - 8px) / 3);
+        background-size: calc(var(--block-size) * 2) calc(var(--block-size) * 2);
+        background-position: 0 0, 0 var(--block-size), var(--block-size) calc(-1 * var(--block-size)), calc(-1 * var(--block-size)) 0px;  
+      `)
+    ])
   ])
 ])

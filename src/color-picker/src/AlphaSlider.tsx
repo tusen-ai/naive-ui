@@ -76,8 +76,7 @@ export default defineComponent({
             overflow: 'hidden'
           }}
         >
-          <div class="n-color-picker-slider__grid" />
-          <div class="n-color-picker-slider__grid n-color-picker-slider__grid--bottom" />
+          <div class="n-color-picker-checkboard" />
           <div
             class="n-color-picker-slider__image"
             style={{

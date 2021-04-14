@@ -84,7 +84,7 @@ export default defineComponent({
     return (
       <div class="n-color-picker-input">
         <div class="n-color-picker-input__mode" onClick={this.onUpdateMode}>
-          {this.mode.toUpperCase()}
+          {this.mode.toUpperCase() + (this.showAlpha ? 'A' : '')}
         </div>
         <NInputGroup>
           {{

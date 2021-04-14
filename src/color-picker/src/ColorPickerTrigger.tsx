@@ -18,12 +18,18 @@ export default defineComponent({
     const { hsla, value } = this
     return (
       <div class="n-color-picker-trigger" onClick={this.onClick}>
-        <div
-          class="n-color-picker-trigger__fill"
-          style={{
-            backgroundColor: hsla ? toHslaString(hsla) : ''
-          }}
-        >
+        <div class="n-color-picker-trigger__fill">
+          <div class="n-color-picker-checkboard" />
+          <div
+            style={{
+              position: 'absolute',
+              left: 0,
+              right: 0,
+              top: 0,
+              bottom: 0,
+              backgroundColor: hsla ? toHslaString(hsla) : ''
+            }}
+          />
           {value && hsla ? (
             <div
               class="n-color-picker-trigger__value"

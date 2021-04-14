@@ -53,9 +53,10 @@ export default defineComponent({
   render () {
     return (
       <div
-        class="n-hue-slider"
+        class="n-color-picker-slider"
         style={{
-          marginBottom: '8px'
+          height: HANDLE_SIZE,
+          borderRadius: RADIUS
         }}
       >
         <div
