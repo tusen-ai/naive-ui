@@ -57,6 +57,7 @@ export default defineComponent({
       type: [Number, String] as PropType<number | string | null>,
       default: null
     },
+    showAlpha: Boolean,
     onUpdateValue: {
       type: Function as PropType<(value: number | string) => void>,
       required: true
@@ -90,11 +91,10 @@ export default defineComponent({
       switch (props.label) {
         case 'HEX':
           valid = normalizeHexaUnit(value)
-          if (!valid) {
-            inputValueRef.value = getInputString()
-          } else {
+          if (valid) {
             props.onUpdateValue(value)
           }
+          inputValueRef.value = getInputString() // to normalized new value
           break
         case 'H':
           unit = normalizeHueUnit(value)

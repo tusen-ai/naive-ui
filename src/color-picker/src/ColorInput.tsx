@@ -94,6 +94,7 @@ export default defineComponent({
                 return (
                   <ColorInputUnit
                     label={'HEX'}
+                    showAlpha={showAlpha}
                     value={
                       value === null
                         ? null
