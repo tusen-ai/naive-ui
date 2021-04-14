@@ -6,7 +6,6 @@ import {
   toRgbaString,
   toHslaString,
   toHexaString,
-  rgba,
   toHexString,
   toHsvString,
   toRgbString,
@@ -29,6 +28,11 @@ export default defineComponent({
       required: true
     },
     value: {
+      // for hex to get percise value
+      type: String as PropType<string | null>,
+      default: null
+    },
+    valueArr: {
       type: (Array as unknown) as PropType<HSVA | RGBA | HSLA | null>,
       default: null
     },
@@ -47,15 +51,15 @@ export default defineComponent({
         const { showAlpha } = props
         if (props.mode === 'hex') {
           props.onUpdateValue(
-            (showAlpha ? toHexaString : toHexString)(rgba(value as string))
+            (showAlpha ? toHexaString : toHexString)(value as string)
           )
           return
         }
         let nextValueArr: any
-        if (props.value === null) {
+        if (props.valueArr === null) {
           nextValueArr = [0, 0, 0, 0]
         } else {
-          nextValueArr = Array.from(props.value) as typeof props.value
+          nextValueArr = Array.from(props.valueArr) as typeof props.valueArr
         }
         switch (props.mode) {
           case 'hsv':
@@ -89,17 +93,20 @@ export default defineComponent({
         <NInputGroup>
           {{
             default: () => {
-              const { mode, value, showAlpha } = this
+              const { mode, valueArr, value, showAlpha } = this
               if (mode === 'hex') {
+                let hexValue = null
+                try {
+                  hexValue =
+                    value === null
+                      ? null
+                      : (showAlpha ? toHexaString : toHexString)(value)
+                } catch {}
                 return (
                   <ColorInputUnit
                     label={'HEX'}
                     showAlpha={showAlpha}
-                    value={
-                      value === null
-                        ? null
-                        : (showAlpha ? toHexaString : toHexString)(value)
-                    }
+                    value={hexValue}
                     onUpdateValue={(unitValue) => {
                       this.handleUnitUpdateValue(0, unitValue)
                     }}
@@ -109,7 +116,7 @@ export default defineComponent({
               return (mode + (showAlpha ? 'a' : '')).split('').map((v, i) => (
                 <ColorInputUnit
                   label={v.toUpperCase()}
-                  value={value === null ? null : value[i]}
+                  value={valueArr === null ? null : valueArr[i]}
                   onUpdateValue={(unitValue) => {
                     this.handleUnitUpdateValue(i, unitValue)
                   }}

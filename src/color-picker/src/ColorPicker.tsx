@@ -533,7 +533,8 @@ export default defineComponent({
               showAlpha={props.showAlpha}
               mode={displayedModeRef.value}
               onUpdateMode={handleUpdateDisplayedMode}
-              value={mergedValueArrRef.value}
+              value={mergedValueRef.value}
+              valueArr={mergedValueArrRef.value}
               onUpdateValue={handleInputUpdateValue}
             />
           </div>
