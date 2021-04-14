@@ -6,6 +6,10 @@
 
 - `n-color-picker` add `show-alpha` prop.
 
+### Fixes
+
+- Fix `n-select` default `fallback-option` breaks the component.
+
 ## 2.5.0
 
 ### Feats

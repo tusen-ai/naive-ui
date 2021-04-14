@@ -126,7 +126,7 @@ export default defineComponent({
       type: [Function, Boolean] as PropType<
       (value: string | number) => SelectBaseOption | false
       >,
-      default: (value: string | number) => ({
+      default: () => (value: string | number) => ({
         label: String(value),
         value
       })

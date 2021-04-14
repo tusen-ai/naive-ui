@@ -6,6 +6,10 @@
 
 - `n-color-picker` 增加 `show-alpha` 属性
 
+### Fixes
+
+- 修正 `n-select` 默认 `fallback-option` 属性使组件崩溃
+
 ## 2.5.0
 
 ### Feats
