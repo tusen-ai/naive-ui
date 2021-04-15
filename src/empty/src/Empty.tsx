@@ -7,35 +7,48 @@ import {
   renderSlot
 } from 'vue'
 import { EmptyIcon } from '../../_internal/icons'
-import { useLocale, useTheme } from '../../_mixins'
+import { useConfig, useLocale, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createKey } from '../../_utils'
+import { createKey, ExtractPublicPropTypes } from '../../_utils'
 import { NBaseIcon } from '../../_internal'
 import { emptyLight } from '../styles'
 import type { EmptyTheme } from '../styles'
 import style from './styles/index.cssr'
 
+const emptyProps = {
+  ...(useTheme.props as ThemeProps<EmptyTheme>),
+  description: {
+    type: String,
+    default: undefined
+  },
+  showDescription: {
+    type: Boolean,
+    default: true
+  },
+  size: {
+    type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
+    default: 'medium'
+  }
+}
+
+export type EmptyProps = ExtractPublicPropTypes<typeof emptyProps>
+
 export default defineComponent({
   name: 'Empty',
-  props: {
-    ...(useTheme.props as ThemeProps<EmptyTheme>),
-    description: {
-      type: String,
-      default: undefined
-    },
-    showDescription: {
-      type: Boolean,
-      default: true
-    },
-    size: {
-      type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
-      default: 'medium'
-    }
-  },
+  props: emptyProps,
   setup (props) {
-    const themeRef = useTheme('Empty', 'Empty', style, emptyLight, props)
+    const { mergedClsPrefix } = useConfig(props)
+    const themeRef = useTheme(
+      'Empty',
+      'Empty',
+      style,
+      emptyLight,
+      props,
+      mergedClsPrefix
+    )
     const { locale } = useLocale('Empty')
     return {
+      cPrefix: mergedClsPrefix,
       localizedDescription: computed(() => {
         return props.description || locale.value.description
       }),
@@ -63,23 +76,27 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots } = this
+    const { $slots, cPrefix } = this
     return (
-      <div class="n-empty" style={this.cssVars as CSSProperties}>
-        <div class="n-empty__icon">
+      <div class={`${cPrefix}-empty`} style={this.cssVars as CSSProperties}>
+        <div class={`${cPrefix}-empty__icon`}>
           {renderSlot($slots, 'icon', undefined, () => [
-            <NBaseIcon>{{ default: () => <EmptyIcon /> }}</NBaseIcon>
+            <NBaseIcon clsPrefix={cPrefix}>
+              {{ default: () => <EmptyIcon /> }}
+            </NBaseIcon>
           ])}
         </div>
         {this.showDescription ? (
-          <div class="n-empty__description">
+          <div class={`${cPrefix}-empty__description`}>
             {renderSlot($slots, 'default', undefined, () => [
               this.localizedDescription
             ])}
           </div>
         ) : null}
         {$slots.extra ? (
-          <div class="n-empty__extra">{renderSlot($slots, 'extra')}</div>
+          <div class={`${cPrefix}-empty__extra`}>
+            {renderSlot($slots, 'extra')}
+          </div>
         ) : null}
       </div>
     )

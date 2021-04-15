@@ -7,8 +7,7 @@ import {
   watch,
   defineComponent,
   PropType,
-  CSSProperties,
-  ExtractPropTypes
+  CSSProperties
 } from 'vue'
 import { useCompitable, useMergedState } from 'vooks'
 import { NSelect } from '../../select'
@@ -27,11 +26,12 @@ import { paginationLight, PaginationTheme } from '../styles'
 import { pageItems } from './utils'
 import type { PageItem } from './utils'
 import style from './styles/index.cssr'
-import { call, MaybeArray } from '../../_utils'
+import { call, ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { Size as InputSize } from '../../input/src/interface'
 import { Size as SelectSize } from '../../select/src/interface'
 
 const paginationProps = {
+  ...(useTheme.props as ThemeProps<PaginationTheme>),
   page: {
     type: Number,
     required: undefined
@@ -101,22 +101,20 @@ const paginationProps = {
   }
 } as const
 
-export type PaginationProps = Partial<ExtractPropTypes<typeof paginationProps>>
+export type PaginationProps = ExtractPublicPropTypes<typeof paginationProps>
 
 export default defineComponent({
   name: 'Pagination',
-  props: {
-    ...(useTheme.props as ThemeProps<PaginationTheme>),
-    ...paginationProps
-  },
+  props: paginationProps,
   setup (props) {
-    const { NConfigProvider } = useConfig(props)
+    const { NConfigProvider, mergedClsPrefix } = useConfig(props)
     const themeRef = useTheme(
       'Pagination',
       'Pagination',
       style,
       paginationLight,
-      props
+      props,
+      mergedClsPrefix
     )
     const { locale } = useLocale('Pagination')
     const selfRef = ref<HTMLElement | null>(null)
@@ -266,6 +264,7 @@ export default defineComponent({
       jumperValueRef.value = value
     }
     return {
+      cPrefix: mergedClsPrefix,
       locale,
       selfRef,
       jumperRef,
@@ -379,6 +378,7 @@ export default defineComponent({
   render () {
     // it's ok to expand all prop here since no slots' deps
     const {
+      cPrefix,
       transitionDisabled,
       disabled,
       cssVars,
@@ -409,35 +409,37 @@ export default defineComponent({
       <div
         ref="selfRef"
         class={[
-          'n-pagination',
+          `${cPrefix}-pagination`,
           {
-            'n-pagination--transition-disabled': transitionDisabled,
-            'n-pagination--disabled': disabled
+            [`${cPrefix}-pagination--transition-disabled`]: transitionDisabled,
+            [`${cPrefix}-pagination--disabled`]: disabled
           }
         ]}
         style={cssVars as CSSProperties}
       >
         <div
           class={[
-            'n-pagination-item n-pagination-item--button',
+            `${cPrefix}-pagination-item ${cPrefix}-pagination-item--button`,
             {
-              'n-pagination-item--disabled':
+              [`${cPrefix}-pagination-item--disabled`]:
                 mergedPage <= 1 || mergedPage > compitablePageCount || disabled
             }
           ]}
           onClick={handleBackwardClick}
         >
-          <NBaseIcon>{{ default: () => <BackwardIcon /> }}</NBaseIcon>
+          <NBaseIcon clsPrefix={cPrefix}>
+            {{ default: () => <BackwardIcon /> }}
+          </NBaseIcon>
         </div>
         {pageItems.map((pageItem, index) => {
           return (
             <div
               key={index}
               class={[
-                'n-pagination-item',
+                `${cPrefix}-pagination-item`,
                 {
-                  'n-pagination-item--active': pageItem.active,
-                  'n-pagination-item--disabled': disabled
+                  [`${cPrefix}-pagination-item--active`]: pageItem.active,
+                  [`${cPrefix}-pagination-item--disabled`]: disabled
                 }
               ]}
               onClick={() => handlePageItemClick(pageItem)}
@@ -447,20 +449,24 @@ export default defineComponent({
               {pageItem.type === 'page' ? pageItem.label : null}
               {pageItem.type === 'fastBackward' ? (
                 showFastBackward ? (
-                  <NBaseIcon>
+                  <NBaseIcon clsPrefix={cPrefix}>
                     {{ default: () => <FastBackwardIcon /> }}
                   </NBaseIcon>
                 ) : (
-                  <NBaseIcon>{{ default: () => <MoreIcon /> }}</NBaseIcon>
+                  <NBaseIcon clsPrefix={cPrefix}>
+                    {{ default: () => <MoreIcon /> }}
+                  </NBaseIcon>
                 )
               ) : null}
               {pageItem.type === 'fastForward' ? (
                 showFastForward ? (
-                  <NBaseIcon>
+                  <NBaseIcon clsPrefix={cPrefix}>
                     {{ default: () => <FastForwardIcon /> }}
                   </NBaseIcon>
                 ) : (
-                  <NBaseIcon>{{ default: () => <MoreIcon /> }}</NBaseIcon>
+                  <NBaseIcon clsPrefix={cPrefix}>
+                    {{ default: () => <MoreIcon /> }}
+                  </NBaseIcon>
                 )
               ) : null}
             </div>
@@ -468,15 +474,17 @@ export default defineComponent({
         })}
         <div
           class={[
-            'n-pagination-item n-pagination-item--button',
+            `${cPrefix}-pagination-item ${cPrefix}-pagination-item--button`,
             {
-              'n-pagination-item--disabled':
+              [`${cPrefix}-pagination-item--disabled`]:
                 mergedPage < 1 || mergedPage >= compitablePageCount || disabled
             }
           ]}
           onClick={handleForwardClick}
         >
-          <NBaseIcon>{{ default: () => <ForwardIcon /> }}</NBaseIcon>
+          <NBaseIcon clsPrefix={cPrefix}>
+            {{ default: () => <ForwardIcon /> }}
+          </NBaseIcon>
         </div>
         {showSizePicker ? (
           <NSelect
@@ -491,7 +499,7 @@ export default defineComponent({
           />
         ) : null}
         {showQuickJumper ? (
-          <div class="n-pagination-quick-jumper">
+          <div class={`${cPrefix}-pagination-quick-jumper`}>
             {locale.goto}
             <NInput
               ref="jumperRef"
