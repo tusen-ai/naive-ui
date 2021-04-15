@@ -7,7 +7,9 @@ type UseConfigProps = Readonly<{
   [key: string]: unknown
 }>
 
-export default function clsPrefix (
+export const defaultClsPrefix = 'n'
+
+export default function useConfig (
   props: UseConfigProps = {},
   options: {
     defaultBordered?: boolean
@@ -30,7 +32,7 @@ export default function clsPrefix (
     }),
     mergedClsPrefix: computed(() => {
       const clsPrefix = NConfigProvider?.mergedClsPrefix
-      return clsPrefix || 'n'
+      return clsPrefix || defaultClsPrefix
     }),
     namespace: computed(() => NConfigProvider?.mergedNamespace)
   }

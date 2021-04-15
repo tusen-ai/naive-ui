@@ -12,7 +12,7 @@ import {
 import { useMemo } from 'vooks'
 import { merge } from 'lodash-es'
 import { warn } from '../../_utils'
-import type { Hljs } from '../../_mixins'
+import { defaultClsPrefix, Hljs } from '../../_mixins'
 import type {
   GlobalTheme,
   GlobalThemeOverrides,
@@ -146,6 +146,10 @@ export default defineComponent({
       if (componentOptions !== undefined) return componentOptions
       return NConfigProvider?.mergedComponentProps
     })
+    const mergedClsPrefixRef = computed(() => {
+      const { clsPrefix } = props
+      return NConfigProvider?.mergedClsPrefix ?? clsPrefix
+    })
     provide(
       configProviderInjectionKey,
       reactive({
@@ -153,10 +157,7 @@ export default defineComponent({
         mergedComponentProps: mergedComponentPropsRef,
         mergedBordered: mergedBorderedRef,
         mergedNamespace: mergedNamespaceRef,
-        mergedClsPrefix: computed(() => {
-          const { clsPrefix } = props
-          return NConfigProvider?.mergedClsPrefix ?? clsPrefix
-        }),
+        mergedClsPrefix: mergedClsPrefixRef,
         mergedLocale: computed(() => {
           const { locale } = props
           if (locale === null) return undefined
@@ -202,6 +203,7 @@ export default defineComponent({
       })
     )
     return {
+      cPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
       mergedNamespace: mergedNamespaceRef,
       mergedTheme: mergedThemeRef,
@@ -213,7 +215,7 @@ export default defineComponent({
       ? h(
         this.as || this.tag,
         {
-          class: ['n-config-provider']
+          class: `${this.cPrefix || defaultClsPrefix}-config-provider`
         },
         renderSlot(this.$slots, 'default')
       )
