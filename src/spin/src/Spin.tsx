@@ -8,9 +8,9 @@ import {
 } from 'vue'
 import { useCompitable } from 'vooks'
 import { NBaseLoading } from '../../_internal'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createKey, warn } from '../../_utils'
+import { createKey, ExtractPublicPropTypes, warn } from '../../_utils'
 import { spinLight } from '../styles'
 import type { SpinTheme } from '../styles'
 import style from './styles/index.cssr'
@@ -21,38 +21,51 @@ const STROKE_WIDTH = {
   large: 18
 }
 
+const spinProps = {
+  ...(useTheme.props as ThemeProps<SpinTheme>),
+  stroke: {
+    type: String,
+    default: undefined
+  },
+  size: {
+    type: [String, Number] as PropType<'small' | 'medium' | 'large'>,
+    default: 'medium'
+  },
+  show: {
+    type: Boolean,
+    default: true
+  },
+  strokeWidth: {
+    type: Number,
+    default: undefined
+  },
+  spinning: {
+    type: Boolean,
+    validator: () => {
+      warn('spin', '`spinning` is deprecated, please use `show` instead.')
+      return true
+    },
+    default: undefined
+  }
+}
+
+export type SpinProps = ExtractPublicPropTypes<typeof spinProps>
+
 export default defineComponent({
   name: 'Spin',
-  props: {
-    ...(useTheme.props as ThemeProps<SpinTheme>),
-    stroke: {
-      type: String,
-      default: undefined
-    },
-    size: {
-      type: [String, Number] as PropType<'small' | 'medium' | 'large'>,
-      default: 'medium'
-    },
-    show: {
-      type: Boolean,
-      default: true
-    },
-    strokeWidth: {
-      type: Number,
-      default: undefined
-    },
-    spinning: {
-      type: Boolean,
-      validator: () => {
-        warn('spin', '`spinning` is deprecated, please use `show` instead.')
-        return true
-      },
-      default: undefined
-    }
-  },
+  props: spinProps,
   setup (props) {
-    const themeRef = useTheme('Spin', 'Spin', style, spinLight, props)
+    const { mergedClsPrefix } = useConfig(props)
+    const themeRef = useTheme(
+      'Spin',
+      'Spin',
+      style,
+      spinLight,
+      props,
+      mergedClsPrefix
+    )
     return {
+      cPrefix: mergedClsPrefix,
       compitableShow: useCompitable(props, ['spinning', 'show']),
       mergedStrokeWidth: computed(() => {
         const { strokeWidth } = props
@@ -76,15 +89,16 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots } = this
+    const { $slots, cPrefix } = this
     return $slots.default ? (
-      <div class="n-spin-container" style={this.cssVars as CSSProperties}>
+      <div
+        class={`${cPrefix}-spin-container`}
+        style={this.cssVars as CSSProperties}
+      >
         <div
           class={[
-            'n-spin-content',
-            {
-              'n-spin-content--spinning': this.compitableShow
-            }
+            `${cPrefix}-spin-content`,
+            this.compitableShow && `${cPrefix}-spin-content--spinning`
           ]}
         >
           {$slots}
@@ -94,9 +108,10 @@ export default defineComponent({
             default: () =>
               this.compitableShow ? (
                 <NBaseLoading
+                  clsPrefix={cPrefix}
                   stroke={this.stroke}
                   strokeWidth={this.mergedStrokeWidth}
-                  class="n-spin"
+                  class={`${cPrefix}-spin`}
                 />
               ) : null
           }}
@@ -104,10 +119,11 @@ export default defineComponent({
       </div>
     ) : (
       <NBaseLoading
+        clsPrefix={cPrefix}
         style={this.cssVars as CSSProperties}
         stroke={this.stroke}
         stroke-width={this.mergedStrokeWidth}
-        class="n-spin"
+        class={`${cPrefix}-spin`}
       />
     )
   }
