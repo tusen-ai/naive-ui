@@ -1,24 +1,20 @@
-import {
-  defineComponent,
-  h,
-  ref,
-  PropType,
-  computed,
-  mergeProps,
-  ExtractPropTypes
-} from 'vue'
+import { defineComponent, h, ref, PropType, computed, mergeProps } from 'vue'
 import type { PopoverProps } from '../../popover/src/Popover'
 import { TooltipInst } from '../../tooltip/src/Tooltip'
 import { NTooltip } from '../../tooltip'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { ellipsisLight } from '../styles'
 import type { EllipsisTheme } from '../styles'
 import style from './styles/index.cssr'
 
-const lineClampClass = 'n-ellpisis--line-clamp'
+function createLineClampClass (clsPrefix: string): string {
+  return `${clsPrefix}-ellpisis--line-clamp`
+}
 
 const ellpisisProps = {
+  ...(useTheme.props as ThemeProps<EllipsisTheme>),
   expandTrigger: String as PropType<'click'>,
   lineClamp: [Number, String] as PropType<string | number>,
   tooltip: {
@@ -27,22 +23,21 @@ const ellpisisProps = {
   }
 } as const
 
-export type EllipsisProps = Partial<ExtractPropTypes<typeof ellpisisProps>>
+export type EllipsisProps = ExtractPublicPropTypes<typeof ellpisisProps>
 
 export default defineComponent({
   name: 'Ellipsis',
   inheritAttrs: false,
-  props: {
-    ...(useTheme.props as ThemeProps<EllipsisTheme>),
-    ...ellpisisProps
-  },
+  props: ellpisisProps,
   setup (props, { slots, attrs }) {
+    const { mergedClsPrefix } = useConfig(props)
     const mergedTheme = useTheme(
       'Ellipsis',
       'ellipsis',
       style,
       ellipsisLight,
-      props
+      props,
+      mergedClsPrefix
     )
     const triggerRef = ref<HTMLElement | null>(null)
     const tooltipRef = ref<TooltipInst | null>(null)
@@ -96,8 +91,10 @@ export default defineComponent({
       <span
         {...mergeProps(attrs, {
           class: [
-            'n-ellpisis',
-            props.lineClamp !== undefined ? lineClampClass : undefined
+            `${mergedClsPrefix.value}-ellpisis`,
+            props.lineClamp !== undefined
+              ? createLineClampClass(mergedClsPrefix.value)
+              : undefined
           ],
           style: ellpisisStyleRef.value
         })}
@@ -110,6 +107,7 @@ export default defineComponent({
     function syncEllipsisStyle (trigger: HTMLElement): void {
       if (!trigger) return
       const latestStyle = ellpisisStyleRef.value
+      const lineClampClass = createLineClampClass(mergedClsPrefix.value)
       if (props.lineClamp !== undefined) {
         if (!trigger.classList.contains(lineClampClass)) {
           trigger.classList.add(lineClampClass)
