@@ -10,6 +10,10 @@ const RADIUS = '6px'
 export default defineComponent({
   name: 'AlphaSlider',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     rgba: {
       type: (Array as unknown) as PropType<RGBA | null>,
       default: null
@@ -55,9 +59,10 @@ export default defineComponent({
     }
   },
   render () {
+    const { clsPrefix } = this
     return (
       <div
-        class="n-color-picker-slider"
+        class={`${clsPrefix}-color-picker-slider`}
         ref="railRef"
         style={{
           height: HANDLE_SIZE,
@@ -76,9 +81,9 @@ export default defineComponent({
             overflow: 'hidden'
           }}
         >
-          <div class="n-color-picker-checkboard" />
+          <div class={`${clsPrefix}-color-picker-checkboard`} />
           <div
-            class="n-color-picker-slider__image"
+            class={`${clsPrefix}-color-picker-slider__image`}
             style={{
               backgroundImage: this.railBackgroundImage
             }}
@@ -95,7 +100,7 @@ export default defineComponent({
             }}
           >
             <div
-              class="n-color-picker-handle"
+              class={`${clsPrefix}-color-picker-handle`}
               style={{
                 left: `calc(${this.alpha * 100}% - ${RADIUS})`,
                 borderRadius: RADIUS,
@@ -104,7 +109,7 @@ export default defineComponent({
               }}
             >
               <div
-                class="n-color-picker-handle__fill"
+                class={`${clsPrefix}-color-picker-handle__fill`}
                 style={{
                   backgroundColor: toRgbaString(this.rgba),
                   borderRadius: RADIUS,

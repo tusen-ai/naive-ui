@@ -19,6 +19,10 @@ import type { ColorPickerMode } from './utils'
 export default defineComponent({
   name: 'ColorInput',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     mode: {
       type: String as PropType<ColorPickerMode>,
       required: true
@@ -85,9 +89,13 @@ export default defineComponent({
     }
   },
   render () {
+    const { clsPrefix } = this
     return (
-      <div class="n-color-picker-input">
-        <div class="n-color-picker-input__mode" onClick={this.onUpdateMode}>
+      <div class={`${clsPrefix}-color-picker-input`}>
+        <div
+          class={`${clsPrefix}-color-picker-input__mode`}
+          onClick={this.onUpdateMode}
+        >
           {this.mode.toUpperCase() + (this.showAlpha ? 'A' : '')}
         </div>
         <NInputGroup>

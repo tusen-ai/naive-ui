@@ -8,6 +8,10 @@ const RADIUS = '6px'
 export default defineComponent({
   name: 'Pallete',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     rgba: {
       type: (Array as unknown) as PropType<HSVA | null>,
       default: null
@@ -61,21 +65,22 @@ export default defineComponent({
     }
   },
   render () {
+    const { clsPrefix } = this
     return (
       <div
-        class="n-color-picker-pallete"
+        class={`${clsPrefix}-color-picker-pallete`}
         onMousedown={this.handleMouseDown}
         ref="palleteRef"
       >
         <div
-          class="n-color-picker-pallete__layer"
+          class={`${clsPrefix}-color-picker-pallete__layer`}
           style={{
             // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
             backgroundImage: `linear-gradient(90deg, white, hsl(${this.displayedHue}, 100%, 50%))`
           }}
         />
         <div
-          class="n-color-picker-pallete__layer n-color-picker-pallete__layer--shadowed"
+          class={`${clsPrefix}-color-picker-pallete__layer ${clsPrefix}-color-picker-pallete__layer--shadowed`}
           style={{
             backgroundImage:
               'linear-gradient(180deg, rgba(0, 0, 0, 0%), rgba(0, 0, 0, 100%))'
@@ -83,7 +88,7 @@ export default defineComponent({
         />
         {this.rgba && (
           <div
-            class="n-color-picker-handle"
+            class={`${clsPrefix}-color-picker-handle`}
             style={{
               width: HANDLE_SIZE,
               height: HANDLE_SIZE,
@@ -93,7 +98,7 @@ export default defineComponent({
             }}
           >
             <div
-              class="n-color-picker-handle__fill"
+              class={`${clsPrefix}-color-picker-handle__fill`}
               style={{
                 backgroundColor: this.handleColor,
                 borderRadius: RADIUS,

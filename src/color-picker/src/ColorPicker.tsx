@@ -13,7 +13,6 @@ import {
   provide,
   InjectionKey,
   ComputedRef,
-  ExtractPropTypes,
   Ref,
   watch
 } from 'vue'
@@ -52,7 +51,8 @@ import {
   useTheme,
   useLocale
 } from '../../_mixins'
-import { call, createKey, MaybeArray, useAdjustedTo } from '../../_utils'
+import { call, createKey, useAdjustedTo } from '../../_utils'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import HueSlider from './HueSlider'
 import AlphaSlider from './AlphaSlider'
 import Pallete from './Pallete'
@@ -68,7 +68,7 @@ export const colorPickerPanelProps = {
   ...(useTheme.props as ThemeProps<ColorPickerTheme>),
   value: String,
   show: {
-    type: Boolean,
+    type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
   defaultShow: {
@@ -102,8 +102,8 @@ export const colorPickerPanelProps = {
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 } as const
 
-export type ColorPickerProps = Partial<
-ExtractPropTypes<typeof colorPickerPanelProps>
+export type ColorPickerProps = ExtractPublicPropTypes<
+  typeof colorPickerPanelProps
 >
 
 export const colorPickerThemeInjectionKey: InjectionKey<
@@ -119,13 +119,15 @@ export default defineComponent({
 
     const formItemRef = useFormItem(props)
     const { locale: localeRef } = useLocale('global')
+    const { mergedClsPrefix, namespace } = useConfig(props)
 
     const themeRef = useTheme(
       'ColorPicker',
       'ColorPicker',
       style,
       colorPickerLight,
-      props
+      props,
+      mergedClsPrefix
     )
 
     provide(colorPickerThemeInjectionKey, themeRef)
@@ -500,16 +502,18 @@ export default defineComponent({
       const { value: displayedHue } = displayedHueRef
       const { internalActions } = props
       const { value: mergedTheme } = themeRef
+      const { value: cPrefix } = mergedClsPrefix
       return (
         <div
-          class="n-color-picker-panel"
+          class={`${cPrefix}-color-picker-panel`}
           onDragstart={(e) => {
             e.preventDefault()
           }}
           style={cssVarsRef.value as CSSProperties}
         >
-          <div class="n-color-picker-control">
+          <div class={`${cPrefix}-color-picker-control`}>
             <Pallete
+              clsPrefix={cPrefix}
               rgba={rgba}
               displayedHue={displayedHue}
               displayedSv={displayedSvRef.value}
@@ -517,12 +521,14 @@ export default defineComponent({
               onComplete={handleComplete}
             />
             <HueSlider
+              clsPrefix={cPrefix}
               hue={displayedHue}
               onUpdateHue={handleUpdateHue}
               onComplete={handleComplete}
             />
             {props.showAlpha ? (
               <AlphaSlider
+                clsPrefix={cPrefix}
                 rgba={rgba}
                 alpha={displayedAlphaRef.value}
                 onUpdateAlpha={handleUpdateAlpha}
@@ -530,6 +536,7 @@ export default defineComponent({
               />
             ) : null}
             <ColorInput
+              clsPrefix={cPrefix}
               showAlpha={props.showAlpha}
               mode={displayedModeRef.value}
               onUpdateMode={handleUpdateDisplayedMode}
@@ -539,9 +546,11 @@ export default defineComponent({
             />
           </div>
           {slots.action ? (
-            <div class="n-color-picker-action">{{ default: slots.action }}</div>
+            <div class={`${cPrefix}-color-picker-action`}>
+              {{ default: slots.action }}
+            </div>
           ) : internalActions ? (
-            <div class="n-color-picker-action">
+            <div class={`${cPrefix}-color-picker-action`}>
               {internalActions.includes('undo') && (
                 <NButton
                   size="small"
@@ -571,7 +580,8 @@ export default defineComponent({
     }
 
     return {
-      ...useConfig(props),
+      cPrefix: mergedClsPrefix,
+      namespace,
       selfRef,
       hsla: hslaRef,
       rgba: rgbaRef,
@@ -591,9 +601,10 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     return (
       <div
-        class="n-color-picker"
+        class={`${cPrefix}-color-picker`}
         ref="selfRef"
         style={this.cssVars as CSSProperties}
       >
@@ -604,6 +615,7 @@ export default defineComponent({
                 {{
                   default: () => (
                     <ColorPickerTrigger
+                      clsPrefix={cPrefix}
                       value={this.mergedValue}
                       hsla={this.hsla}
                       onClick={this.handleTriggerClick}

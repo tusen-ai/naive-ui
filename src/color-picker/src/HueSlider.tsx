@@ -13,6 +13,10 @@ const GRADIENT =
 export default defineComponent({
   name: 'HueSlider',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     hue: {
       type: Number,
       required: true
@@ -51,9 +55,10 @@ export default defineComponent({
     }
   },
   render () {
+    const { clsPrefix } = this
     return (
       <div
-        class="n-color-picker-slider"
+        class={`${clsPrefix}-color-picker-slider`}
         style={{
           height: HANDLE_SIZE,
           borderRadius: RADIUS
@@ -81,7 +86,7 @@ export default defineComponent({
             }}
           >
             <div
-              class="n-color-picker-handle"
+              class={`${clsPrefix}-color-picker-handle`}
               style={{
                 left: `calc((${this.hue}%) / 359 * 100 - ${RADIUS})`,
                 borderRadius: RADIUS,
@@ -90,7 +95,7 @@ export default defineComponent({
               }}
             >
               <div
-                class="n-color-picker-handle__fill"
+                class={`${clsPrefix}-color-picker-handle__fill`}
                 style={{
                   backgroundColor: `hsl(${this.hue}, 100%, 50%)`,
                   borderRadius: RADIUS,

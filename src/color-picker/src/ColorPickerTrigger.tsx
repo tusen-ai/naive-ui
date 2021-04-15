@@ -4,6 +4,10 @@ import { defineComponent, PropType, h } from 'vue'
 export default defineComponent({
   name: 'ColorPickerTrigger',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     value: {
       type: String as PropType<string | null>,
       default: null
@@ -15,11 +19,11 @@ export default defineComponent({
     onClick: Function as PropType<() => void>
   },
   render () {
-    const { hsla, value } = this
+    const { hsla, value, clsPrefix } = this
     return (
-      <div class="n-color-picker-trigger" onClick={this.onClick}>
-        <div class="n-color-picker-trigger__fill">
-          <div class="n-color-picker-checkboard" />
+      <div class={`${clsPrefix}-color-picker-trigger`} onClick={this.onClick}>
+        <div class={`${clsPrefix}-color-picker-trigger__fill`}>
+          <div class={`${clsPrefix}-color-picker-checkboard`} />
           <div
             style={{
               position: 'absolute',
@@ -32,7 +36,7 @@ export default defineComponent({
           />
           {value && hsla ? (
             <div
-              class="n-color-picker-trigger__value"
+              class={`${clsPrefix}-color-picker-trigger__value`}
               style={{
                 color: hsla[2] > 50 || hsla[3] < 0.5 ? 'black' : 'white'
               }}
