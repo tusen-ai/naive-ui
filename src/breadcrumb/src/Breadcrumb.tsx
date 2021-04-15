@@ -1,33 +1,58 @@
-import { h, computed, defineComponent, CSSProperties, provide } from 'vue'
-import { useTheme } from '../../_mixins'
+import {
+  h,
+  computed,
+  defineComponent,
+  CSSProperties,
+  provide,
+  ExtractPropTypes,
+  InjectionKey,
+  Ref,
+  toRef
+} from 'vue'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { breadcrumbLight } from '../styles'
 import type { BreadcrumbTheme } from '../styles'
 import style from './styles/index.cssr'
 
 export interface BreadcrumbInjection {
-  separator: string
+  separatorRef: Ref<string>
+  mergedClsPrefixRef: Ref<string>
 }
+
+export const breadcrumbInjectionKey: InjectionKey<BreadcrumbInjection> = Symbol(
+  'breadcrumb'
+)
+
+const breadcrumbProps = {
+  ...(useTheme.props as ThemeProps<BreadcrumbTheme>),
+  separator: {
+    type: String,
+    default: '/'
+  }
+} as const
+
+export type BreadcrumbProps = Partial<ExtractPropTypes<typeof breadcrumbProps>>
 
 export default defineComponent({
   name: 'Breadcrumb',
-  props: {
-    ...(useTheme.props as ThemeProps<BreadcrumbTheme>),
-    separator: {
-      type: String,
-      default: '/'
-    }
-  },
+  props: breadcrumbProps,
   setup (props) {
+    const { mergedClsPrefix } = useConfig(props)
     const themeRef = useTheme(
       'Breadcrumb',
       'Breadcrumb',
       style,
       breadcrumbLight,
-      props
+      props,
+      mergedClsPrefix
     )
-    provide<BreadcrumbInjection>('NBreadcrumb', props)
+    provide(breadcrumbInjectionKey, {
+      separatorRef: toRef(props, 'separator'),
+      mergedClsPrefixRef: mergedClsPrefix
+    })
     return {
+      cPrefix: mergedClsPrefix,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
@@ -56,7 +81,10 @@ export default defineComponent({
   },
   render () {
     return (
-      <div class="n-breadcrumb" style={this.cssVars as CSSProperties}>
+      <div
+        class={`${this.cPrefix}-breadcrumb`}
+        style={this.cssVars as CSSProperties}
+      >
         {this.$slots}
       </div>
     )
