@@ -1,4 +1,4 @@
-import { h, defineComponent } from 'vue'
+import { h, defineComponent, toRef } from 'vue'
 import { useStyle } from '../../../_mixins'
 import NIconSwitchTransition from '../../icon-switch-transition'
 import style from './styles/index.cssr'
@@ -6,6 +6,10 @@ import style from './styles/index.cssr'
 export default defineComponent({
   name: 'BaseLoading',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     scale: {
       type: Number,
       default: 1
@@ -27,26 +31,27 @@ export default defineComponent({
       default: true
     }
   },
-  setup () {
-    useStyle('BaseLoading', style)
+  setup (props) {
+    useStyle('BaseLoading', style, toRef(props, 'clsPrefix'))
   },
   render () {
+    const { clsPrefix } = this
     return (
-      <div class="n-base-loading" style={{ stroke: this.stroke }}>
+      <div class={`${clsPrefix}-base-loading`} style={{ stroke: this.stroke }}>
         <NIconSwitchTransition>
           {{
             default: () =>
               this.show ? (
                 <svg
                   key="loading"
-                  class="n-base-loading-circular n-base-loading__icon"
+                  class={`${clsPrefix}-base-loading-circular ${clsPrefix}-base-loading__icon`}
                   viewBox={`0 0 ${(this.radius * 2) / this.scale} ${
                     (this.radius * 2) / this.scale
                   }`}
                 >
                   <circle
                     style={{ strokeWidth: this.strokeWidth }}
-                    class="n-base-loading-circular-path"
+                    class={`${clsPrefix}-base-loading-circular-path`}
                     cx={this.radius / this.scale}
                     cy={this.radius / this.scale}
                     fill="none"
@@ -54,7 +59,10 @@ export default defineComponent({
                   />
                 </svg>
               ) : (
-                <div key="placeholder" class="n-base-loading__placeholder">
+                <div
+                  key="placeholder"
+                  class={`${clsPrefix}-base-loading__placeholder`}
+                >
                   {this.$slots}
                 </div>
               )

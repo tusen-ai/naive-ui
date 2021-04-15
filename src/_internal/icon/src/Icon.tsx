@@ -7,7 +7,7 @@ export default defineComponent({
   props: {
     clsPerfix: {
       type: String,
-      default: 'n'
+      required: true
     },
     onClick: Function as PropType<(e: MouseEvent) => void>,
     onMousedown: Function as PropType<(e: MouseEvent) => void>

@@ -7,7 +7,8 @@ import {
   defineComponent,
   PropType,
   renderSlot,
-  CSSProperties
+  CSSProperties,
+  ExtractPropTypes
 } from 'vue'
 import { useMemo } from 'vooks'
 import { createHoverColor, createPressedColor } from '../../_utils/color/index'
@@ -24,74 +25,78 @@ import { call, createKey } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import { buttonLight } from '../styles'
 import type { ButtonTheme } from '../styles'
-import type { ButtonGroupInjection } from './ButtonGroup'
+import { buttonGroupInjectionKey } from './ButtonGroup'
 import type { Type, Size } from './interface'
 import style from './styles/button.cssr'
 
+const buttonProps = {
+  ...(useTheme.props as ThemeProps<ButtonTheme>),
+  color: String,
+  text: {
+    type: Boolean,
+    default: false
+  },
+  block: {
+    type: Boolean,
+    default: false
+  },
+  loading: {
+    type: Boolean,
+    default: false
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  circle: {
+    type: Boolean,
+    default: false
+  },
+  size: String as PropType<Size>,
+  ghost: {
+    type: Boolean,
+    default: false
+  },
+  round: {
+    type: Boolean,
+    default: false
+  },
+  focusable: {
+    type: Boolean,
+    default: true
+  },
+  keyboard: {
+    type: Boolean,
+    default: true
+  },
+  type: {
+    type: String as PropType<Type>,
+    default: 'default'
+  },
+  dashed: {
+    type: Boolean,
+    default: false
+  },
+  iconPlacement: {
+    type: String as PropType<'left' | 'right'>,
+    default: 'left'
+  },
+  attrType: {
+    type: String as PropType<'button' | 'submit' | 'reset'>,
+    default: 'button'
+  },
+  onClick: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
+  bordered: {
+    type: Boolean,
+    default: true
+  }
+} as const
+
+export type ButtonProps = Partial<ExtractPropTypes<typeof buttonProps>>
+
 export default defineComponent({
   name: 'Button',
-  props: {
-    ...(useTheme.props as ThemeProps<ButtonTheme>),
-    color: String,
-    text: {
-      type: Boolean,
-      default: false
-    },
-    block: {
-      type: Boolean,
-      default: false
-    },
-    loading: {
-      type: Boolean,
-      default: false
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    circle: {
-      type: Boolean,
-      default: false
-    },
-    size: String as PropType<Size>,
-    ghost: {
-      type: Boolean,
-      default: false
-    },
-    round: {
-      type: Boolean,
-      default: false
-    },
-    focusable: {
-      type: Boolean,
-      default: true
-    },
-    keyboard: {
-      type: Boolean,
-      default: true
-    },
-    type: {
-      type: String as PropType<Type>,
-      default: 'default'
-    },
-    dashed: {
-      type: Boolean,
-      default: false
-    },
-    iconPlacement: {
-      type: String as PropType<'left' | 'right'>,
-      default: 'left'
-    },
-    attrType: {
-      type: String as PropType<'button' | 'submit' | 'reset'>,
-      default: 'button'
-    },
-    onClick: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
-    bordered: {
-      type: Boolean,
-      default: true
-    }
-  },
+  props: buttonProps,
   setup (props) {
     const selfRef = ref<HTMLElement | null>(null)
     const waveRef = ref<BaseWaveRef | null>(null)
@@ -103,7 +108,7 @@ export default defineComponent({
         props.bordered
       )
     })
-    const NButtonGroup = inject<ButtonGroupInjection>('NButtonGroup', {})
+    const NButtonGroup = inject(buttonGroupInjectionKey, {})
     const { mergedSize: mergedSizeRef } = useFormItem(
       {},
       {
@@ -429,6 +434,7 @@ export default defineComponent({
                       default: () =>
                         this.loading ? (
                           <NBaseLoading
+                            clsPrefix={cPrefix}
                             key="loading"
                             class={`${cPrefix}-icon-slot`}
                             strokeWidth={24}
@@ -447,7 +453,7 @@ export default defineComponent({
         {$slots.default && this.iconPlacement === 'left' ? (
           <span class={`${cPrefix}-button__content`}>{$slots}</span>
         ) : null}
-        {!this.text ? <NBaseWave ref="waveRef" /> : null}
+        {!this.text ? <NBaseWave ref="waveRef" clsPrefix={cPrefix} /> : null}
         {this.showBorder ? (
           <div
             class={`${cPrefix}-button__border`}

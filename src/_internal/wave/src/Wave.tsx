@@ -1,4 +1,4 @@
-import { h, defineComponent, ref, onBeforeUnmount, nextTick } from 'vue'
+import { h, defineComponent, ref, onBeforeUnmount, nextTick, toRef } from 'vue'
 import { useStyle } from '../../../_mixins'
 import style from './styles/index.cssr'
 
@@ -8,8 +8,14 @@ export interface BaseWaveRef {
 
 export default defineComponent({
   name: 'BaseWave',
-  setup () {
-    useStyle('BaseWave', style)
+  props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    }
+  },
+  setup (props) {
+    useStyle('BaseWave', style, toRef(props, 'clsPrefix'))
     const selfRef = ref<HTMLElement | null>(null)
     const activeRef = ref(false)
     let animationTimerId: number | null = null
@@ -40,14 +46,13 @@ export default defineComponent({
     }
   },
   render () {
+    const { clsPrefix } = this
     return (
       <div
         ref="selfRef"
         class={[
-          'n-base-wave',
-          {
-            'n-base-wave--active': this.active
-          }
+          `${clsPrefix}-base-wave`,
+          this.active && `${clsPrefix}-base-wave--active`
         ]}
       />
     )

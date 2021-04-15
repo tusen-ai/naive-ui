@@ -1,5 +1,12 @@
-import { h, PropType, defineComponent, provide } from 'vue'
-import { useStyle } from '../../_mixins'
+import {
+  h,
+  PropType,
+  defineComponent,
+  provide,
+  InjectionKey,
+  ExtractPropTypes
+} from 'vue'
+import { useConfig, useStyle } from '../../_mixins'
 import type { Size } from './interface'
 import style from './styles/button-group.cssr'
 
@@ -7,29 +14,41 @@ export interface ButtonGroupInjection {
   size?: Size | undefined
 }
 
+export const buttonGroupInjectionKey: InjectionKey<ButtonGroupInjection> = Symbol(
+  'button-group'
+)
+
+const buttonGroupProps = {
+  size: {
+    type: String as PropType<Size | undefined>,
+    default: undefined
+  },
+  vertical: Boolean
+} as const
+
+export type ButtonGroupProps = Partial<
+ExtractPropTypes<typeof buttonGroupProps>
+>
+
 export default defineComponent({
   name: 'ButtonGroup',
-  props: {
-    size: {
-      type: String as PropType<Size | undefined>,
-      default: undefined
-    },
-    vertical: {
-      type: Boolean,
-      default: false
+  props: buttonGroupProps,
+  setup (props) {
+    const { mergedClsPrefix } = useConfig(props)
+    useStyle('ButtonGroup', style, mergedClsPrefix)
+    provide(buttonGroupInjectionKey, props)
+    return {
+      cPrefix: mergedClsPrefix
     }
   },
-  setup (props) {
-    useStyle('ButtonGroup', style)
-    provide<ButtonGroupInjection>('NButtonGroup', props)
-  },
   render () {
+    const { cPrefix } = this
     return (
       <div
         class={[
-          'n-button-group',
+          `${cPrefix}-button-group`,
           {
-            'n-button-group--vertical': this.vertical
+            [`${cPrefix}-button-group--vertical`]: this.vertical
           }
         ]}
       >
