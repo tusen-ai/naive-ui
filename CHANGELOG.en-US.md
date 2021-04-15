@@ -2,6 +2,12 @@
 
 ## 2.5.1
 
+## Pending
+
+### Fixes
+
+- Fix `n-popover` may influence other popover when static props is hoisted.
+
 ### Feats
 
 - `n-color-picker` add `show-alpha` prop.

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修正 `n-popover` 在静态提升时可能影响别的 popover 的问题
+
 ## 2.5.1
 
 ### Feats

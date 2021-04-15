@@ -35,6 +35,9 @@ function appendEvents (
 ): void {
   Object.entries(events).forEach(([key, handler]) => {
     if (!vNode.props) vNode.props = {}
+    else {
+      vNode.props = Object.assign({}, vNode.props)
+    }
     const originalHandler = vNode.props[key]
     if (!originalHandler) vNode.props[key] = handler
     else {

@@ -17,6 +17,7 @@ raw-content
 style
 trigger-width
 manual-position
+hoist-debug
 ```
 
 ## Props
