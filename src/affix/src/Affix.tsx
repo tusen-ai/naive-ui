@@ -6,10 +6,11 @@ import {
   defineComponent,
   CSSProperties,
   PropType,
-  h
+  h,
+  ExtractPropTypes
 } from 'vue'
 import { getScrollParent, unwrapElement } from 'seemly'
-import { useStyle } from '../../_mixins'
+import { useConfig, useStyle } from '../../_mixins'
 import { warn, keysOf } from '../../_utils'
 import style from './styles/index.cssr'
 
@@ -53,11 +54,14 @@ export const affixProps = {
 
 export const affixPropKeys = keysOf(affixProps)
 
+export type AffixProps = Partial<ExtractPropTypes<typeof affixProps>>
+
 export default defineComponent({
   name: 'Affix',
   props: affixProps,
   setup (props) {
-    useStyle('Affix', style)
+    const { mergedClsPrefix } = useConfig(props)
+    useStyle('Affix', style, mergedClsPrefix)
     const scrollElementRef = ref<HTMLElement | null>(null)
     const stickToTopRef = ref(false)
     const stickToBottomRef = ref(false)
@@ -163,6 +167,7 @@ export default defineComponent({
     return {
       selfRef,
       affixed: affixedRef,
+      cPrefix: mergedClsPrefix,
       mergedstyle: computed<CSSProperties>(() => {
         const style: CSSProperties = {}
         if (stickToTopRef.value && mergedOffsetTopRef.value !== undefined) {
@@ -179,14 +184,16 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     return (
       <div
         ref="selfRef"
         class={[
-          'n-affix',
+          `${cPrefix}-affix`,
           {
-            'n-affix--affixed': this.affixed,
-            'n-affix--absolute-positioned': this.position === 'absolute'
+            [`${cPrefix}-affix--affixed`]: this.affixed,
+            [`${cPrefix}-affix--absolute-positioned`]:
+              this.position === 'absolute'
           }
         ]}
         style={this.mergedstyle}
