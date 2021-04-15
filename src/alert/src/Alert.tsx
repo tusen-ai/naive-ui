@@ -5,7 +5,8 @@ import {
   defineComponent,
   PropType,
   mergeProps,
-  renderSlot
+  renderSlot,
+  ExtractPropTypes
 } from 'vue'
 import { getMargin } from 'seemly'
 import {
@@ -15,60 +16,69 @@ import {
   ErrorIcon
 } from '../../_internal/icons'
 import { NFadeInExpandTransition, NBaseClose, NBaseIcon } from '../../_internal'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { warn, createKey } from '../../_utils'
 import { alertLight } from '../styles'
 import type { AlertTheme } from '../styles'
 import style from './styles/index.cssr'
 
+const alertProps = {
+  ...(useTheme.props as ThemeProps<AlertTheme>),
+  title: {
+    type: String,
+    default: undefined
+  },
+  showIcon: {
+    type: Boolean,
+    default: true
+  },
+  type: {
+    type: String as PropType<
+    'info' | 'warning' | 'error' | 'success' | 'default'
+    >,
+    default: 'default'
+  },
+  closable: {
+    type: Boolean,
+    default: false
+  },
+  onClose: Function,
+  onAfterLeave: {
+    type: Function,
+    default: undefined
+  },
+  onAfterHide: {
+    type: Function,
+    validator: () => {
+      if (__DEV__) {
+        warn(
+          'alert',
+          '`on-after-hide` is deprecated, please use `on-after-leave` instead.'
+        )
+      }
+      return true
+    },
+    default: undefined
+  }
+}
+
+export type AlertProps = Partial<ExtractPropTypes<typeof alertProps>>
+
 export default defineComponent({
   name: 'Alert',
   inheritAttrs: false,
-  props: {
-    ...(useTheme.props as ThemeProps<AlertTheme>),
-    title: {
-      type: String,
-      default: undefined
-    },
-    showIcon: {
-      type: Boolean,
-      default: true
-    },
-    type: {
-      type: String as PropType<
-      'info' | 'warning' | 'error' | 'success' | 'default'
-      >,
-      default: 'default'
-    },
-    closable: {
-      type: Boolean,
-      default: false
-    },
-    onClose: {
-      type: Function,
-      default: () => true
-    },
-    onAfterLeave: {
-      type: Function,
-      default: undefined
-    },
-    onAfterHide: {
-      type: Function,
-      validator: () => {
-        if (__DEV__) {
-          warn(
-            'alert',
-            '`on-after-hide` is deprecated, please use `on-after-leave` instead.'
-          )
-        }
-        return true
-      },
-      default: undefined
-    }
-  },
+  props: alertProps,
   setup (props) {
-    const themeRef = useTheme('Alert', 'Alert', style, alertLight, props)
+    const { mergedClsPrefix } = useConfig(props)
+    const themeRef = useTheme(
+      'Alert',
+      'Alert',
+      style,
+      alertLight,
+      props,
+      mergedClsPrefix
+    )
     const cssVars = computed(() => {
       const {
         common: { cubicBezierEaseInOut },
@@ -122,7 +132,7 @@ export default defineComponent({
       if (onAfterHide) onAfterHide()
     }
     const handleCloseClick = (): void => {
-      void Promise.resolve(props.onClose()).then((result) => {
+      void Promise.resolve(props.onClose?.()).then((result) => {
         if (result === false) return
         visibleRef.value = false
       })
@@ -131,6 +141,7 @@ export default defineComponent({
       doAfterLeave()
     }
     return {
+      cPrefix: mergedClsPrefix,
       visible: visibleRef,
       handleCloseClick,
       handleAfterLeave,
@@ -139,6 +150,7 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     return (
       <NFadeInExpandTransition onAfterLeave={this.handleAfterLeave}>
         {{
@@ -148,22 +160,22 @@ export default defineComponent({
                 'div',
                 mergeProps(this.$attrs, {
                   class: [
-                    'n-alert',
-                    {
-                      'n-alert--show-icon': this.showIcon
-                    }
+                      `${cPrefix}-alert`,
+                      {
+                        [`${cPrefix}-alert--show-icon`]: this.showIcon
+                      }
                   ],
                   style: this.cssVars
                 }),
                 [
                   this.closable ? (
                     <NBaseClose
-                      class="n-alert__close"
+                      class={`${cPrefix}-alert__close`}
                       onClick={this.handleCloseClick}
                     />
                   ) : null,
                   this.showIcon ? (
-                    <div class="n-alert__icon">
+                    <div class={`${cPrefix}-alert__icon`}>
                       {this.$slots.icon ? (
                         renderSlot(this.$slots, 'icon')
                       ) : (
@@ -188,16 +200,18 @@ export default defineComponent({
                       )}
                     </div>
                   ) : null,
-                  <div class="n-alert-body">
+                  <div class={`${cPrefix}-alert-body`}>
                     {this.title !== undefined ? (
-                      <div class="n-alert-body__title">
+                      <div class={`${cPrefix}-alert-body__title`}>
                         {renderSlot(this.$slots, 'header', undefined, () => [
                           this.title
                         ])}
                       </div>
                     ) : null}
                     {this.$slots.default ? (
-                      <div class="n-alert-body__content">{this.$slots}</div>
+                      <div class={`${cPrefix}-alert-body__content`}>
+                        {this.$slots}
+                      </div>
                     ) : null}
                   </div>
                 ] as any
