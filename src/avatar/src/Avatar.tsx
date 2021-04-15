@@ -5,37 +5,44 @@ import {
   onUpdated,
   onMounted,
   defineComponent,
-  PropType
+  PropType,
+  ExtractPropTypes
 } from 'vue'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { avatarLight } from '../styles'
 import type { AvatarTheme } from '../styles'
 import { createKey } from '../../_utils'
 import style from './styles/index.cssr'
 
+const avatarProps = {
+  ...(useTheme.props as ThemeProps<AvatarTheme>),
+  size: {
+    type: [String, Number] as PropType<
+    number | 'tiny' | 'small' | 'medium' | 'large' | 'huge'
+    >,
+    default: 'medium'
+  },
+  src: String,
+  circle: {
+    type: Boolean,
+    default: false
+  },
+  round: {
+    type: Boolean,
+    default: false
+  },
+  color: String
+} as const
+
+export type AvatarProps = Partial<ExtractPropTypes<typeof avatarProps>>
+
 export default defineComponent({
   name: 'Avatar',
-  props: {
-    ...(useTheme.props as ThemeProps<AvatarTheme>),
-    size: {
-      type: [String, Number] as PropType<
-      number | 'tiny' | 'small' | 'medium' | 'large' | 'huge'
-      >,
-      default: 'medium'
-    },
-    src: String,
-    circle: {
-      type: Boolean,
-      default: false
-    },
-    round: {
-      type: Boolean,
-      default: false
-    },
-    color: String
-  },
+  props: avatarProps,
   setup (props) {
+    const { mergedClsPrefix } = useConfig(props)
+
     let memoedTextHtml: string | null = null
     const textRef = ref<HTMLElement | null>(null)
     const selfRef = ref<HTMLElement | null>(null)
@@ -64,10 +71,18 @@ export default defineComponent({
     onUpdated(() => {
       adjustText()
     })
-    const themeRef = useTheme('Avatar', 'Avatar', style, avatarLight, props)
+    const themeRef = useTheme(
+      'Avatar',
+      'Avatar',
+      style,
+      avatarLight,
+      props,
+      mergedClsPrefix
+    )
     return {
       textRef,
       selfRef,
+      cPrefix: mergedClsPrefix,
       cssVars: computed(() => {
         const { size, round, circle } = props
         const {
@@ -91,15 +106,19 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots, src } = this
+    const { $slots, src, cPrefix } = this
     return (
-      <span ref="selfRef" class="n-avatar" style={this.cssVars as any}>
+      <span
+        ref="selfRef"
+        class={`${cPrefix}-avatar`}
+        style={this.cssVars as any}
+      >
         {!$slots.default && src ? (
           <img src={src} />
         ) : (
           <span
             ref="textRef"
-            class="n-avatar__text"
+            class={`${cPrefix}-avatar__text`}
             style={{ background: this.color }}
           >
             {$slots}
