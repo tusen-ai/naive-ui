@@ -6,17 +6,22 @@ import {
   defineComponent,
   Transition,
   PropType,
-  mergeProps,
-  renderSlot,
   withDirectives,
-  CSSProperties
+  CSSProperties,
+  ExtractPropTypes
 } from 'vue'
 import { createTreeMate } from 'treemate'
 import { VBinder, VTarget, VFollower } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
 import { useFormItem, useTheme, useConfig, ThemeProps } from '../../_mixins'
-import { call, warn, useAdjustedTo, MaybeArray } from '../../_utils'
+import {
+  call,
+  warn,
+  useAdjustedTo,
+  MaybeArray,
+  getFirstSlotVNode
+} from '../../_utils'
 import { NInternalSelectMenu, InternalSelectMenuRef } from '../../_internal'
 
 import { NInput } from '../../input'
@@ -37,67 +42,71 @@ import {
 } from './interface'
 import { tmOptions } from '../../select/src/utils'
 
+const autoCompleteProps = {
+  ...(useTheme.props as ThemeProps<AutoCompleteTheme>),
+  to: useAdjustedTo.propTo,
+  bordered: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
+  clearable: {
+    type: Boolean,
+    default: undefined
+  },
+  defaultValue: {
+    type: String as PropType<string | null>,
+    default: null
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  placeholder: String,
+  value: String,
+  blurAfterSelect: {
+    type: Boolean,
+    default: false
+  },
+  clearAfterSelect: {
+    type: Boolean,
+    default: false
+  },
+  size: String as PropType<'small' | 'medium' | 'large'>,
+  options: {
+    type: Array as PropType<AutoCompleteOptions>,
+    default: () => []
+  },
+  zIndex: Number,
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  onSelect: [Function, Array] as PropType<MaybeArray<OnSelect>>,
+  onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
+  onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
+  // deprecated
+  onInput: {
+    type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
+    validator: () => {
+      if (__DEV__) {
+        warn(
+          'auto-complete',
+          '`on-input` is deprecated, please use `on-update:value` instead.'
+        )
+      }
+      return true
+    },
+    default: undefined
+  }
+} as const
+
+export type AutoCompleteProps = Partial<
+ExtractPropTypes<typeof autoCompleteProps>
+>
+
 export default defineComponent({
   name: 'AutoComplete',
-  inheritAttrs: false,
-  props: {
-    ...(useTheme.props as ThemeProps<AutoCompleteTheme>),
-    to: useAdjustedTo.propTo,
-    bordered: {
-      type: Boolean as PropType<boolean | undefined>,
-      default: undefined
-    },
-    clearable: {
-      type: Boolean,
-      default: undefined
-    },
-    defaultValue: {
-      type: String as PropType<string | null>,
-      default: null
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    placeholder: String,
-    value: String,
-    blurAfterSelect: {
-      type: Boolean,
-      default: false
-    },
-    clearAfterSelect: {
-      type: Boolean,
-      default: false
-    },
-    size: String as PropType<'small' | 'medium' | 'large'>,
-    options: {
-      type: Array as PropType<AutoCompleteOptions>,
-      default: () => []
-    },
-    zIndex: Number,
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-    onSelect: [Function, Array] as PropType<MaybeArray<OnSelect>>,
-    onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
-    onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
-    // deprecated
-    onInput: {
-      type: [Function, Array] as PropType<
-      MaybeArray<OnUpdateValue> | undefined
-      >,
-      validator: () => {
-        if (__DEV__) {
-          warn(
-            'auto-complete',
-            '`on-input` is deprecated, please use `on-update:value` instead.'
-          )
-        }
-        return true
-      },
-      default: undefined
-    }
-  },
+  props: autoCompleteProps,
   setup (props) {
+    const { mergedBordered, namespace, mergedClsPrefix } = useConfig(props)
     const formItem = useFormItem(props)
 
     const triggerElRef = ref<HTMLElement | null>(null)
@@ -117,7 +126,8 @@ export default defineComponent({
       'AutoComplete',
       style,
       autoCompleteLight,
-      props
+      props,
+      mergedClsPrefix
     )
     const selectOptionsRef = computed(() => {
       return mapAutoCompleteOptionsToSelectOptions(props.options)
@@ -262,102 +272,102 @@ export default defineComponent({
           '--bezier': cubicBezierEaseInOut
         }
       }),
-      ...useConfig(props)
+      mergedBordered,
+      namespace,
+      mergedClsPrefix
     }
   },
   render () {
     return (
-      <VBinder>
-        {{
-          default: () => [
-            <VTarget>
-              {{
-                default: () =>
-                  h(
-                    'div',
-                    mergeProps(this.$attrs, {
-                      class: 'n-auto-complete',
-                      ref: 'triggerElRef',
-                      onKeydown: this.handleKeyDown,
-                      onCompositionstart: this.handleCompositionStart,
-                      onCompositionend: this.handleCompositionEnd
-                    }),
-                    renderSlot(
-                      this.$slots,
-                      'default',
-                      {
+      <div
+        class={`${this.mergedClsPrefix}-auto-complete`}
+        ref="triggerElRef"
+        onKeydown={this.handleKeyDown}
+        onCompositionstart={this.handleCompositionStart}
+        onCompositionend={this.handleCompositionEnd}
+      >
+        <VBinder>
+          {{
+            default: () => [
+              <VTarget>
+                {{
+                  default: () => {
+                    const defaultSlot = this.$slots.default
+                    if (defaultSlot) {
+                      getFirstSlotVNode(this.$slots, 'default', {
                         handleInput: this.handleInput,
                         handleFocus: this.handleFocus,
                         handleBlur: this.handleBlur,
                         value: this.mergedValue
-                      },
-                      () => [
-                        <NInput
-                          theme={this.mergedTheme.peers.Input}
-                          themeOverrides={this.mergedTheme.peerOverrides.Input}
-                          bordered={this.mergedBordered}
-                          value={this.mergedValue}
-                          placeholder={this.placeholder}
-                          size={this.mergedSize}
-                          disabled={this.disabled}
-                          clearable={this.clearable}
-                          onClear={this.handleClear}
-                          onFocus={this.handleFocus}
-                          onUpdateValue={this.handleInput}
-                          onBlur={this.handleBlur}
-                        />
-                      ]
+                      })
+                    }
+                    return (
+                      <NInput
+                        theme={this.mergedTheme.peers.Input}
+                        themeOverrides={this.mergedTheme.peerOverrides.Input}
+                        bordered={this.mergedBordered}
+                        value={this.mergedValue}
+                        placeholder={this.placeholder}
+                        size={this.mergedSize}
+                        disabled={this.disabled}
+                        clearable={this.clearable}
+                        onClear={this.handleClear}
+                        onFocus={this.handleFocus}
+                        onUpdateValue={this.handleInput}
+                        onBlur={this.handleBlur}
+                      />
                     )
+                  }
+                }}
+              </VTarget>,
+              <VFollower
+                show={this.active}
+                to={this.adjustedTo}
+                containerClass={this.namespace}
+                zIndex={this.zIndex}
+                teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
+                placement="bottom-start"
+                width="target"
+              >
+                {{
+                  default: () => (
+                    <Transition
+                      name="n-fade-in-scale-up-transition"
+                      appear={this.isMounted}
+                    >
+                      {{
+                        default: () =>
+                          this.active
+                            ? withDirectives(
+                              <NInternalSelectMenu
+                                ref="menuInstRef"
+                                theme={
+                                  this.mergedTheme.peers.InternalSelectMenu
+                                }
+                                themeOverrides={
+                                  this.mergedTheme.peerOverrides
+                                    .InternalSelectMenu
+                                }
+                                auto-pending
+                                class={`${this.mergedClsPrefix}-auto-complete-menu`}
+                                style={this.cssVars as CSSProperties}
+                                treeMate={this.treeMate}
+                                multiple={false}
+                                size="medium"
+                                onMenuToggleOption={this.handleToggleOption}
+                              />,
+                              [[clickoutside, this.handleClickOutsideMenu]]
+                            )
+                            : null
+                      }}
+                    </Transition>
                   )
-              }}
-            </VTarget>,
-            <VFollower
-              show={this.active}
-              to={this.adjustedTo}
-              containerClass={this.namespace}
-              zIndex={this.zIndex}
-              teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
-              placement="bottom-start"
-              width="target"
-            >
-              {{
-                default: () => (
-                  <Transition
-                    name="n-fade-in-scale-up-transition"
-                    appear={this.isMounted}
-                  >
-                    {{
-                      default: () =>
-                        this.active
-                          ? withDirectives(
-                            <NInternalSelectMenu
-                              ref="menuInstRef"
-                              theme={
-                                this.mergedTheme.peers.InternalSelectMenu
-                              }
-                              themeOverrides={
-                                this.mergedTheme.peerOverrides
-                                  .InternalSelectMenu
-                              }
-                              auto-pending
-                              class="n-auto-complete-menu"
-                              style={this.cssVars as CSSProperties}
-                              treeMate={this.treeMate}
-                              multiple={false}
-                              size="medium"
-                              onMenuToggleOption={this.handleToggleOption}
-                            />,
-                            [[clickoutside, this.handleClickOutsideMenu]]
-                          )
-                          : null
-                    }}
-                  </Transition>
-                )
-              }}
-            </VFollower>
-          ]
-        }}
-      </VBinder>
+                }}
+              </VFollower>
+            ]
+          }}
+        </VBinder>
+      </div>
     )
   }
 })
