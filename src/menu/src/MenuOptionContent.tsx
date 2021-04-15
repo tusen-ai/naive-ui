@@ -41,6 +41,10 @@ export default defineComponent({
     iconMarginRight: {
       type: Number,
       required: true
+    },
+    clsPrefix: {
+      type: String,
+      required: true
     }
   },
   setup (props) {
@@ -61,35 +65,42 @@ export default defineComponent({
     }
   },
   render () {
+    const { clsPrefix: cPrefix } = this
     return (
       <div
         class={[
-          'n-menu-item-content',
+          `${cPrefix}-menu-item-content`,
           {
-            'n-menu-item-content--collapsed': this.collapsed,
-            'n-menu-item-content--child-active': this.childActive,
-            'n-menu-item-content--disabled': this.disabled,
-            'n-menu-item-content--hover': this.hover
+            [`${cPrefix}-menu-item-content--collapsed`]: this.collapsed,
+            [`${cPrefix}-menu-item-content--child-active`]: this.childActive,
+            [`${cPrefix}-menu-item-content--disabled`]: this.disabled,
+            [`${cPrefix}-menu-item-content--hover`]: this.hover
           }
         ]}
         style={this.style}
       >
         {this.icon ? (
-          <div class="n-menu-item-content__icon" style={this.iconStyle}>
+          <div
+            class={`${cPrefix}-menu-item-content__icon`}
+            style={this.iconStyle}
+          >
             <Render render={this.icon} />
           </div>
         ) : null}
-        <div class="n-menu-item-content-header">
+        <div class={`${cPrefix}-menu-item-content-header`}>
           <Render render={this.title} />
           {this.extra ? (
-            <span class="n-menu-item-content-header__extra">
+            <span class={`${cPrefix}-menu-item-content-header__extra`}>
               {' '}
               <Render render={this.extra} />
             </span>
           ) : null}
         </div>
         {this.showArrow ? (
-          <NBaseIcon class="n-menu-item-content__arrow">
+          <NBaseIcon
+            class={`${cPrefix}-menu-item-content__arrow`}
+            clsPerfix={cPrefix}
+          >
             {{
               default: () => <ChevronDownFilledIcon />
             }}

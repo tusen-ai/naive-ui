@@ -1,24 +1,31 @@
 import { Key } from 'treemate'
-import { inject, computed, ComputedRef, PropType, ExtractPropTypes } from 'vue'
+import { useMenuChildProps } from './use-menu-child-props'
+import { inject, computed, ComputedRef, ExtractPropTypes, Ref } from 'vue'
 import { MergedTheme } from '../../_mixins/use-theme'
 import type { MenuTheme } from '../styles'
 import { OnUpdateValueImpl } from './interface'
+import { menuInjectionKey } from './Menu'
+import { menuItemGroupInjectionKey } from './MenuOptionGroup'
+import { submenuInjectionKey } from './Submenu'
 
 const ICON_MARGIN_RIGHT = 8
 
 export interface MenuInjection {
-  mergedValue: Key | null
-  mode: 'vertical' | 'horizontal'
-  collapsed: boolean
-  iconSize: number
-  collapsedIconSize: number | undefined
-  indent: number
-  rootIndent: number
-  collapsedWidth: number
-  disabled: boolean
-  mergedExpandedKeys: Key[]
-  activePath: Key[]
-  mergedTheme: MergedTheme<MenuTheme>
+  props: {
+    mode: 'vertical' | 'horizontal'
+    collapsed: boolean
+    iconSize: number
+    collapsedIconSize: number | undefined
+    indent: number
+    rootIndent: number
+    collapsedWidth: number
+    disabled: boolean
+  }
+  mergedClsPrefixRef: Ref<string>
+  mergedValueRef: Ref<Key | null>
+  mergedExpandedKeysRef: Ref<Key[]>
+  activePathRef: Ref<Key[]>
+  mergedThemeRef: Ref<MergedTheme<MenuTheme>>
   doSelect: OnUpdateValueImpl
   toggleExpand: (key: Key) => void
 }
@@ -32,22 +39,7 @@ export interface MenuOptionGroupInjection {
   paddingLeft: number | undefined
 }
 
-const menuChildProps = {
-  internalKey: {
-    type: [String, Number] as PropType<Key>,
-    required: true
-  },
-  root: Boolean,
-  isGroup: Boolean,
-  level: {
-    type: Number,
-    required: true
-  },
-  title: [String, Function] as PropType<string | Function>,
-  extra: [String, Function] as PropType<string | Function>
-} as const
-
-export type UseMenuChildProps = ExtractPropTypes<typeof menuChildProps>
+export type UseMenuChildProps = ExtractPropTypes<typeof useMenuChildProps>
 
 export interface UseMenuChild {
   dropdownPlacement: ComputedRef<'bottom' | 'right' | 'right-start'>
@@ -59,15 +51,17 @@ export interface UseMenuChild {
   NSubmenu: SubmenuInjection | null
 }
 
-function useMenuChild (props: UseMenuChildProps): UseMenuChild {
-  const NMenu = inject<MenuInjection>('NMenu') as MenuInjection
-  const NSubmenu = inject<SubmenuInjection | null>('NSubmenu', null)
+export function useMenuChild (props: UseMenuChildProps): UseMenuChild {
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const NMenu = inject(menuInjectionKey)!
+  const { props: menuProps } = NMenu
+  const NSubmenu = inject(submenuInjectionKey, null)
   const NMenuOptionGroup = inject<MenuOptionGroupInjection | null>(
-    'NMenuOptionGroup',
+    menuItemGroupInjectionKey,
     null
   )
   const horizontalRef = computed(() => {
-    return NMenu.mode === 'horizontal'
+    return menuProps.mode === 'horizontal'
   })
   const dropdownPlacementRef = computed(() => {
     if (horizontalRef.value) {
@@ -77,22 +71,25 @@ function useMenuChild (props: UseMenuChildProps): UseMenuChild {
     return 'right'
   })
   const maxIconSizeRef = computed(() => {
-    return Math.max(NMenu.collapsedIconSize ?? NMenu.iconSize, NMenu.iconSize)
+    return Math.max(
+      menuProps.collapsedIconSize ?? menuProps.iconSize,
+      menuProps.iconSize
+    )
   })
   const activeIconSizeRef = computed(() => {
-    if (!horizontalRef.value && props.root && NMenu.collapsed) {
-      return NMenu.collapsedIconSize ?? NMenu.iconSize
+    if (!horizontalRef.value && props.root && menuProps.collapsed) {
+      return menuProps.collapsedIconSize ?? menuProps.iconSize
     } else {
-      return NMenu.iconSize
+      return menuProps.iconSize
     }
   })
   const paddingLeftRef = computed(() => {
     if (horizontalRef.value) return undefined
-    const { collapsedWidth, indent, rootIndent } = NMenu
+    const { collapsedWidth, indent, rootIndent } = menuProps
     const { root, isGroup } = props
     const mergedRootIndent = rootIndent === undefined ? indent : rootIndent
     if (root) {
-      if (NMenu.collapsed) return collapsedWidth / 2 - maxIconSizeRef.value / 2
+      if (menuProps.collapsed) { return collapsedWidth / 2 - maxIconSizeRef.value / 2 }
       return mergedRootIndent
     }
     if (NMenuOptionGroup) {
@@ -104,12 +101,12 @@ function useMenuChild (props: UseMenuChildProps): UseMenuChild {
     return undefined as never
   })
   const iconMarginRightRef = computed(() => {
-    const { collapsedWidth, indent, rootIndent } = NMenu
+    const { collapsedWidth, indent, rootIndent } = menuProps
     const { value: maxIconSize } = maxIconSizeRef
     const { root } = props
     if (horizontalRef.value) return ICON_MARGIN_RIGHT
     if (!root) return ICON_MARGIN_RIGHT
-    if (!NMenu.collapsed) return ICON_MARGIN_RIGHT
+    if (!menuProps.collapsed) return ICON_MARGIN_RIGHT
     const mergedRootIndent = rootIndent === undefined ? indent : rootIndent
     return (
       mergedRootIndent +
@@ -129,6 +126,4 @@ function useMenuChild (props: UseMenuChildProps): UseMenuChild {
   }
 }
 
-useMenuChild.props = menuChildProps
-
-export { useMenuChild }
+export { useMenuChildProps }

@@ -7,20 +7,22 @@ import {
   computed,
   reactive,
   VNode,
-  VNodeChild
+  VNodeChild,
+  InjectionKey
 } from 'vue'
 import { useMemo } from 'vooks'
 import { NFadeInExpandTransition } from '../../_internal'
 import { NDropdown } from '../../dropdown'
 import NMenuOptionContent from './MenuOptionContent'
 import { itemRenderer } from './utils'
-import { useMenuChild } from './use-menu-child'
+import { useMenuChild, useMenuChildProps } from './use-menu-child'
 import type { SubmenuInjection } from './use-menu-child'
 import { TreeNode } from 'treemate'
 import { MenuGroupOption, MenuOption } from './interface'
+import { menuItemGroupInjectionKey } from './MenuOptionGroup'
 
 export const submenuProps = {
-  ...useMenuChild.props,
+  ...useMenuChildProps,
   rawNodes: {
     type: Array as PropType<Array<MenuOption | MenuGroupOption>>,
     default: () => []
@@ -37,34 +39,41 @@ export const submenuProps = {
   onClick: Function as PropType<() => void>
 } as const
 
+export const submenuInjectionKey: InjectionKey<SubmenuInjection> = Symbol(
+  'submenu'
+)
+
+console.log(submenuProps, useMenuChildProps)
+
 export default defineComponent({
   name: 'Submenu',
   props: submenuProps,
   setup (props) {
     const MenuChild = useMenuChild(props)
     const { NMenu, NSubmenu } = MenuChild
+    const { props: menuProps } = NMenu
     const mergedDisabledRef = computed(() => {
       const { disabled } = props
       if (NSubmenu?.mergedDisabled) return true
-      if (NMenu.disabled) return true
+      if (menuProps.disabled) return true
       return disabled
     })
     const dropdownShowRef = ref(false)
-    provide<SubmenuInjection>(
-      'NSubmenu',
+    provide(
+      submenuInjectionKey,
       reactive({
         paddingLeft: MenuChild.paddingLeft,
         mergedDisabled: mergedDisabledRef
       })
     )
-    provide('NMenuOptionGroup', null)
+    provide(menuItemGroupInjectionKey, null)
     function doClick (): void {
       const { onClick } = props
       if (onClick) onClick()
     }
     function handleClick (): void {
       if (!mergedDisabledRef.value) {
-        if (!NMenu.collapsed) {
+        if (!menuProps.collapsed) {
           NMenu.toggleExpand(props.internalKey)
         }
         doClick()
@@ -75,6 +84,7 @@ export default defineComponent({
     }
     return {
       NMenu,
+      cPrefix: NMenu.mergedClsPrefixRef,
       maxIconSize: MenuChild.maxIconSize,
       activeIconSize: MenuChild.activeIconSize,
       iconMarginRight: MenuChild.iconMarginRight,
@@ -82,20 +92,21 @@ export default defineComponent({
       dropdownShow: dropdownShowRef,
       paddingLeft: MenuChild.paddingLeft,
       mergedDisabled: mergedDisabledRef,
+      mergedValue: NMenu.mergedValueRef,
       childActive: useMemo(() => {
-        return NMenu.activePath.includes(props.internalKey)
+        return NMenu.activePathRef.value.includes(props.internalKey)
       }),
       collapsed: computed(() => {
-        if (NMenu.mode === 'horizontal') return false
-        if (NMenu.collapsed) {
+        if (menuProps.mode === 'horizontal') return false
+        if (menuProps.collapsed) {
           return true
         }
-        return !NMenu.mergedExpandedKeys.includes(props.internalKey)
+        return !NMenu.mergedExpandedKeysRef.value.includes(props.internalKey)
       }),
       dropdownEnabled: computed(() => {
         return (
           !mergedDisabledRef.value &&
-          (NMenu.mode === 'horizontal' || NMenu.collapsed)
+          (menuProps.mode === 'horizontal' || menuProps.collapsed)
         )
       }),
       handlePopoverShowChange,
@@ -103,6 +114,7 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     const createSubmenuItem = (): VNode => {
       const {
         NMenu,
@@ -126,8 +138,9 @@ export default defineComponent({
         maxIconSize,
         activeIconSize,
         title,
-        showArrow: !(NMenu.mode === 'horizontal'),
+        showArrow: !(NMenu.props.mode === 'horizontal'),
         childActive: childActive,
+        clsPrefix: cPrefix,
         icon,
         hover: dropdownShow,
         onClick: handleClick
@@ -141,7 +154,7 @@ export default defineComponent({
             ? h(
               'div',
               {
-                class: 'n-submenu-children'
+                class: `${cPrefix}-submenu-children`
               },
               tmNodes.map((item) => itemRenderer(item))
             )
@@ -157,7 +170,7 @@ export default defineComponent({
             fontSizeLarge: '14px',
             optionIconSizeLarge: '18px'
           },
-          value: this.NMenu.mergedValue,
+          value: this.mergedValue,
           size: 'large',
           trigger: 'hover',
           disabled: !this.dropdownEnabled,
@@ -171,11 +184,11 @@ export default defineComponent({
             h(
               'div',
               {
-                class: 'n-submenu'
+                class: `${cPrefix}-submenu`
               },
               [
                 createSubmenuItem(),
-                this.NMenu.mode === 'horizontal'
+                this.NMenu.props.mode === 'horizontal'
                   ? null
                   : createSubmenuChildren()
               ]
@@ -185,7 +198,7 @@ export default defineComponent({
       : h(
         'div',
         {
-          class: 'n-submenu'
+          class: `${cPrefix}-submenu`
         },
         [createSubmenuItem(), createSubmenuChildren()]
       )

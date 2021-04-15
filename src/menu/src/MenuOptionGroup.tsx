@@ -1,34 +1,52 @@
-import { h, defineComponent, provide, PropType, reactive, Fragment } from 'vue'
+import {
+  h,
+  defineComponent,
+  provide,
+  PropType,
+  reactive,
+  Fragment,
+  InjectionKey,
+  inject
+} from 'vue'
 import { render as Render } from '../../_utils'
-import { useMenuChild } from './use-menu-child'
+import { useMenuChild, useMenuChildProps } from './use-menu-child'
 import type { MenuOptionGroupInjection } from './use-menu-child'
 import { itemRenderer } from './utils'
 import { TmNode } from './interface'
+import { submenuInjectionKey } from './Submenu'
+import { menuInjectionKey } from './Menu'
 
 export const menuItemGroupProps = {
-  ...useMenuChild.props,
+  ...useMenuChildProps,
   tmNodes: {
     type: Array as PropType<TmNode[]>,
     required: true
   }
 } as const
 
+export const menuItemGroupInjectionKey: InjectionKey<MenuOptionGroupInjection> = Symbol(
+  'menu-item-group'
+)
+
 export default defineComponent({
   name: 'MenuOptionGroup',
   props: menuItemGroupProps,
   setup (props) {
-    provide('NSubmenu', null)
+    provide(submenuInjectionKey, null)
     const MenuChild = useMenuChild(props)
-    provide<MenuOptionGroupInjection>(
-      'NMenuOptionGroup',
+    provide(
+      menuItemGroupInjectionKey,
       reactive({ paddingLeft: MenuChild.paddingLeft })
     )
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const { mergedClsPrefixRef } = inject(menuInjectionKey)!
     return function () {
+      const { value: cPrefix } = mergedClsPrefixRef
       const paddingLeft = MenuChild.paddingLeft.value
       return (
-        <div class="n-menu-item-group">
+        <div class={`${cPrefix}-menu-item-group`}>
           <span
-            class="n-menu-item-group-title"
+            class={`${cPrefix}-menu-item-group-title`}
             style={
               paddingLeft !== undefined
                 ? `padding-left: ${paddingLeft}px;`

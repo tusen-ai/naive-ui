@@ -2,11 +2,12 @@ import { h, computed, defineComponent, toRef, PropType } from 'vue'
 import { useMemo } from 'vooks'
 import { NTooltip } from '../../tooltip'
 import NMenuOptionContent from './MenuOptionContent'
-import { useMenuChild } from './use-menu-child'
+import { useMenuChild, useMenuChildProps } from './use-menu-child'
 import { TmNode } from './interface'
+import { render } from '../../_utils'
 
 export const menuItemProps = {
-  ...useMenuChild.props,
+  ...useMenuChildProps,
   tmNode: {
     type: Object as PropType<TmNode>,
     required: true
@@ -25,6 +26,7 @@ export default defineComponent({
   setup (props) {
     const MenuChild = useMenuChild(props)
     const { NSubmenu, NMenu } = MenuChild
+    const { props: menuProps, mergedClsPrefixRef } = NMenu
     const submenuDisabledRef = NSubmenu
       ? toRef(NSubmenu, 'mergedDisabled')
       : { value: false }
@@ -42,17 +44,18 @@ export default defineComponent({
       }
     }
     return {
+      cPrefix: mergedClsPrefixRef,
       dropdownPlacement: MenuChild.dropdownPlacement,
       paddingLeft: MenuChild.paddingLeft,
       iconMarginRight: MenuChild.iconMarginRight,
       maxIconSize: MenuChild.maxIconSize,
       activeIconSize: MenuChild.activeIconSize,
-      mergedTheme: computed(() => NMenu.mergedTheme),
+      mergedTheme: NMenu.mergedThemeRef,
       dropdownEnabled: useMemo(() => {
         return (
           props.root &&
-          NMenu.collapsed &&
-          NMenu.mode !== 'horizontal' &&
+          menuProps.collapsed &&
+          menuProps.mode !== 'horizontal' &&
           !mergedDisabledRef.value
         )
       }),
@@ -60,7 +63,7 @@ export default defineComponent({
       // menu item state won't be updated...
       // a minimal reproduction is needed
       selected: computed(() => {
-        if (NMenu.mergedValue === props.internalKey) return true
+        if (NMenu.mergedValueRef.value === props.internalKey) return true
         return false
       }),
       mergedDisabled: mergedDisabledRef,
@@ -68,13 +71,14 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     return (
       <div
         class={[
-          'n-menu-item',
+          `${cPrefix}-menu-item`,
           {
-            'n-menu-item--selected': this.selected,
-            'n-menu-item--disabled': this.mergedDisabled
+            [`${cPrefix}-menu-item--selected`]: this.selected,
+            [`${cPrefix}-menu-item--disabled`]: this.mergedDisabled
           }
         ]}
       >
@@ -86,9 +90,10 @@ export default defineComponent({
           disabled={!this.dropdownEnabled || this.title === undefined}
         >
           {{
-            default: () => this.title,
+            default: () => h(render, { render: this.title }),
             trigger: () => {
               return h(NMenuOptionContent, {
+                clsPrefix: cPrefix,
                 paddingLeft: this.paddingLeft,
                 iconMarginRight: this.iconMarginRight,
                 maxIconSize: this.maxIconSize,

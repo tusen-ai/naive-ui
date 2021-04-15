@@ -5,12 +5,13 @@ import {
   computed,
   defineComponent,
   provide,
-  reactive,
-  PropType
+  PropType,
+  ExtractPropTypes,
+  InjectionKey
 } from 'vue'
 import { createTreeMate, Key } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, MaybeArray, warn } from '../../_utils'
 import { itemRenderer } from './utils'
@@ -27,138 +28,154 @@ import {
   OnUpdateKeysImpl
 } from './interface'
 
+const menuProps = {
+  ...(useTheme.props as ThemeProps<MenuTheme>),
+  options: {
+    type: Array as PropType<Array<MenuOption | MenuGroupOption>>,
+    default: () => []
+  },
+  items: {
+    type: Array as PropType<Array<MenuOption | MenuGroupOption> | undefined>,
+    validator: () => {
+      if (__DEV__) {
+        warn('menu', '`items` is deprecated, please use `options` instead.')
+      }
+      return true
+    },
+    default: undefined
+  },
+  collapsed: {
+    type: Boolean,
+    default: false
+  },
+  collapsedWidth: {
+    type: Number,
+    default: undefined
+  },
+  iconSize: {
+    type: Number,
+    default: 20
+  },
+  collapsedIconSize: {
+    type: Number,
+    default: 24
+  },
+  rootIndent: {
+    type: Number,
+    default: undefined
+  },
+  indent: {
+    type: Number,
+    default: 32
+  },
+  defaultExpandAll: {
+    type: Boolean,
+    default: false
+  },
+  defaultExpandedKeys: {
+    type: Array as PropType<Key[]>,
+    default: () => []
+  },
+  expandedKeys: {
+    type: Array as PropType<Key[]>,
+    default: undefined
+  },
+  value: [String, Number] as PropType<Key | null>,
+  defaultValue: {
+    type: [String, Number] as PropType<Key | null>,
+    default: null
+  },
+  mode: {
+    type: String as PropType<'vertical' | 'horizontal'>,
+    default: 'vertical'
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:expandedKeys': [Function, Array] as PropType<
+  MaybeArray<OnUpdateKeys>
+  >,
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  // deprecated
+  onOpenNamesChange: {
+    type: [Function, Array] as PropType<MaybeArray<OnUpdateKeys>>,
+    validator: () => {
+      warn(
+        'menu',
+        '`on-open-names-change` is deprecated, please use `on-update:expanded-keys` instead.'
+      )
+      return true
+    },
+    default: undefined
+  },
+  onSelect: {
+    type: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+    validator: () => {
+      warn(
+        'menu',
+        '`on-select` is deprecated, please use `on-update:value` instead.'
+      )
+      return true
+    },
+    default: undefined
+  },
+  onExpandedNamesChange: {
+    type: [Function, Array] as PropType<MaybeArray<OnUpdateKeys>>,
+    validator: () => {
+      warn(
+        'menu',
+        '`on-expanded-names-change` is deprecated, please use `on-update:expanded-keys` instead.'
+      )
+      return true
+    },
+    default: undefined
+  },
+  expandedNames: {
+    type: Array as PropType<Key[]>,
+    validator: () => {
+      warn(
+        'menu',
+        '`expanded-names` is deprecated, please use `expanded-keys` instead.'
+      )
+      return true
+    },
+    default: undefined
+  },
+  defaultExpandedNames: {
+    type: Array as PropType<Key[]>,
+    validator: () => {
+      warn(
+        'menu',
+        '`default-expanded-names` is deprecated, please use `default-expanded-keys` instead.'
+      )
+      return true
+    },
+    default: undefined
+  }
+} as const
+
+export type MenuSetupProps = ExtractPropTypes<typeof menuProps>
+
+export type MenuProps = Partial<MenuSetupProps>
+
+export const menuInjectionKey: InjectionKey<MenuInjection> = Symbol('menu')
+
 export default defineComponent({
   name: 'Menu',
-  props: {
-    ...(useTheme.props as ThemeProps<MenuTheme>),
-    options: {
-      type: Array as PropType<Array<MenuOption | MenuGroupOption>>,
-      default: () => []
-    },
-    items: {
-      type: Array as PropType<Array<MenuOption | MenuGroupOption> | undefined>,
-      validator: () => {
-        if (__DEV__) {
-          warn('menu', '`items` is deprecated, please use `options` instead.')
-        }
-        return true
-      },
-      default: undefined
-    },
-    collapsed: {
-      type: Boolean,
-      default: false
-    },
-    collapsedWidth: {
-      type: Number,
-      default: undefined
-    },
-    iconSize: {
-      type: Number,
-      default: 20
-    },
-    collapsedIconSize: {
-      type: Number,
-      default: 24
-    },
-    rootIndent: {
-      type: Number,
-      default: undefined
-    },
-    indent: {
-      type: Number,
-      default: 32
-    },
-    defaultExpandAll: {
-      type: Boolean,
-      default: false
-    },
-    defaultExpandedKeys: {
-      type: Array as PropType<Key[]>,
-      default: () => []
-    },
-    expandedKeys: {
-      type: Array as PropType<Key[]>,
-      default: undefined
-    },
-    value: [String, Number] as PropType<Key | null>,
-    defaultValue: {
-      type: [String, Number] as PropType<Key | null>,
-      default: null
-    },
-    mode: {
-      type: String as PropType<'vertical' | 'horizontal'>,
-      default: 'vertical'
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:expandedKeys': [Function, Array] as PropType<
-    MaybeArray<OnUpdateKeys>
-    >,
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-    // deprecated
-    onOpenNamesChange: {
-      type: [Function, Array] as PropType<MaybeArray<OnUpdateKeys>>,
-      validator: () => {
-        warn(
-          'menu',
-          '`on-open-names-change` is deprecated, please use `on-update:expanded-keys` instead.'
-        )
-        return true
-      },
-      default: undefined
-    },
-    onSelect: {
-      type: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-      validator: () => {
-        warn(
-          'menu',
-          '`on-select` is deprecated, please use `on-update:value` instead.'
-        )
-        return true
-      },
-      default: undefined
-    },
-    onExpandedNamesChange: {
-      type: [Function, Array] as PropType<MaybeArray<OnUpdateKeys>>,
-      validator: () => {
-        warn(
-          'menu',
-          '`on-expanded-names-change` is deprecated, please use `on-update:expanded-keys` instead.'
-        )
-        return true
-      },
-      default: undefined
-    },
-    expandedNames: {
-      type: Array as PropType<Key[]>,
-      validator: () => {
-        warn(
-          'menu',
-          '`expanded-names` is deprecated, please use `expanded-keys` instead.'
-        )
-        return true
-      },
-      default: undefined
-    },
-    defaultExpandedNames: {
-      type: Array as PropType<Key[]>,
-      validator: () => {
-        warn(
-          'menu',
-          '`default-expanded-names` is deprecated, please use `default-expanded-keys` instead.'
-        )
-        return true
-      },
-      default: undefined
-    }
-  },
+  props: menuProps,
   setup (props) {
-    const themeRef = useTheme('Menu', 'Menu', style, menuLight, props)
+    const { mergedClsPrefix } = useConfig(props)
+    const themeRef = useTheme(
+      'Menu',
+      'Menu',
+      style,
+      menuLight,
+      props,
+      mergedClsPrefix
+    )
 
     const treeMateRef = computed(() =>
       createTreeMate<MenuOption, MenuGroupOption>(
@@ -193,25 +210,16 @@ export default defineComponent({
     const activePathRef = computed(() => {
       return treeMateRef.value.getPath(mergedValueRef.value).keyPath
     })
-    provide<MenuInjection>(
-      'NMenu',
-      reactive({
-        mergedTheme: themeRef,
-        mode: toRef(props, 'mode'),
-        collapsed: toRef(props, 'collapsed'),
-        iconSize: toRef(props, 'iconSize'),
-        indent: toRef(props, 'indent'),
-        rootIndent: toRef(props, 'rootIndent'),
-        collapsedWidth: toRef(props, 'collapsedWidth'),
-        collapsedIconSize: toRef(props, 'collapsedIconSize'),
-        disabled: toRef(props, 'disabled'),
-        mergedValue: mergedValueRef,
-        mergedExpandedKeys: mergedExpandedKeysRef,
-        activePath: activePathRef,
-        doSelect,
-        toggleExpand
-      })
-    )
+    provide(menuInjectionKey, {
+      props,
+      mergedThemeRef: themeRef,
+      mergedValueRef: mergedValueRef,
+      mergedExpandedKeysRef: mergedExpandedKeysRef,
+      activePathRef: activePathRef,
+      mergedClsPrefixRef: mergedClsPrefix,
+      doSelect,
+      toggleExpand
+    })
     function doSelect (value: Key, item: MenuOption): void {
       const { 'onUpdate:value': onUpdateValue, onSelect } = props
       if (onUpdateValue) {
@@ -253,6 +261,7 @@ export default defineComponent({
       doUpdateExpandedKeys(currentExpandedKeys)
     }
     return {
+      cPrefix: mergedClsPrefix,
       controlledExpandedKeys: controlledExpandedKeysRef,
       uncontrolledExpanededKeys: uncontrolledExpandedKeysRef,
       mergedExpandedKeys: mergedExpandedKeysRef,
@@ -304,15 +313,14 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     return h(
       'div',
       {
         class: [
-          'n-menu',
-          `n-menu--${this.mode}`,
-          {
-            'n-menu--collapsed': this.collapsed
-          }
+          `${cPrefix}-menu`,
+          `${cPrefix}-menu--${this.mode}`,
+          this.collapsed && `${cPrefix}-menu--collapsed`
         ],
         style: this.cssVars
       },
