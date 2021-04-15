@@ -5,7 +5,8 @@ import {
   inject,
   Ref,
   getCurrentInstance,
-  onBeforeUnmount
+  onBeforeUnmount,
+  InjectionKey
 } from 'vue'
 
 // injection.collection {
@@ -53,7 +54,7 @@ export function useInjectionInstanceCollection (
 //   key2: [instc.value]
 // }
 export function useInjectionCollection (
-  injectionName: string,
+  injectionName: string | InjectionKey<unknown>,
   collectionKey: string,
   valueRef: Ref<any>
 ): void {
@@ -85,7 +86,7 @@ export function useInjectionCollection (
 //   key2: [instc.$el]
 // }
 export function useInjectionElementCollection (
-  injectionName: string,
+  injectionName: string | InjectionKey<unknown>,
   collectionKey: string,
   getElement: () => HTMLElement | null
 ): void {

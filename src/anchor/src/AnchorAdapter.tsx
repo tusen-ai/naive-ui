@@ -1,86 +1,106 @@
-import { h, defineComponent, computed, ref, CSSProperties } from 'vue'
+import {
+  h,
+  defineComponent,
+  computed,
+  ref,
+  CSSProperties,
+  ExtractPropTypes
+} from 'vue'
 import { NAffix } from '../../affix'
 import { affixProps, affixPropKeys } from '../../affix/src/Affix'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { keep } from '../../_utils'
 import { anchorLight } from '../styles'
 import type { AnchorTheme } from '../styles'
 import style from './styles/index.cssr'
 import NBaseAnchor, { baseAnchorProps, baseAnchorPropKeys } from './BaseAnchor'
-import type { BaseAnchorRef } from './BaseAnchor'
+import type { BaseAnchorInst } from './BaseAnchor'
 
-export interface AnchorRef {
+export interface AnchorInst {
   scrollTo: (href: string) => void
 }
 
+const anchorProps = {
+  ...(useTheme.props as ThemeProps<AnchorTheme>),
+  affix: {
+    type: Boolean,
+    default: false
+  },
+  ...affixProps,
+  ...baseAnchorProps
+} as const
+
+export type AnchorProps = Partial<ExtractPropTypes<typeof anchorProps>>
+
 export default defineComponent({
   name: 'Anchor',
-  props: {
-    ...(useTheme.props as ThemeProps<AnchorTheme>),
-    affix: {
-      type: Boolean,
-      default: false
-    },
-    ...affixProps,
-    ...baseAnchorProps
-  },
-  setup (props) {
-    const themeRef = useTheme('Anchor', 'Anchor', style, anchorLight, props)
-    const anchorRef = ref<BaseAnchorRef | null>(null)
+  props: anchorProps,
+  setup (props, { slots }) {
+    const { mergedClsPrefix } = useConfig(props)
+    const themeRef = useTheme(
+      'Anchor',
+      'Anchor',
+      style,
+      anchorLight,
+      props,
+      mergedClsPrefix
+    )
+    const anchorRef = ref<BaseAnchorInst | null>(null)
+    const cssVarsRef = computed(() => {
+      const {
+        self: {
+          railColor,
+          linkColor,
+          railColorActive,
+          linkTextColor,
+          linkTextColorHover,
+          linkTextColorPressed,
+          linkTextColorActive,
+          linkFontSize,
+          railWidth,
+          linkPadding
+        },
+        common: { cubicBezierEaseInOut }
+      } = themeRef.value
+      return {
+        '--link-color': linkColor,
+        '--link-font-size': linkFontSize,
+        '--link-text-color': linkTextColor,
+        '--link-text-color-hover': linkTextColorHover,
+        '--link-text-color-active': linkTextColorActive,
+        '--link-text-color-pressed': linkTextColorPressed,
+        '--link-padding': linkPadding,
+        '--bezier': cubicBezierEaseInOut,
+        '--rail-color': railColor,
+        '--rail-color-active': railColorActive,
+        '--rail-width': railWidth
+      }
+    })
     return {
-      anchorRef,
       scrollTo (href: string) {
         anchorRef.value?.setActiveHref(href)
       },
-      mergedTheme: themeRef,
-      cssVars: computed(() => {
-        const {
-          self: {
-            railColor,
-            linkColor,
-            railColorActive,
-            linkTextColor,
-            linkTextColorHover,
-            linkTextColorPressed,
-            linkTextColorActive,
-            linkFontSize,
-            railWidth,
-            linkPadding
-          },
-          common: { cubicBezierEaseInOut }
-        } = themeRef.value
-        return {
-          '--link-color': linkColor,
-          '--link-font-size': linkFontSize,
-          '--link-text-color': linkTextColor,
-          '--link-text-color-hover': linkTextColorHover,
-          '--link-text-color-active': linkTextColorActive,
-          '--link-text-color-pressed': linkTextColorPressed,
-          '--link-padding': linkPadding,
-          '--bezier': cubicBezierEaseInOut,
-          '--rail-color': railColor,
-          '--rail-color-active': railColorActive,
-          '--rail-width': railWidth
-        }
-      })
+      renderAnchor: () => {
+        return (
+          <NBaseAnchor
+            ref={anchorRef}
+            style={cssVarsRef.value as CSSProperties}
+            {...keep(props, baseAnchorPropKeys)}
+            mergedClsPrefix={mergedClsPrefix.value}
+          >
+            {slots}
+          </NBaseAnchor>
+        )
+      }
     }
   },
   render () {
-    const anchorNode = (
-      <NBaseAnchor
-        ref="anchorRef"
-        style={this.cssVars as CSSProperties}
-        {...keep(this, baseAnchorPropKeys)}
-      >
-        {this.$slots}
-      </NBaseAnchor>
-    )
     return !this.affix ? (
-      anchorNode
+      this.renderAnchor()
     ) : (
       <NAffix {...keep(this, affixPropKeys)}>
-        {{ default: () => anchorNode }}
+        {{ default: this.renderAnchor }}
       </NAffix>
     )
   }

@@ -2,22 +2,21 @@ import {
   h,
   nextTick,
   ref,
-  markRaw,
   provide,
-  reactive,
   defineComponent,
   PropType,
   watch,
   onBeforeUnmount,
   renderSlot,
-  onMounted
+  onMounted,
+  toRef
 } from 'vue'
 import { getScrollParent, unwrapElement } from 'seemly'
 import { onFontsReady } from 'vooks'
 import { warn, keysOf } from '../../_utils'
-import type { AnchorInjection } from './Link'
+import { anchorInjectionKey } from './Link'
 
-export interface BaseAnchorRef {
+export interface BaseAnchorInst {
   setActiveHref: (href: string) => void
 }
 
@@ -71,11 +70,17 @@ export const baseAnchorPropKeys = keysOf(baseAnchorProps)
 
 export default defineComponent({
   name: 'BaseAnchor',
-  props: baseAnchorProps,
+  props: {
+    ...baseAnchorProps,
+    mergedClsPrefix: {
+      type: String,
+      required: true
+    }
+  },
   setup (props) {
     let scrollElement: HTMLElement | null
-    const collectedLinkHrefs: string[] = markRaw([])
-    const titleEls: HTMLElement[] = markRaw([])
+    const collectedLinkHrefs: string[] = []
+    const titleEls: HTMLElement[] = []
     const activeHrefRef = ref<string | null>(null)
     const slotRef = ref<HTMLElement | null>(null)
     const barRef = ref<HTMLElement | null>(null)
@@ -256,16 +261,14 @@ export default defineComponent({
         scrollEl.addEventListener('scroll', handleScroll)
       }
     }
-    provide<AnchorInjection>(
-      'NAnchor',
-      reactive({
-        activeHref: activeHrefRef,
-        updateBarPosition,
-        setActiveHref,
-        collectedLinkHrefs,
-        titleEls
-      })
-    )
+    provide(anchorInjectionKey, {
+      activeHref: activeHrefRef,
+      mergedClsPrefix: toRef(props, 'mergedClsPrefix'),
+      updateBarPosition,
+      setActiveHref,
+      collectedLinkHrefs,
+      titleEls
+    })
     onMounted(() => {
       init()
       setActiveHref(String(window.location))
@@ -297,23 +300,26 @@ export default defineComponent({
     }
   },
   render () {
+    const { mergedClsPrefix: cPrefix } = this
     return (
       <div
-        class={['n-anchor', this.showRail && 'n-anchor--show-rail']}
+        class={[
+          `${cPrefix}-anchor`,
+          this.showRail && `${cPrefix}-anchor--show-rail`
+        ]}
         ref="selfRef"
       >
         {this.showRail && this.showBackground ? (
-          <div ref="slotRef" class="n-anchor-link-background" />
+          <div ref="slotRef" class={`${cPrefix}-anchor-link-background`} />
         ) : null}
         {this.showRail ? (
-          <div class="n-anchor-rail">
+          <div class={`${cPrefix}-anchor-rail`}>
             <div
               ref="barRef"
               class={[
-                'n-anchor-rail__bar',
-                {
-                  'n-anchor-rail__bar--active': this.activeHref !== null
-                }
+                `${cPrefix}-anchor-rail__bar`,
+                this.activeHref !== null &&
+                  `${cPrefix}-anchor-rail__bar--active`
               ]}
             />
           </div>
