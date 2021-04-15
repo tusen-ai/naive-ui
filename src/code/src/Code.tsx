@@ -9,32 +9,38 @@ import {
   PropType,
   CSSProperties
 } from 'vue'
-import { useTheme, useHljs, Hljs } from '../../_mixins'
+import { useTheme, useHljs, Hljs, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { codeLight } from '../styles'
 import type { CodeTheme } from '../styles'
 import style from './styles/index.cssr'
+import type { ExtractPublicPropTypes } from '../../_utils'
+
+const codeProps = {
+  ...(useTheme.props as ThemeProps<CodeTheme>),
+  language: String,
+  code: {
+    type: String,
+    default: ''
+  },
+  trim: {
+    type: Boolean,
+    default: true
+  },
+  hljs: Object as PropType<Hljs>,
+  uri: {
+    type: Boolean,
+    default: false
+  }
+}
+
+export type CardProps = ExtractPublicPropTypes<typeof codeProps>
 
 export default defineComponent({
   name: 'Code',
-  props: {
-    ...(useTheme.props as ThemeProps<CodeTheme>),
-    language: String,
-    code: {
-      type: String,
-      default: ''
-    },
-    trim: {
-      type: Boolean,
-      default: true
-    },
-    hljs: Object as PropType<Hljs>,
-    uri: {
-      type: Boolean,
-      default: false
-    }
-  },
+  props: codeProps,
   setup (props, { slots }) {
+    const { mergedClsPrefix } = useConfig()
     const codeRef = ref<HTMLElement | null>(null)
     const hljsRef = useHljs(props)
     const createCodeHtml = (
@@ -74,8 +80,16 @@ export default defineComponent({
     watch(toRef(props, 'language'), setCode)
     watch(toRef(props, 'code'), setCode)
     watch(hljsRef, setCode)
-    const themeRef = useTheme('Code', 'Code', style, codeLight, props)
+    const themeRef = useTheme(
+      'Code',
+      'Code',
+      style,
+      codeLight,
+      props,
+      mergedClsPrefix
+    )
     return {
+      cPrefix: mergedClsPrefix,
       codeRef,
       cssVars: computed(() => {
         const {
@@ -117,8 +131,9 @@ export default defineComponent({
   },
   render () {
     const { default: defaultSlot } = this.$slots
+    const { cPrefix } = this
     return (
-      <code class="n-code" style={this.cssVars as CSSProperties}>
+      <code class={`${cPrefix}-code`} style={this.cssVars as CSSProperties}>
         {defaultSlot ? defaultSlot() : <pre ref="codeRef"></pre>}
       </code>
     )

@@ -43,8 +43,6 @@ export const submenuInjectionKey: InjectionKey<SubmenuInjection> = Symbol(
   'submenu'
 )
 
-console.log(submenuProps, useMenuChildProps)
-
 export default defineComponent({
   name: 'Submenu',
   props: submenuProps,
