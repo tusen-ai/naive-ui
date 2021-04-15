@@ -13,13 +13,16 @@ import {
   PropType,
   watch,
   toRef,
-  provide
+  provide,
+  CSSProperties,
+  VNode,
+  renderSlot
 } from 'vue'
 import { VFollower, FollowerPlacement, FollowerRef } from 'vueuc'
 import { clickoutside, mousemoveoutside } from 'vdirs'
 import { useTheme, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { formatLength, useAdjustedTo, getSlot } from '../../_utils'
+import { formatLength, useAdjustedTo } from '../../_utils'
 import { popoverLight } from '../styles'
 import type { PopoverTheme } from '../styles'
 import style from './styles/index.cssr'
@@ -38,7 +41,7 @@ export const popoverBodyProps = {
   delay: Number,
   duration: Number,
   raw: Boolean,
-  arrowStyle: [String, Object],
+  arrowStyle: [String, Object] as PropType<string | CSSProperties>,
   displayDirective: String as PropType<'if' | 'show'>,
   x: Number,
   y: Number,
@@ -59,8 +62,16 @@ export default defineComponent({
   name: 'PopoverBody',
   inheritAttrs: false,
   props: popoverBodyProps,
-  setup (props) {
-    const themeRef = useTheme('Popover', 'Popover', style, popoverLight, props)
+  setup (props, { slots, attrs }) {
+    const { namespace, mergedClsPrefix } = useConfig(props)
+    const themeRef = useTheme(
+      'Popover',
+      'Popover',
+      style,
+      popoverLight,
+      props,
+      mergedClsPrefix
+    )
     const followerRef = ref<FollowerRef | null>(null)
     const NPopover = inject<PopoverInjection>('NPopover') as PopoverInjection
     const bodyRef = ref<HTMLElement | null>(null)
@@ -176,66 +187,62 @@ export default defineComponent({
     provide(popoverBodyInjectionKey, bodyRef)
     provide(drawerBodyInjectionKey, null)
     provide(modalBodyInjectionKey, null)
-    return {
-      ...useConfig(props),
-      NPopover,
-      followerRef,
-      bodyRef,
-      adjustedTo: useAdjustedTo(props),
-      followerEnabled: followerEnabledRef,
-      style: styleRef,
-      directives: directivesRef,
-      handleMouseEnter,
-      handleMouseLeave
-    }
-  },
-  render () {
-    const { animated } = this
-    const contentNode =
-      this.displayDirective === 'show' || this.show
+
+    function renderContentNode (): VNode | null {
+      const cPrefix = mergedClsPrefix.value
+      return props.displayDirective === 'show' || props.show
         ? withDirectives(
           h(
             'div',
             mergeProps(
               {
                 class: [
-                  'n-popover',
-                  {
-                    'n-popover--overlap': this.overlap,
-                    'n-popover--no-arrow': !this.showArrow,
-                    'n-popover--shadow': this.shadow,
-                    'n-popover--padded': this.padded,
-                    'n-popover--raw': this.raw
-                  }
+                    `${cPrefix}-popover`,
+                    {
+                      [`${cPrefix}-popover--overlap`]: props.overlap,
+                      [`${cPrefix}-popover--no-arrow`]: !props.showArrow,
+                      [`${cPrefix}-popover--shadow`]: props.shadow,
+                      [`${cPrefix}-popover--padded`]: props.padded,
+                      [`${cPrefix}-popover--raw`]: props.raw
+                    }
                 ],
-                ref: 'bodyRef',
-                style: this.style,
-                onMouseenter: this.handleMouseEnter,
-                onMouseleave: this.handleMouseLeave
+                ref: bodyRef,
+                style: styleRef.value,
+                onMouseenter: handleMouseEnter,
+                onMouseleave: handleMouseLeave
               },
-              this.$attrs
+              attrs
             ),
             [
-              getSlot(this),
-              this.showArrow
-                ? h(
-                  'div',
-                  {
-                    class: 'n-popover-arrow-wrapper'
-                  },
-                  [
-                    h('div', {
-                      class: 'n-popover-arrow',
-                      style: this.arrowStyle
-                    })
-                  ]
-                )
-                : null
+              renderSlot(slots, 'default'),
+              props.showArrow ? (
+                <div
+                  class={`${cPrefix}-popover-arrow-wrapper`}
+                  key="__popover-arrow__"
+                >
+                  <div
+                    class={`${cPrefix}-popover-arrow`}
+                    style={props.arrowStyle}
+                  />
+                </div>
+              ) : null
             ]
           ),
-          this.directives
+          directivesRef.value
         )
         : null
+    }
+
+    return {
+      namespace,
+      NPopover,
+      followerRef,
+      adjustedTo: useAdjustedTo(props),
+      followerEnabled: followerEnabledRef,
+      renderContentNode
+    }
+  },
+  render () {
     return h(
       VFollower,
       {
@@ -253,7 +260,7 @@ export default defineComponent({
       },
       {
         default: () => {
-          return animated
+          return this.animated
             ? h(
               Transition,
               {
@@ -264,10 +271,10 @@ export default defineComponent({
                 }
               },
               {
-                default: () => contentNode
+                default: this.renderContentNode
               }
             )
-            : contentNode
+            : this.renderContentNode()
         }
       }
     )

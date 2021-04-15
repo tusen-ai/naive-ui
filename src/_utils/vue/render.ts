@@ -3,7 +3,7 @@ import { defineComponent, createTextVNode, PropType } from 'vue'
 export const render = defineComponent({
   name: 'Render',
   props: {
-    render: [String, Number, Function] as PropType<unknown>
+    render: [String, Number, Function, Boolean] as PropType<unknown>
   },
   render () {
     const { render } = this
