@@ -9,7 +9,7 @@ import {
 } from 'vue'
 import { VirtualList, VirtualListRef } from 'vueuc'
 import { NEmpty } from '../../empty'
-import { NScrollbar, ScrollbarRef } from '../../scrollbar'
+import { NScrollbar, ScrollbarInst } from '../../scrollbar'
 import type { Option, TransferInjection } from './interface'
 import NTransferListItem from './TransferListItem'
 
@@ -49,7 +49,7 @@ export default defineComponent({
     const NTransfer = inject<TransferInjection>(
       'NTransfer'
     ) as TransferInjection
-    const scrollerInstRef = ref<ScrollbarRef | null>(null)
+    const scrollerInstRef = ref<ScrollbarInst | null>(null)
     const vlInstRef = ref<VirtualListRef | null>(null)
     function syncVLScroller (): void {
       scrollerInstRef.value?.sync()

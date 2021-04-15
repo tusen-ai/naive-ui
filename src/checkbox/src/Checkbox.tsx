@@ -10,10 +10,16 @@ import {
   CSSProperties
 } from 'vue'
 import { useMergedState, useMemo } from 'vooks'
-import { useFormItem, useTheme } from '../../_mixins'
+import { useConfig, useFormItem, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NIconSwitchTransition } from '../../_internal'
-import { warn, call, createKey, MaybeArray } from '../../_utils'
+import {
+  warn,
+  call,
+  createKey,
+  MaybeArray,
+  ExtractPublicPropTypes
+} from '../../_utils'
 import { checkboxLight } from '../styles'
 import type { CheckboxTheme } from '../styles'
 import CheckMark from './CheckMark'
@@ -21,60 +27,65 @@ import LineMark from './LineMark'
 import type { CheckboxGroupInjection } from './CheckboxGroup'
 import style from './styles/index.cssr'
 
+const checkboxProps = {
+  ...(useTheme.props as ThemeProps<CheckboxTheme>),
+  size: String as PropType<'small' | 'medium' | 'large'>,
+  checked: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
+  defaultChecked: {
+    type: Boolean,
+    default: false
+  },
+  value: [String, Number],
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  indeterminate: {
+    type: Boolean,
+    default: false
+  },
+  label: {
+    type: String,
+    default: undefined
+  },
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:checked': [Function, Array] as PropType<
+  MaybeArray<(value: boolean) => void>
+  >,
+  onUpdateChecked: [Function, Array] as PropType<
+  MaybeArray<(value: boolean) => void>
+  >,
+  // private
+  tableHeader: {
+    type: Boolean,
+    default: false
+  },
+  // deprecated
+  onChange: {
+    type: [Function, Array] as PropType<
+    undefined | MaybeArray<(value: boolean) => void>
+    >,
+    validator: () => {
+      warn(
+        'checkbox',
+        '`on-change` is deprecated, please use `on-update:checked` instead.'
+      )
+      return true
+    },
+    default: undefined
+  }
+}
+
+export type CheckboxProps = ExtractPublicPropTypes<typeof checkboxProps>
+
 export default defineComponent({
   name: 'Checkbox',
-  props: {
-    ...(useTheme.props as ThemeProps<CheckboxTheme>),
-    size: String as PropType<'small' | 'medium' | 'large'>,
-    checked: {
-      type: Boolean as PropType<boolean | undefined>,
-      default: undefined
-    },
-    defaultChecked: {
-      type: Boolean,
-      default: false
-    },
-    value: [String, Number],
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    indeterminate: {
-      type: Boolean,
-      default: false
-    },
-    label: {
-      type: String,
-      default: undefined
-    },
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:checked': [Function, Array] as PropType<
-    MaybeArray<(value: boolean) => void>
-    >,
-    onUpdateChecked: [Function, Array] as PropType<
-    MaybeArray<(value: boolean) => void>
-    >,
-    // private
-    tableHeader: {
-      type: Boolean,
-      default: false
-    },
-    // deprecated
-    onChange: {
-      type: [Function, Array] as PropType<
-      undefined | MaybeArray<(value: boolean) => void>
-      >,
-      validator: () => {
-        warn(
-          'checkbox',
-          '`on-change` is deprecated, please use `on-update:checked` instead.'
-        )
-        return true
-      },
-      default: undefined
-    }
-  },
+  props: checkboxProps,
   setup (props) {
+    const { mergedClsPrefix } = useConfig(props)
     const NCheckboxGroup = inject<CheckboxGroupInjection | null>(
       'NCheckboxGroup',
       null
@@ -121,7 +132,8 @@ export default defineComponent({
       'Checkbox',
       style,
       checkboxLight,
-      props
+      props,
+      mergedClsPrefix
     )
     function toggle (): void {
       if (NCheckboxGroup && props.value !== undefined) {
@@ -162,6 +174,7 @@ export default defineComponent({
       }
     }
     return Object.assign(formItem, {
+      cPrefix: mergedClsPrefix,
       NCheckboxGroup,
       mergedDisabled: mergedDisabledRef,
       renderedChecked: renderedCheckedRef,
@@ -237,6 +250,7 @@ export default defineComponent({
       tableHeader,
       cssVars,
       label,
+      cPrefix,
       handleKeyUp,
       handleKeyDown,
       handleClick
@@ -244,12 +258,12 @@ export default defineComponent({
     return (
       <div
         class={[
-          'n-checkbox',
+          `${cPrefix}-checkbox`,
           {
-            'n-checkbox--checked': renderedChecked,
-            'n-checkbox--disabled': mergedDisabled,
-            'n-checkbox--indeterminate': indeterminate,
-            'n-checkbox--table-header': tableHeader
+            [`${cPrefix}-checkbox--checked`]: renderedChecked,
+            [`${cPrefix}-checkbox--disabled`]: mergedDisabled,
+            [`${cPrefix}-checkbox--indeterminate`]: indeterminate,
+            [`${cPrefix}-checkbox--table-header`]: tableHeader
           }
         ]}
         tabindex={mergedDisabled ? undefined : 0}
@@ -258,25 +272,25 @@ export default defineComponent({
         onKeydown={handleKeyDown}
         onClick={handleClick}
       >
-        <div class="n-checkbox-box">
+        <div class={`${cPrefix}-checkbox-box`}>
           <NIconSwitchTransition>
             {{
               default: () =>
                 this.indeterminate ? (
-                  <div key="indeterminate" class="n-checkbox-icon">
+                  <div key="indeterminate" class={`${cPrefix}-checkbox-icon`}>
                     {LineMark}
                   </div>
                 ) : (
-                  <div key="check" class="n-checkbox-icon">
+                  <div key="check" class={`${cPrefix}-checkbox-icon`}>
                     {CheckMark}
                   </div>
                 )
             }}
           </NIconSwitchTransition>
-          <div class="n-checkbox-box__border" />
+          <div class={`${cPrefix}-checkbox-box__border`} />
         </div>
         {label !== null || $slots.default ? (
-          <span class="n-checkbox__label">
+          <span class={`${cPrefix}-checkbox__label`}>
             {renderSlot($slots, 'default', undefined, () => [label])}
           </span>
         ) : null}

@@ -14,7 +14,7 @@ import type { ThemeProps } from '../../_mixins'
 import { formatLength, MaybeArray, call, warn } from '../../_utils'
 
 import { NScrollbar } from '../../scrollbar'
-import type { ScrollbarProps, ScrollbarRef } from '../../scrollbar'
+import type { ScrollbarProps, ScrollbarInst } from '../../scrollbar'
 import { layoutLight } from '../styles'
 import type { LayoutTheme } from '../styles'
 import style from './styles/layout-sider.cssr'
@@ -108,7 +108,7 @@ export default defineComponent({
       }
     }
     const selfRef = ref<HTMLElement | null>(null)
-    const scrollbarRef = ref<ScrollbarRef | null>(null)
+    const scrollbarRef = ref<ScrollbarInst | null>(null)
     const styleMaxWidthRef = computed(() => {
       return formatLength(
         mergedCollapsedRef.value ? props.collapsedWidth : props.width

@@ -9,8 +9,9 @@ import {
   ref
 } from 'vue'
 import { useMergedState } from 'vooks'
-import { useFormItem } from '../../_mixins'
+import { useConfig, useFormItem } from '../../_mixins'
 import { warn, call, MaybeArray } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 
 export interface CheckboxGroupInjection {
   disabled: boolean
@@ -19,47 +20,48 @@ export interface CheckboxGroupInjection {
   toggleCheckbox: (checked: boolean, checkboxValue: string | number) => void
 }
 
+const checkboxGroupProps = {
+  size: String as PropType<'small' | 'medium' | 'large'>,
+  value: Array as PropType<Array<string | number> | null>,
+  defaultValue: {
+    type: Array as PropType<Array<string | number> | null>,
+    default: null
+  },
+  disabled: Boolean,
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:value': [Function, Array] as PropType<
+  MaybeArray<(value: Array<string | number>) => void>
+  >,
+  onUpdateValue: [Function, Array] as PropType<
+  MaybeArray<(value: Array<string | number>) => void>
+  >,
+  // deprecated
+  onChange: {
+    type: [Function, Array] as PropType<
+    MaybeArray<(value: Array<string | number>) => void> | undefined
+    >,
+    validator: () => {
+      if (__DEV__) {
+        warn(
+          'checkbox-group',
+          '`on-change` is deprecated, please use `on-update:value` instead.'
+        )
+      }
+      return true
+    },
+    default: undefined
+  }
+} as const
+
+export type CheckboxGroupProps = ExtractPublicPropTypes<
+  typeof checkboxGroupProps
+>
+
 export default defineComponent({
   name: 'CheckboxGroup',
-  props: {
-    size: {
-      type: String as PropType<'small' | 'medium' | 'large'>,
-      default: undefined
-    },
-    value: Array as PropType<Array<string | number> | null>,
-    defaultValue: {
-      type: Array as PropType<Array<string | number> | null>,
-      default: null
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': [Function, Array] as PropType<
-    MaybeArray<(value: Array<string | number>) => void>
-    >,
-    onUpdateValue: [Function, Array] as PropType<
-    MaybeArray<(value: Array<string | number>) => void>
-    >,
-    // deprecated
-    onChange: {
-      type: [Function, Array] as PropType<
-      MaybeArray<(value: Array<string | number>) => void> | undefined
-      >,
-      validator: () => {
-        if (__DEV__) {
-          warn(
-            'checkbox-group',
-            '`on-change` is deprecated, please use `on-update:value` instead.'
-          )
-        }
-        return true
-      },
-      default: undefined
-    }
-  },
+  props: checkboxGroupProps,
   setup (props) {
+    const { mergedClsPrefix } = useConfig(props)
     const formItem = useFormItem(props)
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = computed(() => props.value)
@@ -131,14 +133,11 @@ export default defineComponent({
         toggleCheckbox
       })
     )
+    return {
+      cPrefix: mergedClsPrefix
+    }
   },
   render () {
-    return h(
-      'div',
-      {
-        class: 'n-checkbox-group'
-      },
-      this.$slots
-    )
+    return <div class={`${this.cPrefix}-checkbox-group`}>{this.$slots}</div>
   }
 })

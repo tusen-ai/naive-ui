@@ -47,7 +47,7 @@ export interface ScrollTo {
   }): void
 }
 
-export interface ScrollbarRef {
+export interface ScrollbarInst {
   scrollTo: ScrollTo
   sync: () => void
   containerRef: HTMLElement | null

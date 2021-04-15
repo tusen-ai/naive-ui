@@ -10,7 +10,7 @@ import {
   provide
 } from 'vue'
 import { NScrollbar } from '../../scrollbar'
-import type { ScrollbarProps, ScrollbarRef } from '../../scrollbar'
+import type { ScrollbarProps, ScrollbarInst } from '../../scrollbar'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { layoutLight } from '../styles'
@@ -43,7 +43,7 @@ export default defineComponent({
   },
   setup (props) {
     const selfRef = ref<HTMLElement | null>(null)
-    const scrollbarRef = ref<ScrollbarRef | null>(null)
+    const scrollbarRef = ref<ScrollbarInst | null>(null)
     const themeRef = useTheme('Layout', 'Layout', style, layoutLight, props)
     const scrollTo: LayoutRef['scrollTo'] = (
       options: ScrollToOptions | number,

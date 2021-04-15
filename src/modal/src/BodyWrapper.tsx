@@ -17,7 +17,7 @@ import {
 } from 'vue'
 import { clickoutside } from 'vdirs'
 import { cardBasePropKeys } from '../../card/src/Card'
-import { NScrollbar, ScrollbarRef } from '../../scrollbar'
+import { NScrollbar, ScrollbarInst } from '../../scrollbar'
 import { NDialog, dialogPropKeys } from '../../dialog'
 import { NCard } from '../../card'
 import { getFirstSlotVNode, keep, warn } from '../../_utils'
@@ -69,7 +69,7 @@ export default defineComponent({
   },
   setup (props) {
     const bodyRef = ref<HTMLElement | ComponentPublicInstance | null>(null)
-    const scrollbarRef = ref<ScrollbarRef | null>(null)
+    const scrollbarRef = ref<ScrollbarInst | null>(null)
     const displayedRef = ref(props.show)
     const transformOriginXRef = ref<number | null>(null)
     const transformOriginYRef = ref<number | null>(null)

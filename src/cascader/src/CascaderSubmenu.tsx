@@ -1,7 +1,7 @@
 import { h, ref, defineComponent, inject, PropType } from 'vue'
 import NCascaderOption from './CascaderOption'
 import { NScrollbar } from '../../scrollbar'
-import type { ScrollbarRef } from '../../scrollbar'
+import type { ScrollbarInst } from '../../scrollbar'
 import {
   TmNode,
   CascaderSubmenuInstance,
@@ -23,7 +23,7 @@ export default defineComponent({
   setup () {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NCascader = inject(cascaderInjectionKey)!
-    const scrollbarInstRef = ref<ScrollbarRef | null>(null)
+    const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     const inst: CascaderSubmenuInstance = {
       scroll (index: number, elSize: number) {
         scrollbarInstRef.value?.scrollTo({

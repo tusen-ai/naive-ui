@@ -15,7 +15,7 @@ import { useTheme, useHljs, ThemeProps } from '../../_mixins'
 import type { Hljs } from '../../_mixins'
 import { warn } from '../../_utils'
 import { NScrollbar } from '../../scrollbar'
-import type { ScrollbarRef } from '../../scrollbar'
+import type { ScrollbarInst } from '../../scrollbar'
 import { NCode } from '../../code'
 import { logLight, LogTheme } from '../styles'
 import NLogLoader from './LogLoader'
@@ -91,7 +91,7 @@ export default defineComponent({
       }
       return props.lines
     })
-    const scrollbarRef = ref<ScrollbarRef | null>(null)
+    const scrollbarRef = ref<ScrollbarInst | null>(null)
     const themeRef = useTheme('Log', 'Log', style, logLight, props)
     function handleScroll (e: Event): void {
       const container = e.target as HTMLElement

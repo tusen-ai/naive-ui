@@ -19,7 +19,7 @@ import { VirtualList, VirtualListRef } from 'vueuc'
 import { depx, getPadding } from 'seemly'
 import { NEmpty } from '../../../empty'
 import { NScrollbar } from '../../../scrollbar'
-import type { ScrollbarRef } from '../../../scrollbar'
+import type { ScrollbarInst } from '../../../scrollbar'
 import type {
   SelectBaseOption,
   SelectGroupOption,
@@ -123,7 +123,7 @@ export default defineComponent({
     const selfRef = ref<HTMLElement | null>(null)
     const actionElRef = ref<HTMLElement | null>(null)
     const virtualListRef = ref<VirtualListRef | null>(null)
-    const scrollbarRef = ref<ScrollbarRef | null>(null)
+    const scrollbarRef = ref<ScrollbarInst | null>(null)
     const { treeMate } = props
     const pendingNodeRef = ref(
       props.autoPending

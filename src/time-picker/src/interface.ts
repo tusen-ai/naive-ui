@@ -1,4 +1,4 @@
-import { ScrollbarRef } from '../../scrollbar'
+import { ScrollbarInst } from '../../scrollbar'
 import type { MergedTheme } from '../../_mixins'
 import type { TimePickerTheme } from '../styles'
 
@@ -8,9 +8,9 @@ export interface TimePickerInjection {
 
 export interface PanelRef {
   $el: HTMLElement
-  hourScrollRef?: ScrollbarRef
-  minuteScrollRef?: ScrollbarRef
-  secondScrollRef?: ScrollbarRef
+  hourScrollRef?: ScrollbarInst
+  minuteScrollRef?: ScrollbarInst
+  secondScrollRef?: ScrollbarInst
 }
 
 export type OnUpdateValue = <T extends number & (number | null)>(

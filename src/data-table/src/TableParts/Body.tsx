@@ -1,7 +1,7 @@
 import { h, ref, defineComponent, inject } from 'vue'
 import { pxfy } from 'seemly'
 import { NCheckbox } from '../../../checkbox'
-import { NScrollbar, ScrollbarRef } from '../../../scrollbar'
+import { NScrollbar, ScrollbarInst } from '../../../scrollbar'
 import { formatLength } from '../../../_utils'
 import { DataTableInjection, RowKey, TmNode } from '../interface'
 import { createRowClassName } from '../utils'
@@ -14,7 +14,7 @@ export default defineComponent({
     const NDataTable = inject<DataTableInjection>(
       'NDataTable'
     ) as DataTableInjection
-    const scrollbarInstRef = ref<ScrollbarRef | null>(null)
+    const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     function handleCheckboxUpdateChecked (
       tmNode: TmNode,
       checked: boolean

@@ -61,7 +61,7 @@ export default c([
         backgroundColor: 'var(--color-checked)'
       }, [
         cB('checkbox-icon', [
-          cE('check', `
+          c('.check-icon', `
             opacity: 1;
             transform: scale(1);
           `)
@@ -71,11 +71,11 @@ export default c([
     cM('indeterminate', [
       cB('checkbox-box', [
         cB('checkbox-icon', [
-          cE('check', `
+          c('.check-icon', `
             opacity: 0;
             transform: scale(.5);
           `),
-          cE('line', `
+          c('.line-icon', `
             opacity: 1;
             transform: scale(1);
           `)
@@ -112,7 +112,7 @@ export default c([
             border: 'var(--border-disabled-checked)'
           }),
           cB('checkbox-icon', [
-            cE('check, line', {
+            c('.check-icon, .line-icon', {
               fill: 'var(--check-mark-color-disabled-checked)'
             })
           ])
@@ -125,7 +125,7 @@ export default c([
           border: 'var(--border-disabled)'
         }),
         cB('checkbox-icon', [
-          cE('check, line', {
+          c('.check-icon, .line-icon', {
             fill: 'var(--check-mark-color-disabled)'
           })
         ])
@@ -167,9 +167,8 @@ export default c([
         top: 0;
         bottom: 0;
       `, [
-        cE('line, check', `
+        c('.check-icon, .line-icon', `
           fill: var(--check-mark-color);
-          width: calc(100% - 2px);
           opacity: 0;
           transform: scale(0.5);
           transform-origin: center;
