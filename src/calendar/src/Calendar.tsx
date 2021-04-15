@@ -25,7 +25,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
 import { call, MaybeArray } from '../../_utils'
 import { NButton, NButtonGroup } from '../../button'
-import { useLocale, useTheme } from '../../_mixins'
+import { useConfig, useLocale, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { calendarLight } from '../styles'
 import type { CalendarTheme } from '../styles'
@@ -59,12 +59,15 @@ export default defineComponent({
   name: 'Calendar',
   props: calendarProps,
   setup (props) {
+    const { mergedClsPrefix } = useConfig(props)
+
     const themeRef = useTheme(
       'Calendar',
       'Calendar',
       style,
       calendarLight,
-      props
+      props,
+      mergedClsPrefix
     )
     const { locale: localeRef, dateLocale: dateLocaleRef } = useLocale(
       'DatePicker'
@@ -99,6 +102,7 @@ export default defineComponent({
       monthTsRef.value = startOfMonth(now).valueOf()
     }
     return {
+      cPrefix: mergedClsPrefix,
       locale: localeRef,
       dateLocale: dateLocaleRef,
       now,
@@ -173,6 +177,7 @@ export default defineComponent({
   render () {
     const {
       isDateDisabled,
+      cPrefix,
       monthTs,
       cssVars,
       mergedValue,
@@ -191,10 +196,10 @@ export default defineComponent({
       ? `${localeMonth} ${year}`
       : `${year} ${localeMonth}`
     return (
-      <div class="n-calendar" style={cssVars as CSSProperties}>
-        <div class="n-calendar-header">
-          <div class="n-calendar-header__title">{title}</div>
-          <div class="n-calendar-header__extra">
+      <div class={`${cPrefix}-calendar`} style={cssVars as CSSProperties}>
+        <div class={`${cPrefix}-calendar-header`}>
+          <div class={`${cPrefix}-calendar-header__title`}>{title}</div>
+          <div class={`${cPrefix}-calendar-header__extra`}>
             <NButtonGroup>
               {{
                 default: () => (
@@ -207,7 +212,10 @@ export default defineComponent({
                     >
                       {{
                         icon: () => (
-                          <NBaseIcon class="n-calendar-prev-btn">
+                          <NBaseIcon
+                            clsPerfix={cPrefix}
+                            class={`${cPrefix}-calendar-prev-btn`}
+                          >
                             {{ default: () => <ChevronLeftIcon /> }}
                           </NBaseIcon>
                         )
@@ -229,7 +237,10 @@ export default defineComponent({
                     >
                       {{
                         icon: () => (
-                          <NBaseIcon class="n-calendar-next-btn">
+                          <NBaseIcon
+                            clsPerfix={cPrefix}
+                            class={`${cPrefix}-calendar-next-btn`}
+                          >
                             {{ default: () => <ChevronRightIcon /> }}
                           </NBaseIcon>
                         )
@@ -241,7 +252,7 @@ export default defineComponent({
             </NButtonGroup>
           </div>
         </div>
-        <div class="n-calendar-dates">
+        <div class={`${cPrefix}-calendar-dates`}>
           {this.dateItems.map(
             ({ ts, inCurrentMonth, isCurrentDate }, index) => {
               const disabled = !inCurrentMonth || isDateDisabled?.(ts) === true
@@ -251,10 +262,10 @@ export default defineComponent({
                 <div
                   key={isCurrentDate ? 'current' : index}
                   class={[
-                    'n-calendar-cell',
-                    disabled && 'n-calendar-cell--disabled',
-                    isCurrentDate && 'n-calendar-cell--current',
-                    selected && 'n-calendar-cell--selected'
+                    `${cPrefix}-calendar-cell`,
+                    disabled && `${cPrefix}-calendar-cell--disabled`,
+                    isCurrentDate && `${cPrefix}-calendar-cell--current`,
+                    selected && `${cPrefix}-calendar-cell--selected`
                   ]}
                   onClick={() => {
                     this.doUpdateValue(ts, {
@@ -265,18 +276,24 @@ export default defineComponent({
                     this.monthTs = startOfMonth(ts).valueOf()
                   }}
                 >
-                  <div class="n-calendar-date">
+                  <div class={`${cPrefix}-calendar-date`}>
                     {disabled ? (
-                      <div class="n-calendar-date__date" key="disabled">
+                      <div
+                        class={`${cPrefix}-calendar-date__date`}
+                        key="disabled"
+                      >
                         {date}
                       </div>
                     ) : (
-                      <div class="n-calendar-date__date" key="available">
+                      <div
+                        class={`${cPrefix}-calendar-date__date`}
+                        key="available"
+                      >
                         {date}
                       </div>
                     )}
                     {index < 7 && (
-                      <div class="n-calendar-date__day">
+                      <div class={`${cPrefix}-calendar-date__day`}>
                         {format(ts, 'EEE', {
                           locale
                         })}
@@ -288,7 +305,7 @@ export default defineComponent({
                     month,
                     date
                   })}
-                  <div class="n-calendar-cell__bar" key={month} />
+                  <div class={`${cPrefix}-calendar-cell__bar`} key={month} />
                 </div>
               )
             }
