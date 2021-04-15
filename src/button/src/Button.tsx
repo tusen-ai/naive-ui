@@ -424,7 +424,7 @@ export default defineComponent({
             default: () =>
               $slots.icon || this.loading ? (
                 <span
-                  class={`${cPrefix}-button__icon"`}
+                  class={`${cPrefix}-button__icon`}
                   style={{
                     margin: !$slots.default ? 0 : ''
                   }}

@@ -1,18 +1,22 @@
-import { h, defineComponent, computed, mergeProps } from 'vue'
-import { useTheme } from '../../_mixins'
+import { h, defineComponent, computed, mergeProps, PropType } from 'vue'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { formatLength, warn } from '../../_utils'
 import { iconLight } from '../styles'
 import type { IconTheme } from '../styles'
-import commonProps from './common-props'
 import style from './styles/index.cssr'
+
+export type Depth = 1 | 2 | 3 | 4 | 5 | '1' | '2' | '3' | '4' | '5' | undefined
 
 export default defineComponent({
   __NAIVE_ICON__: true,
   name: 'Icon',
   props: {
     ...(useTheme.props as ThemeProps<IconTheme>),
-    ...commonProps,
+    depth: {
+      type: [String, Number] as PropType<Depth>,
+      default: undefined
+    },
     size: {
       type: [Number, String],
       default: undefined
@@ -23,8 +27,17 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const themeRef = useTheme('Icon', 'Icon', style, iconLight, props)
+    const { mergedClsPrefix } = useConfig(props)
+    const themeRef = useTheme(
+      'Icon',
+      'Icon',
+      style,
+      iconLight,
+      props,
+      mergedClsPrefix
+    )
     return {
+      cPrefix: mergedClsPrefix,
       mergedStyle: computed(() => {
         const { size, color } = props
         return {
@@ -53,7 +66,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { $parent, depth } = this
+    const { $parent, depth, cPrefix } = this
     if ($parent?.$options.__NAIVE_ICON__) {
       warn('icon', "don't wrap `n-icon` inside `n-icon`")
     }
@@ -61,10 +74,10 @@ export default defineComponent({
       'i',
       mergeProps(this.$attrs, {
         class: [
-          'n-icon',
+          `${cPrefix}-icon`,
           {
-            'n-icon--depth': depth,
-            'n-icon--color-transition': depth
+            [`${cPrefix}-icon--depth`]: depth,
+            [`${cPrefix}-icon--color-transition`]: depth !== undefined
           }
         ],
         style: Object.assign(this.cssVars, this.mergedStyle)
