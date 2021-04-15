@@ -1,5 +1,5 @@
 import { CNode } from 'css-render'
-import { ComputedRef, onBeforeMount } from 'vue'
+import { Ref, onBeforeMount } from 'vue'
 import globalStyle from '../_styles/global/index.cssr'
 
 globalStyle.mount({
@@ -10,12 +10,12 @@ globalStyle.mount({
 export default function useStyle (
   mountId: string,
   style: CNode,
-  clsPrefixRef?: ComputedRef<string | undefined>
+  clsPrefixRef?: Ref<string | undefined>
 ): void {
   onBeforeMount(() => {
     const clsPrefix = clsPrefixRef?.value
     style.mount({
-      id: mountId,
+      id: clsPrefix === undefined ? mountId : clsPrefix + mountId,
       head: true,
       props: {
         bPrefix: clsPrefix ? `.${clsPrefix}-` : undefined

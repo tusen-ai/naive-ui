@@ -11,12 +11,13 @@ import {
   Transition,
   PropType,
   onMounted,
-  onBeforeUnmount
+  onBeforeUnmount,
+  ExtractPropTypes
 } from 'vue'
 import { VLazyTeleport } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
 import { getScrollParent, unwrapElement } from 'seemly'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseIcon } from '../../_internal'
 import { formatLength, warn } from '../../_utils'
@@ -25,76 +26,82 @@ import type { BackTopTheme } from '../styles'
 import BackTopIcon from './BackTopIcon'
 import style from './styles/index.cssr'
 
+const backTopProps = {
+  ...(useTheme.props as ThemeProps<BackTopTheme>),
+  show: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
+  right: {
+    type: [Number, String] as PropType<string | number>,
+    default: 40
+  },
+  bottom: {
+    type: [Number, String] as PropType<string | number>,
+    default: 40
+  },
+  to: {
+    type: [String, Object] as PropType<HTMLElement | string>,
+    default: 'body'
+  },
+  visibilityHeight: {
+    type: Number,
+    default: 180
+  },
+  listenTo: [String, Object, Function] as PropType<
+  string | HTMLElement | (() => HTMLElement)
+  >,
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:show': {
+    type: Function,
+    default: () => {}
+  },
+  // deprecated
+  target: {
+    type: Function as PropType<() => HTMLElement | undefined>,
+    validator: () => {
+      warn(
+        'back-top',
+        '`target` is deprecated, please use `listen-to` instead.'
+      )
+      return true
+    },
+    default: undefined
+  },
+  onShow: {
+    type: (Function as unknown) as PropType<(() => void) | undefined>,
+    validator: () => {
+      warn(
+        'back-top',
+        '`on-show` is deprecated, please use `on-update:show` instead.'
+      )
+      return true
+    },
+    default: undefined
+  },
+  onHide: {
+    type: (Function as unknown) as PropType<(() => void) | undefined>,
+    validator: () => {
+      warn(
+        'back-top',
+        '`on-hide` is deprecated, please use `on-update:show` instead.'
+      )
+      return true
+    },
+    default: undefined
+  }
+} as const
+
+export type BackTopProps = Partial<ExtractPropTypes<typeof backTopProps>>
+
 export default defineComponent({
   name: 'BackTop',
+  // make style applied to back-top button
   inheritAttrs: false,
-  props: {
-    ...(useTheme.props as ThemeProps<BackTopTheme>),
-    show: {
-      type: Boolean,
-      default: undefined
-    },
-    right: {
-      type: [Number, String],
-      default: 40
-    },
-    bottom: {
-      type: [Number, String],
-      default: 40
-    },
-    to: {
-      type: [String, Object] as PropType<HTMLElement | string>,
-      default: 'body'
-    },
-    visibilityHeight: {
-      type: Number,
-      default: 180
-    },
-    listenTo: {
-      type: [String, Object, Function],
-      default: undefined
-    },
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:show': {
-      type: Function,
-      default: () => {}
-    },
-    // deprecated
-    target: {
-      type: Function as PropType<() => HTMLElement | undefined>,
-      validator: () => {
-        warn(
-          'back-top',
-          '`target` is deprecated, please use `listen-to` instead.'
-        )
-        return true
-      },
-      default: undefined
-    },
-    onShow: {
-      type: (Function as unknown) as PropType<(() => void) | undefined>,
-      validator: () => {
-        warn(
-          'back-top',
-          '`on-show` is deprecated, please use `on-update:show` instead.'
-        )
-        return true
-      },
-      default: undefined
-    },
-    onHide: {
-      type: (Function as unknown) as PropType<(() => void) | undefined>,
-      validator: () => {
-        warn(
-          'back-top',
-          '`on-hide` is deprecated, please use `on-update:show` instead.'
-        )
-        return true
-      },
-      default: undefined
-    }
-  },
+  props: backTopProps,
   setup (props) {
+    const { mergedClsPrefix } = useConfig(props)
+
     const scrollTopRef = ref<number | null>(null)
     const uncontrolledShowRef = computed(() => {
       if (scrollTopRef.value === null) return false
@@ -130,7 +137,14 @@ export default defineComponent({
         props.onHide?.()
       }
     })
-    const themeRef = useTheme('BackTop', 'BackTop', style, backTopLight, props)
+    const themeRef = useTheme(
+      'BackTop',
+      'BackTop',
+      style,
+      backTopLight,
+      props,
+      mergedClsPrefix
+    )
     function init (): void {
       if (scrollListenerRegistered) return
       scrollListenerRegistered = true
@@ -205,6 +219,7 @@ export default defineComponent({
       scrollTop: scrollTopRef,
       DomInfoReady: DomInfoReadyRef,
       transitionDisabled: transitionDisabledRef,
+      cPrefix: mergedClsPrefix,
       handleAfterEnter,
       handleScroll,
       handleClick,
@@ -267,11 +282,11 @@ export default defineComponent({
                         'div',
                         mergeProps(this.$attrs, {
                           class: [
-                            'n-back-top',
-                            {
-                              'n-back-top--transition-disabled': this
-                                .transitionDisabled
-                            }
+                              `${this.cPrefix}-back-top`,
+                              {
+                                [`${this.cPrefix}-back-top--transition-disabled`]: this
+                                  .transitionDisabled
+                              }
                           ],
                           style: {
                             ...this.style,
@@ -285,7 +300,7 @@ export default defineComponent({
                             'default',
                             undefined,
                             () => [
-                              <NBaseIcon>
+                              <NBaseIcon clsPerfix={this.cPrefix}>
                                 {{ default: () => BackTopIcon }}
                               </NBaseIcon>
                             ]
