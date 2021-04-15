@@ -99,7 +99,7 @@ export default defineComponent({
         {this.showArrow ? (
           <NBaseIcon
             class={`${cPrefix}-menu-item-content__arrow`}
-            clsPerfix={cPrefix}
+            clsPrefix={cPrefix}
           >
             {{
               default: () => <ChevronDownFilledIcon />

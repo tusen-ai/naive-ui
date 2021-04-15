@@ -2,10 +2,10 @@ import { h, ref, defineComponent, inject, PropType } from 'vue'
 import NCascaderOption from './CascaderOption'
 import { NScrollbar } from '../../scrollbar'
 import type { ScrollbarRef } from '../../scrollbar'
-import type {
-  CascaderInjection,
+import {
   TmNode,
-  CascaderSubmenuInstance
+  CascaderSubmenuInstance,
+  cascaderInjectionKey
 } from './interface'
 
 export default defineComponent({
@@ -21,9 +21,8 @@ export default defineComponent({
     }
   },
   setup () {
-    const NCascader = inject<CascaderInjection>(
-      'NCascader'
-    ) as CascaderInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NCascader = inject(cascaderInjectionKey)!
     const scrollbarInstRef = ref<ScrollbarRef | null>(null)
     const inst: CascaderSubmenuInstance = {
       scroll (index: number, elSize: number) {
@@ -42,7 +41,7 @@ export default defineComponent({
   render () {
     const { NCascader } = this
     return (
-      <div class="n-cascader-submenu">
+      <div class={`${NCascader.mergedClsPrefix}-cascader-submenu`}>
         <NScrollbar
           ref="scrollbarInstRef"
           theme={NCascader.mergedTheme.peers.Scrollbar}

@@ -7,6 +7,10 @@ import { ChevronDownIcon } from '../../icons'
 export default defineComponent({
   name: 'InternalSelectionSuffix',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     showArrow: {
       type: Boolean,
       default: undefined
@@ -22,28 +26,35 @@ export default defineComponent({
     onClear: Function as PropType<(e: MouseEvent) => void>
   },
   setup (props) {
-    return () => (
-      <NBaseLoading
-        class="n-base-selection__mark"
-        strokeWidth={20}
-        scale={0.8}
-        show={props.loading}
-      >
-        {{
-          default: () =>
-            props.showArrow ? (
-              <NBaseClear show={props.showClear} onClear={props.onClear}>
-                {{
-                  default: () => (
-                    <NBaseIcon class="n-base-selection__arrow">
-                      {{ default: () => <ChevronDownIcon /> }}
-                    </NBaseIcon>
-                  )
-                }}
-              </NBaseClear>
-            ) : null
-        }}
-      </NBaseLoading>
-    )
+    return () => {
+      const { clsPrefix } = props
+      return (
+        <NBaseLoading
+          clsPrefix={clsPrefix}
+          class={`${clsPrefix}-base-selection__mark`}
+          strokeWidth={20}
+          scale={0.8}
+          show={props.loading}
+        >
+          {{
+            default: () =>
+              props.showArrow ? (
+                <NBaseClear show={props.showClear} onClear={props.onClear}>
+                  {{
+                    default: () => (
+                      <NBaseIcon
+                        clsPrefix={clsPrefix}
+                        class={`${clsPrefix}-base-selection__arrow`}
+                      >
+                        {{ default: () => <ChevronDownIcon /> }}
+                      </NBaseIcon>
+                    )
+                  }}
+                </NBaseClear>
+              ) : null
+          }}
+        </NBaseLoading>
+      )
+    }
   }
 })

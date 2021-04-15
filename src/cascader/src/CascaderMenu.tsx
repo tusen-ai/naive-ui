@@ -16,7 +16,7 @@ import { NBaseMenuMask } from '../../_internal'
 import { MenuMaskRef } from '../../_internal/menu-mask'
 import NCascaderSubmenu from './CascaderSubmenu'
 import {
-  CascaderInjection,
+  cascaderInjectionKey,
   CascaderMenuInstance,
   CascaderSubmenuInstance,
   MenuModel,
@@ -45,9 +45,8 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const NCascader = inject<CascaderInjection>(
-      'NCascader'
-    ) as CascaderInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NCascader = inject(cascaderInjectionKey)!
     const submenuInstRefs: CascaderSubmenuInstance[] = []
     const maskInstRef = ref<MenuMaskRef | null>(null)
     watch(toRef(props, 'value'), () => {
@@ -103,7 +102,7 @@ export default defineComponent({
             this.show
               ? withDirectives(
                 <div
-                  class="n-cascader-menu"
+                  class={`${NCascader.mergedClsPrefix}-cascader-menu`}
                   onMousedown={this.handleMenuMouseDown}
                 >
                   {this.menuModel.map((submenuOptions, index) => {

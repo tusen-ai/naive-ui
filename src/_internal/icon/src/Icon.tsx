@@ -5,7 +5,7 @@ import style from './styles/index.cssr'
 export default defineComponent({
   name: 'BaseIcon',
   props: {
-    clsPerfix: {
+    clsPrefix: {
       type: String,
       required: true
     },
@@ -13,12 +13,12 @@ export default defineComponent({
     onMousedown: Function as PropType<(e: MouseEvent) => void>
   },
   setup (props) {
-    useStyle('BaseIcon', style, toRef(props, 'clsPerfix'))
+    useStyle('BaseIcon', style, toRef(props, 'clsPrefix'))
   },
   render () {
     return (
       <i
-        class={`${this.clsPerfix}-base-icon`}
+        class={`${this.clsPrefix}-base-icon`}
         onClick={this.onClick}
         onMousedown={this.onMousedown}
       >

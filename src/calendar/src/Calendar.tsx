@@ -213,7 +213,7 @@ export default defineComponent({
                       {{
                         icon: () => (
                           <NBaseIcon
-                            clsPerfix={cPrefix}
+                            clsPrefix={cPrefix}
                             class={`${cPrefix}-calendar-prev-btn`}
                           >
                             {{ default: () => <ChevronLeftIcon /> }}
@@ -238,7 +238,7 @@ export default defineComponent({
                       {{
                         icon: () => (
                           <NBaseIcon
-                            clsPerfix={cPrefix}
+                            clsPrefix={cPrefix}
                             class={`${cPrefix}-calendar-next-btn`}
                           >
                             {{ default: () => <ChevronRightIcon /> }}

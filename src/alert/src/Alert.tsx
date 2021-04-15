@@ -180,7 +180,7 @@ export default defineComponent({
                       {this.$slots.icon ? (
                         renderSlot(this.$slots, 'icon')
                       ) : (
-                        <NBaseIcon clsPerfix={cPrefix}>
+                        <NBaseIcon clsPrefix={cPrefix}>
                           {{
                             default: () => {
                               switch (this.type) {

@@ -11,7 +11,8 @@ import {
   provide,
   reactive,
   Ref,
-  UnwrapRef
+  UnwrapRef,
+  InjectionKey
 } from 'vue'
 import { TreeNode } from 'treemate'
 import { VirtualList, VirtualListRef } from 'vueuc'
@@ -49,6 +50,10 @@ export interface InternalSelectMenuInjection {
   value: string | number | Array<string | number> | null
 }
 
+export const internalSelectionMenuInjectionKey: InjectionKey<InternalSelectMenuInjection> = Symbol(
+  'internal-select-menu'
+)
+
 interface InternalExposedProps {
   selfRef: Ref<HTMLElement | null>
   getPendingOption: () => SelectBaseOption | null
@@ -62,6 +67,10 @@ export default defineComponent({
   name: 'InternalSelectMenu',
   props: {
     ...(useTheme.props as ThemeProps<InternalSelectMenuTheme>),
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     scrollable: {
       type: Boolean,
       default: true
@@ -108,7 +117,8 @@ export default defineComponent({
       'InternalSelectMenu',
       style,
       internalSelectMenuLight,
-      props
+      props,
+      toRef(props, 'clsPrefix')
     )
     const selfRef = ref<HTMLElement | null>(null)
     const actionElRef = ref<HTMLElement | null>(null)
@@ -246,8 +256,8 @@ export default defineComponent({
         props.onBlur?.(e)
       }
     }
-    provide<InternalSelectMenuInjection>(
-      'NInternalSelectMenu',
+    provide(
+      internalSelectionMenuInjectionKey,
       reactive({
         handleOptionMouseEnter,
         handleOptionClick,
@@ -345,16 +355,14 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots, virtualScroll } = this
+    const { $slots, virtualScroll, clsPrefix } = this
     return (
       <div
         ref="selfRef"
         tabindex={this.focusable ? 0 : -1}
         class={[
-          'n-base-select-menu',
-          {
-            'n-base-select-menu--multiple': this.multiple
-          }
+          `${clsPrefix}-base-select-menu`,
+          this.multiple && `${clsPrefix}-base-select-menu--multiple`
         ]}
         style={this.style as any}
         onFocusin={this.handleFocusin}
@@ -364,8 +372,8 @@ export default defineComponent({
         onMousedown={this.handleMouseDown}
       >
         {this.loading ? (
-          <div class="n-base-select-menu__loading">
-            <NInternalLoading strokeWidth={20} />
+          <div class={`${clsPrefix}-base-select-menu__loading`}>
+            <NInternalLoading clsPrefix={clsPrefix} strokeWidth={20} />
           </div>
         ) : !this.empty ? (
           <NScrollbar
@@ -380,7 +388,7 @@ export default defineComponent({
                 return virtualScroll ? (
                   <VirtualList
                     ref="virtualListRef"
-                    class="n-virtual-list"
+                    class={`${clsPrefix}-virtual-list`}
                     items={this.flattenedNodes}
                     itemSize={this.itemSize}
                     showScrollbar={false}
@@ -403,12 +411,14 @@ export default defineComponent({
                         return tmNode.isGroup ? (
                           <NSelectGroupHeader
                             key={tmNode.key}
+                            clsPrefix={clsPrefix}
                             tmNode={
                               (tmNode as unknown) as TreeNode<SelectGroupOption>
                             }
                           />
                         ) : tmNode.ignored ? null : (
                           <NSelectOption
+                            clsPrefix={clsPrefix}
                             key={tmNode.key}
                             tmNode={
                               (tmNode as unknown) as TreeNode<SelectBaseOption>
@@ -420,7 +430,7 @@ export default defineComponent({
                   </VirtualList>
                 ) : (
                   <div
-                    class="n-base-select-menu-option-wrapper"
+                    class={`${clsPrefix}-base-select-menu-option-wrapper`}
                     style={{
                       paddingTop: this.padding.top,
                       paddingBottom: this.padding.bottom
@@ -430,12 +440,14 @@ export default defineComponent({
                       tmNode.isGroup ? (
                         <NSelectGroupHeader
                           key={tmNode.key}
+                          clsPrefix={clsPrefix}
                           tmNode={
                             (tmNode as unknown) as TreeNode<SelectGroupOption>
                           }
                         />
                       ) : (
                         <NSelectOption
+                          clsPrefix={clsPrefix}
                           key={tmNode.key}
                           tmNode={
                             (tmNode as unknown) as TreeNode<SelectBaseOption>
@@ -449,12 +461,15 @@ export default defineComponent({
             }}
           </NScrollbar>
         ) : (
-          <div class="n-base-select-menu__empty">
+          <div class={`${clsPrefix}-base-select-menu__empty`}>
             {renderSlot($slots, 'empty', undefined, () => [<NEmpty />])}
           </div>
         )}
         {$slots.action && (
-          <div class="n-base-select-menu__action" ref="actionElRef">
+          <div
+            class={`${clsPrefix}-base-select-menu__action`}
+            ref="actionElRef"
+          >
             {renderSlot($slots, 'action')}
           </div>
         )}

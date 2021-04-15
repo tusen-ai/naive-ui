@@ -17,7 +17,7 @@ import { useIsMounted, useMergedState, useCompitable } from 'vooks'
 import { clickoutside } from 'vdirs'
 import { useTheme, useConfig, useLocale, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn, call, useAdjustedTo } from '../../_utils'
+import { warn, call, useAdjustedTo, ExtractPublicPropTypes } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import {
   NInternalSelectMenu,
@@ -45,154 +45,164 @@ import type {
   Size
 } from './interface'
 
-export default defineComponent({
-  name: 'Select',
-  props: {
-    ...(useTheme.props as ThemeProps<SelectTheme>),
-    to: useAdjustedTo.propTo,
-    bordered: {
-      type: Boolean as PropType<boolean | undefined>,
-      default: undefined
-    },
-    clearable: {
-      type: Boolean,
-      default: false
-    },
-    options: {
-      type: Array as PropType<SelectMixedOption[]>,
-      default: () => []
-    },
-    defaultValue: {
-      type: [String, Number, Array] as PropType<Value | null>,
-      default: null
-    },
-    value: [String, Number, Array] as PropType<Value>,
-    placeholder: String,
-    multiple: {
-      type: Boolean,
-      default: false
-    },
-    size: String as PropType<Size>,
-    filterable: {
-      type: Boolean,
-      default: false
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    remote: {
-      type: Boolean,
-      default: false
-    },
-    loading: {
-      type: Boolean,
-      default: false
-    },
-    filter: {
-      type: Function as PropType<
-      (pattern: string, option: SelectBaseOption) => boolean
-      >,
-      default: (pattern: string, option: SelectBaseOption) => {
-        if (!option) return false
-        if (typeof option.label === 'string') {
-          return patternMatched(pattern, option.label)
-        } else if (option.value !== undefined) {
-          return patternMatched(pattern, String(option.value))
-        }
-        return false
+const selectProps = {
+  ...(useTheme.props as ThemeProps<SelectTheme>),
+  to: useAdjustedTo.propTo,
+  bordered: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
+  clearable: {
+    type: Boolean,
+    default: false
+  },
+  options: {
+    type: Array as PropType<SelectMixedOption[]>,
+    default: () => []
+  },
+  defaultValue: {
+    type: [String, Number, Array] as PropType<Value | null>,
+    default: null
+  },
+  value: [String, Number, Array] as PropType<Value>,
+  placeholder: String,
+  multiple: {
+    type: Boolean,
+    default: false
+  },
+  size: String as PropType<Size>,
+  filterable: {
+    type: Boolean,
+    default: false
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  remote: {
+    type: Boolean,
+    default: false
+  },
+  loading: {
+    type: Boolean,
+    default: false
+  },
+  filter: {
+    type: Function as PropType<
+    (pattern: string, option: SelectBaseOption) => boolean
+    >,
+    default: (pattern: string, option: SelectBaseOption) => {
+      if (!option) return false
+      if (typeof option.label === 'string') {
+        return patternMatched(pattern, option.label)
+      } else if (option.value !== undefined) {
+        return patternMatched(pattern, String(option.value))
       }
-    },
-    placement: {
-      type: String,
-      default: 'bottom-start'
-    },
-    widthMode: {
-      type: String,
-      default: 'trigger'
-    },
-    tag: {
-      type: Boolean,
-      default: false
-    },
-    onCreate: {
-      type: Function as PropType<(label: string) => SelectBaseOption>,
-      default: (label: string) => ({
-        label: label,
-        value: label
-      })
-    },
-    fallbackOption: {
-      type: [Function, Boolean] as PropType<
-      (value: string | number) => SelectBaseOption | false
-      >,
-      default: () => (value: string | number) => ({
-        label: String(value),
-        value
-      })
-    },
-    show: {
-      type: Boolean,
-      default: undefined
-    },
-    showArrow: {
-      type: Boolean,
-      default: true
-    },
-    maxTagCount: [Number, String] as PropType<number | 'responsive'>,
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': [Function, Array] as PropType<
-    MaybeArray<OnUpdateValue> | undefined
-    >,
-    // for jsx
-    onUpdateValue: [Function, Array] as PropType<
-    MaybeArray<OnUpdateValue> | undefined
-    >,
-    onBlur: [Function, Array] as PropType<
-    MaybeArray<(e: FocusEvent) => void> | undefined
-    >,
-    onFocus: [Function, Array] as PropType<
-    MaybeArray<(e: FocusEvent) => void> | undefined
-    >,
-    onScroll: [Function, Array] as PropType<
-    MaybeArray<(e: Event) => void> | undefined
-    >,
-    onSearch: [Function, Array] as PropType<
-    MaybeArray<(value: string) => void> | undefined
-    >,
-    /** deprecated */
-    onChange: {
-      type: [Function, Array] as PropType<
-      MaybeArray<OnUpdateValue> | undefined
-      >,
-      validator: () => {
-        if (__DEV__) {
-          warn(
-            'select',
-            '`on-change` is deprecated, please use `on-update:value` instead.'
-          )
-        }
-        return true
-      },
-      default: undefined
-    },
-    items: {
-      type: Array as PropType<SelectMixedOption[] | undefined>,
-      validator: () => {
-        if (__DEV__) {
-          warn('select', '`items` is deprecated, please use `options` instead.')
-        }
-        return true
-      },
-      default: undefined
-    },
-    autofocus: {
-      type: Boolean,
-      default: false
+      return false
     }
   },
+  placement: {
+    type: String,
+    default: 'bottom-start'
+  },
+  widthMode: {
+    type: String,
+    default: 'trigger'
+  },
+  tag: {
+    type: Boolean,
+    default: false
+  },
+  onCreate: {
+    type: Function as PropType<(label: string) => SelectBaseOption>,
+    default: (label: string) => ({
+      label: label,
+      value: label
+    })
+  },
+  fallbackOption: {
+    type: [Function, Boolean] as PropType<
+    (value: string | number) => SelectBaseOption | false
+    >,
+    default: () => (value: string | number) => ({
+      label: String(value),
+      value
+    })
+  },
+  show: {
+    type: Boolean,
+    default: undefined
+  },
+  showArrow: {
+    type: Boolean,
+    default: true
+  },
+  maxTagCount: [Number, String] as PropType<number | 'responsive'>,
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:value': [Function, Array] as PropType<
+  MaybeArray<OnUpdateValue> | undefined
+  >,
+  // for jsx
+  onUpdateValue: [Function, Array] as PropType<
+  MaybeArray<OnUpdateValue> | undefined
+  >,
+  onBlur: [Function, Array] as PropType<
+  MaybeArray<(e: FocusEvent) => void> | undefined
+  >,
+  onFocus: [Function, Array] as PropType<
+  MaybeArray<(e: FocusEvent) => void> | undefined
+  >,
+  onScroll: [Function, Array] as PropType<
+  MaybeArray<(e: Event) => void> | undefined
+  >,
+  onSearch: [Function, Array] as PropType<
+  MaybeArray<(value: string) => void> | undefined
+  >,
+  /** deprecated */
+  onChange: {
+    type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
+    validator: () => {
+      if (__DEV__) {
+        warn(
+          'select',
+          '`on-change` is deprecated, please use `on-update:value` instead.'
+        )
+      }
+      return true
+    },
+    default: undefined
+  },
+  items: {
+    type: Array as PropType<SelectMixedOption[] | undefined>,
+    validator: () => {
+      if (__DEV__) {
+        warn('select', '`items` is deprecated, please use `options` instead.')
+      }
+      return true
+    },
+    default: undefined
+  },
+  autofocus: {
+    type: Boolean,
+    default: false
+  }
+} as const
+
+export type SelectProps = ExtractPublicPropTypes<typeof selectProps>
+
+export default defineComponent({
+  name: 'Select',
+  props: selectProps,
   setup (props) {
-    const themeRef = useTheme('Select', 'Select', style, selectLight, props)
+    const { mergedClsPrefix, mergedBordered, namespace } = useConfig(props)
+    const themeRef = useTheme(
+      'Select',
+      'Select',
+      style,
+      selectLight,
+      props,
+      mergedClsPrefix
+    )
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(
@@ -627,7 +637,9 @@ export default defineComponent({
       void nextTick(syncPosition)
     })
     return {
-      ...useConfig(props),
+      cPrefix: mergedClsPrefix,
+      mergedBordered,
+      namespace,
       treeMate: treeMateRef,
       isMounted: useIsMounted(),
       triggerRef,
@@ -674,9 +686,9 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots } = this
+    const { $slots, cPrefix } = this
     return (
-      <div class="n-select">
+      <div class={`${cPrefix}-select`}>
         <VBinder>
           {{
             default: () => [
@@ -685,6 +697,7 @@ export default defineComponent({
                   default: () => (
                     <NInternalSelection
                       ref="triggerRef"
+                      clsPrefix={cPrefix}
                       showArrow={this.showArrow}
                       maxTagCount={this.maxTagCount}
                       bordered={this.mergedBordered}
@@ -741,7 +754,8 @@ export default defineComponent({
                           withDirectives(
                             <NInternalSelectMenu
                               ref="menuRef"
-                              class="n-select-menu"
+                              class={`${cPrefix}-select-menu`}
+                              clsPrefix={cPrefix}
                               focusable
                               autoPending={true}
                               theme={this.mergedTheme.peers.InternalSelectMenu}

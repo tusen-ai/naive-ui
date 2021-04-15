@@ -9,14 +9,14 @@ import {
   mergeProps,
   renderSlot,
   Transition,
-  ExtractPropTypes,
   CSSProperties
 } from 'vue'
 import { on, off } from 'evtd'
 import { VResizeObserver } from 'vueuc'
 import { useIsIos } from 'vooks'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { scrollbarLight } from '../styles'
 import type { ScrollbarTheme } from '../styles'
 import style from './styles/index.cssr'
@@ -56,6 +56,7 @@ export interface ScrollbarRef {
 }
 
 const scrollbarProps = {
+  ...(useTheme.props as ThemeProps<ScrollbarTheme>),
   size: {
     type: Number,
     default: 5
@@ -82,15 +83,14 @@ const scrollbarProps = {
   onScroll: Function as PropType<(e: Event) => void>
 } as const
 
-export type ScrollbarProps = ExtractPropTypes<typeof scrollbarProps>
+export type ScrollbarProps = ExtractPublicPropTypes<typeof scrollbarProps>
 
 export default defineComponent({
   name: 'Scrollbar',
-  props: {
-    ...(useTheme.props as ThemeProps<ScrollbarTheme>),
-    ...scrollbarProps
-  },
+  props: scrollbarProps,
   setup (props) {
+    const { mergedClsPrefix } = useConfig(props)
+
     // dom ref
     const containerRef = ref<HTMLElement | null>(null)
     const contentRef = ref<HTMLElement | null>(null)
@@ -503,11 +503,13 @@ export default defineComponent({
       'Scrollbar',
       style,
       scrollbarLight,
-      props
+      props,
+      mergedClsPrefix
     )
     return {
       sync,
       scrollTo,
+      cPrefix: mergedClsPrefix,
       containerScrollTop: containerScrollTopRef,
       containerRef,
       contentRef,
@@ -543,7 +545,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots } = this
+    const { $slots, cPrefix } = this
     if (!this.scrollable) return renderSlot($slots, 'default')
     return (
       <VResizeObserver onResize={this.handleContentResize}>
@@ -552,7 +554,7 @@ export default defineComponent({
             h(
               'div',
               mergeProps(this.$attrs, {
-                class: 'n-scrollbar',
+                class: `${cPrefix}-scrollbar`,
                 style: this.cssVars,
                 onMouseenter: this.handleMouseEnterWrapper,
                 onMouseleave: this.handleMouseLeaveWrapper
@@ -563,7 +565,7 @@ export default defineComponent({
                 ) : (
                   <div
                     ref="containerRef"
-                    class="n-scrollbar-container"
+                    class={`${cPrefix}-scrollbar-container`}
                     style={this.containerStyle}
                     onScroll={this.handleScroll}
                   >
@@ -580,7 +582,10 @@ export default defineComponent({
                                 }
                               ] as any
                             }
-                            class={['n-scrollbar-content', this.contentClass]}
+                            class={[
+                              `${cPrefix}-scrollbar-content`,
+                              this.contentClass
+                            ]}
                           >
                             {$slots}
                           </div>
@@ -592,9 +597,9 @@ export default defineComponent({
                 <div
                   ref="yRailRef"
                   class={[
-                    'n-scrollbar-rail n-scrollbar-rail--vertical',
+                    `${cPrefix}-scrollbar-rail ${cPrefix}-scrollbar-rail--vertical`,
                     {
-                      'n-scrollbar-rail--disabled': !this.needYBar
+                      [`${cPrefix}-scrollbar-rail--disabled`]: !this.needYBar
                     }
                   ]}
                   style={
@@ -606,7 +611,7 @@ export default defineComponent({
                       default: () =>
                         this.needYBar && this.isShowYBar && !this.isIos ? (
                           <div
-                            class="n-scrollbar-rail__scrollbar"
+                            class={`${cPrefix}-scrollbar-rail__scrollbar`}
                             style={{
                               height: this.yBarSizePx,
                               top: this.yBarTopPx,
@@ -622,9 +627,9 @@ export default defineComponent({
                 <div
                   ref="xRailRef"
                   class={[
-                    'n-scrollbar-rail n-scrollbar-rail--horizontal',
+                    `${cPrefix}-scrollbar-rail ${cPrefix}-scrollbar-rail--horizontal`,
                     {
-                      'n-scrollbar-rail--disabled': !this.needXBar
+                      [`${cPrefix}-scrollbar-rail--disabled`]: !this.needXBar
                     }
                   ]}
                   style={
@@ -636,7 +641,7 @@ export default defineComponent({
                       default: () =>
                         this.needXBar && this.isShowXBar && !this.isIos ? (
                           <div
-                            class="n-scrollbar-rail__scrollbar"
+                            class={`${cPrefix}-scrollbar-rail__scrollbar`}
                             style={{
                               height: this.sizePx,
                               width: this.xBarSizePx,

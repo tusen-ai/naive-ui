@@ -23,7 +23,7 @@ export default defineComponent({
       const { clsPrefix } = props
       return (
         <NBaseIcon
-          clsPerfix={clsPrefix}
+          clsPrefix={clsPrefix}
           class={[
             `${clsPrefix}-base-close`,
             props.disabled && `${clsPrefix}-base-close--disabled`

@@ -470,6 +470,7 @@
   - [x] table ellipisis vertical align
   - [x] form item grid item
   - [x] select filter composite...
+  - [ ] 清理导出的 select 类型
 
 ## Build
 

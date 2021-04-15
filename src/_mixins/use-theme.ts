@@ -1,5 +1,12 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
-import { inject, computed, onBeforeMount, ComputedRef, PropType } from 'vue'
+import {
+  inject,
+  computed,
+  onBeforeMount,
+  ComputedRef,
+  Ref,
+  PropType
+} from 'vue'
 import { merge } from 'lodash-es'
 import globalStyle from '../_styles/global/index.cssr'
 import { CNode } from 'css-render'
@@ -86,7 +93,7 @@ function useTheme<N, T, R> (
   style: CNode | undefined,
   defaultTheme: Theme<N, T, R>,
   props: UseThemeProps<Theme<N, T, R>>,
-  clsPrefixRef?: ComputedRef<string | undefined>
+  clsPrefixRef?: Ref<string | undefined>
 ): ComputedRef<MergedTheme<Theme<N, T, R>>> {
   if (style) {
     onBeforeMount(() => {

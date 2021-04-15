@@ -11,7 +11,7 @@ import { useMemo } from 'vooks'
 import { NCheckbox } from '../../checkbox'
 import { NBaseLoading, NBaseIcon } from '../../_internal'
 import { ChevronRightIcon, CheckmarkIcon } from '../../_internal/icons'
-import { CascaderInjection, TmNode } from './interface'
+import { cascaderInjectionKey, TmNode } from './interface'
 
 export default defineComponent({
   name: 'NCascaderOption',
@@ -22,9 +22,8 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const NCascader = inject<CascaderInjection>(
-      'NCascader'
-    ) as CascaderInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NCascader = inject(cascaderInjectionKey)!
     const valueRef = computed(() => props.tmNode.rawNode.value)
     const useHoverTriggerRef = computed(() => {
       const { expandTrigger, remote } = NCascader
@@ -155,15 +154,16 @@ export default defineComponent({
   },
   render () {
     const { NCascader } = this
+    const { mergedClsPrefix: cPrefix } = NCascader
     return (
       <div
         class={[
-          'n-cascader-option',
+          `${cPrefix}-cascader-option`,
           {
-            'n-cascader-option--pending':
+            [`${cPrefix}-cascader-option--pending`]:
               this.keyboardPending || this.hoverPending,
-            'n-cascader-option--disabled': this.disabled,
-            'n-cascader-option--show-prefix': this.showCheckbox
+            [`${cPrefix}-cascader-option--disabled`]: this.disabled,
+            [`${cPrefix}-cascader-option--show-prefix`]: this.showCheckbox
           }
         ]}
         onMouseenter={this.mergedHandleMouseEnter}
@@ -171,7 +171,7 @@ export default defineComponent({
         onClick={this.handleClick}
       >
         {this.showCheckbox ? (
-          <div class="n-cascader-option__prefix">
+          <div class={`${cPrefix}-cascader-option__prefix`}>
             <NCheckbox
               disabled={this.disabled}
               checked={this.checked}
@@ -182,21 +182,23 @@ export default defineComponent({
             />
           </div>
         ) : null}
-        <span class="n-cascader-option__label">{this.label}</span>
-        <div class="n-cascader-option__suffix">
-          <div class="n-cascader-option-icon-placeholder">
+        <span class={`${cPrefix}-cascader-option__label`}>{this.label}</span>
+        <div class={`${cPrefix}-cascader-option__suffix`}>
+          <div class={`${cPrefix}-cascader-option-icon-placeholder`}>
             {!this.isLeaf ? (
               <NBaseLoading
+                clsPrefix={cPrefix}
                 scale={0.8}
                 strokeWidth={20}
                 show={this.isLoading}
-                class="n-cascader-option-icon"
+                class={`${cPrefix}-cascader-option-icon`}
               >
                 {{
                   default: () => (
                     <NBaseIcon
+                      clsPrefix={cPrefix}
                       key="arrow"
-                      class="n-cascader-option-icon n-cascader-option-icon--arrow"
+                      class={`${cPrefix}-cascader-option-icon ${cPrefix}-cascader-option-icon--arrow`}
                     >
                       {{
                         default: () => <ChevronRightIcon />
@@ -210,7 +212,10 @@ export default defineComponent({
                 {{
                   default: () =>
                     this.checked ? (
-                      <NBaseIcon class="n-cascader-option-icon n-cascader-option-icon--checkmark">
+                      <NBaseIcon
+                        clsPrefix={cPrefix}
+                        class={`${cPrefix}-cascader-option-icon ${cPrefix}-cascader-option-icon--checkmark`}
+                      >
                         {{ default: () => <CheckmarkIcon /> }}
                       </NBaseIcon>
                     ) : null

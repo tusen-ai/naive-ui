@@ -25,7 +25,7 @@ import { NInternalSelection, InternalSelectionRef } from '../../_internal'
 import { useLocale, useTheme, useConfig, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { warn, call, useAdjustedTo } from '../../_utils'
-import type { MaybeArray } from '../../_utils'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { cascaderLight } from '../styles'
 import type { CascaderTheme } from '../styles'
 import { getPathLabel } from './utils'
@@ -33,7 +33,7 @@ import CascaderMenu from './CascaderMenu'
 import CascaderSelectMenu from './CascaderSelectMenu'
 import {
   BaseOption,
-  CascaderInjection,
+  cascaderInjectionKey,
   CascaderMenuInstance,
   ExpandTrigger,
   Filter,
@@ -46,104 +46,108 @@ import {
 } from './interface'
 import style from './styles/index.cssr'
 
+const cascaderProps = {
+  ...(useTheme.props as ThemeProps<CascaderTheme>),
+  to: useAdjustedTo.propTo,
+  bordered: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
+  options: {
+    type: Array as PropType<BaseOption[]>,
+    default: () => []
+  },
+  value: [String, Number, Array] as PropType<Value | null>,
+  defaultValue: {
+    type: [String, Number, Array] as PropType<Value | null>,
+    default: null
+  },
+  placeholder: String,
+  multiple: {
+    type: Boolean,
+    default: false
+  },
+  size: String as PropType<'small' | 'medium' | 'large'>,
+  filterable: {
+    type: Boolean,
+    default: false
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  expandTrigger: {
+    type: String as PropType<ExpandTrigger>,
+    default: 'click'
+  },
+  clearable: {
+    type: Boolean,
+    default: false
+  },
+  remote: {
+    type: Boolean,
+    default: false
+  },
+  onLoad: Function as PropType<OnLoad>,
+  separator: {
+    type: String,
+    default: ' / '
+  },
+  filter: Function as PropType<Filter>,
+  placement: {
+    type: String as PropType<FollowerPlacement>,
+    default: 'bottom-start'
+  },
+  cascade: {
+    type: Boolean,
+    default: true
+  },
+  leafOnly: {
+    type: Boolean,
+    default: false
+  },
+  showPath: {
+    type: Boolean,
+    default: true
+  },
+  show: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
+  maxTagCount: [String, Number] as PropType<number | 'responsive'>,
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  // deprecated
+  onChange: {
+    type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
+    validator: () => {
+      warn(
+        'cascader',
+        '`on-change` is deprecated, please use `on-update:value` instead.'
+      )
+      return true
+    },
+    default: undefined
+  },
+  onBlur: Function as PropType<(e: FocusEvent) => void>,
+  onFocus: Function as PropType<(e: FocusEvent) => void>
+} as const
+
+export type CascaderProps = ExtractPublicPropTypes<typeof cascaderProps>
+
 // TODO refactor cascader menu keyboard scroll (use virtual list)
 export default defineComponent({
   name: 'Cascader',
-  props: {
-    ...(useTheme.props as ThemeProps<CascaderTheme>),
-    to: useAdjustedTo.propTo,
-    bordered: {
-      type: Boolean as PropType<boolean | undefined>,
-      default: undefined
-    },
-    options: {
-      type: Array as PropType<BaseOption[]>,
-      default: () => []
-    },
-    value: [String, Number, Array] as PropType<Value | null>,
-    defaultValue: {
-      type: [String, Number, Array] as PropType<Value | null>,
-      default: null
-    },
-    placeholder: String,
-    multiple: {
-      type: Boolean,
-      default: false
-    },
-    size: String as PropType<'small' | 'medium' | 'large'>,
-    filterable: {
-      type: Boolean,
-      default: false
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    expandTrigger: {
-      type: String as PropType<ExpandTrigger>,
-      default: 'click'
-    },
-    clearable: {
-      type: Boolean,
-      default: false
-    },
-    remote: {
-      type: Boolean,
-      default: false
-    },
-    onLoad: Function as PropType<OnLoad>,
-    separator: {
-      type: String,
-      default: ' / '
-    },
-    filter: Function as PropType<Filter>,
-    placement: {
-      type: String as PropType<FollowerPlacement>,
-      default: 'bottom-start'
-    },
-    cascade: {
-      type: Boolean,
-      default: true
-    },
-    leafOnly: {
-      type: Boolean,
-      default: false
-    },
-    showPath: {
-      type: Boolean,
-      default: true
-    },
-    show: {
-      type: Boolean as PropType<boolean | undefined>,
-      default: undefined
-    },
-    maxTagCount: [String, Number] as PropType<number | 'responsive'>,
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-    // deprecated
-    onChange: {
-      type: [Function, Array] as PropType<
-      MaybeArray<OnUpdateValue> | undefined
-      >,
-      validator: () => {
-        warn(
-          'cascader',
-          '`on-change` is deprecated, please use `on-update:value` instead.'
-        )
-        return true
-      },
-      default: undefined
-    },
-    onBlur: Function as PropType<(e: FocusEvent) => void>,
-    onFocus: Function as PropType<(e: FocusEvent) => void>
-  },
+  props: cascaderProps,
   setup (props) {
+    const { mergedBordered, mergedClsPrefix, namespace } = useConfig(props)
     const themeRef = useTheme(
       'Cascader',
       'Cascader',
       style,
       cascaderLight,
-      props
+      props,
+      mergedClsPrefix
     )
     const { locale } = useLocale('Cascader')
     const uncontrolledValueRef = ref(props.defaultValue)
@@ -625,9 +629,10 @@ export default defineComponent({
     function syncCascaderMenuPosition (): void {
       cascaderMenuFollowerRef.value?.syncPosition()
     }
-    provide<CascaderInjection>(
-      'NCascader',
+    provide(
+      cascaderInjectionKey,
       reactive({
+        mergedClsPrefix,
         mergedTheme: themeRef,
         mergedValue: mergedValueRef,
         checkedKeys: checkedKeysRef,
@@ -657,82 +662,83 @@ export default defineComponent({
         handleCascaderMenuClickOutside
       })
     )
-    return Object.assign(
-      {
-        selectMenuFollowerRef,
-        cascaderMenuFollowerRef,
-        triggerInstRef,
-        selectMenuInstRef,
-        cascaderMenuInstRef,
-        mergedValue: mergedValueRef,
-        mergedShow: mergedShowRef,
-        showSelectMenu: showSelectMenuRef,
-        pattern: patternRef,
-        treeMate: treeMateRef,
-        mergedSize: formItem.mergedSize,
-        localizedPlaceholder: localizedPlaceholderRef,
-        selectedOption: selectedOptionRef,
-        selectedOptions: selectedOptionsRef,
-        adjustedTo: adjustedToRef,
-        menuModel: menuModelRef,
-        handleTriggerFocus,
-        handleTriggerBlur,
-        handleTriggerClick,
-        handleClear,
-        handleDeleteLastOption,
-        handleDeleteOption,
-        handlePatternInput,
-        handleKeyDown,
-        handleKeyUp,
-        focused: focusedRef,
-        optionHeight: optionHeightRef,
-        mergedTheme: themeRef,
-        cssVars: computed(() => {
-          const {
-            self: {
-              optionArrowColor,
-              optionTextColor,
-              optionTextColorActive,
-              optionTextColorDisabled,
-              optionCheckMarkColor,
-              menuColor,
-              menuBoxShadow,
-              menuDividerColor,
-              menuBorderRadius,
-              menuHeight,
-              optionColorHover,
-              optionHeight,
-              optionFontSize,
-              loadingColor
-            },
-            common: { cubicBezierEaseInOut }
-          } = themeRef.value
-          return {
-            '--bezier': cubicBezierEaseInOut,
-            '--menu-border-radius': menuBorderRadius,
-            '--menu-box-shadow': menuBoxShadow,
-            '--menu-height': menuHeight,
-            '--menu-color': menuColor,
-            '--menu-divider-color': menuDividerColor,
-            '--option-height': optionHeight,
-            '--option-font-size': optionFontSize,
-            '--option-text-color': optionTextColor,
-            '--option-text-color-disabled': optionTextColorDisabled,
-            '--option-text-color-active': optionTextColorActive,
-            '--option-color-hover': optionColorHover,
-            '--option-check-mark-color': optionCheckMarkColor,
-            '--option-arrow-color': optionArrowColor,
-            '--menu-mask-color': changeColor(menuColor, { alpha: 0.75 }),
-            '--loading-color': loadingColor
-          }
-        })
-      },
-      useConfig(props)
-    )
+    return {
+      selectMenuFollowerRef,
+      cascaderMenuFollowerRef,
+      triggerInstRef,
+      selectMenuInstRef,
+      cascaderMenuInstRef,
+      mergedBordered,
+      cPrefix: mergedClsPrefix,
+      namespace,
+      mergedValue: mergedValueRef,
+      mergedShow: mergedShowRef,
+      showSelectMenu: showSelectMenuRef,
+      pattern: patternRef,
+      treeMate: treeMateRef,
+      mergedSize: formItem.mergedSize,
+      localizedPlaceholder: localizedPlaceholderRef,
+      selectedOption: selectedOptionRef,
+      selectedOptions: selectedOptionsRef,
+      adjustedTo: adjustedToRef,
+      menuModel: menuModelRef,
+      handleTriggerFocus,
+      handleTriggerBlur,
+      handleTriggerClick,
+      handleClear,
+      handleDeleteLastOption,
+      handleDeleteOption,
+      handlePatternInput,
+      handleKeyDown,
+      handleKeyUp,
+      focused: focusedRef,
+      optionHeight: optionHeightRef,
+      mergedTheme: themeRef,
+      cssVars: computed(() => {
+        const {
+          self: {
+            optionArrowColor,
+            optionTextColor,
+            optionTextColorActive,
+            optionTextColorDisabled,
+            optionCheckMarkColor,
+            menuColor,
+            menuBoxShadow,
+            menuDividerColor,
+            menuBorderRadius,
+            menuHeight,
+            optionColorHover,
+            optionHeight,
+            optionFontSize,
+            loadingColor
+          },
+          common: { cubicBezierEaseInOut }
+        } = themeRef.value
+        return {
+          '--bezier': cubicBezierEaseInOut,
+          '--menu-border-radius': menuBorderRadius,
+          '--menu-box-shadow': menuBoxShadow,
+          '--menu-height': menuHeight,
+          '--menu-color': menuColor,
+          '--menu-divider-color': menuDividerColor,
+          '--option-height': optionHeight,
+          '--option-font-size': optionFontSize,
+          '--option-text-color': optionTextColor,
+          '--option-text-color-disabled': optionTextColorDisabled,
+          '--option-text-color-active': optionTextColorActive,
+          '--option-color-hover': optionColorHover,
+          '--option-check-mark-color': optionCheckMarkColor,
+          '--option-arrow-color': optionArrowColor,
+          '--menu-mask-color': changeColor(menuColor, { alpha: 0.75 }),
+          '--loading-color': loadingColor
+        }
+      })
+    }
   },
   render () {
+    const { cPrefix } = this
     return (
-      <div class="n-cascader">
+      <div class={`${cPrefix}-cascader`}>
         <VBinder>
           {{
             default: () => [
@@ -741,6 +747,7 @@ export default defineComponent({
                   default: () => (
                     <NInternalSelection
                       ref="triggerInstRef"
+                      clsPrefix={cPrefix}
                       maxTagCount={this.maxTagCount}
                       bordered={this.mergedBordered}
                       size={this.mergedSize}

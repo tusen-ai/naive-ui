@@ -26,7 +26,8 @@ import {
   Value,
   Filter,
   BaseOption,
-  SelectMenuInstance
+  SelectMenuInstance,
+  cascaderInjectionKey
 } from './interface'
 import { tmOptions } from '../../select/src/utils'
 
@@ -60,9 +61,8 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const NCascader = inject<CascaderInjection>(
-      'NCascader'
-    ) as CascaderInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NCascader = inject<CascaderInjection>(cascaderInjectionKey)!
     const menuInstRef = ref<InternalSelectMenuRef | null>(null)
     const selectOptionsRef = computed(() => {
       return createSelectOptions(props.tmNodes, NCascader.leafOnly)
@@ -166,7 +166,8 @@ export default defineComponent({
               ? withDirectives(
                 <NInternalSelectMenu
                   ref="menuInstRef"
-                  class="n-cascader-menu"
+                  clsPrefix={NCascader.mergedClsPrefix}
+                  class={`${NCascader.mergedClsPrefix}-cascader-menu`}
                   autoPending
                   themeOverrides={
                     NCascader.mergedTheme.peerOverrides.InternalSelectMenu

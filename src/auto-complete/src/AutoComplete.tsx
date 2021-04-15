@@ -272,13 +272,13 @@ export default defineComponent({
       }),
       mergedBordered,
       namespace,
-      mergedClsPrefix
+      cPrefix: mergedClsPrefix
     }
   },
   render () {
     return (
       <div
-        class={`${this.mergedClsPrefix}-auto-complete`}
+        class={`${this.cPrefix}-auto-complete`}
         ref="triggerElRef"
         onKeydown={this.handleKeyDown}
         onCompositionstart={this.handleCompositionStart}
@@ -338,6 +338,7 @@ export default defineComponent({
                           this.active
                             ? withDirectives(
                               <NInternalSelectMenu
+                                clsPrefix={this.cPrefix}
                                 ref="menuInstRef"
                                 theme={
                                   this.mergedTheme.peers.InternalSelectMenu
@@ -347,7 +348,7 @@ export default defineComponent({
                                     .InternalSelectMenu
                                 }
                                 auto-pending
-                                class={`${this.mergedClsPrefix}-auto-complete-menu`}
+                                class={`${this.cPrefix}-auto-complete-menu`}
                                 style={this.cssVars as CSSProperties}
                                 treeMate={this.treeMate}
                                 multiple={false}

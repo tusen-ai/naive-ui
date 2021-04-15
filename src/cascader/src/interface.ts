@@ -2,6 +2,7 @@ import { TreeNode } from 'treemate'
 import type { MergedTheme } from '../../_mixins'
 import type { NLocale } from '../../locales'
 import type { CascaderTheme } from '../styles'
+import { InjectionKey } from '@vue/runtime-core'
 
 export type ValueAtom = string | number
 export type Value = ValueAtom | ValueAtom[]
@@ -47,6 +48,7 @@ export type OnUpdateValueImpl = (value: Value | null) => void
 export type MenuModel = TmNode[][]
 
 export interface CascaderInjection {
+  mergedClsPrefix: string
   mergedTheme: MergedTheme<CascaderTheme>
   mergedValue: Value | null
   checkedKeys: Key[]
@@ -90,3 +92,7 @@ export interface SelectMenuInstance {
   next: () => void
   enter: () => boolean
 }
+
+export const cascaderInjectionKey: InjectionKey<CascaderInjection> = Symbol(
+  'cascader'
+)

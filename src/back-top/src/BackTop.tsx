@@ -300,7 +300,7 @@ export default defineComponent({
                             'default',
                             undefined,
                             () => [
-                              <NBaseIcon clsPerfix={this.cPrefix}>
+                              <NBaseIcon clsPrefix={this.cPrefix}>
                                 {{ default: () => BackTopIcon }}
                               </NBaseIcon>
                             ]

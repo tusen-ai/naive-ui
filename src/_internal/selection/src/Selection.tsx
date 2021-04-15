@@ -36,6 +36,10 @@ export default defineComponent({
   name: 'InternalSelection',
   props: {
     ...(useTheme.props as ThemeProps<InternalSelectionTheme>),
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     bordered: {
       type: Boolean as PropType<boolean | undefined>,
       default: undefined
@@ -100,7 +104,8 @@ export default defineComponent({
       'InternalSelection',
       style,
       internalSelectionLight,
-      props
+      props,
+      toRef(props, 'clsPrefix')
     )
     const mergedClearableRef = computed(() => {
       return (
@@ -440,12 +445,21 @@ export default defineComponent({
     }
   },
   render () {
-    const { multiple, size, disabled, filterable, maxTagCount, bordered } = this
+    const {
+      multiple,
+      size,
+      disabled,
+      filterable,
+      maxTagCount,
+      bordered,
+      clsPrefix
+    } = this
     const maxTagCountResponsive = maxTagCount === 'responsive'
     const maxTagCountNumeric = typeof maxTagCount === 'number'
     const useMaxTagCount = maxTagCountResponsive || maxTagCountNumeric
     const suffix = (
       <Suffix
+        clsPrefix={clsPrefix}
         loading={this.loading}
         showArrow={this.showArrow}
         showClear={this.mergedClearable && this.selected}
@@ -456,7 +470,10 @@ export default defineComponent({
     let body: JSX.Element
     if (multiple) {
       const createTag = (option: SelectBaseOption): JSX.Element => (
-        <div class="n-base-selection-tag-wrapper" key={option.value}>
+        <div
+          class={`${clsPrefix}-base-selection-tag-wrapper`}
+          key={option.value}
+        >
           <NTag
             size={size}
             closable
@@ -473,14 +490,17 @@ export default defineComponent({
         : this.selectedOptions!
       ).map(createTag)
       const input = filterable ? (
-        <div class="n-base-selection-input-tag" key="__input-tag__">
+        <div
+          class={`${clsPrefix}-base-selection-input-tag`}
+          key="__input-tag__"
+        >
           <input
             ref="patternInputRef"
             tabindex={-1}
             disabled={disabled}
             value={this.pattern}
             autofocus={this.autofocus}
-            class="n-base-selection-input-tag__input"
+            class={`${clsPrefix}-base-selection-input-tag__input`}
             onBlur={this.handlePatternInputBlur}
             onFocus={this.handlePatternInputFocus}
             onKeydown={this.handlePatternKeyDown}
@@ -490,7 +510,7 @@ export default defineComponent({
           />
           <span
             ref="patternInputMirrorRef"
-            class="n-base-selection-input-tag__mirror"
+            class={`${clsPrefix}-base-selection-input-tag__mirror`}
           >
             {this.pattern ? this.pattern : ''}
           </span>
@@ -499,7 +519,10 @@ export default defineComponent({
       // May Overflow
       const renderCounter = maxTagCountResponsive
         ? () => (
-          <div class="n-base-selection-tag-wrapper" ref="counterWrapperRef">
+          <div
+            class={`${clsPrefix}-base-selection-tag-wrapper`}
+            ref="counterWrapperRef"
+          >
             <NTag
               ref="counterRef"
               onMouseenter={this.handleMouseEnterCounter}
@@ -514,7 +537,10 @@ export default defineComponent({
         const rest = this.selectedOptions!.length - (maxTagCount as number)
         if (rest > 0) {
           counter = (
-            <div class="n-base-selection-tag-wrapper" key="__counter__">
+            <div
+              class={`${clsPrefix}-base-selection-tag-wrapper`}
+              key="__counter__"
+            >
               <NTag
                 ref="counterRef"
                 onMouseenter={this.handleMouseEnterCounter}
@@ -571,7 +597,7 @@ export default defineComponent({
       )
       const renderPopover = useMaxTagCount
         ? (): JSX.Element => (
-          <div class="n-base-selection-popover">
+          <div class={`${clsPrefix}-base-selection-popover`}>
             {maxTagCountResponsive
               ? originalTags
               : this.selectedOptions!.map(createTag)}
@@ -592,11 +618,16 @@ export default defineComponent({
         : null
       const placeholder =
         !this.selected && !this.pattern && !this.isCompositing ? (
-          <div class="n-base-selection-placeholder">{this.placeholder}</div>
+          <div class={`${clsPrefix}-base-selection-placeholder`}>
+            {this.placeholder}
+          </div>
         ) : null
       if (filterable) {
         const popoverTrigger = (
-          <div ref="patternInputWrapperRef" class="n-base-selection-tags">
+          <div
+            ref="patternInputWrapperRef"
+            class={`${clsPrefix}-base-selection-tags`}
+          >
             {tags}
             {maxTagCountResponsive ? null : input}
             {suffix}
@@ -621,7 +652,7 @@ export default defineComponent({
         const popoverTrigger = (
           <div
             ref="multipleElRef"
-            class="n-base-selection-tags"
+            class={`${clsPrefix}-base-selection-tags`}
             tabindex={disabled ? undefined : 0}
           >
             {tags}
@@ -652,10 +683,13 @@ export default defineComponent({
           !this.isCompositing
         body = (
           <>
-            <div ref="patternInputWrapperRef" class="n-base-selection-label">
+            <div
+              ref="patternInputWrapperRef"
+              class={`${clsPrefix}-base-selection-label`}
+            >
               <input
                 ref="patternInputRef"
-                class="n-base-selection-label__input"
+                class={`${clsPrefix}-base-selection-label__input`}
                 value={
                   showPlaceholder
                     ? ''
@@ -677,7 +711,7 @@ export default defineComponent({
                 onCompositionend={this.handleCompositionEnd}
               />
               {showPlaceholder ? (
-                <div class="n-base-selection-placeholder">
+                <div class={`${clsPrefix}-base-selection-placeholder`}>
                   {this.filterablePlaceholder}
                 </div>
               ) : null}
@@ -690,15 +724,21 @@ export default defineComponent({
           <>
             <div
               ref="singleElRef"
-              class="n-base-selection-label"
+              class={`${clsPrefix}-base-selection-label`}
               tabindex={this.disabled ? undefined : 0}
             >
               {this.label !== undefined ? (
-                <div class="n-base-selection-label__input" key="input">
+                <div
+                  class={`${clsPrefix}-base-selection-label__input`}
+                  key="input"
+                >
                   {this.label}
                 </div>
               ) : (
-                <div class="n-base-selection-placeholder" key="placeholder">
+                <div
+                  class={`${clsPrefix}-base-selection-placeholder`}
+                  key="placeholder"
+                >
                   {this.placeholder}
                 </div>
               )}
@@ -712,17 +752,17 @@ export default defineComponent({
       <div
         ref="selfRef"
         class={[
-          'n-base-selection',
+          `${clsPrefix}-base-selection`,
           {
-            'n-base-selection--active': this.active,
-            'n-base-selection--selected':
+            [`${clsPrefix}-base-selection--active`]: this.active,
+            [`${clsPrefix}-base-selection--selected`]:
               this.selected || (this.active && this.pattern),
-            'n-base-selection--disabled': this.disabled,
-            'n-base-selection--multiple': this.multiple,
+            [`${clsPrefix}-base-selection--disabled`]: this.disabled,
+            [`${clsPrefix}-base-selection--multiple`]: this.multiple,
             // focus is not controlled by selection itself since it always need
             // to be managed together with menu. provide :focus style will cause
             // many redundant codes.
-            'n-base-selection--focus': this.focused
+            [`${clsPrefix}-base-selection--focus`]: this.focused
           }
         ]}
         style={this.cssVars as CSSProperties}
@@ -736,8 +776,12 @@ export default defineComponent({
         onMousedown={this.handleMouseDown}
       >
         {body}
-        {bordered ? <div class="n-base-selection__border" /> : null}
-        {bordered ? <div class="n-base-selection__state-border" /> : null}
+        {bordered ? (
+          <div class={`${clsPrefix}-base-selection__border`} />
+        ) : null}
+        {bordered ? (
+          <div class={`${clsPrefix}-base-selection__state-border`} />
+        ) : null}
       </div>
     )
   }

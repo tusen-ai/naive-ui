@@ -7,42 +7,50 @@ import {
   PropType,
   VNode
 } from 'vue'
-import { InternalSelectMenuInjection } from './SelectMenu'
+import { internalSelectionMenuInjectionKey } from './SelectMenu'
 import { TreeNode } from 'treemate'
 import { useMemo } from 'vooks'
 import type { SelectBaseOption } from '../../../select'
 import { CheckmarkIcon } from '../../icons'
 import NBaseIcon from '../../icon'
 
-const checkMark = h(NBaseIcon, null, {
-  default: () => h(CheckmarkIcon)
-})
+const checkMarkIcon = h(CheckmarkIcon)
 
-function renderCheckMark (show: boolean): VNode {
-  return h(
-    Transition,
-    {
-      name: 'n-fade-in-scale-up-transition',
-      class: 'n-base-select-option__check'
-    },
-    {
-      default: () => (show ? checkMark : null)
-    }
+function renderCheckMark (show: boolean, clsPrefix: string): VNode {
+  return (
+    <Transition name="n-fade-in-scale-up-transition">
+      {{
+        default: () =>
+          show ? (
+            <NBaseIcon
+              clsPrefix={clsPrefix}
+              class={`${clsPrefix}-base-select-option__check`}
+            >
+              {{
+                default: () => checkMarkIcon
+              }}
+            </NBaseIcon>
+          ) : null
+      }}
+    </Transition>
   )
 }
 
 export default defineComponent({
   name: 'NBaseSelectOption',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     tmNode: {
       type: Object as PropType<TreeNode<SelectBaseOption>>,
       required: true
     }
   },
   setup (props) {
-    const NInternalSelectMenu = inject<InternalSelectMenuInjection>(
-      'NInternalSelectMenu'
-    ) as InternalSelectMenuInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NInternalSelectMenu = inject(internalSelectionMenuInjectionKey)!
     const rawNodeRef = toRef(props.tmNode, 'rawNode')
     const isPendingRef = useMemo(() => {
       const { pendingTmNode } = NInternalSelectMenu
@@ -92,6 +100,7 @@ export default defineComponent({
   },
   render () {
     const {
+      clsPrefix,
       rawNode,
       isSelected,
       isPending,
@@ -103,29 +112,30 @@ export default defineComponent({
     } = this
     const showCheckMark = multiple && isSelected
     const children = rawNode.render
-      ? [rawNode.render(rawNode, isSelected), renderCheckMark(showCheckMark)]
-      : [rawNode.label, renderCheckMark(showCheckMark)]
-    return h(
-      'div',
-      {
-        class: [
-          'n-base-select-option',
-          [
-            rawNode.class,
-            {
-              'n-base-select-option--disabled': rawNode.disabled,
-              'n-base-select-option--selected': isSelected,
-              'n-base-select-option--grouped': isGrouped,
-              'n-base-select-option--pending': isPending
-            }
-          ]
-        ],
-        style: rawNode.style,
-        onClick: handleClick,
-        onMouseenter: handleMouseEnter,
-        onMousemove: handleMouseMove
-      },
-      children
+      ? [
+        rawNode.render(rawNode, isSelected),
+        renderCheckMark(showCheckMark, clsPrefix)
+      ]
+      : [rawNode.label, renderCheckMark(showCheckMark, clsPrefix)]
+    return (
+      <div
+        class={[
+          `${clsPrefix}-base-select-option`,
+          rawNode.class,
+          {
+            [`${clsPrefix}-base-select-option--disabled`]: rawNode.disabled,
+            [`${clsPrefix}-base-select-option--selected`]: isSelected,
+            [`${clsPrefix}-base-select-option--grouped`]: isGrouped,
+            [`${clsPrefix}-base-select-option--pending`]: isPending
+          }
+        ]}
+        style={rawNode.style}
+        onClick={handleClick}
+        onMouseenter={handleMouseEnter}
+        onMousemove={handleMouseMove}
+      >
+        {children}
+      </div>
     )
   }
 })
