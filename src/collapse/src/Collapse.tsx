@@ -3,15 +3,17 @@ import {
   h,
   defineComponent,
   PropType,
-  toRef,
-  reactive,
   provide,
-  ref
+  ref,
+  InjectionKey,
+  Ref,
+  ExtractPropTypes,
+  CSSProperties
 } from 'vue'
 import { intersection } from 'lodash-es'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, warn } from '../../_utils'
+import { call, ExtractPublicPropTypes, warn } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import { collapseLight, CollapseTheme } from '../styles'
 import style from './styles/index.cssr'
@@ -24,10 +26,60 @@ import {
   OnItemHeaderClickImpl
 } from './interface'
 
+const collapseProps = {
+  ...(useTheme.props as ThemeProps<CollapseTheme>),
+  defaultExpandesNames: [Array, String] as PropType<
+  string | number | Array<string | number> | null
+  >,
+  expandedNames: [Array, String] as PropType<
+  string | number | Array<string | number> | null
+  >,
+  arrowPlacement: {
+    type: String as PropType<'left' | 'right'>,
+    default: 'left'
+  },
+  accordion: {
+    type: Boolean,
+    default: false
+  },
+  displayDirective: {
+    type: String as PropType<'if' | 'show'>,
+    default: 'if'
+  },
+  onItemHeaderClick: [Function, Array] as PropType<
+  MaybeArray<OnItemHeaderClick>
+  >,
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:expandedNames': [Function, Array] as PropType<
+  MaybeArray<OnUpdateExpandedNames>
+  >,
+  onUpdateExpandedNames: [Function, Array] as PropType<
+  MaybeArray<OnUpdateExpandedNames>
+  >,
+  // deprecated
+  onExpandedNamesChange: {
+    type: [Function, Array] as PropType<
+    MaybeArray<OnUpdateExpandedNames> | undefined
+    >,
+    validator: () => {
+      if (__DEV__) {
+        warn(
+          'collapse',
+          '`on-expanded-names-change` is deprecated, please use `on-update:expanded-names` instead.'
+        )
+      }
+      return true
+    },
+    default: undefined
+  }
+} as const
+
+export type CollapseProps = ExtractPublicPropTypes<typeof collapseProps>
+
 export interface NCollapseInjection {
-  arrowPlacement: 'left' | 'right'
-  displayDirective: 'if' | 'show'
-  expandedNames: string | number | Array<string | number> | null
+  props: ExtractPropTypes<typeof collapseProps>
+  expandedNamesRef: Ref<string | number | Array<string | number> | null>
+  clsPrefixRef: Ref<string>
   collectedItemNames: Array<string | number>
   toggleItem: (
     collapse: boolean,
@@ -36,61 +88,20 @@ export interface NCollapseInjection {
   ) => void
 }
 
+export const collapseInjectionKey: InjectionKey<NCollapseInjection> = Symbol(
+  'collapse'
+)
+
 export default defineComponent({
   name: 'Collapse',
-  props: {
-    ...(useTheme.props as ThemeProps<CollapseTheme>),
-    defaultExpandesNames: [Array, String] as PropType<
-    string | number | Array<string | number> | null
-    >,
-    expandedNames: [Array, String] as PropType<
-    string | number | Array<string | number> | null
-    >,
-    arrowPlacement: {
-      type: String as PropType<'left' | 'right'>,
-      default: 'left'
-    },
-    accordion: {
-      type: Boolean,
-      default: false
-    },
-    displayDirective: {
-      type: String as PropType<'if' | 'show'>,
-      default: 'if'
-    },
-    onItemHeaderClick: [Function, Array] as PropType<
-    MaybeArray<OnItemHeaderClick>
-    >,
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:expandedNames': [Function, Array] as PropType<
-    MaybeArray<OnUpdateExpandedNames>
-    >,
-    onUpdateExpandedNames: [Function, Array] as PropType<
-    MaybeArray<OnUpdateExpandedNames>
-    >,
-    // deprecated
-    onExpandedNamesChange: {
-      type: [Function, Array] as PropType<
-      MaybeArray<OnUpdateExpandedNames> | undefined
-      >,
-      validator: () => {
-        if (__DEV__) {
-          warn(
-            'collapse',
-            '`on-expanded-names-change` is deprecated, please use `on-update:expanded-names` instead.'
-          )
-        }
-        return true
-      },
-      default: undefined
-    }
-  },
+  props: collapseProps,
   setup (props) {
+    const { mergedClsPrefix } = useConfig(props)
     const uncontrolledExpandedNamesRef = ref<
     string | number | Array<string | number> | null
     >(null)
     const controlledExpandedNamesRef = computed(() => props.expandedNames)
-    const mergedExpandedNames = useMergedState(
+    const mergedExpandedNamesRef = useMergedState(
       controlledExpandedNamesRef,
       uncontrolledExpandedNamesRef
     )
@@ -100,7 +111,8 @@ export default defineComponent({
       'Collapse',
       style,
       collapseLight,
-      props
+      props,
+      mergedClsPrefix
     )
     function doUpdateExpandedNames (
       names: Array<string | number> | string | number
@@ -135,7 +147,7 @@ export default defineComponent({
       event: MouseEvent
     ): void {
       const { accordion } = props
-      const { value: expandedNames } = mergedExpandedNames
+      const { value: expandedNames } = mergedExpandedNamesRef
       if (accordion) {
         if (collapse) {
           doUpdateExpandedNames([name])
@@ -165,18 +177,16 @@ export default defineComponent({
         }
       }
     }
-    provide<NCollapseInjection>(
-      'NCollapse',
-      reactive({
-        arrowPlacement: toRef(props, 'arrowPlacement'),
-        displayDirective: toRef(props, 'displayDirective'),
-        expandedNames: mergedExpandedNames,
-        collectedItemNames,
-        toggleItem
-      })
-    )
+    provide(collapseInjectionKey, {
+      props,
+      clsPrefixRef: mergedClsPrefix,
+      expandedNamesRef: mergedExpandedNamesRef,
+      collectedItemNames,
+      toggleItem
+    })
     return {
       mergedTheme: themeRef,
+      cPrefix: mergedClsPrefix,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
@@ -204,13 +214,13 @@ export default defineComponent({
     }
   },
   render () {
-    return h(
-      'div',
-      {
-        class: 'n-collapse',
-        style: this.cssVars
-      },
-      this.$slots
+    return (
+      <div
+        class={`${this.cPrefix}-collapse`}
+        style={this.cssVars as CSSProperties}
+      >
+        {this.$slots}
+      </div>
     )
   }
 })

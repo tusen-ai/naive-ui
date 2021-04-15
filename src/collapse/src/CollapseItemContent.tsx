@@ -1,10 +1,20 @@
-import { h, withDirectives, vShow, defineComponent, toRef } from 'vue'
+import { h, withDirectives, vShow, defineComponent, toRef, PropType } from 'vue'
 import { useFalseUntilTruthy } from 'vooks'
 import { NFadeInExpandTransition } from '../../_internal'
 
 export default defineComponent({
   name: 'CollapseItemContent',
-  props: ['displayDirective', 'show'],
+  props: {
+    displayDirective: {
+      type: String as PropType<'if' | 'show'>,
+      required: true
+    },
+    show: Boolean,
+    clsPrefix: {
+      type: String,
+      required: true
+    }
+  },
   setup (props) {
     const onceTrueRef = useFalseUntilTruthy(toRef(props, 'show'))
     return {
@@ -16,11 +26,13 @@ export default defineComponent({
       <NFadeInExpandTransition>
         {{
           default: () => {
-            const { show, displayDirective, onceTrue } = this
+            const { show, displayDirective, onceTrue, clsPrefix } = this
             const useVShow = displayDirective === 'show' && onceTrue
             const contentNode = (
-              <div class="n-collapse-item__content-wrapper">
-                <div class="n-collapse-item__content-inner">{this.$slots}</div>
+              <div class={`${clsPrefix}-collapse-item__content-wrapper`}>
+                <div class={`${clsPrefix}-collapse-item__content-inner`}>
+                  {this.$slots}
+                </div>
               </div>
             )
             return useVShow

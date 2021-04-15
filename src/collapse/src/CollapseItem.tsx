@@ -1,30 +1,45 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { h, defineComponent, PropType, inject, computed, renderSlot } from 'vue'
 import { createId } from 'seemly'
-import { ChevronRightIcon as ArrowIcon } from '../../_internal/icons'
-import { NBaseIcon } from '../../_internal'
-import { useInjectionCollection } from '../../_utils/composable'
-import NCollapseItemContent from './CollapseItemContent'
-import { NCollapseInjection } from './Collapse'
 import { useMemo } from 'vooks'
+import { ChevronRightIcon as ArrowIcon } from '../../_internal/icons'
+import { useInjectionCollection } from '../../_utils/composable'
+import { NBaseIcon } from '../../_internal'
+import { ExtractPublicPropTypes, throwError } from '../../_utils'
+import { collapseInjectionKey } from './Collapse'
+import NCollapseItemContent from './CollapseItemContent'
+
+const collapseItemProps = {
+  title: String,
+  name: [String, Number] as PropType<string | number>,
+  displayDirective: String as PropType<'if' | 'show'>
+} as const
+
+export type CollapseItemProps = ExtractPublicPropTypes<typeof collapseItemProps>
 
 export default defineComponent({
   name: 'CollapseItem',
-  props: {
-    title: String,
-    name: [String, Number],
-    displayDirective: String as PropType<'if' | 'show'>
-  },
+  props: collapseItemProps,
   setup (props) {
     const randomName = createId()
     const mergedNameRef = useMemo(() => {
       return props.name ?? randomName
     })
-    const NCollapse = inject<NCollapseInjection>(
-      'NCollapse'
-    ) as NCollapseInjection
-    useInjectionCollection('NCollapse', 'collectedItemNames', mergedNameRef)
+    const NCollapse = inject(collapseInjectionKey)
+    if (!NCollapse) {
+      throwError(
+        'collapse-item',
+        '`n-collapse-item` must be placed inside `n-collapse`.'
+      )
+    }
+    const { expandedNamesRef, props: collapseProps, clsPrefixRef } = NCollapse
+    useInjectionCollection(
+      collapseInjectionKey,
+      'collectedItemNames',
+      mergedNameRef
+    )
     const collapsedRef = computed<boolean>(() => {
-      const { expandedNames } = NCollapse
+      const { value: expandedNames } = expandedNamesRef
       if (Array.isArray(expandedNames)) {
         const { value: name } = mergedNameRef
         return !~expandedNames.findIndex(
@@ -35,17 +50,18 @@ export default defineComponent({
     })
     return {
       randomName,
+      cPrefix: clsPrefixRef,
       collapsed: collapsedRef,
       mergedDisplayDirective: computed<'if' | 'show'>(() => {
         const { displayDirective } = props
         if (displayDirective) {
           return displayDirective
         } else {
-          return NCollapse.displayDirective
+          return collapseProps.displayDirective
         }
       }),
       arrowPlacement: computed<'left' | 'right'>(() => {
-        return NCollapse.arrowPlacement
+        return collapseProps.arrowPlacement
       }),
       handleClick (e: MouseEvent) {
         if (NCollapse) {
@@ -60,33 +76,37 @@ export default defineComponent({
       arrowPlacement,
       collapsed,
       title,
-      mergedDisplayDirective
+      mergedDisplayDirective,
+      cPrefix
     } = this
     const headerNode = renderSlot($slots, 'header', undefined, () => [title])
     return (
       <div
         class={[
-          'n-collapse-item',
-          `n-collapse-item--${arrowPlacement}-arrow-placement`,
-          !collapsed && 'n-collapse-item--active'
+          `${cPrefix}-collapse-item`,
+          `${cPrefix}-collapse-item--${arrowPlacement}-arrow-placement`,
+          !collapsed && `${cPrefix}-collapse-item--active`
         ]}
       >
         <div
           class={[
-            'n-collapse-item__header',
-            !collapsed && 'n-collapse-item__header--active'
+            `${cPrefix}-collapse-item__header`,
+            !collapsed && `${cPrefix}-collapse-item__header--active`
           ]}
           onClick={this.handleClick}
         >
           {arrowPlacement === 'right' && headerNode}
-          <div class="n-collapse-item-arrow">
+          <div class={`${cPrefix}-collapse-item-arrow`}>
             {renderSlot($slots, 'arrow', { collapsed: collapsed }, () => [
-              <NBaseIcon>{{ default: () => <ArrowIcon /> }}</NBaseIcon>
+              <NBaseIcon clsPrefix={cPrefix}>
+                {{ default: () => <ArrowIcon /> }}
+              </NBaseIcon>
             ])}
           </div>
           {arrowPlacement === 'left' && headerNode}
         </div>
         <NCollapseItemContent
+          clsPrefix={cPrefix}
           displayDirective={mergedDisplayDirective}
           show={!collapsed}
         >
