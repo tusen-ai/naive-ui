@@ -1,4 +1,4 @@
-import { h, ref, defineComponent, provide, PropType, reactive } from 'vue'
+import { h, ref, defineComponent, provide, PropType } from 'vue'
 import {
   NPopover,
   popoverProps,
@@ -6,7 +6,7 @@ import {
   PopoverTrigger
 } from '../../popover'
 import { omit, keep, call } from '../../_utils'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { popconfirmLight } from '../styles'
 import type { PopconfirmTheme } from '../styles'
@@ -37,12 +37,14 @@ export default defineComponent({
     >
   },
   setup (props) {
+    const { mergedClsPrefix } = useConfig()
     const themeRef = useTheme(
       'Popconfirm',
       'Popconfirm',
       style,
       popconfirmLight,
-      props
+      props,
+      mergedClsPrefix
     )
     const popoverInstRef = ref<PopoverInst | null>(null)
     function handlePositiveClick (e: MouseEvent): void {
@@ -65,12 +67,10 @@ export default defineComponent({
         }
       )
     }
-    provide<PopconfirmInjection>(
-      'NPopconfirm',
-      reactive({
-        mergedTheme: themeRef
-      })
-    )
+    provide<PopconfirmInjection>('NPopconfirm', {
+      mergedThemeRef: themeRef,
+      mergedClsPrefixRef: mergedClsPrefix
+    })
     return {
       mergedTheme: themeRef,
       popoverInstRef,
@@ -82,14 +82,12 @@ export default defineComponent({
     const { $slots: slots, $props: props, mergedTheme } = this
     return h(
       NPopover,
-      {
-        ...omit(props, panelPropKeys, {
-          theme: mergedTheme.peers.Popover,
-          themeOverrides: mergedTheme.peerOverrides.Popover
-        }),
-        class: 'n-popconfirm',
+      omit(props, panelPropKeys, {
+        theme: mergedTheme.peers.Popover,
+        themeOverrides: mergedTheme.peerOverrides.Popover,
+        internalExtraClass: 'popconfirm',
         ref: 'popoverInstRef'
-      },
+      }),
       {
         trigger: slots.activator || slots.trigger,
         default: () => {
@@ -101,11 +99,7 @@ export default defineComponent({
               onPositiveClick: this.handlePositiveClick,
               onNegativeClick: this.handleNegativeClick
             },
-            {
-              action: slots.action,
-              icon: slots.icon,
-              default: slots.default
-            }
+            slots
           )
         }
       }

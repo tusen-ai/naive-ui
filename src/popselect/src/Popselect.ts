@@ -61,7 +61,7 @@ export default defineComponent({
       omit(this.$props, panelPropKeys, {
         padded: false,
         ref: 'popoverInstRef',
-        class: 'n-popselect',
+        internalExtraClass: 'popselect',
         theme: mergedTheme.peers.Popover,
         themeOverrides: mergedTheme.peerOverrides.Popover
       }),

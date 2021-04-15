@@ -52,7 +52,7 @@ export default defineComponent({
         theme: mergedTheme.peers.Popover,
         themeOverrides: mergedTheme.peerOverrides.Popover,
         builtinThemeOverrides: this.popoverThemeOverrides,
-        class: 'n-tooltip n-popover--tooltip',
+        internalExtraClass: 'tooltip',
         ref: 'popoverRef'
       },
       this.$slots

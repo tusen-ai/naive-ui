@@ -43,11 +43,12 @@ export default defineComponent({
     ) as PopconfirmInjection
     return {
       ...useLocale('Popconfirm'),
+      cPrefix: NPopconfirm.mergedClsPrefixRef,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
           self: { fontSize, iconSize, iconColor }
-        } = NPopconfirm.mergedTheme
+        } = NPopconfirm.mergedThemeRef.value
         return {
           '--bezier': cubicBezierEaseInOut,
           '--font-size': fontSize,
@@ -70,11 +71,12 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     return (
       <div style={this.cssVars as CSSProperties}>
-        <div class="n-popconfirm__body">
+        <div class={`${cPrefix}-popconfirm__body`}>
           {this.showIcon ? (
-            <div class="n-popconfirm__icon">
+            <div class={`${cPrefix}-popconfirm__icon`}>
               <slot name="icon">
                 <NBaseIcon>{{ default: () => <WarningIcon /> }}</NBaseIcon>
               </slot>
@@ -82,7 +84,7 @@ export default defineComponent({
           ) : null}
           {renderSlot(this.$slots, 'default')}
         </div>
-        <div class="n-popconfirm__action">
+        <div class={`${cPrefix}-popconfirm__action`}>
           {renderSlot(this.$slots, 'action', undefined, () => [
             <NButton size="small" onClick={this.handleNegativeClick}>
               {this.localizedNegativeText}

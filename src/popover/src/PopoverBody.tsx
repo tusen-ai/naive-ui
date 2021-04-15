@@ -79,7 +79,9 @@ export default defineComponent({
     const directivesRef = computed<DirectiveArguments>(() => {
       const { trigger } = props
       const directives = []
-      const { positionManually } = NPopover
+      const {
+        positionManuallyRef: { value: positionManually }
+      } = NPopover
       if (!positionManually) {
         if (trigger === 'click') {
           directives.push([clickoutside, handleClickOutside])
@@ -190,6 +192,7 @@ export default defineComponent({
 
     function renderContentNode (): VNode | null {
       const cPrefix = mergedClsPrefix.value
+      const extraClass = NPopover.extraClassRef.value
       return props.displayDirective === 'show' || props.show
         ? withDirectives(
           h(
@@ -198,6 +201,7 @@ export default defineComponent({
               {
                 class: [
                     `${cPrefix}-popover`,
+                    extraClass && `${cPrefix}-${extraClass}`,
                     {
                       [`${cPrefix}-popover--overlap`]: props.overlap,
                       [`${cPrefix}-popover--no-arrow`]: !props.showArrow,
@@ -265,7 +269,7 @@ export default defineComponent({
               Transition,
               {
                 name: 'popover-transition',
-                appear: this.NPopover.isMounted,
+                appear: this.NPopover.isMountedRef.value,
                 onAfterLeave: () => {
                   this.followerEnabled = false
                 }

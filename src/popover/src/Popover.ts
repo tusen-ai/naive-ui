@@ -1,7 +1,6 @@
 import {
   h,
   ref,
-  reactive,
   computed,
   createTextVNode,
   defineComponent,
@@ -9,7 +8,10 @@ import {
   VNode,
   provide,
   CSSProperties,
-  ExtractPropTypes
+  ExtractPropTypes,
+  ComputedRef,
+  Ref,
+  toRef
 } from 'vue'
 import { VBinder, VTarget, FollowerPlacement } from 'vueuc'
 import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
@@ -64,8 +66,9 @@ export interface PopoverInjection {
   handleClickOutside: (e: MouseEvent) => void
   getTriggerElement: () => HTMLElement
   setBodyInstance: (value: BodyInstance | null) => void
-  positionManually: boolean
-  isMounted: boolean
+  positionManuallyRef: ComputedRef<boolean>
+  isMountedRef: Ref<boolean>
+  extraClassRef: Ref<string | undefined>
 }
 
 export const popoverProps = {
@@ -125,6 +128,10 @@ export const popoverProps = {
     type: [Number, String] as PropType<number | 'trigger'>,
     default: undefined
   },
+  overlap: {
+    type: Boolean,
+    default: false
+  },
   // private
   padded: {
     type: Boolean,
@@ -134,10 +141,7 @@ export const popoverProps = {
     type: Boolean,
     default: true
   },
-  overlap: {
-    type: Boolean,
-    default: false
-  },
+  internalExtraClass: String,
   // events
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:show': [Function, Array] as PropType<
@@ -335,19 +339,17 @@ export default defineComponent({
     function setBodyInstance (value: BodyInstance | null): void {
       bodyInstance = value
     }
-    provide<PopoverInjection>(
-      'NPopover',
-      reactive({
-        getTriggerElement,
-        handleMouseEnter,
-        handleMouseLeave,
-        handleClickOutside,
-        handleMouseMoveOutside,
-        setBodyInstance,
-        positionManually: positionManuallyRef,
-        isMounted: isMountedRef
-      })
-    )
+    provide<PopoverInjection>('NPopover', {
+      getTriggerElement,
+      handleMouseEnter,
+      handleMouseLeave,
+      handleClickOutside,
+      handleMouseMoveOutside,
+      setBodyInstance,
+      positionManuallyRef: positionManuallyRef,
+      isMountedRef: isMountedRef,
+      extraClassRef: toRef(props, 'internalExtraClass')
+    })
     return {
       positionManually: positionManuallyRef,
       // if to show popover body
