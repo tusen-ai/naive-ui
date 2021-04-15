@@ -170,6 +170,7 @@ export default defineComponent({
                 [
                   this.closable ? (
                     <NBaseClose
+                      clsPrefix={cPrefix}
                       class={`${cPrefix}-alert__close`}
                       onClick={this.handleCloseClick}
                     />

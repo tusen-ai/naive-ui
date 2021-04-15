@@ -7,9 +7,10 @@ import {
   defineComponent,
   renderSlot,
   Transition,
-  CSSProperties
+  CSSProperties,
+  ExtractPropTypes
 } from 'vue'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseSlotMachine, NBaseWave } from '../../_internal'
 import { createKey } from '../../_utils'
@@ -17,47 +18,50 @@ import { badgeLight } from '../styles'
 import type { BadgeTheme } from '../styles'
 import style from './styles/index.cssr'
 
+const badgeProps = {
+  ...(useTheme.props as ThemeProps<BadgeTheme>),
+  value: [String, Number] as PropType<string | number>,
+  max: Number,
+  dot: {
+    type: Boolean,
+    default: false
+  },
+  type: {
+    type: String as PropType<
+    'success' | 'error' | 'warning' | 'info' | 'default'
+    >,
+    default: 'default'
+  },
+  show: {
+    type: Boolean,
+    default: true
+  },
+  showZero: {
+    type: Boolean,
+    default: false
+  },
+  processing: {
+    type: Boolean,
+    default: false
+  },
+  color: String
+} as const
+
+export type BadgeProps = Partial<ExtractPropTypes<typeof badgeProps>>
+
 export default defineComponent({
   name: 'Badge',
-  props: {
-    ...(useTheme.props as ThemeProps<BadgeTheme>),
-    value: {
-      type: [String, Number],
-      default: undefined
-    },
-    max: {
-      type: Number,
-      default: undefined
-    },
-    dot: {
-      type: Boolean,
-      default: false
-    },
-    type: {
-      type: String as PropType<
-      'success' | 'error' | 'warning' | 'info' | 'default'
-      >,
-      default: 'default'
-    },
-    show: {
-      type: Boolean,
-      default: true
-    },
-    showZero: {
-      type: Boolean,
-      default: false
-    },
-    processing: {
-      type: Boolean,
-      default: false
-    },
-    color: {
-      type: String,
-      default: undefined
-    }
-  },
+  props: badgeProps,
   setup (props) {
-    const themeRef = useTheme('Badge', 'Badge', style, badgeLight, props)
+    const { mergedClsPrefix } = useConfig(props)
+    const themeRef = useTheme(
+      'Badge',
+      'Badge',
+      style,
+      badgeLight,
+      props,
+      mergedClsPrefix
+    )
     const appearedRef = ref(false)
     const handleAfterEnter = (): void => {
       appearedRef.value = true
@@ -76,15 +80,8 @@ export default defineComponent({
       if (showBadgeRef.value) appearedRef.value = true
     })
     return {
+      cPrefix: mergedClsPrefix,
       appeared: ref(false),
-      number: computed(() => {
-        const { max, value } = props
-        return max === undefined || typeof value === 'string'
-          ? value
-          : value > max
-            ? `${max}+`
-            : value
-      }),
       showBadge: showBadgeRef,
       handleAfterEnter,
       handleAfterLeave,
@@ -106,13 +103,14 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     return (
       <div
         class={[
-          'n-badge',
+          `${cPrefix}-badge`,
           {
-            'n-badge--dot': this.dot,
-            'n-badge--as-is': !this.$slots.default
+            [`${cPrefix}-badge--dot`]: this.dot,
+            [`${cPrefix}-badge--as-is`]: !this.$slots.default
           }
         ]}
         style={this.cssVars as CSSProperties}
@@ -126,15 +124,16 @@ export default defineComponent({
           {{
             default: () =>
               this.showBadge ? (
-                <sup class="n-badge-sup">
+                <sup class={`${cPrefix}-badge-sup`}>
                   {!this.dot ? (
                     <NBaseSlotMachine
+                      clsPrefix={cPrefix}
                       appeared={this.appeared}
                       max={this.max}
                       value={this.value}
                     />
                   ) : null}
-                  {this.processing ? <NBaseWave /> : null}
+                  {this.processing ? <NBaseWave clsPrefix={cPrefix} /> : null}
                 </sup>
               ) : null
           }}

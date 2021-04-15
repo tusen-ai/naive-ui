@@ -1,4 +1,4 @@
-import { h, defineComponent, PropType } from 'vue'
+import { h, defineComponent, PropType, toRef } from 'vue'
 import { useStyle } from '../../../_mixins'
 import NBaseIcon from '../../icon'
 import { CloseIcon } from '../../icons'
@@ -7,6 +7,10 @@ import style from './styles/index.cssr'
 export default defineComponent({
   name: 'BaseClose',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     disabled: {
       type: Boolean,
       default: false
@@ -14,21 +18,23 @@ export default defineComponent({
     onClick: Function as PropType<(e: MouseEvent) => void>
   },
   setup (props) {
-    useStyle('BaseClose', style)
-    return () => (
-      <NBaseIcon
-        class={[
-          'n-base-close',
-          {
-            'n-base-close--disabled': props.disabled
-          }
-        ]}
-        onClick={props.onClick}
-      >
-        {{
-          default: () => <CloseIcon />
-        }}
-      </NBaseIcon>
-    )
+    useStyle('BaseClose', style, toRef(props, 'clsPrefix'))
+    return () => {
+      const { clsPrefix } = props
+      return (
+        <NBaseIcon
+          clsPerfix={clsPrefix}
+          class={[
+            `${clsPrefix}-base-close`,
+            props.disabled && `${clsPrefix}-base-close--disabled`
+          ]}
+          onClick={props.onClick}
+        >
+          {{
+            default: () => <CloseIcon />
+          }}
+        </NBaseIcon>
+      )
+    }
   }
 })

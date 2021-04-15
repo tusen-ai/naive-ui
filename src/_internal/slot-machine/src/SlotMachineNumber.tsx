@@ -13,6 +13,10 @@ import {
 export default defineComponent({
   name: 'SlotMachineNumber',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     value: {
       // could be '+', 1, 2, ...
       type: [Number, String] as PropType<string | number>,
@@ -35,12 +39,12 @@ export default defineComponent({
     const activeRef = ref(false)
     const newNumberScrollAnimationClassRef = computed(() => {
       return activeRef.value
-        ? `n-base-slot-machine-current-number--${scrollAnimationDirectionRef.value}-scroll`
+        ? `${props.clsPrefix}-base-slot-machine-current-number--${scrollAnimationDirectionRef.value}-scroll`
         : null
     })
     const oldNumberScrollAnimationClassRef = computed(() => {
       return activeRef.value
-        ? `n-base-slot-machine-old-number--${scrollAnimationDirectionRef.value}-scroll`
+        ? `${props.clsPrefix}-base-slot-machine-old-number--${scrollAnimationDirectionRef.value}-scroll`
         : null
     })
     // BUG: may be typescript bug
@@ -70,12 +74,13 @@ export default defineComponent({
       })
     }
     return () => {
+      const { clsPrefix } = props
       return (
-        <span ref={numberRef} class="n-base-slot-machine-number">
+        <span ref={numberRef} class={`${clsPrefix}-base-slot-machine-number`}>
           {oldNumberRef.value !== null ? (
             <span
               class={[
-                'n-base-slot-machine-old-number n-base-slot-machine-old-number--top',
+                `${clsPrefix}-base-slot-machine-old-number ${clsPrefix}-base-slot-machine-old-number--top`,
                 oldNumberScrollAnimationClassRef.value
               ]}
             >
@@ -84,18 +89,16 @@ export default defineComponent({
           ) : null}
           <span
             class={[
-              'n-base-slot-machine-current-number',
+              `${clsPrefix}-base-slot-machine-current-number`,
               newNumberScrollAnimationClassRef.value
             ]}
           >
             <span
               ref="numberWrapper"
               class={[
-                'n-base-slot-machine-current-number__inner',
-                {
-                  'n-base-slot-machine-current-number__inner--not-number':
-                    typeof props.value !== 'number'
-                }
+                `${clsPrefix}-base-slot-machine-current-number__inner`,
+                typeof props.value !== 'number' &&
+                  `${clsPrefix}-base-slot-machine-current-number__inner--not-number`
               ]}
             >
               {newNumberRef.value}
@@ -104,7 +107,7 @@ export default defineComponent({
           {oldNumberRef.value !== null ? (
             <span
               class={[
-                'n-base-slot-machine-old-number n-base-slot-machine-old-number--bottom',
+                `${clsPrefix}-base-slot-machine-old-number ${clsPrefix}-base-slot-machine-old-number--bottom`,
                 oldNumberScrollAnimationClassRef.value
               ]}
             >

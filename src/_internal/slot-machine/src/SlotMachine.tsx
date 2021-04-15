@@ -16,6 +16,10 @@ import style from './styles/index.cssr'
 export default defineComponent({
   name: 'BaseSlotMachine',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     value: {
       type: [Number, String],
       default: 0
@@ -30,7 +34,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    useStyle('BaseSlotMachine', style)
+    useStyle('BaseSlotMachine', style, toRef(props, 'clsPrefix'))
     const oldValueRef = ref<number>()
     const newValueRef = ref<number>()
     const numbersRef = computed(() => {
@@ -64,14 +68,15 @@ export default defineComponent({
       }
     })
     return () => {
-      const { value } = props
+      const { value, clsPrefix } = props
       return typeof value === 'number' ? (
-        <span class="n-base-slot-machine">
+        <span class={`${clsPrefix}-base-slot-machine`}>
           <TransitionGroup name="n-fade-up-width-expand-transition" tag="span">
             {{
               default: () =>
                 numbersRef.value.map((number, i) => (
                   <SlotMachineNumber
+                    clsPrefix={clsPrefix}
                     key={numbersRef.value.length - i - 1}
                     oldOriginalNumber={oldValueRef.value}
                     newOriginalNumber={newValueRef.value}
@@ -84,13 +89,13 @@ export default defineComponent({
             {{
               default: () =>
                 props.max !== undefined && props.max < value ? (
-                  <SlotMachineNumber value="+" />
+                  <SlotMachineNumber clsPrefix={clsPrefix} value="+" />
                 ) : null
             }}
           </NFadeInExpandTransition>
         </span>
       ) : (
-        <span class="n-base-slot-machine">{value}</span>
+        <span class={`${clsPrefix}-base-slot-machine`}>{value}</span>
       )
     }
   }
