@@ -6,7 +6,6 @@ import {
   renderSlot,
   defineComponent,
   watch,
-  ExtractPropTypes,
   Ref,
   InjectionKey
 } from 'vue'
@@ -15,6 +14,7 @@ import {
   useInjectionCollection,
   useInjectionElementCollection
 } from '../../_utils/composable'
+import type { ExtractPublicPropTypes } from '../../_utils'
 
 export interface AnchorInjection {
   activeHref: Ref<string | null>
@@ -34,7 +34,7 @@ const anchorLinkProps = {
   href: String
 } as const
 
-export type AnchorLinkProps = Partial<ExtractPropTypes<typeof anchorLinkProps>>
+export type AnchorLinkProps = ExtractPublicPropTypes<typeof anchorLinkProps>
 
 export default defineComponent({
   name: 'AnchorLink',

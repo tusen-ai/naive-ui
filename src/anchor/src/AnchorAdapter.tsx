@@ -1,15 +1,9 @@
-import {
-  h,
-  defineComponent,
-  computed,
-  ref,
-  CSSProperties,
-  ExtractPropTypes
-} from 'vue'
+import { h, defineComponent, computed, ref, CSSProperties } from 'vue'
 import { NAffix } from '../../affix'
 import { affixProps, affixPropKeys } from '../../affix/src/Affix'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { keep } from '../../_utils'
 import { anchorLight } from '../styles'
 import type { AnchorTheme } from '../styles'
@@ -31,7 +25,7 @@ const anchorProps = {
   ...baseAnchorProps
 } as const
 
-export type AnchorProps = Partial<ExtractPropTypes<typeof anchorProps>>
+export type AnchorProps = ExtractPublicPropTypes<typeof anchorProps>
 
 export default defineComponent({
   name: 'Anchor',

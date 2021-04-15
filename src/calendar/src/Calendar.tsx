@@ -1,7 +1,6 @@
 import {
   computed,
   defineComponent,
-  ExtractPropTypes,
   h,
   ref,
   PropType,
@@ -23,7 +22,8 @@ import { useMergedState } from 'vooks'
 import { dateArray } from '../../date-picker/src/utils'
 import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
-import { call, MaybeArray } from '../../_utils'
+import { call } from '../../_utils'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { NButton, NButtonGroup } from '../../button'
 import { useConfig, useLocale, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -47,7 +47,7 @@ const calendarProps = {
   >
 } as const
 
-export type CalendarProps = Partial<ExtractPropTypes<typeof calendarProps>>
+export type CalendarProps = ExtractPublicPropTypes<typeof calendarProps>
 
 interface DateItem {
   year: number

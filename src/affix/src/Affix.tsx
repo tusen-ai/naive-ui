@@ -6,12 +6,12 @@ import {
   defineComponent,
   CSSProperties,
   PropType,
-  h,
-  ExtractPropTypes
+  h
 } from 'vue'
 import { getScrollParent, unwrapElement } from 'seemly'
 import { useConfig, useStyle } from '../../_mixins'
 import { warn, keysOf } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import style from './styles/index.cssr'
 
 export const affixProps = {
@@ -54,7 +54,7 @@ export const affixProps = {
 
 export const affixPropKeys = keysOf(affixProps)
 
-export type AffixProps = Partial<ExtractPropTypes<typeof affixProps>>
+export type AffixProps = ExtractPublicPropTypes<typeof affixProps>
 
 export default defineComponent({
   name: 'Affix',

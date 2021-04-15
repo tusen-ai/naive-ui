@@ -5,8 +5,7 @@ import {
   defineComponent,
   PropType,
   mergeProps,
-  renderSlot,
-  ExtractPropTypes
+  renderSlot
 } from 'vue'
 import { getMargin } from 'seemly'
 import {
@@ -19,6 +18,7 @@ import { NFadeInExpandTransition, NBaseClose, NBaseIcon } from '../../_internal'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { warn, createKey } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { alertLight } from '../styles'
 import type { AlertTheme } from '../styles'
 import style from './styles/index.cssr'
@@ -63,7 +63,7 @@ const alertProps = {
   }
 }
 
-export type AlertProps = Partial<ExtractPropTypes<typeof alertProps>>
+export type AlertProps = ExtractPublicPropTypes<typeof alertProps>
 
 export default defineComponent({
   name: 'Alert',

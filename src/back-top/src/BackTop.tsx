@@ -11,8 +11,7 @@ import {
   Transition,
   PropType,
   onMounted,
-  onBeforeUnmount,
-  ExtractPropTypes
+  onBeforeUnmount
 } from 'vue'
 import { VLazyTeleport } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
@@ -21,6 +20,7 @@ import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseIcon } from '../../_internal'
 import { formatLength, warn } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { backTopLight } from '../styles'
 import type { BackTopTheme } from '../styles'
 import BackTopIcon from './BackTopIcon'
@@ -92,7 +92,7 @@ const backTopProps = {
   }
 } as const
 
-export type BackTopProps = Partial<ExtractPropTypes<typeof backTopProps>>
+export type BackTopProps = ExtractPublicPropTypes<typeof backTopProps>
 
 export default defineComponent({
   name: 'BackTop',

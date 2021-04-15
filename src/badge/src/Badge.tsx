@@ -7,13 +7,13 @@ import {
   defineComponent,
   renderSlot,
   Transition,
-  CSSProperties,
-  ExtractPropTypes
+  CSSProperties
 } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseSlotMachine, NBaseWave } from '../../_internal'
 import { createKey } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { badgeLight } from '../styles'
 import type { BadgeTheme } from '../styles'
 import style from './styles/index.cssr'
@@ -47,7 +47,7 @@ const badgeProps = {
   color: String
 } as const
 
-export type BadgeProps = Partial<ExtractPropTypes<typeof badgeProps>>
+export type BadgeProps = ExtractPublicPropTypes<typeof badgeProps>
 
 export default defineComponent({
   name: 'Badge',

@@ -1,12 +1,6 @@
-import {
-  h,
-  PropType,
-  defineComponent,
-  provide,
-  InjectionKey,
-  ExtractPropTypes
-} from 'vue'
+import { h, PropType, defineComponent, provide, InjectionKey } from 'vue'
 import { useConfig, useStyle } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { Size } from './interface'
 import style from './styles/button-group.cssr'
 
@@ -26,9 +20,7 @@ const buttonGroupProps = {
   vertical: Boolean
 } as const
 
-export type ButtonGroupProps = Partial<
-ExtractPropTypes<typeof buttonGroupProps>
->
+export type ButtonGroupProps = ExtractPublicPropTypes<typeof buttonGroupProps>
 
 export default defineComponent({
   name: 'ButtonGroup',

@@ -7,8 +7,7 @@ import {
   defineComponent,
   PropType,
   renderSlot,
-  CSSProperties,
-  ExtractPropTypes
+  CSSProperties
 } from 'vue'
 import { useMemo } from 'vooks'
 import { createHoverColor, createPressedColor } from '../../_utils/color/index'
@@ -22,7 +21,7 @@ import {
 } from '../../_internal'
 import type { BaseWaveRef } from '../../_internal'
 import { call, createKey } from '../../_utils'
-import type { MaybeArray } from '../../_utils'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { buttonLight } from '../styles'
 import type { ButtonTheme } from '../styles'
 import { buttonGroupInjectionKey } from './ButtonGroup'
@@ -92,7 +91,7 @@ const buttonProps = {
   }
 } as const
 
-export type ButtonProps = Partial<ExtractPropTypes<typeof buttonProps>>
+export type ButtonProps = ExtractPublicPropTypes<typeof buttonProps>
 
 export default defineComponent({
   name: 'Button',

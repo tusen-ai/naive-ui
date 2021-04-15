@@ -5,14 +5,14 @@ import {
   onUpdated,
   onMounted,
   defineComponent,
-  PropType,
-  ExtractPropTypes
+  PropType
 } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { avatarLight } from '../styles'
 import type { AvatarTheme } from '../styles'
 import { createKey } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import style from './styles/index.cssr'
 
 const avatarProps = {
@@ -35,7 +35,7 @@ const avatarProps = {
   color: String
 } as const
 
-export type AvatarProps = Partial<ExtractPropTypes<typeof avatarProps>>
+export type AvatarProps = ExtractPublicPropTypes<typeof avatarProps>
 
 export default defineComponent({
   name: 'Avatar',

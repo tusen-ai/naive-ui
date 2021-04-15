@@ -4,12 +4,12 @@ import {
   computed,
   PropType,
   renderSlot,
-  CSSProperties,
-  ExtractPropTypes
+  CSSProperties
 } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, createKey, keysOf, MaybeArray } from '../../_utils'
+import { call, createKey, keysOf } from '../../_utils'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { NBaseClose } from '../../_internal'
 import { cardLight } from '../styles'
 import type { CardTheme } from '../styles'
@@ -54,7 +54,7 @@ const cardProps = {
   ...cardBaseProps
 }
 
-export type CardProps = Partial<ExtractPropTypes<typeof cardProps>>
+export type CardProps = ExtractPublicPropTypes<typeof cardProps>
 
 export default defineComponent({
   name: 'Card',

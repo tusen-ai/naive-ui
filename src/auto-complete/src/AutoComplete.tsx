@@ -7,8 +7,7 @@ import {
   Transition,
   PropType,
   withDirectives,
-  CSSProperties,
-  ExtractPropTypes
+  CSSProperties
 } from 'vue'
 import { createTreeMate } from 'treemate'
 import { VBinder, VTarget, VFollower } from 'vueuc'
@@ -22,6 +21,7 @@ import {
   MaybeArray,
   getFirstSlotVNode
 } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { NInternalSelectMenu, InternalSelectMenuRef } from '../../_internal'
 
 import { NInput } from '../../input'
@@ -98,9 +98,7 @@ const autoCompleteProps = {
   }
 } as const
 
-export type AutoCompleteProps = Partial<
-ExtractPropTypes<typeof autoCompleteProps>
->
+export type AutoCompleteProps = ExtractPublicPropTypes<typeof autoCompleteProps>
 
 export default defineComponent({
   name: 'AutoComplete',

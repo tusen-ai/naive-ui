@@ -4,7 +4,6 @@ import {
   defineComponent,
   CSSProperties,
   provide,
-  ExtractPropTypes,
   InjectionKey,
   Ref,
   toRef
@@ -14,6 +13,7 @@ import type { ThemeProps } from '../../_mixins'
 import { breadcrumbLight } from '../styles'
 import type { BreadcrumbTheme } from '../styles'
 import style from './styles/index.cssr'
+import type { ExtractPublicPropTypes } from '../../_utils'
 
 export interface BreadcrumbInjection {
   separatorRef: Ref<string>
@@ -32,7 +32,7 @@ const breadcrumbProps = {
   }
 } as const
 
-export type BreadcrumbProps = Partial<ExtractPropTypes<typeof breadcrumbProps>>
+export type BreadcrumbProps = ExtractPublicPropTypes<typeof breadcrumbProps>
 
 export default defineComponent({
   name: 'Breadcrumb',
