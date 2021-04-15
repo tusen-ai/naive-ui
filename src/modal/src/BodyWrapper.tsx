@@ -16,9 +16,10 @@ import {
   mergeProps
 } from 'vue'
 import { clickoutside } from 'vdirs'
+import { cardBasePropKeys } from '../../card/src/Card'
 import { NScrollbar, ScrollbarRef } from '../../scrollbar'
 import { NDialog, dialogPropKeys } from '../../dialog'
-import { NCard, cardPropKeys } from '../../card'
+import { NCard } from '../../card'
 import { getFirstSlotVNode, keep, warn } from '../../_utils'
 import { presetProps } from './presetProps'
 import type { ModalInjection } from './Modal'
@@ -220,7 +221,7 @@ export default defineComponent({
                               themeOverrides={
                                 NModal.mergedTheme.peerOverrides.Card
                               }
-                              {...keep(this.$props, cardPropKeys)}
+                              {...keep(this.$props, cardBasePropKeys)}
                             >
                               {$slots}
                             </NCard>

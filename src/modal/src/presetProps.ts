@@ -1,11 +1,9 @@
 import { dialogProps } from '../../dialog'
-import type { DialogProps } from '../../dialog'
-import { cardProps } from '../../card'
-import type { CardProps } from '../../card'
+import { cardBaseProps } from '../../card/src/Card'
 import { keysOf } from '../../_utils'
 
-const presetProps: DialogProps & CardProps = {
-  ...cardProps,
+const presetProps = {
+  ...cardBaseProps,
   // put dialog props after since I want the card to unbordered by default
   ...dialogProps
 }

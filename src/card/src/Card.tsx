@@ -4,9 +4,10 @@ import {
   computed,
   PropType,
   renderSlot,
-  CSSProperties
+  CSSProperties,
+  ExtractPropTypes
 } from 'vue'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, createKey, keysOf, MaybeArray } from '../../_utils'
 import { NBaseClose } from '../../_internal'
@@ -21,7 +22,7 @@ export interface Segmented {
   action?: boolean | 'soft'
 }
 
-const cardProps = {
+export const cardBaseProps = {
   title: String,
   contentStyle: [Object, String] as PropType<CSSProperties | string>,
   headerStyle: [Object, String] as PropType<CSSProperties | string>,
@@ -46,25 +47,36 @@ const cardProps = {
   onClose: [Function, Array] as PropType<MaybeArray<() => void>>
 } as const
 
-export { cardProps }
-export const cardPropKeys = keysOf(cardProps)
-export type CardProps = typeof cardProps
+export const cardBasePropKeys = keysOf(cardBaseProps)
+
+const cardProps = {
+  ...(useTheme.props as ThemeProps<CardTheme>),
+  ...cardBaseProps
+}
+
+export type CardProps = Partial<ExtractPropTypes<typeof cardProps>>
 
 export default defineComponent({
   name: 'Card',
-  props: {
-    ...(useTheme.props as ThemeProps<CardTheme>),
-    ...cardProps
-  },
+  props: cardProps,
   setup (props) {
     const handleCloseClick = (): void => {
       const { onClose } = props
       if (onClose) call(onClose)
     }
-    const themeRef = useTheme('Card', 'Card', style, cardLight, props)
+    const { mergedClsPrefix } = useConfig(props)
+    const themeRef = useTheme(
+      'Card',
+      'Card',
+      style,
+      cardLight,
+      props,
+      mergedClsPrefix
+    )
     return {
-      handleCloseClick,
+      cPrefix: mergedClsPrefix,
       mergedTheme: themeRef,
+      handleCloseClick,
       cssVars: computed(() => {
         const { size } = props
         const {
@@ -123,63 +135,71 @@ export default defineComponent({
     }
   },
   render () {
-    const { segmented, bordered, hoverable, $slots } = this
+    const { segmented, bordered, hoverable, $slots, cPrefix } = this
     return (
       <div
         class={[
-          'n-card',
+          `${cPrefix}-card`,
           {
-            [`n-card--content${
+            [`${cPrefix}-card--content${
               typeof segmented !== 'boolean' && segmented.content === 'soft'
                 ? '-soft'
                 : ''
             }-segmented`]:
               segmented === true || (segmented !== false && segmented.content),
-            [`n-card--footer${
+            [`${cPrefix}-card--footer${
               typeof segmented !== 'boolean' && segmented.footer === 'soft'
                 ? '-soft'
                 : ''
             }-segmented`]:
               segmented === true || (segmented !== false && segmented.footer),
-            'n-card--action-segmented':
+            [`${cPrefix}-card--action-segmented`]:
               segmented === true || (segmented !== false && segmented.action),
-            'n-card--bordered': bordered,
-            'n-card--hoverable': hoverable
+            [`${cPrefix}-card--bordered`]: bordered,
+            [`${cPrefix}-card--hoverable`]: hoverable
           }
         ]}
         style={this.cssVars as CSSProperties}
       >
         {$slots.cover ? (
-          <div class="n-card-cover">{renderSlot($slots, 'cover')}</div>
+          <div class={`${cPrefix}-card-cover`}>
+            {renderSlot($slots, 'cover')}
+          </div>
         ) : null}
         {$slots.header || this.title || this.closable ? (
-          <div class="n-card-header">
-            <div class="n-card-header__main" style={this.headerStyle}>
+          <div class={`${cPrefix}-card-header`}>
+            <div
+              class={`${cPrefix}-card-header__main`}
+              style={this.headerStyle}
+            >
               {renderSlot($slots, 'header', {}, () => [this.title])}
             </div>
             {$slots['header-extra'] ? (
-              <div class="n-card-header__extra">
+              <div class={`${cPrefix}-card-header__extra`}>
                 {renderSlot($slots, 'header-extra')}
               </div>
             ) : null}
             {this.closable ? (
               <NBaseClose
-                class="n-card-header__close"
+                clsPrefix={cPrefix}
+                class={`${cPrefix}-card-header__close`}
                 onClick={this.handleCloseClick}
               />
             ) : null}
           </div>
         ) : null}
-        <div class="n-card__content" style={this.contentStyle}>
+        <div class={`${cPrefix}-card__content`} style={this.contentStyle}>
           {$slots}
         </div>
         {$slots.footer ? (
-          <div class="n-card__footer" style={this.footerStyle}>
+          <div class={`${cPrefix}-card__footer`} style={this.footerStyle}>
             {renderSlot($slots, 'footer')}
           </div>
         ) : null}
         {$slots.action ? (
-          <div class="n-card__action">{renderSlot($slots, 'action')}</div>
+          <div class={`${cPrefix}-card__action`}>
+            {renderSlot($slots, 'action')}
+          </div>
         ) : null}
       </div>
     )
