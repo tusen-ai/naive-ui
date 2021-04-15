@@ -1,5 +1,5 @@
 import { TreeNode, TreeMate } from 'treemate'
-import { CSSProperties, VNodeChild } from 'vue'
+import { CSSProperties, InjectionKey, VNodeChild } from 'vue'
 import { EllipsisProps } from '../../ellipsis/src/Ellipsis'
 import { NLocale } from '../../locales'
 import { MergedTheme } from '../../_mixins'
@@ -128,6 +128,7 @@ export type TableColumn =
 export type TableColumns = TableColumn[]
 
 export interface DataTableInjection {
+  cPrefix: string
   mergedTheme: MergedTheme<DataTableTheme>
   scrollX?: string | number
   rows: RowItem[][]
@@ -170,6 +171,10 @@ export interface DataTableInjection {
   ) => void
   deriveActiveLeftFixedColumn: (target: HTMLElement, tableWidth: number) => void
 }
+
+export const dataTableInjectionKey: InjectionKey<DataTableInjection> = Symbol(
+  'dataTable'
+)
 
 export interface MainTableInjection {
   leftActiveFixedColKey: ColumnKey | null

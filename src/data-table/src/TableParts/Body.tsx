@@ -3,7 +3,7 @@ import { pxfy } from 'seemly'
 import { NCheckbox } from '../../../checkbox'
 import { NScrollbar, ScrollbarInst } from '../../../scrollbar'
 import { formatLength } from '../../../_utils'
-import { DataTableInjection, RowKey, TmNode } from '../interface'
+import { dataTableInjectionKey, RowKey, TmNode } from '../interface'
 import { createRowClassName } from '../utils'
 import Cell from './Cell'
 import ExpandTrigger from './ExpandTrigger'
@@ -11,9 +11,8 @@ import ExpandTrigger from './ExpandTrigger'
 export default defineComponent({
   name: 'DataTableBody',
   setup () {
-    const NDataTable = inject<DataTableInjection>(
-      'NDataTable'
-    ) as DataTableInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NDataTable = inject(dataTableInjectionKey)!
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     function handleCheckboxUpdateChecked (
       tmNode: TmNode,
@@ -61,11 +60,11 @@ export default defineComponent({
   },
   render () {
     const { NDataTable, handleScroll } = this
-    const { mergedTheme, scrollX } = NDataTable
+    const { mergedTheme, scrollX, cPrefix } = NDataTable
     return (
       <NScrollbar
         ref="scrollbarInstRef"
-        class="n-data-table-base-table-body"
+        class={`${cPrefix}-data-table-base-table-body`}
         theme={mergedTheme.peers.Scrollbar}
         themeOverrides={mergedTheme.peerOverrides.Scrollbar}
         contentStyle={{
@@ -105,7 +104,7 @@ export default defineComponent({
                 <tr
                   key={rowKey}
                   class={[
-                    'n-data-table-tr',
+                    `${cPrefix}-data-table-tr`,
                     createRowClassName(rowData, rowIndex, rowClassName)
                   ]}
                 >
@@ -161,26 +160,28 @@ export default defineComponent({
                         colspan={mergedColSpan}
                         rowspan={mergedRowSpan}
                         class={[
-                          'n-data-table-td',
+                          `${cPrefix}-data-table-td`,
                           column.className,
                           column.fixed &&
-                            `n-data-table-td--fixed-${column.fixed}`,
+                            `${cPrefix}-data-table-td--fixed-${column.fixed}`,
                           column.align &&
-                            `n-data-table-td--${column.align}-align`,
+                            `${cPrefix}-data-table-td--${column.align}-align`,
                           {
-                            'n-data-table-td--ellipsis':
+                            [`${cPrefix}-data-table-td--ellipsis`]:
                               column.ellipsis === true ||
                               // don't add ellpisis class if tooltip exists
                               (column.ellipsis && !column.ellipsis.tooltip),
-                            'n-data-table-td--shadow-after':
+                            [`${cPrefix}-data-table-td--shadow-after`]:
                               leftActiveFixedColKey === colKey,
-                            'n-data-table-td--shadow-before':
+                            [`${cPrefix}-data-table-td--shadow-before`]:
                               rightActiveFixedColKey === colKey,
-                            'n-data-table-td--selection':
+                            [`${cPrefix}-data-table-td--selection`]:
                               column.type === 'selection',
-                            'n-data-table-td--expand': column.type === 'expand',
-                            'n-data-table-td--last-col': isLastCol,
-                            'n-data-table-td--last-row': isLastRow && !expanded
+                            [`${cPrefix}-data-table-td--expand`]:
+                              column.type === 'expand',
+                            [`${cPrefix}-data-table-td--last-col`]: isLastCol,
+                            [`${cPrefix}-data-table-td--last-row`]:
+                              isLastRow && !expanded
                           }
                         ]}
                       >
@@ -197,6 +198,7 @@ export default defineComponent({
                           !column.expandable ||
                           column.expandable?.(rowData, rowIndex) ? (
                               <ExpandTrigger
+                                clsPrefix={cPrefix}
                                 expanded={expanded}
                                 onClick={() => handleUpdateExpanded(rowKey)}
                               />
@@ -220,14 +222,16 @@ export default defineComponent({
                 }
                 return [
                   row,
-                  <tr class="n-data-table-tr" key={`${rowKey}__expand`}>
+                  <tr
+                    class={`${cPrefix}-data-table-tr`}
+                    key={`${rowKey}__expand`}
+                  >
                     <td
                       class={[
-                        'n-data-table-td',
-                        'n-data-table-td--last-col',
-                        {
-                          'n-data-table-td--last-row': rowIndex + 1 === rowCount
-                        }
+                        `${cPrefix}-data-table-td`,
+                        `${cPrefix}-data-table-td--last-col`,
+                        rowIndex + 1 === rowCount &&
+                          `${cPrefix}-data-table-td--last-row`
                       ]}
                       colspan={colCount}
                     >
@@ -240,13 +244,13 @@ export default defineComponent({
             })
 
             return (
-              <table ref="body" class="n-data-table-table">
+              <table ref="body" class={`${cPrefix}-data-table-table`}>
                 <colgroup>
                   {cols.map((col) => (
                     <col key={col.key} style={col.style}></col>
                   ))}
                 </colgroup>
-                <tbody ref="tbody" class="n-data-table-tbody">
+                <tbody ref="tbody" class={`${cPrefix}-data-table-tbody`}>
                   {hasExpandedRows ? rows.flat() : rows}
                 </tbody>
               </table>

@@ -1,4 +1,5 @@
 export { default as NDataTable } from './src/DataTable'
+export type { DataTableProps } from './src/DataTable'
 export type {
   RenderFilter as DataTableRenderFilter,
   RenderSorter as DataTableRenderSorter,

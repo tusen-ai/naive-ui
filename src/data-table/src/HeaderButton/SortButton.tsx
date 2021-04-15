@@ -2,7 +2,7 @@ import { defineComponent, PropType, h, computed, inject } from 'vue'
 import { ArrowDownIcon } from '../../../_internal/icons'
 import { NBaseIcon } from '../../../_internal'
 import RenderSorter from './RenderSorter'
-import { DataTableInjection, TableBaseColumn } from '../interface'
+import { dataTableInjectionKey, TableBaseColumn } from '../interface'
 import { useConfig } from '../../../_mixins'
 
 export default defineComponent({
@@ -15,9 +15,8 @@ export default defineComponent({
   },
   setup (props) {
     const { NConfigProvider } = useConfig()
-    const NDataTable = inject<DataTableInjection>(
-      'NDataTable'
-    ) as DataTableInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NDataTable = inject(dataTableInjectionKey)!
     const sortStateRef = computed(() => {
       return NDataTable.mergedSortState
     })
@@ -38,26 +37,34 @@ export default defineComponent({
       )
     })
     return {
+      NDataTable,
       active: activeRef,
       mergedSortOrder: mergedSortOrderRef,
       mergedRenderSorter: mergedRenderSorterRef
     }
   },
   render () {
-    const { mergedRenderSorter, mergedSortOrder } = this
+    const {
+      mergedRenderSorter,
+      mergedSortOrder,
+      NDataTable: { cPrefix }
+    } = this
     return mergedRenderSorter ? (
       <RenderSorter render={mergedRenderSorter} order={mergedSortOrder} />
     ) : (
       <span
         class={[
-          'n-data-table-sorter',
+          `${cPrefix}-data-table-sorter`,
           {
-            'n-data-table-sorter--asc': mergedSortOrder === 'ascend',
-            'n-data-table-sorter--desc': mergedSortOrder === 'descend'
+            [`${cPrefix}-data-table-sorter--asc`]: mergedSortOrder === 'ascend',
+            [`${cPrefix}-data-table-sorter--desc`]:
+              mergedSortOrder === 'descend'
           }
         ]}
       >
-        <NBaseIcon>{{ default: () => <ArrowDownIcon /> }}</NBaseIcon>
+        <NBaseIcon clsPrefix={cPrefix}>
+          {{ default: () => <ArrowDownIcon /> }}
+        </NBaseIcon>
       </span>
     )
   }

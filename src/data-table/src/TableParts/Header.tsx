@@ -12,11 +12,11 @@ import {
   getColKey
 } from '../utils'
 import {
-  DataTableInjection,
   TableExpandColumn,
   TableSelectionColumn,
   TableColumnGroup,
-  TableBaseColumn
+  TableBaseColumn,
+  dataTableInjectionKey
 } from '../interface'
 
 function renderTitle (
@@ -33,9 +33,8 @@ export default defineComponent({
     onScroll: Function as PropType<(e: Event) => void>
   },
   setup () {
-    const NDataTable = inject<DataTableInjection>(
-      'NDataTable'
-    ) as DataTableInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NDataTable = inject(dataTableInjectionKey)!
     function handleCheckboxUpdateChecked (column: TableSelectionColumn): void {
       if (NDataTable.someRowsChecked || NDataTable.allRowsChecked) {
         NDataTable.doUncheckAll(column)
@@ -65,6 +64,7 @@ export default defineComponent({
   render () {
     const {
       NDataTable: {
+        cPrefix,
         scrollX,
         fixedColumnLeftMap,
         fixedColumnRightMap,
@@ -84,12 +84,12 @@ export default defineComponent({
     return (
       <div
         style={headerStyle}
-        class="n-data-table-base-table-header"
+        class={`${cPrefix}-data-table-base-table-header`}
         onScroll={this.onScroll}
       >
         <table
           ref="body"
-          class="n-data-table-table"
+          class={`${cPrefix}-data-table-table`}
           style={{ minWidth: formatLength(scrollX) }}
         >
           <colgroup>
@@ -97,10 +97,10 @@ export default defineComponent({
               <col key={col.key} style={col.style} />
             ))}
           </colgroup>
-          <thead class="n-data-table-thead">
+          <thead class={`${cPrefix}-data-table-thead`}>
             {rows.map((row) => {
               return (
-                <tr class="n-data-table-tr">
+                <tr class={`${cPrefix}-data-table-tr`}>
                   {row.map(({ column, colSpan, rowSpan, isLast }) => {
                     const key = getColKey(column)
                     return (
@@ -114,23 +114,23 @@ export default defineComponent({
                         colspan={colSpan}
                         rowspan={rowSpan}
                         class={[
-                          'n-data-table-th',
+                          `${cPrefix}-data-table-th`,
                           column.fixed &&
-                            `n-data-table-th--fixed-${column.fixed}`,
+                            `${cPrefix}-data-table-th--fixed-${column.fixed}`,
                           {
-                            'n-data-table-th--filterable': isColumnFilterable(
+                            [`${cPrefix}-data-table-th--filterable`]: isColumnFilterable(
                               column
                             ),
-                            'n-data-table-th--sortable': isColumnSortable(
+                            [`${cPrefix}-data-table-th--sortable`]: isColumnSortable(
                               column
                             ),
-                            'n-data-table-th--shadow-after':
+                            [`${cPrefix}-data-table-th--shadow-after`]:
                               leftActiveFixedColKey === key,
-                            'n-data-table-th--shadow-before':
+                            [`${cPrefix}-data-table-th--shadow-before`]:
                               rightActiveFixedColKey === key,
-                            'n-data-table-th--selection':
+                            [`${cPrefix}-data-table-th--selection`]:
                               column.type === 'selection',
-                            'n-data-table-th--last': isLast
+                            [`${cPrefix}-data-table-th--last`]: isLast
                           },
                           column.className
                         ]}
@@ -156,7 +156,7 @@ export default defineComponent({
                           />
                         ) : column.ellipsis === true ||
                           (column.ellipsis && !column.ellipsis.tooltip) ? (
-                            <div class="n-data-table-th__ellipsis">
+                            <div class={`${cPrefix}-data-table-th__ellipsis`}>
                               {renderTitle(column)}
                             </div>
                           ) // eslint-disable-next-line @typescript-eslint/prefer-optional-chain

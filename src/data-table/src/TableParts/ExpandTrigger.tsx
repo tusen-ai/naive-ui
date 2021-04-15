@@ -5,6 +5,10 @@ import { NBaseIcon } from '../../../_internal'
 export default defineComponent({
   name: 'DataTableExpandTrigger',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     expanded: Boolean,
     onClick: {
       type: Function as PropType<() => void>,
@@ -17,7 +21,11 @@ export default defineComponent({
       fontSize: '16px'
     }
     return (
-      <NBaseIcon onClick={this.onClick} style={style}>
+      <NBaseIcon
+        clsPrefix={this.clsPrefix}
+        onClick={this.onClick}
+        style={style}
+      >
         {{
           default: () => {
             return (

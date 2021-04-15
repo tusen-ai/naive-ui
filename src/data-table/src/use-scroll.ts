@@ -1,13 +1,13 @@
 import { beforeNextFrame } from 'seemly'
 import { computed, ComputedRef, watch, Ref, ref } from 'vue'
 import { formatLength, warn } from '../../_utils'
-import { DataTableProps } from './DataTable'
+import { DataTableSetupProps } from './DataTable'
 import type { ColumnKey, MainTableRef } from './interface'
 import { getColWidth, getColKey } from './utils'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function useScroll (
-  props: DataTableProps,
+  props: DataTableSetupProps,
   data: {
     mainTableInstRef: Ref<MainTableRef | null>
     mergedCurrentPageRef: ComputedRef<number>

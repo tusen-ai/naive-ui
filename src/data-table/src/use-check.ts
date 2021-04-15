@@ -1,13 +1,13 @@
 import { computed, ComputedRef, ref, toRef } from 'vue'
 import { useMergedState } from 'vooks'
-import { DataTableProps } from './DataTable'
+import { DataTableSetupProps } from './DataTable'
 import { RowKey, TableSelectionColumn, RowData, TmNode } from './interface'
 import { call } from '../../_utils'
 import { TreeMate } from 'treemate'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function useCheck (
-  props: DataTableProps,
+  props: DataTableSetupProps,
   data: {
     paginatedDataRef: ComputedRef<TmNode[]>
     treeMateRef: ComputedRef<TreeMate<RowData>>

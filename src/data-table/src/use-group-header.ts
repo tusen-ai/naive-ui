@@ -1,5 +1,5 @@
 import { CSSProperties, ComputedRef, computed } from 'vue'
-import { DataTableProps } from './DataTable'
+import { DataTableSetupProps } from './DataTable'
 import type {
   TableExpandColumn,
   TableSelectionColumn,
@@ -117,7 +117,7 @@ function getRowsAndCols (
 }
 
 export function useGroupHeader (
-  props: DataTableProps
+  props: DataTableSetupProps
 ): {
     rows: ComputedRef<RowItem[][]>
     cols: ComputedRef<ColItem[]>

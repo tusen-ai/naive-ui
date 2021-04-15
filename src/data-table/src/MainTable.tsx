@@ -4,7 +4,7 @@ import { formatLength } from '../../_utils'
 import TableHeader from './TableParts/Header'
 import TableBody from './TableParts/Body'
 import {
-  DataTableInjection,
+  dataTableInjectionKey,
   MainTableBodyRef,
   MainTableHeaderRef,
   MainTableRef
@@ -20,9 +20,8 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const NDataTable = inject<DataTableInjection>(
-      'NDataTable'
-    ) as DataTableInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NDataTable = inject(dataTableInjectionKey)!
 
     const {
       deriveActiveLeftFixedColumn,
@@ -92,6 +91,7 @@ export default defineComponent({
       getHeaderElement
     }
     return {
+      NDataTable,
       headerInstRef,
       bodyInstRef,
       bodyStyle: bodyStyleRef,
@@ -102,14 +102,15 @@ export default defineComponent({
     }
   },
   render () {
+    const {
+      NDataTable: { cPrefix }
+    } = this
     return (
       <div
         class={[
-          'n-data-table-base-table',
-          {
-            'n-data-table-base-table--transition-disabled': !this
-              .fixedStateInitialized
-          }
+          `${cPrefix}-data-table-base-table`,
+          !this.fixedStateInitialized &&
+            `${cPrefix}-data-table-base-table--transition-disabled`
         ]}
       >
         <VResizeObserver onResize={this.handleHeaderResize}>

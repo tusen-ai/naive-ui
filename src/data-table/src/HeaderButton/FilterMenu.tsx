@@ -5,7 +5,7 @@ import { NButton } from '../../../button'
 import { NScrollbar } from '../../../scrollbar'
 import { shouldUseArrayInSingleMode } from '../utils'
 import {
-  DataTableInjection,
+  dataTableInjectionKey,
   FilterOption,
   FilterOptionValue,
   OnFilterMenuChange,
@@ -52,9 +52,8 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const NDataTable = inject<DataTableInjection>(
-      'NDataTable'
-    ) as DataTableInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NDataTable = inject(dataTableInjectionKey)!
     // to be compared with changed value
     // const initialValueRef = ref(props.value)
     const temporalValueRef = ref(props.value)
@@ -120,9 +119,9 @@ export default defineComponent({
   },
   render () {
     const { NDataTable } = this
-    const { mergedTheme, locale } = NDataTable
+    const { mergedTheme, locale, cPrefix } = NDataTable
     return (
-      <div class="n-data-table-filter-menu">
+      <div class={`${cPrefix}-data-table-filter-menu`}>
         <NScrollbar>
           {{
             default: () => {
@@ -130,7 +129,7 @@ export default defineComponent({
               return this.multiple ? (
                 <NCheckboxGroup
                   value={checkboxGroupValue}
-                  class="n-data-table-filter-menu__group"
+                  class={`${cPrefix}-data-table-filter-menu__group`}
                   onUpdateValue={handleChange}
                 >
                   {{
@@ -152,7 +151,7 @@ export default defineComponent({
               ) : (
                 <NRadioGroup
                   name={this.radioGroupName}
-                  class="n-data-table-filter-menu__group"
+                  class={`${cPrefix}-data-table-filter-menu__group`}
                   value={this.radioGroupValue}
                   onUpdateValue={this.handleChange}
                 >
@@ -174,7 +173,7 @@ export default defineComponent({
             }
           }}
         </NScrollbar>
-        <div class="n-data-table-filter-menu__action">
+        <div class={`${cPrefix}-data-table-filter-menu__action`}>
           <NButton
             size="tiny"
             theme={mergedTheme.peers.Button}

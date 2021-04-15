@@ -6,7 +6,7 @@ import RenderFilter from './RenderFilter'
 import NDataTableFilterMenu from './FilterMenu'
 import {
   ColumnKey,
-  DataTableInjection,
+  dataTableInjectionKey,
   FilterOption,
   FilterOptionValue,
   FilterState,
@@ -38,9 +38,8 @@ export default defineComponent({
   },
   setup (props) {
     const { NConfigProvider } = useConfig()
-    const NDataTable = inject<DataTableInjection>(
-      'NDataTable'
-    ) as DataTableInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NDataTable = inject(dataTableInjectionKey)!
     const showPopoverRef = ref(false)
     const filterStateRef = computed(() => {
       return NDataTable.mergedFilterState
@@ -100,7 +99,7 @@ export default defineComponent({
   },
   render () {
     const { NDataTable } = this
-    const { mergedTheme } = NDataTable
+    const { mergedTheme, cPrefix } = NDataTable
     return (
       <NPopover
         show={this.showPopover}
@@ -123,14 +122,16 @@ export default defineComponent({
               <div
                 data-data-table-filter
                 class={[
-                  'n-data-table-filter',
+                  `${cPrefix}-data-table-filter`,
                   {
-                    'n-data-table-filter--active': this.active,
-                    'n-data-table-filter--show': this.showPopover
+                    [`${cPrefix}-data-table-filter--active`]: this.active,
+                    [`${cPrefix}-data-table-filter--show`]: this.showPopover
                   }
                 ]}
               >
-                <NBaseIcon>{{ default: () => <FilterIcon /> }}</NBaseIcon>
+                <NBaseIcon clsPrefix={cPrefix}>
+                  {{ default: () => <FilterIcon /> }}
+                </NBaseIcon>
               </div>
             ),
           default: () => {

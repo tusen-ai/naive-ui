@@ -1,7 +1,7 @@
 import { computed, ref, ComputedRef } from 'vue'
 import { useMergedState } from 'vooks'
 import { createTreeMate } from 'treemate'
-import type { DataTableProps } from './DataTable'
+import type { DataTableSetupProps } from './DataTable'
 import type {
   ColumnKey,
   Filter,
@@ -23,7 +23,7 @@ import { call, warn } from '../../_utils'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function useTableData (
-  props: DataTableProps,
+  props: DataTableSetupProps,
   {
     dataRelatedCols
   }: {
