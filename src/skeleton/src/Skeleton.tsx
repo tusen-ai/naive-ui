@@ -7,47 +7,55 @@ import {
   Fragment,
   mergeProps
 } from 'vue'
-import type { ThemeProps } from '../../_mixins'
-import { useTheme } from '../../_mixins'
+import { ThemeProps, useConfig, useTheme } from '../../_mixins'
+
 import { createKey, useHoudini } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { SkeletonTheme } from '../styles'
 import { skeletonLight } from '../styles'
 import style from './styles/index.cssr'
 
+const skeletonProps = {
+  ...(useTheme.props as ThemeProps<SkeletonTheme>),
+  text: Boolean,
+  round: Boolean,
+  circle: Boolean,
+  height: [String, Number] as PropType<string | number>,
+  width: [String, Number] as PropType<string | number>,
+  size: String as PropType<'small' | 'medium' | 'large'>,
+  repeat: {
+    type: Number,
+    default: 1
+  },
+  animated: {
+    type: Boolean,
+    default: true
+  },
+  sharp: {
+    type: Boolean,
+    default: true
+  }
+} as const
+
+export type SkeletonProps = ExtractPublicPropTypes<typeof skeletonProps>
+
 export default defineComponent({
   name: 'Skeleton',
   inheritAttrs: false,
-  props: {
-    ...(useTheme.props as ThemeProps<SkeletonTheme>),
-    text: Boolean,
-    round: Boolean,
-    circle: Boolean,
-    height: [String, Number],
-    width: [String, Number],
-    size: String as PropType<'small' | 'medium' | 'large'>,
-    repeat: {
-      type: Number,
-      default: 1
-    },
-    animated: {
-      type: Boolean,
-      default: true
-    },
-    sharp: {
-      type: Boolean,
-      default: true
-    }
-  },
+  props: skeletonProps,
   setup (props) {
     useHoudini()
+    const { mergedClsPrefix } = useConfig(props)
     const themeRef = useTheme(
       'Skeleton',
       'Skeleton',
       style,
       skeletonLight,
-      props
+      props,
+      mergedClsPrefix
     )
     return {
+      cPrefix: mergedClsPrefix,
       style: computed(() => {
         const theme = themeRef.value
         const {
@@ -96,7 +104,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { repeat, style, $attrs } = this
+    const { repeat, style, cPrefix, $attrs } = this
     // BUG:
     // Chrome devtools can't read the element
     // Maybe it's a bug of chrome
@@ -104,7 +112,7 @@ export default defineComponent({
       'div',
       mergeProps(
         {
-          class: 'n-skeleton',
+          class: `${cPrefix}-skeleton`,
           style: style
         },
         $attrs
