@@ -10,45 +10,57 @@ import {
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { NBaseIcon } from '../../_internal'
-import { useTheme, useFormItem } from '../../_mixins'
+import { useTheme, useFormItem, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call } from '../../_utils'
-import type { MaybeArray } from '../../_utils'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { rateLight } from '../styles'
 import type { RateTheme } from '../styles'
 import style from './styles/index.cssr'
 import StarIcon from './StarIcon'
 
+const rateProps = {
+  ...(useTheme.props as ThemeProps<RateTheme>),
+  count: {
+    type: Number,
+    default: 5
+  },
+  value: {
+    type: Number,
+    default: undefined
+  },
+  defaultValue: {
+    type: Number,
+    default: 0
+  },
+  size: {
+    type: String as PropType<'small' | 'medium' | 'large'>,
+    default: 'medium'
+  },
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:value': [Function, Array] as PropType<
+  MaybeArray<(value: number) => void>
+  >,
+  onUpdateValue: [Function, Array] as PropType<
+  MaybeArray<(value: number) => void>
+  >
+} as const
+
+export type RateProps = ExtractPublicPropTypes<typeof rateProps>
+
 export default defineComponent({
   name: 'Rate',
-  props: {
-    ...(useTheme.props as ThemeProps<RateTheme>),
-    count: {
-      type: Number,
-      default: 5
-    },
-    value: {
-      type: Number,
-      default: undefined
-    },
-    defaultValue: {
-      type: Number,
-      default: 0
-    },
-    size: {
-      type: String as PropType<'small' | 'medium' | 'large'>,
-      default: 'medium'
-    },
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': [Function, Array] as PropType<
-    MaybeArray<(value: number) => void>
-    >,
-    onUpdateValue: [Function, Array] as PropType<
-    MaybeArray<(value: number) => void>
-    >
-  },
+  props: rateProps,
   setup (props) {
-    const themeRef = useTheme('Rate', 'Rate', style, rateLight, props)
+    const { mergedClsPrefix } = useConfig(props)
+    const themeRef = useTheme(
+      'Rate',
+      'Rate',
+      style,
+      rateLight,
+      props,
+      mergedClsPrefix
+    )
     const controlledValueRef = toRef(props, 'value')
     const uncontrolledValueRef = ref(props.defaultValue)
     const hoverIndexRef = ref<number | null>(null)
@@ -76,6 +88,7 @@ export default defineComponent({
       doUpdateValue(index + 1)
     }
     return {
+      cPrefix: mergedClsPrefix,
       mergedValue: useMergedState(controlledValueRef, uncontrolledValueRef),
       hoverIndex: hoverIndexRef,
       handleMouseEnter,
@@ -96,10 +109,10 @@ export default defineComponent({
     }
   },
   render () {
-    const { hoverIndex, mergedValue } = this
+    const { hoverIndex, mergedValue, cPrefix } = this
     return (
       <div
-        class="n-rate"
+        class={`${cPrefix}-rate`}
         style={this.cssVars as CSSProperties}
         onMouseleave={this.handleMouseLeave}
       >
@@ -107,9 +120,9 @@ export default defineComponent({
           <div
             key={index}
             class={[
-              'n-rate__item',
+              `${cPrefix}-rate__item`,
               {
-                'n-rate__item--active':
+                [`${cPrefix}-rate__item--active`]:
                   hoverIndex !== null
                     ? index <= hoverIndex
                     : index < mergedValue
@@ -118,7 +131,9 @@ export default defineComponent({
             onClick={() => this.handleClick(index)}
             onMouseenter={() => this.handleMouseEnter(index)}
           >
-            <NBaseIcon>{{ default: () => StarIcon }}</NBaseIcon>
+            <NBaseIcon clsPrefix={cPrefix}>
+              {{ default: () => StarIcon }}
+            </NBaseIcon>
           </div>
         ))}
       </div>
