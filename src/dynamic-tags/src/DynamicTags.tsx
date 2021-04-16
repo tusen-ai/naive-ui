@@ -15,9 +15,10 @@ import { NSpace } from '../../space'
 import { InputInst, NInput } from '../../input'
 import { NTag } from '../../tag'
 import { NBaseIcon } from '../../_internal'
-import { useTheme, useFormItem, useLocale } from '../../_mixins'
+import { useTheme, useFormItem, useLocale, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn, call, MaybeArray, smallerSize } from '../../_utils'
+import { warn, call, smallerSize } from '../../_utils'
+import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { dynamicTagsLight } from '../styles'
 import type { DynamicTagsTheme } from '../styles'
 import style from './styles/index.cssr'
@@ -25,43 +26,46 @@ import style from './styles/index.cssr'
 import type { OnUpdateValue } from './interface'
 import { useMergedState } from 'vooks'
 
+const dynamicTagsProps = {
+  ...(useTheme.props as ThemeProps<DynamicTagsTheme>),
+  ...commonProps,
+  closable: {
+    type: Boolean,
+    default: true
+  },
+  defaultValue: {
+    type: Array as PropType<string[]>,
+    default: () => []
+  },
+  value: Array as PropType<string[]>,
+  inputStyle: [String, Object] as PropType<string | CSSProperties>,
+  tagStyle: [String, Object] as PropType<string | CSSProperties>,
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  // deprecated
+  onChange: {
+    type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
+    validator: () => {
+      if (__DEV__) {
+        warn(
+          'dynamic-tags',
+          '`on-change` is deprecated, please use `on-update:value` instead.'
+        )
+      }
+      return true
+    },
+    default: undefined
+  }
+}
+
+export type DynamicTagsProps = ExtractPublicPropTypes<typeof dynamicTagsProps>
+
 export default defineComponent({
   name: 'DynamicTags',
-  props: {
-    ...(useTheme.props as ThemeProps<DynamicTagsTheme>),
-    ...commonProps,
-    closable: {
-      type: Boolean,
-      default: true
-    },
-    defaultValue: {
-      type: Array as PropType<string[]>,
-      default: () => []
-    },
-    value: Array as PropType<string[]>,
-    inputStyle: [String, Object] as PropType<string | CSSProperties>,
-    tagStyle: [String, Object] as PropType<string | CSSProperties>,
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-    onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-    // deprecated
-    onChange: {
-      type: [Function, Array] as PropType<
-      MaybeArray<OnUpdateValue> | undefined
-      >,
-      validator: () => {
-        if (__DEV__) {
-          warn(
-            'dynamic-tags',
-            '`on-change` is deprecated, please use `on-update:value` instead.'
-          )
-        }
-        return true
-      },
-      default: undefined
-    }
-  },
+  props: dynamicTagsProps,
   setup (props) {
+    const { mergedClsPrefix } = useConfig(props)
     const { locale } = useLocale('DynamicTags')
     const formItem = useFormItem(props)
     const inputValueRef = ref('')
@@ -73,7 +77,8 @@ export default defineComponent({
       'DynamicTags',
       style,
       dynamicTagsLight,
-      props
+      props,
+      mergedClsPrefix
     )
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
@@ -134,6 +139,7 @@ export default defineComponent({
       })
     }
     return {
+      cPrefix: mergedClsPrefix,
       inputInstRef,
       localizedAdd: localizedAddRef,
       inputSize: inputSizeRef,
@@ -157,10 +163,10 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedTheme, cssVars } = this
+    const { mergedTheme, cssVars, cPrefix } = this
     return (
       <NSpace
-        class="n-dynamic-tags"
+        class={`${cPrefix}-dynamic-tags`}
         size="small"
         style={cssVars as CSSProperties}
         theme={mergedTheme.peers.Space}
@@ -232,7 +238,9 @@ export default defineComponent({
                   >
                     {{
                       icon: () => (
-                        <NBaseIcon>{{ default: () => <AddIcon /> }}</NBaseIcon>
+                        <NBaseIcon clsPrefix={cPrefix}>
+                          {{ default: () => <AddIcon /> }}
+                        </NBaseIcon>
                       )
                     }}
                   </NButton>
