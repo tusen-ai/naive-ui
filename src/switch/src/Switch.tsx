@@ -9,62 +9,75 @@ import {
 } from 'vue'
 import { depx, pxfy } from 'seemly'
 import { useMergedState } from 'vooks'
-import { useFormItem, useTheme } from '../../_mixins'
+import { useConfig, useFormItem, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, warn, createKey, MaybeArray } from '../../_utils'
+import { call, warn, createKey } from '../../_utils'
+import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import style from './styles/index.cssr'
 import { switchLight } from '../styles'
 import type { SwitchTheme } from '../styles'
 
+const switchProps = {
+  ...(useTheme.props as ThemeProps<SwitchTheme>),
+  size: {
+    type: String as PropType<'small' | 'medium' | 'large'>,
+    default: 'medium'
+  },
+  value: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
+  defaultValue: {
+    type: Boolean,
+    default: false
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  round: {
+    type: Boolean,
+    default: true
+  },
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:value': [Function, Array] as PropType<
+  MaybeArray<(value: boolean) => void>
+  >,
+  onUpdateValue: [Function, Array] as PropType<
+  MaybeArray<(value: boolean) => void>
+  >,
+  onChange: {
+    type: [Function, Array] as PropType<
+    MaybeArray<(value: boolean) => void> | undefined
+    >,
+    validator: () => {
+      if (__DEV__) {
+        warn(
+          'switch',
+          '`on-change` is deprecated, please use `on-update:value` instead.'
+        )
+      }
+      return true
+    },
+    default: undefined
+  }
+} as const
+
+export type SwitchProps = ExtractPublicPropTypes<typeof switchProps>
+
 export default defineComponent({
   name: 'Switch',
-  props: {
-    ...(useTheme.props as ThemeProps<SwitchTheme>),
-    size: {
-      type: String as PropType<'small' | 'medium' | 'large'>,
-      default: 'medium'
-    },
-    value: {
-      type: Boolean as PropType<boolean | undefined>,
-      default: undefined
-    },
-    defaultValue: {
-      type: Boolean,
-      default: false
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    round: {
-      type: Boolean,
-      default: true
-    },
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': [Function, Array] as PropType<
-    MaybeArray<(value: boolean) => void>
-    >,
-    onUpdateValue: [Function, Array] as PropType<
-    MaybeArray<(value: boolean) => void>
-    >,
-    onChange: {
-      type: [Function, Array] as PropType<
-      MaybeArray<(value: boolean) => void> | undefined
-      >,
-      validator: () => {
-        if (__DEV__) {
-          warn(
-            'switch',
-            '`on-change` is deprecated, please use `on-update:value` instead.'
-          )
-        }
-        return true
-      },
-      default: undefined
-    }
-  },
+  props: switchProps,
   setup (props) {
-    const themeRef = useTheme('Switch', 'Switch', style, switchLight, props)
+    const { mergedClsPrefix } = useConfig(props)
+    const themeRef = useTheme(
+      'Switch',
+      'Switch',
+      style,
+      switchLight,
+      props,
+      mergedClsPrefix
+    )
     const formItem = useFormItem(props)
     const { mergedSize: mergedSizeRef } = formItem
     const uncontrolledValueRef = ref(props.defaultValue)
@@ -110,6 +123,7 @@ export default defineComponent({
       handleClick,
       handleBlur,
       handleFocus,
+      cPrefix: mergedClsPrefix,
       mergedValue: mergedValueRef,
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
@@ -158,14 +172,15 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     return (
       <div
         class={[
-          'n-switch',
+          `${cPrefix}-switch`,
           {
-            'n-switch--active': this.mergedValue,
-            'n-switch--disabled': this.disabled,
-            'n-switch--round': this.round
+            [`${cPrefix}-switch--active`]: this.mergedValue,
+            [`${cPrefix}-switch--disabled`]: this.disabled,
+            [`${cPrefix}-switch--round`]: this.round
           }
         ]}
         tabindex={!this.disabled ? 0 : undefined}
@@ -174,7 +189,7 @@ export default defineComponent({
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
       >
-        <div class="n-switch__rail" />
+        <div class={`${cPrefix}-switch__rail`} />
       </div>
     )
   }
