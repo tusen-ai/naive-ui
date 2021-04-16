@@ -6,38 +6,46 @@ import {
   h,
   renderSlot
 } from 'vue'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { statisticLight } from '../styles'
 import type { StatisticTheme } from '../styles'
 import style from './styles/index.cssr'
 
+const statisticProps = {
+  ...(useTheme.props as ThemeProps<StatisticTheme>),
+  label: {
+    type: String,
+    default: undefined
+  },
+  value: {
+    type: [String, Number],
+    default: undefined
+  },
+  valueStyle: {
+    type: [Object, String] as PropType<undefined | string | CSSProperties>,
+    default: undefined
+  }
+}
+
+export type StatisticProps = ExtractPublicPropTypes<typeof statisticProps>
+
 export default defineComponent({
   name: 'Statistic',
-  props: {
-    ...(useTheme.props as ThemeProps<StatisticTheme>),
-    label: {
-      type: String,
-      default: undefined
-    },
-    value: {
-      type: [String, Number],
-      default: undefined
-    },
-    valueStyle: {
-      type: [Object, String] as PropType<undefined | string | CSSProperties>,
-      default: undefined
-    }
-  },
+  props: statisticProps,
   setup (props) {
+    const { mergedClsPrefix } = useConfig(props)
     const themeRef = useTheme(
       'Statistic',
       'Statistic',
       style,
       statisticLight,
-      props
+      props,
+      mergedClsPrefix
     )
     return {
+      cPrefix: mergedClsPrefix,
       cssVars: computed(() => {
         const {
           self: {
@@ -65,23 +73,27 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots } = this
+    const { $slots, cPrefix } = this
     return (
-      <div class="n-statistic" style={this.cssVars as CSSProperties}>
-        <div class="n-statistic__label">{this.label || $slots.label?.()}</div>
-        <div class="n-statistic-value">
+      <div class={`${cPrefix}-statistic`} style={this.cssVars as CSSProperties}>
+        <div class={`${cPrefix}-statistic__label`}>
+          {this.label || $slots.label?.()}
+        </div>
+        <div class={`${cPrefix}-statistic-value`}>
           {$slots.prefix ? (
-            <span class="n-statistic-value__prefix">
+            <span class={`${cPrefix}-statistic-value__prefix`}>
               {renderSlot($slots, 'prefix')}
             </span>
           ) : null}
           {this.value !== undefined ? (
-            <span class="n-statistic-value__content">{this.value}</span>
+            <span class={`${cPrefix}-statistic-value__content`}>
+              {this.value}
+            </span>
           ) : (
-            <span class="n-statistic-value__content">{$slots}</span>
+            <span class={`${cPrefix}-statistic-value__content`}>{$slots}</span>
           )}
           {$slots.suffix ? (
-            <span class="n-statistic-value__suffix">
+            <span class={`${cPrefix}-statistic-value__suffix`}>
               {renderSlot($slots, 'suffix')}
             </span>
           ) : null}
