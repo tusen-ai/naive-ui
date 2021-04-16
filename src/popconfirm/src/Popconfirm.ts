@@ -1,10 +1,6 @@
 import { h, ref, defineComponent, provide, PropType } from 'vue'
-import {
-  NPopover,
-  popoverBaseProps,
-  PopoverInst,
-  PopoverTrigger
-} from '../../popover'
+import { NPopover, PopoverInst, PopoverTrigger } from '../../popover'
+import { popoverBaseProps } from '../../popover/src/Popover'
 import { omit, keep, call } from '../../_utils'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'

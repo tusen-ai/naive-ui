@@ -13,9 +13,10 @@ import {
 } from 'vue'
 import { createTreeMate, Key, TreeMateOptions, TreeNode } from 'treemate'
 import { useMergedState, useKeyboard, useMemo } from 'vooks'
+import { popoverBaseProps } from '../../popover/src/Popover'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { NPopover, popoverBaseProps } from '../../popover'
+import { NPopover } from '../../popover'
 import {
   keep,
   call,

@@ -1,6 +1,7 @@
 // Tooltip: popover wearing waistcoat
 import { h, defineComponent, ref, computed } from 'vue'
-import { NPopover, popoverBaseProps } from '../../popover'
+import { NPopover } from '../../popover'
+import { popoverBaseProps } from '../../popover/src/Popover'
 import type { PopoverInst } from '../../popover'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'

@@ -1,5 +1,6 @@
 import { h, ref, provide, defineComponent, PropType } from 'vue'
-import { NPopover, popoverBaseProps } from '../../popover'
+import { NPopover } from '../../popover'
+import { popoverBaseProps } from '../../popover/src/Popover'
 import type { PopoverInst, PopoverTrigger } from '../../popover'
 import NPopselectPanel, { panelPropKeys, panelProps } from './PopselectPanel'
 import { omit, keep } from '../../_utils'
