@@ -4,30 +4,56 @@ import {
   h,
   renderSlot,
   PropType,
-  CSSProperties
+  CSSProperties,
+  Ref,
+  provide,
+  InjectionKey
 } from 'vue'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { listLight } from '../styles'
 import type { ListTheme } from '../styles'
 import style from './styles/index.cssr'
 
+const listProps = {
+  ...(useTheme.props as ThemeProps<ListTheme>),
+  size: {
+    type: String as PropType<'small' | 'medium' | 'large'>,
+    default: 'medium'
+  },
+  bordered: {
+    type: Boolean,
+    default: false
+  }
+}
+
+export type ListProps = ExtractPublicPropTypes<typeof listProps>
+
+interface ListInjection {
+  mergedClsPrefixRef: Ref<string>
+}
+
+export const listInjectionKey: InjectionKey<ListInjection> = Symbol('list')
+
 export default defineComponent({
   name: 'List',
-  props: {
-    ...(useTheme.props as ThemeProps<ListTheme>),
-    size: {
-      type: String as PropType<'small' | 'medium' | 'large'>,
-      default: 'medium'
-    },
-    bordered: {
-      type: Boolean,
-      default: false
-    }
-  },
+  props: listProps,
   setup (props) {
-    const themeRef = useTheme('List', 'List', style, listLight, props)
+    const { mergedClsPrefix } = useConfig(props)
+    const themeRef = useTheme(
+      'List',
+      'List',
+      style,
+      listLight,
+      props,
+      mergedClsPrefix
+    )
+    provide(listInjectionKey, {
+      mergedClsPrefixRef: mergedClsPrefix
+    })
     return {
+      cPrefix: mergedClsPrefix,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
@@ -59,23 +85,23 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots } = this
+    const { $slots, cPrefix } = this
     return (
       <ul
         class={[
-          'n-list',
-          {
-            'n-list--bordered': this.bordered
-          }
+          `${cPrefix}-list`,
+          this.bordered && `${cPrefix}-list--bordered`
         ]}
         style={this.cssVars as CSSProperties}
       >
         {$slots.header ? (
-          <div class="n-list__header">{renderSlot($slots, 'header')}</div>
+          <div class={`${cPrefix}-list__header`}>
+            {renderSlot($slots, 'header')}
+          </div>
         ) : null}
         {renderSlot($slots, 'default')}
         {$slots.footer ? (
-          <div v-if="$slots.footer" class="n-list__footer">
+          <div class={`${cPrefix}-list__footer`}>
             {renderSlot($slots, 'footer')}
           </div>
         ) : null}
