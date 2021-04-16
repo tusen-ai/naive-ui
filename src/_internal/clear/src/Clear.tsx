@@ -8,6 +8,10 @@ import style from './styles/index.cssr'
 export default defineComponent({
   name: 'BaseClear',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     show: {
       type: Boolean,
       default: false
@@ -25,15 +29,17 @@ export default defineComponent({
     }
   },
   render () {
+    const { clsPrefix } = this
     return (
-      <div class="n-base-clear">
+      <div class={`${clsPrefix}-base-clear`}>
         <NIconSwitchTransition>
           {{
             default: () => {
               return this.show ? (
                 <NBaseIcon
+                  clsPrefix={clsPrefix}
                   key="dismiss"
-                  class="n-base-clear__clear"
+                  class={`${clsPrefix}-base-clear__clear`}
                   onClick={this.onClear}
                   onMousedown={this.handleMouseDown}
                 >
@@ -42,7 +48,7 @@ export default defineComponent({
                   }}
                 </NBaseIcon>
               ) : (
-                <div key="icon" class="n-base-clear__placeholder">
+                <div key="icon" class={`${clsPrefix}-base-clear__placeholder`}>
                   {this.$slots}
                 </div>
               )

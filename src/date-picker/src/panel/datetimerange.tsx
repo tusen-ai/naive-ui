@@ -18,23 +18,25 @@ export default defineComponent({
     return useDualCalendar(props, 'datetimerange')
   },
   render () {
+    const { NDatePicker } = this
+    const { cPrefix } = NDatePicker
     return (
       <div
         ref="selfRef"
         tabindex={0}
-        class="n-date-panel n-date-panel--datetimerange"
+        class={`${cPrefix}-date-panel ${cPrefix}-date-panel--datetimerange`}
         onClick={this.resetSelectingStatus}
         onKeydown={this.handlePanelKeyDown}
         onFocus={this.handlePanelFocus}
       >
-        <div class="n-date-panel-header">
+        <div class={`${cPrefix}-date-panel-header`}>
           <NInput
             value={this.startDateDisplayString}
-            theme={this.NDatePicker.mergedTheme.peers.Input}
-            themeOverrides={this.NDatePicker.mergedTheme.peerOverrides.Input}
+            theme={NDatePicker.mergedTheme.peers.Input}
+            themeOverrides={NDatePicker.mergedTheme.peerOverrides.Input}
             size={this.timePickerSize}
             stateful={false}
-            class="n-date-panel-date-input"
+            class={`${cPrefix}-date-panel-date-input`}
             textDecoration={this.isStartValueInvalid ? 'line-through' : ''}
             placeholder={this.locale.selectDate}
             onBlur={this.handleStartDateInputBlur}
@@ -44,10 +46,8 @@ export default defineComponent({
             size={this.timePickerSize}
             to={false}
             showIcon={false}
-            theme={this.NDatePicker.mergedTheme.peers.TimePicker}
-            themeOverrides={
-              this.NDatePicker.mergedTheme.peerOverrides.TimePicker
-            }
+            theme={NDatePicker.mergedTheme.peers.TimePicker}
+            themeOverrides={NDatePicker.mergedTheme.peerOverrides.TimePicker}
             stateful={false}
             placeholder={this.locale.selectTime}
             format={this.timeFormat}
@@ -59,11 +59,11 @@ export default defineComponent({
           />
           <NInput
             value={this.endDateInput}
-            theme={this.NDatePicker.mergedTheme.peers.Input}
-            themeOverrides={this.NDatePicker.mergedTheme.peerOverrides.Input}
+            theme={NDatePicker.mergedTheme.peers.Input}
+            themeOverrides={NDatePicker.mergedTheme.peerOverrides.Input}
             stateful={false}
             size={this.timePickerSize}
-            class="n-date-panel-date-input"
+            class={`${cPrefix}-date-panel-date-input`}
             textDecoration={this.isEndValueInvalid ? 'line-through' : ''}
             placeholder={this.locale.selectDate}
             onBlur={this.handleEndDateInputBlur}
@@ -71,10 +71,8 @@ export default defineComponent({
           />
           <NTimePicker
             showIcon={false}
-            theme={this.NDatePicker.mergedTheme.peers.TimePicker}
-            themeOverrides={
-              this.NDatePicker.mergedTheme.peerOverrides.TimePicker
-            }
+            theme={NDatePicker.mergedTheme.peers.TimePicker}
+            themeOverrides={NDatePicker.mergedTheme.peerOverrides.TimePicker}
             to={false}
             size={this.timePickerSize}
             stateful={false}
@@ -89,63 +87,63 @@ export default defineComponent({
         </div>
         <div
           ref="startDatesElRef"
-          class="n-date-panel-calendar n-date-panel-calendar--start"
+          class={`${cPrefix}-date-panel-calendar ${cPrefix}-date-panel-calendar--start`}
         >
-          <div class="n-date-panel-month">
+          <div class={`${cPrefix}-date-panel-month`}>
             <div
-              class="n-date-panel-month__fast-prev"
+              class={`${cPrefix}-date-panel-month__fast-prev`}
               onClick={this.startCalendarPrevYear}
             >
               <FastBackwardIcon />
             </div>
             <div
-              class="n-date-panel-month__prev"
+              class={`${cPrefix}-date-panel-month__prev`}
               onClick={this.startCalendarPrevMonth}
             >
               <BackwardIcon />
             </div>
-            <div class="n-date-panel-month__month-year">
+            <div class={`${cPrefix}-date-panel-month__month-year`}>
               {this.locale.monthBeforeYear
                 ? `${this.startCalendarMonth} ${this.startCalendarYear}`
                 : `${this.startCalendarYear} ${this.startCalendarMonth}`}
             </div>
             <div
-              class="n-date-panel-month__next"
+              class={`${cPrefix}-date-panel-month__next`}
               onClick={this.startCalendarNextMonth}
             >
               <ForwardIcon />
             </div>
             <div
-              class="n-date-panel-month__fast-next"
+              class={`${cPrefix}-date-panel-month__fast-next`}
               onClick={this.startCalendarNextYear}
             >
               <FastForwardIcon />
             </div>
           </div>
-          <div class="n-date-panel-weekdays">
+          <div class={`${cPrefix}-date-panel-weekdays`}>
             {this.weekdays.map((weekday) => (
-              <div key={weekday} class="n-date-panel-weekdays__day">
+              <div key={weekday} class={`${cPrefix}-date-panel-weekdays__day`}>
                 {weekday}
               </div>
             ))}
           </div>
-          <div class="n-date-panel__divider" />
-          <div class="n-date-panel-dates">
+          <div class={`${cPrefix}-date-panel__divider`} />
+          <div class={`${cPrefix}-date-panel-dates`}>
             {this.startDateArray.map((dateItem, i) => (
               <div
                 key={i}
                 class={[
-                  'n-date-panel-date',
+                  `${cPrefix}-date-panel-date`,
                   {
-                    'n-date-panel-date--excluded': !dateItem.inCurrentMonth,
-                    'n-date-panel-date--current': dateItem.isCurrentDate,
-                    'n-date-panel-date--selected': dateItem.selected,
-                    'n-date-panel-date--covered': dateItem.inSpan,
-                    'n-date-panel-date--start': dateItem.startOfSpan,
-                    'n-date-panel-date--end': dateItem.endOfSpan,
-                    'n-date-panel-date--transition-disabled': this
+                    [`${cPrefix}-date-panel-date--excluded`]: !dateItem.inCurrentMonth,
+                    [`${cPrefix}-date-panel-date--current`]: dateItem.isCurrentDate,
+                    [`${cPrefix}-date-panel-date--selected`]: dateItem.selected,
+                    [`${cPrefix}-date-panel-date--covered`]: dateItem.inSpan,
+                    [`${cPrefix}-date-panel-date--start`]: dateItem.startOfSpan,
+                    [`${cPrefix}-date-panel-date--end`]: dateItem.endOfSpan,
+                    [`${cPrefix}-date-panel-date--transition-disabled`]: this
                       .transitionDisabled,
-                    'n-date-panel-date--disabled': this.mergedIsDateDisabled(
+                    [`${cPrefix}-date-panel-date--disabled`]: this.mergedIsDateDisabled(
                       dateItem.ts
                     )
                   }
@@ -155,72 +153,72 @@ export default defineComponent({
               >
                 {dateItem.dateObject.date}
                 {dateItem.isCurrentDate ? (
-                  <div class="n-date-panel-date__sup" />
+                  <div class={`${cPrefix}-date-panel-date__sup`} />
                 ) : null}
               </div>
             ))}
           </div>
         </div>
-        <div class="n-date-panel__vertical-divider" />
+        <div class={`${cPrefix}-date-panel__vertical-divider`} />
         <div
           ref="endDatesElRef"
-          class="n-date-panel-calendar n-date-panel-calendar--end"
+          class={`${cPrefix}-date-panel-calendar ${cPrefix}-date-panel-calendar--end`}
         >
-          <div class="n-date-panel-month">
+          <div class={`${cPrefix}-date-panel-month`}>
             <div
-              class="n-date-panel-month__fast-prev"
+              class={`${cPrefix}-date-panel-month__fast-prev`}
               onClick={this.endCalendarPrevYear}
             >
               <FastBackwardIcon />
             </div>
             <div
-              class="n-date-panel-month__prev"
+              class={`${cPrefix}-date-panel-month__prev`}
               onClick={this.endCalendarPrevMonth}
             >
               <BackwardIcon />
             </div>
-            <div class="n-date-panel-month__month-year">
+            <div class={`${cPrefix}-date-panel-month__month-year`}>
               {this.locale.monthBeforeYear
                 ? `${this.endCalendarMonth} ${this.endCalendarYear}`
                 : `${this.endCalendarYear} ${this.endCalendarMonth}`}
             </div>
             <div
-              class="n-date-panel-month__next"
+              class={`${cPrefix}-date-panel-month__next`}
               onClick={this.endCalendarNextMonth}
             >
               <ForwardIcon />
             </div>
             <div
-              class="n-date-panel-month__fast-next"
+              class={`${cPrefix}-date-panel-month__fast-next`}
               onClick={this.endCalendarNextYear}
             >
               <FastForwardIcon />
             </div>
           </div>
-          <div class="n-date-panel-weekdays">
+          <div class={`${cPrefix}-date-panel-weekdays`}>
             {this.weekdays.map((weekday) => (
-              <div key={weekday} class="n-date-panel-weekdays__day">
+              <div key={weekday} class={`${cPrefix}-date-panel-weekdays__day`}>
                 {weekday}
               </div>
             ))}
           </div>
-          <div class="n-date-panel__divider" />
-          <div class="n-date-panel-dates">
+          <div class={`${cPrefix}-date-panel__divider`} />
+          <div class={`${cPrefix}-date-panel-dates`}>
             {this.endDateArray.map((dateItem, i) => (
               <div
                 key={i}
                 class={[
-                  'n-date-panel-date',
+                  `${cPrefix}-date-panel-date`,
                   {
-                    'n-date-panel-date--excluded': !dateItem.inCurrentMonth,
-                    'n-date-panel-date--current': dateItem.isCurrentDate,
-                    'n-date-panel-date--selected': dateItem.selected,
-                    'n-date-panel-date--covered': dateItem.inSpan,
-                    'n-date-panel-date--start': dateItem.startOfSpan,
-                    'n-date-panel-date--end': dateItem.endOfSpan,
-                    'n-date-panel-date--transition-disabled': this
+                    [`${cPrefix}-date-panel-date--excluded`]: !dateItem.inCurrentMonth,
+                    [`${cPrefix}-date-panel-date--current`]: dateItem.isCurrentDate,
+                    [`${cPrefix}-date-panel-date--selected`]: dateItem.selected,
+                    [`${cPrefix}-date-panel-date--covered`]: dateItem.inSpan,
+                    [`${cPrefix}-date-panel-date--start`]: dateItem.startOfSpan,
+                    [`${cPrefix}-date-panel-date--end`]: dateItem.endOfSpan,
+                    [`${cPrefix}-date-panel-date--transition-disabled`]: this
                       .transitionDisabled,
-                    'n-date-panel-date--disabled': this.mergedIsDateDisabled(
+                    [`${cPrefix}-date-panel-date--disabled`]: this.mergedIsDateDisabled(
                       dateItem.ts
                     )
                   }
@@ -230,20 +228,18 @@ export default defineComponent({
               >
                 {dateItem.dateObject.date}
                 {dateItem.isCurrentDate ? (
-                  <div class="n-date-panel-date__sup" />
+                  <div class={`${cPrefix}-date-panel-date__sup`} />
                 ) : null}
               </div>
             ))}
           </div>
         </div>
         {this.actions?.length ? (
-          <div class="n-date-panel-actions">
+          <div class={`${cPrefix}-date-panel-actions`}>
             {this.actions.includes('clear') ? (
               <NButton
-                theme={this.NDatePicker.mergedTheme.peers.Button}
-                themeOverrides={
-                  this.NDatePicker.mergedTheme.peerOverrides.Button
-                }
+                theme={NDatePicker.mergedTheme.peers.Button}
+                themeOverrides={NDatePicker.mergedTheme.peerOverrides.Button}
                 size="tiny"
                 onClick={this.handleClearClick}
               >
@@ -252,10 +248,8 @@ export default defineComponent({
             ) : null}
             {this.actions.includes('confirm') ? (
               <NButton
-                theme={this.NDatePicker.mergedTheme.peers.Button}
-                themeOverrides={
-                  this.NDatePicker.mergedTheme.peerOverrides.Button
-                }
+                theme={NDatePicker.mergedTheme.peers.Button}
+                themeOverrides={NDatePicker.mergedTheme.peerOverrides.Button}
                 size="tiny"
                 type="primary"
                 disabled={this.isRangeInvalid}

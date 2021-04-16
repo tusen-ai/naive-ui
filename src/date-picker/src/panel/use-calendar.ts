@@ -15,7 +15,11 @@ import {
 } from 'date-fns'
 import { dateArray, strictParse } from '../utils'
 import { usePanelCommon } from './use-panel-common'
-import { DatePickerInjection, Value, IsSingleDateDisabled } from '../interface'
+import {
+  Value,
+  IsSingleDateDisabled,
+  datePickerInjectionKey
+} from '../interface'
 import type { DateItem } from '../utils'
 
 const useCalendarProps = {
@@ -37,9 +41,8 @@ function useCalendar (
   type: 'date' | 'datetime'
 ) {
   const panelCommon = usePanelCommon(props)
-  const NDatePicker = inject<DatePickerInjection>(
-    'NDatePicker'
-  ) as DatePickerInjection
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const NDatePicker = inject(datePickerInjectionKey)!
   const validation = {
     isValueInvalid: computed(() => NDatePicker.isValueInvalid),
     isDateDisabled: computed(() => NDatePicker.isDateDisabled),

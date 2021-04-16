@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { computed, ComputedRef } from 'vue'
 import { getHours, getMinutes, getSeconds } from 'date-fns'
-import type { DatePickerProps } from './DatePicker'
+import type { DatePickerSetupProps } from './DatePicker'
 import {
   IsRangeTimeDisabled,
   IsSingleTimeDisabled,
@@ -9,7 +9,7 @@ import {
 } from './interface'
 
 export function uniCalendarValidation (
-  props: DatePickerProps,
+  props: DatePickerSetupProps,
   mergedValueRef: ComputedRef<number | [number, number] | null>
 ) {
   // date, datetime
@@ -86,7 +86,7 @@ export function uniCalendarValidation (
 }
 
 export function dualCalendarValidation (
-  props: DatePickerProps,
+  props: DatePickerSetupProps,
   mergedValueRef: ComputedRef<number | [number, number] | null>
 ) {
   // daterange, datetimerange

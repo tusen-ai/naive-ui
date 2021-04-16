@@ -10,9 +10,9 @@ import { useKeyboard } from 'vooks'
 
 import {
   OnUpdateValue,
-  DatePickerInjection,
   Value,
-  OnUpdateValueImpl
+  OnUpdateValueImpl,
+  datePickerInjectionKey
 } from '../interface'
 
 const DATE_FORMAT = 'yyyy-MM-dd'
@@ -45,9 +45,8 @@ type UsePanelCommonProps = ExtractPropTypes<typeof usePanelCommonProps>
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function usePanelCommon (props: UsePanelCommonProps) {
-  const NDatePicker = inject<DatePickerInjection>(
-    'NDatePicker'
-  ) as DatePickerInjection
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const NDatePicker = inject(datePickerInjectionKey)!
   const dateFnsOptionsRef = computed(() => {
     return {
       locale: NDatePicker.dateLocale.locale

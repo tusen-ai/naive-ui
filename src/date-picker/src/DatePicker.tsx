@@ -23,7 +23,8 @@ import { NBaseIcon } from '../../_internal'
 import { useFormItem, useTheme, useConfig, useLocale } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { DateIcon, ToIcon } from '../../_internal/icons'
-import { warn, call, useAdjustedTo, createKey, MaybeArray } from '../../_utils'
+import { warn, call, useAdjustedTo, createKey } from '../../_utils'
+import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { datePickerLight } from '../styles'
 import { strictParse } from './utils'
 // import { getDerivedTimeFromKeyboardEvent } from './utils'
@@ -42,9 +43,9 @@ import {
   OnUpdateValueImpl,
   Value,
   PanelRef,
-  DatePickerInjection,
   IsDateDisabled,
-  IsTimeDisabled
+  IsTimeDisabled,
+  datePickerInjectionKey
 } from './interface'
 import { Size as TimePickerSize } from '../../time-picker/src/interface'
 
@@ -117,7 +118,8 @@ const datePickerProps = {
   }
 } as const
 
-export type DatePickerProps = ExtractPropTypes<typeof datePickerProps>
+export type DatePickerSetupProps = ExtractPropTypes<typeof datePickerProps>
+export type DatePickerProps = ExtractPublicPropTypes<typeof datePickerProps>
 
 export default defineComponent({
   name: 'DatePicker',
@@ -125,7 +127,12 @@ export default defineComponent({
   setup (props) {
     const { locale, dateLocale } = useLocale('DatePicker')
     const formItem = useFormItem(props)
-    const { NConfigProvider } = useConfig(props)
+    const {
+      NConfigProvider,
+      mergedClsPrefix,
+      mergedBordered,
+      namespace
+    } = useConfig(props)
     const panelInstRef = ref<PanelRef | null>(null)
     const triggerElRef = ref<HTMLElement | null>(null)
     const inputInstRef = ref<InputInst | null>(null)
@@ -144,7 +151,8 @@ export default defineComponent({
       'DatePicker',
       style,
       datePickerLight,
-      props
+      props,
+      mergedClsPrefix
     )
     const dateFnsOptionsRef = computed(() => {
       return {
@@ -394,9 +402,10 @@ export default defineComponent({
 
     const uniVaidation = uniCalendarValidation(props, mergedValueRef)
     const dualValidation = dualCalendarValidation(props, mergedValueRef)
-    provide<DatePickerInjection>(
-      'NDatePicker',
+    provide(
+      datePickerInjectionKey,
       reactive({
+        cPrefix: mergedClsPrefix,
         mergedTheme: themeRef,
         timePickerSize: timePickerSizeRef,
         locale: locale,
@@ -411,6 +420,9 @@ export default defineComponent({
       })
     )
     return {
+      cPrefix: mergedClsPrefix,
+      mergedBordered,
+      namespace,
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
       panelInstRef,
@@ -443,7 +455,6 @@ export default defineComponent({
       handleRangeUpdateValue,
       handleSingleUpdateValue,
       handlePanelUpdateValue,
-      ...useConfig(props),
       mergedTheme: themeRef,
       triggerCssVars: computed(() => {
         const {
@@ -580,14 +591,15 @@ export default defineComponent({
       actions: this.actions,
       style: this.cssVars as CSSProperties
     }
+    const { cPrefix } = this
     return (
       <div
         ref="triggerElRef"
         class={[
-          'n-date-picker',
+          `${cPrefix}-date-picker`,
           {
-            'n-date-picker--disabled': this.disabled,
-            'n-date-picker--range': this.isRange
+            [`${cPrefix}-date-picker--disabled`]: this.disabled,
+            [`${cPrefix}-date-picker--range`]: this.isRange
           }
         ]}
         style={this.triggerCssVars as CSSProperties}
@@ -617,12 +629,18 @@ export default defineComponent({
                       >
                         {{
                           separator: () => (
-                            <NBaseIcon class="n-date-picker-icon">
+                            <NBaseIcon
+                              clsPrefix={cPrefix}
+                              class={`${cPrefix}-date-picker-icon`}
+                            >
                               {{ default: () => <ToIcon /> }}
                             </NBaseIcon>
                           ),
                           clear: () => (
-                            <NBaseIcon class="n-date-picker-icon">
+                            <NBaseIcon
+                              clsPrefix={cPrefix}
+                              class={`${cPrefix}-date-picker-icon`}
+                            >
                               {{ default: () => <DateIcon /> }}
                             </NBaseIcon>
                           )
@@ -643,7 +661,10 @@ export default defineComponent({
                       >
                         {{
                           clear: () => (
-                            <NBaseIcon class="n-date-picker-icon">
+                            <NBaseIcon
+                              clsPrefix={cPrefix}
+                              class={`${cPrefix}-date-picker-icon`}
+                            >
                               {{ default: () => <DateIcon /> }}
                             </NBaseIcon>
                           )

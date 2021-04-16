@@ -18,22 +18,24 @@ export default defineComponent({
     return useCalendar(props, 'datetime')
   },
   render () {
+    const { NDatePicker } = this
+    const { cPrefix } = NDatePicker
     return (
       <div
         ref="selfRef"
         tabindex={0}
-        class="n-date-panel n-date-panel--datetime"
+        class={`${cPrefix}-date-panel ${cPrefix}-date-panel--datetime`}
         onKeydown={this.handlePanelKeyDown}
         onFocus={this.handlePanelFocus}
       >
-        <div class="n-date-panel-header">
+        <div class={`${cPrefix}-date-panel-header`}>
           <NInput
             value={this.dateInputValue}
-            theme={this.NDatePicker.mergedTheme.peers.Input}
-            themeOverrides={this.NDatePicker.mergedTheme.peerOverrides.Input}
+            theme={NDatePicker.mergedTheme.peers.Input}
+            themeOverrides={NDatePicker.mergedTheme.peerOverrides.Input}
             stateful={false}
             size={this.timePickerSize}
-            class="n-date-panel-date-input"
+            class={`${cPrefix}-date-panel-date-input`}
             textDecoration={this.isDateInvalid ? 'line-through' : ''}
             placeholder={this.locale.selectDate}
             onBlur={this.handleDateInputBlur}
@@ -43,10 +45,8 @@ export default defineComponent({
             showIcon={false}
             format={this.timeFormat}
             stateful={false}
-            theme={this.NDatePicker.mergedTheme.peers.TimePicker}
-            themeOverrides={
-              this.NDatePicker.mergedTheme.peerOverrides.TimePicker
-            }
+            theme={NDatePicker.mergedTheme.peers.TimePicker}
+            themeOverrides={NDatePicker.mergedTheme.peerOverrides.TimePicker}
             to={false}
             size={this.timePickerSize}
             value={Array.isArray(this.value) ? null : this.value}
@@ -57,46 +57,58 @@ export default defineComponent({
             onUpdateValue={this.handleTimePickerChange}
           />
         </div>
-        <div class="n-date-panel-calendar">
-          <div class="n-date-panel-month">
-            <div class="n-date-panel-month__fast-prev" onClick={this.prevYear}>
+        <div class={`${cPrefix}-date-panel-calendar`}>
+          <div class={`${cPrefix}-date-panel-month`}>
+            <div
+              class={`${cPrefix}-date-panel-month__fast-prev`}
+              onClick={this.prevYear}
+            >
               <FastBackwardIcon />
             </div>
-            <div class="n-date-panel-month__prev" onClick={this.prevMonth}>
+            <div
+              class={`${cPrefix}-date-panel-month__prev`}
+              onClick={this.prevMonth}
+            >
               <BackwardIcon />
             </div>
-            <div class="n-date-panel-month__month-year">
+            <div class={`${cPrefix}-date-panel-month__month-year`}>
               {this.locale.monthBeforeYear
                 ? `${this.calendarMonth} ${this.calendarYear}`
                 : `${this.calendarYear} ${this.calendarMonth}`}
             </div>
-            <div class="n-date-panel-month__next" onClick={this.nextMonth}>
+            <div
+              class={`${cPrefix}-date-panel-month__next`}
+              onClick={this.nextMonth}
+            >
               <ForwardIcon />
             </div>
-            <div class="n-date-panel-month__fast-next" onClick={this.nextYear}>
+            <div
+              class={`${cPrefix}-date-panel-month__fast-next`}
+              onClick={this.nextYear}
+            >
               <FastForwardIcon />
             </div>
           </div>
-          <div class="n-date-panel-weekdays">
+          <div class={`${cPrefix}-date-panel-weekdays`}>
             {this.weekdays.map((weekday) => (
-              <div key={weekday} class="n-date-panel-weekdays__day">
+              <div key={weekday} class={`${cPrefix}-date-panel-weekdays__day`}>
                 {weekday}
               </div>
             ))}
           </div>
-          <div class="n-date-panel-dates">
+          <div class={`${cPrefix}-date-panel-dates`}>
             {this.dateArray.map((dateItem, i) => (
               <div
                 key={i}
                 class={[
-                  'n-date-panel-date',
+                  `${cPrefix}-date-panel-date`,
                   {
-                    'n-date-panel-date--current': dateItem.isCurrentDate,
-                    'n-date-panel-date--selected': dateItem.selected,
-                    'n-date-panel-date--excluded': !dateItem.inCurrentMonth,
-                    'n-date-panel-date--transition-disabled': this
+                    [`${cPrefix}-date-panel-date--current`]: dateItem.isCurrentDate,
+                    [`${cPrefix}-date-panel-date--selected`]: dateItem.selected,
+                    [`${cPrefix}-date-panel-date--excluded`]: !dateItem.inCurrentMonth,
+                    [`${cPrefix}-date-panel-date--transition-disabled`]: this
                       .transitionDisabled,
-                    'n-date-panel-date--disabled': this.mergedIsDateDisabled(
+                    [`${cPrefix}-date-panel-date--disabled`]: this.mergedIsDateDisabled(
                       dateItem.ts
                     )
                   }
@@ -105,20 +117,18 @@ export default defineComponent({
               >
                 {dateItem.dateObject.date}
                 {dateItem.isCurrentDate ? (
-                  <div class="n-date-panel-date__sup" />
+                  <div class={`${cPrefix}-date-panel-date__sup`} />
                 ) : null}
               </div>
             ))}
           </div>
         </div>
         {this.actions?.length ? (
-          <div class="n-date-panel-actions">
+          <div class={`${cPrefix}-date-panel-actions`}>
             {this.actions.includes('clear') ? (
               <NButton
-                theme={this.NDatePicker.mergedTheme.peers.Button}
-                themeOverrides={
-                  this.NDatePicker.mergedTheme.peerOverrides.Button
-                }
+                theme={NDatePicker.mergedTheme.peers.Button}
+                themeOverrides={NDatePicker.mergedTheme.peerOverrides.Button}
                 size="tiny"
                 onClick={this.handleClearClick}
               >
@@ -127,10 +137,8 @@ export default defineComponent({
             ) : null}
             {this.actions.includes('now') ? (
               <NButton
-                theme={this.NDatePicker.mergedTheme.peers.Button}
-                themeOverrides={
-                  this.NDatePicker.mergedTheme.peerOverrides.Button
-                }
+                theme={NDatePicker.mergedTheme.peers.Button}
+                themeOverrides={NDatePicker.mergedTheme.peerOverrides.Button}
                 size="tiny"
                 onClick={this.handleNowClick}
               >
@@ -139,10 +147,8 @@ export default defineComponent({
             ) : null}
             {this.actions.includes('confirm') ? (
               <NButton
-                theme={this.NDatePicker.mergedTheme.peers.Button}
-                themeOverrides={
-                  this.NDatePicker.mergedTheme.peerOverrides.Button
-                }
+                theme={NDatePicker.mergedTheme.peers.Button}
+                themeOverrides={NDatePicker.mergedTheme.peerOverrides.Button}
                 size="tiny"
                 type="primary"
                 disabled={this.isDateInvalid}
