@@ -8,7 +8,6 @@ import {
   mergeProps
 } from 'vue'
 import { ThemeProps, useConfig, useTheme } from '../../_mixins'
-
 import { createKey, useHoudini } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { SkeletonTheme } from '../styles'
@@ -120,7 +119,12 @@ export default defineComponent({
     )
     if (repeat > 1) {
       return (
-        <>{Array.apply(null, { length: repeat } as any).map((_) => child)}</>
+        <>
+          {Array.apply(null, { length: repeat } as any).map((_) => [
+            child,
+            '\n'
+          ])}
+        </>
       )
     }
     return child

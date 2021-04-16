@@ -13,6 +13,7 @@ slots
 border
 segment
 closable
+loading
 ```
 
 ## Props
