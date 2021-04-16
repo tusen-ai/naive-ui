@@ -1,7 +1,8 @@
-import { defineComponent, computed, h, PropType } from 'vue'
-import { useTheme } from '../../_mixins'
+import { defineComponent, computed, h, PropType, CSSProperties } from 'vue'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey, formatLength, useHoudini } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { gradientTextLight } from '../styles'
 import type { GradientTextTheme } from '../styles'
 import style from './styles/index.cssr'
@@ -14,23 +15,28 @@ type Gradient =
     to: string
   }
 
+const gradientTextProps = {
+  ...(useTheme.props as ThemeProps<GradientTextTheme>),
+  size: [String, Number] as PropType<string | number>,
+  fontSize: [String, Number] as PropType<string | number>,
+  type: {
+    type: String as PropType<
+    'info' | 'success' | 'warning' | 'error' | 'primary' | 'danger'
+    >,
+    default: 'primary'
+  },
+  color: [Object, String] as PropType<Gradient>,
+  gradient: [Object, String] as PropType<Gradient>
+} as const
+
+export type GradientTextProps = ExtractPublicPropTypes<typeof gradientTextProps>
+
 export default defineComponent({
   name: 'GradientText',
-  props: {
-    ...(useTheme.props as ThemeProps<GradientTextTheme>),
-    size: [String, Number],
-    fontSize: [String, Number],
-    type: {
-      type: String as PropType<
-      'info' | 'success' | 'warning' | 'error' | 'primary' | 'danger'
-      >,
-      default: 'primary'
-    },
-    color: [Object, String] as PropType<Gradient>,
-    gradient: [Object, String] as PropType<Gradient>
-  },
+  props: gradientTextProps,
   setup (props) {
     useHoudini()
+    const { mergedClsPrefix } = useConfig(props)
     const compatibleTypeRef = computed<
     'info' | 'success' | 'warning' | 'error' | 'primary'
     >(() => {
@@ -60,9 +66,11 @@ export default defineComponent({
       'GradientText',
       style,
       gradientTextLight,
-      props
+      props,
+      mergedClsPrefix
     )
     return {
+      cPrefix: mergedClsPrefix,
       compatibleType: compatibleTypeRef,
       styleFontSize: styleFontSizeRef,
       styleBgImage: styleBgImageRef,
@@ -88,17 +96,20 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     return (
       <span
         class={[
-          'n-gradient-text',
-          `n-gradient-text--${this.compatibleType}-type`
+          `${cPrefix}-gradient-text`,
+          `${cPrefix}-gradient-text--${this.compatibleType}-type`
         ]}
-        style={{
-          fontSize: this.styleFontSize,
-          backgroundImage: this.styleBgImage,
-          ...this.cssVars
-        }}
+        style={[
+          {
+            fontSize: this.styleFontSize,
+            backgroundImage: this.styleBgImage
+          },
+          this.cssVars as CSSProperties
+        ]}
       >
         {this.$slots}
       </span>
