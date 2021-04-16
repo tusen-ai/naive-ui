@@ -15,18 +15,11 @@ import {
 } from 'vue'
 import { NScrollbar } from '../../scrollbar'
 import type { ScrollbarProps } from '../../scrollbar'
-import type { MergedTheme } from '../../_mixins'
-import type { DrawerTheme } from '../styles'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
 import { modalBodyInjectionKey } from '../../modal/src/interface'
-import { drawerBodyInjectionKey } from './interface'
+import { drawerBodyInjectionKey, drawerInjectionKey } from './interface'
 
 export type Placement = 'left' | 'right' | 'top' | 'bottom'
-
-export interface DrawerInjection {
-  isMounted: boolean
-  mergedTheme: MergedTheme<DrawerTheme>
-}
 
 export default defineComponent({
   name: 'NDrawerContent',
@@ -53,7 +46,8 @@ export default defineComponent({
   setup (props) {
     const displayedRef = ref(props.show)
     const bodyRef = ref<HTMLElement | null>(null) // used for detached content
-    const NDrawer = inject<DrawerInjection>('NDrawer') as DrawerInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NDrawer = inject(drawerInjectionKey)!
     watchEffect(() => {
       if (props.show) displayedRef.value = true
     })
@@ -64,7 +58,9 @@ export default defineComponent({
     provide(popoverBodyInjectionKey, null)
     provide(modalBodyInjectionKey, null)
     return {
-      NDrawer,
+      cPrefix: NDrawer.cPrefixRef,
+      isMounted: NDrawer.isMountedRef,
+      mergedTheme: NDrawer.mergedThemeRef,
       displayed: displayedRef,
       transitionName: computed(() => {
         return {
@@ -78,7 +74,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { NDrawer, $slots } = this
+    const { $slots, cPrefix } = this
     return this.displayDirective === 'show' || this.displayed || this.show
       ? withDirectives(
         <div>
@@ -86,7 +82,7 @@ export default defineComponent({
             Nor the detached content will disappear without transition */}
           <Transition
             name={this.transitionName}
-            appear={this.NDrawer.isMounted}
+            appear={this.isMounted}
             onAfterLeave={this.handleAfterLeave}
           >
             {{
@@ -97,10 +93,11 @@ export default defineComponent({
                     mergeProps(this.$attrs, {
                       ref: 'bodyRef',
                       class: [
-                        'n-drawer',
-                          `n-drawer--${this.placement}-placement`,
+                          `${cPrefix}-drawer`,
+                          `${cPrefix}-drawer--${this.placement}-placement`,
                           {
-                            'n-drawer--native-scrollbar': this.nativeScrollbar
+                            [`${cPrefix}-drawer--native-scrollbar`]: this
+                              .nativeScrollbar
                           }
                       ]
                     }),
@@ -110,10 +107,10 @@ export default defineComponent({
                       ) : (
                         <NScrollbar
                           {...this.scrollbarProps}
-                          contentClass="n-drawer-scroll-content"
-                          theme={NDrawer.mergedTheme.peers.Scrollbar}
+                          contentClass={`${cPrefix}-drawer-scroll-content`}
+                          theme={this.mergedTheme.peers.Scrollbar}
                           themeOverrides={
-                            NDrawer.mergedTheme.peerOverrides.Scrollbar
+                            this.mergedTheme.peerOverrides.Scrollbar
                           }
                         >
                           {$slots}

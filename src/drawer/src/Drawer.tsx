@@ -5,7 +5,6 @@ import {
   computed,
   provide,
   CSSProperties,
-  reactive,
   withDirectives,
   Transition
 } from 'vue'
@@ -15,116 +14,129 @@ import { useIsMounted } from 'vooks'
 import { useTheme, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { warn, formatLength, call } from '../../_utils'
-import type { MaybeArray } from '../../_utils'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import { ScrollbarProps } from '../../scrollbar'
 import { drawerLight, DrawerTheme } from '../styles'
 import NDrawerBodyWrapper from './DrawerBodyWrapper'
-import type { DrawerInjection, Placement } from './DrawerBodyWrapper'
+import type { Placement } from './DrawerBodyWrapper'
+import { drawerInjectionKey } from './interface'
 import style from './styles/index.cssr'
-import { ScrollbarProps } from '../../scrollbar'
+
+const drawerProps = {
+  ...(useTheme.props as ThemeProps<DrawerTheme>),
+  show: {
+    type: Boolean,
+    default: false
+  },
+  width: {
+    type: [Number, String] as PropType<string | number>,
+    default: 251
+  },
+  height: {
+    type: [Number, String] as PropType<string | number>,
+    default: 251
+  },
+  placement: {
+    type: String as PropType<Placement>,
+    default: 'right'
+  },
+  maskClosable: {
+    type: Boolean,
+    default: true
+  },
+  to: [String, Object] as PropType<string | HTMLElement>,
+  displayDirective: {
+    type: String as PropType<'if' | 'show'>,
+    default: 'if'
+  },
+  nativeScrollbar: {
+    type: Boolean,
+    default: true
+  },
+  scrollbarProps: Object as PropType<ScrollbarProps>,
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:show': [Function, Array] as PropType<
+  MaybeArray<(value: boolean) => void>
+  >,
+  onUpdateShow: [Function, Array] as PropType<
+  MaybeArray<(value: boolean) => void>
+  >,
+  // deprecated
+  drawerStyle: {
+    type: [Object, String] as PropType<CSSProperties | string | undefined>,
+    validator: () => {
+      warn(
+        'drawer',
+        '`drawer-style` is deprecated, please use `style` instead.'
+      )
+      return true
+    },
+    default: undefined
+  },
+  drawerClass: {
+    type: String as PropType<string | undefined>,
+    validator: () => {
+      warn(
+        'drawer',
+        '`drawer-class` is deprecated, please use `class` instead.'
+      )
+      return true
+    },
+    default: undefined
+  },
+  target: {
+    validator: () => {
+      warn('drawer', '`target` is deprecated, please use `to` instead.')
+      return true
+    },
+    default: undefined
+  },
+
+  onShow: {
+    type: [Function, Array] as PropType<
+    MaybeArray<(value: boolean) => void> | undefined
+    >,
+    validator: () => {
+      warn(
+        'drawer',
+        '`on-show` is deprecated, please use `on-update:show` instead.'
+      )
+      return true
+    },
+    default: undefined
+  },
+  onHide: {
+    type: [Function, Array] as PropType<
+    MaybeArray<(value: false) => void> | undefined
+    >,
+    validator: () => {
+      warn(
+        'drawer',
+        '`on-hide` is deprecated, please use `on-update:show` instead.'
+      )
+      return true
+    },
+    default: undefined
+  }
+} as const
+
+export type DrawerProps = ExtractPublicPropTypes<typeof drawerProps>
 
 export default defineComponent({
   name: 'Drawer',
   inheritAttrs: false,
-  props: {
-    ...(useTheme.props as ThemeProps<DrawerTheme>),
-    show: {
-      type: Boolean,
-      default: false
-    },
-    width: {
-      type: [Number, String],
-      default: 251
-    },
-    height: {
-      type: [Number, String],
-      default: 251
-    },
-    placement: {
-      type: String as PropType<Placement>,
-      default: 'right'
-    },
-    maskClosable: {
-      type: Boolean,
-      default: true
-    },
-    to: [String, Object] as PropType<string | HTMLElement>,
-    displayDirective: {
-      type: String as PropType<'if' | 'show'>,
-      default: 'if'
-    },
-    nativeScrollbar: {
-      type: Boolean,
-      default: true
-    },
-    scrollbarProps: Object as PropType<ScrollbarProps>,
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:show': [Function, Array] as PropType<
-    MaybeArray<(value: boolean) => void>
-    >,
-    onUpdateShow: [Function, Array] as PropType<
-    MaybeArray<(value: boolean) => void>
-    >,
-    // deprecated
-    drawerStyle: {
-      type: [Object, String] as PropType<CSSProperties | string | undefined>,
-      validator: () => {
-        warn(
-          'drawer',
-          '`drawer-style` is deprecated, please use `style` instead.'
-        )
-        return true
-      },
-      default: undefined
-    },
-    drawerClass: {
-      type: String as PropType<string | undefined>,
-      validator: () => {
-        warn(
-          'drawer',
-          '`drawer-class` is deprecated, please use `class` instead.'
-        )
-        return true
-      },
-      default: undefined
-    },
-    target: {
-      validator: () => {
-        warn('drawer', '`target` is deprecated, please use `to` instead.')
-        return true
-      },
-      default: undefined
-    },
-
-    onShow: {
-      type: [Function, Array] as PropType<
-      MaybeArray<(value: boolean) => void> | undefined
-      >,
-      validator: () => {
-        warn(
-          'drawer',
-          '`on-show` is deprecated, please use `on-update:show` instead.'
-        )
-        return true
-      },
-      default: undefined
-    },
-    onHide: {
-      type: [Function, Array] as PropType<
-      MaybeArray<(value: false) => void> | undefined
-      >,
-      validator: () => {
-        warn(
-          'drawer',
-          '`on-hide` is deprecated, please use `on-update:show` instead.'
-        )
-        return true
-      },
-      default: undefined
-    }
-  },
+  props: drawerProps,
   setup (props) {
+    const { mergedClsPrefix, namespace } = useConfig(props)
     const isMountedRef = useIsMounted()
-    const themeRef = useTheme('Drawer', 'Drawer', style, drawerLight, props)
+    const themeRef = useTheme(
+      'Drawer',
+      'Drawer',
+      style,
+      drawerLight,
+      props,
+      mergedClsPrefix
+    )
     const styleWidthRef = computed(() => {
       const { placement } = props
       if (placement === 'top' || placement === 'bottom') return ''
@@ -155,16 +167,14 @@ export default defineComponent({
         if (onHide) call(onHide, false)
       }
     }
-    provide<DrawerInjection>(
-      'NDrawer',
-      reactive({
-        isMounted: isMountedRef,
-        mergedTheme: themeRef
-      })
-    )
-    provide('NModal', null)
+    provide(drawerInjectionKey, {
+      isMountedRef: isMountedRef,
+      mergedThemeRef: themeRef,
+      cPrefixRef: mergedClsPrefix
+    })
     return {
-      ...useConfig(props),
+      cPrefix: mergedClsPrefix,
+      namespace,
       mergedBodyStyle: mergedBodyStyleRef,
       handleMaskClick,
       mergedTheme: themeRef,
@@ -198,7 +208,7 @@ export default defineComponent({
           default: () => {
             return withDirectives(
               <div
-                class={['n-drawer-container', this.namespace]}
+                class={[`${this.cPrefix}-drawer-container`, this.namespace]}
                 style={this.cssVars as CSSProperties}
               >
                 <Transition name="n-fade-in-transition" appear={this.isMounted}>
@@ -206,7 +216,7 @@ export default defineComponent({
                     default: () =>
                       this.show ? (
                         <div
-                          class="n-drawer-mask"
+                          class={`${this.cPrefix}-drawer-mask`}
                           onClick={this.handleMaskClick}
                         />
                       ) : null
