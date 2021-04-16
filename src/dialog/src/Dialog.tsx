@@ -10,6 +10,7 @@ import {
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { render, createKey, keysOf } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { NBaseIcon, NBaseClose } from '../../_internal'
 import { NButton } from '../../button'
 import {
@@ -67,7 +68,7 @@ const dialogProps = {
   onClose: Function as PropType<() => void>
 } as const
 
-export type DialogProps = typeof dialogProps
+export type DialogProps = ExtractPublicPropTypes<typeof dialogProps>
 export { dialogProps }
 export const dialogPropKeys = keysOf(dialogProps)
 
@@ -82,7 +83,7 @@ export default defineComponent({
     ...dialogProps
   },
   setup (props) {
-    const { NConfigProvider } = useConfig(props)
+    const { NConfigProvider, mergedClsPrefix } = useConfig(props)
     const mergedIconPlacementRef = computed(() => {
       const { iconPlacement } = props
       return (
@@ -103,8 +104,16 @@ export default defineComponent({
       const { onClose } = props
       if (onClose) onClose()
     }
-    const themeRef = useTheme('Dialog', 'Dialog', style, dialogLight, props)
+    const themeRef = useTheme(
+      'Dialog',
+      'Dialog',
+      style,
+      dialogLight,
+      props,
+      mergedClsPrefix
+    )
     return {
+      cPrefix: mergedClsPrefix,
       mergedIconPlacement: mergedIconPlacementRef,
       mergedTheme: themeRef,
       handlePositiveClick,
@@ -182,25 +191,28 @@ export default defineComponent({
       handleNegativeClick,
       mergedTheme,
       loading,
-      type
+      type,
+      cPrefix
     } = this
     return (
       <div
         class={[
-          'n-dialog',
-          {
-            'n-dialog--bordered': bordered,
-            [`n-dialog--icon-${mergedIconPlacement}`]: true
-          }
+          `${cPrefix}-dialog`,
+          `${cPrefix}-dialog--icon-${mergedIconPlacement}`,
+          bordered && `${cPrefix}-dialog--bordered`
         ]}
         style={cssVars as CSSProperties}
       >
         {closable ? (
-          <NBaseClose class="n-dialog__close" onClick={this.handleCloseClick} />
+          <NBaseClose
+            clsPrefix={cPrefix}
+            class={`${cPrefix}-dialog__close`}
+            onClick={this.handleCloseClick}
+          />
         ) : null}
         {showIcon && mergedIconPlacement === 'top' ? (
-          <div class="n-dialog-icon-container">
-            <NBaseIcon class="n-dialog__icon">
+          <div class={`${cPrefix}-dialog-icon-container`}>
+            <NBaseIcon clsPrefix={cPrefix} class={`${cPrefix}-dialog__icon`}>
               {{
                 default: () =>
                   renderSlot($slots, 'icon', undefined, () => [
@@ -212,9 +224,9 @@ export default defineComponent({
             </NBaseIcon>
           </div>
         ) : null}
-        <div class="n-dialog__title">
+        <div class={`${cPrefix}-dialog__title`}>
           {showIcon && mergedIconPlacement === 'left' ? (
-            <NBaseIcon class="n-dialog__icon">
+            <NBaseIcon clsPrefix={cPrefix} class={`${cPrefix}-dialog__icon`}>
               {{
                 default: () =>
                   renderSlot($slots, 'icon', undefined, () => [
@@ -231,14 +243,14 @@ export default defineComponent({
             })
           ])}
         </div>
-        <div class="n-dialog__content">
+        <div class={`${cPrefix}-dialog__content`}>
           {renderSlot($slots, 'default', undefined, () => [
             h(render, {
               render: content
             })
           ])}
         </div>
-        <div class="n-dialog__action">
+        <div class={`${cPrefix}-dialog__action`}>
           {renderSlot($slots, 'action', undefined, () => [
             negativeText ? (
               <NButton

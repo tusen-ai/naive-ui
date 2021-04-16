@@ -13,7 +13,6 @@ const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000))
 const countDown = (second) => `倒计时 ${second} 秒`
 
 export default {
-  inject: ['dialog'],
   setup () {
     const dialog = useDialog()
     return {

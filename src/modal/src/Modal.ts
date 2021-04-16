@@ -15,7 +15,7 @@ import {
 import { zindexable } from 'vdirs'
 import { useIsMounted, useClicked, useClickPosition } from 'vooks'
 import { VLazyTeleport } from 'vueuc'
-import type { DialogProviderInjection } from '../../dialog/src/DialogProvider'
+import { dialogProviderInjectionKey } from '../../dialog/src/DialogProvider'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps, MergedTheme } from '../../_mixins'
 import { warn, keep, call } from '../../_utils'
@@ -141,7 +141,7 @@ export default defineComponent({
     const clickedPositionRef = useClickPosition()
     const isMountedRef = useIsMounted()
     const NDialogProvider = props.dialog
-      ? inject<DialogProviderInjection | null>('NDialogProvider', null)
+      ? inject(dialogProviderInjectionKey, null)
       : null
     function doUpdateShow (show: boolean): void {
       const { onUpdateShow, 'onUpdate:show': _onUpdateShow, onHide } = props

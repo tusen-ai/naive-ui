@@ -16,9 +16,10 @@ import {
   mergeProps
 } from 'vue'
 import { clickoutside } from 'vdirs'
+import { dialogPropKeys } from '../../dialog/src/Dialog'
 import { cardBasePropKeys } from '../../card/src/Card'
 import { NScrollbar, ScrollbarInst } from '../../scrollbar'
-import { NDialog, dialogPropKeys } from '../../dialog'
+import { NDialog } from '../../dialog'
 import { NCard } from '../../card'
 import { getFirstSlotVNode, keep, warn } from '../../_utils'
 import { presetProps } from './presetProps'

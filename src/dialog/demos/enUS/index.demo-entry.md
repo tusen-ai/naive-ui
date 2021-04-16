@@ -20,7 +20,6 @@ import { useDialog } from 'naive-ui'
 
 // content
 export default {
-  inject: ['dialog'],
   setup () {
     const dialog = useDialog()
     return {

@@ -6,11 +6,12 @@ import {
   ExtractPropTypes,
   provide,
   PropType,
-  inject,
-  reactive
+  reactive,
+  InjectionKey
 } from 'vue'
 import { createId } from 'seemly'
-import { omit, throwError } from '../../_utils'
+import { omit } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import DialogEnvironment, { exposedDialogEnvProps } from './DialogEnvironment'
 import { useClicked, useClickPosition } from 'vooks'
 
@@ -31,27 +32,37 @@ export interface DialogApiInjection {
   info: (options: DialogOptions) => DialogReactive
 }
 
+export const dialogApiInjectionKey: InjectionKey<DialogApiInjection> = Symbol(
+  'dialogApi'
+)
+
 export interface DialogProviderInjection {
   clicked: boolean
   clickPosition: { x: number, y: number } | null
 }
 
+export const dialogProviderInjectionKey: InjectionKey<DialogProviderInjection> = Symbol(
+  'dialogProvider'
+)
+
 interface DialogInst {
   hide: () => void
 }
 
-export function useDialog (): DialogApiInjection {
-  const dialog = inject<DialogApiInjection | null>('dialog', null)
-  if (dialog === null) throwError('use-dialog', 'Dialog injection not found.')
-  return dialog
+export type DialogProviderInst = DialogApiInjection
+
+const dialogProviderProps = {
+  injectionKey: String,
+  to: [String, Object] as PropType<string | HTMLElement>
 }
+
+export type DialogProviderProps = ExtractPublicPropTypes<
+  typeof dialogProviderProps
+>
 
 export default defineComponent({
   name: 'DialogProvider',
-  props: {
-    injectionKey: String,
-    to: [String, Object] as PropType<string | HTMLElement>
-  },
+  props: dialogProviderProps,
   setup () {
     const dialogListRef = ref<DialogReactive[]>([])
     const dialogInstRefs: Record<string, DialogInst> = {}
@@ -79,21 +90,23 @@ export default defineComponent({
         1
       )
     }
-    provide<DialogApiInjection>('dialog', {
+    const api = {
       create,
       info: typedApi[0],
       success: typedApi[1],
       warning: typedApi[2],
       error: typedApi[3]
-    })
-    provide<DialogProviderInjection>(
-      'NDialogProvider',
+    }
+    provide(dialogApiInjectionKey, api)
+    provide(
+      dialogProviderInjectionKey,
       reactive({
         clicked: useClicked(64),
         clickPosition: useClickPosition()
       })
     )
     return {
+      ...api,
       dialogList: dialogListRef,
       dialogInstRefs,
       handleAfterLeave
