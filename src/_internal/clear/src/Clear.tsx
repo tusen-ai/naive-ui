@@ -1,4 +1,4 @@
-import { h, defineComponent, PropType } from 'vue'
+import { h, defineComponent, PropType, toRef } from 'vue'
 import { useStyle, useConfig } from '../../../_mixins'
 import { ClearIcon } from '../../icons'
 import NBaseIcon from '../../icon'
@@ -18,8 +18,8 @@ export default defineComponent({
     },
     onClear: Function as PropType<(e: MouseEvent) => void>
   },
-  setup () {
-    useStyle('BaseClear', style)
+  setup (props) {
+    useStyle('BaseClear', style, toRef(props, 'clsPrefix'))
     const { NConfigProvider } = useConfig()
     return {
       NConfigProvider,

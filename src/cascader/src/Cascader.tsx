@@ -21,7 +21,7 @@ import {
 } from 'vueuc'
 import { depx, changeColor } from 'seemly'
 import { useIsMounted, useMergedState } from 'vooks'
-import { NInternalSelection, InternalSelectionRef } from '../../_internal'
+import { NInternalSelection, InternalSelectionInst } from '../../_internal'
 import { useLocale, useTheme, useConfig, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { warn, call, useAdjustedTo } from '../../_utils'
@@ -160,7 +160,7 @@ export default defineComponent({
     const formItem = useFormItem(props)
     const cascaderMenuInstRef = ref<CascaderMenuInstance | null>(null)
     const selectMenuInstRef = ref<SelectMenuInstance | null>(null)
-    const triggerInstRef = ref<InternalSelectionRef | null>(null)
+    const triggerInstRef = ref<InternalSelectionInst | null>(null)
     const keyboardKeyRef = ref<Key | null>(null)
     const hoverKeyRef = ref<Key | null>(null)
     const loadingKeySetRef = ref<Set<Key>>(new Set())

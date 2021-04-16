@@ -24,7 +24,7 @@ import {
   NInternalSelection,
   InternalSelectMenuRef
 } from '../../_internal'
-import type { InternalSelectionRef } from '../../_internal'
+import type { InternalSelectionInst } from '../../_internal'
 import { selectLight, SelectTheme } from '../styles'
 import {
   tmOptions,
@@ -223,7 +223,7 @@ export default defineComponent({
       toRef(props, 'show'),
       uncontrolledShowRef
     )
-    const triggerRef = ref<InternalSelectionRef | null>(null)
+    const triggerRef = ref<InternalSelectionInst | null>(null)
     const followerRef = ref<FollowerRef | null>(null)
     const menuRef = ref<InternalSelectMenuRef | null>(null)
     const { locale } = useLocale('Select')

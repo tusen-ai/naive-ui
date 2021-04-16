@@ -26,7 +26,7 @@ import style from './styles/index.cssr'
 import type { SelectBaseOption } from '../../../select'
 import type { TagRef } from '../../../tag/src/Tag'
 
-export interface InternalSelectionRef {
+export interface InternalSelectionInst {
   focus: () => void
   focusInput: () => void
   $el: HTMLElement

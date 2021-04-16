@@ -1,13 +1,24 @@
 import { h, defineComponent } from 'vue'
-import { useStyle } from '../../_mixins'
+import { useConfig, useStyle } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import style from './styles/input-group.cssr'
+
+const inputGroupProps = {}
+
+export type InputGroupProps = ExtractPublicPropTypes<typeof inputGroupProps>
 
 export default defineComponent({
   name: 'InputGroup',
-  setup () {
-    useStyle('InputGroup', style)
+  props: inputGroupProps,
+  setup (props) {
+    const { mergedClsPrefix } = useConfig(props)
+    useStyle('InputGroup', style, mergedClsPrefix)
+    return {
+      cPrefix: mergedClsPrefix
+    }
   },
   render () {
-    return <div class="n-input-group">{this.$slots}</div>
+    const { cPrefix } = this
+    return <div class={`${cPrefix}-input-group`}>{this.$slots}</div>
   }
 })

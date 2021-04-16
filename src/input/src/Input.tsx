@@ -12,8 +12,7 @@ import {
   CSSProperties,
   watch,
   watchEffect,
-  WatchStopHandle,
-  ExtractPropTypes
+  WatchStopHandle
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { toRgbString, getAlphaString, getPadding } from 'seemly'
@@ -21,7 +20,7 @@ import { VResizeObserver } from 'vueuc'
 import { NBaseClear } from '../../_internal'
 import { useTheme, useLocale, useFormItem, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, createKey } from '../../_utils'
+import { call, createKey, ExtractPublicPropTypes } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import { inputLight } from '../styles'
 import type { InputTheme } from '../styles'
@@ -148,13 +147,21 @@ const inputProps = {
   }
 }
 
-export type InputProps = Partial<ExtractPropTypes<typeof inputProps>>
+export type InputProps = ExtractPublicPropTypes<typeof inputProps>
 
 export default defineComponent({
   name: 'Input',
   props: inputProps,
   setup (props) {
-    const themeRef = useTheme('Input', 'Input', style, inputLight, props)
+    const { mergedClsPrefix, mergedBordered } = useConfig(props)
+    const themeRef = useTheme(
+      'Input',
+      'Input',
+      style,
+      inputLight,
+      props,
+      mergedClsPrefix
+    )
     // dom refs
     const wrapperElRef = ref<HTMLElement | null>(null)
     const textareaElRef = ref<HTMLTextAreaElement | null>(null)
@@ -647,6 +654,8 @@ export default defineComponent({
       showClearButton,
       mergedSize: mergedSizeRef,
       textDecorationStyle: textDecorationStyleRef,
+      cPrefix: mergedClsPrefix,
+      mergedBordered,
       // methods
       handleCompositionStart,
       handleCompositionEnd,
@@ -663,7 +672,6 @@ export default defineComponent({
       handleClear,
       handleWrapperKeyDown,
       handleTextAreaMirrorResize,
-      ...useConfig(props),
       mergedTheme: themeRef,
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
@@ -764,20 +772,22 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     return (
       <div
         ref="wrapperElRef"
         class={[
-          'n-input',
+          `${cPrefix}-input`,
           {
-            'n-input--disabled': this.disabled,
-            'n-input--textarea': this.type === 'textarea',
-            'n-input--resizable': this.resizable && !this.autosize,
-            'n-input--autosize': this.autosize,
-            'n-input--round': this.round && !(this.type === 'textarea'),
-            'n-input--pair': this.pair,
-            'n-input--focus': this.mergedFocus,
-            'n-input--stateful': this.stateful
+            [`${cPrefix}-input--disabled`]: this.disabled,
+            [`${cPrefix}-input--textarea`]: this.type === 'textarea',
+            [`${cPrefix}-input--resizable`]: this.resizable && !this.autosize,
+            [`${cPrefix}-input--autosize`]: this.autosize,
+            [`${cPrefix}-input--round`]:
+              this.round && !(this.type === 'textarea'),
+            [`${cPrefix}-input--pair`]: this.pair,
+            [`${cPrefix}-input--focus`]: this.mergedFocus,
+            [`${cPrefix}-input--stateful`]: this.stateful
           }
         ]}
         style={this.cssVars as CSSProperties}
@@ -798,19 +808,19 @@ export default defineComponent({
         onKeydown={this.handleWrapperKeyDown}
       >
         {/* textarea & basic input */}
-        <div class="n-input-wrapper">
+        <div class={`${cPrefix}-input-wrapper`}>
           {this.$slots.affix || this.$slots.prefix ? (
-            <div class="n-input__prefix">
+            <div class={`${cPrefix}-input__prefix`}>
               {renderSlot(this.$slots, 'affix', undefined, () => {
                 return [renderSlot(this.$slots, 'prefix')]
               })}
             </div>
           ) : null}
           {this.type === 'textarea' ? (
-            <div class="n-input__textarea">
+            <div class={`${cPrefix}-input__textarea`}>
               <textarea
                 ref="textareaElRef"
-                class="n-input__textarea-el"
+                class={`${cPrefix}-input__textarea-el`}
                 autofocus={this.autofocus}
                 rows={Number(this.rows)}
                 placeholder={this.placeholder as string | undefined}
@@ -829,7 +839,7 @@ export default defineComponent({
                 onChange={this.handleChange}
               />
               {this.showPlaceholder1 ? (
-                <div class="n-input__placeholder" key="placeholder">
+                <div class={`${cPrefix}-input__placeholder`} key="placeholder">
                   {this.mergedPlaceholder[0]}
                 </div>
               ) : null}
@@ -839,7 +849,7 @@ export default defineComponent({
                     default: () => (
                       <div
                         ref="textareaMirrorElRef"
-                        class="n-input__textarea-mirror"
+                        class={`${cPrefix}-input__textarea-mirror`}
                         key="mirror"
                       />
                     )
@@ -848,11 +858,11 @@ export default defineComponent({
               ) : null}
             </div>
           ) : (
-            <div class="n-input__input">
+            <div class={`${cPrefix}-input__input`}>
               <input
                 ref="inputElRef"
                 type={this.type}
-                class="n-input__input-el"
+                class={`${cPrefix}-input__input-el`}
                 tabindex={
                   this.passivelyActivated && !this.activated ? -1 : undefined
                 }
@@ -875,13 +885,13 @@ export default defineComponent({
                 onChange={(e) => this.handleChange(e, 0)}
               />
               {this.showPlaceholder1 ? (
-                <div class="n-input__placeholder">
+                <div class={`${cPrefix}-input__placeholder`}>
                   <span>{this.mergedPlaceholder[0]}</span>
                 </div>
               ) : null}
               {this.autosize ? (
                 <div
-                  class="n-input__input-mirror"
+                  class={`${cPrefix}-input__input-mirror`}
                   key="mirror"
                   ref="inputMirrorElRef"
                 >
@@ -891,11 +901,12 @@ export default defineComponent({
             </div>
           )}
           {!this.pair && (this.$slots.suffix || this.clearable) ? (
-            <div class="n-input__suffix">
+            <div class={`${cPrefix}-input__suffix`}>
               {[
                 renderSlot(this.$slots, 'suffix'),
                 this.clearable || this.$slots.clear ? (
                   <NBaseClear
+                    clsPrefix={cPrefix}
                     show={this.showClearButton}
                     onClear={this.handleClear}
                   >
@@ -908,19 +919,19 @@ export default defineComponent({
         </div>
         {/* pair input */}
         {this.pair ? (
-          <span class="n-input__separator">
+          <span class={`${cPrefix}-input__separator`}>
             {renderSlot(this.$slots, 'separator', undefined, () => [
               this.separator
             ])}
           </span>
         ) : null}
         {this.pair ? (
-          <div class="n-input-wrapper">
-            <div class="n-input__input">
+          <div class={`${cPrefix}-input-wrapper`}>
+            <div class={`${cPrefix}-input__input`}>
               <input
                 ref="inputEl2Ref"
                 type={this.type}
-                class="n-input__input-el"
+                class={`${cPrefix}-input__input-el`}
                 tabindex={
                   this.passivelyActivated && !this.activated ? -1 : undefined
                 }
@@ -941,16 +952,17 @@ export default defineComponent({
                 onChange={(e) => this.handleChange(e, 1)}
               />
               {this.showPlaceholder2 ? (
-                <div class="n-input__placeholder">
+                <div class={`${cPrefix}-input__placeholder`}>
                   <span>{this.mergedPlaceholder[1]}</span>
                 </div>
               ) : null}
             </div>
-            <div class="n-input__suffix">
+            <div class={`${cPrefix}-input__suffix`}>
               {[
                 renderSlot(this.$slots, 'suffix'),
                 this.clearable || this.$slots.clear ? (
                   <NBaseClear
+                    clsPrefix={cPrefix}
                     show={this.showClearButton}
                     onClear={this.handleClear}
                   >
@@ -962,8 +974,12 @@ export default defineComponent({
           </div>
         ) : null}
         {/* border */}
-        {this.mergedBordered ? <div class="n-input__border" /> : null}
-        {this.mergedBordered ? <div class="n-input__state-border" /> : null}
+        {this.mergedBordered ? (
+          <div class={`${cPrefix}-input__border`} />
+        ) : null}
+        {this.mergedBordered ? (
+          <div class={`${cPrefix}-input__state-border`} />
+        ) : null}
       </div>
     )
   }

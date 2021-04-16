@@ -565,13 +565,9 @@ export default defineComponent({
     const commonInputProps: InputProps = {
       bordered: this.mergedBordered,
       size: this.mergedSize,
-      theme: this.mergedTheme.peers.Input,
-      themeOverrides: this.mergedTheme.peerOverrides.Input,
       passivelyActivated: true,
       disabled: this.disabled,
       readonly: this.disabled,
-      internalForceFocus: this.active,
-      internalDeactivateOnEnter: true,
       clearable: this.clearable,
       onClear: this.handleClear,
       onClick: this.handleTriggerClick,
@@ -625,6 +621,10 @@ export default defineComponent({
                         ]}
                         pair
                         onUpdateValue={this.handleRangeUpdateValue}
+                        theme={this.mergedTheme.peers.Input}
+                        themeOverrides={this.mergedTheme.peerOverrides.Input}
+                        internalForceFocus={this.active}
+                        internalDeactivateOnEnter
                         {...commonInputProps}
                       >
                         {{

@@ -1,3 +1,2 @@
-/* istanbul ignore file */
 export { default } from './src/Selection'
-export type { InternalSelectionRef } from './src/Selection'
+export type { InternalSelectionInst } from './src/Selection'
