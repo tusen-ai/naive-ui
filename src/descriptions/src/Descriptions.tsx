@@ -7,56 +7,61 @@ import {
   CSSProperties
 } from 'vue'
 import { useCompitable } from 'vooks'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { warn, getSlot, getVNodeChildren, createKey } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { descriptionsLight } from '../styles'
 import type { DescriptionsTheme } from '../styles'
 import { isDescriptionsItem } from './utils'
 import style from './styles/index.cssr'
 
+const descriptionProps = {
+  ...(useTheme.props as ThemeProps<DescriptionsTheme>),
+  title: String,
+  column: {
+    type: Number,
+    default: 3
+  },
+  columns: {
+    type: Number,
+    default: undefined
+  },
+  labelPlacement: {
+    type: String as PropType<'left' | 'top'>,
+    default: 'top'
+  },
+  labelAlign: {
+    type: String as PropType<'left' | 'right' | 'center'>,
+    default: 'left'
+  },
+  size: {
+    type: String as PropType<'small' | 'medium' | 'large'>,
+    default: 'medium'
+  },
+  bordered: {
+    type: Boolean,
+    default: false
+  }
+} as const
+
+export type DescriptionProps = ExtractPublicPropTypes<typeof descriptionProps>
+
 export default defineComponent({
   name: 'Descriptions',
-  props: {
-    ...(useTheme.props as ThemeProps<DescriptionsTheme>),
-    title: {
-      type: String,
-      default: undefined
-    },
-    column: {
-      type: Number,
-      default: 3
-    },
-    columns: {
-      type: Number,
-      default: undefined
-    },
-    labelPlacement: {
-      type: String as PropType<'left' | 'top'>,
-      default: 'top'
-    },
-    labelAlign: {
-      type: String as PropType<'left' | 'right' | 'center'>,
-      default: 'left'
-    },
-    size: {
-      type: String as PropType<'small' | 'medium' | 'large'>,
-      default: 'medium'
-    },
-    bordered: {
-      type: Boolean,
-      default: false
-    }
-  },
+  props: descriptionProps,
   setup (props) {
+    const { mergedClsPrefix } = useConfig(props)
     const themeRef = useTheme(
       'Descriptions',
       'Descriptions',
       style,
       descriptionsLight,
-      props
+      props,
+      mergedClsPrefix
     )
     return {
+      cPrefix: mergedClsPrefix,
       cssVars: computed(() => {
         const { size, bordered } = props
         const {
@@ -121,7 +126,8 @@ export default defineComponent({
       size,
       bordered,
       title,
-      cssVars
+      cssVars,
+      cPrefix
     } = this
     const filteredChildren: VNode[] = children.filter((child) =>
       isDescriptionsItem(child)
@@ -156,11 +162,11 @@ export default defineComponent({
       if (labelPlacement === 'left') {
         if (bordered) {
           state.row.push(
-            <th class="n-descriptions-table-header" colspan={1}>
+            <th class={`${cPrefix}-descriptions-table-header`} colspan={1}>
               {itemLabel}
             </th>,
             <td
-              class="n-descriptions-table-content"
+              class={`${cPrefix}-descriptions-table-content`}
               colspan={
                 isLastIteration
                   ? (compitableColumn - memorizedSpan) * 2 + 1
@@ -173,20 +179,20 @@ export default defineComponent({
         } else {
           state.row.push(
             <td
-              class="n-descriptions-table-content"
+              class={`${cPrefix}-descriptions-table-content`}
               colspan={
                 isLastIteration
                   ? (compitableColumn - memorizedSpan) * 2
                   : itemSpan * 2
               }
             >
-              <span class="n-descriptions-table-content__label">
+              <span class={`${cPrefix}-descriptions-table-content__label`}>
                 {[
                   ...itemLabel,
-                  <span class="n-descriptions-separator">:</span>
+                  <span class={`${cPrefix}-descriptions-separator`}>:</span>
                 ]}
               </span>
-              <span class="n-descriptions-table-content__content">
+              <span class={`${cPrefix}-descriptions-table-content__content`}>
                 {itemChildren}
               </span>
             </td>
@@ -197,12 +203,12 @@ export default defineComponent({
           ? (compitableColumn - memorizedSpan) * 2
           : itemSpan * 2
         state.row.push(
-          <th class="n-descriptions-table-header" colspan={colspan}>
+          <th class={`${cPrefix}-descriptions-table-header`} colspan={colspan}>
             {itemLabel}
           </th>
         )
         state.secondRow.push(
-          <td class="n-descriptions-table-content" colspan={colspan}>
+          <td class={`${cPrefix}-descriptions-table-content`} colspan={colspan}>
             {itemChildren}
           </td>
         )
@@ -223,26 +229,26 @@ export default defineComponent({
       return state
     }, defaultState)
     const rows = itemState.rows.map((row) => (
-      <tr class="n-descriptions-table-row">{row}</tr>
+      <tr class={`${cPrefix}-descriptions-table-row`}>{row}</tr>
     ))
     return (
       <div
         style={cssVars as CSSProperties}
         class={[
-          'n-descriptions',
-          `n-descriptions--${labelPlacement}-label-placement`,
-          `n-descriptions--${labelAlign}-label-align`,
-          `n-descriptions--${size}-size`,
-          bordered && 'n-descriptions--bordered'
+          `${cPrefix}-descriptions`,
+          `${cPrefix}-descriptions--${labelPlacement}-label-placement`,
+          `${cPrefix}-descriptions--${labelAlign}-label-align`,
+          `${cPrefix}-descriptions--${size}-size`,
+          bordered && `${cPrefix}-descriptions--bordered`
         ]}
       >
         {title || this.$slots.header ? (
-          <div class="n-descriptions-header">
+          <div class={`${cPrefix}-descriptions-header`}>
             {title || getSlot(this, 'header')}
           </div>
         ) : null}
-        <div class="n-descriptions-table-wrapper">
-          <table class="n-descriptions-table">
+        <div class={`${cPrefix}-descriptions-table-wrapper`}>
+          <table class={`${cPrefix}-descriptions-table`}>
             <tbody>{rows}</tbody>
           </table>
         </div>
