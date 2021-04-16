@@ -7,39 +7,42 @@ import {
   renderSlot,
   CSSProperties
 } from 'vue'
-import { useTheme } from '../../_mixins'
-import { createKey } from '../../_utils'
-import { timelineLight } from '../styles'
-import type { TimelineInjection } from './Timeline'
-import style from './styles/index.cssr'
+import { createKey, throwError } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import { timelineInjectionKey } from './Timeline'
+
+const timelineItemProps = {
+  time: [String, Number] as PropType<string | number>,
+  title: String,
+  content: String,
+  type: {
+    type: String as PropType<
+    'default' | 'success' | 'error' | 'warning' | 'info'
+    >,
+    default: 'default'
+  }
+}
+
+export type TimelineItemProps = ExtractPublicPropTypes<typeof timelineItemProps>
 
 export default defineComponent({
   name: 'TimelineItem',
-  props: {
-    time: [String, Number],
-    title: String,
-    content: String,
-    type: {
-      type: String as PropType<
-      'default' | 'success' | 'error' | 'warning' | 'info'
-      >,
-      default: 'default'
-    }
-  },
+  props: timelineItemProps,
   setup (props) {
-    const NTimeline = inject<TimelineInjection>(
-      'NTimeline'
-    ) as TimelineInjection
-    const themeRef = useTheme(
-      'Timeline',
-      'Timeline',
-      style,
-      timelineLight,
-      NTimeline
-    )
+    const NTimeline = inject(timelineInjectionKey)
+    if (!NTimeline) {
+      throwError(
+        'timeline-item',
+        '`n-timeline-item` must be placed inside `n-timeline`.'
+      )
+    }
     return {
+      cPrefix: NTimeline.cPrefixRef,
       cssVars: computed(() => {
-        const { size } = NTimeline
+        const {
+          props: { size },
+          mergedThemeRef
+        } = NTimeline
         const { type } = props
         const {
           self: {
@@ -54,7 +57,7 @@ export default defineComponent({
             [createKey('circleBorder', type)]: circleBorder
           },
           common: { cubicBezierEaseInOut }
-        } = themeRef.value
+        } = mergedThemeRef.value
         return {
           '--bezier': cubicBezierEaseInOut,
           '--circle-border': circleBorder,
@@ -71,27 +74,31 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     return (
       <div
-        class={['n-timeline-item', `n-timeline-item--${this.type}-type`]}
+        class={[
+          `${cPrefix}-timeline-item`,
+          `${cPrefix}-timeline-item--${this.type}-type`
+        ]}
         style={this.cssVars as CSSProperties}
       >
-        <div class="n-timeline-item-timeline">
-          <div class="n-timeline-item-timeline__line" />
-          <div class="n-timeline-item-timeline__circle" />
+        <div class={`${cPrefix}-timeline-item-timeline`}>
+          <div class={`${cPrefix}-timeline-item-timeline__line`} />
+          <div class={`${cPrefix}-timeline-item-timeline__circle`} />
         </div>
-        <div class="n-timeline-item-content">
+        <div class={`${cPrefix}-timeline-item-content`}>
           {this.title ? (
-            <div class="n-timeline-item-content__title">
+            <div class={`${cPrefix}-timeline-item-content__title`}>
               {renderSlot(this.$slots, 'header', undefined, () => [this.title])}
             </div>
           ) : null}
-          <div class="n-timeline-item-content__content">
+          <div class={`${cPrefix}-timeline-item-content__content`}>
             {renderSlot(this.$slots, 'default', undefined, () => [
               this.content
             ])}
           </div>
-          <div class="n-timeline-item-content__meta">
+          <div class={`${cPrefix}-timeline-item-content__meta`}>
             {renderSlot(this.$slots, 'footer', undefined, () => [this.time])}
           </div>
         </div>

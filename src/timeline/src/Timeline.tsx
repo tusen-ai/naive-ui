@@ -1,7 +1,18 @@
-import { h, defineComponent, PropType, ExtractPropTypes, provide } from 'vue'
-import { useTheme } from '../../_mixins'
+import {
+  h,
+  defineComponent,
+  PropType,
+  ExtractPropTypes,
+  provide,
+  InjectionKey,
+  Ref
+} from 'vue'
+import { MergedTheme, useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { TimelineTheme } from '../styles'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import { timelineLight } from '../styles'
+import style from './styles/index.cssr'
 
 const timelineProps = {
   ...(useTheme.props as ThemeProps<TimelineTheme>),
@@ -15,28 +26,47 @@ const timelineProps = {
   }
 } as const
 
-export type TimelineInjection = ExtractPropTypes<typeof timelineProps>
+export interface TimelineInjection {
+  props: ExtractPropTypes<typeof timelineProps>
+  mergedThemeRef: Ref<MergedTheme<TimelineTheme>>
+  cPrefixRef: Ref<string>
+}
+export const timelineInjectionKey: InjectionKey<TimelineInjection> = Symbol(
+  'timeline'
+)
+export type TimelineProps = ExtractPublicPropTypes<typeof timelineProps>
 
 export default defineComponent({
   name: 'Timeline',
-  provide () {
-    return {
-      NTimeline: this
-    }
-  },
   props: timelineProps,
   setup (props, { slots }) {
-    provide<TimelineInjection>('NTimeline', props)
-    return () => (
-      <div
-        class={[
-          'n-timeline',
-          `n-timeline--${props.size}-size`,
-          `n-timeline--${props.itemPlacement}-placement`
-        ]}
-      >
-        {slots}
-      </div>
+    const { mergedClsPrefix } = useConfig(props)
+    const themeRef = useTheme(
+      'Timeline',
+      'Timeline',
+      style,
+      timelineLight,
+      props,
+      mergedClsPrefix
     )
+    provide(timelineInjectionKey, {
+      props,
+      mergedThemeRef: themeRef,
+      cPrefixRef: mergedClsPrefix
+    })
+    return () => {
+      const { value: cPrefix } = mergedClsPrefix
+      return (
+        <div
+          class={[
+            `${cPrefix}-timeline`,
+            `${cPrefix}-timeline--${props.size}-size`,
+            `${cPrefix}-timeline--${props.itemPlacement}-placement`
+          ]}
+        >
+          {slots}
+        </div>
+      )
+    }
   }
 })
