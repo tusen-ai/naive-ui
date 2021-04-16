@@ -23,10 +23,9 @@ import { NDialog } from '../../dialog'
 import { NCard } from '../../card'
 import { getFirstSlotVNode, keep, warn } from '../../_utils'
 import { presetProps } from './presetProps'
-import type { ModalInjection } from './Modal'
 import { drawerBodyInjectionKey } from '../../drawer/src/interface'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
-import { modalBodyInjectionKey } from './interface'
+import { modalBodyInjectionKey, modalInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'ModalBody',
@@ -77,7 +76,8 @@ export default defineComponent({
     watch(toRef(props, 'show'), (value) => {
       if (value) displayedRef.value = true
     })
-    const NModal = inject<ModalInjection>('NModal') as ModalInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NModal = inject(modalInjectionKey)!
     function styleTransformOrigin (): string {
       const { value: transformOriginX } = transformOriginXRef
       const { value: transformOriginY } = transformOriginYRef
@@ -139,7 +139,10 @@ export default defineComponent({
     provide(drawerBodyInjectionKey, null)
     provide(popoverBodyInjectionKey, null)
     return {
-      NModal,
+      mergedTheme: NModal.mergedThemeRef,
+      appear: NModal.appearRef,
+      isMounted: NModal.isMountedRef,
+      cPrefix: NModal.cPrefixRef,
       bodyRef,
       scrollbarRef,
       displayed: displayedRef,
@@ -154,14 +157,14 @@ export default defineComponent({
   },
   render () {
     const {
-      NModal,
       $slots,
       $attrs,
       handleEnter,
       handleAfterLeave,
       handleBeforeLeave,
       handleClickOutside,
-      preset
+      preset,
+      cPrefix
     } = this
     let childNode: VNode | null = null
     if (!preset) {
@@ -172,7 +175,7 @@ export default defineComponent({
       }
       childNode.props = mergeProps(
         {
-          class: 'n-modal'
+          class: `${cPrefix}-modal`
         },
         $attrs,
         childNode.props || {}
@@ -180,18 +183,18 @@ export default defineComponent({
     }
     return this.displayDirective === 'show' || this.displayed || this.show
       ? withDirectives(
-        <div class="n-modal-body-wrapper">
+        <div class={`${cPrefix}-modal-body-wrapper`}>
           <NScrollbar
             ref="scrollbarRef"
-            theme={NModal.mergedTheme.peers.Scrollbar}
-            themeOverrides={NModal.mergedTheme.peerOverrides.Scrollbar}
-            contentClass="n-modal-scroll-content"
+            theme={this.mergedTheme.peers.Scrollbar}
+            themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
+            contentClass={`${cPrefix}-modal-scroll-content`}
           >
             {{
               default: () => (
                 <Transition
                   name="n-fade-in-scale-up-transition"
-                  appear={NModal.appear ?? NModal.isMounted}
+                  appear={this.appear ?? this.isMounted}
                   onEnter={handleEnter as any}
                   onAfterLeave={handleAfterLeave}
                   onBeforeLeave={handleBeforeLeave as any}
@@ -203,11 +206,11 @@ export default defineComponent({
                           this.preset === 'dialog' ? (
                             <NDialog
                               {...this.$attrs}
-                              class="n-modal"
+                              class={`${cPrefix}-modal`}
                               ref="bodyRef"
-                              theme={NModal.mergedTheme.peers.Dialog}
+                              theme={this.mergedTheme.peers.Dialog}
                               themeOverrides={
-                                NModal.mergedTheme.peerOverrides.Dialog
+                                this.mergedTheme.peerOverrides.Dialog
                               }
                               {...keep(this.$props, dialogPropKeys)}
                             >
@@ -217,10 +220,10 @@ export default defineComponent({
                             <NCard
                               {...this.$attrs}
                               ref="bodyRef"
-                              class="n-modal"
-                              theme={NModal.mergedTheme.peers.Card}
+                              class={`${cPrefix}-modal`}
+                              theme={this.mergedTheme.peers.Card}
                               themeOverrides={
-                                NModal.mergedTheme.peerOverrides.Card
+                                this.mergedTheme.peerOverrides.Card
                               }
                               {...keep(this.$props, cardBasePropKeys)}
                             >

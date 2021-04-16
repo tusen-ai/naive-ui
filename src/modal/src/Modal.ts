@@ -6,7 +6,6 @@ import {
   computed,
   defineComponent,
   provide,
-  reactive,
   PropType,
   CSSProperties,
   toRef,
@@ -17,126 +16,125 @@ import { useIsMounted, useClicked, useClickPosition } from 'vooks'
 import { VLazyTeleport } from 'vueuc'
 import { dialogProviderInjectionKey } from '../../dialog/src/DialogProvider'
 import { useConfig, useTheme } from '../../_mixins'
-import type { ThemeProps, MergedTheme } from '../../_mixins'
-import { warn, keep, call } from '../../_utils'
+import type { ThemeProps } from '../../_mixins'
+import { warn, keep, call, ExtractPublicPropTypes } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import { modalLight } from '../styles'
 import type { ModalTheme } from '../styles'
 import { presetProps, presetPropsKeys } from './presetProps'
 import NModalBodyWrapper from './BodyWrapper'
+import { modalInjectionKey } from './interface'
 import style from './styles/index.cssr'
 
-export interface ModalInjection {
-  getMousePosition: () => {
-    x: number
-    y: number
-  } | null
-  mergedTheme: MergedTheme<ModalTheme>
-  isMounted: boolean
-  appear: boolean | undefined
+const modalProps = {
+  ...(useTheme.props as ThemeProps<ModalTheme>),
+  show: {
+    type: Boolean,
+    default: false
+  },
+  unstableShowMask: {
+    type: Boolean,
+    default: true
+  },
+  maskClosable: {
+    type: Boolean,
+    default: true
+  },
+  preset: String as PropType<'confirm' | 'dialog' | 'card'>,
+  to: [String, Object] as PropType<string | HTMLElement>,
+  displayDirective: {
+    type: String as PropType<'if' | 'show'>,
+    default: 'if'
+  },
+  ...presetProps,
+  // events
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:show': [Function, Array] as PropType<
+  MaybeArray<(value: boolean) => void>
+  >,
+  onUpdateShow: [Function, Array] as PropType<
+  MaybeArray<(value: boolean) => void>
+  >,
+  // private
+  dialog: Boolean,
+  appear: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
+  onBeforeLeave: Function as PropType<() => void>,
+  onAfterLeave: Function as PropType<() => void>,
+  onClose: Function as PropType<() => Promise<boolean> | boolean | any>,
+  onPositiveClick: Function as PropType<() => Promise<boolean> | boolean | any>,
+  onNegativeClick: Function as PropType<() => Promise<boolean> | boolean | any>,
+  // deprecated
+  overlayStyle: {
+    type: [String, Object] as PropType<string | CSSProperties | undefined>,
+    validator: () => {
+      if (__DEV__) {
+        warn(
+          'modal',
+          '`overlay-style` is deprecated, please use `style` instead.'
+        )
+      }
+      return true
+    },
+    default: undefined
+  },
+  onBeforeHide: {
+    type: (Function as unknown) as PropType<(() => void) | undefined>,
+    validator: () => {
+      if (__DEV__) {
+        warn(
+          'modal',
+          '`on-before-hide` is deprecated, please use `on-before-leave` instead.'
+        )
+      }
+      return true
+    },
+    default: undefined
+  },
+  onAfterHide: {
+    type: (Function as unknown) as PropType<(() => void) | undefined>,
+    validator: () => {
+      if (__DEV__) {
+        warn(
+          'modal',
+          '`on-after-hide` is deprecated, please use `on-after-leave` instead.'
+        )
+      }
+      return true
+    },
+    default: undefined
+  },
+  onHide: {
+    type: (Function as unknown) as PropType<
+    ((value: false) => void) | undefined
+    >,
+    validator: () => {
+      if (__DEV__) warn('modal', '`on-hide` is deprecated.')
+      return true
+    },
+    default: undefined
+  }
 }
+
+export type ModalProps = ExtractPublicPropTypes<typeof modalProps>
 
 export default defineComponent({
   name: 'Modal',
   inheritAttrs: false,
-  props: {
-    ...(useTheme.props as ThemeProps<ModalTheme>),
-    show: {
-      type: Boolean,
-      default: false
-    },
-    unstableShowMask: {
-      type: Boolean,
-      default: true
-    },
-    maskClosable: {
-      type: Boolean,
-      default: true
-    },
-    preset: String as PropType<'confirm' | 'dialog' | 'card'>,
-    to: [String, Object] as PropType<string | HTMLElement>,
-    displayDirective: {
-      type: String as PropType<'if' | 'show'>,
-      default: 'if'
-    },
-    ...presetProps,
-    // events
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:show': [Function, Array] as PropType<
-    MaybeArray<(value: boolean) => void>
-    >,
-    onUpdateShow: [Function, Array] as PropType<
-    MaybeArray<(value: boolean) => void>
-    >,
-    // private
-    dialog: Boolean,
-    appear: {
-      type: Boolean as PropType<boolean | undefined>,
-      default: undefined
-    },
-    onBeforeLeave: Function as PropType<() => void>,
-    onAfterLeave: Function as PropType<() => void>,
-    onClose: Function as PropType<() => Promise<boolean> | boolean | any>,
-    onPositiveClick: Function as PropType<
-    () => Promise<boolean> | boolean | any
-    >,
-    onNegativeClick: Function as PropType<
-    () => Promise<boolean> | boolean | any
-    >,
-    // deprecated
-    overlayStyle: {
-      type: [String, Object] as PropType<string | CSSProperties | undefined>,
-      validator: () => {
-        if (__DEV__) {
-          warn(
-            'modal',
-            '`overlay-style` is deprecated, please use `style` instead.'
-          )
-        }
-        return true
-      },
-      default: undefined
-    },
-    onBeforeHide: {
-      type: (Function as unknown) as PropType<(() => void) | undefined>,
-      validator: () => {
-        if (__DEV__) {
-          warn(
-            'modal',
-            '`on-before-hide` is deprecated, please use `on-before-leave` instead.'
-          )
-        }
-        return true
-      },
-      default: undefined
-    },
-    onAfterHide: {
-      type: (Function as unknown) as PropType<(() => void) | undefined>,
-      validator: () => {
-        if (__DEV__) {
-          warn(
-            'modal',
-            '`on-after-hide` is deprecated, please use `on-after-leave` instead.'
-          )
-        }
-        return true
-      },
-      default: undefined
-    },
-    onHide: {
-      type: (Function as unknown) as PropType<
-      ((value: false) => void) | undefined
-      >,
-      validator: () => {
-        if (__DEV__) warn('modal', '`on-hide` is deprecated.')
-        return true
-      },
-      default: undefined
-    }
-  },
+  props: modalProps,
   setup (props) {
     const containerRef = ref<HTMLElement | null>(null)
-    const themeRef = useTheme('Modal', 'Modal', style, modalLight, props)
+    const { mergedClsPrefix, namespace } = useConfig(props)
+    const themeRef = useTheme(
+      'Modal',
+      'Modal',
+      style,
+      modalLight,
+      props,
+      mergedClsPrefix
+    )
     const clickedRef = useClicked(64)
     const clickedPositionRef = useClickPosition()
     const isMountedRef = useIsMounted()
@@ -201,28 +199,26 @@ export default defineComponent({
         }
       }
     }
-    provide<ModalInjection>(
-      'NModal',
-      reactive({
-        getMousePosition: () => {
-          if (NDialogProvider) {
-            if (NDialogProvider.clicked && NDialogProvider.clickPosition) {
-              return NDialogProvider.clickPosition
-            }
+    provide(modalInjectionKey, {
+      getMousePosition: () => {
+        if (NDialogProvider) {
+          if (NDialogProvider.clicked && NDialogProvider.clickPosition) {
+            return NDialogProvider.clickPosition
           }
-          if (clickedRef.value) {
-            return clickedPositionRef.value
-          }
-          return null
-        },
-        mergedTheme: themeRef,
-        isMounted: isMountedRef,
-        appear: toRef(props, 'appear')
-      })
-    )
-    provide('NDrawer', null)
+        }
+        if (clickedRef.value) {
+          return clickedPositionRef.value
+        }
+        return null
+      },
+      cPrefixRef: mergedClsPrefix,
+      mergedThemeRef: themeRef,
+      isMountedRef: isMountedRef,
+      appearRef: toRef(props, 'appear')
+    })
     return {
-      ...useConfig(props),
+      cPrefix: mergedClsPrefix,
+      namespace,
       isMounted: isMountedRef,
       containerRef,
       presetProps: computed(() => {
@@ -264,7 +260,7 @@ export default defineComponent({
               'div',
               {
                 ref: 'containerRef',
-                class: ['n-modal-container', this.namespace],
+                class: [`${this.cPrefix}-modal-container`, this.namespace],
                 style: this.cssVars as CSSProperties
               },
               [
@@ -281,7 +277,7 @@ export default defineComponent({
                         return this.show
                           ? h('div', {
                             ref: 'containerRef',
-                            class: 'n-modal-mask'
+                            class: `${this.cPrefix}-modal-mask`
                           })
                           : null
                       }
