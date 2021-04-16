@@ -6,73 +6,83 @@ import { NInput } from '../../input'
 import type { InputInst } from '../../input'
 import { NBaseIcon } from '../../_internal'
 import { NButton } from '../../button'
-import { useTheme, useFormItem, useLocale } from '../../_mixins'
+import { useTheme, useFormItem, useLocale, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn, call, MaybeArray } from '../../_utils'
+import { warn, call, MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { inputNumberLight, InputNumberTheme } from '../styles'
 import { parse, validator, format, parseNumber } from './utils'
 
+const inputNumberProps = {
+  ...(useTheme.props as ThemeProps<InputNumberTheme>),
+  placeholder: String,
+  defaultValue: {
+    type: Number as PropType<number | null>,
+    default: null
+  },
+  value: {
+    type: Number,
+    default: undefined
+  },
+  step: {
+    type: [Number, String],
+    default: 1
+  },
+  min: {
+    type: [Number, String],
+    default: undefined
+  },
+  max: {
+    type: [Number, String],
+    default: undefined
+  },
+  size: String as PropType<'small' | 'medium' | 'large'>,
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  validator: Function as PropType<(value: number) => boolean>,
+  bordered: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:value': [Function, Array] as PropType<
+  MaybeArray<(value: number) => void>
+  >,
+  onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
+  onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
+  // deprecated
+  onChange: {
+    type: [Function, Array] as PropType<
+    MaybeArray<(value: number) => void> | undefined
+    >,
+    validator: () => {
+      if (__DEV__) {
+        warn(
+          'input-number',
+          '`on-change` is deprecated, please use `on-update:value` instead.'
+        )
+      }
+      return true
+    },
+    default: undefined
+  }
+}
+
+export type InputNumberProps = ExtractPublicPropTypes<typeof inputNumberProps>
+
 export default defineComponent({
   name: 'InputNumber',
-  props: {
-    ...(useTheme.props as ThemeProps<InputNumberTheme>),
-    placeholder: String,
-    defaultValue: {
-      type: Number as PropType<number | null>,
-      default: null
-    },
-    value: {
-      type: Number,
-      default: undefined
-    },
-    step: {
-      type: [Number, String],
-      default: 1
-    },
-    min: {
-      type: [Number, String],
-      default: undefined
-    },
-    max: {
-      type: [Number, String],
-      default: undefined
-    },
-    size: String as PropType<'small' | 'medium' | 'large'>,
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    validator: Function as PropType<(value: number) => boolean>,
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': [Function, Array] as PropType<
-    MaybeArray<(value: number) => void>
-    >,
-    onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
-    onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
-    // deprecated
-    onChange: {
-      type: [Function, Array] as PropType<
-      MaybeArray<(value: number) => void> | undefined
-      >,
-      validator: () => {
-        if (__DEV__) {
-          warn(
-            'input-number',
-            '`on-change` is deprecated, please use `on-update:value` instead.'
-          )
-        }
-        return true
-      },
-      default: undefined
-    }
-  },
+  props: inputNumberProps,
   setup (props) {
+    const { mergedBordered, mergedClsPrefix } = useConfig(props)
     const themeRef = useTheme(
       'InputNumber',
       'InputNumber',
       undefined,
       inputNumberLight,
-      props
+      props,
+      mergedClsPrefix
     )
     const { locale } = useLocale('InputNumber')
     const formItem = useFormItem(props)
@@ -280,6 +290,8 @@ export default defineComponent({
       inputInstRef,
       minusButtonInstRef,
       addButtonInstRef,
+      cPrefix: mergedClsPrefix,
+      mergedBordered,
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
       mergedPlaceholder: mergedPlaceholderRef,
@@ -315,10 +327,12 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     return (
-      <div class="NInput-number">
+      <div class={`${cPrefix}-input-number`}>
         <NInput
           ref="inputInstRef"
+          bordered={this.mergedBordered}
           value={this.displayedValue}
           onUpdateValue={this.handleUpdateDisplayedValue}
           passively-activated
@@ -348,7 +362,7 @@ export default defineComponent({
               >
                 {{
                   default: () => (
-                    <NBaseIcon>
+                    <NBaseIcon clsPrefix={cPrefix}>
                       {{
                         default: () => <RemoveIcon />
                       }}
@@ -366,7 +380,7 @@ export default defineComponent({
               >
                 {{
                   default: () => (
-                    <NBaseIcon>
+                    <NBaseIcon clsPrefix={cPrefix}>
                       {{
                         default: () => <AddIcon />
                       }}

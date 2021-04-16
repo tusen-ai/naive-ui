@@ -18,6 +18,7 @@ validator
 
 | 名称            | 类型                             | 默认值      | 说明 |
 | --------------- | -------------------------------- | ----------- | ---- |
+| bordered        | `boolean`                        | `true`      |      |
 | default-value   | `number \| null`                 | `null`      |      |
 | disabled        | `boolean`                        | `false`     |      |
 | max             | `number`                         | `undefined` |      |
