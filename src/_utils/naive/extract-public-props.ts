@@ -5,5 +5,5 @@ type themePropKeys = keyof typeof useTheme.props
 
 export type ExtractPublicPropTypes<T> = Omit<
 Partial<ExtractPropTypes<T>>,
-themePropKeys
+themePropKeys | Extract<keyof T, `internal${string}`>
 >
