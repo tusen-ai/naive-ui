@@ -1,9 +1,18 @@
-import { computed, inject, provide, onBeforeUnmount, ComputedRef } from 'vue'
+import {
+  computed,
+  inject,
+  provide,
+  onBeforeUnmount,
+  ComputedRef,
+  InjectionKey,
+  Ref
+} from 'vue'
 
 type FormItemSize = 'small' | 'medium' | 'large'
 type AllowedSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge'
 
 export interface FormItemInjection {
+  path: Ref<string | undefined>
   mergedSize: ComputedRef<FormItemSize>
   restoreValidation: () => void
   handleContentBlur: () => void
@@ -11,6 +20,10 @@ export interface FormItemInjection {
   handleContentInput: () => void
   handleContentChange: () => void
 }
+
+export const formItemInjectionKey: InjectionKey<FormItemInjection> = Symbol(
+  'formItem'
+)
 
 interface UseFormItemOptions<T> {
   defaultSize?: FormItemSize
@@ -35,8 +48,8 @@ export default function useFormItem<T extends AllowedSize = FormItemSize> (
   props: UseFormItemProps<T>,
   { defaultSize = 'medium', mergedSize }: UseFormItemOptions<T> = {}
 ): UseFormItem<T> {
-  const NFormItem = inject<FormItemInjection | null>('NFormItem', null)
-  provide('NFormItem', null)
+  const NFormItem = inject(formItemInjectionKey, null)
+  provide(formItemInjectionKey, null)
   const mergedSizeRef = computed(
     mergedSize
       ? () => mergedSize(NFormItem)

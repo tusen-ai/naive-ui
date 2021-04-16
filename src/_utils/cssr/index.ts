@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import CSSRender, { CNode, CProperties } from 'css-render'
 import BEMPlugin from '@css-render/plugin-bem'
 
@@ -13,43 +14,45 @@ const plugin = BEMPlugin({
   modifierPrefix
 })
 cssr.use(plugin)
-const { c, context, find } = cssr
-context.theme = null
-context.palette = null
+const { c, find } = cssr
 const { cB, cE, cM, cNotM } = plugin
 
 function insideFormItem (status: string | null, style: CNode): CNode {
   if (status === null) return style
-  return c(`${prefix}form-item`, [
-    c(`${prefix}form-item-blank`, [
-      c(() => `&${prefix}form-item-blank${modifierPrefix}${status}`, [style])
-    ])
+  return c([
+    ({ props: { bPrefix } }) =>
+      c(`${bPrefix || prefix}form-item`, [
+        c(`${bPrefix || prefix}form-item-blank`, [
+          c(`&${bPrefix || prefix}form-item-blank${modifierPrefix}${status}`, [
+            style
+          ])
+        ])
+      ])
   ])
 }
 
 function insideModal (style: CNode): CNode {
-  return c(`${prefix}modal, ${prefix}drawer`, [style])
+  return c(
+    ({ props: { bPrefix } }) =>
+      `${bPrefix || prefix}modal, ${bPrefix || prefix}drawer`,
+    [style]
+  )
 }
 
 function insidePopover (style: CNode): CNode {
-  return c(`${prefix}popover:not(${prefix}tooltip)`, [style])
-}
-
-function cRB (selector: string, ...rest: any[]): CNode {
-  return (c as any)(`${prefix}${selector}`, ...rest)
+  return c(
+    ({ props: { bPrefix } }) =>
+      `${bPrefix || prefix}popover:not(${bPrefix || prefix}tooltip)`,
+    [style]
+  )
 }
 
 function asModal (style: CProperties): CNode {
-  return c(`&${prefix}modal`, style)
-}
-
-function withPrefix (selector: string): string {
-  return `${prefix}${selector}`
+  return c(({ props: { bPrefix } }) => `&${bPrefix || prefix}modal`, style)
 }
 
 export {
   c,
-  cRB,
   cB,
   cE,
   cM,
@@ -57,7 +60,6 @@ export {
   insideFormItem,
   insideModal,
   insidePopover,
-  withPrefix,
   asModal,
   prefix,
   namespace,

@@ -1,15 +1,16 @@
 import { inject, computed, ref, ComputedRef } from 'vue'
 import { get } from 'lodash-es'
 import { pxfy } from 'seemly'
-import { FormItemProps } from './FormItem'
-import { Size, FormInjection, FormItemRule } from './interface'
+import type { FormItemSetupProps } from './FormItem'
+import { formInjectionKey } from './interface'
+import type { Size, FormItemRule } from './interface'
 
 export function formItemSize (
-  props: FormItemProps
+  props: FormItemSetupProps
 ): {
     mergedSize: ComputedRef<Size>
   } {
-  const NForm = inject<FormInjection | null>('NForm', null)
+  const NForm = inject(formInjectionKey, null)
   return {
     mergedSize: computed(() => {
       if (props.size !== undefined) return props.size
@@ -20,8 +21,8 @@ export function formItemSize (
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function formItemMisc (props: FormItemProps) {
-  const NForm = inject<FormInjection | null>('NForm', null)
+export function formItemMisc (props: FormItemSetupProps) {
+  const NForm = inject(formInjectionKey, null)
   const mergedLabelWidthRef = computed(() => {
     if (mergedLabelPlacementRef.value === 'top') return
     const { labelWidth } = props
@@ -82,8 +83,8 @@ export function formItemMisc (props: FormItemProps) {
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function formItemRule (props: FormItemProps) {
-  const NForm = inject<FormInjection | null>('NForm', null)
+export function formItemRule (props: FormItemSetupProps) {
+  const NForm = inject(formInjectionKey, null)
   const compatibleRulePathRef = computed(() => {
     const { rulePath } = props
     if (rulePath !== undefined) return rulePath

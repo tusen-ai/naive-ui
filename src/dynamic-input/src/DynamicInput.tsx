@@ -21,6 +21,7 @@ import { NButton, NButtonGroup } from '../../button'
 import { useTheme, useLocale, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { warn, call, MaybeArray, ExtractPublicPropTypes } from '../../_utils'
+import { formItemInjectionKey } from '../../_mixins/use-form-item'
 import { dynamicInputLight } from '../styles'
 import type { DynamicInputTheme } from '../styles'
 import NDynamicInputInputPreset from './InputPreset'
@@ -30,10 +31,6 @@ import type { OnUpdateValue } from './interface'
 import style from './styles/index.cssr'
 
 const globalDataKeyMap = new WeakMap()
-
-interface FormItemInjection {
-  path?: string
-}
 
 const dynamicInputProps = {
   ...(useTheme.props as ThemeProps<DynamicInputTheme>),
@@ -107,7 +104,7 @@ export default defineComponent({
   props: dynamicInputProps,
   setup (props, { slots }) {
     const { NConfigProvider, mergedClsPrefix } = useConfig()
-    const NFormItem = inject<FormItemInjection | null>('NFormItem', null)
+    const NFormItem = inject(formItemInjectionKey, null)
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(
@@ -306,9 +303,11 @@ export default defineComponent({
                 <NDynamicInputInputPreset
                   clsPrefix={cPrefix}
                   value={mergedValue[index]}
-                  parentPath={NFormItem ? NFormItem.path : undefined}
+                  parentPath={NFormItem ? NFormItem.path.value : undefined}
                   path={
-                    NFormItem?.path ? `${NFormItem.path}[${index}]` : undefined
+                    NFormItem?.path.value
+                      ? `${NFormItem.path.value}[${index}]`
+                      : undefined
                   }
                   onUpdateValue={(v) => handleValueChange(index, v)}
                 />
@@ -316,9 +315,11 @@ export default defineComponent({
                 <NDynamicInputPairPreset
                   clsPrefix={cPrefix}
                   value={mergedValue[index]}
-                  parentPath={NFormItem ? NFormItem.path : undefined}
+                  parentPath={NFormItem ? NFormItem.path.value : undefined}
                   path={
-                    NFormItem?.path ? `${NFormItem.path}[${index}]` : undefined
+                    NFormItem?.path.value
+                      ? `${NFormItem.path.value}[${index}]`
+                      : undefined
                   }
                   onUpdateValue={(v) => handleValueChange(index, v)}
                 />

@@ -1,18 +1,23 @@
 import { h, ref, defineComponent } from 'vue'
 import NRow, { rowProps, rowPropKeys } from '../../legacy-grid/src/Row'
 import { keep } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import NFormItemCol, {
   formItemColProps,
   formItemColPropKeys
 } from './FormItemCol'
 import { FormItemColRef } from './interface'
 
+const formItemRowProps = {
+  ...rowProps,
+  ...formItemColProps
+}
+
+export type FormItemRowProps = ExtractPublicPropTypes<typeof formItemRowProps>
+
 export default defineComponent({
   name: 'FormItemRow',
-  props: {
-    ...rowProps,
-    ...formItemColProps
-  },
+  props: formItemRowProps,
   setup () {
     const formItemColInstRef = ref<FormItemColRef | null>(null)
     const validate: FormItemColRef['validate'] = ((...args: any[]) => {

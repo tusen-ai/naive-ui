@@ -4,6 +4,7 @@ import NGridItem, {
   gridItemPropKeys
 } from '../../grid/src/GridItem'
 import { keep, keysOf } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import NFormItem, { formItemProps, formItemPropKeys } from './FormItem'
 import { FormItemInst } from './interface'
 
@@ -13,6 +14,8 @@ export const formItemGiProps = {
 } as const
 
 export const formItemGiPropKeys = keysOf(formItemGiProps)
+
+export type FormItemGiProps = ExtractPublicPropTypes<typeof formItemGiProps>
 
 export default defineComponent({
   __GRID_ITEM__: true,

@@ -16,22 +16,21 @@ import {
 import Schema, { ErrorList, ValidateOption } from 'async-validator'
 import { get } from 'lodash-es'
 import { createId } from 'seemly'
-import type { FormItemInjection } from '../../_mixins/use-form-item'
-import type { ThemeProps } from '../../_mixins'
-import { useTheme } from '../../_mixins'
+import { formItemInjectionKey } from '../../_mixins/use-form-item'
+import { ThemeProps, useConfig, useTheme } from '../../_mixins'
 import {
   warn,
   createKey,
   useInjectionInstanceCollection,
   keysOf
 } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { formLight, FormTheme } from '../styles'
 import { formItemMisc, formItemSize, formItemRule } from './utils'
 import Feedbacks from './Feedbacks'
 import style from './styles/form-item.cssr'
 import {
   ApplyRule,
-  FormInjection,
   FormItemRule,
   LabelAlign,
   LabelPlacement,
@@ -40,7 +39,9 @@ import {
   FormItemRuleValidator,
   FormItemValidateOptions,
   FormItemInst,
-  FormItemInternalValidate
+  FormItemInternalValidate,
+  formItemInstsInjectionKey,
+  formInjectionKey
 } from './interface'
 
 export const formItemProps = {
@@ -81,7 +82,8 @@ export const formItemProps = {
   feedback: String
 } as const
 
-export type FormItemProps = ExtractPropTypes<typeof formItemProps>
+export type FormItemSetupProps = ExtractPropTypes<typeof formItemProps>
+export type FormItemProps = ExtractPublicPropTypes<typeof formItemProps>
 export const formItemPropKeys = keysOf(formItemProps)
 
 // Wrapped Validator is to be passed into async-validator
@@ -127,11 +129,12 @@ export default defineComponent({
   props: formItemProps,
   setup (props) {
     useInjectionInstanceCollection(
-      'NFormRules',
+      formItemInstsInjectionKey,
       'formItems',
       toRef(props, 'path')
     )
-    const NForm = inject<FormInjection | null>('NForm', null)
+    const { mergedClsPrefix } = useConfig(props)
+    const NForm = inject(formInjectionKey, null)
     const formItemSizeRefs = formItemSize(props)
     const formItemMiscRefs = formItemMisc(props)
     const { validationErrored: validationErroredRef } = formItemMiscRefs
@@ -148,7 +151,14 @@ export default defineComponent({
       if (feedback !== undefined && feedback !== null) return true
       return explainsRef.value.length
     })
-    const themeRef = useTheme('Form', 'FormItem', style, formLight, props)
+    const themeRef = useTheme(
+      'Form',
+      'FormItem',
+      style,
+      formLight,
+      props,
+      mergedClsPrefix
+    )
     watch(toRef(props, 'path'), () => {
       if (props.ignorePathChange) return
       restoreValidation()
@@ -297,7 +307,8 @@ export default defineComponent({
         )
       })
     }
-    provide<FormItemInjection>('NFormItem', {
+    provide(formItemInjectionKey, {
+      path: toRef(props, 'path'),
       mergedSize: formItemSizeRefs.mergedSize,
       restoreValidation,
       handleContentBlur,
@@ -311,6 +322,7 @@ export default defineComponent({
       internalValidate
     }
     return {
+      cPrefix: mergedClsPrefix,
       mergedRequired: mergedRequiredRef,
       hasFeedback: hasFeedbackRef,
       feedbackId: feedbackIdRef,
@@ -365,48 +377,55 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots } = this
+    const { $slots, cPrefix } = this
     return (
       <div
         class={[
-          'n-form-item',
-          [
-            `n-form-item--${this.mergedSize}-size`,
-            `n-form-item--${this.mergedLabelPlacement}-labelled`,
-            this.label === false && 'n-form-item--no-label'
-          ]
+          `${cPrefix}-form-item`,
+          `${cPrefix}-form-item--${this.mergedSize}-size`,
+          `${cPrefix}-form-item--${this.mergedLabelPlacement}-labelled`,
+          this.label === false && `${cPrefix}-form-item--no-label`
         ]}
         style={this.cssVars as CSSProperties}
       >
         {this.label || $slots.label ? (
-          <label class="n-form-item-label" style={this.mergedLabelStyle as any}>
+          <label
+            class={`${cPrefix}-form-item-label`}
+            style={this.mergedLabelStyle as any}
+          >
             {renderSlot($slots, 'label', undefined, () => [this.label])}
             {(
               this.mergedShowRequireMark !== undefined
                 ? this.mergedShowRequireMark
                 : this.mergedRequired
             ) ? (
-                <span class="n-form-item-label__asterisk">&nbsp;*</span>
+                <span class={`${cPrefix}-form-item-label__asterisk`}>
+                &nbsp;*
+                </span>
               ) : null}
           </label>
         ) : null}
 
         <div
           class={[
-            'n-form-item-blank',
+            `${cPrefix}-form-item-blank`,
             this.mergedValidationStatus &&
-              `n-form-item-blank--${this.mergedValidationStatus}`
+              `${cPrefix}-form-item-blank--${this.mergedValidationStatus}`
           ]}
         >
           {$slots}
         </div>
         {this.mergedShowFeedback ? (
-          <div key={this.feedbackId} class="n-form-item-feedback-wrapper">
+          <div
+            key={this.feedbackId}
+            class={`${cPrefix}-form-item-feedback-wrapper`}
+          >
             <Transition name="n-fade-down-transition" mode="out-in">
               {{
                 default: () => {
                   const feedbacks = (
                     <Feedbacks
+                      clsPrefix={cPrefix}
                       explains={this.explains}
                       feedback={this.feedback}
                     />
@@ -416,28 +435,28 @@ export default defineComponent({
                     mergedValidationStatus === 'warning' ? (
                       <div
                         key="controlled-warning"
-                        class="n-form-item-feedback n-form-item-feedback--warning"
+                        class={`${cPrefix}-form-item-feedback ${cPrefix}-form-item-feedback--warning`}
                       >
                         {feedbacks}
                       </div>
                     ) : mergedValidationStatus === 'error' ? (
                       <div
                         key="controlled-error"
-                        class="n-form-item-feedback n-form-item-feedback--error"
+                        class={`${cPrefix}-form-item-feedback ${cPrefix}-form-item-feedback--error`}
                       >
                         {feedbacks}
                       </div>
                     ) : mergedValidationStatus === 'success' ? (
                       <div
                         key="controlled-success"
-                        class="n-form-item-feedback n-form-item-feedback--success"
+                        class={`${cPrefix}-form-item-feedback ${cPrefix}-form-item-feedback--success`}
                       >
                         {feedbacks}
                       </div>
                     ) : (
                       <div
                         key="controlled-default"
-                        class="n-form-item-feedback"
+                        class={`${cPrefix}-form-item-feedback`}
                       >
                         {feedbacks}
                       </div>

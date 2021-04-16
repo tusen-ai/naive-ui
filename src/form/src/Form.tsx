@@ -1,21 +1,22 @@
 import { h, defineComponent, PropType, provide, ExtractPropTypes } from 'vue'
 import { ErrorList } from 'async-validator'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { formLight } from '../styles'
 import type { FormTheme } from '../styles'
 import style from './styles/form.cssr'
 import {
   ApplyRule,
-  FormInjection,
   FormItemInst,
   FormRules,
   FormValidateCallback,
   LabelAlign,
   LabelPlacement,
-  FormInst
+  FormInst,
+  formItemInstsInjectionKey,
+  formInjectionKey
 } from './interface'
-import { keysOf } from '../../_utils'
+import { ExtractPublicPropTypes, keysOf } from '../../_utils'
 
 const formProps = {
   ...(useTheme.props as ThemeProps<FormTheme>),
@@ -52,13 +53,15 @@ const formProps = {
   }
 } as const
 
-export type FormProps = ExtractPropTypes<typeof formProps>
+export type FormSetupProps = ExtractPropTypes<typeof formProps>
+export type FormProps = ExtractPublicPropTypes<typeof formProps>
 
 export default defineComponent({
   name: 'Form',
   props: formProps,
   setup (props) {
-    useTheme('Form', 'Form', style, formLight, props)
+    const { mergedClsPrefix } = useConfig(props)
+    useTheme('Form', 'Form', style, formLight, props, mergedClsPrefix)
     // from path to form-item
     const formItems: Record<string, FormItemInst[]> = {}
     async function validate (
@@ -104,23 +107,21 @@ export default defineComponent({
         }
       }
     }
-    provide<FormInjection>('NForm', props)
-    provide('NFormRules', { formItems })
+    provide(formInjectionKey, props)
+    provide(formItemInstsInjectionKey, { formItems })
     const formExposedMethod: FormInst = {
       validate,
       restoreValidation
     }
-    return formExposedMethod
+    return Object.assign(formExposedMethod, {
+      cPrefix: mergedClsPrefix
+    })
   },
   render () {
+    const { cPrefix } = this
     return (
       <form
-        class={[
-          'n-form',
-          {
-            'n-form--inline': this.inline
-          }
-        ]}
+        class={[`${cPrefix}-form`, this.inline && `${cPrefix}-form--inline`]}
         onSubmit={this.onSubmit}
       >
         {this.$slots}

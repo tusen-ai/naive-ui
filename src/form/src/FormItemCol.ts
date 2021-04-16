@@ -1,6 +1,7 @@
 import { h, ref, defineComponent } from 'vue'
 import NCol, { colProps, colPropKeys } from '../../legacy-grid/src/Col'
 import { keep, keysOf } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import NFormItem, { formItemProps, formItemPropKeys } from './FormItem'
 import { FormItemInst } from './interface'
 
@@ -10,6 +11,8 @@ export const formItemColProps = {
 } as const
 
 export const formItemColPropKeys = keysOf(formItemColProps)
+
+export type FormItemColProps = ExtractPublicPropTypes<typeof formItemColProps>
 
 export default defineComponent({
   name: 'FormItemCol',

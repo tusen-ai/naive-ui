@@ -1,5 +1,6 @@
+import { InjectionKey } from '@vue/runtime-core'
 import { ErrorList, RuleItem, ValidateOption } from 'async-validator'
-import { FormProps } from './Form'
+import { FormSetupProps } from './Form'
 
 export interface FormRules {
   [path: string]: FormRules | FormItemRule | FormItemRule[]
@@ -46,7 +47,12 @@ export interface FormItemInst {
 export type FormItemColRef = FormItemInst
 export type FormItemRowRef = FormItemInst
 
-export type FormInjection = FormProps
+export type FormInjection = FormSetupProps
+
+export const formInjectionKey: InjectionKey<FormInjection> = Symbol('form')
+export const formItemInstsInjectionKey: InjectionKey<unknown> = Symbol(
+  'formItemInsts'
+)
 
 export type LabelAlign = 'left' | 'center' | 'right'
 export type LabelPlacement = 'left' | 'top'

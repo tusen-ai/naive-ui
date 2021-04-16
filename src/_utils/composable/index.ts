@@ -14,7 +14,7 @@ import {
 //   key2: [instc]
 // }
 export function useInjectionInstanceCollection (
-  injectionName: string,
+  injectionName: string | InjectionKey<unknown>,
   collectionKey: string,
   registerKeyRef: Ref<any>
 ): void {
