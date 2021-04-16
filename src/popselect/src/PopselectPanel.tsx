@@ -12,7 +12,8 @@ import { createTreeMate } from 'treemate'
 import { NInternalSelectMenu } from '../../_internal'
 import { call, keysOf, warn } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
-import type { PopselectSize, PopselectInjection } from './interface'
+import type { PopselectSize } from './interface'
+import { popselectInjectionKey } from './interface'
 import {
   OnUpdateValue,
   OnUpdateValueImpl,
@@ -24,6 +25,7 @@ import {
   ValueAtom
 } from '../../select/src/interface'
 import { tmOptions } from '../../select/src/utils'
+import { useConfig } from '../../_mixins'
 
 export const panelProps = {
   multiple: {
@@ -74,9 +76,10 @@ export default defineComponent({
   name: 'PopselectPanel',
   props: panelProps,
   setup (props) {
-    const NPopselect = inject<PopselectInjection>(
-      'NPopselect'
-    ) as PopselectInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NPopselect = inject(popselectInjectionKey)!
+
+    const { mergedClsPrefix } = useConfig()
 
     function doUpdateValue (value: Value | null): void {
       const {
@@ -126,7 +129,8 @@ export default defineComponent({
       })
     })
     return {
-      NPopselect,
+      mergedTheme: NPopselect.mergedThemeRef,
+      cPrefix: mergedClsPrefix,
       treeMate: computed(() => {
         return createTreeMate<
         SelectBaseOption,
@@ -140,10 +144,9 @@ export default defineComponent({
   render () {
     return (
       <NInternalSelectMenu
-        theme={this.NPopselect.mergedTheme.peers.InternalSelectMenu}
-        themeOverrides={
-          this.NPopselect.mergedTheme.peerOverrides.InternalSelectMenu
-        }
+        clsPrefix={this.cPrefix}
+        theme={this.mergedTheme.peers.InternalSelectMenu}
+        themeOverrides={this.mergedTheme.peerOverrides.InternalSelectMenu}
         multiple={this.multiple}
         treeMate={this.treeMate}
         size={this.size}

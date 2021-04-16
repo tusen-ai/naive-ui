@@ -8,7 +8,6 @@ import {
   VNode,
   provide,
   CSSProperties,
-  ExtractPropTypes,
   ComputedRef,
   Ref,
   toRef
@@ -16,7 +15,7 @@ import {
 import { VBinder, VTarget, FollowerPlacement } from 'vueuc'
 import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
 import { call, keep, warn, getFirstSlotVNode } from '../../_utils'
-import type { MaybeArray } from '../../_utils'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import NPopoverBody, { popoverBodyProps } from './PopoverBody'
@@ -71,7 +70,7 @@ export interface PopoverInjection {
   extraClassRef: Ref<string | undefined>
 }
 
-export const popoverProps = {
+export const popoverBaseProps = {
   show: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -189,14 +188,14 @@ export const popoverProps = {
   maxWidth: Number
 }
 
-export type PopoverProps = Partial<ExtractPropTypes<typeof popoverProps>>
+export type PopoverProps = ExtractPublicPropTypes<typeof popoverBaseProps>
 
 export default defineComponent({
   name: 'Popover',
   inheritAttrs: false,
   props: {
     ...(useTheme.props as ThemeProps<PopoverTheme>),
-    ...popoverProps
+    ...popoverBaseProps
   },
   setup (props) {
     const isMountedRef = useIsMounted()

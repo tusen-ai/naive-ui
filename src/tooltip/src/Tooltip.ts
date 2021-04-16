@@ -1,6 +1,6 @@
 // Tooltip: popover wearing waistcoat
 import { h, defineComponent, ref, computed } from 'vue'
-import { NPopover, popoverProps } from '../../popover'
+import { NPopover, popoverBaseProps } from '../../popover'
 import type { PopoverInst } from '../../popover'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -12,7 +12,7 @@ export type TooltipInst = PopoverInst
 export default defineComponent({
   name: 'Tooltip',
   props: {
-    ...popoverProps,
+    ...popoverBaseProps,
     ...(useTheme.props as ThemeProps<TooltipTheme>)
   },
   setup (props) {

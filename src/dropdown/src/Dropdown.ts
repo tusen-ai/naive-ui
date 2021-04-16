@@ -14,7 +14,7 @@ import { createTreeMate, Key, TreeMateOptions, TreeNode } from 'treemate'
 import { useMergedState, useKeyboard, useMemo } from 'vooks'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { NPopover, popoverProps } from '../../popover'
+import { NPopover, popoverBaseProps } from '../../popover'
 import { keep, call, createKey, MaybeArray } from '../../_utils'
 import { dropdownLight } from '../styles'
 import type { DropdownTheme } from '../styles'
@@ -91,14 +91,14 @@ const dropdownProps = {
   value: [String, Number] as PropType<Key | null>
 } as const
 
-const popoverPropKeys = Object.keys(popoverProps) as Array<
-keyof typeof popoverProps
+const popoverPropKeys = Object.keys(popoverBaseProps) as Array<
+keyof typeof popoverBaseProps
 >
 
 export default defineComponent({
   name: 'Dropdown',
   props: {
-    ...popoverProps,
+    ...popoverBaseProps,
     ...dropdownProps,
     ...(useTheme.props as ThemeProps<DropdownTheme>)
   },

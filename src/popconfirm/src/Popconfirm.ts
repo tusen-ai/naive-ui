@@ -1,7 +1,7 @@
 import { h, ref, defineComponent, provide, PropType } from 'vue'
 import {
   NPopover,
-  popoverProps,
+  popoverBaseProps,
   PopoverInst,
   PopoverTrigger
 } from '../../popover'
@@ -18,7 +18,7 @@ export default defineComponent({
   name: 'Popconfirm',
   props: {
     ...(useTheme.props as ThemeProps<PopconfirmTheme>),
-    ...popoverProps,
+    ...popoverBaseProps,
     positiveText: String,
     negativeText: String,
     showIcon: {
