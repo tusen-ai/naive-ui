@@ -5,23 +5,31 @@ import {
   provide,
   InjectionKey,
   renderSlot,
-  getCurrentInstance
+  getCurrentInstance,
+  Ref
 } from 'vue'
 import { createId } from 'seemly'
 import NImagePreview from './ImagePreview'
 import type { ImagePreviewInst } from './ImagePreview'
+import { ExtractPublicPropTypes } from '../../_utils'
+import { useConfig } from '../../_mixins'
 
 export const imageGroupInjectionKey: InjectionKey<
-ImagePreviewInst & { groupId: string }
+ImagePreviewInst & { groupId: string, mergedClsPrefix: Ref<string> }
 > = Symbol('image-group')
+
+const imageGroupProps = {
+  showToolbar: { type: Boolean, default: true }
+}
+
+export type ImageGroupProps = ExtractPublicPropTypes<typeof imageGroupProps>
 
 export default defineComponent({
   name: 'ImageGroup',
-  props: {
-    showToolbar: { type: Boolean, default: true }
-  },
-  setup () {
+  props: imageGroupProps,
+  setup (props) {
     let currentSrc: string | undefined
+    const { mergedClsPrefix } = useConfig(props)
     const groupId = createId()
     const vm = getCurrentInstance()
     const setPreviewSrc = (src: string | undefined): void => {
@@ -44,6 +52,7 @@ export default defineComponent({
       }
     }
     provide(imageGroupInjectionKey, {
+      mergedClsPrefix,
       setPreviewSrc,
       setThumbnailEl: (el) => {
         previewInstRef.value?.setThumbnailEl(el)
@@ -55,6 +64,7 @@ export default defineComponent({
     })
     const previewInstRef = ref<ImagePreviewInst | null>(null)
     return {
+      cPrefix: mergedClsPrefix,
       previewInstRef,
       next: () => go(1),
       prev: () => go(-1)
@@ -63,6 +73,7 @@ export default defineComponent({
   render () {
     return (
       <NImagePreview
+        clsPrefix={this.cPrefix}
         ref="previewInstRef"
         onPrev={this.prev}
         onNext={this.next}

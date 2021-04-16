@@ -10,7 +10,8 @@ import {
   watch,
   computed,
   CSSProperties,
-  PropType
+  PropType,
+  toRef
 } from 'vue'
 import { zindexable } from 'vdirs'
 import { useIsMounted } from 'vooks'
@@ -40,10 +41,21 @@ export default defineComponent({
   props: {
     showToolbar: Boolean,
     onNext: Function as PropType<() => void>,
-    onPrev: Function as PropType<() => void>
+    onPrev: Function as PropType<() => void>,
+    clsPrefix: {
+      type: String,
+      required: true
+    }
   },
   setup (props) {
-    const themeRef = useTheme('Image', 'Image', style, imageLight, {})
+    const themeRef = useTheme(
+      'Image',
+      'Image',
+      style,
+      imageLight,
+      {},
+      toRef(props, 'clsPrefix')
+    )
     let thumbnailEl: HTMLImageElement | null = null
     const previewRef = ref<HTMLImageElement | null>(null)
     const previewWrapperRef = ref<HTMLDivElement | null>(null)
@@ -232,6 +244,7 @@ export default defineComponent({
     }
   },
   render () {
+    const { clsPrefix } = this
     return (
       <>
         {renderSlot(this.$slots, 'default')}
@@ -241,7 +254,7 @@ export default defineComponent({
               this.show || this.displayed
                 ? withDirectives(
                   <div
-                    class="n-image-preview-container"
+                    class={`${clsPrefix}-image-preview-container`}
                     style={this.cssVars as CSSProperties}
                   >
                     <Transition
@@ -252,7 +265,7 @@ export default defineComponent({
                         default: () =>
                           this.show ? (
                             <div
-                              class="n-image-preview-overlay"
+                              class={`${clsPrefix}-image-preview-overlay`}
                               onClick={this.toggleShow}
                             />
                           ) : null
@@ -266,18 +279,27 @@ export default defineComponent({
                         {{
                           default: () =>
                             this.show ? (
-                              <div class="n-image-preview-toolbar">
+                              <div
+                                class={`${clsPrefix}-image-preview-toolbar`}
+                              >
                                 {this.onPrev ? (
                                   <>
-                                    <NBaseIcon onClick={this.onPrev}>
+                                    <NBaseIcon
+                                      clsPrefix={clsPrefix}
+                                      onClick={this.onPrev}
+                                    >
                                       {{ default: () => prevIcon }}
                                     </NBaseIcon>
-                                    <NBaseIcon onClick={this.onNext}>
+                                    <NBaseIcon
+                                      clsPrefix={clsPrefix}
+                                      onClick={this.onNext}
+                                    >
                                       {{ default: () => nextIcon }}
                                     </NBaseIcon>
                                   </>
                                 ) : null}
                                 <NBaseIcon
+                                  clsPrefix={clsPrefix}
                                   onClick={this.rotateCounterclockwise}
                                 >
                                   {{
@@ -286,13 +308,22 @@ export default defineComponent({
                                     )
                                   }}
                                 </NBaseIcon>
-                                <NBaseIcon onClick={this.rotateClockwise}>
+                                <NBaseIcon
+                                  clsPrefix={clsPrefix}
+                                  onClick={this.rotateClockwise}
+                                >
                                   {{ default: () => <RotateClockwiseIcon /> }}
                                 </NBaseIcon>
-                                <NBaseIcon onClick={this.zoomOut}>
+                                <NBaseIcon
+                                  clsPrefix={clsPrefix}
+                                  onClick={this.zoomOut}
+                                >
                                   {{ default: () => <ZoomOutIcon /> }}
                                 </NBaseIcon>
-                                <NBaseIcon onClick={this.zoomIn}>
+                                <NBaseIcon
+                                  clsPrefix={clsPrefix}
+                                  onClick={this.zoomIn}
+                                >
                                   {{ default: () => <ZoomInIcon /> }}
                                 </NBaseIcon>
                               </div>
@@ -314,13 +345,14 @@ export default defineComponent({
                         default: () =>
                           withDirectives(
                             <div
-                              class="n-image-preview-wrapper"
+                              class={`${clsPrefix}-image-preview-wrapper`}
                               ref="previewWrapperRef"
                             >
                               <img
                                 draggable={false}
                                 onMousedown={this.handlePreviewMousedown}
-                                class="n-image-preview"
+                                class={`${clsPrefix}-image-preview`}
+                                key={this.previewSrc}
                                 src={this.previewSrc}
                                 ref="previewRef"
                               />

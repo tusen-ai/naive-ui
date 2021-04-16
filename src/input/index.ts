@@ -1,4 +1,3 @@
-/* istanbul ignore file */
 export { default as NInput } from './src/Input'
 export type { InputInst } from './src/interface'
 export type { InputProps } from './src/Input'

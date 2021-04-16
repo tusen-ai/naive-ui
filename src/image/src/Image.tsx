@@ -1,21 +1,29 @@
-import { defineComponent, h, inject, ref } from 'vue'
+import { defineComponent, h, inject, ref, PropType } from 'vue'
 import NImagePreview from './ImagePreview'
 import type { ImagePreviewInst } from './ImagePreview'
 import { imageGroupInjectionKey } from './ImageGroup'
+import { ExtractPublicPropTypes } from '../../_utils'
+import { useConfig } from '../../_mixins'
+
+const imageProps = {
+  width: [String, Number] as PropType<string | number>,
+  height: [String, Number] as PropType<string | number>,
+  src: String,
+  showToolbar: { type: Boolean, default: true }
+}
+
+export type ImageProps = ExtractPublicPropTypes<typeof imageProps>
 
 export default defineComponent({
   name: 'Image',
-  props: {
-    width: [String, Number],
-    height: [String, Number],
-    src: String,
-    showToolbar: { type: Boolean, default: true }
-  },
+  props: imageProps,
   setup (props) {
     const imageRef = ref<HTMLImageElement | null>(null)
     const previewInstRef = ref<ImagePreviewInst | null>(null)
     const imageGroupHandle = inject(imageGroupInjectionKey, null)
+    const { mergedClsPrefix } = imageGroupHandle || useConfig(props)
     return {
+      cPrefix: mergedClsPrefix,
       groupId: imageGroupHandle?.groupId,
       previewInstRef,
       imageRef,
@@ -35,8 +43,9 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     return this.groupId ? (
-      <div class="n-image">
+      <div class={`${cPrefix}-image`}>
         <img
           class={this.groupId}
           ref="imageRef"
@@ -47,11 +56,15 @@ export default defineComponent({
         />
       </div>
     ) : (
-      <NImagePreview ref="previewInstRef" showToolbar={this.showToolbar}>
+      <NImagePreview
+        clsPrefix={cPrefix}
+        ref="previewInstRef"
+        showToolbar={this.showToolbar}
+      >
         {{
           default: () => {
             return (
-              <div class="n-image">
+              <div class={`${cPrefix}-image`}>
                 <img
                   ref="imageRef"
                   width={this.width}
