@@ -7,7 +7,8 @@ import {
   defineComponent,
   provide,
   reactive,
-  PropType
+  PropType,
+  InjectionKey
 } from 'vue'
 import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { useMemo } from 'vooks'
@@ -15,8 +16,8 @@ import { ChevronRightIcon } from '../../_internal/icons'
 import { useDeferredTrue } from '../../_utils/composable'
 import { render } from '../../_utils'
 import { NIcon } from '../../icon'
-import NDropdownMenu, { NDropdownMenuInjection } from './DropdownMenu'
-import { DropdownInjection } from './Dropdown'
+import NDropdownMenu, { dropdownMenuInjectionKey } from './DropdownMenu'
+import { dropdownInjectionKey } from './Dropdown'
 import { isSubmenuNode } from './utils'
 import { TreeNode } from 'treemate'
 import {
@@ -29,9 +30,17 @@ interface NDropdownOptionInjection {
   enteringSubmenu: boolean
 }
 
+const dropdownOptionInjectionKey: InjectionKey<NDropdownOptionInjection> = Symbol(
+  'dropdown-option'
+)
+
 export default defineComponent({
   name: 'DropdownOption',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     tmNode: {
       type: Object as PropType<
       TreeNode<DropdownOption, DropdownGroupOption, DropdownIgnoredOption>
@@ -48,16 +57,11 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const NDropdown = inject<DropdownInjection>(
-      'NDropdown'
-    ) as DropdownInjection
-    const NDropdownOption = inject<NDropdownOptionInjection | null>(
-      'NDropdownOption',
-      null
-    )
-    const NDropdownMenu = inject<NDropdownMenuInjection>(
-      'NDropdownMenu'
-    ) as NDropdownMenuInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NDropdown = inject(dropdownInjectionKey)!
+    const NDropdownOption = inject(dropdownOptionInjectionKey, null)
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NDropdownMenu = inject(dropdownMenuInjectionKey)!
     const rawNodeRef = computed(() => props.tmNode.rawNode)
     const hasSubmenuRef = computed(() => {
       return isSubmenuNode(props.tmNode.rawNode)
@@ -93,8 +97,8 @@ export default defineComponent({
       return !!NDropdownOption?.enteringSubmenu
     })
     const enteringSubmenuRef = ref(false)
-    provide<NDropdownOptionInjection>(
-      'NDropdownOption',
+    provide(
+      dropdownOptionInjectionKey,
       reactive({
         enteringSubmenu: enteringSubmenuRef
       })
@@ -124,7 +128,7 @@ export default defineComponent({
       const { relatedTarget } = e
       if (
         relatedTarget &&
-        !(relatedTarget as HTMLElement).getAttribute('n-dropdown-option')
+        !(relatedTarget as HTMLElement).hasAttribute('__dropdown-option')
       ) {
         NDropdown.hoverKey = null
       }
@@ -171,136 +175,120 @@ export default defineComponent({
     const {
       NDropdown: { animated },
       rawNode,
-      mergedShowSubmenu
+      mergedShowSubmenu,
+      clsPrefix
     } = this
     const submenuVNode = mergedShowSubmenu
       ? h(NDropdownMenu, {
+        clsPrefix,
         tmNodes: this.tmNode.children,
         parentKey: this.tmNode.key
       })
       : null
-    return h(
-      'div',
-      {
-        class: 'n-dropdown-option'
-      },
-      [
-        h(
-          'div',
-          {
-            class: [
-              'n-dropdown-option-body',
-              {
-                'n-dropdown-option-body--pending': this.pending,
-                'n-dropdown-option-body--active': this.active
-              }
-            ],
-            onMousemove: this.handleMouseMove,
-            onMouseenter: this.handleMouseEnter,
-            onMouseleave: this.handleMouseLeave,
-            onClick: this.handleClick
-          },
-          [
-            h(
-              'div',
-              {
-                class: [
-                  'n-dropdown-option-body__prefix',
-                  {
-                    'n-dropdown-option-body__prefix--show-icon': this
-                      .NDropdownMenu.showIcon
-                  }
-                ],
-                'n-dropdown-option': true
-              },
-              [h(render, { render: rawNode.icon })]
-            ),
-            h(
-              'div',
-              {
-                class: 'n-dropdown-option-body__label',
-                'n-dropdown-option': true
-              },
-              // TODO: Workaround, menu campatible
-              [h(render, { render: rawNode.label ?? rawNode.title })]
-            ),
-            h(
-              'div',
-              {
-                class: [
-                  'n-dropdown-option-body__suffix',
-                  {
-                    'n-dropdown-option-body__suffix--has-submenu': this
-                      .NDropdownMenu.hasSubmenu
-                  }
-                ],
-                'n-dropdown-option': true
-              },
-              [
-                this.hasSubmenu
-                  ? h(NIcon, null, {
-                    default: () => h(ChevronRightIcon)
-                  })
-                  : null
-              ]
-            )
-          ]
-        ),
-        this.hasSubmenu
-          ? h(VBinder, null, {
-            default: () => {
-              return h(VTarget, null, {
-                default: () => {
-                  return h(
-                    'div',
-                    {
-                      class: 'n-dropdown-offset-container'
-                    },
-                    [
-                      h(
-                        VFollower,
-                        {
-                          show: this.mergedShowSubmenu,
-                          teleportDisabled: true,
-                          placement: this.placement
-                        },
-                        {
-                          default: () => {
-                            return h(
-                              'div',
-                              {
-                                class: 'n-dropdown-menu-wrapper'
-                              },
-                              [
-                                animated
-                                  ? h(
-                                    Transition,
-                                    {
-                                      onBeforeEnter: this
-                                        .handleSubmenuBeforeEnter,
-                                      onAfterEnter: this
-                                        .handleSubmenuAfterEnter,
-                                      name: 'n-fade-in-scale-up-transition',
-                                      appear: true
-                                    },
-                                    {
-                                      default: () => submenuVNode
-                                    }
-                                  )
-                                  : submenuVNode
-                              ]
-                            )
-                          }
-                        }
-                      )
-                    ]
-                  )
-                }
-              })
+    return (
+      <div class={`${clsPrefix}-dropdown-option`}>
+        <div
+          class={[
+            `${clsPrefix}-dropdown-option-body`,
+            {
+              [`${clsPrefix}-dropdown-option-body--pending`]: this.pending,
+              [`${clsPrefix}-dropdown-option-body--active`]: this.active
             }
-          })
-          : null
-      ]
+          ]}
+          onMousemove={this.handleMouseMove}
+          onMouseenter={this.handleMouseEnter}
+          onMouseleave={this.handleMouseLeave}
+          onClick={this.handleClick}
+        >
+          <div
+            __dropdown-option
+            class={[
+              `${clsPrefix}-dropdown-option-body__prefix`,
+              {
+                [`${clsPrefix}-dropdown-option-body__prefix--show-icon`]: this
+                  .NDropdownMenu.showIcon
+              }
+            ]}
+          >
+            {h(render, { render: rawNode.icon })}
+          </div>
+          <div
+            __dropdown-option
+            class={`${clsPrefix}-dropdown-option-body__label`}
+          >
+            {/* TODO: Workaround, menu campatible */}
+            {h(render, { render: rawNode.label ?? rawNode.title })}
+          </div>
+          <div
+            __dropdown-option
+            class={[
+              `${clsPrefix}-dropdown-option-body__suffix`,
+              {
+                [`${clsPrefix}-dropdown-option-body__suffix--has-submenu`]: this
+                  .NDropdownMenu.hasSubmenu
+              }
+            ]}
+          >
+            {this.hasSubmenu ? (
+              <NIcon>
+                {{
+                  default: () => <ChevronRightIcon />
+                }}
+              </NIcon>
+            ) : null}
+          </div>
+        </div>
+        {this.hasSubmenu ? (
+          <VBinder>
+            {{
+              default: () => [
+                <VTarget>
+                  {{
+                    default: () => (
+                      <div class={`${clsPrefix}-dropdown-offset-container`}>
+                        <VFollower
+                          show={this.mergedShowSubmenu}
+                          placement={this.placement}
+                          teleportDisabled
+                        >
+                          {{
+                            default: () => {
+                              return (
+                                <div
+                                  class={`${clsPrefix}-dropdown-menu-wrapper`}
+                                >
+                                  {animated ? (
+                                    <Transition
+                                      onBeforeEnter={
+                                        this.handleSubmenuBeforeEnter
+                                      }
+                                      onAfterEnter={
+                                        this.handleSubmenuAfterEnter
+                                      }
+                                      name="n-fade-in-scale-up-transition"
+                                      appear
+                                    >
+                                      {{
+                                        default: () => submenuVNode
+                                      }}
+                                    </Transition>
+                                  ) : (
+                                    submenuVNode
+                                  )}
+                                </div>
+                              )
+                            }
+                          }}
+                        </VFollower>
+                      </div>
+                    )
+                  }}
+                </VTarget>
+              ]
+            }}
+          </VBinder>
+        ) : null}
+      </div>
     )
   }
 })

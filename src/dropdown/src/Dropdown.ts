@@ -8,14 +8,21 @@ import {
   watch,
   provide,
   reactive,
-  CSSProperties
+  CSSProperties,
+  InjectionKey
 } from 'vue'
 import { createTreeMate, Key, TreeMateOptions, TreeNode } from 'treemate'
 import { useMergedState, useKeyboard, useMemo } from 'vooks'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NPopover, popoverBaseProps } from '../../popover'
-import { keep, call, createKey, MaybeArray } from '../../_utils'
+import {
+  keep,
+  call,
+  createKey,
+  MaybeArray,
+  ExtractPublicPropTypes
+} from '../../_utils'
 import { dropdownLight } from '../styles'
 import type { DropdownTheme } from '../styles'
 import NDropdownMenu from './DropdownMenu'
@@ -57,7 +64,11 @@ export interface DropdownInjection {
   doUpdateShow: (value: boolean) => void
 }
 
-const dropdownProps = {
+export const dropdownInjectionKey: InjectionKey<DropdownInjection> = Symbol(
+  'dropdown'
+)
+
+const dropdownBaseProps = {
   animated: {
     type: Boolean,
     default: true
@@ -83,10 +94,6 @@ const dropdownProps = {
     type: Array as PropType<DropdownMixedOption[]>,
     default: () => []
   },
-  containerClass: {
-    type: String,
-    default: 'n-dropdown'
-  },
   // for menu
   value: [String, Number] as PropType<Key | null>
 } as const
@@ -95,13 +102,17 @@ const popoverPropKeys = Object.keys(popoverBaseProps) as Array<
 keyof typeof popoverBaseProps
 >
 
+const dropdownProps = {
+  ...popoverBaseProps,
+  ...dropdownBaseProps,
+  ...(useTheme.props as ThemeProps<DropdownTheme>)
+} as const
+
+export type DropdownProps = ExtractPublicPropTypes<typeof dropdownProps>
+
 export default defineComponent({
   name: 'Dropdown',
-  props: {
-    ...popoverBaseProps,
-    ...dropdownProps,
-    ...(useTheme.props as ThemeProps<DropdownTheme>)
-  },
+  props: dropdownProps,
   setup (props) {
     const uncontrolledShowRef = ref(false)
     const mergedShowRef = useMergedState(
@@ -171,16 +182,19 @@ export default defineComponent({
       keyboardEnabledRef
     )
 
+    const { mergedClsPrefix } = useConfig(props)
+
     const themeRef = useTheme(
       'Dropdown',
       'Dropdown',
       style,
       dropdownLight,
-      props
+      props,
+      mergedClsPrefix
     )
 
-    provide<DropdownInjection>(
-      'NDropdown',
+    provide(
+      dropdownInjectionKey,
       reactive({
         hoverKey: hoverKeyRef,
         keyboardKey: keyboardKeyRef,
@@ -278,6 +292,7 @@ export default defineComponent({
       }
     }
     return {
+      cPrefix: mergedClsPrefix,
       mergedTheme: themeRef,
       // data
       tmNodes: tmNodesRef,
@@ -339,17 +354,19 @@ export default defineComponent({
       NPopover,
       keep(this.$props, popoverPropKeys, {
         show: this.mergedShow,
-        'onUpdate:show': this.doUpdateShow,
+        onUpdateShow: this.doUpdateShow,
         showArrow: false,
         raw: true,
         shadow: false,
         theme: this.mergedTheme.peers.Popover,
-        themeOverrides: this.mergedTheme.peerOverrides.Popover
+        themeOverrides: this.mergedTheme.peerOverrides.Popover,
+        internalExtraClass: 'dropdown'
       }),
       {
         trigger: this.$slots.default,
         default: () => {
           return h(NDropdownMenu, {
+            clsPrefix: this.cPrefix,
             tmNodes: this.tmNodes,
             style: this.cssVars as CSSProperties
           })

@@ -1,4 +1,12 @@
-import { computed, defineComponent, h, PropType, provide, reactive } from 'vue'
+import {
+  computed,
+  defineComponent,
+  h,
+  InjectionKey,
+  PropType,
+  provide,
+  reactive
+} from 'vue'
 import { TreeNode } from 'treemate'
 import NDropdownOption from './DropdownOption'
 import NDropdownDivider from './DropdownDivider'
@@ -15,9 +23,17 @@ export interface NDropdownMenuInjection {
   hasSubmenu: boolean
 }
 
+export const dropdownMenuInjectionKey: InjectionKey<NDropdownMenuInjection> = Symbol(
+  'dropdownMenu'
+)
+
 export default defineComponent({
   name: 'DropdownMenu',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     tmNodes: {
       type: Array as PropType<
       Array<
@@ -32,8 +48,8 @@ export default defineComponent({
     }
   },
   setup (props) {
-    provide<NDropdownMenuInjection>(
-      'NDropdownMenu',
+    provide(
+      dropdownMenuInjectionKey,
       reactive({
         showIcon: computed(() => {
           return props.tmNodes.some((tmNode) => {
@@ -61,31 +77,33 @@ export default defineComponent({
     )
   },
   render () {
-    const { parentKey } = this
-    return h(
-      'div',
-      {
-        class: 'n-dropdown-menu'
-      },
-      this.tmNodes.map((tmNode) => {
-        if (isDividerNode(tmNode.rawNode)) {
-          return h(NDropdownDivider, {
-            key: tmNode.key
-          })
-        }
-        if (isGroupNode(tmNode.rawNode)) {
-          return h(NDropdownGroup, {
-            tmNode,
-            parentKey,
-            key: tmNode.key
-          })
-        }
-        return h(NDropdownOption, {
-          tmNode: tmNode,
-          parentKey,
-          key: tmNode.key
-        })
-      })
+    const { parentKey, clsPrefix } = this
+    return (
+      <div class={`${clsPrefix}-dropdown-menu`}>
+        {this.tmNodes.map((tmNode) => {
+          if (isDividerNode(tmNode.rawNode)) {
+            return <NDropdownDivider clsPrefix={clsPrefix} key={tmNode.key} />
+          }
+          if (isGroupNode(tmNode.rawNode)) {
+            return (
+              <NDropdownGroup
+                clsPrefix={clsPrefix}
+                tmNode={tmNode}
+                parentKey={parentKey}
+                key={tmNode.key}
+              />
+            )
+          }
+          return (
+            <NDropdownOption
+              clsPrefix={clsPrefix}
+              tmNode={tmNode}
+              parentKey={parentKey}
+              key={tmNode.key}
+            />
+          )
+        })}
+      </div>
     )
   }
 })

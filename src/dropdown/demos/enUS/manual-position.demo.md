@@ -20,7 +20,7 @@ For some special case, you may want to manually position the dropdown. For examp
 ```
 
 ```js
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, nextTick } from 'vue'
 import { useMessage } from 'naive-ui'
 
 const options = [

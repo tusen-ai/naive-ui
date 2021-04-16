@@ -1,4 +1,4 @@
-import { defineComponent, Fragment, h, PropType, VNode } from 'vue'
+import { defineComponent, Fragment, h, PropType } from 'vue'
 import { TreeNode } from 'treemate'
 import { warn } from '../../_utils'
 import NDropdownOption from './DropdownOption'
@@ -14,6 +14,10 @@ import {
 export default defineComponent({
   name: 'NDropdownGroup',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     tmNode: {
       type: Object as PropType<
       TreeNode<DropdownOption, DropdownGroupOption, DropdownIgnoredOption>
@@ -26,19 +30,19 @@ export default defineComponent({
     }
   },
   render () {
-    const { tmNode, parentKey } = this
+    const { tmNode, parentKey, clsPrefix } = this
     const { children } = tmNode
-    return h(
-      Fragment,
-      [
-        h(NDropdownGroupHeader, {
-          tmNode,
-          key: tmNode.key
-        })
-      ].concat(
-        children?.map((child) => {
+    return (
+      <>
+        <NDropdownGroupHeader
+          clsPrefix={clsPrefix}
+          tmNode={tmNode}
+          key={tmNode.key}
+        />
+        {children?.map((child) => {
           if (isDividerNode(child.rawNode)) {
             return h(NDropdownDivider, {
+              clsPrefix,
               key: child.key
             })
           }
@@ -50,12 +54,13 @@ export default defineComponent({
             return null
           }
           return h(NDropdownOption, {
+            clsPrefix,
             tmNode: child,
             parentKey,
             key: child.key
           })
-        }) as VNode[]
-      )
+        })}
+      </>
     )
   }
 })
