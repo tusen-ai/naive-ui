@@ -3,6 +3,7 @@ import { kebabCase } from 'lodash-es'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { warn } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 
 /**
  * @deprecated
@@ -11,44 +12,50 @@ import useLegacy from '../../config-consumer/src/use-legacy'
 import { elementLight } from '../styles'
 import type { ElementTheme } from '../styles'
 
+const elementProps = {
+  ...(useTheme.props as ThemeProps<ElementTheme>),
+  tag: {
+    type: String,
+    default: 'div'
+  },
+  // deprecated
+  onThemeChange: {
+    type: Function as PropType<(theme: string | undefined) => void>,
+    validator: () => {
+      warn('element', '`on-theme-change` is deprecated.')
+      return true
+    },
+    default: undefined
+  },
+  as: {
+    type: String,
+    validator: () => {
+      warn('element', '`as` is deprecated, please use `tag` instead.')
+      return true
+    },
+    default: undefined
+  }
+} as const
+
+export type ElementProps = ExtractPublicPropTypes<typeof elementProps>
+
 export default defineComponent({
   name: 'Element',
   alias: ['El'],
-  props: {
-    ...(useTheme.props as ThemeProps<ElementTheme>),
-    tag: {
-      type: String,
-      default: 'div'
-    },
-    // deprecated
-    onThemeChange: {
-      type: Function as PropType<(theme: string | undefined) => void>,
-      validator: () => {
-        warn('element', '`on-theme-change` is deprecated.')
-        return true
-      },
-      default: undefined
-    },
-    as: {
-      type: String,
-      validator: () => {
-        warn('element', '`as` is deprecated, please use `tag` instead.')
-        return true
-      },
-      default: undefined
-    }
-  },
+  props: elementProps,
   setup (props) {
+    const { NConfigProvider, namespace, mergedClsPrefix } = useConfig(props)
     const themeRef = useTheme(
       'Element',
       'Element',
       undefined,
       elementLight,
-      props
+      props,
+      mergedClsPrefix
     )
-    const { NConfigProvider, namespace } = useConfig(props)
     return {
       ...useLegacy(NConfigProvider),
+      cPrefix: mergedClsPrefix,
       namespace,
       cssVars: computed(() => {
         const { common } = themeRef.value
@@ -65,6 +72,7 @@ export default defineComponent({
     const {
       as,
       tag,
+      cPrefix,
       namespace,
       $slots,
       cssVars,
@@ -76,7 +84,10 @@ export default defineComponent({
     return h(
       as || tag,
       {
-        class: ['n-element', legacyTheme && `n-${legacyTheme}-theme`],
+        class: [
+          `${cPrefix}-element`,
+          legacyTheme && `${cPrefix}-${legacyTheme}-theme`
+        ],
         style: cssVars
       },
       ($slots.default?.({
