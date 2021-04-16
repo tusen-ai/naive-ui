@@ -10,8 +10,7 @@ import {
   provide,
   nextTick,
   watch,
-  CSSProperties,
-  reactive
+  CSSProperties
 } from 'vue'
 import { useIsMounted, useKeyboard, useMergedState } from 'vooks'
 import { VBinder, VTarget, VFollower } from 'vueuc'
@@ -37,7 +36,13 @@ import { InputInst, NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
 import { useConfig, useTheme, useLocale, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn, call, useAdjustedTo, MaybeArray } from '../../_utils'
+import {
+  warn,
+  call,
+  useAdjustedTo,
+  MaybeArray,
+  ExtractPublicPropTypes
+} from '../../_utils'
 import { timePickerLight } from '../styles'
 import type { TimePickerTheme } from '../styles'
 import Panel from './Panel'
@@ -49,77 +54,80 @@ import {
   OnUpdateValue,
   OnUpdateValueImpl,
   PanelRef,
-  TimePickerInjection,
-  Size
+  Size,
+  timePickerInjectionKey
 } from './interface'
+
+const timePickerProps = {
+  ...(useTheme.props as ThemeProps<TimePickerTheme>),
+  to: useAdjustedTo.propTo,
+  bordered: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
+  defaultValue: {
+    type: Number as PropType<number | null>,
+    default: null
+  },
+  placeholder: String,
+  placement: {
+    type: String,
+    default: 'bottom-start'
+  },
+  value: Number as PropType<number | null>,
+  format: {
+    type: String,
+    default: 'HH:mm:ss'
+  },
+  isHourDisabled: Function as PropType<IsHourDisabled>,
+  size: String as PropType<Size>,
+  isMinuteDisabled: Function as PropType<IsMinuteDisabled>,
+  isSecondDisabled: Function as PropType<IsSecondDisabled>,
+  clearable: {
+    type: Boolean,
+    default: false
+  },
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
+  onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
+  // private
+  stateful: {
+    type: Boolean,
+    default: true
+  },
+  showIcon: {
+    type: Boolean,
+    default: true
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  // deprecated
+  onChange: {
+    type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
+    validator: () => {
+      if (__DEV__) {
+        warn(
+          'time-picker',
+          '`on-change` is deprecated, please use `on-update:value` instead.'
+        )
+      }
+      return true
+    },
+    default: undefined
+  }
+}
+
+export type TimePickerProps = ExtractPublicPropTypes<typeof timePickerProps>
 
 export default defineComponent({
   name: 'TimePicker',
-  props: {
-    ...(useTheme.props as ThemeProps<TimePickerTheme>),
-    to: useAdjustedTo.propTo,
-    bordered: {
-      type: Boolean as PropType<boolean | undefined>,
-      default: undefined
-    },
-    defaultValue: {
-      type: Number as PropType<number | null>,
-      default: null
-    },
-    placeholder: String,
-    placement: {
-      type: String,
-      default: 'bottom-start'
-    },
-    value: Number as PropType<number | null>,
-    format: {
-      type: String,
-      default: 'HH:mm:ss'
-    },
-    isHourDisabled: Function as PropType<IsHourDisabled>,
-    size: String as PropType<Size>,
-    isMinuteDisabled: Function as PropType<IsMinuteDisabled>,
-    isSecondDisabled: Function as PropType<IsSecondDisabled>,
-    clearable: {
-      type: Boolean,
-      default: false
-    },
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-    onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-    onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
-    onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
-    // private
-    stateful: {
-      type: Boolean,
-      default: true
-    },
-    showIcon: {
-      type: Boolean,
-      default: true
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    // deprecated
-    onChange: {
-      type: [Function, Array] as PropType<
-      MaybeArray<OnUpdateValue> | undefined
-      >,
-      validator: () => {
-        if (__DEV__) {
-          warn(
-            'time-picker',
-            '`on-change` is deprecated, please use `on-update:value` instead.'
-          )
-        }
-        return true
-      },
-      default: undefined
-    }
-  },
+  props: timePickerProps,
   setup (props) {
+    const { mergedBordered, mergedClsPrefix, namespace } = useConfig(props)
     const { locale, dateLocale } = useLocale('TimePicker')
     const formItem = useFormItem(props)
     const themeRef = useTheme(
@@ -127,7 +135,8 @@ export default defineComponent({
       'TimePicker',
       style,
       timePickerLight,
-      props
+      props,
+      mergedClsPrefix
     )
 
     const keyboardState = useKeyboard()
@@ -477,13 +486,14 @@ export default defineComponent({
         doChange(memorizedValueRef.value)
       }
     })
-    provide<TimePickerInjection>(
-      'NTimePicker',
-      reactive({
-        mergedTheme: themeRef
-      })
-    )
+    provide(timePickerInjectionKey, {
+      mergedTheme: themeRef,
+      cPrefix: mergedClsPrefix
+    })
     return {
+      mergedBordered,
+      cPrefix: mergedClsPrefix,
+      namespace,
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
       isMounted: useIsMounted(),
@@ -509,7 +519,6 @@ export default defineComponent({
       hourValue: hourValueRef,
       minuteValue: minuteValueRef,
       secondValue: secondValueRef,
-      ...useConfig(props),
       handleTimeInputFocus,
       handleTimeInputBlur,
       handleNowClick,
@@ -575,8 +584,12 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     return (
-      <div class="n-time-picker" style={this.triggerCssVars as CSSProperties}>
+      <div
+        class={`${cPrefix}-time-picker`}
+        style={this.triggerCssVars as CSSProperties}
+      >
         <VBinder>
           {{
             default: () => [
@@ -611,7 +624,10 @@ export default defineComponent({
                       {this.showIcon
                         ? {
                           suffix: () => (
-                            <NBaseIcon class="n-time-picker-icon">
+                            <NBaseIcon
+                              clsPrefix={cPrefix}
+                              class={`${cPrefix}-time-picker-icon`}
+                            >
                               {{
                                 default: () => <TimeIcon />
                               }}

@@ -7,7 +7,7 @@ import {
   IsHourDisabled,
   IsMinuteDisabled,
   IsSecondDisabled,
-  TimePickerInjection
+  timePickerInjectionKey
 } from './interface'
 import PanelCol, { Item } from './PanelCol'
 
@@ -87,9 +87,8 @@ export default defineComponent({
     onKeydown: Function as PropType<(e: KeyboardEvent) => void>
   },
   setup (props) {
-    const NTimePicker = inject<TimePickerInjection>(
-      'NTimePicker'
-    ) as TimePickerInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NTimePicker = inject(timePickerInjectionKey)!
     const hoursRef = computed<Item[]>(() =>
       time.hours.map((hour) => {
         const { isHourDisabled } = props
@@ -126,7 +125,8 @@ export default defineComponent({
       })
     )
     return {
-      NTimePicker,
+      mergedTheme: NTimePicker.mergedTheme,
+      cPrefix: NTimePicker.cPrefix,
       hours: hoursRef,
       minutes: minutesRef,
       seconds: secondsRef,
@@ -136,43 +136,43 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix, mergedTheme } = this
     return h(
       'div',
       {
         tabindex: 0,
-        class: 'n-time-picker-panel',
+        class: `${cPrefix}-time-picker-panel`,
         onFocusin: this.onFocusin,
         onFocusout: this.onFocusout,
         onKeydown: this.onKeydown
       },
       [
-        <div class="n-time-picker-cols">
+        <div class={`${cPrefix}-time-picker-cols`}>
           {this.showHour ? (
             <div
               class={[
-                'n-time-picker-col',
+                `${cPrefix}-time-picker-col`,
                 {
-                  'n-time-picker-col--invalid': this.isHourInvalid,
-                  'n-time-picker-col--transition-disabled': this
+                  [`${cPrefix}-time-picker-col--invalid`]: this.isHourInvalid,
+                  [`${cPrefix}-time-picker-col--transition-disabled`]: this
                     .transitionDisabled
                 }
               ]}
             >
               <NScrollbar
                 ref="hourScrollRef"
-                theme={this.NTimePicker.mergedTheme.peers.Scrollbar}
-                themeOverrides={
-                  this.NTimePicker.mergedTheme.peerOverrides.Scrollbar
-                }
+                theme={mergedTheme.peers.Scrollbar}
+                themeOverrides={mergedTheme.peerOverrides.Scrollbar}
               >
                 {{
                   default: () => [
                     <PanelCol
+                      clsPrefix={cPrefix}
                       data={this.hours}
                       activeValue={this.hourValue}
                       onItemClick={this.onHourClick}
                     />,
-                    <div class="n-time-picker-col__padding" />
+                    <div class={`${cPrefix}-time-picker-col__padding`} />
                   ]
                 }}
               </NScrollbar>
@@ -181,29 +181,28 @@ export default defineComponent({
           {this.showMinute ? (
             <div
               class={[
-                'n-time-picker-col',
+                `${cPrefix}-time-picker-col`,
                 {
-                  'n-time-picker-col--transition-disabled': this
+                  [`${cPrefix}-time-picker-col--transition-disabled`]: this
                     .transitionDisabled,
-                  'n-time-picker-col--invalid': this.isMinuteInvalid
+                  [`${cPrefix}-time-picker-col--invalid`]: this.isMinuteInvalid
                 }
               ]}
             >
               <NScrollbar
                 ref="minuteScrollRef"
-                theme={this.NTimePicker.mergedTheme.peers.Scrollbar}
-                themeOverrides={
-                  this.NTimePicker.mergedTheme.peerOverrides.Scrollbar
-                }
+                theme={mergedTheme.peers.Scrollbar}
+                themeOverrides={mergedTheme.peerOverrides.Scrollbar}
               >
                 {{
                   default: () => [
                     <PanelCol
+                      clsPrefix={cPrefix}
                       data={this.minutes}
                       activeValue={this.minuteValue}
                       onItemClick={this.onMinuteClick}
                     />,
-                    <div class="n-time-picker-col__padding" />
+                    <div class={`${cPrefix}-time-picker-col__padding`} />
                   ]
                 }}
               </NScrollbar>
@@ -212,40 +211,39 @@ export default defineComponent({
           {this.showSecond ? (
             <div
               class={[
-                'n-time-picker-col',
+                `${cPrefix}-time-picker-col`,
                 {
-                  'n-time-picker-col--invalid': this.isSecondInvalid,
-                  'n-time-picker-col--transition-disabled': this
+                  [`${cPrefix}-time-picker-col--invalid`]: this.isSecondInvalid,
+                  [`${cPrefix}-time-picker-col--transition-disabled`]: this
                     .transitionDisabled
                 }
               ]}
             >
               <NScrollbar
                 ref="secondScrollRef"
-                theme={this.NTimePicker.mergedTheme.peers.Scrollbar}
-                themeOverrides={
-                  this.NTimePicker.mergedTheme.peerOverrides.Scrollbar
-                }
+                theme={mergedTheme.peers.Scrollbar}
+                themeOverrides={mergedTheme.peerOverrides.Scrollbar}
               >
                 {{
                   default: () => [
                     <PanelCol
+                      clsPrefix={cPrefix}
                       data={this.seconds}
                       activeValue={this.secondValue}
                       onItemClick={this.onSecondClick}
                     />,
-                    <div class="n-time-picker-col__padding" />
+                    <div class={`${cPrefix}-time-picker-col__padding`} />
                   ]
                 }}
               </NScrollbar>
             </div>
           ) : null}
         </div>,
-        <div class="n-time-picker-actions">
+        <div class={`${cPrefix}-time-picker-actions`}>
           <NButton
             size="tiny"
-            theme={this.NTimePicker.mergedTheme.peers.Button}
-            themeOverrides={this.NTimePicker.mergedTheme.peerOverrides.Button}
+            theme={mergedTheme.peers.Button}
+            themeOverrides={mergedTheme.peerOverrides.Button}
             onClick={this.onNowClick}
           >
             {{ default: () => this.nowText }}
@@ -253,9 +251,9 @@ export default defineComponent({
           <NButton
             size="tiny"
             type="primary"
-            class="n-time-picker-actions__confirm"
-            theme={this.NTimePicker.mergedTheme.peers.Button}
-            themeOverrides={this.NTimePicker.mergedTheme.peerOverrides.Button}
+            class={`${cPrefix}-time-picker-actions__confirm`}
+            theme={mergedTheme.peers.Button}
+            themeOverrides={mergedTheme.peerOverrides.Button}
             disabled={this.isValueInvalid}
             onClick={this.onConfirmClick}
           >

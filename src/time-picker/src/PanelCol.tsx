@@ -8,6 +8,10 @@ export interface Item {
 export default defineComponent({
   name: 'TimePickerPanelCol',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     data: {
       type: Array as PropType<Item[]>,
       required: true
@@ -19,7 +23,7 @@ export default defineComponent({
     onItemClick: Function as PropType<(value: number) => void>
   },
   render () {
-    const { activeValue, onItemClick } = this
+    const { activeValue, onItemClick, clsPrefix } = this
     return this.data.map((item) => {
       const { value, disabled } = item
       const numValue = Number(value)
@@ -29,10 +33,10 @@ export default defineComponent({
           key={value}
           data-active={active ? '' : null}
           class={[
-            'n-time-picker-col__item',
+            `${clsPrefix}-time-picker-col__item`,
             {
-              'n-time-picker-col__item--active': active,
-              'n-time-picker-col__item--disabled': disabled
+              [`${clsPrefix}-time-picker-col__item--active`]: active,
+              [`${clsPrefix}-time-picker-col__item--disabled`]: disabled
             }
           ]}
           onClick={
