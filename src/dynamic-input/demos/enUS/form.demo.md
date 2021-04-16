@@ -67,7 +67,7 @@ export default {
         }
       },
       model: {
-        dynamicInputValue: [{ key: 0, value: '', name: '' }]
+        dynamicInputValue: [{ value: '', name: '' }]
       }
     }
   },
