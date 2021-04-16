@@ -82,16 +82,6 @@ export default c([
       border-radius: var(--border-radius);
       background-color: var(--list-color);
     `, [
-      cB('virtual-scroller', {
-        height: '100%',
-        scrollbarWidth: 'none',
-        '-moz-scrollbar-width': 'none'
-      }, [
-        c('&::-webkit-scrollbar', {
-          width: 0,
-          height: 0
-        })
-      ]),
       cE('border', `
         border: 1px solid var(--border-color);
         transition: border-color .3s var(--bezier);

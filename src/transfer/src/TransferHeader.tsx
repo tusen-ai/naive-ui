@@ -1,6 +1,6 @@
 import { h, computed, defineComponent, inject, PropType } from 'vue'
 import { NCheckbox } from '../../checkbox'
-import { TransferInjection } from './interface'
+import { transferInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'TransferHeader',
@@ -16,9 +16,8 @@ export default defineComponent({
     title: String
   },
   setup (props) {
-    const NTransfer = inject<TransferInjection>(
-      'NTransfer'
-    ) as TransferInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NTransfer = inject(transferInjectionKey)!
     const checkboxPropsRef = computed(() => {
       const { source } = props
       if (source) {
@@ -30,20 +29,23 @@ export default defineComponent({
     return () => {
       const { source } = props
       const { value: checkboxProps } = checkboxPropsRef
+      const { mergedTheme, cPrefix } = NTransfer
       return (
-        <div class="n-transfer-list-header">
-          <div class="n-transfer-list-header__checkbox">
+        <div class={`${cPrefix}-transfer-list-header`}>
+          <div class={`${cPrefix}-transfer-list-header__checkbox`}>
             <NCheckbox
-              theme={NTransfer.mergedTheme.peers.Checkbox}
-              themeOverrides={NTransfer.mergedTheme.peerOverrides.Checkbox}
+              theme={mergedTheme.peers.Checkbox}
+              themeOverrides={mergedTheme.peerOverrides.Checkbox}
               checked={checkboxProps.checked}
               indeterminate={checkboxProps.indeterminate}
               disabled={checkboxProps.disabled || NTransfer.disabled}
               onUpdateChecked={props.onChange}
             />
           </div>
-          <div class="n-transfer-list-header__header">{props.title}</div>
-          <div class="n-transfer-list-header__extra">
+          <div class={`${cPrefix}-transfer-list-header__header`}>
+            {props.title}
+          </div>
+          <div class={`${cPrefix}-transfer-list-header__extra`}>
             {source
               ? NTransfer.srcCheckedValues.length
               : NTransfer.tgtCheckedValues.length}

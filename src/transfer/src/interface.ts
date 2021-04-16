@@ -1,3 +1,4 @@
+import { InjectionKey } from 'vue'
 import type { MergedTheme } from '../../_mixins'
 import type { TransferTheme } from '../styles'
 
@@ -21,6 +22,7 @@ export type Filter = (
 ) => boolean
 
 export interface TransferInjection {
+  cPrefix: string
   mergedSize: 'small' | 'medium' | 'large'
   disabled: boolean
   mergedTheme: MergedTheme<TransferTheme>
@@ -33,5 +35,9 @@ export interface TransferInjection {
   handleSrcCheckboxClick: (checked: boolean, value: OptionValue) => void
   handleTgtCheckboxClick: (checked: boolean, value: OptionValue) => void
 }
+
+export const transferInjectionKey: InjectionKey<TransferInjection> = Symbol(
+  'transfer'
+)
 
 export type OnUpdateValue = (value: OptionValue[]) => void

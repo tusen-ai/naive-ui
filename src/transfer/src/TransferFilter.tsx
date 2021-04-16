@@ -2,7 +2,7 @@ import { h, defineComponent, inject, PropType } from 'vue'
 import { SearchIcon } from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
 import { NInput } from '../../input'
-import { TransferInjection } from './interface'
+import { transferInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'TransferFilter',
@@ -24,23 +24,23 @@ export default defineComponent({
     }
   },
   setup () {
-    const NTransfer = inject<TransferInjection>(
-      'NTransfer'
-    ) as TransferInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NTransfer = inject(transferInjectionKey)!
     return {
       NTransfer
     }
   },
   render () {
     const { NTransfer } = this
+    const { mergedTheme, cPrefix } = NTransfer
     return (
-      <div class="n-transfer-filter">
+      <div class={`${cPrefix}-transfer-filter`}>
         <NInput
           value={this.value}
           onUpdateValue={this.onUpdateValue}
           disabled={this.disabled}
-          theme={NTransfer.mergedTheme.peers.Input}
-          themeOverrides={NTransfer.mergedTheme.peerOverrides.Input}
+          theme={mergedTheme.peers.Input}
+          themeOverrides={mergedTheme.peerOverrides.Input}
           clearable
           size="small"
           placeholder={this.placeholder}
@@ -49,7 +49,7 @@ export default defineComponent({
         >
           {{
             clear: () => (
-              <NBaseIcon class="n-transfer-icon">
+              <NBaseIcon clsPrefix={cPrefix} class={`${cPrefix}-transfer-icon`}>
                 {{ default: () => <SearchIcon /> }}
               </NBaseIcon>
             )

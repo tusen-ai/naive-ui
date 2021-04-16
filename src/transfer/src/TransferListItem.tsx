@@ -1,7 +1,7 @@
 import { h, inject, defineComponent } from 'vue'
 import { useMemo } from 'vooks'
 import { NCheckbox } from '../../checkbox'
-import type { TransferInjection } from './interface'
+import { transferInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'NTransferListItem',
@@ -25,9 +25,8 @@ export default defineComponent({
   },
   setup (props) {
     const { source } = props
-    const NTransfer = inject<TransferInjection>(
-      'NTransfer'
-    ) as TransferInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NTransfer = inject(transferInjectionKey)!
     const checkedRef = source
       ? useMemo(() => NTransfer.srcCheckedValues.includes(props.value))
       : useMemo(() => NTransfer.tgtCheckedValues.includes(props.value))
@@ -45,34 +44,32 @@ export default defineComponent({
     return {
       NTransfer,
       checked: checkedRef,
-      className: source
-        ? 'n-transfer-list-item--source'
-        : 'n-transfer-list-item--target',
       handleClick
     }
   },
   render () {
-    const { disabled, NTransfer, label, checked, className } = this
+    const { disabled, NTransfer, label, checked, source } = this
+    const { mergedTheme, cPrefix } = NTransfer
     return (
       <div
         class={[
-          'n-transfer-list-item',
-          className,
-          {
-            'n-transfer-list-item--disabled': disabled
-          }
+          `${cPrefix}-transfer-list-item`,
+          disabled && `${cPrefix}-transfer-list-item--disabled`,
+          source
+            ? `${cPrefix}-transfer-list-item--source`
+            : `${cPrefix}-transfer-list-item--target`
         ]}
         onClick={this.handleClick}
       >
-        <div class="n-transfer-list-item__checkbox">
+        <div class={`${cPrefix}-transfer-list-item__checkbox`}>
           <NCheckbox
-            theme={NTransfer.mergedTheme.peers.Checkbox}
-            themeOverrides={NTransfer.mergedTheme.peerOverrides.Checkbox}
+            theme={mergedTheme.peers.Checkbox}
+            themeOverrides={mergedTheme.peerOverrides.Checkbox}
             disabled={disabled}
             checked={checked}
           />
         </div>
-        <div class="n-transfer-list-item__label">{label}</div>
+        <div class={`${cPrefix}-transfer-list-item__label`}>{label}</div>
       </div>
     )
   }

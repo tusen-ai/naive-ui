@@ -13,10 +13,10 @@ import { depx } from 'seemly'
 import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
 import { NButton } from '../../button'
-import { useLocale, useFormItem, useTheme } from '../../_mixins'
+import { useLocale, useFormItem, useTheme, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils/cssr'
-import { warn, call } from '../../_utils'
+import { warn, call, ExtractPublicPropTypes } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import { transferLight } from '../styles'
 import type { TransferTheme } from '../styles'
@@ -30,75 +30,81 @@ import {
   Option,
   Filter,
   OnUpdateValue,
-  TransferInjection
+  transferInjectionKey
 } from './interface'
+
+const transferProps = {
+  ...(useTheme.props as ThemeProps<TransferTheme>),
+  value: Array as PropType<OptionValue[] | null>,
+  defaultValue: {
+    type: Array as PropType<OptionValue[] | null>,
+    default: null
+  },
+  options: {
+    type: Array as PropType<Option[]>,
+    default: () => []
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  virtualScroll: {
+    type: Boolean,
+    default: false
+  },
+  sourceTitle: String,
+  targetTitle: String,
+  filterable: {
+    type: Boolean,
+    default: false
+  },
+  sourceFilterPlaceholder: String,
+  targetFilterPlaceholder: String,
+  filter: {
+    type: Function as PropType<Filter>,
+    default: (pattern: string, option: Option) => {
+      if (!pattern) return true
+      return ~('' + option.label)
+        .toLowerCase()
+        .indexOf(('' + pattern).toLowerCase())
+    }
+  },
+  size: {
+    type: String as PropType<'small' | 'medium' | 'large' | undefined>,
+    default: undefined
+  },
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  onChange: {
+    type: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+    validator: () => {
+      if (__DEV__) {
+        warn(
+          'transfer',
+          '`on-change` is deprecated, please use `on-update:value` instead.'
+        )
+      }
+      return true
+    },
+    default: undefined
+  }
+} as const
+
+export type TransferProps = ExtractPublicPropTypes<typeof transferProps>
 
 export default defineComponent({
   name: 'Transfer',
-  props: {
-    ...(useTheme.props as ThemeProps<TransferTheme>),
-    value: Array as PropType<OptionValue[] | null>,
-    defaultValue: {
-      type: Array as PropType<OptionValue[] | null>,
-      default: null
-    },
-    options: {
-      type: Array as PropType<Option[]>,
-      default: () => []
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    virtualScroll: {
-      type: Boolean,
-      default: false
-    },
-    sourceTitle: String,
-    targetTitle: String,
-    filterable: {
-      type: Boolean,
-      default: false
-    },
-    sourceFilterPlaceholder: String,
-    targetFilterPlaceholder: String,
-    filter: {
-      type: Function as PropType<Filter>,
-      default: (pattern: string, option: Option) => {
-        if (!pattern) return true
-        return ~('' + option.label)
-          .toLowerCase()
-          .indexOf(('' + pattern).toLowerCase())
-      }
-    },
-    size: {
-      type: String as PropType<'small' | 'medium' | 'large' | undefined>,
-      default: undefined
-    },
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-    onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-    onChange: {
-      type: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-      validator: () => {
-        if (__DEV__) {
-          warn(
-            'transfer',
-            '`on-change` is deprecated, please use `on-update:value` instead.'
-          )
-        }
-        return true
-      },
-      default: undefined
-    }
-  },
+  props: transferProps,
   setup (props) {
+    const { mergedClsPrefix } = useConfig(props)
     const themeRef = useTheme(
       'Transfer',
       'Transfer',
       style,
       transferLight,
-      props
+      props,
+      mergedClsPrefix
     )
     const formItem = useFormItem(props)
     const itemSizeRef = computed(() => {
@@ -210,9 +216,10 @@ export default defineComponent({
       )
       tgtCheckedValuesRef.value = []
     }
-    provide<TransferInjection>(
-      'NTransfer',
+    provide(
+      transferInjectionKey,
       reactive({
+        cPrefix: mergedClsPrefix,
         mergedSize: formItem.mergedSize,
         disabled: toRef(props, 'disabled'),
         mergedTheme: themeRef,
@@ -229,6 +236,7 @@ export default defineComponent({
     return {
       ...formItem,
       ...useLocale('Transfer'),
+      cPrefix: mergedClsPrefix,
       itemSize: itemSizeRef,
       isMounted: useIsMounted(),
       isInputing: isInputingRef,
@@ -305,24 +313,23 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     return (
       <div
         class={[
-          'n-transfer',
-          {
-            'n-transfer--disabled': this.disabled,
-            'n-transfer--filterable': this.filterable
-          }
+          `${cPrefix}-transfer`,
+          this.disabled && `${cPrefix}-transfer--disabled`,
+          this.filterable && `${cPrefix}-transfer--filterable`
         ]}
         style={this.cssVars as CSSProperties}
       >
-        <div class="n-transfer-list">
+        <div class={`${cPrefix}-transfer-list`}>
           <NTransferHeader
             source
             onChange={this.handleSrcHeaderCheck}
             title={this.sourceTitle || this.locale.sourceTitle}
           />
-          <div class="n-transfer-list-body">
+          <div class={`${cPrefix}-transfer-list-body`}>
             {this.filterable ? (
               <NTransferFilter
                 onUpdateValue={this.handleSrcFilterUpdateValue}
@@ -333,7 +340,7 @@ export default defineComponent({
                 onBlur={this.handleInputBlur}
               />
             ) : null}
-            <div class="n-transfer-list-flex-container">
+            <div class={`${cPrefix}-transfer-list-flex-container`}>
               <NTransferList
                 source
                 options={this.filteredSrcOpts}
@@ -345,9 +352,9 @@ export default defineComponent({
               />
             </div>
           </div>
-          <div class="n-transfer-list__border" />
+          <div class={`${cPrefix}-transfer-list__border`} />
         </div>
-        <div class="n-transfer-gap">
+        <div class={`${cPrefix}-transfer-gap`}>
           <NButton
             disabled={this.toButtonDisabled || this.disabled}
             theme={this.mergedTheme.peers.Button}
@@ -356,7 +363,9 @@ export default defineComponent({
           >
             {{
               icon: () => (
-                <NBaseIcon>{{ default: () => <ChevronRightIcon /> }}</NBaseIcon>
+                <NBaseIcon clsPrefix={cPrefix}>
+                  {{ default: () => <ChevronRightIcon /> }}
+                </NBaseIcon>
               )
             }}
           </NButton>
@@ -368,17 +377,19 @@ export default defineComponent({
           >
             {{
               icon: () => (
-                <NBaseIcon>{{ default: () => <ChevronLeftIcon /> }}</NBaseIcon>
+                <NBaseIcon clsPrefix={cPrefix}>
+                  {{ default: () => <ChevronLeftIcon /> }}
+                </NBaseIcon>
               )
             }}
           </NButton>
         </div>
-        <div class="n-transfer-list">
+        <div class={`${cPrefix}-transfer-list`}>
           <NTransferHeader
             onChange={this.handleTgtHeaderCheck}
             title={this.targetTitle || this.locale.targetTitle}
           />
-          <div class="n-transfer-list-body">
+          <div class={`${cPrefix}-transfer-list-body`}>
             {this.filterable ? (
               <NTransferFilter
                 onUpdateValue={this.handleTgtFilterUpdateValue}
@@ -389,7 +400,7 @@ export default defineComponent({
                 onBlur={this.handleInputBlur}
               />
             ) : null}
-            <div class="n-transfer-list-flex-container">
+            <div class={`${cPrefix}-transfer-list-flex-container`}>
               <NTransferList
                 options={this.filteredTgtOpts}
                 disabled={this.disabled}
@@ -400,7 +411,7 @@ export default defineComponent({
               />
             </div>
           </div>
-          <div class="n-transfer-list__border" />
+          <div class={`${cPrefix}-transfer-list__border`} />
         </div>
       </div>
     )

@@ -10,7 +10,7 @@ import {
 import { VirtualList, VirtualListRef } from 'vueuc'
 import { NEmpty } from '../../empty'
 import { NScrollbar, ScrollbarInst } from '../../scrollbar'
-import type { Option, TransferInjection } from './interface'
+import { Option, transferInjectionKey } from './interface'
 import NTransferListItem from './TransferListItem'
 
 export default defineComponent({
@@ -46,9 +46,8 @@ export default defineComponent({
     }
   },
   setup () {
-    const NTransfer = inject<TransferInjection>(
-      'NTransfer'
-    ) as TransferInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NTransfer = inject(transferInjectionKey)!
     const scrollerInstRef = ref<ScrollbarInst | null>(null)
     const vlInstRef = ref<VirtualListRef | null>(null)
     function syncVLScroller (): void {
@@ -77,12 +76,13 @@ export default defineComponent({
   },
   render () {
     const { NTransfer, syncVLScroller } = this
+    const { mergedTheme, cPrefix } = NTransfer
     return this.options.length ? (
       this.virtualScroll ? (
         <NScrollbar
           ref="scrollerInstRef"
-          theme={NTransfer.mergedTheme.peers.Scrollbar}
-          themeOverrides={NTransfer.mergedTheme.peerOverrides.Scrollbar}
+          theme={mergedTheme.peers.Scrollbar}
+          themeOverrides={mergedTheme.peerOverrides.Scrollbar}
           container={this.scrollContainer}
           content={this.scrollContent}
         >
@@ -90,7 +90,8 @@ export default defineComponent({
             default: () => (
               <VirtualList
                 ref="srcVlInstRef"
-                class="n-virtual-scroller n-transfer-list-content"
+                style={{ height: '100%' }}
+                class={`${cPrefix}-transfer-list-content`}
                 items={this.options}
                 itemSize={this.itemSize}
                 showScrollbar={false}
@@ -122,7 +123,7 @@ export default defineComponent({
         >
           {{
             default: () => (
-              <div class="n-transfer-list-content">
+              <div class={`${cPrefix}-transfer-list-content`}>
                 <TransitionGroup
                   name="item"
                   appear={this.isMounted}
