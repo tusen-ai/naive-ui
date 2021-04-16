@@ -15,8 +15,9 @@ import {
 import { useBreakpoint, useMemo } from 'vooks'
 import { VResizeObserver, VResizeObserverOnResize } from 'vueuc'
 import { pxfy, parseResponsivePropValue, beforeNextFrameOnce } from 'seemly'
-import { getSlot, flatten } from '../../_utils'
+import { getSlot, flatten, ExtractPublicPropTypes } from '../../_utils'
 import { defaultSpan } from './GridItem'
+import { useConfig } from '../../_mixins'
 
 const defaultCols = 24
 
@@ -53,13 +54,16 @@ export interface NGridInjection {
   overflow: boolean
 }
 
-export const gridInjectionKey: InjectionKey<NGridInjection> = Symbol('n-grid')
+export const gridInjectionKey: InjectionKey<NGridInjection> = Symbol('grid')
+
+export type GridProps = ExtractPublicPropTypes<typeof gridProps>
 
 export default defineComponent({
   name: 'Grid',
   inheritAttrs: false,
   props: gridProps,
   setup (props) {
+    const { mergedClsPrefix } = useConfig(props)
     const numRegex = /^\d+$/
     const widthRef = ref<number | undefined>(undefined)
     const breakpointRef = useBreakpoint()
@@ -114,6 +118,7 @@ export default defineComponent({
       })
     )
     return {
+      cPrefix: mergedClsPrefix,
       style: computed<CSSProperties>(() => {
         return {
           width: '100%',
@@ -218,7 +223,7 @@ export default defineComponent({
         'div',
         mergeProps(
           {
-            class: 'n-grid',
+            class: `${this.cPrefix}-grid`,
             style: this.style
           },
           this.$attrs

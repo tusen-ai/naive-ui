@@ -9,8 +9,8 @@ import {
 } from 'vue'
 import { pxfy } from 'seemly'
 import { gridInjectionKey } from './Grid'
-import type { NGridInjection } from './Grid'
 import { keysOf } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 
 export const defaultSpan = 1
 
@@ -43,13 +43,16 @@ export const gridItemProps = {
 
 export const gridItemPropKeys = keysOf(gridItemProps)
 
+export type GridItemProps = ExtractPublicPropTypes<typeof gridItemProps>
+
 export default defineComponent({
   __GRID_ITEM__: true,
   name: 'GridItem',
   alias: ['Gi'],
   props: gridItemProps,
   setup (props) {
-    const NGrid = inject(gridInjectionKey, null) as NGridInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NGrid = inject(gridInjectionKey)!
     const self = getCurrentInstance()
     return {
       NGrid,
