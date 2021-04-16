@@ -2,7 +2,8 @@ import { h, defineComponent, computed, PropType, CSSProperties, ref } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseClose } from '../../_internal'
-import { warn, createKey, MaybeArray, call } from '../../_utils'
+import { warn, createKey, call } from '../../_utils'
+import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { tagLight } from '../styles'
 import type { TagTheme } from '../styles'
 import commonProps from './common-props'
@@ -15,55 +16,66 @@ export interface TagRef extends TagPublicMethods {
   $el: HTMLElement
 }
 
+const tagProps = {
+  ...(useTheme.props as ThemeProps<TagTheme>),
+  ...commonProps,
+  bordered: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
+  checked: {
+    type: Boolean,
+    default: false
+  },
+  checkable: {
+    type: Boolean,
+    default: false
+  },
+  onClose: [Array, Function] as PropType<MaybeArray<() => void>>,
+  onMouseenter: Function as PropType<(e: MouseEvent) => void>,
+  onMouseleave: Function as PropType<(e: MouseEvent) => void>,
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:checked': {
+    type: Function,
+    default: undefined
+  },
+  // private
+  internalStopClickPropagation: {
+    type: Boolean,
+    default: false
+  },
+  // deprecated
+  onCheckedChange: {
+    type: Function as PropType<(checked: boolean) => void>,
+    validator: () => {
+      if (__DEV__) {
+        warn(
+          'tag',
+          '`on-checked-change` is deprecated, please use `on-update:checked` instead'
+        )
+      }
+      return true
+    },
+    default: undefined
+  }
+}
+
+export type TagProps = ExtractPublicPropTypes<typeof tagProps>
+
 export default defineComponent({
   name: 'Tag',
-  props: {
-    ...(useTheme.props as ThemeProps<TagTheme>),
-    ...commonProps,
-    bordered: {
-      type: Boolean as PropType<boolean | undefined>,
-      default: undefined
-    },
-    checked: {
-      type: Boolean,
-      default: false
-    },
-    checkable: {
-      type: Boolean,
-      default: false
-    },
-    onClose: [Array, Function] as PropType<MaybeArray<() => void>>,
-    onMouseenter: Function as PropType<(e: MouseEvent) => void>,
-    onMouseleave: Function as PropType<(e: MouseEvent) => void>,
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:checked': {
-      type: Function,
-      default: undefined
-    },
-    // private
-    internalStopClickPropagation: {
-      type: Boolean,
-      default: false
-    },
-    // deprecated
-    onCheckedChange: {
-      type: Function as PropType<(checked: boolean) => void>,
-      validator: () => {
-        if (__DEV__) {
-          warn(
-            'tag',
-            '`on-checked-change` is deprecated, please use `on-update:checked` instead'
-          )
-        }
-        return true
-      },
-      default: undefined
-    }
-  },
+  props: tagProps,
   setup (props) {
     const contentRef = ref<HTMLElement | null>(null)
-    const { mergedBordered } = useConfig(props)
-    const themeRef = useTheme('Tag', 'Tag', style, tagLight, props)
+    const { mergedBordered, mergedClsPrefix } = useConfig(props)
+    const themeRef = useTheme(
+      'Tag',
+      'Tag',
+      style,
+      tagLight,
+      props,
+      mergedClsPrefix
+    )
     function handleClick (e: MouseEvent): void {
       if (!props.disabled) {
         if (props.checkable) {
@@ -95,6 +107,7 @@ export default defineComponent({
     }
     return {
       ...tagPublicMethods,
+      cPrefix: mergedClsPrefix,
       contentRef,
       mergedBordered,
       handleClick,
@@ -159,15 +172,16 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     return (
       <div
         class={[
-          'n-tag',
+          `${cPrefix}-tag`,
           {
-            'n-tag--disabled': this.disabled,
-            'n-tag--checkable': this.checkable,
-            'n-tag--checked': this.checkable && this.checked,
-            'n-tag--round': this.round
+            [`${cPrefix}-tag--disabled`]: this.disabled,
+            [`${cPrefix}-tag--checkable`]: this.checkable,
+            [`${cPrefix}-tag--checked`]: this.checkable && this.checked,
+            [`${cPrefix}-tag--round`]: this.round
           }
         ]}
         style={this.cssVars as CSSProperties}
@@ -175,18 +189,19 @@ export default defineComponent({
         onMouseenter={this.onMouseenter}
         onMouseleave={this.onMouseleave}
       >
-        <span class="n-tag__content" ref="contentRef">
+        <span class={`${cPrefix}-tag__content`} ref="contentRef">
           {this.$slots}
         </span>
         {!this.checkable && this.closable ? (
           <NBaseClose
-            class="n-tag__close"
+            clsPrefix={cPrefix}
+            class={`${cPrefix}-tag__close`}
             disabled={this.disabled}
             onClick={this.handleCloseClick}
           />
         ) : null}
         {!this.checkable && this.mergedBordered ? (
-          <div class="n-tag__border" />
+          <div class={`${cPrefix}-tag__border`} />
         ) : null}
       </div>
     )
