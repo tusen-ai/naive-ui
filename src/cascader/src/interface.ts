@@ -2,7 +2,7 @@ import { TreeNode } from 'treemate'
 import type { MergedTheme } from '../../_mixins'
 import type { NLocale } from '../../locales'
 import type { CascaderTheme } from '../styles'
-import { InjectionKey } from '@vue/runtime-core'
+import { InjectionKey } from 'vue'
 
 export type ValueAtom = string | number
 export type Value = ValueAtom | ValueAtom[]

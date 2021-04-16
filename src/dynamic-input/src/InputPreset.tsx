@@ -1,10 +1,14 @@
 import { h, defineComponent, inject, PropType } from 'vue'
 import { NInput } from '../../input'
-import { DynamicInputInjection } from './interface'
+import { dynamicInputInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'DynamicInputInputPreset',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     value: {
       type: String,
       default: ''
@@ -18,17 +22,16 @@ export default defineComponent({
     }
   },
   setup () {
-    const NDynamicInput = inject<DynamicInputInjection>(
-      'NDynamicInput'
-    ) as DynamicInputInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NDynamicInput = inject(dynamicInputInjectionKey)!
     return {
       NDynamicInput
     }
   },
   render () {
-    const { NDynamicInput, value, onUpdateValue } = this
+    const { NDynamicInput, value, clsPrefix, onUpdateValue } = this
     return (
-      <div class="n-dynamic-input-preset-input">
+      <div class={`${clsPrefix}-dynamic-input-preset-input`}>
         <NInput
           theme={NDynamicInput.mergedTheme.peers.Input}
           theme-overrides={NDynamicInput.mergedTheme.peerOverrides.Input}

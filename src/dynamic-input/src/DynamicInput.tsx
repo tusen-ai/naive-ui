@@ -20,13 +20,14 @@ import { NBaseIcon } from '../../_internal'
 import { NButton, NButtonGroup } from '../../button'
 import { useTheme, useLocale, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn, call, MaybeArray } from '../../_utils'
+import { warn, call, MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { dynamicInputLight } from '../styles'
 import type { DynamicInputTheme } from '../styles'
 import NDynamicInputInputPreset from './InputPreset'
 import NDynamicInputPairPreset from './PairPreset'
+import { dynamicInputInjectionKey } from './interface'
+import type { OnUpdateValue } from './interface'
 import style from './styles/index.cssr'
-import { DynamicInputInjection, OnUpdateValue } from './interface'
 
 const globalDataKeyMap = new WeakMap()
 
@@ -34,76 +35,78 @@ interface FormItemInjection {
   path?: string
 }
 
-export default defineComponent({
-  name: 'DynamicInput',
-  props: {
-    ...(useTheme.props as ThemeProps<DynamicInputTheme>),
-    max: Number,
-    min: {
-      type: Number,
-      default: 0
+const dynamicInputProps = {
+  ...(useTheme.props as ThemeProps<DynamicInputTheme>),
+  max: Number,
+  min: {
+    type: Number,
+    default: 0
+  },
+  value: Array as PropType<any[]>,
+  // TODO: make it robust for different types
+  defaultValue: {
+    type: Array as PropType<any[]>,
+    default: () => []
+  },
+  preset: {
+    type: String as PropType<'input' | 'pair'>,
+    default: 'input'
+  },
+  keyField: String,
+  itemStyle: [String, Object] as PropType<string | CSSProperties>,
+  // for preset pair
+  keyPlaceholder: {
+    type: String,
+    default: ''
+  },
+  valuePlaceholder: {
+    type: String,
+    default: ''
+  },
+  // for preset input
+  placeholder: {
+    type: String,
+    default: ''
+  },
+  onCreate: Function as PropType<(index: number) => any>,
+  onRemove: Function as PropType<(index: number) => void>,
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  // deprecated
+  onClear: {
+    type: Function as PropType<() => void>,
+    validator: () => {
+      warn(
+        'dynamic-input',
+        '`on-clear` is deprecated, it is out of usage anymore.'
+      )
+      return true
     },
-    value: Array as PropType<any[]>,
-    // TODO: make it robust for different types
-    defaultValue: {
-      type: Array as PropType<any[]>,
-      default: () => []
-    },
-    preset: {
-      type: String as PropType<'input' | 'pair'>,
-      default: 'input'
-    },
-    keyField: String,
-    itemStyle: [String, Object] as PropType<string | CSSProperties>,
-    // for preset pair
-    keyPlaceholder: {
-      type: String,
-      default: ''
-    },
-    valuePlaceholder: {
-      type: String,
-      default: ''
-    },
-    // for preset input
-    placeholder: {
-      type: String,
-      default: ''
-    },
-    onCreate: Function as PropType<(index: number) => any>,
-    onRemove: Function as PropType<(index: number) => void>,
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-    onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-    // deprecated
-    onClear: {
-      type: Function as PropType<() => void>,
-      validator: () => {
+    default: undefined
+  },
+  onInput: {
+    type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
+    validator: () => {
+      if (__DEV__) {
         warn(
           'dynamic-input',
-          '`on-clear` is deprecated, it is out of usage anymore.'
+          '`on-input` is deprecated, please use `on-update:value` instead.'
         )
-        return true
-      },
-      default: undefined
+      }
+      return true
     },
-    onInput: {
-      type: [Function, Array] as PropType<
-      MaybeArray<OnUpdateValue> | undefined
-      >,
-      validator: () => {
-        if (__DEV__) {
-          warn(
-            'dynamic-input',
-            '`on-input` is deprecated, please use `on-update:value` instead.'
-          )
-        }
-        return true
-      },
-      default: undefined
-    }
-  },
+    default: undefined
+  }
+} as const
+
+export type DynamicInputProps = ExtractPublicPropTypes<typeof dynamicInputProps>
+
+export default defineComponent({
+  name: 'DynamicInput',
+  props: dynamicInputProps,
   setup (props, { slots }) {
-    const { NConfigProvider } = useConfig()
+    const { NConfigProvider, mergedClsPrefix } = useConfig()
     const NFormItem = inject<FormItemInjection | null>('NFormItem', null)
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
@@ -116,7 +119,8 @@ export default defineComponent({
       'DynamicInput',
       style,
       dynamicInputLight,
-      props
+      props,
+      mergedClsPrefix
     )
     const insertionDisabledRef = computed(() => {
       const { value: mergedValue } = mergedValueRef
@@ -209,8 +213,8 @@ export default defineComponent({
       const { onRemove } = props
       if (onRemove) onRemove(index)
     }
-    provide<DynamicInputInjection>(
-      'NDynamicInput',
+    provide(
+      dynamicInputInjectionKey,
       reactive({
         mergedTheme: themeRef,
         keyPlaceholder: toRef(props, 'keyPlaceholder'),
@@ -220,6 +224,7 @@ export default defineComponent({
     )
     return {
       ...useLocale('DynamicInput'),
+      cPrefix: mergedClsPrefix,
       NConfigProvider,
       NFormItem,
       uncontrolledValue: uncontrolledValueRef,
@@ -244,6 +249,7 @@ export default defineComponent({
   },
   render () {
     const {
+      cPrefix,
       mergedValue,
       locale,
       mergedTheme,
@@ -260,7 +266,10 @@ export default defineComponent({
     const buttonSize = this.NConfigProvider?.mergedComponentProps?.DynamicInput
       ?.buttonSize
     return (
-      <div class="n-dynamic-input" style={this.cssVars as CSSProperties}>
+      <div
+        class={`${cPrefix}-dynamic-input`}
+        style={this.cssVars as CSSProperties}
+      >
         {!Array.isArray(mergedValue) || mergedValue.length === 0 ? (
           <NButton
             block
@@ -274,7 +283,9 @@ export default defineComponent({
             {{
               default: () => locale.create,
               icon: () => (
-                <NBaseIcon>{{ default: () => <AddIcon /> }}</NBaseIcon>
+                <NBaseIcon clsPrefix={cPrefix}>
+                  {{ default: () => <AddIcon /> }}
+                </NBaseIcon>
               )
             }}
           </NButton>
@@ -283,7 +294,7 @@ export default defineComponent({
             <div
               key={keyField ? _[keyField] : ensureKey(_, index)}
               data-key={keyField ? _[keyField] : ensureKey(_, index)}
-              class="n-dynamic-input-item"
+              class={`${cPrefix}-dynamic-input-item`}
               style={itemStyle}
             >
               {$slots.default ? (
@@ -293,6 +304,7 @@ export default defineComponent({
                 })
               ) : preset === 'input' ? (
                 <NDynamicInputInputPreset
+                  clsPrefix={cPrefix}
                   value={mergedValue[index]}
                   parentPath={NFormItem ? NFormItem.path : undefined}
                   path={
@@ -302,6 +314,7 @@ export default defineComponent({
                 />
               ) : preset === 'pair' ? (
                 <NDynamicInputPairPreset
+                  clsPrefix={cPrefix}
                   value={mergedValue[index]}
                   parentPath={NFormItem ? NFormItem.path : undefined}
                   path={
@@ -310,7 +323,7 @@ export default defineComponent({
                   onUpdateValue={(v) => handleValueChange(index, v)}
                 />
               ) : null}
-              <div class="n-dynamic-input-item__action">
+              <div class={`${cPrefix}-dynamic-input-item__action`}>
                 <NButtonGroup size={buttonSize}>
                   {{
                     default: () => [
@@ -323,7 +336,7 @@ export default defineComponent({
                         >
                           {{
                             icon: () => (
-                              <NBaseIcon>
+                              <NBaseIcon clsPrefix={cPrefix}>
                                 {{ default: () => <RemoveIcon /> }}
                               </NBaseIcon>
                             )
@@ -339,7 +352,7 @@ export default defineComponent({
                       >
                         {{
                           icon: () => (
-                            <NBaseIcon>
+                            <NBaseIcon clsPrefix={cPrefix}>
                               {{ default: () => <AddIcon /> }}
                             </NBaseIcon>
                           )

@@ -1,5 +1,5 @@
 import { Ref } from '@vue/reactivity'
-import { InjectionKey } from '@vue/runtime-core'
+import { InjectionKey } from 'vue'
 import type { MergedTheme } from '../../_mixins'
 import type { PopselectTheme } from '../styles'
 

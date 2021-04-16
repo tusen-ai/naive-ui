@@ -1,4 +1,4 @@
-import { ExtractPropTypes } from '@vue/runtime-core'
+import { ExtractPropTypes } from 'vue'
 import { useTheme } from '../../_mixins'
 
 type themePropKeys = keyof typeof useTheme.props
