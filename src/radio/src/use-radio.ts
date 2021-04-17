@@ -5,11 +5,13 @@ import {
   ExtractPropTypes,
   PropType,
   Ref,
-  ComputedRef
+  ComputedRef,
+  InjectionKey
 } from 'vue'
 import { useMemo, useMergedState } from 'vooks'
-import { useFormItem } from '../../_mixins'
-import { warn, call, MaybeArray } from '../../_utils'
+import { useConfig, useFormItem } from '../../_mixins'
+import { warn, call } from '../../_utils'
+import type { MaybeArray } from '../../_utils'
 
 const radioProps = {
   name: String,
@@ -48,14 +50,20 @@ const radioProps = {
 } as const
 
 export interface RadioGroupInjection {
-  name: string | undefined
-  value: string | number | null
-  mergedSize: 'small' | 'medium' | 'large'
-  disabled: boolean
+  cPrefixRef: Ref<string>
+  nameRef: Ref<string | undefined>
+  valueRef: Ref<string | number | null>
+  mergedSizeRef: Ref<'small' | 'medium' | 'large'>
+  disabledRef: Ref<boolean>
   doUpdateValue: (value: string | number) => void
 }
 
+export const radioGroupInjectionKey: InjectionKey<RadioGroupInjection> = Symbol(
+  'radioGroup'
+)
+
 export interface UseRadio {
+  cPrefix: Ref<string>
   inputRef: Ref<HTMLElement | null>
   labelRef: Ref<HTMLElement | null>
   mergedName: Ref<string | undefined>
@@ -78,7 +86,9 @@ function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
       const { size } = props
       if (size !== undefined) return size
       if (NRadioGroup) {
-        const { mergedSize } = NRadioGroup
+        const {
+          mergedSizeRef: { value: mergedSize }
+        } = NRadioGroup
         if (mergedSize !== undefined) {
           return mergedSize
         }
@@ -91,7 +101,7 @@ function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
   })
   const inputRef = ref<HTMLElement | null>(null)
   const labelRef = ref<HTMLElement | null>(null)
-  const NRadioGroup = inject<RadioGroupInjection | null>('NRadioGroup', null)
+  const NRadioGroup = inject(radioGroupInjectionKey, null)
   const uncontrolledCheckedRef = ref(props.defaultChecked)
   const controlledCheckedRef = toRef(props, 'checked')
   const mergedCheckedRef = useMergedState(
@@ -99,16 +109,16 @@ function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
     uncontrolledCheckedRef
   )
   const renderSafeCheckedRef = useMemo(() => {
-    if (NRadioGroup) return NRadioGroup.value === props.value
+    if (NRadioGroup) return NRadioGroup.valueRef.value === props.value
     return mergedCheckedRef.value
   })
   const mergedNameRef = useMemo(() => {
     const { name } = props
     if (name !== undefined) return name
-    if (NRadioGroup) return NRadioGroup.name
+    if (NRadioGroup) return NRadioGroup.nameRef.value
   })
   const mergedDisabledRef = useMemo(() => {
-    return NRadioGroup?.disabled || props.disabled
+    return NRadioGroup?.disabledRef.value || props.disabled
   })
   const focusRef = ref(false)
   function doUpdateChecked (): void {
@@ -158,6 +168,9 @@ function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
     inputRef.value?.click()
   }
   return {
+    cPrefix: NRadioGroup
+      ? NRadioGroup.cPrefixRef
+      : useConfig(props).mergedClsPrefix,
     inputRef,
     labelRef,
     mergedName: mergedNameRef,

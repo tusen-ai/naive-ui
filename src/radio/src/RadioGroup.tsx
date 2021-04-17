@@ -7,22 +7,24 @@ import {
   provide,
   ref,
   toRef,
-  reactive,
   VNodeChild,
   CSSProperties
 } from 'vue'
 import { useMergedState } from 'vooks'
-import { useTheme, useFormItem } from '../../_mixins'
+import { useTheme, useFormItem, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { getSlot, warn, createKey, call, flatten } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { radioLight } from '../styles'
 import type { RadioTheme } from '../styles'
-import type { RadioProps, RadioGroupInjection } from './use-radio'
+import type { RadioProps } from './use-radio'
+import { radioGroupInjectionKey } from './use-radio'
 import style from './styles/radio-group.cssr'
 
 function mapSlot (
   defaultSlot: VNode[],
-  value: string | number | null
+  value: string | number | null,
+  clsPrefix: string
 ): {
     children: VNodeChild[]
     isButtonGroup: boolean
@@ -68,19 +70,19 @@ function mapSlot (
       const currentInstancePriority =
         (currentInstanceChecked ? 2 : 0) + (!currentInstanceDisabled ? 1 : 0)
       const lastInstanceClass = {
-        'n-radio-group__splitor--disabled': lastInstanceDisabled,
-        'n-radio-group__splitor--checked': lastInstanceChecked
+        [`${clsPrefix}-radio-group__splitor--disabled`]: lastInstanceDisabled,
+        [`${clsPrefix}-radio-group__splitor--checked`]: lastInstanceChecked
       }
       const currentInstanceClass = {
-        'n-radio-group__splitor--disabled': currentInstanceDisabled,
-        'n-radio-group__splitor--checked': currentInstanceChecked
+        [`${clsPrefix}-radio-group__splitor--disabled`]: currentInstanceDisabled,
+        [`${clsPrefix}-radio-group__splitor--checked`]: currentInstanceChecked
       }
       const splitorClass =
         lastInstancePriority < currentInstancePriority
           ? currentInstanceClass
           : lastInstanceClass
       children.push(
-        <div class={['n-radio-group__splitor', splitorClass]}></div>,
+        <div class={[`${clsPrefix}-radio-group__splitor`, splitorClass]}></div>,
         wrappedInstance
       )
     }
@@ -91,49 +93,61 @@ function mapSlot (
   }
 }
 
+const radioGroupProps = {
+  ...(useTheme.props as ThemeProps<RadioTheme>),
+  name: String,
+  value: {
+    type: [String, Number] as PropType<string | number | undefined | null>
+  },
+  defaultValue: {
+    type: [String, Number] as PropType<string | number | null>,
+    default: null
+  },
+  size: {
+    type: String as PropType<'small' | 'medium' | 'large' | undefined>,
+    default: undefined
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:value': Function as PropType<(value: string | number) => void>,
+  onUpdateValue: Function as PropType<(value: string | number) => void>,
+  // deprecated
+  onChange: {
+    type: (Function as unknown) as PropType<
+    ((value: string | number) => void) | undefined
+    >,
+    validator: () => {
+      if (__DEV__) {
+        warn(
+          'radio-group',
+          '`on-change` is deprecated, please use `on-update:value` instead.'
+        )
+      }
+      return true
+    },
+    default: undefined
+  }
+} as const
+
+export type RadioGroupProps = ExtractPublicPropTypes<typeof radioGroupProps>
+
 export default defineComponent({
   name: 'RadioGroup',
-  props: {
-    ...(useTheme.props as ThemeProps<RadioTheme>),
-    name: String,
-    value: {
-      type: [String, Number] as PropType<string | number | undefined | null>
-    },
-    defaultValue: {
-      type: [String, Number] as PropType<string | number | null>,
-      default: null
-    },
-    size: {
-      type: String as PropType<'small' | 'medium' | 'large' | undefined>,
-      default: undefined
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': Function as PropType<(value: string | number) => void>,
-    onUpdateValue: Function as PropType<(value: string | number) => void>,
-    // deprecated
-    onChange: {
-      type: (Function as unknown) as PropType<
-      ((value: string | number) => void) | undefined
-      >,
-      validator: () => {
-        if (__DEV__) {
-          warn(
-            'radio-group',
-            '`on-change` is deprecated, please use `on-update:value` instead.'
-          )
-        }
-        return true
-      },
-      default: undefined
-    }
-  },
+  props: radioGroupProps,
   setup (props) {
     const formItem = useFormItem(props)
-    const themeRef = useTheme('Radio', 'RadioGroup', style, radioLight, props)
+    const { mergedClsPrefix } = useConfig(props)
+    const themeRef = useTheme(
+      'Radio',
+      'RadioGroup',
+      style,
+      radioLight,
+      props,
+      mergedClsPrefix
+    )
     const { mergedSize: mergedSizeRef } = formItem
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
@@ -158,17 +172,16 @@ export default defineComponent({
       }
       uncontrolledValueRef.value = value
     }
-    provide<RadioGroupInjection>(
-      'NRadioGroup',
-      reactive({
-        name: toRef(props, 'name'),
-        value: mergedValueRef,
-        doUpdateValue,
-        disabled: toRef(props, 'disabled'),
-        mergedSize: formItem.mergedSize
-      })
-    )
+    provide(radioGroupInjectionKey, {
+      cPrefixRef: mergedClsPrefix,
+      nameRef: toRef(props, 'name'),
+      valueRef: mergedValueRef,
+      disabledRef: toRef(props, 'disabled'),
+      mergedSizeRef: formItem.mergedSize,
+      doUpdateValue
+    })
     return {
+      cPrefix: mergedClsPrefix,
       mergedValue: mergedValueRef,
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
@@ -208,16 +221,17 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedValue } = this
+    const { mergedValue, cPrefix } = this
     const { children, isButtonGroup } = mapSlot(
       flatten(getSlot(this)),
-      mergedValue
+      mergedValue,
+      cPrefix
     )
     return (
       <div
         class={[
-          'n-radio-group',
-          isButtonGroup && 'n-radio-group--button-group'
+          `${cPrefix}-radio-group`,
+          isButtonGroup && `${cPrefix}-radio-group--button-group`
         ]}
         style={this.cssVars as CSSProperties}
       >

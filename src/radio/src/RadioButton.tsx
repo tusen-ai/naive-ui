@@ -1,5 +1,8 @@
 import { h, defineComponent } from 'vue'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import useRadio from './use-radio'
+
+export type RadioButtonProps = ExtractPublicPropTypes<typeof useRadio.props>
 
 export default defineComponent({
   name: 'RadioButton',
@@ -8,14 +11,15 @@ export default defineComponent({
     return useRadio(props)
   },
   render () {
+    const { cPrefix } = this
     return (
       <div
         class={[
-          'n-radio-button',
+          `${cPrefix}-radio-button`,
           {
-            'n-radio-button--disabled': this.mergedDisabled,
-            'n-radio-button--checked': this.renderSafeChecked,
-            'n-radio-button--focus': this.focus
+            [`${cPrefix}-radio-button--disabled`]: this.mergedDisabled,
+            [`${cPrefix}-radio-button--checked`]: this.renderSafeChecked,
+            [`${cPrefix}-radio-button--focus`]: this.focus
           }
         ]}
         onKeyup={this.handleKeyUp}
@@ -25,7 +29,7 @@ export default defineComponent({
         <input
           ref="inputRef"
           type="radio"
-          class="n-radio-button__radio-input"
+          class={`${cPrefix}-radio-button__radio-input`}
           value={this.value}
           name={this.mergedName}
           checked={this.renderSafeChecked}
@@ -34,7 +38,7 @@ export default defineComponent({
           onFocus={this.handleRadioInputFocus}
           onBlur={this.handleRadioInputBlur}
         />
-        <div class="n-radio-button__state-border" />
+        <div class={`${cPrefix}-radio-button__state-border`} />
         <span ref="labelRef">{this.$slots}</span>
       </div>
     )
