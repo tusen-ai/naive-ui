@@ -22,76 +22,89 @@ import { useIsMounted, useMergedState } from 'vooks'
 import { on, off } from 'evtd'
 import { useTheme, useFormItem, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn, call, useAdjustedTo, MaybeArray } from '../../_utils'
+import { warn, call, useAdjustedTo } from '../../_utils'
+import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { sliderLight, SliderTheme } from '../styles'
 import style from './styles/index.cssr'
 import { OnUpdateValueImpl } from './interface'
 
+const sliderProps = {
+  ...(useTheme.props as ThemeProps<SliderTheme>),
+  to: useAdjustedTo.propTo,
+  defaultValue: {
+    type: [Number, Array] as PropType<number | [number, number]>,
+    default: 0
+  },
+  marks: Object as PropType<Record<string, string>>,
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  min: {
+    type: Number,
+    default: 0
+  },
+  max: {
+    type: Number,
+    default: 100
+  },
+  step: {
+    type: Number,
+    default: 1
+  },
+  range: {
+    type: Boolean,
+    default: false
+  },
+  value: [Number, Array] as PropType<number | [number, number]>,
+  placement: {
+    type: String as PropType<FollowerPlacement>,
+    default: 'top'
+  },
+  showTooltip: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:value': [Function, Array] as PropType<
+  MaybeArray<<T extends number & [number, number]>(value: T) => void>
+  >,
+  onUpdateValue: [Function, Array] as PropType<
+  MaybeArray<<T extends number & [number, number]>(value: T) => void>
+  >,
+  // deprecated
+  onChange: {
+    type: [Function, Array] as PropType<
+    MaybeArray<<T extends number & [number, number]>(value: T) => void>
+    >,
+    validator: () => {
+      if (__DEV__) {
+        warn(
+          'slider',
+          '`on-change` is deprecated, please use `on-update:value` instead.'
+        )
+      }
+      return true
+    },
+    default: undefined
+  }
+} as const
+
+export type SliderProps = ExtractPublicPropTypes<typeof sliderProps>
+
 export default defineComponent({
   name: 'Slider',
-  props: {
-    ...(useTheme.props as ThemeProps<SliderTheme>),
-    to: useAdjustedTo.propTo,
-    defaultValue: {
-      type: [Number, Array] as PropType<number | [number, number]>,
-      default: 0
-    },
-    marks: Object as PropType<Record<string, string>>,
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    min: {
-      type: Number,
-      default: 0
-    },
-    max: {
-      type: Number,
-      default: 100
-    },
-    step: {
-      type: Number,
-      default: 1
-    },
-    range: {
-      type: Boolean,
-      default: false
-    },
-    value: [Number, Array] as PropType<number | [number, number]>,
-    placement: {
-      type: String as PropType<FollowerPlacement>,
-      default: 'top'
-    },
-    showTooltip: {
-      type: Boolean as PropType<boolean | undefined>,
-      default: undefined
-    },
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': [Function, Array] as PropType<
-    MaybeArray<<T extends number & [number, number]>(value: T) => void>
-    >,
-    onUpdateValue: [Function, Array] as PropType<
-    MaybeArray<<T extends number & [number, number]>(value: T) => void>
-    >,
-    // deprecated
-    onChange: {
-      type: [Function, Array] as PropType<
-      MaybeArray<<T extends number & [number, number]>(value: T) => void>
-      >,
-      validator: () => {
-        if (__DEV__) {
-          warn(
-            'slider',
-            '`on-change` is deprecated, please use `on-update:value` instead.'
-          )
-        }
-        return true
-      },
-      default: undefined
-    }
-  },
+  props: sliderProps,
   setup (props) {
-    const themeRef = useTheme('Slider', 'Slider', style, sliderLight, props)
+    const { mergedClsPrefix, namespace } = useConfig(props)
+    const themeRef = useTheme(
+      'Slider',
+      'Slider',
+      style,
+      sliderLight,
+      props,
+      mergedClsPrefix
+    )
     const formItem = useFormItem(props)
 
     const handleRef1 = ref<HTMLElement | null>(null)
@@ -646,7 +659,8 @@ export default defineComponent({
       off('mouseup', document, handleHandleMouseUp)
     })
     return {
-      ...useConfig(props),
+      cPrefix: mergedClsPrefix,
+      namespace,
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
       isMounted: useIsMounted(),
@@ -759,28 +773,29 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     return (
       <div
         class={[
-          'n-slider',
+          `${cPrefix}-slider`,
           {
-            'n-slider--disabled': this.disabled,
-            'n-slider--active': this.active,
-            'n-slider--with-mark': this.marks
+            [`${cPrefix}-slider--disabled`]: this.disabled,
+            [`${cPrefix}-slider--active`]: this.active,
+            [`${cPrefix}-slider--with-mark`]: this.marks
           }
         ]}
         style={this.cssVars as CSSProperties}
         onKeydown={this.handleKeyDown}
         onClick={this.handleRailClick}
       >
-        <div ref="railRef" class="n-slider-rail">
-          <div class="n-slider-rail__fill" style={this.fillStyle} />
+        <div ref="railRef" class={`${cPrefix}-slider-rail`}>
+          <div class={`${cPrefix}-slider-rail__fill`} style={this.fillStyle} />
           {this.marks ? (
             <div
               class={[
-                'n-slider-dots',
+                `${cPrefix}-slider-dots`,
                 {
-                  'n-slider-dots--transition-disabled': this
+                  [`${cPrefix}-slider-dots--transition-disabled`]: this
                     .dotTransitionDisabled
                 }
               ]}
@@ -789,9 +804,9 @@ export default defineComponent({
                 <div
                   key={mark.label}
                   class={[
-                    'n-slider-dot',
+                    `${cPrefix}-slider-dot`,
                     {
-                      'n-slider-dot--active': mark.active
+                      [`${cPrefix}-slider-dot--active`]: mark.active
                     }
                   ]}
                   style={mark.style}
@@ -808,7 +823,7 @@ export default defineComponent({
                   default: () => (
                     <div
                       ref="handleRef1"
-                      class="n-slider-handle"
+                      class={`${cPrefix}-slider-handle`}
                       tabindex={0}
                       style={this.firstHandleStyle}
                       onFocus={this.handleHandleFocus1}
@@ -839,7 +854,7 @@ export default defineComponent({
                         default: () =>
                           this.mergedShowTooltip1 ? (
                             <div
-                              class="n-slider-handle-indicator"
+                              class={`${cPrefix}-slider-handle-indicator`}
                               style={this.indicatorCssVars as CSSProperties}
                             >
                               {this.handleValue1}
@@ -862,7 +877,7 @@ export default defineComponent({
                     default: () => (
                       <div
                         ref="handleRef2"
-                        class="n-slider-handle"
+                        class={`${cPrefix}-slider-handle`}
                         tabindex={0}
                         style={this.secondHandleStyle}
                         onFocus={this.handleHandleFocus2}
@@ -893,7 +908,7 @@ export default defineComponent({
                           default: () =>
                             this.mergedShowTooltip2 ? (
                               <div
-                                class="n-slider-handle-indicator"
+                                class={`${cPrefix}-slider-handle-indicator`}
                                 style={this.indicatorCssVars as CSSProperties}
                               >
                                 {this.handleValue2}
@@ -909,9 +924,13 @@ export default defineComponent({
           </VBinder>
         ) : null}
         {this.marks ? (
-          <div class="n-slider-marks">
+          <div class={`${cPrefix}-slider-marks`}>
             {this.markInfos.map((mark) => (
-              <div key={mark.label} class="n-slider-mark" style={mark.style}>
+              <div
+                key={mark.label}
+                class={`${cPrefix}-slider-mark`}
+                style={mark.style}
+              >
                 {mark.label}
               </div>
             ))}

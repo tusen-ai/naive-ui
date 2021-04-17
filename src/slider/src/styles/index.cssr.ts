@@ -151,7 +151,7 @@ export default c([
   ]),
   cB('slider-handle-indicator', `
     font-size: var(--font-size);
-    padding: 8px 12px;
+    padding: 6px 10px;
     margin-bottom: 12px;
     border-radius: var(--indicator-border-radius);
     color: var(--indicator-text-color);
