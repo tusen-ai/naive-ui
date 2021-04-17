@@ -1,3 +1,5 @@
+import { Ref } from '@vue/reactivity'
+import { InjectionKey } from '@vue/runtime-core'
 import type { MergedTheme } from '../../_mixins'
 import type { UploadTheme } from '../styles'
 
@@ -27,7 +29,7 @@ export type OnRemove = (data: {
 }) => Promise<boolean> | boolean | any
 export type OnDownload = (file: FileInfo) => Promise<boolean> | boolean | any
 
-export interface UploadInst {
+export interface UploadInternalInst {
   doChange: DoChange
   XhrMap: Map<string, XMLHttpRequest>
   onFinish?: OnFinish
@@ -43,19 +45,23 @@ export type DoChange = (
 ) => void
 
 export interface UploadInjection {
-  readonly mergedTheme: MergedTheme<UploadTheme>
-  draggerInside: boolean
-  showCancelButton: boolean
-  showRemoveButton: boolean
-  showDownloadButton: boolean
-  showRetryButton: boolean
-  mergedFileList: FileInfo[]
+  cPrefixRef: Ref<string>
+  mergedThemeRef: Ref<MergedTheme<UploadTheme>>
+  showCancelButtonRef: Ref<boolean>
+  showRemoveButtonRef: Ref<boolean>
+  showDownloadButtonRef: Ref<boolean>
+  showRetryButtonRef: Ref<boolean>
+  mergedFileListRef: Ref<FileInfo[]>
+  onRemoveRef: Ref<OnRemove | undefined>
+  onDownloadRef: Ref<OnDownload | undefined>
   XhrMap: Map<string, XMLHttpRequest>
   submit: (fileId?: string) => void
   doChange: DoChange
-  onRemove: OnRemove | undefined
-  onDownload: OnDownload | undefined
 }
+
+export const uploadInjectionKey: InjectionKey<UploadInjection> = Symbol(
+  'upload'
+)
 
 export interface XhrHandlers {
   handleXHRLoad: (e: ProgressEvent) => void
@@ -64,6 +70,6 @@ export interface XhrHandlers {
   handleXHRError: (e: ProgressEvent) => void
 }
 
-export interface UploadRef {
+export interface UploadInst {
   submit: () => void
 }

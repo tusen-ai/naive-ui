@@ -5,37 +5,37 @@ import {
   provide,
   toRef,
   ref,
-  reactive,
   PropType,
   CSSProperties
 } from 'vue'
 import { createId } from 'seemly'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn } from '../../_utils'
+import { ExtractPublicPropTypes, getFirstSlotVNode, warn } from '../../_utils'
 import { NFadeInExpandTransition } from '../../_internal'
 import { uploadLight, UploadTheme } from '../styles'
 import NUploadFile from './UploadFile'
 import style from './styles/index.cssr'
-import type {
+import {
   XhrHandlers,
   FileInfo,
   DoChange,
-  UploadInst,
+  UploadInternalInst,
   FuncOrRecordOrUndef,
   OnFinish,
-  UploadInjection,
   OnRemove,
   OnDownload,
-  OnChange
+  OnChange,
+  uploadInjectionKey
 } from './interface'
 import { useMergedState } from 'vooks'
+import { uploadDraggerKey } from './UploadDragger'
 
 /**
  * fils status ['pending', 'uploading', 'finished', 'removed', 'error']
  */
 function createXhrHandlers (
-  inst: UploadInst,
+  inst: UploadInternalInst,
   file: FileInfo,
   XHR: XMLHttpRequest
 ): XhrHandlers {
@@ -86,7 +86,7 @@ function createXhrHandlers (
 }
 
 function registerHandler (
-  inst: UploadInst,
+  inst: UploadInternalInst,
   file: FileInfo,
   request: XMLHttpRequest
 ): void {
@@ -135,7 +135,7 @@ function appendData (
 }
 
 function submitImpl (
-  inst: UploadInst,
+  inst: UploadInternalInst,
   file: FileInfo,
   formData: FormData,
   {
@@ -168,76 +168,90 @@ function submitImpl (
   }
 }
 
+const uploadProps = {
+  ...(useTheme.props as ThemeProps<UploadTheme>),
+  name: {
+    type: String,
+    default: 'file'
+  },
+  accept: String,
+  action: String,
+  // to be impl
+  // directory: {
+  //   type: Boolean,
+  //   default: false
+  // },
+  method: {
+    type: String,
+    default: 'POST'
+  },
+  multiple: {
+    type: Boolean,
+    default: false
+  },
+  data: [Object, Function] as PropType<FuncOrRecordOrUndef>,
+  headers: [Object, Function] as PropType<FuncOrRecordOrUndef>,
+  withCredentials: {
+    type: Boolean,
+    default: false
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  onChange: Function as PropType<OnChange>,
+  onRemove: Function as PropType<OnRemove>,
+  onFinish: Function as PropType<OnFinish>,
+  /** currently of no usage */
+  onDownload: Function as PropType<OnDownload>,
+  defaultUpload: {
+    type: Boolean,
+    default: true
+  },
+  fileList: Array as PropType<FileInfo[]>,
+  fileListStyle: [String, Object] as PropType<string | CSSProperties>,
+  defaultFileList: {
+    type: Array as PropType<FileInfo[]>,
+    default: () => []
+  },
+  showCancelButton: {
+    type: Boolean,
+    default: true
+  },
+  showRemoveButton: {
+    type: Boolean,
+    default: true
+  },
+  showDownloadButton: {
+    type: Boolean,
+    default: false
+  },
+  showRetryButton: {
+    type: Boolean,
+    default: true
+  }
+} as const
+
+export type UploadProps = ExtractPublicPropTypes<typeof uploadProps>
+
 export default defineComponent({
   name: 'Upload',
-  props: {
-    ...(useTheme.props as ThemeProps<UploadTheme>),
-    name: {
-      type: String,
-      default: 'file'
-    },
-    accept: String,
-    action: String,
-    // to be impl
-    // directory: {
-    //   type: Boolean,
-    //   default: false
-    // },
-    method: {
-      type: String,
-      default: 'POST'
-    },
-    multiple: {
-      type: Boolean,
-      default: false
-    },
-    data: [Object, Function] as PropType<FuncOrRecordOrUndef>,
-    headers: [Object, Function] as PropType<FuncOrRecordOrUndef>,
-    withCredentials: {
-      type: Boolean,
-      default: false
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    onChange: Function as PropType<OnChange>,
-    onRemove: Function as PropType<OnRemove>,
-    onFinish: Function as PropType<OnFinish>,
-    /** currently of no usage */
-    onDownload: Function as PropType<OnDownload>,
-    defaultUpload: {
-      type: Boolean,
-      default: true
-    },
-    fileList: Array as PropType<FileInfo[]>,
-    fileListStyle: [String, Object] as PropType<string | CSSProperties>,
-    defaultFileList: {
-      type: Array as PropType<FileInfo[]>,
-      default: () => []
-    },
-    showCancelButton: {
-      type: Boolean,
-      default: true
-    },
-    showRemoveButton: {
-      type: Boolean,
-      default: true
-    },
-    showDownloadButton: {
-      type: Boolean,
-      default: false
-    },
-    showRetryButton: {
-      type: Boolean,
-      default: true
-    }
-  },
+  props: uploadProps,
   setup (props) {
-    const themeRef = useTheme('Upload', 'Upload', style, uploadLight, props)
+    const { mergedClsPrefix } = useConfig(props)
+    const themeRef = useTheme(
+      'Upload',
+      'Upload',
+      style,
+      uploadLight,
+      props,
+      mergedClsPrefix
+    )
     const uncontrolledFileListRef = ref(props.defaultFileList)
     const inputElRef = ref<HTMLInputElement | null>(null)
-    const draggerInsideRef = ref(false)
+    const draggerInsideRef = {
+      value: false
+    }
     const dragOverRef = ref(false)
     const XhrMap = new Map<string, XMLHttpRequest>()
     const mergedFileListRef = useMergedState(
@@ -369,28 +383,26 @@ export default defineComponent({
         warn('upload', 'File has no corresponding id in current file list.')
       }
     }
-    provide<UploadInjection>(
-      'NUpload',
-      reactive({
-        mergedTheme: themeRef,
-        showCancelButton: toRef(props, 'showCancelButton'),
-        showDownloadButton: toRef(props, 'showDownloadButton'),
-        showRemoveButton: toRef(props, 'showRemoveButton'),
-        showRetryButton: toRef(props, 'showRetryButton'),
-        draggerInside: draggerInsideRef,
-        mergedFileList: mergedFileListRef,
-        XhrMap,
-        onRemove: toRef(props, 'onRemove'),
-        onDownload: toRef(props, 'onDownload'),
-        submit,
-        doChange
-      })
-    )
+    provide(uploadInjectionKey, {
+      cPrefixRef: mergedClsPrefix,
+      mergedThemeRef: themeRef,
+      showCancelButtonRef: toRef(props, 'showCancelButton'),
+      showDownloadButtonRef: toRef(props, 'showDownloadButton'),
+      showRemoveButtonRef: toRef(props, 'showRemoveButton'),
+      showRetryButtonRef: toRef(props, 'showRetryButton'),
+      onRemoveRef: toRef(props, 'onRemove'),
+      onDownloadRef: toRef(props, 'onDownload'),
+      mergedFileListRef: mergedFileListRef,
+      XhrMap,
+      submit,
+      doChange
+    })
     return {
+      cPrefix: mergedClsPrefix,
+      draggerInsideRef,
       inputElRef,
       mergedFileList: mergedFileListRef,
       mergedTheme: themeRef,
-      draggerInside: draggerInsideRef,
       dragOver: dragOverRef,
       handleTriggerDrop,
       handleTriggerDragLeave,
@@ -439,14 +451,20 @@ export default defineComponent({
     }
   },
   render () {
+    const { draggerInsideRef, cPrefix } = this
+    const firstChild = getFirstSlotVNode(this.$slots, 'default')
+    // @ts-expect-error
+    if (firstChild?.type?.[uploadDraggerKey]) {
+      draggerInsideRef.value = true
+    }
     return (
       <div
         class={[
-          'n-upload',
+          `${cPrefix}-upload`,
           {
-            'n-upload--dragger-inside': this.draggerInside,
-            'n-upload--drag-over': this.dragOver,
-            'n-upload--disabled': this.disabled
+            [`${cPrefix}-upload--dragger-inside`]: draggerInsideRef.value,
+            [`${cPrefix}-upload--drag-over`]: this.dragOver,
+            [`${cPrefix}-upload--disabled`]: this.disabled
           }
         ]}
         style={this.cssVars as CSSProperties}
@@ -454,13 +472,13 @@ export default defineComponent({
         <input
           ref="inputElRef"
           type="file"
-          class="n-upload__file-input"
+          class={`${cPrefix}-upload__file-input`}
           accept={this.accept}
           multiple={this.multiple}
           onChange={this.handleFileInputChange}
         />
         <div
-          class="n-upload__trigger"
+          class={`${cPrefix}-upload__trigger`}
           onClick={this.handleTriggerClick}
           onDrop={this.handleTriggerDrop}
           onDragover={this.handleTriggerDragOver}
@@ -469,12 +487,12 @@ export default defineComponent({
         >
           {this.$slots}
         </div>
-        <div class="n-upload-file-list" style={this.fileListStyle}>
+        <div class={`${cPrefix}-upload-file-list`} style={this.fileListStyle}>
           <NFadeInExpandTransition group>
             {{
               default: () =>
                 this.mergedFileList.map((file) => (
-                  <NUploadFile key={file.id} file={file} />
+                  <NUploadFile clsPrefix={cPrefix} key={file.id} file={file} />
                 ))
             }}
           </NFadeInExpandTransition>

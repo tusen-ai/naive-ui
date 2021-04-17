@@ -10,18 +10,23 @@ import { NButton } from '../../button'
 import { NIconSwitchTransition, NBaseIcon } from '../../_internal'
 import { warn } from '../../_utils'
 import NUploadProgress from './UploadProgress'
-import type { FileInfo, UploadInjection } from './interface'
+import { FileInfo, uploadInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'UploadFile',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     file: {
       type: Object as PropType<FileInfo>,
       required: true
     }
   },
   setup (props) {
-    const NUpload = inject<UploadInjection>('NUpload') as UploadInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NUpload = inject(uploadInjectionKey)!
     const progressStatusRef = computed(() => {
       const { file } = props
       if (file.status === 'finished') return 'success'
@@ -38,22 +43,22 @@ export default defineComponent({
       return file.status === 'uploading'
     })
     const showCancelButtonRef = computed(() => {
-      if (!NUpload.showCancelButton) return false
+      if (!NUpload.showCancelButtonRef.value) return false
       const { file } = props
       return ['uploading', 'pending', 'error'].includes(file.status)
     })
     const showRemoveButtonRef = computed(() => {
-      if (!NUpload.showRemoveButton) return false
+      if (!NUpload.showRemoveButtonRef.value) return false
       const { file } = props
       return ['finished'].includes(file.status)
     })
     const showDownloadButtonRef = computed(() => {
-      if (!NUpload.showDownloadButton) return false
+      if (!NUpload.showDownloadButtonRef.value) return false
       const { file } = props
       return ['finished'].includes(file.status)
     })
     const showRetryButtonRef = computed(() => {
-      if (!NUpload.showRetryButton) return false
+      if (!NUpload.showRetryButtonRef.value) return false
       const { file } = props
       return ['error'].includes(file.status)
     })
@@ -76,12 +81,17 @@ export default defineComponent({
       handleDownload(props.file)
     }
     function handleRemove (file: FileInfo): void {
-      const { XhrMap, doChange } = NUpload
+      const {
+        XhrMap,
+        doChange,
+        onRemoveRef: { value: onRemove },
+        mergedFileListRef: { value: mergedFileList }
+      } = NUpload
       void Promise.resolve(
-        NUpload.onRemove
-          ? NUpload.onRemove({
+        onRemove
+          ? onRemove({
             file: Object.assign({}, file),
-            fileList: NUpload.mergedFileList
+            fileList: mergedFileList
           })
           : true
       ).then((result) => {
@@ -96,8 +106,11 @@ export default defineComponent({
       })
     }
     function handleDownload (file: FileInfo): void {
+      const {
+        onDownloadRef: { value: onDownload }
+      } = NUpload
       void Promise.resolve(
-        NUpload.onDownload ? NUpload.onDownload(Object.assign({}, file)) : true
+        onDownload ? onDownload(Object.assign({}, file)) : true
       ).then((res) => {
         /** I haven't figure out its usage, so just leave it here */
       })
@@ -109,7 +122,7 @@ export default defineComponent({
       handleRemove(Object.assign({}, file))
     }
     return {
-      NUpload,
+      mergedTheme: NUpload.mergedThemeRef,
       progressStatus: progressStatusRef,
       buttonType: buttonTypeRef,
       showProgress: showProgressRef,
@@ -123,28 +136,31 @@ export default defineComponent({
     }
   },
   render () {
+    const { clsPrefix, mergedTheme } = this
     return (
       <a
         ref="noopener noreferer"
         target="_blank"
         href={this.file.url || undefined}
         class={[
-          'n-upload-file',
-          `n-upload-file--${this.progressStatus}-status`,
-          this.file.url && 'n-upload-file--with-url'
+          `${clsPrefix}-upload-file`,
+          `${clsPrefix}-upload-file--${this.progressStatus}-status`,
+          this.file.url && `${clsPrefix}-upload-file--with-url`
         ]}
       >
-        <div class="n-upload-file-info">
-          <div class="n-upload-file-info__name">
-            <NBaseIcon>{{ default: () => <AttachIcon /> }}</NBaseIcon>
+        <div class={`${clsPrefix}-upload-file-info`}>
+          <div class={`${clsPrefix}-upload-file-info__name`}>
+            <NBaseIcon clsPrefix={clsPrefix}>
+              {{ default: () => <AttachIcon /> }}
+            </NBaseIcon>
             {this.file.name}
           </div>
-          <div class="n-upload-file-info__action">
+          <div class={`${clsPrefix}-upload-file-info__action`}>
             {this.showRemoveButton || this.showCancelButton ? (
               <NButton
                 key="cancelOrTrash"
-                theme={this.NUpload.mergedTheme.peers.Button}
-                themeOverrides={this.NUpload.mergedTheme.peerOverrides.Button}
+                theme={mergedTheme.peers.Button}
+                themeOverrides={mergedTheme.peerOverrides.Button}
                 text
                 type={this.buttonType}
                 onClick={this.handleRemoveOrCancelClick}
@@ -155,11 +171,11 @@ export default defineComponent({
                       {{
                         default: () =>
                           this.showRemoveButton ? (
-                            <NBaseIcon key="trash">
+                            <NBaseIcon clsPrefix={clsPrefix} key="trash">
                               {{ default: () => <TrashIcon /> }}
                             </NBaseIcon>
                           ) : (
-                            <NBaseIcon key="cancel">
+                            <NBaseIcon clsPrefix={clsPrefix} key="cancel">
                               {{ default: () => <CancelIcon /> }}
                             </NBaseIcon>
                           )
@@ -175,10 +191,14 @@ export default defineComponent({
                 text
                 type={this.buttonType}
                 onClick={this.handleRetryClick}
+                theme={mergedTheme.peers.Button}
+                themeOverrides={mergedTheme.peerOverrides.Button}
               >
                 {{
                   icon: () => (
-                    <NBaseIcon>{{ default: () => <RetryIcon /> }}</NBaseIcon>
+                    <NBaseIcon clsPrefix={clsPrefix}>
+                      {{ default: () => <RetryIcon /> }}
+                    </NBaseIcon>
                   )
                 }}
               </NButton>
@@ -189,10 +209,14 @@ export default defineComponent({
                 text
                 type={this.buttonType}
                 onClick={this.handleDownloadClick}
+                theme={mergedTheme.peers.Button}
+                themeOverrides={mergedTheme.peerOverrides.Button}
               >
                 {{
                   icon: () => (
-                    <NBaseIcon>{{ default: () => <DownloadIcon /> }}</NBaseIcon>
+                    <NBaseIcon clsPrefix={clsPrefix}>
+                      {{ default: () => <DownloadIcon /> }}
+                    </NBaseIcon>
                   )
                 }}
               </NButton>
