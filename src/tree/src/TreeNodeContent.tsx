@@ -3,6 +3,10 @@ import { h, defineComponent, ref, PropType } from 'vue'
 export default defineComponent({
   name: 'TreeNodeContent',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     disabled: {
       type: Boolean,
       default: false
@@ -144,6 +148,7 @@ export default defineComponent({
   },
   render () {
     const {
+      clsPrefix,
       pending,
       pendingPosition,
       selected,
@@ -162,16 +167,19 @@ export default defineComponent({
       <span
         ref="selfRef"
         class={[
-          'n-tree-node-content',
+          `${clsPrefix}-tree-node-content`,
           {
-            'n-tree-node-content--pending': pending,
-            'n-tree-node-content--pending-bottom': pendingPosition === 'bottom',
-            'n-tree-node-content--pending-body': pendingPosition === 'center',
-            'n-tree-node-content--pending-top': pendingPosition === 'top',
-            'n-tree-node-content--selected': selected,
-            'n-tree-node-content--block': blockNode,
-            'n-tree-node-content--checkable': checkable,
-            'n-tree-node-content--hightlight': highlight
+            [`${clsPrefix}-tree-node-content--pending`]: pending,
+            [`${clsPrefix}-tree-node-content--pending-bottom`]:
+              pendingPosition === 'bottom',
+            [`${clsPrefix}-tree-node-content--pending-body`]:
+              pendingPosition === 'center',
+            [`${clsPrefix}-tree-node-content--pending-top`]:
+              pendingPosition === 'top',
+            [`${clsPrefix}-tree-node-content--selected`]: selected,
+            [`${clsPrefix}-tree-node-content--block`]: blockNode,
+            [`${clsPrefix}-tree-node-content--checkable`]: checkable,
+            [`${clsPrefix}-tree-node-content--hightlight`]: highlight
           }
         ]}
         onDragleave={handleContentDragLeave}
@@ -182,8 +190,8 @@ export default defineComponent({
         onDrop={handleContentDrop}
         onClick={handleClick}
       >
-        <div class="n-tree-node-content__padding-box" />
-        <div class="n-tree-node-content__text">{this.$slots}</div>
+        <div class={`${clsPrefix}-tree-node-content__padding-box`} />
+        <div class={`${clsPrefix}-tree-node-content__text`}>{this.$slots}</div>
       </span>
     )
   }

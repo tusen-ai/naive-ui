@@ -5,6 +5,10 @@ import { NIconSwitchTransition, NBaseLoading, NBaseIcon } from '../../_internal'
 export default defineComponent({
   name: 'NTreeSwitcher',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     expanded: {
       type: Boolean,
       default: false
@@ -20,27 +24,28 @@ export default defineComponent({
     onClick: Function as PropType<(e: MouseEvent) => void>
   },
   render () {
+    const { clsPrefix } = this
     return (
       <span
         class={[
-          'n-tree-node-switcher',
+          `${clsPrefix}-tree-node-switcher`,
           {
-            'n-tree-node-switcher--expanded': this.expanded,
-            'n-tree-node-switcher--hide': this.hide
+            [`${clsPrefix}-tree-node-switcher--expanded`]: this.expanded,
+            [`${clsPrefix}-tree-node-switcher--hide`]: this.hide
           }
         ]}
         onClick={this.onClick}
       >
-        <div class="n-tree-node-switcher__icon">
+        <div class={`${clsPrefix}-tree-node-switcher__icon`}>
           <NIconSwitchTransition>
             {{
               default: () =>
                 !this.loading ? (
-                  <NBaseIcon key="switcher">
+                  <NBaseIcon clsPrefix={clsPrefix} key="switcher">
                     {{ default: () => <SwitcherIcon /> }}
                   </NBaseIcon>
                 ) : (
-                  <NBaseLoading key="loading" />
+                  <NBaseLoading clsPrefix={clsPrefix} key="loading" />
                 )
             }}
           </NIconSwitchTransition>

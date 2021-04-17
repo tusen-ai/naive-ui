@@ -7,177 +7,185 @@ import {
   provide,
   PropType,
   watch,
-  reactive
+  CSSProperties
 } from 'vue'
 import { createTreeMate } from 'treemate'
 import { useMergedState } from 'vooks'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, MaybeArray, warn } from '../../_utils'
+import { call, warn } from '../../_utils'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { treeLight } from '../styles'
 import type { TreeTheme } from '../styles'
-import NTreeOption from './TreeNode'
+import NTreeNode from './TreeNode'
 import { keysWithFilter } from './utils'
 import style from './styles/index.cssr'
-import type {
+import {
   DragInfo,
   DropInfo,
-  TreeInjection,
   TreeOptions,
   Key,
   TreeOption,
   TmNode,
   InternalDragInfo,
-  InternalDropInfo
+  InternalDropInfo,
+  treeInjectionKey
 } from './interface'
+
+const treeProps = {
+  ...(useTheme.props as ThemeProps<TreeTheme>),
+  data: {
+    type: Array as PropType<TreeOptions>,
+    default: () => []
+  },
+  defaultExpandAll: {
+    type: Boolean,
+    default: false
+  },
+  expandOnDragenter: {
+    type: Boolean,
+    default: true
+  },
+  cancelable: {
+    type: Boolean,
+    default: true
+  },
+  checkable: {
+    type: Boolean,
+    default: false
+  },
+  draggable: {
+    type: Boolean,
+    default: false
+  },
+  blockNode: {
+    type: Boolean,
+    default: false
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  checkedKeys: Array as PropType<Key[]>,
+  defaultCheckedKeys: {
+    type: Array as PropType<Key[]>,
+    default: () => []
+  },
+  expandedKeys: Array as PropType<Key[]>,
+  defaultExpandedKeys: {
+    type: Array as PropType<Key[]>,
+    default: () => []
+  },
+  selectedKeys: Array as PropType<Key[]>,
+  defaultSelectedKeys: {
+    type: Array as PropType<Key[]>,
+    default: () => []
+  },
+  remote: {
+    type: Boolean,
+    default: false
+  },
+  multiple: {
+    type: Boolean,
+    default: false
+  },
+  pattern: {
+    type: String,
+    default: ''
+  },
+  filter: {
+    type: Function as PropType<(pattern: string, node: TreeOption) => boolean>,
+    default: (pattern: string, node: TreeOption) => {
+      if (!pattern) return true
+      return ~node.label.toLowerCase().indexOf(pattern.toLowerCase())
+    }
+  },
+  onLoad: Function as PropType<(node: TreeOption) => Promise<void>>,
+  cascade: {
+    type: Boolean,
+    default: false
+  },
+  selectable: {
+    type: Boolean,
+    default: true
+  },
+  onDragenter: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
+  onDragleave: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
+  onDragend: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
+  onDragstart: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
+  onDrop: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:expandedKeys': [Function, Array] as PropType<
+  MaybeArray<(value: Key[]) => void>
+  >,
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:checkedKeys': [Function, Array] as PropType<
+  MaybeArray<(value: Key[]) => void>
+  >,
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:selectedKeys': [Function, Array] as PropType<
+  MaybeArray<(value: Key[]) => void>
+  >,
+  // deprecated
+  /** @deprecated */
+  onExpandedKeysChange: {
+    type: [Function, Array] as PropType<
+    MaybeArray<(value: Key[]) => void> | undefined
+    >,
+    validator: () => {
+      warn(
+        'tree',
+        '`on-expanded-keys-change` is deprecated, please use `on-update:expanded-keys` instead.'
+      )
+      return true
+    },
+    default: undefined
+  },
+  /** @deprecated */
+  onCheckedKeysChange: {
+    type: [Function, Array] as PropType<
+    MaybeArray<(value: Key[]) => void> | undefined
+    >,
+    validator: () => {
+      warn(
+        'tree',
+        '`on-checked-keys-change` is deprecated, please use `on-update:expanded-keys` instead.'
+      )
+      return true
+    },
+    default: undefined
+  },
+  /** @deprecated */
+  onSelectedKeysChange: {
+    type: [Function, Array] as PropType<
+    MaybeArray<(value: Key[]) => void> | undefined
+    >,
+    validator: () => {
+      warn(
+        'tree',
+        '`on-selected-keys-change` is deprecated, please use `on-update:selected-keys` instead.'
+      )
+      return true
+    },
+    default: undefined
+  }
+} as const
+
+export type TreeProps = ExtractPublicPropTypes<typeof treeProps>
 
 export default defineComponent({
   name: 'Tree',
-  props: {
-    ...(useTheme.props as ThemeProps<TreeTheme>),
-    data: {
-      type: Array as PropType<TreeOptions>,
-      default: () => []
-    },
-    defaultExpandAll: {
-      type: Boolean,
-      default: false
-    },
-    expandOnDragenter: {
-      type: Boolean,
-      default: true
-    },
-    cancelable: {
-      type: Boolean,
-      default: true
-    },
-    checkable: {
-      type: Boolean,
-      default: false
-    },
-    draggable: {
-      type: Boolean,
-      default: false
-    },
-    blockNode: {
-      type: Boolean,
-      default: false
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    checkedKeys: Array as PropType<Key[]>,
-    defaultCheckedKeys: {
-      type: Array as PropType<Key[]>,
-      default: () => []
-    },
-    expandedKeys: Array as PropType<Key[]>,
-    defaultExpandedKeys: {
-      type: Array as PropType<Key[]>,
-      default: () => []
-    },
-    selectedKeys: Array as PropType<Key[]>,
-    defaultSelectedKeys: {
-      type: Array as PropType<Key[]>,
-      default: () => []
-    },
-    remote: {
-      type: Boolean,
-      default: false
-    },
-    multiple: {
-      type: Boolean,
-      default: false
-    },
-    pattern: {
-      type: String,
-      default: ''
-    },
-    filter: {
-      type: Function as PropType<
-      (pattern: string, node: TreeOption) => boolean
-      >,
-      default: (pattern: string, node: TreeOption) => {
-        if (!pattern) return true
-        return ~node.label.toLowerCase().indexOf(pattern.toLowerCase())
-      }
-    },
-    onLoad: Function as PropType<(node: TreeOption) => Promise<void>>,
-    cascade: {
-      type: Boolean,
-      default: false
-    },
-    selectable: {
-      type: Boolean,
-      default: true
-    },
-    onDragenter: [Function, Array] as PropType<
-    MaybeArray<(e: DragInfo) => void>
-    >,
-    onDragleave: [Function, Array] as PropType<
-    MaybeArray<(e: DragInfo) => void>
-    >,
-    onDragend: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
-    onDragstart: [Function, Array] as PropType<
-    MaybeArray<(e: DragInfo) => void>
-    >,
-    onDrop: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:expandedKeys': [Function, Array] as PropType<
-    MaybeArray<(value: Key[]) => void>
-    >,
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:checkedKeys': [Function, Array] as PropType<
-    MaybeArray<(value: Key[]) => void>
-    >,
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:selectedKeys': [Function, Array] as PropType<
-    MaybeArray<(value: Key[]) => void>
-    >,
-    // deprecated
-    onExpandedKeysChange: {
-      type: [Function, Array] as PropType<
-      MaybeArray<(value: Key[]) => void> | undefined
-      >,
-      validator: () => {
-        warn(
-          'tree',
-          '`on-expanded-keys-change` is deprecated, please use `on-update:expanded-keys` instead.'
-        )
-        return true
-      },
-      default: undefined
-    },
-    onCheckedKeysChange: {
-      type: [Function, Array] as PropType<
-      MaybeArray<(value: Key[]) => void> | undefined
-      >,
-      validator: () => {
-        warn(
-          'tree',
-          '`on-checked-keys-change` is deprecated, please use `on-update:expanded-keys` instead.'
-        )
-        return true
-      },
-      default: undefined
-    },
-    onSelectedKeysChange: {
-      type: [Function, Array] as PropType<
-      MaybeArray<(value: Key[]) => void> | undefined
-      >,
-      validator: () => {
-        warn(
-          'tree',
-          '`on-selected-keys-change` is deprecated, please use `on-update:selected-keys` instead.'
-        )
-        return true
-      },
-      default: undefined
-    }
-  },
+  props: treeProps,
   setup (props) {
-    const themeRef = useTheme('Tree', 'Tree', style, treeLight, props)
+    const { mergedClsPrefix } = useConfig(props)
+    const themeRef = useTheme(
+      'Tree',
+      'Tree',
+      style,
+      treeLight,
+      props,
+      mergedClsPrefix
+    )
     const treeMateRef = computed(() => createTreeMate(props.data))
     const uncontrolledCheckedKeysRef = ref(
       props.defaultCheckedKeys || props.checkedKeys
@@ -419,32 +427,30 @@ export default defineComponent({
       })
       resetDragStatus()
     }
-    provide<TreeInjection>(
-      'NTree',
-      reactive({
-        loadingKeys: loadingKeysRef,
-        highlightKeys: highlightKeysRef,
-        displayedCheckedKeys: displayedCheckedKeysRef,
-        displayedIndeterminateKeys: displayedIndeterminateKeysRef,
-        mergedSelectedKeys: mergedSelectedKeysRef,
-        mergedExpandedKeys: mergedExpandedKeysRef,
-        remote: toRef(props, 'remote'),
-        onLoad: toRef(props, 'onLoad'),
-        draggable: toRef(props, 'draggable'),
-        checkable: toRef(props, 'checkable'),
-        blockNode: toRef(props, 'blockNode'),
-        handleSwitcherClick,
-        handleDragEnd,
-        handleDragEnter,
-        handleDragLeave,
-        handleDragStart,
-        handleDrop,
-        handleSelect,
-        handleCheck,
-        mergedTheme: themeRef
-      })
-    )
+    provide(treeInjectionKey, {
+      loadingKeysRef: loadingKeysRef,
+      highlightKeysRef: highlightKeysRef,
+      displayedCheckedKeysRef: displayedCheckedKeysRef,
+      displayedIndeterminateKeysRef: displayedIndeterminateKeysRef,
+      mergedSelectedKeysRef: mergedSelectedKeysRef,
+      mergedExpandedKeysRef: mergedExpandedKeysRef,
+      mergedThemeRef: themeRef,
+      remoteRef: toRef(props, 'remote'),
+      onLoadRef: toRef(props, 'onLoad'),
+      draggableRef: toRef(props, 'draggable'),
+      checkableRef: toRef(props, 'checkable'),
+      blockNodeRef: toRef(props, 'blockNode'),
+      handleSwitcherClick,
+      handleDragEnd,
+      handleDragEnter,
+      handleDragLeave,
+      handleDragStart,
+      handleDrop,
+      handleSelect,
+      handleCheck
+    })
     return {
+      cPrefix: mergedClsPrefix,
       tmNodes: computed(() => treeMateRef.value.treeNodes),
       cssVars: computed(() => {
         const {
@@ -477,18 +483,13 @@ export default defineComponent({
     }
   },
   render () {
-    return h(
-      'div',
-      {
-        class: 'n-tree',
-        style: this.cssVars
-      },
-      this.tmNodes.map((tmNode) =>
-        h(NTreeOption, {
-          tmNode,
-          key: tmNode.key
-        })
-      )
+    const { cPrefix } = this
+    return (
+      <div class={`${cPrefix}-tree`} style={this.cssVars as CSSProperties}>
+        {this.tmNodes.map((tmNode) => (
+          <NTreeNode key={tmNode.key} tmNode={tmNode} clsPrefix={cPrefix} />
+        ))}
+      </div>
     )
   }
 })

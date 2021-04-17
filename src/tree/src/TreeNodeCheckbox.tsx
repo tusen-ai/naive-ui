@@ -1,10 +1,14 @@
 import { h, defineComponent, inject, PropType } from 'vue'
 import { NCheckbox } from '../../checkbox'
-import type { TreeInjection } from './interface'
+import { treeInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'NTreeNodeCheckbox',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     checked: {
       type: Boolean,
       default: false
@@ -16,7 +20,8 @@ export default defineComponent({
     onCheck: Function as PropType<(value: boolean) => void>
   },
   setup (props) {
-    const NTree = inject<TreeInjection>('NTree') as TreeInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NTree = inject(treeInjectionKey)!
     function doCheck (value: boolean): void {
       const { onCheck } = props
       if (onCheck) return onCheck(value)
@@ -30,16 +35,22 @@ export default defineComponent({
     }
     return {
       handleUpdateValue,
-      NTree
+      mergedTheme: NTree.mergedThemeRef
     }
   },
   render () {
-    const { NTree, checked, indeterminate, handleUpdateValue } = this
+    const {
+      mergedTheme,
+      checked,
+      indeterminate,
+      handleUpdateValue,
+      clsPrefix
+    } = this
     return (
-      <span class="n-tree-node-checkbox">
+      <span class={`${clsPrefix}-tree-node-checkbox`}>
         <NCheckbox
-          theme={NTree.mergedTheme.peers.Checkbox}
-          themeOverrides={NTree.mergedTheme.peerOverrides.Checkbox}
+          theme={mergedTheme.peers.Checkbox}
+          themeOverrides={mergedTheme.peerOverrides.Checkbox}
           checked={checked}
           indeterminate={indeterminate}
           onUpdateChecked={handleUpdateValue}

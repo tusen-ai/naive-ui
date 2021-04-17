@@ -1,5 +1,5 @@
 import { TreeNode } from 'treemate'
-import { VNodeChild } from 'vue'
+import { InjectionKey, Ref, VNodeChild } from 'vue'
 import type { MergedTheme } from '../../_mixins'
 import type { TreeTheme } from '../styles'
 
@@ -39,17 +39,18 @@ export interface InternalDropInfo {
 }
 
 export interface TreeInjection {
-  loadingKeys: Key[]
-  highlightKeys: Key[]
-  displayedCheckedKeys: Key[]
-  displayedIndeterminateKeys: Key[]
-  mergedSelectedKeys: Key[]
-  mergedExpandedKeys: Key[]
-  remote: boolean
-  draggable: boolean
-  checkable: boolean
-  blockNode: boolean
-  onLoad?: (node: TreeOption) => Promise<void>
+  loadingKeysRef: Ref<Key[]>
+  highlightKeysRef: Ref<Key[]>
+  displayedCheckedKeysRef: Ref<Key[]>
+  displayedIndeterminateKeysRef: Ref<Key[]>
+  mergedSelectedKeysRef: Ref<Key[]>
+  mergedExpandedKeysRef: Ref<Key[]>
+  remoteRef: Ref<boolean>
+  draggableRef: Ref<boolean>
+  checkableRef: Ref<boolean>
+  blockNodeRef: Ref<boolean>
+  mergedThemeRef: Ref<MergedTheme<TreeTheme>>
+  onLoadRef: Ref<((node: TreeOption) => Promise<void>) | undefined>
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void
   handleSelect: (node: TreeNode<TreeOption>) => void
   handleCheck: (node: TreeNode<TreeOption>, checked: boolean) => void
@@ -58,7 +59,8 @@ export interface TreeInjection {
   handleDragLeave: (info: InternalDragInfo) => void
   handleDragEnd: (info: InternalDragInfo) => void
   handleDrop: (info: InternalDropInfo) => void
-  mergedTheme: MergedTheme<TreeTheme>
 }
+
+export const treeInjectionKey: InjectionKey<TreeInjection> = Symbol('tree')
 
 export type TmNode = TreeNode<TreeOption>
