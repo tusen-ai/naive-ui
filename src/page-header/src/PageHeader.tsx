@@ -1,31 +1,39 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { h, defineComponent, computed, CSSProperties, PropType } from 'vue'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { pageHeaderLight } from '../styles/light'
 import type { PageHeaderTheme } from '../styles/light'
 import style from './styles/index.cssr'
 import { ArrowBackIcon } from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
+import type { ExtractPublicPropTypes } from '../../_utils'
+
+const pageHeaderProps = {
+  ...(useTheme.props as ThemeProps<PageHeaderTheme>),
+  title: String,
+  subtitle: String,
+  extra: String,
+  onBack: Function as PropType<() => void>
+}
+
+export type PageHeaderPorps = ExtractPublicPropTypes<typeof pageHeaderProps>
 
 export default defineComponent({
   name: 'PageHeader',
-  props: {
-    ...(useTheme.props as ThemeProps<PageHeaderTheme>),
-    title: String,
-    subtitle: String,
-    extra: String,
-    onBack: Function as PropType<() => void>
-  },
+  props: pageHeaderProps,
   setup (props) {
+    const { mergedClsPrefix } = useConfig(props)
     const themeRef = useTheme(
       'PageHeader',
       'PageHeader',
       style,
       pageHeaderLight,
-      props
+      props,
+      mergedClsPrefix
     )
     return {
+      cPrefix: mergedClsPrefix,
       cssVars: computed(() => {
         const {
           self: {
@@ -57,7 +65,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { onBack, title, subtitle, extra, $slots } = this
+    const { onBack, title, subtitle, extra, cPrefix, cssVars, $slots } = this
     const {
       title: titleSlot,
       subtitle: subtitleSlot,
@@ -72,17 +80,17 @@ export default defineComponent({
     const showSubtitle = subtitle || subtitleSlot
     const showExtra = extra || extraSlot
     return (
-      <div style={this.cssVars as CSSProperties}>
+      <div style={cssVars as CSSProperties}>
         {headerSlot ? (
-          <div class="n-page-header-header" key="breadcrumn">
+          <div class={`${cPrefix}-page-header-header`} key="breadcrumn">
             {headerSlot()}
           </div>
         ) : null}
-        <div class="n-page-header" key="header">
-          <div class="n-page-header__main" key="back">
+        <div class={`${cPrefix}-page-header`} key="header">
+          <div class={`${cPrefix}-page-header__main`} key="back">
             {showBack ? (
-              <div class="n-page-header__back" onClick={onBack}>
-                <NBaseIcon>
+              <div class={`${cPrefix}-page-header__back`} onClick={onBack}>
+                <NBaseIcon clsPrefix={cPrefix}>
                   {{
                     default: () => <ArrowBackIcon />
                   }}
@@ -90,30 +98,32 @@ export default defineComponent({
               </div>
             ) : null}
             {avatarSlot ? (
-              <div class="n-page-header__avatar">{avatarSlot()}</div>
+              <div class={`${cPrefix}-page-header__avatar`}>{avatarSlot()}</div>
             ) : null}
             {showTitle ? (
-              <div class="n-page-header__title" key="title">
+              <div class={`${cPrefix}-page-header__title`} key="title">
                 {title || titleSlot!()}
               </div>
             ) : null}
             {showSubtitle ? (
-              <div class="n-page-header__subtitle" key="subtitle">
+              <div class={`${cPrefix}-page-header__subtitle`} key="subtitle">
                 {subtitle || subtitleSlot!()}
               </div>
             ) : null}
           </div>
           {showExtra ? (
-            <div class="n-page-header__extra">{extra || extraSlot!()}</div>
+            <div class={`${cPrefix}-page-header__extra`}>
+              {extra || extraSlot!()}
+            </div>
           ) : null}
         </div>
         {defaultSlot ? (
-          <div class="n-page-header-content" key="content">
+          <div class={`${cPrefix}-page-header-content`} key="content">
             {defaultSlot()}
           </div>
         ) : null}
         {footerSlot ? (
-          <div class="n-page-header-footer" key="footer">
+          <div class={`${cPrefix}-page-header-footer`} key="footer">
             {footerSlot()}
           </div>
         ) : null}
