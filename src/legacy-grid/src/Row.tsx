@@ -1,14 +1,26 @@
-import { defineComponent, h, PropType, provide, reactive, toRef } from 'vue'
+import {
+  defineComponent,
+  h,
+  InjectionKey,
+  PropType,
+  provide,
+  Ref,
+  toRef
+} from 'vue'
 import { useMemo } from 'vooks'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { formatLength, keysOf } from '../../_utils'
-import { useStyle } from '../../_mixins'
+import { useConfig, useStyle } from '../../_mixins'
 import style from './styles/index.cssr'
 
 export interface RowInjection {
-  gutter: any
-  verticalGutter: number
-  horizontalGutter: number
+  gutterRef: Ref<string | number | [number, number]>
+  verticalGutterRef: Ref<number>
+  horizontalGutterRef: Ref<number>
+  cPrefixRef: Ref<string>
 }
+
+export const rowInjectionKey: InjectionKey<RowInjection> = Symbol('row')
 
 export const rowProps = {
   gutter: {
@@ -23,11 +35,14 @@ export const rowProps = {
 
 export const rowPropKeys = keysOf(rowProps)
 
+export type RowProps = ExtractPublicPropTypes<typeof rowProps>
+
 export default defineComponent({
   name: 'Row',
   props: rowProps,
   setup (props) {
-    useStyle('Grid', style)
+    const { mergedClsPrefix } = useConfig(props)
+    useStyle('LegacyGrid', style, mergedClsPrefix)
     const verticalGutterRef = useMemo(() => {
       const { gutter } = props
       if (Array.isArray(gutter)) {
@@ -42,15 +57,14 @@ export default defineComponent({
       }
       return Number(gutter)
     })
-    provide<RowInjection>(
-      'NRow',
-      reactive({
-        gutter: toRef(props, 'gutter'),
-        verticalGutter: verticalGutterRef,
-        horizontalGutter: horizontalGutterRef
-      })
-    )
+    provide(rowInjectionKey, {
+      cPrefixRef: mergedClsPrefix,
+      gutterRef: toRef(props, 'gutter'),
+      verticalGutterRef: verticalGutterRef,
+      horizontalGutterRef: horizontalGutterRef
+    })
     return {
+      cPrefix: mergedClsPrefix,
       styleMargin: useMemo(
         () =>
           `-${formatLength(verticalGutterRef.value, {
@@ -65,7 +79,7 @@ export default defineComponent({
   render () {
     return (
       <div
-        class="n-row"
+        class={`${this.cPrefix}-row`}
         style={{
           margin: this.styleMargin,
           width: this.styleWidth,

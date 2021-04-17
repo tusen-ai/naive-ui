@@ -1,7 +1,12 @@
 import { h, computed, defineComponent, inject, PropType } from 'vue'
-import { formatLength, keysOf } from '../../_utils'
+import {
+  ExtractPublicPropTypes,
+  formatLength,
+  keysOf,
+  throwError
+} from '../../_utils'
 import { useStyle } from '../../_mixins'
-import type { RowInjection } from './Row'
+import { rowInjectionKey } from './Row'
 import style from './styles/index.cssr'
 import { Span } from './interface'
 
@@ -26,34 +31,46 @@ export const colProps = {
 
 export const colPropKeys = keysOf(colProps)
 
+export type ColProps = ExtractPublicPropTypes<typeof colProps>
+
 export default defineComponent({
   name: 'Col',
   props: colProps,
   setup (props) {
     useStyle('Grid', style)
-    const NRow = inject<RowInjection>('NRow') as RowInjection
+    const NRow = inject(rowInjectionKey, null)
+    if (!NRow) throwError('col', '`n-col` must be placed inside `n-row`.')
     return {
-      gutter: computed(() => NRow.gutter),
+      cPrefix: NRow.cPrefixRef,
+      gutter: NRow.gutterRef,
       stylePadding: computed(
         () =>
-          `${formatLength(NRow.verticalGutter, {
+          `${formatLength(NRow.verticalGutterRef.value, {
             c: 0.5
-          })} ${formatLength(NRow.horizontalGutter, { c: 0.5 })}`
+          })} ${formatLength(NRow.horizontalGutterRef.value, { c: 0.5 })}`
       ),
       mergedPush: computed(() => Number(props.push) - Number(props.pull))
     }
   },
   render () {
-    const { $slots, span, mergedPush, offset, stylePadding, gutter } = this
+    const {
+      $slots,
+      span,
+      mergedPush,
+      offset,
+      stylePadding,
+      gutter,
+      cPrefix
+    } = this
     return (
       <div
         class={[
-          'n-col',
+          `${cPrefix}-col`,
           {
-            [`n-col--${span}-span`]: true,
-            [`n-col--${mergedPush}-push`]: mergedPush > 0,
-            [`n-col--${-mergedPush}-pull`]: mergedPush < 0,
-            [`n-col--${offset}-offset`]: offset
+            [`${cPrefix}-col--${span}-span`]: true,
+            [`${cPrefix}-col--${mergedPush}-push`]: mergedPush > 0,
+            [`${cPrefix}-col--${-mergedPush}-pull`]: mergedPush < 0,
+            [`${cPrefix}-col--${offset}-offset`]: offset
           }
         ]}
         style={{
