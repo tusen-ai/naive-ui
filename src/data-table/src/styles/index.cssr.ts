@@ -189,7 +189,7 @@ export default c([
             })
           ])
         ]),
-        cM('hover', {
+        c('&:hover', {
           backgroundColor: 'var(--merged-td-color-hover)'
         }, [
           cB('data-table-td', {
@@ -252,6 +252,9 @@ export default c([
           border-color .3s var(--bezier),
           color .3s var(--bezier);
       `, [
+        cM('hover', {
+          backgroundColor: 'var(--merged-td-color-hover)'
+        }),
         cM('ellipsis', `
           text-overflow: ellipsis;
           overflow: hidden;

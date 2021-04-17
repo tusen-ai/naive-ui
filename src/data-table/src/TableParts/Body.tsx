@@ -79,7 +79,8 @@ export default defineComponent({
           default: () => {
             let hasExpandedRows = false
             const cordToPass: Record<number, number[]> = {}
-            const rowWithOverlap: Record<number, boolean> = {}
+            // coord to related hover keys
+            const cordKey: Record<number, Record<number, RowKey[]>> = {}
             const {
               cols,
               paginatedData,
@@ -92,13 +93,15 @@ export default defineComponent({
               leftActiveFixedColKey,
               rightActiveFixedColKey,
               renderExpand,
-              mergedExpandedRowKeys,
-              hoverKey
+              mergedExpandedRowKeys
             } = NDataTable
             const { length: colCount } = cols
             const { length: rowCount } = paginatedData
             const { handleCheckboxUpdateChecked, handleUpdateExpanded } = this
-            let mergedHoverKey: RowKey
+            const rowIndexToKey: Record<number, RowKey> = {}
+            paginatedData.forEach((tmNode, rowIndex) => {
+              rowIndexToKey[rowIndex] = tmNode.key
+            })
             const rows = paginatedData.map((tmNode, rowIndex) => {
               const { rawNode: rowData, key: rowKey } = tmNode
               const expanded =
@@ -120,9 +123,17 @@ export default defineComponent({
                 const mergedRowSpan = rowSpan ? rowSpan(rowData, rowIndex) : 1
                 const isLastCol = colIndex + mergedColSpan === colCount
                 const isLastRow = rowIndex + mergedRowSpan === rowCount
-                if (mergedColSpan > 1 || mergedRowSpan > 1) {
+                const isCrossRowTd = mergedRowSpan > 1
+                if (isCrossRowTd) {
+                  cordKey[rowIndex] = {
+                    [colIndex]: []
+                  }
+                }
+                if (mergedColSpan > 1 || isCrossRowTd) {
                   for (let i = rowIndex; i < rowIndex + mergedRowSpan; ++i) {
-                    if (i !== rowIndex) rowWithOverlap[i] = true
+                    if (isCrossRowTd) {
+                      cordKey[rowIndex][colIndex].push(rowIndexToKey[i])
+                    }
                     for (let j = colIndex; j < colIndex + mergedColSpan; ++j) {
                       if (i === rowIndex && j === colIndex) continue
                       if (!(i in cordToPass)) {
@@ -133,6 +144,7 @@ export default defineComponent({
                     }
                   }
                 }
+                const hoverKey = isCrossRowTd ? NDataTable.hoverKey : null
                 return (
                   <td
                     key={colKey}
@@ -146,6 +158,9 @@ export default defineComponent({
                     class={[
                       `${cPrefix}-data-table-td`,
                       column.className,
+                      hoverKey !== null &&
+                        cordKey[rowIndex][colIndex].includes(hoverKey) &&
+                        `${cPrefix}-data-table-td--hover`,
                       column.fixed &&
                         `${cPrefix}-data-table-td--fixed-${column.fixed}`,
                       column.align &&
@@ -198,20 +213,14 @@ export default defineComponent({
                   </td>
                 )
               })
-              if (!rowWithOverlap[rowIndex]) {
-                mergedHoverKey = rowKey
-              }
-              const cachedHoverKey = mergedHoverKey
               const row = (
                 <tr
                   onMouseenter={() => {
-                    NDataTable.hoverKey = cachedHoverKey
+                    NDataTable.hoverKey = rowKey
                   }}
                   key={rowKey}
                   class={[
                     `${cPrefix}-data-table-tr`,
-                    cachedHoverKey === hoverKey &&
-                      `${cPrefix}-data-table-tr--hover`,
                     createRowClassName(rowData, rowIndex, rowClassName)
                   ]}
                 >
