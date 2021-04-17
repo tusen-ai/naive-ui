@@ -24,7 +24,7 @@ import type {
 import { NInternalSelectMenu } from '../../_internal'
 import type { InternalSelectMenuRef } from '../../_internal'
 import { call, useAdjustedTo, warn } from '../../_utils'
-import type { MaybeArray } from '../../_utils'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { useConfig, useFormItem, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { mentionLight } from '../styles'
@@ -34,75 +34,81 @@ import { getRelativePosition } from './utils'
 import style from './styles/index.cssr'
 import type { MentionOption } from './interface'
 
+const mentionProps = {
+  ...(useTheme.props as ThemeProps<MentionTheme>),
+  to: useAdjustedTo.propTo,
+  autosize: [Boolean, Object] as PropType<
+  boolean | { maxRows?: number, minRows?: number }
+  >,
+  options: {
+    type: Array as PropType<MentionOption[]>,
+    default: []
+  },
+  type: {
+    type: String as PropType<'input' | 'textarea'>,
+    default: 'input'
+  },
+  separator: {
+    type: String,
+    validator: (separator: string) => {
+      if (separator.length !== 1) {
+        warn('mention', "`separator`'s length must be 1.")
+        return false
+      }
+      return true
+    },
+    default: ' '
+  },
+  bordered: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
+  disabled: Boolean,
+  value: String as PropType<string | null>,
+  defaultValue: {
+    type: String,
+    default: ''
+  },
+  loading: Boolean,
+  prefix: {
+    type: [String, Array] as PropType<string | string[]>,
+    default: '@'
+  },
+  placeholder: {
+    type: String,
+    default: ''
+  },
+  size: String as PropType<InputSize>,
+  'onUpdate:value': [Array, Function] as PropType<
+  MaybeArray<(value: string) => void>
+  >,
+  onUpdateValue: [Array, Function] as PropType<
+  MaybeArray<(value: string) => void>
+  >,
+  onSearch: Function as PropType<(pattern: string, prefix: string) => void>,
+  onSelect: Function as PropType<
+  (option: MentionOption, prefix: string) => void
+  >,
+  onFocus: Function as PropType<(e: FocusEvent) => void>,
+  onBlur: Function as PropType<(e: FocusEvent) => void>,
+  // private
+  internalDebug: Boolean
+}
+
+export type MentionProps = ExtractPublicPropTypes<typeof mentionProps>
+
 export default defineComponent({
   name: 'Mention',
-  props: {
-    ...(useTheme.props as ThemeProps<MentionTheme>),
-    to: useAdjustedTo.propTo,
-    autosize: [Boolean, Object] as PropType<
-    boolean | { maxRows?: number, minRows?: number }
-    >,
-    options: {
-      type: Array as PropType<MentionOption[]>,
-      default: []
-    },
-    type: {
-      type: String as PropType<'input' | 'textarea'>,
-      default: 'input'
-    },
-    separator: {
-      type: String,
-      validator: (separator: string) => {
-        if (separator.length !== 1) {
-          warn('mention', "`separator`'s length must be 1.")
-          return false
-        }
-        return true
-      },
-      default: ' '
-    },
-    bordered: {
-      type: Boolean as PropType<boolean | undefined>,
-      default: undefined
-    },
-    disabled: Boolean,
-    value: String as PropType<string | null>,
-    defaultValue: {
-      type: String,
-      default: ''
-    },
-    loading: Boolean,
-    prefix: {
-      type: [String, Array] as PropType<string | string[]>,
-      default: '@'
-    },
-    placeholder: {
-      type: String,
-      default: ''
-    },
-    size: String as PropType<InputSize>,
-    'onUpdate:value': [Array, Function] as PropType<
-    MaybeArray<(value: string) => void>
-    >,
-    onUpdateValue: [Array, Function] as PropType<
-    MaybeArray<(value: string) => void>
-    >,
-    onSearch: Function as PropType<(pattern: string, prefix: string) => void>,
-    onSelect: Function as PropType<
-    (option: MentionOption, prefix: string) => void
-    >,
-    onFocus: Function as PropType<(e: FocusEvent) => void>,
-    onBlur: Function as PropType<(e: FocusEvent) => void>,
-    // private
-    internalDebug: Boolean
-  },
+  props: mentionProps,
   setup (props) {
-    const mergedTheme = useTheme(
+    const { namespace, mergedClsPrefix, mergedBordered } = useConfig(props)
+    const themeRef = useTheme(
       'Mention',
       'Mention',
       style,
       mentionLight,
-      props
+      props,
+      mergedClsPrefix
     )
     const formItem = useFormItem(props)
     const inputInstRef = ref<InputInst | null>(null)
@@ -326,9 +332,11 @@ export default defineComponent({
       }
     }
     return {
-      ...useConfig(props),
+      namespace,
+      cPrefix: mergedClsPrefix,
+      mergedBordered,
       mergedSize: formItem.mergedSize,
-      mergedTheme,
+      mergedTheme: themeRef,
       treeMate: treeMateRef,
       selectMenuInstRef,
       inputInstRef,
@@ -347,7 +355,7 @@ export default defineComponent({
       cssVars: computed(() => {
         const {
           self: { menuBoxShadow }
-        } = mergedTheme.value
+        } = themeRef.value
         return {
           '--menu-box-shadow': menuBoxShadow
         }
@@ -355,9 +363,9 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedTheme } = this
+    const { mergedTheme, cPrefix } = this
     return (
-      <div class="n-mention" style={{ position: 'relative' }}>
+      <div class={`${cPrefix}-mention`}>
         <NInput
           themeOverrides={mergedTheme.peerOverrides.Input}
           theme={mergedTheme.peers.Input}
@@ -414,13 +422,14 @@ export default defineComponent({
                           const { mergedTheme } = this
                           return this.showMenu ? (
                             <NInternalSelectMenu
+                              clsPrefix={cPrefix}
                               theme={mergedTheme.peers.InternalSelectMenu}
                               themeOverrides={
                                 mergedTheme.peerOverrides.InternalSelectMenu
                               }
                               autoPending
                               ref="selectMenuInstRef"
-                              class="n-mention-menu"
+                              class={`${cPrefix}-mention-menu`}
                               loading={this.loading}
                               treeMate={this.treeMate}
                               virtualScroll={false}
