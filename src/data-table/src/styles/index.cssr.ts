@@ -189,7 +189,7 @@ export default c([
             })
           ])
         ]),
-        c('&:hover', {
+        cM('hover', {
           backgroundColor: 'var(--merged-td-color-hover)'
         }, [
           cB('data-table-td', {

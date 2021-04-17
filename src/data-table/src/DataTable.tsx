@@ -225,6 +225,7 @@ export default defineComponent({
       treeMate: treeMateRef,
       mergedCurrentPage: mergedCurrentPageRef,
       paginatedData: paginatedDataRef,
+      hoverKey,
       currentPage,
       mergedPagination,
       mergedFilterState,
@@ -273,6 +274,7 @@ export default defineComponent({
     provide(
       dataTableInjectionKey,
       reactive({
+        hoverKey,
         cPrefix: mergedClsPrefix,
         treeMate: treeMateRef,
         mergedTheme: themeRef,

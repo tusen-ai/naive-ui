@@ -5,10 +5,10 @@ function createRenderer (wrapCodeWithCard = true) {
   const renderer = new marked.Renderer()
   const overrides = {
     table (header, body) {
-      if (body) body = '<tbody class="n-table__tbody">' + body + '</tbody>'
+      if (body) body = '<tbody>' + body + '</tbody>'
       return (
         '<div class="md-table-wrapper"><n-table single-column class="md-table">\n' +
-        '<thead class="n-table__thead">\n' +
+        '<thead>\n' +
         header +
         '</thead>\n' +
         body +
@@ -18,19 +18,14 @@ function createRenderer (wrapCodeWithCard = true) {
     },
 
     tablerow (content) {
-      return '<tr class="n-table__tr">\n' + content + '</tr>\n'
+      return '<tr>\n' + content + '</tr>\n'
     },
 
     tablecell (content, flags) {
       const type = flags.header ? 'th' : 'td'
       const tag = flags.align
-        ? '<' +
-          type +
-          ` class="n-table__${type}"` +
-          ' align="' +
-          flags.align +
-          '">'
-        : '<' + type + ` class="n-table__${type}"` + '>'
+        ? '<' + type + ' align="' + flags.align + '">'
+        : '<' + type + '>'
       return tag + content + '</' + type + '>\n'
     },
 

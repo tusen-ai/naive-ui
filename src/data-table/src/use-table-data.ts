@@ -2,7 +2,7 @@ import { computed, ref, ComputedRef } from 'vue'
 import { useMergedState } from 'vooks'
 import { createTreeMate } from 'treemate'
 import type { DataTableSetupProps } from './DataTable'
-import type {
+import {
   ColumnKey,
   Filter,
   FilterOptionValue,
@@ -13,7 +13,8 @@ import type {
   TableSelectionColumn,
   RowData,
   TmNode,
-  TableExpandColumn
+  TableExpandColumn,
+  RowKey
 } from './interface'
 import { createShallowClonedObject, getFlagOfOrder } from './utils'
 import { PaginationProps } from '../../pagination/src/Pagination'
@@ -378,6 +379,7 @@ export function useTableData (
     currentPage: mergedCurrentPageRef,
     mergedFilterState: mergedFilterStateRef,
     mergedSortState: mergedSortStateRef,
+    hoverKey: ref<RowKey | null>(null),
     doUpdateFilters,
     doUpdateSorter,
     doUpdatePageSize,

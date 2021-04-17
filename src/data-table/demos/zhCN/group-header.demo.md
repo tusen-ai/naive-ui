@@ -52,6 +52,7 @@ function createCols () {
 function createData () {
   return Array.apply(null, { length: 50 }).map((_, i) => {
     return {
+      key: i,
       name: `name_${i}`,
       physicsAttack: `physicsAttack_${i}`,
       magicAttack: `magicAttack_${i}`,
