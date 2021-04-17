@@ -16,7 +16,7 @@ single-line
 
 ## Components
 
-You can use `n-table`, `n-thead`, `n-tbody`, `n-tr`, `n-th` and `n-td`.
+You can use `n-table`, `n-thead`, `n-tbody`, `n-tr`, `n-th` and `n-td`. At most time you won't need the components after `n-table`. They can be used to reduce the granularity of dependency collecting.
 
 ## Props
 

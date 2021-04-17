@@ -2,30 +2,30 @@
 
 ```html
 <n-table single-column :single-line="false">
-  <n-thead>
-    <n-tr>
-      <n-th>Abandon</n-th>
-      <n-th>Abormal</n-th>
-      <n-th>Abolish</n-th>
-      <n-th>...</n-th>
-      <n-th>It's hard to learn words</n-th>
-    </n-tr>
-  </n-thead>
-  <n-tbody>
-    <n-tr>
-      <n-td>放弃</n-td>
-      <n-td>反常的</n-td>
-      <n-td>彻底废除</n-td>
-      <n-td>...</n-td>
-      <n-td>Damn it! I can't remember those words.</n-td>
-    </n-tr>
-    <n-tr>
-      <n-td>...</n-td>
-      <n-td>...</n-td>
-      <n-td>...</n-td>
-      <n-td>...</n-td>
-      <n-td>...</n-td>
-    </n-tr>
-  </n-tbody>
+  <thead>
+    <tr>
+      <th>Abandon</th>
+      <th>Abormal</th>
+      <th>Abolish</th>
+      <th>...</th>
+      <th>It's hard to learn words</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>放弃</td>
+      <td>反常的</td>
+      <td>彻底废除</td>
+      <td>...</td>
+      <td>Damn it! I can't remember those words.</td>
+    </tr>
+    <tr>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+  </tbody>
 </n-table>
 ```

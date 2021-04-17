@@ -1,39 +1,53 @@
 import { defineComponent, computed, h, PropType, CSSProperties } from 'vue'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { tableLight } from '../styles'
 import type { TableTheme } from '../styles'
 import style from './styles/index.cssr'
 
+const tableProps = {
+  ...(useTheme.props as ThemeProps<TableTheme>),
+  bordered: {
+    type: Boolean,
+    default: true
+  },
+  bottomBordered: {
+    type: Boolean,
+    default: true
+  },
+  singleLine: {
+    type: Boolean,
+    default: true
+  },
+  singleColumn: {
+    type: Boolean,
+    default: false
+  },
+  size: {
+    type: String as PropType<'small' | 'medium' | 'large'>,
+    default: 'medium'
+  }
+}
+
+export type TableProps = ExtractPublicPropTypes<typeof tableProps>
+
 export default defineComponent({
   name: 'Table',
-  props: {
-    ...(useTheme.props as ThemeProps<TableTheme>),
-    bordered: {
-      type: Boolean,
-      default: true
-    },
-    bottomBordered: {
-      type: Boolean,
-      default: true
-    },
-    singleLine: {
-      type: Boolean,
-      default: true
-    },
-    singleColumn: {
-      type: Boolean,
-      default: false
-    },
-    size: {
-      type: String as PropType<'small' | 'medium' | 'large'>,
-      default: 'medium'
-    }
-  },
+  props: tableProps,
   setup (props) {
-    const themeRef = useTheme('Table', 'Table', style, tableLight, props)
+    const { mergedClsPrefix } = useConfig(props)
+    const themeRef = useTheme(
+      'Table',
+      'Table',
+      style,
+      tableLight,
+      props,
+      mergedClsPrefix
+    )
     return {
+      cPrefix: mergedClsPrefix,
       cssVars: computed(() => {
         const { size } = props
         const {
@@ -82,15 +96,16 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     return (
       <table
         class={[
-          'n-table',
+          `${cPrefix}-table`,
           {
-            'n-table--bottom-bordered': this.bottomBordered,
-            'n-table--bordered': this.bordered,
-            'n-table--single-line': this.singleLine,
-            'n-table--single-column': this.singleColumn
+            [`${cPrefix}-table--bottom-bordered`]: this.bottomBordered,
+            [`${cPrefix}-table--bordered`]: this.bordered,
+            [`${cPrefix}-table--single-line`]: this.singleLine,
+            [`${cPrefix}-table--single-column`]: this.singleColumn
           }
         ]}
         style={this.cssVars as CSSProperties}
