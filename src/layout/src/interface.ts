@@ -5,7 +5,9 @@ export const positionProp = {
   default: 'static'
 } as const
 
-export interface LayoutRef {
+export interface LayoutInst {
   scrollTo: ((options: ScrollToOptions) => void) &
   ((x: number, y: number) => void)
 }
+
+export type LayoutSiderInst = LayoutInst

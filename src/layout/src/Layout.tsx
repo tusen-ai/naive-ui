@@ -5,18 +5,19 @@ import {
   PropType,
   CSSProperties,
   ref,
-  ExtractPropTypes,
   InjectionKey,
-  provide
+  provide,
+  ExtractPropTypes
 } from 'vue'
 import { NScrollbar } from '../../scrollbar'
 import type { ScrollbarProps, ScrollbarInst } from '../../scrollbar'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { layoutLight } from '../styles'
 import type { LayoutTheme } from '../styles'
 import style from './styles/layout.cssr'
-import { LayoutRef, positionProp } from './interface'
+import { LayoutInst, positionProp } from './interface'
+import type { ExtractPublicPropTypes } from '../../_utils'
 
 const layoutProps = {
   position: positionProp,
@@ -28,11 +29,11 @@ const layoutProps = {
   hasSider: Boolean
 } as const
 
-export type LayoutProps = ExtractPropTypes<typeof layoutProps>
+export type LayoutProps = ExtractPublicPropTypes<typeof layoutProps>
 
-export const layoutInjectionKey: InjectionKey<LayoutProps> = Symbol(
-  'layoutInjectionKey'
-)
+export const layoutInjectionKey: InjectionKey<
+ExtractPropTypes<LayoutProps>
+> = Symbol('layout')
 
 export default defineComponent({
   name: 'Layout',
@@ -44,8 +45,16 @@ export default defineComponent({
   setup (props) {
     const selfRef = ref<HTMLElement | null>(null)
     const scrollbarRef = ref<ScrollbarInst | null>(null)
-    const themeRef = useTheme('Layout', 'Layout', style, layoutLight, props)
-    const scrollTo: LayoutRef['scrollTo'] = (
+    const { mergedClsPrefix } = useConfig(props)
+    const themeRef = useTheme(
+      'Layout',
+      'Layout',
+      style,
+      layoutLight,
+      props,
+      mergedClsPrefix
+    )
+    const scrollTo: LayoutInst['scrollTo'] = (
       options: ScrollToOptions | number,
       y?: number
     ): void => {
@@ -57,6 +66,7 @@ export default defineComponent({
     }
     if (__DEV__) provide(layoutInjectionKey, props)
     return {
+      cPrefix: mergedClsPrefix,
       selfRef,
       scrollbarRef,
       scrollTo,
@@ -75,13 +85,14 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     return (
       <div
         ref="selfRef"
         class={[
-          'n-layout',
-          `n-layout--${this.position}-positioned`,
-          this.hasSider && 'n-layout--has-sider'
+          `${cPrefix}-layout`,
+          `${cPrefix}-layout--${this.position}-positioned`,
+          this.hasSider && `${cPrefix}-layout--has-sider`
         ]}
         style={this.cssVars as CSSProperties}
       >

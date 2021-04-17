@@ -6,13 +6,12 @@ import {
   ref,
   CSSProperties,
   toRef,
-  ExtractPropTypes,
   inject
 } from 'vue'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { formatLength, MaybeArray, call, warn } from '../../_utils'
-
+import { formatLength, call, warn } from '../../_utils'
+import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { NScrollbar } from '../../scrollbar'
 import type { ScrollbarProps, ScrollbarInst } from '../../scrollbar'
 import { layoutLight } from '../styles'
@@ -82,7 +81,7 @@ const layoutSiderProps = {
   onCollapse: [Function, Array] as PropType<MaybeArray<() => void>>
 } as const
 
-export type LayoutSiderProps = ExtractPropTypes<typeof layoutSiderProps>
+export type LayoutSiderProps = ExtractPublicPropTypes<typeof layoutSiderProps>
 
 export default defineComponent({
   name: 'LayoutSider',
@@ -160,16 +159,19 @@ export default defineComponent({
         if (onCollapse) call(onCollapse)
       }
     }
+    const { mergedClsPrefix } = useConfig(props)
     const themeRef = useTheme(
       'Layout',
       'LayoutSider',
       style,
       layoutLight,
-      props
+      props,
+      mergedClsPrefix
     )
     return {
       selfRef,
       scrollbarRef,
+      cPrefix: mergedClsPrefix,
       mergedTheme: themeRef,
       styleMaxWidth: styleMaxWidthRef,
       mergedCollapsed: mergedCollapsedRef,
@@ -199,32 +201,31 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     return (
       <aside
         ref="selfRef"
         class={[
-          'n-layout-sider',
-          this.position && [`n-layout-sider--${this.position}-positioned`],
+          `${cPrefix}-layout-sider`,
+          `${cPrefix}-layout-sider--${this.position}-positioned`,
           {
-            'n-layout-sider--bordered': this.bordered,
-            'n-layout-sider--collapsed': this.mergedCollapsed,
-            'n-layout-sider--show-content': this.showContent
+            [`${cPrefix}-layout-sider--bordered`]: this.bordered,
+            [`${cPrefix}-layout-sider--collapsed`]: this.mergedCollapsed,
+            [`${cPrefix}-layout-sider--show-content`]: this.showContent
           }
         ]}
-        style={
-          [
-            this.cssVars,
-            {
-              maxWidth: this.styleMaxWidth,
-              width: formatLength(this.width)
-            }
-          ] as any
-        }
+        style={[
+          this.cssVars as any,
+          {
+            maxWidth: this.styleMaxWidth,
+            width: formatLength(this.width)
+          }
+        ]}
       >
         {!this.nativeScrollbar ? (
           <NScrollbar
             ref="scrollbarRef"
-            class="n-layout-sider__content"
+            class={`${cPrefix}-layout-sider__content`}
             style={this.contentStyle}
             {...this.scrollbarProps}
             theme={this.mergedTheme.peers.Scrollbar}
@@ -233,19 +234,26 @@ export default defineComponent({
             {this.$slots}
           </NScrollbar>
         ) : (
-          <div class="n-layout-sider__content" style={this.contentStyle}>
+          <div
+            class={`${cPrefix}-layout-sider__content`}
+            style={this.contentStyle}
+          >
             {this.$slots}
           </div>
         )}
-        {this.bordered ? <div class="n-layout-sider__border" /> : null}
+        {this.bordered ? (
+          <div class={`${cPrefix}-layout-sider__border`} />
+        ) : null}
         {this.showTrigger ? (
           this.showTrigger === 'arrow-circle' ? (
             <ToggleButton
+              clsPrefix={cPrefix}
               style={this.triggerStyle}
               onClick={this.handleTriggerClick}
             />
           ) : (
             <ToggleBar
+              clsPrefix={cPrefix}
               collapsed={this.mergedCollapsed}
               style={this.triggerStyle}
               onClick={this.handleTriggerClick}

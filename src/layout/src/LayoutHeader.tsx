@@ -1,16 +1,11 @@
-import {
-  h,
-  defineComponent,
-  computed,
-  CSSProperties,
-  ExtractPropTypes
-} from 'vue'
-import { useTheme } from '../../_mixins'
+import { h, defineComponent, computed, CSSProperties } from 'vue'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { layoutLight } from '../styles'
 import type { LayoutTheme } from '../styles'
 import { positionProp } from './interface'
 import style from './styles/layout-header.cssr'
+import { ExtractPublicPropTypes } from '../../_utils'
 
 const headerProps = {
   position: positionProp,
@@ -20,7 +15,7 @@ const headerProps = {
   }
 } as const
 
-export type LayoutHeaderProps = ExtractPropTypes<typeof headerProps>
+export type LayoutHeaderProps = ExtractPublicPropTypes<typeof headerProps>
 
 export default defineComponent({
   name: 'LayoutHeader',
@@ -29,14 +24,17 @@ export default defineComponent({
     ...headerProps
   },
   setup (props) {
+    const { mergedClsPrefix } = useConfig(props)
     const themeRef = useTheme(
       'Layout',
       'LayoutHeader',
       style,
       layoutLight,
-      props
+      props,
+      mergedClsPrefix
     )
     return {
+      cPrefix: mergedClsPrefix,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
@@ -51,14 +49,14 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     return (
       <div
         class={[
-          'n-layout-header',
-          this.position && `n-layout-header--${this.position}-positioned`,
-          {
-            'n-layout-header--bordered': this.bordered
-          }
+          `${cPrefix}-layout-header`,
+          this.position &&
+            `${cPrefix}-layout-header--${this.position}-positioned`,
+          this.bordered && `${cPrefix}-layout-header--bordered`
         ]}
         style={this.cssVars as CSSProperties}
       >

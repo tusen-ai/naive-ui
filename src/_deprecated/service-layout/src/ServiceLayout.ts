@@ -21,7 +21,7 @@ import NLayoutHeader from '../../../layout/src/LayoutHeader'
 import type { LayoutHeaderProps } from '../../../layout/src/LayoutHeader'
 import { createItems } from './utils'
 import type { Item } from './interface'
-import { LayoutRef } from '../../../layout'
+import { LayoutInst } from '../../../layout'
 
 export default defineComponent({
   name: 'ServiceLayout',
@@ -33,14 +33,10 @@ export default defineComponent({
     },
     name: String,
     headerProps: Object as PropType<
-    Partial<LayoutHeaderProps & { style: CSSProperties }>
+    LayoutHeaderProps & { style: CSSProperties }
     >,
-    contentProps: Object as PropType<
-    Partial<LayoutProps & { style: CSSProperties }>
-    >,
-    siderProps: Object as PropType<
-    Partial<LayoutSiderProps & { style: CSSProperties }>
-    >,
+    contentProps: Object as PropType<LayoutProps & { style: CSSProperties }>,
+    siderProps: Object as PropType<LayoutSiderProps & { style: CSSProperties }>,
     value: String,
     'onUpdate:value': Function as PropType<(value: string) => void>,
     // deprecated
@@ -55,7 +51,7 @@ export default defineComponent({
   setup (props) {
     const router = useRouter()
     const route = useRoute()
-    const bodyLayoutInstRef = ref<LayoutRef | null>(null)
+    const bodyLayoutInstRef = ref<LayoutInst | null>(null)
     const uncontrolledValueRef = ref<string | null>(null)
     const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(
@@ -94,7 +90,7 @@ export default defineComponent({
       }
       doUpdateValue(value)
     }
-    const scrollTo: LayoutRef['scrollTo'] = (...args: any[]): void => {
+    const scrollTo: LayoutInst['scrollTo'] = (...args: any[]): void => {
       ;(bodyLayoutInstRef.value?.scrollTo as Function)(...args)
     }
     function syncPath (path?: string, items?: Item[]): void {

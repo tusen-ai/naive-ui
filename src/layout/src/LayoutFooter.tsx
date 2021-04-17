@@ -1,30 +1,38 @@
 import { h, computed, defineComponent, CSSProperties } from 'vue'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { layoutLight } from '../styles'
 import type { LayoutTheme } from '../styles'
 import { positionProp } from './interface'
 import style from './styles/layout-footer.cssr'
+import type { ExtractPublicPropTypes } from '../../_utils'
+
+const layoutFooterProps = {
+  ...(useTheme.props as ThemeProps<LayoutTheme>),
+  position: positionProp,
+  bordered: {
+    type: Boolean,
+    default: false
+  }
+}
+
+export type LayoutFooterProps = ExtractPublicPropTypes<typeof layoutFooterProps>
 
 export default defineComponent({
   name: 'LayoutFooter',
-  props: {
-    ...(useTheme.props as ThemeProps<LayoutTheme>),
-    position: positionProp,
-    bordered: {
-      type: Boolean,
-      default: false
-    }
-  },
+  props: layoutFooterProps,
   setup (props) {
+    const { mergedClsPrefix } = useConfig(props)
     const themeRef = useTheme(
       'Layout',
       'LayoutFooter',
       style,
       layoutLight,
-      props
+      props,
+      mergedClsPrefix
     )
     return {
+      cPrefix: mergedClsPrefix,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
@@ -38,13 +46,15 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     return (
       <div
         class={[
-          'n-layout-footer',
+          `${cPrefix}-layout-footer`,
           {
-            [`n-layout-footer--${this.position}-positioned`]: this.position,
-            'n-layout-footer--bordered': this.bordered
+            [`${cPrefix}-layout-footer--${this.position}-positioned`]: this
+              .position,
+            [`${cPrefix}-layout-footer--bordered`]: this.bordered
           }
         ]}
         style={this.cssVars as CSSProperties}

@@ -2,6 +2,10 @@ import { h, defineComponent, PropType } from 'vue'
 
 export default defineComponent({
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     onClick: Function as PropType<(e: MouseEvent) => void>,
     collapsed: {
       type: Boolean,
@@ -9,18 +13,17 @@ export default defineComponent({
     }
   },
   render () {
+    const { clsPrefix } = this
     return (
       <div
         onClick={this.onClick}
         class={[
-          'n-layout-toggle-bar',
-          {
-            'n-layout-toggle-bar--collapsed': this.collapsed
-          }
+          `${clsPrefix}-layout-toggle-bar`,
+          this.collapsed && `${clsPrefix}-layout-toggle-bar--collapsed`
         ]}
       >
-        <div class="n-layout-toggle-bar__top" />
-        <div class="n-layout-toggle-bar__bottom" />
+        <div class={`${clsPrefix}-layout-toggle-bar__top`} />
+        <div class={`${clsPrefix}-layout-toggle-bar__bottom`} />
       </div>
     )
   }
