@@ -8,11 +8,13 @@ import {
   nextTick,
   ref,
   reactive,
-  toRef
+  toRef,
+  InjectionKey
 } from 'vue'
 import { throttle } from 'lodash-es'
-import { useTheme, useHljs, ThemeProps } from '../../_mixins'
+import { useTheme, useHljs, ThemeProps, useConfig } from '../../_mixins'
 import type { Hljs } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { warn } from '../../_utils'
 import { NScrollbar } from '../../scrollbar'
 import type { ScrollbarInst } from '../../scrollbar'
@@ -29,53 +31,60 @@ export interface LogInjection {
   mergedHljs: Hljs | undefined
 }
 
+export const logInjectionKey: InjectionKey<LogInjection> = Symbol('log')
+
+const logProps = {
+  ...(useTheme.props as ThemeProps<LogTheme>),
+  loading: {
+    type: Boolean,
+    default: false
+  },
+  trim: {
+    type: Boolean,
+    default: false
+  },
+  log: String,
+  fontSize: {
+    type: Number,
+    default: 14
+  },
+  lines: {
+    type: Array as PropType<string[]>,
+    default: () => []
+  },
+  lineHeight: {
+    type: Number,
+    default: 1.25
+  },
+  language: String,
+  rows: {
+    type: Number,
+    default: 15
+  },
+  offsetTop: {
+    type: Number,
+    default: 0
+  },
+  offsetBottom: {
+    type: Number,
+    default: 0
+  },
+  hljs: {
+    type: Object,
+    default: undefined
+  },
+  onReachTop: Function as PropType<() => void>,
+  onReachBottom: Function as PropType<() => void>,
+  onRequireMore: Function as PropType<(from: 'top' | 'bottom') => void>
+} as const
+
+export type LogProps = ExtractPublicPropTypes<typeof logProps>
+
 export default defineComponent({
   name: 'Log',
-  props: {
-    ...(useTheme.props as ThemeProps<LogTheme>),
-    loading: {
-      type: Boolean,
-      default: false
-    },
-    trim: {
-      type: Boolean,
-      default: false
-    },
-    log: String,
-    fontSize: {
-      type: Number,
-      default: 14
-    },
-    lines: {
-      type: Array as PropType<string[]>,
-      default: () => []
-    },
-    lineHeight: {
-      type: Number,
-      default: 1.25
-    },
-    language: String,
-    rows: {
-      type: Number,
-      default: 15
-    },
-    offsetTop: {
-      type: Number,
-      default: 0
-    },
-    offsetBottom: {
-      type: Number,
-      default: 0
-    },
-    hljs: {
-      type: Object,
-      default: undefined
-    },
-    onReachTop: Function as PropType<() => void>,
-    onReachBottom: Function as PropType<() => void>,
-    onRequireMore: Function as PropType<(from: 'top' | 'bottom') => void>
-  },
+  props: logProps,
   setup (props) {
+    const { mergedClsPrefix } = useConfig(props)
     const slientRef = ref(false)
     const highlightRef = computed(() => {
       return props.language !== undefined
@@ -92,7 +101,14 @@ export default defineComponent({
       return props.lines
     })
     const scrollbarRef = ref<ScrollbarInst | null>(null)
-    const themeRef = useTheme('Log', 'Log', style, logLight, props)
+    const themeRef = useTheme(
+      'Log',
+      'Log',
+      style,
+      logLight,
+      props,
+      mergedClsPrefix
+    )
     function handleScroll (e: Event): void {
       const container = e.target as HTMLElement
       const content = container.firstElementChild as HTMLElement
@@ -190,8 +206,8 @@ export default defineComponent({
         slient
       })
     }
-    provide<LogInjection>(
-      'NLog',
+    provide(
+      logInjectionKey,
       reactive({
         language: toRef(props, 'language'),
         mergedHljs: useHljs(props),
@@ -200,6 +216,7 @@ export default defineComponent({
       })
     )
     return {
+      cPrefix: mergedClsPrefix,
       scrollbarRef,
       mergedTheme: themeRef,
       styleHeight: styleHeightRef,
@@ -232,10 +249,11 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix, mergedTheme } = this
     return h(
       'div',
       {
-        class: 'n-log',
+        class: `${cPrefix}-log`,
         style: [
           {
             lineHeight: this.lineHeight,
@@ -248,15 +266,15 @@ export default defineComponent({
       [
         <NScrollbar
           ref="scrollbarRef"
-          theme={this.mergedTheme.peers.Scrollbar}
-          themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
+          theme={mergedTheme.peers.Scrollbar}
+          themeOverrides={mergedTheme.peerOverrides.Scrollbar}
           onScroll={this.handleScroll}
         >
           {{
             default: () => (
               <NCode
-                theme={this.mergedTheme.peers.Code}
-                themeOverrides={this.mergedTheme.peerOverrides.Code}
+                theme={mergedTheme.peers.Code}
+                themeOverrides={mergedTheme.peerOverrides.Code}
               >
                 {{
                   default: () =>
@@ -269,7 +287,10 @@ export default defineComponent({
           }}
         </NScrollbar>,
         <Transition name="n-fade-in-scale-up-transition">
-          {{ default: () => (this.loading ? <NLogLoader /> : null) }}
+          {{
+            default: () =>
+              this.loading ? <NLogLoader clsPrefix={cPrefix} /> : null
+          }}
         </Transition>
       ]
     )

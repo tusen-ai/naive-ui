@@ -1,5 +1,5 @@
 import { h, defineComponent, inject, ref, onMounted, watch, toRef } from 'vue'
-import type { LogInjection } from './Log'
+import { logInjectionKey } from './Log'
 
 export default defineComponent({
   props: {
@@ -9,7 +9,8 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const NLog = inject<LogInjection>('NLog') as LogInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NLog = inject(logInjectionKey)!
     const selfRef = ref<HTMLElement | null>(null)
     function setInnerHTML (): void {
       const trimmedLine = NLog.trim ? (props.line || '').trim() : props.line
@@ -52,10 +53,6 @@ export default defineComponent({
   },
   render () {
     const { NLog } = this
-    return (
-      <pre class="n-log__line" ref="selfRef">
-        {NLog.highlight ? null : this.line}
-      </pre>
-    )
+    return <pre ref="selfRef">{NLog.highlight ? null : this.line}</pre>
   }
 })

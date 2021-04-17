@@ -93,7 +93,7 @@ const mentionProps = {
   onBlur: Function as PropType<(e: FocusEvent) => void>,
   // private
   internalDebug: Boolean
-}
+} as const
 
 export type MentionProps = ExtractPublicPropTypes<typeof mentionProps>
 

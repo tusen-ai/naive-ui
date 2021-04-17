@@ -1,4 +1,4 @@
-import { cB, cE } from '../../../_utils/cssr'
+import { c, cB, cE } from '../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // vars:
@@ -20,7 +20,7 @@ export default cB('log', `
     margin: 0;
     white-space: pre-wrap;
   `),
-  cE('line', `
+  c('pre', `
     margin: 0;
   `),
   cB('log-loader', `

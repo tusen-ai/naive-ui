@@ -4,14 +4,23 @@ import { useLocale } from '../../_mixins'
 
 export default defineComponent({
   name: 'LogLoader',
+  props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    }
+  },
   setup () {
     return useLocale('Log')
   },
   render () {
+    const { clsPrefix } = this
     return (
-      <div class="n-log-loader">
-        <NBaseLoading strokeWidth={24} />
-        <span class="n-log-loader__content">{this.locale.loading}</span>
+      <div class={`${clsPrefix}-log-loader`}>
+        <NBaseLoading clsPrefix={clsPrefix} strokeWidth={24} />
+        <span class={`${clsPrefix}-log-loader__content`}>
+          {this.locale.loading}
+        </span>
       </div>
     )
   }
