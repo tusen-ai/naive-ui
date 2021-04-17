@@ -1,7 +1,7 @@
 import { h, computed, defineComponent, PropType, CSSProperties } from 'vue'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createKey } from '../../_utils'
+import { createKey, ExtractPublicPropTypes } from '../../_utils'
 import { progressLight } from '../styles'
 import type { ProgressTheme } from '../styles'
 import style from './styles/index.cssr'
@@ -10,88 +10,95 @@ import Line from './Line'
 import Circle from './Circle'
 import MultipleCircle from './MultipleCircle'
 
+const progressProps = {
+  ...(useTheme.props as ThemeProps<ProgressTheme>),
+  processing: {
+    type: Boolean,
+    default: false
+  },
+  type: {
+    type: String as PropType<'line' | 'circle' | 'multiple-circle'>,
+    default: 'line'
+  },
+  status: {
+    type: String as PropType<Status>,
+    default: 'default'
+  },
+  railColor: [String, Array] as PropType<string | string[]>,
+  railStyle: [String, Array] as PropType<
+  string | CSSProperties | Array<string | CSSProperties>
+  >,
+  color: [String, Array] as PropType<string | string[]>,
+  viewBoxWidth: {
+    type: Number,
+    default: 100
+  },
+  strokeWidth: {
+    type: Number,
+    default: 7
+  },
+  percentage: {
+    type: [Number, Array] as PropType<number | number[]>,
+    default: 0
+  },
+  unit: {
+    type: String,
+    default: '%'
+  },
+  showIndicator: {
+    type: Boolean,
+    default: true
+  },
+  indicatorPosition: {
+    type: String as PropType<'inside' | 'outside'>,
+    default: 'outside'
+  },
+  indicatorPlacement: {
+    type: String as PropType<'inside' | 'outside'>,
+    default: 'outside'
+  },
+  indicatorTextColor: {
+    type: String,
+    default: undefined
+  },
+  circleGap: {
+    type: Number,
+    default: 1
+  },
+  height: {
+    type: Number,
+    default: undefined
+  },
+  borderRadius: {
+    type: [String, Number] as PropType<string | number | undefined>,
+    default: undefined
+  },
+  fillBorderRadius: {
+    type: [String, Number] as PropType<string | number | undefined>,
+    default: undefined
+  }
+} as const
+
+export type ProgressProps = ExtractPublicPropTypes<typeof progressProps>
+
 export default defineComponent({
   name: 'Progress',
-  props: {
-    ...(useTheme.props as ThemeProps<ProgressTheme>),
-    processing: {
-      type: Boolean,
-      default: false
-    },
-    type: {
-      type: String as PropType<'line' | 'circle' | 'multiple-circle'>,
-      default: 'line'
-    },
-    status: {
-      type: String as PropType<Status>,
-      default: 'default'
-    },
-    railColor: [String, Array] as PropType<string | string[]>,
-    railStyle: [String, Array] as PropType<
-    string | CSSProperties | Array<string | CSSProperties>
-    >,
-    color: [String, Array] as PropType<string | string[]>,
-    viewBoxWidth: {
-      type: Number,
-      default: 100
-    },
-    strokeWidth: {
-      type: Number,
-      default: 7
-    },
-    percentage: {
-      type: [Number, Array] as PropType<number | number[]>,
-      default: 0
-    },
-    unit: {
-      type: String,
-      default: '%'
-    },
-    showIndicator: {
-      type: Boolean,
-      default: true
-    },
-    indicatorPosition: {
-      type: String as PropType<'inside' | 'outside'>,
-      default: 'outside'
-    },
-    indicatorPlacement: {
-      type: String as PropType<'inside' | 'outside'>,
-      default: 'outside'
-    },
-    indicatorTextColor: {
-      type: String,
-      default: undefined
-    },
-    circleGap: {
-      type: Number,
-      default: 1
-    },
-    height: {
-      type: Number,
-      default: undefined
-    },
-    borderRadius: {
-      type: [String, Number] as PropType<string | number | undefined>,
-      default: undefined
-    },
-    fillBorderRadius: {
-      type: [String, Number] as PropType<string | number | undefined>,
-      default: undefined
-    }
-  },
+  props: progressProps,
   setup (props) {
     const mergedIndicatorPlacementRef = computed(() => {
       return props.indicatorPlacement || props.indicatorPosition
     })
+    const { mergedClsPrefix } = useConfig(props)
     const themeRef = useTheme(
       'Progress',
       'Progress',
       style,
       progressLight,
-      props
+      props,
+      mergedClsPrefix
     )
     return {
+      cPrefix: mergedClsPrefix,
       mergedIndicatorPlacement: mergedIndicatorPlacementRef,
       cssVars: computed(() => {
         const { status } = props
@@ -153,15 +160,21 @@ export default defineComponent({
       height,
       processing,
       circleGap,
+      cPrefix,
       $slots
     } = this
     return (
       <div
-        class={['n-progress', `n-progress--${type}`, `n-progress--${status}`]}
+        class={[
+          `${cPrefix}-progress`,
+          `${cPrefix}-progress--${type}`,
+          `${cPrefix}-progress--${status}`
+        ]}
         style={cssVars as CSSProperties}
       >
         {type === 'circle' ? (
           <Circle
+            clsPrefix={cPrefix}
             status={status}
             showIndicator={showIndicator}
             indicatorTextColor={indicatorTextColor}
@@ -177,6 +190,7 @@ export default defineComponent({
           </Circle>
         ) : type === 'line' ? (
           <Line
+            clsPrefix={cPrefix}
             status={status}
             showIndicator={showIndicator}
             indicatorTextColor={indicatorTextColor}
@@ -195,6 +209,7 @@ export default defineComponent({
           </Line>
         ) : type === 'multiple-circle' ? (
           <MultipleCircle
+            clsPrefix={cPrefix}
             strokeWidth={strokeWidth}
             railColor={railColor as any}
             fillColor={color as any}

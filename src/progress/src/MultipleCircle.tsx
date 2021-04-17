@@ -9,6 +9,10 @@ function circlePath (r: number, sw: number, vw: number = 100): string {
 export default defineComponent({
   name: 'ProgressMultipleCircle',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     viewBoxWidth: {
       type: Number,
       required: true
@@ -65,18 +69,19 @@ export default defineComponent({
         fillColor,
         railColor,
         railStyle,
-        percentage
+        percentage,
+        clsPrefix
       } = props
       return (
-        <div class="n-progress-content">
-          <div class="n-progress-graph">
-            <div class="n-progress-graph-circle">
+        <div class={`${clsPrefix}-progress-content`}>
+          <div class={`${clsPrefix}-progress-graph`}>
+            <div class={`${clsPrefix}-progress-graph-circle`}>
               <svg viewBox={`0 0 ${viewBoxWidth} ${viewBoxWidth}`}>
                 {percentage.map((p, index) => {
                   return (
                     <g key={index}>
                       <path
-                        class="n-progress-graph-circle-rail"
+                        class={`${clsPrefix}-progress-graph-circle-rail`}
                         d={circlePath(
                           viewBoxWidth / 2 -
                             (strokeWidth / 2) * (1 + 2 * index) -
@@ -99,10 +104,9 @@ export default defineComponent({
                       />
                       <path
                         class={[
-                          'n-progress-graph-circle-fill',
-                          {
-                            'n-progress-graph-circle-fill--empty': p === 0
-                          }
+                          `${clsPrefix}-progress-graph-circle-fill`,
+                          p === 0 &&
+                            `${clsPrefix}-progress-graph-circle-fill--empty`
                         ]}
                         d={circlePath(
                           viewBoxWidth / 2 -
@@ -128,7 +132,7 @@ export default defineComponent({
           </div>
           {showIndicator && slots.default ? (
             <div>
-              <div class="n-progress-text">{slots.default()}</div>
+              <div class={`${clsPrefix}-progress-text`}>{slots.default()}</div>
             </div>
           ) : null}
         </div>

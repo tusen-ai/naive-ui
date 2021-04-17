@@ -19,6 +19,10 @@ const iconMap = {
 export default defineComponent({
   name: 'ProgressLine',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     percentage: {
       type: Number,
       required: true
@@ -84,21 +88,22 @@ export default defineComponent({
         status,
         showIndicator,
         fillColor,
-        processing
+        processing,
+        clsPrefix
       } = props
       return (
-        <div class="n-progress-content">
-          <div class="n-progress-graph">
+        <div class={`${clsPrefix}-progress-content`}>
+          <div class={`${clsPrefix}-progress-graph`}>
             <div
               class={[
-                'n-progress-graph-line',
+                `${clsPrefix}-progress-graph-line`,
                 {
-                  [`n-progress-graph-line--indicator-${indicatorPlacement}`]: true
+                  [`${clsPrefix}-progress-graph-line--indicator-${indicatorPlacement}`]: true
                 }
               ]}
             >
               <div
-                class="n-progress-graph-line-rail"
+                class={`${clsPrefix}-progress-graph-line-rail`}
                 style={
                   [
                     {
@@ -112,10 +117,9 @@ export default defineComponent({
               >
                 <div
                   class={[
-                    'n-progress-graph-line-fill',
-                    {
-                      'n-progress-graph-line-fill--processing': processing
-                    }
+                    `${clsPrefix}-progress-graph-line-fill`,
+                    processing &&
+                      `${clsPrefix}-progress-graph-line-fill--processing`
                   ]}
                   style={{
                     maxWidth: `${props.percentage}%`,
@@ -125,7 +129,7 @@ export default defineComponent({
                   }}
                 >
                   {indicatorPlacement === 'inside' ? (
-                    <div class="n-progress-graph-line-indicator">
+                    <div class={`${clsPrefix}-progress-graph-line-indicator`}>
                       {`${percentage}${unit || ''}`}
                     </div>
                   ) : null}
@@ -137,7 +141,7 @@ export default defineComponent({
             <div>
               {slots.default ? (
                 <div
-                  class="n-progress-custom-content"
+                  class={`${clsPrefix}-progress-custom-content`}
                   style={{
                     color: indicatorTextColor
                   }}
@@ -146,7 +150,7 @@ export default defineComponent({
                 </div>
               ) : status === 'default' ? (
                 <div
-                  class="n-progress-icon n-progress-icon--as-text"
+                  class={`${clsPrefix}-progress-icon ${clsPrefix}-progress-icon--as-text`}
                   style={{
                     color: indicatorTextColor
                   }}
@@ -155,8 +159,10 @@ export default defineComponent({
                   {unit}
                 </div>
               ) : (
-                <div class="n-progress-icon">
-                  <NBaseIcon>{{ default: () => iconMap[status] }}</NBaseIcon>
+                <div class={`${clsPrefix}-progress-icon`}>
+                  <NBaseIcon clsPrefix={clsPrefix}>
+                    {{ default: () => iconMap[status] }}
+                  </NBaseIcon>
                 </div>
               )}
             </div>

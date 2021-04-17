@@ -18,6 +18,10 @@ const iconMap = {
 export default defineComponent({
   name: 'ProgressCircle',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     status: {
       type: String as PropType<Status>,
       required: true
@@ -58,16 +62,17 @@ export default defineComponent({
         percentage,
         showIndicator,
         indicatorTextColor,
-        unit
+        unit,
+        clsPrefix
       } = props
       return (
-        <div class="n-progress-content">
-          <div class="n-progress-graph">
-            <div class="n-progress-graph-circle">
+        <div class={`${clsPrefix}-progress-content`}>
+          <div class={`${clsPrefix}-progress-graph`}>
+            <div class={`${clsPrefix}-progress-graph-circle`}>
               <svg viewBox="0 0 110 110">
                 <g>
                   <path
-                    class="n-progress-graph-circle-rail"
+                    class={`${clsPrefix}-progress-graph-circle-rail`}
                     d="m 55 5 a 50 50 0 1 1 0 100 a 50 50 0 1 1 0 -100"
                     stroke-width={strokeWidth * 1.1}
                     stroke-linecap="round"
@@ -86,10 +91,9 @@ export default defineComponent({
                 <g>
                   <path
                     class={[
-                      'n-progress-graph-circle-fill',
-                      {
-                        'n-progress-graph-circle-fill--empty': percentage === 0
-                      }
+                      `${clsPrefix}-progress-graph-circle-fill`,
+                      percentage === 0 &&
+                        `${clsPrefix}-progress-graph-circle-fill--empty`
                     ]}
                     d="m 55 5 a 50 50 0 1 1 0 100 a 50 50 0 1 1 0 -100"
                     stroke-width={strokeWidth * 1.1}
@@ -108,10 +112,12 @@ export default defineComponent({
           {showIndicator ? (
             <div>
               {slots.default ? (
-                <div class="n-progress-custom-content">{slots.default()}</div>
+                <div class={`${clsPrefix}-progress-custom-content`}>
+                  {slots.default()}
+                </div>
               ) : status !== 'default' ? (
-                <div class="n-progress-icon">
-                  <NBaseIcon>
+                <div class={`${clsPrefix}-progress-icon`}>
+                  <NBaseIcon clsPrefix={clsPrefix}>
                     {{
                       default: () => iconMap[status]
                     }}
@@ -119,13 +125,15 @@ export default defineComponent({
                 </div>
               ) : (
                 <div
-                  class="n-progress-text"
+                  class={`${clsPrefix}-progress-text`}
                   style={{
                     color: indicatorTextColor
                   }}
                 >
-                  <span class="n-progress-text__percentage">{percentage}</span>
-                  <span class="n-progress-text__unit">{unit}</span>
+                  <span class={`${clsPrefix}-progress-text__percentage`}>
+                    {percentage}
+                  </span>
+                  <span class={`${clsPrefix}-progress-text__unit`}>{unit}</span>
                 </div>
               )}
             </div>
