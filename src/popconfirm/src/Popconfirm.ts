@@ -2,36 +2,41 @@ import { h, ref, defineComponent, provide, PropType } from 'vue'
 import { NPopover, PopoverInst, PopoverTrigger } from '../../popover'
 import { popoverBaseProps } from '../../popover/src/Popover'
 import { omit, keep, call } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { popconfirmLight } from '../styles'
 import type { PopconfirmTheme } from '../styles'
 import PopconfirmPanel, { panelPropKeys } from './PopconfirmPanel'
 import style from './styles/index.cssr'
-import type { PopconfirmInjection } from './interface'
+import { popconfirmInjectionKey } from './interface'
+
+const popconfirmProps = {
+  ...(useTheme.props as ThemeProps<PopconfirmTheme>),
+  ...popoverBaseProps,
+  positiveText: String,
+  negativeText: String,
+  showIcon: {
+    type: Boolean,
+    default: true
+  },
+  trigger: {
+    type: String as PropType<PopoverTrigger>,
+    default: 'click'
+  },
+  onPositiveClick: Function as PropType<
+  (e: MouseEvent) => Promise<boolean> | boolean | any
+  >,
+  onNegativeClick: Function as PropType<
+  (e: MouseEvent) => Promise<boolean> | boolean | any
+  >
+}
+
+export type PopconfirmProps = ExtractPublicPropTypes<typeof popconfirmProps>
 
 export default defineComponent({
   name: 'Popconfirm',
-  props: {
-    ...(useTheme.props as ThemeProps<PopconfirmTheme>),
-    ...popoverBaseProps,
-    positiveText: String,
-    negativeText: String,
-    showIcon: {
-      type: Boolean,
-      default: true
-    },
-    trigger: {
-      type: String as PropType<PopoverTrigger>,
-      default: 'click'
-    },
-    onPositiveClick: Function as PropType<
-    (e: MouseEvent) => Promise<boolean> | boolean | any
-    >,
-    onNegativeClick: Function as PropType<
-    (e: MouseEvent) => Promise<boolean> | boolean | any
-    >
-  },
+  props: popconfirmProps,
   setup (props) {
     const { mergedClsPrefix } = useConfig()
     const themeRef = useTheme(
@@ -63,7 +68,7 @@ export default defineComponent({
         }
       )
     }
-    provide<PopconfirmInjection>('NPopconfirm', {
+    provide(popconfirmInjectionKey, {
       mergedThemeRef: themeRef,
       mergedClsPrefixRef: mergedClsPrefix
     })

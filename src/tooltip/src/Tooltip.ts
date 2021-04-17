@@ -7,15 +7,20 @@ import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { tooltipLight } from '../styles'
 import type { TooltipTheme } from '../styles'
+import type { ExtractPublicPropTypes } from '../../_utils'
 
 export type TooltipInst = PopoverInst
 
+const tooltipProps = {
+  ...popoverBaseProps,
+  ...(useTheme.props as ThemeProps<TooltipTheme>)
+}
+
+export type TooltipProps = ExtractPublicPropTypes<typeof tooltipProps>
+
 export default defineComponent({
   name: 'Tooltip',
-  props: {
-    ...popoverBaseProps,
-    ...(useTheme.props as ThemeProps<TooltipTheme>)
-  },
+  props: tooltipProps,
   setup (props) {
     const themeRef = useTheme(
       'Tooltip',

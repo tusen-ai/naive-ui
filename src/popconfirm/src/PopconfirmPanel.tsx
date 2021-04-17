@@ -12,7 +12,7 @@ import { NBaseIcon } from '../../_internal'
 import { WarningIcon } from '../../_internal/icons'
 import { useLocale } from '../../_mixins'
 import { keysOf } from '../../_utils'
-import type { PopconfirmInjection } from './interface'
+import { popconfirmInjectionKey } from './interface'
 
 export const panelProps = {
   positiveText: String,
@@ -38,9 +38,8 @@ export default defineComponent({
   props: panelProps,
   setup (props) {
     const { locale: localeRef } = useLocale('Popconfirm')
-    const NPopconfirm = inject<PopconfirmInjection>(
-      'NPopconfirm'
-    ) as PopconfirmInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NPopconfirm = inject(popconfirmInjectionKey)!
     return {
       ...useLocale('Popconfirm'),
       cPrefix: NPopconfirm.mergedClsPrefixRef,
@@ -78,7 +77,9 @@ export default defineComponent({
           {this.showIcon ? (
             <div class={`${cPrefix}-popconfirm__icon`}>
               <slot name="icon">
-                <NBaseIcon>{{ default: () => <WarningIcon /> }}</NBaseIcon>
+                <NBaseIcon clsPrefix={cPrefix}>
+                  {{ default: () => <WarningIcon /> }}
+                </NBaseIcon>
               </slot>
             </div>
           ) : null}
