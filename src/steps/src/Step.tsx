@@ -11,41 +11,36 @@ import {
   CheckmarkIcon as FinishedIcon,
   CloseIcon as ErrorIcon
 } from '../../_internal/icons'
-import { useTheme } from '../../_mixins'
 import { NIconSwitchTransition, NBaseIcon } from '../../_internal'
-import { createKey } from '../../_utils'
-import { stepsLight } from '../styles'
-import type { StepsInjection } from './Steps'
-import style from './styles/index.cssr'
+import { createKey, throwError } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import { stepsInjectionKey } from './Steps'
+
+const stepProps = {
+  status: String as PropType<'process' | 'finish' | 'error' | 'wait'>,
+  title: String,
+  description: String,
+  // index will be filled by parent steps, not user
+  internalIndex: {
+    type: Number,
+    default: undefined
+  }
+} as const
+
+export type StepProps = ExtractPublicPropTypes<typeof stepProps>
 
 export default defineComponent({
   name: 'Step',
-  props: {
-    status: {
-      type: String as PropType<
-      'process' | 'finish' | 'error' | 'wait' | undefined
-      >,
-      default: undefined
-    },
-    title: {
-      type: String,
-      default: undefined
-    },
-    description: {
-      type: String,
-      default: undefined
-    },
-    index: {
-      type: Number,
-      default: undefined
-    }
-  },
+  props: stepProps,
   setup (props) {
-    const NSteps = inject<StepsInjection>('NSteps') as StepsInjection
-    const themeRef = useTheme('Steps', 'Steps', style, stepsLight, NSteps)
+    const NSteps = inject(stepsInjectionKey, null)
+
+    if (!NSteps) throwError('step', '`n-step` must be placed inside `n-steps`.')
+
+    const { props: stepsProps, mergedThemeRef, cPrefixRef } = NSteps
 
     const verticalRef = computed(() => {
-      return NSteps.vertical
+      return stepsProps.vertical
     })
     const mergedStatusRef = computed<'process' | 'finish' | 'error' | 'wait'>(
       () => {
@@ -53,14 +48,14 @@ export default defineComponent({
         if (status) {
           return status
         } else {
-          const { index } = props
-          const { current } = NSteps
+          const { internalIndex } = props
+          const { current } = stepsProps
           if (current === undefined) return 'process'
-          if (index < current) {
+          if (internalIndex < current) {
             return 'finish'
-          } else if (index === current) {
-            return NSteps.status || 'process'
-          } else if (index > current) {
+          } else if (internalIndex === current) {
+            return stepsProps.status || 'process'
+          } else if (internalIndex > current) {
             return 'wait'
           }
         }
@@ -68,11 +63,12 @@ export default defineComponent({
       }
     )
     return {
+      cPrefix: cPrefixRef,
       vertical: verticalRef,
       mergedStatus: mergedStatusRef,
       cssVars: computed(() => {
         const { value: status } = mergedStatusRef
-        const { size } = NSteps
+        const { size } = stepsProps
         const {
           common: { cubicBezierEaseInOut },
           self: {
@@ -88,7 +84,7 @@ export default defineComponent({
             [createKey('indicatorColor', status)]: indicatorColor,
             [createKey('descriptionTextColor', status)]: descriptionTextColor
           }
-        } = themeRef.value
+        } = mergedThemeRef.value
         return {
           '--bezier': cubicBezierEaseInOut,
           '--description-text-color': descriptionTextColor,
@@ -109,13 +105,17 @@ export default defineComponent({
   render () {
     const showDescription =
       this.description !== undefined || this.$slots.default
+    const { cPrefix } = this
     return (
       <div
-        class={['n-step', { 'n-step--show-description': showDescription }]}
+        class={[
+          `${cPrefix}-step`,
+          showDescription && `${cPrefix}-step--show-description`
+        ]}
         style={this.cssVars as CSSProperties}
       >
-        <div class="n-step-indicator">
-          <div class="n-step-indicator-slot">
+        <div class={`${cPrefix}-step-indicator`}>
+          <div class={`${cPrefix}-step-indicator-slot`}>
             <NIconSwitchTransition>
               {{
                 default: () => {
@@ -123,15 +123,18 @@ export default defineComponent({
                   return !(
                     mergedStatus === 'finish' || mergedStatus === 'error'
                   ) ? (
-                      <div key="index" class="n-step-indicator-slot__index">
-                        {this.index}
+                      <div
+                        key={this.internalIndex}
+                        class={`${cPrefix}-step-indicator-slot__index`}
+                      >
+                        {this.internalIndex}
                       </div>
                     ) : mergedStatus === 'finish' ? (
-                      <NBaseIcon key="finish">
+                      <NBaseIcon clsPrefix={cPrefix} key="finish">
                         {{ default: () => <FinishedIcon /> }}
                       </NBaseIcon>
                     ) : mergedStatus === 'error' ? (
-                      <NBaseIcon key="error">
+                      <NBaseIcon clsPrefix={cPrefix} key="error">
                         {{ default: () => <ErrorIcon /> }}
                       </NBaseIcon>
                     ) : null
@@ -139,15 +142,17 @@ export default defineComponent({
               }}
             </NIconSwitchTransition>
           </div>
-          {this.vertical ? <div class="n-step-splitor" /> : null}
+          {this.vertical ? <div class={`${cPrefix}-step-splitor`} /> : null}
         </div>
-        <div class="n-step-content">
-          <div class="n-step-content-header">
-            <div class="n-step-content-header__title">{this.title}</div>
-            {!this.vertical ? <div class="n-step-splitor" /> : null}
+        <div class={`${cPrefix}-step-content`}>
+          <div class={`${cPrefix}-step-content-header`}>
+            <div class={`${cPrefix}-step-content-header__title`}>
+              {this.title}
+            </div>
+            {!this.vertical ? <div class={`${cPrefix}-step-splitor`} /> : null}
           </div>
           {showDescription ? (
-            <div class="n-step-content__description">
+            <div class={`${cPrefix}-step-content__description`}>
               {renderSlot(this.$slots, 'default', undefined, () => [
                 this.description
               ])}
