@@ -6,39 +6,40 @@ import {
   CSSProperties,
   Fragment
 } from 'vue'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ThemeProps } from '../../_mixins'
 import { thingLight } from '../styles'
 import type { ThingTheme } from '../styles'
 import style from './styles/index.cssr'
 
+const thingProps = {
+  ...(useTheme.props as ThemeProps<ThingTheme>),
+  title: String,
+  titleExtra: String,
+  description: String,
+  content: String,
+  contentIndented: {
+    type: Boolean,
+    default: false
+  }
+}
+
+export type ThingProps = ExtractPublicPropTypes<typeof thingProps>
+
 export default defineComponent({
   name: 'Thing',
-  props: {
-    ...(useTheme.props as ThemeProps<ThingTheme>),
-    title: {
-      type: String,
-      default: undefined
-    },
-    titleExtra: {
-      type: String,
-      default: undefined
-    },
-    description: {
-      type: String,
-      default: undefined
-    },
-    content: {
-      type: String,
-      default: undefined
-    },
-    contentIndented: {
-      type: Boolean,
-      default: false
-    }
-  },
+  props: thingProps,
   setup (props, { slots }) {
-    const themeRef = useTheme('Thing', 'Thing', style, thingLight, props)
+    const { mergedClsPrefix } = useConfig(props)
+    const themeRef = useTheme(
+      'Thing',
+      'Thing',
+      style,
+      thingLight,
+      props,
+      mergedClsPrefix
+    )
     const cssVarsRef = computed(() => {
       const {
         self: { titleTextColor, textColor, titleFontWeight, fontSize },
@@ -53,21 +54,27 @@ export default defineComponent({
       }
     })
     return () => {
+      const { value: cPrefix } = mergedClsPrefix
       return (
-        <div class="n-thing" style={cssVarsRef.value as CSSProperties}>
+        <div
+          class={`${cPrefix}-thing`}
+          style={cssVarsRef.value as CSSProperties}
+        >
           {slots.avatar && props.contentIndented ? (
-            <div class="n-thing-avatar">{renderSlot(slots, 'avatar')}</div>
+            <div class={`${cPrefix}-thing-avatar`}>
+              {renderSlot(slots, 'avatar')}
+            </div>
           ) : null}
-          <div class="n-thing-main">
+          <div class={`${cPrefix}-thing-main`}>
             {!props.contentIndented &&
             (slots.header ||
               props.title ||
               slots['header-extra'] ||
               props.titleExtra ||
               slots.avatar) ? (
-                <div class="n-thing-avatar-header-wrapper">
+                <div class={`${cPrefix}-thing-avatar-header-wrapper`}>
                   {slots.avatar ? (
-                    <div class="n-thing-avatar">
+                    <div class={`${cPrefix}-thing-avatar`}>
                       {renderSlot(slots, 'avatar')}
                     </div>
                   ) : null}
@@ -75,17 +82,17 @@ export default defineComponent({
                 props.title ||
                 slots['header-extra'] ||
                 props.titleExtra ? (
-                      <div class="n-thing-header-wrapper">
-                        <div class="n-thing-header">
+                      <div class={`${cPrefix}-thing-header-wrapper`}>
+                        <div class={`${cPrefix}-thing-header`}>
                           {slots.header || props.title ? (
-                            <div class="n-thing-header__title">
+                            <div class={`${cPrefix}-thing-header__title`}>
                               {renderSlot(slots, 'header', undefined, () => [
                                 props.title
                               ])}
                             </div>
                           ) : null}
                           {slots['header-extra'] || props.titleExtra ? (
-                            <div class="n-thing-header__extra">
+                            <div class={`${cPrefix}-thing-header__extra`}>
                               {renderSlot(slots, 'header-extra', undefined, () => [
                                 props.titleExtra
                               ])}
@@ -93,7 +100,7 @@ export default defineComponent({
                           ) : null}
                         </div>
                         {slots.description || props.description ? (
-                          <div class="n-thing-main__description">
+                          <div class={`${cPrefix}-thing-main__description`}>
                             {renderSlot(slots, 'description', undefined, () => [
                               props.description
                             ])}
@@ -108,16 +115,16 @@ export default defineComponent({
                 props.title ||
                 slots['header-extra'] ||
                 props.titleExtra ? (
-                      <div class="n-thing-header">
+                      <div class={`${cPrefix}-thing-header`}>
                         {slots.header || props.title ? (
-                          <div class="n-thing-header__title">
+                          <div class={`${cPrefix}-thing-header__title`}>
                             {renderSlot(slots, 'header', undefined, () => [
                               props.title
                             ])}
                           </div>
                         ) : null}
                         {slots['header-extra'] || props.titleExtra ? (
-                          <div class="n-thing-header__extra">
+                          <div class={`${cPrefix}-thing-header__extra`}>
                             {renderSlot(slots, 'header-extra', undefined, () => [
                               props.titleExtra
                             ])}
@@ -126,7 +133,7 @@ export default defineComponent({
                       </div>
                     ) : null}
                   {slots.description || props.description ? (
-                    <div class="n-thing-main__description">
+                    <div class={`${cPrefix}-thing-main__description`}>
                       {renderSlot(slots, 'description', undefined, () => [
                         props.description
                       ])}
@@ -135,17 +142,17 @@ export default defineComponent({
                 </>
               )}
             {slots.default || props.content ? (
-              <div class="n-thing-main__content">
+              <div class={`${cPrefix}-thing-main__content`}>
                 {renderSlot(slots, 'default', undefined, () => [props.content])}
               </div>
             ) : null}
             {slots.footer ? (
-              <div class="n-thing-main__footer">
+              <div class={`${cPrefix}-thing-main__footer`}>
                 {renderSlot(slots, 'footer')}
               </div>
             ) : null}
             {slots.action ? (
-              <div class="n-thing-main__action">
+              <div class={`${cPrefix}-thing-main__action`}>
                 {renderSlot(slots, 'action')}
               </div>
             ) : null}
