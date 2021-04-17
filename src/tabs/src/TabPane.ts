@@ -6,10 +6,12 @@ import {
   ExtractPropTypes,
   inject,
   onBeforeUnmount,
-  computed,
-  PropType
+  PropType,
+  InjectionKey,
+  Ref
 } from 'vue'
-import { getSlot } from '../../_utils'
+import { getSlot, throwError } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 
 const tabPaneProps = {
   label: [String, Number] as PropType<string | number>,
@@ -27,43 +29,52 @@ const tabPaneProps = {
   }
 } as const
 
-export type TabPaneProps = ExtractPropTypes<typeof tabPaneProps>
+export type TabPaneSetupProps = ExtractPropTypes<typeof tabPaneProps>
+export type TabPaneProps = ExtractPublicPropTypes<typeof tabPaneProps>
 
 export interface TabsInjection {
-  value: string | number | null
-  type: 'line' | 'card'
-  addPanel: (props: TabPaneProps) => void
-  removePanel: (props: TabPaneProps) => void
+  cPrefixRef: Ref<string>
+  valueRef: Ref<string | number | null>
+  typeRef: Ref<'line' | 'card'>
+  addPanel: (props: TabPaneSetupProps) => void
+  removePanel: (props: TabPaneSetupProps) => void
 }
+
+export const tabsInjectionKey: InjectionKey<TabsInjection> = Symbol('tabs')
 
 export default defineComponent({
   name: 'TabPane',
   alias: ['TabPanel'],
   props: tabPaneProps,
   setup (props) {
-    const NTab = inject<TabsInjection>('NTabs') as TabsInjection
+    const NTab = inject(tabsInjectionKey, null)
+    if (!NTab) {
+      throwError('tab-pane', '`n-tab-pane` must be placed inside `n-tabs`.')
+    }
     NTab.addPanel(props)
     onBeforeUnmount(() => {
       NTab.removePanel(props)
     })
     return {
-      type: computed(() => NTab.type),
-      show: computed(() => props.name === NTab.value)
+      cPrefix: NTab.cPrefixRef,
+      type: NTab.typeRef,
+      value: NTab.valueRef
     }
   },
   render () {
     const useVShow = this.displayDirective === 'show'
-    return useVShow || this.show
+    const show = this.value === this.name
+    return useVShow || show
       ? withDirectives(
         h(
           'div',
           {
-            class: 'n-tab-panel',
+            class: `${this.cPrefix}-tab-panel`,
             key: this.name
           },
           getSlot(this)
         ),
-        [[vShow, !useVShow || this.show]]
+        [[vShow, !useVShow || show]]
       )
       : null
   }

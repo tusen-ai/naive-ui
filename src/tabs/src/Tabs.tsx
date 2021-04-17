@@ -8,98 +8,105 @@ import {
   CSSProperties,
   watch,
   nextTick,
-  reactive,
   toRef,
-  Ref,
   renderSlot
 } from 'vue'
 import { VResizeObserver, VXScroll } from 'vueuc'
 import { throttle } from 'lodash-es'
 import { useCompitable, onFontsReady, useMergedState } from 'vooks'
 import { NBaseClose } from '../../_internal'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { warn, createKey, call } from '../../_utils'
-import type { MaybeArray } from '../../_utils'
+import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { tabsLight } from '../styles'
 import type { TabsTheme } from '../styles'
-import type { TabsInjection, TabPaneProps } from './TabPane'
+import { TabPaneSetupProps, tabsInjectionKey } from './TabPane'
 import type { OnUpdateValueImpl } from './interface'
 import style from './styles/index.cssr'
 
+const tabsProps = {
+  ...(useTheme.props as ThemeProps<TabsTheme>),
+  value: [String, Number] as PropType<string | number>,
+  defaultValue: {
+    type: [String, Number] as PropType<string | number | null>,
+    default: null
+  },
+  type: {
+    type: String as PropType<'line' | 'card'>,
+    default: 'line'
+  },
+  closable: {
+    type: Boolean,
+    default: false
+  },
+  justifyContent: String as PropType<
+  'space-between' | 'space-around' | 'space-evenly'
+  >,
+  labelSize: {
+    type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
+    default: 'medium'
+  },
+  navStyle: [String, Object] as PropType<string | CSSProperties>,
+  onScrollableChange: [Function, Array] as PropType<
+  MaybeArray<(value: boolean) => void>
+  >,
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:value': [Function, Array] as PropType<
+  MaybeArray<(value: string & number) => void>
+  >,
+  onUpdateValue: [Function, Array] as PropType<
+  MaybeArray<(value: string & number) => void>
+  >,
+  onClose: [Function, Array] as PropType<MaybeArray<() => void>>,
+  // deprecated
+  activeName: {
+    type: [String, Number] as PropType<string | number | undefined>,
+    validator: () => {
+      if (__DEV__) {
+        warn('tabs', '`active-name` is deprecated, please use `value` instead.')
+      }
+      return true
+    },
+    default: undefined
+  },
+  onActiveNameChange: {
+    type: [Function, Array] as PropType<
+    MaybeArray<(value: string & number) => void> | undefined
+    >,
+    validator: () => {
+      if (__DEV__) {
+        warn(
+          'tabs',
+          '`on-active-name-change` is deprecated, please use `on-update:value` instead.'
+        )
+      }
+      return true
+    },
+    default: undefined
+  }
+} as const
+
+export type TabsProps = ExtractPublicPropTypes<typeof tabsProps>
+
 export default defineComponent({
   name: 'Tabs',
-  props: {
-    ...(useTheme.props as ThemeProps<TabsTheme>),
-    value: [String, Number] as PropType<string | number>,
-    defaultValue: {
-      type: [String, Number] as PropType<string | number | null>,
-      default: null
-    },
-    type: {
-      type: String as PropType<'line' | 'card'>,
-      default: 'line'
-    },
-    closable: {
-      type: Boolean,
-      default: false
-    },
-    justifyContent: String as PropType<
-    'space-between' | 'space-around' | 'space-evenly'
-    >,
-    labelSize: {
-      type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
-      default: 'medium'
-    },
-    navStyle: [String, Object] as PropType<string | CSSProperties>,
-    onScrollableChange: [Function, Array] as PropType<
-    MaybeArray<(value: boolean) => void>
-    >,
-    // eslint-disable-next-line vue/prop-name-casing
-    'onUpdate:value': [Function, Array] as PropType<
-    MaybeArray<(value: string & number) => void>
-    >,
-    onUpdateValue: [Function, Array] as PropType<
-    MaybeArray<(value: string & number) => void>
-    >,
-    onClose: [Function, Array] as PropType<MaybeArray<() => void>>,
-    // deprecated
-    activeName: {
-      type: [String, Number] as PropType<string | number | undefined>,
-      validator: () => {
-        if (__DEV__) {
-          warn(
-            'tabs',
-            '`active-name` is deprecated, please use `value` instead.'
-          )
-        }
-        return true
-      },
-      default: undefined
-    },
-    onActiveNameChange: {
-      type: [Function, Array] as PropType<
-      MaybeArray<(value: string & number) => void> | undefined
-      >,
-      validator: () => {
-        if (__DEV__) {
-          warn(
-            'tabs',
-            '`on-active-name-change` is deprecated, please use `on-update:value` instead.'
-          )
-        }
-        return true
-      },
-      default: undefined
-    }
-  },
+  props: tabsProps,
   setup (props) {
-    const themeRef = useTheme('Tabs', 'Tabs', style, tabsLight, props)
+    const { mergedClsPrefix } = useConfig(props)
+    const themeRef = useTheme(
+      'Tabs',
+      'Tabs',
+      style,
+      tabsLight,
+      props,
+      mergedClsPrefix
+    )
 
     const labelWrapperRef = ref<HTMLElement | null>(null)
     const labelBarRef = ref<HTMLElement | null>(null)
 
-    const panelsRef = ref<TabPaneProps[]>([])
+    const panelsRef = ref<TabPaneSetupProps[]>([])
     const transitionDisabledRef = ref(false)
     const compitableValueRef = useCompitable(props, ['activeName', 'value'])
     const uncontrolledValueRef = ref(props.defaultValue)
@@ -120,10 +127,10 @@ export default defineComponent({
       updateCurrentBarPosition()
     })
 
-    function addPanel (panelProps: TabPaneProps): void {
+    function addPanel (panelProps: TabPaneSetupProps): void {
       panelsRef.value.push(panelProps)
     }
-    function removePanel (panelProps: TabPaneProps): void {
+    function removePanel (panelProps: TabPaneSetupProps): void {
       const index = panelsRef.value.findIndex(
         (panel) => panel.name === panelProps.name
       )
@@ -171,11 +178,13 @@ export default defineComponent({
         onUpdateValue,
         'onUpdate:value': _onUpdateValue
       } = props
-      if (onActiveNameChange) { call(onActiveNameChange as OnUpdateValueImpl, panelName) }
+      if (onActiveNameChange) {
+        call(onActiveNameChange as OnUpdateValueImpl, panelName)
+      }
       if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, panelName)
       if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, panelName)
     }
-    function handleCloseClick (e: MouseEvent, panel: TabPaneProps): void {
+    function handleCloseClick (e: MouseEvent, panel: TabPaneSetupProps): void {
       const { onClose } = props
       if (onClose) call(onClose, panel.name)
       e.stopPropagation()
@@ -191,19 +200,18 @@ export default defineComponent({
         })
       }
     }, 64)
-    provide<TabsInjection>(
-      'NTabs',
-      reactive({
-        type: toRef(props, 'type') as Ref<'line' | 'card'>,
-        value: mergedValueRef,
-        removePanel,
-        addPanel
-      })
-    )
+    provide(tabsInjectionKey, {
+      cPrefixRef: mergedClsPrefix,
+      typeRef: toRef(props, 'type'),
+      valueRef: mergedValueRef,
+      removePanel,
+      addPanel
+    })
     onFontsReady(() => {
       updateCurrentBarPosition()
     })
     return {
+      cPrefix: mergedClsPrefix,
       mergedValue: mergedValueRef,
       labelWrapperRef,
       labelBarRef,
@@ -263,48 +271,51 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     return (
       <div
         class={[
-          'n-tabs',
-          `n-tabs--${this.type}-type`,
-          `n-tabs--${this.labelSize}-size`,
-          {
-            'n-tabs--flex': this.justifyContent
-          }
+          `${cPrefix}-tabs`,
+          `${cPrefix}-tabs--${this.type}-type`,
+          `${cPrefix}-tabs--${this.labelSize}-size`,
+          this.justifyContent && `${cPrefix}-tabs--flex`
         ]}
         style={this.cssVars as CSSProperties}
       >
         <VResizeObserver onResize={this.handleNavResize}>
           {{
             default: () => (
-              <VXScroll class="n-tabs-nav" style={this.navStyle}>
+              <VXScroll class={`${cPrefix}-tabs-nav`} style={this.navStyle}>
                 {{
                   default: () => (
-                    <div ref="labelWrapperRef" class="n-tabs-label-wrapper">
+                    <div
+                      ref="labelWrapperRef"
+                      class={`${cPrefix}-tabs-label-wrapper`}
+                    >
                       <div style={this.labelWrapperStyle}>
                         {this.panels.map((panel, i) => (
                           <div
                             key={i}
                             data-name={panel.name}
                             class={[
-                              'n-tabs-label',
+                              `${cPrefix}-tabs-label`,
                               {
-                                'n-tabs-label--active':
+                                [`${cPrefix}-tabs-label--active`]:
                                   this.mergedValue === panel.name,
-                                'n-tabs-label--disabled': panel.disabled
+                                [`${cPrefix}-tabs-label--disabled`]: panel.disabled
                               }
                             ]}
                             onClick={(e) =>
                               this.handleTabClick(e, panel.name, panel.disabled)
                             }
                           >
-                            <span class="n-tabs-label__label">
+                            <span class={`${cPrefix}-tabs-label__label`}>
                               {panel.label}
                             </span>
                             {this.closable && this.type === 'card' ? (
                               <NBaseClose
-                                class="n-tabs-label__close"
+                                clsPrefix={cPrefix}
+                                class={`${cPrefix}-tabs-label__close`}
                                 onClick={(e) => this.handleCloseClick(e, panel)}
                               />
                             ) : null}
@@ -315,9 +326,9 @@ export default defineComponent({
                         <div
                           ref="labelBarRef"
                           class={[
-                            'n-tabs-label-bar',
+                            `${cPrefix}-tabs-label-bar`,
                             {
-                              'n-tabs-label-bar--transition-disabled': this
+                              [`${cPrefix}-tabs-label-bar--transition-disabled`]: this
                                 .transitionDisabled
                             }
                           ]}
