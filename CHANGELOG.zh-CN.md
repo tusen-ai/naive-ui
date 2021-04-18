@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Feats
+
+- `n-config-provider` 增加 `cls-prefix` 属性
+
 ### Fixes
 
 - 修正 `n-popover` 在静态提升时可能影响别的 popover 的问题

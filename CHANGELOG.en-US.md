@@ -1,12 +1,16 @@
 # CHANGELOG
 
-## 2.5.1
-
 ## Pending
+
+### Feats
+
+- `n-config-provider` Add `cls-prefix` prop.
 
 ### Fixes
 
 - Fix `n-popover` may influence other popover when static props is hoisted.
+
+## 2.5.1
 
 ### Feats
 
