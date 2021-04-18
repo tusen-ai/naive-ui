@@ -96,10 +96,23 @@ naive-ui 通过使用 `n-config-provider` 调整主题。
 
 naive-ui 提供主题编辑器帮助你方便的编辑主题并导出对应配置。它可以被嵌套于 `n-config-provider` 中。
 
+主题编辑器不包含在全局安装中（`app.use(naive)`）。你需要显式引入来使用它。
+
 ```html
 <template>
   <n-theme-editor>
     <app />
   </n-theme-editor>
 </template>
+
+<script>
+  import { defineComponent } from 'vue'
+  import { NThemeEditor } from 'naive-ui'
+
+  export default defineComponent({
+    components: {
+      NThemeEditor
+    }
+  })
+</script>
 ```

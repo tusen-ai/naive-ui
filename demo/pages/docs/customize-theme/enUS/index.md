@@ -96,10 +96,23 @@ You can use `n-global-style` to sync common global style to the body element. In
 
 Naive-ui provides theme editor to help you edit theme and export the corresponding configuration. It can be placed inside `n-config-provider`.
 
+The theme editor is not included in global installation (`app.use(naive)`). You need to import it explicitly to use it
+
 ```html
 <template>
   <n-theme-editor>
     <app />
   </n-theme-editor>
 </template>
+
+<script>
+  import { defineComponent } from 'vue'
+  import { NThemeEditor } from 'naive-ui'
+
+  export default defineComponent({
+    components: {
+      NThemeEditor
+    }
+  })
+</script>
 ```
