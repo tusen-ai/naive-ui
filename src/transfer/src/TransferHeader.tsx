@@ -16,20 +16,31 @@ export default defineComponent({
     title: String
   },
   setup (props) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const NTransfer = inject(transferInjectionKey)!
+    const {
+      srcOptsRef,
+      tgtOptsRef,
+      srcCheckedStatusRef,
+      tgtCheckedStatusRef,
+      srcCheckedValuesRef,
+      tgtCheckedValuesRef,
+      mergedThemeRef,
+      disabledRef,
+      cPrefixRef
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    } = inject(transferInjectionKey)!
     const checkboxPropsRef = computed(() => {
       const { source } = props
       if (source) {
-        return NTransfer.srcCheckedStatus
+        return srcCheckedStatusRef.value
       } else {
-        return NTransfer.tgtCheckedStatus
+        return tgtCheckedStatusRef.value
       }
     })
     return () => {
       const { source } = props
       const { value: checkboxProps } = checkboxPropsRef
-      const { mergedTheme, cPrefix } = NTransfer
+      const { value: mergedTheme } = mergedThemeRef
+      const { value: cPrefix } = cPrefixRef
       return (
         <div class={`${cPrefix}-transfer-list-header`}>
           <div class={`${cPrefix}-transfer-list-header__checkbox`}>
@@ -38,7 +49,7 @@ export default defineComponent({
               themeOverrides={mergedTheme.peerOverrides.Checkbox}
               checked={checkboxProps.checked}
               indeterminate={checkboxProps.indeterminate}
-              disabled={checkboxProps.disabled || NTransfer.disabled}
+              disabled={checkboxProps.disabled || disabledRef.value}
               onUpdateChecked={props.onChange}
             />
           </div>
@@ -47,9 +58,9 @@ export default defineComponent({
           </div>
           <div class={`${cPrefix}-transfer-list-header__extra`}>
             {source
-              ? NTransfer.srcCheckedValues.length
-              : NTransfer.tgtCheckedValues.length}
-            /{source ? NTransfer.srcOpts.length : NTransfer.tgtOpts.length}
+              ? srcCheckedValuesRef.value.length
+              : tgtCheckedValuesRef.value.length}
+            /{source ? srcOptsRef.value.length : tgtOptsRef.value.length}
           </div>
         </div>
       )

@@ -47,7 +47,7 @@ export default defineComponent({
   },
   setup () {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const NTransfer = inject(transferInjectionKey)!
+    const { mergedThemeRef, cPrefixRef } = inject(transferInjectionKey)!
     const scrollerInstRef = ref<ScrollbarInst | null>(null)
     const vlInstRef = ref<VirtualListRef | null>(null)
     function syncVLScroller (): void {
@@ -66,7 +66,8 @@ export default defineComponent({
       return itemsRef
     }
     return {
-      NTransfer,
+      mergedTheme: mergedThemeRef,
+      cPrefix: cPrefixRef,
       scrollerInstRef,
       vlInstRef,
       syncVLScroller,
@@ -75,8 +76,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { NTransfer, syncVLScroller } = this
-    const { mergedTheme, cPrefix } = NTransfer
+    const { mergedTheme, cPrefix, syncVLScroller } = this
     return this.options.length ? (
       this.virtualScroll ? (
         <NScrollbar
@@ -118,8 +118,8 @@ export default defineComponent({
         </NScrollbar>
       ) : (
         <NScrollbar
-          theme={NTransfer.mergedTheme.peers.Scrollbar}
-          themeOverrides={NTransfer.mergedTheme.peerOverrides.Scrollbar}
+          theme={mergedTheme.peers.Scrollbar}
+          themeOverrides={mergedTheme.peerOverrides.Scrollbar}
         >
           {{
             default: () => (
@@ -158,8 +158,8 @@ export default defineComponent({
         {{
           default: () => (
             <NEmpty
-              theme={NTransfer.mergedTheme.peers.Empty}
-              themeOverrides={NTransfer.mergedTheme.peerOverrides.Empty}
+              theme={mergedTheme.peers.Empty}
+              themeOverrides={mergedTheme.peerOverrides.Empty}
             />
           )
         }}

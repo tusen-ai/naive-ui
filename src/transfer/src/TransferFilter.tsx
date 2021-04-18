@@ -25,14 +25,14 @@ export default defineComponent({
   },
   setup () {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const NTransfer = inject(transferInjectionKey)!
+    const { mergedThemeRef, cPrefixRef } = inject(transferInjectionKey)!
     return {
-      NTransfer
+      cPrefix: cPrefixRef,
+      mergedTheme: mergedThemeRef
     }
   },
   render () {
-    const { NTransfer } = this
-    const { mergedTheme, cPrefix } = NTransfer
+    const { mergedTheme, cPrefix } = this
     return (
       <div class={`${cPrefix}-transfer-filter`}>
         <NInput

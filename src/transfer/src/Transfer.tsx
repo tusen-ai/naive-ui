@@ -4,7 +4,6 @@ import {
   h,
   provide,
   PropType,
-  reactive,
   toRef,
   CSSProperties
 } from 'vue'
@@ -216,23 +215,20 @@ export default defineComponent({
       )
       tgtCheckedValuesRef.value = []
     }
-    provide(
-      transferInjectionKey,
-      reactive({
-        cPrefix: mergedClsPrefix,
-        mergedSize: formItem.mergedSize,
-        disabled: toRef(props, 'disabled'),
-        mergedTheme: themeRef,
-        srcCheckedValues: srcCheckedValuesRef,
-        tgtCheckedValues: tgtCheckedValuesRef,
-        srcOpts: srcOptsRef,
-        tgtOpts: tgtOptsRef,
-        srcCheckedStatus: srcCheckedStatusRef,
-        tgtCheckedStatus: tgtCheckedStatusRef,
-        handleSrcCheckboxClick,
-        handleTgtCheckboxClick
-      })
-    )
+    provide(transferInjectionKey, {
+      cPrefixRef: mergedClsPrefix,
+      mergedSizeRef: formItem.mergedSize,
+      disabledRef: toRef(props, 'disabled'),
+      mergedThemeRef: themeRef,
+      srcCheckedValuesRef,
+      tgtCheckedValuesRef,
+      srcOptsRef,
+      tgtOptsRef,
+      srcCheckedStatusRef,
+      tgtCheckedStatusRef,
+      handleSrcCheckboxClick,
+      handleTgtCheckboxClick
+    })
     return {
       ...formItem,
       ...useLocale('Transfer'),

@@ -25,31 +25,38 @@ export default defineComponent({
   },
   setup (props) {
     const { source } = props
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const NTransfer = inject(transferInjectionKey)!
+    const {
+      cPrefixRef,
+      mergedThemeRef,
+      srcCheckedValuesRef,
+      tgtCheckedValuesRef,
+      handleSrcCheckboxClick,
+      handleTgtCheckboxClick
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    } = inject(transferInjectionKey)!
     const checkedRef = source
-      ? useMemo(() => NTransfer.srcCheckedValues.includes(props.value))
-      : useMemo(() => NTransfer.tgtCheckedValues.includes(props.value))
+      ? useMemo(() => srcCheckedValuesRef.value.includes(props.value))
+      : useMemo(() => tgtCheckedValuesRef.value.includes(props.value))
     const handleClick = source
       ? () => {
         if (!props.disabled) {
-          NTransfer.handleSrcCheckboxClick(!checkedRef.value, props.value)
+          handleSrcCheckboxClick(!checkedRef.value, props.value)
         }
       }
       : () => {
         if (!props.disabled) {
-          NTransfer.handleTgtCheckboxClick(!checkedRef.value, props.value)
+          handleTgtCheckboxClick(!checkedRef.value, props.value)
         }
       }
     return {
-      NTransfer,
+      cPrefix: cPrefixRef,
+      mergedTheme: mergedThemeRef,
       checked: checkedRef,
       handleClick
     }
   },
   render () {
-    const { disabled, NTransfer, label, checked, source } = this
-    const { mergedTheme, cPrefix } = NTransfer
+    const { disabled, mergedTheme, cPrefix, label, checked, source } = this
     return (
       <div
         class={[
