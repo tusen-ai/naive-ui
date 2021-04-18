@@ -1,4 +1,3 @@
-/* istanbul ignore file */
 import NimbusIcon from './src/main.vue'
 
 NimbusIcon.install = function (app) {

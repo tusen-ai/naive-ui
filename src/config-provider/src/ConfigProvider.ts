@@ -11,7 +11,7 @@ import {
 } from 'vue'
 import { useMemo } from 'vooks'
 import { merge } from 'lodash-es'
-import { warn } from '../../_utils'
+import { ExtractPublicPropTypes, warn } from '../../_utils'
 import { defaultClsPrefix, Hljs } from '../../_mixins'
 import type {
   GlobalTheme,
@@ -97,6 +97,10 @@ export const configProviderProps = {
     default: undefined
   }
 } as const
+
+export type ConfigProviderProps = ExtractPublicPropTypes<
+  typeof configProviderProps
+>
 
 export default defineComponent({
   name: 'ConfigProvider',

@@ -34,7 +34,7 @@ const codeProps = {
   }
 }
 
-export type CardProps = ExtractPublicPropTypes<typeof codeProps>
+export type CodeProps = ExtractPublicPropTypes<typeof codeProps>
 
 export default defineComponent({
   name: 'Code',
