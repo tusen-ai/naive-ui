@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { h, defineComponent, PropType, inject, computed, renderSlot } from 'vue'
 import { createId } from 'seemly'
 import { useMemo } from 'vooks'

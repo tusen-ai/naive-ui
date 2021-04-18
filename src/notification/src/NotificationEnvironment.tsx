@@ -118,29 +118,28 @@ export default defineComponent({
     }
   },
   render () {
-    return h(
-      Transition,
-      {
-        name: 'n-notification-transition',
-        appear: true,
+    return (
+      <Transition
+        name="notification-transition"
+        appear={true}
         // convert to any since Element is not compitable with HTMLElement
-        onBeforeEnter: this.handleBeforeEnter as any,
-        onAfterEnter: this.handleAfterEnter as any,
-        onBeforeLeave: this.handleBeforeLeave as any,
-        onLeave: this.handleLeave as any,
-        onAfterLeave: this.handleAfterLeave as any
-      },
-      {
-        default: () => {
-          const props = keep(this.$props, notificationPropKeys)
-          return this.show
-            ? h(NNotification, {
-              ...props,
-              onClose: this.handleClose
-            })
-            : null
-        }
-      }
+        onBeforeEnter={this.handleBeforeEnter as any}
+        onAfterEnter={this.handleAfterEnter as any}
+        onBeforeLeave={this.handleBeforeLeave as any}
+        onLeave={this.handleLeave as any}
+        onAfterLeave={this.handleAfterLeave as any}
+      >
+        {{
+          default: () => {
+            return this.show ? (
+              <NNotification
+                {...keep(this.$props, notificationPropKeys)}
+                onClose={this.handleClose}
+              />
+            ) : null
+          }
+        }}
+      </Transition>
     )
   }
 })

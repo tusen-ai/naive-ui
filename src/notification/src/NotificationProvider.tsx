@@ -8,12 +8,15 @@ import {
   defineComponent,
   PropType,
   ExtractPropTypes,
-  provide
+  provide,
+  InjectionKey,
+  Ref,
+  renderSlot
 } from 'vue'
 import { createId } from 'seemly'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { MergedTheme, ThemeProps } from '../../_mixins'
-import { omit } from '../../_utils'
+import { ExtractPublicPropTypes, omit } from '../../_utils'
 import { notificationLight, NotificationTheme } from '../styles'
 import NotificationContainer from './NotificationContainer'
 import NotificationEnvironment, {
@@ -26,8 +29,13 @@ ExtractPropTypes<typeof notificationEnvOptions>
 >
 
 export interface NotificationProviderInjection {
-  mergedTheme: MergedTheme<NotificationTheme>
+  cPrefixRef: Ref<string>
+  mergedThemeRef: Ref<MergedTheme<NotificationTheme>>
 }
+
+export const notificationProviderInjectionKey: InjectionKey<NotificationProviderInjection> = Symbol(
+  'notificationProvider'
+)
 
 type Create = (options: NotificationOptions) => NotificationReactive
 type TypedCreate = (
@@ -44,6 +52,12 @@ export interface NotificationApiInjection {
   open: Create
 }
 
+export type NotificationProviderInst = NotificationApiInjection
+
+export const notificationApiInjectionKey: InjectionKey<NotificationApiInjection> = Symbol(
+  'notificationApi'
+)
+
 type NotificationReactive = {
   readonly key: string
   readonly destroy: () => void
@@ -57,23 +71,29 @@ interface NotificationRef {
   hide: () => void
 }
 
+const notificationProviderProps = {
+  ...(useTheme.props as ThemeProps<NotificationTheme>),
+  to: [String, Object] as PropType<string | HTMLElement>,
+  scrollable: {
+    type: Boolean,
+    default: true
+  }
+}
+
+export type NotificationProviderProps = ExtractPublicPropTypes<
+  typeof notificationProviderProps
+>
+
 export default defineComponent({
   name: 'NotificationProvider',
-  props: {
-    ...(useTheme.props as ThemeProps<NotificationTheme>),
-    to: [String, Object] as PropType<string | HTMLElement>,
-    scrollable: {
-      type: Boolean,
-      default: true
-    }
-  },
+  props: notificationProviderProps,
   setup (props) {
+    const { mergedClsPrefix } = useConfig(props)
     const notificationListRef = ref<NotificationReactive[]>([])
     const notificationRefs: Record<string, NotificationRef> = {}
     function create (options: NotificationOptions): NotificationReactive {
       const key = createId()
-      const destroy = (): void =>
-        notificationRefs[`n-notification-${key}`].hide()
+      const destroy = (): void => notificationRefs[key].hide()
       const notificationReactive = reactive({
         ...options,
         key,
@@ -103,72 +123,72 @@ export default defineComponent({
       'Notification',
       style,
       notificationLight,
-      props
+      props,
+      mergedClsPrefix
     )
-    provide<NotificationApiInjection>('notification', {
+    const api = {
       create,
       info: apis[0],
       success: apis[1],
       warning: apis[2],
       error: apis[3],
       open
+    }
+    provide(notificationApiInjectionKey, api)
+    provide(notificationProviderInjectionKey, {
+      cPrefixRef: mergedClsPrefix,
+      mergedThemeRef: themeRef
     })
-    provide<NotificationProviderInjection>(
-      'NNotificationProvider',
-      reactive({
-        mergedTheme: themeRef
-      })
-    )
     // deprecated
     function open (options: NotificationOptions): NotificationReactive {
       return create(options)
     }
-    return {
-      handleAfterLeave,
-      notificationList: notificationListRef,
-      notificationRefs
-    }
+    return Object.assign(
+      {
+        cPrefix: mergedClsPrefix,
+        notificationList: notificationListRef,
+        notificationRefs,
+        handleAfterLeave
+      },
+      api
+    )
   },
   render () {
-    return h(Fragment, null, [
-      h(
-        Teleport,
-        {
-          to: this.to ?? 'body'
-        },
-        [
-          this.notificationList.length
-            ? h(
-              NotificationContainer,
-              {
-                scrollable: this.scrollable
-              },
-              {
+    return (
+      <>
+        {renderSlot(this.$slots, 'default')}
+        {this.notificationList.length ? (
+          <Teleport to={this.to ?? 'body'}>
+            <NotificationContainer scrollable={this.scrollable}>
+              {{
                 default: () => {
                   return this.notificationList.map((notification) => {
-                    return h(NotificationEnvironment, {
-                      ref: ((inst: NotificationRef) => {
-                        const refKey = `n-notification-${notification.key}`
-                        if (inst === null) {
-                          delete this.notificationRefs[refKey]
-                        } else this.notificationRefs[refKey] = inst
-                      }) as any,
-                      ...omit(notification, [
-                        'destroy',
-                        'hide',
-                        'deactivate'
-                      ]),
-                      internalKey: notification.key,
-                      onInternalAfterLeave: this.handleAfterLeave
-                    })
+                    return (
+                      <NotificationEnvironment
+                        ref={
+                          ((inst: NotificationRef) => {
+                            const refKey = notification.key
+                            if (inst === null) {
+                              delete this.notificationRefs[refKey]
+                            } else this.notificationRefs[refKey] = inst
+                          }) as any
+                        }
+                        {...omit(notification, [
+                          'destroy',
+                          'hide',
+                          'deactivate'
+                        ])}
+                        internalKey={notification.key}
+                        onInternalAfterLeave={this.handleAfterLeave}
+                      />
+                    )
                   })
                 }
-              }
-            )
-            : null
-        ]
-      ),
-      this.$slots.default?.()
-    ])
+              }}
+            </NotificationContainer>
+          </Teleport>
+        ) : null}
+      </>
+    )
   }
 })

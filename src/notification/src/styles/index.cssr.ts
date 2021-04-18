@@ -62,16 +62,16 @@ export default c([
       top: 0
     }),
     cB('notification', [
-      c('&-transition-enter-from, &-transition-leave-to', `
+      c('&.notification-transition-enter-from, &.notification-transition-leave-to', `
         opacity: 0;
         margin-bottom: 0 !important;
         transform: translateX(calc(100% + 16px));
       `),
-      c('&-transition-leave-from, &-transition-enter-to', `
+      c('&.notification-transition-leave-from, &.notification-transition-enter-to', `
         opacity: 1;
         transform: translateX(0);
       `),
-      c('&-transition-leave-active', `
+      c('&.notification-transition-leave-active', `
         transition:
           background-color .3s var(--bezier),
           color .3s var(--bezier),

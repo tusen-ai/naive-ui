@@ -58,7 +58,7 @@ interface PrivateMessageRef extends MessageReactive {
 
 export type MessageProviderInst = MessageApiInjection
 
-const messageProps = {
+const messageProviderProps = {
   ...(useTheme.props as ThemeProps<MessageTheme>),
   to: {
     type: [String, Object],
@@ -66,9 +66,11 @@ const messageProps = {
   }
 }
 
-export type MessageProviderProps = ExtractPublicPropTypes<typeof messageProps>
+export type MessageProviderProps = ExtractPublicPropTypes<
+  typeof messageProviderProps
+>
 
-type MessageProviderSetupProps = ExtractPropTypes<typeof messageProps>
+type MessageProviderSetupProps = ExtractPropTypes<typeof messageProviderProps>
 
 export const messageProviderInjectionKey: InjectionKey<{
   props: MessageProviderSetupProps
@@ -77,7 +79,7 @@ export const messageProviderInjectionKey: InjectionKey<{
 
 export default defineComponent({
   name: 'MessageProvider',
-  props: messageProps,
+  props: messageProviderProps,
   setup (props) {
     const { mergedClsPrefix } = useConfig(props)
     const messageListRef = ref<PrivateMessageReactive[]>([])
@@ -120,13 +122,15 @@ export default defineComponent({
         1
       )
     }
-    return {
-      cPrefix: mergedClsPrefix,
-      messageRefs,
-      messageList: messageListRef,
-      handleAfterLeave,
-      ...api
-    }
+    return Object.assign(
+      {
+        cPrefix: mergedClsPrefix,
+        messageRefs,
+        messageList: messageListRef,
+        handleAfterLeave
+      },
+      api
+    )
   },
   render () {
     return (

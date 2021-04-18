@@ -1,6 +1,6 @@
 import { h, defineComponent, inject } from 'vue'
 import { NScrollbar } from '../../scrollbar'
-import { NotificationProviderInjection } from './NotificationProvider'
+import { notificationProviderInjectionKey } from './NotificationProvider'
 
 export default defineComponent({
   name: 'NotificationContainer',
@@ -11,29 +11,28 @@ export default defineComponent({
     }
   },
   setup () {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const { mergedThemeRef, cPrefixRef } = inject(
+      notificationProviderInjectionKey
+    )!
     return {
-      NNotificationProvider: inject<NotificationProviderInjection>(
-        'NNotificationProvider'
-      ) as NotificationProviderInjection
+      mergedTheme: mergedThemeRef,
+      cPrefix: cPrefixRef
     }
   },
   render () {
-    const { $slots, scrollable, NNotificationProvider } = this
+    const { $slots, scrollable, cPrefix, mergedTheme } = this
     return (
       <div
         class={[
-          'n-notification-container',
-          {
-            'n-notification-container--scrollable': scrollable
-          }
+          `${cPrefix}-notification-container`,
+          scrollable && `${cPrefix}-notification-container--scrollable`
         ]}
       >
         {scrollable ? (
           <NScrollbar
-            theme={NNotificationProvider.mergedTheme.peers.Scrollbar}
-            themeOverrides={
-              NNotificationProvider.mergedTheme.peerOverrides.Scrollbar
-            }
+            theme={mergedTheme.peers.Scrollbar}
+            themeOverrides={mergedTheme.peerOverrides.Scrollbar}
           >
             {$slots}
           </NScrollbar>

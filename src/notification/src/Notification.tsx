@@ -16,7 +16,7 @@ import {
   WarningIcon,
   ErrorIcon
 } from '../../_internal/icons'
-import { NotificationProviderInjection } from './NotificationProvider'
+import { notificationProviderInjectionKey } from './NotificationProvider'
 
 const iconMap = {
   info: <InfoIcon />,
@@ -57,10 +57,12 @@ export default defineComponent({
   name: 'Notification',
   props: notificationProps,
   setup (props) {
-    const NNotificationProvider = inject<NotificationProviderInjection>(
-      'NNotificationProvider'
-    ) as NotificationProviderInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const { cPrefixRef, mergedThemeRef } = inject(
+      notificationProviderInjectionKey
+    )!
     return {
+      cPrefix: cPrefixRef,
       showAvatar: computed(() => {
         return props.avatar || props.type !== 'default'
       }),
@@ -95,7 +97,7 @@ export default defineComponent({
             cubicBezierEaseIn,
             cubicBezierEaseInOut
           }
-        } = NNotificationProvider.mergedTheme
+        } = mergedThemeRef.value
         const { left, right, top, bottom } = getPadding(padding)
         return {
           '--color': color,
@@ -127,58 +129,61 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     return (
       <div
         class={[
-          'n-notification',
+          `${cPrefix}-notification`,
           {
-            'n-notification--closable': this.closable,
-            'n-notification--show-avatar': this.showAvatar
+            [`${cPrefix}-notification--closable`]: this.closable,
+            [`${cPrefix}-notification--show-avatar`]: this.showAvatar
           }
         ]}
         style={this.cssVars as CSSProperties}
       >
         {this.showAvatar ? (
-          <div class="n-notification__avatar">
+          <div class={`${cPrefix}-notification__avatar`}>
             {this.avatar ? (
               <Render render={this.avatar} />
             ) : this.type !== 'default' ? (
-              <NBaseIcon>{{ default: () => iconMap[this.type] }}</NBaseIcon>
+              <NBaseIcon clsPrefix={cPrefix}>
+                {{ default: () => iconMap[this.type] }}
+              </NBaseIcon>
             ) : null}
           </div>
         ) : null}
         {this.closable ? (
           <NBaseClose
-            class="n-notification__close"
+            clsPrefix={cPrefix}
+            class={`${cPrefix}-notification__close`}
             onClick={this.handleCloseClick}
           />
         ) : null}
-        <div ref="bodyRef" class="n-notification-main">
+        <div ref="bodyRef" class={`${cPrefix}-notification-main`}>
           {this.title ? (
-            <div class="n-notification-main__header">
+            <div class={`${cPrefix}-notification-main__header`}>
               <Render render={this.title} />
             </div>
           ) : null}
           {this.description ? (
-            <div class="n-notification-main__description">
+            <div class={`${cPrefix}-notification-main__description`}>
               <Render render={this.description} />
             </div>
           ) : null}
           {this.content ? (
-            <pre class="n-notification-main__content">
+            <pre class={`${cPrefix}-notification-main__content`}>
               <Render render={this.content} />
             </pre>
           ) : null}
-
           {this.meta || this.action ? (
-            <div class="n-notification-main-footer">
+            <div class={`${cPrefix}-notification-main-footer`}>
               {this.meta ? (
-                <div class="n-notification-main-footer__meta">
+                <div class={`${cPrefix}-notification-main-footer__meta`}>
                   <Render render={this.meta} />
                 </div>
               ) : null}
               {this.action ? (
-                <div class="n-notification-main-footer__action">
+                <div class={`${cPrefix}-notification-main-footer__action`}>
                   <Render render={this.action} />
                 </div>
               ) : null}

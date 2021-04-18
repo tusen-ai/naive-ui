@@ -75,7 +75,6 @@ export default defineComponent({
         <div
           class={`${clsPrefix}-color-picker-pallete__layer`}
           style={{
-            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
             backgroundImage: `linear-gradient(90deg, white, hsl(${this.displayedHue}, 100%, 50%))`
           }}
         />
