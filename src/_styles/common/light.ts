@@ -140,13 +140,13 @@ const derived = {
   borderColor: 'rgb(224, 224, 230)',
 
   // close
-  closeColorHover: neutral(Number(base.alphaClose) * 0.8),
   closeColor: neutral(Number(base.alphaClose)),
-  closeColorPressed: scaleColor(neutral(base.alphaClose), { lightness: 1.25 }),
+  closeColorHover: neutral(Number(base.alphaClose) * 1.25),
+  closeColorPressed: neutral(Number(base.alphaClose) * 0.8),
   closeColorDisabled: neutral(base.alpha4),
   closeOpacity: base.alphaClose,
-  closeOpacityHover: String(roundAlpha(Number(base.alphaClose) * 0.8)),
-  closeOpacityPressed: String(roundAlpha(Number(base.alphaClose) * 1.25)),
+  closeOpacityHover: String(roundAlpha(Number(base.alphaClose) * 1.25)),
+  closeOpacityPressed: String(roundAlpha(Number(base.alphaClose) * 0.8)),
 
   // clear
   clearColor: neutral(base.alpha4),

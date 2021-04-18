@@ -1,4 +1,11 @@
-import { computed, h, defineComponent, inject, VNodeChild } from 'vue'
+import {
+  computed,
+  h,
+  defineComponent,
+  inject,
+  VNodeChild,
+  CSSProperties
+} from 'vue'
 import {
   InfoIcon,
   SuccessIcon,
@@ -12,35 +19,38 @@ import {
   NBaseClose
 } from '../../_internal'
 import { render, createKey } from '../../_utils'
-import { ThemePropsReactive, useTheme } from '../../_mixins'
-import { messageLight, MessageTheme } from '../styles'
+import { useTheme } from '../../_mixins'
+import { messageLight } from '../styles'
 import { messageProps, MessageType } from './message-props'
+import { messageProviderInjectionKey } from './MessageProvider'
 import style from './styles/index.cssr'
 
 const iconMap = {
-  info: InfoIcon,
-  success: SuccessIcon,
-  warning: WarningIcon,
-  error: ErrorIcon,
-  loading: NBaseLoading
+  info: <InfoIcon />,
+  success: <SuccessIcon />,
+  warning: <WarningIcon />,
+  error: <ErrorIcon />
 }
 
 export default defineComponent({
   name: 'Message',
   props: messageProps,
   setup (props) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const themeProps = inject<ThemePropsReactive<MessageTheme>>(
-      'NMessageProvider'
-    )!
+    const {
+      props: messageProviderProps,
+      cPrefixRef
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    } = inject(messageProviderInjectionKey)!
     const themeRef = useTheme(
       'Message',
       'Message',
       style,
       messageLight,
-      themeProps
+      messageProviderProps,
+      cPrefixRef
     )
     return {
+      cPrefix: cPrefixRef,
       handleClose () {
         props.onClose?.()
       },
@@ -100,74 +110,67 @@ export default defineComponent({
     }
   },
   render () {
-    const { icon, type, closable, content, handleClose, cssVars } = this
-    return h(
-      'div',
-      {
-        class: 'n-message-wrapper',
-        style: cssVars
-      },
-      [
-        h(
-          'div',
-          {
-            class: 'n-message'
-          },
-          [
-            h(
-              'div',
-              {
-                class: [
-                  'n-message__icon',
-                  `n-message__icon n-message__icon--${type}-type`
-                ]
-              },
-              [
-                h(NIconSwitchTransition, null, {
-                  default: () => [createIconVNode(icon, type)]
-                })
-              ]
-            ),
-            h(
-              'div',
-              {
-                class: 'n-message__content'
-              },
-              [
-                h(render, {
-                  render: content
-                })
-              ]
-            ),
-            closable
-              ? h(NBaseClose, {
-                class: 'n-message__close',
-                onClick: handleClose
-              })
-              : null
-          ]
-        )
-      ]
+    const {
+      icon,
+      type,
+      closable,
+      content,
+      cPrefix,
+      cssVars,
+      handleClose
+    } = this
+    return (
+      <div
+        class={`${cPrefix}-message-wrapper`}
+        style={cssVars as CSSProperties}
+      >
+        <div class={`${cPrefix}-message`}>
+          <div
+            class={`${cPrefix}-message__icon ${cPrefix}-message__icon--${type}-type`}
+          >
+            <NIconSwitchTransition>
+              {{
+                default: () => [createIconVNode(icon, type, cPrefix)]
+              }}
+            </NIconSwitchTransition>
+          </div>
+          <div class={`${cPrefix}-message__content`}>
+            {h(render, {
+              render: content
+            })}
+          </div>
+          {closable ? (
+            <NBaseClose
+              clsPrefix={cPrefix}
+              class={`${cPrefix}-message__close`}
+              onClick={handleClose}
+            />
+          ) : null}
+        </div>
+      </div>
     )
   }
 })
 
 function createIconVNode (
   icon: undefined | (() => VNodeChild),
-  type: MessageType
+  type: MessageType,
+  clsPrefix: string
 ): VNodeChild {
   if (typeof icon === 'function') {
     return icon()
   } else {
-    return h(
-      NBaseIcon,
-      {
-        key: type
-      },
-      {
-        default: () =>
-          h(iconMap[type], type === 'loading' ? { scale: 0.85 } : undefined)
-      }
+    return (
+      <NBaseIcon clsPrefix={clsPrefix} key={type}>
+        {{
+          default: () =>
+            type === 'loading' ? (
+              <NBaseLoading clsPrefix={clsPrefix} scale={0.85} />
+            ) : (
+              iconMap[type]
+            )
+        }}
+      </NBaseIcon>
     )
   }
 }

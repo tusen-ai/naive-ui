@@ -27,26 +27,31 @@ A example to use with card. (demo is the card)
 ```
 
 ```js
-export default {
-  inject: ['message'],
-  data () {
-    return {
-      panels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
-      name: '1',
-      tabNavScrollable: false
+import { defineComponent, ref } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const message = useMessage()
+    const tabNavScrollableRef = ref(false)
+    const panelsRef = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
+    function handleScrollableChange (value) {
+      tabNavScrollableRef.value = value
     }
-  },
-  methods: {
-    handleScrollableChange (value) {
-      this.tabNavScrollable = value
-    },
-    handleClose (name) {
-      this.message.info('Close ' + name)
-      const index = this.panels.findIndex((v) => name === v.toString())
+    function handleClose (name) {
+      message.info('Close ' + name)
+      const index = panelsRef.value.findIndex((v) => name === v.toString())
       if (~index) {
-        this.panels.splice(index, 1)
+        panelsRef.value.splice(index, 1)
       }
     }
+    return {
+      panels: panelsRef,
+      name: ref('1'),
+      tabNavScrollable: tabNavScrollableRef,
+      handleScrollableChange,
+      handleClose
+    }
   }
-}
+})
 ```

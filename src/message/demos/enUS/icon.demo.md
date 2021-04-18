@@ -15,7 +15,7 @@ export default {
     return {
       createMessage () {
         message.warning("I never needed anybody's help in any way", {
-          icon: () => h(NIcon, { default: () => h(MdHourglass) })
+          icon: () => h(NIcon, null, { default: () => h(MdHourglass) })
         })
       }
     }

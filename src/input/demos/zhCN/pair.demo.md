@@ -14,26 +14,27 @@
 ```
 
 ```js
-export default {
-  inject: ['message'],
-  data () {
+import { defineComponent } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const message = useMessage()
     return {
-      placeholder: ['从', '到']
-    }
-  },
-  methods: {
-    handleInputBlur () {
-      this.message.info('输入成对值：Blur')
-    },
-    handleInputFocus () {
-      this.message.info('输入成对值：Focus')
-    },
-    handleInputInput () {
-      this.message.info('输入成对值：Input')
-    },
-    handleInputChange () {
-      this.message.info('输入成对值：Change')
+      placeholder: ['从', '到'],
+      handleInputBlur () {
+        message.info('输入成对值：Blur')
+      },
+      handleInputFocus () {
+        message.info('输入成对值：Focus')
+      },
+      handleInputInput () {
+        message.info('输入成对值：Input')
+      },
+      handleInputChange () {
+        message.info('输入成对值：Change')
+      }
     }
   }
-}
+})
 ```

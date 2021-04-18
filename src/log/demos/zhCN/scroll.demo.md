@@ -19,7 +19,7 @@
     >
   </n-button-group>
   <n-log
-    ref="log"
+    ref="logInstRef"
     :log="log"
     @require-more="handleRequireMore"
     @reach-top="handleReachTop"
@@ -31,6 +31,9 @@
 ```
 
 ```js
+import { defineComponent, ref } from 'vue'
+import { useMessage } from 'naive-ui'
+
 function log () {
   const l = []
   for (let i = 0; i < 10; ++i) {
@@ -39,40 +42,42 @@ function log () {
   return l.join('\n') + '\n'
 }
 
-export default {
-  inject: ['message'],
-  data () {
+export default defineComponent({
+  setup () {
+    const message = useMessage()
+    const loadingRef = ref(false)
+    const logRef = ref(log())
+    const logInstRef = ref(null)
     return {
+      logInstRef,
       loading: false,
-      log: log()
-    }
-  },
-  methods: {
-    clear () {
-      this.log = ''
-    },
-    handleRequireMore (from) {
-      this.message.info('Require More from ' + from)
-      if (this.loading) return
-      this.loading = true
-      setTimeout(() => {
-        if (from === 'top') {
-          this.log = log() + this.log
-        } else if (from === 'bottom') {
-          this.log = this.log + log()
-        }
-        this.loading = false
-      }, 1000)
-    },
-    handleReachTop () {
-      this.message.info('Reach Top')
-    },
-    handleReachBottom () {
-      this.message.info('Reach Bottom')
-    },
-    scrollTo (...args) {
-      this.$refs.log.scrollTo(...args)
+      log: log(),
+      clear () {
+        logRef.value = ''
+      },
+      handleRequireMore (from) {
+        message.info('Require More from ' + from)
+        if (loadingRef.value) return
+        loadingRef.value = true
+        setTimeout(() => {
+          if (from === 'top') {
+            logRef.value = log() + logRef.value
+          } else if (from === 'bottom') {
+            logRef.value = logRef.value + log()
+          }
+          loadingRef.value = false
+        }, 1000)
+      },
+      handleReachTop () {
+        message.info('Reach Top')
+      },
+      handleReachBottom () {
+        message.info('Reach Bottom')
+      },
+      scrollTo (...args) {
+        logInstRef.value.scrollTo(...args)
+      }
     }
   }
-}
+})
 ```

@@ -9,7 +9,7 @@ import style from './styles/index.cssr'
 export type Depth = 1 | 2 | 3 | 4 | 5 | '1' | '2' | '3' | '4' | '5' | undefined
 
 export default defineComponent({
-  __NAIVE_ICON__: true,
+  __ICON__: true,
   name: 'Icon',
   props: {
     ...(useTheme.props as ThemeProps<IconTheme>),
@@ -67,7 +67,7 @@ export default defineComponent({
   },
   render () {
     const { $parent, depth, cPrefix } = this
-    if ($parent?.$options.__NAIVE_ICON__) {
+    if ($parent?.$options.__ICON__) {
       warn('icon', "don't wrap `n-icon` inside `n-icon`")
     }
     return h(

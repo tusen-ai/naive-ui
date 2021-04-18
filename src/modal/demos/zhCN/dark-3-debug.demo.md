@@ -98,7 +98,6 @@ const data = Array.apply(null, { length: 46 }).map((_, index) => ({
 }))
 
 export default {
-  inject: ['message'],
   data () {
     return {
       showModal: false,
@@ -109,11 +108,6 @@ export default {
   computed: {
     pagination () {
       return { pageSize: 10 }
-    }
-  },
-  methods: {
-    sendMail (rowData) {
-      this.message.info('send mail to ' + rowData.name)
     }
   }
 }

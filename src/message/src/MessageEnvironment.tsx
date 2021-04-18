@@ -11,28 +11,16 @@ export default defineComponent({
       type: Number,
       default: 3000
     },
-    onAfterLeave: {
-      type: Function,
-      default: undefined
-    },
+    onAfterLeave: Function,
     internalKey: {
       type: String,
       required: true
     },
     // private
-    onInternalAfterLeave: {
-      type: Function as PropType<(key: string) => void>,
-      default: undefined
-    },
+    onInternalAfterLeave: Function as PropType<(key: string) => void>,
     // deprecated
-    onHide: {
-      type: Function,
-      default: undefined
-    },
-    onAfterHide: {
-      type: Function,
-      default: undefined
-    }
+    onHide: Function,
+    onAfterHide: Function
   },
   setup (props) {
     const timerIdRef = ref<number | null>(null)
@@ -83,25 +71,22 @@ export default defineComponent({
     }
   },
   render () {
-    return h(
-      NFadeInExpandTransition,
-      {
-        appear: true,
-        onAfterLeave: this.handleAfterLeave
-      },
-      {
-        default: () => [
-          this.show
-            ? h(NMessage, {
-              content: this.content,
-              type: this.type,
-              icon: this.icon,
-              closable: this.closable,
-              onClose: this.handleClose
-            })
-            : null
-        ]
-      }
+    return (
+      <NFadeInExpandTransition appear onAfterLeave={this.handleAfterLeave}>
+        {{
+          default: () => [
+            this.show ? (
+              <NMessage
+                content={this.content}
+                type={this.type}
+                icon={this.icon}
+                closable={this.closable}
+                onClose={this.handleClose}
+              />
+            ) : null
+          ]
+        }}
+      </NFadeInExpandTransition>
     )
   }
 })

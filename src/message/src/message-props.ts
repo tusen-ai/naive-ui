@@ -8,12 +8,9 @@ export const messageProps = {
     type: String as PropType<MessageType>,
     default: 'info'
   },
-  content: {
-    type: [String, Number, Boolean, Function] as PropType<
-    string | number | boolean | (() => VNodeChild)
-    >,
-    default: undefined
-  },
+  content: [String, Number, Boolean, Function] as PropType<
+  string | number | boolean | (() => VNodeChild)
+  >,
   closable: {
     type: Boolean,
     default: false

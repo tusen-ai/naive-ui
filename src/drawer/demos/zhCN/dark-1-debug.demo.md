@@ -145,8 +145,14 @@
 ```
 
 ```js
+import { useMessage } from 'naive-ui'
+
 export default {
-  inject: ['message'],
+  setup () {
+    return {
+      message: useMessage()
+    }
+  },
   data () {
     return {
       modalActive: false,

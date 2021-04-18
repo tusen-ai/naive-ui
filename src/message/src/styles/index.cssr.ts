@@ -82,13 +82,13 @@ export default c([
           `)
         ])
       ),
-      c('> *', {
-        position: 'absolute',
-        left: 0,
-        top: 0,
-        right: 0,
-        bottom: 0
-      },
+      c('> *', `
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+      `,
       [iconSwitchTransition()])
     ]),
     cE('close', `
@@ -96,7 +96,14 @@ export default c([
       margin: var(--close-margin);
       transition: color .3s var(--bezier);
       flex-shrink: 0;
-    `)
+    `, [
+      c('&:hover', `
+        color: var(--close-color-hover);
+      `),
+      c('&:active', `
+        color: var(--close-color-pressed);
+      `)
+    ])
   ]),
   cB('message-container', `
     z-index: 6000;

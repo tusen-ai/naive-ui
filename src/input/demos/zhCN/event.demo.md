@@ -23,24 +23,29 @@
 ```
 
 ```js
-export default {
-  inject: ['message'],
-  methods: {
-    handleFocus () {
-      this.message.info('[Event focus]')
-    },
-    handleBlur () {
-      this.message.info('[Event blur]')
-    },
-    handleChange (v) {
-      this.message.info('[Event change]' + v)
-    },
-    handleKeyUp (e) {
-      this.message.info('[Event keyup]')
-    },
-    handleInput (v) {
-      this.message.info('[Event input] ' + v)
+import { defineComponent } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const message = useMessage()
+    return {
+      handleFocus (e) {
+        message.info('[Event focus]')
+      },
+      handleBlur (e) {
+        message.info('[Event blur]')
+      },
+      handleChange (v) {
+        message.info('[Event change]: ' + v)
+      },
+      handleKeyUp (e) {
+        message.info('[Event keyup]')
+      },
+      handleInput (v) {
+        message.info('[Event input]: ' + v)
+      }
     }
   }
-}
+})
 ```

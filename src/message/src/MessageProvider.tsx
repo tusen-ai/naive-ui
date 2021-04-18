@@ -6,11 +6,15 @@ import {
   Teleport,
   defineComponent,
   provide,
-  VNodeChild
+  VNodeChild,
+  InjectionKey,
+  ExtractPropTypes,
+  renderSlot,
+  Ref
 } from 'vue'
 import { createId } from 'seemly'
-import { omit } from '../../_utils'
-import { ThemePropsReactive, useTheme } from '../../_mixins'
+import { ExtractPublicPropTypes, omit } from '../../_utils'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import MessageEnvironment from './MessageEnvironment'
 import { MessageTheme } from '../styles'
@@ -30,6 +34,10 @@ export interface MessageApiInjection {
   loading: (content: string, options: MessageOptions) => MessageReactive
 }
 
+export const messageApiInjectionKey: InjectionKey<MessageApiInjection> = Symbol(
+  'messageApi'
+)
+
 export interface MessageReactive {
   content?: string
   duration?: number
@@ -48,16 +56,30 @@ interface PrivateMessageRef extends MessageReactive {
   hide: () => void
 }
 
+export type MessageProviderInst = MessageApiInjection
+
+const messageProps = {
+  ...(useTheme.props as ThemeProps<MessageTheme>),
+  to: {
+    type: [String, Object],
+    default: undefined
+  }
+}
+
+export type MessageProviderProps = ExtractPublicPropTypes<typeof messageProps>
+
+type MessageProviderSetupProps = ExtractPropTypes<typeof messageProps>
+
+export const messageProviderInjectionKey: InjectionKey<{
+  props: MessageProviderSetupProps
+  cPrefixRef: Ref<string>
+}> = Symbol('messageProvider')
+
 export default defineComponent({
   name: 'MessageProvider',
-  props: {
-    ...(useTheme.props as ThemeProps<MessageTheme>),
-    to: {
-      type: [String, Object],
-      default: undefined
-    }
-  },
+  props: messageProps,
   setup (props) {
+    const { mergedClsPrefix } = useConfig(props)
     const messageListRef = ref<PrivateMessageReactive[]>([])
     const messageRefs = ref<{ [key: string]: PrivateMessageRef }>({})
     const api: MessageApiInjection = {
@@ -77,8 +99,8 @@ export default defineComponent({
         return create(content, { ...options, type: 'loading' })
       }
     }
-    provide<ThemePropsReactive<MessageTheme>>('NMessageProvider', props)
-    provide<MessageApiInjection>('message', api)
+    provide(messageProviderInjectionKey, { props, cPrefixRef: mergedClsPrefix })
+    provide(messageApiInjectionKey, api)
     function create (content: string, options = {}): MessageReactive {
       const key = createId()
       const messageReactive = reactive({
@@ -86,7 +108,7 @@ export default defineComponent({
         content,
         key,
         destroy: () => {
-          messageRefs.value[`n-message-${key}`].hide()
+          messageRefs.value[key].hide()
         }
       })
       messageListRef.value.push(messageReactive)
@@ -99,42 +121,41 @@ export default defineComponent({
       )
     }
     return {
+      cPrefix: mergedClsPrefix,
       messageRefs,
       messageList: messageListRef,
-      handleAfterLeave
+      handleAfterLeave,
+      ...api
     }
   },
   render () {
-    const { default: defaultSlot } = this.$slots
-    return h(Fragment, null, [
-      this.messageList.length
-        ? h(
-          Teleport,
-          {
-            to: this.to ?? 'body'
-          },
-          [
-            h(
-              'div',
-              {
-                class: 'n-message-container',
-                key: 'n-message-container'
-              },
-              this.messageList.map((message) => {
-                return h(MessageEnvironment, {
-                  ref: ((inst: PrivateMessageRef) => {
-                    this.messageRefs[`n-message-${message.key}`] = inst
-                  }) as () => void,
-                  internalKey: message.key,
-                  onInternalAfterLeave: this.handleAfterLeave,
-                  ...omit(message, ['destroy'], undefined)
-                })
-              })
-            )
-          ]
-        )
-        : null,
-      defaultSlot?.()
-    ])
+    return (
+      <>
+        {renderSlot(this.$slots, 'default')}
+        {this.messageList.length ? (
+          <Teleport to={this.to ?? 'body'}>
+            <div
+              class={`${this.cPrefix}-message-container`}
+              key="message-container"
+            >
+              {this.messageList.map((message) => {
+                return (
+                  <MessageEnvironment
+                    ref={
+                      ((inst: PrivateMessageRef) => {
+                        this.messageRefs[message.key] = inst
+                      }) as () => void
+                    }
+                    internalKey={message.key}
+                    onInternalAfterLeave={this.handleAfterLeave}
+                    {...omit(message, ['destroy'], undefined)}
+                  />
+                )
+              })}
+            </div>
+          </Teleport>
+        ) : null}
+      </>
+    )
   }
 })
