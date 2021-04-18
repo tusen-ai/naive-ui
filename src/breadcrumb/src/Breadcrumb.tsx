@@ -52,7 +52,7 @@ export default defineComponent({
       mergedClsPrefixRef: mergedClsPrefix
     })
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
@@ -82,7 +82,7 @@ export default defineComponent({
   render () {
     return (
       <div
-        class={`${this.cPrefix}-breadcrumb`}
+        class={`${this.mergedClsPrefix}-breadcrumb`}
         style={this.cssVars as CSSProperties}
       >
         {this.$slots}

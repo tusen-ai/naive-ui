@@ -275,7 +275,7 @@ export default defineComponent({
       dataTableInjectionKey,
       reactive({
         hoverKey,
-        cPrefix: mergedClsPrefix,
+        mergedClsPrefix,
         treeMate: treeMateRef,
         mergedTheme: themeRef,
         scrollX: computed(() => props.scrollX),
@@ -333,7 +333,7 @@ export default defineComponent({
     }
     return {
       mainTableInstRef,
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       mergedTheme: themeRef,
       paginatedData: paginatedDataRef,
       mergedBordered,
@@ -412,17 +412,17 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <div
         class={[
-          `${cPrefix}-data-table`,
+          `${mergedClsPrefix}-data-table`,
           {
-            [`${cPrefix}-data-table--bordered`]: this.mergedBordered,
-            [`${cPrefix}-data-table--bottom-bordered`]: this
+            [`${mergedClsPrefix}-data-table--bordered`]: this.mergedBordered,
+            [`${mergedClsPrefix}-data-table--bottom-bordered`]: this
               .mergedBottomBordered,
-            [`${cPrefix}-data-table--single-line`]: this.singleLine,
-            [`${cPrefix}-data-table--single-column`]: this.singleColumn
+            [`${mergedClsPrefix}-data-table--single-line`]: this.singleLine,
+            [`${mergedClsPrefix}-data-table--single-column`]: this.singleColumn
           }
         ]}
         style={this.cssVars as CSSProperties}
@@ -435,7 +435,7 @@ export default defineComponent({
         >
           {{
             default: () => [
-              <div class={`${cPrefix}-data-table-wrapper`}>
+              <div class={`${mergedClsPrefix}-data-table-wrapper`}>
                 <NMainTable
                   ref="mainTableInstRef"
                   maxHeight={this.maxHeight}
@@ -447,9 +447,9 @@ export default defineComponent({
                       this.paginatedData.length === 0 ? (
                         <div
                           class={[
-                            `${cPrefix}-data-table-empty`,
+                            `${mergedClsPrefix}-data-table-empty`,
                             {
-                              [`${cPrefix}-data-table-empty--hide`]: this
+                              [`${mergedClsPrefix}-data-table-empty--hide`]: this
                                 .loading
                             }
                           ]}
@@ -466,7 +466,7 @@ export default defineComponent({
                 </NMainTable>
               </div>,
               this.pagination ? (
-                <div class={`${this.cPrefix}-data-table__pagination`}>
+                <div class={`${this.mergedClsPrefix}-data-table__pagination`}>
                   <NPagination
                     theme={this.mergedTheme.peers.Pagination}
                     themeOverrides={this.mergedTheme.peerOverrides.Pagination}

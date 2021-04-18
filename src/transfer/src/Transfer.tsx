@@ -216,7 +216,7 @@ export default defineComponent({
       tgtCheckedValuesRef.value = []
     }
     provide(transferInjectionKey, {
-      cPrefixRef: mergedClsPrefix,
+      mergedClsPrefixRef: mergedClsPrefix,
       mergedSizeRef: formItem.mergedSize,
       disabledRef: toRef(props, 'disabled'),
       mergedThemeRef: themeRef,
@@ -232,7 +232,7 @@ export default defineComponent({
     return {
       ...formItem,
       ...useLocale('Transfer'),
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       itemSize: itemSizeRef,
       isMounted: useIsMounted(),
       isInputing: isInputingRef,
@@ -309,23 +309,23 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <div
         class={[
-          `${cPrefix}-transfer`,
-          this.disabled && `${cPrefix}-transfer--disabled`,
-          this.filterable && `${cPrefix}-transfer--filterable`
+          `${mergedClsPrefix}-transfer`,
+          this.disabled && `${mergedClsPrefix}-transfer--disabled`,
+          this.filterable && `${mergedClsPrefix}-transfer--filterable`
         ]}
         style={this.cssVars as CSSProperties}
       >
-        <div class={`${cPrefix}-transfer-list`}>
+        <div class={`${mergedClsPrefix}-transfer-list`}>
           <NTransferHeader
             source
             onChange={this.handleSrcHeaderCheck}
             title={this.sourceTitle || this.locale.sourceTitle}
           />
-          <div class={`${cPrefix}-transfer-list-body`}>
+          <div class={`${mergedClsPrefix}-transfer-list-body`}>
             {this.filterable ? (
               <NTransferFilter
                 onUpdateValue={this.handleSrcFilterUpdateValue}
@@ -336,7 +336,7 @@ export default defineComponent({
                 onBlur={this.handleInputBlur}
               />
             ) : null}
-            <div class={`${cPrefix}-transfer-list-flex-container`}>
+            <div class={`${mergedClsPrefix}-transfer-list-flex-container`}>
               <NTransferList
                 source
                 options={this.filteredSrcOpts}
@@ -348,9 +348,9 @@ export default defineComponent({
               />
             </div>
           </div>
-          <div class={`${cPrefix}-transfer-list__border`} />
+          <div class={`${mergedClsPrefix}-transfer-list__border`} />
         </div>
-        <div class={`${cPrefix}-transfer-gap`}>
+        <div class={`${mergedClsPrefix}-transfer-gap`}>
           <NButton
             disabled={this.toButtonDisabled || this.disabled}
             theme={this.mergedTheme.peers.Button}
@@ -359,7 +359,7 @@ export default defineComponent({
           >
             {{
               icon: () => (
-                <NBaseIcon clsPrefix={cPrefix}>
+                <NBaseIcon clsPrefix={mergedClsPrefix}>
                   {{ default: () => <ChevronRightIcon /> }}
                 </NBaseIcon>
               )
@@ -373,19 +373,19 @@ export default defineComponent({
           >
             {{
               icon: () => (
-                <NBaseIcon clsPrefix={cPrefix}>
+                <NBaseIcon clsPrefix={mergedClsPrefix}>
                   {{ default: () => <ChevronLeftIcon /> }}
                 </NBaseIcon>
               )
             }}
           </NButton>
         </div>
-        <div class={`${cPrefix}-transfer-list`}>
+        <div class={`${mergedClsPrefix}-transfer-list`}>
           <NTransferHeader
             onChange={this.handleTgtHeaderCheck}
             title={this.targetTitle || this.locale.targetTitle}
           />
-          <div class={`${cPrefix}-transfer-list-body`}>
+          <div class={`${mergedClsPrefix}-transfer-list-body`}>
             {this.filterable ? (
               <NTransferFilter
                 onUpdateValue={this.handleTgtFilterUpdateValue}
@@ -396,7 +396,7 @@ export default defineComponent({
                 onBlur={this.handleInputBlur}
               />
             ) : null}
-            <div class={`${cPrefix}-transfer-list-flex-container`}>
+            <div class={`${mergedClsPrefix}-transfer-list-flex-container`}>
               <NTransferList
                 options={this.filteredTgtOpts}
                 disabled={this.disabled}
@@ -407,7 +407,7 @@ export default defineComponent({
               />
             </div>
           </div>
-          <div class={`${cPrefix}-transfer-list__border`} />
+          <div class={`${mergedClsPrefix}-transfer-list__border`} />
         </div>
       </div>
     )

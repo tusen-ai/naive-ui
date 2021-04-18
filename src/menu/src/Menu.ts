@@ -261,7 +261,7 @@ export default defineComponent({
       doUpdateExpandedKeys(currentExpandedKeys)
     }
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       controlledExpandedKeys: controlledExpandedKeysRef,
       uncontrolledExpanededKeys: uncontrolledExpandedKeysRef,
       mergedExpandedKeys: mergedExpandedKeysRef,
@@ -313,14 +313,14 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return h(
       'div',
       {
         class: [
-          `${cPrefix}-menu`,
-          `${cPrefix}-menu--${this.mode}`,
-          this.collapsed && `${cPrefix}-menu--collapsed`
+          `${mergedClsPrefix}-menu`,
+          `${mergedClsPrefix}-menu--${this.mode}`,
+          this.collapsed && `${mergedClsPrefix}-menu--collapsed`
         ],
         style: this.cssVars
       },

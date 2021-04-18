@@ -384,7 +384,7 @@ export default defineComponent({
       }
     }
     provide(uploadInjectionKey, {
-      cPrefixRef: mergedClsPrefix,
+      mergedClsPrefixRef: mergedClsPrefix,
       mergedThemeRef: themeRef,
       showCancelButtonRef: toRef(props, 'showCancelButton'),
       showDownloadButtonRef: toRef(props, 'showDownloadButton'),
@@ -398,7 +398,7 @@ export default defineComponent({
       doChange
     })
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       draggerInsideRef,
       inputElRef,
       mergedFileList: mergedFileListRef,
@@ -451,7 +451,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { draggerInsideRef, cPrefix } = this
+    const { draggerInsideRef, mergedClsPrefix } = this
     const firstChild = getFirstSlotVNode(this.$slots, 'default')
     // @ts-expect-error
     if (firstChild?.type?.[uploadDraggerKey]) {
@@ -460,11 +460,11 @@ export default defineComponent({
     return (
       <div
         class={[
-          `${cPrefix}-upload`,
+          `${mergedClsPrefix}-upload`,
           {
-            [`${cPrefix}-upload--dragger-inside`]: draggerInsideRef.value,
-            [`${cPrefix}-upload--drag-over`]: this.dragOver,
-            [`${cPrefix}-upload--disabled`]: this.disabled
+            [`${mergedClsPrefix}-upload--dragger-inside`]: draggerInsideRef.value,
+            [`${mergedClsPrefix}-upload--drag-over`]: this.dragOver,
+            [`${mergedClsPrefix}-upload--disabled`]: this.disabled
           }
         ]}
         style={this.cssVars as CSSProperties}
@@ -472,13 +472,13 @@ export default defineComponent({
         <input
           ref="inputElRef"
           type="file"
-          class={`${cPrefix}-upload__file-input`}
+          class={`${mergedClsPrefix}-upload__file-input`}
           accept={this.accept}
           multiple={this.multiple}
           onChange={this.handleFileInputChange}
         />
         <div
-          class={`${cPrefix}-upload__trigger`}
+          class={`${mergedClsPrefix}-upload__trigger`}
           onClick={this.handleTriggerClick}
           onDrop={this.handleTriggerDrop}
           onDragover={this.handleTriggerDragOver}
@@ -487,12 +487,19 @@ export default defineComponent({
         >
           {this.$slots}
         </div>
-        <div class={`${cPrefix}-upload-file-list`} style={this.fileListStyle}>
+        <div
+          class={`${mergedClsPrefix}-upload-file-list`}
+          style={this.fileListStyle}
+        >
           <NFadeInExpandTransition group>
             {{
               default: () =>
                 this.mergedFileList.map((file) => (
-                  <NUploadFile clsPrefix={cPrefix} key={file.id} file={file} />
+                  <NUploadFile
+                    clsPrefix={mergedClsPrefix}
+                    key={file.id}
+                    file={file}
+                  />
                 ))
             }}
           </NFadeInExpandTransition>

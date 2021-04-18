@@ -15,7 +15,7 @@ export interface ModalInjection {
     x: number
     y: number
   } | null
-  cPrefixRef: Ref<string>
+  mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<ModalTheme>>
   isMountedRef: Ref<boolean>
   appearRef: Ref<boolean | undefined>

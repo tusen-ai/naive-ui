@@ -290,7 +290,7 @@ export default defineComponent({
       }
     }
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       mergedTheme: themeRef,
       // data
       tmNodes: tmNodesRef,
@@ -364,7 +364,7 @@ export default defineComponent({
         trigger: this.$slots.default,
         default: () => {
           return h(NDropdownMenu, {
-            clsPrefix: this.cPrefix,
+            clsPrefix: this.mergedClsPrefix,
             tmNodes: this.tmNodes,
             style: this.cssVars as CSSProperties
           })

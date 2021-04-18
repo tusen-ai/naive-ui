@@ -29,7 +29,7 @@ ExtractPropTypes<typeof notificationEnvOptions>
 >
 
 export interface NotificationProviderInjection {
-  cPrefixRef: Ref<string>
+  mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<NotificationTheme>>
 }
 
@@ -136,7 +136,7 @@ export default defineComponent({
     }
     provide(notificationApiInjectionKey, api)
     provide(notificationProviderInjectionKey, {
-      cPrefixRef: mergedClsPrefix,
+      mergedClsPrefixRef: mergedClsPrefix,
       mergedThemeRef: themeRef
     })
     // deprecated
@@ -145,7 +145,7 @@ export default defineComponent({
     }
     return Object.assign(
       {
-        cPrefix: mergedClsPrefix,
+        mergedClsPrefix,
         notificationList: notificationListRef,
         notificationRefs,
         handleAfterLeave

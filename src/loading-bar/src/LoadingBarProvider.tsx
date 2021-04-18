@@ -46,7 +46,7 @@ export type LoadingBarProviderSetupProps = ExtractPropTypes<
 
 export const loadingBarProviderInjectionKey: InjectionKey<{
   props: LoadingBarProviderSetupProps
-  cPrefixRef: Ref<string>
+  mergedClsPrefixRef: Ref<string>
 }> = Symbol('loadingBar')
 
 export const loadingBarApiInjectionKey: InjectionKey<LoadingBarApiInjection> = Symbol(
@@ -92,7 +92,7 @@ export default defineComponent({
     provide(loadingBarApiInjectionKey, methods)
     provide(loadingBarProviderInjectionKey, {
       props,
-      cPrefixRef: mergedClsPrefix
+      mergedClsPrefixRef: mergedClsPrefix
     })
     return Object.assign(methods, {
       loadingBarRef

@@ -186,7 +186,7 @@ export default defineComponent({
     })
     return {
       mergedTheme: themeRef,
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
@@ -216,7 +216,7 @@ export default defineComponent({
   render () {
     return (
       <div
-        class={`${this.cPrefix}-collapse`}
+        class={`${this.mergedClsPrefix}-collapse`}
         style={this.cssVars as CSSProperties}
       >
         {this.$slots}

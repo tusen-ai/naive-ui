@@ -136,10 +136,12 @@ export default defineComponent({
       toggleCheckbox
     })
     return {
-      cPrefix: mergedClsPrefix
+      mergedClsPrefix
     }
   },
   render () {
-    return <div class={`${this.cPrefix}-checkbox-group`}>{this.$slots}</div>
+    return (
+      <div class={`${this.mergedClsPrefix}-checkbox-group`}>{this.$slots}</div>
+    )
   }
 })

@@ -322,7 +322,7 @@ export default defineComponent({
       internalValidate
     }
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       mergedRequired: mergedRequiredRef,
       hasFeedback: hasFeedbackRef,
       feedbackId: feedbackIdRef,
@@ -377,20 +377,20 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots, cPrefix } = this
+    const { $slots, mergedClsPrefix } = this
     return (
       <div
         class={[
-          `${cPrefix}-form-item`,
-          `${cPrefix}-form-item--${this.mergedSize}-size`,
-          `${cPrefix}-form-item--${this.mergedLabelPlacement}-labelled`,
-          this.label === false && `${cPrefix}-form-item--no-label`
+          `${mergedClsPrefix}-form-item`,
+          `${mergedClsPrefix}-form-item--${this.mergedSize}-size`,
+          `${mergedClsPrefix}-form-item--${this.mergedLabelPlacement}-labelled`,
+          this.label === false && `${mergedClsPrefix}-form-item--no-label`
         ]}
         style={this.cssVars as CSSProperties}
       >
         {this.label || $slots.label ? (
           <label
-            class={`${cPrefix}-form-item-label`}
+            class={`${mergedClsPrefix}-form-item-label`}
             style={this.mergedLabelStyle as any}
           >
             {renderSlot($slots, 'label', undefined, () => [this.label])}
@@ -399,7 +399,7 @@ export default defineComponent({
                 ? this.mergedShowRequireMark
                 : this.mergedRequired
             ) ? (
-                <span class={`${cPrefix}-form-item-label__asterisk`}>
+                <span class={`${mergedClsPrefix}-form-item-label__asterisk`}>
                 &nbsp;*
                 </span>
               ) : null}
@@ -408,9 +408,9 @@ export default defineComponent({
 
         <div
           class={[
-            `${cPrefix}-form-item-blank`,
+            `${mergedClsPrefix}-form-item-blank`,
             this.mergedValidationStatus &&
-              `${cPrefix}-form-item-blank--${this.mergedValidationStatus}`
+              `${mergedClsPrefix}-form-item-blank--${this.mergedValidationStatus}`
           ]}
         >
           {$slots}
@@ -418,14 +418,14 @@ export default defineComponent({
         {this.mergedShowFeedback ? (
           <div
             key={this.feedbackId}
-            class={`${cPrefix}-form-item-feedback-wrapper`}
+            class={`${mergedClsPrefix}-form-item-feedback-wrapper`}
           >
             <Transition name="n-fade-down-transition" mode="out-in">
               {{
                 default: () => {
                   const feedbacks = (
                     <Feedbacks
-                      clsPrefix={cPrefix}
+                      clsPrefix={mergedClsPrefix}
                       explains={this.explains}
                       feedback={this.feedback}
                     />
@@ -435,28 +435,28 @@ export default defineComponent({
                     mergedValidationStatus === 'warning' ? (
                       <div
                         key="controlled-warning"
-                        class={`${cPrefix}-form-item-feedback ${cPrefix}-form-item-feedback--warning`}
+                        class={`${mergedClsPrefix}-form-item-feedback ${mergedClsPrefix}-form-item-feedback--warning`}
                       >
                         {feedbacks}
                       </div>
                     ) : mergedValidationStatus === 'error' ? (
                       <div
                         key="controlled-error"
-                        class={`${cPrefix}-form-item-feedback ${cPrefix}-form-item-feedback--error`}
+                        class={`${mergedClsPrefix}-form-item-feedback ${mergedClsPrefix}-form-item-feedback--error`}
                       >
                         {feedbacks}
                       </div>
                     ) : mergedValidationStatus === 'success' ? (
                       <div
                         key="controlled-success"
-                        class={`${cPrefix}-form-item-feedback ${cPrefix}-form-item-feedback--success`}
+                        class={`${mergedClsPrefix}-form-item-feedback ${mergedClsPrefix}-form-item-feedback--success`}
                       >
                         {feedbacks}
                       </div>
                     ) : (
                       <div
                         key="controlled-default"
-                        class={`${cPrefix}-form-item-feedback`}
+                        class={`${mergedClsPrefix}-form-item-feedback`}
                       >
                         {feedbacks}
                       </div>

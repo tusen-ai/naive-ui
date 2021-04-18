@@ -50,7 +50,7 @@ const radioProps = {
 } as const
 
 export interface RadioGroupInjection {
-  cPrefixRef: Ref<string>
+  mergedClsPrefixRef: Ref<string>
   nameRef: Ref<string | undefined>
   valueRef: Ref<string | number | null>
   mergedSizeRef: Ref<'small' | 'medium' | 'large'>
@@ -63,7 +63,7 @@ export const radioGroupInjectionKey: InjectionKey<RadioGroupInjection> = Symbol(
 )
 
 export interface UseRadio {
-  cPrefix: Ref<string>
+  mergedClsPrefix: Ref<string>
   inputRef: Ref<HTMLElement | null>
   labelRef: Ref<HTMLElement | null>
   mergedName: Ref<string | undefined>
@@ -168,8 +168,8 @@ function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
     inputRef.value?.click()
   }
   return {
-    cPrefix: NRadioGroup
-      ? NRadioGroup.cPrefixRef
+    mergedClsPrefix: NRadioGroup
+      ? NRadioGroup.mergedClsPrefixRef
       : useConfig(props).mergedClsPrefix,
     inputRef,
     labelRef,

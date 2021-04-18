@@ -26,7 +26,7 @@ export default defineComponent({
   setup (props) {
     const { source } = props
     const {
-      cPrefixRef,
+      mergedClsPrefixRef,
       mergedThemeRef,
       srcCheckedValuesRef,
       tgtCheckedValuesRef,
@@ -49,26 +49,33 @@ export default defineComponent({
         }
       }
     return {
-      cPrefix: cPrefixRef,
+      mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: mergedThemeRef,
       checked: checkedRef,
       handleClick
     }
   },
   render () {
-    const { disabled, mergedTheme, cPrefix, label, checked, source } = this
+    const {
+      disabled,
+      mergedTheme,
+      mergedClsPrefix,
+      label,
+      checked,
+      source
+    } = this
     return (
       <div
         class={[
-          `${cPrefix}-transfer-list-item`,
-          disabled && `${cPrefix}-transfer-list-item--disabled`,
+          `${mergedClsPrefix}-transfer-list-item`,
+          disabled && `${mergedClsPrefix}-transfer-list-item--disabled`,
           source
-            ? `${cPrefix}-transfer-list-item--source`
-            : `${cPrefix}-transfer-list-item--target`
+            ? `${mergedClsPrefix}-transfer-list-item--source`
+            : `${mergedClsPrefix}-transfer-list-item--target`
         ]}
         onClick={this.handleClick}
       >
-        <div class={`${cPrefix}-transfer-list-item__checkbox`}>
+        <div class={`${mergedClsPrefix}-transfer-list-item__checkbox`}>
           <NCheckbox
             theme={mergedTheme.peers.Checkbox}
             themeOverrides={mergedTheme.peerOverrides.Checkbox}
@@ -76,7 +83,9 @@ export default defineComponent({
             checked={checked}
           />
         </div>
-        <div class={`${cPrefix}-transfer-list-item__label`}>{label}</div>
+        <div class={`${mergedClsPrefix}-transfer-list-item__label`}>
+          {label}
+        </div>
       </div>
     )
   }

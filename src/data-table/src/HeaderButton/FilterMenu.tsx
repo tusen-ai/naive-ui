@@ -119,9 +119,9 @@ export default defineComponent({
   },
   render () {
     const { NDataTable } = this
-    const { mergedTheme, locale, cPrefix } = NDataTable
+    const { mergedTheme, locale, mergedClsPrefix } = NDataTable
     return (
-      <div class={`${cPrefix}-data-table-filter-menu`}>
+      <div class={`${mergedClsPrefix}-data-table-filter-menu`}>
         <NScrollbar>
           {{
             default: () => {
@@ -129,7 +129,7 @@ export default defineComponent({
               return this.multiple ? (
                 <NCheckboxGroup
                   value={checkboxGroupValue}
-                  class={`${cPrefix}-data-table-filter-menu__group`}
+                  class={`${mergedClsPrefix}-data-table-filter-menu__group`}
                   onUpdateValue={handleChange}
                 >
                   {{
@@ -151,7 +151,7 @@ export default defineComponent({
               ) : (
                 <NRadioGroup
                   name={this.radioGroupName}
-                  class={`${cPrefix}-data-table-filter-menu__group`}
+                  class={`${mergedClsPrefix}-data-table-filter-menu__group`}
                   value={this.radioGroupValue}
                   onUpdateValue={this.handleChange}
                 >
@@ -173,7 +173,7 @@ export default defineComponent({
             }
           }}
         </NScrollbar>
-        <div class={`${cPrefix}-data-table-filter-menu__action`}>
+        <div class={`${mergedClsPrefix}-data-table-filter-menu__action`}>
           <NButton
             size="tiny"
             theme={mergedTheme.peers.Button}

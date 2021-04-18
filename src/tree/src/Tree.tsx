@@ -450,7 +450,7 @@ export default defineComponent({
       handleCheck
     })
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       tmNodes: computed(() => treeMateRef.value.treeNodes),
       cssVars: computed(() => {
         const {
@@ -483,11 +483,18 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
-      <div class={`${cPrefix}-tree`} style={this.cssVars as CSSProperties}>
+      <div
+        class={`${mergedClsPrefix}-tree`}
+        style={this.cssVars as CSSProperties}
+      >
         {this.tmNodes.map((tmNode) => (
-          <NTreeNode key={tmNode.key} tmNode={tmNode} clsPrefix={cPrefix} />
+          <NTreeNode
+            key={tmNode.key}
+            tmNode={tmNode}
+            clsPrefix={mergedClsPrefix}
+          />
         ))}
       </div>
     )

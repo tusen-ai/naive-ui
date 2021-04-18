@@ -171,7 +171,7 @@ export default defineComponent({
       }
     }
     return Object.assign(formItem, {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       mergedDisabled: mergedDisabledRef,
       renderedChecked: renderedCheckedRef,
       mergedTheme: themeRef,
@@ -246,7 +246,7 @@ export default defineComponent({
       tableHeader,
       cssVars,
       label,
-      cPrefix,
+      mergedClsPrefix,
       handleKeyUp,
       handleKeyDown,
       handleClick
@@ -254,12 +254,12 @@ export default defineComponent({
     return (
       <div
         class={[
-          `${cPrefix}-checkbox`,
+          `${mergedClsPrefix}-checkbox`,
           {
-            [`${cPrefix}-checkbox--checked`]: renderedChecked,
-            [`${cPrefix}-checkbox--disabled`]: mergedDisabled,
-            [`${cPrefix}-checkbox--indeterminate`]: indeterminate,
-            [`${cPrefix}-checkbox--table-header`]: tableHeader
+            [`${mergedClsPrefix}-checkbox--checked`]: renderedChecked,
+            [`${mergedClsPrefix}-checkbox--disabled`]: mergedDisabled,
+            [`${mergedClsPrefix}-checkbox--indeterminate`]: indeterminate,
+            [`${mergedClsPrefix}-checkbox--table-header`]: tableHeader
           }
         ]}
         tabindex={mergedDisabled ? undefined : 0}
@@ -268,25 +268,28 @@ export default defineComponent({
         onKeydown={handleKeyDown}
         onClick={handleClick}
       >
-        <div class={`${cPrefix}-checkbox-box`}>
+        <div class={`${mergedClsPrefix}-checkbox-box`}>
           <NIconSwitchTransition>
             {{
               default: () =>
                 this.indeterminate ? (
-                  <div key="indeterminate" class={`${cPrefix}-checkbox-icon`}>
+                  <div
+                    key="indeterminate"
+                    class={`${mergedClsPrefix}-checkbox-icon`}
+                  >
                     {LineMark}
                   </div>
                 ) : (
-                  <div key="check" class={`${cPrefix}-checkbox-icon`}>
+                  <div key="check" class={`${mergedClsPrefix}-checkbox-icon`}>
                     {CheckMark}
                   </div>
                 )
             }}
           </NIconSwitchTransition>
-          <div class={`${cPrefix}-checkbox-box__border`} />
+          <div class={`${mergedClsPrefix}-checkbox-box__border`} />
         </div>
         {label !== null || $slots.default ? (
-          <span class={`${cPrefix}-checkbox__label`}>
+          <span class={`${mergedClsPrefix}-checkbox__label`}>
             {renderSlot($slots, 'default', undefined, () => [label])}
           </span>
         ) : null}

@@ -14,11 +14,11 @@ export default defineComponent({
     const { mergedClsPrefix } = useConfig(props)
     useStyle('InputGroup', style, mergedClsPrefix)
     return {
-      cPrefix: mergedClsPrefix
+      mergedClsPrefix
     }
   },
   render () {
-    const { cPrefix } = this
-    return <div class={`${cPrefix}-input-group`}>{this.$slots}</div>
+    const { mergedClsPrefix } = this
+    return <div class={`${mergedClsPrefix}-input-group`}>{this.$slots}</div>
   }
 })

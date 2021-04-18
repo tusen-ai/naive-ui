@@ -126,7 +126,7 @@ export default defineComponent({
     )
     return {
       mergedTheme: NTimePicker.mergedTheme,
-      cPrefix: NTimePicker.cPrefix,
+      mergedClsPrefix: NTimePicker.mergedClsPrefix,
       hours: hoursRef,
       minutes: minutesRef,
       seconds: secondsRef,
@@ -136,25 +136,26 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix, mergedTheme } = this
+    const { mergedClsPrefix, mergedTheme } = this
     return h(
       'div',
       {
         tabindex: 0,
-        class: `${cPrefix}-time-picker-panel`,
+        class: `${mergedClsPrefix}-time-picker-panel`,
         onFocusin: this.onFocusin,
         onFocusout: this.onFocusout,
         onKeydown: this.onKeydown
       },
       [
-        <div class={`${cPrefix}-time-picker-cols`}>
+        <div class={`${mergedClsPrefix}-time-picker-cols`}>
           {this.showHour ? (
             <div
               class={[
-                `${cPrefix}-time-picker-col`,
+                `${mergedClsPrefix}-time-picker-col`,
                 {
-                  [`${cPrefix}-time-picker-col--invalid`]: this.isHourInvalid,
-                  [`${cPrefix}-time-picker-col--transition-disabled`]: this
+                  [`${mergedClsPrefix}-time-picker-col--invalid`]: this
+                    .isHourInvalid,
+                  [`${mergedClsPrefix}-time-picker-col--transition-disabled`]: this
                     .transitionDisabled
                 }
               ]}
@@ -167,12 +168,14 @@ export default defineComponent({
                 {{
                   default: () => [
                     <PanelCol
-                      clsPrefix={cPrefix}
+                      clsPrefix={mergedClsPrefix}
                       data={this.hours}
                       activeValue={this.hourValue}
                       onItemClick={this.onHourClick}
                     />,
-                    <div class={`${cPrefix}-time-picker-col__padding`} />
+                    <div
+                      class={`${mergedClsPrefix}-time-picker-col__padding`}
+                    />
                   ]
                 }}
               </NScrollbar>
@@ -181,11 +184,12 @@ export default defineComponent({
           {this.showMinute ? (
             <div
               class={[
-                `${cPrefix}-time-picker-col`,
+                `${mergedClsPrefix}-time-picker-col`,
                 {
-                  [`${cPrefix}-time-picker-col--transition-disabled`]: this
+                  [`${mergedClsPrefix}-time-picker-col--transition-disabled`]: this
                     .transitionDisabled,
-                  [`${cPrefix}-time-picker-col--invalid`]: this.isMinuteInvalid
+                  [`${mergedClsPrefix}-time-picker-col--invalid`]: this
+                    .isMinuteInvalid
                 }
               ]}
             >
@@ -197,12 +201,14 @@ export default defineComponent({
                 {{
                   default: () => [
                     <PanelCol
-                      clsPrefix={cPrefix}
+                      clsPrefix={mergedClsPrefix}
                       data={this.minutes}
                       activeValue={this.minuteValue}
                       onItemClick={this.onMinuteClick}
                     />,
-                    <div class={`${cPrefix}-time-picker-col__padding`} />
+                    <div
+                      class={`${mergedClsPrefix}-time-picker-col__padding`}
+                    />
                   ]
                 }}
               </NScrollbar>
@@ -211,10 +217,11 @@ export default defineComponent({
           {this.showSecond ? (
             <div
               class={[
-                `${cPrefix}-time-picker-col`,
+                `${mergedClsPrefix}-time-picker-col`,
                 {
-                  [`${cPrefix}-time-picker-col--invalid`]: this.isSecondInvalid,
-                  [`${cPrefix}-time-picker-col--transition-disabled`]: this
+                  [`${mergedClsPrefix}-time-picker-col--invalid`]: this
+                    .isSecondInvalid,
+                  [`${mergedClsPrefix}-time-picker-col--transition-disabled`]: this
                     .transitionDisabled
                 }
               ]}
@@ -227,19 +234,21 @@ export default defineComponent({
                 {{
                   default: () => [
                     <PanelCol
-                      clsPrefix={cPrefix}
+                      clsPrefix={mergedClsPrefix}
                       data={this.seconds}
                       activeValue={this.secondValue}
                       onItemClick={this.onSecondClick}
                     />,
-                    <div class={`${cPrefix}-time-picker-col__padding`} />
+                    <div
+                      class={`${mergedClsPrefix}-time-picker-col__padding`}
+                    />
                   ]
                 }}
               </NScrollbar>
             </div>
           ) : null}
         </div>,
-        <div class={`${cPrefix}-time-picker-actions`}>
+        <div class={`${mergedClsPrefix}-time-picker-actions`}>
           <NButton
             size="tiny"
             theme={mergedTheme.peers.Button}
@@ -251,7 +260,7 @@ export default defineComponent({
           <NButton
             size="tiny"
             type="primary"
-            class={`${cPrefix}-time-picker-actions__confirm`}
+            class={`${mergedClsPrefix}-time-picker-actions__confirm`}
             theme={mergedTheme.peers.Button}
             themeOverrides={mergedTheme.peerOverrides.Button}
             disabled={this.isValueInvalid}

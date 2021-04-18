@@ -33,7 +33,7 @@ export default defineComponent({
       mergedClsPrefix
     )
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       cssVars: computed(() => {
         const {
           self: {
@@ -65,7 +65,15 @@ export default defineComponent({
     }
   },
   render () {
-    const { onBack, title, subtitle, extra, cPrefix, cssVars, $slots } = this
+    const {
+      onBack,
+      title,
+      subtitle,
+      extra,
+      mergedClsPrefix,
+      cssVars,
+      $slots
+    } = this
     const {
       title: titleSlot,
       subtitle: subtitleSlot,
@@ -82,15 +90,18 @@ export default defineComponent({
     return (
       <div style={cssVars as CSSProperties}>
         {headerSlot ? (
-          <div class={`${cPrefix}-page-header-header`} key="breadcrumn">
+          <div class={`${mergedClsPrefix}-page-header-header`} key="breadcrumn">
             {headerSlot()}
           </div>
         ) : null}
-        <div class={`${cPrefix}-page-header`} key="header">
-          <div class={`${cPrefix}-page-header__main`} key="back">
+        <div class={`${mergedClsPrefix}-page-header`} key="header">
+          <div class={`${mergedClsPrefix}-page-header__main`} key="back">
             {showBack ? (
-              <div class={`${cPrefix}-page-header__back`} onClick={onBack}>
-                <NBaseIcon clsPrefix={cPrefix}>
+              <div
+                class={`${mergedClsPrefix}-page-header__back`}
+                onClick={onBack}
+              >
+                <NBaseIcon clsPrefix={mergedClsPrefix}>
                   {{
                     default: () => <ArrowBackIcon />
                   }}
@@ -98,32 +109,37 @@ export default defineComponent({
               </div>
             ) : null}
             {avatarSlot ? (
-              <div class={`${cPrefix}-page-header__avatar`}>{avatarSlot()}</div>
+              <div class={`${mergedClsPrefix}-page-header__avatar`}>
+                {avatarSlot()}
+              </div>
             ) : null}
             {showTitle ? (
-              <div class={`${cPrefix}-page-header__title`} key="title">
+              <div class={`${mergedClsPrefix}-page-header__title`} key="title">
                 {title || titleSlot!()}
               </div>
             ) : null}
             {showSubtitle ? (
-              <div class={`${cPrefix}-page-header__subtitle`} key="subtitle">
+              <div
+                class={`${mergedClsPrefix}-page-header__subtitle`}
+                key="subtitle"
+              >
                 {subtitle || subtitleSlot!()}
               </div>
             ) : null}
           </div>
           {showExtra ? (
-            <div class={`${cPrefix}-page-header__extra`}>
+            <div class={`${mergedClsPrefix}-page-header__extra`}>
               {extra || extraSlot!()}
             </div>
           ) : null}
         </div>
         {defaultSlot ? (
-          <div class={`${cPrefix}-page-header-content`} key="content">
+          <div class={`${mergedClsPrefix}-page-header-content`} key="content">
             {defaultSlot()}
           </div>
         ) : null}
         {footerSlot ? (
-          <div class={`${cPrefix}-page-header-footer`} key="footer">
+          <div class={`${mergedClsPrefix}-page-header-footer`} key="footer">
             {footerSlot()}
           </div>
         ) : null}

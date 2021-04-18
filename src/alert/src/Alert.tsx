@@ -141,7 +141,7 @@ export default defineComponent({
       doAfterLeave()
     }
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       visible: visibleRef,
       handleCloseClick,
       handleAfterLeave,
@@ -150,7 +150,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <NFadeInExpandTransition onAfterLeave={this.handleAfterLeave}>
         {{
@@ -160,9 +160,9 @@ export default defineComponent({
                 'div',
                 mergeProps(this.$attrs, {
                   class: [
-                      `${cPrefix}-alert`,
+                      `${mergedClsPrefix}-alert`,
                       {
-                        [`${cPrefix}-alert--show-icon`]: this.showIcon
+                        [`${mergedClsPrefix}-alert--show-icon`]: this.showIcon
                       }
                   ],
                   style: this.cssVars
@@ -170,17 +170,17 @@ export default defineComponent({
                 [
                   this.closable ? (
                     <NBaseClose
-                      clsPrefix={cPrefix}
-                      class={`${cPrefix}-alert__close`}
+                      clsPrefix={mergedClsPrefix}
+                      class={`${mergedClsPrefix}-alert__close`}
                       onClick={this.handleCloseClick}
                     />
                   ) : null,
                   this.showIcon ? (
-                    <div class={`${cPrefix}-alert__icon`}>
+                    <div class={`${mergedClsPrefix}-alert__icon`}>
                       {this.$slots.icon ? (
                         renderSlot(this.$slots, 'icon')
                       ) : (
-                        <NBaseIcon clsPrefix={cPrefix}>
+                        <NBaseIcon clsPrefix={mergedClsPrefix}>
                           {{
                             default: () => {
                               switch (this.type) {
@@ -201,16 +201,16 @@ export default defineComponent({
                       )}
                     </div>
                   ) : null,
-                  <div class={`${cPrefix}-alert-body`}>
+                  <div class={`${mergedClsPrefix}-alert-body`}>
                     {this.title !== undefined ? (
-                      <div class={`${cPrefix}-alert-body__title`}>
+                      <div class={`${mergedClsPrefix}-alert-body__title`}>
                         {renderSlot(this.$slots, 'header', undefined, () => [
                           this.title
                         ])}
                       </div>
                     ) : null}
                     {this.$slots.default ? (
-                      <div class={`${cPrefix}-alert-body__content`}>
+                      <div class={`${mergedClsPrefix}-alert-body__content`}>
                         {this.$slots}
                       </div>
                     ) : null}

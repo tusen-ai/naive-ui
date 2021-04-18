@@ -33,7 +33,7 @@ export type TabPaneSetupProps = ExtractPropTypes<typeof tabPaneProps>
 export type TabPaneProps = ExtractPublicPropTypes<typeof tabPaneProps>
 
 export interface TabsInjection {
-  cPrefixRef: Ref<string>
+  mergedClsPrefixRef: Ref<string>
   valueRef: Ref<string | number | null>
   typeRef: Ref<'line' | 'card'>
   addPanel: (props: TabPaneSetupProps) => void
@@ -56,7 +56,7 @@ export default defineComponent({
       NTab.removePanel(props)
     })
     return {
-      cPrefix: NTab.cPrefixRef,
+      mergedClsPrefix: NTab.mergedClsPrefixRef,
       type: NTab.typeRef,
       value: NTab.valueRef
     }
@@ -69,7 +69,7 @@ export default defineComponent({
         h(
           'div',
           {
-            class: `${this.cPrefix}-tab-panel`,
+            class: `${this.mergedClsPrefix}-tab-panel`,
             key: this.name
           },
           getSlot(this)

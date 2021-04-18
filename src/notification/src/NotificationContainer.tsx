@@ -12,21 +12,21 @@ export default defineComponent({
   },
   setup () {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const { mergedThemeRef, cPrefixRef } = inject(
+    const { mergedThemeRef, mergedClsPrefixRef } = inject(
       notificationProviderInjectionKey
     )!
     return {
       mergedTheme: mergedThemeRef,
-      cPrefix: cPrefixRef
+      mergedClsPrefix: mergedClsPrefixRef
     }
   },
   render () {
-    const { $slots, scrollable, cPrefix, mergedTheme } = this
+    const { $slots, scrollable, mergedClsPrefix, mergedTheme } = this
     return (
       <div
         class={[
-          `${cPrefix}-notification-container`,
-          scrollable && `${cPrefix}-notification-container--scrollable`
+          `${mergedClsPrefix}-notification-container`,
+          scrollable && `${mergedClsPrefix}-notification-container--scrollable`
         ]}
       >
         {scrollable ? (

@@ -37,7 +37,7 @@ export default defineComponent({
 
     if (!NSteps) throwError('step', '`n-step` must be placed inside `n-steps`.')
 
-    const { props: stepsProps, mergedThemeRef, cPrefixRef } = NSteps
+    const { props: stepsProps, mergedThemeRef, mergedClsPrefixRef } = NSteps
 
     const verticalRef = computed(() => {
       return stepsProps.vertical
@@ -63,7 +63,7 @@ export default defineComponent({
       }
     )
     return {
-      cPrefix: cPrefixRef,
+      mergedClsPrefix: mergedClsPrefixRef,
       vertical: verticalRef,
       mergedStatus: mergedStatusRef,
       cssVars: computed(() => {
@@ -105,17 +105,17 @@ export default defineComponent({
   render () {
     const showDescription =
       this.description !== undefined || this.$slots.default
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <div
         class={[
-          `${cPrefix}-step`,
-          showDescription && `${cPrefix}-step--show-description`
+          `${mergedClsPrefix}-step`,
+          showDescription && `${mergedClsPrefix}-step--show-description`
         ]}
         style={this.cssVars as CSSProperties}
       >
-        <div class={`${cPrefix}-step-indicator`}>
-          <div class={`${cPrefix}-step-indicator-slot`}>
+        <div class={`${mergedClsPrefix}-step-indicator`}>
+          <div class={`${mergedClsPrefix}-step-indicator-slot`}>
             <NIconSwitchTransition>
               {{
                 default: () => {
@@ -125,16 +125,16 @@ export default defineComponent({
                   ) ? (
                       <div
                         key={this.internalIndex}
-                        class={`${cPrefix}-step-indicator-slot__index`}
+                        class={`${mergedClsPrefix}-step-indicator-slot__index`}
                       >
                         {this.internalIndex}
                       </div>
                     ) : mergedStatus === 'finish' ? (
-                      <NBaseIcon clsPrefix={cPrefix} key="finish">
+                      <NBaseIcon clsPrefix={mergedClsPrefix} key="finish">
                         {{ default: () => <FinishedIcon /> }}
                       </NBaseIcon>
                     ) : mergedStatus === 'error' ? (
-                      <NBaseIcon clsPrefix={cPrefix} key="error">
+                      <NBaseIcon clsPrefix={mergedClsPrefix} key="error">
                         {{ default: () => <ErrorIcon /> }}
                       </NBaseIcon>
                     ) : null
@@ -142,17 +142,21 @@ export default defineComponent({
               }}
             </NIconSwitchTransition>
           </div>
-          {this.vertical ? <div class={`${cPrefix}-step-splitor`} /> : null}
+          {this.vertical ? (
+            <div class={`${mergedClsPrefix}-step-splitor`} />
+          ) : null}
         </div>
-        <div class={`${cPrefix}-step-content`}>
-          <div class={`${cPrefix}-step-content-header`}>
-            <div class={`${cPrefix}-step-content-header__title`}>
+        <div class={`${mergedClsPrefix}-step-content`}>
+          <div class={`${mergedClsPrefix}-step-content-header`}>
+            <div class={`${mergedClsPrefix}-step-content-header__title`}>
               {this.title}
             </div>
-            {!this.vertical ? <div class={`${cPrefix}-step-splitor`} /> : null}
+            {!this.vertical ? (
+              <div class={`${mergedClsPrefix}-step-splitor`} />
+            ) : null}
           </div>
           {showDescription ? (
-            <div class={`${cPrefix}-step-content__description`}>
+            <div class={`${mergedClsPrefix}-step-content__description`}>
               {renderSlot(this.$slots, 'default', undefined, () => [
                 this.description
               ])}

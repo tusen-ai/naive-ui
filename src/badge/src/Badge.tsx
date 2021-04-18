@@ -80,7 +80,7 @@ export default defineComponent({
       if (showBadgeRef.value) appearedRef.value = true
     })
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       appeared: ref(false),
       showBadge: showBadgeRef,
       handleAfterEnter,
@@ -103,14 +103,14 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <div
         class={[
-          `${cPrefix}-badge`,
+          `${mergedClsPrefix}-badge`,
           {
-            [`${cPrefix}-badge--dot`]: this.dot,
-            [`${cPrefix}-badge--as-is`]: !this.$slots.default
+            [`${mergedClsPrefix}-badge--dot`]: this.dot,
+            [`${mergedClsPrefix}-badge--as-is`]: !this.$slots.default
           }
         ]}
         style={this.cssVars as CSSProperties}
@@ -124,16 +124,18 @@ export default defineComponent({
           {{
             default: () =>
               this.showBadge ? (
-                <sup class={`${cPrefix}-badge-sup`}>
+                <sup class={`${mergedClsPrefix}-badge-sup`}>
                   {!this.dot ? (
                     <NBaseSlotMachine
-                      clsPrefix={cPrefix}
+                      clsPrefix={mergedClsPrefix}
                       appeared={this.appeared}
                       max={this.max}
                       value={this.value}
                     />
                   ) : null}
-                  {this.processing ? <NBaseWave clsPrefix={cPrefix} /> : null}
+                  {this.processing ? (
+                    <NBaseWave clsPrefix={mergedClsPrefix} />
+                  ) : null}
                 </sup>
               ) : null
           }}

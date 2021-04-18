@@ -217,7 +217,7 @@ export default defineComponent({
     })
     return {
       ...useLocale('DynamicInput'),
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       NConfigProvider,
       NFormItem,
       uncontrolledValue: uncontrolledValueRef,
@@ -242,7 +242,7 @@ export default defineComponent({
   },
   render () {
     const {
-      cPrefix,
+      mergedClsPrefix,
       mergedValue,
       locale,
       mergedTheme,
@@ -260,7 +260,7 @@ export default defineComponent({
       ?.buttonSize
     return (
       <div
-        class={`${cPrefix}-dynamic-input`}
+        class={`${mergedClsPrefix}-dynamic-input`}
         style={this.cssVars as CSSProperties}
       >
         {!Array.isArray(mergedValue) || mergedValue.length === 0 ? (
@@ -276,7 +276,7 @@ export default defineComponent({
             {{
               default: () => locale.create,
               icon: () => (
-                <NBaseIcon clsPrefix={cPrefix}>
+                <NBaseIcon clsPrefix={mergedClsPrefix}>
                   {{ default: () => <AddIcon /> }}
                 </NBaseIcon>
               )
@@ -287,7 +287,7 @@ export default defineComponent({
             <div
               key={keyField ? _[keyField] : ensureKey(_, index)}
               data-key={keyField ? _[keyField] : ensureKey(_, index)}
-              class={`${cPrefix}-dynamic-input-item`}
+              class={`${mergedClsPrefix}-dynamic-input-item`}
               style={itemStyle}
             >
               {$slots.default ? (
@@ -297,7 +297,7 @@ export default defineComponent({
                 })
               ) : preset === 'input' ? (
                 <NDynamicInputInputPreset
-                  clsPrefix={cPrefix}
+                  clsPrefix={mergedClsPrefix}
                   value={mergedValue[index]}
                   parentPath={NFormItem ? NFormItem.path.value : undefined}
                   path={
@@ -309,7 +309,7 @@ export default defineComponent({
                 />
               ) : preset === 'pair' ? (
                 <NDynamicInputPairPreset
-                  clsPrefix={cPrefix}
+                  clsPrefix={mergedClsPrefix}
                   value={mergedValue[index]}
                   parentPath={NFormItem ? NFormItem.path.value : undefined}
                   path={
@@ -320,7 +320,7 @@ export default defineComponent({
                   onUpdateValue={(v) => handleValueChange(index, v)}
                 />
               ) : null}
-              <div class={`${cPrefix}-dynamic-input-item__action`}>
+              <div class={`${mergedClsPrefix}-dynamic-input-item__action`}>
                 <NButtonGroup size={buttonSize}>
                   {{
                     default: () => [
@@ -333,7 +333,7 @@ export default defineComponent({
                         >
                           {{
                             icon: () => (
-                              <NBaseIcon clsPrefix={cPrefix}>
+                              <NBaseIcon clsPrefix={mergedClsPrefix}>
                                 {{ default: () => <RemoveIcon /> }}
                               </NBaseIcon>
                             )
@@ -349,7 +349,7 @@ export default defineComponent({
                       >
                         {{
                           icon: () => (
-                            <NBaseIcon clsPrefix={cPrefix}>
+                            <NBaseIcon clsPrefix={mergedClsPrefix}>
                               {{ default: () => <AddIcon /> }}
                             </NBaseIcon>
                           )

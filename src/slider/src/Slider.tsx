@@ -659,7 +659,7 @@ export default defineComponent({
       off('mouseup', document, handleHandleMouseUp)
     })
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       namespace,
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
@@ -773,29 +773,32 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <div
         class={[
-          `${cPrefix}-slider`,
+          `${mergedClsPrefix}-slider`,
           {
-            [`${cPrefix}-slider--disabled`]: this.disabled,
-            [`${cPrefix}-slider--active`]: this.active,
-            [`${cPrefix}-slider--with-mark`]: this.marks
+            [`${mergedClsPrefix}-slider--disabled`]: this.disabled,
+            [`${mergedClsPrefix}-slider--active`]: this.active,
+            [`${mergedClsPrefix}-slider--with-mark`]: this.marks
           }
         ]}
         style={this.cssVars as CSSProperties}
         onKeydown={this.handleKeyDown}
         onClick={this.handleRailClick}
       >
-        <div ref="railRef" class={`${cPrefix}-slider-rail`}>
-          <div class={`${cPrefix}-slider-rail__fill`} style={this.fillStyle} />
+        <div ref="railRef" class={`${mergedClsPrefix}-slider-rail`}>
+          <div
+            class={`${mergedClsPrefix}-slider-rail__fill`}
+            style={this.fillStyle}
+          />
           {this.marks ? (
             <div
               class={[
-                `${cPrefix}-slider-dots`,
+                `${mergedClsPrefix}-slider-dots`,
                 {
-                  [`${cPrefix}-slider-dots--transition-disabled`]: this
+                  [`${mergedClsPrefix}-slider-dots--transition-disabled`]: this
                     .dotTransitionDisabled
                 }
               ]}
@@ -804,9 +807,9 @@ export default defineComponent({
                 <div
                   key={mark.label}
                   class={[
-                    `${cPrefix}-slider-dot`,
+                    `${mergedClsPrefix}-slider-dot`,
                     {
-                      [`${cPrefix}-slider-dot--active`]: mark.active
+                      [`${mergedClsPrefix}-slider-dot--active`]: mark.active
                     }
                   ]}
                   style={mark.style}
@@ -823,7 +826,7 @@ export default defineComponent({
                   default: () => (
                     <div
                       ref="handleRef1"
-                      class={`${cPrefix}-slider-handle`}
+                      class={`${mergedClsPrefix}-slider-handle`}
                       tabindex={0}
                       style={this.firstHandleStyle}
                       onFocus={this.handleHandleFocus1}
@@ -854,7 +857,7 @@ export default defineComponent({
                         default: () =>
                           this.mergedShowTooltip1 ? (
                             <div
-                              class={`${cPrefix}-slider-handle-indicator`}
+                              class={`${mergedClsPrefix}-slider-handle-indicator`}
                               style={this.indicatorCssVars as CSSProperties}
                             >
                               {this.handleValue1}
@@ -877,7 +880,7 @@ export default defineComponent({
                     default: () => (
                       <div
                         ref="handleRef2"
-                        class={`${cPrefix}-slider-handle`}
+                        class={`${mergedClsPrefix}-slider-handle`}
                         tabindex={0}
                         style={this.secondHandleStyle}
                         onFocus={this.handleHandleFocus2}
@@ -908,7 +911,7 @@ export default defineComponent({
                           default: () =>
                             this.mergedShowTooltip2 ? (
                               <div
-                                class={`${cPrefix}-slider-handle-indicator`}
+                                class={`${mergedClsPrefix}-slider-handle-indicator`}
                                 style={this.indicatorCssVars as CSSProperties}
                               >
                                 {this.handleValue2}
@@ -924,11 +927,11 @@ export default defineComponent({
           </VBinder>
         ) : null}
         {this.marks ? (
-          <div class={`${cPrefix}-slider-marks`}>
+          <div class={`${mergedClsPrefix}-slider-marks`}>
             {this.markInfos.map((mark) => (
               <div
                 key={mark.label}
-                class={`${cPrefix}-slider-mark`}
+                class={`${mergedClsPrefix}-slider-mark`}
                 style={mark.style}
               >
                 {mark.label}

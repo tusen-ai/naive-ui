@@ -10,7 +10,7 @@ export const drawerBodyInjectionKey: InjectionKey<DrawerBodyInjection> = Symbol(
 export interface DrawerInjection {
   isMountedRef: Ref<boolean>
   mergedThemeRef: Ref<MergedTheme<DrawerTheme>>
-  cPrefixRef: Ref<string>
+  mergedClsPrefixRef: Ref<string>
 }
 export const drawerInjectionKey: InjectionKey<DrawerInjection> = Symbol(
   'drawer'

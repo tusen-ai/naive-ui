@@ -119,7 +119,10 @@ export default defineComponent({
                       />
                     )
                   })}
-                  <NBaseMenuMask ref="maskInstRef" />
+                  <NBaseMenuMask
+                    clsPrefix={NCascader.mergedClsPrefix}
+                    ref="maskInstRef"
+                  />
                 </div>,
                 [[clickoutside, this.handleClickOutside]]
               )

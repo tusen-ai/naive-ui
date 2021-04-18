@@ -65,7 +65,7 @@ export default defineComponent({
       mergedClsPrefix
     )
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       compitableShow: useCompitable(props, ['spinning', 'show']),
       mergedStrokeWidth: computed(() => {
         const { strokeWidth } = props
@@ -89,16 +89,16 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots, cPrefix } = this
+    const { $slots, mergedClsPrefix } = this
     return $slots.default ? (
       <div
-        class={`${cPrefix}-spin-container`}
+        class={`${mergedClsPrefix}-spin-container`}
         style={this.cssVars as CSSProperties}
       >
         <div
           class={[
-            `${cPrefix}-spin-content`,
-            this.compitableShow && `${cPrefix}-spin-content--spinning`
+            `${mergedClsPrefix}-spin-content`,
+            this.compitableShow && `${mergedClsPrefix}-spin-content--spinning`
           ]}
         >
           {$slots}
@@ -108,10 +108,10 @@ export default defineComponent({
             default: () =>
               this.compitableShow ? (
                 <NBaseLoading
-                  clsPrefix={cPrefix}
+                  clsPrefix={mergedClsPrefix}
                   stroke={this.stroke}
                   strokeWidth={this.mergedStrokeWidth}
-                  class={`${cPrefix}-spin`}
+                  class={`${mergedClsPrefix}-spin`}
                 />
               ) : null
           }}
@@ -119,11 +119,11 @@ export default defineComponent({
       </div>
     ) : (
       <NBaseLoading
-        clsPrefix={cPrefix}
+        clsPrefix={mergedClsPrefix}
         style={this.cssVars as CSSProperties}
         stroke={this.stroke}
         stroke-width={this.mergedStrokeWidth}
-        class={`${cPrefix}-spin`}
+        class={`${mergedClsPrefix}-spin`}
       />
     )
   }

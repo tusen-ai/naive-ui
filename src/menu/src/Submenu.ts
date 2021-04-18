@@ -78,7 +78,7 @@ export default defineComponent({
     }
     return {
       NMenu,
-      cPrefix: NMenu.mergedClsPrefixRef,
+      mergedClsPrefix: NMenu.mergedClsPrefixRef,
       maxIconSize: MenuChild.maxIconSize,
       activeIconSize: MenuChild.activeIconSize,
       iconMarginRight: MenuChild.iconMarginRight,
@@ -108,7 +108,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     const createSubmenuItem = (): VNode => {
       const {
         NMenu,
@@ -134,7 +134,7 @@ export default defineComponent({
         title,
         showArrow: !(NMenu.props.mode === 'horizontal'),
         childActive: childActive,
-        clsPrefix: cPrefix,
+        clsPrefix: mergedClsPrefix,
         icon,
         hover: dropdownShow,
         onClick: handleClick
@@ -148,7 +148,7 @@ export default defineComponent({
             ? h(
               'div',
               {
-                class: `${cPrefix}-submenu-children`
+                class: `${mergedClsPrefix}-submenu-children`
               },
               tmNodes.map((item) => itemRenderer(item))
             )
@@ -178,7 +178,7 @@ export default defineComponent({
             h(
               'div',
               {
-                class: `${cPrefix}-submenu`
+                class: `${mergedClsPrefix}-submenu`
               },
               [
                 createSubmenuItem(),
@@ -192,7 +192,7 @@ export default defineComponent({
       : h(
         'div',
         {
-          class: `${cPrefix}-submenu`
+          class: `${mergedClsPrefix}-submenu`
         },
         [createSubmenuItem(), createSubmenuChildren()]
       )

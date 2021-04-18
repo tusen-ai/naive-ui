@@ -47,22 +47,23 @@ export default defineComponent({
     const {
       mergedRenderSorter,
       mergedSortOrder,
-      NDataTable: { cPrefix }
+      NDataTable: { mergedClsPrefix }
     } = this
     return mergedRenderSorter ? (
       <RenderSorter render={mergedRenderSorter} order={mergedSortOrder} />
     ) : (
       <span
         class={[
-          `${cPrefix}-data-table-sorter`,
+          `${mergedClsPrefix}-data-table-sorter`,
           {
-            [`${cPrefix}-data-table-sorter--asc`]: mergedSortOrder === 'ascend',
-            [`${cPrefix}-data-table-sorter--desc`]:
+            [`${mergedClsPrefix}-data-table-sorter--asc`]:
+              mergedSortOrder === 'ascend',
+            [`${mergedClsPrefix}-data-table-sorter--desc`]:
               mergedSortOrder === 'descend'
           }
         ]}
       >
-        <NBaseIcon clsPrefix={cPrefix}>
+        <NBaseIcon clsPrefix={mergedClsPrefix}>
           {{ default: () => <ArrowDownIcon /> }}
         </NBaseIcon>
       </span>

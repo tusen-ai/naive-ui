@@ -48,7 +48,7 @@ export default defineComponent({
     )
     const { locale } = useLocale('Empty')
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       localizedDescription: computed(() => {
         return props.description || locale.value.description
       }),
@@ -76,25 +76,28 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots, cPrefix } = this
+    const { $slots, mergedClsPrefix } = this
     return (
-      <div class={`${cPrefix}-empty`} style={this.cssVars as CSSProperties}>
-        <div class={`${cPrefix}-empty__icon`}>
+      <div
+        class={`${mergedClsPrefix}-empty`}
+        style={this.cssVars as CSSProperties}
+      >
+        <div class={`${mergedClsPrefix}-empty__icon`}>
           {renderSlot($slots, 'icon', undefined, () => [
-            <NBaseIcon clsPrefix={cPrefix}>
+            <NBaseIcon clsPrefix={mergedClsPrefix}>
               {{ default: () => <EmptyIcon /> }}
             </NBaseIcon>
           ])}
         </div>
         {this.showDescription ? (
-          <div class={`${cPrefix}-empty__description`}>
+          <div class={`${mergedClsPrefix}-empty__description`}>
             {renderSlot($slots, 'default', undefined, () => [
               this.localizedDescription
             ])}
           </div>
         ) : null}
         {$slots.extra ? (
-          <div class={`${cPrefix}-empty__extra`}>
+          <div class={`${mergedClsPrefix}-empty__extra`}>
             {renderSlot($slots, 'extra')}
           </div>
         ) : null}

@@ -63,7 +63,7 @@ export default defineComponent({
       mergedClsPrefix
     )
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       margin: computed<{ horizontal: number, vertical: number }>(() => {
         const { size } = props
         if (Array.isArray(size)) {
@@ -98,7 +98,7 @@ export default defineComponent({
       itemStyle,
       margin,
       wrap,
-      cPrefix
+      mergedClsPrefix
     } = this
     const children = flatten(getSlot(this))
     const horizontalMargin = `${margin.horizontal}px`
@@ -107,7 +107,7 @@ export default defineComponent({
     const lastIndex = children.length - 1
     return (
       <div
-        class={`${cPrefix}-space`}
+        class={`${mergedClsPrefix}-space`}
         style={{
           display: inline ? 'inline-flex' : 'flex',
           flexDirection: vertical ? 'column' : 'row',

@@ -61,7 +61,7 @@ export default defineComponent({
       mergedClsPrefix
     )
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       cssVars: computed(() => {
         const { size, bordered } = props
         const {
@@ -127,7 +127,7 @@ export default defineComponent({
       bordered,
       title,
       cssVars,
-      cPrefix
+      mergedClsPrefix
     } = this
     const filteredChildren: VNode[] = children.filter((child) =>
       isDescriptionsItem(child)
@@ -162,11 +162,14 @@ export default defineComponent({
       if (labelPlacement === 'left') {
         if (bordered) {
           state.row.push(
-            <th class={`${cPrefix}-descriptions-table-header`} colspan={1}>
+            <th
+              class={`${mergedClsPrefix}-descriptions-table-header`}
+              colspan={1}
+            >
               {itemLabel}
             </th>,
             <td
-              class={`${cPrefix}-descriptions-table-content`}
+              class={`${mergedClsPrefix}-descriptions-table-content`}
               colspan={
                 isLastIteration
                   ? (compitableColumn - memorizedSpan) * 2 + 1
@@ -179,20 +182,26 @@ export default defineComponent({
         } else {
           state.row.push(
             <td
-              class={`${cPrefix}-descriptions-table-content`}
+              class={`${mergedClsPrefix}-descriptions-table-content`}
               colspan={
                 isLastIteration
                   ? (compitableColumn - memorizedSpan) * 2
                   : itemSpan * 2
               }
             >
-              <span class={`${cPrefix}-descriptions-table-content__label`}>
+              <span
+                class={`${mergedClsPrefix}-descriptions-table-content__label`}
+              >
                 {[
                   ...itemLabel,
-                  <span class={`${cPrefix}-descriptions-separator`}>:</span>
+                  <span class={`${mergedClsPrefix}-descriptions-separator`}>
+                    :
+                  </span>
                 ]}
               </span>
-              <span class={`${cPrefix}-descriptions-table-content__content`}>
+              <span
+                class={`${mergedClsPrefix}-descriptions-table-content__content`}
+              >
                 {itemChildren}
               </span>
             </td>
@@ -203,12 +212,18 @@ export default defineComponent({
           ? (compitableColumn - memorizedSpan) * 2
           : itemSpan * 2
         state.row.push(
-          <th class={`${cPrefix}-descriptions-table-header`} colspan={colspan}>
+          <th
+            class={`${mergedClsPrefix}-descriptions-table-header`}
+            colspan={colspan}
+          >
             {itemLabel}
           </th>
         )
         state.secondRow.push(
-          <td class={`${cPrefix}-descriptions-table-content`} colspan={colspan}>
+          <td
+            class={`${mergedClsPrefix}-descriptions-table-content`}
+            colspan={colspan}
+          >
             {itemChildren}
           </td>
         )
@@ -229,26 +244,26 @@ export default defineComponent({
       return state
     }, defaultState)
     const rows = itemState.rows.map((row) => (
-      <tr class={`${cPrefix}-descriptions-table-row`}>{row}</tr>
+      <tr class={`${mergedClsPrefix}-descriptions-table-row`}>{row}</tr>
     ))
     return (
       <div
         style={cssVars as CSSProperties}
         class={[
-          `${cPrefix}-descriptions`,
-          `${cPrefix}-descriptions--${labelPlacement}-label-placement`,
-          `${cPrefix}-descriptions--${labelAlign}-label-align`,
-          `${cPrefix}-descriptions--${size}-size`,
-          bordered && `${cPrefix}-descriptions--bordered`
+          `${mergedClsPrefix}-descriptions`,
+          `${mergedClsPrefix}-descriptions--${labelPlacement}-label-placement`,
+          `${mergedClsPrefix}-descriptions--${labelAlign}-label-align`,
+          `${mergedClsPrefix}-descriptions--${size}-size`,
+          bordered && `${mergedClsPrefix}-descriptions--bordered`
         ]}
       >
         {title || this.$slots.header ? (
-          <div class={`${cPrefix}-descriptions-header`}>
+          <div class={`${mergedClsPrefix}-descriptions-header`}>
             {title || getSlot(this, 'header')}
           </div>
         ) : null}
-        <div class={`${cPrefix}-descriptions-table-wrapper`}>
-          <table class={`${cPrefix}-descriptions-table`}>
+        <div class={`${mergedClsPrefix}-descriptions-table-wrapper`}>
+          <table class={`${mergedClsPrefix}-descriptions-table`}>
             <tbody>{rows}</tbody>
           </table>
         </div>

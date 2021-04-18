@@ -55,7 +55,7 @@ export default defineComponent({
     )
     return {
       ...useLegacy(NConfigProvider),
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       namespace,
       cssVars: computed(() => {
         const { common } = themeRef.value
@@ -72,7 +72,7 @@ export default defineComponent({
     const {
       as,
       tag,
-      cPrefix,
+      mergedClsPrefix,
       namespace,
       $slots,
       cssVars,
@@ -85,8 +85,8 @@ export default defineComponent({
       as || tag,
       {
         class: [
-          `${cPrefix}-element`,
-          legacyTheme && `${cPrefix}-${legacyTheme}-theme`
+          `${mergedClsPrefix}-element`,
+          legacyTheme && `${mergedClsPrefix}-${legacyTheme}-theme`
         ],
         style: cssVars
       },

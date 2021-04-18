@@ -99,7 +99,7 @@ export default defineComponent({
   },
   render () {
     const { NDataTable } = this
-    const { mergedTheme, cPrefix } = NDataTable
+    const { mergedTheme, mergedClsPrefix } = NDataTable
     return (
       <NPopover
         show={this.showPopover}
@@ -122,14 +122,16 @@ export default defineComponent({
               <div
                 data-data-table-filter
                 class={[
-                  `${cPrefix}-data-table-filter`,
+                  `${mergedClsPrefix}-data-table-filter`,
                   {
-                    [`${cPrefix}-data-table-filter--active`]: this.active,
-                    [`${cPrefix}-data-table-filter--show`]: this.showPopover
+                    [`${mergedClsPrefix}-data-table-filter--active`]: this
+                      .active,
+                    [`${mergedClsPrefix}-data-table-filter--show`]: this
+                      .showPopover
                   }
                 ]}
               >
-                <NBaseIcon clsPrefix={cPrefix}>
+                <NBaseIcon clsPrefix={mergedClsPrefix}>
                   {{ default: () => <FilterIcon /> }}
                 </NBaseIcon>
               </div>

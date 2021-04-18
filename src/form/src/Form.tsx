@@ -114,14 +114,17 @@ export default defineComponent({
       restoreValidation
     }
     return Object.assign(formExposedMethod, {
-      cPrefix: mergedClsPrefix
+      mergedClsPrefix
     })
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <form
-        class={[`${cPrefix}-form`, this.inline && `${cPrefix}-form--inline`]}
+        class={[
+          `${mergedClsPrefix}-form`,
+          this.inline && `${mergedClsPrefix}-form--inline`
+        ]}
         onSubmit={this.onSubmit}
       >
         {this.$slots}

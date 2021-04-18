@@ -23,7 +23,7 @@ export default defineComponent({
     const imageGroupHandle = inject(imageGroupInjectionKey, null)
     const { mergedClsPrefix } = imageGroupHandle || useConfig(props)
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       groupId: imageGroupHandle?.groupId,
       previewInstRef,
       imageRef,
@@ -43,9 +43,9 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return this.groupId ? (
-      <div class={`${cPrefix}-image`}>
+      <div class={`${mergedClsPrefix}-image`}>
         <img
           class={this.groupId}
           ref="imageRef"
@@ -57,14 +57,14 @@ export default defineComponent({
       </div>
     ) : (
       <NImagePreview
-        clsPrefix={cPrefix}
+        clsPrefix={mergedClsPrefix}
         ref="previewInstRef"
         showToolbar={this.showToolbar}
       >
         {{
           default: () => {
             return (
-              <div class={`${cPrefix}-image`}>
+              <div class={`${mergedClsPrefix}-image`}>
                 <img
                   ref="imageRef"
                   width={this.width}

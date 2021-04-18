@@ -488,11 +488,11 @@ export default defineComponent({
     })
     provide(timePickerInjectionKey, {
       mergedTheme: themeRef,
-      cPrefix: mergedClsPrefix
+      mergedClsPrefix
     })
     return {
       mergedBordered,
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       namespace,
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
@@ -584,10 +584,10 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <div
-        class={`${cPrefix}-time-picker`}
+        class={`${mergedClsPrefix}-time-picker`}
         style={this.triggerCssVars as CSSProperties}
       >
         <VBinder>
@@ -625,8 +625,8 @@ export default defineComponent({
                         ? {
                           suffix: () => (
                             <NBaseIcon
-                              clsPrefix={cPrefix}
-                              class={`${cPrefix}-time-picker-icon`}
+                              clsPrefix={mergedClsPrefix}
+                              class={`${mergedClsPrefix}-time-picker-icon`}
                             >
                               {{
                                 default: () => <TimeIcon />

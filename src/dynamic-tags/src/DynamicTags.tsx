@@ -139,7 +139,7 @@ export default defineComponent({
       })
     }
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       inputInstRef,
       localizedAdd: localizedAddRef,
       inputSize: inputSizeRef,
@@ -163,10 +163,10 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedTheme, cssVars, cPrefix } = this
+    const { mergedTheme, cssVars, mergedClsPrefix } = this
     return (
       <NSpace
-        class={`${cPrefix}-dynamic-tags`}
+        class={`${mergedClsPrefix}-dynamic-tags`}
         size="small"
         style={cssVars as CSSProperties}
         theme={mergedTheme.peers.Space}
@@ -238,7 +238,7 @@ export default defineComponent({
                   >
                     {{
                       icon: () => (
-                        <NBaseIcon clsPrefix={cPrefix}>
+                        <NBaseIcon clsPrefix={mergedClsPrefix}>
                           {{ default: () => <AddIcon /> }}
                         </NBaseIcon>
                       )

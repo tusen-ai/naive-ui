@@ -64,7 +64,7 @@ export default defineComponent({
     })
     const previewInstRef = ref<ImagePreviewInst | null>(null)
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       previewInstRef,
       next: () => go(1),
       prev: () => go(-1)
@@ -73,7 +73,7 @@ export default defineComponent({
   render () {
     return (
       <NImagePreview
-        clsPrefix={this.cPrefix}
+        clsPrefix={this.mergedClsPrefix}
         ref="previewInstRef"
         onPrev={this.prev}
         onNext={this.next}

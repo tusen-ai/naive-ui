@@ -25,7 +25,7 @@ export default defineComponent({
       tgtCheckedValuesRef,
       mergedThemeRef,
       disabledRef,
-      cPrefixRef
+      mergedClsPrefixRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(transferInjectionKey)!
     const checkboxPropsRef = computed(() => {
@@ -40,10 +40,10 @@ export default defineComponent({
       const { source } = props
       const { value: checkboxProps } = checkboxPropsRef
       const { value: mergedTheme } = mergedThemeRef
-      const { value: cPrefix } = cPrefixRef
+      const { value: mergedClsPrefix } = mergedClsPrefixRef
       return (
-        <div class={`${cPrefix}-transfer-list-header`}>
-          <div class={`${cPrefix}-transfer-list-header__checkbox`}>
+        <div class={`${mergedClsPrefix}-transfer-list-header`}>
+          <div class={`${mergedClsPrefix}-transfer-list-header__checkbox`}>
             <NCheckbox
               theme={mergedTheme.peers.Checkbox}
               themeOverrides={mergedTheme.peerOverrides.Checkbox}
@@ -53,10 +53,10 @@ export default defineComponent({
               onUpdateChecked={props.onChange}
             />
           </div>
-          <div class={`${cPrefix}-transfer-list-header__header`}>
+          <div class={`${mergedClsPrefix}-transfer-list-header__header`}>
             {props.title}
           </div>
-          <div class={`${cPrefix}-transfer-list-header__extra`}>
+          <div class={`${mergedClsPrefix}-transfer-list-header__extra`}>
             {source
               ? srcCheckedValuesRef.value.length
               : tgtCheckedValuesRef.value.length}

@@ -88,7 +88,7 @@ export default defineComponent({
       doUpdateValue(index + 1)
     }
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       mergedValue: useMergedState(controlledValueRef, uncontrolledValueRef),
       hoverIndex: hoverIndexRef,
       handleMouseEnter,
@@ -109,10 +109,10 @@ export default defineComponent({
     }
   },
   render () {
-    const { hoverIndex, mergedValue, cPrefix } = this
+    const { hoverIndex, mergedValue, mergedClsPrefix } = this
     return (
       <div
-        class={`${cPrefix}-rate`}
+        class={`${mergedClsPrefix}-rate`}
         style={this.cssVars as CSSProperties}
         onMouseleave={this.handleMouseLeave}
       >
@@ -120,9 +120,9 @@ export default defineComponent({
           <div
             key={index}
             class={[
-              `${cPrefix}-rate__item`,
+              `${mergedClsPrefix}-rate__item`,
               {
-                [`${cPrefix}-rate__item--active`]:
+                [`${mergedClsPrefix}-rate__item--active`]:
                   hoverIndex !== null
                     ? index <= hoverIndex
                     : index < mergedValue
@@ -131,7 +131,7 @@ export default defineComponent({
             onClick={() => this.handleClick(index)}
             onMouseenter={() => this.handleMouseEnter(index)}
           >
-            <NBaseIcon clsPrefix={cPrefix}>
+            <NBaseIcon clsPrefix={mergedClsPrefix}>
               {{ default: () => StarIcon }}
             </NBaseIcon>
           </div>

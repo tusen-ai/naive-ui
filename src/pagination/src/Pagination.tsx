@@ -264,7 +264,7 @@ export default defineComponent({
       jumperValueRef.value = value
     }
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       locale,
       selfRef,
       jumperRef,
@@ -378,7 +378,7 @@ export default defineComponent({
   render () {
     // it's ok to expand all prop here since no slots' deps
     const {
-      cPrefix,
+      mergedClsPrefix,
       transitionDisabled,
       disabled,
       cssVars,
@@ -409,25 +409,25 @@ export default defineComponent({
       <div
         ref="selfRef"
         class={[
-          `${cPrefix}-pagination`,
+          `${mergedClsPrefix}-pagination`,
           {
-            [`${cPrefix}-pagination--transition-disabled`]: transitionDisabled,
-            [`${cPrefix}-pagination--disabled`]: disabled
+            [`${mergedClsPrefix}-pagination--transition-disabled`]: transitionDisabled,
+            [`${mergedClsPrefix}-pagination--disabled`]: disabled
           }
         ]}
         style={cssVars as CSSProperties}
       >
         <div
           class={[
-            `${cPrefix}-pagination-item ${cPrefix}-pagination-item--button`,
+            `${mergedClsPrefix}-pagination-item ${mergedClsPrefix}-pagination-item--button`,
             {
-              [`${cPrefix}-pagination-item--disabled`]:
+              [`${mergedClsPrefix}-pagination-item--disabled`]:
                 mergedPage <= 1 || mergedPage > compitablePageCount || disabled
             }
           ]}
           onClick={handleBackwardClick}
         >
-          <NBaseIcon clsPrefix={cPrefix}>
+          <NBaseIcon clsPrefix={mergedClsPrefix}>
             {{ default: () => <BackwardIcon /> }}
           </NBaseIcon>
         </div>
@@ -436,10 +436,10 @@ export default defineComponent({
             <div
               key={index}
               class={[
-                `${cPrefix}-pagination-item`,
+                `${mergedClsPrefix}-pagination-item`,
                 {
-                  [`${cPrefix}-pagination-item--active`]: pageItem.active,
-                  [`${cPrefix}-pagination-item--disabled`]: disabled
+                  [`${mergedClsPrefix}-pagination-item--active`]: pageItem.active,
+                  [`${mergedClsPrefix}-pagination-item--disabled`]: disabled
                 }
               ]}
               onClick={() => handlePageItemClick(pageItem)}
@@ -449,22 +449,22 @@ export default defineComponent({
               {pageItem.type === 'page' ? pageItem.label : null}
               {pageItem.type === 'fastBackward' ? (
                 showFastBackward ? (
-                  <NBaseIcon clsPrefix={cPrefix}>
+                  <NBaseIcon clsPrefix={mergedClsPrefix}>
                     {{ default: () => <FastBackwardIcon /> }}
                   </NBaseIcon>
                 ) : (
-                  <NBaseIcon clsPrefix={cPrefix}>
+                  <NBaseIcon clsPrefix={mergedClsPrefix}>
                     {{ default: () => <MoreIcon /> }}
                   </NBaseIcon>
                 )
               ) : null}
               {pageItem.type === 'fastForward' ? (
                 showFastForward ? (
-                  <NBaseIcon clsPrefix={cPrefix}>
+                  <NBaseIcon clsPrefix={mergedClsPrefix}>
                     {{ default: () => <FastForwardIcon /> }}
                   </NBaseIcon>
                 ) : (
-                  <NBaseIcon clsPrefix={cPrefix}>
+                  <NBaseIcon clsPrefix={mergedClsPrefix}>
                     {{ default: () => <MoreIcon /> }}
                   </NBaseIcon>
                 )
@@ -474,15 +474,15 @@ export default defineComponent({
         })}
         <div
           class={[
-            `${cPrefix}-pagination-item ${cPrefix}-pagination-item--button`,
+            `${mergedClsPrefix}-pagination-item ${mergedClsPrefix}-pagination-item--button`,
             {
-              [`${cPrefix}-pagination-item--disabled`]:
+              [`${mergedClsPrefix}-pagination-item--disabled`]:
                 mergedPage < 1 || mergedPage >= compitablePageCount || disabled
             }
           ]}
           onClick={handleForwardClick}
         >
-          <NBaseIcon clsPrefix={cPrefix}>
+          <NBaseIcon clsPrefix={mergedClsPrefix}>
             {{ default: () => <ForwardIcon /> }}
           </NBaseIcon>
         </div>
@@ -499,7 +499,7 @@ export default defineComponent({
           />
         ) : null}
         {showQuickJumper ? (
-          <div class={`${cPrefix}-pagination-quick-jumper`}>
+          <div class={`${mergedClsPrefix}-pagination-quick-jumper`}>
             {locale.goto}
             <NInput
               ref="jumperRef"

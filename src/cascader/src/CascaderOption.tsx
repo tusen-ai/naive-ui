@@ -154,16 +154,17 @@ export default defineComponent({
   },
   render () {
     const { NCascader } = this
-    const { mergedClsPrefix: cPrefix } = NCascader
+    const { mergedClsPrefix } = NCascader
     return (
       <div
         class={[
-          `${cPrefix}-cascader-option`,
+          `${mergedClsPrefix}-cascader-option`,
           {
-            [`${cPrefix}-cascader-option--pending`]:
+            [`${mergedClsPrefix}-cascader-option--pending`]:
               this.keyboardPending || this.hoverPending,
-            [`${cPrefix}-cascader-option--disabled`]: this.disabled,
-            [`${cPrefix}-cascader-option--show-prefix`]: this.showCheckbox
+            [`${mergedClsPrefix}-cascader-option--disabled`]: this.disabled,
+            [`${mergedClsPrefix}-cascader-option--show-prefix`]: this
+              .showCheckbox
           }
         ]}
         onMouseenter={this.mergedHandleMouseEnter}
@@ -171,7 +172,7 @@ export default defineComponent({
         onClick={this.handleClick}
       >
         {this.showCheckbox ? (
-          <div class={`${cPrefix}-cascader-option__prefix`}>
+          <div class={`${mergedClsPrefix}-cascader-option__prefix`}>
             <NCheckbox
               disabled={this.disabled}
               checked={this.checked}
@@ -182,23 +183,25 @@ export default defineComponent({
             />
           </div>
         ) : null}
-        <span class={`${cPrefix}-cascader-option__label`}>{this.label}</span>
-        <div class={`${cPrefix}-cascader-option__suffix`}>
-          <div class={`${cPrefix}-cascader-option-icon-placeholder`}>
+        <span class={`${mergedClsPrefix}-cascader-option__label`}>
+          {this.label}
+        </span>
+        <div class={`${mergedClsPrefix}-cascader-option__suffix`}>
+          <div class={`${mergedClsPrefix}-cascader-option-icon-placeholder`}>
             {!this.isLeaf ? (
               <NBaseLoading
-                clsPrefix={cPrefix}
+                clsPrefix={mergedClsPrefix}
                 scale={0.8}
                 strokeWidth={20}
                 show={this.isLoading}
-                class={`${cPrefix}-cascader-option-icon`}
+                class={`${mergedClsPrefix}-cascader-option-icon`}
               >
                 {{
                   default: () => (
                     <NBaseIcon
-                      clsPrefix={cPrefix}
+                      clsPrefix={mergedClsPrefix}
                       key="arrow"
-                      class={`${cPrefix}-cascader-option-icon ${cPrefix}-cascader-option-icon--arrow`}
+                      class={`${mergedClsPrefix}-cascader-option-icon ${mergedClsPrefix}-cascader-option-icon--arrow`}
                     >
                       {{
                         default: () => <ChevronRightIcon />
@@ -213,8 +216,8 @@ export default defineComponent({
                   default: () =>
                     this.checked ? (
                       <NBaseIcon
-                        clsPrefix={cPrefix}
-                        class={`${cPrefix}-cascader-option-icon ${cPrefix}-cascader-option-icon--checkmark`}
+                        clsPrefix={mergedClsPrefix}
+                        class={`${mergedClsPrefix}-cascader-option-icon ${mergedClsPrefix}-cascader-option-icon--checkmark`}
                       >
                         {{ default: () => <CheckmarkIcon /> }}
                       </NBaseIcon>

@@ -51,7 +51,7 @@ const stepsProps = {
 
 export interface StepsInjection {
   props: ExtractPropTypes<typeof stepsProps>
-  cPrefixRef: Ref<string>
+  mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<StepsTheme>>
 }
 
@@ -75,19 +75,19 @@ export default defineComponent({
     provide(stepsInjectionKey, {
       props,
       mergedThemeRef: themeRef,
-      cPrefixRef: mergedClsPrefix
+      mergedClsPrefixRef: mergedClsPrefix
     })
     return {
-      cPrefix: mergedClsPrefix
+      mergedClsPrefix
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <div
         class={[
-          `${cPrefix}-steps`,
-          this.vertical && `${cPrefix}-steps--vertical`
+          `${mergedClsPrefix}-steps`,
+          this.vertical && `${mergedClsPrefix}-steps--vertical`
         ]}
       >
         {stepsWithIndex(getSlot(this))}

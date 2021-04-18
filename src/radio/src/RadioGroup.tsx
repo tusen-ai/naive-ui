@@ -173,7 +173,7 @@ export default defineComponent({
       uncontrolledValueRef.value = value
     }
     provide(radioGroupInjectionKey, {
-      cPrefixRef: mergedClsPrefix,
+      mergedClsPrefixRef: mergedClsPrefix,
       nameRef: toRef(props, 'name'),
       valueRef: mergedValueRef,
       disabledRef: toRef(props, 'disabled'),
@@ -181,7 +181,7 @@ export default defineComponent({
       doUpdateValue
     })
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       mergedValue: mergedValueRef,
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
@@ -221,17 +221,17 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedValue, cPrefix } = this
+    const { mergedValue, mergedClsPrefix } = this
     const { children, isButtonGroup } = mapSlot(
       flatten(getSlot(this)),
       mergedValue,
-      cPrefix
+      mergedClsPrefix
     )
     return (
       <div
         class={[
-          `${cPrefix}-radio-group`,
-          isButtonGroup && `${cPrefix}-radio-group--button-group`
+          `${mergedClsPrefix}-radio-group`,
+          isButtonGroup && `${mergedClsPrefix}-radio-group--button-group`
         ]}
         style={this.cssVars as CSSProperties}
       >

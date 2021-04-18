@@ -129,7 +129,7 @@ export type TableColumns = TableColumn[]
 
 export interface DataTableInjection {
   hoverKey: RowKey | null
-  cPrefix: string
+  mergedClsPrefix: string
   mergedTheme: MergedTheme<DataTableTheme>
   scrollX?: string | number
   rows: RowItem[][]

@@ -71,7 +71,7 @@ export default defineComponent({
       mergedClsPrefix
     )
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       cssVars: computed(() => {
         const { size, status } = props
         const {
@@ -102,28 +102,33 @@ export default defineComponent({
     }
   },
   render () {
-    const { status, $slots, cPrefix } = this
+    const { status, $slots, mergedClsPrefix } = this
     return (
-      <div class={`${cPrefix}-result`} style={this.cssVars as CSSProperties}>
-        <div class={`${cPrefix}-result-icon`}>
+      <div
+        class={`${mergedClsPrefix}-result`}
+        style={this.cssVars as CSSProperties}
+      >
+        <div class={`${mergedClsPrefix}-result-icon`}>
           {status in imgMap ? (
             imgMap[(status as unknown) as keyof typeof imgMap]
           ) : (
-            <NBaseIcon clsPrefix={cPrefix}>
+            <NBaseIcon clsPrefix={mergedClsPrefix}>
               {{ default: () => iconMap[status as keyof typeof iconMap] }}
             </NBaseIcon>
           )}
         </div>
-        <div class={`${cPrefix}-result-header`}>
-          <div class={`${cPrefix}-result-header__title`}>{this.title}</div>
-          <div class={`${cPrefix}-result-header__description`}>
+        <div class={`${mergedClsPrefix}-result-header`}>
+          <div class={`${mergedClsPrefix}-result-header__title`}>
+            {this.title}
+          </div>
+          <div class={`${mergedClsPrefix}-result-header__description`}>
             {this.description}
           </div>
         </div>
         {$slots.default ? (
-          <div class={`${cPrefix}-result-content`}>{$slots}</div>
+          <div class={`${mergedClsPrefix}-result-content`}>{$slots}</div>
         ) : null}
-        <div class={`${cPrefix}-result-footer`}>
+        <div class={`${mergedClsPrefix}-result-footer`}>
           {renderSlot($slots, 'footer')}
         </div>
       </div>

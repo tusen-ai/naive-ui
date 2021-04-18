@@ -22,7 +22,7 @@ export type Filter = (
 ) => boolean
 
 export interface TransferInjection {
-  cPrefixRef: Ref<string>
+  mergedClsPrefixRef: Ref<string>
   mergedSizeRef: Ref<'small' | 'medium' | 'large'>
   disabledRef: Ref<boolean>
   mergedThemeRef: Ref<MergedTheme<TransferTheme>>

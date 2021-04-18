@@ -49,7 +49,7 @@ export default defineComponent({
     })
     return {
       randomName,
-      cPrefix: clsPrefixRef,
+      mergedClsPrefix: clsPrefixRef,
       collapsed: collapsedRef,
       mergedDisplayDirective: computed<'if' | 'show'>(() => {
         const { displayDirective } = props
@@ -76,28 +76,28 @@ export default defineComponent({
       collapsed,
       title,
       mergedDisplayDirective,
-      cPrefix
+      mergedClsPrefix
     } = this
     const headerNode = renderSlot($slots, 'header', undefined, () => [title])
     return (
       <div
         class={[
-          `${cPrefix}-collapse-item`,
-          `${cPrefix}-collapse-item--${arrowPlacement}-arrow-placement`,
-          !collapsed && `${cPrefix}-collapse-item--active`
+          `${mergedClsPrefix}-collapse-item`,
+          `${mergedClsPrefix}-collapse-item--${arrowPlacement}-arrow-placement`,
+          !collapsed && `${mergedClsPrefix}-collapse-item--active`
         ]}
       >
         <div
           class={[
-            `${cPrefix}-collapse-item__header`,
-            !collapsed && `${cPrefix}-collapse-item__header--active`
+            `${mergedClsPrefix}-collapse-item__header`,
+            !collapsed && `${mergedClsPrefix}-collapse-item__header--active`
           ]}
           onClick={this.handleClick}
         >
           {arrowPlacement === 'right' && headerNode}
-          <div class={`${cPrefix}-collapse-item-arrow`}>
+          <div class={`${mergedClsPrefix}-collapse-item-arrow`}>
             {renderSlot($slots, 'arrow', { collapsed: collapsed }, () => [
-              <NBaseIcon clsPrefix={cPrefix}>
+              <NBaseIcon clsPrefix={mergedClsPrefix}>
                 {{ default: () => <ArrowIcon /> }}
               </NBaseIcon>
             ])}
@@ -105,7 +105,7 @@ export default defineComponent({
           {arrowPlacement === 'left' && headerNode}
         </div>
         <NCollapseItemContent
-          clsPrefix={cPrefix}
+          clsPrefix={mergedClsPrefix}
           displayDirective={mergedDisplayDirective}
           show={!collapsed}
         >

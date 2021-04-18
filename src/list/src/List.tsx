@@ -53,7 +53,7 @@ export default defineComponent({
       mergedClsPrefixRef: mergedClsPrefix
     })
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
@@ -85,23 +85,23 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots, cPrefix } = this
+    const { $slots, mergedClsPrefix } = this
     return (
       <ul
         class={[
-          `${cPrefix}-list`,
-          this.bordered && `${cPrefix}-list--bordered`
+          `${mergedClsPrefix}-list`,
+          this.bordered && `${mergedClsPrefix}-list--bordered`
         ]}
         style={this.cssVars as CSSProperties}
       >
         {$slots.header ? (
-          <div class={`${cPrefix}-list__header`}>
+          <div class={`${mergedClsPrefix}-list__header`}>
             {renderSlot($slots, 'header')}
           </div>
         ) : null}
         {renderSlot($slots, 'default')}
         {$slots.footer ? (
-          <div class={`${cPrefix}-list__footer`}>
+          <div class={`${mergedClsPrefix}-list__footer`}>
             {renderSlot($slots, 'footer')}
           </div>
         ) : null}

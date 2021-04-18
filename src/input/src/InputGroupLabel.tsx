@@ -38,7 +38,7 @@ export default defineComponent({
       mergedClsPrefix
     )
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       mergedBordered,
       cssVars: computed(() => {
         const { size } = props
@@ -68,12 +68,15 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
-      <div class={`${cPrefix}-input-group-label`} style={this.cssVars as any}>
+      <div
+        class={`${mergedClsPrefix}-input-group-label`}
+        style={this.cssVars as any}
+      >
         {renderSlot(this.$slots, 'default')}
         {this.mergedBordered ? (
-          <div class={`${cPrefix}-input-group-label__border`} />
+          <div class={`${mergedClsPrefix}-input-group-label__border`} />
         ) : null}
       </div>
     )

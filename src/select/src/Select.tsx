@@ -637,7 +637,7 @@ export default defineComponent({
       void nextTick(syncPosition)
     })
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       mergedBordered,
       namespace,
       treeMate: treeMateRef,
@@ -686,9 +686,9 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots, cPrefix } = this
+    const { $slots, mergedClsPrefix } = this
     return (
-      <div class={`${cPrefix}-select`}>
+      <div class={`${mergedClsPrefix}-select`}>
         <VBinder>
           {{
             default: () => [
@@ -697,7 +697,7 @@ export default defineComponent({
                   default: () => (
                     <NInternalSelection
                       ref="triggerRef"
-                      clsPrefix={cPrefix}
+                      clsPrefix={mergedClsPrefix}
                       showArrow={this.showArrow}
                       maxTagCount={this.maxTagCount}
                       bordered={this.mergedBordered}
@@ -754,8 +754,8 @@ export default defineComponent({
                           withDirectives(
                             <NInternalSelectMenu
                               ref="menuRef"
-                              class={`${cPrefix}-select-menu`}
-                              clsPrefix={cPrefix}
+                              class={`${mergedClsPrefix}-select-menu`}
+                              clsPrefix={mergedClsPrefix}
                               focusable
                               autoPending={true}
                               theme={this.mergedTheme.peers.InternalSelectMenu}

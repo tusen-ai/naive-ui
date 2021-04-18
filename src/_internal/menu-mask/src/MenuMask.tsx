@@ -5,6 +5,12 @@ import style from './styles/index.cssr'
 
 export default defineComponent({
   name: 'BaseMenuMask',
+  props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    }
+  },
   setup () {
     useStyle('BaseMenuMask', style)
     const messageRef = ref<string | null>(null)
@@ -38,7 +44,9 @@ export default defineComponent({
         {{
           default: () =>
             this.show ? (
-              <div class="n-base-menu-mask">{this.message}</div>
+              <div class={`${this.clsPrefix}-base-menu-mask`}>
+                {this.message}
+              </div>
             ) : null
         }}
       </Transition>

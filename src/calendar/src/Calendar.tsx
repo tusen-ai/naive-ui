@@ -102,7 +102,7 @@ export default defineComponent({
       monthTsRef.value = startOfMonth(now).valueOf()
     }
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       locale: localeRef,
       dateLocale: dateLocaleRef,
       now,
@@ -177,7 +177,7 @@ export default defineComponent({
   render () {
     const {
       isDateDisabled,
-      cPrefix,
+      mergedClsPrefix,
       monthTs,
       cssVars,
       mergedValue,
@@ -196,10 +196,13 @@ export default defineComponent({
       ? `${localeMonth} ${year}`
       : `${year} ${localeMonth}`
     return (
-      <div class={`${cPrefix}-calendar`} style={cssVars as CSSProperties}>
-        <div class={`${cPrefix}-calendar-header`}>
-          <div class={`${cPrefix}-calendar-header__title`}>{title}</div>
-          <div class={`${cPrefix}-calendar-header__extra`}>
+      <div
+        class={`${mergedClsPrefix}-calendar`}
+        style={cssVars as CSSProperties}
+      >
+        <div class={`${mergedClsPrefix}-calendar-header`}>
+          <div class={`${mergedClsPrefix}-calendar-header__title`}>{title}</div>
+          <div class={`${mergedClsPrefix}-calendar-header__extra`}>
             <NButtonGroup>
               {{
                 default: () => (
@@ -213,8 +216,8 @@ export default defineComponent({
                       {{
                         icon: () => (
                           <NBaseIcon
-                            clsPrefix={cPrefix}
-                            class={`${cPrefix}-calendar-prev-btn`}
+                            clsPrefix={mergedClsPrefix}
+                            class={`${mergedClsPrefix}-calendar-prev-btn`}
                           >
                             {{ default: () => <ChevronLeftIcon /> }}
                           </NBaseIcon>
@@ -238,8 +241,8 @@ export default defineComponent({
                       {{
                         icon: () => (
                           <NBaseIcon
-                            clsPrefix={cPrefix}
-                            class={`${cPrefix}-calendar-next-btn`}
+                            clsPrefix={mergedClsPrefix}
+                            class={`${mergedClsPrefix}-calendar-next-btn`}
                           >
                             {{ default: () => <ChevronRightIcon /> }}
                           </NBaseIcon>
@@ -252,7 +255,7 @@ export default defineComponent({
             </NButtonGroup>
           </div>
         </div>
-        <div class={`${cPrefix}-calendar-dates`}>
+        <div class={`${mergedClsPrefix}-calendar-dates`}>
           {this.dateItems.map(
             ({ ts, inCurrentMonth, isCurrentDate }, index) => {
               const disabled = !inCurrentMonth || isDateDisabled?.(ts) === true
@@ -262,10 +265,11 @@ export default defineComponent({
                 <div
                   key={isCurrentDate ? 'current' : index}
                   class={[
-                    `${cPrefix}-calendar-cell`,
-                    disabled && `${cPrefix}-calendar-cell--disabled`,
-                    isCurrentDate && `${cPrefix}-calendar-cell--current`,
-                    selected && `${cPrefix}-calendar-cell--selected`
+                    `${mergedClsPrefix}-calendar-cell`,
+                    disabled && `${mergedClsPrefix}-calendar-cell--disabled`,
+                    isCurrentDate &&
+                      `${mergedClsPrefix}-calendar-cell--current`,
+                    selected && `${mergedClsPrefix}-calendar-cell--selected`
                   ]}
                   onClick={() => {
                     this.doUpdateValue(ts, {
@@ -276,24 +280,24 @@ export default defineComponent({
                     this.monthTs = startOfMonth(ts).valueOf()
                   }}
                 >
-                  <div class={`${cPrefix}-calendar-date`}>
+                  <div class={`${mergedClsPrefix}-calendar-date`}>
                     {disabled ? (
                       <div
-                        class={`${cPrefix}-calendar-date__date`}
+                        class={`${mergedClsPrefix}-calendar-date__date`}
                         key="disabled"
                       >
                         {date}
                       </div>
                     ) : (
                       <div
-                        class={`${cPrefix}-calendar-date__date`}
+                        class={`${mergedClsPrefix}-calendar-date__date`}
                         key="available"
                       >
                         {date}
                       </div>
                     )}
                     {index < 7 && (
-                      <div class={`${cPrefix}-calendar-date__day`}>
+                      <div class={`${mergedClsPrefix}-calendar-date__day`}>
                         {format(ts, 'EEE', {
                           locale
                         })}
@@ -305,7 +309,10 @@ export default defineComponent({
                     month,
                     date
                   })}
-                  <div class={`${cPrefix}-calendar-cell__bar`} key={month} />
+                  <div
+                    class={`${mergedClsPrefix}-calendar-cell__bar`}
+                    key={month}
+                  />
                 </div>
               )
             }

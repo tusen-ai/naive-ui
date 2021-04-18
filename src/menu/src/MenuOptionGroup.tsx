@@ -39,12 +39,12 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const { mergedClsPrefixRef } = inject(menuInjectionKey)!
     return function () {
-      const { value: cPrefix } = mergedClsPrefixRef
+      const { value: mergedClsPrefix } = mergedClsPrefixRef
       const paddingLeft = MenuChild.paddingLeft.value
       return (
-        <div class={`${cPrefix}-menu-item-group`}>
+        <div class={`${mergedClsPrefix}-menu-item-group`}>
           <span
-            class={`${cPrefix}-menu-item-group-title`}
+            class={`${mergedClsPrefix}-menu-item-group-title`}
             style={
               paddingLeft !== undefined
                 ? `padding-left: ${paddingLeft}px;`

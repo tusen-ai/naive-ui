@@ -29,7 +29,7 @@ const timelineProps = {
 export interface TimelineInjection {
   props: ExtractPropTypes<typeof timelineProps>
   mergedThemeRef: Ref<MergedTheme<TimelineTheme>>
-  cPrefixRef: Ref<string>
+  mergedClsPrefixRef: Ref<string>
 }
 export const timelineInjectionKey: InjectionKey<TimelineInjection> = Symbol(
   'timeline'
@@ -40,28 +40,28 @@ export default defineComponent({
   name: 'Timeline',
   props: timelineProps,
   setup (props, { slots }) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefix: mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Timeline',
       'Timeline',
       style,
       timelineLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     provide(timelineInjectionKey, {
       props,
       mergedThemeRef: themeRef,
-      cPrefixRef: mergedClsPrefix
+      mergedClsPrefixRef
     })
     return () => {
-      const { value: cPrefix } = mergedClsPrefix
+      const { value: mergedClsPrefix } = mergedClsPrefixRef
       return (
         <div
           class={[
-            `${cPrefix}-timeline`,
-            `${cPrefix}-timeline--${props.size}-size`,
-            `${cPrefix}-timeline--${props.itemPlacement}-placement`
+            `${mergedClsPrefix}-timeline`,
+            `${mergedClsPrefix}-timeline--${props.size}-size`,
+            `${mergedClsPrefix}-timeline--${props.itemPlacement}-placement`
           ]}
         >
           {slots}

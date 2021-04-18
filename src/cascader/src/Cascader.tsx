@@ -669,7 +669,7 @@ export default defineComponent({
       selectMenuInstRef,
       cascaderMenuInstRef,
       mergedBordered,
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       namespace,
       mergedValue: mergedValueRef,
       mergedShow: mergedShowRef,
@@ -736,9 +736,9 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
-      <div class={`${cPrefix}-cascader`}>
+      <div class={`${mergedClsPrefix}-cascader`}>
         <VBinder>
           {{
             default: () => [
@@ -747,7 +747,7 @@ export default defineComponent({
                   default: () => (
                     <NInternalSelection
                       ref="triggerInstRef"
-                      clsPrefix={cPrefix}
+                      clsPrefix={mergedClsPrefix}
                       maxTagCount={this.maxTagCount}
                       bordered={this.mergedBordered}
                       size={this.mergedSize}

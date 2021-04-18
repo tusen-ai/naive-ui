@@ -187,7 +187,7 @@ export default defineComponent({
     return {
       selfRef,
       waveRef,
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       mergedFocusable: mergedFocusableRef,
       mergedSize: mergedSizeRef,
       showBorder: showBorderRef,
@@ -389,20 +389,20 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots, cPrefix } = this
+    const { $slots, mergedClsPrefix } = this
     return (
       <button
         ref="selfRef"
         class={[
-          `${cPrefix}-button`,
-          `${cPrefix}-button--${this.type}-type`,
+          `${mergedClsPrefix}-button`,
+          `${mergedClsPrefix}-button--${this.type}-type`,
           {
-            [`${cPrefix}-button--disabled`]: this.disabled,
-            [`${cPrefix}-button--block`]: this.block,
-            [`${cPrefix}-button--pressed`]: this.enterPressed,
-            [`${cPrefix}-button--dashed`]: !this.text && this.dashed,
-            [`${cPrefix}-button--color`]: this.color,
-            [`${cPrefix}-button--ghost`]: this.ghost // required for button group border collapse
+            [`${mergedClsPrefix}-button--disabled`]: this.disabled,
+            [`${mergedClsPrefix}-button--block`]: this.block,
+            [`${mergedClsPrefix}-button--pressed`]: this.enterPressed,
+            [`${mergedClsPrefix}-button--dashed`]: !this.text && this.dashed,
+            [`${mergedClsPrefix}-button--color`]: this.color,
+            [`${mergedClsPrefix}-button--ghost`]: this.ghost // required for button group border collapse
           }
         ]}
         tabindex={this.mergedFocusable ? 0 : -1}
@@ -416,14 +416,14 @@ export default defineComponent({
         onKeydown={this.handleKeyDown}
       >
         {$slots.default && this.iconPlacement === 'right' ? (
-          <div class={`${cPrefix}-button__content`}>{$slots}</div>
+          <div class={`${mergedClsPrefix}-button__content`}>{$slots}</div>
         ) : null}
         <NFadeInExpandTransition width>
           {{
             default: () =>
               $slots.icon || this.loading ? (
                 <span
-                  class={`${cPrefix}-button__icon`}
+                  class={`${mergedClsPrefix}-button__icon`}
                   style={{
                     margin: !$slots.default ? 0 : ''
                   }}
@@ -433,13 +433,16 @@ export default defineComponent({
                       default: () =>
                         this.loading ? (
                           <NBaseLoading
-                            clsPrefix={cPrefix}
+                            clsPrefix={mergedClsPrefix}
                             key="loading"
-                            class={`${cPrefix}-icon-slot`}
+                            class={`${mergedClsPrefix}-icon-slot`}
                             strokeWidth={24}
                           />
                         ) : (
-                          <div key="icon" class={`${cPrefix}-icon-slot`}>
+                          <div
+                            key="icon"
+                            class={`${mergedClsPrefix}-icon-slot`}
+                          >
                             {renderSlot($slots, 'icon')}
                           </div>
                         )
@@ -450,18 +453,20 @@ export default defineComponent({
           }}
         </NFadeInExpandTransition>
         {$slots.default && this.iconPlacement === 'left' ? (
-          <span class={`${cPrefix}-button__content`}>{$slots}</span>
+          <span class={`${mergedClsPrefix}-button__content`}>{$slots}</span>
         ) : null}
-        {!this.text ? <NBaseWave ref="waveRef" clsPrefix={cPrefix} /> : null}
+        {!this.text ? (
+          <NBaseWave ref="waveRef" clsPrefix={mergedClsPrefix} />
+        ) : null}
         {this.showBorder ? (
           <div
-            class={`${cPrefix}-button__border`}
+            class={`${mergedClsPrefix}-button__border`}
             style={this.customColorCssVars as CSSProperties}
           />
         ) : null}
         {this.showBorder ? (
           <div
-            class={`${cPrefix}-button__state-border`}
+            class={`${mergedClsPrefix}-button__state-border`}
             style={this.customColorCssVars as CSSProperties}
           />
         ) : null}

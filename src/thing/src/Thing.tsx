@@ -31,14 +31,14 @@ export default defineComponent({
   name: 'Thing',
   props: thingProps,
   setup (props, { slots }) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefix: mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Thing',
       'Thing',
       style,
       thingLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const cssVarsRef = computed(() => {
       const {
@@ -54,27 +54,27 @@ export default defineComponent({
       }
     })
     return () => {
-      const { value: cPrefix } = mergedClsPrefix
+      const { value: mergedClsPrefix } = mergedClsPrefixRef
       return (
         <div
-          class={`${cPrefix}-thing`}
+          class={`${mergedClsPrefix}-thing`}
           style={cssVarsRef.value as CSSProperties}
         >
           {slots.avatar && props.contentIndented ? (
-            <div class={`${cPrefix}-thing-avatar`}>
+            <div class={`${mergedClsPrefix}-thing-avatar`}>
               {renderSlot(slots, 'avatar')}
             </div>
           ) : null}
-          <div class={`${cPrefix}-thing-main`}>
+          <div class={`${mergedClsPrefix}-thing-main`}>
             {!props.contentIndented &&
             (slots.header ||
               props.title ||
               slots['header-extra'] ||
               props.titleExtra ||
               slots.avatar) ? (
-                <div class={`${cPrefix}-thing-avatar-header-wrapper`}>
+                <div class={`${mergedClsPrefix}-thing-avatar-header-wrapper`}>
                   {slots.avatar ? (
-                    <div class={`${cPrefix}-thing-avatar`}>
+                    <div class={`${mergedClsPrefix}-thing-avatar`}>
                       {renderSlot(slots, 'avatar')}
                     </div>
                   ) : null}
@@ -82,17 +82,17 @@ export default defineComponent({
                 props.title ||
                 slots['header-extra'] ||
                 props.titleExtra ? (
-                      <div class={`${cPrefix}-thing-header-wrapper`}>
-                        <div class={`${cPrefix}-thing-header`}>
+                      <div class={`${mergedClsPrefix}-thing-header-wrapper`}>
+                        <div class={`${mergedClsPrefix}-thing-header`}>
                           {slots.header || props.title ? (
-                            <div class={`${cPrefix}-thing-header__title`}>
+                            <div class={`${mergedClsPrefix}-thing-header__title`}>
                               {renderSlot(slots, 'header', undefined, () => [
                                 props.title
                               ])}
                             </div>
                           ) : null}
                           {slots['header-extra'] || props.titleExtra ? (
-                            <div class={`${cPrefix}-thing-header__extra`}>
+                            <div class={`${mergedClsPrefix}-thing-header__extra`}>
                               {renderSlot(slots, 'header-extra', undefined, () => [
                                 props.titleExtra
                               ])}
@@ -100,7 +100,7 @@ export default defineComponent({
                           ) : null}
                         </div>
                         {slots.description || props.description ? (
-                          <div class={`${cPrefix}-thing-main__description`}>
+                          <div class={`${mergedClsPrefix}-thing-main__description`}>
                             {renderSlot(slots, 'description', undefined, () => [
                               props.description
                             ])}
@@ -115,16 +115,16 @@ export default defineComponent({
                 props.title ||
                 slots['header-extra'] ||
                 props.titleExtra ? (
-                      <div class={`${cPrefix}-thing-header`}>
+                      <div class={`${mergedClsPrefix}-thing-header`}>
                         {slots.header || props.title ? (
-                          <div class={`${cPrefix}-thing-header__title`}>
+                          <div class={`${mergedClsPrefix}-thing-header__title`}>
                             {renderSlot(slots, 'header', undefined, () => [
                               props.title
                             ])}
                           </div>
                         ) : null}
                         {slots['header-extra'] || props.titleExtra ? (
-                          <div class={`${cPrefix}-thing-header__extra`}>
+                          <div class={`${mergedClsPrefix}-thing-header__extra`}>
                             {renderSlot(slots, 'header-extra', undefined, () => [
                               props.titleExtra
                             ])}
@@ -133,7 +133,7 @@ export default defineComponent({
                       </div>
                     ) : null}
                   {slots.description || props.description ? (
-                    <div class={`${cPrefix}-thing-main__description`}>
+                    <div class={`${mergedClsPrefix}-thing-main__description`}>
                       {renderSlot(slots, 'description', undefined, () => [
                         props.description
                       ])}
@@ -142,17 +142,17 @@ export default defineComponent({
                 </>
               )}
             {slots.default || props.content ? (
-              <div class={`${cPrefix}-thing-main__content`}>
+              <div class={`${mergedClsPrefix}-thing-main__content`}>
                 {renderSlot(slots, 'default', undefined, () => [props.content])}
               </div>
             ) : null}
             {slots.footer ? (
-              <div class={`${cPrefix}-thing-main__footer`}>
+              <div class={`${mergedClsPrefix}-thing-main__footer`}>
                 {renderSlot(slots, 'footer')}
               </div>
             ) : null}
             {slots.action ? (
-              <div class={`${cPrefix}-thing-main__action`}>
+              <div class={`${mergedClsPrefix}-thing-main__action`}>
                 {renderSlot(slots, 'action')}
               </div>
             ) : null}

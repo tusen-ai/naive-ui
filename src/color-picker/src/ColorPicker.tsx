@@ -119,7 +119,7 @@ export default defineComponent({
 
     const formItemRef = useFormItem(props)
     const { locale: localeRef } = useLocale('global')
-    const { mergedClsPrefix, namespace } = useConfig(props)
+    const { mergedClsPrefix: mergedClsPrefixRef, namespace } = useConfig(props)
 
     const themeRef = useTheme(
       'ColorPicker',
@@ -127,7 +127,7 @@ export default defineComponent({
       style,
       colorPickerLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
 
     provide(colorPickerThemeInjectionKey, themeRef)
@@ -502,18 +502,18 @@ export default defineComponent({
       const { value: displayedHue } = displayedHueRef
       const { internalActions } = props
       const { value: mergedTheme } = themeRef
-      const { value: cPrefix } = mergedClsPrefix
+      const { value: mergedClsPrefix } = mergedClsPrefixRef
       return (
         <div
-          class={`${cPrefix}-color-picker-panel`}
+          class={`${mergedClsPrefix}-color-picker-panel`}
           onDragstart={(e) => {
             e.preventDefault()
           }}
           style={cssVarsRef.value as CSSProperties}
         >
-          <div class={`${cPrefix}-color-picker-control`}>
+          <div class={`${mergedClsPrefix}-color-picker-control`}>
             <Pallete
-              clsPrefix={cPrefix}
+              clsPrefix={mergedClsPrefix}
               rgba={rgba}
               displayedHue={displayedHue}
               displayedSv={displayedSvRef.value}
@@ -521,14 +521,14 @@ export default defineComponent({
               onComplete={handleComplete}
             />
             <HueSlider
-              clsPrefix={cPrefix}
+              clsPrefix={mergedClsPrefix}
               hue={displayedHue}
               onUpdateHue={handleUpdateHue}
               onComplete={handleComplete}
             />
             {props.showAlpha ? (
               <AlphaSlider
-                clsPrefix={cPrefix}
+                clsPrefix={mergedClsPrefix}
                 rgba={rgba}
                 alpha={displayedAlphaRef.value}
                 onUpdateAlpha={handleUpdateAlpha}
@@ -536,7 +536,7 @@ export default defineComponent({
               />
             ) : null}
             <ColorInput
-              clsPrefix={cPrefix}
+              clsPrefix={mergedClsPrefix}
               showAlpha={props.showAlpha}
               mode={displayedModeRef.value}
               onUpdateMode={handleUpdateDisplayedMode}
@@ -546,11 +546,11 @@ export default defineComponent({
             />
           </div>
           {slots.action ? (
-            <div class={`${cPrefix}-color-picker-action`}>
+            <div class={`${mergedClsPrefix}-color-picker-action`}>
               {{ default: slots.action }}
             </div>
           ) : internalActions ? (
-            <div class={`${cPrefix}-color-picker-action`}>
+            <div class={`${mergedClsPrefix}-color-picker-action`}>
               {internalActions.includes('undo') && (
                 <NButton
                   size="small"
@@ -580,7 +580,7 @@ export default defineComponent({
     }
 
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       namespace,
       selfRef,
       hsla: hslaRef,
@@ -601,10 +601,10 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <div
-        class={`${cPrefix}-color-picker`}
+        class={`${mergedClsPrefix}-color-picker`}
         ref="selfRef"
         style={this.cssVars as CSSProperties}
       >
@@ -615,7 +615,7 @@ export default defineComponent({
                 {{
                   default: () => (
                     <ColorPickerTrigger
-                      clsPrefix={cPrefix}
+                      clsPrefix={mergedClsPrefix}
                       value={this.mergedValue}
                       hsla={this.hsla}
                       onClick={this.handleTriggerClick}

@@ -45,7 +45,7 @@ export type DoChange = (
 ) => void
 
 export interface UploadInjection {
-  cPrefixRef: Ref<string>
+  mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<UploadTheme>>
   showCancelButtonRef: Ref<boolean>
   showRemoveButtonRef: Ref<boolean>

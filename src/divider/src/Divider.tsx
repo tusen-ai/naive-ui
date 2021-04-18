@@ -45,7 +45,7 @@ export default defineComponent({
       mergedClsPrefix
     )
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
@@ -61,16 +61,23 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots, titlePlacement, vertical, dashed, cssVars, cPrefix } = this
+    const {
+      $slots,
+      titlePlacement,
+      vertical,
+      dashed,
+      cssVars,
+      mergedClsPrefix
+    } = this
     return (
       <div
         class={[
-          `${cPrefix}-divider`,
+          `${mergedClsPrefix}-divider`,
           {
-            [`${cPrefix}-divider--vertical`]: vertical,
-            [`${cPrefix}-divider--no-title`]: !$slots.default,
-            [`${cPrefix}-divider--dashed`]: dashed,
-            [`${cPrefix}-divider--title-position-${titlePlacement}`]:
+            [`${mergedClsPrefix}-divider--vertical`]: vertical,
+            [`${mergedClsPrefix}-divider--no-title`]: !$slots.default,
+            [`${mergedClsPrefix}-divider--dashed`]: dashed,
+            [`${mergedClsPrefix}-divider--title-position-${titlePlacement}`]:
               $slots.default && titlePlacement
           }
         ]}
@@ -78,14 +85,14 @@ export default defineComponent({
       >
         {!vertical ? (
           <hr
-            class={`${cPrefix}-divider__line ${cPrefix}-divider__line--left`}
+            class={`${mergedClsPrefix}-divider__line ${mergedClsPrefix}-divider__line--left`}
           />
         ) : null}
         {!vertical && $slots.default ? (
           <>
-            <div class={`${cPrefix}-divider__title`}>{this.$slots}</div>
+            <div class={`${mergedClsPrefix}-divider__title`}>{this.$slots}</div>
             <div
-              class={`${cPrefix}-divider__line ${cPrefix}-divider__line--right`}
+              class={`${mergedClsPrefix}-divider__line ${mergedClsPrefix}-divider__line--right`}
             />
           </>
         ) : null}

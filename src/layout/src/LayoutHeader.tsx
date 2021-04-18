@@ -34,7 +34,7 @@ export default defineComponent({
       mergedClsPrefix
     )
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
@@ -49,14 +49,14 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <div
         class={[
-          `${cPrefix}-layout-header`,
+          `${mergedClsPrefix}-layout-header`,
           this.position &&
-            `${cPrefix}-layout-header--${this.position}-positioned`,
-          this.bordered && `${cPrefix}-layout-header--bordered`
+            `${mergedClsPrefix}-layout-header--${this.position}-positioned`,
+          this.bordered && `${mergedClsPrefix}-layout-header--bordered`
         ]}
         style={this.cssVars as CSSProperties}
       >

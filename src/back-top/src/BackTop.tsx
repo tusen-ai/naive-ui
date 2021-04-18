@@ -219,7 +219,7 @@ export default defineComponent({
       scrollTop: scrollTopRef,
       DomInfoReady: DomInfoReadyRef,
       transitionDisabled: transitionDisabledRef,
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       handleAfterEnter,
       handleScroll,
       handleClick,
@@ -260,10 +260,11 @@ export default defineComponent({
     }
   },
   render () {
+    const { mergedClsPrefix } = this
     return (
       <div
         ref="placeholderRef"
-        class="n-back-top-placeholder"
+        class={`${mergedClsPrefix}-back-top-placeholder`}
         style="display: none"
         aria-hidden
       >
@@ -282,9 +283,9 @@ export default defineComponent({
                         'div',
                         mergeProps(this.$attrs, {
                           class: [
-                              `${this.cPrefix}-back-top`,
+                              `${mergedClsPrefix}-back-top`,
                               {
-                                [`${this.cPrefix}-back-top--transition-disabled`]: this
+                                [`${mergedClsPrefix}-back-top--transition-disabled`]: this
                                   .transitionDisabled
                               }
                           ],
@@ -300,7 +301,7 @@ export default defineComponent({
                             'default',
                             undefined,
                             () => [
-                              <NBaseIcon clsPrefix={this.cPrefix}>
+                              <NBaseIcon clsPrefix={mergedClsPrefix}>
                                 {{ default: () => BackTopIcon }}
                               </NBaseIcon>
                             ]

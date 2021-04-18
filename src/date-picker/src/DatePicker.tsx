@@ -405,7 +405,7 @@ export default defineComponent({
     provide(
       datePickerInjectionKey,
       reactive({
-        cPrefix: mergedClsPrefix,
+        mergedClsPrefix,
         mergedTheme: themeRef,
         timePickerSize: timePickerSizeRef,
         locale: locale,
@@ -420,7 +420,7 @@ export default defineComponent({
       })
     )
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       mergedBordered,
       namespace,
       uncontrolledValue: uncontrolledValueRef,
@@ -587,15 +587,15 @@ export default defineComponent({
       actions: this.actions,
       style: this.cssVars as CSSProperties
     }
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <div
         ref="triggerElRef"
         class={[
-          `${cPrefix}-date-picker`,
+          `${mergedClsPrefix}-date-picker`,
           {
-            [`${cPrefix}-date-picker--disabled`]: this.disabled,
-            [`${cPrefix}-date-picker--range`]: this.isRange
+            [`${mergedClsPrefix}-date-picker--disabled`]: this.disabled,
+            [`${mergedClsPrefix}-date-picker--range`]: this.isRange
           }
         ]}
         style={this.triggerCssVars as CSSProperties}
@@ -630,16 +630,16 @@ export default defineComponent({
                         {{
                           separator: () => (
                             <NBaseIcon
-                              clsPrefix={cPrefix}
-                              class={`${cPrefix}-date-picker-icon`}
+                              clsPrefix={mergedClsPrefix}
+                              class={`${mergedClsPrefix}-date-picker-icon`}
                             >
                               {{ default: () => <ToIcon /> }}
                             </NBaseIcon>
                           ),
                           clear: () => (
                             <NBaseIcon
-                              clsPrefix={cPrefix}
-                              class={`${cPrefix}-date-picker-icon`}
+                              clsPrefix={mergedClsPrefix}
+                              class={`${mergedClsPrefix}-date-picker-icon`}
                             >
                               {{ default: () => <DateIcon /> }}
                             </NBaseIcon>
@@ -662,8 +662,8 @@ export default defineComponent({
                         {{
                           clear: () => (
                             <NBaseIcon
-                              clsPrefix={cPrefix}
-                              class={`${cPrefix}-date-picker-icon`}
+                              clsPrefix={mergedClsPrefix}
+                              class={`${mergedClsPrefix}-date-picker-icon`}
                             >
                               {{ default: () => <DateIcon /> }}
                             </NBaseIcon>

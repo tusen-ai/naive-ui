@@ -70,7 +70,7 @@ export default defineComponent({
       mergedClsPrefix
     )
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       compatibleType: compatibleTypeRef,
       styleFontSize: styleFontSizeRef,
       styleBgImage: styleBgImageRef,
@@ -96,12 +96,12 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <span
         class={[
-          `${cPrefix}-gradient-text`,
-          `${cPrefix}-gradient-text--${this.compatibleType}-type`
+          `${mergedClsPrefix}-gradient-text`,
+          `${mergedClsPrefix}-gradient-text--${this.compatibleType}-type`
         ]}
         style={[
           {

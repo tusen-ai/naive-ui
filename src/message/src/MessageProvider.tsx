@@ -74,7 +74,7 @@ type MessageProviderSetupProps = ExtractPropTypes<typeof messageProviderProps>
 
 export const messageProviderInjectionKey: InjectionKey<{
   props: MessageProviderSetupProps
-  cPrefixRef: Ref<string>
+  mergedClsPrefixRef: Ref<string>
 }> = Symbol('messageProvider')
 
 export default defineComponent({
@@ -101,7 +101,10 @@ export default defineComponent({
         return create(content, { ...options, type: 'loading' })
       }
     }
-    provide(messageProviderInjectionKey, { props, cPrefixRef: mergedClsPrefix })
+    provide(messageProviderInjectionKey, {
+      props,
+      mergedClsPrefixRef: mergedClsPrefix
+    })
     provide(messageApiInjectionKey, api)
     function create (content: string, options = {}): MessageReactive {
       const key = createId()
@@ -124,7 +127,7 @@ export default defineComponent({
     }
     return Object.assign(
       {
-        cPrefix: mergedClsPrefix,
+        mergedClsPrefix,
         messageRefs,
         messageList: messageListRef,
         handleAfterLeave
@@ -139,7 +142,7 @@ export default defineComponent({
         {this.messageList.length ? (
           <Teleport to={this.to ?? 'body'}>
             <div
-              class={`${this.cPrefix}-message-container`}
+              class={`${this.mergedClsPrefix}-message-container`}
               key="message-container"
             >
               {this.messageList.map((message) => {

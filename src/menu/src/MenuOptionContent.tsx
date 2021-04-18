@@ -66,33 +66,34 @@ export default defineComponent({
     }
   },
   render () {
-    const { clsPrefix: cPrefix } = this
+    const { clsPrefix: mergedClsPrefix } = this
     return (
       <div
         onClick={this.onClick}
         class={[
-          `${cPrefix}-menu-item-content`,
+          `${mergedClsPrefix}-menu-item-content`,
           {
-            [`${cPrefix}-menu-item-content--collapsed`]: this.collapsed,
-            [`${cPrefix}-menu-item-content--child-active`]: this.childActive,
-            [`${cPrefix}-menu-item-content--disabled`]: this.disabled,
-            [`${cPrefix}-menu-item-content--hover`]: this.hover
+            [`${mergedClsPrefix}-menu-item-content--collapsed`]: this.collapsed,
+            [`${mergedClsPrefix}-menu-item-content--child-active`]: this
+              .childActive,
+            [`${mergedClsPrefix}-menu-item-content--disabled`]: this.disabled,
+            [`${mergedClsPrefix}-menu-item-content--hover`]: this.hover
           }
         ]}
         style={this.style}
       >
         {this.icon ? (
           <div
-            class={`${cPrefix}-menu-item-content__icon`}
+            class={`${mergedClsPrefix}-menu-item-content__icon`}
             style={this.iconStyle}
           >
             <Render render={this.icon} />
           </div>
         ) : null}
-        <div class={`${cPrefix}-menu-item-content-header`}>
+        <div class={`${mergedClsPrefix}-menu-item-content-header`}>
           <Render render={this.title} />
           {this.extra ? (
-            <span class={`${cPrefix}-menu-item-content-header__extra`}>
+            <span class={`${mergedClsPrefix}-menu-item-content-header__extra`}>
               {' '}
               <Render render={this.extra} />
             </span>
@@ -100,8 +101,8 @@ export default defineComponent({
         </div>
         {this.showArrow ? (
           <NBaseIcon
-            class={`${cPrefix}-menu-item-content__arrow`}
-            clsPrefix={cPrefix}
+            class={`${mergedClsPrefix}-menu-item-content__arrow`}
+            clsPrefix={mergedClsPrefix}
           >
             {{
               default: () => <ChevronDownFilledIcon />

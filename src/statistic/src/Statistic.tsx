@@ -45,7 +45,7 @@ export default defineComponent({
       mergedClsPrefix
     )
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       cssVars: computed(() => {
         const {
           self: {
@@ -73,27 +73,32 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots, cPrefix } = this
+    const { $slots, mergedClsPrefix } = this
     return (
-      <div class={`${cPrefix}-statistic`} style={this.cssVars as CSSProperties}>
-        <div class={`${cPrefix}-statistic__label`}>
+      <div
+        class={`${mergedClsPrefix}-statistic`}
+        style={this.cssVars as CSSProperties}
+      >
+        <div class={`${mergedClsPrefix}-statistic__label`}>
           {this.label || $slots.label?.()}
         </div>
-        <div class={`${cPrefix}-statistic-value`}>
+        <div class={`${mergedClsPrefix}-statistic-value`}>
           {$slots.prefix ? (
-            <span class={`${cPrefix}-statistic-value__prefix`}>
+            <span class={`${mergedClsPrefix}-statistic-value__prefix`}>
               {renderSlot($slots, 'prefix')}
             </span>
           ) : null}
           {this.value !== undefined ? (
-            <span class={`${cPrefix}-statistic-value__content`}>
+            <span class={`${mergedClsPrefix}-statistic-value__content`}>
               {this.value}
             </span>
           ) : (
-            <span class={`${cPrefix}-statistic-value__content`}>{$slots}</span>
+            <span class={`${mergedClsPrefix}-statistic-value__content`}>
+              {$slots}
+            </span>
           )}
           {$slots.suffix ? (
-            <span class={`${cPrefix}-statistic-value__suffix`}>
+            <span class={`${mergedClsPrefix}-statistic-value__suffix`}>
               {renderSlot($slots, 'suffix')}
             </span>
           ) : null}

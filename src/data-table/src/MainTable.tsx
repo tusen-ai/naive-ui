@@ -103,14 +103,14 @@ export default defineComponent({
   },
   render () {
     const {
-      NDataTable: { cPrefix }
+      NDataTable: { mergedClsPrefix }
     } = this
     return (
       <div
         class={[
-          `${cPrefix}-data-table-base-table`,
+          `${mergedClsPrefix}-data-table-base-table`,
           !this.fixedStateInitialized &&
-            `${cPrefix}-data-table-base-table--transition-disabled`
+            `${mergedClsPrefix}-data-table-base-table--transition-disabled`
         ]}
       >
         <VResizeObserver onResize={this.handleHeaderResize}>

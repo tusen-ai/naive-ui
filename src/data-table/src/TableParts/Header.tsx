@@ -64,7 +64,7 @@ export default defineComponent({
   render () {
     const {
       NDataTable: {
-        cPrefix,
+        mergedClsPrefix,
         scrollX,
         fixedColumnLeftMap,
         fixedColumnRightMap,
@@ -84,12 +84,12 @@ export default defineComponent({
     return (
       <div
         style={headerStyle}
-        class={`${cPrefix}-data-table-base-table-header`}
+        class={`${mergedClsPrefix}-data-table-base-table-header`}
         onScroll={this.onScroll}
       >
         <table
           ref="body"
-          class={`${cPrefix}-data-table-table`}
+          class={`${mergedClsPrefix}-data-table-table`}
           style={{ minWidth: formatLength(scrollX) }}
         >
           <colgroup>
@@ -97,10 +97,10 @@ export default defineComponent({
               <col key={col.key} style={col.style} />
             ))}
           </colgroup>
-          <thead class={`${cPrefix}-data-table-thead`}>
+          <thead class={`${mergedClsPrefix}-data-table-thead`}>
             {rows.map((row) => {
               return (
-                <tr class={`${cPrefix}-data-table-tr`}>
+                <tr class={`${mergedClsPrefix}-data-table-tr`}>
                   {row.map(({ column, colSpan, rowSpan, isLast }) => {
                     const key = getColKey(column)
                     return (
@@ -114,23 +114,23 @@ export default defineComponent({
                         colspan={colSpan}
                         rowspan={rowSpan}
                         class={[
-                          `${cPrefix}-data-table-th`,
+                          `${mergedClsPrefix}-data-table-th`,
                           column.fixed &&
-                            `${cPrefix}-data-table-th--fixed-${column.fixed}`,
+                            `${mergedClsPrefix}-data-table-th--fixed-${column.fixed}`,
                           {
-                            [`${cPrefix}-data-table-th--filterable`]: isColumnFilterable(
+                            [`${mergedClsPrefix}-data-table-th--filterable`]: isColumnFilterable(
                               column
                             ),
-                            [`${cPrefix}-data-table-th--sortable`]: isColumnSortable(
+                            [`${mergedClsPrefix}-data-table-th--sortable`]: isColumnSortable(
                               column
                             ),
-                            [`${cPrefix}-data-table-th--shadow-after`]:
+                            [`${mergedClsPrefix}-data-table-th--shadow-after`]:
                               leftActiveFixedColKey === key,
-                            [`${cPrefix}-data-table-th--shadow-before`]:
+                            [`${mergedClsPrefix}-data-table-th--shadow-before`]:
                               rightActiveFixedColKey === key,
-                            [`${cPrefix}-data-table-th--selection`]:
+                            [`${mergedClsPrefix}-data-table-th--selection`]:
                               column.type === 'selection',
-                            [`${cPrefix}-data-table-th--last`]: isLast
+                            [`${mergedClsPrefix}-data-table-th--last`]: isLast
                           },
                           column.className
                         ]}
@@ -156,7 +156,9 @@ export default defineComponent({
                           />
                         ) : column.ellipsis === true ||
                           (column.ellipsis && !column.ellipsis.tooltip) ? (
-                            <div class={`${cPrefix}-data-table-th__ellipsis`}>
+                            <div
+                              class={`${mergedClsPrefix}-data-table-th__ellipsis`}
+                            >
                               {renderTitle(column)}
                             </div>
                           ) // eslint-disable-next-line @typescript-eslint/prefer-optional-chain

@@ -113,7 +113,7 @@ export default defineComponent({
       overflowRef
     })
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       style: computed<CSSProperties>(() => {
         return {
           width: '100%',
@@ -218,7 +218,7 @@ export default defineComponent({
         'div',
         mergeProps(
           {
-            class: `${this.cPrefix}-grid`,
+            class: `${this.mergedClsPrefix}-grid`,
             style: this.style
           },
           this.$attrs

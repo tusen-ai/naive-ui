@@ -82,7 +82,7 @@ export default defineComponent({
     return {
       textRef,
       selfRef,
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       cssVars: computed(() => {
         const { size, round, circle } = props
         const {
@@ -106,11 +106,11 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots, src, cPrefix } = this
+    const { $slots, src, mergedClsPrefix } = this
     return (
       <span
         ref="selfRef"
-        class={`${cPrefix}-avatar`}
+        class={`${mergedClsPrefix}-avatar`}
         style={this.cssVars as any}
       >
         {!$slots.default && src ? (
@@ -118,7 +118,7 @@ export default defineComponent({
         ) : (
           <span
             ref="textRef"
-            class={`${cPrefix}-avatar__text`}
+            class={`${mergedClsPrefix}-avatar__text`}
             style={{ background: this.color }}
           >
             {$slots}

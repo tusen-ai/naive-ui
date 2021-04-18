@@ -58,11 +58,11 @@ export default defineComponent({
   props: notificationProps,
   setup (props) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const { cPrefixRef, mergedThemeRef } = inject(
+    const { mergedClsPrefixRef, mergedThemeRef } = inject(
       notificationProviderInjectionKey
     )!
     return {
-      cPrefix: cPrefixRef,
+      mergedClsPrefix: mergedClsPrefixRef,
       showAvatar: computed(() => {
         return props.avatar || props.type !== 'default'
       }),
@@ -129,24 +129,24 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <div
         class={[
-          `${cPrefix}-notification`,
+          `${mergedClsPrefix}-notification`,
           {
-            [`${cPrefix}-notification--closable`]: this.closable,
-            [`${cPrefix}-notification--show-avatar`]: this.showAvatar
+            [`${mergedClsPrefix}-notification--closable`]: this.closable,
+            [`${mergedClsPrefix}-notification--show-avatar`]: this.showAvatar
           }
         ]}
         style={this.cssVars as CSSProperties}
       >
         {this.showAvatar ? (
-          <div class={`${cPrefix}-notification__avatar`}>
+          <div class={`${mergedClsPrefix}-notification__avatar`}>
             {this.avatar ? (
               <Render render={this.avatar} />
             ) : this.type !== 'default' ? (
-              <NBaseIcon clsPrefix={cPrefix}>
+              <NBaseIcon clsPrefix={mergedClsPrefix}>
                 {{ default: () => iconMap[this.type] }}
               </NBaseIcon>
             ) : null}
@@ -154,36 +154,40 @@ export default defineComponent({
         ) : null}
         {this.closable ? (
           <NBaseClose
-            clsPrefix={cPrefix}
-            class={`${cPrefix}-notification__close`}
+            clsPrefix={mergedClsPrefix}
+            class={`${mergedClsPrefix}-notification__close`}
             onClick={this.handleCloseClick}
           />
         ) : null}
-        <div ref="bodyRef" class={`${cPrefix}-notification-main`}>
+        <div ref="bodyRef" class={`${mergedClsPrefix}-notification-main`}>
           {this.title ? (
-            <div class={`${cPrefix}-notification-main__header`}>
+            <div class={`${mergedClsPrefix}-notification-main__header`}>
               <Render render={this.title} />
             </div>
           ) : null}
           {this.description ? (
-            <div class={`${cPrefix}-notification-main__description`}>
+            <div class={`${mergedClsPrefix}-notification-main__description`}>
               <Render render={this.description} />
             </div>
           ) : null}
           {this.content ? (
-            <pre class={`${cPrefix}-notification-main__content`}>
+            <pre class={`${mergedClsPrefix}-notification-main__content`}>
               <Render render={this.content} />
             </pre>
           ) : null}
           {this.meta || this.action ? (
-            <div class={`${cPrefix}-notification-main-footer`}>
+            <div class={`${mergedClsPrefix}-notification-main-footer`}>
               {this.meta ? (
-                <div class={`${cPrefix}-notification-main-footer__meta`}>
+                <div
+                  class={`${mergedClsPrefix}-notification-main-footer__meta`}
+                >
                   <Render render={this.meta} />
                 </div>
               ) : null}
               {this.action ? (
-                <div class={`${cPrefix}-notification-main-footer__action`}>
+                <div
+                  class={`${mergedClsPrefix}-notification-main-footer__action`}
+                >
                   <Render render={this.action} />
                 </div>
               ) : null}

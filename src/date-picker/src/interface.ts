@@ -30,7 +30,7 @@ export interface PanelRef {
 }
 
 export type DatePickerInjection = {
-  cPrefix: string
+  mergedClsPrefix: string
   mergedTheme: MergedTheme<DatePickerTheme>
   timePickerSize: 'small' | 'medium' | 'large'
   locale: NLocale['DatePicker']

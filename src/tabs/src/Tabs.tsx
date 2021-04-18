@@ -201,7 +201,7 @@ export default defineComponent({
       }
     }, 64)
     provide(tabsInjectionKey, {
-      cPrefixRef: mergedClsPrefix,
+      mergedClsPrefixRef: mergedClsPrefix,
       typeRef: toRef(props, 'type'),
       valueRef: mergedValueRef,
       removePanel,
@@ -211,7 +211,7 @@ export default defineComponent({
       updateCurrentBarPosition()
     })
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       mergedValue: mergedValueRef,
       labelWrapperRef,
       labelBarRef,
@@ -271,26 +271,29 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <div
         class={[
-          `${cPrefix}-tabs`,
-          `${cPrefix}-tabs--${this.type}-type`,
-          `${cPrefix}-tabs--${this.labelSize}-size`,
-          this.justifyContent && `${cPrefix}-tabs--flex`
+          `${mergedClsPrefix}-tabs`,
+          `${mergedClsPrefix}-tabs--${this.type}-type`,
+          `${mergedClsPrefix}-tabs--${this.labelSize}-size`,
+          this.justifyContent && `${mergedClsPrefix}-tabs--flex`
         ]}
         style={this.cssVars as CSSProperties}
       >
         <VResizeObserver onResize={this.handleNavResize}>
           {{
             default: () => (
-              <VXScroll class={`${cPrefix}-tabs-nav`} style={this.navStyle}>
+              <VXScroll
+                class={`${mergedClsPrefix}-tabs-nav`}
+                style={this.navStyle}
+              >
                 {{
                   default: () => (
                     <div
                       ref="labelWrapperRef"
-                      class={`${cPrefix}-tabs-label-wrapper`}
+                      class={`${mergedClsPrefix}-tabs-label-wrapper`}
                     >
                       <div style={this.labelWrapperStyle}>
                         {this.panels.map((panel, i) => (
@@ -298,24 +301,26 @@ export default defineComponent({
                             key={i}
                             data-name={panel.name}
                             class={[
-                              `${cPrefix}-tabs-label`,
+                              `${mergedClsPrefix}-tabs-label`,
                               {
-                                [`${cPrefix}-tabs-label--active`]:
+                                [`${mergedClsPrefix}-tabs-label--active`]:
                                   this.mergedValue === panel.name,
-                                [`${cPrefix}-tabs-label--disabled`]: panel.disabled
+                                [`${mergedClsPrefix}-tabs-label--disabled`]: panel.disabled
                               }
                             ]}
                             onClick={(e) =>
                               this.handleTabClick(e, panel.name, panel.disabled)
                             }
                           >
-                            <span class={`${cPrefix}-tabs-label__label`}>
+                            <span
+                              class={`${mergedClsPrefix}-tabs-label__label`}
+                            >
                               {panel.label}
                             </span>
                             {this.closable && this.type === 'card' ? (
                               <NBaseClose
-                                clsPrefix={cPrefix}
-                                class={`${cPrefix}-tabs-label__close`}
+                                clsPrefix={mergedClsPrefix}
+                                class={`${mergedClsPrefix}-tabs-label__close`}
                                 onClick={(e) => this.handleCloseClick(e, panel)}
                               />
                             ) : null}
@@ -326,9 +331,9 @@ export default defineComponent({
                         <div
                           ref="labelBarRef"
                           class={[
-                            `${cPrefix}-tabs-label-bar`,
+                            `${mergedClsPrefix}-tabs-label-bar`,
                             {
-                              [`${cPrefix}-tabs-label-bar--transition-disabled`]: this
+                              [`${mergedClsPrefix}-tabs-label-bar--transition-disabled`]: this
                                 .transitionDisabled
                             }
                           ]}

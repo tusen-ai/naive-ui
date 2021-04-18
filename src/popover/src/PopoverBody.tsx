@@ -63,14 +63,14 @@ export default defineComponent({
   inheritAttrs: false,
   props: popoverBodyProps,
   setup (props, { slots, attrs }) {
-    const { namespace, mergedClsPrefix } = useConfig(props)
+    const { namespace, mergedClsPrefix: mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Popover',
       'Popover',
       style,
       popoverLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const followerRef = ref<FollowerRef | null>(null)
     const NPopover = inject<PopoverInjection>('NPopover') as PopoverInjection
@@ -191,7 +191,7 @@ export default defineComponent({
     provide(modalBodyInjectionKey, null)
 
     function renderContentNode (): VNode | null {
-      const cPrefix = mergedClsPrefix.value
+      const mergedClsPrefix = mergedClsPrefixRef.value
       const extraClass = NPopover.extraClassRef.value
       return props.displayDirective === 'show' || props.show
         ? withDirectives(
@@ -200,14 +200,14 @@ export default defineComponent({
             mergeProps(
               {
                 class: [
-                    `${cPrefix}-popover`,
-                    extraClass && `${cPrefix}-${extraClass}`,
+                    `${mergedClsPrefix}-popover`,
+                    extraClass && `${mergedClsPrefix}-${extraClass}`,
                     {
-                      [`${cPrefix}-popover--overlap`]: props.overlap,
-                      [`${cPrefix}-popover--no-arrow`]: !props.showArrow,
-                      [`${cPrefix}-popover--shadow`]: props.shadow,
-                      [`${cPrefix}-popover--padded`]: props.padded,
-                      [`${cPrefix}-popover--raw`]: props.raw
+                      [`${mergedClsPrefix}-popover--overlap`]: props.overlap,
+                      [`${mergedClsPrefix}-popover--no-arrow`]: !props.showArrow,
+                      [`${mergedClsPrefix}-popover--shadow`]: props.shadow,
+                      [`${mergedClsPrefix}-popover--padded`]: props.padded,
+                      [`${mergedClsPrefix}-popover--raw`]: props.raw
                     }
                 ],
                 ref: bodyRef,
@@ -221,11 +221,11 @@ export default defineComponent({
               renderSlot(slots, 'default'),
               props.showArrow ? (
                 <div
-                  class={`${cPrefix}-popover-arrow-wrapper`}
+                  class={`${mergedClsPrefix}-popover-arrow-wrapper`}
                   key="__popover-arrow__"
                 >
                   <div
-                    class={`${cPrefix}-popover-arrow`}
+                    class={`${mergedClsPrefix}-popover-arrow`}
                     style={props.arrowStyle}
                   />
                 </div>

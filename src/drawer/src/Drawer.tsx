@@ -170,10 +170,10 @@ export default defineComponent({
     provide(drawerInjectionKey, {
       isMountedRef: isMountedRef,
       mergedThemeRef: themeRef,
-      cPrefixRef: mergedClsPrefix
+      mergedClsPrefixRef: mergedClsPrefix
     })
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       namespace,
       mergedBodyStyle: mergedBodyStyleRef,
       handleMaskClick,
@@ -202,13 +202,14 @@ export default defineComponent({
     }
   },
   render () {
+    const { mergedClsPrefix } = this
     return (
       <VLazyTeleport to={this.to} show={this.show}>
         {{
           default: () => {
             return withDirectives(
               <div
-                class={[`${this.cPrefix}-drawer-container`, this.namespace]}
+                class={[`${mergedClsPrefix}-drawer-container`, this.namespace]}
                 style={this.cssVars as CSSProperties}
               >
                 <Transition name="n-fade-in-transition" appear={this.isMounted}>
@@ -216,7 +217,7 @@ export default defineComponent({
                     default: () =>
                       this.show ? (
                         <div
-                          class={`${this.cPrefix}-drawer-mask`}
+                          class={`${mergedClsPrefix}-drawer-mask`}
                           onClick={this.handleMaskClick}
                         />
                       ) : null

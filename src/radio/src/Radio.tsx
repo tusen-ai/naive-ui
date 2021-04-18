@@ -23,7 +23,7 @@ export default defineComponent({
       style,
       radioLight,
       props,
-      radio.cPrefix
+      radio.mergedClsPrefix
     )
     return Object.assign(radio, {
       cssVars: computed(() => {
@@ -70,15 +70,15 @@ export default defineComponent({
     })
   },
   render () {
-    const { $slots, cPrefix } = this
+    const { $slots, mergedClsPrefix } = this
     return (
       <div
         class={[
-          `${cPrefix}-radio`,
+          `${mergedClsPrefix}-radio`,
           {
-            [`${cPrefix}-radio--disabled`]: this.mergedDisabled,
-            [`${cPrefix}-radio--checked`]: this.renderSafeChecked,
-            [`${cPrefix}-radio--focus`]: this.focus
+            [`${mergedClsPrefix}-radio--disabled`]: this.mergedDisabled,
+            [`${mergedClsPrefix}-radio--checked`]: this.renderSafeChecked,
+            [`${mergedClsPrefix}-radio--focus`]: this.focus
           }
         ]}
         style={this.cssVars as CSSProperties}
@@ -89,7 +89,7 @@ export default defineComponent({
         <input
           ref="inputRef"
           type="radio"
-          class={`${cPrefix}-radio__radio-input`}
+          class={`${mergedClsPrefix}-radio__radio-input`}
           value={this.value}
           name={this.mergedName}
           checked={this.renderSafeChecked}
@@ -100,12 +100,12 @@ export default defineComponent({
         />
         <div
           class={[
-            `${cPrefix}-radio__dot`,
-            this.renderSafeChecked && `${cPrefix}-radio__dot--checked`
+            `${mergedClsPrefix}-radio__dot`,
+            this.renderSafeChecked && `${mergedClsPrefix}-radio__dot--checked`
           ]}
         />
         {$slots.default ? (
-          <div ref="labelRef" class={`${cPrefix}-radio__label`}>
+          <div ref="labelRef" class={`${mergedClsPrefix}-radio__label`}>
             {$slots.default()}
           </div>
         ) : null}

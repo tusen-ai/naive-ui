@@ -58,7 +58,7 @@ export default defineComponent({
     provide(popoverBodyInjectionKey, null)
     provide(modalBodyInjectionKey, null)
     return {
-      cPrefix: NDrawer.cPrefixRef,
+      mergedClsPrefix: NDrawer.mergedClsPrefixRef,
       isMounted: NDrawer.isMountedRef,
       mergedTheme: NDrawer.mergedThemeRef,
       displayed: displayedRef,
@@ -74,7 +74,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots, cPrefix } = this
+    const { $slots, mergedClsPrefix } = this
     return this.displayDirective === 'show' || this.displayed || this.show
       ? withDirectives(
         <div>
@@ -93,10 +93,10 @@ export default defineComponent({
                     mergeProps(this.$attrs, {
                       ref: 'bodyRef',
                       class: [
-                          `${cPrefix}-drawer`,
-                          `${cPrefix}-drawer--${this.placement}-placement`,
+                          `${mergedClsPrefix}-drawer`,
+                          `${mergedClsPrefix}-drawer--${this.placement}-placement`,
                           {
-                            [`${cPrefix}-drawer--native-scrollbar`]: this
+                            [`${mergedClsPrefix}-drawer--native-scrollbar`]: this
                               .nativeScrollbar
                           }
                       ]
@@ -107,7 +107,7 @@ export default defineComponent({
                       ) : (
                         <NScrollbar
                           {...this.scrollbarProps}
-                          contentClass={`${cPrefix}-drawer-scroll-content`}
+                          contentClass={`${mergedClsPrefix}-drawer-scroll-content`}
                           theme={this.mergedTheme.peers.Scrollbar}
                           themeOverrides={
                             this.mergedTheme.peerOverrides.Scrollbar

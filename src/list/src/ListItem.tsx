@@ -10,23 +10,23 @@ export default defineComponent({
       throwError('list-item', '`n-list-item` must be placed in `n-list`.')
     }
     return {
-      cPrefix: listInjection.mergedClsPrefixRef
+      mergedClsPrefix: listInjection.mergedClsPrefixRef
     }
   },
   render () {
-    const { $slots, cPrefix } = this
+    const { $slots, mergedClsPrefix } = this
     return (
-      <li class={`${cPrefix}-list-item`}>
+      <li class={`${mergedClsPrefix}-list-item`}>
         {$slots.prefix ? (
-          <div class={`${cPrefix}-list-item__prefix`}>
+          <div class={`${mergedClsPrefix}-list-item__prefix`}>
             {renderSlot($slots, 'prefix')}
           </div>
         ) : null}
         {$slots.default ? (
-          <div class={`${cPrefix}-list-item__main`}>{$slots}</div>
+          <div class={`${mergedClsPrefix}-list-item__main`}>{$slots}</div>
         ) : null}
         {$slots.suffix ? (
-          <div class={`${cPrefix}-list-item__suffix`}>
+          <div class={`${mergedClsPrefix}-list-item__suffix`}>
             {renderSlot($slots, 'suffix')}
           </div>
         ) : null}

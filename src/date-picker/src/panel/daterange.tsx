@@ -17,75 +17,78 @@ export default defineComponent({
   },
   render () {
     const { NDatePicker } = this
-    const { cPrefix } = NDatePicker
+    const { mergedClsPrefix } = NDatePicker
     return (
       <div
         ref="selfRef"
         tabindex={0}
-        class={`${cPrefix}-date-panel ${cPrefix}-date-panel--daterange`}
+        class={`${mergedClsPrefix}-date-panel ${mergedClsPrefix}-date-panel--daterange`}
         onClick={this.resetSelectingStatus}
         onKeydown={this.handlePanelKeyDown}
         onFocus={this.handlePanelFocus}
       >
         <div
           ref="startDatesElRef"
-          class={`${cPrefix}-date-panel-calendar ${cPrefix}-date-panel-calendar--start`}
+          class={`${mergedClsPrefix}-date-panel-calendar ${mergedClsPrefix}-date-panel-calendar--start`}
         >
-          <div class={`${cPrefix}-date-panel-month`}>
+          <div class={`${mergedClsPrefix}-date-panel-month`}>
             <div
-              class={`${cPrefix}-date-panel-month__fast-prev`}
+              class={`${mergedClsPrefix}-date-panel-month__fast-prev`}
               onClick={this.startCalendarPrevYear}
             >
               <FastBackwardIcon />
             </div>
             <div
-              class={`${cPrefix}-date-panel-month__prev`}
+              class={`${mergedClsPrefix}-date-panel-month__prev`}
               onClick={this.startCalendarPrevMonth}
             >
               <BackwardIcon />
             </div>
-            <div class={`${cPrefix}-date-panel-month__month-year`}>
+            <div class={`${mergedClsPrefix}-date-panel-month__month-year`}>
               {this.locale.monthBeforeYear
                 ? `${this.startCalendarMonth} ${this.startCalendarYear}`
                 : `${this.startCalendarYear} ${this.startCalendarMonth}`}
             </div>
             <div
-              class={`${cPrefix}-date-panel-month__next`}
+              class={`${mergedClsPrefix}-date-panel-month__next`}
               onClick={this.startCalendarNextMonth}
             >
               <ForwardIcon />
             </div>
             <div
-              class={`${cPrefix}-date-panel-month__fast-next`}
+              class={`${mergedClsPrefix}-date-panel-month__fast-next`}
               onClick={this.startCalendarNextYear}
             >
               <FastForwardIcon />
             </div>
           </div>
-          <div class={`${cPrefix}-date-panel-weekdays`}>
+          <div class={`${mergedClsPrefix}-date-panel-weekdays`}>
             {this.weekdays.map((weekday) => (
-              <div key={weekday} class={`${cPrefix}-date-panel-weekdays__day`}>
+              <div
+                key={weekday}
+                class={`${mergedClsPrefix}-date-panel-weekdays__day`}
+              >
                 {weekday}
               </div>
             ))}
           </div>
-          <div class={`${cPrefix}-date-panel__divider`} />
-          <div class={`${cPrefix}-date-panel-dates`}>
+          <div class={`${mergedClsPrefix}-date-panel__divider`} />
+          <div class={`${mergedClsPrefix}-date-panel-dates`}>
             {this.startDateArray.map((dateItem, i) => (
               <div
                 key={i}
                 class={[
-                  `${cPrefix}-date-panel-date`,
+                  `${mergedClsPrefix}-date-panel-date`,
                   {
-                    [`${cPrefix}-date-panel-date--excluded`]: !dateItem.inCurrentMonth,
-                    [`${cPrefix}-date-panel-date--current`]: dateItem.isCurrentDate,
-                    [`${cPrefix}-date-panel-date--selected`]: dateItem.selected,
-                    [`${cPrefix}-date-panel-date--covered`]: dateItem.inSpan,
-                    [`${cPrefix}-date-panel-date--start`]: dateItem.startOfSpan,
-                    [`${cPrefix}-date-panel-date--end`]: dateItem.endOfSpan,
-                    [`${cPrefix}-date-panel-date--transition-disabled`]: this
+                    [`${mergedClsPrefix}-date-panel-date--excluded`]: !dateItem.inCurrentMonth,
+                    [`${mergedClsPrefix}-date-panel-date--current`]: dateItem.isCurrentDate,
+                    [`${mergedClsPrefix}-date-panel-date--selected`]: dateItem.selected,
+                    [`${mergedClsPrefix}-date-panel-date--covered`]: dateItem.inSpan,
+                    [`${mergedClsPrefix}-date-panel-date--start`]: dateItem.startOfSpan,
+                    [`${mergedClsPrefix}-date-panel-date--end`]: dateItem.endOfSpan,
+                    [`${mergedClsPrefix}-date-panel-date--transition-disabled`]: this
                       .transitionDisabled,
-                    [`${cPrefix}-date-panel-date--disabled`]: this.mergedIsDateDisabled(
+                    [`${mergedClsPrefix}-date-panel-date--disabled`]: this.mergedIsDateDisabled(
                       dateItem.ts
                     )
                   }
@@ -95,72 +98,75 @@ export default defineComponent({
               >
                 {dateItem.dateObject.date}
                 {dateItem.isCurrentDate ? (
-                  <div class={`${cPrefix}-date-panel-date__sup`} />
+                  <div class={`${mergedClsPrefix}-date-panel-date__sup`} />
                 ) : null}
               </div>
             ))}
           </div>
         </div>
-        <div class={`${cPrefix}-date-panel__vertical-divider`} />
+        <div class={`${mergedClsPrefix}-date-panel__vertical-divider`} />
         <div
           ref="endDatesElRef"
-          class={`${cPrefix}-date-panel-calendar ${cPrefix}-date-panel-calendar--end`}
+          class={`${mergedClsPrefix}-date-panel-calendar ${mergedClsPrefix}-date-panel-calendar--end`}
         >
-          <div class={`${cPrefix}-date-panel-month`}>
+          <div class={`${mergedClsPrefix}-date-panel-month`}>
             <div
-              class={`${cPrefix}-date-panel-month__fast-prev`}
+              class={`${mergedClsPrefix}-date-panel-month__fast-prev`}
               onClick={this.endCalendarPrevYear}
             >
               <FastBackwardIcon />
             </div>
             <div
-              class={`${cPrefix}-date-panel-month__prev`}
+              class={`${mergedClsPrefix}-date-panel-month__prev`}
               onClick={this.endCalendarPrevMonth}
             >
               <BackwardIcon />
             </div>
-            <div class={`${cPrefix}-date-panel-month__month-year`}>
+            <div class={`${mergedClsPrefix}-date-panel-month__month-year`}>
               {this.locale.monthBeforeYear
                 ? `${this.endCalendarMonth} ${this.endCalendarYear}`
                 : `${this.endCalendarYear} ${this.endCalendarMonth}`}
             </div>
             <div
-              class={`${cPrefix}-date-panel-month__next`}
+              class={`${mergedClsPrefix}-date-panel-month__next`}
               onClick={this.endCalendarNextMonth}
             >
               <ForwardIcon />
             </div>
             <div
-              class={`${cPrefix}-date-panel-month__fast-next`}
+              class={`${mergedClsPrefix}-date-panel-month__fast-next`}
               onClick={this.endCalendarNextYear}
             >
               <FastForwardIcon />
             </div>
           </div>
-          <div class={`${cPrefix}-date-panel-weekdays`}>
+          <div class={`${mergedClsPrefix}-date-panel-weekdays`}>
             {this.weekdays.map((weekday) => (
-              <div key={weekday} class={`${cPrefix}-date-panel-weekdays__day`}>
+              <div
+                key={weekday}
+                class={`${mergedClsPrefix}-date-panel-weekdays__day`}
+              >
                 {weekday}
               </div>
             ))}
           </div>
-          <div class={`${cPrefix}-date-panel__divider`} />
-          <div class={`${cPrefix}-date-panel-dates`}>
+          <div class={`${mergedClsPrefix}-date-panel__divider`} />
+          <div class={`${mergedClsPrefix}-date-panel-dates`}>
             {this.endDateArray.map((dateItem, i) => (
               <div
                 key={i}
                 class={[
-                  `${cPrefix}-date-panel-date`,
+                  `${mergedClsPrefix}-date-panel-date`,
                   {
-                    [`${cPrefix}-date-panel-date--excluded`]: !dateItem.inCurrentMonth,
-                    [`${cPrefix}-date-panel-date--current`]: dateItem.isCurrentDate,
-                    [`${cPrefix}-date-panel-date--selected`]: dateItem.selected,
-                    [`${cPrefix}-date-panel-date--covered`]: dateItem.inSpan,
-                    [`${cPrefix}-date-panel-date--start`]: dateItem.startOfSpan,
-                    [`${cPrefix}-date-panel-date--end`]: dateItem.endOfSpan,
-                    [`${cPrefix}-date-panel-date--transition-disabled`]: this
+                    [`${mergedClsPrefix}-date-panel-date--excluded`]: !dateItem.inCurrentMonth,
+                    [`${mergedClsPrefix}-date-panel-date--current`]: dateItem.isCurrentDate,
+                    [`${mergedClsPrefix}-date-panel-date--selected`]: dateItem.selected,
+                    [`${mergedClsPrefix}-date-panel-date--covered`]: dateItem.inSpan,
+                    [`${mergedClsPrefix}-date-panel-date--start`]: dateItem.startOfSpan,
+                    [`${mergedClsPrefix}-date-panel-date--end`]: dateItem.endOfSpan,
+                    [`${mergedClsPrefix}-date-panel-date--transition-disabled`]: this
                       .transitionDisabled,
-                    [`${cPrefix}-date-panel-date--disabled`]: this.mergedIsDateDisabled(
+                    [`${mergedClsPrefix}-date-panel-date--disabled`]: this.mergedIsDateDisabled(
                       dateItem.ts
                     )
                   }
@@ -170,14 +176,14 @@ export default defineComponent({
               >
                 {dateItem.dateObject.date}
                 {dateItem.isCurrentDate ? (
-                  <div class={`${cPrefix}-date-panel-date__sup`} />
+                  <div class={`${mergedClsPrefix}-date-panel-date__sup`} />
                 ) : null}
               </div>
             ))}
           </div>
         </div>
         {this.actions?.length ? (
-          <div class={`${cPrefix}-date-panel-actions`}>
+          <div class={`${mergedClsPrefix}-date-panel-actions`}>
             {this.actions.includes('clear') ? (
               <NButton
                 theme={NDatePicker.mergedTheme.peers.Button}

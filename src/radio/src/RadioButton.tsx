@@ -11,15 +11,16 @@ export default defineComponent({
     return useRadio(props)
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <div
         class={[
-          `${cPrefix}-radio-button`,
+          `${mergedClsPrefix}-radio-button`,
           {
-            [`${cPrefix}-radio-button--disabled`]: this.mergedDisabled,
-            [`${cPrefix}-radio-button--checked`]: this.renderSafeChecked,
-            [`${cPrefix}-radio-button--focus`]: this.focus
+            [`${mergedClsPrefix}-radio-button--disabled`]: this.mergedDisabled,
+            [`${mergedClsPrefix}-radio-button--checked`]: this
+              .renderSafeChecked,
+            [`${mergedClsPrefix}-radio-button--focus`]: this.focus
           }
         ]}
         onKeyup={this.handleKeyUp}
@@ -29,7 +30,7 @@ export default defineComponent({
         <input
           ref="inputRef"
           type="radio"
-          class={`${cPrefix}-radio-button__radio-input`}
+          class={`${mergedClsPrefix}-radio-button__radio-input`}
           value={this.value}
           name={this.mergedName}
           checked={this.renderSafeChecked}
@@ -38,7 +39,7 @@ export default defineComponent({
           onFocus={this.handleRadioInputFocus}
           onBlur={this.handleRadioInputBlur}
         />
-        <div class={`${cPrefix}-radio-button__state-border`} />
+        <div class={`${mergedClsPrefix}-radio-button__state-border`} />
         <span ref="labelRef">{this.$slots}</span>
       </div>
     )

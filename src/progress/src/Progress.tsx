@@ -98,7 +98,7 @@ export default defineComponent({
       mergedClsPrefix
     )
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       mergedIndicatorPlacement: mergedIndicatorPlacementRef,
       cssVars: computed(() => {
         const { status } = props
@@ -160,21 +160,21 @@ export default defineComponent({
       height,
       processing,
       circleGap,
-      cPrefix,
+      mergedClsPrefix,
       $slots
     } = this
     return (
       <div
         class={[
-          `${cPrefix}-progress`,
-          `${cPrefix}-progress--${type}`,
-          `${cPrefix}-progress--${status}`
+          `${mergedClsPrefix}-progress`,
+          `${mergedClsPrefix}-progress--${type}`,
+          `${mergedClsPrefix}-progress--${status}`
         ]}
         style={cssVars as CSSProperties}
       >
         {type === 'circle' ? (
           <Circle
-            clsPrefix={cPrefix}
+            clsPrefix={mergedClsPrefix}
             status={status}
             showIndicator={showIndicator}
             indicatorTextColor={indicatorTextColor}
@@ -190,7 +190,7 @@ export default defineComponent({
           </Circle>
         ) : type === 'line' ? (
           <Line
-            clsPrefix={cPrefix}
+            clsPrefix={mergedClsPrefix}
             status={status}
             showIndicator={showIndicator}
             indicatorTextColor={indicatorTextColor}
@@ -209,7 +209,7 @@ export default defineComponent({
           </Line>
         ) : type === 'multiple-circle' ? (
           <MultipleCircle
-            clsPrefix={cPrefix}
+            clsPrefix={mergedClsPrefix}
             strokeWidth={strokeWidth}
             railColor={railColor as any}
             fillColor={color as any}

@@ -213,7 +213,7 @@ export default defineComponent({
       highlightRef
     })
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       scrollbarRef,
       mergedTheme: themeRef,
       styleHeight: styleHeightRef,
@@ -246,11 +246,11 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix, mergedTheme } = this
+    const { mergedClsPrefix, mergedTheme } = this
     return h(
       'div',
       {
-        class: `${cPrefix}-log`,
+        class: `${mergedClsPrefix}-log`,
         style: [
           {
             lineHeight: this.lineHeight,
@@ -286,7 +286,7 @@ export default defineComponent({
         <Transition name="n-fade-in-scale-up-transition">
           {{
             default: () =>
-              this.loading ? <NLogLoader clsPrefix={cPrefix} /> : null
+              this.loading ? <NLogLoader clsPrefix={mergedClsPrefix} /> : null
           }}
         </Transition>
       ]

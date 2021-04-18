@@ -27,7 +27,7 @@ export default defineComponent({
   setup () {
     const {
       props: providerProps,
-      cPrefixRef
+      mergedClsPrefixRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(loadingBarProviderInjectionKey)!
     const loadingBarRef = ref<HTMLElement | null>(null)
@@ -55,7 +55,7 @@ export default defineComponent({
       el.style.maxWidth = `${fromProgress}%`
       el.style.transition = 'none'
       void el.offsetWidth
-      el.className = createClassName(status, cPrefixRef.value)
+      el.className = createClassName(status, mergedClsPrefixRef.value)
       el.style.transition = ''
       el.style.maxWidth = `${toProgress}%`
     }
@@ -66,7 +66,7 @@ export default defineComponent({
           finishing = true
           const el = loadingBarRef.value
           if (!el) return
-          el.className = createClassName('finishing', cPrefixRef.value)
+          el.className = createClassName('finishing', mergedClsPrefixRef.value)
           void el.offsetWidth
           loadingRef.value = false
         })
@@ -74,7 +74,7 @@ export default defineComponent({
         finishing = true
         const el = loadingBarRef.value
         if (!el) return
-        el.className = createClassName('finishing', cPrefixRef.value)
+        el.className = createClassName('finishing', mergedClsPrefixRef.value)
         el.style.maxWidth = '100%'
         void el.offsetWidth
         loadingRef.value = false
@@ -87,7 +87,7 @@ export default defineComponent({
           erroring = true
           const el = loadingBarRef.value
           if (!el) return
-          el.className = createClassName('error', cPrefixRef.value)
+          el.className = createClassName('error', mergedClsPrefixRef.value)
           void el.offsetWidth
           loadingRef.value = false
         })
@@ -95,7 +95,7 @@ export default defineComponent({
         erroring = true
         const el = loadingBarRef.value
         if (!el) return
-        el.className = createClassName('error', cPrefixRef.value)
+        el.className = createClassName('error', mergedClsPrefixRef.value)
         el.style.maxWidth = '100%'
         void el.offsetWidth
         loadingRef.value = false
@@ -116,10 +116,10 @@ export default defineComponent({
       style,
       loadingBarLight,
       providerProps,
-      cPrefixRef
+      mergedClsPrefixRef
     )
     return {
-      cPrefix: cPrefixRef,
+      mergedClsPrefix: mergedClsPrefixRef,
       loadingBarRef,
       loading: loadingRef,
       entering: enteringRef,
@@ -142,7 +142,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <Transition
         name="n-fade-in-transition"
@@ -159,10 +159,10 @@ export default defineComponent({
         {{
           default: () =>
             withDirectives(
-              <div class={`${cPrefix}-loading-bar-container`}>
+              <div class={`${mergedClsPrefix}-loading-bar-container`}>
                 <div
                   ref="loadingBarRef"
-                  class={`${cPrefix}-loading-bar`}
+                  class={`${mergedClsPrefix}-loading-bar`}
                   style={this.cssVars as CSSProperties}
                 />
               </div>,

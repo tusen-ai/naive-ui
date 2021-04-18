@@ -60,11 +60,11 @@ export default defineComponent({
   },
   render () {
     const { NDataTable, handleScroll } = this
-    const { mergedTheme, scrollX, cPrefix } = NDataTable
+    const { mergedTheme, scrollX, mergedClsPrefix } = NDataTable
     return (
       <NScrollbar
         ref="scrollbarInstRef"
-        class={`${cPrefix}-data-table-base-table-body`}
+        class={`${mergedClsPrefix}-data-table-base-table-body`}
         theme={mergedTheme.peers.Scrollbar}
         themeOverrides={mergedTheme.peerOverrides.Scrollbar}
         contentStyle={{
@@ -156,30 +156,30 @@ export default defineComponent({
                     colspan={mergedColSpan}
                     rowspan={mergedRowSpan}
                     class={[
-                      `${cPrefix}-data-table-td`,
+                      `${mergedClsPrefix}-data-table-td`,
                       column.className,
                       hoverKey !== null &&
                         cordKey[rowIndex][colIndex].includes(hoverKey) &&
-                        `${cPrefix}-data-table-td--hover`,
+                        `${mergedClsPrefix}-data-table-td--hover`,
                       column.fixed &&
-                        `${cPrefix}-data-table-td--fixed-${column.fixed}`,
+                        `${mergedClsPrefix}-data-table-td--fixed-${column.fixed}`,
                       column.align &&
-                        `${cPrefix}-data-table-td--${column.align}-align`,
+                        `${mergedClsPrefix}-data-table-td--${column.align}-align`,
                       {
-                        [`${cPrefix}-data-table-td--ellipsis`]:
+                        [`${mergedClsPrefix}-data-table-td--ellipsis`]:
                           column.ellipsis === true ||
                           // don't add ellpisis class if tooltip exists
                           (column.ellipsis && !column.ellipsis.tooltip),
-                        [`${cPrefix}-data-table-td--shadow-after`]:
+                        [`${mergedClsPrefix}-data-table-td--shadow-after`]:
                           leftActiveFixedColKey === colKey,
-                        [`${cPrefix}-data-table-td--shadow-before`]:
+                        [`${mergedClsPrefix}-data-table-td--shadow-before`]:
                           rightActiveFixedColKey === colKey,
-                        [`${cPrefix}-data-table-td--selection`]:
+                        [`${mergedClsPrefix}-data-table-td--selection`]:
                           column.type === 'selection',
-                        [`${cPrefix}-data-table-td--expand`]:
+                        [`${mergedClsPrefix}-data-table-td--expand`]:
                           column.type === 'expand',
-                        [`${cPrefix}-data-table-td--last-col`]: isLastCol,
-                        [`${cPrefix}-data-table-td--last-row`]:
+                        [`${mergedClsPrefix}-data-table-td--last-col`]: isLastCol,
+                        [`${mergedClsPrefix}-data-table-td--last-row`]:
                           isLastRow && !expanded
                       }
                     ]}
@@ -197,7 +197,7 @@ export default defineComponent({
                       !column.expandable ||
                       column.expandable?.(rowData, rowIndex) ? (
                           <ExpandTrigger
-                            clsPrefix={cPrefix}
+                            clsPrefix={mergedClsPrefix}
                             expanded={expanded}
                             onClick={() => handleUpdateExpanded(rowKey)}
                           />
@@ -220,7 +220,7 @@ export default defineComponent({
                   }}
                   key={rowKey}
                   class={[
-                    `${cPrefix}-data-table-tr`,
+                    `${mergedClsPrefix}-data-table-tr`,
                     createRowClassName(rowData, rowIndex, rowClassName)
                   ]}
                 >
@@ -234,15 +234,15 @@ export default defineComponent({
                 return [
                   row,
                   <tr
-                    class={`${cPrefix}-data-table-tr`}
+                    class={`${mergedClsPrefix}-data-table-tr`}
                     key={`${rowKey}__expand`}
                   >
                     <td
                       class={[
-                        `${cPrefix}-data-table-td`,
-                        `${cPrefix}-data-table-td--last-col`,
+                        `${mergedClsPrefix}-data-table-td`,
+                        `${mergedClsPrefix}-data-table-td--last-col`,
                         rowIndex + 1 === rowCount &&
-                          `${cPrefix}-data-table-td--last-row`
+                          `${mergedClsPrefix}-data-table-td--last-row`
                       ]}
                       colspan={colCount}
                     >
@@ -257,7 +257,7 @@ export default defineComponent({
             return (
               <table
                 ref="body"
-                class={`${cPrefix}-data-table-table`}
+                class={`${mergedClsPrefix}-data-table-table`}
                 onMouseleave={() => {
                   NDataTable.hoverKey = null
                 }}
@@ -267,7 +267,10 @@ export default defineComponent({
                     <col key={col.key} style={col.style}></col>
                   ))}
                 </colgroup>
-                <tbody ref="tbody" class={`${cPrefix}-data-table-tbody`}>
+                <tbody
+                  ref="tbody"
+                  class={`${mergedClsPrefix}-data-table-tbody`}
+                >
                   {hasExpandedRows ? rows.flat() : rows}
                 </tbody>
               </table>

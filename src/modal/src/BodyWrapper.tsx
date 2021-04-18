@@ -142,7 +142,7 @@ export default defineComponent({
       mergedTheme: NModal.mergedThemeRef,
       appear: NModal.appearRef,
       isMounted: NModal.isMountedRef,
-      cPrefix: NModal.cPrefixRef,
+      mergedClsPrefix: NModal.mergedClsPrefixRef,
       bodyRef,
       scrollbarRef,
       displayed: displayedRef,
@@ -164,7 +164,7 @@ export default defineComponent({
       handleBeforeLeave,
       handleClickOutside,
       preset,
-      cPrefix
+      mergedClsPrefix
     } = this
     let childNode: VNode | null = null
     if (!preset) {
@@ -175,7 +175,7 @@ export default defineComponent({
       }
       childNode.props = mergeProps(
         {
-          class: `${cPrefix}-modal`
+          class: `${mergedClsPrefix}-modal`
         },
         $attrs,
         childNode.props || {}
@@ -183,12 +183,12 @@ export default defineComponent({
     }
     return this.displayDirective === 'show' || this.displayed || this.show
       ? withDirectives(
-        <div class={`${cPrefix}-modal-body-wrapper`}>
+        <div class={`${mergedClsPrefix}-modal-body-wrapper`}>
           <NScrollbar
             ref="scrollbarRef"
             theme={this.mergedTheme.peers.Scrollbar}
             themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
-            contentClass={`${cPrefix}-modal-scroll-content`}
+            contentClass={`${mergedClsPrefix}-modal-scroll-content`}
           >
             {{
               default: () => (
@@ -206,7 +206,7 @@ export default defineComponent({
                           this.preset === 'dialog' ? (
                             <NDialog
                               {...this.$attrs}
-                              class={`${cPrefix}-modal`}
+                              class={`${mergedClsPrefix}-modal`}
                               ref="bodyRef"
                               theme={this.mergedTheme.peers.Dialog}
                               themeOverrides={
@@ -220,7 +220,7 @@ export default defineComponent({
                             <NCard
                               {...this.$attrs}
                               ref="bodyRef"
-                              class={`${cPrefix}-modal`}
+                              class={`${mergedClsPrefix}-modal`}
                               theme={this.mergedTheme.peers.Card}
                               themeOverrides={
                                 this.mergedTheme.peerOverrides.Card

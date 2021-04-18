@@ -130,7 +130,7 @@ export default defineComponent({
     })
     return {
       mergedTheme: NPopselect.mergedThemeRef,
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       treeMate: computed(() => {
         return createTreeMate<
         SelectBaseOption,
@@ -144,7 +144,7 @@ export default defineComponent({
   render () {
     return (
       <NInternalSelectMenu
-        clsPrefix={this.cPrefix}
+        clsPrefix={this.mergedClsPrefix}
         theme={this.mergedTheme.peers.InternalSelectMenu}
         themeOverrides={this.mergedTheme.peerOverrides.InternalSelectMenu}
         multiple={this.multiple}

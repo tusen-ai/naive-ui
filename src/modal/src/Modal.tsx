@@ -211,13 +211,13 @@ export default defineComponent({
         }
         return null
       },
-      cPrefixRef: mergedClsPrefix,
+      mergedClsPrefixRef: mergedClsPrefix,
       mergedThemeRef: themeRef,
       isMountedRef: isMountedRef,
       appearRef: toRef(props, 'appear')
     })
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       namespace,
       isMounted: isMountedRef,
       containerRef,
@@ -247,75 +247,65 @@ export default defineComponent({
     }
   },
   render () {
-    return h(
-      VLazyTeleport,
-      {
-        to: this.to,
-        show: this.show
-      },
-      {
-        default: () => [
-          withDirectives(
-            h(
-              'div',
-              {
-                ref: 'containerRef',
-                class: [`${this.cPrefix}-modal-container`, this.namespace],
-                style: this.cssVars as CSSProperties
-              },
-              [
-                this.unstableShowMask
-                  ? h(
-                    Transition,
-                    {
-                      name: 'n-fade-in-transition',
-                      key: 'mask',
-                      appear: this.appear ?? this.isMounted
-                    },
-                    {
+    const { mergedClsPrefix } = this
+    return (
+      <VLazyTeleport to={this.to} show={this.show}>
+        {{
+          default: () => [
+            withDirectives(
+              <div
+                ref="containerRef"
+                class={[`${mergedClsPrefix}-modal-container`, this.namespace]}
+                style={this.cssVars as CSSProperties}
+              >
+                {this.unstableShowMask ? (
+                  <Transition
+                    name="n-fade-in-transition"
+                    key="mask"
+                    appear={this.appear ?? this.isMounted}
+                  >
+                    {{
                       default: () => {
-                        return this.show
-                          ? h('div', {
-                            ref: 'containerRef',
-                            class: `${this.cPrefix}-modal-mask`
-                          })
-                          : null
+                        return this.show ? (
+                          <div
+                            ref="containerRef"
+                            class={`${mergedClsPrefix}-modal-mask`}
+                          />
+                        ) : null
                       }
-                    }
-                  )
-                  : null,
-                h(
-                  NModalBodyWrapper,
-                  {
-                    style: this.overlayStyle,
-                    ...this.$attrs,
-                    ref: 'bodyWrapper',
-                    displayDirective: this.displayDirective,
-                    show: this.show,
-                    preset: this.preset,
-                    ...this.presetProps,
-                    onClose: this.handleCloseClick,
-                    onNegativeClick: this.handleNegativeClick,
-                    onPositiveClick: this.handlePositiveClick,
-                    onBeforeLeave: this.handleBeforeLeave,
-                    onAfterLeave: this.handleAfterLeave,
-                    onClickoutside: this.handleClickoutside
-                  },
-                  this.$slots
-                )
-              ]
-            ),
-            [
+                    }}
+                  </Transition>
+                ) : null}
+                <NModalBodyWrapper
+                  style={this.overlayStyle}
+                  {...this.$attrs}
+                  ref={'bodyWrapper'}
+                  displayDirective={this.displayDirective}
+                  show={this.show}
+                  preset={this.preset}
+                  {...this.presetProps}
+                  onClose={this.handleCloseClick}
+                  onNegativeClick={this.handleNegativeClick}
+                  onPositiveClick={this.handlePositiveClick}
+                  onBeforeLeave={this.handleBeforeLeave}
+                  onAfterLeave={this.handleAfterLeave}
+                  onClickoutside={this.handleClickoutside}
+                >
+                  {this.$slots}
+                </NModalBodyWrapper>
+              </div>,
               [
-                zindexable,
-                {
-                  enabled: this.show
-                }
+                [
+                  zindexable,
+                  {
+                    enabled: this.show
+                  }
+                ]
               ]
-            ]
-          )
-        ]
-      }
+            )
+          ]
+        }}
+      </VLazyTeleport>
     )
   }
 })

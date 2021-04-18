@@ -207,7 +207,7 @@ export default defineComponent({
       })
     )
     return {
-      cPrefix: mergedClsPrefixRef,
+      mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
       mergedNamespace: mergedNamespaceRef,
       mergedTheme: mergedThemeRef,
@@ -219,7 +219,7 @@ export default defineComponent({
       ? h(
         this.as || this.tag,
         {
-          class: `${this.cPrefix || defaultClsPrefix}-config-provider`
+          class: `${this.mergedClsPrefix || defaultClsPrefix}-config-provider`
         },
         renderSlot(this.$slots, 'default')
       )

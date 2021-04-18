@@ -300,26 +300,29 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix: cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <div
         class={[
-          `${cPrefix}-anchor`,
-          this.showRail && `${cPrefix}-anchor--show-rail`
+          `${mergedClsPrefix}-anchor`,
+          this.showRail && `${mergedClsPrefix}-anchor--show-rail`
         ]}
         ref="selfRef"
       >
         {this.showRail && this.showBackground ? (
-          <div ref="slotRef" class={`${cPrefix}-anchor-link-background`} />
+          <div
+            ref="slotRef"
+            class={`${mergedClsPrefix}-anchor-link-background`}
+          />
         ) : null}
         {this.showRail ? (
-          <div class={`${cPrefix}-anchor-rail`}>
+          <div class={`${mergedClsPrefix}-anchor-rail`}>
             <div
               ref="barRef"
               class={[
-                `${cPrefix}-anchor-rail__bar`,
+                `${mergedClsPrefix}-anchor-rail__bar`,
                 this.activeHref !== null &&
-                  `${cPrefix}-anchor-rail__bar--active`
+                  `${mergedClsPrefix}-anchor-rail__bar--active`
               ]}
             />
           </div>

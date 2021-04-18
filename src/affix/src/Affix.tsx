@@ -167,7 +167,7 @@ export default defineComponent({
     return {
       selfRef,
       affixed: affixedRef,
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       mergedstyle: computed<CSSProperties>(() => {
         const style: CSSProperties = {}
         if (stickToTopRef.value && mergedOffsetTopRef.value !== undefined) {
@@ -184,15 +184,15 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <div
         ref="selfRef"
         class={[
-          `${cPrefix}-affix`,
+          `${mergedClsPrefix}-affix`,
           {
-            [`${cPrefix}-affix--affixed`]: this.affixed,
-            [`${cPrefix}-affix--absolute-positioned`]:
+            [`${mergedClsPrefix}-affix--affixed`]: this.affixed,
+            [`${mergedClsPrefix}-affix--absolute-positioned`]:
               this.position === 'absolute'
           }
         ]}

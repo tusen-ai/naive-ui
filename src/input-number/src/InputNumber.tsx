@@ -290,7 +290,7 @@ export default defineComponent({
       inputInstRef,
       minusButtonInstRef,
       addButtonInstRef,
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       mergedBordered,
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
@@ -327,9 +327,9 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
-      <div class={`${cPrefix}-input-number`}>
+      <div class={`${mergedClsPrefix}-input-number`}>
         <NInput
           ref="inputInstRef"
           bordered={this.mergedBordered}
@@ -362,7 +362,7 @@ export default defineComponent({
               >
                 {{
                   default: () => (
-                    <NBaseIcon clsPrefix={cPrefix}>
+                    <NBaseIcon clsPrefix={mergedClsPrefix}>
                       {{
                         default: () => <RemoveIcon />
                       }}
@@ -380,7 +380,7 @@ export default defineComponent({
               >
                 {{
                   default: () => (
-                    <NBaseIcon clsPrefix={cPrefix}>
+                    <NBaseIcon clsPrefix={mergedClsPrefix}>
                       {{
                         default: () => <AddIcon />
                       }}

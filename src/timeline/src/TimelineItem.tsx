@@ -37,7 +37,7 @@ export default defineComponent({
       )
     }
     return {
-      cPrefix: NTimeline.cPrefixRef,
+      mergedClsPrefix: NTimeline.mergedClsPrefixRef,
       cssVars: computed(() => {
         const {
           props: { size },
@@ -74,31 +74,31 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <div
         class={[
-          `${cPrefix}-timeline-item`,
-          `${cPrefix}-timeline-item--${this.type}-type`
+          `${mergedClsPrefix}-timeline-item`,
+          `${mergedClsPrefix}-timeline-item--${this.type}-type`
         ]}
         style={this.cssVars as CSSProperties}
       >
-        <div class={`${cPrefix}-timeline-item-timeline`}>
-          <div class={`${cPrefix}-timeline-item-timeline__line`} />
-          <div class={`${cPrefix}-timeline-item-timeline__circle`} />
+        <div class={`${mergedClsPrefix}-timeline-item-timeline`}>
+          <div class={`${mergedClsPrefix}-timeline-item-timeline__line`} />
+          <div class={`${mergedClsPrefix}-timeline-item-timeline__circle`} />
         </div>
-        <div class={`${cPrefix}-timeline-item-content`}>
+        <div class={`${mergedClsPrefix}-timeline-item-content`}>
           {this.title ? (
-            <div class={`${cPrefix}-timeline-item-content__title`}>
+            <div class={`${mergedClsPrefix}-timeline-item-content__title`}>
               {renderSlot(this.$slots, 'header', undefined, () => [this.title])}
             </div>
           ) : null}
-          <div class={`${cPrefix}-timeline-item-content__content`}>
+          <div class={`${mergedClsPrefix}-timeline-item-content__content`}>
             {renderSlot(this.$slots, 'default', undefined, () => [
               this.content
             ])}
           </div>
-          <div class={`${cPrefix}-timeline-item-content__meta`}>
+          <div class={`${mergedClsPrefix}-timeline-item-content__meta`}>
             {renderSlot(this.$slots, 'footer', undefined, () => [this.time])}
           </div>
         </div>

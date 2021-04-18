@@ -26,11 +26,13 @@ export default defineComponent({
     }
     const { separatorRef, mergedClsPrefixRef } = NBreadcrumb
     return () => {
-      const { value: cPrefix } = mergedClsPrefixRef
+      const { value: mergedClsPrefix } = mergedClsPrefixRef
       return (
-        <span class={`${cPrefix}-breadcrumb-item`}>
-          <span class={`${cPrefix}-breadcrumb-item__link`}>{slots}</span>
-          <span class={`${cPrefix}-breadcrumb-item__separator`}>
+        <span class={`${mergedClsPrefix}-breadcrumb-item`}>
+          <span class={`${mergedClsPrefix}-breadcrumb-item__link`}>
+            {slots}
+          </span>
+          <span class={`${mergedClsPrefix}-breadcrumb-item__separator`}>
             {slots.separator
               ? slots.separator()
               : props.separator ?? separatorRef.value}

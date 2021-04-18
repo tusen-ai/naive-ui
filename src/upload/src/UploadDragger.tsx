@@ -16,7 +16,9 @@ export default defineComponent({
       )
     }
     return () => (
-      <div class={`${NUpload.cPrefixRef.value}-upload-dragger`}>{slots}</div>
+      <div class={`${NUpload.mergedClsPrefixRef.value}-upload-dragger`}>
+        {slots}
+      </div>
     )
   }
 })

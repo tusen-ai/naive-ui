@@ -171,7 +171,7 @@ export default defineComponent({
     return {
       selfRef,
       scrollbarRef,
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       mergedTheme: themeRef,
       styleMaxWidth: styleMaxWidthRef,
       mergedCollapsed: mergedCollapsedRef,
@@ -201,17 +201,18 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <aside
         ref="selfRef"
         class={[
-          `${cPrefix}-layout-sider`,
-          `${cPrefix}-layout-sider--${this.position}-positioned`,
+          `${mergedClsPrefix}-layout-sider`,
+          `${mergedClsPrefix}-layout-sider--${this.position}-positioned`,
           {
-            [`${cPrefix}-layout-sider--bordered`]: this.bordered,
-            [`${cPrefix}-layout-sider--collapsed`]: this.mergedCollapsed,
-            [`${cPrefix}-layout-sider--show-content`]: this.showContent
+            [`${mergedClsPrefix}-layout-sider--bordered`]: this.bordered,
+            [`${mergedClsPrefix}-layout-sider--collapsed`]: this
+              .mergedCollapsed,
+            [`${mergedClsPrefix}-layout-sider--show-content`]: this.showContent
           }
         ]}
         style={[
@@ -225,7 +226,7 @@ export default defineComponent({
         {!this.nativeScrollbar ? (
           <NScrollbar
             ref="scrollbarRef"
-            class={`${cPrefix}-layout-sider__content`}
+            class={`${mergedClsPrefix}-layout-sider__content`}
             style={this.contentStyle}
             {...this.scrollbarProps}
             theme={this.mergedTheme.peers.Scrollbar}
@@ -235,25 +236,25 @@ export default defineComponent({
           </NScrollbar>
         ) : (
           <div
-            class={`${cPrefix}-layout-sider__content`}
+            class={`${mergedClsPrefix}-layout-sider__content`}
             style={this.contentStyle}
           >
             {this.$slots}
           </div>
         )}
         {this.bordered ? (
-          <div class={`${cPrefix}-layout-sider__border`} />
+          <div class={`${mergedClsPrefix}-layout-sider__border`} />
         ) : null}
         {this.showTrigger ? (
           this.showTrigger === 'arrow-circle' ? (
             <ToggleButton
-              clsPrefix={cPrefix}
+              clsPrefix={mergedClsPrefix}
               style={this.triggerStyle}
               onClick={this.handleTriggerClick}
             />
           ) : (
             <ToggleBar
-              clsPrefix={cPrefix}
+              clsPrefix={mergedClsPrefix}
               collapsed={this.mergedCollapsed}
               style={this.triggerStyle}
               onClick={this.handleTriggerClick}

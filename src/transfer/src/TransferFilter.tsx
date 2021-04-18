@@ -25,16 +25,16 @@ export default defineComponent({
   },
   setup () {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const { mergedThemeRef, cPrefixRef } = inject(transferInjectionKey)!
+    const { mergedThemeRef, mergedClsPrefixRef } = inject(transferInjectionKey)!
     return {
-      cPrefix: cPrefixRef,
+      mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: mergedThemeRef
     }
   },
   render () {
-    const { mergedTheme, cPrefix } = this
+    const { mergedTheme, mergedClsPrefix } = this
     return (
-      <div class={`${cPrefix}-transfer-filter`}>
+      <div class={`${mergedClsPrefix}-transfer-filter`}>
         <NInput
           value={this.value}
           onUpdateValue={this.onUpdateValue}
@@ -49,7 +49,10 @@ export default defineComponent({
         >
           {{
             clear: () => (
-              <NBaseIcon clsPrefix={cPrefix} class={`${cPrefix}-transfer-icon`}>
+              <NBaseIcon
+                clsPrefix={mergedClsPrefix}
+                class={`${mergedClsPrefix}-transfer-icon`}
+              >
                 {{ default: () => <SearchIcon /> }}
               </NBaseIcon>
             )

@@ -38,7 +38,7 @@ export default defineComponent({
   setup (props) {
     const {
       props: messageProviderProps,
-      cPrefixRef
+      mergedClsPrefixRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(messageProviderInjectionKey)!
     const themeRef = useTheme(
@@ -47,10 +47,10 @@ export default defineComponent({
       style,
       messageLight,
       messageProviderProps,
-      cPrefixRef
+      mergedClsPrefixRef
     )
     return {
-      cPrefix: cPrefixRef,
+      mergedClsPrefix: mergedClsPrefixRef,
       handleClose () {
         props.onClose?.()
       },
@@ -115,34 +115,34 @@ export default defineComponent({
       type,
       closable,
       content,
-      cPrefix,
+      mergedClsPrefix,
       cssVars,
       handleClose
     } = this
     return (
       <div
-        class={`${cPrefix}-message-wrapper`}
+        class={`${mergedClsPrefix}-message-wrapper`}
         style={cssVars as CSSProperties}
       >
-        <div class={`${cPrefix}-message`}>
+        <div class={`${mergedClsPrefix}-message`}>
           <div
-            class={`${cPrefix}-message__icon ${cPrefix}-message__icon--${type}-type`}
+            class={`${mergedClsPrefix}-message__icon ${mergedClsPrefix}-message__icon--${type}-type`}
           >
             <NIconSwitchTransition>
               {{
-                default: () => [createIconVNode(icon, type, cPrefix)]
+                default: () => [createIconVNode(icon, type, mergedClsPrefix)]
               }}
             </NIconSwitchTransition>
           </div>
-          <div class={`${cPrefix}-message__content`}>
+          <div class={`${mergedClsPrefix}-message__content`}>
             {h(render, {
               render: content
             })}
           </div>
           {closable ? (
             <NBaseClose
-              clsPrefix={cPrefix}
-              class={`${cPrefix}-message__close`}
+              clsPrefix={mergedClsPrefix}
+              class={`${mergedClsPrefix}-message__close`}
               onClick={handleClose}
             />
           ) : null}

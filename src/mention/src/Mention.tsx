@@ -333,7 +333,7 @@ export default defineComponent({
     }
     return {
       namespace,
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       mergedBordered,
       mergedSize: formItem.mergedSize,
       mergedTheme: themeRef,
@@ -363,9 +363,9 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedTheme, cPrefix } = this
+    const { mergedTheme, mergedClsPrefix } = this
     return (
-      <div class={`${cPrefix}-mention`}>
+      <div class={`${mergedClsPrefix}-mention`}>
         <NInput
           themeOverrides={mergedTheme.peerOverrides.Input}
           theme={mergedTheme.peers.Input}
@@ -422,14 +422,14 @@ export default defineComponent({
                           const { mergedTheme } = this
                           return this.showMenu ? (
                             <NInternalSelectMenu
-                              clsPrefix={cPrefix}
+                              clsPrefix={mergedClsPrefix}
                               theme={mergedTheme.peers.InternalSelectMenu}
                               themeOverrides={
                                 mergedTheme.peerOverrides.InternalSelectMenu
                               }
                               autoPending
                               ref="selectMenuInstRef"
-                              class={`${cPrefix}-mention-menu`}
+                              class={`${mergedClsPrefix}-mention-menu`}
                               loading={this.loading}
                               treeMate={this.treeMate}
                               virtualScroll={false}

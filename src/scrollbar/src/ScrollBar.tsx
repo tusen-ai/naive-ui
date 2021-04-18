@@ -509,7 +509,7 @@ export default defineComponent({
     return {
       sync,
       scrollTo,
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       containerScrollTop: containerScrollTopRef,
       containerRef,
       contentRef,
@@ -545,7 +545,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots, cPrefix } = this
+    const { $slots, mergedClsPrefix } = this
     if (!this.scrollable) return renderSlot($slots, 'default')
     return (
       <VResizeObserver onResize={this.handleContentResize}>
@@ -554,7 +554,7 @@ export default defineComponent({
             h(
               'div',
               mergeProps(this.$attrs, {
-                class: `${cPrefix}-scrollbar`,
+                class: `${mergedClsPrefix}-scrollbar`,
                 style: this.cssVars,
                 onMouseenter: this.handleMouseEnterWrapper,
                 onMouseleave: this.handleMouseLeaveWrapper
@@ -565,7 +565,7 @@ export default defineComponent({
                 ) : (
                   <div
                     ref="containerRef"
-                    class={`${cPrefix}-scrollbar-container`}
+                    class={`${mergedClsPrefix}-scrollbar-container`}
                     style={this.containerStyle}
                     onScroll={this.handleScroll}
                   >
@@ -583,7 +583,7 @@ export default defineComponent({
                               ] as any
                             }
                             class={[
-                              `${cPrefix}-scrollbar-content`,
+                              `${mergedClsPrefix}-scrollbar-content`,
                               this.contentClass
                             ]}
                           >
@@ -597,9 +597,10 @@ export default defineComponent({
                 <div
                   ref="yRailRef"
                   class={[
-                    `${cPrefix}-scrollbar-rail ${cPrefix}-scrollbar-rail--vertical`,
+                    `${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--vertical`,
                     {
-                      [`${cPrefix}-scrollbar-rail--disabled`]: !this.needYBar
+                      [`${mergedClsPrefix}-scrollbar-rail--disabled`]: !this
+                        .needYBar
                     }
                   ]}
                   style={
@@ -611,7 +612,7 @@ export default defineComponent({
                       default: () =>
                         this.needYBar && this.isShowYBar && !this.isIos ? (
                           <div
-                            class={`${cPrefix}-scrollbar-rail__scrollbar`}
+                            class={`${mergedClsPrefix}-scrollbar-rail__scrollbar`}
                             style={{
                               height: this.yBarSizePx,
                               top: this.yBarTopPx,
@@ -627,9 +628,10 @@ export default defineComponent({
                 <div
                   ref="xRailRef"
                   class={[
-                    `${cPrefix}-scrollbar-rail ${cPrefix}-scrollbar-rail--horizontal`,
+                    `${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--horizontal`,
                     {
-                      [`${cPrefix}-scrollbar-rail--disabled`]: !this.needXBar
+                      [`${mergedClsPrefix}-scrollbar-rail--disabled`]: !this
+                        .needXBar
                     }
                   ]}
                   style={
@@ -641,7 +643,7 @@ export default defineComponent({
                       default: () =>
                         this.needXBar && this.isShowXBar && !this.isIos ? (
                           <div
-                            class={`${cPrefix}-scrollbar-rail__scrollbar`}
+                            class={`${mergedClsPrefix}-scrollbar-rail__scrollbar`}
                             style={{
                               height: this.sizePx,
                               width: this.xBarSizePx,

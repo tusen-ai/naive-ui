@@ -66,7 +66,7 @@ export default defineComponent({
     }
     if (__DEV__) provide(layoutInjectionKey, props)
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       selfRef,
       scrollbarRef,
       scrollTo,
@@ -85,14 +85,14 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <div
         ref="selfRef"
         class={[
-          `${cPrefix}-layout`,
-          `${cPrefix}-layout--${this.position}-positioned`,
-          this.hasSider && `${cPrefix}-layout--has-sider`
+          `${mergedClsPrefix}-layout`,
+          `${mergedClsPrefix}-layout--${this.position}-positioned`,
+          this.hasSider && `${mergedClsPrefix}-layout--has-sider`
         ]}
         style={this.cssVars as CSSProperties}
       >

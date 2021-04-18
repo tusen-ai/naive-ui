@@ -89,7 +89,7 @@ export default defineComponent({
       mergedClsPrefix
     )
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       codeRef,
       cssVars: computed(() => {
         const {
@@ -131,9 +131,12 @@ export default defineComponent({
   },
   render () {
     const { default: defaultSlot } = this.$slots
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
-      <code class={`${cPrefix}-code`} style={this.cssVars as CSSProperties}>
+      <code
+        class={`${mergedClsPrefix}-code`}
+        style={this.cssVars as CSSProperties}
+      >
         {defaultSlot ? defaultSlot() : <pre ref="codeRef"></pre>}
       </code>
     )

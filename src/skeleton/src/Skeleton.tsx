@@ -54,7 +54,7 @@ export default defineComponent({
       mergedClsPrefix
     )
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       style: computed(() => {
         const theme = themeRef.value
         const {
@@ -103,7 +103,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { repeat, style, cPrefix, $attrs } = this
+    const { repeat, style, mergedClsPrefix, $attrs } = this
     // BUG:
     // Chrome devtools can't read the element
     // Maybe it's a bug of chrome
@@ -111,7 +111,7 @@ export default defineComponent({
       'div',
       mergeProps(
         {
-          class: `${cPrefix}-skeleton`,
+          class: `${mergedClsPrefix}-skeleton`,
           style: style
         },
         $attrs

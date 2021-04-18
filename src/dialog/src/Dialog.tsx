@@ -113,7 +113,7 @@ export default defineComponent({
       mergedClsPrefix
     )
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       mergedIconPlacement: mergedIconPlacementRef,
       mergedTheme: themeRef,
       handlePositiveClick,
@@ -192,27 +192,30 @@ export default defineComponent({
       mergedTheme,
       loading,
       type,
-      cPrefix
+      mergedClsPrefix
     } = this
     return (
       <div
         class={[
-          `${cPrefix}-dialog`,
-          `${cPrefix}-dialog--icon-${mergedIconPlacement}`,
-          bordered && `${cPrefix}-dialog--bordered`
+          `${mergedClsPrefix}-dialog`,
+          `${mergedClsPrefix}-dialog--icon-${mergedIconPlacement}`,
+          bordered && `${mergedClsPrefix}-dialog--bordered`
         ]}
         style={cssVars as CSSProperties}
       >
         {closable ? (
           <NBaseClose
-            clsPrefix={cPrefix}
-            class={`${cPrefix}-dialog__close`}
+            clsPrefix={mergedClsPrefix}
+            class={`${mergedClsPrefix}-dialog__close`}
             onClick={this.handleCloseClick}
           />
         ) : null}
         {showIcon && mergedIconPlacement === 'top' ? (
-          <div class={`${cPrefix}-dialog-icon-container`}>
-            <NBaseIcon clsPrefix={cPrefix} class={`${cPrefix}-dialog__icon`}>
+          <div class={`${mergedClsPrefix}-dialog-icon-container`}>
+            <NBaseIcon
+              clsPrefix={mergedClsPrefix}
+              class={`${mergedClsPrefix}-dialog__icon`}
+            >
               {{
                 default: () =>
                   renderSlot($slots, 'icon', undefined, () => [
@@ -224,9 +227,12 @@ export default defineComponent({
             </NBaseIcon>
           </div>
         ) : null}
-        <div class={`${cPrefix}-dialog__title`}>
+        <div class={`${mergedClsPrefix}-dialog__title`}>
           {showIcon && mergedIconPlacement === 'left' ? (
-            <NBaseIcon clsPrefix={cPrefix} class={`${cPrefix}-dialog__icon`}>
+            <NBaseIcon
+              clsPrefix={mergedClsPrefix}
+              class={`${mergedClsPrefix}-dialog__icon`}
+            >
               {{
                 default: () =>
                   renderSlot($slots, 'icon', undefined, () => [
@@ -243,14 +249,14 @@ export default defineComponent({
             })
           ])}
         </div>
-        <div class={`${cPrefix}-dialog__content`}>
+        <div class={`${mergedClsPrefix}-dialog__content`}>
           {renderSlot($slots, 'default', undefined, () => [
             h(render, {
               render: content
             })
           ])}
         </div>
-        <div class={`${cPrefix}-dialog__action`}>
+        <div class={`${mergedClsPrefix}-dialog__action`}>
           {renderSlot($slots, 'action', undefined, () => [
             negativeText ? (
               <NButton

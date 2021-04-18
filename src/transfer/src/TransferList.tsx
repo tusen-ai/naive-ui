@@ -47,7 +47,7 @@ export default defineComponent({
   },
   setup () {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const { mergedThemeRef, cPrefixRef } = inject(transferInjectionKey)!
+    const { mergedThemeRef, mergedClsPrefixRef } = inject(transferInjectionKey)!
     const scrollerInstRef = ref<ScrollbarInst | null>(null)
     const vlInstRef = ref<VirtualListRef | null>(null)
     function syncVLScroller (): void {
@@ -67,7 +67,7 @@ export default defineComponent({
     }
     return {
       mergedTheme: mergedThemeRef,
-      cPrefix: cPrefixRef,
+      mergedClsPrefix: mergedClsPrefixRef,
       scrollerInstRef,
       vlInstRef,
       syncVLScroller,
@@ -76,7 +76,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedTheme, cPrefix, syncVLScroller } = this
+    const { mergedTheme, mergedClsPrefix, syncVLScroller } = this
     return this.options.length ? (
       this.virtualScroll ? (
         <NScrollbar
@@ -91,7 +91,7 @@ export default defineComponent({
               <VirtualList
                 ref="srcVlInstRef"
                 style={{ height: '100%' }}
-                class={`${cPrefix}-transfer-list-content`}
+                class={`${mergedClsPrefix}-transfer-list-content`}
                 items={this.options}
                 itemSize={this.itemSize}
                 showScrollbar={false}
@@ -123,7 +123,7 @@ export default defineComponent({
         >
           {{
             default: () => (
-              <div class={`${cPrefix}-transfer-list-content`}>
+              <div class={`${mergedClsPrefix}-transfer-list-content`}>
                 <TransitionGroup
                   name="item"
                   appear={this.isMounted}

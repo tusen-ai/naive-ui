@@ -123,7 +123,7 @@ export default defineComponent({
       handleClick,
       handleBlur,
       handleFocus,
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       mergedValue: mergedValueRef,
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
@@ -172,15 +172,15 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <div
         class={[
-          `${cPrefix}-switch`,
+          `${mergedClsPrefix}-switch`,
           {
-            [`${cPrefix}-switch--active`]: this.mergedValue,
-            [`${cPrefix}-switch--disabled`]: this.disabled,
-            [`${cPrefix}-switch--round`]: this.round
+            [`${mergedClsPrefix}-switch--active`]: this.mergedValue,
+            [`${mergedClsPrefix}-switch--disabled`]: this.disabled,
+            [`${mergedClsPrefix}-switch--round`]: this.round
           }
         ]}
         tabindex={!this.disabled ? 0 : undefined}
@@ -189,7 +189,7 @@ export default defineComponent({
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
       >
-        <div class={`${cPrefix}-switch__rail`} />
+        <div class={`${mergedClsPrefix}-switch__rail`} />
       </div>
     )
   }

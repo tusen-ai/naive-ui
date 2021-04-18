@@ -107,7 +107,7 @@ export default defineComponent({
     }
     return {
       ...tagPublicMethods,
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       contentRef,
       mergedBordered,
       handleClick,
@@ -172,16 +172,16 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <div
         class={[
-          `${cPrefix}-tag`,
+          `${mergedClsPrefix}-tag`,
           {
-            [`${cPrefix}-tag--disabled`]: this.disabled,
-            [`${cPrefix}-tag--checkable`]: this.checkable,
-            [`${cPrefix}-tag--checked`]: this.checkable && this.checked,
-            [`${cPrefix}-tag--round`]: this.round
+            [`${mergedClsPrefix}-tag--disabled`]: this.disabled,
+            [`${mergedClsPrefix}-tag--checkable`]: this.checkable,
+            [`${mergedClsPrefix}-tag--checked`]: this.checkable && this.checked,
+            [`${mergedClsPrefix}-tag--round`]: this.round
           }
         ]}
         style={this.cssVars as CSSProperties}
@@ -189,19 +189,19 @@ export default defineComponent({
         onMouseenter={this.onMouseenter}
         onMouseleave={this.onMouseleave}
       >
-        <span class={`${cPrefix}-tag__content`} ref="contentRef">
+        <span class={`${mergedClsPrefix}-tag__content`} ref="contentRef">
           {this.$slots}
         </span>
         {!this.checkable && this.closable ? (
           <NBaseClose
-            clsPrefix={cPrefix}
-            class={`${cPrefix}-tag__close`}
+            clsPrefix={mergedClsPrefix}
+            class={`${mergedClsPrefix}-tag__close`}
             disabled={this.disabled}
             onClick={this.handleCloseClick}
           />
         ) : null}
         {!this.checkable && this.mergedBordered ? (
-          <div class={`${cPrefix}-tag__border`} />
+          <div class={`${mergedClsPrefix}-tag__border`} />
         ) : null}
       </div>
     )

@@ -47,7 +47,7 @@ export default defineComponent({
       mergedClsPrefix
     )
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       cssVars: computed(() => {
         const { size } = props
         const {
@@ -96,16 +96,16 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <table
         class={[
-          `${cPrefix}-table`,
+          `${mergedClsPrefix}-table`,
           {
-            [`${cPrefix}-table--bottom-bordered`]: this.bottomBordered,
-            [`${cPrefix}-table--bordered`]: this.bordered,
-            [`${cPrefix}-table--single-line`]: this.singleLine,
-            [`${cPrefix}-table--single-column`]: this.singleColumn
+            [`${mergedClsPrefix}-table--bottom-bordered`]: this.bottomBordered,
+            [`${mergedClsPrefix}-table--bordered`]: this.bordered,
+            [`${mergedClsPrefix}-table--single-line`]: this.singleLine,
+            [`${mergedClsPrefix}-table--single-column`]: this.singleColumn
           }
         ]}
         style={this.cssVars as CSSProperties}

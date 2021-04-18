@@ -5,7 +5,7 @@ import type { TimePickerTheme } from '../styles'
 
 export interface TimePickerInjection {
   mergedTheme: Ref<MergedTheme<TimePickerTheme>>
-  cPrefix: Ref<string>
+  mergedClsPrefix: Ref<string>
 }
 
 export const timePickerInjectionKey: InjectionKey<TimePickerInjection> = Symbol(

@@ -41,7 +41,7 @@ export default defineComponent({
     const NRow = inject(rowInjectionKey, null)
     if (!NRow) throwError('col', '`n-col` must be placed inside `n-row`.')
     return {
-      cPrefix: NRow.cPrefixRef,
+      mergedClsPrefix: NRow.mergedClsPrefixRef,
       gutter: NRow.gutterRef,
       stylePadding: computed(
         () =>
@@ -60,17 +60,17 @@ export default defineComponent({
       offset,
       stylePadding,
       gutter,
-      cPrefix
+      mergedClsPrefix
     } = this
     return (
       <div
         class={[
-          `${cPrefix}-col`,
+          `${mergedClsPrefix}-col`,
           {
-            [`${cPrefix}-col--${span}-span`]: true,
-            [`${cPrefix}-col--${mergedPush}-push`]: mergedPush > 0,
-            [`${cPrefix}-col--${-mergedPush}-pull`]: mergedPush < 0,
-            [`${cPrefix}-col--${offset}-offset`]: offset
+            [`${mergedClsPrefix}-col--${span}-span`]: true,
+            [`${mergedClsPrefix}-col--${mergedPush}-push`]: mergedPush > 0,
+            [`${mergedClsPrefix}-col--${-mergedPush}-pull`]: mergedPush < 0,
+            [`${mergedClsPrefix}-col--${offset}-offset`]: offset
           }
         ]}
         style={{

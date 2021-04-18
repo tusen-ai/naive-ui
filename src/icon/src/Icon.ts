@@ -37,7 +37,7 @@ export default defineComponent({
       mergedClsPrefix
     )
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       mergedStyle: computed(() => {
         const { size, color } = props
         return {
@@ -66,7 +66,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { $parent, depth, cPrefix } = this
+    const { $parent, depth, mergedClsPrefix } = this
     if ($parent?.$options.__ICON__) {
       warn('icon', "don't wrap `n-icon` inside `n-icon`")
     }
@@ -74,10 +74,10 @@ export default defineComponent({
       'i',
       mergeProps(this.$attrs, {
         class: [
-          `${cPrefix}-icon`,
+          `${mergedClsPrefix}-icon`,
           {
-            [`${cPrefix}-icon--depth`]: depth,
-            [`${cPrefix}-icon--color-transition`]: depth !== undefined
+            [`${mergedClsPrefix}-icon--depth`]: depth,
+            [`${mergedClsPrefix}-icon--color-transition`]: depth !== undefined
           }
         ],
         style: Object.assign(this.cssVars, this.mergedStyle)

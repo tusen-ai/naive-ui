@@ -74,7 +74,7 @@ export default defineComponent({
       mergedClsPrefix
     )
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       mergedTheme: themeRef,
       handleCloseClick,
       cssVars: computed(() => {
@@ -135,69 +135,75 @@ export default defineComponent({
     }
   },
   render () {
-    const { segmented, bordered, hoverable, $slots, cPrefix } = this
+    const { segmented, bordered, hoverable, $slots, mergedClsPrefix } = this
     return (
       <div
         class={[
-          `${cPrefix}-card`,
+          `${mergedClsPrefix}-card`,
           {
-            [`${cPrefix}-card--content${
+            [`${mergedClsPrefix}-card--content${
               typeof segmented !== 'boolean' && segmented.content === 'soft'
                 ? '-soft'
                 : ''
             }-segmented`]:
               segmented === true || (segmented !== false && segmented.content),
-            [`${cPrefix}-card--footer${
+            [`${mergedClsPrefix}-card--footer${
               typeof segmented !== 'boolean' && segmented.footer === 'soft'
                 ? '-soft'
                 : ''
             }-segmented`]:
               segmented === true || (segmented !== false && segmented.footer),
-            [`${cPrefix}-card--action-segmented`]:
+            [`${mergedClsPrefix}-card--action-segmented`]:
               segmented === true || (segmented !== false && segmented.action),
-            [`${cPrefix}-card--bordered`]: bordered,
-            [`${cPrefix}-card--hoverable`]: hoverable
+            [`${mergedClsPrefix}-card--bordered`]: bordered,
+            [`${mergedClsPrefix}-card--hoverable`]: hoverable
           }
         ]}
         style={this.cssVars as CSSProperties}
       >
         {$slots.cover ? (
-          <div class={`${cPrefix}-card-cover`}>
+          <div class={`${mergedClsPrefix}-card-cover`}>
             {renderSlot($slots, 'cover')}
           </div>
         ) : null}
         {$slots.header || this.title || this.closable ? (
-          <div class={`${cPrefix}-card-header`}>
+          <div class={`${mergedClsPrefix}-card-header`}>
             <div
-              class={`${cPrefix}-card-header__main`}
+              class={`${mergedClsPrefix}-card-header__main`}
               style={this.headerStyle}
             >
               {renderSlot($slots, 'header', {}, () => [this.title])}
             </div>
             {$slots['header-extra'] ? (
-              <div class={`${cPrefix}-card-header__extra`}>
+              <div class={`${mergedClsPrefix}-card-header__extra`}>
                 {renderSlot($slots, 'header-extra')}
               </div>
             ) : null}
             {this.closable ? (
               <NBaseClose
-                clsPrefix={cPrefix}
-                class={`${cPrefix}-card-header__close`}
+                clsPrefix={mergedClsPrefix}
+                class={`${mergedClsPrefix}-card-header__close`}
                 onClick={this.handleCloseClick}
               />
             ) : null}
           </div>
         ) : null}
-        <div class={`${cPrefix}-card__content`} style={this.contentStyle}>
+        <div
+          class={`${mergedClsPrefix}-card__content`}
+          style={this.contentStyle}
+        >
           {$slots}
         </div>
         {$slots.footer ? (
-          <div class={`${cPrefix}-card__footer`} style={this.footerStyle}>
+          <div
+            class={`${mergedClsPrefix}-card__footer`}
+            style={this.footerStyle}
+          >
             {renderSlot($slots, 'footer')}
           </div>
         ) : null}
         {$slots.action ? (
-          <div class={`${cPrefix}-card__action`}>
+          <div class={`${mergedClsPrefix}-card__action`}>
             {renderSlot($slots, 'action')}
           </div>
         ) : null}

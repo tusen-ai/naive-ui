@@ -44,7 +44,7 @@ export default defineComponent({
       }
     }
     return {
-      cPrefix: mergedClsPrefixRef,
+      mergedClsPrefix: mergedClsPrefixRef,
       dropdownPlacement: MenuChild.dropdownPlacement,
       paddingLeft: MenuChild.paddingLeft,
       iconMarginRight: MenuChild.iconMarginRight,
@@ -71,14 +71,14 @@ export default defineComponent({
     }
   },
   render () {
-    const { cPrefix } = this
+    const { mergedClsPrefix } = this
     return (
       <div
         class={[
-          `${cPrefix}-menu-item`,
+          `${mergedClsPrefix}-menu-item`,
           {
-            [`${cPrefix}-menu-item--selected`]: this.selected,
-            [`${cPrefix}-menu-item--disabled`]: this.mergedDisabled
+            [`${mergedClsPrefix}-menu-item--selected`]: this.selected,
+            [`${mergedClsPrefix}-menu-item--disabled`]: this.mergedDisabled
           }
         ]}
       >
@@ -93,7 +93,7 @@ export default defineComponent({
             default: () => h(render, { render: this.title }),
             trigger: () => (
               <NMenuOptionContent
-                clsPrefix={cPrefix}
+                clsPrefix={mergedClsPrefix}
                 paddingLeft={this.paddingLeft}
                 iconMarginRight={this.iconMarginRight}
                 maxIconSize={this.maxIconSize}

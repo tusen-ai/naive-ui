@@ -17,7 +17,7 @@ export interface RowInjection {
   gutterRef: Ref<string | number | [number, number]>
   verticalGutterRef: Ref<number>
   horizontalGutterRef: Ref<number>
-  cPrefixRef: Ref<string>
+  mergedClsPrefixRef: Ref<string>
 }
 
 export const rowInjectionKey: InjectionKey<RowInjection> = Symbol('row')
@@ -58,13 +58,13 @@ export default defineComponent({
       return Number(gutter)
     })
     provide(rowInjectionKey, {
-      cPrefixRef: mergedClsPrefix,
+      mergedClsPrefixRef: mergedClsPrefix,
       gutterRef: toRef(props, 'gutter'),
       verticalGutterRef: verticalGutterRef,
       horizontalGutterRef: horizontalGutterRef
     })
     return {
-      cPrefix: mergedClsPrefix,
+      mergedClsPrefix,
       styleMargin: useMemo(
         () =>
           `-${formatLength(verticalGutterRef.value, {
@@ -79,7 +79,7 @@ export default defineComponent({
   render () {
     return (
       <div
-        class={`${this.cPrefix}-row`}
+        class={`${this.mergedClsPrefix}-row`}
         style={{
           margin: this.styleMargin,
           width: this.styleWidth,
