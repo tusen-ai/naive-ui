@@ -12,7 +12,8 @@
 </template>
 
 <script>
-import { onMounted, inject } from 'vue'
+import { onMounted } from 'vue'
+import { useLoadingBar } from 'naive-ui'
 import SiteHeader from './SiteHeader.vue'
 import { loadingBarApiRef } from './routes/router'
 import { useIsXs } from './utils/composables'
@@ -23,7 +24,7 @@ export default {
     SiteHeader
   },
   setup () {
-    const loadingBar = inject('loadingBar')
+    const loadingBar = useLoadingBar()
     const isXsRef = useIsXs()
     onMounted(() => {
       loadingBarApiRef.value = loadingBar

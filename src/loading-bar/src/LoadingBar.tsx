@@ -10,22 +10,26 @@ import {
   ref,
   nextTick
 } from 'vue'
-import { ThemePropsReactive, useTheme } from '../../_mixins'
+import { useTheme } from '../../_mixins'
 import { loadingBarLight } from '../styles'
-import type { LoadingBarTheme } from '../styles'
+import { loadingBarProviderInjectionKey } from './LoadingBarProvider'
 import style from './styles/index.cssr'
 
-function createClassName (status: 'error' | 'finishing' | 'starting'): string {
-  return `n-loading-bar n-loading-bar--${status}`
+function createClassName (
+  status: 'error' | 'finishing' | 'starting',
+  clsPrefix: string
+): string {
+  return `${clsPrefix}-loading-bar ${clsPrefix}-loading-bar--${status}`
 }
 
 export default defineComponent({
   name: 'LoadingBar',
   setup () {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const loadingBarProps = inject<ThemePropsReactive<LoadingBarTheme>>(
-      'NLoadingBarProps'
-    )!
+    const {
+      props: providerProps,
+      cPrefixRef
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    } = inject(loadingBarProviderInjectionKey)!
     const loadingBarRef = ref<HTMLElement | null>(null)
     const enteringRef = ref(false)
     const loadingRef = ref(false)
@@ -51,7 +55,7 @@ export default defineComponent({
       el.style.maxWidth = `${fromProgress}%`
       el.style.transition = 'none'
       void el.offsetWidth
-      el.className = createClassName(status)
+      el.className = createClassName(status, cPrefixRef.value)
       el.style.transition = ''
       el.style.maxWidth = `${toProgress}%`
     }
@@ -62,7 +66,7 @@ export default defineComponent({
           finishing = true
           const el = loadingBarRef.value
           if (!el) return
-          el.className = createClassName('finishing')
+          el.className = createClassName('finishing', cPrefixRef.value)
           void el.offsetWidth
           loadingRef.value = false
         })
@@ -70,7 +74,7 @@ export default defineComponent({
         finishing = true
         const el = loadingBarRef.value
         if (!el) return
-        el.className = createClassName('finishing')
+        el.className = createClassName('finishing', cPrefixRef.value)
         el.style.maxWidth = '100%'
         void el.offsetWidth
         loadingRef.value = false
@@ -83,7 +87,7 @@ export default defineComponent({
           erroring = true
           const el = loadingBarRef.value
           if (!el) return
-          el.className = createClassName('error')
+          el.className = createClassName('error', cPrefixRef.value)
           void el.offsetWidth
           loadingRef.value = false
         })
@@ -91,7 +95,7 @@ export default defineComponent({
         erroring = true
         const el = loadingBarRef.value
         if (!el) return
-        el.className = createClassName('error')
+        el.className = createClassName('error', cPrefixRef.value)
         el.style.maxWidth = '100%'
         void el.offsetWidth
         loadingRef.value = false
@@ -111,9 +115,11 @@ export default defineComponent({
       'LoadingBar',
       style,
       loadingBarLight,
-      loadingBarProps
+      providerProps,
+      cPrefixRef
     )
     return {
+      cPrefix: cPrefixRef,
       loadingBarRef,
       loading: loadingRef,
       entering: enteringRef,
@@ -136,6 +142,7 @@ export default defineComponent({
     }
   },
   render () {
+    const { cPrefix } = this
     return (
       <Transition
         name="n-fade-in-transition"
@@ -152,10 +159,10 @@ export default defineComponent({
         {{
           default: () =>
             withDirectives(
-              <div class="n-loading-bar-container">
+              <div class={`${cPrefix}-loading-bar-container`}>
                 <div
                   ref="loadingBarRef"
-                  class="n-loading-bar"
+                  class={`${cPrefix}-loading-bar`}
                   style={this.cssVars as CSSProperties}
                 />
               </div>,
