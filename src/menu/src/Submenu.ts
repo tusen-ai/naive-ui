@@ -5,7 +5,6 @@ import {
   PropType,
   provide,
   computed,
-  reactive,
   VNode,
   VNodeChild,
   InjectionKey
@@ -52,18 +51,15 @@ export default defineComponent({
     const { props: menuProps } = NMenu
     const mergedDisabledRef = computed(() => {
       const { disabled } = props
-      if (NSubmenu?.mergedDisabled) return true
+      if (NSubmenu?.mergedDisabledRef.value) return true
       if (menuProps.disabled) return true
       return disabled
     })
     const dropdownShowRef = ref(false)
-    provide(
-      submenuInjectionKey,
-      reactive({
-        paddingLeft: MenuChild.paddingLeft,
-        mergedDisabled: mergedDisabledRef
-      })
-    )
+    provide(submenuInjectionKey, {
+      paddingLeftRef: MenuChild.paddingLeft,
+      mergedDisabledRef
+    })
     provide(menuItemGroupInjectionKey, null)
     function doClick (): void {
       const { onClick } = props

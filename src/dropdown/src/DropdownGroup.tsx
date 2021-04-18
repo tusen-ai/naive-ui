@@ -53,12 +53,14 @@ export default defineComponent({
             )
             return null
           }
-          return h(NDropdownOption, {
-            clsPrefix,
-            tmNode: child,
-            parentKey,
-            key: child.key
-          })
+          return (
+            <NDropdownOption
+              clsPrefix={clsPrefix}
+              tmNode={child}
+              parentKey={parentKey}
+              key={child.key}
+            />
+          )
         })}
       </>
     )

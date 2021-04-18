@@ -10,8 +10,7 @@ import {
   PropType,
   inject,
   CSSProperties,
-  provide,
-  reactive
+  provide
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { createId } from 'seemly'
@@ -210,15 +209,12 @@ export default defineComponent({
       const { onRemove } = props
       if (onRemove) onRemove(index)
     }
-    provide(
-      dynamicInputInjectionKey,
-      reactive({
-        mergedTheme: themeRef,
-        keyPlaceholder: toRef(props, 'keyPlaceholder'),
-        valuePlaceholder: toRef(props, 'valuePlaceholder'),
-        placeholder: toRef(props, 'placeholder')
-      })
-    )
+    provide(dynamicInputInjectionKey, {
+      mergedThemeRef: themeRef,
+      keyPlaceholderRef: toRef(props, 'keyPlaceholder'),
+      valuePlaceholderRef: toRef(props, 'valuePlaceholder'),
+      placeholderRef: toRef(props, 'placeholder')
+    })
     return {
       ...useLocale('DynamicInput'),
       cPrefix: mergedClsPrefix,

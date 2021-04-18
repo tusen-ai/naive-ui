@@ -3,7 +3,6 @@ import {
   defineComponent,
   provide,
   PropType,
-  reactive,
   Fragment,
   InjectionKey,
   inject
@@ -34,10 +33,9 @@ export default defineComponent({
   setup (props) {
     provide(submenuInjectionKey, null)
     const MenuChild = useMenuChild(props)
-    provide(
-      menuItemGroupInjectionKey,
-      reactive({ paddingLeft: MenuChild.paddingLeft })
-    )
+    provide(menuItemGroupInjectionKey, {
+      paddingLeftRef: MenuChild.paddingLeft
+    })
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const { mergedClsPrefixRef } = inject(menuInjectionKey)!
     return function () {

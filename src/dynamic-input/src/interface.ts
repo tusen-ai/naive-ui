@@ -1,12 +1,12 @@
-import { InjectionKey } from 'vue'
+import { InjectionKey, Ref } from 'vue'
 import type { MergedTheme } from '../../_mixins'
 import type { DynamicInputTheme } from '../styles'
 
 export interface DynamicInputInjection {
-  mergedTheme: MergedTheme<DynamicInputTheme>
-  keyPlaceholder?: string
-  valuePlaceholder?: string
-  placeholder?: string
+  mergedThemeRef: Ref<MergedTheme<DynamicInputTheme>>
+  keyPlaceholderRef: Ref<string | undefined>
+  valuePlaceholderRef: Ref<string | undefined>
+  placeholderRef: Ref<string | undefined>
 }
 
 export const dynamicInputInjectionKey: InjectionKey<DynamicInputInjection> = Symbol(

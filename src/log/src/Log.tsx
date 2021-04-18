@@ -7,9 +7,9 @@ import {
   PropType,
   nextTick,
   ref,
-  reactive,
   toRef,
-  InjectionKey
+  InjectionKey,
+  Ref
 } from 'vue'
 import { throttle } from 'lodash-es'
 import { useTheme, useHljs, ThemeProps, useConfig } from '../../_mixins'
@@ -25,10 +25,10 @@ import NLogLine from './LogLine'
 import style from './styles/index.cssr'
 
 export interface LogInjection {
-  trim: boolean
-  language: string | undefined
-  highlight: boolean
-  mergedHljs: Hljs | undefined
+  trimRef: Ref<boolean>
+  languageRef: Ref<string | undefined>
+  highlightRef: Ref<boolean>
+  mergedHljsRef: Ref<Hljs | undefined>
 }
 
 export const logInjectionKey: InjectionKey<LogInjection> = Symbol('log')
@@ -206,15 +206,12 @@ export default defineComponent({
         slient
       })
     }
-    provide(
-      logInjectionKey,
-      reactive({
-        language: toRef(props, 'language'),
-        mergedHljs: useHljs(props),
-        trim: toRef(props, 'trim'),
-        highlight: highlightRef
-      })
-    )
+    provide(logInjectionKey, {
+      languageRef: toRef(props, 'language'),
+      mergedHljsRef: useHljs(props),
+      trimRef: toRef(props, 'trim'),
+      highlightRef
+    })
     return {
       cPrefix: mergedClsPrefix,
       scrollbarRef,

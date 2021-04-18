@@ -6,9 +6,9 @@ import {
   Transition,
   defineComponent,
   provide,
-  reactive,
   PropType,
-  InjectionKey
+  InjectionKey,
+  Ref
 } from 'vue'
 import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { useMemo } from 'vooks'
@@ -27,7 +27,7 @@ import {
 } from './interface'
 
 interface NDropdownOptionInjection {
-  enteringSubmenu: boolean
+  enteringSubmenuRef: Ref<boolean>
 }
 
 const dropdownOptionInjectionKey: InjectionKey<NDropdownOptionInjection> = Symbol(
@@ -59,6 +59,15 @@ export default defineComponent({
   setup (props) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NDropdown = inject(dropdownInjectionKey)!
+    const {
+      hoverKeyRef,
+      keyboardKeyRef,
+      lastToggledSubmenuKeyRef,
+      pendingKeyPathRef,
+      activeKeyPathRef,
+      animatedRef,
+      mergedShowRef
+    } = NDropdown
     const NDropdownOption = inject(dropdownOptionInjectionKey, null)
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NDropdownMenu = inject(dropdownMenuInjectionKey)!
@@ -68,12 +77,10 @@ export default defineComponent({
     })
     const showSubmenuRef = computed(() => {
       if (!hasSubmenuRef.value) return false
-      const {
-        hoverKey,
-        keyboardKey,
-        lastToggledSubmenuKey,
-        pendingKeyPath
-      } = NDropdown
+      const { value: hoverKey } = hoverKeyRef
+      const { value: keyboardKey } = keyboardKeyRef
+      const { value: lastToggledSubmenuKey } = lastToggledSubmenuKeyRef
+      const { value: pendingKeyPath } = pendingKeyPathRef
       const { key } = props.tmNode
       if (hoverKey !== null) return pendingKeyPath.includes(key)
       if (keyboardKey !== null) {
@@ -86,7 +93,7 @@ export default defineComponent({
       return false
     })
     const shouldDelayRef = computed(() => {
-      return NDropdown.keyboardKey === null && !NDropdown.animated
+      return keyboardKeyRef.value === null && !animatedRef.value
     })
     const deferredShowSubmenuRef = useDeferredTrue(
       showSubmenuRef,
@@ -94,15 +101,12 @@ export default defineComponent({
       shouldDelayRef
     )
     const parentEnteringSubmenuRef = computed(() => {
-      return !!NDropdownOption?.enteringSubmenu
+      return !!NDropdownOption?.enteringSubmenuRef.value
     })
     const enteringSubmenuRef = ref(false)
-    provide(
-      dropdownOptionInjectionKey,
-      reactive({
-        enteringSubmenu: enteringSubmenuRef
-      })
-    )
+    provide(dropdownOptionInjectionKey, {
+      enteringSubmenuRef
+    })
     // methods
     function handleSubmenuBeforeEnter (): void {
       enteringSubmenuRef.value = true
@@ -112,31 +116,31 @@ export default defineComponent({
     }
     function handleMouseEnter (): void {
       const { parentKey, tmNode } = props
-      if (!NDropdown.mergedShow) return
-      NDropdown.lastToggledSubmenuKey = parentKey
-      NDropdown.keyboardKey = null
-      NDropdown.hoverKey = tmNode.key
+      if (!mergedShowRef.value) return
+      lastToggledSubmenuKeyRef.value = parentKey
+      keyboardKeyRef.value = null
+      hoverKeyRef.value = tmNode.key
     }
     function handleMouseMove (): void {
       const { tmNode } = props
-      if (!NDropdown.mergedShow) return
-      if (NDropdown.hoverKey === tmNode.key) return
+      if (!mergedShowRef.value) return
+      if (hoverKeyRef.value === tmNode.key) return
       handleMouseEnter()
     }
     function handleMouseLeave (e: MouseEvent): void {
-      if (!NDropdown.mergedShow) return
+      if (!mergedShowRef.value) return
       const { relatedTarget } = e
       if (
         relatedTarget &&
         !(relatedTarget as HTMLElement).hasAttribute('__dropdown-option')
       ) {
-        NDropdown.hoverKey = null
+        hoverKeyRef.value = null
       }
     }
     function handleClick (): void {
       const { value: hasSubmenu } = hasSubmenuRef
       const { tmNode } = props
-      if (!NDropdown.mergedShow) return
+      if (!mergedShowRef.value) return
       if (!hasSubmenu && !tmNode.disabled) {
         NDropdown.doSelect(
           tmNode.key,
@@ -146,20 +150,21 @@ export default defineComponent({
       }
     }
     return {
-      NDropdown,
-      NDropdownMenu,
+      siblingHasIcon: NDropdownMenu.showIconRef,
+      siblingHasSubmenu: NDropdownMenu.hasSubmenuRef,
+      animated: animatedRef,
       mergedShowSubmenu: computed(() => {
         return deferredShowSubmenuRef.value && !parentEnteringSubmenuRef.value
       }),
       rawNode: rawNodeRef,
       hasSubmenu: hasSubmenuRef,
       pending: useMemo(() => {
-        const { pendingKeyPath } = NDropdown
+        const { value: pendingKeyPath } = pendingKeyPathRef
         const { key } = props.tmNode
         return pendingKeyPath.includes(key)
       }),
       active: useMemo(() => {
-        const { activeKeyPath } = NDropdown
+        const { value: activeKeyPath } = activeKeyPathRef
         const { key } = props.tmNode
         return activeKeyPath.includes(key)
       }),
@@ -173,18 +178,20 @@ export default defineComponent({
   },
   render () {
     const {
-      NDropdown: { animated },
+      animated,
       rawNode,
       mergedShowSubmenu,
-      clsPrefix
+      clsPrefix,
+      siblingHasIcon,
+      siblingHasSubmenu
     } = this
-    const submenuVNode = mergedShowSubmenu
-      ? h(NDropdownMenu, {
-        clsPrefix,
-        tmNodes: this.tmNode.children,
-        parentKey: this.tmNode.key
-      })
-      : null
+    const submenuVNode = mergedShowSubmenu ? (
+      <NDropdownMenu
+        clsPrefix={clsPrefix}
+        tmNodes={this.tmNode.children}
+        parentKey={this.tmNode.key}
+      />
+    ) : null
     return (
       <div class={`${clsPrefix}-dropdown-option`}>
         <div
@@ -204,10 +211,8 @@ export default defineComponent({
             __dropdown-option
             class={[
               `${clsPrefix}-dropdown-option-body__prefix`,
-              {
-                [`${clsPrefix}-dropdown-option-body__prefix--show-icon`]: this
-                  .NDropdownMenu.showIcon
-              }
+              siblingHasIcon &&
+                `${clsPrefix}-dropdown-option-body__prefix--show-icon`
             ]}
           >
             {h(render, { render: rawNode.icon })}
@@ -223,10 +228,8 @@ export default defineComponent({
             __dropdown-option
             class={[
               `${clsPrefix}-dropdown-option-body__suffix`,
-              {
-                [`${clsPrefix}-dropdown-option-body__suffix--has-submenu`]: this
-                  .NDropdownMenu.hasSubmenu
-              }
+              siblingHasSubmenu &&
+                `${clsPrefix}-dropdown-option-body__suffix--has-submenu`
             ]}
           >
             {this.hasSubmenu ? (

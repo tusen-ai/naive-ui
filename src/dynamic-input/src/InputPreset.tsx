@@ -22,21 +22,25 @@ export default defineComponent({
     }
   },
   setup () {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const NDynamicInput = inject(dynamicInputInjectionKey)!
+    const {
+      mergedThemeRef,
+      placeholderRef
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    } = inject(dynamicInputInjectionKey)!
     return {
-      NDynamicInput
+      mergedTheme: mergedThemeRef,
+      placeholder: placeholderRef
     }
   },
   render () {
-    const { NDynamicInput, value, clsPrefix, onUpdateValue } = this
+    const { mergedTheme, placeholder, value, clsPrefix, onUpdateValue } = this
     return (
       <div class={`${clsPrefix}-dynamic-input-preset-input`}>
         <NInput
-          theme={NDynamicInput.mergedTheme.peers.Input}
-          theme-overrides={NDynamicInput.mergedTheme.peerOverrides.Input}
+          theme={mergedTheme.peers.Input}
+          theme-overrides={mergedTheme.peerOverrides.Input}
           value={value}
-          placeholder={NDynamicInput.placeholder}
+          placeholder={placeholder}
           onUpdateValue={onUpdateValue}
         />
       </div>

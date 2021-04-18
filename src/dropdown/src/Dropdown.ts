@@ -7,9 +7,9 @@ import {
   PropType,
   watch,
   provide,
-  reactive,
   CSSProperties,
-  InjectionKey
+  InjectionKey,
+  Ref
 } from 'vue'
 import { createTreeMate, Key, TreeMateOptions, TreeNode } from 'treemate'
 import { useMergedState, useKeyboard, useMemo } from 'vooks'
@@ -54,13 +54,13 @@ DropdownIgnoredOption
 }
 
 export interface DropdownInjection {
-  hoverKey: Key | null
-  keyboardKey: Key | null
-  lastToggledSubmenuKey: Key | null
-  pendingKeyPath: Key[]
-  activeKeyPath: Key[]
-  animated: boolean
-  mergedShow: boolean
+  hoverKeyRef: Ref<Key | null>
+  keyboardKeyRef: Ref<Key | null>
+  lastToggledSubmenuKeyRef: Ref<Key | null>
+  pendingKeyPathRef: Ref<Key[]>
+  activeKeyPathRef: Ref<Key[]>
+  animatedRef: Ref<boolean>
+  mergedShowRef: Ref<boolean>
   doSelect: OnUpdateValueImpl
   doUpdateShow: (value: boolean) => void
 }
@@ -194,20 +194,17 @@ export default defineComponent({
       mergedClsPrefix
     )
 
-    provide(
-      dropdownInjectionKey,
-      reactive({
-        hoverKey: hoverKeyRef,
-        keyboardKey: keyboardKeyRef,
-        lastToggledSubmenuKey: lastToggledSubmenuKeyRef,
-        pendingKeyPath: pendingKeyPathRef,
-        activeKeyPath: activeKeyPathRef,
-        animated: toRef(props, 'animated'),
-        mergedShow: mergedShowRef,
-        doSelect,
-        doUpdateShow
-      })
-    )
+    provide(dropdownInjectionKey, {
+      hoverKeyRef: hoverKeyRef,
+      keyboardKeyRef: keyboardKeyRef,
+      lastToggledSubmenuKeyRef: lastToggledSubmenuKeyRef,
+      pendingKeyPathRef: pendingKeyPathRef,
+      activeKeyPathRef: activeKeyPathRef,
+      animatedRef: toRef(props, 'animated'),
+      mergedShowRef: mergedShowRef,
+      doSelect,
+      doUpdateShow
+    })
     // watch
     watch(mergedShowRef, (value) => {
       if (!value) clearPendingState()

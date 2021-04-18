@@ -15,13 +15,15 @@ export default defineComponent({
     }
   },
   setup () {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const { showIconRef, hasSubmenuRef } = inject(dropdownMenuInjectionKey)!
     return {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      NDropdownMenu: inject(dropdownMenuInjectionKey)!
+      showIcon: showIconRef,
+      hasSubmenu: hasSubmenuRef
     }
   },
   render () {
-    const { clsPrefix } = this
+    const { clsPrefix, hasSubmenu, showIcon } = this
     const { rawNode } = this.tmNode
     return (
       <div class={`${clsPrefix}-dropdown-option`}>
@@ -32,8 +34,7 @@ export default defineComponent({
             __dropdown-option
             class={[
               `${clsPrefix}-dropdown-option-body__prefix`,
-              this.NDropdownMenu.showIcon &&
-                `${clsPrefix}-dropdown-option-body__prefix--show-icon`
+              showIcon && `${clsPrefix}-dropdown-option-body__prefix--show-icon`
             ]}
           >
             {h(render, { render: rawNode.icon })}
@@ -47,7 +48,7 @@ export default defineComponent({
           <div
             class={[
               `${clsPrefix}-dropdown-option-body__suffix`,
-              this.NDropdownMenu.hasSubmenu &&
+              hasSubmenu &&
                 `${clsPrefix}-dropdown-option-body__suffix--has-submenu`
             ]}
             __dropdown-option

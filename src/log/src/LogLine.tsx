@@ -10,13 +10,15 @@ export default defineComponent({
   },
   setup (props) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const NLog = inject(logInjectionKey)!
+    const { trimRef, highlightRef, languageRef, mergedHljsRef } = inject(
+      logInjectionKey
+    )!
     const selfRef = ref<HTMLElement | null>(null)
     function setInnerHTML (): void {
-      const trimmedLine = NLog.trim ? (props.line || '').trim() : props.line
+      const trimmedLine = trimRef.value ? (props.line || '').trim() : props.line
       if (selfRef.value) {
         selfRef.value.innerHTML = generateCodeHTML(
-          NLog.language,
+          languageRef.value,
           trimmedLine,
           false
         )
@@ -28,7 +30,7 @@ export default defineComponent({
       trim: boolean
     ): string {
       if (trim) code = code.trim()
-      const { mergedHljs: hljs } = NLog
+      const { value: hljs } = mergedHljsRef
       if (hljs) {
         if (language && hljs.getLanguage(language)) {
           return hljs.highlight(code, { language }).value
@@ -37,22 +39,22 @@ export default defineComponent({
       return code
     }
     onMounted(() => {
-      if (NLog.highlight) {
+      if (highlightRef.value) {
         setInnerHTML()
       }
     })
     watch(toRef(props, 'line'), () => {
-      if (NLog.highlight) {
+      if (highlightRef.value) {
         setInnerHTML()
       }
     })
     return {
-      NLog,
+      highlight: highlightRef,
       selfRef
     }
   },
   render () {
-    const { NLog } = this
-    return <pre ref="selfRef">{NLog.highlight ? null : this.line}</pre>
+    const { highlight } = this
+    return <pre ref="selfRef">{highlight ? null : this.line}</pre>
   }
 })

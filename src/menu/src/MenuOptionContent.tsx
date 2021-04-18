@@ -1,4 +1,4 @@
-import { computed, defineComponent, h } from 'vue'
+import { computed, defineComponent, h, PropType } from 'vue'
 import { ChevronDownFilledIcon } from '../../_internal/icons'
 import { render as Render } from '../../_utils'
 import { NBaseIcon } from '../../_internal'
@@ -45,7 +45,8 @@ export default defineComponent({
     clsPrefix: {
       type: String,
       required: true
-    }
+    },
+    onClick: Function as PropType<(e: MouseEvent) => void>
   },
   setup (props) {
     return {
@@ -68,6 +69,7 @@ export default defineComponent({
     const { clsPrefix: cPrefix } = this
     return (
       <div
+        onClick={this.onClick}
         class={[
           `${cPrefix}-menu-item-content`,
           {

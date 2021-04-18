@@ -24,7 +24,7 @@ import { checkboxLight } from '../styles'
 import type { CheckboxTheme } from '../styles'
 import CheckMark from './CheckMark'
 import LineMark from './LineMark'
-import type { CheckboxGroupInjection } from './CheckboxGroup'
+import { checkboxGroupInjectionKey } from './CheckboxGroup'
 import style from './styles/index.cssr'
 
 const checkboxProps = {
@@ -86,10 +86,7 @@ export default defineComponent({
   props: checkboxProps,
   setup (props) {
     const { mergedClsPrefix } = useConfig(props)
-    const NCheckboxGroup = inject<CheckboxGroupInjection | null>(
-      'NCheckboxGroup',
-      null
-    )
+    const NCheckboxGroup = inject(checkboxGroupInjectionKey, null)
     const uncontrolledCheckedRef = ref(props.defaultChecked)
     const controlledCheckedRef = toRef(props, 'checked')
     const mergedCheckedRef = useMergedState(
@@ -98,7 +95,7 @@ export default defineComponent({
     )
     const renderedCheckedRef = useMemo(() => {
       if (NCheckboxGroup) {
-        const groupValueSet = NCheckboxGroup.valueSet
+        const groupValueSet = NCheckboxGroup.valueSetRef.value
         if (groupValueSet && props.value !== undefined) {
           return groupValueSet.has(props.value)
         }
@@ -108,14 +105,14 @@ export default defineComponent({
       }
     })
     const mergedDisabledRef = computed(() => {
-      return props.disabled || NCheckboxGroup?.disabled
+      return props.disabled || NCheckboxGroup?.disabledRef.value
     })
     const formItem = useFormItem(props, {
       mergedSize (NFormItem) {
         const { size } = props
         if (size !== undefined) return size
         if (NCheckboxGroup) {
-          const { mergedSize } = NCheckboxGroup
+          const { value: mergedSize } = NCheckboxGroup.mergedSizeRef
           if (mergedSize !== undefined) {
             return mergedSize
           }
@@ -175,7 +172,6 @@ export default defineComponent({
     }
     return Object.assign(formItem, {
       cPrefix: mergedClsPrefix,
-      NCheckboxGroup,
       mergedDisabled: mergedDisabledRef,
       renderedChecked: renderedCheckedRef,
       mergedTheme: themeRef,

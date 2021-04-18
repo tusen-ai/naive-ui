@@ -5,7 +5,7 @@ import {
   InjectionKey,
   PropType,
   provide,
-  reactive
+  Ref
 } from 'vue'
 import { TreeNode } from 'treemate'
 import NDropdownOption from './DropdownOption'
@@ -19,8 +19,8 @@ import {
 } from './interface'
 
 export interface NDropdownMenuInjection {
-  showIcon: boolean
-  hasSubmenu: boolean
+  showIconRef: Ref<boolean>
+  hasSubmenuRef: Ref<boolean>
 }
 
 export const dropdownMenuInjectionKey: InjectionKey<NDropdownMenuInjection> = Symbol(
@@ -48,33 +48,30 @@ export default defineComponent({
     }
   },
   setup (props) {
-    provide(
-      dropdownMenuInjectionKey,
-      reactive({
-        showIcon: computed(() => {
-          return props.tmNodes.some((tmNode) => {
-            const { rawNode } = tmNode
-            if (isGroupNode(rawNode)) {
-              return (rawNode as DropdownGroupOption).children.some(
-                (rawChild) => rawChild.icon
-              )
-            }
-            return rawNode.icon
-          })
-        }),
-        hasSubmenu: computed(() => {
-          return props.tmNodes.some((tmNode) => {
-            const { rawNode } = tmNode
-            if (isGroupNode(rawNode)) {
-              return (rawNode as DropdownGroupOption).children.some(
-                (rawChild) => isSubmenuNode(rawChild)
-              )
-            }
-            return isSubmenuNode(rawNode)
-          })
+    provide(dropdownMenuInjectionKey, {
+      showIconRef: computed(() => {
+        return props.tmNodes.some((tmNode) => {
+          const { rawNode } = tmNode
+          if (isGroupNode(rawNode)) {
+            return (rawNode as DropdownGroupOption).children.some(
+              (rawChild) => rawChild.icon
+            )
+          }
+          return rawNode.icon
+        })
+      }),
+      hasSubmenuRef: computed(() => {
+        return props.tmNodes.some((tmNode) => {
+          const { rawNode } = tmNode
+          if (isGroupNode(rawNode)) {
+            return (rawNode as DropdownGroupOption).children.some((rawChild) =>
+              isSubmenuNode(rawChild)
+            )
+          }
+          return isSubmenuNode(rawNode)
         })
       })
-    )
+    })
   },
   render () {
     const { parentKey, clsPrefix } = this

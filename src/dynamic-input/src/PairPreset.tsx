@@ -27,9 +27,13 @@ export default defineComponent({
   },
   setup (props) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const NDynamicInput = inject(dynamicInputInjectionKey)!
+    const { mergedThemeRef, keyPlaceholderRef, valuePlaceholderRef } = inject(
+      dynamicInputInjectionKey
+    )!
     return {
-      NDynamicInput,
+      mergedTheme: mergedThemeRef,
+      keyPlaceholder: keyPlaceholderRef,
+      valuePlaceholder: valuePlaceholderRef,
       handleKeyInput (key: string) {
         props.onUpdateValue({
           key,
@@ -45,23 +49,29 @@ export default defineComponent({
     }
   },
   render () {
-    const { NDynamicInput, value, clsPrefix } = this
+    const {
+      mergedTheme,
+      keyPlaceholder,
+      valuePlaceholder,
+      value,
+      clsPrefix
+    } = this
     return (
       <div class={`${clsPrefix}-dynamic-input-preset-pair`}>
         <NInput
-          theme={NDynamicInput.mergedTheme.peers.Input}
-          theme-overrides={NDynamicInput.mergedTheme.peerOverrides.Input}
+          theme={mergedTheme.peers.Input}
+          theme-overrides={mergedTheme.peerOverrides.Input}
           value={value.key}
           class={`${clsPrefix}-dynamic-input-pair-input`}
-          placeholder={NDynamicInput.keyPlaceholder}
+          placeholder={keyPlaceholder}
           onUpdateValue={this.handleKeyInput}
         />
         <NInput
-          theme={NDynamicInput.mergedTheme.peers.Input}
-          theme-overrides={NDynamicInput.mergedTheme.peerOverrides.Input}
+          theme={mergedTheme.peers.Input}
+          theme-overrides={mergedTheme.peerOverrides.Input}
           value={value.value}
           class={`${clsPrefix}-dynamic-input-pair-input`}
-          placeholder={NDynamicInput.valuePlaceholder}
+          placeholder={valuePlaceholder}
           onUpdateValue={this.handleValueInput}
         />
       </div>

@@ -4,9 +4,10 @@ import {
   provide,
   PropType,
   computed,
-  reactive,
   toRef,
-  ref
+  ref,
+  InjectionKey,
+  Ref
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { useConfig, useFormItem } from '../../_mixins'
@@ -14,11 +15,15 @@ import { warn, call, MaybeArray } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 
 export interface CheckboxGroupInjection {
-  disabled: boolean
-  valueSet: Set<string | number>
-  mergedSize: 'small' | 'medium' | 'large'
+  disabledRef: Ref<boolean>
+  valueSetRef: Ref<Set<string | number>>
+  mergedSizeRef: Ref<'small' | 'medium' | 'large'>
   toggleCheckbox: (checked: boolean, checkboxValue: string | number) => void
 }
+
+export const checkboxGroupInjectionKey: InjectionKey<CheckboxGroupInjection> = Symbol(
+  'checkboxGroup'
+)
 
 const checkboxGroupProps = {
   size: String as PropType<'small' | 'medium' | 'large'>,
@@ -124,15 +129,12 @@ export default defineComponent({
         }
       }
     }
-    provide<CheckboxGroupInjection>(
-      'NCheckboxGroup',
-      reactive({
-        valueSet: valueSetRef,
-        disabled: toRef(props, 'disabled'),
-        mergedSize: formItem.mergedSize,
-        toggleCheckbox
-      })
-    )
+    provide(checkboxGroupInjectionKey, {
+      valueSetRef: valueSetRef,
+      disabledRef: toRef(props, 'disabled'),
+      mergedSizeRef: formItem.mergedSize,
+      toggleCheckbox
+    })
     return {
       cPrefix: mergedClsPrefix
     }

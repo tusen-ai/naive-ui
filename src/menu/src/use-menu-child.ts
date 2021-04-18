@@ -31,12 +31,12 @@ export interface MenuInjection {
 }
 
 export interface SubmenuInjection {
-  paddingLeft: number | undefined
-  mergedDisabled: boolean
+  paddingLeftRef: Ref<number | undefined>
+  mergedDisabledRef: Ref<boolean>
 }
 
 export interface MenuOptionGroupInjection {
-  paddingLeft: number | undefined
+  paddingLeftRef: Ref<number | undefined>
 }
 
 export type UseMenuChildProps = ExtractPropTypes<typeof useMenuChildProps>
@@ -89,14 +89,19 @@ export function useMenuChild (props: UseMenuChildProps): UseMenuChild {
     const { root, isGroup } = props
     const mergedRootIndent = rootIndent === undefined ? indent : rootIndent
     if (root) {
-      if (menuProps.collapsed) { return collapsedWidth / 2 - maxIconSizeRef.value / 2 }
+      if (menuProps.collapsed) {
+        return collapsedWidth / 2 - maxIconSizeRef.value / 2
+      }
       return mergedRootIndent
     }
     if (NMenuOptionGroup) {
-      return indent / 2 + (NMenuOptionGroup.paddingLeft as number)
+      return indent / 2 + (NMenuOptionGroup.paddingLeftRef.value as number)
     }
     if (NSubmenu) {
-      return (isGroup ? indent / 2 : indent) + (NSubmenu.paddingLeft as number)
+      return (
+        (isGroup ? indent / 2 : indent) +
+        (NSubmenu.paddingLeftRef.value as number)
+      )
     }
     return undefined as never
   })

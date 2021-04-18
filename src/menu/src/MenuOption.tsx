@@ -1,4 +1,4 @@
-import { h, computed, defineComponent, toRef, PropType } from 'vue'
+import { h, computed, defineComponent, PropType } from 'vue'
 import { useMemo } from 'vooks'
 import { NTooltip } from '../../tooltip'
 import NMenuOptionContent from './MenuOptionContent'
@@ -28,7 +28,7 @@ export default defineComponent({
     const { NSubmenu, NMenu } = MenuChild
     const { props: menuProps, mergedClsPrefixRef } = NMenu
     const submenuDisabledRef = NSubmenu
-      ? toRef(NSubmenu, 'mergedDisabled')
+      ? NSubmenu.mergedDisabledRef
       : { value: false }
     const mergedDisabledRef = computed(() => {
       return submenuDisabledRef.value || props.disabled
@@ -91,20 +91,20 @@ export default defineComponent({
         >
           {{
             default: () => h(render, { render: this.title }),
-            trigger: () => {
-              return h(NMenuOptionContent, {
-                clsPrefix: cPrefix,
-                paddingLeft: this.paddingLeft,
-                iconMarginRight: this.iconMarginRight,
-                maxIconSize: this.maxIconSize,
-                activeIconSize: this.activeIconSize,
-                title: this.title,
-                extra: this.extra,
-                disabled: this.mergedDisabled,
-                icon: this.icon,
-                onClick: this.handleClick
-              })
-            }
+            trigger: () => (
+              <NMenuOptionContent
+                clsPrefix={cPrefix}
+                paddingLeft={this.paddingLeft}
+                iconMarginRight={this.iconMarginRight}
+                maxIconSize={this.maxIconSize}
+                activeIconSize={this.activeIconSize}
+                title={this.title}
+                extra={this.extra}
+                disabled={this.mergedDisabled}
+                icon={this.icon}
+                onClick={this.handleClick}
+              />
+            )
           }}
         </NTooltip>
       </div>
