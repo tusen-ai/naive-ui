@@ -2,9 +2,9 @@
   "name": "@naive-ui/tusimple-theme",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "peerDependencies": {
-    "naive-ui": "^2.4.0"
+    "naive-ui": "^2.6.0"
   },
   "author": "07akioni",
   "license": "MIT",
