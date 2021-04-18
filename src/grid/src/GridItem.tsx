@@ -51,11 +51,16 @@ export default defineComponent({
   alias: ['Gi'],
   props: gridItemProps,
   setup (props) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const NGrid = inject(gridInjectionKey)!
+    const {
+      xGapRef,
+      itemStyleRef,
+      overflowRef
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    } = inject(gridInjectionKey)!
     const self = getCurrentInstance()
     return {
-      NGrid,
+      overflow: overflowRef,
+      itemStyle: itemStyleRef,
       deriveStyle: () => {
         // Here is quite a hack, I hope there is a better way to solve it
         const {
@@ -65,7 +70,7 @@ export default defineComponent({
           privateOffset = 0
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         } = self!.vnode.props as GridItemVNodeProps
-        const { xGap } = NGrid
+        const { value: xGap } = xGapRef
         const mergedXGap = pxfy(xGap || 0)
         return {
           display: !privateShow ? 'none' : '',
@@ -83,13 +88,10 @@ export default defineComponent({
     return (
       <div
         style={
-          ([
-            this.NGrid?.itemStyle,
-            this.deriveStyle()
-          ] as unknown) as CSSProperties
+          ([this.itemStyle, this.deriveStyle()] as unknown) as CSSProperties
         }
       >
-        {renderSlot(this.$slots, 'default', { overflow: this.NGrid.overflow })}
+        {renderSlot(this.$slots, 'default', { overflow: this.overflow })}
       </div>
     )
   }

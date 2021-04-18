@@ -7,10 +7,10 @@ import {
   PropType,
   provide,
   toRef,
-  reactive,
   mergeProps,
   ref,
-  VNode
+  VNode,
+  Ref
 } from 'vue'
 import { useBreakpoint, useMemo } from 'vooks'
 import { VResizeObserver, VResizeObserverOnResize } from 'vueuc'
@@ -48,10 +48,9 @@ const gridProps = {
 } as const
 
 export interface NGridInjection {
-  itemStyle: CSSProperties | string | undefined
-  xGap: string | undefined
-  yGap: string | undefined
-  overflow: boolean
+  itemStyleRef: Ref<CSSProperties | string | undefined>
+  xGapRef: Ref<string | undefined>
+  overflowRef: Ref<boolean>
 }
 
 export const gridInjectionKey: InjectionKey<NGridInjection> = Symbol('grid')
@@ -108,15 +107,11 @@ export default defineComponent({
         return undefined
       }
     )
-    provide(
-      gridInjectionKey,
-      reactive({
-        itemStyle: toRef(props, 'itemStyle'),
-        xGap: responsiveXGapRef,
-        yGap: responsiveYGapRef,
-        overflow: overflowRef
-      })
-    )
+    provide(gridInjectionKey, {
+      itemStyleRef: toRef(props, 'itemStyle'),
+      xGapRef: responsiveXGapRef,
+      overflowRef
+    })
     return {
       cPrefix: mergedClsPrefix,
       style: computed<CSSProperties>(() => {

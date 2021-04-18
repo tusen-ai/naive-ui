@@ -49,32 +49,39 @@ export default defineComponent({
     }
   },
   setup (props) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const NInternalSelectMenu = inject(internalSelectionMenuInjectionKey)!
+    const {
+      valueRef,
+      pendingTmNodeRef,
+      multipleRef,
+      valueSetRef,
+      handleOptionClick,
+      handleOptionMouseEnter
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    } = inject(internalSelectionMenuInjectionKey)!
     const rawNodeRef = toRef(props.tmNode, 'rawNode')
     const isPendingRef = useMemo(() => {
-      const { pendingTmNode } = NInternalSelectMenu
+      const { value: pendingTmNode } = pendingTmNodeRef
       if (!pendingTmNode) return false
       return props.tmNode.key === pendingTmNode.key
     })
     function handleClick (e: MouseEvent): void {
       const { tmNode } = props
       if (tmNode.disabled) return
-      NInternalSelectMenu.handleOptionClick(e, tmNode)
+      handleOptionClick(e, tmNode)
     }
     function handleMouseEnter (e: MouseEvent): void {
       const { tmNode } = props
       if (tmNode.disabled) return
-      NInternalSelectMenu.handleOptionMouseEnter(e, tmNode)
+      handleOptionMouseEnter(e, tmNode)
     }
     function handleMouseMove (e: MouseEvent): void {
       const { tmNode } = props
       const { value: isPending } = isPendingRef
       if (tmNode.disabled || isPending) return
-      NInternalSelectMenu.handleOptionMouseEnter(e, tmNode)
+      handleOptionMouseEnter(e, tmNode)
     }
     return {
-      NInternalSelectMenu,
+      multiple: multipleRef,
       rawNode: rawNodeRef,
       isGrouped: useMemo(() => {
         const { tmNode } = props
@@ -83,11 +90,12 @@ export default defineComponent({
       }),
       isPending: isPendingRef,
       isSelected: useMemo(() => {
-        const { multiple, value } = NInternalSelectMenu
+        const { value } = valueRef
+        const { value: multiple } = multipleRef
         if (value === null) return false
         const optionValue = rawNodeRef.value.value
         if (multiple) {
-          const { valueSet } = NInternalSelectMenu
+          const { value: valueSet } = valueSetRef
           return valueSet.has(optionValue)
         } else {
           return value === optionValue
@@ -105,10 +113,10 @@ export default defineComponent({
       isSelected,
       isPending,
       isGrouped,
+      multiple,
       handleClick,
       handleMouseEnter,
-      handleMouseMove,
-      NInternalSelectMenu: { multiple }
+      handleMouseMove
     } = this
     const showCheckMark = multiple && isSelected
     const children = rawNode.render

@@ -9,7 +9,6 @@ import {
   toRef,
   renderSlot,
   provide,
-  reactive,
   Ref,
   UnwrapRef,
   InjectionKey
@@ -45,10 +44,10 @@ export interface InternalSelectMenuInjection {
     tmNode: TreeNode<SelectBaseOption>
   ) => void
   handleOptionClick: (e: MouseEvent, tmNode: TreeNode<SelectBaseOption>) => void
-  valueSet: Set<number | string>
-  pendingTmNode: TreeNode<SelectBaseOption> | null
-  multiple: boolean
-  value: string | number | Array<string | number> | null
+  valueSetRef: Ref<Set<number | string>>
+  pendingTmNodeRef: Ref<TreeNode<SelectBaseOption> | null>
+  multipleRef: Ref<boolean>
+  valueRef: Ref<string | number | Array<string | number> | null>
 }
 
 export const internalSelectionMenuInjectionKey: InjectionKey<InternalSelectMenuInjection> = Symbol(
@@ -257,17 +256,14 @@ export default defineComponent({
         props.onBlur?.(e)
       }
     }
-    provide(
-      internalSelectionMenuInjectionKey,
-      reactive({
-        handleOptionMouseEnter,
-        handleOptionClick,
-        valueSet: valueSetRef,
-        multiple: toRef(props, 'multiple'),
-        value: toRef(props, 'value'),
-        pendingTmNode: pendingNodeRef
-      })
-    )
+    provide(internalSelectionMenuInjectionKey, {
+      handleOptionMouseEnter,
+      handleOptionClick,
+      valueSetRef,
+      multipleRef: toRef(props, 'multiple'),
+      valueRef: toRef(props, 'value'),
+      pendingTmNodeRef: pendingNodeRef
+    })
     onMounted(() => {
       const { value } = scrollbarRef
       if (value) value.sync()
