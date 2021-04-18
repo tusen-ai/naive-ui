@@ -2,7 +2,7 @@ import {
   useMessage as _useMessage,
   MessageOptions,
   MessageReactive,
-  MessageApiInjection
+  MessageApi
 } from 'naive-ui'
 import { icons } from './icons'
 
@@ -10,7 +10,7 @@ export interface ExtendedApi {
   danger: (content: string, options: MessageOptions) => MessageReactive
 }
 
-export type TsMessageApi = MessageApiInjection & ExtendedApi
+export type TsMessageApi = MessageApi & ExtendedApi
 
 function useMessage (): TsMessageApi {
   const messageApi = _useMessage()

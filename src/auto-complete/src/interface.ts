@@ -1,4 +1,7 @@
-import { SelectGroupOption, SelectMixedOption } from '../../select'
+import {
+  SelectGroupOption,
+  SelectMixedOption
+} from '../../select/src/interface'
 
 export type AutoCompleteOption =
   | AutoCompleteBaseOption

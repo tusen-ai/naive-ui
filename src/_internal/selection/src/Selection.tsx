@@ -14,6 +14,7 @@ import {
   onMounted
 } from 'vue'
 import { VOverflow, VOverflowRef } from 'vueuc'
+import type { SelectBaseOption } from '../../../select/src/interface'
 import { NPopover } from '../../../popover'
 import { NTag } from '../../../tag'
 import { useTheme } from '../../../_mixins'
@@ -23,7 +24,6 @@ import { internalSelectionLight } from '../styles'
 import type { InternalSelectionTheme } from '../styles'
 import Suffix from './Suffix'
 import style from './styles/index.cssr'
-import type { SelectBaseOption } from '../../../select'
 import type { TagRef } from '../../../tag/src/Tag'
 
 export interface InternalSelectionInst {

@@ -1,6 +1,6 @@
 import { h, defineComponent, PropType } from 'vue'
 import { TreeNode } from 'treemate'
-import type { SelectGroupOption } from '../../../select'
+import type { SelectGroupOption } from '../../../select/src/interface'
 
 export default defineComponent({
   name: 'NBaseSelectGroupHeader',

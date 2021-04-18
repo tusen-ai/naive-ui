@@ -1,5 +1,5 @@
 import type { TmNode, BaseOption } from './interface'
-import type { SelectBaseOption } from '../../select'
+import type { SelectBaseOption } from '../../select/src/interface'
 
 function traverseWithCallback<T extends { children?: T[] }> (
   options: T[],

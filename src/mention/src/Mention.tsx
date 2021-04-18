@@ -20,7 +20,7 @@ import type {
   SelectBaseOption,
   SelectGroupOption,
   SelectIgnoredOption
-} from '../../select'
+} from '../../select/src/interface'
 import { NInternalSelectMenu } from '../../_internal'
 import type { InternalSelectMenuRef } from '../../_internal'
 import { call, useAdjustedTo, warn } from '../../_utils'

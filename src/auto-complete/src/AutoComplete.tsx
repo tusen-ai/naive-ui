@@ -29,7 +29,7 @@ import type {
   SelectBaseOption,
   SelectGroupOption,
   SelectIgnoredOption
-} from '../../select'
+} from '../../select/src/interface'
 import { autoCompleteLight } from '../styles'
 import type { AutoCompleteTheme } from '../styles'
 import { mapAutoCompleteOptionsToSelectOptions } from './utils'

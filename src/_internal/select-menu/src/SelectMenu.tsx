@@ -23,9 +23,10 @@ import type { ScrollbarInst } from '../../../scrollbar'
 import type {
   SelectBaseOption,
   SelectGroupOption,
-  SelectIgnoredOption
-} from '../../../select'
-import type { Value, SelectTreeMate } from '../../../select/src/interface'
+  SelectIgnoredOption,
+  Value,
+  SelectTreeMate
+} from '../../../select/src/interface'
 import { formatLength } from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
 import { useTheme } from '../../../_mixins'

@@ -10,7 +10,7 @@ import {
 import { internalSelectionMenuInjectionKey } from './SelectMenu'
 import { TreeNode } from 'treemate'
 import { useMemo } from 'vooks'
-import type { SelectBaseOption } from '../../../select'
+import type { SelectBaseOption } from '../../../select/src/interface'
 import { CheckmarkIcon } from '../../icons'
 import NBaseIcon from '../../icon'
 

@@ -17,7 +17,7 @@ import type {
   SelectBaseOption,
   SelectGroupOption,
   SelectIgnoredOption
-} from '../../select'
+} from '../../select/src/interface'
 import { InternalSelectMenuRef, NInternalSelectMenu } from '../../_internal'
 import { createSelectOptions } from './utils'
 import {
