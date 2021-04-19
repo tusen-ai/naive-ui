@@ -262,7 +262,7 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     color: '#5B5B5B'
   },
   Drawer: {
-    padding: '20px'
+    bodyPadding: '20px'
   },
   DynamicTags: {
     peers: {
