@@ -1,6 +1,10 @@
 export const enDocRoutes = [
   // basic docs
   {
+    path: 'introduction',
+    component: () => import('../pages/docs/introduction/enUS/index.md')
+  },
+  {
     path: 'installation',
     component: () => import('../pages/docs/installation/enUS/index.md')
   },
@@ -40,6 +44,10 @@ export const enDocRoutes = [
 
 export const zhDocRoutes = [
   // basic docs
+  {
+    path: 'introduction',
+    component: () => import('../pages/docs/introduction/zhCN/index.md')
+  },
   {
     path: 'installation',
     component: () => import('../pages/docs/installation/zhCN/index.md')

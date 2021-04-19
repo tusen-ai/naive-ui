@@ -217,7 +217,7 @@ export default {
       if (value === 'doc') {
         if (!/^(\/[^/]+){2}\/docs/.test(route.path)) {
           router.push(
-            themeAndLocaleReg.exec(route.path)[0] + '/docs/installation'
+            themeAndLocaleReg.exec(route.path)[0] + '/docs/introduction'
           )
         }
       }

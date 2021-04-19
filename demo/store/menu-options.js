@@ -51,6 +51,18 @@ function createItems (lang, theme, prefix, items) {
 export function createDocumentationMenuOptions ({ lang, theme, mode }) {
   return createItems(lang, theme, '/docs', [
     {
+      en: 'Introduction',
+      zh: '介绍',
+      type: 'group',
+      children: [
+        {
+          en: 'Naive UI',
+          zh: 'Naive UI',
+          path: '/introduction'
+        }
+      ]
+    },
+    {
       en: 'Getting Started',
       zh: '快速上手',
       type: 'group',

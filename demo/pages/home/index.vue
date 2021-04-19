@@ -83,16 +83,15 @@ export default {
       ...i18n({
         'zh-CN': {
           start: '开始使用',
-          intro1: '一个 Vue UI 框架',
-          intro2: '在意样式，带主题，比较完整，不算太慢',
+          intro1: '一个 Vue 3 UI 框架',
+          intro2: '比较完整，主题可调，使用 Typescript，不算太慢',
           intro3: '有点意思',
           intro4: '换个主题'
         },
         'en-US': {
           start: 'Get Started',
-          intro1: 'A Vue UI Framework',
-          intro2:
-            'Caring About Styles, Themed, Batteries Included, Not Rather Slow',
+          intro1: 'A Vue 3 UI Framework',
+          intro2: 'Rather Complete, Themeable, With Typescript, Not Too Slow',
           intro3: 'Interesting Somehow',
           intro4: 'Change Theme'
         }
@@ -187,6 +186,7 @@ export default {
     margin-left: 16px;
     transform: none;
     margin-top: 60px;
+    margin-right: 16px;
     min-height: 550px;
     height: calc(100vh - 180px);
   }
