@@ -1,16 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>Naive UI: A Vue3 UI Framework</title>
-  <link rel="icon" type="image/svg+xml" href="/demo/assets/images/naivelogo.svg"/>
-</head>
-
-<body>
-  <div id="app"></div>
-  <script type="module" src="__INDEX__"></script>
-</body>
-
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <title>Naive UI</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/demo/assets/images/naivelogo.svg"
+    />
+  </head>
+  <body>
+    <script>
+      function deriveTitleFromLocale(locale = navigator.language) {
+        if (locale === 'zh-CN') {
+          document.title = 'Naive UI: 一个 Vue 3 UI 框架'
+        } else {
+          document.title = 'Naive UI: A Vue 3 UI Framework'
+        }
+      }
+      deriveTitleFromLocale()
+    </script>
+    <div id="app"></div>
+    <script type="module" src="__INDEX__"></script>
+  </body>
 </html>

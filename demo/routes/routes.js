@@ -798,7 +798,7 @@ export const routes = [
     redirect: {
       name: 'home',
       params: {
-        lang: 'zh-CN',
+        lang: navigator.language === 'zh-CN' ? 'zh-CN' : 'en-US',
         theme: 'os-theme'
       }
     }

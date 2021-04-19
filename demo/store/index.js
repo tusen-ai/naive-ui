@@ -1,4 +1,4 @@
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useMemo } from 'vooks'
 import {
   NConfigProvider,
@@ -30,6 +30,10 @@ export function initRouter (_router, _route) {
     set (locale) {
       router.push(changeLangInPath(route.fullPath, locale))
     }
+  })
+  watch(localeNameRef, (value) => {
+    // defined in index.html
+    window.deriveTitleFromLocale(value)
   })
   dateLocaleRef = useMemo(() => {
     return route.path.startsWith('/zh-CN') ? dateZhCN : dateEnUS
