@@ -2,6 +2,7 @@ import { internalSelectionDark } from '../../_internal/selection/styles'
 import { internalSelectMenuDark } from '../../_internal/select-menu/styles'
 import { commonDark } from '../../_styles/common'
 import type { SelectTheme } from './light'
+import { self } from './light'
 
 const selectDark: SelectTheme = {
   name: 'Select',
@@ -10,12 +11,7 @@ const selectDark: SelectTheme = {
     InternalSelection: internalSelectionDark,
     InternalSelectMenu: internalSelectMenuDark
   },
-  self (vars) {
-    const { boxShadow2 } = vars
-    return {
-      menuBoxShadow: boxShadow2
-    }
-  }
+  self
 }
 
 export default selectDark
