@@ -26,6 +26,10 @@ const layoutProps = {
     default: true
   },
   scrollbarProps: Object as PropType<Partial<ScrollbarProps>>,
+  contentStyle: {
+    type: [String, Object] as PropType<string | CSSProperties>,
+    default: ''
+  },
   hasSider: Boolean
 } as const
 
@@ -64,11 +68,21 @@ export default defineComponent({
         selfRef.value.scrollTo(options as any, y as any)
       }
     }
+    const scrollableDivStyleRef = computed(() => {
+      return [
+        props.contentStyle,
+        {
+          height: '100%',
+          overflow: 'auto'
+        }
+      ]
+    })
     if (__DEV__) provide(layoutInjectionKey, props)
     return {
       mergedClsPrefix,
       selfRef,
       scrollbarRef,
+      scrollableDivStyle: scrollableDivStyleRef,
       scrollTo,
       mergedTheme: themeRef,
       cssVars: computed(() => {
@@ -102,11 +116,18 @@ export default defineComponent({
             ref="scrollbarRef"
             theme={this.mergedTheme.peers.Scrollbar}
             themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
+            contentClass={`${mergedClsPrefix}-layout__content`}
+            contentStyle={this.contentStyle}
           >
             {this.$slots}
           </NScrollbar>
         ) : (
-          this.$slots
+          <div
+            class={`${mergedClsPrefix}-layout__content`}
+            style={this.scrollableDivStyle}
+          >
+            {this.$slots}
+          </div>
         )}
       </div>
     )

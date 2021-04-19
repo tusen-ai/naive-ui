@@ -37,6 +37,10 @@ const layoutSiderProps = {
     type: Number,
     default: 272
   },
+  contentStyle: {
+    type: [String, Object] as PropType<string | CSSProperties>,
+    default: ''
+  },
   collapseMode: {
     type: String as PropType<'width' | 'transform'>,
     default: 'transform'
@@ -113,11 +117,20 @@ export default defineComponent({
         mergedCollapsedRef.value ? props.collapsedWidth : props.width
       )
     })
-    const contentStyleRef = computed<CSSProperties>(() => {
-      const overflow = props.nativeScrollbar ? 'auto' : ''
-      return props.collapseMode === 'transform'
-        ? { width: formatLength(props.width), flexShrink: 0, overflow }
-        : { width: '100%', overflow }
+    const scrollContainerStyleRef = computed<CSSProperties>(() => {
+      return {
+        width: formatLength(props.width)
+      }
+    })
+    const scrollableDivStyleRef = computed(() => {
+      return [
+        props.contentStyle,
+        scrollContainerStyleRef.value,
+        {
+          height: '100%',
+          overflow: 'auto'
+        }
+      ]
     })
     const uncontrolledCollapsedRef = ref(props.defaultCollapsed)
     const mergedCollapsedRef = useMergedState(
@@ -175,7 +188,8 @@ export default defineComponent({
       mergedTheme: themeRef,
       styleMaxWidth: styleMaxWidthRef,
       mergedCollapsed: mergedCollapsedRef,
-      contentStyle: contentStyleRef,
+      scrollContainerStyle: scrollContainerStyleRef,
+      scrollableDivStyle: scrollableDivStyleRef,
       scrollTo,
       handleTriggerClick,
       cssVars: computed(() => {
@@ -225,10 +239,11 @@ export default defineComponent({
       >
         {!this.nativeScrollbar ? (
           <NScrollbar
+            {...this.scrollbarProps}
             ref="scrollbarRef"
             class={`${mergedClsPrefix}-layout-sider__content`}
-            style={this.contentStyle}
-            {...this.scrollbarProps}
+            style={this.scrollContainerStyle}
+            contentStyle={this.contentStyle}
             theme={this.mergedTheme.peers.Scrollbar}
             themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
           >
@@ -237,7 +252,7 @@ export default defineComponent({
         ) : (
           <div
             class={`${mergedClsPrefix}-layout-sider__content`}
-            style={this.contentStyle}
+            style={this.scrollableDivStyle}
           >
             {this.$slots}
           </div>

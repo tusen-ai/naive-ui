@@ -20,17 +20,15 @@ Not Recommended:
 </n-layout>
 Recommended:
 <n-layout has-sider style="height: 240px; border: 1px solid #7773;">
-  <n-layout-sider>
-    <div style="width: 100%; padding: 24px; box-sizing: border-box;">
-      <n-h1>Content</n-h1>
-      <n-h1>Content</n-h1>
-      <n-h1>Content</n-h1>
-      <n-h1>Content</n-h1>
-      <n-h1>Content</n-h1>
-      <n-h1>Content</n-h1>
-      <n-h1>Content</n-h1>
-      <n-h1>Content</n-h1>
-    </div>
+  <n-layout-sider content-style="padding: 24px;">
+    <n-h1>Content</n-h1>
+    <n-h1>Content</n-h1>
+    <n-h1>Content</n-h1>
+    <n-h1>Content</n-h1>
+    <n-h1>Content</n-h1>
+    <n-h1>Content</n-h1>
+    <n-h1>Content</n-h1>
+    <n-h1>Content</n-h1>
   </n-layout-sider>
 </n-layout>
 ```

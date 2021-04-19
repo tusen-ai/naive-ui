@@ -91,6 +91,8 @@ export default cB('layout-sider', `
     transition: background-color .3s var(--bezier);
   `),
   cE('content', `
+    flex-shrink: 0;
+    box-sizing: border-box;
     height: 100%;
     opacity: 0;
     transition: opacity .3s var(--bezier);

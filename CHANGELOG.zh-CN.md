@@ -6,6 +6,12 @@
 
 - `n-drawer` 默认不再包含 padding，填充 drawer 的内容可以使用 `n-drawer-content`
 
+### Feats
+
+- `n-drawer` 增加 `content-style` 属性
+- `n-layout` 增加 `content-style` 属性
+- `n-layout-sider` 增加 `content-style` 属性
+
 ## 2.6.0
 
 ### Feats

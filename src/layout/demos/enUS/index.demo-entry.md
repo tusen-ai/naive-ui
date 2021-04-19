@@ -28,6 +28,7 @@ scroll-to
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| content-style | `string \| Object` | `undefined` | Style of scrollable content node. |
 | has-sider | `boolean` | `false` | Whether the component has sider inside. If so it must be `true`. |
 | native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on itself. If set to `false`, layout will use a naive-ui style scrollbar for content |
 | position | `'static' \| 'absolute'` | `'static'` | `static` position will make it css position set to `static`. `absolute` position will make it css position set to `absolute` and `left`, `right`, `top`, `bottom` to `0`. `absolute` position is very useful when you want to make content scroll in a fixed container or make the whole page's layout in a fixed position. You may need to change the style of the component to make it display as you expect. |
@@ -54,6 +55,7 @@ scroll-to
 | collapse-mode | `'transform' \| 'width'` | `'transform'` | If set to `'width'`, the sider's content width will be actually collapsed. If set to `'transform'`, the sider will only move it's position and won't change its content width. |
 | collapsed | `boolean` | `undefined` | Whether the sider is collapsed. It only works for when `position` is `'static'`. |
 | collapsed-width | `number` | `48` |  |
+| content-style | `string \| Object` | `undefined` | Style of scrollable content node. |
 | default-collapsed | `boolean` | `false` |  |
 | position | `'static' \| 'absolute'` | `'static'` | `static` position will make it css position set to `static`. `absolute` position will make it css position set to `absolute` and `left`, `top`, `bottom` to `0`. `absolute` position is very useful when you want to make content scroll in a fixed container or make the whole page's layout in a fixed position. You may need to change the style of the component to make it as you expect. |
 | show-content | `boolean` | `true` | If set to `false`, sider content will be invisible. |
