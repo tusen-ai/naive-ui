@@ -39,6 +39,30 @@ I try to make it not rather slow. At least select works with virtual list.
 
 What's more, ..., no more. Just enjoy it.
 
+## Installation
+
+### npm
+
+Use npm to install.
+
+```bash
+npm i -D naive-ui
+```
+
+### Fonts
+
+```bash
+npm i -D vfonts
+```
+
+### Icons
+
+naive-ui recommends using [xicons](https://www.xicons.org) as icon library.
+
+### Design Resources
+
+Sorry, currently there is nothing.
+
 ## License
 
 Naive UI is licensed under the [MIT license](https://opensource.org/licenses/MIT).

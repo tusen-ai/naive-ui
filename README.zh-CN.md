@@ -39,6 +39,30 @@ Naive UI 全量使用 Typescript 编写，和你的 Typescript 项目无缝衔�
 
 顺便一提，...，没有顺便了。祝你使用愉快。
 
+## 安装
+
+### npm
+
+使用 npm 安装。
+
+```bash
+npm i -D naive-ui
+```
+
+### 字体
+
+```bash
+npm i -D vfonts
+```
+
+### 图标
+
+naive-ui 建议使用 [xicons](https://www.xicons.org) 作为图标库。
+
+### 设计资源
+
+不好意思暂时没有。
+
 ## 许可
 
 Naive UI 使用 [MIT license](https://opensource.org/licenses/MIT) 许可证书。
