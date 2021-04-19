@@ -2,6 +2,10 @@
 
 ## Pending
 
+# Feats
+
+- `n-checkbox` add `focusable` prop.
+
 ### Fixes
 
 - Fix `n-cascader` loading triggered when click checkbox.

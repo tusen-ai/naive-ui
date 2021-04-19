@@ -2,6 +2,10 @@
 
 ## Pending
 
+# Feats
+
+- `n-checkbox` 增加 `focusable` 属性
+
 ### Fixes
 
 - 修正 `n-cascader` 点击 checkbox 会触发 loading

@@ -17,23 +17,24 @@ event
 
 ### Checkbox Props
 
-| 名称              | 类型                 | 默认值      | 说明           |
-| ----------------- | -------------------- | ----------- | -------------- |
-| checked           | `boolean`            | `undefined` |                |
-| default-checked   | `boolean`            | `false`     |                |
-| disabled          | `boolean`            | `false`     |                |
-| label             | `string \| function` | `undefined` | 可以是渲染函数 |
-| value             | `string \| number`   | `undefined` |                |
-| on-update:checked | `(checked: boolean)` | `undefined` |                |
+| 名称              | 类型                           | 默认值      | 说明 |
+| ----------------- | ------------------------------ | ----------- | ---- |
+| checked           | `boolean`                      | `undefined` |      |
+| default-checked   | `boolean`                      | `false`     |      |
+| disabled          | `boolean`                      | `false`     |      |
+| focusable         | `boolean`                      | `true`      |      |
+| label             | `string \| (() => VNodeChild)` | `undefined` |      |
+| value             | `string \| number`             | `undefined` |      |
+| on-update:checked | `(checked: boolean) => void`   | `undefined` |      |
 
 ### Checkbox Group Props
 
-| 名称            | 类型                        | 默认值      | 说明        |
-| --------------- | --------------------------- | ----------- | ----------- | --- |
-| disabled        | `boolean`                   | `false`     |             |
-| default-value   | `Array<string \| number>    | null`       | `null`      |     |
-| value           | `Array<string \| number>    | null`       | `undefined` |     |
-| on-update:value | `(value: string \| number)` | `undefined` |             |
+| 名称            | 类型                              | 默认值      | 说明 |
+| --------------- | --------------------------------- | ----------- | ---- |
+| disabled        | `boolean`                         | `false`     |      |
+| default-value   | `Array<string \| number>`         | `null`      |
+| value           | `Array<string \| number> \| null` | `undefined` |
+| on-update:value | `(value: string \| number)`       | `undefined` |      |
 
 ## Slots
 

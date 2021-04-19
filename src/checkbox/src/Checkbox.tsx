@@ -51,6 +51,10 @@ const checkboxProps = {
     type: String,
     default: undefined
   },
+  focusable: {
+    type: Boolean,
+    default: true
+  },
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:checked': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
@@ -247,6 +251,7 @@ export default defineComponent({
       cssVars,
       label,
       mergedClsPrefix,
+      focusable,
       handleKeyUp,
       handleKeyDown,
       handleClick
@@ -262,7 +267,7 @@ export default defineComponent({
             [`${mergedClsPrefix}-checkbox--table-header`]: tableHeader
           }
         ]}
-        tabindex={mergedDisabled ? undefined : 0}
+        tabindex={mergedDisabled || !focusable ? undefined : 0}
         style={cssVars as CSSProperties}
         onKeyup={handleKeyUp}
         onKeydown={handleKeyDown}
