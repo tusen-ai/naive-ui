@@ -1,12 +1,19 @@
-<!--anchor:on-->
+<p align="center">
+  <img width="144px" src="https://naiveui.oss-cn-hongkong.aliyuncs.com/naivelogo.svg" />
+</p>
 
-# Naive UI
+<h1 align="center">Naive UI</h1>
+<p align="center">一个 Vue 3 UI 框架</p>
+<p align="center"><b>比较完整，主题可调，使用 Typescript，不算太慢</b></p>
+<p align="center">有点意思</p>
 
-Naive UI 是一个 Vue3 UI 框架。
+<p align="center"><a href="README.md">English</a> | 中文</p>
 
-要了解如何安装，参见[安装](installation)。
+## 文档
 
-它比较完整，主题可调，用 Typescript 写的，不算太慢。
+[www.naiveui.com(WIP)](http://www.naiveui.com)
+
+## 特性
 
 ## 比较完整
 
@@ -35,3 +42,5 @@ Naive UI 全量使用 Typescript 编写，和你的 Typescript 项目无缝衔�
 ## 许可
 
 Naive UI 使用 [MIT license](https://opensource.org/licenses/MIT) 许可证书。
+
+`result` 组件的图像资源来自于 [Twemoji](https://github.com/twitter/twemoji)，遵守 [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) 许可。

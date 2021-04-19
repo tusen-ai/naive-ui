@@ -7,6 +7,8 @@
 <p align="center"><b>Rather Complete, Themable, With Typescript, Not Too Slow</b></p>
 <p align="center">Interesting Somehow</p>
 
+<p align="center">English | <a href="README.zh-CN.md">中文</a></p>
+
 ## Documentation
 
 [www.naiveui.com(WIP)](http://www.naiveui.com)
