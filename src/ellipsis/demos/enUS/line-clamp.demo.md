@@ -4,7 +4,12 @@ Naive-ui provide multiple line ellipsis based on `-webkit-line-clamp`. See [cani
 
 ```html
 <n-ellipsis :line-clamp="2">
-  电灯熄灭 物换星移 泥牛入海<br />黑暗好像 一颗巨石 按在胸口<br />独脚大盗
-  百万富翁 摸爬滚打<br />黑暗好像 一颗巨石 按在胸口
+  The lights are extinguished.<br />
+  Matter is transformed and the heavens have shifted.<br />
+  Clay figures vanish into the sea.<br />
+  The darkness is like a boulder pressing down upon the breast.<br />
+  The one-legged pirate and the millionaire fumble and grope on their
+  bellies.<br />
+  The darkness is like a boulder pressing down upon the breast.
 </n-ellipsis>
 ```
