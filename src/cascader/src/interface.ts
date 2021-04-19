@@ -2,7 +2,7 @@ import { TreeNode } from 'treemate'
 import type { MergedTheme } from '../../_mixins'
 import type { NLocale } from '../../locales'
 import type { CascaderTheme } from '../styles'
-import { InjectionKey } from 'vue'
+import { InjectionKey, Ref } from 'vue'
 
 export type ValueAtom = string | number
 export type Value = ValueAtom | ValueAtom[]
@@ -48,34 +48,34 @@ export type OnUpdateValueImpl = (value: Value | null) => void
 export type MenuModel = TmNode[][]
 
 export interface CascaderInjection {
-  mergedClsPrefix: string
-  mergedTheme: MergedTheme<CascaderTheme>
-  mergedValue: Value | null
-  checkedKeys: Key[]
-  indeterminateKeys: Key[]
-  hoverKeyPath: Key[]
-  leafOnly: boolean
-  multiple: boolean
-  keyboardKey: Key | null
-  hoverKey: Key | null
-  remote: boolean
-  loadingKeySet: Set<Key>
-  expandTrigger: ExpandTrigger
-  isMounted: boolean
-  cascade: boolean
+  mergedClsPrefixRef: Ref<string>
+  mergedThemeRef: Ref<MergedTheme<CascaderTheme>>
+  mergedValueRef: Ref<Value | null>
+  checkedKeysRef: Ref<Key[]>
+  indeterminateKeysRef: Ref<Key[]>
+  hoverKeyPathRef: Ref<Key[]>
+  leafOnlyRef: Ref<boolean>
+  multipleRef: Ref<boolean>
+  keyboardKeyRef: Ref<Key | null>
+  hoverKeyRef: Ref<Key | null>
+  remoteRef: Ref<boolean>
+  loadingKeySetRef: Ref<Set<Key>>
+  expandTriggerRef: Ref<ExpandTrigger>
+  isMountedRef: Ref<boolean>
+  cascadeRef: Ref<boolean>
+  onLoadRef: Ref<((value: BaseOption) => Promise<void>) | undefined>
+  localeRef: Ref<NLocale['Cascader']>
   syncCascaderMenuPosition: () => void
   syncSelectMenuPosition: () => void
   updateKeyboardKey: (value: Key | null) => void
   updateHoverKey: (value: Key | null) => void
   addLoadingKey: (value: Key) => void
   deleteLoadingKey: (value: Key) => void
-  onLoad?: (value: BaseOption) => Promise<void>
   doCheck: (value: Key) => void
   doUncheck: (value: Key) => void
   closeMenu: () => void
   handleSelectMenuClickOutside: (e: MouseEvent) => void
   handleCascaderMenuClickOutside: (e: MouseEvent) => void
-  locale: NLocale['Cascader']
 }
 
 export interface CascaderSubmenuInstance {

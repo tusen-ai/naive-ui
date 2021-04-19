@@ -1,4 +1,11 @@
-import { h, ref, onBeforeUnmount, defineComponent, Transition } from 'vue'
+import {
+  h,
+  ref,
+  onBeforeUnmount,
+  defineComponent,
+  Transition,
+  toRef
+} from 'vue'
 import { useStyle } from '../../../_mixins'
 import type { MenuMaskRef } from './interface'
 import style from './styles/index.cssr'
@@ -11,8 +18,8 @@ export default defineComponent({
       required: true
     }
   },
-  setup () {
-    useStyle('BaseMenuMask', style)
+  setup (props) {
+    useStyle('BaseMenuMask', style, toRef(props, 'clsPrefix'))
     const messageRef = ref<string | null>(null)
     let timerId: number | null = null
     const uncontrolledShowRef = ref(false)

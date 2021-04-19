@@ -7,7 +7,6 @@ import {
   ref,
   watch,
   toRef,
-  reactive,
   CSSProperties,
   isReactive
 } from 'vue'
@@ -629,39 +628,36 @@ export default defineComponent({
     function syncCascaderMenuPosition (): void {
       cascaderMenuFollowerRef.value?.syncPosition()
     }
-    provide(
-      cascaderInjectionKey,
-      reactive({
-        mergedClsPrefix,
-        mergedTheme: themeRef,
-        mergedValue: mergedValueRef,
-        checkedKeys: checkedKeysRef,
-        indeterminateKeys: indeterminateKeysRef,
-        hoverKeyPath: hoverKeyPathRef,
-        leafOnly: toRef(props, 'leafOnly'),
-        cascade: toRef(props, 'cascade'),
-        multiple: toRef(props, 'multiple'),
-        keyboardKey: keyboardKeyRef,
-        hoverKey: hoverKeyRef,
-        remote: toRef(props, 'remote'),
-        loadingKeySet: loadingKeySetRef,
-        expandTrigger: computed(() => props.expandTrigger),
-        isMounted: useIsMounted(),
-        onLoad: toRef(props, 'onLoad'),
-        locale,
-        syncCascaderMenuPosition,
-        syncSelectMenuPosition,
-        updateKeyboardKey,
-        updateHoverKey,
-        addLoadingKey,
-        deleteLoadingKey,
-        doCheck,
-        doUncheck,
-        closeMenu,
-        handleSelectMenuClickOutside,
-        handleCascaderMenuClickOutside
-      })
-    )
+    provide(cascaderInjectionKey, {
+      mergedClsPrefixRef: mergedClsPrefix,
+      mergedThemeRef: themeRef,
+      mergedValueRef,
+      checkedKeysRef,
+      indeterminateKeysRef,
+      hoverKeyPathRef,
+      leafOnlyRef: toRef(props, 'leafOnly'),
+      cascadeRef: toRef(props, 'cascade'),
+      multipleRef: toRef(props, 'multiple'),
+      keyboardKeyRef,
+      hoverKeyRef,
+      remoteRef: toRef(props, 'remote'),
+      loadingKeySetRef,
+      expandTriggerRef: toRef(props, 'expandTrigger'),
+      isMountedRef: useIsMounted(),
+      onLoadRef: toRef(props, 'onLoad'),
+      localeRef: locale,
+      syncCascaderMenuPosition,
+      syncSelectMenuPosition,
+      updateKeyboardKey,
+      updateHoverKey,
+      addLoadingKey,
+      deleteLoadingKey,
+      doCheck,
+      doUncheck,
+      closeMenu,
+      handleSelectMenuClickOutside,
+      handleCascaderMenuClickOutside
+    })
     return {
       selectMenuFollowerRef,
       cascaderMenuFollowerRef,

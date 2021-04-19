@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修正 `n-cascader` 点击 checkbox 会触发 loading
+- 修正 `n-cascader` 菜单遮罩样式
+
 ## 2.7.0
 
 ### Breaking Changes

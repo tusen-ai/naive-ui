@@ -45,18 +45,24 @@ export default defineComponent({
     }
   },
   setup (props) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const NCascader = inject(cascaderInjectionKey)!
+    const {
+      localeRef,
+      isMountedRef,
+      mergedClsPrefixRef,
+      syncCascaderMenuPosition,
+      handleCascaderMenuClickOutside
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    } = inject(cascaderInjectionKey)!
     const submenuInstRefs: CascaderSubmenuInstance[] = []
     const maskInstRef = ref<MenuMaskRef | null>(null)
     watch(toRef(props, 'value'), () => {
       void nextTick(() => {
-        NCascader.syncCascaderMenuPosition()
+        syncCascaderMenuPosition()
       })
     })
     watch(toRef(props, 'menuModel'), () => {
       void nextTick(() => {
-        NCascader.syncCascaderMenuPosition()
+        syncCascaderMenuPosition()
       })
     })
     function handleMenuMouseDown (e: MouseEvent): void {
@@ -65,12 +71,12 @@ export default defineComponent({
     }
     function showErrorMessage (label: string): void {
       const {
-        locale: { loadingRequiredMessage }
-      } = NCascader
+        value: { loadingRequiredMessage }
+      } = localeRef
       maskInstRef.value?.showOnce(loadingRequiredMessage(label))
     }
     function handleClickOutside (e: MouseEvent): void {
-      NCascader.handleCascaderMenuClickOutside(e)
+      handleCascaderMenuClickOutside(e)
     }
     const exposedRef: CascaderMenuInstance = {
       scroll (depth: number, index: number, elSize: number) {
@@ -82,7 +88,8 @@ export default defineComponent({
       showErrorMessage
     }
     return {
-      NCascader,
+      isMounted: isMountedRef,
+      mergedClsPrefix: mergedClsPrefixRef,
       submenuInstRefs,
       maskInstRef,
       handleClickOutside,
@@ -91,18 +98,15 @@ export default defineComponent({
     }
   },
   render () {
-    const { NCascader, submenuInstRefs } = this
+    const { submenuInstRefs } = this
     return (
-      <Transition
-        name="n-fade-in-scale-up-transition"
-        appear={NCascader.isMounted}
-      >
+      <Transition name="n-fade-in-scale-up-transition" appear={this.isMounted}>
         {{
           default: () =>
             this.show
               ? withDirectives(
                 <div
-                  class={`${NCascader.mergedClsPrefix}-cascader-menu`}
+                  class={`${this.mergedClsPrefix}-cascader-menu`}
                   onMousedown={this.handleMenuMouseDown}
                 >
                   {this.menuModel.map((submenuOptions, index) => {
@@ -120,7 +124,7 @@ export default defineComponent({
                     )
                   })}
                   <NBaseMenuMask
-                    clsPrefix={NCascader.mergedClsPrefix}
+                    clsPrefix={this.mergedClsPrefix}
                     ref="maskInstRef"
                   />
                 </div>,

@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-cascader` loading triggered when click checkbox.
+- Fix `n-cascader` menu mask style.
+
 ## 2.7.0
 
 ### Breaking Changes

@@ -21,7 +21,6 @@ import type {
 import { InternalSelectMenuRef, NInternalSelectMenu } from '../../_internal'
 import { createSelectOptions } from './utils'
 import {
-  CascaderInjection,
   TmNode,
   Value,
   Filter,
@@ -61,11 +60,22 @@ export default defineComponent({
     }
   },
   setup (props) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const NCascader = inject<CascaderInjection>(cascaderInjectionKey)!
+    const {
+      isMountedRef,
+      leafOnlyRef,
+      mergedValueRef,
+      mergedClsPrefixRef,
+      mergedThemeRef,
+      syncSelectMenuPosition,
+      closeMenu,
+      handleSelectMenuClickOutside,
+      doUncheck: cascaderDoUncheck,
+      doCheck: cascaderDoCheck
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    } = inject(cascaderInjectionKey)!
     const menuInstRef = ref<InternalSelectMenuRef | null>(null)
     const selectOptionsRef = computed(() => {
-      return createSelectOptions(props.tmNodes, NCascader.leafOnly)
+      return createSelectOptions(props.tmNodes, leafOnlyRef.value)
     })
     const filteredSelectOptionsRef = computed(() => {
       const { filter, pattern } = props
@@ -91,12 +101,12 @@ export default defineComponent({
     })
     watch(toRef(props, 'value'), () => {
       void nextTick(() => {
-        NCascader.syncSelectMenuPosition()
+        syncSelectMenuPosition()
       })
     })
     watch(filteredSelectOptionsRef, () => {
       void nextTick(() => {
-        NCascader.syncSelectMenuPosition()
+        syncSelectMenuPosition()
       })
     })
     function handleToggleOption (option: BaseOption): void {
@@ -104,19 +114,18 @@ export default defineComponent({
     }
     function doCheck (option: BaseOption): void {
       if (props.multiple) {
-        const { mergedValue, doCheck, doUncheck } = NCascader
+        const { value: mergedValue } = mergedValueRef
         if (Array.isArray(mergedValue)) {
           if (!mergedValue.includes(option.value)) {
-            doCheck(option.value)
+            cascaderDoCheck(option.value)
           } else {
-            doUncheck(option.value)
+            cascaderDoUncheck(option.value)
           }
         } else if (mergedValue === null) {
-          doCheck(option.value)
+          cascaderDoCheck(option.value)
         }
       } else {
-        const { doCheck, closeMenu } = NCascader
-        doCheck(option.value)
+        cascaderDoCheck(option.value)
         closeMenu()
       }
     }
@@ -137,7 +146,7 @@ export default defineComponent({
       return false
     }
     function handleClickOutside (e: MouseEvent): void {
-      NCascader.handleSelectMenuClickOutside(e)
+      handleSelectMenuClickOutside(e)
     }
     const exposedRef: SelectMenuInstance = {
       prev,
@@ -145,7 +154,9 @@ export default defineComponent({
       enter
     }
     return {
-      NCascader,
+      isMounted: isMountedRef,
+      mergedTheme: mergedThemeRef,
+      mergedClsPrefix: mergedClsPrefixRef,
       menuInstRef,
       selectTreeMate: selectTreeMateRef,
       handleToggleOption,
@@ -154,25 +165,22 @@ export default defineComponent({
     }
   },
   render () {
-    const { NCascader } = this
+    const { mergedClsPrefix, isMounted, mergedTheme } = this
     return (
-      <Transition
-        name="n-fade-in-scale-up-transition"
-        appear={NCascader.isMounted}
-      >
+      <Transition name="n-fade-in-scale-up-transition" appear={isMounted}>
         {{
           default: () =>
             this.show
               ? withDirectives(
                 <NInternalSelectMenu
                   ref="menuInstRef"
-                  clsPrefix={NCascader.mergedClsPrefix}
-                  class={`${NCascader.mergedClsPrefix}-cascader-menu`}
+                  clsPrefix={mergedClsPrefix}
+                  class={`${mergedClsPrefix}-cascader-menu`}
                   autoPending
                   themeOverrides={
-                    NCascader.mergedTheme.peerOverrides.InternalSelectMenu
+                    mergedTheme.peerOverrides.InternalSelectMenu
                   }
-                  theme={NCascader.mergedTheme.peers.InternalSelectMenu}
+                  theme={mergedTheme.peers.InternalSelectMenu}
                   treeMate={this.selectTreeMate}
                   multiple={this.multiple}
                   value={this.value}

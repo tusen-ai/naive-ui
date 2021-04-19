@@ -1,17 +1,10 @@
-import {
-  h,
-  computed,
-  inject,
-  toRef,
-  defineComponent,
-  PropType,
-  Transition
-} from 'vue'
+import { h, computed, inject, defineComponent, PropType, Transition } from 'vue'
 import { useMemo } from 'vooks'
 import { NCheckbox } from '../../checkbox'
 import { NBaseLoading, NBaseIcon } from '../../_internal'
 import { ChevronRightIcon, CheckmarkIcon } from '../../_internal/icons'
 import { cascaderInjectionKey, TmNode } from './interface'
+import { happensIn } from 'seemly'
 
 export default defineComponent({
   name: 'NCascaderOption',
@@ -22,11 +15,34 @@ export default defineComponent({
     }
   },
   setup (props) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const NCascader = inject(cascaderInjectionKey)!
+    const {
+      expandTriggerRef,
+      remoteRef,
+      multipleRef,
+      mergedValueRef,
+      checkedKeysRef,
+      indeterminateKeysRef,
+      hoverKeyPathRef,
+      keyboardKeyRef,
+      loadingKeySetRef,
+      cascadeRef,
+      leafOnlyRef,
+      onLoadRef,
+      mergedClsPrefixRef,
+      mergedThemeRef,
+      updateHoverKey,
+      updateKeyboardKey,
+      addLoadingKey,
+      deleteLoadingKey,
+      closeMenu,
+      doCheck,
+      doUncheck
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    } = inject(cascaderInjectionKey)!
     const valueRef = computed(() => props.tmNode.rawNode.value)
     const useHoverTriggerRef = computed(() => {
-      const { expandTrigger, remote } = NCascader
+      const { value: expandTrigger } = expandTriggerRef
+      const { value: remote } = remoteRef
       return !remote && expandTrigger === 'hover'
     })
     const mergedHandleMouseEnterRef = computed(() => {
@@ -42,29 +58,31 @@ export default defineComponent({
       return undefined
     })
     const checkedRef = useMemo(() => {
-      if (!NCascader.multiple) return NCascader.mergedValue === valueRef.value
-      return NCascader.checkedKeys.includes(valueRef.value)
+      const { value: multiple } = multipleRef
+      if (!multiple) return mergedValueRef.value === valueRef.value
+      return checkedKeysRef.value.includes(valueRef.value)
     })
     const indeterminateRef = useMemo(() => {
-      if (!NCascader.multiple) return false
-      return NCascader.indeterminateKeys.includes(valueRef.value)
+      if (!multipleRef.value) return false
+      return indeterminateKeysRef.value.includes(valueRef.value)
     })
     const hoverPendingRef = useMemo(() => {
-      return NCascader.hoverKeyPath.includes(valueRef.value)
+      return hoverKeyPathRef.value.includes(valueRef.value)
     })
     const keyboardPendingRef = useMemo(() => {
-      if (NCascader.keyboardKey === null) return false
-      return NCascader.keyboardKey === valueRef.value
+      const { value: keyboardKey } = keyboardKeyRef
+      if (keyboardKey === null) return false
+      return keyboardKey === valueRef.value
     })
     const isLoadingRef = useMemo(() => {
-      if (NCascader.remote) {
-        return NCascader.loadingKeySet.has(valueRef.value)
+      if (remoteRef.value) {
+        return loadingKeySetRef.value.has(valueRef.value)
       }
       return false
     })
     const showCheckboxRef = computed(() => {
-      if (NCascader.multiple && NCascader.cascade) return true
-      if (!NCascader.leafOnly) return true
+      if (multipleRef.value && cascadeRef.value) return true
+      if (!leafOnlyRef.value) return true
     })
     const rawNodeRef = computed(() => props.tmNode.rawNode)
     const isLeafRef = computed(() => props.tmNode.isLeaf)
@@ -73,17 +91,12 @@ export default defineComponent({
     const isShallowLoadedRef = computed(() => {
       return props.tmNode.shallowLoaded
     })
-    function handleClick (): void {
+    function handleClick (e: MouseEvent): void {
       if (disabledRef.value) return
-      const {
-        updateHoverKey,
-        updateKeyboardKey,
-        remote,
-        loadingKeySet,
-        addLoadingKey,
-        deleteLoadingKey,
-        onLoad
-      } = NCascader
+      if (happensIn(e, 'checkbox')) return
+      const { value: remote } = remoteRef
+      const { value: loadingKeySet } = loadingKeySetRef
+      const { value: onLoad } = onLoadRef
       const { value } = valueRef
       const { value: isLeaf } = isLeafRef
       const { value: isShallowLoaded } = isShallowLoadedRef
@@ -105,7 +118,6 @@ export default defineComponent({
     }
     function handleMouseEnter (): void {
       if (!useHoverTriggerRef.value || disabledRef.value) return
-      const { updateHoverKey, updateKeyboardKey } = NCascader
       const { value } = valueRef
       updateHoverKey(value)
       updateKeyboardKey(value)
@@ -119,7 +131,7 @@ export default defineComponent({
       if (!isLeaf) toggleCheckbox()
     }
     function toggleCheckbox (): void {
-      const { doCheck, doUncheck, closeMenu, multiple } = NCascader
+      const { value: multiple } = multipleRef
       const { value } = valueRef
       if (multiple) {
         if (indeterminateRef.value || checkedRef.value) {
@@ -133,10 +145,9 @@ export default defineComponent({
       }
     }
     return {
-      NCascader,
-      leafOnly: toRef(NCascader, 'leafOnly'),
-      multiple: toRef(NCascader, 'multiple'),
-      cascade: toRef(NCascader, 'cascade'),
+      leafOnly: leafOnlyRef,
+      multiple: multipleRef,
+      cascade: cascadeRef,
       checked: checkedRef,
       indeterminate: indeterminateRef,
       hoverPending: hoverPendingRef,
@@ -146,6 +157,8 @@ export default defineComponent({
       isLeaf: isLeafRef,
       disabled: disabledRef,
       label: labelRef,
+      mergedClsPrefix: mergedClsPrefixRef,
+      mergedTheme: mergedThemeRef,
       handleClick,
       handleCheckboxUpdateValue,
       mergedHandleMouseEnter: mergedHandleMouseEnterRef,
@@ -153,8 +166,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { NCascader } = this
-    const { mergedClsPrefix } = NCascader
+    const { mergedClsPrefix } = this
     return (
       <div
         class={[
@@ -174,11 +186,12 @@ export default defineComponent({
         {this.showCheckbox ? (
           <div class={`${mergedClsPrefix}-cascader-option__prefix`}>
             <NCheckbox
+              data-checkbox
               disabled={this.disabled}
               checked={this.checked}
               indeterminate={this.indeterminate}
-              theme={NCascader.mergedTheme.peers.Checkbox}
-              themeOverrides={NCascader.mergedTheme.peerOverrides.Checkbox}
+              theme={this.mergedTheme.peers.Checkbox}
+              themeOverrides={this.mergedTheme.peerOverrides.Checkbox}
               onUpdateChecked={this.handleCheckboxUpdateValue}
             />
           </div>

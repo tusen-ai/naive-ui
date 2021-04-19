@@ -21,8 +21,11 @@ export default defineComponent({
     }
   },
   setup () {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const NCascader = inject(cascaderInjectionKey)!
+    const {
+      mergedClsPrefixRef,
+      mergedThemeRef
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    } = inject(cascaderInjectionKey)!
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     const inst: CascaderSubmenuInstance = {
       scroll (index: number, elSize: number) {
@@ -33,19 +36,20 @@ export default defineComponent({
       }
     }
     return {
-      NCascader,
+      mergedClsPrefix: mergedClsPrefixRef,
+      mergedTheme: mergedThemeRef,
       scrollbarInstRef,
       ...inst
     }
   },
   render () {
-    const { NCascader } = this
+    const { mergedClsPrefix, mergedTheme } = this
     return (
-      <div class={`${NCascader.mergedClsPrefix}-cascader-submenu`}>
+      <div class={`${mergedClsPrefix}-cascader-submenu`}>
         <NScrollbar
           ref="scrollbarInstRef"
-          theme={NCascader.mergedTheme.peers.Scrollbar}
-          themeOverrides={NCascader.mergedTheme.peerOverrides.Scrollbar}
+          theme={mergedTheme.peers.Scrollbar}
+          themeOverrides={mergedTheme.peerOverrides.Scrollbar}
         >
           {{
             default: () =>
