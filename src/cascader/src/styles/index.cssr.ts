@@ -19,14 +19,16 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // --loading-color
 export default c([
   cB('cascader-menu', `
+    outline: none;
     position: relative;
     margin: 4px 0;
     display: flex;
-    flex-wrap: nowrap;
+    flex-flow: column nowrap;
     border-radius: var(--menu-border-radius);
     overflow: hidden;
     box-shadow: var(--menu-box-shadow);
     color: var(--option-text-color);
+    background-color: var(--menu-color);
   `, [
     fadeInScaleUpTransition({ transformOrigin: 'inherit', duration: '0.2s' }),
     cB('scrollbar', {
@@ -40,12 +42,16 @@ export default c([
     cB('base-loading', {
       color: 'var(--loading-color)'
     }),
+    cB('cascader-submenu-wrapper', `
+      position: relative;
+      display: flex;
+      flex-wrap: nowrap;
+    `),
     cB('cascader-submenu', `
       height: var(--menu-height);
       position: relative;
       overflow: hidden;
-      min-width: 182px;
-      background-color: var(--menu-color);
+      min-width: 180px;
     `, [
       cB('scrollbar-content', {
         position: 'relative'
@@ -62,6 +68,11 @@ export default c([
         border-left: 1px solid var(--menu-divider-color);
       `)
     ]),
+    cB('cascader-menu-action', `
+      box-sizing: border-box;
+      padding: 8px;
+      border-top: 1px solid var(--menu-divider-color);
+    `),
     cB('cascader-option', `
       height: var(--option-height);
       line-height: var(--option-height);
@@ -82,9 +93,11 @@ export default c([
       cM('show-prefix', {
         paddingLeft: 0
       }),
-      cE('label', {
-        flex: 1
-      }),
+      cE('label', `
+        flex: 1 0 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      `),
       cE('prefix', {
         width: '32px',
         display: 'flex',

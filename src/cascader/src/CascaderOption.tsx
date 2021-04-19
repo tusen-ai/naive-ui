@@ -93,25 +93,26 @@ export default defineComponent({
     })
     function handleClick (e: MouseEvent): void {
       if (disabledRef.value) return
-      if (happensIn(e, 'checkbox')) return
       const { value: remote } = remoteRef
       const { value: loadingKeySet } = loadingKeySetRef
       const { value: onLoad } = onLoadRef
       const { value } = valueRef
       const { value: isLeaf } = isLeafRef
       const { value: isShallowLoaded } = isShallowLoadedRef
-      if (remote && !isShallowLoaded && !loadingKeySet.has(value) && onLoad) {
-        addLoadingKey(value)
-        onLoad(rawNodeRef.value)
-          .then(() => {
-            deleteLoadingKey(value)
-          })
-          .catch(() => {
-            deleteLoadingKey(value)
-          })
+      if (!happensIn(e, 'checkbox')) {
+        if (remote && !isShallowLoaded && !loadingKeySet.has(value) && onLoad) {
+          addLoadingKey(value)
+          onLoad(rawNodeRef.value)
+            .then(() => {
+              deleteLoadingKey(value)
+            })
+            .catch(() => {
+              deleteLoadingKey(value)
+            })
+        }
+        updateHoverKey(value)
+        updateKeyboardKey(value)
       }
-      updateHoverKey(value)
-      updateKeyboardKey(value)
       if (isLeaf) {
         toggleCheckbox()
       }
@@ -141,7 +142,7 @@ export default defineComponent({
         }
       } else {
         doCheck(value)
-        closeMenu()
+        closeMenu(true)
       }
     }
     return {
@@ -186,6 +187,7 @@ export default defineComponent({
         {this.showCheckbox ? (
           <div class={`${mergedClsPrefix}-cascader-option__prefix`}>
             <NCheckbox
+              focusable={false}
               data-checkbox
               disabled={this.disabled}
               checked={this.checked}

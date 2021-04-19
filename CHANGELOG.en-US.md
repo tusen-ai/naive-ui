@@ -5,6 +5,7 @@
 # Feats
 
 - `n-checkbox` add `focusable` prop.
+- `n-cascader` add `action` slot.
 
 ### Fixes
 

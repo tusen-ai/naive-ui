@@ -18,7 +18,7 @@ import {
   FollowerPlacement,
   FollowerRef
 } from 'vueuc'
-import { depx, changeColor } from 'seemly'
+import { depx, changeColor, happensIn } from 'seemly'
 import { useIsMounted, useMergedState } from 'vooks'
 import { NInternalSelection, InternalSelectionInst } from '../../_internal'
 import { useLocale, useTheme, useConfig, useFormItem } from '../../_mixins'
@@ -247,7 +247,7 @@ export default defineComponent({
       hoverKeyRef.value = key
     }
     function doCheck (key: Key): boolean {
-      const { cascade, multiple, leafOnly } = props
+      const { cascade, multiple, leafOnly, filterable } = props
       if (multiple) {
         try {
           const { checkedKeys } = treeMateRef.value.check(
@@ -259,6 +259,7 @@ export default defineComponent({
             }
           )
           doUpdateValue(checkedKeys)
+          if (filterable) focusSelectionInput()
         } catch (err) {
           if (err instanceof SubtreeNotLoadedError) {
             if (cascaderMenuInstRef.value) {
@@ -375,16 +376,25 @@ export default defineComponent({
       if (onFocus) call(onFocus, e)
       nTriggerFormFocus()
     }
+    function focusSelectionInput (): void {
+      triggerInstRef.value?.focusInput()
+    }
+    function focusSelection (): void {
+      triggerInstRef.value?.focus()
+    }
     function openMenu (): void {
       if (!props.disabled) {
         patternRef.value = ''
         uncontrolledShowRef.value = true
         if (props.filterable) {
-          triggerInstRef.value?.focusInput()
+          focusSelectionInput()
         }
       }
     }
-    function closeMenu (): void {
+    function closeMenu (returnFocus = false): void {
+      if (returnFocus) {
+        focusSelection()
+      }
       uncontrolledShowRef.value = false
       patternRef.value = ''
     }
@@ -488,6 +498,7 @@ export default defineComponent({
       }
     }
     function handleKeyUp (e: KeyboardEvent): void {
+      if (happensIn(e, 'action')) return
       switch (e.code) {
         case 'Space':
           if (props.filterable) return
@@ -508,7 +519,7 @@ export default defineComponent({
                 } else {
                   const checkIsValid = doCheck(keyboardKey)
                   if (!props.multiple && checkIsValid) {
-                    closeMenu()
+                    closeMenu(true)
                   }
                 }
               }
@@ -553,9 +564,11 @@ export default defineComponent({
           }
           break
         case 'Escape':
-          closeMenu()
-          triggerInstRef.value?.focus()
+          closeMenu(true)
       }
+    }
+    function handleMenuKeyUp (e: KeyboardEvent): void {
+      handleKeyUp(e)
     }
     // --- search
     function handleClear (e: MouseEvent): void {
@@ -563,20 +576,47 @@ export default defineComponent({
       doUpdateValue(null)
     }
     function handleTriggerFocus (e: FocusEvent): void {
-      doFocus(e)
-      focusedRef.value = true
+      if (!cascaderMenuInstRef.value?.$el.contains(e.relatedTarget as Node)) {
+        focusedRef.value = true
+        doFocus(e)
+      }
     }
     function handleTriggerBlur (e: FocusEvent): void {
-      focusedRef.value = false
-      doBlur(e)
-      closeMenu()
+      if (!cascaderMenuInstRef.value?.$el.contains(e.relatedTarget as Node)) {
+        focusedRef.value = false
+        doBlur(e)
+        closeMenu()
+      }
+    }
+    function handleMenuFocus (e: FocusEvent): void {
+      if (!triggerInstRef.value?.$el.contains(e.relatedTarget as Node)) {
+        focusedRef.value = true
+        doFocus(e)
+      }
+    }
+    function handleMenuBlur (e: FocusEvent): void {
+      if (!triggerInstRef.value?.$el.contains(e.relatedTarget as Node)) {
+        focusedRef.value = false
+        doBlur(e)
+      }
+    }
+    function handleMenuMousedown (e: MouseEvent): void {
+      if (!happensIn(e, 'action')) {
+        if (props.multiple && props.filter) {
+          e.preventDefault()
+          focusSelectionInput()
+        }
+      }
+    }
+    function handleMenuTabout (): void {
+      closeMenu(true)
     }
     function handleTriggerClick (): void {
       if (props.filterable) {
         openMenu()
       } else {
         if (mergedShowRef.value) {
-          closeMenu()
+          closeMenu(true)
         } else {
           openMenu()
         }
@@ -678,6 +718,11 @@ export default defineComponent({
       selectedOptions: selectedOptionsRef,
       adjustedTo: adjustedToRef,
       menuModel: menuModelRef,
+      handleMenuTabout,
+      handleMenuFocus,
+      handleMenuBlur,
+      handleMenuKeyUp,
+      handleMenuMousedown,
       handleTriggerFocus,
       handleTriggerBlur,
       handleTriggerClick,
@@ -791,7 +836,16 @@ export default defineComponent({
                       show={this.mergedShow && !this.showSelectMenu}
                       menuModel={this.menuModel}
                       style={this.cssVars as CSSProperties}
-                    />
+                      onFocus={this.handleMenuFocus}
+                      onBlur={this.handleMenuBlur}
+                      onKeyup={this.handleMenuKeyUp}
+                      onMousedown={this.handleMenuMousedown}
+                      onTabout={this.handleMenuTabout}
+                    >
+                      {this.$slots.action && {
+                        action: this.$slots.action
+                      }}
+                    </CascaderMenu>
                   )
                 }}
               </VFollower>,

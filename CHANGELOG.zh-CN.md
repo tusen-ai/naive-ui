@@ -5,6 +5,7 @@
 # Feats
 
 - `n-checkbox` 增加 `focusable` 属性
+- `n-cascader` 增加 `action` slot
 
 ### Fixes
 

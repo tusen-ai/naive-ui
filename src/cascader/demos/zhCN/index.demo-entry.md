@@ -10,6 +10,7 @@ multiple
 size
 single-lazy
 multiple-lazy
+action
 ```
 
 ## Props
@@ -48,3 +49,9 @@ multiple-lazy
 | label     | `string`           |      |
 | style     | `string \| number` |
 | disabled? | `boolean`          |      |
+
+## Slots
+
+| 名称   | 参数 | 描述 |
+| ------ | ---- | ---- |
+| action | `()` |      |

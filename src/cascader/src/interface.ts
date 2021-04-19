@@ -73,7 +73,7 @@ export interface CascaderInjection {
   deleteLoadingKey: (value: Key) => void
   doCheck: (value: Key) => void
   doUncheck: (value: Key) => void
-  closeMenu: () => void
+  closeMenu: (returnFocus?: boolean) => void
   handleSelectMenuClickOutside: (e: MouseEvent) => void
   handleCascaderMenuClickOutside: (e: MouseEvent) => void
 }
@@ -82,10 +82,14 @@ export interface CascaderSubmenuInstance {
   scroll: (index: number, elSize: number) => void
 }
 
-export interface CascaderMenuInstance {
+export interface CascaderMenuExposedMethods {
   scroll: (depth: number, index: number, elSize: number) => void
   showErrorMessage: (label: string) => void
 }
+
+export type CascaderMenuInstance = {
+  $el: HTMLElement
+} & CascaderMenuExposedMethods
 
 export interface SelectMenuInstance {
   prev: () => void

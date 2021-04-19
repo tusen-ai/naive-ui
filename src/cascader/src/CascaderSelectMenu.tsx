@@ -126,7 +126,9 @@ export default defineComponent({
         }
       } else {
         cascaderDoCheck(option.value)
-        closeMenu()
+        // currently the select menu is set to focusable
+        // however just leave it here
+        closeMenu(true)
       }
     }
     function prev (): void {

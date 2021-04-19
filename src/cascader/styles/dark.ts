@@ -4,6 +4,7 @@ import { scrollbarDark } from '../../scrollbar/styles'
 import { checkboxDark } from '../../checkbox/styles'
 import { commonDark } from '../../_styles/common'
 import type { CascaderTheme } from './light'
+import { self } from './light'
 
 const cascaderDark: CascaderTheme = {
   name: 'Cascader',
@@ -14,37 +15,7 @@ const cascaderDark: CascaderTheme = {
     Scrollbar: scrollbarDark,
     Checkbox: checkboxDark
   },
-  self (vars) {
-    const {
-      borderRadius,
-      boxShadow2,
-      popoverColor,
-      textColor2,
-      textColor3,
-      primaryColor,
-      textColorDisabled,
-      dividerColor,
-      hoverColor,
-      fontSizeMedium,
-      heightMedium
-    } = vars
-    return {
-      menuBorderRadius: borderRadius,
-      menuColor: popoverColor,
-      menuBoxShadow: boxShadow2,
-      menuDividerColor: dividerColor,
-      menuHeight: 'calc(var(--option-height) * 6.6)',
-      optionArrowColor: textColor3,
-      optionHeight: heightMedium,
-      optionFontSize: fontSizeMedium,
-      optionColorHover: hoverColor,
-      optionTextColor: textColor2,
-      optionTextColorActive: primaryColor,
-      optionTextColorDisabled: textColorDisabled,
-      optionCheckMarkColor: primaryColor,
-      loadingColor: primaryColor
-    }
-  }
+  self
 }
 
 export default cascaderDark

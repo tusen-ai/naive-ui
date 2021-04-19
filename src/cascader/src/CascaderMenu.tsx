@@ -17,11 +17,12 @@ import { MenuMaskRef } from '../../_internal/menu-mask'
 import NCascaderSubmenu from './CascaderSubmenu'
 import {
   cascaderInjectionKey,
-  CascaderMenuInstance,
+  CascaderMenuExposedMethods,
   CascaderSubmenuInstance,
   MenuModel,
   Value
 } from './interface'
+import FocusDetector from '../../_internal/focus-detector'
 
 export default defineComponent({
   name: 'NCascaderMenu',
@@ -42,6 +43,26 @@ export default defineComponent({
     loading: {
       type: Boolean,
       default: false
+    },
+    onFocus: {
+      type: Function as PropType<(e: FocusEvent) => void>,
+      required: true
+    },
+    onBlur: {
+      type: Function as PropType<(e: FocusEvent) => void>,
+      required: true
+    },
+    onKeyup: {
+      type: Function as PropType<(e: KeyboardEvent) => void>,
+      required: true
+    },
+    onMousedown: {
+      type: Function as PropType<(e: MouseEvent) => void>,
+      required: true
+    },
+    onTabout: {
+      type: Function as PropType<() => void>,
+      required: true
     }
   },
   setup (props) {
@@ -55,6 +76,7 @@ export default defineComponent({
     } = inject(cascaderInjectionKey)!
     const submenuInstRefs: CascaderSubmenuInstance[] = []
     const maskInstRef = ref<MenuMaskRef | null>(null)
+    const selfElRef = ref<HTMLElement | null>(null)
     watch(toRef(props, 'value'), () => {
       void nextTick(() => {
         syncCascaderMenuPosition()
@@ -65,10 +87,6 @@ export default defineComponent({
         syncCascaderMenuPosition()
       })
     })
-    function handleMenuMouseDown (e: MouseEvent): void {
-      e.preventDefault()
-      e.stopPropagation()
-    }
     function showErrorMessage (label: string): void {
       const {
         value: { loadingRequiredMessage }
@@ -78,7 +96,21 @@ export default defineComponent({
     function handleClickOutside (e: MouseEvent): void {
       handleCascaderMenuClickOutside(e)
     }
-    const exposedRef: CascaderMenuInstance = {
+    function handleFocusin (e: FocusEvent): void {
+      const { value: selfEl } = selfElRef
+      if (!selfEl) return
+      if (!selfEl.contains(e.relatedTarget as Node)) {
+        props.onFocus(e)
+      }
+    }
+    function handleFocusout (e: FocusEvent): void {
+      const { value: selfEl } = selfElRef
+      if (!selfEl) return
+      if (!selfEl.contains(e.relatedTarget as Node)) {
+        props.onBlur(e)
+      }
+    }
+    const exposedRef: CascaderMenuExposedMethods = {
       scroll (depth: number, index: number, elSize: number) {
         const submenuInst = submenuInstRefs[depth]
         if (submenuInst) {
@@ -90,15 +122,17 @@ export default defineComponent({
     return {
       isMounted: isMountedRef,
       mergedClsPrefix: mergedClsPrefixRef,
+      selfElRef,
       submenuInstRefs,
       maskInstRef,
+      handleFocusin,
+      handleFocusout,
       handleClickOutside,
-      handleMenuMouseDown,
       ...exposedRef
     }
   },
   render () {
-    const { submenuInstRefs } = this
+    const { submenuInstRefs, mergedClsPrefix, $slots } = this
     return (
       <Transition name="n-fade-in-scale-up-transition" appear={this.isMounted}>
         {{
@@ -106,27 +140,50 @@ export default defineComponent({
             this.show
               ? withDirectives(
                 <div
-                  class={`${this.mergedClsPrefix}-cascader-menu`}
-                  onMousedown={this.handleMenuMouseDown}
+                  tabindex="0"
+                  ref="selfElRef"
+                  class={`${mergedClsPrefix}-cascader-menu`}
+                  onMousedown={this.onMousedown}
+                  onFocusin={this.handleFocusin}
+                  onFocusout={this.handleFocusout}
+                  onKeyup={this.onKeyup}
+                  style={
+                    {
+                      '--col-count': this.menuModel.length
+                    } as any
+                  }
                 >
-                  {this.menuModel.map((submenuOptions, index) => {
-                    return (
-                      <NCascaderSubmenu
-                        ref={
-                          ((instance: CascaderSubmenuInstance) => {
-                            if (instance) submenuInstRefs[index] = instance
-                          }) as any
-                        }
-                        key={index}
-                        tmNodes={submenuOptions}
-                        depth={index + 1}
-                      />
-                    )
-                  })}
-                  <NBaseMenuMask
-                    clsPrefix={this.mergedClsPrefix}
-                    ref="maskInstRef"
-                  />
+                  <div class={`${mergedClsPrefix}-cascader-submenu-wrapper`}>
+                    {this.menuModel.map((submenuOptions, index) => {
+                      return (
+                        <NCascaderSubmenu
+                          ref={
+                            ((instance: CascaderSubmenuInstance) => {
+                              if (instance) submenuInstRefs[index] = instance
+                            }) as any
+                          }
+                          key={index}
+                          tmNodes={submenuOptions}
+                          depth={index + 1}
+                        />
+                      )
+                    })}
+                    <NBaseMenuMask
+                      clsPrefix={mergedClsPrefix}
+                      ref="maskInstRef"
+                    />
+                  </div>
+                  {$slots.action ? (
+                    <div
+                      class={`${mergedClsPrefix}-cascader-menu-action`}
+                      data-action
+                    >
+                      {{
+                        default: $slots.action
+                      }}
+                    </div>
+                  ) : null}
+                  <FocusDetector onFocus={this.onTabout} />
                 </div>,
                 [[clickoutside, this.handleClickOutside]]
               )
