@@ -7,72 +7,78 @@ import {
   CSSProperties
 } from 'vue'
 import { useCompitable } from 'vooks'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { warn, createKey } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { typographyLight } from '../styles'
 import type { TypographyTheme } from '../styles'
 import style from './styles/text.cssr'
 
+const textProps = {
+  ...(useTheme.props as ThemeProps<TypographyTheme>),
+  code: {
+    type: Boolean,
+    default: false
+  },
+  type: {
+    type: String,
+    default: 'default'
+  },
+  delete: {
+    type: Boolean,
+    default: false
+  },
+  strong: {
+    type: Boolean,
+    default: false
+  },
+  italic: {
+    type: Boolean,
+    default: false
+  },
+  underline: {
+    type: Boolean,
+    default: false
+  },
+  depth: {
+    type: [String, Number] as PropType<1 | 2 | 3 | '1' | '2' | '3' | undefined>,
+    default: undefined
+  },
+  tag: {
+    type: String,
+    default: undefined
+  },
+  // deprecated
+  as: {
+    type: String,
+    validator: () => {
+      if (__DEV__) {
+        warn('text', '`as` is deprecated, please use `tag` instead.')
+      }
+      return true
+    },
+    default: undefined
+  }
+} as const
+
+export type TextProps = ExtractPublicPropTypes<typeof textProps>
+
 export default defineComponent({
   name: 'Text',
-  props: {
-    ...(useTheme.props as ThemeProps<TypographyTheme>),
-    code: {
-      type: Boolean,
-      default: false
-    },
-    type: {
-      type: String,
-      default: 'default'
-    },
-    delete: {
-      type: Boolean,
-      default: false
-    },
-    strong: {
-      type: Boolean,
-      default: false
-    },
-    italic: {
-      type: Boolean,
-      default: false
-    },
-    underline: {
-      type: Boolean,
-      default: false
-    },
-    depth: {
-      type: [String, Number] as PropType<
-      1 | 2 | 3 | '1' | '2' | '3' | undefined
-      >,
-      default: undefined
-    },
-    tag: {
-      type: String,
-      default: undefined
-    },
-    // deprecated
-    as: {
-      type: String,
-      validator: () => {
-        if (__DEV__) {
-          warn('text', '`as` is deprecated, please use `tag` instead.')
-        }
-        return true
-      },
-      default: undefined
-    }
-  },
+  props: textProps,
   setup (props) {
+    const { mergedClsPrefix } = useConfig(props)
     const themeRef = useTheme(
       'Typography',
       'Text',
       style,
       typographyLight,
-      props
+      props,
+      mergedClsPrefix
     )
     return {
+      mergedClsPrefix,
       compitableTag: useCompitable(props, ['as', 'tag']),
       cssVars: computed(() => {
         const { depth, type } = props
@@ -105,14 +111,15 @@ export default defineComponent({
     }
   },
   render () {
+    const { mergedClsPrefix } = this
     const textClass = [
-      'n-text',
+      `${mergedClsPrefix}-text`,
       {
-        'n-text--code': this.code,
-        'n-text--delete': this.delete,
-        'n-text--strong': this.strong,
-        'n-text--italic': this.italic,
-        'n-text--underline': this.underline
+        [`${mergedClsPrefix}-text--code`]: this.code,
+        [`${mergedClsPrefix}-text--delete`]: this.delete,
+        [`${mergedClsPrefix}-text--strong`]: this.strong,
+        [`${mergedClsPrefix}-text--italic`]: this.italic,
+        [`${mergedClsPrefix}-text--underline`]: this.underline
       }
     ]
     const defaultSlot = renderSlot(this.$slots, 'default')

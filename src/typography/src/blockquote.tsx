@@ -1,28 +1,36 @@
 import { h, defineComponent, computed, CSSProperties } from 'vue'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import style from './styles/blockquote.cssr'
 import { typographyLight } from '../styles'
 import type { TypographyTheme } from '../styles'
+import type { ExtractPublicPropTypes } from '../../_utils'
+
+const blockquoteProps = {
+  ...(useTheme.props as ThemeProps<TypographyTheme>),
+  alignText: {
+    type: Boolean,
+    default: false
+  }
+} as const
+
+export type BlockquoteProps = ExtractPublicPropTypes<typeof blockquoteProps>
 
 export default defineComponent({
   name: 'Blockquote',
-  props: {
-    ...(useTheme.props as ThemeProps<TypographyTheme>),
-    alignText: {
-      type: Boolean,
-      default: false
-    }
-  },
+  props: blockquoteProps,
   setup (props) {
+    const { mergedClsPrefix } = useConfig(props)
     const themeRef = useTheme(
       'Typography',
       'Blockquote',
       style,
       typographyLight,
-      props
+      props,
+      mergedClsPrefix
     )
     return {
+      mergedClsPrefix,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
@@ -44,13 +52,12 @@ export default defineComponent({
     }
   },
   render () {
+    const { mergedClsPrefix } = this
     return (
       <blockquote
         class={[
-          'n-blockquote',
-          {
-            'n-blockquote--align-text': this.alignText
-          }
+          `${mergedClsPrefix}-blockquote`,
+          this.alignText && `${mergedClsPrefix}-blockquote--align-text`
         ]}
         style={this.cssVars as CSSProperties}
       >

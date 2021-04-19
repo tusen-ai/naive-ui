@@ -1,5 +1,13 @@
 import { c, cB, cM } from '../../../_utils/cssr'
 
+const liStyle = c('li', {
+  transition: 'color .3s var(--bezier)',
+  lineHeight: 'var(--line-height)',
+  margin: 'var(--li-margin)',
+  marginBottom: 0,
+  color: 'var(--text-color)'
+})
+
 // vars:
 // --bezier
 // --font-size
@@ -15,7 +23,8 @@ export default c([
   }, [
     cM('align-text', {
       paddingLeft: 0
-    })
+    }),
+    liStyle
   ]),
   cB('ul', {
     fontSize: 'var(--font-size)',
@@ -23,13 +32,7 @@ export default c([
   }, [
     cM('align-text', {
       paddingLeft: 0
-    })
-  ]),
-  cB('li', {
-    transition: 'color .3s var(--bezier)',
-    lineHeight: 'var(--line-height)',
-    margin: 'var(--li-margin)',
-    marginBottom: 0,
-    color: 'var(--text-color)'
-  })
+    }),
+    liStyle
+  ])
 ])

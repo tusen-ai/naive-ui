@@ -1,28 +1,36 @@
 import { h, defineComponent, computed, CSSProperties } from 'vue'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { typographyLight } from '../styles'
 import type { TypographyTheme } from '../styles'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import style from './styles/list.cssr'
+
+const olProps = {
+  ...(useTheme.props as ThemeProps<TypographyTheme>),
+  alignText: {
+    type: Boolean,
+    default: false
+  }
+}
+
+export type OlProps = ExtractPublicPropTypes<typeof olProps>
 
 export default defineComponent({
   name: 'Ol',
-  props: {
-    ...(useTheme.props as ThemeProps<TypographyTheme>),
-    alignText: {
-      type: Boolean,
-      default: false
-    }
-  },
+  props: olProps,
   setup (props) {
+    const { mergedClsPrefix } = useConfig(props)
     const themeRef = useTheme(
       'Typography',
       'Ol&Ul',
       style,
       typographyLight,
-      props
+      props,
+      mergedClsPrefix
     )
     return {
+      mergedClsPrefix,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
@@ -48,13 +56,12 @@ export default defineComponent({
     }
   },
   render () {
+    const { mergedClsPrefix } = this
     return (
       <ol
         class={[
-          'n-ol',
-          {
-            'n-ol--align-text': this.alignText
-          }
+          `${mergedClsPrefix}-ol`,
+          this.alignText && `${mergedClsPrefix}-ol--align-text`
         ]}
         style={this.cssVars as CSSProperties}
       >

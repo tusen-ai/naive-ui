@@ -32,6 +32,7 @@ target
 | Name | Parameters | Default | Description |
 | --- | --- | --- | --- |
 | body-style | `string \| Object` | `undefined` |  |
+| body-content-style | `string \| Object` | `undefined` | Style of body's scrollable content node. |
 | footer-style | `string \| Object` | `undefined` |  |
 | header-style | `string \| Object` | `undefined` |  |
 | native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on body part. |

@@ -1,22 +1,33 @@
 import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { typographyLight } from '../styles'
 import type { TypographyTheme } from '../styles'
 import style from './styles/p.cssr'
+import type { ExtractPublicPropTypes } from '../../_utils'
+
+const pProps = {
+  ...(useTheme.props as ThemeProps<TypographyTheme>),
+  depth: String as PropType<1 | 2 | 3 | '1' | '2' | '3' | undefined>
+}
+
+export type PProps = ExtractPublicPropTypes<typeof pProps>
 
 export default defineComponent({
   name: 'P',
-  props: {
-    ...(useTheme.props as ThemeProps<TypographyTheme>),
-    depth: {
-      type: String as PropType<1 | 2 | 3 | '1' | '2' | '3' | undefined>,
-      default: undefined
-    }
-  },
+  props: pProps,
   setup (props) {
-    const themeRef = useTheme('Typography', 'P', style, typographyLight, props)
+    const { mergedClsPrefix } = useConfig(props)
+    const themeRef = useTheme(
+      'Typography',
+      'P',
+      style,
+      typographyLight,
+      props,
+      mergedClsPrefix
+    )
     return {
+      mergedClsPrefix,
       cssVars: computed(() => {
         const { depth } = props
         const typeSafeDepth = depth || '1'
@@ -42,7 +53,10 @@ export default defineComponent({
   },
   render () {
     return (
-      <p class="n-p" style={this.cssVars as CSSProperties}>
+      <p
+        class={`${this.mergedClsPrefix}-p`}
+        style={this.cssVars as CSSProperties}
+      >
         {this.$slots}
       </p>
     )

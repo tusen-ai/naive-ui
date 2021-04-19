@@ -1,5 +1,5 @@
 import { h, defineComponent, computed, CSSProperties } from 'vue'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { typographyLight } from '../styles'
 import type { TypographyTheme } from '../styles'
@@ -11,8 +11,17 @@ export default defineComponent({
     ...(useTheme.props as ThemeProps<TypographyTheme>)
   },
   setup (props) {
-    const themeRef = useTheme('Typography', 'Hr', style, typographyLight, props)
+    const { mergedClsPrefix } = useConfig(props)
+    const themeRef = useTheme(
+      'Typography',
+      'Hr',
+      style,
+      typographyLight,
+      props,
+      mergedClsPrefix
+    )
     return {
+      mergedClsPrefix,
       cssVars: computed(() => {
         return {
           '--color': themeRef.value.self.hrColor
@@ -21,6 +30,11 @@ export default defineComponent({
     }
   },
   render () {
-    return <hr class="n-hr" style={this.cssVars as CSSProperties} />
+    return (
+      <hr
+        class={`${this.mergedClsPrefix}-hr`}
+        style={this.cssVars as CSSProperties}
+      />
+    )
   }
 })

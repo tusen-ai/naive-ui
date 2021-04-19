@@ -37,6 +37,7 @@ dark-4-debug
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | body-style | `string \| Object` | `undefined` | 主体的样式 |
+| body-content-style | `string \| Object` | `undefined` | 主体可滚动内容节点的样式 |
 | footer-style | `string \| Object` | `undefined` |  |
 | header-style | `string \| Object` | `undefined` |  |
 | native-scrollbar | `boolean` | `true` | 主体部分是否使用原生滚动条 |

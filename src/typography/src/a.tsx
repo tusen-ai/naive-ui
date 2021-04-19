@@ -1,23 +1,37 @@
-import { h, defineComponent, computed, renderSlot, CSSProperties } from 'vue'
-import { RouterLink } from 'vue-router'
-import { useTheme } from '../../_mixins'
+import { h, defineComponent, computed, CSSProperties, PropType } from 'vue'
+import { RouteLocationRaw, RouterLink } from 'vue-router'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { typographyLight } from '../styles'
 import type { TypographyTheme } from '../styles'
 import style from './styles/a.cssr'
+import type { ExtractPublicPropTypes } from '../../_utils'
+
+const aProps = {
+  ...(useTheme.props as ThemeProps<TypographyTheme>),
+  to: {
+    type: [String, Object] as PropType<RouteLocationRaw>,
+    default: null
+  }
+} as const
+
+export type AProps = ExtractPublicPropTypes<typeof aProps>
 
 export default defineComponent({
   name: 'A',
-  props: {
-    ...(useTheme.props as ThemeProps<TypographyTheme>),
-    to: {
-      type: [String, Object],
-      default: null
-    }
-  },
+  props: aProps,
   setup (props) {
-    const themeRef = useTheme('Typography', 'A', style, typographyLight, props)
+    const { mergedClsPrefix } = useConfig(props)
+    const themeRef = useTheme(
+      'Typography',
+      'A',
+      style,
+      typographyLight,
+      props,
+      mergedClsPrefix
+    )
     return {
+      mergedClsPrefix,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
@@ -32,20 +46,21 @@ export default defineComponent({
   },
   render () {
     if (this.to) {
-      return h(
-        RouterLink as any,
-        {
-          class: 'n-a',
-          to: this.to,
-          style: this.cssVars
-        },
-        {
-          default: () => renderSlot(this.$slots, 'default')
-        }
+      return (
+        <RouterLink
+          class={`${this.mergedClsPrefix}-a`}
+          to={this.to}
+          style={this.cssVars as CSSProperties}
+        >
+          {this.$slots}
+        </RouterLink>
       )
     }
     return (
-      <a class="n-a" style={this.cssVars as CSSProperties}>
+      <a
+        class={`${this.mergedClsPrefix}-a`}
+        style={this.cssVars as CSSProperties}
+      >
         {this.$slots}
       </a>
     )
