@@ -31,8 +31,9 @@
   :placement="placement"
   to="#drawer-target"
 >
-  <n-h1>Stoner</n-h1>
-  <n-p>Stoner is a 1965 novel by the American writer John Williams.</n-p>
+  <n-drawer-content title="Stoner">
+    Stoner is a 1965 novel by the American writer John Williams.
+  </n-drawer-content>
 </n-drawer>
 ```
 

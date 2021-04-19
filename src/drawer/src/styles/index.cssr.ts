@@ -1,4 +1,4 @@
-import { c, cB, cM, cNotM } from '../../../_utils/cssr'
+import { c, cB, cM } from '../../../_utils/cssr'
 import slideInFromRightTransition from '../../../_styles/transitions/slide-in-from-right'
 import slideInFromLeftTransition from '../../../_styles/transitions/slide-in-from-left'
 import slideInFromTopTransition from '../../../_styles/transitions/slide-in-from-top'
@@ -13,11 +13,17 @@ import fadeInTransition from '../../../_styles/transitions/fade-in.cssr'
 // --bezier
 // --bezier-out
 // --bezier-in
-// --padding
+// --body-padding
+// --header-padding
+// --footer-padding
+// --title-font-size
+// --title-text-color
+// --title-font-weight
+// --header-border-bottom
+// --footer-border-top
 export default c([
   cB('drawer', `
     line-height: var(--line-height);
-    overflow: auto;
     position: absolute;
     pointer-events: all;
     box-shadow: var(--box-shadow);
@@ -26,21 +32,55 @@ export default c([
       color .3s var(--bezier);
     background-color: var(--color);
     color: var(--text-color);
+    box-sizing: border-box;
   `,
   [
     slideInFromRightTransition(),
     slideInFromLeftTransition(),
     slideInFromTopTransition(),
     slideInFromBottomTransition(),
-    cM('native-scrollbar', {
-      boxSizing: 'border-box',
-      padding: 'var(--padding)'
-    }),
-    cNotM('native-scrollbar', [
-      cB('drawer-scroll-content', {
-        boxSizing: 'border-box',
-        padding: 'var(--padding)'
-      })
+    cM('native-scrollbar', [
+      cB('drawer-content-wrapper', `
+        overflow: auto;
+        height: 100%;
+      `)
+    ]),
+    cB('drawer-content-wrapper', `
+      box-sizing: border-box;
+    `),
+    cB('drawer-content', `
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    `, [
+      cM('native-scrollbar', [
+        cB('drawer-body-content-wrapper', `
+          height: 100%;
+          overflow: auto;
+        `)
+      ]),
+      cB('drawer-body', `
+        flex: 1 0 0;
+      `),
+      cB('drawer-body-content-wrapper', `
+        box-sizing: border-box;
+        padding: var(--body-padding);
+      `),
+      cB('drawer-header', `
+        font-weight: var(--title-font-weight);
+        line-height: 1;
+        font-size: var(--title-font-size);
+        color: var(--title-text-color);
+        padding: var(--header-padding);
+        border-bottom: 1px solid var(--divider-color);
+        border-bottom: var(--header-border-bottom);
+      `),
+      cB('drawer-footer', `
+        display: flex;
+        justify-content: flex-end;
+        border-top: var(--footer-border-top);
+        padding: var(--footer-padding);
+      `)
     ]),
     cM('right-placement', `
       top: 0;

@@ -1,5 +1,6 @@
 import { commonDark } from '../../_styles/common'
 import { scrollbarDark } from '../../scrollbar/styles'
+import { self } from './light'
 import type { DrawerTheme } from './light'
 
 const drawerDark: DrawerTheme = {
@@ -8,16 +9,7 @@ const drawerDark: DrawerTheme = {
   peers: {
     Scrollbar: scrollbarDark
   },
-  self (vars) {
-    const { modalColor, textColor2, boxShadow3, lineHeight } = vars
-    return {
-      padding: '16px 24px',
-      color: modalColor,
-      textColor: textColor2,
-      boxShadow: boxShadow3,
-      lineHeight
-    }
-  }
+  self
 }
 
 export default drawerDark

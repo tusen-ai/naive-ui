@@ -8,8 +8,9 @@
   <n-button @click="activate('left')">左</n-button>
 </n-button-group>
 <n-drawer v-model:show="active" :width="502" :placement="placement">
-  <n-h1>斯通纳</n-h1>
-  <n-p>《斯通纳》是美国作家约翰·威廉姆斯在 1965 年出版的小说。</n-p>
+  <n-drawer-content title="斯通纳">
+    《斯通纳》是美国作家约翰·威廉姆斯在 1965 年出版的小说。
+  </n-drawer-content>
 </n-drawer>
 ```
 

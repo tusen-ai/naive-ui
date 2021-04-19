@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Breaking Changes
+
+- `n-drawer` 默认不再包含 padding，填充 drawer 的内容可以使用 `n-drawer-content`
+
 ## 2.6.0
 
 ### Feats

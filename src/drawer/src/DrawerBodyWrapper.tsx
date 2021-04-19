@@ -10,8 +10,8 @@ import {
   PropType,
   withDirectives,
   vShow,
-  renderSlot,
-  mergeProps
+  mergeProps,
+  CSSProperties
 } from 'vue'
 import { NScrollbar } from '../../scrollbar'
 import type { ScrollbarProps } from '../../scrollbar'
@@ -37,6 +37,7 @@ export default defineComponent({
       type: String as PropType<Placement>,
       required: true
     },
+    contentStyle: [Object, String] as PropType<string | CSSProperties>,
     nativeScrollbar: {
       type: Boolean,
       required: true
@@ -58,6 +59,7 @@ export default defineComponent({
     provide(popoverBodyInjectionKey, null)
     provide(modalBodyInjectionKey, null)
     return {
+      bodyRef,
       mergedClsPrefix: NDrawer.mergedClsPrefixRef,
       isMounted: NDrawer.isMountedRef,
       mergedTheme: NDrawer.mergedThemeRef,
@@ -95,19 +97,23 @@ export default defineComponent({
                       class: [
                           `${mergedClsPrefix}-drawer`,
                           `${mergedClsPrefix}-drawer--${this.placement}-placement`,
-                          {
-                            [`${mergedClsPrefix}-drawer--native-scrollbar`]: this
-                              .nativeScrollbar
-                          }
+                          this.nativeScrollbar &&
+                            `${mergedClsPrefix}-drawer--native-scrollbar`
                       ]
                     }),
                     [
                       this.nativeScrollbar ? (
-                        renderSlot($slots, 'default')
+                        <div
+                          class={`${mergedClsPrefix}-drawer-content-wrapper`}
+                          style={this.contentStyle}
+                        >
+                          {$slots}
+                        </div>
                       ) : (
                         <NScrollbar
                           {...this.scrollbarProps}
-                          contentClass={`${mergedClsPrefix}-drawer-scroll-content`}
+                          contentStyle={this.contentStyle}
+                          contentClass={`${mergedClsPrefix}-drawer-content-wrapper`}
                           theme={this.mergedTheme.peers.Scrollbar}
                           themeOverrides={
                             this.mergedTheme.peerOverrides.Scrollbar

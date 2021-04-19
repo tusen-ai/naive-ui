@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Breaking Changes
+
+- `n-drawer` doesn't have padding by default. `n-drawer-content` is provided to fill the drawer.
+
 ## 2.6.0
 
 ### Feats

@@ -1,33 +1,39 @@
 # Multiple Drawers
 
 ```html
-<n-button @click="activate">Come on!</n-button>
-<n-drawer v-model:show="active" :width="502">
-  <n-h1>Stoner</n-h1>
-  <n-p>Stoner is a 1965 novel by the American writer John Williams.</n-p>
-  <n-button @click="innerActivate">Come on Again!</n-button>
-  <n-drawer v-model:show="innerActive" :width="251">
-    <n-h1>Stoner</n-h1>
-    <n-p>Stoner is a 1965 novel by the American writer John Williams.</n-p>
+<n-button @click="doShowOuter">Come on!</n-button>
+<n-drawer v-model:show="showOuter" :width="502">
+  <n-drawer-content title="Stoner">
+    Stoner is a 1965 novel by the American writer John Williams.
+    <template #footer>
+      <n-button @click="doShowInner">Come on Again!</n-button>
+    </template>
+  </n-drawer-content>
+  <n-drawer v-model:show="showInner" :width="251">
+    <n-drawer-content title="Stoner">
+      Stoner is a 1965 novel by the American writer John Williams.
+    </n-drawer-content>
   </n-drawer>
 </n-drawer>
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
+    const showOuterRef = ref(false)
+    const showInnerRef = ref(false)
     return {
-      active: false,
-      innerActive: false
-    }
-  },
-  methods: {
-    activate () {
-      this.active = true
-    },
-    innerActivate () {
-      this.innerActive = true
+      showOuter: showOuterRef,
+      showInner: showInnerRef,
+      doShowOuter () {
+        showOuterRef.value = true
+      },
+      doShowInner () {
+        showInnerRef.value = true
+      }
     }
   }
-}
+})
 ```

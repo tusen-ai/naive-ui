@@ -8,8 +8,9 @@
   <n-button @click="activate('left')">Left</n-button>
 </n-button-group>
 <n-drawer v-model:show="active" :width="502" :placement="placement">
-  <n-h1>Stoner</n-h1>
-  <n-p>Stoner is a 1965 novel by the American writer John Williams.</n-p>
+  <n-drawer-content title="Stoner">
+    Stoner is a 1965 novel by the American writer John Williams.
+  </n-drawer-content>
 </n-drawer>
 ```
 

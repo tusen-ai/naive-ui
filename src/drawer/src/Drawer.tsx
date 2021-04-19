@@ -54,6 +54,7 @@ const drawerProps = {
     default: true
   },
   scrollbarProps: Object as PropType<ScrollbarProps>,
+  contentStyle: [Object, String] as PropType<string | CSSProperties>,
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
@@ -61,37 +62,43 @@ const drawerProps = {
   onUpdateShow: [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
-  // deprecated
+  /** @deprecated */
   drawerStyle: {
     type: [Object, String] as PropType<CSSProperties | string | undefined>,
-    validator: () => {
-      warn(
-        'drawer',
-        '`drawer-style` is deprecated, please use `style` instead.'
-      )
-      return true
-    },
+    validator: __DEV__
+      ? () => {
+        warn(
+          'drawer',
+          '`drawer-style` is deprecated, please use `style` instead.'
+        )
+        return true
+      }
+      : undefined,
     default: undefined
   },
+  /** @deprecated */
   drawerClass: {
     type: String as PropType<string | undefined>,
-    validator: () => {
-      warn(
-        'drawer',
-        '`drawer-class` is deprecated, please use `class` instead.'
-      )
-      return true
-    },
+    validator: __DEV__
+      ? () => {
+        warn(
+          'drawer',
+          '`drawer-class` is deprecated, please use `class` instead.'
+        )
+        return true
+      }
+      : undefined,
     default: undefined
   },
   target: {
-    validator: () => {
-      warn('drawer', '`target` is deprecated, please use `to` instead.')
-      return true
-    },
+    validator: __DEV__
+      ? () => {
+        warn('drawer', '`target` is deprecated, please use `to` instead.')
+        return true
+      }
+      : undefined,
     default: undefined
   },
-
   onShow: {
     type: [Function, Array] as PropType<
     MaybeArray<(value: boolean) => void> | undefined
@@ -185,7 +192,20 @@ export default defineComponent({
             cubicBezierEaseIn,
             cubicBezierEaseOut
           },
-          self: { color, textColor, boxShadow, lineHeight, padding }
+          self: {
+            color,
+            textColor,
+            boxShadow,
+            lineHeight,
+            headerPadding,
+            footerPadding,
+            bodyPadding,
+            titleFontSize,
+            titleTextColor,
+            titleFontWeight,
+            headerBorderBottom,
+            footerBorderTop
+          }
         } = themeRef.value
         return {
           '--line-height': lineHeight,
@@ -195,7 +215,14 @@ export default defineComponent({
           '--bezier': cubicBezierEaseInOut,
           '--bezier-out': cubicBezierEaseOut,
           '--bezier-in': cubicBezierEaseIn,
-          '--padding': padding
+          '--header-padding': headerPadding,
+          '--body-padding': bodyPadding,
+          '--footer-padding': footerPadding,
+          '--title-text-color': titleTextColor,
+          '--title-font-size': titleFontSize,
+          '--title-font-weight': titleFontWeight,
+          '--header-border-bottom': headerBorderBottom,
+          '--footer-border-top': footerBorderTop
         }
       }),
       isMounted: isMountedRef
@@ -226,7 +253,8 @@ export default defineComponent({
                 <NDrawerBodyWrapper
                   {...this.$attrs}
                   class={[this.drawerClass, this.$attrs.class]}
-                  style={this.mergedBodyStyle as any}
+                  style={[this.mergedBodyStyle, this.$attrs.style]}
+                  contentStyle={this.contentStyle}
                   placement={this.placement}
                   scrollbarProps={this.scrollbarProps}
                   show={this.show}
