@@ -15,7 +15,7 @@ import {
 } from 'vue'
 import { TreeNode } from 'treemate'
 import { VirtualList, VirtualListRef } from 'vueuc'
-import { depx, getPadding } from 'seemly'
+import { depx, getPadding, happensIn } from 'seemly'
 import { NEmpty } from '../../../empty'
 import { NScrollbar } from '../../../scrollbar'
 import type { ScrollbarInst } from '../../../scrollbar'
@@ -102,6 +102,7 @@ export default defineComponent({
     },
     loading: Boolean,
     focusable: Boolean,
+    onMousedown: Function as PropType<(e: MouseEvent) => void>,
     onScroll: Function as PropType<(e: Event) => void>,
     onFocus: Function as PropType<(e: FocusEvent) => void>,
     onBlur: Function as PropType<(e: FocusEvent) => void>,
@@ -121,7 +122,6 @@ export default defineComponent({
       toRef(props, 'clsPrefix')
     )
     const selfRef = ref<HTMLElement | null>(null)
-    const actionElRef = ref<HTMLElement | null>(null)
     const virtualListRef = ref<VirtualListRef | null>(null)
     const scrollbarRef = ref<ScrollbarInst | null>(null)
     const { treeMate } = props
@@ -207,14 +207,15 @@ export default defineComponent({
     }
     // keyboard related methods
     function handleKeyUp (e: KeyboardEvent): void {
-      if (actionElRef.value?.contains(e.target as Node)) return
+      if (happensIn(e, 'action')) return
       props.onKeyup?.(e)
     }
     function handleKeyDown (e: KeyboardEvent): void {
-      if (actionElRef.value?.contains(e.target as Node)) return
+      if (happensIn(e, 'action')) return
       props.onKeydown?.(e)
     }
     function handleMouseDown (e: MouseEvent): void {
+      props.onMousedown?.(e)
       if (props.focusable) return
       e.preventDefault()
     }
@@ -325,7 +326,6 @@ export default defineComponent({
     return {
       virtualListRef,
       scrollbarRef,
-      actionElRef,
       style: styleRef,
       defaultScrollIndex: pendingNodeRef.value?.fIndex,
       itemSize: itemSizeRef,
@@ -463,10 +463,7 @@ export default defineComponent({
           </div>
         )}
         {$slots.action && (
-          <div
-            class={`${clsPrefix}-base-select-menu__action`}
-            ref="actionElRef"
-          >
+          <div class={`${clsPrefix}-base-select-menu__action`} data-action>
             {renderSlot($slots, 'action')}
           </div>
         )}

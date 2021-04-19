@@ -44,6 +44,7 @@ import type {
   Value,
   Size
 } from './interface'
+import { happensIn } from 'seemly'
 
 const selectProps = {
   ...(useTheme.props as ThemeProps<SelectTheme>),
@@ -559,6 +560,11 @@ export default defineComponent({
         doUpdateValue(null)
       }
     }
+    function handleMenuMousedown (e: MouseEvent): void {
+      if (!happensIn(e, 'action') && props.multiple && props.filterable) {
+        focusSelection()
+      }
+    }
     // scroll events on menu
     function handleMenuScroll (e: Event): void {
       doScroll(e)
@@ -674,6 +680,7 @@ export default defineComponent({
       handleMenuScroll,
       handleMenuKeyup: handleKeyUp,
       handleMenuKeydown: handleKeyDown,
+      handleMenuMousedown,
       mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
@@ -775,6 +782,7 @@ export default defineComponent({
                               onKeyup={this.handleMenuKeyup}
                               onKeydown={this.handleMenuKeydown}
                               onTabOut={this.handleMenuTabOut}
+                              onMousedown={this.handleMenuMousedown}
                             >
                               {$slots}
                             </NInternalSelectMenu>,
