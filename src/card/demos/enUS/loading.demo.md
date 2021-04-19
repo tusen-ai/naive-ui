@@ -1,6 +1,6 @@
-# 加载中
+# Loading
 
-使用 `n-skeleton` 模拟加载效果。
+Use `n-skeleton` to simulate loading effect.
 
 ```html
 <n-space vertical>

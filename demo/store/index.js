@@ -34,6 +34,7 @@ export function initRouter (_router, _route) {
   dateLocaleRef = useMemo(() => {
     return route.path.startsWith('/zh-CN') ? dateZhCN : dateEnUS
   })
+  rawThemeNameRef = useMemo(() => route.params.theme)
   themeNameRef = useMemo({
     get () {
       switch (route.params.theme) {
@@ -75,6 +76,7 @@ let dateLocaleRef = null
 // theme
 const osThemeRef = useOsTheme()
 let themeNameRef = null
+let rawThemeNameRef = null // could be `os-theme`
 const themeRef = computed(() => {
   const { value } = themeNameRef
   return value === 'dark' ? darkTheme : null
@@ -91,14 +93,14 @@ const configProviderRef = computed(() => {
 // options
 const docOptionsRef = computed(() =>
   createDocumentationMenuOptions({
-    theme: themeNameRef.value,
+    theme: rawThemeNameRef.value,
     lang: localeNameRef.value,
     mode: displayModeRef.value
   })
 )
 const componentOptionsRef = computed(() =>
   createComponentMenuOptions({
-    theme: themeNameRef.value,
+    theme: rawThemeNameRef.value,
     lang: localeNameRef.value,
     mode: displayModeRef.value
   })
