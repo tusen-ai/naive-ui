@@ -4,7 +4,7 @@ import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
 
-function self (vars: ThemeCommonVars) {
+export function self (vars: ThemeCommonVars) {
   const { boxShadow2 } = vars
   return {
     menuBoxShadow: boxShadow2

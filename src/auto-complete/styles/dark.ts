@@ -2,6 +2,7 @@ import { internalSelectMenuDark } from '../../_internal/select-menu/styles'
 import { inputDark } from '../../input/styles'
 import { commonDark } from '../../_styles/common'
 import type { AutoCompleteTheme } from './light'
+import { self } from './light'
 
 const autoCompleteDark: AutoCompleteTheme = {
   name: 'AutoComplete',
@@ -10,12 +11,7 @@ const autoCompleteDark: AutoCompleteTheme = {
     InternalSelectMenu: internalSelectMenuDark,
     Input: inputDark
   },
-  self (vars) {
-    const { boxShadow2 } = vars
-    return {
-      menuBoxShadow: boxShadow2
-    }
-  }
+  self
 }
 
 export default autoCompleteDark

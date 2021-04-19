@@ -5,7 +5,7 @@ import commonVariables from './_common'
 import { createTheme } from '../../_mixins'
 import { buttonLight } from '../../button/styles'
 
-const self = (vars: ThemeCommonVars) => {
+export const self = (vars: ThemeCommonVars) => {
   const {
     borderRadius,
     fontSize,
