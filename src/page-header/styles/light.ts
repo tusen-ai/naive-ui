@@ -3,7 +3,7 @@ import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import common from './_common'
 
-function self (vars: ThemeCommonVars) {
+export function self (vars: ThemeCommonVars) {
   const {
     textColor1,
     textColor2,

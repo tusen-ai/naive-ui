@@ -1,8 +1,8 @@
 import { buttonDark } from '../../button/styles'
 import { popoverDark } from '../../popover/styles'
 import { commonDark } from '../../_styles/common'
-import commonVars from './_common'
 import type { PopconfirmTheme } from './light'
+import { self } from './light'
 
 const popconfirmDark: PopconfirmTheme = {
   name: 'Popconfirm',
@@ -11,14 +11,7 @@ const popconfirmDark: PopconfirmTheme = {
     Button: buttonDark,
     Popover: popoverDark
   },
-  self (vars) {
-    const { fontSize, warningColor } = vars
-    return {
-      ...commonVars,
-      fontSize: fontSize,
-      iconColor: warningColor
-    }
-  }
+  self
 }
 
 export default popconfirmDark

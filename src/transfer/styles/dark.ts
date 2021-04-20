@@ -41,10 +41,10 @@ const transferDark: TransferTheme = {
       itemHeightSmall: heightSmall,
       itemHeightMedium: heightMedium,
       itemHeightLarge: heightLarge,
-      fontSizeSmall: fontSizeSmall,
-      fontSizeMedium: fontSizeMedium,
-      fontSizeLarge: fontSizeLarge,
-      borderRadius: borderRadius,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge,
+      borderRadius,
       borderColor: 'transparent',
       listColor: inputColor,
       headerColor: tableHeaderColor,
@@ -56,8 +56,8 @@ const transferDark: TransferTheme = {
       itemTextColorDisabled: textColorDisabled,
       itemColorPending: hoverColor,
       titleFontWeight: fontWeight,
-      iconColor: iconColor,
-      iconColorDisabled: iconColorDisabled
+      iconColor,
+      iconColorDisabled
     }
   }
 }

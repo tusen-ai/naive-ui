@@ -2,7 +2,8 @@ import { scrollbarDark } from '../../scrollbar/styles'
 import { dialogDark } from '../../dialog/styles'
 import { cardDark } from '../../card/styles'
 import { commonDark } from '../../_styles/common'
-import { ModalTheme } from './light'
+import type { ModalTheme } from './light'
+import { self } from './light'
 
 const modalDark: ModalTheme = {
   name: 'Modal',
@@ -12,14 +13,7 @@ const modalDark: ModalTheme = {
     Dialog: dialogDark,
     Card: cardDark
   },
-  self (vars) {
-    const { modalColor, textColor2, boxShadow3 } = vars
-    return {
-      color: modalColor,
-      textColor: textColor2,
-      boxShadow: boxShadow3
-    }
-  }
+  self
 }
 
 export default modalDark

@@ -4,11 +4,11 @@ import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
 
-const self = (vars: ThemeCommonVars) => {
+export const self = (vars: ThemeCommonVars) => {
   const {
     textColor1,
     textColor2,
-    cardColor,
+    modalColor,
     closeColor,
     closeColorHover,
     closeColorPressed,
@@ -30,7 +30,7 @@ const self = (vars: ThemeCommonVars) => {
     border: `1px solid ${dividerColor}`,
     titleTextColor: textColor1,
     textColor: textColor2,
-    color: cardColor,
+    color: modalColor,
     closeColor: closeColor,
     closeColorHover: closeColorHover,
     closeColorPressed: closeColorPressed,

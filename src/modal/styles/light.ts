@@ -5,7 +5,7 @@ import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
 
-const self = (vars: ThemeCommonVars) => {
+export const self = (vars: ThemeCommonVars) => {
   const { modalColor, textColor2, boxShadow3 } = vars
   return {
     color: modalColor,

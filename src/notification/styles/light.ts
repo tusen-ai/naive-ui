@@ -4,7 +4,7 @@ import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
 import commonVars from './_common'
 
-const self = (vars: ThemeCommonVars) => {
+export const self = (vars: ThemeCommonVars) => {
   const {
     textColor2,
     successColor,

@@ -4,7 +4,7 @@ import type { ThemeCommonVars } from '../../_styles/common'
 import { scrollbarLight } from '../../scrollbar/styles'
 import { createTheme } from '../../_mixins'
 
-const self = (vars: ThemeCommonVars) => {
+export const self = (vars: ThemeCommonVars) => {
   const {
     textColor2,
     bodyColor,

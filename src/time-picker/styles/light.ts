@@ -6,9 +6,9 @@ import { buttonLight } from '../../button/styles'
 import { createTheme } from '../../_mixins'
 import { inputLight } from '../../input/styles'
 
-const self = (vars: ThemeCommonVars) => {
+export const self = (vars: ThemeCommonVars) => {
   const {
-    modalColor,
+    popoverColor,
     textColor2,
     primaryColor,
     hoverColor,
@@ -21,7 +21,7 @@ const self = (vars: ThemeCommonVars) => {
   } = vars
   return {
     ...commonVars,
-    panelColor: modalColor,
+    panelColor: popoverColor,
     panelBoxShadow: boxShadow2,
     panelDividerColor: dividerColor,
     itemTextColor: textColor2,

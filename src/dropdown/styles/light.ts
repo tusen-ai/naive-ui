@@ -4,7 +4,7 @@ import { createTheme } from '../../_mixins/use-theme'
 import commonVariables from './_common'
 import { popoverLight } from '../../popover/styles'
 
-const self = (vars: ThemeCommonVars) => {
+export const self = (vars: ThemeCommonVars) => {
   const {
     primaryColor,
     textColor2,

@@ -1,5 +1,3 @@
-import { composite } from 'seemly'
-import commonVariables from './_common'
 import { ellipsisDark } from '../../ellipsis/styles'
 import { buttonDark } from '../../button/styles'
 import { checkboxDark } from '../../checkbox/styles'
@@ -11,6 +9,7 @@ import { spinDark } from '../../spin/styles'
 import { emptyDark } from '../../empty/styles'
 import { commonDark } from '../../_styles/common'
 import type { DataTableTheme } from './light'
+import { self } from './light'
 
 const dataTableDark: DataTableTheme = {
   name: 'DataTable',
@@ -26,67 +25,7 @@ const dataTableDark: DataTableTheme = {
     Popover: popoverDark,
     Ellipsis: ellipsisDark
   },
-  self (vars) {
-    const {
-      cardColor,
-      modalColor,
-      popoverColor,
-      dividerColor,
-      textColor2,
-      textColor1,
-      tableHeaderColor,
-      tableColorHover,
-      iconColor,
-      primaryColor,
-      fontWeightStrong,
-      borderRadius,
-      lineHeight,
-      fontSizeSmall,
-      fontSizeMedium,
-      fontSizeLarge
-    } = vars
-    return {
-      ...commonVariables,
-      actionDividerColor: dividerColor,
-      borderRadius,
-      lineHeight,
-      fontSizeSmall,
-      fontSizeMedium,
-      fontSizeLarge,
-      borderColor: composite(cardColor, dividerColor),
-      tdColorHover: composite(cardColor, tableColorHover),
-      thColor: composite(cardColor, tableHeaderColor),
-      thColorHover: composite(
-        composite(cardColor, tableHeaderColor),
-        tableHeaderColor
-      ),
-      tdColor: cardColor,
-      tdTextColor: textColor2,
-      thTextColor: textColor1,
-      thFontWeight: fontWeightStrong,
-      thButtonColorHover: tableColorHover,
-      thIconColor: iconColor,
-      thIconColorActive: primaryColor,
-      // modal
-      borderColorModal: composite(modalColor, dividerColor),
-      tdColorHoverModal: composite(modalColor, tableColorHover),
-      thColorModal: composite(modalColor, tableHeaderColor),
-      thColorHoverModal: composite(
-        composite(modalColor, tableHeaderColor),
-        tableHeaderColor
-      ),
-      tdColorModal: modalColor,
-      // popover
-      borderColorPopover: composite(popoverColor, dividerColor),
-      tdColorHoverPopover: composite(popoverColor, tableColorHover),
-      thColorPopover: composite(popoverColor, tableHeaderColor),
-      thColorHoverPopover: composite(
-        composite(popoverColor, tableHeaderColor),
-        tableHeaderColor
-      ),
-      tdColorPopover: popoverColor
-    }
-  }
+  self
 }
 
 export default dataTableDark

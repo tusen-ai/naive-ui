@@ -5,7 +5,7 @@ import { commonLight, ThemeCommonVars } from '../../_styles/common'
 
 import commonVars from './_common'
 
-const self = (vars: ThemeCommonVars) => {
+export const self = (vars: ThemeCommonVars) => {
   const { fontSize, warningColor } = vars
   return {
     ...commonVars,

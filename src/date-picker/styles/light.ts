@@ -7,7 +7,7 @@ import commonVars from './_common'
 import { changeColor } from 'seemly'
 import { createTheme } from '../../_mixins'
 
-const self = (vars: ThemeCommonVars) => {
+export const self = (vars: ThemeCommonVars) => {
   const {
     hoverColor,
     fontSize,
