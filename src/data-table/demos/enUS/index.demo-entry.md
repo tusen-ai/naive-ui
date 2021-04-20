@@ -46,7 +46,7 @@ custom-filter-menu
 | loading | `boolean` | `false` |  |
 | max-height | `number \| string` | `undefined` | The max-height of the table. If content height is larger than it, the header will be fixed at top |
 | min-height | `number \| string` | `undefined` | The min-height of the table. |
-| pagination | `false \| Object` | `false` | See [Pagination props](n-pagination#Props) |
+| pagination | `false \| Object` | `false` | See [Pagination props](pagination#Props) |
 | paging | `boolean` | `true` | If data-table do automatic paging. You may set it to `false` in async usage. |
 | row-class-name | `string \| (rowData: Object, rowIndex : number) => string \| Object` | `undefined` |  |
 | row-key | `(rowData: Object) => number \| string` | `undefined` | Generate the key of the row by row data (if you don't want to set the key) |

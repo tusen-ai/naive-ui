@@ -89,334 +89,334 @@ export const zhDocRoutes = [
 export const enComponentRoutes = [
   // components
   {
-    path: 'n-layout',
+    path: 'layout',
     component: () => import('../../src/layout/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-gradient-text',
+    path: 'gradient-text',
     component: () =>
       import('../../src/gradient-text/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-icon',
+    path: 'icon',
     component: () => import('../../src/icon/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-checkbox',
+    path: 'checkbox',
     component: () => import('../../src/checkbox/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-button',
+    path: 'button',
     component: () => import('../../src/button/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-switch',
+    path: 'switch',
     component: () => import('../../src/switch/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-data-table',
+    path: 'data-table',
     component: () =>
       import('../../src/data-table/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-input',
+    path: 'input',
     component: () => import('../../src/input/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-select',
+    path: 'select',
     component: () => import('../../src/select/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-cascader',
+    path: 'cascader',
     component: () => import('../../src/cascader/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-dynamic-input',
+    path: 'dynamic-input',
     component: () =>
       import('../../src/dynamic-input/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-modal',
+    path: 'modal',
     component: () => import('../../src/modal/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-message',
+    path: 'message',
     component: () => import('../../src/message/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-tooltip',
+    path: 'tooltip',
     component: () => import('../../src/tooltip/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-popover',
+    path: 'popover',
     component: () => import('../../src/popover/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-notification',
+    path: 'notification',
     component: () =>
       import('../../src/notification/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-pagination',
+    path: 'pagination',
     component: () =>
       import('../../src/pagination/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-alert',
+    path: 'alert',
     component: () => import('../../src/alert/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-date-picker',
+    path: 'date-picker',
     component: () =>
       import('../../src/date-picker/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-input-number',
+    path: 'input-number',
     component: () =>
       import('../../src/input-number/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-radio',
+    path: 'radio',
     component: () => import('../../src/radio/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-form',
+    path: 'form',
     component: () => import('../../src/form/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-tabs',
+    path: 'tabs',
     component: () => import('../../src/tabs/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-time-picker',
+    path: 'time-picker',
     component: () =>
       import('../../src/time-picker/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-dialog',
+    path: 'dialog',
     component: () => import('../../src/dialog/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-badge',
+    path: 'badge',
     component: () => import('../../src/badge/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-steps',
+    path: 'steps',
     component: () => import('../../src/steps/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-collapse',
+    path: 'collapse',
     component: () => import('../../src/collapse/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-progress',
+    path: 'progress',
     component: () => import('../../src/progress/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-tag',
+    path: 'tag',
     component: () => import('../../src/tag/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-menu',
+    path: 'menu',
     component: () => import('../../src/menu/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-timeline',
+    path: 'timeline',
     component: () => import('../../src/timeline/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-back-top',
+    path: 'back-top',
     component: () => import('../../src/back-top/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-divider',
+    path: 'divider',
     component: () => import('../../src/divider/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-popconfirm',
+    path: 'popconfirm',
     component: () =>
       import('../../src/popconfirm/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-anchor',
+    path: 'anchor',
     component: () => import('../../src/anchor/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-dropdown',
+    path: 'dropdown',
     component: () => import('../../src/dropdown/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-popselect',
+    path: 'popselect',
     component: () =>
       import('../../src/popselect/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-config-provider',
+    path: 'config-provider',
     component: () =>
       import('../../src/config-provider/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-transfer',
+    path: 'transfer',
     component: () => import('../../src/transfer/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-spin',
+    path: 'spin',
     component: () => import('../../src/spin/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-drawer',
+    path: 'drawer',
     component: () => import('../../src/drawer/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-loading-bar',
+    path: 'loading-bar',
     component: () =>
       import('../../src/loading-bar/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-time',
+    path: 'time',
     component: () => import('../../src/time/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-slider',
+    path: 'slider',
     component: () => import('../../src/slider/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-tree',
+    path: 'tree',
     component: () => import('../../src/tree/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-affix',
+    path: 'affix',
     component: () => import('../../src/affix/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-statistic',
+    path: 'statistic',
     component: () =>
       import('../../src/statistic/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-legacy-grid',
+    path: 'legacy-grid',
     component: () =>
       import('../../src/legacy-grid/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-grid',
+    path: 'grid',
     component: () => import('../../src/grid/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-breadcrumb',
+    path: 'breadcrumb',
     component: () =>
       import('../../src/breadcrumb/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-descriptions',
+    path: 'descriptions',
     component: () =>
       import('../../src/descriptions/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-list',
+    path: 'list',
     component: () => import('../../src/list/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-card',
+    path: 'card',
     component: () => import('../../src/card/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-avatar',
+    path: 'avatar',
     component: () => import('../../src/avatar/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-result',
+    path: 'result',
     component: () => import('../../src/result/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-thing',
+    path: 'thing',
     component: () => import('../../src/thing/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-auto-complete',
+    path: 'auto-complete',
     component: () =>
       import('../../src/auto-complete/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-empty',
+    path: 'empty',
     component: () => import('../../src/empty/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-element',
+    path: 'element',
     component: () => import('../../src/element/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-log',
+    path: 'log',
     component: () => import('../../src/log/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-code',
+    path: 'code',
     component: () => import('../../src/code/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-typography',
+    path: 'typography',
     component: () =>
       import('../../src/typography/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-upload',
+    path: 'upload',
     component: () => import('../../src/upload/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-table',
+    path: 'table',
     component: () => import('../../src/table/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-space',
+    path: 'space',
     component: () => import('../../src/space/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-rate',
+    path: 'rate',
     component: () => import('../../src/rate/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-dynamic-tags',
+    path: 'dynamic-tags',
     component: () =>
       import('../../src/dynamic-tags/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-ellipsis',
+    path: 'ellipsis',
     component: () => import('../../src/ellipsis/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-mention',
+    path: 'mention',
     component: () => import('../../src/mention/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-page-header',
+    path: 'page-header',
     component: () =>
       import('../../src/page-header/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-global-style',
+    path: 'global-style',
     component: () =>
       import('../../src/global-style/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-image',
+    path: 'image',
     component: () => import('../../src/image/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-skeleton',
+    path: 'skeleton',
     component: () => import('../../src/skeleton/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-calendar',
+    path: 'calendar',
     component: () => import('../../src/calendar/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'n-color-picker',
+    path: 'color-picker',
     component: () =>
       import('../../src/color-picker/demos/enUS/index.demo-entry.md')
   },
   // deprecated
   {
-    path: 'n-nimbus-service-layout',
+    path: 'nimbus-service-layout',
     component: () =>
       import(
         '../pages/docs/deprecated/nimbus-service-layout/enUS/index.demo-entry.md'
@@ -427,334 +427,334 @@ export const enComponentRoutes = [
 export const zhComponentRoutes = [
   // components
   {
-    path: 'n-layout',
+    path: 'layout',
     component: () => import('../../src/layout/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-gradient-text',
+    path: 'gradient-text',
     component: () =>
       import('../../src/gradient-text/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-icon',
+    path: 'icon',
     component: () => import('../../src/icon/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-checkbox',
+    path: 'checkbox',
     component: () => import('../../src/checkbox/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-button',
+    path: 'button',
     component: () => import('../../src/button/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-switch',
+    path: 'switch',
     component: () => import('../../src/switch/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-data-table',
+    path: 'data-table',
     component: () =>
       import('../../src/data-table/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-input',
+    path: 'input',
     component: () => import('../../src/input/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-select',
+    path: 'select',
     component: () => import('../../src/select/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-cascader',
+    path: 'cascader',
     component: () => import('../../src/cascader/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-dynamic-input',
+    path: 'dynamic-input',
     component: () =>
       import('../../src/dynamic-input/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-modal',
+    path: 'modal',
     component: () => import('../../src/modal/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-message',
+    path: 'message',
     component: () => import('../../src/message/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-tooltip',
+    path: 'tooltip',
     component: () => import('../../src/tooltip/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-popover',
+    path: 'popover',
     component: () => import('../../src/popover/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-notification',
+    path: 'notification',
     component: () =>
       import('../../src/notification/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-pagination',
+    path: 'pagination',
     component: () =>
       import('../../src/pagination/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-alert',
+    path: 'alert',
     component: () => import('../../src/alert/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-date-picker',
+    path: 'date-picker',
     component: () =>
       import('../../src/date-picker/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-input-number',
+    path: 'input-number',
     component: () =>
       import('../../src/input-number/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-radio',
+    path: 'radio',
     component: () => import('../../src/radio/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-form',
+    path: 'form',
     component: () => import('../../src/form/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-tabs',
+    path: 'tabs',
     component: () => import('../../src/tabs/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-time-picker',
+    path: 'time-picker',
     component: () =>
       import('../../src/time-picker/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-dialog',
+    path: 'dialog',
     component: () => import('../../src/dialog/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-badge',
+    path: 'badge',
     component: () => import('../../src/badge/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-steps',
+    path: 'steps',
     component: () => import('../../src/steps/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-collapse',
+    path: 'collapse',
     component: () => import('../../src/collapse/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-progress',
+    path: 'progress',
     component: () => import('../../src/progress/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-tag',
+    path: 'tag',
     component: () => import('../../src/tag/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-menu',
+    path: 'menu',
     component: () => import('../../src/menu/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-timeline',
+    path: 'timeline',
     component: () => import('../../src/timeline/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-back-top',
+    path: 'back-top',
     component: () => import('../../src/back-top/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-divider',
+    path: 'divider',
     component: () => import('../../src/divider/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-popconfirm',
+    path: 'popconfirm',
     component: () =>
       import('../../src/popconfirm/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-anchor',
+    path: 'anchor',
     component: () => import('../../src/anchor/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-dropdown',
+    path: 'dropdown',
     component: () => import('../../src/dropdown/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-popselect',
+    path: 'popselect',
     component: () =>
       import('../../src/popselect/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-config-provider',
+    path: 'config-provider',
     component: () =>
       import('../../src/config-provider/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-transfer',
+    path: 'transfer',
     component: () => import('../../src/transfer/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-spin',
+    path: 'spin',
     component: () => import('../../src/spin/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-drawer',
+    path: 'drawer',
     component: () => import('../../src/drawer/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-loading-bar',
+    path: 'loading-bar',
     component: () =>
       import('../../src/loading-bar/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-time',
+    path: 'time',
     component: () => import('../../src/time/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-slider',
+    path: 'slider',
     component: () => import('../../src/slider/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-tree',
+    path: 'tree',
     component: () => import('../../src/tree/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-affix',
+    path: 'affix',
     component: () => import('../../src/affix/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-statistic',
+    path: 'statistic',
     component: () =>
       import('../../src/statistic/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-legacy-grid',
+    path: 'legacy-grid',
     component: () =>
       import('../../src/legacy-grid/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-grid',
+    path: 'grid',
     component: () => import('../../src/grid/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-breadcrumb',
+    path: 'breadcrumb',
     component: () =>
       import('../../src/breadcrumb/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-descriptions',
+    path: 'descriptions',
     component: () =>
       import('../../src/descriptions/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-list',
+    path: 'list',
     component: () => import('../../src/list/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-card',
+    path: 'card',
     component: () => import('../../src/card/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-avatar',
+    path: 'avatar',
     component: () => import('../../src/avatar/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-result',
+    path: 'result',
     component: () => import('../../src/result/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-thing',
+    path: 'thing',
     component: () => import('../../src/thing/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-auto-complete',
+    path: 'auto-complete',
     component: () =>
       import('../../src/auto-complete/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-empty',
+    path: 'empty',
     component: () => import('../../src/empty/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-element',
+    path: 'element',
     component: () => import('../../src/element/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-log',
+    path: 'log',
     component: () => import('../../src/log/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-code',
+    path: 'code',
     component: () => import('../../src/code/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-typography',
+    path: 'typography',
     component: () =>
       import('../../src/typography/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-upload',
+    path: 'upload',
     component: () => import('../../src/upload/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-table',
+    path: 'table',
     component: () => import('../../src/table/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-space',
+    path: 'space',
     component: () => import('../../src/space/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-rate',
+    path: 'rate',
     component: () => import('../../src/rate/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-dynamic-tags',
+    path: 'dynamic-tags',
     component: () =>
       import('../../src/dynamic-tags/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-ellipsis',
+    path: 'ellipsis',
     component: () => import('../../src/ellipsis/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-mention',
+    path: 'mention',
     component: () => import('../../src/mention/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-page-header',
+    path: 'page-header',
     component: () =>
       import('../../src/page-header/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-global-style',
+    path: 'global-style',
     component: () =>
       import('../../src/global-style/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-image',
+    path: 'image',
     component: () => import('../../src/image/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-skeleton',
+    path: 'skeleton',
     component: () => import('../../src/skeleton/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-calendar',
+    path: 'calendar',
     component: () => import('../../src/calendar/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'n-color-picker',
+    path: 'color-picker',
     component: () =>
       import('../../src/color-picker/demos/zhCN/index.demo-entry.md')
   },
   // deprecated
   {
-    path: 'n-nimbus-service-layout',
+    path: 'nimbus-service-layout',
     component: () =>
       import(
         '../pages/docs/deprecated/nimbus-service-layout/zhCN/index.demo-entry.md'

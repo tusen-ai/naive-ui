@@ -224,7 +224,7 @@ export default {
       if (value === 'component') {
         if (!/^(\/[^/]+){2}\/components/.test(route.path)) {
           router.push(
-            themeAndLocaleReg.exec(route.path)[0] + '/components/n-button'
+            themeAndLocaleReg.exec(route.path)[0] + '/components/button'
           )
         }
       }

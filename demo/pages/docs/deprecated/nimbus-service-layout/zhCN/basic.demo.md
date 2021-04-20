@@ -35,14 +35,14 @@ export default {
       items: [
         {
           name: 'n-config-provider',
-          path: '/en-US/dark/n-config-provider'
+          path: '/en-US/dark/config-provider'
         },
         {
           name: 'Morning Glory',
           children: [
             {
               name: 'Hello',
-              path: '/en-US/dark/n-nimbus-service-layout?param=777'
+              path: '/en-US/dark/nimbus-service-layout?param=777'
             }
           ]
         }

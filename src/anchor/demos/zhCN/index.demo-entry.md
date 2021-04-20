@@ -17,7 +17,7 @@ scrollto
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| affix | `boolean` | `false` | Anchor 是否像 Affix 一样展示，如果设定为 `true`，它还会接受 [Affix](n-affix#Props) 的 Props |
+| affix | `boolean` | `false` | Anchor 是否像 Affix 一样展示，如果设定为 `true`，它还会接受 [Affix](affix#Props) 的 Props |
 | bound | `number` | `12` |  |
 | ignore-gap | `boolean` | `false` | 如果设定为 `true`, 导航将显示在准确的 href 区域 |
 | listen-to | `string \| HTMLElement` | `undefined` | 需要监听滚动的元素，如果未设定则会监听最近的可滚动祖先元素 |

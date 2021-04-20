@@ -17,7 +17,7 @@ scrollto
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| affix | `boolean` | `false` | If it works like a affix. If set to `true`, it will recieve props from [affix](n-affix#Props) |
+| affix | `boolean` | `false` | If it works like a affix. If set to `true`, it will recieve props from [affix](affix#Props) |
 | bound | `number` | `12` |  |
 | ignore-gap | `boolean` | `false` | If set to `true`, it will be displayed on the exact href |
 | listen-to | `string \| HTMLElement` | `undefined` | The scrolling element to listen scrolling. If not set it will listen to the nearest scrollable ascendant element. |

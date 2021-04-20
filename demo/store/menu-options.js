@@ -142,73 +142,73 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           en: 'Avatar',
           zh: '头像',
           enSuffix: true,
-          path: '/n-avatar'
+          path: '/avatar'
         },
         {
           en: 'Button',
           zh: '按钮',
           enSuffix: true,
-          path: '/n-button'
+          path: '/button'
         },
         {
           en: 'Card',
           zh: '卡片',
           enSuffix: true,
-          path: '/n-card'
+          path: '/card'
         },
         {
           en: 'Collapse',
           zh: '折叠面板',
           enSuffix: true,
-          path: '/n-collapse'
+          path: '/collapse'
         },
         {
           en: 'Divider',
           zh: '分割线',
           enSuffix: true,
-          path: '/n-divider'
+          path: '/divider'
         },
         {
           en: 'Dropdown',
           zh: '下拉菜单',
           enSuffix: true,
-          path: '/n-dropdown'
+          path: '/dropdown'
         },
         {
           en: 'Ellipsis',
           zh: '文本省略',
           enSuffix: true,
-          path: '/n-ellipsis'
+          path: '/ellipsis'
         },
         {
           en: 'Gradient Text',
           zh: '渐变文字',
           enSuffix: true,
-          path: '/n-gradient-text'
+          path: '/gradient-text'
         },
         {
           en: 'Icon',
           zh: '图标',
           enSuffix: true,
-          path: '/n-icon'
+          path: '/icon'
         },
         {
           en: 'PageHeader',
           zh: '页头',
           enSuffix: true,
-          path: '/n-page-header'
+          path: '/page-header'
         },
         {
           en: 'Tag',
           zh: '标签',
           enSuffix: true,
-          path: '/n-tag'
+          path: '/tag'
         },
         {
           en: 'Typography',
           zh: '排印',
           enSuffix: true,
-          path: '/n-typography'
+          path: '/typography'
         }
       ]
     }),
@@ -221,115 +221,115 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           en: 'Auto Complete',
           zh: '自动填充',
           enSuffix: true,
-          path: '/n-auto-complete'
+          path: '/auto-complete'
         },
         {
           en: 'Cascader',
           zh: '级联选择',
           enSuffix: true,
-          path: '/n-cascader'
+          path: '/cascader'
         },
         {
           en: 'Color Picker',
           zh: '颜色选择器',
           enSuffix: true,
-          path: '/n-color-picker'
+          path: '/color-picker'
         },
         {
           en: 'Checkbox',
           zh: '复选框',
           enSuffix: true,
-          path: '/n-checkbox'
+          path: '/checkbox'
         },
         {
           en: 'Date Picker',
           zh: '日期选择器',
           enSuffix: true,
-          path: '/n-date-picker'
+          path: '/date-picker'
         },
         {
           en: 'Dynamic Input',
           zh: '动态录入',
           enSuffix: true,
-          path: '/n-dynamic-input'
+          path: '/dynamic-input'
         },
         {
           en: 'Dynamic Tags',
           zh: '动态标签',
           enSuffix: true,
-          path: '/n-dynamic-tags'
+          path: '/dynamic-tags'
         },
         {
           en: 'Form',
           zh: '表单',
           enSuffix: true,
-          path: '/n-form'
+          path: '/form'
         },
         {
           en: 'Input',
           zh: '文本输入',
           enSuffix: true,
-          path: '/n-input'
+          path: '/input'
         },
         {
           en: 'Input Number',
           zh: '数字输入',
           enSuffix: true,
-          path: '/n-input-number'
+          path: '/input-number'
         },
         {
           en: 'Mention',
           zh: '提及',
           enSuffix: true,
-          path: '/n-mention'
+          path: '/mention'
         },
         {
           en: 'Radio',
           zh: '单选',
           enSuffix: true,
-          path: '/n-radio'
+          path: '/radio'
         },
         {
           en: 'Rate',
           zh: '评分',
           enSuffix: true,
-          path: '/n-rate'
+          path: '/rate'
         },
         {
           en: 'Select',
           zh: '选择器',
           enSuffix: true,
-          path: '/n-select'
+          path: '/select'
         },
         {
           en: 'Slider',
           zh: '滑动选择',
           enSuffix: true,
-          path: '/n-slider'
+          path: '/slider'
         },
         {
           en: 'Switch',
           zh: '开关',
           enSuffix: true,
-          path: '/n-switch'
+          path: '/switch'
         },
         {
           en: 'Time Picker',
           zh: '时间选择器',
           enSuffix: true,
-          path: '/n-time-picker'
+          path: '/time-picker'
         },
         {
           en: 'Transfer',
           zh: '穿梭框',
           enSuffix: true,
-          path: '/n-transfer'
+          path: '/transfer'
         },
         {
           en: 'Upload',
           zh: '上传',
           enSuffix: true,
-          path: '/n-upload'
+          path: '/upload'
         }
       ]
     }),
@@ -342,85 +342,85 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           en: 'Calendar',
           zh: '日历',
           enSuffix: true,
-          path: '/n-calendar'
+          path: '/calendar'
         },
         {
           en: 'Code',
           zh: '代码',
           enSuffix: true,
-          path: '/n-code'
+          path: '/code'
         },
         {
           en: 'Data Table',
           zh: '数据表格',
           enSuffix: true,
-          path: '/n-data-table'
+          path: '/data-table'
         },
         {
           en: 'Descriptions',
           zh: '描述',
           enSuffix: true,
-          path: '/n-descriptions'
+          path: '/descriptions'
         },
         {
           en: 'Empty',
           zh: '无内容',
           enSuffix: true,
-          path: '/n-empty'
+          path: '/empty'
         },
         {
           en: 'Image',
           zh: '图像',
           enSuffix: true,
-          path: '/n-image'
+          path: '/image'
         },
         {
           en: 'List',
           zh: '列表',
           enSuffix: true,
-          path: '/n-list'
+          path: '/list'
         },
         {
           en: 'Log',
           zh: '日志',
           enSuffix: true,
-          path: '/n-log'
+          path: '/log'
         },
         {
           en: 'Statistic',
           zh: '统计数据',
           enSuffix: true,
-          path: '/n-statistic'
+          path: '/statistic'
         },
         {
           en: 'Table',
           zh: '表格',
           enSuffix: true,
-          path: '/n-table'
+          path: '/table'
         },
         {
           en: 'Thing',
           zh: '东西',
           enSuffix: true,
-          path: '/n-thing'
+          path: '/thing'
         },
         {
           en: 'Time',
           zh: '时间',
           enSuffix: true,
-          path: '/n-time'
+          path: '/time'
         },
         {
           en: 'Timeline',
           zh: '时间线',
           enSuffix: true,
-          path: '/n-timeline'
+          path: '/timeline'
         },
         {
           en: 'Tree',
           zh: '树',
           enSuffix: true,
-          path: '/n-tree'
+          path: '/tree'
         }
       ]
     }),
@@ -433,55 +433,55 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           en: 'Affix',
           zh: '固钉',
           enSuffix: true,
-          path: '/n-affix'
+          path: '/affix'
         },
         {
           en: 'Anchor',
           zh: '侧边导航',
           enSuffix: true,
-          path: '/n-anchor'
+          path: '/anchor'
         },
         {
           en: 'Back Top',
           zh: '回到顶部',
           enSuffix: true,
-          path: '/n-back-top'
+          path: '/back-top'
         },
         {
           en: 'Breadcrumb',
           zh: '面包屑',
           enSuffix: true,
-          path: '/n-breadcrumb'
+          path: '/breadcrumb'
         },
         {
           en: 'Loading Bar',
           zh: '加载条',
           enSuffix: true,
-          path: '/n-loading-bar'
+          path: '/loading-bar'
         },
         {
           en: 'Menu',
           zh: '菜单',
           enSuffix: true,
-          path: '/n-menu'
+          path: '/menu'
         },
         {
           en: 'Pagination',
           zh: '分页',
           enSuffix: true,
-          path: '/n-pagination'
+          path: '/pagination'
         },
         {
           en: 'Steps',
           zh: '步骤',
           enSuffix: true,
-          path: '/n-steps'
+          path: '/steps'
         },
         {
           en: 'Tabs',
           zh: '标签页',
           enSuffix: true,
-          path: '/n-tabs'
+          path: '/tabs'
         }
       ]
     }),
@@ -494,91 +494,91 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           en: 'Alert',
           zh: '警告信息',
           enSuffix: true,
-          path: '/n-alert'
+          path: '/alert'
         },
         {
           en: 'Badge',
           zh: '标记',
           enSuffix: true,
-          path: '/n-badge'
+          path: '/badge'
         },
         {
           en: 'Dialog',
           zh: '对话框',
           enSuffix: true,
-          path: '/n-dialog'
+          path: '/dialog'
         },
         {
           en: 'Drawer',
           zh: '抽屉',
           enSuffix: true,
-          path: '/n-drawer'
+          path: '/drawer'
         },
         {
           en: 'Message',
           zh: '信息',
           enSuffix: true,
-          path: '/n-message'
+          path: '/message'
         },
         {
           en: 'Modal',
           zh: '模态框',
           enSuffix: true,
-          path: '/n-modal'
+          path: '/modal'
         },
         {
           en: 'Notification',
           zh: '通知',
           enSuffix: true,
-          path: '/n-notification'
+          path: '/notification'
         },
         {
           en: 'Popconfirm',
           zh: '弹出确认',
           enSuffix: true,
-          path: '/n-popconfirm'
+          path: '/popconfirm'
         },
         {
           en: 'Popover',
           zh: '弹出信息',
           enSuffix: true,
-          path: '/n-popover'
+          path: '/popover'
         },
         {
           en: 'Popselect',
           zh: '弹出选择',
           enSuffix: true,
-          path: '/n-popselect'
+          path: '/popselect'
         },
         {
           en: 'Progress',
           zh: '进度',
           enSuffix: true,
-          path: '/n-progress'
+          path: '/progress'
         },
         {
           en: 'Result',
           zh: '结果页',
           enSuffix: true,
-          path: '/n-result'
+          path: '/result'
         },
         {
           en: 'Skeleton',
           zh: '骨架屏',
           enSuffix: true,
-          path: '/n-skeleton'
+          path: '/skeleton'
         },
         {
           en: 'Spin',
           zh: '加载',
           enSuffix: true,
-          path: '/n-spin'
+          path: '/spin'
         },
         {
           en: 'Tooltip',
           zh: '弹出提示',
           enSuffix: true,
-          path: '/n-tooltip'
+          path: '/tooltip'
         }
       ]
     }),
@@ -591,19 +591,19 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           en: 'Layout',
           zh: '布局',
           enSuffix: true,
-          path: '/n-layout'
+          path: '/layout'
         },
         {
           en: 'Grid',
           zh: '栅格',
           enSuffix: true,
-          path: '/n-grid'
+          path: '/grid'
         },
         {
           en: 'Space',
           zh: '间距',
           enSuffix: true,
-          path: '/n-space'
+          path: '/space'
         }
       ]
     }),
@@ -616,19 +616,19 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           en: 'Config Provider',
           zh: '全局化配置',
           enSuffix: true,
-          path: '/n-config-provider'
+          path: '/config-provider'
         },
         {
           en: 'Element',
           zh: '元素',
           enSuffix: true,
-          path: '/n-element'
+          path: '/element'
         },
         {
           en: 'Global Style',
           zh: '全局样式',
           enSuffix: true,
-          path: '/n-global-style'
+          path: '/global-style'
         }
       ]
     }),
@@ -641,7 +641,7 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           en: 'Legacy Grid',
           zh: '旧版栅格',
           enSuffix: true,
-          path: '/n-legacy-grid'
+          path: '/legacy-grid'
         }
       ]
     },
@@ -651,7 +651,7 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
         children: [
           {
             en: 'Nimbus Service Layout',
-            path: '/n-nimbus-service-layout'
+            path: '/nimbus-service-layout'
           }
         ]
       },
@@ -663,51 +663,51 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
         children: [
           {
             en: 'SuffixDebug',
-            path: '/n-base-suffix-debug'
+            path: '/base-suffix-debug'
           },
           {
             en: 'PopoverDebug',
-            path: '/n-popover-debug'
+            path: '/popover-debug'
           },
           {
             en: 'RouterDebug',
-            path: '/n-router-debug'
+            path: '/router-debug'
           },
           {
             en: 'ModalDebug',
-            path: '/n-modal-debug'
+            path: '/modal-debug'
           },
           {
             en: 'ScrollbarDebug',
-            path: '/n-scrollbar-debug'
+            path: '/scrollbar-debug'
           },
           {
             en: 'ScrollbarDebug2',
-            path: '/n-scrollbar-debug2'
+            path: '/scrollbar-debug2'
           },
           {
             en: 'DatePickerDebug',
-            path: '/n-date-picker-debug'
+            path: '/date-picker-debug'
           },
           {
             en: 'BackTopDebug',
-            path: '/n-back-top-debug'
+            path: '/back-top-debug'
           },
           {
             en: 'CascaderDebug',
-            path: '/n-cascader-debug'
+            path: '/cascader-debug'
           },
           {
             en: 'VerticalAlignDebug',
-            path: '/n-vertical-align-debug'
+            path: '/vertical-align-debug'
           },
           {
             en: 'IconTransitionDebug',
-            path: '/n-icon-transition-debug'
+            path: '/icon-transition-debug'
           },
           {
             en: 'SelectDebug',
-            path: '/n-select-debug'
+            path: '/select-debug'
           }
         ]
       },

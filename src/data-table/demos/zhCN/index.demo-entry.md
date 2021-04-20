@@ -46,7 +46,7 @@ custom-filter-menu
 | loading | `boolean` | `false` |  |
 | max-height | `number \| string` | `undefined` | 表格的最大高度，如果内容高度高于它，那么表头将固定 |
 | min-height | `number \| string` | `undefined` | 表格的最低高度 |
-| pagination | `false \| Object` | `false` | 属性参考 [Pagination props](n-pagination#Props) |
+| pagination | `false \| Object` | `false` | 属性参考 [Pagination props](pagination#Props) |
 | paging | `boolean` | `true` | 表格是否自动分页数据，在异步的状况下你可能需要把它设为 `false` |
 | row-class-name | `string \| (rowData: Object, index : number) => string \| Object` | `undefined` |  |
 | row-key | `(rowData: Object) => number \| string` | `undefined` | 通过行数据创建行的 key（如果你不想给每一行加上 key） |

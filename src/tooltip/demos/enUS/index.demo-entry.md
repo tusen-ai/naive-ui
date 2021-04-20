@@ -15,8 +15,8 @@ arrow
 
 ## Props
 
-See [Popover Props](n-popover#Props)
+See [Popover Props](popover#Props)
 
 ## Slots
 
-See [Popover Slots](n-popover#Slots)
+See [Popover Slots](popover#Slots)

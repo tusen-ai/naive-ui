@@ -15,8 +15,8 @@ arrow
 
 ## Props
 
-参考 [Popover Props](n-popover#Props)
+参考 [Popover Props](popover#Props)
 
 ## Slots
 
-参考 [Popover Slots](n-popover#Slots)
+参考 [Popover Slots](popover#Slots)

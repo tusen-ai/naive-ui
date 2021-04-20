@@ -2,7 +2,7 @@
 
 Pop some hidden message around content. There isn't much builtin styles in popover. It's more up to you to fill the content.
 
-If you just want to display some basic text message, see [Tooltip](n-tooltip) instead.
+If you just want to display some basic text message, see [Tooltip](tooltip) instead.
 
 ## Demos
 

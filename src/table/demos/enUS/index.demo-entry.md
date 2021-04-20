@@ -2,7 +2,7 @@
 
 <!--single-column-->
 
-If you only want to render some basic table, use it. If you want to render structured data, see <n-a to="n-data-table">Data Table</n-a>.
+If you only want to render some basic table, use it. If you want to render structured data, see <n-a to="data-table">Data Table</n-a>.
 
 ## Demos
 

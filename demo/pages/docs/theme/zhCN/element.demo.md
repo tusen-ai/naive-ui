@@ -1,6 +1,6 @@
 # 使用元素组件
 
-Naive UI 提供 `n-element` 组件，参考 [Element](n-element)。
+Naive UI 提供 `n-element` 组件，参考 [Element](element)。
 
 ```html
 <n-space vertical>

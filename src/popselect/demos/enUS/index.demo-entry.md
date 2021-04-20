@@ -22,6 +22,6 @@ multiple
 | value | `string \| number \| Array<string \| number> \| null` | `null` |  |
 | on-update:value | `(string \| number \| Array<string \| number> \| null) => void` | `undefined` |  |
 
-For SelectOption & SelectGroupOption, see [Select](n-select#SelectOption-Type)
+For SelectOption & SelectGroupOption, see [Select](select#SelectOption-Type)
 
-For other props, see [Popover](n-popover#Props)
+For other props, see [Popover](popover#Props)

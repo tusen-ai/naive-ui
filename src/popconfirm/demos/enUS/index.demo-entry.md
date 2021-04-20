@@ -22,7 +22,7 @@ no-icon
 | on-positive-click | `() => boolean \| Promise<boolean> \| any` | `undefined` |  |
 | on-negative-click | `() => boolean \| Promise<boolean> \| any` | `undefined` |  |
 
-For more props, see [popover](n-popover#Props).
+For more props, see [popover](popover#Props).
 
 ## Slots
 

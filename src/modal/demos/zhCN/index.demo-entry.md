@@ -40,11 +40,11 @@ dark-10-debug
 
 ### Modal（Card 预设）
 
-参考 [Card props](n-card#Props)
+参考 [Card props](card#Props)
 
 ### Modal（Dialog 预设）
 
-参考 [Dialog props](n-dialog#Props)
+参考 [Dialog props](dialog#Props)
 
 ## Slots
 
@@ -56,8 +56,8 @@ dark-10-debug
 
 ### Modal（Card 预设）
 
-参考 [Card slots](n-card#Slots)
+参考 [Card slots](card#Slots)
 
 ### Modal（Dialog 预设）
 
-参考 [Dialog slots](n-dialog#Slots)
+参考 [Dialog slots](dialog#Slots)

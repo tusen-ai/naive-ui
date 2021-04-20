@@ -1,53 +1,53 @@
 const rootDebugRoutes = [
   {
-    path: '/n-popover-debug',
+    path: '/popover-debug',
     component: () => import('../debug-pages/popoverDebug.vue')
   },
   {
-    path: '/n-back-top-debug',
+    path: '/back-top-debug',
     component: () => import('../debug-pages/backTopDebug/index.vue')
   },
   {
-    path: '/n-cascader-debug',
+    path: '/cascader-debug',
     component: () => import('../debug-pages/cascaderDebug/index.vue')
   }
 ]
 
 const childDebugRoutes = [
   {
-    path: 'n-scrollbar-debug2',
+    path: 'scrollbar-debug2',
     component: () => import('../debug-pages/scrollbarDebug2/index.vue')
   },
   {
-    path: 'n-date-picker-debug',
+    path: 'date-picker-debug',
     component: () => import('../debug-pages/datePickerDebug/index.vue')
   },
   {
-    path: 'n-suffix-debug',
+    path: 'suffix-debug',
     component: () => import('../debug-pages/suffixDebug/index.vue')
   },
   {
-    path: 'n-vertical-align-debug',
+    path: 'vertical-align-debug',
     component: () => import('../debug-pages/verticalAlignDebug.vue')
   },
   {
-    path: 'n-icon-transition-debug',
+    path: 'icon-transition-debug',
     component: () => import('../debug-pages/iconTransitionDebug.vue')
   },
   {
-    path: 'n-select-debug',
+    path: 'select-debug',
     component: () => import('../debug-pages/selectDebug.vue')
   },
   {
-    path: 'n-router-debug',
+    path: 'router-debug',
     component: () => import('../debug-pages/routerDebug.vue')
   },
   {
-    path: 'n-modal-debug',
+    path: 'modal-debug',
     component: () => import('../debug-pages/modalDebug/index.vue')
   },
   {
-    path: 'n-scrollbar-debug',
+    path: 'scrollbar-debug',
     component: () => import('../debug-pages/scrollbarDebug/index.vue')
   }
 ]
