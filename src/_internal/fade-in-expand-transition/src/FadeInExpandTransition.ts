@@ -80,8 +80,8 @@ export default defineComponent({
         type as any,
         {
           name: props.width
-            ? 'n-fade-in-width-expand-transition'
-            : 'n-fade-in-height-expand-transition',
+            ? 'fade-in-width-expand-transition'
+            : 'fade-in-height-expand-transition',
           mode: props.mode,
           appear: props.appear,
           onEnter: handleEnter,
