@@ -16,10 +16,10 @@ export default defineComponent({
   setup (props) {
     const { NConfigProvider } = useConfig()
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const NDataTable = inject(dataTableInjectionKey)!
-    const sortStateRef = computed(() => {
-      return NDataTable.mergedSortState
-    })
+    const { mergedSortStateRef, mergedClsPrefixRef } = inject(
+      dataTableInjectionKey
+    )!
+    const sortStateRef = mergedSortStateRef
     const activeRef = computed(() => {
       const { value } = sortStateRef
       if (value) return value.columnKey === props.column.key
@@ -37,18 +37,14 @@ export default defineComponent({
       )
     })
     return {
-      NDataTable,
+      mergedClsPrefix: mergedClsPrefixRef,
       active: activeRef,
       mergedSortOrder: mergedSortOrderRef,
       mergedRenderSorter: mergedRenderSorterRef
     }
   },
   render () {
-    const {
-      mergedRenderSorter,
-      mergedSortOrder,
-      NDataTable: { mergedClsPrefix }
-    } = this
+    const { mergedRenderSorter, mergedSortOrder, mergedClsPrefix } = this
     return mergedRenderSorter ? (
       <RenderSorter render={mergedRenderSorter} order={mergedSortOrder} />
     ) : (

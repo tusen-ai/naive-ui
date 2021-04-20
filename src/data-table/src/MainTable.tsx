@@ -20,13 +20,15 @@ export default defineComponent({
     }
   },
   setup (props) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const NDataTable = inject(dataTableInjectionKey)!
-
     const {
+      mergedClsPrefixRef,
+      rightFixedColumnsRef,
+      leftFixedColumnsRef,
       deriveActiveLeftFixedColumn,
-      deriveActiveRightFixedColumn
-    } = NDataTable
+      deriveActiveRightFixedColumn,
+      handleTableHeaderScroll
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    } = inject(dataTableInjectionKey)!
 
     let tableWidth: number = 0
     const bodyMaxHeightRef = ref<number | undefined>(undefined)
@@ -35,9 +37,8 @@ export default defineComponent({
     const headerInstRef = ref<MainTableHeaderRef | null>(null)
     const bodyInstRef = ref<MainTableBodyRef | null>(null)
 
-    const { rightFixedColumns, leftFixedColumns } = NDataTable
     const fixedStateInitializedRef = ref(
-      !(leftFixedColumns.length || rightFixedColumns.length)
+      !(leftFixedColumnsRef.value.length || rightFixedColumnsRef.value.length)
     )
 
     const bodyStyleRef = computed(() => {
@@ -58,7 +59,7 @@ export default defineComponent({
     function handleHeaderScroll (e: Event): void {
       deriveActiveRightFixedColumn(e.target as HTMLElement, tableWidth)
       deriveActiveLeftFixedColumn(e.target as HTMLElement, tableWidth)
-      NDataTable.handleTableHeaderScroll(e)
+      handleTableHeaderScroll(e)
     }
     function getHeaderElement (): HTMLElement | null {
       const { value } = headerInstRef
@@ -91,7 +92,7 @@ export default defineComponent({
       getHeaderElement
     }
     return {
-      NDataTable,
+      mergedClsPrefix: mergedClsPrefixRef,
       headerInstRef,
       bodyInstRef,
       bodyStyle: bodyStyleRef,
@@ -102,9 +103,7 @@ export default defineComponent({
     }
   },
   render () {
-    const {
-      NDataTable: { mergedClsPrefix }
-    } = this
+    const { mergedClsPrefix } = this
     return (
       <div
         class={[

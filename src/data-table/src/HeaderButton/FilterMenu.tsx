@@ -52,8 +52,12 @@ export default defineComponent({
     }
   },
   setup (props) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const NDataTable = inject(dataTableInjectionKey)!
+    const {
+      mergedClsPrefixRef,
+      mergedThemeRef,
+      localeRef
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    } = inject(dataTableInjectionKey)!
     // to be compared with changed value
     // const initialValueRef = ref(props.value)
     const temporalValueRef = ref(props.value)
@@ -109,7 +113,9 @@ export default defineComponent({
       props.onClear()
     }
     return {
-      NDataTable,
+      mergedClsPrefix: mergedClsPrefixRef,
+      mergedTheme: mergedThemeRef,
+      locale: localeRef,
       checkboxGroupValue: checkboxGroupValueRef,
       radioGroupValue: radioGroupValueRef,
       handleChange,
@@ -118,8 +124,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { NDataTable } = this
-    const { mergedTheme, locale, mergedClsPrefix } = NDataTable
+    const { mergedTheme, locale, mergedClsPrefix } = this
     return (
       <div class={`${mergedClsPrefix}-data-table-filter-menu`}>
         <NScrollbar>

@@ -11,23 +11,38 @@ import ExpandTrigger from './ExpandTrigger'
 export default defineComponent({
   name: 'DataTableBody',
   setup () {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const NDataTable = inject(dataTableInjectionKey)!
+    const {
+      treeMateRef,
+      mergedCheckedRowKeysRef,
+      mergedExpandedRowKeysRef,
+      mergedClsPrefixRef,
+      mergedThemeRef,
+      scrollXRef,
+      colsRef,
+      paginatedDataRef,
+      fixedColumnLeftMapRef,
+      fixedColumnRightMapRef,
+      mergedCurrentPageRef,
+      rowClassNameRef,
+      leftActiveFixedColKeyRef,
+      rightActiveFixedColKeyRef,
+      renderExpandRef,
+      hoverKeyRef,
+      doUpdateExpandedRowKeys,
+      handleTableBodyScroll,
+      doUpdateCheckedRowKeys
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    } = inject(dataTableInjectionKey)!
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     function handleCheckboxUpdateChecked (
       tmNode: TmNode,
       checked: boolean
     ): void {
-      NDataTable.doUpdateCheckedRowKeys(
-        checked
-          ? NDataTable.treeMate.check(
-            tmNode.key,
-            NDataTable.mergedCheckedRowKeys
-          ).checkedKeys
-          : NDataTable.treeMate.uncheck(
-            tmNode.key,
-            NDataTable.mergedCheckedRowKeys
-          ).checkedKeys
+      doUpdateCheckedRowKeys(
+        (checked ? treeMateRef.value.check : treeMateRef.value.uncheck)(
+          tmNode.key,
+          mergedCheckedRowKeysRef.value
+        ).checkedKeys
       )
     }
     function getScrollContainer (): HTMLElement | null {
@@ -36,10 +51,10 @@ export default defineComponent({
       return null
     }
     function handleScroll (event: Event): void {
-      NDataTable.handleTableBodyScroll(event)
+      handleTableBodyScroll(event)
     }
     function handleUpdateExpanded (key: RowKey): void {
-      const { mergedExpandedRowKeys, doUpdateExpandedRowKeys } = NDataTable
+      const { value: mergedExpandedRowKeys } = mergedExpandedRowKeysRef
       const index = mergedExpandedRowKeys.indexOf(key)
       const nextExpandedKeys = Array.from(mergedExpandedRowKeys)
       if (~index) {
@@ -50,8 +65,22 @@ export default defineComponent({
       doUpdateExpandedRowKeys(nextExpandedKeys)
     }
     return {
-      NDataTable,
       scrollbarInstRef,
+      mergedClsPrefix: mergedClsPrefixRef,
+      mergedTheme: mergedThemeRef,
+      scrollX: scrollXRef,
+      cols: colsRef,
+      paginatedData: paginatedDataRef,
+      fixedColumnLeftMap: fixedColumnLeftMapRef,
+      fixedColumnRightMap: fixedColumnRightMapRef,
+      currentPage: mergedCurrentPageRef,
+      mergedCheckedRowKeys: mergedCheckedRowKeysRef,
+      rowClassName: rowClassNameRef,
+      leftActiveFixedColKey: leftActiveFixedColKeyRef,
+      rightActiveFixedColKey: rightActiveFixedColKeyRef,
+      renderExpand: renderExpandRef,
+      mergedExpandedRowKeys: mergedExpandedRowKeysRef,
+      hoverKey: hoverKeyRef,
       getScrollContainer,
       handleScroll,
       handleCheckboxUpdateChecked,
@@ -59,8 +88,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { NDataTable, handleScroll } = this
-    const { mergedTheme, scrollX, mergedClsPrefix } = NDataTable
+    const { mergedTheme, scrollX, mergedClsPrefix, handleScroll } = this
     return (
       <NScrollbar
         ref="scrollbarInstRef"
@@ -94,7 +122,7 @@ export default defineComponent({
               rightActiveFixedColKey,
               renderExpand,
               mergedExpandedRowKeys
-            } = NDataTable
+            } = this
             const { length: colCount } = cols
             const { length: rowCount } = paginatedData
             const { handleCheckboxUpdateChecked, handleUpdateExpanded } = this
@@ -144,7 +172,7 @@ export default defineComponent({
                     }
                   }
                 }
-                const hoverKey = isCrossRowTd ? NDataTable.hoverKey : null
+                const hoverKey = isCrossRowTd ? this.hoverKey : null
                 return (
                   <td
                     key={colKey}
@@ -216,7 +244,7 @@ export default defineComponent({
               const row = (
                 <tr
                   onMouseenter={() => {
-                    NDataTable.hoverKey = rowKey
+                    this.hoverKey = rowKey
                   }}
                   key={rowKey}
                   class={[
@@ -259,7 +287,7 @@ export default defineComponent({
                 ref="body"
                 class={`${mergedClsPrefix}-data-table-table`}
                 onMouseleave={() => {
-                  NDataTable.hoverKey = null
+                  this.hoverKey = null
                 }}
               >
                 <colgroup>

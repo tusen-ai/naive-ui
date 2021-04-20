@@ -1,5 +1,5 @@
 import { TreeNode, TreeMate } from 'treemate'
-import { CSSProperties, InjectionKey, VNodeChild } from 'vue'
+import { CSSProperties, InjectionKey, Ref, VNodeChild } from 'vue'
 import { EllipsisProps } from '../../ellipsis/src/Ellipsis'
 import { NLocale } from '../../locales'
 import { MergedTheme } from '../../_mixins'
@@ -134,35 +134,35 @@ export type DataTableCheckOptions = Array<
 | { label: string, key: string | number, onSelect: () => void }
 >
 export interface DataTableInjection {
-  checkOptions: DataTableCheckOptions | undefined
-  hoverKey: RowKey | null
-  mergedClsPrefix: string
-  mergedTheme: MergedTheme<DataTableTheme>
-  scrollX: string | number | undefined
-  rows: RowItem[][]
-  cols: ColItem[]
-  treeMate: TreeMate<RowData>
-  paginatedData: TmNode[]
-  leftFixedColumns: TableColumns
-  rightFixedColumns: TableColumns
-  leftActiveFixedColKey: ColumnKey | null
-  rightActiveFixedColKey: ColumnKey | null
-  fixedColumnLeftMap: Record<ColumnKey, number | undefined>
-  fixedColumnRightMap: Record<ColumnKey, number | undefined>
-  currentPage: number
-  someRowsChecked: boolean
-  allRowsChecked: boolean
-  mergedSortState: SortState | null
-  mergedFilterState: FilterState
-  loading: boolean
-  rowClassName: string | CreateRowClassName | undefined
-  mergedCheckedRowKeys: RowKey[]
-  locale: NLocale['DataTable']
-  filterMenuCssVars: CSSProperties
-  mergedExpandedRowKeys: RowKey[]
-  renderExpand: undefined | RenderExpand
+  checkOptionsRef: Ref<DataTableCheckOptions | undefined>
+  hoverKeyRef: Ref<RowKey | null>
+  mergedClsPrefixRef: Ref<string>
+  mergedThemeRef: Ref<MergedTheme<DataTableTheme>>
+  scrollXRef: Ref<string | number | undefined>
+  rowsRef: Ref<RowItem[][]>
+  colsRef: Ref<ColItem[]>
+  treeMateRef: Ref<TreeMate<RowData>>
+  paginatedDataRef: Ref<TmNode[]>
+  leftFixedColumnsRef: Ref<TableColumns>
+  rightFixedColumnsRef: Ref<TableColumns>
+  leftActiveFixedColKeyRef: Ref<ColumnKey | null>
+  rightActiveFixedColKeyRef: Ref<ColumnKey | null>
+  fixedColumnLeftMapRef: Ref<Record<ColumnKey, number | undefined>>
+  fixedColumnRightMapRef: Ref<Record<ColumnKey, number | undefined>>
+  mergedCurrentPageRef: Ref<number>
+  someRowsCheckedRef: Ref<boolean>
+  allRowsCheckedRef: Ref<boolean>
+  mergedSortStateRef: Ref<SortState | null>
+  mergedFilterStateRef: Ref<FilterState>
+  loadingRef: Ref<boolean>
+  rowClassNameRef: Ref<string | CreateRowClassName | undefined>
+  mergedCheckedRowKeysRef: Ref<RowKey[]>
+  localeRef: Ref<NLocale['DataTable']>
+  filterMenuCssVarsRef: Ref<CSSProperties>
+  mergedExpandedRowKeysRef: Ref<RowKey[]>
+  rowKeyRef: Ref<CreateRowKey | undefined>
+  renderExpandRef: Ref<undefined | RenderExpand>
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
-  rowKey: CreateRowKey | undefined
   doUpdateFilters: (
     filters: FilterState,
     sourceColumn?: TableBaseColumn

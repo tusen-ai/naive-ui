@@ -33,13 +33,31 @@ export default defineComponent({
     onScroll: Function as PropType<(e: Event) => void>
   },
   setup () {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const NDataTable = inject(dataTableInjectionKey)!
+    const {
+      mergedClsPrefixRef,
+      scrollXRef,
+      fixedColumnLeftMapRef,
+      fixedColumnRightMapRef,
+      mergedCurrentPageRef,
+      allRowsCheckedRef,
+      someRowsCheckedRef,
+      leftActiveFixedColKeyRef,
+      rightActiveFixedColKeyRef,
+      rowsRef,
+      colsRef,
+      mergedThemeRef,
+      checkOptionsRef,
+      mergedSortStateRef,
+      doUpdateSorter,
+      doUncheckAll,
+      doCheckAll
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    } = inject(dataTableInjectionKey)!
     function handleCheckboxUpdateChecked (): void {
-      if (NDataTable.someRowsChecked || NDataTable.allRowsChecked) {
-        NDataTable.doUncheckAll()
+      if (someRowsCheckedRef.value || allRowsCheckedRef.value) {
+        doUncheckAll()
       } else {
-        NDataTable.doCheckAll()
+        doCheckAll()
       }
     }
     function handleColHeaderClick (
@@ -48,43 +66,48 @@ export default defineComponent({
     ): void {
       if (happensIn(e, 'dataTableFilter')) return
       if (!isColumnSortable(column)) return
-      const activeSorter = NDataTable.mergedSortState
+      const activeSorter = mergedSortStateRef.value
       const nextSorter = createNextSorter(column, activeSorter)
-      NDataTable.doUpdateSorter(nextSorter)
+      doUpdateSorter(nextSorter)
     }
     return {
-      NDataTable,
-      headerStyle: {
-        overflow: 'scroll'
-      },
+      mergedClsPrefix: mergedClsPrefixRef,
+      scrollX: scrollXRef,
+      fixedColumnLeftMap: fixedColumnLeftMapRef,
+      fixedColumnRightMap: fixedColumnRightMapRef,
+      currentPage: mergedCurrentPageRef,
+      allRowsChecked: allRowsCheckedRef,
+      someRowsChecked: someRowsCheckedRef,
+      leftActiveFixedColKey: leftActiveFixedColKeyRef,
+      rightActiveFixedColKey: rightActiveFixedColKeyRef,
+      rows: rowsRef,
+      cols: colsRef,
+      mergedTheme: mergedThemeRef,
+      checkOptions: checkOptionsRef,
       handleCheckboxUpdateChecked,
       handleColHeaderClick
     }
   },
   render () {
     const {
-      NDataTable: {
-        mergedClsPrefix,
-        scrollX,
-        fixedColumnLeftMap,
-        fixedColumnRightMap,
-        currentPage,
-        allRowsChecked,
-        someRowsChecked,
-        leftActiveFixedColKey,
-        rightActiveFixedColKey,
-        rows,
-        cols,
-        mergedTheme,
-        checkOptions
-      },
-      headerStyle,
+      mergedClsPrefix,
+      scrollX,
+      fixedColumnLeftMap,
+      fixedColumnRightMap,
+      currentPage,
+      allRowsChecked,
+      someRowsChecked,
+      leftActiveFixedColKey,
+      rightActiveFixedColKey,
+      rows,
+      cols,
+      mergedTheme,
+      checkOptions,
       handleColHeaderClick,
       handleCheckboxUpdateChecked
     } = this
     return (
       <div
-        style={headerStyle}
         class={`${mergedClsPrefix}-data-table-base-table-header`}
         onScroll={this.onScroll}
       >
@@ -154,7 +177,9 @@ export default defineComponent({
                               indeterminate={someRowsChecked}
                               onUpdateChecked={handleCheckboxUpdateChecked}
                             />
-                            {checkOptions ? <CheckMenu /> : null}
+                            {checkOptions ? (
+                              <CheckMenu clsPrefix={mergedClsPrefix} />
+                            ) : null}
                           </>
                         ) : column.ellipsis === true ||
                           (column.ellipsis && !column.ellipsis.tooltip) ? (

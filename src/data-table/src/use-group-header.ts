@@ -119,16 +119,16 @@ function getRowsAndCols (
 export function useGroupHeader (
   props: DataTableSetupProps
 ): {
-    rows: ComputedRef<RowItem[][]>
-    cols: ComputedRef<ColItem[]>
-    dataRelatedCols: ComputedRef<
+    rowsRef: ComputedRef<RowItem[][]>
+    colsRef: ComputedRef<ColItem[]>
+    dataRelatedColsRef: ComputedRef<
     Array<TableSelectionColumn | TableBaseColumn | TableExpandColumn>
     >
   } {
   const rowsAndCols = computed(() => getRowsAndCols(props.columns))
   return {
-    rows: computed(() => rowsAndCols.value.rows),
-    cols: computed(() => rowsAndCols.value.cols),
-    dataRelatedCols: computed(() => rowsAndCols.value.dataRelatedCols)
+    rowsRef: computed(() => rowsAndCols.value.rows),
+    colsRef: computed(() => rowsAndCols.value.cols),
+    dataRelatedColsRef: computed(() => rowsAndCols.value.dataRelatedCols)
   }
 }

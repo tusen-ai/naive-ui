@@ -6,7 +6,6 @@ import {
   provide,
   PropType,
   ExtractPropTypes,
-  reactive,
   toRef,
   CSSProperties
 } from 'vue'
@@ -220,17 +219,16 @@ export default defineComponent({
       mergedClsPrefix
     )
     const mainTableInstRef = ref<MainTableRef | null>(null)
-    const { rows, cols, dataRelatedCols } = useGroupHeader(props)
+    const { rowsRef, colsRef, dataRelatedColsRef } = useGroupHeader(props)
     const {
-      treeMate: treeMateRef,
-      mergedCurrentPage: mergedCurrentPageRef,
-      paginatedData: paginatedDataRef,
-      selectionColumn: selectionColumnRef,
-      hoverKey,
-      currentPage,
-      mergedPagination,
-      mergedFilterState,
-      mergedSortState,
+      treeMateRef,
+      mergedCurrentPageRef,
+      paginatedDataRef,
+      selectionColumnRef,
+      hoverKeyRef,
+      mergedPaginationRef,
+      mergedFilterStateRef,
+      mergedSortStateRef,
       doUpdateFilters,
       doUpdateSorter,
       filter,
@@ -239,22 +237,22 @@ export default defineComponent({
       clearFilters,
       page,
       sort
-    } = useTableData(props, { dataRelatedCols })
+    } = useTableData(props, { dataRelatedColsRef })
     const {
       doCheckAll,
       doUncheckAll,
       doUpdateCheckedRowKeys,
-      someRowsChecked,
-      allRowsChecked,
-      mergedCheckedRowKeys
+      someRowsCheckedRef,
+      allRowsCheckedRef,
+      mergedCheckedRowKeysRef
     } = useCheck(props, {
       selectionColumnRef,
       treeMateRef,
       paginatedDataRef
     })
     const {
-      mergedExpandedRowKeys,
-      renderExpand,
+      mergedExpandedRowKeysRef,
+      renderExpandRef,
       doUpdateExpandedRowKeys
     } = useExpand(props)
     const {
@@ -262,73 +260,70 @@ export default defineComponent({
       handleTableHeaderScroll,
       deriveActiveRightFixedColumn,
       deriveActiveLeftFixedColumn,
-      leftActiveFixedColKey,
-      rightActiveFixedColKey,
-      leftFixedColumns,
-      rightFixedColumns,
-      fixedColumnLeftMap,
-      fixedColumnRightMap
+      leftActiveFixedColKeyRef,
+      rightActiveFixedColKeyRef,
+      leftFixedColumnsRef,
+      rightFixedColumnsRef,
+      fixedColumnLeftMapRef,
+      fixedColumnRightMapRef
     } = useScroll(props, {
       mainTableInstRef,
       mergedCurrentPageRef
     })
     const { locale } = useLocale('DataTable')
-    provide(
-      dataTableInjectionKey,
-      reactive({
-        hoverKey,
-        mergedClsPrefix,
-        treeMate: treeMateRef,
-        mergedTheme: themeRef,
-        scrollX: computed(() => props.scrollX),
-        rows,
-        cols,
-        paginatedData: paginatedDataRef,
-        leftActiveFixedColKey,
-        rightActiveFixedColKey,
-        leftFixedColumns,
-        rightFixedColumns,
-        fixedColumnLeftMap,
-        fixedColumnRightMap,
-        currentPage,
-        someRowsChecked,
-        allRowsChecked,
-        mergedSortState,
-        mergedFilterState,
-        loading: toRef(props, 'loading'),
-        rowClassName: toRef(props, 'rowClassName'),
-        mergedCheckedRowKeys,
-        mergedExpandedRowKeys,
-        locale,
-        rowKey: toRef(props, 'rowKey'),
-        checkOptions: computed(() => {
-          const { value: selectionColumn } = selectionColumnRef
-          return selectionColumn?.options
-        }),
-        filterMenuCssVars: computed(() => {
-          const {
-            self: { actionDividerColor, actionPadding, actionButtonMargin }
-          } = themeRef.value
-          // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-          return {
-            '--action-padding': actionPadding,
-            '--action-button-margin': actionButtonMargin,
-            '--action-divider-color': actionDividerColor
-          } as CSSProperties
-        }),
-        renderExpand,
-        deriveActiveRightFixedColumn,
-        deriveActiveLeftFixedColumn,
-        doUpdateFilters,
-        doUpdateSorter,
-        doUpdateCheckedRowKeys,
-        doCheckAll,
-        doUncheckAll,
-        doUpdateExpandedRowKeys,
-        handleTableHeaderScroll,
-        handleTableBodyScroll
-      })
-    )
+    provide(dataTableInjectionKey, {
+      hoverKeyRef,
+      mergedClsPrefixRef: mergedClsPrefix,
+      treeMateRef,
+      mergedThemeRef: themeRef,
+      scrollXRef: computed(() => props.scrollX),
+      rowsRef,
+      colsRef,
+      paginatedDataRef,
+      leftActiveFixedColKeyRef,
+      rightActiveFixedColKeyRef,
+      leftFixedColumnsRef,
+      rightFixedColumnsRef,
+      fixedColumnLeftMapRef,
+      fixedColumnRightMapRef,
+      mergedCurrentPageRef,
+      someRowsCheckedRef,
+      allRowsCheckedRef,
+      mergedSortStateRef,
+      mergedFilterStateRef,
+      loadingRef: toRef(props, 'loading'),
+      rowClassNameRef: toRef(props, 'rowClassName'),
+      mergedCheckedRowKeysRef,
+      mergedExpandedRowKeysRef,
+      localeRef: locale,
+      rowKeyRef: toRef(props, 'rowKey'),
+      renderExpandRef,
+      checkOptionsRef: computed(() => {
+        const { value: selectionColumn } = selectionColumnRef
+        return selectionColumn?.options
+      }),
+      filterMenuCssVarsRef: computed(() => {
+        const {
+          self: { actionDividerColor, actionPadding, actionButtonMargin }
+        } = themeRef.value
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+        return {
+          '--action-padding': actionPadding,
+          '--action-button-margin': actionButtonMargin,
+          '--action-divider-color': actionDividerColor
+        } as CSSProperties
+      }),
+      deriveActiveRightFixedColumn,
+      deriveActiveLeftFixedColumn,
+      doUpdateFilters,
+      doUpdateSorter,
+      doUpdateCheckedRowKeys,
+      doCheckAll,
+      doUncheckAll,
+      doUpdateExpandedRowKeys,
+      handleTableHeaderScroll,
+      handleTableBodyScroll
+    })
     const exposedMethods: DataTableInst = {
       filter,
       filters,
@@ -344,7 +339,7 @@ export default defineComponent({
       paginatedData: paginatedDataRef,
       mergedBordered,
       mergedBottomBordered: mergedBottomBorderedRef,
-      mergedPagination,
+      mergedPagination: mergedPaginationRef,
       ...exposedMethods,
       cssVars: computed(() => {
         const { size } = props

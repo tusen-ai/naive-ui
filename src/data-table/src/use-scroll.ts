@@ -169,12 +169,12 @@ export function useScroll (
   })
   return {
     styleScrollXRef,
-    fixedColumnLeftMap: fixedColumnLeftMapRef,
-    fixedColumnRightMap: fixedColumnRightMapRef,
-    leftFixedColumns: leftFixedColumnsRef,
-    rightFixedColumns: rightFixedColumnsRef,
-    leftActiveFixedColKey: leftActiveFixedColKeyRef,
-    rightActiveFixedColKey: rightActiveFixedColKeyRef,
+    fixedColumnLeftMapRef,
+    fixedColumnRightMapRef,
+    leftFixedColumnsRef,
+    rightFixedColumnsRef,
+    leftActiveFixedColKeyRef,
+    rightActiveFixedColKeyRef,
     deriveActiveRightFixedColumn,
     deriveActiveLeftFixedColumn,
     handleTableBodyScroll,

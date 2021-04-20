@@ -26,9 +26,9 @@ import { call, warn } from '../../_utils'
 export function useTableData (
   props: DataTableSetupProps,
   {
-    dataRelatedCols
+    dataRelatedColsRef
   }: {
-    dataRelatedCols: ComputedRef<
+    dataRelatedColsRef: ComputedRef<
     Array<TableSelectionColumn | TableBaseColumn | TableExpandColumn>
     >
   }
@@ -44,7 +44,7 @@ export function useTableData (
   const uncontrolledCurrentPageRef = ref(1)
   const uncontrolledPageSizeRef = ref(10)
 
-  dataRelatedCols.value.forEach((column) => {
+  dataRelatedColsRef.value.forEach((column) => {
     if (column.sorter !== undefined) {
       uncontrolledSortStateRef.value = {
         columnKey: column.key,
@@ -102,7 +102,7 @@ export function useTableData (
   const mergedSortStateRef = computed<SortState | null>(() => {
     // If one of the columns's sort order is false or 'ascend' or 'descend',
     // the table's controll functionality should work in controlled manner.
-    const columnsWithControlledSortOrder = dataRelatedCols.value.filter(
+    const columnsWithControlledSortOrder = dataRelatedColsRef.value.filter(
       (column) =>
         column.type !== 'selection' &&
         column.sorter !== undefined &&
@@ -132,7 +132,7 @@ export function useTableData (
   })
 
   const mergedFilterStateRef = computed<FilterState>(() => {
-    const columnsWithControlledFilter = dataRelatedCols.value.filter(
+    const columnsWithControlledFilter = dataRelatedColsRef.value.filter(
       (column) => {
         return (
           column.filterOptionValues !== undefined ||
@@ -346,7 +346,7 @@ export function useTableData (
     if (!columnKey) {
       clearSorter()
     } else {
-      const columnToSort = dataRelatedCols.value.find(
+      const columnToSort = dataRelatedColsRef.value.find(
         (column) =>
           column.type !== 'selection' &&
           column.type !== 'expand' &&
@@ -383,15 +383,14 @@ export function useTableData (
     }
   }
   return {
-    treeMate: treeMateRef,
-    mergedCurrentPage: mergedCurrentPageRef,
-    mergedPagination: mergedPaginationRef,
-    paginatedData: paginatedDataRef,
-    currentPage: mergedCurrentPageRef,
-    mergedFilterState: mergedFilterStateRef,
-    mergedSortState: mergedSortStateRef,
-    hoverKey: ref<RowKey | null>(null),
-    selectionColumn: selectionColumnRef,
+    treeMateRef,
+    mergedCurrentPageRef,
+    mergedPaginationRef,
+    paginatedDataRef,
+    mergedFilterStateRef,
+    mergedSortStateRef: mergedSortStateRef,
+    hoverKeyRef: ref<RowKey | null>(null),
+    selectionColumnRef,
     doUpdateFilters,
     doUpdateSorter,
     doUpdatePageSize,

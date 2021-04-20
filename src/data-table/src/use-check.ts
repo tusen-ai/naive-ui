@@ -90,9 +90,9 @@ export function useCheck (
     )
   }
   return {
-    mergedCheckedRowKeys: mergedCheckedRowKeysRef,
-    someRowsChecked: someRowsCheckedRef,
-    allRowsChecked: allRowsCheckedRef,
+    mergedCheckedRowKeysRef,
+    someRowsCheckedRef,
+    allRowsCheckedRef,
     doUpdateCheckedRowKeys,
     doCheckAll,
     doUncheckAll

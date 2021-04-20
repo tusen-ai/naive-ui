@@ -38,12 +38,16 @@ export default defineComponent({
   },
   setup (props) {
     const { NConfigProvider } = useConfig()
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const NDataTable = inject(dataTableInjectionKey)!
+    const {
+      mergedThemeRef,
+      mergedClsPrefixRef,
+      mergedFilterStateRef,
+      filterMenuCssVarsRef,
+      doUpdateFilters
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    } = inject(dataTableInjectionKey)!
     const showPopoverRef = ref(false)
-    const filterStateRef = computed(() => {
-      return NDataTable.mergedFilterState
-    })
+    const filterStateRef = mergedFilterStateRef
     const filterMultipleRef = computed(() => {
       return props.column.filterMultiple !== false
     })
@@ -77,7 +81,7 @@ export default defineComponent({
         props.column.key,
         mergedFilterValue
       )
-      NDataTable.doUpdateFilters(nextFilterState, props.column)
+      doUpdateFilters(nextFilterState, props.column)
     }
     function handleFilterMenuCancel (): void {
       showPopoverRef.value = false
@@ -86,20 +90,21 @@ export default defineComponent({
       showPopoverRef.value = false
     }
     return {
-      NDataTable,
+      mergedTheme: mergedThemeRef,
+      mergedClsPrefix: mergedClsPrefixRef,
       active: activeRef,
       showPopover: showPopoverRef,
       mergedRenderFilter: mergedRenderFilterRef,
       filterMultiple: filterMultipleRef,
       mergedFilterValue: mergedFilterValueRef,
+      filterMenuCssVars: filterMenuCssVarsRef,
       handleFilterChange,
       handleFilterMenuConfirm,
       handleFilterMenuCancel
     }
   },
   render () {
-    const { NDataTable } = this
-    const { mergedTheme, mergedClsPrefix } = NDataTable
+    const { mergedTheme, mergedClsPrefix } = this
     return (
       <NPopover
         show={this.showPopover}
@@ -142,7 +147,7 @@ export default defineComponent({
               renderFilterMenu()
             ) : (
               <NDataTableFilterMenu
-                style={NDataTable.filterMenuCssVars}
+                style={this.filterMenuCssVars}
                 radioGroupName={String(this.column.key)}
                 multiple={this.filterMultiple}
                 value={this.mergedFilterValue}

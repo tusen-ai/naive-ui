@@ -21,7 +21,7 @@ export function useExpand (props: DataTableSetupProps) {
   })
   const uncontrolledExpandedRowKeysRef = ref(props.defaultExpandedRowKeys)
   const controlledExpandedRowKeysRef = toRef(props, 'expandedRowKeys')
-  const mergedExpandedRowKeys = useMergedState(
+  const mergedExpandedRowKeysRef = useMergedState(
     controlledExpandedRowKeysRef,
     uncontrolledExpandedRowKeysRef
   )
@@ -39,8 +39,8 @@ export function useExpand (props: DataTableSetupProps) {
     uncontrolledExpandedRowKeysRef.value = expandedKeys
   }
   return {
-    mergedExpandedRowKeys: mergedExpandedRowKeys,
-    renderExpand: renderExpandRef,
+    mergedExpandedRowKeysRef,
+    renderExpandRef,
     doUpdateExpandedRowKeys
   }
 }

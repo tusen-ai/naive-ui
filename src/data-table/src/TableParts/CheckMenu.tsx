@@ -68,25 +68,36 @@ function createDropdownOptions (
 
 export default defineComponent({
   name: 'DataTableCheckMenu',
+  props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    }
+  },
   setup () {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const NDataTable = inject(dataTableInjectionKey)!
-    const { doCheckAll, doUncheckAll } = NDataTable
+    const {
+      checkOptionsRef,
+      doCheckAll,
+      doUncheckAll
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    } = inject(dataTableInjectionKey)!
     return {
-      handleSelect: createSelectHandler(
-        NDataTable.checkOptions,
-        doCheckAll,
-        doUncheckAll
+      handleSelect: computed(() =>
+        createSelectHandler(checkOptionsRef.value, doCheckAll, doUncheckAll)
       ),
-      options: computed(() => createDropdownOptions(NDataTable.checkOptions))
+      options: computed(() => createDropdownOptions(checkOptionsRef.value))
     }
   },
   render () {
+    const { clsPrefix } = this
     return (
       <NDropdown options={this.options} onSelect={this.handleSelect}>
         {{
           default: () => (
-            <NBaseIcon clsPrefix="n" class="n-data-table-check-extra">
+            <NBaseIcon
+              clsPrefix={clsPrefix}
+              class={`${clsPrefix}-data-table-check-extra`}
+            >
               {{
                 default: () => <ChevronDownIcon />
               }}

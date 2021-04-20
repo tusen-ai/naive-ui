@@ -269,11 +269,12 @@ export default c([
         fixedColumnStyle
       ])
     ]),
-    cB('data-table-base-table-header', {
-      flexShrink: 0,
-      transition: 'border-color .3s var(--bezier)',
-      scrollbarWidth: 'none'
-    }, [
+    cB('data-table-base-table-header', `
+      overflow: scroll;
+      flex-shrink: 0;
+      transition: border-color .3s var(--bezier);
+      scrollbar-width: none;
+    `, [
       c('&::-webkit-scrollbar', {
         width: 0,
         height: 0
