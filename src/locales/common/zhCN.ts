@@ -40,6 +40,8 @@ const zhCN: NLocale = {
     today: '今天'
   },
   DataTable: {
+    checkTableAll: '选择全部表格数据',
+    uncheckTableAll: '取消选择全部表格数据',
     confirm: '确认',
     clear: '重置'
   },

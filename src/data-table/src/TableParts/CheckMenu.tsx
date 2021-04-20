@@ -1,5 +1,6 @@
 import { h, defineComponent, inject, computed } from 'vue'
 import { NDropdown } from '../../../dropdown'
+import { NLocale } from '../../../locales'
 import { NBaseIcon } from '../../../_internal'
 import { ChevronDownIcon } from '../../../_internal/icons'
 import { dataTableInjectionKey } from '../interface'
@@ -45,19 +46,20 @@ function createDropdownOptions (
   | DataTableCheckOption
   | { label: string, key: string | number, onSelect: () => void }
   >
-  | undefined
+  | undefined,
+  localeRef: NLocale['DataTable']
 ): Array<{ label: string, key: string | number }> {
   if (!options) return []
   return options.map((option) => {
     switch (option) {
       case DataTableCheckOption.CHECK_ALL:
         return {
-          label: '选择表格全部数据',
+          label: localeRef.checkTableAll,
           key: DataTableCheckOption.CHECK_ALL
         }
       case DataTableCheckOption.UNCHECK_ALL:
         return {
-          label: '选择表格全部数据取消',
+          label: localeRef.uncheckTableAll,
           key: DataTableCheckOption.UNCHECK_ALL
         }
       default:
@@ -76,6 +78,7 @@ export default defineComponent({
   },
   setup () {
     const {
+      localeRef,
       checkOptionsRef,
       doCheckAll,
       doUncheckAll
@@ -85,7 +88,9 @@ export default defineComponent({
       handleSelect: computed(() =>
         createSelectHandler(checkOptionsRef.value, doCheckAll, doUncheckAll)
       ),
-      options: computed(() => createDropdownOptions(checkOptionsRef.value))
+      options: computed(() =>
+        createDropdownOptions(checkOptionsRef.value, localeRef.value)
+      )
     }
   },
   render () {

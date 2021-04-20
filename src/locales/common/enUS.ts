@@ -38,6 +38,8 @@ const enUS = {
     today: 'Today'
   },
   DataTable: {
+    checkTableAll: 'Select all in the table',
+    uncheckTableAll: 'Unselect all in the table',
     confirm: 'Confirm',
     clear: 'Clear'
   },
