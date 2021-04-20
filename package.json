@@ -1,7 +1,7 @@
 {
   "name": "naive-ui",
-  "version": "2.7.0",
-  "description": "A Vue UI Framework. Caring About Styles, Themed, Batteries Included, Not Rather Slow.",
+  "version": "2.7.1",
+  "description": "A Vue 3 UI Framework. Rather Complete, Themable, With Typescript, Not Too Slow",
   "main": "lib/index.js",
   "module": "es/index.js",
   "scripts": {
