@@ -1,4 +1,4 @@
-import { h, defineComponent, inject, PropType, VNodeChild } from 'vue'
+import { h, defineComponent, inject, PropType, VNodeChild, Fragment } from 'vue'
 import { happensIn, pxfy } from 'seemly'
 import { formatLength } from '../../../_utils'
 import { NCheckbox } from '../../../checkbox'
@@ -13,11 +13,11 @@ import {
 } from '../utils'
 import {
   TableExpandColumn,
-  TableSelectionColumn,
   TableColumnGroup,
   TableBaseColumn,
   dataTableInjectionKey
 } from '../interface'
+import CheckMenu from './CheckMenu'
 
 function renderTitle (
   column: TableExpandColumn | TableBaseColumn | TableColumnGroup
@@ -35,11 +35,11 @@ export default defineComponent({
   setup () {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NDataTable = inject(dataTableInjectionKey)!
-    function handleCheckboxUpdateChecked (column: TableSelectionColumn): void {
+    function handleCheckboxUpdateChecked (): void {
       if (NDataTable.someRowsChecked || NDataTable.allRowsChecked) {
-        NDataTable.doUncheckAll(column)
+        NDataTable.doUncheckAll()
       } else {
-        NDataTable.doCheckAll(column)
+        NDataTable.doCheckAll()
       }
     }
     function handleColHeaderClick (
@@ -75,7 +75,8 @@ export default defineComponent({
         rightActiveFixedColKey,
         rows,
         cols,
-        mergedTheme
+        mergedTheme,
+        checkOptions
       },
       headerStyle,
       handleColHeaderClick,
@@ -145,15 +146,16 @@ export default defineComponent({
                         }
                       >
                         {column.type === 'selection' ? (
-                          <NCheckbox
-                            key={currentPage}
-                            tableHeader
-                            checked={allRowsChecked}
-                            indeterminate={someRowsChecked}
-                            onUpdateChecked={() =>
-                              handleCheckboxUpdateChecked(column)
-                            }
-                          />
+                          <>
+                            <NCheckbox
+                              key={currentPage}
+                              tableHeader
+                              checked={allRowsChecked}
+                              indeterminate={someRowsChecked}
+                              onUpdateChecked={handleCheckboxUpdateChecked}
+                            />
+                            {checkOptions ? <CheckMenu /> : null}
+                          </>
                         ) : column.ellipsis === true ||
                           (column.ellipsis && !column.ellipsis.tooltip) ? (
                             <div

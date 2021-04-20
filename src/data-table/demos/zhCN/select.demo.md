@@ -16,9 +16,12 @@
 ```
 
 ```js
+import { DataTableCheckOption } from 'naive-ui'
+
 const columns = [
   {
     type: 'selection',
+    options: [DataTableCheckOption.CHECK_ALL, DataTableCheckOption.UNCHECK_ALL],
     disabled (row, index) {
       return row.name === 'Edward King 3'
     }

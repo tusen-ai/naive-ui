@@ -301,6 +301,17 @@ export function useTableData (
     }
   })
 
+  const selectionColumnRef = computed<TableSelectionColumn | null>(() => {
+    return (
+      (props.columns.find((col) => {
+        if (col.type === 'selection') {
+          return true
+        }
+        return false
+      }) as TableSelectionColumn | undefined) || null
+    )
+  })
+
   function doUpdatePage (page: number): void {
     const { 'onUpdate:page': onUpdatePage, onPageChange } = props
     if (onUpdatePage) call(onUpdatePage, page)
@@ -380,6 +391,7 @@ export function useTableData (
     mergedFilterState: mergedFilterStateRef,
     mergedSortState: mergedSortStateRef,
     hoverKey: ref<RowKey | null>(null),
+    selectionColumn: selectionColumnRef,
     doUpdateFilters,
     doUpdateSorter,
     doUpdatePageSize,

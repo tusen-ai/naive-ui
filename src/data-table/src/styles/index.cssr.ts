@@ -214,10 +214,12 @@ export default c([
         cM('filterable', {
           paddingRight: '36px'
         }),
+        fixedColumnStyle,
         cM('selection', `
           padding: 0;
           text-align: center;
           line-height: 0;
+          z-index: 3;
         `),
         cE('ellipsis', `
           display: inline-block;
@@ -236,8 +238,7 @@ export default c([
           c('&:hover', {
             backgroundColor: 'var(--merged-th-color-hover)'
           })
-        ]),
-        fixedColumnStyle
+        ])
       ]),
       cB('data-table-td', `
         text-align: start;
@@ -329,7 +330,17 @@ export default c([
           `)
         ])
       ])
-    ])
+    ]),
+    cB('data-table-check-extra', `
+      transition: color .3s var(--bezier);
+      color: var(--th-icon-color);
+      position: absolute;
+      font-size: 14px;
+      right: -4px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1;
+    `)
   ]),
   cB('data-table-filter-menu', [
     cB('scrollbar', {
@@ -387,11 +398,11 @@ export default c([
 
 function createFixedColumnStyle (): CNode[] {
   return [
-    cM('fixed-left', {
-      left: 0,
-      position: 'sticky',
-      zIndex: 2
-    }, [
+    cM('fixed-left', `
+      left: 0;
+      position: sticky;
+      z-index: 2;
+    `, [
       c('&::after', `
         pointer-events: none;
         content: "";

@@ -5,6 +5,7 @@ import { NLocale } from '../../locales'
 import { MergedTheme } from '../../_mixins'
 import { DataTableTheme } from '../styles'
 import { RowItem, ColItem } from './use-group-header'
+import { DataTableCheckOption } from './TableParts/CheckMenu'
 
 export type FilterOptionValue = string | number
 export type ColumnKey = string | number
@@ -100,6 +101,7 @@ export type TableBaseColumn = {
 export type TableSelectionColumn = {
   type: 'selection'
   disabled?: (row: RowData) => boolean
+  options?: DataTableCheckOptions
 
   // to suppress type error in utils
   sorter?: never
@@ -127,11 +129,16 @@ export type TableColumn =
   | TableExpandColumn
 export type TableColumns = TableColumn[]
 
+export type DataTableCheckOptions = Array<
+| DataTableCheckOption
+| { label: string, key: string | number, onSelect: () => void }
+>
 export interface DataTableInjection {
+  checkOptions: DataTableCheckOptions | undefined
   hoverKey: RowKey | null
   mergedClsPrefix: string
   mergedTheme: MergedTheme<DataTableTheme>
-  scrollX?: string | number
+  scrollX: string | number | undefined
   rows: RowItem[][]
   cols: ColItem[]
   treeMate: TreeMate<RowData>
@@ -148,7 +155,7 @@ export interface DataTableInjection {
   mergedSortState: SortState | null
   mergedFilterState: FilterState
   loading: boolean
-  rowClassName?: string | CreateRowClassName
+  rowClassName: string | CreateRowClassName | undefined
   mergedCheckedRowKeys: RowKey[]
   locale: NLocale['DataTable']
   filterMenuCssVars: CSSProperties
@@ -162,8 +169,8 @@ export interface DataTableInjection {
   ) => void
   doUpdateSorter: (sorter: SortState | null) => void
   doUpdateCheckedRowKeys: (keys: RowKey[]) => void
-  doUncheckAll: (column: TableSelectionColumn) => void
-  doCheckAll: (column: TableSelectionColumn) => void
+  doUncheckAll: (checkWholeTable?: boolean) => void
+  doCheckAll: (checkWholeTable?: boolean) => void
   handleTableHeaderScroll: (e: Event) => void
   handleTableBodyScroll: (e: Event) => void
   deriveActiveRightFixedColumn: (

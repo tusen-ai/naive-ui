@@ -9,11 +9,12 @@ import { TreeMate } from 'treemate'
 export function useCheck (
   props: DataTableSetupProps,
   data: {
+    selectionColumnRef: ComputedRef<TableSelectionColumn | null>
     paginatedDataRef: ComputedRef<TmNode[]>
     treeMateRef: ComputedRef<TreeMate<RowData>>
   }
 ) {
-  const { paginatedDataRef, treeMateRef } = data
+  const { paginatedDataRef, treeMateRef, selectionColumnRef } = data
   const uncontrolledCheckedRowKeysRef = ref(props.defaultCheckedRowKeys)
   const controlledCheckedRowKeysRef = toRef(props, 'checkedRowKeys')
   const mergedCheckedRowKeysRef = useMergedState(
@@ -47,9 +48,14 @@ export function useCheck (
     if (onCheckedRowKeysChange) call(onCheckedRowKeysChange, keys)
     uncontrolledCheckedRowKeysRef.value = keys
   }
-  function doCheckAll (column: TableSelectionColumn): void {
+  function doCheckAll (checkWholeTable: boolean = false): void {
+    const { value: column } = selectionColumnRef
+    if (!column) return
     const rowKeysToCheck: RowKey[] = []
-    paginatedDataRef.value.forEach((tmNode) => {
+    ;(checkWholeTable
+      ? treeMateRef.value.treeNodes
+      : paginatedDataRef.value
+    ).forEach((tmNode) => {
       if (column.disabled?.(tmNode.rawNode)) {
         return
       }
@@ -62,9 +68,14 @@ export function useCheck (
         .checkedKeys
     )
   }
-  function doUncheckAll (column: TableSelectionColumn): void {
+  function doUncheckAll (checkWholeTable: boolean = false): void {
+    const { value: column } = selectionColumnRef
+    if (!column) return
     const rowKeysToUncheck: RowKey[] = []
-    paginatedDataRef.value.forEach((tmNode) => {
+    ;(checkWholeTable
+      ? treeMateRef.value.treeNodes
+      : paginatedDataRef.value
+    ).forEach((tmNode) => {
       const { rawNode: row } = tmNode
       if (column.disabled?.(row)) {
         return

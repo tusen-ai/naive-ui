@@ -225,6 +225,7 @@ export default defineComponent({
       treeMate: treeMateRef,
       mergedCurrentPage: mergedCurrentPageRef,
       paginatedData: paginatedDataRef,
+      selectionColumn: selectionColumnRef,
       hoverKey,
       currentPage,
       mergedPagination,
@@ -247,8 +248,9 @@ export default defineComponent({
       allRowsChecked,
       mergedCheckedRowKeys
     } = useCheck(props, {
-      paginatedDataRef,
-      treeMateRef
+      selectionColumnRef,
+      treeMateRef,
+      paginatedDataRef
     })
     const {
       mergedExpandedRowKeys,
@@ -299,6 +301,10 @@ export default defineComponent({
         mergedExpandedRowKeys,
         locale,
         rowKey: toRef(props, 'rowKey'),
+        checkOptions: computed(() => {
+          const { value: selectionColumn } = selectionColumnRef
+          return selectionColumn?.options
+        }),
         filterMenuCssVars: computed(() => {
           const {
             self: { actionDividerColor, actionPadding, actionButtonMargin }
