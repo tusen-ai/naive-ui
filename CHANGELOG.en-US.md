@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-layout` overflow on horizontal direction.
+
 ## 2.7.1
 
 # Feats

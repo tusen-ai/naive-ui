@@ -10,17 +10,14 @@ export default cB('layout', `
   position: relative;
   z-index: auto;
   flex: auto;
+  overflow-x: hidden;
   transition:
     margin-left .3s var(--bezier),
     background-color .3s var(--bezier),
     color .3s var(--bezier);
 `, [
-  cE('content', `
-    box-sizing: border-box;
-    overflow-x: hidden;
-  `),
   cM('has-sider', [
-    c('& >', [
+    c('>', [
       cE('content', `
         display: flex;
         flex-wrap: nowrap;

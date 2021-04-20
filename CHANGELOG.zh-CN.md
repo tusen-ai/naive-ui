@@ -1,8 +1,14 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-layout` 横向溢出的问题
+
 ## 2.7.1
 
-# Feats
+### Feats
 
 - `n-checkbox` 增加 `focusable` 属性
 - `n-cascader` 增加 `action` slot
