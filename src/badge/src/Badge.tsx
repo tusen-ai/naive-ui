@@ -117,7 +117,7 @@ export default defineComponent({
       >
         {renderSlot(this.$slots, 'default')}
         <Transition
-          name="n-fade-in-scale-up-transition"
+          name="fade-in-scale-up-transition"
           onAfterEnter={this.handleAfterEnter}
           onAfterLeave={this.handleAfterLeave}
         >

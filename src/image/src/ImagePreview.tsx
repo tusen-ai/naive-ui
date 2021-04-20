@@ -258,7 +258,7 @@ export default defineComponent({
                     style={this.cssVars as CSSProperties}
                   >
                     <Transition
-                      name="n-fade-in-transition"
+                      name="fade-in-transition"
                       appear={this.appear}
                     >
                       {{
@@ -273,7 +273,7 @@ export default defineComponent({
                     </Transition>
                     {this.showToolbar ? (
                       <Transition
-                        name="n-fade-in-transition"
+                        name="fade-in-transition"
                         appear={this.appear}
                       >
                         {{
@@ -332,7 +332,7 @@ export default defineComponent({
                       </Transition>
                     ) : null}
                     <Transition
-                      name="n-fade-in-scale-up-transition"
+                      name="fade-in-scale-up-transition"
                       onAfterLeave={this.handleAfterLeave}
                       appear={this.appear}
                       // BUG:

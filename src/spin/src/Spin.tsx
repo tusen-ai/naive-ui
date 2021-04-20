@@ -103,7 +103,7 @@ export default defineComponent({
         >
           {$slots}
         </div>
-        <Transition name="n-fade-in-transition">
+        <Transition name="fade-in-transition">
           {{
             default: () =>
               this.compitableShow ? (

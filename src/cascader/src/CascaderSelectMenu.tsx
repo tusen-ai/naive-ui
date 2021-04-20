@@ -169,7 +169,7 @@ export default defineComponent({
   render () {
     const { mergedClsPrefix, isMounted, mergedTheme } = this
     return (
-      <Transition name="n-fade-in-scale-up-transition" appear={isMounted}>
+      <Transition name="fade-in-scale-up-transition" appear={isMounted}>
         {{
           default: () =>
             this.show

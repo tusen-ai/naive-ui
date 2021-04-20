@@ -18,7 +18,7 @@ const checkMarkIcon = h(CheckmarkIcon)
 
 function renderCheckMark (show: boolean, clsPrefix: string): VNode {
   return (
-    <Transition name="n-fade-in-scale-up-transition">
+    <Transition name="fade-in-scale-up-transition">
       {{
         default: () =>
           show ? (

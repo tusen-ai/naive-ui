@@ -420,7 +420,7 @@ export default defineComponent({
             key={this.feedbackId}
             class={`${mergedClsPrefix}-form-item-feedback-wrapper`}
           >
-            <Transition name="n-fade-down-transition" mode="out-in">
+            <Transition name="fade-down-transition" mode="out-in">
               {{
                 default: () => {
                   const feedbacks = (

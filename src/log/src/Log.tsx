@@ -283,7 +283,7 @@ export default defineComponent({
             )
           }}
         </NScrollbar>,
-        <Transition name="n-fade-in-scale-up-transition">
+        <Transition name="fade-in-scale-up-transition">
           {{
             default: () =>
               this.loading ? <NLogLoader clsPrefix={mergedClsPrefix} /> : null

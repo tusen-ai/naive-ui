@@ -193,7 +193,7 @@ export default defineComponent({
             {{
               default: () => (
                 <Transition
-                  name="n-fade-in-scale-up-transition"
+                  name="fade-in-scale-up-transition"
                   appear={this.appear ?? this.isMounted}
                   onEnter={handleEnter as any}
                   onAfterLeave={handleAfterLeave}

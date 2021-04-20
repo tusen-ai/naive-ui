@@ -71,7 +71,7 @@ export default defineComponent({
       const { value, clsPrefix } = props
       return typeof value === 'number' ? (
         <span class={`${clsPrefix}-base-slot-machine`}>
-          <TransitionGroup name="n-fade-up-width-expand-transition" tag="span">
+          <TransitionGroup name="fade-up-width-expand-transition" tag="span">
             {{
               default: () =>
                 numbersRef.value.map((number, i) => (

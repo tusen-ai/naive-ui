@@ -849,7 +849,7 @@ export default defineComponent({
                 {{
                   default: () => (
                     <Transition
-                      name="n-fade-in-scale-up-transition"
+                      name="fade-in-scale-up-transition"
                       appear={this.isMounted}
                       css={!(this.active && this.prevActive)}
                     >
@@ -903,7 +903,7 @@ export default defineComponent({
                   {{
                     default: () => (
                       <Transition
-                        name="n-fade-in-scale-up-transition"
+                        name="fade-in-scale-up-transition"
                         appear={this.isMounted}
                         css={!(this.active && this.prevActive)}
                       >

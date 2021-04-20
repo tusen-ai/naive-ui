@@ -151,7 +151,7 @@ export default defineComponent({
       )
     ) : (
       <Transition
-        name="n-fade-in-transition"
+        name="fade-in-transition"
         appear={this.isMounted}
         css={!this.isInputing}
       >

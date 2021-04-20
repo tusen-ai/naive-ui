@@ -607,7 +607,7 @@ export default defineComponent({
                     [this.horizontalRailStyle, { width: this.sizePx }] as any
                   }
                 >
-                  <Transition name="n-fade-in-transition">
+                  <Transition name="fade-in-transition">
                     {{
                       default: () =>
                         this.needYBar && this.isShowYBar && !this.isIos ? (
@@ -638,7 +638,7 @@ export default defineComponent({
                     [this.verticalRailStyle, { height: this.sizePx }] as any
                   }
                 >
-                  <Transition name="n-fade-in-transition">
+                  <Transition name="fade-in-transition">
                     {{
                       default: () =>
                         this.needXBar && this.isShowXBar && !this.isIos ? (

@@ -1,5 +1,5 @@
 import { CNode } from 'css-render'
-import { c, namespace } from '../../_utils/cssr'
+import { c } from '../../_utils/cssr'
 import commonVariables from '../common/_common'
 
 const { cubicBezierEaseInOut } = commonVariables
@@ -14,15 +14,15 @@ export default function ({
   delay = '.1s'
 }: FadeInWidthExpandTransition = {}): CNode[] {
   return [
-    c(`&.${namespace}-fade-in-width-expand-transition-leave-from, &.${namespace}-fade-in-width-expand-transition-enter-to`, {
+    c('&.fade-in-width-expand-transition-leave-from, &.fade-in-width-expand-transition-enter-to', {
       opacity: 1
     }),
-    c(`&.${namespace}-fade-in-width-expand-transition-leave-to, &.${namespace}-fade-in-width-expand-transition-enter-from`, `
+    c('&.fade-in-width-expand-transition-leave-to, &.fade-in-width-expand-transition-enter-from', `
       opacity: 0!important;
       margin-left: 0!important;
       margin-right: 0!important;
     `),
-    c(`&.${namespace}-fade-in-width-expand-transition-leave-active`, `
+    c('&.fade-in-width-expand-transition-leave-active', `
       overflow: hidden;
       transition:
         opacity ${duration} ${cubicBezierEaseInOut},
@@ -30,7 +30,7 @@ export default function ({
         margin-left ${duration} ${cubicBezierEaseInOut} ${delay},
         margin-right ${duration} ${cubicBezierEaseInOut} ${delay};
     `),
-    c(`&.${namespace}-fade-in-width-expand-transition-enter-active`, `
+    c('&.fade-in-width-expand-transition-enter-active', `
       overflow: hidden;
       transition:
         opacity ${duration} ${cubicBezierEaseInOut} ${delay},

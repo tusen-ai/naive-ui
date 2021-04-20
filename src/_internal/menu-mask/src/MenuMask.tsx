@@ -47,7 +47,7 @@ export default defineComponent({
   },
   render () {
     return (
-      <Transition name="n-fade-in-transition">
+      <Transition name="fade-in-transition">
         {{
           default: () =>
             this.show ? (

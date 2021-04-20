@@ -1,5 +1,5 @@
 import { CNode } from 'css-render'
-import { c, namespace } from '../../_utils/cssr'
+import { c } from '../../_utils/cssr'
 import commonVariables from '../common/_common'
 
 const {
@@ -28,11 +28,11 @@ export default function ({
   leaveToProps = undefined
 }: FadeInHeightExpandTransitionOption = {}): CNode[] {
   return [
-    c(`&.${namespace}-fade-in-height-expand-transition-leave-from, &.${namespace}-fade-in-height-expand-transition-enter-to`, {
+    c('&.fade-in-height-expand-transition-leave-from, &.fade-in-height-expand-transition-enter-to', {
       ...enterToProps,
       opacity: 1
     }),
-    c(`&.${namespace}-fade-in-height-expand-transition-leave-to, &.${namespace}-fade-in-height-expand-transition-enter-from`, {
+    c('&.fade-in-height-expand-transition-leave-to, &.fade-in-height-expand-transition-enter-from', {
       ...leaveToProps,
       opacity: 0,
       marginTop: '0 !important',
@@ -40,7 +40,7 @@ export default function ({
       paddingTop: foldPadding ? '0 !important' : undefined,
       paddingBottom: foldPadding ? '0 !important' : undefined
     }),
-    c(`&.${namespace}-fade-in-height-expand-transition-leave-active`, `
+    c('&.fade-in-height-expand-transition-leave-active', `
       overflow: ${overflow};
       transition:
         max-height ${duration} ${cubicBezierEaseInOut} ${leavingDelay},
@@ -51,7 +51,7 @@ export default function ({
         padding-bottom ${duration} ${cubicBezierEaseInOut} ${leavingDelay}
         ${originalTransition ? ',' + originalTransition : ''}
     `),
-    c(`&.${namespace}-fade-in-height-expand-transition-enter-active`, `
+    c('&.fade-in-height-expand-transition-enter-active', `
       overflow: ${overflow};
       transition:
         max-height ${duration} ${cubicBezierEaseInOut},

@@ -134,7 +134,7 @@ export default defineComponent({
   render () {
     const { submenuInstRefs, mergedClsPrefix, $slots } = this
     return (
-      <Transition name="n-fade-in-scale-up-transition" appear={this.isMounted}>
+      <Transition name="fade-in-scale-up-transition" appear={this.isMounted}>
         {{
           default: () =>
             this.show

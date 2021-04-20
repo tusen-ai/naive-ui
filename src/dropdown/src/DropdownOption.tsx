@@ -268,7 +268,7 @@ export default defineComponent({
                                       onAfterEnter={
                                         this.handleSubmenuAfterEnter
                                       }
-                                      name="n-fade-in-scale-up-transition"
+                                      name="fade-in-scale-up-transition"
                                       appear
                                     >
                                       {{

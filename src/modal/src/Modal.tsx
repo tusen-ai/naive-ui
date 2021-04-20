@@ -260,7 +260,7 @@ export default defineComponent({
               >
                 {this.unstableShowMask ? (
                   <Transition
-                    name="n-fade-in-transition"
+                    name="fade-in-transition"
                     key="mask"
                     appear={this.appear ?? this.isMounted}
                   >

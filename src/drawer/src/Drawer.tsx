@@ -239,7 +239,7 @@ export default defineComponent({
                 class={[`${mergedClsPrefix}-drawer-container`, this.namespace]}
                 style={this.cssVars as CSSProperties}
               >
-                <Transition name="n-fade-in-transition" appear={this.isMounted}>
+                <Transition name="fade-in-transition" appear={this.isMounted}>
                   {{
                     default: () =>
                       this.show ? (

@@ -226,7 +226,7 @@ export default defineComponent({
                 }}
               </NBaseLoading>
             ) : this.leafOnly && !(this.multiple && this.cascade) ? (
-              <Transition name="n-fade-in-scale-up-transition">
+              <Transition name="fade-in-scale-up-transition">
                 {{
                   default: () =>
                     this.checked ? (

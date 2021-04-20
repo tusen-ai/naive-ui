@@ -1,5 +1,5 @@
 import { CNode } from 'css-render'
-import { c, namespace } from '../../_utils/cssr'
+import { c } from '../../_utils/cssr'
 import commonVariables from '../common/_common'
 
 const { cubicBezierEaseIn, cubicBezierEaseOut } = commonVariables
@@ -16,22 +16,22 @@ export default function ({
   name = 'slide-in-from-left'
 }: SlideInFromLeftTransitionOptions = {}): CNode[] {
   return [
-    c(`&.${namespace}-${name}-transition-leave-active`, {
+    c(`&.${name}-transition-leave-active`, {
       transition: `transform ${leaveDuration} ${cubicBezierEaseIn}`
     }),
-    c(`&.${namespace}-${name}-transition-enter-active`, {
+    c(`&.${name}-transition-enter-active`, {
       transition: `transform ${duration} ${cubicBezierEaseOut}`
     }),
-    c(`&.${namespace}-${name}-transition-enter-to`, {
+    c(`&.${name}-transition-enter-to`, {
       transform: 'translateX(0)'
     }),
-    c(`&.${namespace}-${name}-transition-enter-from`, {
+    c(`&.${name}-transition-enter-from`, {
       transform: 'translateX(-100%)'
     }),
-    c(`&.${namespace}-${name}-transition-leave-from`, {
+    c(`&.${name}-transition-leave-from`, {
       transform: 'translateX(0)'
     }),
-    c(`&.${namespace}-${name}-transition-leave-to`, {
+    c(`&.${name}-transition-leave-to`, {
       transform: 'translateX(-100%)'
     })
   ]

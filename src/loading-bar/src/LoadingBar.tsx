@@ -145,7 +145,7 @@ export default defineComponent({
     const { mergedClsPrefix } = this
     return (
       <Transition
-        name="n-fade-in-transition"
+        name="fade-in-transition"
         appear
         onEnter={this.handleEnter}
         onAfterEnter={this.handleAfterEnter}
