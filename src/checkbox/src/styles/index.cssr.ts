@@ -34,7 +34,7 @@ export default c([
     align-items: center;
     white-space: nowrap;
     vertical-align: middle;
-    --merged-color-table-header: var(--color-table-header-popover);
+    --merged-color-table-header: var(--color-table-header);
   `, [
     c('&:hover', [
       cB('checkbox-box', [
