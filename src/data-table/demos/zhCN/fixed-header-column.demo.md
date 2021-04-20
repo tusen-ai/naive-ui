@@ -15,17 +15,6 @@
 />
 ```
 
-```html
-<n-data-table
-  ref="table"
-  :columns="columns"
-  :data="data"
-  :pagination="pagination"
-  :max-height="250"
-  :scroll-x="1800"
-/>
-```
-
 ```js
 import { h, defineComponent } from 'vue'
 
