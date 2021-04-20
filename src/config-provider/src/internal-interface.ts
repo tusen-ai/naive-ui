@@ -1,4 +1,4 @@
-import { VNodeChild } from 'vue'
+import { VNodeChild, Ref } from 'vue'
 import type { AlertTheme } from '../../alert/styles'
 import type { AnchorTheme } from '../../anchor/styles'
 import type { AutoCompleteTheme } from '../../auto-complete/styles'
@@ -201,21 +201,21 @@ export interface GlobalIconConfig {
 }
 
 export interface ConfigProviderInjection {
-  mergedClsPrefix: string | undefined
-  mergedBordered: boolean | undefined
-  mergedNamespace: string | undefined
-  mergedLocale: NLocale | undefined
-  mergedDateLocale: NDateLocale | undefined
-  mergedHljs: Hljs | undefined
-  mergedComponentProps: GlobalComponentConfig | undefined
-  mergedIcons: GlobalIconConfig | undefined
-  mergedTheme: GlobalTheme | undefined
-  mergedThemeOverrides: GlobalThemeOverrides | undefined
+  mergedClsPrefixRef: Ref<string | undefined>
+  mergedBorderedRef: Ref<boolean | undefined>
+  mergedNamespaceRef: Ref<string | undefined>
+  mergedLocaleRef: Ref<NLocale | undefined>
+  mergedDateLocaleRef: Ref<NDateLocale | undefined>
+  mergedHljsRef: Ref<Hljs | undefined>
+  mergedComponentPropsRef: Ref<GlobalComponentConfig | undefined>
+  mergedIconsRef: Ref<GlobalIconConfig | undefined>
+  mergedThemeRef: Ref<GlobalTheme | undefined>
+  mergedThemeOverridesRef: Ref<GlobalThemeOverrides | undefined>
   // deprecated
   /** @deprecated */
-  mergedLegacyTheme: string | undefined
+  mergedLegacyThemeRef: Ref<string | undefined>
   /** @deprecated */
-  mergedLanguage: string | undefined
+  mergedLanguageRef: Ref<string | undefined>
   /** @deprecated */
-  mergedThemeEnvironments: any | undefined
+  mergedThemeEnvironmentsRef: Ref<any | undefined>
 }

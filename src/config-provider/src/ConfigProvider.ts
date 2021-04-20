@@ -5,7 +5,6 @@ import {
   defineComponent,
   PropType,
   provide,
-  reactive,
   InjectionKey,
   renderSlot
 } from 'vue'
@@ -111,7 +110,7 @@ export default defineComponent({
     const mergedThemeRef = computed(() => {
       const { theme } = props
       if (theme === null) return undefined
-      return theme === undefined ? NConfigProvider?.mergedTheme : theme
+      return theme === undefined ? NConfigProvider?.mergedThemeRef.value : theme
     })
     const mergedThemeOverridesRef = computed(() => {
       const { themeOverrides } = props
@@ -119,9 +118,10 @@ export default defineComponent({
       if (themeOverrides === null) return undefined
       // use inherited themeOverrides
       if (themeOverrides === undefined) {
-        return NConfigProvider?.mergedThemeOverrides
+        return NConfigProvider?.mergedThemeOverridesRef.value
       } else {
-        const inheritedThemeOverrides = NConfigProvider?.mergedThemeOverrides
+        const inheritedThemeOverrides =
+          NConfigProvider?.mergedThemeOverridesRef.value
         if (inheritedThemeOverrides === undefined) {
           // no inherited, use self overrides
           return themeOverrides
@@ -134,78 +134,79 @@ export default defineComponent({
     const mergedNamespaceRef = useMemo(() => {
       const { namespace } = props
       return namespace === undefined
-        ? NConfigProvider?.mergedNamespace
+        ? NConfigProvider?.mergedNamespaceRef.value
         : namespace
     })
     const mergedBorderedRef = useMemo(() => {
       const { bordered } = props
-      return bordered === undefined ? NConfigProvider?.mergedBordered : bordered
+      return bordered === undefined
+        ? NConfigProvider?.mergedBorderedRef.value
+        : bordered
     })
     const mergedIconsRef = computed(() => {
       const { icons } = props
-      return icons === undefined ? NConfigProvider?.mergedIcons : icons
+      return icons === undefined ? NConfigProvider?.mergedIconsRef.value : icons
     })
     const mergedComponentPropsRef = computed(() => {
       const { componentOptions } = props
       if (componentOptions !== undefined) return componentOptions
-      return NConfigProvider?.mergedComponentProps
+      return NConfigProvider?.mergedComponentPropsRef.value
     })
     const mergedClsPrefixRef = computed(() => {
       const { clsPrefix } = props
-      return NConfigProvider?.mergedClsPrefix ?? clsPrefix
+      return NConfigProvider?.mergedClsPrefixRef.value ?? clsPrefix
     })
-    provide(
-      configProviderInjectionKey,
-      reactive({
-        mergedIcons: mergedIconsRef,
-        mergedComponentProps: mergedComponentPropsRef,
-        mergedBordered: mergedBorderedRef,
-        mergedNamespace: mergedNamespaceRef,
-        mergedClsPrefix: mergedClsPrefixRef,
-        mergedLocale: computed(() => {
-          const { locale } = props
-          if (locale === null) return undefined
-          return locale === undefined ? NConfigProvider?.mergedLocale : locale
-        }),
-        mergedDateLocale: computed(() => {
-          const { dateLocale } = props
-          if (dateLocale === null) return undefined
-          return dateLocale === undefined
-            ? NConfigProvider?.mergedDateLocale
-            : dateLocale
-        }),
-        mergedHljs: computed(() => {
-          const { hljs } = props
-          return hljs === undefined ? NConfigProvider?.mergedHljs : hljs
-        }),
-        // wip, unstable
-        mergedTheme: mergedThemeRef,
-        mergedThemeOverrides: mergedThemeOverridesRef,
-        // deprecated
-        mergedLegacyTheme: useMemo(() => {
-          const { legacyTheme } = props
-          return legacyTheme === undefined
-            ? NConfigProvider?.mergedTheme
-            : legacyTheme
-        }),
-        mergedLanguage: useMemo(() => {
-          const { language, lang } = props
-          return language === undefined
-            ? lang === undefined
-              ? NConfigProvider?.mergedLanguage
-              : lang
-            : language
-        }),
-        mergedThemeEnvironments: computed(() => {
-          const { themeEnvironments, themeEnvironment } = props
-          return themeEnvironments === undefined
-            ? themeEnvironment === undefined
-              ? NConfigProvider?.mergedThemeEnvironments
-              : themeEnvironment
-            : themeEnvironments
-        })
+    provide(configProviderInjectionKey, {
+      mergedIconsRef,
+      mergedComponentPropsRef,
+      mergedBorderedRef,
+      mergedNamespaceRef,
+      mergedClsPrefixRef,
+      mergedLocaleRef: computed(() => {
+        const { locale } = props
+        if (locale === null) return undefined
+        return locale === undefined
+          ? NConfigProvider?.mergedLocaleRef.value
+          : locale
+      }),
+      mergedDateLocaleRef: computed(() => {
+        const { dateLocale } = props
+        if (dateLocale === null) return undefined
+        return dateLocale === undefined
+          ? NConfigProvider?.mergedDateLocaleRef.value
+          : dateLocale
+      }),
+      mergedHljsRef: computed(() => {
+        const { hljs } = props
+        return hljs === undefined ? NConfigProvider?.mergedHljsRef.value : hljs
+      }),
+      // wip, unstable
+      mergedThemeRef,
+      mergedThemeOverridesRef,
+      // deprecated
+      mergedLegacyThemeRef: useMemo(() => {
+        const { legacyTheme } = props
+        return legacyTheme === undefined
+          ? NConfigProvider?.mergedLegacyThemeRef.value
+          : legacyTheme
+      }),
+      mergedLanguageRef: useMemo(() => {
+        const { language, lang } = props
+        return language === undefined
+          ? lang === undefined
+            ? NConfigProvider?.mergedLanguageRef.value
+            : lang
+          : language
+      }),
+      mergedThemeEnvironmentsRef: computed(() => {
+        const { themeEnvironments, themeEnvironment } = props
+        return themeEnvironments === undefined
+          ? themeEnvironment === undefined
+            ? NConfigProvider?.mergedThemeEnvironmentsRef.value
+            : themeEnvironment
+          : themeEnvironments
       })
-    )
+    })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,

@@ -10,7 +10,7 @@ export function replaceable (name: keyof GlobalIconConfig, icon: JSX.Element) {
     setup () {
       const { NConfigProvider } = useConfig()
       return () => {
-        const iconOverride = NConfigProvider?.mergedIcons?.[name]
+        const iconOverride = NConfigProvider?.mergedIconsRef.value?.[name]
         return iconOverride ? iconOverride() : icon
       }
     }

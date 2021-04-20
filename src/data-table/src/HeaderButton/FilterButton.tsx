@@ -69,8 +69,8 @@ export default defineComponent({
     })
     const mergedRenderFilterRef = computed(() => {
       return (
-        NConfigProvider?.mergedComponentProps?.DataTable?.renderFilter ||
-        props.column.renderFilter
+        NConfigProvider?.mergedComponentPropsRef.value?.DataTable
+          ?.renderFilter || props.column.renderFilter
       )
     })
     function handleFilterChange (

@@ -16,10 +16,10 @@ export default function useHljs (
   props: UseHljsProps
 ): ComputedRef<Hljs | undefined> {
   const NConfigProvider = inject(configProviderInjectionKey, null)
-  if (__DEV__ && !props.hljs && !NConfigProvider?.mergedHljs) {
+  if (__DEV__ && !props.hljs && !NConfigProvider?.mergedHljsRef.value) {
     warn('code', 'hljs is not set.')
   }
   return computed(() => {
-    return (props.hljs as any) || NConfigProvider?.mergedHljs
+    return (props.hljs as any) || NConfigProvider?.mergedHljsRef.value
   })
 }

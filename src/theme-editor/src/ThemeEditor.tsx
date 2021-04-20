@@ -61,8 +61,9 @@ export default defineComponent({
     const { NConfigProvider } = useConfig()
     const theme = computed(() => {
       const mergedTheme: GlobalTheme =
-        NConfigProvider?.mergedTheme || lightTheme
-      const mergedThemeOverrides = NConfigProvider?.mergedThemeOverrides
+        NConfigProvider?.mergedThemeRef.value || lightTheme
+      const mergedThemeOverrides =
+        NConfigProvider?.mergedThemeOverridesRef.value
       const common = merge(
         {},
         mergedTheme.common || lightTheme.common,
@@ -87,7 +88,7 @@ export default defineComponent({
       return overrides
     })
     const themeCommonDefaultRef = computed(() => {
-      return NConfigProvider?.mergedTheme?.common || lightTheme.common
+      return NConfigProvider?.mergedThemeRef.value?.common || lightTheme.common
     })
     const showPanelRef = ref(false)
     const overridesRef = ref<any>(

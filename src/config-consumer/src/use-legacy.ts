@@ -1,4 +1,4 @@
-import { computed, watch, toRef, ComputedRef } from 'vue'
+import { computed, watch, ComputedRef } from 'vue'
 import { ConfigProviderInjection } from '../../config-provider/src/internal-interface'
 import styleScheme from '../../_deprecated/style-scheme'
 
@@ -23,27 +23,31 @@ export default function useLegacy (
   props?: UseLegacyProps
 ): UseLegacy {
   if (NConfigProvider && props) {
-    watch(toRef(NConfigProvider, 'mergedLanguage'), (value, oldValue) => {
+    watch(NConfigProvider.mergedLanguageRef, (value, oldValue) => {
       const { onLanguageChange } = props
       if (onLanguageChange) onLanguageChange(value, oldValue)
     })
   }
   return {
     legacyTheme: computed(() => {
-      return NConfigProvider?.mergedLegacyTheme || 'light'
+      return NConfigProvider?.mergedLegacyThemeRef.value || 'light'
     }),
     legacyLanguage: computed(() => {
-      return NConfigProvider ? NConfigProvider.mergedLanguage : undefined
+      return NConfigProvider
+        ? NConfigProvider.mergedLanguageRef.value
+        : undefined
     }),
     legacyThemeEnvironment: computed(() => {
-      const { mergedThemeEnvironments, mergedLegacyTheme } =
-        NConfigProvider || {}
-      return mergedThemeEnvironments
-        ? mergedThemeEnvironments[mergedLegacyTheme || 'light']
-        : null
+      return (
+        NConfigProvider?.mergedThemeEnvironmentsRef.value?.[
+          NConfigProvider.mergedLegacyThemeRef.value || 'light'
+        ] ?? null
+      )
     }),
     legacyStyleScheme: computed(() => {
-      return (styleScheme as any)[NConfigProvider?.mergedLegacyTheme || 'light']
+      return (styleScheme as any)[
+        NConfigProvider?.mergedLegacyThemeRef.value || 'light'
+      ]
     })
   }
 }

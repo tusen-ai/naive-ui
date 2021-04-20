@@ -131,6 +131,10 @@ export default defineComponent({
       if (Array.isArray(mergedValue)) return mergedValue.length <= props.min
       return true
     })
+    const buttonSizeRef = computed(() => {
+      return NConfigProvider?.mergedComponentPropsRef.value?.DynamicInput
+        ?.buttonSize
+    })
     function doUpdateValue (value: any[]): void {
       const { onInput, 'onUpdate:value': _onUpdateValue, onUpdateValue } = props
       if (onInput) call(onInput, value)
@@ -217,8 +221,8 @@ export default defineComponent({
     })
     return {
       ...useLocale('DynamicInput'),
+      buttonSize: buttonSizeRef,
       mergedClsPrefix,
-      NConfigProvider,
       NFormItem,
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
@@ -242,6 +246,7 @@ export default defineComponent({
   },
   render () {
     const {
+      buttonSize,
       mergedClsPrefix,
       mergedValue,
       locale,
@@ -256,8 +261,6 @@ export default defineComponent({
       remove,
       createItem
     } = this
-    const buttonSize = this.NConfigProvider?.mergedComponentProps?.DynamicInput
-      ?.buttonSize
     return (
       <div
         class={`${mergedClsPrefix}-dynamic-input`}

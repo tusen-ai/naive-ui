@@ -88,7 +88,7 @@ export default defineComponent({
       const { iconPlacement } = props
       return (
         iconPlacement ??
-        NConfigProvider?.mergedComponentProps?.Dialog?.iconPlacement ??
+        NConfigProvider?.mergedComponentPropsRef.value?.Dialog?.iconPlacement ??
         'left'
       )
     })

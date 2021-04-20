@@ -32,8 +32,8 @@ export default defineComponent({
     })
     const mergedRenderSorterRef = computed(() => {
       return (
-        NConfigProvider?.mergedComponentProps?.DataTable?.renderSorter ||
-        props.column.renderSorter
+        NConfigProvider?.mergedComponentPropsRef.value?.DataTable
+          ?.renderSorter || props.column.renderSorter
       )
     })
     return {

@@ -121,19 +121,17 @@ function useTheme<N, T, R> (
     } = props
     const { common: selfCommonOverrides, peers: peersOverrides } = selfOverrides
     const {
-      mergedTheme: {
-        common: globalCommon = undefined,
-        [resolveId]: {
-          common: globalSelfCommon = undefined,
-          self: globalSelf = undefined,
-          peers: globalPeers = {}
-        } = {}
-      } = {},
-      mergedThemeOverrides: {
-        common: globalCommonOverrides = undefined,
-        [resolveId]: globalSelfOverrides = {}
+      common: globalCommon = undefined,
+      [resolveId]: {
+        common: globalSelfCommon = undefined,
+        self: globalSelf = undefined,
+        peers: globalPeers = {}
       } = {}
-    } = NConfigProvider || {}
+    } = NConfigProvider?.mergedThemeRef.value || {}
+    const {
+      common: globalCommonOverrides = undefined,
+      [resolveId]: globalSelfOverrides = {}
+    } = NConfigProvider?.mergedThemeOverridesRef.value || {}
     const {
       common: globalSelfCommonOverrides,
       peers: globalPeersOverrides = {}

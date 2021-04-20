@@ -144,12 +144,14 @@ export default defineComponent({
     })
     const inputSizeRef = computed<InputSize>(() => {
       return (
-        NConfigProvider?.mergedComponentProps?.Pagination?.inputSize || 'small'
+        NConfigProvider?.mergedComponentPropsRef.value?.Pagination?.inputSize ||
+        'small'
       )
     })
     const selectSizeRef = computed<SelectSize>(() => {
       return (
-        NConfigProvider?.mergedComponentProps?.Pagination?.selectSize || 'small'
+        NConfigProvider?.mergedComponentPropsRef.value?.Pagination
+          ?.selectSize || 'small'
       )
     })
 

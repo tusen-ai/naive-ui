@@ -28,12 +28,16 @@ export default function useConfig (
     mergedBordered: computed(() => {
       const { bordered } = props
       if (bordered !== undefined) return bordered
-      return NConfigProvider?.mergedBordered ?? options.defaultBordered ?? true
+      return (
+        NConfigProvider?.mergedBorderedRef.value ??
+        options.defaultBordered ??
+        true
+      )
     }),
     mergedClsPrefix: computed(() => {
-      const clsPrefix = NConfigProvider?.mergedClsPrefix
+      const clsPrefix = NConfigProvider?.mergedClsPrefixRef.value
       return clsPrefix || defaultClsPrefix
     }),
-    namespace: computed(() => NConfigProvider?.mergedNamespace)
+    namespace: computed(() => NConfigProvider?.mergedNamespaceRef.value)
   }
 }

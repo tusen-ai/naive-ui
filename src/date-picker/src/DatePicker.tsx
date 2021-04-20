@@ -161,8 +161,8 @@ export default defineComponent({
     })
     const timePickerSizeRef = computed<TimePickerSize>(() => {
       return (
-        NConfigProvider?.mergedComponentProps?.DatePicker?.timePickerSize ||
-        'small'
+        NConfigProvider?.mergedComponentPropsRef.value?.DatePicker
+          ?.timePickerSize || 'small'
       )
     })
     const isRangeRef = computed(() => {

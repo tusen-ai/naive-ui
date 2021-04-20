@@ -1,4 +1,4 @@
-import { defineComponent, inject, toRef, watch, PropType } from 'vue'
+import { defineComponent, inject, watch, PropType } from 'vue'
 import { configProviderInjectionKey } from '../../config-provider/src/ConfigProvider'
 import useLegacy, { OnLanguageChange } from './use-legacy'
 
@@ -24,7 +24,7 @@ export default defineComponent({
   setup (props) {
     const NConfigProvider = inject(configProviderInjectionKey, null)
     if (NConfigProvider) {
-      watch(toRef(NConfigProvider, 'mergedNamespace'), (value, oldValue) => {
+      watch(NConfigProvider.mergedNamespaceRef, (value, oldValue) => {
         const { onNamespaceChange } = props
         if (onNamespaceChange) onNamespaceChange(value, oldValue)
       })
@@ -39,7 +39,9 @@ export default defineComponent({
     const { NConfigProvider } = this
     return defaultSlot
       ? defaultSlot({
-        namespace: NConfigProvider ? NConfigProvider.mergedNamespace : null,
+        namespace: NConfigProvider
+          ? NConfigProvider.mergedNamespaceRef.value
+          : null,
         // deprecated
         theme: this.legacyTheme,
         language: this.legacyLanguage,

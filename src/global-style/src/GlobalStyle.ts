@@ -29,8 +29,8 @@ export default defineComponent({
         } = NConfigProvider
           ? merge(
             {},
-            NConfigProvider.mergedTheme?.common || commonLight,
-            NConfigProvider.mergedThemeOverrides?.common
+            NConfigProvider.mergedThemeRef.value?.common || commonLight,
+            NConfigProvider.mergedThemeOverridesRef.value?.common
           )
           : commonLight
         if (styleApplied || !body.hasAttribute('n-styled')) {
