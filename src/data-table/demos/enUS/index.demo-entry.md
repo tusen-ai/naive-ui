@@ -18,6 +18,7 @@ size
 merge-cell
 filter-and-sorter
 select
+custom-select
 group-header
 controlled-page
 controlled-filter
@@ -96,6 +97,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` |  |
 | fixed | `'left \| 'right' \| false` | `false` |  |
 | key | `string \| number` | `undefined` | Unique key of this column, **required** when table's row-key is not set. |
+| options | `Array<'all' \| 'none' \| { label: string, key: string \| number, onSelect: (pageData: RowData) => void }>` | `undefined` | Options of custom selection. Only work with `type='selection'` |
 | render | `(rowData: Object, rowIndex: number) => VNodeChild` | `undefined` | Render function of column row cell. |
 | renderExpand | `(rowData: Object, rowIndex: number) => VNodeChild` | `undefined` | Render function of the expand area. Only works when `type` is `'expand'`. |
 | renderFilterMenu | `() => VNodeChild` | `undefined` | Render function of column filter menu. |

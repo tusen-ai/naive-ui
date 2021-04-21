@@ -33,9 +33,26 @@ export function useTableData (
     >
   }
 ) {
+  const selectionColumnRef = computed<TableSelectionColumn | null>(() => {
+    return (
+      (props.columns.find((col) => {
+        if (col.type === 'selection') {
+          return true
+        }
+        return false
+      }) as TableSelectionColumn | undefined) || null
+    )
+  })
+
   const treeMateRef = computed(() =>
     createTreeMate<RowData>(props.data, {
-      getKey: props.rowKey
+      getKey: props.rowKey,
+      getDisabled: (rowData) => {
+        if (selectionColumnRef.value?.disabled?.(rowData)) {
+          return true
+        }
+        return false
+      }
     })
   )
 
@@ -299,17 +316,6 @@ export function useTableData (
       pageSize: mergedPageSizeRef.value,
       pageCount: mergedPageCountRef.value
     }
-  })
-
-  const selectionColumnRef = computed<TableSelectionColumn | null>(() => {
-    return (
-      (props.columns.find((col) => {
-        if (col.type === 'selection') {
-          return true
-        }
-        return false
-      }) as TableSelectionColumn | undefined) || null
-    )
   })
 
   function doUpdatePage (page: number): void {

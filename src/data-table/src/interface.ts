@@ -5,7 +5,7 @@ import { NLocale } from '../../locales'
 import { MergedTheme } from '../../_mixins'
 import { DataTableTheme } from '../styles'
 import { RowItem, ColItem } from './use-group-header'
-import { DataTableCheckOption } from './TableParts/CheckMenu'
+import { DataTableSelectionOption } from './TableParts/SelectionMenu'
 
 export type FilterOptionValue = string | number
 export type ColumnKey = string | number
@@ -101,7 +101,7 @@ export type TableBaseColumn = {
 export type TableSelectionColumn = {
   type: 'selection'
   disabled?: (row: RowData) => boolean
-  options?: DataTableCheckOptions
+  options?: DataTableSelectionOptions
 
   // to suppress type error in utils
   sorter?: never
@@ -129,12 +129,12 @@ export type TableColumn =
   | TableExpandColumn
 export type TableColumns = TableColumn[]
 
-export type DataTableCheckOptions = Array<
-| DataTableCheckOption
+export type DataTableSelectionOptions = Array<
+| DataTableSelectionOption
 | { label: string, key: string | number, onSelect: () => void }
 >
 export interface DataTableInjection {
-  checkOptionsRef: Ref<DataTableCheckOptions | undefined>
+  checkOptionsRef: Ref<DataTableSelectionOptions | undefined>
   hoverKeyRef: Ref<RowKey | null>
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<DataTableTheme>>

@@ -2,6 +2,10 @@
 
 ## Pending
 
+## Feats
+
+- `n-data-table` 在 `'type=selection'` 的列增加 `options` 选项
+
 ### Fixes
 
 - Fix `n-layout` 横向溢出的问题

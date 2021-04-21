@@ -2,6 +2,10 @@
 
 ## Pending
 
+## Feats
+
+- `n-data-table` add `options` on `'type=selection'` column.
+
 ### Fixes
 
 - Fix `n-layout` overflow on horizontal direction.

@@ -18,6 +18,7 @@ size
 merge-cell
 filter-and-sorter
 select
+custom-select
 group-header
 controlled-page
 controlled-filter
@@ -96,6 +97,7 @@ custom-filter-menu
 | filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` |  |
 | fixed | `'left \| 'right' \| false` | `false` |  |
 | key | `string \| number` | `undefined` | 这一列的 key，在表格未设定 row-key 的时候是**必须**的。 |
+| options | `Array<'all' \| 'none' \| { label: string, key: string \| number, onSelect: (pageData: RowData) => void }>` | `undefined` | 自定义选择项的选项，只对 `type='selection'` 生效 |
 | render | `(rowData: Object, rowIndex: number) => VNodeChild` | `undefined` | 渲染函数，渲染这一列的每一行的单元格 |
 | renderExpand | `(rowData: Object, rowIndex: number) => VNodeChild` | `undefined` | 展开区域的渲染函数，仅在 `type` 为 `'expand'` 的时候生效 |
 | renderFilterMenu | `() => VNodeChild` | `undefined` | 渲染函数，渲染这一列的过滤器菜单 |

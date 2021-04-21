@@ -215,7 +215,7 @@ export default defineComponent({
                     {column.type === 'selection' ? (
                       <NCheckbox
                         key={currentPage}
-                        disabled={column.disabled?.(rowData)}
+                        disabled={tmNode.disabled}
                         checked={mergedCheckedRowKeys.includes(rowKey)}
                         onUpdateChecked={(checked) =>
                           handleCheckboxUpdateChecked(tmNode, checked)

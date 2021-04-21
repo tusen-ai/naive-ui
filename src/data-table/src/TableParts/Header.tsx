@@ -17,7 +17,7 @@ import {
   TableBaseColumn,
   dataTableInjectionKey
 } from '../interface'
-import CheckMenu from './CheckMenu'
+import SelectionMenu from './SelectionMenu'
 
 function renderTitle (
   column: TableExpandColumn | TableBaseColumn | TableColumnGroup
@@ -178,7 +178,7 @@ export default defineComponent({
                               onUpdateChecked={handleCheckboxUpdateChecked}
                             />
                             {checkOptions ? (
-                              <CheckMenu clsPrefix={mergedClsPrefix} />
+                              <SelectionMenu clsPrefix={mergedClsPrefix} />
                             ) : null}
                           </>
                         ) : column.ellipsis === true ||

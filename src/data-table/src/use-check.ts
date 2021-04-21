@@ -56,9 +56,6 @@ export function useCheck (
       ? treeMateRef.value.treeNodes
       : paginatedDataRef.value
     ).forEach((tmNode) => {
-      if (column.disabled?.(tmNode.rawNode)) {
-        return
-      }
       if (!tmNode.disabled) {
         rowKeysToCheck.push(tmNode.key)
       }
@@ -76,10 +73,6 @@ export function useCheck (
       ? treeMateRef.value.treeNodes
       : paginatedDataRef.value
     ).forEach((tmNode) => {
-      const { rawNode: row } = tmNode
-      if (column.disabled?.(row)) {
-        return
-      }
       if (!tmNode.disabled) {
         rowKeysToUncheck.push(tmNode.key)
       }

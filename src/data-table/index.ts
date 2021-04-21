@@ -1,5 +1,4 @@
 export { default as NDataTable } from './src/DataTable'
-export { DataTableCheckOption } from './src/TableParts/CheckMenu'
 export type { DataTableProps } from './src/DataTable'
 export type {
   RenderFilter as DataTableRenderFilter,
@@ -7,7 +6,7 @@ export type {
   ColumnKey as DataTableColumnKey,
   TableColumn as DataTableColumn,
   TableBaseColumn as DataTableBaseColumn,
-  TableSelectionColumn as DataTableCheckOptionColumn,
+  TableSelectionColumn as DataTableSelectionColumn,
   TableExpandColumn as DataTableExpandColumn,
   DataTableInst
 } from './src/interface'
