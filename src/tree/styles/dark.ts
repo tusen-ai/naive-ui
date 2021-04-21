@@ -1,4 +1,3 @@
-import { changeColor } from 'seemly'
 import { checkboxDark } from '../../checkbox/styles'
 import { commonDark } from '../../_styles/common'
 import type { TreeTheme } from './light'
@@ -10,12 +9,7 @@ const treeDark: TreeTheme = {
   peers: {
     Checkbox: checkboxDark
   },
-  self (vars) {
-    const { primaryColor } = vars
-    const commonSelf = self(vars)
-    commonSelf.nodeColorActive = changeColor(primaryColor, { alpha: 0.15 })
-    return commonSelf
-  }
+  self
 }
 
 export default treeDark

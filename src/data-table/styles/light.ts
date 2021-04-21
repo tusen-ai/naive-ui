@@ -45,7 +45,7 @@ export const self = (vars: ThemeCommonVars) => {
     thColor: composite(cardColor, tableHeaderColor),
     thColorHover: composite(
       composite(cardColor, tableHeaderColor),
-      tableHeaderColor
+      tableColorHover
     ),
     tdColor: cardColor,
     tdTextColor: textColor2,
@@ -60,7 +60,7 @@ export const self = (vars: ThemeCommonVars) => {
     thColorModal: composite(modalColor, tableHeaderColor),
     thColorHoverModal: composite(
       composite(modalColor, tableHeaderColor),
-      tableHeaderColor
+      tableColorHover
     ),
     tdColorModal: modalColor,
     // popover
@@ -69,7 +69,7 @@ export const self = (vars: ThemeCommonVars) => {
     thColorPopover: composite(popoverColor, tableHeaderColor),
     thColorHoverPopover: composite(
       composite(popoverColor, tableHeaderColor),
-      tableHeaderColor
+      tableColorHover
     ),
     tdColorPopover: popoverColor,
     boxShadowBefore: 'inset -12px 0 8px -12px rgba(0, 0, 0, .18)',
