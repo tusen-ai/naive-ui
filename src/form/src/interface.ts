@@ -11,7 +11,7 @@ export type FormItemRuleValidator = (
 ) => boolean | Error | Promise<boolean> | Promise<Error> | any
 
 export type FormItemRule = RuleItem & {
-  trigger?: ValidationTrigger | string
+  trigger?: ValidationTrigger | string | (ValidationTrigger | string)[]
   validator?: FormItemRuleValidator
   asyncValidator?: FormItemRuleValidator
 }
