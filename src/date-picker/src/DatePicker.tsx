@@ -10,9 +10,7 @@ import {
   withDirectives,
   ExtractPropTypes,
   CSSProperties,
-  reactive,
-  toRef,
-  ComputedRef
+  toRef
 } from 'vue'
 import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
@@ -402,23 +400,17 @@ export default defineComponent({
 
     const uniVaidation = uniCalendarValidation(props, mergedValueRef)
     const dualValidation = dualCalendarValidation(props, mergedValueRef)
-    provide(
-      datePickerInjectionKey,
-      reactive({
-        mergedClsPrefix,
-        mergedTheme: themeRef,
-        timePickerSize: timePickerSizeRef,
-        locale: locale,
-        dateLocale: dateLocale,
-        value: mergedValueRef,
-        isDateDisabled: toRef(
-          props,
-          'isDateDisabled'
-        ) as ComputedRef<IsDateDisabled>,
-        ...uniVaidation,
-        ...dualValidation
-      })
-    )
+    provide(datePickerInjectionKey, {
+      mergedClsPrefixRef: mergedClsPrefix,
+      mergedThemeRef: themeRef,
+      timePickerSizeRef,
+      localeRef: locale,
+      dateLocaleRef: dateLocale,
+      valueRef: mergedValueRef,
+      isDateDisabledRef: toRef(props, 'isDateDisabled'),
+      ...uniVaidation,
+      ...dualValidation
+    })
     return {
       mergedClsPrefix,
       mergedBordered,
@@ -439,9 +431,9 @@ export default defineComponent({
       localizedEndPlaceholder: localizedEndPlaceholderRef,
       mergedSize: formItem.mergedSize,
       localizedPlacehoder: localizedPlacehoderRef,
-      isValueInvalid: uniVaidation.isValueInvalid,
-      isStartValueInvalid: dualValidation.isStartValueInvalid,
-      isEndValueInvalid: dualValidation.isEndValueInvalid,
+      isValueInvalid: uniVaidation.isValueInvalidRef,
+      isStartValueInvalid: dualValidation.isStartValueInvalidRef,
+      isEndValueInvalid: dualValidation.isEndValueInvalidRef,
       handleClickOutside,
       handleKeyDown,
       handleClear,

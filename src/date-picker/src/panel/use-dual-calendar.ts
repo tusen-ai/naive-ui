@@ -29,25 +29,41 @@ function useDualCalendar (
   props: ExtractPropTypes<typeof useDualCalendarProps>,
   type = 'datetime'
 ) {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const NDatePicker = inject(datePickerInjectionKey)!
-  const panelCommon = usePanelCommon(props)
+  const {
+    isDateDisabledRef,
+    isStartHourDisabledRef,
+    isEndHourDisabledRef,
+    isStartMinuteDisabledRef,
+    isEndMinuteDisabledRef,
+    isStartSecondDisabledRef,
+    isEndSecondDisabledRef,
+    isStartDateInvalidRef,
+    isEndDateInvalidRef,
+    isStartTimeInvalidRef,
+    isEndTimeInvalidRef,
+    isStartValueInvalidRef,
+    isEndValueInvalidRef,
+    isRangeInvalidRef,
+    localeRef
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  } = inject(datePickerInjectionKey)!
   const validation = {
-    isDateDisabled: toRef(NDatePicker, 'isDateDisabled'),
-    isStartHourDisabled: toRef(NDatePicker, 'isStartHourDisabled'),
-    isEndHourDisabled: toRef(NDatePicker, 'isEndHourDisabled'),
-    isStartMinuteDisabled: toRef(NDatePicker, 'isStartMinuteDisabled'),
-    isEndMinuteDisabled: toRef(NDatePicker, 'isEndMinuteDisabled'),
-    isStartSecondDisabled: toRef(NDatePicker, 'isStartSecondDisabled'),
-    isEndSecondDisabled: toRef(NDatePicker, 'isEndSecondDisabled'),
-    isStartDateInvalid: toRef(NDatePicker, 'isStartDateInvalid'),
-    isEndDateInvalid: toRef(NDatePicker, 'isEndDateInvalid'),
-    isStartTimeInvalid: toRef(NDatePicker, 'isStartTimeInvalid'),
-    isEndTimeInvalid: toRef(NDatePicker, 'isEndTimeInvalid'),
-    isStartValueInvalid: toRef(NDatePicker, 'isStartValueInvalid'),
-    isEndValueInvalid: toRef(NDatePicker, 'isEndValueInvalid'),
-    isRangeInvalid: toRef(NDatePicker, 'isRangeInvalid')
+    isDateDisabled: isDateDisabledRef,
+    isStartHourDisabled: isStartHourDisabledRef,
+    isEndHourDisabled: isEndHourDisabledRef,
+    isStartMinuteDisabled: isStartMinuteDisabledRef,
+    isEndMinuteDisabled: isEndMinuteDisabledRef,
+    isStartSecondDisabled: isStartSecondDisabledRef,
+    isEndSecondDisabled: isEndSecondDisabledRef,
+    isStartDateInvalid: isStartDateInvalidRef,
+    isEndDateInvalid: isEndDateInvalidRef,
+    isStartTimeInvalid: isStartTimeInvalidRef,
+    isEndTimeInvalid: isEndTimeInvalidRef,
+    isStartValueInvalid: isStartValueInvalidRef,
+    isEndValueInvalid: isEndValueInvalidRef,
+    isRangeInvalid: isRangeInvalidRef
   }
+  const panelCommon = usePanelCommon(props)
   const startDatesElRef = ref<HTMLElement | null>(null)
   const endDatesElRef = ref<HTMLElement | null>(null)
   const startCalendarDateTimeRef = ref(Date.now())
@@ -83,7 +99,7 @@ function useDualCalendar (
       startCalendarDateTimeRef.value,
       props.value,
       nowRef.value,
-      NDatePicker.locale.firstDayOfWeek
+      localeRef.value.firstDayOfWeek
     )
   })
   const endDateArrayRef = computed(() => {
@@ -91,7 +107,7 @@ function useDualCalendar (
       endCalendarDateTimeRef.value,
       props.value,
       nowRef.value,
-      NDatePicker.locale.firstDayOfWeek
+      localeRef.value.firstDayOfWeek
     )
   })
   const weekdaysRef = computed(() => {
@@ -99,7 +115,7 @@ function useDualCalendar (
       const { ts } = dateItem
       return format(
         ts,
-        NDatePicker.locale.dayFormat,
+        localeRef.value.dayFormat,
         panelCommon.dateFnsOptions.value
       )
     })
@@ -107,28 +123,28 @@ function useDualCalendar (
   const startCalendarMonthRef = computed(() => {
     return format(
       startCalendarDateTimeRef.value,
-      NDatePicker.locale.monthFormat,
+      localeRef.value.monthFormat,
       panelCommon.dateFnsOptions.value
     )
   })
   const endCalendarMonthRef = computed(() => {
     return format(
       endCalendarDateTimeRef.value,
-      NDatePicker.locale.monthFormat,
+      localeRef.value.monthFormat,
       panelCommon.dateFnsOptions.value
     )
   })
   const startCalendarYearRef = computed(() => {
     return format(
       startCalendarDateTimeRef.value,
-      NDatePicker.locale.yearFormat,
+      localeRef.value.yearFormat,
       panelCommon.dateFnsOptions.value
     )
   })
   const endCalendarYearRef = computed(() => {
     return format(
       endCalendarDateTimeRef.value,
-      NDatePicker.locale.yearFormat,
+      localeRef.value.yearFormat,
       panelCommon.dateFnsOptions.value
     )
   })
@@ -155,7 +171,7 @@ function useDualCalendar (
     } else {
       isSelectingRef.value = false
       if (type === 'datetimerange') {
-        if (validation.isRangeInvalid.value) {
+        if (isRangeInvalidRef.value) {
           panelCommon.doUpdateValue(panelCommon.memorizedValue.value)
         }
       } else if (type === 'daterange') {
@@ -259,9 +275,7 @@ function useDualCalendar (
   }
   // The function is used on date panel, not the date-picker value validation
   function mergedIsDateDisabled (ts: number): boolean {
-    const {
-      isDateDisabled: { value: isDateDisabled }
-    } = validation
+    const isDateDisabled = isDateDisabledRef.value
     if (!isDateDisabled || !Array.isArray(props.value)) return false
     if (selectingPhaseRef.value === 'start') {
       // before you really start to select
@@ -327,7 +341,7 @@ function useDualCalendar (
     }
   }
   function handleConfirmClick (): void {
-    if (validation.isRangeInvalid.value) {
+    if (isRangeInvalidRef.value) {
       return
     }
     panelCommon.doConfirm()
@@ -519,7 +533,6 @@ function useDualCalendar (
     changeEndDateTime(value)
   }
   return {
-    NDatePicker,
     startDatesElRef,
     endDatesElRef,
     resetSelectingStatus,

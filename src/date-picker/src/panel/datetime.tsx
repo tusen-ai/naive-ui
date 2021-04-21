@@ -18,8 +18,7 @@ export default defineComponent({
     return useCalendar(props, 'datetime')
   },
   render () {
-    const { NDatePicker } = this
-    const { mergedClsPrefix } = NDatePicker
+    const { mergedClsPrefix, mergedTheme } = this
     return (
       <div
         ref="selfRef"
@@ -31,8 +30,8 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-date-panel-header`}>
           <NInput
             value={this.dateInputValue}
-            theme={NDatePicker.mergedTheme.peers.Input}
-            themeOverrides={NDatePicker.mergedTheme.peerOverrides.Input}
+            theme={mergedTheme.peers.Input}
+            themeOverrides={mergedTheme.peerOverrides.Input}
             stateful={false}
             size={this.timePickerSize}
             class={`${mergedClsPrefix}-date-panel-date-input`}
@@ -45,8 +44,8 @@ export default defineComponent({
             showIcon={false}
             format={this.timeFormat}
             stateful={false}
-            theme={NDatePicker.mergedTheme.peers.TimePicker}
-            themeOverrides={NDatePicker.mergedTheme.peerOverrides.TimePicker}
+            theme={mergedTheme.peers.TimePicker}
+            themeOverrides={mergedTheme.peerOverrides.TimePicker}
             to={false}
             size={this.timePickerSize}
             value={Array.isArray(this.value) ? null : this.value}
@@ -130,8 +129,8 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             {this.actions.includes('clear') ? (
               <NButton
-                theme={NDatePicker.mergedTheme.peers.Button}
-                themeOverrides={NDatePicker.mergedTheme.peerOverrides.Button}
+                theme={mergedTheme.peers.Button}
+                themeOverrides={mergedTheme.peerOverrides.Button}
                 size="tiny"
                 onClick={this.handleClearClick}
               >
@@ -140,8 +139,8 @@ export default defineComponent({
             ) : null}
             {this.actions.includes('now') ? (
               <NButton
-                theme={NDatePicker.mergedTheme.peers.Button}
-                themeOverrides={NDatePicker.mergedTheme.peerOverrides.Button}
+                theme={mergedTheme.peers.Button}
+                themeOverrides={mergedTheme.peerOverrides.Button}
                 size="tiny"
                 onClick={this.handleNowClick}
               >
@@ -150,8 +149,8 @@ export default defineComponent({
             ) : null}
             {this.actions.includes('confirm') ? (
               <NButton
-                theme={NDatePicker.mergedTheme.peers.Button}
-                themeOverrides={NDatePicker.mergedTheme.peerOverrides.Button}
+                theme={mergedTheme.peers.Button}
+                themeOverrides={mergedTheme.peerOverrides.Button}
                 size="tiny"
                 type="primary"
                 disabled={this.isDateInvalid}

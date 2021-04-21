@@ -45,11 +45,17 @@ type UsePanelCommonProps = ExtractPropTypes<typeof usePanelCommonProps>
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function usePanelCommon (props: UsePanelCommonProps) {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const NDatePicker = inject(datePickerInjectionKey)!
+  const {
+    dateLocaleRef,
+    timePickerSizeRef,
+    localeRef,
+    mergedClsPrefixRef,
+    mergedThemeRef
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  } = inject(datePickerInjectionKey)!
   const dateFnsOptionsRef = computed(() => {
     return {
-      locale: NDatePicker.dateLocale.locale
+      locale: dateLocaleRef.value.locale
     }
   })
   const transitionDisabledRef = ref(false)
@@ -107,12 +113,14 @@ function usePanelCommon (props: UsePanelCommonProps) {
     }
   }
   return {
+    mergedTheme: mergedThemeRef,
+    mergedClsPrefix: mergedClsPrefixRef,
     dateFnsOptions: dateFnsOptionsRef,
-    timePickerSize: computed(() => NDatePicker.timePickerSize),
+    timePickerSize: timePickerSizeRef,
     transitionDisabled: transitionDisabledRef,
     memorizedValue: memorizedValueRef,
     selfRef,
-    locale: NDatePicker.locale,
+    locale: localeRef,
     doConfirm,
     doClose,
     doUpdateValue,

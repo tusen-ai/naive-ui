@@ -1,4 +1,4 @@
-import { InjectionKey, UnwrapRef } from 'vue'
+import { InjectionKey, Ref } from 'vue'
 import { NLocale, NDateLocale } from '../../locales'
 import {
   IsHourDisabled,
@@ -30,15 +30,15 @@ export interface PanelRef {
 }
 
 export type DatePickerInjection = {
-  mergedClsPrefix: string
-  mergedTheme: MergedTheme<DatePickerTheme>
-  timePickerSize: 'small' | 'medium' | 'large'
-  locale: NLocale['DatePicker']
-  dateLocale: NDateLocale
-  value: Value | null
-  isDateDisabled: IsDateDisabled
-} & UnwrapRef<ReturnType<typeof uniCalendarValidation>> &
-UnwrapRef<ReturnType<typeof dualCalendarValidation>>
+  mergedClsPrefixRef: Ref<string>
+  mergedThemeRef: Ref<MergedTheme<DatePickerTheme>>
+  timePickerSizeRef: Ref<'small' | 'medium' | 'large'>
+  localeRef: Ref<NLocale['DatePicker']>
+  dateLocaleRef: Ref<NDateLocale>
+  valueRef: Ref<Value | null>
+  isDateDisabledRef: Ref<IsDateDisabled | undefined>
+} & ReturnType<typeof uniCalendarValidation> &
+ReturnType<typeof dualCalendarValidation>
 
 export const datePickerInjectionKey: InjectionKey<DatePickerInjection> = Symbol(
   'datePicker'

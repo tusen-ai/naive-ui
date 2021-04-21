@@ -56,12 +56,12 @@ format
 ### DateRange Type Props
 
 | Name | Type | Default | Description |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` |  |
 | end-placeholder | `string` | `'End Date'` |  |
 | format | `string` | `'yyyy-MM-dd'` |  |
-| is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] | null) => boolean` | `undefined` |  |
-| is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] | null) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` |  |
+| is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` |  |
+| is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` |  |
 | separator | `string` | `'to'` |  |
 | start-placeholder | `string` | `'Start Date'` |  |
 | on-update:value | `(value: [number, number] \| null) => void` | `undefined` |  |
@@ -69,11 +69,11 @@ format
 ### DateTimeRange Type Props
 
 | Name | Type | Default | Description |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` |  |
 | end-placeholder | `string` | `'End Date and Time'` |  |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` |  |
-| is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] | null) => boolean` | `undefined` |  |
+| is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` |  |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` |  |
 | separator | `string` | `'to'` |  |
 | start-placeholder | `string` | `'Start Date and Time'` |  |

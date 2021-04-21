@@ -41,17 +41,27 @@ function useCalendar (
   type: 'date' | 'datetime'
 ) {
   const panelCommon = usePanelCommon(props)
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const NDatePicker = inject(datePickerInjectionKey)!
+  const {
+    isValueInvalidRef,
+    isDateDisabledRef,
+    isDateInvalidRef,
+    isTimeInvalidRef,
+    isDateTimeInvalidRef,
+    isHourDisabledRef,
+    isMinuteDisabledRef,
+    isSecondDisabledRef,
+    localeRef
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  } = inject(datePickerInjectionKey)!
   const validation = {
-    isValueInvalid: computed(() => NDatePicker.isValueInvalid),
-    isDateDisabled: computed(() => NDatePicker.isDateDisabled),
-    isDateInvalid: computed(() => NDatePicker.isDateInvalid),
-    isTimeInvalid: computed(() => NDatePicker.isTimeInvalid),
-    isDateTimeInvalid: computed(() => NDatePicker.isDateTimeInvalid),
-    isHourDisabled: computed(() => NDatePicker.isHourDisabled),
-    isMinuteDisabled: computed(() => NDatePicker.isMinuteDisabled),
-    isSecondDisabled: computed(() => NDatePicker.isSecondDisabled)
+    isValueInvalid: isValueInvalidRef,
+    isDateDisabled: isDateDisabledRef,
+    isDateInvalid: isDateInvalidRef,
+    isTimeInvalid: isTimeInvalidRef,
+    isDateTimeInvalid: isDateTimeInvalidRef,
+    isHourDisabled: isHourDisabledRef,
+    isMinuteDisabled: isMinuteDisabledRef,
+    isSecondDisabled: isSecondDisabledRef
   }
   const dateInputValueRef = ref(
     props.value === null || Array.isArray(props.value)
@@ -69,7 +79,7 @@ function useCalendar (
       calendarValueRef.value,
       ensureValidValue(props.value),
       nowRef.value,
-      NDatePicker.locale.firstDayOfWeek
+      localeRef.value.firstDayOfWeek
     )
   })
   const weekdaysRef = computed(() => {
@@ -77,7 +87,7 @@ function useCalendar (
       const { ts } = dateItem
       return format(
         ts,
-        NDatePicker.locale.dayFormat,
+        localeRef.value.dayFormat,
         panelCommon.dateFnsOptions.value
       )
     })
@@ -85,14 +95,14 @@ function useCalendar (
   const calendarMonthRef = computed(() => {
     return format(
       calendarValueRef.value,
-      NDatePicker.locale.monthFormat,
+      localeRef.value.monthFormat,
       panelCommon.dateFnsOptions.value
     )
   })
   const calendarYearRef = computed(() => {
     return format(
       calendarValueRef.value,
-      NDatePicker.locale.yearFormat,
+      localeRef.value.yearFormat,
       panelCommon.dateFnsOptions.value
     )
   })
@@ -246,7 +256,6 @@ function useCalendar (
     panelCommon.doUpdateValue(value)
   }
   return {
-    NDatePicker,
     dateArray: dateArrayRef,
     calendarYear: calendarYearRef,
     calendarMonth: calendarMonthRef,

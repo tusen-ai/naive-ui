@@ -74,14 +74,14 @@ export function uniCalendarValidation (
   })
   return {
     // date & datetime
-    isValueInvalid: isValueInvalidRef,
-    isDateInvalid: isDateInvalidRef,
+    isValueInvalidRef,
+    isDateInvalidRef,
     // datetime only
-    isTimeInvalid: isTimeInvalidRef,
-    isDateTimeInvalid: isDateTimeInvalidRef,
-    isHourDisabled: isHourDisabledRef,
-    isMinuteDisabled: isMinuteDisabledRef,
-    isSecondDisabled: isSecondDisabledRef
+    isTimeInvalidRef,
+    isDateTimeInvalidRef,
+    isHourDisabledRef,
+    isMinuteDisabledRef,
+    isSecondDisabledRef
   }
 }
 
@@ -102,22 +102,22 @@ export function dualCalendarValidation (
     ]
   })
   const timeValidator = {
-    isStartHourDisabled: computed(
+    isStartHourDisabledRef: computed(
       () => timePickerValidatorRef.value[0]?.isHourDisabled
     ),
-    isEndHourDisabled: computed(
+    isEndHourDisabledRef: computed(
       () => timePickerValidatorRef.value[1]?.isHourDisabled
     ),
-    isStartMinuteDisabled: computed(
+    isStartMinuteDisabledRef: computed(
       () => timePickerValidatorRef.value[0]?.isMinuteDisabled
     ),
-    isEndMinuteDisabled: computed(
+    isEndMinuteDisabledRef: computed(
       () => timePickerValidatorRef.value[1]?.isMinuteDisabled
     ),
-    isStartSecondDisabled: computed(
+    isStartSecondDisabledRef: computed(
       () => timePickerValidatorRef.value[0]?.isSecondDisabled
     ),
-    isEndSecondDisabled: computed(
+    isEndSecondDisabledRef: computed(
       () => timePickerValidatorRef.value[1]?.isSecondDisabled
     )
   }
@@ -157,19 +157,19 @@ export function dualCalendarValidation (
     const startMinutes = getMinutes(value[0])
     const startSeconds = getSeconds(value[0])
     const {
-      isStartHourDisabled,
-      isStartMinuteDisabled,
-      isStartSecondDisabled
+      isStartHourDisabledRef,
+      isStartMinuteDisabledRef,
+      isStartSecondDisabledRef
     } = timeValidator
     const startTimeInvalid =
-      (isStartHourDisabled.value
-        ? isStartHourDisabled.value(startHours)
+      (isStartHourDisabledRef.value
+        ? isStartHourDisabledRef.value(startHours)
         : false) ||
-      (isStartMinuteDisabled.value
-        ? isStartMinuteDisabled.value(startMinutes, startHours)
+      (isStartMinuteDisabledRef.value
+        ? isStartMinuteDisabledRef.value(startMinutes, startHours)
         : false) ||
-      (isStartSecondDisabled.value
-        ? isStartSecondDisabled.value(startSeconds, startMinutes, startHours)
+      (isStartSecondDisabledRef.value
+        ? isStartSecondDisabledRef.value(startSeconds, startMinutes, startHours)
         : false)
     return startTimeInvalid
   })
@@ -183,17 +183,19 @@ export function dualCalendarValidation (
     const endMinutes = getMinutes(value[1])
     const endSeconds = getSeconds(value[1])
     const {
-      isEndHourDisabled,
-      isEndMinuteDisabled,
-      isEndSecondDisabled
+      isEndHourDisabledRef,
+      isEndMinuteDisabledRef,
+      isEndSecondDisabledRef
     } = timeValidator
     const endTimeInvalid =
-      (isEndHourDisabled.value ? isEndHourDisabled.value(endHours) : false) ||
-      (isEndMinuteDisabled.value
-        ? isEndMinuteDisabled.value(endMinutes, endHours)
+      (isEndHourDisabledRef.value
+        ? isEndHourDisabledRef.value(endHours)
         : false) ||
-      (isEndSecondDisabled.value
-        ? isEndSecondDisabled.value(endSeconds, endMinutes, endHours)
+      (isEndMinuteDisabledRef.value
+        ? isEndMinuteDisabledRef.value(endMinutes, endHours)
+        : false) ||
+      (isEndSecondDisabledRef.value
+        ? isEndSecondDisabledRef.value(endSeconds, endMinutes, endHours)
         : false)
     return endTimeInvalid
   })
@@ -208,12 +210,12 @@ export function dualCalendarValidation (
   })
   return {
     ...timeValidator,
-    isStartDateInvalid: isStartDateInvalidRef,
-    isEndDateInvalid: isEndDateInvalidRef,
-    isStartTimeInvalid: isStartTimeInvalidRef,
-    isEndTimeInvalid: isEndTimeInvalidRef,
-    isStartValueInvalid: isStartValueInvalidRef,
-    isEndValueInvalid: isEndValueInvalidRef,
-    isRangeInvalid: isRangeInvalidRef
+    isStartDateInvalidRef,
+    isEndDateInvalidRef,
+    isStartTimeInvalidRef,
+    isEndTimeInvalidRef,
+    isStartValueInvalidRef,
+    isEndValueInvalidRef,
+    isRangeInvalidRef
   }
 }

@@ -16,8 +16,7 @@ export default defineComponent({
     return useCalendar(props, 'date')
   },
   render () {
-    const { NDatePicker } = this
-    const { mergedClsPrefix } = NDatePicker
+    const { mergedClsPrefix, mergedTheme } = this
     return (
       <div
         ref="selfRef"
@@ -99,8 +98,8 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             {this.actions.includes('clear') ? (
               <NButton
-                theme={NDatePicker.mergedTheme.peers.Button}
-                themeOverrides={NDatePicker.mergedTheme.peerOverrides.Button}
+                theme={mergedTheme.peers.Button}
+                themeOverrides={mergedTheme.peerOverrides.Button}
                 size="tiny"
                 onClick={this.handleClearClick}
               >
@@ -109,8 +108,8 @@ export default defineComponent({
             ) : null}
             {this.actions.includes('now') ? (
               <NButton
-                theme={NDatePicker.mergedTheme.peers.Button}
-                themeOverrides={NDatePicker.mergedTheme.peerOverrides.Button}
+                theme={mergedTheme.peers.Button}
+                themeOverrides={mergedTheme.peerOverrides.Button}
                 size="tiny"
                 onClick={this.handleNowClick}
               >
@@ -119,8 +118,8 @@ export default defineComponent({
             ) : null}
             {this.actions.includes('confirm') ? (
               <NButton
-                theme={NDatePicker.mergedTheme.peers.Button}
-                themeOverrides={NDatePicker.mergedTheme.peerOverrides.Button}
+                theme={mergedTheme.peers.Button}
+                themeOverrides={mergedTheme.peerOverrides.Button}
                 size="tiny"
                 type="primary"
                 disabled={this.isDateInvalid}

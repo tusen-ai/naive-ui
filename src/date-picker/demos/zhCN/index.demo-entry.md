@@ -56,12 +56,12 @@ format
 ### DateRange 类型的 Props
 
 | 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` |  |
 | end-placeholder | `string` | `'结束日期'` |  |
 | format | `string` | `'yyyy-MM-dd'` |  |
-| is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] | null) => boolean` | `undefined` |  |
-| is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] | null) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` |  |
+| is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` |  |
+| is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` |  |
 | separator | `string` | `'至'` |  |
 | start-placeholder | `string` | `'开始日期'` |  |
 | on-update:value | `(value: [number, number] \| null) => void` | `undefined` |  |
@@ -69,11 +69,11 @@ format
 ### DateTimeRange 类型的 Props
 
 | 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` |  |
 | end-placeholder | `string` | `'结束日期时间'` |  |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` |  |
-| is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] | null) => boolean` | `undefined` |  |
+| is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` |  |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` |  |
 | separator | `string` | `'to'` |  |
 | start-placeholder | `string` | `'开始日期时间'` |  |

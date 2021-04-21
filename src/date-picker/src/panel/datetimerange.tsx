@@ -18,8 +18,7 @@ export default defineComponent({
     return useDualCalendar(props, 'datetimerange')
   },
   render () {
-    const { NDatePicker } = this
-    const { mergedClsPrefix } = NDatePicker
+    const { mergedClsPrefix, mergedTheme } = this
     return (
       <div
         ref="selfRef"
@@ -32,8 +31,8 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-date-panel-header`}>
           <NInput
             value={this.startDateDisplayString}
-            theme={NDatePicker.mergedTheme.peers.Input}
-            themeOverrides={NDatePicker.mergedTheme.peerOverrides.Input}
+            theme={mergedTheme.peers.Input}
+            themeOverrides={mergedTheme.peerOverrides.Input}
             size={this.timePickerSize}
             stateful={false}
             class={`${mergedClsPrefix}-date-panel-date-input`}
@@ -46,8 +45,8 @@ export default defineComponent({
             size={this.timePickerSize}
             to={false}
             showIcon={false}
-            theme={NDatePicker.mergedTheme.peers.TimePicker}
-            themeOverrides={NDatePicker.mergedTheme.peerOverrides.TimePicker}
+            theme={mergedTheme.peers.TimePicker}
+            themeOverrides={mergedTheme.peerOverrides.TimePicker}
             stateful={false}
             placeholder={this.locale.selectTime}
             format={this.timeFormat}
@@ -59,8 +58,8 @@ export default defineComponent({
           />
           <NInput
             value={this.endDateInput}
-            theme={NDatePicker.mergedTheme.peers.Input}
-            themeOverrides={NDatePicker.mergedTheme.peerOverrides.Input}
+            theme={mergedTheme.peers.Input}
+            themeOverrides={mergedTheme.peerOverrides.Input}
             stateful={false}
             size={this.timePickerSize}
             class={`${mergedClsPrefix}-date-panel-date-input`}
@@ -71,8 +70,8 @@ export default defineComponent({
           />
           <NTimePicker
             showIcon={false}
-            theme={NDatePicker.mergedTheme.peers.TimePicker}
-            themeOverrides={NDatePicker.mergedTheme.peerOverrides.TimePicker}
+            theme={mergedTheme.peers.TimePicker}
+            themeOverrides={mergedTheme.peerOverrides.TimePicker}
             to={false}
             size={this.timePickerSize}
             stateful={false}
@@ -244,8 +243,8 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             {this.actions.includes('clear') ? (
               <NButton
-                theme={NDatePicker.mergedTheme.peers.Button}
-                themeOverrides={NDatePicker.mergedTheme.peerOverrides.Button}
+                theme={mergedTheme.peers.Button}
+                themeOverrides={mergedTheme.peerOverrides.Button}
                 size="tiny"
                 onClick={this.handleClearClick}
               >
@@ -254,8 +253,8 @@ export default defineComponent({
             ) : null}
             {this.actions.includes('confirm') ? (
               <NButton
-                theme={NDatePicker.mergedTheme.peers.Button}
-                themeOverrides={NDatePicker.mergedTheme.peerOverrides.Button}
+                theme={mergedTheme.peers.Button}
+                themeOverrides={mergedTheme.peerOverrides.Button}
                 size="tiny"
                 type="primary"
                 disabled={this.isRangeInvalid}
