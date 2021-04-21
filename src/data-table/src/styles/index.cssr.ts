@@ -47,12 +47,111 @@ export default c([
     --merged-th-color-hover: var(--th-color-hover);
     --merged-td-color-hover: var(--td-color-hover);
   `, [
-    cB('data-table-th', {
-      padding: 'var(--th-padding)'
+    cB('data-table-thead', {
+      transition: 'background-color .3s var(--bezier)',
+      backgroundColor: 'var(--merged-th-color)'
     }),
-    cB('data-table-td', {
-      padding: 'var(--td-padding)'
-    }),
+    cB('data-table-tr', {
+      boxSizing: 'border-box',
+      backgroundClip: 'padding-box',
+      transition: 'background-color .3s var(--bezier)'
+    }, [
+      c('&:hover', {
+        backgroundColor: 'var(--merged-td-color-hover)'
+      }, [
+        cB('data-table-td', {
+          backgroundColor: 'var(--merged-td-color-hover)'
+        })
+      ])
+    ]),
+    cB('data-table-th', `
+      padding: var(--th-padding);
+      position: relative;
+      text-align: start;
+      box-sizing: border-box;
+      background-color: var(--merged-th-color);
+      border-color: var(--merged-border-color);
+      border-bottom: 1px solid var(--merged-border-color);
+      color: var(--th-text-color);
+      transition:
+        border-color .3s var(--bezier),
+        color .3s var(--bezier),
+        background-color .3s var(--bezier);
+      font-weight: var(--th-font-weight);
+    `, [
+      cM('filterable', {
+        paddingRight: '36px'
+      }),
+      fixedColumnStyle,
+      cM('selection', `
+        padding: 0;
+        text-align: center;
+        line-height: 0;
+        z-index: 3;
+      `),
+      cE('ellipsis', `
+        display: inline-block;
+        vertical-align: bottom;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        max-width: 100%;
+      `),
+      cM('sortable', {
+        cursor: 'pointer'
+      }, [
+        cE('ellipsis', {
+          maxWidth: 'calc(100% - 18px)'
+        }),
+        c('&:hover', {
+          backgroundColor: 'var(--merged-th-color-hover)'
+        })
+      ])
+    ]),
+    cB('data-table-td', `
+      padding: var(--td-padding);
+      text-align: start;
+      box-sizing: border-box;
+      border: none;
+      background-color: var(--merged-td-color);
+      color: var(--td-text-color);
+      border-bottom: 1px solid var(--merged-border-color);
+      transition:
+        box-shadow .3s var(--bezier),
+        background-color .3s var(--bezier),
+        border-color .3s var(--bezier),
+        color .3s var(--bezier);
+    `, [
+      cM('last-row', {
+        borderBottom: '0 solid var(--merged-border-color)'
+      }, [
+        // make sure there is no overlap between bottom border and
+        // fixed column box shadow
+        c('&::after', {
+          bottom: '0 !important'
+        }),
+        c('&::before', {
+          bottom: '0 !important'
+        })
+      ]),
+      cM('summary', `
+      background-color: var(--merged-th-color);
+    `),
+      cM('hover', {
+        backgroundColor: 'var(--merged-td-color-hover)'
+      }),
+      cM('ellipsis', `
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      `),
+      cM('selection, expand', `
+        text-align: center;
+        padding: 0;
+        line-height: 0;
+      `),
+      fixedColumnStyle
+    ]),
     cB('data-table-empty', `
       padding: var(--empty-padding);
       flex-grow: 1;
@@ -80,38 +179,28 @@ export default c([
       line-height: var(--line-height);
     `),
     cM('single-column', [
-      cB('data-table-wrapper', [
-        cB('data-table-table', [
-          cB('data-table-tr', [
-            cB('data-table-td', {
-              borderBottom: '0 solid var(--merged-border-color)'
-            }, [
-              c('&::after, &::before', {
-                bottom: '0 !important'
-              })
-            ])
-          ])
-        ])
+      cB('data-table-td', {
+        borderBottom: '0 solid var(--merged-border-color)'
+      }, [
+        c('&::after, &::before', {
+          bottom: '0 !important'
+        })
       ])
     ]),
     cNotM('single-line', [
-      cB('data-table-wrapper', [
-        cB('data-table-table', [
-          cB('data-table-th', {
-            borderRight: '1px solid var(--merged-border-color)'
-          }, [
-            cM('last', {
-              borderRight: '0 solid var(--merged-border-color)'
-            })
-          ]),
-          cB('data-table-td', {
-            borderRight: '1px solid var(--merged-border-color)'
-          }, [
-            cM('last-col', {
-              borderRight: '0 solid var(--merged-border-color)'
-            })
-          ])
-        ])
+      cB('data-table-th', {
+        borderRight: '1px solid var(--merged-border-color)'
+      }, [
+        cM('last', {
+          borderRight: '0 solid var(--merged-border-color)'
+        })
+      ]),
+      cB('data-table-td', {
+        borderRight: '1px solid var(--merged-border-color)'
+      }, [
+        cM('last-col', {
+          borderRight: '0 solid var(--merged-border-color)'
+        })
       ])
     ]),
     cM('bordered', [
@@ -119,21 +208,16 @@ export default c([
         border: '1px solid var(--merged-border-color)',
         borderBottomLeftRadius: 'var(--border-radius)',
         borderBottomRightRadius: 'var(--border-radius)'
-      }, [
-        cB('data-table-table', [
-          cB('data-table-tr', [
-            cB('data-table-td', [
-              cM('last-row', {
-                borderBottom: '0 solid var(--merged-border-color)'
-              })
-            ])
-          ])
-        ]),
-        cB('data-table-base-table-body', `
-          border-bottom-left-radius: calc(var(--border-radius) - 1px);
-          border-bottom-right-radius: calc(var(--border-radius) - 1px);
-        `)
-      ])
+      }),
+      cB('data-table-td', [
+        cM('last-row', {
+          borderBottom: '0 solid var(--merged-border-color)'
+        })
+      ]),
+      cB('data-table-base-table-body', `
+        border-bottom-left-radius: calc(var(--border-radius) - 1px);
+        border-bottom-right-radius: calc(var(--border-radius) - 1px);
+      `)
     ]),
     cB('data-table-base-table', [
       cM('transition-disabled', [
@@ -142,14 +226,10 @@ export default c([
       ])
     ]),
     cM('bottom-bordered', [
-      cB('data-table-table', [
-        cB('data-table-tr', [
-          cB('data-table-td', [
-            cM('last-row', {
-              borderBottom: '1px solid var(--merged-border-color)'
-            })
-          ])
-        ])
+      cB('data-table-td', [
+        cM('last-row', {
+          borderBottom: '1px solid var(--merged-border-color)'
+        })
       ])
     ]),
     cB('data-table-table', `
@@ -162,110 +242,7 @@ export default c([
       border-collapse: separate;
       border-spacing: 0;
       background-color: var(--merged-td-color)
-    `, [
-      cB('data-table-thead', {
-        transition: 'background-color .3s var(--bezier)',
-        backgroundColor: 'var(--merged-th-color)'
-      }),
-      cB('data-table-tr', {
-        boxSizing: 'border-box',
-        backgroundClip: 'padding-box',
-        transition: 'background-color .3s var(--bezier)'
-      }, [
-        cB('data-table-td', [
-          cM('last-row', {
-            borderBottom: '0 solid var(--merged-border-color)'
-          }, [
-            // make sure there is no overlap between bottom border and
-            // fixed column box shadow
-            c('&::after', {
-              bottom: '0 !important'
-            }),
-            c('&::before', {
-              bottom: '0 !important'
-            })
-          ])
-        ]),
-        c('&:hover', {
-          backgroundColor: 'var(--merged-td-color-hover)'
-        }, [
-          cB('data-table-td', {
-            backgroundColor: 'var(--merged-td-color-hover)'
-          })
-        ])
-      ]),
-      cB('data-table-th', `
-        position: relative;
-        text-align: start;
-        box-sizing: border-box;
-        background-color: var(--merged-th-color);
-        border-color: var(--merged-border-color);
-        border-bottom: 1px solid var(--merged-border-color);
-        color: var(--th-text-color);
-        transition:
-          border-color .3s var(--bezier),
-          color .3s var(--bezier),
-          background-color .3s var(--bezier);
-        font-weight: var(--th-font-weight);
-      `, [
-        cM('filterable', {
-          paddingRight: '36px'
-        }),
-        fixedColumnStyle,
-        cM('selection', `
-          padding: 0;
-          text-align: center;
-          line-height: 0;
-          z-index: 3;
-        `),
-        cE('ellipsis', `
-          display: inline-block;
-          vertical-align: bottom;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          white-space: nowrap;
-          max-width: 100%;
-        `),
-        cM('sortable', {
-          cursor: 'pointer'
-        }, [
-          cE('ellipsis', {
-            maxWidth: 'calc(100% - 18px)'
-          }),
-          c('&:hover', {
-            backgroundColor: 'var(--merged-th-color-hover)'
-          })
-        ])
-      ]),
-      cB('data-table-td', `
-        text-align: start;
-        box-sizing: border-box;
-        border: none;
-        background-color: var(--merged-td-color);
-        color: var(--td-text-color);
-        border-bottom: 1px solid var(--merged-border-color);
-        transition:
-          box-shadow .3s var(--bezier),
-          background-color .3s var(--bezier),
-          border-color .3s var(--bezier),
-          color .3s var(--bezier);
-      `, [
-        cM('hover', {
-          backgroundColor: 'var(--merged-td-color-hover)'
-        }),
-        cM('ellipsis', `
-          text-overflow: ellipsis;
-          overflow: hidden;
-          white-space: nowrap;
-        `),
-        cM('selection, expand', `
-          text-align: center;
-          padding: 0;
-          line-height: 0;
-        `),
-        fixedColumnStyle
-      ])
-    ]),
+    `),
     cB('data-table-base-table-header', `
       border-top-left-radius: calc(var(--border-radius) - 1px);
       border-top-right-radius: calc(var(--border-radius) - 1px);
