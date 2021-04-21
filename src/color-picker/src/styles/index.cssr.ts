@@ -145,7 +145,10 @@ export default c([
     transition: border-color .3s var(--bezier);
     cursor: pointer;
   `, [
-    cE('value', 'position: relative;'),
+    cE('value', `
+      white-space: nowrap;
+      position: relative;
+    `),
     cE('fill', `
       border-radius: var(--border-radius);
       position: absolute;

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-color-picker` value has line wrap.
+
 ## 2.7.2
 
 ## Feats

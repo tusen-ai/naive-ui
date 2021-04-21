@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修正 `n-color-picker` 值折行
+
 ## 2.7.2
 
 ## Feats
