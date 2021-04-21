@@ -2,10 +2,10 @@
 
 执行之前，请确认。
 
-<n-space vertical>
 <n-alert title="使用前提" type="warning">
   如果你想使用对话框，你需要把调用其方法的组件放在 <n-text code>n-dialog-provider</n-text> 内部并且使用 <n-text code>useDialog</n-text> 去获取 API。
 </n-alert>
+
 例如：
 
 ```html
@@ -31,8 +31,6 @@ export default {
 }
 ```
 
-</n-space>
-
 ## 演示
 
 ```demo
@@ -43,7 +41,7 @@ use-component
 
 ## API
 
-### `dialog` Injection API
+### `useDialog` API
 
 | 名称       | 类型                                        | 说明 |
 | ---------- | ------------------------------------------- | ---- |
