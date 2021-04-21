@@ -11,7 +11,7 @@ import {
   onMounted,
   toRef
 } from 'vue'
-import { getScrollParent, unwrapElement } from 'seemly'
+import { getScrollParent, unwrapElement, beforeNextFrameOnce } from 'seemly'
 import { onFontsReady } from 'vooks'
 import { warn, keysOf } from '../../_utils'
 import { anchorInjectionKey } from './Link'
@@ -157,7 +157,7 @@ export default defineComponent({
       }
     }
     function setActiveHref (href: string, transition = true): void {
-      const idMatchResult = /#([^#]+)$/.exec(href)
+      const idMatchResult = /^#([^#]+)$/.exec(href)
       if (idMatchResult) {
         const linkEl = document.getElementById(idMatchResult[1])
         if (linkEl && scrollElement) {
@@ -176,7 +176,7 @@ export default defineComponent({
       }
     }
     function handleScroll (): void {
-      _handleScroll()
+      beforeNextFrameOnce(_handleScroll)
     }
     function _handleScroll (transition = true): void {
       interface LinkInfo {
@@ -254,11 +254,9 @@ export default defineComponent({
       }
       if (scrollEl) {
         scrollElement = scrollEl
+        scrollElement.addEventListener('scroll', handleScroll, true)
       } else if (__DEV__) {
         warn('anchor', 'Target to be listened to is not valid.')
-      }
-      if (scrollEl) {
-        scrollEl.addEventListener('scroll', handleScroll)
       }
     }
     provide(anchorInjectionKey, {
