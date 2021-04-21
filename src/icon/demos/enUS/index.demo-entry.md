@@ -6,7 +6,6 @@ It is recommend to use [xicons](https://www.xicons.org) as your icon library.
 
 ```demo
 basic
-theme
 custom-icon
 depth
 ```
