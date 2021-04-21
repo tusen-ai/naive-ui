@@ -99,6 +99,9 @@ export default c([
         white-space: nowrap;
         max-width: 100%;
       `),
+      cM('hover', {
+        backgroundColor: 'var(--merged-th-color-hover)'
+      }),
       cM('sortable', {
         cursor: 'pointer'
       }, [
@@ -298,12 +301,12 @@ export default c([
           font-size: var(--filter-size);
           color: var(--th-icon-color);
         `, [
-          c('&:hover', {
-            backgroundColor: 'var(--th-button-color-hover)'
-          }),
-          cM('show', {
-            backgroundColor: 'var(--th-button-color-hover)'
-          }),
+          c('&:hover', `
+            background-color: var(--th-button-color-hover);
+          `),
+          cM('show', `
+            background-color: var(--th-button-color-hover);
+          `),
           cM('active', `
             background-color: var(--th-button-color-hover);
             color: var(--th-icon-color-active);

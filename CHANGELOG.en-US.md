@@ -2,6 +2,10 @@
 
 ## Pending
 
+## Feats
+
+- `n-data-table` highlight sorted col.
+
 ### Fixes
 
 - `n-data-table` fix column box-shadow more clear in dark theme.
