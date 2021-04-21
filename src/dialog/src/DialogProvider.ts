@@ -7,7 +7,8 @@ import {
   provide,
   PropType,
   reactive,
-  InjectionKey
+  InjectionKey,
+  Ref
 } from 'vue'
 import { createId } from 'seemly'
 import { omit } from '../../_utils'
@@ -37,8 +38,8 @@ export const dialogApiInjectionKey: InjectionKey<DialogApiInjection> = Symbol(
 )
 
 export interface DialogProviderInjection {
-  clicked: boolean
-  clickPosition: { x: number, y: number } | null
+  clickedRef: Ref<boolean>
+  clickPositionRef: Ref<{ x: number, y: number } | null>
 }
 
 export const dialogProviderInjectionKey: InjectionKey<DialogProviderInjection> = Symbol(
@@ -98,13 +99,10 @@ export default defineComponent({
       error: typedApi[3]
     }
     provide(dialogApiInjectionKey, api)
-    provide(
-      dialogProviderInjectionKey,
-      reactive({
-        clicked: useClicked(64),
-        clickPosition: useClickPosition()
-      })
-    )
+    provide(dialogProviderInjectionKey, {
+      clickedRef: useClicked(64),
+      clickPositionRef: useClickPosition()
+    })
     return {
       ...api,
       dialogList: dialogListRef,

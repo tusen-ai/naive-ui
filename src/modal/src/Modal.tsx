@@ -202,8 +202,9 @@ export default defineComponent({
     provide(modalInjectionKey, {
       getMousePosition: () => {
         if (NDialogProvider) {
-          if (NDialogProvider.clicked && NDialogProvider.clickPosition) {
-            return NDialogProvider.clickPosition
+          const { clickedRef, clickPositionRef } = NDialogProvider
+          if (clickedRef.value && clickPositionRef.value) {
+            return clickPositionRef.value
           }
         }
         if (clickedRef.value) {
