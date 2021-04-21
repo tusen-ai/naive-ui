@@ -29,7 +29,7 @@ export interface FilterOption {
 
 export interface RowData {
   [key: string]: unknown
-  children?: RowData[]
+  // children?: RowData[]
 }
 
 export type TmNode = TreeNode<RowData>
@@ -162,6 +162,8 @@ export interface DataTableInjection {
   mergedExpandedRowKeysRef: Ref<RowKey[]>
   rowKeyRef: Ref<CreateRowKey | undefined>
   renderExpandRef: Ref<undefined | RenderExpand>
+  summaryRef: Ref<undefined | CreateSummary>
+  rawPaginatedDataRef: Ref<RowData[]>
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   doUpdateFilters: (
     filters: FilterState,
@@ -249,4 +251,17 @@ export interface DataTableInst {
   clearFilters: () => void
   page: (page: number) => void
   sort: (columnKey: ColumnKey, order: SortOrder) => void
+}
+
+export type CreateSummary = (
+  pageData: RowData[]
+) => SummaryRowData | SummaryRowData[]
+
+export interface SummaryCell {
+  value?: string | number
+  colSpan?: number
+  rowSpan?: number
+}
+export interface SummaryRowData {
+  [key: string]: SummaryCell
 }

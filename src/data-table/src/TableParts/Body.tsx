@@ -3,7 +3,12 @@ import { pxfy } from 'seemly'
 import { NCheckbox } from '../../../checkbox'
 import { NScrollbar, ScrollbarInst } from '../../../scrollbar'
 import { formatLength } from '../../../_utils'
-import { dataTableInjectionKey, RowKey, TmNode } from '../interface'
+import {
+  dataTableInjectionKey,
+  RowData,
+  RowKey,
+  SummaryRowData
+} from '../interface'
 import { createRowClassName } from '../utils'
 import Cell from './Cell'
 import ExpandTrigger from './ExpandTrigger'
@@ -20,6 +25,7 @@ export default defineComponent({
       scrollXRef,
       colsRef,
       paginatedDataRef,
+      rawPaginatedDataRef,
       fixedColumnLeftMapRef,
       fixedColumnRightMapRef,
       mergedCurrentPageRef,
@@ -28,6 +34,7 @@ export default defineComponent({
       rightActiveFixedColKeyRef,
       renderExpandRef,
       hoverKeyRef,
+      summaryRef,
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
       doUpdateCheckedRowKeys
@@ -35,7 +42,7 @@ export default defineComponent({
     } = inject(dataTableInjectionKey)!
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     function handleCheckboxUpdateChecked (
-      tmNode: TmNode,
+      tmNode: { key: RowKey },
       checked: boolean
     ): void {
       doUpdateCheckedRowKeys(
@@ -66,11 +73,13 @@ export default defineComponent({
     }
     return {
       scrollbarInstRef,
+      summary: summaryRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: mergedThemeRef,
       scrollX: scrollXRef,
       cols: colsRef,
       paginatedData: paginatedDataRef,
+      rawPaginatedData: rawPaginatedDataRef,
       fixedColumnLeftMap: fixedColumnLeftMapRef,
       fixedColumnRightMap: fixedColumnRightMapRef,
       currentPage: mergedCurrentPageRef,
@@ -121,17 +130,67 @@ export default defineComponent({
               leftActiveFixedColKey,
               rightActiveFixedColKey,
               renderExpand,
-              mergedExpandedRowKeys
+              mergedExpandedRowKeys,
+              summary
             } = this
             const { length: colCount } = cols
-            const { length: rowCount } = paginatedData
             const { handleCheckboxUpdateChecked, handleUpdateExpanded } = this
             const rowIndexToKey: Record<number, RowKey> = {}
             paginatedData.forEach((tmNode, rowIndex) => {
               rowIndexToKey[rowIndex] = tmNode.key
             })
-            const rows = paginatedData.map((tmNode, rowIndex) => {
-              const { rawNode: rowData, key: rowKey } = tmNode
+
+            type RowRenderInfo =
+              | {
+                summary: true
+                rawNode: SummaryRowData
+                key: RowKey
+                disabled: boolean
+              }
+              | {
+                summary?: never
+                rawNode: RowData
+                key: RowKey
+                disabled: boolean
+              }
+
+            let mergedData: RowRenderInfo[]
+
+            if (summary) {
+              const summaryRows = summary(this.rawPaginatedData)
+              if (Array.isArray(summaryRows)) {
+                mergedData = [
+                  ...paginatedData,
+                  ...summaryRows.map((row, i) => ({
+                    summary: true as const,
+                    rawNode: row,
+                    key: `__n_summary__${i}`,
+                    disabled: true
+                  }))
+                ]
+              } else {
+                mergedData = [
+                  ...paginatedData,
+                  {
+                    summary: true,
+                    rawNode: summaryRows,
+                    key: '__n_summary__',
+                    disabled: true
+                  }
+                ]
+              }
+            } else {
+              mergedData = paginatedData
+            }
+
+            const { length: rowCount } = mergedData
+
+            const rows = mergedData.map((rowInfo, rowIndex) => {
+              const {
+                rawNode: rowData,
+                key: rowKey,
+                summary: isSummary
+              } = rowInfo
               const expanded =
                 renderExpand && mergedExpandedRowKeys.includes(rowKey)
               const colNodes = cols.map((col, colIndex) => {
@@ -147,8 +206,16 @@ export default defineComponent({
                 }
                 const { key: colKey, column } = col
                 const { rowSpan, colSpan } = column
-                const mergedColSpan = colSpan ? colSpan(rowData, rowIndex) : 1
-                const mergedRowSpan = rowSpan ? rowSpan(rowData, rowIndex) : 1
+                const mergedColSpan = rowInfo.summary
+                  ? rowInfo.rawNode[colKey].colSpan || 1
+                  : colSpan
+                    ? colSpan(rowData, rowIndex)
+                    : 1
+                const mergedRowSpan = rowInfo.summary
+                  ? rowInfo.rawNode[colKey].rowSpan || 1
+                  : rowSpan
+                    ? rowSpan(rowData, rowIndex)
+                    : 1
                 const isLastCol = colIndex + mergedColSpan === colCount
                 const isLastRow = rowIndex + mergedRowSpan === rowCount
                 const isCrossRowTd = mergedRowSpan > 1
@@ -186,6 +253,7 @@ export default defineComponent({
                     class={[
                       `${mergedClsPrefix}-data-table-td`,
                       column.className,
+                      isSummary && `${mergedClsPrefix}-data-table-td--summary`,
                       hoverKey !== null &&
                         cordKey[rowIndex][colIndex].includes(hoverKey) &&
                         `${mergedClsPrefix}-data-table-td--hover`,
@@ -213,28 +281,33 @@ export default defineComponent({
                     ]}
                   >
                     {column.type === 'selection' ? (
-                      <NCheckbox
-                        key={currentPage}
-                        disabled={tmNode.disabled}
-                        checked={mergedCheckedRowKeys.includes(rowKey)}
-                        onUpdateChecked={(checked) =>
-                          handleCheckboxUpdateChecked(tmNode, checked)
-                        }
-                      />
+                      !isSummary ? (
+                        <NCheckbox
+                          key={currentPage}
+                          disabled={rowInfo.disabled}
+                          checked={mergedCheckedRowKeys.includes(rowKey)}
+                          onUpdateChecked={(checked) =>
+                            handleCheckboxUpdateChecked(rowInfo, checked)
+                          }
+                        />
+                      ) : null
                     ) : column.type === 'expand' ? (
-                      !column.expandable ||
-                      column.expandable?.(rowData, rowIndex) ? (
-                          <ExpandTrigger
-                            clsPrefix={mergedClsPrefix}
-                            expanded={expanded}
-                            onClick={() => handleUpdateExpanded(rowKey)}
-                          />
-                        ) : null
+                      !isSummary ? (
+                        !column.expandable ||
+                        column.expandable?.(rowData, rowIndex) ? (
+                            <ExpandTrigger
+                              clsPrefix={mergedClsPrefix}
+                              expanded={expanded}
+                              onClick={() => handleUpdateExpanded(rowKey)}
+                            />
+                          ) : null
+                      ) : null
                     ) : (
                       <Cell
                         index={rowIndex}
                         row={rowData}
                         column={column}
+                        isSummary={isSummary}
                         mergedTheme={mergedTheme}
                       />
                     )}
@@ -281,6 +354,7 @@ export default defineComponent({
               }
               return row
             })
+            // const summary =
 
             return (
               <table

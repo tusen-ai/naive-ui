@@ -1,7 +1,7 @@
 import { defineComponent, PropType, VNodeChild, h } from 'vue'
 import type { MergedTheme } from '../../../_mixins'
 import { NEllipsis } from '../../../ellipsis'
-import { TableBaseColumn, RowData } from '../interface'
+import { TableBaseColumn, RowData, SummaryCell } from '../interface'
 import type { DataTableTheme } from '../../styles'
 
 export default defineComponent({
@@ -19,6 +19,7 @@ export default defineComponent({
       type: Object as PropType<TableBaseColumn>,
       required: true
     },
+    isSummary: Boolean,
     mergedTheme: {
       type: Object as PropType<MergedTheme<DataTableTheme>>,
       required: true
@@ -26,14 +27,19 @@ export default defineComponent({
   },
   render () {
     const {
+      isSummary,
       column: { render, key, ellipsis },
       row
     } = this
     let cell: VNodeChild
-    if (render) {
+    if (render && !isSummary) {
       cell = render(row, this.index)
     } else {
-      cell = row[key] as any
+      if (isSummary) {
+        cell = (row[key] as SummaryCell).value
+      } else {
+        cell = row[key] as any
+      }
     }
     const tooltip = typeof ellipsis === 'object' ? ellipsis.tooltip : undefined
     if (tooltip) {

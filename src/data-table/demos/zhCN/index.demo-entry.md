@@ -25,6 +25,7 @@ controlled-filter
 controlled-sorter
 fixed-header
 fixed-header-column
+summary
 ellipsis
 ellipsis-tooltip
 expand
@@ -55,6 +56,7 @@ custom-filter-menu
 | single-column | `boolean` | `false` |  |
 | single-line | `boolean` | `true` |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
+| summary | `CreateSummary` | `undefined` | 表格总结栏的数据，类型见 <n-a href="#CreateSummary-Type">CreateSummary Type</n-a> |
 | on-update:checked-row-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
 | on-update:filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: Column)` |  |
 | on-update:page | `(page: number)` | `undefined` |  |
@@ -109,3 +111,25 @@ custom-filter-menu
 | titleRowSpan | `number` | `undefined` |  |
 | type | `'selection' \| 'expand'` | `undefined` |  |
 | width | `number \| string` | `undefined` | 列的宽度，在列固定时是**必需**的 |
+
+### CreateSummary Type
+
+```__ts
+type CreateSummary = (
+  pageData: RowData[]
+) =>
+  | Array<{
+      [columnKey: string]: {
+        value?: string | number
+        colSpan?: number
+        rowSpan?: number
+      }
+    }>
+  | {
+      [columnKey: string]: {
+        value?: string | number
+        colSpan?: number
+        rowSpan?: number
+      }
+    }
+```

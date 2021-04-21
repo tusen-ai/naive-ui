@@ -4,6 +4,7 @@
 
 ## Feats
 
+- `n-data-table` 增加 `summary` 属性
 - `n-data-table` 在 `'type=selection'` 的列增加 `options` 选项
 
 ### Fixes

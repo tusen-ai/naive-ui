@@ -30,6 +30,9 @@ function createRenderer (wrapCodeWithCard = true) {
     },
 
     code: (code, language) => {
+      if (language.startsWith('__')) {
+        language = language.replace('__', '')
+      }
       const isLanguageValid = !!(language && hljs.getLanguage(language))
       if (!isLanguageValid) {
         throw new Error(

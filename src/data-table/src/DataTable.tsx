@@ -34,7 +34,8 @@ import {
   MainTableRef,
   DataTableInst,
   OnUpdateExpandedRowKeys,
-  dataTableInjectionKey
+  dataTableInjectionKey,
+  CreateSummary
 } from './interface'
 import style from './styles/index.cssr'
 import { useGroupHeader } from './use-group-header'
@@ -97,6 +98,7 @@ export const dataTableProps = {
     default: []
   },
   expandedRowKeys: Array as PropType<RowKey[]>,
+  summary: [Function] as PropType<CreateSummary>,
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:page': [Function, Array] as PropType<
   PaginationProps['onUpdate:page']
@@ -224,6 +226,7 @@ export default defineComponent({
       treeMateRef,
       mergedCurrentPageRef,
       paginatedDataRef,
+      rawPaginatedDataRef,
       selectionColumnRef,
       hoverKeyRef,
       mergedPaginationRef,
@@ -298,10 +301,12 @@ export default defineComponent({
       localeRef: locale,
       rowKeyRef: toRef(props, 'rowKey'),
       renderExpandRef,
+      summaryRef: toRef(props, 'summary'),
       checkOptionsRef: computed(() => {
         const { value: selectionColumn } = selectionColumnRef
         return selectionColumn?.options
       }),
+      rawPaginatedDataRef,
       filterMenuCssVarsRef: computed(() => {
         const {
           self: { actionDividerColor, actionPadding, actionButtonMargin }

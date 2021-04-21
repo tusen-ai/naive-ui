@@ -3,7 +3,7 @@ import { NDropdown } from '../../../dropdown'
 import { NLocale } from '../../../locales'
 import { NBaseIcon } from '../../../_internal'
 import { ChevronDownIcon } from '../../../_internal/icons'
-import type { RowData, TmNode } from '../interface'
+import type { RowData } from '../interface'
 import { dataTableInjectionKey } from '../interface'
 
 export type DataTableSelectionOption = 'all' | 'none'
@@ -22,7 +22,7 @@ function createSelectHandler (
   }
   >
   | undefined,
-  paginatedDataRef: Ref<TmNode[]>,
+  rawPaginatedDataRef: Ref<RowData[]>,
   doCheckAll: (checkWholeTable?: boolean) => void,
   doUncheckAll: (checkWholeTable?: boolean) => void
 ): (key: string | number) => void {
@@ -38,9 +38,7 @@ function createSelectHandler (
           return
         default:
           if (typeof option === 'object' && option.key === key) {
-            option.onSelect(
-              paginatedDataRef.value.map((rowTmNode) => rowTmNode.rawNode)
-            )
+            option.onSelect(rawPaginatedDataRef.value)
             return
           }
       }
@@ -88,7 +86,7 @@ export default defineComponent({
     const {
       localeRef,
       checkOptionsRef,
-      paginatedDataRef,
+      rawPaginatedDataRef,
       doCheckAll,
       doUncheckAll
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -97,7 +95,7 @@ export default defineComponent({
       handleSelect: computed(() =>
         createSelectHandler(
           checkOptionsRef.value,
-          paginatedDataRef,
+          rawPaginatedDataRef,
           doCheckAll,
           doUncheckAll
         )

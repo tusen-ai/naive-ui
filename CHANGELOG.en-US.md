@@ -4,6 +4,7 @@
 
 ## Feats
 
+- `n-data-table` add `summary` prop.
 - `n-data-table` add `options` on `'type=selection'` column.
 
 ### Fixes

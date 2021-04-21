@@ -25,6 +25,7 @@ controlled-filter
 controlled-sorter
 fixed-header
 fixed-header-column
+summary
 ellipsis
 ellipsis-tooltip
 expand
@@ -55,6 +56,7 @@ custom-filter-menu
 | single-column | `boolean` | `false` |  |
 | single-line | `boolean` | `true` |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
+| summary | `CreateSummary` | `undefined` | Data of table summary row. For types, see <n-a href="#CreateSummary-Type">CreateSummary Type</n-a>. |
 | on-update:checked-row-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
 | on-update:filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: Column)` |  |
 | on-update:page | `(page: number)` | `undefined` |  |
@@ -105,7 +107,29 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | rowSpan | `(rowData: Object, rowIndex: number) => number` | `undefined` |  |
 | sortOrder | `'descend' \| 'ascend' \| false` | `undefined` | The controlled sort order of the column. If multiple columns' sortOrder is set, the first one will affect. |
 | sorter | `boolean \| function \| 'default'` | `false` | The sorter of the column. If set `'default'`, it will use a basic builtin compare function. If set to `true`, it will only display sort icon on the column, which can be used in async status. Otherwise it works like `Array.sort`'s compare function. |
-| title | `string \| (() => VNodeChild)` | `undefined` | Can be a render function |
+| title | `string \| (() => VNodeChild)` | `undefined` | Can be a render function. |
 | titleRowSpan | `number` | `undefined` |  |
 | type | `'selection' \| 'expand'` | `undefined` |  |
-| width | `number \| string` | `undefined` | Width of the column, **required** when fixed |
+| width | `number \| string` | `undefined` | Width of the column, **required** when fixed. |
+
+### CreateSummary Type
+
+```__ts
+type CreateSummary = (
+  pageData: RowData[]
+) =>
+  | Array<{
+      [columnKey: string]: {
+        value: string | number
+        colSpan?: number
+        rowSpan?: number
+      }
+    }>
+  | {
+      [columnKey: string]: {
+        value: string | number
+        colSpan?: number
+        rowSpan?: number
+      }
+    }
+```
