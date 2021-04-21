@@ -91,9 +91,10 @@ export type TableBaseColumn = {
   filterMultiple?: boolean
 
   render?: (rowData: RowData, rowIndex: number) => VNodeChild
-  renderFilterMenu?: RenderFilterMenu
   renderSorter?: RenderSorter
   renderFilter?: RenderFilter
+  renderFilterIcon?: RenderFilter
+  renderFilterMenu?: RenderFilterMenu
   colSpan?: (rowData: RowData, rowIndex: number) => number
   rowSpan?: (rowData: RowData, rowIndex: number) => number
 } & CommonColumnInfo

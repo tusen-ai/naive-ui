@@ -47,7 +47,7 @@ export default c([
     bottom: 0;
   `, [
     c('&::after', `
-      background-image: linear-gradient(45deg, #DDD 25%, transparent 25%), linear-gradient(-45deg, #DDD 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #DDD 75%), linear-gradient(-45deg, transparent 75%, #DDD 75%);
+      background-image: linear-gradient(45deg, #DDD 25%, #0000 25%), linear-gradient(-45deg, #DDD 25%, #0000 25%), linear-gradient(45deg, #0000 75%, #DDD 75%), linear-gradient(-45deg, #0000 75%, #DDD 75%);
       background-size: 12px 12px;
       background-position: 0 0, 0 6px, 6px -6px, -6px 0px;
       background-repeat: repeat;
@@ -145,7 +145,10 @@ export default c([
     transition: border-color .3s var(--bezier);
     cursor: pointer;
   `, [
-    cE('value', 'position: relative;'),
+    cE('value', `
+      white-space: nowrap;
+      position: relative;
+    `),
     cE('fill', `
       border-radius: var(--border-radius);
       position: absolute;

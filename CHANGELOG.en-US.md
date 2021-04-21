@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## Pending
+
+## Feats
+
+- `n-data-table` highlight sorted col.
+- `n-data-table` col add `render-filter` prop.
+- `n-data-table` col add `render-filter-icon` prop.
+
+### Fixes
+
+- `n-data-table` fix column box-shadow more clear in dark theme.
+- Fix `n-color-picker` value has line wrap.
+
 ## 2.7.2
 
 ## Feats

@@ -58,7 +58,7 @@ export const self = (vars: ThemeCommonVars) => {
     textColorError: errorColor,
     codeTextColor: textColor2,
     codeColor: codeColor,
-    codeBorder: '1px solid transparent'
+    codeBorder: '1px solid #0000'
   }
 }
 

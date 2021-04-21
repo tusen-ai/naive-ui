@@ -8,9 +8,7 @@ Slots are also related to preset.
   <template #header>
     <div>title</div>
   </template>
-  <template #content>
-    <div>content</div>
-  </template>
+  <div>content</div>
   <template #action>
     <div>action</div>
   </template>

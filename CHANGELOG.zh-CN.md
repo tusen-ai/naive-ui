@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## Pending
+
+## Feats
+
+- `n-data-table` 高亮排序列
+- `n-data-table` 列增加 `render-filter` 属性
+- `n-data-table` 列增加 `render-filter-icon` 属性
+
+### Fixes
+
+- `n-data-table` 固定列 box-shadow 在暗色模式更明显
+- 修正 `n-color-picker` 值折行
+
 ## 2.7.2
 
 ## Feats

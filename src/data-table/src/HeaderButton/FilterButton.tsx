@@ -115,15 +115,20 @@ export default defineComponent({
         padded={false}
       >
         {{
-          trigger: () =>
-            this.mergedRenderFilter ? (
-              <RenderFilter
-                data-data-table-filter
-                render={this.mergedRenderFilter}
-                active={this.active}
-                show={this.showPopover}
-              />
-            ) : (
+          trigger: () => {
+            const { mergedRenderFilter } = this
+            if (mergedRenderFilter) {
+              return (
+                <RenderFilter
+                  data-data-table-filter
+                  render={mergedRenderFilter}
+                  active={this.active}
+                  show={this.showPopover}
+                />
+              )
+            }
+            const { renderFilterIcon } = this.column
+            return (
               <div
                 data-data-table-filter
                 class={[
@@ -136,11 +141,19 @@ export default defineComponent({
                   }
                 ]}
               >
-                <NBaseIcon clsPrefix={mergedClsPrefix}>
-                  {{ default: () => <FilterIcon /> }}
-                </NBaseIcon>
+                {renderFilterIcon ? (
+                  renderFilterIcon({
+                    active: this.active,
+                    show: this.showPopover
+                  })
+                ) : (
+                  <NBaseIcon clsPrefix={mergedClsPrefix}>
+                    {{ default: () => <FilterIcon /> }}
+                  </NBaseIcon>
+                )}
               </div>
-            ),
+            )
+          },
           default: () => {
             const { renderFilterMenu } = this.column
             return renderFilterMenu ? (

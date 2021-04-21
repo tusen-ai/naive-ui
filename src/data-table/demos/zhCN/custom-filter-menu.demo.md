@@ -6,7 +6,8 @@
 
 ```js
 import { h, ref, reactive } from 'vue'
-import { NButton, NSpace } from 'naive-ui'
+import { NButton, NSpace, NIcon } from 'naive-ui'
+import { SearchOutline } from '@vicons/ionicons5'
 
 const data = [
   {
@@ -33,6 +34,9 @@ export default {
         key: 'Right',
         filter: 'default',
         filterOptionValue: filterOptionValueRef,
+        renderFilterIcon: () => {
+          return h(NIcon, null, { default: () => h(SearchOutline) })
+        },
         renderFilterMenu: () => {
           return h(
             NSpace,

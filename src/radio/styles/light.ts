@@ -56,8 +56,8 @@ const self = (vars: ThemeCommonVars) => {
       primaryColor,
       { alpha: 0.3 }
     )}`,
-    buttonBoxShadowHover: 'inset 0 0 0 1px transparent',
-    buttonBoxShadow: 'inset 0 0 0 1px transparent',
+    buttonBoxShadowHover: 'inset 0 0 0 1px #0000',
+    buttonBoxShadow: 'inset 0 0 0 1px #0000',
     buttonBorderRadius: borderRadius
   }
 }

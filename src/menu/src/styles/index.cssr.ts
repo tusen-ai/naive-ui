@@ -39,7 +39,7 @@ export default cB('menu', {
       margin: 0
     }, [
       c('&::after', {
-        backgroundColor: 'transparent !important'
+        backgroundColor: '#0000 !important'
       }),
       cM('selected', [
         cB('menu-item-content', {
@@ -49,7 +49,7 @@ export default cB('menu', {
     ]),
     cB('menu-item-content', {
       padding: '0 20px',
-      borderBottom: '2px solid transparent'
+      borderBottom: '2px solid #0000'
     }, [
       cM('child-active', {
         borderBottom: '2px solid var(--border-color-horizontal)'
@@ -68,7 +68,7 @@ export default cB('menu', {
   cM('collapsed', [
     cB('menu-item', [
       c('&::after', {
-        backgroundColor: 'transparent !important'
+        backgroundColor: '#0000 !important'
       })
     ]),
     cB('menu-item-content', [
@@ -91,7 +91,7 @@ export default cB('menu', {
   }, [
     c('&::after', `
       content: "";
-      background-color: transparent;
+      background-color: #0000;
       position: absolute;
       left: 8px;
       right: 8px;

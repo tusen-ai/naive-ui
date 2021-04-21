@@ -16,7 +16,7 @@ const logDark: LogTheme = {
       loaderFontSize: fontSize,
       loaderTextColor: textColor2,
       loaderColor: inputColor,
-      loaderBorder: '1px solid transparent',
+      loaderBorder: '1px solid #0000',
       loadingColor: primaryColor
     }
   }

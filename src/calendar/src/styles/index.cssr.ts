@@ -94,7 +94,7 @@ export default c([
         right: 0;
         bottom: -1px;
         height: 3px;
-        background-color: transparent;
+        background-color: #0000;
         transition: background-color .3s var(--bezier);
       `),
       cM('selected', [

@@ -42,7 +42,7 @@ const internalSelectionDark: InternalSelectionTheme = {
       color: inputColor,
       colorDisabled: inputColorDisabled,
       colorActive: changeColor(primaryColor, { alpha: 0.1 }),
-      border: '1px solid transparent',
+      border: '1px solid #0000',
       borderHover: `1px solid ${primaryColorHover}`,
       borderActive: `1px solid ${primaryColor}`,
       borderFocus: `1px solid ${primaryColorHover}`,

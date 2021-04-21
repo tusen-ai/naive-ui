@@ -71,6 +71,7 @@ export default defineComponent({
       doUpdateSorter(nextSorter)
     }
     return {
+      mergedSortState: mergedSortStateRef,
       mergedClsPrefix: mergedClsPrefixRef,
       scrollX: scrollXRef,
       fixedColumnLeftMap: fixedColumnLeftMapRef,
@@ -99,6 +100,7 @@ export default defineComponent({
       someRowsChecked,
       leftActiveFixedColKey,
       rightActiveFixedColKey,
+      mergedSortState,
       rows,
       cols,
       mergedTheme,
@@ -142,6 +144,9 @@ export default defineComponent({
                           column.fixed &&
                             `${mergedClsPrefix}-data-table-th--fixed-${column.fixed}`,
                           {
+                            [`${mergedClsPrefix}-data-table-th--hover`]:
+                              mergedSortState?.order &&
+                              mergedSortState.columnKey === key,
                             [`${mergedClsPrefix}-data-table-th--filterable`]: isColumnFilterable(
                               column
                             ),

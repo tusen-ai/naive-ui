@@ -402,6 +402,10 @@ export default defineComponent({
                                                         ) ? (
                                                             <NColorPicker
                                                               key={varKey}
+                                                              modes={[
+                                                                'rgb',
+                                                                'hex'
+                                                              ]}
                                                               value={
                                                                 this
                                                                   .tempOverrides?.[

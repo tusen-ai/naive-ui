@@ -87,15 +87,15 @@ export default cB('tree', {
     display: inline-flex;
     height: 24px;
     box-sizing: border-box;
-    border-bottom: 3px solid transparent;
-    border-top: 3px solid transparent;
+    border-bottom: 3px solid #0000;
+    border-top: 3px solid #0000;
     line-height: 24px;
     align-items: center;
     vertical-align: bottom;
     padding: 0 6px;
     cursor: pointer;
     border-radius: var(--node-border-radius);
-    text-decoration-color: transparent;
+    text-decoration-color: #0000;
     text-decoration-line: underline;
     color: var(--node-text-color);
     transition:
@@ -113,11 +113,11 @@ export default cB('tree', {
       bottom: 0;
       left: 0;
       right: 0;
-      background-color: transparent;
+      background-color: #0000;
     `),
     cE('text', `
       line-height: 1.25;
-      border-bottom: 1px solid transparent;
+      border-bottom: 1px solid #0000;
       transition: border-color .3s var(--bezier);
     `),
     cM('block', {
@@ -140,7 +140,7 @@ export default cB('tree', {
     ]),
     cM('pending', [
       c('&:hover', {
-        backgroundColor: 'transparent'
+        backgroundColor: '#0000'
       }),
       cM('pending-bottom', {
         borderBottom: '3px solid var(--node-color-hover)'

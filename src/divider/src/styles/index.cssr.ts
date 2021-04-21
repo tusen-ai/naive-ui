@@ -49,7 +49,7 @@ export default cB('divider', `
   ]),
   cM('dashed', [
     cE('line', `
-      background-color: transparent;
+      background-color: #0000;
       height: 0px;
       width: 100%;
       border-style: dashed;

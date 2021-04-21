@@ -20,9 +20,9 @@ const base = {
 
   alphaDisabled: '0.5',
   alphaDisabledInput: '0.02',
-  alphaPending: '0.04',
+  alphaPending: '0.05',
   alphaTablePending: '0.02',
-  alphaActive: '0.06',
+  alphaPressed: '0.07',
 
   alphaAvatar: '0.2',
   alphaRail: '0.14',
@@ -134,7 +134,6 @@ const derived = {
   opacity3: base.alpha3,
   opacity4: base.alpha4,
   opacity5: base.alpha5,
-  opacityPending: base.alphaPending,
 
   dividerColor: 'rgb(239, 239, 245)',
   borderColor: 'rgb(224, 224, 230)',
@@ -173,9 +172,10 @@ const derived = {
   actionColor: 'rgb(250, 250, 252)',
   tableHeaderColor: 'rgb(250, 250, 252)',
 
-  hoverColor: 'rgb(246, 246, 248)',
-  tableColorHover: overlay(base.alphaTablePending),
-  activeColor: overlay(base.alphaActive),
+  hoverColor: 'rgb(243, 243, 245)',
+  // use color with alpha since it can be nested with header filter & sorter effect
+  tableColorHover: 'rgba(0, 0, 100, 0.02)',
+  pressedColor: 'rgb(237, 237, 239)',
 
   opacityDisabled: base.alphaDisabled,
   inputColorDisabled: 'rgb(250, 250, 252)',

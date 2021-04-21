@@ -39,7 +39,7 @@ const radioDark: RadioTheme = {
       )}`,
       boxShadowHover: `inset 0 0 0 1px ${primaryColor}`,
       boxShadowDisabled: `inset 0 0 0 1px ${borderColor}`,
-      color: 'transparent',
+      color: '#0000',
       colorDisabled: inputColorDisabled,
       textColor: textColor2,
       textColorDisabled: textColorDisabled,
@@ -48,7 +48,7 @@ const radioDark: RadioTheme = {
       buttonBorderColor: borderColor,
       buttonBorderColorActive: primaryColor,
       buttonBorderColorHover: primaryColor,
-      buttonColor: 'transparent',
+      buttonColor: '#0000',
       buttonColorActive: primaryColor,
       buttonTextColor: textColor2,
       buttonTextColorActive: baseColor,
@@ -59,7 +59,7 @@ const radioDark: RadioTheme = {
         { alpha: 0.3 }
       )}`,
       buttonBoxShadowHover: `inset 0 0 0 1px ${primaryColor}`,
-      buttonBoxShadow: 'inset 0 0 0 1px transparent',
+      buttonBoxShadow: 'inset 0 0 0 1px #0000',
       buttonBorderRadius: borderRadius
     }
   }

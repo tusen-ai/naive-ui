@@ -9,7 +9,7 @@ import {
   RowKey,
   SummaryRowData
 } from '../interface'
-import { createRowClassName } from '../utils'
+import { createRowClassName, getColKey } from '../utils'
 import Cell from './Cell'
 import ExpandTrigger from './ExpandTrigger'
 
@@ -35,6 +35,7 @@ export default defineComponent({
       renderExpandRef,
       hoverKeyRef,
       summaryRef,
+      mergedSortStateRef,
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
       doUpdateCheckedRowKeys
@@ -90,6 +91,7 @@ export default defineComponent({
       renderExpand: renderExpandRef,
       mergedExpandedRowKeys: mergedExpandedRowKeysRef,
       hoverKey: hoverKeyRef,
+      mergedSortState: mergedSortStateRef,
       getScrollContainer,
       handleScroll,
       handleCheckboxUpdateChecked,
@@ -129,8 +131,9 @@ export default defineComponent({
               rowClassName,
               leftActiveFixedColKey,
               rightActiveFixedColKey,
-              renderExpand,
+              mergedSortState,
               mergedExpandedRowKeys,
+              renderExpand,
               summary
             } = this
             const { length: colCount } = cols
@@ -139,7 +142,10 @@ export default defineComponent({
             paginatedData.forEach((tmNode, rowIndex) => {
               rowIndexToKey[rowIndex] = tmNode.key
             })
-
+            const sorterKey =
+              !!mergedSortState &&
+              mergedSortState.order &&
+              mergedSortState.columnKey
             type RowRenderInfo =
               | {
                 summary: true
@@ -204,7 +210,8 @@ export default defineComponent({
                     return null
                   }
                 }
-                const { key: colKey, column } = col
+                const { column } = col
+                const colKey = getColKey(col)
                 const { rowSpan, colSpan } = column
                 const mergedColSpan = rowInfo.summary
                   ? rowInfo.rawNode[colKey].colSpan || 1
@@ -254,8 +261,9 @@ export default defineComponent({
                       `${mergedClsPrefix}-data-table-td`,
                       column.className,
                       isSummary && `${mergedClsPrefix}-data-table-td--summary`,
-                      hoverKey !== null &&
-                        cordKey[rowIndex][colIndex].includes(hoverKey) &&
+                      ((hoverKey !== null &&
+                        cordKey[rowIndex][colIndex].includes(hoverKey)) ||
+                        (sorterKey !== false && sorterKey === colKey)) &&
                         `${mergedClsPrefix}-data-table-td--hover`,
                       column.fixed &&
                         `${mergedClsPrefix}-data-table-td--fixed-${column.fixed}`,

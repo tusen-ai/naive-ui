@@ -59,10 +59,10 @@ const inputDark: InputTheme = {
       color: inputColor,
       colorDisabled: inputColorDisabled,
       colorFocus: changeColor(primaryColor, { alpha: 0.1 }),
-      groupLabelBorder: '1px solid transparent',
-      border: '1px solid transparent',
+      groupLabelBorder: '1px solid #0000',
+      border: '1px solid #0000',
       borderHover: `1px solid ${primaryColorHover}`,
-      borderDisabled: '1px solid transparent',
+      borderDisabled: '1px solid #0000',
       borderFocus: `1px solid ${primaryColorHover}`,
       boxShadowFocus: `0 0 8px 0 ${changeColor(primaryColor, { alpha: 0.3 })}`,
       // warning

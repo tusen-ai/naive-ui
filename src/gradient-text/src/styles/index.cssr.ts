@@ -11,7 +11,7 @@ export default cB('gradient-text', `
   font-weight: var(--font-weight);
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
+  color: #0000;
   white-space: nowrap;
   background-image: linear-gradient(var(--rotate), var(--color-start) 0%, var(--color-end) 100%);
   transition:

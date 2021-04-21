@@ -23,7 +23,7 @@ const base = {
   alphaDisabledInput: '0.06',
   alphaPending: '0.09',
   alphaTablePending: '0.06',
-  alphaActive: '0.03',
+  alphaPressed: '0.05',
 
   alphaAvatar: '0.18',
   alphaRail: '0.2',
@@ -135,7 +135,6 @@ const derived: ThemeCommonVars = {
   opacity3: base.alpha3,
   opacity4: base.alpha4,
   opacity5: base.alpha5,
-  opacityPending: base.alphaPending,
 
   dividerColor: overlay(base.alphaDivider),
   borderColor: overlay(base.alphaBorder),
@@ -176,7 +175,7 @@ const derived: ThemeCommonVars = {
 
   hoverColor: overlay(base.alphaPending),
   tableColorHover: overlay(base.alphaTablePending),
-  activeColor: overlay(base.alphaActive),
+  pressedColor: overlay(base.alphaPressed),
 
   opacityDisabled: base.alphaDisabled,
   inputColorDisabled: overlay(base.alphaDisabledInput),

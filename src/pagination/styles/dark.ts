@@ -19,7 +19,7 @@ const paginationDark: PaginationTheme = {
     })
     const commonSelf = self(vars)
     commonSelf.itemBorderActive = `1px solid ${borderColorActive}`
-    commonSelf.itemBorderDisabled = '1px solid transparent'
+    commonSelf.itemBorderDisabled = '1px solid #0000'
     return commonSelf
   }
 }

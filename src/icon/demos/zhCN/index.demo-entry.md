@@ -6,7 +6,6 @@
 
 ```demo
 basic
-theme
 custom-icon
 depth
 ```
