@@ -4,6 +4,7 @@
 
 ### Fixes
 
+- `n-data-table` fix column box-shadow more clear in dark theme.
 - Fix `n-color-picker` value has line wrap.
 
 ## 2.7.2

@@ -25,7 +25,12 @@ const dataTableDark: DataTableTheme = {
     Popover: popoverDark,
     Ellipsis: ellipsisDark
   },
-  self
+  self (vars) {
+    const commonSelf = self(vars)
+    commonSelf.boxShadowAfter = 'inset 12px 0 8px -12px rgba(0, 0, 0, .36)'
+    commonSelf.boxShadowBefore = 'inset -12px 0 8px -12px rgba(0, 0, 0, .36)'
+    return commonSelf
+  }
 }
 
 export default dataTableDark

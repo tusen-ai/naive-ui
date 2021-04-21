@@ -71,7 +71,9 @@ export const self = (vars: ThemeCommonVars) => {
       composite(popoverColor, tableHeaderColor),
       tableHeaderColor
     ),
-    tdColorPopover: popoverColor
+    tdColorPopover: popoverColor,
+    boxShadowBefore: 'inset -12px 0 8px -12px rgba(0, 0, 0, .18)',
+    boxShadowAfter: 'inset 12px 0 8px -12px rgba(0, 0, 0, .18)'
   }
 }
 

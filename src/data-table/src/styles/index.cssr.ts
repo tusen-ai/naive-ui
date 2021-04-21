@@ -37,6 +37,8 @@ const fixedColumnStyle = createFixedColumnStyle()
 // --action-button-margin
 // --pagination-margin
 // --empty-padding
+// --box-shadow-before
+// --box-shadow-after
 export default c([
   cB('data-table', `
     width: 100%;
@@ -412,12 +414,12 @@ function createFixedColumnStyle (): CNode[] {
     ]),
     cM('shadow-before', [
       c('&::before', {
-        boxShadow: 'inset -12px 0 8px -12px rgba(0, 0, 0, .18)'
+        boxShadow: 'var(--box-shadow-before)'
       })
     ]),
     cM('shadow-after', [
       c('&::after', {
-        boxShadow: 'inset 12px 0 8px -12px rgba(0, 0, 0, .18)'
+        boxShadow: 'var(--box-shadow-after)'
       })
     ])
   ]

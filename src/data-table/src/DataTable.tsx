@@ -377,6 +377,8 @@ export default defineComponent({
             thColorHoverPopover,
             paginationMargin,
             emptyPadding,
+            boxShadowAfter,
+            boxShadowBefore,
             [createKey('fontSize', size)]: fontSize,
             [createKey('thPadding', size)]: thPadding,
             [createKey('tdPadding', size)]: tdPadding
@@ -412,7 +414,9 @@ export default defineComponent({
           '--th-icon-color-active': thIconColorActive,
           '--filter-size': filterSize,
           '--pagination-margin': paginationMargin,
-          '--empty-padding': emptyPadding
+          '--empty-padding': emptyPadding,
+          '--box-shadow-before': boxShadowBefore,
+          '--box-shadow-after': boxShadowAfter
         }
       })
     }
