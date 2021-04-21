@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.7.3
 
 ## Feats
 
@@ -12,6 +12,7 @@
 
 - `n-data-table` 固定列 box-shadow 在暗色模式更明显
 - 修正 `n-color-picker` 值折行
+- 修正 `n-form` FormRuleItem.trigger 类型
 
 ## 2.7.2
 

@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "2.7.2",
+  "version": "2.7.3",
   "description": "A Vue 3 UI Framework. Rather Complete, Themable, With Typescript, Not Too Slow",
   "main": "lib/index.js",
   "module": "es/index.js",

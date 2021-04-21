@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.7.3
 
 ## Feats
 
@@ -10,8 +10,9 @@
 
 ### Fixes
 
-- `n-data-table` fix column box-shadow more clear in dark theme.
+- `n-data-table` fixed column box-shadow more clear in dark theme.
 - Fix `n-color-picker` value has line wrap.
+- Fix `n-form` FormRuleItem.trigger types.
 
 ## 2.7.2
 
