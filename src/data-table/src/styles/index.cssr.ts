@@ -77,7 +77,6 @@ export default c([
       transition: border-color .3s var(--bezier);
       border-top-left-radius: var(--border-radius);
       border-top-right-radius: var(--border-radius);
-      overflow: hidden;
       line-height: var(--line-height);
     `),
     cM('single-column', [
@@ -117,7 +116,6 @@ export default c([
     ]),
     cM('bordered', [
       cB('data-table-wrapper', {
-        overflow: 'hidden',
         border: '1px solid var(--merged-border-color)',
         borderBottomLeftRadius: 'var(--border-radius)',
         borderBottomRightRadius: 'var(--border-radius)'
@@ -130,15 +128,14 @@ export default c([
               })
             ])
           ])
-        ])
+        ]),
+        cB('data-table-base-table-body', `
+          border-bottom-left-radius: calc(var(--border-radius) - 1px);
+          border-bottom-right-radius: calc(var(--border-radius) - 1px);
+        `)
       ])
     ]),
     cB('data-table-base-table', [
-      cB('scrollbar', [
-        cB('scrollbar-content', {
-          overflow: 'visible'
-        })
-      ]),
       cM('transition-disabled', [
         cB('data-table-th', [c('&::after, &::before', { transition: 'none' })]),
         cB('data-table-td', [c('&::after, &::before', { transition: 'none' })])
@@ -270,6 +267,9 @@ export default c([
       ])
     ]),
     cB('data-table-base-table-header', `
+      border-top-left-radius: calc(var(--border-radius) - 1px);
+      border-top-right-radius: calc(var(--border-radius) - 1px);
+      z-index: 3;
       overflow: scroll;
       flex-shrink: 0;
       transition: border-color .3s var(--bezier);
