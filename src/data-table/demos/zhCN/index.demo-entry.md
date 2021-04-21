@@ -103,7 +103,8 @@ custom-filter-menu
 | render | `(rowData: Object, rowIndex: number) => VNodeChild` | `undefined` | 渲染函数，渲染这一列的每一行的单元格 |
 | renderExpand | `(rowData: Object, rowIndex: number) => VNodeChild` | `undefined` | 展开区域的渲染函数，仅在 `type` 为 `'expand'` 的时候生效 |
 | renderFilterMenu | `() => VNodeChild` | `undefined` | 渲染函数，渲染这一列的过滤器菜单 |
-| renderFilter | `() => VNodeChild` | `undefined` | 渲染函数，渲染过滤器图标 |
+| renderFilterIcon | `(options: { active: boolean, show: boolean }) => VNodeChild` | `undefined` | 渲染函数，渲染过滤器图标 |
+| renderFilter | `(options: { active: boolean, show: boolean }) => VNodeChild` | `undefined` | 渲染函数，渲染过滤器触发元素 |
 | rowSpan | `(rowData: Object, rowIndex: number) => number` | `undefined` |  |
 | sortOrder | `'descend' \| 'ascend' \| false` | `undefined` | 受控状态下表格的排序方式。如果多列都设定了有效值，那么只有第一个会生效 |
 | sorter | `boolean \| function \| 'default'` | `undefined` | 这一列的排序方法。如果设为 `'default'` 表格将会使用一个内置的排序函数；如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。其他情况下它工作的方式类似 `Array.sort` 的对比函数 |

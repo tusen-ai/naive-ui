@@ -5,6 +5,8 @@
 ## Feats
 
 - `n-data-table` highlight sorted col.
+- `n-data-table` col add `render-filter` prop.
+- `n-data-table` col add `render-filter-icon` prop.
 
 ### Fixes
 

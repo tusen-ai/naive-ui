@@ -39,6 +39,7 @@ const fixedColumnStyle = createFixedColumnStyle()
 // --empty-padding
 // --box-shadow-before
 // --box-shadow-after
+// --sorter-size
 export default c([
   cB('data-table', `
     width: 100%;
@@ -263,8 +264,8 @@ export default c([
       }),
       cB('data-table-th', [
         cB('data-table-sorter', `
-          height: 14px;
-          width: 14px;
+          height: var(--sorter-size);
+          width: var(--sorter-size);
           margin-left: 4px;
           position: relative;
           display: inline-flex;

@@ -5,6 +5,8 @@
 ## Feats
 
 - `n-data-table` 高亮排序列
+- `n-data-table` 列增加 `render-filter` 属性
+- `n-data-table` 列增加 `render-filter-icon` 属性
 
 ### Fixes
 

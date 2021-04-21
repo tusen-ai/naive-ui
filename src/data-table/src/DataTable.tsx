@@ -379,6 +379,7 @@ export default defineComponent({
             emptyPadding,
             boxShadowAfter,
             boxShadowBefore,
+            sorterSize,
             [createKey('fontSize', size)]: fontSize,
             [createKey('thPadding', size)]: thPadding,
             [createKey('tdPadding', size)]: tdPadding
@@ -416,7 +417,8 @@ export default defineComponent({
           '--pagination-margin': paginationMargin,
           '--empty-padding': emptyPadding,
           '--box-shadow-before': boxShadowBefore,
-          '--box-shadow-after': boxShadowAfter
+          '--box-shadow-after': boxShadowAfter,
+          '--sorter-size': sorterSize
         }
       })
     }
