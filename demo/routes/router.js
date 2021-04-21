@@ -1,3 +1,4 @@
+import { nextTick } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 export const loadingBarApiRef = {}
@@ -21,6 +22,12 @@ export default function createDemoRouter (app, routes) {
     if (!from || to.path !== from.path) {
       if (loadingBarApiRef.value) {
         loadingBarApiRef.value.finish()
+      }
+      if (to.hash) {
+        nextTick(() => {
+          const el = document.querySelector(to.hash)
+          if (el) el.scrollIntoView()
+        })
       }
     }
   })
