@@ -80,7 +80,7 @@ export default c([
       padding: 0 0 0 18px;
       box-sizing: border-box;
       min-width: 182px;
-      background-color: transparent;
+      background-color: #0000;
       display: flex;
       align-items: center;
       white-space: nowrap;
@@ -143,7 +143,7 @@ export default c([
       }),
       cM('disabled', `
         color: var(--option-text-color-disabled);
-        background-color: transparent;
+        background-color: #0000;
         cursor: not-allowed;
       `, [
         cB('cascader-option-icon', [

@@ -147,7 +147,7 @@ export default c([
               borderRadius: '10px'
             }),
             cB('progress-graph-line-indicator', `
-              background: transparent;
+              background: #0000;
               white-space: nowrap;
               text-align: right;
               margin-left: 14px;

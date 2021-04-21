@@ -61,7 +61,7 @@ export default c([
       font-family: inherit;
       border: none;
       outline: none;
-      background-color: transparent;
+      background-color: #0000;
       text-align: inherit;
       transition:
         caret-color .3s var(--bezier),
@@ -77,7 +77,7 @@ export default c([
       caret-color: var(--caret-color);
     `, [
       c('&::placeholder', {
-        color: 'transparent'
+        color: '#0000'
       })
     ]),
     cM('round', [
@@ -270,7 +270,7 @@ export default c([
         border-color .3s var(--bezier);
     `),
     cE('state-border', `
-      border-color: transparent;
+      border-color: #0000;
       z-index: 1;
     `),
     cE('prefix', {

@@ -27,7 +27,7 @@ export const self = (vars: ThemeCommonVars) => {
     itemIconColorActive: primaryColor,
     itemIconColorChildActive: primaryColor,
     itemIconColorCollapsed: textColor1,
-    borderColorHorizontal: 'transparent',
+    borderColorHorizontal: '#0000',
     arrowColor: primaryColor,
     fontSize
   }

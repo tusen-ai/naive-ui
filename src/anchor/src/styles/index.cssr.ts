@@ -45,7 +45,7 @@ export default cB('anchor', `
       left: 0;
       width: var(--rail-width);
       height: 21px;
-      background-color: transparent;
+      background-color: #0000;
       transition: 
         top .15s var(--bezier),
         background-color .3s var(--bezier);

@@ -71,7 +71,7 @@ export default c([
     `),
     cE('state-border', `
       z-index: 1;
-      border-color: transparent;
+      border-color: #0000;
     `),
     cE('mark', `
       cursor: pointer;
@@ -145,7 +145,7 @@ export default c([
         width: 100%;
         white-space: nowrap;
         padding: var(--padding-single);
-        background-color: transparent;
+        background-color: #0000;
         color: var(--text-color);
         transition: color .3s var(--bezier);
         caret-color: var(--caret-color);
@@ -214,7 +214,7 @@ export default c([
       cE('input', `
         min-width: 1px;
         padding: 0;
-        background-color: transparent;
+        background-color: #0000;
         outline: none;
         border: none;
         max-width: 100%;

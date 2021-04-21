@@ -154,7 +154,7 @@ export default cB('tabs', `
       position: relative;
       vertical-align: bottom;
       border-radius: var(--tab-border-radius);
-      border: 1px solid transparent;
+      border: 1px solid #0000;
     `, [
       cE('label', `
         font-size: var(--label-font-size-card);

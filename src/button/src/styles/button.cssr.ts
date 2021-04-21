@@ -171,7 +171,7 @@ export default c([
     }),
     cE('state-border', {
       border: 'var(--border)',
-      borderColor: 'transparent',
+      borderColor: '#0000',
       zIndex: 1
     }),
     cE('icon', `

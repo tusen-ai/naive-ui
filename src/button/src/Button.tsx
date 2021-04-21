@@ -248,12 +248,12 @@ export default defineComponent({
         }
         if (text) {
           colorProps = {
-            '--color': 'transparent',
-            '--color-hover': 'transparent',
-            '--color-pressed': 'transparent',
-            '--color-focus': 'transparent',
-            '--color-disabled': 'transparent',
-            '--ripple-color': 'transparent',
+            '--color': '#0000',
+            '--color-hover': '#0000',
+            '--color-pressed': '#0000',
+            '--color-focus': '#0000',
+            '--color-disabled': '#0000',
+            '--ripple-color': '#0000',
             '--text-color': color || self[createKey('textColorText', type)],
             '--text-color-hover': color
               ? createHoverColor(color)
@@ -269,11 +269,11 @@ export default defineComponent({
           }
         } else if (ghost || dashed) {
           colorProps = {
-            '--color': 'transparent',
-            '--color-hover': 'transparent',
-            '--color-pressed': 'transparent',
-            '--color-focus': 'transparent',
-            '--color-disabled': 'transparent',
+            '--color': '#0000',
+            '--color-hover': '#0000',
+            '--color-pressed': '#0000',
+            '--color-focus': '#0000',
+            '--color-disabled': '#0000',
             '--ripple-color': color || self[createKey('rippleColor', type)],
             '--text-color': color || self[createKey('textColorGhost', type)],
             '--text-color-hover': color

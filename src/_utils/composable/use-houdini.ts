@@ -11,13 +11,13 @@ export function useHoudini (): void {
           name: '--color-start',
           syntax: '<color>',
           inherits: false,
-          initialValue: 'transparent'
+          initialValue: '#0000'
         })
         ;(CSS as any).registerProperty({
           name: '--color-end',
           syntax: '<color>',
           inherits: false,
-          initialValue: 'transparent'
+          initialValue: '#0000'
         })
       }
     }

@@ -122,7 +122,7 @@ export default cB('upload', [
           text-overflow: ellipsis;
           overflow: hidden;
           text-decoration: underline;
-          text-decoration-color: transparent;
+          text-decoration-color: #0000;
           font-size: var(--font-size);
           transition:
             color .3s var(--bezier),

@@ -81,8 +81,8 @@ export default c([
           background-color .3s var(--bezier),
           opacity .3s var(--bezier),
           text-decoration-color .3s var(--bezier);
-        background: transparent;
-        text-decoration-color: transparent;
+        background: #0000;
+        text-decoration-color: #0000;
         color: var(--item-text-color);
       `, [
         cNotM('disabled', [

@@ -7,7 +7,7 @@ const tabsDark: TabsTheme = {
   common: commonDark,
   self (vars) {
     const commonSelf = self(vars)
-    commonSelf.tabBorderColorActive = 'transparent'
+    commonSelf.tabBorderColorActive = '#0000'
     return commonSelf
   }
 }

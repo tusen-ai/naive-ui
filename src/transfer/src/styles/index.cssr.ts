@@ -218,7 +218,7 @@ export default c([
               `),
               cM('disabled', `
                 cursor: not-allowed
-                background-color: transparent;
+                background-color: #0000;
                 color: var(--item-text-color-disabled);
               `),
               cM('source', {
