@@ -8,7 +8,7 @@ import {
   PropType,
   h
 } from 'vue'
-import { getScrollParent, unwrapElement } from 'seemly'
+import { getScrollParent, unwrapElement, beforeNextFrameOnce } from 'seemly'
 import { useConfig, useStyle } from '../../_mixins'
 import { warn, keysOf } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
@@ -108,7 +108,11 @@ export default defineComponent({
         handleScroll()
       }
     }
-    const handleScroll = (): void => {
+    function handleScroll (): void {
+      beforeNextFrameOnce(_handleScroll)
+    }
+
+    function _handleScroll (): void {
       const { value: containerEl } = scrollElementRef
       const { value: selfEl } = selfRef
       if (!containerEl || !selfEl) return
