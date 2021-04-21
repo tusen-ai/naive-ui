@@ -69,14 +69,14 @@ duration
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| action | `string \| (() => VNode \| Array<VNode>)` | `undefined` | 可以是 render 函数 |
-| avatar | `() => VNode \| Array<VNode>` | `undefined` | 可以是 render 函数 |
+| action | `string \| (() => VNodeChild)` | `undefined` | 可以是 render 函数 |
+| avatar | `() => VNodeChild` | `undefined` | 可以是 render 函数 |
 | closable | `boolean` | `true` |  |
-| content | `string \| (() => VNode \| Array<VNode>)` | `undefined` | 可以是 render 函数 |
-| description | `string \| (() => VNode \| Array<VNode>)` | `undefined` | 可以是 render 函数 |
+| content | `string \| (() => VNodeChild)` | `undefined` | 可以是 render 函数 |
+| description | `string \| (() => VNodeChild)` | `undefined` | 可以是 render 函数 |
 | duration | `number` | `undefined` | 如果没有设定则不会自动关闭，单位毫秒 |
-| meta | `string \| (() => VNode \| Array<VNode>)` | `undefined` | 可以是 render 函数 |
-| title | `string \| (() => VNode \| Array<VNode>)` | `undefined` | 可以是 render 函数 |
+| meta | `string \| (() => VNodeChild)` | `undefined` | 可以是 render 函数 |
+| title | `string \| (() => VNodeChild)` | `undefined` | 可以是 render 函数 |
 | onAfterEnter | `Function` | `undefined` |  |
 | onAfterLeave | `Function` | `undefined` |  |
 | onClose | `() => boolean \| Promise<boolean>` | `undefined` | 关闭通知的回调。返回 `false`、Promise resolve `false` 或者 reject 会取消这次关闭 |
@@ -90,13 +90,13 @@ NotificationReactive 实例的属性可以被动态改变。
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| action | `string \| (() => VNode \| Array<VNode>)` | 可以是 render 函数 |
-| avatar | `() => VNode \| Array<VNode>` | 可以是 render 函数 |
+| action | `string \| (() => VNodeChild)` | 可以是 render 函数 |
+| avatar | `() => VNodeChild` | 可以是 render 函数 |
 | closable | `boolean` |  |
-| content | `string \| (() => VNode \| Array<VNode>)` | 可以是 render 函数 |
-| description | `string \| (() => VNode \| Array<VNode>)` | 可以是 render 函数 |
-| meta | `string \| (() => VNode \| Array<VNode>)` | 可以是 render 函数 |
-| title | `string \| (() => VNode \| Array<VNode>)` | 可以是 render 函数 |
+| content | `string \| (() => VNodeChild)` | 可以是 render 函数 |
+| description | `string \| (() => VNodeChild)` | 可以是 render 函数 |
+| meta | `string \| (() => VNodeChild)` | 可以是 render 函数 |
+| title | `string \| (() => VNodeChild)` | 可以是 render 函数 |
 | onAfterEnter | `Function` |  |
 | onAfterLeave | `Function` |  |
 | onClose | `() => boolean \| Promise<boolean>` | 关闭通知的回调。返回 `false`、Promise resolve `false` 或者 reject 会取消这次关闭 |

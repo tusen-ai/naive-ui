@@ -69,14 +69,14 @@ duration
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| action | `string \| (() => VNode \| Array<VNode>)` | `undefined` | Can be a render function. |
-| avatar | `() => VNode \| Array<VNode>` | `undefined` | Can be a render function. |
+| action | `string \| (() => VNodeChild)` | `undefined` | Can be a render function. |
+| avatar | `() => VNodeChild` | `undefined` | Can be a render function. |
 | closable | `boolean` | `true` |  |
-| content | `string \| (() => VNode \| Array<VNode>)` | `undefined` | Can be a render function. |
-| description | `string \| (() => VNode \| Array<VNode>)` | `undefined` | Can be a render function. |
+| content | `string \| (() => VNodeChild)` | `undefined` | Can be a render function. |
+| description | `string \| (() => VNodeChild)` | `undefined` | Can be a render function. |
 | duration | `number` | `undefined` | If not set, it won't automatically close. Unit is millisecond. |
-| meta | `string \| (() => VNode \| Array<VNode>)` | `undefined` | Can be a render function. |
-| title | `string \| (() => VNode \| Array<VNode>)` | `undefined` | Can be a render function. |
+| meta | `string \| (() => VNodeChild)` | `undefined` | Can be a render function. |
+| title | `string \| (() => VNodeChild)` | `undefined` | Can be a render function. |
 | onAfterEnter | `Function` | `undefined` |  |
 | onAfterLeave | `Function` | `undefined` |  |
 | onClose | `() => boolean \| Promise<boolean>` | `undefined` | The callback of notification closing. Returning `false`, promise resolve `false` or promise reject will cancel this closing. |
@@ -90,13 +90,13 @@ Properties of NotificationReactive can be dynamically changed.
 
 | Name | Type | Description |
 | --- | --- | --- |
-| action | `string \| (() => VNode \| Array<VNode>)` | Can be a render function. |
-| avatar | `() => VNode \| Array<VNode>` | Can be a render function. |
+| action | `string \| (() => VNodeChild)` | Can be a render function. |
+| avatar | `() => VNodeChild` | Can be a render function. |
 | closable | `boolean` |  |
-| content | `string \| (() => VNode \| Array<VNode>)` | Can be a render function. |
-| description | `string \| (() => VNode \| Array<VNode>)` | Can be a render function. |
-| meta | `string \| (() => VNode \| Array<VNode>)` | Can be a render function. |
-| title | `string \| (() => VNode \| Array<VNode>)` | Can be a render function. |
+| content | `string \| (() => VNodeChild)` | Can be a render function. |
+| description | `string \| (() => VNodeChild)` | Can be a render function. |
+| meta | `string \| (() => VNodeChild)` | Can be a render function. |
+| title | `string \| (() => VNodeChild)` | Can be a render function. |
 | onAfterEnter | `Function` |  |
 | onAfterLeave | `Function` |  |
 | onClose | `() => boolean \| Promise<boolean>` | The callback of notification closing. Returning `false`, promise resolve `false` or promise reject will cancel this closing. |

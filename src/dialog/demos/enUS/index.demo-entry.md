@@ -57,14 +57,14 @@ use-component
 | --- | --- | --- | --- |
 | bordered | `boolean` | `false` |  |
 | closable | `boolean` | `true` |  |
-| content | `string \| (() => VNode \| Array<VNode>)` | `undefined` | Can be a render function. |
+| content | `string \| (() => VNodeChild)` | `undefined` | Can be a render function. |
 | icon-placement | `'left' \| 'top'` | `'left'` |  |
-| icon | `() => VNode \| Array<VNode>` | `undefined` | Render function. |
+| icon | `() => VNodeChild` | `undefined` | Render function. |
 | loading | `boolean` | `false` |  |
 | negative-text | `string` | `undefined` | Corresponding button won't show if not set. |
 | positive-text | `string` | `undefined` | Corresponding button won't show if not set. |
 | show-icon | `boolean` | `true` |  |
-| title | `string \| (() => VNode \| Array<VNode>)` | `undefined` | Can be a render function. |
+| title | `string \| (() => VNodeChild)` | `undefined` | Can be a render function. |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` |  |
 | onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior. |
 | onNegativeClick | `() => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior. |
@@ -80,14 +80,14 @@ All the properties can be modified dynamically.
 | --- | --- | --- | --- |
 | bordered | `boolean` |  |
 | closable | `boolean` |  |
-| content | `string \| (() => VNode \| Array<VNode>)` | Can be a render function. |
+| content | `string \| (() => VNodeChild)` | Can be a render function. |
 | icon-placement | `'left' \| 'top'` | `'left'` |  |
-| icon | `() => VNode \| Array<VNode>` | Render function. |
+| icon | `() => VNodeChild` | Render function. |
 | loading | `boolean` |  |
 | negative-text | `string` | Corresponding button won't show if not set. |
 | positive-text | `string` | Corresponding button won't show if not set. |
 | show-icon | `boolean` |  |
-| title | `string \| (() => VNode \| Array<VNode>)` | Can be a render function. |
+| title | `string \| (() => VNodeChild)` | Can be a render function. |
 | type | `'error \| 'success' \| 'warning'` |  |
 | onClose | `() => boolean \| Promise<boolean> \| any` |  |
 | onNegativeClick | `() => boolean \| Promise<boolean> \| any` |  |
@@ -107,14 +107,14 @@ All the properties can be modified dynamically.
 | --- | --- | --- | --- |
 | bordered | `boolean` | `false` |  |
 | closable | `boolean` | `boolean` |  |
-| content | `string \| (() => VNode \| Array<VNode>)` | `undefined` | Can be a render function. |
+| content | `string \| (() => VNodeChild)` | `undefined` | Can be a render function. |
 | icon-placement | `'left' \| 'top'` | `'left'` |  |
-| icon | `() => VNode \| Array<VNode>` | `undefined` | Render function. |
+| icon | `() => VNodeChild` | `undefined` | Render function. |
 | loading | `boolean` | `false` |  |
 | negative-text | `string` | `undefined` | Corresponding button won't show if not set. |
 | positive-text | `string` | `undefined` | Corresponding button won't show if not set. |
 | show-icon | `boolean` | `true` |  |
-| title | `string \| (() => VNode \| Array<VNode>)` | `undefined` | Can be a render function. |
+| title | `string \| (() => VNodeChild)` | `undefined` | Can be a render function. |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` |  |
 | on-close | `() => void` |  |
 | on-negative-click | `() => void` |  |

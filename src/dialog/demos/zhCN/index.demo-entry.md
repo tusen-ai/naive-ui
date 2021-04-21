@@ -58,14 +58,14 @@ use-component
 | --- | --- | --- | --- |
 | bordered | `boolean` | `false` |  |
 | closable | `boolean` | `true` |  |
-| content | `string \| (() => VNode \| Array<VNode>)` | `undefined` | 可以是 render 函数 |
+| content | `string \| (() => VNodeChild)` | `undefined` | 可以是 render 函数 |
 | icon-placement | `'left' \| 'top'` | `'left'` |  |
-| icon | `() => VNode \| Array<VNode>` | `undefined` | 需要是 render 函数 |
+| icon | `() => VNodeChild` | `undefined` | 需要是 render 函数 |
 | loading | `boolean` | `false` |  |
 | negative-text | `string` | `undefined` | 不填对应的按钮不会出现 |
 | positive-text | `string` | `undefined` | 不填对应的按钮不会出现 |
 | show-icon | `boolean` | `true` |  |
-| title | `string \| (() => VNode \| Array<VNode>)` | `undefined` | 可以是 render 函数 |
+| title | `string \| (() => VNodeChild)` | `undefined` | 可以是 render 函数 |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` |  |
 | onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为 |
 | onNegativeClick | `() => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为 |
@@ -81,14 +81,14 @@ use-component
 | --- | --- | --- | --- |
 | bordered | `boolean` |  |
 | closable | `boolean` |  |
-| content | `string \| (() => VNode \| Array<VNode>)` | 可以是 render 函数 |
+| content | `string \| (() => VNodeChild)` | 可以是 render 函数 |
 | icon-placement | `'left' \| 'top'` | `'left'` |  |
-| icon | `() => VNode \| Array<VNode>` | 需要是 render 函数 |
+| icon | `() => VNodeChild` | 需要是 render 函数 |
 | loading | `boolean` |  |
 | negative-text | `string` | 不填对应的按钮不会出现 |
 | positive-text | `string` | 不填对应的按钮不会出现 |
 | show-icon | `boolean` |  |
-| title | `string \| (() => VNode \| Array<VNode>)` | 可以是 render 函数 |
+| title | `string \| (() => VNodeChild)` | 可以是 render 函数 |
 | type | `'error \| 'success' \| 'warning'` |  |
 | onClose | `() => boolean \| Promise<boolean> \| any` |  |
 | onNegativeClick | `() => boolean \| Promise<boolean> \| any` |  |
@@ -108,13 +108,13 @@ use-component
 | --- | --- | --- | --- |
 | bordered | `boolean` | `false` |  |
 | closable | `boolean` | `boolean` |  |
-| content | `string \| (() => VNode \| Array<VNode>)` | `undefined` | 可以是 render 函数 |
-| icon | `() => VNode \| Array<VNode>` | `undefined` | 需要是 render 函数 |
+| content | `string \| (() => VNodeChild)` | `undefined` | 可以是 render 函数 |
+| icon | `() => VNodeChild` | `undefined` | 需要是 render 函数 |
 | loading | `boolean` | `false` |  |
 | negative-text | `string` | `undefined` | 不填对应的按钮不会出现 |
 | positive-text | `string` | `undefined` | 不填对应的按钮不会出现 |
 | show-icon | `boolean` | `true` |  |
-| title | `string \| (() => VNode \| Array<VNode>)` | `undefined` | 可以是 render 函数 |
+| title | `string \| (() => VNodeChild)` | `undefined` | 可以是 render 函数 |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` |  |
 | on-close | `() => void` |  |
 | on-negative-click | `() => void` |  |
