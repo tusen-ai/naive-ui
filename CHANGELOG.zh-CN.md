@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.7.2
 
 ## Feats
 
