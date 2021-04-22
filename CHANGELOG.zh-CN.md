@@ -1,8 +1,14 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修正 `n-p`、`n-ol`、`n-ul` 作为最后一个子元素 margin bottom 不是 0
+
 ## 2.7.3
 
-## Feats
+### Feats
 
 - `n-data-table` 高亮排序列
 - `n-data-table` 列增加 `render-filter` 属性
@@ -16,7 +22,7 @@
 
 ## 2.7.2
 
-## Feats
+### Feats
 
 - `n-data-table` 增加 `summary` 属性
 - `n-data-table` 在 `'type=selection'` 的列增加 `options` 选项

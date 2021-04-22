@@ -8,6 +8,15 @@ const liStyle = c('li', {
   color: 'var(--text-color)'
 })
 
+const childStyle = [
+  c('&:first-child', `
+    margin-top: 0;
+  `),
+  c('&:last-child', `
+    margin-bottom: 0;
+  `)
+]
+
 // vars:
 // --bezier
 // --font-size
@@ -24,7 +33,8 @@ export default c([
     cM('align-text', {
       paddingLeft: 0
     }),
-    liStyle
+    liStyle,
+    childStyle
   ]),
   cB('ul', {
     fontSize: 'var(--font-size)',
@@ -33,6 +43,7 @@ export default c([
     cM('align-text', {
       paddingLeft: 0
     }),
-    liStyle
+    liStyle,
+    childStyle
   ])
 ])

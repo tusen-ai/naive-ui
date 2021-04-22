@@ -1,8 +1,14 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-p`, `n-ol`, `n-ul` margin bottom is not 0 when they are last child.
+
 ## 2.7.3
 
-## Feats
+### Feats
 
 - `n-data-table` highlight sorted col.
 - `n-data-table` col add `render-filter` prop.
@@ -16,7 +22,7 @@
 
 ## 2.7.2
 
-## Feats
+### Feats
 
 - `n-data-table` add `summary` prop.
 - `n-data-table` add `options` on `'type=selection'` column.
@@ -27,7 +33,7 @@
 
 ## 2.7.1
 
-# Feats
+### Feats
 
 - `n-checkbox` add `focusable` prop.
 - `n-cascader` add `action` slot.

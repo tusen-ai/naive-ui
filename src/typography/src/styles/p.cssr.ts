@@ -14,7 +14,6 @@ export default cB('p', `
   line-height: var(--line-height);
   color: var(--text-color);
 `, [
-  c('&:first-child', {
-    marginTop: 0
-  })
+  c('&:first-child', 'margin-top: 0;'),
+  c('&:last-child', 'margin-bottom: 0;')
 ])
