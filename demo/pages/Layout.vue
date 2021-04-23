@@ -26,7 +26,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { findMenuValue } from '../utils/route'
 import { useIsXs } from '../utils/composables'
 import { useDocOptions, useComponentOptions } from '../store'
-import { useBreakpoint, useMemo } from 'vooks'
+import { useMemo } from 'vooks'
 
 export default {
   setup () {
@@ -54,15 +54,15 @@ export default {
         layoutInstRef.value.scrollTo(0, 0)
       }
     })
-    const breakpointRef = useBreakpoint()
+    const isXsRef = useIsXs()
     return {
       showSider: useMemo(() => {
-        return breakpointRef.value !== 'xs'
+        return !isXsRef.value
       }),
       layoutInstRef,
       options: optionsRef,
       menuValue: menuValueRef,
-      isXs: useIsXs(),
+      isXs: isXsRef,
       handleMenuUpdateValue: (_, option) => {
         router.push(option.path)
       }

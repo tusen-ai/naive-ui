@@ -61,7 +61,7 @@
         />
       </div>
     </n-popover>
-    <div style="display: flex" v-else-if="isM">
+    <!-- <div style="display: flex" v-else-if="isM">
       <n-popover
         style="padding: 0; width: 180px"
         placement="bottom-end"
@@ -78,48 +78,33 @@
           @update:value="handleUpdateMMenu"
         />
       </n-popover>
-    </div>
-    <div style="display: flex" v-else>
-      <n-button size="small" class="nav-picker" @click="handleThemeUpdate">
+    </div> -->
+    <div class="nav-end" v-else>
+      <n-button text class="nav-picker" @click="handleThemeUpdate">
         {{ themeLabelMap[theme] }}
       </n-button>
-      <n-popselect
-        :options="localeOptions"
-        v-model:value="locale"
-        overlap
-        placement="top"
-        trigger="click"
-      >
-        <n-button size="small" class="nav-picker">
-          {{ localeLabelMap[locale] }}
-        </n-button>
-      </n-popselect>
-      <n-popselect
-        v-if="tusimple || dev"
-        :options="configProviderOptions"
-        v-model:value="configProviderName"
-        overlap
-        placement="top"
-        trigger="click"
-      >
-        <n-button size="small" class="nav-picker">
-          {{ cfgProviderLabelMap[configProviderName] }}
-        </n-button>
-      </n-popselect>
-      <n-popselect
-        v-if="dev"
-        :options="displayModeOptions"
-        v-model:value="displayMode"
-        overlap
-        placement="top"
-        trigger="click"
-      >
-        <n-button size="small" class="nav-picker">{{
-          displayModeLabelMap[displayMode]
-        }}</n-button>
-      </n-popselect>
-      <n-button size="small">
+      <n-button text class="nav-picker" @click="handleLocaleUpdate">
+        {{ localeLabelMap[locale] }}
+      </n-button>
+      <n-button text class="nav-picker">Github</n-button>
+      <n-text class="nav-picker">
         {{ version }}
+      </n-text>
+      <n-button
+        v-if="dev"
+        text
+        class="nav-picker"
+        @click="handleDisplayModeUpdate"
+      >
+        {{ displayModeLabelMap[displayMode] }}
+      </n-button>
+      <n-button
+        v-if="tusimple || dev"
+        text
+        class="nav-picker"
+        @click="handleConfigProviderUpdate"
+      >
+        {{ cfgProviderLabelMap[configProviderName] }}
       </n-button>
     </div>
   </n-layout-header>
@@ -237,27 +222,27 @@ export default {
     })
 
     // m options
-    const mMenuOptionsRef = computed(() => [
-      {
-        key: 'theme',
-        title: themeLabelMapRef.value[themeNameRef.value]
-      },
-      {
-        key: 'locale',
-        title: localeNameRef.value === 'zh-CN' ? 'English' : '中文'
-      }
-    ])
-    function handleUpdateMMenu (value, { path }) {
-      if (value === 'theme') {
-        handleThemeUpdate()
-      } else if (value === 'locale') {
-        if (localeNameRef.value === 'zh-CN') {
-          localeNameRef.value = 'en-US'
-        } else {
-          localeNameRef.value = 'zh-CN'
-        }
-      }
-    }
+    // const mMenuOptionsRef = computed(() => [
+    //   {
+    //     key: 'theme',
+    //     title: themeLabelMapRef.value[themeNameRef.value]
+    //   },
+    //   {
+    //     key: 'locale',
+    //     title: localeNameRef.value === 'zh-CN' ? 'English' : '中文'
+    //   }
+    // ])
+    // function handleUpdateMMenu (value, { path }) {
+    //   if (value === 'theme') {
+    //     handleThemeUpdate()
+    //   } else if (value === 'locale') {
+    //     if (localeNameRef.value === 'zh-CN') {
+    //       localeNameRef.value = 'en-US'
+    //     } else {
+    //       localeNameRef.value = 'zh-CN'
+    //     }
+    //   }
+    // }
 
     // s opitions
     const sMenuOptionsRef = computed(() => {
@@ -366,50 +351,41 @@ export default {
       'zh-CN': 'English',
       'en-US': '中文'
     }
-    const localeOptions = [
-      {
-        label: 'English',
-        value: 'en-US'
-      },
-      {
-        label: '中文',
-        value: 'zh-CN'
+    function handleLocaleUpdate () {
+      if (localeNameRef.value === 'zh-CN') {
+        localeNameRef.value = 'en-US'
+      } else {
+        localeNameRef.value = 'zh-CN'
       }
-    ]
+    }
 
     // display mode
     const displayModeRef = useDisplayMode()
     const displayModeLabelMap = {
-      common: 'Prod',
-      debug: 'Debug'
+      common: 'Debug',
+      debug: 'Prod'
     }
-    const displayModeOptions = [
-      {
-        label: 'Prod',
-        value: 'common'
-      },
-      {
-        label: 'Debug',
-        value: 'debug'
+    function handleDisplayModeUpdate () {
+      if (displayModeRef.value === 'common') {
+        displayModeRef.value = 'debug'
+      } else {
+        displayModeRef.value = 'common'
       }
-    ]
+    }
 
     // config provider
     const configProviderNameRef = useConfigProviderName()
     const cfgProviderLabelMapRef = computed(() => ({
-      tusimple: t('tusimpleTheme'),
-      default: t('defaultTheme')
+      tusimple: t('defaultTheme'),
+      default: t('tusimpleTheme')
     }))
-    const configProviderOptionsRef = computed(() => [
-      {
-        label: t('defaultTheme'),
-        value: 'default'
-      },
-      {
-        label: t('tusimpleTheme'),
-        value: 'tusimple'
+    function handleConfigProviderUpdate () {
+      if (configProviderNameRef.value === 'tusimple') {
+        configProviderNameRef.value = 'default'
+      } else {
+        configProviderNameRef.value = 'tusimple'
       }
-    ])
+    }
 
     // search
     const searchableOptionsRef = useFlattenedDocOptions()
@@ -468,15 +444,15 @@ export default {
       // displayMode
       displayMode: displayModeRef,
       displayModeLabelMap,
-      displayModeOptions,
+      handleDisplayModeUpdate,
       // locale
       locale: localeNameRef,
       localeLabelMap,
-      localeOptions,
+      handleLocaleUpdate,
       // configProvider
       configProviderName: configProviderNameRef,
-      configProviderOptions: configProviderOptionsRef,
       cfgProviderLabelMap: cfgProviderLabelMapRef,
+      handleConfigProviderUpdate,
       // search
       searchPattern: searchPatternRef,
       searchOptions: searchOptionsRef,
@@ -486,9 +462,9 @@ export default {
       menuValue: menuValueRef,
       handleMenuUpdateValue,
       // m menu
-      mMenuOptions: mMenuOptionsRef,
-      handleUpdateMMenu,
-      mMenuValue: null,
+      // mMenuOptions: mMenuOptionsRef,
+      // handleUpdateMMenu,
+      // mMenuValue: null,
       // s menu
       sMenuOptions: sMenuOptionsRef,
       handleUpdateSMenu,
@@ -542,11 +518,16 @@ export default {
 }
 
 .nav-picker {
-  margin-right: 12px;
+  margin-right: 24px;
 }
 
 .nav-picker:last-child {
   margin-right: 0;
+}
+
+.nav-end {
+  display: flex;
+  align-items: center;
 }
 </style>
 

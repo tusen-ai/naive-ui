@@ -3,7 +3,7 @@
 Use checkbox with grid.
 
 ```html
-<n-checkbox-group v-model:value="value">
+<n-checkbox-group>
   <n-grid :y-gap="8" :cols="2">
     <n-gi>
       <n-checkbox value="Pushes Open" label="Pushes Open" />
