@@ -9,6 +9,7 @@
 ### Fixes
 
 - Fix `n-p`, `n-ol`, `n-ul` margin bottom is not 0 when they are last child.
+- Fix `n-checkbox-group` not working in uncontrolled mode.
 
 ## 2.7.3
 

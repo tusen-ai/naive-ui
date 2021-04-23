@@ -100,6 +100,7 @@ export default defineComponent({
             if (_onUpdateValue) call(_onUpdateValue, groupValue)
             nTriggerFormInput()
             nTriggerFormChange()
+            uncontrolledValueRef.value = groupValue
             // deprecated
             if (onChange) call(onChange, groupValue)
           }
@@ -109,6 +110,7 @@ export default defineComponent({
             if (onUpdateValue) call(onUpdateValue, groupValue)
             if (_onUpdateValue) call(_onUpdateValue, groupValue)
             if (onChange) call(onChange, groupValue) // deprecated
+            uncontrolledValueRef.value = groupValue
             nTriggerFormInput()
             nTriggerFormChange()
           }
@@ -118,12 +120,14 @@ export default defineComponent({
           if (onUpdateValue) call(onUpdateValue, [checkboxValue])
           if (_onUpdateValue) call(_onUpdateValue, [checkboxValue])
           if (onChange) call(onChange, [checkboxValue]) // deprecated
+          uncontrolledValueRef.value = [checkboxValue]
           nTriggerFormInput()
           nTriggerFormChange()
         } else {
           if (onUpdateValue) call(onUpdateValue, [])
           if (_onUpdateValue) call(_onUpdateValue, [])
           if (onChange) call(onChange, []) // deprecated
+          uncontrolledValueRef.value = []
           nTriggerFormInput()
           nTriggerFormChange()
         }
