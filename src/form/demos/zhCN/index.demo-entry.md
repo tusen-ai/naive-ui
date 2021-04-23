@@ -12,6 +12,7 @@ custom-rule
 custom-validation
 top
 left
+item-only
 async
 height-debug
 validator-debug
@@ -72,10 +73,7 @@ validator-debug
 ### Form Methods
 
 <n-alert type="warning" title="Validate 方法的注意事项" style="margin-bottom: 16px;">
-  <n-ol align-text>
-    <n-li>验证只会在有 <n-text code>path</n-text> 属性的表项上执行</n-li>
-    <n-li>默认情况下，验证将会在合法表项的所有规则上进行，不管规则的 trigger 是什么</n-li>
-  </n-ol>
+  默认情况下，验证将会在合法表项的所有规则上进行，不管规则的 trigger 是什么
 </n-alert>
 
 | 名称 | 类型 | 说明 |

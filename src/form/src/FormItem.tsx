@@ -239,20 +239,14 @@ export default defineComponent({
       errors?: ErrorList
     }> => {
       const { path } = props
-      // If no path or NForm is specified, not data will be validated, so any
-      // value will be valid.
-      if (!path || !NForm) {
-        return Promise.resolve({
-          valid: true
-        })
-      }
       if (!options) {
         options = {}
       } else {
         if (!options.first) options.first = props.first
       }
       const { value: rules } = mergedRulesRef
-      const value = get(NForm.model, path, null)
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const value = NForm ? get(NForm.model, path!, null) : undefined
       const activeRules = (!trigger
         ? rules
         : rules.filter((rule) => {
@@ -284,10 +278,11 @@ export default defineComponent({
           valid: true
         })
       }
-      const validator = new Schema({ [path]: activeRules })
+      const mergedPath = path ?? '__n_no_path__'
+      const validator = new Schema({ [mergedPath]: activeRules })
       return new Promise((resolve, reject) => {
         void validator.validate(
-          { [path]: value },
+          { [mergedPath]: value },
           options,
           (errors, fields) => {
             if (errors?.length) {
@@ -405,7 +400,6 @@ export default defineComponent({
               ) : null}
           </label>
         ) : null}
-
         <div
           class={[
             `${mergedClsPrefix}-form-item-blank`,

@@ -12,6 +12,7 @@ custom-rule
 custom-validation
 top
 left
+item-only
 async
 ```
 
@@ -71,10 +72,7 @@ Accept all props from FormItem & [GridItem](grid#GridItem-Props)
 ### Form Methods
 
 <n-alert type="warning" title="Caveat on Validate Method" style="margin-bottom: 16px;">
-  <n-ol align-text>
-    <n-li>Validation will only be executed on form items which have a <n-text code>path</n-text></n-li>
-    <n-li>By default, validation will use all rules regardless of the triggers of the rules.</n-li>
-  </n-ol>
+  By default, validation will use all rules regardless of the triggers of the rules.
 </n-alert>
 
 | Name | Type | Description |

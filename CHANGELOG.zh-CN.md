@@ -2,6 +2,10 @@
 
 ## Pending
 
+## Feats
+
+- `n-form-item` 可以在 `n-form` 外使用
+
 ### Fixes
 
 - 修正 `n-p`、`n-ol`、`n-ul` 作为最后一个子元素 margin bottom 不是 0

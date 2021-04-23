@@ -2,6 +2,10 @@
 
 ## Pending
 
+## Feats
+
+- `n-form-item` works without `n-form`.
+
 ### Fixes
 
 - Fix `n-p`, `n-ol`, `n-ul` margin bottom is not 0 when they are last child.
