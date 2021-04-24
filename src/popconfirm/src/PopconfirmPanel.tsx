@@ -37,17 +37,19 @@ export default defineComponent({
   name: 'NPopconfirmPanel',
   props: panelProps,
   setup (props) {
-    const { locale: localeRef } = useLocale('Popconfirm')
+    const { localeRef } = useLocale('Popconfirm')
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const NPopconfirm = inject(popconfirmInjectionKey)!
+    const { mergedClsPrefixRef, mergedThemeRef } = inject(
+      popconfirmInjectionKey
+    )!
     return {
       ...useLocale('Popconfirm'),
-      mergedClsPrefix: NPopconfirm.mergedClsPrefixRef,
+      mergedClsPrefix: mergedClsPrefixRef,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
           self: { fontSize, iconSize, iconColor }
-        } = NPopconfirm.mergedThemeRef.value
+        } = mergedThemeRef.value
         return {
           '--bezier': cubicBezierEaseInOut,
           '--font-size': fontSize,

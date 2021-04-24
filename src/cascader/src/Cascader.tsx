@@ -148,7 +148,7 @@ export default defineComponent({
       props,
       mergedClsPrefix
     )
-    const { locale } = useLocale('Cascader')
+    const { localeRef } = useLocale('Cascader')
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = computed(() => props.value)
     const mergedValueRef = useMergedState(
@@ -357,7 +357,7 @@ export default defineComponent({
     const localizedPlaceholderRef = computed(() => {
       const { placeholder } = props
       if (placeholder !== undefined) return placeholder
-      return locale.value.placeholder
+      return localeRef.value.placeholder
     })
     // select option related
     const showSelectMenuRef = computed(() => {
@@ -685,7 +685,7 @@ export default defineComponent({
       expandTriggerRef: toRef(props, 'expandTrigger'),
       isMountedRef: useIsMounted(),
       onLoadRef: toRef(props, 'onLoad'),
-      localeRef: locale,
+      localeRef,
       syncCascaderMenuPosition,
       syncSelectMenuPosition,
       updateKeyboardKey,

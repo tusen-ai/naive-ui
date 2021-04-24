@@ -80,11 +80,11 @@
       </n-popover>
     </div> -->
     <div class="nav-end" v-else>
-      <n-button text class="nav-picker" @click="handleThemeUpdate">
-        {{ themeLabelMap[theme] }}
-      </n-button>
       <n-button text class="nav-picker" @click="handleLocaleUpdate">
         {{ localeLabelMap[locale] }}
+      </n-button>
+      <n-button text class="nav-picker" @click="handleThemeUpdate">
+        {{ themeLabelMap[theme] }}
       </n-button>
       <n-button text class="nav-picker">Github</n-button>
       <n-text class="nav-picker">

@@ -123,7 +123,7 @@ export default defineComponent({
   name: 'DatePicker',
   props: datePickerProps,
   setup (props) {
-    const { locale, dateLocale } = useLocale('DatePicker')
+    const { localeRef, dateLocaleRef } = useLocale('DatePicker')
     const formItem = useFormItem(props)
     const {
       NConfigProvider,
@@ -154,7 +154,7 @@ export default defineComponent({
     )
     const dateFnsOptionsRef = computed(() => {
       return {
-        locale: dateLocale.value.locale
+        locale: dateLocaleRef.value.locale
       }
     })
     const timePickerSizeRef = computed<TimePickerSize>(() => {
@@ -169,9 +169,9 @@ export default defineComponent({
     const localizedPlacehoderRef = computed(() => {
       if (props.placeholder === undefined) {
         if (props.type === 'date') {
-          return locale.value.datePlaceholder
+          return localeRef.value.datePlaceholder
         } else if (props.type === 'datetime') {
-          return locale.value.datetimePlaceholder
+          return localeRef.value.datetimePlaceholder
         }
         return props.placeholder
       } else {
@@ -181,9 +181,9 @@ export default defineComponent({
     const localizedStartPlaceholderRef = computed(() => {
       if (props.startPlaceholder === undefined) {
         if (props.type === 'daterange') {
-          return locale.value.startDatePlaceholder
+          return localeRef.value.startDatePlaceholder
         } else if (props.type === 'datetimerange') {
-          return locale.value.startDatetimePlaceholder
+          return localeRef.value.startDatetimePlaceholder
         }
         return ''
       } else {
@@ -193,9 +193,9 @@ export default defineComponent({
     const localizedEndPlaceholderRef = computed(() => {
       if (props.endPlaceholder === undefined) {
         if (props.type === 'daterange') {
-          return locale.value.endDatePlaceholder
+          return localeRef.value.endDatePlaceholder
         } else if (props.type === 'datetimerange') {
-          return locale.value.endDatetimePlaceholder
+          return localeRef.value.endDatetimePlaceholder
         }
         return ''
       } else {
@@ -404,8 +404,8 @@ export default defineComponent({
       mergedClsPrefixRef: mergedClsPrefix,
       mergedThemeRef: themeRef,
       timePickerSizeRef,
-      localeRef: locale,
-      dateLocaleRef: dateLocale,
+      localeRef,
+      dateLocaleRef,
       valueRef: mergedValueRef,
       isDateDisabledRef: toRef(props, 'isDateDisabled'),
       ...uniVaidation,

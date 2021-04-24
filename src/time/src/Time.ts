@@ -33,10 +33,10 @@ export default defineComponent({
   name: 'Time',
   props: timeProps,
   setup (props) {
-    const { locale, dateLocale } = useLocale('Time')
+    const { localeRef, dateLocaleRef } = useLocale('Time')
     const dateFnsOptionsRef = computed(() => {
       return {
-        locale: dateLocale.value.locale
+        locale: dateLocaleRef.value.locale
       }
     })
     const mergedTimeRef = computed(() => {
@@ -61,19 +61,19 @@ export default defineComponent({
       } else if (props.type === 'date') {
         return format(
           mergedTimeRef.value,
-          locale.value.dateFormat,
+          localeRef.value.dateFormat,
           dateFnsOptionsRef.value
         )
       } else if (props.type === 'datetime') {
         return format(
           mergedTimeRef.value,
-          locale.value.dateTimeFormat,
+          localeRef.value.dateTimeFormat,
           dateFnsOptionsRef.value
         )
       } else {
         return formatDistance(mergedTimeRef.value, mergedToRef.value, {
           addSuffix: true,
-          locale: dateLocale.value.locale
+          locale: dateLocaleRef.value.locale
         })
       }
     })

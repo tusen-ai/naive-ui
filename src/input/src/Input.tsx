@@ -170,7 +170,7 @@ export default defineComponent({
     const inputElRef = ref<HTMLInputElement | null>(null)
     const inputEl2Ref = ref<HTMLInputElement | null>(null)
     // local
-    const { locale } = useLocale('Input')
+    const { localeRef } = useLocale('Input')
     // value
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
@@ -198,7 +198,7 @@ export default defineComponent({
         }
         return [placeholder, placeholder]
       } else if (placeholder === undefined) {
-        return [locale.value.placeholder]
+        return [localeRef.value.placeholder]
       } else {
         return [placeholder] as [string]
       }

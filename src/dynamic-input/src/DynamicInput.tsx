@@ -220,7 +220,7 @@ export default defineComponent({
       placeholderRef: toRef(props, 'placeholder')
     })
     return {
-      ...useLocale('DynamicInput'),
+      locale: useLocale('DynamicInput').localeRef,
       buttonSize: buttonSizeRef,
       mergedClsPrefix,
       NFormItem,

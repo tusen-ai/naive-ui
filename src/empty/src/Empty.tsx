@@ -46,11 +46,11 @@ export default defineComponent({
       props,
       mergedClsPrefix
     )
-    const { locale } = useLocale('Empty')
+    const { localeRef } = useLocale('Empty')
     return {
       mergedClsPrefix,
       localizedDescription: computed(() => {
-        return props.description || locale.value.description
+        return props.description || localeRef.value.description
       }),
       cssVars: computed(() => {
         const { size } = props

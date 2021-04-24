@@ -118,7 +118,7 @@ export default defineComponent({
     let upcomingValue: string | null = null
 
     const formItemRef = useFormItem(props)
-    const { locale: localeRef } = useLocale('global')
+    const { localeRef } = useLocale('global')
     const { mergedClsPrefix: mergedClsPrefixRef, namespace } = useConfig(props)
 
     const themeRef = useTheme(

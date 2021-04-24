@@ -66,7 +66,7 @@ export default defineComponent({
   props: dynamicTagsProps,
   setup (props) {
     const { mergedClsPrefix } = useConfig(props)
-    const { locale } = useLocale('DynamicTags')
+    const { localeRef } = useLocale('DynamicTags')
     const formItem = useFormItem(props)
     const inputValueRef = ref('')
     const showInputRef = ref(false)
@@ -88,7 +88,7 @@ export default defineComponent({
     )
 
     const localizedAddRef = computed(() => {
-      return locale.value.add
+      return localeRef.value.add
     })
     const inputSizeRef = computed(() => {
       return smallerSize(props.size)

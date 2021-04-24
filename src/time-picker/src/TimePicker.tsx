@@ -128,7 +128,7 @@ export default defineComponent({
   props: timePickerProps,
   setup (props) {
     const { mergedBordered, mergedClsPrefix, namespace } = useConfig(props)
-    const { locale, dateLocale } = useLocale('TimePicker')
+    const { localeRef, dateLocaleRef } = useLocale('TimePicker')
     const formItem = useFormItem(props)
     const themeRef = useTheme(
       'TimePicker',
@@ -152,7 +152,7 @@ export default defineComponent({
     )
     const dateFnsOptionsRef = computed(() => {
       return {
-        locale: dateLocale.value.locale
+        locale: dateLocaleRef.value.locale
       }
     })
     const { value: mergedValue } = mergedValueRef
@@ -166,17 +166,17 @@ export default defineComponent({
     const transitionDisabledRef = ref(false)
 
     const localizedNowRef = computed(() => {
-      return locale.value.now
+      return localeRef.value.now
     })
     const localizedPlaceholderRef = computed(() => {
       if (props.placeholder !== undefined) return props.placeholder
-      return locale.value.placeholder
+      return localeRef.value.placeholder
     })
     const localizedNegativeTextRef = computed(() => {
-      return locale.value.negativeText
+      return localeRef.value.negativeText
     })
     const localizedPositiveTextRef = computed(() => {
-      return locale.value.positiveText
+      return localeRef.value.positiveText
     })
     const hourInFormatRef = computed(() => {
       return /H|h|K|k/.test(props.format)

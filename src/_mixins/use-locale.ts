@@ -5,8 +5,8 @@ import { configProviderInjectionKey } from '../config-provider/src/ConfigProvide
 export default function createLocaleMixin<T extends keyof typeof enUS> (
   ns: T
 ): {
-    locale: Ref<typeof enUS[T]>
-    dateLocale: Ref<typeof dateEnUS>
+    localeRef: Ref<typeof enUS[T]>
+    dateLocaleRef: Ref<typeof dateEnUS>
   } {
   const NConfigProvider = inject(configProviderInjectionKey, null)
   const localeRef = computed(() => {
@@ -18,7 +18,7 @@ export default function createLocaleMixin<T extends keyof typeof enUS> (
     return mergedDateLocaleRef?.value ?? dateEnUS
   })
   return {
-    dateLocale: dateLocaleRef,
-    locale: localeRef
+    dateLocaleRef,
+    localeRef
   }
 }

@@ -273,7 +273,7 @@ export default defineComponent({
       mainTableInstRef,
       mergedCurrentPageRef
     })
-    const { locale } = useLocale('DataTable')
+    const { localeRef } = useLocale('DataTable')
     provide(dataTableInjectionKey, {
       hoverKeyRef,
       mergedClsPrefixRef: mergedClsPrefix,
@@ -298,7 +298,7 @@ export default defineComponent({
       rowClassNameRef: toRef(props, 'rowClassName'),
       mergedCheckedRowKeysRef,
       mergedExpandedRowKeysRef,
-      localeRef: locale,
+      localeRef,
       rowKeyRef: toRef(props, 'rowKey'),
       renderExpandRef,
       summaryRef: toRef(props, 'summary'),

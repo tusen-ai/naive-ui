@@ -11,7 +11,9 @@ export default defineComponent({
     }
   },
   setup () {
-    return useLocale('Log')
+    return {
+      locale: useLocale('Log').localeRef
+    }
   },
   render () {
     const { clsPrefix } = this

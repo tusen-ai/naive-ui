@@ -84,7 +84,7 @@ export default defineComponent({
       props,
       mergedClsPrefix
     )
-    const { locale } = useLocale('InputNumber')
+    const { localeRef } = useLocale('InputNumber')
     const formItem = useFormItem(props)
     // dom ref
     const inputInstRef = ref<InputInst | null>(null)
@@ -101,7 +101,7 @@ export default defineComponent({
     const mergedPlaceholderRef = useMemo(() => {
       const { placeholder } = props
       if (placeholder !== undefined) return placeholder
-      return locale.value.placeholder
+      return localeRef.value.placeholder
     })
     const mergedStepRef = useMemo(() => {
       const parsedNumber = parseNumber(props.step)

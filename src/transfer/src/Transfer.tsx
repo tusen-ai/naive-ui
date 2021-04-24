@@ -229,9 +229,10 @@ export default defineComponent({
       handleSrcCheckboxClick,
       handleTgtCheckboxClick
     })
+    const { localeRef } = useLocale('Transfer')
     return {
       ...formItem,
-      ...useLocale('Transfer'),
+      locale: localeRef,
       mergedClsPrefix,
       itemSize: itemSizeRef,
       isMounted: useIsMounted(),

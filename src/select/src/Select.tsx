@@ -227,9 +227,9 @@ export default defineComponent({
     const triggerRef = ref<InternalSelectionInst | null>(null)
     const followerRef = ref<FollowerRef | null>(null)
     const menuRef = ref<InternalSelectMenuRef | null>(null)
-    const { locale } = useLocale('Select')
+    const { localeRef } = useLocale('Select')
     const localizedPlaceholderRef = computed<string>(() => {
-      return props.placeholder ?? locale.value.placeholder
+      return props.placeholder ?? localeRef.value.placeholder
     })
     const compitableOptionsRef = useCompitable(props, [
       'items',

@@ -164,7 +164,7 @@ export default defineComponent({
       localStorage['naive-ui-theme-overrides'] = JSON.stringify(value)
     })
     return {
-      ...useLocale('ThemeEditor'),
+      locale: useLocale('ThemeEditor').localeRef,
       themeCommonDefault: themeCommonDefaultRef,
       theme,
       showPanel: showPanelRef,

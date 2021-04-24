@@ -69,9 +69,7 @@ export default defineComponent({
       props,
       mergedClsPrefix
     )
-    const { locale: localeRef, dateLocale: dateLocaleRef } = useLocale(
-      'DatePicker'
-    )
+    const { localeRef, dateLocaleRef } = useLocale('DatePicker')
     const now = Date.now()
     // ts => timestamp
     const monthTsRef = ref(startOfMonth(now).valueOf())

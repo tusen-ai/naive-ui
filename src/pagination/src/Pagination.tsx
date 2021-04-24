@@ -116,7 +116,7 @@ export default defineComponent({
       props,
       mergedClsPrefix
     )
-    const { locale } = useLocale('Pagination')
+    const { localeRef } = useLocale('Pagination')
     const selfRef = ref<HTMLElement | null>(null)
     const jumperRef = ref<InputInst | null>(null)
     const compitablePageCountRef = useCompitable(props, ['pageCount', 'total'])
@@ -136,7 +136,7 @@ export default defineComponent({
     const transitionDisabledRef = ref(false)
 
     const pageSizeOptionsRef = computed(() => {
-      const suffix = locale.value.selectionSuffix
+      const suffix = localeRef.value.selectionSuffix
       return props.pageSizes.map((size) => ({
         label: `${size} / ${suffix}`,
         value: size
@@ -267,7 +267,7 @@ export default defineComponent({
     }
     return {
       mergedClsPrefix,
-      locale,
+      locale: localeRef,
       selfRef,
       jumperRef,
       mergedPage: mergedPageRef,
