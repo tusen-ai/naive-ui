@@ -203,12 +203,12 @@ export default defineComponent({
   alias: ['AdvancedTable'],
   props: dataTableProps,
   setup (props) {
-    const { mergedBordered, mergedClsPrefix } = useConfig(props)
+    const { mergedBorderedRef, mergedClsPrefixRef } = useConfig(props)
     const mergedBottomBorderedRef = computed(() => {
       const { bottomBordered } = props
       // do not add bottom bordered class if bordered is true
       // since border is displayed on wrapper
-      if (mergedBordered.value) return false
+      if (mergedBorderedRef.value) return false
       if (bottomBordered !== undefined) return bottomBordered
       return true
     })
@@ -218,7 +218,7 @@ export default defineComponent({
       style,
       dataTableLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const mainTableInstRef = ref<MainTableRef | null>(null)
     const { rowsRef, colsRef, dataRelatedColsRef } = useGroupHeader(props)
@@ -276,7 +276,7 @@ export default defineComponent({
     const { localeRef } = useLocale('DataTable')
     provide(dataTableInjectionKey, {
       hoverKeyRef,
-      mergedClsPrefixRef: mergedClsPrefix,
+      mergedClsPrefixRef,
       treeMateRef,
       mergedThemeRef: themeRef,
       scrollXRef: computed(() => props.scrollX),
@@ -339,10 +339,10 @@ export default defineComponent({
     }
     return {
       mainTableInstRef,
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
       paginatedData: paginatedDataRef,
-      mergedBordered,
+      mergedBordered: mergedBorderedRef,
       mergedBottomBordered: mergedBottomBorderedRef,
       mergedPagination: mergedPaginationRef,
       ...exposedMethods,

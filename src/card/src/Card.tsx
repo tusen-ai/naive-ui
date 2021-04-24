@@ -64,17 +64,17 @@ export default defineComponent({
       const { onClose } = props
       if (onClose) call(onClose)
     }
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Card',
       'Card',
       style,
       cardLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
       handleCloseClick,
       cssVars: computed(() => {

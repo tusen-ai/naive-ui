@@ -40,20 +40,20 @@ export default defineComponent({
   name: 'List',
   props: listProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'List',
       'List',
       style,
       listLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     provide(listInjectionKey, {
-      mergedClsPrefixRef: mergedClsPrefix
+      mergedClsPrefixRef
     })
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },

@@ -65,7 +65,7 @@ export default defineComponent({
   name: 'DynamicTags',
   props: dynamicTagsProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const { localeRef } = useLocale('DynamicTags')
     const formItem = useFormItem(props)
     const inputValueRef = ref('')
@@ -78,7 +78,7 @@ export default defineComponent({
       style,
       dynamicTagsLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
@@ -139,7 +139,7 @@ export default defineComponent({
       })
     }
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       inputInstRef,
       localizedAdd: localizedAddRef,
       inputSize: inputSizeRef,

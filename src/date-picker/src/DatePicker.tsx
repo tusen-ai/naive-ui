@@ -127,9 +127,9 @@ export default defineComponent({
     const formItem = useFormItem(props)
     const {
       NConfigProvider,
-      mergedClsPrefix,
-      mergedBordered,
-      namespace
+      mergedClsPrefixRef,
+      mergedBorderedRef,
+      namespaceRef
     } = useConfig(props)
     const panelInstRef = ref<PanelRef | null>(null)
     const triggerElRef = ref<HTMLElement | null>(null)
@@ -150,7 +150,7 @@ export default defineComponent({
       style,
       datePickerLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const dateFnsOptionsRef = computed(() => {
       return {
@@ -401,7 +401,7 @@ export default defineComponent({
     const uniVaidation = uniCalendarValidation(props, mergedValueRef)
     const dualValidation = dualCalendarValidation(props, mergedValueRef)
     provide(datePickerInjectionKey, {
-      mergedClsPrefixRef: mergedClsPrefix,
+      mergedClsPrefixRef,
       mergedThemeRef: themeRef,
       timePickerSizeRef,
       localeRef,
@@ -412,9 +412,9 @@ export default defineComponent({
       ...dualValidation
     })
     return {
-      mergedClsPrefix,
-      mergedBordered,
-      namespace,
+      mergedClsPrefix: mergedClsPrefixRef,
+      mergedBordered: mergedBorderedRef,
+      namespace: namespaceRef,
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
       panelInstRef,

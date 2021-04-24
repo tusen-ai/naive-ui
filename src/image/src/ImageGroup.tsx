@@ -15,7 +15,7 @@ import { ExtractPublicPropTypes } from '../../_utils'
 import { useConfig } from '../../_mixins'
 
 export const imageGroupInjectionKey: InjectionKey<
-ImagePreviewInst & { groupId: string, mergedClsPrefix: Ref<string> }
+ImagePreviewInst & { groupId: string, mergedClsPrefixRef: Ref<string> }
 > = Symbol('image-group')
 
 const imageGroupProps = {
@@ -29,7 +29,7 @@ export default defineComponent({
   props: imageGroupProps,
   setup (props) {
     let currentSrc: string | undefined
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const groupId = createId()
     const vm = getCurrentInstance()
     const setPreviewSrc = (src: string | undefined): void => {
@@ -52,7 +52,7 @@ export default defineComponent({
       }
     }
     provide(imageGroupInjectionKey, {
-      mergedClsPrefix,
+      mergedClsPrefixRef,
       setPreviewSrc,
       setThumbnailEl: (el) => {
         previewInstRef.value?.setThumbnailEl(el)
@@ -64,7 +64,7 @@ export default defineComponent({
     })
     const previewInstRef = ref<ImagePreviewInst | null>(null)
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       previewInstRef,
       next: () => go(1),
       prev: () => go(-1)

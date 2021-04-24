@@ -175,19 +175,19 @@ export default defineComponent({
     const handleBlur = (): void => {
       enterPressedRef.value = false
     }
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Button',
       'Button',
       style,
       buttonLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     return {
       selfRef,
       waveRef,
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       mergedFocusable: mergedFocusableRef,
       mergedSize: mergedSizeRef,
       showBorder: showBorderRef,

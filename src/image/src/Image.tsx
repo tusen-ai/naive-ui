@@ -21,9 +21,9 @@ export default defineComponent({
     const imageRef = ref<HTMLImageElement | null>(null)
     const previewInstRef = ref<ImagePreviewInst | null>(null)
     const imageGroupHandle = inject(imageGroupInjectionKey, null)
-    const { mergedClsPrefix } = imageGroupHandle || useConfig(props)
+    const { mergedClsPrefixRef } = imageGroupHandle || useConfig(props)
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       groupId: imageGroupHandle?.groupId,
       previewInstRef,
       imageRef,

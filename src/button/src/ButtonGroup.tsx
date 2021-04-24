@@ -26,11 +26,11 @@ export default defineComponent({
   name: 'ButtonGroup',
   props: buttonGroupProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
-    useStyle('ButtonGroup', style, mergedClsPrefix)
+    const { mergedClsPrefixRef } = useConfig(props)
+    useStyle('ButtonGroup', style, mergedClsPrefixRef)
     provide(buttonGroupInjectionKey, props)
     return {
-      mergedClsPrefix
+      mergedClsPrefix: mergedClsPrefixRef
     }
   },
   render () {
@@ -39,9 +39,7 @@ export default defineComponent({
       <div
         class={[
           `${mergedClsPrefix}-button-group`,
-          {
-            [`${mergedClsPrefix}-button-group--vertical`]: this.vertical
-          }
+          this.vertical && `${mergedClsPrefix}-button-group--vertical`
         ]}
       >
         {this.$slots}

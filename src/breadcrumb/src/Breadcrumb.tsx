@@ -38,21 +38,21 @@ export default defineComponent({
   name: 'Breadcrumb',
   props: breadcrumbProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Breadcrumb',
       'Breadcrumb',
       style,
       breadcrumbLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     provide(breadcrumbInjectionKey, {
       separatorRef: toRef(props, 'separator'),
-      mergedClsPrefixRef: mergedClsPrefix
+      mergedClsPrefixRef
     })
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },

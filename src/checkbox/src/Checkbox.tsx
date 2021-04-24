@@ -89,7 +89,7 @@ export default defineComponent({
   name: 'Checkbox',
   props: checkboxProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const NCheckboxGroup = inject(checkboxGroupInjectionKey, null)
     const uncontrolledCheckedRef = ref(props.defaultChecked)
     const controlledCheckedRef = toRef(props, 'checked')
@@ -135,7 +135,7 @@ export default defineComponent({
       style,
       checkboxLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     function toggle (): void {
       if (NCheckboxGroup && props.value !== undefined) {
@@ -176,7 +176,7 @@ export default defineComponent({
       }
     }
     return Object.assign(formItem, {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       mergedDisabled: mergedDisabledRef,
       renderedChecked: renderedCheckedRef,
       mergedTheme: themeRef,

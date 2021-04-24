@@ -36,7 +36,7 @@ export default defineComponent({
   props: gradientTextProps,
   setup (props) {
     useHoudini()
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const compatibleTypeRef = computed<
     'info' | 'success' | 'warning' | 'error' | 'primary'
     >(() => {
@@ -67,10 +67,10 @@ export default defineComponent({
       style,
       gradientTextLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       compatibleType: compatibleTypeRef,
       styleFontSize: styleFontSizeRef,
       styleBgImage: styleBgImageRef,

@@ -167,14 +167,14 @@ export default defineComponent({
   name: 'Menu',
   props: menuProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Menu',
       'Menu',
       style,
       menuLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
 
     const treeMateRef = computed(() =>
@@ -213,10 +213,10 @@ export default defineComponent({
     provide(menuInjectionKey, {
       props,
       mergedThemeRef: themeRef,
-      mergedValueRef: mergedValueRef,
-      mergedExpandedKeysRef: mergedExpandedKeysRef,
-      activePathRef: activePathRef,
-      mergedClsPrefixRef: mergedClsPrefix,
+      mergedValueRef,
+      mergedExpandedKeysRef,
+      activePathRef,
+      mergedClsPrefixRef,
       doSelect,
       toggleExpand
     })
@@ -261,7 +261,7 @@ export default defineComponent({
       doUpdateExpandedKeys(currentExpandedKeys)
     }
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       controlledExpandedKeys: controlledExpandedKeysRef,
       uncontrolledExpanededKeys: uncontrolledExpandedKeysRef,
       mergedExpandedKeys: mergedExpandedKeysRef,

@@ -170,7 +170,7 @@ function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
   return {
     mergedClsPrefix: NRadioGroup
       ? NRadioGroup.mergedClsPrefixRef
-      : useConfig(props).mergedClsPrefix,
+      : useConfig(props).mergedClsPrefixRef,
     inputRef,
     labelRef,
     mergedName: mergedNameRef,

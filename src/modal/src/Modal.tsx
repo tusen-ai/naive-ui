@@ -126,14 +126,14 @@ export default defineComponent({
   props: modalProps,
   setup (props) {
     const containerRef = ref<HTMLElement | null>(null)
-    const { mergedClsPrefix, namespace } = useConfig(props)
+    const { mergedClsPrefixRef, namespaceRef } = useConfig(props)
     const themeRef = useTheme(
       'Modal',
       'Modal',
       style,
       modalLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const clickedRef = useClicked(64)
     const clickedPositionRef = useClickPosition()
@@ -212,14 +212,14 @@ export default defineComponent({
         }
         return null
       },
-      mergedClsPrefixRef: mergedClsPrefix,
+      mergedClsPrefixRef,
       mergedThemeRef: themeRef,
-      isMountedRef: isMountedRef,
+      isMountedRef,
       appearRef: toRef(props, 'appear')
     })
     return {
-      mergedClsPrefix,
-      namespace,
+      mergedClsPrefix: mergedClsPrefixRef,
+      namespace: namespaceRef,
       isMounted: isMountedRef,
       containerRef,
       presetProps: computed(() => {

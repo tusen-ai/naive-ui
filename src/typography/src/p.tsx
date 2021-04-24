@@ -17,17 +17,17 @@ export default defineComponent({
   name: 'P',
   props: pProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Typography',
       'P',
       style,
       typographyLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       cssVars: computed(() => {
         const { depth } = props
         const typeSafeDepth = depth || '1'

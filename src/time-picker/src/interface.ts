@@ -4,8 +4,8 @@ import type { MergedTheme } from '../../_mixins'
 import type { TimePickerTheme } from '../styles'
 
 export interface TimePickerInjection {
-  mergedTheme: Ref<MergedTheme<TimePickerTheme>>
-  mergedClsPrefix: Ref<string>
+  mergedThemeRef: Ref<MergedTheme<TimePickerTheme>>
+  mergedClsPrefixRef: Ref<string>
 }
 
 export const timePickerInjectionKey: InjectionKey<TimePickerInjection> = Symbol(

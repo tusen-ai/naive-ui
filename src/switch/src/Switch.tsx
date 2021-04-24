@@ -69,14 +69,14 @@ export default defineComponent({
   name: 'Switch',
   props: switchProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Switch',
       'Switch',
       style,
       switchLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const formItem = useFormItem(props)
     const { mergedSizeRef } = formItem
@@ -123,7 +123,7 @@ export default defineComponent({
       handleClick,
       handleBlur,
       handleFocus,
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef

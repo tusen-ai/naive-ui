@@ -44,19 +44,21 @@ export default defineComponent({
   alias: ['El'],
   props: elementProps,
   setup (props) {
-    const { NConfigProvider, namespace, mergedClsPrefix } = useConfig(props)
+    const { NConfigProvider, namespaceRef, mergedClsPrefixRef } = useConfig(
+      props
+    )
     const themeRef = useTheme(
       'Element',
       'Element',
       undefined,
       elementLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     return {
       ...useLegacy(NConfigProvider),
-      mergedClsPrefix,
-      namespace,
+      mergedClsPrefix: mergedClsPrefixRef,
+      namespace: namespaceRef,
       cssVars: computed(() => {
         const { common } = themeRef.value
         return ((Object.keys(common) as unknown) as Array<

@@ -100,7 +100,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: backTopProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
 
     const scrollTopRef = ref<number | null>(null)
     const uncontrolledShowRef = computed(() => {
@@ -143,7 +143,7 @@ export default defineComponent({
       style,
       backTopLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     function init (): void {
       if (scrollListenerRegistered) return
@@ -219,7 +219,7 @@ export default defineComponent({
       scrollTop: scrollTopRef,
       DomInfoReady: DomInfoReadyRef,
       transitionDisabled: transitionDisabledRef,
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       handleAfterEnter,
       handleScroll,
       handleClick,

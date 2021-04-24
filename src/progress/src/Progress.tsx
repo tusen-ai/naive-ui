@@ -88,17 +88,17 @@ export default defineComponent({
     const mergedIndicatorPlacementRef = computed(() => {
       return props.indicatorPlacement || props.indicatorPosition
     })
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Progress',
       'Progress',
       style,
       progressLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       mergedIndicatorPlacement: mergedIndicatorPlacementRef,
       cssVars: computed(() => {
         const { status } = props

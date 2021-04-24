@@ -41,8 +41,8 @@ export default defineComponent({
   name: 'Row',
   props: rowProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
-    useStyle('LegacyGrid', style, mergedClsPrefix)
+    const { mergedClsPrefixRef } = useConfig(props)
+    useStyle('LegacyGrid', style, mergedClsPrefixRef)
     const verticalGutterRef = useMemo(() => {
       const { gutter } = props
       if (Array.isArray(gutter)) {
@@ -58,13 +58,13 @@ export default defineComponent({
       return Number(gutter)
     })
     provide(rowInjectionKey, {
-      mergedClsPrefixRef: mergedClsPrefix,
+      mergedClsPrefixRef,
       gutterRef: toRef(props, 'gutter'),
       verticalGutterRef: verticalGutterRef,
       horizontalGutterRef: horizontalGutterRef
     })
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       styleMargin: useMemo(
         () =>
           `-${formatLength(verticalGutterRef.value, {

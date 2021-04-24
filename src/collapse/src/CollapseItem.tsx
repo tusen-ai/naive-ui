@@ -31,7 +31,11 @@ export default defineComponent({
         '`n-collapse-item` must be placed inside `n-collapse`.'
       )
     }
-    const { expandedNamesRef, props: collapseProps, clsPrefixRef } = NCollapse
+    const {
+      expandedNamesRef,
+      props: collapseProps,
+      mergedClsPrefixRef
+    } = NCollapse
     useInjectionCollection(
       collapseInjectionKey,
       'collectedItemNames',
@@ -49,7 +53,7 @@ export default defineComponent({
     })
     return {
       randomName,
-      mergedClsPrefix: clsPrefixRef,
+      mergedClsPrefix: mergedClsPrefixRef,
       collapsed: collapsedRef,
       mergedDisplayDirective: computed<'if' | 'show'>(() => {
         const { displayDirective } = props

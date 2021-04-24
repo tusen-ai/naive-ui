@@ -37,18 +37,18 @@ export default defineComponent({
   name: 'Empty',
   props: emptyProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Empty',
       'Empty',
       style,
       emptyLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const { localeRef } = useLocale('Empty')
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       localizedDescription: computed(() => {
         return props.description || localeRef.value.description
       }),

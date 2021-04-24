@@ -120,7 +120,7 @@ export default defineComponent({
     const formItem = useFormItem(props)
     const { mergedSizeRef } = formItem
     const { localeRef } = useLocale('global')
-    const { mergedClsPrefix: mergedClsPrefixRef, namespace } = useConfig(props)
+    const { mergedClsPrefixRef, namespaceRef } = useConfig(props)
 
     const themeRef = useTheme(
       'ColorPicker',
@@ -582,7 +582,7 @@ export default defineComponent({
 
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      namespace,
+      namespace: namespaceRef,
       selfRef,
       hsla: hslaRef,
       rgba: rgbaRef,

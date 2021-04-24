@@ -88,11 +88,11 @@ export default defineComponent({
         }
       }
     }
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     provide(loadingBarApiInjectionKey, methods)
     provide(loadingBarProviderInjectionKey, {
       props,
-      mergedClsPrefixRef: mergedClsPrefix
+      mergedClsPrefixRef
     })
     return Object.assign(methods, {
       loadingBarRef

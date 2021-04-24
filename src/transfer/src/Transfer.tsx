@@ -96,14 +96,14 @@ export default defineComponent({
   name: 'Transfer',
   props: transferProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Transfer',
       'Transfer',
       style,
       transferLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const formItem = useFormItem(props)
     const { mergedSizeRef } = formItem
@@ -215,7 +215,7 @@ export default defineComponent({
       tgtCheckedValuesRef.value = []
     }
     provide(transferInjectionKey, {
-      mergedClsPrefixRef: mergedClsPrefix,
+      mergedClsPrefixRef,
       mergedSizeRef,
       disabledRef: toRef(props, 'disabled'),
       mergedThemeRef: themeRef,
@@ -230,9 +230,8 @@ export default defineComponent({
     })
     const { localeRef } = useLocale('Transfer')
     return {
-      ...formItem,
       locale: localeRef,
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       itemSize: itemSizeRef,
       isMounted: useIsMounted(),
       isInputing: isInputingRef,

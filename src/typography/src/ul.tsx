@@ -20,17 +20,17 @@ export default defineComponent({
   name: 'Ul',
   props: ulProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Typography',
       'Ol&Ul',
       style,
       typographyLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },

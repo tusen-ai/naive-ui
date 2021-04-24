@@ -67,14 +67,14 @@ export default defineComponent({
   props: tagProps,
   setup (props) {
     const contentRef = ref<HTMLElement | null>(null)
-    const { mergedBordered, mergedClsPrefix } = useConfig(props)
+    const { mergedBorderedRef, mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Tag',
       'Tag',
       style,
       tagLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     function handleClick (e: MouseEvent): void {
       if (!props.disabled) {
@@ -107,9 +107,9 @@ export default defineComponent({
     }
     return {
       ...tagPublicMethods,
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       contentRef,
-      mergedBordered,
+      mergedBordered: mergedBorderedRef,
       handleClick,
       handleCloseClick,
       cssVars: computed(() => {

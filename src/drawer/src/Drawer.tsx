@@ -134,7 +134,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: drawerProps,
   setup (props) {
-    const { mergedClsPrefix, namespace } = useConfig(props)
+    const { mergedClsPrefixRef, namespaceRef } = useConfig(props)
     const isMountedRef = useIsMounted()
     const themeRef = useTheme(
       'Drawer',
@@ -142,7 +142,7 @@ export default defineComponent({
       style,
       drawerLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const styleWidthRef = computed(() => {
       const { placement } = props
@@ -177,11 +177,11 @@ export default defineComponent({
     provide(drawerInjectionKey, {
       isMountedRef: isMountedRef,
       mergedThemeRef: themeRef,
-      mergedClsPrefixRef: mergedClsPrefix
+      mergedClsPrefixRef
     })
     return {
-      mergedClsPrefix,
-      namespace,
+      mergedClsPrefix: mergedClsPrefixRef,
+      namespace: namespaceRef,
       mergedBodyStyle: mergedBodyStyleRef,
       handleMaskClick,
       mergedTheme: themeRef,

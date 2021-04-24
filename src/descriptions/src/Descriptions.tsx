@@ -51,17 +51,17 @@ export default defineComponent({
   name: 'Descriptions',
   props: descriptionProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Descriptions',
       'Descriptions',
       style,
       descriptionsLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       cssVars: computed(() => {
         const { size, bordered } = props
         const {

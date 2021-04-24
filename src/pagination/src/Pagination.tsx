@@ -107,14 +107,14 @@ export default defineComponent({
   name: 'Pagination',
   props: paginationProps,
   setup (props) {
-    const { NConfigProvider, mergedClsPrefix } = useConfig(props)
+    const { NConfigProvider, mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Pagination',
       'Pagination',
       style,
       paginationLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const { localeRef } = useLocale('Pagination')
     const selfRef = ref<HTMLElement | null>(null)
@@ -266,7 +266,7 @@ export default defineComponent({
       jumperValueRef.value = value
     }
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       locale: localeRef,
       selfRef,
       jumperRef,

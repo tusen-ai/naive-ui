@@ -139,14 +139,14 @@ export default defineComponent({
   props: radioGroupProps,
   setup (props) {
     const formItem = useFormItem(props)
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Radio',
       'RadioGroup',
       style,
       radioLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const { mergedSizeRef } = formItem
     const uncontrolledValueRef = ref(props.defaultValue)
@@ -173,7 +173,7 @@ export default defineComponent({
       uncontrolledValueRef.value = value
     }
     provide(radioGroupInjectionKey, {
-      mergedClsPrefixRef: mergedClsPrefix,
+      mergedClsPrefixRef,
       nameRef: toRef(props, 'name'),
       valueRef: mergedValueRef,
       disabledRef: toRef(props, 'disabled'),
@@ -181,7 +181,7 @@ export default defineComponent({
       doUpdateValue
     })
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef

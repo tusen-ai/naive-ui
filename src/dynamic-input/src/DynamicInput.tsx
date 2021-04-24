@@ -102,7 +102,7 @@ export default defineComponent({
   name: 'DynamicInput',
   props: dynamicInputProps,
   setup (props, { slots }) {
-    const { NConfigProvider, mergedClsPrefix } = useConfig()
+    const { NConfigProvider, mergedClsPrefixRef } = useConfig()
     const NFormItem = inject(formItemInjectionKey, null)
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
@@ -116,7 +116,7 @@ export default defineComponent({
       style,
       dynamicInputLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const insertionDisabledRef = computed(() => {
       const { value: mergedValue } = mergedValueRef
@@ -222,7 +222,7 @@ export default defineComponent({
     return {
       locale: useLocale('DynamicInput').localeRef,
       buttonSize: buttonSizeRef,
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       NFormItem,
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,

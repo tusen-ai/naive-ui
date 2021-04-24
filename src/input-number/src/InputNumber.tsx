@@ -75,14 +75,14 @@ export default defineComponent({
   name: 'InputNumber',
   props: inputNumberProps,
   setup (props) {
-    const { mergedBordered, mergedClsPrefix } = useConfig(props)
+    const { mergedBorderedRef, mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'InputNumber',
       'InputNumber',
       undefined,
       inputNumberLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const { localeRef } = useLocale('InputNumber')
     const formItem = useFormItem(props)
@@ -290,8 +290,8 @@ export default defineComponent({
       inputInstRef,
       minusButtonInstRef,
       addButtonInstRef,
-      mergedClsPrefix,
-      mergedBordered,
+      mergedClsPrefix: mergedClsPrefixRef,
+      mergedBordered: mergedBorderedRef,
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
       mergedPlaceholder: mergedPlaceholderRef,

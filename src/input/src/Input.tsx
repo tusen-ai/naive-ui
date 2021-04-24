@@ -153,14 +153,14 @@ export default defineComponent({
   name: 'Input',
   props: inputProps,
   setup (props) {
-    const { mergedClsPrefix, mergedBordered } = useConfig(props)
+    const { mergedClsPrefixRef, mergedBorderedRef } = useConfig(props)
     const themeRef = useTheme(
       'Input',
       'Input',
       style,
       inputLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     // dom refs
     const wrapperElRef = ref<HTMLElement | null>(null)
@@ -654,8 +654,8 @@ export default defineComponent({
       showClearButton,
       mergedSize: mergedSizeRef,
       textDecorationStyle: textDecorationStyleRef,
-      mergedClsPrefix,
-      mergedBordered,
+      mergedClsPrefix: mergedClsPrefixRef,
+      mergedBordered: mergedBorderedRef,
       // methods
       handleCompositionStart,
       handleCompositionEnd,

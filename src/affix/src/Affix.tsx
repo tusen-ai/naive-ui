@@ -60,8 +60,8 @@ export default defineComponent({
   name: 'Affix',
   props: affixProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
-    useStyle('Affix', style, mergedClsPrefix)
+    const { mergedClsPrefixRef } = useConfig(props)
+    useStyle('Affix', style, mergedClsPrefixRef)
     const scrollElementRef = ref<HTMLElement | null>(null)
     const stickToTopRef = ref(false)
     const stickToBottomRef = ref(false)
@@ -171,7 +171,7 @@ export default defineComponent({
     return {
       selfRef,
       affixed: affixedRef,
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       mergedstyle: computed<CSSProperties>(() => {
         const style: CSSProperties = {}
         if (stickToTopRef.value && mergedOffsetTopRef.value !== undefined) {

@@ -31,7 +31,7 @@ export default defineComponent({
   name: 'Thing',
   props: thingProps,
   setup (props, { slots }) {
-    const { mergedClsPrefix: mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Thing',
       'Thing',

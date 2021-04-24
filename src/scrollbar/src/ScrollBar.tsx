@@ -89,7 +89,7 @@ export default defineComponent({
   name: 'Scrollbar',
   props: scrollbarProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
 
     // dom ref
     const containerRef = ref<HTMLElement | null>(null)
@@ -504,12 +504,12 @@ export default defineComponent({
       style,
       scrollbarLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     return {
       sync,
       scrollTo,
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       containerScrollTop: containerScrollTopRef,
       containerRef,
       contentRef,

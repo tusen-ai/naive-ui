@@ -172,19 +172,19 @@ export default defineComponent({
         if (onCollapse) call(onCollapse)
       }
     }
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Layout',
       'LayoutSider',
       style,
       layoutLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     return {
       selfRef,
       scrollbarRef,
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
       styleMaxWidth: styleMaxWidthRef,
       mergedCollapsed: mergedCollapsedRef,

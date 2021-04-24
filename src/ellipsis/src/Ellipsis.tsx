@@ -30,14 +30,14 @@ export default defineComponent({
   inheritAttrs: false,
   props: ellpisisProps,
   setup (props, { slots, attrs }) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const mergedTheme = useTheme(
       'Ellipsis',
       'ellipsis',
       style,
       ellipsisLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const triggerRef = ref<HTMLElement | null>(null)
     const tooltipRef = ref<TooltipInst | null>(null)
@@ -91,9 +91,9 @@ export default defineComponent({
       <span
         {...mergeProps(attrs, {
           class: [
-            `${mergedClsPrefix.value}-ellpisis`,
+            `${mergedClsPrefixRef.value}-ellpisis`,
             props.lineClamp !== undefined
-              ? createLineClampClass(mergedClsPrefix.value)
+              ? createLineClampClass(mergedClsPrefixRef.value)
               : undefined
           ],
           style: ellpisisStyleRef.value
@@ -107,7 +107,7 @@ export default defineComponent({
     function syncEllipsisStyle (trigger: HTMLElement): void {
       if (!trigger) return
       const latestStyle = ellpisisStyleRef.value
-      const lineClampClass = createLineClampClass(mergedClsPrefix.value)
+      const lineClampClass = createLineClampClass(mergedClsPrefixRef.value)
       if (props.lineClamp !== undefined) {
         if (!trigger.classList.contains(lineClampClass)) {
           trigger.classList.add(lineClampClass)

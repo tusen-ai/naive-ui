@@ -195,14 +195,16 @@ export default defineComponent({
   name: 'Select',
   props: selectProps,
   setup (props) {
-    const { mergedClsPrefix, mergedBordered, namespace } = useConfig(props)
+    const { mergedClsPrefixRef, mergedBorderedRef, namespaceRef } = useConfig(
+      props
+    )
     const themeRef = useTheme(
       'Select',
       'Select',
       style,
       selectLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
@@ -643,9 +645,9 @@ export default defineComponent({
       void nextTick(syncPosition)
     })
     return {
-      mergedClsPrefix,
-      mergedBordered,
-      namespace,
+      mergedClsPrefix: mergedClsPrefixRef,
+      mergedBordered: mergedBorderedRef,
+      namespace: namespaceRef,
       treeMate: treeMateRef,
       isMounted: useIsMounted(),
       triggerRef,

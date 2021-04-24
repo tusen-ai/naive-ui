@@ -27,17 +27,17 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Icon',
       'Icon',
       style,
       iconLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       mergedStyle: computed(() => {
         const { size, color } = props
         return {

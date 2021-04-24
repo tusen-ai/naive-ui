@@ -101,14 +101,16 @@ export default defineComponent({
   name: 'Mention',
   props: mentionProps,
   setup (props) {
-    const { namespace, mergedClsPrefix, mergedBordered } = useConfig(props)
+    const { namespaceRef, mergedClsPrefixRef, mergedBorderedRef } = useConfig(
+      props
+    )
     const themeRef = useTheme(
       'Mention',
       'Mention',
       style,
       mentionLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const formItem = useFormItem(props)
     const inputInstRef = ref<InputInst | null>(null)
@@ -332,9 +334,9 @@ export default defineComponent({
       }
     }
     return {
-      namespace,
-      mergedClsPrefix,
-      mergedBordered,
+      namespace: namespaceRef,
+      mergedClsPrefix: mergedClsPrefixRef,
+      mergedBordered: mergedBorderedRef,
       mergedSize: formItem.mergedSizeRef,
       mergedTheme: themeRef,
       treeMate: treeMateRef,

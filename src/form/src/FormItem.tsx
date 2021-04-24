@@ -133,7 +133,7 @@ export default defineComponent({
       'formItems',
       toRef(props, 'path')
     )
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const NForm = inject(formInjectionKey, null)
     const formItemSizeRefs = formItemSize(props)
     const formItemMiscRefs = formItemMisc(props)
@@ -157,7 +157,7 @@ export default defineComponent({
       style,
       formLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     watch(toRef(props, 'path'), () => {
       if (props.ignorePathChange) return
@@ -317,7 +317,7 @@ export default defineComponent({
       internalValidate
     }
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       mergedRequired: mergedRequiredRef,
       hasFeedback: hasFeedbackRef,
       feedbackId: feedbackIdRef,

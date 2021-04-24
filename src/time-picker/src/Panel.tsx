@@ -87,8 +87,11 @@ export default defineComponent({
     onKeydown: Function as PropType<(e: KeyboardEvent) => void>
   },
   setup (props) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const NTimePicker = inject(timePickerInjectionKey)!
+    const {
+      mergedThemeRef,
+      mergedClsPrefixRef
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    } = inject(timePickerInjectionKey)!
     const hoursRef = computed<Item[]>(() =>
       time.hours.map((hour) => {
         const { isHourDisabled } = props
@@ -125,8 +128,8 @@ export default defineComponent({
       })
     )
     return {
-      mergedTheme: NTimePicker.mergedTheme,
-      mergedClsPrefix: NTimePicker.mergedClsPrefix,
+      mergedTheme: mergedThemeRef,
+      mergedClsPrefix: mergedClsPrefixRef,
       hours: hoursRef,
       minutes: minutesRef,
       seconds: secondsRef,

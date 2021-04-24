@@ -63,7 +63,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: popoverBodyProps,
   setup (props, { slots, attrs }) {
-    const { namespace, mergedClsPrefix: mergedClsPrefixRef } = useConfig(props)
+    const { namespaceRef, mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Popover',
       'Popover',
@@ -238,7 +238,7 @@ export default defineComponent({
     }
 
     return {
-      namespace,
+      namespace: namespaceRef,
       NPopover,
       followerRef,
       adjustedTo: useAdjustedTo(props),

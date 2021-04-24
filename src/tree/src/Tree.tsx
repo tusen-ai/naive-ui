@@ -177,14 +177,14 @@ export default defineComponent({
   name: 'Tree',
   props: treeProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Tree',
       'Tree',
       style,
       treeLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const treeMateRef = computed(() => createTreeMate(props.data))
     const uncontrolledCheckedKeysRef = ref(
@@ -450,7 +450,7 @@ export default defineComponent({
       handleCheck
     })
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       tmNodes: computed(() => treeMateRef.value.treeNodes),
       cssVars: computed(() => {
         const {

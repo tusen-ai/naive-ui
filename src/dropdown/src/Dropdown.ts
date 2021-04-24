@@ -183,7 +183,7 @@ export default defineComponent({
       keyboardEnabledRef
     )
 
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
 
     const themeRef = useTheme(
       'Dropdown',
@@ -191,7 +191,7 @@ export default defineComponent({
       style,
       dropdownLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
 
     provide(dropdownInjectionKey, {
@@ -290,7 +290,7 @@ export default defineComponent({
       }
     }
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
       // data
       tmNodes: tmNodesRef,

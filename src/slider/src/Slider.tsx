@@ -96,14 +96,14 @@ export default defineComponent({
   name: 'Slider',
   props: sliderProps,
   setup (props) {
-    const { mergedClsPrefix, namespace } = useConfig(props)
+    const { mergedClsPrefixRef, namespaceRef } = useConfig(props)
     const themeRef = useTheme(
       'Slider',
       'Slider',
       style,
       sliderLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const formItem = useFormItem(props)
 
@@ -659,8 +659,8 @@ export default defineComponent({
       off('mouseup', document, handleHandleMouseUp)
     })
     return {
-      mergedClsPrefix,
-      namespace,
+      mergedClsPrefix: mergedClsPrefixRef,
+      namespace: namespaceRef,
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
       isMounted: useIsMounted(),

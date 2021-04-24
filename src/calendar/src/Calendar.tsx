@@ -59,15 +59,14 @@ export default defineComponent({
   name: 'Calendar',
   props: calendarProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
-
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Calendar',
       'Calendar',
       style,
       calendarLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const { localeRef, dateLocaleRef } = useLocale('DatePicker')
     const now = Date.now()
@@ -100,7 +99,7 @@ export default defineComponent({
       monthTsRef.value = startOfMonth(now).valueOf()
     }
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       locale: localeRef,
       dateLocale: dateLocaleRef,
       now,

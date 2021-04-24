@@ -40,7 +40,7 @@ export default defineComponent({
   name: 'Timeline',
   props: timelineProps,
   setup (props, { slots }) {
-    const { mergedClsPrefix: mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Timeline',
       'Timeline',

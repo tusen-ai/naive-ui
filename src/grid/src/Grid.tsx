@@ -62,7 +62,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: gridProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const numRegex = /^\d+$/
     const widthRef = ref<number | undefined>(undefined)
     const breakpointRef = useBreakpoint()
@@ -113,7 +113,7 @@ export default defineComponent({
       overflowRef
     })
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       style: computed<CSSProperties>(() => {
         return {
           width: '100%',

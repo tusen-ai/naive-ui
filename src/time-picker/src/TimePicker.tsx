@@ -127,7 +127,9 @@ export default defineComponent({
   name: 'TimePicker',
   props: timePickerProps,
   setup (props) {
-    const { mergedBordered, mergedClsPrefix, namespace } = useConfig(props)
+    const { mergedBorderedRef, mergedClsPrefixRef, namespaceRef } = useConfig(
+      props
+    )
     const { localeRef, dateLocaleRef } = useLocale('TimePicker')
     const formItem = useFormItem(props)
     const themeRef = useTheme(
@@ -136,7 +138,7 @@ export default defineComponent({
       style,
       timePickerLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
 
     const keyboardState = useKeyboard()
@@ -487,13 +489,13 @@ export default defineComponent({
       }
     })
     provide(timePickerInjectionKey, {
-      mergedTheme: themeRef,
-      mergedClsPrefix
+      mergedThemeRef: themeRef,
+      mergedClsPrefixRef
     })
     return {
-      mergedBordered,
-      mergedClsPrefix,
-      namespace,
+      mergedBordered: mergedBorderedRef,
+      mergedClsPrefix: mergedClsPrefixRef,
+      namespace: namespaceRef,
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
       isMounted: useIsMounted(),

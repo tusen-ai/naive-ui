@@ -11,17 +11,17 @@ export default defineComponent({
     ...(useTheme.props as ThemeProps<TypographyTheme>)
   },
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Typography',
       'Hr',
       style,
       typographyLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       cssVars: computed(() => {
         return {
           '--color': themeRef.value.self.hrColor

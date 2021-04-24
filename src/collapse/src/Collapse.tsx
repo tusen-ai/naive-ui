@@ -79,7 +79,7 @@ export type CollapseProps = ExtractPublicPropTypes<typeof collapseProps>
 export interface NCollapseInjection {
   props: ExtractPropTypes<typeof collapseProps>
   expandedNamesRef: Ref<string | number | Array<string | number> | null>
-  clsPrefixRef: Ref<string>
+  mergedClsPrefixRef: Ref<string>
   collectedItemNames: Array<string | number>
   toggleItem: (
     collapse: boolean,
@@ -96,7 +96,7 @@ export default defineComponent({
   name: 'Collapse',
   props: collapseProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const uncontrolledExpandedNamesRef = ref<
     string | number | Array<string | number> | null
     >(null)
@@ -112,7 +112,7 @@ export default defineComponent({
       style,
       collapseLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     function doUpdateExpandedNames (
       names: Array<string | number> | string | number
@@ -179,14 +179,14 @@ export default defineComponent({
     }
     provide(collapseInjectionKey, {
       props,
-      clsPrefixRef: mergedClsPrefix,
+      mergedClsPrefixRef,
       expandedNamesRef: mergedExpandedNamesRef,
       collectedItemNames,
       toggleItem
     })
     return {
       mergedTheme: themeRef,
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },

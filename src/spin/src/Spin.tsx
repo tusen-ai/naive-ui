@@ -55,17 +55,17 @@ export default defineComponent({
   name: 'Spin',
   props: spinProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Spin',
       'Spin',
       style,
       spinLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       compitableShow: useCompitable(props, ['spinning', 'show']),
       mergedStrokeWidth: computed(() => {
         const { strokeWidth } = props

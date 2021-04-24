@@ -60,8 +60,8 @@ export default defineComponent({
   name: 'Form',
   props: formProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
-    useTheme('Form', 'Form', style, formLight, props, mergedClsPrefix)
+    const { mergedClsPrefixRef } = useConfig(props)
+    useTheme('Form', 'Form', style, formLight, props, mergedClsPrefixRef)
     // from path to form-item
     const formItems: Record<string, FormItemInst[]> = {}
     async function validate (
@@ -114,7 +114,7 @@ export default defineComponent({
       restoreValidation
     }
     return Object.assign(formExposedMethod, {
-      mergedClsPrefix
+      mergedClsPrefix: mergedClsPrefixRef
     })
   },
   render () {

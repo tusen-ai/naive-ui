@@ -70,14 +70,14 @@ export default defineComponent({
   inheritAttrs: false,
   props: alertProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Alert',
       'Alert',
       style,
       alertLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const cssVars = computed(() => {
       const {
@@ -141,7 +141,7 @@ export default defineComponent({
       doAfterLeave()
     }
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       visible: visibleRef,
       handleCloseClick,
       handleAfterLeave,

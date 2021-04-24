@@ -41,7 +41,7 @@ export default defineComponent({
   name: 'Avatar',
   props: avatarProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
 
     let memoedTextHtml: string | null = null
     const textRef = ref<HTMLElement | null>(null)
@@ -77,12 +77,12 @@ export default defineComponent({
       style,
       avatarLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     return {
       textRef,
       selfRef,
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       cssVars: computed(() => {
         const { size, round, circle } = props
         const {

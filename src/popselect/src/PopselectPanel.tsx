@@ -79,7 +79,7 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NPopselect = inject(popselectInjectionKey)!
 
-    const { mergedClsPrefix } = useConfig()
+    const { mergedClsPrefixRef } = useConfig(props)
 
     function doUpdateValue (value: Value | null): void {
       const {
@@ -130,7 +130,7 @@ export default defineComponent({
     })
     return {
       mergedTheme: NPopselect.mergedThemeRef,
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       treeMate: computed(() => {
         return createTreeMate<
         SelectBaseOption,

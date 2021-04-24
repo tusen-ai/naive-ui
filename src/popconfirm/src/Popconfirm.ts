@@ -38,14 +38,14 @@ export default defineComponent({
   name: 'Popconfirm',
   props: popconfirmProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig()
+    const { mergedClsPrefixRef } = useConfig()
     const themeRef = useTheme(
       'Popconfirm',
       'Popconfirm',
       style,
       popconfirmLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const popoverInstRef = ref<PopoverInst | null>(null)
     function handlePositiveClick (e: MouseEvent): void {
@@ -70,7 +70,7 @@ export default defineComponent({
     }
     provide(popconfirmInjectionKey, {
       mergedThemeRef: themeRef,
-      mergedClsPrefixRef: mergedClsPrefix
+      mergedClsPrefixRef
     })
     return {
       mergedTheme: themeRef,

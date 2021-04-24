@@ -93,14 +93,14 @@ export default defineComponent({
   name: 'Tabs',
   props: tabsProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Tabs',
       'Tabs',
       style,
       tabsLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
 
     const labelWrapperRef = ref<HTMLElement | null>(null)
@@ -201,7 +201,7 @@ export default defineComponent({
       }
     }, 64)
     provide(tabsInjectionKey, {
-      mergedClsPrefixRef: mergedClsPrefix,
+      mergedClsPrefixRef,
       typeRef: toRef(props, 'type'),
       valueRef: mergedValueRef,
       removePanel,
@@ -211,7 +211,7 @@ export default defineComponent({
       updateCurrentBarPosition()
     })
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
       labelWrapperRef,
       labelBarRef,

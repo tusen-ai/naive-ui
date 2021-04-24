@@ -104,7 +104,9 @@ export default defineComponent({
   name: 'AutoComplete',
   props: autoCompleteProps,
   setup (props) {
-    const { mergedBordered, namespace, mergedClsPrefix } = useConfig(props)
+    const { mergedBorderedRef, namespaceRef, mergedClsPrefixRef } = useConfig(
+      props
+    )
     const formItem = useFormItem(props)
 
     const triggerElRef = ref<HTMLElement | null>(null)
@@ -125,7 +127,7 @@ export default defineComponent({
       style,
       autoCompleteLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const selectOptionsRef = computed(() => {
       return mapAutoCompleteOptionsToSelectOptions(props.options)
@@ -270,9 +272,9 @@ export default defineComponent({
           '--bezier': cubicBezierEaseInOut
         }
       }),
-      mergedBordered,
-      namespace,
-      mergedClsPrefix
+      mergedBordered: mergedBorderedRef,
+      namespace: namespaceRef,
+      mergedClsPrefix: mergedClsPrefixRef
     }
   },
   render () {

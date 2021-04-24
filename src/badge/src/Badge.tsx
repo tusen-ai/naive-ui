@@ -53,14 +53,14 @@ export default defineComponent({
   name: 'Badge',
   props: badgeProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Badge',
       'Badge',
       style,
       badgeLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const appearedRef = ref(false)
     const handleAfterEnter = (): void => {
@@ -80,7 +80,7 @@ export default defineComponent({
       if (showBadgeRef.value) appearedRef.value = true
     })
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       appeared: ref(false),
       showBadge: showBadgeRef,
       handleAfterEnter,

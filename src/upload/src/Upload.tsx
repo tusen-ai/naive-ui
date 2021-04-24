@@ -238,14 +238,14 @@ export default defineComponent({
   name: 'Upload',
   props: uploadProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Upload',
       'Upload',
       style,
       uploadLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const uncontrolledFileListRef = ref(props.defaultFileList)
     const inputElRef = ref<HTMLInputElement | null>(null)
@@ -384,7 +384,7 @@ export default defineComponent({
       }
     }
     provide(uploadInjectionKey, {
-      mergedClsPrefixRef: mergedClsPrefix,
+      mergedClsPrefixRef,
       mergedThemeRef: themeRef,
       showCancelButtonRef: toRef(props, 'showCancelButton'),
       showDownloadButtonRef: toRef(props, 'showDownloadButton'),
@@ -398,7 +398,7 @@ export default defineComponent({
       doChange
     })
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       draggerInsideRef,
       inputElRef,
       mergedFileList: mergedFileListRef,

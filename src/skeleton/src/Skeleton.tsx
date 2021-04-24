@@ -44,17 +44,17 @@ export default defineComponent({
   props: skeletonProps,
   setup (props) {
     useHoudini()
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Skeleton',
       'Skeleton',
       style,
       skeletonLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       style: computed(() => {
         const theme = themeRef.value
         const {

@@ -139,14 +139,16 @@ export default defineComponent({
   name: 'Cascader',
   props: cascaderProps,
   setup (props) {
-    const { mergedBordered, mergedClsPrefix, namespace } = useConfig(props)
+    const { mergedBorderedRef, mergedClsPrefixRef, namespaceRef } = useConfig(
+      props
+    )
     const themeRef = useTheme(
       'Cascader',
       'Cascader',
       style,
       cascaderLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const { localeRef } = useLocale('Cascader')
     const uncontrolledValueRef = ref(props.defaultValue)
@@ -669,7 +671,7 @@ export default defineComponent({
       cascaderMenuFollowerRef.value?.syncPosition()
     }
     provide(cascaderInjectionKey, {
-      mergedClsPrefixRef: mergedClsPrefix,
+      mergedClsPrefixRef,
       mergedThemeRef: themeRef,
       mergedValueRef,
       checkedKeysRef,
@@ -704,9 +706,9 @@ export default defineComponent({
       triggerInstRef,
       selectMenuInstRef,
       cascaderMenuInstRef,
-      mergedBordered,
-      mergedClsPrefix,
-      namespace,
+      mergedBordered: mergedBorderedRef,
+      mergedClsPrefix: mergedClsPrefixRef,
+      namespace: namespaceRef,
       mergedValue: mergedValueRef,
       mergedShow: mergedShowRef,
       showSelectMenu: showSelectMenuRef,

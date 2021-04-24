@@ -49,14 +49,14 @@ export default defineComponent({
   setup (props) {
     const selfRef = ref<HTMLElement | null>(null)
     const scrollbarRef = ref<ScrollbarInst | null>(null)
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Layout',
       'Layout',
       style,
       layoutLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const scrollTo: LayoutInst['scrollTo'] = (
       options: ScrollToOptions | number,
@@ -79,7 +79,7 @@ export default defineComponent({
     })
     if (__DEV__) provide(layoutInjectionKey, props)
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       selfRef,
       scrollbarRef,
       scrollableDivStyle: scrollableDivStyleRef,

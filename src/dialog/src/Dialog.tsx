@@ -83,7 +83,7 @@ export default defineComponent({
     ...dialogProps
   },
   setup (props) {
-    const { NConfigProvider, mergedClsPrefix } = useConfig(props)
+    const { NConfigProvider, mergedClsPrefixRef } = useConfig(props)
     const mergedIconPlacementRef = computed(() => {
       const { iconPlacement } = props
       return (
@@ -110,10 +110,10 @@ export default defineComponent({
       style,
       dialogLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       mergedIconPlacement: mergedIconPlacementRef,
       mergedTheme: themeRef,
       handlePositiveClick,

@@ -29,17 +29,17 @@ export default (level: '1' | '2' | '3' | '4' | '5' | '6') =>
     name: `H${level}`,
     props: headerProps,
     setup (props) {
-      const { mergedClsPrefix } = useConfig(props)
+      const { mergedClsPrefixRef } = useConfig(props)
       const themeRef = useTheme(
         'Typography',
         'H',
         style,
         typographyLight,
         props,
-        mergedClsPrefix
+        mergedClsPrefixRef
       )
       return {
-        mergedClsPrefix,
+        mergedClsPrefix: mergedClsPrefixRef,
         cssVars: computed(() => {
           const { type } = props
           const {

@@ -28,18 +28,18 @@ export default defineComponent({
   name: 'InputGroupLabel',
   props: inputGroupLabelProps,
   setup (props) {
-    const { mergedBordered, mergedClsPrefix } = useConfig(props)
+    const { mergedBorderedRef, mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Input',
       'InputGroupLabel',
       style,
       inputLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     return {
-      mergedClsPrefix,
-      mergedBordered,
+      mergedClsPrefix: mergedClsPrefixRef,
+      mergedBordered: mergedBorderedRef,
       cssVars: computed(() => {
         const { size } = props
         const {

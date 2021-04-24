@@ -23,17 +23,17 @@ export default defineComponent({
   name: 'PageHeader',
   props: pageHeaderProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'PageHeader',
       'PageHeader',
       style,
       pageHeaderLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       cssVars: computed(() => {
         const {
           self: {

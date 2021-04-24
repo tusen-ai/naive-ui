@@ -40,7 +40,7 @@ export default defineComponent({
   name: 'Code',
   props: codeProps,
   setup (props, { slots }) {
-    const { mergedClsPrefix } = useConfig()
+    const { mergedClsPrefixRef } = useConfig()
     const codeRef = ref<HTMLElement | null>(null)
     const hljsRef = useHljs(props)
     const createCodeHtml = (
@@ -86,10 +86,10 @@ export default defineComponent({
       style,
       codeLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       codeRef,
       cssVars: computed(() => {
         const {

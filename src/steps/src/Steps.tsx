@@ -63,22 +63,22 @@ export default defineComponent({
   name: 'Steps',
   props: stepsProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Steps',
       'Steps',
       style,
       stepsLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     provide(stepsInjectionKey, {
       props,
       mergedThemeRef: themeRef,
-      mergedClsPrefixRef: mergedClsPrefix
+      mergedClsPrefixRef
     })
     return {
-      mergedClsPrefix
+      mergedClsPrefix: mergedClsPrefixRef
     }
   },
   render () {

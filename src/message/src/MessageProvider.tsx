@@ -81,7 +81,7 @@ export default defineComponent({
   name: 'MessageProvider',
   props: messageProviderProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const messageListRef = ref<PrivateMessageReactive[]>([])
     const messageRefs = ref<{ [key: string]: PrivateMessageRef }>({})
     const api: MessageApiInjection = {
@@ -103,7 +103,7 @@ export default defineComponent({
     }
     provide(messageProviderInjectionKey, {
       props,
-      mergedClsPrefixRef: mergedClsPrefix
+      mergedClsPrefixRef
     })
     provide(messageApiInjectionKey, api)
     function create (content: string, options = {}): MessageReactive {
@@ -127,7 +127,7 @@ export default defineComponent({
     }
     return Object.assign(
       {
-        mergedClsPrefix,
+        mergedClsPrefix: mergedClsPrefixRef,
         messageRefs,
         messageList: messageListRef,
         handleAfterLeave

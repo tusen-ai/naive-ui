@@ -84,7 +84,7 @@ export default defineComponent({
   name: 'Log',
   props: logProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const slientRef = ref(false)
     const highlightRef = computed(() => {
       return props.language !== undefined
@@ -107,7 +107,7 @@ export default defineComponent({
       style,
       logLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     function handleScroll (e: Event): void {
       const container = e.target as HTMLElement
@@ -213,7 +213,7 @@ export default defineComponent({
       highlightRef
     })
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       scrollbarRef,
       mergedTheme: themeRef,
       styleHeight: styleHeightRef,

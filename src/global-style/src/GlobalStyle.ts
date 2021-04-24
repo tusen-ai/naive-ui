@@ -13,7 +13,7 @@ import { merge } from 'lodash-es'
 export default defineComponent({
   name: 'GlobalStyle',
   setup () {
-    const NConfigProvider = inject(configProviderInjectionKey)
+    const NConfigProvider = inject(configProviderInjectionKey, null)
     const { body } = document
     const { style } = body
     let styleApplied = false

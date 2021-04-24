@@ -66,7 +66,7 @@ export default defineComponent({
   name: 'CheckboxGroup',
   props: checkboxGroupProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const formItem = useFormItem(props)
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = computed(() => props.value)
@@ -140,7 +140,7 @@ export default defineComponent({
       toggleCheckbox
     })
     return {
-      mergedClsPrefix
+      mergedClsPrefix: mergedClsPrefixRef
     }
   },
   render () {

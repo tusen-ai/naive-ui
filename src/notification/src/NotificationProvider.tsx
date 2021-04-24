@@ -88,7 +88,7 @@ export default defineComponent({
   name: 'NotificationProvider',
   props: notificationProviderProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const notificationListRef = ref<NotificationReactive[]>([])
     const notificationRefs: Record<string, NotificationRef> = {}
     function create (options: NotificationOptions): NotificationReactive {
@@ -124,7 +124,7 @@ export default defineComponent({
       style,
       notificationLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const api = {
       create,
@@ -136,7 +136,7 @@ export default defineComponent({
     }
     provide(notificationApiInjectionKey, api)
     provide(notificationProviderInjectionKey, {
-      mergedClsPrefixRef: mergedClsPrefix,
+      mergedClsPrefixRef,
       mergedThemeRef: themeRef
     })
     // deprecated
@@ -145,7 +145,7 @@ export default defineComponent({
     }
     return Object.assign(
       {
-        mergedClsPrefix,
+        mergedClsPrefix: mergedClsPrefixRef,
         notificationList: notificationListRef,
         notificationRefs,
         handleAfterLeave

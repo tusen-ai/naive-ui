@@ -11,10 +11,10 @@ export default defineComponent({
   name: 'InputGroup',
   props: inputGroupProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
-    useStyle('InputGroup', style, mergedClsPrefix)
+    const { mergedClsPrefixRef } = useConfig(props)
+    useStyle('InputGroup', style, mergedClsPrefixRef)
     return {
-      mergedClsPrefix
+      mergedClsPrefix: mergedClsPrefixRef
     }
   },
   render () {

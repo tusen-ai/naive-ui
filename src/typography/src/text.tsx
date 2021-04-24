@@ -68,17 +68,17 @@ export default defineComponent({
   name: 'Text',
   props: textProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Typography',
       'Text',
       style,
       typographyLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       compitableTag: useCompitable(props, ['as', 'tag']),
       cssVars: computed(() => {
         const { depth, type } = props

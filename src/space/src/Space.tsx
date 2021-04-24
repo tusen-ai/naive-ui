@@ -53,17 +53,17 @@ export default defineComponent({
   name: 'Space',
   props: spaceProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Space',
       'Space',
       undefined,
       spaceLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       margin: computed<{ horizontal: number, vertical: number }>(() => {
         const { size } = props
         if (Array.isArray(size)) {

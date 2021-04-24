@@ -52,14 +52,14 @@ export default defineComponent({
   name: 'Rate',
   props: rateProps,
   setup (props) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Rate',
       'Rate',
       style,
       rateLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const controlledValueRef = toRef(props, 'value')
     const uncontrolledValueRef = ref(props.defaultValue)
@@ -88,7 +88,7 @@ export default defineComponent({
       doUpdateValue(index + 1)
     }
     return {
-      mergedClsPrefix,
+      mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: useMergedState(controlledValueRef, uncontrolledValueRef),
       hoverIndex: hoverIndexRef,
       handleMouseEnter,

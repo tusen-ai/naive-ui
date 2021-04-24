@@ -18,14 +18,14 @@ export default function useConfig (
   }
 ): {
     NConfigProvider: ConfigProviderInjection | null
-    mergedBordered: ComputedRef<boolean>
-    mergedClsPrefix: ComputedRef<string>
-    namespace: ComputedRef<string | undefined>
+    mergedBorderedRef: ComputedRef<boolean>
+    mergedClsPrefixRef: ComputedRef<string>
+    namespaceRef: ComputedRef<string | undefined>
   } {
   const NConfigProvider = inject(configProviderInjectionKey, null)
   return {
     NConfigProvider,
-    mergedBordered: computed(() => {
+    mergedBorderedRef: computed(() => {
       const { bordered } = props
       if (bordered !== undefined) return bordered
       return (
@@ -34,10 +34,10 @@ export default function useConfig (
         true
       )
     }),
-    mergedClsPrefix: computed(() => {
+    mergedClsPrefixRef: computed(() => {
       const clsPrefix = NConfigProvider?.mergedClsPrefixRef.value
       return clsPrefix || defaultClsPrefix
     }),
-    namespace: computed(() => NConfigProvider?.mergedNamespaceRef.value)
+    namespaceRef: computed(() => NConfigProvider?.mergedNamespaceRef.value)
   }
 }

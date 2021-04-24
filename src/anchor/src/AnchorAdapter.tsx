@@ -31,14 +31,14 @@ export default defineComponent({
   name: 'Anchor',
   props: anchorProps,
   setup (props, { slots }) {
-    const { mergedClsPrefix } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Anchor',
       'Anchor',
       style,
       anchorLight,
       props,
-      mergedClsPrefix
+      mergedClsPrefixRef
     )
     const anchorRef = ref<BaseAnchorInst | null>(null)
     const cssVarsRef = computed(() => {
@@ -81,7 +81,7 @@ export default defineComponent({
             ref={anchorRef}
             style={cssVarsRef.value as CSSProperties}
             {...keep(props, baseAnchorPropKeys)}
-            mergedClsPrefix={mergedClsPrefix.value}
+            mergedClsPrefix={mergedClsPrefixRef.value}
           >
             {slots}
           </NBaseAnchor>
