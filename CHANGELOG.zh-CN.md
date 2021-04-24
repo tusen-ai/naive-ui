@@ -10,6 +10,7 @@
 
 - 修正 `n-p`、`n-ol`、`n-ul` 作为最后一个子元素 margin bottom 不是 0
 - 修正 `n-checkbox-group` 在非受控模式不工作
+- 修正 `n-data-table` 取消全部选择不工作
 
 ## 2.7.3
 

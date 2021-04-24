@@ -10,6 +10,7 @@
 
 - Fix `n-p`, `n-ol`, `n-ul` margin bottom is not 0 when they are last child.
 - Fix `n-checkbox-group` not working in uncontrolled mode.
+- Fix `n-data-table` clear check all in table now working.
 
 ## 2.7.3
 

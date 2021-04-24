@@ -33,7 +33,7 @@ function createSelectHandler (
         case allKey:
           doCheckAll(true)
           return
-        case '_n-none__':
+        case noneKey:
           doUncheckAll(true)
           return
         default:
