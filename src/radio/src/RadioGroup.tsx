@@ -148,7 +148,7 @@ export default defineComponent({
       props,
       mergedClsPrefix
     )
-    const { mergedSize: mergedSizeRef } = formItem
+    const { mergedSizeRef } = formItem
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(
@@ -177,7 +177,7 @@ export default defineComponent({
       nameRef: toRef(props, 'name'),
       valueRef: mergedValueRef,
       disabledRef: toRef(props, 'disabled'),
-      mergedSizeRef: formItem.mergedSize,
+      mergedSizeRef,
       doUpdateValue
     })
     return {

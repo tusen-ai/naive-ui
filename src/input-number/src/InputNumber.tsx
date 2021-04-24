@@ -296,7 +296,7 @@ export default defineComponent({
       mergedValue: mergedValueRef,
       mergedPlaceholder: mergedPlaceholderRef,
       displayedValueInvalid: displayedValueInvalidRef,
-      mergedSize: formItem.mergedSize,
+      mergedSize: formItem.mergedSizeRef,
       displayedValue: displayedValueRef,
       addable: addableRef,
       minusable: minusableRef,

@@ -37,7 +37,7 @@ type UseFormItemProps<T> =
   | {}
 
 export interface UseFormItem<T> {
-  mergedSize: ComputedRef<T>
+  mergedSizeRef: ComputedRef<T>
   nTriggerFormBlur: () => void
   nTriggerFormChange: () => void
   nTriggerFormFocus: () => void
@@ -71,7 +71,7 @@ export default function useFormItem<T extends AllowedSize = FormItemSize> (
     }
   })
   return {
-    mergedSize: mergedSizeRef,
+    mergedSizeRef,
     nTriggerFormBlur () {
       if (NFormItem) {
         NFormItem.handleContentBlur()

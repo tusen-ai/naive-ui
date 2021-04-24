@@ -79,7 +79,7 @@ export default defineComponent({
       mergedClsPrefix
     )
     const formItem = useFormItem(props)
-    const { mergedSize: mergedSizeRef } = formItem
+    const { mergedSizeRef } = formItem
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(

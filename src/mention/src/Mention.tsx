@@ -335,7 +335,7 @@ export default defineComponent({
       namespace,
       mergedClsPrefix,
       mergedBordered,
-      mergedSize: formItem.mergedSize,
+      mergedSize: formItem.mergedSizeRef,
       mergedTheme: themeRef,
       treeMate: treeMateRef,
       selectMenuInstRef,

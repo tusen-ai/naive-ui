@@ -712,7 +712,7 @@ export default defineComponent({
       showSelectMenu: showSelectMenuRef,
       pattern: patternRef,
       treeMate: treeMateRef,
-      mergedSize: formItem.mergedSize,
+      mergedSize: formItem.mergedSizeRef,
       localizedPlaceholder: localizedPlaceholderRef,
       selectedOption: selectedOptionRef,
       selectedOptions: selectedOptionsRef,

@@ -178,7 +178,7 @@ function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
     uncontrolledChecked: uncontrolledCheckedRef,
     renderSafeChecked: renderSafeCheckedRef,
     focus: focusRef,
-    mergedSize: formItem.mergedSize,
+    mergedSize: formItem.mergedSizeRef,
     handleRadioInputChange,
     handleRadioInputBlur,
     handleRadioInputFocus,

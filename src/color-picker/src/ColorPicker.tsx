@@ -117,7 +117,8 @@ export default defineComponent({
     const selfRef = ref<HTMLElement | null>(null)
     let upcomingValue: string | null = null
 
-    const formItemRef = useFormItem(props)
+    const formItem = useFormItem(props)
+    const { mergedSizeRef } = formItem
     const { localeRef } = useLocale('global')
     const { mergedClsPrefix: mergedClsPrefixRef, namespace } = useConfig(props)
 
@@ -391,7 +392,7 @@ export default defineComponent({
       } else {
         upcomingValue = null
       }
-      const { nTriggerFormChange, nTriggerFormInput } = formItemRef
+      const { nTriggerFormChange, nTriggerFormInput } = formItem
       const { onUpdateValue, 'onUpdate:value': _onUpdateValue } = props
       if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
       if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
@@ -409,7 +410,7 @@ export default defineComponent({
       const { value } = mergedValueRef
       // no value & only hue changes will complete with no value
       if (value) {
-        const { nTriggerFormChange, nTriggerFormInput } = formItemRef
+        const { nTriggerFormChange, nTriggerFormInput } = formItem
         const { onComplete } = props
         if (onComplete) {
           ;(onComplete as OnUpdateValueImpl)(value)
@@ -468,7 +469,7 @@ export default defineComponent({
     })
 
     const cssVarsRef = computed(() => {
-      const { value: mergedSize } = formItemRef.mergedSize
+      const { value: mergedSize } = mergedSizeRef
       const {
         common: { cubicBezierEaseInOut },
         self: {

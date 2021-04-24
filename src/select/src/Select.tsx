@@ -660,7 +660,7 @@ export default defineComponent({
       localizedPlaceholder: localizedPlaceholderRef,
       selectedOption: selectedOptionRef,
       selectedOptions: selectedOptionsRef,
-      mergedSize: formItem.mergedSize,
+      mergedSize: formItem.mergedSizeRef,
       focused: focusedRef,
       handleMenuFocus,
       handleMenuBlur,

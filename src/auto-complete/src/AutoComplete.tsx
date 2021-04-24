@@ -248,7 +248,7 @@ export default defineComponent({
       menuInstRef,
       triggerElRef,
       treeMate: treeMateRef,
-      mergedSize: formItem.mergedSize,
+      mergedSize: formItem.mergedSizeRef,
       active: activeRef,
       handleClear,
       handleFocus,

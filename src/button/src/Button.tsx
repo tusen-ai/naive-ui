@@ -108,7 +108,7 @@ export default defineComponent({
       )
     })
     const NButtonGroup = inject(buttonGroupInjectionKey, {})
-    const { mergedSize: mergedSizeRef } = useFormItem(
+    const { mergedSizeRef } = useFormItem(
       {},
       {
         defaultSize: 'medium',

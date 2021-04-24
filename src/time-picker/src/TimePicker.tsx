@@ -510,7 +510,7 @@ export default defineComponent({
       secondInFormat: secondInFormatRef,
       mergedAttrSize: mergedAttrSizeRef,
       displayTimeString: displayTimeStringRef,
-      mergedSize: formItem.mergedSize,
+      mergedSize: formItem.mergedSizeRef,
       isValueInvalid: isValueInvalidRef,
       isHourInvalid: isHourInvalidRef,
       isMinuteInvalid: isMinuteInvalidRef,

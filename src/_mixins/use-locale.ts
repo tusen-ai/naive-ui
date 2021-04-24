@@ -8,13 +8,12 @@ export default function createLocaleMixin<T extends keyof typeof enUS> (
     localeRef: Ref<typeof enUS[T]>
     dateLocaleRef: Ref<typeof dateEnUS>
   } {
-  const NConfigProvider = inject(configProviderInjectionKey, null)
+  const { mergedLocaleRef, mergedDateLocaleRef } =
+    inject(configProviderInjectionKey, null) || {}
   const localeRef = computed(() => {
-    const { mergedLocaleRef } = NConfigProvider || {}
     return mergedLocaleRef?.value?.[ns] ?? enUS[ns]
   })
   const dateLocaleRef = computed(() => {
-    const { mergedDateLocaleRef } = NConfigProvider || {}
     return mergedDateLocaleRef?.value ?? dateEnUS
   })
   return {

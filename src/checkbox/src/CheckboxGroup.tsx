@@ -136,7 +136,7 @@ export default defineComponent({
     provide(checkboxGroupInjectionKey, {
       valueSetRef: valueSetRef,
       disabledRef: toRef(props, 'disabled'),
-      mergedSizeRef: formItem.mergedSize,
+      mergedSizeRef: formItem.mergedSizeRef,
       toggleCheckbox
     })
     return {

@@ -106,10 +106,9 @@ export default defineComponent({
       mergedClsPrefix
     )
     const formItem = useFormItem(props)
+    const { mergedSizeRef } = formItem
     const itemSizeRef = computed(() => {
-      const {
-        mergedSize: { value: size }
-      } = formItem
+      const { value: size } = mergedSizeRef
       const {
         self: { [createKey('itemHeight', size)]: itemSize }
       } = themeRef.value
@@ -217,7 +216,7 @@ export default defineComponent({
     }
     provide(transferInjectionKey, {
       mergedClsPrefixRef: mergedClsPrefix,
-      mergedSizeRef: formItem.mergedSize,
+      mergedSizeRef,
       disabledRef: toRef(props, 'disabled'),
       mergedThemeRef: themeRef,
       srcCheckedValuesRef,
@@ -253,9 +252,7 @@ export default defineComponent({
       handleTgtFilterUpdateValue,
       handleSrcFilterUpdateValue,
       cssVars: computed(() => {
-        const {
-          mergedSize: { value: size }
-        } = formItem
+        const { value: size } = mergedSizeRef
         const {
           common: {
             cubicBezierEaseInOut,

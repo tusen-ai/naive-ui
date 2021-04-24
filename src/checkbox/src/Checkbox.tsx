@@ -128,6 +128,7 @@ export default defineComponent({
         return 'medium'
       }
     })
+    const { mergedSizeRef } = formItem
     const themeRef = useTheme(
       'Checkbox',
       'Checkbox',
@@ -183,9 +184,7 @@ export default defineComponent({
       handleKeyUp,
       handleKeyDown,
       cssVars: computed(() => {
-        const {
-          mergedSize: { value: mergedSize }
-        } = formItem
+        const { value: mergedSize } = mergedSizeRef
         const {
           common: { cubicBezierEaseInOut },
           self: {

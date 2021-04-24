@@ -429,7 +429,7 @@ export default defineComponent({
       isRange: isRangeRef,
       localizedStartPlaceholder: localizedStartPlaceholderRef,
       localizedEndPlaceholder: localizedEndPlaceholderRef,
-      mergedSize: formItem.mergedSize,
+      mergedSize: formItem.mergedSizeRef,
       localizedPlacehoder: localizedPlacehoderRef,
       isValueInvalid: uniVaidation.isValueInvalidRef,
       isStartValueInvalid: dualValidation.isStartValueInvalidRef,

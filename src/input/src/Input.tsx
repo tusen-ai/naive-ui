@@ -180,7 +180,7 @@ export default defineComponent({
     )
     // form-item
     const formItem = useFormItem(props)
-    const { mergedSize: mergedSizeRef } = formItem
+    const { mergedSizeRef } = formItem
     // states
     const focusedRef = ref(false)
     const hoverRef = ref(false)
