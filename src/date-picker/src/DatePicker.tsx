@@ -16,6 +16,7 @@ import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { format, getTime, isValid } from 'date-fns'
 import { useIsMounted, useMergedState } from 'vooks'
+import { getAlphaString, toRgbString } from 'seemly'
 import { InputInst, InputProps, NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
 import { useFormItem, useTheme, useConfig, useLocale } from '../../_mixins'
@@ -497,6 +498,8 @@ export default defineComponent({
             panelHeaderPadding,
             calendarDividerColor,
             calendarTitleGridTempateColumns,
+            iconColor,
+            iconColorDisabled,
             [createKey('calendarLeftPadding', type)]: calendarLeftPadding,
             [createKey('calendarRightPadding', type)]: calendarRightPadding
           }
@@ -548,7 +551,13 @@ export default defineComponent({
 
           // panel arrow
           '--arrow-size': arrowSize,
-          '--arrow-color': arrowColor
+          '--arrow-color': arrowColor,
+
+          // icon in trigger
+          '--icon-color': toRgbString(iconColor),
+          '--icon-color-disabled': toRgbString(iconColorDisabled),
+          '--icon-alpha': getAlphaString(iconColor),
+          '--icon-alpha-disabled': getAlphaString(iconColorDisabled)
         }
       })
     }
