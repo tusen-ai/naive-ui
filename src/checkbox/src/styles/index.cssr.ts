@@ -61,7 +61,9 @@ export default c([
         backgroundColor: 'var(--color-checked)'
       }, [
         cB('checkbox-icon', [
+          // if not set width to 100%, safari & old chrome won't display the icon
           c('.check-icon', `
+            width: 100%;
             opacity: 1;
             transform: scale(1);
           `)

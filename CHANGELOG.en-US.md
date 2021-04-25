@@ -8,6 +8,7 @@
 
 ### Fixes
 
+- Fix `n-checkbox` check mark not displayed.
 - Fix `n-date-picker` icon transition style in trigger.
 - Fix `n-p`, `n-ol`, `n-ul` margin bottom is not 0 when they are last child.
 - Fix `n-checkbox-group` not working in uncontrolled mode.
