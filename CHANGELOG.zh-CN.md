@@ -1,8 +1,8 @@
 # CHANGELOG
 
-## Pending
+## 2.7.4
 
-## Feats
+### Feats
 
 - `n-form-item` 可以在 `n-form` 外使用
 
