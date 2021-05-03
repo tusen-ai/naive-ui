@@ -11,7 +11,9 @@ const layoutDark: LayoutTheme = {
   },
   self (vars) {
     const commonSelf = self(vars)
+    const { cardColor } = vars
     commonSelf.siderToggleButtonColor = 'rgba(255, 255, 255, .3)'
+    commonSelf.footerColor = cardColor
     return commonSelf
   }
 }

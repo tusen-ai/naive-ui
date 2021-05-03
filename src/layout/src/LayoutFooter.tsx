@@ -36,11 +36,12 @@ export default defineComponent({
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
-          self: { footerBorderColor }
+          self: { footerBorderColor, footerColor }
         } = themeRef.value
         return {
           '--bezier': cubicBezierEaseInOut,
-          '--footer-border-color': footerBorderColor
+          '--color': footerColor,
+          '--border-color': footerBorderColor
         }
       })
     }

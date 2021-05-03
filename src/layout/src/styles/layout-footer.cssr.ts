@@ -1,11 +1,14 @@
 import { cB, cM } from '../../../_utils/cssr'
 
 // vars:
-// --footer-border-color
+// --bezier
+// --color
+// --border-color
 export default cB('layout-footer', `
   transition:
     background-color .3s var(--bezier),
     border-color .3s var(--bezier);
+  background-color: var(--color);
   box-sizing: border-box;
 `, [
   cM('absolute-positioned', `
@@ -15,6 +18,6 @@ export default cB('layout-footer', `
     bottom: 0;
   `),
   cM('bordered', `
-    border-top: solid 1px var(--footer-border-color);
+    border-top: solid 1px var(--border-color);
   `)
 ])

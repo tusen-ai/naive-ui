@@ -10,6 +10,7 @@ export const self = (vars: ThemeCommonVars) => {
     bodyColor,
     cardColor,
     dividerColor,
+    actionColor,
     scrollbarColor,
     scrollbarColorHover
   } = vars
@@ -17,6 +18,7 @@ export const self = (vars: ThemeCommonVars) => {
     textColor: textColor2,
     color: bodyColor,
     headerColor: cardColor,
+    footerColor: actionColor,
     headerBorderColor: dividerColor,
     footerBorderColor: dividerColor,
     siderBorderColor: dividerColor,
