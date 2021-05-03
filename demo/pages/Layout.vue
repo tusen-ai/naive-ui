@@ -15,6 +15,7 @@
     </n-layout-sider>
     <n-layout ref="layoutInstRef" :native-scrollbar="false">
       <router-view />
+      <site-footer />
     </n-layout>
   </n-layout>
 </template>
@@ -25,10 +26,14 @@ import { computed, watch, toRef, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { findMenuValue } from '../utils/route'
 import { useIsXs } from '../utils/composables'
+import SiteFooter from './home/Footer.vue'
 import { useDocOptions, useComponentOptions } from '../store'
 import { useMemo } from 'vooks'
 
 export default {
+  components: {
+    SiteFooter
+  },
   setup () {
     const route = useRoute()
     const router = useRouter()

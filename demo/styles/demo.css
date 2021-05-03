@@ -47,6 +47,11 @@ body {
   margin-bottom: 16px;
 }
 
+.md-table-wrapper:last-child,
+.md-card:last-child {
+  margin-bottom: 0;
+}
+
 .md-table td:first-child {
   font-size: 0.93em !important;
   font-family: v-mono, monospace;

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="banner">
-      <right-image class="right-image" v-if="!isXs" />
+      <right-image class="right-image" v-if="!isS" />
       <n-h1 :style="titleStyle" class="naive-title">
         <span
           @mouseenter="handleTitleMouseEnter"
@@ -9,7 +9,7 @@
           >Na{{ hover ? 'ï' : 'i' }}ve UI</span
         >
       </n-h1>
-      <n-p style="font-size: 16px; margin-bottom: 0">
+      <n-p style="font-size: 16px; margin-top: 0; margin-bottom: 0">
         {{ t('intro1') }}
       </n-p>
       <n-p
@@ -45,11 +45,8 @@
       </div>
       <left-image class="left-image" />
     </div>
-    <n-layout-footer
-      :position="isXs ? undefined : 'absolute'"
-      style="z-index: auto"
-    >
-      <landing-footer style="max-width: 1200px; margin: auto" />
+    <n-layout-footer>
+      <landing-footer centered />
     </n-layout-footer>
   </div>
 </template>
@@ -59,7 +56,7 @@ import { computed } from 'vue'
 import LandingFooter from './Footer.vue'
 import leftImage from './Left.vue'
 import rightImage from './Right.vue'
-import { i18n, useIsXs } from '../../utils/composables'
+import { i18n, useIsXs, useIsS } from '../../utils/composables'
 import { useThemeName } from '../../store'
 
 export default {
@@ -72,6 +69,7 @@ export default {
     const isXsRef = useIsXs()
     return {
       isXs: isXsRef,
+      isS: useIsS(),
       theme: useThemeName(),
       titleStyle: computed(() => {
         if (isXsRef.value) {
@@ -130,15 +128,22 @@ export default {
 
 <style scoped>
 .banner {
+  height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  position: relative;
   text-align: center;
-  position: absolute;
-  top: calc(50% - 36px);
-  left: 0;
-  right: 0;
-  transform: translateY(-50%);
+  justify-content: center;
+}
+
+.banner::after {
+  content: '';
+  width: 100%;
+  height: 64px;
 }
 
 .naive-title {
+  line-height: 1;
   font-family: Metropolis, sans-serif;
   margin-bottom: 18px !important;
 }
@@ -179,7 +184,7 @@ export default {
   transform: translateY(-50%);
 }
 
-@media only screen and (max-width: 639px) {
+@media only screen and (max-width: 1023px) {
   .banner {
     position: static;
     text-align: left;
@@ -188,7 +193,7 @@ export default {
     margin-top: 60px;
     margin-right: 16px;
     min-height: 550px;
-    height: calc(100vh - 180px);
+    height: calc(100vh - 124px);
   }
   .left-image {
     position: relative;

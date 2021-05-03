@@ -46,7 +46,7 @@ function genDemosTemplate (demoInfos, colSpan) {
 }
 
 function genAnchorTemplate (children, options = {}) {
-  return `<n-anchor :top="32" :bound="16" position="absolute" affix style="width: 144px;" :ignore-gap="${options.ignoreGap}">${children}</n-anchor>`
+  return `<n-anchor :bound="16" style="width: 144px; position: sticky; top: 32px;" :ignore-gap="${options.ignoreGap}">${children}</n-anchor>`
 }
 
 function genDemosAnchorTemplate (demoInfos) {
@@ -112,7 +112,7 @@ export default {
       displayMode: useDisplayMode(),
       wrapperStyle: computed(() => {
         return !useSmallPaddingRef.value
-          ? 'display: flex; flex-wrap: nowrap; padding: 32px 24px 24px 56px;'
+          ? 'display: flex; flex-wrap: nowrap; padding: 32px 24px 56px 56px;'
           : 'padding: 16px;'
       }),
       contentStyle: computed(() => {

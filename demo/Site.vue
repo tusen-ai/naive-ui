@@ -5,6 +5,7 @@
       class="home-layout"
       :style="isXs ? undefined : 'top: 64px; overflow: hidden'"
       :position="isXs ? undefined : 'absolute'"
+      :native-scrollbar="false"
     >
       <router-view />
     </n-layout>
