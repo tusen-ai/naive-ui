@@ -96,6 +96,7 @@ export default cB('layout-sider', `
     height: 100%;
     opacity: 0;
     transition: opacity .3s var(--bezier);
+    max-width: 100%;
   `),
   cM('show-content', [
     cE('content', {

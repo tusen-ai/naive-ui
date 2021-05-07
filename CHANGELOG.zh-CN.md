@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- `n-layout-sider` 折叠后不显示菜单
+
 ## 2.7.4
 
 ### Feats

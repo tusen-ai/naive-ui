@@ -7,7 +7,8 @@ import {
   provide,
   PropType,
   ExtractPropTypes,
-  InjectionKey
+  InjectionKey,
+  CSSProperties
 } from 'vue'
 import { createTreeMate, Key } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
@@ -314,17 +315,17 @@ export default defineComponent({
   },
   render () {
     const { mergedClsPrefix } = this
-    return h(
-      'div',
-      {
-        class: [
+    return (
+      <div
+        class={[
           `${mergedClsPrefix}-menu`,
           `${mergedClsPrefix}-menu--${this.mode}`,
           this.collapsed && `${mergedClsPrefix}-menu--collapsed`
-        ],
-        style: this.cssVars
-      },
-      this.tmNodes.map((tmNode) => itemRenderer(tmNode))
+        ]}
+        style={this.cssVars as CSSProperties}
+      >
+        {this.tmNodes.map((tmNode) => itemRenderer(tmNode))}
+      </div>
     )
   }
 })

@@ -124,77 +124,71 @@ export default defineComponent({
         dropdownShow,
         iconMarginRight
       } = this
-      return h(NMenuOptionContent, {
-        paddingLeft,
-        collapsed,
-        disabled: mergedDisabled,
-        iconMarginRight,
-        maxIconSize,
-        activeIconSize,
-        title,
-        showArrow: !(NMenu.props.mode === 'horizontal'),
-        childActive: childActive,
-        clsPrefix: mergedClsPrefix,
-        icon,
-        hover: dropdownShow,
-        onClick: handleClick
-      })
+      return (
+        <NMenuOptionContent
+          paddingLeft={paddingLeft}
+          collapsed={collapsed}
+          disabled={mergedDisabled}
+          iconMarginRight={iconMarginRight}
+          maxIconSize={maxIconSize}
+          activeIconSize={activeIconSize}
+          title={title}
+          showArrow={!(NMenu.props.mode === 'horizontal')}
+          childActive={childActive}
+          clsPrefix={mergedClsPrefix}
+          icon={icon}
+          hover={dropdownShow}
+          onClick={handleClick}
+        />
+      )
     }
     const createSubmenuChildren = (): VNode => {
-      return h(NFadeInExpandTransition, null, {
-        default: () => {
-          const { tmNodes, collapsed } = this
-          return !collapsed
-            ? h(
-              'div',
-              {
-                class: `${mergedClsPrefix}-submenu-children`
-              },
-              tmNodes.map((item) => itemRenderer(item))
-            )
-            : null
-        }
-      })
+      return (
+        <NFadeInExpandTransition>
+          {{
+            default: () => {
+              const { tmNodes, collapsed } = this
+              return !collapsed ? (
+                <div class={`${mergedClsPrefix}-submenu-children`}>
+                  {tmNodes.map((item) => itemRenderer(item))}
+                </div>
+              ) : null
+            }
+          }}
+        </NFadeInExpandTransition>
+      )
     }
-    return this.root
-      ? h(
-        NDropdown,
-        {
-          builtinThemeOverrides: {
-            fontSizeLarge: '14px',
-            optionIconSizeLarge: '18px'
-          },
-          value: this.mergedValue,
-          size: 'large',
-          trigger: 'hover',
-          disabled: !this.dropdownEnabled,
-          placement: this.dropdownPlacement,
-          'onUpdate:show': this.handlePopoverShowChange,
-          options: this.rawNodes,
-          onSelect: this.NMenu.doSelect
-        },
-        {
-          default: () =>
-            h(
-              'div',
-              {
-                class: `${mergedClsPrefix}-submenu`
-              },
-              [
-                createSubmenuItem(),
-                this.NMenu.props.mode === 'horizontal'
-                  ? null
-                  : createSubmenuChildren()
-              ]
-            )
-        }
-      )
-      : h(
-        'div',
-        {
-          class: `${mergedClsPrefix}-submenu`
-        },
-        [createSubmenuItem(), createSubmenuChildren()]
-      )
+    return this.root ? (
+      <NDropdown
+        builtinThemeOverrides={{
+          fontSizeLarge: '14px',
+          optionIconSizeLarge: '18px'
+        }}
+        value={this.mergedValue}
+        size="large"
+        trigger="hover"
+        disabled={!this.dropdownEnabled}
+        placement={this.dropdownPlacement}
+        onUpdateShow={this.handlePopoverShowChange}
+        options={this.rawNodes}
+        onSelect={this.NMenu.doSelect}
+      >
+        {{
+          default: () => (
+            <div class={`${mergedClsPrefix}-submenu`}>
+              {createSubmenuItem()}
+              {this.NMenu.props.mode === 'horizontal'
+                ? null
+                : createSubmenuChildren()}
+            </div>
+          )
+        }}
+      </NDropdown>
+    ) : (
+      <div class={`${mergedClsPrefix}-submenu`}>
+        {createSubmenuItem()}
+        {createSubmenuChildren()}
+      </div>
+    )
   }
 })

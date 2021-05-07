@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- `n-layout-sider` doesn't show menu after collapsed.
+
 ## 2.7.4
 
 ### Feats
