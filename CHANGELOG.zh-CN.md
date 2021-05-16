@@ -4,7 +4,8 @@
 
 ### Fixes
 
-- `n-layout-sider` 折叠后不显示菜单
+- 修正 `n-layout-sider` 折叠后不显示菜单
+- 修正 `n-input-number` 在输入不合法 blur 时没有重设回原始值
 
 ## 2.7.4
 

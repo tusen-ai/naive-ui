@@ -4,7 +4,8 @@
 
 ### Fixes
 
-- `n-layout-sider` doesn't show menu after collapsed.
+- Fix `n-layout-sider` doesn't show menu after collapsed.
+- Fix `n-input-number` doesn't reset to origin value when blur with invalid value.
 
 ## 2.7.4
 

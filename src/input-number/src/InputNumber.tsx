@@ -133,7 +133,7 @@ export default defineComponent({
     }
     const deriveValueFromDisplayedValue = (
       offset = 0,
-      postUpdate = true
+      postUpdateIfValid = true
     ): null | number | false => {
       const { value: displayedValue } = displayedValueRef
       const parsedValue = parse(displayedValue)
@@ -144,15 +144,15 @@ export default defineComponent({
           const { value: mergedMax } = mergedMaxRef
           const { value: mergedMin } = mergedMinRef
           if (mergedMax !== null && nextValue > mergedMax) {
-            if (!postUpdate) return false
+            if (!postUpdateIfValid) return false
             nextValue = mergedMax
           }
           if (mergedMin !== null && nextValue < mergedMin) {
-            if (!postUpdate) return false
+            if (!postUpdateIfValid) return false
             nextValue = mergedMin
           }
           if (props.validator && !props.validator(nextValue)) return false
-          if (postUpdate) doUpdateValue(nextValue)
+          if (postUpdateIfValid) doUpdateValue(nextValue)
           return nextValue
         }
       }
@@ -204,12 +204,17 @@ export default defineComponent({
         return
       }
       const value = deriveValueFromDisplayedValue()
+      // If valid, update has been posted
       // make sure e.target.value is correct in blur callback
       if (value !== false) {
         const inputElRef = inputInstRef.value?.inputElRef
         if (inputElRef) {
           inputElRef.value = String(value || '')
         }
+      } else {
+        // If not valid, nothing will be emitted, so derive displayed value from
+        // origin value
+        deriveDisplayedValueFromValue()
       }
       const { onBlur } = props
       const { nTriggerFormBlur } = formItem
