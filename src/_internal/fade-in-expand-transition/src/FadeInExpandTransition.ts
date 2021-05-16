@@ -15,14 +15,15 @@ export default defineComponent({
       type: String as PropType<'in-out' | 'out-in' | 'default' | undefined>,
       default: undefined
     },
-    onAfterLeave: {
-      type: Function,
-      default: undefined
-    },
+    onAfterLeave: Function,
+    onAfterEnter: Function,
     width: {
       type: Boolean,
       default: false
-    }
+    },
+    // reverse mode is only used in tree
+    // it make it from expanded to collapsed after mounted
+    reverse: Boolean
   },
   setup (props, { slots }) {
     function handleBeforeLeave (el: HTMLElement): void {
@@ -59,11 +60,18 @@ export default defineComponent({
         el.style.transition = ''
         el.style.maxWidth = `${memorizedWidth}px`
       } else {
-        const memorizedHeight = el.offsetHeight
-        el.style.maxHeight = '0'
-        void el.offsetWidth
-        el.style.transition = ''
-        el.style.maxHeight = `${memorizedHeight}px`
+        if (props.reverse) {
+          el.style.maxHeight = `${el.offsetHeight}px`
+          void el.offsetHeight
+          el.style.transition = ''
+          el.style.maxHeight = '0'
+        } else {
+          const memorizedHeight = el.offsetHeight
+          el.style.maxHeight = '0'
+          void el.offsetWidth
+          el.style.transition = ''
+          el.style.maxHeight = `${memorizedHeight}px`
+        }
       }
       void el.offsetWidth
     }
@@ -71,8 +79,11 @@ export default defineComponent({
       if (props.width) {
         el.style.maxWidth = ''
       } else {
-        el.style.maxHeight = ''
+        if (!props.reverse) {
+          el.style.maxHeight = ''
+        }
       }
+      props.onAfterEnter?.()
     }
     return () => {
       const type = props.group ? TransitionGroup : Transition

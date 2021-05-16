@@ -9,7 +9,7 @@ import {
   watch,
   CSSProperties
 } from 'vue'
-import { createTreeMate } from 'treemate'
+import { createTreeMate, flatten } from 'treemate'
 import { useMergedState } from 'vooks'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -31,6 +31,13 @@ import {
   InternalDropInfo,
   treeInjectionKey
 } from './interface'
+import MotionWrapper from './MotionWrapper'
+
+interface MotionData {
+  __motion: true
+  mode: 'expand' | 'collapse'
+  nodes: TmNode[]
+}
 
 const treeProps = {
   ...(useTheme.props as ThemeProps<TreeTheme>),
@@ -225,6 +232,10 @@ export default defineComponent({
       uncontrolledExpandedKeysRef
     )
 
+    const fNodesRef = computed(() =>
+      treeMateRef.value.getFlattenedNodes(mergedExpandedKeysRef.value)
+    )
+
     const draggingNodeKeyRef = ref<Key | null>(null)
     const draggingNodeRef = ref<TreeOption | null>(null)
     const droppingNodeKeyRef = ref<Key | null>(null)
@@ -249,6 +260,79 @@ export default defineComponent({
         highlightKeysRef.value = []
       }
     })
+
+    const aipRef = ref(false) // animation in progress
+    const afNodeRef = ref<Array<TmNode | MotionData>>([]) // animation flattened nodes
+    watch(mergedExpandedKeysRef, (value, prevValue) => {
+      const prevVSet = new Set(prevValue)
+      let addedKey: Key | null = null
+      let removedKey: Key | null = null
+      for (const expandedKey of value) {
+        if (!prevVSet.has(expandedKey)) {
+          if (addedKey !== null) return // multi expand, not triggered by click
+          addedKey = expandedKey
+        }
+      }
+      const currentVSet = new Set(value)
+      for (const expandedKey of prevValue) {
+        if (!currentVSet.has(expandedKey)) {
+          if (removedKey !== null) return // multi collapse, not triggered by click
+          removedKey = expandedKey
+        }
+      }
+      if (addedKey !== null && removedKey !== null) {
+        // multi action, not triggered by click
+        return
+      }
+      if (addedKey !== null) {
+        // play add animation
+        aipRef.value = true
+        afNodeRef.value = treeMateRef.value.getFlattenedNodes(prevValue)
+        const expandedNodeIndex = afNodeRef.value.findIndex(
+          (node) => (node as any).key === addedKey
+        )
+        if (~expandedNodeIndex) {
+          afNodeRef.value.splice(expandedNodeIndex + 1, 0, {
+            __motion: true,
+            mode: 'expand',
+            nodes: flatten(
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+              (afNodeRef.value[expandedNodeIndex] as TmNode).children!,
+              value
+            )
+          })
+        }
+      }
+      if (removedKey !== null) {
+        // play remove animation
+        aipRef.value = true
+        afNodeRef.value = treeMateRef.value.getFlattenedNodes(value)
+        const collapsedNodeIndex = afNodeRef.value.findIndex(
+          (node) => (node as any).key === removedKey
+        )
+        console.log(collapsedNodeIndex)
+        if (~collapsedNodeIndex) {
+          afNodeRef.value.splice(collapsedNodeIndex + 1, 0, {
+            __motion: true,
+            mode: 'collapse',
+            nodes: flatten(
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+              (afNodeRef.value[collapsedNodeIndex] as TmNode).children!,
+              value
+            )
+          })
+        }
+      }
+    })
+
+    const mergedFNodesRef = computed(() => {
+      if (aipRef.value) return afNodeRef.value
+      else return fNodesRef.value
+    })
+
+    function handleAfterEnter (): void {
+      aipRef.value = false
+    }
 
     function doExpandedKeysChange (value: Key[]): void {
       const {
@@ -329,7 +413,7 @@ export default defineComponent({
       }
     }
     function handleSwitcherClick (node: TmNode): void {
-      if (props.disabled || node.disabled) return
+      if (props.disabled || node.disabled || aipRef.value) return
       toggleExpand(node)
     }
     function handleSelect (node: TmNode): void {
@@ -428,12 +512,12 @@ export default defineComponent({
       resetDragStatus()
     }
     provide(treeInjectionKey, {
-      loadingKeysRef: loadingKeysRef,
-      highlightKeysRef: highlightKeysRef,
-      displayedCheckedKeysRef: displayedCheckedKeysRef,
-      displayedIndeterminateKeysRef: displayedIndeterminateKeysRef,
-      mergedSelectedKeysRef: mergedSelectedKeysRef,
-      mergedExpandedKeysRef: mergedExpandedKeysRef,
+      loadingKeysRef,
+      highlightKeysRef,
+      displayedCheckedKeysRef,
+      displayedIndeterminateKeysRef,
+      mergedSelectedKeysRef,
+      mergedExpandedKeysRef,
       mergedThemeRef: themeRef,
       remoteRef: toRef(props, 'remote'),
       onLoadRef: toRef(props, 'onLoad'),
@@ -451,7 +535,8 @@ export default defineComponent({
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      tmNodes: computed(() => treeMateRef.value.treeNodes),
+      fNodes: mergedFNodesRef,
+      handleAfterEnter,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
@@ -489,13 +574,22 @@ export default defineComponent({
         class={`${mergedClsPrefix}-tree`}
         style={this.cssVars as CSSProperties}
       >
-        {this.tmNodes.map((tmNode) => (
-          <NTreeNode
-            key={tmNode.key}
-            tmNode={tmNode}
-            clsPrefix={mergedClsPrefix}
-          />
-        ))}
+        {this.fNodes.map((tmNode) =>
+          '__motion' in tmNode ? (
+            <MotionWrapper
+              nodes={tmNode.nodes}
+              clsPrefix={mergedClsPrefix}
+              mode={tmNode.mode}
+              onAfterEnter={this.handleAfterEnter}
+            />
+          ) : (
+            <NTreeNode
+              key={tmNode.key}
+              tmNode={tmNode}
+              clsPrefix={mergedClsPrefix}
+            />
+          )
+        )}
       </div>
     )
   }

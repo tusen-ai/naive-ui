@@ -3,7 +3,6 @@ import { useMemo } from 'vooks'
 import NTreeNodeSwitcher from './TreeNodeSwitcher'
 import NTreeNodeCheckbox from './TreeNodeCheckbox'
 import NTreeNodeContent from './TreeNodeContent'
-import { NFadeInExpandTransition } from '../../_internal'
 import { TmNode, treeInjectionKey } from './interface'
 
 const TreeNode = defineComponent({
@@ -120,6 +119,9 @@ const TreeNode = defineComponent({
     const { tmNode, clsPrefix, checkable, blockNode } = this
     return (
       <li class={`${clsPrefix}-tree-node`}>
+        {Array.apply(null, { length: tmNode.level } as any).map(() => (
+          <div class={`${clsPrefix}-tree-node-indent`}></div>
+        ))}
         <NTreeNodeSwitcher
           clsPrefix={clsPrefix}
           expanded={this.expanded}
@@ -153,20 +155,6 @@ const TreeNode = defineComponent({
           }}
         </NTreeNodeContent>
         {this.icon ? this.icon() : null}
-        {!tmNode.isLeaf ? (
-          <NFadeInExpandTransition>
-            {{
-              default: () =>
-                this.expanded && tmNode.children ? (
-                  <ul class={`${clsPrefix}-tree-children-wrapper`}>
-                    {tmNode.children.map((child) =>
-                      h(TreeNode, { tmNode: child, key: child.key, clsPrefix })
-                    )}
-                  </ul>
-                ) : null
-            }}
-          </NFadeInExpandTransition>
-        ) : null}
       </li>
     )
   }

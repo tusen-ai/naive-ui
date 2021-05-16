@@ -16,6 +16,7 @@ interface FadeInHeightExpandTransitionOption {
   foldPadding?: boolean
   enterToProps?: Record<string, string | number> | undefined
   leaveToProps?: Record<string, string | number> | undefined
+  reverse?: boolean
 }
 
 export default function ({
@@ -25,14 +26,19 @@ export default function ({
   leavingDelay = '0s',
   foldPadding = false,
   enterToProps = undefined,
-  leaveToProps = undefined
+  leaveToProps = undefined,
+  reverse = false
 }: FadeInHeightExpandTransitionOption = {}): CNode[] {
+  const enterClass = reverse ? 'leave' : 'enter'
+  const leaveClass = reverse ? 'enter' : 'leave'
   return [
-    c('&.fade-in-height-expand-transition-leave-from, &.fade-in-height-expand-transition-enter-to', {
+    c(`&.fade-in-height-expand-transition-${leaveClass}-from,
+      &.fade-in-height-expand-transition-${enterClass}-to`, {
       ...enterToProps,
       opacity: 1
     }),
-    c('&.fade-in-height-expand-transition-leave-to, &.fade-in-height-expand-transition-enter-from', {
+    c(`&.fade-in-height-expand-transition-${leaveClass}-to,
+      &.fade-in-height-expand-transition-${enterClass}-from`, {
       ...leaveToProps,
       opacity: 0,
       marginTop: '0 !important',
@@ -40,7 +46,7 @@ export default function ({
       paddingTop: foldPadding ? '0 !important' : undefined,
       paddingBottom: foldPadding ? '0 !important' : undefined
     }),
-    c('&.fade-in-height-expand-transition-leave-active', `
+    c(`&.fade-in-height-expand-transition-${leaveClass}-active`, `
       overflow: ${overflow};
       transition:
         max-height ${duration} ${cubicBezierEaseInOut} ${leavingDelay},
@@ -51,7 +57,7 @@ export default function ({
         padding-bottom ${duration} ${cubicBezierEaseInOut} ${leavingDelay}
         ${originalTransition ? ',' + originalTransition : ''}
     `),
-    c('&.fade-in-height-expand-transition-enter-active', `
+    c(`&.fade-in-height-expand-transition-${enterClass}-active`, `
       overflow: ${overflow};
       transition:
         max-height ${duration} ${cubicBezierEaseInOut},

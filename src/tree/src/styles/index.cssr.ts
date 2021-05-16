@@ -1,6 +1,6 @@
 import { c, cB, cE, cM } from '../../../_utils/cssr'
-import fadeInHeightExpandTransition from '../../../_styles/transitions/fade-in-height-expand.cssr'
 import iconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
+import fadeInHeightExpandTransition from '../../../_styles/transitions/fade-in-height-expand.cssr'
 
 // vars:
 // --arrow-color
@@ -27,14 +27,24 @@ export default cB('tree', {
       })
     ])
   ]),
-  cB('tree-children-wrapper', {
-    marginLeft: '16px'
-  }, [
-    fadeInHeightExpandTransition({ duration: '0.15s' })
+  cB('tree-node-indent', `
+    height: 0;
+    flex: 0 0 16px;
+  `),
+  cB('tree-motion-wrapper', [
+    cM('expand', [
+      fadeInHeightExpandTransition()
+    ]),
+    cM('collapse', [
+      fadeInHeightExpandTransition({
+        reverse: true
+      })
+    ])
   ]),
-  cB('tree-node', {
-    padding: '6px 0 0 0'
-  }),
+  cB('tree-node', `
+    padding: 6px 0 0 0;
+    display: flex;
+  `),
   cB('tree-node-switcher', `
     cursor: pointer;
     display: inline-flex;
