@@ -13,7 +13,7 @@ import {
   UnwrapRef,
   InjectionKey
 } from 'vue'
-import { TreeNode } from 'treemate'
+import { TreeNode, createIndexGetter } from 'treemate'
 import { VirtualList, VirtualListRef } from 'vueuc'
 import { depx, getPadding, happensIn } from 'seemly'
 import { NEmpty } from '../../../empty'
@@ -124,6 +124,10 @@ export default defineComponent({
     const selfRef = ref<HTMLElement | null>(null)
     const virtualListRef = ref<VirtualListRef | null>(null)
     const scrollbarRef = ref<ScrollbarInst | null>(null)
+    const flattenedNodesRef = computed(() => props.treeMate.getFlattenedNodes())
+    const fIndexGetterRef = computed(() =>
+      createIndexGetter(flattenedNodesRef.value)
+    )
     const { treeMate } = props
     const pendingNodeRef = ref(
       props.autoPending
@@ -140,6 +144,9 @@ export default defineComponent({
             treeMate.getFirstAvailableNode()
         : null
     )
+    const defaultScrollIndex = pendingNodeRef.value
+      ? fIndexGetterRef.value(pendingNodeRef.value.key) ?? undefined
+      : undefined
     const itemSizeRef = computed(() => {
       return depx(themeRef.value.self[createKey('optionHeight', props.size)])
     })
@@ -153,14 +160,11 @@ export default defineComponent({
       return new Set<string | number>()
     })
     const emptyRef = computed(() => {
-      const tmNodes = props.treeMate.flattenedNodes
+      const tmNodes = flattenedNodesRef.value
       return tmNodes && tmNodes.length === 0
     })
     const styleRef = computed(() => {
       return [{ width: formatLength(props.width) }, cssVarsRef.value]
-    })
-    const flattenedNodesRef = computed(() => {
-      return props.treeMate.flattenedNodes
     })
     watch(toRef(props, 'treeMate'), () => {
       if (props.autoPending) {
@@ -237,11 +241,13 @@ export default defineComponent({
     ): void {
       pendingNodeRef.value = tmNode
       if (doScroll && tmNode) {
+        const fIndex = fIndexGetterRef.value(tmNode.key)
+        if (fIndex === null) return
         if (props.virtualScroll) {
-          virtualListRef.value?.scrollTo({ index: tmNode.fIndex })
+          virtualListRef.value?.scrollTo({ index: fIndex })
         } else {
           scrollbarRef.value?.scrollTo({
-            index: tmNode.fIndex,
+            index: fIndex,
             elSize: itemSizeRef.value
           })
         }
@@ -327,7 +333,7 @@ export default defineComponent({
       virtualListRef,
       scrollbarRef,
       style: styleRef,
-      defaultScrollIndex: pendingNodeRef.value?.fIndex,
+      defaultScrollIndex,
       itemSize: itemSizeRef,
       padding: paddingRef,
       flattenedNodes: flattenedNodesRef,
