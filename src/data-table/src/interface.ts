@@ -159,6 +159,7 @@ export interface DataTableInjection {
   loadingRef: Ref<boolean>
   rowClassNameRef: Ref<string | CreateRowClassName | undefined>
   mergedCheckedRowKeysRef: Ref<RowKey[]>
+  mergedCheckedRowKeySetRef: Ref<Set<RowKey>>
   localeRef: Ref<NLocale['DataTable']>
   filterMenuCssVarsRef: Ref<CSSProperties>
   mergedExpandedRowKeysRef: Ref<RowKey[]>

@@ -21,11 +21,14 @@ export function useCheck (
     controlledCheckedRowKeysRef,
     uncontrolledCheckedRowKeysRef
   )
+  const mergedCheckedRowKeySetRef = computed(() => {
+    return new Set(mergedCheckedRowKeysRef.value)
+  })
   const countOfCurrentPageCheckedRowsRef = computed(() => {
-    const { value: checkedRowKeys } = mergedCheckedRowKeysRef
+    const { value: mergedCheckedRowKeySet } = mergedCheckedRowKeySetRef
     return paginatedDataRef.value.reduce((total, tmNode) => {
       const { key } = tmNode
-      return total + (checkedRowKeys.includes(key) ? 1 : 0)
+      return total + (mergedCheckedRowKeySet.has(key) ? 1 : 0)
     }, 0)
   })
   const someRowsCheckedRef = computed(() => {
@@ -83,6 +86,7 @@ export function useCheck (
     )
   }
   return {
+    mergedCheckedRowKeySetRef,
     mergedCheckedRowKeysRef,
     someRowsCheckedRef,
     allRowsCheckedRef,

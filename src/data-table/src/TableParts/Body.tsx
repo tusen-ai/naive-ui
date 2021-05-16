@@ -8,8 +8,8 @@ import {
   onUnmounted
 } from 'vue'
 import { pxfy } from 'seemly'
+import { VirtualList, VirtualListRef } from 'vueuc'
 import { c } from '../../../_utils/cssr'
-import { NCheckbox } from '../../../checkbox'
 import { NScrollbar, ScrollbarInst } from '../../../scrollbar'
 import { formatLength } from '../../../_utils'
 import {
@@ -22,7 +22,7 @@ import {
 import { createRowClassName, getColKey } from '../utils'
 import Cell from './Cell'
 import ExpandTrigger from './ExpandTrigger'
-import { VirtualList, VirtualListRef } from 'vueuc'
+import RenderSafeCheckbox from './BodyCheckbox'
 
 export default defineComponent({
   name: 'DataTableBody',
@@ -30,6 +30,7 @@ export default defineComponent({
     const {
       treeMateRef,
       mergedCheckedRowKeysRef,
+      mergedCheckedRowKeySetRef,
       mergedExpandedRowKeysRef,
       mergedClsPrefixRef,
       mergedThemeRef,
@@ -164,7 +165,7 @@ export default defineComponent({
       fixedColumnLeftMap: fixedColumnLeftMapRef,
       fixedColumnRightMap: fixedColumnRightMapRef,
       currentPage: mergedCurrentPageRef,
-      mergedCheckedRowKeys: mergedCheckedRowKeysRef,
+      mergedCheckedRowKeySet: mergedCheckedRowKeySetRef,
       rowClassName: rowClassNameRef,
       renderExpand: renderExpandRef,
       mergedExpandedRowKeys: mergedExpandedRowKeysRef,
@@ -220,7 +221,6 @@ export default defineComponent({
               fixedColumnLeftMap,
               fixedColumnRightMap,
               currentPage,
-              mergedCheckedRowKeys,
               rowClassName,
               mergedSortState,
               mergedExpandedRowKeys,
@@ -382,10 +382,10 @@ export default defineComponent({
                   >
                     {column.type === 'selection' ? (
                       !isSummary ? (
-                        <NCheckbox
+                        <RenderSafeCheckbox
                           key={currentPage}
+                          rowKey={rowKey}
                           disabled={rowInfo.disabled}
-                          checked={mergedCheckedRowKeys.includes(rowKey)}
                           onUpdateChecked={(checked) =>
                             handleCheckboxUpdateChecked(rowInfo, checked)
                           }

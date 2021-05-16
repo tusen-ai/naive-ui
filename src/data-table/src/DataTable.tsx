@@ -249,7 +249,8 @@ export default defineComponent({
       doUpdateCheckedRowKeys,
       someRowsCheckedRef,
       allRowsCheckedRef,
-      mergedCheckedRowKeysRef
+      mergedCheckedRowKeysRef,
+      mergedCheckedRowKeySetRef
     } = useCheck(props, {
       selectionColumnRef,
       treeMateRef,
@@ -300,6 +301,7 @@ export default defineComponent({
       loadingRef: toRef(props, 'loading'),
       rowClassNameRef: toRef(props, 'rowClassName'),
       mergedCheckedRowKeysRef,
+      mergedCheckedRowKeySetRef,
       mergedExpandedRowKeysRef,
       localeRef,
       rowKeyRef: toRef(props, 'rowKey'),
