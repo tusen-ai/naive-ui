@@ -40,6 +40,7 @@ import {
 import style from './styles/index.cssr'
 import { useGroupHeader } from './use-group-header'
 import { useExpand } from './use-expand'
+import { createId } from 'seemly'
 
 export const dataTableProps = {
   ...(useTheme.props as ThemeProps<DataTableTheme>),
@@ -99,6 +100,7 @@ export const dataTableProps = {
   },
   expandedRowKeys: Array as PropType<RowKey[]>,
   summary: [Function] as PropType<CreateSummary>,
+  virtualScroll: Boolean,
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:page': [Function, Array] as PropType<
   PaginationProps['onUpdate:page']
@@ -275,6 +277,7 @@ export default defineComponent({
     })
     const { localeRef } = useLocale('DataTable')
     provide(dataTableInjectionKey, {
+      componentId: createId(),
       hoverKeyRef,
       mergedClsPrefixRef,
       treeMateRef,
@@ -302,6 +305,7 @@ export default defineComponent({
       rowKeyRef: toRef(props, 'rowKey'),
       renderExpandRef,
       summaryRef: toRef(props, 'summary'),
+      virtualScrollRef: toRef(props, 'virtualScroll'),
       checkOptionsRef: computed(() => {
         const { value: selectionColumn } = selectionColumnRef
         return selectionColumn?.options

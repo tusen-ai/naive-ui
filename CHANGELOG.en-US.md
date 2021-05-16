@@ -5,6 +5,7 @@
 ## Feats
 
 - `n-tree` add `virtual-scroll` prop.
+- `n-data-table` add `virtual-scroll` prop.
 
 ### Fixes
 

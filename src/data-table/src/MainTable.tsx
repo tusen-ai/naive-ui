@@ -1,4 +1,12 @@
-import { h, ref, defineComponent, inject, computed, renderSlot } from 'vue'
+import {
+  h,
+  ref,
+  defineComponent,
+  inject,
+  computed,
+  renderSlot,
+  watchEffect
+} from 'vue'
 import { VResizeObserver } from 'vueuc'
 import { formatLength } from '../../_utils'
 import TableHeader from './TableParts/Header'
@@ -36,6 +44,7 @@ export default defineComponent({
 
     const headerInstRef = ref<MainTableHeaderRef | null>(null)
     const bodyInstRef = ref<MainTableBodyRef | null>(null)
+    const selfElRef = ref<HTMLElement | null>(null)
 
     const fixedStateInitializedRef = ref(
       !(leftFixedColumnsRef.value.length || rightFixedColumnsRef.value.length)
@@ -43,8 +52,12 @@ export default defineComponent({
 
     const bodyStyleRef = computed(() => {
       return {
-        maxHeight: formatLength(bodyMaxHeightRef.value),
-        minHeight: formatLength(bodyMinHeightRef.value)
+        maxHeight: formatLength(props.maxHeight),
+        minHeight: formatLength(props.minHeight)
+        // the following mode will cause dup renders
+        // need to expose a new props to enable it
+        // maxHeight: formatLength(bodyMaxHeightRef.value ?? props.maxHeight),
+        // minHeight: formatLength(bodyMinHeightRef.value ?? props.minHeight)
       }
     })
     function handleHeaderResize (entry: ResizeObserverEntry): void {
@@ -91,12 +104,24 @@ export default defineComponent({
       getBodyElement,
       getHeaderElement
     }
+    watchEffect(() => {
+      const { value: selfEl } = selfElRef
+      if (!selfEl) return
+      const transitionDisabledClass = `${mergedClsPrefixRef.value}-data-table-base-table--transition-disabled`
+      if (fixedStateInitializedRef.value) {
+        setTimeout(() => {
+          selfEl.classList.remove(transitionDisabledClass)
+        }, 0)
+      } else {
+        selfEl.classList.add(transitionDisabledClass)
+      }
+    })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
+      selfElRef,
       headerInstRef,
       bodyInstRef,
       bodyStyle: bodyStyleRef,
-      fixedStateInitialized: fixedStateInitializedRef,
       handleHeaderScroll,
       handleHeaderResize,
       ...exposedMethods
@@ -105,13 +130,7 @@ export default defineComponent({
   render () {
     const { mergedClsPrefix } = this
     return (
-      <div
-        class={[
-          `${mergedClsPrefix}-data-table-base-table`,
-          !this.fixedStateInitialized &&
-            `${mergedClsPrefix}-data-table-base-table--transition-disabled`
-        ]}
-      >
+      <div class={`${mergedClsPrefix}-data-table-base-table`} ref="selfElRef">
         <VResizeObserver onResize={this.handleHeaderResize}>
           {{
             default: () => (

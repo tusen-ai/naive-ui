@@ -5,6 +5,7 @@
 ## Feats
 
 - `n-tree` 新增 `virtual-scroll` 属性
+- `n-data-table` 新增 `virtual-scroll` 属性
 
 ### Fixes
 

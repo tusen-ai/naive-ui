@@ -41,13 +41,12 @@ export default defineComponent({
       mergedCurrentPageRef,
       allRowsCheckedRef,
       someRowsCheckedRef,
-      leftActiveFixedColKeyRef,
-      rightActiveFixedColKeyRef,
       rowsRef,
       colsRef,
       mergedThemeRef,
       checkOptionsRef,
       mergedSortStateRef,
+      componentId,
       doUpdateSorter,
       doUncheckAll,
       doCheckAll
@@ -71,6 +70,7 @@ export default defineComponent({
       doUpdateSorter(nextSorter)
     }
     return {
+      componentId,
       mergedSortState: mergedSortStateRef,
       mergedClsPrefix: mergedClsPrefixRef,
       scrollX: scrollXRef,
@@ -79,8 +79,6 @@ export default defineComponent({
       currentPage: mergedCurrentPageRef,
       allRowsChecked: allRowsCheckedRef,
       someRowsChecked: someRowsCheckedRef,
-      leftActiveFixedColKey: leftActiveFixedColKeyRef,
-      rightActiveFixedColKey: rightActiveFixedColKeyRef,
       rows: rowsRef,
       cols: colsRef,
       mergedTheme: mergedThemeRef,
@@ -98,13 +96,12 @@ export default defineComponent({
       currentPage,
       allRowsChecked,
       someRowsChecked,
-      leftActiveFixedColKey,
-      rightActiveFixedColKey,
       mergedSortState,
       rows,
       cols,
       mergedTheme,
       checkOptions,
+      componentId,
       handleColHeaderClick,
       handleCheckboxUpdateChecked
     } = this
@@ -123,7 +120,10 @@ export default defineComponent({
               <col key={col.key} style={col.style} />
             ))}
           </colgroup>
-          <thead class={`${mergedClsPrefix}-data-table-thead`}>
+          <thead
+            class={`${mergedClsPrefix}-data-table-thead`}
+            data-n-id={componentId}
+          >
             {rows.map((row) => {
               return (
                 <tr class={`${mergedClsPrefix}-data-table-tr`}>
@@ -139,6 +139,7 @@ export default defineComponent({
                         }}
                         colspan={colSpan}
                         rowspan={rowSpan}
+                        data-col-key={key}
                         class={[
                           `${mergedClsPrefix}-data-table-th`,
                           column.fixed &&
@@ -153,10 +154,6 @@ export default defineComponent({
                             [`${mergedClsPrefix}-data-table-th--sortable`]: isColumnSortable(
                               column
                             ),
-                            [`${mergedClsPrefix}-data-table-th--shadow-after`]:
-                              leftActiveFixedColKey === key,
-                            [`${mergedClsPrefix}-data-table-th--shadow-before`]:
-                              rightActiveFixedColKey === key,
                             [`${mergedClsPrefix}-data-table-th--selection`]:
                               column.type === 'selection',
                             [`${mergedClsPrefix}-data-table-th--last`]: isLast

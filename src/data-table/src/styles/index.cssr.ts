@@ -37,9 +37,10 @@ const fixedColumnStyle = createFixedColumnStyle()
 // --action-button-margin
 // --pagination-margin
 // --empty-padding
-// --box-shadow-before
-// --box-shadow-after
 // --sorter-size
+
+// --box-shadow-before used in Body.tsx
+// --box-shadow-after used in Body.tsx
 export default c([
   cB('data-table', `
     width: 100%;
@@ -415,16 +416,6 @@ function createFixedColumnStyle (): CNode[] {
         transition: box-shadow .2s var(--bezier);
         left: -36px;
       `)
-    ]),
-    cM('shadow-before', [
-      c('&::before', {
-        boxShadow: 'var(--box-shadow-before)'
-      })
-    ]),
-    cM('shadow-after', [
-      c('&::after', {
-        boxShadow: 'var(--box-shadow-after)'
-      })
     ])
   ]
 }

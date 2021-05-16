@@ -135,6 +135,7 @@ export type DataTableSelectionOptions = Array<
 | { label: string, key: string | number, onSelect: () => void }
 >
 export interface DataTableInjection {
+  componentId: string
   checkOptionsRef: Ref<DataTableSelectionOptions | undefined>
   hoverKeyRef: Ref<RowKey | null>
   mergedClsPrefixRef: Ref<string>
@@ -165,6 +166,7 @@ export interface DataTableInjection {
   renderExpandRef: Ref<undefined | RenderExpand>
   summaryRef: Ref<undefined | CreateSummary>
   rawPaginatedDataRef: Ref<RowData[]>
+  virtualScrollRef: Ref<boolean>
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   doUpdateFilters: (
     filters: FilterState,

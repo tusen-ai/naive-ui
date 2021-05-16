@@ -1,5 +1,14 @@
-import { h, ref, defineComponent, inject } from 'vue'
+import {
+  h,
+  ref,
+  defineComponent,
+  inject,
+  VNode,
+  watchEffect,
+  onUnmounted
+} from 'vue'
 import { pxfy } from 'seemly'
+import { c } from '../../../_utils/cssr'
 import { NCheckbox } from '../../../checkbox'
 import { NScrollbar, ScrollbarInst } from '../../../scrollbar'
 import { formatLength } from '../../../_utils'
@@ -7,11 +16,13 @@ import {
   dataTableInjectionKey,
   RowData,
   RowKey,
-  SummaryRowData
+  SummaryRowData,
+  MainTableBodyRef
 } from '../interface'
 import { createRowClassName, getColKey } from '../utils'
 import Cell from './Cell'
 import ExpandTrigger from './ExpandTrigger'
+import { VirtualList, VirtualListRef } from 'vueuc'
 
 export default defineComponent({
   name: 'DataTableBody',
@@ -36,12 +47,15 @@ export default defineComponent({
       hoverKeyRef,
       summaryRef,
       mergedSortStateRef,
+      virtualScrollRef,
+      componentId,
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
       doUpdateCheckedRowKeys
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(dataTableInjectionKey)!
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
+    const virtualListRef = ref<VirtualListRef | null>(null)
     function handleCheckboxUpdateChecked (
       tmNode: { key: RowKey },
       checked: boolean
@@ -54,6 +68,9 @@ export default defineComponent({
       )
     }
     function getScrollContainer (): HTMLElement | null {
+      if (virtualScrollRef.value) {
+        return virtualListContainer()
+      }
       const { value } = scrollbarInstRef
       if (value) return value.containerRef
       return null
@@ -72,8 +89,71 @@ export default defineComponent({
       }
       doUpdateExpandedRowKeys(nextExpandedKeys)
     }
+    function handleMouseLeaveTable (): void {
+      hoverKeyRef.value = null
+    }
+    function virtualListContainer (): HTMLElement {
+      const { value } = virtualListRef
+      return value?.listRef as HTMLElement
+    }
+    function virtualListContent (): HTMLElement {
+      const { value } = virtualListRef
+      return value?.itemsRef as HTMLElement
+    }
+    function handleVirtualListScroll (e: Event): void {
+      scrollbarInstRef.value?.sync()
+      handleScroll(e)
+    }
+    function handleVirtualListResize (): void {
+      scrollbarInstRef.value?.sync()
+    }
+    const exposedMethods: MainTableBodyRef = {
+      getScrollContainer
+    }
+    // manually control shadow style to avoid rerender
+    const style = c([
+      ({ props: cProps }: { props: Record<string, string> }) =>
+        c([
+          cProps.leftActiveFixedColKey === null
+            ? null
+            : c(
+                `[data-n-id="${cProps.componentId}"] [data-col-key="${cProps.leftActiveFixedColKey}"]::after`,
+                {
+                  boxShadow: 'var(--box-shadow-after)'
+                }
+            ),
+          cProps.rightActiveFixedColKey === null
+            ? null
+            : c(
+                `[data-n-id="${cProps.componentId}"] [data-col-key="${cProps.rightActiveFixedColKey}"]::before`,
+                {
+                  boxShadow: 'var(--box-shadow-before)'
+                }
+            )
+        ])
+    ])
+    watchEffect(() => {
+      const { value: leftActiveFixedColKey } = leftActiveFixedColKeyRef
+      const { value: rightActiveFixedColKey } = rightActiveFixedColKeyRef
+      style.mount({
+        id: `n-${componentId}`,
+        force: true,
+        props: {
+          leftActiveFixedColKey,
+          rightActiveFixedColKey,
+          componentId
+        }
+      })
+    })
+    onUnmounted(() => {
+      style.unmount({
+        id: `n-${componentId}`
+      })
+    })
     return {
+      componentId,
       scrollbarInstRef,
+      virtualListRef,
       summary: summaryRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: mergedThemeRef,
@@ -86,29 +166,42 @@ export default defineComponent({
       currentPage: mergedCurrentPageRef,
       mergedCheckedRowKeys: mergedCheckedRowKeysRef,
       rowClassName: rowClassNameRef,
-      leftActiveFixedColKey: leftActiveFixedColKeyRef,
-      rightActiveFixedColKey: rightActiveFixedColKeyRef,
       renderExpand: renderExpandRef,
       mergedExpandedRowKeys: mergedExpandedRowKeysRef,
       hoverKey: hoverKeyRef,
       mergedSortState: mergedSortStateRef,
-      getScrollContainer,
+      virtualScroll: virtualScrollRef,
+      handleVirtualListScroll,
+      handleVirtualListResize,
+      handleMouseLeaveTable,
+      virtualListContainer,
+      virtualListContent,
       handleScroll,
       handleCheckboxUpdateChecked,
-      handleUpdateExpanded
+      handleUpdateExpanded,
+      ...exposedMethods
     }
   },
   render () {
-    const { mergedTheme, scrollX, mergedClsPrefix, handleScroll } = this
+    const {
+      mergedTheme,
+      scrollX,
+      mergedClsPrefix,
+      virtualScroll,
+      handleScroll
+    } = this
+    const contentStyle = {
+      minWidth: formatLength(scrollX)
+    }
     return (
       <NScrollbar
         ref="scrollbarInstRef"
         class={`${mergedClsPrefix}-data-table-base-table-body`}
         theme={mergedTheme.peers.Scrollbar}
         themeOverrides={mergedTheme.peerOverrides.Scrollbar}
-        contentStyle={{
-          minWidth: formatLength(scrollX)
-        }}
+        contentStyle={contentStyle}
+        container={virtualScroll ? this.virtualListContainer : undefined}
+        content={virtualScroll ? this.virtualListContent : undefined}
         horizontalRailStyle={{ zIndex: 3 }}
         verticalRailStyle={{ zIndex: 3 }}
         xScrollable
@@ -129,10 +222,12 @@ export default defineComponent({
               currentPage,
               mergedCheckedRowKeys,
               rowClassName,
-              leftActiveFixedColKey,
-              rightActiveFixedColKey,
               mergedSortState,
               mergedExpandedRowKeys,
+              componentId,
+              handleVirtualListScroll,
+              handleVirtualListResize,
+              handleMouseLeaveTable,
               renderExpand,
               summary
             } = this
@@ -257,6 +352,7 @@ export default defineComponent({
                     }}
                     colspan={mergedColSpan}
                     rowspan={mergedRowSpan}
+                    data-col-key={colKey}
                     class={[
                       `${mergedClsPrefix}-data-table-td`,
                       column.className,
@@ -274,10 +370,6 @@ export default defineComponent({
                           column.ellipsis === true ||
                           // don't add ellpisis class if tooltip exists
                           (column.ellipsis && !column.ellipsis.tooltip),
-                        [`${mergedClsPrefix}-data-table-td--shadow-after`]:
-                          leftActiveFixedColKey === colKey,
-                        [`${mergedClsPrefix}-data-table-td--shadow-before`]:
-                          rightActiveFixedColKey === colKey,
                         [`${mergedClsPrefix}-data-table-td--selection`]:
                           column.type === 'selection',
                         [`${mergedClsPrefix}-data-table-td--expand`]:
@@ -362,11 +454,57 @@ export default defineComponent({
               }
               return row
             })
-            // const summary =
+
+            // Please note that the current virtual scroll mode impl
+            // not very performant, since it support all the feature of table.
+            // If we can bailout some path it will be much faster. Since it
+            // need to generate all vnode before use the virtual list.
+            if (virtualScroll) {
+              const VirtualListItemWrapper = defineComponent({
+                render () {
+                  return (
+                    <table
+                      class={`${mergedClsPrefix}-data-table-table`}
+                      onMouseleave={handleMouseLeaveTable}
+                    >
+                      <colgroup>
+                        {cols.map((col) => (
+                          <col key={col.key} style={col.style}></col>
+                        ))}
+                      </colgroup>
+                      <tbody
+                        data-n-id={componentId}
+                        class={`${mergedClsPrefix}-data-table-tbody`}
+                      >
+                        {this.$slots}
+                      </tbody>
+                    </table>
+                  )
+                }
+              })
+              return (
+                <VirtualList
+                  ref="virtualListRef"
+                  items={hasExpandedRows ? rows.flat() : rows}
+                  itemSize={28}
+                  visibleItemsTag={VirtualListItemWrapper}
+                  showScrollbar={false}
+                  onResize={handleVirtualListResize}
+                  onScroll={handleVirtualListScroll}
+                  itemsStyle={contentStyle}
+                  itemResizable
+                >
+                  {{
+                    default: ({ item }: { item: VNode }) => {
+                      return item
+                    }
+                  }}
+                </VirtualList>
+              )
+            }
 
             return (
               <table
-                ref="body"
                 class={`${mergedClsPrefix}-data-table-table`}
                 onMouseleave={() => {
                   this.hoverKey = null
@@ -378,7 +516,7 @@ export default defineComponent({
                   ))}
                 </colgroup>
                 <tbody
-                  ref="tbody"
+                  data-n-id={componentId}
                   class={`${mergedClsPrefix}-data-table-tbody`}
                 >
                   {hasExpandedRows ? rows.flat() : rows}
