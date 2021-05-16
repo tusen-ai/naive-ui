@@ -97,6 +97,7 @@ export default defineComponent({
                 showScrollbar={false}
                 onResize={syncVLScroller}
                 onScroll={syncVLScroller}
+                keyField="value"
               >
                 {{
                   default: ({ item }: { item: Option }) => {
