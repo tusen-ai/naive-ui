@@ -2,6 +2,10 @@
 
 ## Pending
 
+## Feats
+
+- `n-tree` 新增 `virtual-scroll` 属性
+
 ### Fixes
 
 - 修正 `n-layout-sider` 折叠后不显示菜单

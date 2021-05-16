@@ -10,6 +10,7 @@ export default defineComponent({
       type: String,
       required: true
     },
+    height: Number,
     nodes: {
       type: Array as PropType<TmNode[]>,
       required: true
@@ -38,6 +39,9 @@ export default defineComponent({
                 `${clsPrefix}-tree-motion-wrapper`,
                 `${clsPrefix}-tree-motion-wrapper--${this.mode}`
               ]}
+              style={{
+                height: this.height
+              }}
             >
               {this.nodes.map((node) => (
                 <TreeNode clsPrefix={clsPrefix} tmNode={node} />

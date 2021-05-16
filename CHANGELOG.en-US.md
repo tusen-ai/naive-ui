@@ -2,6 +2,10 @@
 
 ## Pending
 
+## Feats
+
+- `n-tree` add `virtual-scroll` prop.
+
 ### Fixes
 
 - Fix `n-layout-sider` doesn't show menu after collapsed.

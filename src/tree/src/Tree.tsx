@@ -7,7 +7,8 @@ import {
   provide,
   PropType,
   watch,
-  CSSProperties
+  CSSProperties,
+  VNode
 } from 'vue'
 import { createTreeMate, flatten } from 'treemate'
 import { useMergedState } from 'vooks'
@@ -32,12 +33,16 @@ import {
   treeInjectionKey
 } from './interface'
 import MotionWrapper from './MotionWrapper'
+import { VVirtualList } from 'vueuc'
 
 interface MotionData {
   __motion: true
+  height: number | undefined
   mode: 'expand' | 'collapse'
   nodes: TmNode[]
 }
+
+const ITEM_SIZE = 30
 
 const treeProps = {
   ...(useTheme.props as ThemeProps<TreeTheme>),
@@ -116,6 +121,7 @@ const treeProps = {
     type: Boolean,
     default: true
   },
+  virtualScroll: Boolean,
   onDragenter: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
   onDragleave: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
   onDragend: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
@@ -193,6 +199,7 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const selfElRef = ref<HTMLDivElement | null>(null)
     const treeMateRef = computed(() => createTreeMate(props.data))
     const uncontrolledCheckedKeysRef = ref(
       props.defaultCheckedKeys || props.checkedKeys
@@ -280,10 +287,20 @@ export default defineComponent({
           removedKey = expandedKey
         }
       }
-      if (addedKey !== null && removedKey !== null) {
-        // multi action, not triggered by click
+      if (
+        (addedKey !== null && removedKey !== null) ||
+        (addedKey === null && removedKey === null) ||
+        !selfElRef.value
+      ) {
+        // 1. multi action, not triggered by click
+        // 2. no action, don't know what happened
+        // 3. no self element el, it shouldn't happen, it's only a typescript
+        //    type guard
         return
       }
+      const viewportItemCount =
+        Math.ceil(selfElRef.value.offsetHeight / ITEM_SIZE) + 1
+      const { virtualScroll } = props
       if (addedKey !== null) {
         // play add animation
         aipRef.value = true
@@ -292,14 +309,20 @@ export default defineComponent({
           (node) => (node as any).key === addedKey
         )
         if (~expandedNodeIndex) {
+          const expandedChildren = flatten(
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            (afNodeRef.value[expandedNodeIndex] as TmNode).children!,
+            value
+          )
           afNodeRef.value.splice(expandedNodeIndex + 1, 0, {
             __motion: true,
             mode: 'expand',
-            nodes: flatten(
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-              (afNodeRef.value[expandedNodeIndex] as TmNode).children!,
-              value
-            )
+            height: virtualScroll
+              ? expandedChildren.length * ITEM_SIZE
+              : undefined,
+            nodes: virtualScroll
+              ? expandedChildren.slice(0, viewportItemCount)
+              : expandedChildren
           })
         }
       }
@@ -310,16 +333,21 @@ export default defineComponent({
         const collapsedNodeIndex = afNodeRef.value.findIndex(
           (node) => (node as any).key === removedKey
         )
-        console.log(collapsedNodeIndex)
         if (~collapsedNodeIndex) {
+          const collapsedChildren = flatten(
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            (afNodeRef.value[collapsedNodeIndex] as TmNode).children!,
+            value
+          )
           afNodeRef.value.splice(collapsedNodeIndex + 1, 0, {
             __motion: true,
             mode: 'collapse',
-            nodes: flatten(
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-              (afNodeRef.value[collapsedNodeIndex] as TmNode).children!,
-              value
-            )
+            height: virtualScroll
+              ? collapsedChildren.length * ITEM_SIZE
+              : undefined,
+            nodes: virtualScroll
+              ? collapsedChildren.slice(0, viewportItemCount)
+              : collapsedChildren
           })
         }
       }
@@ -536,6 +564,8 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       fNodes: mergedFNodesRef,
+      aip: aipRef,
+      selfElRef,
       handleAfterEnter,
       cssVars: computed(() => {
         const {
@@ -569,26 +599,42 @@ export default defineComponent({
   },
   render () {
     const { mergedClsPrefix } = this
+    const createNode = (tmNode: TmNode | MotionData): VNode =>
+      '__motion' in tmNode ? (
+        <MotionWrapper
+          height={tmNode.height}
+          nodes={tmNode.nodes}
+          clsPrefix={mergedClsPrefix}
+          mode={tmNode.mode}
+          onAfterEnter={this.handleAfterEnter}
+        />
+      ) : (
+        <NTreeNode
+          key={tmNode.key}
+          tmNode={tmNode}
+          clsPrefix={mergedClsPrefix}
+        />
+      )
     return (
       <div
         class={`${mergedClsPrefix}-tree`}
         style={this.cssVars as CSSProperties}
+        ref="selfElRef"
       >
-        {this.fNodes.map((tmNode) =>
-          '__motion' in tmNode ? (
-            <MotionWrapper
-              nodes={tmNode.nodes}
-              clsPrefix={mergedClsPrefix}
-              mode={tmNode.mode}
-              onAfterEnter={this.handleAfterEnter}
-            />
-          ) : (
-            <NTreeNode
-              key={tmNode.key}
-              tmNode={tmNode}
-              clsPrefix={mergedClsPrefix}
-            />
-          )
+        {this.virtualScroll ? (
+          <VVirtualList
+            items={this.fNodes}
+            itemSize={ITEM_SIZE}
+            ignoreItemResize={this.aip}
+            itemResizable
+          >
+            {{
+              default: ({ item }: { item: TmNode | MotionData }) =>
+                createNode(item)
+            }}
+          </VVirtualList>
+        ) : (
+          this.fNodes.map(createNode)
         )}
       </div>
     )

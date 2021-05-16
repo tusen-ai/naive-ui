@@ -12,6 +12,7 @@ cascade
 async
 multiple
 filter
+virtual
 drag-drop-debug
 ```
 
@@ -37,6 +38,7 @@ drag-drop-debug
 | remote | `boolean` | `false` | 是否异步获取选项，和 onLoad 配合 |
 | selectable | `boolean` | `true` |  |
 | selected-keys | `Array<string \| number>` | `undefined` | 如果设定则 selected 状态受控 |
+| virtual-scroll | `boolean` | `false` | 是否启用虚拟滚动，启用前你需要设定好树的高度样式 |
 | on-update:selected-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
 | on-update:expanded-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
 | on-update:checked-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
