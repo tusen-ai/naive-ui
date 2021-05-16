@@ -9,7 +9,8 @@ import {
   mergeProps,
   renderSlot,
   Transition,
-  CSSProperties
+  CSSProperties,
+  watchEffect
 } from 'vue'
 import { on, off } from 'evtd'
 import { VResizeObserver } from 'vueuc'
@@ -476,6 +477,31 @@ export default defineComponent({
         hideBar()
       }
     }
+    watchEffect(() => {
+      const { value: needXBar } = needXBarRef
+      const { value: needYBar } = needYBarRef
+      const { value: mergedClsPrefix } = mergedClsPrefixRef
+      const { value: xRailEl } = xRailRef
+      const { value: yRailEl } = yRailRef
+      if (xRailEl) {
+        if (!needXBar) {
+          xRailEl.classList.add(`${mergedClsPrefix}-scrollbar-rail--disabled`)
+        } else {
+          xRailEl.classList.remove(
+            `${mergedClsPrefix}-scrollbar-rail--disabled`
+          )
+        }
+      }
+      if (yRailEl) {
+        if (!needYBar) {
+          yRailEl.classList.add(`${mergedClsPrefix}-scrollbar-rail--disabled`)
+        } else {
+          yRailEl.classList.remove(
+            `${mergedClsPrefix}-scrollbar-rail--disabled`
+          )
+        }
+      }
+    })
     onMounted(() => {
       // if container exist, it always can't be resolved when scrollbar is mounted
       // for example:
@@ -596,13 +622,7 @@ export default defineComponent({
                 ),
                 <div
                   ref="yRailRef"
-                  class={[
-                    `${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--vertical`,
-                    {
-                      [`${mergedClsPrefix}-scrollbar-rail--disabled`]: !this
-                        .needYBar
-                    }
-                  ]}
+                  class={`${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--vertical`}
                   style={
                     [this.horizontalRailStyle, { width: this.sizePx }] as any
                   }
@@ -627,13 +647,7 @@ export default defineComponent({
                 </div>,
                 <div
                   ref="xRailRef"
-                  class={[
-                    `${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--horizontal`,
-                    {
-                      [`${mergedClsPrefix}-scrollbar-rail--disabled`]: !this
-                        .needXBar
-                    }
-                  ]}
+                  class={`${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--horizontal`}
                   style={
                     [this.verticalRailStyle, { height: this.sizePx }] as any
                   }
