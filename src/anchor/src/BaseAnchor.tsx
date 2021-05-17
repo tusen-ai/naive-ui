@@ -254,7 +254,7 @@ export default defineComponent({
       }
       if (scrollEl) {
         scrollElement = scrollEl
-        scrollElement.addEventListener('scroll', handleScroll, true)
+        scrollElement.addEventListener('scroll', handleScroll)
       } else if (__DEV__) {
         warn('anchor', 'Target to be listened to is not valid.')
       }
