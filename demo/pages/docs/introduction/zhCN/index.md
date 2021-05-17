@@ -28,7 +28,7 @@ Naive UI 全量使用 Typescript 编写，和你的 Typescript 项目无缝衔�
 
 ## 不算太慢
 
-我尽力让它不要太慢。至少 select 使用虚拟列表写的。
+我尽力让它不要太慢。至少 select、tree、transfer、table 都可以用虚拟列表。
 
 顺便一提，...，没有顺便了。祝你使用愉快。
 
