@@ -33,10 +33,13 @@ export default cB('tree', {
   `),
   cB('tree-motion-wrapper', [
     cM('expand', [
-      fadeInHeightExpandTransition()
+      fadeInHeightExpandTransition({
+        duration: '0.2s'
+      })
     ]),
     cM('collapse', [
       fadeInHeightExpandTransition({
+        duration: '0.2s',
         reverse: true
       })
     ])
