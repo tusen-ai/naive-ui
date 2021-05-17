@@ -2,7 +2,7 @@
 
 Large data is ok. By default `virtual-scroll` is true, so the demo only wants to show you cascader work with large data.
 
-In the example there are 5000 _ 2 _ 2 = 20000 entries.
+In the example there are 5000 \* 2 \* 2 = 20000 entries.
 
 ```html
 <n-space vertical>
@@ -15,7 +15,7 @@ In the example there are 5000 _ 2 _ 2 = 20000 entries.
   </n-space>
   <n-cascader
     v-model:value="value"
-    placeholder="Useless Value"
+    placeholder="Meaningless Value"
     :expand-trigger="hoverTrigger ? 'hover' : 'click'"
     :options="options"
     :cascade="cascade"
