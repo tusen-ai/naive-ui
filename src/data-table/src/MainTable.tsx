@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   h,
   ref,
@@ -32,13 +33,12 @@ export default defineComponent({
       mergedClsPrefixRef,
       rightFixedColumnsRef,
       leftFixedColumnsRef,
-      deriveActiveLeftFixedColumn,
-      deriveActiveRightFixedColumn,
+      tableWidthRef,
+      syncScrollState,
       handleTableHeaderScroll
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(dataTableInjectionKey)!
 
-    let tableWidth: number = 0
     const bodyMaxHeightRef = ref<number | undefined>(undefined)
     const bodyMinHeightRef = ref<number | undefined>(undefined)
 
@@ -63,16 +63,13 @@ export default defineComponent({
     function handleHeaderResize (entry: ResizeObserverEntry): void {
       setTableWidth(entry.contentRect.width)
       deriveBodyMinMaxHeight(entry.contentRect.height)
-      deriveActiveLeftFixedColumn(entry.target as HTMLElement, tableWidth)
-      deriveActiveRightFixedColumn(entry.target as HTMLElement, tableWidth)
+      syncScrollState()
       if (!fixedStateInitializedRef.value) {
         fixedStateInitializedRef.value = true
       }
     }
-    function handleHeaderScroll (e: Event): void {
-      deriveActiveRightFixedColumn(e.target as HTMLElement, tableWidth)
-      deriveActiveLeftFixedColumn(e.target as HTMLElement, tableWidth)
-      handleTableHeaderScroll(e)
+    function handleHeaderScroll (): void {
+      handleTableHeaderScroll()
     }
     function getHeaderElement (): HTMLElement | null {
       const { value } = headerInstRef
@@ -89,7 +86,7 @@ export default defineComponent({
       return null
     }
     function setTableWidth (width: number): void {
-      tableWidth = width
+      tableWidthRef.value = width
     }
     function deriveBodyMinMaxHeight (headerHeight: number): void {
       const { bordered, maxHeight, minHeight } = props

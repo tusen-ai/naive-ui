@@ -1,6 +1,6 @@
-import { beforeNextFrame } from 'seemly'
+import { beforeNextFrameOnce } from 'seemly'
 import { computed, ComputedRef, watch, Ref, ref } from 'vue'
-import { formatLength, warn } from '../../_utils'
+import { formatLength } from '../../_utils'
 import { DataTableSetupProps } from './DataTable'
 import type { ColumnKey, MainTableRef } from './interface'
 import { getColWidth, getColKey } from './utils'
@@ -8,15 +8,19 @@ import { getColWidth, getColKey } from './utils'
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function useScroll (
   props: DataTableSetupProps,
-  data: {
+  {
+    mainTableInstRef,
+    mergedCurrentPageRef,
+    tableWidthRef,
+    scrollPartRef
+  }: {
+    scrollPartRef: Ref<'head' | 'body'>
+    tableWidthRef: Ref<null | number>
     mainTableInstRef: Ref<MainTableRef | null>
     mergedCurrentPageRef: ComputedRef<number>
   }
 ) {
-  const { mainTableInstRef, mergedCurrentPageRef } = data
-  // which part is being scrolling: body left right header
-  let scrollingPart: 'body' | 'left' | 'right' | 'header' | null = null
-  let scrollReceived = false
+  let scrollLeft = 0
   const leftActiveFixedColKeyRef = ref<ColumnKey | null>(null)
   const rightActiveFixedColKeyRef = ref<ColumnKey | null>(null)
   const styleScrollXRef = computed(() => {
@@ -46,13 +50,9 @@ export function useScroll (
     }
     return columns
   })
-  function deriveActiveLeftFixedColumn (
-    target: HTMLElement,
-    tableWidth: number
-  ): void {
+  function deriveActiveLeftFixedColumn (): void {
     // target is header element
     const { value: leftFixedColumns } = leftFixedColumnsRef
-    const scrollLeft = target.scrollLeft
     let leftWidth = 0
     const { value: fixedColumnLeftMap } = fixedColumnLeftMapRef
     let leftActiveFixedColKey = null
@@ -67,14 +67,12 @@ export function useScroll (
     }
     leftActiveFixedColKeyRef.value = leftActiveFixedColKey
   }
-  function deriveActiveRightFixedColumn (
-    target: HTMLElement,
-    tableWidth: number
-  ): void {
+  function deriveActiveRightFixedColumn (): void {
     // target is header element
     const { value: rightFixedColumns } = rightFixedColumnsRef
-    const { scrollLeft } = target
-    const scrollWidth = target.scrollWidth
+    const scrollWidth = Number(props.scrollX)
+    const { value: tableWidth } = tableWidthRef
+    if (tableWidth === null) return
     let rightWidth = 0
     let rightActiveFixedColKey = null
     const { value: fixedColumnRightMap } = fixedColumnRightMapRef
@@ -114,55 +112,50 @@ export function useScroll (
     }
   }
   function handleTableHeaderScroll (): void {
-    if (scrollReceived && scrollingPart === 'header') return
-    switch (scrollingPart) {
-      case null:
-        scrollingPart = 'header'
-        scrollReceived = true
-        beforeNextFrame(syncScrollState)
-        break
-      case 'body':
-        scrollingPart = null
-        scrollReceived = false
-        break
+    if (scrollPartRef.value === 'head') {
+      beforeNextFrameOnce(syncScrollState)
     }
   }
   function handleTableBodyScroll (): void {
-    if (scrollReceived && scrollingPart === 'body') return
-    switch (scrollingPart) {
-      case null:
-        scrollingPart = 'body'
-        scrollReceived = true
-        beforeNextFrame(syncScrollState)
-        break
-      case 'header':
-        scrollingPart = null
-        scrollReceived = false
-        break
+    if (scrollPartRef.value === 'body') {
+      beforeNextFrameOnce(syncScrollState)
     }
   }
   function syncScrollState (): void {
-    if (__DEV__ && scrollingPart === null) {
-      warn(
-        'data-table',
-        'Scroll sync has no corresponding part. This could be a bug of naive-ui.'
-      )
-    }
     const { header, body } = getScrollElements()
     if (!body || !header) return
-    if (body.scrollLeft === header.scrollLeft) {
-      scrollingPart = null
-      scrollReceived = false
-      return
+    const { value: tableWidth } = tableWidthRef
+    if (tableWidth === null) return
+    const { scrollX } = props
+    if (!scrollX) return
+    const scrollWidth = Number(scrollX)
+    const { value: scrollPart } = scrollPartRef
+    // we need to deal with overscroll
+    if (scrollPart === 'head') {
+      scrollLeft = header.scrollLeft
+      if (scrollLeft < 0) {
+        body.scrollLeft = 0
+        header.scrollLeft = 0
+      } else if (scrollLeft + tableWidth > scrollX) {
+        body.scrollLeft = scrollWidth - tableWidth
+        header.scrollLeft = scrollWidth - tableWidth
+      } else {
+        body.scrollLeft = scrollLeft
+      }
+    } else {
+      scrollLeft = body.scrollLeft
+      if (scrollLeft < 0) {
+        body.scrollLeft = 0
+        header.scrollLeft = 0
+      } else if (scrollLeft + tableWidth > scrollX) {
+        body.scrollLeft = scrollWidth - tableWidth
+        header.scrollLeft = scrollWidth - tableWidth
+      } else {
+        header.scrollLeft = scrollLeft
+      }
     }
-    switch (scrollingPart) {
-      case 'header':
-        body.scrollLeft = header.scrollLeft
-        break
-      case 'body':
-        header.scrollLeft = body.scrollLeft
-        break
-    }
+    deriveActiveLeftFixedColumn()
+    deriveActiveRightFixedColumn()
   }
   watch(mergedCurrentPageRef, () => {
     scrollMainTableBodyToTop()
@@ -175,8 +168,7 @@ export function useScroll (
     rightFixedColumnsRef,
     leftActiveFixedColKeyRef,
     rightActiveFixedColKeyRef,
-    deriveActiveRightFixedColumn,
-    deriveActiveLeftFixedColumn,
+    syncScrollState,
     handleTableBodyScroll,
     handleTableHeaderScroll
   }

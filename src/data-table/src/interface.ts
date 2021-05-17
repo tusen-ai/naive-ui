@@ -168,6 +168,8 @@ export interface DataTableInjection {
   summaryRef: Ref<undefined | CreateSummary>
   rawPaginatedDataRef: Ref<RowData[]>
   virtualScrollRef: Ref<boolean>
+  tableWidthRef: Ref<number | null>
+  scrollPartRef: Ref<'head' | 'body'>
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   doUpdateFilters: (
     filters: FilterState,
@@ -177,13 +179,9 @@ export interface DataTableInjection {
   doUpdateCheckedRowKeys: (keys: RowKey[]) => void
   doUncheckAll: (checkWholeTable?: boolean) => void
   doCheckAll: (checkWholeTable?: boolean) => void
-  handleTableHeaderScroll: (e: Event) => void
-  handleTableBodyScroll: (e: Event) => void
-  deriveActiveRightFixedColumn: (
-    target: HTMLElement,
-    tableWidth: number
-  ) => void
-  deriveActiveLeftFixedColumn: (target: HTMLElement, tableWidth: number) => void
+  handleTableHeaderScroll: () => void
+  handleTableBodyScroll: () => void
+  syncScrollState: () => void
 }
 
 export const dataTableInjectionKey: InjectionKey<DataTableInjection> = Symbol(

@@ -222,6 +222,8 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const tableWidthRef = ref<number | null>(null)
+    const scrollPartRef = ref<'head' | 'body'>('body')
     const mainTableInstRef = ref<MainTableRef | null>(null)
     const { rowsRef, colsRef, dataRelatedColsRef } = useGroupHeader(props)
     const {
@@ -264,8 +266,7 @@ export default defineComponent({
     const {
       handleTableBodyScroll,
       handleTableHeaderScroll,
-      deriveActiveRightFixedColumn,
-      deriveActiveLeftFixedColumn,
+      syncScrollState,
       leftActiveFixedColKeyRef,
       rightActiveFixedColKeyRef,
       leftFixedColumnsRef,
@@ -273,11 +274,14 @@ export default defineComponent({
       fixedColumnLeftMapRef,
       fixedColumnRightMapRef
     } = useScroll(props, {
+      scrollPartRef,
+      tableWidthRef,
       mainTableInstRef,
       mergedCurrentPageRef
     })
     const { localeRef } = useLocale('DataTable')
     provide(dataTableInjectionKey, {
+      tableWidthRef,
       componentId: createId(),
       hoverKeyRef,
       mergedClsPrefixRef,
@@ -304,6 +308,7 @@ export default defineComponent({
       mergedCheckedRowKeySetRef,
       mergedExpandedRowKeysRef,
       localeRef,
+      scrollPartRef,
       rowKeyRef: toRef(props, 'rowKey'),
       renderExpandRef,
       summaryRef: toRef(props, 'summary'),
@@ -324,8 +329,7 @@ export default defineComponent({
           '--action-divider-color': actionDividerColor
         } as CSSProperties
       }),
-      deriveActiveRightFixedColumn,
-      deriveActiveLeftFixedColumn,
+      syncScrollState,
       doUpdateFilters,
       doUpdateSorter,
       doUpdateCheckedRowKeys,

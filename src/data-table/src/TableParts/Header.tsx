@@ -47,6 +47,7 @@ export default defineComponent({
       checkOptionsRef,
       mergedSortStateRef,
       componentId,
+      scrollPartRef,
       doUpdateSorter,
       doUncheckAll,
       doCheckAll
@@ -69,6 +70,9 @@ export default defineComponent({
       const nextSorter = createNextSorter(column, activeSorter)
       doUpdateSorter(nextSorter)
     }
+    function handleMouseenter (): void {
+      scrollPartRef.value = 'head'
+    }
     return {
       componentId,
       mergedSortState: mergedSortStateRef,
@@ -83,6 +87,7 @@ export default defineComponent({
       cols: colsRef,
       mergedTheme: mergedThemeRef,
       checkOptions: checkOptionsRef,
+      handleMouseenter,
       handleCheckboxUpdateChecked,
       handleColHeaderClick
     }
@@ -102,13 +107,16 @@ export default defineComponent({
       mergedTheme,
       checkOptions,
       componentId,
+      onScroll,
+      handleMouseenter,
       handleColHeaderClick,
       handleCheckboxUpdateChecked
     } = this
     return (
       <div
         class={`${mergedClsPrefix}-data-table-base-table-header`}
-        onScroll={this.onScroll}
+        onScroll={onScroll}
+        onMouseenter={handleMouseenter}
       >
         <table
           ref="body"

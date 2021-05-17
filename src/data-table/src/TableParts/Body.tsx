@@ -50,6 +50,7 @@ export default defineComponent({
       mergedSortStateRef,
       virtualScrollRef,
       componentId,
+      scrollPartRef,
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
       doUpdateCheckedRowKeys
@@ -76,8 +77,8 @@ export default defineComponent({
       if (value) return value.containerRef
       return null
     }
-    function handleScroll (event: Event): void {
-      handleTableBodyScroll(event)
+    function handleScroll (): void {
+      handleTableBodyScroll()
     }
     function handleUpdateExpanded (key: RowKey): void {
       const { value: mergedExpandedRowKeys } = mergedExpandedRowKeysRef
@@ -90,8 +91,11 @@ export default defineComponent({
       }
       doUpdateExpandedRowKeys(nextExpandedKeys)
     }
-    function handleMouseLeaveTable (): void {
+    function handleMouseleaveTable (): void {
       hoverKeyRef.value = null
+    }
+    function handleMouseenterTable (): void {
+      scrollPartRef.value = 'body'
     }
     function virtualListContainer (): HTMLElement {
       const { value } = virtualListRef
@@ -103,7 +107,7 @@ export default defineComponent({
     }
     function handleVirtualListScroll (e: Event): void {
       scrollbarInstRef.value?.sync()
-      handleScroll(e)
+      handleScroll()
     }
     function handleVirtualListResize (): void {
       scrollbarInstRef.value?.sync()
@@ -136,15 +140,17 @@ export default defineComponent({
     watchEffect(() => {
       const { value: leftActiveFixedColKey } = leftActiveFixedColKeyRef
       const { value: rightActiveFixedColKey } = rightActiveFixedColKeyRef
-      style.mount({
-        id: `n-${componentId}`,
-        force: true,
-        props: {
-          leftActiveFixedColKey,
-          rightActiveFixedColKey,
-          componentId
-        }
-      })
+      if (leftActiveFixedColKey !== null || rightActiveFixedColKey !== null) {
+        style.mount({
+          id: `n-${componentId}`,
+          force: true,
+          props: {
+            leftActiveFixedColKey,
+            rightActiveFixedColKey,
+            componentId
+          }
+        })
+      }
     })
     onUnmounted(() => {
       style.unmount({
@@ -172,9 +178,10 @@ export default defineComponent({
       hoverKey: hoverKeyRef,
       mergedSortState: mergedSortStateRef,
       virtualScroll: virtualScrollRef,
+      handleMouseenterTable,
       handleVirtualListScroll,
       handleVirtualListResize,
-      handleMouseLeaveTable,
+      handleMouseleaveTable,
       virtualListContainer,
       virtualListContent,
       handleScroll,
@@ -227,7 +234,8 @@ export default defineComponent({
               componentId,
               handleVirtualListScroll,
               handleVirtualListResize,
-              handleMouseLeaveTable,
+              handleMouseenterTable,
+              handleMouseleaveTable,
               renderExpand,
               summary
             } = this
@@ -465,7 +473,8 @@ export default defineComponent({
                   return (
                     <table
                       class={`${mergedClsPrefix}-data-table-table`}
-                      onMouseleave={handleMouseLeaveTable}
+                      onMouseenter={handleMouseenterTable}
+                      onMouseleave={handleMouseleaveTable}
                     >
                       <colgroup>
                         {cols.map((col) => (
@@ -506,9 +515,8 @@ export default defineComponent({
             return (
               <table
                 class={`${mergedClsPrefix}-data-table-table`}
-                onMouseleave={() => {
-                  this.hoverKey = null
-                }}
+                onMouseleave={handleMouseleaveTable}
+                onMouseenter={handleMouseenterTable}
               >
                 <colgroup>
                   {cols.map((col) => (
