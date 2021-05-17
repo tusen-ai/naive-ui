@@ -396,7 +396,7 @@ export default defineComponent({
             scrollable={this.scrollable}
             container={virtualScroll ? this.virtualListContainer : undefined}
             content={virtualScroll ? this.virtualListContent : undefined}
-            onScroll={this.doScroll}
+            onScroll={virtualScroll ? undefined : this.doScroll}
           >
             {{
               default: () => {

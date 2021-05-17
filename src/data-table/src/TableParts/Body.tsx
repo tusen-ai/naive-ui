@@ -206,7 +206,7 @@ export default defineComponent({
         horizontalRailStyle={{ zIndex: 3 }}
         verticalRailStyle={{ zIndex: 3 }}
         xScrollable
-        onScroll={handleScroll}
+        onScroll={virtualScroll ? undefined : handleScroll}
       >
         {{
           default: () => {
