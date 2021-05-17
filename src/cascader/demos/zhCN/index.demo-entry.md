@@ -11,6 +11,7 @@ size
 single-lazy
 multiple-lazy
 action
+virtual
 ```
 
 ## Props
@@ -35,6 +36,7 @@ action
 | show-path | `boolean` | `true` | 是否在选择器中显示选项路径 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | value | `string \| number \| Array<number \| string>` | `undefined` |  |
+| virtual-scroll | `boolean` | `true` |  |
 | on-blur | `() => void` | `undefined` |  |
 | on-focus | `() => void` | `undefined` |  |
 | on-load | `(option: CascaderOption) => Promise<any>` | `undefined` | 在点击未加载完成节点时的回调，在返回的 promise 中设定 `option.children`，在返回的 promise resolve 或 reject 之后完成加载 |

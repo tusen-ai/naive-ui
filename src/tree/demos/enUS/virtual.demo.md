@@ -1,4 +1,4 @@
-# Huge Date
+# Large Date
 
 Set `virtual-scroll` to use virtual scroll. Note that you should set the height of the tree.
 

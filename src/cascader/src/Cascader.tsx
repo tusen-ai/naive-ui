@@ -114,6 +114,10 @@ const cascaderProps = {
     default: undefined
   },
   maxTagCount: [String, Number] as PropType<number | 'responsive'>,
+  virtualScroll: {
+    type: Boolean,
+    default: true
+  },
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   // deprecated
@@ -687,6 +691,8 @@ export default defineComponent({
       expandTriggerRef: toRef(props, 'expandTrigger'),
       isMountedRef: useIsMounted(),
       onLoadRef: toRef(props, 'onLoad'),
+      virtualScrollRef: toRef(props, 'virtualScroll'),
+      optionHeightRef,
       localeRef,
       syncCascaderMenuPosition,
       syncSelectMenuPosition,

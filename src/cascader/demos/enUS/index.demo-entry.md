@@ -11,6 +11,7 @@ size
 single-lazy
 multiple-lazy
 action
+virtual
 ```
 
 ## Props
@@ -35,6 +36,7 @@ action
 | show-path | `boolean` | `true` | Whether to show path in selector. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | value | `string \| number \| Array<number \| string> \| null` | `undefined` |  |
+| virtual-scroll | `boolean` | `true` |  |
 | on-blur | `() => void` | `undefined` |  |
 | on-focus | `() => void` | `undefined` |
 | on-load | `(option: CascaderOption) => Promise<any>` | `undefined` | Callback when click unloaded node. Set `option.children` in the returned promise. Loading is end after the promise is resolved or rejected. |

@@ -65,6 +65,8 @@ export interface CascaderInjection {
   cascadeRef: Ref<boolean>
   onLoadRef: Ref<((value: BaseOption) => Promise<void>) | undefined>
   localeRef: Ref<NLocale['Cascader']>
+  virtualScrollRef: Ref<boolean>
+  optionHeightRef: Ref<string>
   syncCascaderMenuPosition: () => void
   syncSelectMenuPosition: () => void
   updateKeyboardKey: (value: Key | null) => void
