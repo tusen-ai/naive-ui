@@ -100,6 +100,11 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
+    // show is used to toggle pending state initialization
+    show: {
+      type: Boolean,
+      default: true
+    },
     loading: Boolean,
     focusable: Boolean,
     onMousedown: Function as PropType<(e: MouseEvent) => void>,
@@ -128,22 +133,29 @@ export default defineComponent({
     const fIndexGetterRef = computed(() =>
       createIndexGetter(flattenedNodesRef.value)
     )
-    const { treeMate } = props
-    const pendingNodeRef = ref(
-      props.autoPending
-        ? props.value === null
-          ? treeMate.getFirstAvailableNode()
-          : props.multiple
-            ? treeMate.getNode(
-              ((props.value as Array<string | number> | null) || [])[
-                ((props.value as Array<string | number> | null) || []).length -
-                  1
-              ]
-            ) || treeMate.getFirstAvailableNode()
-            : treeMate.getNode(props.value as string | number) ||
-            treeMate.getFirstAvailableNode()
-        : null
-    )
+    const pendingNodeRef = ref<TreeNode<SelectBaseOption> | null>(null)
+    function initPendingNode (): void {
+      const { treeMate } = props
+      setPendingTmNode(
+        props.autoPending
+          ? props.value === null
+            ? treeMate.getFirstAvailableNode()
+            : props.multiple
+              ? treeMate.getNode(
+                ((props.value as Array<string | number> | null) || [])[
+                  ((props.value as Array<string | number> | null) || [])
+                    .length - 1
+                ]
+              ) || treeMate.getFirstAvailableNode()
+              : treeMate.getNode(props.value as string | number) ||
+              treeMate.getFirstAvailableNode()
+          : null
+      )
+    }
+    watch(toRef(props, 'show'), (value) => {
+      if (value) initPendingNode()
+    })
+    initPendingNode()
     const defaultScrollIndex = pendingNodeRef.value
       ? fIndexGetterRef.value(pendingNodeRef.value.key) ?? undefined
       : undefined

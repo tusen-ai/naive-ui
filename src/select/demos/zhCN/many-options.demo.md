@@ -10,16 +10,18 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      value: null,
-      values: null,
+      value: ref(null),
+      values: ref(null),
       options: Array.apply(null, { length: 42000 }).map((_, i) => ({
         label: String(i),
         value: i
       }))
     }
   }
-}
+})
 ```

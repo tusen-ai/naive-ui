@@ -9,7 +9,8 @@ import {
   ComputedRef,
   watch,
   Transition,
-  withDirectives
+  withDirectives,
+  vShow
 } from 'vue'
 import { createTreeMate } from 'treemate'
 import { VBinder, VFollower, VTarget, FollowerRef } from 'vueuc'
@@ -186,6 +187,10 @@ const selectProps = {
   autofocus: {
     type: Boolean,
     default: false
+  },
+  displayDirective: {
+    type: String as PropType<'if' | 'show'>,
+    default: 'show'
   }
 } as const
 
@@ -759,7 +764,8 @@ export default defineComponent({
                     >
                       {{
                         default: () =>
-                          this.mergedShow &&
+                          (this.mergedShow ||
+                            this.displayDirective === 'show') &&
                           withDirectives(
                             <NInternalSelectMenu
                               ref="menuRef"
@@ -785,10 +791,16 @@ export default defineComponent({
                               onKeydown={this.handleMenuKeydown}
                               onTabOut={this.handleMenuTabOut}
                               onMousedown={this.handleMenuMousedown}
+                              show={this.mergedShow}
                             >
                               {$slots}
                             </NInternalSelectMenu>,
-                            [[clickoutside, this.handleMenuClickOutside]]
+                            this.displayDirective === 'show'
+                              ? [
+                                [vShow, this.mergedShow],
+                                [clickoutside, this.handleMenuClickOutside]
+                              ]
+                              : [[clickoutside, this.handleMenuClickOutside]]
                           )
                       }}
                     </Transition>

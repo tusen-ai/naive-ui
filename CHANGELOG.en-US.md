@@ -2,7 +2,12 @@
 
 ## Pending
 
-## Feats
+### Perf
+
+- Optimize `n-data-table` init render count.
+- Optimize `n-select` open duration after first opening.
+
+### Feats
 
 - `n-tree` add `virtual-scroll` prop.
 - `n-data-table` add `virtual-scroll` prop.

@@ -2,7 +2,12 @@
 
 ## Pending
 
-## Feats
+### Perf
+
+- 优化 `n-data-table` 初始渲染次数
+- 优化 `n-select` 首次打开后打开用时
+
+### Feats
 
 - `n-tree` 新增 `virtual-scroll` 属性
 - `n-data-table` 新增 `virtual-scroll` 属性
