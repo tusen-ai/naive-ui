@@ -81,7 +81,8 @@ const scrollbarProps = {
   contentStyle: [String, Object] as PropType<string | CSSProperties>,
   horizontalRailStyle: [String, Object] as PropType<string | CSSProperties>,
   verticalRailStyle: [String, Object] as PropType<string | CSSProperties>,
-  onScroll: Function as PropType<(e: Event) => void>
+  onScroll: Function as PropType<(e: Event) => void>,
+  onWheel: Function as PropType<(e: WheelEvent) => void>
 } as const
 
 export type ScrollbarProps = ExtractPublicPropTypes<typeof scrollbarProps>
@@ -594,6 +595,7 @@ export default defineComponent({
                     class={`${mergedClsPrefix}-scrollbar-container`}
                     style={this.containerStyle}
                     onScroll={this.handleScroll}
+                    onWheel={this.onWheel}
                   >
                     <VResizeObserver onResize={this.handleContentResize}>
                       {{

@@ -34,8 +34,8 @@ export default defineComponent({
       rightFixedColumnsRef,
       leftFixedColumnsRef,
       tableWidthRef,
-      syncScrollState,
-      handleTableHeaderScroll
+      handleTableHeaderScroll,
+      syncScrollState
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(dataTableInjectionKey)!
 
@@ -67,9 +67,6 @@ export default defineComponent({
       if (!fixedStateInitializedRef.value) {
         fixedStateInitializedRef.value = true
       }
-    }
-    function handleHeaderScroll (): void {
-      handleTableHeaderScroll()
     }
     function getHeaderElement (): HTMLElement | null {
       const { value } = headerInstRef
@@ -119,7 +116,7 @@ export default defineComponent({
       headerInstRef,
       bodyInstRef,
       bodyStyle: bodyStyleRef,
-      handleHeaderScroll,
+      handleHeaderScroll: handleTableHeaderScroll,
       handleHeaderResize,
       ...exposedMethods
     }

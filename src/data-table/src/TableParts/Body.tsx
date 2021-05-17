@@ -77,9 +77,6 @@ export default defineComponent({
       if (value) return value.containerRef
       return null
     }
-    function handleScroll (): void {
-      handleTableBodyScroll()
-    }
     function handleUpdateExpanded (key: RowKey): void {
       const { value: mergedExpandedRowKeys } = mergedExpandedRowKeysRef
       const index = mergedExpandedRowKeys.indexOf(key)
@@ -107,7 +104,7 @@ export default defineComponent({
     }
     function handleVirtualListScroll (e: Event): void {
       scrollbarInstRef.value?.sync()
-      handleScroll()
+      handleTableBodyScroll()
     }
     function handleVirtualListResize (): void {
       scrollbarInstRef.value?.sync()
@@ -184,7 +181,7 @@ export default defineComponent({
       handleMouseleaveTable,
       virtualListContainer,
       virtualListContent,
-      handleScroll,
+      handleScroll: handleTableBodyScroll,
       handleCheckboxUpdateChecked,
       handleUpdateExpanded,
       ...exposedMethods
