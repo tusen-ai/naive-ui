@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.8.0
 
 ### Perf
 
