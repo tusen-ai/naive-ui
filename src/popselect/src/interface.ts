@@ -1,5 +1,4 @@
-import { Ref } from '@vue/reactivity'
-import { InjectionKey } from 'vue'
+import { Ref, InjectionKey } from 'vue'
 import type { MergedTheme } from '../../_mixins'
 import type { PopselectTheme } from '../styles'
 
@@ -11,6 +10,5 @@ export interface PopselectInjection {
   syncPosition: () => void
 }
 
-export const popselectInjectionKey: InjectionKey<PopselectInjection> = Symbol(
-  'popselect'
-)
+export const popselectInjectionKey: InjectionKey<PopselectInjection> =
+  Symbol('popselect')

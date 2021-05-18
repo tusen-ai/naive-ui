@@ -43,8 +43,8 @@ const inputProps = {
     default: undefined
   },
   type: {
-    type: String as PropType<'text' | 'textarea'>,
-    default: 'text'
+    type: String as PropType<'input' | 'textarea'>,
+    default: 'input'
   },
   placeholder: [Array, String] as PropType<string | [string, string]>,
   defaultValue: {

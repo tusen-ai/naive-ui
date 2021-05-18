@@ -1,5 +1,4 @@
-import { Ref } from '@vue/reactivity'
-import { InjectionKey } from '@vue/runtime-core'
+import { Ref, InjectionKey } from 'vue'
 import type { MergedTheme } from '../../_mixins'
 import type { UploadTheme } from '../styles'
 
@@ -59,9 +58,8 @@ export interface UploadInjection {
   doChange: DoChange
 }
 
-export const uploadInjectionKey: InjectionKey<UploadInjection> = Symbol(
-  'upload'
-)
+export const uploadInjectionKey: InjectionKey<UploadInjection> =
+  Symbol('upload')
 
 export interface XhrHandlers {
   handleXHRLoad: (e: ProgressEvent) => void
