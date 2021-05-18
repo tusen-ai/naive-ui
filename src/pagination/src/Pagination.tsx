@@ -9,7 +9,7 @@ import {
   PropType,
   CSSProperties
 } from 'vue'
-import { useCompitable, useMergedState } from 'vooks'
+import { useMergedState } from 'vooks'
 import { NSelect } from '../../select'
 import { InputInst, NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
@@ -27,31 +27,20 @@ import { pageItems } from './utils'
 import type { PageItem } from './utils'
 import style from './styles/index.cssr'
 import { call, ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { Size as InputSize } from '../../input/src/interface'
-import { Size as SelectSize } from '../../select/src/interface'
+import type { Size as InputSize } from '../../input/src/interface'
+import type { Size as SelectSize } from '../../select/src/interface'
 
 const paginationProps = {
   ...(useTheme.props as ThemeProps<PaginationTheme>),
-  page: {
-    type: Number,
-    required: undefined
-  },
+  page: Number,
   defaultPage: {
     type: Number,
     default: 1
   },
-  pageCount: {
-    type: Number,
-    validator: (value: any) => {
-      return Number.isInteger(value) && value > 0
-    },
-    default: undefined
-  },
+  itemCount: Number,
+  pageCount: Number,
   defaultPageCount: {
     type: Number,
-    validator: (value: any) => {
-      return Number.isInteger(value) && value > 0
-    },
     default: 1
   },
   showSizePicker: {
@@ -59,10 +48,7 @@ const paginationProps = {
     default: false
   },
   pageSize: Number as PropType<number>,
-  defaultPageSize: {
-    type: Number as PropType<number>,
-    default: 10
-  },
+  defaultPageSize: Number,
   pageSizes: {
     type: Array as PropType<number[]>,
     default: () => [10]
@@ -79,26 +65,24 @@ const paginationProps = {
     type: Number,
     default: 9
   },
-  // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:page': [Function, Array] as PropType<
   MaybeArray<(page: number) => void>
   >,
-  // eslint-disable-next-line vue/prop-name-casing
+  onUpdatePage: [Function, Array] as PropType<
+  MaybeArray<(page: number) => void>
+  >,
   'onUpdate:pageSize': [Function, Array] as PropType<
   MaybeArray<(pageSize: number) => void>
   >,
-  // deprecated
+  onUpdatePageSize: [Function, Array] as PropType<
+  MaybeArray<(pageSize: number) => void>
+  >,
+  /** @deprecated */
   onPageSizeChange: [Function, Array] as PropType<
   MaybeArray<(pageSize: number) => void>
   >,
-  onChange: [Function, Array] as PropType<MaybeArray<(page: number) => void>>,
-  total: {
-    type: Number,
-    validator: (value: any) => {
-      return Number.isInteger(value) && value > 0
-    },
-    default: 1
-  }
+  /** @deprecated */
+  onChange: [Function, Array] as PropType<MaybeArray<(page: number) => void>>
 } as const
 
 export type PaginationProps = ExtractPublicPropTypes<typeof paginationProps>
@@ -119,10 +103,11 @@ export default defineComponent({
     const { localeRef } = useLocale('Pagination')
     const selfRef = ref<HTMLElement | null>(null)
     const jumperRef = ref<InputInst | null>(null)
-    const compitablePageCountRef = useCompitable(props, ['pageCount', 'total'])
     const jumperValueRef = ref('')
     const uncontrolledPageRef = ref(props.defaultPage)
-    const uncontrolledPageSizeRef = ref(props.defaultPageSize)
+    const uncontrolledPageSizeRef = ref(
+      props.defaultPageSize || props.pageSizes[0]
+    )
     const mergedPageRef = useMergedState(
       toRef(props, 'page'),
       uncontrolledPageRef
@@ -133,7 +118,6 @@ export default defineComponent({
     )
     const showFastForwardRef = ref(false)
     const showFastBackwardRef = ref(false)
-    const transitionDisabledRef = ref(false)
 
     const pageSizeOptionsRef = computed(() => {
       const suffix = localeRef.value.selectionSuffix
@@ -156,33 +140,38 @@ export default defineComponent({
     })
 
     const disableTransitionOneTick = (): void => {
-      transitionDisabledRef.value = true
       void nextTick(() => {
+        const { value: selfEl } = selfRef
+        if (!selfEl) return
+        selfEl.classList.add('transition-disabled')
         void selfRef.value?.offsetWidth
-        transitionDisabledRef.value = false
+        selfEl.classList.remove('transition-disabled')
       })
     }
     watch(mergedPageRef, disableTransitionOneTick)
     function doUpdatePage (page: number): void {
       if (page === mergedPageRef.value) return
-      const { 'onUpdate:page': onUpdatePage, onChange } = props
+      const { 'onUpdate:page': _onUpdatePage, onUpdatePage, onChange } = props
+      if (_onUpdatePage) call(_onUpdatePage, page)
       if (onUpdatePage) call(onUpdatePage, page)
       // deprecated
       if (onChange) call(onChange, page)
     }
     function doUpdatePageSize (pageSize: number): void {
       if (pageSize === mergedPageSizeRef.value) return
-      const { 'onUpdate:pageSize': onUpdatePageSize, onPageSizeChange } = props
+      const {
+        'onUpdate:pageSize': _onUpdatePageSize,
+        onUpdatePageSize,
+        onPageSizeChange
+      } = props
+      if (_onUpdatePageSize) call(_onUpdatePageSize, pageSize)
       if (onUpdatePageSize) call(onUpdatePageSize, pageSize)
       // deprecated
       if (onPageSizeChange) call(onPageSizeChange, pageSize)
     }
     function forward (): void {
       if (props.disabled) return
-      const page = Math.min(
-        mergedPageRef.value + 1,
-        compitablePageCountRef.value
-      )
+      const page = Math.min(mergedPageRef.value + 1, props.pageCount || 1)
       doUpdatePage(page)
     }
     function backward (): void {
@@ -194,7 +183,7 @@ export default defineComponent({
       if (props.disabled) return
       const page = Math.min(
         mergedPageRef.value + (props.pageSlot - 4),
-        compitablePageCountRef.value
+        props.pageCount || 1
       )
       doUpdatePage(page)
     }
@@ -212,7 +201,7 @@ export default defineComponent({
         if (
           !Number.isNaN(page) &&
           page >= 1 &&
-          page <= compitablePageCountRef.value
+          page <= (props.pageCount || 1)
         ) {
           doUpdatePage(page)
           jumperValueRef.value = ''
@@ -273,19 +262,13 @@ export default defineComponent({
       mergedPage: mergedPageRef,
       showFastBackward: showFastBackwardRef,
       showFastForward: showFastForwardRef,
-      compitablePageCount: compitablePageCountRef,
       pageItems: computed(() =>
-        pageItems(
-          mergedPageRef.value,
-          compitablePageCountRef.value,
-          props.pageSlot
-        )
+        pageItems(mergedPageRef.value, props.pageCount || 1, props.pageSlot)
       ),
       jumperValue: jumperValueRef,
       pageSizeOptions: pageSizeOptionsRef,
       inputSize: inputSizeRef,
       selectSize: selectSizeRef,
-      transitionDisabled: transitionDisabledRef,
       mergedTheme: themeRef,
       handleJumperInput,
       handleBackwardClick: backward,
@@ -381,11 +364,10 @@ export default defineComponent({
     // it's ok to expand all prop here since no slots' deps
     const {
       mergedClsPrefix,
-      transitionDisabled,
       disabled,
       cssVars,
       mergedPage,
-      compitablePageCount,
+      pageCount,
       pageItems,
       showFastBackward,
       showFastForward,
@@ -412,20 +394,15 @@ export default defineComponent({
         ref="selfRef"
         class={[
           `${mergedClsPrefix}-pagination`,
-          {
-            [`${mergedClsPrefix}-pagination--transition-disabled`]: transitionDisabled,
-            [`${mergedClsPrefix}-pagination--disabled`]: disabled
-          }
+          disabled && `${mergedClsPrefix}-pagination--disabled`
         ]}
         style={cssVars as CSSProperties}
       >
         <div
           class={[
             `${mergedClsPrefix}-pagination-item ${mergedClsPrefix}-pagination-item--button`,
-            {
-              [`${mergedClsPrefix}-pagination-item--disabled`]:
-                mergedPage <= 1 || mergedPage > compitablePageCount || disabled
-            }
+            (mergedPage <= 1 || mergedPage > (pageCount || 1) || disabled) &&
+              `${mergedClsPrefix}-pagination-item--disabled`
           ]}
           onClick={handleBackwardClick}
         >
@@ -479,7 +456,7 @@ export default defineComponent({
             `${mergedClsPrefix}-pagination-item ${mergedClsPrefix}-pagination-item--button`,
             {
               [`${mergedClsPrefix}-pagination-item--disabled`]:
-                mergedPage < 1 || mergedPage >= compitablePageCount || disabled
+                mergedPage < 1 || mergedPage >= (pageCount || 1) || disabled
             }
           ]}
           onClick={handleForwardClick}

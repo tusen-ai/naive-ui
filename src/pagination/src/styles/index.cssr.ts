@@ -43,7 +43,7 @@ export default cB('pagination', `
   cB('select', {
     width: 'var(--select-width)'
   }),
-  cM('transition-disabled', [
+  c('&.transition-disabled', [
     cB('pagination-item', {
       transition: 'none!important'
     })
