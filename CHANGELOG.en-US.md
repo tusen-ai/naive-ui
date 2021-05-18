@@ -6,6 +6,7 @@
 
 - Optimize `n-data-table` init render count.
 - Optimize `n-select` open duration after first opening.
+- Optimize `n-anchor` scroll performance.
 
 ### Feats
 

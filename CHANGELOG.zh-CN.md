@@ -6,6 +6,7 @@
 
 - 优化 `n-data-table` 初始渲染次数
 - 优化 `n-select` 首次打开后打开用时
+- 优化 `n-anchor` 滚动性能
 
 ### Feats
 

@@ -11,10 +11,11 @@ import {
   onMounted,
   toRef
 } from 'vue'
-import { getScrollParent, unwrapElement, beforeNextFrameOnce } from 'seemly'
+import { getScrollParent, unwrapElement } from 'seemly'
 import { onFontsReady } from 'vooks'
 import { warn, keysOf } from '../../_utils'
 import { anchorInjectionKey } from './Link'
+import { throttle } from 'lodash'
 
 export interface BaseAnchorInst {
   setActiveHref: (href: string) => void
@@ -175,9 +176,7 @@ export default defineComponent({
         }
       }
     }
-    function handleScroll (): void {
-      beforeNextFrameOnce(_handleScroll)
-    }
+    const handleScroll = throttle(() => _handleScroll(true), 128)
     function _handleScroll (transition = true): void {
       interface LinkInfo {
         top: number
