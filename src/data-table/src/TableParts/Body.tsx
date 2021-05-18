@@ -5,7 +5,8 @@ import {
   inject,
   VNode,
   watchEffect,
-  onUnmounted
+  onUnmounted,
+  PropType
 } from 'vue'
 import { pxfy } from 'seemly'
 import { VirtualList, VirtualListRef } from 'vueuc'
@@ -26,7 +27,10 @@ import RenderSafeCheckbox from './BodyCheckbox'
 
 export default defineComponent({
   name: 'DataTableBody',
-  setup () {
+  props: {
+    onResize: Function as PropType<(e: ResizeObserverEntry) => void>
+  },
+  setup (props) {
     const {
       treeMateRef,
       mergedCheckedRowKeysRef,
@@ -51,6 +55,7 @@ export default defineComponent({
       virtualScrollRef,
       componentId,
       scrollPartRef,
+      setHeaderScrollLeft,
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
       doUpdateCheckedRowKeys
@@ -103,10 +108,12 @@ export default defineComponent({
       return value?.itemsRef as HTMLElement
     }
     function handleVirtualListScroll (e: Event): void {
+      handleTableBodyScroll(e)
       scrollbarInstRef.value?.sync()
-      handleTableBodyScroll()
     }
-    function handleVirtualListResize (): void {
+    function handleVirtualListResize (e: ResizeObserverEntry): void {
+      const { onResize } = props
+      if (onResize) onResize(e)
       scrollbarInstRef.value?.sync()
     }
     const exposedMethods: MainTableBodyRef = {
@@ -175,13 +182,14 @@ export default defineComponent({
       hoverKey: hoverKeyRef,
       mergedSortState: mergedSortStateRef,
       virtualScroll: virtualScrollRef,
+      setHeaderScrollLeft,
       handleMouseenterTable,
       handleVirtualListScroll,
       handleVirtualListResize,
       handleMouseleaveTable,
       virtualListContainer,
       virtualListContent,
-      handleScroll: handleTableBodyScroll,
+      handleTableBodyScroll,
       handleCheckboxUpdateChecked,
       handleUpdateExpanded,
       ...exposedMethods
@@ -193,7 +201,8 @@ export default defineComponent({
       scrollX,
       mergedClsPrefix,
       virtualScroll,
-      handleScroll
+      onResize,
+      setHeaderScrollLeft
     } = this
     const contentStyle = {
       minWidth: formatLength(scrollX)
@@ -210,7 +219,9 @@ export default defineComponent({
         horizontalRailStyle={{ zIndex: 3 }}
         verticalRailStyle={{ zIndex: 3 }}
         xScrollable
-        onScroll={virtualScroll ? undefined : handleScroll}
+        onScroll={virtualScroll ? undefined : this.handleTableBodyScroll}
+        privateOnSetSL={setHeaderScrollLeft}
+        onResize={onResize}
       >
         {{
           default: () => {
@@ -229,8 +240,6 @@ export default defineComponent({
               mergedSortState,
               mergedExpandedRowKeys,
               componentId,
-              handleVirtualListScroll,
-              handleVirtualListResize,
               handleMouseenterTable,
               handleMouseleaveTable,
               renderExpand,
@@ -495,8 +504,8 @@ export default defineComponent({
                   itemSize={28}
                   visibleItemsTag={VirtualListItemWrapper}
                   showScrollbar={false}
-                  onResize={handleVirtualListResize}
-                  onScroll={handleVirtualListScroll}
+                  onResize={this.handleVirtualListResize}
+                  onScroll={this.handleVirtualListScroll}
                   itemsStyle={contentStyle}
                   itemResizable
                 >

@@ -11,11 +11,11 @@ export function useScroll (
   {
     mainTableInstRef,
     mergedCurrentPageRef,
-    tableWidthRef,
+    bodyWidthRef,
     scrollPartRef
   }: {
     scrollPartRef: Ref<'head' | 'body'>
-    tableWidthRef: Ref<null | number>
+    bodyWidthRef: Ref<null | number>
     mainTableInstRef: Ref<MainTableRef | null>
     mergedCurrentPageRef: ComputedRef<number>
   }
@@ -71,7 +71,7 @@ export function useScroll (
     // target is header element
     const { value: rightFixedColumns } = rightFixedColumnsRef
     const scrollWidth = Number(props.scrollX)
-    const { value: tableWidth } = tableWidthRef
+    const { value: tableWidth } = bodyWidthRef
     if (tableWidth === null) return
     let rightWidth = 0
     let rightActiveFixedColKey = null
@@ -122,40 +122,29 @@ export function useScroll (
     }
   }
   function syncScrollState (): void {
-    const { header, body } = getScrollElements()
-    if (!body || !header) return
-    const { value: tableWidth } = tableWidthRef
-    if (tableWidth === null) return
     const { scrollX } = props
     if (!scrollX) return
-    const scrollWidth = Number(scrollX)
+    const { header, body } = getScrollElements()
+    if (!body || !header) return
+    const { value: tableWidth } = bodyWidthRef
+    if (tableWidth === null) return
     const { value: scrollPart } = scrollPartRef
     // we need to deal with overscroll
     if (scrollPart === 'head') {
       scrollLeft = header.scrollLeft
-      if (scrollLeft < 0) {
-        body.scrollLeft = 0
-        header.scrollLeft = 0
-      } else if (scrollLeft + tableWidth > scrollX) {
-        body.scrollLeft = scrollWidth - tableWidth
-        header.scrollLeft = scrollWidth - tableWidth
-      } else {
-        body.scrollLeft = scrollLeft
-      }
+      body.scrollLeft = scrollLeft
     } else {
       scrollLeft = body.scrollLeft
-      if (scrollLeft < 0) {
-        body.scrollLeft = 0
-        header.scrollLeft = 0
-      } else if (scrollLeft + tableWidth > scrollX) {
-        body.scrollLeft = scrollWidth - tableWidth
-        header.scrollLeft = scrollWidth - tableWidth
-      } else {
-        header.scrollLeft = scrollLeft
-      }
+      header.scrollLeft = scrollLeft
     }
     deriveActiveLeftFixedColumn()
     deriveActiveRightFixedColumn()
+  }
+  function setHeaderScrollLeft (left: number): void {
+    const { header } = getScrollElements()
+    if (!header) return
+    header.scrollLeft = left
+    syncScrollState()
   }
   watch(mergedCurrentPageRef, () => {
     scrollMainTableBodyToTop()
@@ -170,6 +159,7 @@ export function useScroll (
     rightActiveFixedColKeyRef,
     syncScrollState,
     handleTableBodyScroll,
-    handleTableHeaderScroll
+    handleTableHeaderScroll,
+    setHeaderScrollLeft
   }
 }

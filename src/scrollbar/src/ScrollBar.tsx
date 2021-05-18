@@ -10,7 +10,8 @@ import {
   renderSlot,
   Transition,
   CSSProperties,
-  watchEffect
+  watchEffect,
+  VNode
 } from 'vue'
 import { on, off } from 'evtd'
 import { VResizeObserver } from 'vueuc'
@@ -82,7 +83,9 @@ const scrollbarProps = {
   horizontalRailStyle: [String, Object] as PropType<string | CSSProperties>,
   verticalRailStyle: [String, Object] as PropType<string | CSSProperties>,
   onScroll: Function as PropType<(e: Event) => void>,
-  onWheel: Function as PropType<(e: WheelEvent) => void>
+  onWheel: Function as PropType<(e: WheelEvent) => void>,
+  onResize: Function as PropType<(e: ResizeObserverEntry) => void>,
+  privateOnSetSL: Function as PropType<(scrollLeft: number) => void>
 } as const
 
 export type ScrollbarProps = ExtractPublicPropTypes<typeof scrollbarProps>
@@ -233,7 +236,10 @@ export default defineComponent({
     })
 
     // methods
-    function handleContentResize (): void {
+    const handleContentResize = sync
+    const handleContainerResize = (e: ResizeObserverEntry): void => {
+      const { onResize } = props
+      if (onResize) onResize(e)
       sync()
     }
     interface MergedScrollOptions {
@@ -419,6 +425,8 @@ export default defineComponent({
       const { value: container } = mergedContainerRef
       if (container) {
         container.scrollLeft = toScrollLeft
+        const { privateOnSetSL } = props
+        if (privateOnSetSL) privateOnSetSL(toScrollLeft)
       }
     }
     function handleXScrollMouseUp (e: MouseEvent): void {
@@ -554,6 +562,7 @@ export default defineComponent({
       isIos,
       handleScroll,
       handleContentResize,
+      handleContainerResize,
       handleMouseEnterWrapper,
       handleMouseLeaveWrapper,
       handleYScrollMouseDown,
@@ -574,106 +583,105 @@ export default defineComponent({
   render () {
     const { $slots, mergedClsPrefix } = this
     if (!this.scrollable) return renderSlot($slots, 'default')
-    return (
-      <VResizeObserver onResize={this.handleContentResize}>
-        {{
-          default: () =>
-            h(
-              'div',
-              mergeProps(this.$attrs, {
-                class: `${mergedClsPrefix}-scrollbar`,
-                style: this.cssVars,
-                onMouseenter: this.handleMouseEnterWrapper,
-                onMouseleave: this.handleMouseLeaveWrapper
-              }),
-              [
-                this.container ? (
-                  renderSlot($slots, 'default')
-                ) : (
-                  <div
-                    ref="containerRef"
-                    class={`${mergedClsPrefix}-scrollbar-container`}
-                    style={this.containerStyle}
-                    onScroll={this.handleScroll}
-                    onWheel={this.onWheel}
-                  >
-                    <VResizeObserver onResize={this.handleContentResize}>
-                      {{
-                        default: () => (
-                          <div
-                            ref="contentRef"
-                            style={
-                              [
-                                this.contentStyle,
-                                {
-                                  width: this.xScrollable ? 'fit-content' : null
-                                }
-                              ] as any
-                            }
-                            class={[
-                              `${mergedClsPrefix}-scrollbar-content`,
-                              this.contentClass
-                            ]}
-                          >
-                            {$slots}
-                          </div>
-                        )
+    const createChildren = (): VNode =>
+      h(
+        'div',
+        mergeProps(this.$attrs, {
+          class: `${mergedClsPrefix}-scrollbar`,
+          style: this.cssVars,
+          onMouseenter: this.handleMouseEnterWrapper,
+          onMouseleave: this.handleMouseLeaveWrapper
+        }),
+        [
+          this.container ? (
+            renderSlot($slots, 'default')
+          ) : (
+            <div
+              ref="containerRef"
+              class={`${mergedClsPrefix}-scrollbar-container`}
+              style={this.containerStyle}
+              onScroll={this.handleScroll}
+              onWheel={this.onWheel}
+            >
+              <VResizeObserver onResize={this.handleContentResize}>
+                {{
+                  default: () => (
+                    <div
+                      ref="contentRef"
+                      style={
+                        [
+                          this.contentStyle,
+                          {
+                            width: this.xScrollable ? 'fit-content' : null
+                          }
+                        ] as any
+                      }
+                      class={[
+                        `${mergedClsPrefix}-scrollbar-content`,
+                        this.contentClass
+                      ]}
+                    >
+                      {$slots}
+                    </div>
+                  )
+                }}
+              </VResizeObserver>
+            </div>
+          ),
+          <div
+            ref="yRailRef"
+            class={`${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--vertical`}
+            style={[this.horizontalRailStyle, { width: this.sizePx }] as any}
+          >
+            <Transition name="fade-in-transition">
+              {{
+                default: () =>
+                  this.needYBar && this.isShowYBar && !this.isIos ? (
+                    <div
+                      class={`${mergedClsPrefix}-scrollbar-rail__scrollbar`}
+                      style={{
+                        height: this.yBarSizePx,
+                        top: this.yBarTopPx,
+                        width: this.sizePx,
+                        borderRadius: this.sizePx
                       }}
-                    </VResizeObserver>
-                  </div>
-                ),
-                <div
-                  ref="yRailRef"
-                  class={`${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--vertical`}
-                  style={
-                    [this.horizontalRailStyle, { width: this.sizePx }] as any
-                  }
-                >
-                  <Transition name="fade-in-transition">
-                    {{
-                      default: () =>
-                        this.needYBar && this.isShowYBar && !this.isIos ? (
-                          <div
-                            class={`${mergedClsPrefix}-scrollbar-rail__scrollbar`}
-                            style={{
-                              height: this.yBarSizePx,
-                              top: this.yBarTopPx,
-                              width: this.sizePx,
-                              borderRadius: this.sizePx
-                            }}
-                            onMousedown={this.handleYScrollMouseDown}
-                          />
-                        ) : null
-                    }}
-                  </Transition>
-                </div>,
-                <div
-                  ref="xRailRef"
-                  class={`${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--horizontal`}
-                  style={
-                    [this.verticalRailStyle, { height: this.sizePx }] as any
-                  }
-                >
-                  <Transition name="fade-in-transition">
-                    {{
-                      default: () =>
-                        this.needXBar && this.isShowXBar && !this.isIos ? (
-                          <div
-                            class={`${mergedClsPrefix}-scrollbar-rail__scrollbar`}
-                            style={{
-                              height: this.sizePx,
-                              width: this.xBarSizePx,
-                              left: this.xBarLeftPx,
-                              borderRadius: this.sizePx
-                            }}
-                            onMousedown={this.handleXScrollMouseDown}
-                          />
-                        ) : null
-                    }}
-                  </Transition>
-                </div>
-              ]
-            )
+                      onMousedown={this.handleYScrollMouseDown}
+                    />
+                  ) : null
+              }}
+            </Transition>
+          </div>,
+          <div
+            ref="xRailRef"
+            class={`${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--horizontal`}
+            style={[this.verticalRailStyle, { height: this.sizePx }] as any}
+          >
+            <Transition name="fade-in-transition">
+              {{
+                default: () =>
+                  this.needXBar && this.isShowXBar && !this.isIos ? (
+                    <div
+                      class={`${mergedClsPrefix}-scrollbar-rail__scrollbar`}
+                      style={{
+                        height: this.sizePx,
+                        width: this.xBarSizePx,
+                        left: this.xBarLeftPx,
+                        borderRadius: this.sizePx
+                      }}
+                      onMousedown={this.handleXScrollMouseDown}
+                    />
+                  ) : null
+              }}
+            </Transition>
+          </div>
+        ]
+      )
+    return this.container ? (
+      createChildren()
+    ) : (
+      <VResizeObserver onResize={this.handleContainerResize}>
+        {{
+          default: createChildren
         }}
       </VResizeObserver>
     )

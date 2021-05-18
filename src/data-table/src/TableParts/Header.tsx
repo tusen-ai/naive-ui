@@ -1,4 +1,4 @@
-import { h, defineComponent, inject, PropType, VNodeChild, Fragment } from 'vue'
+import { h, defineComponent, inject, VNodeChild, Fragment } from 'vue'
 import { happensIn, pxfy } from 'seemly'
 import { formatLength } from '../../../_utils'
 import { NCheckbox } from '../../../checkbox'
@@ -29,9 +29,6 @@ function renderTitle (
 
 export default defineComponent({
   name: 'DataTableHeader',
-  props: {
-    onScroll: Function as PropType<(e: Event) => void>
-  },
   setup () {
     const {
       mergedClsPrefixRef,
@@ -48,6 +45,7 @@ export default defineComponent({
       mergedSortStateRef,
       componentId,
       scrollPartRef,
+      handleTableBodyScroll,
       doUpdateSorter,
       doUncheckAll,
       doCheckAll
@@ -89,7 +87,8 @@ export default defineComponent({
       checkOptions: checkOptionsRef,
       handleMouseenter,
       handleCheckboxUpdateChecked,
-      handleColHeaderClick
+      handleColHeaderClick,
+      handleTableBodyScroll
     }
   },
   render () {
@@ -107,7 +106,7 @@ export default defineComponent({
       mergedTheme,
       checkOptions,
       componentId,
-      onScroll,
+      handleTableBodyScroll,
       handleMouseenter,
       handleColHeaderClick,
       handleCheckboxUpdateChecked
@@ -115,7 +114,7 @@ export default defineComponent({
     return (
       <div
         class={`${mergedClsPrefix}-data-table-base-table-header`}
-        onScroll={onScroll}
+        onScroll={handleTableBodyScroll}
         onMouseenter={handleMouseenter}
       >
         <table

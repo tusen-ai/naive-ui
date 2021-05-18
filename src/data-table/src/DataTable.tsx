@@ -222,7 +222,7 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    const tableWidthRef = ref<number | null>(null)
+    const bodyWidthRef = ref<number | null>(null)
     const scrollPartRef = ref<'head' | 'body'>('body')
     const mainTableInstRef = ref<MainTableRef | null>(null)
     const { rowsRef, colsRef, dataRelatedColsRef } = useGroupHeader(props)
@@ -267,6 +267,7 @@ export default defineComponent({
       handleTableBodyScroll,
       handleTableHeaderScroll,
       syncScrollState,
+      setHeaderScrollLeft,
       leftActiveFixedColKeyRef,
       rightActiveFixedColKeyRef,
       leftFixedColumnsRef,
@@ -275,13 +276,13 @@ export default defineComponent({
       fixedColumnRightMapRef
     } = useScroll(props, {
       scrollPartRef,
-      tableWidthRef,
+      bodyWidthRef,
       mainTableInstRef,
       mergedCurrentPageRef
     })
     const { localeRef } = useLocale('DataTable')
     provide(dataTableInjectionKey, {
-      tableWidthRef,
+      bodyWidthRef,
       componentId: createId(),
       hoverKeyRef,
       mergedClsPrefixRef,
@@ -337,7 +338,8 @@ export default defineComponent({
       doUncheckAll,
       doUpdateExpandedRowKeys,
       handleTableHeaderScroll,
-      handleTableBodyScroll
+      handleTableBodyScroll,
+      setHeaderScrollLeft
     })
     const exposedMethods: DataTableInst = {
       filter,
@@ -434,7 +436,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, mergedTheme } = this
     return (
       <div
         class={[
@@ -451,8 +453,8 @@ export default defineComponent({
       >
         <NSpin
           show={this.loading}
-          theme={this.mergedTheme.peers.Spin}
-          themeOverrides={this.mergedTheme.peerOverrides.Spin}
+          theme={mergedTheme.peers.Spin}
+          themeOverrides={mergedTheme.peerOverrides.Spin}
           size="small"
         >
           {{

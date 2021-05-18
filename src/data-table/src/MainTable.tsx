@@ -8,7 +8,6 @@ import {
   renderSlot,
   watchEffect
 } from 'vue'
-import { VResizeObserver } from 'vueuc'
 import { formatLength } from '../../_utils'
 import TableHeader from './TableParts/Header'
 import TableBody from './TableParts/Body'
@@ -33,14 +32,11 @@ export default defineComponent({
       mergedClsPrefixRef,
       rightFixedColumnsRef,
       leftFixedColumnsRef,
-      tableWidthRef,
+      bodyWidthRef,
       handleTableHeaderScroll,
       syncScrollState
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(dataTableInjectionKey)!
-
-    const bodyMaxHeightRef = ref<number | undefined>(undefined)
-    const bodyMinHeightRef = ref<number | undefined>(undefined)
 
     const headerInstRef = ref<MainTableHeaderRef | null>(null)
     const bodyInstRef = ref<MainTableBodyRef | null>(null)
@@ -54,15 +50,10 @@ export default defineComponent({
       return {
         maxHeight: formatLength(props.maxHeight),
         minHeight: formatLength(props.minHeight)
-        // the following mode will cause dup renders
-        // need to expose a new props to enable it
-        // maxHeight: formatLength(bodyMaxHeightRef.value ?? props.maxHeight),
-        // minHeight: formatLength(bodyMinHeightRef.value ?? props.minHeight)
       }
     })
-    function handleHeaderResize (entry: ResizeObserverEntry): void {
-      setTableWidth(entry.contentRect.width)
-      deriveBodyMinMaxHeight(entry.contentRect.height)
+    function handleBodyResize (entry: ResizeObserverEntry): void {
+      bodyWidthRef.value = entry.contentRect.width
       syncScrollState()
       if (!fixedStateInitializedRef.value) {
         fixedStateInitializedRef.value = true
@@ -81,18 +72,6 @@ export default defineComponent({
         return value.getScrollContainer()
       }
       return null
-    }
-    function setTableWidth (width: number): void {
-      tableWidthRef.value = width
-    }
-    function deriveBodyMinMaxHeight (headerHeight: number): void {
-      const { bordered, maxHeight, minHeight } = props
-      if (maxHeight !== undefined) {
-        bodyMaxHeightRef.value = maxHeight + (bordered ? -2 : 0) - headerHeight
-      }
-      if (minHeight !== undefined) {
-        bodyMinHeightRef.value = minHeight + (bordered ? -2 : 0) - headerHeight
-      }
     }
     const exposedMethods: MainTableRef = {
       getBodyElement,
@@ -116,8 +95,8 @@ export default defineComponent({
       headerInstRef,
       bodyInstRef,
       bodyStyle: bodyStyleRef,
-      handleHeaderScroll: handleTableHeaderScroll,
-      handleHeaderResize,
+      handleTableHeaderScroll,
+      handleBodyResize,
       ...exposedMethods
     }
   },
@@ -125,17 +104,12 @@ export default defineComponent({
     const { mergedClsPrefix } = this
     return (
       <div class={`${mergedClsPrefix}-data-table-base-table`} ref="selfElRef">
-        <VResizeObserver onResize={this.handleHeaderResize}>
-          {{
-            default: () => (
-              <TableHeader
-                ref="headerInstRef"
-                onScroll={this.handleHeaderScroll}
-              />
-            )
-          }}
-        </VResizeObserver>
-        <TableBody ref="bodyInstRef" style={this.bodyStyle} />
+        <TableHeader ref="headerInstRef" />
+        <TableBody
+          ref="bodyInstRef"
+          style={this.bodyStyle}
+          onResize={this.handleBodyResize}
+        />
         {renderSlot(this.$slots, 'default')}
       </div>
     )
