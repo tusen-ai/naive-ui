@@ -213,7 +213,7 @@ export default c([
           background-color .2s var(--bezier),
           color .2s var(--bezier);
       `, [
-        cM('transition-disabled', {
+        c('&.transition-disabled', {
           transition: 'none !important'
         }, [
           c('&::before, &::after', {

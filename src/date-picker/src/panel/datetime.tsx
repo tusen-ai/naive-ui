@@ -101,6 +101,7 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-date-panel-dates`}>
             {this.dateArray.map((dateItem, i) => (
               <div
+                data-n-date
                 key={i}
                 class={[
                   `${mergedClsPrefix}-date-panel-date`,
@@ -108,8 +109,6 @@ export default defineComponent({
                     [`${mergedClsPrefix}-date-panel-date--current`]: dateItem.isCurrentDate,
                     [`${mergedClsPrefix}-date-panel-date--selected`]: dateItem.selected,
                     [`${mergedClsPrefix}-date-panel-date--excluded`]: !dateItem.inCurrentMonth,
-                    [`${mergedClsPrefix}-date-panel-date--transition-disabled`]: this
-                      .transitionDisabled,
                     [`${mergedClsPrefix}-date-panel-date--disabled`]: this.mergedIsDateDisabled(
                       dateItem.ts
                     )

@@ -133,6 +133,7 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-date-panel-dates`}>
             {this.startDateArray.map((dateItem, i) => (
               <div
+                data-n-date
                 key={i}
                 class={[
                   `${mergedClsPrefix}-date-panel-date`,
@@ -143,8 +144,6 @@ export default defineComponent({
                     [`${mergedClsPrefix}-date-panel-date--covered`]: dateItem.inSpan,
                     [`${mergedClsPrefix}-date-panel-date--start`]: dateItem.startOfSpan,
                     [`${mergedClsPrefix}-date-panel-date--end`]: dateItem.endOfSpan,
-                    [`${mergedClsPrefix}-date-panel-date--transition-disabled`]: this
-                      .transitionDisabled,
                     [`${mergedClsPrefix}-date-panel-date--disabled`]: this.mergedIsDateDisabled(
                       dateItem.ts
                     )
@@ -211,6 +210,7 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-date-panel-dates`}>
             {this.endDateArray.map((dateItem, i) => (
               <div
+                data-n-date
                 key={i}
                 class={[
                   `${mergedClsPrefix}-date-panel-date`,
@@ -221,8 +221,6 @@ export default defineComponent({
                     [`${mergedClsPrefix}-date-panel-date--covered`]: dateItem.inSpan,
                     [`${mergedClsPrefix}-date-panel-date--start`]: dateItem.startOfSpan,
                     [`${mergedClsPrefix}-date-panel-date--end`]: dateItem.endOfSpan,
-                    [`${mergedClsPrefix}-date-panel-date--transition-disabled`]: this
-                      .transitionDisabled,
                     [`${mergedClsPrefix}-date-panel-date--disabled`]: this.mergedIsDateDisabled(
                       dateItem.ts
                     )

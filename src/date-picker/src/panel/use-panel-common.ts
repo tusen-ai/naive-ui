@@ -58,7 +58,6 @@ function usePanelCommon (props: UsePanelCommonProps) {
       locale: dateLocaleRef.value.locale
     }
   })
-  const transitionDisabledRef = ref(false)
   const memorizedValueRef = ref(props.value)
   const selfRef = ref<HTMLElement | null>(null)
   const keyboardState = useKeyboard()
@@ -86,14 +85,18 @@ function usePanelCommon (props: UsePanelCommonProps) {
   }
   function disableTransitionOneTick (): void {
     if (props.active) {
-      transitionDisabledRef.value = true
       void nextTick(() => {
-        const { value: el } = selfRef
-        void el?.offsetWidth
-        transitionDisabledRef.value = false
+        const { value: selfEl } = selfRef
+        if (!selfEl) return
+        const dateEls = selfEl.querySelectorAll('[data-n-date]')
+        dateEls.forEach((el) => {
+          el.classList.add('transition-disabled')
+        })
+        void selfEl.offsetWidth
+        dateEls.forEach((el) => {
+          el.classList.remove('transition-disabled')
+        })
       })
-    } else {
-      transitionDisabledRef.value = false
     }
   }
   function handlePanelKeyDown (e: KeyboardEvent): void {
@@ -117,7 +120,6 @@ function usePanelCommon (props: UsePanelCommonProps) {
     mergedClsPrefix: mergedClsPrefixRef,
     dateFnsOptions: dateFnsOptionsRef,
     timePickerSize: timePickerSizeRef,
-    transitionDisabled: transitionDisabledRef,
     memorizedValue: memorizedValueRef,
     selfRef,
     locale: localeRef,
