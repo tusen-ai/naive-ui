@@ -13,11 +13,13 @@
 - `n-tree` 新增 `virtual-scroll` 属性
 - `n-data-table` 新增 `virtual-scroll` 属性
 - `n-cascader` 新增 `virtual-scroll` 属性
+- `n-pagination` 新增 `item-count` 属性
 
 ### Fixes
 
 - 修正 `n-layout-sider` 折叠后不显示菜单
 - 修正 `n-input-number` 在输入不合法 blur 时没有重设回原始值
+- 修正 `n-pagination` 在非受控模式下不更新页数
 
 ## 2.7.4
 

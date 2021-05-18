@@ -12,6 +12,7 @@ slot
 quick-jumper
 size-picker
 disabled
+item-count
 ```
 
 ## Props

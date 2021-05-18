@@ -4,10 +4,10 @@ import {
   computed,
   ref,
   toRef,
-  watch,
   defineComponent,
   PropType,
-  CSSProperties
+  CSSProperties,
+  watchEffect
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { NSelect } from '../../select'
@@ -26,7 +26,7 @@ import { paginationLight, PaginationTheme } from '../styles'
 import { pageItems } from './utils'
 import type { PageItem } from './utils'
 import style from './styles/index.cssr'
-import { call, ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import { call, ExtractPublicPropTypes, MaybeArray, warn } from '../../_utils'
 import type { Size as InputSize } from '../../input/src/interface'
 import type { Size as SelectSize } from '../../select/src/interface'
 
@@ -91,6 +91,16 @@ export default defineComponent({
   name: 'Pagination',
   props: paginationProps,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.pageCount !== undefined && props.itemCount !== undefined) {
+          warn(
+            'pagination',
+            "`pageCount` and `itemCount` should't be specified together."
+          )
+        }
+      })
+    }
     const { NConfigProvider, mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Pagination',
@@ -116,6 +126,15 @@ export default defineComponent({
       toRef(props, 'pageSize'),
       uncontrolledPageSizeRef
     )
+    const mergedPageCountRef = computed(() => {
+      const { pageCount } = props
+      if (pageCount !== undefined) return pageCount
+      const { itemCount } = props
+      if (itemCount !== undefined) {
+        return Math.ceil(itemCount / mergedPageSizeRef.value)
+      }
+      return 1
+    })
     const showFastForwardRef = ref(false)
     const showFastBackwardRef = ref(false)
 
@@ -148,7 +167,6 @@ export default defineComponent({
         selfEl.classList.remove('transition-disabled')
       })
     }
-    watch(mergedPageRef, disableTransitionOneTick)
     function doUpdatePage (page: number): void {
       if (page === mergedPageRef.value) return
       const { 'onUpdate:page': _onUpdatePage, onUpdatePage, onChange } = props
@@ -156,6 +174,7 @@ export default defineComponent({
       if (onUpdatePage) call(onUpdatePage, page)
       // deprecated
       if (onChange) call(onChange, page)
+      uncontrolledPageRef.value = page
     }
     function doUpdatePageSize (pageSize: number): void {
       if (pageSize === mergedPageSizeRef.value) return
@@ -168,10 +187,16 @@ export default defineComponent({
       if (onUpdatePageSize) call(onUpdatePageSize, pageSize)
       // deprecated
       if (onPageSizeChange) call(onPageSizeChange, pageSize)
+      uncontrolledPageSizeRef.value = pageSize
+      // update new page when overflows.
+      // we may have different update strategy, but i've no time to impl it
+      if (mergedPageCountRef.value < mergedPageRef.value) {
+        doUpdatePage(mergedPageCountRef.value)
+      }
     }
     function forward (): void {
       if (props.disabled) return
-      const page = Math.min(mergedPageRef.value + 1, props.pageCount || 1)
+      const page = Math.min(mergedPageRef.value + 1, mergedPageCountRef.value)
       doUpdatePage(page)
     }
     function backward (): void {
@@ -183,7 +208,7 @@ export default defineComponent({
       if (props.disabled) return
       const page = Math.min(
         mergedPageRef.value + (props.pageSlot - 4),
-        props.pageCount || 1
+        mergedPageCountRef.value
       )
       doUpdatePage(page)
     }
@@ -201,7 +226,7 @@ export default defineComponent({
         if (
           !Number.isNaN(page) &&
           page >= 1 &&
-          page <= (props.pageCount || 1)
+          page <= mergedPageCountRef.value
         ) {
           doUpdatePage(page)
           jumperValueRef.value = ''
@@ -254,6 +279,11 @@ export default defineComponent({
     function handleJumperInput (value: string): void {
       jumperValueRef.value = value
     }
+    watchEffect(() => {
+      void mergedPageRef.value
+      void mergedPageSizeRef.value
+      disableTransitionOneTick()
+    })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       locale: localeRef,
@@ -263,13 +293,15 @@ export default defineComponent({
       showFastBackward: showFastBackwardRef,
       showFastForward: showFastForwardRef,
       pageItems: computed(() =>
-        pageItems(mergedPageRef.value, props.pageCount || 1, props.pageSlot)
+        pageItems(mergedPageRef.value, mergedPageCountRef.value, props.pageSlot)
       ),
       jumperValue: jumperValueRef,
       pageSizeOptions: pageSizeOptionsRef,
+      mergedPageSize: mergedPageSizeRef,
       inputSize: inputSizeRef,
       selectSize: selectSizeRef,
       mergedTheme: themeRef,
+      mergedPageCount: mergedPageCountRef,
       handleJumperInput,
       handleBackwardClick: backward,
       handleForwardClick: forward,
@@ -367,7 +399,7 @@ export default defineComponent({
       disabled,
       cssVars,
       mergedPage,
-      pageCount,
+      mergedPageCount,
       pageItems,
       showFastBackward,
       showFastForward,
@@ -377,7 +409,7 @@ export default defineComponent({
       locale,
       inputSize,
       selectSize,
-      pageSize,
+      mergedPageSize,
       pageSizeOptions,
       jumperValue,
       handleJumperInput,
@@ -401,7 +433,7 @@ export default defineComponent({
         <div
           class={[
             `${mergedClsPrefix}-pagination-item ${mergedClsPrefix}-pagination-item--button`,
-            (mergedPage <= 1 || mergedPage > (pageCount || 1) || disabled) &&
+            (mergedPage <= 1 || mergedPage > mergedPageCount || disabled) &&
               `${mergedClsPrefix}-pagination-item--disabled`
           ]}
           onClick={handleBackwardClick}
@@ -456,7 +488,7 @@ export default defineComponent({
             `${mergedClsPrefix}-pagination-item ${mergedClsPrefix}-pagination-item--button`,
             {
               [`${mergedClsPrefix}-pagination-item--disabled`]:
-                mergedPage < 1 || mergedPage >= (pageCount || 1) || disabled
+                mergedPage < 1 || mergedPage >= mergedPageCount || disabled
             }
           ]}
           onClick={handleForwardClick}
@@ -470,7 +502,7 @@ export default defineComponent({
             size={selectSize}
             placeholder=""
             options={pageSizeOptions}
-            value={pageSize}
+            value={mergedPageSize}
             disabled={disabled}
             theme={mergedTheme.peers.Select}
             themeOverrides={mergedTheme.peerOverrides.Select}

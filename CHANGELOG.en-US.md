@@ -13,11 +13,13 @@
 - `n-tree` add `virtual-scroll` prop.
 - `n-data-table` add `virtual-scroll` prop.
 - `n-cascader` add `virtual-scroll` prop.
+- `n-pagination` add `item-count` prop.
 
 ### Fixes
 
 - Fix `n-layout-sider` doesn't show menu after collapsed.
 - Fix `n-input-number` doesn't reset to origin value when blur with invalid value.
+- Fix `n-pagination` doesn't update page in uncontrolled mode.
 
 ## 2.7.4
 
