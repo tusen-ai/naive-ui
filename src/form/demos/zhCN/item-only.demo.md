@@ -11,18 +11,18 @@
 ```js
 import { defineComponent, ref } from 'vue'
 
-const lyrics = '它不在 Form 里面'
+const message = '它不在 Form 里面'
 
 export default defineComponent({
   setup () {
-    const valueRef = ref(lyrics)
+    const valueRef = ref(message)
     return {
       value: valueRef,
       rule: {
         trigger: ['input', 'blur'],
         validator () {
-          if (valueRef.value !== lyrics) {
-            return new Error(lyrics)
+          if (valueRef.value !== message) {
+            return new Error(message)
           }
         }
       }

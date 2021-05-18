@@ -1,4 +1,4 @@
-import { InjectionKey } from '@vue/runtime-core'
+import { InjectionKey } from 'vue'
 import { ErrorList, RuleItem, ValidateOption } from 'async-validator'
 import { FormSetupProps } from './Form'
 
@@ -6,14 +6,23 @@ export interface FormRules {
   [path: string]: FormRules | FormItemRule | FormItemRule[]
 }
 
-export type FormItemRuleValidator = (
-  ...args: Parameters<RuleItem['validator'] & {}>
-) => boolean | Error | Promise<boolean> | Promise<Error> | any
+export type FormItemRuleValidatorParams = Parameters<
+NonNullable<RuleItem['validator']>
+>
 
-export type FormItemRule = RuleItem & {
+export type FormItemRuleValidator = (
+  ...args: FormItemRuleValidatorParams
+) => boolean | Error | Error[] | Promise<void> | undefined
+
+// In src of async-validator, any non-promise of asyncValidator will be abadoned
+export type FormItemRuleAsyncValidator = (
+  ...args: FormItemRuleValidatorParams
+) => Promise<void> | undefined
+
+export type FormItemRule = Omit<RuleItem, 'validator' | 'asyncValidator'> & {
   trigger?: ValidationTrigger | string | Array<ValidationTrigger | string>
   validator?: FormItemRuleValidator
-  asyncValidator?: FormItemRuleValidator
+  asyncValidator?: FormItemRuleAsyncValidator
 }
 
 export interface FormItemValidateOptions {
@@ -50,9 +59,8 @@ export type FormItemRowRef = FormItemInst
 export type FormInjection = FormSetupProps
 
 export const formInjectionKey: InjectionKey<FormInjection> = Symbol('form')
-export const formItemInstsInjectionKey: InjectionKey<unknown> = Symbol(
-  'formItemInsts'
-)
+export const formItemInstsInjectionKey: InjectionKey<unknown> =
+  Symbol('formItemInsts')
 
 export type LabelAlign = 'left' | 'center' | 'right'
 export type LabelPlacement = 'left' | 'top'

@@ -11,18 +11,18 @@ You can use `n-form-item` alone, without `n-form`.
 ```js
 import { defineComponent, ref } from 'vue'
 
-const lyrics = 'It is not in Form'
+const message = 'It is not in Form'
 
 export default defineComponent({
   setup () {
-    const valueRef = ref(lyrics)
+    const valueRef = ref(message)
     return {
       value: valueRef,
       rule: {
         trigger: ['input', 'blur'],
         validator () {
-          if (valueRef.value !== lyrics) {
-            return new Error(lyrics)
+          if (valueRef.value !== message) {
+            return new Error(message)
           }
         }
       }

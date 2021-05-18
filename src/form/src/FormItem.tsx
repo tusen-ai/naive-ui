@@ -13,7 +13,7 @@ import {
   Transition,
   renderSlot
 } from 'vue'
-import Schema, { ErrorList, ValidateOption } from 'async-validator'
+import Schema, { ErrorList, RuleItem, ValidateOption } from 'async-validator'
 import { get } from 'lodash-es'
 import { createId } from 'seemly'
 import { formItemInjectionKey } from '../../_mixins/use-form-item'
@@ -36,6 +36,7 @@ import {
   LabelPlacement,
   ValidateCallback,
   ValidationTrigger,
+  FormItemRuleValidatorParams,
   FormItemRuleValidator,
   FormItemValidateOptions,
   FormItemInst,
@@ -87,27 +88,38 @@ export type FormItemProps = ExtractPublicPropTypes<typeof formItemProps>
 export const formItemPropKeys = keysOf(formItemProps)
 
 // Wrapped Validator is to be passed into async-validator
+// In their source code, validator can be a asyncValidator.
+// asyncValidator will non-promise return value will be ignored.
+// We need to deal with some type quirks.
 type WrappedValidator = (
-  ...args: Parameters<FormItemRuleValidator>
-) => boolean | Error | Promise<boolean | Error> | undefined
-function wrapValidator (validator: FormItemRuleValidator): WrappedValidator {
+  ...args: FormItemRuleValidatorParams
+) => boolean | Error | Error[] | Promise<void> | undefined
+
+// wrap sync validator
+function wrapValidator (
+  validator: FormItemRuleValidator,
+  async: boolean
+): WrappedValidator {
   return (...args: Parameters<FormItemRuleValidator>) => {
     try {
       const validateResult = validator(...args)
       if (
-        typeof validateResult === 'boolean' ||
-        validateResult instanceof Error ||
-        validateResult?.then
+        (!async &&
+          (typeof validateResult === 'boolean' ||
+            validateResult instanceof Error ||
+            Array.isArray(validateResult))) || // Error[]
+        (validateResult as any)?.then
       ) {
-        return validateResult
+        return validateResult as any
       } else if (validateResult === undefined) {
         return true
       } else {
         warn(
           'form-item/validate',
           `You return a ${typeof validateResult} ` +
-            'typed value in the validator method, which is not recommended. Please ' +
-            'use `boolean`, `Error` or `Promise` typed value instead.'
+            'typed value in the validator method, which is not recommended. Please use ' +
+            (async ? '`Promise`' : '`boolean`, `Error` or `Promise`') +
+            ' typed value instead.'
         )
         return true
       }
@@ -119,6 +131,8 @@ function wrapValidator (validator: FormItemRuleValidator): WrappedValidator {
           "`n-form` or `n-form-item` won't be called in this validation."
       )
       console.error(err)
+      // If returns undefined, async-validator won't trigger callback
+      // so the result will be abandoned, which means not true and not false
       return undefined
     }
   }
@@ -138,10 +152,8 @@ export default defineComponent({
     const formItemSizeRefs = formItemSize(props)
     const formItemMiscRefs = formItemMisc(props)
     const { validationErrored: validationErroredRef } = formItemMiscRefs
-    const {
-      mergedRequired: mergedRequiredRef,
-      mergedRules: mergedRulesRef
-    } = formItemRule(props)
+    const { mergedRequired: mergedRequiredRef, mergedRules: mergedRulesRef } =
+      formItemRule(props)
     const { mergedSize: mergedSizeRef } = formItemSizeRefs
     const { mergedLabelPlacement: labelPlacementRef } = formItemMiscRefs
     const explainsRef = ref<string[]>([])
@@ -247,28 +259,31 @@ export default defineComponent({
       const { value: rules } = mergedRulesRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const value = NForm ? get(NForm.model, path!, null) : undefined
-      const activeRules = (!trigger
-        ? rules
-        : rules.filter((rule) => {
-          // if (rule.trigger === undefined) return true
-          if (Array.isArray(rule.trigger)) {
-            return rule.trigger.includes(trigger)
-          } else {
-            return rule.trigger === trigger
-          }
-        })
+      const activeRules = (
+        !trigger
+          ? rules
+          : rules.filter((rule) => {
+            // if (rule.trigger === undefined) return true
+            if (Array.isArray(rule.trigger)) {
+              return rule.trigger.includes(trigger)
+            } else {
+              return rule.trigger === trigger
+            }
+          })
       )
         .filter(shouldRuleBeApplied)
         .map((rule) => {
           const shallowClonedRule = Object.assign({}, rule)
           if (shallowClonedRule.validator) {
             shallowClonedRule.validator = wrapValidator(
-              shallowClonedRule.validator
+              shallowClonedRule.validator,
+              false
             )
           }
           if (shallowClonedRule.asyncValidator) {
             shallowClonedRule.asyncValidator = wrapValidator(
-              shallowClonedRule.asyncValidator
+              shallowClonedRule.asyncValidator,
+              true
             ) as any
           }
           return shallowClonedRule
@@ -279,8 +294,8 @@ export default defineComponent({
         })
       }
       const mergedPath = path ?? '__n_no_path__'
-      const validator = new Schema({ [mergedPath]: activeRules })
-      return new Promise((resolve, reject) => {
+      const validator = new Schema({ [mergedPath]: activeRules as RuleItem[] })
+      return new Promise((resolve) => {
         void validator.validate(
           { [mergedPath]: value },
           options,
@@ -345,10 +360,8 @@ export default defineComponent({
             [createKey('feedbackHeight', size)]: feedbackHeight,
             [createKey('labelPadding', direction)]: labelPadding,
             [createKey('labelTextAlign', direction)]: labelTextAlign,
-            [createKey(
-              createKey('labelFontSize', labelPlacement),
-              size
-            )]: labelFontSize
+            [createKey(createKey('labelFontSize', labelPlacement), size)]:
+              labelFontSize
           }
         } = themeRef.value
         return {
