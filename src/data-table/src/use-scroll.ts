@@ -79,8 +79,9 @@ export function useScroll (
     for (let i = 0; i < rightFixedColumns.length; ++i) {
       const key = getColKey(rightFixedColumns[i])
       if (
-        scrollLeft + (fixedColumnRightMap[key] || 0) + tableWidth - rightWidth <
-        scrollWidth
+        Math.round(
+          scrollLeft + (fixedColumnRightMap[key] || 0) + tableWidth - rightWidth
+        ) < scrollWidth
       ) {
         rightActiveFixedColKey = key
         rightWidth += getColWidth(rightFixedColumns[i]) || 0
