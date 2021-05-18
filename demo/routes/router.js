@@ -23,7 +23,7 @@ export default function createDemoRouter (app, routes) {
       if (loadingBarApiRef.value) {
         loadingBarApiRef.value.finish()
       }
-      if (to.hash) {
+      if (to.hash && to.hash !== from.hash) {
         nextTick(() => {
           const el = document.querySelector(to.hash)
           if (el) el.scrollIntoView()
