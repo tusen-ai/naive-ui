@@ -9,6 +9,7 @@ const inputDark: InputTheme = {
   self (vars) {
     const {
       textColor2,
+      textColor3,
       textColorDisabled,
       primaryColor,
       primaryColorHover,
@@ -36,6 +37,7 @@ const inputDark: InputTheme = {
     } = vars
     return {
       ...commonVariables,
+      countTextColor: textColor3,
       heightTiny,
       heightSmall,
       heightMedium,

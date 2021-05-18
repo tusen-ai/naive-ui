@@ -31,6 +31,7 @@ import { cB, c, cE, cM, cNotM, insideFormItem } from '../../../_utils/cssr'
 // --icon-color-disabled
 // --icon-alpha
 // --icon-alpha-disabled
+// --count-text-color
 // ...form item vars
 export default c([
   cB('input', `
@@ -149,6 +150,11 @@ export default c([
     cM('textarea', {
       width: '100%'
     }, [
+      cB('input-word-count', `
+        position: absolute;
+        right: var(--padding-right);
+        bottom: var(--padding-vertical);
+      `),
       cM('resizable', [
         cB('input-wrapper', `
           resize: vertical;
@@ -311,7 +317,16 @@ export default c([
       cB('base-icon', {
         fontSize: 'var(--icon-size)'
       })
-    ])
+    ]),
+    cB('input-word-count', `
+      pointer-events: none;
+      line-height: 1.5;
+      font-size: .85em;
+      color: var(--count-text-color);
+      transition: color .3s var(--bezier);
+      margin-left: 4px;
+      font-variant: tabular-nums;
+    `)
   ]),
   ['warning', 'error'].map(status => insideFormItem(status,
     cB('input', [

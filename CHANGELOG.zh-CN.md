@@ -18,6 +18,7 @@
 - `n-pagination` 新增 `prefix` slot
 - `n-pagination` 新增 `suffix` 属性
 - `n-pagination` 新增 `suffix` slot
+- `n-input` 新增 `show-count` 属性
 
 ### Fixes
 

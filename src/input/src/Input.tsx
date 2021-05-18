@@ -12,7 +12,8 @@ import {
   CSSProperties,
   watch,
   watchEffect,
-  WatchStopHandle
+  WatchStopHandle,
+  provide
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { toRgbString, getAlphaString, getPadding } from 'seemly'
@@ -24,12 +25,15 @@ import { call, createKey, ExtractPublicPropTypes } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import { inputLight } from '../styles'
 import type { InputTheme } from '../styles'
-import type {
+import {
   OnUpdateValue,
   OnUpdateValueImpl,
   Size,
-  InputWrappedRef
+  InputWrappedRef,
+  inputInjectionKey
 } from './interface'
+import { len } from './utils'
+import WordCount from './WordCount'
 import style from './styles/input.cssr'
 
 const inputProps = {
@@ -39,7 +43,7 @@ const inputProps = {
     default: undefined
   },
   type: {
-    type: String,
+    type: String as PropType<'text' | 'textarea'>,
     default: 'text'
   },
   placeholder: [Array, String] as PropType<string | [string, string]>,
@@ -48,63 +52,39 @@ const inputProps = {
     default: null
   },
   value: [String, Array] as PropType<null | string | [string, string]>,
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-  size: {
-    type: String as PropType<Size | undefined>,
-    default: undefined
-  },
+  disabled: Boolean,
+  size: String as PropType<Size>,
   rows: {
     type: [Number, String] as PropType<number | string>,
     default: 3
   },
-  round: {
-    type: Boolean,
-    default: false
-  },
+  round: Boolean,
   minlength: [String, Number] as PropType<number | string>,
   maxlength: [String, Number] as PropType<number | string>,
-  clearable: {
-    type: Boolean,
-    default: false
-  },
+  clearable: Boolean,
   autosize: {
     type: [Boolean, Object] as PropType<
     boolean | { minRows?: number, maxRows?: number }
     >,
     default: false
   },
-  showWordLimit: {
-    type: Boolean,
-    default: false
-  },
-  pair: {
-    type: Boolean,
-    default: false
-  },
+  pair: Boolean,
   separator: String,
   readonly: {
     type: [String, Boolean],
     default: false
   },
-  passivelyActivated: {
-    type: Boolean,
-    default: false
-  },
+  passivelyActivated: Boolean,
   stateful: {
     type: Boolean,
     default: true
   },
-  autofocus: {
-    type: Boolean,
-    default: false
-  },
+  autofocus: Boolean,
   resizable: {
     type: Boolean,
     default: true
   },
+  showCount: Boolean,
   onMousedown: Function as PropType<(e: MouseEvent) => void>,
   onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
   onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
@@ -137,14 +117,8 @@ const inputProps = {
   onWrapperBlur: [Function, Array] as PropType<
   MaybeArray<(e: FocusEvent) => void>
   >,
-  internalDeactivateOnEnter: {
-    type: Boolean,
-    default: false
-  },
-  internalForceFocus: {
-    type: Boolean,
-    default: false
-  }
+  internalDeactivateOnEnter: Boolean,
+  internalForceFocus: Boolean
 }
 
 export type InputProps = ExtractPublicPropTypes<typeof inputProps>
@@ -296,6 +270,11 @@ export default defineComponent({
         }
       }
     }
+    // word count
+    const maxlengthRef = computed(() => {
+      const { maxlength } = props
+      return maxlength === undefined ? undefined : Number(maxlength)
+    })
     onMounted(() => {
       // sync mirror if is not pair
       const { value } = mergedValueRef
@@ -488,12 +467,8 @@ export default defineComponent({
         if (props.resizable) {
           const { value: wrapperEl } = wrapperElRef
           if (wrapperEl) {
-            const {
-              left,
-              top,
-              width,
-              height
-            } = wrapperEl.getBoundingClientRect()
+            const { left, top, width, height } =
+              wrapperEl.getBoundingClientRect()
             const resizeHandleSize = 14
             if (
               left + width - resizeHandleSize < e.clientX &&
@@ -622,6 +597,16 @@ export default defineComponent({
       }
     })
 
+    provide(inputInjectionKey, {
+      wordCountRef: computed(() => {
+        const { value: mergedValue } = mergedValueRef
+        if (mergedValue === null || Array.isArray(mergedValue)) return 0
+        return len(mergedValue)
+      }),
+      maxlengthRef,
+      mergedClsPrefixRef
+    })
+
     const exposedProps: InputWrappedRef = {
       wrapperElRef,
       inputElRef,
@@ -714,6 +699,7 @@ export default defineComponent({
             iconColor,
             iconColorDisabled,
             suffixTextColor,
+            countTextColor,
             [createKey('padding', size)]: padding,
             [createKey('fontSize', size)]: fontSize,
             [createKey('height', size)]: height
@@ -722,6 +708,7 @@ export default defineComponent({
         const { left: paddingLeft, right: paddingRight } = getPadding(padding)
         return {
           '--bezier': cubicBezierEaseInOut,
+          '--count-text-color': countTextColor,
           '--color': color,
           '--font-size': fontSize,
           '--border-radius': borderRadius,
@@ -904,22 +891,26 @@ export default defineComponent({
               ) : null}
             </div>
           )}
-          {!this.pair && (this.$slots.suffix || this.clearable) ? (
-            <div class={`${mergedClsPrefix}-input__suffix`}>
-              {[
-                renderSlot(this.$slots, 'suffix'),
-                this.clearable || this.$slots.clear ? (
-                  <NBaseClear
-                    clsPrefix={mergedClsPrefix}
-                    show={this.showClearButton}
-                    onClear={this.handleClear}
-                  >
-                    {{ default: () => renderSlot(this.$slots, 'clear') }}
-                  </NBaseClear>
-                ) : null
-              ]}
-            </div>
-          ) : null}
+          {!this.pair &&
+          (this.$slots.suffix || this.clearable || this.showCount) ? (
+              <div class={`${mergedClsPrefix}-input__suffix`}>
+                {[
+                  renderSlot(this.$slots, 'suffix'),
+                  this.clearable || this.$slots.clear ? (
+                    <NBaseClear
+                      clsPrefix={mergedClsPrefix}
+                      show={this.showClearButton}
+                      onClear={this.handleClear}
+                    >
+                      {{ default: () => renderSlot(this.$slots, 'clear') }}
+                    </NBaseClear>
+                  ) : null,
+                  this.showCount && this.type !== 'textarea' ? (
+                    <WordCount />
+                  ) : null
+                ]}
+              </div>
+            ) : null}
         </div>
         {/* pair input */}
         {this.pair ? (
@@ -984,6 +975,7 @@ export default defineComponent({
         {this.mergedBordered ? (
           <div class={`${mergedClsPrefix}-input__state-border`} />
         ) : null}
+        {this.showCount && this.type === 'textarea' ? <WordCount /> : null}
       </div>
     )
   }

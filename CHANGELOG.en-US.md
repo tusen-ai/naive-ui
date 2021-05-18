@@ -18,6 +18,7 @@
 - `n-pagination` add `prefix` slot.
 - `n-pagination` add `suffix` prop.
 - `n-pagination` add `suffix` slot.
+- `n-input` add `show-count` prop.
 
 ### Fixes
 

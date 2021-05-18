@@ -1,4 +1,4 @@
-import { Ref, UnwrapRef } from 'vue'
+import { Ref, UnwrapRef, InjectionKey } from 'vue'
 
 export type Size = 'tiny' | 'small' | 'medium' | 'large'
 
@@ -20,3 +20,9 @@ export interface InputWrappedRef {
 }
 
 export type InputInst = UnwrapRef<InputWrappedRef>
+
+export const inputInjectionKey: InjectionKey<{
+  wordCountRef: Ref<number>
+  maxlengthRef: Ref<number | undefined>
+  mergedClsPrefixRef: Ref<string>
+}> = Symbol('input')

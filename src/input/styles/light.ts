@@ -7,6 +7,7 @@ import type { Theme } from '../../_mixins'
 const self = (vars: ThemeCommonVars) => {
   const {
     textColor2,
+    textColor3,
     textColorDisabled,
     primaryColor,
     primaryColorHover,
@@ -36,6 +37,7 @@ const self = (vars: ThemeCommonVars) => {
   } = vars
   return {
     ...commonVariables,
+    countTextColor: textColor3,
     heightTiny,
     heightSmall,
     heightMedium,

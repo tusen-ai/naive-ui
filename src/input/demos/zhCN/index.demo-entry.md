@@ -16,6 +16,7 @@ autosize
 pair
 input-group
 passively-activated
+count
 ```
 
 ## Props
@@ -38,6 +39,7 @@ passively-activated
 | round | `boolean` | `false` |  |
 | rows | `number` | `3` |  |
 | separator | `string` | `undefined` | 成对的值中间的分隔符 |
+| show-count | `boolean` | `false` | 是否显示字数统计 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | type | `'text' \| 'password' \| 'textarea'` | `'text'` |  |
 | value | `string \| [string, string] \| null` | `undefined` | 文本输入的值。如果是 `pair` 是 `true`，`value` 是一个数组 |

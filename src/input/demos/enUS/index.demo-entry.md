@@ -16,6 +16,7 @@ autosize
 pair
 input-group
 passively-activated
+count
 ```
 
 ## Props
@@ -38,6 +39,7 @@ passively-activated
 | round | `boolean` | `false` |  |
 | rows | `number` | `3` |  |
 | separator | `string` | `undefined` | The separator bewteen pairwise inputs. |
+| show-count | `boolean` | `false` | Whether to show word count. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | type | `'text' \| 'password' \| 'textarea'` | `'text'` |  |
 | value | `string \| [string, string] \| null` | `undefined` | Value of input. When `pair` is `true`, `value` is an array. |
