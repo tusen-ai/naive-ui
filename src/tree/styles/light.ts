@@ -1,4 +1,5 @@
 import { checkboxLight } from '../../checkbox/styles'
+import { scrollbarLight } from '../../scrollbar/styles'
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins/use-theme'
@@ -33,7 +34,8 @@ const treeLight = createTheme({
   name: 'Tree',
   common: commonLight,
   peers: {
-    Checkbox: checkboxLight
+    Checkbox: checkboxLight,
+    Scrollbar: scrollbarLight
   },
   self
 })

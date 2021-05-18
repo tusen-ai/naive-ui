@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   h,
   ref,
@@ -12,10 +13,12 @@ import {
 } from 'vue'
 import { createTreeMate, flatten } from 'treemate'
 import { useMergedState } from 'vooks'
+import { VirtualListRef, VVirtualList } from 'vueuc'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, warn } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import { NScrollbar, ScrollbarInst } from '../../scrollbar'
 import { treeLight } from '../styles'
 import type { TreeTheme } from '../styles'
 import NTreeNode from './TreeNode'
@@ -33,7 +36,6 @@ import {
   treeInjectionKey
 } from './interface'
 import MotionWrapper from './MotionWrapper'
-import { VVirtualList } from 'vueuc'
 
 interface MotionData {
   __motion: true
@@ -200,6 +202,14 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const selfElRef = ref<HTMLDivElement | null>(null)
+    const scrollbarInstRef = ref<ScrollbarInst | null>(null)
+    const virtualListInstRef = ref<VirtualListRef | null>(null)
+    function getScrollContainer (): HTMLElement | null | undefined {
+      return virtualListInstRef.value?.listRef
+    }
+    function getScrollContent (): HTMLElement | null | undefined {
+      return virtualListInstRef.value?.itemsRef
+    }
     const treeMateRef = computed(() => createTreeMate(props.data))
     const uncontrolledCheckedKeysRef = ref(
       props.defaultCheckedKeys || props.checkedKeys
@@ -289,18 +299,18 @@ export default defineComponent({
       }
       if (
         (addedKey !== null && removedKey !== null) ||
-        (addedKey === null && removedKey === null) ||
-        !selfElRef.value
+        (addedKey === null && removedKey === null)
       ) {
         // 1. multi action, not triggered by click
         // 2. no action, don't know what happened
-        // 3. no self element el, it shouldn't happen, it's only a typescript
-        //    type guard
         return
       }
-      const viewportItemCount =
-        Math.ceil(selfElRef.value.offsetHeight / ITEM_SIZE) + 1
       const { virtualScroll } = props
+      const viewportHeight = (virtualScroll
+        ? virtualListInstRef.value!.listRef
+        : selfElRef.value!
+      ).offsetHeight
+      const viewportItemCount = Math.ceil(viewportHeight / ITEM_SIZE) + 1
       if (addedKey !== null) {
         // play add animation
         aipRef.value = true
@@ -539,6 +549,12 @@ export default defineComponent({
       })
       resetDragStatus()
     }
+    function handleScroll (): void {
+      scrollbarInstRef.value?.sync()
+    }
+    function handleResize (): void {
+      scrollbarInstRef.value?.sync()
+    }
     provide(treeInjectionKey, {
       loadingKeysRef,
       highlightKeysRef,
@@ -563,10 +579,17 @@ export default defineComponent({
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
+      mergedTheme: themeRef,
       fNodes: mergedFNodesRef,
       aip: aipRef,
       selfElRef,
+      virtualListInstRef,
+      scrollbarInstRef,
+      handleScroll,
+      getScrollContainer,
+      getScrollContent,
       handleAfterEnter,
+      handleResize,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
@@ -615,27 +638,47 @@ export default defineComponent({
           clsPrefix={mergedClsPrefix}
         />
       )
+    if (this.virtualScroll) {
+      const { mergedTheme } = this
+      return (
+        <NScrollbar
+          ref="scrollbarInstRef"
+          container={this.getScrollContainer}
+          content={this.getScrollContent}
+          class={`${mergedClsPrefix}-tree`}
+          theme={mergedTheme.peers.Scrollbar}
+          themeOverrides={mergedTheme.peerOverrides.Scrollbar}
+        >
+          {{
+            default: () => (
+              <VVirtualList
+                ref="virtualListInstRef"
+                items={this.fNodes}
+                itemSize={ITEM_SIZE}
+                ignoreItemResize={this.aip}
+                style={this.cssVars as CSSProperties}
+                onScroll={this.handleScroll}
+                onResize={this.handleResize}
+                showScrollbar={false}
+                itemResizable
+              >
+                {{
+                  default: ({ item }: { item: TmNode | MotionData }) =>
+                    createNode(item)
+                }}
+              </VVirtualList>
+            )
+          }}
+        </NScrollbar>
+      )
+    }
     return (
       <div
         class={`${mergedClsPrefix}-tree`}
         style={this.cssVars as CSSProperties}
         ref="selfElRef"
       >
-        {this.virtualScroll ? (
-          <VVirtualList
-            items={this.fNodes}
-            itemSize={ITEM_SIZE}
-            ignoreItemResize={this.aip}
-            itemResizable
-          >
-            {{
-              default: ({ item }: { item: TmNode | MotionData }) =>
-                createNode(item)
-            }}
-          </VVirtualList>
-        ) : (
-          this.fNodes.map(createNode)
-        )}
+        {this.fNodes.map(createNode)}
       </div>
     )
   }
