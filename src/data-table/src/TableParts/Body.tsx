@@ -24,6 +24,45 @@ import { createRowClassName, getColKey } from '../utils'
 import Cell from './Cell'
 import ExpandTrigger from './ExpandTrigger'
 import RenderSafeCheckbox from './BodyCheckbox'
+import type { ColItem } from '../use-group-header'
+
+const VirtualListItemWrapper = defineComponent({
+  props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
+    id: {
+      type: String,
+      required: true
+    },
+    cols: {
+      type: Array as PropType<ColItem[]>,
+      required: true
+    },
+    onMouseenter: Function as PropType<(e: MouseEvent) => void>,
+    onMouseleave: Function as PropType<(e: MouseEvent) => void>
+  },
+  render () {
+    const { clsPrefix, id, cols, onMouseenter, onMouseleave } = this
+    return (
+      <table
+        class={`${clsPrefix}-data-table-table`}
+        onMouseenter={onMouseenter}
+        onMouseleave={onMouseleave}
+      >
+        <colgroup>
+          {cols.map((col) => (
+            <col key={col.key} style={col.style}></col>
+          ))}
+        </colgroup>
+        <tbody data-n-id={id} class={`${clsPrefix}-data-table-tbody`}>
+          {this.$slots}
+        </tbody>
+      </table>
+    )
+  }
+})
 
 export default defineComponent({
   name: 'DataTableBody',
@@ -470,39 +509,23 @@ export default defineComponent({
             })
 
             // Please note that the current virtual scroll mode impl
-            // not very performant, since it support all the feature of table.
+            // not very performant, since it supports all the feature of table.
             // If we can bailout some path it will be much faster. Since it
-            // need to generate all vnode before use the virtual list.
+            // need to generate all vnodes before using the virtual list.
             if (virtualScroll) {
-              const VirtualListItemWrapper = defineComponent({
-                render () {
-                  return (
-                    <table
-                      class={`${mergedClsPrefix}-data-table-table`}
-                      onMouseenter={handleMouseenterTable}
-                      onMouseleave={handleMouseleaveTable}
-                    >
-                      <colgroup>
-                        {cols.map((col) => (
-                          <col key={col.key} style={col.style}></col>
-                        ))}
-                      </colgroup>
-                      <tbody
-                        data-n-id={componentId}
-                        class={`${mergedClsPrefix}-data-table-tbody`}
-                      >
-                        {this.$slots}
-                      </tbody>
-                    </table>
-                  )
-                }
-              })
               return (
                 <VirtualList
                   ref="virtualListRef"
                   items={hasExpandedRows ? rows.flat() : rows}
                   itemSize={28}
                   visibleItemsTag={VirtualListItemWrapper}
+                  visibleItemsProps={{
+                    clsPrefix: mergedClsPrefix,
+                    id: componentId,
+                    cols,
+                    onMouseenter: handleMouseenterTable,
+                    onMouseleave: handleMouseleaveTable
+                  }}
                   showScrollbar={false}
                   onResize={this.handleVirtualListResize}
                   onScroll={this.handleVirtualListScroll}
