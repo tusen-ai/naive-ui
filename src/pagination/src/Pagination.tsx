@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   h,
   nextTick,
@@ -29,6 +30,7 @@ import style from './styles/index.cssr'
 import { call, ExtractPublicPropTypes, MaybeArray, warn } from '../../_utils'
 import type { Size as InputSize } from '../../input/src/interface'
 import type { Size as SelectSize } from '../../select/src/interface'
+import { RenderPrefix, RenderSuffix } from './interface'
 
 const paginationProps = {
   ...(useTheme.props as ThemeProps<PaginationTheme>),
@@ -65,6 +67,8 @@ const paginationProps = {
     type: Number,
     default: 9
   },
+  prefix: Function as PropType<RenderPrefix>,
+  suffix: Function as PropType<RenderSuffix>,
   'onUpdate:page': [Function, Array] as PropType<
   MaybeArray<(page: number) => void>
   >,
@@ -96,7 +100,7 @@ export default defineComponent({
         if (props.pageCount !== undefined && props.itemCount !== undefined) {
           warn(
             'pagination',
-            "`pageCount` and `itemCount` should't be specified together."
+            "`page-count` and `item-count` should't be specified together. Only `item-count` will take effect."
           )
         }
       })
@@ -127,12 +131,13 @@ export default defineComponent({
       uncontrolledPageSizeRef
     )
     const mergedPageCountRef = computed(() => {
-      const { pageCount } = props
-      if (pageCount !== undefined) return pageCount
+      // item count has high priority, for it can affect prefix slot rendering
       const { itemCount } = props
       if (itemCount !== undefined) {
         return Math.ceil(itemCount / mergedPageSizeRef.value)
       }
+      const { pageCount } = props
+      if (pageCount !== undefined) return pageCount
       return 1
     })
     const showFastForwardRef = ref(false)
@@ -156,6 +161,17 @@ export default defineComponent({
         NConfigProvider?.mergedComponentPropsRef.value?.Pagination
           ?.selectSize || 'small'
       )
+    })
+    const startIndexRef = computed(() => {
+      return (mergedPageRef.value - 1) * mergedPageSizeRef.value
+    })
+    const endIndexRef = computed(() => {
+      const endIndex = mergedPageRef.value * mergedPageSizeRef.value
+      const { itemCount } = props
+      if (itemCount !== undefined) {
+        return endIndex > itemCount ? itemCount : endIndex
+      }
+      return endIndex
     })
 
     const disableTransitionOneTick = (): void => {
@@ -302,6 +318,8 @@ export default defineComponent({
       selectSize: selectSizeRef,
       mergedTheme: themeRef,
       mergedPageCount: mergedPageCountRef,
+      startIndex: startIndexRef,
+      endIndex: endIndexRef,
       handleJumperInput,
       handleBackwardClick: backward,
       handleForwardClick: forward,
@@ -347,11 +365,15 @@ export default defineComponent({
             itemFontSize,
             jumperFontSize,
             jumperTextColor,
-            jumperTextColorDisabled
+            jumperTextColorDisabled,
+            prefixMargin,
+            suffixMargin
           },
           common: { cubicBezierEaseInOut }
         } = themeRef.value
         return {
+          '--prefix-margin': prefixMargin,
+          '--suffix-margin': suffixMargin,
           '--item-font-size': itemFontSize,
           '--select-width': selectWidth,
           '--select-margin': selectMargin,
@@ -395,6 +417,7 @@ export default defineComponent({
   render () {
     // it's ok to expand all prop here since no slots' deps
     const {
+      $slots,
       mergedClsPrefix,
       disabled,
       cssVars,
@@ -412,6 +435,8 @@ export default defineComponent({
       mergedPageSize,
       pageSizeOptions,
       jumperValue,
+      prefix,
+      suffix,
       handleJumperInput,
       handleSizePickerChange,
       handleBackwardClick,
@@ -430,6 +455,19 @@ export default defineComponent({
         ]}
         style={cssVars as CSSProperties}
       >
+        {prefix || $slots.prefix ? (
+          <div class={`${mergedClsPrefix}-pagination-prefix`}>
+            {($slots.prefix
+              ? (($slots.prefix as unknown) as RenderPrefix)
+              : prefix!)({
+              page: mergedPage,
+              pageSize: mergedPageSize,
+              pageCount: mergedPageCount,
+              startIndex: this.startIndex,
+              endIndex: this.endIndex
+            })}
+          </div>
+        ) : null}
         <div
           class={[
             `${mergedClsPrefix}-pagination-item ${mergedClsPrefix}-pagination-item--button`,
@@ -523,6 +561,19 @@ export default defineComponent({
               themeOverrides={mergedTheme.peerOverrides.Input}
               onKeyup={handleQuickJumperKeyUp}
             />
+          </div>
+        ) : null}
+        {suffix || $slots.suffix ? (
+          <div class={`${mergedClsPrefix}-pagination-suffix`}>
+            {($slots.suffix
+              ? (($slots.suffix as unknown) as RenderSuffix)
+              : suffix!)({
+              page: mergedPage,
+              pageSize: mergedPageSize,
+              pageCount: mergedPageCount,
+              startIndex: this.startIndex,
+              endIndex: this.endIndex
+            })}
           </div>
         ) : null}
       </div>

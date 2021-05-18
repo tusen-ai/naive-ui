@@ -31,12 +31,24 @@ import { cB, c, cM, cNotM } from '../../../_utils/cssr'
 // --button-icon-color
 // --button-icon-color-hover
 // --button-icon-color-pressed
+// --prefix-margin
+// --suffix-margin
 export default cB('pagination', `
   display: flex;
   vertical-align: middle;
   font-size: var(--item-font-size);
   flex-wrap: nowrap;
 `, [
+  cB('pagination-prefix', `
+    display: flex;
+    align-items: center;
+    margin: var(--prefix-margin);
+  `),
+  cB('pagination-suffix', `
+    display: flex;
+    align-items: center;
+    margin: var(--suffix-margin);
+  `),
   c('> *:not(:first-child)', {
     margin: 'var(--item-margin)'
   }),

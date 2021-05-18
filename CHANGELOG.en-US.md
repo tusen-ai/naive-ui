@@ -14,6 +14,10 @@
 - `n-data-table` add `virtual-scroll` prop.
 - `n-cascader` add `virtual-scroll` prop.
 - `n-pagination` add `item-count` prop.
+- `n-pagination` add `prefix` prop.
+- `n-pagination` add `prefix` slot.
+- `n-pagination` add `suffix` prop.
+- `n-pagination` add `suffix` slot.
 
 ### Fixes
 

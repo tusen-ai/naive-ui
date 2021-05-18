@@ -14,6 +14,10 @@
 - `n-data-table` 新增 `virtual-scroll` 属性
 - `n-cascader` 新增 `virtual-scroll` 属性
 - `n-pagination` 新增 `item-count` 属性
+- `n-pagination` 新增 `prefix` 属性
+- `n-pagination` 新增 `prefix` slot
+- `n-pagination` 新增 `suffix` 属性
+- `n-pagination` 新增 `suffix` slot
 
 ### Fixes
 
