@@ -48,7 +48,6 @@ export interface TreeInjection {
   remoteRef: Ref<boolean>
   draggableRef: Ref<boolean>
   checkableRef: Ref<boolean>
-  blockNodeRef: Ref<boolean>
   mergedThemeRef: Ref<MergedTheme<TreeTheme>>
   onLoadRef: Ref<((node: TreeOption) => Promise<void>) | undefined>
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void

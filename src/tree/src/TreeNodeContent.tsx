@@ -11,22 +11,6 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    selected: {
-      type: Boolean,
-      default: false
-    },
-    blockNode: {
-      type: Boolean,
-      default: false
-    },
-    checkable: {
-      type: Boolean,
-      default: false
-    },
-    highlight: {
-      type: Boolean,
-      default: false
-    },
     onClick: Function as PropType<(e: MouseEvent) => void>,
     onDragstart: Function as PropType<(e: DragEvent) => void>,
     onDragend: Function as PropType<(e: DragEvent) => void>,
@@ -151,10 +135,6 @@ export default defineComponent({
       clsPrefix,
       pending,
       pendingPosition,
-      selected,
-      blockNode,
-      checkable,
-      highlight,
       handleContentDragLeave,
       handleContentDragStart,
       handleDragOverContent,
@@ -175,11 +155,7 @@ export default defineComponent({
             [`${clsPrefix}-tree-node-content--pending-body`]:
               pendingPosition === 'center',
             [`${clsPrefix}-tree-node-content--pending-top`]:
-              pendingPosition === 'top',
-            [`${clsPrefix}-tree-node-content--selected`]: selected,
-            [`${clsPrefix}-tree-node-content--block`]: blockNode,
-            [`${clsPrefix}-tree-node-content--checkable`]: checkable,
-            [`${clsPrefix}-tree-node-content--hightlight`]: highlight
+              pendingPosition === 'top'
           }
         ]}
         onDragleave={handleContentDragLeave}

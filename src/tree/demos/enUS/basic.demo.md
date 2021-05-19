@@ -3,7 +3,12 @@
 Fortunately, the tree is now alive and it's not balanced.
 
 ```html
-<n-tree block-node :data="data" :default-expanded-keys="defaultExpandedKeys" />
+<n-tree
+  block-line
+  :data="data"
+  :default-expanded-keys="defaultExpandedKeys"
+  selectable
+/>
 ```
 
 ```js

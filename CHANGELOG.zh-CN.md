@@ -6,6 +6,7 @@
 
 - `n-button` 新增 `tag` 属性
 - `n-data-table` 新增 `table-layout` 属性
+- `n-tree` 新增 `block-line` 属性
 
 ### Fixes
 

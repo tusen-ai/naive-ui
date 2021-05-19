@@ -21,6 +21,7 @@ drag-drop-debug
 | Name | Type | default | Description |
 | --- | --- | --- | --- |
 | block-node | `boolean` | `false` |  |
+| block-line | `boolean` | `false` |  |
 | cancelable | `boolean` | `false` | Whether node's select status can be cancelled. |
 | cascade | `boolean` | `false` | Whether to cascade checkboxes. |
 | checkable | `boolean` | `false` |  |

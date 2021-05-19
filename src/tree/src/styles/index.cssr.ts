@@ -1,6 +1,29 @@
-import { c, cB, cE, cM } from '../../../_utils/cssr'
+import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 import iconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
 import fadeInHeightExpandTransition from '../../../_styles/transitions/fade-in-height-expand.cssr'
+
+const nodeStateStyle = [
+  c('&:hover', {
+    backgroundColor: 'var(--node-color-hover)'
+  }),
+  c('&:active', {
+    backgroundColor: 'var(--node-color-pressed)'
+  }),
+  cM('pending', [
+    c('&:hover', {
+      backgroundColor: '#0000'
+    }),
+    cM('pending-bottom', {
+      borderBottom: '3px solid var(--node-color-hover)'
+    }),
+    cM('pending-top', {
+      borderTop: '3px solid var(--node-color-hover)'
+    }),
+    cM('pending-body', {
+      backgroundColor: 'var(--node-color-hover)'
+    })
+  ])
+]
 
 // vars:
 // --arrow-color
@@ -23,7 +46,7 @@ export default cB('tree', {
   c('>', [
     cB('tree-node', [
       c('&:first-child', {
-        paddingTop: 0
+        marginTop: 0
       })
     ])
   ]),
@@ -45,9 +68,44 @@ export default cB('tree', {
     ])
   ]),
   cB('tree-node', `
-    padding: 6px 0 0 0;
+    margin: 6px 0 0 0;
     display: flex;
-  `),
+    border-radius: var(--node-border-radius);
+    transition: background-color .3s var(--bezier);
+  `, [
+    cM('hightlight', [
+      cB('tree-node-content', [
+        cE('text', {
+          borderBottomColor: 'var(--node-text-color-disabled)'
+        })
+      ])
+    ])
+  ]),
+  cM('block-node', [
+    cB('tree-node-content', `
+      width: 100%;
+    `)
+  ]),
+  cNotM('block-line', [
+    cB('tree-node-content', nodeStateStyle),
+    cB('tree-node', [
+      cM('selected', [
+        cB('tree-node-content', {
+          backgroundColor: 'var(--node-color-active)'
+        })
+      ])
+    ])
+  ]),
+  cM('block-line', [
+    cB('tree-node', {
+      cursor: 'pointer'
+    }, [
+      nodeStateStyle,
+      cM('selected', {
+        backgroundColor: 'var(--node-color-active)'
+      })
+    ])
+  ]),
   cB('tree-node-switcher', `
     cursor: pointer;
     display: inline-flex;
@@ -133,24 +191,12 @@ export default cB('tree', {
       border-bottom: 1px solid #0000;
       transition: border-color .3s var(--bezier);
     `),
-    cM('block', {
-      width: 'calc(100% - 24px)'
-    }, [
-      cM('checkable', {
-        width: 'calc(100% - 48px)'
-      })
-    ]),
     c('&:hover', {
       backgroundColor: 'var(--node-color-hover)'
     }),
     c('&:active', {
       backgroundColor: 'var(--node-color-pressed)'
     }),
-    cM('hightlight', [
-      cE('text', {
-        borderBottomColor: 'var(--node-text-color-disabled)'
-      })
-    ]),
     cM('pending', [
       c('&:hover', {
         backgroundColor: '#0000'
@@ -164,9 +210,6 @@ export default cB('tree', {
       cM('pending-body', {
         backgroundColor: 'var(--node-color-hover)'
       })
-    ]),
-    cM('selected', {
-      backgroundColor: 'var(--node-color-active)'
-    })
+    ])
   ])
 ])

@@ -3,7 +3,12 @@
 好在这颗树不是活的，也不平衡。
 
 ```html
-<n-tree block-node :data="data" :default-expanded-keys="defaultExpandedKeys" />
+<n-tree
+  block-line
+  :data="data"
+  :default-expanded-keys="defaultExpandedKeys"
+  selectable
+/>
 ```
 
 ```js

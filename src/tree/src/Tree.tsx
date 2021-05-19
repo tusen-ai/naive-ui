@@ -76,6 +76,10 @@ const treeProps = {
     type: Boolean,
     default: false
   },
+  blockLine: {
+    type: Boolean,
+    default: false
+  },
   disabled: {
     type: Boolean,
     default: false
@@ -567,7 +571,6 @@ export default defineComponent({
       onLoadRef: toRef(props, 'onLoad'),
       draggableRef: toRef(props, 'draggable'),
       checkableRef: toRef(props, 'checkable'),
-      blockNodeRef: toRef(props, 'blockNode'),
       handleSwitcherClick,
       handleDragEnd,
       handleDragEnter,
@@ -621,7 +624,12 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, blockNode, blockLine } = this
+    const treeClass = [
+      `${mergedClsPrefix}-tree`,
+      (blockLine || blockNode) && `${mergedClsPrefix}-tree--block-node`,
+      blockLine && `${mergedClsPrefix}-tree--block-line`
+    ]
     const createNode = (tmNode: TmNode | MotionData): VNode =>
       '__motion' in tmNode ? (
         <MotionWrapper
@@ -645,7 +653,7 @@ export default defineComponent({
           ref="scrollbarInstRef"
           container={this.getScrollContainer}
           content={this.getScrollContent}
-          class={`${mergedClsPrefix}-tree`}
+          class={treeClass}
           theme={mergedTheme.peers.Scrollbar}
           themeOverrides={mergedTheme.peerOverrides.Scrollbar}
         >
@@ -674,7 +682,7 @@ export default defineComponent({
     }
     return (
       <div
-        class={`${mergedClsPrefix}-tree`}
+        class={treeClass}
         style={this.cssVars as CSSProperties}
         ref="selfElRef"
       >

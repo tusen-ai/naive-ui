@@ -6,6 +6,7 @@
 
 - `n-button` add `tag` prop.
 - `n-data-table` add `table-layout` prop.
+- `n-tree` add `block-line` prop.
 
 ### Fixes
 

@@ -21,6 +21,7 @@ drag-drop-debug
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | block-node | `boolean` | `false` |  |
+| block-line | `boolean` | `false` |  |
 | cancelable | `boolean` | `false` | 选中之后是否允许取消 |
 | cascade | `boolean` | `false` | 是否关联选项 |
 | checkable | `boolean` | `false` |  |

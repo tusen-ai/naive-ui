@@ -104,7 +104,6 @@ const TreeNode = defineComponent({
       icon: computed(() => props.tmNode.rawNode.icon),
       checkable: NTree.checkableRef,
       draggable: NTree.draggableRef,
-      blockNode: NTree.blockNodeRef,
       handleCheck,
       handleDrop,
       handleDragStart,
@@ -116,9 +115,18 @@ const TreeNode = defineComponent({
     }
   },
   render () {
-    const { tmNode, clsPrefix, checkable, blockNode } = this
+    const { tmNode, clsPrefix, checkable, selected, highlight } = this
     return (
-      <li class={`${clsPrefix}-tree-node`}>
+      <li
+        class={[
+          `${clsPrefix}-tree-node`,
+          {
+            [`${clsPrefix}-tree-node--selected`]: selected,
+            [`${clsPrefix}-tree-node--checkable`]: checkable,
+            [`${clsPrefix}-tree-node--hightlight`]: highlight
+          }
+        ]}
+      >
         {Array.apply(null, { length: tmNode.level } as any).map(() => (
           <div class={`${clsPrefix}-tree-node-indent`}></div>
         ))}
@@ -139,10 +147,6 @@ const TreeNode = defineComponent({
         ) : null}
         <NTreeNodeContent
           clsPrefix={clsPrefix}
-          selected={this.selected}
-          blockNode={blockNode}
-          checkable={checkable}
-          highlight={this.highlight}
           onClick={this.handleContentClick}
           onDragenter={this.handleDragEnter}
           onDragstart={this.handleDragStart}
