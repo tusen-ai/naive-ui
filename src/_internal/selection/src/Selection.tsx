@@ -13,7 +13,7 @@ import {
   watchEffect,
   onMounted
 } from 'vue'
-import { VOverflow, VOverflowRef } from 'vueuc'
+import { VOverflow, VOverflowInst } from 'vueuc'
 import type { SelectBaseOption } from '../../../select/src/interface'
 import { NPopover } from '../../../popover'
 import { NTag } from '../../../tag'
@@ -94,7 +94,7 @@ export default defineComponent({
     const patternInputWrapperRef = ref<HTMLElement | null>(null)
     const counterRef = ref<TagRef | null>(null)
     const counterWrapperRef = ref<HTMLElement | null>(null)
-    const overflowRef = ref<VOverflowRef | null>(null)
+    const overflowRef = ref<VOverflowInst | null>(null)
 
     const showTagsPopoverRef = ref<boolean>(false)
     const patternInputFocusedRef = ref(false)

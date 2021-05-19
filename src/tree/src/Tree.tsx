@@ -13,7 +13,7 @@ import {
 } from 'vue'
 import { createTreeMate, flatten } from 'treemate'
 import { useMergedState } from 'vooks'
-import { VirtualListRef, VVirtualList } from 'vueuc'
+import { VirtualListInst, VVirtualList } from 'vueuc'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, warn } from '../../_utils'
@@ -203,12 +203,12 @@ export default defineComponent({
     )
     const selfElRef = ref<HTMLDivElement | null>(null)
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
-    const virtualListInstRef = ref<VirtualListRef | null>(null)
+    const virtualListInstRef = ref<VirtualListInst | null>(null)
     function getScrollContainer (): HTMLElement | null | undefined {
-      return virtualListInstRef.value?.listRef
+      return virtualListInstRef.value?.listElRef
     }
     function getScrollContent (): HTMLElement | null | undefined {
-      return virtualListInstRef.value?.itemsRef
+      return virtualListInstRef.value?.itemsElRef
     }
     const treeMateRef = computed(() => createTreeMate(props.data))
     const uncontrolledCheckedKeysRef = ref(
@@ -307,7 +307,7 @@ export default defineComponent({
       }
       const { virtualScroll } = props
       const viewportHeight = (virtualScroll
-        ? virtualListInstRef.value!.listRef
+        ? virtualListInstRef.value!.listElRef
         : selfElRef.value!
       ).offsetHeight
       const viewportItemCount = Math.ceil(viewportHeight / ITEM_SIZE) + 1

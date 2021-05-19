@@ -1,5 +1,5 @@
 import { h, ref, defineComponent, inject, PropType, computed } from 'vue'
-import { VirtualList, VirtualListRef } from 'vueuc'
+import { VirtualList, VirtualListInst } from 'vueuc'
 import NCascaderOption from './CascaderOption'
 import { NScrollbar } from '../../scrollbar'
 import type { ScrollbarInst } from '../../scrollbar'
@@ -31,7 +31,7 @@ export default defineComponent({
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(cascaderInjectionKey)!
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
-    const vlInstRef = ref<VirtualListRef | null>(null)
+    const vlInstRef = ref<VirtualListInst | null>(null)
     const inst: CascaderSubmenuInstance = {
       scroll (index: number, elSize: number) {
         if (virtualScrollRef.value) {
@@ -57,10 +57,10 @@ export default defineComponent({
         scrollbarInstRef.value?.sync()
       },
       getVlContainer: () => {
-        return vlInstRef.value?.listRef
+        return vlInstRef.value?.listElRef
       },
       getVlContent: () => {
-        return vlInstRef.value?.itemsRef
+        return vlInstRef.value?.itemsElRef
       },
       ...inst
     }

@@ -7,7 +7,7 @@ import {
   TransitionGroup,
   Transition
 } from 'vue'
-import { VirtualList, VirtualListRef } from 'vueuc'
+import { VirtualList, VirtualListInst } from 'vueuc'
 import { NEmpty } from '../../empty'
 import { NScrollbar, ScrollbarInst } from '../../scrollbar'
 import { Option, transferInjectionKey } from './interface'
@@ -49,21 +49,21 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const { mergedThemeRef, mergedClsPrefixRef } = inject(transferInjectionKey)!
     const scrollerInstRef = ref<ScrollbarInst | null>(null)
-    const vlInstRef = ref<VirtualListRef | null>(null)
+    const vlInstRef = ref<VirtualListInst | null>(null)
     function syncVLScroller (): void {
       scrollerInstRef.value?.sync()
     }
     function scrollContainer (): HTMLElement | null {
       const { value } = vlInstRef
       if (!value) return null
-      const { listRef } = value
-      return listRef
+      const { listElRef } = value
+      return listElRef
     }
     function scrollContent (): HTMLElement | null {
       const { value } = vlInstRef
       if (!value) return null
-      const { itemsRef } = value
-      return itemsRef
+      const { itemsElRef } = value
+      return itemsElRef
     }
     return {
       mergedTheme: mergedThemeRef,

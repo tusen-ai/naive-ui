@@ -14,7 +14,7 @@ import {
   InjectionKey
 } from 'vue'
 import { TreeNode, createIndexGetter } from 'treemate'
-import { VirtualList, VirtualListRef } from 'vueuc'
+import { VirtualList, VirtualListInst } from 'vueuc'
 import { depx, getPadding, happensIn } from 'seemly'
 import { NEmpty } from '../../../empty'
 import { NScrollbar } from '../../../scrollbar'
@@ -127,7 +127,7 @@ export default defineComponent({
       toRef(props, 'clsPrefix')
     )
     const selfRef = ref<HTMLElement | null>(null)
-    const virtualListRef = ref<VirtualListRef | null>(null)
+    const virtualListRef = ref<VirtualListInst | null>(null)
     const scrollbarRef = ref<ScrollbarInst | null>(null)
     const flattenedNodesRef = computed(() => props.treeMate.getFlattenedNodes())
     const fIndexGetterRef = computed(() =>
@@ -352,11 +352,11 @@ export default defineComponent({
       empty: emptyRef,
       virtualListContainer () {
         const { value } = virtualListRef
-        return value?.listRef as HTMLElement
+        return value?.listElRef as HTMLElement
       },
       virtualListContent () {
         const { value } = virtualListRef
-        return value?.itemsRef as HTMLElement
+        return value?.itemsElRef as HTMLElement
       },
       doScroll,
       handleFocusin,

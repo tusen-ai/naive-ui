@@ -9,7 +9,7 @@ import {
   PropType
 } from 'vue'
 import { pxfy } from 'seemly'
-import { VirtualList, VirtualListRef } from 'vueuc'
+import { VirtualList, VirtualListInst } from 'vueuc'
 import { c } from '../../../_utils/cssr'
 import { NScrollbar, ScrollbarInst } from '../../../scrollbar'
 import { formatLength } from '../../../_utils'
@@ -101,7 +101,7 @@ export default defineComponent({
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(dataTableInjectionKey)!
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
-    const virtualListRef = ref<VirtualListRef | null>(null)
+    const virtualListRef = ref<VirtualListInst | null>(null)
     function handleCheckboxUpdateChecked (
       tmNode: { key: RowKey },
       checked: boolean
@@ -140,11 +140,11 @@ export default defineComponent({
     }
     function virtualListContainer (): HTMLElement {
       const { value } = virtualListRef
-      return value?.listRef as HTMLElement
+      return value?.listElRef as HTMLElement
     }
     function virtualListContent (): HTMLElement {
       const { value } = virtualListRef
-      return value?.itemsRef as HTMLElement
+      return value?.itemsElRef as HTMLElement
     }
     function handleVirtualListScroll (e: Event): void {
       handleTableBodyScroll(e)
