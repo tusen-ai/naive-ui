@@ -109,7 +109,7 @@
   "dependencies": {
     "@css-render/plugin-bem": "^0.13.9",
     "async-validator": "^3.5.1",
-    "css-render": "^0.13.9",
+    "css-render": "^0.14.1",
     "date-fns": "^2.19.0",
     "evtd": "^0.2.0",
     "highlight.js": "^10.7.1",
@@ -121,7 +121,7 @@
     "vooks": "^0.2.3",
     "vue": "^3.0.10",
     "vue-router": "^4.0.5",
-    "vueuc": "^0.3.12"
+    "vueuc": "^0.4.1"
   },
   "husky": {
     "hooks": {
