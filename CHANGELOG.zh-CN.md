@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-button` 新增 `tag` 属性
+
 ## 2.8.0
 
 ### Perf

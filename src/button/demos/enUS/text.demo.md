@@ -1,6 +1,6 @@
 # Text Button
 
-Somebody also calls it `link` button.
+Just look like text.
 
 ```html
 <n-button text>

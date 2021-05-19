@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-button` add `tag` prop.
+
 ## 2.8.0
 
 ### Perf

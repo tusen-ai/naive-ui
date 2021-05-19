@@ -9,6 +9,7 @@ basic
 dashed
 size
 text
+tag
 disabled
 icon
 events

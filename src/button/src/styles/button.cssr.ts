@@ -58,6 +58,7 @@ export default c([
     user-select: none;
     text-align: center;
     cursor: pointer;
+    text-decoration: none;
     transition:
       color .3s var(--bezier),
       background-color .3s var(--bezier),

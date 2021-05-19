@@ -31,35 +31,14 @@ import style from './styles/button.cssr'
 const buttonProps = {
   ...(useTheme.props as ThemeProps<ButtonTheme>),
   color: String,
-  text: {
-    type: Boolean,
-    default: false
-  },
-  block: {
-    type: Boolean,
-    default: false
-  },
-  loading: {
-    type: Boolean,
-    default: false
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-  circle: {
-    type: Boolean,
-    default: false
-  },
+  text: Boolean,
+  block: Boolean,
+  loading: Boolean,
+  disabled: Boolean,
+  circle: Boolean,
   size: String as PropType<Size>,
-  ghost: {
-    type: Boolean,
-    default: false
-  },
-  round: {
-    type: Boolean,
-    default: false
-  },
+  ghost: Boolean,
+  round: Boolean,
   focusable: {
     type: Boolean,
     default: true
@@ -68,14 +47,15 @@ const buttonProps = {
     type: Boolean,
     default: true
   },
+  tag: {
+    type: String as PropType<keyof HTMLElementTagNameMap>,
+    default: 'button'
+  },
   type: {
     type: String as PropType<Type>,
     default: 'default'
   },
-  dashed: {
-    type: Boolean,
-    default: false
-  },
+  dashed: Boolean,
   iconPlacement: {
     type: String as PropType<'left' | 'right'>,
     default: 'left'
@@ -389,9 +369,9 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots, mergedClsPrefix } = this
+    const { $slots, mergedClsPrefix, tag: Component } = this
     return (
-      <button
+      <Component
         ref="selfRef"
         class={[
           `${mergedClsPrefix}-button`,
@@ -470,7 +450,7 @@ export default defineComponent({
             style={this.customColorCssVars as CSSProperties}
           />
         ) : null}
-      </button>
+      </Component>
     )
   }
 })
