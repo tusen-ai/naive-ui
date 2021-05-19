@@ -57,10 +57,11 @@ scroll-to
 | collapsed-width | `number` | `48` |  |
 | content-style | `string \| Object` | `undefined` | Style of scrollable content node. |
 | default-collapsed | `boolean` | `false` |  |
+| native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on itself. If set to `false`, sider will use a naive-ui style scrollbar for content |
 | position | `'static' \| 'absolute'` | `'static'` | `static` position will make it css position set to `static`. `absolute` position will make it css position set to `absolute` and `left`, `top`, `bottom` to `0`. `absolute` position is very useful when you want to make content scroll in a fixed container or make the whole page's layout in a fixed position. You may need to change the style of the component to make it as you expect. |
 | show-content | `boolean` | `true` | If set to `false`, sider content will be invisible. |
 | show-trigger | `boolean \| 'bar' \| 'arrow-circle'` | `false` | Whether to show the built-in trigger button on sider. |
-| native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on itself. If set to `false`, sider will use a naive-ui style scrollbar for content |
+| trigger-style | `string \| Object` | `undefined` |  |
 | width | `number` | `272` |  |
 | on-update:collapsed | `(collapsed: boolean) => void` | `undefined` |  |
 

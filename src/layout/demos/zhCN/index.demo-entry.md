@@ -57,11 +57,12 @@ scroll-to
 | collapsed-width | `number` | `48` |  |
 | content-style | `string \| Object` | `undefined` | 可滚动内容节点的样式 |
 | default-collapsed | `boolean` | `false` |  |
+| native-scrollbar | `boolean` | `true` | 是否在自身使用原生滚动条。如果设定为 `false`, Sider 将会对内容使用 naive-ui 风格的滚动条 |
 | position | `'static' \| 'absolute'` | `'static'` | `static` 模式将会把 CSS `position` 设为 `static`， `absolute` 模式将会把 CSS `position` 设为 `absolute`，还将 `left`、`top`、`bottom` 设为 `0`。`absolute` 模式在你想将内容在一个固定容器或者将这个页面的布局设为固定位置的时候很有用。你可能需要修改一些 style 来确保它按照你预想的方式展示 |
 | show-content | `boolean` | `true` | 如果设为 `false`，Sider 的内容将会变透明 |
 | show-trigger | `boolean \| 'bar' \| 'arrow-circle'` | `false` | 内置的触发按钮是否展示 |
+| trigger-style | `string \| Object` | `undefined` |  |
 | width | `number` | `272` |  |
-| native-scrollbar | `boolean` | `true` | 是否在自身使用原生滚动条。如果设定为 `false`, Sider 将会对内容使用 naive-ui 风格的滚动条 |
 | on-update:collapsed | `(collapsed: boolean) => void` | `undefined` |  |
 
 ## Slots

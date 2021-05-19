@@ -6,6 +6,7 @@
       collapse-mode="transform"
       bordered
       show-trigger="bar"
+      trigger-style="top: calc(50% - 64px);"
       v-if="showSider"
     >
       <n-menu
