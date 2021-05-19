@@ -4,7 +4,7 @@
 
 ```html
 <n-tree
-  block-node
+  block-line
   :data="data"
   default-expand-all
   virtual-scroll

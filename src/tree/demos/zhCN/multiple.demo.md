@@ -3,9 +3,9 @@
 设置 `multiple` 来允许多选节点。
 
 ```html
-<n-tree multiple block-node :data="data" />
+<n-tree multiple block-line :data="data" />
 <n-divider />
-<n-tree multiple block-node :data="data" v-model:selected-keys="value" />
+<n-tree multiple block-line :data="data" v-model:selected-keys="value" />
 ```
 
 ```js

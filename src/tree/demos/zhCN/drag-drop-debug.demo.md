@@ -4,7 +4,7 @@
 
 ```html
 <n-tree
-  block-node
+  block-line
   checkable
   draggable
   :data="data"

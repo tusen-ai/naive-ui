@@ -4,7 +4,7 @@ Set `virtual-scroll` to use virtual scroll. Note that you should set the height 
 
 ```html
 <n-tree
-  block-node
+  block-line
   :data="data"
   default-expand-all
   virtual-scroll

@@ -4,7 +4,7 @@ After set `remote`, use `on-load` callback to load data. When loading async, all
 
 ```html
 <n-tree
-  block-node
+  block-line
   checkable
   remote
   :data="data"

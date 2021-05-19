@@ -3,9 +3,9 @@
 Set `multiple` to select multiple nodes.
 
 ```html
-<n-tree multiple block-node :data="data" />
+<n-tree multiple block-line :data="data" />
 <n-divider />
-<n-tree multiple block-node :data="data" v-model="value" />
+<n-tree multiple block-line :data="data" v-model="value" />
 ```
 
 ```js

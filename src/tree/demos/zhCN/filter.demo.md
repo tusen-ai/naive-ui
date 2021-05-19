@@ -5,7 +5,7 @@
 ```html
 <n-space vertical :size="12">
   <n-input v-model:value="pattern" placeholder="搜索" />
-  <n-tree :pattern="pattern" :data="data" block-node />
+  <n-tree :pattern="pattern" :data="data" block-line />
 </n-space>
 ```
 

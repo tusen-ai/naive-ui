@@ -2,7 +2,7 @@
 
 ```html
 <n-tree
-  block-node
+  block-line
   cascade
   checkable
   :data="data"

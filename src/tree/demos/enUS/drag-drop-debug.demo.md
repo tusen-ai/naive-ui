@@ -4,7 +4,7 @@ Set `draggable` and write bunch of codes to make drag & drop work.
 
 ```html
 <n-tree
-  block-node
+  block-line
   checkable
   draggable
   :data="data"
