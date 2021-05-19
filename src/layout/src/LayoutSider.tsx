@@ -118,8 +118,9 @@ export default defineComponent({
       )
     })
     const scrollContainerStyleRef = computed<CSSProperties>(() => {
+      if (props.collapseMode !== 'transform') return {}
       return {
-        width: formatLength(props.width)
+        minWidth: formatLength(props.width)
       }
     })
     const scrollableDivStyleRef = computed(() => {
@@ -127,6 +128,7 @@ export default defineComponent({
         props.contentStyle,
         scrollContainerStyleRef.value,
         {
+          width: '100%',
           height: '100%',
           overflow: 'auto'
         }

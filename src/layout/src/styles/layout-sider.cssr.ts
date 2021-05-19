@@ -8,6 +8,7 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --sider-toggle-bar-color
 // --sider-toggle-bar-color-hover
 export default cB('layout-sider', `
+  flex-shrink: 0;
   box-sizing: border-box;
   position: relative;
   z-index: 1;

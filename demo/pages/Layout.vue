@@ -3,6 +3,7 @@
     <n-layout-sider
       :native-scrollbar="false"
       :collapsed-width="0"
+      collapse-mode="transform"
       bordered
       show-trigger="bar"
       v-if="showSider"

@@ -5,7 +5,11 @@
 ### Feats
 
 - `n-button` add `tag` prop.
-- `n-data-table` add `table-layout` prop
+- `n-data-table` add `table-layout` prop.
+
+### Fixes
+
+- `n-layout-sider`'s `collapse-mode` not working.
 
 ## 2.8.0
 

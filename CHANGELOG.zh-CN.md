@@ -7,6 +7,10 @@
 - `n-button` 新增 `tag` 属性
 - `n-data-table` 新增 `table-layout` 属性
 
+### Fixes
+
+- `n-layout-sider` 的 `collapse-mode` 属性不生效
+
 ## 2.8.0
 
 ### Perf
