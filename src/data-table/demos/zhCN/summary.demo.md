@@ -13,18 +13,15 @@ const createColumns = () => {
   return [
     {
       title: 'Name',
-      key: 'name',
-      width: '15%'
+      key: 'name'
     },
     {
       title: 'Age',
-      key: 'age',
-      width: '10%'
+      key: 'age'
     },
     {
       title: 'Address',
-      key: 'address',
-      width: '20%'
+      key: 'address'
     }
   ]
 }

@@ -58,6 +58,7 @@ custom-filter-menu
 | single-line | `boolean` | `true` |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | summary | `CreateSummary` | `undefined` | Data of table summary row. For types, see <n-a href="#CreateSummary-Type">CreateSummary Type</n-a>. |
+| table-layout | `'auto' \| 'fixed'` | `'auto'` | Style `table-layout` of the table. When `ellpisis` or `max-height` are set, it will always be `'fixed'` regardless of what you set. |
 | virtual-scroll | `boolean` | `false` | Whether to use virtual scroll to deal with large data. Make sure `max-height` is set before using it. |
 | on-update:checked-row-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
 | on-update:filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: Column)` |  |

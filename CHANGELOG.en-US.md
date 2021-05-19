@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-button` add `tag` prop.
+- `n-data-table` add `table-layout` prop
 
 ## 2.8.0
 

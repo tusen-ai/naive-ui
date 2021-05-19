@@ -101,13 +101,15 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, maxHeight } = this
+    const headerInBody = maxHeight === undefined
     return (
       <div class={`${mergedClsPrefix}-data-table-base-table`} ref="selfElRef">
-        <TableHeader ref="headerInstRef" />
+        {headerInBody ? null : <TableHeader ref="headerInstRef" />}
         <TableBody
           ref="bodyInstRef"
           style={this.bodyStyle}
+          showHeader={headerInBody}
           onResize={this.handleBodyResize}
         />
         {renderSlot(this.$slots, 'default')}

@@ -24,6 +24,7 @@ import { createRowClassName, getColKey } from '../utils'
 import Cell from './Cell'
 import ExpandTrigger from './ExpandTrigger'
 import RenderSafeCheckbox from './BodyCheckbox'
+import TableHeader from './Header'
 import type { ColItem } from '../use-group-header'
 
 const VirtualListItemWrapper = defineComponent({
@@ -47,6 +48,7 @@ const VirtualListItemWrapper = defineComponent({
     const { clsPrefix, id, cols, onMouseenter, onMouseleave } = this
     return (
       <table
+        style={{ tableLayout: 'fixed' }}
         class={`${clsPrefix}-data-table-table`}
         onMouseenter={onMouseenter}
         onMouseleave={onMouseleave}
@@ -67,7 +69,8 @@ const VirtualListItemWrapper = defineComponent({
 export default defineComponent({
   name: 'DataTableBody',
   props: {
-    onResize: Function as PropType<(e: ResizeObserverEntry) => void>
+    onResize: Function as PropType<(e: ResizeObserverEntry) => void>,
+    showHeader: Boolean
   },
   setup (props) {
     const {
@@ -94,6 +97,7 @@ export default defineComponent({
       virtualScrollRef,
       componentId,
       scrollPartRef,
+      tableLayoutRef,
       setHeaderScrollLeft,
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
@@ -221,6 +225,7 @@ export default defineComponent({
       hoverKey: hoverKeyRef,
       mergedSortState: mergedSortStateRef,
       virtualScroll: virtualScrollRef,
+      tableLayout: tableLayoutRef,
       setHeaderScrollLeft,
       handleMouseenterTable,
       handleVirtualListScroll,
@@ -279,6 +284,7 @@ export default defineComponent({
               mergedSortState,
               mergedExpandedRowKeys,
               componentId,
+              showHeader,
               handleMouseenterTable,
               handleMouseleaveTable,
               renderExpand,
@@ -339,6 +345,8 @@ export default defineComponent({
 
             const { length: rowCount } = mergedData
 
+            let hasEllipsis = false
+
             const rows = mergedData.map((rowInfo, rowIndex) => {
               const {
                 rawNode: rowData,
@@ -395,6 +403,8 @@ export default defineComponent({
                   }
                 }
                 const hoverKey = isCrossRowTd ? this.hoverKey : null
+                const { ellipsis } = column
+                if (!hasEllipsis && ellipsis) hasEllipsis = true
                 return (
                   <td
                     key={colKey}
@@ -420,9 +430,9 @@ export default defineComponent({
                         `${mergedClsPrefix}-data-table-td--${column.align}-align`,
                       {
                         [`${mergedClsPrefix}-data-table-td--ellipsis`]:
-                          column.ellipsis === true ||
+                          ellipsis === true ||
                           // don't add ellpisis class if tooltip exists
-                          (column.ellipsis && !column.ellipsis.tooltip),
+                          (ellipsis && !ellipsis.tooltip),
                         [`${mergedClsPrefix}-data-table-td--selection`]:
                           column.type === 'selection',
                         [`${mergedClsPrefix}-data-table-td--expand`]:
@@ -546,12 +556,17 @@ export default defineComponent({
                 class={`${mergedClsPrefix}-data-table-table`}
                 onMouseleave={handleMouseleaveTable}
                 onMouseenter={handleMouseenterTable}
+                style={{
+                  tableLayout:
+                    this.showHeader && !hasEllipsis ? this.tableLayout : 'fixed'
+                }}
               >
                 <colgroup>
                   {cols.map((col) => (
                     <col key={col.key} style={col.style}></col>
                   ))}
                 </colgroup>
+                {showHeader ? <TableHeader discrete={false} /> : null}
                 <tbody
                   data-n-id={componentId}
                   class={`${mergedClsPrefix}-data-table-tbody`}

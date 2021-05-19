@@ -113,6 +113,56 @@ export default c([
         c('&:hover', {
           backgroundColor: 'var(--merged-th-color-hover)'
         })
+      ]),
+      cB('data-table-sorter', `
+        height: var(--sorter-size);
+        width: var(--sorter-size);
+        margin-left: 4px;
+        position: relative;
+        display: inline-flex;
+        vertical-align: -0.2em;
+        color: var(--th-icon-color);
+        transition: 
+          transform .3s var(--bezier),
+          color .3s var(--bezier);
+      `, [
+        cM('desc', {
+          transform: 'rotate(0)'
+        }),
+        cM('asc', {
+          transform: 'rotate(-180deg)'
+        }),
+        cM('asc, desc', {
+          color: 'var(--th-icon-color-active)'
+        })
+      ]),
+      cB('data-table-filter', `
+        position: absolute;
+        z-index: auto;
+        right: 0;
+        width: 36px;
+        top: 0;
+        bottom: 0;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition:
+          background-color .3s var(--bezier),
+          color .3s var(--bezier);
+        font-size: var(--filter-size);
+        color: var(--th-icon-color);
+      `, [
+        c('&:hover', `
+          background-color: var(--th-button-color-hover);
+        `),
+        cM('show', `
+          background-color: var(--th-button-color-hover);
+        `),
+        cM('active', `
+          background-color: var(--th-button-color-hover);
+          color: var(--th-icon-color-active);
+        `)
       ])
     ]),
     cB('data-table-td', `
@@ -244,7 +294,6 @@ export default c([
       width: 100%;
       word-wrap: break-word;
       word-break: break-all;
-      table-layout: fixed;
       transition: background-color .3s var(--bezier);
       border-collapse: separate;
       border-spacing: 0;
@@ -262,59 +311,7 @@ export default c([
       c('&::-webkit-scrollbar', {
         width: 0,
         height: 0
-      }),
-      cB('data-table-th', [
-        cB('data-table-sorter', `
-          height: var(--sorter-size);
-          width: var(--sorter-size);
-          margin-left: 4px;
-          position: relative;
-          display: inline-flex;
-          vertical-align: -0.2em;
-          color: var(--th-icon-color);
-          transition: 
-            transform .3s var(--bezier),
-            color .3s var(--bezier);
-        `, [
-          cM('desc', {
-            transform: 'rotate(0)'
-          }),
-          cM('asc', {
-            transform: 'rotate(-180deg)'
-          }),
-          cM('asc, desc', {
-            color: 'var(--th-icon-color-active)'
-          })
-        ]),
-        cB('data-table-filter', `
-          position: absolute;
-          z-index: auto;
-          right: 0;
-          width: 36px;
-          top: 0;
-          bottom: 0;
-          cursor: pointer;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          transition:
-            background-color .3s var(--bezier),
-            color .3s var(--bezier);
-          font-size: var(--filter-size);
-          color: var(--th-icon-color);
-        `, [
-          c('&:hover', `
-            background-color: var(--th-button-color-hover);
-          `),
-          cM('show', `
-            background-color: var(--th-button-color-hover);
-          `),
-          cM('active', `
-            background-color: var(--th-button-color-hover);
-            color: var(--th-icon-color-active);
-          `)
-        ])
-      ])
+      })
     ]),
     cB('data-table-check-extra', `
       transition: color .3s var(--bezier);

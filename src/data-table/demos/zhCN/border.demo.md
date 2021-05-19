@@ -26,23 +26,19 @@ const createColumns = ({ sendMail }) => {
   return [
     {
       title: 'Name',
-      key: 'name',
-      width: '15%'
+      key: 'name'
     },
     {
       title: 'Age',
-      key: 'age',
-      width: '10%'
+      key: 'age'
     },
     {
       title: 'Address',
-      key: 'address',
-      width: '20%'
+      key: 'address'
     },
     {
       title: 'Tags',
       key: 'tags',
-      width: '20%',
       render (row) {
         const tags = row.tags.map((tagKey) => {
           return h(
@@ -64,7 +60,6 @@ const createColumns = ({ sendMail }) => {
     {
       title: 'Action',
       key: 'actions',
-      width: '20%',
       render (row) {
         return h(
           NButton,

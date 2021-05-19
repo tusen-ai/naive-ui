@@ -58,6 +58,7 @@ custom-filter-menu
 | single-line | `boolean` | `true` |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | summary | `CreateSummary` | `undefined` | 表格总结栏的数据，类型见 <n-a href="#CreateSummary-Type">CreateSummary Type</n-a> |
+| table-layout | `'auto' \| 'fixed'` | `'auto'` | 表格的 `table-layout` 样式属性，在设定 `ellpisis` 或 `max-height` 的情况下固定为 `'fixed'` |
 | virtual-scroll | `boolean` | `false` | 是否开启虚拟滚动，应对大规模数据，开启前请设定好 `max-height` |
 | on-update:checked-row-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
 | on-update:filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: Column)` |  |

@@ -21,25 +21,21 @@ const createColumns = ({ sendMail }) => {
       title: 'Name',
       titleColSpan: 2,
       key: 'name',
-      width: '15%',
       rowSpan: (rowData, rowIndex) => (rowIndex === 0 ? 2 : 1),
       colSpan: (rowData, rowIndex) => (rowIndex === 0 ? 2 : 1)
     },
     {
       title: 'Age',
-      key: 'age',
-      width: '10%'
+      key: 'age'
     },
     {
       title: 'Address',
       key: 'address',
-      width: '20%',
       colSpan: (rowData, rowIndex) => (rowIndex === 2 ? 2 : 1)
     },
     {
       title: 'Tags',
       key: 'tags',
-      width: '20%',
       titleColSpan: 2,
       render (row) {
         const tags = row.tags.map((tagKey) => {
@@ -62,7 +58,6 @@ const createColumns = ({ sendMail }) => {
     {
       title: 'Action',
       key: 'actions',
-      width: '20%',
       rowSpan: (rowData, rowIndex) => (rowIndex === 0 ? 2 : 1),
       render (row) {
         return h(

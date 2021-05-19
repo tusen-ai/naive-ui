@@ -101,6 +101,10 @@ export const dataTableProps = {
   expandedRowKeys: Array as PropType<RowKey[]>,
   summary: [Function] as PropType<CreateSummary>,
   virtualScroll: Boolean,
+  tableLayout: {
+    type: String as PropType<'auto' | 'fixed'>,
+    default: 'auto'
+  },
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:page': [Function, Array] as PropType<
   PaginationProps['onUpdate:page']
@@ -330,6 +334,7 @@ export default defineComponent({
           '--action-divider-color': actionDividerColor
         } as CSSProperties
       }),
+      tableLayoutRef: toRef(props, 'tableLayout'),
       syncScrollState,
       doUpdateFilters,
       doUpdateSorter,

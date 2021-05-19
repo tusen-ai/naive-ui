@@ -170,6 +170,7 @@ export interface DataTableInjection {
   virtualScrollRef: Ref<boolean>
   bodyWidthRef: Ref<number | null>
   scrollPartRef: Ref<'head' | 'body'>
+  tableLayoutRef: Ref<'auto' | 'fixed'>
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   doUpdateFilters: (
     filters: FilterState,
