@@ -11,6 +11,9 @@ import { NTag, NButton, useMessage } from 'naive-ui'
 const createColumns = ({ sendMail }) => {
   return [
     {
+      type: 'selection'
+    },
+    {
       type: 'expand',
       expandable: (_, index) => index !== 1,
       renderExpand: (rowData) => {
