@@ -105,6 +105,18 @@ export const dataTableProps = {
     type: String as PropType<'auto' | 'fixed'>,
     default: 'auto'
   },
+  cascade: {
+    type: Boolean,
+    default: true
+  },
+  childrenKey: {
+    type: String,
+    default: 'children'
+  },
+  indent: {
+    type: Number,
+    default: 16
+  },
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:page': [Function, Array] as PropType<
   PaginationProps['onUpdate:page']
@@ -240,6 +252,7 @@ export default defineComponent({
       mergedPaginationRef,
       mergedFilterStateRef,
       mergedSortStateRef,
+      firstContentfulColIndexRef,
       doUpdateFilters,
       doUpdateSorter,
       filter,
@@ -252,11 +265,12 @@ export default defineComponent({
     const {
       doCheckAll,
       doUncheckAll,
-      doUpdateCheckedRowKeys,
+      doCheck,
+      doUncheck,
       someRowsCheckedRef,
       allRowsCheckedRef,
-      mergedCheckedRowKeysRef,
-      mergedCheckedRowKeySetRef
+      mergedCheckedRowKeySetRef,
+      mergedInderminateRowKeySetRef
     } = useCheck(props, {
       selectionColumnRef,
       treeMateRef,
@@ -286,11 +300,12 @@ export default defineComponent({
     })
     const { localeRef } = useLocale('DataTable')
     provide(dataTableInjectionKey, {
+      indentRef: toRef(props, 'indent'),
+      firstContentfulColIndexRef,
       bodyWidthRef,
       componentId: createId(),
       hoverKeyRef,
       mergedClsPrefixRef,
-      treeMateRef,
       mergedThemeRef: themeRef,
       scrollXRef: computed(() => props.scrollX),
       rowsRef,
@@ -309,9 +324,9 @@ export default defineComponent({
       mergedFilterStateRef,
       loadingRef: toRef(props, 'loading'),
       rowClassNameRef: toRef(props, 'rowClassName'),
-      mergedCheckedRowKeysRef,
       mergedCheckedRowKeySetRef,
       mergedExpandedRowKeysRef,
+      mergedInderminateRowKeySetRef,
       localeRef,
       scrollPartRef,
       rowKeyRef: toRef(props, 'rowKey'),
@@ -323,6 +338,9 @@ export default defineComponent({
         return selectionColumn?.options
       }),
       rawPaginatedDataRef,
+      hasChildrenRef: computed(() => {
+        return treeMateRef.value.maxLevel > 0
+      }),
       filterMenuCssVarsRef: computed(() => {
         const {
           self: { actionDividerColor, actionPadding, actionButtonMargin }
@@ -338,7 +356,8 @@ export default defineComponent({
       syncScrollState,
       doUpdateFilters,
       doUpdateSorter,
-      doUpdateCheckedRowKeys,
+      doCheck,
+      doUncheck,
       doCheckAll,
       doUncheckAll,
       doUpdateExpandedRowKeys,

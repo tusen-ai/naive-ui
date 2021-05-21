@@ -1,4 +1,4 @@
-import { h, defineComponent, PropType, CSSProperties } from 'vue'
+import { h, defineComponent, PropType } from 'vue'
 import { ChevronRightIcon } from '../../../_internal/icons'
 import { NBaseIcon } from '../../../_internal'
 
@@ -16,16 +16,8 @@ export default defineComponent({
     }
   },
   render () {
-    const style: CSSProperties = {
-      cursor: 'pointer',
-      fontSize: '16px'
-    }
     return (
-      <NBaseIcon
-        clsPrefix={this.clsPrefix}
-        onClick={this.onClick}
-        style={style}
-      >
+      <NBaseIcon clsPrefix={this.clsPrefix} onClick={this.onClick}>
         {{
           default: () => {
             return (

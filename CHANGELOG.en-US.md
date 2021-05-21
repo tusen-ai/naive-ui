@@ -4,6 +4,10 @@
 
 ### Feats
 
+- `n-data-table` support tree data.
+- `n-data-table` add `cascade` prop.
+- `n-data-table` add `children-key` prop.
+- `n-data-table` add `indent` prop.
 - `n-button` add `tag` prop.
 - `n-data-table` add `table-layout` prop.
 - `n-tree` add `block-line` prop.

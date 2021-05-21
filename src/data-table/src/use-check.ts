@@ -1,5 +1,4 @@
-import { computed, ComputedRef, ref, toRef } from 'vue'
-import { useMergedState } from 'vooks'
+import { computed, ComputedRef, ref } from 'vue'
 import { DataTableSetupProps } from './DataTable'
 import { RowKey, TableSelectionColumn, RowData, TmNode } from './interface'
 import { call } from '../../_utils'
@@ -16,13 +15,29 @@ export function useCheck (
 ) {
   const { paginatedDataRef, treeMateRef, selectionColumnRef } = data
   const uncontrolledCheckedRowKeysRef = ref(props.defaultCheckedRowKeys)
-  const controlledCheckedRowKeysRef = toRef(props, 'checkedRowKeys')
-  const mergedCheckedRowKeysRef = useMergedState(
-    controlledCheckedRowKeysRef,
-    uncontrolledCheckedRowKeysRef
+  const mergedCheckState = computed(() => {
+    const { checkedRowKeys } = props
+    return treeMateRef.value.getCheckedKeys(
+      checkedRowKeys === undefined
+        ? uncontrolledCheckedRowKeysRef.value
+        : checkedRowKeys,
+      {
+        cascade: props.cascade
+      }
+    )
+  })
+
+  const mergedCheckedRowKeysRef = computed(
+    () => mergedCheckState.value.checkedKeys
+  )
+  const mergedInderminateRowKeysRef = computed(
+    () => mergedCheckState.value.indeterminateKeys
   )
   const mergedCheckedRowKeySetRef = computed(() => {
     return new Set(mergedCheckedRowKeysRef.value)
+  })
+  const mergedInderminateRowKeySetRef = computed(() => {
+    return new Set(mergedInderminateRowKeysRef.value)
   })
   const countOfCurrentPageCheckedRowsRef = computed(() => {
     const { value: mergedCheckedRowKeySet } = mergedCheckedRowKeySetRef
@@ -32,9 +47,14 @@ export function useCheck (
     }, 0)
   })
   const someRowsCheckedRef = computed(() => {
+    const { value: mergedInderminateRowKeySet } = mergedInderminateRowKeySetRef
     return (
-      countOfCurrentPageCheckedRowsRef.value > 0 &&
-      countOfCurrentPageCheckedRowsRef.value < paginatedDataRef.value.length
+      (countOfCurrentPageCheckedRowsRef.value > 0 &&
+        countOfCurrentPageCheckedRowsRef.value <
+          paginatedDataRef.value.length) ||
+      paginatedDataRef.value.some((rowData) =>
+        mergedInderminateRowKeySet.has(rowData.key)
+      )
     )
   })
   const allRowsCheckedRef = computed(() => {
@@ -51,6 +71,20 @@ export function useCheck (
     if (onCheckedRowKeysChange) call(onCheckedRowKeysChange, keys)
     uncontrolledCheckedRowKeysRef.value = keys
   }
+  function doCheck (rowKey: RowKey): void {
+    doUpdateCheckedRowKeys(
+      treeMateRef.value.check(rowKey, mergedCheckedRowKeysRef.value, {
+        cascade: props.cascade
+      }).checkedKeys
+    )
+  }
+  function doUncheck (rowKey: RowKey): void {
+    doUpdateCheckedRowKeys(
+      treeMateRef.value.uncheck(rowKey, mergedCheckedRowKeysRef.value, {
+        cascade: props.cascade
+      }).checkedKeys
+    )
+  }
   function doCheckAll (checkWholeTable: boolean = false): void {
     const { value: column } = selectionColumnRef
     if (!column) return
@@ -63,9 +97,11 @@ export function useCheck (
         rowKeysToCheck.push(tmNode.key)
       }
     })
+    // alway cascade, to emit correct row keys
     doUpdateCheckedRowKeys(
-      treeMateRef.value.check(rowKeysToCheck, mergedCheckedRowKeysRef.value)
-        .checkedKeys
+      treeMateRef.value.check(rowKeysToCheck, mergedCheckedRowKeysRef.value, {
+        cascade: true
+      }).checkedKeys
     )
   }
   function doUncheckAll (checkWholeTable: boolean = false): void {
@@ -80,18 +116,27 @@ export function useCheck (
         rowKeysToUncheck.push(tmNode.key)
       }
     })
+    // alway cascade, to emit correct row keys
     doUpdateCheckedRowKeys(
-      treeMateRef.value.uncheck(rowKeysToUncheck, mergedCheckedRowKeysRef.value)
-        .checkedKeys
+      treeMateRef.value.uncheck(
+        rowKeysToUncheck,
+        mergedCheckedRowKeysRef.value,
+        {
+          cascade: true
+        }
+      ).checkedKeys
     )
   }
   return {
     mergedCheckedRowKeySetRef,
     mergedCheckedRowKeysRef,
+    mergedInderminateRowKeySetRef,
     someRowsCheckedRef,
     allRowsCheckedRef,
     doUpdateCheckedRowKeys,
     doCheckAll,
-    doUncheckAll
+    doUncheckAll,
+    doCheck,
+    doUncheck
   }
 }

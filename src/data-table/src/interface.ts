@@ -1,4 +1,4 @@
-import { TreeNode, TreeMate } from 'treemate'
+import { TreeNode } from 'treemate'
 import { CSSProperties, InjectionKey, Ref, VNodeChild } from 'vue'
 import { EllipsisProps } from '../../ellipsis/src/Ellipsis'
 import { NLocale } from '../../locales'
@@ -135,6 +135,9 @@ export type DataTableSelectionOptions = Array<
 | { label: string, key: string | number, onSelect: () => void }
 >
 export interface DataTableInjection {
+  indentRef: Ref<number>
+  hasChildrenRef: Ref<boolean>
+  firstContentfulColIndexRef: Ref<number>
   componentId: string
   checkOptionsRef: Ref<DataTableSelectionOptions | undefined>
   hoverKeyRef: Ref<RowKey | null>
@@ -143,7 +146,6 @@ export interface DataTableInjection {
   scrollXRef: Ref<string | number | undefined>
   rowsRef: Ref<RowItem[][]>
   colsRef: Ref<ColItem[]>
-  treeMateRef: Ref<TreeMate<RowData>>
   paginatedDataRef: Ref<TmNode[]>
   leftFixedColumnsRef: Ref<TableColumns>
   rightFixedColumnsRef: Ref<TableColumns>
@@ -158,8 +160,8 @@ export interface DataTableInjection {
   mergedFilterStateRef: Ref<FilterState>
   loadingRef: Ref<boolean>
   rowClassNameRef: Ref<string | CreateRowClassName | undefined>
-  mergedCheckedRowKeysRef: Ref<RowKey[]>
   mergedCheckedRowKeySetRef: Ref<Set<RowKey>>
+  mergedInderminateRowKeySetRef: Ref<Set<RowKey>>
   localeRef: Ref<NLocale['DataTable']>
   filterMenuCssVarsRef: Ref<CSSProperties>
   mergedExpandedRowKeysRef: Ref<RowKey[]>
@@ -177,9 +179,10 @@ export interface DataTableInjection {
     sourceColumn?: TableBaseColumn
   ) => void
   doUpdateSorter: (sorter: SortState | null) => void
-  doUpdateCheckedRowKeys: (keys: RowKey[]) => void
   doUncheckAll: (checkWholeTable?: boolean) => void
   doCheckAll: (checkWholeTable?: boolean) => void
+  doCheck: (rowKey: RowKey) => void
+  doUncheck: (rowKey: RowKey) => void
   handleTableHeaderScroll: (e: Event) => void
   handleTableBodyScroll: (e: Event) => void
   syncScrollState: (deltaX?: number, deltaY?: number) => void

@@ -34,6 +34,7 @@ custom-style
 ajax-usage
 virtual
 custom-filter-menu
+tree
 ```
 
 ## Props
@@ -43,9 +44,12 @@ custom-filter-menu
 | bordered | `boolean` | `true` |  |
 | bottom-bordered | `boolean` | `true` |  |
 | checked-row-keys | `Array<string \| number>` | `undefined` | The keys of checked rows. |
+| cascade | `boolean` | `true` | Whether to do cascade checking when using tree data. |
+| children-key | `string` | `'children'` | The key of children data in tree data's data entity. |
 | columns | `Array<Column>` | `[]` | Columns to display. |
 | data | `Array<Object>` | `[]` | Data to display. |
 | default-checked-row-keys | `Array<string \| number>` | `[]` |  |
+| indent | `number` | `16` | Indent of row content when using tree data. |
 | loading | `boolean` | `false` |  |
 | max-height | `number \| string` | `undefined` | The max-height of the table. If content height is larger than it, the header will be fixed at top |
 | min-height | `number \| string` | `undefined` | The min-height of the table. |

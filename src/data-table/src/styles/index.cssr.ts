@@ -51,6 +51,22 @@ export default c([
     --merged-th-color-hover: var(--th-color-hover);
     --merged-td-color-hover: var(--td-color-hover);
   `, [
+    cB('data-table-expand-placeholder', `
+      margin-right: 8px;
+      display: inline-block;
+      width: 16px;
+      height: 1px;
+    `),
+    cB('data-table-indent', `
+      display: inline-block;
+      height: 1px;
+    `),
+    cB('data-table-expand-trigger', `
+      margin-right: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      vertical-align: -.125em;
+    `),
     cB('data-table-thead', {
       transition: 'background-color .3s var(--bezier)',
       backgroundColor: 'var(--merged-th-color)'

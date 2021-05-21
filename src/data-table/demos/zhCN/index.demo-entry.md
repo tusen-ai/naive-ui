@@ -34,6 +34,7 @@ custom-style
 ajax-usage
 virtual
 custom-filter-menu
+tree
 ```
 
 ## Props
@@ -43,9 +44,12 @@ custom-filter-menu
 | bordered | `boolean` | `true` |  |
 | bottom-bordered | `boolean` | `true` |  |
 | checked-row-keys | `Array<string \| number>` | `undefined` | 被选中的列的 key |
+| cascade | `boolean` | `true` | 在进行树型数据选择的时候是否级联 |
+| children-key | `string` | `'children'` | 树形数据下后代节点在数据中的 key |
 | columns | `Array<Column>` | `[]` | 需要展示的列 |
 | data | `Array<Object>` | `[]` | 需要展示的数据 |
 | default-checked-row-keys | `Array<string \| number>` | `[]` |  |
+| indent | `number` | `16` | 使用树形数据时行内容的缩进 |
 | loading | `boolean` | `false` |  |
 | max-height | `number \| string` | `undefined` | 表格的最大高度，如果内容高度高于它，那么表头将固定 |
 | min-height | `number \| string` | `undefined` | 表格的最低高度 |

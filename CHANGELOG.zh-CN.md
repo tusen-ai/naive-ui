@@ -4,6 +4,10 @@
 
 ### Feats
 
+- `n-data-table` 支持树形数据
+- `n-data-table` 新增 `cascade` 属性
+- `n-data-table` 新增 `children-key` 属性
+- `n-data-table` 新增 `indent` 属性
 - `n-button` 新增 `tag` 属性
 - `n-data-table` 新增 `table-layout` 属性
 - `n-tree` 新增 `block-line` 属性

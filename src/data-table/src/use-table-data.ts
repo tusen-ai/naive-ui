@@ -1,5 +1,5 @@
 import { computed, ref, ComputedRef } from 'vue'
-import { useMergedState } from 'vooks'
+import { useMemo, useMergedState } from 'vooks'
 import { createTreeMate } from 'treemate'
 import type { DataTableSetupProps } from './DataTable'
 import {
@@ -44,9 +44,11 @@ export function useTableData (
     )
   })
 
-  const treeMateRef = computed(() =>
-    createTreeMate<RowData>(props.data, {
+  const treeMateRef = computed(() => {
+    const { childrenKey } = props
+    return createTreeMate<RowData>(props.data, {
       getKey: props.rowKey,
+      getChildren: (rowData) => rowData[childrenKey] as any,
       getDisabled: (rowData) => {
         if (selectionColumnRef.value?.disabled?.(rowData)) {
           return true
@@ -54,7 +56,18 @@ export function useTableData (
         return false
       }
     })
-  )
+  })
+
+  const firstContentfulColIndexRef = useMemo(() => {
+    const { columns } = props
+    const { length } = columns
+    for (let i = 0; i < length; ++i) {
+      if (!columns[i].type) {
+        return i
+      }
+    }
+    return 0
+  })
 
   const uncontrolledFilterStateRef = ref<FilterState>({})
   const uncontrolledSortStateRef = ref<SortState | null>(null)
@@ -402,6 +415,7 @@ export function useTableData (
     mergedSortStateRef: mergedSortStateRef,
     hoverKeyRef: ref<RowKey | null>(null),
     selectionColumnRef,
+    firstContentfulColIndexRef,
     doUpdateFilters,
     doUpdateSorter,
     doUpdatePageSize,

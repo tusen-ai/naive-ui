@@ -21,14 +21,17 @@ export default defineComponent({
   },
   setup (props) {
     const {
-      mergedCheckedRowKeySetRef
+      mergedCheckedRowKeySetRef,
+      mergedInderminateRowKeySetRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(dataTableInjectionKey)!
     return () => {
+      const { rowKey } = props
       return (
         <NCheckbox
           disabled={props.disabled}
-          checked={mergedCheckedRowKeySetRef.value.has(props.rowKey)}
+          indeterminate={mergedInderminateRowKeySetRef.value.has(rowKey)}
+          checked={mergedCheckedRowKeySetRef.value.has(rowKey)}
           onUpdateChecked={props.onUpdateChecked}
         />
       )

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   h,
   ref,
@@ -8,17 +9,17 @@ import {
   onUnmounted,
   PropType
 } from 'vue'
-import { pxfy } from 'seemly'
+import { pxfy, repeat } from 'seemly'
 import { VirtualList, VirtualListInst } from 'vueuc'
 import { c } from '../../../_utils/cssr'
 import { NScrollbar, ScrollbarInst } from '../../../scrollbar'
 import { formatLength } from '../../../_utils'
 import {
   dataTableInjectionKey,
-  RowData,
   RowKey,
   SummaryRowData,
-  MainTableBodyRef
+  MainTableBodyRef,
+  TmNode
 } from '../interface'
 import { createRowClassName, getColKey } from '../utils'
 import Cell from './Cell'
@@ -26,6 +27,31 @@ import ExpandTrigger from './ExpandTrigger'
 import RenderSafeCheckbox from './BodyCheckbox'
 import TableHeader from './Header'
 import type { ColItem } from '../use-group-header'
+
+type RowRenderInfo =
+  | {
+    summary: true
+    rawNode: SummaryRowData
+    key: RowKey
+    disabled: boolean
+  }
+  | TmNode
+
+function flatten (rows: TmNode[], expandedRowKeys: RowKey[]): TmNode[] {
+  const fRows: TmNode[] = []
+  function traverse (rs: TmNode[]): void {
+    rs.forEach((r) => {
+      if (r.children && expandedRowKeys.includes(r.key)) {
+        fRows.push(r)
+        traverse(r.children)
+      } else {
+        fRows.push(r)
+      }
+    })
+  }
+  traverse(rows)
+  return fRows
+}
 
 const VirtualListItemWrapper = defineComponent({
   props: {
@@ -74,9 +100,6 @@ export default defineComponent({
   },
   setup (props) {
     const {
-      treeMateRef,
-      mergedCheckedRowKeysRef,
-      mergedCheckedRowKeySetRef,
       mergedExpandedRowKeysRef,
       mergedClsPrefixRef,
       mergedThemeRef,
@@ -98,10 +121,14 @@ export default defineComponent({
       componentId,
       scrollPartRef,
       tableLayoutRef,
+      hasChildrenRef,
+      firstContentfulColIndexRef,
+      indentRef,
       setHeaderScrollLeft,
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
-      doUpdateCheckedRowKeys
+      doCheck,
+      doUncheck
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(dataTableInjectionKey)!
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
@@ -110,12 +137,11 @@ export default defineComponent({
       tmNode: { key: RowKey },
       checked: boolean
     ): void {
-      doUpdateCheckedRowKeys(
-        (checked ? treeMateRef.value.check : treeMateRef.value.uncheck)(
-          tmNode.key,
-          mergedCheckedRowKeysRef.value
-        ).checkedKeys
-      )
+      if (checked) {
+        doCheck(tmNode.key)
+      } else {
+        doUncheck(tmNode.key)
+      }
     }
     function getScrollContainer (): HTMLElement | null {
       if (virtualScrollRef.value) {
@@ -218,7 +244,6 @@ export default defineComponent({
       fixedColumnLeftMap: fixedColumnLeftMapRef,
       fixedColumnRightMap: fixedColumnRightMapRef,
       currentPage: mergedCurrentPageRef,
-      mergedCheckedRowKeySet: mergedCheckedRowKeySetRef,
       rowClassName: rowClassNameRef,
       renderExpand: renderExpandRef,
       mergedExpandedRowKeys: mergedExpandedRowKeysRef,
@@ -226,6 +251,9 @@ export default defineComponent({
       mergedSortState: mergedSortStateRef,
       virtualScroll: virtualScrollRef,
       tableLayout: tableLayoutRef,
+      hasChildren: hasChildrenRef,
+      firstContentfulColIndex: firstContentfulColIndexRef,
+      indent: indentRef,
       setHeaderScrollLeft,
       handleMouseenterTable,
       handleVirtualListScroll,
@@ -269,7 +297,6 @@ export default defineComponent({
       >
         {{
           default: () => {
-            let hasExpandedRows = false
             const cordToPass: Record<number, number[]> = {}
             // coord to related hover keys
             const cordKey: Record<number, Record<number, RowKey[]>> = {}
@@ -285,13 +312,16 @@ export default defineComponent({
               mergedExpandedRowKeys,
               componentId,
               showHeader,
+              hasChildren,
+              firstContentfulColIndex,
               handleMouseenterTable,
               handleMouseleaveTable,
               renderExpand,
-              summary
+              summary,
+              handleCheckboxUpdateChecked,
+              handleUpdateExpanded
             } = this
             const { length: colCount } = cols
-            const { handleCheckboxUpdateChecked, handleUpdateExpanded } = this
             const rowIndexToKey: Record<number, RowKey> = {}
             paginatedData.forEach((tmNode, rowIndex) => {
               rowIndexToKey[rowIndex] = tmNode.key
@@ -300,27 +330,20 @@ export default defineComponent({
               !!mergedSortState &&
               mergedSortState.order &&
               mergedSortState.columnKey
-            type RowRenderInfo =
-              | {
-                summary: true
-                rawNode: SummaryRowData
-                key: RowKey
-                disabled: boolean
-              }
-              | {
-                summary?: never
-                rawNode: RowData
-                key: RowKey
-                disabled: boolean
-              }
 
             let mergedData: RowRenderInfo[]
+
+            // if there is children in data, we should expand mergedData first
+
+            const mergedPaginationData = hasChildren
+              ? flatten(paginatedData, mergedExpandedRowKeys)
+              : paginatedData
 
             if (summary) {
               const summaryRows = summary(this.rawPaginatedData)
               if (Array.isArray(summaryRows)) {
                 mergedData = [
-                  ...paginatedData,
+                  ...mergedPaginationData,
                   ...summaryRows.map((row, i) => ({
                     summary: true as const,
                     rawNode: row,
@@ -330,7 +353,7 @@ export default defineComponent({
                 ]
               } else {
                 mergedData = [
-                  ...paginatedData,
+                  ...mergedPaginationData,
                   {
                     summary: true,
                     rawNode: summaryRows,
@@ -340,21 +363,23 @@ export default defineComponent({
                 ]
               }
             } else {
-              mergedData = paginatedData
+              mergedData = mergedPaginationData
             }
 
             const { length: rowCount } = mergedData
 
             let hasEllipsis = false
 
-            const rows = mergedData.map((rowInfo, rowIndex) => {
-              const {
-                rawNode: rowData,
-                key: rowKey,
-                summary: isSummary
-              } = rowInfo
-              const expanded =
-                renderExpand && mergedExpandedRowKeys.includes(rowKey)
+            const indentStyle = hasChildren
+              ? { width: pxfy(this.indent) }
+              : undefined
+
+            const rows: VNode[] = []
+            mergedData.forEach((rowInfo, rowIndex) => {
+              const { rawNode: rowData, key: rowKey } = rowInfo
+              const isSummary = 'summary' in rowInfo
+              const expanded = mergedExpandedRowKeys.includes(rowKey)
+              const showExpandContent = renderExpand && expanded
               const colNodes = cols.map((col, colIndex) => {
                 if (rowIndex in cordToPass) {
                   const cordOfRowToPass = cordToPass[rowIndex]
@@ -368,14 +393,16 @@ export default defineComponent({
                 }
                 const { column } = col
                 const colKey = getColKey(col)
+                // If there is no rowSpan
+                // virtual list should have a fast path
                 const { rowSpan, colSpan } = column
-                const mergedColSpan = rowInfo.summary
-                  ? rowInfo.rawNode[colKey].colSpan || 1
+                const mergedColSpan = isSummary
+                  ? (rowInfo.rawNode as SummaryRowData)[colKey].colSpan || 1
                   : colSpan
                     ? colSpan(rowData, rowIndex)
                     : 1
-                const mergedRowSpan = rowInfo.summary
-                  ? rowInfo.rawNode[colKey].rowSpan || 1
+                const mergedRowSpan = isSummary
+                  ? (rowInfo.rawNode as SummaryRowData)[colKey].rowSpan || 1
                   : rowSpan
                     ? rowSpan(rowData, rowIndex)
                     : 1
@@ -439,10 +466,35 @@ export default defineComponent({
                           column.type === 'expand',
                         [`${mergedClsPrefix}-data-table-td--last-col`]: isLastCol,
                         [`${mergedClsPrefix}-data-table-td--last-row`]:
-                          isLastRow && !expanded
+                          isLastRow && !showExpandContent
                       }
                     ]}
                   >
+                    {hasChildren && colIndex === firstContentfulColIndex
+                      ? [
+                        repeat(
+                          <div
+                            class={`${mergedClsPrefix}-data-table-indent`}
+                            style={indentStyle}
+                          />,
+                          isSummary ? 0 : (rowInfo as TmNode).level
+                        ),
+                        isSummary || !(rowInfo as TmNode).children ? (
+                          <div
+                            class={`${mergedClsPrefix}-data-table-expand-placeholder`}
+                          />
+                        ) : (
+                          <ExpandTrigger
+                            class={`${mergedClsPrefix}-data-table-expand-trigger`}
+                            clsPrefix={mergedClsPrefix}
+                            expanded={expanded}
+                            onClick={() => {
+                              handleUpdateExpanded(rowKey)
+                            }}
+                          />
+                        )
+                      ]
+                      : null}
                     {column.type === 'selection' ? (
                       !isSummary ? (
                         <RenderSafeCheckbox
@@ -491,11 +543,8 @@ export default defineComponent({
                   {colNodes}
                 </tr>
               )
-              if (expanded && renderExpand) {
-                if (!hasExpandedRows) {
-                  hasExpandedRows = true
-                }
-                return [
+              if (showExpandContent) {
+                rows.push(
                   row,
                   <tr
                     class={`${mergedClsPrefix}-data-table-tr`}
@@ -510,12 +559,13 @@ export default defineComponent({
                       ]}
                       colspan={colCount}
                     >
-                      {renderExpand(rowData, rowIndex)}
+                      {renderExpand!(rowData, rowIndex)}
                     </td>
                   </tr>
-                ]
+                )
+              } else {
+                rows.push(row)
               }
-              return row
             })
 
             // Please note that the current virtual scroll mode impl
@@ -526,7 +576,7 @@ export default defineComponent({
               return (
                 <VirtualList
                   ref="virtualListRef"
-                  items={hasExpandedRows ? rows.flat() : rows}
+                  items={rows}
                   itemSize={28}
                   visibleItemsTag={VirtualListItemWrapper}
                   visibleItemsProps={{
@@ -571,7 +621,7 @@ export default defineComponent({
                   data-n-id={componentId}
                   class={`${mergedClsPrefix}-data-table-tbody`}
                 >
-                  {hasExpandedRows ? rows.flat() : rows}
+                  {rows}
                 </tbody>
               </table>
             )
