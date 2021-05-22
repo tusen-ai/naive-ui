@@ -127,6 +127,10 @@ const treeProps = {
     type: Boolean,
     default: true
   },
+  indent: {
+    type: Number,
+    default: 16
+  },
   virtualScroll: Boolean,
   onDragenter: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
   onDragleave: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
@@ -264,6 +268,7 @@ export default defineComponent({
 
     const draggingNodeRef = ref<TmNode | null>(null)
     const droppingNodeRef = ref<TmNode | null>(null)
+    const droppingPositionRef = ref<'top' | 'center' | 'bottom' | null>(null)
     const droppingNodeParentRef = computed(() => {
       const { value: droppingNode } = droppingNodeRef
       if (droppingNode) return droppingNode.parent
@@ -434,9 +439,16 @@ export default defineComponent({
       const { onDrop } = props
       if (onDrop) call(onDrop, info)
     }
-    function resetDragStatus (): void {
+    function resetDndState (): void {
+      resetDragState()
+      resetDropState()
+    }
+    function resetDragState (): void {
       draggingNodeRef.value = null
+    }
+    function resetDropState (): void {
       droppingNodeRef.value = null
+      droppingPositionRef.value = null
     }
     function handleCheck (node: TmNode, checked: boolean): void {
       if (props.disabled || node.disabled) return
@@ -496,10 +508,16 @@ export default defineComponent({
       // node should be a tmNode
       if (!props.draggable || props.disabled || node.disabled) return
       doDragEnter({ event, node: node.rawNode })
-      if (!props.expandOnDragenter) return
-      droppingNodeRef.value = node
       const { value: draggingNode } = draggingNodeRef
-      if (draggingNode && node.key === draggingNode.key) return
+      // Drag self into self
+      if (draggingNode?.contains(node)) {
+        resetDropState()
+        return
+      }
+      handleDragOver({ event, node }, false)
+      // Update dropping node
+      droppingNodeRef.value = node
+      if (!props.expandOnDragenter) return
       if (!mergedExpandedKeysRef.value.includes(node.key) && !node.isLeaf) {
         window.clearTimeout(expandTimerIdRef.value)
         const expand = (): void => {
@@ -535,21 +553,47 @@ export default defineComponent({
     }
     function handleDragLeave ({ event, node }: InternalDragInfo): void {
       if (!props.draggable || props.disabled || node.disabled) return
-      droppingNodeRef.value = null
       doDragLeave({ event, node: node.rawNode })
     }
+    function handleDragLeaveTree (e: DragEvent): void {
+      if (e.target !== e.currentTarget) return
+      resetDropState()
+    }
+    // Dragend is ok, we don't need to add global listener to reset drag status
     function handleDragEnd ({ event, node }: InternalDragInfo): void {
+      resetDndState()
       if (!props.draggable || props.disabled || node.disabled) return
       doDragEnd({ event, node: node.rawNode })
-      resetDragStatus()
     }
     function handleDragStart ({ event, node }: InternalDragInfo): void {
       if (!props.draggable || props.disabled || node.disabled) return
       draggingNodeRef.value = node
       doDragStart({ event, node: node.rawNode })
     }
-    function handleDragOver ({ event, node }: InternalDragInfo): void {
-      doDragOver({ event, node: node.rawNode })
+    function handleDragOver (
+      { event, node }: InternalDragInfo,
+      emit: boolean = true
+    ): void {
+      if (!props.draggable || props.disabled || node.disabled) return
+      const { value: draggingNode } = draggingNodeRef
+      // Drag self into self
+      if (draggingNode?.contains(node)) return
+      // Update dropping node
+      droppingNodeRef.value = node
+      const el = event.currentTarget as HTMLElement
+      const {
+        height: elOffsetHeight,
+        top: elClientTop
+      } = el.getBoundingClientRect()
+      const eventOffsetY = event.clientY - elClientTop
+      if (eventOffsetY <= 8) {
+        droppingPositionRef.value = 'top'
+      } else if (eventOffsetY >= elOffsetHeight - 8) {
+        droppingPositionRef.value = 'bottom'
+      } else {
+        droppingPositionRef.value = 'center'
+      }
+      if (emit) doDragOver({ event, node: node.rawNode })
     }
     function handleDrop ({ event, node, dropPosition }: InternalDropInfo): void {
       if (
@@ -566,7 +610,7 @@ export default defineComponent({
         dragNode: draggingNodeRef.value.rawNode,
         dropPosition
       })
-      resetDragStatus()
+      resetDndState()
     }
     function handleScroll (): void {
       scrollbarInstRef.value?.sync()
@@ -587,9 +631,11 @@ export default defineComponent({
       draggableRef: toRef(props, 'draggable'),
       checkableRef: toRef(props, 'checkable'),
       blockLineRef: toRef(props, 'blockLine'),
+      indentRef: toRef(props, 'indent'),
       droppingNodeRef,
       droppingNodeParentRef,
       draggingNodeRef,
+      droppingPositionRef,
       handleSwitcherClick,
       handleDragEnd,
       handleDragEnter,
@@ -608,6 +654,7 @@ export default defineComponent({
       selfElRef,
       virtualListInstRef,
       scrollbarInstRef,
+      handleDragLeaveTree,
       handleScroll,
       getScrollContainer,
       getScrollContent,
@@ -625,7 +672,8 @@ export default defineComponent({
             arrowColor,
             loadingColor,
             nodeTextColor,
-            nodeTextColorDisabled
+            nodeTextColorDisabled,
+            dropMarkColor
           }
         } = themeRef.value
         return {
@@ -638,13 +686,14 @@ export default defineComponent({
           '--node-color-hover': nodeColorHover,
           '--node-color-pressed': nodeColorPressed,
           '--node-text-color': nodeTextColor,
-          '--node-text-color-disabled': nodeTextColorDisabled
+          '--node-text-color-disabled': nodeTextColorDisabled,
+          '--drop-mark-color': dropMarkColor
         }
       })
     }
   },
   render () {
-    const { mergedClsPrefix, blockNode, blockLine } = this
+    const { mergedClsPrefix, blockNode, blockLine, draggable } = this
     const treeClass = [
       `${mergedClsPrefix}-tree`,
       (blockLine || blockNode) && `${mergedClsPrefix}-tree--block-node`,
@@ -671,6 +720,7 @@ export default defineComponent({
       return (
         <NScrollbar
           ref="scrollbarInstRef"
+          onDragleave={draggable ? this.handleDragLeaveTree : undefined}
           container={this.getScrollContainer}
           content={this.getScrollContent}
           class={treeClass}
@@ -704,6 +754,7 @@ export default defineComponent({
       <div
         class={treeClass}
         style={this.cssVars as CSSProperties}
+        onDragleave={draggable ? this.handleDragLeaveTree : undefined}
         ref="selfElRef"
       >
         {this.fNodes.map(createNode)}

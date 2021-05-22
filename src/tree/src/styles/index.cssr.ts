@@ -38,7 +38,6 @@ export default cB('tree', {
   ]),
   cB('tree-node-indent', `
     height: 0;
-    flex: 0 0 16px;
   `),
   cB('tree-motion-wrapper', [
     cM('expand', [
@@ -53,8 +52,11 @@ export default cB('tree', {
       })
     ])
   ]),
-  cB('tree-node-wrapper', 'padding: 3px 0;'),
+  cB('tree-node-wrapper', `
+    padding: 3px 0;
+  `),
   cB('tree-node', `
+    position: relative;
     display: flex;
     border-radius: var(--node-border-radius);
     transition: background-color .3s var(--bezier);
@@ -176,12 +178,6 @@ export default cB('tree', {
       line-height: 1.25;
       border-bottom: 1px solid #0000;
       transition: border-color .3s var(--bezier);
-    `),
-    c('&:hover', {
-      backgroundColor: 'var(--node-color-hover)'
-    }),
-    c('&:active', {
-      backgroundColor: 'var(--node-color-pressed)'
-    })
+    `)
   ])
 ])

@@ -75,6 +75,7 @@ const scrollbarProps = {
     type: Boolean,
     default: false
   },
+  // If container is set, resize observer won't not attached
   container: Function as PropType<() => HTMLElement | null | undefined>,
   content: Function as PropType<() => HTMLElement | null | undefined>,
   containerStyle: [String, Object] as PropType<string | CSSProperties>,
@@ -85,6 +86,7 @@ const scrollbarProps = {
   onScroll: Function as PropType<(e: Event) => void>,
   onWheel: Function as PropType<(e: WheelEvent) => void>,
   onResize: Function as PropType<(e: ResizeObserverEntry) => void>,
+  onDragleave: Function as PropType<(e: DragEvent) => void>,
   privateOnSetSL: Function as PropType<(scrollLeft: number) => void>
 } as const
 
@@ -589,6 +591,7 @@ export default defineComponent({
         mergeProps(this.$attrs, {
           class: `${mergedClsPrefix}-scrollbar`,
           style: this.cssVars,
+          onDragleave: this.onDragleave,
           onMouseenter: this.handleMouseEnterWrapper,
           onMouseleave: this.handleMouseLeaveWrapper
         }),

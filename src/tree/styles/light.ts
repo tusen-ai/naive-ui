@@ -24,7 +24,8 @@ export const self = (vars: ThemeCommonVars) => {
     arrowColor: textColor3,
     nodeTextColor: textColor2,
     nodeTextColorDisabled: textColorDisabled,
-    loadingColor: primaryColor
+    loadingColor: primaryColor,
+    dropMarkColor: primaryColor
   }
 }
 

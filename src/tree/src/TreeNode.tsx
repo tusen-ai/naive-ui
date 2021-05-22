@@ -1,12 +1,15 @@
-import { h, inject, computed, defineComponent, PropType, ref } from 'vue'
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { h, inject, computed, defineComponent, PropType } from 'vue'
 import { useMemo } from 'vooks'
 import NTreeNodeSwitcher from './TreeNodeSwitcher'
 import NTreeNodeCheckbox from './TreeNodeCheckbox'
 import NTreeNodeContent from './TreeNodeContent'
 import { TmNode, treeInjectionKey } from './interface'
+import { renderDropMark } from './render-drop-mark'
+import { repeat } from 'seemly'
 
 const TreeNode = defineComponent({
-  name: 'NTreeNode',
+  name: 'TreeNode',
   props: {
     clsPrefix: {
       type: String,
@@ -20,6 +23,13 @@ const TreeNode = defineComponent({
   setup (props) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NTree = inject(treeInjectionKey)!
+    const {
+      droppingNodeParentRef,
+      droppingNodeRef,
+      draggingNodeRef,
+      droppingPositionRef,
+      indentRef
+    } = NTree
     function handleSwitcherClick (): void {
       const { tmNode } = props
       if (NTree.remoteRef.value && !tmNode.isLeaf && !tmNode.shallowLoaded) {
@@ -50,7 +60,6 @@ const TreeNode = defineComponent({
       NTree.handleCheck(props.tmNode, checked)
     }
     // Dnd
-    const pendingPositionRef = ref<'top' | 'center' | 'bottom' | null>(null)
     function handleDragStart (e: DragEvent): void {
       NTree.handleDragStart({
         event: e,
@@ -58,13 +67,7 @@ const TreeNode = defineComponent({
       })
     }
     function handleDragEnter (e: DragEvent): void {
-      if (
-        e.currentTarget &&
-        e.relatedTarget &&
-        (e.currentTarget as HTMLElement).contains(
-          e.relatedTarget as HTMLElement
-        )
-      ) {
+      if (e.currentTarget !== e.target) {
         return
       }
       NTree.handleDragEnter({
@@ -73,18 +76,7 @@ const TreeNode = defineComponent({
       })
     }
     function handleDragOver (e: DragEvent): void {
-      e.preventDefault()
-      const el = e.currentTarget as HTMLElement
-      const elOffsetHeight = el.offsetHeight // dangerous
-      const elClientTop = el.getBoundingClientRect().top
-      const eventOffsetY = e.clientY - elClientTop
-      if (eventOffsetY <= 8) {
-        pendingPositionRef.value = 'top'
-      } else if (eventOffsetY >= elOffsetHeight - 8) {
-        pendingPositionRef.value = 'bottom'
-      } else {
-        pendingPositionRef.value = 'center'
-      }
+      e.preventDefault() // if not prevent, drop event won't be fired...
       NTree.handleDragOver({
         event: e,
         node: props.tmNode
@@ -97,13 +89,7 @@ const TreeNode = defineComponent({
       })
     }
     function handleDragLeave (e: DragEvent): void {
-      if (
-        e.currentTarget &&
-        e.relatedTarget &&
-        (e.currentTarget as HTMLElement).contains(
-          e.relatedTarget as HTMLElement
-        )
-      ) {
+      if (e.currentTarget !== e.target) {
         return
       }
       NTree.handleDragLeave({
@@ -113,12 +99,12 @@ const TreeNode = defineComponent({
     }
     function handleDrop (e: DragEvent): void {
       e.preventDefault()
-      if (pendingPositionRef.value !== null) {
+      if (droppingPositionRef.value !== null) {
         const dropPosition = ({
           top: 'top',
           bottom: 'bottom',
           center: 'center'
-        } as const)[pendingPositionRef.value]
+        } as const)[droppingPositionRef.value]
         NTree.handleDrop({
           event: e,
           node: props.tmNode,
@@ -127,6 +113,27 @@ const TreeNode = defineComponent({
       }
     }
     return {
+      showDropMark: useMemo(() => {
+        const { value: draggingNode } = draggingNodeRef
+        if (!draggingNode) return
+        const { value: droppingPosition } = droppingPositionRef
+        if (!droppingPosition) return
+        const { value: droppingNode } = droppingNodeRef
+        if (!droppingNode || draggingNode.key === droppingNode.key) return
+        const { tmNode } = props
+        if (tmNode.key === droppingNode.key) return true
+        return false
+      }),
+      showDropMarkAsParent: useMemo(() => {
+        const { value: droppingNodeParent } = droppingNodeParentRef
+        if (!droppingNodeParent) return false
+        const { tmNode } = props
+        const { value: droppingPosition } = droppingPositionRef
+        if (droppingPosition === 'top' || droppingPosition === 'bottom') {
+          return droppingNodeParent.key === tmNode.key
+        }
+        return false
+      }),
       loading: useMemo(() =>
         NTree.loadingKeysRef.value.includes(props.tmNode.key)
       ),
@@ -149,7 +156,8 @@ const TreeNode = defineComponent({
       checkable: NTree.checkableRef,
       draggable: NTree.draggableRef,
       blockLine: NTree.blockLineRef,
-      pendingPosition: pendingPositionRef,
+      droppingPosition: droppingPositionRef,
+      indent: indentRef,
       handleCheck,
       handleDrop,
       handleDragStart,
@@ -178,7 +186,8 @@ const TreeNode = defineComponent({
         onDragenter: this.handleDragEnter,
         onDragleave: this.handleDragLeave,
         onDragend: this.handleDragEnd,
-        onDrop: this.handleDrop
+        onDrop: this.handleDrop,
+        onDragover: this.handleDragOver
       }
       : undefined
     return (
@@ -200,9 +209,13 @@ const TreeNode = defineComponent({
             draggable && blockLine ? this.handleDragStart : undefined
           }
         >
-          {Array.apply(null, { length: tmNode.level } as any).map(() => (
-            <div class={`${clsPrefix}-tree-node-indent`}></div>
-          ))}
+          {repeat(
+            <div
+              class={`${clsPrefix}-tree-node-indent`}
+              style={{ flex: `0 0 ${this.indent}px` }}
+            />,
+            tmNode.level
+          )}
           <NTreeNodeSwitcher
             clsPrefix={clsPrefix}
             expanded={this.expanded}
@@ -221,14 +234,30 @@ const TreeNode = defineComponent({
           <NTreeNodeContent
             clsPrefix={clsPrefix}
             onClick={this.handleContentClick}
-            onDragstart={this.handleDragStart}
-            {...(!blockLine ? dragEventHandlers : undefined)}
+            onDragstart={
+              draggable && blockLine ? undefined : this.handleDragStart
+            }
           >
             {{
               default: () => tmNode.rawNode.label
             }}
           </NTreeNodeContent>
           {this.icon ? this.icon() : null}
+          {draggable
+            ? this.showDropMark
+              ? renderDropMark({
+                position: this.droppingPosition!,
+                level: tmNode.level,
+                indent: this.indent
+              })
+              : this.showDropMarkAsParent
+                ? renderDropMark({
+                  position: 'center',
+                  level: tmNode.level,
+                  indent: this.indent
+                })
+                : null
+            : null}
         </div>
       </div>
     )

@@ -32,10 +32,12 @@ export interface InternalDragInfo {
   node: TmNode
 }
 
+export type DropPosition = 'top' | 'center' | 'bottom'
+
 export interface InternalDropInfo {
   event: DragEvent
   node: TmNode
-  dropPosition: 'top' | 'center' | 'bottom'
+  dropPosition: DropPosition
 }
 
 export interface TreeInjection {
@@ -51,9 +53,11 @@ export interface TreeInjection {
   mergedThemeRef: Ref<MergedTheme<TreeTheme>>
   onLoadRef: Ref<((node: TreeOption) => Promise<void>) | undefined>
   blockLineRef: Ref<boolean>
+  indentRef: Ref<number>
   draggingNodeRef: Ref<TmNode | null>
   droppingNodeRef: Ref<TmNode | null>
   droppingNodeParentRef: Ref<TmNode | null>
+  droppingPositionRef: Ref<null | DropPosition>
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void
   handleSelect: (node: TreeNode<TreeOption>) => void
   handleCheck: (node: TreeNode<TreeOption>, checked: boolean) => void
