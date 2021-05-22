@@ -8,21 +8,7 @@ const nodeStateStyle = [
   }),
   c('&:active', {
     backgroundColor: 'var(--node-color-pressed)'
-  }),
-  cM('pending', [
-    c('&:hover', {
-      backgroundColor: '#0000'
-    }),
-    cM('pending-bottom', {
-      borderBottom: '3px solid var(--node-color-hover)'
-    }),
-    cM('pending-top', {
-      borderTop: '3px solid var(--node-color-hover)'
-    }),
-    cM('pending-body', {
-      backgroundColor: 'var(--node-color-hover)'
-    })
-  ])
+  })
 ]
 
 // vars:
@@ -67,8 +53,8 @@ export default cB('tree', {
       })
     ])
   ]),
+  cB('tree-node-wrapper', 'padding: 3px 0;'),
   cB('tree-node', `
-    margin: 6px 0 0 0;
     display: flex;
     border-radius: var(--node-border-radius);
     transition: background-color .3s var(--bezier);
@@ -196,20 +182,6 @@ export default cB('tree', {
     }),
     c('&:active', {
       backgroundColor: 'var(--node-color-pressed)'
-    }),
-    cM('pending', [
-      c('&:hover', {
-        backgroundColor: '#0000'
-      }),
-      cM('pending-bottom', {
-        borderBottom: '3px solid var(--node-color-hover)'
-      }),
-      cM('pending-top', {
-        borderTop: '3px solid var(--node-color-hover)'
-      }),
-      cM('pending-body', {
-        backgroundColor: 'var(--node-color-hover)'
-      })
-    ])
+    })
   ])
 ])

@@ -132,6 +132,7 @@ const treeProps = {
   onDragleave: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
   onDragend: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
   onDragstart: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
+  onDragover: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
   onDrop: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:expandedKeys': [Function, Array] as PropType<
@@ -257,12 +258,17 @@ export default defineComponent({
       treeMateRef.value.getFlattenedNodes(mergedExpandedKeysRef.value)
     )
 
-    const draggingNodeKeyRef = ref<Key | null>(null)
-    const draggingNodeRef = ref<TreeOption | null>(null)
-    const droppingNodeKeyRef = ref<Key | null>(null)
     const expandTimerIdRef = ref<number | undefined>(undefined)
     const highlightKeysRef = ref<Key[]>([])
     const loadingKeysRef = ref<Key[]>([])
+
+    const draggingNodeRef = ref<TmNode | null>(null)
+    const droppingNodeRef = ref<TmNode | null>(null)
+    const droppingNodeParentRef = computed(() => {
+      const { value: droppingNode } = droppingNodeRef
+      if (droppingNode) return droppingNode.parent
+      return null
+    })
 
     watch(toRef(props, 'data'), () => {
       loadingKeysRef.value = []
@@ -420,14 +426,17 @@ export default defineComponent({
       const { onDragstart } = props
       if (onDragstart) call(onDragstart, info)
     }
+    function doDragOver (info: DragInfo): void {
+      const { onDragover } = props
+      if (onDragover) call(onDragover, info)
+    }
     function doDrop (info: DropInfo): void {
       const { onDrop } = props
       if (onDrop) call(onDrop, info)
     }
     function resetDragStatus (): void {
-      draggingNodeKeyRef.value = null
       draggingNodeRef.value = null
-      droppingNodeKeyRef.value = null
+      droppingNodeRef.value = null
     }
     function handleCheck (node: TmNode, checked: boolean): void {
       if (props.disabled || node.disabled) return
@@ -482,18 +491,22 @@ export default defineComponent({
         }
       }
     }
+    // Dnd
     function handleDragEnter ({ event, node }: InternalDragInfo): void {
       // node should be a tmNode
       if (!props.draggable || props.disabled || node.disabled) return
       doDragEnter({ event, node: node.rawNode })
       if (!props.expandOnDragenter) return
-      droppingNodeKeyRef.value = node.key
-      if (node.key === draggingNodeKeyRef.value) return
+      droppingNodeRef.value = node
+      const { value: draggingNode } = draggingNodeRef
+      if (draggingNode && node.key === draggingNode.key) return
       if (!mergedExpandedKeysRef.value.includes(node.key) && !node.isLeaf) {
         window.clearTimeout(expandTimerIdRef.value)
         const expand = (): void => {
+          const { value: droppingNode } = droppingNodeRef
           if (
-            droppingNodeKeyRef.value === node.key &&
+            droppingNode &&
+            droppingNode.key === node.key &&
             !mergedExpandedKeysRef.value.includes(node.key)
           ) {
             doExpandedKeysChange(mergedExpandedKeysRef.value.concat(node.key))
@@ -522,7 +535,7 @@ export default defineComponent({
     }
     function handleDragLeave ({ event, node }: InternalDragInfo): void {
       if (!props.draggable || props.disabled || node.disabled) return
-      droppingNodeKeyRef.value = null
+      droppingNodeRef.value = null
       doDragLeave({ event, node: node.rawNode })
     }
     function handleDragEnd ({ event, node }: InternalDragInfo): void {
@@ -532,9 +545,11 @@ export default defineComponent({
     }
     function handleDragStart ({ event, node }: InternalDragInfo): void {
       if (!props.draggable || props.disabled || node.disabled) return
-      draggingNodeKeyRef.value = node.key
-      draggingNodeRef.value = node.rawNode
+      draggingNodeRef.value = node
       doDragStart({ event, node: node.rawNode })
+    }
+    function handleDragOver ({ event, node }: InternalDragInfo): void {
+      doDragOver({ event, node: node.rawNode })
     }
     function handleDrop ({ event, node, dropPosition }: InternalDropInfo): void {
       if (
@@ -548,7 +563,7 @@ export default defineComponent({
       doDrop({
         event,
         node: node.rawNode,
-        dragNode: draggingNodeRef.value,
+        dragNode: draggingNodeRef.value.rawNode,
         dropPosition
       })
       resetDragStatus()
@@ -571,12 +586,17 @@ export default defineComponent({
       onLoadRef: toRef(props, 'onLoad'),
       draggableRef: toRef(props, 'draggable'),
       checkableRef: toRef(props, 'checkable'),
+      blockLineRef: toRef(props, 'blockLine'),
+      droppingNodeRef,
+      droppingNodeParentRef,
+      draggingNodeRef,
       handleSwitcherClick,
       handleDragEnd,
       handleDragEnter,
       handleDragLeave,
       handleDragStart,
       handleDrop,
+      handleDragOver,
       handleSelect,
       handleCheck
     })

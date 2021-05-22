@@ -50,6 +50,10 @@ export interface TreeInjection {
   checkableRef: Ref<boolean>
   mergedThemeRef: Ref<MergedTheme<TreeTheme>>
   onLoadRef: Ref<((node: TreeOption) => Promise<void>) | undefined>
+  blockLineRef: Ref<boolean>
+  draggingNodeRef: Ref<TmNode | null>
+  droppingNodeRef: Ref<TmNode | null>
+  droppingNodeParentRef: Ref<TmNode | null>
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void
   handleSelect: (node: TreeNode<TreeOption>) => void
   handleCheck: (node: TreeNode<TreeOption>, checked: boolean) => void
@@ -57,6 +61,7 @@ export interface TreeInjection {
   handleDragEnter: (info: InternalDragInfo) => void
   handleDragLeave: (info: InternalDragInfo) => void
   handleDragEnd: (info: InternalDragInfo) => void
+  handleDragOver: (info: InternalDragInfo) => void
   handleDrop: (info: InternalDropInfo) => void
 }
 

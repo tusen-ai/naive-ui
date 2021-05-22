@@ -1,4 +1,4 @@
-import { h, inject, computed, defineComponent, PropType } from 'vue'
+import { h, inject, computed, defineComponent, PropType, ref } from 'vue'
 import { useMemo } from 'vooks'
 import NTreeNodeSwitcher from './TreeNodeSwitcher'
 import NTreeNodeCheckbox from './TreeNodeCheckbox'
@@ -45,20 +45,47 @@ const TreeNode = defineComponent({
     function handleContentClick (e: MouseEvent): void {
       NTree.handleSelect(props.tmNode)
     }
-    function handleDragEnter (e: DragEvent): void {
-      NTree.handleDragEnter({
-        event: e,
-        node: props.tmNode
-      })
+
+    function handleCheck (checked: boolean): void {
+      NTree.handleCheck(props.tmNode, checked)
     }
+    // Dnd
+    const pendingPositionRef = ref<'top' | 'center' | 'bottom' | null>(null)
     function handleDragStart (e: DragEvent): void {
       NTree.handleDragStart({
         event: e,
         node: props.tmNode
       })
     }
-    function handleDragLeave (e: DragEvent): void {
-      NTree.handleDragLeave({
+    function handleDragEnter (e: DragEvent): void {
+      if (
+        e.currentTarget &&
+        e.relatedTarget &&
+        (e.currentTarget as HTMLElement).contains(
+          e.relatedTarget as HTMLElement
+        )
+      ) {
+        return
+      }
+      NTree.handleDragEnter({
+        event: e,
+        node: props.tmNode
+      })
+    }
+    function handleDragOver (e: DragEvent): void {
+      e.preventDefault()
+      const el = e.currentTarget as HTMLElement
+      const elOffsetHeight = el.offsetHeight // dangerous
+      const elClientTop = el.getBoundingClientRect().top
+      const eventOffsetY = e.clientY - elClientTop
+      if (eventOffsetY <= 8) {
+        pendingPositionRef.value = 'top'
+      } else if (eventOffsetY >= elOffsetHeight - 8) {
+        pendingPositionRef.value = 'bottom'
+      } else {
+        pendingPositionRef.value = 'center'
+      }
+      NTree.handleDragOver({
         event: e,
         node: props.tmNode
       })
@@ -69,18 +96,35 @@ const TreeNode = defineComponent({
         node: props.tmNode
       })
     }
-    function handleDrop (
-      e: DragEvent,
-      dropPosition: 'bottom' | 'center' | 'top'
-    ): void {
-      NTree.handleDrop({
+    function handleDragLeave (e: DragEvent): void {
+      if (
+        e.currentTarget &&
+        e.relatedTarget &&
+        (e.currentTarget as HTMLElement).contains(
+          e.relatedTarget as HTMLElement
+        )
+      ) {
+        return
+      }
+      NTree.handleDragLeave({
         event: e,
-        node: props.tmNode,
-        dropPosition
+        node: props.tmNode
       })
     }
-    function handleCheck (checked: boolean): void {
-      NTree.handleCheck(props.tmNode, checked)
+    function handleDrop (e: DragEvent): void {
+      e.preventDefault()
+      if (pendingPositionRef.value !== null) {
+        const dropPosition = ({
+          top: 'top',
+          bottom: 'bottom',
+          center: 'center'
+        } as const)[pendingPositionRef.value]
+        NTree.handleDrop({
+          event: e,
+          node: props.tmNode,
+          dropPosition
+        })
+      }
     }
     return {
       loading: useMemo(() =>
@@ -104,10 +148,13 @@ const TreeNode = defineComponent({
       icon: computed(() => props.tmNode.rawNode.icon),
       checkable: NTree.checkableRef,
       draggable: NTree.draggableRef,
+      blockLine: NTree.blockLineRef,
+      pendingPosition: pendingPositionRef,
       handleCheck,
       handleDrop,
       handleDragStart,
       handleDragEnter,
+      handleDragOver,
       handleDragEnd,
       handleDragLeave,
       handleContentClick,
@@ -115,51 +162,75 @@ const TreeNode = defineComponent({
     }
   },
   render () {
-    const { tmNode, clsPrefix, checkable, selected, highlight } = this
+    const {
+      tmNode,
+      clsPrefix,
+      checkable,
+      selected,
+      highlight,
+      draggable,
+      blockLine
+    } = this
+    // drag start not inside
+    // it need to be append to node itself, not wrapper
+    const dragEventHandlers = draggable
+      ? {
+        onDragenter: this.handleDragEnter,
+        onDragleave: this.handleDragLeave,
+        onDragend: this.handleDragEnd,
+        onDrop: this.handleDrop
+      }
+      : undefined
     return (
-      <li
-        class={[
-          `${clsPrefix}-tree-node`,
-          {
-            [`${clsPrefix}-tree-node--selected`]: selected,
-            [`${clsPrefix}-tree-node--checkable`]: checkable,
-            [`${clsPrefix}-tree-node--hightlight`]: highlight
-          }
-        ]}
+      <div
+        class={`${clsPrefix}-tree-node-wrapper`}
+        {...(blockLine ? dragEventHandlers : undefined)}
       >
-        {Array.apply(null, { length: tmNode.level } as any).map(() => (
-          <div class={`${clsPrefix}-tree-node-indent`}></div>
-        ))}
-        <NTreeNodeSwitcher
-          clsPrefix={clsPrefix}
-          expanded={this.expanded}
-          loading={this.loading}
-          hide={tmNode.isLeaf}
-          onClick={this.handleSwitcherClick}
-        />
-        {checkable ? (
-          <NTreeNodeCheckbox
-            clsPrefix={clsPrefix}
-            checked={this.checked}
-            indeterminate={this.indeterminate}
-            onCheck={this.handleCheck}
-          />
-        ) : null}
-        <NTreeNodeContent
-          clsPrefix={clsPrefix}
-          onClick={this.handleContentClick}
-          onDragenter={this.handleDragEnter}
-          onDragstart={this.handleDragStart}
-          onDragleave={this.handleDragLeave}
-          onDragend={this.handleDragEnd}
-          onDrop={this.handleDrop}
+        <div
+          class={[
+            `${clsPrefix}-tree-node`,
+            {
+              [`${clsPrefix}-tree-node--selected`]: selected,
+              [`${clsPrefix}-tree-node--checkable`]: checkable,
+              [`${clsPrefix}-tree-node--hightlight`]: highlight
+            }
+          ]}
+          draggable={draggable && blockLine}
+          onDragstart={
+            draggable && blockLine ? this.handleDragStart : undefined
+          }
         >
-          {{
-            default: () => tmNode.rawNode.label
-          }}
-        </NTreeNodeContent>
-        {this.icon ? this.icon() : null}
-      </li>
+          {Array.apply(null, { length: tmNode.level } as any).map(() => (
+            <div class={`${clsPrefix}-tree-node-indent`}></div>
+          ))}
+          <NTreeNodeSwitcher
+            clsPrefix={clsPrefix}
+            expanded={this.expanded}
+            loading={this.loading}
+            hide={tmNode.isLeaf}
+            onClick={this.handleSwitcherClick}
+          />
+          {checkable ? (
+            <NTreeNodeCheckbox
+              clsPrefix={clsPrefix}
+              checked={this.checked}
+              indeterminate={this.indeterminate}
+              onCheck={this.handleCheck}
+            />
+          ) : null}
+          <NTreeNodeContent
+            clsPrefix={clsPrefix}
+            onClick={this.handleContentClick}
+            onDragstart={this.handleDragStart}
+            {...(!blockLine ? dragEventHandlers : undefined)}
+          >
+            {{
+              default: () => tmNode.rawNode.label
+            }}
+          </NTreeNodeContent>
+          {this.icon ? this.icon() : null}
+        </div>
+      </div>
     )
   }
 })
