@@ -35,10 +35,9 @@ export default defineComponent({
         ref="selfRef"
         class={[`${clsPrefix}-tree-node-content`]}
         onClick={handleClick}
-        draggable={!!onDragstart}
+        draggable={onDragstart === undefined ? undefined : true}
         onDragstart={onDragstart}
       >
-        <div class={`${clsPrefix}-tree-node-content__padding-box`} />
         <div class={`${clsPrefix}-tree-node-content__text`}>{this.$slots}</div>
       </span>
     )

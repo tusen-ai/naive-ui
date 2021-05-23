@@ -4,11 +4,13 @@ import { DropPosition, TreeOption } from './interface'
 export function renderDropMark ({
   position,
   level,
-  indent
+  indent,
+  el
 }: {
   position: 'before' | 'inside' | 'after'
   level: number
   indent: number
+  el: HTMLElement
 }): VNode {
   const style: CSSProperties = {
     position: 'absolute',
@@ -24,7 +26,9 @@ export function renderDropMark ({
   } else {
     const cssPosition = position === 'before' ? 'top' : 'bottom'
     style[cssPosition] = 0
-    style.left = `${level * indent + 40}px`
+    // The left prop should be modified when tree's style is changed
+    // Maybe it is possible to use content left
+    style.left = `${el.offsetLeft + 6}px`
     style.height = '2px'
     style.backgroundColor = 'var(--drop-mark-color)'
     style.transformOrigin = cssPosition

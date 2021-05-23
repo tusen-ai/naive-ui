@@ -473,11 +473,11 @@ export default defineComponent({
                     {hasChildren && colIndex === firstContentfulColIndex
                       ? [
                         repeat(
+                          isSummary ? 0 : (rowInfo as TmNode).level,
                           <div
                             class={`${mergedClsPrefix}-data-table-indent`}
                             style={indentStyle}
-                          />,
-                          isSummary ? 0 : (rowInfo as TmNode).level
+                          />
                         ),
                         isSummary || !(rowInfo as TmNode).children ? (
                           <div

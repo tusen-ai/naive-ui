@@ -3,7 +3,7 @@
 ## 预备条件
 
 <n-alert title="注意" type="warning" style="margin-bottom: 16px;">
-  由于尺寸原因，Naive UI 并不把 hightlight.js 内置。如果你需要使用代码组件，请确保你在使用之前已经设定了 highlight.js。
+  由于尺寸原因，Naive UI 并不把 highlight.js 内置。如果你需要使用代码组件，请确保你在使用之前已经设定了 highlight.js。
 </n-alert>
 
 下面的代码展示了如何为 Code 设定 hljs。比较推荐的方式是按需引入，因为它可以极大的减小打包尺寸。

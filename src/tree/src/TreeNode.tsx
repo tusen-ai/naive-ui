@@ -1,5 +1,14 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { h, inject, computed, defineComponent, PropType } from 'vue'
+import {
+  h,
+  inject,
+  computed,
+  defineComponent,
+  PropType,
+  ref,
+  ComponentPublicInstance,
+  onMounted
+} from 'vue'
 import { useMemo } from 'vooks'
 import NTreeNodeSwitcher from './TreeNodeSwitcher'
 import NTreeNodeCheckbox from './TreeNodeCheckbox'
@@ -30,6 +39,15 @@ const TreeNode = defineComponent({
       droppingPositionRef,
       indentRef
     } = NTree
+
+    // used for drag and drop
+    const contentInstRef = ref<null | ComponentPublicInstance>(null)
+    // must be non-reactive
+    const contentElRef: { value: HTMLElement | null } = { value: null }
+    onMounted(() => {
+      contentElRef.value = contentInstRef.value!.$el as HTMLElement
+    })
+
     function handleSwitcherClick (): void {
       const { tmNode } = props
       if (NTree.remoteRef.value && !tmNode.isLeaf && !tmNode.shallowLoaded) {
@@ -147,12 +165,14 @@ const TreeNode = defineComponent({
       expanded: useMemo(() =>
         NTree.mergedExpandedKeysRef.value.includes(props.tmNode.key)
       ),
-      icon: computed(() => props.tmNode.rawNode.icon),
+      suffix: computed(() => props.tmNode.rawNode.suffix),
       checkable: NTree.checkableRef,
       draggable: NTree.draggableRef,
       blockLine: NTree.blockLineRef,
       droppingPosition: droppingPositionRef,
       indent: indentRef,
+      contentInstRef,
+      contentElRef,
       handleCheck,
       handleDrop,
       handleDragStart,
@@ -172,7 +192,9 @@ const TreeNode = defineComponent({
       selected,
       highlight,
       draggable,
-      blockLine
+      blockLine,
+      indent,
+      suffix
     } = this
     // drag start not inside
     // it need to be append to node itself, not wrapper
@@ -186,17 +208,14 @@ const TreeNode = defineComponent({
       }
       : undefined
     return (
-      <div
-        class={`${clsPrefix}-tree-node-wrapper`}
-        {...(blockLine ? dragEventHandlers : undefined)}
-      >
+      <div class={`${clsPrefix}-tree-node-wrapper`} {...dragEventHandlers}>
         <div
           class={[
             `${clsPrefix}-tree-node`,
             {
               [`${clsPrefix}-tree-node--selected`]: selected,
               [`${clsPrefix}-tree-node--checkable`]: checkable,
-              [`${clsPrefix}-tree-node--hightlight`]: highlight
+              [`${clsPrefix}-tree-node--highlight`]: highlight
             }
           ]}
           draggable={draggable && blockLine}
@@ -205,11 +224,11 @@ const TreeNode = defineComponent({
           }
         >
           {repeat(
+            tmNode.level,
             <div
               class={`${clsPrefix}-tree-node-indent`}
-              style={{ flex: `0 0 ${this.indent}px` }}
-            />,
-            tmNode.level
+              style={{ flex: `0 0 ${indent}px` }}
+            />
           )}
           <NTreeNodeSwitcher
             clsPrefix={clsPrefix}
@@ -227,29 +246,31 @@ const TreeNode = defineComponent({
             />
           ) : null}
           <NTreeNodeContent
+            ref="contentInstRef"
             clsPrefix={clsPrefix}
             onClick={this.handleContentClick}
             onDragstart={
-              draggable && blockLine ? undefined : this.handleDragStart
+              draggable && !blockLine ? this.handleDragStart : undefined
             }
           >
             {{
-              default: () => tmNode.rawNode.label
+              default: () => [tmNode.rawNode.label, suffix ? suffix() : null]
             }}
           </NTreeNodeContent>
-          {this.icon ? this.icon() : null}
           {draggable
             ? this.showDropMark
               ? renderDropMark({
+                el: this.contentElRef.value!,
                 position: this.droppingPosition!,
                 level: tmNode.level,
-                indent: this.indent
+                indent
               })
               : this.showDropMarkAsParent
                 ? renderDropMark({
+                  el: this.contentElRef.value!,
                   position: 'inside',
                   level: tmNode.level,
-                  indent: this.indent
+                  indent
                 })
                 : null
             : null}

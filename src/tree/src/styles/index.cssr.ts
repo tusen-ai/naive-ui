@@ -61,7 +61,7 @@ export default cB('tree', {
     border-radius: var(--node-border-radius);
     transition: background-color .3s var(--bezier);
   `, [
-    cM('hightlight', [
+    cM('highlight', [
       cB('tree-node-content', [
         cE('text', {
           borderBottomColor: 'var(--node-text-color-disabled)'
@@ -166,14 +166,6 @@ export default cB('tree', {
     c('&:last-child', {
       marginBottom: 0
     }),
-    cE('padding-box', `
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background-color: #0000;
-    `),
     cE('text', `
       line-height: 1.25;
       border-bottom: 1px solid #0000;

@@ -39,9 +39,9 @@ import {
 } from './interface'
 import MotionWrapper from './MotionWrapper'
 import { defaultAllowDrop } from './dnd'
+import { sleep } from 'seemly'
 
 // TODO:
-// Drag expand has some bugs
 // During expanding, some node are mis-applied with :active style
 
 interface MotionData {
@@ -252,7 +252,8 @@ export default defineComponent({
       treeMateRef.value.getFlattenedNodes(mergedExpandedKeysRef.value)
     )
 
-    const expandTimerIdRef = ref<number | undefined>(undefined)
+    let expandTimerId: number | null = null
+    let nodeKeyToBeExpanded: Key | null = null
     const highlightKeysRef = ref<Key[]>([])
     const loadingKeysRef = ref<Key[]>([])
 
@@ -271,7 +272,7 @@ export default defineComponent({
 
     watch(toRef(props, 'data'), () => {
       loadingKeysRef.value = []
-      expandTimerIdRef.value = undefined
+      resetDndState()
     })
     watch(toRef(props, 'pattern'), (value) => {
       if (value) {
@@ -447,6 +448,14 @@ export default defineComponent({
     function resetDropState (): void {
       droppingNodeRef.value = null
       droppingPositionRef.value = null
+      resetDragExpandState()
+    }
+    function resetDragExpandState (): void {
+      if (expandTimerId) {
+        window.clearTimeout(expandTimerId)
+        expandTimerId = null
+      }
+      nodeKeyToBeExpanded = null
     }
     function handleCheck (node: TmNode, checked: boolean): void {
       if (props.disabled || node.disabled) return
@@ -501,45 +510,63 @@ export default defineComponent({
         }
       }
     }
+
+    function expandDragEnterNode (node: TmNode): void {
+      if (expandTimerId) {
+        window.clearTimeout(expandTimerId)
+        expandTimerId = null
+      }
+      nodeKeyToBeExpanded = node.key
+      const expand = (): void => {
+        if (nodeKeyToBeExpanded !== node.key) return
+        const { value: droppingNode } = droppingNodeRef
+        if (
+          droppingNode &&
+          droppingNode.key === node.key &&
+          !mergedExpandedKeysRef.value.includes(node.key)
+        ) {
+          doExpandedKeysChange(mergedExpandedKeysRef.value.concat(node.key))
+        }
+        expandTimerId = null
+        nodeKeyToBeExpanded = null
+      }
+      if (!node.shallowLoaded) {
+        if (props.onLoad) {
+          if (!loadingKeysRef.value.includes(node.key)) {
+            loadingKeysRef.value.push(node.key)
+          } else {
+            Promise.all([props.onLoad(node.rawNode), sleep(1000)])
+              .then(() => {
+                loadingKeysRef.value.splice(
+                  loadingKeysRef.value.findIndex((key) => key === node.key),
+                  1
+                )
+                expand()
+              })
+              .catch(([loadError, _]) => {
+                console.error(loadError)
+                resetDragExpandState()
+              })
+          }
+        } else if (__DEV__) {
+          warn(
+            'tree',
+            'There is unloaded node in data but props.onLoad is not specified.'
+          )
+        }
+      } else {
+        expandTimerId = window.setTimeout(() => {
+          expand()
+        }, 1000)
+      }
+    }
+
     // Dnd
     function handleDragEnter ({ event, node }: InternalDragInfo): void {
       // node should be a tmNode
       if (!props.draggable || props.disabled || node.disabled) return
       handleDragOver({ event, node }, false)
       doDragEnter({ event, node: node.rawNode })
-      if (!props.expandOnDragenter) return
-      if (!mergedExpandedKeysRef.value.includes(node.key) && !node.isLeaf) {
-        window.clearTimeout(expandTimerIdRef.value)
-        const expand = (): void => {
-          const { value: droppingNode } = droppingNodeRef
-          if (
-            droppingNode &&
-            droppingNode.key === node.key &&
-            !mergedExpandedKeysRef.value.includes(node.key)
-          ) {
-            doExpandedKeysChange(mergedExpandedKeysRef.value.concat(node.key))
-          }
-        }
-        if (!node.shallowLoaded) {
-          if (!loadingKeysRef.value.includes(node.key)) {
-            loadingKeysRef.value.push(node.key)
-          }
-          if (props.onLoad) {
-            void props.onLoad(node.rawNode).then(() => {
-              loadingKeysRef.value.splice(
-                loadingKeysRef.value.findIndex((key) => key === node.key),
-                1
-              )
-              expand()
-            })
-          }
-          return
-        }
-        expandTimerIdRef.value = window.setTimeout(() => {
-          expand()
-          expandTimerIdRef.value = undefined
-        }, 1200)
-      }
     }
     function handleDragLeave ({ event, node }: InternalDragInfo): void {
       if (!props.draggable || props.disabled || node.disabled) return
@@ -567,6 +594,7 @@ export default defineComponent({
       if (!props.draggable || props.disabled || node.disabled) return
       const { value: draggingNode } = draggingNodeRef
       if (!draggingNode) return
+      if (emit) doDragOver({ event, node: node.rawNode })
       // Update dropping node
       const el = event.currentTarget as HTMLElement
       const {
@@ -583,9 +611,9 @@ export default defineComponent({
       })
 
       if (allowDropInside) {
-        if (eventOffsetY <= 8) {
+        if (eventOffsetY <= 10) {
           mousePosition = 'before'
-        } else if (eventOffsetY >= elOffsetHeight - 8) {
+        } else if (eventOffsetY >= elOffsetHeight - 10) {
           mousePosition = 'after'
         } else {
           mousePosition = 'inside'
@@ -661,6 +689,7 @@ export default defineComponent({
         return
       }
 
+      // Bailout 3
       if (
         allowDrop({
           node: finalDropNode.rawNode,
@@ -671,23 +700,37 @@ export default defineComponent({
         droppingNodeRef.value = finalDropNode!
       } else {
         resetDropState()
+        return
       }
-      if (emit) doDragOver({ event, node: node.rawNode })
+
+      if (nodeKeyToBeExpanded !== finalDropNode.key) {
+        if (finalDropPosition === 'inside') {
+          expandDragEnterNode(finalDropNode)
+        } else {
+          resetDragExpandState()
+        }
+      } else {
+        if (finalDropPosition !== 'inside') {
+          resetDragExpandState()
+        }
+      }
     }
     function handleDrop ({ event, node, dropPosition }: InternalDropInfo): void {
       if (
         !props.draggable ||
         props.disabled ||
         node.disabled ||
-        !draggingNodeRef.value
+        !draggingNodeRef.value ||
+        !droppingNodeRef.value ||
+        !droppingPositionRef.value
       ) {
         return
       }
       doDrop({
         event,
-        node: node.rawNode,
+        node: droppingNodeRef.value.rawNode,
         dragNode: draggingNodeRef.value.rawNode,
-        dropPosition
+        dropPosition: droppingPositionRef.value
       })
       resetDndState()
     }

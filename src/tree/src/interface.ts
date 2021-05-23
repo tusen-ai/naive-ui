@@ -10,7 +10,7 @@ export interface TreeOption {
   label: string
   disabled?: boolean
   children?: TreeOption[]
-  icon?: () => VNodeChild
+  suffix?: () => VNodeChild
 }
 
 export type TreeOptions = TreeOption[]
